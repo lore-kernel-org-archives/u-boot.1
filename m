@@ -4,149 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C85D3B7F2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 15:32:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34E07D3B7F3
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 15:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C10A8838A5;
-	Mon,  8 Dec 2025 16:32:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A06C8392C;
+	Mon,  8 Dec 2025 16:38:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WcfTL+gk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OEktSO2E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2806E838CE; Mon,  8 Dec 2025 16:32:40 +0100 (CET)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A4AC283946; Mon,  8 Dec 2025 16:38:58 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0ED0E835FD
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 16:32:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F5BE835FD
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 16:38:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Aw0cquDC018L5gzn+aL9rRnuRa3dhysCqAOwW/6kCNEtRyPKtlCsjJ0tiYhGcISeKLI0w9r7fRYIxNjUX9XR4XCrZvIu2suRcUT1slHxp9Er8ll2qcSvv1E0NGv6i9VqybsdKbRjnK9iwODiu0T/o+zXvxM2N1sE4BWI8WnCaXxBck6Is1w1ETu4FZ+810BUbYNfKb0GKsj7Jg72AbE3HKHkZ5UhyLEGiJehlzhbPGuoqyK6GPydTss68EnSrkxurldxdGCFLNDnLG8KRnWcWO3da8jgAs7XJTWP5cVa/4lzilC3TvHb7VTaKZZvY/t4oUlgvHNlMeZ3anC/Di3Rfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ExwkB+I/EAtCGvTO1Z/euqAUcMk/5POD3Y8d7FsIn2c=;
- b=bFWB/5vq4mpZcAZjSHoMN2r0MDzsNbiIfbm/tYbm5DJnUqjsy3L94kLYw376SbXsjsTlOngib055fkcaECjF1G75T5taBRN78X5sJiO6UFx2TmWqzCXtiNAPMkOXcLMp2E1KSHumyF6f+0HuM6H3BKKN00x6pTac+l4dDBjrW5xP0XDx6CNw4butXr4OBHz5MuNGMzAU4RivykjuRzvxdKHuHJYG8G+P6W5Atyos4Irlgk9PurrrfvpeZL1rd/OBLa4ayNwmNHrPf6e8ZaVFUQCJzlF1MTSN7hOx08o0E6ahTUJzRTDPEGU9n30X4mpAEUA4IJNPsMnj8ie8eYQqmQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=amarulasolutions.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ExwkB+I/EAtCGvTO1Z/euqAUcMk/5POD3Y8d7FsIn2c=;
- b=WcfTL+gktj574d1F8spFdtxT/diW790pf3pRBOyJ1MJg8BmQ1eK5676pI64QEvLT08xu/GKeclas+N/4LWD+Zy/fhY622n8plPYaaT3LNjCs9aGZu034QLEXlBlhWoih9MGyrGN+r8xyM5e8R0nikk/ucRcOHrrQvVbsGx/hIuw=
-Received: from BN8PR04CA0061.namprd04.prod.outlook.com (2603:10b6:408:d4::35)
- by CO1PR10MB4452.namprd10.prod.outlook.com (2603:10b6:303:6e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Mon, 8 Dec
- 2025 15:32:33 +0000
-Received: from BN2PEPF000044A0.namprd02.prod.outlook.com
- (2603:10b6:408:d4:cafe::a4) by BN8PR04CA0061.outlook.office365.com
- (2603:10b6:408:d4::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.14 via Frontend Transport; Mon,
- 8 Dec 2025 15:32:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN2PEPF000044A0.mail.protection.outlook.com (10.167.243.151) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Mon, 8 Dec 2025 15:32:33 +0000
-Received: from DLEE115.ent.ti.com (157.170.170.26) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.2562.20; Mon, 8 Dec
- 2025 09:32:26 -0600
-Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 8
- Dec 2025 09:32:26 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 8 Dec 2025 09:32:26 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B8FWQvh3849756;
- Mon, 8 Dec 2025 09:32:26 -0600
-Date: Mon, 8 Dec 2025 09:32:26 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- "Andrew Goodbody" <andrew.goodbody@linaro.org>, <u-boot@lists.denx.de>,
- "Patrice Chotard" <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Christian Marangi
- <ansuelsmth@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Marek
- Vasut" <marex@denx.de>, Simon Glass <sjg@chromium.org>, Jonas Karlman
- <jonas@kwiboo.se>, Ye Li <ye.li@nxp.com>, Michael Trimarchi
- <michael@amarulasolutions.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c71cca8fc2so3420533a34.1
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 07:38:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1765208335; x=1765813135; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yd/P8FEPpSXIiJHJWNlwY83eLwgrLfKzZkimXEUtTFo=;
+ b=OEktSO2EhXBat8BAmM3wLqQgrTv1OzQJe6OeIUwO2/Q4QuSdyU3sQkGgzaa4jqGTQy
+ OvboKW5BEnpZPMMYUt23lCFAJOSnqu5HGoPp0jbw8fr6dc3n3sCOXoaV+lN9Qr0ySHHq
+ /GDQmdz+XWqzRkhZJFecAJvJUCIIlSA/8KqDI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765208335; x=1765813135;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yd/P8FEPpSXIiJHJWNlwY83eLwgrLfKzZkimXEUtTFo=;
+ b=kNRca5LatY2GriAmB+/KRpQoAu0WKyX2s17VDouu301euiUqov9fAvzxrQZ87ek5JG
+ tmzW2LvxUGtsFcnyg+iods9SnZdkIsOOiHycMGPGa86fUJcdP+BITwa24TKewY54yZyO
+ CJKeuarxke1qUuX2QWSP7f+1ALPLdSV4NAksGj3jXULZrbnRPrNXxg7SQPtcZLPh//us
+ 4zW8kZevLOlDX/Bg6sL/fp/u+5N+FcCbGVzuMIaTmi1HWYcW+sWe0hWhW7HWn5mjAIoA
+ U0dYvUiu+Uu6Xfv5xPm+ziI/8BtSLvN8n2SR3OwaQG5cCh7Tr8R7JggjFgVG9ZcZ2lw3
+ x4+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVVoyk8ZvEYS2NRM8i/h5ejilwlD3eklTIWb8ehoREGJzOAiSx/rf+0vwLTYSP1SpdlDbEW8u4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlV9pGb3k5Y85pULgBrn2A7HNRhT3ylvAYhtFWapbWLkzlr+oh
+ 5uYzuddeCt3si9DxHuSfo4UcbHIbltY915V8q/nQIVsZh9JidvQiLQygRzqa3ZgCXwA=
+X-Gm-Gg: ASbGncsL0cpPtxB01mEDUEjyVIaMw9/sb37eStutsrgGt8e3StKO/+Ix0s1tijriPk3
+ TkdbrXCqymBzN4A22H0uB2y9kjHGI/keIy39QOo3ZRusvK+Wt19xEopi237QYwP5oRnJyd/9gKw
+ erljwxydehLWOFff9fU85ip7Z7drUUh1YxInYaKkTH6lL5uGlmmYF2W5ZN47b8GUU8Id64OPWPc
+ oCdc7yQ1zO2IjIy90fdth6G8Zj1rROoelRiHz5Z1fQiQ8R4yR/6XSJpORre4KG+F3VPkdAtyjjE
+ bM4tJCf9K9nAPl4rtdmwliayfojK+EDB4Vh+XK6rDUQo7sqh8iL+qEIkBrYRJ5s+HTgUCY5XZtR
+ 7o8/Ui7kUnEUYxLIuVm9Z47lEiVyxWXoeK/kKvMoE4E/s5hpNfyvj5UHuhlmRL0/qDcGJAY51v0
+ Or6qm85o+bbnVFltHzJ8tHtePxhKgNZIap2j6mqlQZD2Itq0AhiA==
+X-Google-Smtp-Source: AGHT+IFDhjb9DpqP0DCsia4Y0I8gpr91x7hvM86htfHv0gkp8wCkuPsO9am8e9sjVKWDtSb9TlUjHQ==
+X-Received: by 2002:a05:6830:254b:b0:7c9:5b7c:8a33 with SMTP id
+ 46e09a7af769-7c97080bf92mr4977001a34.19.1765208335097; 
+ Mon, 08 Dec 2025 07:38:55 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c95acaf826sm9886274a34.22.2025.12.08.07.38.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Dec 2025 07:38:54 -0800 (PST)
+Date: Mon, 8 Dec 2025 09:38:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Nishanth Menon <nm@ti.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Ye Li <ye.li@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
 Subject: Re: [PATCH v2 0/3] clk: Return value calculated by ERR_PTR
-Message-ID: <20251208153226.moktyjv3irmjlg6q@lingo>
+Message-ID: <20251208153852.GP303283@bill-the-cat>
 References: <20251121-clk_uclass_fix-v2-0-74f4ea10e194@linaro.org>
  <176503025989.2523567.16347058613411695182.b4-ty@konsulko.com>
+ <20251208153226.moktyjv3irmjlg6q@lingo>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cHDg7ZRmHjK5ofms"
 Content-Disposition: inline
-In-Reply-To: <176503025989.2523567.16347058613411695182.b4-ty@konsulko.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A0:EE_|CO1PR10MB4452:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c3721bb-1ce4-4ce2-7c1f-08de366f01bf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|7416014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?h0YcHHIWolC9Gqgyv2SK0EDSSL4TfJhpyD71LgKHRAAwpKgCPS+5jVgS/+m3?=
- =?us-ascii?Q?eSglgNe3M1uyK/VIG3+eBAefEaSmjs/eft3MUr4SRX4e639YRrVGTIwzOEV8?=
- =?us-ascii?Q?reedQ2PUYe7nkKEkImJpG1xeVTN/2lRXDddUqHhRR8EdrBGzaIZ1/8n3a02P?=
- =?us-ascii?Q?zvRKjMIfnL2ib5p2EeL/KQfnwoQa7/Y5DYaB0jK58bVfaTi2DCumatziuW2r?=
- =?us-ascii?Q?tOSR4l1L7fu+qVyykTqa5dFqOJjjlQgmbeJp8Ug0Qv9NNvOf2wzd7J5w8Xhp?=
- =?us-ascii?Q?H/Yd8NX6eoFh6C5utzspfiKu+X1pWL2kjHXaL11NPRSIKRCp1/MzVcrTflxx?=
- =?us-ascii?Q?9UTGCyIHUbq+uxu6+FCbTIiYDFn87EKnB8FihtHmEw1WtA9BJFtHXN+jyTIi?=
- =?us-ascii?Q?R+Ln7av7qC0TSfg+XfOyS2QuYK/j7+arGIyifcxog9LjKEw9yeLR1O2u2FQb?=
- =?us-ascii?Q?uVnNyFUZ1pmrW3NNA5ee2nnxGl2qI7TOaQ0LghciHs5r7iRdNWukgGXYaX4L?=
- =?us-ascii?Q?1tlnn5G4fQvKBs96OktN02hGgRi2mhNcvT+CMAFMoSlheoVxA7lbK0U5Gexi?=
- =?us-ascii?Q?w+w6VMqmBNE6fjINpujEdWl/7hpxDvp6XMzhsUiVSwREshuTh+xzq+pQa1kD?=
- =?us-ascii?Q?WKJF9cL3yjagf0PIyHktQDe4q5OYXRbD8yz+GgtPoWVGRVMMH0Wlr9J3wGb4?=
- =?us-ascii?Q?qx+A2Gqng8B5VL8Xj1928coe5c/UkhJJGhjVCj6ny4DEnGRtf+143CaZLzeM?=
- =?us-ascii?Q?awYsiCDuwRwJhAInimHgW4j04MUMa2wxcd8LDxIy6IHm0a7AtUkX2Mrz5ugg?=
- =?us-ascii?Q?MF/4ek3aG1FIMPn17lFQl53JzZ9/C50RFdENARyIWyyInOzT1isp6xDFMgwz?=
- =?us-ascii?Q?HFeSgOii9XzuZGbAf28t/4OFlzSvqQVRG4bQcrGSrlLdqtbZvJwLef8zjq8Z?=
- =?us-ascii?Q?X7qmn1qsc4vdivfhWBvp5N1HO4iKmxosa0vOSQjYtzUP7uVQ199U5ja2HEvR?=
- =?us-ascii?Q?IL8bpjQMMGdiN2aGynyCC6bjm6qvsNi7gZHn+Mmcs3msGXvMFcgQ0gdNPNnf?=
- =?us-ascii?Q?bWKBbHzB7+GT6DM7T7qtwBXJrkwWVtOGWrZ/xvz1NDYxJA9eGURsneMaFWCj?=
- =?us-ascii?Q?2zpGF0DL9XoUHAwo7aPbaUzfc0vk40uFPb6yFnH/rlLIs2f18OfBsvMLCxP3?=
- =?us-ascii?Q?TQ8rw/kYPXEHPvLEChcv9Tovco6NDEBWwRn8q6YJ+m/YpnCrUgD1EJLKHRug?=
- =?us-ascii?Q?2ivGR+JY3PgJSPNwuOBJ7ftjM0uOHfB2anh08GapujU81I1ZMVcmwiHGYl2k?=
- =?us-ascii?Q?RDjzgT8LUUtNbCIK+O1ovYAikVLDyH692SBXSurt8NbUrhAazJKVkRPgJtHI?=
- =?us-ascii?Q?/7yaL1+CWqzEqYiFLBNTVRFHuctj9I97c3qozH5KclEqNSUh6BM8knQ/p4SX?=
- =?us-ascii?Q?BBiW4HUa8jVxAkJZZh5wttRLTFew4OnBkDpOSs09ST6UNBQtnOZ3eXdnTw1v?=
- =?us-ascii?Q?Ki6fS4jYX+RbXHhXpFm0Oktq8rM+465R+MrzXyqxnJqO3c83VQi2yYdjer5K?=
- =?us-ascii?Q?aK3MVqFbKzE9EpexNxg=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(7416014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 15:32:33.0591 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c3721bb-1ce4-4ce2-7c1f-08de366f01bf
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A0.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4452
+In-Reply-To: <20251208153226.moktyjv3irmjlg6q@lingo>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,57 +110,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08:10-20251206, Tom Rini wrote:
-> On Fri, 21 Nov 2025 17:34:30 +0000, Andrew Goodbody wrote:
-> 
-> > Smatch reported an error where a value calculated by ERR_PTR was not
-> > used. Fixing this to return the generated value led to a test failure
-> > which meant updating the sandbox clock code so that it would still cause
-> > the tests to pass with the above correction.
-> > Debugging this problem led to a SIGSEGV which is addressed in 1/3.
-> > Possible memory leaks noticed are addressed in 3/3.
-> > 
-> > [...]
-> 
-> Applied to u-boot/next, thanks!
-> 
-> [1/3] clk: Prevent SIGSEGV on debug
->       commit: 1c0a46e2918a1ddf42f51449e45077513dd52417
-> [2/3] clk: Return value calculated by ERR_PTR
->       commit: fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
 
-This commit seems to have broken TI platforms in next branch.
+--cHDg7ZRmHjK5ofms
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-u-boot$ git bisect log
-git bisect start
-# status: waiting for both good and bad commits
-# bad: [bc1819331ece7aa4e7d0573c9cdacdb8efbdb067] Merge patch series "clk: Return value calculated by ERR_PTR"
-git bisect bad bc1819331ece7aa4e7d0573c9cdacdb8efbdb067
-# status: waiting for good commit(s), bad commit known
-# good: [384d3785df4dbe452f9fbb4bd9c9c9e986cdc205] Merge patch series "led: remove unused legacy LED code"
-git bisect good 384d3785df4dbe452f9fbb4bd9c9c9e986cdc205
-# good: [1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc] board: ti: CAT24C256WI-GT3 require min. 5ms delay (tWR) between write/read
-git bisect good 1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc
-# good: [1165e8efcba0ab3efd1ea4ff956d26746fc386b0] reboot-mode: Correct macro name from U_BOOT_DEVICE to U_BOOT_DRVINFO
-git bisect good 1165e8efcba0ab3efd1ea4ff956d26746fc386b0
-# bad: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Return value calculated by ERR_PTR
-git bisect bad fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
-# good: [1c0a46e2918a1ddf42f51449e45077513dd52417] clk: Prevent SIGSEGV on debug
-git bisect good 1c0a46e2918a1ddf42f51449e45077513dd52417
-# first bad commit: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Return value calculated by ERR_PTR
+On Mon, Dec 08, 2025 at 09:32:26AM -0600, Nishanth Menon wrote:
+> On 08:10-20251206, Tom Rini wrote:
+> > On Fri, 21 Nov 2025 17:34:30 +0000, Andrew Goodbody wrote:
+> >=20
+> > > Smatch reported an error where a value calculated by ERR_PTR was not
+> > > used. Fixing this to return the generated value led to a test failure
+> > > which meant updating the sandbox clock code so that it would still ca=
+use
+> > > the tests to pass with the above correction.
+> > > Debugging this problem led to a SIGSEGV which is addressed in 1/3.
+> > > Possible memory leaks noticed are addressed in 3/3.
+> > >=20
+> > > [...]
+> >=20
+> > Applied to u-boot/next, thanks!
+> >=20
+> > [1/3] clk: Prevent SIGSEGV on debug
+> >       commit: 1c0a46e2918a1ddf42f51449e45077513dd52417
+> > [2/3] clk: Return value calculated by ERR_PTR
+> >       commit: fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
+>=20
+> This commit seems to have broken TI platforms in next branch.
+>=20
+> u-boot$ git bisect log
+> git bisect start
+> # status: waiting for both good and bad commits
+> # bad: [bc1819331ece7aa4e7d0573c9cdacdb8efbdb067] Merge patch series "clk=
+: Return value calculated by ERR_PTR"
+> git bisect bad bc1819331ece7aa4e7d0573c9cdacdb8efbdb067
+> # status: waiting for good commit(s), bad commit known
+> # good: [384d3785df4dbe452f9fbb4bd9c9c9e986cdc205] Merge patch series "le=
+d: remove unused legacy LED code"
+> git bisect good 384d3785df4dbe452f9fbb4bd9c9c9e986cdc205
+> # good: [1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc] board: ti: CAT24C256WI=
+-GT3 require min. 5ms delay (tWR) between write/read
+> git bisect good 1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc
+> # good: [1165e8efcba0ab3efd1ea4ff956d26746fc386b0] reboot-mode: Correct m=
+acro name from U_BOOT_DEVICE to U_BOOT_DRVINFO
+> git bisect good 1165e8efcba0ab3efd1ea4ff956d26746fc386b0
+> # bad: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Return value calcu=
+lated by ERR_PTR
+> git bisect bad fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
+> # good: [1c0a46e2918a1ddf42f51449e45077513dd52417] clk: Prevent SIGSEGV o=
+n debug
+> git bisect good 1c0a46e2918a1ddf42f51449e45077513dd52417
+> # first bad commit: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Retur=
+n value calculated by ERR_PTR
+>=20
+> Confirmed by reverting the commit. Looks like
+> 9ed8fafbcde3425d8817ec5953edd428c7508153 revert is needed again?
 
-Confirmed by reverting the commit. Looks like
-9ed8fafbcde3425d8817ec5953edd428c7508153 revert is needed again?
+Interesting, OK. What Andrew did in commit
+fe780310cfa8bf5a093894b5cd7fe85c6b02fd91 is more complex than before and
+there's two stanzas there. Our lab is current being re-worked again
+right now so I can't test on the K3 platforms I have, but can you please
+see which of the two changes in clk-uclass.c is the one that breaks
+these platforms? Thanks!
 
-> [3/3] clk: Prevent memory leak on error
->       commit: 33285945518731ed459680ffb01891c4804fb6c9
-> -- 
-> Tom
-> 
-> 
+--=20
+Tom
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
-https://ti.com/opensource
+--cHDg7ZRmHjK5ofms
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTbxCAAKCRAr4qD1Cr/k
+Ch64AQCz9CZBY/M8oYBOqHG+CXTVLDk1xwlpQSCfmA5pzjMrqAEA9AP9axTdKg6n
+FIwFzhWKbFU7hpU4f8Q8OwDvl1Df5A0=
+=miU0
+-----END PGP SIGNATURE-----
+
+--cHDg7ZRmHjK5ofms--
