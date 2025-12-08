@@ -4,93 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897C7D3B7F2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 14:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD63D3B7F3
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 15:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D67DA83AB8;
-	Mon,  8 Dec 2025 15:24:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 647518313B;
+	Mon,  8 Dec 2025 16:04:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uK9U4W1h";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="i8Rbn0kJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 341B983AC5; Mon,  8 Dec 2025 15:24:51 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0DDA98392C; Mon,  8 Dec 2025 16:04:09 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F03E83990
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 15:24:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9362E830E4
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 16:04:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so3720813a34.1
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 06:24:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765203887; x=1765808687; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OM8ofd/q+h9pqs8bQhE5v4gCcqSgWJ0yJQDve9gRH/c=;
- b=uK9U4W1hvQJrphTnJclzF81onf+QwyMe3DwPA0bqoNfheNNtEm4PJs1hzZCK0O1Om5
- KEkBw7z+AVHof6cda1oHm8zmGe98CTHpYY0c9jwpYcVicOkk2kg8kpvnq+KHGwDSgU9w
- BgftZMFbi2kcfc1DPCeQN3QXnL/q1GCdZ3Ymg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765203887; x=1765808687;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OM8ofd/q+h9pqs8bQhE5v4gCcqSgWJ0yJQDve9gRH/c=;
- b=ZLmMlOpDGCUzvqxkyr5D6v8a/C3JX96cYcva2faZ/FFEaj6V2OH2Jr/aEp1gPOhzlx
- HrT4Zd7f8wZyBADCEgNrm5aytrU1MIWeRzPd9i4x5ke7OwH7F1unUVDKUb8+0nQIt+IB
- FkrdtSpSe6OG7ntxot2qXR3ClQEi3q/ynG2XUcLwAi9c3j8z6Drjg9mhIhDn/gpxiRLn
- pN4kUKgqY4vQYxoE+VtKRX7QJhg//XJvTjbRd5GW+/qymdLFiwIaYH86827yb+4fS70D
- ETS89z/WGHygrqQoIda4k7LYmQ1QSmBgxHhueyPc+JZXdelHt8EZsUzU2OPBL/osu4G4
- YIIA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1m9hC8nyWqWwAwWBU7a7jzXLJ8pU5el8wAhQ+ZhKflBj4lkPGGp2qA+kTByiKEtWbaDaGXis=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy77Yfsro+Qzq7d44dfrmAkklAb8IDOB65XQqft4KaWralF+zHT
- CgTl4v6BIit6WYaBFcx7faCmiFtwOmmAKMS9BSNf20+9XSdRAw8WotqBWjYRMWQwf/g=
-X-Gm-Gg: ASbGncvOsZpzNwUDILU3ALf+gP8qIofri3ZZLKZu7re5QtczX6Qq8tU4n6gBX3P1hXd
- V7Wj5rCLzb08ljl0Y9phra4QkcFbeGgM3JrN8i7UicuJ+CRyJ6Z+jmkNs1JxZaRZ3KkAGbU0x2F
- vV95m7NkdJlYwMYjwIp2HqpnKYaBD689kHT1Pvzpo+FeissRaKd+I5HDxgaRStNeDw4WzYPna0u
- RnMfY9F2lgQtecEyJS8GadoE51UDaanLzHk484n83FeWoPLscJ+/BLdYdQ3ZxKxGNa1CCuQYRFV
- 1ojcOggKXE+AHQnC4xX6Rl1nhVY3XQIXRj04u/k5gF9HhPoxV4EWSM3BR4auQuPog/65I0tRCvi
- FDXYLQPexWknA+39CMcxBKmgZdxSq5EFATUk5T15T0vmZNosqHVohFPEAActIvqBK8+7gp7ZHU4
- I4pwd0qZu2RwemHqTToOCaVERpydfsdlZsGPJ2H4FhS5jbefbkWCz1Yux0DfbX
-X-Google-Smtp-Source: AGHT+IFwWdeM1YPISLhvfnudreyziz8PGDROVZulS7cQDsKtiuylkvKbeOl/N8TUJvabRJ5Hp2f3eQ==
-X-Received: by 2002:a05:6830:2115:b0:7b2:aba7:f4e with SMTP id
- 46e09a7af769-7c970752562mr4182938a34.10.1765203887151; 
- Mon, 08 Dec 2025 06:24:47 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95ac84d2bsm9835653a34.18.2025.12.08.06.24.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 06:24:46 -0800 (PST)
-Date: Mon, 8 Dec 2025 08:24:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Davis <afd@ti.com>
-Cc: Beleswar Prasad Padhi <b-padhi@ti.com>, nm@ti.com, n-francis@ti.com,
- u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
- used by PPA
-Message-ID: <20251208142444.GO303283@bill-the-cat>
-References: <20251128150455.3279166-1-b-padhi@ti.com>
- <c5f858f8-0eb3-4ff0-bc7b-6286a43c93da@ti.com>
- <52e73f71-6c4d-4630-88f4-81de3fedaf83@ti.com>
- <1e980f3c-5955-47c1-81d4-f758dfa2d09c@ti.com>
- <0a4d1065-24ce-4806-9696-b300717a672f@ti.com>
- <ba834c1f-2e64-4e60-8ce7-d249cfbd11fb@ti.com>
- <8934e095-d694-4d47-b8e2-6fca9e164646@ti.com>
- <5e90cda7-a867-417b-a898-0ff10f2b2e1a@ti.com>
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Zx++me3K/qAgJ5tmSIYz+vK9cfHHYyFztguPfw3JKFW7pUzZzPG+sPcvu10EY4yjetbFqBoGhpTkGx5euCg9G/q0VocTfcFwh4fR9ihJWXuXNr2xfbZAPmKMMT52hY3ZdFRS1eqhqyva86IU06BwulQ9DoVI0gJ7w2Rbyshq0zT6eGSBmVL5Vqvr+RMbCE+epIiS5+RVIhrBs65XpYRbngBQbQJshh8+0Nf6QfP66LyMzCOLbnDGhBpf2taGHYPVa9EaF67xifv/xgoTJUe2Z+l1tID69jeFTex0Cs3KE2VGTtTFDByXzGgzI90Hw4e1MwS4A1LyRihUtwKX+PcO+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4ekiBWmzewgRwuHBwyfiFH+knhlB/jbZa8ApPuHvVPo=;
+ b=bakAVlSt8ILwL4IOip3h8NwjYI0gNT1syBAHlpFaaOYWYYq7MsB4x+aWvOw8OTAAv+mWAf1C54+MZHwDvXnz4tbPIkMotEsehH0q/luCtKCrHnucFOWfchrFPLyfytoVVDou1zWhy1WAO+5zIRUL3ulDnJUtMGSL2PJVZqFZlkgFgAY3fyCqOsSl0VlJNehwrGd5aUKrcReBxJh/93jzsQRvRLehwfs0ycIMiwSkWs7yxB0EOPE6KP9jMTJr96/Zv1Lp//n/FjsCJbJaTtEIYocgjCY54Sa+zstc/gWMerPOnD4casr+y4dazXo5imywk4gYDTvDnNS5tnSa7xk9XQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4ekiBWmzewgRwuHBwyfiFH+knhlB/jbZa8ApPuHvVPo=;
+ b=i8Rbn0kJd7ZxThD/LibzV84TFVRiT8T3Q+H+7wRzohyk4zk9PSOw9HIk46zF/lBy5ZQ6ET2Dp+gvp+SFlcuKhGi9CP37YxUi7rxBKV/sV5yP5UgC0j56CWe9wjThjdWfqpqzTH3YLc90w28XDEgc0ou6B3FpV7OQfwvwGgjuSsc=
+Received: from SJ0PR05CA0116.namprd05.prod.outlook.com (2603:10b6:a03:334::31)
+ by MN2PR12MB4341.namprd12.prod.outlook.com (2603:10b6:208:262::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Mon, 8 Dec
+ 2025 15:04:00 +0000
+Received: from CO1PEPF000066E7.namprd05.prod.outlook.com
+ (2603:10b6:a03:334:cafe::38) by SJ0PR05CA0116.outlook.office365.com
+ (2603:10b6:a03:334::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.6 via Frontend Transport; Mon, 8
+ Dec 2025 15:03:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CO1PEPF000066E7.mail.protection.outlook.com (10.167.249.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Mon, 8 Dec 2025 15:03:58 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Mon, 8 Dec
+ 2025 09:03:52 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Dec
+ 2025 09:03:51 -0600
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Mon, 8 Dec 2025 07:03:50 -0800
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Padmarao Begari <padmarao.begari@amd.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Martin Herren <sputnik@on-the-web.ch>,
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] xilinx: mbv: Update defconfigs as per memory map
+Date: Mon, 8 Dec 2025 16:03:34 +0100
+Message-ID: <ed4a3618875869287b87b6b57fd55f4c6a36f046.1765206211.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lisjg5ngJ2vBeDC5"
-Content-Disposition: inline
-In-Reply-To: <5e90cda7-a867-417b-a898-0ff10f2b2e1a@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2966; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=hJL/3FAYiOQ4jKiLJdZM0ZChlq2+2qM2W9IxDeRgNXY=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSavTj3U/b++ZWTK5fq3Fq3jKPnQpDFAp/EjIS9rNafN
+ 25nSH3O01HKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQAT2XyX4X9SL5+5wUmNzScC
+ nyZ2/GXanBoab2Hw0ZzPlrVx0//2H+aMDD0XWDfMXqnjnHk/9Irh7yuC/x8bXs5teu6tcbxmua+
+ /Gi8A
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066E7:EE_|MN2PR12MB4341:EE_
+X-MS-Office365-Filtering-Correlation-Id: a4e5f829-28c3-4db7-4e76-08de366b0393
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KQD/kczFPGY9ZGwCLnpoQ4UmiNXfe1aL616s0udjNGnh70WGszDC49KQq3cp?=
+ =?us-ascii?Q?uqVCpNR8hEEE6wsv/qhxQu2JLpE3VPhQN60yfcusQAqyKf3Sbuw1AWuXYS9m?=
+ =?us-ascii?Q?e2zSP+Qu9DIEZ996JSg2fFznovivx5XF8gT+YsuPb7oK8xBIRAKrJAiTK/dv?=
+ =?us-ascii?Q?VMJ+Bb83DwVARm8tpjDB6rfdc8z8IchkmJ1cDPiPMCahwvFB5/h1j0hi91Kk?=
+ =?us-ascii?Q?0QcTcetDoA+BzDK83F+TGXOzZqj2r+aChXKrMuzT5ngd5g/2sGLqEpAIgMfj?=
+ =?us-ascii?Q?OfglWd+b0pyRzfK83Fxjx9f5xhK9gYmrUSAPHHAB/UPH+WqQLfLS5ih/kHxp?=
+ =?us-ascii?Q?VPXl3weQzw/XBJFvN+ZqkiiTH38F37ffviRYW4Voe0Ec8JoNqR1zB20GL8XK?=
+ =?us-ascii?Q?pg9ayv3lwZl3U/SCZ9hWmAx/1lIzEG+mFuyG+8Djpi2NV3tXMs6YyLcn1DdF?=
+ =?us-ascii?Q?bro+g8XlxtXFPJvAJAwOo0Cxclp0JIZpCHaszOLRKnJPT06knqjP0y0BQsiW?=
+ =?us-ascii?Q?AoBc2RWCxpc5DMOBKSzPwcSsqumHiNFZLnnAym8IhBZYm4j9o2AwHLTnfNHW?=
+ =?us-ascii?Q?Ea+6JWvY1JCjSp6kN+XOLyLK9tSqvkdusTKSYw8MCXftykk3EL1b02fv3hPQ?=
+ =?us-ascii?Q?aU0bZ4jzWznnTyacqLeMtkftJV4naivwKpuVpQSQCv5SVwZeZLdkxMHXRYEe?=
+ =?us-ascii?Q?TuuLJxGG7SI36OtDykZ3jmTLgcKAfQRvygueXzbEHHzC0R0KK2I4G3aJGY7U?=
+ =?us-ascii?Q?N8jMWjL5S0VOelT/e5sXnjAslwV6tzeiVUTQf/My2QsKPLXx5jcu5sq7VAL+?=
+ =?us-ascii?Q?gB+1jdcIiBM+sK/sosFUCUpMtPyL0jTdvsW6TQ85LkZL+IANUz5+QD88Lije?=
+ =?us-ascii?Q?6nCPwYGttLHtaL6osyV+Do5gRzI10NSN9DSvSyr2J2tZ7xxx2ASbBLLlRB9j?=
+ =?us-ascii?Q?4gqh+UHZpWDVupub1Y+BIS3kNiGDZLnzCnj43filPW9AoC1egtXRBvYWxv1d?=
+ =?us-ascii?Q?DuhcfAKMUIoLwKnAVvTFymOF3CHQgiJzc9nBzcEBEUKQqBT0c1qbTqfhJf5Y?=
+ =?us-ascii?Q?MyjGCXd+OnNjtbKSixBvMxaefnWj0ZBwbOPeYmpKqcHaGFX52zll9yG9By1G?=
+ =?us-ascii?Q?R8iXR3++MvwYJoQs2Q/LDgio+uqHSkEafi9KB+Bv8Nu6EYfnsAhfEO1WoODe?=
+ =?us-ascii?Q?EFRfPhkbKE539rGmvllIcJZJZTHfiF5FraiB6LmDTqfqFFYg8MnBqYKrah6W?=
+ =?us-ascii?Q?4OTbwOZVSMqZBRJXeqHPlgfqIz5y+g+ncEMQ2bIPPtq1H0dNQKXKPSq7SdSj?=
+ =?us-ascii?Q?vl+O2Dvxb0btGDIeQhhQx7jKCQ/qZKg9dGqKLwulbTens9HI2E8xhxj2W8gZ?=
+ =?us-ascii?Q?ZupeB2CCospqdjnJhlguJGvmPh7UnKRFg963ukdN5O01D8Blp/dGzTtub3RM?=
+ =?us-ascii?Q?Ck0UTsgNPseH7ksLKKN9GZ/zhhtTS1AGENtA6fceoVmI1kOwCvmnAywAujzk?=
+ =?us-ascii?Q?knydqYNf5aok4VopU/9M2/HIzG7baIBhG3Mxp8zi6A099pC1QG74XhQEeehL?=
+ =?us-ascii?Q?VhQfDvitWqnPA4yFwXg=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 15:03:58.1210 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a4e5f829-28c3-4db7-4e76-08de366b0393
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066E7.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4341
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,194 +163,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Padmarao Begari <padmarao.begari@amd.com>
 
---lisjg5ngJ2vBeDC5
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+U-Boot SPL should be executed from LMB BRAM, where its text
+and data sections are located, while the heap and stack are
+allocated in DDR memory.
 
-On Mon, Dec 08, 2025 at 08:21:06AM -0600, Andrew Davis wrote:
-> On 12/8/25 3:25 AM, Beleswar Prasad Padhi wrote:
-> >=20
-> > On 05/12/25 20:12, Andrew Davis wrote:
-> > >=20
-> > >=20
-> > > On 12/5/25 1:32 AM, Beleswar Prasad Padhi wrote:
-> > > >=20
-> > > > On 02/12/25 18:47, Andrew Davis wrote:
-> > > > > On 12/1/25 11:56 PM, Beleswar Prasad Padhi wrote:
-> > > > > >=20
-> > > > > > On 02/12/25 00:58, Andrew Davis wrote:
-> > > > > > > On 11/28/25 9:04 AM, Beleswar Padhi wrote:
-> > > > > > > > The AM571x SoC has 1 GB DDR space. As part of normal re-loc=
-ation process
-> > > > > > > > U-Boot copies itself to the top of DDR bank. However, on HS=
- devices, the
-> > > > > > > > top 37 MB is used by PPA and is firewalled. This results in=
- an exception
-> > > > > > > > and the boot fails.
-> > > > > > > >=20
-> > > > > > > > Introduce a new defconfig for AM571x HS platforms and set
-> > > > > > > > CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (al=
-igned to 2MB
-> > > > > > > > as per page size for ARM32) for the same.
-> > > > > > > >=20
-> > > > > > >=20
-> > > > > > > This "SYS_MEM_TOP_HIDE" looks new, for other OMAP-class HS de=
-vices we
-> > > > > > > use "CFG_PRAM"[0], seems these two configs do the same thing,=
- could probably
-> > > > > > > combine them in some way..
-> > > > > > >=20
-> > > > > > > As CFG_PRAM is set based on TI_SECURE_EMIF_TOTAL_REGION_SIZE =
-which is 32MB
-> > > > > >=20
-> > > > > >=20
-> > > > > > CFG_PRAM is only set if TI_SECURE_EMIF_REGION_START is not set,=
- but we
-> > > > > > have it set it to 0xbdb00000 in the am57xx_hs_evm_defconfig.
-> > > > > >=20
-> > > > > > https://github.com/u-boot/u-boot/blob/master/include/configs/ti=
-_omap5_common.h#L75-L81
-> > > > > >=20
-> > > > > > > for all other AM57x, why is this needed only for AM571?
-> > > > > >=20
-> > > > > >=20
-> > > > > > Other AM57x boards have >1 GiB DDR. So, the top of DDR space do=
-es not
-> > > > > > intersect with the firewalled EMIF region (0xbdb00000). Only in=
- case of
-> > > > > > AM571x, the top of DDR collides with firewalled region, so boot=
- fails while
-> > > > > > doing reloc.
-> > > > > >=20
-> > > > >=20
-> > > > > Is there some way to detect this at runtime? Nothing prevents any=
- of the
-> > > > > AM57x SoCs being used on boards with 1GB DDR (although they also =
-might use
-> > > > > a different defconfig). How do we deal with this for K3 devices? =
-Some use
-> > > > > an OP-TEE address aligned at 512MB and I'm sure one of them have =
-that amount
-> > > > > of DDR.
-> > > >=20
-> > > >=20
-> > > > Well, actually not...
-> > > > It's the AM62 SIP platform. From DT, it would look like OPTEE is at=
- the top of the
-> > > > DDR[1], but we do a FDT fixup here in u-boot to replace the OPTEE t=
-o the start
-> > > > of DDR[2]
-> > > >=20
-> > > > [1]: https://github.com/torvalds/linux/blob/master/arch/arm64/boot/=
-dts/ti/k3-am62x-sk-common.dtsi#L71
-> > > > [2]: https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-k3/=
-am62x/am625_fdt.c#L84
-> > > >=20
-> > > > I am not sure if we can do such a thing here for mem used by PPA/fi=
-rmware
-> > > > as it could assume it has that memory hardcoded.
-> > > >=20
-> > > > >=20
-> > > > > > > We build for all
-> > > > > > > the AM57x with one defconfig, so this new defconfig will go u=
-nused. Just set
-> > > > > > > the default CFG_PRAM size to 64MB (same as AM43x),
-> > > > > >=20
-> > > > > >=20
-> > > > > > I am guessing all AM43x devices have the same amount of memory =
-unlike
-> > > > > > AM57x devices? If we set CFG_PRAM to 38MB by default, won't we =
-lose out
-> > > > > > that memory on other devices which do not face this limitation?
-> > > > > >=20
-> > > > >=20
-> > > > > We only really supported "officially" the AM437x-EVM. But our ove=
-r-focus
-> > > > > on just our EVMs caused us to make assumptions that would later m=
-ake
-> > > > > it difficult to add support for customer boards. Assuming DDR siz=
-e was
-> > > > > one such assumption, and should a customer board have the "wrong"=
- DDR
-> > > > > size things like this would break.
-> > > > >=20
-> > > > > So instead of making another one-off fix to get one of our EVMs w=
-orking,
-> > > > > I'm trying to think of a way we can make this work automatically =
-for any
-> > > > > combination of DDR size and firewalled region.
-> > > >=20
-> > > > TL;DR
-> > > > I think adding that dynamic support would be tied up only for TI us=
-ecase?
-> > > >=20
-> > > > Hmm yes, I get your point. But to be able to do this dynamically, we
-> > > > would want to see if gd->relocaddr intersects with CFG_PRAM:
-> > > >=20
-> > > > Case 1:
-> > > > gd->relocaddr > (SECURE_REGION_START + SECURE_REGION_SIZE)
-> > > > =3D Best case. U-Boot relocates to an address higher than firewalle=
-d addr
-> > > >=20
-> > > > Case 2:
-> > > > gd->relocaddr <=3D (SECURE_REGION_START + SECURE_REGION_SIZE)
-> > > > =3D Fixup needed. U-Boot relocates to an address which could overlap
-> > > > with secure region. Update the gd->relocaddr to a lower address ran=
-ge
-> > > > which won't overlap with secure region:
-> > > >=20
-> > > >  =A0=A0=A0=A0 reloc_text_size =3D (RAM_TOP - gd->relocaddr);
-> > > >  =A0=A0=A0=A0 gd->relocaddr =3D SECURE_REGION_START - reloc_text_si=
-ze;
-> > > >=20
-> > > >=20
-> > > > And ofcourse, we can't put this logic in the existing 'reserve_pram=
-'[3]
-> > > > INITCALL because gd->relocaddr gets modified in the subsequent
-> > > > initcalls like 'reserve_trace'. We would want to introduce a new
-> > > > INITCALL which would be invoked after all reserve_* initcalls and
-> > > > before the reloc_* initcalls; where we can put this logic.
-> > > >=20
-> > > > Let me know if you think this is worth adding, or is an overkill and
-> > > > we can live happily with CFG_PRAM =3D 38 MB for all AM57x devices :)
-> > >=20
-> > > Thanks for doing all this evaluation. I don't think this will be
-> > > the last time we run into this issue, but for now let's just make
-> > > CFG_PRAM =3D 64 MB for all AM57x devices and create the perfect solut=
-ion
-> > > later.
-> >=20
-> >=20
-> > Thanks, I tried setting CFG_PRAM but it still ended up in a firewall
-> > exception. I guess this is because CFG_PRAM only ensures U-Boot doesn't
-> > relocate to that protected address[4], however that memory is still open
-> > for access by anything else if needed. Whereas, SYS_MEM_TOP_HIDE reduces
-> > the ram size itself[5], which ensures that memory is not visible to
-> > U-Boot at all (either for reloc, or general usage).
->=20
-> Seem PRAM ("Protected" RAM) isn't all it claims to be, better route then
-> is to convert our existing uses of PRAM to SYS_MEM_TOP_HIDE, which seems
-> more modern and uses KConfig.
+Because on the MB-V platform, after power-up, reset, or FPGA
+load, execution begins from LMB BRAM at address 0x0. Therefore,
+the SPL binary must be placed in BRAM to support this boot flow.
+Without it, the system can only be booted via JTAG.
 
-I don't think it's any more or less modern, but to be clear, there's no
-way (or no reason?) to describe these memory areas in DT? Or is it that
-we also need to do some game to remove it from U-Boot's view early on
-because how of little memory there is / where this area is? Thanks!
+A 64KB LMB BRAM region is allocated for U-Boot SPL, starting at
+address 0x0. This region contains the SPL's text, data, and device
+tree blob (DTB) sections. The .bss section is placed separately at
+address 0xF000.
 
---=20
-Tom
+	_________________0xFFFF
+	|BSS            |
+	|_______________|0xF000
+	|DTB            |
+	|_______________|
+	|Data           |
+	|_______________|
+	|Text           |
+	|_______________|0x0000
 
---lisjg5ngJ2vBeDC5
-Content-Type: application/pgp-signature; name="signature.asc"
+A 2MB region of DDR memory is allocated for U-Boot SPL, with the
+heap starting at address 0x80000000 and the stack at 0x80200000.
 
------BEGIN PGP SIGNATURE-----
+	_________________0xBFFFFFFF
+	|Full U-Boot    |
+	|_______________|0x80400000
+	|Load FIT Image |
+	|_______________|0x80200000
+	|Stack          |
+	|_______________|
+	|Heap           |
+	|_______________|0x80000000
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTbfqAAKCRAr4qD1Cr/k
-CjBNAP4zpGbu4mwA/DBOaEqVKlvv2wKuK7nV/FdG4N7pWnXrRgEAnQSQH8Zw/eMy
-XCG5mzgyo9cbhlirDj9S2wt7g0DU3gs=
-=Smt0
------END PGP SIGNATURE-----
+Since LMB BRAM is a limited resource with a practical size
+constraint of 64KB - it cannot accommodate all runtime data.
+Therefore, the heap and stack are placed at the beginning of
+DDR memory to ensure sufficient space for SPL execution.
 
---lisjg5ngJ2vBeDC5--
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ configs/xilinx_mbv32_defconfig | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 9e3c44352a15..42dc5fb282ad 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -6,11 +6,12 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
+ CONFIG_SPL_STACK=0x80200000
+-CONFIG_SPL_BSS_START_ADDR=0x84000000
+-CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_TEXT_BASE=0x0
++CONFIG_SPL_BSS_START_ADDR=0xf000
++CONFIG_SPL_BSS_MAX_SIZE=0x1000
+ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80200000
+-CONFIG_SPL_SIZE_LIMIT=0x40000
++CONFIG_SPL_SIZE_LIMIT=0x10000
+ CONFIG_SPL=y
+ CONFIG_SYS_CLK_FREQ=100000000
+ CONFIG_BOOT_SCRIPT_OFFSET=0x0
+@@ -25,10 +26,13 @@ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ # CONFIG_BOARD_INIT is not set
+ # CONFIG_BOARD_LATE_INIT is not set
+-CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_MAX_SIZE=0xf000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x200000
+ # CONFIG_CMD_MII is not set
+ CONFIG_CMD_SNTP=y
+ CONFIG_CMD_TIMER=y
+-- 
+2.43.0
+
+base-commit: 6cf68b9fba56781b3a7b1c2976aec4d2c71bebc1
+branch: debian-sent3
