@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FAFBD3B7E2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 19:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E593AD3B7EA
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 20:47:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B4D983B03;
-	Mon,  8 Dec 2025 20:39:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 23F2C83A57;
+	Mon,  8 Dec 2025 21:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sX0U4yKv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LeUTHhGv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64DA283B03; Mon,  8 Dec 2025 20:39:04 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id A4EF783AEE; Mon,  8 Dec 2025 21:47:26 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA9F683A57
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 20:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B39783990
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 21:47:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4510974a8cdso2593754b6e.0
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 11:39:00 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-8824888ce97so61802326d6.2
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 12:47:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765222739; x=1765827539; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bN1GUZ906m6QC80hBlGQuENBBu/fnelA4+DeJ20Dq0M=;
- b=sX0U4yKvl3crjuwISC5LOc8OtdJ3Tpirj6OnOS8QhD6Mp8XKnUHepJhADGZ2QbUoD4
- SHhwHx2nbNldyPvynt33GkdVQE2okQllxywjgZpG1tMtk5zotd+m9xzgJDJ14JVNcg3i
- E5dSxaG1xLg90fdv/IFyGy42tVy1BXexeP1JU=
+ d=linaro.org; s=google; t=1765226842; x=1765831642; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c/4fKeTLzU2N2FsUgiaPEappldAmVdJ9JS4tKX61ksY=;
+ b=LeUTHhGvTJLPK8cstyHP5HZZjLsCJhPoV140liPp63DlSOFyoThgmOhmvi7TMgdb+m
+ nqhkWqrBbbSNz1IV1fU9ZkGQsCbN/k+aGnNF8hIyTVVKD5jz73Z9c/prYJYHZ9zNIBbX
+ EGiNsZYsM7YOhTUFM1sGZ8HEM2kRCuCGvoniSxYdfpbbWdxpVyBwRIxawKDEOvPurITB
+ dZSwlJ5w8AfsT62UdoGeZwbEzfQx4GmRZH9NJ+jq5RmxR1+3Ln+l94JBB8b/gXIS3Spz
+ WpF1AesY+nF/NSRfi1bTTWHIIkmXJo3LUMD06GwJC9A+h5tsShxENn6i+b4+J0FLfzbB
+ EOwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765222739; x=1765827539;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bN1GUZ906m6QC80hBlGQuENBBu/fnelA4+DeJ20Dq0M=;
- b=SF31YSOkb21ikV2bYCoI/WjIs/4eK0mfjJi3olsvx6nS1sUk8pkw4EfF7c7LiECJl+
- 3/A/fln3ljcR4W569Ly9tL70bLP47l/UjMwOqsI2GWmsmRebQWIIciBwb5AIeU24p8A6
- lqqQxdRE+wfPOQjeMR5uvQseq/bp6aQbsk48CtBidd8t+ya+K2T7z/3pJ4OOl0hxdsag
- 0s7lTx/JDhlrkhqs6BWtzMSaEQrgFFB8Uwg5VgjiK8b5HQCaIo7QnAsoI30vkCMY/Cgp
- vPyEDTEuObgtKHXqu1iLAILjB57EIpR3ja3w6/AB1+niZvC1nJaOJq9Y26HlxkrIK5Nr
- oyyw==
-X-Gm-Message-State: AOJu0Yzcjc9tceLTHD82JWqY0PahtdN1uNxIEMzYR/JILcRCUkcB0NfT
- Ba07BG6LEgPLoBsQMZGkrragY7DPuDyz+BukoPEAiOzUNnMgNWUDeWrhDmJS9sFtHPqUuYkv0R4
- WVjMpeIk=
-X-Gm-Gg: ASbGnct4xzH00sU92PZCYAdx5NIqdMUUz3jOPOO76nSmkI2ABOuBt/My0jPBhnemRrg
- DMoKwitwBMabUwTT+p1MVfdmD+/W5mrhJtfLNTmNPgVgt+8dq0YKtyh71AmAIfJ3BxqcTdJqvSM
- CUhHLHcOmFTzMCxzkQ5UzOfZwQ8vX5J0+uUSL6d+uX/PI+Ra2kZnGJRC50klgsDQLxw1RWNvskx
- 3I2CcNEFWwca64T4bK7BvNdOWDnAxifUwAdOuBSOj8+sK8rCYaz6xaeHbo/iGx1zW0BCyXpLK/5
- CrG4jvijzPwLE0N7qq3ZyU4PaMmNOPze9dfo+ezIJAMivJ4LNQ8wz1XLNSwKsT57SnS3QVcJM/v
- JB5luYBVzw6f6ObU3wG1hPTSUPyo+gpoHH+jLYilvNElqLhF6XuXP7CaSJDI2blYSeThvjx6eXM
- g66NiIzA422+bwsLBuMb9FkRbDhSSWtSZ/3Ff3oquI6W32BkcOwg==
-X-Google-Smtp-Source: AGHT+IE6jqpaF7kyIRBRnrpJon+4MI0bnCIIPyveSCVWTDTL7d8l+1ANMepwmTpXgOmaZjFbM7SUtw==
-X-Received: by 2002:a05:6808:30a7:b0:453:7a2a:62cd with SMTP id
- 5614622812f47-4539e094e5amr3267888b6e.50.1765222739405; 
- Mon, 08 Dec 2025 11:38:59 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4538f742e5asm4967498b6e.4.2025.12.08.11.38.58
+ d=1e100.net; s=20230601; t=1765226842; x=1765831642;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c/4fKeTLzU2N2FsUgiaPEappldAmVdJ9JS4tKX61ksY=;
+ b=I1ULFIcoWqZzQNkRaMlMtMV90FYzfA60JOirjk9wgVISpnLmibEZD1e9uVj20QPPZ/
+ b5MoO/uNFnsP4sopMmhnsetcMNe7D7BDQiqOsX/unkbUaFTDgbGA3cUeO+BE9GnZKUZd
+ ACwFn4a5KTbpgqA1bQSOYEt9NOe5XWoGQGRpTp96PqCUq7r37WL7Jxk/RSSYbmaTRM1f
+ NF5vmN4SD29cOHor8UhhUpmPsYxjr+nNtemN90Jway4gZlHKJ222/Ao3BSCJLh3DAJvK
+ K/sb+W4q1Ed+RXSqtcIBICM5ecLd5U5zQKkHYGVDEEHc4Rmx/ViaO27a4CunraKfS0bg
+ aAHA==
+X-Gm-Message-State: AOJu0YyXDmEsmOv/1RgPx1w/999EoVh+I3AQx8Y9RDsVpn1rA5gIEiqV
+ o9KeSZvtzOfWQ7XYcsBYTtaARammyAi3b5ITekmG5ryEt6OCBFwF97Em0H1i6i3sm+g=
+X-Gm-Gg: ASbGncuRlIga+2P0MNNKRxQtYxWtAhFzb0B8WulnspLjamctJycU+IEtwyASzDAzzWq
+ zwVPM7BqKf2quxGOQFT7pKFqDOMLigY2WPTLNQKAAloeu2k8vMUMUL39BVPixT2ES/vAMXA3RLF
+ 6yklgtrTU4kSUBQc/qG+W7IrgU2+Sbt3BZBvH1nsBQpcuxTyqulVH1It4JkJhg//HQBTYRsxnUn
+ 5XoxjA15LXGFHbxxRbM62246+g0Wb0rUZZ62Wu09NvR6TnIEdBXw0DBEIgNBBl1sVSepL3BEX42
+ yGDsnnUfOzufO6TDiGUPd3gNrCiizX/rei2KWkj5djaS/XA5017ttthS2zKXeld9Ff7T7bhDwJg
+ 2j0XQyr6Js0kblqo1dOAgQBwM2z3MWf+1Q2dFL6ouzO6POv2Ge1ea1rn8LP5K87I6Y1Z/d+wCby
+ GbTBV7DHSMyjNE9oNlo6OPQtw+g4ug
+X-Google-Smtp-Source: AGHT+IH2dindWsFOU2Nd8y3Qx2MH2y8OZrBfQN0IZuPBrCdMvdZjVuiYyqEG7MArppb8FAUlv8sfBw==
+X-Received: by 2002:a05:6214:d4b:b0:880:5bff:74d6 with SMTP id
+ 6a1803df08f44-8883dc4b9fcmr171709876d6.51.1765226842155; 
+ Mon, 08 Dec 2025 12:47:22 -0800 (PST)
+Received: from maple.netwinder.org ([173.206.223.168])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-888583bd0f3sm2624786d6.7.2025.12.08.12.47.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 11:38:58 -0800 (PST)
-Date: Mon, 8 Dec 2025 13:38:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Adriana Nicolae <adriana@arista.com>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20251208193857.GS303283@bill-the-cat>
+ Mon, 08 Dec 2025 12:47:21 -0800 (PST)
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Mon, 08 Dec 2025 15:47:06 -0500
+Subject: [PATCH] spi: designware: Allow disabling designware driver in SPL
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5gVvVyXMlSo2Ej3S"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251208-spi-designware-spl-v1-1-21e6f519a4de@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAEk5N2kC/x3MQQqAIBBG4avIrBNSMKqrRAvJvxoIEwcqkO6et
+ PwW7xUSZIbQqAplXCx8xgrTKFp2HzdoDtVkW+uMbXstiXWA8BZvn1F56NC70HnbwWGgGqaMlZ9
+ /Os3v+wETIosUZAAAAA==
+X-Change-ID: 20251208-spi-designware-spl-d85d6a26e5e9
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>
+X-Mailer: b4 0.15-dev-56183
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,141 +101,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+To reduce SPL size, make it possible to exclude designware driver,
+while keeping it enabled in the main u-boot.
 
---5gVvVyXMlSo2Ej3S
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+---
+ drivers/spi/Kconfig  | 8 ++++++++
+ drivers/spi/Makefile | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-Here's the latest Coverity scan report. I think the test/dm/clk_ccf.c
-report is just a "works as intended" but I'm not sure off-hand about the
-fdtdec.c test. Might be the case the previous test in the file also has
-this problem, and since it's just test code, might also be fine enough.
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index 2afb15fff1e..94054ba39b0 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -223,6 +223,14 @@ config DESIGNWARE_SPI
+ 	  access the SPI NOR flash on platforms embedding this Designware
+ 	  IP core.
+ 
++config SPL_DESIGNWARE_SPI
++	bool "Designware SPI driver in SPL"
++	depends on SPL
++	default y
++	help
++	  Enable the Designware SPI driver during SPL.
++	  See the help of DESIGNWARE_SPI for details.
++
+ config EXYNOS_SPI
+ 	bool "Samsung Exynos SPI driver"
+ 	depends on ARCH_EXYNOS
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index d5d1e543588..0dc2d23e172 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -35,7 +35,7 @@ obj-$(CONFIG_CF_SPI) += cf_spi.o
+ obj-$(CONFIG_CORTINA_SFLASH) += ca_sflash.o
+ obj-$(CONFIG_CV1800B_SPIF) += cv1800b_spif.o
+ obj-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
+-obj-$(CONFIG_DESIGNWARE_SPI) += designware_spi.o
++obj-$(CONFIG_$(PHASE_)DESIGNWARE_SPI) += designware_spi.o
+ obj-$(CONFIG_EXYNOS_SPI) += exynos_spi.o
+ obj-$(CONFIG_FSL_DSPI) += fsl_dspi.o
+ obj-$(CONFIG_FSL_ESPI) += fsl_espi.o
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Dec 8, 2025 at 1:23=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
-
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 2
-   - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 2 of 2 defect(s)
-
-Defect Details
-
-** CID 639831:         (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 639831:           (TAINTED_SCALAR)
-/test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-147
-148     	blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-149     	blob =3D memalign(8, blob_sz);
-150     	ut_assertnonnull(blob);
-151
-152     	/* Make a writable copy of the fdt blob */
->>>     CID 639831:           (TAINTED_SCALAR)
->>>     Passing tainted expression "gd->fdt_blob->totalsize" to "fdt_open_i=
-nto", which uses it as an offset.
-153     	ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-154
-155     	/* Mock SMBIOS table */
-156     	entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-smbios3_entry));
-157     	memcpy(entry->anchor, "_SM3_", 5);
-158     	entry->length =3D sizeof(struct smbios3_entry);
-/test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-147
-148     	blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-149     	blob =3D memalign(8, blob_sz);
-150     	ut_assertnonnull(blob);
-151
-152     	/* Make a writable copy of the fdt blob */
->>>     CID 639831:           (TAINTED_SCALAR)
->>>     Passing tainted expression "gd->fdt_blob->size_dt_strings" to "fdt_=
-open_into", which uses it as an offset.
-153     	ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-154
-155     	/* Mock SMBIOS table */
-156     	entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-smbios3_entry));
-157     	memcpy(entry->anchor, "_SM3_", 5);
-158     	entry->length =3D sizeof(struct smbios3_entry);
-/test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-147
-148     	blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-149     	blob =3D memalign(8, blob_sz);
-150     	ut_assertnonnull(blob);
-151
-152     	/* Make a writable copy of the fdt blob */
->>>     CID 639831:           (TAINTED_SCALAR)
->>>     Passing tainted expression "gd->fdt_blob->size_dt_struct" to "fdt_o=
-pen_into", which uses it as an offset.
-153     	ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-154
-155     	/* Mock SMBIOS table */
-156     	entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-smbios3_entry));
-157     	memcpy(entry->anchor, "_SM3_", 5);
-158     	entry->length =3D sizeof(struct smbios3_entry);
-
-** CID 639830:       Integer handling issues  (INTEGER_OVERFLOW)
-/test/dm/clk_ccf.c: 68           in dm_test_clk_ccf()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
-/test/dm/clk_ccf.c: 68             in dm_test_clk_ccf()
-62     	ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
-63
-64     	rate =3D clk_get_parent_rate(clk);
-65     	ut_asserteq(rate, 60000000);
-66
-67     	rate =3D clk_set_rate(clk, 60000000);
->>>     CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "_val1", where "rate" is known to be equal to -38, overf=
-lows the type of "_val1", which is type "unsigned int".
-68     	ut_asserteq(rate, -ENOSYS);
-69
-70     	rate =3D clk_get_rate(clk);
-71     	ut_asserteq(rate, 60000000);
-72
-73     	ret =3D clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_80M), &pclk);
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+---
+base-commit: 0e0a198a68be71148f5ec27ef86796174f91436f
+change-id: 20251208-spi-designware-spl-d85d6a26e5e9
 
 Best regards,
+--  
+Ralph Siemsen <ralph.siemsen@linaro.org>
 
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---5gVvVyXMlSo2Ej3S
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTcpUAAKCRAr4qD1Cr/k
-CuNyAP9ISqq6sozFFgR47Rxxi4vu5WPKBMxyCW1QDfL6j4C7mwD/ZYCqI2aRCbIe
-zkYNpkTEQkoPieQQCLWKHCqMgy21jgU=
-=Nfrf
------END PGP SIGNATURE-----
-
---5gVvVyXMlSo2Ej3S--
