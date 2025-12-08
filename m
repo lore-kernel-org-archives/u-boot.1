@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93AC8D3B7E2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B76D3B7E2
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 216C083B55;
-	Mon,  8 Dec 2025 13:52:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E06B83B34;
+	Mon,  8 Dec 2025 13:52:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IBg9jcXW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ArSIL4RM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2981A83B4E; Mon,  8 Dec 2025 13:52:13 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 8003283B72; Mon,  8 Dec 2025 13:52:14 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28F1683B32
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:52:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53BD283B43
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:52:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-477a1c28778so57437835e9.3
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 04:52:11 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4775895d69cso21842735e9.0
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 04:52:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765198330; x=1765803130; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1765198332; x=1765803132; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=x58j6eNqlaNi5vfFnoUz9VMOmumGq+ig6InZvzrW0vY=;
- b=IBg9jcXWSIc3Dc+GVIRiI42eiLi+mQh1asmPYuSA1asCfpFo1Q2dlHrLFi3osOAAGI
- iUEY60Fd79+p6R94xTBbOsFxMWYRciFAfXkxVQDWY7Z7ag1wzOmdteHdoNLemn1fUbVV
- MkqJskKrFWOSYnidN3cWwr32QotVHWuH381/6PQNpAPNPz0fx2BeTVlnzxR85/t19Lcm
- 7SiMPgsJjpUS/aR4/J0BOwlXVVGRhpSSNpeS3rwXGHntPitCydCZxWrawyWXOSZ/QVTC
- LhdXEGEW919rQZY0dVRHTUbvWLIYGe8BIip4C9PzFxjIK6WgsvLaZ690huLw+bhhx0/h
- 4Wwg==
+ :reply-to; bh=kLKPaUn9C3OcyJ1grvuAzWVXvSROYT3QKdyVXmEDa6w=;
+ b=ArSIL4RMHowmq/rlBUZhP8LFfkzVM5Tr9pLhkURlpPIzzT16B61S9Tgk8qwNv4LTTf
+ WXL/u0Exe3Q+q8bLeLc/Hzasdf9lbwTDF7ZInYsoecxeEThfJUbWvPEnlGHZBt3w9f27
+ 453NLXv8LjyUr6xoa3vNgEqUUDyZhXID1uHN3kp1T/Kq0VoruNbOyZWCKEUSt9qo2jb+
+ 5kYFmlUZNAsJ6x2eILGaw4xxMywiFiMHwcQZ1dwQOcmLq2+9EAPBal332EOCKlplOIbB
+ ndxDvZmmKgDrnxzJzFoBsR3T+CXjg2x6H5okKCFwOhfXuALOtSa4lLMOnTy549rvStnm
+ 9uIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765198330; x=1765803130;
+ d=1e100.net; s=20230601; t=1765198332; x=1765803132;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=x58j6eNqlaNi5vfFnoUz9VMOmumGq+ig6InZvzrW0vY=;
- b=OhfQ58ECNhyQfdPJbiY/AceLDeWomUSZHAz9DAqoTXNSlhKt6cMPMHHHNIdRUKf/j9
- 2TNhtzS7lBNSAoICysK/gCSVqX39A/SagaPp5u+lCFzoy7kE3IjDNsOdnU1/USlmtHzq
- pSKZ4TJ7uVJYfuYv5Z3ZN9t1AXZyM86D5uyhdCD6f8xqGoYxJ5d+/cWOWL9AL1Cqcayx
- xDP1hYKn7xowSRD1vxDguCoGnGFZwfwx6ACRiZgjFohmqAOiVBp9k/c/40+npf46Emr+
- ps49txUBo7EEw+Z16edOVPLWnq6VGz6bbNUXd1MRVfn9DmkQqmtl/Zjo/pHoMheFRaT5
- CX3Q==
-X-Gm-Message-State: AOJu0Yz2oHLT4ctFwXn4LA/sQAiE6AEdJZ7hMyIsPpTpS9UE8ukYJZsb
- EbXIaLzKpuMrk5z9TAJ0SXeaGTfzek09ilWMgzD3NCSuc1R+AGwtiq+6bmNF3q8FfnI=
-X-Gm-Gg: ASbGncuReNUWsaQ6Fm1UAYtf2frJkwAiNjATg3Btg1uSewTBO+x1hZBnADfaEhn6vQB
- ShDkK8cPoD95GbgKfXuPTnWKCAsUkRiXgTBS1SwEJLY8l51Qi9pyqB67Ma8cUDc7EG/DUgRplu7
- jRlkomW+d2L5P8aBKujTwyk/RkW2IRtHDueWEBxXJk0xvz0r/s+1zZ9eNwuVSRBKsXIdJE/RRNK
- D4olMvXoY9/3WoIhF+uznmYspGvhQZEtXYbsJLOK3vbD7IulF2WazvmUrRhnZZoLSPZCnpejDz0
- z4w08B6pY0VSSTLi1Mk6pWsA/k5SHYtdmyQpY4452edkgImCUtVMEj1SyxuzzEI00Os8cWzfJq5
- BoloL1l4nXewntHhYX6GUv+gAxLz2Trg5UcF2Gwq//9IqPvkedlHoDWW63iaLfGDa7sObyv6xnw
- 0g4j559HksFrJ6klb8+Fi8M0Hc1giPrC+KvnM7DVk=
-X-Google-Smtp-Source: AGHT+IFtyOyAK5tyISxulNvS6jPaukTVOfEcX03iWvmY5hNE/GZRV7YpvEVOLzSmqVRIDstmgrFOnQ==
-X-Received: by 2002:a05:600c:6209:b0:477:9aeb:6a8f with SMTP id
- 5b1f17b1804b1-47a7b1b053emr2747915e9.9.1765198330509; 
- Mon, 08 Dec 2025 04:52:10 -0800 (PST)
+ bh=kLKPaUn9C3OcyJ1grvuAzWVXvSROYT3QKdyVXmEDa6w=;
+ b=tY74cp3BIlXKPkkWqz+Z9rv1ngqxGPBWaucJCObuD9FXSMVlXmmT1RDw0LJK0EhyAG
+ Z414lwQw5YNTgiS5/Kfbut04fGzhYz1IDAu+Nf2WjyM9VowQ+1acLoyc18XgP28dzSJL
+ 0xlXKClO+m6tiEBz/ps2O96dZ6CSPm0P/+UAUCSJ02myHaW8SiLO/N/wnn6Pn6XXGlKj
+ shbdpVVPhR/PW90w4pjz1EH1R9b/F2D0eRTuPttKMXd2QZkUOYmeArXZRkw5ADeZ4bpc
+ v+K0F6m7zSG20i+Ro6akZ6JWi3IWYUg5jTl0r0o0XdvNdPUQflWR+6KtJ0MSsnEB3yQ6
+ TlSw==
+X-Gm-Message-State: AOJu0YypNR2XZN+k0+aGN6kKzQE7UL4qC3nrkGJ88sWvC+AD0qsW0bzN
+ /Dt6i93eZd/F7BoSDLWVLwoiUAq5MTPJHdmDsMPyb5gXH5LbqGXP24SGESw0425Ul6U=
+X-Gm-Gg: ASbGncvqG/VRq1q+NOiD6E3IreB0HnlwzcFYApgnDYEAJ0otcJYW2T/Cjc/Vlc63ANy
+ uC4wcxNayWaXIohmuA7RuAjvvUFcrH9fmm5kdcxM47Zpj/UqBxqPz9BWZYnKrcChMA4M6RuA//T
+ xaklyTzaB8skikdtS7uaVwMx/Eq5qdMjwcLlvzABjOiZ2uH62eYq6iP9flBGhrB6YlnvhFCw0+1
+ WnWM17lDkPcOViOidAD3cPAxl3v1mmzoR90ON5keh8TE1UDcFJKl8Sj25BBzRjxlR6IuvOX+EOR
+ FGLMxh7LIbJR6LkJk0wOkEyZRGj912mR4PUeGz4nivrh+pXUI33KT3ckNTrBZ+5QXNRYsISdKWO
+ 0LSi9X7sN1xLYwO73q7CpBt0a5VzwgUXYiMfe/kKBlWtz3Rxdw8lfk7S7rjq9lNE+R/0ZytFx2e
+ XoK5l0Kiew7Xe4IiXmAyMznUnqDy+a6RLalTH2gj8=
+X-Google-Smtp-Source: AGHT+IGgVdFd9m/GuQrzBn18HlFyCtY1+2dciNTCcJnsfCBTtyLbd+0yOyQyF9+kYfro1c5/Pc+CSQ==
+X-Received: by 2002:a05:600c:8b34:b0:471:700:f281 with SMTP id
+ 5b1f17b1804b1-47939e3d14amr79673945e9.25.1765198331652; 
+ Mon, 08 Dec 2025 04:52:11 -0800 (PST)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f7b:b001:fd05:11bc:5c24:a865])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47930920b6dsm260113645e9.1.2025.12.08.04.52.09
+ 5b1f17b1804b1-47930920b6dsm260113645e9.1.2025.12.08.04.52.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 04:52:10 -0800 (PST)
+ Mon, 08 Dec 2025 04:52:11 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 08 Dec 2025 12:52:07 +0000
-Subject: [PATCH 1/5] net: move net_state to net-common
+Date: Mon, 08 Dec 2025 12:52:08 +0000
+Subject: [PATCH 2/5] net: Move some variables to net-common files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251208-lwip_nfs-v1-1-1f5d31e15d00@linaro.org>
+Message-Id: <20251208-lwip_nfs-v1-2-1f5d31e15d00@linaro.org>
 References: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
 In-Reply-To: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
 To: u-boot@lists.denx.de
@@ -115,115 +115,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the net_state variable into common code so that it can be used by
-either the legacy network code or LWIP. This is needed for porting
-across the NFS support code for use with LWIP.
+Make some variables available to be used by either the legacy network
+code or LWIP by moving them into the net-common files. This also allowed
+removing a small number of duplicated variables from the LWIP code.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- include/net-common.h | 17 +++++++++++++++++
- include/net-legacy.h | 17 -----------------
- net/net-common.c     |  3 +++
- net/net.c            |  2 --
- 4 files changed, 20 insertions(+), 19 deletions(-)
+ include/net-common.h | 21 +++++++++++++++++++--
+ include/net-legacy.h |  9 ---------
+ net/lwip/net-lwip.c  |  5 -----
+ net/net-common.c     | 18 ++++++++++++++++++
+ net/net.c            | 21 ---------------------
+ 5 files changed, 37 insertions(+), 37 deletions(-)
 
 diff --git a/include/net-common.h b/include/net-common.h
-index f5cff3e7c0c5d25f154e7730fad52cf03f71b875..d7a0f7dff7e50527e77419ead9a9ff30deeea545 100644
+index d7a0f7dff7e50527e77419ead9a9ff30deeea545..ea43c72ab06a782c621f61811b9774c1185d88fc 100644
 --- a/include/net-common.h
 +++ b/include/net-common.h
-@@ -13,6 +13,7 @@
- #include <time.h>
+@@ -132,13 +132,30 @@ static inline void net_set_state(enum net_loop_state state)
+ }
  
- #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
-+#define DEBUG_INT_STATE 0	/* Internal network state changes */
- 
- /*
-  *	The number of receive packet buffers, and the required packet buffer
-@@ -114,6 +115,22 @@ struct ip_udp_hdr {
- #define RINGSZ		4
- #define RINGSZ_LOG2	2
- 
-+/* Network loop state */
-+enum net_loop_state {
-+	NETLOOP_CONTINUE,
-+	NETLOOP_RESTART,
-+	NETLOOP_SUCCESS,
-+	NETLOOP_FAIL
-+};
-+
-+extern enum net_loop_state net_state;
-+
-+static inline void net_set_state(enum net_loop_state state)
-+{
-+	debug_cond(DEBUG_INT_STATE, "--- NetState set to %d\n", state);
-+	net_state = state;
-+}
-+
  extern int		net_restart_wrap;	/* Tried all network devices */
- extern uchar               *net_rx_packets[PKTBUFSRX]; /* Receive packets */
+-extern uchar               *net_rx_packets[PKTBUFSRX]; /* Receive packets */
++extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
++extern uchar		*net_rx_packet;		/* Current receive packet */
  extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
+-extern char	net_boot_file_name[1024];/* Boot File name */
+ extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
+ /* Indicates whether the pxe path prefix / config file was specified in dhcp option */
+ extern char *pxelinux_configfile;
+ 
++/* Our IP addr (0 = unknown) */
++extern struct in_addr	net_ip;
++/* Server IP addr (0 = unknown) */
++extern struct in_addr	net_server_ip;
++/* Our subnet mask (0=unknown) */
++extern struct in_addr net_netmask;
++/* Our gateways IP address */
++extern struct in_addr net_gateway;
++/* Boot File name */
++extern char	net_boot_file_name[1024];
++/* Indicates whether the file name was specified on the command line */
++extern bool	net_boot_file_name_explicit;
++/* The actual transferred size of the bootfile (in bytes) */
++extern u32	net_boot_file_size;
++/* Boot file size in blocks as reported by the DHCP server */
++extern u32	net_boot_file_expected_size_in_blocks;
++
+ /**
+  * compute_ip_checksum() - Compute IP checksum
+  *
 diff --git a/include/net-legacy.h b/include/net-legacy.h
-index 9564e97d238daa2ce919ebaa60bdaf4466d76b14..0a10121b0cf50898a90bb1179966f01dbdda65ad 100644
+index 0a10121b0cf50898a90bb1179966f01dbdda65ad..3a07cb53839d458a6eeaa1fcc935b29ac928aad8 100644
 --- a/include/net-legacy.h
 +++ b/include/net-legacy.h
-@@ -25,7 +25,6 @@ struct udevice;
- #define DEBUG_LL_STATE 0	/* Link local state machine changes */
- #define DEBUG_DEV_PKT 0		/* Packets or info directed to the device */
- #define DEBUG_NET_PKT 0		/* Packets on info on the network at large */
--#define DEBUG_INT_STATE 0	/* Internal network state changes */
+@@ -289,8 +289,6 @@ extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
+ extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
+ extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
+ extern uchar		*net_tx_packet;		/* THE transmit packet */
+-extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
+-extern uchar		*net_rx_packet;		/* Current receive packet */
+ extern int		net_rx_packet_len;	/* Current rx packet length */
+ extern const u8		net_null_ethaddr[ARP_HLEN];
  
- /* ARP hardware address length */
- #define ARP_HLEN 6
-@@ -369,22 +368,6 @@ bool arp_is_waiting(void);		/* Waiting for ARP reply? */
- void net_set_icmp_handler(rxhand_icmp_f *f); /* Set ICMP RX handler */
- void net_set_timeout_handler(ulong t, thand_f *f);/* Set timeout handler */
+@@ -307,13 +305,6 @@ enum proto_t {
+ 	WOL, UDP, NCSI, WGET, RS
+ };
  
--/* Network loop state */
--enum net_loop_state {
--	NETLOOP_CONTINUE,
--	NETLOOP_RESTART,
--	NETLOOP_SUCCESS,
--	NETLOOP_FAIL
--};
+-/* Indicates whether the file name was specified on the command line */
+-extern bool	net_boot_file_name_explicit;
+-/* The actual transferred size of the bootfile (in bytes) */
+-extern u32	net_boot_file_size;
+-/* Boot file size in blocks as reported by the DHCP server */
+-extern u32	net_boot_file_expected_size_in_blocks;
 -
--extern enum net_loop_state net_state;
--
--static inline void net_set_state(enum net_loop_state state)
--{
--	debug_cond(DEBUG_INT_STATE, "--- NetState set to %d\n", state);
--	net_state = state;
--}
--
- /*
-  * net_get_async_tx_pkt_buf - Get a packet buffer that is not in use for
-  *			      sending an asynchronous reply
+ #if defined(CONFIG_DNS)
+ extern char *net_dns_resolve;		/* The host to resolve  */
+ extern char *net_dns_env_var;		/* the env var to put the ip into */
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 8741f65fe12e23cc30068506453a762533f8a67f..b3b6c796976ea9d7aec4148992f7cd41cd8f8743 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -33,13 +33,8 @@ static int net_restarted;
+ int net_restart_wrap;
+ static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN]
+ 	__aligned(PKTALIGN);
+-uchar *net_rx_packets[PKTBUFSRX];
+-uchar *net_rx_packet;
+ const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+ char *pxelinux_configfile;
+-/* Our IP addr (0 = unknown) */
+-struct in_addr	net_ip;
+-char net_boot_file_name[1024];
+ 
+ static err_t net_lwip_tx(struct netif *netif, struct pbuf *p)
+ {
 diff --git a/net/net-common.c b/net/net-common.c
-index c68e19fc03e64a740d05b998ef0efb9fce311543..ec1e179f7d9cdd459dc3b8c2d13f6e478ad4ce87 100644
+index ec1e179f7d9cdd459dc3b8c2d13f6e478ad4ce87..155149c80439306cb02b7c3e4080d210ae0991fb 100644
 --- a/net/net-common.c
 +++ b/net/net-common.c
-@@ -6,6 +6,9 @@
- #include <linux/time.h>
- #include <rtc.h>
+@@ -8,6 +8,24 @@
  
-+/* Network loop state */
-+enum net_loop_state net_state;
-+
+ /* Network loop state */
+ enum net_loop_state net_state;
++/* Our IP addr (0 = unknown) */
++struct in_addr	net_ip;
++/* Server IP addr (0 = unknown) */
++struct in_addr	net_server_ip;
++/* Our subnet mask (0=unknown) */
++struct in_addr net_netmask;
++/* Our gateways IP address */
++struct in_addr net_gateway;
++/* Boot File name */
++char net_boot_file_name[1024];
++/* Indicates whether the file name was specified on the command line */
++bool net_boot_file_name_explicit;
++/* The actual transferred size of the bootfile (in bytes) */
++u32 net_boot_file_size;
++/* Boot file size in blocks as reported by the DHCP server */
++u32 net_boot_file_expected_size_in_blocks;
++uchar *net_rx_packets[PKTBUFSRX];
++uchar *net_rx_packet;
+ 
  void copy_filename(char *dst, const char *src, int size)
  {
- 	if (src && *src && (*src == '"')) {
 diff --git a/net/net.c b/net/net.c
-index f579f6ac5bcced5a05a340b000a1ca9c2651c6da..03a39419d10817aff5f12badc0f604a403fe7fb2 100644
+index 03a39419d10817aff5f12badc0f604a403fe7fb2..bd7f12248fa3fcdf1ecdced31559dc805e151ba1 100644
 --- a/net/net.c
 +++ b/net/net.c
-@@ -163,8 +163,6 @@ const u8 net_null_ethaddr[6];
- #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
- void (*push_packet)(void *, int len) = 0;
- #endif
--/* Network loop state */
--enum net_loop_state net_state;
- /* Tried all network devices */
- int		net_restart_wrap;
- /* Network loop restarted */
+@@ -128,10 +128,6 @@
+ 
+ /** BOOTP EXTENTIONS **/
+ 
+-/* Our subnet mask (0=unknown) */
+-struct in_addr net_netmask;
+-/* Our gateways IP address */
+-struct in_addr net_gateway;
+ /* Our DNS IP address */
+ struct in_addr net_dns_server;
+ #if defined(CONFIG_BOOTP_DNS2)
+@@ -147,12 +143,6 @@ char *pxelinux_configfile;
+ u8 net_ethaddr[6];
+ /* Boot server enet address */
+ u8 net_server_ethaddr[6];
+-/* Our IP addr (0 = unknown) */
+-struct in_addr	net_ip;
+-/* Server IP addr (0 = unknown) */
+-struct in_addr	net_server_ip;
+-/* Current receive packet */
+-uchar *net_rx_packet;
+ /* Current rx packet length */
+ int		net_rx_packet_len;
+ /* IP packet ID */
+@@ -176,18 +166,7 @@ ushort		net_our_vlan = 0xFFFF;
+ /* ditto */
+ ushort		net_native_vlan = 0xFFFF;
+ 
+-/* Boot File name */
+-char net_boot_file_name[1024];
+-/* Indicates whether the file name was specified on the command line */
+-bool net_boot_file_name_explicit;
+-/* The actual transferred size of the bootfile (in bytes) */
+-u32 net_boot_file_size;
+-/* Boot file size in blocks as reported by the DHCP server */
+-u32 net_boot_file_expected_size_in_blocks;
+-
+ static uchar net_pkt_buf[(PKTBUFSRX+1) * PKTSIZE_ALIGN + PKTALIGN];
+-/* Receive packets */
+-uchar *net_rx_packets[PKTBUFSRX];
+ /* Current UDP RX packet handler */
+ static rxhand_f *udp_packet_handler;
+ /* Current ARP RX packet handler */
 
 -- 
 2.47.3
