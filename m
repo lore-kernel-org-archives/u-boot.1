@@ -4,172 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F73DD3B7E2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78747D3B7E2
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:52:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6204383AB0;
-	Mon,  8 Dec 2025 13:44:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id DE8C58397A;
+	Mon,  8 Dec 2025 13:52:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ZPttyqkN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NzUxd7wc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38B2483956; Mon,  8 Dec 2025 13:10:36 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7878F83B4A; Mon,  8 Dec 2025 13:52:12 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B89D883935
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:10:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0058E838E6
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:52:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jamie.Gibbons@microchip.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gUP8zivFlLpHJ0d/eznS2fSdDBBC6BLkKs7KejStknJTgQnxBVQs8Yqt3y3RhFsYC8xXvvjihrYG86pE2Jv3E9GHKX29erzbX+WOWc6aB7hzZA8OU0QtmaYpcOKxCN/5KGZFdv5ukgxAQLQsMI8fztycj3LItpXhrQWjD2N2KpJ4dH6ofeWXtpRYq5jeF/73FCl7B/VC+OnCZ++SAUYPc8WOPlsnJeV2nPWVE6acQKH5ItPRH+6ORxvYHUCA58FGLMC5g5YxmhQ5ma4Bg0lg7e53Lm2XVxI+IZ8G3sia0iVIZZTZaRbmpD3/KItVm/e9APyVD75JLrZy2KmmNxJ72w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kquUkGoaMD+u1Gdg84/7nrQ9kbuCp8H7cnbZZ2NDJ3k=;
- b=yd3weqizi/oSn6icaIO41HknEvl0GLGVcSMgLPzYVsGFsHOZ29Jzj7rmmPDpLrrP92HsAUWnC1ZnKZLlel7gEHPBPiaHAr92ZcC8O39NmuZYJ2jBSKfMPYaOnKtfri/C/U+2HgfvFJKOHRF6XK/SQY97GpsYcXHNFyyLUBEUhXCcwpyvsO+BpxcLUtfv89pkAwrba6gWfp6cCvGTn9//k3bEu8me/HB9X4sChzAbFNlOhcCBaw5rOvSHv1xxBlbQ7rQ7LkPhrXLsMLarLlgUoaJiHc/zwfvFy5fjJsplvj0SH1ktbjFcwjWG3Ay4bu8m7OUBuLsssY8yROcDHR1MnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kquUkGoaMD+u1Gdg84/7nrQ9kbuCp8H7cnbZZ2NDJ3k=;
- b=ZPttyqkNQUc4+Vzbn/FpLI9EAy1phmTIh3hOkIl/uAmFG1SBHC6d0GZPCnZTLkvTnEKCGft+BV2a0YUDZoNYzYAxvL5YJ2Kjud2QCcnmrGpd73BSGxm/qxS+w3LpxdDKRLxjtVFu/WlVpHqVg5HaUP0Qu4Hs2ftjSvewpXlf4Vyq4jE0+L0b8yKW5SMKxTtObpFiiwUzbN4kkgqxCDZTJ/qYewvXqorXdZxsobgchJGCuuGszaXa6Y1R1PJj4RBx/ry0u+fqegyTQW6MHtJ4IOAf6b+I0F/DoWd9S+6GhuqGW0vAvqY2dwk6SqIlcvYJAuG1rf7lmsRu7jDFjnmC5Q==
-Received: from DM4PR11MB6335.namprd11.prod.outlook.com (2603:10b6:8:b7::10) by
- DM4PR11MB6141.namprd11.prod.outlook.com (2603:10b6:8:b3::13) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.14; Mon, 8 Dec 2025 12:10:28 +0000
-Received: from DM4PR11MB6335.namprd11.prod.outlook.com
- ([fe80::3adb:8c97:94da:80]) by DM4PR11MB6335.namprd11.prod.outlook.com
- ([fe80::3adb:8c97:94da:80%3]) with mapi id 15.20.9388.013; Mon, 8 Dec 2025
- 12:10:28 +0000
-From: <Jamie.Gibbons@microchip.com>
-To: <ycliang@andestech.com>
-CC: <ziyao@disroot.org>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
- <Conor.Dooley@microchip.com>, <Valentina.FernandezAlanis@microchip.com>,
- <junhui.liu@pigmoral.tech>, <rick@andestech.com>
-Subject: Re: [PATCH 1/2] riscv: create a custom CPU implementation for
- PolarFire SoC
-Thread-Topic: [PATCH 1/2] riscv: create a custom CPU implementation for
- PolarFire SoC
-Thread-Index: AQHcWVD/RnPTorg1nEi5sGwPSPgnhbURMTMAgAaTcAA=
-Date: Mon, 8 Dec 2025 12:10:28 +0000
-Message-ID: <471395da081e977a4db8795e7cfd5022ebd058e6.camel@microchip.com>
-References: <20251119123843.4171699-1-jamie.gibbons@microchip.com>
- <20251119123843.4171699-2-jamie.gibbons@microchip.com>
- <aTE8Bi9kmTqaUgpy@swlinux02>
-In-Reply-To: <aTE8Bi9kmTqaUgpy@swlinux02>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM4PR11MB6335:EE_|DM4PR11MB6141:EE_
-x-ms-office365-filtering-correlation-id: 60c2270b-7e6b-4ff4-77ee-08de3652c6b7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700021;
-x-microsoft-antispam-message-info: =?utf-8?B?WkdEVjFPdTBmd2FGOGpEMjF0dHp5Q1duL1pOem4xRHVjMkpLcGx5YWVXTERa?=
- =?utf-8?B?UEdHUGhSc0hIMUdzUHpraENRcHNjWVN0ZnhLVVYyUCt2alhuRFZNaEFOVGtC?=
- =?utf-8?B?TGhHRTczczlhVGZ2dFlWcjUzOXFqb25PTDQ1Vjh4cDJMRVpNVUw4TTlzMElq?=
- =?utf-8?B?ZjJaQnRFMmxxZGVpTVhrRENWYmwzTW1SS1ozZUQ4eW5KVXgyUis2S3ZoUHJa?=
- =?utf-8?B?ZWNFOFRyeGI3NFR1SDlRb1Joak1odCtleHZCZGhxRVBnc3lmNkJRdFJ6ZHRp?=
- =?utf-8?B?Q2d2SFRTeDlZSmJ1WmNlZmV6R2pOSFFHTnlHaGMvZ3NOL3VGQ015TDd1cGZD?=
- =?utf-8?B?bjdtcUF2VW9HT2puVDZlU0dRcVdNeUkvMi9MM3Q5SWE4elNYRFV1L1hXZHJF?=
- =?utf-8?B?NUdJbTNtZFdML1hrcjhEdGVZdUtZazM1N1ovdzhOTjUwd1VyME1wVnBVZDF6?=
- =?utf-8?B?T3FyMzByQk0wSzZKZGFSbWJLNVhyMk5UeU5MMkZ4TldHKysxaXQveVNETmQy?=
- =?utf-8?B?NEVubFJHSDZaQnRuVEtMZzl2eWVhL3FqR25pMHkvVzk4T2dGcXJKZ3VBaDdO?=
- =?utf-8?B?VjRJeUdva3FQZUdjaDllamhOSDZLYUpaSjdvbE13VldzVGpUaTBxcW0zRkd1?=
- =?utf-8?B?bjNsUTlEUXQ0bDRld2pWZFFWemJRa2FSZFJXRnZMbUtCTWlPUlJOZVU5NTF4?=
- =?utf-8?B?OVo5ellzZTYrdHg0cy9qcjk1K3hLbHVCSk5oS3RxeWt2Qis1K05YWU1IYStM?=
- =?utf-8?B?akoxWXlZVTJ6UTYvNS9icU1NSWs0cmw1NzFuTmw5UTZhNWI3N01oK3JEQU9Z?=
- =?utf-8?B?L3ZOQjJLeU9weEtHOXNMTW9PZjRPcmFiaURyR1JUcU53bnltY1pMMlkvakNC?=
- =?utf-8?B?c1M5Wlo0cllSdEJpVWhURTlqc1VGdnVvcmlCQUpBUmNXVFdVSjFiYXVPRGlo?=
- =?utf-8?B?V0x2dGh0eVpiMG9lY2wvNU9zN2grWHB6OG5zMFE5UndZbFQyY1ZzOFErbUV3?=
- =?utf-8?B?d0ZJck4xM1Z0VHNKbDJlaVk2UFVreEtEVWZ3WEVZcStxQ3hkcW5RVWd1LzRZ?=
- =?utf-8?B?QmZneG8rOFFzMXZMU0tXWTBpeVJZRnB1TmNkUmo5Ull3ajUzVzBWdHhJTElr?=
- =?utf-8?B?NmlLQ3p1VERZd0RidVNNN2ZxY2hCWWVzU3JpUzdLYkNKdnlFNGtheG0yY2JW?=
- =?utf-8?B?RWEzNlhYTTluN0lHUlMxY2cxeW5xRy9xaGtTbloyUzhVTXpKVWZneVRpQjVR?=
- =?utf-8?B?ekpWQWk1SkFjMU9ZeEJ5NXJlZEdkbDhLNzNvNjlmemN0WkVHc0RrM0tvSFdq?=
- =?utf-8?B?TmFCWG1GM1FtamVBUzUxT1dUeXdrdTFlckhPOUZSYVZKUFhOcjFOM3NkbmVo?=
- =?utf-8?B?S20rOS95UnFRTlA4Y09SN3FFOTNiTS9vQWN5SDBjS2pQQi9vUjBFaVhCMngv?=
- =?utf-8?B?YVF2Uzg3ZmFHRzMvUGpJVEFZUlhSczZtV2ZrWnRQcEl6bzBWMGR5ZndBQ0FG?=
- =?utf-8?B?NXJodHlHSFJkV3BZMzFsRDVnWmh0bWszU3ZoL2Rvc3ZsSUpuczRFc3ovdnpV?=
- =?utf-8?B?Ukg3a09TcFdEMW8xeENGTzNWVWJVMGhYcHVXazlTS0xiWjZWNTVobXVPc09j?=
- =?utf-8?B?MG4rNUhPellIY3BxYThVNXV3RmFGZXU5TldRU3JYWTBGT3laMi9PSFA1aXgr?=
- =?utf-8?B?VHZFZFE1OFlkMEUxOUdjMGRaUUwySGlJdWx5VFRUY2FhdzZlaGEvMmROMmUw?=
- =?utf-8?B?RVhIS0NyRnJtVzVobGk1MUN3dXFObUJjTFNkdVVJb2kweEtEazZibnpoWjE2?=
- =?utf-8?B?dytPQzJzMEJXendpQzc1eVA5a3N1NHFxZ1lXSERyYWpFd3lHZitIdTk3ZDBN?=
- =?utf-8?B?WSt0UmNBU0kyVzc0aXJmU01IekhqMCtac3c2bHNtc3NQSkFNVXJMc1FVdWlT?=
- =?utf-8?B?N0NaUnZNSDNyeFFPTWtVMmo3SHozeCtFbmNsMUw4ZFpyWVV0UHBzZXdYV3ZV?=
- =?utf-8?B?emI2WHlGcEJMcGNYU3U1SENzRnVHRmdnMUZ5TGtpZEF1TCsxbnAvMXhMK21D?=
- =?utf-8?Q?zmrZt/?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR11MB6335.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700021); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VFBNaHNSNmpJTEJ1Y09UMHpEeTdFTWg3bkhHNU9QWm94N2ZkN0oyb1RUaGFX?=
- =?utf-8?B?dUMreDE4aUsvVVU5RU5JeUF5QjdObEh6RE1Ia21DNWpjOXJSVU5qcWtGSFVK?=
- =?utf-8?B?VlBFMnBLbCtBOStvTXA2SDVielhsRWhINmhNUTY5Z0RZOWYyOXdtY3NmY0Q4?=
- =?utf-8?B?LzFSVXVqaWp6RE92MHZSbGE5aThWUHhHeTcrRjV4dldYQUhwcjE0Zi9SYUM2?=
- =?utf-8?B?REN2RG1qdjRVbDZyMlR1SW1TaFVZM1l0YTZIRkFaenJrOVNXY2NZTzA1SkJS?=
- =?utf-8?B?dWdkYkMzbVdTS3E2ZHNUU25XaUNDVG1FeERDN1FNNkIvY2FNUmcwNGZ1MlZF?=
- =?utf-8?B?bmlpZGJpMlV4aG8relNLaVFRSG9EbDRFMlBxN3ZKbitpR2c4N1RMOVpFcjBR?=
- =?utf-8?B?VnFrbjZyVDlkc3FWZU01R1NkWllNbjlIWTRNVjNucTRxZkEvcndBNHVhYmZK?=
- =?utf-8?B?WHlBR3hxYWhRSXRQSTczcXI3bG11ZUE3UEpwaVg1N3lwRWRuVHN1elF6MmZx?=
- =?utf-8?B?YlowVWpESm9BR1AyRlUzSlpZbTZzdVc0TmE4QmZXOHdkSnFCOFNnTUl4djMz?=
- =?utf-8?B?dHFWZ0FHcURFdlpDN0UzUXJENnpnclBVTHNzOWVyQXR1eE81MWJUQ2xBRXp0?=
- =?utf-8?B?TkQvSTVpYThhUld2NUozMU1IYUs4MXVJci94YmJpMXRldUFyNDc3WmV2ZVg4?=
- =?utf-8?B?TkUrVW9QWHg5VFV2YjdrbzlKZVh0d0k5dS9oa2RoRzVkTEIyWk5hcURSYSsw?=
- =?utf-8?B?SmdoYS85VEdqenJVVkdwVkNYbVJJbWJjNkRLYUd0U0xUQXlhUWtXR2thaDUv?=
- =?utf-8?B?UUd3QWdKMW9ub2ZUcTBTQk5IcGl0VUpTWCsrQTZuWHgxN2xRQkZFY281MFdN?=
- =?utf-8?B?TDlMc3JIVWkwUDhaTHAvZUk1ZUo2YkJIOENTRWVST1hzV0lva3dLVTlVMGpS?=
- =?utf-8?B?dFcreXRlcnNKTnhlYVBLUWFIRzJXN09IR2hNOWI2VGt3bWExUnJUWDNOSzFO?=
- =?utf-8?B?Uk1MdmQrSk44WiswZEpucStSMW4rQ0MwOGNwSUh0QWszejJOOUh6cFlLUjl2?=
- =?utf-8?B?dDRJV3JKMU9ka2ZCQnk0VUR6UVViTVVlcXExVFUzS05vVFJOSUFId084M2Nh?=
- =?utf-8?B?YnlWdW5Bb0ozVDdwMm1GZzlYaVpPSERQYWZTNWV4UHhZTC9vYTV1NmkzTXdV?=
- =?utf-8?B?RXpSYzNxVlo4L0crdW94cWRnOGhxZFM1L0VZdysvRTNBQ2IxM2Y4cUpUeEw2?=
- =?utf-8?B?MngwYS9TN00xYUpjcWVtN2Z1NUtlZHdHblppaVRWSjNrbW83U0hQaU1mMENW?=
- =?utf-8?B?OWIzM01uazRieUpKYklJWVFhSjJibk5vNVpEVGNjVXc3eE1RS1o3OUZGZ3dM?=
- =?utf-8?B?RktrdEZLSE9RUzRxbHN3eUR1N3JDNmdnaitHV09Hek4yd09SVEdTS25MQXo1?=
- =?utf-8?B?YzFqdlR6OGVsTGhPcGhlZXVacFI3OG94akFUSmRHS25ZNmpJQnk2NXVMR2xx?=
- =?utf-8?B?ZklrM0JpaU9sVjNNWW9rSVdQNWpvaWZ4cXR1ckYyakNrMnJjTXd4bHdSRFNJ?=
- =?utf-8?B?K3kzbDJ1ZDFPSiswSXFoY21ubG5nU1RocjcvSG9tbVBCMmZNRzJXRExaZStK?=
- =?utf-8?B?YmVTRmFHTnlMdXlWVHRBMVBnM3p3cXhmYjlXOTlwb3FIM2dyRzk1S2pPcVd0?=
- =?utf-8?B?UjVIUmFLUjc4Zk9hc004bVRZR2lxeGd4bUVjMTNJT3dvU0ZzRFNIalBwR0w2?=
- =?utf-8?B?aDdneVlPYzF0eU9OSVJRejB6K291NndyZWZnbk1GY3llc216QmxaYS81Tm1a?=
- =?utf-8?B?NS9yVEI4aTRDTHBCRlRQRDBid253eTUvT1BnNTdSWHc5NVBWaXp2cVpDc2pR?=
- =?utf-8?B?bm52UFp6cU5PT3hFb082aWNscDU5SEIzczFSRU5BYmgrVTVBKys3YzJiOVJq?=
- =?utf-8?B?cGtFVFJ1SllwS2UxbndNMkhGTlhqbUV0eklNckJPNUx4SjhpVytwZFV1TC9I?=
- =?utf-8?B?bWhINU5rMjljVWsvSGcycWViZ2l3cmZURTlPZEVjR1FhQmVFbHNTdk1LdGYy?=
- =?utf-8?B?djRjRVE5bFU1aWFnaHJvSXNKZEpDU0VtVFdxYnovbFBtOXlPNm1ZWU5DQUda?=
- =?utf-8?B?Y2FJQTlSbngyK0V3K0RZaWNXWXdwSVlRb1AwL1BkNjlZUmRGMUV2aVpmb3FS?=
- =?utf-8?B?dkE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <EBF260FB8A43E84BAC729B5BFEDA863A@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4779adb38d3so41137785e9.2
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 04:52:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765198329; x=1765803129; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tQT50zeKFQoeW9Rr2i1wc3Rlyb+dymIaVF+Tns3b2Ws=;
+ b=NzUxd7wc2QrGeQGqXUZVTQPgPNGPrPnDHbGi0O6pr79zJYtHm7xEPk459pBAeOP6pZ
+ JBwyHiw4oU0TwKGzcJmozbC6Mjgdj5pFnHqzjzAvmlgypPGw1/bPpNEUie26U5yY3xI2
+ KOvtEkzT0sOl9B2tSkYoWeyebRH1pEN1pfLHZ89nqf+CpT1ljgCma6JLruvvkoICeFSJ
+ 7Ps/tb5+GKGpPnXPPvu0cH/J5GXk5D5ZP9IV+0CttG7ZgTgP24ZE3Gc+dKnWHHtn24d5
+ Rsr2mjWASmxn87Dzbwql0j6eneywX6UQKVySoi2/iFRcQtPQ12MTXrAZ8hL1m3BpAljL
+ WKCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765198329; x=1765803129;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tQT50zeKFQoeW9Rr2i1wc3Rlyb+dymIaVF+Tns3b2Ws=;
+ b=CLyfAeXkbNceDjnMNDhG4ugFeyAgEgxE76wCeaHF++7uw4w7aNCmrUcla1CEaI7rp6
+ kcUnY0aI+VEORQJBUfdHCTSJ/34e/gvoH6z+fUNFaAyuwl/F8OBKlbMZsYXrhlb6wcLd
+ VVX+z/r1x24N1+ihlhPwOKPvOnNuGt/Q8M1j4UnuaWE4kcCgGSO+O6Wj2k6WVvPqpVlg
+ FVZg/lJ7tKA9RXqpcYUa8cEp697iBerZx646KZQ4U7+kerbCqlbZvnmW9XAWBYDTvZd/
+ V9a4z3urMhRK6I0RPDv1D6AEXUX3/CKxsW4+Cl8O9yK8sXHpQmxJU8ub6LNrztvgQKsY
+ elIg==
+X-Gm-Message-State: AOJu0Yzf7FlVh/riuhkm3u6LO1tC8j0a85rYqIsMd216fyS9xK1/BwIh
+ bHsZbDx7n6xir8AceVKvrpQnXSGeNnjmCns1OFPfls2MKX8/9Ev/sNAT9dyD6+Ytu+w=
+X-Gm-Gg: ASbGncs6Z/pIo39jxQlnbIwmlz5hsVeJqW0xUMxUEUrj/OTlu0Q2PvrFoNsbRanGE27
+ MJKiV6eQCA0bg8mPts5Ehbbfe8Hn4f9dopWSbAIho6n6ujMZJFdRXuMB7yG2XEMpVOxWDAA104E
+ y7J3mExzK7RwpDvu+QhUjsEox38S2Zd6badaj2eZUf3/UlqN+ZRPWzXzQk4F13bKm3yvPXMHE+h
+ /Pb9KDAsFbeRy5OZ1mfU5Gyiy1/NfirhV2K42YSHireGJ0rG6XvCyRfgcHubbw0RLka6+HXmYpt
+ bF+Qn3XEyYbd+OTDognC5gEAKQP6jxFqA6IrjcmEP8HkFWABy85SZsRAHj7+LCm8yH2B0tsQsUR
+ /pUGdT60lJt2+yo6C8fJuKRHCYHFXiKptMfTDJ6NF+jS+Ob9/d9TQd+y/0UHWm8Wc7/VYv9xwHa
+ xnwdT8ErGoJMrFaO4OPSmEkXZIY3LvizD2cLo9E+4=
+X-Google-Smtp-Source: AGHT+IG+OQVo+IW0ocg/qXk3E1lCqzokCAlS13kKoa+yhVz7vk7rqqmKahvY0+mX8LWYh22xxDs+EA==
+X-Received: by 2002:a05:600c:1912:b0:477:acb7:7141 with SMTP id
+ 5b1f17b1804b1-47939df69dcmr65231695e9.3.1765198329381; 
+ Mon, 08 Dec 2025 04:52:09 -0800 (PST)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f7b:b001:fd05:11bc:5c24:a865])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47930920b6dsm260113645e9.1.2025.12.08.04.52.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Dec 2025 04:52:08 -0800 (PST)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/5] net: Port NFS to LWIP
+Date: Mon, 08 Dec 2025 12:52:06 +0000
+Message-Id: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: microchip.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB6335.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60c2270b-7e6b-4ff4-77ee-08de3652c6b7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Dec 2025 12:10:28.2240 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: KS1CQfSFzhBPr64NnxerUcMO8E3XgJTNU8SPyLFPdFaZAMVGvBcidlAMTRqndM0qvhrydXRNstbDyOn2Ki26QpgKeVUZaWll2ljYcFYzRMs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB6141
-X-Mailman-Approved-At: Mon, 08 Dec 2025 13:44:18 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPbJNmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAyNL3ZzyzIL4vLRiXVNjC9PUtOREc8OkZCWg8oKi1LTMCrBR0bG1tQD
+ VrUCCWgAAAA==
+X-Change-ID: 20251029-lwip_nfs-5385efca71bc
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Benjamin Hahn <B.Hahn@phytec.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Adriano Cordova <adrianox@gmail.com>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,42 +117,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTGVvLA0KDQpPbiBUaHUsIDIwMjUtMTItMDQgYXQgMTU6NDUgKzA4MDAsIExlbyBMaWFuZyB3
-cm90ZToNCj4gRVhURVJOQUwgRU1BSUw6IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFj
-aG1lbnRzIHVubGVzcyB5b3Uga25vdw0KPiB0aGUgY29udGVudCBpcyBzYWZlDQo+IA0KPiBIaSBK
-YW1pZSwNCj4gDQo+IE9uIFdlZCwgTm92IDE5LCAyMDI1IGF0IDEyOjM4OjQyUE0gKzAwMDAsIEph
-bWllIEdpYmJvbnMgd3JvdGU6DQo+ID4gW0VYVEVSTkFMIE1BSUxdDQo+ID4gDQo+ID4gRnJvbTog
-Q29ub3IgRG9vbGV5IDxjb25vci5kb29sZXlAbWljcm9jaGlwLmNvbT4NCj4gPiANCj4gPiBQb2xh
-ckZpcmUgU29DIG5lZWRzIGEgY3VzdG9tIGltcGxlbWVudGF0aW9uIG9mIHRvcF9vZl9yYW0oKSwg
-c28gc3RvcA0KPiA+IHVzaW5nIHRoZSBnZW5lcmljIENQVSAmIGNyZWF0ZSBhIGN1c3RvbSBDUFUg
-aW5zdGVhZC4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBDb25vciBEb29sZXkgPGNvbm9yLmRv
-b2xleUBtaWNyb2NoaXAuY29tPg0KPiA+IC0tLQ0KPiA+IMKgYXJjaC9yaXNjdi9LY29uZmlnwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMSArDQo+ID4gwqBhcmNo
-L3Jpc2N2L2NwdS9tcGZzL0tjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTYgKysrKysr
-KysrKysNCj4gPiDCoGFyY2gvcmlzY3YvY3B1L21wZnMvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKg
-wqDCoCB8wqAgNiArKysrDQo+ID4gwqBhcmNoL3Jpc2N2L2NwdS9tcGZzL2NwdS5jwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgfCAyMiArKysrKysrKysrKysrKysNCj4gPiDCoGFyY2gvcmlzY3Yv
-Y3B1L21wZnMvZHJhbS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMzgNCj4gPiArKysrKysr
-KysrKysrKysrKysrKysrKysrKw0KPiA+IMKgYXJjaC9yaXNjdi9pbmNsdWRlL2FzbS9hcmNoLW1w
-ZnMvY2xrLmggfMKgIDggKysrKysrDQo+ID4gwqBib2FyZC9taWNyb2NoaXAvbXBmc19nZW5lcmlj
-L0tjb25maWfCoMKgIHzCoCA0ICstLQ0KPiA+IMKgNyBmaWxlcyBjaGFuZ2VkLCA5MyBpbnNlcnRp
-b25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvcmlz
-Y3YvY3B1L21wZnMvS2NvbmZpZw0KPiA+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvcmlzY3Yv
-Y3B1L21wZnMvTWFrZWZpbGUNCj4gPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL3Jpc2N2L2Nw
-dS9tcGZzL2NwdS5jDQo+IA0KPiBUaGUgY3B1LmMgZmlsZSBvbmx5IGNvbnRhaW5zICJjbGVhbnVw
-X2JlZm9yZV9saW51eCIgYW5kIHNlZW1zDQo+IGlkZW50aWNhbA0KPiB3aXRoIHRoZSBvbmUgcHJv
-dmlkZWQgaW4gYXJjaC9yaXNjdi9jcHUvZ2VuZXJpYy9jcHUuYy4NCj4gDQo+IE90aGVyIHRoYW4g
-dGhhdCwgTEdUTS4NCj4gDQo+IElmIHlvdSBkb24ndCBtaW5kLCBJIGNvdWxkIGZpeCB0aGlzIG9u
-IG15IHNpZGUgdGhhdCB5b3UgZG9uJ3QgbmVlZCB0bw0KPiByZXNlbmQgdGhlIHBhdGNoc2V0IGFn
-YWluLg0KPiANCj4gUmV2aWV3ZWQtYnk6IExlbyBZdS1DaGkgTGlhbmcgPHljbGlhbmdAYW5kZXN0
-ZWNoLmNvbT4NCg0KVGhhbmsgeW91IGZvciB5b3VyIHJlc3BvbnNlLCByZXZpZXcgYW5kIGZlZWRi
-YWNrLg0KDQpSZWdhcmRpbmcgJ21wZnMvY3B1LmMnLCB5b3UncmUgY29yZWN0IHRoYXQgaXQgaXMg
-Y3VycmVudGx5IGlkZW50aWNhbCB0bw0KdGhlIGdlbmVyaWMgaW1wbGVtZW50YXRpb24uIE91ciBp
-bnRlbnQgd2FzIHRvIHByb3ZpZGUgYSBwbGFjZWhvbGRlciBmb3INCmFueSBmdXR1cmUgUG9sYXJm
-aXJlLXNwZWNpZmljIGxvZ2ljIGFuZCBhbHNvIGFzc3VtZWQgaXQgd2FzIG1hbmRpdG9yeSwNCmJ1
-dCBpZiBkdXBsaWNhdGlvbiBpcyB1bm5lY2Nlc3NhcnksIEknbSBoYXBweSBmb3IgeW91IHRvIGFk
-anVzdCBhcyB5b3UNCnNlZSBmaXQuDQoNCkluIG90aGVyIHdvcmRzLCBpZiBVLUJvb3QgcHJlZmVy
-cyB0byBhdm9pZCBkdXBsaWNhdGlvbiBhbmQgdGhpcyBmaWxlIGlzDQpub3QgbWFuZGF0b3J5IGZv
-ciBidWlsZCBvciBhcmNoaXRleHR1cmFsIHJlYXNvbnMgcGVyIENQVSBpbXBsZW1lbnRhdGlvbiwN
-CnRoYW4gcGxlYXNlIGdvIGFoZWFkIGFuZCB1c2UgdGhlIGdlbmVyaWMgdmVyc2lvbi4NCg0KVGhh
-bmtzLA0KSmFtaWUuDQoNCg==
+This series ports the existing NFS code so that it can be used with both
+the legacy network code and also with LWIP.
+Firstly some legacy network code, mostly variables, is moved into common
+files so that it is accessible to LWIP.
+Secondly the NFS code is refactored so that the parts that are not
+specific to the network code can be shared with both network
+implementations.
+Finally the LWIP specific parts needed to interface the NFS shared code
+to that network stack are added and enabled.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Andrew Goodbody (5):
+      net: move net_state to net-common
+      net: Move some variables to net-common files
+      net: nfs: Add licence header
+      net: nfs: Move most NFS code to common files
+      net: lwip: nfs: Port the NFS code to work with LWIP
+
+ cmd/Kconfig          |  28 +-
+ cmd/lwip/Makefile    |   1 +
+ cmd/lwip/nfs.c       |  11 +
+ include/net-common.h |  38 ++-
+ include/net-legacy.h |  26 --
+ include/net-lwip.h   |   1 +
+ net/Makefile         |   1 +
+ net/lwip/Makefile    |   1 +
+ net/lwip/net-lwip.c  |   5 -
+ net/lwip/nfs.c       | 282 +++++++++++++++++
+ net/net-common.c     |  21 ++
+ net/net.c            |  23 --
+ net/nfs-common.c     | 863 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ net/nfs-common.h     | 123 ++++++++
+ net/nfs.c            | 849 +-------------------------------------------------
+ net/nfs.h            |  59 ----
+ 16 files changed, 1368 insertions(+), 964 deletions(-)
+---
+base-commit: 59f9fcc1f514762674ac07c13c2a85f7aace7250
+change-id: 20251029-lwip_nfs-5385efca71bc
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
