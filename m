@@ -4,99 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE2ED3B7F3
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 15:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C85D3B7F2
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 15:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53B77833C6;
-	Mon,  8 Dec 2025 16:15:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C10A8838A5;
+	Mon,  8 Dec 2025 16:32:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jyjWgLRl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WcfTL+gk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19796838A5; Mon,  8 Dec 2025 16:15:13 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2806E838CE; Mon,  8 Dec 2025 16:32:40 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED4E780433
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 16:15:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ED0E835FD
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 16:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-477b5e0323bso29034045e9.0
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 07:15:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765206909; x=1765811709; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NX6QbgGJ0ui5pW5lpBKvdNtRJO7lVaB2jNAiw9risps=;
- b=jyjWgLRlAj5iqOFjWtwvYbM2Au4SsojFhboI8/5KcKRHFJhgB4g5mGLvo1DqPxr5mO
- DR8LHvtx8HXOzHfYQYzthB12ic+PwljeZh++f+rZ/W+YWpckrZi7nnPsKX29XHk+cxV8
- 68zMiosaaLI4mc1QKDWN8ZJV8Zn4LoZUd+dNghC/4hqbX4MRg7A3v60Qp8ZtV6RZq7rn
- ZZ5o+ym7iCpRS1f/MXDVOfqTALt8xeTIcJ9SyJTfuClUd75qiqPcxBtKmnUE5uhH703o
- 98UqR2lComGbkp8Lz1BsoJYKikSIpid0fYVXj0d49ZYuUi3yC2eD/GK/u33ZT54c3SkA
- dYzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765206909; x=1765811709;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NX6QbgGJ0ui5pW5lpBKvdNtRJO7lVaB2jNAiw9risps=;
- b=mAiwicwAKBS2xRxBcd84BPUCCOYLMT91Ii2waRpvCSESJSv2EA00Kb2tMH2OKWY0du
- YVCEqJX0Bnmk5CqhDe1imjnhqmo0bfcaPCLJbR/zx8bOusI/Fsfs4JATOg0VT9DqH4i2
- 5HFz18fBfcFDPFP0TXgNcXqELAsNLKwQj6HTEH6KyNI/66wjtl7u781+o3bDSQB42KbV
- PO9msHOAnDIcIVyQ6jcvodQNqsivJdp0iA+MFlQyUJKmp3NGSIAtzNy/svlQZPqOXXI6
- X/sOhRsLQElobLXkV8NqsstjDYxfGDAZeDan5RZfvuij8wdecsKuc3QkTh9I/KSL6kz9
- TNUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYL7n5G05ELk9v8qCRs/3segLoPitJK8MVxQB1DW9Ba1+MAtU8M7um/Pvnr/7zVGPlmtoYdrs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJUOI64IPVHaw6Qp09Kzr+w8oC9u4B/mV3c4VwWdNiFGkNdI9o
- BUO/Ovdb8frbSKMNNjoJNOhp7EY7zo5/d8ticq3G9McOhFnVks0tPxBYR0KND2MOA4A=
-X-Gm-Gg: ASbGncvK4sEv8MvnmK2keH0KwOfpX51K0EkOTGNtxV7+6bvKeRqRhDYX3E3Dh1r2THp
- HyYdRASzD3RMqKWkCzwPuBfJ5ghtSpzBHAEF5/7b2QJzmNWFme9ni5RHO7ghQ0i8b/gzvQZtimZ
- Z68STWqli/y+qSY6Koad9syLybMDI899NnHz+hmfMW6BAkOBHuwFozmsT0j/bXyC3fSP1Sn3bom
- zv0fKjHya1rCnOW2y6LH7/Os6FGEBk4Ce1/j7Nn892nqBz6MTMiCs+VQq9WoL7bzyR5cHxVhpv1
- lykYnMSSJITVEHQBk4yJwhvPqgxxDyWJ9daN2p2SRbD5opFplpHpwVcVtxc+9lgr8N2I6cB+QRX
- B45McSwdFph3UaV2YYHSFpvDNwhiZmyOdmKQJeAD+Ym2szPigZKGMIQKwMiLu/ybZxQQU1Lovdx
- VNCANpk81HJcfDmrhv9jeDYicDUH3T+u9WEqWGrKV+n3ime6uv30UR8IEpkezyX+yom9XC15ZNs
- Hg15Al/Vzw/BWjBLHPIg7TyKG71Qg==
-X-Google-Smtp-Source: AGHT+IFHiomxzRa4HTvj582uAbp7hrNTNEi1wKQDopiB/t39hH+l2RNeOdTHaPdo0BpcrKz0JacMzw==
-X-Received: by 2002:a05:600c:1388:b0:477:9890:9ab8 with SMTP id
- 5b1f17b1804b1-47939df12a9mr83105755e9.3.1765206908876; 
- Mon, 08 Dec 2025 07:15:08 -0800 (PST)
-Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42f7d353f75sm26420337f8f.42.2025.12.08.07.15.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 07:15:08 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- John Toomey <john.toomey@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Javier Tia <javier.tia@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Yao Zi <ziyao@disroot.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Maks Mishin <maks.mishinfz@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] efi_loader: Trigger capsule updates with automatically
- generated boot options
-Date: Mon,  8 Dec 2025 17:14:56 +0200
-Message-ID: <20251208151503.1681988-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Aw0cquDC018L5gzn+aL9rRnuRa3dhysCqAOwW/6kCNEtRyPKtlCsjJ0tiYhGcISeKLI0w9r7fRYIxNjUX9XR4XCrZvIu2suRcUT1slHxp9Er8ll2qcSvv1E0NGv6i9VqybsdKbRjnK9iwODiu0T/o+zXvxM2N1sE4BWI8WnCaXxBck6Is1w1ETu4FZ+810BUbYNfKb0GKsj7Jg72AbE3HKHkZ5UhyLEGiJehlzhbPGuoqyK6GPydTss68EnSrkxurldxdGCFLNDnLG8KRnWcWO3da8jgAs7XJTWP5cVa/4lzilC3TvHb7VTaKZZvY/t4oUlgvHNlMeZ3anC/Di3Rfg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ExwkB+I/EAtCGvTO1Z/euqAUcMk/5POD3Y8d7FsIn2c=;
+ b=bFWB/5vq4mpZcAZjSHoMN2r0MDzsNbiIfbm/tYbm5DJnUqjsy3L94kLYw376SbXsjsTlOngib055fkcaECjF1G75T5taBRN78X5sJiO6UFx2TmWqzCXtiNAPMkOXcLMp2E1KSHumyF6f+0HuM6H3BKKN00x6pTac+l4dDBjrW5xP0XDx6CNw4butXr4OBHz5MuNGMzAU4RivykjuRzvxdKHuHJYG8G+P6W5Atyos4Irlgk9PurrrfvpeZL1rd/OBLa4ayNwmNHrPf6e8ZaVFUQCJzlF1MTSN7hOx08o0E6ahTUJzRTDPEGU9n30X4mpAEUA4IJNPsMnj8ie8eYQqmQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=amarulasolutions.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ExwkB+I/EAtCGvTO1Z/euqAUcMk/5POD3Y8d7FsIn2c=;
+ b=WcfTL+gktj574d1F8spFdtxT/diW790pf3pRBOyJ1MJg8BmQ1eK5676pI64QEvLT08xu/GKeclas+N/4LWD+Zy/fhY622n8plPYaaT3LNjCs9aGZu034QLEXlBlhWoih9MGyrGN+r8xyM5e8R0nikk/ucRcOHrrQvVbsGx/hIuw=
+Received: from BN8PR04CA0061.namprd04.prod.outlook.com (2603:10b6:408:d4::35)
+ by CO1PR10MB4452.namprd10.prod.outlook.com (2603:10b6:303:6e::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Mon, 8 Dec
+ 2025 15:32:33 +0000
+Received: from BN2PEPF000044A0.namprd02.prod.outlook.com
+ (2603:10b6:408:d4:cafe::a4) by BN8PR04CA0061.outlook.office365.com
+ (2603:10b6:408:d4::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.14 via Frontend Transport; Mon,
+ 8 Dec 2025 15:32:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN2PEPF000044A0.mail.protection.outlook.com (10.167.243.151) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Mon, 8 Dec 2025 15:32:33 +0000
+Received: from DLEE115.ent.ti.com (157.170.170.26) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.2562.20; Mon, 8 Dec
+ 2025 09:32:26 -0600
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 8
+ Dec 2025 09:32:26 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 8 Dec 2025 09:32:26 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B8FWQvh3849756;
+ Mon, 8 Dec 2025 09:32:26 -0600
+Date: Mon, 8 Dec 2025 09:32:26 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ "Andrew Goodbody" <andrew.goodbody@linaro.org>, <u-boot@lists.denx.de>,
+ "Patrice Chotard" <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Christian Marangi
+ <ansuelsmth@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Marek
+ Vasut" <marex@denx.de>, Simon Glass <sjg@chromium.org>, Jonas Karlman
+ <jonas@kwiboo.se>, Ye Li <ye.li@nxp.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>
+Subject: Re: [PATCH v2 0/3] clk: Return value calculated by ERR_PTR
+Message-ID: <20251208153226.moktyjv3irmjlg6q@lingo>
+References: <20251121-clk_uclass_fix-v2-0-74f4ea10e194@linaro.org>
+ <176503025989.2523567.16347058613411695182.b4-ty@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <176503025989.2523567.16347058613411695182.b4-ty@konsulko.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A0:EE_|CO1PR10MB4452:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6c3721bb-1ce4-4ce2-7c1f-08de366f01bf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|7416014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?h0YcHHIWolC9Gqgyv2SK0EDSSL4TfJhpyD71LgKHRAAwpKgCPS+5jVgS/+m3?=
+ =?us-ascii?Q?eSglgNe3M1uyK/VIG3+eBAefEaSmjs/eft3MUr4SRX4e639YRrVGTIwzOEV8?=
+ =?us-ascii?Q?reedQ2PUYe7nkKEkImJpG1xeVTN/2lRXDddUqHhRR8EdrBGzaIZ1/8n3a02P?=
+ =?us-ascii?Q?zvRKjMIfnL2ib5p2EeL/KQfnwoQa7/Y5DYaB0jK58bVfaTi2DCumatziuW2r?=
+ =?us-ascii?Q?tOSR4l1L7fu+qVyykTqa5dFqOJjjlQgmbeJp8Ug0Qv9NNvOf2wzd7J5w8Xhp?=
+ =?us-ascii?Q?H/Yd8NX6eoFh6C5utzspfiKu+X1pWL2kjHXaL11NPRSIKRCp1/MzVcrTflxx?=
+ =?us-ascii?Q?9UTGCyIHUbq+uxu6+FCbTIiYDFn87EKnB8FihtHmEw1WtA9BJFtHXN+jyTIi?=
+ =?us-ascii?Q?R+Ln7av7qC0TSfg+XfOyS2QuYK/j7+arGIyifcxog9LjKEw9yeLR1O2u2FQb?=
+ =?us-ascii?Q?uVnNyFUZ1pmrW3NNA5ee2nnxGl2qI7TOaQ0LghciHs5r7iRdNWukgGXYaX4L?=
+ =?us-ascii?Q?1tlnn5G4fQvKBs96OktN02hGgRi2mhNcvT+CMAFMoSlheoVxA7lbK0U5Gexi?=
+ =?us-ascii?Q?w+w6VMqmBNE6fjINpujEdWl/7hpxDvp6XMzhsUiVSwREshuTh+xzq+pQa1kD?=
+ =?us-ascii?Q?WKJF9cL3yjagf0PIyHktQDe4q5OYXRbD8yz+GgtPoWVGRVMMH0Wlr9J3wGb4?=
+ =?us-ascii?Q?qx+A2Gqng8B5VL8Xj1928coe5c/UkhJJGhjVCj6ny4DEnGRtf+143CaZLzeM?=
+ =?us-ascii?Q?awYsiCDuwRwJhAInimHgW4j04MUMa2wxcd8LDxIy6IHm0a7AtUkX2Mrz5ugg?=
+ =?us-ascii?Q?MF/4ek3aG1FIMPn17lFQl53JzZ9/C50RFdENARyIWyyInOzT1isp6xDFMgwz?=
+ =?us-ascii?Q?HFeSgOii9XzuZGbAf28t/4OFlzSvqQVRG4bQcrGSrlLdqtbZvJwLef8zjq8Z?=
+ =?us-ascii?Q?X7qmn1qsc4vdivfhWBvp5N1HO4iKmxosa0vOSQjYtzUP7uVQ199U5ja2HEvR?=
+ =?us-ascii?Q?IL8bpjQMMGdiN2aGynyCC6bjm6qvsNi7gZHn+Mmcs3msGXvMFcgQ0gdNPNnf?=
+ =?us-ascii?Q?bWKBbHzB7+GT6DM7T7qtwBXJrkwWVtOGWrZ/xvz1NDYxJA9eGURsneMaFWCj?=
+ =?us-ascii?Q?2zpGF0DL9XoUHAwo7aPbaUzfc0vk40uFPb6yFnH/rlLIs2f18OfBsvMLCxP3?=
+ =?us-ascii?Q?TQ8rw/kYPXEHPvLEChcv9Tovco6NDEBWwRn8q6YJ+m/YpnCrUgD1EJLKHRug?=
+ =?us-ascii?Q?2ivGR+JY3PgJSPNwuOBJ7ftjM0uOHfB2anh08GapujU81I1ZMVcmwiHGYl2k?=
+ =?us-ascii?Q?RDjzgT8LUUtNbCIK+O1ovYAikVLDyH692SBXSurt8NbUrhAazJKVkRPgJtHI?=
+ =?us-ascii?Q?/7yaL1+CWqzEqYiFLBNTVRFHuctj9I97c3qozH5KclEqNSUh6BM8knQ/p4SX?=
+ =?us-ascii?Q?BBiW4HUa8jVxAkJZZh5wttRLTFew4OnBkDpOSs09ST6UNBQtnOZ3eXdnTw1v?=
+ =?us-ascii?Q?Ki6fS4jYX+RbXHhXpFm0Oktq8rM+465R+MrzXyqxnJqO3c83VQi2yYdjer5K?=
+ =?us-ascii?Q?aK3MVqFbKzE9EpexNxg=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(7416014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 15:32:33.0591 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c3721bb-1ce4-4ce2-7c1f-08de366f01bf
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A0.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4452
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,363 +163,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI spec in §8.5.5 says
-"The directory \EFI\UpdateCapsule is checked for capsules only within
- the EFI system partition on the device specified in the active boot
- option determine by reference to BootNext variable or BootOrder variable
- processing."
+On 08:10-20251206, Tom Rini wrote:
+> On Fri, 21 Nov 2025 17:34:30 +0000, Andrew Goodbody wrote:
+> 
+> > Smatch reported an error where a value calculated by ERR_PTR was not
+> > used. Fixing this to return the generated value led to a test failure
+> > which meant updating the sandbox clock code so that it would still cause
+> > the tests to pass with the above correction.
+> > Debugging this problem led to a SIGSEGV which is addressed in 1/3.
+> > Possible memory leaks noticed are addressed in 3/3.
+> > 
+> > [...]
+> 
+> Applied to u-boot/next, thanks!
+> 
+> [1/3] clk: Prevent SIGSEGV on debug
+>       commit: 1c0a46e2918a1ddf42f51449e45077513dd52417
+> [2/3] clk: Return value calculated by ERR_PTR
+>       commit: fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
 
-Automatically generated boot options don't point to the ESP, they point to
-the disk itself and find_handle() won't match when searching for an ESP
-during a capsule update.
-This happens because find_handle() only matches device paths that are
-shorter or equal to the device path passed as an argument.
-Since the EFI spec allows it we want to allow capsule updates, when the
-boot option points to a disk, but that disk contains an ESP with a
-\EFI\UpdateCapsule  directory.
+This commit seems to have broken TI platforms in next branch.
 
-find_handle() implicitly changes it's behavior depending on the passed
-arguments as well. If the 'rem' ptr is not valid it will only search for
-an exact match. Otherwise it will match on the best match and return the
-remaining portion of the matched device path to 'rem'.
+u-boot$ git bisect log
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [bc1819331ece7aa4e7d0573c9cdacdb8efbdb067] Merge patch series "clk: Return value calculated by ERR_PTR"
+git bisect bad bc1819331ece7aa4e7d0573c9cdacdb8efbdb067
+# status: waiting for good commit(s), bad commit known
+# good: [384d3785df4dbe452f9fbb4bd9c9c9e986cdc205] Merge patch series "led: remove unused legacy LED code"
+git bisect good 384d3785df4dbe452f9fbb4bd9c9c9e986cdc205
+# good: [1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc] board: ti: CAT24C256WI-GT3 require min. 5ms delay (tWR) between write/read
+git bisect good 1e8eff6d7a9ad2c605185e5b3d8c22ccd26733dc
+# good: [1165e8efcba0ab3efd1ea4ff956d26746fc386b0] reboot-mode: Correct macro name from U_BOOT_DEVICE to U_BOOT_DRVINFO
+git bisect good 1165e8efcba0ab3efd1ea4ff956d26746fc386b0
+# bad: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Return value calculated by ERR_PTR
+git bisect bad fe780310cfa8bf5a093894b5cd7fe85c6b02fd91
+# good: [1c0a46e2918a1ddf42f51449e45077513dd52417] clk: Prevent SIGSEGV on debug
+git bisect good 1c0a46e2918a1ddf42f51449e45077513dd52417
+# first bad commit: [fe780310cfa8bf5a093894b5cd7fe85c6b02fd91] clk: Return value calculated by ERR_PTR
 
-Tweak this slightly and pass an enum with 3 options
-- EXACT   - Exact match, as if 'rem' was NULL
-- SHORTER - Match a shorter device path and put the remainder in 'rem'
-- LONGER  - Inverse the logic and match a longer device path. Put the
-            remainder into 'rem'.
+Confirmed by reverting the commit. Looks like
+9ed8fafbcde3425d8817ec5953edd428c7508153 revert is needed again?
 
-To avoid any regressions, LONGER is only used during capsule updates and
-since 'rem' always carries the remainder of the matched device path we
-can plug it in with minimal changes.
+> [3/3] clk: Prevent memory leak on error
+>       commit: 33285945518731ed459680ffb01891c4804fb6c9
+> -- 
+> Tom
+> 
+> 
 
-Reported-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Reported-by: John Toomey <john.toomey@amd.com>
-Tested-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since v1:
-- Fixed the function descriptions
-- renamed device_is_present_and_system_part() to device_has_esp to
-  better match the updated functionality
-
- cmd/eficonfig.c                  |  2 +-
- include/efi_device_path.h        | 21 ++++++++---
- lib/efi_loader/efi_bootmgr.c     |  6 ++--
- lib/efi_loader/efi_boottime.c    |  5 +--
- lib/efi_loader/efi_capsule.c     | 29 +++++++++------
- lib/efi_loader/efi_device_path.c | 62 +++++++++++++++++++++++++-------
- lib/efi_loader/efi_disk.c        |  2 +-
- 7 files changed, 94 insertions(+), 33 deletions(-)
-
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index d8d946c87ac8..e317f3c90c14 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -1321,7 +1321,7 @@ static efi_status_t prepare_file_selection_entry(struct efimenu *efi_menu, char
- 		return EFI_OUT_OF_RESOURCES;
-
- 	/* get the device name only when the user already selected the file path */
--	handle = efi_dp_find_obj(file_info->dp_volume, NULL, NULL);
-+	handle = efi_dp_find_obj(file_info->dp_volume, NULL, NULL, false);
- 	if (handle) {
- 		ret = efi_disk_get_device_name(handle, devname, EFICONFIG_VOLUME_PATH_MAX);
- 		if (ret != EFI_SUCCESS)
-diff --git a/include/efi_device_path.h b/include/efi_device_path.h
-index aae85228f681..ffff93f64833 100644
---- a/include/efi_device_path.h
-+++ b/include/efi_device_path.h
-@@ -71,15 +71,28 @@ struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp);
- /**
-  * efi_dp_find_obj() - find handle by device path
-  *
-+ * if @match_longer is false, the function will only search for device
-+ * paths that are either an exact match or shorter than the provided device
-+ * path.
-+ * if @match_longer is true it will also match device paths that are longer
-+ * that the provided device path.
-+ * The function searches and matches DPs in this order:
-+ * - Try to find an exact match
-+ * - Try to find a device path that's shorter than the provided one
-+ * - Try to find a device path that's longer than the provided one
-+ *
-  * If @rem is provided, the handle with the longest partial match is returned.
-  *
-- * @dp:     device path to search
-- * @guid:   GUID of protocol that must be installed on path or NULL
-- * @rem:    pointer to receive remaining device path
-+ * @dp:			device path to search
-+ * @guid:		GUID of protocol that must be installed on path or NULL
-+ * @rem:		pointer to receive remaining device path
-+ * @match_longer:	match even if the provided dp is shorter. @rem will
-+ *                      still hold the remaining device path if specified
-+ *
-  * Return:  matching handle
-  */
- efi_handle_t efi_dp_find_obj(struct efi_device_path *dp, const efi_guid_t *guid,
--			     struct efi_device_path **rem);
-+			     struct efi_device_path **rem, bool match_longer);
-
- /**
-  * efi_dp_last_node() - Determine the last device path node before the end node
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a687f4d8e85c..df7500a94876 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -84,7 +84,8 @@ struct efi_device_path *expand_media_path(struct efi_device_path *device_path)
- 	 * booting from removable media.
- 	 */
- 	handle = efi_dp_find_obj(device_path,
--				 &efi_simple_file_system_protocol_guid, &rem);
-+				 &efi_simple_file_system_protocol_guid, &rem,
-+				 false);
- 	if (handle) {
- 		if (rem->type == DEVICE_PATH_TYPE_END) {
- 			char fname[30];
-@@ -625,7 +626,8 @@ static efi_status_t try_load_from_media(struct efi_device_path *file_path,
- 	struct efi_device_path *rem, *dp = NULL;
- 	struct efi_device_path *final_dp = file_path;
-
--	handle_blkdev = efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
-+	handle_blkdev = efi_dp_find_obj(file_path, &efi_block_io_guid, &rem,
-+					false);
- 	if (handle_blkdev) {
- 		if (rem->type == DEVICE_PATH_TYPE_END) {
- 			/* no file name present, try default file */
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index ddc935d22409..0391b92a8be4 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -1816,7 +1816,8 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
- 	info->system_table = &systab;
-
- 	if (device_path) {
--		info->device_handle = efi_dp_find_obj(device_path, NULL, NULL);
-+		info->device_handle = efi_dp_find_obj(device_path, NULL, NULL,
-+						      false);
-
- 		dp = efi_dp_concat(device_path, file_path, 0);
- 		if (!dp) {
-@@ -2016,7 +2017,7 @@ efi_status_t efi_load_image_from_path(bool boot_policy,
- 	*size = 0;
-
- 	dp = file_path;
--	device = efi_dp_find_obj(dp, NULL, &rem);
-+	device = efi_dp_find_obj(dp, NULL, &rem, false);
- 	ret = efi_search_protocol(device, &efi_simple_file_system_protocol_guid,
- 				  NULL);
- 	if (ret == EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 31b47a20186e..bd40ef5f57c4 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -887,26 +887,26 @@ static efi_status_t get_dp_device(u16 *boot_var,
- }
-
- /**
-- * device_is_present_and_system_part - check if a device exists
-+ * device_has_esp - check if an ESP exists on a device or partition
-  *
-  * Check if a device pointed to by the device path, @dp, exists and is
-- * located in UEFI system partition.
-+ * either located in or contains a UEFI system partition.
-  *
-  * @dp		device path
-  * Return:	true - yes, false - no
-  */
--static bool device_is_present_and_system_part(struct efi_device_path *dp)
-+static bool device_has_esp(struct efi_device_path *dp,
-+			   struct efi_device_path **rem)
- {
- 	efi_handle_t handle;
--	struct efi_device_path *rem;
-
- 	/* Check device exists */
--	handle = efi_dp_find_obj(dp, NULL, NULL);
-+	handle = efi_dp_find_obj(dp, NULL, NULL, false);
- 	if (!handle)
- 		return false;
-
--	/* Check device is on system partition */
--	handle = efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);
-+	/* Check device is on system partition or contains one */
-+	handle = efi_dp_find_obj(dp, &efi_system_partition_guid, rem, true);
- 	if (!handle)
- 		return false;
-
-@@ -918,6 +918,9 @@ static bool device_is_present_and_system_part(struct efi_device_path *dp)
-  *
-  * Identify the boot device from boot-related variables as UEFI
-  * specification describes and put its handle into bootdev_root.
-+ * The function iterates through the active boot options, including
-+ * the one defined in BootNext and tries to detect if an ESP is
-+ * present on the disk or partition of the disk defined in the boot entry.
-  *
-  * Return:	status code
-  */
-@@ -928,7 +931,7 @@ static efi_status_t find_boot_device(void)
- 	efi_uintn_t size;
- 	int i, num;
- 	struct efi_simple_file_system_protocol *volume;
--	struct efi_device_path *boot_dev = NULL;
-+	struct efi_device_path *boot_dev = NULL, *rem = NULL;
- 	efi_status_t ret;
-
- 	/* find active boot device in BootNext */
-@@ -949,7 +952,7 @@ static efi_status_t find_boot_device(void)
-
- 		ret = get_dp_device(boot_var16, &boot_dev);
- 		if (ret == EFI_SUCCESS) {
--			if (device_is_present_and_system_part(boot_dev)) {
-+			if (device_has_esp(boot_dev, &rem)) {
- 				goto found;
- 			} else {
- 				efi_free_pool(boot_dev);
-@@ -987,7 +990,7 @@ skip:
- 		if (ret != EFI_SUCCESS)
- 			continue;
-
--		if (device_is_present_and_system_part(boot_dev))
-+		if (device_has_esp(boot_dev, &rem))
- 			break;
-
- 		efi_free_pool(boot_dev);
-@@ -997,7 +1000,11 @@ found:
- 	if (boot_dev) {
- 		log_debug("Boot device %pD\n", boot_dev);
-
--		volume = efi_fs_from_path(boot_dev);
-+		if (rem->type == DEVICE_PATH_TYPE_END)
-+			volume = efi_fs_from_path(boot_dev);
-+		else
-+			volume = efi_fs_from_path(rem);
-+
- 		if (!volume)
- 			ret = EFI_DEVICE_ERROR;
- 		else
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index b3fb20b2501e..e5b113c331bd 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -30,6 +30,19 @@ const struct efi_device_path EFI_DP_END = {
- 	.length   = sizeof(EFI_DP_END),
- };
-
-+/**
-+ * enum match - Options for device path matching
-+ *
-+ * @EXACT:   Only match an identical device path
-+ * @SHORTER: Match device paths that are shorter than the provided one
-+ * @LONGER:  Match device paths that are longer than the provided one
-+ */
-+enum match {
-+	EXACT,
-+	SHORTER,
-+	LONGER
-+};
-+
- #if defined(CONFIG_MMC)
- /*
-  * Determine if an MMC device is an SD card.
-@@ -109,10 +122,11 @@ struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp)
-  */
- static efi_handle_t find_handle(struct efi_device_path *dp,
- 				const efi_guid_t *guid, bool short_path,
--				struct efi_device_path **rem)
-+				struct efi_device_path **rem,
-+				enum match match)
- {
- 	efi_handle_t handle, best_handle = NULL;
--	efi_uintn_t len, best_len = 0;
-+	efi_uintn_t len, match_len = 0, best_len = 0;
-
- 	len = efi_dp_instance_size(dp);
-
-@@ -137,22 +151,35 @@ static efi_handle_t find_handle(struct efi_device_path *dp,
- 			if (!dp_current)
- 				continue;
- 		}
--		len_current = efi_dp_instance_size(dp_current);
--		if (rem) {
-+
-+		match_len = len_current = efi_dp_instance_size(dp_current);
-+		switch (match) {
-+		case EXACT:
-+			if (len_current != len)
-+				continue;
-+			break;
-+		case SHORTER:
- 			if (len_current > len)
- 				continue;
--		} else {
--			if (len_current != len)
-+			break;
-+		case LONGER:
-+			if (len_current < len)
- 				continue;
-+			match_len = len;
-+			break;
- 		}
--		if (memcmp(dp_current, dp, len_current))
-+
-+		if (memcmp(dp_current, dp, match_len))
- 			continue;
- 		if (!rem)
- 			return handle;
- 		if (len_current > best_len) {
- 			best_len = len_current;
- 			best_handle = handle;
--			*rem = (void*)((u8 *)dp + len_current);
-+			if (len_current <= len)
-+				*rem = (void *)((uintptr_t)dp + len_current);
-+			else
-+				*rem = (void *)((uintptr_t)dp_current + match_len);
- 		}
- 	}
- 	return best_handle;
-@@ -160,14 +187,25 @@ static efi_handle_t find_handle(struct efi_device_path *dp,
-
- efi_handle_t efi_dp_find_obj(struct efi_device_path *dp,
- 			     const efi_guid_t *guid,
--			     struct efi_device_path **rem)
-+			     struct efi_device_path **rem, bool match_longer)
- {
- 	efi_handle_t handle;
-
--	handle = find_handle(dp, guid, false, rem);
-+	handle = find_handle(dp, guid, false, rem, EXACT);
- 	if (!handle)
--		/* Match short form device path */
--		handle = find_handle(dp, guid, true, rem);
-+		handle = find_handle(dp, guid, true, rem, EXACT);
-+	if (handle)
-+		return handle;
-+
-+	handle = find_handle(dp, guid, false, rem, SHORTER);
-+	if (!handle)
-+		handle = find_handle(dp, guid, true, rem, SHORTER);
-+
-+	if (match_longer && !handle) {
-+		handle = find_handle(dp, guid, false, rem, LONGER);
-+		if (!handle)
-+			handle = find_handle(dp, guid, true, rem, LONGER);
-+	}
-
- 	return handle;
- }
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index 130c4db9606f..0d3d7c187d72 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -339,7 +339,7 @@ efi_fs_from_path(struct efi_device_path *full_path)
- 	efi_free_pool(file_path);
-
- 	/* Get the EFI object for the partition */
--	efiobj = efi_dp_find_obj(device_path, NULL, NULL);
-+	efiobj = efi_dp_find_obj(device_path, NULL, NULL, false);
- 	efi_free_pool(device_path);
- 	if (!efiobj)
- 		return NULL;
---
-2.43.0
-
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+https://ti.com/opensource
