@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D837D3B7EA
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 18:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2326ED3B7EA
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 19:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03F4283B5E;
-	Mon,  8 Dec 2025 19:55:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5EEDC83981;
+	Mon,  8 Dec 2025 20:05:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sGF6vu0P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uWyetGns";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B1E783B4B; Mon,  8 Dec 2025 19:54:59 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 594DB8398D; Mon,  8 Dec 2025 20:04:56 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54AC083990
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 19:54:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3631183A57
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 20:04:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-453928468baso1929386b6e.3
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 10:54:57 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-450063be247so2179034b6e.2
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 11:04:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765220096; x=1765824896; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5yfexDkNs2dQvgkcm58SjWXeqmj2kWqhegVOYP9GCvs=;
- b=sGF6vu0P5B+d/Oly9yugpp1anN4lIXR/l6S6qosgjP37ZBP8n7/yfUvdp4PZA6jw4w
- CkSvXyfDnCpDQBTS6SNfkUrci+fRkxHb3QJrqug6OVwEe1mb2hrV1Erkkpaj2wRTfNpw
- gjXsdTM0CtVrmATPylSHdqQum9o0AHDupMWTY=
+ d=konsulko.com; s=google; t=1765220690; x=1765825490; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=z4c+2BB4nnUmThyklQzh9kqU7bV3qxqmMvfwO+jGOvU=;
+ b=uWyetGnslexGOiYbkWGJhp04TcMPdAGEFfds9w5y3pqbg6fw/RCTg6mxYaueAJlwBJ
+ LAScIUpfl8lZFD0Gtlp2NGWU9wPMCDCjyToiKAeoBCA8lsIYIa31jPqwZGsyEzpNw7RF
+ InKMx0JUG2MGaMVmAqbbZvKygslQQsOA8tdY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765220096; x=1765824896;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5yfexDkNs2dQvgkcm58SjWXeqmj2kWqhegVOYP9GCvs=;
- b=IXejd1Nt3mpZVuH1XsD1tVllHxBWpKtZuZrmK09PpGI1Eo6TN1JEDHPmbfbKvRG2uf
- /9vOwGcZu89oqmRQJmD6/GqE6iMUuR49NrSF9qXlWuWYGnu28zBw4CInvEJyOoQZZMDe
- Nf0dTLkPJ2XvauHCDkSJQH6Sr4JYPIaxa7y/SRojGcLtt/Pd/dR5YEG+cGoCSgq6Fqyb
- U8psdMpR2plY3EpO6O31shOL/0lRAQIgmjPYb3D2xbvVyYwRedQNfkeICj0tQI10qUQo
- 1Gs7RFUAuIxShVsq36LRIQEWp4/rpb/f6nwSUE8jeeA0V45zPud8JrNARaUB6b7HvCGo
- M6+w==
-X-Gm-Message-State: AOJu0YzKdM7G1EHiZz5khhQvLAKjNagJaEXq8KIHC7LzRheuSVUSPJ3A
- uxt9lMGkA0lfeNq3o7MiWi2Web8iALLULamccJPn8Pn4oAHoFQ1LoaCZ8j3AjlkJCbkpCbkIvLT
- xwsn2d3Q=
-X-Gm-Gg: ASbGnctUcPEWwvpCpSBLf+fy7vxi7hucgfkO+7fNU1a69TFeSGkSLEDn/lEkwrxV0/+
- NF+ikrXZLZ4pE9DEtpZgrQP3+dgv0zrk1aBRpLYPZp259SrNaKHD1Ub6ozziJw+u9+LaSvu39PI
- YWSVXKyPBChOuTgtw2FxcIZgKJPjmdwcEF70VcCi3BtBpTkG0ufE/T68BWWmygpzZTok0D1KhDs
- CXByw9syTs5zUvz7PjRV8kZu9mZDyPFZ4+3ym3vFQ8cZWLDPwlXvs/9yHvHjhm/pdelnS7zSdmH
- +0uhaR9XKsm8DuG2+dVSGDZ4x6NRcUyGk0450S7gjuFkIMEMhfoxfJTE9DET4iYnm48hamKxBgq
- Cr0dVPpuXk+U2QGy8iEBTh6TOwmKzVVUf5sgDIPHK+6qHqJmwzJBoxIFTVKLZn4z+PmKiqNad+/
- bbKUhaeF0l3DYHV1ixVxNma2UYLYAhucNzeAjudsKSAJRiudijjPnc/ND+YW8=
-X-Google-Smtp-Source: AGHT+IFdGofMGjz213X47ocXjm/uI+a0C5nUgunQjazYmzys0VlzgXtty2HH/XiLvBH4/XrQ/ceHHA==
-X-Received: by 2002:a05:6808:2e45:b0:450:d143:b79f with SMTP id
- 5614622812f47-4539e0c610emr3375749b6e.66.1765220096076; 
- Mon, 08 Dec 2025 10:54:56 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1765220690; x=1765825490;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z4c+2BB4nnUmThyklQzh9kqU7bV3qxqmMvfwO+jGOvU=;
+ b=o/g55gTN9U5cKvII6f6n5JlNqeOnZ7vCqIoOqre5vKrTEg9x+OgutZn5bRg0gFWCZr
+ Xvv/evXsIRFANavSW+mG22A4aQCRpJg8h/UNdYmx2t79mlJMABu9NjnixJxKpOola56o
+ A8FVYkozR7ytGaBIHeplI1OJXMO/bzjnaT1SdF9JE8wTSUTMP0H6tEH4I7u45DAla7Fs
+ WGBLwjijHUgQzfhuAtw6xokVKLnGu/MthhGQkHmT2j7gRlFkUD443LHMpgFl6Ou2wFTE
+ fJriT3khxwaLmdL8DLw03lusYawhWKOuLzycj2FrP7TZxx9ktUd0/2aekWGcaE3vsr5A
+ s3ZQ==
+X-Gm-Message-State: AOJu0YztxMch69ct/ObNC9VnslOFGkMeqt9ub7HSCHCGu9ZiMLoGs43p
+ gc35iG5CyQKv8c4VQ7YE2NBQP7Ys72fSmEEj5pt0KlLT3iUjkg7Y//sN/8WL6yGPGEQhQIWpB2K
+ v70V1KHk=
+X-Gm-Gg: ASbGncvrDqr9Ws84WLiEbzUxo14xMZJ0hP5gcEzmLzzqbCdQXkv5PkI2H+3q5x9VAst
+ fWYMRPDDasSf2QQ+TbmkINRBYE1FHhQx6/y3fjuvBVWLkufg66pITx3YdRDFc7cfzyw5Im1vWYG
+ ofc84ZlhzBJbLu9tYDrFwecwiEhyaips0SIEDOagGPwxXofu4K7lkePtA9fA+Krq67o0K+g7SQV
+ x0VjXedtd+s4uzsrQTwVmhBQCBc+8U/foTpc2M3b0jv+44Fh6BvJvoT2U4+2hJwxt3U2Thb/YOF
+ +x+Z091T5f0vSrThdrqRRUIH5Xz6KXSS7r7BbJjAr0h9DkQMF7qIZXzAXhv0GMRq5lCFTB0zpK5
+ X9go5Wyw3f2oAss3PUrTkuKRYZIGEZW/YKTX65HpRILVnxex7UsG0hkhsNdDKnLgc7wO8aRcgFN
+ kPgYKVcVpArcrEfcXJQnV+wqRl4G7Z/N4MU13WLEwJPxApIoUXd3OsmOuXjr3z
+X-Google-Smtp-Source: AGHT+IGiut3Htsi/QehtBnX2OJhumbS90i61ZhHLilznCpLPWBSkdamzl5mPcleVLKI4Q09iESJonQ==
+X-Received: by 2002:a05:6808:16a7:b0:44f:da6f:edb1 with SMTP id
+ 5614622812f47-4539df930aemr3646706b6e.13.1765220689755; 
+ Mon, 08 Dec 2025 11:04:49 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a91eecbsm10890864a34.11.2025.12.08.10.54.55
+ 5614622812f47-453800cc729sm6579139b6e.10.2025.12.08.11.04.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 10:54:55 -0800 (PST)
+ Mon, 08 Dec 2025 11:04:49 -0800 (PST)
+Date: Mon, 8 Dec 2025 13:04:47 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251208181709.39819-1-me@ziyao.cc>
-References: <20251208181709.39819-1-me@ziyao.cc>
-Subject: Re: [PATCH] MAINTAINERS: update my email address
-Message-Id: <176522009554.376851.2191456975540821067.b4-ty@konsulko.com>
-Date: Mon, 08 Dec 2025 12:54:55 -0600
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.01-rc4 released
+Message-ID: <20251208190447.GQ303283@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i1pWBi+WbUoCsEP4"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,18 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Dec 2025 18:17:08 +0000, Yao Zi wrote:
 
-> My old mail address, ziyao@disroot.org, has stopped working. Switch to
-> my new address, me@ziyao.cc, and map it in .mailmap.
-> 
-> 
+--i1pWBi+WbUoCsEP4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+Hey all,
 
-[1/1] MAINTAINERS: update my email address
-      commit: 543900ab530a4c65d0130c10b001378c3290107b
--- 
+So it's release day and I have tagged and pushed things out. In my own
+patchwork queue, things are fairly solidly for the next branch, with
+just a few things like MAINTAINER entires to update. Which means that in
+general, I'm hoping custodians are looking at their queue and seeing
+what they have which can go to the next branch now as well.
+
+We're continuing with a community meeting following the release and the
+calendar link is
+https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DZGNsNT=
+h2YWQ2YTB0ajAzZXRkdDVhdjFuNmpfMjAyNTEwMjhUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
+mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
+89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
+lendar.google.com&scp=3DALL
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+December 10th, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+In terms of a rough changelog:
+
+We have one mroe rc release to go before the final release which will be
+on 05 January 2026.
+
+Thanks all!
+
+--=20
 Tom
 
+--i1pWBi+WbUoCsEP4
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTchTwAKCRAr4qD1Cr/k
+Cs+cAQDmOhLeP66J1lioZJ9HK+IXA9zyi/lTdG/jMDtrUGp7sAEAo+27II/dABms
+2UsJkbdHeQ/UBoDB2vklSjgYCBXXLQc=
+=e04u
+-----END PGP SIGNATURE-----
+
+--i1pWBi+WbUoCsEP4--
