@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78747D3B7E2
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:52:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93AC8D3B7E2
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 12:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE8C58397A;
-	Mon,  8 Dec 2025 13:52:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 216C083B55;
+	Mon,  8 Dec 2025 13:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NzUxd7wc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IBg9jcXW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7878F83B4A; Mon,  8 Dec 2025 13:52:12 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 2981A83B4E; Mon,  8 Dec 2025 13:52:13 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0058E838E6
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:52:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28F1683B32
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 13:52:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4779adb38d3so41137785e9.2
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 04:52:09 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-477a1c28778so57437835e9.3
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 04:52:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765198329; x=1765803129; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tQT50zeKFQoeW9Rr2i1wc3Rlyb+dymIaVF+Tns3b2Ws=;
- b=NzUxd7wc2QrGeQGqXUZVTQPgPNGPrPnDHbGi0O6pr79zJYtHm7xEPk459pBAeOP6pZ
- JBwyHiw4oU0TwKGzcJmozbC6Mjgdj5pFnHqzjzAvmlgypPGw1/bPpNEUie26U5yY3xI2
- KOvtEkzT0sOl9B2tSkYoWeyebRH1pEN1pfLHZ89nqf+CpT1ljgCma6JLruvvkoICeFSJ
- 7Ps/tb5+GKGpPnXPPvu0cH/J5GXk5D5ZP9IV+0CttG7ZgTgP24ZE3Gc+dKnWHHtn24d5
- Rsr2mjWASmxn87Dzbwql0j6eneywX6UQKVySoi2/iFRcQtPQ12MTXrAZ8hL1m3BpAljL
- WKCw==
+ d=linaro.org; s=google; t=1765198330; x=1765803130; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=x58j6eNqlaNi5vfFnoUz9VMOmumGq+ig6InZvzrW0vY=;
+ b=IBg9jcXWSIc3Dc+GVIRiI42eiLi+mQh1asmPYuSA1asCfpFo1Q2dlHrLFi3osOAAGI
+ iUEY60Fd79+p6R94xTBbOsFxMWYRciFAfXkxVQDWY7Z7ag1wzOmdteHdoNLemn1fUbVV
+ MkqJskKrFWOSYnidN3cWwr32QotVHWuH381/6PQNpAPNPz0fx2BeTVlnzxR85/t19Lcm
+ 7SiMPgsJjpUS/aR4/J0BOwlXVVGRhpSSNpeS3rwXGHntPitCydCZxWrawyWXOSZ/QVTC
+ LhdXEGEW919rQZY0dVRHTUbvWLIYGe8BIip4C9PzFxjIK6WgsvLaZ690huLw+bhhx0/h
+ 4Wwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765198329; x=1765803129;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tQT50zeKFQoeW9Rr2i1wc3Rlyb+dymIaVF+Tns3b2Ws=;
- b=CLyfAeXkbNceDjnMNDhG4ugFeyAgEgxE76wCeaHF++7uw4w7aNCmrUcla1CEaI7rp6
- kcUnY0aI+VEORQJBUfdHCTSJ/34e/gvoH6z+fUNFaAyuwl/F8OBKlbMZsYXrhlb6wcLd
- VVX+z/r1x24N1+ihlhPwOKPvOnNuGt/Q8M1j4UnuaWE4kcCgGSO+O6Wj2k6WVvPqpVlg
- FVZg/lJ7tKA9RXqpcYUa8cEp697iBerZx646KZQ4U7+kerbCqlbZvnmW9XAWBYDTvZd/
- V9a4z3urMhRK6I0RPDv1D6AEXUX3/CKxsW4+Cl8O9yK8sXHpQmxJU8ub6LNrztvgQKsY
- elIg==
-X-Gm-Message-State: AOJu0Yzf7FlVh/riuhkm3u6LO1tC8j0a85rYqIsMd216fyS9xK1/BwIh
- bHsZbDx7n6xir8AceVKvrpQnXSGeNnjmCns1OFPfls2MKX8/9Ev/sNAT9dyD6+Ytu+w=
-X-Gm-Gg: ASbGncs6Z/pIo39jxQlnbIwmlz5hsVeJqW0xUMxUEUrj/OTlu0Q2PvrFoNsbRanGE27
- MJKiV6eQCA0bg8mPts5Ehbbfe8Hn4f9dopWSbAIho6n6ujMZJFdRXuMB7yG2XEMpVOxWDAA104E
- y7J3mExzK7RwpDvu+QhUjsEox38S2Zd6badaj2eZUf3/UlqN+ZRPWzXzQk4F13bKm3yvPXMHE+h
- /Pb9KDAsFbeRy5OZ1mfU5Gyiy1/NfirhV2K42YSHireGJ0rG6XvCyRfgcHubbw0RLka6+HXmYpt
- bF+Qn3XEyYbd+OTDognC5gEAKQP6jxFqA6IrjcmEP8HkFWABy85SZsRAHj7+LCm8yH2B0tsQsUR
- /pUGdT60lJt2+yo6C8fJuKRHCYHFXiKptMfTDJ6NF+jS+Ob9/d9TQd+y/0UHWm8Wc7/VYv9xwHa
- xnwdT8ErGoJMrFaO4OPSmEkXZIY3LvizD2cLo9E+4=
-X-Google-Smtp-Source: AGHT+IG+OQVo+IW0ocg/qXk3E1lCqzokCAlS13kKoa+yhVz7vk7rqqmKahvY0+mX8LWYh22xxDs+EA==
-X-Received: by 2002:a05:600c:1912:b0:477:acb7:7141 with SMTP id
- 5b1f17b1804b1-47939df69dcmr65231695e9.3.1765198329381; 
- Mon, 08 Dec 2025 04:52:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1765198330; x=1765803130;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=x58j6eNqlaNi5vfFnoUz9VMOmumGq+ig6InZvzrW0vY=;
+ b=OhfQ58ECNhyQfdPJbiY/AceLDeWomUSZHAz9DAqoTXNSlhKt6cMPMHHHNIdRUKf/j9
+ 2TNhtzS7lBNSAoICysK/gCSVqX39A/SagaPp5u+lCFzoy7kE3IjDNsOdnU1/USlmtHzq
+ pSKZ4TJ7uVJYfuYv5Z3ZN9t1AXZyM86D5uyhdCD6f8xqGoYxJ5d+/cWOWL9AL1Cqcayx
+ xDP1hYKn7xowSRD1vxDguCoGnGFZwfwx6ACRiZgjFohmqAOiVBp9k/c/40+npf46Emr+
+ ps49txUBo7EEw+Z16edOVPLWnq6VGz6bbNUXd1MRVfn9DmkQqmtl/Zjo/pHoMheFRaT5
+ CX3Q==
+X-Gm-Message-State: AOJu0Yz2oHLT4ctFwXn4LA/sQAiE6AEdJZ7hMyIsPpTpS9UE8ukYJZsb
+ EbXIaLzKpuMrk5z9TAJ0SXeaGTfzek09ilWMgzD3NCSuc1R+AGwtiq+6bmNF3q8FfnI=
+X-Gm-Gg: ASbGncuReNUWsaQ6Fm1UAYtf2frJkwAiNjATg3Btg1uSewTBO+x1hZBnADfaEhn6vQB
+ ShDkK8cPoD95GbgKfXuPTnWKCAsUkRiXgTBS1SwEJLY8l51Qi9pyqB67Ma8cUDc7EG/DUgRplu7
+ jRlkomW+d2L5P8aBKujTwyk/RkW2IRtHDueWEBxXJk0xvz0r/s+1zZ9eNwuVSRBKsXIdJE/RRNK
+ D4olMvXoY9/3WoIhF+uznmYspGvhQZEtXYbsJLOK3vbD7IulF2WazvmUrRhnZZoLSPZCnpejDz0
+ z4w08B6pY0VSSTLi1Mk6pWsA/k5SHYtdmyQpY4452edkgImCUtVMEj1SyxuzzEI00Os8cWzfJq5
+ BoloL1l4nXewntHhYX6GUv+gAxLz2Trg5UcF2Gwq//9IqPvkedlHoDWW63iaLfGDa7sObyv6xnw
+ 0g4j559HksFrJ6klb8+Fi8M0Hc1giPrC+KvnM7DVk=
+X-Google-Smtp-Source: AGHT+IFtyOyAK5tyISxulNvS6jPaukTVOfEcX03iWvmY5hNE/GZRV7YpvEVOLzSmqVRIDstmgrFOnQ==
+X-Received: by 2002:a05:600c:6209:b0:477:9aeb:6a8f with SMTP id
+ 5b1f17b1804b1-47a7b1b053emr2747915e9.9.1765198330509; 
+ Mon, 08 Dec 2025 04:52:10 -0800 (PST)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:f7b:b001:fd05:11bc:5c24:a865])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47930920b6dsm260113645e9.1.2025.12.08.04.52.08
+ 5b1f17b1804b1-47930920b6dsm260113645e9.1.2025.12.08.04.52.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 04:52:08 -0800 (PST)
+ Mon, 08 Dec 2025 04:52:10 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH 0/5] net: Port NFS to LWIP
-Date: Mon, 08 Dec 2025 12:52:06 +0000
-Message-Id: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+Date: Mon, 08 Dec 2025 12:52:07 +0000
+Subject: [PATCH 1/5] net: move net_state to net-common
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPbJNmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAyNL3ZzyzIL4vLRiXVNjC9PUtOREc8OkZCWg8oKi1LTMCrBR0bG1tQD
- VrUCCWgAAAA==
-X-Change-ID: 20251029-lwip_nfs-5385efca71bc
+Message-Id: <20251208-lwip_nfs-v1-1-1f5d31e15d00@linaro.org>
+References: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+In-Reply-To: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -117,47 +115,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series ports the existing NFS code so that it can be used with both
-the legacy network code and also with LWIP.
-Firstly some legacy network code, mostly variables, is moved into common
-files so that it is accessible to LWIP.
-Secondly the NFS code is refactored so that the parts that are not
-specific to the network code can be shared with both network
-implementations.
-Finally the LWIP specific parts needed to interface the NFS shared code
-to that network stack are added and enabled.
+Move the net_state variable into common code so that it can be used by
+either the legacy network code or LWIP. This is needed for porting
+across the NFS support code for use with LWIP.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Andrew Goodbody (5):
-      net: move net_state to net-common
-      net: Move some variables to net-common files
-      net: nfs: Add licence header
-      net: nfs: Move most NFS code to common files
-      net: lwip: nfs: Port the NFS code to work with LWIP
+ include/net-common.h | 17 +++++++++++++++++
+ include/net-legacy.h | 17 -----------------
+ net/net-common.c     |  3 +++
+ net/net.c            |  2 --
+ 4 files changed, 20 insertions(+), 19 deletions(-)
 
- cmd/Kconfig          |  28 +-
- cmd/lwip/Makefile    |   1 +
- cmd/lwip/nfs.c       |  11 +
- include/net-common.h |  38 ++-
- include/net-legacy.h |  26 --
- include/net-lwip.h   |   1 +
- net/Makefile         |   1 +
- net/lwip/Makefile    |   1 +
- net/lwip/net-lwip.c  |   5 -
- net/lwip/nfs.c       | 282 +++++++++++++++++
- net/net-common.c     |  21 ++
- net/net.c            |  23 --
- net/nfs-common.c     | 863 +++++++++++++++++++++++++++++++++++++++++++++++++++
- net/nfs-common.h     | 123 ++++++++
- net/nfs.c            | 849 +-------------------------------------------------
- net/nfs.h            |  59 ----
- 16 files changed, 1368 insertions(+), 964 deletions(-)
----
-base-commit: 59f9fcc1f514762674ac07c13c2a85f7aace7250
-change-id: 20251029-lwip_nfs-5385efca71bc
+diff --git a/include/net-common.h b/include/net-common.h
+index f5cff3e7c0c5d25f154e7730fad52cf03f71b875..d7a0f7dff7e50527e77419ead9a9ff30deeea545 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -13,6 +13,7 @@
+ #include <time.h>
+ 
+ #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
++#define DEBUG_INT_STATE 0	/* Internal network state changes */
+ 
+ /*
+  *	The number of receive packet buffers, and the required packet buffer
+@@ -114,6 +115,22 @@ struct ip_udp_hdr {
+ #define RINGSZ		4
+ #define RINGSZ_LOG2	2
+ 
++/* Network loop state */
++enum net_loop_state {
++	NETLOOP_CONTINUE,
++	NETLOOP_RESTART,
++	NETLOOP_SUCCESS,
++	NETLOOP_FAIL
++};
++
++extern enum net_loop_state net_state;
++
++static inline void net_set_state(enum net_loop_state state)
++{
++	debug_cond(DEBUG_INT_STATE, "--- NetState set to %d\n", state);
++	net_state = state;
++}
++
+ extern int		net_restart_wrap;	/* Tried all network devices */
+ extern uchar               *net_rx_packets[PKTBUFSRX]; /* Receive packets */
+ extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
+diff --git a/include/net-legacy.h b/include/net-legacy.h
+index 9564e97d238daa2ce919ebaa60bdaf4466d76b14..0a10121b0cf50898a90bb1179966f01dbdda65ad 100644
+--- a/include/net-legacy.h
++++ b/include/net-legacy.h
+@@ -25,7 +25,6 @@ struct udevice;
+ #define DEBUG_LL_STATE 0	/* Link local state machine changes */
+ #define DEBUG_DEV_PKT 0		/* Packets or info directed to the device */
+ #define DEBUG_NET_PKT 0		/* Packets on info on the network at large */
+-#define DEBUG_INT_STATE 0	/* Internal network state changes */
+ 
+ /* ARP hardware address length */
+ #define ARP_HLEN 6
+@@ -369,22 +368,6 @@ bool arp_is_waiting(void);		/* Waiting for ARP reply? */
+ void net_set_icmp_handler(rxhand_icmp_f *f); /* Set ICMP RX handler */
+ void net_set_timeout_handler(ulong t, thand_f *f);/* Set timeout handler */
+ 
+-/* Network loop state */
+-enum net_loop_state {
+-	NETLOOP_CONTINUE,
+-	NETLOOP_RESTART,
+-	NETLOOP_SUCCESS,
+-	NETLOOP_FAIL
+-};
+-
+-extern enum net_loop_state net_state;
+-
+-static inline void net_set_state(enum net_loop_state state)
+-{
+-	debug_cond(DEBUG_INT_STATE, "--- NetState set to %d\n", state);
+-	net_state = state;
+-}
+-
+ /*
+  * net_get_async_tx_pkt_buf - Get a packet buffer that is not in use for
+  *			      sending an asynchronous reply
+diff --git a/net/net-common.c b/net/net-common.c
+index c68e19fc03e64a740d05b998ef0efb9fce311543..ec1e179f7d9cdd459dc3b8c2d13f6e478ad4ce87 100644
+--- a/net/net-common.c
++++ b/net/net-common.c
+@@ -6,6 +6,9 @@
+ #include <linux/time.h>
+ #include <rtc.h>
+ 
++/* Network loop state */
++enum net_loop_state net_state;
++
+ void copy_filename(char *dst, const char *src, int size)
+ {
+ 	if (src && *src && (*src == '"')) {
+diff --git a/net/net.c b/net/net.c
+index f579f6ac5bcced5a05a340b000a1ca9c2651c6da..03a39419d10817aff5f12badc0f604a403fe7fb2 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -163,8 +163,6 @@ const u8 net_null_ethaddr[6];
+ #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+ void (*push_packet)(void *, int len) = 0;
+ #endif
+-/* Network loop state */
+-enum net_loop_state net_state;
+ /* Tried all network devices */
+ int		net_restart_wrap;
+ /* Network loop restarted */
 
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.47.3
 
