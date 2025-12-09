@@ -4,61 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 675F3D3B982
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 22:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE01D3B99E
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 22:34:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93A5A8394E;
-	Tue,  9 Dec 2025 23:32:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D55883C4B;
+	Tue,  9 Dec 2025 23:34:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GTJIeC+g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrKsBb7Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EB5983A71; Tue,  9 Dec 2025 23:32:51 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C33B083C94; Tue,  9 Dec 2025 23:34:25 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA136836C8
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 23:32:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 28D463F7D5; 
- Tue,  9 Dec 2025 22:32:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1765319562;
- bh=DkS/TPNCrOVM7UDHRrzrfif/hg3LwhCThP17t3pSods=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=GTJIeC+g1ZQYXfv8JPt+wa9P9N1vuqVsxWbQwoF5e5z68UJMOzMTdStgoHkv4TT1S
- ZWnwogd6e80dDcqCSf6WCHa4vLlp0/JTd3dNIghsLPFgQLLF6FYgnKZYVbYzyAtN0x
- Wmw5IIshH9XwCxCL8XGOVWG8eyAxSOpGJyenFVLgghNhkwcBcZuPuWYSQ2IOTTN5RG
- bSEOZoooO2+HFXb9mpfUXrIypiWorCPPrkgZDt0NPpCop+9m/kLA1WeLHNhv1sqo5C
- wNwt24YBRiNuHxz52fKeyTfhN0y0Xwp/Iu3AdFrv+aJM5hD05fGW7Olyg/S9U5W85N
- XlhLB4feklLiJm21HMdkYVXKRy90anoJps9hH65RLqtG/T0fmQ43CbEFfItDm8bkaF
- 7tvFNVUfjuAsYCxo+2Bpar8WrbcOK+SNnKwFL4hkdLBgOFUTYRRDrMOeKu7bW2UlG4
- tc2ZMhRur94FYGV1lwtRjXoCOZNMKV1IuJQZzS2pGmn4LDATbi1+ZIoR/9c+95obOn
- vi+HRcx9I0kpEFXT7lJyLPzrk6GCH/lkeJoVdcrx2A2Gs326IufqjiTPsc664L0p1U
- 750HoB862mLzvXVA4uzTfnAM7S6ebhQpwBBaJcDyiRGWvzfzUxbrVzrut3CGdKC12F
- BB95I2aA2aY1VBhm9BU4rP+E=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] tools: use setuptools 78.1.1
-Date: Tue,  9 Dec 2025 23:32:38 +0100
-Message-ID: <20251209223238.415022-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7FF836C8
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 23:34:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c75dd36b1bso4789286a34.2
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 14:34:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1765319662; x=1765924462; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XhY3V0tlgdjOSbNioR0nkT0CO2SakUJnp3zH98IjJVU=;
+ b=XrKsBb7ZIg5KnKdoCAfAzy3gylmcz5Jj8byWXiJZBiDCJuen66taygBoK8HmM0WCGP
+ EcelrE6u+RDCMVouJLBXWwFF+2+vFYk2QHeqmVPgQABeQ1qV6Rp2TdMz3NuJvHHY/tdR
+ caej6vyqc63ZXk+BqMDBYLcNJfNruKns5kntY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765319662; x=1765924462;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XhY3V0tlgdjOSbNioR0nkT0CO2SakUJnp3zH98IjJVU=;
+ b=prGe5gGrzUKrJZg+FVL1axSEddiVuLhJvc2sQAhG5BNyw4HpqDDtBWu96FMF2FTdDK
+ 1clLhZOMGEyD33VcF/FQrd9yyDYuN0Nu97En1kBaiZUEpu6QC8DBQb1CUbubjnPhIWqY
+ zYK9yFL/1rUUsay8oVzPK/HGkTNjoAtJG30lh8uCHYGypmt7YKZOvCmWK+j30cUwHmpc
+ B7ozZs/nXi1ig27xBwge9Xfu0SC6MUM6fL8HKuZ+LYigekC+AGz5SmTeEon1lYGkF2hM
+ EyEAYS+TEN61D0So5yUbpzpziop8RHjT7kxJdcZKmKDnyXBaRuz9O6jow2VHjpvPtDbW
+ JPYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX1UUJ8owQdNarbjo+NCAk/4MhD9nwHzAWro40vqT61lCJhmST5UtXmMEiMWNAr0o7pJXcfOuI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzcA2kQ4E13baRMxOe0Nt73G9qPLLWFokfiJUR7Qh8zbWBV6S1f
+ MlKzK+JjlPAjf8Z19eCEvwXwU6od8sE22HL8/CVe6ov0zQg5icdB/Vs6zSsba36qjrRmKstWwva
+ 6tqisNLc=
+X-Gm-Gg: ASbGncs/gkCy60xJDpimIgu34EfC1MfF370Eqgjxwjp69bkwlB7FKZCrINtDDKDrBzD
+ fk6slFENSzAZy3uxB6GYnk4bwUkWwsRcXtEkAFDpTfzdNkNB8mz4jOtHLp57q7bgEY8qNAfbAPe
+ PFcZZIs/Wf6ucmr5tDcLLMG6cOME/5cco4y18ETgwBiLLhfOeDK1N5tJyQOSUB9ehriL3T2MXMf
+ D3mB8cJnI0AvoMsMyC0vAZEOKevgLSGZ5hjiizrAjAufKlHFRiev19StBltC4cCzdi+5oxhpvC3
+ NHeir9cNM/6j0PDyJGtAmKLyknfhODx3O0wdD/ZtsE/9jmz7CGkwi+bYLgTkWLI3ajQPVd3FqOW
+ eIWHgpH739hthwBM1+PUxDtEDaMpjljXBXm43xJ3esA0ZM/z2badgaKtHkawt4simaiX6s73SQn
+ hlHKJEGhroXPv0nnmjPG3JQJZRJDPXvQvnLOB4jXdSxUgOv71/1g==
+X-Google-Smtp-Source: AGHT+IFzjdxrhwl10KBS3mXzKVr8DwIfrYISxT9ErC8OPXwagzPYOSFDwz8cpI8dDxRZdmMqA9FdIQ==
+X-Received: by 2002:a05:6830:90b:b0:7c6:819d:bddd with SMTP id
+ 46e09a7af769-7cacec5f44bmr263202a34.34.1765319662345; 
+ Tue, 09 Dec 2025 14:34:22 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c95acdb599sm12962554a34.28.2025.12.09.14.34.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Dec 2025 14:34:21 -0800 (PST)
+Date: Tue, 9 Dec 2025 16:34:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] tools: use setuptools 78.1.1
+Message-ID: <20251209223419.GC303283@bill-the-cat>
+References: <20251209223238.415022-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wlXFByTO3obhMF50"
+Content-Disposition: inline
+In-Reply-To: <20251209223238.415022-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,72 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CVE-2025-47273 describes a path traversal vulnerability.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- tools/binman/pyproject.toml       | 2 +-
- tools/buildman/pyproject.toml     | 2 +-
- tools/dtoc/pyproject.toml         | 2 +-
- tools/patman/pyproject.toml       | 2 +-
- tools/u_boot_pylib/pyproject.toml | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+--wlXFByTO3obhMF50
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/tools/binman/pyproject.toml b/tools/binman/pyproject.toml
-index ba34437fc53..7c9ab0f2a27 100644
---- a/tools/binman/pyproject.toml
-+++ b/tools/binman/pyproject.toml
-@@ -1,5 +1,5 @@
- [build-system]
--requires = ["setuptools>=61.0"]
-+requires = ["setuptools>=78.1.1"]
- build-backend = "setuptools.build_meta"
- 
- [project]
-diff --git a/tools/buildman/pyproject.toml b/tools/buildman/pyproject.toml
-index 68bfa45c3f4..274042df155 100644
---- a/tools/buildman/pyproject.toml
-+++ b/tools/buildman/pyproject.toml
-@@ -1,5 +1,5 @@
- [build-system]
--requires = ["setuptools>=61.0"]
-+requires = ["setuptools>=78.1.1"]
- build-backend = "setuptools.build_meta"
- 
- [project]
-diff --git a/tools/dtoc/pyproject.toml b/tools/dtoc/pyproject.toml
-index 9f59788e616..cc96cf784c6 100644
---- a/tools/dtoc/pyproject.toml
-+++ b/tools/dtoc/pyproject.toml
-@@ -1,5 +1,5 @@
- [build-system]
--requires = ["setuptools>=61.0"]
-+requires = ["setuptools>=78.1.1"]
- build-backend = "setuptools.build_meta"
- 
- [project]
-diff --git a/tools/patman/pyproject.toml b/tools/patman/pyproject.toml
-index 06e169cdf48..91802c8cc27 100644
---- a/tools/patman/pyproject.toml
-+++ b/tools/patman/pyproject.toml
-@@ -1,5 +1,5 @@
- [build-system]
--requires = ["setuptools>=61.0"]
-+requires = ["setuptools>=78.1.1"]
- build-backend = "setuptools.build_meta"
- 
- [project]
-diff --git a/tools/u_boot_pylib/pyproject.toml b/tools/u_boot_pylib/pyproject.toml
-index ce2355084ac..a860d134551 100644
---- a/tools/u_boot_pylib/pyproject.toml
-+++ b/tools/u_boot_pylib/pyproject.toml
-@@ -1,5 +1,5 @@
- [build-system]
--requires = ["setuptools>=61.0"]
-+requires = ["setuptools>=78.1.1"]
- build-backend = "setuptools.build_meta"
- 
- [project]
--- 
-2.51.0
+On Tue, Dec 09, 2025 at 11:32:38PM +0100, Heinrich Schuchardt wrote:
 
+> CVE-2025-47273 describes a path traversal vulnerability.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+As this also keeps us in sync with tools/patman/requirements.txt:
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--wlXFByTO3obhMF50
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTij6AAKCRAr4qD1Cr/k
+CmQSAP9ma5VyvkPcjVCkW0rpOzU55mb22My2MhuKE8cBopuqHQD8DeegtCTbeNKT
+A7MIbxD8PNoIwMERioEzCckZeR68cA0=
+=P2+T
+-----END PGP SIGNATURE-----
+
+--wlXFByTO3obhMF50--
