@@ -4,144 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE5DD1CDC6
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 13:28:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28D4D3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 13:28:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15AB183935;
-	Tue,  9 Dec 2025 14:28:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+	by phobos.denx.de (Postfix) with ESMTP id 701A683BC4;
+	Tue,  9 Dec 2025 14:28:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="XZtYs9Xj";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="DxLJZLsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70E7883B81; Tue,  9 Dec 2025 10:56:48 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazolkn190130003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d20a::3])
+ id 6E4F3838A0; Tue,  9 Dec 2025 12:40:53 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 727AC8003E
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 10:56:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yuCVwsjX+asvyGPOwRLWLpYkV0PAUsUUXDd06sl1eoAO7j/Q31sF+xwMcgxyFO+US/5BjsOQEcHTzF48BfX1y9wcca3ylzGCB96OCRGGagf0+1538AY7+pqQQsEXfnkEje2Nx2oFOxHIg9IK1z0rnUAq3x4urhW+32gGbRJxjC2H90/hgv50GzWyuCBntszVWTWnU7zZuum+ErL17MwfHBahaiLHTjZY1vMT1I7g4Tyoucnjmxr4p4WgcK4DaZNyLM+/prUWine7Mitceu1o83MBM+Lnj7RoScuoQpiwTOKrtv60Gq6r5F6N2oMptQbmeVjO10lVjQEcsF+Q7PGjBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=psBrEK/5D/WEXc//TVue2oKi+QR2zPcrYkMudilzKmM=;
- b=HwMwg05ffP6YIl1iCazELcNXxTN79s1jiufimUDLXGmDOmSo43qsTYV97WwLHRqmaw6wPj8bXc3wyYWxrNvI53awkfFLMEIPMgMAuEM8dZNMyCh0Xu0YzlrqZr8Qb5Cpg1MzUm5EB3yAe3FD9BCtiBoJ6nHYyIQoIsnQjvchUfGRdTEnwKZqhW2Bwdqj6nH7m4I/tO8xkITKpgpajDTdIF5mEfOWGjh91g5VNqEICBV+rI0Zkgj0xiHielctEV/5iNCzSmEq9jsOZFkW22I4nA8C2SbCL3mYVb4xSsmYn/UBc33AxJNQV4QcUzyRSNkRGTz+jp2oDHG5hfTsVbnqYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=psBrEK/5D/WEXc//TVue2oKi+QR2zPcrYkMudilzKmM=;
- b=XZtYs9XjcMSwEiIYopiPY4zscReTBAyhQSB9e+XDoRzHvT/Xdq4UiUcnrl/G3sL2MIvrKi83Bg9cmYsh8XXAa6XXTSJW7M9fSLBSkxYd75YMSXWZX/f2fAxxwZVCPDR25HxlGX3LRF61siqWzXvqZ52QoRgYepQyiZPVuBdpY5iw+OLIF3zU0PD0MKUV24NdWue+FExKYYKy1ONCqlbBJDacYJLqzTRkrg/WTDjvK/nyWh51wn0j8+FMYQuYbO2T1jFsmp2H0dtjyHQ9SwetT1D0qe/x3HAEwFLIc//p4Gdj6HaNznXNH92Ih0+UZyPBvDRiOekBT/ZMupdycrxPLQ==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- PA4P194MB1069.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:c3::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.14; Tue, 9 Dec 2025 09:56:45 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9388.003; Tue, 9 Dec 2025
- 09:56:43 +0000
-Message-ID: <BESP194MB28058C540F0C3D28F4D08541DAA3A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Tue, 9 Dec 2025 10:56:40 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] mtd: spi: Add missing free in sf_get_bootflow
-To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PA7P264CA0248.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:371::14) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <e164ef41-efc1-4fdf-b5ed-e86fe9d4f8c4@outlook.fr>
+ by phobos.denx.de (Postfix) with ESMTPS id F1A518312A
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 12:40:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=431f43551=Jamie.Gibbons@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1765280450; x=1796816450;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=cfSS0JvUVWc2agOpQJN4cEBJcDFJ9dMdxRYUirAV2JM=;
+ b=DxLJZLszINvFvK0BptYqrSBDLRR/yIr3x/fepWDUfrod0P+ZeKwQzz/8
+ NQy4uJ8sctmxxQuRWCcw/w0hne3RgaNjVVxbCO0gxCjDRMyXdH8MC2WbQ
+ AuhHvAF/Ik+2iJc9KFHRd/j/heRjbHV4J8yi9OPbyqDwxc32JUGaD6rXO
+ bmXqvMsSLZpioZ6TSBrslSE7f5Ob82//SV1sj3wYk8l6T9FgFS4T0x0Su
+ UdDKVNb+F6l2XqLQtN0WsSUXGIYVJzlGJkU+vpzzvGjTjtwVxfjth2HcB
+ LNhBLnYG9eVG1guvT7chpmXpv/+n+k5jU24vfYDw4pQPcINE1dJfJeYIh A==;
+X-CSE-ConnectionGUID: XmyoGan4QuKcmigUJnxIUw==
+X-CSE-MsgGUID: Uw74RWR2RjqqCI71BDcyXA==
+X-IronPort-AV: E=Sophos;i="6.20,261,1758610800"; d="scan'208";a="217599347"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 09 Dec 2025 04:40:48 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Tue, 9 Dec 2025 04:40:17 -0700
+Received: from jamie-dev.microchip.com (10.10.85.11) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
+ 15.1.2507.58 via Frontend Transport; Tue, 9 Dec 2025 04:40:15 -0700
+From: Jamie Gibbons <jamie.gibbons@microchip.com>
+To: <u-boot@lists.denx.de>
+CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
+ <valentina.fernandezalanis@microchip.com>, Tom Rini <trini@konsulko.com>, Leo
+ <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, Yao Zi
+ <ziyao@disroot.org>, Junhui Liu <junhui.liu@pigmoral.tech>, Cyril Jean
+ <cyril.jean@microchip.com>, <jamie.gibbons@microchip.com>
+Subject: [PATCH] riscv: Add support for BeagleV-Fire
+Date: Tue, 9 Dec 2025 11:45:21 +0000
+Message-ID: <20251209114521.164647-1-jamie.gibbons@microchip.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|PA4P194MB1069:EE_
-X-MS-Office365-Filtering-Correlation-Id: 608efe71-2091-48e8-8b27-08de370941de
-X-MS-Exchange-SLBlob-MailProps: Cq7lScuPrnr9cOglUl1urTSFBsjx1OD0WzusccMzPyPe6gR5xzcBZFFPD49HVF+HqavBXB76gHHtVoVW9sRDD31cCgAxLD6IEnOaLazxBI/xMGB+KqbibYX891ydQxfjQsbl+L5LK4HNRxV8M3nnxFsh+I/FEeLpAIQvOYQlniPzAAJaUIpbGJB7ml+udKdNG5NukLznpflV/YzCNiIOHWrBK7a1AQsI2/7Ulms/8wMmeJz8yLHTWaI4R/QVWjyFiB7KRAdPOrUDNbltAf6uRwEf/7UfQcaj/6VqMtqvC0xA8IIg0lB/7YqNxPjFu7geCZn5IIAoMs5sePu1uuB0DtvYDkw6iFqQdmNwEUiLa8844w2XDMHrbHi8u3huWCKUyWxQN7MNzbd6vPhV/IN4kVzorinGXqhnD497Fdm15g+9UmYkpqcGwGduVvZu2yP+LK04bGdVs1YAu4hqgxO6ojF7DVttsu1b6wpOEV0PR+FQtz5YOcXr/FdspqNPhVf89ZQrpdpSOM7UWsi4fme/qlptF4xD4FeJ212q1gafkL76qSgdhXn5Cg/zKumVO54Y6ZzJRSHqajIcHmTwiDLNNfTuycgbOPUyaAzvX3vULRsFAW0broz6GMiU3M1l3tmmaAuRqDnih6K2W8a/zyEROiC0KT8UMQbSCi98BJHQ2L4NlEscgDDt5vDinsGfEr4/LmTnFm/z7W8Nrx3jpYbvRkjTGw7S/f8HL2+L7B315WZyjeFzVQQroqeHmNin7Ge4m6lMMh6Ix9Y=
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5072599009|15080799012|6090799003|21061999006|5062599005|8060799015|23021999003|19110799012|41001999006|461199028|53005399003|40105399003|3412199025|440099028|11031999003|12091999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SGUxeEN3Y3pIN0RmY0ZDYnU2elJYa21Uc2JUWXA4bytVeHh4K3ZNR0RyQ2RQ?=
- =?utf-8?B?cFBxUzdUZUUzMUl2VU1pbzhTU1FRMitqbjBVNG9RamRZMjg2bTVlSFpvb1RI?=
- =?utf-8?B?RHlaVTRScS9LSTd3S09zVVZRcjk3K0JSalRkN2JscmVVTlFtM0t5OWdwZ0Nt?=
- =?utf-8?B?VDdQY0tXZXkxNmlaMkkwWWpDSmw5OUlEbVJ6bzZiTnBFdEJmb0p2ckNUVEFU?=
- =?utf-8?B?cHJzK0FtKzNyZEJsaG9UVkxjajVDQ3hJVTg2K09TdUlNMEpQUDRiV0IyQWVq?=
- =?utf-8?B?RmVaSWJDMG9yTkZEeUZuVmlVUWplUTIrMzBQZzBWTHdITjZRMWpqQUQ1SHZS?=
- =?utf-8?B?UGtzdTZnNnpUbFNOVkZpcFJXRU50SXV1VVFCWEpndTJOOFY2aFA5QWdtN3Rs?=
- =?utf-8?B?eTMyMkRkTE1xZUlLMm1OYlFUYytqRE9zNWdzQ1B1V0ZwcmZhUDNZaUVYeXBy?=
- =?utf-8?B?aXJuN3VmNkJYK0RHS1VyQ0xqaDkwSVRnYXcrTnlBYlhuMXVjWHdSdTBvRXVn?=
- =?utf-8?B?YlQzbmFuZjRxQ1ArTTRFSzFjcUQ0Rm01dnZnbHphdnRuQlREMDRPWFlndnY3?=
- =?utf-8?B?MGVhR2l5WW5KOW5KNFNJWUZDS3BZK0R2ZlVHb1lxVDBnVmFMZ3N3MUFJTndL?=
- =?utf-8?B?UXRDcitrQTBXMWlMZVBZekhLN0w3VUg5azVxd2xQUkdNWGpKb0RqajZhRjRv?=
- =?utf-8?B?VFlPc3hGMHNBZlRlZW5KUkJCUGJWbUhubTE1SHkwMFVvbVFFUVRveGhLM0VG?=
- =?utf-8?B?dWNHRHpseCtHUlJkU21PSkNvdXFnQkFQdk1nZGZjMms4UE1wOTB6cFhZWmhT?=
- =?utf-8?B?b2RoVUhZQ2pXcjlndFdtYlJvOW1TTHNrclVCRExxREZvVmJhZnpZenR2MGhj?=
- =?utf-8?B?VzlRM2lZdDcyZk5LUXZzcHVydWtoSnE1U0NwbXhFOTRqc28rdzJEbzJ0VTF2?=
- =?utf-8?B?dmRIMm1pNjdSYTBCR2xmYUZMaHk4UWFXVFp0OHJuaXJpUE94R2I3a3c0VGw5?=
- =?utf-8?B?cjBmREovSHFIclM0QTFVWmcwWkZjYTYzTnlWbTlOa2k5bmVDWFhUT0FKTU81?=
- =?utf-8?B?WHFjNjBhS01sZXk0MUlHN1c3OWMvVkUwb21uSC9mc0JuTWF4N1dnRFJnMkVY?=
- =?utf-8?B?MHB4emxQOUE3V0FTS2xoblBwV0RteFZ1RmQrd2phM3FxWTlzV2RDQ0JacE9r?=
- =?utf-8?B?UHJRS0JrWUs0RTFBa0NDamR3czl4Q2MwQkVKYjk5QmhYbHVzOWNuTk56VFAr?=
- =?utf-8?B?bGs0cjJDMHdQUXIxNkdNdmNoTnhCeVdqTS9rU29DbWo4UmZGa0hHcHloMGpn?=
- =?utf-8?B?K3NzMTB2Q0wrU1drN2o1NUllMUpwZVMrYkpsa21mdnhycjV3ZW8yNVNjSVl3?=
- =?utf-8?B?bVNoWHk2VDF5bURGNDhtT3RweVMwNTVIRVlvQ3NVZG9QdjhXZ3RyQ21odmJm?=
- =?utf-8?B?S2ZiWjdLYmFBTGJtUnBQbFlaUWpzWE9IV2VBWi85OHdCNWdpUE5odWJLTjFn?=
- =?utf-8?B?Y0o5T0xXVy93d3dhNEJGVzdHbFZLUHFKM3B6cm1pVFl2azdGd09qV3FxSVg2?=
- =?utf-8?B?UzdLMndNa21COG03bkpsbkxPZU9MNzZZcGl4aWNuYkZOblhMRE83anI3UWR5?=
- =?utf-8?B?Q0RYZDNPKzFWQmpjRHVZdXpYbTNsbHZRK3YzZlZia1RrbnJ2UlpnYy9YMDVW?=
- =?utf-8?B?dkw0Q2FyK09FdUZYaUZnNjlYL01uajBKNGtncHhyMTM0a2hnb1lqWlhOancr?=
- =?utf-8?B?N1dhVndFdkZzcDlXUnR5N05qVkUzSmZ6WkZJWjlCM2laNEZSWlNnYk5ZU3kr?=
- =?utf-8?Q?CAaqTD7vTO3n9WJOuiZ2N9RNiq5QqlI1HXhHI=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Vlp6KzdIRm9pUENiN0J1Uytua3NFUTRkQU1vV0tocUlhenZDKzZhL2pRa3NW?=
- =?utf-8?B?NjBnMG1BT0RNNHRyVHJ0TkxKLzQ4a0hKdzh0R1hXVC9kQU5CRXRPN3NjanRi?=
- =?utf-8?B?aldSQmhjNWtOVTluZHFyRTFZMlI0ZU9rOG1Ld0M0ZWFHY0xNZGRpN2tZVUlJ?=
- =?utf-8?B?a01nYnBhbXY5OWFsMVE0QWdBL3JLSG1VY3B6NGNUNjFMZnFrQStxRlVjWnJ0?=
- =?utf-8?B?TlUzZHg0Z1lTUUkzR2ZHODh1NytYWlpIbHJMVXFkRzBhMFVxTUh3QXk5YnFs?=
- =?utf-8?B?U2lVN3pHVVN1WFhJQmFBV2VIRndnTFBzU2t0MGl0amVqUC9QMjRDR1BXdXR4?=
- =?utf-8?B?eE9EZERSN3BGVnNRZjlibFF1WUhKS0d0dnM0elhtMGM5YkZSZjI5MGtSeXFH?=
- =?utf-8?B?YzFwU0Fha3N1TEYrME5CTjlEK0xqMUl2R3BMMkF3WXJ3YURrVkNjWGF3S3VZ?=
- =?utf-8?B?eWttVmRBcnVGcE1hS1NiVWVaS3JlOFNJRlBiVjhTMUNvNmJTdmJUcnNSRkw3?=
- =?utf-8?B?UE5MeEw5aklWQUlNVWV2OEZ5Q0N5SC9RUUY0QkduUTVnaEFrcVJtUUtneDJY?=
- =?utf-8?B?UC92d0pyRHhSekxpVlgyVHJhamNzMDE0Z1lsS2dNWGZmWUE2VkZoSFRZeDBm?=
- =?utf-8?B?cmN5TkxhVFhkU1Qwdmg2SHYvUmN4ZmcxOFd0bG1Sek5ORUplMjhqbmUxbHNl?=
- =?utf-8?B?aWFYdXU1cE9lem1NUFhlbUdYVGgzcGs1MWxyU1k1cHNCZ2lpVEtYdndjSm1Z?=
- =?utf-8?B?Z2Nyb1R6MHVhT0lZQmRPNk1XcjhTQnFFWWphSmoxWEpoVml6L3JiY1B6U1Ji?=
- =?utf-8?B?UmdiWE10cUJ2bUJobEs0bEhEUXFMWXNTaWJueXQ3UUhCcGFuSlVIUHJBMWNt?=
- =?utf-8?B?YWpRdEVwRWJlTHRqbzFVMmdkbWlpMjkvTTVTaWxxUGNXWng4YUVIQjJZeHoy?=
- =?utf-8?B?RTdmVDJDRzBCMFFLcE9QYmcveUFFaTBudHFEQkUwa2gwczBaZXVGZlB3SWc5?=
- =?utf-8?B?Ymp1S1dYajhxZEJPcWFDQjhkZ2REaDhFYm9KYjAyc1dtOEp3N2daTlFCSXE2?=
- =?utf-8?B?a3BwMkttREpQY1hGZ0h1Rk16cjlRaGdYcTIwdnYrMzFBUWR0UGpUWVViNzhG?=
- =?utf-8?B?bTdOaDRLdWl0Z1N2ZVdmYWNuOWZSek5jc2JhdVFqZjFBVDVHZVFQNUNYVmR2?=
- =?utf-8?B?Rm92VEJuc29mL2w5aGs2V2pXNHVHSFVObWtDeUpPalJHd05GS1B5QWZVQk1S?=
- =?utf-8?B?c2dJNDcwNlFiRExBNXJtcmRoTFM3TU8vMHJWbkZFM0N2WkpEeEk1aGxsU1Ro?=
- =?utf-8?B?NEYwSFlreERFUW9mckhpZlhnYnJZZUpaenlibW9lMTZSOFVGQnRGNzl2eXd0?=
- =?utf-8?B?NTd2aXVNcC9TSnZoc1c1aysvcExkb3BFY1ZKbjhnVDNXeEpGZGVRbk5zd2RD?=
- =?utf-8?B?S1loVGFENytJdmlZRjNDZ3VhNHJpdlRFazVmVVJxK2NOVmEzd2h6eW5XRkpt?=
- =?utf-8?B?RUpSOUlDZzAwRkhYOXNycDh6U2t5aU9hZE9QYTcyejBORUVzcnQ1WDZuUDJo?=
- =?utf-8?B?MnUxMWErUjZTTk9qbmVaN0piVHRtMGU4NC9EV01laXB4MU1LbDZYNnJtU29U?=
- =?utf-8?Q?lx1CgY8TodYsbeemlRfLsCXt4ruFpnRWH5oHx2BJBzg8=3D?=
-X-OriginatorOrg: sct-15-20-8534-20-msonline-outlook-9bdce.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 608efe71-2091-48e8-8b27-08de370941de
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 09:56:43.7531 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4P194MB1069
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Mailman-Approved-At: Tue, 09 Dec 2025 14:28:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -159,29 +83,342 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Free buf if spi_flash_read_dm fails.
+Bring U-Boot support for the BeagleV-Fire by adding a defconfig and
+supporting board files etc.
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
+Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 ---
- drivers/mtd/spi/sf_bootdev.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ arch/riscv/Kconfig                       |   4 +
+ board/beagle/beaglev_fire/Kconfig        |  39 ++++++++
+ board/beagle/beaglev_fire/MAINTAINERS    |   7 ++
+ board/beagle/beaglev_fire/Makefile       |   6 ++
+ board/beagle/beaglev_fire/beaglev_fire.c | 117 +++++++++++++++++++++++
+ configs/beaglev_fire_defconfig           |  29 ++++++
+ include/configs/beaglev_fire.h           |  57 +++++++++++
+ 7 files changed, 259 insertions(+)
+ create mode 100644 board/beagle/beaglev_fire/Kconfig
+ create mode 100644 board/beagle/beaglev_fire/MAINTAINERS
+ create mode 100644 board/beagle/beaglev_fire/Makefile
+ create mode 100644 board/beagle/beaglev_fire/beaglev_fire.c
+ create mode 100644 configs/beaglev_fire_defconfig
+ create mode 100644 include/configs/beaglev_fire.h
 
-diff --git a/drivers/mtd/spi/sf_bootdev.c b/drivers/mtd/spi/sf_bootdev.c
-index 017a74a3016..720faf51a1f 100644
---- a/drivers/mtd/spi/sf_bootdev.c
-+++ b/drivers/mtd/spi/sf_bootdev.c
-@@ -35,8 +35,10 @@ static int sf_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 265b5320777..dd98dee8eab 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -17,6 +17,9 @@ config TARGET_ANDES_VOYAGER
+ config TARGET_BANANAPI_F3
+ 	bool "Support BananaPi F3 Board"
  
- 	ret = spi_flash_read_dm(sf, env_get_hex("script_offset_f", 0),
- 				size, buf);
--	if (ret)
++config TARGET_BEAGLEBOARD_BEAGLEVFIRE
++	bool "Support BeagleBoard BeagleV-Fire Board (based on Microchip MPFS)"
++
+ config TARGET_K230_CANMV
+ 	bool "Support K230 CanMV Board"
+ 
+@@ -106,6 +109,7 @@ config SPL_ZERO_MEM_BEFORE_USE
+ source "board/andestech/ae350/Kconfig"
+ source "board/andestech/voyager/Kconfig"
+ source "board/aspeed/ibex_ast2700/Kconfig"
++source "board/beagle/beaglev_fire/Kconfig"
+ source "board/canaan/k230_canmv/Kconfig"
+ source "board/emulation/qemu-riscv/Kconfig"
+ source "board/microchip/mpfs_generic/Kconfig"
+diff --git a/board/beagle/beaglev_fire/Kconfig b/board/beagle/beaglev_fire/Kconfig
+new file mode 100644
+index 00000000000..279d38b3aa9
+--- /dev/null
++++ b/board/beagle/beaglev_fire/Kconfig
+@@ -0,0 +1,39 @@
++if TARGET_BEAGLEBOARD_BEAGLEVFIRE
++
++config SYS_BOARD
++	default "beaglev_fire"
++
++config SYS_VENDOR
++	default "beagle"
++
++config SYS_CPU
++	default "mpfs"
++
++config SYS_CONFIG_NAME
++	default "beaglev_fire"
++
++config TEXT_BASE
++	default 0x80000000 if !RISCV_SMODE
++	default 0x80200000 if RISCV_SMODE
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select MICROCHIP_MPFS
++	select BOARD_EARLY_INIT_F
++	select BOARD_LATE_INIT
++	imply SMP
++	imply CMD_DHCP
++	imply CMD_EXT2
++	imply CMD_EXT4
++	imply CMD_FAT
++	imply CMD_FS_GENERIC
++	imply CMD_NET
++	imply CMD_PING
++	imply CMD_MMC
++	imply DOS_PARTITION
++	imply EFI_PARTITION
++	imply IP_DYN
++	imply ISO_PARTITION
++	imply PHY_LIB
++	imply PHY_VITESSE
++endif
+diff --git a/board/beagle/beaglev_fire/MAINTAINERS b/board/beagle/beaglev_fire/MAINTAINERS
+new file mode 100644
+index 00000000000..a5dad93ee99
+--- /dev/null
++++ b/board/beagle/beaglev_fire/MAINTAINERS
+@@ -0,0 +1,7 @@
++BeagleBoard MPFS BeagleV-Fire
++M:	Cyril Jean <cyril.jean@microchip.com>
++M:	Jamie Gibbons <jamie.gibbons@microchip.com>
++S:	Maintained
++F:	board/beagle/beaglev_fire/
++F:	include/configs/beaglev_fire.h
++F:	configs/beaglev_fire_defconfig
+\ No newline at end of file
+diff --git a/board/beagle/beaglev_fire/Makefile b/board/beagle/beaglev_fire/Makefile
+new file mode 100644
+index 00000000000..a4109a8aad4
+--- /dev/null
++++ b/board/beagle/beaglev_fire/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2023 Microchip Technology Inc.
++#
++
++obj-y	+= beaglev_fire.o
+\ No newline at end of file
+diff --git a/board/beagle/beaglev_fire/beaglev_fire.c b/board/beagle/beaglev_fire/beaglev_fire.c
+new file mode 100644
+index 00000000000..b2f18c455b7
+--- /dev/null
++++ b/board/beagle/beaglev_fire/beaglev_fire.c
+@@ -0,0 +1,117 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2019-2023 Microchip Technology Inc.
++ */
++
++#include <dm.h>
++#include <dm/devres.h>
++#include <env.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <linux/compat.h>
++#include <mpfs-mailbox.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define MPFS_SYSREG_SOFT_RESET	((unsigned int *)0x20002088)
++#define PERIPH_RESET_VALUE		0x800001e8u
++
++#if IS_ENABLED(CONFIG_MPFS_SYSCONTROLLER)
++static unsigned char mac_addr[6];
++#endif
++
++int board_init(void)
++{
++	/* For now nothing to do here. */
++
++	return 0;
++}
++
++int board_early_init_f(void)
++{
++	unsigned int val;
++
++	/* Reset uart, mmc peripheral */
++	val = readl(MPFS_SYSREG_SOFT_RESET);
++	val = (val & ~(PERIPH_RESET_VALUE));
++	writel(val, MPFS_SYSREG_SOFT_RESET);
++
++	return 0;
++}
++
++int board_late_init(void)
++{
++#if IS_ENABLED(CONFIG_MPFS_SYSCONTROLLER)
++	u32 ret;
++	int node;
++	u8 device_serial_number[16] = {0};
++	void *blob = (void *)gd->fdt_blob;
++	struct udevice *dev;
++	struct mpfs_sys_serv *sys_serv_priv;
++
++	ret = uclass_get_device_by_name(UCLASS_MISC, "syscontroller", &dev);
 +	if (ret) {
-+		free(buf);
- 		return log_msg_ret("cmd", -EINVAL);
++		debug("%s: system controller setup failed\n", __func__);
++		return ret;
 +	}
- 	bflow->state = BOOTFLOWST_MEDIA;
- 
- 	ret = bootmeth_set_bootflow(bflow->method, bflow, buf, size);
++
++	sys_serv_priv = devm_kzalloc(dev, sizeof(*sys_serv_priv), GFP_KERNEL);
++	if (!sys_serv_priv)
++		return -ENOMEM;
++
++	sys_serv_priv->dev = dev;
++
++	sys_serv_priv->sys_controller = mpfs_syscontroller_get(dev);
++	ret = IS_ERR(sys_serv_priv->sys_controller);
++	if (ret) {
++		debug("%s:  Failed to register system controller sub device ret=%d\n", __func__, ret);
++		return -ENODEV;
++	}
++
++	ret = mpfs_syscontroller_read_sernum(sys_serv_priv, device_serial_number);
++	if (ret) {
++		printf("Cannot read device serial number\n");
++		return -EINVAL;
++	}
++
++	/* Update MAC address with device serial number */
++	mac_addr[0] = 0x00;
++	mac_addr[1] = 0x04;
++	mac_addr[2] = 0xA3;
++	mac_addr[3] = device_serial_number[2];
++	mac_addr[4] = device_serial_number[1];
++	mac_addr[5] = device_serial_number[0];
++
++	node = fdt_path_offset(blob, "/soc/ethernet@20110000");
++	if (node >= 0) {
++		ret = fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
++		if (ret) {
++			printf("Error setting local-mac-address property for ethernet@20110000\n");
++			return -ENODEV;
++		}
++	}
++
++	mpfs_syscontroller_process_dtbo(sys_serv_priv);
++#endif
++
++	return 0;
++}
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++#if IS_ENABLED(CONFIG_MPFS_SYSCONTROLLER)
++	u32 ret;
++	int node;
++
++	node = fdt_path_offset(blob, "/soc/ethernet@20110000");
++	if (node >= 0) {
++		ret = fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
++		if (ret) {
++			printf("Error setting local-mac-address property for ethernet@20110000\n");
++			return -ENODEV;
++		}
++	}
++#endif
++
++	return 0;
++}
+\ No newline at end of file
+diff --git a/configs/beaglev_fire_defconfig b/configs/beaglev_fire_defconfig
+new file mode 100644
+index 00000000000..c476fb103c5
+--- /dev/null
++++ b/configs/beaglev_fire_defconfig
+@@ -0,0 +1,29 @@
++CONFIG_RISCV=y
++CONFIG_SYS_MALLOC_LEN=0x800000
++CONFIG_SYS_MALLOC_F_LEN=0x2000
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
++CONFIG_ENV_SIZE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="microchip/mpfs-beaglev-fire"
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_LOAD_ADDR=0x80200000
++CONFIG_TARGET_BEAGLEBOARD_BEAGLEVFIRE=y
++CONFIG_ARCH_RV64I=y
++CONFIG_RISCV_SMODE=y
++CONFIG_FIT=y
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++CONFIG_SYS_CBSIZE=256
++CONFIG_SYS_PBSIZE=282
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_OVERWRITE_ETHADDR_ONCE=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_SYSRESET=y
++CONFIG_MPFS_GPIO=y
++CONFIG_CMD_GPIO=y
++CONFIG_DM_GPIO=y
++CONFIG_MMC_SPI=y
+diff --git a/include/configs/beaglev_fire.h b/include/configs/beaglev_fire.h
+new file mode 100644
+index 00000000000..e3ee0f02f2d
+--- /dev/null
++++ b/include/configs/beaglev_fire.h
+@@ -0,0 +1,57 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2023 Microchip Technology Inc.
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++#include <linux/sizes.h>
++
++#define CFG_SYS_SDRAM_BASE       0x80000000
++
++/* Environment options */
++
++#if defined(CONFIG_CMD_DHCP)
++#define BOOT_TARGET_DEVICES_DHCP(func)	func(DHCP, dhcp, na)
++#else
++#define BOOT_TARGET_DEVICES_DHCP(func)
++#endif
++
++#if defined(CONFIG_CMD_MMC)
++#define BOOT_TARGET_DEVICES_MMC(func)	func(MMC, mmc, 0)
++#else
++#define BOOT_TARGET_DEVICES_MMC(func)
++#endif
++
++#define BOOT_TARGET_DEVICES(func) \
++	BOOT_TARGET_DEVICES_MMC(func)\
++	BOOT_TARGET_DEVICES_DHCP(func)
++
++#define BOOTENV_DESIGN_OVERLAYS \
++	"design_overlays=" \
++	"if test -n ${no_of_overlays}; then " \
++		"setenv inc 1; " \
++		"setenv idx 0; " \
++		"fdt resize ${dtbo_size}; " \
++		"while test $idx -ne ${no_of_overlays}; do " \
++			"setenv dtbo_name dtbo_image${idx}; " \
++			"setenv fdt_cmd \"fdt apply $\"$dtbo_name; " \
++			"run fdt_cmd; " \
++			"setexpr idx $inc + $idx; " \
++		"done; " \
++	"fi;\0 " \
++
++#include <config_distro_bootcmd.h>
++
++#define CFG_EXTRA_ENV_SETTINGS \
++	"bootm_size=0x10000000\0" \
++	"kernel_addr_r=0x80200000\0" \
++	"fdt_addr_r=0x8a000000\0" \
++	"fdtoverlay_addr_r=0x8a080000\0" \
++	"ramdisk_addr_r=0x8aa00000\0" \
++	"scriptaddr=0x8e000000\0" \
++	BOOTENV_DESIGN_OVERLAYS \
++	BOOTENV \
++
++#endif /* __CONFIG_H */
 -- 
 2.43.0
 
