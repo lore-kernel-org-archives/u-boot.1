@@ -4,176 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079D4D3B7E2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 02:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA1ED3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 02:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C4983C29;
-	Tue,  9 Dec 2025 03:48:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id E675B83B91;
+	Tue,  9 Dec 2025 03:57:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="xTvR46q/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ktzo9dd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3D9783C28; Tue,  9 Dec 2025 03:48:32 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3053483BBE; Tue,  9 Dec 2025 03:57:32 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3EE083C4B
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 03:48:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C0A283B81
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 03:57:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UxtEh+7sh9xvpE81SXZ9la62fRscW6VtO0Vy6sFRpeJ50k4veEmDYENUrXn4DKJJywyWRX+JE8kjHE9aCYLhq0/ZPzsTgOoIf3+U/aLZUxBib2g9GhGFbDKDHxt6o5AkoCuezoEaD/EZ2pZbJVvyJTquo25Gi3zEs36kD0ZScpMKZWlLLVeySNwEu//Q24tKBOxIVYJuDxhaKaiTZXeaVVGFYMgLwT0PLUBC1PES71SFgdCFPlyO4sjHX4763XZ6XMGq9hwPrMz+KqpevhALkHxRQUTGzQYRWL4Nwhgyw5NGkTqBIuB8WZ+ncnZ2EVIFoZQwnSvnoqKTQLrGELbEAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UaM7uBHDip57qTjt2fxcGSVVoHq7BvQR3Q6/m0kpEGM=;
- b=OUCmbaz70Kp1v1YlhG3ePd/XI09I4zAZpC9s4+yVDUmadcqVzpyOGxCfJBZYzjdR8rR5v0WF+onof2gcNl+eTzpGmJmXyH4Ch600jzqHxCfJm0V4HgKkEa382Ib8a+cqrVItVAyIsgmaDfX9n8cI9V7xrPnzi+oOlQD5qsuFYHKs7dbOHu8zYs1YWRl9ARA+R6oXd7KPWZzcySckiUnTsXDZrFPR/fWYHKxeJvrVpO3rDsDt/RfaTsfZHGt5tFyxCBEOo75McRU1jK1IoUi9s8Wd+3f2BP31uba82RHfXA9/f0gU+wq1N5K1rsOhgAghhMxfojGRyRSvovXjxLDjNw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UaM7uBHDip57qTjt2fxcGSVVoHq7BvQR3Q6/m0kpEGM=;
- b=xTvR46q/tQ2NU3KkInejrh3uR7iZMU1zGuWGtTK+IsEonB7T1J/qaP9Sij+Fsri1iLQN9D0ruUvPh3HWA9hnh36BIj9GFJgy7kFDpKOEv4KTrSwFa9GQE5lDx+thsmqPaHFW5eYpkTCOiKctGypJopQET0qoq3+UDZ05tIJ4lUYSAo+zNOrjJJ5BOcgfG5ICTe8Qh0Yl/gyGrhCTe+hxA8exyb+8ITy/i3M+Cn5Zl5mYtKZ+58zqXfakTNtmM27l2g9PorLONQpmeAaoSgKylT8MiPh5HKV5sr9Esv7jZGpYXCm+5VQv2KPhDe/utT8jH0XwP1Cste90e9/FytSHpA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by DU4PR04MB11897.eurprd04.prod.outlook.com (2603:10a6:10:61d::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.11; Tue, 9 Dec
- 2025 02:48:29 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9388.013; Tue, 9 Dec 2025
- 02:48:28 +0000
-From: alice.guo@oss.nxp.com
-Date: Tue, 09 Dec 2025 10:47:12 +0800
-Subject: [PATCH v2 5/5] imx8ulp_evk: Enable USB controller at 0x29920000 in
- host mode
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251209-imx8ulp-v1-5-97e76ed1d967@nxp.com>
-References: <20251209-imx8ulp-v1-0-97e76ed1d967@nxp.com>
-In-Reply-To: <20251209-imx8ulp-v1-0-97e76ed1d967@nxp.com>
-To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Marek Vasut <marex@denx.de>, Marek Vasut <marek.vasut@mailbox.org>, 
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Stefano Babic <sbabic@nabladev.com>, Lukasz Majewski <lukma@denx.de>, 
- David Zang <davidzangcs@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: SG2PR02CA0098.apcprd02.prod.outlook.com
- (2603:1096:4:92::14) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-786a822e73aso49962317b3.3
+ for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 18:57:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1765249048; x=1765853848; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ymxhjtm18qn6YcNLrEejZMtSSfIc2wu2L8XqVOaOTks=;
+ b=Ktzo9dd+1Z9ypAewIZ2h9RBQuyGKrj8EhIZHVim6bpp3KzHIrKaOleE1l1ssZCNX4B
+ JNDBLc7XkrnKMRijDvysFTWCbfKjkwfbrESG64UDD6hffiX3bPL/qq8LR1fhuCRk8ZR5
+ wlH8kD0ymJ9bXW9eHb8BOU5iCbikfH+7onMBq8WkYvQDY3Su9BJf+3nnD7Bb1HEGhJuG
+ lEWvRdqpNIfY+CCiFcbmCaEN/unhzr1RVfDigufjRV7n+SX8CaeC3N4Ag8+WAmkPGgsR
+ cROVhDZGds0tkkZSY0l9Oufhzy9Eb4d88En+EFzwT7krV0G0vfGxt0HV9EDJwm9MberB
+ 8bpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765249048; x=1765853848;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ymxhjtm18qn6YcNLrEejZMtSSfIc2wu2L8XqVOaOTks=;
+ b=ZZTSgkG1KkTjGYasRelJAiUNTf1W4xxyKdwqtagVjXvRkdU8UWLJl3W8+yh8JRw/Yj
+ ZQd+CjnS/N20PdO6McGF3fgnpphB6I7mmAZNZ1EfZPr3C3Ix3iMGEsgbyH7bfgxeX6eX
+ 9ueDCOCSZMyDTb63JmdAFY9CzlljKjchj5FQsSh0bDDIvIUWWsHLdleaZUdoJZOF6tPK
+ YrO9DA10eR3ct5bpwbqLMTqzgM5IIpK/M/qTqH492PsgZNyaeus3d53/kIuYVYgQ7Jns
+ Usr3UlNhEciD1+GP3A4Oa9KJxwMXry0JOXWzY5t6R7LC2iaIocmKSA/HckypQRlfhU9g
+ JKFw==
+X-Gm-Message-State: AOJu0YxFBEfs0AHNXIazQ++CYsmjcRll+FwKwAPdTEjzFJ1uqydUIAbu
+ eHTOgRw3qvnCnk8Pm9DzOSnxiU+rY8BY61QDtL4P/uNMy7o4bb79M4YL
+X-Gm-Gg: ASbGncspWiwbgPwjcPa/9hlkmIdADqrjEtkPyKmyKkKmVvudOlFQaN+bvt+4KxaTfKG
+ 9mVa0PvlWEyBP4sG0yo43US4VowdGQVZxLcOLhNWMk3Woi3GymT+ZjmQb0982z0JYBnwZTWglOF
+ fekkp81LfdeDmCzxvoAqkHxZ7HPCvZJxcv5U92PHELMn+MzQSMqAXFKX4J331eylyJbZ6/ylNkN
+ AhtZaFeF5n6Do/ozA/PBxoiKs6BFxeQL3c1v0BXvXKYx3DC9sdnWwORjH2NzbKbLss/mjfrghMm
+ KQDsp9uwPwMvGoTF/H4FF+lch5BrICA9mSb44z1nXJJ+TwC6YyMkX58QutuPw0Pq5salHtdMOhf
+ eBPLpFADi3GNgU2esx1SvcG9d/KIbuJZYddoztWWyZ2PKUWeDObl7Zp/oOj3tOcwEyL7BUIriVK
+ iuv4hG5OlRwFuykLABtQnVJLIg4x6Matl768263R3Lzd8TCqlVQ2qtc6yVyPUk1yzASrPMP/z1O
+ A==
+X-Google-Smtp-Source: AGHT+IH6tw39PVX8+LPkKIbNEIRNt5P21WNSfl6RLkKo7eP6+JigjCUMvTtEh3nD+jc5MriaovWL8g==
+X-Received: by 2002:a05:690c:6aca:b0:784:aec5:7042 with SMTP id
+ 00721157ae682-78c33c14aa4mr86873117b3.38.1765249048378; 
+ Mon, 08 Dec 2025 18:57:28 -0800 (PST)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-78c1b77942bsm54418787b3.27.2025.12.08.18.57.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Dec 2025 18:57:27 -0800 (PST)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tony Dinh <mibodhi@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Subject: [PATCH] Revert "drivers: scsi: fix inaccurate block count reporting
+ in scsi operations"
+Date: Mon,  8 Dec 2025 18:53:52 -0800
+Message-ID: <20251209025634.14466-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU4PR04MB11897:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7cd11f66-83c9-42ea-d978-08de36cd6eb9
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|1800799024|366016|376014|7416014|19092799006|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?R0hyNmxHSy9UVDdMMWpwYU02RzJSYk5NcGdnR01aVlVzempYWlRzWXc2R05K?=
- =?utf-8?B?Z1JhZHRqTEx3TlZVeGlLTzRsbTRLeEllTWpuN2lXbnlGR2FBaDVhbS9YQ2N3?=
- =?utf-8?B?MVlkN1p3cFhhQUlDekp4dnc3WlM2cENlVkZMRW9lYTZ0RHBBSWl5eDgvT3I3?=
- =?utf-8?B?bW1YOGJYUVo1MXpodjB3SEQ2TGs2TFVOSzVLQUpXVFIxbUJ2SGlUS2lJMUh1?=
- =?utf-8?B?M0czMUVSNE9wRENmbDF1Z1I0RDZ6N0JlaEpuWUJlbEFaRDBicTBvZ2oxektG?=
- =?utf-8?B?M3RyVHlDaURkVzl5QjY0TG1lYWh6T0FQaC8rUnViUlozdi9Nd1hLRWZ1QVRJ?=
- =?utf-8?B?amxRUFJRMjBJWUxWN01RZENneUZ2QnpVc3BwY3AwczBPTkcwOXdGVkxlT2U0?=
- =?utf-8?B?cWZ5d1p3RDFsR0dMVnMybEJJWHZlb2k4dzZKQjRFOFhiUnBKZHhsQVZybk1z?=
- =?utf-8?B?NHhJUEJnQW43M01qU3BraGd0N1BITnV1czdha1RXZVpWTDc2T2FuelhvOTBP?=
- =?utf-8?B?U2pVUXkyQ280WGFYL1llV1l1eTZidURGanRiQUEzeTJHNW9GaWdJQmVhTWIr?=
- =?utf-8?B?cjBzNFJ5NTRiOEF5WXJKcnEwU0pqMWNhSzRJaGUrNWFSTVZ0My9wdHZNa3dD?=
- =?utf-8?B?azBnTFgwcXk4Qm1tRjk2alNWeW9wVVIySVNsVCsxaVJtc1VCSWpyL0tYVVY5?=
- =?utf-8?B?S3drSHkwNDI5Y1pweDArTnlXdDJVN2VLNkZjWTRUNEkwaVNGeWlaSDJXYVFG?=
- =?utf-8?B?UW5uQ2h2UlpuTFlpdkljdGtTMGU2cVYrYjVaa0FDTjhaZlE1Tlp5djRoQjVS?=
- =?utf-8?B?bzR3LytUNjBXalUvSEU0Z0dzWVBETlZUcGtlNjJ4WTN1NjBEN3Fqd2RiaHpi?=
- =?utf-8?B?WkEwbzBETmhWUktqSFROU1o1d29WSlFjeGpkWDNBRlMzOStTUGREb2xGei8x?=
- =?utf-8?B?Wm5QS3hWdlcwQjhhRG10d2xoajVlNVN6dDQ2a0docU9aaHQ5QmhQZGV2ay9s?=
- =?utf-8?B?QkNKTTVUaW1idXVlZ3lMWnFYK0ZWaWZEWHM0c1RHNmcyR0VlSXBYTVlVVVo1?=
- =?utf-8?B?NTFtN2hKNFlrSUgrR2h2U1BlSnUxVlhzbzQwT3lmRDR0YTJLRGZEQXhXamNk?=
- =?utf-8?B?T2xWN2FIK3BneUxlVlgyb0lhK0VoR2t5cEhkS3JMUk9ZVHlqRWMwYUl4RGdN?=
- =?utf-8?B?RlJ4aHJHamxvZVlNS3M1dlFnbmQ2bWJZNGFOUUNqNkJuZ3RhaktpUWlvckdh?=
- =?utf-8?B?d0NWLzJwd0gvVXMrckJ2M29SZEJMclFaZWtvNVo3L2hCemNQQnBUQ1NYYit5?=
- =?utf-8?B?V3RtZUhkREE1NEVodzVZN1ExbVhrZDNnaEFoSllSNzB0eFpBUktIekhhZEVr?=
- =?utf-8?B?OFowSVg2SzdRRmNpTDYwZkNBcnZXSjByK01WS1A5NEp3aWVaVnRWTUNVODBz?=
- =?utf-8?B?amU3Wmg3eEw4cFhqb2FvQXozcXNpanoxL1VOQUtlVG01SXpNRnJSeDZuT1VH?=
- =?utf-8?B?UFJ5eW05VHFNT1FoWEduRGs1REdoUDREN3hwdVBTTCtqTm9FaXhiR2R2WG4y?=
- =?utf-8?B?cnV3MU9YcjYwa0YwNkVudGJKOWNkeGEwbmN5SHNwTzBqRDZXVlZWSkxuaW5G?=
- =?utf-8?B?d29PTkNYckppalhuRzM4TkQxUDFSbjdTcXYyRFVJOUJ5MmIzbEV0dFc1UFAv?=
- =?utf-8?B?ZUJiWUN4bGo5b0Z5dWNDTEU1NmJEMUxFd1hOejg4K2J1dFRaNVFlVmhQaHl2?=
- =?utf-8?B?Tm16U1lSelhXaXhpRTZlL3hkWkRGVFUyVzF5MGFYNU1zMllOVnpLbzMwYlRY?=
- =?utf-8?B?bzJ6c1BpQy9PTXdlbWtXN1JwemtPaWhBQUwxMExiV3JVaDdmNmVpV0xkZkov?=
- =?utf-8?B?VDJyclVtV0hVcktYUnVsdFhVRjVVYWErT3lHTitTUnJWZUZGdVZvSHdnaDhs?=
- =?utf-8?B?QSswQjVhSi9vWnowdjVMWFhUNSt3SHRyOXBEL3JQa1BtVHdyUTJ1WDhMc2Jq?=
- =?utf-8?B?bmhadUJQa05QU1hWUjMxSUZTZkVNcmNrcjBNRk5jYVBRK1MxbDByVzZ0YWRS?=
- =?utf-8?Q?bundtK?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(1800799024)(366016)(376014)(7416014)(19092799006)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eDQ5V2ZtSWtMQlR2ejhxa0dybkZxa3p1YUs2cmdTOGNUWFhBZXhFSGdaSEhL?=
- =?utf-8?B?VzBOVmRDcm1ickFwdi9SNGZVb2s0dnR6Wmlmc3IvV3hlaXkrRFkxQzZOQVF1?=
- =?utf-8?B?V0N1c3FWQWNYQWZ0SDdubHNqWnpST1NtNnF6eDhUTXVUUDlUdEVQZm51czM4?=
- =?utf-8?B?WWlSOEtubVpDYk8wbFBHR3BBMFBmT09oWkk5WndhZ1kxb2xjeklPbG1PblNk?=
- =?utf-8?B?TzlqRWhKUWwyMjRtT2VtQ2pMQm8yYnFCWk01YU1sdm9ma3JpMVY0ZmFPZWRo?=
- =?utf-8?B?YittMjdNQjVWOWc3Q0pCS2I4WkM4cFBsN3RQN2Z4azJVWFBmZUFZYURhZVA4?=
- =?utf-8?B?eFJPc3hrNEhNblFEbG5mNlFveVRqTlJmVmlZcUxLN244K0NDOXBNcCtxV3ZX?=
- =?utf-8?B?M2dKZisyMVZDUFVMK1RQOUFqdXFDRW1lREdxeUVzSjNNWmpCK1pSK2NFL2RL?=
- =?utf-8?B?TmFPaVVEVHBzOTMyRHNYa3NhTGE5N2hiWEZJLzFMbzI2YWc4Y1I5dkFkUDJU?=
- =?utf-8?B?UDEyRmpjUHFyRGJJc3J5S0hhTDh0dlBDL0tTNEJnL29UMjU5bmk0ZTFDWUNV?=
- =?utf-8?B?MW5mQlYvZWN2YjhBQ05HRzZrNHpaTjAveFRxVDBpajFBL3YzcERFZWtkVE1n?=
- =?utf-8?B?ZHIrSFRTRnBMbU5aV0Qyb1NBdlQ0OFVvc21aSXgvNUM2d3g4eUFiVnJDUjZr?=
- =?utf-8?B?emUrVlp6cmlxbmRUM0RDL0tnOG45S1ZjekY4dUFQL0V6cVovdnpWYlA1Wkgw?=
- =?utf-8?B?TUY3S21COG5mUWFkamczSHpmYU5ScTNHcHUzMXl2Nld3OXJZYVpBbE9iN2dJ?=
- =?utf-8?B?RTd0dDJGY3dlR09wQmR6dkhHMHNGQ0JNY3lTRGJoOGpVaVB1V0RGbnJPNU1O?=
- =?utf-8?B?TVRHT0RyTjdNRHZ0VXZFU04zeXY2QW1vcUlSWEEyNjhoS3craHZ6R00vZUg4?=
- =?utf-8?B?ZzBIWUZoaWNYbjZTTGkvcGdVTU9qSWgyM3gwcTlEVjEwRlNwcnh3RHVzMWUz?=
- =?utf-8?B?bW5nRklTd29yOFdNQVhGRzdaQmc5NWFFQzZiWlEyMXpSQllnQStZU3cwL0tM?=
- =?utf-8?B?SFRNWERJalhNTHhFYndMV05DMjV6Z0ZtWDdZRU00SE4wcHUyRjN4V0VWRmJm?=
- =?utf-8?B?NXExWDhtaklNWkZiTFZvUW5DT1BIR01ld2l1aUZraFRiUFFub2JBYzVDUVFk?=
- =?utf-8?B?Q1d1NzRSc1VvSjd5Q0pvYmZ5SG9FNjRPaTE0bzY3ejJTNS92Sm9vZ01pQmpW?=
- =?utf-8?B?OFVMMVF5WUJnZHdobFpyZytiRVhLTmNCa3RjVW1ZcGVkRDRlc0hod3lpcWtY?=
- =?utf-8?B?T2I1UEpCM0ptQUpXUzl1UWdLT3N4SFRNdHc2MDVEKzA2VHlmbUg1Q3dOajI4?=
- =?utf-8?B?WDNCa3FFV1Rlam1UV3VGai9WOHhweEdzNW1FOXliL1VJUlZLMzlsNDV2Q09p?=
- =?utf-8?B?STlwVkNuYlFkaExTaXBsUWs4OGd6Q1FIeTkyWHVYMmlBRlhGeURSaStGaW1n?=
- =?utf-8?B?bk5GWWVBcGprbUFCSGJGdnFxNDVuMDhWcFRrWXQzVEJ5K1N1TGtTZXVBNUhL?=
- =?utf-8?B?c2tRVm1WY2I2Vm10SUxVVDNuQ3Y5akxLcGxrdEdIcGx1RnBwb1pFVjlrbk52?=
- =?utf-8?B?V3crTEloSFdRdmEvcVY1N0ZtZExZQlRZVTBvV2s1V01WL0pMdzJQL2NoQ0xr?=
- =?utf-8?B?MzFKb0FrM0hReWFEcEpmTWZYZklLNlRHNHJyb253eGhLaURHUmFBaWdQb2xR?=
- =?utf-8?B?YTFwRnBtUDJ1TXFWajBvaVc4V1ZhcGNhclBCUTJ6K09wZlgvVFBaVVgrT0Na?=
- =?utf-8?B?dlFsN0tUcGMxNlJNR3pvbm1NS3pObnNTWURPVWN6V0EzeGZVNzgzTGVXVUtE?=
- =?utf-8?B?TEk1K3B3NVRRVEtvK0tndUZvc0VxbWdWb3pzR3hDSFR0WnBQVlc3QTNNb3Ju?=
- =?utf-8?B?N2ZFeXZHQ3VodjIwS0FJRUtjWFpLU0R5Q2EveDArLyszWHZCeVJ1bm5NODBQ?=
- =?utf-8?B?NjJaWDZRbnNnL1E2Y0VaVHg1UkxNRkxxSG1SZmozRDZqV2d6UnF4RmJoaXN2?=
- =?utf-8?B?SjM4M2tMZW02czNHcHBIY2FaK2pDbjAwaXVlL2VmazBXNzlSYXpPeXV4L3lu?=
- =?utf-8?Q?avnKdjr+nHlXTOOalLyiYOd4r?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cd11f66-83c9-42ea-d978-08de36cd6eb9
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 02:48:28.8449 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XS0lrbJzndmGKnnQO9I2QVgWpnCPct/hZzIusDkKK2UOaaIyqnh1/IVcYtVbuvduEZhUHnpV2rQGC6E3R6Ngyw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11897
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -190,53 +103,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+This reverts commit b32dda34506b4f486bc803d0c7251f987edd2455.
 
-Update the i.MX8ULP EVK device tree files and defconfig to enable the
-second USB controller (base address 0x29920000) on i.MX8ULP EVK in host
-mode.
+Currently, scsi is broken and causes data abort. I did a bisect and found
+that this commit was the cause. Reverting it and scsi is working again.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
+=== Error Log with data abort
+
+U-Boot 2026.01-rc4-tld-1-g0e0a198a68be (Dec 08 2025 - 17:42:05 -0800)
+Synology DS116
+
+DS116> scsi reset
+
+Reset SCSI
+scanning bus for devices...
+Target spinup took 0 ms.
+SATA link 1 timeout.
+AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
+flags: 64bit ncq led only pmp fbss pio slum part sxs
+  Device 0: (0:0) Vendor: ATA Prod.: FUJITSU MHY2250B Rev: 890B
+            Type: Hard Disk
+            Capacity: 238475.1 MB = 232.8 GB (488397169 x 512)
+
+DS116> ext2ls scsi 0:1 /boot
+data abort
+pc : [<3ffa5d3e>]	   lr : [<3ffc1515>]
+sp : 3fb65ad8  ip : 0000000c	 fp : 3fb7f220
+r10: 00002710  r9 : 3fb6aed0	 r8 : 3fb85e40
+r7 : f10a8100  r6 : 000003e8	 r5 : 000003e8  r4 : 3fb65ae0
+r3 : e38e39c1  r2 : 00000000	 r1 : 3fb65ae0  r0 : 00931767
+Flags: Nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
+Code: 3ffd b510 6803 460c (6bdb) 681b
+
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 ---
- arch/arm/dts/imx8ulp-evk-u-boot.dtsi | 4 ++++
- configs/imx8ulp_evk_defconfig        | 3 +++
- 2 files changed, 7 insertions(+)
 
-diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-index 860994129ae..e35653edc29 100644
---- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-@@ -34,6 +34,10 @@
- 	bootph-pre-ram;
- };
+ drivers/scsi/scsi.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index b414d022f3f..715271b1d69 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -228,11 +228,13 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 			blocks = max_blks;
+ 			scsi_setup_read_ext(pccb, start, blocks);
+ 			start += max_blks;
++			blks -= max_blks;
+ 		} else {
+ 			pccb->datalen = block_dev->blksz * blks;
+ 			blocks = blks;
+ 			scsi_setup_read_ext(pccb, start, blocks);
+ 			start += blks;
++			blks = 0;
+ 		}
+ 		debug("scsi_read_ext: startblk " LBAF
+ 		      ", blccnt " LBAF " buffer %lX\n",
+@@ -242,7 +244,6 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 			blkcnt -= blks;
+ 			break;
+ 		}
+-		blks -= blocks;
+ 		buf_addr += pccb->datalen;
+ 	} while (blks != 0);
+ 	debug("scsi_read_ext: end startblk " LBAF
+@@ -285,11 +286,13 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 			blocks = max_blks;
+ 			scsi_setup_write_ext(pccb, start, blocks);
+ 			start += max_blks;
++			blks -= max_blks;
+ 		} else {
+ 			pccb->datalen = block_dev->blksz * blks;
+ 			blocks = blks;
+ 			scsi_setup_write_ext(pccb, start, blocks);
+ 			start += blks;
++			blks = 0;
+ 		}
+ 		debug("%s: startblk " LBAF ", blccnt " LBAF " buffer %lx\n",
+ 		      __func__, start, blocks, buf_addr);
+@@ -298,7 +301,6 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 			blkcnt -= blks;
+ 			break;
+ 		}
+-		blks -= blocks;
+ 		buf_addr += pccb->datalen;
+ 	} while (blks != 0);
  
-+&usbotg2 {
-+	compatible = "fsl,imx8ulp-usb", "fsl,imx7ulp-usb", "fsl,imx27-usb";
-+};
-+
- &iomuxc1 {
- 	bootph-all;
- };
-diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
-index ff6cd8e6c98..5fd73ce4ae9 100644
---- a/configs/imx8ulp_evk_defconfig
-+++ b/configs/imx8ulp_evk_defconfig
-@@ -54,6 +54,7 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_READ=y
-+CONFIG_CMD_USB=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
-@@ -92,4 +93,6 @@ CONFIG_FSL_LPUART=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_NXP_FSPI=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
- CONFIG_ULP_WATCHDOG=y
-
+@@ -320,7 +322,7 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
+ 	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
+ 	struct udevice *bdev = dev->parent;
+ 	struct scsi_plat *uc_plat = dev_get_uclass_plat(bdev);
+-	lbaint_t start, blks, max_blks, blocks;
++	lbaint_t start, blks, max_blks;
+ 	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
+ 
+ 	/* Setup device */
+@@ -337,20 +339,19 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
+ 	      __func__, block_dev->devnum, start, blks);
+ 	do {
+ 		if (blks > max_blks) {
+-			blocks = max_blks;
+ 			scsi_setup_erase_ext(pccb, start, max_blks);
+ 			start += max_blks;
++			blks -= max_blks;
+ 		} else {
+-			blocks = blks;
+ 			scsi_setup_erase_ext(pccb, start, blks);
+ 			start += blks;
++			blks = 0;
+ 		}
+ 		if (scsi_exec(bdev, pccb)) {
+ 			scsi_print_error(pccb);
+ 			blkcnt -= blks;
+ 			break;
+ 		}
+-		blks -= blocks;
+ 	} while (blks != 0);
+ 	return blkcnt;
+ }
 -- 
-2.43.0
+2.47.3
 
+base-commit: 0e0a198a68be71148f5ec27ef86796174f91436f
+branch: master
