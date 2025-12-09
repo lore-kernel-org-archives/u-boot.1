@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 671EED3B7E2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 02:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18381D3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 02:21:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81FE483BD2;
-	Tue,  9 Dec 2025 03:20:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C789D83B7E;
+	Tue,  9 Dec 2025 03:20:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="WqUfwDYq";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="YSkZD7LJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33E6683BF1; Tue,  9 Dec 2025 03:20:35 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 3A492838CE; Tue,  9 Dec 2025 03:20:41 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF9C83B7E
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 03:20:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCBC83B7E
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 03:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y8I/bcHh2HGozh6m9YSp6fDM4fHv2hFgZNmK7JjHajsG0mfWUAUscj59szLnN77bgGjIpp2cexNXf/MWNHYa15es1O3vIIDN/RDvLk5y/GMiYYwSDmQNEVXjO5/kZqL7jcAHNBzofTSdwFBowEzKjsPpqdpIqtRgAzS3Bf/3cUwKh0y4ZM/iANGVHfbEtAp/YT4IzqRnYUIHrHikRsls6R90QwTZSmgpAdbgsXHdI7jIV7SjPqAFFzYVzHQx1O01DEWMXQYbxWUxXhdLSo//GkZCD1ESpvv5NNuu7sZO8HfbKrRRa+Yn5iOiI0c+ytojcRiCCEZKcfpqFB9lnZHNSg==
+ b=UkZz9khAw5GNlBjtdC88H5d02u41dxixaUgcj2IDm3VZCtlx6WhVUwGXAIf4KHyZ28bOqQlOVwPTlrc9tMBFAQImB9x0dPiqWAn3DJu9AAhD50LyZpf6r/AcQpMFaMth10XXHAHpbnlllzCDTx7aDeCSkQ4z9oesAPBDRPM+5RlpWvD2K1hL9wXvsITZ1RvAAcuGF7vscH0k6nxMV2uPKjn2ZoAg0g4zRBZLJqA2BmyPQWiTqHIOQRe6uA2qYdapPgr7yMoYEfrmBZyNzZSMEfcETKg5HfzfyHhdRkhLDVcjiEUd064Ql2PZ7w1fCIB3DM7foumi8mB1/Wd5vt2JNQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j5AEnOogsp2FymPRWtnQL9sVjhbS0cGnNgskF+sV8DU=;
- b=gTqszTP1R0Ktg+vLc+c8H+Hfyw50DPUXPzWj45wNV0Q4spZBfXdyDLzl15rKd2fo3TTYEsU0jUE02QGY3u6ZhNIXT7jYwuZV5HU3eHBOcmJ+7VPLUjhaGUEqdZ+KT5tFUO+NMsWUB1KkCj4Tl82m4VcpKoypmEbXuO4NhcsfKp9z0ezEyIfJht++kmvXn8ZPAN8+kbe/+dmwp9JQAKgrleH6v7rFTZBL/WEONPbc22iAQNWuAba5RhK7lPhoChSU4EvD2dmAs1d/XCxmzJOXwauCYHcyCdnZDaNw4538lk4e5YMs1XR2Ef3RVfeTR2ZTbw00kTy9b+Z0zWDPZlQDgw==
+ bh=F//kKyhsFw5N0X4dc2rTGv6zS3GCxx6ek1x3WNLXGXA=;
+ b=BwsUCOY87mqsXlpRtVHJ6h7vaA8kchZKWJrbDgEr9RwLxxfE9mq0X9L0SMFClQVvQQ/tucKbsYTZZGAZGJ8Q/Wde81Jn4zPei7+YRcj7r75b5hFWpFE4AtkAjDIw3ubyb0biSm9qES4N6q2iJR/cHn8/NWnhH3HkaUnYWI9ghIEu2LHoZ+jW8jIK9F6zsKl97t924JE/TuqNAc5TwBkuHWEPFJCcFY1evVNEspdoGvhZSqm+W9p+yLlJnaWPvyzJzp9eo5UM40ypGDWRIkRiqk6mRjsPdl3qw8Cu+kFogPNG9O1xGIz+FFVaoa/Rkmnxl1A9VKYPGbIx31rKn6AuEA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j5AEnOogsp2FymPRWtnQL9sVjhbS0cGnNgskF+sV8DU=;
- b=WqUfwDYqxQ0VvBe2Zel7AvXn2JBbUr2GCTxV01M2s9eUL2t8ZcADsgSMkOUTmjEE7nvMf7FmbqWKhkJ4Ex1KjC4ilaD0Wgat3NhqMXLxpMLKcK2DFJoJQRbOEGTGZjF0K9SCLR5wNBJgnNaYA++eIxbqmAWc6Qo1FVKlcVFwu9TfmuUngvu3N4i1M8FJhrZaPZoUq3UK41C61/XkTL0ct1WkuK/w+b6jlMnQOtQlGRARz8bW1Fijora2TA1gWHWKUK9s/ekrsjqgJ1T+KVGg9Mg2ff5tnDEb9riw1CSUsoQV5ZISk3hTKhHZF+zv9tmxcdVwzpZTjZgJ3i2YmufIZg==
+ bh=F//kKyhsFw5N0X4dc2rTGv6zS3GCxx6ek1x3WNLXGXA=;
+ b=YSkZD7LJqfd4F4Yl2y/9Xd4wMWk1xKwb8WamN38srvQ1VG0bwegRyFHQAjqXzR1XQ7yABXWMJyY5blFbUAQ+nG8sdrsxAj8SxVX4eleI5OUxcLrXNg1r9SkkERDY/ZvaSwOqxKZFcbxCqqN9o42E8ozJINQVkruQUTYCJOjJKQPoJoS0HY9Wb9ORgISlPGSNG3l14PsEQWm5gJZ7DwILE7grom5HPYGwZSK0M+jpBl9IWjhNqkTDXnhHvX6ic8cb222ZBYePyEsg14kUwXTEx4QTfRfucIuJsyV5pyNmxspRJP0i6xra13ZEKKb8KBNgraydyWHzSpeCKtTLa0QM/g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by DB9PR04MB8331.eurprd04.prod.outlook.com (2603:10a6:10:244::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Tue, 9 Dec
- 2025 02:20:31 +0000
+ 2025 02:20:36 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9388.013; Tue, 9 Dec 2025
- 02:20:31 +0000
+ 02:20:36 +0000
 From: alice.guo@oss.nxp.com
-Date: Tue, 09 Dec 2025 10:19:18 +0800
-Subject: [PATCH v3 2/3] imx8ulp_evk: Move environment variables to .env
- file
+Date: Tue, 09 Dec 2025 10:19:19 +0800
+Subject: [PATCH v3 3/3] imx8ulp_evk: Switch to use devicetree imported from
+ Linux kernel release
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251209-imx8ulp-v1-2-c58c22834737@nxp.com>
+Message-Id: <20251209-imx8ulp-v1-3-c58c22834737@nxp.com>
 References: <20251209-imx8ulp-v1-0-c58c22834737@nxp.com>
 In-Reply-To: <20251209-imx8ulp-v1-0-c58c22834737@nxp.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -85,97 +85,97 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DB9PR04MB8331:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebc6eb97-19ec-478c-4322-08de36c9869a
+X-MS-Office365-Filtering-Correlation-Id: c9724c81-49a2-4502-92e0-08de36c98a22
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|1800799024|7416014|376014|19092799006|366016|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RHk1VzhJRTFIZlhxWURHQXJ6TmhQbFVsQ3ByaE4reEVJQ1pIYTBUbVRyZmU2?=
- =?utf-8?B?dlROQjgxU1NjYmdpQXp0NUIrM3hjdzVlUnhZSFJJMG5CTkdSdXU2eVd0dU5S?=
- =?utf-8?B?T3c1Y0dESWhSSG5jRlptcFRYNm9MajBIU1hadUZidnJncTlIbHpreUk2VW4r?=
- =?utf-8?B?VFNVbzhuRmRmOFFST1ByVnh0MlpqSW9uS0Vmb0V0ZCthOEhkelRxWEcrZGFj?=
- =?utf-8?B?WHNhc3B2YmZIS0hNOXJWTVRGM3ppc0pEak9ncmhSeFJrVTNwR3BCV3hvbFpY?=
- =?utf-8?B?cVcxTnp2bXpMdFhVMHFiaWIzbTZBbXJBblNyNW9IR0FYWnFrRzRrY0JSYVFa?=
- =?utf-8?B?N2I4NGxJejdLdE05NmpjRUhVOWZtQ2FnWHRMNUFRZ0hvZmwyWHpmdW9sQkpY?=
- =?utf-8?B?QkhuamVZdnpSU3h5bENUcHByNGh5WmMvTWdJL3d4N2NPNFFkdFU2VmpwQXVN?=
- =?utf-8?B?UDFwbGlZMUpRU3NoNlV1L3ZWNTdSb3lnL3ZJay96OGlaem1UMWUxQnQ2U2l2?=
- =?utf-8?B?dC9hTFFNWWsvaE9lMWhWWnZMNm9XSEZGSTFBcjU4Uzd1MWhnUHpKVUtGa3JQ?=
- =?utf-8?B?YkJ4YXZTckFub25uUTc1OGd0UzdKYVZkUnpzT04rL0xOamxIRWg5Qmc2YStr?=
- =?utf-8?B?N01aeDRCMlU3U3MwM3BCZUV1cUVjVnVxKzNQT2JKWldiSkprN2MvRDlLUXVm?=
- =?utf-8?B?YUFJeHRRVExGMkQ3RFBEQW12MzdxeHcyS0x2VnIrc1pjcVRSWko2NjZ4N2pI?=
- =?utf-8?B?M0I0ZUdxeGx0cCs1aExGN1pMUW9teVNmUjhQbFJ3RFNiSWN2MEs0c1dFbDFZ?=
- =?utf-8?B?RzMvd1Q1L3hNZnN1TnNZeVp0REhYVXJQSEowNUNyVmw3d0ZRYUs5RVV0L1Ey?=
- =?utf-8?B?YlVzM3lPS0htMmZ5dW9SZUFmL05RWVZkbW94cGVEWTVUd0Y4Ym9HcTRpY1Bt?=
- =?utf-8?B?ckRZaDB2c1EwMnAyM1IvaVZsOWlzcFhBSHRlR21YMXZhQ1hCOW4zWnY0ZTNQ?=
- =?utf-8?B?Q2d2UHMrMHQ4VFhUZXBnUzJtVmdQOUJqU0lORlp6dGE3Mnc0YVUwWjlzb3lo?=
- =?utf-8?B?UFZaZ1dwTjl5U3hGODJKYUF2R3Zjc1J5TGh2M1lrNU9CWktQR1pUVG83SUZ6?=
- =?utf-8?B?YmU0Vnhod0VaV084Q1c1NGRiNlhxNzU1VXhhNlpCeGtMbURyZ3ozaU1OQW5N?=
- =?utf-8?B?YWNHMnVmSC93b0RMSmE0d1FFTE5FT2lMbldjYlFhekowT1NtajVpenpNTE1E?=
- =?utf-8?B?YWtTY2RhdU1iWXhpT0ZOeGI0Tk4yWmZ5NU13OXlZWlVmTTJ6U2JtZ1VRaW4x?=
- =?utf-8?B?UkJuS0E3SGRzNzhMZjZ4NllFZHQ4d09PQ3R2QjBORDBJTXdYd2FzVXc5Q1BB?=
- =?utf-8?B?K2E3bU5ieW5LYjF4d3Q4dWtJQkNyUzNycm9yTmhPRWhiZ1FRTDNtSW52L0ti?=
- =?utf-8?B?bVNsT1kzSzFUS2FXZm9KSmJhNll1clJvVCtRdXhLTzZQQ0M1d3U4SVlwWVNs?=
- =?utf-8?B?c24zc3lJRGZIZzhrNFVBd2Z1V1ltajFVR2pDQWJFdGJsRXd3L3JNb2QzeHZh?=
- =?utf-8?B?akd1QWNrc1I1OEs0WlhCbHVXcjNOQlJGZDhaNk1KQUF1K0hJbTE0bkdxRGsz?=
- =?utf-8?B?OHNpdHdoYjQ3ZXRKSTlmZXRpRVVrNmI3Tnl3L2dxNGtQZVBUbE1ZUUE4bW40?=
- =?utf-8?B?NEdsT3NNdEV0WFE3VDBQc1FRL3pkL1RXZjB2UHYxWURJdXJkU1hWNEtHL3FN?=
- =?utf-8?B?cEl6UmQ0YUNPK0srU21jM1FSZVVjZ0hQVzF5RTVNcWZWQkdldGJUbHhJa2hY?=
- =?utf-8?B?WlJpYVh4VmczSVF6S01OcjBGZHFZNzZuNnlIZ1I4YVlZN1lDQzhVaVd0MnlS?=
- =?utf-8?B?NDUyR1Mrd1JGVUVDRHB6Q00vUFQ2ZU90TUVhTTFPKzZ1a2x0TU1ZTUFtS01z?=
- =?utf-8?B?ZFgxcXhYOWdqNm52dktZc2F1cXNRRjVheFZzQnowbjVVdjRxd1ovZ29Eakhi?=
- =?utf-8?B?TjR0OCtjRDdpbkRNc1BJenFSaS8rZGxORCtLMzYrNDN5YzJJeGtBVHgyeGlK?=
- =?utf-8?Q?t5QMfA?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?di9aNHlCekNhbTAwdlNMbXBlNzJrMUlFQmd0M0U3OXNoM1h6NEY4dDJxdk1q?=
+ =?utf-8?B?TVd1Z0lYaCt6M3l5Y3h5L2FJSTc5MEZITlZzbGpyZ1RKTzJ5OGg2Ui9mSUJM?=
+ =?utf-8?B?Q1ZDUHZJNFN6M0FnY1FtVzVYVVlvUTJHMUNCS3ordWJHM0NrMHp1YXpvMWg4?=
+ =?utf-8?B?QWVmT09iRVpZTXM0aUpGYTZIbTE3VXJyYTFUb2kxN0w0VGtEY2JxaGg2WW5l?=
+ =?utf-8?B?TlVwMjh4Q0RuckhKYkRSdTJDayt1SDQzcXkzaktaRHRWdFlvalEwSU5PaEpy?=
+ =?utf-8?B?dUMxR2FVMkFlMzJ5RUdHZi8vZDZUc21sZmhvdHBXM0c4ZlpPdlMrU3ArK3k3?=
+ =?utf-8?B?b2ZWbGRNSTJzZGxIYmVNbEZiRFkvRUZON09NSGRkM1ZNdG5LS0hJRXFadUgw?=
+ =?utf-8?B?M3JuY1hFdHpaeEtDVksrYlpzUjlEL3RWNTg2N2Z2ZTZnNi92dW1IR0lDckd5?=
+ =?utf-8?B?aGcyM1Y2eFNYTlNHTkhoQXNRUGVSditwYm1RQkIwK2tRWnNKTGxkSjVTRjQr?=
+ =?utf-8?B?UlY2Wk1ncjU2R2hlTUtFVWVhZkFQN05OY3cxbmJhbGlvclRDNERjVjZXU0dz?=
+ =?utf-8?B?WWtsTDJFWm5vTUkrUjNZRHFtd3pUSlJqUTBhV1F0NVNPNGFKYk03TTYxNkw4?=
+ =?utf-8?B?Y2JpWjcxRUNPY0pzdStwT3piVVo4ZGxISkxpN21JOGExckVUUGk4c2lGaEh4?=
+ =?utf-8?B?ZHA4Zys1WGhDcVJNOXNzcDk5Nkk4b0kvVE5KMFZsYitWVkV3RXUvUWhPbkg0?=
+ =?utf-8?B?YXNpWjBFRkljcy9WaWp6TjJGSFBlUlpuQ25DRHVuZkt3VHFtbUVZSmNSK3Zx?=
+ =?utf-8?B?VFp4YTQxWVI4WmQ2NWZkVkl2djI2S0YyeTZtNS9SOVJPTzRacVhsSThSU08z?=
+ =?utf-8?B?QTZxUXFMK2hRckZheDRpRnFwemlDUE1QdHRqbU1ncm11Tk02cEtvN3lYbFZ3?=
+ =?utf-8?B?MGtvZVQ5VFk1UU9UOUZuODFOK0FxK0ZxNEU4T3A1Y1U3NTk0QUV3S2tXQUFQ?=
+ =?utf-8?B?QmFWRU44aWNISUNaR0ZibDM5ZGNlVUYxZ2hLbklkSmQxNkR3YzJXVytRL1J1?=
+ =?utf-8?B?cW0xQTg2c0NqNEFld0RKamFoOGRNZ1hWMDN4TkRjSENYMFZLb0tCWHhYYW5H?=
+ =?utf-8?B?NlR4L3ZyMnFMYXVvSFBIbTFoc0NZSktseGxPUGxhNVBNMFBFUUhQYnFyQjla?=
+ =?utf-8?B?R0d2WDNMMkdXdzVrSzRCV1FOd291ZXpsd2pid2xiMWhKby9tdGxHTU42d0Y1?=
+ =?utf-8?B?NThlOXk0VXhYNlVmKzZscllCNUpPeXRMK081TkZoZkNCQkoxRXY4RHFsL0k5?=
+ =?utf-8?B?ZjVhK3ZtZ1I5bmRsYTVzeW83cXZJdld6MStNeXBWUFhPMXhvRVpUenZveWFn?=
+ =?utf-8?B?NlY4VDl5VllJVmZDby9uTHJ1OU0rUisrcGtpaUM1UG9CUW5sd0pta2JrWU01?=
+ =?utf-8?B?V0dja093VTdwbDlQT3pUTjl6MmZpN25EY0VEWXBRNlM2ZlhMa2k5Nis5RTk4?=
+ =?utf-8?B?dmpOTms4YnJGeVR1QXg5Sk1kc2pMYWlQVENnaUpxMzFLMk5hMktsWnNEc0RG?=
+ =?utf-8?B?enpScGhSY04rczdJSHZmanduSWx4SW5USEFobjhodFlkOXZtTUJ0ZXIyakxO?=
+ =?utf-8?B?UGk1ZFVFNFY4NkJIdGxmNC94U1VxVktGL3pvSVRMQ0NVSytBZGJSTkZRRksw?=
+ =?utf-8?B?OTZFMyt5dVE1T043RThCekVic1pBZzRISkN2Z0FWQ3F5eXllSnZPTFJ2Lzlm?=
+ =?utf-8?B?TU5YSStnZUFyekNxTjFWNjdwYmNlZ3BqVUd0Ylc0WXNEUFc1bm1PNWJESTZR?=
+ =?utf-8?B?OGwwbDVHb2dLMThMaFNuUUpXdys3YnNwalA1bUpMVCttU1Zua2F6VXhhdWFw?=
+ =?utf-8?B?MUgyaEhzZEtTUTcwMU9iRk5wTUZqMWY1Y0hCRUl6OHhwSjlOQTJrUjJsN2ZY?=
+ =?utf-8?B?NmJPUEV4clUxSnZ3NWF3YXFmclhIc3NlZUxiRW5TZzBlcUo1OFBVNXh2cEln?=
+ =?utf-8?B?cThJdVhBYW15U3VOekFaMUpKODd1TGZseXliclhQRGNZWjNzQzZINTVkOStn?=
+ =?utf-8?Q?LEJZ2C?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(1800799024)(7416014)(376014)(19092799006)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TXNvdVRRSHQvSG9vZlBidUc5aWRzei9qdjVBNEtpWEhmRzhkZXJ6ZHlrTEN1?=
- =?utf-8?B?Uk96RDZxanhmSEV5blRkcmladVlsbTRIWVkvL1V4THpLaVZJM0dYb0psa2RZ?=
- =?utf-8?B?SkZXdm4yaEErQXg0OUU5Z1NOZ2JBM1Nsbm8wNDl1SDIxSXVGWFZ1NGtDZGlH?=
- =?utf-8?B?Ly9McHc3S3d0RWpINFZ0SngrQW12cmVid1Q4RzhXVElCTzFoa3Z2clJ4cEpq?=
- =?utf-8?B?Mm52ZWhyNGxzSytadGVyVzU1bzFqM3oyenFRc2ZqV1VUaEg2NnR6NmJQUFU2?=
- =?utf-8?B?M0ZHYlFLUm1WdkZwbjQxTU9oUG5VclpHODdFdUdQMXZiK3pqVFB2RVFsZ1lN?=
- =?utf-8?B?N0krNjBPd0xoL0xjVXNJMDJUbHRNQTFlZnB3ellKdy9oZmpVbTRmRHZSQmNZ?=
- =?utf-8?B?S00xczBWLzNTZ1h2NVZIY3pvUkNEZlI4Mm5HMDVaRjdqcHhjSW9lRVA4Z2lz?=
- =?utf-8?B?Q3RnOFAxcnVLOEJabCtudlczWnRBUW9vTjdEZ3JWVURwaHk5VFF4U0xCSzBa?=
- =?utf-8?B?UUN5QWpMRytIeUVEM1JLOS9xMFlkeXZTYzZTSmpNRzlyc0hpOEwrakN2N2Rm?=
- =?utf-8?B?V25jOUNueUY4NnhBNENLNzZ4alJUemVjb2pFU3Y2c2VDTTl5Lzg2NlJtS1dF?=
- =?utf-8?B?cDdtSzFUdmIzcnBYNUZyWnprRkJHWlNhZFRTQ01NN3AxSzdEbDM1UmljUGk1?=
- =?utf-8?B?TGc3RUJIS1prSEMxRGNLaFY2dDdTbkc0WHkxTnEvQ0tHKzRraXllSTlnOFFC?=
- =?utf-8?B?dnFzSUxXVGx0MGoyUHVUbkJXMVJLR3RCRTY5UE1sOU9HT0ZOUjFyMVczT2xV?=
- =?utf-8?B?NkJsRVBZTjZ2RXozUzRoajBMNlUrZ1RYTnlhMXA0b2UvTnkrQjJualhBZFBj?=
- =?utf-8?B?V2ZYQlRYejZ5WVhjZ0JXUGNRRmpqaGRlYXJERHUyMnNaY0lpZWlXMmxBNDZR?=
- =?utf-8?B?N0ovTGFMR1pBOXVYVWtRSlNvYjM2ZEtzZjU2WVN5WlZ0WDRRUC80MmQ5REZ1?=
- =?utf-8?B?RUF4TnFyalRIelc5eE9NWktpMENLNkIwR3Z6ZHo0TU5SMjEzd0NzdE8rK0FP?=
- =?utf-8?B?UHMyRGpGNXBPeEhOVEhmQkUyT2R6WEN5K3E4ZERvc1BSZHN4Z3g5QTN0OW1q?=
- =?utf-8?B?cFl6djFPcjhTZW1oc25uTm5Qd1ZPek91d0dnMy9ZZXJoUk96WXZaU2JNcTg0?=
- =?utf-8?B?Y3A5VXY2Tml2b0pkSVZBOTY0VG04QUZmZ00vKzF2NjluZ21UalJQMXBMcHgx?=
- =?utf-8?B?NjhvazExZUlhdjJMKzl2dDlDc1cyMFlZTUZxaUhiTHVEdUxveVkwQ2E0YTVN?=
- =?utf-8?B?ekloNW93NWxwNjQrdXdLZjJmbFBaWFlzbThJMERFZlo2azltdG1SNzdPQUVG?=
- =?utf-8?B?YUNnTVo1YVpvdHVCbWJFRlIwWmcyRFQvcnl2RkFmSlhLejIvaFRYZWJ4b3Jw?=
- =?utf-8?B?N3RPQlVzRzZHUWdqWTZyaEhIb2VpQ3ZmTEtRd3RRMDQ5L016TDVxd0lDNVlj?=
- =?utf-8?B?OG54b0tkVmE0SVJURlJua2haMEpzejBKaXhhc2xiZFpReWxqc01TbW1TKyts?=
- =?utf-8?B?VkwzZGI4UGs5anhVZElBbWdEUlBMdHN0QmNqT2plL0lDbmpocmpjZlE2VENU?=
- =?utf-8?B?a2JZOEpVT1Q2akdQN2pGcXg1VVF4YzhrTmpSMFVkSWNnRFJWT0prVWV4OGhO?=
- =?utf-8?B?RUVlZTlocm1ZWTRlcWl6YmhWMnVxK3I2MmVXbUFGbm8zNXFMQXk1anlDR1py?=
- =?utf-8?B?VXBIVUxpb1lpN0R5NHh0bXZKVkdzRVV4SitDOUlNREdPSWk5aXhjTmpoQ3E2?=
- =?utf-8?B?R1NwYVBXRGxZRGxIaldyUEp2Ri9DK0ZTRlVZaTFXS2FOLzlNRkZmMFAwV2xj?=
- =?utf-8?B?QTVpSlF5YW5FT1NMa1hYQ3hMQmtkUHJYeG5rOGt6TGpMblFMbFRXYm5GUEZk?=
- =?utf-8?B?azZEK1JvRUg1QTFCeThIenBFSk8vNExxZE9QT09IK1dkOXB1Y2lnOWdCdEZ0?=
- =?utf-8?B?NlJtVHFRcDRicDR4Q05tREVEWVZOMTBNRWtGZ1VXczRyaDMzTWdCZDJQTlNp?=
- =?utf-8?B?Y002UVhoelNJRWRMbzlDVDNXb092VnpDM284VmJyYUc4QXFEbHBROWZMRFF6?=
- =?utf-8?Q?CDSxU5V+vRQ/J1Gsojo5NQO78?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWxES08rbFNyNVpNWVFLaFgyOU5lYlhQVDZpaWwveS8xN2h3dmp5Ry9tSjhX?=
+ =?utf-8?B?Tzg1VUVZSjE5VUFuTU1UcjJ4VGlBNXZSR2dkUDJmWm1ScHFJbzRBRHZYbkpS?=
+ =?utf-8?B?NXBlMzBieHplQmhhOXFLbng4QytXVEdWeWZSYTRqQklXblpZa21tZUhFUzhl?=
+ =?utf-8?B?MFNzTkdUYlgzWTJNR1Z2cWFrTTRVTUoyQjYvSERHL1VaaWVOSmU1UzdjdlZP?=
+ =?utf-8?B?TUxpaXNRMDY5c1IzeHU2N3NQdjlvNTdlenNxa1kwOHpzVU5XN2xzQUNHRDdv?=
+ =?utf-8?B?VTVTWlRaaVZ0STNneVlQYStzWCsxakx1Q2J2djVBdTFGcnoyU1NjSm1XeStm?=
+ =?utf-8?B?cFd5UzlwVFJBYlB5OGFMNUJMMVVJblNsanBTQ2FUd1pIZHZxQUVhRCs3L0JT?=
+ =?utf-8?B?T3ZjeEhUbTQzZVpZMjRpVDI0THYzMTdZMEdaMGwxTWJ5YTc2Ky9TUHd2azNE?=
+ =?utf-8?B?OExBMDZZaUF4ajVuUTJUOHVSZVZXaThxRkhKUjdNMkNGT2R1bVFzUGRDcDYx?=
+ =?utf-8?B?dVd4a1FodWlRelJyRnJGQ3YzaXBBOUdTa2VhWFAzQnM3NWRnb2k0djdEbWdL?=
+ =?utf-8?B?alRTeW9oaGVtLzZjSE9URm53WGtLcnZwTE4rVHZEYUkvcmVoUktvZTRZblZE?=
+ =?utf-8?B?eWJyWVlJMkUwMU04cXA4Rm5WVWVrWmo3VC9ib0hrVlQzazhIbmF3SVFXTjdY?=
+ =?utf-8?B?dXBPMk5PM2JVcnduNDVGTzFLaStCTVZwMTFvdDg5Ymx4TnBENHp3b2ZRU1hk?=
+ =?utf-8?B?WG40WFYrL21FTjZ6b2QvdGJqSFNxazlLRTA5eHQvcU5YTVV0VzhQWnowV3Fv?=
+ =?utf-8?B?VnZHK1JqYWZBblUxVTNiSjNJeDlCemw5Sll3N3VzczlGalgyUm5BUVFIaHkv?=
+ =?utf-8?B?dUhXdDhaZkxackl5ajFRY3RQeVV0SVRKWkFIYW9hV2g2QzJGSTZObUpvR2hL?=
+ =?utf-8?B?V25SelMrRWRlektsK1pLdmlmRFpZa0N5cG1sMzJ4M3pKNERmSGlneFg5RkhI?=
+ =?utf-8?B?SUdwNGpQSkNCdHZlM3VaZDlxbFJwN0J3ZUtacFlIdDlBOElHQVgwQngzdjlk?=
+ =?utf-8?B?RDJxRWJHcVBnOWJ0VUZuMFlzRjhHcjFraWJDWmJiRldHSHJvNU4xWXkwMk1J?=
+ =?utf-8?B?Z2xDMTErMnlpZ0tLbzM4NFlpZFJ1eGVvd0JUeWZObXFoTUQ5QUdWQytZeElt?=
+ =?utf-8?B?cEgrbzdvRXdCZUJjY3ZLUUs3a3ZoRVJQN3E5NE16UWdmUjU2NHE2YW1HSEFW?=
+ =?utf-8?B?SmtGOUt1RXNUTW9JYnphNi9ULzJUWDNHendmQWx6dk9oVkV3NE1hUWJubTB2?=
+ =?utf-8?B?MnVBK2hVemRpN0ZEWmc5OWd4NTYramhTWHVHd2UvbVFJa2FaY0poZzl3K0dw?=
+ =?utf-8?B?MzI1U2RLYmQvaHJiWVMvZ2Y3L0lJMDV5VElXbkpoQzc1UjBYNDROK01UZkFJ?=
+ =?utf-8?B?K0VnRDVHQ05PUWFUZ1ozYWt2d3I2aXBMOHFtVVRhYUp3WllFUGFPelJQNFI0?=
+ =?utf-8?B?azRtdDJ6VGVBTlZlZk0zaGt2S1k0Zjh0ck1RUW1GVzk5T1FjcjlJUE1GRGNh?=
+ =?utf-8?B?YXEwMHpCY2tCSXdwK2pER0tTNUJXeGVqODBFcFdYOG4vMlBtOTJIRU8rOXRP?=
+ =?utf-8?B?RG9jcWlKdkg0MGgyZUZZMWkzbnJxZkh0YU9HcmNaNW5PRDRIRGZuWUs0TExu?=
+ =?utf-8?B?bHFJM3BoM1BKUFdpWUROcit3ZmN0dTdnQ3FXOXlIZTkwTDZ4K1Jxb2FKTzBU?=
+ =?utf-8?B?MXhOb2piVlU3L3F4ZmREamt1THJXYUZVZWpiVi8wcnRFSmUxUU1mcmxpOXlM?=
+ =?utf-8?B?Tnp0eGVqNElYa0RQOWpoYVpXZVBvR21kdkZ0ZHhudDFpZC81TE9UUEN6NmRl?=
+ =?utf-8?B?TWQ2azIxZlMvb254WDdWbDBUWTEwemplN25vWUFwU3JWTDM4QTQ0V0dVaTdH?=
+ =?utf-8?B?ZWw3L01WbWhMdEh0dWc4MzBQS1NPUFZEWE9mNkIrUWtCUnpHWS9LdDNLenFx?=
+ =?utf-8?B?NjBpcW9QNjdkWUpHR2Z6c3o4WmNsUnlwODBPN1E0cGNTd0NEYlF5SUs1VTB4?=
+ =?utf-8?B?am5nT2grV2FOSVo3RFFPdzNUL0NSekZoWEwvT1B4TExJRU5kTXlNQkVVUFZT?=
+ =?utf-8?Q?siRBqWhLoPXfMe5HcCVkOuZ+E?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebc6eb97-19ec-478c-4322-08de36c9869a
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9724c81-49a2-4502-92e0-08de36c98a22
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 02:20:30.9714 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 02:20:36.8381 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tYrbv7c+7L1EwfPxPo9a4zu70L3yKNcgyjpwXldoGp8iEkqv2eU1u1FIFveGdCnUnRDWQMDtyVeeHtpyyL0lBA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5k5rNrIfBb6CzjFjWLm1D8gUwcZKfi0iFdKCWQHLqYswAWO2oD5N9gg9mhQu2wzjkUNoe9TqpUFVLnulddod2A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8331
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -195,158 +195,698 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-Add board-specific environment variables to imx8ulp_evk.env for better
-maintainability. Define bsp_bootcmd in the environment to resolve the
-runtime error: "bsp_bootcmd" not defined.
+Enable OF_UPSTREAM for i.MX8ULP EVK so that devicetree imported from
+Linux kernel release can be used.
+
+If mailbox@29220000 is enabled, gd->arch.ele_dev will be set to this
+device for communication with ELE firmware. This is incorrect because
+mu@27020000 is the MU used for communication with the ELE firmware. To
+prevent misconfiguration, disable mailbox@29220000.
+
+The driver model for watchdog timer is not enabled yet, so disable wdog3
+temporarily.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- board/freescale/imx8ulp_evk/imx8ulp_evk.env | 97 +++++++++++++++++++++++++++++
- configs/imx8ulp_evk_defconfig               |  2 +-
- include/configs/imx8ulp_evk.h               | 14 -----
- 3 files changed, 98 insertions(+), 15 deletions(-)
+ arch/arm/dts/Makefile                |   3 -
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi |   8 +
+ arch/arm/dts/imx8ulp-evk.dts         | 125 ---------
+ arch/arm/dts/imx8ulp.dtsi            | 476 -----------------------------------
+ arch/arm/mach-imx/imx8ulp/Kconfig    |   1 +
+ configs/imx8ulp_evk_defconfig        |   2 +-
+ 6 files changed, 10 insertions(+), 605 deletions(-)
 
-diff --git a/board/freescale/imx8ulp_evk/imx8ulp_evk.env b/board/freescale/imx8ulp_evk/imx8ulp_evk.env
-new file mode 100644
-index 00000000000..52d7f447029
---- /dev/null
-+++ b/board/freescale/imx8ulp_evk/imx8ulp_evk.env
-@@ -0,0 +1,97 @@
-+#ifdef CONFIG_AHAB_BOOT
-+sec_boot=yes
-+#else
-+sec_boot=no
-+#endif
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index fcad6fb2fc7..28d3f701f3f 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -880,9 +880,6 @@ dtb-$(CONFIG_ARCH_IMX8) += \
+ 	fsl-imx8qxp-mek.dtb \
+ 	imx8-capricorn-cxg3.dtb \
+ 
+-dtb-$(CONFIG_ARCH_IMX8ULP) += \
+-	imx8ulp-evk.dtb
+-
+ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mm-data-modul-edm-sbc.dtb \
+ 	imx8mm-icore-mx8mm-ctouch2.dtb \
+diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+index 2782dc7dd75..860994129ae 100644
+--- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+@@ -22,6 +22,14 @@
+ 	bootph-all;
+ };
+ 
++&mu {
++	status = "disabled";
++};
 +
-+jh_clk=
-+jh_mmcboot=setenv jh_clk kvm.enable_virt_at_load=false clk_ignore_unused mem=896MB; run loadimage; \
-+	   run mmcboot
-+jh_netboot=setenv jh_clk kvm.enable_virt_at_load=false clk_ignore_unused mem=896MB; run netboot
++&wdog3 {
++	status = "disabled";
++};
 +
-+initrd_addr=0x83800000
-+scriptaddr=0x83500000
-+splashimage=0x90000000
-+kernel_addr_r=CONFIG_SYS_LOAD_ADDR
-+fdtoverlay_addr_r=0x83040000
-+fdt_addr_r=0x83000000
-+fdt_addr=0x83000000
-+cntr_addr=0x98000000
-+emmc_dev=0
-+sd_dev=2
-+mmcdev=CONFIG_SYS_MMC_ENV_DEV
-+mmcpart=1
-+image=Image
-+cntr_file=os_cntr_signed.bin
-+fdtfile=CONFIG_DEFAULT_FDT_FILE
-+console=ttyLP1,115200 earlycon
-+bootm_size=0x10000000
-+boot_fit=no
-+mmcroot=/dev/mmcblk0p2 rootwait rw
-+mmcautodetect=yes
-+mmcargs=setenv bootargs ${jh_clk} console=${console} root=${mmcroot}
-+netargs=setenv bootargs ${jh_clk} console=${console}
-+        root=/dev/nfs
-+        ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
-+loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
-+loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
-+loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
-+loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
-+bootscript=echo Running bootscript from mmc ...; source
-+auth_os=booti ${cntr_addr}
-+boot_os=booti ${loadaddr} - ${fdt_addr_r}
-+mmcboot=echo Booting from mmc ...;
-+        run mmcargs;
-+        if test ${sec_boot} = yes; then
-+                run auth_os;
-+        else
-+            if test ${boot_fit} = yes || test ${boot_fit} = try; then
-+                bootm ${loadaddr};
-+            else
-+                if run loadfdt loadimage; then
-+                    run boot_os;
-+                else
-+                    echo WARN: Cannot load the fdt and image;
-+                fi;
-+            fi;
-+        fi;
-+netboot=echo Booting from net ...;
-+        run netargs;
-+        if test ${ip_dyn} = yes; then
-+            setenv get_cmd dhcp;
-+        else
-+            setenv get_cmd tftp;
-+        fi;
-+        if test ${sec_boot} = yes; then
-+            ${get_cmd} ${cntr_addr} ${cntr_file};
-+            run auth_os;
-+        else
-+            ${get_cmd} ${loadaddr} ${image};
-+            if test ${boot_fit} = yes || test ${boot_fit} = try; then
-+                bootm ${loadaddr};
-+            else
-+                if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
-+                    run boot_os;
-+                else
-+                    echo WARN: Cannot load the DT;
-+                fi;
-+            fi;
-+        fi;
-+bsp_bootcmd=echo Running BSP bootcmd ...;
-+            mmc dev ${mmcdev}; if mmc rescan; then
-+            if run loadbootscript; then
-+                run bootscript;
-+            else
-+                if test ${sec_boot} = yes; then
-+                    if run loadcntr; then
-+                        run mmcboot;
-+                    else run netboot;
-+                    fi;
-+                else
-+                    if run loadimage; then
-+                        run mmcboot;
-+                    else run netboot;
-+                    fi;
-+                fi;
-+            fi;
-+        fi;
+ &per_bridge4 {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx8ulp-evk.dts b/arch/arm/dts/imx8ulp-evk.dts
+deleted file mode 100644
+index 7aec1706382..00000000000
+--- a/arch/arm/dts/imx8ulp-evk.dts
++++ /dev/null
+@@ -1,125 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright 2021 NXP
+- */
+-
+-/dts-v1/;
+-
+-#include "imx8ulp.dtsi"
+-
+-/ {
+-	model = "NXP i.MX8ULP EVK";
+-	compatible = "fsl,imx8ulp-evk", "fsl,imx8ulp";
+-
+-	chosen {
+-		stdout-path = &lpuart5;
+-	};
+-
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x80000000 0 0x80000000>;
+-	};
+-
+-	clock_ext_rmii: clock-ext-rmii {
+-		compatible = "fixed-clock";
+-		clock-frequency = <50000000>;
+-		clock-output-names = "ext_rmii_clk";
+-		#clock-cells = <0>;
+-	};
+-
+-	clock_ext_ts: clock-ext-ts {
+-		compatible = "fixed-clock";
+-		/* External ts clock is 50MHZ from PHY on EVK board. */
+-		clock-frequency = <50000000>;
+-		clock-output-names = "ext_ts_clk";
+-		#clock-cells = <0>;
+-	};
+-};
+-
+-&lpuart5 {
+-	/* console */
+-	pinctrl-names = "default", "sleep";
+-	pinctrl-0 = <&pinctrl_lpuart5>;
+-	pinctrl-1 = <&pinctrl_lpuart5>;
+-	status = "okay";
+-};
+-
+-&usdhc0 {
+-	pinctrl-names = "default", "sleep";
+-	pinctrl-0 = <&pinctrl_usdhc0>;
+-	pinctrl-1 = <&pinctrl_usdhc0>;
+-	non-removable;
+-	bus-width = <8>;
+-	status = "okay";
+-};
+-
+-&fec {
+-	pinctrl-names = "default", "sleep";
+-	pinctrl-0 = <&pinctrl_enet>;
+-	pinctrl-1 = <&pinctrl_enet>;
+-	clocks = <&cgc1 IMX8ULP_CLK_XBAR_DIVBUS>,
+-		 <&pcc4 IMX8ULP_CLK_ENET>,
+-		 <&cgc1 IMX8ULP_CLK_ENET_TS_SEL>,
+-		 <&clock_ext_rmii>;
+-	clock-names = "ipg", "ahb", "ptp", "enet_clk_ref";
+-	assigned-clocks = <&cgc1 IMX8ULP_CLK_ENET_TS_SEL>;
+-	assigned-clock-parents = <&clock_ext_ts>;
+-	phy-mode = "rmii";
+-	phy-handle = <&ethphy>;
+-	status = "okay";
+-
+-	mdio {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		ethphy: ethernet-phy@1 {
+-			reg = <1>;
+-			micrel,led-mode = <1>;
+-		};
+-	};
+-};
+-
+-&iomuxc1 {
+-	pinctrl_enet: enetgrp {
+-		fsl,pins = <
+-			MX8ULP_PAD_PTE15__ENET0_MDC     0x43
+-			MX8ULP_PAD_PTE14__ENET0_MDIO    0x43
+-			MX8ULP_PAD_PTE17__ENET0_RXER    0x43
+-			MX8ULP_PAD_PTE18__ENET0_CRS_DV  0x43
+-			MX8ULP_PAD_PTF1__ENET0_RXD0     0x43
+-			MX8ULP_PAD_PTE20__ENET0_RXD1    0x43
+-			MX8ULP_PAD_PTE16__ENET0_TXEN    0x43
+-			MX8ULP_PAD_PTE23__ENET0_TXD0    0x43
+-			MX8ULP_PAD_PTE22__ENET0_TXD1    0x43
+-			MX8ULP_PAD_PTE19__ENET0_REFCLK  0x43
+-			MX8ULP_PAD_PTF10__ENET0_1588_CLKIN 0x43
+-		>;
+-	};
+-
+-	pinctrl_lpuart5: lpuart5grp {
+-		fsl,pins = <
+-			MX8ULP_PAD_PTF14__LPUART5_TX	0x3
+-			MX8ULP_PAD_PTF15__LPUART5_RX	0x3
+-		>;
+-	};
+-
+-	pinctrl_usdhc0: usdhc0grp {
+-		fsl,pins = <
+-			MX8ULP_PAD_PTD1__SDHC0_CMD	0x43
+-			MX8ULP_PAD_PTD2__SDHC0_CLK	0x10042
+-			MX8ULP_PAD_PTD10__SDHC0_D0	0x43
+-			MX8ULP_PAD_PTD9__SDHC0_D1	0x43
+-			MX8ULP_PAD_PTD8__SDHC0_D2	0x43
+-			MX8ULP_PAD_PTD7__SDHC0_D3	0x43
+-			MX8ULP_PAD_PTD6__SDHC0_D4	0x43
+-			MX8ULP_PAD_PTD5__SDHC0_D5	0x43
+-			MX8ULP_PAD_PTD4__SDHC0_D6	0x43
+-			MX8ULP_PAD_PTD3__SDHC0_D7	0x43
+-			MX8ULP_PAD_PTD11__SDHC0_DQS	0x10042
+-		>;
+-	};
+-};
+-
+-&wdog3 {
+-	status = "disabled";
+-};
+diff --git a/arch/arm/dts/imx8ulp.dtsi b/arch/arm/dts/imx8ulp.dtsi
+deleted file mode 100644
+index 06ce5f19aa8..00000000000
+--- a/arch/arm/dts/imx8ulp.dtsi
++++ /dev/null
+@@ -1,476 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright 2021 NXP
+- */
+-
+-#include <dt-bindings/clock/imx8ulp-clock.h>
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/interrupt-controller/arm-gic.h>
+-#include <dt-bindings/power/imx8ulp-power.h>
+-
+-#include "imx8ulp-pinfunc.h"
+-
+-/ {
+-	interrupt-parent = <&gic>;
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-
+-	aliases {
+-		ethernet0 = &fec;
+-		gpio0 = &gpiod;
+-		gpio1 = &gpioe;
+-		gpio2 = &gpiof;
+-		mmc0 = &usdhc0;
+-		mmc1 = &usdhc1;
+-		mmc2 = &usdhc2;
+-		serial0 = &lpuart4;
+-		serial1 = &lpuart5;
+-		serial2 = &lpuart6;
+-		serial3 = &lpuart7;
+-	};
+-
+-	cpus {
+-		#address-cells = <2>;
+-		#size-cells = <0>;
+-
+-		A35_0: cpu@0 {
+-			device_type = "cpu";
+-			compatible = "arm,cortex-a35";
+-			reg = <0x0 0x0>;
+-			enable-method = "psci";
+-			next-level-cache = <&A35_L2>;
+-		};
+-
+-		A35_1: cpu@1 {
+-			device_type = "cpu";
+-			compatible = "arm,cortex-a35";
+-			reg = <0x0 0x1>;
+-			enable-method = "psci";
+-			next-level-cache = <&A35_L2>;
+-		};
+-
+-		A35_L2: l2-cache0 {
+-			compatible = "cache";
+-		};
+-	};
+-
+-	gic: interrupt-controller@2d400000 {
+-		compatible = "arm,gic-v3";
+-		reg = <0x0 0x2d400000 0 0x10000>, /* GIC Dist */
+-		      <0x0 0x2d440000 0 0xc0000>; /* GICR (RD_base + SGI_base) */
+-		#interrupt-cells = <3>;
+-		interrupt-controller;
+-		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
+-	};
+-
+-	pmu {
+-		compatible = "arm,cortex-a35-pmu";
+-		interrupt-parent = <&gic>;
+-		interrupts = <GIC_PPI 7
+-			     (GIC_CPU_MASK_SIMPLE(2) | IRQ_TYPE_LEVEL_HIGH)>;
+-		interrupt-affinity = <&A35_0>, <&A35_1>;
+-	};
+-
+-	psci {
+-		compatible = "arm,psci-1.0";
+-		method = "smc";
+-	};
+-
+-	timer {
+-		compatible = "arm,armv8-timer";
+-		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>, /* Physical Secure */
+-			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>, /* Physical Non-Secure */
+-			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>, /* Virtual */
+-			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>; /* Hypervisor */
+-	};
+-
+-	frosc: clock-frosc {
+-		compatible = "fixed-clock";
+-		clock-frequency = <192000000>;
+-		clock-output-names = "frosc";
+-		#clock-cells = <0>;
+-	};
+-
+-	lposc: clock-lposc {
+-		compatible = "fixed-clock";
+-		clock-frequency = <1000000>;
+-		clock-output-names = "lposc";
+-		#clock-cells = <0>;
+-	};
+-
+-	rosc: clock-rosc {
+-		compatible = "fixed-clock";
+-		clock-frequency = <32768>;
+-		clock-output-names = "rosc";
+-		#clock-cells = <0>;
+-	};
+-
+-	sosc: clock-sosc {
+-		compatible = "fixed-clock";
+-		clock-frequency = <24000000>;
+-		clock-output-names = "sosc";
+-		#clock-cells = <0>;
+-	};
+-
+-	sram@2201f000 {
+-		compatible = "mmio-sram";
+-		reg = <0x0 0x2201f000 0x0 0x1000>;
+-
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0 0x0 0x2201f000 0x1000>;
+-
+-		scmi_buf: scmi-sram-section@0 {
+-			compatible = "arm,scmi-shmem";
+-			reg = <0x0 0x400>;
+-		};
+-	};
+-
+-	firmware {
+-		scmi {
+-			compatible = "arm,scmi-smc";
+-			arm,smc-id = <0xc20000fe>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			shmem = <&scmi_buf>;
+-
+-			scmi_devpd: protocol@11 {
+-				reg = <0x11>;
+-				#power-domain-cells = <1>;
+-			};
+-
+-			scmi_sensor: protocol@15 {
+-				reg = <0x15>;
+-				#thermal-sensor-cells = <1>;
+-			};
+-		};
+-	};
+-
+-	soc: soc@0 {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x0 0x0 0x40000000>;
+-
+-		s4muap: mailbox@27020000 {
+-			compatible = "fsl,imx8ulp-mu-s4";
+-			reg = <0x27020000 0x10000>;
+-			interrupts = <GIC_SPI 79 IRQ_TYPE_LEVEL_HIGH>;
+-			#mbox-cells = <2>;
+-		};
+-
+-		per_bridge3: bus@29000000 {
+-			compatible = "simple-bus";
+-			reg = <0x29000000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			mu: mailbox@29220000 {
+-				compatible = "fsl,imx8ulp-mu";
+-				reg = <0x29220000 0x10000>;
+-				interrupts = <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
+-				#mbox-cells = <2>;
+-				status = "disabled";
+-			};
+-
+-			mu3: mailbox@29230000 {
+-				compatible = "fsl,imx8ulp-mu";
+-				reg = <0x29230000 0x10000>;
+-				interrupts = <GIC_SPI 75 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_MU3_A>;
+-				#mbox-cells = <2>;
+-				status = "disabled";
+-			};
+-
+-			wdog3: watchdog@292a0000 {
+-				compatible = "fsl,imx8ulp-wdt", "fsl,imx7ulp-wdt";
+-				reg = <0x292a0000 0x10000>;
+-				interrupts = <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_WDOG3>;
+-				assigned-clocks = <&pcc3 IMX8ULP_CLK_WDOG3>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_SOSC_DIV2>;
+-				timeout-sec = <40>;
+-			};
+-
+-			cgc1: clock-controller@292c0000 {
+-				compatible = "fsl,imx8ulp-cgc1";
+-				reg = <0x292c0000 0x10000>;
+-				#clock-cells = <1>;
+-			};
+-
+-			pcc3: clock-controller@292d0000 {
+-				compatible = "fsl,imx8ulp-pcc3";
+-				reg = <0x292d0000 0x10000>;
+-				#clock-cells = <1>;
+-				#reset-cells = <1>;
+-			};
+-
+-			tpm5: tpm@29340000 {
+-				compatible = "fsl,imx8ulp-tpm", "fsl,imx7ulp-tpm";
+-				reg = <0x29340000 0x1000>;
+-				interrupts = <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_TPM5>,
+-					 <&pcc3 IMX8ULP_CLK_TPM5>;
+-				clock-names = "ipg", "per";
+-				status = "disabled";
+-			};
+-
+-			lpi2c4: i2c@29370000 {
+-				compatible = "fsl,imx8ulp-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x29370000 0x10000>;
+-				interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPI2C4>,
+-					 <&pcc3 IMX8ULP_CLK_LPI2C4>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc3 IMX8ULP_CLK_LPI2C4>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-
+-			lpi2c5: i2c@29380000 {
+-				compatible = "fsl,imx8ulp-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x29380000 0x10000>;
+-				interrupts = <GIC_SPI 93 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPI2C5>,
+-					 <&pcc3 IMX8ULP_CLK_LPI2C5>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc3 IMX8ULP_CLK_LPI2C5>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-
+-			lpuart4: serial@29390000 {
+-				compatible = "fsl,imx8ulp-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x29390000 0x1000>;
+-				interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPUART4>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart5: serial@293a0000 {
+-				compatible = "fsl,imx8ulp-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x293a0000 0x1000>;
+-				interrupts = <GIC_SPI 100 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPUART5>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi4: spi@293b0000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx8ulp-spi", "fsl,imx7ulp-spi";
+-				reg = <0x293b0000 0x10000>;
+-				interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPSPI4>,
+-					 <&pcc3 IMX8ULP_CLK_LPSPI4>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc3 IMX8ULP_CLK_LPSPI4>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-
+-			lpspi5: spi@293c0000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx8ulp-spi", "fsl,imx7ulp-spi";
+-				reg = <0x293c0000 0x10000>;
+-				interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc3 IMX8ULP_CLK_LPSPI5>,
+-					 <&pcc3 IMX8ULP_CLK_LPSPI5>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc3 IMX8ULP_CLK_LPSPI5>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-		};
+-
+-		per_bridge4: bus@29800000 {
+-			compatible = "simple-bus";
+-			reg = <0x29800000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			pcc4: clock-controller@29800000 {
+-				compatible = "fsl,imx8ulp-pcc4";
+-				reg = <0x29800000 0x10000>;
+-				#clock-cells = <1>;
+-				#reset-cells = <1>;
+-			};
+-
+-			lpi2c6: i2c@29840000 {
+-				compatible = "fsl,imx8ulp-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x29840000 0x10000>;
+-				interrupts = <GIC_SPI 94 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc4 IMX8ULP_CLK_LPI2C6>,
+-					 <&pcc4 IMX8ULP_CLK_LPI2C6>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc4 IMX8ULP_CLK_LPI2C6>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-
+-			lpi2c7: i2c@29850000 {
+-				compatible = "fsl,imx8ulp-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x29850000 0x10000>;
+-				interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc4 IMX8ULP_CLK_LPI2C7>,
+-					 <&pcc4 IMX8ULP_CLK_LPI2C7>;
+-				clock-names = "per", "ipg";
+-				assigned-clocks = <&pcc4 IMX8ULP_CLK_LPI2C7>;
+-				assigned-clock-parents = <&cgc1 IMX8ULP_CLK_FROSC_DIV2>;
+-				assigned-clock-rates = <48000000>;
+-				status = "disabled";
+-			};
+-
+-			lpuart6: serial@29860000 {
+-				compatible = "fsl,imx8ulp-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x29860000 0x1000>;
+-				interrupts = <GIC_SPI 101 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc4 IMX8ULP_CLK_LPUART6>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart7: serial@29870000 {
+-				compatible = "fsl,imx8ulp-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x29870000 0x1000>;
+-				interrupts = <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&pcc4 IMX8ULP_CLK_LPUART7>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			iomuxc1: pinctrl@298c0000 {
+-				compatible = "fsl,imx8ulp-iomuxc1";
+-				reg = <0x298c0000 0x10000>;
+-			};
+-
+-			usdhc0: mmc@298d0000 {
+-				compatible = "fsl,imx8ulp-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x298d0000 0x10000>;
+-				interrupts = <GIC_SPI 142 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&cgc1 IMX8ULP_CLK_XBAR_DIVBUS>,
+-					 <&cgc1 IMX8ULP_CLK_XBAR_AD_DIVPLAT>,
+-					 <&pcc4 IMX8ULP_CLK_USDHC0>;
+-				clock-names = "ipg", "ahb", "per";
+-				power-domains = <&scmi_devpd IMX8ULP_PD_USDHC0>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step = <2>;
+-				bus-width = <4>;
+-				status = "disabled";
+-			};
+-
+-			usdhc1: mmc@298e0000 {
+-				compatible = "fsl,imx8ulp-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x298e0000 0x10000>;
+-				interrupts = <GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&cgc1 IMX8ULP_CLK_XBAR_DIVBUS>,
+-					 <&cgc1 IMX8ULP_CLK_NIC_PER_DIVPLAT>,
+-					 <&pcc4 IMX8ULP_CLK_USDHC1>;
+-				clock-names = "ipg", "ahb", "per";
+-				power-domains = <&scmi_devpd IMX8ULP_PD_USDHC1>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step = <2>;
+-				bus-width = <4>;
+-				status = "disabled";
+-			};
+-
+-			usdhc2: mmc@298f0000 {
+-				compatible = "fsl,imx8ulp-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x298f0000 0x10000>;
+-				interrupts = <GIC_SPI 144 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&cgc1 IMX8ULP_CLK_XBAR_DIVBUS>,
+-					 <&cgc1 IMX8ULP_CLK_NIC_PER_DIVPLAT>,
+-					 <&pcc4 IMX8ULP_CLK_USDHC2>;
+-				clock-names = "ipg", "ahb", "per";
+-				power-domains = <&scmi_devpd IMX8ULP_PD_USDHC2_USB1>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step = <2>;
+-				bus-width = <4>;
+-				status = "disabled";
+-			};
+-
+-			fec: ethernet@29950000 {
+-				compatible = "fsl,imx8ulp-fec", "fsl,imx6ul-fec", "fsl,imx6q-fec";
+-				reg = <0x29950000 0x10000>;
+-				interrupts = <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
+-				interrupt-names = "int0";
+-				fsl,num-tx-queues = <1>;
+-				fsl,num-rx-queues = <1>;
+-				status = "disabled";
+-			};
+-		};
+-
+-		gpioe: gpio@2d000080 {
+-				compatible = "fsl,imx8ulp-gpio", "fsl,imx7ulp-gpio";
+-				reg = <0x2d000080 0x1000>, <0x2d000040 0x40>;
+-				gpio-controller;
+-				#gpio-cells = <2>;
+-				interrupts = <GIC_SPI 129 IRQ_TYPE_LEVEL_HIGH>;
+-				interrupt-controller;
+-				#interrupt-cells = <2>;
+-				clocks = <&pcc4 IMX8ULP_CLK_RGPIOE>,
+-					 <&pcc4 IMX8ULP_CLK_PCTLE>;
+-				clock-names = "gpio", "port";
+-				gpio-ranges = <&iomuxc1 0 32 24>;
+-		};
+-
+-		gpiof: gpio@2d010080 {
+-				compatible = "fsl,imx8ulp-gpio", "fsl,imx7ulp-gpio";
+-				reg = <0x2d010080 0x1000>, <0x2d010040 0x40>;
+-				gpio-controller;
+-				#gpio-cells = <2>;
+-				interrupts = <GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>;
+-				interrupt-controller;
+-				#interrupt-cells = <2>;
+-				clocks = <&pcc4 IMX8ULP_CLK_RGPIOF>,
+-					 <&pcc4 IMX8ULP_CLK_PCTLF>;
+-				clock-names = "gpio", "port";
+-				gpio-ranges = <&iomuxc1 0 64 32>;
+-		};
+-
+-		per_bridge5: bus@2d800000 {
+-			compatible = "simple-bus";
+-			reg = <0x2d800000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			cgc2: clock-controller@2da60000 {
+-				compatible = "fsl,imx8ulp-cgc2";
+-				reg = <0x2da60000 0x10000>;
+-				#clock-cells = <1>;
+-			};
+-
+-			pcc5: clock-controller@2da70000 {
+-				compatible = "fsl,imx8ulp-pcc5";
+-				reg = <0x2da70000 0x10000>;
+-				#clock-cells = <1>;
+-				#reset-cells = <1>;
+-			};
+-		};
+-
+-		gpiod: gpio@2e200080 {
+-			compatible = "fsl,imx8ulp-gpio", "fsl,imx7ulp-gpio";
+-			reg = <0x2e200080 0x1000>, <0x2e200040 0x40>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupts = <GIC_SPI 127 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-			clocks = <&pcc5 IMX8ULP_CLK_RGPIOD>,
+-				 <&pcc5 IMX8ULP_CLK_RGPIOD>;
+-			clock-names = "gpio", "port";
+-			gpio-ranges = <&iomuxc1 0 0 24>;
+-		};
+-	};
+-};
+diff --git a/arch/arm/mach-imx/imx8ulp/Kconfig b/arch/arm/mach-imx/imx8ulp/Kconfig
+index fbca241e106..37a8cefd6cc 100644
+--- a/arch/arm/mach-imx/imx8ulp/Kconfig
++++ b/arch/arm/mach-imx/imx8ulp/Kconfig
+@@ -27,6 +27,7 @@ config TARGET_IMX8ULP_EVK
+ 	select IMX8ULP
+ 	select SUPPORT_SPL
+ 	select IMX8ULP_DRAM
++	imply OF_UPSTREAM
+ 
+ endchoice
+ 
 diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
-index 8617cf32f2b..baca0b41099 100644
+index baca0b41099..ff6cd8e6c98 100644
 --- a/configs/imx8ulp_evk_defconfig
 +++ b/configs/imx8ulp_evk_defconfig
-@@ -29,7 +29,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=0
- CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
--CONFIG_DEFAULT_FDT_FILE="imx8ulp-evk"
-+CONFIG_DEFAULT_FDT_FILE="imx8ulp-evk.dtb"
- CONFIG_SYS_CBSIZE=2048
- CONFIG_SYS_PBSIZE=2068
- CONFIG_BOARD_EARLY_INIT_F=y
-diff --git a/include/configs/imx8ulp_evk.h b/include/configs/imx8ulp_evk.h
-index eb006c5d4a5..edfd6f70815 100644
---- a/include/configs/imx8ulp_evk.h
-+++ b/include/configs/imx8ulp_evk.h
-@@ -21,20 +21,6 @@
- #define CFG_FEC_MXC_PHYADDR		1
- #endif
- 
--/* Initial environment variables */
--#define CFG_EXTRA_ENV_SETTINGS		\
--	"scriptaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
--	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
--	"image=Image\0" \
--	"console=ttyLP1,115200 earlycon\0" \
--	"fdt_addr_r=0x83000000\0"			\
--	"boot_fit=no\0" \
--	"fdtfile=imx8ulp-evk.dtb\0" \
--	"initrd_addr=0x83800000\0"		\
--	"bootm_size=0x10000000\0" \
--	"mmcpart=1\0" \
--	"mmcroot=/dev/mmcblk2p2 rootwait rw\0" \
--
- /* Link Definitions */
- 
- #define CFG_SYS_INIT_RAM_ADDR	0x80000000
+@@ -10,7 +10,7 @@ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0x400000
+ CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx8ulp/imximage.cfg"
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="imx8ulp-evk"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8ulp-evk"
+ CONFIG_TARGET_IMX8ULP_EVK=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_SERIAL=y
 
 -- 
 2.43.0
