@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00207D3B996
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 21:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEE2D3B7F6
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 21:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A14983C72;
-	Tue,  9 Dec 2025 22:23:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 15D41838A0;
+	Tue,  9 Dec 2025 22:32:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dQQLDdQJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GeHuOlSG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A54283C7B; Tue,  9 Dec 2025 22:23:06 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id E389283C5A; Tue,  9 Dec 2025 22:32:52 +0100 (CET)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40AFB83C6C
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 22:23:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 611D483655
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 22:32:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4511fa1e3efso1942338b6e.0
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 13:23:04 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-bc274b8b15bso5850774a12.1
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 13:32:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765315383; x=1765920183; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=QarUppd9e041ts+7Ipne1RRuuzGVSHhWtbGvMfm+owE=;
- b=dQQLDdQJpKvJE0NEAWZJmaM8MY3p/6kPFQHOflC/PcDItxFr+Ls5qPvfouoKyfdwNv
- eQbjdQj9D8aev7eEb1BOPLRuL8smg3/koG34gxE5G+gKEQCQQDQz7BCzlm288Y0LuDS+
- ZG40rdWJ1M6Om4YSMxD66vWKz8rVMFlofKY7k=
+ d=linaro.org; s=google; t=1765315968; x=1765920768; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CQKiAbOZAjqW0gFzeFbfPQkSThRHCCxda7bqA+bODRE=;
+ b=GeHuOlSGOiY+58FdPUrJnm0HtrWUTFWW7Prdu6HNxejdX11mKEMVBsQ3T7Unc+CxQi
+ vsTrP0vWoYBFNnanHMyY32iv2ikWurQgBtitMUOsCUGETsvhq9BMJLbh6dY7BU09N7na
+ cEx9bZlVpSTdVX3gvyigl0iC1ovup7SWuCQobBsQbUKEjJWwdJgZY2j3c+w0BudkdPzW
+ gwOBXG+5yj9guQo8Zmk8Uhmrj9Jpodb9nBQXk/BJbEg4pX7asMaqBPZ3sL6VnKjWLFW7
+ 3rRPF/mR4c4Ay1maaJXdbALnweCa9QIZpwzrOig3c+jWQLaJ10Kkm0jFsBUVwJizPfh2
+ rIow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765315383; x=1765920183;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QarUppd9e041ts+7Ipne1RRuuzGVSHhWtbGvMfm+owE=;
- b=l28pipajZY6z6HrJsZyxznIn0IqsYtbZlmsj3bc5r9tEwSXeP7y3OCNCcR5Jhl7Rrz
- N0F6vf17NCPxn9vkREx74Rms2ihQeRSjTfkHV92/pmOsRL0oW0TIbGGq/ECp+MSYStRN
- Ii9vOmKM8XKqvyLr2+9/LNgPm+9Uz3ccKOewcLzyqcZzxDt3sF6bZRvIr44lsCt4ed0O
- DiRUxwycYKLCXEPh3vl3rQFWGvyJ6e17AeRUGEaSZn6TCisMLudejZZNy5x5l8h4iqSx
- gYJrquCnoT4zvRjbcC6FqOwWDFHFyRtxaXXdJUtnaxyu115frBUoPQsuTUIANK39Ef3D
- U9Ng==
-X-Gm-Message-State: AOJu0YxJOVmnyehz3K5uxRogR/1Zm3libIwFFmLLfIxb7rEnf1ChWhVQ
- UpQ2ZP2aY95xAdk4EKZvtXrPkqjigxCtfwHhrIk6QnWhWpYTMd7LxAKr4yeR8JJdy0uh6hTOF0a
- 6JYLeTM0=
-X-Gm-Gg: ASbGnctMR49/eG31bFXPg7TgdqvzKDNHPwoNq912kF3XrBvLZMBKxbHAOcT0zDIwuCk
- M2YUi+RpEDfjTazUPphaCzS5vX5McNdOx/QLtNrOtNFmidN+5qXUP2MfQaUpa2o9a5XF8tIqbv6
- nJRLH4U6CptMq692uO7apbJrpovJtFabTLMVwEdw04FNaadJsyEtqVmXSDxp3MJGoMzuZ4YX/MS
- W9D0Yf3BqLj+eu0CZPF5WXQV/SrDifWKLaPo1z1fXvBz/YSS/HX+2ashGdreh+9gLuBp+U8AuTw
- i5euD8c+E5X0PWOYh4yh74Ndd62Te5s/Fx0nvbfLMd/JizseNes/olzp+DlstVdM7ZOZkjwlHKK
- q7asOuMvf5GLYDvB29NudQZybvb3RcKGN+OhU6EJYgfPVFHRI9XTD0zoeGz+cyVZT3Zj8XZAdL6
- kXNJ3j2dpMT9yKFNPmzbhQX0Qcn706SsY1szFhO2s0ZDbkjafuAE6IEgvqhj1KtlI=
-X-Google-Smtp-Source: AGHT+IG6XNK3shy6alS4da6Xj2Zurl2dVy7I6vW9DpIsCm/PfWESKVJs2frjgoifMSXwkq6bnqFewQ==
-X-Received: by 2002:a05:6808:1448:b0:43f:5c61:448c with SMTP id
- 5614622812f47-455864da11dmr205191b6e.39.1765315382890; 
- Tue, 09 Dec 2025 13:23:02 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4538f742e5asm6545827b6e.4.2025.12.09.13.23.02
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Dec 2025 13:23:02 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] fs: fat: Perform sanity checks on getsize in get_fatent()
-Date: Tue,  9 Dec 2025 15:23:01 -0600
-Message-ID: <20251209212301.2924760-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1765315968; x=1765920768;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=CQKiAbOZAjqW0gFzeFbfPQkSThRHCCxda7bqA+bODRE=;
+ b=ox9cpFInFVB1I6f1M/WAjwqs0/KrkwoWDGHan/80kBDdAp9WY1eykmxqZP0CC3G6GO
+ 8OWQhJYZkvzwzpyHv2KtvwyQJuVDFUDz0lnds9SpmCM1kjoRuuX3soH/cZ3i2GHIVGxJ
+ EDQg6fuArEiBbD9Ere2JlYkKOm1zxw7UVormsgjcMNydu5QJHtnElZaooHoAQlYhOM+p
+ Hcoo4RNAIAmH8wFXIOgzoxh+aNo96TQ5/ipIHWttU3vMS6uAv0TDceIdLBYm30KTlUlc
+ 0Uyr1C3XO32GiqMpFhzail2Rv5annXKCJAsUwPWH6zU8T9SY4EuD0gxSHAzWzNU1FcRQ
+ GqmA==
+X-Gm-Message-State: AOJu0YwQsr7CZuHQ0cEya15LSg2yw+QUiZ8RFMAVbWSrV3TRDMKanz+f
+ XpaMFJSwrasUNqYlSKINa55NBb1YO2Tb08fd/CXli2qnycL1zMfhcK5Ib9Z+7KAAQ7JD+Bhf1qJ
+ +UPqGF6nv5rFmSWbdEMqRL/fUSPdQT30SrIer8N30+w==
+X-Gm-Gg: AY/fxX5oL716Z72pQDq6G67OaV4hlNCUlk00hUxTVgI/PZwhikjNj3LJtA1L5EFvsbJ
+ 1AASf+27fz8QdIfLC8dWTArxYVkN1WP8zWWxjnmUvnn2G2V1llKtcnaQeN/W93iSphemnoVDdMF
+ FMvVDKtzkYxO5xLcaHCqhMbAOT9jt1XyDsCCD5mpmQ0hSpGjNaKGg18AbGiIbyrttiaTyVoCo26
+ qqeOqnsU7BDOWgYMVEKo0xeEfzFVnDpWy4zaydv4yWGZ7j8ILP9hjDP5C1hz16WPJLgvztxQXNb
+ h6vnm+qe
+X-Google-Smtp-Source: AGHT+IGko2BWvSH0fIBuKAvETdSLHKXw0H6w1M+rE17VauR1bTXt54Pv4whiIe/FplWQHWogJUD+81qQxClW0zE5Brc=
+X-Received: by 2002:a05:693c:6215:b0:2a4:3592:cf77 with SMTP id
+ 5a478bee46e88-2ac05540c45mr353077eec.27.1765315968266; Tue, 09 Dec 2025
+ 13:32:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251208-spi-designware-spl-v1-1-21e6f519a4de@linaro.org>
+ <3d0a90ad-f5aa-4a2b-89c6-1f9dbb8e1c60@seco.com>
+In-Reply-To: <3d0a90ad-f5aa-4a2b-89c6-1f9dbb8e1c60@seco.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Tue, 9 Dec 2025 16:32:38 -0500
+X-Gm-Features: AQt7F2qKi9N2NTR-JfdjdpEMYFW-5gltpMGYoQNNlV6GdNvi7fpSMgeKEcabluM
+Message-ID: <CANp-EDZKunW1O3KCE9zcyNw2vLzLuFRgceWn=He6NCFXWbPHkQ@mail.gmail.com>
+Subject: Re: [PATCH] spi: designware: Allow disabling designware driver in SPL
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,36 +95,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We do not perform a check on the value of getsize in get_fatent to
-ensure that it will fit within the allocated buffer. For safety sake,
-add a check now and if the value exceeds FATBUFBLOCKS use that value
-instead. While not currently actively exploitable, it was in the past so
-adding this check is worthwhile.
+Hi Sean,
 
-This addresses CVE-2025-24857 and was originally reported by Harvey
-Phillips of Amazon Element55
+On Mon, Dec 8, 2025 at 5:55=E2=80=AFPM Sean Anderson <sean.anderson@seco.co=
+m> wrote:
+> > diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+> > index 2afb15fff1e..94054ba39b0 100644
+> > --- a/drivers/spi/Kconfig
+> > +++ b/drivers/spi/Kconfig
+> > @@ -223,6 +223,14 @@ config DESIGNWARE_SPI
+> >         access the SPI NOR flash on platforms embedding this Designware
+> >         IP core.
+> >
+> > +config SPL_DESIGNWARE_SPI
+> > +     bool "Designware SPI driver in SPL"
+> > +     depends on SPL
+> > +     default y
+> > +     help
+> > +       Enable the Designware SPI driver during SPL.
+> > +       See the help of DESIGNWARE_SPI for details.
+> > +
+>
+> In addition to Tom's comment this should probably be moved out of the
+> SPI/DM_SPI if/endif and made to depend on SPL_DM_SPI.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- fs/fat/fat.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Ack for Tom's change, but I am puzzled by your request to move it out
+of the existing ifdev. I would think that we'd want the two options to
+appear next to each other when running 'menuconfig'.
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 89f2acbba1ef..9ce5df59f9ba 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -216,6 +216,11 @@ static __u32 get_fatent(fsdata *mydata, __u32 entry)
- 		if (flush_dirty_fat_buffer(mydata) < 0)
- 			return -1;
- 
-+		if (getsize > FATBUFBLOCKS) {
-+			debug("getsize is too large for bufptr\n");
-+			getsize = FATBUFBLOCKS;
-+		}
-+
- 		if (disk_read(startblock, getsize, bufptr) < 0) {
- 			debug("Error reading FAT blocks\n");
- 			return ret;
--- 
-2.43.0
+While I admit that adding SPL- and perhaps TPL- prefixed symbols is a
+bit messy, it seems to be how it has been done elsewhere. For example
+drivers/clk/Kconfig has quite a few such cases.
 
+Regards,
+Ralph
