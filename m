@@ -4,86 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE01D3B99E
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 22:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ABC3D3B9A4
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 23:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D55883C4B;
-	Tue,  9 Dec 2025 23:34:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9600983BC9;
+	Wed, 10 Dec 2025 00:03:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrKsBb7Z";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g0VcEWd2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C33B083C94; Tue,  9 Dec 2025 23:34:25 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F267783C7B; Wed, 10 Dec 2025 00:03:25 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A7FF836C8
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 23:34:23 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c75dd36b1bso4789286a34.2
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 14:34:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765319662; x=1765924462; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XhY3V0tlgdjOSbNioR0nkT0CO2SakUJnp3zH98IjJVU=;
- b=XrKsBb7ZIg5KnKdoCAfAzy3gylmcz5Jj8byWXiJZBiDCJuen66taygBoK8HmM0WCGP
- EcelrE6u+RDCMVouJLBXWwFF+2+vFYk2QHeqmVPgQABeQ1qV6Rp2TdMz3NuJvHHY/tdR
- caej6vyqc63ZXk+BqMDBYLcNJfNruKns5kntY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765319662; x=1765924462;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XhY3V0tlgdjOSbNioR0nkT0CO2SakUJnp3zH98IjJVU=;
- b=prGe5gGrzUKrJZg+FVL1axSEddiVuLhJvc2sQAhG5BNyw4HpqDDtBWu96FMF2FTdDK
- 1clLhZOMGEyD33VcF/FQrd9yyDYuN0Nu97En1kBaiZUEpu6QC8DBQb1CUbubjnPhIWqY
- zYK9yFL/1rUUsay8oVzPK/HGkTNjoAtJG30lh8uCHYGypmt7YKZOvCmWK+j30cUwHmpc
- B7ozZs/nXi1ig27xBwge9Xfu0SC6MUM6fL8HKuZ+LYigekC+AGz5SmTeEon1lYGkF2hM
- EyEAYS+TEN61D0So5yUbpzpziop8RHjT7kxJdcZKmKDnyXBaRuz9O6jow2VHjpvPtDbW
- JPYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1UUJ8owQdNarbjo+NCAk/4MhD9nwHzAWro40vqT61lCJhmST5UtXmMEiMWNAr0o7pJXcfOuI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcA2kQ4E13baRMxOe0Nt73G9qPLLWFokfiJUR7Qh8zbWBV6S1f
- MlKzK+JjlPAjf8Z19eCEvwXwU6od8sE22HL8/CVe6ov0zQg5icdB/Vs6zSsba36qjrRmKstWwva
- 6tqisNLc=
-X-Gm-Gg: ASbGncs/gkCy60xJDpimIgu34EfC1MfF370Eqgjxwjp69bkwlB7FKZCrINtDDKDrBzD
- fk6slFENSzAZy3uxB6GYnk4bwUkWwsRcXtEkAFDpTfzdNkNB8mz4jOtHLp57q7bgEY8qNAfbAPe
- PFcZZIs/Wf6ucmr5tDcLLMG6cOME/5cco4y18ETgwBiLLhfOeDK1N5tJyQOSUB9ehriL3T2MXMf
- D3mB8cJnI0AvoMsMyC0vAZEOKevgLSGZ5hjiizrAjAufKlHFRiev19StBltC4cCzdi+5oxhpvC3
- NHeir9cNM/6j0PDyJGtAmKLyknfhODx3O0wdD/ZtsE/9jmz7CGkwi+bYLgTkWLI3ajQPVd3FqOW
- eIWHgpH739hthwBM1+PUxDtEDaMpjljXBXm43xJ3esA0ZM/z2badgaKtHkawt4simaiX6s73SQn
- hlHKJEGhroXPv0nnmjPG3JQJZRJDPXvQvnLOB4jXdSxUgOv71/1g==
-X-Google-Smtp-Source: AGHT+IFzjdxrhwl10KBS3mXzKVr8DwIfrYISxT9ErC8OPXwagzPYOSFDwz8cpI8dDxRZdmMqA9FdIQ==
-X-Received: by 2002:a05:6830:90b:b0:7c6:819d:bddd with SMTP id
- 46e09a7af769-7cacec5f44bmr263202a34.34.1765319662345; 
- Tue, 09 Dec 2025 14:34:22 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acdb599sm12962554a34.28.2025.12.09.14.34.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Dec 2025 14:34:21 -0800 (PST)
-Date: Tue, 9 Dec 2025 16:34:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] tools: use setuptools 78.1.1
-Message-ID: <20251209223419.GC303283@bill-the-cat>
-References: <20251209223238.415022-1-heinrich.schuchardt@canonical.com>
+ by phobos.denx.de (Postfix) with ESMTPS id ECB7083B8B
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 00:03:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 2C61F4003D; 
+ Tue,  9 Dec 2025 23:03:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1765321403;
+ bh=sFAZJJ6R3i/mfhTKXaGk04BQE6iDzCe1D5s6t/yQydU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=g0VcEWd2fIIE463hsq/9E3bXlTmHCdlkAtHy8cjTyS8FUuUQm9jbaFXhKT/DuSK9A
+ d6thw+4B6Wbg/JDPhijkoNkehR5x6IWcnaThKKIIUHp8LZb4Z1CtMDWjUnVWAqw5Fe
+ aCCGGGYDHNFiCiKG1QiHpd1J+i/ERLse0pmkfb1MCgJyg5pVKtp+Dr0d9G/BmX62Oi
+ 0u1xPEkVghelAiWrPxwf4FvR4yRw//gSDhI8JRa2GsTdQdXDSaXJebegnMFSpYziE0
+ 3anNKR0iN+4tgLgve5UkiggyS8XomYUS4VzrHJrFNCdBi+h8u0/T1vo5Ks3gGyyLI6
+ b/W4mNEtzCb6FSG3QzX4LcPIxzRuBowXb/HPAsIAcuXWFm4k0iJgYzjFHvL4GbU/ST
+ jPR64/muGt0PUE/66aSmSRPBxic0U5wqGMQLrnOSRFgP176lwrXYVFbZDdVRz+XrID
+ F6RDsM4fg6l8Frqn1w97CIvyoH3y5tBAg2Jp+pvRM/3G+cinRa3AHHQCla1EQcTwI4
+ rp7Zzmq1vKRaDZjLPMtiTmUZZdV4OSWko64PYS4Io+xSzUmFHzqc4MUQMLbmHfqVvM
+ 711fNGGeuHh1AtgMoU4KHHZLW8Cie77A8BTvQzwNj0RNrh4YT1lP8TA2FMgR71HRmQ
+ uvm+tmI5Pj5BvuvcIoSCeTbM=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Stephen Warren <swarren@nvidia.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [U-BOOT TESTHOOKS][PATCH 1/1] py/travis-ci: add
+ u_boot_boardenv_qemu_riscv64_smode_(acpi_)na.py
+Date: Wed, 10 Dec 2025 00:03:18 +0100
+Message-ID: <20251209230318.416872-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wlXFByTO3obhMF50"
-Content-Disposition: inline
-In-Reply-To: <20251209223238.415022-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,34 +75,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add missing boardenv files for
 
---wlXFByTO3obhMF50
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* qemu-riscv64_smode_defconfig
+* qemu-riscv64_smode_acpi_defconfig
 
-On Tue, Dec 09, 2025 at 11:32:38PM +0100, Heinrich Schuchardt wrote:
+to enable network testing.
 
-> CVE-2025-47273 describes a path traversal vulnerability.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ .../u_boot_boardenv_qemu_riscv64_smode_acpi_na.py      | 10 ++++++++++
+ py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py  | 10 ++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+ create mode 100644 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
 
-As this also keeps us in sync with tools/patman/requirements.txt:
+diff --git a/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+new file mode 100644
+index 0000000..a86e0bd
+--- /dev/null
++++ b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+@@ -0,0 +1,10 @@
++import os
++import travis_tftp
++
++env__net_dhcp_server = True
++env__net_tftp_readable_file = travis_tftp.file2env('u-boot')
++env__efi_loader_helloworld_file = travis_tftp.file2env('lib/efi_loader/helloworld.efi')
++env__efi_loader_grub_file = travis_tftp.file2env('grub_riscv64.efi')
++env__efi_fit_tftp_file = {
++    "dn" : os.environ['UBOOT_TRAVIS_BUILD_DIR'],
++}
+diff --git a/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
+new file mode 100644
+index 0000000..a86e0bd
+--- /dev/null
++++ b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
+@@ -0,0 +1,10 @@
++import os
++import travis_tftp
++
++env__net_dhcp_server = True
++env__net_tftp_readable_file = travis_tftp.file2env('u-boot')
++env__efi_loader_helloworld_file = travis_tftp.file2env('lib/efi_loader/helloworld.efi')
++env__efi_loader_grub_file = travis_tftp.file2env('grub_riscv64.efi')
++env__efi_fit_tftp_file = {
++    "dn" : os.environ['UBOOT_TRAVIS_BUILD_DIR'],
++}
+-- 
+2.51.0
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---wlXFByTO3obhMF50
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTij6AAKCRAr4qD1Cr/k
-CmQSAP9ma5VyvkPcjVCkW0rpOzU55mb22My2MhuKE8cBopuqHQD8DeegtCTbeNKT
-A7MIbxD8PNoIwMERioEzCckZeR68cA0=
-=P2+T
------END PGP SIGNATURE-----
-
---wlXFByTO3obhMF50--
