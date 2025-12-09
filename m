@@ -4,69 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30B6D3B7FF
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 16:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB63BD3B981
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 16:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E406C80FA1;
-	Tue,  9 Dec 2025 17:33:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A70683C40;
+	Tue,  9 Dec 2025 17:39:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hVe+t9XI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bCHTHcKH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49BB483015; Tue,  9 Dec 2025 17:33:51 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 18F6583C72; Tue,  9 Dec 2025 17:39:23 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACDF4807B1
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 17:33:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6D8E260127
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 16:33:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2542AC4CEF5
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 16:33:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1765298021;
- bh=zAo4u+2G7zXpvaVGLUSGJ+lz0fMS+Ely1qMGWEXmSRs=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=hVe+t9XIU3SrqXCjge7+KIteupgvqU8MvIpKM/1BYGJTgp/+qPatmwPJkKR/jYJJl
- UV5ehEH3u3qiCXaheekfBrQ8aDg1B6uppoWGYO0+gkVuvLRQaYrkM5R41XK+IQMesO
- tmMUdy1OdQtVVrDYDtGIuhfUVWfk7D/vYJ2S6rywDKHhhC3mTZ5UpZooJz1x4mUfEE
- pf6fIoMVPgOL1LSI/22H+TgPvwFSMqXgfSbk3aW56Wdh2FO1jZc2zGA89BIpzLWcQl
- H0OLoWKGUxO5tO2CdzPNjYNJL2LXMSRxMmHleqZBUlESY9qxocFlXnq6Jkt/4LWO0Z
- Ulx1r2OX3BHiQ==
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-6431b0a1948so9916254a12.3
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 08:33:41 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6333D807B1
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 17:39:20 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-47a80d4a065so5348555e9.2
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 08:39:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765298360; x=1765903160; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=UWuil6aAnDBdBs6Nkad6VjaHxymEwlM5nJpjfI5wEC0=;
+ b=bCHTHcKHOnX4NYR/yvJQW8VnCzOKnXvdi8mipJ/jqnbhe0WPMOOuGEmo2ypgA+sPdB
+ 1UtwW/PfgJoXZ+5SJL3/aHIeK18Smj2x8/HowGPWhVqJZfhU3LCA9+vAUJS3h6CHs+3b
+ kH3ciyYtvEmvCFNUFNKEA5tBdvWxKZ1bqyMI2/2VMrtHkw1HPIHgVqy5105dCd7BJLpz
+ j1B2Z/NFoL8mlHRUnDLzd/8YUs7ikgybgC2FmCHK17L5F7F3QzzEfFLimp3vVkNcG4S7
+ UVSlBNRq8l2v1HDDnAlvJx78xFP7ZyT4Q5pMiv3AbpdrNdIU+xzHozAx/l0jDob2ELbu
+ VyOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765298360; x=1765903160;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UWuil6aAnDBdBs6Nkad6VjaHxymEwlM5nJpjfI5wEC0=;
+ b=cVts+9xbInHIlFPfjAQj9vi/uztd7mNEtXLXsxNPz7HON3IVGVQOwnenvzhxDnP6fq
+ p/ofIP4gXLKAeqHKftDzsq0YvOJWoKojtuzzEUHEnLAOIspdQugw7+AX29qFn4ALiSUt
+ mkzRS9gdjLOrurWzLV21UWXpLtrpVJcTW6tBZ2CXE3t0+UNG5hhW2Q4BaxdsAVN9cJXe
+ 5GF7E3TsAZZb9q4Bq4fUBOHgXCHKq7zAku/0jfAPzTov6gvzoUujox3uwdLVLRP83BDy
+ nCgALriaoE7gO/c663FbApjHWdhOnxd0E9RTFa/fx8vg48deb6fjB4r11xjEv0Rb+DtW
+ xwNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtZaKYns5xFHpOK4zkbEs6LcUbqbb5Ltu9fu4R3gWv4nhssGw0Jc9hKHPMff9FrVoUJHZsUAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYK6ejdcNM1D83cWPZNeRTifgUT2+Duheqn6P6T982cMJnyo9d
- jcFA87q70ROEyIj+zm6O1S8TLd8Dw3KpOLTRxvTl2RIsRpv5Q3pRvCuuWykOMw4x3neQ8s9JQcH
- C7mtjHe7Ogu6I2MgJezUqwJROd5Vvrg==
-X-Google-Smtp-Source: AGHT+IHWQUeVvWQsencdQPX0UFonukQ0LAUTjVcIZEYb3I46uJ2HOFsNrEQOxJ/CKtlhqOscN9IHsgzV1cJmnWvhUmU=
-X-Received: by 2002:a05:6402:1444:b0:63c:1d4a:afc4 with SMTP id
- 4fb4d7f45d1cf-64919c041d6mr9911727a12.4.1765298019711; Tue, 09 Dec 2025
- 08:33:39 -0800 (PST)
+ AJvYcCUJiVpCQMKMV980yqndtJIvYyW352SfEvg5kMLpRkQGzpMr2RHI8b8diB8p8D+MWz32L6nHGd4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7Om2G3gI48zMxJm/AL3HUhLEwMvLYkzRkutfgiL9nwuQ/LDES
+ ZMu+uMA3VVAdyy3tHPGrxswPxkhvXGYwwgT2gIyAHNIPhFT+uz2xAxfp3zso4JWRgqE=
+X-Gm-Gg: ASbGncuRzrmCq+SfwFoIOOT9gLV1P/osFkF2aHC67m53bbjTsLtoNq588mhZ2e1gEyb
+ DTl/6G/5K/jhfJ3XDdmw30fYY88eBor8zvXc4HxWi8VphODCwH5nJ8QPbHDJqdudQbk+u9X9Vpr
+ n0lNSvO3Rw1Ndbd6Wiw08VdxqC0OA3xXIilUpCPy4RNoKyloNwKuWNvrkjRGXfEuHcv+85efC+Y
+ GiM/nqwT/2LzkR0XbpolNfQiEBiQRaWqhkMMXlCr/GIJBRz4zploa6L+6iG49p1xkZnR6bWjWml
+ aAEz1obCFE5Ee7Sq84Vg+UmZIpVC4xOExxoxQmAnmDXt8Mtz93klFYbapZCxRJNOBFexcbaOp3z
+ L22Ucu7av/udbPFLU40SP7QfRJhuP0hJreRxK/aIH7HIdtgfyJWOm2SBrhSXkBAZSlWUrajXbjB
+ iZloqJsB/8DT/XU4AYG2AsLmu1Qo9U0d6Iqs7nSGkjP6RdL4wwo7gZmWtLLCk7
+X-Google-Smtp-Source: AGHT+IGrihDrUZ1/dESw3d5J3i70CXoMPGmGPO9cobDPiea+2QgWxrRBd+IwRrtdYFI9OP4lw+PIKA==
+X-Received: by 2002:a05:600c:8488:b0:46e:33b2:c8da with SMTP id
+ 5b1f17b1804b1-47939e3d210mr110938785e9.32.1765298359584; 
+ Tue, 09 Dec 2025 08:39:19 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:f7b:b001:5671:a6d7:74:fcb5?
+ ([2a0a:ef40:f7b:b001:5671:a6d7:74:fcb5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47a7d98ef5bsm22512155e9.3.2025.12.09.08.39.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Dec 2025 08:39:18 -0800 (PST)
+Message-ID: <976f38ab-fb39-4db0-a37d-31066ea941f6@linaro.org>
+Date: Tue, 9 Dec 2025 16:39:17 +0000
 MIME-Version: 1.0
-References: <20251127154752.589691-1-frazer.carsley@arm.com>
- <20251201090424.34519-1-frazer.carsley@arm.com>
- <20251201090424.34519-2-frazer.carsley@arm.com>
-In-Reply-To: <20251201090424.34519-2-frazer.carsley@arm.com>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 9 Dec 2025 10:33:27 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqJhhyZhNUQP2x178yeRRBkSWvpev_+_bM3OyDON=JZ2aA@mail.gmail.com>
-X-Gm-Features: AQt7F2qG9oOi0zSBa0-7VJnizKmIkiHGE-d7TZzauZCD9DGjGxEIz1P-tsjXMqw
-Message-ID: <CAL_JsqJhhyZhNUQP2x178yeRRBkSWvpev_+_bM3OyDON=JZ2aA@mail.gmail.com>
-Subject: Re: [PATCHv2 1/1] corstone1000: Add Cortex-A320 support on FVP
-To: Frazer Carsley <frazer.carsley@arm.com>
-Cc: abdellatif.elkhlifi@arm.com, harsimransingh.tungal@arm.com, 
- hugues.kambampiana@arm.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/5] net: lwip: nfs: Port the NFS code to work with LWIP
+To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Martyn Welch <martyn.welch@collabora.com>
+References: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+ <20251208-lwip_nfs-v1-5-1f5d31e15d00@linaro.org>
+ <99a2c68e-dee6-4d0b-8068-ba318a3db03a@linaro.org>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <99a2c68e-dee6-4d0b-8068-ba318a3db03a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,220 +119,462 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 1, 2025 at 3:05=E2=80=AFAM Frazer Carsley <frazer.carsley@arm.c=
-om> wrote:
->
-> Enable Cortex-A320 support on the Corstone-1000 platform
-> (including FVP) and update the device tree to support the integrated
-> Ethos-U85 NPU and GIC-600 interrupt controller. These updates make
-> the platform fully compatible with Cortex-A320 while retaining
-> backward compatibility with Cortex-A35 and GIC-400.
+On 09/12/2025 15:02, Jerome Forissier wrote:
+> Hi Andrew,
+> 
+> On 12/8/25 13:52, Andrew Goodbody wrote:
+>> After the preparatory patches moved most of the NFS code into common
+>> files we now add the code to enable NFS support with LWIP.
+> 
+> s/LWIP/lwIP/ and same in the commit subject ('lwip:' is OK as a subsystem prefix though)
 
-TLDR: This needs to be a new platform. We really should have a new
-name here rather than trying to reuse corstone-1000.
+OK.
 
-> **Cortex-A320 enablement**
->
-> * Extend Corstone-1000 compatibility list to include `cortex-a320`.
-> * Ensure build and device-tree logic support both Cortex-A35 and
->   Cortex-A320 configurations.
->
-> **Ethos-U85 integration**
->
-> * Add `/ethosu@1a050000` node describing the NPU register block at
->   `0x1A050000`.
-> * Introduce associated reserved memory regions:
->   * `ethosu_sram@02400000`: 2 MiB on-chip SRAM (`no-map`).
->   * `ethosu_reserved@A0000000`: 32 MiB DDR carve-out
->      (`shared-dma-pool`).
-> * Connect memory regions through `memory-region` and `sram` phandles.
-> * Add `dma-ranges`, interrupt spec, `region-cfgs`, `cs-region`, and
->   `ethosu-mem-config` for full driver support.
-> * Enable the NPU node conditionally via `CONFIG_ETHOS_U85`.
->
-> **GICv3/GIC-600 support**
->
-> * Introduce `CONFIG_GIC_V3` to toggle between GIC-400 (v2) and
->   GIC-600 (v3).
-> * Add full GICv3 node guarded by `#ifdef CONFIG_GIC_V3`.
-> * Adjust `cpu@1..3` `reg` values to `0x100/0x200/0x300` under
->   GICv3 (keep `0x1/0x2/0x3` for GIC-400).
-> * Update Ethos-U85 interrupt assignment to **SPI 16** to align with
->   the new interrupt map.
->
-> These updates align the Corstone-1000 platform with Arm=E2=80=99s latest
-> Cortex-A320 and Ethos-U85 configurations and ensure proper interrupt
-> and memory mapping for both secure and non-secure domains.
->
-> Signed-off-by: Frazer Carsley <frazer.carsley@arm.com>
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> ---
->  arch/arm/dts/corstone1000-fvp-u-boot.dtsi | 18 +++++-
->  arch/arm/dts/corstone1000-u-boot.dtsi     | 76 +++++++++++++++++++++++
->  arch/arm/include/asm/armv8/cpu.h          |  1 +
->  board/armltd/corstone1000/Kconfig         |  7 +++
->  4 files changed, 99 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi b/arch/arm/dts/cor=
-stone1000-fvp-u-boot.dtsi
-> index 6b89d653417..0539e6c092a 100644
-> --- a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
-> +++ b/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
-> @@ -17,24 +17,36 @@
->  &{/cpus} {
->         cpu1: cpu@1 {
->                 device_type =3D "cpu";
-> -               compatible =3D "arm,cortex-a35";
-> +               compatible =3D "arm,cortex-a35","arm,cortex-a320";
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   cmd/Kconfig        |  28 +++---
+>>   cmd/lwip/Makefile  |   1 +
+>>   cmd/lwip/nfs.c     |  11 +++
+>>   include/net-lwip.h |   1 +
+>>   net/lwip/Makefile  |   1 +
+>>   net/lwip/nfs.c     | 282 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+>>   net/nfs-common.c   |   4 +-
+>>   7 files changed, 313 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index 8e3efff2bee69e4be80fe8e87eb7815dd3ff8ca9..de180fd7fab62329f8b63dfed780b32e0e908e91 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -2110,20 +2110,6 @@ config CMD_RARP
+>>   	help
+>>   	  Boot image via network using RARP/TFTP protocol
+>>   
+>> -config CMD_NFS
+>> -	bool "nfs"
+>> -	help
+>> -	  Boot image via network using NFS protocol.
+>> -
+>> -config NFS_TIMEOUT
+>> -	int "Timeout in milliseconds for NFS mounts"
+>> -	depends on CMD_NFS
+>> -	default 2000
+>> -	help
+>> -	  Timeout in milliseconds used in NFS protocol.  If you encounter
+>> -	  "ERROR: Cannot umount" in nfs command, try longer timeout such as
+>> -	  10000.
+>> -
+>>   config SYS_DISABLE_AUTOLOAD
+>>   	bool "Disable automatically loading files over the network"
+>>   	depends on CMD_BOOTP || CMD_DHCP || CMD_NFS || CMD_RARP
+>> @@ -2218,6 +2204,20 @@ config CMD_MDIO
+>>   	  The MDIO interface is orthogonal to the MII interface and extends
+>>   	  it by adding access to more registers through indirect addressing.
+>>   
+>> +config CMD_NFS
+>> +	bool "nfs"
+>> +	help
+>> +	  Boot image via network using NFS protocol.
+>> +
+>> +config NFS_TIMEOUT
+>> +	int "Timeout in milliseconds for NFS mounts"
+>> +	depends on CMD_NFS
+>> +	default 2000
+>> +	help
+>> +	  Timeout in milliseconds used in NFS protocol.  If you encounter
+>> +	  "ERROR: Cannot umount" in nfs command, try longer timeout such as
+>> +	  10000.
+>> +
+>>   config CMD_PING
+>>   	bool "ping"
+>>   	select PROT_RAW_LWIP if NET_LWIP
+>> diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+>> index a7f8976af3fb7cb2d41344f9f22a5d820c5ebc7e..90df1f5511cce4496abb16a495720df4e8cea822 100644
+>> --- a/cmd/lwip/Makefile
+>> +++ b/cmd/lwip/Makefile
+>> @@ -1,5 +1,6 @@
+>>   obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>>   obj-$(CONFIG_CMD_DNS) += dns.o
+>> +obj-$(CONFIG_CMD_NFS) += nfs.o
+>>   obj-$(CONFIG_CMD_PING) += ping.o
+>>   obj-$(CONFIG_CMD_SNTP) += sntp.o
+>>   obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>> diff --git a/cmd/lwip/nfs.c b/cmd/lwip/nfs.c
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..f22db582fdb9ff7c978da41d35046bf834aaf54e
+>> --- /dev/null
+>> +++ b/cmd/lwip/nfs.c
+>> @@ -0,0 +1,11 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/* Copyright (C) 2025 Linaro Ltd. */
+>> +
+>> +#include <command.h>
+>> +#include <net.h>
+>> +
+>> +U_BOOT_CMD(nfs,	3,	1,	do_nfs,
+>> +	   "boot image via network using NFS protocol",
+>> +	   "[loadAddress] [[hostIPaddr:]bootfilename]"
+>> +	  );
+>> +
+>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>> index c910def5719ea49c1796c11354e1a3d63e01e023..20cb0992cce1f9dbca7eaa114b4939028158d9b5 100644
+>> --- a/include/net-lwip.h
+>> +++ b/include/net-lwip.h
+>> @@ -51,6 +51,7 @@ int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip);
+>>   bool wget_validate_uri(char *uri);
+>>   
+>>   int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>> +int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>>   int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+>>   
+>>   #endif /* __NET_LWIP_H__ */
+>> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+>> index 1b48ae4d50885863e82989f77416e5c35545502a..5291cbb2a1c31a970c44c6e182dc6d3a90d489cf 100644
+>> --- a/net/lwip/Makefile
+>> +++ b/net/lwip/Makefile
+>> @@ -4,6 +4,7 @@ obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
+>>   obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>>   obj-$(CONFIG_DNS) += dns.o
+>>   obj-$(CONFIG_LWIP_ICMP_SHOW_UNREACH) += icmp_unreach.o
+>> +obj-$(CONFIG_CMD_NFS) += nfs.o
+>>   obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>>   obj-$(CONFIG_WGET) += wget.o
+>>   
+>> diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..5a2275aec97cd7e36ca3db9c3ee138878718f3b9
+>> --- /dev/null
+>> +++ b/net/lwip/nfs.c
+>> @@ -0,0 +1,282 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/* Copyright (C) 2025 Linaro Ltd. */
+>> +
+>> +#include <console.h>
+>> +#include <display_options.h>
+>> +#include <env.h>
+>> +#include <image.h>
+>> +#include <linux/kconfig.h>
+>> +#include <lwip/timeouts.h>
+>> +#include <lwip/udp.h>
+>> +#include <net.h>
+>> +#include "../nfs-common.h"
+>> +#include <time.h>
+>> +
+>> +static ulong timer_start;
+>> +
+>> +static struct nfs_ctx {
+>> +	ip_addr_t nfs_server;
+>> +	struct udp_pcb *pcb;
+>> +} sess_ctx;
+> 
+> I'd much prefer if we could avoid global variables, especially since
+> this NETLOOP_* state is imported from the legacy network stack. See
+> how tftp_loop() declares a tftp_ctx on the stack. We could have a
+> nfs_ctx for example.
 
-Not a valid combination. A35 is not backwards compatible with A320. We
-don't ever have fallbacks on Arm cores.
+I did consider that initially. Unfortunately it will much reduce the 
+amount of code that can be shared. The nfs_ctx needs to be passed around 
+which will change all the function signatures. The tftp code benefits 
+from being able to use the lwIP implementation instead of attempting to 
+reuse the legacy net code.
+Please confirm if you want me to go ahead with this change given that it 
+is likely to mean very little, if any, code sharing.
 
-> +#ifdef CONFIG_GIC_V3
-> +               reg =3D <0x100>;
-> +#else
->                 reg =3D <0x1>;
-> +#endif
+> With that I suppose "net: move net_state to net-common" could be
+> removed from the series.
 
-Do use ifdefs in DT like this. Upstream builds need to have both. And
-now your unit-address is wrong in one case.
+It could, yes.
 
->                 enable-method =3D "psci";
->                 next-level-cache =3D <&L2_0>;
->         };
+>> +
+>> +/**************************************************************************
+>> + * RPC_LOOKUP - Lookup RPC Port numbers
+>> + **************************************************************************
+>> + */
+>> +void rpc_req(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
+>> +{
+>> +	struct pbuf *pb;
+>> +	int pktlen;
+>> +	int sport;
+>> +	err_t err;
+>> +
+>> +	pb = pbuf_alloc(PBUF_TRANSPORT, sizeof(struct rpc_t), PBUF_RAM);
+> 
+> This needs to be checked for NULL.
 
-> diff --git a/arch/arm/dts/corstone1000-u-boot.dtsi b/arch/arm/dts/corston=
-e1000-u-boot.dtsi
-> index b29ac74217e..206403ea9a5 100644
-> --- a/arch/arm/dts/corstone1000-u-boot.dtsi
-> +++ b/arch/arm/dts/corstone1000-u-boot.dtsi
-> @@ -29,6 +29,15 @@
->         };
->  };
->
-> +&{/cpus} {
-> +       cpu: cpu@0 {
-> +               device_type =3D "cpu";
-> +               compatible =3D "arm,cortex-a35","arm,cortex-a320";
-> +               reg =3D <0>;
-> +               next-level-cache =3D <&L2_0>;
-> +       };
-> +};
-> +
->  &{/soc} {
->         extsys0: remoteproc@1a010310 {
->                 compatible =3D "arm,corstone1000-extsys";
-> @@ -37,3 +46,70 @@
->                 firmware-name =3D "es_flashfw.elf";
->         };
->  };
-> +
-> +#ifdef CONFIG_ETHOS_U85
-> +&{/reserved-memory} {
-> +       ethosu_sram: ethosu_sram@02400000 {
+OK.
 
-SRAM does not belong in reserved-memory. I believe I pointed out these
-issues internally.
+Andrew
 
-> +               reg =3D <0x02400000 0x200000>;
-> +               no-map;
-> +       };
-> +
-> +       ethosu_reserved: ethosu_reserved@A0000000 {
+>> +
+>> +	rpc_req_common(rpc_prog, rpc_proc, data, datalen,
+>> +		       pb->payload, &pktlen, &sport);
+>> +
+>> +	pbuf_realloc(pb, (u16_t)pktlen);
+>> +
+>> +	err = udp_sendto(sess_ctx.pcb, pb, &sess_ctx.nfs_server, sport);
+>> +	debug_cond((err != ERR_OK), "Failed to send UDP packet err = %d\n", err);
+>> +	pbuf_free(pb);
+>> +}
+>> +
+>> +void nfs_refresh_timeout(void)
+>> +{
+>> +	timer_start = get_timer(0);
+>> +}
+>> +
+>> +static void nfs_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
+>> +		     const ip_addr_t *addr, u16_t port)
+>> +{
+>> +	struct nfs_ctx *ctx = arg;
+>> +	int plen;
+>> +	struct rpc_t rpc_pkt;
+>> +
+>> +	if (addr->addr != ctx->nfs_server.addr)
+>> +		goto exitfree;
+>> +
+>> +	if (p->tot_len > sizeof(struct rpc_t))
+>> +		goto exitfree;
+>> +
+>> +	plen = pbuf_copy_partial(p, &rpc_pkt.u.data[0], sizeof(rpc_pkt), 0);
+>> +	nfs_pkt_recv(&rpc_pkt.u.data[0], plen);
+>> +
+>> +exitfree:
+>> +	pbuf_free(p);
+>> +}
+>> +
+>> +static int nfs_udp_init(struct nfs_ctx *ctx)
+>> +{
+>> +	ctx->pcb = udp_new();
+>> +	if (!ctx->pcb)
+>> +		return -ENOMEM;
+>> +
+>> +	ctx->pcb->local_port = nfs_our_port;
+>> +	udp_recv(ctx->pcb, nfs_recv, ctx);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int nfs_timeout_check(void)
+>> +{
+>> +	if (get_timer(timer_start) < nfs_timeout)
+>> +		return 0;
+>> +	if (++nfs_timeout_count < NFS_RETRY_COUNT) {
+>> +		puts("T ");
+>> +		timer_start = get_timer(0);
+>> +		nfs_send();
+>> +		return 0;
+>> +	}
+>> +
+>> +	return 1;
+>> +}
+>> +
+>> +static int nfs_loop(struct udevice *udev, ulong addr, char *fname,
+>> +		    ip_addr_t srvip)
+>> +{
+>> +	struct netif *netif;
+>> +	int ret;
+>> +
+>> +	nfs_download_state = NETLOOP_FAIL;
+>> +	net_set_state(NETLOOP_FAIL);
+> 
+> These states belong in the nfs_ctx I mentioned above.
+> 
+>> +
+>> +	if (!fname || addr == 0)
+>> +		return -1;
+>> +
+>> +	netif = net_lwip_new_netif(udev);
+>> +	if (!netif)
+>> +		return -1;
+>> +
+>> +	nfs_filename = nfs_basename(fname);
+>> +	nfs_path     = nfs_dirname(fname);
+>> +
+>> +	printf("Using %s device\n", eth_get_name());
+>> +
+>> +	printf("File transfer via NFS from server %s; our IP address is %s\n",
+>> +	       ip4addr_ntoa(&srvip), env_get("ipaddr"));
+>> +
+>> +	printf("\nFilename '%s/%s'.", nfs_path, nfs_filename);
+>> +
+>> +	if (net_boot_file_expected_size_in_blocks) {
+>> +		printf(" Size is 0x%x Bytes = ",
+>> +		       net_boot_file_expected_size_in_blocks << 9);
+>> +		print_size(net_boot_file_expected_size_in_blocks << 9, "");
+>> +	}
+>> +	printf("\nLoad address: 0x%lx\nLoading: *\b", addr);
+>> +	image_load_addr = addr;
+>> +
+>> +	nfs_timeout_count = 0;
+>> +	nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
+>> +
+>> +	ret = nfs_udp_init(&sess_ctx);
+>> +	if (ret < 0) {
+>> +		net_lwip_remove_netif(netif);
+>> +		debug("Failed to init network interface, aborting for error = %d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	net_set_state(NETLOOP_CONTINUE);
+>> +
+>> +	sess_ctx.nfs_server.addr = srvip.addr;
+>> +
+>> +	nfs_send();
+>> +
+>> +	timer_start = get_timer(0);
+>> +	do {
+>> +		net_lwip_rx(udev, netif);
+>> +		if (net_state != NETLOOP_CONTINUE)
+>> +			break;
+>> +		if (ctrlc()) {
+>> +			printf("\nAbort\n");
+>> +			break;
+>> +		}
+>> +
+>> +		if (nfs_timeout_check())
+>> +			break;
+>> +	} while (true);
+>> +	debug("%s: Loop exit at %lu\n", __func__, get_timer(0));
+>> +
+>> +	net_lwip_remove_netif(netif);
+>> +
+>> +	if (net_state == NETLOOP_SUCCESS) {
+>> +		ret = 0;
+>> +		if (net_boot_file_size > 0) {
+>> +			printf("Bytes transferred = %u (%x hex)\n",
+>> +			       net_boot_file_size, net_boot_file_size);
+>> +			env_set_hex("filesize", net_boot_file_size);
+>> +			env_set_hex("fileaddr", image_load_addr);
+>> +		}
+>> +
+>> +	} else {
+>> +		debug("%s: NFS loop failed\n", __func__);
+>> +		ret = -1;
+>> +	}
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>> +{
+>> +	int ret = CMD_RET_SUCCESS;
+>> +	char *arg = NULL;
+>> +	char *words[2] = { };
+>> +	char *fname = NULL;
+>> +	char *server_ip = NULL;
+>> +	char *end;
+>> +	ip_addr_t srvip;
+>> +	ulong laddr;
+>> +	ulong addr;
+>> +	int i;
+>> +
+>> +	laddr = env_get_ulong("loadaddr", 16, image_load_addr);
+>> +
+>> +	switch (argc) {
+>> +	case 1:
+>> +		fname = env_get("bootfile");
+>> +		break;
+>> +	case 2:
+>> +		/*
+>> +		 * Only one arg - accept two forms:
+>> +		 * Just load address, or just boot file name. The latter
+>> +		 * form must be written in a format which can not be
+>> +		 * mis-interpreted as a valid number.
+>> +		 */
+>> +		addr = hextoul(argv[1], &end);
+>> +		if (end == (argv[1] + strlen(argv[1]))) {
+>> +			laddr = addr;
+>> +			fname = env_get("bootfile");
+>> +		} else {
+>> +			arg = strdup(argv[1]);
+>> +		}
+>> +		break;
+>> +	case 3:
+>> +		laddr = hextoul(argv[1], NULL);
+>> +		arg = strdup(argv[2]);
+>> +		break;
+>> +	default:
+>> +		ret = CMD_RET_USAGE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (!arg)
+>> +		arg = net_boot_file_name;
+>> +
+>> +	if (*arg) {
+>> +		/* Parse [ip:]fname */
+>> +		i = 0;
+>> +		while ((*(words + i) = strsep(&arg, ":")))
+>> +			i++;
+>> +
+>> +		switch (i) {
+>> +		case 2:
+>> +			server_ip = words[0];
+>> +			fname = words[1];
+>> +			break;
+>> +		case 1:
+>> +			fname = words[0];
+>> +			break;
+>> +		default:
+>> +			break;
+>> +		}
+>> +	}
+>> +
+>> +	if (!server_ip)
+>> +		server_ip = env_get("serverip");
+>> +	if (!server_ip) {
+>> +		log_err("*** ERROR: 'serverip' not set\n");
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (!ipaddr_aton(server_ip, &srvip)) {
+>> +		log_err("error: ipaddr_aton\n");
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (!fname) {
+>> +		log_err("error: no file name\n");
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (!laddr) {
+>> +		log_err("error: no load address\n");
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (net_lwip_eth_start() < 0) {
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>> +	}
+>> +
+>> +	if (nfs_loop(eth_get_dev(), laddr, fname, srvip) < 0)
+>> +		ret = CMD_RET_FAILURE;
+>> +out:
+>> +	if (arg != net_boot_file_name)
+>> +		free(arg);
+>> +	return ret;
+>> +}
+>> diff --git a/net/nfs-common.c b/net/nfs-common.c
+>> index a6a70677bd2d8350819dd7bce336d35cc3ae7bf8..4fbde67a760f4eb2825749a051dd444bac486253 100644
+>> --- a/net/nfs-common.c
+>> +++ b/net/nfs-common.c
+>> @@ -286,9 +286,11 @@ static void nfs_umountall_req(void)
+>>   	u32 *p;
+>>   	int len;
+>>   
+>> -	if ((nfs_server_mount_port == -1) || !fs_mounted)
+>> +	if ((nfs_server_mount_port == -1) || !fs_mounted) {
+>>   		/* Nothing mounted, nothing to umount */
+>> +		net_set_state(NETLOOP_FAIL);
+>>   		return;
+>> +	}
+>>   
+>>   	p = &data[0];
+>>   	p = rpc_add_credentials(p);
+>>
+> 
+> Thanks,
 
-Upstream is not going to use this.
-
-> +               compatible =3D "shared-dma-pool";
-> +               reg =3D <0xA0000000 0x02000000>;
-> +               no-map;
-> +       };
-> +};
-> +
-> +/ {
-> +       ethosu: ethosu@1A050000 {
-> +               compatible =3D "arm,ethosu-direct";
-
-This binding will never be accepted. The upstream binding is here[1].
-
-> +
-> +               // Base address and size of NPU registers
-> +               reg =3D <0x1A050000 0x4000>;
-> +
-> +               memory-region =3D <&ethosu_reserved>;
-> +               sram =3D <&ethosu_sram>;
-> +
-> +               // Address mappings to translate between bus addresses (N=
-PU) and physical host CPU addresses
-> +               dma-ranges =3D <0x02400000 0x02400000 0x200000>,
-> +               <0xA0000000 0xA0000000 0x02000000>;
-> +
-> +               interrupts =3D <0 16 4>;
-> +               interrupt-names =3D "irq";
-> +
-> +               // Memory region configuration
-> +               region-cfgs =3D <3 3 0 3 3 3 3 3>;
-> +
-> +               // Memory regions used for the command stream
-> +               cs-region =3D <2>;
-> +
-> +               // Memory interface configuration for Ethos-U85
-> +               ethosu_mem_config {
-> +                       compatible =3D "arm,ethosu-mem-config";
-> +                       // <beats outstanding_read outstanding_write>
-> +                       sram =3D <0 64 32>;
-> +                       ext  =3D <1 64 32>;
-> +                       // <mem_domain mem_type axi_port>
-> +                       configs =3D <0 0 0>,
-> +                       <0 0 0>,
-> +                       <0 0 1>,
-> +                       <0 0 1>;
-> +               };
-> +       };
-> +};
-> +#endif
-> +#ifdef CONFIG_GIC_V3
-> +gic: &{/interrupt-controller@1c000000} {
-> +               compatible =3D "arm,gic-v3";
-> +               #interrupt-cells =3D <3>;
-> +               #address-cells =3D <1>;
-> +               #size-cells =3D <1>;
-> +               ranges;
-> +               interrupt-controller;
-> +               reg =3D <0x1c000000 0x00010000>,
-> +               <0x1c040000 0x00080000>;
-> +               interrupts =3D <GIC_PPI 9 IRQ_TYPE_LEVEL_LOW>;
-> +       };
-> +#endif
-> +
-> diff --git a/arch/arm/include/asm/armv8/cpu.h b/arch/arm/include/asm/armv=
-8/cpu.h
-> index 4dbb589aab8..ffd8f8f358f 100644
-> --- a/arch/arm/include/asm/armv8/cpu.h
-> +++ b/arch/arm/include/asm/armv8/cpu.h
-> @@ -8,6 +8,7 @@
->  #define MIDR_PARTNUM_CORTEX_A57                0xD07
->  #define MIDR_PARTNUM_CORTEX_A72                0xD08
->  #define MIDR_PARTNUM_CORTEX_A76                0xD0B
-> +#define MIDR_PARTNUM_CORTEX_A320               0xD8F
->  #define MIDR_PARTNUM_SHIFT             0x4
->  #define MIDR_PARTNUM_MASK              (0xFFF << MIDR_PARTNUM_SHIFT)
->
-> diff --git a/board/armltd/corstone1000/Kconfig b/board/armltd/corstone100=
-0/Kconfig
-> index 709674d4cf7..9476d64d0b0 100644
-> --- a/board/armltd/corstone1000/Kconfig
-> +++ b/board/armltd/corstone1000/Kconfig
-> @@ -9,4 +9,11 @@ config SYS_VENDOR
->  config SYS_CONFIG_NAME
->         default "corstone1000"
->
-> +config ETHOS_U85
-> +       bool "Enable Arm Ethos-U85 NPU support"
-> +       default n
-
-Why would u-boot care about ethosu?
-
-Rob
-
-[1] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
-tree/Documentation/devicetree/bindings/npu/arm,ethos.yaml
