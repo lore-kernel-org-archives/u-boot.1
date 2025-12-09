@@ -4,95 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABBDD3B7F8
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 15:55:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51036D3B981
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 16:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4815883C51;
-	Tue,  9 Dec 2025 16:55:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=arista.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D8D6830A0;
+	Tue,  9 Dec 2025 17:27:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=arista.com header.i=@arista.com header.b="Z9OC5dyu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MUmLD0cQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AA6A83C6C; Tue,  9 Dec 2025 16:55:50 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id AB1F283C40; Tue,  9 Dec 2025 17:27:28 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CE2583C39
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 16:55:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BFAA80FA1
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 17:27:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=arista.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adriana@arista.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-297cf964774so9902175ad.2
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 07:55:42 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c704bf2d9eso3538164a34.0
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 08:27:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arista.com; s=google; t=1765295741; x=1765900541; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pl9XYgqRR9c2j67fhuhjmlW5B1zHkFntwtfxF3FB6c0=;
- b=Z9OC5dyucw9Hi8ukzu8tLb0FZi+TqnfgrjBwBWCpc1O2rwHgqaElQUnN1olcG3YZE8
- SllWRlJQUrYr2PjJVDCODpEr85P0u1yKYQNxZPOCRWHBzfyGEVE59aBFN1lZkabB4rCG
- h9bP+sR1ww24JRPINBzemIkWyx0juqzyR8JE/CzavTfUIpExjDvdjvET+JWgWztODN6Q
- HCPjUzK3NwsoObDwg+4G6qSbutyCyxVN2QPOXSt1cdlHHxm0X8ywXEm5/Q1/LNQrlyCx
- SASCjV5aED9gpqV5nQ6dHjiDYUpoBmWH+wyJTKx4e/tnzWXIdX1mWXaBamKZCPGF/mga
- dUdw==
+ d=konsulko.com; s=google; t=1765297645; x=1765902445; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cgljv7eYDFKYdHDRvW4k9W0aBTaOP9XPPMax/me05KM=;
+ b=MUmLD0cQC+Q5oCHG5/DpxUYsgiKorzYyJWtygoHdfRZEd/gO1eVPw8A2Ode4MgrVqR
+ 43Ko18zeoCOef4g573IKEk+9iT+4VoYMdZtsKHm5S44ogntMEuFtR2NOF9z9FvEl1l5N
+ 6WzkM0QxwFuJulAv2W7Gtdb1SJpNG/5+QijU4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765295741; x=1765900541;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pl9XYgqRR9c2j67fhuhjmlW5B1zHkFntwtfxF3FB6c0=;
- b=Zt7cjD5p8Tv49tpPzVil1ytnR3rohrUid0ORI8+7+BuT/4caZx+aGYSwWwqrLE/v3p
- 2a51nd7DTTm4FrA4HoG7eWv1q6Q7bE+fprNsjFE5tBB+Y1XkP8iDdRSiyYf+YZ515MDM
- /um/W3dc/UNwxmq6FKb6mrfcYZYvOcMkQJFQuIo1Ayn7LgYpuKDSK7jGG9Cu63nF18W3
- Xuz27F0KjD8MHST1CgvPwDIutiVQNbQf43LwMMICE2X3Eh8bXH9QacAvPrNt2RQZgwTX
- 4dU0sPid26UVV4cmHqbawHsfpbZl8fbl9sHXJhwQjdbzgVy3GCFXbwsfw3lHIrvAH86n
- cfAA==
-X-Gm-Message-State: AOJu0YygXPDwz7Usr8rC/915yCU0BCvJ2gVdoh3Uj5ywfTDqpAdmhvOm
- Qemodm9NeuDy/1Dj6ueiXNK6DG8v0nH2aWySFKIyhgcoGLC5vCsiKNe75TlJsUqUBMbt08vayxJ
- CKVe0TQ==
-X-Gm-Gg: AY/fxX5u82d9RIylJc5JGDzJ41SWmeSNKTaYepJQQ8iTLVzUpTVhPMh0sZEZp3YLQoB
- LFoDZrd5m6PLXm44CinlXDvQ1c3FzpqJE5mdNUK7Y2q696plMw62l3Kx0il1kd+s3fhPJoLZ0em
- RJMyKAWG4FTJISWdxGWcKJ6ck9mui1wPbOpvFukinapZ6xvFDBxZRTfOkV8W5vAcNwKDImmswLu
- MkfNuPfFpovMjhBPHzNoIfCXsV0DtTye769/pLUsUPWCMZfY1xZbXxNMFAFG+MNGUaJoLaNn2TD
- Nc0SL8AR1Ik5MAj7j88SwWqGxN4mu5/jEl4K+Zf/ae2ahHVXybOKAAfavsUAhQeDti/ibTLJAl7
- AXxKvOEcNEcXy9p7j46lHScF6oGi72BVgJ9u5dL+fWA+6eYcKS8Jpv65PclulrCd4U1HZMFgULO
- FDayfjKQxu+zePuNDghPMjrEL//yQtZjJCYF5N3RaoZiJiACk=
-X-Google-Smtp-Source: AGHT+IFrriKqsXiXi3JxOCRFaEJWtEqGlNeVIVC1DTRlioD2Ne8ykJMHElwpLVgA03XryZstjTaGsg==
-X-Received: by 2002:a05:7300:6409:b0:2ab:ca55:89be with SMTP id
- 5a478bee46e88-2abca5598c0mr3912891eec.5.1765295740485; 
- Tue, 09 Dec 2025 07:55:40 -0800 (PST)
-Received: from adriana-dmi-upstream.sjc.aristanetworks.com ([74.123.28.12])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-11df7552defsm73006944c88.2.2025.12.09.07.55.40
+ d=1e100.net; s=20230601; t=1765297645; x=1765902445;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Cgljv7eYDFKYdHDRvW4k9W0aBTaOP9XPPMax/me05KM=;
+ b=YNQwBZAfSMsbalHaaOFb4Bp9Pe6Rb1uYLXKmkieYwfXXlvvw3qMWsrfKMFur8o0if1
+ vgUd3hsv4Wkie00zddYnwKj3d+uMahdJqv01qcOCpf7rPiDCZgwJuGBzisaZpCxSYeAM
+ QHPJHETi1Wd8spCgYyLePchunxzcfmdKffrJb6tATClFNtfUnwwGGtsHCyTKsu9S1uyx
+ MFNtnYEnhVHcbbdr2x9PRYZjh/PaKZ7fzMSTJ35RyuL0bZ95mtw/hFys1kuRaO2hdiYh
+ wRFGjrFDz9qpMw3zb5FQX2AWLmFUl9jQ2vzWJwkeqE6PpQ2TCOSE3kif9mGCPQMAY3fg
+ AW3A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2FeBmLZF9gkMqHQeJJX5SecKH340FB+bO3CouqudH5ZVyYA3+ndBfC0/EH9urLImvURxUZcE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqhBqyCdrqcaX/oWHnCADF/FRJiHfysrFXVh4uR2P4RFlF5mWT
+ cOBX8nUubmOio42vMXcqOd06oPX+xO1IrjC2Es4l5UzVx5h3IITRiIW6XPRXyoEpOps=
+X-Gm-Gg: ASbGnct5iv1LpKQo/aEr47O65xJZugrXPUt7xLbnTflhvAbllMmllStcrPnuytdqsXc
+ OnurUfXdamDi52IVX6kNsoKVn5z/Q/4OhgD9ni7eOwcT/dJI4SJEcLIIhsplcj1FemcxU39cc21
+ SVqxrqoE/5w1FGdj3axmmvXkXhZV3E8cOShXPWggvxOH1MibqK7T7eF8Uub1B4p8+clj7jeVde1
+ r/grgT8xw1TtE1U8tIUkMQPVub8xk65basTtexbZE6giInUI5RwaUKl06S5NeiezzZ1D4vYtoY6
+ 3NMj9Miom8wdYSuGL+pTZpQAsG2+xcgxidj19ByMPPT3+wcui56fRO9D8Ju/cP5ZE2KlTxLCktE
+ BGpbf/72DM7HsewE8Y7QAuYUnkCFG0LtX173yWy3cW645WpOwO6eZq5FILZK+oENtPhfwDcjJMH
+ YjjyEIVL39d+X0LzQtpZNnXswdZ+JbMNAyYMV+eWuUVL2Z4u/g+A==
+X-Google-Smtp-Source: AGHT+IGbE4w/s9716d2aGPTv/99AsOM8ehDGKnttvWb4wsNBJe7AzgPjx5z408eH7Ee0eiizN5inPw==
+X-Received: by 2002:a05:6830:2541:b0:7af:1d61:1055 with SMTP id
+ 46e09a7af769-7c9707ca9femr5919231a34.21.1765297645143; 
+ Tue, 09 Dec 2025 08:27:25 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c95acb0565sm12236085a34.24.2025.12.09.08.27.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Dec 2025 07:55:40 -0800 (PST)
-From: Adriana Nicolae <adriana@arista.com>
-Date: Tue, 09 Dec 2025 07:55:38 -0800
-Subject: [PATCH] test: dm: fdtdec: Validate FDT size in unit test
+ Tue, 09 Dec 2025 08:27:24 -0800 (PST)
+Date: Tue, 9 Dec 2025 10:27:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] configs: am43xx: Migrate to CONFIG_SYS_MEM_TOP_HIDE from
+ CFG_PRAM
+Message-ID: <20251209162722.GZ303283@bill-the-cat>
+References: <20251209055043.1410085-1-b-padhi@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251209-fdtdec-v1-1-614003860c32@arista.com>
-X-B4-Tracking: v=1; b=H4sIAHlGOGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDIwNL3bSUkpTUZF2LNHMLM0OD1MQUEwsloOKCotS0zAqwQdGxtbUAaW8
- SelgAAAA=
-X-Change-ID: 20251209-fdtdec-8f78610ead48
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Adriana Nicolae <adriana@arista.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1765295740; l=2460;
- i=adriana@arista.com; s=20251030; h=from:subject:message-id;
- bh=5svNdAWoToL7C6qST4BG048RUWCWnSs/+szqDVxqHdM=;
- b=qPEza/DD2oEhRTvnmJNdi9fN91rFNDDHdH+2r7XOto/vaAPsoPzZ6Z8G+eKloLyznGXYJ4PpH
- lPuiofYY+SXBreKELVf6TsN7ItMIV/e8pBlPWNPielf7ZUxKCQoXwm+
-X-Developer-Key: i=adriana@arista.com; a=ed25519;
- pk=lII+K3k+wnbGA8lid1LtGpyLz6AegAq0xb4hHGsHZc8=
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Ide4hCTQGrPcN9oB"
+Content-Disposition: inline
+In-Reply-To: <20251209055043.1410085-1-b-padhi@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,88 +100,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current FDT decoding tests calculate the memory required
-for FDT manipulation by directly adding a fixed margin to
-fdt_totalsize(gd->fdt_blob). The static analyzer flagged
-"gd->fdt_blob->totalsize" as a tainted value being passed
-to fdt_open_into().
 
-Ensure the size is validated by checking that the total size
-is within a reasonable maximum FDT limit for unit tests.
+--Ide4hCTQGrPcN9oB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adriana Nicolae <adriana@arista.com>
----
- test/dm/fdtdec.c | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
+On Tue, Dec 09, 2025 at 11:20:43AM +0530, Beleswar Padhi wrote:
 
-diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
-index ea5a494612c..495f57234a4 100644
---- a/test/dm/fdtdec.c
-+++ b/test/dm/fdtdec.c
-@@ -14,14 +14,19 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#define FDTDEC_MAX_SIZE  (2 * 1024 * 1024)
-+
- static int dm_test_fdtdec_set_carveout(struct unit_test_state *uts)
- {
- 	struct fdt_memory resv;
- 	void *blob;
- 	const fdt32_t *prop;
--	int blob_sz, len, offset;
-+	int blob_sz, len, offset, fdt_sz;
-+
-+	fdt_sz = fdt_totalsize(gd->fdt_blob);
-+	ut_assert(fdt_sz > 0 && fdt_sz < FDTDEC_MAX_SIZE);
- 
--	blob_sz = fdt_totalsize(gd->fdt_blob) + 4096;
-+	blob_sz = fdt_sz + 4096;
- 	blob = malloc(blob_sz);
- 	ut_assertnonnull(blob);
- 
-@@ -67,10 +72,13 @@ static int dm_test_fdtdec_add_reserved_memory(struct unit_test_state *uts)
- 	fdt_size_t size;
- 	void *blob;
- 	unsigned long flags = FDTDEC_RESERVED_MEMORY_NO_MAP;
--	int blob_sz, parent, subnode;
-+	int blob_sz, parent, subnode, fdt_sz;
- 	uint32_t phandle, phandle1;
- 
--	blob_sz = fdt_totalsize(gd->fdt_blob) + 128;
-+	fdt_sz = fdt_totalsize(gd->fdt_blob);
-+	ut_assert(fdt_sz > 0 && fdt_sz < FDTDEC_MAX_SIZE);
-+
-+	blob_sz = fdt_sz + 128;
- 	blob = malloc(blob_sz);
- 	ut_assertnonnull(blob);
- 
-@@ -138,14 +146,17 @@ static int dm_test_fdt_chosen_smbios(struct unit_test_state *uts)
- 	void *blob;
- 	ulong val;
- 	struct smbios3_entry *entry;
--	int chosen, blob_sz;
-+	int chosen, blob_sz, fdt_sz;
- 	const fdt64_t *prop;
- 
- 	if (!CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
- 		return -EAGAIN;
- 	}
- 
--	blob_sz = fdt_totalsize(gd->fdt_blob) + 4096;
-+	fdt_sz = fdt_totalsize(gd->fdt_blob);
-+	ut_assert(fdt_sz > 0 && fdt_sz < FDTDEC_MAX_SIZE);
-+
-+	blob_sz = fdt_sz + 4096;
- 	blob = memalign(8, blob_sz);
- 	ut_assertnonnull(blob);
- 
+> The TI AM43xx HS boards have been using CFG_PRAM to hide the top 64MB
+> firewalled DRAM memory from U-Boot. However, CFG_PRAM only prevents
+> U-Boot from relocating into that memory, but it is still open for access
+> for any other usage.
+>=20
+> Therefore, migrate into using CONFIG_SYS_MEM_TOP_HIDE which reduces the
+> ram size itself ensuring that memory is not visible to U-Boot at all
+> (either for reloc, or general usage).
+>=20
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 
----
-base-commit: 0e0a198a68be71148f5ec27ef86796174f91436f
-change-id: 20251209-fdtdec-8f78610ead48
+So, since it sounds like we're failing to boot now and this fixes, it,
+it's fine for the release. But what's using the memory under CFG_PRAM,
+if we aren't relocating ourselves? I want to better understand the
+failure case here, thanks!
 
-Best regards,
--- 
-Adriana Nicolae <adriana@arista.com>
+--=20
+Tom
 
+--Ide4hCTQGrPcN9oB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaThN5wAKCRAr4qD1Cr/k
+CvHwAP9g4Ng49nihJoxP55tRT/1n6BXqgMcWOx3Xs+C2JzLLzwEAt4ZLvNwD9lI6
+4PXErA7yNBvk3F+owUC6qsDF+j1kXgk=
+=F8nU
+-----END PGP SIGNATURE-----
+
+--Ide4hCTQGrPcN9oB--
