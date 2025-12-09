@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA00ED3B7EA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 11:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DD1D3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 11:54:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3628D8051F;
-	Tue,  9 Dec 2025 12:06:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=arista.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D53383700;
+	Tue,  9 Dec 2025 12:54:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=arista.com header.i=@arista.com header.b="fRoxFJx0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ryvD/EtU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OqExDojl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE4708051F; Tue,  9 Dec 2025 12:06:43 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 41D7D838A0; Tue,  9 Dec 2025 12:54:33 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DF088036B
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 12:06:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1815836C8
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 12:54:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=arista.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adriana@arista.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7cab8b4a6faso129528a34.3
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 03:06:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arista.com; s=google; t=1765278399; x=1765883199; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MjpZ0fKIkEqM8c6FFwj6l7H99iWBwd1AF62kuTftT2E=;
- b=fRoxFJx00n1qRFNcI06WAsnGEgKKEs9SHKJTWGT8QCEvSkmWRpEwmsW9h9TcUJceUS
- TCH7kqAxasgBtgIg/Rz9g7oZfdgO1798L5vdLmQITXp+Aty87afqWwxcH/rb8m06JrMf
- q9pa8/8dlLMngJEA6l9OCCrtYAZhNvij89bQ4MxHVI9s9XWLNMXuM8qA1jzVicXWPMfV
- tAjp0DTpvul4vD3UTFFGhx7fdHKuq19cjfk1Xor6P6xIRmvJKcMw9Md5C2yU7A5MQ4sl
- ZrAt41d/KQ2jX5v60hpbr0tigABYtmtZigc+7vsB589QkYWSOpriev2YeAOlbDOMqKE+
- iMKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765278399; x=1765883199;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MjpZ0fKIkEqM8c6FFwj6l7H99iWBwd1AF62kuTftT2E=;
- b=smv7k4C/rZOYTlPpWTKRH6DlhoDYXrucAqwlgoo/yiRQz7PJvb+arq1ikafGFWyQCH
- OZZ/fVrkwG09CIOZjVocsxKzDivWrn7YWBJD+SaY9q/H7vuy4Xz2qlfNIHAnBrKt0Z6Z
- pnmqnhzl1moJgj3+ZUvtkVEark4GfWnIFhL6YJLKUtcr+r+kfxz0HPMCvUlbZLPsVZ9R
- e88YNO2KkA63OqBiIGNFU5M00Y7EgUvo8ReMRumx7prg/xZPIzCrGUZ/bKIifPhrO+mt
- B3VP+hAKVNLVA8e5uXwOGioh62rfKaYnDGNx9rMv3yWtV6WOcVB9WZjSnCtufKozgk1R
- jxyA==
-X-Gm-Message-State: AOJu0Ywb19ntr7cHb8Poz/EJyxnx4hXMKYEw7Qq/qKpLvNDHSe69KUKg
- JeucKvyljLV2hTnV2YBGt8geG+EEvnZJ/RE7hbj0hY38gBkZQl41cWBb3SP2306SqdD1qq2OilB
- SvHYYGY0ukOwwukkLBQ/QKVuR17OeC7IA5eUarORZeWc08RVWQpwL8ZW8
-X-Gm-Gg: ASbGnctskrgBzcDOrVv9kdyAkZCIXZYLkUN/oKMP2zaL07abXpNHRpwXVy6bHQfeS33
- isJoak+IeZ/CaAvaS18nDf9X1MeFjfgQepW5XyNafza8oc5yWWCCdU4L88patpNW0W1EZ6Klp/c
- 4nF+9rn3Ioh6DMNq5e1H9Olec3VszbsSp4I/FlNdUsbway+GPb8PIwrriGpId+6kr/Y2OjoOwnk
- DOWQC5mU7j+RMXx3ewst4j/voc4qf/K2t4MobM24YnAstS1PornkzKrROIU0kZqny48eIbxSEkL
- R0y1eVQvq/ELkwKWYhRDkhjsXrs3qA==
-X-Google-Smtp-Source: AGHT+IEceLijNsuMXotEL+MuGzES/I7jX4RE/fbz0EIKstPOuCxERXj1UbWZmvX3++k8HBdklpHZA9WYQFoua9CIgUk=
-X-Received: by 2002:a05:6808:19a2:b0:455:7fe4:b228 with SMTP id
- 5614622812f47-4557fe4bcf5mr41277b6e.0.1765278399229; Tue, 09 Dec 2025
- 03:06:39 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dQchk1mdHz9tlB;
+ Tue,  9 Dec 2025 12:54:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1765281270;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SeGLgfilyAZEnzKZkvxXQTuOjDYzJf3dSV9ODDWlv8Y=;
+ b=ryvD/EtUrl0OnhfkAAm8vJGSuLSjX0qdvJr6jcUTl8YaLB3JXHotjdGGR0GbHwV3oZI1Hr
+ X/HDZ2i/gALXtXAn/d/Lps8e+iVHlO6WUdOcUMLRAJEcbn/pP8dQfHkiczOkKBEOoZ3kAs
+ HCBIaUinNwP+juXfU94Sx8eVt/PK6zNV+EUgCgiN3YSQieI+vNfC9vlL1jF/hmyCSRHlBP
+ Rya8wSFu+QPwhliW2Vf+Tyr6dbL5s55cNI31lfKE3EHPcbM/icPLwAuUxo2+w9gMlBV67q
+ u0lKOTDjSKX6Z+GSGwEDdfKIgOOYmpjFhqah/FnDxE65pmATCD/U+xklF01L+Q==
+Message-ID: <3d8c5338-9a14-4f27-9dd4-d84929f9c6c5@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1765281268;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SeGLgfilyAZEnzKZkvxXQTuOjDYzJf3dSV9ODDWlv8Y=;
+ b=OqExDojl7qjqL3qgFEiDvMhG5KJKIEuKMtvwMryHGsyUftyM1f0pWJeFjwAJwX+KgdmqF6
+ kQtsqcJ9Ch88Qm6DcoI5WQpuAHxAVYpVrvJ1t3W1m16Cp6frtET4n/BU+8w0Br/6pw7uzu
+ bVG3FFiZSJrdPaZqnv+zodAjaeLOTgRcYKXJWInWvOjT3W+3bz5pCN9yEBVJnqR+vsW1oW
+ KjgfAQyGl7fC3kB24Tki6/UWJ+eX0lL7iVkhamNYxsCmKz55tJM/MAJGswZr4HfCwKeClW
+ +Ew/MvHojlsk/cTOTbi22OFeEOCHTM8vQqP4PvUecNNcxm+ooLCHv+qy12x98g==
+Date: Tue, 9 Dec 2025 12:54:15 +0100
 MIME-Version: 1.0
-References: <20251208193857.GS303283@bill-the-cat>
-In-Reply-To: <20251208193857.GS303283@bill-the-cat>
-From: Adriana Nicolae <adriana@arista.com>
-Date: Tue, 9 Dec 2025 13:06:28 +0200
-X-Gm-Features: AQt7F2r8tFTcmyzfKxsaFMmlef0yp9WuJs-xVz8s_1Idl0yUryeD_DwqI-WCAPE
-Message-ID: <CAERbo5wWCSdxcN3mgf+GxGLNQf6mP5cvbNm_qq7LkY77bupwzQ@mail.gmail.com>
-Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 2/3] clk: scmi: Fix priv initialization in scmi_clk_gate()
+To: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>
+References: <20251208-sqqs-v1-0-290f0594e30b@foss.st.com>
+ <20251208-sqqs-v1-2-290f0594e30b@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251208-sqqs-v1-2-290f0594e30b@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 52d5e4e96058e67f1b8
+X-MBO-RS-META: abwogmno3wwxcrwh4pz7ikwoa347airr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,211 +93,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On 12/8/25 2:51 PM, Patrice Chotard wrote:
+> In scmi_clk_probe(), in case of CLK_CCF is not enabled, parent private
+> data is not set, so in scmi_clk_gate(), an uninitialized priv struct is
+> retrieved.
+> 
+> SCMI request is performed either using scmi_clk_state_in_v1 or
+> scmi_clk_state_in_v2 struct depending of the unpredictable value of
+> priv->version which leads to error during SCMI clock enable.
+> 
+> Issue detected on STM32MP157C-DK2 board using the SCMI device tree
+> stm32mp157c-dk2-scmi.dts.
+> 
+> Fixes: 0619cb32030b ("firmware: scmi: Add clock v3.2 CONFIG_SET support")
+> 
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Cc: Alice Guo <alice.guo@nxp.com>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Valentin Caron <valentin.caron@foss.st.com>
+> Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   drivers/clk/clk_scmi.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+> index f6132178205..e1c20f2c47c 100644
+> --- a/drivers/clk/clk_scmi.c
+> +++ b/drivers/clk/clk_scmi.c
+> @@ -137,7 +137,7 @@ static int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name,
+>   
+>   static int scmi_clk_gate(struct clk *clk, int enable)
+>   {
+> -	struct scmi_clock_priv *priv = dev_get_parent_priv(clk->dev);
+> +	struct scmi_clock_priv *priv;
+>   	struct scmi_clk_state_in_v1 in_v1 = {
+>   		.clock_id = clk_get_id(clk),
+>   		.attributes = enable,
+> @@ -156,6 +156,11 @@ static int scmi_clk_gate(struct clk *clk, int enable)
+>   					     in_v2, out);
+>   	int ret;
+>   
+> +	if (!CONFIG_IS_ENABLED(CLK_CCF))
+> +		priv = dev_get_priv(clk->dev);
+> +	else
+> +		priv = dev_get_parent_priv(clk->dev);
+> +
+Shouldn't this be doing similar resolution like existing code ?
 
-A possible fix for fdtdec.c tests would be to validate the fdt size
-before using it.
-All 3 tests in this file are using the same approach, if the previous tests=
- were
-acceptable the newly added one has some identical parts.
-
-If there is a way to test and fix all these 3 errors, I've put some
-changes which
-might be enough for Coverity to assume that the size of the fdt is safe. Le=
-t me
-know how I can test it or should I send an email to post it as a
-separate change?
-
-diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
-index ea5a494612c..a3c90d38115 100644
---- a/test/dm/fdtdec.c
-+++ b/test/dm/fdtdec.c
-@@ -14,14 +14,21 @@
-
- DECLARE_GLOBAL_DATA_PTR;
-
-+#define FDTDEC_MAX_SIZE  (2 * 1024 * 1024)
-+
- static int dm_test_fdtdec_set_carveout(struct unit_test_state *uts)
- {
-  struct fdt_memory resv;
-  void *blob;
-  const fdt32_t *prop;
-- int blob_sz, len, offset;
-+ int blob_sz, len, offset, fdt_sz;
-+
-+ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
-+ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
-+ return -EINVAL;
-+ }
-
-- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-+ blob_sz =3D fdt_sz + 4096;
-  blob =3D malloc(blob_sz);
-  ut_assertnonnull(blob);
-
-@@ -67,10 +74,15 @@ static int
-dm_test_fdtdec_add_reserved_memory(struct unit_test_state *uts)
-  fdt_size_t size;
-  void *blob;
-  unsigned long flags =3D FDTDEC_RESERVED_MEMORY_NO_MAP;
-- int blob_sz, parent, subnode;
-+ int blob_sz, parent, subnode, fdt_sz;
-  uint32_t phandle, phandle1;
-
-- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 128;
-+ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
-+ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
-+ return -EINVAL;
-+ }
-+
-+ blob_sz =3D fdt_sz + 128;
-  blob =3D malloc(blob_sz);
-  ut_assertnonnull(blob);
-
-@@ -138,14 +150,19 @@ static int dm_test_fdt_chosen_smbios(struct
-unit_test_state *uts)
-  void *blob;
-  ulong val;
-  struct smbios3_entry *entry;
-- int chosen, blob_sz;
-+ int chosen, blob_sz, fdt_sz;
-  const fdt64_t *prop;
-
-  if (!CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
-  return -EAGAIN;
-  }
-
-- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-+ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
-+ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
-+ return -EINVAL;
-+ }
-+
-+ blob_sz =3D fdt_sz + 4096;
-  blob =3D memalign(8, blob_sz);
-  ut_assertnonnull(blob);
-
-
-
-On Mon, Dec 8, 2025 at 9:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> Here's the latest Coverity scan report. I think the test/dm/clk_ccf.c
-> report is just a "works as intended" but I'm not sure off-hand about the
-> fdtdec.c test. Might be the case the previous test in the file also has
-> this problem, and since it's just test code, might also be fine enough.
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Dec 8, 2025 at 1:23=E2=80=AFPM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
->
->    - *New Defects Found:* 2
->    - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
->    the recent build analyzed by Coverity Scan.
->    - *Defects Shown:* Showing 2 of 2 defect(s)
->
-> Defect Details
->
-> ** CID 639831:         (TAINTED_SCALAR)
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 639831:           (TAINTED_SCALAR)
-> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-> 147
-> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-> 149             blob =3D memalign(8, blob_sz);
-> 150             ut_assertnonnull(blob);
-> 151
-> 152             /* Make a writable copy of the fdt blob */
-> >>>     CID 639831:           (TAINTED_SCALAR)
-> >>>     Passing tainted expression "gd->fdt_blob->totalsize" to "fdt_open=
-_into", which uses it as an offset.
-> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-> 154
-> 155             /* Mock SMBIOS table */
-> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-> smbios3_entry));
-> 157             memcpy(entry->anchor, "_SM3_", 5);
-> 158             entry->length =3D sizeof(struct smbios3_entry);
-> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-> 147
-> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-> 149             blob =3D memalign(8, blob_sz);
-> 150             ut_assertnonnull(blob);
-> 151
-> 152             /* Make a writable copy of the fdt blob */
-> >>>     CID 639831:           (TAINTED_SCALAR)
-> >>>     Passing tainted expression "gd->fdt_blob->size_dt_strings" to "fd=
-t_open_into", which uses it as an offset.
-> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-> 154
-> 155             /* Mock SMBIOS table */
-> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-> smbios3_entry));
-> 157             memcpy(entry->anchor, "_SM3_", 5);
-> 158             entry->length =3D sizeof(struct smbios3_entry);
-> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
-> 147
-> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-> 149             blob =3D memalign(8, blob_sz);
-> 150             ut_assertnonnull(blob);
-> 151
-> 152             /* Make a writable copy of the fdt blob */
-> >>>     CID 639831:           (TAINTED_SCALAR)
-> >>>     Passing tainted expression "gd->fdt_blob->size_dt_struct" to "fdt=
-_open_into", which uses it as an offset.
-> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-> 154
-> 155             /* Mock SMBIOS table */
-> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
-> smbios3_entry));
-> 157             memcpy(entry->anchor, "_SM3_", 5);
-> 158             entry->length =3D sizeof(struct smbios3_entry);
->
-> ** CID 639830:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/clk_ccf.c: 68           in dm_test_clk_ccf()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/clk_ccf.c: 68             in dm_test_clk_ccf()
-> 62      ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
-> 63
-> 64      rate =3D clk_get_parent_rate(clk);
-> 65      ut_asserteq(rate, 60000000);
-> 66
-> 67      rate =3D clk_set_rate(clk, 60000000);
-> >>>     CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
-> >>>     Expression "_val1", where "rate" is known to be equal to -38, ove=
-rflows the type of "_val1", which is type "unsigned int".
-> 68      ut_asserteq(rate, -ENOSYS);
-> 69
-> 70      rate =3D clk_get_rate(clk);
-> 71      ut_asserteq(rate, 60000000);
-> 72
-> 73      ret =3D clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_80M), &pclk);
->
->
->
-> View Defects in Coverity Scan
-> <https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
->
-> Best regards,
->
-> The Coverity Scan Admin Team
->
-> ----- End forwarded message -----
->
-> --
-> Tom
+168 static int scmi_clk_get_ctrl_flags(struct clk *clk, u32 *ctrl_flags)
+169 {
+170         struct clk_scmi *clkscmi;
+171         struct udevice *dev;
+172         u32 attributes;
+173         struct clk *c;
+174         int ret;
+175
+176         ret = clk_get_by_id(clk->id, &c);
+177         if (ret)
+178                 return ret;
+179
+180         dev = c->dev->parent; // <-----------------------------
+181
+182         clkscmi = container_of(c, struct clk_scmi, clk);
+183
+184         if (!clkscmi->attrs_resolved) {
+185                 char name[SCMI_CLOCK_NAME_LENGTH_MAX];
+186                 ret = scmi_clk_get_attibute(dev,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+  90 static int scmi_clk_get_attibute(struct udevice *dev, int clkid, 
+char *name,
+  91                                  u32 *attr)
+  92 {
+  93         struct scmi_clock_priv *priv = dev_get_priv(dev);
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
