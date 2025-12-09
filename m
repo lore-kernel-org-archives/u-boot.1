@@ -4,86 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51036D3B981
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 16:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30B6D3B7FF
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 16:33:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8D6830A0;
-	Tue,  9 Dec 2025 17:27:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E406C80FA1;
+	Tue,  9 Dec 2025 17:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MUmLD0cQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hVe+t9XI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB1F283C40; Tue,  9 Dec 2025 17:27:28 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 49BB483015; Tue,  9 Dec 2025 17:33:51 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BFAA80FA1
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 17:27:26 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c704bf2d9eso3538164a34.0
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 08:27:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765297645; x=1765902445; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Cgljv7eYDFKYdHDRvW4k9W0aBTaOP9XPPMax/me05KM=;
- b=MUmLD0cQC+Q5oCHG5/DpxUYsgiKorzYyJWtygoHdfRZEd/gO1eVPw8A2Ode4MgrVqR
- 43Ko18zeoCOef4g573IKEk+9iT+4VoYMdZtsKHm5S44ogntMEuFtR2NOF9z9FvEl1l5N
- 6WzkM0QxwFuJulAv2W7Gtdb1SJpNG/5+QijU4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765297645; x=1765902445;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Cgljv7eYDFKYdHDRvW4k9W0aBTaOP9XPPMax/me05KM=;
- b=YNQwBZAfSMsbalHaaOFb4Bp9Pe6Rb1uYLXKmkieYwfXXlvvw3qMWsrfKMFur8o0if1
- vgUd3hsv4Wkie00zddYnwKj3d+uMahdJqv01qcOCpf7rPiDCZgwJuGBzisaZpCxSYeAM
- QHPJHETi1Wd8spCgYyLePchunxzcfmdKffrJb6tATClFNtfUnwwGGtsHCyTKsu9S1uyx
- MFNtnYEnhVHcbbdr2x9PRYZjh/PaKZ7fzMSTJ35RyuL0bZ95mtw/hFys1kuRaO2hdiYh
- wRFGjrFDz9qpMw3zb5FQX2AWLmFUl9jQ2vzWJwkeqE6PpQ2TCOSE3kif9mGCPQMAY3fg
- AW3A==
+ by phobos.denx.de (Postfix) with ESMTPS id ACDF4807B1
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 17:33:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 6D8E260127
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 16:33:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2542AC4CEF5
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 16:33:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1765298021;
+ bh=zAo4u+2G7zXpvaVGLUSGJ+lz0fMS+Ely1qMGWEXmSRs=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=hVe+t9XIU3SrqXCjge7+KIteupgvqU8MvIpKM/1BYGJTgp/+qPatmwPJkKR/jYJJl
+ UV5ehEH3u3qiCXaheekfBrQ8aDg1B6uppoWGYO0+gkVuvLRQaYrkM5R41XK+IQMesO
+ tmMUdy1OdQtVVrDYDtGIuhfUVWfk7D/vYJ2S6rywDKHhhC3mTZ5UpZooJz1x4mUfEE
+ pf6fIoMVPgOL1LSI/22H+TgPvwFSMqXgfSbk3aW56Wdh2FO1jZc2zGA89BIpzLWcQl
+ H0OLoWKGUxO5tO2CdzPNjYNJL2LXMSRxMmHleqZBUlESY9qxocFlXnq6Jkt/4LWO0Z
+ Ulx1r2OX3BHiQ==
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-6431b0a1948so9916254a12.3
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 08:33:41 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2FeBmLZF9gkMqHQeJJX5SecKH340FB+bO3CouqudH5ZVyYA3+ndBfC0/EH9urLImvURxUZcE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqhBqyCdrqcaX/oWHnCADF/FRJiHfysrFXVh4uR2P4RFlF5mWT
- cOBX8nUubmOio42vMXcqOd06oPX+xO1IrjC2Es4l5UzVx5h3IITRiIW6XPRXyoEpOps=
-X-Gm-Gg: ASbGnct5iv1LpKQo/aEr47O65xJZugrXPUt7xLbnTflhvAbllMmllStcrPnuytdqsXc
- OnurUfXdamDi52IVX6kNsoKVn5z/Q/4OhgD9ni7eOwcT/dJI4SJEcLIIhsplcj1FemcxU39cc21
- SVqxrqoE/5w1FGdj3axmmvXkXhZV3E8cOShXPWggvxOH1MibqK7T7eF8Uub1B4p8+clj7jeVde1
- r/grgT8xw1TtE1U8tIUkMQPVub8xk65basTtexbZE6giInUI5RwaUKl06S5NeiezzZ1D4vYtoY6
- 3NMj9Miom8wdYSuGL+pTZpQAsG2+xcgxidj19ByMPPT3+wcui56fRO9D8Ju/cP5ZE2KlTxLCktE
- BGpbf/72DM7HsewE8Y7QAuYUnkCFG0LtX173yWy3cW645WpOwO6eZq5FILZK+oENtPhfwDcjJMH
- YjjyEIVL39d+X0LzQtpZNnXswdZ+JbMNAyYMV+eWuUVL2Z4u/g+A==
-X-Google-Smtp-Source: AGHT+IGbE4w/s9716d2aGPTv/99AsOM8ehDGKnttvWb4wsNBJe7AzgPjx5z408eH7Ee0eiizN5inPw==
-X-Received: by 2002:a05:6830:2541:b0:7af:1d61:1055 with SMTP id
- 46e09a7af769-7c9707ca9femr5919231a34.21.1765297645143; 
- Tue, 09 Dec 2025 08:27:25 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acb0565sm12236085a34.24.2025.12.09.08.27.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Dec 2025 08:27:24 -0800 (PST)
-Date: Tue, 9 Dec 2025 10:27:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Beleswar Padhi <b-padhi@ti.com>
-Cc: afd@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: am43xx: Migrate to CONFIG_SYS_MEM_TOP_HIDE from
- CFG_PRAM
-Message-ID: <20251209162722.GZ303283@bill-the-cat>
-References: <20251209055043.1410085-1-b-padhi@ti.com>
+ AJvYcCWtZaKYns5xFHpOK4zkbEs6LcUbqbb5Ltu9fu4R3gWv4nhssGw0Jc9hKHPMff9FrVoUJHZsUAc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYK6ejdcNM1D83cWPZNeRTifgUT2+Duheqn6P6T982cMJnyo9d
+ jcFA87q70ROEyIj+zm6O1S8TLd8Dw3KpOLTRxvTl2RIsRpv5Q3pRvCuuWykOMw4x3neQ8s9JQcH
+ C7mtjHe7Ogu6I2MgJezUqwJROd5Vvrg==
+X-Google-Smtp-Source: AGHT+IHWQUeVvWQsencdQPX0UFonukQ0LAUTjVcIZEYb3I46uJ2HOFsNrEQOxJ/CKtlhqOscN9IHsgzV1cJmnWvhUmU=
+X-Received: by 2002:a05:6402:1444:b0:63c:1d4a:afc4 with SMTP id
+ 4fb4d7f45d1cf-64919c041d6mr9911727a12.4.1765298019711; Tue, 09 Dec 2025
+ 08:33:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ide4hCTQGrPcN9oB"
-Content-Disposition: inline
-In-Reply-To: <20251209055043.1410085-1-b-padhi@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251127154752.589691-1-frazer.carsley@arm.com>
+ <20251201090424.34519-1-frazer.carsley@arm.com>
+ <20251201090424.34519-2-frazer.carsley@arm.com>
+In-Reply-To: <20251201090424.34519-2-frazer.carsley@arm.com>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 9 Dec 2025 10:33:27 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqJhhyZhNUQP2x178yeRRBkSWvpev_+_bM3OyDON=JZ2aA@mail.gmail.com>
+X-Gm-Features: AQt7F2qG9oOi0zSBa0-7VJnizKmIkiHGE-d7TZzauZCD9DGjGxEIz1P-tsjXMqw
+Message-ID: <CAL_JsqJhhyZhNUQP2x178yeRRBkSWvpev_+_bM3OyDON=JZ2aA@mail.gmail.com>
+Subject: Re: [PATCHv2 1/1] corstone1000: Add Cortex-A320 support on FVP
+To: Frazer Carsley <frazer.carsley@arm.com>
+Cc: abdellatif.elkhlifi@arm.com, harsimransingh.tungal@arm.com, 
+ hugues.kambampiana@arm.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,42 +83,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Dec 1, 2025 at 3:05=E2=80=AFAM Frazer Carsley <frazer.carsley@arm.c=
+om> wrote:
+>
+> Enable Cortex-A320 support on the Corstone-1000 platform
+> (including FVP) and update the device tree to support the integrated
+> Ethos-U85 NPU and GIC-600 interrupt controller. These updates make
+> the platform fully compatible with Cortex-A320 while retaining
+> backward compatibility with Cortex-A35 and GIC-400.
 
---Ide4hCTQGrPcN9oB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+TLDR: This needs to be a new platform. We really should have a new
+name here rather than trying to reuse corstone-1000.
 
-On Tue, Dec 09, 2025 at 11:20:43AM +0530, Beleswar Padhi wrote:
+> **Cortex-A320 enablement**
+>
+> * Extend Corstone-1000 compatibility list to include `cortex-a320`.
+> * Ensure build and device-tree logic support both Cortex-A35 and
+>   Cortex-A320 configurations.
+>
+> **Ethos-U85 integration**
+>
+> * Add `/ethosu@1a050000` node describing the NPU register block at
+>   `0x1A050000`.
+> * Introduce associated reserved memory regions:
+>   * `ethosu_sram@02400000`: 2 MiB on-chip SRAM (`no-map`).
+>   * `ethosu_reserved@A0000000`: 32 MiB DDR carve-out
+>      (`shared-dma-pool`).
+> * Connect memory regions through `memory-region` and `sram` phandles.
+> * Add `dma-ranges`, interrupt spec, `region-cfgs`, `cs-region`, and
+>   `ethosu-mem-config` for full driver support.
+> * Enable the NPU node conditionally via `CONFIG_ETHOS_U85`.
+>
+> **GICv3/GIC-600 support**
+>
+> * Introduce `CONFIG_GIC_V3` to toggle between GIC-400 (v2) and
+>   GIC-600 (v3).
+> * Add full GICv3 node guarded by `#ifdef CONFIG_GIC_V3`.
+> * Adjust `cpu@1..3` `reg` values to `0x100/0x200/0x300` under
+>   GICv3 (keep `0x1/0x2/0x3` for GIC-400).
+> * Update Ethos-U85 interrupt assignment to **SPI 16** to align with
+>   the new interrupt map.
+>
+> These updates align the Corstone-1000 platform with Arm=E2=80=99s latest
+> Cortex-A320 and Ethos-U85 configurations and ensure proper interrupt
+> and memory mapping for both secure and non-secure domains.
+>
+> Signed-off-by: Frazer Carsley <frazer.carsley@arm.com>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> ---
+>  arch/arm/dts/corstone1000-fvp-u-boot.dtsi | 18 +++++-
+>  arch/arm/dts/corstone1000-u-boot.dtsi     | 76 +++++++++++++++++++++++
+>  arch/arm/include/asm/armv8/cpu.h          |  1 +
+>  board/armltd/corstone1000/Kconfig         |  7 +++
+>  4 files changed, 99 insertions(+), 3 deletions(-)
+>
+> diff --git a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi b/arch/arm/dts/cor=
+stone1000-fvp-u-boot.dtsi
+> index 6b89d653417..0539e6c092a 100644
+> --- a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
+> +++ b/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
+> @@ -17,24 +17,36 @@
+>  &{/cpus} {
+>         cpu1: cpu@1 {
+>                 device_type =3D "cpu";
+> -               compatible =3D "arm,cortex-a35";
+> +               compatible =3D "arm,cortex-a35","arm,cortex-a320";
 
-> The TI AM43xx HS boards have been using CFG_PRAM to hide the top 64MB
-> firewalled DRAM memory from U-Boot. However, CFG_PRAM only prevents
-> U-Boot from relocating into that memory, but it is still open for access
-> for any other usage.
->=20
-> Therefore, migrate into using CONFIG_SYS_MEM_TOP_HIDE which reduces the
-> ram size itself ensuring that memory is not visible to U-Boot at all
-> (either for reloc, or general usage).
->=20
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+Not a valid combination. A35 is not backwards compatible with A320. We
+don't ever have fallbacks on Arm cores.
 
-So, since it sounds like we're failing to boot now and this fixes, it,
-it's fine for the release. But what's using the memory under CFG_PRAM,
-if we aren't relocating ourselves? I want to better understand the
-failure case here, thanks!
+> +#ifdef CONFIG_GIC_V3
+> +               reg =3D <0x100>;
+> +#else
+>                 reg =3D <0x1>;
+> +#endif
 
---=20
-Tom
+Do use ifdefs in DT like this. Upstream builds need to have both. And
+now your unit-address is wrong in one case.
 
---Ide4hCTQGrPcN9oB
-Content-Type: application/pgp-signature; name="signature.asc"
+>                 enable-method =3D "psci";
+>                 next-level-cache =3D <&L2_0>;
+>         };
 
------BEGIN PGP SIGNATURE-----
+> diff --git a/arch/arm/dts/corstone1000-u-boot.dtsi b/arch/arm/dts/corston=
+e1000-u-boot.dtsi
+> index b29ac74217e..206403ea9a5 100644
+> --- a/arch/arm/dts/corstone1000-u-boot.dtsi
+> +++ b/arch/arm/dts/corstone1000-u-boot.dtsi
+> @@ -29,6 +29,15 @@
+>         };
+>  };
+>
+> +&{/cpus} {
+> +       cpu: cpu@0 {
+> +               device_type =3D "cpu";
+> +               compatible =3D "arm,cortex-a35","arm,cortex-a320";
+> +               reg =3D <0>;
+> +               next-level-cache =3D <&L2_0>;
+> +       };
+> +};
+> +
+>  &{/soc} {
+>         extsys0: remoteproc@1a010310 {
+>                 compatible =3D "arm,corstone1000-extsys";
+> @@ -37,3 +46,70 @@
+>                 firmware-name =3D "es_flashfw.elf";
+>         };
+>  };
+> +
+> +#ifdef CONFIG_ETHOS_U85
+> +&{/reserved-memory} {
+> +       ethosu_sram: ethosu_sram@02400000 {
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaThN5wAKCRAr4qD1Cr/k
-CvHwAP9g4Ng49nihJoxP55tRT/1n6BXqgMcWOx3Xs+C2JzLLzwEAt4ZLvNwD9lI6
-4PXErA7yNBvk3F+owUC6qsDF+j1kXgk=
-=F8nU
------END PGP SIGNATURE-----
+SRAM does not belong in reserved-memory. I believe I pointed out these
+issues internally.
 
---Ide4hCTQGrPcN9oB--
+> +               reg =3D <0x02400000 0x200000>;
+> +               no-map;
+> +       };
+> +
+> +       ethosu_reserved: ethosu_reserved@A0000000 {
+
+Upstream is not going to use this.
+
+> +               compatible =3D "shared-dma-pool";
+> +               reg =3D <0xA0000000 0x02000000>;
+> +               no-map;
+> +       };
+> +};
+> +
+> +/ {
+> +       ethosu: ethosu@1A050000 {
+> +               compatible =3D "arm,ethosu-direct";
+
+This binding will never be accepted. The upstream binding is here[1].
+
+> +
+> +               // Base address and size of NPU registers
+> +               reg =3D <0x1A050000 0x4000>;
+> +
+> +               memory-region =3D <&ethosu_reserved>;
+> +               sram =3D <&ethosu_sram>;
+> +
+> +               // Address mappings to translate between bus addresses (N=
+PU) and physical host CPU addresses
+> +               dma-ranges =3D <0x02400000 0x02400000 0x200000>,
+> +               <0xA0000000 0xA0000000 0x02000000>;
+> +
+> +               interrupts =3D <0 16 4>;
+> +               interrupt-names =3D "irq";
+> +
+> +               // Memory region configuration
+> +               region-cfgs =3D <3 3 0 3 3 3 3 3>;
+> +
+> +               // Memory regions used for the command stream
+> +               cs-region =3D <2>;
+> +
+> +               // Memory interface configuration for Ethos-U85
+> +               ethosu_mem_config {
+> +                       compatible =3D "arm,ethosu-mem-config";
+> +                       // <beats outstanding_read outstanding_write>
+> +                       sram =3D <0 64 32>;
+> +                       ext  =3D <1 64 32>;
+> +                       // <mem_domain mem_type axi_port>
+> +                       configs =3D <0 0 0>,
+> +                       <0 0 0>,
+> +                       <0 0 1>,
+> +                       <0 0 1>;
+> +               };
+> +       };
+> +};
+> +#endif
+> +#ifdef CONFIG_GIC_V3
+> +gic: &{/interrupt-controller@1c000000} {
+> +               compatible =3D "arm,gic-v3";
+> +               #interrupt-cells =3D <3>;
+> +               #address-cells =3D <1>;
+> +               #size-cells =3D <1>;
+> +               ranges;
+> +               interrupt-controller;
+> +               reg =3D <0x1c000000 0x00010000>,
+> +               <0x1c040000 0x00080000>;
+> +               interrupts =3D <GIC_PPI 9 IRQ_TYPE_LEVEL_LOW>;
+> +       };
+> +#endif
+> +
+> diff --git a/arch/arm/include/asm/armv8/cpu.h b/arch/arm/include/asm/armv=
+8/cpu.h
+> index 4dbb589aab8..ffd8f8f358f 100644
+> --- a/arch/arm/include/asm/armv8/cpu.h
+> +++ b/arch/arm/include/asm/armv8/cpu.h
+> @@ -8,6 +8,7 @@
+>  #define MIDR_PARTNUM_CORTEX_A57                0xD07
+>  #define MIDR_PARTNUM_CORTEX_A72                0xD08
+>  #define MIDR_PARTNUM_CORTEX_A76                0xD0B
+> +#define MIDR_PARTNUM_CORTEX_A320               0xD8F
+>  #define MIDR_PARTNUM_SHIFT             0x4
+>  #define MIDR_PARTNUM_MASK              (0xFFF << MIDR_PARTNUM_SHIFT)
+>
+> diff --git a/board/armltd/corstone1000/Kconfig b/board/armltd/corstone100=
+0/Kconfig
+> index 709674d4cf7..9476d64d0b0 100644
+> --- a/board/armltd/corstone1000/Kconfig
+> +++ b/board/armltd/corstone1000/Kconfig
+> @@ -9,4 +9,11 @@ config SYS_VENDOR
+>  config SYS_CONFIG_NAME
+>         default "corstone1000"
+>
+> +config ETHOS_U85
+> +       bool "Enable Arm Ethos-U85 NPU support"
+> +       default n
+
+Why would u-boot care about ethosu?
+
+Rob
+
+[1] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+tree/Documentation/devicetree/bindings/npu/arm,ethos.yaml
