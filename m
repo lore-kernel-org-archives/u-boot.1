@@ -4,89 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA1ED3B7EA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 02:57:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D102D3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 03:40:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E675B83B91;
-	Tue,  9 Dec 2025 03:57:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 712FE83BBE;
+	Tue,  9 Dec 2025 04:40:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ktzo9dd+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3053483BBE; Tue,  9 Dec 2025 03:57:32 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 35F5083BDD; Tue,  9 Dec 2025 04:40:26 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C0A283B81
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 03:57:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE11683B81
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 04:39:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-786a822e73aso49962317b3.3
- for <u-boot@lists.denx.de>; Mon, 08 Dec 2025 18:57:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765249048; x=1765853848; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ymxhjtm18qn6YcNLrEejZMtSSfIc2wu2L8XqVOaOTks=;
- b=Ktzo9dd+1Z9ypAewIZ2h9RBQuyGKrj8EhIZHVim6bpp3KzHIrKaOleE1l1ssZCNX4B
- JNDBLc7XkrnKMRijDvysFTWCbfKjkwfbrESG64UDD6hffiX3bPL/qq8LR1fhuCRk8ZR5
- wlH8kD0ymJ9bXW9eHb8BOU5iCbikfH+7onMBq8WkYvQDY3Su9BJf+3nnD7Bb1HEGhJuG
- lEWvRdqpNIfY+CCiFcbmCaEN/unhzr1RVfDigufjRV7n+SX8CaeC3N4Ag8+WAmkPGgsR
- cROVhDZGds0tkkZSY0l9Oufhzy9Eb4d88En+EFzwT7krV0G0vfGxt0HV9EDJwm9MberB
- 8bpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765249048; x=1765853848;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ymxhjtm18qn6YcNLrEejZMtSSfIc2wu2L8XqVOaOTks=;
- b=ZZTSgkG1KkTjGYasRelJAiUNTf1W4xxyKdwqtagVjXvRkdU8UWLJl3W8+yh8JRw/Yj
- ZQd+CjnS/N20PdO6McGF3fgnpphB6I7mmAZNZ1EfZPr3C3Ix3iMGEsgbyH7bfgxeX6eX
- 9ueDCOCSZMyDTb63JmdAFY9CzlljKjchj5FQsSh0bDDIvIUWWsHLdleaZUdoJZOF6tPK
- YrO9DA10eR3ct5bpwbqLMTqzgM5IIpK/M/qTqH492PsgZNyaeus3d53/kIuYVYgQ7Jns
- Usr3UlNhEciD1+GP3A4Oa9KJxwMXry0JOXWzY5t6R7LC2iaIocmKSA/HckypQRlfhU9g
- JKFw==
-X-Gm-Message-State: AOJu0YxFBEfs0AHNXIazQ++CYsmjcRll+FwKwAPdTEjzFJ1uqydUIAbu
- eHTOgRw3qvnCnk8Pm9DzOSnxiU+rY8BY61QDtL4P/uNMy7o4bb79M4YL
-X-Gm-Gg: ASbGncspWiwbgPwjcPa/9hlkmIdADqrjEtkPyKmyKkKmVvudOlFQaN+bvt+4KxaTfKG
- 9mVa0PvlWEyBP4sG0yo43US4VowdGQVZxLcOLhNWMk3Woi3GymT+ZjmQb0982z0JYBnwZTWglOF
- fekkp81LfdeDmCzxvoAqkHxZ7HPCvZJxcv5U92PHELMn+MzQSMqAXFKX4J331eylyJbZ6/ylNkN
- AhtZaFeF5n6Do/ozA/PBxoiKs6BFxeQL3c1v0BXvXKYx3DC9sdnWwORjH2NzbKbLss/mjfrghMm
- KQDsp9uwPwMvGoTF/H4FF+lch5BrICA9mSb44z1nXJJ+TwC6YyMkX58QutuPw0Pq5salHtdMOhf
- eBPLpFADi3GNgU2esx1SvcG9d/KIbuJZYddoztWWyZ2PKUWeDObl7Zp/oOj3tOcwEyL7BUIriVK
- iuv4hG5OlRwFuykLABtQnVJLIg4x6Matl768263R3Lzd8TCqlVQ2qtc6yVyPUk1yzASrPMP/z1O
- A==
-X-Google-Smtp-Source: AGHT+IH6tw39PVX8+LPkKIbNEIRNt5P21WNSfl6RLkKo7eP6+JigjCUMvTtEh3nD+jc5MriaovWL8g==
-X-Received: by 2002:a05:690c:6aca:b0:784:aec5:7042 with SMTP id
- 00721157ae682-78c33c14aa4mr86873117b3.38.1765249048378; 
- Mon, 08 Dec 2025 18:57:28 -0800 (PST)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78c1b77942bsm54418787b3.27.2025.12.08.18.57.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Dec 2025 18:57:27 -0800 (PST)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tony Dinh <mibodhi@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Subject: [PATCH] Revert "drivers: scsi: fix inaccurate block count reporting
- in scsi operations"
-Date: Mon,  8 Dec 2025 18:53:52 -0800
-Message-ID: <20251209025634.14466-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.47.3
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
+ by Atcsqr.andestech.com with ESMTP id 5B93IrwK045083
+ for <u-boot@lists.denx.de>; Tue, 9 Dec 2025 11:18:53 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 5B93Hglx044778
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Tue, 9 Dec 2025 11:17:42 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 9 Dec
+ 2025 11:17:42 +0800
+Date: Tue, 9 Dec 2025 11:17:38 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <Jamie.Gibbons@microchip.com>
+CC: <ziyao@disroot.org>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
+ <Conor.Dooley@microchip.com>,
+ <Valentina.FernandezAlanis@microchip.com>, <junhui.liu@pigmoral.tech>,
+ <rick@andestech.com>
+Subject: Re: [PATCH 1/2] riscv: create a custom CPU implementation for
+ PolarFire SoC
+Message-ID: <aTeU0rLz6qDwpOdM@swlinux02>
+References: <20251119123843.4171699-1-jamie.gibbons@microchip.com>
+ <20251119123843.4171699-2-jamie.gibbons@microchip.com>
+ <aTE8Bi9kmTqaUgpy@swlinux02>
+ <471395da081e977a4db8795e7cfd5022ebd058e6.camel@microchip.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <471395da081e977a4db8795e7cfd5022ebd058e6.camel@microchip.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 5B93IrwK045083
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,126 +78,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit b32dda34506b4f486bc803d0c7251f987edd2455.
+Hi Jamie,
 
-Currently, scsi is broken and causes data abort. I did a bisect and found
-that this commit was the cause. Reverting it and scsi is working again.
+On Mon, Dec 08, 2025 at 12:10:28PM +0000, Jamie.Gibbons@microchip.com wrote:
+> [EXTERNAL MAIL]
+> 
+> Hi Leo,
+> 
+> On Thu, 2025-12-04 at 15:45 +0800, Leo Liang wrote:
+> > EXTERNAL EMAIL: Do not click links or open attachments unless you know
+> > the content is safe
+> >
+> > Hi Jamie,
+> >
+> > On Wed, Nov 19, 2025 at 12:38:42PM +0000, Jamie Gibbons wrote:
+> > > [EXTERNAL MAIL]
+> > >
+> > > From: Conor Dooley <conor.dooley@microchip.com>
+> > >
+> > > PolarFire SoC needs a custom implementation of top_of_ram(), so stop
+> > > using the generic CPU & create a custom CPU instead.
+> > >
+> > > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> > > ---
+> > >  arch/riscv/Kconfig                     |  1 +
+> > >  arch/riscv/cpu/mpfs/Kconfig            | 16 +++++++++++
+> > >  arch/riscv/cpu/mpfs/Makefile           |  6 ++++
+> > >  arch/riscv/cpu/mpfs/cpu.c              | 22 +++++++++++++++
+> > >  arch/riscv/cpu/mpfs/dram.c             | 38
+> > > ++++++++++++++++++++++++++
+> > >  arch/riscv/include/asm/arch-mpfs/clk.h |  8 ++++++
+> > >  board/microchip/mpfs_generic/Kconfig   |  4 +--
+> > >  7 files changed, 93 insertions(+), 2 deletions(-)
+> > >  create mode 100644 arch/riscv/cpu/mpfs/Kconfig
+> > >  create mode 100644 arch/riscv/cpu/mpfs/Makefile
+> > >  create mode 100644 arch/riscv/cpu/mpfs/cpu.c
+> >
+> > The cpu.c file only contains "cleanup_before_linux" and seems
+> > identical
+> > with the one provided in arch/riscv/cpu/generic/cpu.c.
+> >
+> > Other than that, LGTM.
+> >
+> > If you don't mind, I could fix this on my side that you don't need to
+> > resend the patchset again.
+> >
+> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> 
+> Thank you for your response, review and feedback.
+> 
+> Regarding 'mpfs/cpu.c', you're corect that it is currently identical to
+> the generic implementation. Our intent was to provide a placeholder for
+> any future Polarfire-specific logic and also assumed it was manditory,
+> but if duplication is unneccessary, I'm happy for you to adjust as you
+> see fit.
+> 
+> In other words, if U-Boot prefers to avoid duplication and this file is
+> not mandatory for build or architextural reasons per CPU implementation,
+> than please go ahead and use the generic version.
 
-=== Error Log with data abort
+Got it! Thanks for the explanation.
+I’ve updated it to use the generic implementation.
+If any Polarfire-specific logic is needed in the future,
+we can add this file back at that time.
 
-U-Boot 2026.01-rc4-tld-1-g0e0a198a68be (Dec 08 2025 - 17:42:05 -0800)
-Synology DS116
+Best regards,
+Leo
 
-DS116> scsi reset
-
-Reset SCSI
-scanning bus for devices...
-Target spinup took 0 ms.
-SATA link 1 timeout.
-AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
-flags: 64bit ncq led only pmp fbss pio slum part sxs
-  Device 0: (0:0) Vendor: ATA Prod.: FUJITSU MHY2250B Rev: 890B
-            Type: Hard Disk
-            Capacity: 238475.1 MB = 232.8 GB (488397169 x 512)
-
-DS116> ext2ls scsi 0:1 /boot
-data abort
-pc : [<3ffa5d3e>]	   lr : [<3ffc1515>]
-sp : 3fb65ad8  ip : 0000000c	 fp : 3fb7f220
-r10: 00002710  r9 : 3fb6aed0	 r8 : 3fb85e40
-r7 : f10a8100  r6 : 000003e8	 r5 : 000003e8  r4 : 3fb65ae0
-r3 : e38e39c1  r2 : 00000000	 r1 : 3fb65ae0  r0 : 00931767
-Flags: Nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
-Code: 3ffd b510 6803 460c (6bdb) 681b
-
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
-
- drivers/scsi/scsi.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index b414d022f3f..715271b1d69 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -228,11 +228,13 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 			blocks = max_blks;
- 			scsi_setup_read_ext(pccb, start, blocks);
- 			start += max_blks;
-+			blks -= max_blks;
- 		} else {
- 			pccb->datalen = block_dev->blksz * blks;
- 			blocks = blks;
- 			scsi_setup_read_ext(pccb, start, blocks);
- 			start += blks;
-+			blks = 0;
- 		}
- 		debug("scsi_read_ext: startblk " LBAF
- 		      ", blccnt " LBAF " buffer %lX\n",
-@@ -242,7 +244,6 @@ static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 			blkcnt -= blks;
- 			break;
- 		}
--		blks -= blocks;
- 		buf_addr += pccb->datalen;
- 	} while (blks != 0);
- 	debug("scsi_read_ext: end startblk " LBAF
-@@ -285,11 +286,13 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 			blocks = max_blks;
- 			scsi_setup_write_ext(pccb, start, blocks);
- 			start += max_blks;
-+			blks -= max_blks;
- 		} else {
- 			pccb->datalen = block_dev->blksz * blks;
- 			blocks = blks;
- 			scsi_setup_write_ext(pccb, start, blocks);
- 			start += blks;
-+			blks = 0;
- 		}
- 		debug("%s: startblk " LBAF ", blccnt " LBAF " buffer %lx\n",
- 		      __func__, start, blocks, buf_addr);
-@@ -298,7 +301,6 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 			blkcnt -= blks;
- 			break;
- 		}
--		blks -= blocks;
- 		buf_addr += pccb->datalen;
- 	} while (blks != 0);
- 
-@@ -320,7 +322,7 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
- 	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
- 	struct udevice *bdev = dev->parent;
- 	struct scsi_plat *uc_plat = dev_get_uclass_plat(bdev);
--	lbaint_t start, blks, max_blks, blocks;
-+	lbaint_t start, blks, max_blks;
- 	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
- 
- 	/* Setup device */
-@@ -337,20 +339,19 @@ static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
- 	      __func__, block_dev->devnum, start, blks);
- 	do {
- 		if (blks > max_blks) {
--			blocks = max_blks;
- 			scsi_setup_erase_ext(pccb, start, max_blks);
- 			start += max_blks;
-+			blks -= max_blks;
- 		} else {
--			blocks = blks;
- 			scsi_setup_erase_ext(pccb, start, blks);
- 			start += blks;
-+			blks = 0;
- 		}
- 		if (scsi_exec(bdev, pccb)) {
- 			scsi_print_error(pccb);
- 			blkcnt -= blks;
- 			break;
- 		}
--		blks -= blocks;
- 	} while (blks != 0);
- 	return blkcnt;
- }
--- 
-2.47.3
-
-base-commit: 0e0a198a68be71148f5ec27ef86796174f91436f
-branch: master
+> 
+> Thanks,
+> Jamie.
+> 
