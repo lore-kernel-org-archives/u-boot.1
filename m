@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5FD8D3B7EA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 10:49:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA00ED3B7EA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Dec 2025 11:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD4EB838FA;
-	Tue,  9 Dec 2025 11:49:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3628D8051F;
+	Tue,  9 Dec 2025 12:06:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=arista.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Im2dGwPi";
+	dkim=pass (2048-bit key; unprotected) header.d=arista.com header.i=@arista.com header.b="fRoxFJx0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE7C83B81; Tue,  9 Dec 2025 11:49:23 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id BE4708051F; Tue,  9 Dec 2025 12:06:43 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C23DB83849
- for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 11:49:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DF088036B
+ for <u-boot@lists.denx.de>; Tue,  9 Dec 2025 12:06:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=arista.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4777771ed1aso45269145e9.2
- for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 02:49:20 -0800 (PST)
+ spf=pass smtp.mailfrom=adriana@arista.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7cab8b4a6faso129528a34.3
+ for <u-boot@lists.denx.de>; Tue, 09 Dec 2025 03:06:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765277360; x=1765882160; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D21JmQnHH/ZFq2PVSa9iuVobtoB8rmUlRLwualAX038=;
- b=Im2dGwPiMH814hfJx2iGs90qbJdxvNQizn3MhI9tzqMCXYWghyRbfbA1tGG9CE6oby
- vqQcDvYKSnkGaMTetoVf5iWAdyzuMXecfNvNP7zl1BsNjUbx7MeUvMU2HgQmyLCFMyha
- 5XRZ80cIndxcdUurxJNkNnVtaQhiF3eARsDIwSmRn3j79c3VWsLPlSk4HExXMxV7DQPu
- jxuFcj9FRdA07iXzp+ei+TZuOe4wEIjynVmlGzSpdojWbm+nOqMVCpgvO1nm27y2Yjrq
- StkYP7WHCGUjGFt9DHqtibyyqKlhcQT2ncFMxOXu6kbrK1gqz1IfzVLKEThckj39pC1V
- Vd6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765277360; x=1765882160;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=arista.com; s=google; t=1765278399; x=1765883199; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D21JmQnHH/ZFq2PVSa9iuVobtoB8rmUlRLwualAX038=;
- b=l9jCuw3TvhEAl2ITXWavPyjJ2SsUYNa9Cti7JuYlJVi2Fu1vj7YFQxXk2OJ7tubTCq
- yN9s5geOH86/kHNFUqAqDYWeT5vNPmCJaQlhVmCnytCdCxoZ7hlimog9gQE4xrPOeZa3
- MlE2zL8GhLM1hBWiB8y7EiKExnORQlpfMiLKzKAPncm1dcPuvkCUAXHutILOroU0xT2T
- Wmkuu5dLHbhN25bIrVsRtTNmcdUNLiGglCAOKR1I+ftJ9A4ECl89z7lrphvcKFilAckA
- nDG3aocIO2gozfmORflZMhjcefttV5XiuaesZ9zq4JHiowvtFfIzyO4bW/0ZwFcsALnr
- 7aAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVT9jFEtL/BdsRtZIKadmRmKRbH9WFf1wvJ2vYCwL07S0kCqn0cD9VNs7dBCnT6q2aetskU4VE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8p8PvKRO2S0arOjIC+d68b1KwAFKocTCrOYMMXgFUI0CfZKni
- 3alYEFtHnZG2oy4w6v9bzQKUof5YJGcdarHLm6gyrFYP+pYDTRL4xf7bhUJvYrL86Vg=
-X-Gm-Gg: ASbGncuiExoWAb4qMGDLKLOdEYajqoEPOAZwWKBnVrnhfd5cjK5KXBtqPmbeYkouXwC
- 31i7Bi1Bl7IvqhH6jPgZtOjd1hNVEnPWL5NR2I0zLqYt3JqV8MROQS+TbRin3UQ+s2BvPdDCfzs
- ZFiHoYu9FLSlV6Q93UmyQyXWWS3G1tT+LGzoi+ETiJ4t7pkprXDcsdN9h0RRzPxCq850IIwPP5s
- XJkGlq2NSr9x5lS0Hm7Krfgldc8Ngd1CQ9EX8gEIfs7U7CTIdrkyOwwWtKFSbiTK1dGZjzUHR/+
- QKF5E0ANK7+AVTjI2vVs3YW0HKFrIrhTM7CW1OOVobDZXYgpfqiCFb9rXLa9RnMx795QBFvScVC
- aj9CMZ70XUvct/Ve9R0Y1ld3BLAwQZDqRrJ1M2XkfxI+oNR1mB+tLtjy+3bbzfb0RNMQnMAd5J2
- ads6w78fTjoBuuGpYeTbOc2vuqs9HKU83D6Zs/+TSiFqiT/fh/rJAiiAFNOyqd8qBQQlipXw+Yq
- 5bYFd1zyKycA9kpjGYn+DF987uO/g==
-X-Google-Smtp-Source: AGHT+IEO+6yaWn6SbGQ/FFEfStv9nU6gBdv/NnXAn9wnlM/U75KAWXF1csqdSo97S+zN+/w2fSGBqA==
-X-Received: by 2002:a05:600c:d8:b0:479:3a89:121d with SMTP id
- 5b1f17b1804b1-4793a891252mr76396185e9.36.1765277359867; 
- Tue, 09 Dec 2025 02:49:19 -0800 (PST)
-Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a7d6228basm32146525e9.4.2025.12.09.02.49.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Dec 2025 02:49:19 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com,
-	andrew.goodbody@linaro.org
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Add tests for efi_dp_find_obj()
-Date: Tue,  9 Dec 2025 12:49:08 +0200
-Message-ID: <20251209104910.1801409-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ bh=MjpZ0fKIkEqM8c6FFwj6l7H99iWBwd1AF62kuTftT2E=;
+ b=fRoxFJx00n1qRFNcI06WAsnGEgKKEs9SHKJTWGT8QCEvSkmWRpEwmsW9h9TcUJceUS
+ TCH7kqAxasgBtgIg/Rz9g7oZfdgO1798L5vdLmQITXp+Aty87afqWwxcH/rb8m06JrMf
+ q9pa8/8dlLMngJEA6l9OCCrtYAZhNvij89bQ4MxHVI9s9XWLNMXuM8qA1jzVicXWPMfV
+ tAjp0DTpvul4vD3UTFFGhx7fdHKuq19cjfk1Xor6P6xIRmvJKcMw9Md5C2yU7A5MQ4sl
+ ZrAt41d/KQ2jX5v60hpbr0tigABYtmtZigc+7vsB589QkYWSOpriev2YeAOlbDOMqKE+
+ iMKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765278399; x=1765883199;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=MjpZ0fKIkEqM8c6FFwj6l7H99iWBwd1AF62kuTftT2E=;
+ b=smv7k4C/rZOYTlPpWTKRH6DlhoDYXrucAqwlgoo/yiRQz7PJvb+arq1ikafGFWyQCH
+ OZZ/fVrkwG09CIOZjVocsxKzDivWrn7YWBJD+SaY9q/H7vuy4Xz2qlfNIHAnBrKt0Z6Z
+ pnmqnhzl1moJgj3+ZUvtkVEark4GfWnIFhL6YJLKUtcr+r+kfxz0HPMCvUlbZLPsVZ9R
+ e88YNO2KkA63OqBiIGNFU5M00Y7EgUvo8ReMRumx7prg/xZPIzCrGUZ/bKIifPhrO+mt
+ B3VP+hAKVNLVA8e5uXwOGioh62rfKaYnDGNx9rMv3yWtV6WOcVB9WZjSnCtufKozgk1R
+ jxyA==
+X-Gm-Message-State: AOJu0Ywb19ntr7cHb8Poz/EJyxnx4hXMKYEw7Qq/qKpLvNDHSe69KUKg
+ JeucKvyljLV2hTnV2YBGt8geG+EEvnZJ/RE7hbj0hY38gBkZQl41cWBb3SP2306SqdD1qq2OilB
+ SvHYYGY0ukOwwukkLBQ/QKVuR17OeC7IA5eUarORZeWc08RVWQpwL8ZW8
+X-Gm-Gg: ASbGnctskrgBzcDOrVv9kdyAkZCIXZYLkUN/oKMP2zaL07abXpNHRpwXVy6bHQfeS33
+ isJoak+IeZ/CaAvaS18nDf9X1MeFjfgQepW5XyNafza8oc5yWWCCdU4L88patpNW0W1EZ6Klp/c
+ 4nF+9rn3Ioh6DMNq5e1H9Olec3VszbsSp4I/FlNdUsbway+GPb8PIwrriGpId+6kr/Y2OjoOwnk
+ DOWQC5mU7j+RMXx3ewst4j/voc4qf/K2t4MobM24YnAstS1PornkzKrROIU0kZqny48eIbxSEkL
+ R0y1eVQvq/ELkwKWYhRDkhjsXrs3qA==
+X-Google-Smtp-Source: AGHT+IEceLijNsuMXotEL+MuGzES/I7jX4RE/fbz0EIKstPOuCxERXj1UbWZmvX3++k8HBdklpHZA9WYQFoua9CIgUk=
+X-Received: by 2002:a05:6808:19a2:b0:455:7fe4:b228 with SMTP id
+ 5614622812f47-4557fe4bcf5mr41277b6e.0.1765278399229; Tue, 09 Dec 2025
+ 03:06:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251208193857.GS303283@bill-the-cat>
+In-Reply-To: <20251208193857.GS303283@bill-the-cat>
+From: Adriana Nicolae <adriana@arista.com>
+Date: Tue, 9 Dec 2025 13:06:28 +0200
+X-Gm-Features: AQt7F2r8tFTcmyzfKxsaFMmlef0yp9WuJs-xVz8s_1Idl0yUryeD_DwqI-WCAPE
+Message-ID: <CAERbo5wWCSdxcN3mgf+GxGLNQf6mP5cvbNm_qq7LkY77bupwzQ@mail.gmail.com>
+Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,154 +93,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We recently changed efi_dp_find_obj() and extended it's matching patterns.
-The function used to try and match device paths that are only an exact
-match or shorter than the provided one. It can now match device paths
-that are longer, but we have no selftests for it.
+Hello,
 
-Start by adding basic testing.  Install a device path on a dummy handle
-that contains
-- Vendor GUID
-- NVME
-- partition
-- file
+A possible fix for fdtdec.c tests would be to validate the fdt size
+before using it.
+All 3 tests in this file are using the same approach, if the previous tests=
+ were
+acceptable the newly added one has some identical parts.
 
-and try to find an exact match, a match if longer matches are not
-allowed and a longer match if longer matches are allowed.
+If there is a way to test and fix all these 3 errors, I've put some
+changes which
+might be enough for Coverity to assume that the size of the fdt is safe. Le=
+t me
+know how I can test it or should I send an email to post it as a
+separate change?
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
+diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
+index ea5a494612c..a3c90d38115 100644
+--- a/test/dm/fdtdec.c
++++ b/test/dm/fdtdec.c
+@@ -14,14 +14,21 @@
 
-Heinrich, I understand that is not covering all use cases, but it's a start
-Andrew (cc'ed) will add
-- A second longer device path to make sure we match the longest one
-- Multiple ESPs and partitions to test device_has_esp() as described
-  in https://lore.kernel.org/u-boot/20251208151503.1681988-1-ilias.apalodimas@linaro.org/
+ DECLARE_GLOBAL_DATA_PTR;
 
- test/lib/efi_device_path.c | 106 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 106 insertions(+)
-
-diff --git a/test/lib/efi_device_path.c b/test/lib/efi_device_path.c
-index 5a358ddcb934..483546b2224c 100644
---- a/test/lib/efi_device_path.c
-+++ b/test/lib/efi_device_path.c
-@@ -10,6 +10,66 @@
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
-+#include <mapmem.h>
++#define FDTDEC_MAX_SIZE  (2 * 1024 * 1024)
 +
-+#define FILE_NAME_SIZE 16
-+#define GUID_VENDOR \
-+	EFI_GUID(0xdbca4c99, 0x6db1, 0x694d, \
-+		 0x08, 0x75, 0x82, 0x9b, 0x64, 0xf1, 0xbc, 0xd1)
-+
-+static struct {
-+	struct efi_device_path_vendor vendor;
-+	struct efi_device_path_nvme nvme;
-+	struct efi_device_path_hard_drive_path part;
-+	struct efi_device_path_file_path file;
-+	u16 file_name[FILE_NAME_SIZE];
-+	struct efi_device_path end;
-+} dp1 = {
-+	{
-+		{
-+			DEVICE_PATH_TYPE_HARDWARE_DEVICE,
-+			DEVICE_PATH_SUB_TYPE_VENDOR,
-+			sizeof(struct efi_device_path_vendor),
-+		},
-+		GUID_VENDOR,
-+	},
-+	{
-+		{
-+			DEVICE_PATH_TYPE_MESSAGING_DEVICE,
-+			DEVICE_PATH_SUB_TYPE_MSG_NVME,
-+			sizeof(struct efi_device_path_nvme),
-+		},
-+		1,
-+		{0, 1, 2, 3, 4, 5, 6, 7},
-+	},
-+	{
-+		{
-+			DEVICE_PATH_TYPE_MEDIA_DEVICE,
-+			DEVICE_PATH_SUB_TYPE_HARD_DRIVE_PATH,
-+			sizeof(struct efi_device_path_hard_drive_path),
-+		},
-+		5,
-+		0,
-+		1024,
-+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
-+		2,
-+		2,
-+	},
-+	{
-+		{
-+			DEVICE_PATH_TYPE_MEDIA_DEVICE,
-+			DEVICE_PATH_SUB_TYPE_FILE_PATH,
-+			sizeof(struct efi_device_path_file_path) +
-+			       FILE_NAME_SIZE * sizeof(u16),
-+		},
-+	},
-+	u"\\test_image.efi",
-+	{
-+		DEVICE_PATH_TYPE_END,
-+		DEVICE_PATH_SUB_TYPE_END,
-+		sizeof(struct efi_device_path),
-+	},
-+};
-
- static int lib_test_efi_dp_check_length(struct unit_test_state *uts)
+ static int dm_test_fdtdec_set_carveout(struct unit_test_state *uts)
  {
-@@ -47,3 +107,49 @@ static int lib_test_efi_dp_check_length(struct unit_test_state *uts)
- 	return 0;
- }
- LIB_TEST(lib_test_efi_dp_check_length, 0);
+  struct fdt_memory resv;
+  void *blob;
+  const fdt32_t *prop;
+- int blob_sz, len, offset;
++ int blob_sz, len, offset, fdt_sz;
 +
-+static int lib_test_efi_obj_find(struct unit_test_state *uts)
-+{
-+	static efi_handle_t dummy_handle, handle;
-+	struct efi_device_path *device, *image;
-+	efi_status_t ret;
-+
-+	ret = efi_install_multiple_protocol_interfaces(&dummy_handle,
-+						       &efi_guid_device_path,
-+						       &dp1,
-+						       NULL);
-+	ut_assertok(ret);
-+
-+	ret = efi_dp_split_file_path((struct efi_device_path *)&dp1, &device,
-+				     &image);
-+	ut_assertok(ret);
-+
-+	/* find handle by exact match */
-+	handle = efi_dp_find_obj((struct efi_device_path *)&dp1, NULL, NULL,
-+				 false);
-+	ut_asserteq_addr(handle, dummy_handle);
-+
-+	/*
-+	 * Try to find handle by partial match if the dp is smaller while not
-+	 * allowing matching for longer device paths discovered
-+	 */
-+	handle = efi_dp_find_obj(device, NULL, NULL, false);
-+	ut_assertnull(handle);
-+
-+	/* find handle by partial match if the dp is smaller */
-+	handle = efi_dp_find_obj(device, NULL, NULL, true);
-+	ut_asserteq_addr(handle, dummy_handle);
-+
-+	ret = efi_uninstall_multiple_protocol_interfaces(dummy_handle,
-+							 &efi_guid_device_path,
-+							 &dp1,
-+							 NULL);
-+	ut_assertok(ret);
-+
-+	efi_free_pool(device);
-+	efi_free_pool(image);
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_efi_obj_find, 0);
---
-2.43.0
++ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
++ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
++ return -EINVAL;
++ }
 
+- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
++ blob_sz =3D fdt_sz + 4096;
+  blob =3D malloc(blob_sz);
+  ut_assertnonnull(blob);
+
+@@ -67,10 +74,15 @@ static int
+dm_test_fdtdec_add_reserved_memory(struct unit_test_state *uts)
+  fdt_size_t size;
+  void *blob;
+  unsigned long flags =3D FDTDEC_RESERVED_MEMORY_NO_MAP;
+- int blob_sz, parent, subnode;
++ int blob_sz, parent, subnode, fdt_sz;
+  uint32_t phandle, phandle1;
+
+- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 128;
++ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
++ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
++ return -EINVAL;
++ }
++
++ blob_sz =3D fdt_sz + 128;
+  blob =3D malloc(blob_sz);
+  ut_assertnonnull(blob);
+
+@@ -138,14 +150,19 @@ static int dm_test_fdt_chosen_smbios(struct
+unit_test_state *uts)
+  void *blob;
+  ulong val;
+  struct smbios3_entry *entry;
+- int chosen, blob_sz;
++ int chosen, blob_sz, fdt_sz;
+  const fdt64_t *prop;
+
+  if (!CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
+  return -EAGAIN;
+  }
+
+- blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
++ fdt_sz =3D fdt_totalsize(gd->fdt_blob);
++ if (fdt_sz <=3D 0 || fdt_sz > FDTDEC_MAX_SIZE) {
++ return -EINVAL;
++ }
++
++ blob_sz =3D fdt_sz + 4096;
+  blob =3D memalign(8, blob_sz);
+  ut_assertnonnull(blob);
+
+
+
+On Mon, Dec 8, 2025 at 9:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> Here's the latest Coverity scan report. I think the test/dm/clk_ccf.c
+> report is just a "works as intended" but I'm not sure off-hand about the
+> fdtdec.c test. Might be the case the previous test in the file also has
+> this problem, and since it's just test code, might also be fine enough.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Dec 8, 2025 at 1:23=E2=80=AFPM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to *Das U-Boot*
+> found with Coverity Scan.
+>
+>    - *New Defects Found:* 2
+>    - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
+>    the recent build analyzed by Coverity Scan.
+>    - *Defects Shown:* Showing 2 of 2 defect(s)
+>
+> Defect Details
+>
+> ** CID 639831:         (TAINTED_SCALAR)
+>
+>
+> _________________________________________________________________________=
+____________________
+> *** CID 639831:           (TAINTED_SCALAR)
+> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
+> 147
+> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
+> 149             blob =3D memalign(8, blob_sz);
+> 150             ut_assertnonnull(blob);
+> 151
+> 152             /* Make a writable copy of the fdt blob */
+> >>>     CID 639831:           (TAINTED_SCALAR)
+> >>>     Passing tainted expression "gd->fdt_blob->totalsize" to "fdt_open=
+_into", which uses it as an offset.
+> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
+> 154
+> 155             /* Mock SMBIOS table */
+> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
+> smbios3_entry));
+> 157             memcpy(entry->anchor, "_SM3_", 5);
+> 158             entry->length =3D sizeof(struct smbios3_entry);
+> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
+> 147
+> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
+> 149             blob =3D memalign(8, blob_sz);
+> 150             ut_assertnonnull(blob);
+> 151
+> 152             /* Make a writable copy of the fdt blob */
+> >>>     CID 639831:           (TAINTED_SCALAR)
+> >>>     Passing tainted expression "gd->fdt_blob->size_dt_strings" to "fd=
+t_open_into", which uses it as an offset.
+> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
+> 154
+> 155             /* Mock SMBIOS table */
+> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
+> smbios3_entry));
+> 157             memcpy(entry->anchor, "_SM3_", 5);
+> 158             entry->length =3D sizeof(struct smbios3_entry);
+> /test/dm/fdtdec.c: 153             in dm_test_fdt_chosen_smbios()
+> 147
+> 148             blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
+> 149             blob =3D memalign(8, blob_sz);
+> 150             ut_assertnonnull(blob);
+> 151
+> 152             /* Make a writable copy of the fdt blob */
+> >>>     CID 639831:           (TAINTED_SCALAR)
+> >>>     Passing tainted expression "gd->fdt_blob->size_dt_struct" to "fdt=
+_open_into", which uses it as an offset.
+> 153             ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
+> 154
+> 155             /* Mock SMBIOS table */
+> 156             entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct
+> smbios3_entry));
+> 157             memcpy(entry->anchor, "_SM3_", 5);
+> 158             entry->length =3D sizeof(struct smbios3_entry);
+>
+> ** CID 639830:       Integer handling issues  (INTEGER_OVERFLOW)
+> /test/dm/clk_ccf.c: 68           in dm_test_clk_ccf()
+>
+>
+> _________________________________________________________________________=
+____________________
+> *** CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
+> /test/dm/clk_ccf.c: 68             in dm_test_clk_ccf()
+> 62      ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
+> 63
+> 64      rate =3D clk_get_parent_rate(clk);
+> 65      ut_asserteq(rate, 60000000);
+> 66
+> 67      rate =3D clk_set_rate(clk, 60000000);
+> >>>     CID 639830:         Integer handling issues  (INTEGER_OVERFLOW)
+> >>>     Expression "_val1", where "rate" is known to be equal to -38, ove=
+rflows the type of "_val1", which is type "unsigned int".
+> 68      ut_asserteq(rate, -ENOSYS);
+> 69
+> 70      rate =3D clk_get_rate(clk);
+> 71      ut_asserteq(rate, 60000000);
+> 72
+> 73      ret =3D clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_80M), &pclk);
+>
+>
+>
+> View Defects in Coverity Scan
+> <https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+>
+> Best regards,
+>
+> The Coverity Scan Admin Team
+>
+> ----- End forwarded message -----
+>
+> --
+> Tom
