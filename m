@@ -4,120 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A57D3C925
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 723A8D3C928
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 16:13:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B77E383DA9;
-	Wed, 10 Dec 2025 16:53:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D26B083869;
+	Wed, 10 Dec 2025 17:12:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vyZUwtLL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kzN6OH9r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93850836C8; Wed, 10 Dec 2025 15:11:16 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 067B98389A; Wed, 10 Dec 2025 17:12:54 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 919248042F
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 15:11:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4D8B8367F
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 17:12:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6431b0a1948so11615834a12.3
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 06:11:08 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-45392215f74so1782767b6e.3
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 08:12:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765375868; x=1765980668;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4NQ+lWidNj/+feQMRgBifTtISRExMJTNPAtjyeblQqs=;
- b=vyZUwtLLzm8+3sdKSKBZbpEIIQgxYzs2XhBUtFOj6aH2ZgPzHdWBuDZTHi5MJX4d3T
- TaZjwyqiFaFAYtVgitfgS9j3R9l2mDsvxxhgc+sSZHBh8WEOVmq0a2fOx7IRFp3c2HVU
- om9m9GPZs1BFmRv0fE09yEl53+FIl1s/1FeqZJ6I8+0zeJZ27H6Qhb5rLFLFnFSKRzvJ
- XR6iGVZuttWGyEW29p6x/i4zDXUHxvxlSg6xnMnZ1M+LBUNFm6dHst9UlukgBCdExFX9
- 7StSWa+RL2ZONlOJK3sKxijPYGklDA8441q+M5aNKLnMu21U2oJ1qzp7fIJojOUKhIpv
- NJIg==
+ d=konsulko.com; s=google; t=1765383170; x=1765987970; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uXcMS8FgfBX52js1VN9vgoeCcddBsG5Rx9We0hPP044=;
+ b=kzN6OH9rzN4wZTZAnYYRsarqaNRk3MIUZhF1zF0TqhZbp5sMlg8T7CjSx5kxpsklpQ
+ p3L0LEmJ9etyRgZmtKAgttVtOS+iSi+XZxB/zjLWJDk0Pn127IHCABRua2sfSI4gwj1T
+ Sg7OJcFR3n8Ot7BeeNV7hhaB+fzzku55wP+48=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765375868; x=1765980668;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=4NQ+lWidNj/+feQMRgBifTtISRExMJTNPAtjyeblQqs=;
- b=JHQVXwJWEMqr9lf3EUa8Fprrg/qy2TuvIgRBO8DJBP07BU4GakFN8igYpt7T215pxM
- Pspf1fse0UrbIZJt2HI+F41PgjarkUeM5StvYzPUmnNeK5lHFmX8NOSCgajAwKkdRM+c
- t1z+qOfrpMPpMCQMf8tUmTYmIzztpxvgNMRrr1sNlb0FkU3IJjGX23SRkbPxhzfqZ/FK
- 5CdwJlHVraKxFz8x5Mfwhkrgp7kGwf2eoASxprjp4MjJZck85W5padChMEAK531FnmRl
- VBwgLKvDiZtYaAE+dc5lTz+CznNsXDd7P9QH53wiJJ2dl0gRfOc232fpoBDOMI8zBMDv
- 3gHw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXO62NSDGbfJARIATW5HB//ibUAKfZLo/umnIleLYvrEgyydfWFwgvojtCQ6DvQdxBgzK8Gub4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqGty73BiF7kuPGe+mrLH3d4YbY0BPc4i9LPlisfQRm4pvNHUw
- vlPC5/aWiRzt8E8hlYxHdTtWKgntoD/JVke4WiJasz5viz5wYoY9YSIzEInj3TFdsesSEgXrfLb
- EDC56
-X-Gm-Gg: ASbGncuB6aTbfC7sq3cyXK310h130cQ4Knav/mbEJP5525kUTl0fdyZB6xY/VTSdyNq
- e+ycTqhF8tae0VI1hq2HPu4WMu3lGPE1svd65ZhRyUtaO/pB73gGXWrxbtit1YWYux4G9fQbzkx
- xvxU6M06/Pdr7XvPojzXtOL6obR17nUcZoiNMHJcYvVg4kvLyzc4JHuZ5vYAxf1E2FvYf8t63X6
- Wbj+gVz4EidPfvB0UW7zM64sYUM1KPvTBXScUBVVlqQ4xJ8bwG9lQ1KxOuVEODPbNgetpIFq0M+
- f/e7Gr/dggFYfEnWcXPBPdc8PxV8zEuEKfqaLl0EtsjO3wmFtXkJqLhZI20vtenXjYxXvjRMz26
- 1bcpxd+dP56x5AOKImQVzxRl27HBxwNrQ2O0U32ugJ98yD85k00+HSdAOQ8iwO8EPLykmXp4Xdz
- ggWd7Wp5dMrOvhnlnEoyk=
-X-Google-Smtp-Source: AGHT+IHs2hQsecwoO0LW/aPlGXdCQkjgHQQ+zEyJC7x+Dq8nsjK3q777ytfuRGxCy8Ysi0qlT/j/pQ==
-X-Received: by 2002:a17:907:1c1f:b0:b6d:9576:3890 with SMTP id
- a640c23a62f3a-b7ce844ca8emr254359366b.45.1765375867763; 
- Wed, 10 Dec 2025 06:11:07 -0800 (PST)
-Received: from localhost ([2001:4091:a246:86d6:2b1a:7262:ad08:3918])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b79f44d3d9esm1659997566b.30.2025.12.10.06.11.07
+ d=1e100.net; s=20230601; t=1765383170; x=1765987970;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uXcMS8FgfBX52js1VN9vgoeCcddBsG5Rx9We0hPP044=;
+ b=sk6+2GV0lhdsdRQYyUWBuy31MDKCxflxdGjy0XVLb22iJNRhI1TyU/yYTp+RFInDiP
+ fvNocuqCXQqacAU1IVB4Dg74gh6lK1feW/8KfBHhqvyLAEyu51+V3qydqNxbyeoF3pgn
+ AFLZehD/bBpS6+Vp9Vz6IpzC0Mq4NCCznF6l7scwKK6NVKn4NjhnidlsKqwuDHdAOLau
+ g8eSsaWaI0EW4JsYiEcHVsL+rklo4cBator1YCbNKoy6yWnMceDr8G23H+wGTOPl/ie3
+ 3yhzMLeBnTvP9rVYZbOCLpdorZF+tVutPtrWhPc4SMVynJ0sS8cdtv8eEYIb0knmYx9P
+ EQaw==
+X-Gm-Message-State: AOJu0YzBpsHLSCK/d/NLTaeUD6GGWNSN5mxUXfJghAIsx9iMh2rut504
+ BvuD5p53vfPZNfrhEde9T11XwVL7rg2De9RzPMcoJpTsOPh5Xyr3uU8HYWDgH1JBmeXjsAKmkfG
+ 3vamJnVc=
+X-Gm-Gg: ASbGncup0Q0fO8gomf3ybscaw2JXUE4AKm2Yu9PW4CDpNzXJ/Go/uV+d1TtONdNd3KV
+ R/s8PA2OypFMOjWknbsPKTTjyu+84uyyP+ON/5fS8dl9+CZt+6NUjcCmHTiz7vQzhIpPFI/sIzq
+ LHxyG5Yxqh+nC1V0B9GrJrWZEOht8z0jWYaDkWrbhGrSbLn1j0PgVZOrfM2v/VbZUXvIZhiGdpD
+ qyR3h5RipCnIftjFmA3Gpq89rWorz3j8+Sp6xZbQgNoAEiIqVqPWgL0JlsfX917AWzL67CrS7tL
+ BEB9BBNIN3Bd/3DzZXUNYsQfKnLhUzQDLFMNuvspqCLPez1st20Pk2nxbiey/RWeaCsQgafkEvo
+ 60VuxMKFUd1HbQsAomgPIoH9TXqPpfAHMA+jHA9ModidgomKj9T6wSmo6uEvNQW8h2wIN1etK0z
+ fPMdid5Ol9rDefADvIShAwpV68bo8Mvm0VDHSvjIWYf6UehGZ9iA==
+X-Google-Smtp-Source: AGHT+IHHik0aAfqMVlDeZHlwXGY47NGJOcwT0eo5hAioyhM+Q8GWRO1vfTDkkR0JawHYLNjQCIWvRQ==
+X-Received: by 2002:a05:6808:13d6:b0:453:7404:e4b9 with SMTP id
+ 5614622812f47-4558651610emr1841669b6e.49.1765383170606; 
+ Wed, 10 Dec 2025 08:12:50 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4538011c67bsm9331523b6e.15.2025.12.10.08.12.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 06:11:07 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Wed, 10 Dec 2025 15:09:06 +0100
-Subject: [PATCH v7 12/13] configs: am62ax_evm_r5: Enable IODDR resume support
+ Wed, 10 Dec 2025 08:12:50 -0800 (PST)
+Date: Wed, 10 Dec 2025 10:12:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Vishal Mahaveer <vishalm@ti.com>
+Cc: u-boot@lists.denx.de, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bryan Brattlof <bb@ti.com>
+Subject: Re: [PATCH 0/6] board: ti: Add 32k crystal initialization
+Message-ID: <20251210161247.GH303283@bill-the-cat>
+References: <20251210154845.3852231-1-vishalm@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-12-f113b156f83f@baylibre.com>
-References: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
-In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>, 
- Dhruva Gole <d-gole@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
- Kendall Willis <k-willis@ti.com>, Akashdeep Kaur <a-kaur@ti.com>, 
- u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
- Moteen Shah <m-shah@ti.com>, Santhosh Kumar K <s-k6@ti.com>, 
- Nathan Morrisson <nmorrisson@phytec.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Judith Mendez <jm@ti.com>, 
- Aparna Patra <a-patra@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Chintan Vankar <c-vankar@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Prasanth Babu Mantena <p-mantena@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Beleswar Padhi <b-padhi@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Udit Kumar <u-kumar1@ti.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, E Shattow <e@freeshell.de>, 
- Devarsh Thakkar <devarsht@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Andre Przywara <andre.przywara@arm.com>, 
- =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=722; i=msp@baylibre.com;
- h=from:subject:message-id; bh=FbC1rUTuScXeOmf83HpDWbtQ7H+tS92iS+oVIblF1ew=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzL+uDW67tlUz13uar71S1ms/pwv+3L3fmr3uf3Ppo/b
- 8rjcM+gjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZhI4D5GhpaGTMtbimlefgl7
- J92YZjq7+vxLFcGfOT82OLr/Pd/PpQFUkXy9tuheQ0z05jX//m/ISZ139Jc2T+4aT5EPbZ2T/Wz
- 4AA==
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Wed, 10 Dec 2025 16:53:41 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SNGobfUOsYKIgdnh"
+Content-Disposition: inline
+In-Reply-To: <20251210154845.3852231-1-vishalm@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,26 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable K3_IODDR to enable support to resume from DDR after exiting
-IO+DDR.
 
-Tested-by: Anshul Dalal <anshuld@ti.com>
-Reviewed-by: Kendall Willis <k-willis@ti.com>
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- configs/am62ax_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+--SNGobfUOsYKIgdnh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 64886986c4264a5d9272228e468f7057c195593a..3a9f382193532dc3b712a1bd3fa16a9c0de3fedb 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -106,3 +106,4 @@ CONFIG_SPL_TIMER=y
- CONFIG_OMAP_TIMER=y
- CONFIG_LIB_RATIONAL=y
- CONFIG_SPL_LIB_RATIONAL=y
-+CONFIG_K3_IODDR=y
+On Wed, Dec 10, 2025 at 09:48:38AM -0600, Vishal Mahaveer wrote:
 
--- 
-2.51.0
+> Add 32k crystal initialization support for am62x, am62ax and
+> am62px TI boards.
+>=20
+> Vishal Mahaveer (6):
+>   board: ti: am62x: Add basic initialization for 32k crystal
+>   board: ti: am62ax: Add basic initialization for 32k crystal
+>   board: ti: am62px: Add basic initialization for 32k crystal
 
+These three functions look identical at first glance, and if so, we need
+to figure out a better abstraction.
+
+>   configs: am62x_evm_a53_defconfig: Enable SPL_BOARD_INIT
+>   configs: am62ax_evm_a53_defconfig: Enable SPL_BOARD_INIT
+>   configs: am62px_evm_a53_defconfig: Enable SPL_BOARD_INIT
+
+And then, the config change should go with the code change. Thanks.
+
+--=20
+Tom
+
+--SNGobfUOsYKIgdnh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTmb+AAKCRAr4qD1Cr/k
+Cpp+AP9pYWB4SyBi4nq8bvXLm25GkChELVJGMeOl16DYLvmPFAD/XLnT91OX5ZkN
+1/M76AyCWJ7y2NzpgvxUZXO2agUTogI=
+=tymC
+-----END PGP SIGNATURE-----
+
+--SNGobfUOsYKIgdnh--
