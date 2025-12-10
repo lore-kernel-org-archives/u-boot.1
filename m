@@ -4,119 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFCCD3C928
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 17:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A456AD3E765
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 17:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4EA283B48;
-	Wed, 10 Dec 2025 18:22:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B920383B48;
+	Wed, 10 Dec 2025 18:57:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UsfOZ6CA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aKcBCFIb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F034E83C7B; Wed, 10 Dec 2025 18:22:25 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 9EF3E83C08; Wed, 10 Dec 2025 18:57:03 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4666283AEF
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 18:22:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39A068367F
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 18:56:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4779ce2a624so359115e9.2
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 09:22:23 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c76d855ddbso57985a34.3
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 09:56:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765387342; x=1765992142; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=/SclT3Omm+2CZXKkcGUNW/0XaceWcAuVmgtRXsAEUAE=;
- b=UsfOZ6CARfQT/bRWITqJ/aFcgqCa7SF5Bvy3BvUHsaK4AA8RdBGnf522X2RDWI30ej
- N6cf6KsYLJ+kRaWIM5JwwRVQM5qH/oJpM+Y9fuA1MdUg29z4Vh6zZwiBYp+0XIsY36/U
- lvKJXsSANiTmi9cJXUbSMJQM3XC0frsYZQnnqwF9NzyXz5ggrjTw2I2BYKhfw0n1owAU
- TvRGQR597hLxwgu2Fod80/Ff4Yll0GAay+gIoafLsBf3YUrTJWBg6oGjWNLijlGTVdms
- lFkFIB2BuqnSQ+Il6Foxn6kjI9qq1fm+zz96V9py7ku8+A9DO/GuISCNtVyxwVkuzjWI
- z7XA==
+ d=konsulko.com; s=google; t=1765389418; x=1765994218; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fJU66UsfzzvP8Dzkc/3UvZ82UK36nmFmDC5xHjmFtV8=;
+ b=aKcBCFIbM9wlzQ62tFbzDVpDhNqDL8WC7cRAcrrrbXLFCHF93xwq+X8nK4OmD3Zah4
+ OTxIcwHd6Uyrgg4ryV7MBw/cDGrxrS1LdXlz+ii0I8bEUMBpsHovibBervOukfi3CHz4
+ 8VJKMhPeg/Nvf9m88BMmLhaZdLNchSSzZe95g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765387342; x=1765992142;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1765389418; x=1765994218;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/SclT3Omm+2CZXKkcGUNW/0XaceWcAuVmgtRXsAEUAE=;
- b=Mf3lnFnowEkqVlLzH2tbbysIvWbdotcCytpNxNjRNenJ7s8LUtTUxDygBVhLU1YUKe
- lHJYR5CM5uFVlb/yol6uaXSMTKtjgUwYue4tcF/gcWYNlELDqeJUdEId5s2+AuaTepc6
- fF9KNNoAakbtOTxseI3fN2i+fhM7SIxWphgCWaCsNGVbknIFK0O3N4cDxdhMzAtzFrq9
- 0gV8cFJsrGqyxr8Jfqd+quuHQNq2zYFboAk/ZofymFMe5XcmzGYhUMvPTRN+naTM3FvD
- AN+nEAdslrEYJa6mi13frPCd7HlxpNPEwSCF7zmk2kVoc/l97LjlGs2fczjEO6M2HYOm
- vTKw==
+ bh=fJU66UsfzzvP8Dzkc/3UvZ82UK36nmFmDC5xHjmFtV8=;
+ b=KK3czICA4Qblox6xKT/ew+VDXMsTDJrjGK+JbxJrJSRCZ30XTi+ru+NMMUodendRXu
+ 64CD1Zp5y6MJ7eTVbzAINsES7yeYbpssAqPDErk3Ywnopn78zY4dzHNORlHvn6HQYheM
+ ig4VzQSrtHHl7l+1uC57khHG4gIPEeRBVVlkJQ3d8ZxZzfJHGOgBPzMbr0rQsjMy065c
+ 9egFPsr5KsseulSe9umsbKDgN2jBpWO/geTVFmDxYL1lZfje0RzehIM6EFYbrD1XNw7U
+ mtaTHzjQuq8CVrQxQ3qqUf6piJk2nsB4JL67oVxVhFTYKLc3U3JUbjg3iENwLeb/HrWH
+ 0zwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0AHoxzU6wSB/ozaGIcoMI54+7y5YUinqRtUkjUx0scyfan+zzeWaOz+omD0t5EnDDn+vViS8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFOskLXbV5IWaa69YMbIPmM47KhJEFyLdiu0imA7iT79cMfsUq
- cQZPGBPsMmcxIRm63wcOcYag4a5S3aYb+QO8OHPY4xzMqoRW77H6kB4mA41tXLbOsJ8=
-X-Gm-Gg: ASbGncv7N8yyGgCCFdHg0vHAxOzIc134mYvXmPBtGRLTtkkt8OS3kJ3AKgwGVcpXiaZ
- pL3EbHWdvCeKqgtxrz14Tru/ML5bdfX2p8ib4hm2nQg2XQ1IRPAu41NPjr/AcMs9WrinXRMDrHr
- R2JjhSkGX0PejU2jJDoOxPLNsGXKLlFrp0epuPc645pA34Bmz8KMUbXBaoR4bLDFkhF96gOdLnk
- KLOFdU9it2kF2ETknyIuplZuoqhL23t6FwasYW6kS/GJKx4tB4+84961IBf5rPR80YeGW7fUYgy
- EgVIhZW07a25+bjc+261GnuTAU5Djhj0luKdB6O3YikeHzysPx7dJCKkurFk+hv97tdao7E93Fx
- 3HtHqdHlJgev1rohO/5ahGpldgM/NY+RKG6WEYvNThhPucy9eu6XTNvn/iuwnuYIiV9Oz/cdqRe
- kWy62irPQLbCxH0nF1MRPGMBmLAhHkA+Rck/M9kmXCe6uBELw2Rowt5JPGLN6qHTI=
-X-Google-Smtp-Source: AGHT+IEGhy86JbGqNlDWvi701eZr2/85Zeh/lYkKno0m+i1a8XIdhjnDKyqQ5iiKCFv4R/5cm/6Fuw==
-X-Received: by 2002:a05:600c:5246:b0:477:89d5:fdac with SMTP id
- 5b1f17b1804b1-47a8379669amr33863825e9.31.1765387342247; 
- Wed, 10 Dec 2025 09:22:22 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:4565:581d:e0e3:e5e1?
- ([2a01:e0a:3d9:2080:4565:581d:e0e3:e5e1])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a8835c7acsm961425e9.0.2025.12.10.09.22.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Dec 2025 09:22:21 -0800 (PST)
-Message-ID: <799a8118-f555-4fd9-8d3d-7bfa96fcffeb@linaro.org>
-Date: Wed, 10 Dec 2025 18:22:20 +0100
+ AJvYcCVvDpujUOJT3ZKEoh/dfECDYM9qXyyc1cg43f+0Eu1LdlR2M5QEXFO016dwfe4oDL2KFz88gSU=@lists.denx.de
+X-Gm-Message-State: AOJu0YziY5oNXEw/dSGHN2kg6bS6dsXHg2ExCl+QwGLztbf/T/nqCcAR
+ zmSjkbhcwXMvKk3Xk8ewBbmXXnycNfAFMFafbwYePTMH3q38VdR2NqPR2FqEtytj/HU=
+X-Gm-Gg: ASbGncuaR9U7TYLl3jS/QKLtdibpzHEGJYTBeiLRYcYBdvVIPnr6EQAvcJPUb/3g00S
+ VlqUETs+76ggYo/nnX0QQhuWZ4W0RNmJSE72R6bSGu+A6Mh0EjZOAvrojClndcVQdki5y2pjA2U
+ TaHmVsrjsfjV3C787GMxE5mVuK1o00LLpeRQty76aQic1kYFwB23Snw4Oy8NceG/erhLuvuxndL
+ n7c1g2WQYKxegZUzg5n6TZN4mNkPW0TEzHxhHdfpueec/HD1213jZVpjPqbJ3D6WpxH6sZlcGHc
+ MLUEoewYslaQeTbSXQBZHgqkLnxTwWJnyRH6KXVgg80o+woK80gOg0AGjNnwjXIOQfTa1b2EIoY
+ TDffxXcnJxc4cbD9aX4ZIr9sHe7ARFFDsXm8s2AqJVNNHwR3O0vKSD3TgGOa6GMlmMA24Em/555
+ Yf+oiQwt0XWaWNp5hTTigqnytw9Qod7uK91vkV4oyNP2e3uhDj9A==
+X-Google-Smtp-Source: AGHT+IEWCWgq7tYzBEiDbIlC1k4tIfO3daOKpG5u/FbmrI3I7GDyUarkzq2mxZ6kE4Ocl4zzVr2Xcw==
+X-Received: by 2002:a05:6830:448b:b0:799:c0c8:e9d1 with SMTP id
+ 46e09a7af769-7cacebf3decmr2346932a34.24.1765389417906; 
+ Wed, 10 Dec 2025 09:56:57 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cad91227b1sm139538a34.6.2025.12.10.09.56.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Dec 2025 09:56:57 -0800 (PST)
+Date: Wed, 10 Dec 2025 11:56:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sam Shih <sam.shih@mediatek.com>, David Lechner <dlechner@baylibre.com>
+Subject: Re: [PATCH 2/2] clk: mediatek: add MT8188 clock driver
+Message-ID: <20251210175654.GA3377532@bill-the-cat>
+References: <20251203-add-mt8188-support-v1-0-9a06ebb97734@baylibre.com>
+ <20251203-add-mt8188-support-v1-2-9a06ebb97734@baylibre.com>
+ <20251205144711.543ba2a8@kmaincent-XPS-13-7390>
+ <CAEHHSvbW4usYU0SBZDOqX0ktseDbPMSnTaywrNCx2bsGkSMG3g@mail.gmail.com>
+ <20251209110320.57aa9a54@kmaincent-XPS-13-7390>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] ufs: Disable UTP command timeout in slow mode
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
-Cc: Padmarao Begari <padmarao.begari@amd.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-References: <e6deb9086afab9d2bdd53db8ecbc7db93af5204d.1764169598.git.michal.simek@amd.com>
- <d0bb740d-f4ca-4d20-9a62-0295438f16ae@amd.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <d0bb740d-f4ca-4d20-9a62-0295438f16ae@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ixqJJ/1K/B4p9kkx"
+Content-Disposition: inline
+In-Reply-To: <20251209110320.57aa9a54@kmaincent-XPS-13-7390>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,63 +116,171 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 12/10/25 08:41, Michal Simek wrote:
-> Hi Neal,
-> 
-> On 11/26/25 16:06, Michal Simek wrote:
->> From: Padmarao Begari <padmarao.begari@amd.com>
->>
->> When the UFS controller is operating in slow (PWM) mode,
->> the driver is disabled the timeout for UTP send commands.
->> In high-speed mode, the timeout remains enabled to
->> detect stalled or failed transfers. This change ensures reliable
->> operation in slow mode, where command completion may take longer
->> and timeouts are not required.
->>
->> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
->>
->>   drivers/ufs/ufs-uclass.c | 12 +++++++-----
->>   1 file changed, 7 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
->> index 3c8e4299259c..7a80a9d5664b 100644
->> --- a/drivers/ufs/ufs-uclass.c
->> +++ b/drivers/ufs/ufs-uclass.c
->> @@ -917,11 +917,13 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
->>           enabled_intr_status = intr_status & hba->intr_mask;
->>           ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
->> -        if (get_timer(start) > QUERY_REQ_TIMEOUT) {
->> -            dev_err(hba->dev,
->> -                "Timedout waiting for UTP response\n");
->> -
->> -            return -ETIMEDOUT;
->> +        if (hba->max_pwr_info.info.pwr_rx != SLOWAUTO_MODE &&
->> +            hba->max_pwr_info.info.pwr_tx != SLOWAUTO_MODE) {
->> +            if (get_timer(start) > QUERY_REQ_TIMEOUT) {
->> +                dev_err(hba->dev,
->> +                    "Timedout waiting for UTP response\n");
->> +                return -ETIMEDOUT;
->> +            }
->>           }
->>           if (enabled_intr_status & UFSHCD_ERROR_MASK) {
-> 
-> Can you please take a look at this patch?
+--ixqJJ/1K/B4p9kkx
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I started to check, but was preempted, I'll continue asap.
+On Tue, Dec 09, 2025 at 11:03:20AM +0100, Kory Maincent wrote:
+> On Tue, 9 Dec 2025 10:27:32 +0100
+> Julien Stephan <jstephan@baylibre.com> wrote:
+>=20
+> > Le ven. 5 d=E9c. 2025 =E0 14:47, Kory Maincent <kory.maincent@bootlin.c=
+om> a
+> > =E9crit :
+> > >
+> > > On Wed, 03 Dec 2025 10:31:53 +0100
+> > > Julien Stephan <jstephan@baylibre.com> wrote:
+> > > =20
+> > > > From: Julien Masson <jmasson@baylibre.com>
+> > > >
+> > > > The following clocks have been added for MT8188 SoC:
+> > > > apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
+> > > >
+> > > > These clocks driver are based on the ones present in the kernel:
+> > > > drivers/clk/mediatek/clk-mt8188-*
+> > > >
+> > > > Signed-off-by: Julien Masson <jmasson@baylibre.com>
+> > > > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > > > ---
+> > > >  drivers/clk/mediatek/Makefile     |    1 +
+> > > >  drivers/clk/mediatek/clk-mt8188.c | 1840
+> > > > +++++++++++++++++++++++++++++++++++++ 2 files changed, 1841 inserti=
+ons(+)
+> > > > =20
+> > >
+> > > ...
+> > > =20
+> > > > +
+> > > > +static int mt8188_apmixedsys_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_init(dev, &mt8188_apmixedsys_clk_tree);
+> > > > +}
+> > > > +
+> > > > +static int mt8188_topckgen_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_init(dev, &mt8188_topckgen_clk_tree);
+> > > > +}
+> > > > +
+> > > > +static int mt8188_topckgen_cg_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev, &mt8188_topckgen_cg_clk_=
+tree,
+> > > > topckgen_cg_clks); +}
+> > > > +
+> > > > +static int mt8188_infracfg_ao_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev, &mt8188_infracfg_ao_clk_=
+tree,
+> > > > infracfg_ao_clks); +}
+> > > > +
+> > > > +static int mt8188_pericfg_ao_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev, &mt8188_pericfg_ao_clk_t=
+ree,
+> > > > pericfg_ao_clks); +}
+> > > > +
+> > > > +static int mt8188_imp_iic_wrap_c_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev,
+> > > > &mt8188_imp_iic_wrap_c_clk_tree, imp_iic_wrap_c_clks); +}
+> > > > +
+> > > > +static int mt8188_imp_iic_wrap_w_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev,
+> > > > &mt8188_imp_iic_wrap_w_clk_tree, imp_iic_wrap_w_clks); +}
+> > > > +
+> > > > +static int mt8188_imp_iic_wrap_en_probe(struct udevice *dev)
+> > > > +{
+> > > > +     return mtk_common_clk_gate_init(dev,
+> > > > &mt8188_imp_iic_wrap_en_clk_tree,
+> > > > +                                     imp_iic_wrap_en_clks);
+> > > > +}
+> > > > +
+> > > > +static const struct udevice_id mt8188_apmixed_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-apmixedsys", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_topckgen_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-topckgen", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_topckgen_cg_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-topckgen-cg", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_infracfg_ao_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-infracfg-ao", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_pericfg_ao_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-pericfg-ao", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_imp_iic_wrap_c_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-c", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_imp_iic_wrap_w_compat[] =3D {
+> > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-w", },
+> > > > +     { }
+> > > > +};
+> > > > +
+> > > > +static const struct udevice_id mt8188_imp_iic_wrap_en_compat[] =3D=
+ {
+> > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-en", },
+> > > > +     { }
+> > > > +}; =20
+> > >
+> > > Why don't you use udevice_id data field to describe each of the
+> > > mediatek,mt8188 version? This would avoid having this number of probe
+> > > function, udevice_id structs and U_BOOT_DRIVER definitions.
+> > > =20
+> >=20
+> > Hi Kory,
+> >=20
+> > I am not the original author, but I guess it's done that way to be as
+> > close as possible to the Kernel.
+>=20
+> Linux is using one file per clock driver so your argument does not work.
+> And even within a file if there are several sub possibility it uses data =
+field:
+> https://elixir.bootlin.com/linux/v6.18/source/drivers/clk/mediatek/clk-mt=
+8188-imp_iic_wrap.c#L64
+>=20
+> > Moreover all drivers in drivers/clk/mediatek/ are designed that way,
+> > so we keep consistency between Mediatek clock driverss
+>=20
+> Indeed this type of design seems quite common in U-boot. I don't really l=
+ike
+> this as it adds more code for nothing. Anyway ok then.
 
-Neil
+We can always rework things to be better :)
 
-> 
-> Thanks,
-> Michal
+--=20
+Tom
 
+--ixqJJ/1K/B4p9kkx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTm0XgAKCRAr4qD1Cr/k
+CpTEAQC4iydlUuYHoBgkxbGVmxWa12F3kyKb/M6vVa3pR0Vy4AD9G7WXH4jpIeUP
+LRNutUvyxm29JG73U/v7DpejMnY8Ygo=
+=AoTC
+-----END PGP SIGNATURE-----
+
+--ixqJJ/1K/B4p9kkx--
