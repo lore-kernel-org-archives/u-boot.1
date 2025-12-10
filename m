@@ -4,92 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FD7D3C538
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 12:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9ABDD3C545
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 12:55:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CF2B83A71;
-	Wed, 10 Dec 2025 13:32:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 623CB83759;
+	Wed, 10 Dec 2025 13:55:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZPfSARES";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZMBH4IAu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2790783AEF; Wed, 10 Dec 2025 13:32:20 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E86A98389A; Wed, 10 Dec 2025 13:55:53 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9BC183A35
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 13:32:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A76678367F
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 13:55:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-640aa1445c3so10120635a12.1
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 04:32:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1765369937; x=1765974737; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i244BQM+oJH0W2jPB6wCsUhR8g951IP9nODdRLMeHjc=;
- b=ZPfSARESbqfsgih4APMXtIqfyO5E5KFWyj3HSJZxZ0NWyaeYvCAuiya5AHfJLF/ObO
- EpnUzMzR3HCw6xdaRMFTqBMlREElfSeq7JCOOCNOHYm33dMl4+z2IBIbSnbEo5S21YIK
- i+aJ4iXDchVbgxPRp3wqSvdoPE8jwXVX+mVas=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765369937; x=1765974737;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i244BQM+oJH0W2jPB6wCsUhR8g951IP9nODdRLMeHjc=;
- b=ameanov3Hhf412OCj2B4zkfG5XW2iTL0zqwdSIj6brdajPSvMzn3uZQudJ9ymGXujx
- jlvaoNVNgcCpBDHCVxIlICRnvpOIDK0pswjs2xu+lut/F0Q4KITK/1q4NeRPWVtx1/+M
- 1KOBZpV3EaL2b474tfWPr8fZA2dscygTabZRp5CiltaQEqU1/F8P91BsQR3/gkh20PGd
- 3WSpccVQSdo5pjJL+BGpkkYyJEJxQt+5S3OpIX5L9qPu/jeeRzED5zLNXziaUmPicfRq
- 3BL2oB7Eka4eV7FUh4gNLSii6bb6vA8KlUzhbjScPpSE+C8CgN3GW65cdKP6EWMsP28f
- cpzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWhO5IkFgeRivE44qCDW+2/Nut8LEETWfusEirVwt4U044Nw2R6J+hVbTe/MWt/98EhJVdMDE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwANgvn+7VljrZCEHXHw0/br6BPNTJbKTrmyEDze4Hh20rwRPaa
- 33Qk7kzTCCGTkD0ctGNZq3KtLC0zHeC6dlqw5oSF5GcKYGUQIfZGlXLoaV7w/diRsUoExJS8Rza
- QWxBtggml1O6fImkZaOWW8UJOBeL4FkcuN/i0Q2sX
-X-Gm-Gg: AY/fxX43vo6jsI4vFmOGmrJZLx90GIbCqOQiyLAaZ/TptAPupl5o1jYAy3806JQFI+a
- kIHJxw8vil7omfXsQiZaSIJvERPK9rc3+b+zF43Y32VCwkN+ZEWbJ973WN8dHcbuGeY/n8c8f3b
- n16nfE0la4jO/TeR9P+rC5AsueCfiFlB7yxzzY5QKaI8HRkBO5e0bLgrdiW0b+WRYDe10eIhEMx
- LOX2APF+KROHz+44Fj329OBMXsmaj7ZJAOWd9KYKqtNhjaHVuQjoSyT2kLFjADIRsfjLA==
-X-Google-Smtp-Source: AGHT+IFriPRu7qtHy77XoXYqOw8UvoSeE01DoUFpdpX6DyKn+pO6yO41ZbWCFZG2VRJOhIPqpayMH1qTBMmfSetb+Dw=
-X-Received: by 2002:a05:6402:40d1:b0:649:6b4e:2839 with SMTP id
- 4fb4d7f45d1cf-6496db38c11mr2212119a12.23.1765369937218; Wed, 10 Dec 2025
- 04:32:17 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1765371327; x=1765976127; i=xypron.glpk@gmx.de;
+ bh=eITvZzq+hyzGZnfm/ipKzE1Hb8lA+q+vrQbMkIipou8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=ZMBH4IAuL27ZA/LVDmYPOP++eKd9JVFY2iePlnODs/o49IgHJ28HxSt09+vGLiEM
+ voNApiqOEHFhZiaFWxC8gDcFh7lNqD9Kph6+CDLcB9NdWbuGdG0rY8T2EMmrvVuaP
+ SP2LsxmOGNwW+aRgEatZBZSCtexKQWWb6kaRDKGQ6PqoRSYuhZAE6BxUQyIvynO8a
+ fuLjWP/iIehciKNoPIN6ZjVWw38rDNmIkPY589uaoae84Vz0a51QLmlfYAUcP0szl
+ ukT3hZb2NTd5J+A3Z0wC2GU/DgCmYPHBlIIpywjLIRLkInXerO1GqmaTRSqFDDer+
+ R/3hAa/Ta0yn9aR7dA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.125] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCKBc-1vL2Fh0qLy-004BMv; Wed, 10
+ Dec 2025 13:55:27 +0100
+Message-ID: <d9abea30-3604-4c06-9ec0-15e67edf34f7@gmx.de>
+Date: Wed, 10 Dec 2025 13:55:25 +0100
 MIME-Version: 1.0
-References: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
- <20251121-binman-engine-v3-4-b80180aaa783@cherry.de>
- <CAFLszThxhLBEm731QjvB-wbOGryGBfh1_09NeWNy13nLwqZW4A@mail.gmail.com>
- <6b2751af-783b-40d4-b205-5859b7eaa0d2@cherry.de>
- <CAFLszTh1Tt1=9SOHf1WdnENB3q1E7vdq4mK4XjPC7Bob5gQoEw@mail.gmail.com>
- <fea1b8fb-2512-41f9-af23-a716c70cce39@cherry.de>
-In-Reply-To: <fea1b8fb-2512-41f9-af23-a716c70cce39@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 10 Dec 2025 05:32:04 -0700
-X-Gm-Features: AQt7F2rhKmYiX7wmpcOid6NoCZ2qC6zgj9ftW4AaCe4wkt6ZXcOjP2D6Z3xi_mg
-Message-ID: <CAFLszTieo4xZzo6VkvrP28duwgksgpx+4HP3tQ8WVEdssYzGOA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] tools: binman: fit: add tests for signing with an
- OpenSSL engine
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Bryan Brattlof <bb@ti.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] net: Port NFS to LWIP
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Benjamin Hahn <B.Hahn@phytec.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
  Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Eddie Kovsky <ekovsky@redhat.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Yannic Moog <y.moog@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+References: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Is1U3dal3P8pwHd6v0pTOPszj/nhXCvRCjxzrk/rk8KFhUcmHrX
+ g6oZWLv40FQfIw1ipctScW4ZbvkYEEXJVc0k9KepZdel1W5tq3uAho009ILFBEiocbNBOHX
+ +Mnb38lvn7ZR+IzhD6IOc8J2f9FYV9tGxLZYNIys/KTGi4QNtmWcxHnh5N6zjJEB8mwkEt3
+ wVfbznRKTPjbji150ALuw==
+UI-OutboundReport: notjunk:1;M01:P0:IGbakJOeV40=;gKvsaSx18/tlRt68ORlrZ39fh/Z
+ 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
+ tiVde9Bg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,114 +163,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On 12/8/25 13:52, Andrew Goodbody wrote:
+> This series ports the existing NFS code so that it can be used with both
+> the legacy network code and also with LWIP.
+> Firstly some legacy network code, mostly variables, is moved into common
+> files so that it is accessible to LWIP.
+> Secondly the NFS code is refactored so that the parts that are not
+> specific to the network code can be shared with both network
+> implementations.
+> Finally the LWIP specific parts needed to interface the NFS shared code
+> to that network stack are added and enabled.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+> Andrew Goodbody (5):
+>        net: move net_state to net-common
+>        net: Move some variables to net-common files
+>        net: nfs: Add licence header
+>        net: nfs: Move most NFS code to common files
+>        net: lwip: nfs: Port the NFS code to work with LWIP
+>=20
+>   cmd/Kconfig          |  28 +-
+>   cmd/lwip/Makefile    |   1 +
+>   cmd/lwip/nfs.c       |  11 +
+>   include/net-common.h |  38 ++-
+>   include/net-legacy.h |  26 --
+>   include/net-lwip.h   |   1 +
+>   net/Makefile         |   1 +
+>   net/lwip/Makefile    |   1 +
+>   net/lwip/net-lwip.c  |   5 -
+>   net/lwip/nfs.c       | 282 +++++++++++++++++
+>   net/net-common.c     |  21 ++
+>   net/net.c            |  23 --
+>   net/nfs-common.c     | 863 +++++++++++++++++++++++++++++++++++++++++++=
+++++++++
+>   net/nfs-common.h     | 123 ++++++++
+>   net/nfs.c            | 849 +------------------------------------------=
+=2D------
+>   net/nfs.h            |  59 ----
+>   16 files changed, 1368 insertions(+), 964 deletions(-)
+> ---
+> base-commit: 59f9fcc1f514762674ac07c13c2a85f7aace7250
+> change-id: 20251029-lwip_nfs-5385efca71bc
+>=20
+> Best regards,
 
-On Thu, 4 Dec 2025 at 04:50, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon
->
-> On 12/2/25 9:06 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Wed, 26 Nov 2025 at 04:44, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 11/25/25 11:15 PM, Simon Glass wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On Fri, 21 Nov 2025 at 10:15, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> >>>>
-> >>>> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>>>
-> >>>> This adds a test that signs a FIT and verifies the signature with
-> >>>> fit_check_sign.
-> >>>>
-> >>>> OpenSSL engines are typically for signing with external HW so it's not
-> >>>> that straight-forward to simulate.
-> >>>>
-> >>>> For a simple RSA OpenSSL engine, a dummy engine with a hardcoded RSA
-> >>>> 4096 private key is made available. It can be selected by setting the
-> >>>> OpenSSL engine argument to dummy-rsa-engine. This can only be done if
-> >>>> the engine is detected by OpenSSL, which works by setting the
-> >>>> OPENSSL_ENGINES environment variable. I have no clue if dummy-rsa-engine
-> >>>> is properly implementing what is expected from an RSA engine, but it
-> >>>> seems to be enough for testing.
-> >>>>
-> >>>> For a simple PKCS11 engine, SoftHSMv2 is used, which allows to do PKCS11
-> >>>> without specific hardware. The keypairs and tokens are generated on the
-> >>>> fly. The "prod" token is generated with a different PIN (1234 instead of
-> >>>> 1111) to also test MKIMAGE_SIGN_PIN env variable while we're at it.
-> >>>>
-> >>>> Binman will not mess with the local SoftHSMv2 setup as it will only use
-> >>>> tokens from a per-test temporary directory enforced via the temporary
-> >>>> configuration file set via SOFTHSM2_CONF env variable in the tests. The
-> >>>> files created in the input dir should NOT be named the same as it is
-> >>>> shared between all tests in the same process (which is all tests when
-> >>>> running binman with -P 1 or with -T).
-> >>>>
-> >>>> Once signed, it's checked with fit_check_sign with the associated
-> >>>> certificate.
-> >>>>
-> >>>> Finally, a new softhsm2_util bintool is added so that we can initialize
-> >>>> the token and import keypairs. On Debian, the package also brings
-> >>>> libsofthsm2 which is required for OpenSSL to interact with SoftHSMv2. It
-> >>>> is not the only package required though, as it also needs p11-kit and
-> >>>> libengine-pkcs11-openssl (the latter bringing the former). We can detect
-> >>>> if it's properly installed by running openssl engine dynamic -c pkcs11.
-> >>>> If that fails, we simply skip the test.
-> >>>> The package is installed in the CI container by default.
-> >>>>
-> >>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >>>> ---
-> >>>>    tools/binman/btool/softhsm2_util.py                |  21 ++
-> >>>>    tools/binman/ftest.py                              | 223 +++++++++++++++++++++
-> >>>>    tools/binman/test/340_dummy-rsa4096.crt            |  31 +++
-> >>>>    tools/binman/test/340_fit_signature_engine.dts     |  99 +++++++++
-> >>>>    .../test/340_fit_signature_engine_encrypt.dts      | 100 +++++++++
-> >>>>    .../test/340_fit_signature_engine_pkcs11.dts       |  99 +++++++++
-> >>>>    .../340_fit_signature_engine_pkcs11_object.dts     | 100 +++++++++
-> >>>>    tools/binman/test/340_openssl.conf                 |  10 +
-> >>>>    tools/binman/test/340_softhsm2.conf                |  16 ++
-> >>>>    tools/binman/test/Makefile                         |   6 +-
-> >>>>    tools/binman/test/dummy-rsa-engine.c               | 149 ++++++++++++++
-> >>>>    11 files changed, 853 insertions(+), 1 deletion(-)
-> >>>
-> >>> Not sure of the changes from last time, but I assume the test coverage
-> >>> is finished.
-> >>>
-> >>
-> >> They are listed in the cover letter in the Changes section.
-> >>
-> >> $ b4 diff -v 2 3 --
-> >> https://lore.kernel.org/u-boot/20251121-binman-engine-v3-0-b80180aaa783@cherry.de/T//#t
-> >>
-> >> will show you the git-range-diff between both versions for a given commit.
-> >
-> > I normally review just in email (often on a Chromebook) so I don't
-> > have that. It is also an extra step and I don't know where your log
-> > argument comes from. It would be better to put the change log in the
->
-> What do you mean by "your log argument"?
+Thank you for looking into the LWIP port.
 
-Basically this is an email review flow. It is true that sometimes we
-apply patches to look into them in detail, but as I said I am often on
-a machine where I cannot.
+We lack an NFS server in our Gitlab CI to run the NFS test.
 
->
-> > patch as well.
-> >
->
-> We already had that discussion 7 months ago. See
-> https://lore.kernel.org/u-boot/CAFLszTh49HqGC4P2=nefc8vgdWrLe_p6HoyoEZ=FkadNBLsp3Q@mail.gmail.com/
-> and the exchange afterwards. b4 expects you to put the changes made in
-> the series in the cover letter. It doesn't forbid you from adding some
-> to individual commits underneath "---" but I also don't think it syncs
-> them with the cover letter (which is a feature Tom told you you could
-> bring up to the b4 maintainer).
+For HTTP we are running
+python3 -m http.server 80 --directory "${UBOOT_TRAVIS_BUILD_DIR}"
+in .gitlab-ci.yml.
 
-OK I see. Well in this case I just assume that the next version solves
-anything I might have mentioned last time.
+We should do something similar for NFS.
 
-Regards,
-Simon
+There is a userspace NFS server available
+at https://github.com/unfs3/unfs3.
+
+This worked on my workstation:
+
+cat > exports << EOF
+/home/ubuntu
+EOF
+./unfsd -e `pwd`/exports  -u  -n 4096 -m 4096
+sudo mount -t nfs \
+-o port=3D4096,mountport=3D4096,mountvers=3D3,nolock \
+localhost:/home/ubuntu /mnt
+
+Now in /mnt I could see the /home/ubuntu file-system.
+
+With LWIP we should think about enabling tcp for NFS.
+
+Best regards
+
+Heinrich
