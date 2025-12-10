@@ -4,127 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB3CD3B9A9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 10:19:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE68D3B9A9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 10:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB6B83106;
-	Wed, 10 Dec 2025 11:19:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 2355983655;
+	Wed, 10 Dec 2025 11:31:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="gL4ehHry";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nLpGow2R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FFB8367F; Wed, 10 Dec 2025 11:19:26 +0100 (CET)
-Received: from TYVP286CU001.outbound.protection.outlook.com
- (mail-japaneastazolkn190110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d405::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5231B8367F; Wed, 10 Dec 2025 11:31:03 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD452830E4
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 11:19:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C8D483642
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 11:31:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yangshiji66@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vyn7yZjoiqdKf+SLByxMOAYi3OCOJ6w+6XFxH8T9NrD24nBPoBs/E+BEa0oVk8whcfqzk4ZYNk1UBFw1ewVF94jJH9XQfpzLerqrCYc1IJzOMQ2Juf8cHoIwMk1lXXIV/AG8KIeHHMHJl0QKg2DNOYIiEcpNSv1ADoTd5jqtEsC7+3Obvo7US758vw9xrKy+b7i38X79KDl3ttQmQLN+N4CezkNJr3nslrqhyxKXJPVIxjUIy23BlutFASX+zuJpW770G6d+rWDfeJpMk8VtK8JlNfYvq1a8W9/Jtx6srsXKbAGry21dNWirbzPj0VjUYuvov+BUefBX6FTlTyxpyA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IuAZcpJvBfCxLhQRXNKjR7y0/XZxE/8KH2p/ZU6Ryv4=;
- b=ILZCzJbe5axNYtejXPbFss5vE8liWGDj818LKJY7NIUtWIrjEjW5JlvNmF0pB2JJRdbLE8/kZJdGGJ3WXN5SdTAekxwwfagT7m3wTwiW1mT02sct96aM5mIFeIj09XIgEWUFvP6eBj0kzG8poa0hflxcXzFpQwVwUazM7cZTPWkF4tjmqGVwQ/Udu474rH1xKrzZIP4/EzQcF41iiIxAeELW7RTs+zsQ5plWBV4S0D0dxus6tEL9sgvfS6hp6wECOrkX6KbIIYkhv8QSHfjmAKpUvjyr2Q/2/CwVy+4+aPkrtCwrgJimK84iI6aP53O/dIQz70zsuynt/PTw5hi1cA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IuAZcpJvBfCxLhQRXNKjR7y0/XZxE/8KH2p/ZU6Ryv4=;
- b=gL4ehHry21V+SmTuD9tOgp+WbTaRCT6EZ7GoHLGDUQxbPPlJoN8bqGySM5crudSh9sgEwRrE1ySa62ZDhD2ZQ4br2a5Qqp5rbN3Rr5xxITYn1WDkw/JRA2ahwbimR6w9iwEQt1b5NakjDoBTzd9m2qf1Ss+pNYROnlUI+dxRUU6clm6tCVPUwsFpXQdiFHpyD6lLhVSeg9wk4lJ84WfqJIweXc1py07HlsfvCrCWJWOgj0j+OONz6uuO0WcojGI3thW0WACWtzdFckHEA928cxM/3ApjKE8RYSwZ9xFXhVL6Ez4K3Ioc/ehpErKPkGBoD6TItinhPiPyh8S3KF5DEw==
-Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
- (2603:1096:604:36a::14) by OSCPR01MB15682.jpnprd01.prod.outlook.com
- (2603:1096:604:3c7::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.7; Wed, 10 Dec
- 2025 10:19:19 +0000
-Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
- ([fe80::6e58:e4b5:3405:28d6]) by OS7PR01MB13834.jpnprd01.prod.outlook.com
- ([fe80::6e58:e4b5:3405:28d6%4]) with mapi id 15.20.9412.005; Wed, 10 Dec 2025
- 10:19:19 +0000
-From: Shiji Yang <yangshiji66@outlook.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Shiji Yang <yangshiji66@outlook.com>
-Subject: [BUG] [v2026.01-rc4] hush: while/until loop unexpectedly skipped
-Date: Wed, 10 Dec 2025 18:18:23 +0800
-Message-ID: <OS7PR01MB138341D2719717E66B069F33FBCA0A@OS7PR01MB13834.jpnprd01.prod.outlook.com>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI1PR02CA0001.apcprd02.prod.outlook.com
- (2603:1096:4:1f7::15) To OS7PR01MB13834.jpnprd01.prod.outlook.com
- (2603:1096:604:36a::14)
-X-Microsoft-Original-Message-ID: <20251210101824.22786-1-yangshiji66@outlook.com>
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b725ead5800so883110466b.1
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 02:31:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765362660; x=1765967460; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wOwxgr1U3+pImw4HYxnHpHWFsQA7SLb51tBage3eMb0=;
+ b=nLpGow2Rf3CjlyH5VL1DgP4uK63YbwefFnH38UBJ4McyVHxTw6Zl9ulgvXbo3i4TTx
+ ChraIc9OMigahRTdHWTZpxrMaIVfG6IFMxTKmx3NclnoLKqZfnx2aBiuBltEozp+HAn6
+ uMh9OYgs4k0xd0+yrFPiNb/WVfgqnygg1jDvSY6f13ZryWAHYk0lYqFWSoK0+3tCqBQC
+ r1PYQyTCXed+UI56h2T10MwQmGGig1vofiilnQ/ZTCJR6ws0NoMF4L3ER5GN5QoFiLsf
+ Lai1nqePeZ55Bmvc8jl2wcHMelE/BiXWQNFTn7Hw4RZZT+4Ukn7YnSUX5pNUlI/KM50H
+ mdzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765362660; x=1765967460;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wOwxgr1U3+pImw4HYxnHpHWFsQA7SLb51tBage3eMb0=;
+ b=l9wTfiqYUhpdixMPy8LkOLOe8b0X9ih6v7w/Ufv8+1YgEceyiJNksIfUCS/IllHx9k
+ rzP7r598lGyEZr/H2DK33gEtlJw/jSLAbJb8QcvyNczBktmDhvjozR1jIB08bbooI8ml
+ JfKrKJbO7Ma6JiARN3IEA2DYWNPQ+rGjZUA1sGa0vivhyEYYWEi74njPRwxBx9LkUGK9
+ rVVZBo/unIQ0QpO3RwOdaH9d+QpPJxfG1176AClZL1uolApEzVNnaNb35f87qOf8nLyc
+ xJ3V2rSSDUjTGG4J+LWQWlW5P7vsQeU4/e+sB2+QYx7/bYx/t8C6PSF16ls4zlZ45Zfa
+ Lt6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVB+0YtaPMOZ+r9eOdDBIfFlizgLsFu2qB+sY9jZjssURbwJOfOZlNVV2XPo1HV5kmISdFEqMw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz19hPVYLx956F7likjuayxPdXz4niHjGSUm56A/2eSSbwyjDCg
+ psHZftcSk0xtT9Mk+nuqESLyZiiMA96VVAPU+/FdwDcBFyZJ9ylLCrvSblpkOWgInv8=
+X-Gm-Gg: ASbGnctRgu+8ddm561lkD0fnfH11gxMKej5y+Ua49GIkFJhDUooPHs7RkOeDax9pX4X
+ JcitYkBrZXmXeaLnzMhtVCThs1bws/UOdq79wkFEAsXL7qZdh3zKp0JVm+x3sQC6B+d9Vb70lBe
+ IzSzJ9IuOOGwLXtt/KItfBBHc9iHBEIWc332v+ozglqRRXlgY1F2N1PnDyG2SkarOh6Jqj42GLr
+ NEbD1/7SLw0cxQwQ6WeI9KYcdjrdNke8QKBZ0LDxLj8aryYc+RouJPRCQfU0+RlQTeNbTGFx9nU
+ q8I5YTL6ctSMdUtqI9zk0bZYrTXhFn9KArhSOWAe7A3hbeq3oTm8HR3Vpfdew9haO0xLgZVOjVG
+ 2/b+E5HTMuICCXdiTIGZl2cMM4+HrFFqY4WbeI4wAoCt1rDe3NQB0YDoofR7nM+5W0Ep4eCecSg
+ S6s8IpQvMx30iAzEZ/Ng9a6lF4XDifcgoYYNaIGPG++9SnL/8ufptqhCVhKmULuFnFkM/MzbDZ1
+ rgS
+X-Google-Smtp-Source: AGHT+IGK1N50+LJunLSIneQ4JRmGGsIwm9JbiumA/MwFpyPNMCVCJVzVkcUbSNPyBFq+gOAzQx5zgw==
+X-Received: by 2002:a17:907:2d8a:b0:b76:3399:457b with SMTP id
+ a640c23a62f3a-b7ce84d62a0mr196129566b.37.1765362659643; 
+ Wed, 10 Dec 2025 02:30:59 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:bab0:64cb:d41d:cc7e?
+ ([2a01:e0a:3cb:7bb0:bab0:64cb:d41d:cc7e])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-647b2edf71fsm17920231a12.14.2025.12.10.02.30.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Dec 2025 02:30:59 -0800 (PST)
+Message-ID: <fb7060d2-0d34-4517-8679-aa9b4ea7e52c@linaro.org>
+Date: Wed, 10 Dec 2025 11:30:57 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS7PR01MB13834:EE_|OSCPR01MB15682:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a4192da-4318-401c-1512-08de37d59446
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|15080799012|19110799012|41001999006|461199028|8060799015|23021999003|5072599009|52005399003|440099028|3412199025|40105399003|1710799026;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1sx9W2CsBxdi6XbgtgusSEl4vBjrFt1TdoKj6dB+5MWs+3nh9+3o7S9e4kOJ?=
- =?us-ascii?Q?Oo2LLJK9RxWoewnD/29tA0GbInJTMTSxVryxyVDSTgfld6HYM5xeuBGhJe3j?=
- =?us-ascii?Q?qWuU6WBtAV9poRPIU1RVqs1XfJiGRFxIQMrh22kbI6bwt+9skt+Oo0rlmXzh?=
- =?us-ascii?Q?qSSwfK42ub7dhaR/UfiNRpbwgWG0eFEaDFlStWHn8YU/iSvJPq+bjb8k1Shj?=
- =?us-ascii?Q?0y/V4Nh4S0xFxfLwxV8HJlsF07aA4ay/wyr56odj8ZowKTGwaGr2SAwYV7hs?=
- =?us-ascii?Q?bD1xhPj32bSRAaXWwL8Y3tDElEfdr+0c3TdmwJNUJ5piKJc0AOOegr8cZrjw?=
- =?us-ascii?Q?J11LOG3U6C68HZRDLVGl+lDE4dB+Gc3HW354zyXJZEVh47htElYa9uoseqT2?=
- =?us-ascii?Q?4qEf7xKsItc7vpbBM0nARiK6W/RM2522Tid3wx3Q+/Idm+AUVYpiEcs4Vx3Q?=
- =?us-ascii?Q?I8HG7j0ZSq5nhiJDOAOapEwcEpUIrRcxYuaaWERJWzfvsjBnfVvdRUCBHxO2?=
- =?us-ascii?Q?Go6kGnH5cuBXjASJLWI0uNwGV9qcOMwLCoeQXLkQWE4GOslF0do2vU2hJyZD?=
- =?us-ascii?Q?gYHlgi8ryfmVtLKfKJTSFUtGDtbtxSEDd3h0zG4svg8JiY7t8ViTn4yasK+f?=
- =?us-ascii?Q?EG7/W+9be2xWZoKmJqROV5e+bZMj8iJYYmPojEIlH8P/ZEjN4gakhBNXbsR8?=
- =?us-ascii?Q?s0zVv7iRjP0Q1ovxEjRhL7kjaHQgS5ut5Es+rPC5yf4FA9gF2fz5S6YGIrfM?=
- =?us-ascii?Q?D82vqu7K+T/369MRdb5xozu3zv2+TD7wrt/ifkoyKaKPphp0EK+CZe/Kt0Wd?=
- =?us-ascii?Q?uX8QyzA74eMVFxKXBfnJs/OH65oGLC9u00tYKEbP5DRgczPFMBaQICsTiBjq?=
- =?us-ascii?Q?kDGk6YIAlfK5zmZpcI0dGZwAfANG1wv9ZNUE5KWG4Kcv5Q7ZPBCQZoIhe54/?=
- =?us-ascii?Q?qoMDGyBuvNx+fW273jDiDBul55KPhEq6Rxz7aO4AyAWDXTM6hr2MG/sgDzPE?=
- =?us-ascii?Q?axpGx/ArnzToRX5covBtP+82hYKgzc1SHdRbBrL4rQKceuR3PX9T6B4z2zCq?=
- =?us-ascii?Q?UNpdzYeeUEuWN4wjShV6tiWDXpMysbFglEeYQtInEgKPdEckUYAbAN5+3OxB?=
- =?us-ascii?Q?I+IFiNiKSWbIbmjKDYVXwx5CN+WlX3ahRma8D0KSFG8A0roRXgfZ5XuVtJG5?=
- =?us-ascii?Q?sGYennaU490WwPbKOxuOmnHG8U30KZkuc8oHVitxrL2GLuFCI8FF6o8134I?=
- =?us-ascii?Q?=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Aqq9yvJfyO9yzeVRc7QTThExarcGT+5v9hhKSkw5zLqh7DVX1sClZZLFG7zA?=
- =?us-ascii?Q?/bR05IZppNtI/QD1KOSs+Wj3ONQ+mvR9/7bc0zCqr09mSpozDuxCI8uD0rHi?=
- =?us-ascii?Q?UQh4DSzSFvy3nZJ/dcDnfB9nv+jEOIYP/hay3ZI5LbyEmuTVuqTGFG/uMkTv?=
- =?us-ascii?Q?xFgRwgFS/zX53zOK+UsrsTIneHKPyfY4mCFop1LHhgBBOpyDmzUGfAtaD384?=
- =?us-ascii?Q?AON9GWqFF+92QSsvEAxgRtcOixCva5ZViBbb+crNhsjLKHBklotQzolJ8Bw0?=
- =?us-ascii?Q?2qnelP3v97H/5HIDQvQzzhADGJTRo/2R+hOVs8QR9B0YLF5KQCBfw6HuUEnr?=
- =?us-ascii?Q?wonNuvvYncagzXFh1Q0ab7Xnf94CwA9L8XAP2eVaDPDp69EmSpFcLwNRmWOx?=
- =?us-ascii?Q?vIpwMNzGPNLZej6eNcPV1bI9VR0nP6b0jQbuos88Or8qM9LZYGCArh7M56sH?=
- =?us-ascii?Q?ZsvMPhZVZA9SvTYdBLpmCC6oNvl86wX4pGLr9xQsSZunMup0yv013fzwOOO4?=
- =?us-ascii?Q?HeiyOVkvgzhFUzPUDmYDXRasKEYZzOZUovTUq1TzBgaVLFhN46hLLF91Rihl?=
- =?us-ascii?Q?3YhCSl91cJ9Of5F6Ihth7MUPAVp4FI29y8lEJ1Bfh3qMA0lgmc/HA+zZ1Xw+?=
- =?us-ascii?Q?SrP4juTrXXMDUmcEcU6pG5hvKQ27XvnZpOw5MqOqJzPa2G04/+9fszy+f6AP?=
- =?us-ascii?Q?mjjSwBHv+56jOdYLOVDRv+qy9haXFBVy/GIaF9qvoyncnSu0mD/J19nALl87?=
- =?us-ascii?Q?C3rLt4hWDSm4HNufK57vGqsdcHlIKSfGssfEWqkotX8gFgGUzOiiCupgfcHY?=
- =?us-ascii?Q?RdjZSitNWZAuE23+IXy4OAoUb3KjwGhYJp9JokVFfwFDyTPB+Riz+a8TBVJr?=
- =?us-ascii?Q?cCIlKL0eyialSNXSEM5iw0Fz1Mf0E6Wwvdf53fIK1D0IEY/DXagpg0f3LAK9?=
- =?us-ascii?Q?w1W2xC53RnjOEO+6uprB3W3X0e6bTaoKQgQKLtdGSAyyVrJc89QXBr91q1/s?=
- =?us-ascii?Q?tqDb1ylOLHibU4pKS1ok74XSZy2S4TngH62jwgSKovqQ8oThslpR/uUPMDQx?=
- =?us-ascii?Q?KfqvTbOiqg1z9br7tHIZlExIJ0jBSVE6n/jzrpv6R/jsueBVtcNawn9YGhdd?=
- =?us-ascii?Q?olYdgmAtatMJDkLwy4fZ2FNvRuRGTS9UvJJwot4/j5DOyHhSVXfqUwc3+Ujn?=
- =?us-ascii?Q?NWeZkFLs4ENsqpTJZ+Eb3mvYBIQ0XmFN2zCPMG1Q6U7DQY5fhaxg9mSq5smy?=
- =?us-ascii?Q?IJDlpiu1zniIYLSmTiyK?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a4192da-4318-401c-1512-08de37d59446
-X-MS-Exchange-CrossTenant-AuthSource: OS7PR01MB13834.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2025 10:19:19.5112 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSCPR01MB15682
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/5] net: lwip: nfs: Port the NFS code to work with LWIP
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Martyn Welch <martyn.welch@collabora.com>
+References: <20251208-lwip_nfs-v1-0-1f5d31e15d00@linaro.org>
+ <20251208-lwip_nfs-v1-5-1f5d31e15d00@linaro.org>
+ <99a2c68e-dee6-4d0b-8068-ba318a3db03a@linaro.org>
+ <976f38ab-fb39-4db0-a37d-31066ea941f6@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <976f38ab-fb39-4db0-a37d-31066ea941f6@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,29 +121,462 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the command before the while/until loop is interrupted by
-Ctrl-C, the loop will be skipped. See examples below:
 
-=> echo start ; tftpboot test.bin ; echo interrupt ; while true ; do echo 1oop ; sleep 1 ; done ; echo end
-start
-Using eth@10100000 device
-TFTP from server 192.168.1.254; our IP address is 192.168.1.1
-Filename 'test.bin'.
-Load address: 0x81800000
-Loading: *
-Abort		<-- Press Ctrl-C to exit here
-interrupt
-end
 
-=> echo start ; until false ; do echo 1oop1 ; sleep 1 ; done ; echo interrupt ; until false ; do echo loop2 ; sleep 1 ; done ; echo end
-start
-1oop1
-1oop1
-1oop1		<-- Press Ctrl-C to exit here
-interrupt
-end
+On 12/9/25 17:39, Andrew Goodbody wrote:
+> On 09/12/2025 15:02, Jerome Forissier wrote:
+>> Hi Andrew,
+>>
+>> On 12/8/25 13:52, Andrew Goodbody wrote:
+>>> After the preparatory patches moved most of the NFS code into common
+>>> files we now add the code to enable NFS support with LWIP.
+>>
+>> s/LWIP/lwIP/ and same in the commit subject ('lwip:' is OK as a subsystem prefix though)
+> 
+> OK.
+> 
+>>>
+>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>> ---
+>>>   cmd/Kconfig        |  28 +++---
+>>>   cmd/lwip/Makefile  |   1 +
+>>>   cmd/lwip/nfs.c     |  11 +++
+>>>   include/net-lwip.h |   1 +
+>>>   net/lwip/Makefile  |   1 +
+>>>   net/lwip/nfs.c     | 282 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+>>>   net/nfs-common.c   |   4 +-
+>>>   7 files changed, 313 insertions(+), 15 deletions(-)
+>>>
+>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>>> index 8e3efff2bee69e4be80fe8e87eb7815dd3ff8ca9..de180fd7fab62329f8b63dfed780b32e0e908e91 100644
+>>> --- a/cmd/Kconfig
+>>> +++ b/cmd/Kconfig
+>>> @@ -2110,20 +2110,6 @@ config CMD_RARP
+>>>       help
+>>>         Boot image via network using RARP/TFTP protocol
+>>>   -config CMD_NFS
+>>> -    bool "nfs"
+>>> -    help
+>>> -      Boot image via network using NFS protocol.
+>>> -
+>>> -config NFS_TIMEOUT
+>>> -    int "Timeout in milliseconds for NFS mounts"
+>>> -    depends on CMD_NFS
+>>> -    default 2000
+>>> -    help
+>>> -      Timeout in milliseconds used in NFS protocol.  If you encounter
+>>> -      "ERROR: Cannot umount" in nfs command, try longer timeout such as
+>>> -      10000.
+>>> -
+>>>   config SYS_DISABLE_AUTOLOAD
+>>>       bool "Disable automatically loading files over the network"
+>>>       depends on CMD_BOOTP || CMD_DHCP || CMD_NFS || CMD_RARP
+>>> @@ -2218,6 +2204,20 @@ config CMD_MDIO
+>>>         The MDIO interface is orthogonal to the MII interface and extends
+>>>         it by adding access to more registers through indirect addressing.
+>>>   +config CMD_NFS
+>>> +    bool "nfs"
+>>> +    help
+>>> +      Boot image via network using NFS protocol.
+>>> +
+>>> +config NFS_TIMEOUT
+>>> +    int "Timeout in milliseconds for NFS mounts"
+>>> +    depends on CMD_NFS
+>>> +    default 2000
+>>> +    help
+>>> +      Timeout in milliseconds used in NFS protocol.  If you encounter
+>>> +      "ERROR: Cannot umount" in nfs command, try longer timeout such as
+>>> +      10000.
+>>> +
+>>>   config CMD_PING
+>>>       bool "ping"
+>>>       select PROT_RAW_LWIP if NET_LWIP
+>>> diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+>>> index a7f8976af3fb7cb2d41344f9f22a5d820c5ebc7e..90df1f5511cce4496abb16a495720df4e8cea822 100644
+>>> --- a/cmd/lwip/Makefile
+>>> +++ b/cmd/lwip/Makefile
+>>> @@ -1,5 +1,6 @@
+>>>   obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>>>   obj-$(CONFIG_CMD_DNS) += dns.o
+>>> +obj-$(CONFIG_CMD_NFS) += nfs.o
+>>>   obj-$(CONFIG_CMD_PING) += ping.o
+>>>   obj-$(CONFIG_CMD_SNTP) += sntp.o
+>>>   obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>>> diff --git a/cmd/lwip/nfs.c b/cmd/lwip/nfs.c
+>>> new file mode 100644
+>>> index 0000000000000000000000000000000000000000..f22db582fdb9ff7c978da41d35046bf834aaf54e
+>>> --- /dev/null
+>>> +++ b/cmd/lwip/nfs.c
+>>> @@ -0,0 +1,11 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/* Copyright (C) 2025 Linaro Ltd. */
+>>> +
+>>> +#include <command.h>
+>>> +#include <net.h>
+>>> +
+>>> +U_BOOT_CMD(nfs,    3,    1,    do_nfs,
+>>> +       "boot image via network using NFS protocol",
+>>> +       "[loadAddress] [[hostIPaddr:]bootfilename]"
+>>> +      );
+>>> +
+>>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>>> index c910def5719ea49c1796c11354e1a3d63e01e023..20cb0992cce1f9dbca7eaa114b4939028158d9b5 100644
+>>> --- a/include/net-lwip.h
+>>> +++ b/include/net-lwip.h
+>>> @@ -51,6 +51,7 @@ int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip);
+>>>   bool wget_validate_uri(char *uri);
+>>>     int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>>> +int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>>>   int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+>>>     #endif /* __NET_LWIP_H__ */
+>>> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+>>> index 1b48ae4d50885863e82989f77416e5c35545502a..5291cbb2a1c31a970c44c6e182dc6d3a90d489cf 100644
+>>> --- a/net/lwip/Makefile
+>>> +++ b/net/lwip/Makefile
+>>> @@ -4,6 +4,7 @@ obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
+>>>   obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>>>   obj-$(CONFIG_DNS) += dns.o
+>>>   obj-$(CONFIG_LWIP_ICMP_SHOW_UNREACH) += icmp_unreach.o
+>>> +obj-$(CONFIG_CMD_NFS) += nfs.o
+>>>   obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>>>   obj-$(CONFIG_WGET) += wget.o
+>>>   diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+>>> new file mode 100644
+>>> index 0000000000000000000000000000000000000000..5a2275aec97cd7e36ca3db9c3ee138878718f3b9
+>>> --- /dev/null
+>>> +++ b/net/lwip/nfs.c
+>>> @@ -0,0 +1,282 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/* Copyright (C) 2025 Linaro Ltd. */
+>>> +
+>>> +#include <console.h>
+>>> +#include <display_options.h>
+>>> +#include <env.h>
+>>> +#include <image.h>
+>>> +#include <linux/kconfig.h>
+>>> +#include <lwip/timeouts.h>
+>>> +#include <lwip/udp.h>
+>>> +#include <net.h>
+>>> +#include "../nfs-common.h"
+>>> +#include <time.h>
+>>> +
+>>> +static ulong timer_start;
+>>> +
+>>> +static struct nfs_ctx {
+>>> +    ip_addr_t nfs_server;
+>>> +    struct udp_pcb *pcb;
+>>> +} sess_ctx;
+>>
+>> I'd much prefer if we could avoid global variables, especially since
+>> this NETLOOP_* state is imported from the legacy network stack. See
+>> how tftp_loop() declares a tftp_ctx on the stack. We could have a
+>> nfs_ctx for example.
+> 
+> I did consider that initially. Unfortunately it will much reduce the amount of code that can be shared. The nfs_ctx needs to be passed around which will change all the function signatures. The tftp code benefits from being able to use the lwIP implementation instead of attempting to reuse the legacy net code.
+> Please confirm if you want me to go ahead with this change given that it is likely to mean very little, if any, code sharing.
 
-I guess we need to clear some flags after pressing Ctrl-C.
+Well, I took a closer look and indeed it's not a very good option. We
+probably don't want to touch the legacy code too much.
+So I'm OK with keeping the global variables.
 
-Regards,
-Shiji Yang
+Thanks,
+-- 
+Jerome
+
+> 
+>> With that I suppose "net: move net_state to net-common" could be
+>> removed from the series.
+> 
+> It could, yes.
+> 
+>>> +
+>>> +/**************************************************************************
+>>> + * RPC_LOOKUP - Lookup RPC Port numbers
+>>> + **************************************************************************
+>>> + */
+>>> +void rpc_req(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
+>>> +{
+>>> +    struct pbuf *pb;
+>>> +    int pktlen;
+>>> +    int sport;
+>>> +    err_t err;
+>>> +
+>>> +    pb = pbuf_alloc(PBUF_TRANSPORT, sizeof(struct rpc_t), PBUF_RAM);
+>>
+>> This needs to be checked for NULL.
+> 
+> OK.
+> 
+> Andrew
+> 
+>>> +
+>>> +    rpc_req_common(rpc_prog, rpc_proc, data, datalen,
+>>> +               pb->payload, &pktlen, &sport);
+>>> +
+>>> +    pbuf_realloc(pb, (u16_t)pktlen);
+>>> +
+>>> +    err = udp_sendto(sess_ctx.pcb, pb, &sess_ctx.nfs_server, sport);
+>>> +    debug_cond((err != ERR_OK), "Failed to send UDP packet err = %d\n", err);
+>>> +    pbuf_free(pb);
+>>> +}
+>>> +
+>>> +void nfs_refresh_timeout(void)
+>>> +{
+>>> +    timer_start = get_timer(0);
+>>> +}
+>>> +
+>>> +static void nfs_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
+>>> +             const ip_addr_t *addr, u16_t port)
+>>> +{
+>>> +    struct nfs_ctx *ctx = arg;
+>>> +    int plen;
+>>> +    struct rpc_t rpc_pkt;
+>>> +
+>>> +    if (addr->addr != ctx->nfs_server.addr)
+>>> +        goto exitfree;
+>>> +
+>>> +    if (p->tot_len > sizeof(struct rpc_t))
+>>> +        goto exitfree;
+>>> +
+>>> +    plen = pbuf_copy_partial(p, &rpc_pkt.u.data[0], sizeof(rpc_pkt), 0);
+>>> +    nfs_pkt_recv(&rpc_pkt.u.data[0], plen);
+>>> +
+>>> +exitfree:
+>>> +    pbuf_free(p);
+>>> +}
+>>> +
+>>> +static int nfs_udp_init(struct nfs_ctx *ctx)
+>>> +{
+>>> +    ctx->pcb = udp_new();
+>>> +    if (!ctx->pcb)
+>>> +        return -ENOMEM;
+>>> +
+>>> +    ctx->pcb->local_port = nfs_our_port;
+>>> +    udp_recv(ctx->pcb, nfs_recv, ctx);
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +static int nfs_timeout_check(void)
+>>> +{
+>>> +    if (get_timer(timer_start) < nfs_timeout)
+>>> +        return 0;
+>>> +    if (++nfs_timeout_count < NFS_RETRY_COUNT) {
+>>> +        puts("T ");
+>>> +        timer_start = get_timer(0);
+>>> +        nfs_send();
+>>> +        return 0;
+>>> +    }
+>>> +
+>>> +    return 1;
+>>> +}
+>>> +
+>>> +static int nfs_loop(struct udevice *udev, ulong addr, char *fname,
+>>> +            ip_addr_t srvip)
+>>> +{
+>>> +    struct netif *netif;
+>>> +    int ret;
+>>> +
+>>> +    nfs_download_state = NETLOOP_FAIL;
+>>> +    net_set_state(NETLOOP_FAIL);
+>>
+>> These states belong in the nfs_ctx I mentioned above.
+>>
+>>> +
+>>> +    if (!fname || addr == 0)
+>>> +        return -1;
+>>> +
+>>> +    netif = net_lwip_new_netif(udev);
+>>> +    if (!netif)
+>>> +        return -1;
+>>> +
+>>> +    nfs_filename = nfs_basename(fname);
+>>> +    nfs_path     = nfs_dirname(fname);
+>>> +
+>>> +    printf("Using %s device\n", eth_get_name());
+>>> +
+>>> +    printf("File transfer via NFS from server %s; our IP address is %s\n",
+>>> +           ip4addr_ntoa(&srvip), env_get("ipaddr"));
+>>> +
+>>> +    printf("\nFilename '%s/%s'.", nfs_path, nfs_filename);
+>>> +
+>>> +    if (net_boot_file_expected_size_in_blocks) {
+>>> +        printf(" Size is 0x%x Bytes = ",
+>>> +               net_boot_file_expected_size_in_blocks << 9);
+>>> +        print_size(net_boot_file_expected_size_in_blocks << 9, "");
+>>> +    }
+>>> +    printf("\nLoad address: 0x%lx\nLoading: *\b", addr);
+>>> +    image_load_addr = addr;
+>>> +
+>>> +    nfs_timeout_count = 0;
+>>> +    nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
+>>> +
+>>> +    ret = nfs_udp_init(&sess_ctx);
+>>> +    if (ret < 0) {
+>>> +        net_lwip_remove_netif(netif);
+>>> +        debug("Failed to init network interface, aborting for error = %d\n", ret);
+>>> +        return ret;
+>>> +    }
+>>> +
+>>> +    net_set_state(NETLOOP_CONTINUE);
+>>> +
+>>> +    sess_ctx.nfs_server.addr = srvip.addr;
+>>> +
+>>> +    nfs_send();
+>>> +
+>>> +    timer_start = get_timer(0);
+>>> +    do {
+>>> +        net_lwip_rx(udev, netif);
+>>> +        if (net_state != NETLOOP_CONTINUE)
+>>> +            break;
+>>> +        if (ctrlc()) {
+>>> +            printf("\nAbort\n");
+>>> +            break;
+>>> +        }
+>>> +
+>>> +        if (nfs_timeout_check())
+>>> +            break;
+>>> +    } while (true);
+>>> +    debug("%s: Loop exit at %lu\n", __func__, get_timer(0));
+>>> +
+>>> +    net_lwip_remove_netif(netif);
+>>> +
+>>> +    if (net_state == NETLOOP_SUCCESS) {
+>>> +        ret = 0;
+>>> +        if (net_boot_file_size > 0) {
+>>> +            printf("Bytes transferred = %u (%x hex)\n",
+>>> +                   net_boot_file_size, net_boot_file_size);
+>>> +            env_set_hex("filesize", net_boot_file_size);
+>>> +            env_set_hex("fileaddr", image_load_addr);
+>>> +        }
+>>> +
+>>> +    } else {
+>>> +        debug("%s: NFS loop failed\n", __func__);
+>>> +        ret = -1;
+>>> +    }
+>>> +
+>>> +    return ret;
+>>> +}
+>>> +
+>>> +int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>> +{
+>>> +    int ret = CMD_RET_SUCCESS;
+>>> +    char *arg = NULL;
+>>> +    char *words[2] = { };
+>>> +    char *fname = NULL;
+>>> +    char *server_ip = NULL;
+>>> +    char *end;
+>>> +    ip_addr_t srvip;
+>>> +    ulong laddr;
+>>> +    ulong addr;
+>>> +    int i;
+>>> +
+>>> +    laddr = env_get_ulong("loadaddr", 16, image_load_addr);
+>>> +
+>>> +    switch (argc) {
+>>> +    case 1:
+>>> +        fname = env_get("bootfile");
+>>> +        break;
+>>> +    case 2:
+>>> +        /*
+>>> +         * Only one arg - accept two forms:
+>>> +         * Just load address, or just boot file name. The latter
+>>> +         * form must be written in a format which can not be
+>>> +         * mis-interpreted as a valid number.
+>>> +         */
+>>> +        addr = hextoul(argv[1], &end);
+>>> +        if (end == (argv[1] + strlen(argv[1]))) {
+>>> +            laddr = addr;
+>>> +            fname = env_get("bootfile");
+>>> +        } else {
+>>> +            arg = strdup(argv[1]);
+>>> +        }
+>>> +        break;
+>>> +    case 3:
+>>> +        laddr = hextoul(argv[1], NULL);
+>>> +        arg = strdup(argv[2]);
+>>> +        break;
+>>> +    default:
+>>> +        ret = CMD_RET_USAGE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (!arg)
+>>> +        arg = net_boot_file_name;
+>>> +
+>>> +    if (*arg) {
+>>> +        /* Parse [ip:]fname */
+>>> +        i = 0;
+>>> +        while ((*(words + i) = strsep(&arg, ":")))
+>>> +            i++;
+>>> +
+>>> +        switch (i) {
+>>> +        case 2:
+>>> +            server_ip = words[0];
+>>> +            fname = words[1];
+>>> +            break;
+>>> +        case 1:
+>>> +            fname = words[0];
+>>> +            break;
+>>> +        default:
+>>> +            break;
+>>> +        }
+>>> +    }
+>>> +
+>>> +    if (!server_ip)
+>>> +        server_ip = env_get("serverip");
+>>> +    if (!server_ip) {
+>>> +        log_err("*** ERROR: 'serverip' not set\n");
+>>> +        ret = CMD_RET_FAILURE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (!ipaddr_aton(server_ip, &srvip)) {
+>>> +        log_err("error: ipaddr_aton\n");
+>>> +        ret = CMD_RET_FAILURE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (!fname) {
+>>> +        log_err("error: no file name\n");
+>>> +        ret = CMD_RET_FAILURE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (!laddr) {
+>>> +        log_err("error: no load address\n");
+>>> +        ret = CMD_RET_FAILURE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (net_lwip_eth_start() < 0) {
+>>> +        ret = CMD_RET_FAILURE;
+>>> +        goto out;
+>>> +    }
+>>> +
+>>> +    if (nfs_loop(eth_get_dev(), laddr, fname, srvip) < 0)
+>>> +        ret = CMD_RET_FAILURE;
+>>> +out:
+>>> +    if (arg != net_boot_file_name)
+>>> +        free(arg);
+>>> +    return ret;
+>>> +}
+>>> diff --git a/net/nfs-common.c b/net/nfs-common.c
+>>> index a6a70677bd2d8350819dd7bce336d35cc3ae7bf8..4fbde67a760f4eb2825749a051dd444bac486253 100644
+>>> --- a/net/nfs-common.c
+>>> +++ b/net/nfs-common.c
+>>> @@ -286,9 +286,11 @@ static void nfs_umountall_req(void)
+>>>       u32 *p;
+>>>       int len;
+>>>   -    if ((nfs_server_mount_port == -1) || !fs_mounted)
+>>> +    if ((nfs_server_mount_port == -1) || !fs_mounted) {
+>>>           /* Nothing mounted, nothing to umount */
+>>> +        net_set_state(NETLOOP_FAIL);
+>>>           return;
+>>> +    }
+>>>         p = &data[0];
+>>>       p = rpc_add_credentials(p);
+>>>
+>>
+>> Thanks,
+> 
