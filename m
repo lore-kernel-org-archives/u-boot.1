@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954DDD3C925
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:49:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E55FD3C925
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:49:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5BB83CD2;
-	Wed, 10 Dec 2025 16:48:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E06C83CEA;
+	Wed, 10 Dec 2025 16:49:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WAfswAK9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w1PTJM9O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9C8283C08; Wed, 10 Dec 2025 16:48:57 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id BC08C83C94; Wed, 10 Dec 2025 16:48:58 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AC7A83C7B
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 16:48:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F58683A71
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 16:48:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O3GEtOAI+MBlXrwLQ0LRB4WCIGpnZalao0qVpkcO1CAkgSmv5SaBEcKCxPK8XvbEQcf1uNoqFpGMgOiXApoMvp3hBRt/rMjmyKpoH37SVlNlUnhtMyyZ9vDU9OF+Y4Y90OuC4NgEc4C9+u7xr2VacPWJCwNQnqQYUW8xuxIXh6FFqWgEtXWCgLcyfg97uqEpuKrSiS6NfN/a3wAQ9XIvrTIBumWv+2+f44nrxzVJcDwAqlbP9K0NrqE2XJrbPYpOJu6ieft5619slXz1HG4sFxJ7t7+qRrWLq3wtRyaI0s2uIMSmiMB/ooROeC3QT+tG62j5JmLOHBQurVv8cJ8U5A==
+ b=SZBIuhLhGxUwQJReajV2K0nWARp1y5VjhbFRT03mtBJNT4PzM86vtLQaUkj0b5xakJu2gzWnBDbp8m4upifGXpOU4OFXOlOlqZXfgwFF11SrUWU9ykPt19yqsP1YgIzCsreOhCaK1d87JuIO45XDE5bivQ2Bdi1FnSxJdduMWwMAj4K6HM+hEZofe6YrULbF6jrzkFlp/ylLybGWC5rWy89rj0hHCQpdcOHZ/35I8OCCRt96mwp0xYYNE6VPfzGdgP4XeuLbKVRLXAF3o57v9AZPx2P8zD7FYn4ILfWzwIb4RqU7vvqyShGCzfnlfzXWRM3dItS5K4OxlyZ2bla6Ew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nQyuJlUxjsy8QGVtObLJY1tv6BrooYZTm5b1xpbOCVs=;
- b=jjP0xLo8x2N+BQ2hZKh9VcA7JiaH6qegTqE2bg89Qry5zBifRe0PPDZzw4ahKHQnTeM4NGwMRQ3DTvvHgxWI/jLhJc2QhCnOPaI3WP8j/IxRn0XXoZCG14puG5uvZ9qclOJLlBcQG6l3gtOif8Mx+xfT980LjKZ3m93uvCvmLvUGDW69Gq7SERZ2cU+7QVeRJXb4oDaiAxKuYinLiI1Ip7TJESaumjvenAdb3l2a87eSw4kuX5Bt65f/yDBwFB+GRXVShfqKobywhlt6aN5inDW7asTElG53kgtdoxLjU7Lc5KBn5qg1XbJlrO4o990GmuqoMrCwcQAvqxzWUnYU2w==
+ bh=8bAk3wXt5VFrzJPOV96B50p6E3+Ai1NHKhe3nL8xUls=;
+ b=mlO097/2+WtevTX8FxjgxQppeF1xkkjGZfpAmTmIkK/OXZ9zIa6QMVxShIElqxV3CGFeUW17vvQVVAFFcTn6S0/0kRo75MZqEXXpnRIUwnkk8C2vheSFCBq7BmN4+KDJ768+0GiLxYFWimfAhMBLLiw+k/Hv+I+Nv0i+oNT2oeKovzCC23xoYvOGms2+uzA3TFn0jiwJMiitBu7J6eDTgNi2fcMjF6/AJflWB+hqBhtkq8BibpRG/Cl4yWA0x2Ik7bbng7rwa31rD9ha6OiiEewAdcdEDuLc5rtIhKtBB0t9TTDjyEFQaWp+2uIlTmCdqjD0hvgCj+rQ0ccaFWiUgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nQyuJlUxjsy8QGVtObLJY1tv6BrooYZTm5b1xpbOCVs=;
- b=WAfswAK9LwR0s5b42VsX+ewblqzazv/0oYA8z65YLzWNjMmP/TwZsgshcSGbkGSLOvFJ5vbFgeJKba0ogsU02t1pNdo1hqp+lc/rPAxA1TWoptDa7kEV01OyoQwoukWXTz9fhA2rUyg72ES85xWXxpHQEBAVnrqjV19BP4HfjBw=
-Received: from SA1P222CA0046.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::14)
- by SN7PR10MB7074.namprd10.prod.outlook.com (2603:10b6:806:34c::8)
+ bh=8bAk3wXt5VFrzJPOV96B50p6E3+Ai1NHKhe3nL8xUls=;
+ b=w1PTJM9OYjAnQPiL1OlmiTSQJui8UISrkwdjrFHeKlzUCLCOlXsQigM6Ts8XgTMaY/pHF5DPxT6R96ai/KsfCx1EFCxnKdNv8oWsxKMLWAZGoFUTDbvAPjZKbDB4z5fW8HPdYbIeGOT9jZI/2/tOq6cYauB2t5bHRwxiPnsL75E=
+Received: from SA1P222CA0042.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::16)
+ by SJ1PR10MB5979.namprd10.prod.outlook.com (2603:10b6:a03:45e::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.9; Wed, 10 Dec
- 2025 15:48:49 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.7; Wed, 10 Dec
+ 2025 15:48:51 +0000
 Received: from SA2PEPF0000150B.namprd04.prod.outlook.com
- (2603:10b6:806:2d0:cafe::46) by SA1P222CA0046.outlook.office365.com
- (2603:10b6:806:2d0::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.7 via Frontend Transport; Wed,
- 10 Dec 2025 15:48:49 +0000
+ (2603:10b6:806:2d0:cafe::ff) by SA1P222CA0042.outlook.office365.com
+ (2603:10b6:806:2d0::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Wed,
+ 10 Dec 2025 15:48:50 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -60,30 +60,29 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
  SA2PEPF0000150B.mail.protection.outlook.com (10.167.242.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Wed, 10 Dec 2025 15:48:49 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ 15.20.9412.4 via Frontend Transport; Wed, 10 Dec 2025 15:48:50 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 10 Dec
  2025 09:48:46 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 10 Dec
- 2025 09:48:45 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:48:46 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 10 Dec 2025 09:48:45 -0600
+ Transport; Wed, 10 Dec 2025 09:48:46 -0600
 Received: from uda0271468c.dhcp.ti.com (uda0271468c.dhcp.ti.com
  [128.247.75.68])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BAFmjru3199756;
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BAFmjrw3199756;
  Wed, 10 Dec 2025 09:48:45 -0600
 From: Vishal Mahaveer <vishalm@ti.com>
 To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 2/6] board: ti: am62ax: Add basic initialization for 32k
- crystal
-Date: Wed, 10 Dec 2025 09:48:40 -0600
-Message-ID: <20251210154845.3852231-3-vishalm@ti.com>
+Subject: [PATCH 4/6] configs: am62x_evm_a53_defconfig: Enable SPL_BOARD_INIT
+Date: Wed, 10 Dec 2025 09:48:42 -0600
+Message-ID: <20251210154845.3852231-5-vishalm@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251210154845.3852231-1-vishalm@ti.com>
 References: <20251210154845.3852231-1-vishalm@ti.com>
@@ -93,53 +92,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF0000150B:EE_|SN7PR10MB7074:EE_
-X-MS-Office365-Filtering-Correlation-Id: f6c91a27-dd50-4880-a030-08de38039c4c
+X-MS-TrafficTypeDiagnostic: SA2PEPF0000150B:EE_|SJ1PR10MB5979:EE_
+X-MS-Office365-Filtering-Correlation-Id: fa9c2fce-de0c-4c69-3b10-08de38039ce5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?VMoLiK2nZYoiSTdsZIQfzwHWcPKvFAlXtydwJLNeTgitAHsIOLQ5BOJ2VHnL?=
- =?us-ascii?Q?yh+rUBPHoYANtUWD7ee90G9pFBV/gUPsfDBBTqytP6pnBBOYuQl1JNqG3mSw?=
- =?us-ascii?Q?3arRr/Li2KNppvqKx0VTxtfF94nweM0SGiBW2YYKmqkzjK86gCKDSc6xnONr?=
- =?us-ascii?Q?uQYK06H3/Srjp8h5QFXeRJepBCaopbi0xty98egN64qNxUqtFutgxo+GvCMp?=
- =?us-ascii?Q?13TXHmzAl5BnfmvvCrNCz8iM5/+st7N6Sxet+NJH0NF0uoo3dJcQ7dNYKL5Z?=
- =?us-ascii?Q?qqrdkVNbvljodrMZ4cs/xXIKbLHCQJSw/kbbipPtQiHDNtBGQVBiq8YFpNbZ?=
- =?us-ascii?Q?T6zEh/vehfgZSiD40jhuG98fBgpCppO18aEOIbjdtoI4hldediux4Mzlz/2R?=
- =?us-ascii?Q?9RlN4md8nGPwzixK1bq6I3LWM3cbCetIXjxWMbFB+i8EEbCKqqE5QE3dRbv9?=
- =?us-ascii?Q?UTltVu+aXV3s6Ex0KZV3O9q2S79ZYG5WOudm4dgx/oUccWQgJ0C/8GH+x6FQ?=
- =?us-ascii?Q?gbJhLqoKfu/w08lV1mf4ITXMaiS3VwoEdIFikZpb+D/PJjBEresMW801Aw1p?=
- =?us-ascii?Q?5QR8WKt7Pefv4zAqWP/Ux7URM5eeiyB6dJhzyfm7/3QVNZDUN/TXM2QiG0OD?=
- =?us-ascii?Q?QdfzvNvBx57SoAeLCFsPreS6SRCJJR6mOZw1EYxaKyOyjmUbG55cmWW6McnW?=
- =?us-ascii?Q?i6M40noC8Kg66UpGtx17x/Q4+vxiToZwr3oMZ3rpWiYuRv4HYSRXW6pIc8GX?=
- =?us-ascii?Q?rHmms5xo2UXGa9vXydd2+6V5REv7RSvD/1e+nU9TQmoYI8toCz637WJuAyUN?=
- =?us-ascii?Q?haeCUz/KWZ3R2B64K1EHwGucZPPfpx3rBjiwkxuAgzZn2ocy/GyPF8yOxAYe?=
- =?us-ascii?Q?jRKYCxkqPPWnQIoofuixAvOOutm9FGdYCRzvaQ27Bv4C+H1e9s3/CSC3Yxrt?=
- =?us-ascii?Q?+lgvsKFvqBIaiSjXk26+q+cdSBrrT7WlAzuTO/IpSEfKsVoeCAV/7RajPRCd?=
- =?us-ascii?Q?xvscV/Lvxm2MQFcmMOB2LMijOSQ2ynFEH4ikrGxSzmcoOaOHrh/eRKE4L1yL?=
- =?us-ascii?Q?4ZqiJ2B96xVhHIwyId6V1/4pMCqbKPwgR8v2+JaG6VmK5d3vaCTnaEvcInhL?=
- =?us-ascii?Q?NFma9+5UWTWmHrtn2ARju9/zPDewZ+hqwoXe7WivenSnNmB+CDe+G8j5HFEC?=
- =?us-ascii?Q?+IL5CK1AS+/xReYkuZ6gUGHixpPfd3eu/H8TpJXoJySTXL7M8PEsVN3WniYs?=
- =?us-ascii?Q?OSHuR82oSIPMGHv+kUpXm4WQznG9b9OMvVMGw3NOB07Sp5+QcheuAY0IRs+B?=
- =?us-ascii?Q?L2lCAhHAqXZ9iDQLnfiRm1xNm0864AeMLPKBbOWvfnTh9memSUhc3mItKbgx?=
- =?us-ascii?Q?6Qdx9CdTldItcKQmNAnA9HS5PFD0wr9WNZI1OfFCpqR1EQOh5b0dRex/1DWx?=
- =?us-ascii?Q?6C3OwDApoxnn3qigL/aOAU6k5vvU0WYbyVqG7J/Rk8D1edTfT5UhNFRamjr1?=
- =?us-ascii?Q?SL/OQ8i1lZFQcKGCcmRyXJeJuJ43LRp4lq0dv7mSJ7CmsoDRnZ8ibpdhyYb8?=
- =?us-ascii?Q?8rne81n/8GVL2lDD/no=3D?=
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?c2J/rixa/klu64vJiQ/FNqnmRTPqQHQ4PZGUXVbvFXfWDjP1RXfafWozovxP?=
+ =?us-ascii?Q?PEYeDHY+H85NqfkGlV60CVdJqZr6n+JjmxZUqTqUaCAOOrBpS0LmrQ8fRixm?=
+ =?us-ascii?Q?CpNmtRzPwnDAE6WGIH6hkG4M/c8AyYEPFhXUIZzrdKRgL04z7m2hFYmtiNEn?=
+ =?us-ascii?Q?Z8USMxzjaSegoJoPjWM09HYBk/jmkG6+7c1Jy4gdN5Eb4io+5GRjlo7eMenz?=
+ =?us-ascii?Q?hPFMpqaQsdBMJxpBFJzrN5rh3LLGg4j5B9vsrZXM0uwU4JCdXtbykJuizIA6?=
+ =?us-ascii?Q?rMN/XO4Utk20ZSmHm4d4orA/sSIGXRYYtbNIWVjQp3Yam0WPsH1e65pItLSr?=
+ =?us-ascii?Q?wTxpvNDMThvovyerUfYbjFvivx1twp9NaN6VcCWBPewIZyHacc7EKVk/+OEt?=
+ =?us-ascii?Q?fpf/jgSczbjmMVe7rnJeBaMdX/V8z2uE9pRQ9BAuxB+ag6Gyb2tMA+aypWe3?=
+ =?us-ascii?Q?WWP/J3oOrG6PQu/Cs/OTBeVUDu7bvP1tzYeDuXa4XlSUnzk53tRqMNkTD5eT?=
+ =?us-ascii?Q?alM9lHari82xsckGVN77fZHWM3jMhI/ZB4EPPvwqSzlQZ+6k7m7TQwCXi2Yg?=
+ =?us-ascii?Q?Oduxc4kdi94lR/CX57AH7VC0jd4cklOyEhVNtsovpq+xjWE4gim6YZ/1SaB4?=
+ =?us-ascii?Q?1fqL6vy7oRamQCClqpJ9eGukZBt4o3J6E4Fl3ZSjW8KJA5xGz1gV/z6F596o?=
+ =?us-ascii?Q?LGqqq/TUEoLkaEGM6Olvpy201Xj9L2g86vYkItpq5EA+J2rozSgcn7aW9Tpv?=
+ =?us-ascii?Q?rCscpdtOBAYtnUF4B/KTqe1hy6DN7nP4EWnUScsAM+FxvuYACqXIu0uI2gaP?=
+ =?us-ascii?Q?bl30FQU7lMdTS7fYyQ2Cg/bJgv0cxLJ9x0b3/uBARfAdKzWv8mSvcnwMR+2S?=
+ =?us-ascii?Q?bEhHCq1RYz5Fhiidpal9LAZ4Azam+ZYz5FimI8bvjroVlMt9FzU3aFYLhk/X?=
+ =?us-ascii?Q?nCmCLWfik1jznWVRAFash/msxZBtYf4V+9U2XFTbOWx6x9Ps9ZAy+SlMq7dP?=
+ =?us-ascii?Q?szgRDAw5cXCV1HzCP0ahcLiClGSYK6Ww2wSGUed6w3VMNfB9V5S6wxSYpGsf?=
+ =?us-ascii?Q?bad+JKZ5d/WHl9K5tKxyi147dyWQIRS6+hVQh9Fdlih1Ibq7rN8jQwohCWFf?=
+ =?us-ascii?Q?+ekUptrx6i6fC7Zhn4Vy2Dx1M+WeXoAStbmQkNsGHuRDapGJrJdmSlBdbJQm?=
+ =?us-ascii?Q?43WPLzfgBpKAuB/OKglTQbN5RWlxj/RhsyoQMyZ5WjDhXjZ7cuHD9ALO8txf?=
+ =?us-ascii?Q?b5yFRnJ9m9I3wxeNsU8RzaHil4WpwjUXHbxg5alDaSnFoqSYnM0xMkt/pSDS?=
+ =?us-ascii?Q?Kdyhn9U/hIqSmP94Fa1lwihy06yVsJtZ3q4B6SCCM+tekvcZs8eKPJV0morE?=
+ =?us-ascii?Q?f07P3rDC0MpqMaXuOAOCWLsJwLK2AlGZ9HeU6ej2edsL5FhUzOz/HnO/0Zaj?=
+ =?us-ascii?Q?+mLQIb5EkjEVbN6ZlDDIKe1PmYBjbVd/Fu+lIIyoHhTfEymrI+/pgXLZ8m69?=
+ =?us-ascii?Q?QIwo4LDVZPTnieeALcRxpMlgtaoQ9sRpr31C554/vJaVFH74dM7PMoAdQK1/?=
+ =?us-ascii?Q?6SRm0K0KYJ27H3Y6Ue4=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2025 15:48:49.1031 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6c91a27-dd50-4880-a030-08de38039c4c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2025 15:48:50.0861 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fa9c2fce-de0c-4c69-3b10-08de38039ce5
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
  Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF0000150B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB7074
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB5979
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,39 +155,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do the basic configuration required for enabling the 32k crystal. If
-external 32k source is not used, 32k rc-osc comes into play, which is
-accurate to +-20%.
+Enable the SPL_BOARD_INIT config option to make use of the
+spl_board_init function.
 
 Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
 ---
- board/ti/am62ax/evm.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ configs/am62x_evm_a53_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-index da6c31176cd..fffbddbdcc0 100644
---- a/board/ti/am62ax/evm.c
-+++ b/board/ti/am62ax/evm.c
-@@ -35,3 +35,19 @@ int board_late_init(void)
- 	return 0;
- }
- #endif
-+
-+#if IS_ENABLED(CONFIG_SPL_BOARD_INIT)
-+void spl_board_init(void)
-+{
-+	u32 val;
-+
-+	/* We have 32k crystal, so lets enable it */
-+	val = readl(MCU_CTRL_LFXOSC_CTRL);
-+	val &= ~(MCU_CTRL_LFXOSC_32K_DISABLE_VAL);
-+	writel(val, MCU_CTRL_LFXOSC_CTRL);
-+	/* Add any TRIM needed for the crystal here.. */
-+	/* Make sure to mux up to take the SoC 32k from the crystal */
-+	writel(MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL,
-+	       MCU_CTRL_DEVICE_CLKOUT_32K_CTRL);
-+}
-+#endif
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 4da668396d0..58e2daab687 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -39,6 +39,7 @@ CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
 -- 
 2.34.1
 
