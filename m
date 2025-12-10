@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC403D3C925
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D14D3C924
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B1D83D1A;
+	by phobos.denx.de (Postfix) with ESMTP id 6479E83D4A;
 	Wed, 10 Dec 2025 16:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0ex9a/uf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bjasgHYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0873E83A35; Wed, 10 Dec 2025 15:11:01 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 727688042F; Wed, 10 Dec 2025 15:11:02 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFEDB836C8
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 15:10:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AE1280077
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 15:11:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-64312565c10so10963938a12.2
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 06:10:58 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-640ca678745so11625546a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 06:11:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765375858; x=1765980658;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765375859; x=1765980659;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=scPqoX44GXGUzC9B+35HM0I4+UTgowYONX2S5Zp8lDU=;
- b=0ex9a/ufGxlJOZxWOcHVvGOqIDoDOKY27vdr3enVEjwdqhnXY9fQSJmV3O5Sr4gSox
- s8UpQvsMr4HpEqsNwxgUOWkyn95gK2A4jmAizkub8oINN3ZxzX1XknyDBqkxTLs09KnB
- 2LQnhxt5fGETnIj7Dk9Wp+KDmjiRaUhEIywS2OzPU8XzQRR6LsbrfvjGn+pHLokBeyKJ
- ND+NY8y0Rbpd9zlEDr7Iue/N7kzdVhtJ8lKbYeEGvFse3lPMaKD76XrEhK/EZ1Z4trWm
- PlpPsTrwDxXhRDSGvburSeiSXPYNjyk4W/4hlgAiVX7tWkKhyN+OIIThJ8N3DjhfoMxo
- 7B1g==
+ :reply-to; bh=0Qv60IIy90U9uo0l1/yBrU0wfRp02Sm9VUvQmpaFgho=;
+ b=bjasgHYCkBoQwbiw2/Em0vlxvhaBB9NdSTXikoLYM1fe7+IvnxCOEY6PEe0GstjsMf
+ lb8560RcZhA+NyfG4JDBoJFG2VDwMAKyggLCkRm9rRB7oMZBEvGBAtPoRFNnWozjwAXR
+ SCo8tQ4vR6v2HCZC4Po0WzOdF3I1MNYh9DeKg5vkNrLfaqMFEp5e/Ai5+Kij2TPiXqZt
+ kohcrD3jTWVoLjiq8qI967TSJw7aaDC3yJl705qHXdUkaFauYOqNEDTv8t65SIEoicoI
+ 7EJXDkzgjUTpNEG6ajg+8XqqfZ4fgZTW1wXdD9bme2MXn86cns81twTQLSPBWYd1tG0y
+ GvRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765375858; x=1765980658;
+ d=1e100.net; s=20230601; t=1765375859; x=1765980659;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=scPqoX44GXGUzC9B+35HM0I4+UTgowYONX2S5Zp8lDU=;
- b=NiLtHRtocDA8asKUYAJWhbnFKeiOvhPFMLb8rJy0q9g1uTbJXx0484jC60Tu9UuZPU
- mz5PU6xwaVgTeY8ZRUQ4SY1UmZ23gsTlBvqnVxaOOCGtgjJzj+kCEDbvHWn5ZxAMJfpL
- LggsSiU3zEnx4WBxHw8gg2/Ib309lMjMTSgxrB4ATkkf7Dqzg7PKT2qUMiL5YpDvA1pQ
- 88NB+zv14xy7TAI/dcEA5XOvbEqGv/hyC5GyQ+L6SDpxjQ6j5ezzBmcLAJIV4HpgE9P9
- RMJ5i/8jWgwCsKJiYgFB4cWMFdcJoSLtn39aAeBhbH5hGKO+1QC2rMzU+RUDvXY8D4Av
- NO5Q==
+ bh=0Qv60IIy90U9uo0l1/yBrU0wfRp02Sm9VUvQmpaFgho=;
+ b=Wr4jtscTVCSX6O/EcVJAEyq7wXD7eFrKXgBn4Neh1UPUm8C+lff8a+83o6NG3JsQpu
+ NKCojMS8aYPDc5zL6bKCX1QypcDF9ITfn4oIaYj7tEK7HshQyldeSPSKfEYKODjOv6BR
+ jXj/5UV+acliGe9BmpZ5+0mUdDrsfUWAfxr6IaN4+twzQLgJWdAJFU2rriqlNcj6aV+d
+ IQ0CEDWYlkcjeDPFtQWFK72hBf2YuKnBR8YtsCZxDKiDYVFXzel16GM3liBKquUM5qqr
+ rxKFvAcit8W2kiy4L8nq0s/l+BuSGe9qqiqByBG/T4ZXfsG6RGiXOeqsdyVp6tY/m6Lk
+ 3HMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiWIugftABI29ot6QHn2OM+mo9vbL7YTpUZqM+KGp5Cq2C/EKl3rwTwA8YiqYJvDAIbxyOKSw=@lists.denx.de
-X-Gm-Message-State: AOJu0YznBknMPuFARgv2ojUC+/1Pb/cy0CD0fPPXMxU3eSVL976eJOBe
- ID7tX9o3yWQcKWM2GpN2yb1wl9ukrDM6TvYvgodYYtTmMSb57D1MgMBZZyVIif/cnR0gQ8VKsuw
- DJCUB
-X-Gm-Gg: ASbGncv6WdHB4Rb185xLRVCBD33w+EOJwPPWh54owpQSZT1+UoKdrwcC4SftgFByg89
- J5bUbOYT8mdHY1I6uSPCdYqfyqJN2jr3FCRVINi9uti7A/+j9dgN/fpLtWNvT1oQUWrGgy06jgQ
- cXSi9L9BBwZaMB+bSjG8vt4D6q1Avq7JQHn4jaqacrsrtZe/IQW1qwtNDeltJuUh8ShHJRpY2cl
- 6CSzlbZ3RJngAh6xE7mSoP8mb0Yl4C4t23DdgraBFknEEQQnIzuvqiGgY7xUBt3QABwD3+B8Ydu
- aJMfOAkJDVpo159mKn0xqlkVSLrvmCqptNEinOw2Lm4ZKnfMAp2dh55OW1i4ba+KSNM0LQimz8T
- Kz+g5oSGHE8OG91a9jka2Vwukuf5V5Rd+6aDC5wgR5Mo17K8DE+LYQmCuKNFp35+lfq7L7/XkCT
- XnBXi1/by7AqtAOAdP61U=
-X-Google-Smtp-Source: AGHT+IGrdZCn8/ivPQ0apmKZ/KrAE21O6z1kyF7aeXTGhZbpmq3U/w4Wugb2gr2D4Qxb/ZXn6SWY6g==
-X-Received: by 2002:a17:906:d54a:b0:b73:8e7d:4fa3 with SMTP id
- a640c23a62f3a-b7ce846d1c1mr267796266b.32.1765375858325; 
- Wed, 10 Dec 2025 06:10:58 -0800 (PST)
+ AJvYcCXo4YlP+NNyT0OToi9KnjUh/pvMFOMDB1HDHuNmMhSjEipYXsHj7s0o858O39fU8YsOgs6j8i4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3KCfe8cT2IJIYEd8d54bi2I8rFABjhhOG4s9PwxzyDhq1rxHj
+ LP8jgBEAn4tvlWrg7LOsPkIKZkpfrshvp1A3ZmwLyT4TzUz1G2Iev4wxyR8NxjOCx4tmPCaWv/e
+ Rtz/s
+X-Gm-Gg: AY/fxX4pVmpBYdCWgwyhWp6EWKbKp6+OeYyqT9M3rMraqsX/ZnoqOCA2C1x/CUQwE1h
+ fvuCqCbh44lcnAv2vv0uGhQLG0Jie54VEZHdpk8ItThViSqvU6xPN7qxtHwH0spqqqT//hkggAC
+ gg39PAslj+SitvN72oZYappPpnrEoki2oBRrz5TIqUMETymLiDGXpBKv3obA/aN+iDw8CzSkokU
+ kC3uSG/kar9l6/zirXIcZpUf9ZF6tX3zWYhire3di91/EsKH2NGbJ4wOMKqar3plEfAY+1ecZpx
+ F7HkIVwhNX6CYN5h7cSIp6NXawbEbanXdUARWkxq7OXvxRuzVtLp5Y7+oi3IeEvuJ/2BvJzH4Am
+ aN2r5347ZUl2+Zlt/hMzc+aiqtB1mwTeuScXuFTpoDPGYkkF2k+nzOZw23tnUUhzplguA79Aw32
+ FRCQckOx8R
+X-Google-Smtp-Source: AGHT+IGgfFUEBg3tc2rRU8e+3g+fK6diUPNDscxeIiZX+XC5gbyIqzsdpcBr5DvTU7TZEyLRcT+yfQ==
+X-Received: by 2002:a17:907:94c8:b0:b72:8489:7e65 with SMTP id
+ a640c23a62f3a-b7ce84761b9mr286769866b.31.1765375859536; 
+ Wed, 10 Dec 2025 06:10:59 -0800 (PST)
 Received: from localhost ([2001:4091:a246:86d6:2b1a:7262:ad08:3918])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b79f49a897fsm1690931866b.51.2025.12.10.06.10.57
+ a640c23a62f3a-b79f49dd380sm1677403566b.57.2025.12.10.06.10.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 06:10:57 -0800 (PST)
+ Wed, 10 Dec 2025 06:10:59 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Wed, 10 Dec 2025 15:09:01 +0100
-Subject: [PATCH v7 07/13] arm: mach-k3: common: Helper for LPM meta data
- address from DT
+Date: Wed, 10 Dec 2025 15:09:02 +0100
+Subject: [PATCH v7 08/13] arm: mach-k3: am62a7_init: Resume on LPM exit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-7-f113b156f83f@baylibre.com>
+Message-Id: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-8-f113b156f83f@baylibre.com>
 References: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
 In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -110,12 +109,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3280; i=msp@baylibre.com;
- h=from:subject:message-id; bh=zSLYqt5O2FUJGHm0vgn5O1G8RSizn8siHj/tq8/f4eo=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzLen3V2BNMUqL6O3isJ8/+oeUharbjiZjKC2G1uyfmc
- 4qz+jzrKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIm8N2b4H1xuu+bjcYvVfMEl
- IQnLUuWm7P0XZb1u8pG5HDUu/LNrNBkZFqqfWnWqaOeCbl/uzPm+AZPf1m4s0jvj2PT6Tu06+e9
- /eAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1078; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=K+ZIw9M+Eex4lT8pGvItMFQlxGxVLNvn/o4CnpufdPA=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzLevNle489K6s6Yde6SdNy25sl9w6ZtD/RybTKMdn4e
+ E7daxazjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZjInYcM/8zv7T9id3SzqdGX
+ Pxzzdn+dv+/YLpFnG3/H+CzVKotaHZjPyDDjAK9vjXhFhaBMpdkE9p2/lp+aZff4v+Tmy9euaDx
+ stOcAAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Wed, 10 Dec 2025 16:53:41 +0100
@@ -135,105 +134,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a small helper that uses memory regions referenced by the R5
-devicetree node to calculate the LPM meta data address.
+When exiting a low power mode with DDR self-refresh, we can directly
+resume after DDR setup is done. Call the common function to resume.
 
 Tested-by: Anshul Dalal <anshuld@ti.com>
-Reviewed-by: Kendall Willis <k-willis@ti.com>
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- arch/arm/mach-k3/common.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-k3/common.h |  1 +
- 2 files changed, 45 insertions(+)
+ arch/arm/mach-k3/am62ax/am62a7_init.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index ee56f0b86ce303e319cfcd2b0db3bade1540635b..f058e973d08e233a458892df86e6da22ba3852fe 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -16,6 +16,8 @@
- #include <linux/printk.h>
- #include "common.h"
- #include <dm.h>
-+#include <dm/of_access.h>
-+#include <dm/ofnode.h>
- #include <remoteproc.h>
- #include <asm/cache.h>
- #include <linux/soc/ti/ti_sci_protocol.h>
-@@ -36,6 +38,7 @@
- #include <wait_bit.h>
- 
- #define CLKSTOP_TRANSITION_TIMEOUT_MS	10
-+#define K3_R5_MEMREGION_LPM_METADATA_OFFSET	0x108000
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
- #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
-@@ -194,6 +197,43 @@ int __maybe_unused wkup_ctrl_remove_can_io_isolation_if_set(void)
- }
- 
- #if IS_ENABLED(CONFIG_K3_IODDR)
-+int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
-+{
-+	struct ofnode_phandle_args memregion_phandle;
-+	ofnode memregion;
-+	ofnode wkup_bus;
-+	int ret;
+diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+index 24fdfdd7f1d9146f0cb6dde333d2bb54df96700d..9fe671c3ff458189ba04ddedd0f2fa8894629cec 100644
+--- a/arch/arm/mach-k3/am62ax/am62a7_init.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+@@ -197,6 +197,15 @@ void board_init_f(ulong dummy)
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 	if (ret)
+ 		panic("DRAM init failed: %d\n", ret);
 +
-+	wkup_bus = ofnode_path("/bus@f0000/bus@b00000");
-+	if (!ofnode_valid(wkup_bus)) {
-+		printf("Failed to find wkup bus\n");
-+		return -EINVAL;
++	if (wkup_ctrl_is_lpm_exit()) {
++		u64 meta_data_addr;
++
++		ret = wkup_r5f_am62_lpm_meta_data_addr(&meta_data_addr);
++		if (ret)
++			panic("Failed to get LPM meta data address %d\n", ret);
++		lpm_resume_from_ddr(meta_data_addr);
 +	}
-+
-+	memregion = ofnode_by_compatible(wkup_bus, "ti,am62-r5f");
-+	if (!ofnode_valid(memregion)) {
-+		printf("Failed to find r5f devicetree node ti,am62-r5f\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = ofnode_parse_phandle_with_args(memregion, "memory-region", NULL,
-+					     0, 1, &memregion_phandle);
-+	if (ret) {
-+		printf("Failed to parse phandle for second memory region\n");
-+		return ret;
-+	}
-+
-+	ret = ofnode_read_u64_index(memregion_phandle.node, "reg", 0, meta_data_addr);
-+	if (ret) {
-+		printf("Failed to read memory region offset\n");
-+		return ret;
-+	}
-+
-+	*meta_data_addr += K3_R5_MEMREGION_LPM_METADATA_OFFSET;
-+
-+	return 0;
-+}
-+
- static int lpm_restore_context(u64 ctx_addr)
- {
- 	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-@@ -235,6 +275,10 @@ void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
- 	image_entry();
- }
- #else
-+int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
-+{
-+	return -EINVAL;
-+}
+ #endif
+ 	spl_enable_cache();
  
- void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
- {
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index 2c7cc552505bcdffc17fd469db3ee90779f3c192..c2632d4fb0a9b8fec137e4af33116773eb4ee633 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -53,6 +53,7 @@ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
- int shutdown_mcu_r5_core1(void);
- bool wkup_ctrl_is_lpm_exit(void);
- int wkup_ctrl_remove_can_io_isolation_if_set(void);
-+int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr);
- void lpm_resume_from_ddr(u64 meta_data_addr);
- 
- #if IS_ENABLED(CONFIG_SPL_OS_BOOT_SECURE) && !IS_ENABLED(CONFIG_ARM64)
 
 -- 
 2.51.0
