@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C26FD3C92B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 17:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B12D3C92B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 17:13:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E668283B48;
-	Wed, 10 Dec 2025 18:12:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D4EE83CE3;
+	Wed, 10 Dec 2025 18:12:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kRoNneQb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="apwjJZK/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 270C183CEA; Wed, 10 Dec 2025 18:12:54 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 7211183B48; Wed, 10 Dec 2025 18:12:54 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5970A83AEF
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 18:12:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C27C83869
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 18:12:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-65b1f030a08so14708eaf.1
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 09:12:51 -0800 (PST)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6592f1f55a8so8380eaf.2
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 09:12:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765386770; x=1765991570; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765386771; x=1765991571; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jd22GJl9JwzJUo1+K7Lsu+hpVcBFtUcq1SzCTRcXFR0=;
- b=kRoNneQbipRZm3OrfNi8mgKf3HhKeRpaky1Dk0mnjn21nDdalDZ45uEx5DpHsRX161
- EdIPTp9ARUfegLuzMhP0Wx5NiLHdHFz1qrHuGy7FkDWtYfsuSzkPCfqCS/rkhtCFcJlD
- LRtSvkZ44sIPMzc6SMuk6cJDtnbgoZ5rrP8VQ=
+ bh=YXe1wIFL3Dj9s45L89z1gu8DdC8h7bMwsGd2c9ZfJKI=;
+ b=apwjJZK/vhazruwteJweggUAUogssNzOWXTrqrsxelYrrJSsYvzXLQqYg1Uf5W5KtA
+ oNIRnV3Qm0I2lTeqjjh/K6v2QpENPRbnGunBf7AHmtiFk6wTCcHreo/UugR6WyLNHwUu
+ ri1nItVm5N7pkBKqWMuTOnVxAzVMoCEwh/kgg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765386770; x=1765991570;
+ d=1e100.net; s=20230601; t=1765386771; x=1765991571;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=jd22GJl9JwzJUo1+K7Lsu+hpVcBFtUcq1SzCTRcXFR0=;
- b=RXK+R0Jdn5YNnovspdf0zUfVYogQMQHq6MIfhsoLS5nBoijD8pMDfnk0Wp5Wf7PDHV
- ME7AMDoXIcJOwM3ERXE0fZv0PgpMJGHKfYBXSJ3ioBAoBQjb9myGVEKsUsNLThVfYlaB
- rRaNe1nRLWyki8hA7CkXRcy+XBSy7hXT0tdM1t3KhShpww+sy6POpViU3clbaO7EwVtU
- mO3YY1+FBZcAN6sFfgk452vt7m0lQHbw2ExMFebJMJSeSMGS3GyEWFlePb0N7jfWTgmA
- HuvDmCUo25nlFj674GidWJpC6XnmgBZbC/D+YR7HYC+Xw7sNw4Pqq8UyvZ4EESRFEyYE
- S6/w==
+ bh=YXe1wIFL3Dj9s45L89z1gu8DdC8h7bMwsGd2c9ZfJKI=;
+ b=BU1liOpOBAFKbqlhVwOa52les8qK0Gd4FZcP95z9beLh/+wwoJZLuHiD1ufF+7bxrX
+ fc5GBjFgceUjXagxX+BAImqS06r10AX79I0IyOkD0P7r8QWD1cslv8W31bORUkRPc0Bd
+ ZZ8xJDxEru17wDzRfg3Spv/FYFYLvUaxuakR7qnmdHlGjSb9U2leJcUBoi9HNpT+qTev
+ YFKysYLmYv67eH4k2/KqMjGl0fj7dCFQMCkciP/6lp0y9CqkbuuvDFHkpFHZtR9hsa/S
+ i3CGtxntqvXadh+YzsmlRvEjHp/lH9eQ7bSszkzB+/hR8yepcnSIa7txaKpFxjEzAMiF
+ 5DpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsB10W0hgctJrbcGaEz4fIhFcS7sS5NOJ/CxEUqJs8syvx3x+razhJZ0QjkRfiIvtFo8S1BaY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIcX3/avOAF4zbIuFJ1HXgJehZTxFhMJEF2VK5HN0tdbKunCu1
- 6cj4HsBiLYj+C+a1K3K3vJdPxxHQJCVzqjvzZNn4zsA/CvFwIhyBztVjWPVVgjmHSXI=
-X-Gm-Gg: ASbGncs8TbK+lQ76WhmwZWCPgjBbm/EUHvT1vo2u1+OrIzAMJjcY+wlDHocvA7g6ouw
- GxAobJEatSGx2UAg1hU/6dVkjCc2sNxU/ItBz2wSf98OSj0s3GjII/0EkAxYMyd65oBQnROgG+o
- VqYJH//mqpc1IUo6hIpFt3AXUA46GTnizTyHkDdop361qZBcbU2LrKHDDsdBuEjOwOUlkyjkE76
- Ug8fMvRxNp0SMruPVHHzu8jjyKCVLO6G7gLnw3zZR+wSfXEPI6ql0s5KKlYOLyMiFB/u4GwIJ07
- NOkQFVWWiaqqPZoDS3cvEaegAvxsU+IjsfnoziVtfec8lBxjvdLqeqxttK3ktU9yYbJ92Q2Adlk
- EGXENvxCvY5cdGlnTCWUkRgPyJ8xB/iUeJwmF282hTMvAwScXR3znBtYE9R5VINocxdLi8LUFe1
- yjMlJjki2XE7YsPf8cCpzmQoNDKtcw1X2ULDtrW0Q9Rm1wBKUR
-X-Google-Smtp-Source: AGHT+IEHbZhetRK3jHskJeb5cNGa40ejX9vQX7PVmUbUcfnUAtvaWDLeVEOkgUOh7KYCVqKYjuRcVA==
-X-Received: by 2002:a05:6820:1ca7:b0:657:71ec:5450 with SMTP id
- 006d021491bc7-65b2abf2ebdmr1958859eaf.2.1765386770041; 
- Wed, 10 Dec 2025 09:12:50 -0800 (PST)
+ AJvYcCUSS1dpSsZ4JhEM11qLVLgAW9sRwvVG/pQhhFCiOAWol2XOZJ2VabtTOxd22R0GJadwTyf0M08=@lists.denx.de
+X-Gm-Message-State: AOJu0YzK9XWqMUX3RNbfnQf1ZU8hJ44VclRyZjwIbJn78DwcrIAA0ON9
+ cES0MTxHjWJ1HeQPeNgF8sbzPddFvDOpPLluLHoWD0bFZMHbtibi/gkWQ0JxJTXp6EY=
+X-Gm-Gg: ASbGncsRcy9/JgFdVxG6b4y9RAb2imZsPdgEBjYpPRuVwPDm94K/vjkFgvlHrsEhJ9o
+ ZtpjFlfObSYgWmI7NMFEhiPLwZo1WOhDO3V6Bk22nAlS+aKTSnquGBrNI/5poXUBBtbsbiMYiFC
+ ArSdN+rQWSNgGCxeKee1mXIFlkefOQ5MOg6oE8Pc9vhojyZugIW9a5T3nlCiVbN0YnWTH9daGET
+ Clzdl6RE7kAWlfCrqNnohQ9hmYDv4hUq9zGAiuhklcKeVcAOLkoizdCp8tnT93bbnSmVcLNojeq
+ 6AoTFm2+rSuhTu7uREDSDScX0reowwmvVL+F+gysWuz9T+bJ/XxDk66YlqIC+EPiC3YevrLXYMx
+ aB2O2EabrY+GoulHwI47njh7pwMsD5QRA3X1IzxX/SiKyqTsTdG1u36I7tHV7P0rw8WWWXBcuKW
+ iS928NCYH+0GcxmtjLrJgVFZTmmgzsMzufkHmPsgEIVmq98Xtt
+X-Google-Smtp-Source: AGHT+IHbSpehvdXXGWocLXq/j3ytw1BvkCWH/+Lo2+p4MIvGPsRLikYBPI1DHw/C1ZwHecW15p6fPA==
+X-Received: by 2002:a05:6820:810c:b0:659:9a49:8e7f with SMTP id
+ 006d021491bc7-65b2ad1d1f0mr1691499eaf.79.1765386771070; 
+ Wed, 10 Dec 2025 09:12:51 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65b3480fb94sm34528eaf.11.2025.12.10.09.12.49
+ 006d021491bc7-65b3480fb94sm34528eaf.11.2025.12.10.09.12.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 09:12:49 -0800 (PST)
+ Wed, 10 Dec 2025 09:12:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Raymond Mao <raymondmaoca@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-In-Reply-To: <20251208204738.62792-1-heinrich.schuchardt@canonical.com>
-References: <20251208204738.62792-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH] Makefile: use --output-target instead of --target
-Message-Id: <176538676923.3321367.4867156790142837239.b4-ty@konsulko.com>
-Date: Wed, 10 Dec 2025 11:12:49 -0600
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, 
+ u-boot@lists.denx.de
+In-Reply-To: <20251209055043.1410085-1-b-padhi@ti.com>
+References: <20251209055043.1410085-1-b-padhi@ti.com>
+Subject: Re: [PATCH] configs: am43xx: Migrate to CONFIG_SYS_MEM_TOP_HIDE
+ from CFG_PRAM
+Message-Id: <176538677026.3321367.5907731219633418173.b4-ty@konsulko.com>
+Date: Wed, 10 Dec 2025 11:12:50 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,23 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Dec 2025 21:47:38 +0100, Heinrich Schuchardt wrote:
+On Tue, 09 Dec 2025 11:20:43 +0530, Beleswar Padhi wrote:
 
-> The objcopy man-page teaches:
+> The TI AM43xx HS boards have been using CFG_PRAM to hide the top 64MB
+> firewalled DRAM memory from U-Boot. However, CFG_PRAM only prevents
+> U-Boot from relocating into that memory, but it is still open for access
+> for any other usage.
 > 
->     --target=bfdname
->       Use bfdname as the object format for
->       both the input and the output file
-> 
-> This implies for --target=efi-app-x86_64 that the input file would have
-> to be an EFI app.
+> Therefore, migrate into using CONFIG_SYS_MEM_TOP_HIDE which reduces the
+> ram size itself ensuring that memory is not visible to U-Boot at all
+> (either for reloc, or general usage).
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] Makefile: use --output-target instead of --target
-      commit: 7da7ca7cf50f4996493b99198e939726e721906d
+[1/1] configs: am43xx: Migrate to CONFIG_SYS_MEM_TOP_HIDE from CFG_PRAM
+      commit: da54deb1ac8ee65475c7dca556df751b7e31806e
 -- 
 Tom
 
