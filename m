@@ -4,109 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFFEED3E77B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 21:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52BBD3E77B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 21:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 729F183A91;
-	Wed, 10 Dec 2025 22:22:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2143483CCF;
+	Wed, 10 Dec 2025 22:24:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BFAloRw1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vJ7L/0H3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BED583CAA; Wed, 10 Dec 2025 22:22:26 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 4266983CD2; Wed, 10 Dec 2025 22:24:31 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7215E83A26
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 22:22:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5739F83A91
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 22:24:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-65968986a0cso157538eaf.3
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 13:22:23 -0800 (PST)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-42b3c965cc4so127542f8f.0
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 13:24:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765401742; x=1766006542; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=peeGyYfu1h4lyfqTwsCAANzum8Fk18jeEgeDqCLlUSM=;
- b=BFAloRw18/GSD7nFcAVsuGq26ktnh1+uqjxUE+19NWJO0Vp1YdkbwtQMxT+PkGJDY1
- mzYfk0VC22eHby+ES3zR3n5iMpvuAXwfric8u+Fyr9Q1h4tx1Mbk7cacpng9GWAFW5GF
- zJ2DYmP/0uostCg196JCGQKQePPVapYY5NPqw=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765401869; x=1766006669;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qb0sUO20JmLINMvWg9zP8LlMQVa1eM1OnZBSv9luYrA=;
+ b=vJ7L/0H3yYumgfkOS7QSMeOhijLCUqNvqHJQ8KyuRb+zsvxlXNBvq195YzyncdPLUS
+ O/YULTh6Lv9YKXy+MP4kqA7C5150qUMlauigULog3+7s+17AB9JVK7e0dKGOGI3zd1D9
+ ULhn9DRH9uPsin0PXb/bXZ0R5r14KBzGeda8i+42jwwPTy1wprWTiuoFbI/dcvrUnu3D
+ fYyxyT1UdOkxibqRmHHWztUxImSjHbV81keMmCDDXgioU/7vf/U7BiCPDdf++sBnk0cd
+ P686vsnP/Zxn6NuXqiruuhmIxcQAhShII9c2+jn6JE+DK4ZP3AQERBhUs0tLi6G2zgpk
+ ssUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765401742; x=1766006542;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=peeGyYfu1h4lyfqTwsCAANzum8Fk18jeEgeDqCLlUSM=;
- b=kT9uJR4vKKnMY6jHXn5EPd4fWjFvgmmLpdEpCRh5oKFnV7hqaH3T8VkIsEl2G7/mI/
- q4NQW5gy2T0lIH58J5L/t1LKAGPCp5rIimf+JmdD05MNp/dkv3mNAq+53j/Js3MGkBKh
- bjTkbi+mopJduC6uyjDS6cR3Vu3GZrs4gggKTZlBxTYplQRA3YXHmwqOd/0Aoe/TgcZq
- 05WUuU/qs4mM3Da56DfNOA2XsPGoo3FOJASPVKNEZV4yQZcy7g40+e84BxrVQvgek7Jc
- BOKTrBkqYYRWXyfUfQnes8LgAoW6QgJKcVMxo5kLQn9x66j76KGYoe4Bg2ULFVQBvA7Q
- NjpQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLful/k+2Pglq+Pz9APWtYMbzAR6CXJpuQb5XhK15PGCztZQa6F9j3Fg50FSJytZXAuKLw25w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf9dsZPHIhE5uQoEmi+8wnfRHuzx6rpiAa5drvU3M894BjeymK
- nI6BZv4vd8/UbtTQ8OPgcTvUEqI2v2RJvjicGb1H01jyzXTQXNVzAi4h62l8v4fm1MY=
-X-Gm-Gg: ASbGncsOL2Mo0lmr/Roe4EwcnhQQPRLDqOabMUaqDY7WzV9TCFyQF0UrtHnpQAJOv5N
- QeGgzsQc2rYoiA2lXI4qJVbGE5LTu9y0JTdwnt2bEbNvIwfY9/DBGIMQk1PR5//qkWRcFfMtpZj
- /hOTFKin+czMJ3LCgBtu2ZMBuWZaPw8J4sR4wFa7jTqs60F8aqp5u6/+7l7T0xp/q5qxb8E0l9h
- MkS6UMH3alsfF8XVwWdXNzyw/iOAgdspRxCvyGb2e2Vg8qAtYRbToqhmsr6ag15jN6cON5/5YXe
- QGrhJNeXPLSDuda7BJKWABNFXBIc9MNL60+RoFRObQ6qpz1sAeVyFTHBTs1ApBP2+JmqfleEjJI
- 8psdFI8zqicXldTunEOihXKiJcjgS+mI9ymvH/DFEL1UDAtkXsrEcijMptm0xRysBiQd+7MY6fC
- /0OTYErbYMefalcrNlZiIQSvTZUIxACMDHxGWQI0uo45eTw6vasg==
-X-Google-Smtp-Source: AGHT+IGAlgjSCC5fnlCkZ32gXg6F/tFifL0R8x7RdiGsYyxD+V9t7W/kbM8AKiRAQG1ND567oYyrdA==
-X-Received: by 2002:a4a:ee05:0:b0:657:717a:8c8 with SMTP id
- 006d021491bc7-65b2abef8e5mr2223375eaf.3.1765401741882; 
- Wed, 10 Dec 2025 13:22:21 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f5d5149058sm509747fac.18.2025.12.10.13.22.19
+ d=1e100.net; s=20230601; t=1765401869; x=1766006669;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Qb0sUO20JmLINMvWg9zP8LlMQVa1eM1OnZBSv9luYrA=;
+ b=lGWIGrG54jS4xL8H+y2MLxzLUrwg+Bp/UF1EhSatDohkwMcIidPbjtkO9OjPlWCLbu
+ gEhePzF0hpDcf6AwMYcxw86WTLYRgIwC5mQdM3d6l1Q5KnDP1eTLj0/PipSlFmTuE4Lh
+ 2BpdEb1IELSZu9uThkGZD2sTPS61kQ/1nE2Wel5uHsIuG0LAmg8u+jLykFMo+s7EOtcx
+ sdLQT79eqb8RVvR0+GU6NUgYoXSENuN+gs+tq8Po/qm5boEjvtwfDq+C7T7sTRzMAXAx
+ mjz1J8eRaDsZMHNV/+Yl/nA9BuyuK26bT1V1yPW0BsX78jiP4AjaLJBV2+M3pWYVSAi1
+ BtBw==
+X-Gm-Message-State: AOJu0YwWWCJ1KV96Z0Qqt4xhZrga4OBlqbsr0/3CfqTLyiArtFm7V6ef
+ X38mqeM9I9jLjhAjXZpSTfhXiQCVHJ8yskSSHjOd3ycI/VTmpYcD8lEuKHOCzGwOC2s=
+X-Gm-Gg: AY/fxX5TfsM/5Z6sDvUvvsIcyPsBAcRjpn10TDVbf2LlqmEXNR4/Ul3fQM2jgALeRvh
+ T0/X/v3k8i2nO+D7kZyBBmeUzuyUe3XH138zX00bgkbGKFddb4D+o6mrY4lBcFthyie9OBH0wzh
+ S0N0fj0wnsEYtyqX5f2VUnNGLUcG9SwKu0oG1Q+cULQk316BbA/CycOH1gm9E7r78iEVlvCpEl+
+ J+HNYlHL7kFX3yY8jA8+5xc43+4l3su3xtDDTaxQywFZJzswl/zmSOvDtDRAQPMrXaiooJ80p/R
+ LCDVKgGbTLyVQ8SRcprzDpQZ+wQts+pO7/bj0wjSAYL2PDbqaaHPm+OIWef88meNaWfSeLIbXaG
+ C5SEeNVwFlmBQHK/U7Tc1DJ1vnIIFiSApOY13BiU3VavRSfIhrN9pkmUIg68NcpjsPKkHN8ghHZ
+ os8fnZFCFSrmO9J4eCIGGMCOEJ+yWrqk3YprGJY4UVlQjgU40cRuowQr9eyBIIwGMP9gMKpI8GQ
+ bK4FyIKeSSawGlZhqlq
+X-Google-Smtp-Source: AGHT+IHyelsjOLRIqcFDj4VIfRS+BYoLuXs0ULFWj/aerBQupOh8kItQiAmcG9J3IUZabULLnh4rmQ==
+X-Received: by 2002:a05:6000:2485:b0:426:fb27:974a with SMTP id
+ ffacd0b85a97d-42fa89f7345mr777240f8f.27.1765401868668; 
+ Wed, 10 Dec 2025 13:24:28 -0800 (PST)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-f92a-5586-f2e9-b313.rev.sfr.net.
+ [2a02:842a:d52e:6101:f92a:5586:f2e9:b313])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42fa8b96c70sm1122254f8f.37.2025.12.10.13.24.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 13:22:21 -0800 (PST)
-Date: Wed, 10 Dec 2025 15:22:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Julien Stephan <jstephan@baylibre.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sumit Garg <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sam Shih <sam.shih@mediatek.com>, David Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH 2/2] clk: mediatek: add MT8188 clock driver
-Message-ID: <20251210212218.GJ303283@bill-the-cat>
-References: <20251203-add-mt8188-support-v1-0-9a06ebb97734@baylibre.com>
- <20251203-add-mt8188-support-v1-2-9a06ebb97734@baylibre.com>
- <20251205144711.543ba2a8@kmaincent-XPS-13-7390>
- <CAEHHSvbW4usYU0SBZDOqX0ktseDbPMSnTaywrNCx2bsGkSMG3g@mail.gmail.com>
- <20251209110320.57aa9a54@kmaincent-XPS-13-7390>
- <20251210175654.GA3377532@bill-the-cat>
- <CAEHHSvZD8wzJ=NK5OYJdbPe=aweJ9RQZhkU8bk_RcROAdQKcVg@mail.gmail.com>
+ Wed, 10 Dec 2025 13:24:28 -0800 (PST)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 0/3] Fix compilation issue on regulator_common file
+Date: Wed, 10 Dec 2025 22:24:21 +0100
+Message-Id: <20251210-power-regulator-fix-compilation-v1-0-c58f01e0a5c3@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BGKGq//99/n/dOP+"
-Content-Disposition: inline
-In-Reply-To: <CAEHHSvZD8wzJ=NK5OYJdbPe=aweJ9RQZhkU8bk_RcROAdQKcVg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAXlOWkC/x3NSwqDQAwG4KtI1g2MkVHaq5QudBo1YJ0h4wvEu
+ ze4/OB/nJBZhTO8ihOUN8kSZ0P5KCCM7TwwytcM5MiX5J6Y4s6KysM6tUtU7OXAEH9JjNZFTxV
+ 1rqp9aDqwlaRskfvh/bmuP2mqBrJxAAAA
+X-Change-ID: 20251209-power-regulator-fix-compilation-5232b0365c7b
+To: u-boot@lists.denx.de
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Ye Li <ye.li@nxp.com>, 
+ Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ David Lechner <dlechner@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,192 +110,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---BGKGq//99/n/dOP+
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+If CONFIG_DM_GPIO is not enabled, compilation of
+drivers/power/regulator/regulator_common.c  fails with the following
+errors:
 
-On Wed, Dec 10, 2025 at 10:20:34PM +0100, Julien Stephan wrote:
-> Le mer. 10 d=E9c. 2025 =E0 18:56, Tom Rini <trini@konsulko.com> a =E9crit=
- :
-> >
-> > On Tue, Dec 09, 2025 at 11:03:20AM +0100, Kory Maincent wrote:
-> > > On Tue, 9 Dec 2025 10:27:32 +0100
-> > > Julien Stephan <jstephan@baylibre.com> wrote:
-> > >
-> > > > Le ven. 5 d=E9c. 2025 =E0 14:47, Kory Maincent <kory.maincent@bootl=
-in.com> a
-> > > > =E9crit :
-> > > > >
-> > > > > On Wed, 03 Dec 2025 10:31:53 +0100
-> > > > > Julien Stephan <jstephan@baylibre.com> wrote:
-> > > > >
-> > > > > > From: Julien Masson <jmasson@baylibre.com>
-> > > > > >
-> > > > > > The following clocks have been added for MT8188 SoC:
-> > > > > > apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
-> > > > > >
-> > > > > > These clocks driver are based on the ones present in the kernel:
-> > > > > > drivers/clk/mediatek/clk-mt8188-*
-> > > > > >
-> > > > > > Signed-off-by: Julien Masson <jmasson@baylibre.com>
-> > > > > > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > > > > > ---
-> > > > > >  drivers/clk/mediatek/Makefile     |    1 +
-> > > > > >  drivers/clk/mediatek/clk-mt8188.c | 1840
-> > > > > > +++++++++++++++++++++++++++++++++++++ 2 files changed, 1841 ins=
-ertions(+)
-> > > > > >
-> > > > >
-> > > > > ...
-> > > > >
-> > > > > > +
-> > > > > > +static int mt8188_apmixedsys_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_init(dev, &mt8188_apmixedsys_clk_tr=
-ee);
-> > > > > > +}
-> > > > > > +
-> > > > > > +static int mt8188_topckgen_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_init(dev, &mt8188_topckgen_clk_tree=
-);
-> > > > > > +}
-> > > > > > +
-> > > > > > +static int mt8188_topckgen_cg_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev, &mt8188_topckgen_cg_=
-clk_tree,
-> > > > > > topckgen_cg_clks); +}
-> > > > > > +
-> > > > > > +static int mt8188_infracfg_ao_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev, &mt8188_infracfg_ao_=
-clk_tree,
-> > > > > > infracfg_ao_clks); +}
-> > > > > > +
-> > > > > > +static int mt8188_pericfg_ao_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev, &mt8188_pericfg_ao_c=
-lk_tree,
-> > > > > > pericfg_ao_clks); +}
-> > > > > > +
-> > > > > > +static int mt8188_imp_iic_wrap_c_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev,
-> > > > > > &mt8188_imp_iic_wrap_c_clk_tree, imp_iic_wrap_c_clks); +}
-> > > > > > +
-> > > > > > +static int mt8188_imp_iic_wrap_w_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev,
-> > > > > > &mt8188_imp_iic_wrap_w_clk_tree, imp_iic_wrap_w_clks); +}
-> > > > > > +
-> > > > > > +static int mt8188_imp_iic_wrap_en_probe(struct udevice *dev)
-> > > > > > +{
-> > > > > > +     return mtk_common_clk_gate_init(dev,
-> > > > > > &mt8188_imp_iic_wrap_en_clk_tree,
-> > > > > > +                                     imp_iic_wrap_en_clks);
-> > > > > > +}
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_apmixed_compat[] =3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-apmixedsys", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_topckgen_compat[] =3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-topckgen", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_topckgen_cg_compat[] =3D=
- {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-topckgen-cg", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_infracfg_ao_compat[] =3D=
- {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-infracfg-ao", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_pericfg_ao_compat[] =3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-pericfg-ao", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_imp_iic_wrap_c_compat[] =
-=3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-c", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_imp_iic_wrap_w_compat[] =
-=3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-w", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > > > +
-> > > > > > +static const struct udevice_id mt8188_imp_iic_wrap_en_compat[]=
- =3D {
-> > > > > > +     { .compatible =3D "mediatek,mt8188-imp-iic-wrap-en", },
-> > > > > > +     { }
-> > > > > > +};
-> > > > >
-> > > > > Why don't you use udevice_id data field to describe each of the
-> > > > > mediatek,mt8188 version? This would avoid having this number of p=
-robe
-> > > > > function, udevice_id structs and U_BOOT_DRIVER definitions.
-> > > > >
-> > > >
-> > > > Hi Kory,
-> > > >
-> > > > I am not the original author, but I guess it's done that way to be =
-as
-> > > > close as possible to the Kernel.
-> > >
-> > > Linux is using one file per clock driver so your argument does not wo=
-rk.
-> > > And even within a file if there are several sub possibility it uses d=
-ata field:
-> > > https://elixir.bootlin.com/linux/v6.18/source/drivers/clk/mediatek/cl=
-k-mt8188-imp_iic_wrap.c#L64
-> > >
-> > > > Moreover all drivers in drivers/clk/mediatek/ are designed that way,
-> > > > so we keep consistency between Mediatek clock driverss
-> > >
-> > > Indeed this type of design seems quite common in U-boot. I don't real=
-ly like
-> > > this as it adds more code for nothing. Anyway ok then.
-> >
-> > We can always rework things to be better :)
-> >
->=20
-> Hi Tom,
->=20
-> Sure!
-> I already sent a V2, but I can send a V3 reworked if you prefer.
-> Or do you prefer me to send a series later fixing all mediatek clock
-> drivers at once?
-> Let me know.
+aarch64-none-linux-gnu-ld: drivers/power/regulator/regulator_common.o: in function `regulator_common_of_to_plat':
+<...>/u-boot/drivers/power/regulator/regulator_common.c:30: undefined reference to `gpio_request_by_name'
+aarch64-none-linux-gnu-ld: drivers/power/regulator/regulator_common.o: in function `regulator_common_get_enable':
+<...>/u-boot/drivers/power/regulator/regulator_common.c:57: undefined reference to `dm_gpio_get_value'
+aarch64-none-linux-gnu-ld: drivers/power/regulator/regulator_common.o: in function `regulator_common_set_enable':
+<...>/u-boot/drivers/power/regulator/regulator_common.c:92: undefined reference to `dm_gpio_set_value'
+make: *** [Makefile:2029: u-boot] Error 139
 
-I think reworking and cleaning up the mediatek clock drivers is good
-follow-up work, and can be submitted on top of your current v2 (baring
-other feedback).
+Since the enable gpio is optional we can conditionally skip these calls.
 
---=20
-Tom
+While at it, use dm_gpio_is_valid() helper function in
+regulator_common_get_enable, and remove a debug message that checkpatch
+--strict complains about:
 
---BGKGq//99/n/dOP+
-Content-Type: application/pgp-signature; name="signature.asc"
+  WARNING: Unnecessary ftrace-like logging - prefer using ftrace
 
------BEGIN PGP SIGNATURE-----
+The 2 fixes are done before the compilation issue fix in order to easily
+cherry-pick them if needed
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTnkfwAKCRAr4qD1Cr/k
-Cr9JAP9Ba3DzXX6IuWsHjj4oBHY9yoGhHWqqlISQPuo6xgivxAEA8MT9Lz/wjvPG
-q8BscdAAUW4gVRfJ+9Pg63iOvRRHjQA=
-=o1m1
------END PGP SIGNATURE-----
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+Julien Stephan (3):
+      power: regulator: common: remove unnecessary debug trace
+      power: regulator: common: use dm_gpio_is_valid helper
+      power: regulator: common: fix compilation issue
 
---BGKGq//99/n/dOP+--
+ drivers/power/regulator/regulator_common.c | 89 +++++++++++++++---------------
+ 1 file changed, 45 insertions(+), 44 deletions(-)
+---
+base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+change-id: 20251209-power-regulator-fix-compilation-5232b0365c7b
+
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
+
