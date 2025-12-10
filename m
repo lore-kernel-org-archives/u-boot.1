@@ -4,88 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D675D3C526
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 14:34:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68F4D3C924
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 15:48:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D059A836C8;
-	Wed, 10 Dec 2025 15:34:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B5A3183AEF;
+	Wed, 10 Dec 2025 16:48:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHzLQkh/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SmIxioOw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BB1A83A26; Wed, 10 Dec 2025 15:34:31 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C41D483C94; Wed, 10 Dec 2025 16:48:55 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6381E8367F
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 15:34:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E18D83655
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 16:48:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c6ce4f65f7so6238763a34.0
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 06:34:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765377268; x=1765982068; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7xsn/5rC2LZZG0UzSSIavi2x+mkej8Cah1HH2nYoQcE=;
- b=tHzLQkh/reKx2It45tAZwpOFxqT7Z1/ZCJ9RQxqEXOIyMUCJMnJnpFBb7ye4Ab+Ej4
- jiLexcY6MfgPlkXcynmExtdYb2ACf8wrC/A57Ke1VOdZvf2CFfpBQVzB2B6Sd2HDPGeP
- ANQMEV+GJPmk8sGXAbMBtxT1OLycOMkh1Bil0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765377268; x=1765982068;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7xsn/5rC2LZZG0UzSSIavi2x+mkej8Cah1HH2nYoQcE=;
- b=VuVaH7R/ZaJoV8bTj4Bg6RospwlxMOktkyxam8XXcgOBTXV+xyytkPmvCGYALXK0KD
- RFETvA3ic1b0s3XVT+oFXvZtijDXcGo6tyHUWOh9m0Bbktyx+IN9+UsYIgaRKcnIdulp
- ETay7a0TpbQjaZE9OiK8cuv1eZcetbPuMLmjiS6aUeOpcLcZI2f4UZqXw+v3oJ+mS1MT
- VyNceEIx2HN966H3glD1W9hDpWjysHme34px6tk2Mf7tGf0eciQwfBBffkVEPotxVFi4
- QHEWF0ZUJegL5pIkyY/mkFvX7Mw3J8cvN2ybebuayeSvFESZXlSqrXQ5vcKy2xLmbFnC
- 3gdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXkJPZRJ8k6dbULY3MwsPjU677KwDF/r8V4J2C85Vhuicpoh1EOqmHHkf9OCQvqMXwrihwHHPw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0MAuyGkAJFgv2vb8DQ2N/M4z4cJ+1VnpybjbFF1kv9jnGajKJ
- aSPL0PTevz27ALWerJAocuVPiBHxgOPZa2xvJVabUR6vuuXFGhPsrPiDSAXowOUAeJQ+/ZA+isr
- 03gKCgnc=
-X-Gm-Gg: ASbGncumv+ojuelaXtiGElOdPL8hn1fkwWZJh8UJ6xWAoDPKrvmbhZC+arfErU+EVYg
- xJHenvD0QDnzuBcKoCXapukjuQzgjD6j8/xfFwS6p5HZeoJGxXXek2w803W76/2TEqKsqPaLzwE
- kbm5p55EZkuYGj1mTS7dKAgr6RQ9lifZYVXw4W6FiAE67Ly02km1YaL9+YiHAp53MQS/ZEhz1d4
- fodWqLXX9STjSCagq7kX/9lLgMuWuQu+y9ZNIvSTSLHsoUt3iRUl36Q/aZcJVMmdZW98O8mC1cb
- pjoct9fdB8AV0qdfYUFcByazdFNhg/XoU7g4mlymW6KCd864+TpFAdvUiFr0y9otWKW/k8yGSwi
- egyWzoPfHOQCvqh/+KX+Y5dC/ZT9hZSC+NMXcYhLivDSlmDzGDessCVJuEaJVbT5lrNjR+Wyaac
- 9cIBlVivKxbXxyH3T5+vIm4+MlCjdA+PHVLEoX1jIX4B/236Xwyg==
-X-Google-Smtp-Source: AGHT+IHZzqkh9l3ZxbNz5phmXgiFMrGZZmAnOakdOh/HRwqInNqIvVft4xRKl0ODjE4CB8ojmG/A3A==
-X-Received: by 2002:a05:6830:3110:b0:7c7:586c:846c with SMTP id
- 46e09a7af769-7cacebd7201mr1945222a34.19.1765377268119; 
- Wed, 10 Dec 2025 06:34:28 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a91d475sm14780788a34.7.2025.12.10.06.34.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 06:34:27 -0800 (PST)
-Date: Wed, 10 Dec 2025 08:34:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Stephen Warren <swarren@nvidia.com>, u-boot@lists.denx.de
-Subject: Re: [U-BOOT TESTHOOKS][PATCH 1/1] py/travis-ci: add
- u_boot_boardenv_qemu_riscv64_smode_(acpi_)na.py
-Message-ID: <20251210143425.GG303283@bill-the-cat>
-References: <20251209230318.416872-1-heinrich.schuchardt@canonical.com>
- <20251209230707.GD303283@bill-the-cat>
- <8094db06-cd0e-4372-bf55-efd6407d2e9f@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SpYfLf6GCiuzDu5crxwHWp4FVS5NKBGGN7saDShjNtR3E91G6NCx6z73wg1U4Gf5ifEbp8XJ+GbY/xcF9XZ2PeRdOC5uWmFGedh6M1wopJ3zNZ5sFLQKvzvjj1ySPaGxxpj+eF2xySZAH/ffCXddiRn7JghoU+83I6BClNDDzSMNctmW/aGJ1VqdOOqk00761wSo+zDpSl8Ela4UVrNJtBEEe01DwfFphW6vTprbPhvpeIZFBYPFMn7dXfKkGOK+VJJA3N8eK2tod3uQl4tCkPYBAvUHhhSfwvOtiWqAmoqMJFB+qSgBSmn/6q0YTXD2dFY4GHHkuYrA862K2yUYjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4CF0p2tw70ZY8+/dsIxT/5+BZNOXhTxRB9Z/WvmkqtM=;
+ b=eol71ROsYxnzGA+llxGZvReLoDgsdvUfi7S6wr8gZuJVVSUwW+cMXjEgUyQcDr3sPwuMvEkRSs4PkP/1bWlJr/2VU83W4LuC8j9b4ep0nsiCSV2Bh1tXcs9haxfJfyDv1UBS4euzocgqwZu/8LWtbMgjweQX2KjbTiVDUEiGtOc0uHm7IAxzgZ/V3XctDdrSMWv6MYu2vLX3uU6yuwkTH4V+sZHjfeqJ09kP6iRGR52vZ/Qh9cBgpK8C4WhcdvN4GL9d0Ius0+xT9cyPrI98BR9xV6XIhtjjq4w/DjDLZl8l49ILGPtqQ/mprS1zcgIhyXW5Uv2U2Tw1v9yhAmWfCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4CF0p2tw70ZY8+/dsIxT/5+BZNOXhTxRB9Z/WvmkqtM=;
+ b=SmIxioOwoGeDyUuYFDYz1LIWXCyaP+FpZ8mR5IqhSpb/GU6B/a06C48TWsJ5jlL3pUqn00Ogh291UnE4K9rswdYUwPE+meBTHv+ZhM+m9ZFmvkQh2eQfiFZArAMSeHk9eokbGdRC8VACQZV367f0VAylFLh4c4ek+oz4DroGnEg=
+Received: from CH2PR18CA0009.namprd18.prod.outlook.com (2603:10b6:610:4f::19)
+ by IA3PR10MB8492.namprd10.prod.outlook.com (2603:10b6:208:580::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Wed, 10 Dec
+ 2025 15:48:50 +0000
+Received: from CH2PEPF0000009C.namprd02.prod.outlook.com
+ (2603:10b6:610:4f:cafe::3b) by CH2PR18CA0009.outlook.office365.com
+ (2603:10b6:610:4f::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.15 via Frontend Transport; Wed,
+ 10 Dec 2025 15:48:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CH2PEPF0000009C.mail.protection.outlook.com (10.167.244.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Wed, 10 Dec 2025 15:48:49 +0000
+Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 10 Dec
+ 2025 09:48:46 -0600
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 10 Dec
+ 2025 09:48:46 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 10 Dec 2025 09:48:46 -0600
+Received: from uda0271468c.dhcp.ti.com (uda0271468c.dhcp.ti.com
+ [128.247.75.68])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BAFmjs03199756;
+ Wed, 10 Dec 2025 09:48:46 -0600
+From: Vishal Mahaveer <vishalm@ti.com>
+To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
+Subject: [PATCH 6/6] configs: am62px_evm_a53_defconfig: Enable SPL_BOARD_INIT
+Date: Wed, 10 Dec 2025 09:48:44 -0600
+Message-ID: <20251210154845.3852231-7-vishalm@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251210154845.3852231-1-vishalm@ti.com>
+References: <20251210154845.3852231-1-vishalm@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dtouYqZ2Cb3/yq+s"
-Content-Disposition: inline
-In-Reply-To: <8094db06-cd0e-4372-bf55-efd6407d2e9f@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000009C:EE_|IA3PR10MB8492:EE_
+X-MS-Office365-Filtering-Correlation-Id: e44f1bbb-e496-48df-3c50-08de38039cb2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?m9ipWdmCJDQ0xj3vRGAWCzafuLKNTCup9fEznpWsxjb2+3BVi3xVTas0VGWX?=
+ =?us-ascii?Q?AJf3gScvDdFmM0WgX1vYtjKMv7HN8lWT/ZxW1XyUyytn4dcw3A+5RdEJucMf?=
+ =?us-ascii?Q?B8Bw8G9Gww6wJmaPVboRKgo5ay9nYTW9KDAL2nF2KgvSuegMTgvlVAtuQO6u?=
+ =?us-ascii?Q?WceUhu5zhkvaCrZfOAmgBW/DkWQbxPBdzDLdMZGpSzWukk3w84mUDybv9MRu?=
+ =?us-ascii?Q?H3kuZ2RjszbGDRi60vftH7fGyI6P2WfAuUL/FonQ4UWvuuB5lxq/3l2R5xYt?=
+ =?us-ascii?Q?5QsGcHHANDN7RS6+nkoBJ5g3z/IpxcMw9WDQLFMzSqGtBPuNkVsgR6ADCu/r?=
+ =?us-ascii?Q?45AxwBbTGIly5Co4UwgdkSVf+i3D1eaJCYLCPyt14yWvKRhzb1hPfpUyKQnG?=
+ =?us-ascii?Q?TFFt8IG6JV26rXceToLZ66e8NC98ksucQqWULEyWHQGAmGgGMwKCGHnZvaZR?=
+ =?us-ascii?Q?p5Yccm0AD6t76uc0qMCHfx//n8LihRQzTFH8NbbzKOiTZl0K9qLkEVze6XO3?=
+ =?us-ascii?Q?u19HyJav4I3fEAxoYClPfibF8VyTWrYdRpKqILq/FFIYbEhU26j/LnflQ6RJ?=
+ =?us-ascii?Q?vkjiEUkHuX6PxiKt7eUwr6aMUjwoJfu/8fizUyftZJ8l460hVNUErSjg6m5U?=
+ =?us-ascii?Q?waobmzOCR+FalFRDRnClP/e3P12dKc4yn5M2M7q/MmKQGoUjE20wGAHaiLEe?=
+ =?us-ascii?Q?43xDLwt7/Gne2XhOwIshYP3TxYT3WVKf4/shIv8KhjOyo25eSTsgl+kungo9?=
+ =?us-ascii?Q?selq9aDtVnn2xnrmtWNU6kDtGDerNcEo3AjZqufiQKJp4VaIrPnhvrGK+Ewh?=
+ =?us-ascii?Q?siFYPh+Wn81WaMMzCtBCRoLDXsQNytppYp7pIeyR15/FLiVJmYu711NE5v4k?=
+ =?us-ascii?Q?bODiU9Lc1s2z6DrgckN3MyJK/hghXl0XhSZ5PFmmk50h/lgTbaih27GX9iYM?=
+ =?us-ascii?Q?4TzcqH9sNuVY0drmfge5FdQatUx8xBdOnZPfjCmPGjVJ6rzA3hO7VlgLBPSR?=
+ =?us-ascii?Q?v9Q6WHxFMj+pUBamPiX1tY3dLIvTdWfDwCxHwO2T7e+PrSYs/JqqKu/nYNOW?=
+ =?us-ascii?Q?zkEBNzbjt3DAmEr5hzFk/UwNJhumysiMmtBnORm5z1B49fNFddTOjo5irK/l?=
+ =?us-ascii?Q?I0bIXGPwtMlA9G9KFClyV0X2NrvS2hIPWa60XOm1gUGYEPnThrpUpwuZ0uvt?=
+ =?us-ascii?Q?J6Hzl334Iz2UK1B2noS8hlPWpAUgZ2NkM7ZwrsDgZ1FQ5eTNHjWk8Qqv0QTP?=
+ =?us-ascii?Q?Oc/ZhK+EsQEpo6n2ce5QYh6CWLNrpbbVBw1sBorVQxJlTBpdNdDx7JQX83a8?=
+ =?us-ascii?Q?8QLnWQ3oFfjqIWj9Oegvlr6egvItcbE84M6b2whHVdLX7zlXwIm9172xFJRW?=
+ =?us-ascii?Q?Yk+dPPlxT6D8auz3RUWkUqzcz2Fb/yY9jwzNsvByYiypA/o080bXIF91C/AZ?=
+ =?us-ascii?Q?r+h1969OCKe+iHC/Xfe6TkzFGS07sb/jzDlckZ9M73RderERA70ZxPuGYyBY?=
+ =?us-ascii?Q?kx7R/oSEV1mQz2NUMLaexFsAkoYj5ZgYbn+EDUXqtGq+bsE9IUCFbUHe/o+d?=
+ =?us-ascii?Q?l03ijs7B4tNfhEYcdDY=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2025 15:48:49.7727 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e44f1bbb-e496-48df-3c50-08de38039cb2
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8492
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,73 +155,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable the SPL_BOARD_INIT config option to make use of the
+spl_board_init function.
 
---dtouYqZ2Cb3/yq+s
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+---
+ configs/am62px_evm_a53_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Wed, Dec 10, 2025 at 10:58:45AM +0100, Heinrich Schuchardt wrote:
-> On 12/10/25 00:07, Tom Rini wrote:
-> > On Wed, Dec 10, 2025 at 12:03:18AM +0100, Heinrich Schuchardt wrote:
-> > > Add missing boardenv files for
-> > >=20
-> > > * qemu-riscv64_smode_defconfig
-> > > * qemu-riscv64_smode_acpi_defconfig
-> > >=20
-> > > to enable network testing.
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >   .../u_boot_boardenv_qemu_riscv64_smode_acpi_na.py      | 10 +++++++=
-+++
-> > >   py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py  | 10 +++++++=
-+++
-> > >   2 files changed, 20 insertions(+)
-> > >   create mode 100644 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_=
-acpi_na.py
-> > >   create mode 100644 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_=
-na.py
-> >=20
-> > These are identical yes? So they can be symlinks. Probably to
-> > u_boot_boardenv_qemu_riscv64_na.py ? I forget if the file
-> > "py/travis-ci/u_boot_boardenv_qemu_riscv64.py" would be read by all
-> > iterations of qemu_riscv64.
-> >=20
->=20
-> Hello Tom,
->=20
-> My understanding is that the files are per boards. I am always irritated =
-by
-> the _na suffixes. Maybe we can get rid of these. Or at least we should
-> document these.
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+index fa857e51137..fbf73633418 100644
+--- a/configs/am62px_evm_a53_defconfig
++++ b/configs/am62px_evm_a53_defconfig
+@@ -36,6 +36,7 @@ CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+-- 
+2.34.1
 
-Yes. I recall seeing in the code a month or two back that we have some
-fall-back logic so that for the conf files, we can omit the _na suffix.
-I don't recall if the python import portion has similar logic however.
-
-> I remember you being very hesitant about symlinks in git repos because th=
-ey
-> are not supported on all file-systems to which a user might check out at =
-git
-> repo (e.g. on Windows).
-
-Ah, I had forgotten that myself, but, we have several symlinks in the
-main repository itself now, so I think it's become a moot point.
-Especially for trade-offs in reducing duplication.
-
---=20
-Tom
-
---dtouYqZ2Cb3/yq+s
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTmE8QAKCRAr4qD1Cr/k
-Cv+5AP9ghwvjBJjIwIP96qjyPzIKoqj3n47bVl1uJCeaD1AihwEA/0z4pSNvmXmo
-NHZElaRTvgvr9qiEZPfGKFNbxl1UKAA=
-=wSLO
------END PGP SIGNATURE-----
-
---dtouYqZ2Cb3/yq+s--
