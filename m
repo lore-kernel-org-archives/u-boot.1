@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B81D3E77D
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 20:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7AED3B9AB
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 20:45:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEDF783B48;
-	Wed, 10 Dec 2025 21:45:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3819083D07;
+	Wed, 10 Dec 2025 21:45:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OrjChC/F";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oU0I3qSU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02A0683D03; Wed, 10 Dec 2025 21:45:29 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 1787483CB5; Wed, 10 Dec 2025 21:45:30 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C12CC83CB5
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 21:45:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42F4E83A26
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 21:45:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-44ffed84cccso80556b6e.0
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 12:45:25 -0800 (PST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-3ed151e8fc3so137723fac.2
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 12:45:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765399524; x=1766004324; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765399526; x=1766004326; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8xXuhhQpVXPiGIMGVS9W6CEE5EPfAB4Fk9kW5KnvtdA=;
- b=OrjChC/FEeZLTWm+3++czIvwNqV3t1SL39JfTUw9hVWlPfYkb+pREjVkoiWf5NL17m
- 839JgEdjldZDZgtJwwHHKgAIU9+NVCfXIiA7wjbZA8OHm7swLKMXVEXvT+5GH6gtUXx2
- MFAVZSVdMrTgr/C6kvmMarf3HmsOeL5gpHBik=
+ bh=Sbg8G5Qh/CspTRPycAm0AS5DoKyQh1r5T+duIoxypK8=;
+ b=oU0I3qSUTAOzHWtvtJjZxd3i+QuKj6HdRKG32IIFCN/pzl8laOdT798grG4l6Avn3X
+ J3KiWPdIp6jBKMOIx8NP1OXXWNUQS+eCLRdcseqAK7ejfSTVn6K4FLWmTXkbCm+leeBG
+ ejVp5uJof4Sr8LDGJs15tqkwfoV3J6Bq7WhtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765399524; x=1766004324;
+ d=1e100.net; s=20230601; t=1765399526; x=1766004326;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=8xXuhhQpVXPiGIMGVS9W6CEE5EPfAB4Fk9kW5KnvtdA=;
- b=vJZBzFCbzq7HIXDgfDJsuU2nct8O20/i4KKJh1NZ0y2TuUAe2rLdB4q8UuNPYQQHFg
- DGxOeQFFZkv6pT8SFJ26xQRRfI7HIBNqhcRR7A0zpzvzRc/siFZ5s2kfn8dtZXsvWk7/
- hCC1vOhI7dZe+yexxcbQcfwey9nLJ3lBddJ65aOpo00oOGMSnL53rISy00TxK8o3FBr0
- iO0PSgmsIcgbMacbbrmTxTjEPoAdqERvxuGaDsit+UXH7UBQ0Pv8uos84cpTJGN7slkv
- nlCzOlm+9ciUW8lstdHEc0nO94NF6L2K2bZbzzxQFn0TFWo51j46uN6YNyEbBsSD3Ux+
- gw8g==
-X-Gm-Message-State: AOJu0YxWzNtYCY3BTp0SEOfrMkBW2LPctkY2gUweS8J8zGzZhlbNauf3
- JkL7L+YFZrtXiLzWwiocWxUtFyqDbWlOXzwM4HlazOAuL9Uz9f65/rVyM0bIhr1asJEXKODhJVI
- uydcF5CA=
-X-Gm-Gg: ASbGncuwpsKA0Ezzu/g/77QepfSNKEkhK3R5wp5F2XE43U+DOC2wUbHejnSPRBZSo+m
- RteAZ2WxAJElcjnvMj7Ux/IyAvCfrBymDJPC8fsDbO7XQ0W4OFxC4PlYHrM9HDCJT5I9Z5QErtq
- VZW5X4TMgFBQDFtk+tkzTnQbmwjHHkXxBbyIkokyXNNaU6F/Z0RrnfKWopWoHWgiWwQX2Cbxz4L
- 0MLQSEmkaY1Kj+sG86DuIvep/NB7KGPj412Tdw+7adhBlJvk3oxcNIbbU5kZqIzi13farM0PwPI
- d3INOygezGNZho8bUEqMQZL7YS9UrtVnTedm3+6oRTEf5wSUnY0d2MIX0XE2v+HxxfjNB2z/SUo
- pS55MWRAIcIREUOQyrQ228OKa4wOEQLF8h6O3vat+k/4t4a0uXrkfHPJo43J9VrVkbKELKOURl5
- URxpJl69T0nEhkBQqcBmvvOEleXOHNy5H1T26U1rtCSRaVHV2d
-X-Google-Smtp-Source: AGHT+IGgGdBzqzV97zEtmCcbt12q2Aqoqji/1XDHGYicDRGMH78ZF8TDf32taubqFGVtQ0JJDWY0IQ==
-X-Received: by 2002:a05:6808:6d84:b0:455:804c:f835 with SMTP id
- 5614622812f47-45586377744mr1869909b6e.14.1765399524525; 
- Wed, 10 Dec 2025 12:45:24 -0800 (PST)
+ bh=Sbg8G5Qh/CspTRPycAm0AS5DoKyQh1r5T+duIoxypK8=;
+ b=XVlyfHRerSyYk3U5j2XKC7bWHU/w4nq0jwAwcgh/DP8jF4uHAnEAKb8P0L1rAVZnZa
+ p6nMadpY32XJooMCqOGF9y1FtYXQrJmX/ZUH4psJEBhPBEB1Nqh4MbmPHu9snBpUd0Zx
+ +UU+YjaYVVDuw9xUPpB/+XwBnwKIPfwjirW5WcRJymktNMirdzLyMEOqQ2NS1FeS0zC3
+ wiDQ2WAsLX/JoRi6Jw+KyL2Lp+Y/gtjfoFxLIGU7gJwtSLWG6WJ6VROTuj+/dE4fEF3S
+ M0q0zfscXqhVHlX8DhEkz+GguTjmow7TVGN5Q1hbsQDnhDqfjF8qiG947BMhufTNPe9F
+ 0/qA==
+X-Gm-Message-State: AOJu0Yw8b5mwlRi+cAh/tuFw68YiSJ+vFP/Ns6lBwU8snbxFJunFiEZe
+ G5eyESQgRchJ66LhljGkNjyQrbSq/iEM1U5S4Zue/3wxTA4ZZHp0AtaBc0cvMxvTJAw=
+X-Gm-Gg: AY/fxX65urBoZ3tzDokw498Dv68BME6Da8pRM4fuyyr5l9OIcQY2d0tNM1/bLt6kvJC
+ 8i4c3D7hbP06K4UYipfbWNSqfZ1aD0gE/HMCdZLTw/2wyMOtggTnKG2qiREBaalPkRm+pOJ0rE2
+ bZHhYoeeRYbPAH8E3dVwaAtxXdbIZ2GT52D7Kv6VQijtRRBI2tGDbm/ySqdV+VMUujzvd8hjKrt
+ CUhk2PVs1/idVsA6VYZkcZ2K0DnwoS+4lMLDp1BGv+J3OIYZaiqP7hVjy4sJTWL+brlCx5QUpao
+ NpfcwgSh9j6r5p4rW/wIwBRQLUmqFJiUleTzH/vVQQpOkWSI2I9W8/wbKyhF2MtShadCAQiJB3S
+ +ag0Vh+yMHO/BpEcUUxh74zKWiN7m3aN2zV2hSQOumOn59TsbWuhvx/+PrQ7At6CKOCujwjZeUg
+ hcJUBKHXdYWcbSj0+KwuT4xOeQ0ZjV0LEr6fOWhEK1rIM/WoQO
+X-Google-Smtp-Source: AGHT+IHHInkQZtjeDroMfqqKTYTDv3+PRh35s9aXdUOO8ZpKEklxXRnOdw3rQD9/OgciJTGVgIt+3A==
+X-Received: by 2002:a05:6870:a68f:b0:3f5:4172:1f with SMTP id
+ 586e51a60fabf-3f5bdcfa6bdmr2342716fac.56.1765399525907; 
+ Wed, 10 Dec 2025 12:45:25 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f5d4e70030sm485887fac.6.2025.12.10.12.45.23
+ 586e51a60fabf-3f5d4e70030sm485887fac.6.2025.12.10.12.45.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 12:45:24 -0800 (PST)
+ Wed, 10 Dec 2025 12:45:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: m-chawdhry@ti.com, Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-In-Reply-To: <20251127140428.701755-1-w.egorov@phytec.de>
-References: <20251127140428.701755-1-w.egorov@phytec.de>
-Subject: Re: [PATCH 1/2] arch: arm: dts: k3-am625-phyboard-lyra: Drop
- bootph properties
-Message-Id: <176539952385.3502425.7480629842468149780.b4-ty@konsulko.com>
-Date: Wed, 10 Dec 2025 14:45:23 -0600
+To: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes?= <jeremie.dautheribes@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ =?utf-8?q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>
+In-Reply-To: <20251128110304.63138-1-jeremie.dautheribes@bootlin.com>
+References: <20251128110304.63138-1-jeremie.dautheribes@bootlin.com>
+Subject: Re: [PATCH v2] binman: blob_dtb: improve error message when SPL is
+ not found
+Message-Id: <176539952464.3502425.3281227177260356323.b4-ty@konsulko.com>
+Date: Wed, 10 Dec 2025 14:45:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,19 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Nov 2025 15:04:27 +0100, Wadim Egorov wrote:
+On Fri, 28 Nov 2025 12:03:04 +0100, Jérémie Dautheribes wrote:
 
-> Remove bootph properties no longer needed. These are now handled
-> in upstream Linux device trees.
+> When using binman with the '-a spl-dtb=y' flag, if the SPL blob is not
+> found, binman throws a cryptic error message:
+> binman: 'NoneType' object has no attribute 'startswith'
 > 
+> Let's improve the error message to explicitly state which SPL blob is
+> missing.
+> This is particularly useful when binman is used as a standalone tool
+> outside the U-Boot source tree.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] arch: arm: dts: k3-am625-phyboard-lyra: Drop bootph properties
-      commit: 8c5166e9fea2de59c62e6adc12eb82ae01f01105
-[2/2] arch: arm: dts: k3-am642-phyboard-electra: Drop bootph properties
-      commit: 90dc6a8b10f903fc2b84a7dd18a120c1c728746f
+[1/1] binman: blob_dtb: improve error message when SPL is not found
+      commit: 66be03b7ee19444b23aae3990a434a7470fc1641
 -- 
 Tom
 
