@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8D0D3E77D
-	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 22:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28316D3B9AB
+	for <u-boot@archiver.kernel.org>; Wed, 10 Dec 2025 22:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90A7F83CBD;
+	by phobos.denx.de (Postfix) with ESMTP id CAC1783CDF;
 	Wed, 10 Dec 2025 23:28:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eM26iiQo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jjo4c7V+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5416483CAA; Wed, 10 Dec 2025 21:11:32 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id EFC5A83CB5; Wed, 10 Dec 2025 21:11:35 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A81F68042F
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 21:11:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E25DA8042F
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 21:11:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5942b58ac81so94873e87.2
- for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 12:11:29 -0800 (PST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-595819064cdso359517e87.0
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 12:11:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765397489; x=1766002289; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765397493; x=1766002293; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DUXyTJMMankVmIdHp1KVY3Z1U2C+qwXalPZYvGcLaRk=;
- b=eM26iiQoODQEfBI44OVLwm2sTf/u0CxJvxcXs0QuBDhxn95FmkuWwjRei5RUK4qFCf
- qq7fQlwH55e2lgJaIcP0oB4NF/5tL0jcONvdWZIzCGPkb6kayGCMCcHtX09+AZc63uMG
- uPC8GhsQuwQvS3rfkyFmwEBuckTY1mcENbHsEMfYI42o8pEgx+it8FsVO1y4fsUtw5BX
- eFZ8GxZhxFmvzRFR3CB/cHxrOxx4+g3qwiREVEUZCLAKQ83FW1dnjFVz+zTOLVSUa02Q
- ultoj6SEgW0pXAr+E3dD7vJ5rrypQWzjCKiJSCdFE2pQ6kjdLEq8OIgc09SM2/AK8pTb
- Fwvg==
+ :reply-to; bh=S0ZIJXMMvUGwb+b1lGo/m/eYqHKYsO+vadiQtPCJDfQ=;
+ b=Jjo4c7V+UmvvtM8jv8xzhKR2QX/+70l09ZB/Tsd147cM8y/aTv+g2W/jc7U+oRehK7
+ Dt/qTgJmrNn15+ixVyTwYAXDtIQuINc1FDyEh6roABWk4osC9otib34fWOL3j7wOe5ww
+ 1iloWb60E/2DfcHhQtJJxC38gYVJZve5B63u+Sev4q1Xlu545IMXN9tdRRku31QXa7fS
+ oyf5vwfDjZwivRAggrcYC4nLYRXNw5ZnT87aIhy1baHRDeJust/EcGg3i+h3Zg5y4JHb
+ 5If2QjH82vqCSRsUrchPicddCdZtgXDOi2CUEpXrEmHLmMOPhvf8z1Es+VEMqLY+vcZ/
+ Bd3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765397489; x=1766002289;
+ d=1e100.net; s=20230601; t=1765397493; x=1766002293;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=DUXyTJMMankVmIdHp1KVY3Z1U2C+qwXalPZYvGcLaRk=;
- b=i9uebB7CYl7nWe8RDAfBM1QErOx9pYfbQIE2B2KCHqx9aT5YuUr/oyezVnCn53H71m
- 1AefVMkYBMMy6yvUlnbvDNW/eK8F67ck+eXw+3AzEr38imZqJ5TggAQnBcFT+7fnwA21
- vGf4x20vdm1L8DQFioQdxU5UVei/3TnbsXurzcGZor/7vjiM7QX2ufgDzZSvI/qPyzWq
- pGRKMkP1Bg286Jzb1KTQS5oCLfLETccR9OBPUiGRZxueNXVR7HQt/DtlHTMrOmsxtt8O
- NjUWBrVJUgnJKS8ShdVtVdCt7eAfgJ0MoYZItT3j7XyKTGCVBI4s/VR3FGMPxdtvAo59
- 76bw==
-X-Gm-Message-State: AOJu0Yw3D69u8/O4167vfMZVA+9bFlOnOQeD/sCS3l4A8tO1cMPozj21
- gdJhumC2tg3OxVxhfc91Ud1y0ZWDJ0gcjjMgpeKepa1Jo58/IMNVAFRy
-X-Gm-Gg: AY/fxX4JYfl5lKQMOYjWHPLfgsyZkQR6mTi5wUTiw7/JH8xu5EUoUb5cxiC72gO/PF0
- APfO8YDvXCGLYaqVIhIIIbyoxum4ZOHNR+WoblgTLLyZFQd4Ktu7bJAT9ZvsDT/vzORHrC/2Y5V
- 0FVEHWFo4tW7Eiown55IOwHCPd3+OyX1/ZLzjmXmqyeQOojCwg+dEwPaB1FpbDREfqCsqdVRcIR
- iBnaFN7mcUav004NxFC7ecSnl8FaeonZxqiTXHffZs/Gp9MTu+tRw7Z8TkBxpY7Yu8+nrXLOmw8
- ST1GbVSTH1v0s6tMUNBuZsnTmy9s6r90nyXNaIttPsoeDgErYjQWbCu8/BEJAANvyo2uGynK9b5
- pLCIFzqGxOSr9aWv5Vn59zBcU/+WBJS8EMDzwV68nj4WdX6+o7qPkUOCTPFWvcw2GtTIT/oI6Gf
- Fve6YvsBPmhNsBud5LCAqvT9M+
-X-Google-Smtp-Source: AGHT+IFhDP9QK6bkRRl7CbBBbPb0oNflm87RsRz3dUkuvgIEOLW7jfiUcbg7vyH4fqBWIwSiYjvicA==
-X-Received: by 2002:a05:6512:334d:b0:598:f1b5:8404 with SMTP id
- 2adb3069b0e04-598f1b58414mr410083e87.26.1765397488715; 
- Wed, 10 Dec 2025 12:11:28 -0800 (PST)
+ bh=S0ZIJXMMvUGwb+b1lGo/m/eYqHKYsO+vadiQtPCJDfQ=;
+ b=tS648b3lYHsZh0Ammwm/xJa8ytAizh3tzFKsdv9fSMid9KE4nePmKN6vCZfgHLdpLi
+ TL/l9hV6adb5lBPyvTRTRzCUePUmKLy+wFgmtc3lzFXtpe/v8G1qbvJrTFMjMKVrO0kf
+ XO/njyZk+wmpuY/fhlX7mgBYesnfQ5I6BUFj8Ooat3bIt9f0dJXVq6ffPxnO/xEyrmwM
+ OoJnihcohTd0WUMEBUr2ZnuED40uMMKM+CZTjA9TNdhUndiEbcKccAD7ZdInp2a/Gc9t
+ 6P5V3v7JcgaB+RkALuRQn4G72RE6imIaryGZE0XajePnQF5kALbhcukDd/wV/YQwjLH1
+ ik/A==
+X-Gm-Message-State: AOJu0Yz4yhRtlplf8aYwWN9VmRCt6q40GQ3/JQq45yWiQ8Ytcc0Bxx4f
+ X+AB2Lcz+N99YQ0bBpDGS79fGU88EMMBw+fEPxCmZ5kAHaCTtypeYtRo
+X-Gm-Gg: AY/fxX6BL7TDZOopMbtVZACwW5s8Y3xfXqL9ETz5bYjddz5TwkMhf5ZzagXwaSEaTGH
+ IutOREP+yvuyM+K76lrXVOCgmyHoiK8XR9S7JDTwMh6y8mmhgGjWIkr2j+1qxAjJm0ioSaDQPFm
+ qZ/2FrpI+U3tL4OG3IAaYVp324PdglxMwoWTGJsL+93/FUYAHXUe6PL4+6tdUqpP9F93Wg07Cyw
+ 1VDptnK1GMHt9/3w48A/dv5upHXk07vaAFW7RkCcr5rXMegOmyPZIHjomPtRIZuvH5fvUlFQBu3
+ spNQfzQzIJ4KQw0p0qkFfWZ8F7kcF3vLY2djkFCPWGkB5zH+e+ru/KPP0ZczbwX1xdFmOP3dgzN
+ NNppyhO+OgtsM/TSLgMaHlv5vgOoiMtql/1GFU7hj7W5Leu9MxH+FjLzOCuIKvMJmRkkEDdTL0f
+ 24WtwzcLo0sqB/Q7n0xrFhxx41
+X-Google-Smtp-Source: AGHT+IH+dzGf8vJ2hPvLPP/Bbex/QlQBhYMXM8tvIz/e8W86srHD96/dzuwWm1bqotsfQf1fHlHhQw==
+X-Received: by 2002:a05:6512:31ce:b0:598:ec8d:a53a with SMTP id
+ 2adb3069b0e04-598f2bedf5bmr199673e87.6.1765397492859; 
+ Wed, 10 Dec 2025 12:11:32 -0800 (PST)
 Received: from alchark-surface.localdomain ([31.173.84.52])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-598f2f45bbbsm134986e87.45.2025.12.10.12.11.24
+ 2adb3069b0e04-598f2f45bbbsm134986e87.45.2025.12.10.12.11.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 12:11:28 -0800 (PST)
+ Wed, 10 Dec 2025 12:11:32 -0800 (PST)
 From: Alexey Charkov <alchark@gmail.com>
-Date: Wed, 10 Dec 2025 23:10:48 +0300
-Subject: [PATCH 2/4] spl: Make UFS available for SPL builds
+Date: Wed, 10 Dec 2025 23:10:49 +0300
+Subject: [PATCH 3/4] ufs: rockchip: Add device reset support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20251210-rk3576-ufs-v1-2-a3f9e76eb66e@gmail.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251210-rk3576-ufs-v1-3-a3f9e76eb66e@gmail.com>
 References: <20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com>
 In-Reply-To: <20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com>
 To: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>
@@ -128,12 +128,12 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Joseph Chen <chenjh@rock-chips.com>, Ian Roberts <ian.roberts@timesys.com>, 
  Alexey Charkov <alchark@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5546; i=alchark@gmail.com;
- h=from:subject:message-id; bh=c1t8qNLfarP9Mm2F9C4cwk3aVvqPhSPJp8CHr6tRaM0=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRaXn6mciiyeOUHP3F+LiOjyyd8l/zb1m6VtHTK6vVFh
- dcU31YWd5SyMIhxMciKKbLM/bbEdqoR36xdHh5fYeawMoEMYeDiFICJTF3G8D/ucF5h4Jd1/AdD
- snxLFv3vFFm54+zRe/dV1vm6FFX9ZrBnZPj4oKFVdqkYa/yUu0oST6W5Jjrqb7AVPP05w0V4edf
- USUwA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3002; i=alchark@gmail.com;
+ h=from:subject:message-id; bh=W1Zu7acIlLkSUqGsSXXlV6oV4upXJRbljIlcg6R2q1s=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRaXn625sXcalu5u/X7JG+EcM294rvtTpPhirkhqafmV
+ +y7kb2Cv6OUhUGMi0FWTJFl7rcltlON+Gbt8vD4CjOHlQlkCAMXpwBM5G0wI8OVG4oXlcVfi3mm
+ 6+6c2P83cn2LdFvUvE+6d5j/qurPvOvEyLD1UEhM9ZqCi2vdfr0p7WK8+sd05q0tu122hMa08dz
+ t5+ECAA==
 X-Developer-Key: i=alchark@gmail.com; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Wed, 10 Dec 2025 23:28:32 +0100
@@ -153,180 +153,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add minimal infrastructure to build SPL images with support for UFS
-storage devices. This also pulls in SCSI support and charset functions,
-which are dependencies of the UFS code.
+Wire up the GPIO line which Rockchip RK3576 UFS controller uses to reset
+the connected UFS device.
 
-With this, only a fixed offset is supported for loading the next image,
-which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-number of 4096-byte sectors into the UFS block device.
+This seems necessary at least for some UFS modules and fixes the following
+error while enumerating UFS storage:
 
+ufshcd-rockchip ufshc@2a2d0000: ufshcd_link_startup: Device not present
+ufshcd-rockchip ufshc@2a2d0000: link startup failed -6
+ufshcd-rockchip ufshc@2a2d0000: ufshcd_pltfrm_init() failed -6
+
+Fixes: 76465ce21ee4 ("ufs: rockchip: Add initial support")
 Signed-off-by: Alexey Charkov <alchark@gmail.com>
 ---
- MAINTAINERS                |  1 +
- arch/arm/include/asm/spl.h |  1 +
- common/spl/Kconfig         | 16 +++++++++++++++
- common/spl/Makefile        |  1 +
- common/spl/spl_ufs.c       | 49 ++++++++++++++++++++++++++++++++++++++++++++++
- drivers/Makefile           |  1 +
- drivers/scsi/Makefile      |  3 +++
- lib/Makefile               |  1 +
- 8 files changed, 73 insertions(+)
+ drivers/ufs/Kconfig        |  1 +
+ drivers/ufs/ufs-rockchip.c | 25 +++++++++++++++++++++++++
+ drivers/ufs/ufs-rockchip.h |  1 +
+ 3 files changed, 27 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c9853f409920..c58805a724b9 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1860,6 +1860,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
- M:	Bhupesh Sharma <bhupesh.linux@gmail.com>
- M:	Neha Malcom Francis <n-francis@ti.com>
- S:	Maintained
-+F:	common/spl/spl_ufs.c
- F:	drivers/ufs/
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 6c75bb2a0790..30b0c87798e1 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -76,6 +76,7 @@ config UFS_RENESAS_GEN5
+ config UFS_ROCKCHIP
+ 	bool "Rockchip specific hooks to UFS controller platform driver"
+ 	depends on UFS
++	select DM_GPIO
+ 	help
+ 	  This selects the Rockchip specific additions to UFSHCD platform driver.
  
- UPL
-diff --git a/arch/arm/include/asm/spl.h b/arch/arm/include/asm/spl.h
-index ee79a19c05c9..dd462ea6ad82 100644
---- a/arch/arm/include/asm/spl.h
-+++ b/arch/arm/include/asm/spl.h
-@@ -30,6 +30,7 @@ enum {
- 	BOOT_DEVICE_XIP,
- 	BOOT_DEVICE_BOOTROM,
- 	BOOT_DEVICE_SMH,
-+	BOOT_DEVICE_UFS,
- 	BOOT_DEVICE_NONE
- };
- #endif
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index a43271671648..aa198ee44a3f 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1608,6 +1608,22 @@ config SPL_THERMAL
- 	  automatic power-off when the temperature gets too high or low. Other
- 	  devices may be discrete but connected on a suitable bus.
+diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+index 0384244387da..48444705fb29 100644
+--- a/drivers/ufs/ufs-rockchip.c
++++ b/drivers/ufs/ufs-rockchip.c
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
+  */
  
-+config SPL_UFS_SUPPORT
-+	bool "Support loading from UFS"
-+	select SPL_LOAD_BLOCK
-+	help
-+	  Enable support for UFS in SPL. This allows
-+	  use of UFS devices such as hard drives and flash drivers for
-+	  loading U-Boot.
-+
-+config SPL_UFS_RAW_U_BOOT_SECTOR
-+	hex "Address on the UFS to load U-Boot from"
-+	depends on SPL_UFS_SUPPORT
-+	default 0x800 if ARCH_ROCKCHIP
-+	help
-+	  Address on the block device to load U-Boot from，
-+	  Units: UFS sectors (1 sector = 4096 bytes).
-+
- config SPL_WATCHDOG
- 	bool "Support watchdog drivers"
- 	imply SPL_WDT if !HW_WATCHDOG
-diff --git a/common/spl/Makefile b/common/spl/Makefile
-index 4c9482bd3096..e18f3cf09484 100644
---- a/common/spl/Makefile
-+++ b/common/spl/Makefile
-@@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
- obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
- obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
- obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
-+obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
- endif
++#include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
+@@ -153,11 +154,34 @@ static int ufs_rockchip_common_init(struct ufs_hba *hba)
+ 		return err;
+ 	}
  
- obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
-diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-new file mode 100644
-index 000000000000..3a5fcd4ed7a8
---- /dev/null
-+++ b/common/spl/spl_ufs.c
-@@ -0,0 +1,49 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2025 Alexey Charkov <alchark@gmail.com>
-+ */
-+
-+#include <spl.h>
-+#include <spl_load.h>
-+#include <scsi.h>
-+#include <errno.h>
-+#include <image.h>
-+#include <linux/compiler.h>
-+#include <log.h>
-+
-+static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
-+			     ulong size, void *buf)
-+{
-+	struct blk_desc *bd = load->priv;
-+	lbaint_t sector = off >> bd->log2blksz;
-+	lbaint_t count = size >> bd->log2blksz;
-+
-+	return blk_dread(bd, sector, count, buf) << bd->log2blksz;
-+}
-+
-+static int spl_ufs_load_image(struct spl_image_info *spl_image,
-+			      struct spl_boot_device *bootdev)
-+{
-+	int err = -ENOSYS;
-+	struct blk_desc *bd;
-+	struct spl_load_info load;
-+	unsigned long sector = CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR;
-+
-+	/* try to recognize storage devices immediately */
-+	scsi_scan(false);
-+	bd = blk_get_devnum_by_uclass_id(UCLASS_SCSI, 0);
-+	if (!bd)
-+		return -ENODEV;
-+
-+	spl_load_init(&load, h_spl_load_read, bd, bd->blksz);
-+	err = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
++	err = gpio_request_by_name(dev, "reset-gpios", 0, &host->device_reset,
++				   GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
 +	if (err) {
-+		puts("spl_ufs_load_image: ufs block read error\n");
-+		log_debug("(error=%d)\n", err);
++		dev_err(dev, "Warning: cannot get reset GPIO\n");
 +		return err;
 +	}
++
+ 	host->hba = hba;
+ 
+ 	return 0;
+ }
+ 
++static int ufs_rockchip_device_reset(struct ufs_hba *hba)
++{
++	struct ufs_rockchip_host *host = dev_get_priv(hba->dev);
++
++	if (!dm_gpio_is_valid(&host->device_reset))
++		return 0;
++
++	dm_gpio_set_value(&host->device_reset, true);
++	udelay(20);
++
++	dm_gpio_set_value(&host->device_reset, false);
++	udelay(20);
 +
 +	return 0;
 +}
 +
-+SPL_LOAD_IMAGE_METHOD("UFS", 0, BOOT_DEVICE_UFS, spl_ufs_load_image);
-diff --git a/drivers/Makefile b/drivers/Makefile
-index de993ae42ac7..43d0ba332818 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -73,6 +73,7 @@ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
- obj-$(CONFIG_SPL_SATA) += ata/ scsi/
- obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
- obj-$(CONFIG_SPL_THERMAL) += thermal/
-+obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
+ static int ufs_rockchip_rk3576_init(struct ufs_hba *hba)
+ {
+ 	int ret = 0;
+@@ -175,6 +199,7 @@ static struct ufs_hba_ops ufs_hba_rk3576_vops = {
+ 	.init = ufs_rockchip_rk3576_init,
+ 	.phy_initialization = ufs_rockchip_rk3576_phy_init,
+ 	.hce_enable_notify = ufs_rockchip_hce_enable_notify,
++	.device_reset = ufs_rockchip_device_reset,
+ };
  
- endif
- endif
-diff --git a/drivers/scsi/Makefile b/drivers/scsi/Makefile
-index b76de1b22a8b..c9af60d5d03c 100644
---- a/drivers/scsi/Makefile
-+++ b/drivers/scsi/Makefile
-@@ -16,4 +16,7 @@ ifdef CONFIG_XPL_BUILD
- ifdef CONFIG_SPL_SATA
- obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
- endif
-+ifdef CONFIG_SPL_UFS_SUPPORT
-+obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
-+endif
- endif
-diff --git a/lib/Makefile b/lib/Makefile
-index 70667f3728c2..d0ffabc2b476 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -147,6 +147,7 @@ else
- obj-$(CONFIG_$(PHASE_)SPRINTF) += vsprintf.o
- endif
- obj-$(CONFIG_$(PHASE_)STRTO) += strto.o
-+obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += charset.o
- else
- # Main U-Boot always uses the full printf support
- obj-y += vsprintf.o strto.o
+ static const struct udevice_id ufs_rockchip_of_match[] = {
+diff --git a/drivers/ufs/ufs-rockchip.h b/drivers/ufs/ufs-rockchip.h
+index 3dcb80f57020..50c2539da78a 100644
+--- a/drivers/ufs/ufs-rockchip.h
++++ b/drivers/ufs/ufs-rockchip.h
+@@ -72,6 +72,7 @@ struct ufs_rockchip_host {
+ 	void __iomem *ufs_sys_ctrl;
+ 	void __iomem *mphy_base;
+ 	struct reset_ctl_bulk rsts;
++	struct gpio_desc device_reset;
+ 	struct clk ref_out_clk;
+ 	uint64_t caps;
+ 	uint32_t phy_config_mode;
 
 -- 
 2.49.1
