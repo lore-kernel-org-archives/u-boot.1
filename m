@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77674D41D41
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 14:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F213D41D58
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 15:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA4978389A;
-	Thu, 11 Dec 2025 15:14:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B862A83655;
+	Thu, 11 Dec 2025 16:30:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FvGtHAO3";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="m4Khfdiv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDAC839DE; Thu, 11 Dec 2025 15:14:18 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D2F088389A; Thu, 11 Dec 2025 16:30:57 +0100 (CET)
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92F628312A
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 15:14:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BAB783642
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 16:30:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6496c4ed38aso200172a12.1
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 06:14:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765462456; x=1766067256; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Quf//nawr91qVjpDUM81lB+EUItw06tEVljMWzee2l4=;
- b=FvGtHAO3eWiDF7LvM1iTKsXSGfn4XDZ3NscSqVcsWKALVEEyWzWQQh+0ki7jTYlBYg
- ffTJzmcMxXkOlFutaeoOkDnwQOWnNtdpgtcYjXMzzs9lco3UhZdlNpfv5yUTAvMJOoOo
- qw3PVxvbNZCIdhgTzDjih+IV1jG5zcGZYHgIiaz2Y5XlW0NGSnGw45vatk62J9JAmiO2
- vUCJ7JjFshIl7xeP+M7H++OYBhNPQtyPi7kxRDmheI7hnPvcWznl5BEUlj6V/saOMYFe
- 2DRT4w6ftg2c4P7BBhX12NDEkjsJP/K1PCS414RFPsd5MiSs69P71j+V+ab5GMe/M6Wq
- ZhHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765462456; x=1766067256;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Quf//nawr91qVjpDUM81lB+EUItw06tEVljMWzee2l4=;
- b=j62x+3hwTtgWLBa+kieT7O4mymESg9Vv84jlP59kDWJbyka0x9WmBhYMJ62+q69YMv
- a52OZEhXfbNSkovVPUjeGgpExWO+mh7AGzuBpyz6d3pNpuo681foyGUnnQAXAzrYqhfu
- 62WPj3ZA4bjlOBcDPFeXaaYOhs4C/BlfmA1UPDAxu3yg404bVFeVdPIlZ2tRkPlG0l2g
- Rcsd9gMqEGKWyN0tr2w2PP9Yt25pGcVYWlnmjuO0lgOJkh/WKFEUO2v6lkpupj2UDvWK
- 3rwPj7AXdglg8GWN/D46bwfWktwE8a6dlUAKyxLFsdmkiH/cvMebIJqgKynjgd2VgOKs
- aJ7w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUK9V/wih67Z98RMnu6sbPxUDVFwJKccn1IbPDLgOATjrDw6sUiaouuriVhoaDkeKtCXgRSEyg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqO6Fih0+PCNZS7QUzn/bieCu0U0/GX6WKGy7h5Z8Pv+AYfmV1
- rw9AE/fHInEHyCaYE/kRZiD5Ms6bmY9pWuSJrwdbgf5CNd5sg2aeMfa4zK4h+BupB0WrsDt17cN
- TrCMCHGROZCxC6LT9Xq7WqKrzvCuWVbo=
-X-Gm-Gg: AY/fxX74LaCS90vVnwak/OoGA1wzmbfhango4aGcKX6d3wZKL2TLMvDJimyvhjkwzzi
- 8US0Oeui4uI8nUWMS5DsSKVZzBC/lWIXgstDQNfGGI89s+MCJdNL6YwHn9tzfVJW7JsFbm4ruF2
- 9CfUumGaAK1lj/Pv20xj3Y1eIg5kOOIt23ruIVDbjeqdlfYKGZytQXbHZkWhZqDQJz1T4yb8RyR
- 2dyuR97L4CqXvN41HRxaMsG0LiKZFGRA5kDGY1Y0B8LQkH0RIw+E8se4fdHECkNmKvJFjFT+zqd
- NX0cP1rOQlqHjMaF0H+6YnaEjsbIySZDxQXr3V/i3/Lw/n3D0Ah+K6fo31I8OCUTjsMWie8rIP2
- 4++mH8YhGinymKhL+/1QEJLTNtMoEZC74gAbqKa4dXdJluHlGJot2gNZV/pN3u8dKurF2Zjq6sq
- 4=
-X-Google-Smtp-Source: AGHT+IHPFbuGIoMRuwevo6siRqThjINSdb1s839g/AP+AZPC/SJw3jvIuL87gW6EEuIdfUgN20gM2jhkgYNzkIwuDzQ=
-X-Received: by 2002:a05:6402:518b:b0:647:54ba:6c42 with SMTP id
- 4fb4d7f45d1cf-6496cb686dfmr6278691a12.4.1765462455734; Thu, 11 Dec 2025
- 06:14:15 -0800 (PST)
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1765467055;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dfXX3HaCsDLeyCs/ZwvGCesFs3v3RrvHpA739HZZZEk=;
+ b=m4KhfdivWUXCnrMCIDYE9pAfjM4K6VRyUrBLI3GajGhzZEjkgJ6j+FC/WUUCNeYVxhHV+9
+ 95rw3E5o8OzaAwcVT2r4VBPoYQPSpfBbr3HOZyLFiKX5+Myb9ioCVDqZCjQc+qp6bfiQaL
+ O1ehgxlP3U7P1Ga9mNOSCIsaIfpvLAh5+fZZhU/mNgK8EPx6D4q2zbj2tx4dCsDTzv8o5W
+ V4XvTbdvgcP2frtsx5GgyBI8ZMK3O11mVg5P/e1ol7PA0hUl5Ij9AgvSKToq6mQEcdFp5y
+ A/5HVz8eRqEZsp+FxvK119oaGsbTebGSoU3oY2HYi/e2Rbae78gyp09rEC3+PQ==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Date: Thu, 11 Dec 2025 15:30:41 +0000
+Subject: [PATCH v3 1/2] arm: meson: add support for EFI capsule updates
 MIME-Version: 1.0
-References: <20251209211807.497095-1-pbrobinson@gmail.com>
- <7fa7ee4e-94ab-4338-bb01-481a68768922@cherry.de>
- <d74fb99d-f9aa-4417-915c-6b8a00a443b2@kwiboo.se>
-In-Reply-To: <d74fb99d-f9aa-4417-915c-6b8a00a443b2@kwiboo.se>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 11 Dec 2025 14:14:04 +0000
-X-Gm-Features: AQt7F2q4EZnrstXdLHNg4ooPSH_ghEh7tFnK1opD9nGXt-9S9_6oCVELTM6vdOg
-Message-ID: <CALeDE9NMnY+N2psmYr63O5nXA3+ibb87amKFWLWdDL5F9M0zxw@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: rk356x: Stop overriding sdhci/mmc aliases
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251211-meson-capsule-v3-1-1cf15a2d2498@postmarketos.org>
+References: <20251211-meson-capsule-v3-0-1cf15a2d2498@postmarketos.org>
+In-Reply-To: <20251211-meson-capsule-v3-0-1cf15a2d2498@postmarketos.org>
+To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Viacheslav Bocharov <adeep@lexina.in>, 
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Ferass El Hafidi <funderscore@tauchgang.dev>, 
+ ~postmarketos/upstreaming@lists.sr.ht, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4965;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=R3/j5mwQ35bOujgm7R7yKQqif0z7oiKuBOgLb5KDLRk=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpOuOqdtEAwVjyaXQXdZNlSXpDyqCZZmGyiE7w8
+ D7tWAS4ShSJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaTrjqgAKCRCEr8vQ14ma
+ AzrZD/wIX5FpoizvP68oDirkCVE3qet3zORxGV2uNXLXPmq9hTn5cPdwwNMYNKJpfNreJKxCfXs
+ uazHke/lRv6eRth6oE/cbaacFk0YAiUnQcjOtTWyLLvJ/qkTP8+ZClpduqjlH5vgrKby4sXaXsY
+ d5IDpz3lwXc99ul7hOlGsFJ5+OPiejogkoPOzl9jg494ZleuwhaatCoYnyGgn85GBfyh9jcE4ZR
+ /b37iWz2TExfPOCDpN/uBXtMH25H5nY7myZkUvoaVKC5NpHKysrCK4NUZqEP3+xyIQFIsUrWUnN
+ 6j5t7iZLibmj5pmRgYa8X4oIyZ8yhRqeZr9SSSqJ9/BrEpR0tti4K5DaoYgIMUeiSx076+yUuFl
+ DYWYO1W0myj3inXWaFtYr+VU1bMBU3p2qPSW7oKmXqW2igeAbQXoCojSIEqYTrwbqdSo/zs+HBU
+ /5Y4f5b+61xqL5+rQEk72WOvv9RrRwvhXVtOnTP9GXp0Nz1iOUGL9Kknge27BccfCptzVmf9ovN
+ ay/FalU982CNUKsybMTAN9fJW+wWCapmCW4RDxVJUaZ1ro3JiLZyNSj+bE/YzaMtWSyL+C432DI
+ F8rPSroYFjL2M/ds8QYuZ5Nq4nve344mp5JLDuaelHI9dvtxhAXhY9u5onUMeG6V/HxUGt0tqCl
+ FaT+0hJfhQac6jQ==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,55 +92,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Hi,
->
-> On 12/11/2025 11:56 AM, Quentin Schulz wrote:
-> > Hi Peter,
-> >
-> > On 12/9/25 10:18 PM, Peter Robinson wrote:
-> >> Upstream device tree has rules where the aliases are board
-> >> specific settings, no SoC settings. Looking at upstream
-> >> rk356x boards there's a lot of variation in the setting of
-> >> mmc0/mmc1 based on the device so we should not be overriding
-> >> this here and now we sync to upstream we should just consume
-> >> those settings, to do otherwise confuses users.
-> >>
-> >
-> > Do all boards with DM_SEQ_ALIAS config set have these aliases set?
-> > Otherwise the MMC device index may change between reboots.
-> >
-> > While this change is appropriate, we should care to not break users just
-> > for the sake of being correct. The easiest check could be to build all
-> > rk356* DTB before and after your patch and see if it changes something
-> > and for those boards whose DTB changed, whether they use DM_SEQ_ALIAS in
-> > some U-Boot phase or not.
->
-> To my knowledge all rk33/rk35 boards should be using DM_SEQ_ALIAS in SPL
-> and proper in defconfig, at least that is something I have been tested
-> or patched in the past for most Rockchip rk33/rk35 SoCs.
->
-> The mmc0/mmc1 aliases have been added to the u-boot.dtsi to ensure that
-> mmc1  and mmc0 used in e.g. boot_targets env is predictable, similar to
-> all older RK SoCs where mmc0=eMMC and mmc1=SD-card (in U-Boot).
->
-> Removing these aliases will most likely change boot targets order in
-> U-Boot proper, please do not remove these aliases and without first
-> having a fix/replacement for the boot targets change in place.
+Previously, few Amlogic devices supported EFI capsule updates.
+Generally only the Libre Computer ones with SPI flash supported it,
+thanks to board-specific code.
 
-The problem we have is that in cases where Linux is also using the DT
-provided by U-Boot we end up with things that can change and we should
-not be changing/overriding what the board is specifying, and it's
-explicitly forbidden to do this in the upstream DT so we should not be
-overriding this.
+This commit commonises capsule update support across supported
+Amlogic boards.  Similar to Qualcomm's support for it, the dfu string
+and firmware name is automatically generated at runtime depending on
+which device we are booted from.  Right now this supports flashing to
+the eMMC/SD and SPI flash.
 
-The reason this came to my attention is because of bug reports of the
-way it worked in Linux where they were named differently depending on
-whether the U-Boot DT was used in Linux or whether one built from the
-Linux kernel tree did.
+As usual, the capsule UUID is automatically generated.  You can get it
+by enabling CONFIG_CMD_EFIDEBUG and running:
 
-If there are specific boards that regress with this we should fix the
-individual boards rather than use a sledge hammer approach, which is
-disallowed for upstream DTs, and which causes other problems for
-boards that are doing it correctly.
+	=> efidebug capsule esrt
+	========================================
+	ESRT: fw_resource_count=1
+	ESRT: fw_resource_count_max=1
+	ESRT: fw_resource_version=1
+	[entry 0]==============================
+	ESRT: fw_class=796180D4-AAB2-50F1-B16A-53DFF9CA89B2
+	ESRT: fw_type=unknown
+	ESRT: fw_version=0
+	ESRT: lowest_supported_fw_version=0
+	ESRT: capsule_flags=0
+	ESRT: last_attempt_version=0
+	ESRT: last_attempt_status=success
+	========================================
 
-Peter
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+---
+ arch/arm/include/asm/arch-meson/boot.h |  2 ++
+ arch/arm/mach-meson/Makefile           |  2 +-
+ arch/arm/mach-meson/board-common.c     |  5 +++
+ arch/arm/mach-meson/capsule.c          | 61 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 69 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/include/asm/arch-meson/boot.h b/arch/arm/include/asm/arch-meson/boot.h
+index a11dfde719e..e66b45983fe 100644
+--- a/arch/arm/include/asm/arch-meson/boot.h
++++ b/arch/arm/include/asm/arch-meson/boot.h
+@@ -21,6 +21,8 @@ int meson_get_boot_device(void);
+ 
+ int meson_get_soc_rev(char *buff, size_t buff_len);
+ 
++void meson_setup_capsule(void);
++
+ /**
+  * meson_get_socinfo - retrieve cpu_id of the Amlogic SoC
+  *
+diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+index 535b0878b91..640921e2b8e 100644
+--- a/arch/arm/mach-meson/Makefile
++++ b/arch/arm/mach-meson/Makefile
+@@ -2,7 +2,7 @@
+ #
+ # Copyright (c) 2016 Beniamino Galvani <b.galvani@gmail.com>
+ 
+-obj-y += board-common.o sm.o board-info.o
++obj-y += board-common.o sm.o board-info.o capsule.o
+ obj-$(CONFIG_MESON_GX) += board-gx.o
+ obj-$(CONFIG_MESON_AXG) += board-axg.o
+ obj-$(CONFIG_MESON_G12A) += board-g12a.o
+diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+index 39774c43049..e8012604c33 100644
+--- a/arch/arm/mach-meson/board-common.c
++++ b/arch/arm/mach-meson/board-common.c
+@@ -145,6 +145,11 @@ int board_late_init(void)
+ {
+ 	meson_set_boot_source();
+ 
++	if (CONFIG_IS_ENABLED(DFU) && CONFIG_IS_ENABLED(EFI_LOADER)) {
++		/* Generate dfu_string for EFI capsule updates */
++		meson_setup_capsule();
++	}
++
+ 	return meson_board_late_init();
+ }
+ 
+diff --git a/arch/arm/mach-meson/capsule.c b/arch/arm/mach-meson/capsule.c
+new file mode 100644
+index 00000000000..6e968a59c2c
+--- /dev/null
++++ b/arch/arm/mach-meson/capsule.c
+@@ -0,0 +1,61 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2025, Ferass El Hafidi <funderscore@postmarketos.org>
++ */
++
++#include <asm/arch/boot.h>
++#include <dm.h>
++#include <efi_loader.h>
++#include <mmc.h>
++
++/*
++ * To be able to support multiple devices and flash to the correct one we need
++ * to automatically generate the dfu_string and fw_name to match the device we
++ * are booted from. This is done by meson_setup_capsule() which is then called
++ * in board_late_init(). Right now we support EFI capsule updates on SPI flash,
++ * eMMC and SD cards.
++ */
++struct efi_fw_image fw_images[] = {
++	{
++		.image_index = 1,
++	},
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = NULL, /* to be set in meson_capsule_setup */
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++/*
++ * TODO: Support usecase e.g. FIT image on eMMC + SPL on SD.
++ */
++void meson_setup_capsule(void)
++{
++	static char dfu_string[32] = { 0 };
++	int mmc_devnum = 0; /* mmc0 => SD card */
++	u32 max_size = 0x2000; /* 4 MB (MMC sectors are 512 bytes each) */
++	u32 offset = 0x1; /* offset for flashing to eMMC/SD */
++	int boot_device = meson_get_boot_device();
++
++	switch (boot_device) {
++	case BOOT_DEVICE_EMMC:
++		mmc_devnum = 1; /* mmc1 is always eMMC */
++		fallthrough;
++	case BOOT_DEVICE_SD:
++		snprintf(dfu_string, 32, "mmc %d=u-boot.bin raw %d %d", mmc_devnum, offset, max_size);
++		fw_images[0].fw_name = u"U_BOOT_MESON_MMC";
++		break;
++	case BOOT_DEVICE_SPI:
++		/* We assume there's only one SPI flash */
++		fw_images[0].fw_name = u"U_BOOT_MESON_SPI";
++		snprintf(dfu_string, 32, "sf 0:0=u-boot.bin raw 0 %d", max_size);
++		break;
++	default:
++		debug("setup_capsule: Boot device %d unsupported\n", boot_device);
++		return;
++	}
++	debug("EFI Capsule DFU string: %s", dfu_string);
++
++	update_info.dfu_string = dfu_string;
++}
+
+-- 
+2.51.2
+
