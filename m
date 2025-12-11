@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ECEDD41C01
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37244D41C01
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5216483CF2;
-	Thu, 11 Dec 2025 09:05:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2727683D13;
+	Thu, 11 Dec 2025 09:06:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FVrm9Pic";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GsDznUFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D7F83C08; Thu, 11 Dec 2025 09:05:58 +0100 (CET)
+ id 0AA6183D07; Thu, 11 Dec 2025 09:06:00 +0100 (CET)
 Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
  [IPv6:2607:f8b0:4864:20::b12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9084E83CD3
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:05:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05B0E83CF5
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:05:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
 Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-641e9422473so568094d50.2
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:55 -0800 (PST)
+ 956f58d0204a3-64464de1c45so579884d50.2
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765440354; x=1766045154; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765440355; x=1766045155; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QFMQT9UKIfgua+VxhMGaz0wIiXKiswFPijcIUUiLPD4=;
- b=FVrm9PichpV8Pn2IdFdPENU9KY7pEDLOW7wMOmMS8hCxo+DpAyzgJmmPFkjJU+P8Tl
- sPgt30as1iqBytGYu+eXQee2GtpUO9u+b44fESL3SISIA72vBqB89+qwVxg7XEx2BWos
- OQRQBuKbUV9Emfw5XYuy99b9o1B+rtK6bScaGJhBg18tH0SvM8Y+r/50O1m6Hz3LFhVD
- DXehhj1+cKFSDXWQT/1tkG0mbUK+fzUmsbekTK0LYn0nCO0A9OjIYBhuHynQkgOB7byV
- 7eAcUeSKkMaUrEqBVxfw5ThLaHatAGvdCskN6PeO0DQNDGAOEoLamBHLD3E9kw54k2gT
- 18eQ==
+ bh=jCGDsGL35f6oTAAVg8QHhgwHv970ZxyBCgXKVpSF4rE=;
+ b=GsDznUFeqg/7YZv4Hy+X9ecxxgyVmkpR40DGkIKtok9xRkUkMTECpt2cbG9CP0PA4p
+ +8sB34iHv/3IliBxSgBPE0+Gs64zw7WyTBGPza3TLF+gAF7VcwF6y7z2PPpRna1dFqf+
+ c1m//BstTU2hcLquVZDrpAqDMNbXIY0CVftVlm9HG0GNIUOHYnh0Fq3e8eEnjtO1rn93
+ iBQldfSns59fAtLNT3B0wzp6d1UiWaj4it5rI1q+z0JNJCG2Mfj0IELP5MLlE3DCGXVh
+ Ka+vKKT34UjZu70HwvMpSXZl6/Hr9M2a+ReK4IGVn0jjnUw4WQxAADB1CLhFWSLV1w7G
+ /oRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765440354; x=1766045154;
+ d=1e100.net; s=20230601; t=1765440355; x=1766045155;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=QFMQT9UKIfgua+VxhMGaz0wIiXKiswFPijcIUUiLPD4=;
- b=bjclrx9M7s1dsNsluAJGIHZT9OfW+VYyjIQSlKIuwHfqijOUFLOMHz9eN+++dtZQzA
- HHtConzI0SlIFddaRzWWJgFwEc2kAa/1QKZoXTgly3NrgLRBFJKnuQpnUxBRCgUKbcqh
- FrDx9K9v342K9KRt3/wmr4qy0qmMN1Onrc5KgJENAt6BU98MWGZkiHVDHEEL+EOYs4Xz
- qFC1RJ62d9dt5B/dmhy352qPK5TRUu4JIX3kC/V4M4LeawgoPblEgrMeI92GB+sbk0mC
- xkYGBi33VLq3Q9pgCBbitPfSSRC8b+aNdabHycYyXh5gr4UNyuIoPaC8TqSmxRxYY1d6
- 2afQ==
-X-Gm-Message-State: AOJu0Yy67gD+/wbGQWHs38HYwMvB0hN3//5jG8kEcGFu/zekyhuOzRfo
- MFP/h/Mi/s+gU7h0Phz0ulKfq5WKmiFDpaza+P5uJMnGMDqIdkp+UqCa0r0H
-X-Gm-Gg: AY/fxX7nMybm7xdWstxaylpaS1f+WSufs21pvGy4IIXyB6WZoHJob4leMpyem9LfLTI
- GQ3VziVEU6xyLlUAZrA+3iL4jIMCQj6YZGUN4NyNjX1E/H2lG0MHfAsEiOZ/Zh/gm6LuRyirHay
- Zc8SLG1jYQJ8Pxxt3z8he33adNIF42HZVUTUb5SGdTbWlNbuG/S+IvCP75vkG5ymqKiinZ+xcu7
- jtruBoXzR6NuMa484eaLnmAmtQQndNp4EAbgpEBPp5zNq5LlktpixB9kbS9L5CJNFWnLrUUY996
- OXFqTdD0Nh22DaI38SkXMSJYHxczwTlmONMxQc8OnVCZwzoSH4gWgWjAO5Xkp71djwFlXpaoWF4
- jhSB6C6JIKoQkuJPalefk8QQOml1Jah9e46VqbyruzA6ytIi0IWkWI0MroB5o68Frctah/UvoFe
- /l0zD88VW9DV38At1/3OVGEquflCqE3ZzZ8FFc
-X-Google-Smtp-Source: AGHT+IHuUxKf4YiHbe7xJoz9j95a+kNOrdrJpCnbpTkdWRPBIU9JPPKeKNVwi9htE5jbxM295ZpW9g==
-X-Received: by 2002:a05:690c:a58f:b0:78d:1130:78a with SMTP id
- 00721157ae682-78d113012e8mr66608587b3.45.1765440353748; 
- Thu, 11 Dec 2025 00:05:53 -0800 (PST)
+ bh=jCGDsGL35f6oTAAVg8QHhgwHv970ZxyBCgXKVpSF4rE=;
+ b=QaVU37d1kYRn8qeF3WCEUkhQcYaQDimK4gco4zph/NeXpzz4D5+BIWDK6mfm9G0Ohm
+ 22fS+IvbaF10cIAo2hWyqGBUVZhU88QncmPZhMddC9v1iNHemME28H7Zh2WJJZTJ9suf
+ ILeE3Sf7yB7n3zXdUzBD/JqdsvvfRICjfFh4JH+hN9M0M0YWYfhIPClgS1KSqdxJtBXI
+ k+GQEWysRmkCqCwVZOemcpjPAWWo4RXLzX7W9I6mJiknNTMWxTzLoTwtt/FaD5L3TZfD
+ b76YTjNZSWo9IpE2RYpFgjgaBuB//kDgBWn/vGv96hnTQ2odPda0t/sveGRNttVcZwTW
+ qTlQ==
+X-Gm-Message-State: AOJu0YwoibwZzo6qwkqap6JMti1ImVMgwcKuL5WuJjgOXaf5bDqCoubm
+ 5KLYMX+W9QkV5Mx5aAd3u6nAVFoTiq9+XsxL5GNP+lgTyF/BXJ4FPEv86CP+
+X-Gm-Gg: AY/fxX7gj7RYSCqsauBZlSYNQkZXiuegmDUk9Og76Kn6jK0MMPVcM0niI21luVVOmQc
+ ESrgLzpsCncOW9a9TzhaTcBsdl4XBgZDaRP65TqCmbBdG4i+mZ5W+57JL3b2WM30PbQfC0lJ6xg
+ xfjSAERyxkyTVg8fRbpL+MeWONmzkJ8rlXZI6BCc7eT5XAwWi5cTMewp/fi2YDkpgkknuLLw+83
+ mLQGSRJxvDF6EkLWMDGmxhO0OhZiUUlxOQWwWM4p843jYYojs28gVKiNiNEHlMrK1/vqjcwI1Bg
+ ev4PoYhbsmsHobKiZGVC6YIDtt7Z///ukH8HMEkufTOUwWmPVA0H9alJ7yY7R2OprvWNpQ+ZT2i
+ 1uxDw9fXofns0014/uHK0QY+4SxDFuZ12CzBVHr00ITL9U5W/JkLtYjktlKtV+W5uiXCPvpjWog
+ zKQIjpaQRTRD/T34aioY2bQ7TAikU1nholHlhS
+X-Google-Smtp-Source: AGHT+IE+0OjglcbCnvIdOlZr9stdktA0EMZTo1rsllO7i/kvzJ8vacGLN3KxwXOpyn1dN240S5TV6A==
+X-Received: by 2002:a05:690e:13ca:b0:63e:30c0:75e with SMTP id
+ 956f58d0204a3-6446eb28f9emr4100877d50.54.1765440355342; 
+ Thu, 11 Dec 2025 00:05:55 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.52
+ 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 00:05:52 -0800 (PST)
+ Thu, 11 Dec 2025 00:05:54 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Caleb Ethridge <caleb.ethridge@analog.com>,
+ Philip Molloy <philip.molloy@analog.com>,
  Ian Roberts <ian.roberts@timesys.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/12] board: adi: Add SOMCRR infrastructure
-Date: Thu, 11 Dec 2025 03:03:57 -0500
-Message-ID: <20251211080414.5363-7-malysagreg@gmail.com>
+Subject: [PATCH 07/12] board: adi: Add support for SC573-ezkit
+Date: Thu, 11 Dec 2025 03:03:58 -0500
+Message-ID: <20251211080414.5363-8-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <20251211080414.5363-1-malysagreg@gmail.com>
 References: <20251211080414.5363-1-malysagreg@gmail.com>
@@ -103,169 +105,685 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds infrastructure and shared library code for building targets
-that use the ADI SOMCRR-EZKIT and SOMCRR-EZLITE carrier boards. These
-are not used directly as board targets in their own right.
+This adds support for the Analog Devices SC573 EZKIT.
 
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+Signed-off-by: Philip Molloy <philip.molloy@analog.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
 
 ---
 
-(no changes since v2)
+Changes in v3:
+- Add one more GPIO that was named incorrectly
+- Removed whitespace in .env
 
 Changes in v2:
 - GPIO names and polarities adjusted to match logical usage
 
- board/adi/carriers/Makefile        |  8 +++++++
- board/adi/carriers/somcrr.h        | 14 +++++++++++
- board/adi/carriers/somcrr_common.c | 19 +++++++++++++++
- board/adi/carriers/somcrr_ezkit.c  | 38 ++++++++++++++++++++++++++++++
- board/adi/carriers/somcrr_ezlite.c | 24 +++++++++++++++++++
- 5 files changed, 103 insertions(+)
- create mode 100644 board/adi/carriers/Makefile
- create mode 100644 board/adi/carriers/somcrr.h
- create mode 100644 board/adi/carriers/somcrr_common.c
- create mode 100644 board/adi/carriers/somcrr_ezkit.c
- create mode 100644 board/adi/carriers/somcrr_ezlite.c
+ arch/arm/dts/sc573-ezkit.dts          | 240 ++++++++++++++++++++++++++
+ arch/arm/dts/sc57x.dtsi               | 123 ++++++++++++-
+ arch/arm/dts/sc5xx.dtsi               |  76 +++++++-
+ board/adi/sc573-ezkit/Makefile        |   6 +
+ board/adi/sc573-ezkit/sc573-ezkit.c   |  21 +++
+ board/adi/sc573-ezkit/sc573-ezkit.env |  18 +-
+ configs/sc573-ezkit_defconfig         |  90 ++++++++++
+ 7 files changed, 562 insertions(+), 12 deletions(-)
+ create mode 100644 board/adi/sc573-ezkit/Makefile
+ create mode 100644 board/adi/sc573-ezkit/sc573-ezkit.c
+ create mode 100644 configs/sc573-ezkit_defconfig
 
-diff --git a/board/adi/carriers/Makefile b/board/adi/carriers/Makefile
+diff --git a/arch/arm/dts/sc573-ezkit.dts b/arch/arm/dts/sc573-ezkit.dts
+index 0dc2962618c..a848d55be62 100644
+--- a/arch/arm/dts/sc573-ezkit.dts
++++ b/arch/arm/dts/sc573-ezkit.dts
+@@ -5,9 +5,249 @@
+ 
+ /dts-v1/;
+ 
++#include "sc5xx.dtsi"
+ #include "sc57x.dtsi"
+ 
+ / {
+ 	model = "ADI SC573-EZKIT";
+ 	compatible = "adi,sc573-ezkit", "adi,sc57x";
+ };
++
++&i2c0 {
++	gpio_expander1: mcp23017@21 {
++		compatible = "microchip,mcp23017";
++		reg = <0x21>;
++		gpio-controller;
++		#gpio-cells = <2>;
++		bootph-pre-ram;
++
++		eeprom {
++			gpio-hog;
++			gpios = <0 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "eeprom-en";
++			bootph-pre-ram;
++		};
++
++		uart0-flow-en {
++			gpio-hog;
++			gpios = <1 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "uart0-flow-en";
++			bootph-pre-ram;
++		};
++
++		mlb {
++			gpio-hog;
++			gpios = <5 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "mlb-en";
++			bootph-pre-ram;
++		};
++
++		can0 {
++			gpio-hog;
++			gpios = <6 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "can0-en";
++			bootph-pre-ram;
++		};
++
++		can1 {
++			gpio-hog;
++			gpios = <7 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "can1-en";
++			bootph-pre-ram;
++		};
++
++		adau1962 {
++			gpio-hog;
++			gpios = <8 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "adau1962-en";
++			bootph-pre-ram;
++		};
++
++		adau1979 {
++			gpio-hog;
++			gpios = <9 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "adau1979-en";
++			bootph-pre-ram;
++		};
++
++		sd-wp-en {
++			gpio-hog;
++			gpios = <11 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "sd-wp-en";
++			bootph-pre-ram;
++		};
++
++		spi2flash-cs {
++			gpio-hog;
++			gpios = <12 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "spi2flash-cs";
++			bootph-pre-ram;
++		};
++
++		spi2d2-d3 {
++			gpio-hog;
++			gpios = <13 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "spi2d2-d3-en";
++			bootph-pre-ram;
++		};
++
++		spdif-opt {
++			gpio-hog;
++			gpios = <14 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "spdif-optical-en";
++			bootph-pre-ram;
++		};
++
++		spdif-dig {
++			gpio-hog;
++			gpios = <15 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "spdif-digital-en";
++			bootph-pre-ram;
++		};
++	};
++
++	gpio_expander2: mcp23017@22 {
++		compatible = "microchip,mcp23017";
++		reg = <0x22>;
++		gpio-controller;
++		#gpio-cells = <2>;
++		bootph-pre-ram;
++
++		pushbutton3 {
++			gpio-hog;
++			gpios = <0 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "pushbutton3-en";
++			bootph-pre-ram;
++		};
++
++		pushbutton2 {
++			gpio-hog;
++			gpios = <1 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "pushbutton2-en";
++			bootph-pre-ram;
++		};
++
++		pushbutton1 {
++			gpio-hog;
++			gpios = <2 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "pushbutton1-en";
++			bootph-pre-ram;
++		};
++
++		leds {
++			gpio-hog;
++			gpios = <3 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "leds-en";
++			bootph-pre-ram;
++		};
++
++		flg0 {
++			gpio-hog;
++			gpios = <4 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "flg0_loop";
++			bootph-pre-ram;
++		};
++
++		flg1 {
++			gpio-hog;
++			gpios = <5 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "flg1_loop";
++			bootph-pre-ram;
++		};
++
++		flg2 {
++			gpio-hog;
++			gpios = <6 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "flg2_loop";
++			bootph-pre-ram;
++		};
++
++		flg3 {
++			gpio-hog;
++			gpios = <7 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "flg3_loop";
++			bootph-pre-ram;
++		};
++
++		adau1977 {
++			gpio-hog;
++			gpios = <8 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "adau1977_en";
++			bootph-pre-ram;
++		};
++
++		adau1977_fault_rst {
++			gpio-hog;
++			gpios = <9 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "adau1977_fault_rst_en";
++			bootph-pre-ram;
++		};
++
++		thumbwheel {
++			gpio-hog;
++			gpios = <10 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "thumbwheel_oe";
++			bootph-pre-ram;
++		};
++
++		engine_rpm {
++			gpio-hog;
++			gpios = <11 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "engine_rpm_oe";
++			bootph-pre-ram;
++		};
++	};
++};
++
++&eth0 {
++	snps,reset-gpio = <&gpio0 ADI_ADSP_PIN('A', 5) GPIO_ACTIVE_LOW>;
++};
++
++&gpio0 {
++	emac0_phy_pwdn {
++		gpio-hog;
++		output-high;
++		gpios = <ADI_ADSP_PIN('A', 4) GPIO_ACTIVE_HIGH>;
++	};
++};
++
++&mmc {
++	status = "okay";
++};
++
++&spi2 {
++	flash1: is25lp512@1 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor", "is25lp512";
++		reg = <1>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++		spi-max-frequency = <10000000>;
++		bootph-pre-ram;
++	};
++};
+diff --git a/arch/arm/dts/sc57x.dtsi b/arch/arm/dts/sc57x.dtsi
+index ddfcae8d190..e4cc612959f 100644
+--- a/arch/arm/dts/sc57x.dtsi
++++ b/arch/arm/dts/sc57x.dtsi
+@@ -3,19 +3,134 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-#include "sc5xx.dtsi"
+-
+ / {
+-	gic: interrupt-controller@310b2000 {
+-		compatible = "arm,cortex-a5-gic";
++	gic: interrupt-controller@310B2000 {
++		compatible = "arm,cortex-a5-gic", "arm,cortex-a9-gic";
+ 		#interrupt-cells = <3>;
+ 		#address-cells = <0>;
+ 		interrupt-controller;
+ 		reg = <0x310B2000 0x1000>,
+ 		      <0x310B4000 0x100>;
+ 	};
++
++	soc {
++		mmc: mmc0@31010000 {
++			compatible = "snps,dw-mshc";
++			reg = <0x31010000 0x400>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&mmc_default>;
++			bus-width = <4>;
++			fifo-depth = <128>;
++			clock-names = "biu", "ciu";
++			max-frequency = <52000000>;
++			status = "disabled";
++		};
++
++		usb0: musb@310c1000 {
++			compatible = "adi,sc5xx-musb";
++			reg = <0x310c1000 0x390>;
++			interrupts = <GIC_SPI 124 IRQ_TYPE_LEVEL_HIGH>,
++						 <GIC_SPI 125 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "mc", "dma";
++			status = "okay";
++		};
++
++	};
+ };
+ 
+ &timer0 {
+ 	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
+ };
++
++&pinctrl0 {
++	mmc_default: mmc_pins {
++		adi,pins = <ADI_ADSP_PIN('E', 12) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('E', 13) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('E', 14) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('E', 15) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 0) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 1) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 2) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 3) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 4) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 7) ADI_ADSP_PINFUNC_ALT2>,
++					<ADI_ADSP_PIN('C', 12) ADI_ADSP_PINFUNC_ALT1>;
++	};
++
++	eth0_default: eth0_pins {
++		adi,pins = <ADI_ADSP_PIN('B', 7) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 8) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 6) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 5) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 13) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 12) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 14) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 15) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 9) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 4) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 0) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 2) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 10) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('A', 11) ADI_ADSP_PINFUNC_ALT0>;
++	};
++
++	uart0_default: uart0_pins {
++		bootph-pre-ram;
++		adi,pins = <ADI_ADSP_PIN('F', 8) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('F', 9) ADI_ADSP_PINFUNC_ALT0>;
++	};
++
++	spi2_default: spi2_pins {
++		adi,pins = <ADI_ADSP_PIN('B', 14) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 10) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 11) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 12) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 13) ADI_ADSP_PINFUNC_ALT0>,
++					<ADI_ADSP_PIN('B', 15) ADI_ADSP_PINFUNC_ALT0>;
++	};
++};
++
++&pinctrl0 {
++	adi,npins = <92>;
++};
++
++&gpio0 {
++	adi,ngpios = <92>;
++};
++
++&clk {
++	compatible = "adi,sc57x-clocks";
++};
++
++&uart0 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
++
++&spi2 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK1>;
++	reg = <0x31044000 0x1000>;
++};
++
++&wdog {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
++
++&eth0 {
++	reg = <0x3100C000 0x1000>;
++};
++
++&mmc {
++	clocks = <&dummy>, <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
++
++&i2c0 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
++
++&i2c1 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
++
++&i2c2 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
+diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
+index b4de1b51bb9..824e8d2ee7d 100644
+--- a/arch/arm/dts/sc5xx.dtsi
++++ b/arch/arm/dts/sc5xx.dtsi
+@@ -100,7 +100,81 @@
+ 			clocks = <&sys_clkin0>, <&sys_clkin1>;
+ 			clock-names = "sys_clkin0", "sys_clkin1";
+ 			status = "okay";
+-			bootph-all;
++			bootph-pre-ram;
++		};
++
++		uart0: serial@0x31003000 {
++			compatible = "adi,uart4";
++			reg = <0x31003000 0x1000>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&uart0_default>;
++			clock-names = "sclk0";
++			status = "okay";
++			bootph-pre-ram;
++		};
++
++		spi2: spi2 {
++			compatible = "adi,spi3";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&spi2_default>;
++			bus-num = <2>;
++			spi-max-frequency = <10000000>;
++			clock-names = "spi";
++			status = "okay";
++			bootph-pre-ram;
++		};
++
++		wdog: watchdog@31008000 {
++			compatible = "adi,wdt";
++			reg = <0x3108c000 0x1000>,
++					<0x31089000 0x1000>,
++					<0x31008000 0x1000>;
++			reg-names = "rcu", "sec", "wdt";
++			clock-names = "sclk0";
++			status = "disabled";
++			bootph-pre-ram;
++		};
++
++		eth0: eth0 {
++			compatible = "snps,arc-dwmac-3.70a";
++			phy-mode = "rgmii";
++			pinctrl-names = "default";
++			pinctrl-0 = <&eth0_default>;
++			snps,reset-active-low;
++			snps,reset-delays-us = <1000 1000 1000>;
++			status = "okay";
++		};
++
++		i2c0: i2c0@31001400 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			compatible = "adi-i2c";
++			reg = <0x31001400 0x1000>;
++			clock-names = "i2c";
++			status = "okay";
++			bootph-pre-ram;
++		};
++
++		i2c1: i2c1@31001500 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			compatible = "adi-i2c";
++			reg = <0x31001500 0x1000>;
++			clock-names = "i2c";
++			status = "okay";
++			bootph-pre-ram;
++		};
++
++		i2c2: i2c2@31001600 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			compatible = "adi-i2c";
++			reg = <0x31001600 0x1000>;
++			clock-names = "i2c";
++			status = "okay";
++			bootph-pre-ram;
+ 		};
+ 	};
+ };
+diff --git a/board/adi/sc573-ezkit/Makefile b/board/adi/sc573-ezkit/Makefile
 new file mode 100644
-index 00000000000..cefd2cc837f
+index 00000000000..0ea725b992b
 --- /dev/null
-+++ b/board/adi/carriers/Makefile
-@@ -0,0 +1,8 @@
++++ b/board/adi/sc573-ezkit/Makefile
+@@ -0,0 +1,6 @@
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
-+# (C) Copyright 2024 - Analog Devices, Inc.
++# (C) Copyright 2025 - Analog Devices, Inc.
 +#
 +
-+obj-y += somcrr_common.o
-+obj-$(CONFIG_ADI_CARRIER_SOMCRR_EZKIT) += somcrr_ezkit.o
-+obj-$(CONFIG_ADI_CARRIER_SOMCRR_EZLITE) += somcrr_ezlite.o
-diff --git a/board/adi/carriers/somcrr.h b/board/adi/carriers/somcrr.h
++obj-y	+= sc573-ezkit.o
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.c b/board/adi/sc573-ezkit/sc573-ezkit.c
 new file mode 100644
-index 00000000000..01e908c67f8
+index 00000000000..288c2670761
 --- /dev/null
-+++ b/board/adi/carriers/somcrr.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * (C) Copyright 2025 - Analog Devices, Inc.
-+ *
-+ */
-+
-+#ifndef BOARD_ADI_CARRIERS_SOMCRR_H
-+#define BOARD_ADI_CARRIERS_SOMCRR_H
-+
-+void adi_somcrr_init_ethernet(void);
-+void adi_somcrr_enable_ethernet(void);
-+void adi_somcrr_disable_ethernet(void);
-+
-+#endif
-diff --git a/board/adi/carriers/somcrr_common.c b/board/adi/carriers/somcrr_common.c
-new file mode 100644
-index 00000000000..34ae48f31d2
---- /dev/null
-+++ b/board/adi/carriers/somcrr_common.c
-@@ -0,0 +1,19 @@
++++ b/board/adi/sc573-ezkit/sc573-ezkit.c
+@@ -0,0 +1,21 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2025 - Analog Devices, Inc.
 + */
 +
++#include <phy.h>
++#include <asm/u-boot.h>
 +#include <asm/arch-adi/sc5xx/sc5xx.h>
-+#include <linux/delay.h>
++#include <asm/arch-adi/sc5xx/soc.h>
 +
-+#include "somcrr.h"
-+
-+void adi_somcrr_init_ethernet(void)
++int board_phy_config(struct phy_device *phydev)
 +{
-+	adi_somcrr_enable_ethernet();
-+	mdelay(20);
-+	adi_somcrr_disable_ethernet();
-+	mdelay(90);
-+	adi_somcrr_enable_ethernet();
-+	mdelay(20);
++	fixup_dp83867_phy(phydev);
++	return 0;
 +}
-diff --git a/board/adi/carriers/somcrr_ezkit.c b/board/adi/carriers/somcrr_ezkit.c
++
++int board_init(void)
++{
++	sc5xx_enable_rgmii();
++	return 0;
++}
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
+index 26f7b6cb799..8b03a3d5da9 100644
+--- a/board/adi/sc573-ezkit/sc573-ezkit.env
++++ b/board/adi/sc573-ezkit/sc573-ezkit.env
+@@ -1,13 +1,17 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later+ */
+-
+ /*
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-#include <env/adi/adi_boot.env>
+-
+-adi_stage2_offset=0x20000
+-adi_image_offset=0xE0000
+-adi_rfs_offset=0x6E0000
+-loadaddr=0x83000000
++adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
++adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
++adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
++loadaddr=CONFIG_SC5XX_LOADADDR
++
++#define USE_NFS
++#define USE_SPI
++#define USE_RAM
++#define USE_MMC
++
++#include <env/adi/adi_boot.env>
+diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezkit_defconfig
 new file mode 100644
-index 00000000000..8b4d6a96c18
+index 00000000000..a50bfa968f7
 --- /dev/null
-+++ b/board/adi/carriers/somcrr_ezkit.c
-@@ -0,0 +1,38 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2025 - Analog Devices, Inc.
-+ */
-+
-+#include <asm/gpio.h>
-+
-+#include "somcrr.h"
-+
-+void adi_somcrr_enable_ethernet(void)
-+{
-+	struct gpio_desc *eth1;
-+	struct gpio_desc *eth1_reset;
-+	struct gpio_desc *gige_reset;
-+
-+	gpio_hog_lookup_name("eth1-en", &eth1);
-+	gpio_hog_lookup_name("eth1-reset", &eth1_reset);
-+	gpio_hog_lookup_name("gige-reset", &gige_reset);
-+
-+	dm_gpio_set_value(eth1, 1);
-+	dm_gpio_set_value(eth1_reset, 0);
-+	dm_gpio_set_value(gige_reset, 0);
-+}
-+
-+void adi_somcrr_disable_ethernet(void)
-+{
-+	struct gpio_desc *eth1;
-+	struct gpio_desc *eth1_reset;
-+	struct gpio_desc *gige_reset;
-+
-+	gpio_hog_lookup_name("eth1-en", &eth1);
-+	gpio_hog_lookup_name("eth1-reset", &eth1_reset);
-+	gpio_hog_lookup_name("gige-reset", &gige_reset);
-+
-+	dm_gpio_set_value(eth1, 0);
-+	dm_gpio_set_value(eth1_reset, 1);
-+	dm_gpio_set_value(gige_reset, 1);
-+}
-diff --git a/board/adi/carriers/somcrr_ezlite.c b/board/adi/carriers/somcrr_ezlite.c
-new file mode 100644
-index 00000000000..c0655574bab
---- /dev/null
-+++ b/board/adi/carriers/somcrr_ezlite.c
-@@ -0,0 +1,24 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2025 - Analog Devices, Inc.
-+ */
-+
-+#include <asm/gpio.h>
-+
-+#include "somcrr.h"
-+
-+void adi_somcrr_enable_ethernet(void)
-+{
-+	struct gpio_desc *gige_reset;
-+
-+	gpio_hog_lookup_name("eth0-reset", &gige_reset);
-+	dm_gpio_set_value(gige_reset, 0);
-+}
-+
-+void adi_somcrr_disable_ethernet(void)
-+{
-+	struct gpio_desc *gige_reset;
-+
-+	gpio_hog_lookup_name("eth0-reset", &gige_reset);
-+	dm_gpio_set_value(gige_reset, 1);
-+}
++++ b/configs/sc573-ezkit_defconfig
+@@ -0,0 +1,90 @@
++CONFIG_ARM=y
++CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
++CONFIG_ARCH_SC5XX=y
++CONFIG_SYS_MALLOC_LEN=0x100000
++CONFIG_SPL_GPIO=y
++CONFIG_ENV_SIZE=0x4000
++CONFIG_ENV_OFFSET=0xD0000
++CONFIG_ENV_SECT_SIZE=0x4000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SC5XX_UBOOT_OFFSET=0x20000
++CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
++CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
++CONFIG_SC5XX_LOADADDR=0x83000000
++CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
++CONFIG_CGU0_CLKOUTSEL=7
++# CONFIG_EFI_LOADER is not set
++CONFIG_FIT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="run ramboot"
++CONFIG_SYS_CBSIZE=512
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_I2C=y
++CONFIG_CMD_BOOTZ=y
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_BOOTM_VXWORKS is not set
++# CONFIG_CMD_ELF is not set
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_PINMUX is not set
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++CONFIG_SYS_DISABLE_AUTOLOAD=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_MII=y
++# CONFIG_CMD_MDIO is not set
++CONFIG_CMD_PING=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_EMBED=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_USE_HOSTNAME=y
++CONFIG_HOSTNAME="sc573-ezkit"
++CONFIG_NET_RETRY_COUNT=20
++CONFIG_IP_DEFRAG=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_GPIO_HOG=y
++CONFIG_SPL_GPIO_HOG=y
++CONFIG_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_MCP230XX_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_DM_I2C_GPIO=y
++CONFIG_SYS_I2C_ADI=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_SNPS=y
++CONFIG_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_ETH_DESIGNWARE=y
++CONFIG_DW_ALTDESCRIPTOR=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_SPECIFY_CONSOLE_INDEX=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_ADI_SPI3=y
++CONFIG_SPL_TIMER=y
++CONFIG_USB=y
++CONFIG_USB_MUSB_HOST=y
++CONFIG_USB_MUSB_SC5XX=y
++CONFIG_USB_MUSB_PIO_ONLY=y
++CONFIG_USB_STORAGE=y
++CONFIG_FAT_WRITE=y
++# CONFIG_REGEX is not set
 -- 
 2.49.1
 
