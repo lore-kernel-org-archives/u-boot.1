@@ -4,94 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A32D43341
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 19:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B32F3D43358
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 21:20:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17E808367F;
-	Thu, 11 Dec 2025 20:51:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BB618835C6;
+	Thu, 11 Dec 2025 22:20:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W+qUQD0h";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gXVGwyLf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D4DC836D1; Thu, 11 Dec 2025 20:51:18 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id E40838367F; Thu, 11 Dec 2025 18:55:56 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69CCE83655
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 20:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4753583642
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 18:55:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c78d30649aso337691a34.2
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 11:51:16 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4507605e19aso219933b6e.2
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:55:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765482675; x=1766087475; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=srrWYZL5xeniRJLQok80J4BjJa0Oup0wmzL2I4pFqJk=;
- b=W+qUQD0ht38DVfbUuP3Y1U5pk39ZHnE96mr2Vsa7bV75ShbnxtXqRQdEtDJav3RXqO
- JCPGbINmhJPpGMLg9HiTwuooVAw5SNjb1Fd8MgymbddeUYbPuKcuXBbvTzBfTiagRaD9
- AprmOS1on12edof/M4aiVUuSOtURm7Z7lj3IFSN9NtJeffM4qfW0b+1VsqKy3jKnPu5v
- O6G3GdnU0/NSd5JXk5pgyMr7TE/7htIZIxzQaSoHSOeQy3GE5JYkzd488QpMU4cOcSlr
- 0a4hhVtiFlOsCoU81yQKn8eeLFWdT5kZyBwZAjz7nQXHeUCA9k+x43ZuxsHGgdIC3keo
- SCYw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765475752; x=1766080552;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=snXnae9gBbIAkTyS58kiovHvLmpzyhytmEYoPQATCxc=;
+ b=gXVGwyLf7anAtl7QO5/eKVYxKEwCCIbmrxdVi/API5H/eOcWnfFOQMsvpp6U0Yuc1i
+ tvaKI8My5gQpRz+lxhiRy26jFLiPXv12dbqdNKWgXfNPq5Z+0h5rsR9/sit1qSYvcQPw
+ URUYsOzJjG61Mnc//lGcgeUipRhIyrHj7bMref9vSXaceSWL3DnrnXKDjRziXlEQFKIT
+ NUiY/oUQr4D8m8PGx4FcY/ixPEj6HL/qAHDnMaobAlmdgMiau0nWXCVLrsRxKXlwOa0V
+ jDDMe8JodNHItoZNLZLNmxL1NG7DopPjtp5akWCimaEElrXCxveDvQQtAd3n1WrksVae
+ g2Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765482675; x=1766087475;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=srrWYZL5xeniRJLQok80J4BjJa0Oup0wmzL2I4pFqJk=;
- b=RuqA2ftGQg5alUwFZnm5jPdTxHW+GUjLB+7qDKNg61cW8aT/1hIASyBSc/3OdGAVW2
- mBV5kI6AyV2IAJH92fqrSx5chzXH1+ScUlBghGhciEt6UXNWBHs6x5nw5rQJHC0mAr41
- A+91J+JZYi+hArnqUHJl0Ulxrm5tlHnktoDy/6WjiH0S1odzG4c8q0DWePXZDUlqnxj0
- 8ZPpjCozF+WJcBzfs/WaSVUlRW+LPvwpmabKNAhu9lyiW6+dCd08m9Zh1hfa64xv23E0
- tQR0R1mPnuotq0kboK/3dLWjJpjt+5mTwQZ+sj6Whf/I+uPUpMKt8GAEnDpgAjfrhMHh
- R4/Q==
+ d=1e100.net; s=20230601; t=1765475752; x=1766080552;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=snXnae9gBbIAkTyS58kiovHvLmpzyhytmEYoPQATCxc=;
+ b=LKMS493v2KTMRv5kCuuHkqWf+sewrhuoAiHHVDtix0ek4DZzxj69LGgppI9m7mOsyQ
+ m/VkDgA/SMp1sSLfKb0b1G4Zs34+aPln5w5Lk+a5JjqnaIvX6TrS9x8jseP3yHgf/fvV
+ BtPeSD7zQo52zSZ9TY2P0I8PmrtlZZiEP4q6Eno+Y36xRA+c8tHrIZUHak1J9yt4ivvj
+ 7Bhff3471fW7f4I+2dH4vxjafRh0WFQh6YjIzJERVeWdzYTJV7rEn63+yVUrHhLRpmrJ
+ PauAGfZKz+CPqf0mDddUv/I2feO1EJ+/7dTfI6BgU3E92EUonDKZwXRQei8p7UufZ0+J
+ k05Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdUuB7HqhvrbW+pz7tyFD4BRlClXgCYTO273CnsKsJIn6cqY05j9HUMLSJifQFgH/Jn/wY+V4=@lists.denx.de
-X-Gm-Message-State: AOJu0YziI2kJfKkmTT6ffYvSwKPky/uQBksLk8GNQZN07kArl2fLFP0Z
- jDyVyo+jCpaPNFRW+ZBFPBNuJMCMb0PxsfHh11kUNdHptUnb1nhPxxieoINAUWT1lZ0idnZPDBV
- XUSRlKFmqHUiTt/WCABEXmUi/FFcErGo=
-X-Gm-Gg: AY/fxX6hK3nxqjd9w7efRdHd+FF0lNOe3s9ltS0LldDFrLGaoAWkaPcR7N11YnMeh6w
- jCg7iJpnv729kphf4jpMfIAbD0Hxa5tpvqdtlr9h5lGifx2CRmxCiqOa7JhHcfp9l9Liu7pi5B1
- p6JMWWfo/GrkKb+YrkOyummRz2zgRfbJJZY1GMEu4366R76QpxH2aKmT3yC0kp9MJC1C4G+PKUN
- 5kJ5fsFmagW6zYGkx3qgwIwLUZetVnewNfQc0fKWdDZE5WGcFMpT9pRla3ndM3vtGBlFkg=
-X-Google-Smtp-Source: AGHT+IGu0ekX4a4zBQV8o+UX1XTVuiTdDfiCQ62l302FljWOQtixzSOB9Xa0C3aan4UvpdvKBRCVdA4Nz79Ni3zmMAE=
-X-Received: by 2002:a05:6830:2646:b0:7b4:f1e6:4957 with SMTP id
- 46e09a7af769-7cacec2d7d0mr4190124a34.20.1765482675103; Thu, 11 Dec 2025
- 11:51:15 -0800 (PST)
+ AJvYcCVKKRWFbX92Wtl162IFr2hkvfnng/46b5FNvSLObeP2inw90NqzmESvdXoqRSUWDujcneEwBAM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxAxl9wvU2TD8eqQriFKAHIedeP8cNujLu5zqoP5ynvkdrsa82V
+ U2gF2WVOklcJ4gWDXAkh5Ow764de7BNmk+2t6j1hqNH5Zwe9VULOmVhuAPShBzZLssI=
+X-Gm-Gg: AY/fxX5iH2J/DvYPkB6ORLpUtf8c+vY1lIVPagjmXJ5HhGr55U0I1Q3xqkpgxWUVywu
+ iMa/NpAvVOfJ4TmsuAxGDEeGOa7MHBtTeFLKk0nUsRd0UcbEzcA4JxNiZh+wyGiMoCnbGgD4kmA
+ 3CrpaBCc5q0T3+RjvlUiMn/Sr9ftJWlY0fWJaWScc8p6UvYaW2kyLmDJbAXF9RxtcL7EcTU+GMr
+ g6P3ZlKNYGu0h8dgux6WWwdOhCUE/q0/tsuMNuHMaga96Opqxr9baZabQmqGp4JUatEIVPt9UcV
+ 1H/mv3wdnAVIf6zl1U7ElpJ7D4ymAIpsMnIlqGThVilGm9rOd1Jq1FM67kvGnZoARAAwiBTuXAL
+ r5dSdJNw9jv/YWnHa1LYeWKlwJ4/koExDuqQVKoOU/OvQJCjSseKc/6rH+xL1MbPC3RTOhbhDZL
+ GZJipkatxXRESKS3MHAh5BYlczxO6p74dhehfgiGJNZKMzo+qQmShR+9GLyDZr
+X-Google-Smtp-Source: AGHT+IERU5KoieLDWIw3zXY/GMfXUgCahki7DV9gBULe8DHSkwKKc9FhW01KaCx1pGiB6VNxvAiaSw==
+X-Received: by 2002:a05:6808:1496:b0:44f:e7bd:274c with SMTP id
+ 5614622812f47-45586922b51mr3813624b6e.51.1765475752122; 
+ Thu, 11 Dec 2025 09:55:52 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:1635:b560:bfdd:f758?
+ ([2600:8803:e7e4:500:1635:b560:bfdd:f758])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f5d4e868e6sm2096823fac.9.2025.12.11.09.55.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Dec 2025 09:55:51 -0800 (PST)
+Message-ID: <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
+Date: Thu, 11 Dec 2025 11:55:50 -0600
 MIME-Version: 1.0
-References: <20251125212953.1733-1-briansune@gmail.com>
- <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
- <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
- <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
- <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
- <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
- <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
- <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
- <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
- <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
- <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
- <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
- <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
- <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
-In-Reply-To: <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 12 Dec 2025 03:51:03 +0800
-X-Gm-Features: AQt7F2p4ce7vqu9WLEeij1bpHru5fYYdIg2lro3POL8n4LTLTTSKvsqu3EbTLaI
-Message-ID: <CAN7C2SDj5yL4=tpEiG2ftjFQvrWvHSavXkz2JMJQGEgN_i4Dtw@mail.gmail.com>
-Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Ralph Siemsen <ralph.siemsen@linaro.org>
-Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Tom Rini <trini@konsulko.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
- "Chee, Tien Fong" <tienfong.chee@altera.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] clk: mediatek: add MT8188 clock driver
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sam Shih <sam.shih@mediatek.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heiko Schocher <hs@nabladev.com>, =?UTF-8?Q?Duje_Mihanovi=C4=87?=
+ <duje@dujemihanovic.xyz>
+References: <20251209-add-mt8188-support-v2-0-31dbfcf7303c@baylibre.com>
+ <20251209-add-mt8188-support-v2-2-31dbfcf7303c@baylibre.com>
+ <878qf95s5q.fsf@kernel.org>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <878qf95s5q.fsf@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 11 Dec 2025 22:20:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,49 +130,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > Issue 1:
-> > sequencer.c if turned on debug by including this at the very top.
-> > "#define LOG_DEBUG" and "#define DLEVEL 1 or 2"
-> > If will stall somehow on any brand of board my side current had.
->
-> I also encountered this, but it was solved by disable the watchdog, by
-> toggling L4WD0 reset. After doing this, there is no problem with using
-> DLEVEL 2. I even took it a step further and logged every single write
-> to the DDR control registers.
+On 12/11/25 2:39 AM, Mattijs Korpershoek wrote:
+> Hi Julien,
+> 
+> Thank you for the patch.
+> 
+> On Tue, Dec 09, 2025 at 11:22, Julien Stephan <jstephan@baylibre.com> wrote:
+> 
+>> From: Julien Masson <jmasson@baylibre.com>
+>>
+>> The following clocks have been added for MT8188 SoC:
+>> apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
+>>
+>> These clocks driver are based on the ones present in the kernel:
+>> drivers/clk/mediatek/clk-mt8188-*
+>>
+>> Signed-off-by: Julien Masson <jmasson@baylibre.com>
+>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>> ---
+>>  drivers/clk/mediatek/Makefile     |    1 +
+>>  drivers/clk/mediatek/clk-mt8188.c | 1840 +++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 1841 insertions(+)
+>>
+>> diff --git a/drivers/clk/mediatek/Makefile b/drivers/clk/mediatek/Makefile
+>> index 12893687b68fc6c136a06e19305b1dd0c8a8101a..68b3d6e9610d8e7f4c4c625f52e525174e92787a 100644
+>> --- a/drivers/clk/mediatek/Makefile
+>> +++ b/drivers/clk/mediatek/Makefile
+>> @@ -11,6 +11,7 @@ obj-$(CONFIG_TARGET_MT7981) += clk-mt7981.o
+>>  obj-$(CONFIG_TARGET_MT7988) += clk-mt7988.o
+>>  obj-$(CONFIG_TARGET_MT7987) += clk-mt7987.o
+>>  obj-$(CONFIG_TARGET_MT8183) += clk-mt8183.o
+>> +obj-$(CONFIG_TARGET_MT8188) += clk-mt8188.o
+>>  obj-$(CONFIG_TARGET_MT8365) += clk-mt8365.o
+>>  obj-$(CONFIG_TARGET_MT8512) += clk-mt8512.o
+>>  obj-$(CONFIG_TARGET_MT8516) += clk-mt8516.o
+>> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..55dfadddfe3cf743602533de30275bc93d4f15a5
+>> --- /dev/null
+>> +++ b/drivers/clk/mediatek/clk-mt8188.c
+>> @@ -0,0 +1,1840 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * MediaTek clock driver for MT8188 SoC
+>> + *
+>> + * Copyright (C) 2025 BayLibre, SAS
+>> + * Copyright (c) 2025 MediaTek Inc.
+>> + * Authors: Julien Masson <jmasson@baylibre.com>
+>> + *          Garmin Chang <garmin.chang@mediatek.com>
+>> + */
+>> +
+>> +#include <clk-uclass.h>
+>> +#include <dm/device_compat.h>
+>> +#include <dm.h>
+>> +#include <asm/io.h>
+>> +#include <dt-bindings/clock/mediatek,mt8188-clk.h>
+>> +
+>> +#include "clk-mtk.h"
+>> +
+>> +#define MT8188_PLL_FMAX		(3800UL * MHZ)
+>> +#define MT8188_PLL_FMIN		(1500UL * MHZ)
+>> +
+>> +/* Missing topckgen clocks definition in dt-bindings */
+>> +#define CLK_TOP_ADSPPLL		206
+>> +#define CLK_TOP_CLK13M		207
+>> +#define CLK_TOP_CLK26M		208
+>> +#define CLK_TOP_CLK32K		209
+>> +#define CLK_TOP_IMGPLL		210
+>> +#define CLK_TOP_MSDCPLL		211
+>> +#define CLK_TOP_ULPOSC1_CK1	212
+>> +#define CLK_TOP_ULPOSC_CK1	213
+> 
+> Why are these clock definitions missing from the dt-bindings?
+> Were they just forgotten, or is there another reason?
 
-Hi Ralph,
+I was looking at mt8365 clocks yesterday and noticed a similar pattern.
+So I am interested in getting feedback on this too. And I can give at
+least a partial answer.
 
-Thanks again. Quick test on your proposed method.
+Root clocks
+-----------
 
-diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sdram_gen5.c
-index 3c79bb11802..904f9bc6d03 100644
---- a/drivers/ddr/altera/sdram_gen5.c
-+++ b/drivers/ddr/altera/sdram_gen5.c
-@@ -589,6 +589,9 @@ static int altera_gen5_sdram_probe(struct udevice *dev)
-        }
-        reset_deassert_bulk(&resets);
+The three CLK_TOP_CLKXXX clocks are in the devicetree as "fixed-clock"
+with labels "clkXXx".
 
-+       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 1);
-+       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 0);
-+
-        if (sdram_mmr_init_full(sdr_ctrl, 0xffffffff) != 0) {
-                puts("SDRAM init failed.\n");
-                goto failed;
+These should go in a separate group named "PAD" since they aren't
+part of the TOPCKGEN group. And it would make sense to make the
+macros CLK_PAD_CLKXXX.
 
-Works and all debug_log and max level=2.
+Unless we should be reading these from devicetree somehow instead?
 
-However the same behavior can be repeated when CYCLIC / WDT off.
-It will fail and once CYCLIC is turned on it will pass again.
+PLL clocks
+----------
 
-If HW level does not support the 533.333M timing from the beginning
-it is a 100% fail and no possible turning back to work.
-AKA you won't be able to do any timing shift to make it work.
-The DDR3 chip dies are unchanged and twin dies can always run 533.333
-and never stall on the calibration phase w/ CYCLIC.
+This is just a guess, but I suspect in Linux, since CLK_TOP_ADSPPL is
+just a 1:1 divider clock of CLK_APMIXED_ADSPPLL, they took the shortcut
+of leaving out CLK_TOP_ADSPPL from the clock tree and set the parent
+of CLK_TOP_ADSPPLL_Dx to CLK_APMIXED_ADSPPLL instead of CLK_TOP_ADSPPLL.
 
-So simply speaking the sequence.c somehow is so touchy on timing.
-I do test the most common timing bin of the DDR3 die.
-I guess there is no easy fix on this issue unless Altera do change a bit the
-sequence.c syntax.
+The actual full picture should be like this:
 
-Brian
+	77, /* CLK_TOP_ADSPPLL */
+
+	...
+
+	FACTOR0(CLK_TOP_ADSPPL, CLK_APMIXED_ADSPPLL, 1, 1),
+	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_TOP_ADSPPL, 1, 2),
+	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_TOP_ADSPPL, 1, 4),
+	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_TOP_ADSPPL, 1, 8),
+
+Instead of:
+	
+	-1, /* CLK_TOP_ADSPPLL */
+
+	...
+
+	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_APMIXED_ADSPPLL, 1, 2),
+	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_APMIXED_ADSPPLL, 1, 4),
+	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_APMIXED_ADSPPLL, 1, 8),
+
+So we could either follow Linux and use CLK_APMIXED_ADSPPLL everywhere
+instead of adding CLK_TOP_ADSPPL. Or we could be more correct and add
+the missing clocks.
+
+The other PLL clocks seem to follow a similar pattern. So whatever we
+do for ADSPPLL would apply to the others.
+
+CK1 clocks
+----------
+
+I can't see why these would be different from the same name without the
+_CK1 suffix. There is already CLK_TOP_ULPOSC and CLK_TOP_ULPOSC1 and they
+seem like they should be the same clocks.
+
+Perhaps we could not add these?
+
+> 
+> Could we (long term) add these definitions to the dt-bindings by
+> contributing them to the kernel?
+
+I guess it depends on if taking these PLL shortcuts was intentional or
+not if upstream would want to add them or not. But clearly the PAD clocks
+are fine they way they are upstream.
+
+> 
+> Note: I'm not requesting to change this patch, I'm just curious as of
+> why we need to add these definitions here.
+> 
+> Note that I also don't see these CLKs in the linux driver so why are
+> they needed for U-Boot ?
+
+I have a feeling someone will be asking me the same question soon. :-)
+
+> (I searched for CLK_TOP_CLK13M in Linux master commit e7c375b18160 ("Merge tag 'vfs-6.18-rc7.fixes' of gitolite.kernel.org:pub/scm/linux/kernel/git/vfs/vfs"))
+> 
