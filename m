@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AC2D41D6A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 16:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05ADCD41D64
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 16:36:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE2CA83A26;
-	Thu, 11 Dec 2025 17:35:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 334E483A79;
+	Thu, 11 Dec 2025 17:35:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="E8+d2r5I";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="ZXsuYyyL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F6BE8312A; Thu, 11 Dec 2025 17:35:10 +0100 (CET)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ id DD3EB8334F; Thu, 11 Dec 2025 17:35:11 +0100 (CET)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1093C83106
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 17:35:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C92EB830E4
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 17:35:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 20251211163501875938354000020773 for <u-boot@lists.denx.de>;
- Thu, 11 Dec 2025 17:35:01 +0100
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 202512111634592b39723b0600020770 for <u-boot@lists.denx.de>;
+ Thu, 11 Dec 2025 17:35:00 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=DXuhi2R4usUMi4S5/lrCXouum+ugBkTGmzEWQ30yeHo=;
- b=E8+d2r5I9kWvReiZtxWdF23rHdYKKDxIUWNMAZhFOnbChJc9SZEkQRE7gil5ymea9shZ9p
- cL99KNodPbxpkD3TweYLBrcJKn5zqX1iV+BOzqcMtKXbAGQUof2v8VfwEqWSkRY5LKXtNn5U
- ZP8/uN5Whk6TIaMrU3BuaI+tR262l3DfU84elcCLsV8auIbkHXBqXssbLzUZ7bHSlshl2oud
- dhF2gh4EmmojfFFzy0yvfsZuH1mB5jFCdyz3aEkpSX18src+otSDVHZbjTZAEDlhZCfsl9R3
- baLtr6SQgz93FXQHt2nGI+x40GTc1INK6ooboFgVHcOqi2jkaVUTG2Fg==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=vaqfEyHhPFWrczaDxQ2siaq8P+e3nGetzgAfbveMN3c=;
+ b=ZXsuYyyLSXhLbTL/Om0TQ7MEalmhP0Y6zSO4CndiYEI8XiYy8Maa0kPm/VEVn8iuiAMxiP
+ Mwt/pem1WNaV/6t7btBav4A0FE87bTi/6j1GkyCF7oaKfdKr5zLju7L2Q4GYcLbgA+wBBpsB
+ Zh4QQ/wPcl03c2Sp4YbCBQ/MJ8oj0ZjIKESChD+AYC4CRKn6XT11OR57ff3RkZ+wvFqWzryP
+ zi7s0MM4zQAXAMUvSNM2IiM8lzktxq8uFwZU6LS0IobI8baT7SgdfogxhWsmrUURrGBRGvw0
+ 58sRv/AeyIZxp/fHsmT1tMQBM05iu7aQAFtpErgp35a6Nsh7/DPP5CRA==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -45,12 +45,10 @@ Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
  Sune Brian <briansune@gmail.com>, Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [PATCH v3 4/5] arch: arm: mach-socfpga: Adjust a raw sectors for MMC
- loading of U-Boot from SPL
-Date: Thu, 11 Dec 2025 17:34:58 +0100
-Message-ID: <c9a6e6f8ec5e854057459e91db20a46c9420b392.1765470899.git.jan.kiszka@siemens.com>
-In-Reply-To: <cover.1765470899.git.jan.kiszka@siemens.com>
-References: <cover.1765470899.git.jan.kiszka@siemens.com>
+Subject: [PATCH v3 0/5] Fixes for
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION* and for SOCFPGA
+Date: Thu, 11 Dec 2025 17:34:54 +0100
+Message-ID: <cover.1765470899.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -71,45 +69,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+Changes in v3:
+ - improve commit message of patch 2
+ - fix #ifdef condition in patch 4
 
-If U-Boot is located on MMC, SPL and U-Boot proper are glued together.
-More precisely, SPL is stored 4 times. Take this and its padding into
-account and adjust sector number via board_spl_mmc_get_uboot_raw_sector.
-This allows loading from a partition, without the need to hard-code the
-offset via SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+Changes in v2:
+ - split off "select SPL_LOAD_BLOCK" change
+ - address build breakage with CONFIG_SPL_SYS_MMCSD_RAW_MODE off
+ - fix build condition and add comment to mach-socfpga/board.c patch
 
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- arch/arm/mach-socfpga/board.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Several fixes needed after the mmc raw-mode was consolidated a while
+ago. Not all the fallouts can be blamed to that refactoring. It also
+looks to me like booting from mmc just worked by chance before.
 
-diff --git a/arch/arm/mach-socfpga/board.c b/arch/arm/mach-socfpga/board.c
-index 28554b7a109..7f65aed4540 100644
---- a/arch/arm/mach-socfpga/board.c
-+++ b/arch/arm/mach-socfpga/board.c
-@@ -14,6 +14,7 @@
- #include <hang.h>
- #include <handoff.h>
- #include <image.h>
-+#include <spl.h>
- #include <usb.h>
- #include <usb/dwc2_udc.h>
- #include <asm/global_data.h>
-@@ -209,3 +210,13 @@ void lmb_arch_add_memory(void)
- 	}
- }
- #endif
-+
-+#if (defined(CONFIG_TARGET_SOCFPGA_ARRIA10) || \
-+     defined(CONFIG_TARGET_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						 unsigned long raw_sect)
-+{
-+	/* offset of u-boot proper inside u-boot-with-spl.sfp image */
-+	return (CONFIG_SPL_PAD_TO * 4) / 512 + raw_sect;
-+}
-+#endif
+This series now permits U-Boot proper loading from SPL via partition
+type, at least on the DE0-Nano-SoC (other boards not available for
+testing).
+
+Note that even if the socfpga specific changes should not be accepted
+due to switching to fat mode booting, the first two patches are
+generic fixes, affecting all RAW_MODE_U_BOOT_USE_PARTITION_TYPE user -
+of which we have none in-tree, though.
+
+Jan
+
+Jan Kiszka (5):
+  spl: Kconfig: Add missing SPL_LOAD_BLOCK for
+    SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+  spl: mmc: Account for SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+    being a choice
+  spl: mmc: Respect sector value passed to mmc_load_image_raw_partition
+  arch: arm: mach-socfpga: Adjust a raw sectors for MMC loading of
+    U-Boot from SPL
+  configs: socfpga: Fix de0_nano_soc boot
+
+ arch/arm/mach-socfpga/board.c          | 11 +++++++++++
+ common/spl/Kconfig                     |  1 +
+ common/spl/spl_mmc.c                   | 21 +++++++++------------
+ configs/socfpga_de0_nano_soc_defconfig |  1 +
+ include/part.h                         |  3 ++-
+ 5 files changed, 24 insertions(+), 13 deletions(-)
+
 -- 
 2.51.0
 
