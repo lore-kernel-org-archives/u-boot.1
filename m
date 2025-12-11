@@ -4,96 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52752D41C01
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4110D41C02
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 679AA83D2E;
-	Thu, 11 Dec 2025 09:06:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E396A83C94;
+	Thu, 11 Dec 2025 09:23:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PIMpssEL";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jIHYvPpW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526E783D2E; Thu, 11 Dec 2025 09:06:09 +0100 (CET)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C6F4A83C9F; Thu, 11 Dec 2025 09:23:19 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEE7B83D5D
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:06:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5ADFC83BFE
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:23:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-64472ea7d18so615515d50.2
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:06:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765440364; x=1766045164; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=faLHO7THFq9m/ZffKsVkbx6l65Vy7R4vGYJBjJFUj4o=;
- b=PIMpssELEqyZgVmtYNA9LfCwCYFgNUVUAy5iU8B3PGdliO0/F5RJAEQUnZ49ld5EDy
- s6r6D6YDiqKYQ3kLM3C7j8NsiNjuWR8UOwXKco4UrDRt9oo577z3wEQ0mCylbtLI1wNv
- M/kfeuMQ3U5gM5cVlru3aYszK2vLwdadq1bMOe1SR5ljck5M8Cs5YC9Mg91uiUTe6Y7N
- UjaK9r/LkOoZTHeKrO5cAqwlpJFQ7fg7m7TRtjzn3EyK8uwR20dZwZaa+x8+ax9gxVio
- yNbyTj+GfKnKln/zIRKw0QnLaJqFVfwVT0p7Q8AvrsGV1Lc38/R0d+NIHKRECeRKLSss
- srAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765440364; x=1766045164;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=faLHO7THFq9m/ZffKsVkbx6l65Vy7R4vGYJBjJFUj4o=;
- b=OGcckYz3qhoIMvWjSJP8ZP88vEUdnBEq56QjYCKnvTYA2R8dCGKAxyIvYpzOjBm4vS
- nWJ6/VfJ+I4erF492WD7uVzNIwpN0y9SjRedofo4+uo6OrfmkRoivje9vRV8uw6JXkUV
- Oi2PWESAyz62SXueeEzCt+Ji1lQj/MrYn9d7CumpZ9hHviNHJzpumMcZBIQzrcfVLxD2
- 4B/N3YDNu46H8ZZ2qtnrx/cUm24hP6JB82J3C7+SrpeuF745H5egdBqRqOn1FlSQ2iaL
- hn2jQ5vz/I8eOIPx3oM9hVyx4ZtnqeNSo5iShch3fINNEnen3PEiRVh+aP/s+krQA8mQ
- q9eA==
-X-Gm-Message-State: AOJu0Yx4xQ1bbC+B/nwemVMX06IlhAa405vsBKOLkRvEpbO1MCxx+3tM
- 0OBwJM9sdAo0n+e2T580d49Sv2Wijo1ZLbGKKZyAuU42v44pUNFSwPMcxcW1
-X-Gm-Gg: AY/fxX6YYOsVao1vZgprVU+ULTAzHakYjm0N83GlwIQmdMiYWLpb+CLrgM64a9vnpsv
- Z0qEIjK1YhA2WRiyXmud0QDB15ncbzTyZ7TMpfq2mxzouU19dRmSylA9mbWTabBIIxU+950t/As
- 8Mi1i0Q44hRRIbdp4f9I8MyARHGgKBxUKN29XDMseHxm70MmEa9k93D+VkN4HWrDED7M40PutEk
- U0jitsP2IJ30IUdyOWoPVeFgTRdxvQ0x4DqiL7HuJyZuLbxRzi6OYWeUP+ihq02r1dvLjYOLfBV
- hrZjxYUwlDmI9+K6YDJZGx7exZxmjikqslsCDEDw8NHwPcsiQLeKCKY5kRU74A6/N6VeWzZsp0C
- ILzZ7iqo0dJN5q1HBGNRICzueLFAKf9Xh3XFn3HTL3ICBhwP6VinpDvmH88fPO2bBdaMzvk4Uu1
- IBNM6pIgqq4v4BkQ1uu45BgEUBTQ==
-X-Google-Smtp-Source: AGHT+IEjtlMRefHCP1ul0jJAVfW6ierbJHPZd/2qUOJOkh1ZboZfoUet20xwpF6S3QtWGD1IHvw8Rw==
-X-Received: by 2002:a05:690e:782:b0:644:60d9:7527 with SMTP id
- 956f58d0204a3-6446ec69542mr3390740d50.89.1765440364112; 
- Thu, 11 Dec 2025 00:06:04 -0800 (PST)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.06.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 00:06:03 -0800 (PST)
-From: Greg Malysa <malysagreg@gmail.com>
-To: u-boot@lists.denx.de
-Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Heiko Schocher <hs@nabladev.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH 12/12] MAINTAINERS: Update ADI entries for new boards
-Date: Thu, 11 Dec 2025 03:04:03 -0500
-Message-ID: <20251211080414.5363-13-malysagreg@gmail.com>
-X-Mailer: git-send-email 2.49.1
-In-Reply-To: <20251211080414.5363-1-malysagreg@gmail.com>
-References: <20251211080414.5363-1-malysagreg@gmail.com>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4D2F843DC5;
+ Thu, 11 Dec 2025 08:23:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF094C4CEFB;
+ Thu, 11 Dec 2025 08:23:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1765441394;
+ bh=jMIUmWpON58mVNJDoT/8YAr1kPKvmvO6aEUK9z5V4o8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=jIHYvPpWMBRu7CWsUdzb54I7EzCaXhEpH9A4XP7D7zaJRBSstLWgLFpfnPWtmVvrr
+ azhFul/xUrt81QpYXlqV5TQq4SDCqJ7IifUPjmuB2heyzxGYpU77hFSfGO7a9ZrzIf
+ E9Isp7fQK5R67csggKPvb73Rz8irkBp6LstOYnhy51VM5aRJo6XlWhGmdRdaHtMCjc
+ s+r/rJvwMkjaFDR63T7wS8OeVlvODIgaW46aALBQ1pRnoYpXN5vLRoPD31cHD97vRl
+ WtTPw9VTOeExEUXrhLTYD2Wzx91QMjtnkw/8+erPXVPOG3p1dnECiuyhzDqhDdkSvg
+ ASMRzY50idvVQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Eddie Kovsky <ekovsky@redhat.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>, Paul
+ HENRYS <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>,
+ Jan Stancek <jstancek@redhat.com>, Enric Balletbo i Serra
+ <eballetb@redhat.com>, a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] Add support for OpenSSL Provider API
+In-Reply-To: <aSCsgniomRMN0u1m@daedalus>
+References: <20251027195834.71109-1-ekovsky@redhat.com>
+ <c2b48b27-9d4e-4be8-b94a-4aac7ef922a8@cherry.de>
+ <aSCsgniomRMN0u1m@daedalus>
+Date: Thu, 11 Dec 2025 09:23:11 +0100
+Message-ID: <87fr9h5swg.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,49 +74,237 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds missing maintainers entries for the ADI SC5xx defconfigs and
-for a device tree binding file that was previously missed.
+Hi Eddie,
 
-Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+Thank you for working on this. It would be really nice if we could build
+U-Boot on more recent Linux distros without bridge packages such as
+openssl-devel-engine.
 
----
+On Fri, Nov 21, 2025 at 11:16, Eddie Kovsky <ekovsky@redhat.com> wrote:
 
-(no changes since v2)
+> Hi Quentin
+>
+> On 11/17/25, Quentin Schulz wrote:
+>> Hi Eddie,
+>> 
+>> On 10/27/25 8:58 PM, Eddie Kovsky wrote:
+>> > [You don't often get email from ekovsky@redhat.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>> > 
+>> > The Engine API has been deprecated since the release of OpenSSL 3.0. End
+>> > users have been advised to migrate to the new Provider interface.
+>> > Several distributions have already removed support for engines, which is
+>> > preventing U-Boot from being compiled in those environments.
+>> > 
+>> 
+>> Which ones? How do I reproduce?
+>> 
+>
+> As you are probably aware, OpenSSL deprecated the Engine API with the
+> 3.0 release, and engines are likely to be removed entirely when
+> OpenSSL 4.0 is released in 2026. [1][2]
+>
+> [1] https://docs.openssl.org/3.0/man7/migration_guide/#engines-and-method-apis
+> [2] https://github.com/openssl/openssl/discussions/21832
+>
+> I don't have a comprehensive list of all distros. Fedora, RHEL 10,
+> Arch, and Debian 13 are all shipping OpenSSL 3.5. If you try to build
+> U-Boot in those environments the compiler will not be able to resolve the
+> engine API symbols and the build will fail.
+>
+> Fedora is currently providing a bridge package openssl-devel-engine [3] to
+> help make the API transition easier, but that is only a temporary
+> solution. (I think Debian is currently doing something similar.)
+>
+> [3] https://packages.fedoraproject.org/pkgs/openssl/openssl-devel-engine/
+>
+>> > The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the
+>> 
+>> Please consider renaming this, OpenSSL itself uses OPENSSL_NO_DEPRECATED
+>> constants for many things. I would recommend simply renaming to
+>> OPENSSL_NO_ENGINE which is also the symbol OpenSSL is using. If there comes
+>> a time we have more OPENSSL_NO_ options, we can always have a "virtual"
+>> symbol called OPENSSL_NO_DEPRECATED which would select them all if one
+>> wanted for example.
+>> 
+>
+> I did give some thought to using a different name because I don't
+> like the double negative that comes from this construct:
+>
+>     #ifndef CONFIG_OPENSSL_NO_DEPRECATED
+>
+> But I kept it because the name is advantageous precisely because it's
+> already recognized by the OpenSSL API. OPENSSL_NO_DEPRECATED is a
+> user-defined macro.[4] When combined with the OPENSSL_API_COMPAT macro,
+> which is already defined in lib/rsa/rsa-sign.c, we can ensure that
+> deprecated symbols won't be available in sections where
+> OPENSSL_NO_DEPRECATED is defined.
 
-Changes in v2:
- - Possible files relating to ADI were identified using a shell
-   command like so:
-   $ find ./ | xargs grep -i --color=none "Analog Devices" 2>/dev/null | awk '{ print $1 }' | tr -d ":#" | sort | uniq > maybe_adi.txt
-   This file was reviewed and entries unrelated to ADI that merely
-   mentioned the company name were pruned, leaving 111 files.
-   Then, maintainer information was retrieved with:
-   $ cat maybe_adi.txt | xargs -L1 -t ./scripts/get_maintainer.pl --separator , -f
-   and each line was reviewed to ensure it matched ARM SC5XX. This
-   identified one extra file that was missed previously.
+I also don't linke this double negative.
+As you already shared, Linux solved this via:
 
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+#if OPENSSL_VERSION_MAJOR >= 3
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6ce0bbce13d..61b3d8506a1 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -637,6 +637,7 @@ F:	arch/arm/dts/sc5*
- F:	arch/arm/include/asm/arch-adi/
- F:	arch/arm/mach-sc5xx/
- F:	board/adi/
-+F:	configs/sc5*
- F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
- F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
- F:	doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
-@@ -656,6 +657,7 @@ F:	drivers/timer/adi_sc5xx_timer.c
- F:	drivers/usb/musb-new/sc5xx.c
- F:	drivers/watchdog/adi_wdt.c
- F:	include/configs/sc5*
-+F:	include/dt-bindings/clock/adi-sc5xx-clock.h
- F:	include/dt-bindings/pinctrl/adi-adsp.h
- F:	include/env/adi/
- 
--- 
-2.49.1
+Why can't we have something similar?
+See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=558bdc45dfb2669e1741384a0c80be9c82fa052c
 
+>
+> [4] https://docs.openssl.org/3.0/man7/openssl_user_macros/
+>
+>> > Provider API while continuing to use the existing Engine API on distros
+>> > shipping older releases of OpenSSL.
+>> > 
+>> 
+>> One can use org.openssl.engine: as prefix for provider arguments when one
+>> wants to use an engine still.
+>> 
+>
+> Sorry, but it's not clear what you are referring to here.
+>
+>> > This is based on similar work contributed by Jan Stancek updating Linux
+>> > to use the Provider interface.
+>> > 
+>> >      commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+>> >      Author: Jan Stancek <jstancek@redhat.com>
+>> >      Date:   Fri Sep 20 19:52:48 2024 +0300
+>> > 
+>> >          sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
+>> > 
+>> > The changes have been tested with the FIT signature verification vboot
+>> > tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
+>> > Engine library installed and with the Provider API.
+>> > 
+>> 
+>> Are there actually tests using an OpenSSL engine? Because otherwise it's
+>> simply checking that local keys are still working... which isn't that much
+>> different from what we currently have with engines when not using engines.
+>> 
+>> I'm implementing FIT images signing with OpenSSL engines, and it'd be nice
+>> if we could have something that doesn't require changes to support providers
+>> (or if it does, not in a confusing manner for example).
+>> 
+>> https://lore.kernel.org/u-boot/20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de/T/#t
+>> for the v1, I'll soon (next hours or tomorrow) post a v2 and Cc you if you
+>> don't mind.
+>> 
+>> [...]
+>> 
+>
+> As mentioned above, the motivation for this patch is that the Engine
+> API has already been deprecated. Projects that depend on OpenSSL will
+> need to move to the new Provider API in order to continue to function.
+>
+> The FIT Signature Verification tests I used to exercise both APIs are
+> documented here.[5]
+>
+> [5] https://docs.u-boot.org/en/latest/usage/fit/signature.html#u-boot-fit-signature-verification
+>
+>
+>> > diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
+>> > index 9033384e60a3..1bf0ac96d598 100644
+>> > --- a/lib/rsa/Kconfig
+>> > +++ b/lib/rsa/Kconfig
+>> > @@ -20,6 +20,13 @@ config SPL_RSA
+>> >          bool "Use RSA Library within SPL"
+>> >          depends on SPL
+>> > 
+>> > +config OPENSSL_NO_DEPRECATED
+>> > +       bool "Build U-Boot without support for OpenSSL Engine"
+>> > +       help
+>> > +         Add support for the OpenSSL Provider API, which is the officially
+>> > +         supported mechanism in OpenSSL 3.x and later releases for accessing
+>> > +         hardware and software cryptography.
+>> > +
+>> 
+>> mmmm Cannot we use providers for something else than RSA? In which case it's
+>> a bit odd to have it in lib/rsa/Kconfig (but I have no better suggestion).
+>> 
+>
+> To the best of my knowledge, the only areas in the U-Boot source that
+> are using the Engine API are the RSA and AES libraries. All other uses
+> in U-Boot are clients of these two libraries.
+>
+>> >   config SPL_RSA_VERIFY
+>> >          bool
+>> >          depends on SPL_RSA
+>> 
+>> [...]
+>> 
+>> > @@ -207,6 +247,37 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+>> >                  return -ENOENT;
+>> >          }
+>> > 
+>> > +#ifdef CONFIG_OPENSSL_NO_DEPRECATED
+>> > +       EVP_PKEY *private_key = NULL;
+>> > +       OSSL_STORE_CTX *store;
+>> > +
+>> > +       if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
+>> > +               ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
+>> > +       if (!OSSL_PROVIDER_try_load(NULL, "default", true))
+>> > +               ERR(1, "OSSL_PROVIDER_try_load(default)");
+>> > +
+>> > +       store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
+>> > +       ERR(!store, "OSSL_STORE_open");
+>> > +
+>> > +       while (!OSSL_STORE_eof(store)) {
+>> > +               OSSL_STORE_INFO *info = OSSL_STORE_load(store);
+>> > +
+>> > +               if (!info) {
+>> > +                       drain_openssl_errors(__LINE__, 0);
+>> > +                       continue;
+>> > +               }
+>> > +               if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
+>> > +                       private_key = OSSL_STORE_INFO_get1_PKEY(info);
+>> > +                       ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
+>> > +               }
+>> > +               OSSL_STORE_INFO_free(info);
+>> > +               if (private_key)
+>> > +                       break;
+>> > +       }
+>> > +       OSSL_STORE_close(store);
+>> > +
+>> > +       *evpp = private_key;
+>> > +#else
+>> 
+>> Wondering if it really makes sense to have the provider API implemented as
+>> an #ifdef to save like 10 common lines between key-based and provider-based
+>> implems.
+>> 
+>> On another topic, my first reading of the code makes me a bit worried by the
+>> fact that there's seemingly no way to select whether we want to use a local
+>> key or a provider key. Also, I see "pkcs11" and "default" here, but how do I
+>> select which provider I want to use (e.g. my custom one). If I somehow
+>> manage to have a key named the same locally and in one or more providers,
+>> how do I make sure the proper one is selected? I'm wondering whether we
+>> should be reusing the engine parameter to select a provider?
+>> 
+>> I have 0 security or crypto background, don't hesitate to be verbose in your
+>> answer.
+>> 
+>> Cheers,
+>> Quentin
+>> 
+>
+> It's not the prettiest code. But I'm trying to be very conservative
+> in making these changes so that no one's workflow is disrupted.
+> Developers should be able to build U-Boot with the latest OpenSSL
+> without impacting developers who are in environments utilizing the
+> Engine API. The goal here is to preserve feature parity between the two
+> APIs. Adding support for custom Providers is outside the scope of this
+> change, but could certainly be added later.
+
+I'd be in favor to drop CONFIG_OPENSSL_NO_DEPRECATED all together and
+just use "#if OPENSSL_VERSION_MAJOR >= 3".
+
+Tom, or anyone else, is there a particular` reason for gating this in a
+Kconfig ?
+
+The oldest Ubuntu version that seems supported (22.04) already has
+OpenSSL version 3:
+
+$ podman run -it /bin/bash ubuntu:22.04
+root@6dc347676b8a:~# apt update && apt install -y openssl
+root@6dc347676b8a:~# openssl version
+OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
+
+>
+> Eddie
