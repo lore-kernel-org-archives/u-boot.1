@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280FFD41D69
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 16:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB19D41D68
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 17:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C6483A9A;
-	Thu, 11 Dec 2025 17:54:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AE226835C6;
+	Thu, 11 Dec 2025 18:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ANa3JZLe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XI3nHSaQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57ECC83A28; Thu, 11 Dec 2025 17:54:02 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id C245F83642; Thu, 11 Dec 2025 18:36:18 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C79338367F
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 17:53:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 411E083015
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 18:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c6d3676455so159480a34.2
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 08:53:54 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-bd610f4425fso226815a12.3
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:36:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765472033; x=1766076833; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1765474574; x=1766079374; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jx7/mzDcTz2Qr3T8F5dr4ih1T08fQbQkuBKBH7Kjb4o=;
- b=ANa3JZLe7ZLXsLSiD5oCvRKeZa2nJi+61+pRuAeE39yfQY9pIpszLbkOsMC3MKOaJC
- oVTRgo5TTcmioQwPJyuRRDlZ6fEJ3XyK5lyfOYvCOxT5oMDntBxCRhjq0u5vSgXOgavH
- Ufa4a1TokhEe3UOEfhm9tYpUH+WGDRQGgO3vA=
+ bh=VCBN0PP3zE4c/DGJl7SO2AmgTiBckYJuyjqDKjO65sk=;
+ b=XI3nHSaQea0OVCDscSh+hm816VBbG9E/Rl+LSBfCaOyht3uNMzcxzioCB3c6C3JLkG
+ 3fmUk3+fHiG1dS9XSWE5cA6nT+ZCdrxbEgl/ZO3ScfOYqEdN/ZC8pvtcar0ka8imm9vI
+ 52QHeZ9AZXhvAOZ9hZb1VL3/CaGQRERMcUIoTLuxYRFsiS+6TKP10w5WAaHHj/0mkzJV
+ Mk1yrB+4RehVL6ILhn0dKod6PnPonZclA2IQ0dZLtgFQW/tyv9RBH4V/8iXuCtL10RQM
+ SegNErw4JLrgPCj1ASAnudi5HUNzk1z4+Raar7NLPF1FY3wsNpiekS2lzr0inbkQv4Jy
+ jReg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765472033; x=1766076833;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1765474574; x=1766079374;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Jx7/mzDcTz2Qr3T8F5dr4ih1T08fQbQkuBKBH7Kjb4o=;
- b=QP1YHJNPQkdWzJZXWIvM9wpLDYQZABmH5jM46ZNMgId8C2KHSXaf70Yg02m+dj2j1X
- +ZjIidJSsmk9mWE57Ro6hIXj0wMy5yHZ595+FtfAvtxYeUlGYCQLwhjpFuv52hknRTQ4
- 0YplehNVAR4TBtMGPVrpGWwBU/ghgbsFC4R721KAIav2Uhl+F88kvA5szI8Abk3zQPkY
- wv6cMqBB5QZ5Gwb8bK9uhSTCkwmQ/RJNoD7jiGp465iBM6601mnbP8rMvQJ9ZI0KDu3i
- QO44/npizDO8rcsxzDU4BjN/kR3UcdKTii1a64m7VB8LDs4hWxWpmGRZZ55NihPks5A1
- 8JDg==
-X-Gm-Message-State: AOJu0YxlYhmTRLvEBFktEfQjEjycudoMqeo5F0tFn2jsD3MCShYsICaV
- j5J7a8YC28OOty2IAXk1la+oQxBWm/2ABKUKmdNqSq9w5iqGuTgB0KlRwOBOEAx9vdg=
-X-Gm-Gg: AY/fxX7F7mY4ko5vJeHQnS1FGqmtwE7htVjFbWLQ0xkF3nDvN+ryholwZM6VyGjxn/Z
- Pns4xWh1ZAixVuOPoFnCWwthpmMR8Z6vstRX7fmiplyczApvJjGJSfjinWohyOGNxKPm013SEcC
- 90lHMzlZ0lTplBNtptcGvuHmw1QPhzHzKCTdHKws299WnNcsLmHmJqpTqixGN+93mx/qtM8Y7Kw
- WgQ2gmqKWQeCgfoMWvcIX9e1FohBftDG6ZQcUpNIogAHg/pOaGvZhMgoo2+A9s06lD1eJaZ96vb
- +KnCi1IPAdez0/U+ucUwCSBV1CH+qomgpk8wrF3YTuGfiK9smLZtZBw+kbhhJSTOX5o+l20Acmp
- 7btxMXNcEb+Nr+oOgLEvGPmido3zZGl/c0i81UST8LDvusIfaF/Vzrdo0Hzhqh39ZdlPxwLojqJ
- kWtmmE2gIEc9NFw2ohgPi4/g7ZaXs+umkcdloFreDZQT8fgM+w
-X-Google-Smtp-Source: AGHT+IG0PQOhlOjuyTYqk2u6RUT861MsZnsyMLh/g6L/EWO6Wl7tPIAQgLlfv0ISP2ILAHjW5rmzQQ==
-X-Received: by 2002:a05:6830:4411:b0:7c7:827f:872e with SMTP id
- 46e09a7af769-7cacec39ae9mr4930597a34.38.1765472033456; 
- Thu, 11 Dec 2025 08:53:53 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cadb34577dsm1739686a34.30.2025.12.11.08.53.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 08:53:52 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-In-Reply-To: <aTrAm8B3VY97yrYp@nxa18884-linux.ap.freescale.net>
-References: <aTrAm8B3VY97yrYp@nxa18884-linux.ap.freescale.net>
-Subject: Re: [GIT PULL] Please pull mmc-next-2025-12-11 for next
-Message-Id: <176547203252.772226.12928205511755003428.b4-ty@konsulko.com>
-Date: Thu, 11 Dec 2025 10:53:52 -0600
+ bh=VCBN0PP3zE4c/DGJl7SO2AmgTiBckYJuyjqDKjO65sk=;
+ b=pG8Y9iRZqXnmShKrnl7Cv2BUVqj8lzr2zExIt5iLpYgcu02EVUuEXYumtfEnqVSuh+
+ SJu64I3biSNwhCtvrK1Ipv2wHwWjTJVAaqjC576jS65mKy2dgzBj+yj8Qp555x2OSFA7
+ EVFC0zPsahv4KUzSs0Ucoe7YTchwKkgWRjunyRy+cDynIrSdOemkCbRtVr5HL7jsdJEq
+ CY57ROfXyUXt0+JvPcQupKX09ptpgiKcnAS32zYkcq3i30MOhuhXfKoOzgu8yS0FeJkt
+ EsNJdKAdaRQlE1v3KCal9jo501MOmwmd4VswTFeUH/rmMh1+R8YZIQqhZEtxbSF8NDLF
+ 27Hg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUe9EGA6o03+zXXsZmGMCl/tK2PF4hOJDgcYb/woZZ9sfPhDWB/vS6F/TvsBCV4zx+mbj+v5yM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCOthdIGTWCH4DwgGWeFDNW3pgdEc9ZDzme0VYcmMGE97Vms8K
+ fRcek7tYqUKzvS/j3IVzxyEJEoY8pfUFdgkkLmyrbiHJkMizqtOt7qfUXNuAKfPGUo3hGmITx8A
+ ZRc/K7c3yk0VBG8lUcvLkDNPwMg6TZUVOBQdoVysihA==
+X-Gm-Gg: AY/fxX6sN8Z5pspOzI4glxKBWqGXQCN6cOQG4OcGMjVfxtleVpoxx2CKCvqM/f4GfDY
+ QiGofc16b8KRTLEHpFR8h2EqfQyOEjzy9AKLom6/1N9joWeFZv8Qbwdm2rxuJ1xIf5r9J4esgYe
+ j1MkFjwg5+gR65ck7yCNRPlGghZvufVjCM9ScWEQox+OIKCovs/OQxpX+6CZyaEUpw4HZtEt2xQ
+ RrSS4v6ZKSSkjBdZqk1SqLA37xm/UBWNrBeGdPzTD2LFlq5mmB291M5aNxQiuKEj0TDTdNFCBfC
+ 1ucCkFaP
+X-Google-Smtp-Source: AGHT+IE/SzdJeskJS5EOo7dpfd2kj4jfWHf+hNVDO/KeJ+Nt93iMIOntMKLwgbwEPU3D42h/DPk/nrme8ya8fb75rrY=
+X-Received: by 2002:a05:7301:1623:b0:2a4:5ce8:44d0 with SMTP id
+ 5a478bee46e88-2ac055c6c67mr4267176eec.38.1765474574110; Thu, 11 Dec 2025
+ 09:36:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+ <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+ <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
+ <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
+ <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
+ <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+ <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+ <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
+ <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
+ <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
+In-Reply-To: <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Thu, 11 Dec 2025 12:36:03 -0500
+X-Gm-Features: AQt7F2pyPXg-BjRpCYCtJ0Y6ZMCTT4OTefGkrw8W9eBLBrBNVJsFuKmiFs2UoIc
+Message-ID: <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
+ "Chee, Tien Fong" <tienfong.chee@altera.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +110,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 21:01:15 +0800, Peng Fan wrote:
+Hi Brian,
 
-> Please pull mmc-next-2025-12-11 for next
-> 
-> -------------------------------------------------------------
-> mmc: assign f_max to 0 when max-frequency property not exist
-> Improvements and minor fixes for Cadence SDHCI driver
-> ------------------------------------------------------------
-> 
-> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/28729
-> 
-> [...]
+On Thu, Dec 4, 2025 at 1:09=E2=80=AFPM Sune Brian <briansune@gmail.com> wro=
+te:
 
-Merged into u-boot/next, thanks!
+> If possible I would like to check if this is aligned disregarded to DRAM =
+size.
+> On U-Boot latest or after 2025.07.
 
--- 
-Tom
+Sorry for the delay. I am testing on 2025.10 version with a few
+additional changes. It is a custom board using its own Quartus memory
+parameters (which have been unchanged in many years).
 
+> Issue 1:
+> sequencer.c if turned on debug by including this at the very top.
+> "#define LOG_DEBUG" and "#define DLEVEL 1 or 2"
+> If will stall somehow on any brand of board my side current had.
 
+I also encountered this, but it was solved by disable the watchdog, by
+toggling L4WD0 reset. After doing this, there is no problem with using
+DLEVEL 2. I even took it a step further and logged every single write
+to the DDR control registers.
+
+> Issue 2:
+> For DRAM size larger than 1GB, when w/o O.C. and using as stable
+> setting as possible.
+> Even it passed the calibration it will not cont'd boot when
+> sdram_gen5.c is turned on debug flag via "#define LOG_DEBUG"
+> However this issue is not found on 1GB nor 512MB.
+
+I was able to get access to board with 2GB, and it boots successfully.
+Memory calibration completes, and subsequent test with u-boot "mtest"
+basic memory test is also passing.
+
+I'm also running memtester on my 512MB board and it hasn't found any
+issues after a few hours runtime.
+
+Regards,
+Ralph
