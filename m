@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 341C0D41C17
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 10:12:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE1AD41C14
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 10:12:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A98E883DAE;
-	Thu, 11 Dec 2025 11:06:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 32E4A83DF3;
+	Thu, 11 Dec 2025 11:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zz6efZfG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zsqukkUR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5732E83B48; Thu, 11 Dec 2025 10:26:39 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 8FE1E83B48; Thu, 11 Dec 2025 10:26:41 +0100 (CET)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C673F835B3
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 10:26:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78915835B3
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 10:26:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S77Qkrh/YGikgPzWl/qdRZpZTat0s7jcOU8d5Rf1j/hfHVSnohallP0xiUHuYlmWcecbrLU3LlFeGqQOi5vd2VFcYP1LyoRsRRkT9PUEj9rWpA6pIjhIEAZRVG5Dm81blDTnt5HhCR+pI6d2kE8ax/dhmXoPEcI5DLww6AKh/CQBt6TL19qUj7AWaCANPLxeYyI9kXYBLVIqf95nqc71zFrBDMTbjRqO9EWJnsXRC+Y9ewGKiIE5bVHJi7BVXC3GHysGEGMRbBpoT5MYZThd+LqZL2Dj22/Dwmp++M0b9OSUIA5vhHO2usDfKDxhMGyRNUQfn34EM9swBbiFbQllBA==
+ b=xHXnwnDUESY3Xu5YoFMmRv/Y0jNUdKu7WvDvMb0l0T3gwOsR7C7pCJViV/oeaFW7BawYqbOgK7oI/OQSH/TdPXc4+/do5MSliCft4NRgoQL+v9G3K2psnsvjtpxHZQFnMsslYxcsUO9t+Yccx31pbwl04x8fkbyB16iw/6QHBPIq3YG5glbxpCtYgaEhliMpY2k6FsdPrTGqYEH5FsPm2cPfwJDezLbaHQgYFCcl1OE4+lzM8YxOMeN1u/slfmvp6FZbaVIypM608YRhtZlaQzKao7nVPqHTb4I+oDrfnyVrPn3+ngJq8Hp83yn5GOkf3j1rAnoYAwaTQHbz3zW7tQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=g4R9LKsWY49seJUOW0Uy24FugpSz+nIzkVxKLvjDxok=;
- b=l8twKXBTC2z/SOWoafIgcL2Rkfg+95pek/Npu9Y+eMuwTGXkC8kya/u+BUoIgQKnKGiq8X2qKTLk8M5OmknEX2KI4c3HkXzpwZfXxW1YPTly0deR6FOVE9SQwiU/z06zIs4Hn/iXevcczNxfk3qzq6Z409eUZpPv4t0672w2IegIyMUbCMImm7xKUZAZA8L9yGWkJckKE0R0etwBDq52bM6Gg3+egKY2MokV8r1Sun+4p3m3VaZaEIGRIIsMZpknCiBxp5k05elMfJtAlns4HHp5IRy9OOq5J9APaIhMxzIuo76PV8gEGGTp7RQGolBNMAk0IrnEaltw5sW2tISVxA==
+ bh=ElIo0OTnjTCCUOCK1/lyAeGXn10gxstrYG51+xanE2k=;
+ b=b3HI01ClAHljLTl25P+eo5CAqCREtp8qeGFkz8P1CYBrK3Vx21yt39LhswZaZtB9VgD97C+SHf/7hYPAV5cVbJUwdfYMjZZG3z3CWsRq6imgQLe479q9tidUP2IH5dmU092clOU/Vvhu5Akx4tZXlsphrvZiu7esC8Ho0w1o4d/0mGMVfnEKz6ljwN+rljEn1oj6ZGW59+lnSfDSNqpcYhUVkXrQOJd7NZgikarpCpTvEO9lOJcotdcqMtBICeSyV84uK8Wt6/7jepIuq1hDy/Bt8e+qSH3klDPaHoL5Sdjq8QMCjyPzp0JWfgDla2zZQY6zUQJmDYwMRHdx1VL1sw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=g4R9LKsWY49seJUOW0Uy24FugpSz+nIzkVxKLvjDxok=;
- b=zz6efZfGD/SzXR5LLP5q0GAw1e8pCcGRJV21Y3DEpAtCsUs/mq3MPUgoZXynniwql56cMTgrfcmrP5S8Hk5J836mD+MFIyyPJueCuPvxMkDW740LitcnrYXxRSKCcOshotLvBdX0GuRsmbxmAcwFhrjWbZKe94rv4gau+gA/SoU=
-Received: from DM5PR07CA0115.namprd07.prod.outlook.com (2603:10b6:4:ae::44) by
- BY5PR12MB4275.namprd12.prod.outlook.com (2603:10b6:a03:20a::18) with
+ bh=ElIo0OTnjTCCUOCK1/lyAeGXn10gxstrYG51+xanE2k=;
+ b=zsqukkURNkLvei1FGYiKWEtqzvLgqU5DUVOGxpWshUoTG2j1J6fHWnfCwxGuUFAYcWy+kGcRTpAiYrHnL9eLcNU1VUs8mfXLcWBMkcEZ4yjyvti70sk9ARHvbR8EgF/ox59AzfM1MkQ/CAvg2VTlEeFe8chjs9mVyNcbluM2QW8=
+Received: from DM5PR07CA0118.namprd07.prod.outlook.com (2603:10b6:4:ae::47) by
+ IA1PR12MB7736.namprd12.prod.outlook.com (2603:10b6:208:420::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.10; Thu, 11 Dec
- 2025 09:26:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.9; Thu, 11 Dec
+ 2025 09:26:29 +0000
 Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
- (2603:10b6:4:ae:cafe::26) by DM5PR07CA0115.outlook.office365.com
- (2603:10b6:4:ae::44) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:4:ae:cafe::97) by DM5PR07CA0118.outlook.office365.com
+ (2603:10b6:4:ae::47) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Thu,
- 11 Dec 2025 09:26:30 +0000
+ 11 Dec 2025 09:26:29 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,22 +61,22 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from satlexmb07.amd.com (165.204.84.17) by
  DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Thu, 11 Dec 2025 09:26:30 +0000
+ 15.20.9412.4 via Frontend Transport; Thu, 11 Dec 2025 09:26:28 +0000
 Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 11 Dec
- 2025 03:26:29 -0600
+ 2025 03:26:27 -0600
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 11 Dec 2025 01:26:28 -0800
+ Transport; Thu, 11 Dec 2025 01:26:26 -0800
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH v3 2/2] arm64: versal2: Populate DRAM banks before page table
- size calculation
-Date: Thu, 11 Dec 2025 14:56:18 +0530
-Message-ID: <20251211092618.2320004-3-pranav.sanwal@amd.com>
+Subject: [PATCH v3 1/2] fdtdec: Add declaration for get_next_memory_node()
+ helper
+Date: Thu, 11 Dec 2025 14:56:17 +0530
+Message-ID: <20251211092618.2320004-2-pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251211092618.2320004-1-pranav.sanwal@amd.com>
 References: <20251211092618.2320004-1-pranav.sanwal@amd.com>
@@ -85,53 +85,53 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|BY5PR12MB4275:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae66dcbb-fc5b-4e9b-05f8-08de38975e4e
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|IA1PR12MB7736:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ece7def-1643-4a92-cd72-08de38975d53
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dpXvRVCv5hY7APFtZIeoV3cfhagWB7G1qUEbPCUz5oX6BqwUjbIEDKQKjFhe?=
- =?us-ascii?Q?ss5XqA8AfdZsJg33I8F5qexUpadjd2zaeM7e/QqfK6lLzkyC3lD5CtBAQmzM?=
- =?us-ascii?Q?3pUTukUizGIO4q1dSRaaHsI48BvAR/ZYR1WbK3gNUT9U6jBCjgWA9HprqWV2?=
- =?us-ascii?Q?I1mhh2d+caBbXv8BCNgc57+FTVijBy/Elxu0YBm/rTbrjPfHR/GtuP+YNn++?=
- =?us-ascii?Q?necoXrTfUu4DVITVH7qeyQo7BEBr7A0AxHAMQBCbisJxtDQsE95Vo9ZwNBrF?=
- =?us-ascii?Q?bSQOFTZE7K9XDWofhs2Dgks93W0nQ7mS9l9kWWzm2tsL6yJd9emHqihSgzEV?=
- =?us-ascii?Q?WQHJ5Y3a/5lWkiltadWvE/0S0p+gHOQCVW1CAM6Ix5bYt/GO1ysZIUmQ8xd4?=
- =?us-ascii?Q?0w5g9m3idO3ykb/J25KAIDSDoZoJM5VboqDuj1g2g3pcstCqz0tm8IAWHjJ9?=
- =?us-ascii?Q?biegBYcGgVhn2gUa9jPkNLSWwwIC5X4dR4YJExPusL68VHIrznRaUf5/Dgv8?=
- =?us-ascii?Q?hvr5Olg8r3U2fkqjwPHw0BGzslsyu/XiFtrhlM5dA/YHNc1bD9cl3PIg5UmC?=
- =?us-ascii?Q?i5EI3anbC3gQGGSEK4Rhb+8WYo227Qi3PN5rmgX96+PFaHg3FjE/mL31pNwc?=
- =?us-ascii?Q?6LyDUe10xS3dy7ScsHeyV79UxixuDxTZYWucP/MVV3EkSz1ufxa1Wl/+vaFY?=
- =?us-ascii?Q?vvyWNvtGqObie+N0ohVjmHvd55iBXOf5VeW6NcI4a91JONAyMTBKdNuPiW89?=
- =?us-ascii?Q?MODbrsaVT0DUDP6BIXUCPjeM2TL/GKesvfB78XPPLdK9U1QBMrVRNubmtqxD?=
- =?us-ascii?Q?QbIchOb0SaEGk6wNeiq/6MI2il+lBu4iU2jE/ubFv8vVAG5zAY1h833nmyjL?=
- =?us-ascii?Q?o3NJId98xeFGTRKPKKOURXN0K4M/5oyDrJ/duNqkKQaY1TM9yryrpdaTdBW1?=
- =?us-ascii?Q?68vHxBWIUs4KCfeCCz3G3oSUK0bjja3KXAANo1w+eJouw/6+EKZL9Qs5pJUV?=
- =?us-ascii?Q?B2KLX7HoUsSmlv+gjkMPYxPwHGA0k8WKLboUerB9+gW5v+85vVx2DS0M4kB+?=
- =?us-ascii?Q?PhRPfErS99ZTo2HAjd+FMKFIPTLqTag/pD6JWD2c1pL9hEAEp4qZxHbZ/c9F?=
- =?us-ascii?Q?ojvxu2utwWKscFSgNvVFu73DzJMHYIwChCxabnNc648Vp3psVgyeozoBf+qz?=
- =?us-ascii?Q?9k6J5HnxK6WgylcNDqfb7zqsG/Dlj9/7+ddTMWlzKqH9v/VRJtKj52oP4L34?=
- =?us-ascii?Q?4B1Oq9a2DXgJ7eLGCkwNwy9nZgGqrB4B+tGWzeAQn5aaMsw9WfMHhegV0F+i?=
- =?us-ascii?Q?cHZxtYJuygrqyyx2x9M/jLVO4LRdQk7Inf73VHKE7Fy3chEH/PgP08oRFfmu?=
- =?us-ascii?Q?5Z9pxgSaDVKyh8moJjuzTueAwBWl4wQWRbjSHmKRwfySsxNufpehXQ1KnANt?=
- =?us-ascii?Q?u3OGts9WzIll8ekSLoBLESw9Fw8UAcWvgAOMcy7tbEuf0QJOIPePJsGyO4/l?=
- =?us-ascii?Q?7cW1Xza0CWMuyjYmX5Q7YftcjKIauRuUyRZ91N7PmIsRDXEplMR1hjqN11zC?=
- =?us-ascii?Q?ZfhgZLOiTfU8sr/4ARM=3D?=
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hV3ohWQccsnnEbvL3TA3HMxSXXd2WXy3K7EndEUuTbw2vD+1nOtuQrO22/LX?=
+ =?us-ascii?Q?oLmFp5OkqbPx36nMSTC+S4K0dwWcZ1NTfkVacKSxeuZ7WwvXKEntP04E9vBZ?=
+ =?us-ascii?Q?kr9JHN7zaJSMOhKd4KNIj0zgZcBdg64UShJh5zOXm8I1vMpbgh+wQQGSb6AS?=
+ =?us-ascii?Q?pR7Zzkg51E190azY/Ljtg2T7pmpmvkr+0Joalranf0iGXxUZCpIDsn0lwazO?=
+ =?us-ascii?Q?ZBJSEt3K6c8mCWsDQE23Q7/X23roFd9Ee8ECMla2QbYi4snju1ZtSmV/O30R?=
+ =?us-ascii?Q?8u13/Sz+2fWzHrFzJHHV6sXrm9JZfgLVx49SSKpZgTp633tgwx/fnh16l/Z/?=
+ =?us-ascii?Q?BhoT51DbU7pTwxuAKK99od/hQC27pQlsNV+WWfWpgrLe44mMH3nLU3iW3HAw?=
+ =?us-ascii?Q?A8a8QXrTUuv/1dipNsMKRQ/2sB86pY+ZeKwj6koCqFXEmg6BqT6vgYqzJLvw?=
+ =?us-ascii?Q?J/9YuHf7I5Nf+lUoha2liJgzChJqUND/9IuH2sH7EFoCqrvSTdok/CLTKX4i?=
+ =?us-ascii?Q?L0pbBmHiJ2I2wEDgG+KcHjYZD/bta8c8RTlubTYeq8MR1PB43WGICa4EezYj?=
+ =?us-ascii?Q?gL1ZUYjI1qvT4+H6l8IUWf5aZLFMWFojIGkVODiPgNypaHu8m9zCs/HnuSJR?=
+ =?us-ascii?Q?WYRneFTALisFSo0ArEJTLDcNhr9QAT4NYndURWRBGGbYijonS2JObDNYiIX5?=
+ =?us-ascii?Q?kVZd72XM0tWn+hEcCTGX82JKgg8A3EQte1rhjCPx2IjumQ9HXwNqzgiGQ+f+?=
+ =?us-ascii?Q?jfTi2H+dngCISWwnbjC/ONzCGSwZ+uMp8gSBNTm63P3XOVyCPxSDlBFBiIg+?=
+ =?us-ascii?Q?31+vW24uo7WjqnbM3gJaaWIqfVxjC38S8rQe1aGZQ1RIa0jmHPeqS1QpDuaP?=
+ =?us-ascii?Q?ee69CHzfYPeaq0SfMu/GoxxV+D+B9kSvRkIf03wJy3DXI9IdLA6iljWpZtvI?=
+ =?us-ascii?Q?gA/MGBQ99SLtKu4AvJxyOkt9pcG++E3+nzlttsF7oQEqOkixDPxEtqHw9PKE?=
+ =?us-ascii?Q?SYAdbN9b8tybw3A0SOpvxuZnYqxWe9xexsV3zgfJmOEYeF9t8YBmkFGI8/FJ?=
+ =?us-ascii?Q?D/+6CKDnD2lIDcqjTjUpjCpfV8TKifr3TLwOQDC23EohuJWNFGBZle2ch8gN?=
+ =?us-ascii?Q?mME3YxyVaCMuIFgcmOt8PPA3whcWt3H9cpB9CY75UWrak94cnMCExrjylxRu?=
+ =?us-ascii?Q?4JBo3hJ1DpccfgL9KXsqXM642PZum2cTTXvIDO4fNX9vJcOhv+9NN4kMwVQZ?=
+ =?us-ascii?Q?QDxbbEbYLN5puWO6yTbkgdF+6SdaGgvdF5gWYi+6rRyKYfZul8WwN1DeMdbz?=
+ =?us-ascii?Q?vr0q4qoMeltQ0NDGlDkE1VbXwLQefNQ1u/eKaVWrCCuBfdsbZZU62nbenuvx?=
+ =?us-ascii?Q?oBFg0pcxSLrYnoS9hPJxa1/HIhzd2YRU2DKdCL9L0kkYXGUXNWAy+JzZPjyu?=
+ =?us-ascii?Q?JVQsSyEJ3OCQOU27P+Ikdo1dBrygWArwNbVgm9TRoB3zQTNC3cxkIfi/7SxG?=
+ =?us-ascii?Q?4j5l+aF5XIh82YP9J8RwfFjKTVwUQB7plzfqCCiD0fR3EjL8tiHiFik8qtW4?=
+ =?us-ascii?Q?va0nBbdmIn7a/5SerWI=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2025 09:26:30.5796 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae66dcbb-fc5b-4e9b-05f8-08de38975e4e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2025 09:26:28.9399 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ece7def-1643-4a92-cd72-08de38975d53
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DC.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4275
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7736
 X-Mailman-Approved-At: Thu, 11 Dec 2025 11:05:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -149,227 +149,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move DRAM bank detection from fdtdec to custom implementation to
-ensure memory banks are populated before get_page_table_size() is
-called during MMU initialization.
+Add get_next_memory_node() function declaration to fdtdec.h to support
+iterating through multiple memory nodes in device tree. This function
+is used to enumerate memory banks when the system has non-contiguous
+or multiple memory regions defined with device_type = "memory".
 
-The current fdtdec-based approach populates gd->bd->bi_dram[] too
-late in the boot sequence, causing get_page_table_size() to be
-called with unpopulated DRAM information. This prevents dynamic
-page table sizing based on actual memory configuration.
+The function implementation already exists in lib/fdtdec.c (lines
+1298-1305) but was missing the public declaration in the header file.
+This patch adds the declaration and includes dm/ofnode_decl.h for the
+ofnode type definition.
 
-Parse /memory nodes in dram_init() to fill versal2_mem_map[]
-early enough for MMU setup. Supports up to
-CONFIG_NR_DRAM_BANKS (36) non-contiguous banks with high memory
-regions (>4GB) and use __weak get_page_table_size implementation
-to estimate page table size based on the populated DRAM banks.
+This is needed for platforms that require early memory enumeration
+before standard fdtdec_setup_memory_banksize() is called, particularly
+for dynamic MMU page table size calculation based on actual DRAM
+configuration.
 
 Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
 ---
- arch/arm/mach-versal2/cpu.c                   | 57 ++++++++++++---
- .../arm/mach-versal2/include/mach/sys_proto.h |  4 +-
- board/amd/versal2/board.c                     | 70 +++++++++++++++----
- 3 files changed, 107 insertions(+), 24 deletions(-)
+ include/fdtdec.h | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-diff --git a/arch/arm/mach-versal2/cpu.c b/arch/arm/mach-versal2/cpu.c
-index 2dfcadb369e..896ff958bc0 100644
---- a/arch/arm/mach-versal2/cpu.c
-+++ b/arch/arm/mach-versal2/cpu.c
-@@ -63,30 +63,71 @@ static struct mm_region versal2_mem_map[VERSAL2_MEM_MAP_MAX] = {
- 	}
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index d9fcd037ed2..87e97635ce1 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -16,6 +16,7 @@
+ 
+ #include <linux/libfdt.h>
+ #include <pci.h>
++#include <dm/ofnode_decl.h>
+ 
+ /*
+  * Support for 64bit fdt addresses.
+@@ -198,6 +199,28 @@ struct fdtdec_phandle_args {
+ 	uint32_t args[MAX_PHANDLE_ARGS];
  };
  
--void mem_map_fill(void)
 +/**
-+ * mem_map_fill() - Populate global memory map with DRAM banks
-+ * @bank_info: Array of memory regions parsed from device tree
-+ * @num_banks: Number of valid DRAM banks in bank_info array
++ * get_next_memory_node() - Get the next enabled memory node from device tree
++ * @mem: Current memory node to start search from, or ofnode_null() to get first node
 + *
-+ * Copies DRAM bank information into the global versal2_mem_map[] array
-+ * starting at index VERSAL2_MEM_MAP_USED (5), which is after the fixed
-+ * device mappings. This must be called early in boot before MMU
-+ * initialization so that get_page_table_size() can calculate the
-+ * required page table size based on actual memory configuration.
++ * This function iterates through device tree nodes with device_type = "memory"
++ * property, automatically skipping disabled nodes (status != "okay").
++ *
++ * It is used to enumerate multiple memory regions when the system has
++ * non-contiguous or multiple memory banks defined in the device tree.
++ * The function continues searching from the given node onwards, looking
++ * for the next node with the "memory" device_type property and checking
++ * its status property.
++ *
++ * Context: Can be called multiple times to iterate through all memory nodes.
++ *          Pass ofnode_null() on first call, then pass the returned node
++ *          on subsequent calls until an invalid node is returned.
++ *
++ * Return: Next valid, enabled memory ofnode, or invalid ofnode if no more
++ *         memory nodes exist
 + */
-+void mem_map_fill(struct mm_region *bank_info, u32 num_banks)
- {
- 	int banks = VERSAL2_MEM_MAP_USED;
- 
--	for (int i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
--		/* Zero size means no more DDR that's this is end */
--		if (!gd->bd->bi_dram[i].size)
--			break;
-+	for (int i = 0; i < num_banks; i++) {
-+		if (banks > VERSAL2_MEM_MAP_MAX)
-+			return;
- 
--		versal2_mem_map[banks].virt = gd->bd->bi_dram[i].start;
--		versal2_mem_map[banks].phys = gd->bd->bi_dram[i].start;
--		versal2_mem_map[banks].size = gd->bd->bi_dram[i].size;
-+		versal2_mem_map[banks].virt = bank_info[i].phys;
-+		versal2_mem_map[banks].phys = bank_info[i].phys;
-+		versal2_mem_map[banks].size = bank_info[i].size;
- 		versal2_mem_map[banks].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 					      PTE_BLOCK_INNER_SHARE;
- 		banks = banks + 1;
- 	}
- }
- 
-+/**
-+ * fill_gd_mem_info() - Copy DRAM banks from mem_map to bd_info
-+ *
-+ * Transfers DRAM bank information from the global versal2_mem_map[]
-+ * array to bd->bi_dram[] for passing memory configuration to the
-+ * Linux kernel via boot parameters (ATAGS/FDT). Each bank's physical
-+ * address and size are copied.
-+ *
-+ * This is called during dram_init_banksize() after the memory map
-+ * has been populated by mem_map_fill() in dram_init().
-+ *
-+ * Context: Called after dram_init() but before kernel handoff
-+ * Side effects: Modifies bd->bi_dram[] array
-+ */
-+void fill_bd_mem_info(void)
-+{
-+	struct bd_info *bd = gd->bd;
-+	int banks = VERSAL2_MEM_MAP_USED;
++ofnode get_next_memory_node(ofnode mem);
 +
-+	for (int i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		if (!versal2_mem_map[banks].size)
-+			break;
-+
-+		bd->bi_dram[i].start = versal2_mem_map[banks].phys;
-+		bd->bi_dram[i].size = versal2_mem_map[banks].size;
-+		banks++;
-+	}
-+}
-+
- struct mm_region *mem_map = versal2_mem_map;
- 
-+#if CONFIG_IS_ENABLED(SYS_MEM_RSVD_FOR_MMU)
- u64 get_page_table_size(void)
- {
- 	return 0x14000;
- }
-+#endif
- 
- U_BOOT_DRVINFO(soc_amd_versal2) = {
- 	.name = "soc_amd_versal2",
-diff --git a/arch/arm/mach-versal2/include/mach/sys_proto.h b/arch/arm/mach-versal2/include/mach/sys_proto.h
-index 7b1726a7ef4..cee13488620 100644
---- a/arch/arm/mach-versal2/include/mach/sys_proto.h
-+++ b/arch/arm/mach-versal2/include/mach/sys_proto.h
-@@ -5,5 +5,7 @@
-  */
- 
- #include <linux/build_bug.h>
-+#include <asm/armv8/mmu.h>
- 
--void mem_map_fill(void);
-+void mem_map_fill(struct mm_region *bank_info, u32 num_banks);
-+void fill_bd_mem_info(void);
-diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-index 7d91d288d2e..9d65f298565 100644
---- a/board/amd/versal2/board.c
-+++ b/board/amd/versal2/board.c
-@@ -18,6 +18,7 @@
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
- #include <asm/arch/sys_proto.h>
-+#include <asm/sections.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <versalpl.h>
-@@ -26,6 +27,7 @@
- #include <linux/bitfield.h>
- #include <debug_uart.h>
- #include <generated/dt.h>
-+#include <linux/ioport.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -339,28 +341,66 @@ int board_late_init(void)
- 
- int dram_init_banksize(void)
- {
--	int ret;
--
--	ret = fdtdec_setup_memory_banksize();
--	if (ret)
--		return ret;
--
--	mem_map_fill();
--
-+	fill_bd_mem_info();
- 	return 0;
- }
- 
- int dram_init(void)
- {
--	int ret;
-+	struct mm_region bank_info[CONFIG_NR_DRAM_BANKS];
-+	ofnode mem = ofnode_null();
-+	struct resource res;
-+	int ret, i, reg = 0;
-+	u32 num_banks = 0;
-+	u64 text = (u64)_start;
-+
-+	gd->ram_base = (unsigned long)~0;
-+
-+	mem = get_next_memory_node(mem);
-+	if (!ofnode_valid(mem)) {
-+		printf("%s: Missing /memory node\n", __func__);
-+		return -EINVAL;
-+	}
- 
--	if (IS_ENABLED(CONFIG_SYS_MEM_RSVD_FOR_MMU))
--		ret = fdtdec_setup_mem_size_base();
--	else
--		ret = fdtdec_setup_mem_size_base_lowest();
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		ret = ofnode_read_resource(mem, reg++, &res);
-+		if (ret < 0) {
-+			reg = 0;
-+			mem = get_next_memory_node(mem);
-+			if (!ofnode_valid(mem))
-+				break;
-+
-+			ret = ofnode_read_resource(mem, reg++, &res);
-+			if (ret < 0)
-+				break;
-+		}
- 
--	if (ret)
--		return -EINVAL;
-+		if (ret != 0)
-+			return -EINVAL;
-+
-+		bank_info[i].phys = (phys_addr_t)res.start;
-+		bank_info[i].size  = (phys_size_t)(res.end - res.start + 1);
-+
-+		if (bank_info[i].size == 0)
-+			break;
-+
-+		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-+		      __func__, i, (unsigned long long)bank_info[i].phys,
-+		      (unsigned long long)bank_info[i].size);
-+
-+		if (text >= bank_info[i].phys &&
-+		    text < (bank_info[i].phys + bank_info[i].size)) {
-+			gd->ram_base = bank_info[i].phys;
-+			gd->ram_size = bank_info[i].size;
-+			debug("%s:TEXT BASE = 0x%llx,\n", __func__, text);
-+		}
-+		num_banks++;
-+	}
-+
-+	mem_map_fill(bank_info, num_banks);
-+
-+	debug("%s: Initial DRAM base %lx size %lx\n", __func__,
-+	      gd->ram_base, (unsigned long)gd->ram_size);
- 
- 	return 0;
- }
+ /**
+  * fdtdec_parse_phandle_with_args() - Find a node pointed by phandle in a list
+  *
 -- 
 2.34.1
 
