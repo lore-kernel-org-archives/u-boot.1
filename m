@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1CB0D41C01
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D188D41C01
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:06:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6225C83CB5;
+	by phobos.denx.de (Postfix) with ESMTP id A180683CE3;
 	Thu, 11 Dec 2025 09:05:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2XIh2LZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NLGkQ9mU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 280B983C9F; Thu, 11 Dec 2025 09:05:53 +0100 (CET)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
+ id DCBFA83C9F; Thu, 11 Dec 2025 09:05:53 +0100 (CET)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DE18830E4
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:05:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B574A83C94
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:05:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-6446c924f9eso606734d50.1
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:49 -0800 (PST)
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-6432842cafdso601063d50.2
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765440348; x=1766045148; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765440350; x=1766045150; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+eQlZZ5Wty/TGmJgzChRCqBtAhuW6plHbwUSo23RDiY=;
- b=Y2XIh2LZ6Q2KWe9yQAJpQAzv3BlNxwW+J+Vfi4anuehKp/0cln3yiI0m4wpNIBZETw
- VLGR7NXDlyhppfbLPzEdPbHCbkhtCn+qbJ0mrm83kNs3O12hkVDICa+4UwDi03m4yE9e
- R9y9XLtFE1X3pUu9x0RpBqqAmc2tsh/e9tfyIGcYQMKFpNkhKy8EmVmBw8rJObtgI4LM
- LqqzHQoxMX9y0g3CpITTZCWYSl4kYbaA0bNM4iS7gUhn0SHNoUYkSXOMHtKCQInNQUoM
- rFvil37vchNz2N47RwbguPgoEEvb+fPwIG+1zoEeXy1nnaH732D5PUoTeaJtbAKzA7/M
- JiJQ==
+ bh=kOLvYABW607VGNhbGGH6i0LCrzafdHBVhMM2AMxPgak=;
+ b=NLGkQ9mUqmrCLnrvQlhIqOuWfSoeMWBB1vt/a1GfpRIk/wpkX3Ypu/etoMI7VdGsCu
+ y/2D9mYmr/Convb1wM+lqBHvYyjmbhBRCHWEBl+RGeAmdACKSK01urFxvZVNDA6VTPqK
+ Ke+VWhv91sQhSq++jBOw6C9SXyYQGKYeVjCOOINvpDxPGXvFVUL0sWGtBfXCjXRAkcQ2
+ mTYEH8dke5ZV1iA0N+F7BtZ3pvPCVSEJWVugFBX59XBOsmhGVJh6ip1v1mMIDhOUFmmZ
+ 9AMlnSeRApSGSE7fd6NejQ37USnPXJiOMbxsGxpGH9cOnvsU7D+Ri2NMOaU2o+i3/T2b
+ 5X+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765440348; x=1766045148;
+ d=1e100.net; s=20230601; t=1765440350; x=1766045150;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+eQlZZ5Wty/TGmJgzChRCqBtAhuW6plHbwUSo23RDiY=;
- b=fiFEqlMLmIhMDVNxjzeVR9u+olmdIAhS3gW1R0McIFNyQ8aD09O7/RBIMg+XC3V0uJ
- 6jzJ6ueBPJTeIFwk6Jx8z/EECtYxGYVnHTdfF6a5Oef9jc9XkkBqhLvYcMcbTLfu9WER
- KEkdCCt9eYtDRTGFvqjJgMCT0wmSkP4lSc+hMEYv3I3+1nxGQKgDtTQYZC4TGtr+LqPh
- 0a/tspXkG1BPgFbtSaJinKqI/GI08vHbgCiu8PP5EQMQhTINvr6c8yXdK42XEKDEG88d
- KaYjRJDs3xUTTBojZKruMRlV6bDWVRIrXoZTCGNx/IQheRjer6lCKy+Le1H9U0n4lsCD
- 0axg==
-X-Gm-Message-State: AOJu0YyRWSsM+jYvbDMU86Sk9vwbV/nyXiZoKAceNhglFD5LqGzUoolK
- JOj+hVBr82lqv85YnxTxSY3mS00kCt3si6OUSzC08A7d3i2zu/v01GaEDBtH
-X-Gm-Gg: AY/fxX7nwDDeDl1Bd372wMj3J+KAGi0PJDCZ2Rj28/Q1vkwMsmt/3ppKG1YJNGKTPyc
- 49EUS5OXrfJmHIibjPJ2SK8X0R7zvjpBmR+4GF32/5DgRHsO9B9T37OeLAfjOc+oW9POJeM0aoa
- /HXqKbVkLiW8mE4Uu4Sth9oqIRWFstlhN136lbzHPw/UaIk5mAMw36h1SJZd4jC+HDQnsw2y6Yh
- ykla6OEJ64d83dF3LjwC27GooOghBh0XKKoxG2XrpDdCLkvxtcOwtRnB8Mu7TAgaTgBzoZH7i4y
- ymCZNFq1O5/Dorc3NBL0pi3vs16G/G5R1DBfsBqmiDE3hD5uiOT5HzqX7EqC/AY+g1uhtttS/Q5
- XxmcqDVU3QENRaWpyDxUkx/dXziFrSLyJi80jOEK9fL8Y71ikl4jWs3cBpo1EvFkAT9yM3Z5t3w
- uu7NMXE+PkwRakJCzXQiSwxaiNCg==
-X-Google-Smtp-Source: AGHT+IFDC8f/iMGLfImcve9ySUGqhV/78nBOoyM29yyBlDFRBAXns8Hfb9KtMvRTrSOnGt0MN2sEmA==
-X-Received: by 2002:a05:690e:128d:b0:644:7b59:4219 with SMTP id
- 956f58d0204a3-6447b5946f7mr597054d50.10.1765440348497; 
- Thu, 11 Dec 2025 00:05:48 -0800 (PST)
+ bh=kOLvYABW607VGNhbGGH6i0LCrzafdHBVhMM2AMxPgak=;
+ b=gd6QLC2MqoMoBbHIrHc6BMwOhRdgBor1weuOY1xnx/M7m9hrNAVjlejj2w4AGX/Wl6
+ IJUmzrgzQ/7sdIkeqIYXcqwcke7mbE4ioMdlHJYBCxI6xSFsirh+QnEDVKWLgQVxlG8o
+ W2G3I8g7Zk8UN9eVk5iu7eK40icqIxfdUXJuDOBeOEUd9J0ElHI1wJ724dc1ytVx2vbm
+ YI6XXlH54i4FVUoUJ+TC61/+Q0v4LPvnm6YmAlmDZdKWmXRouU8T2xNA3HAZ0CpZtBGo
+ i761BBRRIylCB4KRx01v6WT9Wq6aJ0Bl5AfMANel/aPrlZpFu4zpzocuNNeu9WQIpwDh
+ dYNA==
+X-Gm-Message-State: AOJu0Yw1WcPBbi6tWoUhDrnOIORUo7vgHwwXib63+9A0HTByazWHi3+Z
+ pwDxH48mpDFWV+/qjvUon4gkFA0+9j+pL9+jVdoncVl6Ynx254L0suXL4cc5
+X-Gm-Gg: AY/fxX4zpoWXbNlbFn/vNIO5wmvPvowRQOQMVLmfirYc0PGOypa95weLyr2x7zdHBcK
+ 7J3DvVeTbFaBPv/YOEo/L1dbO9bpLpOrNUlaKhtIy2AdRdQrQah7pO+q2v1JTEubKMl08umIMoJ
+ wnyKsR9JcFthd4BvcbEjSQ4Vzqn78TLUwu1zGnttvdnq/7oOGgr7etfOe+EByKeqfkWcPajIVo9
+ AmC0QsonigmShuvFL+AE0qZ2kBFqb6F1egBnP9opKkQJ5szBr3Wsa6sjBsH4aC3q9wIZwJRYatl
+ tPF20v+PHggnv9uM2N6QxuA02fXyzJTq9usSh1GCl/p0wIVuLgiqPLCr/wFBeRWgqwISn82r10X
+ JZy+pMenUoKahgpBXNWD30EpS52EzX0uq2coJdqbx8fDlCLp4HC2CQSxWgPB3K0Tvf6DcDc8huK
+ NcavPi53E00AjLHxy8a9DSDPwhbA==
+X-Google-Smtp-Source: AGHT+IHpSUmtW6VBCND0Ajq7buntWXqkcWqG8MiDfNC93wQ4chG9E/0ZaXWP1CDWjOGtySyfkTJosA==
+X-Received: by 2002:a53:acc3:0:20b0:644:49f0:9a21 with SMTP id
+ 956f58d0204a3-6446eb2feaemr3672649d50.44.1765440350138; 
+ Thu, 11 Dec 2025 00:05:50 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.47
+ 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 00:05:47 -0800 (PST)
+ Thu, 11 Dec 2025 00:05:49 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
-Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
- Philip Molloy <Philip.Molloy@analog.com>,
+Cc: adsp-linux@analog.com, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Ian Roberts <ian.roberts@timesys.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Philip Molloy <philip@philipmolloy.com>, Tom Rini <trini@konsulko.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH 03/12] mach-sc5xx: Kconfig: Make EZKIT and EZLITE carriers
- mutually exclusive
-Date: Thu, 11 Dec 2025 03:03:54 -0500
-Message-ID: <20251211080414.5363-4-malysagreg@gmail.com>
+Subject: [PATCH 04/12] mach-sc5xx: Add preliminary support for binman
+Date: Thu, 11 Dec 2025 03:03:55 -0500
+Message-ID: <20251211080414.5363-5-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <20251211080414.5363-1-malysagreg@gmail.com>
 References: <20251211080414.5363-1-malysagreg@gmail.com>
@@ -106,62 +104,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support for the SOM-CRR variants introduces library level changes that
-are not modelled in the device tree. As a result they cannot both be
-selected at the same time, so this updates the dependency in Kconfig to
-prevent them from being enabled together.
+From: Utsav Agarwal <utsav.agarwal@analog.com>
 
-Reported-by: Philip Molloy <Philip.Molloy@analog.com>
+Binman is optionally supported for Analog Devices sc5xx SoCs if Yocto is
+not being used to create and assemble system images. The spl LDR is
+generated locally but other artifacts such as kernel FIT image and root
+file system are built externally and must be supplied to binman if used.
+
+Binman is enabled by selecting the SC5XX_USE_BINMAN config symbol and
+the image structure is included in the shared sc5xx device tree.
+
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
-
+Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
- - New
+ arch/arm/dts/sc5xx.dtsi     | 52 +++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-sc5xx/Kconfig | 33 +++++++++++++++++++++++
+ 2 files changed, 85 insertions(+)
 
- arch/arm/mach-sc5xx/Kconfig | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
-
+diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
+index 3f440dac29f..b4de1b51bb9 100644
+--- a/arch/arm/dts/sc5xx.dtsi
++++ b/arch/arm/dts/sc5xx.dtsi
+@@ -10,6 +10,58 @@
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
+ 
++	chosen {
++		stdout-path = "serial0:115200";
++		bootph-pre-ram;
++	};
++
++	aliases {
++		spi2 = "/spi2";
++		serial0 = &uart0;
++		bootph-pre-ram;
++	};
++
++#ifdef CONFIG_SC5XX_USE_BINMAN
++	binman {
++		filename = CONFIG_SC5XX_BINMAN_FILENAME;
++		stage1-boot {
++			offset = <CONFIG_SC5XX_UBOOT_SPL_OFFSET>;
++			type = "blob-ext";
++			filename = "spl/u-boot-spl.ldr";
++		};
++
++		/* since falcon mode can jump from SPL to OS directly
++		 * full u-boot is optional
++		 *
++		 * @todo: review if we can say this given support has
++		 * not yet been upstreamed. Otherwise we might have to
++		 * invoke binman only for full u-boot.
++		 */
++		stage2-boot {
++			offset = <CONFIG_SC5XX_UBOOT_OFFSET>;
++			type = "blob-ext";
++			filename = "u-boot.ldr";
++			optional;
++		};
++
++#ifdef CONFIG_SC5XX_FITIMAGE_NAME
++		fitImage {
++			offset = <CONFIG_SC5XX_FITIMAGE_OFFSET>;
++			type = "blob-ext";
++			filename = CONFIG_SC5XX_FITIMAGE_NAME;
++		};
++#endif
++
++#ifdef CONFIG_SC5XX_ROOTFS_NAME
++		rfs {
++			offset = <CONFIG_SC5XX_ROOTFS_OFFSET>;
++			type = "blob-ext";
++			filename = CONFIG_SC5XX_ROOTFS_NAME;
++		};
++#endif
++	};
++#endif
++
+ 	clocks {
+ 		sys_clkin0: sys_clkin0 {
+ 			compatible = "fixed-clock";
 diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index 170177f4e10..b7c298fe279 100644
+index b7c298fe279..ec1d5539dc9 100644
 --- a/arch/arm/mach-sc5xx/Kconfig
 +++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -241,21 +241,27 @@ config ADI_BUG_EZKHW21
- 	  This workaround affects the SC584 EZKIT and addresses bug EZKHW21.
- 	  It disables gigabit ethernet mode and limits the board to 100 Mbps
+@@ -147,6 +147,39 @@ config SC5XX_LOADADDR
+ 	help
+ 	  The default load address for u-boot.
  
-+choice
-+	prompt "Analog Devices SOM Carrier Board Variant"
-+	depends on (SC59X || SC59X_64)
-+	default ADI_CARRIER_SOMCRR_EZKIT
++menu "Binman configuration"
++config SC5XX_USE_BINMAN
++	bool "Use binman for final image"
++	select BINMAN
 +	help
-+	  Select the specific EV-SOMCRR carrier board that you are using.
-+	  Using a SOM without a carrier board is not supported.
++	  If you wish to use binman to assemble an image, say 'Y' here.
++	  This will enable binman-specific sections in the device tree.
 +
- config ADI_CARRIER_SOMCRR_EZKIT
- 	bool "Support the EV-SOMCRR-EZKIT"
--	depends on (SC59X || SC59X_64)
- 	help
- 	  Say y to include support for the EV-SOMCRR-EZKIT carrier board,
--	  which is compatible with the SC594 and SC598 SOMs. The EZKIT is
--	  mutually incompatible with the EZLITE.
-+	  which is compatible with the SC594 and SC598 SOMs.
- 
- config ADI_CARRIER_SOMCRR_EZLITE
- 	bool "Support the EV-SOMCRR-EZLITE"
--	depends on (SC59X || SC59X_64)
- 	help
- 	  Say y to include support for the EV-SOMCRR-EZLITE carrier board,
--	  which is compatible with the SC594 and SC598 SOMs. The EZLITE is
--	  mutually incompatible with the EZKIT.
-+	  which is compatible with the SC594 and SC598 SOMs.
++config SC5XX_BINMAN_FILENAME
++	string "Image name"
++	default "sc5xx-image.img"
++	depends on SC5XX_USE_BINMAN
++	help
++	  The name of the image that will be created by binman.
++	  This is used to create the final image.
 +
-+endchoice
- 
- config ADI_SPL_FORCE_BMODE
- 	int "Force the SPL to use this BMODE device during next boot stage"
++config SC5XX_FITIMAGE_NAME
++	string "FitImage name"
++	default "fitImage"
++	depends on SC5XX_USE_BINMAN
++	help
++	  The name of the fitImage to be packed by binman.
++	  This is used to create the final image.
++
++config SC5XX_ROOTFS_NAME
++	string "RootFS name"
++	default "rootfs"
++	depends on SC5XX_USE_BINMAN
++	help
++	  The name of the rootfs to be packed by binman.
++	  This is used to create the final image.
++endmenu
++
+ config ADI_IMAGE
+ 	string "ADI fitImage type"
+ 	help
 -- 
 2.49.1
 
