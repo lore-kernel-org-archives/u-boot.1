@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96447D41D64
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 16:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AC2D41D6A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 16:35:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAEAD8312A;
-	Thu, 11 Dec 2025 17:35:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE2CA83A26;
+	Thu, 11 Dec 2025 17:35:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="gH/mqx2y";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="E8+d2r5I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE26583A8E; Thu, 11 Dec 2025 17:35:09 +0100 (CET)
-Received: from mta-64-226.siemens.flowmailer.net
- (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ id 4F6BE8312A; Thu, 11 Dec 2025 17:35:10 +0100 (CET)
+Received: from mta-65-227.siemens.flowmailer.net
+ (mta-65-227.siemens.flowmailer.net [185.136.65.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59F7C8312A
+ by phobos.denx.de (Postfix) with ESMTPS id 1093C83106
  for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 17:35:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
- 20251211163500fd651c829c00020724 for <u-boot@lists.denx.de>;
- Thu, 11 Dec 2025 17:35:00 +0100
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
+ 20251211163501875938354000020773 for <u-boot@lists.denx.de>;
+ Thu, 11 Dec 2025 17:35:01 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=sQ9fj5dCL3nxocieYK4Gdx/gRS16S0CTnubutgIA44M=;
- b=gH/mqx2ydoVBwasrCqontLVV/7JWSN6/Bg5GRTUR3mNYJ7VIftV/C2v2Be/gEeZvLWzuRT
- 4m8JGPwBKMcL/Y1d4/5H81aUFwPjCxs+uEq992KiIY7rdJXOCezTTKR2VTg4FWghEBD8GI8L
- sWgJ90/hnCkXZE/qN1CKKiDoS0VOro3yykwIBY8uTXMCYQgV1Q9QP7NvBhtEMSHEHhSQI2d2
- LAYSvVbcsUNntAk8LSnxSrbWvL16zYL6SJoGUunIfnKqJl4LmyO44vdmwqqGDWd8IPKKbMll
- UHWEyPPIBkwHTPiKgamBCpFEEmM7Ke1gO2M/RIp3rNbdTV6s98r13EPg==;
+ bh=DXuhi2R4usUMi4S5/lrCXouum+ugBkTGmzEWQ30yeHo=;
+ b=E8+d2r5I9kWvReiZtxWdF23rHdYKKDxIUWNMAZhFOnbChJc9SZEkQRE7gil5ymea9shZ9p
+ cL99KNodPbxpkD3TweYLBrcJKn5zqX1iV+BOzqcMtKXbAGQUof2v8VfwEqWSkRY5LKXtNn5U
+ ZP8/uN5Whk6TIaMrU3BuaI+tR262l3DfU84elcCLsV8auIbkHXBqXssbLzUZ7bHSlshl2oud
+ dhF2gh4EmmojfFFzy0yvfsZuH1mB5jFCdyz3aEkpSX18src+otSDVHZbjTZAEDlhZCfsl9R3
+ baLtr6SQgz93FXQHt2nGI+x40GTc1INK6ooboFgVHcOqi2jkaVUTG2Fg==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -45,10 +45,10 @@ Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
  Sune Brian <briansune@gmail.com>, Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [PATCH v3 2/5] spl: mmc: Account for
- SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE being a choice
-Date: Thu, 11 Dec 2025 17:34:56 +0100
-Message-ID: <d9fd61b433a5101ed019029ba554c5900140fdfd.1765470899.git.jan.kiszka@siemens.com>
+Subject: [PATCH v3 4/5] arch: arm: mach-socfpga: Adjust a raw sectors for MMC
+ loading of U-Boot from SPL
+Date: Thu, 11 Dec 2025 17:34:58 +0100
+Message-ID: <c9a6e6f8ec5e854057459e91db20a46c9420b392.1765470899.git.jan.kiszka@siemens.com>
 In-Reply-To: <cover.1765470899.git.jan.kiszka@siemens.com>
 References: <cover.1765470899.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
@@ -73,75 +73,43 @@ X-Virus-Status: Clean
 
 From: Jan Kiszka <jan.kiszka@siemens.com>
 
-Add SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE as condition where so
-far SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was enough - though often
-by chance as both options were enabled.
+If U-Boot is located on MMC, SPL and U-Boot proper are glued together.
+More precisely, SPL is stored 4 times. Take this and its padding into
+account and adjust sector number via board_spl_mmc_get_uboot_raw_sector.
+This allows loading from a partition, without the need to hard-code the
+offset via SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
 
-Reorder the #ifdef blocks at this chance to follow the order in the
-Kconfig menu.
-
-Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
- common/spl/spl_mmc.c | 17 +++++++++--------
- include/part.h       |  3 ++-
- 2 files changed, 11 insertions(+), 9 deletions(-)
+ arch/arm/mach-socfpga/board.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index d8ce3a84614..1942e417075 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -106,7 +106,8 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
- 	return 0;
+diff --git a/arch/arm/mach-socfpga/board.c b/arch/arm/mach-socfpga/board.c
+index 28554b7a109..7f65aed4540 100644
+--- a/arch/arm/mach-socfpga/board.c
++++ b/arch/arm/mach-socfpga/board.c
+@@ -14,6 +14,7 @@
+ #include <hang.h>
+ #include <handoff.h>
+ #include <image.h>
++#include <spl.h>
+ #include <usb.h>
+ #include <usb/dwc2_udc.h>
+ #include <asm/global_data.h>
+@@ -209,3 +210,13 @@ void lmb_arch_add_memory(void)
+ 	}
  }
- 
--#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-+#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
-+    defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
- static int mmc_load_image_raw_partition(struct spl_image_info *spl_image,
- 					struct spl_boot_device *bootdev,
- 					struct mmc *mmc, int partition,
-@@ -419,19 +420,19 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 
- 		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
- 
--#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
--		ret = mmc_load_image_raw_partition(spl_image, bootdev,
--						   mmc, raw_part,
--						   raw_sect);
--		if (!ret)
--			return 0;
--#endif
- #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
- 		ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
- 						raw_sect +
- 						spl_mmc_raw_uboot_offset(part));
- 		if (!ret)
- 			return 0;
-+#elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
-+      defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
-+		ret = mmc_load_image_raw_partition(spl_image, bootdev,
-+						   mmc, raw_part,
-+						   raw_sect);
-+		if (!ret)
-+			return 0;
  #endif
- 		/* If RAW mode fails, try FS mode. */
- 		fallthrough;
-diff --git a/include/part.h b/include/part.h
-index 6caaa6526aa..ba4a63ddc75 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -461,7 +461,8 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t start, lbaint_t blkcnt);
- #ifdef CONFIG_XPL_BUILD
- # define part_print_ptr(x)	NULL
- # if defined(CONFIG_SPL_FS_EXT4) || defined(CONFIG_SPL_FS_FAT) || \
--	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION)
-+	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
-+	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
- #  define part_get_info_ptr(x)	x
- # else
- #  define part_get_info_ptr(x)	NULL
++
++#if (defined(CONFIG_TARGET_SOCFPGA_ARRIA10) || \
++     defined(CONFIG_TARGET_SOCFPGA_GEN5)) && defined(CONFIG_XPL_BUILD)
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						 unsigned long raw_sect)
++{
++	/* offset of u-boot proper inside u-boot-with-spl.sfp image */
++	return (CONFIG_SPL_PAD_TO * 4) / 512 + raw_sect;
++}
++#endif
 -- 
 2.51.0
 
