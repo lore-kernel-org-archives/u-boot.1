@@ -4,173 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B98D41C09
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 10:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEEEAD41C09
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 10:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A589683CBD;
-	Thu, 11 Dec 2025 11:05:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D0AA83CB1;
+	Thu, 11 Dec 2025 11:05:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="PDKNI+aw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="scWUBWeu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88F71807C0; Thu, 11 Dec 2025 08:18:37 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 795708389A; Thu, 11 Dec 2025 08:36:11 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 712B183B48
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 08:18:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB04280325
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 08:36:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dDT6acAQ61MFsvokwpxg03LqIYGh9GUteRxG/dHEnFdKx53Jeso8XOE+y1huRelrMQr22cuKnYA00E1mGwvd4saM0v/+Lqq2kzYQ43xsVw3tWeaxWP2xoEAdTPpN68xIkLO2PA7/FeFuE4tZnpYy8DFYU+/VtFmT8qejVHYa2TxS/A6OmlsB8dG8hnppxbxEy+k0TKijJON0WvoWbJSy4tHArkwbWVjhrI9Derrghc1cWgEJR+4Med0ZAKUMKtBnxikUBwHcT4F3e2aiMF9kGy2yfH0mzdtlWUren/xztggcQlOdePWHsZnfovVohSxJxpZJJdxhzHqA85E19vEHCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3ROQOv6/su+A6tqHKhMJljwCQHbOt5tWqTbAhrWxxyM=;
- b=gaMsobNJiD5wvKD0V5KCTHkkHRtOi5+s2WJLKGVwJT6hr98n9O4HuTS5myuCMk216+JmimbstuxtWGs23YgYixt+i+0c4TqYoCy5Hdh7pNyBUZ+/z2tIvoRxuU7SW0fRgHD6zi7A1+PI/SUUp8RhNtEwuD2BwRdkbSQduG7U83chpXvIEZJerf3rqaBbTQULea6v08a7gT5TI9PvGoDeTM4QRtgaQzWBF4ILocW/z4XI41lIsUXUv3F2fY4t/+n7H0FlRjVUh+wcGm/YiuBBXjIBr+wDstYoLwIvpLvPGKkH3I6P+nZHAGhShdJqcvAASZoennm98w2uN6x+mXEF6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3ROQOv6/su+A6tqHKhMJljwCQHbOt5tWqTbAhrWxxyM=;
- b=PDKNI+aw2uORfW4ZSEjYB6Gxaq/csNvjG/uKJZ0BayfSxIjq1R75nS8ksbCkxrqrlZNFA5ql9pEr+03lyyyAKlTtdLOu29t7Egyzr7ucNiHv5GLE1OgwGd3WvP23zsNOEggjPnn7zGF7IjZXZ06XqXwFGARp0VUMaOLiVRI3frxXHcoivQ0PLq0tTHRYMjQcdhAxT0nf+kiG4dYhhvZchrRAz1ull/t9/hc1Fpe9od6uUFivXfauxRVFASUxc8UG8VDKk3KpSKVmlKTcijJR17qgMfJ1RBIyNMH33+OzHTG2ru9dB9hia2uL7uX1xuaBhPAKlQfsYJlQQwxZWWRBgQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DUZPR04MB9920.eurprd04.prod.outlook.com (2603:10a6:10:4dd::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.8; Thu, 11 Dec
- 2025 07:18:33 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9388.003; Thu, 11 Dec 2025
- 07:18:33 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Thu, 11 Dec 2025 16:31:44 +0800
-Subject: [PATCH 2/2] clk: imx95-blk-ctrl: Resolve scmi clk before using it
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251211-clk-scmi-imx-fix-v1-2-9579567da829@nxp.com>
-References: <20251211-clk-scmi-imx-fix-v1-0-9579567da829@nxp.com>
-In-Reply-To: <20251211-clk-scmi-imx-fix-v1-0-9579567da829@nxp.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Alice Guo <alice.guo@nxp.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, 
- Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
- Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.3
-X-ClientProxiedBy: SG2P153CA0039.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::8)
- To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-42e2e2eccd2so362822f8f.1
+ for <u-boot@lists.denx.de>; Wed, 10 Dec 2025 23:36:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765438568; x=1766043368; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=M4rEywrgYXDR9yDGsTJS6XNynx3Qe+2SrhyMLvmCFYE=;
+ b=scWUBWeuypP08D4BRa2qctSg0B7EgCeRf2ZtkP2BniAPtBJjrjUE9gmUNFEOZrrkkJ
+ OJX5+NC7ixemmuZ2lbh6TaxHBDV/B3471EdywcSNTeTrVqJLBIjjYNmazy4rK9blwGg8
+ NBLobKC9Va7l/5DaLp3Aid4Q8oaCf0GYYTV92Khi9CZLuj+WwCvDMBxnQIYNZDBhFBqo
+ aTadyTykqf7ia1EEYQSdua0TVXP/LjASREqsMkrDI9YgbO9Z9ao2BajtcH+jngmyldAJ
+ sGT+Cds2SJ54i5bai/57FPa/b0qYmbTcgjMCo8a0OZVKYf4uKHR1il9HGWY4+7l4Be+j
+ fBQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765438568; x=1766043368;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=M4rEywrgYXDR9yDGsTJS6XNynx3Qe+2SrhyMLvmCFYE=;
+ b=UzGFugzuhs3OvRs5edlZFcnU18h4Jm+hQ8gTq3Fl9TlEH44xynb8lRu9vVwdz5epdW
+ W0qBradu9JyRf8IWVhiff+P301OzHg4c0sI3e125I763pEvQxB8hmdzYZyNJ6mgBrlFX
+ ZWbWfGxpN7IVxIuBD1wJ1MDlGITHz/0/VZfKlzQczxJX0ePzM9PVXEdMOtpRHwQifPXd
+ /8wSSmnsOOUv+yTwITjzuxbZfWgSRg5Cqe7v0L7wGtUAwd3ERhegzbFw37RiQ+YkVBI3
+ 9b3dqBhwY8QA2IeDD2L9Tnd35qDzcdta65C3E7x02T8Zc+JIUcNuAphwHbeXFJs8txD+
+ Jx/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVu4uPVvqo7IT29Ss3XEErT/gtwAmsq5uIkXsp60IQrgXq0HyNgC/7KedGUPmW5zQJ+vZAcUo4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpI45+FCgbEViAsbkxes4eEGlaynygD20ND1VzcLTA0XEvDHca
+ bgDF/1gT20I6v2Gh+PWSoY7Rys1M1yVfi+GXnHY8+tZZ0VZFCuDyhKFEjJcRc/83F/I=
+X-Gm-Gg: AY/fxX6LgNr9LEvj0wYATOxRhnoyIEwc4ahHTfzk3yvlCEXtPF5KFhmErlwQIdOIj6Y
+ hxukm6v3WcP77G4Ga14PNPveZadszcbeRgPLtZhQQTMkhAmuNcHbRMKerd+I33PVObmryJz11Nd
+ +uee/O/bTnzqvTe5qHeKmIpB4oHIKnyHr18zZX5OxFHKy9gZ+mRcpwjd7QgOQ0lD0a+Rs2Q8tUl
+ ZzK0iwwfmWRqc+vRUzvwJFXU0v6VwffQqLH/QicekWBQynH756bb7F4+wJbTuRSdrrXOO6c14Lo
+ HvF2p7kSez2jdFKvWtKSD/1kzF9/bRd1MAM3NPxTavLjWUrGkWg8HA+JnYDgKoF+xIRjDUjXWy8
+ KUoImx+W6MwFXASUZR8lmwUBcazkAv5zI/XyM+9N5yNrQd+nNYaqDWB17p67r9i42mF6m57L34h
+ sCZWLh0eLvsq09NRQ7LW3OZYXworsJxug60BW6HsZKja6bETE0vKy3FN51JS7A
+X-Google-Smtp-Source: AGHT+IGyZ7clIyahu8uhrf4v6LW550obCSQ+2DayeRFzLs4Ej+4bsg3bSt02zQCJesBgXJILMEP48A==
+X-Received: by 2002:a5d:5f43:0:b0:42b:3e0a:649e with SMTP id
+ ffacd0b85a97d-42fa39ce2c0mr5672613f8f.13.1765438567609; 
+ Wed, 10 Dec 2025 23:36:07 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:1fdc:8c26:84af:4a6?
+ ([2a01:e0a:3d9:2080:1fdc:8c26:84af:4a6])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42fa8b85fcesm4119630f8f.25.2025.12.10.23.36.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Dec 2025 23:36:07 -0800 (PST)
+Message-ID: <06a02ccb-e694-4463-83b1-cdc281408972@linaro.org>
+Date: Thu, 11 Dec 2025 08:36:04 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DUZPR04MB9920:EE_
-X-MS-Office365-Filtering-Correlation-Id: d5cecade-7fa2-4e1f-d542-08de38857e0c
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|7416014|1800799024|376014|366016|19092799006|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?U2FnU2RmSWdwb2ZhVmNKU3JEUndnSjh5RG9sY3BlNzdUc2ErN1FHRlBKNFRl?=
- =?utf-8?B?alozelIwVTlySktRQUlOM05SalpNSWdvVGZEa2JWeHlkUUp4eUhkclNSOEVT?=
- =?utf-8?B?Um8rTENFYzljbE5vY2pqcGsyTDBCeVhURWFXV0J5YnZMbFpEeW1tbmxHcXNo?=
- =?utf-8?B?MlAzR2xJTGxsS0xEQmh6eEFnQnR5cWpBNitaZFpMcUFsUFBjeHpLbGtQVlFz?=
- =?utf-8?B?RFdXS1pOUThqcDNEeFNtVFZsZXdqVW9kVjdsT0pENW03b2ZuNVFlUUIweHVq?=
- =?utf-8?B?QWpTa2RnYVFhWEV2VzJzMVhpbEV2dEg3cmVtM1RLUFdXQmxERWFudFB4S0dh?=
- =?utf-8?B?b3RPS0U1Z1J1QURDUnV6R0ZucXM0Zks3ekNuUUZOVXhXWE0zbUdLT2lwQ3lX?=
- =?utf-8?B?bjhTQUFJa0RqTWlXeFBXbWZSM0tpMmhMNElPdTZnejRKTUpEVTlMY3k0TGt2?=
- =?utf-8?B?Q1RuUTdIRWhQV3MzUWdJMjIvYTN3eHJZSjFXbkM5V1JEY2RCb0FuV1Vwc2ls?=
- =?utf-8?B?UW9JaDJGTmRWTksvbC9LNVV6TU5vdEtIaHFPWDlOZXZDWXJuVjN2YXRmcjJ3?=
- =?utf-8?B?NGxQakkxdDlMZmNvSkFkVjRzZjZJQjdTYWpRQjhyNkF5SXpGb0pOSStlaUh6?=
- =?utf-8?B?NW91V3VqU2N6cmczc1pkTTdoUWJNb3Z4S3ZjbVJWSGhPZWlaZlVVRTBzNlp4?=
- =?utf-8?B?RGZla3VLeFY0ZWVrdlJSREp6R1A5RS8vSnBhdnNmaEF3anVxdHNYeW9XVzJp?=
- =?utf-8?B?YnZHQjZQdUZEUER6UG8zb0tSaExtandLZGhaa2lYQTZBQTk0VXFQZUFKdzFv?=
- =?utf-8?B?dFFpZlVIcUwwamZkcW9LQ2RESmFFZlhOVzVzSTFDcHpuanFScHRQakhTM2Ft?=
- =?utf-8?B?dWM5VjRNZFd2MWlPWnV3TnFYb3l1d2V2WGhIeUtlZk9YN1ZtRC9NbHJlMW9t?=
- =?utf-8?B?Y0F2Z2d0YVpuK3NEUnp4Y2JvaHlocVB1QnU1SXBONkUvNjE1VDY4MlhKMzlP?=
- =?utf-8?B?QUFvZ2FmVjZNcXNYSEYxYjdnc0s0d2tPQmgvdG1VTEhETzhQTldBMkZXdnNU?=
- =?utf-8?B?N3hVUE1QbVF4bnZKTGcrdkQ0aFRzRFR5V2hzYUEvd2hvS3FxVHExcFJId3pY?=
- =?utf-8?B?L1dxckxHZHROZGVaYklSSDdWV1pXOUVaTFpsMDRUeW5Ra0tUUWg1RkZ4T0ow?=
- =?utf-8?B?Y253S1NtT1JhSE8rUTZGbldxOHo0eElQY2dmOStBUnhlcmpuSGh6UWhIWVk3?=
- =?utf-8?B?UDU5UmxIYTU4aU1NV1BKL2FndHlxaCs1UjdGaGZsWG1yUDZUQVJhRXJJVHpT?=
- =?utf-8?B?RCtqSUc3VmVQRFlIMVh2VHlyU0Fhd3BCVWJncFE4cnA2VmNOSXgyeGpxNTEr?=
- =?utf-8?B?d205OWRtNGwvZHNDOEVxV1dMb1UxMzhyMVpJMk4yWEVubkFBSmJ5d051MXlQ?=
- =?utf-8?B?RWcvNXJwa0ZIMDRJb1QxR2kyVDhwZTdrUHh0dmZzMTBDUXRpNEpqQlNhTmts?=
- =?utf-8?B?VmZ1aGdYWUFMMVpRVzVhTFpsKzJjb3JtNWFRYXcyRHRLVmgxa3Z6UVhuNXFl?=
- =?utf-8?B?Q1EzZGtPck1idjZ1WkxoR0EyeGppajdDNnBEdVZ2enlUOVlFTGVlanpwYTgv?=
- =?utf-8?B?a2F5alRlRmpoQkQzZXpsRlpCVDBTQzFmY293N3VZZzV5aHhWc2ZjWTdQVmtm?=
- =?utf-8?B?MGRreU8wU1NxNmZUTFlLdDdqZFhyWjVqSHlMN2tHL3A5SThVY2sxdjJVTzMy?=
- =?utf-8?B?enkxeDF2YStTVFFwbml4L1ZJT3lFbnRWdUdqYnpLZzd3by9GWTh0bEJ2NnFy?=
- =?utf-8?B?UzRSc2dHdWdDcEpSV0pNb2FibWYyaTZkeGNRRlR6YlhINWZyclRPRlJ4ZWpB?=
- =?utf-8?B?aG5pbEdiSk9uSnVNSGVUNk4vMG1VUWVhS0VOTDVtTnV5UDhpRTJXektVcmYx?=
- =?utf-8?B?THFvaTNlRUMvZkt4QkNsbUlhcGprbGV3QVNSQkJUcjg1Q2lzWlRBN3AxUGY5?=
- =?utf-8?B?dFJFQTd0RHcwVTJIZjZaUlV1NFZkODhkUmtmK0hKUGF0WlRzN1lOVTEwWFpi?=
- =?utf-8?Q?k3LBvl?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(7416014)(1800799024)(376014)(366016)(19092799006)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VjRJQ3NCZ21nNW9qeG5VWXlYeGUwaE9iM1JvNS8xOWsyUGp0V2dvQVFRdGtw?=
- =?utf-8?B?Mlh4ZmVNWCtmRnBrUDUveXMyTmloUXZ3anBjZ3J6THg0Zjh2TEVBemkvSGVo?=
- =?utf-8?B?V1Vwd2wzMDVZY1pHOHRhUEFhbnMwWEJqYzZ0ajNLTytuaHdYOWhicUYzM0Er?=
- =?utf-8?B?Zm9JVWpmSnRlSHZ5cTQzc01tUXlZUTh2Q2JpZEMvVjJNMXdJVmovZ0V3bC9m?=
- =?utf-8?B?cDN4cHdvQk9xVlE5ellTRUNEeTR6aUpWYlFjd1kwS2VUYi9BSkVjZzZmWGsw?=
- =?utf-8?B?YlpCOWVhTHcvbWhuQVlpL2FpNmRRZ2tHaEp3V3pWRWxVaXRQUzRpa3RNcGVQ?=
- =?utf-8?B?cWpxd3pFMlBFdm14OXdZY2FHbzRzd0s3R0IvQ0k4VGRnQnl6ZDVjQmoyUDA0?=
- =?utf-8?B?S0YrTHdwcVlaY1BQZmVmMWVYWHhiajZjcDY2VXROQkZObWRFeFlqVTZCZk9s?=
- =?utf-8?B?OSsxQTV0Z1ppSnpsdUxNZmRzS3lidWV5WkF4WHZtYjBHcThmbGVyakdydjQ3?=
- =?utf-8?B?ZHRtSjZxY05UZXZUYjhZYTd6YTR3QU5tSkpib2NndTVkRmlUeFo3WHl4YXFu?=
- =?utf-8?B?c1ZOWnM5YVNmM1F4YlFMaVpmaWR1RDIwN2l6TElORHluRlA4ZnhjWkVSaWI3?=
- =?utf-8?B?MXVUSytFd0xtNlhZQjVuaGJkZnNwY1I4eEJ2ZXU4cU4zUEtBVTl2b0cvdDZL?=
- =?utf-8?B?Sm05bW1RNjlsWWMzUnBEWHhLR2NDVVQ4R01Sb01va282M0VpRVAyVkxJWjdI?=
- =?utf-8?B?OGd6ZHVzb3k5Z2VySmREK3Q4QkppWjRTa3cxd21jUzQ1aWpWYlhZb0Z4T2RN?=
- =?utf-8?B?Sno4aGNSR0liRzdwTUhDallQeU1jQUNpWEh5ZXQ3bG44WWRmZ1o4NTNnM1RU?=
- =?utf-8?B?ME00MmRzK2NneERnazdVejQ1OUF6Z3hkUU85djF4ZU91aDBMUnB4TlQ0L1Qv?=
- =?utf-8?B?c0kwL0NQOTducHhodXBvOWlGK2lKdGdBQThtRnZ5NkhkMFJFSHlXOW5NeWNi?=
- =?utf-8?B?bzRpYlgvSkpsZWhZT3REQkxtZkxSTW9vRjlGeG5NNnNhanNZNmF0eXh5Ym8x?=
- =?utf-8?B?VDczUE4xQ2NJRjlEN1RUaDRlaXNUSzVCOC81Nk9tWHZ1OW1LVXRUY0NEV2Zh?=
- =?utf-8?B?YzQ3MzgrZHYxcFpSbmZpWCtJTkFzME5QRzNleDNTUFVWaUI1Y0RiVmEwdGxF?=
- =?utf-8?B?NzdkSTlmY1BaaEZwckxDSVg2b3F6VGt0dThnekVJUkJRZlJlaWJVQWRrdEFC?=
- =?utf-8?B?bFF5aHJKQ0dIV0pQVTNicUVFZkgwZTkydUttZjJ3dDY4aEVRbG9HUG9wYU9E?=
- =?utf-8?B?TzI1enlQa1NWVmNNa0NQRnhFWjR2U3NmU1lBRnowYUp4d1BvZTdLOWNybDkx?=
- =?utf-8?B?VFVuYnZDV0htSy9jL2tBUHJkcmdsK28yRXhmNU0xTkpJejFhM3ZlUVN1eUZD?=
- =?utf-8?B?N2tWeVRGY0thTzR5NEw3dDRQVmJ4YW14RnB6NXdWUW9vdFFDQW9ialhNYXNq?=
- =?utf-8?B?VDhwdkVRa2hDc3VJQlJuRzRRUko1NG01a2t6UUQzVlZYRHJhdDYySjJwVEpL?=
- =?utf-8?B?MHJtY3Z2eU40N2NSWEpyTTEwRFp4RWZNdEJSUXVSeE5kZ2ZpL293TU0xVHBm?=
- =?utf-8?B?UjM4ZzJZUER6UGpyRldsWWRTNE5DdDlHc2pDTVFmUWJKVm1Pdkl1U010RFhF?=
- =?utf-8?B?dmxnVHdvblU4VHlQMGZxOEpkQ0syY2dyV09mSy9tb3VhdnhxMTJ0MHlkaCtp?=
- =?utf-8?B?eUZCaUFDVG1naUtCSnNUNzN1SWZBR0RCdEU3ZWViR3NrWG9DNHpEeGFweng0?=
- =?utf-8?B?d3BMSlgyQVVpR0RYRURYbXJqSWd4U3RiQk1MeDlMNFg2R1pJLzNOWW1HWHpM?=
- =?utf-8?B?Sm5WZ1JGUDVISkFNWEFjaC80ZlZxRDQxUUU1NFdKelJqWXJMZUlxK0Jlby9Z?=
- =?utf-8?B?c2MxQjR4RnUraERzMVpYYXNyclpRWkxIMDFaYzRIUm0yUTFHRitRWG1NbXg5?=
- =?utf-8?B?d3ozdVh1TERJcjZ3S3M1alBXQThBMkI4eDBaTHFMaXNhbG1qWGxncU12SmQ5?=
- =?utf-8?B?djR5dDRLSDlGN3BYV3VJeklFZ2tJQXpSSXBzQUJFUXFMUlYzTjhBMStLK3V3?=
- =?utf-8?Q?lYSu7SU2Hp+fMC1fRmqUc4GSK?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d5cecade-7fa2-4e1f-d542-08de38857e0c
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2025 07:18:33.2119 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GidNsVTpV3qCqmNY0GmuO7/QX97qYNr6yu1qu7/Eq2w2qG4jjFIZ4fVZs2Rnky5ppdMzpW28EC3WUUGzXnnJtA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB9920
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/4] spl: Make UFS available for SPL builds
+To: Alexey Charkov <alchark@gmail.com>, u-boot@lists.denx.de,
+ Shawn Lin <shawn.lin@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Walle <mwalle@kernel.org>, Rasmus Villemoes <ravi@prevas.dk>,
+ Marek Vasut <marek.vasut@mailbox.org>, Anshul Dalal <anshuld@ti.com>,
+ Andre Przywara <andre.przywara@arm.com>, Peng Fan <peng.fan@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Anurag Dutta
+ <a-dutta@ti.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Johan Jonker <jbx6244@gmail.com>, Dhruva Gole <d-gole@ti.com>,
+ Yifeng Zhao <yifeng.zhao@rock-chips.com>, Sam Edwards <cfsworks@gmail.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, Greg Malysa <malysagreg@gmail.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Stefan Roese <stefan.roese@mailbox.org>, Heiko Schocher <hs@nabladev.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Randolph <randolph@andestech.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou
+ <me@per1cycle.org>, Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>, Joseph Chen
+ <chenjh@rock-chips.com>, Ian Roberts <ian.roberts@timesys.com>
+References: <20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com>
+ <20251210-rk3576-ufs-v1-2-a3f9e76eb66e@gmail.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20251210-rk3576-ufs-v1-2-a3f9e76eb66e@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 11 Dec 2025 11:05:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -183,175 +170,197 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi,
 
-With commit 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES"),
-there is error log:
-imx95_blkctrl_clk syscon@4c0100c0: Failed to resolve clk hsiopll
+On 12/10/25 21:10, Alexey Charkov wrote:
+> Add minimal infrastructure to build SPL images with support for UFS
+> storage devices. This also pulls in SCSI support and charset functions,
+> which are dependencies of the UFS code.
+> 
+> With this, only a fixed offset is supported for loading the next image,
+> which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
+> number of 4096-byte sectors into the UFS block device.
+> 
+> Signed-off-by: Alexey Charkov <alchark@gmail.com>
+> ---
+>   MAINTAINERS                |  1 +
+>   arch/arm/include/asm/spl.h |  1 +
+>   common/spl/Kconfig         | 16 +++++++++++++++
+>   common/spl/Makefile        |  1 +
+>   common/spl/spl_ufs.c       | 49 ++++++++++++++++++++++++++++++++++++++++++++++
+>   drivers/Makefile           |  1 +
+>   drivers/scsi/Makefile      |  3 +++
+>   lib/Makefile               |  1 +
+>   8 files changed, 73 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c9853f409920..c58805a724b9 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1860,6 +1860,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+>   M:	Bhupesh Sharma <bhupesh.linux@gmail.com>
+>   M:	Neha Malcom Francis <n-francis@ti.com>
+>   S:	Maintained
+> +F:	common/spl/spl_ufs.c
+>   F:	drivers/ufs/
+>   
+>   UPL
+> diff --git a/arch/arm/include/asm/spl.h b/arch/arm/include/asm/spl.h
+> index ee79a19c05c9..dd462ea6ad82 100644
+> --- a/arch/arm/include/asm/spl.h
+> +++ b/arch/arm/include/asm/spl.h
+> @@ -30,6 +30,7 @@ enum {
+>   	BOOT_DEVICE_XIP,
+>   	BOOT_DEVICE_BOOTROM,
+>   	BOOT_DEVICE_SMH,
+> +	BOOT_DEVICE_UFS,
+>   	BOOT_DEVICE_NONE
+>   };
+>   #endif
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index a43271671648..aa198ee44a3f 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1608,6 +1608,22 @@ config SPL_THERMAL
+>   	  automatic power-off when the temperature gets too high or low. Other
+>   	  devices may be discrete but connected on a suitable bus.
+>   
+> +config SPL_UFS_SUPPORT
+> +	bool "Support loading from UFS"
+> +	select SPL_LOAD_BLOCK
+> +	help
+> +	  Enable support for UFS in SPL. This allows
+> +	  use of UFS devices such as hard drives and flash drivers for
+> +	  loading U-Boot.
+> +
+> +config SPL_UFS_RAW_U_BOOT_SECTOR
+> +	hex "Address on the UFS to load U-Boot from"
+> +	depends on SPL_UFS_SUPPORT
+> +	default 0x800 if ARCH_ROCKCHIP
+> +	help
+> +	  Address on the block device to load U-Boot from，
+> +	  Units: UFS sectors (1 sector = 4096 bytes).
 
-clk_register use parent name "hsiopll", however this name does not
-exist. The valid name at the moment is "scmi-[0-9*]". So need to first
-resolve the scmi clk before using it.
+The UFS are usually configured with multiple LUNs, so I would expect to at least
+have the LUN parameter in case we use the sector address to load the payload.
 
-Fixes: 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES")
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/clk/imx/Makefile            |  6 ++++-
- drivers/clk/imx/clk-imx95-blkctrl.c | 48 ++++++++++++++++++++++++++++++++++++-
- 2 files changed, 52 insertions(+), 2 deletions(-)
+> +
+>   config SPL_WATCHDOG
+>   	bool "Support watchdog drivers"
+>   	imply SPL_WDT if !HW_WATCHDOG
+> diff --git a/common/spl/Makefile b/common/spl/Makefile
+> index 4c9482bd3096..e18f3cf09484 100644
+> --- a/common/spl/Makefile
+> +++ b/common/spl/Makefile
+> @@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
+>   obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
+>   obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
+>   obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+> +obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
+>   endif
+>   
+>   obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
+> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
+> new file mode 100644
+> index 000000000000..3a5fcd4ed7a8
+> --- /dev/null
+> +++ b/common/spl/spl_ufs.c
+> @@ -0,0 +1,49 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2025 Alexey Charkov <alchark@gmail.com>
+> + */
+> +
+> +#include <spl.h>
+> +#include <spl_load.h>
+> +#include <scsi.h>
+> +#include <errno.h>
+> +#include <image.h>
+> +#include <linux/compiler.h>
+> +#include <log.h>
+> +
+> +static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
+> +			     ulong size, void *buf)
 
-diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
-index f2fd6ff8ca0..619a523cf96 100644
---- a/drivers/clk/imx/Makefile
-+++ b/drivers/clk/imx/Makefile
-@@ -25,4 +25,8 @@ obj-$(CONFIG_$(PHASE_)CLK_IMX93) += clk-imx93.o clk-fracn-gppll.o \
- obj-$(CONFIG_$(PHASE_)CLK_IMXRT1020) += clk-imxrt1020.o
- obj-$(CONFIG_$(PHASE_)CLK_IMXRT1050) += clk-imxrt1050.o
- obj-$(CONFIG_$(PHASE_)CLK_IMXRT1170) += clk-imxrt1170.o
--obj-$(CONFIG_CLK_IMX95_BLKCTRL) += clk-imx95-blkctrl.o
-+
-+ifdef CONFIG_CLK_IMX95_BLKCTRL
-+ccflags-y += -I$(srctree)/dts/upstream/src/arm64/freescale/
-+obj-y += clk-imx95-blkctrl.o
-+endif
-diff --git a/drivers/clk/imx/clk-imx95-blkctrl.c b/drivers/clk/imx/clk-imx95-blkctrl.c
-index 3e6f53b4a16..f6563539402 100644
---- a/drivers/clk/imx/clk-imx95-blkctrl.c
-+++ b/drivers/clk/imx/clk-imx95-blkctrl.c
-@@ -6,9 +6,11 @@
- 
- #include <asm/io.h>
- #include <clk-uclass.h>
-+#include <clk/scmi.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <dt-bindings/clock/nxp,imx95-clock.h>
-+#include <imx95-clock.h>
- #include <linux/clk-provider.h>
- 
- #include "clk.h"
-@@ -19,9 +21,11 @@ enum {
- 	CLK_MUX,
- };
- 
-+#define MAX_NUM_PARENTS 4
- struct imx95_blk_ctl_clk_dev_data {
- 	const char *name;
- 	const char * const *parent_names;
-+	u32 clk_parent_ids[4];
- 	u32 num_parents;
- 	u32 reg;
- 	u32 bit_idx;
-@@ -41,6 +45,7 @@ static const struct imx95_blk_ctl_clk_dev_data hsio_blk_ctl_clk_dev_data[] = {
- 	[0] = {
- 		.name = "hsio_blk_ctl_clk",
- 		.parent_names = (const char *[]){ "hsiopll", },
-+		.clk_parent_ids = { IMX95_CLK_HSIOPLL, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 6,
-@@ -59,6 +64,7 @@ static const struct imx95_blk_ctl_clk_dev_data imx95_lvds_clk_dev_data[] = {
- 	[IMX95_CLK_DISPMIX_LVDS_PHY_DIV] = {
- 		.name = "ldb_phy_div",
- 		.parent_names = (const char *[]){ "ldbpll", },
-+		.clk_parent_ids = { IMX95_CLK_LDBPLL, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 0,
-@@ -69,6 +75,7 @@ static const struct imx95_blk_ctl_clk_dev_data imx95_lvds_clk_dev_data[] = {
- 	[IMX95_CLK_DISPMIX_LVDS_CH0_GATE] = {
- 		.name = "lvds_ch0_gate",
- 		.parent_names = (const char *[]){ "ldb_phy_div", },
-+		.clk_parent_ids = { ~0U, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 1,
-@@ -79,6 +86,7 @@ static const struct imx95_blk_ctl_clk_dev_data imx95_lvds_clk_dev_data[] = {
- 	[IMX95_CLK_DISPMIX_LVDS_CH1_GATE] = {
- 		.name = "lvds_ch1_gate",
- 		.parent_names = (const char *[]){ "ldb_phy_div", },
-+		.clk_parent_ids = { ~0U, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 2,
-@@ -89,6 +97,7 @@ static const struct imx95_blk_ctl_clk_dev_data imx95_lvds_clk_dev_data[] = {
- 	[IMX95_CLK_DISPMIX_PIX_DI0_GATE] = {
- 		.name = "lvds_di0_gate",
- 		.parent_names = (const char *[]){ "ldb_pll_div7", },
-+		.clk_parent_ids = { ~0U, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 3,
-@@ -99,6 +108,7 @@ static const struct imx95_blk_ctl_clk_dev_data imx95_lvds_clk_dev_data[] = {
- 	[IMX95_CLK_DISPMIX_PIX_DI1_GATE] = {
- 		.name = "lvds_di1_gate",
- 		.parent_names = (const char *[]){ "ldb_pll_div7", },
-+		.clk_parent_ids = { ~0U, },
- 		.num_parents = 1,
- 		.reg = 0,
- 		.bit_idx = 4,
-@@ -116,10 +126,11 @@ static const struct imx95_blk_ctl_dev_data imx95_lvds_csr_dev_data = {
- 
- static int imx95_blkctrl_clk_probe(struct udevice *dev)
- {
--	int i;
-+	int i, j, ret;
- 	void __iomem *addr;
- 	struct imx95_blk_ctl_dev_data *dev_data = (void *)dev_get_driver_data(dev);
- 	const struct imx95_blk_ctl_clk_dev_data *clk_dev_data;
-+	struct udevice *scmi_clk_dev;
- 
- 	addr = dev_read_addr_ptr(dev);
- 	if (addr == (void *)FDT_ADDR_T_NONE) {
-@@ -132,7 +143,42 @@ static int imx95_blkctrl_clk_probe(struct udevice *dev)
- 		return -EINVAL;
- 	}
- 
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "protocol@14", &scmi_clk_dev);
-+	if (ret) {
-+		dev_err(dev, "Failed to find procotol@14\n");
-+		return ret;
-+	}
-+
- 	clk_dev_data = dev_data->clk_dev_data;
-+	for (i = 0; i < dev_data->num_clks; i++) {
-+		ulong id;
-+		if (clk_dev_data[i].clk_type == CLK_GATE ||
-+		    clk_dev_data[i].clk_type == CLK_DIVIDER) {
-+			if (clk_dev_data[i].clk_parent_ids[0] == ~0U)
-+				continue;
-+
-+			id = CLK_ID(scmi_clk_dev, clk_dev_data[i].clk_parent_ids[0]);
-+			ret = scmi_clk_resolve_attr(id, NULL);
-+			if (ret) {
-+				dev_err(dev, "Failed to resolve clk %s\n",
-+					clk_dev_data[i].parent_names[0]);
-+				return ret;
-+			}
-+		} else if (clk_dev_data[i].clk_type == CLK_MUX) {
-+			for (j = 0; j < clk_dev_data[i].num_parents; j++) {
-+				if (clk_dev_data[i].clk_parent_ids[j] == ~0U)
-+					continue;
-+				id = CLK_ID(scmi_clk_dev, clk_dev_data[i].clk_parent_ids[j]);
-+				ret = scmi_clk_resolve_attr(id, NULL);
-+				if (ret) {
-+					dev_err(dev, "Failed to resolve clk %s\n",
-+						clk_dev_data[i].parent_names[0]);
-+					return ret;
-+				}
-+			}
-+		}
-+	}
-+
- 	for (i = 0; i < dev_data->num_clks; i++) {
- 		if (clk_dev_data[i].clk_type == CLK_GATE) {
- 			dev_clk_dm(dev, i,
+What a weird function name, please rename to spl_ufs_load_read
 
--- 
-2.51.0
+> +{
+> +	struct blk_desc *bd = load->priv;
+> +	lbaint_t sector = off >> bd->log2blksz;
+> +	lbaint_t count = size >> bd->log2blksz;
+> +
+> +	return blk_dread(bd, sector, count, buf) << bd->log2blksz;
+> +}
+> +
+> +static int spl_ufs_load_image(struct spl_image_info *spl_image,
+> +			      struct spl_boot_device *bootdev)
+> +{
+> +	int err = -ENOSYS;
+> +	struct blk_desc *bd;
+> +	struct spl_load_info load;
+> +	unsigned long sector = CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR;
+> +
+> +	/* try to recognize storage devices immediately */
+> +	scsi_scan(false);
+> +	bd = blk_get_devnum_by_uclass_id(UCLASS_SCSI, 0);
+> +	if (!bd)
+> +		return -ENODEV;
+> +
+> +	spl_load_init(&load, h_spl_load_read, bd, bd->blksz);
+> +	err = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
+> +	if (err) {
+> +		puts("spl_ufs_load_image: ufs block read error\n");
+> +		log_debug("(error=%d)\n", err);
+> +		return err;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +SPL_LOAD_IMAGE_METHOD("UFS", 0, BOOT_DEVICE_UFS, spl_ufs_load_image);
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index de993ae42ac7..43d0ba332818 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -73,6 +73,7 @@ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
+>   obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+>   obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+>   obj-$(CONFIG_SPL_THERMAL) += thermal/
+> +obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
+>   
+>   endif
+>   endif
+> diff --git a/drivers/scsi/Makefile b/drivers/scsi/Makefile
+> index b76de1b22a8b..c9af60d5d03c 100644
+> --- a/drivers/scsi/Makefile
+> +++ b/drivers/scsi/Makefile
+> @@ -16,4 +16,7 @@ ifdef CONFIG_XPL_BUILD
+>   ifdef CONFIG_SPL_SATA
+>   obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
+>   endif
+> +ifdef CONFIG_SPL_UFS_SUPPORT
+> +obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
+> +endif
+>   endif
+> diff --git a/lib/Makefile b/lib/Makefile
+> index 70667f3728c2..d0ffabc2b476 100644
+> --- a/lib/Makefile
+> +++ b/lib/Makefile
+> @@ -147,6 +147,7 @@ else
+>   obj-$(CONFIG_$(PHASE_)SPRINTF) += vsprintf.o
+>   endif
+>   obj-$(CONFIG_$(PHASE_)STRTO) += strto.o
+> +obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += charset.o
+>   else
+>   # Main U-Boot always uses the full printf support
+>   obj-y += vsprintf.o strto.o
+> 
 
+Thanks,
+Neil
