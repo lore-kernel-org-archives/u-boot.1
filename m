@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5596D3E79D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:07:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F3F5D41C01
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 08:07:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 819AE83D0C;
-	Thu, 11 Dec 2025 09:06:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 58BEB83D3C;
+	Thu, 11 Dec 2025 09:06:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NRQ8gh/y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fqeoa/7o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59567830E4; Thu, 11 Dec 2025 09:06:01 +0100 (CET)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
+ id 7671183D07; Thu, 11 Dec 2025 09:06:02 +0100 (CET)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5142083C08
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:05:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08EF783D0D
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 09:06:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-6446704997cso558065d50.2
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:58 -0800 (PST)
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-6446bae1e17so639898d50.0
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 00:05:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765440357; x=1766045157; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765440358; x=1766045158; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+qpXajNj9DIxuf8gi2bS+sUi8rOXdXXxhXCyCkSzYI0=;
- b=NRQ8gh/yhD2MrmWzYpw50u1Voy3WgnmHMruLQ7wsVXzLkxZbGFjJRFyp0QDjKptjO9
- o6YmYP+X7ouwyt4eR1tEcbXVsF6XkYc3IOkHprQOiOduNlPSgraxp4hv4amPmPPMiM0m
- PEgpBsRfZD1c7f0JbPHHekffQXXeuXaA2+HAL9SYQJPW8DJgkEupgrPfqNSxjnFuMjlZ
- JjULyyx8t06sRJIaZtdLPAOHqGisgrRdpnN9ABzTwgfHAq03j4Rhp9/CsdyvhpV0uIVM
- cGhvvofhkn4I/L0NLTEGxDZ1URDi4QzpKMbjWFiYgJDovpdZ/ghjqqHPMfNLD4b38tgz
- zKnw==
+ bh=G1h4L1SSSXR/YPtIFjikeUkZTbaDCPMilV9YBo5Rt4c=;
+ b=Fqeoa/7oBklZE9e7OK/VbzLtn+HhpIgPBxp5YYbxgaL3q1R19X41VI2JnsbIBgAiK2
+ NRE/wm2HAX3JfEM1xW0d7QIp8hqgsa2tgjXwh1iIvj27kKF92yVf/kvybzHw7o5pgdsp
+ 8fIHNEFq0eo3PmRCyARgtroRoaYeHCF2kDVr/FVCjQsieLBy/4qppYELxnXcZC6Jpk7x
+ 0xqUL9GaeBBk8j3YnkraccQXRDd6Tb1Ucgeq7NeI8DQ4V32nC/H00LouJt8AS7doUO1L
+ DBtq56wVhSBKvjWgI+6VqeEQm231cisgvI6u0R8BNjeD7ljKVtdkpveyySzWGLnjYL/B
+ tETg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765440357; x=1766045157;
+ d=1e100.net; s=20230601; t=1765440358; x=1766045158;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+qpXajNj9DIxuf8gi2bS+sUi8rOXdXXxhXCyCkSzYI0=;
- b=g1FLPZx10p/It0uWJA7HJku7d4FAFttw0AFysfLgf9l8v5gd80yZyTT9aR4Sz96dyb
- 1l+2Nk/7NhIQyW4njYw+71iVEytgA7gao1FTGgziiHziZ9SxNkJwhdJdZ6SbDWLBgd0n
- UaEKBpasYtTWiCqM4crUWBDIkznOmZfVP31E4vQWsXP8edSvcCCnqsq7KaMj2dBJnbfj
- LOruVJSpSAh5+OIJAjpuw2d10y65I/TC3Kaj6DDSlssmySkN7+/hGWuY0MZfyZyVWWw0
- YV9ctKBZ0wQLOOEyUjDSLKG/68927shmbs0Gadu6Wmg1PjJMqqmnfDVexKt6L/OK4j1N
- t1Hw==
-X-Gm-Message-State: AOJu0YwoebpogT5FGrbeeL5ZS8mTqk0CLnUfa5NSkxng2oDws0m//bns
- ClNsw5if70t2GxYwGAq/DllLRkzFiJz71ljk3YDJB0AwFz+KIcVVaa+CajP0
-X-Gm-Gg: AY/fxX6oZPJYJ1ZCgq+r94fBs8jU5zbHcsH+lF5Q+MM+hV3IR2W9t3r2Q80yv45cYgh
- ljZM2BsbNdFoOF4ZR30wfq+7PvOuCYf6CxICJGYAU5g06eAN4A/GF6rz8FfJ3G0UO7fHYompK13
- VxEAWEjLebg2vPVJSmrEpopxQf79UenEBAByelGXZ7Ag83bvau0CEuER48oyBwpBz4DKBPMYPWB
- a1UwfVeNEI0LyzzWA0V2pejavMIV/CBG4TzwETucVSaPWbLf1nL4+wEG8L0CTRFfRB7rP4Vdjr4
- z1+etHC6/vD7Xyn0QzuGlLzsMrLKlxKaX74mq/9Xap08ZT+wWrr/NO+ZPsDb3cI49k1BQWob+at
- fey2mV+BK1U4KItPnMebIZnsd5bgt59IGQferHq0daSMlGD9LMM83pneClKN++3tDI4RZwru2hw
- dzzi1O1imGwImgPFbUBBvdvYjaOQ==
-X-Google-Smtp-Source: AGHT+IHRUrtHykntA5X1SOgzdT6Qh/qhV6K2KqkExKmDkMTZxz6CY9/YEEKGOoEOCgGtvjkafZgIoQ==
-X-Received: by 2002:a05:690e:1589:20b0:63f:b6a4:bd24 with SMTP id
- 956f58d0204a3-6446eaffa9bmr3297105d50.48.1765440356695; 
- Thu, 11 Dec 2025 00:05:56 -0800 (PST)
+ bh=G1h4L1SSSXR/YPtIFjikeUkZTbaDCPMilV9YBo5Rt4c=;
+ b=jtSyjNL6v73Bck5XTbu+3mV96R5h8Ytjr5v/ryrS8n+Mwzs3kPORbKZsCyOYuoN1kX
+ pqoulh1qCiJOTvpvgr8cRLhfWp3jD+BgNL5uUMelPndBg8Ge1yeVrmf8u90q6uel29QE
+ zHaOkED5WJs6zbGgv9z0aV7/JdqI3ahd6KZWc2Txair8HINzpqPfjNcCgmGdg4PnT/vo
+ 9AtdIrBpFFgODUHoG+K+ibjMa7p6Mw3CSQltDOOLWMDYBtHIXAiv9xkUdYTs9j3+OoBY
+ wrDDO2yJS70CaviALqXqGRSwGB5qbKyLRwS1P3zRc3D5T/vnbw7LzwBDm4fo8Ts37TOA
+ qpUA==
+X-Gm-Message-State: AOJu0YxPiov8cAsjUZVyWgeoRmZqTO+ADf/j0ppF/KRJSrCAlBbowo5D
+ JoQNLs+ZaarjIsdt0FomUeFc2EIJYHgLQioV8irmd1WLM1Tley6DddCezfmO
+X-Gm-Gg: AY/fxX7YK5eHd5WlhaTOLA/2211fUVhr4TwKee+emRxZugYD9OKfnV4eVRAAXstDixv
+ 7hKjSPCS4vAeVOZFaVheS8laCI5pfjBc9HGGr5l5tOQKQ6Jzm+F7qH1eIPhlO/Ln7ARea1fD5tl
+ jRrhQgmutbrbQ/f4cq3EGRXhUpSJlMR3iQASZ6LJjCwdWDefEpT11I10VuwNdMIB9qH2KEo0POh
+ n7e89gnGWYV1P6XY2EP03Vob4PNujLVGrgMXAi85e0gsP+9DEuhqev/9yNjqqz/v2Y6VqvxfQK/
+ Il7LtAf8uh/ug/9Nie3T/DsJPE49hQd7CUuOqSoNA0NlmhHuZiiqUpkMnKOWdxD03ABVjQJiXe3
+ pnmrGuJv0pn3U5hX4BH8AscP8aCn9kGmAb7OIMqKGWHOKZIpTdPM9QCW3XeCzbyggwpxDXFiiBU
+ 7y/KEfR2JtPZnLWfv5Dq1becpf0C3a+Q3BRZL4
+X-Google-Smtp-Source: AGHT+IG3Tk6vkEeUeAOjpgI5rz/qktBwg6QAT/A1m3SW5pj/iY09/DlEKxayig0n2rXhVJFQGpLYCA==
+X-Received: by 2002:a05:690e:c41:b0:63f:ae41:fbbc with SMTP id
+ 956f58d0204a3-6446e8ff1b7mr3861601d50.10.1765440358290; 
+ Thu, 11 Dec 2025 00:05:58 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.55
+ 00721157ae682-78d69d83a85sm7256657b3.28.2025.12.11.00.05.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 00:05:56 -0800 (PST)
+ Thu, 11 Dec 2025 00:05:57 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
@@ -79,11 +79,10 @@ Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Caleb Ethridge <caleb.ethridge@analog.com>,
- Philip Molloy <philip.molloy@analog.com>,
  Ian Roberts <ian.roberts@timesys.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/12] board: adi: Add support for SC589 boards
-Date: Thu, 11 Dec 2025 03:03:59 -0500
-Message-ID: <20251211080414.5363-9-malysagreg@gmail.com>
+Subject: [PATCH 09/12] board: adi: Add support for SC584-ezkit
+Date: Thu, 11 Dec 2025 03:04:00 -0500
+Message-ID: <20251211080414.5363-10-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <20251211080414.5363-1-malysagreg@gmail.com>
 References: <20251211080414.5363-1-malysagreg@gmail.com>
@@ -105,14 +104,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds support for the Analog Devices SC589-EZKIT and SC589-mini.
+This adds support for the Analog Devices SC584-EZKIT.
 
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
 Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
-Signed-off-by: Philip Molloy <philip.molloy@analog.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
 
 ---
@@ -124,42 +122,26 @@ Changes in v3:
 Changes in v2:
 - GPIO names and polarities adjusted to match logical usage
 
- arch/arm/dts/sc589-ezkit.dts          | 198 ++++++++++++++++++++++++++
- arch/arm/dts/sc589-mini.dts           |  18 ++-
- arch/arm/dts/sc58x.dtsi               | 164 ++++++++++++++++++++-
- board/adi/sc589-ezkit/Makefile        |   6 +
- board/adi/sc589-ezkit/sc589-ezkit.c   |  21 +++
- board/adi/sc589-ezkit/sc589-ezkit.env |  18 ++-
- board/adi/sc589-mini/Makefile         |   6 +
- board/adi/sc589-mini/sc589-mini.c     |  21 +++
- board/adi/sc589-mini/sc589-mini.env   |  18 ++-
- configs/sc589-ezkit_defconfig         | 101 +++++++++++++
- configs/sc589-mini_defconfig          |  97 +++++++++++++
- 11 files changed, 650 insertions(+), 18 deletions(-)
- create mode 100644 board/adi/sc589-ezkit/Makefile
- create mode 100644 board/adi/sc589-ezkit/sc589-ezkit.c
- create mode 100644 board/adi/sc589-mini/Makefile
- create mode 100644 board/adi/sc589-mini/sc589-mini.c
- create mode 100644 configs/sc589-ezkit_defconfig
- create mode 100644 configs/sc589-mini_defconfig
+ arch/arm/dts/sc584-ezkit.dts          | 230 ++++++++++++++++++++++++++
+ board/adi/sc584-ezkit/Makefile        |   6 +
+ board/adi/sc584-ezkit/sc584-ezkit.c   |  21 +++
+ board/adi/sc584-ezkit/sc584-ezkit.env |  17 +-
+ configs/sc584-ezkit_defconfig         |  96 +++++++++++
+ 5 files changed, 363 insertions(+), 7 deletions(-)
+ create mode 100644 board/adi/sc584-ezkit/Makefile
+ create mode 100644 board/adi/sc584-ezkit/sc584-ezkit.c
+ create mode 100644 configs/sc584-ezkit_defconfig
 
-diff --git a/arch/arm/dts/sc589-ezkit.dts b/arch/arm/dts/sc589-ezkit.dts
-index 8a1c0ce0862..39ac7a4fd6e 100644
---- a/arch/arm/dts/sc589-ezkit.dts
-+++ b/arch/arm/dts/sc589-ezkit.dts
-@@ -8,6 +8,204 @@
- #include "sc58x.dtsi"
- 
- / {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
- 	model = "ADI SC589-EZKIT";
- 	compatible = "adi,sc589-ezkit", "adi,sc58x";
+diff --git a/arch/arm/dts/sc584-ezkit.dts b/arch/arm/dts/sc584-ezkit.dts
+index 4ec6bcfb658..e9f4e1da383 100644
+--- a/arch/arm/dts/sc584-ezkit.dts
++++ b/arch/arm/dts/sc584-ezkit.dts
+@@ -11,3 +11,233 @@
+ 	model = "ADI SC584-EZKIT";
+ 	compatible = "adi,sc584-ezkit", "adi,sc58x";
  };
 +
-+&i2c0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
++&i2c2 {
 +	gpio_expander1: mcp23017@21 {
 +		compatible = "microchip,mcp23017";
 +		reg = <0x21>;
@@ -188,22 +170,6 @@ index 8a1c0ce0862..39ac7a4fd6e 100644
 +			gpios = <2 GPIO_ACTIVE_LOW>;
 +			output-high;
 +			line-name = "uart0-en";
-+			bootph-pre-ram;
-+		};
-+
-+		eth0 {
-+			gpio-hog;
-+			gpios = <3 GPIO_ACTIVE_LOW>;
-+			output-high;
-+			line-name = "eth0-en";
-+			bootph-pre-ram;
-+		};
-+
-+		eth1 {
-+			gpio-hog;
-+			gpios = <4 GPIO_ACTIVE_LOW>;
-+			output-high;
-+			line-name = "eth1-en";
 +			bootph-pre-ram;
 +		};
 +
@@ -247,11 +213,11 @@ index 8a1c0ce0862..39ac7a4fd6e 100644
 +			bootph-pre-ram;
 +		};
 +
-+		sd_wp {
++		audio_jack_sel {
 +			gpio-hog;
-+			gpios = <11 GPIO_ACTIVE_LOW>;
++			gpios = <10 GPIO_ACTIVE_HIGH>;
 +			output-low;
-+			line-name = "sd-wp-en";
++			line-name = "audio_jack_sel";
 +			bootph-pre-ram;
 +		};
 +
@@ -295,11 +261,11 @@ index 8a1c0ce0862..39ac7a4fd6e 100644
 +		#gpio-cells = <2>;
 +		bootph-pre-ram;
 +
-+		pushbutton1 {
++		pushbutton3 {
 +			gpio-hog;
 +			gpios = <0 GPIO_ACTIVE_LOW>;
 +			output-high;
-+			line-name = "pushbutton1-en";
++			line-name = "pushbutton3-en";
 +			bootph-pre-ram;
 +		};
 +
@@ -311,27 +277,83 @@ index 8a1c0ce0862..39ac7a4fd6e 100644
 +			bootph-pre-ram;
 +		};
 +
-+		led10 {
++		pushbutton1 {
 +			gpio-hog;
 +			gpios = <2 GPIO_ACTIVE_LOW>;
 +			output-high;
-+			line-name = "led10-en";
++			line-name = "pushbutton1-en";
 +			bootph-pre-ram;
 +		};
 +
-+		led11 {
++		leds {
 +			gpio-hog;
 +			gpios = <3 GPIO_ACTIVE_LOW>;
 +			output-high;
-+			line-name = "led11-en";
++			line-name = "leds-en";
 +			bootph-pre-ram;
 +		};
 +
-+		led12 {
++		flg0 {
 +			gpio-hog;
 +			gpios = <4 GPIO_ACTIVE_LOW>;
 +			output-high;
-+			line-name = "led12-en";
++			line-name = "flg0_loop";
++			bootph-pre-ram;
++		};
++
++		flg1 {
++			gpio-hog;
++			gpios = <5 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "flg1_loop";
++			bootph-pre-ram;
++		};
++
++		flg2 {
++			gpio-hog;
++			gpios = <6 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "flg2_loop";
++			bootph-pre-ram;
++		};
++
++		flg3 {
++			gpio-hog;
++			gpios = <7 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "flg3_loop";
++			bootph-pre-ram;
++		};
++
++		adau1977 {
++			gpio-hog;
++			gpios = <8 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "adau1977_en";
++			bootph-pre-ram;
++		};
++
++		adau1977_fault_rst {
++			gpio-hog;
++			gpios = <9 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "adau1977_fault_rst_en";
++			bootph-pre-ram;
++		};
++
++		thumbwheel {
++			gpio-hog;
++			gpios = <10 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "thumbwheel_oe";
++			bootph-pre-ram;
++		};
++
++		engine_rpm {
++			gpio-hog;
++			gpios = <11 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "engine_rpm_oe";
 +			bootph-pre-ram;
 +		};
 +	};
@@ -348,239 +370,23 @@ index 8a1c0ce0862..39ac7a4fd6e 100644
 +		gpios = <ADI_ADSP_PIN('C', 15) GPIO_ACTIVE_HIGH>;
 +	};
 +};
-+
-+&mmc {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/sc589-mini.dts b/arch/arm/dts/sc589-mini.dts
-index 605f7a17bfc..a7650bae12c 100644
---- a/arch/arm/dts/sc589-mini.dts
-+++ b/arch/arm/dts/sc589-mini.dts
-@@ -8,6 +8,22 @@
- #include "sc58x.dtsi"
- 
- / {
--	model = "ADI SC598-MINI";
-+	model = "ADI SC589-MINI";
- 	compatible = "adi,sc589-mini", "adi,sc58x";
- };
-+
-+&eth0 {
-+	snps,reset-gpio = <&gpio0 ADI_ADSP_PIN('B', 7) GPIO_ACTIVE_LOW>;
-+};
-+
-+&gpio0 {
-+	emac0_phy_pwdn {
-+		gpio-hog;
-+		output-high;
-+		gpios = <ADI_ADSP_PIN('F', 6) GPIO_ACTIVE_HIGH>;
-+	};
-+};
-+
-+&mmc {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/sc58x.dtsi b/arch/arm/dts/sc58x.dtsi
-index 66145315ab7..7b07589de47 100644
---- a/arch/arm/dts/sc58x.dtsi
-+++ b/arch/arm/dts/sc58x.dtsi
-@@ -6,18 +6,176 @@
- #include "sc5xx.dtsi"
- 
- / {
--	gic: interrupt-controller@310b2000 {
--		compatible = "arm,cortex-a5-gic";
-+	gic: interrupt-controller@310B2000 {
-+		compatible = "arm,cortex-a5-gic", "arm,cortex-a9-gic";
- 		#interrupt-cells = <3>;
- 		#address-cells = <0>;
- 		interrupt-controller;
- 		reg = <0x310B2000 0x1000>,
- 		      <0x310B4000 0x100>;
- 	};
-+
-+	soc {
-+		rcu: rcu@0x3108B000 {
-+			compatible = "adi,reset-controller";
-+			reg = <0x3108B000 0x1000>;
-+			adi,sharc-min = <1>;
-+			adi,sharc-max = <2>;
-+			adi,enable-reboot;
-+			status = "disabled";
-+		};
-+
-+		mmc: mmc0@31010000 {
-+			compatible = "snps,dw-mshc";
-+			reg = <0x31010000 0x400>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&mmc_default>;
-+			bus-width = <4>;
-+			fifo-depth = <128>;
-+			clock-names = "biu", "ciu";
-+			max-frequency = <52000000>;
-+			status = "disabled";
-+		};
-+
-+		usb0: musb@310c1000 {
-+			compatible = "adi,sc5xx-musb";
-+			reg = <0x310c1000 0x390>;
-+			interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>,
-+						 <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "mc", "dma";
-+			status = "okay";
-+		};
-+
-+		usb1: musb@310c2000 {
-+			compatible = "adi,sc5xx-musb";
-+			reg = <0x310c2000 0x390>;
-+			interrupts = <GIC_SPI 134 IRQ_TYPE_LEVEL_HIGH>,
-+						 <GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "mc", "dma";
-+			status = "disabled";
-+		};
-+
-+		sharc1: sharc@0x28240000 {
-+			compatible = "adi,sc5xx-rproc";
-+			reg = <0x28240000 0x100>;
-+			coreid = <1>;
-+			adi,rcu = <&rcu>;
-+			status = "disabled";
-+		};
-+
-+		sharc2: sharc@0x28a40000 {
-+			compatible = "adi,sc5xx-rproc";
-+			reg = <0x28a40000 0x100>;
-+			coreid = <2>;
-+			adi,rcu = <&rcu>;
-+			status = "disabled";
-+		};
-+	};
- };
- 
- &timer0 {
- 	reg = <0x31001004 0x100>,
--	      <0x31001060 0x100>;
-+			<0x31001060 0x100>;
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&pinctrl0 {
-+	mmc_default: mmc_pins {
-+		bootph-pre-ram;
-+		adi,pins = <ADI_ADSP_PIN('F', 2) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 3) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 4) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 5) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 10) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 11) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('F', 12) ADI_ADSP_PINFUNC_ALT0>;
-+	};
-+
-+	eth0_default: eth0_pins {
-+		adi,pins = <ADI_ADSP_PIN('A', 0) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 1) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 2) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 3) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 4) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 5) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 6) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 7) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 8) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 9) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 10) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 11) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 12) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('A', 13) ADI_ADSP_PINFUNC_ALT0>;
-+	};
-+
-+	uart0_default: uart0_pins {
-+		bootph-pre-ram;
-+		adi,pins = <ADI_ADSP_PIN('C', 13) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 14) ADI_ADSP_PINFUNC_ALT0>;
-+	};
-+
-+	spi2_default: spi2_pins {
-+		adi,pins = <ADI_ADSP_PIN('C', 1) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 2) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 3) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 4) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 5) ADI_ADSP_PINFUNC_ALT0>,
-+					<ADI_ADSP_PIN('C', 6) ADI_ADSP_PINFUNC_ALT0>;
-+	};
-+};
-+
-+&pinctrl0 {
-+	adi,npins = <102>;
-+};
-+
-+&gpio0 {
-+	adi,ngpios = <102>;
-+};
-+
-+&clk {
-+	compatible = "adi,sc58x-clocks";
-+};
-+
-+&uart0 {
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&spi2 {
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK1>;
-+	reg = <0x31044000 0x1000>;
-+
-+	flash1: is25lp512@1 {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "jedec,spi-nor", "is25lp512";
-+		reg = <1>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+		spi-max-frequency = <10000000>;
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&wdog {
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&eth0 {
-+	reg = <0x3100C000 0x1000>;
-+};
-+
-+&mmc {
-+	clocks = <&dummy>, <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c0 {
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c1 {
-+	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c2 {
- 	clocks = <&clk ADSP_SC58X_CLK_CGU0_SCLK0>;
- };
-diff --git a/board/adi/sc589-ezkit/Makefile b/board/adi/sc589-ezkit/Makefile
+diff --git a/board/adi/sc584-ezkit/Makefile b/board/adi/sc584-ezkit/Makefile
 new file mode 100644
-index 00000000000..0450aa373bd
+index 00000000000..86f94976cf3
 --- /dev/null
-+++ b/board/adi/sc589-ezkit/Makefile
++++ b/board/adi/sc584-ezkit/Makefile
 @@ -0,0 +1,6 @@
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
 +# (C) Copyright 2025 - Analog Devices, Inc.
 +#
 +
-+obj-y	:= sc589-ezkit.o
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.c b/board/adi/sc589-ezkit/sc589-ezkit.c
++obj-y	:= sc584-ezkit.o
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.c b/board/adi/sc584-ezkit/sc584-ezkit.c
 new file mode 100644
 index 00000000000..288c2670761
 --- /dev/null
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.c
++++ b/board/adi/sc584-ezkit/sc584-ezkit.c
 @@ -0,0 +1,21 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
@@ -603,11 +409,11 @@ index 00000000000..288c2670761
 +	sc5xx_enable_rgmii();
 +	return 0;
 +}
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index 34b924992ac..b8206e85179 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -1,13 +1,17 @@
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
+index af9a9e01bcf..8a6f7edd5e8 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.env
++++ b/board/adi/sc584-ezkit/sc584-ezkit.env
+@@ -1,13 +1,16 @@
  /* SPDX-License-Identifier: GPL-2.0-or-later+ */
 -
  /*
@@ -619,100 +425,29 @@ index 34b924992ac..b8206e85179 100644
 -adi_stage2_offset=0x20000
 -adi_image_offset=0xE0000
 -adi_rfs_offset=0x6E0000
--loadaddr=0xC3000000
+-loadaddr=0x89300000
 +adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
 +adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
 +adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
 +loadaddr=CONFIG_SC5XX_LOADADDR
 +
 +#define USE_NFS
-+#define USE_RAM
-+#define USE_MMC
 +#define USE_SPI
++#define USE_RAM
 +
 +#include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc589-mini/Makefile b/board/adi/sc589-mini/Makefile
+diff --git a/configs/sc584-ezkit_defconfig b/configs/sc584-ezkit_defconfig
 new file mode 100644
-index 00000000000..b2712e8e488
+index 00000000000..25ac59e4733
 --- /dev/null
-+++ b/board/adi/sc589-mini/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# (C) Copyright 2025 - Analog Devices, Inc.
-+#
-+
-+obj-y	:= sc589-mini.o
-diff --git a/board/adi/sc589-mini/sc589-mini.c b/board/adi/sc589-mini/sc589-mini.c
-new file mode 100644
-index 00000000000..288c2670761
---- /dev/null
-+++ b/board/adi/sc589-mini/sc589-mini.c
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2025 - Analog Devices, Inc.
-+ */
-+
-+#include <phy.h>
-+#include <asm/u-boot.h>
-+#include <asm/arch-adi/sc5xx/sc5xx.h>
-+#include <asm/arch-adi/sc5xx/soc.h>
-+
-+int board_phy_config(struct phy_device *phydev)
-+{
-+	fixup_dp83867_phy(phydev);
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	sc5xx_enable_rgmii();
-+	return 0;
-+}
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 0f3f0bd28e9..f7628b0b335 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -1,13 +1,17 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later+ */
--
- /*
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--#include <env/adi/adi_boot.env>
--
--adi_stage2_offset=0x20000
--adi_image_offset=0xE0000
--adi_rfs_offset=0x8E0000
--loadaddr=0xC3000000
-+adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
-+adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
-+adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
-+loadaddr=CONFIG_SC5XX_LOADADDR
-+
-+#define USE_NFS
-+#define USE_RAM
-+#define USE_SPI
-+#define USE_MMC
-+
-+#include <env/adi/adi_boot.env>
-diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
-new file mode 100644
-index 00000000000..37f9199623e
---- /dev/null
-+++ b/configs/sc589-ezkit_defconfig
-@@ -0,0 +1,101 @@
++++ b/configs/sc584-ezkit_defconfig
+@@ -0,0 +1,96 @@
 +CONFIG_ARM=y
 +CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
 +CONFIG_ARCH_SC5XX=y
 +CONFIG_SYS_MALLOC_LEN=0x100000
 +CONFIG_SPL_GPIO=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
-+CONFIG_SF_DEFAULT_SPEED=1000000
 +CONFIG_ENV_SIZE=0x4000
 +CONFIG_ENV_OFFSET=0xD0000
 +CONFIG_ENV_SECT_SIZE=0x4000
@@ -723,13 +458,12 @@ index 00000000000..37f9199623e
 +CONFIG_SPL_BSS_START_ADDR=0x200A0000
 +CONFIG_SPL_BSS_MAX_SIZE=0x8000
 +CONFIG_SC58X=y
-+CONFIG_TARGET_SC589_EZKIT=y
 +CONFIG_SC5XX_UBOOT_OFFSET=0x20000
 +CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
 +CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
-+CONFIG_SC5XX_LOADADDR=0xC3000000
++CONFIG_SC5XX_LOADADDR=0x89300000
 +CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
-+CONFIG_ADI_USE_DMC1=y
++CONFIG_ADI_BUG_EZKHW21=y
 +CONFIG_CGU0_CLKOUTSEL=7
 +# CONFIG_EFI_LOADER is not set
 +CONFIG_FIT=y
@@ -750,7 +484,6 @@ index 00000000000..37f9199623e
 +CONFIG_CMD_DM=y
 +CONFIG_CMD_GPIO=y
 +CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
 +# CONFIG_CMD_PINMUX is not set
 +CONFIG_CMD_SPI=y
 +CONFIG_CMD_USB=y
@@ -766,11 +499,12 @@ index 00000000000..37f9199623e
 +CONFIG_CMD_FS_GENERIC=y
 +CONFIG_SPL_OF_CONTROL=y
 +CONFIG_OF_EMBED=y
++# CONFIG_OF_TAG_MIGRATE is not set
 +CONFIG_ENV_OVERWRITE=y
 +CONFIG_ENV_IS_IN_SPI_FLASH=y
 +CONFIG_ENV_SPI_MAX_HZ=10000000
 +CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="sc589-ezkit"
++CONFIG_HOSTNAME="sc584-ezkit"
 +CONFIG_NET_RETRY_COUNT=20
 +CONFIG_IP_DEFRAG=y
 +CONFIG_SPL_CLK=y
@@ -783,8 +517,6 @@ index 00000000000..37f9199623e
 +CONFIG_DM_I2C=y
 +CONFIG_DM_I2C_GPIO=y
 +CONFIG_SYS_I2C_ADI=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_SNPS=y
 +CONFIG_MTD=y
 +CONFIG_DM_SPI_FLASH=y
 +CONFIG_SPI_FLASH_WINBOND=y
@@ -807,109 +539,6 @@ index 00000000000..37f9199623e
 +CONFIG_FAT_WRITE=y
 +# CONFIG_REGEX is not set
 +# CONFIG_SPL_CRC8 is not set
-diff --git a/configs/sc589-mini_defconfig b/configs/sc589-mini_defconfig
-new file mode 100644
-index 00000000000..c8dd28fa2da
---- /dev/null
-+++ b/configs/sc589-mini_defconfig
-@@ -0,0 +1,97 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
-+CONFIG_ARCH_SC5XX=y
-+CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SPL_GPIO=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_OFFSET=0xD0000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_DM_GPIO=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK=0x200C0000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_BSS_START_ADDR=0x200A0000
-+CONFIG_SPL_BSS_MAX_SIZE=0x8000
-+CONFIG_SC58X=y
-+CONFIG_TARGET_SC589_MINI=y
-+CONFIG_SC5XX_UBOOT_OFFSET=0x20000
-+CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
-+CONFIG_SC5XX_ROOTFS_OFFSET=0x8E0000
-+CONFIG_SC5XX_LOADADDR=0xC3000000
-+CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
-+CONFIG_ADI_USE_DMC1=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="run ramboot"
-+CONFIG_SYS_CBSIZE=512
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_CMD_BOOTZ=y
-+# CONFIG_BOOTM_NETBSD is not set
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
-+# CONFIG_BOOTM_VXWORKS is not set
-+# CONFIG_CMD_ELF is not set
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_PINMUX is not set
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_SYS_DISABLE_AUTOLOAD=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_DNS=y
-+CONFIG_CMD_MII=y
-+# CONFIG_CMD_MDIO is not set
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_EMBED=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_SPI_MAX_HZ=10000000
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="sc589-mini"
-+CONFIG_NET_RETRY_COUNT=20
-+CONFIG_IP_DEFRAG=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_CLK_CCF=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_SPL_GPIO_HOG=y
-+CONFIG_DM_GPIO_LOOKUP_LABEL=y
-+CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
-+CONFIG_DM_I2C=y
-+CONFIG_DM_I2C_GPIO=y
-+CONFIG_SYS_I2C_ADI=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_SNPS=y
-+CONFIG_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_DW_ALTDESCRIPTOR=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_SPL_PINCTRL=y
-+# CONFIG_SPL_PINCTRL_GENERIC is not set
-+CONFIG_SPECIFY_CONSOLE_INDEX=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_ADI_SPI3=y
-+CONFIG_SPL_TIMER=y
-+CONFIG_USB=y
-+CONFIG_USB_MUSB_HOST=y
-+CONFIG_USB_MUSB_SC5XX=y
-+CONFIG_USB_MUSB_PIO_ONLY=y
-+CONFIG_USB_STORAGE=y
-+CONFIG_FAT_WRITE=y
-+# CONFIG_REGEX is not set
 -- 
 2.49.1
 
