@@ -4,83 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 982FED41C24
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 18:16:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B69D41C24
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 19:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D02898389A;
-	Thu, 11 Dec 2025 19:16:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FEEC800B1;
+	Thu, 11 Dec 2025 20:15:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aDlQG02Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LU8v2/x0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 515F683642; Thu, 11 Dec 2025 19:15:57 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 0AED5808AF; Thu, 11 Dec 2025 20:15:08 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EE9F8389A
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 19:15:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D29FF800AD
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 20:15:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64175dfc338so762146a12.0
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 10:15:45 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c7660192b0so289002a34.0
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 11:15:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765476944; x=1766081744; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JMW6SUmf6h3z6Ql/l8TQg5wtiSa/FH7XXfmoZ8CH2Ko=;
- b=aDlQG02QWhy2yNLHrY2GNC/kqfIFeoUM5/F0EzwvqbPwg6RfuyLYhqA72zi8vRE2FC
- oDODW9LDiFiZoYUboHbvicAD8kkFAAjSu19qD2Us+KJjLpS5/37rp7dpZdbJqu9ZjQNh
- MUMifk+mw3xp6V/boNJMNDfL+zC9OX9ZkokFSNnc+Q6Q9GgoMnXeWo13KwQwygUxx8wo
- vHvmjVmGeD3+EKTf4WJiZjXVfnbOB+oKCL8DHIIdcSj5YZPkDlwZqglORaO98rnfythB
- OSLlhTtjalE5HkMFX6PiEWZ6Q9iAAzfUcSTgIvE0D08TfWjq9RwgKkbj7013IDORzjVK
- IfDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765476944; x=1766081744;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1765480504; x=1766085304; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JMW6SUmf6h3z6Ql/l8TQg5wtiSa/FH7XXfmoZ8CH2Ko=;
- b=jgPrd9wRcSMH4w4sF7jGolRPteE2tTpZO2F1uaTeupWoVwVJHGhdHUWPXUS1W0wKDD
- 9QCPNOuyKMn3L8kEzCO73pn0GHZiCt9IqDyQwOjxNDKYzmzD2WsFLtJitmp9TWfRq59D
- zrHzKL5x1fFr92ademOW2j5l1HwORt/6cFzclPki1OipS74Nbi/GPci1eEejs4xmVyEN
- nOFlC1T+CjbXHdDSiCeTghvRpRlfEprGZbpGCCG5rN4S91/lBAikKQXP7/cT29yCEuCR
- 26s9atSSmjtOGYd35BIrbWrXDQBIksaqQWIWuP1keuwrD6nlxCObRp2IjmOzXb5mVvb6
- 4m1Q==
+ bh=+c/5Ckg2bevwdOSM1fp0BY6wEI3P6ZfVBWLYKh4A5ho=;
+ b=LU8v2/x0gcRLPQnh+X2Cw0XyrAlN2lneiedLAcOyFjHU7EUIdJaWooyRM+ZV5SMbyk
+ tYTE9AYAI4c1jjeXshzOmnzC+w+vRiZPD4qAkf2IGWY+n62bwDMZ5Zy+dTezTF/e4ThQ
+ JqpIms8PUqJtntgQ78C+LoPV/ExwONOYkhMg/qrNx8pCleRCFssQiGm3Sgj5Z/3L/unr
+ b/1nf2UhNts7O8Gx22XxDre7z7p2Nhsc4zoCQbNcasqxz2VYKBWKh/5DwyCMNu1S8myx
+ Tp8EyLHgDlVYFgwEo5iihUkqKhDig66c1B1RC30N9qBWr9da5W2ZcNidqno0vITOc64J
+ XH7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765480504; x=1766085304;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+c/5Ckg2bevwdOSM1fp0BY6wEI3P6ZfVBWLYKh4A5ho=;
+ b=H4KxMtW2PhQjmEQvSsL3GEfG3HSgCmWx16eq4L2Mr6MglJUDaZ055XvhBNe0nU6uMH
+ YI2QkQN340St5qaywp/JxNU9GLBw3OXeLG0l5cMiHYSvvhBHbpF0y6PeErZaFz7w0wB5
+ cvSd6vFvLOZQarBZjWF98DvFkd+Fe/4+dJEWSgf8625nW93N+XFud5n+Iasw26megWA4
+ 9CVs1STc8htSJvu0NxznTm/0VsDrIGFsRz8Wf+08DuvPFFqS/qioYL+H3FNipCdiz9DU
+ okFHsYbTCkFRvB0yWgMh9pPpqeEG/n0a/GCG7VdWaUgcAoy/SV9vSkWn4hYp8AZg2r9p
+ pjQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGmHF6x5W+wtWBFqYLMl7px0EQxZfkJEMFKD7zaV74qxtnBYluJKQd/1Dl3LpAcxp/KpU6m3o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0BgljGBX21azP1znUaVN9VnOcqGEswjj/H36YehSMJ9CRazHw
- drPDWZaMZXwHK9RFl6oXYFYEU6Shz9e/aAJX055QZ5uvvdl2ZlhKUVoBbkOn6uqSZ3aH9t8f33C
- ZQ5SkYQDg3l5C9K0BWkbW87iVdo914k/KGA==
-X-Gm-Gg: AY/fxX7vWQJBCmG8Z+q+ExFU+iyNUvxNYmRG3UeSRfH7e5TBErbEJTgRYy3hAzcB3hF
- qaVFq5n1R2rFmYKTfWABCRhaltzbg7X+Su9o0zSHDBxp1AZu+LFb/eSwQOIb6124F64Cps/6veW
- J7QndgjoSXiKUfE4BN/FzuZA8K8X6RQLEL17q+eMC0yj3M8w/fblc2ifMGaXBiqc4rJnmhNQmEm
- caOXbthj7OzTElTzdekjN1/SLeNW5yn2d6AwjYRMQkgcb360MQNIGVEOcE3H2/EoBzK2Qcz/Dua
- 08lsAXle1WeMaXYDuRKTQtsYEytvc8hZKTzsCAhAhlylRXvUsA3vf6wx7oteV7ejZ/eInRLh49h
- tysDtA5UyIWKmD61xBnm0wXsyQ4C+ApAw8GCtp1ZZoTSxXKqtgdV6WeSfj1dEbi0f
-X-Google-Smtp-Source: AGHT+IFs9pb36avUopqb9UmhJvSSjNUqgOBIv34HMg8O2753CiJJYL7suLMfUNc7KM+CztcS8O2IkO18TtWWsEjEffE=
-X-Received: by 2002:a05:6402:50ca:b0:647:54a1:4c67 with SMTP id
- 4fb4d7f45d1cf-6496cb85593mr6105094a12.7.1765476944197; Thu, 11 Dec 2025
- 10:15:44 -0800 (PST)
+ AJvYcCX6qGHi0S4WoaTiS1kH6+jGuHZg0zaockU+nuPcJx3fRtmyivaLxFjNE5kkJ54hbdnNMxGUDF0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXlXbOb1tCSkx60dKacSAeFXReSWnSrr2rhXcgwhxeSsZ+G6J6
+ 3sAjy+7drtnchJjScnCE+NWltvoevp3R6cjqho6MR/Bl37BkWAyvqROyEpNhO1TuiBPgy3xxVon
+ VLgjLwEIMSL3qyNlySDOWn/0pQdGlqPQ=
+X-Gm-Gg: AY/fxX7xFKLwe/sBmCxB4ac5cKPCLZ0zYcxBgzgTJmE1GeBdYhoZ+DXDz9nhqFKLR3+
+ GBV+vQ2OK+Gl3o6e4lqFR2APbJDUvOlXxZtmfx/d/6pK/WBvFNn1vuxB2tt5Eh8IK6DzAklahzA
+ CNxau+r+fxHm9A31iVDQZ+CXeTqM6wO0oXFnJZvmVfFJW6PhQuurWfLgpE5FxtgV6kvdyXQMaP2
+ IJvogqq7nZUFWT1PD9DlafdtB5UhKCDpcgvKdQyRRjfSVt7VkOMZHwx56Mnb2kL3FpQ+Ds=
+X-Google-Smtp-Source: AGHT+IFzhd/5djjvSZgJiB2fTZcAS+7FMuvrNSa7kCht2Jqk1kG+weDLRrYNalik1GVmFJRUF1iiaVckn2uHrc14Nkg=
+X-Received: by 2002:a05:6830:211b:b0:7c6:8bfe:f5e with SMTP id
+ 46e09a7af769-7cacec462f4mr5005014a34.32.1765480504234; Thu, 11 Dec 2025
+ 11:15:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20251202182403.GF303283@bill-the-cat>
- <20251202212119.GM303283@bill-the-cat>
- <CAFLszTiQZRY5qqT7kjUwCZdiHgdvZBJN4OPg25S5R_fE65h9bA@mail.gmail.com>
-In-Reply-To: <CAFLszTiQZRY5qqT7kjUwCZdiHgdvZBJN4OPg25S5R_fE65h9bA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 11 Dec 2025 18:15:33 +0000
-X-Gm-Features: AQt7F2rGrMQVYHp5yvyDkYWdMpPQ4mRU9LS3Y4BCH_4Q7hmTsGa3qhQrQJ63mpE
-Message-ID: <CALeDE9OQvhXoRiX7rfLafhBWYYSUbaUHZdmAJcvL9xP=+m8Nsg@mail.gmail.com>
-Subject: Re: Dropping macOS and Windows host tool builds and support in U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+ <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+ <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
+ <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
+ <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
+ <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+ <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+ <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
+ <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
+ <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
+ <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
+In-Reply-To: <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 12 Dec 2025 03:14:52 +0800
+X-Gm-Features: AQt7F2or9UvM0WNYTm7vebPpCBY8iKR3LfFiByF_0e2H5681iTEH56vF4D-XYKI
+Message-ID: <CAN7C2SA=X3Pk9ehcVWDcugUzJ2wD-8ooeA6-=zGnVa-4nQ11Mw@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Ralph Siemsen <ralph.siemsen@linaro.org>
+Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
+ "Chee, Tien Fong" <tienfong.chee@altera.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,79 +110,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 at 13:36, Simon Glass <sjg@chromium.org> wrote:
+Hi Ralph,
+
+On Fri, Dec 12, 2025 at 1:36=E2=80=AFAM Ralph Siemsen <ralph.siemsen@linaro=
+.org> wrote:
 >
-> Hi Tom,
+> Hi Brian,
 >
-> On Tue, 2 Dec 2025 at 14:21, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Dec 02, 2025 at 12:24:03PM -0600, Tom Rini wrote:
-> >
-> > > Hey all,
-> > >
-> > > I am wondering if at this point in time, anyone still builds our host
-> > > tools (fw_printenv / fw_getenv, a few others) to run on macOS or
-> > > Windows, natively.
-> > >
-> > > I ask for two reasons. The first of which is that a reason we still have
-> > > to support Azure (despite its slowness) for CI is it's where we have
-> > > macOS and Windows hosts. But at this point in time there's so many ways
-> > > to have Linux userspace running on Windows or macOS that I don't know
-> > > that there's any value to these builds.
-> > >
-> > > The second reason is more macOS specific and is that with:
-> > >
-> > > commit 8fbcc0e0e839a8e25f636c76e59311033d3817b5
-> > > Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > Date:   Thu Nov 13 12:54:51 2025 +0100
-> > >
-> > >     boot: Assure FDT is always at 8-byte aligned address
-> > >
-> > >     The fitImage may contain FDT at 4-byte aligned address, because alignment
-> > >     of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
-> > >     8-byte aligned address. Make sure that the DTs embedded in fitImages are
-> > >     always used from 8-byte aligned addresses. In case the DT is decompressed,
-> > >     make sure the target buffer is 8-byte aligned. In case the DT is only
-> > >     loaded, make sure the target buffer is 8-byte aligned too.
-> > >
-> > >     Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > >
-> > > Which does things we must do, we now don't build on macOS. Why? As best
-> > > I can tell (and for a general purpose OS, is a good call), memalign(..)
-> > > doesn't exist and you need to use posix_memalign, a not drop-in
-> > > replacement. We could spend some time reworking the code here for that,
-> > > but for now I've instead gone with this workaround so that CI can
-> > > continue:
-> > > https://lore.kernel.org/u-boot/20251202162250.2613085-1-trini@konsulko.com/
-> > >
-> > > But longer term, unless people say they need and use these tools, I'm
-> > > inclined to remove them from CI and remove this workaround, for the
-> > > v2026.04 release.
-> >
-> > We have solved this specific problem without a large work-around.
-> > However, the more general question remains. Does anyone use these tools
-> > on Windows / macOS?
+> On Thu, Dec 4, 2025 at 1:09=E2=80=AFPM Sune Brian <briansune@gmail.com> w=
+rote:
 >
-> There are a lot of Mac users, at least.
+> > If possible I would like to check if this is aligned disregarded to DRA=
+M size.
+> > On U-Boot latest or after 2025.07.
+>
+> Sorry for the delay. I am testing on 2025.10 version with a few
+> additional changes. It is a custom board using its own Quartus memory
+> parameters (which have been unchanged in many years).
+>
+> > Issue 1:
+> > sequencer.c if turned on debug by including this at the very top.
+> > "#define LOG_DEBUG" and "#define DLEVEL 1 or 2"
+> > If will stall somehow on any brand of board my side current had.
+>
+> I also encountered this, but it was solved by disable the watchdog, by
+> toggling L4WD0 reset. After doing this, there is no problem with using
+> DLEVEL 2. I even took it a step further and logged every single write
+> to the DDR control registers.
 
-Where do you get that data? Are they a lot of Mac users building
-natively on MacOS or in Linux on Mac.
+For issue 1 it is just a debug issue but I could also try a bit of your met=
+hod.
+Didn't deeply investigate this.
 
-MacOS 26 adds support for native containers running Linux, I think
-that this is likely the better way for us to support those tools on
-Mac.
+>
+> > Issue 2:
+> > For DRAM size larger than 1GB, when w/o O.C. and using as stable
+> > setting as possible.
+> > Even it passed the calibration it will not cont'd boot when
+> > sdram_gen5.c is turned on debug flag via "#define LOG_DEBUG"
+> > However this issue is not found on 1GB nor 512MB.
+>
+> I was able to get access to board with 2GB, and it boots successfully.
+> Memory calibration completes, and subsequent test with u-boot "mtest"
+> basic memory test is also passing.
 
-> For Windows, mkimage is used by the EDK2 people (Universal Payload).
-> It might be some years before they switch to Linux. Even if Microsoft
-> decides to switch out their kernel, I suspect the 'power shell' will
-> still remain.
+For your 2GB case it is w/o CYCLIC and WDT right?
+For this may I ask what DDR3 speed you used? 400MHz?
+For 2GB there are different die configurations 512x16 itself also come with
+different forms. If possible can you provide the actual die part #?
 
-How is mkimage used by EDK2 and in what way is it used on Windows, can
-you provide a link to documentation?
+For the latest test result.
+1) all boards can run properly w/o watchdog or cyclic but only works on
+400M on any size from 512M to 2G.
+2) For die itself it is shown that twice die performs much more stably.
+3) The DDR calibration itself is so touchy on time and opening CYCLIC or
+WDT highly improves the bootup stability on all timing bins.
 
-Windows has WSL2, which has been around longer than the Mac equivalent.
+>
+> I'm also running memtester on my 512MB board and it hasn't found any
+> issues after a few hours runtime.
+>
 
-Can you explain the value that native build support brings over
-supporting Linux in those subsystems on those OSes?
+The most puzzling part is this. It only dies on the U-Boot stage.
+The ddr sequence.c was somehow cropped to a point for only size and
+speed for the file comments.
+All boards or cases that even by luck passed the calibration phase on U-Boo=
+t
+do not have any issue on all stressapptest nor memtester under distro.
 
-Peter
+> Regards,
+> Ralph
