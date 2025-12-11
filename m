@@ -4,115 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9737D43356
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 21:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE24D43356
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 21:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07F4583837;
-	Thu, 11 Dec 2025 22:20:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A44B839A8;
+	Thu, 11 Dec 2025 22:20:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yY1fjCVh";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="d/hSDbFU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D0AC83837; Thu, 11 Dec 2025 21:17:34 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id A59FC835C6; Thu, 11 Dec 2025 22:05:44 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65FF683106
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 21:17:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6019B8307F
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 22:05:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-3f5ba2fc0d1so196994fac.3
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 12:17:32 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-450ac3ed719so396089b6e.0
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 13:05:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765484251; x=1766089051;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765487135; x=1766091935;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=6Nd0LmCwA99EvIK8VHuuIhlC01BPTrrxetMYPRNjNBQ=;
- b=yY1fjCVhNi5x2bVXKfPLfDX2iW0WiGBq5p0If5EJhqK6KXw0MBRp88vlffHlEGjxol
- qFmvpwfKoUCcRpQhImMU3lWM4h1E0FrgcMQYPIlfoyziJTINn8LYoE2yUpVcMga0DZp/
- vn0iCB21PVvP0C0PnTkhbikVZPDqjOzPfq0PSnb5yao/FBBY7qzVgELO8RcVht75v/3V
- e+9t5xGZ0HHj5RWohrRkadA6D965f7aAFMZ5AIoOQ8gcNs6Rb0L97X73OghZESoJXQbw
- CXY6IKScq4QRg+eTDhqZdSSnzTfzRR5m3HDlCK87cie2tnkjBDdZR8d03GzEapRyi+lg
- efDw==
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o6Lfz+pI0NPpM5tA13Wl2n/yh1PhkjY6CRAu1bo5WfI=;
+ b=d/hSDbFUY7YrulAojF9l8u3eZK5rNou0JbV5ay1AcUC4ZF5dp885pEZZrtdmyvbABY
+ 79AKA0Xdq2GmFQ3LFS5ztYCBRQJnXdzcv9xNCK6SRGVIRekW0FRczeUmVr1aw5Q6b+Wz
+ IGsPyECHRxJqcpSKpm6UgTaRtExRbSW4ELHcDNTTAQ7jaJWxMPT1SeIO5IW0kYPlwsh7
+ aVNPx7XN81npDIebthHI37Gl0D0AJJgyzad1ptKn2aVjTsBR/VyPeYeXu/iIYjfNhVxc
+ 63+esrltzhXkx4gaQFp4goA4WqKgFAZMfk2t560ycjXQ6gL3jJHIE5a/1SYFZs9XEhpe
+ cuJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765484251; x=1766089051;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6Nd0LmCwA99EvIK8VHuuIhlC01BPTrrxetMYPRNjNBQ=;
- b=fi0yMpmQi+pUHMcDcvqpPKcwgIaS6BDBynHGMiuCRuOgekKtwKyNF0M3pI2EMmBfrH
- ++JMw1KVQ5Fw+MpYYAUH6ahuCt4gDB8K3UAwrJi1oC6Rp+Qp6GI4/ZUXqxd1U4cMLqoA
- 76gllBqfWcvwhx5lwg/aMpq0ogBQpyHY6OGAEXcIrmUXeuzZigmyGCysjC9G5Sy2goBE
- 2zelyWkFmJKki+seRQxkTIchTOzTHL9/d9bfo0uMjtkqJC1h4ursKDSdPp2Vn7gXnft/
- At/6UJ9sE/t5Sez4kwmC1YxBq7oImeB3IKFvfo7XxJL3akqCqXgu/DRmIvdLW9L1Y1JH
- TwOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXANN5tFutXN+LtkxSxaJC1T2Xe80s+BbU3wKyNxpg7icyKV3ywyc37BjUfqsWxjGUZBnF8pLI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxL6jd1zyj6y7LOwSXWlh8zf9hKkNHc42nnFR1t0qghEA9wRKka
- mMWzPqcIcnWQUD/VZWNK7ts1LCux4EE9URQfCzrF74I3oB4e/Wds3bJUMvvlTh+U3Nw=
-X-Gm-Gg: AY/fxX5E2bcJDA9okNee3WsbcgM9UsxxwVdvuzYoqHpiNxvSEH+4qyqQDv8lrO7t3pC
- 9Nthl2YzvSCocsnchgpF455gBSsYhQtu9huG0oivSoQy73cjozrWoVR6uUgnTrQDbd5b0SE8YQF
- sjimJV5OqxsjfkxjGCgr5mEGfrccKxjwMSlmbyTFnIYbkKV28G0NDaEgIe1Yeww9p2hZ5K27p4l
- rBYs3ZH18vHwUqlN1m4HHd1rkDoTDKujn+skULbG8gd6MbLOBQQ7tSfmkhKVFYuMpHJzm9eOKSQ
- TlzABioN5wxRkhz537JmUDvJojI2yhQ9F8oEYQUKH0rftaNGIy288/esMRnoLiJEu18YY6R6gUw
- OsMCoAAQOsA+NezAhCYPKLAEuisVCgT6xT1Eu5vG6Wp9HVFZZhYXuiTSIwPe03qz/0KBrZ7qQUU
- LYxUD0aCNZIIjjUOn0PR+vopDOyqCrO/KexUpQcTtHdG4q0XnY8IpJA8Jt1euP
-X-Google-Smtp-Source: AGHT+IEFvsXRQ/gWgq6/ON9PAmm5EnNDomahOJcoRy7NzRwzUgPCKsoeMRTJmezREFAj9kQtsux/jQ==
-X-Received: by 2002:a05:6871:413:b0:3d2:cf03:54f3 with SMTP id
- 586e51a60fabf-3f5bd7dc98amr4170379fac.3.1765484250958; 
- Thu, 11 Dec 2025 12:17:30 -0800 (PST)
-Received: from ?IPV6:2600:8803:e7e4:500:1635:b560:bfdd:f758?
- ([2600:8803:e7e4:500:1635:b560:bfdd:f758])
+ d=1e100.net; s=20230601; t=1765487136; x=1766091936;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o6Lfz+pI0NPpM5tA13Wl2n/yh1PhkjY6CRAu1bo5WfI=;
+ b=JEUyrDO3IqSMw/zXwcSg6peiLtee+FdEvS487VRHV3UgqGFhTzJSiOWTsCxxXO8WyU
+ cVUBM0oMN340VUGc+MH16HG5DNoSPH8WZNhf6vLU3CQzHt9O2gMb6N/DvSIAeDRrjZsH
+ EfOsmyYJTVO23r4YmUbP/aOIQIzIvZICNH1cSPX5ac4G2wLWhzMNTssLJaJ0SDCrXJ6Q
+ SluGDErxUgrbp3/zvo9k7MDv6kCndZ7aUAkehOkTrKK85w4mai/5xap+o8TUpDj2vGyH
+ 5p40NdK5ZdqyNK2OXJ3j7dP2odjxk9liISRg1uPeFrAG0o8aM4LsIqZ5bkm8cyL6jDGh
+ i1Aw==
+X-Gm-Message-State: AOJu0YyQSL70ntJ0ATSc9e1A1wvWFc6f11t5HB0feqhVc6gQdA/pb9fu
+ pakqdiElQ0Te0lSrohfBIWZYrxi3L5advuqbRT7pWL5Kmpuw87gaHCGUyrACpWNOGDo=
+X-Gm-Gg: AY/fxX6+r88fa0/0rmz3/0gmYEilZgdv380m1J236R+oLIrZBlkXfwxgafLXk9e5A9J
+ 8lwIk/U/cyAfWdj3ZvfEPEC6C3c2TjoxfNtdjVq26ck70++4ZaHKbFel5UZJJhCefssPaTTeu12
+ zjyaZAXG+1D0q/KD/7AKnOtFD8V2438E+pNTPxkScZjdNEE2UGvRtVu0wZNO6TFLdx2oxCEpKEH
+ vN93PVPgSNQsxS4xkup3+lR+ekjsGY44Adh+hDTWaDGrTD9R67+y2yW5Y+vzASJs6py8BvuQrBO
+ 9p6vbwRmG9QkYMeJX6aKXGYWbzpZK4Xl69QeFAiMrv2w3J+wq8sud+A2Selhx9PJCrXfKiduXpL
+ R5mm5mNShF5IelnCsQo9MG7O3vwKoJdhXJqnRLxK6uRVh7hHaJPQPei1k/r5uJ3Pdg3hTzOhfqN
+ W9l9uTLqv3O0E7Tcs=
+X-Google-Smtp-Source: AGHT+IGx0XNIHZ754TKQfYOv1Hx0lP8fzK3+XnwaLV9F01QG/w77gUt2ypVQwSR7TStmzrZtbF8NZg==
+X-Received: by 2002:a05:6808:1a19:b0:441:8f74:fbf with SMTP id
+ 5614622812f47-45586968828mr3915475b6e.60.1765487135647; 
+ Thu, 11 Dec 2025 13:05:35 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:1635:b560:bfdd:f758])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f5d5156631sm2205157fac.19.2025.12.11.12.17.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Dec 2025 12:17:30 -0800 (PST)
-Message-ID: <6f9237e4-3313-4eeb-92e9-cda520e97f51@baylibre.com>
-Date: Thu, 11 Dec 2025 14:17:29 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] clk: mediatek: add MT8188 clock driver
+ 46e09a7af769-7cadb1d0e22sm2230619a34.1.2025.12.11.13.05.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Dec 2025 13:05:35 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Julien Stephan <jstephan@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Stefan Roese <stefan.roese@mailbox.org>, Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sumit Garg <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sam Shih <sam.shih@mediatek.com>, Ian Roberts <ian.roberts@timesys.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Heiko Schocher <hs@nabladev.com>, =?UTF-8?Q?Duje_Mihanovi=C4=87?=
- <duje@dujemihanovic.xyz>
-References: <20251209-add-mt8188-support-v2-0-31dbfcf7303c@baylibre.com>
- <20251209-add-mt8188-support-v2-2-31dbfcf7303c@baylibre.com>
- <878qf95s5q.fsf@kernel.org>
- <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+Date: Thu, 11 Dec 2025 15:05:27 -0600
+Subject: [PATCH] clk: mediatek: remove duplicate '@parent' field doc
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d98f857@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqEMAxA0atI1gZsUASvIi5qGjWotbTOIIh3t
+ 7h88Pk3JIkqCbrihih/TXr4DFMWwIv1s6C6bKCKGkPGIG8r7ueKk17ofgGDjeJPdAdj01qSdqK
+ Ra4Y8CFFy9c374Xlek3UynmwAAAA=
+X-Change-ID: 20251211-clk-mtk-fix-dup-parent-doc-57a2e7f2bc4c
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1133; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=cqo1QRHkEhd7YwbaUydIkpNgto4KslikQlMCZpWNCn4=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpOzIYygRTz+MgBcwXA2d9wzbM8LPiSBbLoffG6
+ TofwwhybDGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaTsyGBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A9m0H/3h2aeNrYIFGmV20GjlKmzLvjGb11NBNq4PyTIc
+ 1NV6156raJMe0KbYNWC97eOwGr/d5sP9ttn9IG/ds/hrvQCkJgbmI+pYO6wRmkZdYqjV68QFwqU
+ YMUSnr7NGCouFAaQfl+gaBYebT/6f7q3FpHQi/5j6F6ZTR+n4/JDxXcHJNgQI52POwNjW5iRusH
+ 9R3VqxFCVhmc5A8hwF1OYoa5t7x8ZigT9qQYFJ07nYfRVNh+NzfYt+aHDEfGQt+ccpGCm1TrBSl
+ jrptyckrsX9Rwmfxz9yYy+eaxHRck9NypmP4oI/7vwhUTzUnJY/LWNhs5t0tZbuZ0VzVTrakCtn
+ jOzQ=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Thu, 11 Dec 2025 22:20:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -130,51 +121,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/11/25 11:55 AM, David Lechner wrote:
+Remove duplicate '@parent' field documentation in struct mtk_composite.
+There is no need to say the same thing twice.
 
-...
+Also fix spelling mistake in the word "parent" while we're at it.
 
-> PLL clocks
-> ----------
-> 
-> This is just a guess, but I suspect in Linux, since CLK_TOP_ADSPPL is
-> just a 1:1 divider clock of CLK_APMIXED_ADSPPLL, they took the shortcut
-> of leaving out CLK_TOP_ADSPPL from the clock tree and set the parent
-> of CLK_TOP_ADSPPLL_Dx to CLK_APMIXED_ADSPPLL instead of CLK_TOP_ADSPPLL.
-> 
-> The actual full picture should be like this:
-> 
-> 	77, /* CLK_TOP_ADSPPLL */
-> 
-> 	...
-> 
-> 	FACTOR0(CLK_TOP_ADSPPL, CLK_APMIXED_ADSPPLL, 1, 1),
-> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_TOP_ADSPPL, 1, 2),
-> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_TOP_ADSPPL, 1, 4),
-> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_TOP_ADSPPL, 1, 8),
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/clk/mediatek/clk-mtk.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Correction:
+diff --git a/drivers/clk/mediatek/clk-mtk.h b/drivers/clk/mediatek/clk-mtk.h
+index 4ef1341aea6..89479001ba8 100644
+--- a/drivers/clk/mediatek/clk-mtk.h
++++ b/drivers/clk/mediatek/clk-mtk.h
+@@ -133,8 +133,7 @@ struct mtk_parent {
+  * struct mtk_composite - aggregate clock of mux, divider and gate clocks
+  *
+  * @id:			index of clocks
+- * @parent:		index of parnet clocks
+- * @parent:		index of parnet clocks
++ * @parent:		index of parent clocks
+  * @parent_flags:	table of parent clocks with flags
+  * @mux_reg:		hardware-specific mux register
+  * @gate_reg:		hardware-specific gate register
 
- 	FACTOR0(CLK_TOP_ADSPPL, CLK_APMIXED_ADSPPLL, 1, 1),
- 	FACTOR1(CLK_TOP_ADSPPLL_D2, CLK_TOP_ADSPPL, 1, 2),
- 	FACTOR1(CLK_TOP_ADSPPLL_D4, CLK_TOP_ADSPPL, 1, 4),
- 	FACTOR1(CLK_TOP_ADSPPLL_D8, CLK_TOP_ADSPPL, 1, 8),
+---
+base-commit: ff80e95fed188ec3d4001129445e414c9c811beb
+change-id: 20251211-clk-mtk-fix-dup-parent-doc-57a2e7f2bc4c
 
-FACTOR0() means the 2nd argument is a APMIXED clock ID and
-FACTOR1() means the 2nd argument is a TOPCKGEN clock ID.
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-> 
-> Instead of:
-> 	
-> 	-1, /* CLK_TOP_ADSPPLL */
-> 
-> 	...
-> 
-> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_APMIXED_ADSPPLL, 1, 2),
-> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_APMIXED_ADSPPLL, 1, 4),
-> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_APMIXED_ADSPPLL, 1, 8),
-> 
-> So we could either follow Linux and use CLK_APMIXED_ADSPPLL everywhere
-> instead of adding CLK_TOP_ADSPPL. Or we could be more correct and add
-> the missing clocks.
-> 
