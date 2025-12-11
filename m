@@ -4,99 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C07D41C35
-	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 13:47:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C82E7D41C37
+	for <u-boot@archiver.kernel.org>; Thu, 11 Dec 2025 13:47:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB8AC83655;
-	Thu, 11 Dec 2025 14:47:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3466E83A26;
+	Thu, 11 Dec 2025 14:47:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dya5nuPP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y/BXfqw9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1D788389A; Thu, 11 Dec 2025 14:47:23 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 72D3B83045; Thu, 11 Dec 2025 14:47:34 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DC5983045
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 14:47:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5ADDF83A26
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 14:47:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-450c576a335so43981b6e.1
- for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 05:47:21 -0800 (PST)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-450c576a335so44071b6e.1
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 05:47:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765460840; x=1766065640; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765460851; x=1766065651; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8l6moKjTn+mYUDGLygX7ucVuiHSNnRq/VL7drVMQcSM=;
- b=dya5nuPPyN5Wl6/JDH0d4RDtgzmQkEPUFysrtEYykaDFPCvphscQnrHpNrPdr/oAgS
- q6dlQcEj+jlZYqJVauWAgzy0LHitWKmb1x+WWYLSmfGOLqyrRbFkbqj8JWPrYopp1xML
- WQXYBSzB/MlCasbylnWNON/N8D2tCos1Oc+qY=
+ bh=yGR6keGTg5pbwcyBCnFw0mRMben3yiGcEbeR0mql2iU=;
+ b=Y/BXfqw9Oip+WRkdsnIc9ToaawrjOXTC5ArDXZfuhUm3bC4kq2sy00K33UWrX26yUN
+ 8sYB1xJc4fFtrY9qa1TQExPFPFQM15vs7WybAu8AKihf+l7h2fk8uHowsvCefb3DExR2
+ /C1dZNFuv3/MxZAIwXH7jypDJEVcU0HtOkyvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765460840; x=1766065640;
+ d=1e100.net; s=20230601; t=1765460851; x=1766065651;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8l6moKjTn+mYUDGLygX7ucVuiHSNnRq/VL7drVMQcSM=;
- b=a1jVWxFvvrFOhquEQmoF3S2re0O+XyGL3G56Dvf+ynW5pIA/RQnvnVYtctsfCwV9F/
- 7UlwBa97j4ce7G6DFTB13oLjjrAs5l2UAdE6CKhK4mPCrr4wNBoUOmb/244At8Aj80xw
- U93fMoVE/5c+LSGPatHN7JAQ6g5kL3pt1aH52VFxSgjQ0yZDMOtR/iNt805g6OUEAUgF
- hPKnFeswJVSpKtU+WIiSiUWwmzaizH5KfSO189iut43G7j6Nw8lPV9YxMrdw3YufsGz4
- aegVF8xyWPQn+UnYSAcwnW2+DUkezswZePjdD2hDA2z7jSmzS+pazuAayjuhLlVLILYt
- 1Arw==
+ bh=yGR6keGTg5pbwcyBCnFw0mRMben3yiGcEbeR0mql2iU=;
+ b=GKNhtgCpw/5a8NHDfYkSOSzauFPPacxjIADddtnCioLgTyM3QVOsTNjbPaEBBx9nNx
+ pQ8UXnC9DC+L8YaQyWIXfvGjMS4LFx0Ow7E7NnG43z17Nzee2vyuU3fmOy0ZUmZ4RWdp
+ BYpcVdFiNzCXj7nf62ZzHz4cmOo5728fkhcNnxtUq6LVuU+a3tU6xK6TqoJbcjPMbK3A
+ d/hCufvnCogmobuazGzp+AJjbYbEf+mz2swXMinMmPqTKAK7ytr9T6WRTzpH1TSpCkkZ
+ EgVR3lRf7tMGaZtVaUqEMh8oTGfQ5z3kjjRDLvwJHD0kyttULSkxNO4S8CNUVAU050ya
+ aZMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUf+T6Ajgs9nA94JZZ7EiGTWZY67maGkNh4Q0AzJSMsVTGA+iHTXa1xZpx+RUCLuZZws73li7c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeZEtV6zQMInFM2GdC2LMfuOTfvz6kuOVoQj+d+q0Enbc7FFeH
- Y4FQMZGqa7ZvNQumBkYrXUgbMezERNf2841k11pzhX0s4ShkHb2W2xP0fQX6rb0WyHg=
-X-Gm-Gg: AY/fxX4/ZiQNFXwHdi7QPMkj+YZIdmQ/C9fmIEoH2HRetU48eWWiOi/FshtmYAW4KOY
- tjKlh1kZgyR5iryaJHpDdVErBYluzimWQVl5b8VwSHW2zU6Ghsw3JEVJxZ7wOVatousbbU5Vu+i
- /ZX8IGhw1ZEM3av3GHh0Q8LTKv8UlCSFfS0TaygGmjdAAPmKPNuyUrf+WpMEsbA4kLOv0yju779
- ySJGG90Jo3E9gTBvnwbM7H5N0tVIgBkXPMJ3TTFlPCXJzj8tXdHd/nrwtZmIGMj3/jvDlaNALWt
- nwp8Q2CpMiyP/YUtm2kEAMdMKQE2ieaGvavAQWOMjJmFcsKFwlXyOPXwPQ5esCkWFyyHify+ffm
- +oyMazcBuKnOou1WhB622rZtkS5D7+kYrx1oPztjMO6orATaQT3mciPHr+b/70vaKoR3TBUt+8h
- 1hhzNEQLJ7gbFkN1miEUigtd7LoEmdE+lu30SnwzF0OE8CR3797A==
-X-Google-Smtp-Source: AGHT+IG2Qh2ppmSJOmWyvqXX4J2Wuss81dbItA2SZfIaKgtfzjJm6a2BILyxfgnwrkQI1G9uFBwTCg==
-X-Received: by 2002:a05:6808:5141:b0:450:3c6f:24fc with SMTP id
- 5614622812f47-455864ecb20mr2848410b6e.31.1765460840006; 
- Thu, 11 Dec 2025 05:47:20 -0800 (PST)
+ AJvYcCWzBLVTLPQ0ybOzEDM1Jm3tBFXuahpkwdQSSNefUJdQD8EtL32lFWYVmnMwbNijU4DRFdi/+aQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDGFdEwc+rGwQZCDnPM3y4aDTpFGJkJ3GnHub7cO1KQGHD3TeQ
+ oytnsqJ5OBeYw7bfIhCtGeJcqbOkv0ZboH3A1wQ3kgExJIt7ao8dPkPsFY9mBNt3DBSmw26dIdO
+ QLBevpqg=
+X-Gm-Gg: AY/fxX420jKxDAlp502/Rxp7m4AHgi6WrpC58mLPpRmxu/oKqqBaiMBYM90GJQR2UYs
+ mVvT8yuQEPqS7esgoYxkWJviQloLFSCan+O49Vx/2AM6XLSrVsnXssmu5BgAXCGuBepakbBq/JB
+ RpPPVU0ws1qslBXIRkHvmo9O+tnHem0ydqVVsSSCZ7yAs0TcZuhkn6ljIgD3l6KbBvwiRgJW0yB
+ Hyis//hDE+gOVnNADuMlG08SJcrmI2PW0ExBZpswdsDHlZ3g/kNPUrUxaxaZX7bWE1TKHXK8etM
+ RKbzzC4x4pT5UZm/xlDbS2o8rmHIqLddzZtXrsq3mydFL44zQ488+q4M5XL9dWVtWswqth1P6jb
+ DQYkV1pgoF9YhcDp5uoZaeGdozQPdcT4nR2G1Y7ToiCGTIYqMHNgNG1iWKUVCxha2JutlRvLEhD
+ 8iG8htGH15qRw7JKHnbzoOCxZRKzAnp6yLCseEKg/NyyYnxe6/Ng==
+X-Google-Smtp-Source: AGHT+IGwvKA+bH29hU/UsvBwNe+GpytMa3befDHH9/IJxMS2xAu42eHJRWL7gAsLQfMbDnk3NQrm7A==
+X-Received: by 2002:a05:6808:1485:b0:44f:6d70:45af with SMTP id
+ 5614622812f47-45586356470mr3295568b6e.9.1765460851075; 
+ Thu, 11 Dec 2025 05:47:31 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45598cf2c00sm993768b6e.14.2025.12.11.05.47.18
+ 5614622812f47-45598b992d6sm1051808b6e.7.2025.12.11.05.47.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 05:47:19 -0800 (PST)
-Date: Thu, 11 Dec 2025 07:47:16 -0600
+ Thu, 11 Dec 2025 05:47:30 -0800 (PST)
+Date: Thu, 11 Dec 2025 07:47:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>, Ye Li <ye.li@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v2 0/3] clk: Return value calculated by ERR_PTR
-Message-ID: <20251211134716.GM303283@bill-the-cat>
-References: <20251121-clk_uclass_fix-v2-0-74f4ea10e194@linaro.org>
- <176503025989.2523567.16347058613411695182.b4-ty@konsulko.com>
- <20251208153226.moktyjv3irmjlg6q@lingo>
- <20251208153852.GP303283@bill-the-cat>
- <fd494719-1152-44c7-9de8-0e9a370c659b@linaro.org>
- <20251208163527.oq7vddgodao3legu@unguided>
- <20251211114226.jbggbrqlcfq7dbur@exterior>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: jh80.chung@samsung.com, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] power: regulator: Fix dependency of SPL_DM_REGULATOR_GPIO
+Message-ID: <20251211134728.GN303283@bill-the-cat>
+References: <20251211100119.2470728-1-peng.fan@oss.nxp.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0N0bdzEJMgs95fsz"
+ protocol="application/pgp-signature"; boundary="zRE7a9USfNu6s2zp"
 Content-Disposition: inline
-In-Reply-To: <20251211114226.jbggbrqlcfq7dbur@exterior>
+In-Reply-To: <20251211100119.2470728-1-peng.fan@oss.nxp.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,57 +100,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0N0bdzEJMgs95fsz
+--zRE7a9USfNu6s2zp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 11, 2025 at 05:42:26AM -0600, Nishanth Menon wrote:
-> On 10:35-20251208, Nishanth Menon wrote:
-> > On 15:52-20251208, Andrew Goodbody wrote:
->=20
-> [..]
-> > > > > Confirmed by reverting the commit. Looks like
-> > > > > 9ed8fafbcde3425d8817ec5953edd428c7508153 revert is needed again?
-> > > >=20
-> > > > Interesting, OK. What Andrew did in commit
-> > > > fe780310cfa8bf5a093894b5cd7fe85c6b02fd91 is more complex than befor=
-e and
-> > > > there's two stanzas there. Our lab is current being re-worked again
-> > > > right now so I can't test on the K3 platforms I have, but can you p=
-lease
-> > > > see which of the two changes in clk-uclass.c is the one that breaks
-> > > > these platforms? Thanks!
-> > > What is the breakage please? I did put this series through CI and the=
- only
-> > > issues were due to lack of disk space, so not related to the patches.
-> > >=20
-> > > Andrew
-> > >=20
-> > Looks like A72 would'nt get started.. adding a bit of print to get an
-> > idea:
-> >=20
-> > https://gist.github.com/nmenon/c0487b99cbd2308ccd11ffe510a780bb
-> >=20
->=20
->=20
-> Any suggestions to proceed?
+On Thu, Dec 11, 2025 at 06:01:19PM +0800, Peng Fan (OSS) wrote:
 
-Can you please see which of the two changes to clk-uclass.c is the one
-at fault, or if it's both? Thanks!
+> From: Peng Fan <peng.fan@nxp.com>
+>=20
+> gpio-regulator uses dm gpio API, so it depends on SPL_DM_GPIO, not
+> SPL_GPIO.
+>=20
+> Reported-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---0N0bdzEJMgs95fsz
+--zRE7a9USfNu6s2zp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTrLYAAKCRAr4qD1Cr/k
-CjZUAP4uOsgNyprironn9z8cbz21UADbE0fmWGwLrpLbLJ3H3wEA2SXJH3oTk9FV
-jaMXV0jTMdH790azjL2ItI01xFeaQQM=
-=vJ+B
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTrLcAAKCRAr4qD1Cr/k
+CohhAQCNWu8Y5AXLFuVcbDv9gwoTIL1EKLFRosscweHH+HehvAD/Utts25vFHOAr
+tGg6PMcEY0gJ/jg9pVxLumqGE1dSbg0=
+=aL87
 -----END PGP SIGNATURE-----
 
---0N0bdzEJMgs95fsz--
+--zRE7a9USfNu6s2zp--
