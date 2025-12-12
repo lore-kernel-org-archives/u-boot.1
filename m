@@ -4,84 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96E2BD59D6F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 17:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7666FD59D82
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D8748334F;
-	Fri, 12 Dec 2025 18:44:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B553D8334F;
+	Fri, 12 Dec 2025 19:13:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TAcbgFXJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E518083837; Fri, 12 Dec 2025 18:44:33 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C22F981D6A; Fri, 12 Dec 2025 19:13:30 +0100 (CET)
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [45.157.188.13])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05EA2800B1
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 18:44:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C8CB81D6A
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:13:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c701097a75so816812a34.3
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 09:44:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765561457; x=1766166257; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wEaoWewhkOF/RimyZUnxH/THWvHPcSzGgCrBO269G6o=;
- b=TAcbgFXJS4jZ6gkQ/ggctl2mkDWsxWmJeu/VE2OpR7vVdidZm5dO8NuoimaZc8/FVt
- yMdfiame7szhMo7G3Na8Gs+9oTCHHyj30paSnk9+tydH3Hnznu/AJ271/ZgNs2g0t7Xa
- cmnA1vebn+eXK77wwXZ6IU3OF/Nap+FGjFggE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765561457; x=1766166257;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wEaoWewhkOF/RimyZUnxH/THWvHPcSzGgCrBO269G6o=;
- b=so/B9NqVMmEfaMP9YWJfc0xbGf8HEJ8COcDHwCQ743sKoRcQzEnV9xz16scxBoebOh
- Gnn//QndPdc/1F92GDP1/iK7W6q/gFuJvVL3Xwd0ZBlnH+Qy/ko8R3cEwhLwnbtHACee
- h6/UynnN5LOEwEkYETsd8C3SLvUgIinBqDB2SFTn81RQQE7fgXlAD7FA1qneYPaj28Ol
- SqCScHrXAiBT6jNw4I72LiXBnzX3pwk30SgBF/HMBnQuq0gdgX83NTYWx+zVsVHAa+ZF
- tDk9WG2D/YTpVkDwHWJ5copyEGLz7VrFmWRhFNyqKI217jBca878HGYI6Ne9JZU1UDAx
- h0Zw==
-X-Gm-Message-State: AOJu0YwAi1glsBswECGnCWpm9HdqIs7SaGLLDr0jzjM6FbrHmAAq21zt
- RDPG/3iHPBq2K5NtZ+ywdXtsSUL/8YRYxLpU6JJCceslH8CVPEPDymYdngAyGhJckos=
-X-Gm-Gg: AY/fxX5GYSN+pZFF6mfDe9pW6gKFEGvjeL96WGXmf77vvszjtkwUIcda5q8u6Q0usCw
- b/ujr3H/OmKHuneQcUnJpE8V6GFqWcizkD8JBojbe20izsG5Nv6Bf095aKj7uT8bqj5ZgOw2lS/
- 3At5zBG6JYLiwRiDTj/YYc2osO48S/IeFc4wK3CpMjzKOmiHbdwb1P1IbSmbASP9rXC5mNURQbc
- wJAOjdXOl/iXjNDA3DchFu7EKSyLOICjD3WA4NWzkpZTDJCZ3AJEtIqbrwQACNKi4Hm7j7uF3Xd
- +REWw2hLKSdBnOmagR/fi6GAlD6nvbTo0u856hB+RVrMXCX08VMg1m2aAZWTBX2h51JqeW25aWf
- GuEYfGjJHgp5AL8hZJsVSj3IyDy8SKumKGado7GSTApCD0uigwjZ3bWkhAfHgtfN2EniLAjiqtQ
- /T73Ecuodf/7cBOoYm1wOHwTctyp06Ba0iULsSzzvgjDcHKCt6EhXSWohOs8M=
-X-Google-Smtp-Source: AGHT+IGoyywho0LxJxbxWIBbLLiRbRktx856pN1MmNIzmRYQm6qYmsvxM8t5/IoXlvjKQ74SYcGAXQ==
-X-Received: by 2002:a05:6830:4acb:b0:7ca:e8bf:8c4d with SMTP id
- 46e09a7af769-7cae8bf8eddmr1682537a34.14.1765561456728; 
- Fri, 12 Dec 2025 09:44:16 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cadb345977sm3775688a34.29.2025.12.12.09.44.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 09:44:16 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>
-In-Reply-To: <b0ba6f42-d157-449e-9857-84d9bb39bf80@gmx.de>
-References: <b0ba6f42-d157-449e-9857-84d9bb39bf80@gmx.de>
-Subject: Re: Pull request efi-2026-01-rc5
-Message-Id: <176556145593.1046979.6245651941715019094.b4-ty@konsulko.com>
-Date: Fri, 12 Dec 2025 11:44:15 -0600
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dScyb70G7zpp2;
+ Fri, 12 Dec 2025 19:13:27 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dScyX4xLTzGmV; Fri, 12 Dec 2025 19:13:24 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 0/8] various Kconfig option changes
+Date: Fri, 12 Dec 2025 19:13:12 +0100
+Message-Id: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBvIQQu6SrQIG20INEaIILx70
+ vIt/n+hsAoXmLsXlG8pklOD6Tvwx5Yio+zNQAM5Q4bw9DkFiaicNeLuR7u5iSwHB625lIM8/29
+ Za/0AnFnwK18AAAA=
+X-Change-ID: 20251212-kconfig-reorg-dc64a5724ef5
+To: u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Udit Kumar <u-kumar1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Ye Li <ye.li@nxp.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Justin Klaassen <justin@tidylabs.net>, Samuel Holland <samuel@sholland.org>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,22 +80,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Dec 2025 13:44:08 +0100, Heinrich Schuchardt wrote:
+This fixes a few prompts for xPL options, puts xPL options together
+again, fixes a missed dependency and removes an option with an
+unmeetable dependency.
 
-> The following changes since commit ff80e95fed188ec3d4001129445e414c9c811beb:
-> 
->    tools: use setuptools 78.1.1 (2025-12-10 09:28:43 -0600)
-> 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2026-01-rc5
-> 
-> [...]
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (8):
+      Kconfig: put TPL_OPTIMIZE_INLINING next to SPL_OPTIMIZE_INLINING
+      boot: fix prompt for SPL_LOAD_FIT_ADDRESS
+      boot: fix prompt for SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
+      boot: fix prompt for VPL_LOAD_FIT_FULL
+      boot: specify VPL_FIT_FULL_CHECK applies to VPL
+      spl: fix prompt for SPL_BOOTROM_SUPPORT
+      power: regulator: fix dependency for REGULATOR_PWM
+      power: regulator: remove SPL_REGULATOR_PWM due to unmeetable SPL_DM_PWM dependency
 
-Merged into u-boot/master, thanks!
+ Kconfig                         | 18 +++++++++---------
+ boot/Kconfig                    | 16 ++++++++--------
+ common/spl/Kconfig              |  2 +-
+ drivers/power/regulator/Kconfig |  9 +--------
+ 4 files changed, 19 insertions(+), 26 deletions(-)
+---
+base-commit: ff80e95fed188ec3d4001129445e414c9c811beb
+change-id: 20251212-kconfig-reorg-dc64a5724ef5
 
+Best regards,
 -- 
-Tom
-
+Quentin Schulz <quentin.schulz@cherry.de>
 
