@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C19D59D77
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 17:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96E2BD59D6F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 17:44:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C85DD835B3;
-	Fri, 12 Dec 2025 18:44:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D8748334F;
+	Fri, 12 Dec 2025 18:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wor6zf86";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TAcbgFXJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23D41835FD; Fri, 12 Dec 2025 18:44:27 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id E518083837; Fri, 12 Dec 2025 18:44:33 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58CA78334F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 18:44:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05EA2800B1
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 18:44:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c78d30649aso1044514a34.2
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 09:44:19 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c701097a75so816812a34.3
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 09:44:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765561458; x=1766166258; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765561457; x=1766166257; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jzrQOpfQ9mvG/5YphBY7GOihMoIDYrc6iByFF994oQs=;
- b=Wor6zf86U/Hd9A0Zz8+Bnx5GpbSOf2mLaOo2Yeh02DnCls6kIXhr3nYwYR3HKFemK5
- EVL3/Y2sUDCHyyrlHb0Va8yZpCfCA8ZtEk1vbwB151dpvM+x3p9M2cm5xvI6U596gSlA
- joo5ntgSihY2hNJu58tk4OyUKf8l16GeU+Mx0=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wEaoWewhkOF/RimyZUnxH/THWvHPcSzGgCrBO269G6o=;
+ b=TAcbgFXJS4jZ6gkQ/ggctl2mkDWsxWmJeu/VE2OpR7vVdidZm5dO8NuoimaZc8/FVt
+ yMdfiame7szhMo7G3Na8Gs+9oTCHHyj30paSnk9+tydH3Hnznu/AJ271/ZgNs2g0t7Xa
+ cmnA1vebn+eXK77wwXZ6IU3OF/Nap+FGjFggE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765561458; x=1766166258;
+ d=1e100.net; s=20230601; t=1765561457; x=1766166257;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=jzrQOpfQ9mvG/5YphBY7GOihMoIDYrc6iByFF994oQs=;
- b=f+0ETo9q+bjFxkukAJhdLlXZ+ZFnspOCv0JeoY1M0TcvX/nVVzQtABMpzdw/DGcKVD
- +WHhxPxLDEc7sIc2H6BdhDgewwsBKBm5Ro7CZp00Bq3ofc9+rEhz0LFwxEx1B1OIm9Jg
- QdxJY9/rvTPEtAAhr8XLVUC/XMOqzQYUrWhizL5pp1Fi0Rcs6fG7wynuMl9PDd+sXEb/
- 37pgjl03WuecHAx2JACMDnoASbiNWZoPCqIKaDI90UdQFp+WobeXZVVzj3HYWZRIedvO
- CQrzEcwse8ao5PZAR72JTOKieD2ZPL7+OkVmMHfkNAHSj7USNNFrTTrJCe+dfdXhcwV5
- kwoA==
-X-Gm-Message-State: AOJu0YxxsIRwf/M7oxaIkQVPCnsaQhIqtYODBXy2rryNql1jklzqrO49
- bkz27j+NVuPRJXRWlgThlIyjWdizCCP2FC0hoWhPBx0itRmXGdzE6Y463X54PNpD9RQas7sWx71
- YCF5MPRI=
-X-Gm-Gg: AY/fxX61T0jqBiTXSs/RUIwsGkiQ1xbf/X/hPnEQzNwBv8JXwNgomsWrn0wqTgyRt3J
- /mGwsOELzSN8X252i0sXNyOceDRq8HjxdI0KZRF73iIdvnMRjdQ7mCfHIXtCTb9d6Mw3n4HT6tJ
- 6z6B4AbETBKrMksHZ9iI39wtcfDJV6irmIz3IbSWtO+FStsVwSMaiZl9ikoCaOXdnVJ1y+cifDg
- q1qIS6LtJFWwAC6MgkXrPZeGI0oZB4r+2Rvk9vb3nTW+/QMN+lGnAvRb/rp9l7Vsr2kd1jiDxYW
- eqJN8RDews0XPdYinuTnvV6YwMBPdgYX1a89m+9Rnv9k6rStUVlAvnc8WnslHNdaNeTxIFl7w87
- qmHNDW4ll1G1kPBlUOPCBlqxklPZnJID8bK0P0ZTaL5miCho3bkvYLFpmXrRoGrrlMpNRM1PM1I
- BnaUO7rWRV7hDocFjOgX3Dm1UaWRcC1Pe5l5KZyUp/1jrh4BUX
-X-Google-Smtp-Source: AGHT+IGu2CsVnJkJmLU3oGsMuMthjsrqrim/lDzNcYX0X6wPRTX/RTd4pfNDxcO+wYldSM2cKZ3zCQ==
-X-Received: by 2002:a05:6830:4502:b0:7c7:6cf2:b72 with SMTP id
- 46e09a7af769-7cae82e1d0amr1093868a34.10.1765561458040; 
- Fri, 12 Dec 2025 09:44:18 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=wEaoWewhkOF/RimyZUnxH/THWvHPcSzGgCrBO269G6o=;
+ b=so/B9NqVMmEfaMP9YWJfc0xbGf8HEJ8COcDHwCQ743sKoRcQzEnV9xz16scxBoebOh
+ Gnn//QndPdc/1F92GDP1/iK7W6q/gFuJvVL3Xwd0ZBlnH+Qy/ko8R3cEwhLwnbtHACee
+ h6/UynnN5LOEwEkYETsd8C3SLvUgIinBqDB2SFTn81RQQE7fgXlAD7FA1qneYPaj28Ol
+ SqCScHrXAiBT6jNw4I72LiXBnzX3pwk30SgBF/HMBnQuq0gdgX83NTYWx+zVsVHAa+ZF
+ tDk9WG2D/YTpVkDwHWJ5copyEGLz7VrFmWRhFNyqKI217jBca878HGYI6Ne9JZU1UDAx
+ h0Zw==
+X-Gm-Message-State: AOJu0YwAi1glsBswECGnCWpm9HdqIs7SaGLLDr0jzjM6FbrHmAAq21zt
+ RDPG/3iHPBq2K5NtZ+ywdXtsSUL/8YRYxLpU6JJCceslH8CVPEPDymYdngAyGhJckos=
+X-Gm-Gg: AY/fxX5GYSN+pZFF6mfDe9pW6gKFEGvjeL96WGXmf77vvszjtkwUIcda5q8u6Q0usCw
+ b/ujr3H/OmKHuneQcUnJpE8V6GFqWcizkD8JBojbe20izsG5Nv6Bf095aKj7uT8bqj5ZgOw2lS/
+ 3At5zBG6JYLiwRiDTj/YYc2osO48S/IeFc4wK3CpMjzKOmiHbdwb1P1IbSmbASP9rXC5mNURQbc
+ wJAOjdXOl/iXjNDA3DchFu7EKSyLOICjD3WA4NWzkpZTDJCZ3AJEtIqbrwQACNKi4Hm7j7uF3Xd
+ +REWw2hLKSdBnOmagR/fi6GAlD6nvbTo0u856hB+RVrMXCX08VMg1m2aAZWTBX2h51JqeW25aWf
+ GuEYfGjJHgp5AL8hZJsVSj3IyDy8SKumKGado7GSTApCD0uigwjZ3bWkhAfHgtfN2EniLAjiqtQ
+ /T73Ecuodf/7cBOoYm1wOHwTctyp06Ba0iULsSzzvgjDcHKCt6EhXSWohOs8M=
+X-Google-Smtp-Source: AGHT+IGoyywho0LxJxbxWIBbLLiRbRktx856pN1MmNIzmRYQm6qYmsvxM8t5/IoXlvjKQ74SYcGAXQ==
+X-Received: by 2002:a05:6830:4acb:b0:7ca:e8bf:8c4d with SMTP id
+ 46e09a7af769-7cae8bf8eddmr1682537a34.14.1765561456728; 
+ Fri, 12 Dec 2025 09:44:16 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cadb345977sm3775688a34.29.2025.12.12.09.44.17
+ 46e09a7af769-7cadb345977sm3775688a34.29.2025.12.12.09.44.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 09:44:17 -0800 (PST)
+ Fri, 12 Dec 2025 09:44:16 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251209212301.2924760-1-trini@konsulko.com>
-References: <20251209212301.2924760-1-trini@konsulko.com>
-Subject: Re: [PATCH] fs: fat: Perform sanity checks on getsize in get_fatent()
-Message-Id: <176556145741.1046979.17047744781305427704.b4-ty@konsulko.com>
-Date: Fri, 12 Dec 2025 11:44:17 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>
+In-Reply-To: <b0ba6f42-d157-449e-9857-84d9bb39bf80@gmx.de>
+References: <b0ba6f42-d157-449e-9857-84d9bb39bf80@gmx.de>
+Subject: Re: Pull request efi-2026-01-rc5
+Message-Id: <176556145593.1046979.6245651941715019094.b4-ty@konsulko.com>
+Date: Fri, 12 Dec 2025 11:44:15 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,23 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 09 Dec 2025 15:23:01 -0600, Tom Rini wrote:
+On Fri, 12 Dec 2025 13:44:08 +0100, Heinrich Schuchardt wrote:
 
-> We do not perform a check on the value of getsize in get_fatent to
-> ensure that it will fit within the allocated buffer. For safety sake,
-> add a check now and if the value exceeds FATBUFBLOCKS use that value
-> instead. While not currently actively exploitable, it was in the past so
-> adding this check is worthwhile.
+> The following changes since commit ff80e95fed188ec3d4001129445e414c9c811beb:
 > 
-> This addresses CVE-2025-24857 and was originally reported by Harvey
-> Phillips of Amazon Element55
+>    tools: use setuptools 78.1.1 (2025-12-10 09:28:43 -0600)
+> 
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2026-01-rc5
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] fs: fat: Perform sanity checks on getsize in get_fatent()
-      commit: 87d85139a96a39429120cca838e739408ef971a2
 -- 
 Tom
 
