@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9584D59D77
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 16:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B6DD59D77
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 16:11:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65E8E8367F;
-	Fri, 12 Dec 2025 17:11:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AEAF083849;
+	Fri, 12 Dec 2025 17:11:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cYShps7p";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="inJAsMP/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xPsVWYGn";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FTpuuknL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F115C83837; Fri, 12 Dec 2025 17:11:27 +0100 (CET)
+ id 5814D83869; Fri, 12 Dec 2025 17:11:52 +0100 (CET)
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F5A78307F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 17:11:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EC0783837
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 17:11:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dSZFn5pQFz9tdm;
- Fri, 12 Dec 2025 17:11:25 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dSZG81l1Sz9tdm;
+ Fri, 12 Dec 2025 17:11:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765555885;
+ s=mail20150812; t=1765555904;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8Dhee7iMZXNTNw727B3QWRDYpTj+oops3VP3LJRJqN4=;
- b=cYShps7ptwiST/A768eOlxpBgi+gk7iJW8iHCJbtf3EfKzGA6a6l3LiD3L0SVmQ7jRW7pv
- Bj7E/xd9t9PsxPS80WG4+whNPvFhN7ds3WiPjIK23eSWWHDP1CdPXE8a8qYY3xdV2OlS4i
- rmjtzviUsl0++x9Z5+D7BuqBjUOOeP2KzMKDwM/sfRk+2ZtqE5akY+aimYXQba9QwNe9xe
- h9R2k4DzN7WoUfcsHFGT3+dU9iviisp16LZwYYpZnLYKyum48ssHRLabVIfu1CtQNT7IzQ
- CP5AosFxeFhyLAmHzXvDbqDs5UcKSeovmuEDraOwjLIIlD2IG3L9FRAipFhGvA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="inJAsMP/";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <34d62f27-e10c-4ab3-8cf3-b69c8aadb35a@mailbox.org>
+ bh=1mkaVD5rmXPAFiGZqUPZyEOOdmI1Hk7nmxMsrmKY/DA=;
+ b=xPsVWYGnIz2HLlOaoKHvnl6hf6MNDksmVIkvYE6Jw5QOCj3nL4saRgpIXAz+C538kJRHjb
+ WlBOgmrEeWNuLIt2oYwlF+nVqA5QGGL8Iyu3wt+ahxVJR4FbxH+aRuyOqDtdEK2z6SZKyt
+ L89jvVFzOZcDxlvICBPGBtDF9WxDbRTzYRAp80k9eAH3fsK8j0zGYBd4xPc7Sefw/6343H
+ adoK/qE5kB31MHaUmJ18Tlr82hMhrkQvl41R6AX8YeISL4JckAVwSqzNQSfapXQ7JuXNCC
+ yBm3MbMM+BhHJqbwTbXMl1D8a8SX8+ugydID0rt80PuijiPzdZ6O/75lJZI9eg==
+Message-ID: <849b0052-e9a2-44ff-a019-00b79a3bd3f3@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765555883;
+ s=mail20150812; t=1765555897;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8Dhee7iMZXNTNw727B3QWRDYpTj+oops3VP3LJRJqN4=;
- b=inJAsMP/Icvf3pwHUU4kZtXFoMIA1CFAE56zwiMpY0Gs/qrBERFZJQgrOUDSAZxjn92y1I
- /upAnVj9Sxr4QW6Vi9wcRP0wsrZ5yVWAy0tf85QCXfgEXl4XltN5m/Z9Df2bIMKYrvchmp
- nc5VXCdfZsx9aCYEleCVzlVJU4vnZYJVhzFiSgLwywLeakyOud8rwoDg21C3mKDHzhUZiH
- C5OVS6th+zPoU9CzsK/8uUoKW2wgrG0fbM7/ux0Vrh4cSKpgiMi2Ap0zJP2Lgz+EemZe/v
- KIzIqTRjv+Sf3oju7kzTL8wmGssYJc+MdP/uLxLSSaYhLwBAC/Qp8oVOFvcyEA==
-Date: Fri, 12 Dec 2025 16:23:53 +0100
+ bh=1mkaVD5rmXPAFiGZqUPZyEOOdmI1Hk7nmxMsrmKY/DA=;
+ b=FTpuuknLdseNxmfpeN/FHjtNax3vM8gynEG3/Yv6n1hlDw8StZmyxYt3//orncs5iXARgi
+ 7jMtIuesqfloJczmH/01M/PXl+mzsA0AJ7Tgw06ASI2WCfb1s/VYzNLNHfvkqzpVSt7blD
+ qB498uxy06VU3BD/65/59w/AIz7reS6H792RRH5qbxwDJhCSPC+4G2QsryM3eqaAg0Wjf3
+ 5rYi+MRXO0pBn0TpdX2UC92h2tpmZxmid1n7zadh1/oZhGtiK1LtNnvq2cHZLXf32KoEmw
+ NMT9aP3k1fOwiOQxV8PPTZDUtUPH6++IoJzcq7Gd/4sRdl2S3VvFP3zJyDa6bQ==
+Date: Fri, 12 Dec 2025 16:28:43 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] imx9: scmi: clock: Correct imx_clk_scmi_enable
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Alice Guo <alice.guo@nxp.com>,
+Subject: Re: [PATCH 1/2] clk: scmi: export scmi_clk_resolve_attr
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Alice Guo
+ <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ye Li <ye.li@nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
  Peng Fan <peng.fan@nxp.com>
-References: <20251210-imx-v1-1-c3cfa8d318a9@nxp.com>
+References: <20251211-clk-scmi-imx-fix-v1-0-9579567da829@nxp.com>
+ <20251211-clk-scmi-imx-fix-v1-1-9579567da829@nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251210-imx-v1-1-c3cfa8d318a9@nxp.com>
+In-Reply-To: <20251211-clk-scmi-imx-fix-v1-1-9579567da829@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: qjwsxk8atzw6iapdeotrjq87rrd86wdx
-X-MBO-RS-ID: e28ff2b1627aeccb44d
-X-Rspamd-Queue-Id: 4dSZFn5pQFz9tdm
+X-MBO-RS-META: rbzw5rqhh3jkcb3agcbjisx96a9zpds3
+X-MBO-RS-ID: 5fbb008808fe26f29d0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,22 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/10/25 4:45 AM, Peng Fan (OSS) wrote:
+On 12/11/25 9:31 AM, Peng Fan (OSS) wrote:
 > From: Peng Fan <peng.fan@nxp.com>
 > 
-> i.MX9 SCMI Supports CLK SCMI version 3.0, so need to use
-> "scmi_clk_state_in_v2".
+> With commit 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES"),
+> the SCMI clock names might be defered. However the SCMI clock may be
+> input to other clock controllers, such as clk-imx95-blkctrl.
 > 
-> Per Spec about extended_config_val: "This field is used to set extended
-> configuration of the clock device. It can be ignored if extended config
-> type specified by Bits[23:16] of the attributes field is set to 0."
+> Without the clock names being resolved, there will be error:
+> clk_register: failed to get hsiopll device (parent of hsio_blk_ctl_clk)
 > 
-> So no need initialize extended_config_val.
-> 
-> Fixes: 0619cb32030b ("firmware: scmi: Add clock v3.2 CONFIG_SET support")
-
-The aforementioned commit did not change the behavior of this code. The 
-code worked before this commit with v1 structure, so I assume the 
-firmware (SCP?) supports both the old v1 and new v2 structure ?
-
-If yes, then this is not a bugfix and shouldn't have Fixes tag.
+> So export this API for users.
+Shouldn't the relationship between clock be described in DT using 
+"clock" property and phandles/cells ? You shouldn't have to resolve 
+clock by names.
