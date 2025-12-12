@@ -4,124 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293D1D49220
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C900D4921F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51550839A8;
-	Fri, 12 Dec 2025 13:49:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FC80839D7;
+	Fri, 12 Dec 2025 13:49:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UBnb/OlZ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="XrUr9t6H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5CF78367F; Fri, 12 Dec 2025 10:13:49 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D974B83045; Fri, 12 Dec 2025 11:26:49 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D1FA8334F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 10:13:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEF6B82B20
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 11:26:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-8a3eac7ca30so76905685a.2
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 01:13:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765530821; x=1766135621; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VlAxeOQwUW5tQjMz+Uxh3avEOhs9p54Hj9q93thtlzs=;
- b=UBnb/OlZ7lcScOPALKDuqD+8p5fIDcgG2VHGKE7pHZnapZXYSS98/BtIBupscZgOIa
- NgDQJxCWYxZxzYKxblhDBk2OYcIt8VPvHSNeUzguQXZBaKYmCurOv30hNPSAzINyWsLW
- eOPNKT/pwkJgaiydqBX3xP50ZZXfUlsCbpBjfujZ74N90fpU0b1Xv8+jMTvG0P5vVIqx
- C5bHVJK6/THve91U/AOPcPoowuoEzlkudP87KyI4LrofCtgNMyvI5ZN3f3igjhlzEKRM
- XlLfe7MCDC6J09t28k7dB2SOgEqlK/n7gzmEItE4NbjF0V8oaLwEal5482TIoe4O4FC0
- OfWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765530821; x=1766135621;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=VlAxeOQwUW5tQjMz+Uxh3avEOhs9p54Hj9q93thtlzs=;
- b=ffXjqBkNVc7/EuXqUMO04CFpxa1GTnOOoqElG6BJZ6WYRsmjwpArF49XR1VYN7Av0m
- lnVRb7fSjEv7poFRQdzB/B3CSkMnqC0xMRPtjhyntzxhdimU1T9WdUWrW+s1Q9h9efAa
- e/YI4xutSUiou3HL5fd+eoenq6IlLiRZaAfoOE5yDeM5EJqKUsTBoMbDejL0vmisy9I3
- OYdvhO4cn1AfrwLSVI5epBfKdOUDwMI4cYM+2YCMN7cOg7aUfb+8iJtNZ8JeOVexh2Us
- 0b9gnOgXLXPb5IXvJZdLWAzeHZ9YzdYwQgJUueZHE9qDskFJGaUfOLFiWe30AdCr1XvM
- C37w==
-X-Gm-Message-State: AOJu0Yxv7QymrrjR4QOn74m6LKMHkAN9zbVBKhNrp8ojAm+wkd5BOwTn
- 4MfkxCDe+Fk37NULuwOvP9sSJcIhjWz9iIJo4lJj6ef73+8OMFXpsQ0bqWu8NuBYXKgf9SEBh/d
- zsemjvykAV18rmdTZZbEMHoLfIipn6lk=
-X-Gm-Gg: AY/fxX4AQW2mFqrsJPgRiz9nBBDhTUQpzm5yRG3l5h97rDXw5D5NUYIKm7J2PNWWMoh
- WHCO1kynHZTj94AlDwYINwhBa4dtR26ATX35IRPWSyUZjpuAjpmgfPrr3+aSx0YvrmBubv7WcPn
- wbA94PGmzNast/K+Q3HdQOZJxxpRPBxbwrLNPMmWfyoTKOm9vMqORsozBgLP/WlfuBxgZM/ZHUd
- pqIxPeBEp0ne4LD6gGjeUtqF0YyqaYX4vOa5ymLyjNDlAeLpKZxK47UOUHvUVGNnLkgYQ==
-X-Google-Smtp-Source: AGHT+IF35NhZZmDF6LTa/Su1PmubI/QrrXtddTqaNs1acDb0SMUwehVNKk0Bwl5ZMDc6QDyB2KhsxYC/k4THJhyENjE=
-X-Received: by 2002:ac8:59cf:0:b0:4ee:1e28:acd2 with SMTP id
- d75a77b69052e-4f1d062af78mr14464851cf.70.1765530820986; Fri, 12 Dec 2025
- 01:13:40 -0800 (PST)
+ spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vTwT8OqTJ6ggW8+YqKObD5/6EAUwfgfFsJrR+jnTxJ43er50nYEO1mRDhbINKvQmx8Ez5nPEMmoAak5d7hUmAF7t1MW0ItQZ3d5WryypJeBXFlSBdXIUJJB9QHEmKbjKNWY2myd4jIcQUqgwK1T+orifjrb3cxHMdQOkKHDX2sXsMEqhr7f9/Nt2ZUOUO68VGSs6aO2YcmvRZLoYPvNyvOQQvC2H3VKN18QtuDo+ut48RYIMdV7BZSHKEigs5lBUNMmhyMhJYnHZNnigcqdfeBuRNNvzci5qtm2X9kzig1Vqcqcsk6t0qCrsaH2MzUGKKy2qp4NhXzq0/b0GHiz5DQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CQjgm25ASRKGDnZ83o/IT/XE3BUlpqKoMQJ2MxfOBCY=;
+ b=snRMqa7E9LmyeSkOa3wIlEfRGGMEf3cd9A+BoXMAeUTN7XQVS/Xx6lfwD67DXqU+cIMNHdmcmeHQoT8+Rk7OixSDxZWc/UmPPm8pfPuY1V3L5LgQPRQ9faP/ZGI4HlwRqQLWI/lu6WITgj5YHNIrEU87vfUXPpmcbNjptBztQiE+ZJFlWEt5AEcfnrG2ugnqznxoaQZ6jg7zZ6HR4+ImtyQ657do2JpsiAkT7RQb1soiUUtfsOZtJU/SDtUEkLEIDsr6CGaXvpZf8IsHN1Q4X2L3ABzyLepaKJDeEFXouga1UaGNxwYXRmsLVtc63ujPN7fP3im/LjObRdleNKHBWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CQjgm25ASRKGDnZ83o/IT/XE3BUlpqKoMQJ2MxfOBCY=;
+ b=XrUr9t6H8bOgXlo2Y1VSA+Dcij4V9bLREuMXGf0Qo4dkYPR4D+oqN8O5CN1ycywDgM6VMzeNzTDZlLfob8NP5tMdX5zBTUA6kk79WJJLXgjxz8Tvuenw7BVIlLJ8GaLUIf8ZdsxbwaQyYNXiezJr3KrXSjYdTMh7bu0RbFeEo7c=
+Received: from CH2PR12CA0028.namprd12.prod.outlook.com (2603:10b6:610:57::38)
+ by BN5PR12MB9485.namprd12.prod.outlook.com (2603:10b6:408:2a8::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.10; Fri, 12 Dec
+ 2025 10:26:36 +0000
+Received: from CH2PEPF0000009B.namprd02.prod.outlook.com
+ (2603:10b6:610:57:cafe::a5) by CH2PR12CA0028.outlook.office365.com
+ (2603:10b6:610:57::38) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Fri,
+ 12 Dec 2025 10:26:36 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH2PEPF0000009B.mail.protection.outlook.com (10.167.244.23) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 10:26:36 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 12 Dec
+ 2025 04:26:35 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 12 Dec
+ 2025 04:26:34 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 12 Dec 2025 02:26:32 -0800
+From: Pranav Sanwal <pranav.sanwal@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>
+Subject: [PATCH v4 0/2] Enable dynamic MMU page table sizing 
+Date: Fri, 12 Dec 2025 15:56:19 +0530
+Message-ID: <20251212102621.2888015-1-pranav.sanwal@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com>
- <20251210-rk3576-ufs-v1-2-a3f9e76eb66e@gmail.com>
- <06a02ccb-e694-4463-83b1-cdc281408972@linaro.org>
-In-Reply-To: <06a02ccb-e694-4463-83b1-cdc281408972@linaro.org>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Fri, 12 Dec 2025 12:13:31 +0300
-X-Gm-Features: AQt7F2rHjWlCUVBtea2AtbFgLR69p6m8eIfOXnQLFi1hZ_CiE2XgOglo1ZVU7Qg
-Message-ID: <CABjd4YwfqTj6CxauGgo1rR4a+ku2_N78QXfGCV9RAU+U6PZLDQ@mail.gmail.com>
-Subject: Re: [PATCH 2/4] spl: Make UFS available for SPL builds
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Walle <mwalle@kernel.org>, Rasmus Villemoes <ravi@prevas.dk>, 
- Marek Vasut <marek.vasut@mailbox.org>, Anshul Dalal <anshuld@ti.com>, 
- Andre Przywara <andre.przywara@arm.com>, Peng Fan <peng.fan@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Anurag Dutta <a-dutta@ti.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Dhruva Gole <d-gole@ti.com>, Yifeng Zhao <yifeng.zhao@rock-chips.com>, 
- Sam Edwards <cfsworks@gmail.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Greg Malysa <malysagreg@gmail.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>, 
- Heiko Schocher <hs@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Randolph <randolph@andestech.com>, 
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, Joseph Chen <chenjh@rock-chips.com>, 
- Ian Roberts <ian.roberts@timesys.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: pranav.sanwal@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000009B:EE_|BN5PR12MB9485:EE_
+X-MS-Office365-Filtering-Correlation-Id: a5fae9cd-27e4-44ae-d8fd-08de3968edb6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?50UDH5t9yofiPZhpgxqQxZdjfzOrFV1X4CM2OMI8xc8pQaxQ21NvRqKBOkEi?=
+ =?us-ascii?Q?qQushs4Fvv2iaFqysMcAmvN4lo4wQ6NS1tErRRB4kOvsJFR0V3zU2lvN0e6P?=
+ =?us-ascii?Q?xbuE6xKcor762qfidWamydo1H5+MdPL4LRPsjsj9VtjgJgfZmB/eckhbMCEn?=
+ =?us-ascii?Q?XQpn3H95vxpQuNEeLgmxKx49vKXb8Ns2nN6HqgdF17Wxq9CrjGLw2Cv2Ba90?=
+ =?us-ascii?Q?jM+QlpkwL10jbV+yx1O8Ft29SzDOX8xt605TVDb5x/8iczLWjUpQ6DkaWFUi?=
+ =?us-ascii?Q?MBCnZ45QGH3PPNn8260rQrprp9j4/FBqptvDzpxJz2A+SJPjZaGKLAQaMkKQ?=
+ =?us-ascii?Q?WpyLCqbqZhE6P15cJ8Uw0Wq7Fl++hFoeylrLINU22p4zifeFju8OxGWmm+2a?=
+ =?us-ascii?Q?2MruouBUWfX+NVfSs+C0k6/MK9ZFgGfwyjk4RkIxluHlUYVOG20vTfDgfxxn?=
+ =?us-ascii?Q?f/cbc0AhgwzXgCYycGFlivES+tjewUcwE/8vRx+lLPfTShnvtD0aHiHRsr9e?=
+ =?us-ascii?Q?HHAjJywEdyGvBwob/VVMkYs5kcIRF9YqdhUCcStMusMGSfTV14ukoopDwbPg?=
+ =?us-ascii?Q?IfoDkt3iFeh18TOCR/kxhTGAEZlXmZ84RG3nWJLiFWstQEjEk2GmP22DSKiK?=
+ =?us-ascii?Q?gezdKCBH1YcPhATSEJvF+O+wdGXs9j5GQubNU28tTtI2hMeZx1ILn6QfR612?=
+ =?us-ascii?Q?0T2fvNBfYT7Ya1FVmOvJ6i1c5/XeXdCbrXhSlB/k00l6O8hDLrv3/45S7jW4?=
+ =?us-ascii?Q?9NixoZdzRIakZbdOZnVVzHTN3txHWaMhJPwBGw8D5tmIZjShx5aWLFu2OSVB?=
+ =?us-ascii?Q?9Bsk/fAHZnBkBYU5kvhgQs1huwySEpn3CmknonVMVvCBLu9Be44IIT8LoeX5?=
+ =?us-ascii?Q?6GWx8iribboNaVb6LprZNR3noycP5D5yVIXVnquxagHGq28moGDduirQqnYg?=
+ =?us-ascii?Q?bRgl97F5prIlEzo3T5/4EO9UnrDM0V2W9oI/JI3RilSKh9EOMbG9kj/MR7kB?=
+ =?us-ascii?Q?juEA+Nj0bY7ZSBFPsFeWI1m1kLelFC3y8uRtQIN79iCGw55Ao1p2ziHcmWtS?=
+ =?us-ascii?Q?aslHUM2fmuwQXdKhMhPgV/Rl0yD2XzIjF+KrlkJQ3R5UhydBhv+klOYUZXqE?=
+ =?us-ascii?Q?LOkg1RhT8o1Asqg4wIfIsvY6t1VmLFWFHTlkDOTRYMOgVzb5eYNyebaqNW+C?=
+ =?us-ascii?Q?z1DnSBH0sTt3XHlRI32CTgM3IuuIAAQ271tSUFJyAQwE1BOeAPDG0jB689HU?=
+ =?us-ascii?Q?j7EofIpmS/oj2KY0kMdufgAs71va9xvHzyml17WGsRfrWUfCT9o7koj7lv61?=
+ =?us-ascii?Q?Zjg76HKNex+t3VTWflG6urUpAaFCepmtWpWF69LZ/CRnuYHLRdFkO9raRjSc?=
+ =?us-ascii?Q?etvFp8IC9UGlS1UvZAkPwIKcAykeR81nDEKLarrA7ZEnaSP8rl2qJE7GQdD8?=
+ =?us-ascii?Q?jmnpy1agg6EZlpAy7d5Cp+TpYCxWUTZ57kqHroZGfQi2a6+u2TY+akPVsXle?=
+ =?us-ascii?Q?7ymsuTIbOoIn7NqViz2dx92+fsnFj1gw79kRekoviMSene/OV7g2GcjX385/?=
+ =?us-ascii?Q?iYlmbAkFyU//0hEOPHk=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 10:26:36.0212 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5fae9cd-27e4-44ae-d8fd-08de3968edb6
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009B.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9485
 X-Mailman-Approved-At: Fri, 12 Dec 2025 13:49:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,139 +152,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+This patch series fixes a boot sequence issue in AMD Versal Gen 2,
+where DRAM banks are populated too late during MMU initialization.
+The fdtdec-based approach doesn't provide memory information
+early enough.
 
-Thanks for your review!
+Changes in v4:
+-Better debug logs alignment.
 
-On Thu, Dec 11, 2025 at 10:36=E2=80=AFAM Neil Armstrong
-<neil.armstrong@linaro.org> wrote:
->
-> Hi,
->
-> On 12/10/25 21:10, Alexey Charkov wrote:
-> > Add minimal infrastructure to build SPL images with support for UFS
-> > storage devices. This also pulls in SCSI support and charset functions,
-> > which are dependencies of the UFS code.
-> >
-> > With this, only a fixed offset is supported for loading the next image,
-> > which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-> > number of 4096-byte sectors into the UFS block device.
-> >
-> > Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> > ---
-> >   MAINTAINERS                |  1 +
-> >   arch/arm/include/asm/spl.h |  1 +
-> >   common/spl/Kconfig         | 16 +++++++++++++++
-> >   common/spl/Makefile        |  1 +
-> >   common/spl/spl_ufs.c       | 49 +++++++++++++++++++++++++++++++++++++=
-+++++++++
-> >   drivers/Makefile           |  1 +
-> >   drivers/scsi/Makefile      |  3 +++
-> >   lib/Makefile               |  1 +
-> >   8 files changed, 73 insertions(+)
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index c9853f409920..c58805a724b9 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -1860,6 +1860,7 @@ M:      Neil Armstrong <neil.armstrong@linaro.org=
->
-> >   M:  Bhupesh Sharma <bhupesh.linux@gmail.com>
-> >   M:  Neha Malcom Francis <n-francis@ti.com>
-> >   S:  Maintained
-> > +F:   common/spl/spl_ufs.c
-> >   F:  drivers/ufs/
-> >
-> >   UPL
-> > diff --git a/arch/arm/include/asm/spl.h b/arch/arm/include/asm/spl.h
-> > index ee79a19c05c9..dd462ea6ad82 100644
-> > --- a/arch/arm/include/asm/spl.h
-> > +++ b/arch/arm/include/asm/spl.h
-> > @@ -30,6 +30,7 @@ enum {
-> >       BOOT_DEVICE_XIP,
-> >       BOOT_DEVICE_BOOTROM,
-> >       BOOT_DEVICE_SMH,
-> > +     BOOT_DEVICE_UFS,
-> >       BOOT_DEVICE_NONE
-> >   };
-> >   #endif
-> > diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > index a43271671648..aa198ee44a3f 100644
-> > --- a/common/spl/Kconfig
-> > +++ b/common/spl/Kconfig
-> > @@ -1608,6 +1608,22 @@ config SPL_THERMAL
-> >         automatic power-off when the temperature gets too high or low. =
-Other
-> >         devices may be discrete but connected on a suitable bus.
-> >
-> > +config SPL_UFS_SUPPORT
-> > +     bool "Support loading from UFS"
-> > +     select SPL_LOAD_BLOCK
-> > +     help
-> > +       Enable support for UFS in SPL. This allows
-> > +       use of UFS devices such as hard drives and flash drivers for
-> > +       loading U-Boot.
-> > +
-> > +config SPL_UFS_RAW_U_BOOT_SECTOR
-> > +     hex "Address on the UFS to load U-Boot from"
-> > +     depends on SPL_UFS_SUPPORT
-> > +     default 0x800 if ARCH_ROCKCHIP
-> > +     help
-> > +       Address on the block device to load U-Boot from=EF=BC=8C
-> > +       Units: UFS sectors (1 sector =3D 4096 bytes).
->
-> The UFS are usually configured with multiple LUNs, so I would expect to a=
-t least
-> have the LUN parameter in case we use the sector address to load the payl=
-oad.
+Changes in v3:
+-Fix DRAM base detection boundary condition (text >= bank_phys)
 
-Indeed. Rockchip's tools don't offer a direct way to access
-non-default LUNs, which makes it a bit tricky to test booting from
-anything other than LUN 0 (apart from using a fully booted system with
-its full-blown drivers to write to other LUNs). I'll test and add the
-extra Kconfig selector for the LUN.
+Changes in v2:
+-Address boundary case where U-Boot is loaded at the
+ beginning of a memory region.
+-Export get_next_memory_node() helper from fdtdec for reuse
+-Split previous monolithic patch into two focused patches
+-Add comprehensive documentation for new functions
+-Include proper header dependencies (dm/ofnode_decl.h)
 
-> >   config SPL_WATCHDOG
-> >       bool "Support watchdog drivers"
-> >       imply SPL_WDT if !HW_WATCHDOG
-> > diff --git a/common/spl/Makefile b/common/spl/Makefile
-> > index 4c9482bd3096..e18f3cf09484 100644
-> > --- a/common/spl/Makefile
-> > +++ b/common/spl/Makefile
-> > @@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)DFU) +=3D spl_dfu.o
-> >   obj-$(CONFIG_$(PHASE_)SPI_LOAD) +=3D spl_spi.o
-> >   obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) +=3D spl_ram.o
-> >   obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) +=3D spl_sdp.o
-> > +obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) +=3D spl_ufs.o
-> >   endif
-> >
-> >   obj-$(CONFIG_$(PHASE_)UPL) +=3D spl_upl.o
-> > diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> > new file mode 100644
-> > index 000000000000..3a5fcd4ed7a8
-> > --- /dev/null
-> > +++ b/common/spl/spl_ufs.c
-> > @@ -0,0 +1,49 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * (C) Copyright 2025 Alexey Charkov <alchark@gmail.com>
-> > + */
-> > +
-> > +#include <spl.h>
-> > +#include <spl_load.h>
-> > +#include <scsi.h>
-> > +#include <errno.h>
-> > +#include <image.h>
-> > +#include <linux/compiler.h>
-> > +#include <log.h>
-> > +
-> > +static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
-> > +                          ulong size, void *buf)
->
-> What a weird function name, please rename to spl_ufs_load_read
+Pranav Sanwal (2):
+  fdtdec: Add declaration for get_next_memory_node() helper
+  arm64: versal2: Populate DRAM banks before page table size calculation
 
-Ack. I grabbed it wholesale from spl_mmc.c - but I agree that it's not
-exactly descriptive :) Will rename in v2.
+ arch/arm/mach-versal2/cpu.c                   | 57 ++++++++++++---
+ .../arm/mach-versal2/include/mach/sys_proto.h |  4 +-
+ board/amd/versal2/board.c                     | 70 +++++++++++++++----
+ include/fdtdec.h                              | 23 ++++++
+ 4 files changed, 130 insertions(+), 24 deletions(-)
 
-Best regards,
-Alexey
+-- 
+2.34.1
+
