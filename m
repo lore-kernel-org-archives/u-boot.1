@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED56D59D78
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 16:23:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EB78D59D78
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 16:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB7908307F;
-	Fri, 12 Dec 2025 17:23:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34B9483981;
+	Fri, 12 Dec 2025 17:23:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ULnyKp04";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MeyZqEZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EB7A83106; Fri, 12 Dec 2025 17:23:43 +0100 (CET)
+ id 97D398367F; Fri, 12 Dec 2025 17:23:49 +0100 (CET)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AE6A828A2
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 17:23:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CAB5835B3
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 17:23:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id B103BC19356;
- Fri, 12 Dec 2025 16:23:15 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id D6A21C19361;
+ Fri, 12 Dec 2025 16:23:22 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B6583606DF;
- Fri, 12 Dec 2025 16:23:39 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id F1539606DF;
+ Fri, 12 Dec 2025 16:23:46 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C61BC103C8D8E; Fri, 12 Dec 2025 17:23:29 +0100 (CET)
+ with ESMTPSA id 690C8103C8D8E; Fri, 12 Dec 2025 17:23:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1765556618; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=CcmEjtwXzvFnL/bl58Bwyc6Oq9YyHLA2pKbIzmWyMSY=;
- b=ULnyKp04qorF3ZSPkP2KGhHhnTn+ACBSnUAkHSMQg5JHcar5BwFlDxG9hU8yAhZ1yCAxXZ
- MS2dcd66YkM1cf+6OSwl9ZTKiH+kaoq+tgnGOo51LG/lhTzyct0EdUyNa/ixfIVIWtXe9X
- XXiuPuFHbwU0OOXxu2sRw785c0MbIlQAljmcWiBZNt7kiUB1n6MA5tezQnII3mHIt93nUw
- ncTIVoh8qjk/rR9rXzVC2+Lqqs45eMGdf2tn54u6XWa2VfcQrTuApfAWtZGEs7bhyjK+Bc
- Ow0KEhHhJlaakU2UKBKJpSg5XmyvK2Uz1kvdSEcGdqAoLtHVHyKQaoqchZRnVw==
+ t=1765556625; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=U/fuMnduR2s18od0LK3fQCHYowvBPNd5AkcfaCS1zHA=;
+ b=MeyZqEZlBlOFre41VKlBykDNPtjRL6t/0ZnjwNBVU/teugav2Mwrm3cL+HVWhqwU5D5YI/
+ VEZlT5O8aQ/XEktSj2Dqx6Yfeiswbu8lhelBItd0MA4oYPBZf3de3rGGIDmvyWx7YuCRCI
+ C2aCpX8Zd8Xkb+icd/lx5X5f4XANo8IF04j1XWbOEkr2pZudERvCdDNhVhIbw/KEkxEHzb
+ M4A75eMf1D8d+24rBOdxTxYlYvI31BpBRtggUSPMf3WhQqNTCz6LHaO9vMzfujjDG8p6Jq
+ Ld7HPhdkrhzNzuFy622D8gmwjFG5xFpWwlfuwtkYHHwNLNgeLaZ2f41pcAi0Aw==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Subject: [PATCH v2 0/6] Add support for fwumdata
-Date: Fri, 12 Dec 2025 17:23:25 +0100
-Message-Id: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
+Date: Fri, 12 Dec 2025 17:23:27 +0100
+Subject: [PATCH v2 2/6] tools: Reorganize mkfwumdata tool into fwumdata_src
+ directory
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAH1BPGkC/2WNwQrCMBBEf6Xs2Ui2bbR48j+kSGw2dsE2JUmjU
- vrvxnr0MvAG5s0CgTxTgFOxgKfEgd2YodwV0PV6vJNgkxlKWSpEeRSWdJw9Xe1zHoyOWqhGycY
- ckNBUkGeTJ8uvTXlpM/ccovPv7SHht/3JcvzLEgopjFKoakM1yup8cy4+eNx3boB2XdcPFw/CN
- LIAAAA=
-X-Change-ID: 20251107-feature_fwumdata-58508d61e1d3
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251212-feature_fwumdata-v2-2-ad51572fbe79@bootlin.com>
+References: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
+In-Reply-To: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Tom Rini <trini@konsulko.com>, 
@@ -95,79 +94,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new fwumdata tool to allows users to read, display, and modify FWU
-(Firmware Update) metadata from Linux userspace. It provides functionality
-similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-metadata, change active/previous bank indices, modify bank states, and set
-image acceptance flags. Configuration is done via fwumdata.config file.
+Update FWU metadata-related tools by moving mkfwumdata.c into a new
+tools/fwumdata_src/ directory structure. This refactoring prepares for the
+addition of the fwumdata runtime tool, which will allow editing FWU
+metadata directly from the target.
 
-Made a few change to mkfwumdata tool along the way.
-
-Here is an output example
-
-$ ./fwumdata -l
-FWU Metadata:
-	Version:            2
-	Active Index:       0
-	Previous Index:     1
-	CRC32:              0x1f21ff7b
-	Metadata Size:      120 bytes
-	Descriptor Offset:  32
-	Bank States:
-		Bank 0: accepted (0xfc)
-		Bank 1: accepted (0xfc)
-
-	Firmware Store Descriptor:
-		Number of Banks:       2
-		Number of Images:      1
-		Image Entry Size:      80
-		Bank Info Entry Size:  24
-
-	Images:
-		Image 0:
-			Image Type GUID:  65ae85ad-1fb3-0b46-8c5d-285543aa6eab
-			Location GUID:    51513491-da07-2a4f-9bea-375ea53b1b5c
-			Banks:
-				Bank 0:
-					Image GUID:  cb2df442-f929-6a44-a374-672d92eb2aa7
-					Accepted:    yes (1)
-				Bank 1:
-					Image GUID:  a839a18f-395c-484f-83b8-0354077c8f9f
-					Accepted:    yes (1)
-
-Changes in v2:
-- Fix a small offset mistake in last patch
+The Kconfig and Makefile entries are also moved into separate files within
+the new directory (Kconfig and fwumdata.mk respectively) to keep all FWU
+metadata tool configurations together and improve maintainability.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
-Kory Maincent (6):
-      tools: gitignore: Add mkfwumdata to the git ignore file
-      tools: Reorganize mkfwumdata tool into fwumdata_src directory
-      tools: mkfwumdata: Improve error message specificity
-      tools: mkfwumdata: Add bank count validation for FWU metadata v2
-      tools: Add support for fwumdata tool
-      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
+ MAINTAINERS                           | 3 ++-
+ tools/Kconfig                         | 9 +--------
+ tools/Makefile                        | 4 +---
+ tools/fwumdata_src/Kconfig            | 8 ++++++++
+ tools/fwumdata_src/fwumdata.mk        | 7 +++++++
+ tools/{ => fwumdata_src}/mkfwumdata.c | 0
+ 6 files changed, 19 insertions(+), 12 deletions(-)
 
- MAINTAINERS                           |   7 +-
- doc/develop/uefi/fwu_updates.rst      |   4 +-
- doc/fwumdata.1                        | 222 +++++++++
- tools/.gitignore                      |   2 +
- tools/Kconfig                         |   9 +-
- tools/Makefile                        |   4 +-
- tools/fwumdata_src/Kconfig            |  19 +
- tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
- tools/fwumdata_src/fwumdata.config    |  33 ++
- tools/fwumdata_src/fwumdata.h         | 138 ++++++
- tools/fwumdata_src/fwumdata.mk        |  10 +
- tools/{ => fwumdata_src}/mkfwumdata.c | 106 ++---
- 12 files changed, 1315 insertions(+), 93 deletions(-)
----
-base-commit: 31bf4a1c308773895a8e7ea047b3cea037e4c922
-change-id: 20251107-feature_fwumdata-58508d61e1d3
+diff --git a/MAINTAINERS b/MAINTAINERS
+index b43dae882b3..5f560f4a94e 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1250,9 +1250,10 @@ FWU Multi Bank Update
+ M:	Sughosh Ganu <sughosh.ganu@linaro.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-efi.git
++F:	doc/mkfwumdata.1
+ F:	lib/fwu_updates/*
+ F:	drivers/fwu-mdata/*
+-F:	tools/mkfwumdata.c
++F:	tools/fwumdata_src/mkfwumdata.c
+ 
+ GATEWORKS_SC
+ M:	Tim Harvey <tharvey@gateworks.com>
+diff --git a/tools/Kconfig b/tools/Kconfig
+index 652b0f22557..9fe8b0f87d8 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -194,13 +194,6 @@ config LUT_SEQUENCE
+ 	help
+ 	  Look Up Table Sequence
+ 
+-config TOOLS_MKFWUMDATA
+-	bool "Build mkfwumdata command"
+-	default y if FWU_MULTI_BANK_UPDATE
+-	help
+-	  This command allows users to create a raw image of the FWU
+-	  metadata for initial installation of the FWU multi bank
+-	  update on the board. The installation method depends on
+-	  the platform.
++source tools/fwumdata_src/Kconfig
+ 
+ endmenu
+diff --git a/tools/Makefile b/tools/Makefile
+index ae6a3052646..1c58bac3033 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -271,9 +271,7 @@ mkeficapsule-objs := generated/lib/uuid.o \
+ 	mkeficapsule.o
+ hostprogs-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+ 
+-mkfwumdata-objs := mkfwumdata.o generated/lib/crc32.o
+-HOSTLDLIBS_mkfwumdata += -luuid
+-hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
++include tools/fwumdata_src/fwumdata.mk
+ 
+ # We build some files with extra pedantic flags to try to minimize things
+ # that won't build on some weird host compiler -- though there are lots of
+diff --git a/tools/fwumdata_src/Kconfig b/tools/fwumdata_src/Kconfig
+new file mode 100644
+index 00000000000..c033c560e8d
+--- /dev/null
++++ b/tools/fwumdata_src/Kconfig
+@@ -0,0 +1,8 @@
++config TOOLS_MKFWUMDATA
++	bool "Build mkfwumdata command"
++	default y if FWU_MULTI_BANK_UPDATE
++	help
++	  This command allows users to create a raw image of the FWU
++	  metadata for initial installation of the FWU multi bank
++	  update on the board. The installation method depends on
++	  the platform.
+diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumdata.mk
+new file mode 100644
+index 00000000000..2ce618ef2ed
+--- /dev/null
++++ b/tools/fwumdata_src/fwumdata.mk
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2025, Kory Maincent <kory.maincent@bootlin.com>
++
++mkfwumdata-objs := fwumdata_src/mkfwumdata.o generated/lib/crc32.o
++HOSTLDLIBS_mkfwumdata += -luuid
++hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+diff --git a/tools/mkfwumdata.c b/tools/fwumdata_src/mkfwumdata.c
+similarity index 100%
+rename from tools/mkfwumdata.c
+rename to tools/fwumdata_src/mkfwumdata.c
 
-Best regards,
 -- 
-Köry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+2.43.0
 
