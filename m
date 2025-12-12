@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E2FD4417D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 11:23:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DC9D4417E
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 11:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FD9F809A5;
-	Fri, 12 Dec 2025 12:23:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C04183849;
+	Fri, 12 Dec 2025 12:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tBm/2fbZ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Wn3lZA8D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93923807C0; Fri, 12 Dec 2025 12:23:20 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 30F9E83869; Fri, 12 Dec 2025 12:27:29 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F9D807C0
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 12:23:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D3783837
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 12:27:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 8ABD74E41BAD;
- Fri, 12 Dec 2025 11:23:17 +0000 (UTC)
+Received: from smtpout-01.galae.net (unknown [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 4C31FC1935F;
+ Fri, 12 Dec 2025 11:27:02 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 5297E606DF;
- Fri, 12 Dec 2025 11:23:17 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 58EDC606DF;
+ Fri, 12 Dec 2025 11:27:16 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 72D37103C8CCF; Fri, 12 Dec 2025 12:23:12 +0100 (CET)
+ with ESMTPSA id DDEDF103C8DA8; Fri, 12 Dec 2025 12:27:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1765538596; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1765538835; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=orIhsEYgydb7mPGbP/tjK8gyr3/u6WnXG4wX0DkJN34=;
- b=tBm/2fbZ2fc5nZ1lXQGnKEZKQka/oFeU6N/6Ww6AnATC4jV+46tVh6Fh7KRUf5fVPqYcaS
- 03xIqbGmYcf2zV9HXuhNAOuWzeYv02ma3nxy8op8Mpfr/YAYCvpUZxsNOzuAf0LqlakTcz
- ylibiLdtF4r83M2yA5CpUuJg4/CdTUX8Aso9b7W56lBuli8bXMH8eDkV7mQwWWU5fthG5g
- ku+u+SxhdZsu5b//llXwEN8u7r9rdSGU7cifOs3N3Rr2TLKx13nj3fxJf3tw/I4+EW1Bxr
- 8JKAxrQdnForgCwyWqJkPOOlC3yEGAV1MZYYahk8q1lsINz+CXiNdKKbeMGOeQ==
-Date: Fri, 12 Dec 2025 12:23:10 +0100
+ bh=fle1MlWLPpqwVXUmQgQy0A2Av0GU3BlU5y2WvnQcuKw=;
+ b=Wn3lZA8DnkaCOfMgSQO65v6SHopl3EBoYqNvHo8a4xk5NvDdKkm7kdDC0atpgJY4mEIQGY
+ P8qznRcPFxT2AGmdAQ+eZRnbGaay6L7ypzMId7cllSqrRNTLyyMd8J6lTL7JAv67ExLQC9
+ KVPIPGoLXHu/voBWbWoIEdRPW2IQbczlwpXqE6SXwmg8AQIUtZPbm9wjuVvTxLJLR7XlcB
+ kyRj7Qf2/TnKdn0iUIRpGVkrewvhhZTCKxhiIModESEJs/z3V2sf5adcu1+K0B7ICfZgKn
+ B1CPJHwe77klVG9On82duF+wjtZtYyNeigFrbO01SkaRsviuWNejyCWAZZ3JQw==
+Date: Fri, 12 Dec 2025 12:27:11 +0100
 From: Kory Maincent <kory.maincent@bootlin.com>
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>, Tom Rini
@@ -51,11 +51,11 @@ Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>, Tom Rini
  <romain.gantois@bootlin.com>, Parvathi Pudi <parvathi@couthit.com>,
  Basharath Hussain Khaja <basharath@couthit.com>, Paul Barker
  <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [PATCH v3 5/9] am33xx: Avoid hard failure on USB probe issue
-Message-ID: <20251212122310.2bd960bd@kmaincent-XPS-13-7390>
-In-Reply-To: <20251204-topic-am33-evm-oftree-v2026-01-v3-5-3d1566ce4dc7@baylibre.com>
+Subject: Re: [PATCH v3 8/9] am33xx: Support upstream devicetree USB device
+Message-ID: <20251212122711.7a36f84c@kmaincent-XPS-13-7390>
+In-Reply-To: <20251204-topic-am33-evm-oftree-v2026-01-v3-8-3d1566ce4dc7@baylibre.com>
 References: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
- <20251204-topic-am33-evm-oftree-v2026-01-v3-5-3d1566ce4dc7@baylibre.com>
+ <20251204-topic-am33-evm-oftree-v2026-01-v3-8-3d1566ce4dc7@baylibre.com>
 Organization: bootlin
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
@@ -78,13 +78,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 04 Dec 2025 11:25:41 +0100
+On Thu, 04 Dec 2025 11:25:44 +0100
 "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
-> Currently if USB fails to probe, U-Boot does not reach the console.
+> Support musb being probed by ti,musb-am33xx. The non-upstream DT probing
+> used a wrapper driver that probed ti-musb-peripheral and ti-musb-host.
+> This wrapper registered as UCLASS_MISC, which is why it is requested in
+> this board.c file.
 >=20
-> This patch does not fail if USB fails to probe making it easier to debug
-> in case of issues.
+> With the new devicetree the wrapper that registers as UCLASS_MISC is
+> gone, instead the UCLASS_USB and UCLASS_USB_GADGET_GENERIC have to be
+> requested.
 
 Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 
