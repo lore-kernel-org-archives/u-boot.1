@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7070FD59D81
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DE7ED59D82
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:14:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBFE1835B3;
-	Fri, 12 Dec 2025 19:13:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52D5F83984;
+	Fri, 12 Dec 2025 19:13:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30E7E839B7; Fri, 12 Dec 2025 19:13:37 +0100 (CET)
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [83.166.143.173])
+ id 4230083984; Fri, 12 Dec 2025 19:13:37 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::8fa9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F98283984
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:13:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06C06835B3
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:13:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dScyk67w7zm5S;
- Fri, 12 Dec 2025 19:13:34 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dScyd55FgzkSs;
+ Fri, 12 Dec 2025 19:13:29 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dScyj1qghzJH1; Fri, 12 Dec 2025 19:13:33 +0100 (CET)
+ id 4dScyc0zTbzJ7k; Fri, 12 Dec 2025 19:13:28 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 12 Dec 2025 19:13:16 +0100
-Subject: [PATCH 4/8] boot: fix prompt for VPL_LOAD_FIT_FULL
+Date: Fri, 12 Dec 2025 19:13:13 +0100
+Subject: [PATCH 1/8] Kconfig: put TPL_OPTIMIZE_INLINING next to
+ SPL_OPTIMIZE_INLINING
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251212-kconfig-reorg-v1-4-72441d8cc53c@cherry.de>
+Message-Id: <20251212-kconfig-reorg-v1-1-72441d8cc53c@cherry.de>
 References: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
 In-Reply-To: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
 To: u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
@@ -80,28 +81,49 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The prompt wrongly specifies this applies to SPL while this symbol is
-for VPL, let's fix this oversight.
+Right now LTO is in-between both when using menuconfig.
 
-Fixes: 8dfbd798122b ("boot: Allow use of FIT in TPL and VPL")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- boot/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Kconfig | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 3e882d3f4f9..dc6988aca71 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -361,7 +361,7 @@ config VPL_LOAD_FIT
- 	default y
+diff --git a/Kconfig b/Kconfig
+index 1d600342685..c435fb43182 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -140,6 +140,15 @@ config SPL_OPTIMIZE_INLINING
+ 	  do what it thinks is best, which is desirable in some cases for size
+ 	  reasons.
  
- config VPL_LOAD_FIT_FULL
--	bool "Enable SPL loading U-Boot as a FIT (full fitImage features)"
-+	bool "Enable VPL loading U-Boot as a FIT (full fitImage features)"
- 	select VPL_FIT
- 	help
- 	  Normally with the SPL framework a legacy image is generated as part
++config TPL_OPTIMIZE_INLINING
++	bool "Allow compiler to uninline functions marked 'inline' in TPL"
++	depends on TPL
++	help
++	  This option determines if U-Boot forces gcc to inline the functions
++	  developers have marked 'inline'. Doing so takes away freedom from gcc to
++	  do what it thinks is best, which is desirable in some cases for size
++	  reasons.
++
+ config ARCH_SUPPORTS_LTO
+ 	bool
+ 
+@@ -163,15 +172,6 @@ config LTO
+ 
+ 	  If unsure, say n.
+ 
+-config TPL_OPTIMIZE_INLINING
+-	bool "Allow compiler to uninline functions marked 'inline' in TPL"
+-	depends on TPL
+-	help
+-	  This option determines if U-Boot forces gcc to inline the functions
+-	  developers have marked 'inline'. Doing so takes away freedom from gcc to
+-	  do what it thinks is best, which is desirable in some cases for size
+-	  reasons.
+-
+ config CC_COVERAGE
+ 	bool "Enable code coverage analysis"
+ 	depends on SANDBOX
 
 -- 
 2.52.0
