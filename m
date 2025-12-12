@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9BEBD49230
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 14:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7B5D4922D
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 14:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AF75835B3;
-	Fri, 12 Dec 2025 15:41:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7348C83106;
+	Fri, 12 Dec 2025 15:41:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dOF0dJY/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rq104VCr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 625F88367F; Fri, 12 Dec 2025 15:41:43 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 182CA83837; Fri, 12 Dec 2025 15:41:45 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EDAE8334F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 15:41:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6707828A2
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 15:41:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-477770019e4so13365355e9.3
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 06:41:41 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4779ce2a624so14704895e9.2
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 06:41:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765550501; x=1766155301; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1765550493; x=1766155293; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=62k/G3sg1ICR7NDJ/qjoRUihscU3RosH3GQMgrX52Ws=;
- b=dOF0dJY/JDd6ErrPZDnulvjyhk4thf/xxUg0A2kFzZ3rT3T0gtrz9itk/ln895+09x
- OmSbvUj9NEAP5eu2o01/CqEdQ4Hunvg+0xOj4RlA3/s1yyZhN/pCTJhT13KbLwkfy9ov
- I2WMEJlSPM06KPQCHKURu20dlsqCMwlEDEwpAnb4H74Q1hPJ9xj8+Ur+NQt2EuwjoB6O
- jmrNfu/Wu9xk2KLRfV3ZkhB3wel2BcU6+vBbDqJJIFbmAmHDgkg0QOT2nvZN1iWq3EgG
- CC8C7xD9R6Fq839zRUvpdO6rmknlaasuMLSbjtEiTjXiqVjXfvIEN2y2ETNTzCQ4USKn
- gdUw==
+ bh=oW0uBlzo477/xYDTIDqNQXW8MjVe25bdSNkPl/moL/4=;
+ b=rq104VCrdO7nF2W7haDJnJO8iA2IIYP6NvB5WvtiE8BfHZ+QJKMESsJu67hO6tHgMP
+ smuW0viMATpxXzg5oklHSF8Vv7rSKx2tpzVAxMwU6grN5W25nhGVTEHm1rBum6OdXj68
+ rcBLdD8AIqP0k65fM8I3eSv9MaMqlL7QXLpsSVvYGoUNjMC613fr7QlVNt2QaVD+yQrJ
+ an6/n+rXeIItSX+oTVHNHiYeZu4pVA0LEEc2chamtlYZMZSB1JNPeJCBhq8o0ZztEkf1
+ CEhsyjFcDVHobp/fWBjrdaP99tYF6z7B8zTTN6NDrVmBejH4OdpRr4BhIRB0fAav70B0
+ bNuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765550501; x=1766155301;
+ d=1e100.net; s=20230601; t=1765550493; x=1766155293;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=62k/G3sg1ICR7NDJ/qjoRUihscU3RosH3GQMgrX52Ws=;
- b=Ojp3W380iDA8XGhjHRu76fDyHkoytr3hSAdCTFw3ukDkPZO+dyRnkqqgepRg8YY73b
- hCitj0VLB33ACdgU9S6Bq7o1RlR/exKyCnHHd+MLgGDCRqEL3aB16B8e82pSMgSF8Lsf
- Br/CrA6DK2hV7AE+z0YDTTTid5T1XyxxAv/oIXFWZF+hCiad5kMbCxksgtw1GXLytlDx
- 4vYu+HWaZRTKthRNCbwvJP29IxKbJfdj6CYnx7ZkQLQxYyts6rGjTSAafm4k3txYhqCH
- G8zGpGGXmvigCu1dybNrIvX1sWk67FYpgwCFbdTIgdtgg8pyyingN0AIWLFdmSmyu3VT
- Hqig==
+ bh=oW0uBlzo477/xYDTIDqNQXW8MjVe25bdSNkPl/moL/4=;
+ b=WdzYxdMYrbzt5bszWZmLvaxnwYYFH2tM1hjj41jaaPvGJ4a5cOe2cU7MgDpEVsQ/TS
+ 6PrIq8D8WUVG4VVWVw15bxp0yoTNjKBuYCFNRz7xCnlmX4lnotuZ+q494sQKHXCOs/fj
+ 0YnUtjrbdYH0pHvGwwt/UB9lPxmngWaB/KEjtyKFd7frm/rAih8/s1S1OAOKHS7OaREk
+ 05bvCpCDqzyEO8cXLDJTOGGBC7qEmHVkr55vLrc0ckF/v5FWj76OXrTa4fYgOnGVkXqw
+ 3Ya9hS2DBMdoiLqbI3MCwyfmESbiSwMSNFHViKFsQ/+g1lPyLRjlgHMv98aAaTGXzyOR
+ fE+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0E/0awSHtLsAsZdhsOIV3pppy3ZOBE98ZqRZXlPRFWK5B1vZoMpWS+qgvhoaLs3FWk3KaaBY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7QCiBkxeF6xJXUMuqR5EUdqGdASHaf2GnQYiajbQIKSuNn3lg
- 2hAvnucdluCPdcHMNOjfQlxyNVdF4oRo0iuy7WbnwubMsft3d4vRONPAXATyyU+kxBM=
-X-Gm-Gg: AY/fxX6XL48kUoRPpvqzB85qaSHLroLIpBhz1OOi0gpiAc/X8AhhBxsV5L+FTfT2v/7
- FKVZg+I0O6qZtT1lwSnMRq8Y6csRgwdDcK+pUdswmUlABR2uqCpPw7uo664VMVTXZFwSbvEfLxa
- lMpm+LdmpL8TCdG2YHr5YpGavXcr0IgwnZXEHy71f61BXoQ5C+7Td8ihMdvQQQv3nnnZu40O4tK
- s4UFH5YoIPSXMHGfrfYTDvKgqAeH7bDnQc9Q/f6/WjhvHNG90XTyK2C/Dl30ORrDvNXK/eDt0Ry
- 1fg+LkUDeNiVcxOC/LfEJxsKgvJiEAGJljbvj3OO1MkU2cOvmyJhcDRLXxWHG9MJB7IzYjyoenv
- 5ICAcNsYXPav8bV5vXDSU3gJI3Jrpv2DWxtzKL4xM9rkAFh5ea3ubaShOFlr6uE30qdOUYE8jBh
- Abb+Q1ir9Y6EAjYN1huIvm7W3ZZxZ7FJUAs1TTY31SCm82tSJYGq8pQkxiT6QafN8oPBKOGAyY6
- uxM
-X-Google-Smtp-Source: AGHT+IFZf/9GDfWKc8EmFVlsp7+a72FVozwWAMwI2S+0UOKnu0dQvIoBttW+vf035v4Svi2dXEvgWQ==
-X-Received: by 2002:a05:6000:186e:b0:429:cda2:9ffe with SMTP id
- ffacd0b85a97d-42fb44a38a2mr2298683f8f.7.1765550500526; 
- Fri, 12 Dec 2025 06:41:40 -0800 (PST)
+ AJvYcCVYrt//BzApXkq3jhtgLYtbT0Z8ptvskhpsSdd67dZwDzVxPjtPbAfDOW1QXnEQxkwF6SIp7K8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8GnCVIPKX/oSs+8tcFu4j6jkr/oAuzWDmR0iwaCe1daPR9Lm2
+ J+AvORRpNu4JJJOuOiJ/zVfLjzGZStV9iY4TJC+WgrRegqAcKqoFJ657uy/OgfzOKBs=
+X-Gm-Gg: AY/fxX68e7g0mwT1oTo0QH8o/GiQAk5Lpb+RdZgABxFneimuxk96SOYaEEXmcD9hFr7
+ 50G4QSAA7oXFX9tyLPYgkzfZThL7mTwgShF3nXaEvhtZMcuzB02531xvCyQwQUDrDYoV/1X9pmU
+ Vnehdv71gfvQEX04O9DApLESGIdYLW7wWHJ0nm/62UTgyFMoJS8Xn418D1bMJRGL0KrrkoGNaTA
+ Nye+0RHx1+wrpKTwhFu3qjMaAiVWCoWmiiZuWfJX3JbXRGhODqDMYzPxw+e6sM2ZDXBpPmi/v8B
+ IDPKowsx+LE8tW/HP88cLAAGxq7gxaCVggifEs7bmQbE/6IyZ/bTJU++8ny2K2uxkppyOJkd/pv
+ AVFwq/oYbfd8jHoLsdguunLLz9co+JX+vM0VvVZ2qictXNz7VmGZ53wmce/kp+ZNE8Z4MtjGAJ3
+ ZEsqDVK9ZR4WmR9rk0sKXc3TDDa29dFJPZTQGxKhqHXayJHutCrquPsb7yD0YZZ534LA==
+X-Google-Smtp-Source: AGHT+IHh2BS2dqjc65r8Wa0HBBoyf6DlGyfxYhoSFm6Q4ZsUlNg3zcMT5qlkcpY+DISMbzH83gtU7A==
+X-Received: by 2002:a05:600c:45cb:b0:475:e007:bae0 with SMTP id
+ 5b1f17b1804b1-47a8f8d2537mr31762375e9.16.1765550493043; 
+ Fri, 12 Dec 2025 06:41:33 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
  ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42fa8b9b1f1sm12467320f8f.39.2025.12.12.06.41.39
+ 5b1f17b1804b1-47a8f8d9c6fsm35247075e9.11.2025.12.12.06.41.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Dec 2025 06:41:40 -0800 (PST)
-Message-ID: <51201122-b293-4223-b09e-cd8adaaa3b08@linaro.org>
-Date: Fri, 12 Dec 2025 15:41:39 +0100
+ Fri, 12 Dec 2025 06:41:32 -0800 (PST)
+Message-ID: <70c1ad02-f2d3-48a7-a0f4-4d5e936bec4b@linaro.org>
+Date: Fri, 12 Dec 2025 15:41:31 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] net: Move some variables to net-common files
+Subject: Re: [PATCH v2 1/6] net: move net_state to net-common
 To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -98,10 +97,10 @@ Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Martyn Welch <martyn.welch@collabora.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
 References: <20251212-lwip_nfs-v2-0-9cb5a60520d8@linaro.org>
- <20251212-lwip_nfs-v2-2-9cb5a60520d8@linaro.org>
+ <20251212-lwip_nfs-v2-1-9cb5a60520d8@linaro.org>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20251212-lwip_nfs-v2-2-9cb5a60520d8@linaro.org>
+In-Reply-To: <20251212-lwip_nfs-v2-1-9cb5a60520d8@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -121,40 +120,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/12/25 12:32, Andrew Goodbody wrote:
-> Make some variables available to be used by either the legacy network
-> code or lwIP by moving them into the net-common files. This also allowed
-> removing a small number of duplicated variables from the lwIP code.
+> Move the net_state variable into common code so that it can be used by
+> either the legacy network code or lwIP. This is needed for porting
+> across the NFS support code for use with lwIP.
 > 
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  include/net-common.h | 12 ++++++++++--
->  include/net-legacy.h |  5 -----
->  net/lwip/net-lwip.c  |  5 -----
->  net/net-common.c     |  9 +++++++++
->  net/net.c            | 10 ----------
->  5 files changed, 19 insertions(+), 22 deletions(-)
-> 
-> diff --git a/include/net-common.h b/include/net-common.h
-> index d7a0f7dff7e50527e77419ead9a9ff30deeea545..f293b21bc0bb3c8e1a04ffd8f5188e5ce67d1d12 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -132,13 +132,21 @@ static inline void net_set_state(enum net_loop_state state)
->  }
->  
->  extern int		net_restart_wrap;	/* Tried all network devices */
-> -extern uchar               *net_rx_packets[PKTBUFSRX]; /* Receive packets */
-> +extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
->  extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
-> -extern char	net_boot_file_name[1024];/* Boot File name */
->  extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
->  /* Indicates whether the pxe path prefix / config file was specified in dhcp option */
->  extern char *pxelinux_configfile;
->  
-> +/* Our IP addr (0 = unknown) */
-> +extern struct in_addr	net_ip;
-
-That one is already mentioned above. Please remove.
-The rest of the patch looks fine, so with this fixed:
+>  include/net-common.h | 17 +++++++++++++++++
+>  include/net-legacy.h | 17 -----------------
+>  net/net-common.c     |  3 +++
+>  net/net.c            |  2 --
+>  4 files changed, 20 insertions(+), 19 deletions(-)
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
