@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A41D59D65
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 15:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1549D59D6F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 16:11:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A5B78307F;
-	Fri, 12 Dec 2025 16:50:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 188EB83106;
+	Fri, 12 Dec 2025 17:11:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bsgYhszf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ekktJbUJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hzx31OBI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06CD38334F; Fri, 12 Dec 2025 16:50:05 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 33DDD8334F; Fri, 12 Dec 2025 17:11:16 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E93C283045
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 16:50:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9EA38307F
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 17:11:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-42fbc305882so97197f8f.0
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 07:50:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765554600; x=1766159400; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uCBfmujevjiIdCf3SM+P2l2vusD0FvqTScWRKTADESE=;
- b=bsgYhszfzxSowIb26DFjz8YALTHOlUV1sxUpVrIwf189ZMabFAjVvWZEXKlpYSU275
- LyBLuY0Lk4xsuqvBwRjcabyNljLkdqLNbrwU3mD+dFVk1RV7Bdumlzrz2VmQXRv74eAX
- 1Zvj/W6wfDoGBY9/Tj/vkz7pY10QADMJ3tabwGhGxwjdUuoI5x/K3XvO1MOMp3tYSC03
- r28aDuG8Hf6l6VhvZQ78UKD85EumqVYcGISR+b7dUJLvBUxvo70COP4hT3hliaBUUCYc
- yH8k+aXs1Q8NhuXIi23OSq8/f8HcYm/YaQvUXFYq5lv6y9coQ8d6u0LKgWT/Aqw1QEOl
- 6S6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765554600; x=1766159400;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=uCBfmujevjiIdCf3SM+P2l2vusD0FvqTScWRKTADESE=;
- b=wBuC+fQZPtDuqi6e3UBPl0njWsL3EahTVBLKFfNtM+lYEat3xaInUjk0bMoIzpJhKl
- 3TL0gleMFDDEdmsSeNGyv2RR/7dJ/aGulBXb5o1WFFxFkWngutN+5BPQkt5q7UvLnFUG
- DUkB9uiGmmsrjzdllwZ2b5hUUXo6tT4ntTIYbyU1LImDXHBxyVcdFPzEm8p0GEhlFd3J
- bbbJfOo2c2InTrbrRJKO46Ud2GHrZ4ystjA05LrCJw0CrG1y22WCRKIKdl6jR9NKxCHA
- wpsUySJIThMpvyBoozDKHuJ+5MA5wt7QnLLXmAS+MJ5DptLWjD23+URWiRPc0i7VV3CR
- 6DPA==
-X-Gm-Message-State: AOJu0YyeHciEXt1frsG6f6wnMdSBvUT2mB+wDtvM6IORyYW7bJqOaxpc
- UWdnFHPiyZo8xEdhxBhnj9h5OTHik9QMpt1ob944CIor454l80gnz4D7zo1SZ2n+J9Y=
-X-Gm-Gg: AY/fxX6p0/KGVdttT38ol/sB5/FNjSgYy9nc2GNZE8lETW6KyPSxYkx2DXutMBJ6dP7
- cCE4PInIPslXM/V0w77RELjD56C/viUdGudUGLjltL+ucvHBdg7h+X+3+ipJmCraa/ENrWasSLw
- 1bQYpTb/Yo86Gf7sEOKrMvB5xihOYNkXCD0Af4aGh4WSUhbg5JdpD6hzL0gvh4c6EGennbZErlV
- lrRMHpjQUHugpBvG7cCgU3Q2Ah2lZK39K5gkI9Cjl8KMCvBRsfXqJW7IXwy9UrSQZ0S0dMR7npI
- 7XzbrqDbLY9YiMhZm4qSTVAT0aP511AdDRgI7uVuylS1qisgFGDJE7zXRWC8pvnsNqo2q1PKJP0
- c9vdGH5skvSYC39hUee6MncRFzbzWtV0nWnjM1OpxAHjDmOdt1bR12sf1vXc7DJvcwcCin/JyBG
- urGqRny+UTQYzzeZGIUdf9kwRyuljLxyo=
-X-Google-Smtp-Source: AGHT+IE58J+dC+qq30ONmII4NsDv9XISNp2N3XXi+GF9j7KbCk7AE/bUF9tTJ/rhSDKt+tvm+oNlpw==
-X-Received: by 2002:a05:6000:22c1:b0:429:c7dc:e613 with SMTP id
- ffacd0b85a97d-42fb4901fbamr2923071f8f.41.1765554600196; 
- Fri, 12 Dec 2025 07:50:00 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42fa8b8a950sm14084391f8f.32.2025.12.12.07.49.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 07:49:59 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, git@amd.com, Michal Simek <michal.simek@amd.com>
-Cc: Padmarao Begari <padmarao.begari@amd.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-In-Reply-To: <e6deb9086afab9d2bdd53db8ecbc7db93af5204d.1764169598.git.michal.simek@amd.com>
-References: <e6deb9086afab9d2bdd53db8ecbc7db93af5204d.1764169598.git.michal.simek@amd.com>
-Subject: Re: [PATCH] ufs: Disable UTP command timeout in slow mode
-Message-Id: <176555459951.1592278.10213529530179974819.b4-ty@linaro.org>
-Date: Fri, 12 Dec 2025 16:49:59 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dSZFY2swCz9sdM;
+ Fri, 12 Dec 2025 17:11:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1765555873;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/82cxtlJCkg+kr3ijFKaEuDNT6HsqzTKpdycnpfUsXE=;
+ b=ekktJbUJuL49TToYkzxokoaFmXYl5SuWL4yuZU3oSCeRgSYjYwua488tKSO9nLvJxSKrXX
+ ocKjKbLys4ROoE/lSR2eo+3Z5YXKu4DrZKXOyXY8BWwAF9M7OfoEV7Ss8GpZB6kStJ8SnP
+ 5NcZsOrR3CTP8FiFPoVTkpjh4u5yYnUS2mQC7QUMIy5mMX8t+lCUkx7/m/WeVFq6g/oN12
+ 3JC0cbyS2bdoaPFfdPRPHmhX/gZilXHe6e5FikqMp1MCjLlgTS7/5lVS1laTLO8C0ixt46
+ p8BggmYAQkghvCpMpyPLI1fQqpnUveN0MchBwZZrh1bPWdSGJ1hpM5tCDe3eaQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Hzx31OBI;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <6a9825a4-0c0b-41ad-adc0-595f83b83a2a@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1765555871;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/82cxtlJCkg+kr3ijFKaEuDNT6HsqzTKpdycnpfUsXE=;
+ b=Hzx31OBIJ4jR/czdtYWH76bQrHQqXvRCMkfLc2iH5ey+sMIjJyZXgI2HUSz8eIJFP9g5Ry
+ GUY2KiIg8EU8QETpU/PUn/64eAwYaD4ama3hEzONf8DTSPWb/s2uuOYTU+nLgK8uwU5JXs
+ k+BNyen/PoYUr9923eSvHWgQVM8eFExbQ87Edb6Kh5Q0GHHlr71gnYpioTYPBOvoPZF0LR
+ e5Gd9HZ6LKoMXtP/osN4GaV5KzWG1QGHc8BlfbAya74dFBH2y0jhx0atQGDbdJKQ7181x8
+ GFNmW883xnRthKZ/O1oWZhWevOi/+gz+9Pva4TuiBlk++PSrkow1ZY7PGTvgVQ==
+Date: Fri, 12 Dec 2025 16:16:02 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH 2/3] clk: scmi: Fix priv initialization in scmi_clk_gate()
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>
+References: <20251208-sqqs-v1-0-290f0594e30b@foss.st.com>
+ <20251208-sqqs-v1-2-290f0594e30b@foss.st.com>
+ <3d8c5338-9a14-4f27-9dd4-d84929f9c6c5@mailbox.org>
+ <aTq83QLQ6aa70y9i@nxa18884-linux.ap.freescale.net>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <aTq83QLQ6aa70y9i@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MBO-RS-META: u9sfttx69mjpm9qnz5rc4mnta4neeut5
+X-MBO-RS-ID: b6be52d4c416b49153d
+X-Rspamd-Queue-Id: 4dSZFY2swCz9sdM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,23 +103,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Wed, 26 Nov 2025 16:06:41 +0100, Michal Simek wrote:
-> When the UFS controller is operating in slow (PWM) mode,
-> the driver is disabled the timeout for UTP send commands.
-> In high-speed mode, the timeout remains enabled to
-> detect stalled or failed transfers. This change ensures reliable
-> operation in slow mode, where command completion may take longer
-> and timeouts are not required.
+On 12/11/25 1:45 PM, Peng Fan wrote:
+> On Tue, Dec 09, 2025 at 12:54:15PM +0100, Marek Vasut wrote:
+>> On 12/8/25 2:51 PM, Patrice Chotard wrote:
+>>> In scmi_clk_probe(), in case of CLK_CCF is not enabled, parent private
+>>> data is not set, so in scmi_clk_gate(), an uninitialized priv struct is
+>>> retrieved.
+>>>
+>>> SCMI request is performed either using scmi_clk_state_in_v1 or
+>>> scmi_clk_state_in_v2 struct depending of the unpredictable value of
+>>> priv->version which leads to error during SCMI clock enable.
+>>>
+>>> Issue detected on STM32MP157C-DK2 board using the SCMI device tree
+>>> stm32mp157c-dk2-scmi.dts.
+>>>
+>>> Fixes: 0619cb32030b ("firmware: scmi: Add clock v3.2 CONFIG_SET support")
+>>>
+>>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>>>
+>>> Cc: Alice Guo <alice.guo@nxp.com>
+>>> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>> Cc: Peng Fan <peng.fan@nxp.com>
+>>> Cc: Sean Anderson <seanga2@gmail.com>
+>>> Cc: Tom Rini <trini@konsulko.com>
+>>> Cc: Valentin Caron <valentin.caron@foss.st.com>
+>>> Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+>>> Cc: u-boot@lists.denx.de
+>>> ---
+>>>    drivers/clk/clk_scmi.c | 7 ++++++-
+>>>    1 file changed, 6 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+>>> index f6132178205..e1c20f2c47c 100644
+>>> --- a/drivers/clk/clk_scmi.c
+>>> +++ b/drivers/clk/clk_scmi.c
+>>> @@ -137,7 +137,7 @@ static int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name,
+>>>    static int scmi_clk_gate(struct clk *clk, int enable)
+>>>    {
+>>> -	struct scmi_clock_priv *priv = dev_get_parent_priv(clk->dev);
+>>> +	struct scmi_clock_priv *priv;
+>>>    	struct scmi_clk_state_in_v1 in_v1 = {
+>>>    		.clock_id = clk_get_id(clk),
+>>>    		.attributes = enable,
+>>> @@ -156,6 +156,11 @@ static int scmi_clk_gate(struct clk *clk, int enable)
+>>>    					     in_v2, out);
+>>>    	int ret;
+>>> +	if (!CONFIG_IS_ENABLED(CLK_CCF))
+>>> +		priv = dev_get_priv(clk->dev);
+>>> +	else
+>>> +		priv = dev_get_parent_priv(clk->dev);
+>>> +
+>> Shouldn't this be doing similar resolution like existing code ?
+>>
+>> 168 static int scmi_clk_get_ctrl_flags(struct clk *clk, u32 *ctrl_flags)
+>> 169 {
+>> 170         struct clk_scmi *clkscmi;
+>> 171         struct udevice *dev;
+>> 172         u32 attributes;
+>> 173         struct clk *c;
+>> 174         int ret;
+>> 175
+>> 176         ret = clk_get_by_id(clk->id, &c);
+>> 177         if (ret)
+>> 178                 return ret;
+>> 179
+>> 180         dev = c->dev->parent; // <-----------------------------
 > 
-> [...]
-
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
-
-[1/1] ufs: Disable UTP command timeout in slow mode
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/868ec1f0cb77ecd6cd8ab1d40feb38e238c6f1d2
-
--- 
-Neil
-
+> No need. The current clk code is indeed confusing.
+> 
+> In drivers/clk/clk.c, clk_get_by_id is ready called, so the first param passed
+> to scmi_clk_gate is the clk that registered during clk driver probe.
+Please add a code comment.
