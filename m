@@ -4,62 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB31D4415D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 09:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33D5D44160
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 10:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BE6E8334F;
-	Fri, 12 Dec 2025 10:38:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B1FDE81D6A;
+	Fri, 12 Dec 2025 11:19:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tIH+KR61";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YlNTLgoA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9921D835B3; Fri, 12 Dec 2025 10:38:12 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B7A0828A2; Fri, 12 Dec 2025 11:19:55 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD7F1828A2
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 10:38:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34F11808AF
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 11:19:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=db6d=6S=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1765532288;
- bh=57RmfjR4CQMwoL8LuEGrmbSavaK2eR9Mi69VEXqqUC4=;
- b=tIH+KR61Crw8IwKWxsyyL+Fn72zJaDBuLAYGqCIzTY5MPeEFoI/soIXdcVq0mOsbFnFdFeCcf
- PCzN9rL5m4PUYxQePbF1Il/iEmt5mhUFPt7wyVAVVx4NW7kDvgbxkw9T9hLC8/dKSUL/lACBGR7
- NUqex/VYr9aaN6sudIHKyBMgZMSWizvS36Kzzzcc8SiJR82Pxw7HWRtxMflkDtomkGIZ09IRNML
- U2bDxk5515jGTySG1Q2mmsnrJjAJVzH19LTlNK+JfvL9UbYIofG6zcrhLL4X45fGrzd1bY1eZXk
- DOfgZHvrg7aaOcnXGbd7oL4/ApxHl4hesOGndGUOWl4Q==
-X-Forward-Email-ID: 693be27ebcfd39afaeb6bc56
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.6.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <8df41e2b-6b90-4e67-9857-a64144d8d8e9@kwiboo.se>
-Date: Fri, 12 Dec 2025 10:38:04 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4779ce2a624so11670965e9.2
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 02:19:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765534787; x=1766139587; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZXQDkGooZgNghqh3/FCHbENWnZeYcECSIoMaiYPD0so=;
+ b=YlNTLgoAMTGzTmgaDFeZwDCamFAepsMWHZCd5dFTNmSWyCHtCedz3d+Zp7icLY7pvn
+ qWTvV5iu2p86AcSn1w+BQIqTRXDNW1x95MJkVcOYRAj3y+CYdhJyqaiLdUJ7SsF0w8rO
+ 8ZZDutcyWb7KaMWRQo0MvYVvmfPniuHVDbUvEeQ2Ep6Peexjd/OSlMz7BpER3Q6ujobI
+ jJiLqzdK3msCzKS/Ix880kBM6oLbkK5X42BooXVUibjxcHtT6FQ4ic+chMCucHFvUc5C
+ aZSs32a1Zda1BJ802l+bnCvclwD2QdbjYWEnsykUSwNQtqu3pax1C2m7nFg6r3aL/bL/
+ yWqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765534787; x=1766139587;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZXQDkGooZgNghqh3/FCHbENWnZeYcECSIoMaiYPD0so=;
+ b=WfYkH7J37x4Z5oN/9Oz7Z5s4xWuIAk5w27T9u3XEjbk9Xgg3xhccce3aI30FcezqTG
+ 1T9RIFVozC0VYHHyfEHqFYSyILWDOrd1LswX4IHEhhPWc285Lu25AXONMUiGS4v2M4cW
+ 0E/KY9LrDYN/fKz/Nv0gFyQ7/HHH+ZYqdYdsvQeEOr6Y8iBgGeERLCLWtkSNBm6PacGk
+ YCjieEYIdhvv75KuesAq8iukj2E9QT/UIRxryBliV+ROQC3/taA6czOzlSxdD16LCivb
+ kraaDahFePGu4JXbpELQ/BpE4oMJ1jSMrA7j9k+3tV/J/00wDMH3lOM/NqtVxzaLVdfn
+ laDw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLV1iLeAng11zRD6bzBIYE80nOig4DWk+tXda0qDIccccx/hsqY/mohav1XKqsiwDV0RPGNkA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJGq9SEW5YHXAKaf/vz91651ZLlBe+CKthI40WKNESzTk7lohh
+ e1uRcEZ9BmhL50ttrV8fg2A7NgDadfFvcp1cWQzyxFuvoSHQCANuRdmpHemaiuJAW/c=
+X-Gm-Gg: AY/fxX69QiTBBecHHhEJI8tYIkCr+gA/yznCu4pmORqfdASi3Jo1w0wA8Qtr7lu0xLv
+ AD6gNauXBB0vAK/VTymoexIqSJNTovOGb7dGIfhMJjL97Fd9rMvHt6KQ+Qfrp+14AmiTJVUSRRz
+ 7TlFebIzMwecYbvC/9+hMjyM1/wigvqc/J/h6NmQxZnUejZ6gnlhgc0W/goQ+J2+NanjRclgnFJ
+ NGphgdxkejuVX9u5PkimY00NayIK8TfPp7AL3/b0Ll7eicKszoCDOx0fLOo2YLwXLrGQXJMnHbu
+ /UZsbRcKCNmdgKnU7I3usg1mv5b6MH7uCpo8e67P8gdWmP1Fh3K5gkqddTR/J6aBGKVPs4ZdvWe
+ uaD0CstBBwITI28MDThSuTh1PlfsK2hZ8AC63Dd6TyPU3Nr634Wyiy/QDOsdLbfnT3nvAimObS3
+ XpgdU/NhKkhurnvIAEjlL9MP5eNF7w2rF88nGeG5QHJ1EmdIwuhA4hUNOGp8B4B+OVNQ==
+X-Google-Smtp-Source: AGHT+IEE59jsnGy8We8P38tQZttNblaOrMe+pR5/N8Xz/Yj/mrY6qW7Xj6RHA84ZZW+3LhyNzSapZA==
+X-Received: by 2002:a05:600c:a086:b0:477:9986:5e6b with SMTP id
+ 5b1f17b1804b1-47a8f90e927mr15273105e9.28.1765534787505; 
+ Fri, 12 Dec 2025 02:19:47 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:fed:3801:9287:1e8a:f239:8d00?
+ ([2a0a:ef40:fed:3801:9287:1e8a:f239:8d00])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47a8f4ae4d3sm9067915e9.5.2025.12.12.02.19.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 12 Dec 2025 02:19:46 -0800 (PST)
+Message-ID: <0aa60ddd-096a-4cc4-a990-986558bb8fa1@linaro.org>
+Date: Fri, 12 Dec 2025 10:19:46 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] common/spl: fit: Avoid directly loading images to
- load_addr
-To: Alexey Charkov <alchark@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com>
- <20251210-rk3576-ufs-v1-1-a3f9e76eb66e@gmail.com>
- <f616ea88-9d87-4960-bf02-62f0fbd1b206@kwiboo.se>
- <CABjd4YyevgLs4FqzgLTsog2A8h5VSKcFbhR+TABFUCrEBudLyw@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CABjd4YyevgLs4FqzgLTsog2A8h5VSKcFbhR+TABFUCrEBudLyw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] Revert "clk: Return value calculated by ERR_PTR"
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Nishanth Menon <nm@ti.com>
+References: <20251212011906.865419-1-trini@konsulko.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20251212011906.865419-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,97 +104,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
-
-On 12/12/2025 10:01 AM, Alexey Charkov wrote:
-> Hi Jonas,
+On 12/12/2025 01:19, Tom Rini wrote:
+> While this change was intended to fix a mistake in the code, of calling
+> the ERR_PTR macro but not making use of the result, it seems that
+> functionally platforms depend on the loop not existing here. The TI K3
+> families of platforms for example were broken by this commit.
 > 
-> Thanks for your review!
+> This reverts commit fe780310cfa8bf5a093894b5cd7fe85c6b02fd91.
 > 
-> On Thu, Dec 11, 2025 at 3:27 PM Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Alexey,
->>
->> On 12/10/2025 9:10 PM, Alexey Charkov wrote:
->>> Load images unconditionally to a known-safe location (which is
->>> CONFIG_SYS_LOAD_ADDR) to be later relocated to its desired load address.
->>>
->>> Some storage devices may be unable to directly load each of the images
->>> listed in a FIT to their desired load addresses, as is the case with
->>> e.g. booting from UFS storage on Rockchip RK3576, where part of the
->>> ATF should end up in SRAM but the UFS controller cannot directly write
->>> there.
->>>
->>> Furthermore, the code down the line does a memmove or image decompression
->>> from the original src_ptr, anyway, so there shouldn't be any performance
->>> implications from this change.
->>
->> If I am not mistaken the memmove will try to move the src_ptr into
->> load_addr and as long as they are same this is a no-op, so I am
->> expecting this will have performance implications.
+> Reported-by: Nishanth Menon <nm@ti.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>   arch/sandbox/include/asm/clk.h |  1 -
+>   drivers/clk/clk-uclass.c       |  4 ++--
+>   drivers/clk/clk_sandbox.c      | 17 -----------------
+>   test/dm/clk.c                  |  5 ++---
+>   4 files changed, 4 insertions(+), 23 deletions(-)
 > 
-> If there is no difference in alignment between src_ptr vs. load_addr
-> and no image overhead, the memmove down the line should indeed return
-> early. You're right that there are after all cases where this change
-> will affect performance.
+> diff --git a/arch/sandbox/include/asm/clk.h b/arch/sandbox/include/asm/clk.h
+> index 2d3318cdcc4d..37fe49c7fcf6 100644
+> --- a/arch/sandbox/include/asm/clk.h
+> +++ b/arch/sandbox/include/asm/clk.h
+> @@ -50,7 +50,6 @@ enum sandbox_clk_test_id {
+>   
+>   struct sandbox_clk_priv {
+>   	bool probed;
+> -	struct clk clk;
+>   	ulong rate[SANDBOX_CLK_ID_COUNT];
+>   	bool enabled[SANDBOX_CLK_ID_COUNT];
+>   	bool requested[SANDBOX_CLK_ID_COUNT];
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index 4420651f765c..0584429bed65 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -199,7 +199,7 @@ static struct clk *clk_set_default_get_by_id(struct clk *clk)
+>   		if (ret) {
+>   			debug("%s(): could not get parent clock pointer, id %lu\n",
+>   			      __func__, clk->id);
+> -			return ERR_PTR(ret);
+> +			ERR_PTR(ret);
+>   		}
+>   	}
+>   
+> @@ -354,7 +354,7 @@ static int clk_set_default_rates(struct udevice *dev,
+>   
+>   		c = clk_set_default_get_by_id(&clk);
+>   		if (IS_ERR(c))
+> -			continue;
+> +			return PTR_ERR(c);
+>   
+>   		ret = clk_set_rate(c, rates[index]);
+>   
+> diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
+> index cd92a6a29f57..c8c5a88c52d9 100644
+> --- a/drivers/clk/clk_sandbox.c
+> +++ b/drivers/clk/clk_sandbox.c
+> @@ -8,23 +8,8 @@
+>   #include <errno.h>
+>   #include <malloc.h>
+>   #include <asm/clk.h>
+> -#include <dm/device-internal.h>
+>   #include <linux/clk-provider.h>
+>   
+> -static int sandbox_clk_of_to_plat(struct udevice *dev)
+> -{
+> -	struct clk *clk;
+> -	struct sandbox_clk_priv *priv = dev_get_priv(dev);
+> -
+> -	clk = &priv->clk;
+> -
+> -	/* FIXME: This is not allowed */
+> -	dev_set_uclass_priv(dev, clk);
+> -
+> -	clk->dev = dev;
+> -	return 0;
+> -}
+> -
+>   static ulong sandbox_clk_get_rate(struct clk *clk)
+>   {
+>   	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -117,7 +102,6 @@ static int sandbox_clk_request(struct clk *clk)
+>   	if (id >= SANDBOX_CLK_ID_COUNT)
+>   		return -EINVAL;
+>   
+> -	priv->clk.id = id;
+>   	priv->requested[id] = true;
+>   	return 0;
+>   }
+> @@ -148,7 +132,6 @@ U_BOOT_DRIVER(sandbox_clk) = {
+>   	.name		= "sandbox_clk",
+>   	.id		= UCLASS_CLK,
+>   	.of_match	= sandbox_clk_ids,
+> -	.of_to_plat	= sandbox_clk_of_to_plat,
+>   	.ops		= &sandbox_clk_ops,
+>   	.probe		= sandbox_clk_probe,
+>   	.priv_auto	= sizeof(struct sandbox_clk_priv),
+> diff --git a/test/dm/clk.c b/test/dm/clk.c
+> index c3363796498b..790968e64774 100644
+> --- a/test/dm/clk.c
+> +++ b/test/dm/clk.c
+> @@ -89,9 +89,8 @@ static int dm_test_clk(struct unit_test_state *uts)
+>   						 SANDBOX_CLK_TEST_ID_SPI));
+>   	ut_asserteq(0, sandbox_clk_test_get_rate(dev_test,
+>   						 SANDBOX_CLK_TEST_ID_I2C));
+> -	if (!CONFIG_IS_ENABLED(CLK_AUTO_ID))
+> -		ut_asserteq(321, sandbox_clk_test_get_rate(dev_test,
+> -							   SANDBOX_CLK_TEST_ID_DEVM1));
+> +	ut_asserteq(321, sandbox_clk_test_get_rate(dev_test,
+> +						   SANDBOX_CLK_TEST_ID_DEVM1));
+>   	ut_asserteq(0, sandbox_clk_test_get_rate(dev_test,
+>   						 SANDBOX_CLK_TEST_ID_DEVM2));
 
-On Rockchip platform the FIT images are always sector (512 byte) aligned
-to help ensure source addr and load addr are always aligned and not
-needing use of memmove or a bounce buffer.
 
-See commit 5ad03fc77dfa ("rockchip: Align FIT image data to SD/MMC block
-length").
-
-I am not sure how the use of a larger sector size for UFS affect this.
-
-> 
->> I suggest we instead try to configure the rk3576 firewall to allow the
->> UFS controller to access SRAM (SYSMEM) similar to how this is allowed on
->> e.g. rk3588. Please see U-Boot rk3576.c and rk3588.c, and also TF-A
->> plat/rockchip/rk3576/drivers/secure/firewall.c.
-> 
-> Won't this introduce some sort of a security hole? I have to admit I
-> don't know how the "trusted" part of "trusted firmware" is enforced,
-> but I have a suspicion that there is a security reason why this
-> particular segment gets written to a more locked-down SRAM rather than
-> system RAM before TF-A code takes over the management of the firewall.
-> Would be great to know otherwise, because this sounds like a much
-> cleaner (=fewer code changes) solution than the alternatives. Any
-> advice from the list would be appreciated!
-
-It is the part of TF-A that uses __pmusram* attributes that will be
-loaded into the PMUSRAM, e.g. resume from suspend and other code that
-must work in low power mode.
-
-DRAM to SRAM is allowed so I cannot see an issue with allowing U-Boot
-SPL to use DMA mode to load directly into SRAM until TF-A takes over.
-
-As an alternative we can also add some option to not use external data
-for the FIT image that is not using a load addr in normal DRAM, see [1]
-for a hack I made before DMA/PIO mode was fixed for RK3588.
-
-[1] https://gitlab.collabora.com/hardware-enablement/rockchip-3588/u-boot/-/commit/3dde83844f43e036283947f015224d2fc740a349
-
-Regards,
-Jonas
-
-> 
->> For other Rockchip SoCs we have also used non-DMA mode or a bounce
->> buffer to work around similar issue in the drivers.
-> 
-> I'll look into a potential non-DMA mode in the driver for use in SPL,
-> thanks for the pointer!
-> 
->> On a final note I would not fully trust the SYS_LOAD_ADDR addr on
->> Rockchip platform, to my knowledge this is not really used for anything
->> and because of this have not fully been considered when other static
->> load addresses have been picked, so this could introduce some unintended
->> overlaps.
-> 
-> That should be relatively easy to fix with a quick Kconfig change, but
-> I agree it might lead to an unknown number of regressions on platforms
-> that didn't use SYS_LOAD_ADDR before. Good point, thank you.
-> 
-> Best regards,
-> Alexey
+Reviewed-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
