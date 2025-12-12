@@ -4,134 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F6FD4921F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9960ED49220
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:49:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B665830E4;
-	Fri, 12 Dec 2025 13:44:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id DBD028307F;
+	Fri, 12 Dec 2025 13:49:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aimjwKrJ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2jcJr7gW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6FA283106; Fri, 12 Dec 2025 13:44:16 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 082568334F; Fri, 12 Dec 2025 05:22:37 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52E8F8307F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 13:44:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07B088334F
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 05:22:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1765543449; x=1766148249; i=xypron.glpk@gmx.de;
- bh=Lan/JYt0aowZUzs+FDI/SOjJDygL4YcRjlYsDM7dWSI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=aimjwKrJWVwj+4R30/hkKJiAkbEieYUHu0gVWryRVrglReHDC0MZ8eGW8nZvsJiQ
- CBoZjL2VjqbMCo6BeZjPNVWJwvPPQWfQH1cJPBWYU8zoFfFwimtotBHhmZvabHMVf
- DF4MlikA5ej3HIXw3ogJZIdFYEHo2ePMJeanqFoCVhrrgTNj3SRwhoXKNPmxlfkPJ
- 0XOLtSWWvvynEIv2CmoB9M4KDCEc1R4YYm3NEJan9kAN8PciUOa3vAIAR7evdmdSa
- 5u6xTFxbr97xPUR4J8gMuZG+CyBpBrZDSVV5G6bx42KfeYaPDGvfil0aEcILvngWV
- joI9Td9PpTWbAaXG7A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.125] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M2O6e-1vRH551QuU-009RpZ; Fri, 12
- Dec 2025 13:44:09 +0100
-Message-ID: <b0ba6f42-d157-449e-9857-84d9bb39bf80@gmx.de>
-Date: Fri, 12 Dec 2025 13:44:08 +0100
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-45066bee74aso266013b6e.2
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 20:22:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1765513352; x=1766118152;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=girAkrg4IlD+rvW9jC1arK73UvUP5YtYzboOWxKNFX8=;
+ b=2jcJr7gW0Ah1RE+08u6mMwPSTOUjOeNQBvwLzUmnHKqNDL/FJuzHkLvZoz2anfk2PS
+ WsFd9je3x2PsDT/xpXIv2BhDkEARLdDZQHUoZxV8p42yAkdef/7ksd1eNxcDtUeh2Yce
+ Urt7hcbe74/OO1r6/4y0Sv9H4/2PkkEbrRUbEfB3aice0fzftDWaESu+PdOJkiOq9Id5
+ P0SKqx4k9zs1ZGOwMHAStidi86h2SETEVLR9CpQEPsuEYFeWhiqOrtOv6o46oAyl2uKU
+ bkvIRmfL904WWCpktjhiottwMhR3p4IETNJo2yIJeHBF7NpE4Q41RuEcnNLST3D9H/Ng
+ 9vyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765513352; x=1766118152;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=girAkrg4IlD+rvW9jC1arK73UvUP5YtYzboOWxKNFX8=;
+ b=PFvw6Mt7N6msLFz6CPt97VPwR/07Dn6SQJYjxqgXmA2MQCSUJdAZhtGdH1Z2FAeAd6
+ oEvkiaH6RSC0tmoZLXNPY8B3k2HGLh7A/lJ2P3T6nAVRdtm5SSn1Yn7EQUDSZeYTumZR
+ 7gH6CKHI2lTaJ/K2DEsAbQpoF233BNkR3Efim5S9zJahYnYIXI63Qs4oa1oR3QuBq5bN
+ LNcNE25J9ovGjQ73DDOiCI/5HgekCH9+nn22CyGQcnlX0bJydh0Zyw5AcAjSo57tP3pO
+ igqLE8d31O35WMzZSg3avKMwc8f+IhhGPchi6/D7E2pQd2VYpaPd5EucXBL71aM0mQA6
+ 2I8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2+zrpQIqdHPbnXOuWCtjie1Eq48syOhOSaSOFGp9mSiwi4cU0ivoYdRMW7ouH/1+wbDdqySs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgWZYyRQXvjQ/ebDcMq10WOmtm4mZ8ngfGrHBGblkUC7wQuBxp
+ UqyICw23itRKKIVK2uHCzLabt2g3yjdNv3Bz9D46W5G+DIWNP7TvXzKPPCQdK1ufWzc=
+X-Gm-Gg: AY/fxX67ed16LeSO2PFKgn1GnjpVtyMAIyR5lWizCJvedRVS9+39Rld7srtF4onz7In
+ Q0wYzjIw6vVMaXCC4Vw0yvg55KzPt8Xc/2vLhbQwU76cp1uNXCpRfjwUkRDRzNz5YsqtL+9gR1T
+ s9oJpi2qWub0T7pSBTPoyb9HaD8D3izHUC9T5FgbkLdF1F1f33XohoYaDjUTalUXaAPIKpo6+rA
+ 3OSbe6/5Ni2dw7K1YyYUljjx7FomcWKLdycwnj9R834p9Rf1zEquF0aVjCYyC8cRX/lGZeU+0Xn
+ CiyfPd592f2cjYtRrcTi5N6PNgunr4jM6iiI17VMzCLl0Jt+Q8Gk6tPyLLDW+/0Db01ztek1/IJ
+ FPaFgQimfSXqA7XiWc3NrU79GLP5u+aUzrx3Pyjib+Lu0XUyeivqnyYjH27ILk7alQdmdmG4ypT
+ ALyUp22N79AXsJeeL82FFT5ozgI/Cnl8i+UvxFYH+WoZEGk2xmxBADBMKSdsck
+X-Google-Smtp-Source: AGHT+IF2KdXnMHB0VfmpzqWd0mwa3P/J53FwftEHviPLyYgqP6rDTUEBGbmIjpwyL7b7tiJIfjIa+g==
+X-Received: by 2002:a05:6808:2221:b0:450:b8a2:47a5 with SMTP id
+ 5614622812f47-455aca60a49mr268955b6e.67.1765513352492; 
+ Thu, 11 Dec 2025 20:22:32 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:1635:b560:bfdd:f758?
+ ([2600:8803:e7e4:500:1635:b560:bfdd:f758])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f5fe55e4a6sm227636fac.19.2025.12.11.20.22.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Dec 2025 20:22:30 -0800 (PST)
+Message-ID: <67fdf8ce-41af-4609-a754-8041a4e716dc@baylibre.com>
+Date: Thu, 11 Dec 2025 22:22:29 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] clk: mediatek: add MT8188 clock driver
+From: David Lechner <dlechner@baylibre.com>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sam Shih <sam.shih@mediatek.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heiko Schocher <hs@nabladev.com>, =?UTF-8?Q?Duje_Mihanovi=C4=87?=
+ <duje@dujemihanovic.xyz>
+References: <20251209-add-mt8188-support-v2-0-31dbfcf7303c@baylibre.com>
+ <20251209-add-mt8188-support-v2-2-31dbfcf7303c@baylibre.com>
+ <878qf95s5q.fsf@kernel.org>
+ <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>,
- Udit Kumar <u-kumar1@ti.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2026-01-rc5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1JGjAnPm84aIsn/leVOucYaPnAMv29lupB2kjfq4F+xTMSr7EfQ
- SuoXD6iPbgUuhJPMCFXzqSwZDTj9Jvr9RRhmLdjcxof8DqumsP8CzDnDOlFyEOodZ7KCrls
- Q8T8jT9/iDxnhcXxH7+8dBMoDROH9lfS7vkRBTin/sXx7/65ADjpndfoRogMhdMIZD0+ZCv
- A7rdjZeWAx9Y6z2FQxGLg==
-UI-OutboundReport: notjunk:1;M01:P0:oaWloY2xygI=;qDvXX+/wHXVdZAzONpMajaOwUyU
- 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
- mMOEBf5KeqpyZ9wwWwtw7FEOyKsDIWUwMnl/Gn
+In-Reply-To: <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 12 Dec 2025 13:49:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,49 +130,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On 12/11/25 11:55 AM, David Lechner wrote:
+> On 12/11/25 2:39 AM, Mattijs Korpershoek wrote:
+>> Hi Julien,
+>>
+>> Thank you for the patch.
+>>
+>> On Tue, Dec 09, 2025 at 11:22, Julien Stephan <jstephan@baylibre.com> wrote:
+>>
+>>> From: Julien Masson <jmasson@baylibre.com>
+>>>
+>>> The following clocks have been added for MT8188 SoC:
+>>> apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
+>>>
+>>> These clocks driver are based on the ones present in the kernel:
+>>> drivers/clk/mediatek/clk-mt8188-*
+>>>
+>>> Signed-off-by: Julien Masson <jmasson@baylibre.com>
+>>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>>> ---
+>>>  drivers/clk/mediatek/Makefile     |    1 +
+>>>  drivers/clk/mediatek/clk-mt8188.c | 1840 +++++++++++++++++++++++++++++++++++++
+>>>  2 files changed, 1841 insertions(+)
+>>>
+>>> diff --git a/drivers/clk/mediatek/Makefile b/drivers/clk/mediatek/Makefile
+>>> index 12893687b68fc6c136a06e19305b1dd0c8a8101a..68b3d6e9610d8e7f4c4c625f52e525174e92787a 100644
+>>> --- a/drivers/clk/mediatek/Makefile
+>>> +++ b/drivers/clk/mediatek/Makefile
+>>> @@ -11,6 +11,7 @@ obj-$(CONFIG_TARGET_MT7981) += clk-mt7981.o
+>>>  obj-$(CONFIG_TARGET_MT7988) += clk-mt7988.o
+>>>  obj-$(CONFIG_TARGET_MT7987) += clk-mt7987.o
+>>>  obj-$(CONFIG_TARGET_MT8183) += clk-mt8183.o
+>>> +obj-$(CONFIG_TARGET_MT8188) += clk-mt8188.o
+>>>  obj-$(CONFIG_TARGET_MT8365) += clk-mt8365.o
+>>>  obj-$(CONFIG_TARGET_MT8512) += clk-mt8512.o
+>>>  obj-$(CONFIG_TARGET_MT8516) += clk-mt8516.o
+>>> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+>>> new file mode 100644
+>>> index 0000000000000000000000000000000000000000..55dfadddfe3cf743602533de30275bc93d4f15a5
+>>> --- /dev/null
+>>> +++ b/drivers/clk/mediatek/clk-mt8188.c
+>>> @@ -0,0 +1,1840 @@
+>>> +// SPDX-License-Identifier: GPL-2.0
+>>> +/*
+>>> + * MediaTek clock driver for MT8188 SoC
+>>> + *
+>>> + * Copyright (C) 2025 BayLibre, SAS
+>>> + * Copyright (c) 2025 MediaTek Inc.
+>>> + * Authors: Julien Masson <jmasson@baylibre.com>
+>>> + *          Garmin Chang <garmin.chang@mediatek.com>
+>>> + */
+>>> +
+>>> +#include <clk-uclass.h>
+>>> +#include <dm/device_compat.h>
+>>> +#include <dm.h>
+>>> +#include <asm/io.h>
+>>> +#include <dt-bindings/clock/mediatek,mt8188-clk.h>
+>>> +
+>>> +#include "clk-mtk.h"
+>>> +
+>>> +#define MT8188_PLL_FMAX		(3800UL * MHZ)
+>>> +#define MT8188_PLL_FMIN		(1500UL * MHZ)
+>>> +
+>>> +/* Missing topckgen clocks definition in dt-bindings */
+>>> +#define CLK_TOP_ADSPPLL		206
+>>> +#define CLK_TOP_CLK13M		207
+>>> +#define CLK_TOP_CLK26M		208
+>>> +#define CLK_TOP_CLK32K		209
+>>> +#define CLK_TOP_IMGPLL		210
+>>> +#define CLK_TOP_MSDCPLL		211
+>>> +#define CLK_TOP_ULPOSC1_CK1	212
+>>> +#define CLK_TOP_ULPOSC_CK1	213
+>>
+>> Why are these clock definitions missing from the dt-bindings?
+>> Were they just forgotten, or is there another reason?
 
-The following changes since commit ff80e95fed188ec3d4001129445e414c9c811be=
-b:
+It took me all day, but I learned some more. So some of what I wrote
+below is wrong.
 
-   tools: use setuptools 78.1.1 (2025-12-10 09:28:43 -0600)
+> 
+> I was looking at mt8365 clocks yesterday and noticed a similar pattern.
+> So I am interested in getting feedback on this too. And I can give at
+> least a partial answer.
+> 
+> Root clocks
+> -----------
+> 
+> The three CLK_TOP_CLKXXX clocks are in the devicetree as "fixed-clock"
+> with labels "clkXXx".
+> 
+> These should go in a separate group named "PAD" since they aren't
+> part of the TOPCKGEN group. And it would make sense to make the
+> macros CLK_PAD_CLKXXX.
+> 
+> Unless we should be reading these from devicetree somehow instead?
 
-are available in the Git repository at:
+I see now that this driver is using mt8188_id_offs_map to correct
+these issues, so the suggestion to rename to "PAD" is wrong. Don't
+do that.
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
-tags/efi-2026-01-rc5
+(Conceptually it made sense, but it doesn't match how the drivers
+are implemented for other mediatek clocks already.)
 
-for you to fetch changes up to ec1c966285758489ee45cfc2af703d0ede1a376e:
+> 
+> PLL clocks
+> ----------
+> 
+> This is just a guess, but I suspect in Linux, since CLK_TOP_ADSPPL is
+> just a 1:1 divider clock of CLK_APMIXED_ADSPPLL, they took the shortcut
+> of leaving out CLK_TOP_ADSPPL from the clock tree and set the parent
+> of CLK_TOP_ADSPPLL_Dx to CLK_APMIXED_ADSPPLL instead of CLK_TOP_ADSPPLL.
+> 
+> The actual full picture should be like this:
+> 
+> 	77, /* CLK_TOP_ADSPPLL */
+> 
+> 	...
+> 
+> 	FACTOR0(CLK_TOP_ADSPPL, CLK_APMIXED_ADSPPLL, 1, 1),
+> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_TOP_ADSPPL, 1, 2),
+> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_TOP_ADSPPL, 1, 4),
+> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_TOP_ADSPPL, 1, 8),
+> 
+> Instead of:
+> 	
+> 	-1, /* CLK_TOP_ADSPPLL */
+> 
+> 	...
+> 
+> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_APMIXED_ADSPPLL, 1, 2),
+> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_APMIXED_ADSPPLL, 1, 4),
+> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_APMIXED_ADSPPLL, 1, 8),
+> 
+> So we could either follow Linux and use CLK_APMIXED_ADSPPLL everywhere
+> instead of adding CLK_TOP_ADSPPL. Or we could be more correct and add
+> the missing clocks.
+> 
+> The other PLL clocks seem to follow a similar pattern. So whatever we
+> do for ADSPPLL would apply to the others.
+> 
+> CK1 clocks
+> ----------
+> 
+> I can't see why these would be different from the same name without the
+> _CK1 suffix. There is already CLK_TOP_ULPOSC and CLK_TOP_ULPOSC1 and they
+> seem like they should be the same clocks.
+> 
+> Perhaps we could not add these?
+> 
+>>
+>> Could we (long term) add these definitions to the dt-bindings by
+>> contributing them to the kernel?
+> 
 
-   doc: board: ti: k3: Fix a couple small typos (2025-12-12 12:52:31 +0100=
-)
+Since these values are devicetree ABI, we unfortunately can't really
+fix them upstream. The problem is that the order matters, so we can't
+insert the missing values in the correct position and change all of
+the other numbers. We only get away with adding additional numbers
+here because we have mt8188_id_offs_map to workaround the problem.
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/28738
+Most of these "missing" ones are only parent clocks of other clocks
+so wouldn't be used in the devicetree anyway. (Maybe they were skipped
+intentionally for that reason).
 
-=2D---------------------------------------------------------------
-Pull request efi-2026-01-rc5
 
-Documentation:
+> I guess it depends on if taking these PLL shortcuts was intentional or
+> not if upstream would want to add them or not. But clearly the PAD clocks
+> are fine they way they are upstream.
+> 
+>>
+>> Note: I'm not requesting to change this patch, I'm just curious as of
+>> why we need to add these definitions here.
+>>
+>> Note that I also don't see these CLKs in the linux driver so why are
+>> they needed for U-Boot ?
+> 
+> I have a feeling someone will be asking me the same question soon. :-)
+> 
+>> (I searched for CLK_TOP_CLK13M in Linux master commit e7c375b18160 ("Merge tag 'vfs-6.18-rc7.fixes' of gitolite.kernel.org:pub/scm/linux/kernel/git/vfs/vfs"))
+>>
 
-* Fix typos in the TI K3 board documentation.
-* Describe the TI J742S2.
-
-UEFI:
-
-* Add EFI_PARTITION_INFO_PROTOCOL_GUID translation in the UUID library.
-
-=2D---------------------------------------------------------------
-Andrew Davis (1):
-       doc: board: ti: k3: Fix a couple small typos
-
-Heinrich Schuchardt (1):
-       lib: uuid: add EFI_PARTITION_INFO_PROTOCOL_GUID translation
-
-Udit Kumar (1):
-       doc: board: ti: Add J742S2 support
-
-  doc/board/ti/j784s4_evm.rst | 23 +++++++++++++++++++++--
-  doc/board/ti/k3.rst         |  6 +++---
-  lib/uuid.c                  |  4 ++++
-  3 files changed, 28 insertions(+), 5 deletions(-)
