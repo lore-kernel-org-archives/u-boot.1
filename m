@@ -4,137 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C900D4921F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E04ED4921F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 12:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FC80839D7;
+	by phobos.denx.de (Postfix) with ESMTP id 9DD4C839E8;
 	Fri, 12 Dec 2025 13:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="XrUr9t6H";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="YB3DCZVw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D974B83045; Fri, 12 Dec 2025 11:26:49 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 7AA1B83837; Fri, 12 Dec 2025 11:26:54 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEF6B82B20
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 11:26:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BEDC83015
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 11:26:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vTwT8OqTJ6ggW8+YqKObD5/6EAUwfgfFsJrR+jnTxJ43er50nYEO1mRDhbINKvQmx8Ez5nPEMmoAak5d7hUmAF7t1MW0ItQZ3d5WryypJeBXFlSBdXIUJJB9QHEmKbjKNWY2myd4jIcQUqgwK1T+orifjrb3cxHMdQOkKHDX2sXsMEqhr7f9/Nt2ZUOUO68VGSs6aO2YcmvRZLoYPvNyvOQQvC2H3VKN18QtuDo+ut48RYIMdV7BZSHKEigs5lBUNMmhyMhJYnHZNnigcqdfeBuRNNvzci5qtm2X9kzig1Vqcqcsk6t0qCrsaH2MzUGKKy2qp4NhXzq0/b0GHiz5DQ==
+ b=ohoxs5lYvSYwKqzmrTYcXZ0487l1KPBVf5XN9uP8KJdAq9/ZAwkAS02f6BZsGD/xE8aPMt3xGKYivWy7NBuCASWKzgfRn+McH+5kuV+pOQImAUNNwt5ZfhXR8ZCRd+Ficegx0WuYfh2yjorwhh7VFs54yEIGgENdkrOK8KU0dFq+Sc1dABvHexo96XYmVkxLmn0Q0zQSpis59JwVPW87Nh5ecCaSnSxO8A8TUPlAwjaC/JKCisJ/Tau9oqffl2aH1nudOqfRDeATsPCr2g/eCvq6I92wHkjeeGRyWhIeAA4VhNAPNRVjN4wCxK50Qk8Z0P7lAxryO0Y4j3nIno6y8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CQjgm25ASRKGDnZ83o/IT/XE3BUlpqKoMQJ2MxfOBCY=;
- b=snRMqa7E9LmyeSkOa3wIlEfRGGMEf3cd9A+BoXMAeUTN7XQVS/Xx6lfwD67DXqU+cIMNHdmcmeHQoT8+Rk7OixSDxZWc/UmPPm8pfPuY1V3L5LgQPRQ9faP/ZGI4HlwRqQLWI/lu6WITgj5YHNIrEU87vfUXPpmcbNjptBztQiE+ZJFlWEt5AEcfnrG2ugnqznxoaQZ6jg7zZ6HR4+ImtyQ657do2JpsiAkT7RQb1soiUUtfsOZtJU/SDtUEkLEIDsr6CGaXvpZf8IsHN1Q4X2L3ABzyLepaKJDeEFXouga1UaGNxwYXRmsLVtc63ujPN7fP3im/LjObRdleNKHBWw==
+ bh=ElIo0OTnjTCCUOCK1/lyAeGXn10gxstrYG51+xanE2k=;
+ b=xI6fZG0Mu5iiRV8hcSmGP0J1w5frg/1MOhFaIEU1DWfjdoURbvBi1B2HlzxBdTR6FzZuwK7EWATulbOPgBMlfDJAJmPgGA4/4/OAvcSaMNm3MpQV3yqmuHWMqavpurM0N4wn43gr/CE5oqtguSKMgUtmfkVRSrdOq5AaFR/bvSvJNcfx4P1EBUNrhX6hAZgH7LbkATefO0PkPMbqFktU/3HVaKHwcuuvyhy6Q1JZbtd18AM1tqUQOR0fDAiBKBrlFYjj45CGNW+cVlrcQmMneNF06kcbnwlg6KCZjUPs0osPJ9C7GFxqMrVo3m+G239S1DwYPe/azTBIIV/TMNxlHA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CQjgm25ASRKGDnZ83o/IT/XE3BUlpqKoMQJ2MxfOBCY=;
- b=XrUr9t6H8bOgXlo2Y1VSA+Dcij4V9bLREuMXGf0Qo4dkYPR4D+oqN8O5CN1ycywDgM6VMzeNzTDZlLfob8NP5tMdX5zBTUA6kk79WJJLXgjxz8Tvuenw7BVIlLJ8GaLUIf8ZdsxbwaQyYNXiezJr3KrXSjYdTMh7bu0RbFeEo7c=
-Received: from CH2PR12CA0028.namprd12.prod.outlook.com (2603:10b6:610:57::38)
- by BN5PR12MB9485.namprd12.prod.outlook.com (2603:10b6:408:2a8::11)
+ bh=ElIo0OTnjTCCUOCK1/lyAeGXn10gxstrYG51+xanE2k=;
+ b=YB3DCZVw8AIiZhKnff/jUyti3oQkK1CrlCRD4kQPBBwpQn+v00fvki+Fdg0iZ6wcGE1uVH0iEenyBHPSjc0mqDTRg/Lnc5TymYmfObBazMSAQYXtODdUVik9hO4CZBYeXH/RPrjuY+TEASyWNyFsUMLABvzGZqaCKG6M9EVxTfc=
+Received: from PH8PR07CA0048.namprd07.prod.outlook.com (2603:10b6:510:2cf::19)
+ by IA0PR12MB8973.namprd12.prod.outlook.com (2603:10b6:208:48e::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.10; Fri, 12 Dec
- 2025 10:26:36 +0000
-Received: from CH2PEPF0000009B.namprd02.prod.outlook.com
- (2603:10b6:610:57:cafe::a5) by CH2PR12CA0028.outlook.office365.com
- (2603:10b6:610:57::38) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Fri,
- 12 Dec 2025 10:26:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.9; Fri, 12 Dec
+ 2025 10:26:37 +0000
+Received: from CY4PEPF0000EE39.namprd03.prod.outlook.com
+ (2603:10b6:510:2cf:cafe::42) by PH8PR07CA0048.outlook.office365.com
+ (2603:10b6:510:2cf::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.10 via Frontend Transport; Fri,
+ 12 Dec 2025 10:26:32 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH2PEPF0000009B.mail.protection.outlook.com (10.167.244.23) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000EE39.mail.protection.outlook.com (10.167.242.11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 10:26:36 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 12 Dec
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 12 Dec
  2025 04:26:35 -0600
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 12 Dec
- 2025 04:26:34 -0600
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 12 Dec 2025 02:26:32 -0800
+ Transport; Fri, 12 Dec 2025 02:26:34 -0800
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH v4 0/2] Enable dynamic MMU page table sizing 
-Date: Fri, 12 Dec 2025 15:56:19 +0530
-Message-ID: <20251212102621.2888015-1-pranav.sanwal@amd.com>
+Subject: [PATCH v4 1/2] fdtdec: Add declaration for get_next_memory_node()
+ helper
+Date: Fri, 12 Dec 2025 15:56:20 +0530
+Message-ID: <20251212102621.2888015-2-pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251212102621.2888015-1-pranav.sanwal@amd.com>
+References: <20251212102621.2888015-1-pranav.sanwal@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: pranav.sanwal@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009B:EE_|BN5PR12MB9485:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5fae9cd-27e4-44ae-d8fd-08de3968edb6
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE39:EE_|IA0PR12MB8973:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c6ef4c1-7ee2-485f-5ad6-08de3968ee1b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?50UDH5t9yofiPZhpgxqQxZdjfzOrFV1X4CM2OMI8xc8pQaxQ21NvRqKBOkEi?=
- =?us-ascii?Q?qQushs4Fvv2iaFqysMcAmvN4lo4wQ6NS1tErRRB4kOvsJFR0V3zU2lvN0e6P?=
- =?us-ascii?Q?xbuE6xKcor762qfidWamydo1H5+MdPL4LRPsjsj9VtjgJgfZmB/eckhbMCEn?=
- =?us-ascii?Q?XQpn3H95vxpQuNEeLgmxKx49vKXb8Ns2nN6HqgdF17Wxq9CrjGLw2Cv2Ba90?=
- =?us-ascii?Q?jM+QlpkwL10jbV+yx1O8Ft29SzDOX8xt605TVDb5x/8iczLWjUpQ6DkaWFUi?=
- =?us-ascii?Q?MBCnZ45QGH3PPNn8260rQrprp9j4/FBqptvDzpxJz2A+SJPjZaGKLAQaMkKQ?=
- =?us-ascii?Q?WpyLCqbqZhE6P15cJ8Uw0Wq7Fl++hFoeylrLINU22p4zifeFju8OxGWmm+2a?=
- =?us-ascii?Q?2MruouBUWfX+NVfSs+C0k6/MK9ZFgGfwyjk4RkIxluHlUYVOG20vTfDgfxxn?=
- =?us-ascii?Q?f/cbc0AhgwzXgCYycGFlivES+tjewUcwE/8vRx+lLPfTShnvtD0aHiHRsr9e?=
- =?us-ascii?Q?HHAjJywEdyGvBwob/VVMkYs5kcIRF9YqdhUCcStMusMGSfTV14ukoopDwbPg?=
- =?us-ascii?Q?IfoDkt3iFeh18TOCR/kxhTGAEZlXmZ84RG3nWJLiFWstQEjEk2GmP22DSKiK?=
- =?us-ascii?Q?gezdKCBH1YcPhATSEJvF+O+wdGXs9j5GQubNU28tTtI2hMeZx1ILn6QfR612?=
- =?us-ascii?Q?0T2fvNBfYT7Ya1FVmOvJ6i1c5/XeXdCbrXhSlB/k00l6O8hDLrv3/45S7jW4?=
- =?us-ascii?Q?9NixoZdzRIakZbdOZnVVzHTN3txHWaMhJPwBGw8D5tmIZjShx5aWLFu2OSVB?=
- =?us-ascii?Q?9Bsk/fAHZnBkBYU5kvhgQs1huwySEpn3CmknonVMVvCBLu9Be44IIT8LoeX5?=
- =?us-ascii?Q?6GWx8iribboNaVb6LprZNR3noycP5D5yVIXVnquxagHGq28moGDduirQqnYg?=
- =?us-ascii?Q?bRgl97F5prIlEzo3T5/4EO9UnrDM0V2W9oI/JI3RilSKh9EOMbG9kj/MR7kB?=
- =?us-ascii?Q?juEA+Nj0bY7ZSBFPsFeWI1m1kLelFC3y8uRtQIN79iCGw55Ao1p2ziHcmWtS?=
- =?us-ascii?Q?aslHUM2fmuwQXdKhMhPgV/Rl0yD2XzIjF+KrlkJQ3R5UhydBhv+klOYUZXqE?=
- =?us-ascii?Q?LOkg1RhT8o1Asqg4wIfIsvY6t1VmLFWFHTlkDOTRYMOgVzb5eYNyebaqNW+C?=
- =?us-ascii?Q?z1DnSBH0sTt3XHlRI32CTgM3IuuIAAQ271tSUFJyAQwE1BOeAPDG0jB689HU?=
- =?us-ascii?Q?j7EofIpmS/oj2KY0kMdufgAs71va9xvHzyml17WGsRfrWUfCT9o7koj7lv61?=
- =?us-ascii?Q?Zjg76HKNex+t3VTWflG6urUpAaFCepmtWpWF69LZ/CRnuYHLRdFkO9raRjSc?=
- =?us-ascii?Q?etvFp8IC9UGlS1UvZAkPwIKcAykeR81nDEKLarrA7ZEnaSP8rl2qJE7GQdD8?=
- =?us-ascii?Q?jmnpy1agg6EZlpAy7d5Cp+TpYCxWUTZ57kqHroZGfQi2a6+u2TY+akPVsXle?=
- =?us-ascii?Q?7ymsuTIbOoIn7NqViz2dx92+fsnFj1gw79kRekoviMSene/OV7g2GcjX385/?=
- =?us-ascii?Q?iYlmbAkFyU//0hEOPHk=3D?=
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QLT2lUOeWwdTSv5ZrTKxDLbU4el6D2JvarLCTlx5WGX99UXC7L5MsL7f9Lbo?=
+ =?us-ascii?Q?PCwI5uUElFxvupyavlWCkn0/yJChKE8TyNXndA9M7C3zxmkeWQCvPPFUElLd?=
+ =?us-ascii?Q?bxLeUxXqysHu61GzEMTrEDu6q6jyM9UA8yk+6nJ2mzwqCOb2577L6biTYKKi?=
+ =?us-ascii?Q?AXFLwiKM9jPiqrho3QqEJaVYuRAIN8BfH23ivzIxaCFsD0haJUBUQnoba7Ck?=
+ =?us-ascii?Q?GjC71BmWPFwIr150ZW/QMjx5KZX6FnaBufzLX06tfYu79EJj6YZgmb+8YoFa?=
+ =?us-ascii?Q?F2KQ7YOmkp6s0bmnla66MV1e3hTH1PIAqqgauIZ+uyjaX5bNU62v7F6kiRlR?=
+ =?us-ascii?Q?HqwI4QqQCf1JPu/CushC8Yu8cl7uIow8AyOBCJ+qY5gGfoWbz/88+d6WFAgn?=
+ =?us-ascii?Q?G3hB0REbCRhlGM66TFp5hW00FR9hcXUsLBcPpN7uCw7URSF3Ay+fNw3ssDgZ?=
+ =?us-ascii?Q?reWB25/IrFZ/xFRGiNegSxLxeGCBdLFiWjVWRFPS8bgKkU730v2cHPaLzdaI?=
+ =?us-ascii?Q?gS602XF6Mb3sblhxPZBO3XmYI5/ExmZP/af8e+WgnnxG0AXLGFo/97o5eN0W?=
+ =?us-ascii?Q?1sa9cmgld9LuqzHM7pw59n2wQLb8jYwqdQLxE6feOS31zy6eud8+Yi28rfd/?=
+ =?us-ascii?Q?EV/Qly78nbxnxOpgaiJtjQ5yFjxax8D9VaGi55qMWpyuzg400nC+vnOhOrnl?=
+ =?us-ascii?Q?/S70i6y1wJCtgs0hVZUyruxnrdLTI32OUYLePimOaC3L9ugTEbFajca1mUwA?=
+ =?us-ascii?Q?6m8t5aTn0eTHfzxlm4UUs5BzIv7O6m02/ucwB628bioqTPsTiIE1Xypg9B+B?=
+ =?us-ascii?Q?wj5XRkaANVrwLfkbEeAGKIL12Gm38hShX4hjcabIshdKJwnFDGNM+SBUD5fr?=
+ =?us-ascii?Q?9QHl3+Zoj2vpjsMHbtnpIMS0U7gG89LAcqYZJ+TkK/0+sQwOt27DjeQifbq0?=
+ =?us-ascii?Q?FfNXYOVKDhJeawLi6Om4k0YhVV36R9L/Nx/Y4tZ2nPIcvOhaqFFo3ayzMDq7?=
+ =?us-ascii?Q?iqxug/5/Yg1og3/NTGlHHls4dSLX7A/BtJZp3hp97qwXPw2Fox/LsG88WqwC?=
+ =?us-ascii?Q?1S3ankCN1o2VQa3a9xrkBBJUrRr7QaXHgwIRko4PpgZWQPr6MJH+tbMI9uKK?=
+ =?us-ascii?Q?QILif5dmSrBlxmo/iA2wvDoddTxssBRo1hCMYi7rfX3EwMc/jZcSGsvLWN2s?=
+ =?us-ascii?Q?61fuy2N4aCQ8fPaEuNME7PsVRT4+2faXvMZ30v7P49sWDlvbO1SL05WXjRC3?=
+ =?us-ascii?Q?9CXbBHJIqWcu7P4ya7yisAu/B2mDDyIc/Dzldl05RZJEwlYKSUJBvNnFDvkI?=
+ =?us-ascii?Q?ZcsCCM4Gq0eOGexcZ1JX0b+WXRYxTFFVyOclkHWZm/Dm4c2yWf0AELJY90u0?=
+ =?us-ascii?Q?KfGtvkp9HKoTPmk7RFMKbU48MvPE7bTygY0FI78iaW/1SWW3mVinTMr3G1fP?=
+ =?us-ascii?Q?yJ+WhJjiXBVj8jboq/QJaWDvjpm5z/AyrfxLCuEEeryZ3dROLQppT44/IUZD?=
+ =?us-ascii?Q?e7HaZoYLpE8W2eThHTaHm6S6hCWk+G6ZPXcjYjG5Wo5W6cIXOL6FaLicsGPf?=
+ =?us-ascii?Q?6yuOCwfwK6vl3EWCop8=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 10:26:36.0212 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5fae9cd-27e4-44ae-d8fd-08de3968edb6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 10:26:36.6443 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c6ef4c1-7ee2-485f-5ad6-08de3968ee1b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009B.namprd02.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE39.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9485
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8973
 X-Mailman-Approved-At: Fri, 12 Dec 2025 13:49:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -152,35 +149,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series fixes a boot sequence issue in AMD Versal Gen 2,
-where DRAM banks are populated too late during MMU initialization.
-The fdtdec-based approach doesn't provide memory information
-early enough.
+Add get_next_memory_node() function declaration to fdtdec.h to support
+iterating through multiple memory nodes in device tree. This function
+is used to enumerate memory banks when the system has non-contiguous
+or multiple memory regions defined with device_type = "memory".
 
-Changes in v4:
--Better debug logs alignment.
+The function implementation already exists in lib/fdtdec.c (lines
+1298-1305) but was missing the public declaration in the header file.
+This patch adds the declaration and includes dm/ofnode_decl.h for the
+ofnode type definition.
 
-Changes in v3:
--Fix DRAM base detection boundary condition (text >= bank_phys)
+This is needed for platforms that require early memory enumeration
+before standard fdtdec_setup_memory_banksize() is called, particularly
+for dynamic MMU page table size calculation based on actual DRAM
+configuration.
 
-Changes in v2:
--Address boundary case where U-Boot is loaded at the
- beginning of a memory region.
--Export get_next_memory_node() helper from fdtdec for reuse
--Split previous monolithic patch into two focused patches
--Add comprehensive documentation for new functions
--Include proper header dependencies (dm/ofnode_decl.h)
+Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
+---
+ include/fdtdec.h | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-Pranav Sanwal (2):
-  fdtdec: Add declaration for get_next_memory_node() helper
-  arm64: versal2: Populate DRAM banks before page table size calculation
-
- arch/arm/mach-versal2/cpu.c                   | 57 ++++++++++++---
- .../arm/mach-versal2/include/mach/sys_proto.h |  4 +-
- board/amd/versal2/board.c                     | 70 +++++++++++++++----
- include/fdtdec.h                              | 23 ++++++
- 4 files changed, 130 insertions(+), 24 deletions(-)
-
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index d9fcd037ed2..87e97635ce1 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -16,6 +16,7 @@
+ 
+ #include <linux/libfdt.h>
+ #include <pci.h>
++#include <dm/ofnode_decl.h>
+ 
+ /*
+  * Support for 64bit fdt addresses.
+@@ -198,6 +199,28 @@ struct fdtdec_phandle_args {
+ 	uint32_t args[MAX_PHANDLE_ARGS];
+ };
+ 
++/**
++ * get_next_memory_node() - Get the next enabled memory node from device tree
++ * @mem: Current memory node to start search from, or ofnode_null() to get first node
++ *
++ * This function iterates through device tree nodes with device_type = "memory"
++ * property, automatically skipping disabled nodes (status != "okay").
++ *
++ * It is used to enumerate multiple memory regions when the system has
++ * non-contiguous or multiple memory banks defined in the device tree.
++ * The function continues searching from the given node onwards, looking
++ * for the next node with the "memory" device_type property and checking
++ * its status property.
++ *
++ * Context: Can be called multiple times to iterate through all memory nodes.
++ *          Pass ofnode_null() on first call, then pass the returned node
++ *          on subsequent calls until an invalid node is returned.
++ *
++ * Return: Next valid, enabled memory ofnode, or invalid ofnode if no more
++ *         memory nodes exist
++ */
++ofnode get_next_memory_node(ofnode mem);
++
+ /**
+  * fdtdec_parse_phandle_with_args() - Find a node pointed by phandle in a list
+  *
 -- 
 2.34.1
 
