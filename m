@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC395D4335B
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 01:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39CC9D41D74
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 01:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D86883837;
-	Fri, 12 Dec 2025 02:00:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 99441835B3;
+	Fri, 12 Dec 2025 02:19:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J1XDnboP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t+7t6oYR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACD9D83869; Fri, 12 Dec 2025 02:00:39 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 74CC38367F; Fri, 12 Dec 2025 02:19:16 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6406C8334F
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 02:00:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 247B78334F
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 02:19:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B9ECD43F4A;
- Fri, 12 Dec 2025 01:00:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 597E3C4CEF7;
- Fri, 12 Dec 2025 01:00:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1765501235;
- bh=48NRPzCZa3dGdq1RMbuobRiT/l+XCCnIl8OQDR4u02Y=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=J1XDnboP9DpfcmBNNXxgQfXp0CgA8o4/0VXOK+GHxCwaZYkVK9n2fSxMm7XurKVjv
- w3bJ/XU8kKZnxaoixrJ0B2hVvoE0JQ0+WFl7VZjhI8k5HFpCBV6Oh1KL3g+Z4aQWaQ
- fDzHAfBSU5KBOVSBQl0Ae340BFY55KRL/KEZzhf/VmKKBJ5j6iBlIYyxsYMt4Z+S1I
- lGInAwQQSPWS+hZsVwIXNRfdZprxSURCFbl2wfv95iH7fvG0ZefuREtqud5tip6mfi
- P4H/BfTVbAyYmogCIDlqUluCUs+DZ2irjrTmPE9Q76mye4kinaKJYDkvThKbRJZoj9
- 68OHyP0Xew3lQ==
-Date: Fri, 12 Dec 2025 10:00:28 +0900
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: lukma@denx.de, casey.connolly@linaro.org, neil.armstrong@linaro.org,
- trini@konsulko.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: Re: [PATCH 2/3] clk/qcom: qcm2290: Add SDCC1 apps clock frequency
- table
-Message-ID: <aTtpLOP2WGkmoUQd@sumit-X1>
-References: <20251210155454.1561611-1-loic.poulain@oss.qualcomm.com>
- <20251210155454.1561611-2-loic.poulain@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6597b877066so488216eaf.2
+ for <u-boot@lists.denx.de>; Thu, 11 Dec 2025 17:19:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1765502349; x=1766107149; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5bl/QtjdtYKZyJQh3rNWvZ739kovt62CgxV0Y3tPS9I=;
+ b=t+7t6oYRQGaJr4UFVNoYHnZxIfYOPzvAOWn0CzzlEHcknFxAhlMLIm+7nbiY7EnvBs
+ +DtiIW6yIERNXQptIBjMYasavFuXL5ie5iEk40qPbk/ubK4RBziTunRvSpnkFBwF4pTF
+ yTTsTVSsRPysw3IDfOs4VGMOOTuqi3YlY/cZk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765502349; x=1766107149;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5bl/QtjdtYKZyJQh3rNWvZ739kovt62CgxV0Y3tPS9I=;
+ b=mmHPia1xYqZN/joR1K9+8toXl56Rhx1uqO3IZRelyCcLOrM3kLli5Cv4DmUbmbHc4k
+ ymGYCvuNrYM9WoPhho85bp2l4Nk541pfxG/dP/5QCUX7X+UgdRpodoidwo1Lz0o/T4mX
+ oOTO5vu2Xl316RMsct6wAfrYzAYubtTgqxfBmX8LcFkARqIyBADzwNluld+D4+w+9bUx
+ kluGDKEy6itE53hcRoYx+O1dWb02Qye5SGkyNYSnj3RiJp9Vmppf8nMq3eJi7KELVMqM
+ cecDgRLkvMGWrAY+5NNnfOy/SAoRvhs0Ay0ibEHMP7TWNgZ27mc3IaGCW+kF7ZSd+/e+
+ I6FA==
+X-Gm-Message-State: AOJu0Yybv/hIxKFjzY884CJBg4sgSTJZHzKdej9Wny9hpS7GhqqbfxHx
+ cY6O7qTCEn8T5kMnYMC7x5UqQvYeZCwkUeeJmdx3O8hHoTHYVnbiuZJaf2V5rwzUyhO7BByNlpj
+ lNt2J0ek=
+X-Gm-Gg: AY/fxX5NDATN/NbJn+LVtjO4dpKGkakQCHDrbO8TzeJ6tqOn4zrNnMXC9sXOB4+b8pJ
+ s9T5Fr0U2m3rJRPtDHb/QJO7TOlNX4PxY1E35y0BioKhc8wkf4eP7zQlPu8u6GHV6WafVJJNBwJ
+ bxGFhjik61d8cFahdgUfYFB4YUMom/zxiDtD4CLWR6bgBFLu7eLZ/KSceSNdA/uKd6uCTqBHhVF
+ YJR4S6omYY0KUwh8f9tVAWDjcBmQkjpteyrZY7NxwRQ66KXOzFrP+TEd8cBRBqOnuodPLPAK1Tu
+ KndrYNVI6akOvtzamsqzq6NeVgquLvEezLXi+NRkYYnYO1d37l/W2/3yvbeG6LRewbMzScRh3c2
+ p2iHT8tsSEIYgaLOywX2WlH3KsG44vfkkVuSAZSE7vcJzElXVGLLfwuRCzpZvEP52QY42DG0ohh
+ eNAxt2b1DcOC6pDpM5hXQWLNczlYSjV1walP9DXeD/f6wFzfdF9NqQ
+X-Google-Smtp-Source: AGHT+IEx9kLp3Ta8/rAVBjWfPIhlMAFHo26rQDTi6ACerNRDBCgWBnd9ODZd0VY3X9hun/oPXq8lbA==
+X-Received: by 2002:a05:6820:1caa:b0:65b:3641:bf7a with SMTP id
+ 006d021491bc7-65b4579151amr150362eaf.81.1765502348848; 
+ Thu, 11 Dec 2025 17:19:08 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f5fe288197sm515fac.5.2025.12.11.17.19.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Dec 2025 17:19:08 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+	Nishanth Menon <nm@ti.com>
+Subject: [PATCH] Revert "clk: Return value calculated by ERR_PTR"
+Date: Thu, 11 Dec 2025 19:19:06 -0600
+Message-ID: <20251212011906.865419-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251210155454.1561611-2-loic.poulain@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,77 +94,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 10, 2025 at 04:54:53PM +0100, Loic Poulain wrote:
-> Add support for configuring the SDCC1 apps clock on QCM2290 by introducing
-> a frequency table and enabling dynamic rate setting. Previously, the clock
-> was assumed to be fixed at 384 MHz by firmware, which limited flexibility
-> and correctness when selecting optimal rates for SD/MMC operations.
-> 
-> Suggested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/clock-qcm2290.c | 29 +++++++++++++++++++++++++++--
->  1 file changed, 27 insertions(+), 2 deletions(-)
+While this change was intended to fix a mistake in the code, of calling
+the ERR_PTR macro but not making use of the result, it seems that
+functionally platforms depend on the loop not existing here. The TI K3
+families of platforms for example were broken by this commit.
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+This reverts commit fe780310cfa8bf5a093894b5cd7fe85c6b02fd91.
 
--Sumit
+Reported-by: Nishanth Menon <nm@ti.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ arch/sandbox/include/asm/clk.h |  1 -
+ drivers/clk/clk-uclass.c       |  4 ++--
+ drivers/clk/clk_sandbox.c      | 17 -----------------
+ test/dm/clk.c                  |  5 ++---
+ 4 files changed, 4 insertions(+), 23 deletions(-)
 
-> 
-> diff --git a/drivers/clk/qcom/clock-qcm2290.c b/drivers/clk/qcom/clock-qcm2290.c
-> index fad104fb91a..5a599085b50 100644
-> --- a/drivers/clk/qcom/clock-qcm2290.c
-> +++ b/drivers/clk/qcom/clock-qcm2290.c
-> @@ -17,6 +17,8 @@
->  
->  #define QUPV3_WRAP0_S4_CMD_RCGR 0x1f608
->  #define SDCC2_APPS_CLK_CMD_RCGR 0x1e00c
-> +#define SDCC1_APPS_CLK_CMD_RCGR 0x38028
-> +
->  
->  static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
->  	F(7372800, CFG_CLK_SRC_GPLL0_AUX2, 1, 384, 15625),
-> @@ -55,6 +57,25 @@ static const struct pll_vote_clk gpll7_clk = {
->  	.vote_bit = BIT(7),
->  };
->  
-> +static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
-> +	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
-> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
-> +	F(20000000, CFG_CLK_SRC_GPLL0_AUX2, 5, 1, 3),
-> +	F(25000000, CFG_CLK_SRC_GPLL0_AUX2, 6, 1, 2),
-> +	F(50000000, CFG_CLK_SRC_GPLL0_AUX2, 6, 0, 0),
-> +	F(100000000, CFG_CLK_SRC_GPLL0_AUX2, 3, 0, 0),
-> +	F(192000000, CFG_CLK_SRC_GPLL6, 2, 0, 0),
-> +	F(384000000, CFG_CLK_SRC_GPLL6, 1, 0, 0),
-> +	{}
-> +};
-> +
-> +static const struct pll_vote_clk gpll6_clk = {
-> +	.status = 0x6000,
-> +	.status_bit = BIT(31),
-> +	.ena_vote = 0x79000,
-> +	.vote_bit = BIT(7),
-> +};
-> +
->  static const struct gate_clk qcm2290_clks[] = {
->  	GATE_CLK(GCC_AHB2PHY_USB_CLK, 0x1d008, 0x00000001),
->  	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1a084, 0x00000001),
-> @@ -109,8 +130,12 @@ static ulong qcm2290_set_rate(struct clk *clk, ulong rate)
->  				     8);
->  		return freq->freq;
->  	case GCC_SDCC1_APPS_CLK:
-> -		/* The firmware turns this on for us and always sets it to this rate */
-> -		return 384000000;
-> +		clk_enable_gpll0(priv->base, &gpll6_clk);
-> +		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
-> +				     freq->pre_div, freq->m, freq->n, freq->src,
-> +				     8);
-> +		return freq->freq;
->  	default:
->  		return 0;
->  	}
-> -- 
-> 2.34.1
-> 
+diff --git a/arch/sandbox/include/asm/clk.h b/arch/sandbox/include/asm/clk.h
+index 2d3318cdcc4d..37fe49c7fcf6 100644
+--- a/arch/sandbox/include/asm/clk.h
++++ b/arch/sandbox/include/asm/clk.h
+@@ -50,7 +50,6 @@ enum sandbox_clk_test_id {
+ 
+ struct sandbox_clk_priv {
+ 	bool probed;
+-	struct clk clk;
+ 	ulong rate[SANDBOX_CLK_ID_COUNT];
+ 	bool enabled[SANDBOX_CLK_ID_COUNT];
+ 	bool requested[SANDBOX_CLK_ID_COUNT];
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 4420651f765c..0584429bed65 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -199,7 +199,7 @@ static struct clk *clk_set_default_get_by_id(struct clk *clk)
+ 		if (ret) {
+ 			debug("%s(): could not get parent clock pointer, id %lu\n",
+ 			      __func__, clk->id);
+-			return ERR_PTR(ret);
++			ERR_PTR(ret);
+ 		}
+ 	}
+ 
+@@ -354,7 +354,7 @@ static int clk_set_default_rates(struct udevice *dev,
+ 
+ 		c = clk_set_default_get_by_id(&clk);
+ 		if (IS_ERR(c))
+-			continue;
++			return PTR_ERR(c);
+ 
+ 		ret = clk_set_rate(c, rates[index]);
+ 
+diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
+index cd92a6a29f57..c8c5a88c52d9 100644
+--- a/drivers/clk/clk_sandbox.c
++++ b/drivers/clk/clk_sandbox.c
+@@ -8,23 +8,8 @@
+ #include <errno.h>
+ #include <malloc.h>
+ #include <asm/clk.h>
+-#include <dm/device-internal.h>
+ #include <linux/clk-provider.h>
+ 
+-static int sandbox_clk_of_to_plat(struct udevice *dev)
+-{
+-	struct clk *clk;
+-	struct sandbox_clk_priv *priv = dev_get_priv(dev);
+-
+-	clk = &priv->clk;
+-
+-	/* FIXME: This is not allowed */
+-	dev_set_uclass_priv(dev, clk);
+-
+-	clk->dev = dev;
+-	return 0;
+-}
+-
+ static ulong sandbox_clk_get_rate(struct clk *clk)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
+@@ -117,7 +102,6 @@ static int sandbox_clk_request(struct clk *clk)
+ 	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+-	priv->clk.id = id;
+ 	priv->requested[id] = true;
+ 	return 0;
+ }
+@@ -148,7 +132,6 @@ U_BOOT_DRIVER(sandbox_clk) = {
+ 	.name		= "sandbox_clk",
+ 	.id		= UCLASS_CLK,
+ 	.of_match	= sandbox_clk_ids,
+-	.of_to_plat	= sandbox_clk_of_to_plat,
+ 	.ops		= &sandbox_clk_ops,
+ 	.probe		= sandbox_clk_probe,
+ 	.priv_auto	= sizeof(struct sandbox_clk_priv),
+diff --git a/test/dm/clk.c b/test/dm/clk.c
+index c3363796498b..790968e64774 100644
+--- a/test/dm/clk.c
++++ b/test/dm/clk.c
+@@ -89,9 +89,8 @@ static int dm_test_clk(struct unit_test_state *uts)
+ 						 SANDBOX_CLK_TEST_ID_SPI));
+ 	ut_asserteq(0, sandbox_clk_test_get_rate(dev_test,
+ 						 SANDBOX_CLK_TEST_ID_I2C));
+-	if (!CONFIG_IS_ENABLED(CLK_AUTO_ID))
+-		ut_asserteq(321, sandbox_clk_test_get_rate(dev_test,
+-							   SANDBOX_CLK_TEST_ID_DEVM1));
++	ut_asserteq(321, sandbox_clk_test_get_rate(dev_test,
++						   SANDBOX_CLK_TEST_ID_DEVM1));
+ 	ut_asserteq(0, sandbox_clk_test_get_rate(dev_test,
+ 						 SANDBOX_CLK_TEST_ID_DEVM2));
+ 
+-- 
+2.43.0
+
