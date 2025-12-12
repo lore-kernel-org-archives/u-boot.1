@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DE17D59D84
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:26:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194C0D59D82
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:32:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8EC38367F;
-	Fri, 12 Dec 2025 19:26:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 82AA68367F;
+	Fri, 12 Dec 2025 19:32:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cM2GSDv1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AxuVrAKr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41DE0835B3; Fri, 12 Dec 2025 19:06:38 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0554A83984; Fri, 12 Dec 2025 19:32:44 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C62D81D6A
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:06:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBFC835FD
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:32:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-7b80fed1505so1515704b3a.3
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 10:06:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765562793; x=1766167593; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AphIyp/2QMRgEQTlIdo1nG8jJhkQ09PDAv0B+2dnUnE=;
- b=cM2GSDv1vD2r3Y24vbnKb0EOQWVdZZEPNSzkjV/n8Rf85bikkZKQdMVx4fqMVju7bN
- ckHXiKlHtXPrVdEB9GGw0m5ERc/csQk0W7QqBM5u4veGdRsW82AVf4Wgxfv8Sg7PvKym
- RBnh0tC2lr3o4UiMzmMqPFFCfbeOU0RlO7LmKJ1r40iYLnzSaxM0QhPqwwzy/AJ+mZMm
- taJ3x1MlAa3iCwT+AilxjW8RWjLNPW0vca0SDa3lQWleHafhAuAOJFuN0HxhYvR25pjz
- CriDPLzjVD/w2x9vrbWGBQqzLMGL3cTxhx/OiasBNVsIKcVP0YMeZDtlc8Boi6jExn6E
- vjng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765562793; x=1766167593;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AphIyp/2QMRgEQTlIdo1nG8jJhkQ09PDAv0B+2dnUnE=;
- b=boFwu++B+ueN7RfLmx64ko1GjLcNgpoKwTTPUfP0C4QBuK+6uNzsA3I5UkNF9512QN
- 09O0shI3rhxVW5o0e+MYEzQC0DjJLCfvVpjhxrCZTpLKk7qj2yXA9yxS8veHAwTrWyRH
- yUxp+z5EcNV03ojtxhpcsl6ZXbRZKihwj7qZ9kKZ788iKQv7y1ln7LJ5bUxGPKv83KK3
- sJYPYJdBhSKpqkuthm6952bEqn7I0BOWOsePoXrlW9n/Rbzt8tz8pZxHJrQTRJ8dbIZf
- j0aym8O5IeuduXYEoLfm/V+1nMTt6kyMvbwP6OBXf8pdexnHuxsMcc2aL/ZsmCX6r0HJ
- foJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRP76NqYjnJV8JtzMlcgoVIwXJJ4tWGyNFHq11OGsyEbZnaiDkm5kDutWr7FxxeKI73taPUxs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxemHRXRNXsNvlymsPL80yfqIvSWMMJ2yeUfmKI93/rfICX3ZHz
- K5FqaLaqVU7WXKB8fT95+WVk8dif14pL1QDILoeol+eovzb93yxrCFsoif1WAw==
-X-Gm-Gg: AY/fxX4gedu1cydqjtcirc/qVbNfByYvQYY0dffS3IUltVDiKyJF+tdFA6NOGIXVfP4
- eugf4aIQajCllzEabJE6Z53ajEXeSyb1Pq3+Qn3rf6APBw+73tXoT5kmbTZtwVDIA+xl/ND+Pju
- dX97xPNLnRJsxrKciYjmRo+LyEPLRUxfXzGvvjLSLLIDDevCG1Fi0+1u/dmAtyY6dLlX+ITsxGe
- ce+Hqlqnrqo3E6Wm/SPjauwEkYx/yrmMF3ubO6S1PDHPpNdTHB7nFLvjiacoav5yn5jEUWJjOQH
- loM5d1d40yGigFgQPz1M+ZYtFbK6bBMdJ37sg+d5JHLaahl8g4EgIFteUmgbJwetfcIvax/378v
- TC2NsabiGDa9MbUyTIDplJ/+jziTgfMfVgzAPA+IsuaHVYRsuIh03rrRKea4b9UZyKMgwz8p3RN
- lPnJQ/C5zaDaFSIu6Ko41F0qYq/nXbCRDk+SD01EVKV7RSzjWKu2s3W1KaIPsp+W50Kl1CsrLTZ
- Uu4UOXdNmUWjCDO94pKSE+Ojit2CihDz50=
-X-Google-Smtp-Source: AGHT+IFAHRzA7/kRZ71sqR3Ybaa6Xn9DG40ZMfO8IWsJtOIqkxZ8OUij3fTHkE9pJ61D0aIVMGTh5g==
-X-Received: by 2002:a05:6a20:6a28:b0:364:387:8f4e with SMTP id
- adf61e73a8af0-369ae490337mr2945298637.34.1765562793409; 
- Fri, 12 Dec 2025 10:06:33 -0800 (PST)
-Received: from visitorckw-work01.c.googlers.com.com
- (14.250.194.35.bc.googleusercontent.com. [35.194.250.14])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c0c264211cbsm5590255a12.11.2025.12.12.10.06.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 10:06:32 -0800 (PST)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: lukma@denx.de,
-	trini@konsulko.com
-Cc: andrew.goodbody@linaro.org, aford173@gmail.com, sean.anderson@seco.com,
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de,
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH] clk: versaclock: Fix incorrect error check in
- versaclock_probe()
-Date: Fri, 12 Dec 2025 18:06:15 +0000
-Message-ID: <20251212180615.4112751-1-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.52.0.239.gd5f0c6e74e-goog
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2602840863;
+ Fri, 12 Dec 2025 18:32:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BF14C4CEF1;
+ Fri, 12 Dec 2025 18:32:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1765564356;
+ bh=iLQYMuwfZOjfZU42CvlrRp/rT+ETIG7Qh1+AhADszFI=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=AxuVrAKrfzR8C1oeaNSFzBsfUdCiZv41DBL1Vo4fcAJxd2fsicvJs8VGV8pifjnKt
+ r2OcmleqwdxoZ042H2QENhFFMn/V/VAW6JEfYQFXHfICZoqMosh2kkGI4ji4Q1EEhr
+ FDVLnQFYOkbINSEaeHbtsCUX4B/0HcTyH30GESyY97qd9pODQ7Sua8z1ZHSH/hAVkb
+ lXyGasnudCFAthHxhOIWoLN8mXCk+xU5d4XTb9WI3lNVGKPd3JdpSqc3vrL4lcqyq3
+ 1xQ8T2qyaycRD8KUfmfi7UFftM0/sYgtO3D8LxUtxgy/XHd4xfHCYQM19Mbt7/QJ32
+ BfzRyj0d3xB1A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: David Lechner <dlechner@baylibre.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, Stefan Roese
+ <stefan.roese@mailbox.org>, Greg Malysa <malysagreg@gmail.com>, Vasileios
+ Bimpikas <vasileios.bimpikas@analog.com>, Arturs Artamonovs
+ <arturs.artamonovs@analog.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Peng Fan
+ <peng.fan@nxp.com>, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>, Alif Zakuan
+ Yuslaimi <alif.zakuan.yuslaimi@altera.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Sam Shih
+ <sam.shih@mediatek.com>, Ian Roberts <ian.roberts@timesys.com>, Patrice
+ Chotard <patrice.chotard@foss.st.com>, Heiko Schocher <hs@nabladev.com>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
+Subject: Re: [PATCH v2 2/2] clk: mediatek: add MT8188 clock driver
+In-Reply-To: <67fdf8ce-41af-4609-a754-8041a4e716dc@baylibre.com>
+References: <20251209-add-mt8188-support-v2-0-31dbfcf7303c@baylibre.com>
+ <20251209-add-mt8188-support-v2-2-31dbfcf7303c@baylibre.com>
+ <878qf95s5q.fsf@kernel.org>
+ <6bf9671d-c70b-41ae-b8b0-ec303dfed484@baylibre.com>
+ <67fdf8ce-41af-4609-a754-8041a4e716dc@baylibre.com>
+Date: Fri, 12 Dec 2025 19:32:31 +0100
+Message-ID: <87345f5z5s.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 12 Dec 2025 19:26:55 +0100
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,36 +90,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The error check during the registration of FODs is incorrect. The code
-currently checks IS_ERR(pll_name) immediately after assigning
-fod_name[n].
+Hi David,
 
-Since pll_name is checked in a previous block, this condition will
-always be false, causing any allocation failure in
-versaclock_get_name() for fod_name to be ignored. This could lead
-to usage of an invalid pointer.
+On Thu, Dec 11, 2025 at 22:22, David Lechner <dlechner@baylibre.com> wrote:
 
-Fix the condition to check fod_name[n] instead.
+> On 12/11/25 11:55 AM, David Lechner wrote:
+>> On 12/11/25 2:39 AM, Mattijs Korpershoek wrote:
+>>> Hi Julien,
+>>>
+>>> Thank you for the patch.
+>>>
+>>> On Tue, Dec 09, 2025 at 11:22, Julien Stephan <jstephan@baylibre.com> wrote:
+>>>
+>>>> From: Julien Masson <jmasson@baylibre.com>
+>>>>
+>>>> The following clocks have been added for MT8188 SoC:
+>>>> apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
+>>>>
+>>>> These clocks driver are based on the ones present in the kernel:
+>>>> drivers/clk/mediatek/clk-mt8188-*
+>>>>
+>>>> Signed-off-by: Julien Masson <jmasson@baylibre.com>
+>>>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>>>> ---
+>>>>  drivers/clk/mediatek/Makefile     |    1 +
+>>>>  drivers/clk/mediatek/clk-mt8188.c | 1840 +++++++++++++++++++++++++++++++++++++
+>>>>  2 files changed, 1841 insertions(+)
+>>>>
+>>>> diff --git a/drivers/clk/mediatek/Makefile b/drivers/clk/mediatek/Makefile
+>>>> index 12893687b68fc6c136a06e19305b1dd0c8a8101a..68b3d6e9610d8e7f4c4c625f52e525174e92787a 100644
+>>>> --- a/drivers/clk/mediatek/Makefile
+>>>> +++ b/drivers/clk/mediatek/Makefile
+>>>> @@ -11,6 +11,7 @@ obj-$(CONFIG_TARGET_MT7981) += clk-mt7981.o
+>>>>  obj-$(CONFIG_TARGET_MT7988) += clk-mt7988.o
+>>>>  obj-$(CONFIG_TARGET_MT7987) += clk-mt7987.o
+>>>>  obj-$(CONFIG_TARGET_MT8183) += clk-mt8183.o
+>>>> +obj-$(CONFIG_TARGET_MT8188) += clk-mt8188.o
+>>>>  obj-$(CONFIG_TARGET_MT8365) += clk-mt8365.o
+>>>>  obj-$(CONFIG_TARGET_MT8512) += clk-mt8512.o
+>>>>  obj-$(CONFIG_TARGET_MT8516) += clk-mt8516.o
+>>>> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+>>>> new file mode 100644
+>>>> index 0000000000000000000000000000000000000000..55dfadddfe3cf743602533de30275bc93d4f15a5
+>>>> --- /dev/null
+>>>> +++ b/drivers/clk/mediatek/clk-mt8188.c
+>>>> @@ -0,0 +1,1840 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0
+>>>> +/*
+>>>> + * MediaTek clock driver for MT8188 SoC
+>>>> + *
+>>>> + * Copyright (C) 2025 BayLibre, SAS
+>>>> + * Copyright (c) 2025 MediaTek Inc.
+>>>> + * Authors: Julien Masson <jmasson@baylibre.com>
+>>>> + *          Garmin Chang <garmin.chang@mediatek.com>
+>>>> + */
+>>>> +
+>>>> +#include <clk-uclass.h>
+>>>> +#include <dm/device_compat.h>
+>>>> +#include <dm.h>
+>>>> +#include <asm/io.h>
+>>>> +#include <dt-bindings/clock/mediatek,mt8188-clk.h>
+>>>> +
+>>>> +#include "clk-mtk.h"
+>>>> +
+>>>> +#define MT8188_PLL_FMAX		(3800UL * MHZ)
+>>>> +#define MT8188_PLL_FMIN		(1500UL * MHZ)
+>>>> +
+>>>> +/* Missing topckgen clocks definition in dt-bindings */
+>>>> +#define CLK_TOP_ADSPPLL		206
+>>>> +#define CLK_TOP_CLK13M		207
+>>>> +#define CLK_TOP_CLK26M		208
+>>>> +#define CLK_TOP_CLK32K		209
+>>>> +#define CLK_TOP_IMGPLL		210
+>>>> +#define CLK_TOP_MSDCPLL		211
+>>>> +#define CLK_TOP_ULPOSC1_CK1	212
+>>>> +#define CLK_TOP_ULPOSC_CK1	213
+>>>
+>>> Why are these clock definitions missing from the dt-bindings?
+>>> Were they just forgotten, or is there another reason?
+>
+> It took me all day, but I learned some more. So some of what I wrote
+> below is wrong.
 
-Fixes: dcf2cee77f2d ("clk: clk_versaclock: Add support for versaclock driver")
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
- drivers/clk/clk_versaclock.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thank you for investigating. This is very helpful.
 
-diff --git a/drivers/clk/clk_versaclock.c b/drivers/clk/clk_versaclock.c
-index 19a787eaf0c..1dbde75f180 100644
---- a/drivers/clk/clk_versaclock.c
-+++ b/drivers/clk/clk_versaclock.c
-@@ -945,7 +945,7 @@ int versaclock_probe(struct udevice *dev)
- 	/* Register FODs */
- 	for (n = 0; n < vc5->chip_info->clk_fod_cnt; n++) {
- 		fod_name[n] = versaclock_get_name(dev->name, "fod", n);
--		if (IS_ERR(pll_name)) {
-+		if (IS_ERR(fod_name[n])) {
- 			ret = PTR_ERR(fod_name[n]);
- 			goto free_fod;
- 		}
--- 
-2.52.0.239.gd5f0c6e74e-goog
+I'd say that we should update the above comment to include something
+like you wrote below:
 
+/*
+ * Missing topckgen clocks definition in dt-bindings
+ * Note: we can't add these to the upstream bindings without
+ * breaking the ABI so add them here instead.
+ */
+
+>
+>> 
+>> I was looking at mt8365 clocks yesterday and noticed a similar pattern.
+>> So I am interested in getting feedback on this too. And I can give at
+>> least a partial answer.
+>> 
+>> Root clocks
+>> -----------
+>> 
+>> The three CLK_TOP_CLKXXX clocks are in the devicetree as "fixed-clock"
+>> with labels "clkXXx".
+>> 
+>> These should go in a separate group named "PAD" since they aren't
+>> part of the TOPCKGEN group. And it would make sense to make the
+>> macros CLK_PAD_CLKXXX.
+>> 
+>> Unless we should be reading these from devicetree somehow instead?
+>
+> I see now that this driver is using mt8188_id_offs_map to correct
+> these issues, so the suggestion to rename to "PAD" is wrong. Don't
+> do that.
+>
+> (Conceptually it made sense, but it doesn't match how the drivers
+> are implemented for other mediatek clocks already.)
+
+Ack.
+
+>
+>> 
+>> PLL clocks
+>> ----------
+>> 
+>> This is just a guess, but I suspect in Linux, since CLK_TOP_ADSPPL is
+>> just a 1:1 divider clock of CLK_APMIXED_ADSPPLL, they took the shortcut
+>> of leaving out CLK_TOP_ADSPPL from the clock tree and set the parent
+>> of CLK_TOP_ADSPPLL_Dx to CLK_APMIXED_ADSPPLL instead of CLK_TOP_ADSPPLL.
+>> 
+>> The actual full picture should be like this:
+>> 
+>> 	77, /* CLK_TOP_ADSPPLL */
+>> 
+>> 	...
+>> 
+>> 	FACTOR0(CLK_TOP_ADSPPL, CLK_APMIXED_ADSPPLL, 1, 1),
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_TOP_ADSPPL, 1, 2),
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_TOP_ADSPPL, 1, 4),
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_TOP_ADSPPL, 1, 8),
+>> 
+>> Instead of:
+>> 	
+>> 	-1, /* CLK_TOP_ADSPPLL */
+>> 
+>> 	...
+>> 
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D2, CLK_APMIXED_ADSPPLL, 1, 2),
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D4, CLK_APMIXED_ADSPPLL, 1, 4),
+>> 	FACTOR0(CLK_TOP_ADSPPLL_D8, CLK_APMIXED_ADSPPLL, 1, 8),
+>> 
+>> So we could either follow Linux and use CLK_APMIXED_ADSPPLL everywhere
+>> instead of adding CLK_TOP_ADSPPL. Or we could be more correct and add
+>> the missing clocks.
+>> 
+>> The other PLL clocks seem to follow a similar pattern. So whatever we
+>> do for ADSPPLL would apply to the others.
+>> 
+>> CK1 clocks
+>> ----------
+>> 
+>> I can't see why these would be different from the same name without the
+>> _CK1 suffix. There is already CLK_TOP_ULPOSC and CLK_TOP_ULPOSC1 and they
+>> seem like they should be the same clocks.
+>> 
+>> Perhaps we could not add these?
+>> 
+>>>
+>>> Could we (long term) add these definitions to the dt-bindings by
+>>> contributing them to the kernel?
+>> 
+>
+> Since these values are devicetree ABI, we unfortunately can't really
+> fix them upstream. The problem is that the order matters, so we can't
+> insert the missing values in the correct position and change all of
+> the other numbers. We only get away with adding additional numbers
+> here because we have mt8188_id_offs_map to workaround the problem.
+>
+> Most of these "missing" ones are only parent clocks of other clocks
+> so wouldn't be used in the devicetree anyway. (Maybe they were skipped
+> intentionally for that reason).
+
+That is a little unfortunate but I understand.
+
+Adding a more detailed comment next to the additional clock definitions
+would be enough then. (In my opinion)
+
+
+>
+>
+>> I guess it depends on if taking these PLL shortcuts was intentional or
+>> not if upstream would want to add them or not. But clearly the PAD clocks
+>> are fine they way they are upstream.
+>> 
+>>>
+>>> Note: I'm not requesting to change this patch, I'm just curious as of
+>>> why we need to add these definitions here.
+>>>
+>>> Note that I also don't see these CLKs in the linux driver so why are
+>>> they needed for U-Boot ?
+>> 
+>> I have a feeling someone will be asking me the same question soon. :-)
+>> 
+>>> (I searched for CLK_TOP_CLK13M in Linux master commit e7c375b18160 ("Merge tag 'vfs-6.18-rc7.fixes' of gitolite.kernel.org:pub/scm/linux/kernel/git/vfs/vfs"))
+>>>
