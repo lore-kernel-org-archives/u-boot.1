@@ -4,42 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7666FD59D82
-	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83182D59D81
+	for <u-boot@archiver.kernel.org>; Fri, 12 Dec 2025 18:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B553D8334F;
-	Fri, 12 Dec 2025 19:13:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03A30835FD;
+	Fri, 12 Dec 2025 19:13:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C22F981D6A; Fri, 12 Dec 2025 19:13:30 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id A35E683981; Fri, 12 Dec 2025 19:13:33 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [45.157.188.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C8CB81D6A
- for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:13:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE000835FD
+ for <u-boot@lists.denx.de>; Fri, 12 Dec 2025 19:13:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dScyb70G7zpp2;
- Fri, 12 Dec 2025 19:13:27 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dScyg3NPMzmy3;
+ Fri, 12 Dec 2025 19:13:31 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dScyX4xLTzGmV; Fri, 12 Dec 2025 19:13:24 +0100 (CET)
+ id 4dScyd5VyWzGWr; Fri, 12 Dec 2025 19:13:29 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/8] various Kconfig option changes
-Date: Fri, 12 Dec 2025 19:13:12 +0100
-Message-Id: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
+Date: Fri, 12 Dec 2025 19:13:14 +0100
+Subject: [PATCH 2/8] boot: fix prompt for SPL_LOAD_FIT_ADDRESS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBvIQQu6SrQIG20INEaIILx70
- vIt/n+hsAoXmLsXlG8pklOD6Tvwx5Yio+zNQAM5Q4bw9DkFiaicNeLuR7u5iSwHB625lIM8/29
- Za/0AnFnwK18AAAA=
-X-Change-ID: 20251212-kconfig-reorg-dc64a5724ef5
+Message-Id: <20251212-kconfig-reorg-v1-2-72441d8cc53c@cherry.de>
+References: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
+In-Reply-To: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
 To: u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, 
  Elaine Zhang <zhangqing@rock-chips.com>
@@ -80,32 +78,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This fixes a few prompts for xPL options, puts xPL options together
-again, fixes a missed dependency and removes an option with an
-unmeetable dependency.
+From: Quentin Schulz <quentin.schulz@cherry.de>
+
+The prompt is missing the indication this applies for the SPL loading
+a FIT image, and not any other stage.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (8):
-      Kconfig: put TPL_OPTIMIZE_INLINING next to SPL_OPTIMIZE_INLINING
-      boot: fix prompt for SPL_LOAD_FIT_ADDRESS
-      boot: fix prompt for SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
-      boot: fix prompt for VPL_LOAD_FIT_FULL
-      boot: specify VPL_FIT_FULL_CHECK applies to VPL
-      spl: fix prompt for SPL_BOOTROM_SUPPORT
-      power: regulator: fix dependency for REGULATOR_PWM
-      power: regulator: remove SPL_REGULATOR_PWM due to unmeetable SPL_DM_PWM dependency
+ boot/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- Kconfig                         | 18 +++++++++---------
- boot/Kconfig                    | 16 ++++++++--------
- common/spl/Kconfig              |  2 +-
- drivers/power/regulator/Kconfig |  9 +--------
- 4 files changed, 19 insertions(+), 26 deletions(-)
----
-base-commit: ff80e95fed188ec3d4001129445e414c9c811beb
-change-id: 20251212-kconfig-reorg-dc64a5724ef5
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 85f4d468069..07ae6cc585a 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -272,7 +272,7 @@ config SPL_LOAD_FIT
+ 	     "linux" images are also supported with Falcon boot mode.
+ 
+ config SPL_LOAD_FIT_ADDRESS
+-	hex "load address of fit image"
++	hex "load address of fit image in SPL"
+ 	depends on SPL_LOAD_FIT
+ 	default 0x44000000 if ARCH_IMX8M
+ 	default 0x0
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.52.0
 
