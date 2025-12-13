@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ACB3D5AE41
-	for <u-boot@archiver.kernel.org>; Sat, 13 Dec 2025 14:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5823D5AE41
+	for <u-boot@archiver.kernel.org>; Sat, 13 Dec 2025 14:04:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60885828A2;
+	by phobos.denx.de (Postfix) with ESMTP id A23ED835FD;
 	Sat, 13 Dec 2025 15:04:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YoMo+lwJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WbBuMFN5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3F0583642; Sat, 13 Dec 2025 07:39:14 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id EEB7A83642; Sat, 13 Dec 2025 07:42:31 +0100 (CET)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c005::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 843C883045
- for <u-boot@lists.denx.de>; Sat, 13 Dec 2025 07:39:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A88A083045
+ for <u-boot@lists.denx.de>; Sat, 13 Dec 2025 07:42:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=U44q6mIKWuBHuDCkE8/sxY65s6giSvkxlrWZYRNMWrkf8UFdxrJGvqvqUeQZ/x4UchXuEQbzNC/d+EzUKgX2UiAY57O6fNdpvjYyCuHlKei7tQSQGR+H+YWe2TJIdi3P8RzXRcG/Rf1XCM7XBCuvo7HyuEW9PX7OC/O0kGpj+VSUR2B6EdbDFIshm45VRvM/oK2U47hisAqUvWK1xw4HsTn2ziB4pFFCOcpuwr8TR+smAGgIpuVuWghUeG7e5OIG62Pwt9ReaHM8wasOCVuLVEDeO0ywFJ7hS7CjILreNpOc42Gj/U7yAdrg9T/19TE/RoUmF4qkKPV114PvsVVQjA==
+ b=RwnOHTzVGUBlUImhRU1kp2XEm3ihJmaJqequpda49McG18yvEO7aIEPdvYXgpvcoudzg2jzjuJ24Qaye3U7SwFXydG5oRf1dKE6q3zfgeahnfZjuEpqFVtPJrz+9NmbPlKYT4w71djNfGF9Qp7CrPaNqZC3stV5m/9QrE/eU2NmcbEHrbcvDIuDa5e7BTxkDS1h0xT7NlbD1OdKPYgF4NIDFN+vsDzSfHptlGix16eRcRjAV+EEXlIpf7F6hh965DzKr1v2CLPjHhb1sZ9VJTfZ7peoQr4DqCujl0mTxZsOi3L11iIgiuJsVpLoHJyWxxEVIohFayJYIyq2QOG5SpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nv4sr4sHYAOOz6zsfesBEgH3kKTRCIjXdNEA8/An30w=;
- b=TKdp9ImM4kpRf1gthmX4JwXSDP0MflZs6efNL/gPauftEFkDr/wRI+wOUZ48s3JiSzRYtricD9EmOIREhpXaJ+ECci3REW6stSrP1OHP/Ip0CUt8/TxN64CFN7k4ABDJeBAMZC1ZBYWgx/FNtyzp8iUh1kKZCv1MCWuUr+uXaE+RFH82le0vV7Ov8mH1T0cUTXi1INVtcI1D888jkVe0g+ymW+CJ24VvO12oDlbnEUyrYUSc94FoWWdF465SpPZbkOyj4qG94n+I7UP/wG9eH+lS9+dhS2e1cgWHFj5pBQ94hXtOh5YY1FP1LVjlhHRv45FWOGzHILb31FcHyH3CPg==
+ bh=js92h/H1V8165czzxYLcLJ6hPazvKgw+YnWAIcciSwE=;
+ b=TXJioZ0lU/hKlJNuXWn5CPu0BXarGBb65UHunZCE/mcmUKNIK3X66QjH6zTmizIQZhQU96s4pMqaLg5fszVNuAh8ep9Ift7Bl551ynj40gJ6mW4WfS53hJBjFxCdncJI9jUnBn/4htxwTWWQfKqqSWiSMmYL2XuJYHikqskoMiuAhb9AQ0j3oQt4imS3hV9bEOcJo3I/i2NdwhB3xMMEp3CtsHvYw/jKX/Q5Q5D9jFRP6bbI1HLwDHbb+ZOKmQcFM4l7hYIbl3CVjNY6U3/qkk6Qa9lEgZnRjjvbHPRAyi1WGhZ8Xc4SSVREPvK8SZSKFWQScguVvVEc7FhPC8FRvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.23.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nv4sr4sHYAOOz6zsfesBEgH3kKTRCIjXdNEA8/An30w=;
- b=YoMo+lwJutP+PLhCqezRBzMI7l0Q5a36deR9T7fQtkjrnJi1IoWaxJ3bxPPwLv51VMo03a6FLUz1ll4PONNRt8aSaBYG5Xvlz10GgI3euwsR9K2bDdaMbpZ1sYoQKGPKKed+04+MfLgJUdbkpMbz3g06dILHgmQm9tzka2Th3gA=
-Received: from SA1P222CA0012.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:22c::16)
- by IA1PR10MB6712.namprd10.prod.outlook.com (2603:10b6:208:42f::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.12; Sat, 13 Dec
- 2025 06:39:08 +0000
-Received: from SA2PEPF00001507.namprd04.prod.outlook.com
- (2603:10b6:806:22c:cafe::f7) by SA1P222CA0012.outlook.office365.com
- (2603:10b6:806:22c::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.11 via Frontend Transport; Sat,
- 13 Dec 2025 06:39:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ bh=js92h/H1V8165czzxYLcLJ6hPazvKgw+YnWAIcciSwE=;
+ b=WbBuMFN5wT2FH8jU42GTZXJbiZFZsOD/+CakA9/PmDDatYrB5fPGpuHSrZwWGnCEswm8J1aB+dERlWD7PzYwWGibX3NcU3vXLSAU0ut79ZksuI2jGut1oKplRN8At7lOOQLtcneYw9gD395KOvVw0UujR2KqfVZ3MffXe/XAnsk=
+Received: from SJ0PR03CA0038.namprd03.prod.outlook.com (2603:10b6:a03:33e::13)
+ by DS7PR10MB5904.namprd10.prod.outlook.com (2603:10b6:8:84::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.11; Sat, 13 Dec 2025 06:42:25 +0000
+Received: from CO1PEPF000042AC.namprd03.prod.outlook.com
+ (2603:10b6:a03:33e:cafe::38) by SJ0PR03CA0038.outlook.office365.com
+ (2603:10b6:a03:33e::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.12 via Frontend Transport; Sat,
+ 13 Dec 2025 06:42:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CO1PEPF000042AC.mail.protection.outlook.com (10.167.243.41) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Sat, 13 Dec 2025 06:39:06 +0000
-Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9412.4 via Frontend Transport; Sat, 13 Dec 2025 06:42:24 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 13 Dec
- 2025 00:39:05 -0600
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:42:15 -0600
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 13 Dec
- 2025 00:39:03 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:42:12 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sat, 13 Dec 2025 00:39:03 -0600
+ Transport; Sat, 13 Dec 2025 00:42:12 -0600
 Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BD6crWs3324655;
- Sat, 13 Dec 2025 00:38:53 -0600
-Message-ID: <c1d177f3-f7b1-411e-9a13-f4e5f81a0b28@ti.com>
-Date: Sat, 13 Dec 2025 12:08:52 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BD6g2YI3327571;
+ Sat, 13 Dec 2025 00:42:03 -0600
+Message-ID: <5a3ff81f-8843-43f9-9b5f-5500940cb215@ti.com>
+Date: Sat, 13 Dec 2025 12:12:01 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 04/13] ram: k3-ddrss: Add support for DDR in
- self-refresh
+Subject: Re: [PATCH v7 05/13] firmware: ti_sci: Add
+ TI_SCI_MSG_MIN_CONTEXT_RESTORE
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, Nishanth Menon
  <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh Raghavendra
@@ -105,71 +105,72 @@ CC: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  <marek.vasut+renesas@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
  =?UTF-8?Q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>
 References: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
- <20251210-topic-am62-ioddr-v2025-04-rc1-v7-4-f113b156f83f@baylibre.com>
+ <20251210-topic-am62-ioddr-v2025-04-rc1-v7-5-f113b156f83f@baylibre.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-4-f113b156f83f@baylibre.com>
+In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-5-f113b156f83f@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|IA1PR10MB6712:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2a238e2-37d6-41ff-f97a-08de3a12507b
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AC:EE_|DS7PR10MB5904:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21548641-c45f-427c-c5be-08de3a12c638
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|7416014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q1BmMkU3d215dHgxNjlhMTdRYjZkQWZ4c2RaWlo0emttUG0zS2RyZ0QvRHpT?=
- =?utf-8?B?emZXc3NxS1JMZUEzcXNsL1hVT2xrWklDaVNxZEJWWDRmREtEZnQyNEdPZ2Jo?=
- =?utf-8?B?b2FvRlcrRmhjYkZjdlE4blR6Wncxd0djd0dkaWxCSCs2LzVNeVpuV05EZTZ3?=
- =?utf-8?B?b1lSNi9kazJGWWd1TTFpZzFobnVqeUVjUXhqU043Z1ZvTHlRSERoUU1xR0ti?=
- =?utf-8?B?WWhqUVRsZExDWUxxVU14Q0FPS0NMclAxSy8yT25lQlZpMmVSdEtkOEYzSG8z?=
- =?utf-8?B?WkxWQ3FjU0UvL3FDUWxKRzBEblJGQnQ1TndaNkwva1NIRHJrcENmUUMwQWhw?=
- =?utf-8?B?TkZMMFZKTi82TzA3VGx4R0c1WXBEdDBDTFgzUHRYZkhXNitOL0JmNnBaWlBY?=
- =?utf-8?B?YnY3Vnc5SHhyRlUvMW1IaUQ1VFpWZGlXYzc4Q3hpWW1Vb3FQM1RtOVRLZUsz?=
- =?utf-8?B?aDNNWUVrdkZac2JxS1hQajZXZm4wMjVBOHcwcG5sSEFlUlhSQ2tyK3VLWEJr?=
- =?utf-8?B?akJkZy9OUm1pZkZJdkVtcUpBKzdjRUZhVm5TNUJ2WmE3VzlSMFJxTHNaak96?=
- =?utf-8?B?M3RYbGZneU5hQ2JSSTVBT1hKRnhhdXZKa2pQOUNNNWJmTVNRRVBrYWZMaVhD?=
- =?utf-8?B?bWRoUHlpWGJPeVFNakNTUTVvU0l5ZCt3RFpHUkhOWXoreUVpOGt4b3ZsWStN?=
- =?utf-8?B?a0RVdDJ5MHdYeU5qZG44Z1F0eDZFRFRnNDBBOGoyR0dEalRPdyttUUE3aWVN?=
- =?utf-8?B?NnFqc2hqVkI0MUVpRkFUV0FKNmsxZFRSaFl6d0kzS1g3RUkxTnAwQjJWWG1L?=
- =?utf-8?B?UTQ4N3R4Y2VVaE5mTXpld1lYamtORkhjMHJUM1lFSUxxdHlENVBpZDFSNGRZ?=
- =?utf-8?B?aHpDTUNxME1MdStPQ0NSM2ZJU0pySURZc2lUV0dnNlpod2huaTczK21tY2dr?=
- =?utf-8?B?dy9ZVkMwYklGTTlHU3F6NFRJdERwUnJjcFZ3bzE1V3p3SWo2cW9SOFB0bkMv?=
- =?utf-8?B?NjFVRGQxWkhIdjZHR3NCK2RUVTlBYVJna1p3SEpqaENLSk9VRzd1UDZQZ0k4?=
- =?utf-8?B?MW9PVUxSd3UwR3BjbnFreEtlYXJGZjh0QUJncGxxc25na2N5YjVXcXY3VllW?=
- =?utf-8?B?Z2kyZ0tKZkZqeUNNaVM1RTVzOGJRVmFZNXgyOEVnRTE4RTR0MFRrVWNpSytl?=
- =?utf-8?B?QTJvb29pelpYOVBpaFNySFYzWDhFWkZlaStpYmt0YXdmNnlERUc3cXZFSE1s?=
- =?utf-8?B?UmhKMytoL2doQVBWOUkvb2VQbWpKdzY4Vms3cmJ0OHdEY0c3MVh6YTRhZ0wy?=
- =?utf-8?B?dXorUk43aUZxdzJtSVBuTWptUVZmaHlkSXlYbFFYSEd2eDNUdkJ6ZE5FT3BC?=
- =?utf-8?B?ZVZVa2JVL1VKRDBBR2EvR2psdkhIRmJqTXhycFFxSjhwM1RIYkJ1aTgzRmVJ?=
- =?utf-8?B?dzB6Zmwrc3phZGJLR1VZYWNON3dOYmtTcnZEaU9BMFpEazJtNFBFU2NSckdT?=
- =?utf-8?B?dEE5cVRLbkpoTnUwRTlMSm4xWlZTYms3bDdleStJWnNmbkdqZTMrN1pZREZV?=
- =?utf-8?B?SnNLZ1ptZFZEQW9aQk1NM0tXd3VyOHhYRVVmTCtQZkV2Kys5Q1NLS2tPQW82?=
- =?utf-8?B?amhlYmptUTJZWENDZFdKOUNlczFmVVc0VUhNenRJY05qeGI5SU9TWUdGY0ZL?=
- =?utf-8?B?RUNxVnBjeVc2MWR5RExKeUFSaU52QVd5MzZsQkZSOVJ4d214Rm9uT3FaeUJH?=
- =?utf-8?B?dnVjZ2VZbUp6TkpWZmpBTkY4cm1QNUsyNndYZkpabWxMTklreEp3eGhCQlBr?=
- =?utf-8?B?NDZtNVM1eXZENGl6dDQ2SmdadGkyN3JMZ2NQQ2VxRisxMHVNbmg5SVBUSUxM?=
- =?utf-8?B?ZUo2SGpPTGpOczN1dVFCMk85QVpPeHl2RTdBa0RoWGcxRmdDZm91K0F2RmZZ?=
- =?utf-8?B?a3U2M2w2NExydzhEbXB4MzArQjM2V091eXZ0U0lTRndSR1U5UnhoOU5lZW9Q?=
- =?utf-8?B?WHBBUDhiSWQrRFRSSmpXM3FyaWwrRDBaOG0yc1pGby9GMWc4RkxXWVc4MGRl?=
- =?utf-8?B?cWNlWklkUkk5UEsvZDI0akhreSt0Ris0ZGV3Vi9TNTFUUCtrQ3NjcmpMVG5P?=
- =?utf-8?Q?qrek=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7416014); DIR:OUT;
+ ARA:13230040|36860700013|1800799024|82310400026|7416014|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NTgrVDNyZFZHQWtTQnYrWWR6TGtaem1LeFJhc0RHZWk0NFAxYXgwcXNndDQv?=
+ =?utf-8?B?WEtFMWdCTjJvNlNsRDlyOFZvZTNHb0ZYQUNSUzVVeSt1UGN4Nzk2SmNnVkVB?=
+ =?utf-8?B?bXF6TGRPa3Vub1k4bnRjTnZHOVFGVHp4L2J1d204RGZpczdmWDVNMmtTdEJK?=
+ =?utf-8?B?MG9zcGhQS1ROYXF0SXEwU1luYnpOWXorT3RUNmNmbXVQaHEvZnVXVmNZU05v?=
+ =?utf-8?B?RDRxc2FiV3AydU5HWEN6NWRKKy85MXlSVnYyV0VBOGdZTnI3WUF4Y1dmd0FW?=
+ =?utf-8?B?UG1zMWRPd2VnSmQrZnhpVEw1STlkbHhVZEtDUXd2bGN5YlFjTTFJKytXZmVP?=
+ =?utf-8?B?c0M1Umg0MXllaGkxdFJVMDJHZXAvNDNRNUtkVURwR1RnN2N3czBlSFBRbS80?=
+ =?utf-8?B?dWVrMW1rU3RuMVdkbFNMZStDeDVOVHZSUndJbUtOWFdrQ2o3OFlTUXpEN3Ux?=
+ =?utf-8?B?RE1FWWtVbDJDSDNEVFo0bUVoNEEvYkY0Mm5uMWVOOHhrenBUM1NVQXBYQWFm?=
+ =?utf-8?B?Sjk1enQraHlKRkFYbk45SUdubkV1V3Vscm5qNm1hb0JrellaRG1KcWJZRlhn?=
+ =?utf-8?B?TDBhL252cHZWcHdZNlJPRFhBRHQvdWxZTHR4T1ZKUWNaeEs5N2JhS0pmRmQv?=
+ =?utf-8?B?RFFLZkhXRWZ1TVIyZVV5YnlwQW0rRTh0T0NjSHdTdWZJb2tNYVg4aFh5Q1lw?=
+ =?utf-8?B?czBMTVFpQnpScE0wc2FHRTJUOW1waGUvallTYnJENktuTk04TmExbGRuTnha?=
+ =?utf-8?B?WU1zN2s5TmFiREs0dWJlMVRWUzVFcEFHN2RDZ1laNWdab3NaUUhwUGx6d3Na?=
+ =?utf-8?B?aytCRHA4cjUwSU9XOUZ6Z01tV2RjYlZFZ3pCZkhmSUQ5TXFSTWF1MUpYVTFH?=
+ =?utf-8?B?M2djOXBtdVhPNXdyays3YWlNMS9UbjduYUVJYWRZcjFTNURrZlB5UElXeUVE?=
+ =?utf-8?B?aVAxZldBbHpVUGx0OXhhTjRjNWtoLzBjeFE5cXhjMDhvQjBlczBDZFZHcWJj?=
+ =?utf-8?B?cGdoTm8ycVdsM1R6N0wybXoyRXI3cnhlRzNzSlloWjNGWmpUVTZuWHJURzNV?=
+ =?utf-8?B?NFJHaHdPdW90azJidlRPN1VLeTh6dyt5ZmJiYkJvaS9kQnBBZ2RZN2tuSXdI?=
+ =?utf-8?B?VXZFS1B0cnl5eTZGaFlYT0VGVU9WOW5ib3VENCs1QllldnZZNWQvOWpXeWJr?=
+ =?utf-8?B?TlJUcTU0WVR6Y1RMbWlDVHIrb3BRT0VvTHp1R1hWSXlrQzhUcXh1UVVvdHN4?=
+ =?utf-8?B?bzNldFZZNW55bkVDSjB6dlFScFpybFhvSWdLWDdPT0c1anRRem5uYWt6SWw5?=
+ =?utf-8?B?azJZbS9ES2Y0bWNxK0FPeDVBUVRGKzQrOEQ1ZC9iUGMvR0duVHUyR25Bd2VM?=
+ =?utf-8?B?VG1CQ0xvWjlSK1JnZkp4ME8rSDM5RDh1QWJGOG5lUCt4a2VvWDdzSGdmZWFD?=
+ =?utf-8?B?bU5Vd1NOeGFSY1pIakhwWFZZazNyU0VqWlVaUC9jK3cxVEpHK0cyVDFNald5?=
+ =?utf-8?B?UFZnL2xnRHR1QmVZaE5GOXpielBCYWVWaHpPRVIrNUVDT3BVLzFKL1JNVUp4?=
+ =?utf-8?B?SnhqeWJ1SytzVXhWZzNMRzViQ3pReTg4RW5hSlIzbUJkMklaUlVsVWZ4T2RI?=
+ =?utf-8?B?VHVUOStLQ0pSNndVdyttb1JyTEpvWEFHbE5sQ0pVam9veGovSDcza3ZIMGk5?=
+ =?utf-8?B?NmM5cFQxbGg4SjZ0bTU3dnk1SVFaaW0xb2V5OEljaVhJL2JSc3BXMEtiTitt?=
+ =?utf-8?B?dXQ4YkVudFF6Wm83ejNTRGp3ZkxSMzV3K2puNm1vVk9pZ2gyakl6L3I1Qi94?=
+ =?utf-8?B?Nk5NWi9lZ0tVTUdIU0F5N1NTLzA4ZVoxK0paSTh3L01sUlBsMUova0tGSHgw?=
+ =?utf-8?B?VmNWZnBidjFSVzFPdkRMTFJBUUloSWJpQ05HV28yN2ZkL21LbFZqNGx4d1g5?=
+ =?utf-8?B?SmVUOGx3Z2dyc1NJcEFoYUU2S1NremlhdzRkb0tZWVZBYXE4TFVHOXkvLzVZ?=
+ =?utf-8?B?NG9ZeTV0MFBwKzBnN05tYWdJNDVDczczSnJqeUc3QU0vTHBEZGtjdWZhNFlY?=
+ =?utf-8?B?Y0NsYjgxUlBmK24vUUhteDhPa0lGMjJ6ZW5mRWdzOGtqVTVUZFUvWlM1Nmdz?=
+ =?utf-8?Q?wZ8A=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(7416014)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2025 06:39:06.6872 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2a238e2-37d6-41ff-f97a-08de3a12507b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2025 06:42:24.1880 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21548641-c45f-427c-c5be-08de3a12c638
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001507.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AC.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6712
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5904
 X-Mailman-Approved-At: Sat, 13 Dec 2025 15:04:07 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -187,85 +188,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for clean up Markus,
 
 On 12/10/2025 7:38 PM, Markus Schneider-Pargmann (TI.com) wrote:
-> In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-> powered off completely. During boot the normal initialization routine of
-> DDR is slightly different to exit self-refresh and keep the DDR contents.
+> This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
+> The context needs to be restored after booting SPL when resuming from
+> IO+DDR.
 >
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 > ---
->   drivers/ram/k3-ddrss/Makefile       |   1 +
->   drivers/ram/k3-ddrss/k3-ddrss-lpm.c | 175 ++++++++++++++++++++++++++++++++++++
->   drivers/ram/k3-ddrss/k3-ddrss-lpm.h |   9 ++
->   drivers/ram/k3-ddrss/k3-ddrss.c     |  16 ++++
->   4 files changed, 201 insertions(+)
+>   drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++++++++++
+>   drivers/firmware/ti_sci.h              | 16 ++++++++++++++
+>   include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++++
+>   3 files changed, 63 insertions(+)
 >
-> diff --git a/drivers/ram/k3-ddrss/Makefile b/drivers/ram/k3-ddrss/Makefile
-> index 823d1887178174021778296e6626cadfd11170de..8a2ece1c27eeae51593467259337483a852f5f85 100644
-> --- a/drivers/ram/k3-ddrss/Makefile
-> +++ b/drivers/ram/k3-ddrss/Makefile
-> @@ -4,6 +4,7 @@
->   #
+> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> index 6f57dcfe8de8f874318cd53372c798d182faae73..74e4f162aaa2da8c3ecc1cf393ca11fa5108d83b 100644
+> --- a/drivers/firmware/ti_sci.c
+> +++ b/drivers/firmware/ti_sci.c
+> @@ -2710,6 +2710,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
+>   	return ret;
+>   }
 >   
->   obj-$(CONFIG_K3_DDRSS) += k3-ddrss.o
-> +obj-$(CONFIG_K3_DDRSS) += k3-ddrss-lpm.o
->   obj-$(CONFIG_K3_DDRSS) += lpddr4_obj_if.o
->   obj-$(CONFIG_K3_DDRSS) += lpddr4.o
->   ccflags-$(CONFIG_K3_DDRSS) += -Idrivers/ram/k3-ddrss/
-> diff --git a/drivers/ram/k3-ddrss/k3-ddrss-lpm.c b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..2556632df8806623118c72cca55cfbf370211ae0
-> --- /dev/null
-> +++ b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
-> @@ -0,0 +1,175 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
+> +static int ti_sci_cmd_min_context_restore(const struct ti_sci_handle *handle, u64 ctx_addr)
 
 
-Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+Thanks LGTM
 
-> +#include <asm/io.h>
-> +#include <linux/compiler_types.h>
-> +#include <linux/types.h>
-> +#include <time.h>
-> +#include <vsprintf.h>
-> +#include <wait_bit.h>
-> +
+
+> +{
+> +	struct ti_sci_msg_min_restore_context_req req;
+> +	struct ti_sci_msg_hdr *resp;
+> +	struct ti_sci_info *info;
+> +	struct ti_sci_xfer *xfer;
+> +	int ret = 0;
 > [..]
-> +	is_lpm_resume = k3_ddrss_wkup_conf_boot_is_resume();
-
-Sorry, but repeating same thing k3_ddrss_wkup_conf_boot_is_resume could 
-have different implementation for different SOCs
-
-> +
-> +	if (is_lpm_resume)
-> +		dev_info(dev, "Detected IO+DDR resume\n");
-> +
->   	ddrss->dev = dev;
->   	ret = k3_ddrss_power_on(ddrss);
->   	if (ret)
-> @@ -895,12 +902,21 @@ static int k3_ddrss_probe(struct udevice *dev)
->   	k3_lpddr4_init(ddrss);
->   	k3_lpddr4_hardware_reg_init(ddrss);
->   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_self_refresh_exit(ddrss->ddrss_ctl_cfg);
-> +
->   	ret = k3_ddrss_init_freq(ddrss);
->   	if (ret)
->   		return ret;
->   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_deassert_retention();
-> +
->   	k3_lpddr4_start(ddrss);
->   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_lpm_resume(ddrss->ddrss_ctl_cfg);
-> +
->   	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
->   		if (!ddrss->ddrss_ss_cfg) {
->   			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
->
