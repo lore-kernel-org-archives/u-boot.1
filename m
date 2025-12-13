@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABEFDD59F76
-	for <u-boot@archiver.kernel.org>; Sat, 13 Dec 2025 14:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF2FD59F76
+	for <u-boot@archiver.kernel.org>; Sat, 13 Dec 2025 14:05:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EC8D839DE;
+	by phobos.denx.de (Postfix) with ESMTP id ADFCF839F1;
 	Sat, 13 Dec 2025 15:04:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KpfXNW63";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V9fCIN/W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 303C8830E4; Sat, 13 Dec 2025 07:59:10 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 7671E8307F; Sat, 13 Dec 2025 08:00:01 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0A6983045
- for <u-boot@lists.denx.de>; Sat, 13 Dec 2025 07:59:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 579AC807C0
+ for <u-boot@lists.denx.de>; Sat, 13 Dec 2025 07:59:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mGlBZZXJD4RjUoMPlExoDFripx1kX41T0zE7RfXIkkQKCPVF2NV3JQH5uP+4/EHZ5/rGgzEFzKCYxhf4ctDFceeoVBG54ljOMPutLrR1vtAA4dNuyMtWb1BZHgOGQwkyHumGezfk51a8F5tW7xkJWfyJ4iLaX0s59wNmdLGWosiwPbkyttqwS8h4aEIj6AopP6nXhL6anukGjB8UwgHJjB8Xiw11O7Rd9CH73SKXa32ZznEi0ltUmyCHcnBMICtvNBPiGewZqT70sAwEy/uheItUwKUuXh06zWW+c4vo9M0PmjlSfrPg/pax0EAX2FsK/LgwzCHOoGQqr9tNkrx5xQ==
+ b=RpSxaTzSJ0DRQmzYtE73J5YSiQxSoPnEUP/miDxcd5sYRmdvHQqfvG64xPh3AhDMDHJvuuM/DhozvA6xsF4ljBM9wdktwJBH4sxPDxBzSG31Wqf3oTwsABHR+YBtsaa91BDCSU+hIuQO0mM0Ooeqd+EXpHu3QOnEuoh7T6cHXdettd17m/TqXIj/nJ0P+KGpa1toC+LopJiBPhdr9p0S1YXejZQcnCGyIZNiwdHiq/3B67C6CJ4NyYLriKa+/He+lSlFqR9Zc+10wEoL9bzoYvhGrQRyQtNzdqM0wC1scMHGI5iJMiXFZeVUt5jyp5Y3KupuF+4Iespy6KLP6xYr3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wYxGDEqw5qQyT1bmKy9an9dE6bVbWJDp4HnnD/Yo7ko=;
- b=J8JW0zQffPgoMbcVObvfvorWDLFf1yW82ahzoIQHUv71QXAkvd0OHqRczcvt3keYqLsBNKqFFrZ5jN7yZX1LopKvTiOTTPg9Hx5SD9PxVqUtwv1N8NGqBeHWpFf+q7kF1df/s/zKY7hdYXSCkZUHJwmPHTDVTz5Ayy6ce9KbY2b5u9VhGEQATUTEImPCqXjiFQsx7HmgjNnaQqxHJUtclZuEXiSrecdYdhp/Ea9h3OpzuAQB+7zV1vykQgI/LOZ+j3GSQ4ZMLZ5Hn1QZDtQvBxODsRmJPjlpT0YfL878EEkqjrOp3Ut44ig/eU2A3+T4HCz9mTZE03RppevPvL+lZg==
+ bh=QWCB+B3drLOKrmUXKdeR43jBXJ8mmY6Qs+ueFXFynXc=;
+ b=NB6E4XfclJotXXIfHQf2232sibSPy+o+jU/+CRsmU4KQ22QGf7CPRiqKRWO+6PSIW7iJBkMjhrb6o1dQIBYn/RSa4L1Z5i1V511I65c2FaxP0UkIcCLUWX6wmlPuQs/DHvFDdOztRsxBigxRp7PNhZQqEtHUsTDMpSfWQRkCXVAhzWbt22X+FR/5pUsEnEo4Reh9nTPy9jXRHpFx1s/nEhAj/6pCvmmDI5piOof+zyx0vNH7miYxTGIqPGVVLV6O4a6VQDAaaN0r7Os8YGceYT3vDUGZADAch+bCCe+P5gDm6N+gqOaVOo0MjVsvSpSAVAEGxN+Wu/rtxsu05lDieg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wYxGDEqw5qQyT1bmKy9an9dE6bVbWJDp4HnnD/Yo7ko=;
- b=KpfXNW63LHNm3HUglKqh2kLAbr9m18AsltEM8NUQv0VDi5m6piLY+LNAEH7Us+nk5+iJZbUusqoP8wz+Ul0JW4C4pO6Y7apQGw6vt1+fItyCgwTHuGYw9KGm4ZXXUfYO7Hhb+x/n5QdlM+KWoxJU8L6z4w8RapmhlWhpRRUHZGE=
-Received: from SA0PR11CA0033.namprd11.prod.outlook.com (2603:10b6:806:d0::8)
- by DS0PR10MB6222.namprd10.prod.outlook.com (2603:10b6:8:c0::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.11; Sat, 13 Dec
- 2025 06:59:02 +0000
-Received: from SA2PEPF00003AE5.namprd02.prod.outlook.com
- (2603:10b6:806:d0:cafe::6) by SA0PR11CA0033.outlook.office365.com
- (2603:10b6:806:d0::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Sat,
- 13 Dec 2025 06:58:28 +0000
+ bh=QWCB+B3drLOKrmUXKdeR43jBXJ8mmY6Qs+ueFXFynXc=;
+ b=V9fCIN/WRCHEi6AAFGxJsiYP/FkEtp3H+i0iGsAUAxI3RraC5ITAO0HTAimyMEspd6oGf86qYtaN725SUScXC1lHIafxuCdzVbzPGdh9+jRdcRck68o9DyeBagt1b2C4lnLt3dr+vo27c8cTTVwZasWWchP9U24g2rOxaQ5zpaw=
+Received: from SN6PR2101CA0009.namprd21.prod.outlook.com
+ (2603:10b6:805:106::19) by MW4PR10MB6536.namprd10.prod.outlook.com
+ (2603:10b6:303:22d::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.13; Sat, 13 Dec
+ 2025 06:59:56 +0000
+Received: from SA2PEPF00003AE8.namprd02.prod.outlook.com
+ (2603:10b6:805:106:cafe::4c) by SN6PR2101CA0009.outlook.office365.com
+ (2603:10b6:805:106::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.5 via Frontend Transport; Sat,
+ 13 Dec 2025 06:59:56 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,29 +58,29 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SA2PEPF00003AE5.mail.protection.outlook.com (10.167.248.5) with Microsoft
+ SA2PEPF00003AE8.mail.protection.outlook.com (10.167.248.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Sat, 13 Dec 2025 06:59:00 +0000
-Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet201.ext.ti.com
+ 15.20.9412.4 via Frontend Transport; Sat, 13 Dec 2025 06:59:55 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 13 Dec
- 2025 00:58:57 -0600
-Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:59:53 -0600
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 13 Dec
- 2025 00:58:54 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:59:50 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sat, 13 Dec 2025 00:58:54 -0600
+ Transport; Sat, 13 Dec 2025 00:59:50 -0600
 Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BD6wigo3392354;
- Sat, 13 Dec 2025 00:58:45 -0600
-Message-ID: <fbf79118-9d1a-4da0-ad65-9ae8053833a1@ti.com>
-Date: Sat, 13 Dec 2025 12:28:44 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BD6xeNx3343550;
+ Sat, 13 Dec 2025 00:59:41 -0600
+Message-ID: <80202eaf-aa50-4203-8ada-1c7787ba7743@ti.com>
+Date: Sat, 13 Dec 2025 12:29:40 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 10/13] arm: dts: k3-am62a: Add r5 device nodes
+Subject: Re: [PATCH v7 11/13] arm: dts: k3-am62p: Add r5 device nodes
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, Nishanth Menon
  <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh Raghavendra
@@ -104,71 +104,71 @@ CC: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  <marek.vasut+renesas@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
  =?UTF-8?Q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>
 References: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
- <20251210-topic-am62-ioddr-v2025-04-rc1-v7-10-f113b156f83f@baylibre.com>
+ <20251210-topic-am62-ioddr-v2025-04-rc1-v7-11-f113b156f83f@baylibre.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-10-f113b156f83f@baylibre.com>
+In-Reply-To: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-11-f113b156f83f@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE5:EE_|DS0PR10MB6222:EE_
-X-MS-Office365-Filtering-Correlation-Id: eeca9da3-b4a5-4c90-8b2e-08de3a1517df
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE8:EE_|MW4PR10MB6536:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9c74acb-4727-41c1-5fdd-08de3a1538a6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|7416014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TnB1WWhMdGZFUVJnRzYyN25vSUgrZC9sNnkyb2VPMituekdvcDZyUWo1cGRY?=
- =?utf-8?B?OGtvWE1XdGxNS1VIR3cvdkpGSTFZUjlSZzFFQWxjb2tidk0wdEFLNlFzQ0V4?=
- =?utf-8?B?VlA4ZkFFOXFWcHNwcjlzYU1JZnNoOGtvNjJ6aDF4cXdyMzZQVHUzQTlnbFl1?=
- =?utf-8?B?T0ZLcDM4cWcxL0lNRHk5KzdSMlc5bHV6VVRRYVZWYjlBemQvN1gxQWgxWWFz?=
- =?utf-8?B?T2U5SlFSUHVnWnhBSXVta3FiQ2piOFdTUnA2OW4zUG13MmRQOHBtM1RuanBP?=
- =?utf-8?B?UkdINVY2RjZwZ0t3anRhVTRQM01VSkwwaUFtbFV5NG1BL05qWHhkY2xkdnRa?=
- =?utf-8?B?aWtMQnBWakdIVlN3RVpaV2R0c0p5VlhKV1hhOXRuUTZXTnY3cXBMTFp6QmZi?=
- =?utf-8?B?Tk9nWi90K2FoNkNLczBxbUJZd05Fbmwxakh0MzJYc3o5N1BsS0UvUnlrSVpC?=
- =?utf-8?B?Y21sc3RzTVJ0a1BTU0wvVGRsOGVFNHJmUmRVNHZ6Ym1BQUMxU1ZmaCttSTNL?=
- =?utf-8?B?TzZNOVRMcGdRSXJZR2o3c3BQYUp3WDNubWkvenVoclJFbWtTSmVjMjdoaDRh?=
- =?utf-8?B?bEFLcUZtZFJYMjRXS3lXY01jVDNjU2NINUdmdVdvak1rSmI5Q2RLc3ZTSkpV?=
- =?utf-8?B?eUI5MmtINlErbFgvNk1sZ1kyaVFmN3lObVY5Tm4xWm83OFV5cDVjNTNQU2t6?=
- =?utf-8?B?NDFUc3JNVGwzU0c5ZVVKUElvNnNzOXhodkJRU3VEY1YyMFVmKzdnZy91ckxI?=
- =?utf-8?B?MXYzODNBKzBXZjZoaHN2UjJCUlFaTXFyS0hsNVhobDZlZzhablloVEpEdTd1?=
- =?utf-8?B?Z2lNdngrOXYxOHd6d1o2dS9QbE1JTkxzQkY5YUl3bVNqUGNqM0NwUXFSZGRa?=
- =?utf-8?B?TnV1dnVjTW82VkI5SG9TUSt4TkNlYXNTV1EyWFdzdjlaT2o4Y3hnaEVlUnhy?=
- =?utf-8?B?ZGszekMvcmVqQm9YVnZSeU9FQ3VMeWJZQ3ZhSVZpY3Q1N2kvMi9LU0xtcUQ1?=
- =?utf-8?B?U084bXRxZmZZRWxUdkZLRU9COVY4SVdDdnVoN1R1OEFMeFNxWjVkTWlWSzNk?=
- =?utf-8?B?RTJWbDJvenZ5NEJBWUxYREo3eHlQTGZ3bk13WG5ZcitYTndIczdxUmU5aG5B?=
- =?utf-8?B?RmN0bE9RNXNlTVVoSFlqZnIwOEZVZUtDU2pPRG9xVjZuc0ticitRVFFKVFhn?=
- =?utf-8?B?YlhlRG1pT0Q4SE1UNlUwenlscFNHMnVmSldxRE9MUHIxNVhweVRRWTFjeVF1?=
- =?utf-8?B?WUZ2VWFjREFlYUo5cVlwUjgvemdKbjlRR3E3c0pKU0MzTk1DL2JGdENMbEZ5?=
- =?utf-8?B?NUdBNys0ZlBmZmVsa3dBY1NTc1lySi81R1RmU1VNU1pvYmhhMG9kcW5mS3JI?=
- =?utf-8?B?TVdsbmVXQ3hSbUdjQldmTFFoUkw0eWFsN0dLZjZVTTNURSsxSXIrY0VRbmgx?=
- =?utf-8?B?YmR0Q0JMZzNra2xab29UZDJwMVVCdC9XQjRNaml4ZGgvdTE0Nm9TTFBJKzdC?=
- =?utf-8?B?NnppNi9IMlNrZDNvNTlwZzBiSUd0REpsWVNJaC91d2twZ2xENTN0clVoMEl0?=
- =?utf-8?B?RG9QaU43M01xMDJWNDcyNGVqeEdYaGRTQjRLekNZMkdwcUtLKzNIbjhZQ2pZ?=
- =?utf-8?B?dW05dzAyb1M0KzN0Y1hzcWpEUVNsNkVUWG9oUCtjbE91SjVmNG5xN3RINndI?=
- =?utf-8?B?SjlHa0t5RzlXSS9abyt3SWNDNTJkOWRhVmVPaVljUG02VEZ1MkR4cjFBdFZh?=
- =?utf-8?B?R0VQYlBvUXQzR2lEMmZNeE1CTG44N0ozUmV3NXA1U3QramxtTVltTDM4ZmRy?=
- =?utf-8?B?WnRlYkJoWVFwRmZ3TDgrTEI0RHBFLzc0QTNZMWF0Y0NvbGlNS0JVUlVwbW1o?=
- =?utf-8?B?UU5yaEVNNFMwR1VmblpkRWR4MUNhSzgzV3lJOHVGbWdNaE5IOS9MUUhtbWdW?=
- =?utf-8?B?c0YxZmNpMFMxTTZLdUR0SURKY1cyU09SejNUSHZod01Fd0dGNis1RUhYSnlV?=
- =?utf-8?B?UjZNbkVVclZVVlBxMTZRcGNVelp0MDBGOTZxRkExN0lqUDZnQXYyRjN2UXRi?=
- =?utf-8?B?cnh3WmVBT004aEtVTG1YK0RMY0VTZEJHdTY0dGpxUHNYUTh6by9naUwyZnFH?=
- =?utf-8?Q?Lpg8=3D?=
+ ARA:13230040|376014|7416014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dlc5VXZzcXZWRHVPbE8wT3RwbkYzWmkySUpISmpDUnVNVGpGbVFQdllXZHpa?=
+ =?utf-8?B?a0ZpeStkVUhyNURMT2xQeWlTQlg4Z2lHV3lDU3orQ1c2OVhHVUQ4eCtZYU1z?=
+ =?utf-8?B?bXBCOWxWbEdSM0xqMjFLTmo4UG9JcFdQeGROWDl4R1JYamFWRlQ3RGE4UlN3?=
+ =?utf-8?B?ZDRpSC9FSUlnSk53Y1F0Ni9BK3BsK25VRmJCUnNNSFk5eURqY2ZZNDBMZ3lS?=
+ =?utf-8?B?RlVXNFY4SHhXMzdPRFZ1S3lBdnZEYUVUOFpIY2J6MHhncit6cCtkTXdKd1pY?=
+ =?utf-8?B?dC94RUI1VW1CS1NDNm41b3RQZjJJYnIyRlBUTmZKZHVmclBmSHpROTZyU3ps?=
+ =?utf-8?B?cHNMWjg4TkJBRS9ZRVViWGk2U2Rqdy9kYi9kcC82NVNYVDYwc2ZFL3Eza0F2?=
+ =?utf-8?B?UitUL1lRRkRld0NodHpNSTRlZDY0dUNpM0xsdXh5eHJDbExHUE1zTTNOV2pr?=
+ =?utf-8?B?ZlhqbHNvTTh4dzhHeEE1UzRNVjBWb21sbFI1L2ErQTUwUlFHdGNnSUtSVG52?=
+ =?utf-8?B?bm9aeVNac09KWFptZVZuY1lMdUhlN1dURDQzMTVsTzErQVNLVWNkN21zNzlH?=
+ =?utf-8?B?SUUzOHVOV3g3TVB4Q1AyL0FTYVA4QmphQlRxeUdvVlBNOHF4QlNvSmVlLzJo?=
+ =?utf-8?B?Q0ZoZWo0bWFWYy85K0hka3FSdHg2YnMrWUVpeUczUTFxYU9Lc1RhVGJIVmNv?=
+ =?utf-8?B?Tm9ycEFkTEgyM0N2ekZGR25GMkt1QThiMjNpQTcraEdhYjZueTd3UHdzL0JF?=
+ =?utf-8?B?ZkVGdmw0L3orZUpRVzNabFJreXI0M2dFcW02WUtLWnBQWDZLYzVNVERzeDVI?=
+ =?utf-8?B?dWRxR2RkSmE4d1JycmxLeGMyMXY4MHh6NzFPU2loVkFkTmNUUUcreTlWN3Jo?=
+ =?utf-8?B?cXpIeVdTSFRLT0FwK2tBci9jOGZGUTRTZzA2WnhKdGdQbkh5Skw4K1ZoOWJO?=
+ =?utf-8?B?TnNiWlhuV0dVTnJjWTh2OGlyeWdiOGV4N2dQS3dLU0ZUc0FKcXU2NHpadGdn?=
+ =?utf-8?B?YXNGSHJVVmltM1RoR3NOSVB4bmRoeWM5Vll6TXJYTE40bWZBM2Fqb2gwSEZ6?=
+ =?utf-8?B?V3RzSHVSa2FOU3lnQXkvRnVPZTR3TUhyMk9ScjBzOXJvUFU2dzVadVl0d29F?=
+ =?utf-8?B?RldYUE5Bbm1IZk5oRVJ0V0tWM24yOHljY2Q2aW9HbEJRUEZIbXVEam9jREt6?=
+ =?utf-8?B?eGFUWHZJRXhzc1ZvUGtlMHY4MEJHTTFtU2txOUk3aCtRTUJBdjhCSlRPWW5X?=
+ =?utf-8?B?eEd2OElGVytSRnBCZ2psWng4czM1Tjh6UzNTdjRubzZVdUpIcXN3QU1FTGlQ?=
+ =?utf-8?B?Z1hCNncyZ29CQVdKUmFUdE56amh4Q24wcTRFV2tMNkJzNFhsem9OeGFOWkxD?=
+ =?utf-8?B?eHdBUGRMUEhHcDg4MHBuR2VzaHJEYkJsWkkyRW9NS0xBQ1JDanlBU1lJbWtW?=
+ =?utf-8?B?VFVSbjdQK2lPUG4yd0ZDYXZDdTZ2VUJlMlplM2YrVkZwZWt6cHFickRpOVJX?=
+ =?utf-8?B?ZHRZZmdHcHA1NzRra2ZUbURSSzFGNmxVK21pR1pmck14blR6L1JRZ25MWTRS?=
+ =?utf-8?B?OGlYU0ZrcDIxZGlyc2d6NHQvNHJCdFBES2lPWXNSb1NxbnJoZGwvUjRKTGFF?=
+ =?utf-8?B?c3dkYzBoQW9IVHJLcGQxZVhMdUVsNGpuWUFKMm1ld0pSVmtET2tjcmlYb3lt?=
+ =?utf-8?B?VHRMRXFVUGI0MVAzdUxIMEJWcWVoaXRQRkZuZ0ZHR1RWL2FRUlNUVEp0Ympk?=
+ =?utf-8?B?OEJ2Wm1mcDNxZHlHYmFPYjFsSXVPekwwWmFPM1FZL0ZrcE83YjdNNVU2LytX?=
+ =?utf-8?B?MUl3R2gyWWdMUks4eXhLRkZUZUxuQmlLTndaNFdqeHQ4cUlaRDQwRitGOUVO?=
+ =?utf-8?B?TkUwZFN6YnFtUTArN1ZwMkVMMlBnL0gvOEZ6MmdINE5maXRuZmJ6WFQ0cUhH?=
+ =?utf-8?B?U3dtbXVZK1RvZ1Z0N0IzRGpXeU5OY3k4M3BnaU0vS242N0gxaHhKZWpTZ0Nw?=
+ =?utf-8?B?eWlZK2NDNGEvZlU2MUxEaTVaWkdpZXd1WGk2dEQrMStIRzI1WWJ1dHJJYzZ1?=
+ =?utf-8?B?UkFYcU8vaGRMY3EwOUp2eTF1M3hEa2tsMGxaRXVtejVZNHJjbE1GV2ROVitw?=
+ =?utf-8?Q?QsE0=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7416014); DIR:OUT;
+ SFS:(13230040)(376014)(7416014)(82310400026)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2025 06:59:00.1754 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eeca9da3-b4a5-4c90-8b2e-08de3a1517df
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2025 06:59:55.1817 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9c74acb-4727-41c1-5fdd-08de3a1538a6
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
  Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE5.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE8.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6222
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6536
 X-Mailman-Approved-At: Sat, 13 Dec 2025 15:04:07 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -193,14 +193,14 @@ On 12/10/2025 7:39 PM, Markus Schneider-Pargmann (TI.com) wrote:
 >
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 > ---
->   arch/arm/dts/k3-am62a7-sk-u-boot.dtsi | 8 ++++++++
+>   arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 8 ++++++++
 >   1 file changed, 8 insertions(+)
 >
-> diff --git a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-> index a70fc88317e04de032e4da1428e25eb78ecc30cf..84f3a5c199b344d17300b9672cb9c77f607beb6c 100644
-> --- a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-> @@ -16,6 +16,10 @@
+> diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+> index cf087c6e343a8af6f4bb2093bb6c3f28395a2686..26133d818973214914f68838f678dda5aba63970 100644
+> --- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+> @@ -13,6 +13,14 @@
 >   	};
 >   };
 >   
@@ -208,24 +208,17 @@ On 12/10/2025 7:39 PM, Markus Schneider-Pargmann (TI.com) wrote:
 > +	bootph-pre-ram;
 > +};
 > +
->   &cbass_main {
->   	bootph-all;
+>   &dmsc {
+>   	bootph-pre-ram;
 >   };
-> @@ -68,6 +72,10 @@
->   	bootph-all;
->   };
->   
+> +
 > +&wkup_r5fss0_core0 {
 > +	bootph-pre-ram;
 > +};
-> +
 
-please have it in your todo list to push to kernel device tree. with that
+For this patch,
 
 Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 
+Please push to kernel device tree as well.
 
->   &cbass_wakeup {
->   	bootph-all;
->   };
->
