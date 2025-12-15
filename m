@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48EADD5B84C
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 16:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D1D2D5B85B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 17:19:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B11E980325;
-	Mon, 15 Dec 2025 17:39:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BE4B801CF;
+	Mon, 15 Dec 2025 18:19:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A082NCr2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L5XePVZg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47746807B1; Mon, 15 Dec 2025 17:39:08 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id F2BC8830A0; Mon, 15 Dec 2025 18:19:53 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A825C801CF
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 17:39:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF3E38003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:19:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-657490df6f3so2090590eaf.2
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 08:39:05 -0800 (PST)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c7613db390so2386146a34.2
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 09:19:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765816744; x=1766421544; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hMzRlEAloDSg0cPIuNZ7Jrds3z4TZeUPRE+6DXAzqOs=;
- b=A082NCr2CdvKajfB8cpice/NUZUxDlPHFpci20Gr2Q8pweD5U/5JbCwU011BF1tZK0
- B78D8beShCOWQoJfXcAQ689LuwQYLjaSNCALchKsNNiHNFRy4jzboU/iZ7lIq0tPZcAQ
- lsPMXnYNX9CrEvXLVDv+2237HMtiadttvJjAY=
+ d=konsulko.com; s=google; t=1765819190; x=1766423990; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S52kLHYcf1lbaBSiSQ7D0ojVeNlk85CtcliphFdg8ho=;
+ b=L5XePVZg4AyZqu3kEqk5S5XgSVYxeDAYbaIyTJ/084gGjv8s5C6NaETZ9DZYkFrDp2
+ mhRdU8nGPL4igmQlXbyk2ZmAjFOyZmmw5NvspM4ke1nmw26cuGjav6qgBnZaukhD0LQU
+ 8U0Gr10y2nBLNJsh2LuidkmNccSUr/0cTK1ZY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765816744; x=1766421544;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hMzRlEAloDSg0cPIuNZ7Jrds3z4TZeUPRE+6DXAzqOs=;
- b=rXYD6hh7q6+1lLZzu9HAeuGqZ70SwbMuPtDyyJYKZ/GPAqKhBDXxRbO1ib6wpAvu9V
- 87mUiFLuJ8AQcRP8DeG7XHhRVM3vHljf1JIWLV/AsYfgAtzGY6i2xgcmu7J3pkqIWHNG
- YuVdaiUg038rghPXyDQ0//4sAKTin/rNIBiBpSFDKbaoy4XL58erTsXhSqz+q/lHdIV1
- al3WurZrjtrOAARrGPLGFnnYLb8lCB+19oGmyJhDpccijP7zWeqY7/OckKxYMsx/SoQ6
- EE1PEomskLY5BeNwgxBjrPjHmvOKfapqlni0/GSO3GHSUIVml0gutWYwn2kxPwpEGPW9
- b4VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAV1ST/siB6TElJ2vgdAfOh8/3M8OZ6j1IKz1d7y88Kv61fYS7onzQBePl28hJySHPgtFHZ/g=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsrGC9l7jnm2Re8FfvQYrNQobmb4AG+1HkaB+0+494FlbcGgu6
- b076VDKnrnGnc3lmMMJCZrSXDbnXt8KfyMFTv+yzZzxRYPyXzfR0Zz5yUPn5ynlPVfc=
-X-Gm-Gg: AY/fxX6SPhpBJXQtMseD88agz1vZXqrFegGzCTMXdKhK2Y93A50FwUHjX7rO8xS9SfB
- dggc9URjDcDTKoMJ0K82xGNr7aZpJdUquygZ4NpZeIayydcWqlf7/CsCiRLu291gvx0F5UUekLb
- I2yU9zgOKVhn+WcaexM8JOJshOt96iuyd/ZgFzm2yTHXTAqcmGrw0DolgrcC25DB+fVTdrWAmwp
- qEgTN1ILDe6NCbKECS4P0ipHeLYblXHQVpV1dfNUBL3NXx5+Hr1CL6brb7HTCTtCpb7S6xOQELt
- LjaOxQtFPtBOIf4N8og8t6kFuKqQvYc6WO0JH89o+3sDh303Lq4m5okqeu7684wgPCEjJg4sjum
- ngryOiqJ76RiJQ9YtSEgxDPm8uqpPOUtw0+0/rFFIwKMymNChIpSPc8/ZO0WD15ueu1hlaPR1yU
- /ZnJK/NZ7QmvMTRNRunedNCz5TYIvVKufuRzIoU0L7ESr2CIJ6NQ==
-X-Google-Smtp-Source: AGHT+IHL+So2URK6ZN1PaNToQHTajAl+LmKmXYx/3wtFhOzNqomJSo3jj8TNlkRoWy1zxKlrdzAa2Q==
-X-Received: by 2002:a4a:edc8:0:b0:659:9a49:9003 with SMTP id
- 006d021491bc7-65b4525d3bemr4041511eaf.48.1765816744316; 
- Mon, 15 Dec 2025 08:39:04 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1765819190; x=1766423990;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=S52kLHYcf1lbaBSiSQ7D0ojVeNlk85CtcliphFdg8ho=;
+ b=LSfjqC6+9Q3zaIqmmrVcYGtJmXAtJcRnTPek1IAvGzE7lNlF/9+Qt/7AfsSwLwWtQq
+ QfGr4K9bq9Ki8L9uMpNPs2f24YcDHiY6DWVwbpyfYQp8OtVJKSjAOyzBXBUpIE8d1jT5
+ 3S1mC85zMi7ysY0ptfz6XESo/OP9H8RdzpmM27UZIyuMvOGjx5XAEXG4GfRgAi8Frj6l
+ 2dC59mXkoXrXvSIVifHhIklmhWgZ4n4lwjwcUennYsy6zS2Bmv62d/aClDVhcoATltcK
+ I2csB1zvG2i5I+FWDsC2eUbUSAN8y5j5GbMd5Z7sSs+c848CRbuEHsFIybNfobbtNos0
+ 3YVg==
+X-Gm-Message-State: AOJu0YxAAUZB0MSfWERM1tJommVUGf+iF7sGvx5GyL0Tegal0QOFwVy2
+ MZNagO0hg3DMWhg2C2u8/w0d75JFq7IyjFi4TkJS8H1lHI4k3SJEg+pVGVHEM3PT/l0=
+X-Gm-Gg: AY/fxX4RlnUmoqFiN+Nxud6DdMh091KstLM/k6PWqC3a5DFBX4t1IDznvXe42df9tSI
+ JDZ3UODPJJd4b2Bf67NhQAYjz3unuJEwmRsu/sOjUtgyaLd0z3CzlwRUO+gZPU4nYG3Xht9itBJ
+ Ur7E4PP6b9s0BJiywUDz1b6u3cLPJZ9fdcCJZxSH5u5tUQyzD7hNvEj8fSBuylkEykFY8G6kkcU
+ MPqXqmtWFrcymWEe6/IUiUwCd2UOmzjyInG5P2p3jPu4OdFy+kHq1g7JHtoGKP2PP+mHRCM+wJf
+ OZ21RuFgWVvV9QKFd8sosU7n+FLILQCWntGU4t60GlcqCqzN1XOl7S95mJzRrbAhDut9jcbfa6Z
+ wr2dUKHarofYpWBFct375Mly8exXCxVJ6WQq/ePC5drqMl5FIvi6rqTnn/C0W4VpNKUe8UaBSdG
+ 9E0OSyl7gjkstViNB6BQaqZOJkk8ZoMYEPHFpFHNPTUPyTlga8
+X-Google-Smtp-Source: AGHT+IHdKsfGYh3bbA4eXIqdRFIf2Nv80AdL/bTCK7FiKO81r1IkfSWmP0cpsag8jIneuIruteOMWQ==
+X-Received: by 2002:a05:6830:d1a:b0:7c7:8280:9205 with SMTP id
+ 46e09a7af769-7cae83b81dcmr7287697a34.37.1765819190468; 
+ Mon, 15 Dec 2025 09:19:50 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65b35f2ade4sm8226289eaf.4.2025.12.15.08.39.02
+ 46e09a7af769-7cadb345977sm9710691a34.29.2025.12.15.09.19.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Dec 2025 08:39:03 -0800 (PST)
-Date: Mon, 15 Dec 2025 10:39:01 -0600
+ Mon, 15 Dec 2025 09:19:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Beleswar Padhi <b-padhi@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: afd@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
- used by PPA
-Message-ID: <20251215163901.GS303283@bill-the-cat>
-References: <20251128150455.3279166-1-b-padhi@ti.com>
+To: u-boot@lists.denx.de, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: Simon Glass <sjg@chromium.org>, Kory Maincent <kory.maincent@bootlin.com>
+In-Reply-To: <20251128-topic-simple-pm-bus-optional-clocks-v2026-01-v1-1-e38040c88b6d@baylibre.com>
+References: <20251128-topic-simple-pm-bus-optional-clocks-v2026-01-v1-1-e38040c88b6d@baylibre.com>
+Subject: Re: [PATCH] simple-pm-bus: Make clocks optional
+Message-Id: <176581918938.1844985.2310142573160120855.b4-ty@konsulko.com>
+Date: Mon, 15 Dec 2025 11:19:49 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6GNRVbaP+rpRk9Sm"
-Content-Disposition: inline
-In-Reply-To: <20251128150455.3279166-1-b-padhi@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,85 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 28 Nov 2025 11:21:21 +0100, Markus Schneider-Pargmann (TI.com) wrote:
 
---6GNRVbaP+rpRk9Sm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> simple-pm-bus binding requires either power-domains or clocks, not both.
+> Allow clk_get_bulk() to return -ENOENT.
+> 
+> When no clocks are present, bulk->count is set to 0, which works
+> correctly with clk_enable_bulk() and other clk functions used in this
+> driver.
+> 
+> [...]
 
-On Fri, Nov 28, 2025 at 08:34:55PM +0530, Beleswar Padhi wrote:
+Applied to u-boot/next, thanks!
 
-> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
-> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
-> top 37 MB is used by PPA and is firewalled. This results in an exception
-> and the boot fails.
->=20
-> Introduce a new defconfig for AM571x HS platforms and set
-> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (aligned to 2MB
-> as per page size for ARM32) for the same.
->=20
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
-> Fix boot for TI AM571x HS EVM board
-> v2: Changelog:
-> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
-> memory node in DT as it is done by U-Boot as part of FDT fixups
-> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-comm=
-on.c#L72-L107
-> 2. Add entry in MAINTAINERS for new config.
-> 3. Update commit message to use memory size in MB than raw hex bytes
->=20
-> Link to v1:
-> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
->=20
-> Test logs:
-> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
->=20
->  MAINTAINERS                     | 1 +
->  configs/am571x_hs_evm_defconfig | 3 +++
->  2 files changed, 4 insertions(+)
->  create mode 100644 configs/am571x_hs_evm_defconfig
->=20
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index b43dae882b3..e5d564cd760 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1780,6 +1780,7 @@ F:	configs/am335x_hs_evm_spi_defconfig
->  F:	configs/am335x_hs_evm_uart_defconfig
->  F:	configs/am43xx_hs_evm_defconfig
->  F:	configs/am43xx_hs_evm_qspi_defconfig
-> +F:	configs/am571x_hs_evm_defconfig
->  F:	configs/am57xx_hs_evm_defconfig
->  F:	configs/am57xx_hs_evm_usb_defconfig
->  F:	configs/dra7xx_hs_evm_defconfig
-> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_defc=
-onfig
-> new file mode 100644
-> index 00000000000..7e44ee5221a
-> --- /dev/null
-> +++ b/configs/am571x_hs_evm_defconfig
-> @@ -0,0 +1,3 @@
-> +#include <configs/am57xx_hs_evm_defconfig>
-> +
-> +CONFIG_SYS_MEM_TOP_HIDE=3D0x2600000
-
-Sorry I missed this specific part before. Why isn't this just being
-changed in am57xx_hs_evm_defconfig ? Do we *need* a new config here? Or,
-and this gets on to a different topic I've been having with Bryan, is
-there upstream value in this specific config being added? Thanks!
-
---=20
+[1/1] simple-pm-bus: Make clocks optional
+      commit: 447bd8f1e5cf4d3c7d50df40d8cb46c7b911d7c5
+-- 
 Tom
 
---6GNRVbaP+rpRk9Sm
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUA5ogAKCRAr4qD1Cr/k
-CnUgAP91FXDrqLn/mdGUFuZlRp7CMaY3hjwZFwaPnHYmKWdtJgD/fwgcsd1hrLoN
-TGnnVl/Ex5OuWb7nixMptsoWTB4PDwk=
-=QfX7
------END PGP SIGNATURE-----
-
---6GNRVbaP+rpRk9Sm--
