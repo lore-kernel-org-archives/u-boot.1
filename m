@@ -4,146 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EE6D41D74
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 11:03:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45444D5B16E
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 12:25:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BCE2800D0;
-	Mon, 15 Dec 2025 12:03:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DD3080050;
+	Mon, 15 Dec 2025 13:25:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="EQsgBoF+";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="YgR5DDAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1BD6805D7; Mon, 15 Dec 2025 12:03:20 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 4B20980077; Mon, 15 Dec 2025 13:25:18 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F344F80050
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 12:03:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 591A08003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 13:25:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MFVUhBGWTL3VbxctLD/fbF8hi5WlAkToJWHitCnqohE/SixYRjJ+PhSbsC0hz5rvoFoZF29D3eClAiXvX3vnFvhEbIveCQHT30NWYcOKk3d4XFSQPQTm58Fsen6PdLq59aX4f7zAV8zvZJNM9haVjBacfyY8xYvu4MYa9Sem2ae3n415jM11we1kolV2r+ICmSu1QrFps2PRaGgeKjxK31thY9Emw/csmpsW7BtKjuKBk9dlbYfRAXojQVsddOxnDim+tlDH8sQpZ70L/NUXbtMdrRoN8fAKS9OQsWoxhU4LP4zk0z9dFSWTaf773G8LL3Y0LeqdvfpZBI4sk6Gu5A==
+ b=Vy0/QO/WwWWQb+j9jRnTO21JbrIrdI4pJWHrq56ZVy/DfdpUpXHyWy6rU2SQwUoVob8slecoNxEEfYmQ7p3DmhDBTDRBAxoIl0lesTWnNDO/5ErMP8JyKMUy6Zuz4n8FRka6b0G7ydDdCuZp66q4Jk+GLKyZSHsum936amsUKz1P5WY5ubR/GK18ydLhqKUel0QhmFZl31FDceQ9+t5qH192nrMGfflAAqVXikRPY18DbZ8zvnwDFdKdsWEEHG/qtwZZdm+wT86vPTNZXRoenhpoSbK/Ce97W9B6opo+kBXARJZhWCTSooCPC/Y907g6rVrmIaPc9RXzPCUx8oyfCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y3t7NuvLTUL9SiZLniALKFHf07W6jYXgGDhoHEm8zeQ=;
- b=vOf5+ZHgSXiD2KCZCrrqKCL0FGj0QrdYOwFn9BdRnA2z0T6vrLZuWUuxXiYpjeE/t03PlL0vmvdVmuqOGS3Tx0ZyANO7k7sLaZ829XbF7Y7vTialtxJbdk+Z+0rL1Uq9co7NiWEjQvNcS2Kg/q3DY1tnQFLBTThAsf3rpfAyC2H0pcRe9puIOxmwbqJ6/1ukG4EqB7Z3OejSQH1zXK4kE5KVmHhNt1EYx0tUR0dKpgmi0vqZRLZFDDmVjCxLE1aO61yDxjgr/kAMyCbOmQ7w9k0nFoGNr9NjrJN64i1dCbr99HKkv6YoTuFJ8NvdV3yO2mwhJnw45Q4rxXOUi0Bd3w==
+ bh=nSBe4Q71giBxTTy8nDq3qL8fOnPn4vgJhA6xg4QdyiA=;
+ b=EEPKxmYnGuLQbVDsmJnEgpd3P4lfntyOt+yPgL517YWEsAA3UUgB7yffO9Z7pU/MVm9yoC6cpyV/nygHkjrZGSGqhcPcHT5rAFa7jh0UvDNJN/9LSLte4AHl0KgLrT0TkAipB6TKYyxRqXAMr4GYR3OPqLNPF0F+AipE60BYrQ584vcfQD+xBkw4KB+KpwwNZZFv3zedKyAbF9YQLKXH91AmaRzA6l1digixpexxAYQFUg9seeVFPaC6SjfLT4bR2OEUQ58SZmkGCKx9Ee0l2ngwDtbYCjDRSXlhitN51ctdSS5RA7YzWH7Z6oWEr5wUy7ifoVhwRylMCUx0tDzhXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y3t7NuvLTUL9SiZLniALKFHf07W6jYXgGDhoHEm8zeQ=;
- b=EQsgBoF+tXIZLbsHQm9TBLRvxK24Jw6L7B+k5d0H962pQxD0LOO4XP+ymp2xXKQHi10I6r7ly0SNpgpQr+cb2Sm/tXqJSjkof+NnTOP+fvJcfUH1ijA/i9JLG6ln5fExpHr+IUVXoaCYyJjs7bYKvKe6qlNqPm1VZGOWvb6WQA6wsbvmUV28TJEJQxokcy69uqqytuACsaOhd3BHArmqZsEjOF+JuOswSt2aPDsDn9RhFdvNVlbX6G1zQ88W6s3RcTD3ILLC4omzWLA0ZMto0pybvgCGdoRakgPCXICAoRN/2rldInqZ+webOTaUVQQvOQPq0mF8pzKw3rIKm+bcNg==
+ bh=nSBe4Q71giBxTTy8nDq3qL8fOnPn4vgJhA6xg4QdyiA=;
+ b=YgR5DDAJIz2S+jQJyOmu3nkPHnaD6rdUT+xplL2wCyRgbhEkvOUCWdlYfNT8Q4kz4/B++eZJHeil5TVYlW6E8go5LP1mm6eWm5ShjoJkCNIujAANXgnRYqWYkdmELjMIJafmE4diKAAhuD/aM/KKG1tnM/S36kfMmPUum9SuGoQ=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by LV3PR03MB7658.namprd03.prod.outlook.com (2603:10b6:408:28d::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.11; Mon, 15 Dec
- 2025 11:03:15 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9412.011; Mon, 15 Dec 2025
- 11:03:15 +0000
-From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-To: u-boot@lists.denx.de
-Cc: peng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com,
- marex@denx.de, tien.fong.chee@altera.com, tanmay.kathpalia@altera.com
-Subject: [PATCH v1 4/4] arm: dts: socfpga: agilex5: Add dedicated eMMC device
- tree support
-Date: Mon, 15 Dec 2025 03:01:17 -0800
-Message-Id: <20251215110117.19371-5-tanmay.kathpalia@altera.com>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20251215110117.19371-1-tanmay.kathpalia@altera.com>
-References: <20251215110117.19371-1-tanmay.kathpalia@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BYAPR11CA0059.namprd11.prod.outlook.com
- (2603:10b6:a03:80::36) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PA1PR04MB11384.eurprd04.prod.outlook.com (2603:10a6:102:4f5::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Mon, 15 Dec
+ 2025 12:25:14 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9412.011; Mon, 15 Dec 2025
+ 12:25:14 +0000
+Message-ID: <8f5fc06e-ffc5-496d-a0ba-b8746a4a4b89@cherry.de>
+Date: Mon, 15 Dec 2025 13:25:03 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] fs: ext4fs: Free memory while handling errors
+To: Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0207.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ad::12) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|LV3PR03MB7658:EE_
-X-MS-Office365-Filtering-Correlation-Id: f29c67d3-4402-469b-eacb-08de3bc98bdc
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA1PR04MB11384:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7ef31450-8b56-4c2e-14b4-08de3bd4ff88
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JqHlc8waLUah0RNfzI3x0yI8QfgUDjae3TumAb/9pEJffdhD2MUl8c1Cv/Fs?=
- =?us-ascii?Q?Bu86LzUcRPaHluHldee9UZj3zbm3ZqVl0rKU5s26fOv/R+vGfEhpvyCWuAde?=
- =?us-ascii?Q?CnkFmg7yYALVLFvQ8KxWdtmY45OFwwmfva4fv9r0XGFP9y0BnlOPZ1ma+tge?=
- =?us-ascii?Q?8Q3+oM+T7XAU74vddFtOlpimIMcnQhJKiLzVPWZhDzn8sjFCY4HZgTnNN70m?=
- =?us-ascii?Q?3IX9PcjTrhKGQLxm+Twj8Qz0W7ERVn/yQOaNkZm/NTITGOZhbH+5wVD7sUdE?=
- =?us-ascii?Q?Rb/8F7+Bzu/e9QxcVryo8qBDV2J/nmjUK34JrD5m3kAPLLNROC/tuDOEHZjv?=
- =?us-ascii?Q?W6vV8z1jD49vTjrezPIxzFT0BndSoHf9k8WdRUci93b0Y3AAZBzgmdKXEnrv?=
- =?us-ascii?Q?6fzCF2UZsM4t6KanBS6a31AtoFKHsytv+syYYWIJ4gwOLB1rTCEffkQI/0hO?=
- =?us-ascii?Q?Hm0tqK7lVM3mvbg03wMPyAiJmleAP1qFnlA/TiU3zNpbdlWOOSQMRFVoOu/C?=
- =?us-ascii?Q?ZuoUrdXaNWGOfXwIyJIwrehcpxJEWTVY6lXAXkoyZiX15y8M0G1EnZG/IhaP?=
- =?us-ascii?Q?FnjknNopwaaxeDi2YnYBT7ejSw9xH0FOe44jskRT8OKSjJkFKzOI3ZnxlvVs?=
- =?us-ascii?Q?imH1ChMfIWgxbtAMOPipG7JLvLYYseJAhvMVcP/IKphtaGAKWOoyGyk7XsfW?=
- =?us-ascii?Q?9U0/RaIr19p2UHLzmWoLH6oE2HY/qRWqHLnvw9EmfR3cQITMerkYQs+f3qJx?=
- =?us-ascii?Q?Xqk99hvcubkip9kjFJLavoLrftoHLPqM/7Go94R7ihXgZbeQ/p6VlMUWpSaV?=
- =?us-ascii?Q?kWte1QYbJv5t6fvQNozXakawdxl0ycVh+zPCLhZXuWetLo4/qaICvtkI2ydE?=
- =?us-ascii?Q?Cu2U8+RTwzBwLauuFRbUARhM+cZ+QiIst1aAWj7mjLtqk8RwjD05rDj13EvC?=
- =?us-ascii?Q?e3C4ivdKIvi7YCOBTPoAA+jF4YHwbgw1XuCrgCQeQt4uFz1sOmO9Iq5JLypl?=
- =?us-ascii?Q?/Zx+wbr8NJF1puasSwuAIZKiYC8ZpOQkUFLM4nHL6yWSwd02ubGaMBovRZzv?=
- =?us-ascii?Q?jTPQut4Iz2vmoafMrRiv2JJGzlsvRNZ3PArI3It6OVSdh1hhS57j5eKUALFI?=
- =?us-ascii?Q?vJDqowRxWOR0n9qaEMwRkMpz6cRLz/qxqdvnZiiEQsoBrUQqYju49VEhlp1N?=
- =?us-ascii?Q?baYhJAmG9g8PMJ6M/yZEN6T0sE47aJ7my1KZiMyJ/bTFuacmxh8Fg9nGJFu9?=
- =?us-ascii?Q?TuUCtURJZQVhMpoD5/LdRn34dXMU5Vao6HEZQZBzLvZlGrb410sDfAgbkKmW?=
- =?us-ascii?Q?/HdXc0b8kMdsIjZBdvld8Ypbf8GKX86YoUTR+LyPMGF/DbxK5GNDKDDEje8D?=
- =?us-ascii?Q?0Q8LRaRERYfh5BUUSWBUsvD3sg9nqnrd7o8doUW6LUpfJZt3uFqmI+Losuzk?=
- =?us-ascii?Q?RYVcg6FLkcSfnt3wMPNeHJo/+DxC+iwS?=
+X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|10070799003|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TTc0TEJLVGtTVlFWRnpTd3hYbnNlRmVGcjZ4WUZaNzhISUdXN3o0bTNxRHQz?=
+ =?utf-8?B?bUZXSG9wTHFmYU5keVBpMEgyQlVkZ2RFVlpoL25JQjVMYzRtNEJIS1FaVzBQ?=
+ =?utf-8?B?SjdmS3U2WVhZTjNBYUd6YUJzanhLRjM1N1BrZ3A3WCswczF1UUk4c01DQzRS?=
+ =?utf-8?B?aGZKVXR5N0RZbmhNaWdTZGhoc1dCS2wwQ3AxUlNoSEtsei9HSXJhWjZCT2hG?=
+ =?utf-8?B?MFArRStGTVFoSlJIeFp2REpXWVN5T3pzQnRycWRhTVpSczVkdTNoMWgyME9s?=
+ =?utf-8?B?cC9iR3JnakJ5NzVncW53aDNDY2hRVExReWVLdGh6cDBlc2gydzhXWms4MThx?=
+ =?utf-8?B?K3FGTWlsNlJZOXpqZGhtSzVESDBobkdQRlROQmowaHc1allYM1ZMV0FRd0FO?=
+ =?utf-8?B?bm1aMG1PMWlUMzFUbEROQWRZUlpnSkNYSnZvbkNTTlhNZHNXTmlXVGVnc1NP?=
+ =?utf-8?B?NS9qTUZrSjJNL2d3UGV4M3o5eE8rMnZsWlRZTzVlSktpTkJkMFRFa01NZytQ?=
+ =?utf-8?B?ZFFwM3cwd1U2SXEwMXZ2Y1BacHVIeVhZREQ2ajZwc1R4RmFYY1NZUldnTmxB?=
+ =?utf-8?B?MTdCQmpOYUxROTVKalN3bWo2dWVIUVZQblkyZ3NIdDVTVWt5QzVXR2drVDhn?=
+ =?utf-8?B?TkIxbWs0cHZhMVM0aERla3BJZHFlakx4b0NZb0RmV0tLTlhYUlBwekJnR0lo?=
+ =?utf-8?B?UkNNT2ttYnNMb3R3bXE2R094UGRYTlJoalBHTVV3Um9ZU1daaW01MUpyTDRI?=
+ =?utf-8?B?T2FkVGdTbUJnKzd5S0o2V0pDS2VQU3ExSkN5d0NWbHozazhvSE1nNVp2bEpr?=
+ =?utf-8?B?WWRSNGFXaGhjTHhGaWdSYkpmdXh5VzVETGs3blc3OHNtaGRhVVd6ZmRJSW9R?=
+ =?utf-8?B?Y3NTQ1JZUGVpR3pIdzJva1ZKK0lHSStYd3Z4ZGdwbWlnYTFjNGx0VDlibjlN?=
+ =?utf-8?B?Q3R3cTBheXFrcmVXck1adlRyVndTTElFbHBmZ0IrbU9oZHFaYUY4Y2VnWXpH?=
+ =?utf-8?B?NWcvL1Q1cUNzOE1rdW9wbjh2YU8zWENHODY3SXRUU3BadkJrMEk2aE5iUTdn?=
+ =?utf-8?B?SkI5L3B4c2RoRUpvVGRQTWozR1VZWnhMRFBqYjg4Z0tXenpObld4WkRNL2p1?=
+ =?utf-8?B?NjA2ZFVXU2JKL0YrTTE1SklyYUx2dm1qUTd4dFlvK2M2Z1BoQ21HM2U3ZEM3?=
+ =?utf-8?B?YkhUNXBwcFB6eU1IaHB2a2xVWFVKRjU2S2MySml4U0VJaUhrZFRXU0VDM2pi?=
+ =?utf-8?B?aUhlMXBhS2RwbSs3bnZYYktpRVl6THFDeHJBMFlOMW9jZDNOT21haXR5Qzkz?=
+ =?utf-8?B?c3NKUnIycUJWcDA4dStuRWozblQ5TDE1MGlha2gxZmp5MENucXNqYlhiOXh1?=
+ =?utf-8?B?Nk1jdG5FRmd4azllNTZWc0QrMHQ2Tk9MaXY3NTA0MGJTOUZiUHU2bU9oNU1R?=
+ =?utf-8?B?YTBzcWJNMHpReWJUL2UrakwzVDlBN0lkUXZ0WUV1OHE1VEJkbG14eUJJNEpk?=
+ =?utf-8?B?MUUvdXozTUJkc25tUUkra1U2R3UvM0ZQMXA4ZHp5YjdTTjhrZURrTFVyR2Rh?=
+ =?utf-8?B?UHcvUzE3K2pFaWJCZUVMdGNnSEdUZURDZHJ5MWZkR2hNY3BpbGl4Ynk2YjJx?=
+ =?utf-8?B?M3czUlhhMEtia3ZJVjk0U2VQZUthZGV2YnBRSm1FVnhUZTFLTVJ5N0REL3VE?=
+ =?utf-8?B?NkcxdFphMUo5dTUyeUtWemV2RzNKb2RaNXE3RlpDd3BGc0ZtQWdrQ2lrLzJu?=
+ =?utf-8?B?cXlITUZGOEpmSHpEaW1zOFNFemd3cWU3QnNFaG90M2RNSXhvQ1ZHbFpQd3FZ?=
+ =?utf-8?B?ZVhrMGxZbTBjbDVpa09WWGh3ZFJ3QW1COUVybTNCRDhFWTF5akdUTVZ1U2dT?=
+ =?utf-8?B?ODM0VjlYb3dzN09qWVlPUDJSc3pyV2hha0M2cDB5SmFRN3dUS1o4N1FrOTZ1?=
+ =?utf-8?Q?o04MS3Rgx0t3UnSBiccRKyqABH4d3NZ0?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(10070799003)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vVSIDVETo62C9JN5KMRfgsX+TeI+8QqRc0WuZDIgHt35Fs9MP9Wyb5wT7JZ2?=
- =?us-ascii?Q?UM4UWIGlA/oo+aCRX5G++ZP1eJ/nffoxTW74McuxnpPGlUd/YUIxEHy8k7fr?=
- =?us-ascii?Q?4unzzS8xTdRMWRmyAQQ2qPU56WiEQqeJxyNwTYhnfOI7sY8GUwS2Qc3OhM6u?=
- =?us-ascii?Q?H72C+DJXrrHt8VkySr4ZxDHOmzD0AWRDrTlbX3XzBMyJ4Yk3s5M9hPAYulOd?=
- =?us-ascii?Q?8fZy6seLkSoo5whI42Yp4GklK0attCGbCOET79cqnmnfkphoU7BKqNoGz3Xk?=
- =?us-ascii?Q?jHP8eoBhsYKkedTTrreyh6Ex8UzDVOHJbm9f0+6rGsROD9mizE7eDSRGcfoH?=
- =?us-ascii?Q?W++mMDMZWygC0MTVIWgbPomILairs6iht50y8EXqroi+rMpnWfs+4aQZoFFr?=
- =?us-ascii?Q?YrGcvuoyYtaV0KiMUuPTJSjEcNtvh2M6OxQv3b7Zhfjow5rIx6bgOgCmtGnb?=
- =?us-ascii?Q?sz2G5MbRJMm94OR6hfGp+rc+KHNtBFtXeNjmJhfRgbic10G6P5bIDZVgNwI4?=
- =?us-ascii?Q?F/B/u59vZSLata6gfx00kbA0GYq8XhrgUNHTIszIg3SmArQH4i2g3Gl+FkB1?=
- =?us-ascii?Q?+pJfuMgW/9r1ZKGoMxd4WxUBp3ZNLmwcp8WFXpFmDVCGT417n3B2zrIbqrdJ?=
- =?us-ascii?Q?34wfGbBlpCyL+1w9Fi3io+dBwauhjnyRdOq3tKvFFyz0h5G6NObfuOf5QeEq?=
- =?us-ascii?Q?yP6YTFDDOfB9ILE5fiBUarLSc/CruXsCvTQJ9vFJsJnIr3VPFN5i9w/F5Pby?=
- =?us-ascii?Q?Crgj1lSn5elDI4V1dk7VnIZqJkavRZjji2vGYaIVXMmsyxSS9JcFLcLMKtps?=
- =?us-ascii?Q?kHPG6JPWpF8/6n11u8mgloTitfM9VcpbDiJhr7W4v7DfkKKOUQ5E0JIIAJts?=
- =?us-ascii?Q?UlmTud9+VwkFPxxjTcVIL6JRSscTn+uMPF/9Jvty5L1xxYyvUTaiTSba468a?=
- =?us-ascii?Q?p8TON8gLeXpBIO9e/WbPoukhE0hTus8+o0tRPFuLeYBGYGrO2+uMe0FWBYk2?=
- =?us-ascii?Q?nBqe7WH4Af8nGJ7D2NrYEBj/+LbtciAdRLKDiUYGbkO2PSzuIDXR3CDhCbez?=
- =?us-ascii?Q?OmMfVmTxB/PKgplVY9JCeFuWjD91GPxKqfkeDDk3DiQuHGhBXDhInSSwPrdt?=
- =?us-ascii?Q?2ZJq+czCj7hE/h2X6MwSGhHKgnZhKDi+WfzU3RWc9rZ/FpaCNV4OqvOVEi6B?=
- =?us-ascii?Q?UXyUFAKVat953kgyUEPHpXHzIgP5ziMdPLS0jw2X7chqfPQtOqWze8dQaZg0?=
- =?us-ascii?Q?4Jvn9u1Zf8nEgLnNav072X3GP2xYJfqDQycYJ33Xd+kr6gYT14J4rvyYcrQM?=
- =?us-ascii?Q?V4sB909vhzFtEbN2O5S8Oi+Ixm8/8gXVuC2gNszMAVWPNy/Lg6guS5EY04tN?=
- =?us-ascii?Q?A/kAZ+bz2f1Zmv3Q0wy8gJRYzzK4AwCFjJN6Esk2KW08WRsBWCw/JFE1S9dM?=
- =?us-ascii?Q?mVwq1aDtMxXY6NNjNdCxhVI2TSW596bsLpqUv7dI05jWF70j7AJ3ex+MKI+6?=
- =?us-ascii?Q?ZLIhzD3ozt7WS8pMKhx7Gz95t9+uazUiAw0Y97w+jh48sBMY23Frdm3U0Y93?=
- =?us-ascii?Q?qpxSDLlS1cd0NZDJmpp05XuW1zPJ8cNw/bsjkiuYA51XvRAXA1c/Nvj6z7vD?=
- =?us-ascii?Q?0Q=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f29c67d3-4402-469b-eacb-08de3bc98bdc
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SHFxU2VnOEZTb0dSclNmZE1aNkJPTGlBUlRkcnc2Snp1TmJYZkNnU0RjOTBE?=
+ =?utf-8?B?MjNIU1M5NEhZY01jbUxLT2VWMXptVjZvQ1pBVUdoK0tEU1BmeEtQSmQ0b21a?=
+ =?utf-8?B?bzFPNkNYb0kxSHFlVXE2R202WFhWN0tIWk14TEZCT1kxTnkvaFZ6QUVnOCtV?=
+ =?utf-8?B?TCt3bGJTbUhVb2ZDSm1NUERwc0JPbW9DRXlieFdDdmJkcDdGNUQyMmRwUUJi?=
+ =?utf-8?B?Q3pNMUloaUhLVUMzRi8xdzI5Z09ZVTFCK3dnQmliektJKzlPd1pIVzFTOEhu?=
+ =?utf-8?B?djhrM1k0VDZzZlZRSm1RRUw3K0tQSUhKd1l4UG9UT2hvZ2pFSkV3dDZreG41?=
+ =?utf-8?B?M2xZYUJFd3NVODNaeHBRZkxzTXc5cDVTazNSeTZ4YnRGYnk1ZEdhWkZIOUxJ?=
+ =?utf-8?B?V3BxdmgxZXo1TzJTTUlxZnlIZXYrbEJIdVRQc2hQQjlob0s2azZLSGl6VU9N?=
+ =?utf-8?B?QUM5NFFhR0wvTDBuc09zTzM4UVRTeDhMSjJIMkdkY2xrMW9ZRWJlNWtPRENR?=
+ =?utf-8?B?SXRxallQMmIvcURSNE1wZUtCTEthMjhiU2lMbDUzMDNOWnpBRCtRczh4NHBY?=
+ =?utf-8?B?UE1lL3FDczhoVGFJUVRFWWdLNEdOTVl1TDRJbXhsZzRQOEhHcHpCVk5najAz?=
+ =?utf-8?B?SUQvdERoK3c2R2NzUE0xM2ovUkU1VUNMZjc5UW1GVTNaL2RtOHR3a01XaVNX?=
+ =?utf-8?B?clgwMExjNVl0dnh2N0pBc2tPUGp0OVN4d3p4ampvb3o3aEV0YXA0WFRJQ3Rh?=
+ =?utf-8?B?SGtGMXQzREs2dFhLT29DOUtZQ2phSzhkbmxyWndPRFNSTDNzOHp5cktTUDZ5?=
+ =?utf-8?B?UWVzaGo1QkVuWk5PR1RoZi9yaHRKWjlvdWw0U3dMaE5QSzZmSnZpaUJpK0FY?=
+ =?utf-8?B?WUlHTTBlRDJNY1BQcm5xUWpYTmY1aFFqcWtxczBnN0FOV1A0MGJHdUs4b1Z2?=
+ =?utf-8?B?ODY0Y3BTR3lPdkpVNHVhWTAwMmpFZlJtMDhhblFzQkhPZGRpUjByb0dKcE5J?=
+ =?utf-8?B?V2dhMC8xck90ZUdrS044eXZ2aHNPVU0yL0xiU0xQdFo5NkJkWU9mYTBtTzBE?=
+ =?utf-8?B?cW9nRUlKNjh0TFJtWDRpRkxVd2FCc050NDgyWkk0bk53ZTMwNzJOenNoUmpp?=
+ =?utf-8?B?dkF4aEMzTlV5OFEweWNaK2FieUtUWlowTzNsKzhuUnB4QXFaN203LzEyeDJ5?=
+ =?utf-8?B?K1hQWHhudkd6M0tNVFFOemdqM1JXL2IxVS9Cck1KVnZlK0llQkkwNmhXc3M5?=
+ =?utf-8?B?QytDOFc1UFVpNFRYR09peXVkeGxWRUFHNDN3Z0FtOFZMMmFCc1k3K0NlbnBX?=
+ =?utf-8?B?Q1FWUWVneTJJMHNMYjNBd2JFNmJrOEtsejVOcnJLekwwbUFzNU5yV1pUN2J3?=
+ =?utf-8?B?ZTZQTk1EQTRoVGkxc1Q4OFFFZEEwNzlISUxLNlJUYTR1Y2pSVElLWUROMzlK?=
+ =?utf-8?B?bm5qWFQ4b3NoSFhXeXV3dU0xdDE0NFlKMWNKaHNzaTJPR2Y1U1lPazJRdW5O?=
+ =?utf-8?B?ajc5RldTNE5jNGxsUnpSeEt4MXZwZzRjS0gzWThneUJwWnJxcXczcVBLdFVv?=
+ =?utf-8?B?OC9GcUpIcEJIWVBvS0xVMmFESFVWbExITEpxblRBK1ZXMVA3YTFCVXVxNGFp?=
+ =?utf-8?B?RG1YM0p4dVQvNlBrK2V1N1J2Nk5ITUFHaFVPMHV2MzA3Z2Z3UVUvNWY2WVFR?=
+ =?utf-8?B?YVI0TDdtVm9WZTNIWmlhWXNpK1BteVRmeW0zUHQzOWM1Y3lLbGh1cjIzTmli?=
+ =?utf-8?B?K1g5K1JySkRyR3RUeEJHU3N6UDk5QUZPaUJYcjJhZkJqaFh0ZHJZTFlOUFpF?=
+ =?utf-8?B?djBBam1ZWkZHL21qb29Hc1lJb0lyOGJoYmxKT2xVbnF4NXE1TWtIaWMxRHlm?=
+ =?utf-8?B?dE5oK0sxanA3MkxoaEZNTHlkRzFJU3BoRzlxd2YrQXhJa0YyOWM3RTVDTkx3?=
+ =?utf-8?B?T2x4NnBXY1A0aVBhQWRNSGIxTi83djhPbW9UMTFhRjFmb09Wbm9hdGZYd3pB?=
+ =?utf-8?B?SXlDbDlaOE51Q3MwYXplVlJQanZDTGlhZ3p0Rml6SGhza21sajllc0h2QTNp?=
+ =?utf-8?B?ZHpOdTFuRXE0U2hFR2llajNtMGwya0RBRHJJUGUrenRLdnVYSlNzLzQrR3dX?=
+ =?utf-8?B?QUZjdDNXNzdVYXJxaFFoMHNUVFIyZmd4SHV6QVZpVkxIaDIyNk5jWDR4cGVu?=
+ =?utf-8?Q?BxgmunYIg/KfD0fsBo2OlSY=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7ef31450-8b56-4c2e-14b4-08de3bd4ff88
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2025 11:03:15.5289 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2025 12:25:14.1017 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: prvv71KZcwShAOENp6Sx1biMe/6B8Nn7RPV868tkNND+qY2PelPaqFrTDAUoiGvP9Y+vBhegDOrHNXHZ0U3Pg3WXZqJ/NFIbxc45tTPORNE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7658
+X-MS-Exchange-CrossTenant-UserPrincipalName: nsfmt8tyMr6boRERZUK88ilaudcbzZODTpLuCmkyEHZIDjgRzFOkyfrmS7TcBEQIRAZ6RZlkFaKNI2VhvXsGLP13iEhKIUz8XSyqNHz4krs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB11384
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,309 +174,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dedicated device tree support for eMMC configuration on the Agilex5
-SoCDK board, providing an alternative to the default SD card setup.
+Hi Francois,
 
-Changes to socfpga_agilex5.dtsi:
--
-- Configure always-on regulator for stable eMMC operation
+On 12/15/25 12:34 PM, Francois Berder wrote:
+> If zalloc fails, one needs to free memory previously
+> allocated in the function. This commit makes sure that
+> we do not leak any memory.
+> 
 
-New device tree files:
-- socfpga_agilex5_socdk_emmc.dts: Main eMMC device tree configuration
-  * Configure for eMMC operation (no-sd, no-sdio, non-removable)
-  * Set 8-bit bus width and high speed capability
-  * Add timing parameters for legacy and SDR modes
-  * Configure voltage supplies for eMMC power and I/O
-  * Add fixed 1.8V regulator for eMMC I/O voltage supply
+Fixes: ed34f34dbaf2 ("ext4fs write support")
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-- socfpga_agilex5_socdk_emmc-u-boot.dtsi: U-Boot specific additions
-  * Include common Agilex5 U-Boot configurations
-  * Set SPL boot order with eMMC support
-  * Enable necessary peripherals for boot-time operation
-
-Configuration files:
-- configs/socfpga_agilex5_emmc_defconfig: eMMC-specific configuration
-  * Inherit from base Agilex5 configuration
-  * Disable GPIO regulator support (not needed for fixed eMMC setup)
-  * Set eMMC-specific device tree
-
-Build system integration:
-- Add socfpga_agilex5_socdk_emmc.dtb target to Makefile
-
-Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
----
- arch/arm/dts/Makefile                         |   1 +
- .../socfpga_agilex5_socdk_emmc-u-boot.dtsi    | 178 ++++++++++++++++++
- arch/arm/dts/socfpga_agilex5_socdk_emmc.dts   |  49 +++++
- configs/socfpga_agilex5_emmc_defconfig        |   6 +
- 4 files changed, 234 insertions(+)
- create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_emmc-u-boot.dtsi
- create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
- create mode 100644 configs/socfpga_agilex5_emmc_defconfig
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index fcad6fb2fc7..4e39c795e1e 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -451,6 +451,7 @@ dtb-$(CONFIG_TARGET_THUNDERX_88XX) += thunderx-88xx.dtb
- 
- dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
- 	socfpga_agilex5_socdk.dtb			\
-+	socfpga_agilex5_socdk_emmc.dtb		\
- 	socfpga_arria5_secu1.dtb			\
- 	socfpga_arria5_socdk.dtb			\
- 	socfpga_arria10_chameleonv3_270_2.dtb		\
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_emmc-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk_emmc-u-boot.dtsi
-new file mode 100644
-index 00000000000..6aed59f7c19
---- /dev/null
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_emmc-u-boot.dtsi
-@@ -0,0 +1,178 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * U-Boot additions for Agilex5 SocDK eMMC
-+ *
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
-+
-+#include "socfpga_agilex5-u-boot.dtsi"
-+
-+/{
-+	aliases {
-+		spi0 = &qspi;
-+		freeze_br0 = &freeze_controller;
-+	};
-+
-+	soc {
-+		freeze_controller: freeze_controller@0x20000450 {
-+			compatible = "altr,freeze-bridge-controller";
-+			reg = <0x20000450 0x00000010>;
-+			status = "disabled";
-+		};
-+	};
-+
-+	/*
-+	 * Both Memory base address and size default info is retrieved from HW setting.
-+	 * Reconfiguration / Overwrite these info can be done with examples below.
-+	 *
-+	 * When LPDDR ECC is enabled, the last 1/8 of the memory region must
-+	 * be reserved for the Inline ECC buffer.
-+	 *
-+	 * Example for memory size with 2GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 8GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x1 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 32GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x7 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 512GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x7 0x80000000>,
-+	 *	      <0x88 0x00000000 0x78 0x00000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 2GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x70000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 8GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x1 0x40000000>;
-+	 * };
-+	 */
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+		u-boot,spl-boot-order = &mmc,&flash0,&nand,"/memory";
-+	};
-+};
-+
-+&flash0 {
-+	compatible = "jedec,spi-nor";
-+	spi-tx-bus-width = <4>;
-+	spi-rx-bus-width = <4>;
-+	bootph-all;
-+	/delete-property/ cdns,read-delay;
-+};
-+
-+&flash1 {
-+	bootph-all;
-+};
-+
-+&i3c0 {
-+	bootph-all;
-+};
-+
-+&i3c1 {
-+	bootph-all;
-+};
-+
-+&gpio1 {
-+	portb: gpio-controller@0 {
-+		bootph-all;
-+	};
-+};
-+
-+&sd_emmc_power {
-+	bootph-all;
-+};
-+
-+&emmc_io_1v8_reg {
-+	bootph-all;
-+};
-+
-+&mmc {
-+	bootph-all;
-+};
-+
-+&qspi {
-+	status = "okay";
-+};
-+
-+&nand {
-+	status = "disabled";
-+	bootph-all;
-+};
-+
-+&timer0 {
-+	bootph-all;
-+};
-+
-+&timer1 {
-+	bootph-all;
-+};
-+
-+&timer2 {
-+	bootph-all;
-+};
-+
-+&timer3 {
-+	bootph-all;
-+};
-+
-+&watchdog0 {
-+	bootph-all;
-+};
-+
-+&gmac0 {
-+	status = "okay";
-+	phy-mode = "rgmii";
-+	phy-handle = <&emac0_phy0>;
-+
-+	max-frame-size = <9000>;
-+
-+	mdio0 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "snps,dwxgmac-mdio";
-+		emac0_phy0: ethernet-phy@0 {
-+			reg = <0>;
-+		};
-+	};
-+};
-+
-+&gmac2 {
-+	status = "okay";
-+	phy-mode = "rgmii";
-+	phy-handle = <&emac2_phy0>;
-+
-+	max-frame-size = <9000>;
-+
-+	mdio0 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "snps,dwxgmac-mdio";
-+		emac2_phy0: ethernet-phy@0 {
-+			reg = <0>;
-+		};
-+	};
-+};
-+
-+#if !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
-+&binman {
-+	/delete-node/ kernel;
-+};
-+#endif
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-new file mode 100644
-index 00000000000..f6848c373cd
---- /dev/null
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-@@ -0,0 +1,49 @@
-+// SPDX-License-Identifier:     GPL-2.0
-+/*
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
-+
-+#include "socfpga_agilex5_socdk.dts"
-+
-+/ {
-+	soc {
-+		emmc_io_1v8_reg: regulator-fixed-1p8v {
-+			compatible = "regulator-fixed";
-+			regulator-name = "emmc-io-power";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-always-on;
-+		};
-+	};
-+};
-+
-+&mmc {
-+	status = "okay";
-+
-+	no-sd;
-+	no-sdio;
-+	disable-wp;
-+	non-removable;
-+	cap-mmc-highspeed;
-+
-+	bus-width = <8>;
-+	vmmc-supply = <&sd_emmc_power>;
-+	vqmmc-supply = <&emmc_io_1v8_reg>;
-+	max-frequency = <200000000>;
-+
-+	/* eMMC legacy mode timing configuration */
-+	cdns,phy-dqs-timing-delay-sd-ds = <0x00780000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-sd-ds = <0x81a40040>;
-+	cdns,phy-dll-slave-ctrl-sd-ds = <0x00a000fe>;
-+	cdns,phy-dq-timing-delay-sd-ds = <0x28000001>;
-+
-+	/* eMMC SDR mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-sdr = <0x780001>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-sdr = <0x81a40040>;
-+	cdns,phy-dll-slave-ctrl-emmc-sdr = <0x00000000>;
-+	cdns,phy-dq-timing-delay-emmc-sdr = <0x10000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-sdr = <0x1800c>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-sdr = <0x30000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-sdr = <0x101>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-sdr = <0xA0001>;
-+};
-diff --git a/configs/socfpga_agilex5_emmc_defconfig b/configs/socfpga_agilex5_emmc_defconfig
-new file mode 100644
-index 00000000000..9254ab92e0c
---- /dev/null
-+++ b/configs/socfpga_agilex5_emmc_defconfig
-@@ -0,0 +1,6 @@
-+#include <configs/socfpga_agilex5_defconfig>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_emmc"
-+# CONFIG_SPL_DM_REGULATOR_GPIO is not set
-+# CONFIG_DM_REGULATOR_GPIO is not set
-+# CONFIG_SPL_DWAPB_GPIO is not set
--- 
-2.43.7
-
+Thanks!
+Quentin
