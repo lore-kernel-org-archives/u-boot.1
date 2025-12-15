@@ -4,183 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D63D59D99
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 10:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1202D41D74
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 10:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 822DF80107;
-	Mon, 15 Dec 2025 11:50:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 30EF580433;
+	Mon, 15 Dec 2025 11:51:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="CcuMrFJV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O1HHWIpQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8674F801CF; Mon, 15 Dec 2025 11:50:55 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D813B8051F; Mon, 15 Dec 2025 11:51:12 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6863980050
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 11:50:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id DCA5880050
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 11:51:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q3tq507BmYTSH/30J+tzao+YwBbLx7uulANvPc6pcpWJlrD28CG5hkLEQx/ab1uzfeT5gB9YoQSlZRhnl8914YVNyscGk1lD7pE/akmI5a2kE+YjSSS19ZREef8cAeo/voU2eL4SQdySe5vwgNOPvUstKBMfxYn5SngKPg/IsxHFJY4NiA58pjv83FLBGQwNtNh6GfQejzJUHMWG1mWOFr8863SZyDAZpMe+wBL5yZNnh7ZqEAaK/B9a5ImVNtv3KXRRCaIYzGP8JpEhR1URKvJpCFiNT3XZglAFj94JEh2gjnHJeFzgaw886MYTzGTuSEp5+2LXvDDLQm5p+NL2Ag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=APeZLd2s+8u1kVOMu1AZCNbC0pvbmGBf0/GZywLA8Iw=;
- b=ZcCXN/GHfdLl6O74X0ubLn3hzzar89S7o06WcgZeUdS8ccdngslW4CKL0NGufmj2jKuBKg3EWr+oxKpjs1fRJlwlo1cx+pkX3TqQjUDInGXgDrzm1OdXcoOwXUMV+2/DqOMly18cKm+j25S2kADW+p3e3MoC/aYAR+FCyobauhesLgFlCbD1uh5kqMO2GVx3t/QslAZupeBmK9NF1dS9mB6MLUj+vMg37AbprGJxlzpBC1GuWQjTW3CvwGLb6S6/tzaqKCVQzy1LEOfE9DgpE1KgRLNQNPMiCaelAJTBWnVKYvI6zkkQVwS9fx9fzmrXe0oAoUspOdVvHcSgHoj1tA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=APeZLd2s+8u1kVOMu1AZCNbC0pvbmGBf0/GZywLA8Iw=;
- b=CcuMrFJV64+RMN4JOBnHmTa2prgJZXDcrdTPNqyAibCLc1fM9KuoZ6yMCffvHGT3Jensl2FrYA5Y6L6TbTS0s5UnfNrGoTk8fgtbUNJdnJd0fnxk7ZGPORiHGDkWJHEbo+x+iioL8Lnq7sU4c56ann1SkBH2PrblWNAqjLX5SOU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by DU0PR04MB9273.eurprd04.prod.outlook.com (2603:10a6:10:354::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Mon, 15 Dec
- 2025 10:50:50 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9412.011; Mon, 15 Dec 2025
- 10:50:50 +0000
-Message-ID: <579ab77f-ceac-4de0-b3ef-1bfda1724418@cherry.de>
-Date: Mon, 15 Dec 2025 11:50:18 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/8] boot: fix prompt for SPL_LOAD_FIT_ADDRESS
-To: "Kumar, Udit" <u-kumar1@ti.com>, Quentin Schulz <foss+uboot@0leil.net>,
- u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>, Ye Li <ye.li@nxp.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Justin Klaassen <justin@tidylabs.net>,
- Samuel Holland <samuel@sholland.org>, Rui Miguel Silva <rui.silva@linaro.org>
-References: <20251212-kconfig-reorg-v1-0-72441d8cc53c@cherry.de>
- <20251212-kconfig-reorg-v1-2-72441d8cc53c@cherry.de>
- <d46a7a85-7077-4b3e-84a2-2ce607412402@ti.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <d46a7a85-7077-4b3e-84a2-2ce607412402@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR07CA0285.eurprd07.prod.outlook.com
- (2603:10a6:800:130::13) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-42fb0fc5aa9so1137881f8f.1
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 02:51:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765795869; x=1766400669; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=slpC7qvZn/CCeo9dF8OxehQS2U+i/HvX1j2QLOAyoeM=;
+ b=O1HHWIpQa1V5v2DTopnqOs/GG/eVg+/9o50eb7K7hd037uZUK4bzL/mqq0FgG2Fg5r
+ a7QhVAMg9L3ZskyP8l5PTzDGMeOx0K9sfiAeRBe61vdVuNJHIAshRkqgD9GWHHj+P6GY
+ Or6RaElZmhLpMhUYJXk1Q0afLoU+ixHcE96he9kVZJnrWaD48gwZulCj0cIPQbAsCmaF
+ KS5cZuABkmDsIYX09zfRWlSVE1zYFMPaotnUiT1Ex5EZtdv9HL7DdK3mvlUpDAKgurfe
+ ayiIXvZkgtmwwb8LWhVji4Wx2FBAFtPNMRiD9Yi8kGnc22f4e23+JQ974fQ4pZyFNHta
+ +qrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765795869; x=1766400669;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=slpC7qvZn/CCeo9dF8OxehQS2U+i/HvX1j2QLOAyoeM=;
+ b=tcbD6L5KQ7Yxn/thSMXdlXUAQQXe6t1A/WdfdIbvfjtXNaY2wJjqaFeR5FguFg01xX
+ SUT/H85eMX50TFLSTjwUu6bsGCUAFxNOfrEK7Ar+s/a/m/hT3vnMamY0rBdmXjVlfccK
+ 21+Ju+fe1GHDXVlxZFNa6TOrYEPheOE3E2nuNee6DpocY3ZP//3n/EwTyQdgd/FM7q3Z
+ CS10oKsLMM/WteMeo0hw0OJAcGpEMM2HrfvjaBoaMPxxdNDfAamANOA12EpIfziBqSMu
+ IUKw4clamyLbRVilnNdv0KunubV+e5m5hNfcqMDz4QwlMeHlJVc6IfbsXU0xxBYKy2L1
+ 93pQ==
+X-Gm-Message-State: AOJu0YyVks2KFPIGs0SQM4Dd4d+pH4Q1T+01xAEOjnQGKITSwqEwiacN
+ ZZtndZ9GwQRyG4whz6pTVe/m9EcFrQs5q/Sv6f7lpsXlR6cZ8TVU6bmGDQitccwzkAc=
+X-Gm-Gg: AY/fxX4m0/jaRt3OxtGUdYc7I/S5y17xPWPoCFz+eUeq9eP0NdEJ4noLgUyIy71Mp19
+ JCbH729cS14XI+WnMQMpR3uRPgUfLJxN9J4CX8Z2SuLyF0mKna/II7ATcFPCQ6d6iU76wzaudAF
+ 65Vz1404BXFhQQO8d8pjTz5Y7N0ZRInqkFiGt+jrKXRivLkcKUqJGo2EqLpKmkJGWz3/stl+nhw
+ qcEajz6WqL+/+cQvYNdEJ2aIHi4xOMMNVyQiIOxNCb/D4YPfuC1cqp0DDRsmXncTiZLXReOQnKO
+ mPJwQzwDZ1VS/K/jrC98UvUx88p7Wcqu/tX3zN6eZ2QoxcTjLff5ieNDQ/+3csAPzZSunOcDHO6
+ zzOiOy5z2xPJSc4n+LfFLPKrbXx7Xb1a9uSR3PDPW3bhUZlHunQXMW8W+9qCM0S/qoLWEc0QFs2
+ tnTXo+L3ZBiHZc1F7oKJo2utJxImQblVU0TCqtCcRKBv2VawO8hvZVhCYtY0Ea4RI=
+X-Google-Smtp-Source: AGHT+IGo6PS8ijJsM+VslKkAtuJKPppF7QdWvodmYeVJaWXswXLDM5tm+qA+LgiLk9tO4cR5DUEhZw==
+X-Received: by 2002:a05:6000:2287:b0:42b:2fc8:186 with SMTP id
+ ffacd0b85a97d-42fb46ee92dmr11432161f8f.46.1765795869218; 
+ Mon, 15 Dec 2025 02:51:09 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:fed:3801:3471:f76:7a83:5241?
+ ([2a0a:ef40:fed:3801:3471:f76:7a83:5241])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-430f5f6ede8sm11501026f8f.4.2025.12.15.02.51.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Dec 2025 02:51:08 -0800 (PST)
+Message-ID: <322ef73e-83b6-427e-aac1-8f0214de0de8@linaro.org>
+Date: Mon, 15 Dec 2025 10:51:08 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DU0PR04MB9273:EE_
-X-MS-Office365-Filtering-Correlation-Id: 48c72c6f-1e92-4d82-7e5a-08de3bc7cfde
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|1800799024|10070799003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UmU1aFVvS2ZuNnducERiLzM4Snl3QmM0SkpoeGg5bmZrcndXZzd6QnNwemts?=
- =?utf-8?B?SnM3eXlDYmJYMjVMbDFtUDZEUGViZ2ZRd1JiY1NxWmxmRExBQXNIRHNNTFBz?=
- =?utf-8?B?VGZmMElCMC8vZkF5bmsyRzhPRDFaODM4VVBSb3B2L0lnSCtLZEloeWNtMlht?=
- =?utf-8?B?amtqWlIrZmtjOVlYYXNCcUQ2WXdhMkhSUE42MnR6VkUvSng2OTIwcmVkQ09w?=
- =?utf-8?B?Y1UyMTR5ZWZWS1kyT2hvdEM5R3VPSUF1ejl1QmhtTTQrYlRUeng5YmYrWlRl?=
- =?utf-8?B?Z0lGVnVUZEk3Z29xY1pVWEplRjFBMlhoNjBWQVRGem9vUHNYeWF0d2x2RmpQ?=
- =?utf-8?B?R0JpTWUrNFdiaVpSNWRpMWlMamRNUzEzYVVIK09VMjVhL0JDQ1JYM1BFWitt?=
- =?utf-8?B?VHIwMTdHOWRyRjBlcEtjTWJrZFJvU2tDdWh4NEJKS0IzaGNQUWNqdkF6TkUv?=
- =?utf-8?B?dEJDWU1kTm5adHBoaHNjN0puZHFjU3JIbUswRWRya1pLK1RibXlWZFVKNk1C?=
- =?utf-8?B?UFBjWmxYNThBeDJNbGFlUXdDQjZHdFgrR2lySTh5aXhKOW43L0tnTGw1MXQy?=
- =?utf-8?B?bk9aU25OYm1IWFNXOUpzZ0FxenFFeUVNQ2RpM2xocVZYUmpDa28yTGpwWjVn?=
- =?utf-8?B?VjhDZHphN0ZWNjhtUjdXZ2dwMlF2by92VkkrOXkvdWx1L1RLOWN4M2dheHRL?=
- =?utf-8?B?Z25LRUF6c0lCWmFKRmJucnFhTEphdXBYMlZVNC93bjFPNVNnVkFCTTcrSlVj?=
- =?utf-8?B?N2N3ZzVnOENyVzBGUVg2U0JEUG1qWVlZRDJkbi9taC9uZ3BXZVNnTXB5dG1T?=
- =?utf-8?B?SlBJUzF1aW5TaFFxQUhNRTJSdElvKzAwdFRGQTExVVhzZEpaU2NoOE1QUTBq?=
- =?utf-8?B?QkZvY1dsQ2hQUjlBVVVsNXI4ZXh1Sm9GK2JHK3ZDMXpoY0o0U0MzZUkvamND?=
- =?utf-8?B?dVdHZ2JoMENnckhXcFdkbzhlMFM1UUZ0T2hmVThyaHFtN1B3d3l6djBPWFdP?=
- =?utf-8?B?cWx0eEpEUis2eEp6OFlWQ2xydkhQc1dWTENPenFXblQxWitVNVcxaVhxRERa?=
- =?utf-8?B?VFg3N0creUl3b2NSc2NUTHNseDRiNFpMekpaRnJzcEcvdHNJWjFjZzlxcm1X?=
- =?utf-8?B?Rm5iWGNmN3prRWlzcVVIZVRrTzlFbWd1bm1lVWFPRm9kWklmWlpyUjRnVlNh?=
- =?utf-8?B?NXMrd1B0WUdVNHd2anVsbG5FY2Q5L3NSS29YYnMxS1lyd3N6dkFwNVZRODFl?=
- =?utf-8?B?bDJHdHRIV3NQVWgyUzNaOGtiL1FlSEQ0TUsxcGlJaFpVbFJISDBzczBXSlZF?=
- =?utf-8?B?UCt6YVNsdHRpbFprSmtyY25zcjVzL1JqMTk5YXZrWGVQL0oyS1kvSjNicHVN?=
- =?utf-8?B?OC9mdzBQK2NZdWVtRWdiN3RwUGZtYmR2TW44WW5mOUszNFFwR0xhSHFBMC9u?=
- =?utf-8?B?cGlwQjJob1VrRDRkVE5CK3pWVlR3VWV6SUlPWXFtMG1vRUpOaktqMTF3ZEhD?=
- =?utf-8?B?Q3JOV21kWGhuK1dyb0Qzb3Y0aDA2SjdKMUxuT01qdnJEelRRcGhTWGpBSitQ?=
- =?utf-8?B?SGhLU0h1NWNvSHhQV2J4dFg4UW1UQjBLa042NzI0dnpGTy9ldW9DZ2V4MDh6?=
- =?utf-8?B?cGp2Z1BTbDBFQzJqc3VHQW10TU1nZEVzNjNMcUd4bGM2UUxaM2VYVWJrTUZE?=
- =?utf-8?B?MHpCM28yeFFMak12endrQ2pWREhPeVEwdVowNDlKcGM3ZlVCR0pQMnpremVB?=
- =?utf-8?B?SlkyNkp6cjNreFZWekRtWnZMUGN4L0Uvb1EySkJyaEp0aHdRaU1OY0daUW5x?=
- =?utf-8?B?S2pHV3JZa3R3TXVpRFo0VGEraDFwdmRqYjI2Q1J1aXhaZlpHL2sxQVlXOW90?=
- =?utf-8?B?bm5TK0Y4cStsVXJKY0tQOE5TQmEvcHBTQWtTcEI4UlRlcGVRc3d2NmpEa1Vp?=
- =?utf-8?Q?0FoX7BztCmcIrOIWGIDPXTo4wmvbBVgj?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024)(10070799003); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eXQ5SENkOFlaNDZTbWovRUhBV2tmd1U3NFBOeUZ1T1dPemFvdTZaZTNWVG9N?=
- =?utf-8?B?dnFGT3hQVStpbUducmNTSmtZSFRkbWtEaElRWGJWZUgxUldVYmE2T2Z1NU1u?=
- =?utf-8?B?MFRtcFA2Si9BaFBvT2E4Y1Foc3IzMVdKWGdOM01meHhwTjlWM0VGWVltQUtG?=
- =?utf-8?B?ekJHTUxBalhuY1Via0JnNkMzdThxU0gyY2ltZ1JGbzN2bU9ucHRLL0oxTHZX?=
- =?utf-8?B?NUJ5dkIzYWd6RVVMemsyTXU2VGFoYU1Wb2FyTDFrTFJtbHNQbFMyMDdGd0tS?=
- =?utf-8?B?UlZsSm1lUmlDSmpkRnJiUFVGSEFFOHRVVXVZY3pTdzRSNVBzWWdTYjRHeGVw?=
- =?utf-8?B?TUJna0lqWFdzSWNhSFJwTEhDNU92dTVBNFZCcC9sT3RYM2lMNWl5cjVkT0lp?=
- =?utf-8?B?dE1sQXlBVHgxeFlQd09rWi9Ld2Q4ZXBLdTk5a1FKUmxWRVFlbHZPZDM1Mnor?=
- =?utf-8?B?bGlFL2lWTGhKaTdRb0o3SDcvWmtyRFpGcmdwVElOK3oxZDJWaDlxdGpxOHdZ?=
- =?utf-8?B?NUlqcEVzVHBlZEw5Y2N2Rk10M0EzY0cxT3BVcGxmTDllY0R6OCtibmhkd2FV?=
- =?utf-8?B?ejhaNXRZTzh2d3NKc2RET1ZiWmxFRnREZjRHTmtVbDhZK1BsK3RYaVJ1Mmxj?=
- =?utf-8?B?WWNqZUF6V1FBN0ZOcDVYZG5PK1huR09CYjVzdytOWW5xY2RmcXk3aDFIenYv?=
- =?utf-8?B?cVdHUHc1RWVocHZCZkUxcjEvcFpLOWJVQUh2aERrdlk5M1JtTTBDWHJ0MmJJ?=
- =?utf-8?B?SXlUQzU3TUxmM0FpaEtNUXdwVTR1WG5kcGpjTFZVa1lmR2xRWXg5ZU0yZlFK?=
- =?utf-8?B?dDVnNDhPTUtzdkdFdzJBdUpTVTN6eWpzWWRBcGJTQ2hHSWk2TGh1UXRETE1l?=
- =?utf-8?B?VGFWYngvb1BTZDl1TnpaNU9XOU9HS1dPVGxxa2o0elBBOFcyaWNaWEZZdGlY?=
- =?utf-8?B?WU5XbytPQm1haXZxQUYxcXMycjl4M1p2Y29IUUw1S2xjQUViVUxNS3BuYmFn?=
- =?utf-8?B?WUthTDVpdy9TV0F2QndJaW85QUY5d0Y2TVM5cTcyYmFjbVRCTTlubTdEeXY5?=
- =?utf-8?B?aU1zRll5dDZLUlNVWkFvb0JyZjlUeHZvSTJ5U2JlcmpKeUNNcSthd1RUenlL?=
- =?utf-8?B?aExmWTI4M0Y1Nmt4VlVVLytIcTZxUnlnTm9SMkg4a0hxWEdJdG82Q3dNTFhO?=
- =?utf-8?B?OHpSd1lsaFZZTzRmRVluZ0p0VjdFQkpncms3UUp6ZmQ0SFY3UEYvb2dtZXBR?=
- =?utf-8?B?elBXSVA2RzZoVnk2VzUyQUY2RmwxNjl0UjdQV0JiZDFkb3gvZERBNW1RQ1A2?=
- =?utf-8?B?WWIyVC9OTUJjZjN5ZW5rQ0VkM1dBV29DYkYybmNNZDJ3aXhsbTRRRXBkd3pY?=
- =?utf-8?B?MWhlQVdjOU93dEhZY093Z3EyR2dKcDlNM0JyTFExYjFOcmREeWVRQXEwbi9t?=
- =?utf-8?B?bnBwRVhlbDJlTzBOcXlMQlpIaSs0M0hjSTMwV1dLdUkrakxhdUJCVXozYmlJ?=
- =?utf-8?B?N1VpT3Bramh2WDc4cXhCejlLTFQyUXNCTVJuWVJkZzhMZ0pzSWRqakZQQk5i?=
- =?utf-8?B?S3p2V1JYeEgrdjNranFwbXNGUW12OW02ZmpTZ3I4SjZaMlR3OURmc0Q0WDA1?=
- =?utf-8?B?ZVd3WENJNENqR0hFZnFGdnNUU1ZrRi9zcWk4RWtJcVZKcFpFRVRDdlI2WEZs?=
- =?utf-8?B?T0lidzdRcTRrR2pTUmtNLytVK3BRRHVBOExEd0tVQXVtSHdqRkN6dDEvenJR?=
- =?utf-8?B?U0VIZ2plNXlTUW5ZU0FTMWR3YU9GVkRQZnVPQWpQUmoyTHlSZ2pvTDA4TUV1?=
- =?utf-8?B?TDlOZkNlSWVRT013Sm1ZaTArS3ZpVWkrTHl6alI4VVlTNE9BUXN0OUhMSjRO?=
- =?utf-8?B?RWVwQVVCcEIvQWt2d2Y1WmRKUXFVeVNuTUgvTHRrZXMwWDhYVVpITnNyY0FR?=
- =?utf-8?B?Z0lySVJ3OEhYbG0xTmlSYkNYcXpkdnkyOHVXS3Rzdkgya2pBWFBZbkwvSEZR?=
- =?utf-8?B?S1UxS3RZUmtBOEt1N0pwSFdheEJyN3RhRldwMk9ITGF4Z1Rsd0tTMUhjMUJa?=
- =?utf-8?B?MVhXVVZ4UXh1ajNSNGRVd21IbE1lM1RFdWcxdnpiLytTUHNrR0IzRy9Xbmh5?=
- =?utf-8?B?ZnM5Z0VJYmhZKzZEeTFld0pkT0w4QU93NDhBOGk2ZVpTdVRmcmJyNnkwOWFC?=
- =?utf-8?Q?dN2Rw0ATSXDN6GoX6PZY+Vo=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48c72c6f-1e92-4d82-7e5a-08de3bc7cfde
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2025 10:50:50.6232 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mZopRPc5XFUjng4C8rzDWTiV8O6OlsKs9/vAYlhqkjySM+N1ZagKVCmieTyw41qBQt2K3b794ovTFiMRRXdslxr5+xEdTYxe+DEJ6RtQGyg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9273
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] efi_selftest: enhance LoadImage test
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+References: <20251214110937.136425-1-heinrich.schuchardt@canonical.com>
+ <CAC_iWj+dMSBLJF7prZkKmcXYXiXeajRGrQ8a_3SubbH-c7O=Mg@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <CAC_iWj+dMSBLJF7prZkKmcXYXiXeajRGrQ8a_3SubbH-c7O=Mg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -197,41 +104,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kumar,
-
-On 12/13/25 8:05 AM, Kumar, Udit wrote:
+On 15/12/2025 10:45, Ilias Apalodimas wrote:
+> On Sun, 14 Dec 2025 at 13:09, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Check that only a file-system installed on a handle for thethe
 > 
-> On 12/12/2025 11:43 PM, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@cherry.de>
+> Typo here, please fix it on merge. Also can you expand the commit
+> message a bit, explaining that load_image will eventually call
+> efi_dp_find_obj() catching errors in that?
+> 
+>> device-patch node immediately preceding the file path node is
+
+And a typo here I think. s/patch/path/
+
+Andrew
+
+>> used for LoadImage().
 >>
->> The prompt is missing the indication this applies for the SPL loading
->> a FIT image, and not any other stage.
+>> The test can be run with
 >>
->> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>      setenv efi_selftest load image from file
+>>      bootefi selftest
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >> ---
->>   boot/Kconfig | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
+>> The addtional test succeeds with current U-Boot but fails
+>> after applying
 >>
->> diff --git a/boot/Kconfig b/boot/Kconfig
->> index 85f4d468069..07ae6cc585a 100644
->> --- a/boot/Kconfig
->> +++ b/boot/Kconfig
->> @@ -272,7 +272,7 @@ config SPL_LOAD_FIT
->>            "linux" images are also supported with Falcon boot mode.
->>   config SPL_LOAD_FIT_ADDRESS
->> -    hex "load address of fit image"
->> +    hex "load address of fit image in SPL"
+>> [PATCH v2] efi_loader: Trigger capsule updates with automatically generated boot options
+>> https://lore.kernel.org/u-boot/20251208151503.1681988-1-ilias.apalodimas@linaro.org/
+>> ---
 > 
-> SPL_LOAD_FIT_ADDRESS, itself indicate that this is for SPL, no ?
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > 
+>>   lib/efi_selftest/efi_selftest_loadimage.c | 45 +++++++++++++++++++++++
+>>   1 file changed, 45 insertions(+)
+>>
+>> diff --git a/lib/efi_selftest/efi_selftest_loadimage.c b/lib/efi_selftest/efi_selftest_loadimage.c
+>> index 24548f1ae63..967eaa58c69 100644
+>> --- a/lib/efi_selftest/efi_selftest_loadimage.c
+>> +++ b/lib/efi_selftest/efi_selftest_loadimage.c
+>> @@ -125,6 +125,44 @@ static struct {
+>>          }
+>>   };
+>>
+>> +/* Incorrect file device path */
+>> +static struct {
+>> +       struct efi_device_path_vendor vendor;
+>> +       struct efi_device_path_controller ctrl;
+>> +       struct efi_device_path path;
+>> +       u16 file[sizeof(FILE_NAME)];
+>> +       struct efi_device_path end;
+>> +} __packed dp_file2 = {
+>> +       .vendor = {
+>> +               .dp = {
+>> +                       .type = DEVICE_PATH_TYPE_HARDWARE_DEVICE,
+>> +                       .sub_type = DEVICE_PATH_SUB_TYPE_VENDOR,
+>> +                       .length = sizeof(struct efi_device_path_vendor),
+>> +               },
+>> +               .guid = EFI_GUID(0x4f9a0ebf, 0xa179, 0x88a6, 0x25, 0x68,
+>> +                                0x10, 0x72, 0xb1, 0x93, 0x51, 0x71),
+>> +       },
+>> +       .ctrl = {
+>> +               .dp = {
+>> +                       .type = DEVICE_PATH_TYPE_HARDWARE_DEVICE,
+>> +                       .sub_type = DEVICE_PATH_SUB_TYPE_CONTROLLER,
+>> +                       .length = sizeof(struct efi_device_path_controller),
+>> +               },
+>> +               .controller_number = 1,
+>> +       },
+>> +       .path = {
+>> +               .type = DEVICE_PATH_TYPE_MEDIA_DEVICE,
+>> +               .sub_type = DEVICE_PATH_SUB_TYPE_FILE_PATH,
+>> +               .length = sizeof(struct efi_device_path) + sizeof(dp_file.file),
+>> +       },
+>> +       .file = FILE_NAME,
+>> +       .end = {
+>> +               .type = DEVICE_PATH_TYPE_END,
+>> +               .sub_type = DEVICE_PATH_SUB_TYPE_END,
+>> +               .length = sizeof(struct efi_device_path),
+>> +       }
+>> +};
+>> +
+>>   /* File system info */
+>>   static struct file_system_info priv_file_system_info = {
+>>          {
+>> @@ -517,6 +555,13 @@ static int execute(void)
+>>                  return EFI_ST_FAILURE;
+>>          }
+>>
+>> +       ret = boottime->load_image(false, handle_image, &dp_file2.vendor.dp,
+>> +                                  NULL, 0, &handle);
+>> +       if (ret == EFI_SUCCESS) {
+>> +               efi_st_error("Invalid file path accepted\n");
+>> +               return EFI_ST_FAILURE;
+>> +       }
+>> +
+>>          return EFI_ST_SUCCESS;
+>>   }
+>>
+>> --
+>> 2.51.0
+>>
 
-You only have this information if you enter the help menu of the symbol, 
-the user will not know it applies to SPL if they don't enter the menu 
-(and they would have to infer this from the name like you just did, 
-which not necessarily everybody is aware is a thing). Honestly, I read 
-that prompt and thought it was a way to configure loadaddr environment 
-variable or something like that, wouldn't have imagined this is related 
-to falcon boot (mostly from what I could tell).
-
-Cheers,
-Quentin
