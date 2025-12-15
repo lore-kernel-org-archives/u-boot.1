@@ -4,99 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644E2D41D74
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 10:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C36AD5B170
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 10:46:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 874CA80050;
-	Mon, 15 Dec 2025 11:29:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A27A80050;
+	Mon, 15 Dec 2025 11:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lRHt72Td";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="agvXYViz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CB2080077; Mon, 15 Dec 2025 11:29:38 +0100 (CET)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
+ id 95D6580077; Mon, 15 Dec 2025 11:46:28 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 282178003E
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 11:29:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD9748003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 11:46:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-644795bf5feso2860783d50.2
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 02:29:35 -0800 (PST)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-78c33d0df85so45664857b3.0
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 02:46:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765794574; x=1766399374; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1765795585; x=1766400385; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U9FXEZ8x2ailfxCnzgAub3fEavHKWruXpceNuoXUCbM=;
- b=lRHt72TdJNDhDKoMcPbYkwl20BES4HRoGNgww3HTYEJPpH9g0iXvSwEczvZwRTLncO
- sRfSljo2dyRNOtk83tSKSzkIrCe7aynAnv+KkYc67GKXqLdTTXHSVCRteeVoyqUbiM9b
- /Z/u+W03Y/jV6G43mb0NOy7O86wfavlrx1q/ecf/h7OGbNU+lyjTLld5aEXdggNZk4bB
- TxG312t/FTSeYmbss3VLDYpeULuav26FP+Go3SGits5uKgS8ioq44EGQXG7BAqQocCil
- 1zgauwDMgabY62GULL0NMFXkzzk/Jz1Rq0nMu6N43R6YyeDUuID3bcGip7HHso4A4/V0
- B1oA==
+ bh=HzZGDQYVpUZ2TqMfaUsfCMOc6pgqEE6RIMKayNoJvUU=;
+ b=agvXYVizQYKkrWFDgn/as3azkMGouA2Nw5HTh3GbjNiTi2iXTrOBJIhYTrrI+vBSxh
+ +wzf4YOhITnfMFUVoNWOOfoa0eN7XrkiTGZEyTvERJmwnefAo1lr2C4rtJuE4EyMez+q
+ a7ZlQIzrfKjrd7yl5q+Tj1hHXA6o39HYUBcBqKjwGcj31AFymRf2tShW9M9Bh+9JGMiP
+ qkk3e1TNfyfOph4m07g4Jll11JcGzvollaMU4gKmQwz1CCwMFCI+ou1JYZSAphTv+kBg
+ Uh3GZgCCgG9N/3rcV4PdO633FzihoITnoBpDu3Q5zysRX2CS8yFibAbAwpri9vD0Ah4U
+ nzLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765794574; x=1766399374;
+ d=1e100.net; s=20230601; t=1765795585; x=1766400385;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U9FXEZ8x2ailfxCnzgAub3fEavHKWruXpceNuoXUCbM=;
- b=gdeytSl4BO8QCkukMRZ7MfzKHPiJraPv3mPnpbxpWYtGzdgRoqyRZOXUcUtgsRb3zX
- T66AlrDN3S9lopR0dwVQ3aSzkwom78REvrQEo+k0KadNXGrBFHcbSPBhD7/wbU63voLn
- gRYC5g6nI/VnfDNJmCLYpQfUj9/GufV0LdgZ1a2Qxo++NFO2QMDTiEyFPtB3h9NI7ZYx
- eoTlqL7egBghSHiQO/VLQb9TucZPCcpVyMmiylgfEYZOMeMoly4enBbdFx0PHWiMFwOm
- mePknM/K/1XJGH/4+e+g9S3aT9CAG5DOjsPW2q8HLLsNGMEk+ScuKFfBMyoyipPSbMyb
- E49Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvEsWvNXwQHvZtmNkmnGkZ0pjrV+GFOp3L0I2cUrso2XuagHHVFpxSIwHbWzk0YXkyzwWanFU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFQ8ddwQuiLTHmoKZESEGatIUQV1zb1D+Od13jsTKBlb9ePXj3
- YfaoQJUxAlpGX3UYyrWvHdJ1ekVg5G6apUu56d2HNEsCL77YS4oH7AvMmoe57OLGEdHozEFg5Zc
- bzCLBfaTiMmm0ht0ieJuDcvY4HwnKfSot+pc6D+82cw==
-X-Gm-Gg: AY/fxX5u0N0ImG4An0wQjqRjtS6vbTwfiYDcofvUE7Q+jNpdSCr+iX+yjjMxTvehVyF
- iDqnf68Hv1S8cw/c4A4zYidsTpgHHa6mVkEmlBOG6Vx7TKfPotFdmEx8iB5D5EKnQflb3HKEpbx
- dxZfVktApq6wlBZmlMEOCfO9uUBPBOGB/kAn/GslikuZ/dZqNgoAghl2Tgu2M6B25rBWP5n/dP6
- aUjm6lv8iswibIe6ZxnBb73KmOM3A+c5n+lD9FtrCYcEq55FSRPk/4IRkVbAeFXKEWstKNOX6Tf
- DRa84wuf7YvPb6GmuabnnQR65T2E/VZrOR+IoB1HoUTUkZTDw5JeUdwUYpe8A23rXeuQy4gQxbu
- MPDpg7r6usDRtzmmKvI1Kh6MO8VK5p/BODJW4ma5Ovj2ZGi9KD5gOJqNyFidh71PhtG1GACBkqN
- KaG62KnJ4Fz91BKTWBb/Rx4DdvzGNztfCLMeHoxQGSxLlVEEjhcnBkxy5917WAVZwkgL7DtFvi1
- VG5IDZ0/M0Hwo5n+eO6DE78yPdg8wo8W+2oqW5YW2t8W6/2L73/0wR4gt4AttZAUJ0eCIwtnq+5
- mCsTfZom3qiy8pEcimVz4aSHYvue1dxk
-X-Google-Smtp-Source: AGHT+IGd6qxIZB1Hk17ZItrRHPtxOChlQq9gOCHqKwir2660TmAdGHA3DlBeAcOcLgb2eF8zPWS09wGi6DmTv/h0YS0=
-X-Received: by 2002:a53:d3c2:0:b0:641:718:8a08 with SMTP id
- 956f58d0204a3-6455564e8e9mr5930993d50.52.1765794573810; Mon, 15 Dec 2025
- 02:29:33 -0800 (PST)
+ bh=HzZGDQYVpUZ2TqMfaUsfCMOc6pgqEE6RIMKayNoJvUU=;
+ b=oK1q2KQQshd9TI7OyNpS2O+835WFRiMEZ8mwKf1U42LO7qj6vGWcyhN3+yCXhMhkqz
+ E65pccNnR5UkgBiLX1QfTp38GpJukydVhbljVrPyeKKvdzqxuz8eYl5cagQpcez5b8QO
+ K77+ZQ6kZZPvTavqAj9AFisk+/NGbHnZELGy9g48jjpZw2a9WfWk9yTWCKouCAKhxpJS
+ oTa/IJn9xAbnxVsyFaQdKoM4XUMkPQD9+nEA6ctI7qrHcgmIwbuq5y7JJJtOcaC7SceI
+ oV8Gzprr4C7htwhQwccSIrtuIsoWDmf6O0mG800RgOAEeBI0ie8krrNHu1YLp5TAvfk2
+ u3xQ==
+X-Gm-Message-State: AOJu0YzeVfIEGjVEbdAiN8gJvKKH4czIIZ8Di/VI7Aoz9mo72ivTydk8
+ 7GriyDKFKwrzeW7g7rJ1h6JY0LzAjL4RNjC0lPbOyiYI0/OW9gjEUIxqoDzERt2fhG3Z8dG7uRy
+ lT/B62a0zDk0cg1PtceBVEPuWaPlvVa5eldynTll9YqQGLzByi+uLaeuw+Q==
+X-Gm-Gg: AY/fxX5BBdMu4XHfnJuRaxrTT/UGgfpJ6x0BXwZkjRDoRt+71XM4fz8PKfym/crl9cK
+ LW5PYi/p10vYroDtbicQxTs7Z9Ch0qEkf+xN/hVgSpLZbq5F7n/wDWd+uoVeOMy96W82H7V6hrz
+ PHq8+3SyyzWI8PlqnhJ5umvvlyEnNrlVqRKgfPybz3dLTO/gCnDbLlkUim8j1yVxJL5d8Q21CSS
+ M6lFf/QrwcMEpE92u0HS5+DfPI9+8Cv7f+8MHngI6rrhb8uafmj2mIygzQX0Uu8XeBzuLFUyKH5
+ LMxOHytBCSALHl7vDSSroCAZ1vmmVMelPPcNu0cteAy7KsIea46S8QZifhA8ffGIDBRPIlHQm50
+ 95VAz0VV4AmNr/IhDdAaM0XuEaMeSf8KCunWpFCobRqq7iWxe23cIyuHA7+B1tOTc/cU6etcz3Z
+ 7eUzlF5cXxZDoPtGKfhTmg4kzLbZqHNC5rd78GFy/sMqVqG3gblYBbtcTJPngpwSZW9qn4gPd8n
+ IwKO5bGnIlPcn9U6/dzwbPQXZ/GpeJRDHS/iDvRfhu2r06+g+We21fG16/VOfOCP9700mYpqIB3
+ ZfZVfdOybk+BGyEPTlVlCcuQhiiSasfmcn9Yk8PQEKM=
+X-Google-Smtp-Source: AGHT+IFdJXwSkho147fKFiaQ6SBDWVsVpt/tVWigWMRHYqgwJyD286P981TbiRnEQlMUqPSeOdpNPR9eyMZ51RC/AkU=
+X-Received: by 2002:a05:690c:d95:b0:78d:6c06:4a18 with SMTP id
+ 00721157ae682-78e66e5894amr78642067b3.37.1765795584668; Mon, 15 Dec 2025
+ 02:46:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20251208151503.1681988-1-ilias.apalodimas@linaro.org>
- <1623f49d-708e-4e23-a92e-54636d92d239@gmx.de>
- <CAC_iWjKzi-eM6YkXG2xBTxBVKyrjUtqz=NnBw0ZLcF0y2W3vFA@mail.gmail.com>
- <257d0dca-ad77-483b-a91a-3c2d1c4f9b24@gmx.de>
-In-Reply-To: <257d0dca-ad77-483b-a91a-3c2d1c4f9b24@gmx.de>
+References: <20251214110937.136425-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251214110937.136425-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 15 Dec 2025 12:28:57 +0200
-X-Gm-Features: AQt7F2qaP64BhCh5mlE4Vfr7esCd9AFO5GfV_W5fkQCSvfcoaEqWBJ206MiWaxI
-Message-ID: <CAC_iWjK0hZNpBoWk88XUcJchF0fdNmxWbyk4D5fJpq21TmkV8g@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: Trigger capsule updates with automatically
- generated boot options
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- John Toomey <john.toomey@amd.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Javier Tia <javier.tia@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- Yao Zi <ziyao@disroot.org>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Javier Martinez Canillas <javierm@redhat.com>,
- Maks Mishin <maks.mishinfz@gmail.com>, u-boot@lists.denx.de
+Date: Mon, 15 Dec 2025 12:45:48 +0200
+X-Gm-Features: AQt7F2oQ2hLwagoHslCp9rru177-PabtpsHfQ2yKBzXEhF450LJdyA_os6LGPrw
+Message-ID: <CAC_iWj+dMSBLJF7prZkKmcXYXiXeajRGrQ8a_3SubbH-c7O=Mg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_selftest: enhance LoadImage test
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,268 +95,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Dec 2025 at 13:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sun, 14 Dec 2025 at 13:09, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On 12/14/25 08:36, Ilias Apalodimas wrote:
-> > Hi Heinrich
-> >
-> > [...]
-> >
-> >>>    /*
-> >>>     * Determine if an MMC device is an SD card.
-> >>> @@ -109,10 +122,11 @@ struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp)
-> >>>     */
-> >>>    static efi_handle_t find_handle(struct efi_device_path *dp,
-> >>>                                const efi_guid_t *guid, bool short_path,
-> >>> -                             struct efi_device_path **rem)
-> >>> +                             struct efi_device_path **rem,
-> >>> +                             enum match match)
-> >>>    {
-> >>>        efi_handle_t handle, best_handle = NULL;
-> >>> -     efi_uintn_t len, best_len = 0;
-> >>> +     efi_uintn_t len, match_len = 0, best_len = 0;
-> >>>
-> >>>        len = efi_dp_instance_size(dp);
-> >>>
-> >>
-> >> Where is the documentation update for find_handle()?
-> >
-> > The description is in efi_dp_find_obj() which is the only place
-> > find_handle() is called. You want to add something in find_handle() as
-> > well?
+> Check that only a file-system installed on a handle for thethe
+
+Typo here, please fix it on merge. Also can you expand the commit
+message a bit, explaining that load_image will eventually call
+efi_dp_find_obj() catching errors in that?
+
+> device-patch node immediately preceding the file path node is
+> used for LoadImage().
 >
-> I would like the function find_handle() to be documented in a way that
-> would allow to review its functionality irrespective of where it is used.
-
-Fair enough, I'll update both functions in v3
-
+> The test can be run with
 >
-> >
-> >>
-> >>> @@ -137,22 +151,35 @@ static efi_handle_t find_handle(struct efi_device_path *dp,
-> >>>                        if (!dp_current)
-> >>>                                continue;
-> >>>                }
-> >>> -             len_current = efi_dp_instance_size(dp_current);
-> >>> -             if (rem) {
-> >>
-> >> Before this patch calling efi_dp_find_obj(rem == NULL) would only return
-> >> exact matches.
-> >>
-> >> With the patch efi_dp_find_obj(rem == NULL) matches shorter paths.
-> >>
-> >> Your commit message does not describe that you want to change the logic
-> >> of efi_fs_from_path().
-> >
-> > you mean efi_dp_find_obj()? I do mention the current functionality and
-> > how it changes. There's a paragraph in the commit message that
-> > explains that the function currently decides on the exact match based
-> > on the validity of the 'rem ptr and that an an enum is added. If it's
-> > unclear i'll reword it.
+>     setenv efi_selftest load image from file
+>     bootefi selftest
 >
-> I have created
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> The addtional test succeeds with current U-Boot but fails
+> after applying
 >
-> [PATCH 1/1] efi_selftest: enhance LoadImage test
-> https://lore.kernel.org/u-boot/20251214110937.136425-1-heinrich.schuchardt@canonical.com/T/#u
+> [PATCH v2] efi_loader: Trigger capsule updates with automatically generated boot options
+> https://lore.kernel.org/u-boot/20251208151503.1681988-1-ilias.apalodimas@linaro.org/
+> ---
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  lib/efi_selftest/efi_selftest_loadimage.c | 45 +++++++++++++++++++++++
+>  1 file changed, 45 insertions(+)
 >
-> which demonstrates the unintended side effect which could not have been
-> derived from the code comments or the commit message.
-
-Ok thanks that helps.
-
-The problem is not re-organizing efi_dp_find_obj() to search for
-1. exact long path
-2. exact short path
-3. longest long path with dp as start
-4. longest short path with dp as start
-
-Instead of
-
-1. exact long path
-2. longest long path with dp as start
-3. exact short path
-4. longest short path with dp as start
-
-In fact I think this change is correct and we should keep it. Exact
-DPs should always take priority when searching for them.
-
-The problem is that efi_dp_find_obj() will now do a best match even if
-rem is NULL. IOW find_handle() is working correctly, but
-efi_dp_find_obj() changes its behavior. Adding a rem check fixes the
-issue
-
-Something like this:
-@@ -194,7 +194,7 @@ efi_handle_t efi_dp_find_obj(struct efi_device_path *dp,
-        handle = find_handle(dp, guid, false, rem, EXACT);
-        if (!handle)
-                handle = find_handle(dp, guid, true, rem, EXACT);
--       if (handle)
-+       if (handle || !rem)
-                return handle;
-
-        handle = find_handle(dp, guid, false, rem, SHORTER);
-
-
-Earlier you proposed
-#define LONGER ((void *)(uintptr_t) - 1)
-#define SHORTER (NULL)
-using *rem == LONGER for allowing longer DPs and *rem == SHORTER for
-other cases to avoid the extra argument.
-
-I can't make up my mind which is better.
-
-Cheers
-/Ilias
+> diff --git a/lib/efi_selftest/efi_selftest_loadimage.c b/lib/efi_selftest/efi_selftest_loadimage.c
+> index 24548f1ae63..967eaa58c69 100644
+> --- a/lib/efi_selftest/efi_selftest_loadimage.c
+> +++ b/lib/efi_selftest/efi_selftest_loadimage.c
+> @@ -125,6 +125,44 @@ static struct {
+>         }
+>  };
 >
-> Best regards
+> +/* Incorrect file device path */
+> +static struct {
+> +       struct efi_device_path_vendor vendor;
+> +       struct efi_device_path_controller ctrl;
+> +       struct efi_device_path path;
+> +       u16 file[sizeof(FILE_NAME)];
+> +       struct efi_device_path end;
+> +} __packed dp_file2 = {
+> +       .vendor = {
+> +               .dp = {
+> +                       .type = DEVICE_PATH_TYPE_HARDWARE_DEVICE,
+> +                       .sub_type = DEVICE_PATH_SUB_TYPE_VENDOR,
+> +                       .length = sizeof(struct efi_device_path_vendor),
+> +               },
+> +               .guid = EFI_GUID(0x4f9a0ebf, 0xa179, 0x88a6, 0x25, 0x68,
+> +                                0x10, 0x72, 0xb1, 0x93, 0x51, 0x71),
+> +       },
+> +       .ctrl = {
+> +               .dp = {
+> +                       .type = DEVICE_PATH_TYPE_HARDWARE_DEVICE,
+> +                       .sub_type = DEVICE_PATH_SUB_TYPE_CONTROLLER,
+> +                       .length = sizeof(struct efi_device_path_controller),
+> +               },
+> +               .controller_number = 1,
+> +       },
+> +       .path = {
+> +               .type = DEVICE_PATH_TYPE_MEDIA_DEVICE,
+> +               .sub_type = DEVICE_PATH_SUB_TYPE_FILE_PATH,
+> +               .length = sizeof(struct efi_device_path) + sizeof(dp_file.file),
+> +       },
+> +       .file = FILE_NAME,
+> +       .end = {
+> +               .type = DEVICE_PATH_TYPE_END,
+> +               .sub_type = DEVICE_PATH_SUB_TYPE_END,
+> +               .length = sizeof(struct efi_device_path),
+> +       }
+> +};
+> +
+>  /* File system info */
+>  static struct file_system_info priv_file_system_info = {
+>         {
+> @@ -517,6 +555,13 @@ static int execute(void)
+>                 return EFI_ST_FAILURE;
+>         }
 >
-> Heinrich
+> +       ret = boottime->load_image(false, handle_image, &dp_file2.vendor.dp,
+> +                                  NULL, 0, &handle);
+> +       if (ret == EFI_SUCCESS) {
+> +               efi_st_error("Invalid file path accepted\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+>         return EFI_ST_SUCCESS;
+>  }
 >
-> >
-> >>
-> >>> +
-> >>> +             match_len = len_current = efi_dp_instance_size(dp_current);
-> >>> +             switch (match) {
-> >>> +             case EXACT:
-> >>> +                     if (len_current != len)
-> >>> +                             continue;
-> >>> +                     break;
-> >>> +             case SHORTER:
-> >>>                        if (len_current > len)
-> >>>                                continue;
-> >>> -             } else {
-> >>> -                     if (len_current != len)
-> >>> +                     break;
-> >>> +             case LONGER:
-> >>> +                     if (len_current < len)
-> >>>                                continue;
-> >>
-> >> So here the logic is:
-> >>
-> >> When search for \a\b;
-> >>
-> >> \a\b\c\d is a better match than \a\b\c
-> >>
-> >> Is this intended?
-> >> I can't find it in the function description of find_handle().
-> >
-> > Yes it is, the description is in the efi_dp_find_obj(). You want me to
-> > move it around? Or expand find_handle() as well?
-> >
-> >>
-> >>> +                     match_len = len;
-> >>> +                     break;
-> >>>                }
-> >>> -             if (memcmp(dp_current, dp, len_current))
-> >>> +
-> >>> +             if (memcmp(dp_current, dp, match_len))
-> >>>                        continue;
-> >>>                if (!rem)
-> >>>                        return handle;
-> >>>                if (len_current > best_len) {
-> >>>                        best_len = len_current;
-> >>>                        best_handle = handle;
-> >>> -                     *rem = (void*)((u8 *)dp + len_current);
-> >>> +                     if (len_current <= len)
-> >>> +                             *rem = (void *)((uintptr_t)dp + len_current);
-> >>> +                     else
-> >>> +                             *rem = (void *)((uintptr_t)dp_current + match_len);
-> >>>                }
-> >>>        }
-> >>>        return best_handle;
-> >>> @@ -160,14 +187,25 @@ static efi_handle_t find_handle(struct efi_device_path *dp,
-> >>>
-> >>>    efi_handle_t efi_dp_find_obj(struct efi_device_path *dp,
-> >>>                             const efi_guid_t *guid,
-> >>> -                          struct efi_device_path **rem)
-> >>> +                          struct efi_device_path **rem, bool match_longer)
-> >>>    {
-> >>>        efi_handle_t handle;
-> >>>
-> >>> -     handle = find_handle(dp, guid, false, rem);
-> >>> +     handle = find_handle(dp, guid, false, rem, EXACT);
-> >>
-> >> Here you are tweaking the logic a lot without really describing it:
-> >>
-> >> efi_dp_find(rem != NULL) used to match in sequence:
-> >>
-> >> 1) exact long path
-> >> 2) longest long path with dp as start
-> >> 3) exact short path
-> >> 4) longest short path with dp as start
-> >>
-> >> now you have
-> >>
-> >> 1) exact long path
-> >> 2) exact short path
-> >> 3) longest long path with dp as start
-> >> 4) longest short path with dp as start
-> >>
-> >> This might be intended. But it is neither described in the commit
-> >> message nor in the function description.
-> >
-> > I'll reword the commit message.
-> >
-> >>
-> >>>        if (!handle)
-> >>> -             /* Match short form device path */
-> >>> -             handle = find_handle(dp, guid, true, rem);
-> >>> +             handle = find_handle(dp, guid, true, rem, EXACT);
-> >>> +     if (handle)
-> >>> +             return handle;
-> >>> +
-> >>
-> >> Check the value of rem here (see comment above).
-> >
-> > Sure
-> >
-> >>
-> >> Having both rem != NULL and match_longer == true wouldn't make much sense.
-> >>
-> >> Theorectically we could use *rem == LONGER for allowing longer DPs and
-> >> *rem == SHORTER for other cases to avoid the extra argument.
-> >>
-> >> #define LONGER ((void *)(uintptr_t) - 1)
-> >> #define SHORTER (NULL)
-> >
-> > Sure, but I think the enum is clearer. Unless you really want this
-> > I'll keep the enum
-> >
-> > Thanks
-> > /Ilias
-> >
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >>> +     handle = find_handle(dp, guid, false, rem, SHORTER);
-> >>> +     if (!handle)
-> >>> +             handle = find_handle(dp, guid, true, rem, SHORTER);
-> >>> +
-> >>> +     if (match_longer && !handle) {
-> >>> +             handle = find_handle(dp, guid, false, rem, LONGER);
-> >>> +             if (!handle)
-> >>> +                     handle = find_handle(dp, guid, true, rem, LONGER);
-> >>> +     }
-> >>>
-> >>>        return handle;
-> >>>    }
-> >>> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> >>> index 130c4db9606f..0d3d7c187d72 100644
-> >>> --- a/lib/efi_loader/efi_disk.c
-> >>> +++ b/lib/efi_loader/efi_disk.c
-> >>> @@ -339,7 +339,7 @@ efi_fs_from_path(struct efi_device_path *full_path)
-> >>>        efi_free_pool(file_path);
-> >>>
-> >>>        /* Get the EFI object for the partition */
-> >>> -     efiobj = efi_dp_find_obj(device_path, NULL, NULL);
-> >>> +     efiobj = efi_dp_find_obj(device_path, NULL, NULL, false);
-> >>>        efi_free_pool(device_path);
-> >>>        if (!efiobj)
-> >>>                return NULL;
-> >>> --
-> >>> 2.43.0
-> >>>
-> >>
+> --
+> 2.51.0
 >
