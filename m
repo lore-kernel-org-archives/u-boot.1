@@ -4,85 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0301BD5B84D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 17:20:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40751D5B85B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 17:24:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA5E3836CE;
-	Mon, 15 Dec 2025 18:19:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AE86C82FC7;
+	Mon, 15 Dec 2025 18:24:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AVYrKPcX";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.b="gNLV4ZIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD62F830A0; Mon, 15 Dec 2025 18:19:55 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7886A836AC; Mon, 15 Dec 2025 18:24:19 +0100 (CET)
+Received: from mail89.out.titan.email (mail89.out.titan.email [209.209.25.102])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DCCF807B1
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:19:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c77fc7c11bso3771227a34.1
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 09:19:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765819192; x=1766423992; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kIyfs1wmqT9VcVQG6yESPWQx1Pb2eKIxwBjKfPjjGko=;
- b=AVYrKPcXXBkTsKvDvjE2tHXYUnrJ8Ea7w674X4aiF9EA/68d5wMfZYwECIpLRIXb6h
- SuFYBYTTKkFaqeyIG9bkXIyDKE7Zl7FcxZpvmUaFO+dNAAQiZse1jXc1DvIZlpaKXLZw
- fFVAqC+t/PS/aCIXfuGosZ2HQgP12EKaACrfw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765819192; x=1766423992;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=kIyfs1wmqT9VcVQG6yESPWQx1Pb2eKIxwBjKfPjjGko=;
- b=DIFCeupkwuwpXko1YbOSRQoxTUztobhX5b8qiL8MRSrzTZsC/XATbv4JUHLVLKe3O7
- h9fBnNJ08CFJBWs6GAqPpPDXp/ahLUErtSvD9ZffujOvk/8O0cIlV91E1J16AXpfOsP3
- vEbLofcfFBJtnGzvI4gLZ3+RHUFmiNL4ZD87vHuM669jSepmaYq3i8VBpQq+rAneG6sw
- gkfYtHbF00yZu5U3j0Qf6W2f88ubiTaqnDnC2Z7rOJMCmu16jYQzojjfYhSQzYlOr0Qm
- GMkHbkTBpR9DbjfmUry3ilEFRDMS4BSv+MY/G15yigo4bs1Ts7sSVuf1rQsjyeZv7rYn
- 6Q1Q==
-X-Gm-Message-State: AOJu0YzDyKz45h98ge2q8y55jfoSZI+Nn7vr2ZhtC6gYovrpZY1dmstX
- ZGrkdppli/AB390J8itfsf5Lga/iseB2pN8iHlOV/+GGHcbFFhi3ooUaCO58TTilh20=
-X-Gm-Gg: AY/fxX6tIK2oiDn+JxTJA3g4rFHQ/NlbU1LEYZmtyYFyofQjjOVSXbi4xUMNMQxLZ8z
- bulhoqgSFVp+oSmiQZjcqB1KOjUVgoFwjsIfc3ISjNTRVBnMPiCdNyFonJyJOns8ykpI7ed8pBS
- YawBHTJ/kvQZlJo0nQ6TBonV6Znh07bVGKxLAmoVNqayfvvuVi7sDIpt/gdbQnkxs9GY3iqE7li
- ZLqlrFSbU37/HlvhZYKfV5BBsOXcsubfM7NwaN55oUyBYee78PVfYwCBk94Xki4arpP2FyhzKkw
- EMC80h1nGwc04Zr5jv83si/WFw2xXONNmZzMKzTcezndobf9XNkqAg5E+WyG1U3yCE7q28nCf5T
- WVLYwddyKW0VqRjPVs5H9CtlPlyXiMrmFHh0J5LDRETaRhQhAQ9FFiq2iQNyYY19l+jVnoZBX3N
- dA4mYwYNWaWkX3jPz89fbPnpub8Ews7YTM8OrhI6EM53IENAhw
-X-Google-Smtp-Source: AGHT+IE8sdZjy7D7sVS+vgK27/PZGLjEC7/i62+25lSQLgBDzney56qS3+WfwpicdhB72YeN+lcbbQ==
-X-Received: by 2002:a05:6830:82f1:b0:7c7:48b7:640a with SMTP id
- 46e09a7af769-7cadcb9f620mr8824079a34.7.1765819192280; 
- Mon, 15 Dec 2025 09:19:52 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cadb345977sm9710691a34.29.2025.12.15.09.19.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Dec 2025 09:19:51 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251128-topic-am33-clk-regmap-dep-v2026-01-v2-0-451b4f4e7e85@baylibre.com>
-References: <20251128-topic-am33-clk-regmap-dep-v2026-01-v2-0-451b4f4e7e85@baylibre.com>
-Subject: Re: [PATCH v2 0/2] clk: ti: Cleanup common functions and omap-cm
-Message-Id: <176581919153.1844985.13797463833905270401.b4-ty@konsulko.com>
-Date: Mon, 15 Dec 2025 11:19:51 -0600
+ by phobos.denx.de (Postfix) with ESMTPS id 008BE807B1
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:24:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+Received: from localhost (localhost [127.0.0.1])
+ by smtp-out.flockmail.com (Postfix) with ESMTP id 4dVRkR68kGz9s3M;
+ Mon, 15 Dec 2025 17:24:15 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; bh=DxDS6WYYSfpPR+msZm8yd+IkOt2EE+XBRsJ6YfilMlI=; 
+ c=relaxed/relaxed; d=ziyao.cc;
+ h=to:message-id:mime-version:from:cc:subject:date:from:to:cc:subject:date:message-id:in-reply-to:reply-to:references;
+ q=dns/txt; s=titan1; t=1765819455; v=1;
+ b=gNLV4ZIXqQwGIQt21UBLK0x0MHZIFBBE9sjP7HR3/rbslsUS97iFKHnv47ZMuaPz5P4SD0rX
+ OqcwPShN6JgHLQ1fPQhEqM9NXqmpMjSW+tes5+WnYP1Q5Q2FGQALR6t3j3lQU9niD+DHR7YdtoI
+ pK76huVWFD3i1O7oooWMOtzE=
+Received: from ketchup (unknown [117.171.66.90])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by smtp-out.flockmail.com (Postfix) with ESMTPSA id 4dVRkN41KCz9rwj;
+ Mon, 15 Dec 2025 17:24:12 +0000 (UTC)
+Feedback-ID: :me@ziyao.cc:ziyao.cc:flockmailId
+From: Yao Zi <me@ziyao.cc>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Yao Zi <me@ziyao.cc>,
+ Nathaniel Hourt <i@nathaniel.land>
+Subject: [PATCH] riscv: Build SPL with -fno-pic
+Date: Mon, 15 Dec 2025 17:22:37 +0000
+Message-ID: <20251215172236.52710-2-me@ziyao.cc>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-F-Verdict: SPFVALID
+X-Titan-Src-Out: 1765819455679212087.21635.6038954200855312224@prod-use1-smtp-out1003.
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.4 cv=TPG/S0la c=1 sm=1 tr=0 ts=6940443f
+ a=rBp+3XZz9uO5KTvnfbZ58A==:117 a=rBp+3XZz9uO5KTvnfbZ58A==:17
+ a=MKtGQD3n3ToA:10 a=1oJP67jkp3AA:10 a=CEWIc4RMnpUA:10 a=VwQbUJbxAAAA:8
+ a=DmvN9xNSqkJOce4TPBwA:9 a=3z85VNIBY5UIEeAh_hcH:22
+ a=NWVoK91CQySWRX1oVYDe:22
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,24 +77,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Nov 2025 21:22:17 +0100, Markus Schneider-Pargmann (TI.com) wrote:
+For RISC-V ports, both SPL and proper U-Boot are unconditionally built
+with -fpic, i.e. position-independent code, which means symbols may be
+addressed through GOT. This is useful for proper U-Boot, where we have
+relocate_code in arch/riscv/cpu/start.S and could relocate the GOT
+entries and other .data members to run at any address.
 
-> this series cleans up the direct dependency of ARCH_OMAP2PLUS to compile
-> ti/clk.c which holds common functions for other clock drivers. It
-> creates its own config symbols for these common functions and for the
-> omap-cm driver as well.
-> 
-> The omap-cm driver config symbol is added as default enabled.
-> 
-> [...]
+But for SPL, there's no self-relocating mechanism, all we could do is
+relying on the linker to fill correct addresses into the binary at link
+time, forming a position-dependent image. This effectively makes the
+GOT, which is generated by usage of -fpic and couldn't be optimized out
+at link time, an unnecessary size burden.
 
-Applied to u-boot/next, thanks!
+Moreover, our current linkscript for SPL doesn't take .got section into
+account, allowing the linker to put the GOT at unexpected positions,
+like after _end/_image_binary_end symbols. This has caused real-world
+boot failures[1] when SPL is linked by LLD.
 
-[1/2] clk: ti: Split common omap2plus functions into new symbol
-      commit: 6f2d0090f9842c5ff2e5f4344fe6cb1f5f515595
-[2/2] clk: ti: omap4-cm: Add Kconfig symbol
-      commit: f75f8397e813c3aacb147e5177ab969071d759b2
+These two reasons make building SPL with -fno-pic good choice,
+eliminating the usage of GOT at the first place. This patch replaces
+-fpic with -fno-pic in PLATFORM_CPPFLAGS when building SPL.
+
+We also need to force medany code model for SPL to allow putting the
+executable at any contiguous 4GiB memory range, instead of only the
+lowest and highest 2GiB when using medlow. This wans't an issue
+previously, since GCC ignores -mcmodel=medlow when -fpic is specified,
+but is problematic with Clang, or without -fpic.
+
+Building position-dependent code also produces bss/data/rodata section
+variants with "s" prefix on RISC-V, i.e. sbss/sdata/srodata. These are
+"small" sections which compilers expect to be put together, addressable
+through a single instruction relative to $gp register and thus saving
+code size. This is called GP-relaxation[2]. However, U-Boot takes $gp
+for global data pointer, making it impossible, so these sections are
+merged into their "larger" variants in linkscript.
+
+Reported-by: Nathaniel Hourt <i@nathaniel.land>
+Closes: https://lore.kernel.org/all/932979cb47c4fded7ac19216ca172504@nathaniel.land/
+Link: https://lore.kernel.org/all/9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land/ # [1]
+Signed-off-by: Yao Zi <me@ziyao.cc>
+---
+
+I've tested the patch with
+
+	starfive_visionfive2_defconfig (StarFive VisionFive2)
+	sifive_unleashed_defconfig (QEMU -machine sifive_u)
+	th1520_lpi4a_defconfig (Lichee Pi 4A 16GiB)
+
+built with either GCC or Clang, all these ports boot well. When building
+with GCC, this also shrinks SPL of starfive_visionfive2_defconfig by
+1.5KiB (1%),
+
+without patch;
+	-rw-r--r-- 1 ziyao ziyao 149169 Dec 15 11:56 u-boot-spl.bin
+
+with patch:
+	-rw-r--r-- 1 ziyao ziyao 147731 Dec 15 11:57 u-boot-spl.bin
+
+This is a relatively large change to RISC-V SPL, so I'm willing to wait
+for some time for more comments and wider testing. Thanks for your time!
+
+ arch/riscv/Makefile           | 5 ++++-
+ arch/riscv/config.mk          | 8 +++++++-
+ arch/riscv/cpu/u-boot-spl.lds | 3 +++
+ 3 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/arch/riscv/Makefile b/arch/riscv/Makefile
+index fdda6da1df32..90d98eaba6bc 100644
+--- a/arch/riscv/Makefile
++++ b/arch/riscv/Makefile
+@@ -32,13 +32,16 @@ endif
+ ifeq ($(CONFIG_RISCV_ISA_ZBB),y)
+ 	ARCH_ZBB = _zbb
+ endif
++ifeq ($(CONFIG_XPL_BUILD),y)
++	CMODEL = medany
++else
+ ifeq ($(CONFIG_CMODEL_MEDLOW),y)
+ 	CMODEL = medlow
+ endif
+ ifeq ($(CONFIG_CMODEL_MEDANY),y)
+ 	CMODEL = medany
+ endif
+-
++endif
+ 
+ RISCV_MARCH = $(ARCH_BASE)$(ARCH_A)$(ARCH_F)$(ARCH_D)$(ARCH_C)$(ARCH_ZBB)
+ ABI = $(ABI_BASE)$(ABI_D)
+diff --git a/arch/riscv/config.mk b/arch/riscv/config.mk
+index eddd6a3b9a29..4d6fd7434171 100644
+--- a/arch/riscv/config.mk
++++ b/arch/riscv/config.mk
+@@ -35,7 +35,13 @@ EFI_LDS			:= elf_riscv64_efi.lds
+ PLATFORM_ELFFLAGS	+= -B riscv -O elf64-$(large-endian)riscv
+ endif
+ 
+-PLATFORM_CPPFLAGS	+= -ffixed-x3 -fpic
++ifdef CONFIG_XPL_BUILD
++PLATFORM_CPPFLAGS	+= -fno-pic
++else
++PLATFORM_CPPFLAGS	+= -fpic
++endif
++
++PLATFORM_CPPFLAGS	+= -ffixed-x3
+ PLATFORM_RELFLAGS	+= -fno-common -ffunction-sections -fdata-sections
+ LDFLAGS_u-boot		+= --gc-sections -static -pie
+ 
+diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
+index 0717833df556..dc028702a5d8 100644
+--- a/arch/riscv/cpu/u-boot-spl.lds
++++ b/arch/riscv/cpu/u-boot-spl.lds
+@@ -25,11 +25,13 @@ SECTIONS
+ 	. = ALIGN(4);
+ 	.rodata : {
+ 		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
++		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.srodata*)))
+ 	} > .spl_mem
+ 
+ 	. = ALIGN(4);
+ 	.data : {
+ 		*(.data*)
++		*(.sdata*)
+ 	} > .spl_mem
+ 	. = ALIGN(4);
+ 
+@@ -52,6 +54,7 @@ SECTIONS
+ 	.bss : {
+ 		__bss_start = .;
+ 		*(.bss*)
++		*(.sbss*)
+ 		. = ALIGN(8);
+ 		__bss_end = .;
+ 	} > .bss_mem
 -- 
-Tom
-
+2.51.2
 
