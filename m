@@ -4,62 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FA6D41D74
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 07:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0514AD41D74
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 07:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26F3680050;
-	Mon, 15 Dec 2025 08:49:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 1114080050;
+	Mon, 15 Dec 2025 08:57:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SlPLOku+";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Cj3wvra4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2424880081; Mon, 15 Dec 2025 08:49:18 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CBC0480077; Mon, 15 Dec 2025 08:57:01 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FD328003E
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 08:49:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B93138003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 08:56:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dVByy1nJqz9tSS;
- Mon, 15 Dec 2025 08:49:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765784954;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DIiwuH2h7Eskb0MdNl7C3sS3XJMRTsMv28wYzbhIi7M=;
- b=SlPLOku+bqwfdu7NqG1D97JQojsEhBTAPBPTRqkWsLhhPFY573eYSkP/UoHm6xP5EXyx5z
- l3uVK6wa01dJMaaGjuVy/8N4SVFzpbT6G1xjLGAAzce7rYHDRGojyDBMw+NjJN38Obaw5E
- ih6BnBYAP/qMeDjWK9x/c1J3bSbzi3mEiooZ/vLxOWQBJqqV0GsihBZVMvKIDVQx+1JsZB
- Q3s+rg1o5vhdtsM17SUboQxV1nFZS/lj7EvvEbNioLaGeIS3UpO+v0eEm9f04UmtF1FbWO
- XgXunvYzv5qCfngu7Bv/Zc102n7hGTMRVJaprouR4XWgIokYN2qmLAP8hmEaLA==
-Message-ID: <45c7bb4c-b106-4e05-8346-71febd156416@mailbox.org>
-Date: Mon, 15 Dec 2025 08:49:13 +0100
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-42fbc305882so981402f8f.0
+ for <u-boot@lists.denx.de>; Sun, 14 Dec 2025 23:56:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1765785419; x=1766390219; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3W8RBJHCNjVIFl6Bam2tQjTlbmf5CMnWVciuN59aCmM=;
+ b=Cj3wvra4GlZL2hI6W5mrJaZuoVt8SASO1yn9HGMo0Ga9yhXUXWWlYHBX33AfGMbP38
+ shPlZsz4mGD6ZS5eDnKjtZ55tNxMDQ/EVwVo3NS4qcdpz/NIyYDUoB+1LTHAuJfLcTDz
+ rj5GBfIskNnYU3J8XRk5ptrks0LLW6WZie3ZOL+BBkmwVj8gnoSKGOTjQRDpr08GMlEM
+ tnA1ScYKGYXrvT8iPVIewhOnsqU+yDB2mbbM9E17WteoxLT0lNJO7UnkhT6n46R8yXr9
+ GJMNBC2Bnv9LeCJE5TNIzGn4LoaiyPBZAqcI/fcb2iWiEgV8HqK0FgTFVe2nQfTNZwQI
+ CRPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765785419; x=1766390219;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3W8RBJHCNjVIFl6Bam2tQjTlbmf5CMnWVciuN59aCmM=;
+ b=V+tOrXoO+3PVJboFq6cSGHrrj45cTVlhDzdY4uBfQpItoMHU0F59IIyksSNwYSJW6b
+ dDhuJlxDlL4RC0YF5i6P7OHdoyfSw0xscHtfy6D4P/Yac1z1Cm8P0NulrllvhugXqhI7
+ /nWN9lQF2kz3ynJc2zTWPFKwgpM9H725ywIXBUcHr0UNugB/1Z8Q3tvcIAUIpKt4MT9z
+ MG23cU4nGP1ezV+SEf3SrdBx2T8hnbBV6mu/gEtnvq0W2RoDt5hlS2hYs401FiAukGAt
+ LNjoarmGRJpioSBaeD6hBwfTGIEfv6S3JQgJYk2Z0BgjFkKA5V5pJ6/QPJmUB3gw2k5A
+ FeCw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqXBVejvI7yXIugHp+EDqUSqIN+hXMTwSKQmM0iw3aq7b4SGxLU6r/L+sycQKYOMbwTnq2Irk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFSrfuhgKg+Ln6eNfBTCjH/f4eycGb2NUnMKr3KRjyYtNgh2PP
+ lPnPq13JxFlkICazCyp3jFWPKgAQkL8fiX8rbbG9L3ghVVm6jIlqDPE4LXGiBnyAB0w=
+X-Gm-Gg: AY/fxX46U4YXlFTbm40ogDNNM+n3DXua96peNM7wkRVhN8j7ftPzOS+uVuIUJHoHKS3
+ lkbUgr/w0AKoqLXAtdMfQRNN06CRnI0WP9ha7/kuwjvd/nBtqjprjFx48Iz2zH127nwy6AiMIgz
+ KXx3p3B40JrRxckdMGUH940UzM8FOSHXplgUNKhbZZD9BbsO7nOlpgOCvaTyjyNNxwm1gj2amzd
+ Dr05RsT2t7HKuJv7rukl7FbaoscDOw0t/m6LpWfkbreUVP/SXOM8Tqe58sK+DksC3HMXuig7Pg6
+ acKh16KUdS5hZUYDjiwyUppfLuOouVMhGqTLumdgjMFb+L3QimDVXZaDZfCCvoRlxn4pg2uy5sY
+ Bi2wCRepEAsL3DrlBW2eM20KQub450dW/u7FSuG5wQF7oL6wiE2AWoTpDhKnzW0lIMjGPzcXZyQ
+ itRhm5t5jgaeaqVJ33+L+EX1gkdSKtnVE7FSNN0tyZilTlUGV1t0dveHkKgC7J3S8ZVvzJc3duz
+ miOXQQcMOycfZlj
+X-Google-Smtp-Source: AGHT+IGqHxaA/GOfz0EriAT5UzxKEe1/IM4xCuEPPZAivmgd45OchB7Dp36dqOBZJX9Zx3vK0XfARQ==
+X-Received: by 2002:a5d:5f54:0:b0:42b:3c3e:5d2f with SMTP id
+ ffacd0b85a97d-42fb48fc506mr11445139f8f.39.1765785419152; 
+ Sun, 14 Dec 2025 23:56:59 -0800 (PST)
+Received: from T14sGen4.sec.9e.network
+ (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-430fdcc6bbdsm3804371f8f.14.2025.12.14.23.56.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Dec 2025 23:56:58 -0800 (PST)
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] x86: cpu: Fix crash on FTRACE enabled builds
+Date: Mon, 15 Dec 2025 08:56:44 +0100
+Message-ID: <20251215075645.1795762-1-patrick.rudolph@9elements.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: kirkwood: Remove unnecessary watchdog GPIO for ZyXEL
- NSA325 board
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20251210222754.23535-1-mibodhi@gmail.com>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20251210222754.23535-1-mibodhi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 0e9b075a17c01a523b0
-X-MBO-RS-META: d9tfmjotinsh3f7fysne44o961a19unu
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,45 +101,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/10/25 23:27, Tony Dinh wrote:
-> Watchdog was already disabled in board/zyxel/nsa325/kwbimage.cfg.
-> 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+When compiled with FTRACE=1 U-boot will crash as %rdi is clobbered
+in board_init_f_alloc_reserve() and board_init_f_init_reserve() will
+memset the .text segment instead of the global_data struct.
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+According to the System V AMD64 ABI %rdi is not preserved and the
+existing code only worked as board_init_f_alloc_reserve() was small
+enough to not use %rdi.
 
-Thanks,
-Stefan
+Fix that by always passing the correct argument to
+board_init_f_init_reserve().
 
-> ---
-> 
->   board/zyxel/nsa325/nsa325.c | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/board/zyxel/nsa325/nsa325.c b/board/zyxel/nsa325/nsa325.c
-> index 38340b33c8b..894c2ef293c 100644
-> --- a/board/zyxel/nsa325/nsa325.c
-> +++ b/board/zyxel/nsa325/nsa325.c
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * Copyright (C) 2014-2023 Tony Dinh <mibodhi@gmail.com>
-> + * Copyright (C) 2014-2025 Tony Dinh <mibodhi@gmail.com>
->    *
->    * Based on
->    * Copyright (C) 2014  Jason Plum <jplum@archlinuxarm.org>
-> @@ -51,11 +51,10 @@ DECLARE_GLOBAL_DATA_PTR;
->   #define HDD1_GREEN_LED		BIT(9)
->   #define HDD1_RED_LED		BIT(10)
->   #define HDD2_POWER		BIT(15)
-> -#define WATCHDOG_SIGNAL		BIT(14)
->   
->   #define NSA325_OE_HIGH		(~(COPY_GREEN_LED | COPY_RED_LED | \
-> -				   HDD1_GREEN_LED | HDD1_RED_LED | HDD2_POWER | WATCHDOG_SIGNAL))
-> -#define NSA325_VAL_HIGH		(WATCHDOG_SIGNAL | HDD2_POWER)
-> +				   HDD1_GREEN_LED | HDD1_RED_LED | HDD2_POWER))
-> +#define NSA325_VAL_HIGH		(HDD2_POWER)
->   
->   #define BTN_POWER				46
->   #define BTN_RESET				36
+TEST=Can boot on qemu-q35 with FTRACE=1 enabled during build.
+
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+---
+ arch/x86/cpu/start64.S | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/x86/cpu/start64.S b/arch/x86/cpu/start64.S
+index 78e894d2a21..3fcd8c15481 100644
+--- a/arch/x86/cpu/start64.S
++++ b/arch/x86/cpu/start64.S
+@@ -16,6 +16,8 @@ _start:
+ 	/* Set up memory using the existing stack */
+ 	mov	%rsp, %rdi
+ 	call	board_init_f_alloc_reserve
++
++	mov	%rsp, %rdi
+ 	mov	%rax, %rsp
+ 
+ 	call	board_init_f_init_reserve
+-- 
+2.52.0
 
