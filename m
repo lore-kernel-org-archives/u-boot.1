@@ -4,123 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8588D5B16C
-	for <u-boot@archiver.kernel.org>; Sun, 14 Dec 2025 21:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22CB6D59D99
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 04:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E2D80050;
-	Sun, 14 Dec 2025 22:59:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id 25C8280050;
+	Mon, 15 Dec 2025 05:52:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="TqkWcd1k";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Pgkq77rw";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kLt5WCOy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71DD98006D; Sun, 14 Dec 2025 22:59:15 +0100 (CET)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.12])
+ id 4FF4180077; Mon, 15 Dec 2025 05:52:08 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D53378003E
- for <u-boot@lists.denx.de>; Sun, 14 Dec 2025 22:59:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F10428003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 05:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-k346.prod.antispam.mailspamprotection.com;
- s=arckey; t=1765749550; 
- b=aqA2Wode2jE8pX7Hrvsq5tUQwjiZbjFjZ30cH15MBJ8pwqpRX5Elx5vz0QX0fe0yIioH+4dEw+
- kzyqwJLnmaxplDRs+ei2E+/t6j5hoGdcf6fp4pJxJ70gM9cazgHWTxWBCmvODLSptFb0/yJpan
- ksWTdOzgZhqRV+gAiO9kMd+fwGPch07pxfIzVwXUQQqhTw7JkFOABfPn/s2cNaiZmwdFHLIXJJ
- 0JwJQvuwIYQwk4k5iPnY6E7jjs/iESfvswnHrbV7g11oaYR2upAfCvEayvs3wyyH+H2gXtuISK
- DBQJC+RNxEoWdJLDvzFJuoXTtzzHBuvOpMfglx5IP8f9sQ==;
-ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-k346.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-k346.prod.antispam.mailspamprotection.com;
- s=arckey; t=1765749550; 
- bh=9q786pM9qPqppr7dog+apYFCYSngdaKtcM+7TOzxgWM=;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:
- From:Date:DKIM-Signature:DKIM-Signature;
- b=dP3Dy6TLfpA03HotF3lmq/DtVDPoAWxZC4QeGEuzkvFkQ4zZChc6cOEGhNs4GyiyLB5HekUph0
- QhieGYIkp6zCPljTmyJbRDX7JOGRTed1XZtMPZLSEv6Iw+5s+mFXjlKTFSZtdmrR2a4m/uCJcw
- DCoAaabXOIuIHzdfQvU/VB0clRWwd6icTVP1FOYaGkkR0jKJxzIzR490muSaSD0KuQSMshj43k
- YdcGz6PRGtbpdt3ii+vVV+MmH1zA7FDt2drwxnuiOHzzylq8ABNCNis7xyXfg3qNQ7/+G5S+gv
- febTtyS48mMagcIbJK7FxYPuM100ty+TTFcXYtkza+LouQ==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- List-Unsubscribe:Content-Transfer-Encoding;
- bh=Kp/T3RpcWyopc416eJI+MDnuuLxV65hG1WXDuNr617k=; b=TqkWcd1kXjqd51D2YlCrIx8fPz
- QiYvASAXsjDMfyRP9w3dFcC6lFjquiViOxto9JxKUYNRpHlNh4jUl0N6EIl4qkcO8eC+BgmXES0ob
- pvI6K3do2zHD0JZcz5j6VmzWpQLwbg1GhocGky5Hm8mFnX9QMYzC9aSBvmpy3ns6I7Sw=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-k346.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <francesco@valla.it>) id 1vUu7O-00000002bMV-47xk
- for u-boot@lists.denx.de; Sun, 14 Dec 2025 21:59:09 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=Kp/T3RpcWyopc416eJI+MDnuuLxV65hG1WXDuNr617k=; b=Pgkq77rwaR85llxUJYC0s+umNv
- m4+upMIQtmRdCJRTwItXGssozBAEMMzG+e8Vdz/1XCQm1C3KRZ1+UlPj1M0F0KP597zHeV9A+rkva
- tYRh9B0Waum6SAC4Oo2Phd14Ok1gvONlfOuPV+VCgYR8Nb35sgegPSV/ME+BMgPRSzi0=;
-Received: from [79.34.194.176] (port=61045 helo=bywater)
- by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <francesco@valla.it>)
- id 1vUu7J-000000009uw-0jdJ; Sun, 14 Dec 2025 21:59:01 +0000
-Date: Sun, 14 Dec 2025 22:58:59 +0100
-From: Francesco Valla <francesco@valla.it>
-To: Joseph Guo <qijian.guo@nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Jacky Bai <ping.bai@nxp.com>, Joseph Guo <qijian.guo@oss.nxp.com>,
- Justin Jiang <justin.jiang@nxp.com>
-Subject: Re: [PATCH v4 0/2] Add FRDM-IMX91 initial support
-Message-ID: <aT8zI141dpu1c48e@bywater>
-References: <20251212-imx91_frdm-v4-0-66bf00d8e721@nxp.com>
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IwiqxxMWVcvU5nm5FZ/e8Xfbj2saUDpwaibKvkc+3Y6tLTp29a3+oKkgd/s7b5tgBGN+yaI4wZPt+Cg5JxeR01FmK2U1hLE9V23CJV750oAU0d+b1zujBt7PVzEcCi9bscAjwambUCfqXVIsH7HCtofcRiLObw6cOiWogk/fQmLtGK4ehCSl0h6ndADJhqGa21XdcwZhJOI3xBqmommwUjuU+dq0xobKe6kKmClB6IALd5To0V25eFS+1k8WywkEp3/+CX43pG2WH4niJLvh7HwtqL02Jv+MF/6Hhhfn76JEa3WUlq4MhU1RQnIUKmil3JY5ygJk3u6VD0ro3qTIpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7pH9B6HSVWX3wM7C5fkImD+9BBN1WEKYeN1sFh37Fyk=;
+ b=FBs64r0MOHx68hk/xrc9FhV+5JxJ6aymhvXd2oTBTZzJM5zBT6ddVwzqGfhK3fyfUIGmiyyCtLsL3ipg7E6HA+Iq5AJ1mYLaXGzoMODZiJlailkpVRUzeosxPqDTjaKlrydAcXCS8YIuYP/JOcTmMUg1MMl9C1r70vv1FiF4ZDMBLWCLzEYAyHvX5blLA8pbLdTtlC+fi990qUD/YXPy/wS3+oEG6/wLSDv5VQpR7PlXqUfBOs9EE/Zs8IkYNOkE8MtfeGKb8H03MwScUxI289Cxtl4Q4JP4tW08lytZ/4PbyyOSkchZCVcNYyah+RFIwHTZSzchpJPgVpbMfc5DfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7pH9B6HSVWX3wM7C5fkImD+9BBN1WEKYeN1sFh37Fyk=;
+ b=kLt5WCOyfG6my/twyZrR4wI81hLYbYtK1enswGnlH+1bVj0Mwtz/ataWs0FCI35KYD7AkTNC6moaXAlB7xNQR9ekhWpBn0Nu31wYJcnHPCz50Ve3+m9LoEjQrfOYkvcV8XldxlCeJCgufLBHapA2tTmgjXrgai3HjUfLJl8QqWf/U1k1NMZ41cZcLVtPm0+Y14gs0xlcbhwANFJGPnfE71zC6JkKnaoMPUDuJwOVk2ltBq5Tqnyej9wC5AhZzpPMrrgDEccI+MwhY+d9nPXy1jIpdcMw9GcthsZ2SyHvUbx2eqet9JpYcvK3hKxrqkm2UoYsuzaJXEX0mupHV/njlQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
+ by IA1PR03MB8098.namprd03.prod.outlook.com (2603:10b6:208:593::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Mon, 15 Dec
+ 2025 04:52:02 +0000
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0%3]) with mapi id 15.20.9412.005; Mon, 15 Dec 2025
+ 04:52:02 +0000
+Message-ID: <e25fa76c-892b-4e0f-8e5a-6bd36c7aa8bf@altera.com>
+Date: Mon, 15 Dec 2025 12:51:54 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/5] spl: Kconfig: Add missing SPL_LOAD_BLOCK for
+ SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+To: Jan Kiszka <jan.kiszka@siemens.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marex@nabladev.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
+ Sune Brian <briansune@gmail.com>, Ralph Siemsen <ralph.siemsen@linaro.org>
+References: <cover.1765470899.git.jan.kiszka@siemens.com>
+ <53abd048d1c0ba71f09d8fddccb7dc076859a74e.1765470899.git.jan.kiszka@siemens.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tienfong.chee@altera.com>
+In-Reply-To: <53abd048d1c0ba71f09d8fddccb7dc076859a74e.1765470899.git.jan.kiszka@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SG2PR02CA0131.apcprd02.prod.outlook.com
+ (2603:1096:4:188::6) To CY1PR03MB8121.namprd03.prod.outlook.com
+ (2603:10b6:930:106::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251212-imx91_frdm-v4-0-66bf00d8e721@nxp.com>
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: c59b7bc1781c5e79675db7cfce37af2a
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vUu7O-00000002bMV-47xk-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-k346.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|IA1PR03MB8098:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5ab69d6-d7b2-43e5-5578-08de3b95af91
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YmpvMkdxanNwVU5oWlE3aDY2SEZiMmdNU3dpOEg4YjB5T0U1QU9DUnMzUXVY?=
+ =?utf-8?B?dG9NKzRBOEZwbFByY3Q0ZXQ0V1hIbjQzV292K0pQb2wvN0pQUzQ2OGNpUWxZ?=
+ =?utf-8?B?Sit2dFFCcmlPc1hsV0U1Y0J1b2lSUnovRm5YM25FOEl5aW9KU3M1bWJKbElX?=
+ =?utf-8?B?dWVUUEd1Vm9RQklUWEJyVG1EcnRZb04wUmJ5NGVYWUpvL2JZTWhPOG9naWFP?=
+ =?utf-8?B?OHhtbjFQL3ZxWDAwTVRZL25uT1RiT1NaQW1IY0w0OHJsbFlzZXJncG8zZHdX?=
+ =?utf-8?B?K2QvVXAvb1hpUUZiOVlLYjJ4YWxrRHBlNVNKUGR2L3gxZWJhcjA2a0tURmU2?=
+ =?utf-8?B?cGVxVUI4YWd0MUo0bnZsVG1QNmJTTEVoL2xyUFlscC9ScVg3eDZ1RGs0UDVF?=
+ =?utf-8?B?WURNaXdlaVgwbi96SWI5MEtVNWI1bTNyaTNrVktqSlMwWWpUWjNDZFZaMGFW?=
+ =?utf-8?B?SW4wdVZTSmR1V1JYQ2R3Z2tUdUd2aFFSUGkvQjZrR21nOFNVOWZYMlhjb282?=
+ =?utf-8?B?aEYzU2l3dStJUFl5bmNrQmtGU1ltc3RnV3AvWlZDbzhiNEhCc09TMTQ4T2hy?=
+ =?utf-8?B?SkxaRlJtYmxINVRBZ0VrVklwd3hFSlpsYy9jTFB5U3NPSkh4TkJjbTJEb2hy?=
+ =?utf-8?B?WWdIMHVYb05PQUFuUWdNNWpjZVJxVjMrYWJtV1cwbU1mM0djTVdCR01kUWRK?=
+ =?utf-8?B?djNlNWYxTGp2NVJERmttZCtOd2VOdW9JTW9SUjg2aE1GQXRaeU51bUdvbm5S?=
+ =?utf-8?B?S3JUVVFpaFJKVVpHZUxheCtzTExkUi83dnJlSEVLZHRKR2RyNU5HdVIrMlNF?=
+ =?utf-8?B?MGVZSWVtWXBNeW5YNFFNRUdFTzhUL3NxSEV0OFBrWEJkdlRaZndyd0JYWS9p?=
+ =?utf-8?B?NU93MXRRUTFHL1FrMUVUb3BldE1oVXc0blVNbm80VlFVWmpIZnBOK1ovUUZt?=
+ =?utf-8?B?TGFod0UzNlNUYzhrMGJMK1kySW9KdThuamUvVXhGWkNtdVRPL2RKWU9WdkZk?=
+ =?utf-8?B?MmJhdUZESjJ6TGIwa1c3U01wSG5RTXhHYTBSM1NaRHFoR1dWWnNYMEV0RVZN?=
+ =?utf-8?B?eDVPaWJTcFNaMWM3OXlYRkdKcjlWRjVCVW5hRmdGWjRxLy9CTXFrTGJQYUFN?=
+ =?utf-8?B?b05QbG01cEp3OEpFaSszcTRPOUpaY0kydG9PUlpWT0VwVk4zb2lqUGlyMEZx?=
+ =?utf-8?B?THpsemdUWmVoZVRURHo3RmtSSmt4ZGFVNzdEckl4MUxjLzlhZE5KUWxCTW1s?=
+ =?utf-8?B?Q2krY2wvaHB2SEZwbGZWVzV2azlCeVNFcGVHWG5DWXBZL0N1ZjRrSEJKMC8w?=
+ =?utf-8?B?RnVGVW1lSFRUZ2hiNGZLMmhOUEw5QmZSWDFkWWRTYXlkb1pGdXRGWU10Ukt6?=
+ =?utf-8?B?U2pJOEo5V0JqUWdTTm1oM016eUxseTJjT1BOY01uVzNXVGlzbFp3UDJ5ZVIv?=
+ =?utf-8?B?WG5oOUV2S3RQZlF6TnhKZ210SUEwbUU0NXdjbEZxb2dWMk5BR0tpZkxhSmNr?=
+ =?utf-8?B?RWtHOGo5TWFsUkxqUVBZNWRoTk1UNDRHeFUwSWhmbnVreVlUbnVoVm1xaFda?=
+ =?utf-8?B?OVpIR2Y5NC9VUDBqalloamZRVEhwMEJwVFJ2eEt3aUU0bWN4bSt6L2RMWG9R?=
+ =?utf-8?B?T004c3V2K2Z0Wm1yeFdNRVFUeFprNkw0TjZqUDBTTUNDNEgyY0VwK3FiUnFN?=
+ =?utf-8?B?TUFnbGtoWGwveVdiQUhDTzZSa0lWek8rK3VKdFZncWJUYXF4Z3FKU3RON2pu?=
+ =?utf-8?B?TVE0Y3Z1S3FGSlZRY3JaWkova0VNU1UvbTJDNUV2bURxc1VtN3Vhems1Nk5J?=
+ =?utf-8?B?NE84Y0I0ek12YmFxUWNrenBLWDVmRGJ5Z21jb1FQTnVYMnBFbHpLeFU2d2Z4?=
+ =?utf-8?B?ai9ZVXZYN1pkV2wzeHRaN2hHUTJwM3NxekVBU05sYTd5MGxyckY2Q0pIUDVE?=
+ =?utf-8?Q?aQWLJYgg5wFBBxSA4CZRtXf4qn/pUzTg?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?amxyQVBmTURxS3F6V1VXOWRMWnprVVYra2xTQVZCWnAxZGxnMHR0S292Z05t?=
+ =?utf-8?B?ZFcrVEl4dlh5SGlMYlJqdjA3ZUlXNTBrbjFBc1JDbG1KM0txNWJibjR4Sjg5?=
+ =?utf-8?B?Mk9aR2xWMWRHUmJvdmhPY1lPWWJscUJXcUtzS0tQRGRqQUl3cE1UNWdjRUls?=
+ =?utf-8?B?am9DZDh6VFp3RlB2aW5rU1lURG9GOXZUWlYwaENXdVp2UDB2MkFiQmVBMERC?=
+ =?utf-8?B?U0F2UWg2dWF4emZRWHNUd1lQQURWc0hrbittUFNURmtVay9FUjJiSVVLSGdW?=
+ =?utf-8?B?OU83RWRLOEpjaTJ2VDdxNVJvbHNlWEsxaTBOU3N1RjNMdk90MUxaOUFCT1VD?=
+ =?utf-8?B?ZFF3TVNaSFV3SzNldGFhNXJhZHNzY3F2MHpjdEVFaEtxMTViRHQzTERGKy9y?=
+ =?utf-8?B?MHBkbnBkcTkyaHFpOUwyMjdtbkg3Q1pzclFudi9FOFRjV3g4TjUxNiswYTFL?=
+ =?utf-8?B?cXgzNUZlcTRLS2dMWWhxSlF2aWc3aGFsV1VoU1drVWRjZEF4eXVVcDJsejNE?=
+ =?utf-8?B?enVMUDlWZE9NRENGNG5VN0w5OXE5emVZK2NGS3NhQ3RWNWlWbkZZSGtjS0FZ?=
+ =?utf-8?B?RFZ6UG5EMHl6UGsvVk11b1F1dk0vMWNrWEp4Qm03Q3BmalQzekNMQ1d6eHlp?=
+ =?utf-8?B?WE1iZlV0VG9CVGcveHEyZjhvK1U1QTh1ejZvWmJOaXFkY2hQL1dSK29yL3lm?=
+ =?utf-8?B?M0s0cnpSYUtNSmZiMlJsMzVDUThETFJIdTRjRTEwTFdhbDdSeXlkZ04vOUtY?=
+ =?utf-8?B?Q3RjRkNDaXpzS1JxN0c5anlvd09RTngzVnJLeU9XdnZRNGoxVkt1L2dKOEhy?=
+ =?utf-8?B?ZHJFdi8yVm4zQmtTRHM3R1FWMjlqdTNZZFZJMXppZ1FLeHNpbWx2d2dtYlUy?=
+ =?utf-8?B?eitybEx2cWl0dFVpaFNmb2FzTTMzOUpMT0MzdEJIcmJuOTdLKzBtbEZ1Qnp4?=
+ =?utf-8?B?ZmY5QnBoYm8yNDhLNXM1aGxvS3BzQzZCZzZrZDJvMnliVXFHNkJQZ3pBcTZZ?=
+ =?utf-8?B?c3ZsQkQ2WjFjKzFpbEEzMk1lYjhrQ3lJcE5rMnJuSnJEQzNmdWhrYm9tVlBq?=
+ =?utf-8?B?cnRueHdod2lEam9Pcnpwd2VqeDJQS1BsN1RyUUFjbnRGb2xSN3BzM1BWRFpR?=
+ =?utf-8?B?RHlTYncvRXNSRUNlY0xQdjMwOWtrVEx2WHovd3ZMWFFEYWd5N25HTFViTnUr?=
+ =?utf-8?B?RHZWeGUvcHhPdlBBd1JkK3lJTFpQSjFlK3Rma1RHejFWWFF3SjN5cVpsdHdV?=
+ =?utf-8?B?TDFic2x4YnFFTnU4NTlOYjUvZDh2TTdEYnQvN3UrVkNYcGF0eXpiek1iT3JX?=
+ =?utf-8?B?bkloRHI2aXNnQWk1VnlEVzZaT05qdlIwclF4ZzdZVGdwU3N4RngxZzBMRXlR?=
+ =?utf-8?B?bGk5dDRGYlh6VjIxT3JPM1ordFpJMnRVMm5VcmlXazN5UlJscnJ2bGFYVCtw?=
+ =?utf-8?B?L3hPSlV3T0l5ek1OLzdvUnNzMG5IVGlqbVNMRnNDTU1IV3VLY085N1ZUcWN5?=
+ =?utf-8?B?VlZsNEFCcHVGajJBeUFVeklodHlvZWZCZnJEQVpMV3R4Mk5hcnV5b1d3a2NR?=
+ =?utf-8?B?QVltK1NhK3NvVlJJSmNzNVp1NVlPSEtPcHNUTEpZK29aVTF0dC8vc1Z1MUhK?=
+ =?utf-8?B?RFIweFc1ZXNObjJWeHlEYTNlNUIwbk1kZFpHUHRjR2szOTIzbTFMcm51YTMx?=
+ =?utf-8?B?Z1JBazFlK3RWZWJERFgvR0RRSW9sK3Ftc2xyam9jTHpycEFhVm5VcWswVVhW?=
+ =?utf-8?B?U2lGc1BWWDNRRjFvNndVNTlRc0dLVVdQZjJ4MVdZQmczVys4aDlnV1JYZG1j?=
+ =?utf-8?B?aHBKTlZ3bHhITkhTUi9CUGF3RmxvUTV5aVBPanJGUzY0SnNpbzdaZ2NhU21P?=
+ =?utf-8?B?bklYbmpXTFNpRzBJbDF2Zkc2Z3AycUp1QmlSU0RpMzcrUDhpZVVneEppNlk4?=
+ =?utf-8?B?bGhJN1MrSW1XWnpWYy9NczFpd2RUQWNwdlh3Um9sQ21xVlB0N29KbDVvRkFr?=
+ =?utf-8?B?cnVkREpFR2lFYytMeGQ3TDA5T1BhdWZVWitRY2NYWmdLcTN5SEZ2QVA5UHZM?=
+ =?utf-8?B?Tm9RWFprSTRYU292aXhONjQzUGd5SnVuL1UwSEMyY2FUam0zNENhQmUzMW53?=
+ =?utf-8?B?QmJOSkoxYVFmM2ZIYmZYUDYrZ29NdmRVaXQ4ZDF4THZxc2dwdTBGUkRGNUVO?=
+ =?utf-8?B?aEE9PQ==?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5ab69d6-d7b2-43e5-5578-08de3b95af91
+X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2025 04:52:02.0179 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mP/ZfvrYovQyeimGjGREhzfrDD+vUGhQmx7+GY6EtBwGnsR8JbM4Ac2zJTh+cnJMR10OdwrLNygHHixcIpvV9BThKW7S6bIcn54hbhIebRU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8098
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,83 +183,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 12, 2025 at 03:20:19PM +0900, Joseph Guo wrote:
-> This series add initial support for the FRDM i.MX91 11x11 development
-> board in U-Boot:
-> https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-IMX91
-> 
-> Include:
-> - Device tree for the board.
-> - Defconfig and Kconfig for the board.
-> - Header file defining memory layout and hadware addresses.
-> 
-> The board devicetree already attempted to upstream, but not been accepted yet:
-> https://lore.kernel.org/all/20251114-imx91_frdm-v1-0-e5763bdf9336@nxp.com/
-> 
-> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
-> ---
-> Changes in v4:
-> - add explanation for clear_pd_alert
-> - add loadbootscript and bootscript in .env
-> - Link to v3: https://lore.kernel.org/r/20251209-imx91_frdm-v3-0-02303eb0c1c3@nxp.com
-> 
-> Changes in v3:
-> - drop usdhc2 in uboot dts - drop usdhc2 in uboot dts
-> - add workaround to clear ptn5110 alert in board init
-> - /s/EFI_HAVE_CAPSULE_SUPPORT/ENV_IS_IN_MMC
-> - move 'soc' node into /{}
-> - move reset property into kernel dts
-> - drop m-core related env
-> - Link to v2: https://lore.kernel.org/r/20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com
-> 
-> Changes in v2:
-> - add upstream link
-> - rename 'vrpi' to 'vexp' to keep align with upstream dts
-> - move bootph- property from u-boot.dtsi to dts   
-> - correct commit message 'EVK' to 'FRDM'
-> - use #include in ecc config file to avoid duplication
-> - add ecc description in README
-> - drop extraneous includes
-> - rename 'imx91_frdm.rst' to 'imx91_11x11_frdm.rst'
-> - drop IMX91_FRDM_LPDDR4 symbol
-> - Link to v1: https://lore.kernel.org/r/20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com
-> 
-> ---
-> Joseph Guo (2):
->       arm64: dts: add NXP FRDM-IMX91 device tree
->       imx: Support i.MX91 11x11 FRDM board
-> 
->  arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi          |   34 +
->  arch/arm/dts/imx91-11x11-frdm.dts                  |  773 ++++++++
->  arch/arm/mach-imx/imx9/Kconfig                     |    9 +
->  board/freescale/imx91_frdm/Kconfig                 |   12 +
->  board/freescale/imx91_frdm/MAINTAINERS             |    7 +
->  board/freescale/imx91_frdm/Makefile                |   16 +
->  board/freescale/imx91_frdm/imx91_frdm.c            |   84 +
->  board/freescale/imx91_frdm/imx91_frdm.env          |   89 +
->  .../imx91_frdm/lpddr4_2400mts_1gb_timing.c         | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_2gb_timing.c         | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_ecc_1gb_timing.c     | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_ecc_2gb_timing.c     | 1996 ++++++++++++++++++++
->  board/freescale/imx91_frdm/lpddr4_timing.h         |   12 +
->  board/freescale/imx91_frdm/spl.c                   |  193 ++
->  configs/imx91_11x11_frdm_defconfig                 |  138 ++
->  configs/imx91_11x11_frdm_inline_ecc_defconfig      |    3 +
->  doc/board/nxp/imx91_11x11_frdm.rst                 |  100 +
->  doc/board/nxp/index.rst                            |    1 +
->  include/configs/imx91_frdm.h                       |   25 +
->  19 files changed, 9480 insertions(+)
-> ---
-> base-commit: e199db57c00ba2c2aba81069800126b6543a644c
-> change-id: 20251117-imx91_frdm-7a2db95f279d
-> 
-> Best regards,
-> -- 
-> Joseph Guo <qijian.guo@nxp.com>
+
+On 12/12/2025 12:34 am, Jan Kiszka wrote:
+> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
 >
+> From: Jan Kiszka <jan.kiszka@siemens.com>
+>
+> We need to explicitly select SPL_LOAD_BLOCK when USE_PARTITION_TYPE is
+> enabled, just like the other choices do.
+>
+> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> ---
+>   common/spl/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 3b7b6cafef8..142cdb34cd5 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -573,6 +573,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>
+>   config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+>          bool "MMC raw mode: by partition type"
+> +       select SPL_LOAD_BLOCK
+>          depends on DOS_PARTITION
+>          help
+>            Use partition type for specifying U-Boot partition on MMC/SD in
+> --
+> 2.51.0
 
-Tested-by: Francesco Valla <francesco@valla.it>
 
-Regards,
-Francesco
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
+
+Best regards,
+Tien Fong
 
