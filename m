@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0514AD41D74
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 07:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A95D41D74
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 08:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1114080050;
-	Mon, 15 Dec 2025 08:57:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B33C680050;
+	Mon, 15 Dec 2025 09:16:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Cj3wvra4";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="gjaBUBBq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBC0480077; Mon, 15 Dec 2025 08:57:01 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id ACC7780077; Mon, 15 Dec 2025 09:16:45 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B93138003E
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 08:56:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B69D68003E
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 09:16:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-42fbc305882so981402f8f.0
- for <u-boot@lists.denx.de>; Sun, 14 Dec 2025 23:56:59 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-47774d3536dso31095845e9.0
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 00:16:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1765785419; x=1766390219; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1765786603; x=1766391403; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3W8RBJHCNjVIFl6Bam2tQjTlbmf5CMnWVciuN59aCmM=;
- b=Cj3wvra4GlZL2hI6W5mrJaZuoVt8SASO1yn9HGMo0Ga9yhXUXWWlYHBX33AfGMbP38
- shPlZsz4mGD6ZS5eDnKjtZ55tNxMDQ/EVwVo3NS4qcdpz/NIyYDUoB+1LTHAuJfLcTDz
- rj5GBfIskNnYU3J8XRk5ptrks0LLW6WZie3ZOL+BBkmwVj8gnoSKGOTjQRDpr08GMlEM
- tnA1ScYKGYXrvT8iPVIewhOnsqU+yDB2mbbM9E17WteoxLT0lNJO7UnkhT6n46R8yXr9
- GJMNBC2Bnv9LeCJE5TNIzGn4LoaiyPBZAqcI/fcb2iWiEgV8HqK0FgTFVe2nQfTNZwQI
- CRPQ==
+ bh=1sRWLxA4Fpf4BfMeU77n0cuKEiUw9Vx2UebJiHKpdbQ=;
+ b=gjaBUBBqoBgecQRJ95e82MqjOjy/1ngfvccV8AHw8scbc6aM2BPkCsSvGlGW2B1ZKD
+ cLMmFoMXAkWyvYcKy9lXiGuB+ZAp9FPwHlqvoFil/YVf+XsAWeUZbNruNCM8yqH9V6QG
+ VibhtZuUV1TbPNLa7mlSbPhSCUkiTPMhFZSiR8P3/RGM+/pJOrHnGiyCP5DO/y9uUh4c
+ 44TetF5K2/ykQWYvexufINhNSWGfWekzhxEGflfNhf6Ylh/bacZk92mz1jqARkIBRzM5
+ WqQ9I7XzVwgh4kKhPbgCErjMvr3ek9BdK5t1pGykQ8lYLcWwudpJ64vZxFdZDdKqDPoP
+ JCGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765785419; x=1766390219;
+ d=1e100.net; s=20230601; t=1765786603; x=1766391403;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3W8RBJHCNjVIFl6Bam2tQjTlbmf5CMnWVciuN59aCmM=;
- b=V+tOrXoO+3PVJboFq6cSGHrrj45cTVlhDzdY4uBfQpItoMHU0F59IIyksSNwYSJW6b
- dDhuJlxDlL4RC0YF5i6P7OHdoyfSw0xscHtfy6D4P/Yac1z1Cm8P0NulrllvhugXqhI7
- /nWN9lQF2kz3ynJc2zTWPFKwgpM9H725ywIXBUcHr0UNugB/1Z8Q3tvcIAUIpKt4MT9z
- MG23cU4nGP1ezV+SEf3SrdBx2T8hnbBV6mu/gEtnvq0W2RoDt5hlS2hYs401FiAukGAt
- LNjoarmGRJpioSBaeD6hBwfTGIEfv6S3JQgJYk2Z0BgjFkKA5V5pJ6/QPJmUB3gw2k5A
- FeCw==
+ bh=1sRWLxA4Fpf4BfMeU77n0cuKEiUw9Vx2UebJiHKpdbQ=;
+ b=ZdL6hUh76PU3D2jS2Gfr13BNb/vLKiGZYRXoQq8NPZadYd+hak9mi1PGe2Tu4fN9W/
+ YVOW8fM1moNDMaIguSbPojwguTCGJnWh85FaI3Wo/lKtP6z6zysZ9uYf3r7AuN8ijeHg
+ 8P/4TBGXzZl+R51kDb+JkKrKJ1YWc14+nax8Kwqn15eyjb96vJnGBTHho/StnEyNx3qZ
+ sc557A6xphj6QISjXAKtRuCBBoToqWTXhp1neXBQ2lG+hY816XAU8itI3pMLh+ZITC/z
+ +6GZ6L8adA9lW+Mtstwd+EWImNIWjACRFhEeb9Y2b0rIm9RVQqIQb6a5iDRwmlKKX8+J
+ NFUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXqXBVejvI7yXIugHp+EDqUSqIN+hXMTwSKQmM0iw3aq7b4SGxLU6r/L+sycQKYOMbwTnq2Irk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFSrfuhgKg+Ln6eNfBTCjH/f4eycGb2NUnMKr3KRjyYtNgh2PP
- lPnPq13JxFlkICazCyp3jFWPKgAQkL8fiX8rbbG9L3ghVVm6jIlqDPE4LXGiBnyAB0w=
-X-Gm-Gg: AY/fxX46U4YXlFTbm40ogDNNM+n3DXua96peNM7wkRVhN8j7ftPzOS+uVuIUJHoHKS3
- lkbUgr/w0AKoqLXAtdMfQRNN06CRnI0WP9ha7/kuwjvd/nBtqjprjFx48Iz2zH127nwy6AiMIgz
- KXx3p3B40JrRxckdMGUH940UzM8FOSHXplgUNKhbZZD9BbsO7nOlpgOCvaTyjyNNxwm1gj2amzd
- Dr05RsT2t7HKuJv7rukl7FbaoscDOw0t/m6LpWfkbreUVP/SXOM8Tqe58sK+DksC3HMXuig7Pg6
- acKh16KUdS5hZUYDjiwyUppfLuOouVMhGqTLumdgjMFb+L3QimDVXZaDZfCCvoRlxn4pg2uy5sY
- Bi2wCRepEAsL3DrlBW2eM20KQub450dW/u7FSuG5wQF7oL6wiE2AWoTpDhKnzW0lIMjGPzcXZyQ
- itRhm5t5jgaeaqVJ33+L+EX1gkdSKtnVE7FSNN0tyZilTlUGV1t0dveHkKgC7J3S8ZVvzJc3duz
- miOXQQcMOycfZlj
-X-Google-Smtp-Source: AGHT+IGqHxaA/GOfz0EriAT5UzxKEe1/IM4xCuEPPZAivmgd45OchB7Dp36dqOBZJX9Zx3vK0XfARQ==
-X-Received: by 2002:a5d:5f54:0:b0:42b:3c3e:5d2f with SMTP id
- ffacd0b85a97d-42fb48fc506mr11445139f8f.39.1765785419152; 
- Sun, 14 Dec 2025 23:56:59 -0800 (PST)
+ AJvYcCUqOG8lkd2PmEavzEttaDkzqDThXQpu6o83OMqp2PplabymYABHcRlwEJstSUe6ousqEUmYqWE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjYF8MxbwXWkI2hvuBT/oy+c8qRaq3jwLB2bU0N9S81XFqvnyF
+ MH5VFAzCc6vGQ67pDSbgcGqyghiOkDfU5ZyqE4nvjjA9pd1BEkl6Uw9l0HvHfBQV7uE=
+X-Gm-Gg: AY/fxX59w7pHfORr0zERjba3Wtttuww6QO0R4hLgYNf1sh0OoUEQ8yFqEdOQRfZAPhl
+ PrVi8iUV1jwy2sR+x/7lB321CFFreKVd1oCszKAIScxn+NzHwz5sm7izZBAqnN1yd5p4PPMoahe
+ 2hd28NAj6gI2PA9uULtHuNSoLSV4bF+4gclXqN+M8bsQ2k2tgDVnWPEub6Ny0RWoFxbSaVVTbGr
+ KAXJCd1N2wczf9GARFYAQS81i6/h9jCPGS4x4tHdSlQKO8F7P0MRtxKvea2PlmKIYzm8gLyVrtW
+ eBaftt+RAhsQFLc8l351qEER8pd7PllV/9xwurZ+SRCIkrN0H5bwnv3c1eQW9NThMXkbf1rmPV5
+ 6LG8uxsPiYKoUszba3gspPmhuhoAaz/i3ewR/Qsl1fs3kZbEu7+cBNySfjuRv4Tp/wjOLYzw8YW
+ 8WKQxuQ+MszkwR39YD8RqBU+3BEBhOjMg2Yvnc28bFqiETGieF6j7w/V6lsDxl0oDtrrzvtdqXo
+ YvLRLSbuRaPGBGy
+X-Google-Smtp-Source: AGHT+IFZx9vVqSvGC2GLP7BXDbSAu8vxyRiolYk022aXyNKcDJPKuu/ANuLavQP+sliEPfNB7Jl/Lg==
+X-Received: by 2002:a05:600c:46cb:b0:471:665:e688 with SMTP id
+ 5b1f17b1804b1-47a8f2cacf3mr111423725e9.17.1765786603119; 
+ Mon, 15 Dec 2025 00:16:43 -0800 (PST)
 Received: from T14sGen4.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-430fdcc6bbdsm3804371f8f.14.2025.12.14.23.56.58
+ ffacd0b85a97d-430f7475895sm9157705f8f.33.2025.12.15.00.16.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Dec 2025 23:56:58 -0800 (PST)
+ Mon, 15 Dec 2025 00:16:42 -0800 (PST)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH] x86: cpu: Fix crash on FTRACE enabled builds
-Date: Mon, 15 Dec 2025 08:56:44 +0100
-Message-ID: <20251215075645.1795762-1-patrick.rudolph@9elements.com>
+Subject: [PATCH v2] x86: cpu: Fix crash on FTRACE enabled builds
+Date: Mon, 15 Dec 2025 09:16:39 +0100
+Message-ID: <20251215081640.1827840-1-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -116,22 +116,27 @@ TEST=Can boot on qemu-q35 with FTRACE=1 enabled during build.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 ---
+Changes in v2:
+- Point %rd to bottom of global_data struct instead of top
+
+---
  arch/x86/cpu/start64.S | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/arch/x86/cpu/start64.S b/arch/x86/cpu/start64.S
-index 78e894d2a21..3fcd8c15481 100644
+index 78e894d2a21..968a2929d0b 100644
 --- a/arch/x86/cpu/start64.S
 +++ b/arch/x86/cpu/start64.S
-@@ -16,6 +16,8 @@ _start:
+@@ -16,7 +16,9 @@ _start:
  	/* Set up memory using the existing stack */
  	mov	%rsp, %rdi
  	call	board_init_f_alloc_reserve
 +
-+	mov	%rsp, %rdi
  	mov	%rax, %rsp
++	mov	%rsp, %rdi
  
  	call	board_init_f_init_reserve
+ 
 -- 
 2.52.0
 
