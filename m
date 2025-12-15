@@ -4,147 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67814D5B841
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 15:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48EADD5B84C
+	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 16:39:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 796E3807B1;
-	Mon, 15 Dec 2025 16:40:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id B11E980325;
+	Mon, 15 Dec 2025 17:39:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AtWgFZGG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A082NCr2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD9DF82BF2; Mon, 15 Dec 2025 16:40:41 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 47746807B1; Mon, 15 Dec 2025 17:39:08 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E004380081
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 16:40:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A825C801CF
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 17:39:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kFHJegHD5vKUIk1Kdg0VewbZpXu7/2TAp+R7KmYlwJ8OwfFyHoz3+DkNjuSFNsej0YC/X2UxOJsabnZRTXokBXebJmpdOwG01+5OMozkrgeIymDBvAGUsMXbj9T8n7PM5mazLLKzOEEUDcpjnPvKWoA6qnqFTUU4Rr9Rnu8Al920craKWRYWD8WbYKmPC8wmGNSk8SZQNsAJTTwaoGUIcHlk6kLwqzG5Tiyeq2Vl6hekDSAS9NeO96agQxRcMgCqwE8LU7c9v41lgTHE8MsxSkKTO58YFiRTkqBM7q45+iK0bMgfmM7y3ICIxFr3lCADEZgvBLGwF0mT+Uyy3fE9tw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W8+cWENzZHqep0qMQbMUNUBlP+sL3T0N0d7GYEcgYes=;
- b=Ua8weW7+hKafKixHRFFfjG+DauoKQBfVrsjaq+Za30o69TNZOQDGjdZAXU3UHjexklzqZirTlfkkO85W9mWRZ5fUMJ8cnwdmhZABjlZhmXX8hCi0vz9QSSruwo+e9N1GmDSgFMmyrRakx+h1MGU0b8sZ1m1RzEipKC+9AKhdIxDuYeH6Ug/p/L3MDwXCBtUs1CfhmTibm5WVNtDxjH+PkOlZGq7KPhZIwSAZE02Rnc3VogweUnG74jhyQ4l/j0KRzDBrxaCY4p58OAz8JLYDBM9aQeJvDsvXQx7o2NXxPaIYqDT6ArF4jthdiBtJC+tuoGLkFtPzi0L4mY5hE7gizQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W8+cWENzZHqep0qMQbMUNUBlP+sL3T0N0d7GYEcgYes=;
- b=AtWgFZGGUxl5GCqbTtrxS0tiX7YufeaqfEcDAYwXMW6Hz1oe/xYqeLCrk41hlk68a7SPcr3JqYWN75aV/Bif7oEHIMOFry+nM/tC17di/GWO/L7VRbVYcWuPSBFG+IiN2y80vRUEBCeuNiyW38hwD7ofNRlDBw0x13FFg/iSkNo=
-Received: from PH1PEPF000132F1.NAMP220.PROD.OUTLOOK.COM (2603:10b6:518:1::34)
- by SA1PR12MB8948.namprd12.prod.outlook.com (2603:10b6:806:38e::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Mon, 15 Dec
- 2025 15:40:34 +0000
-Received: from CY4PEPF0000E9D6.namprd05.prod.outlook.com
- (2a01:111:f403:f912::5) by PH1PEPF000132F1.outlook.office365.com
- (2603:1036:903:47::3) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.13 via Frontend Transport; Mon,
- 15 Dec 2025 15:40:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CY4PEPF0000E9D6.mail.protection.outlook.com (10.167.241.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Mon, 15 Dec 2025 15:40:33 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Mon, 15 Dec
- 2025 09:40:23 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 15 Dec
- 2025 09:40:21 -0600
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 15 Dec 2025 09:40:20 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Bhupesh Sharma <bhupesh.linux@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] ufs: amd-versal2: Fix reset names with binding
-Date: Mon, 15 Dec 2025 16:40:14 +0100
-Message-ID: <e1082054610fe73d4487d12f4274315030592c77.1765813212.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-657490df6f3so2090590eaf.2
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 08:39:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1765816744; x=1766421544; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hMzRlEAloDSg0cPIuNZ7Jrds3z4TZeUPRE+6DXAzqOs=;
+ b=A082NCr2CdvKajfB8cpice/NUZUxDlPHFpci20Gr2Q8pweD5U/5JbCwU011BF1tZK0
+ B78D8beShCOWQoJfXcAQ689LuwQYLjaSNCALchKsNNiHNFRy4jzboU/iZ7lIq0tPZcAQ
+ lsPMXnYNX9CrEvXLVDv+2237HMtiadttvJjAY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765816744; x=1766421544;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hMzRlEAloDSg0cPIuNZ7Jrds3z4TZeUPRE+6DXAzqOs=;
+ b=rXYD6hh7q6+1lLZzu9HAeuGqZ70SwbMuPtDyyJYKZ/GPAqKhBDXxRbO1ib6wpAvu9V
+ 87mUiFLuJ8AQcRP8DeG7XHhRVM3vHljf1JIWLV/AsYfgAtzGY6i2xgcmu7J3pkqIWHNG
+ YuVdaiUg038rghPXyDQ0//4sAKTin/rNIBiBpSFDKbaoy4XL58erTsXhSqz+q/lHdIV1
+ al3WurZrjtrOAARrGPLGFnnYLb8lCB+19oGmyJhDpccijP7zWeqY7/OckKxYMsx/SoQ6
+ EE1PEomskLY5BeNwgxBjrPjHmvOKfapqlni0/GSO3GHSUIVml0gutWYwn2kxPwpEGPW9
+ b4VA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAV1ST/siB6TElJ2vgdAfOh8/3M8OZ6j1IKz1d7y88Kv61fYS7onzQBePl28hJySHPgtFHZ/g=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsrGC9l7jnm2Re8FfvQYrNQobmb4AG+1HkaB+0+494FlbcGgu6
+ b076VDKnrnGnc3lmMMJCZrSXDbnXt8KfyMFTv+yzZzxRYPyXzfR0Zz5yUPn5ynlPVfc=
+X-Gm-Gg: AY/fxX6SPhpBJXQtMseD88agz1vZXqrFegGzCTMXdKhK2Y93A50FwUHjX7rO8xS9SfB
+ dggc9URjDcDTKoMJ0K82xGNr7aZpJdUquygZ4NpZeIayydcWqlf7/CsCiRLu291gvx0F5UUekLb
+ I2yU9zgOKVhn+WcaexM8JOJshOt96iuyd/ZgFzm2yTHXTAqcmGrw0DolgrcC25DB+fVTdrWAmwp
+ qEgTN1ILDe6NCbKECS4P0ipHeLYblXHQVpV1dfNUBL3NXx5+Hr1CL6brb7HTCTtCpb7S6xOQELt
+ LjaOxQtFPtBOIf4N8og8t6kFuKqQvYc6WO0JH89o+3sDh303Lq4m5okqeu7684wgPCEjJg4sjum
+ ngryOiqJ76RiJQ9YtSEgxDPm8uqpPOUtw0+0/rFFIwKMymNChIpSPc8/ZO0WD15ueu1hlaPR1yU
+ /ZnJK/NZ7QmvMTRNRunedNCz5TYIvVKufuRzIoU0L7ESr2CIJ6NQ==
+X-Google-Smtp-Source: AGHT+IHL+So2URK6ZN1PaNToQHTajAl+LmKmXYx/3wtFhOzNqomJSo3jj8TNlkRoWy1zxKlrdzAa2Q==
+X-Received: by 2002:a4a:edc8:0:b0:659:9a49:9003 with SMTP id
+ 006d021491bc7-65b4525d3bemr4041511eaf.48.1765816744316; 
+ Mon, 15 Dec 2025 08:39:04 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65b35f2ade4sm8226289eaf.4.2025.12.15.08.39.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Dec 2025 08:39:03 -0800 (PST)
+Date: Mon, 15 Dec 2025 10:39:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Beleswar Padhi <b-padhi@ti.com>, Bryan Brattlof <bb@ti.com>
+Cc: afd@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
+ used by PPA
+Message-ID: <20251215163901.GS303283@bill-the-cat>
+References: <20251128150455.3279166-1-b-padhi@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1470; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=gpkJaYlcDyOMm5PbgqOaeyspEH5U/suZc+7ZjBRvRsk=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ6aN9TXhK6ju/ZZs+O6D/isuUKt+dN8frm1nZofxXrr
- StztnrKdJSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBETvgyMpyUt7u5RsXvwOaq
- ZaW6B9IV77XGLOzy7193+ELnm6kla+cy/C90+b6n+c3ilmnq5r9e7s9dpFi7gVtpfsPr3aYzopN
- tV/ECAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D6:EE_|SA1PR12MB8948:EE_
-X-MS-Office365-Filtering-Correlation-Id: cbc73f73-aca0-4797-5bab-08de3bf04941
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?svOk2dhxHXTlVs91/dpC8wZzjaaUOKBXhjayWhM1HLICrI1y4TTxPuRenJKY?=
- =?us-ascii?Q?NhUBV9Mfk80XS0bDRfKcgnU6MQ0TaGYtdeqYyIuSEPVI7PPuns6+U6SmqRyS?=
- =?us-ascii?Q?L2eeUR+1ffTr1CBQvF2SDzRWAiSzeRnLGxuHxJU8ZedHNzWEkhwDxbfotSN9?=
- =?us-ascii?Q?V2K4cL1Kj/ymgJsa6gGVjHiIPfc733h1FiYtKVHDIJ4VzlmfCJRW6qDQ30AT?=
- =?us-ascii?Q?9DO4xSYLXWKueDqBOju69wzWLbg2EPFvxdB7pzLDstMCLUg16StpL13fMOFq?=
- =?us-ascii?Q?wM1XwelXlqqgWT7R3C2tQMoByE/HMZiRxvgnxs01WiZRWC9yOfEaxbdRJ8zj?=
- =?us-ascii?Q?Xld5tdkeD2OGgdoQK+mu3HcWJzp7AiiQEI4I6UbNRqNFoLJhRHSGmvGX+f3I?=
- =?us-ascii?Q?i689OW/v+MyMJSqicc7pa9QU56chroj5IGYtAvP3iPvbM0AqAOUBEk7Y3K26?=
- =?us-ascii?Q?GFu6GrwoyYALKkXP/FRJJPRJ4NkWqVUr3wPifZPx8MyhYSxwW453eCcJEOTg?=
- =?us-ascii?Q?wRr/IUZWWbSJT4EDF3QgVWcQZLY18ylMMWiQALR4ej6ACA7+y5sHEd7LWwfk?=
- =?us-ascii?Q?TbysPwkHgra35aRokJ3oWJQzF0vl26GsvRjRnN7OeOQHzpg1fy1EPDqjw3oN?=
- =?us-ascii?Q?vFmh8dt+RL2MM1YbbIa7QI/A39RzGjsBMKCypFRtK2cZnQP9MX7ZJaQwyYoM?=
- =?us-ascii?Q?YhWvXWlhLZQYOhjbIXbH89BE2NE4lVRfDpckVSq9ZkY4jcGoK3PcJCigAMSr?=
- =?us-ascii?Q?E0zPKLDzq6nlLZ+AE8k8nPLpsUL45WP7OfiXO2Qqi8/UzPG5+DkOC50sQC0Q?=
- =?us-ascii?Q?Svil4bFcv9xHkFrm3Hc+/QschENucHQbhueigxsyYwSwRvk+wPwGqO44jspE?=
- =?us-ascii?Q?XSJqQ6ECMurkJtsbQ5CggiiyWaJHH6zP0Q/n+z86BEvs31QNLaVnkToBy5we?=
- =?us-ascii?Q?H6SMsDdl1a0HzK7WqLxlQLP7f273ncKFyBG9dCVNaO27+2n2hwJNHf/9OcUT?=
- =?us-ascii?Q?U8JvBAG+Z8/wfdvUEJ37Wbip8oUvkOa5yocgawiIPqVbrAsLwpgJIvPg6OsB?=
- =?us-ascii?Q?99roqaGwHhvf+dzSDYHaf4CrS+yK5FefkpFf6i12hIz9jzYh5/x0TFdW3Hq1?=
- =?us-ascii?Q?3QUccas5gEw/QiVGKgL7enbxaF8eut4dox/WgvHog/Yn3tGKxzmFg3nQDtbb?=
- =?us-ascii?Q?NlUO1GTNJJWz7G2/dLgyQbJd/88urgftsbxNI20hIaey2b7+PhrZTfUrNark?=
- =?us-ascii?Q?dnM1sJVPJorDPLmCZZe6w9HKPeCEDMW6Fkgws7asBqIIq+Yq0vBaQjkNkzMd?=
- =?us-ascii?Q?bCtP+SMlKGIFEWOSZdpWZLM+psZUEPX5jAAR/tnlT9h4xg29QHRCs96ep9UM?=
- =?us-ascii?Q?Oivr2wo3pTQnQB+rBLjVAtJYNUG8dPpU4+VqjvwCpmX0MyWh06AlTbghlqsV?=
- =?us-ascii?Q?pGd0g3SikUyqqX9Jrtlds9CoE6HpOSb0vdgkP/ZNIc2LYkrZzBC8SazLw9IX?=
- =?us-ascii?Q?ALBNjKqKElaKVhU=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2025 15:40:33.9552 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cbc73f73-aca0-4797-5bab-08de3bf04941
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D6.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8948
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6GNRVbaP+rpRk9Sm"
+Content-Disposition: inline
+In-Reply-To: <20251128150455.3279166-1-b-padhi@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,46 +100,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align reset names with DT binding.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+--6GNRVbaP+rpRk9Sm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Binding is available here:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/ufs/amd,versal2-ufs.yaml?h=v6.19-rc1
----
- drivers/ufs/ufs-amd-versal2.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Fri, Nov 28, 2025 at 08:34:55PM +0530, Beleswar Padhi wrote:
 
-diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-index bf23439e59d7..97de0756f70a 100644
---- a/drivers/ufs/ufs-amd-versal2.c
-+++ b/drivers/ufs/ufs-amd-versal2.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * Copyright (C) 2024 Advanced Micro Devices, Inc.
-+ * Copyright (C) 2024-2025 Advanced Micro Devices, Inc.
-  */
- 
- #include <clk.h>
-@@ -319,12 +319,12 @@ static int ufs_versal2_init(struct ufs_hba *hba)
- 	}
- 	priv->host_clk = core_clk_rate;
- 
--	priv->rstc = devm_reset_control_get(hba->dev, "ufshc-rst");
-+	priv->rstc = devm_reset_control_get(hba->dev, "host");
- 	if (IS_ERR(priv->rstc)) {
- 		dev_err(hba->dev, "failed to get reset ctl: ufshc-rst\n");
- 		return PTR_ERR(priv->rstc);
- 	}
--	priv->rstphy = devm_reset_control_get(hba->dev, "ufsphy-rst");
-+	priv->rstphy = devm_reset_control_get(hba->dev, "phy");
- 	if (IS_ERR(priv->rstphy)) {
- 		dev_err(hba->dev, "failed to get reset ctl: ufsphy-rst\n");
- 		return PTR_ERR(priv->rstphy);
--- 
-2.43.0
+> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+> top 37 MB is used by PPA and is firewalled. This results in an exception
+> and the boot fails.
+>=20
+> Introduce a new defconfig for AM571x HS platforms and set
+> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (aligned to 2MB
+> as per page size for ARM32) for the same.
+>=20
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+> Fix boot for TI AM571x HS EVM board
+> v2: Changelog:
+> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
+> memory node in DT as it is done by U-Boot as part of FDT fixups
+> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-comm=
+on.c#L72-L107
+> 2. Add entry in MAINTAINERS for new config.
+> 3. Update commit message to use memory size in MB than raw hex bytes
+>=20
+> Link to v1:
+> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
+>=20
+> Test logs:
+> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
+>=20
+>  MAINTAINERS                     | 1 +
+>  configs/am571x_hs_evm_defconfig | 3 +++
+>  2 files changed, 4 insertions(+)
+>  create mode 100644 configs/am571x_hs_evm_defconfig
+>=20
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index b43dae882b3..e5d564cd760 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1780,6 +1780,7 @@ F:	configs/am335x_hs_evm_spi_defconfig
+>  F:	configs/am335x_hs_evm_uart_defconfig
+>  F:	configs/am43xx_hs_evm_defconfig
+>  F:	configs/am43xx_hs_evm_qspi_defconfig
+> +F:	configs/am571x_hs_evm_defconfig
+>  F:	configs/am57xx_hs_evm_defconfig
+>  F:	configs/am57xx_hs_evm_usb_defconfig
+>  F:	configs/dra7xx_hs_evm_defconfig
+> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_defc=
+onfig
+> new file mode 100644
+> index 00000000000..7e44ee5221a
+> --- /dev/null
+> +++ b/configs/am571x_hs_evm_defconfig
+> @@ -0,0 +1,3 @@
+> +#include <configs/am57xx_hs_evm_defconfig>
+> +
+> +CONFIG_SYS_MEM_TOP_HIDE=3D0x2600000
 
-base-commit: a5286b15d0db5b7deaab481921bf1008a6fad23a
-branch: debian-sent3
+Sorry I missed this specific part before. Why isn't this just being
+changed in am57xx_hs_evm_defconfig ? Do we *need* a new config here? Or,
+and this gets on to a different topic I've been having with Bryan, is
+there upstream value in this specific config being added? Thanks!
+
+--=20
+Tom
+
+--6GNRVbaP+rpRk9Sm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUA5ogAKCRAr4qD1Cr/k
+CnUgAP91FXDrqLn/mdGUFuZlRp7CMaY3hjwZFwaPnHYmKWdtJgD/fwgcsd1hrLoN
+TGnnVl/Ex5OuWb7nixMptsoWTB4PDwk=
+=QfX7
+-----END PGP SIGNATURE-----
+
+--6GNRVbaP+rpRk9Sm--
