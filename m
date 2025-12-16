@@ -4,142 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FEEFD609AF
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 15:25:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D3DD609AA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 15:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CF2F80325;
-	Tue, 16 Dec 2025 16:25:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D891A80107;
+	Tue, 16 Dec 2025 16:32:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XCDpz2Qn";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="gkmCuQm0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 385468042F; Tue, 16 Dec 2025 16:25:30 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 4CAA583642; Tue, 16 Dec 2025 16:32:02 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1623580107
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 16:25:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE0E2800AB
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 16:31:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1765898727; x=1766503527; i=xypron.glpk@gmx.de;
- bh=o2xGyRmf1G70t6gGJway/O3ta0WITvkS/1dphVdI9pM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=XCDpz2QnvrA/9hEbT7Nom7TB+rDfEYF970aZa1DHAMOoqtz9Y7mcu1ifMuxZwKFI
- oEIJcK8GpemDuI2ZnDLACsUv8Ms8fYs3H7HjZ/SbsHkt8mHFSrvUAg5pL9pMCWm9K
- eOY5h+81YXy5FlqtDdSFHMFBTRNvcSi+CwiB4eJnO4yooJP+GzZb9KPtMEJrhZCWW
- OW0RpF/wUHBiJkYRae7TMpIoB6rVvL5fkzSr6g+RDSGmpMRCEwFgjR8oG/ZYiGeu2
- LhtwLgvCRdAmFNcPLd6LK5/ZRk/OhFoRPa6OHpTTQP140YOS+qNS2V0MCkcyDLgPx
- tTW3/bkpC6Ni6ZMLmg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.125] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N49h5-1vvgZz42Wv-00uYzI; Tue, 16
- Dec 2025 16:25:27 +0100
-Message-ID: <d70c8dad-dc9e-461d-a0f8-afc27d818b50@gmx.de>
-Date: Tue, 16 Dec 2025 16:24:56 +0100
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=444537dc73=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5BGFVmVE1075338; Tue, 16 Dec 2025 16:31:57 +0100
+Received: from du2pr03cu002.outbound.protection.outlook.com
+ (mail-northeuropeazon11011047.outbound.protection.outlook.com [52.101.65.47])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4b39n983yu-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 16 Dec 2025 16:31:57 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DQL3lJZPWXb7putNi8gkn1T4u0d0QWBwIoZpiQ74RqCwLaGg5sX4pcIJPPl/GmudjES4oyQAXpsnxfCKzPwD/p8qQnQOtIqwu79fUWUF61EXsL2JGhMJt5nITJstjvphmvIHTdqBUk9rOY58G4djfBAywdgsRuiaECX8PqNJW3mBFGfizP1BsMWzRs40/J6B4a6p6ww6YwkBWxfyrdA6sWnlyk3GPKaO+1sfFJZxeJPz/biBqnV2EFFAb9PBeMuu3UB3ARQcMc8e7WQTicp2k/ujPCWblOckexqSYKpxvHpOv/FQ0NUV+bWm1BNWGkKw7oD15ap6BGsNGfnQ+b+1UQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r/5NgyOye6v/EEiDn/1WR/94TddkeD22e8ptZIBhqOY=;
+ b=oGB0qC2rScmj3BzA0LeRT69ZjB5VF+Bm9f2RiNmCXgou5E/BsdhEUOy10gSiEJvthwbdnCMZGDs4e1IT93XkGcco7EdSmrtFP8785c4BPW6gUOBh3neeabIO4LPO146robm33WsgSJmplTVdQ8/uq+xWVd08F8QYOYIWOsz5JB9AkdxCHKXojBCoYQq7M9anieEZwhBTXZD+73wPYDzjZpuHXhudJkxRoXkyKOnztKELT4+Sc435JiSCRHitkLV2l9mlYqOyn1z1VPR7lKTCwFHeAGzKWix59R9ZDVjq9wFduqs38OzuyRVK3eGttsEthJkaB9Cr+e16JYbdxDqNrA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r/5NgyOye6v/EEiDn/1WR/94TddkeD22e8ptZIBhqOY=;
+ b=gkmCuQm0vgsZ728LjC0MAbJZT6whvBSdQsMJChH1W9uDKJhC5T6Ps5cmk7FeTUFPv6pTZ+Opw9N0j1lEn87YKvdpQsnBmcP8DsOzxu2WR5k/6TvHOGNuwOBNc2WYTPOI8Z/jNWbVTbFgbTtD0w2gTP9EHkLIfehhGg+v1QQwcLFPFTk3pIO1/1TD2MHOsaM1XamKebXYNu8gWGer+AVpOtazWGbCm9+00ayEPGEeKeC9xqe/xnsk01EoHDUAQc49YGfSUkFscLMdNhSuT7+0tgCfnWjyvUArhMsm0qGxC9ytKg6JkD/XKYdJj533bETPiroQqAfXWqIpbiJprY9juA==
+Received: from AS4P189CA0006.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5d7::10)
+ by PR3PR10MB3756.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:4a::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Tue, 16 Dec
+ 2025 15:31:55 +0000
+Received: from AMS1EPF00000046.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5d7:cafe::79) by AS4P189CA0006.outlook.office365.com
+ (2603:10a6:20b:5d7::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.13 via Frontend Transport; Tue,
+ 16 Dec 2025 15:31:54 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS1EPF00000046.mail.protection.outlook.com (10.167.16.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.6 via Frontend Transport; Tue, 16 Dec 2025 15:31:54 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 16 Dec
+ 2025 16:32:41 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 16 Dec
+ 2025 16:31:53 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 0/3] spi: stm32: OSPI and QSPI throughput optimization
+Date: Tue, 16 Dec 2025 16:31:51 +0100
+Message-ID: <20251216-next-v1-0-469e1d901920@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] efi_loader: Trigger capsule updates with automatically
- generated boot options
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- John Toomey <john.toomey@amd.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- andrew.goodbody@linaro.org
-References: <20251216074710.270479-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251216074710.270479-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:rlTcsTbnXucTcxdy6CpQfT1vqdHzjfE/j17/dpgwTJngrPiVK2H
- S/X91mK6y6CHGQeNiLaeK4rliJ3bwHU4+u3cArxjKkXFDIl8jpDkzhiM2pISTFphDlCQl4m
- CXCwJmdXd/WQcypddAT7uJddVYM6xMxmQP6Ml3BPc7/g3DQxqO9O2vBk/3qSNt/DK+9fPw+
- 5agRnrY27Tlwe8VR75dCA==
-UI-OutboundReport: notjunk:1;M01:P0:JrjWxVoeeJs=;SzCMdCANske9l6yhJiacbl4Y6ko
- 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
- +amG0MNhJWI
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGd7QWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDI0NT3bzUihLdVIMk49QUIwuDNEsLJaDSgqLUtMwKsDHRsbW1AC+m4DN
+ WAAAA
+X-Change-ID: 20251215-next-e0b3ed280f98
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Jagan Teki <jagan@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, "Patrice
+ Chotard" <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000046:EE_|PR3PR10MB3756:EE_
+X-MS-Office365-Filtering-Correlation-Id: f6d65c03-10fb-49b2-758c-08de3cb83e11
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?R3hQNWNaOFZKUDFpNC9aUnNTVTlGUmg0MGtEWTB0VGExWThTWFBiL091RFJ2?=
+ =?utf-8?B?Ni93YUJtaTgxdEFvdWxDWmNhdDBkWlVUaDhmSDFOSGZrTXUzT2x0R3VQSURk?=
+ =?utf-8?B?ZE1PQnlaVDZ2M0xYbU9tMDJpbUlpa2RjVXR3WTdjVTVmMVRQT0trQVpwbXdT?=
+ =?utf-8?B?aDRsWG9RTkgvS1gvTWlQQkU1U2lMYVRJbHR5dnpSTHlyUDlPVGdnejB3RWNZ?=
+ =?utf-8?B?TEZzSnVja1I4S3JaMG1zODVCR1U5eFJzaU1zVm9raVYwa05oSGk3aUxxWDRM?=
+ =?utf-8?B?RlRZVFlwZW90RFBFZm96a2RHb0UwNWFEeHJrUlRhRXhCb0JPSWhBb3F6M2pO?=
+ =?utf-8?B?S292ZFpFdHJOQ3VwdytNbWQvNnlRc1c4ZmZwNlpBeDB5eWNzQ1MrcWhSclFy?=
+ =?utf-8?B?dHR1dnMycnZDZEhSU3RGNzNWbHdnMlVsQ252WU9Fazh1bG1MUVlIVDZiSVM0?=
+ =?utf-8?B?cHU0NStXckdoc1lpWUFDNWVSQUxycWo2dGxmMjc1RzcrQlFoNmdsYjRKblVk?=
+ =?utf-8?B?MzY1ZUNkd0lMY3FGaXFTSHZSMUJMLzVLZmNWL1FqeSthVUxZQy8yMEljRnNv?=
+ =?utf-8?B?V3Mzam00bWlmVnBkSTQvbnFBeFJHTW85a1FhZEkrbVpzNmtyeXRBWm8veUdN?=
+ =?utf-8?B?T0I4ckpzVjRpRVVHcGRIa1ozeGh6UGk2YTNodXY1dy9mcTV0bDg1NHJnK1l6?=
+ =?utf-8?B?Tms2eEF1bG83OE1kR2RqNGo5K2U5dDZoU3ZMK2ZWbjlWN09DSW9lcmIxK1Vj?=
+ =?utf-8?B?K0dVWkJRd2xudHd5YmlhbmFJSnJ0VURPS1N2VkxVUW1HaFU5b2tpTmZEbHhY?=
+ =?utf-8?B?WU14WWVOYS9Tc0VJTGV6OGdsbzlUdllHQ0xJYWZ0dU8vNU42M09WSFNqU3lG?=
+ =?utf-8?B?cDdYOW1ZTXdqZUZ5M2NjeERBeEQzU1hJeEFabllxakJveUlTaXpxM0Nsdkl0?=
+ =?utf-8?B?TEdzWEZtSXhDTHBMRXdKeWRNRERZZ29GNGlzQVhsVk1pOEZ1d2FVNUpZVCtO?=
+ =?utf-8?B?djhETW1NcTd1Wk0rM0NIVWk2dEV6UkE2SWtlYmk5YTV1dmE4TzQvMWU2YzlS?=
+ =?utf-8?B?ZUFyMHl3UEFJTk1xeW1USzJvNWJEY21DR3dQWkVEek11L0NOK05QcjUyYkxm?=
+ =?utf-8?B?K0dIZzJIUzhqQjlnRnFLa2JzcW9sdGJiRmZMd0hZK09pbUZQWVRlRFhZU2tr?=
+ =?utf-8?B?V291ZU9QRk12NmZQaWNuVFU4ajNIQ0pFOHdHUWFmZmtjTEN1L1lwbzVtT0Q4?=
+ =?utf-8?B?QWxSOE5vNGRXaVBvZUU2bys4dGJOazJ3Z0sraWxicllUZFVwUy9PM3NhK21y?=
+ =?utf-8?B?MkM5eVd2cFFBdFhOSFlRS1U3ZG0wQjNkWUoyVUVlQzdpaW4xcE9Va25ZdkRF?=
+ =?utf-8?B?cVVtRm5oc2wzMUJKdzRicXBwbXBVd21EMnFDTENYNEEyOFJLZGV5SisydWJz?=
+ =?utf-8?B?UlM5YTV5dTdjU3BodzY4MVQzWjBwVm51T2lMa1drWTAyRGdGZTJnWWsyRzc3?=
+ =?utf-8?B?VVlKeFNTWHIwR2Uzc2s5UUZQbUMvVjRYMjlRcExyeFNLbi9FUzhSMU1yeWRs?=
+ =?utf-8?B?UmhQNW05dlZCUzZEait4ajY3NDl0MElnUXp3REtGVlh0OERGWnNwRFFuTVJI?=
+ =?utf-8?B?WmswNmVrSXB0UktvZUFBbm1oRUhxbVdWWVh0MkdLZWI2cFN1ZWtodU02djQ0?=
+ =?utf-8?B?S21MZ2pNOGtTcEdSandaaUdUUGs1OXdJWmZxSTJuMnFhbHdUakJkSmtHRHd2?=
+ =?utf-8?B?bGRzQk5QbEhwamxtWGRweGFiRTQ2aVhsR0JkdlBuM0xDeVJmZkVyTUxzdEd6?=
+ =?utf-8?B?T3dKMlV4NWZ1L3JraEN0cGNSZDd3RDh3cVJZTUJjN01iT3NMYjF4a293czdN?=
+ =?utf-8?B?YW9KQmxUM3dSLy9abWVxSHR0TDlwb0NuRXNWbVBHSkRYdU1tWWw4Q1FQRlpj?=
+ =?utf-8?B?SUtEeCtBbm42clJOOVR4b3pkNTdycjBqa3hVT2pUTVFYaXRSdTZyVlZ0VHZt?=
+ =?utf-8?B?aU5Va3dIOFMzS3orWS9TbXJEbVlxQ0xGdThpQTNESnJ4TUdBeTBBTjkwOVNi?=
+ =?utf-8?B?WjJJYk92NnNuQmN5V21YREo0ZXdnNHFjVFF1V3R3TXFHUHducTFEeWZSTGR0?=
+ =?utf-8?Q?PXvE=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 15:31:54.5276 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f6d65c03-10fb-49b2-758c-08de3cb83e11
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000046.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3756
+X-Authority-Analysis: v=2.4 cv=EK8LElZC c=1 sm=1 tr=0 ts=69417b6d cx=c_pps
+ a=SnlZFlIIozSq1YfOVCQq6A==:117 a=d6reE3nDawwanmLcZTMRXA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
+ a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=_y6EV2h9rhLldSx1SskA:9
+ a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-ORIG-GUID: 8QO8EpBXOOiQciOxUGDfuEI4UJXuthNS
+X-Proofpoint-GUID: 8QO8EpBXOOiQciOxUGDfuEI4UJXuthNS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE2MDEzMyBTYWx0ZWRfX8agiQqs12ocM
+ PFm3DSz/cBvMy4vdKsErTjyx2SDq5/N9r/OgaMsuWxgds9ajcTSnNGPaW4HEUBs7dHacz9Gb6tx
+ vW1xashJ8zGJws8yIJ9ALtXhhj64Rtw0DvTIK710JX2cxTWCLbpMCmddAHRHcoNQ7ecQrR3aPsk
+ 4tW57PWQaxV1xUK2RI2eOZBmshV5Prf9VkgcESa074SvMcO0WAQY3q4wHR+bhbR7nYDKsCmaPsb
+ cUxBTCp6ADl0TKpCmaWWOL4vAQzdAzYnJuTt2dSL8+3oGmimQdS0O9mNoJ4T5962hEnSnFduk51
+ ioFQidcBcZLrV2cOfdgidj/qFkxaDZBX8ddsZhxObGy94xNfsi4xM+LQNFqrAATbhALxyETU9iZ
+ jRpdwbhg45OX+XWz0mQS+KPmnKiJzw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-16_02,2025-12-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ impostorscore=0 adultscore=0 lowpriorityscore=0
+ bulkscore=0 phishscore=0
+ spamscore=0 malwarescore=0 clxscore=1011 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512160133
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,217 +195,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/16/25 08:47, Ilias Apalodimas wrote:
-> The EFI spec in =C2=A78.5.5 says
-> "The directory \EFI\UpdateCapsule is checked for capsules only within
->   the EFI system partition on the device specified in the active boot
->   option determine by reference to BootNext variable or BootOrder variab=
-le
->   processing."
->=20
-> Automatically generated boot options don't point to the ESP, they point =
-to
-> the disk itself and find_handle() won't match when searching for an ESP
-> during a capsule update.
-> This happens because find_handle() only matches device paths that are
-> shorter or equal to the device path passed as an argument.
-> Since the EFI spec allows it we want to allow capsule updates, when the
-> boot option points to a disk, but that disk contains an ESP with a
-> \EFI\UpdateCapsule directory.
->=20
-> So, let's change device_is_present_and_system_part() and check if the
-> supplied device path contains an ESP. If it does return the handle of
-> the device. Otherwise, iterate over child devices and return the handle
-> of the first child that contains an ESP.
->=20
-> The returned handle can then be reused later. Rather than calling
-> efi_fs_from_path(), we can simply look up the EFI_SIMPLE_FILE_SYSTEM_PRO=
-TOCOL
-> on the discovered handle, avoiding the need to re-parse device paths.
->=20
-> Reported-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> Reported-by: John Toomey <john.toomey@amd.com>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Changes from v2:
-> - Changing efi_dp_find_obj() wasn't too intuitive, since we only matched
->    the longest device path we found from a prefix and made the code comp=
-lex.
-> - Change the implementation and iterate over the device children to loca=
-te an
->    ESP, if the supplied DP is not one.
->=20
->   lib/efi_loader/efi_capsule.c | 67 +++++++++++++++++++++++++-----------
->   1 file changed, 46 insertions(+), 21 deletions(-)
->=20
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index eafc647f558f..60ce03b4254a 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -8,6 +8,7 @@
->=20
->   #define LOG_CATEGORY LOGC_EFI
->=20
-> +#include <dm/device.h>
->   #include <efi_device_path.h>
->   #include <efi_loader.h>
->   #include <efi_variable.h>
-> @@ -878,30 +879,48 @@ static efi_status_t get_dp_device(u16 *boot_var,
->   }
->=20
->   /**
-> - * device_is_present_and_system_part - check if a device exists
-> + * get_esp_handle - check if a device exists and contains an ESP
+Update OSPI and QSPI drivers to optimize indirect read/write
+accesses to increase throughput.
 
-The logic looks ok. Yet, the descriptions need rework.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+Patrice Chotard (3):
+      spi: stm32-ospi: Increase read throughput in indirect mode
+      spi: stm32-qspi: Increase read throughput in indirect mode
+      spi: stm32-qspi: Optimize FIFO accesses using u16 or u32
 
-"check if a device exists and contains an ESP":
-This is not what this function does. It checks if a device has an ESP as=
-=20
-immediate child.
+ drivers/spi/stm32_ospi.c |  4 ++-
+ drivers/spi/stm32_qspi.c | 63 ++++++++++++++++++++++++++++++++++++++++--------
+ 2 files changed, 56 insertions(+), 11 deletions(-)
+---
+base-commit: aff0f4d30ec6d7968578fc05fc6df6b5700d9913
+change-id: 20251215-next-e0b3ed280f98
 
->    *
->    * Check if a device pointed to by the device path, @dp, exists and is
-> - * located in UEFI system partition.
-> + * either an ESP or a disk containing an ESP.
-
-Nowhere do you check if the device is a disk. The end node of @dp could=20
-be anything.
-
-An NVMe drive may have many namespaces, a SCSI drive many LUNs.
-
-The partition is not the child of the drive but of the namespace or the LU=
-N.
-
-An NVMe(NSID,EUI) node in a device-path is for a namespace not for a=20
-drive. Similarly an Scsi(PUN,LUN) node is for the LUN and not for the=20
-drive (PUN).
-
-Please, provide an accurate function description.
-
->    *
->    * @dp		device path
-> - * Return:	true - yes, false - no
-> + * Return:	ESP handle or NULL
->    */
-> -static bool device_is_present_and_system_part(struct efi_device_path *d=
-p)
-> +efi_handle_t get_esp_handle(struct efi_device_path *dp)
->   {
-> -	efi_handle_t handle;
-> +	efi_handle_t handle, dev_handle;
-> +	struct udevice *child_dev;
->   	struct efi_device_path *rem;
-> +	efi_status_t ret;
->=20
->   	/* Check device exists */
-> -	handle =3D efi_dp_find_obj(dp, NULL, NULL);
-> -	if (!handle)
-> -		return false;
-> +	dev_handle =3D efi_dp_find_obj(dp, NULL, NULL);
-> +	if (!dev_handle)
-> +		return NULL;
->=20
->   	/* Check device is on system partition */
-
-Should this be
-"Check if the device path points to an EFI system partition"?
-
->   	handle =3D efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);
-> -	if (!handle)
-> -		return false;
-> +	if (handle)
-> +		return handle;
-> +
-> +	/* If it's a disk check its children */
-
-The object that you check may be anything, not necessarily a disk.
-
-Best regards
-
-Heinrich
-
-> +	list_for_each_entry(child_dev, &dev_handle->dev->child_head, sibling_n=
-ode) {
-> +		if (device_get_uclass_id(child_dev) !=3D UCLASS_PARTITION)
-> +			continue;
-> +		if (dev_tag_get_ptr(child_dev, DM_TAG_EFI, (void **)&handle))
-> +			continue;
-> +
-> +		ret =3D EFI_CALL(systab.boottime->open_protocol(
-> +			       handle, &efi_system_partition_guid, NULL, NULL,
-> +			       NULL, EFI_OPEN_PROTOCOL_TEST_PROTOCOL));
-> +		if (ret !=3D EFI_SUCCESS)
-> +			continue;
->=20
-> -	return true;
-> +		return handle;
-> +	}
-> +
-> +	return NULL;
->   }
->=20
->   /**
-> @@ -920,6 +939,8 @@ static efi_status_t find_boot_device(void)
->   	int i, num;
->   	struct efi_simple_file_system_protocol *volume;
->   	struct efi_device_path *boot_dev =3D NULL;
-> +	struct efi_handler *handler;
-> +	efi_handle_t esp =3D NULL;
->   	efi_status_t ret;
->=20
->   	/* find active boot device in BootNext */
-> @@ -940,7 +961,8 @@ static efi_status_t find_boot_device(void)
->=20
->   		ret =3D get_dp_device(boot_var16, &boot_dev);
->   		if (ret =3D=3D EFI_SUCCESS) {
-> -			if (device_is_present_and_system_part(boot_dev)) {
-> +			esp =3D get_esp_handle(boot_dev);
-> +			if (esp) {
->   				goto found;
->   			} else {
->   				efi_free_pool(boot_dev);
-> @@ -967,26 +989,29 @@ skip:
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->=20
-> -		if (device_is_present_and_system_part(boot_dev))
-> +		esp =3D get_esp_handle(boot_dev);
-> +		if (esp)
->   			break;
->=20
->   		efi_free_pool(boot_dev);
->   		boot_dev =3D NULL;
->   	}
-> +
->   found:
-> -	if (boot_dev) {
-> +	ret =3D EFI_NOT_FOUND;
-> +	if (esp) {
->   		log_debug("Boot device %pD\n", boot_dev);
->=20
-> -		volume =3D efi_fs_from_path(boot_dev);
-> -		if (!volume)
-> -			ret =3D EFI_DEVICE_ERROR;
-> -		else
-> +		efi_free_pool(boot_dev);
-> +		ret =3D efi_search_protocol(esp, &efi_simple_file_system_protocol_gui=
-d,
-> +					  &handler);
-> +		if (ret =3D=3D EFI_SUCCESS) {
-> +			volume =3D handler->protocol_interface;
->   			ret =3D EFI_CALL(volume->open_volume(volume,
->   							   &bootdev_root));
-> -		efi_free_pool(boot_dev);
-> -	} else {
-> -		ret =3D EFI_NOT_FOUND;
-> +		}
->   	}
-> +
->   out:
->   	free(boot_order);
->=20
-> --
-> 2.43.0
->=20
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
