@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 650C6D637AE
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 20:52:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 744DBD5E374
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 21:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A01488392C;
-	Tue, 16 Dec 2025 21:52:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6E4B8392C;
+	Tue, 16 Dec 2025 22:00:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FjkiFHB9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gv0gvAT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E27583979; Tue, 16 Dec 2025 21:52:55 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 9CB0483979; Tue, 16 Dec 2025 22:00:33 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 428E38334F
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 21:52:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 729208334F
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 22:00:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c730af8d69so3063031a34.1
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 12:52:53 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c7613db390so3121152a34.2
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 13:00:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765918372; x=1766523172; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765918830; x=1766523630; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8N7SXow2ipjo+t/+XfPMNITpPxLWoaX1+MmyYvsotzM=;
- b=FjkiFHB95e+Zqs72p8n4FECEC9ll8HL0QKbZuSv/mDRCZHnK8rT5m6H91AI1w6LgZv
- +dyZR16qwSp5DR5T7c3HGReCQ2fUy/cxDGgQ/SwxK1y1fj0Dj83eB9ZZsnAtVig+6Tfn
- EqqveC4uUKr4Ha7HIZK0GzF0ZGbVOKfPBszTI60v61DtYf4Wk04eC+1pSjYK2WMpOYLQ
- 8oYneMCmT7yxuopSMp7vGTyf7/GtMZ/84t41aMpxKIsigTeqqk0Vmv+H5E87GL3F1UOr
- 4CAL41lqklOqlayFuwRIjfIwmhKV3M2D2+RPke6NMVHiYkZyDU3DYXmRMc4X/NG08dmO
- 4/eg==
+ bh=SJVIc6sA2K8tPDxDfJ0uIDpWl+P78f2kpQ6vGyeXb5k=;
+ b=Gv0gvAT14jpDgdveJun9IrwSRS8vJJPPARRa7cZMl8HEg6sL7T4T1I1L4nzqtqr8Ax
+ 4LGzFSi99prAsjC93OJr/ZVMPXjiteqcHopqBLplW6yIYgBtzM8Um9RjDxGwjW3oB1CM
+ Uc2BkTBO2HGbkU394mDWve1AHaWnPjvgYjixaAbk7xAM8qar/S9kqTKEr94FtKe4jwIU
+ hw2E9eyqEVhyk76h1/OWniWOH5dKLzyDQl2s0KqKLOEYCrAFbiMwfG8mrbyn3rbU+JP2
+ lBkzyTKwJhVBe9/GNreHXS9W/FTmZ+yV2EgtNWkJ2S64PlJvqPHZUOunyZjWyLiN1xTa
+ /77Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765918372; x=1766523172;
+ d=1e100.net; s=20230601; t=1765918830; x=1766523630;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=8N7SXow2ipjo+t/+XfPMNITpPxLWoaX1+MmyYvsotzM=;
- b=jxxEDLewhLgxshU5QrtAeJJ/gsHnUyz1s++uDi9Ie4g2oW2atWftruzFRnMpOLeAyw
- HgL2iENwnfQi/NA0JUuMbZW75XyA3dJy0hnzkeDbp7s50U5XRBfUWUNB460hXYrBc+Gn
- nrGWkp0IZUQn8gq1k+TsRbnE8v94x16i783GPv4iTay9rNqdj1J4wYngsyU1jlEVQqHi
- /GdEDrwNrDcKVBrW3Y2SzkJq0dWnaNl4jaPncAUkrpl115K0ty314aAiG/Hiv9ui7cBE
- 3qR9qL/6L4VZ5nqU+zxr7h/o3gXknM0Z4cLQcufhmBJB5UZLpbPJe0wLy+aHK5OnVwvU
- YAfQ==
+ bh=SJVIc6sA2K8tPDxDfJ0uIDpWl+P78f2kpQ6vGyeXb5k=;
+ b=LEuuWoKLmhIFshtlJ2FKt+ioJt26/K+9Kaak4ausT+aLsgKo7o0Ar3EFlLZECfVcTb
+ JslgA4NDr/dIo1RJMVih+DkDM648V/vABL/Tx+sku1Pm4gHQGaNpsOZ7x9pBB5rTrkJU
+ 1iW4h6DyVqSFVtG0VvRs/4JbQI2P9YqOwE2non7PvMCEJvay4QtOJLbtLh4W+cz2q7DN
+ aje3fzRBB6oh2xAT0hyc4m/7lGvGFxK0c+yoii+KOQvE2bi+CkC8qG0pEabxDAnuvspN
+ 4UO7q/eFeJaUIRr7kBKU8PG4ndCcWBSansthUbI82Gw28N/O/koeyzyDeCRO2qtTfWDp
+ 6z0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXKcCNDnMoX8RN1jJCY5dDM8hvBhXQ7md3k1uVg6YT/Q8h+YIdrMV40joLOcxY2AyD6rw9EFk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxj2ET5K8RHZVHQf5u4Pg3PuhJttUY8p0dykWdqSWwBNtGEube7
- wvA8REdvtiqZWuec4Wau1kN1q8wzg0e5yu+poFMFKZaTKkh5FVyw4QS5KRD7tA5USXnEuunVezT
- CHDScXHEd9skXhbcR9BVygS1V3XIfFzU=
-X-Gm-Gg: AY/fxX6KULPFpO9B370O9XdMEtrZc2Yzvpsntqkh4EnkFINIFQz88hGwaan4PQ8TYkv
- 5hpUJqozevO1NumfjTRmONuCWBFY/U2/8OLXidHtE72t8JGHeK6h9ETmsiJ4l1WBEPa0k0WWKlN
- 8nc3Ru/aKNl8wGDoew6vKtHMiHeKarvBvnIooUmfbYeOn3LK59ZywiEh8fjnPh3X5lCopgIC4aV
- Wl+OppilYSYH0opbB3HVIgUb/4kApvQstixH4IgUrahgeLyo2YHVT1UGYPND2L/3A2iSxSK
-X-Google-Smtp-Source: AGHT+IH2zpa66odtTM2/lylHUeppbA5pisExwWUddajNY4kmaizbi34nVqmrmdEA2jc2n4BW6ti9yqATtsMuUYji+PY=
-X-Received: by 2002:a05:6830:4c07:b0:7c9:5821:7299 with SMTP id
- 46e09a7af769-7cae83541bamr9218165a34.18.1765918371939; Tue, 16 Dec 2025
- 12:52:51 -0800 (PST)
+ AJvYcCXRJrQy8l1xJHB3X+arXanYi6oaXHvxVvBenuYTK0jDScFVpT6GTUas+TVxe5EJMPWvffP/pfY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzeRixXWYX5gHk7+FjINrR5G9O8s5sGc9sxxoVLoCFdUUpVtp83
+ /45ncerMswMtD2i2llFV6fnxazwtBUJhm1OltMllFjNdth4D8GEBEHfgfpG8ttGWOolkLth2n/g
+ FwuJsmPO6EM0rp479+FCVD6HutXoGdaU=
+X-Gm-Gg: AY/fxX7on0iK64hq1jaQqiYjhmIpuZlv/kJDXe4DdDnaDEry6PUwG/nZ8CdgkzAv/Sm
+ jwfzK6R36utbgdC8tkN+uto2DGu0frBU3B/DuMiVxkh62jv9mz5ZxZ7rRLYbDmF62dXfAsPWpMl
+ xKw3v/D7rXeNyrKCApp9OoIwTjMM9O0yzsAUvwwx7H7eg8DWq9iRLZy78v01nU7/rctDCuB6Pmk
+ RETYd9VuBpG1uMtOtW5j4woQBCdpZvyl0QUEmQJwmSD5p3C6DVFzog1Bw9A4tiLqEr2w1iU
+X-Google-Smtp-Source: AGHT+IFgg0OT2AJYmjyPKOdCfxqW0RiLaiQ4CfrRTs4GrlVsOjSspVl4cRVsgW7DCQj6yw/i38tQmhRPNpV4EUQ9vN4=
+X-Received: by 2002:a05:6830:6d95:b0:7c7:5dd3:ee7e with SMTP id
+ 46e09a7af769-7cae839e804mr8028649a34.32.1765918830038; Tue, 16 Dec 2025
+ 13:00:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20251125212953.1733-1-briansune@gmail.com>
  <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
@@ -81,13 +81,13 @@ References: <20251125212953.1733-1-briansune@gmail.com>
  <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
  <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
  <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
- <CAN7C2SA=X3Pk9ehcVWDcugUzJ2wD-8ooeA6-=zGnVa-4nQ11Mw@mail.gmail.com>
- <CANp-EDaG1vdok9S-LQuKuK9-fU2=ZbW9qRfEtruGSJMsZKWJ+Q@mail.gmail.com>
-In-Reply-To: <CANp-EDaG1vdok9S-LQuKuK9-fU2=ZbW9qRfEtruGSJMsZKWJ+Q@mail.gmail.com>
+ <CAN7C2SDj5yL4=tpEiG2ftjFQvrWvHSavXkz2JMJQGEgN_i4Dtw@mail.gmail.com>
+ <CANp-EDZpbdkKNzvqBS_RzGbJhJ8YP7-8BK9XZe6HuPiPqgQgYQ@mail.gmail.com>
+In-Reply-To: <CANp-EDZpbdkKNzvqBS_RzGbJhJ8YP7-8BK9XZe6HuPiPqgQgYQ@mail.gmail.com>
 From: Sune Brian <briansune@gmail.com>
-Date: Wed, 17 Dec 2025 04:52:41 +0800
-X-Gm-Features: AQt7F2rKdTMsmUo2FNXuhuv0CavhBQO0ToCs_kT0VMQO70eTiEXliMyNu0QYp_E
-Message-ID: <CAN7C2SDxEEBCDh1Q5iXqsc03tYU=VsJQZ-RNPPmhk7pjqP-6Ng@mail.gmail.com>
+Date: Wed, 17 Dec 2025 05:00:14 +0800
+X-Gm-Features: AQt7F2q4dwF9rTSNDiFI3zIIDkG4W6r2vwCqpAk-jk83KQDAn7zsv68V2wCAgR8
+Message-ID: <CAN7C2SCbvD5OjkJiDpYQZGi+VLKo9JfUotwLtkaXzceyPn=Pyw@mail.gmail.com>
 Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
 To: Ralph Siemsen <ralph.siemsen@linaro.org>
 Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
@@ -112,71 +112,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ralph,
+Hi Ralph
 
-On Wed, Dec 17, 2025 at 4:18=E2=80=AFAM Ralph Siemsen <ralph.siemsen@linaro=
+On Wed, Dec 17, 2025 at 4:22=E2=80=AFAM Ralph Siemsen <ralph.siemsen@linaro=
 .org> wrote:
 >
-> On Thu, Dec 11, 2025 at 2:15=E2=80=AFPM Sune Brian <briansune@gmail.com> =
+> On Thu, Dec 11, 2025 at 2:51=E2=80=AFPM Sune Brian <briansune@gmail.com> =
 wrote:
+> > Hi Ralph,
 > >
-> > > > Issue 2:
-> > > > For DRAM size larger than 1GB, when w/o O.C. and using as stable
-> > > > setting as possible.
-> > > > Even it passed the calibration it will not cont'd boot when
-> > > > sdram_gen5.c is turned on debug flag via "#define LOG_DEBUG"
-> > > > However this issue is not found on 1GB nor 512MB.
-> > >
-> > > I was able to get access to board with 2GB, and it boots successfully=
-.
-> > > Memory calibration completes, and subsequent test with u-boot "mtest"
-> > > basic memory test is also passing.
+> > Thanks again. Quick test on your proposed method.
 > >
-> > For your 2GB case it is w/o CYCLIC and WDT right?
+> > diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sdram=
+_gen5.c
+> > index 3c79bb11802..904f9bc6d03 100644
+> > --- a/drivers/ddr/altera/sdram_gen5.c
+> > +++ b/drivers/ddr/altera/sdram_gen5.c
+> > @@ -589,6 +589,9 @@ static int altera_gen5_sdram_probe(struct udevice *=
+dev)
+> >         }
+> >         reset_deassert_bulk(&resets);
+> >
+> > +       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 1);
+> > +       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 0);
+> > +
+> >         if (sdram_mmr_init_full(sdr_ctrl, 0xffffffff) !=3D 0) {
+> >                 puts("SDRAM init failed.\n");
+> >                 goto failed;
+> >
+> > Works and all debug_log and max level=3D2.
 >
-> Correct. Both my 512MB and 2GB are without CYCLIC and WDT.
+> Okay, great.
 >
-> > For this may I ask what DDR3 speed you used? 400MHz?
+> > However the same behavior can be repeated when CYCLIC / WDT off.
+> > It will fail and once CYCLIC is turned on it will pass again.
 >
-> Yes, it is 400MHz, at least on the 512MB board.
+> So there would seem to be another issue related to CYCLIC, hmm...
+>
+> > So simply speaking the sequence.c somehow is so touchy on timing.
+> > I do test the most common timing bin of the DDR3 die.
+> > I guess there is no easy fix on this issue unless Altera do change a bi=
+t the
+> > sequence.c syntax.
+>
+> One other complaint about sequencer.c is its size... the compile code
+> takes up a major portion of the 60kB size limit for SPL.
 
-For this let me recap the situation.
-1) 400MHz on any size could run w/o CYCLIC nor WDT.
-Disregarded to die configuration nor die size aka page size 1k or 2k etc.
-From 512 to 2G.
-2) 533MHz only properly run w/o CYCLIC nor WDT on twinDie setup
-3) 500MHz is required to backoff when CYCLIC and WDT is turned off on 2k
-page size die on max 2G case.
+The major concern here as I didn't fully read that file nor understand yet.
+If the write is possibly ruined the data via wrong address during delay
+taps trials.
 
-So basically speaking it is about the delay tap on the sequence.c is very
-timing dependent and toucky.
+Then the system is sure to stall somehow. So if the SPL phase is not
+100% reliant on OCRAM only then the chance is very high to stall.
+For example it uses total memory of the SDRAM lowest part i.e.
+0x0 to 0x10000 etc. even this could be corrupted during the test.
+However before the sequence.c could possibly reach a good delay taps,
+it had been stalled by other issues and never completed.
 
->
-> > For 2GB there are different die configurations 512x16 itself also come =
-with
-> > different forms. If possible can you provide the actual die part #?
->
-> Unfortunately I don't have physical access (nor schematics) to check that=
-.
->
-> > The most puzzling part is this. It only dies on the U-Boot stage.
-> > The ddr sequence.c was somehow cropped to a point for only size and
-> > speed for the file comments.
-> > All boards or cases that even by luck passed the calibration phase on U=
--Boot
-> > do not have any issue on all stressapptest nor memtester under distro.
->
-> I guess I have been lucky then. My only real problem was that
-> CONFIG_TIMER_COUNTS_DOWN needs to be enabled. And it was quite an
-> adventure to find that (using git bisect). There are other issues,
-> such as watchdog kicking in if there are too many printfs(), and also
-> early uart access is broken.
+And the most concerns from the beginning of C5 devices are they
+don't even have leveling aka official don't allow fly-by yet T-branch only.
+
+So many DDR3 standards are cropped from the beginning and even the
+timing training. (I might be wrong on software level but not hardware level=
+).
+
 >
 > Ralph
-
-Long story short when CYCLIC/WDT is off just back off DDR speed to stable.
-However it makes no sense to trade off possible system speed when it is all=
-owed
-to reach 533.333MHz.
 
 Brian
