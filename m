@@ -4,98 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 744DBD5E374
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 21:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93EF1D637B3
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 21:20:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6E4B8392C;
-	Tue, 16 Dec 2025 22:00:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E192E8392C;
+	Tue, 16 Dec 2025 22:20:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gv0gvAT1";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="GulFiqzh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB0483979; Tue, 16 Dec 2025 22:00:33 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A26F83984; Tue, 16 Dec 2025 18:08:27 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 729208334F
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 22:00:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 555268309A
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:08:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c7613db390so3121152a34.2
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 13:00:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765918830; x=1766523630; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SJVIc6sA2K8tPDxDfJ0uIDpWl+P78f2kpQ6vGyeXb5k=;
- b=Gv0gvAT14jpDgdveJun9IrwSRS8vJJPPARRa7cZMl8HEg6sL7T4T1I1L4nzqtqr8Ax
- 4LGzFSi99prAsjC93OJr/ZVMPXjiteqcHopqBLplW6yIYgBtzM8Um9RjDxGwjW3oB1CM
- Uc2BkTBO2HGbkU394mDWve1AHaWnPjvgYjixaAbk7xAM8qar/S9kqTKEr94FtKe4jwIU
- hw2E9eyqEVhyk76h1/OWniWOH5dKLzyDQl2s0KqKLOEYCrAFbiMwfG8mrbyn3rbU+JP2
- lBkzyTKwJhVBe9/GNreHXS9W/FTmZ+yV2EgtNWkJ2S64PlJvqPHZUOunyZjWyLiN1xTa
- /77Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765918830; x=1766523630;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=SJVIc6sA2K8tPDxDfJ0uIDpWl+P78f2kpQ6vGyeXb5k=;
- b=LEuuWoKLmhIFshtlJ2FKt+ioJt26/K+9Kaak4ausT+aLsgKo7o0Ar3EFlLZECfVcTb
- JslgA4NDr/dIo1RJMVih+DkDM648V/vABL/Tx+sku1Pm4gHQGaNpsOZ7x9pBB5rTrkJU
- 1iW4h6DyVqSFVtG0VvRs/4JbQI2P9YqOwE2non7PvMCEJvay4QtOJLbtLh4W+cz2q7DN
- aje3fzRBB6oh2xAT0hyc4m/7lGvGFxK0c+yoii+KOQvE2bi+CkC8qG0pEabxDAnuvspN
- 4UO7q/eFeJaUIRr7kBKU8PG4ndCcWBSansthUbI82Gw28N/O/koeyzyDeCRO2qtTfWDp
- 6z0g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXRJrQy8l1xJHB3X+arXanYi6oaXHvxVvBenuYTK0jDScFVpT6GTUas+TVxe5EJMPWvffP/pfY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzeRixXWYX5gHk7+FjINrR5G9O8s5sGc9sxxoVLoCFdUUpVtp83
- /45ncerMswMtD2i2llFV6fnxazwtBUJhm1OltMllFjNdth4D8GEBEHfgfpG8ttGWOolkLth2n/g
- FwuJsmPO6EM0rp479+FCVD6HutXoGdaU=
-X-Gm-Gg: AY/fxX7on0iK64hq1jaQqiYjhmIpuZlv/kJDXe4DdDnaDEry6PUwG/nZ8CdgkzAv/Sm
- jwfzK6R36utbgdC8tkN+uto2DGu0frBU3B/DuMiVxkh62jv9mz5ZxZ7rRLYbDmF62dXfAsPWpMl
- xKw3v/D7rXeNyrKCApp9OoIwTjMM9O0yzsAUvwwx7H7eg8DWq9iRLZy78v01nU7/rctDCuB6Pmk
- RETYd9VuBpG1uMtOtW5j4woQBCdpZvyl0QUEmQJwmSD5p3C6DVFzog1Bw9A4tiLqEr2w1iU
-X-Google-Smtp-Source: AGHT+IFgg0OT2AJYmjyPKOdCfxqW0RiLaiQ4CfrRTs4GrlVsOjSspVl4cRVsgW7DCQj6yw/i38tQmhRPNpV4EUQ9vN4=
-X-Received: by 2002:a05:6830:6d95:b0:7c7:5dd3:ee7e with SMTP id
- 46e09a7af769-7cae839e804mr8028649a34.32.1765918830038; Tue, 16 Dec 2025
- 13:00:30 -0800 (PST)
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 0C19326390;
+ Tue, 16 Dec 2025 18:08:25 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4ppHaNxCA5AO; Tue, 16 Dec 2025 18:08:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1765904904; bh=zW8UZ50F4K6mpSebHxJkyXgzfWL+PMgvIABkOEb1ZpI=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References;
+ b=GulFiqzh9io5t008uxhaD08dniXm7M+7lsQ8EY+E0fyO9ypcEyI6xFR9UAfAuT0p5
+ 1werfYB5CW2Vnu2d7Hn+c2aAQ3Id9QJVl9wflU9PzkBefLyx8EvpPF0jgcSLxDFz29
+ 1WPrFDSTOZnEpDoLMZaDUchlFER6K1wtvAks4qEqP44x5KqUQeX9CjYxBUUJXw4QRq
+ DA0qj2zTwu6kiDys30CqeSBcJBwO2QOx35lDx4Z8CWWRaCgOajI8rxyMImhVsOqrob
+ bYd+lhZm9DmVKtz9xx1KRiFj3sdDeBPfA7vbQiDTb/1zC/5DizStdVCqDwSegE+nIt
+ fIQpWEHHPS5Dw==
 MIME-Version: 1.0
-References: <20251125212953.1733-1-briansune@gmail.com>
- <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
- <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
- <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
- <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
- <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
- <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
- <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
- <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
- <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
- <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
- <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
- <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
- <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
- <CAN7C2SDj5yL4=tpEiG2ftjFQvrWvHSavXkz2JMJQGEgN_i4Dtw@mail.gmail.com>
- <CANp-EDZpbdkKNzvqBS_RzGbJhJ8YP7-8BK9XZe6HuPiPqgQgYQ@mail.gmail.com>
-In-Reply-To: <CANp-EDZpbdkKNzvqBS_RzGbJhJ8YP7-8BK9XZe6HuPiPqgQgYQ@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 17 Dec 2025 05:00:14 +0800
-X-Gm-Features: AQt7F2q4dwF9rTSNDiFI3zIIDkG4W6r2vwCqpAk-jk83KQDAn7zsv68V2wCAgR8
-Message-ID: <CAN7C2SCbvD5OjkJiDpYQZGi+VLKo9JfUotwLtkaXzceyPn=Pyw@mail.gmail.com>
-Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Ralph Siemsen <ralph.siemsen@linaro.org>
-Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Tom Rini <trini@konsulko.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
- "Chee, Tien Fong" <tienfong.chee@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Tue, 16 Dec 2025 17:08:24 +0000
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Jonas
+ Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Minkyu
+ Kang <mk7.kang@samsung.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>
+Subject: Re: [PATCH 2/2] usb: dwc3-generic: add support for exynos7870
+In-Reply-To: <89608e43-92ab-41e1-b5c3-79ca01f0360f@mailbox.org>
+References: <20251017-usb-dwc3-exynos7870-v1-0-fe46e2ed1908@disroot.org>
+ <20251017-usb-dwc3-exynos7870-v1-2-fe46e2ed1908@disroot.org>
+ <89608e43-92ab-41e1-b5c3-79ca01f0360f@mailbox.org>
+Message-ID: <8ab651a86f646035edfa06f7e79e45b1@disroot.org>
+X-Sender: kauschluss@disroot.org
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 16 Dec 2025 22:20:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,71 +76,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ralph
+On 2025-12-16 11:13, Marek Vasut wrote:
+> On 10/17/25 5:30 PM, Kaustabh Chakraborty wrote:
+>> Exynos7870's DWC3 glue layer is quite simple, consisting of a few
+>> clocks, which is handled by this driver. Add the compatible string in
+>> here.
+>> 
+>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>> ---
+>>   drivers/usb/dwc3/dwc3-generic.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>> 
+>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>> index 1967594f48ab40963463e6f17ed58ec45ce5867c..622847a9daf8e3c5cba4e4a9414b50e8a050df55 100644
+>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>> @@ -710,6 +710,7 @@ static const struct udevice_id dwc3_glue_ids[] = {
+>>   	{ .compatible = "fsl,imx8mp-dwc3", .data = (ulong)&imx8mp_ops },
+>>   	{ .compatible = "fsl,imx8mq-dwc3" },
+>>   	{ .compatible = "intel,tangier-dwc3" },
+>> +	{ .compatible = "samsung,exynos7870-dwusb3" },
+>>   	{ .compatible = "samsung,exynos850-dwusb3" },
+> Please keep the list sorted.
 
-On Wed, Dec 17, 2025 at 4:22=E2=80=AFAM Ralph Siemsen <ralph.siemsen@linaro=
-.org> wrote:
->
-> On Thu, Dec 11, 2025 at 2:51=E2=80=AFPM Sune Brian <briansune@gmail.com> =
-wrote:
-> > Hi Ralph,
-> >
-> > Thanks again. Quick test on your proposed method.
-> >
-> > diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sdram=
-_gen5.c
-> > index 3c79bb11802..904f9bc6d03 100644
-> > --- a/drivers/ddr/altera/sdram_gen5.c
-> > +++ b/drivers/ddr/altera/sdram_gen5.c
-> > @@ -589,6 +589,9 @@ static int altera_gen5_sdram_probe(struct udevice *=
-dev)
-> >         }
-> >         reset_deassert_bulk(&resets);
-> >
-> > +       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 1);
-> > +       socfpga_per_reset(SOCFPGA_RESET(L4WD0), 0);
-> > +
-> >         if (sdram_mmr_init_full(sdr_ctrl, 0xffffffff) !=3D 0) {
-> >                 puts("SDRAM init failed.\n");
-> >                 goto failed;
-> >
-> > Works and all debug_log and max level=3D2.
->
-> Okay, great.
->
-> > However the same behavior can be repeated when CYCLIC / WDT off.
-> > It will fail and once CYCLIC is turned on it will pass again.
->
-> So there would seem to be another issue related to CYCLIC, hmm...
->
-> > So simply speaking the sequence.c somehow is so touchy on timing.
-> > I do test the most common timing bin of the DDR3 die.
-> > I guess there is no easy fix on this issue unless Altera do change a bi=
-t the
-> > sequence.c syntax.
->
-> One other complaint about sequencer.c is its size... the compile code
-> takes up a major portion of the 60kB size limit for SPL.
-
-The major concern here as I didn't fully read that file nor understand yet.
-If the write is possibly ruined the data via wrong address during delay
-taps trials.
-
-Then the system is sure to stall somehow. So if the SPL phase is not
-100% reliant on OCRAM only then the chance is very high to stall.
-For example it uses total memory of the SDRAM lowest part i.e.
-0x0 to 0x10000 etc. even this could be corrupted during the test.
-However before the sequence.c could possibly reach a good delay taps,
-it had been stalled by other issues and never completed.
-
-And the most concerns from the beginning of C5 devices are they
-don't even have leveling aka official don't allow fly-by yet T-branch only.
-
-So many DDR3 standards are cropped from the beginning and even the
-timing training. (I might be wrong on software level but not hardware level=
-).
-
->
-> Ralph
-
-Brian
+This is... already sorted?
