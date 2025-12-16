@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A3BD637B3
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 21:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F833D637B3
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 21:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF6B083A83;
-	Tue, 16 Dec 2025 22:53:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A925D83979;
+	Tue, 16 Dec 2025 22:55:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b8JZGJG3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uClDqp2q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4D0A83A7A; Tue, 16 Dec 2025 22:53:39 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 0AC36839FA; Tue, 16 Dec 2025 22:55:21 +0100 (CET)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D47083A24
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 22:53:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CE1E8334F
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 22:55:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-450b5338459so3135245b6e.2
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 13:53:36 -0800 (PST)
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7caf5314847so2137017a34.0
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 13:55:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765922015; x=1766526815; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MJlwiTu7f8Pd33Pt/Ne9JwHhxIzKDI+Ah3s9U1a1xL8=;
- b=b8JZGJG3IstDtvKi8Es4ykWbJHfpR8OBZsNIPHPJP3lzvbCfVqhlDDjNx/Tr2zXBMS
- s96o79Bi1pmnf/jTV8LznT+ej+3k5scVbZBh14ifeznwtKQhcTe40/6ZUDP8yvvnfEfu
- RyuES0El3LR7KohBA5GY/Sd/vrLtf+qajKzAk=
+ d=konsulko.com; s=google; t=1765922117; x=1766526917; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wDdHGBc92wabx7z2jFFQlz9MLuLpi5iYG8E1ltDEdEs=;
+ b=uClDqp2qSYwWJZEM1vUlQuDBI1u6pmo2v0vaUpNnAMiCaejA32b/xsRXoKT7HmJAvU
+ O+TRXuuM3rY3KmeljvovtDurkYeKMphUCG+nEYCMSTatLTw0YlqTQtqCQm2cZz+LF5N/
+ MMzz7y0Zgm48tJKP6lTuYMGwOKt8cRRDo64s4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765922015; x=1766526815;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MJlwiTu7f8Pd33Pt/Ne9JwHhxIzKDI+Ah3s9U1a1xL8=;
- b=rUoRs/9eLd5hPP6EyCiGVeG2f7rIFaE/P1yFHvBuHXDt0S47zNA84buiyQHVY+1gse
- yA3BYz1RHKfpOMAZJLc8zICK4x8B3OzT/q7jGJ+gvFL4PhJaEsfXKCeHFjzgjbXO2ftB
- /vHJkxAvyu7iYhytOtPLzwyb5WCwQ3+Ry3kS7+TW1u0LAgSn/h05vBY+ea9uGAdpuXNq
- DII79Ci0yHDLxo8aOgkVdD3kzAn0/pGuFvu7B6UDnKMYQlPaDry8B5E0xleagOKCdgMR
- qtVBxwmYoz61TphscWxQFJLw5bkxLw2KtPCKDc2/ExMRxGzeKTY4MDaJz/VFXusdWG1k
- SRew==
+ d=1e100.net; s=20230601; t=1765922117; x=1766526917;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wDdHGBc92wabx7z2jFFQlz9MLuLpi5iYG8E1ltDEdEs=;
+ b=p33s2bETkTkunoLzBXan9jwiMUMUTBoEuF+x0LOgSk7Tf7y1lfkBE/VPlO3HLLmj6n
+ /jpk6HeacVn2e/ofQZPiO+dsk2T7qz3rnk3ZVaHvaHPRkrM72Lta4Z8EyyzxJAatEHIW
+ hrRxRBUaYaPHdmxbly09u0u5N3pCN/jFByBS1WTFDnTpF8wDXxM1wDlXhsK1fWed3JhF
+ f/1LdgKNL6OpZhFiGOV+VS5TGbmuX63CUY3HLsiihu1UHWH0zog32rePyf4LyBoXhU7C
+ vRhh6GlgT4UwJLtw86kLl6itwYuEHigLr2dN+ZYAMDoSvg3VqlywEF6ZcX0uk8n+GYNl
+ dY5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkSq+C+aRPbY2pTWzQQERAQo+7czDl95xKAmLw8w/G9DjIrR9mLfuMrCZKNgwB68VgNhf2e2U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8wOlqm9FOMigYyihjCLqZIqZIJXk6SFyAq8vKcPHYIJDid1jL
- 4sWdY9gxN/WLajx32LOctY3dXKpAaVkx4HtDWzX5aqs5nr8PPcEoHmldnhGQ/NmhzBQ=
-X-Gm-Gg: AY/fxX7yHAsfT9QencK1/Hsmd/0D+qlOuP7Ys2JM10DwoH8iGBG6bMuR7U5udE+IVhk
- WuDUnY/cpsLnC1vAIEhnBwfRAabXs5Do2aAC+54io8escBW5+kZ7PgWNmpZ6iEd9NnywYqPZcAz
- vKwnEZiLVVxPuT3dLMgnT5wmrGzuYU7cSFFePFy0qcsAmtmVAR2WqK9ZzL0I/JuOB3mOO4EulRm
- 8Xj81w1tWQqnBoi6WZidbg+/5ZZALIu8VvMsSZluR1XKS4kxM7GlYZOVV03tPUQ0DYZ9dhdoRvz
- hrI0bZDuBA8wYZ7bnWM9sUpecZa7MnNtMR4+zjeVB0WwIwSAQvoVSoDjl8li4TbhdAcW146wmyP
- wsE2n72MDklePePZ+tkk0/9qFDmRuUlrSRZ7RFWmYggPt5mwplevA9dT04EcAFtj2GoXzL7/64A
- PHg/509RJ8ZRmxvZppRLps3fuyg9DZJwyVQgkMeLiP+b8tcDpx
-X-Google-Smtp-Source: AGHT+IG9M3/S1fPT2XWFeqPCHmr6a2RKE8Hnwbsra7R7UxcA9Cd/FK19rQKKTMD20op3Wyw6kNhxqg==
-X-Received: by 2002:a05:6808:384b:b0:450:ca65:ef59 with SMTP id
- 5614622812f47-455ac89db2dmr6667416b6e.30.1765922015465; 
- Tue, 16 Dec 2025 13:53:35 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ AJvYcCVz6u+8x6R2dFhktG3+WbQLNSj2F/GfuHK3Q5o3TGjIDBiP5oJoDDBwHIWWTSYhFKC1Ey+xx00=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyWzQrkaWUeOarnChfZBNMad26Pn76uQcyWpxmBQS31WpJMVJW
+ 6dhsyT953KmAL4JdOXbJzombE8TszktIcamRmi4PCsj46O1IGKmTy/C198D+Jea3HZ4sg3QKOA3
+ nWvSZTC0=
+X-Gm-Gg: AY/fxX4poWt4vBGadZwIl8pGf2GNWpMbtrYgLixWD7sVDR9NQXZJ0g0my787jgpiKHy
+ G6BjJB0wRhtBKduNQm7DoY5pnVhaTALXGAt7v31I6yHdR7vgXUECKvvSQxBcV/XMKhLRWRmOcT2
+ CdeIVC//0/P2AQ3wjHySgjptHmA98+MTUar0xStjsqPjSPHY9aA+++dtjN8adVmntionfwGmMAS
+ JnIS3poN7aQvR299qoNLZ8MwmImIUTzgTRNwa7vUnE8Ec0iZ2R8Tp6IT8039mj5UgRFIA8QF50e
+ 6I0cpyF2RGcx1IOdhJQaL+0TDNbrL1Y1DqsVDiTOpXaV8G75uGsRVsHqB/Rzv3rQiecYHDg9XSc
+ GlaXUPEwbAZMx77lEyyDhWbGt0o1IA4P/Jrv5oTVGRSkA7nO9HsGThpIUnXJYaUrqHjcmwJOCFs
+ UNLCV7ulc6twli88YOMB/XWtydcitCne+Mr3yWoq4ooCh0DSC6Uw==
+X-Google-Smtp-Source: AGHT+IEzVDl+C7+x6jOsNRzCZ8b5OmT7VjMhL1yaz+XnCGqWT+EdAIlCj05I2aXTEdXbphJFbEbI6w==
+X-Received: by 2002:a05:6830:211b:b0:7c7:827f:2b6b with SMTP id
+ 46e09a7af769-7cae839f2eamr10560582a34.38.1765922117013; 
+ Tue, 16 Dec 2025 13:55:17 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45598b9966dsm8814255b6e.9.2025.12.16.13.53.34
+ 46e09a7af769-7cadb325094sm12824122a34.23.2025.12.16.13.55.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Dec 2025 13:53:35 -0800 (PST)
+ Tue, 16 Dec 2025 13:55:16 -0800 (PST)
+Date: Tue, 16 Dec 2025 15:55:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
- u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Shiji Yang <yangshiji66@outlook.com>, 
- Anton Moryakov <ant.v.moryakov@gmail.com>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-In-Reply-To: <20251203-fit-compat-v2-0-0fea56f23809@cherry.de>
-References: <20251203-fit-compat-v2-0-0fea56f23809@cherry.de>
-Subject: Re: [PATCH next v2 0/4] fit: print conf node compatibles + use
- property string constants
-Message-Id: <176592201423.2225391.6508157052767689143.b4-ty@konsulko.com>
-Date: Tue, 16 Dec 2025 15:53:34 -0600
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>
+Subject: Re: [PATCH v2] board: toradex: add aquila am69 support
+Message-ID: <20251216215514.GZ303283@bill-the-cat>
+References: <20251205080612.34703-1-francesco@dolcini.it>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9vELzVNpBIuOJgBG"
+Content-Disposition: inline
+In-Reply-To: <20251205080612.34703-1-francesco@dolcini.it>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,30 +102,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Dec 2025 17:19:31 +0100, Quentin Schulz wrote:
 
-> This does a bit of "cleanup" by reusing constants for some FIT
-> properties instead of having the same string in multiple places.
-> 
-> Additionally, this adds a new constant for the compatible property in
-> FIT configuration nodes[1] which is useful for FIT images with multiple
-> FIT configuration nodes to support multiple devices in the same blob.
-> U-Boot will try to figure out which node to select based on that
-> compatible[2].
-> 
-> [...]
+--9vELzVNpBIuOJgBG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Dec 05, 2025 at 09:06:11AM +0100, Francesco Dolcini wrote:
+
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+>=20
+> Add initial support for the Toradex Aquila AM69 module.
+>=20
+> The Aquila AM69 SoM is based on the TI AM69 SoC from the Jacinto 7
+> family and is designed for high-end embedded computing, featuring up to
+> 32GB of LPDDR4 and 256GB eMMC storage, extensive multimedia support (3x
+> Quad CSI, 2x Quad DSI, DisplayPort, 5x Audio I2S/TDM), six Ethernet
+> interfaces (1x 1G, 4x 2.5G SGMII, 1x 10G), USB 3.2 Host/DRD support, and
+> a Wi-Fi 7/BT 5.3 module, alongside an RX8130 RTC, I2C EEPROM and
+> Temperature Sensor, and optional TPM 2.0 module.
+>=20
+> Link: https://www.toradex.com/computer-on-modules/aquila-arm-family/ti-am=
+69
+> Link: https://www.toradex.com/products/carrier-board/aquila-development-b=
+oard-kit
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> Co-developed-by: Parth Pancholi <parth.pancholi@toradex.com>
+> Signed-off-by: Parth Pancholi <parth.pancholi@toradex.com>
+> Co-developed-by: Franz Schnyder <franz.schnyder@toradex.com>
+> Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
+> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
 Applied to u-boot/next, thanks!
 
-[1/4] boot/fit: use constants for property strings
-      commit: 634dcda25924567d000396542948fc33c7e8bc1a
-[2/4] lib: rsa: use FIT_ALGO_PROP constant instead of "algo" in FIT
-      commit: 883359e152d5000943411ef7d2daaec6c137f47d
-[3/4] boot/fit: declare (and use) new constant for conf's compatible prop
-      commit: 3059eb0c27dd1b4a40a06bda4a47e10246185aca
-[4/4] boot/fit: print all configuration node compatibles
-      commit: 6c7d3ba292c648c9075eb0b82278a844bb1ff953
--- 
+--=20
 Tom
 
+--9vELzVNpBIuOJgBG
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUHVPwAKCRAr4qD1Cr/k
+CiPNAQDd68GYHd8VpABXadyA/Iyxsb+GJI1txPCzYRgD2C8ULwEA0YzxHhf75wBL
+1e8wmWPVXloMSq1I0ly/0h0snhJQog8=
+=6dtO
+-----END PGP SIGNATURE-----
+
+--9vELzVNpBIuOJgBG--
