@@ -4,76 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAD6D5E12A
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 10:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86965D5E12E
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 11:26:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9640D83971;
-	Tue, 16 Dec 2025 11:55:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id AF0A08398D;
+	Tue, 16 Dec 2025 12:26:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="WJ9jIvI5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFA978397D; Tue, 16 Dec 2025 11:55:51 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B141B839A5; Tue, 16 Dec 2025 12:26:43 +0100 (CET)
+Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42a9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 466ED8394E
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 11:55:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7F3A83984
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 12:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-34c84dc332cso2428387a91.0
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 02:55:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1765882546; x=1766487346; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QtXHhh/27PjU1w94YWXLgr70ZyKesvaqBAXEEhQB55k=;
- b=WJ9jIvI5PvCYS35dxYjrH1zq/3POXAQfNWLLFuXm9momDQ9ejJnGy+EKt0jQxmD6XG
- 6v03lLq2MVUO01WzuB5pf3NpDd3fNpCvTleh/CGVpPVaZVzlIMVhMgK4lkDbpDZMiLdW
- lgKoOgt3tyo6CMlKnD0AQxDmFrGiSVd6PPLbs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765882546; x=1766487346;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QtXHhh/27PjU1w94YWXLgr70ZyKesvaqBAXEEhQB55k=;
- b=HH6MQ2njY7Q1RPT2Z3R3mUwCTpX+y2jw0e2tF2uI39+gYqWhWxeRAwf35g0qHqOoqp
- iwvMF4QIKAhCf8Ued/Y/YdmGlzXrRsGICQtlgwnoEOk6bbBV5evFb+FdgMO4e56+FKGv
- OiyD27NOS+TCjQYXKBVG36gZLK7+agUXqb62KmCNbGbaUr2G6OXvCdK6i6Bl+9309Mg+
- 8R6T7iQ03tiAU3zSeZzdtGT3vTUMz5VGfc6O6VBi4njr7WBQB2RYzlrhXBPB+99BU5oq
- f1MelpEbrCg5xaYiWBYgmdgzpDdo5+RysBxI+LwLgM7x7Y/jRBbsYCsmgICPPTLlNtXJ
- WDBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2vPsCW7wFAnW2CQta933ufR7D650BWgPiQhGF/LLgT3tR8nkcw9gW7poMtPZgRsQk1vs9tEw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDU1nEB0+u7eWcNULZcM2FjsCQ7IASW14u6/Tvk+mMygn+2eD5
- FlPwWVfSpWa/VmuDtuT1yrf1kXH0pXgVODQ3Lvivd8TqwSacFDSVAmA6zIWWCihV8mC327cbfKV
- f2EwfwQ5zPrq5v36RDJiP3rigLbX5zL4/ml4TpuipTw==
-X-Gm-Gg: AY/fxX5S2o8/oGepjb24sLQAHhayd3nrJte5S+6aCu1aP8X/J4ynPE+PMU6mhYWwYlY
- 7Tr5CZezmaOgM7MGnvZyWYC3xWyl71XVtj8OnrUboH0oFh2IGWZKNIzPwFwFmgG5moXyxOhhFJR
- jF094GynskOSJZ/qQhgSnuL4tPBPKyxcwVDXJnEsQhMxptzM6pTL5DiD676ZRvx8pDyEWbv3LkM
- SAO4OtsVLLPm5Z2dliMMQ+TsZmYfrGQ3pUv8x1M5BRCGqi9GEX2WO1gnu+zM9IFrEj8+P7GiFiX
- 2VCGlJA=
-X-Google-Smtp-Source: AGHT+IFg9K08hNzY1Yb8DfnVGeUuB5Pjm7Gph36Xfu1W2hV130jR4SOpWCkqFEm90IQqWQjD4PNcYbYDJmSvaZ2+kfA=
-X-Received: by 2002:a17:90b:2e48:b0:34c:2ecf:2b2e with SMTP id
- 98e67ed59e1d1-34c2ecf2d4fmr11717930a91.12.1765882546471; Tue, 16 Dec 2025
- 02:55:46 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dVvlP4LsPzcSG;
+ Tue, 16 Dec 2025 12:26:41 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dVvlN5xDgzqQy; Tue, 16 Dec 2025 12:26:40 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Tue, 16 Dec 2025 12:26:29 +0100
+Subject: [PATCH v2 1/3] rockchip: binman: template idbloader.img for MMC
+ and SPI images
 MIME-Version: 1.0
-References: <20251216093513.424736-1-daniel@thingy.jp>
- <9a87c145-ff0f-4f44-9dee-20af2f843b2b@cherry.de>
-In-Reply-To: <9a87c145-ff0f-4f44-9dee-20af2f843b2b@cherry.de>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Tue, 16 Dec 2025 19:55:35 +0900
-X-Gm-Features: AQt7F2rTReHAQ-ovXolm0PZmayzjT0EVAjbQt_kp-vzLRWK8BwFI0doBGzU0rBE
-Message-ID: <CAFr9PXnc5okVixsjfLCDvSoJa5x3eMfXpwaKQysena1OXxgefA@mail.gmail.com>
-Subject: Re: [PATCH] lib: elf: Fix typo
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251216-rockchip-more-template-v2-1-6372e27fc689@cherry.de>
+References: <20251216-rockchip-more-template-v2-0-6372e27fc689@cherry.de>
+In-Reply-To: <20251216-rockchip-more-template-v2-0-6372e27fc689@cherry.de>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,13 +65,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Tue, 16 Dec 2025 at 19:11, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Looking at the code, I believe it should be "EI" instead?
+We may generate two different "simple-bin", one for MMC and one for SPI
+flashes, respectively named u-boot-rockchip.bin and
+u-boot-rockchip-spi.bin.
 
-Yeah, I think you are right. The comment seems like it should really
-be above the if where the check is happening but I guess the intent is
-to show the function is ok for either 32 or 64 bit because it checks
-the class.
+There aren't many differences between the two, namely:
+- the TPL+SPL called "idbloader" has (for some SoCs) a different type
+  to pass to mkimage arguments, namely rksd vs rkspi,
+- the FIT can be stored at different offsets for MMC and SPI, the former
+  is typically controlled by CONFIG_SPL_PAD_TO but for the latter it
+  typically is from CONFIG_SYS_SPI_U_BOOT_OFFS,
+- because of the above, two images are generated, idbloader.img for MMC
+  and idbloader-spi.img for SPI,
+
+binman templating allows to override or supplement templates from the
+inserter side, so let's just do that to remove even more duplication.
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ arch/arm/dts/rockchip-u-boot.dtsi | 26 +++++++++++---------------
+ 1 file changed, 11 insertions(+), 15 deletions(-)
+
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index 71d7623fe2c..79d0dfd8351 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -163,12 +163,10 @@
+ 	};
+ #endif /* HAS_FIT */
+ 
+-	simple-bin {
+-		filename = "u-boot-rockchip.bin";
++	simple_bin_template: template-2 {
+ 		pad-byte = <0xff>;
+ 
+ 		mkimage {
+-			filename = "idbloader.img";
+ 			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
+ 			multiple-data-files;
+ 
+@@ -182,6 +180,15 @@
+ 			u-boot-spl {
+ 			};
+ 		};
++	};
++
++	simple-bin {
++		insert-template = <&simple_bin_template>;
++		filename = "u-boot-rockchip.bin";
++
++		mkimage {
++			filename = "idbloader.img";
++		};
+ 
+ #ifdef HAS_FIT
+ 		fit {
+@@ -196,23 +203,12 @@
+ 
+ #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+ 	simple-bin-spi {
++		insert-template = <&simple_bin_template>;
+ 		filename = "u-boot-rockchip-spi.bin";
+-		pad-byte = <0xff>;
+ 
+ 		mkimage {
+ 			filename = "idbloader-spi.img";
+ 			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
+-			multiple-data-files;
+-
+-#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
+-			rockchip-tpl {
+-			};
+-#elif defined(CONFIG_TPL)
+-			u-boot-tpl {
+-			};
+-#endif
+-			u-boot-spl {
+-			};
+ 		};
+ 
+ #ifdef HAS_FIT
+
+-- 
+2.52.0
+
