@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BC2D5E36F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 14:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF31D5E36C
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 14:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDC0B839D7;
-	Tue, 16 Dec 2025 15:10:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C3238839D7;
+	Tue, 16 Dec 2025 15:14:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BPMeyOI9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IOBpIoI0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB2C583A2D; Tue, 16 Dec 2025 15:10:48 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 2B65C83A3D; Tue, 16 Dec 2025 15:14:14 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AADE83623
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 15:10:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00CA783623
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 15:14:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c71cca8fc2so3393666a34.1
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 06:10:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-c05d66dbab2so4647053a12.0
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 06:14:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765894245; x=1766499045; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W8r+RjAY6nMfl9hwUDuJSScVEHTUwLynHbUl3wlIwjk=;
- b=BPMeyOI9BPSFOYK+bckWAjgSrhb+gEvaXGS9pKgPmzf9864XgBC+OndSYbzu3/QMes
- sRFgWOB6WGuAjDhNQha4YMKiQssXUq2kbFFxTK5HDZTI5UUh+rugjt66wCQS1JnganrA
- BB7OFxd918mILR1yPsD6wwy23SSvG0ZfRFB3M=
+ d=gmail.com; s=20230601; t=1765894450; x=1766499250; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=q3rjjs5nic+YJ+G1+WgouHWnAzafbHYq4UcTTZHMHLY=;
+ b=IOBpIoI0vZRzm+EdDIK4h+JWd+ibwXochf9dE5ulTkPPp7ZxUjS3NmX4a7+mSu7RMi
+ 4WJeWJ0yiau9ATRkitBDq3+aGUKgboy2eoUtH7QKdyFoXlmhOUP9kD5zmUFceKx7WuTy
+ i46rbsE4zNDRfVSUkBbhgUdP+CsD2iIopJz83lfNxC04RyuLp67c0u90+aB9BmGIk6KV
+ HWrd8g8XEUDU/CtL0AynZAjdwvM5ZyspkRwyp73jxD60jMx+MPkpKg5hyOnS6SKa/H62
+ FtVYGKe7QmFKjP7+a4xyY3i+VUZ41qXpAMLzrNlcFwS66Eo7/G3x8irw6Y0usegy4Qmt
+ Dtdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765894245; x=1766499045;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W8r+RjAY6nMfl9hwUDuJSScVEHTUwLynHbUl3wlIwjk=;
- b=wweZUMagoGXxD5m+3wzzyJ2zcXcl5kky9TtavNQT1/t3ryns377aZ+tQgVlNbzWr4N
- jQAH34hKDusbxOf4oExRXNtF8caC+cdJbw9bTBnN2X04eLsfOLk+vXzmFDKrVxSY4Oqw
- ZLwJbhArIBrrDp5e7pfEta8SDuPTs940Z4FzkSoIFLR0Q2gNl12+9VoY1y0H1Yydky33
- i+LWbbI8u6tRQoYFEryOxeHD7T7YPQ95w0MUY/kCA1QtgwfFwLUbSIlwUnbVxInERUUx
- 1UwGv0CjfU7ool0BjUx+9LByYOOJGwsNouyrA+83EnmseDAceHdV0fmGTFDOI6z+3sxr
- rd/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXEWm1MkoFReBwDJTYEXVuQ8MwagGdHd6U25RZ4AZTM0jYiCmAHilHuKIZ15RegYhLvPzs982Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCEVzTwqyiGgG5JcOujPMlUvvABmcE/Bp3eZiqe1kXuYsyV4ka
- hTech5skODMx5IAnEGqz9QCSj6eYGD5SRUOehLIjQQaVQKmvvqgoJoIl/ZCeZwVs1vg=
-X-Gm-Gg: AY/fxX5/WA1QWnyZv5xnnoAcOBr6lrSR+dA9eWeNKeWqMyOGLdjvy1613Sxt73sRR06
- +dFbIRbG6n/cqbCruR2ZxsnG/SVyNeykCNHpLPxF45Nu1LaTASyodUypWavXRjNpaXXPwsdIPKz
- PNfkVdFgW5vuO/ZVRjt2ieSUmSIVfBPntsnRYdugQJQmJ62zr38v00Fq9gtSf8fQ/jMUxlE+w47
- wqg62qHHBUVIfMuUnBURfszvAPbA9yoZcK57QgPBhPXrKYJbfFMvAVUKrLYwfkPXyvcyuVbUCah
- n9g/yDJmoCeRx/EQCY63l/Z5U5vBbWP06WkPuWOnIvSuR4OYRD7a34d19YgTv2jBSYbmV+B7wto
- wY9YfCMQOX0MkgUDAka7NHH2X1aHWeMVAo3Od1DiqR6+lXXX0RZE4GGfP9g4jmawbCqX8le3k6T
- GuikQkFP9Yj0agYqvhfrQZWtg/KKpiXVnL/+VL4uenk4WbhFtjZg==
-X-Google-Smtp-Source: AGHT+IHlK3MQP0IkH8c2HSsIflEbcznaUIZbDBMm1SEF+P008ODE8jLoMB01avD8sEzJIh0hn9+Erw==
-X-Received: by 2002:a05:6808:1925:b0:450:6eb0:3481 with SMTP id
- 5614622812f47-455ac960d1emr5692314b6e.43.1765894244962; 
- Tue, 16 Dec 2025 06:10:44 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45598b9966dsm8219609b6e.9.2025.12.16.06.10.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Dec 2025 06:10:44 -0800 (PST)
-Date: Tue, 16 Dec 2025 08:10:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Beleswar Prasad Padhi <b-padhi@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>, afd@ti.com, nm@ti.com, n-francis@ti.com,
- u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
- used by PPA
-Message-ID: <20251216141042.GW303283@bill-the-cat>
-References: <20251128150455.3279166-1-b-padhi@ti.com>
- <20251215163901.GS303283@bill-the-cat>
- <28abddcb-5218-4705-869f-866aee674f70@ti.com>
+ d=1e100.net; s=20230601; t=1765894450; x=1766499250;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=q3rjjs5nic+YJ+G1+WgouHWnAzafbHYq4UcTTZHMHLY=;
+ b=l32tON5YQVJ6hy/+3zeJKrbfpKc5gTl/Gmf7xDrQ2Ch5lXzkiV6fJLls83+2uM1ixv
+ lfn2/kkLnE/H7tfJhnNwp3Hga1q1bca4HNIK5H5FGHnSsQH9tC9gwzlIv+s0VkBAoNzt
+ zlH8k45691vT9dNwvJe8Gc/miYxgDdnxIt5/pa1/3eMoB+3FDzXZT0f8AKydUDlkLDU0
+ eK4AFnBxY9TgF0i61vNKmbTw1ngSaYuZkHPRKzy2AQ8ApenGTntU4QN01Uw0aVvYyggQ
+ aZ5PYGlev5m2z0YxvFov65BN3SLTCheqJ3oA8pzhJse6COxxG70q3qxN7OBy6bugK9bz
+ IkSA==
+X-Gm-Message-State: AOJu0YwlFUrZT+vg8wEvDgBrpoNLsq8iF7KEkE9hJyS8PzRVMYB/G2JE
+ KmTgomkvOkriROXeLo0Mi1yqD0XHRxD6QXHPc6BAqD7YgAZ/YesBtd1TDS09BAZraNck2yohtUQ
+ DgMbXG6o2wM5AcHOO3oeEoxYAXaWRYoob7OHV
+X-Gm-Gg: AY/fxX6vakQJyMINOkxLQpBzcZIXaoK5VItIuKbq19BNanDpLm0dx1lvgx2A+5D4+SY
+ YtaASIAgB+dCazG0yglXT953B3eLjY8BIwn50Dar3kV0JErRMbYfJoZkhl+qKFYeVYCTc2zNXD4
+ GbNcnf8EkKM3XHs107tIK0x0xASmk4gXg+1/a+rnAd52PmSSnCL274iADyxypCf2ijldjxKQyKj
+ 48AodoEgd2eOR0km+EL62bN2VDaX5PXWAYaPFapPwqw18NTTHLfA68BfolRf0OmHMvuqw==
+X-Google-Smtp-Source: AGHT+IEbEyc6I8G4Nu6My6chzI0o31m/fDCOR4JCEIIMwSbYNWu7N1YAVPU22U5SuYObpnnpl1uS9mbYWdarmWjQoHg=
+X-Received: by 2002:a05:693c:2805:b0:2ae:5020:afe1 with SMTP id
+ 5a478bee46e88-2ae5020b1fdmr1222890eec.14.1765894450030; Tue, 16 Dec 2025
+ 06:14:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8M4SIdk+JQB0fXMp"
-Content-Disposition: inline
-In-Reply-To: <28abddcb-5218-4705-869f-866aee674f70@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Patryk <pbiel7@gmail.com>
+Date: Tue, 16 Dec 2025 15:13:59 +0100
+X-Gm-Features: AQt7F2q-Ihwv0XyCxqwdn_zeNXbwHq85hts-_teSj6msDtggW4relcRcIXTV-y4
+Message-ID: <CA+DkFDbQr40f2V8eKD5cSECVTM6aZyeZNxbZMqT4SeQJjMu3fQ@mail.gmail.com>
+Subject: Standard Boot integration - script validation before execution
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,107 +85,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi
+I would like to integrate Standard Boot on our custom board based on
+NXP LS1028a, as it currently uses a so-called distro boot.
+Normally I would just follow the instructions in the doc about
+converting from distro boot to standard boot, but things are in fact a
+bit more complicated. My board supports dual rootfs following the A/B
+update scheme, so I need a place where I can check the boot state,
+boot counter and so on, so as to set the final rootfs partition to
+pass to the kernel. That's actually not a problem - I can just use the
+bootmeth script and put all the logic there. The problem is that on a
+production system, the devics will be protected by the Secure Boot
+procedure, so the script to be executed should also be verified before
+the execution. In the current solution (distro boot), the boot
+command, first loads the script, then calls esbc_validate over the
+script header and if the validation passes it sources the script so
+the OS can be loaded. In current bootmeth_script there is no place (or
+I'm not aware of) that would allow me to do vendor-specific validation
+over the script. What would you advise in this case? Is there any way
+to "inject" some plugins into the existing boot methods, like  e.g. a
+plugin that would be overriding or adding some functionalities to
+existing bootmeth_script? I can of course patch the existing
+bootmeth_script with a command that would perform the validation but
+this would no longer be a generic boot method. Or perhaps should I
+create my own boot method?
 
---8M4SIdk+JQB0fXMp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Dec 16, 2025 at 10:47:44AM +0530, Beleswar Prasad Padhi wrote:
-> Hi Tom,
->=20
-> On 15/12/25 22:09, Tom Rini wrote:
-> > On Fri, Nov 28, 2025 at 08:34:55PM +0530, Beleswar Padhi wrote:
-> >
-> >> The AM571x SoC has 1 GB DDR space. As part of normal re-location proce=
-ss
-> >> U-Boot copies itself to the top of DDR bank. However, on HS devices, t=
-he
-> >> top 37 MB is used by PPA and is firewalled. This results in an excepti=
-on
-> >> and the boot fails.
-> >>
-> >> Introduce a new defconfig for AM571x HS platforms and set
-> >> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (aligned to 2MB
-> >> as per page size for ARM32) for the same.
-> >>
-> >> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> >> ---
-> >> Fix boot for TI AM571x HS EVM board
-> >> v2: Changelog:
-> >> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
-> >> memory node in DT as it is done by U-Boot as part of FDT fixups
-> >> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-c=
-ommon.c#L72-L107
-> >> 2. Add entry in MAINTAINERS for new config.
-> >> 3. Update commit message to use memory size in MB than raw hex bytes
-> >>
-> >> Link to v1:
-> >> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
-> >>
-> >> Test logs:
-> >> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
-> >>
-> >>  MAINTAINERS                     | 1 +
-> >>  configs/am571x_hs_evm_defconfig | 3 +++
-> >>  2 files changed, 4 insertions(+)
-> >>  create mode 100644 configs/am571x_hs_evm_defconfig
-> >>
-> >> diff --git a/MAINTAINERS b/MAINTAINERS
-> >> index b43dae882b3..e5d564cd760 100644
-> >> --- a/MAINTAINERS
-> >> +++ b/MAINTAINERS
-> >> @@ -1780,6 +1780,7 @@ F:	configs/am335x_hs_evm_spi_defconfig
-> >>  F:	configs/am335x_hs_evm_uart_defconfig
-> >>  F:	configs/am43xx_hs_evm_defconfig
-> >>  F:	configs/am43xx_hs_evm_qspi_defconfig
-> >> +F:	configs/am571x_hs_evm_defconfig
-> >>  F:	configs/am57xx_hs_evm_defconfig
-> >>  F:	configs/am57xx_hs_evm_usb_defconfig
-> >>  F:	configs/dra7xx_hs_evm_defconfig
-> >> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_d=
-efconfig
-> >> new file mode 100644
-> >> index 00000000000..7e44ee5221a
-> >> --- /dev/null
-> >> +++ b/configs/am571x_hs_evm_defconfig
-> >> @@ -0,0 +1,3 @@
-> >> +#include <configs/am57xx_hs_evm_defconfig>
-> >> +
-> >> +CONFIG_SYS_MEM_TOP_HIDE=3D0x2600000
-> > Sorry I missed this specific part before. Why isn't this just being
-> > changed in am57xx_hs_evm_defconfig ?=20
->=20
->=20
-> The firewalled DDR region and the top of DDR (for U-Boot reloc)
-> intersects only for AM571x HS device as it has 1 GiB DDR. This
-> does not happen for other AM57xx HS devices.
->=20
-> > Do we *need* a new config here?=20
->=20
->=20
-> We can have it reserved in am57xx_hs_evm_defconfig, but that would
-> hide that RAM from other AM57xx devices which do not face this
-> limitation. Anyways its just 38MB, so let me know if you prefer to have
-> it in am57xx_hs_evm_defconfig and I will send out a revision for the
-> same.
-
-I assume that for Linux, the hole does or does not exist correctly,
-depending on the platform. And if so, yes, I'd rather one defconfig for
-U-Boot. Thanks!
-
---=20
-Tom
-
---8M4SIdk+JQB0fXMp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUFoYQAKCRAr4qD1Cr/k
-CsWfAQCCB/gej35teNFuiuf8AokTByacI0yo8Mm3iSCZ39cC6AEAvmX4GmDFjX8r
-lZaa9ppOb1vmRM0grO18uH4xPiTDAAI=
-=HjD4
------END PGP SIGNATURE-----
-
---8M4SIdk+JQB0fXMp--
+I would be grateful for any suggestion
+Best regards
+Patryk
