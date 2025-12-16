@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 345DDD5C0C0
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 02:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 151E0D5C0C0
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 02:48:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F02A80077;
-	Tue, 16 Dec 2025 03:47:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9729980107;
+	Tue, 16 Dec 2025 03:48:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IiBAV+0h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PIgdXqUi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24730800AB; Tue, 16 Dec 2025 03:47:52 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 069FE8003E; Tue, 16 Dec 2025 03:48:04 +0100 (CET)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB7E28003E
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 03:47:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0180080107
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 03:48:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-7d26a7e5639so4623102b3a.1
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:47:49 -0800 (PST)
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-7f89d0b37f0so752368b3a.0
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765853268; x=1766458068; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TITfNZv5W6toXo34g9Bwm/0vpcm2276HmestGo2gOFE=;
- b=IiBAV+0h3xp0DBME/2StoOtoxZIo6PhM/14L3OR/hYaoCc98OTB0fSzQAj6JDAZv0v
- suU3uuIOw3RgXHeii+TIMVrNqVxfChXuxy83cNa4Hk8qrtsYjKJheQGcplyPTaSdRAaK
- S6WEGaBhsO7WJM9dSrC4x/Crvvdh7cksQxIq6cLa1c2CWfpxeUohSzaLsJGYDHiBaFGF
- YHCLia2aFActnrw45ZveB3NODS6aH1v6VGxSCzRpSue5Y9xJosWMwAMl2NKqn6cFLXH/
- NL6MfQtMIFcm9Xtbg3r82Fz6Og6gC06G97/OkzRVxIWw9Jl5ACo8TqP//0mQbVLDtei6
- JaqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765853268; x=1766458068;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1765853279; x=1766458079; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TITfNZv5W6toXo34g9Bwm/0vpcm2276HmestGo2gOFE=;
- b=L979GORN2LAfqWyb5llU6XTlbLBvzFAVGCOU/YDq34tjQJsGng01ogrGP/WLDbfnA4
- yBcNnr4F35cEgzCKJ5mE78TQ9yBdo3MW55PNpwrw7P/NTGxoga46LT28cKbkTdWS+8MA
- Mlb4awos9E/Vs9NLUp+hVO7/wY/mXJP1d6F/f469pnqIk4vO9naUykeucTp5Rtb/dLpM
- FfzGUZvBLnDHpUKLsrAvUs2QqAdSaprA+yCUpYKirsKubG4n3mfKbARS/JfDWZLQojfV
- hrkezRaXxMcglgAhDnvcWtgOaQjz+QNI/WZ2GQk+7l7tjHa57EEC/Nx5VresIu6n+8+I
- BaUA==
-X-Gm-Message-State: AOJu0YxZRhp+3Wx+tvugoWvDm6N00FHXDnTsYjKD/UVY2+BVGjrepHkk
- JtRElBu20caJrMfXy5wlInGXUwAW35fZCI8ynG68ja3zq7qQQr5A9mtnwXL3xJdA
-X-Gm-Gg: AY/fxX6ST0my6oELyoiFSVRuOM4eEAwSRJ1T/hBv+84eHNiaHSFDUkoIZ61nzlpZAbB
- qNn7GbSQ0HS4YHTn1f+KcoJtUSWfUNouBGAeGftgBsAWQvxAy1wQwwtXlFotp7jl004HJYYAJeC
- UyeUNmIzQHH0XUCenwflyqtYhINNdH7UY2vvlT9ewztzPRTPYKjk6vlCs4+R3N7N5b7kEjMu/HJ
- HejPHs3r0i8NNuZDQGAF1syZ/z/CDYvvaLviOfXnl0gVGxMlPAj6ZFb1AlwUDQrHwalfjQ162un
- PONhwREZuZ5aPr0SnQ/pnDOpWvuzfwEGUn03MwVNpE/IujgT/dtyVpXbYVysS5Fv1N1NjxaQoDe
- Z5cWYVTCAWqw3f3YKl7ta3GpM3tVhm2zsOtrCow/2juHZStX9r9eUnTrLwZzQFwFVRcNBxeJlxV
- A1jRzTHxSu0DraT0okUPuhfw==
-X-Google-Smtp-Source: AGHT+IGyIzMnYdSnjPdN1Hw3Pdd6S8BFCdDfiN7NEODOAxDnYb0bhC2R1VZs+tj6ssLj7wA9Z7uiZQ==
-X-Received: by 2002:a05:6a21:3283:b0:34f:ce39:1f42 with SMTP id
- adf61e73a8af0-369b432deb9mr12082864637.8.1765853268044; 
- Mon, 15 Dec 2025 18:47:48 -0800 (PST)
+ bh=dHI1vZC+NtUBdFGbaPEBvJmpsPCy4aN+iW1pIheBM68=;
+ b=PIgdXqUitfHN9L9Bw7UaHNHKvgD0dj4IYLBGoyY4Fng0qlH7xd4qo0TSs6Omyw42NY
+ 9npCzcyDolG/TbOlMzJTswjPofHzrI8DbYTAU/6Ohln4l2Mj6aAccawI9ziJ9Y1dgu/t
+ LdcJWMDMzso2xPA2ESD3GFcORjDsmy30QvqKhq+uaalUT4dQEW8+xBjVaHHFXHY5amms
+ BaVlQePb5a2IvIqt7CmYq5NmJulsRjhb00KqNQOgb8sRbupX26m2eadh9rknQQaJ6Vkq
+ jUtTIoh+Z675jxamVbtCx7NkjwlNWAXeIoRMDqRMkaSjXkbCxcfYmpL4/lM45tPFeLO3
+ +fiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765853279; x=1766458079;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=dHI1vZC+NtUBdFGbaPEBvJmpsPCy4aN+iW1pIheBM68=;
+ b=EABOMd9r/1KRoN1335n6awhNPNw/dneSGAvLydvaT5KS2Kh8snepTdWistCFCY52VA
+ +tmtMDPnAlT5rfWVcLaZcYj60Q9dqvlY3EN9ZGEnRXnCc+ZNaEq/dYIzitZtRQ6BbOp5
+ U95N9LUwmBFkbQlmjV+Zzk1ONitm718/egLpm5DVM7VhOZ/i9MTtdONzPyV+JPTYJeox
+ 6lSjXeCUGYjyn3Hc/chlStORrYjsLliteCFr8GF8t1xsJvsAcUghBpsYNrlkVqHdQwGm
+ sYEdEcbIiRLzfjJYH67/N7n+g4uT4rG7Q7rlYDzFlsueVRqqGww2KfJVutwS7ptZubwZ
+ 8lVg==
+X-Gm-Message-State: AOJu0Yy/A1Zy9r3c/l8Ak6y3MxwIRWtfFQMJ1rZdV+SNJ5s8R9Yy2Rep
+ ct2ilY4SdgHSzQQJrs7gATR+WgI1NLwM8NYWqbzavsqgpgZiRuL+1pmr
+X-Gm-Gg: AY/fxX642crTI9f30kxVbv1hsHptX52YA/3ONqcCQToPACZa92GqKRxrLoZjsUMhpcL
+ yC7dXb89ZaBb/ZDjyJUR7oc7O+nNa8pU6wIJGlEcI632Q9NtyK9uuefZckYUq7SUdZcPbKSR/A1
+ 1NT6JHup8mkvHkKF9jK8eV6tAhxaVbfdtiZKoJamVg1TIeGd6lU0J6GRjUFv8WE/HO4snP9+GCZ
+ ffKVOBktPyDeXhLgfEbeAtYlhrASD6HRGsdfurVR/EeQM/oZ2p6woBHG5HEDutCNxIC8UuDomQe
+ 5QPgKagR7+p/jZu9QUT2xuyGSssWdag+Se/KOoG9fSQRv/8ZS93z4PnGgFrOKWI9amt9hVWcM7W
+ njgQ99bOM/aBwMEDGNJmyWhvTic3iiVYu+Fjwxkd/l8/1faTYiisv3q985UHKLIAskz+NLs6BKc
+ X/oQGnpXV33f4fL3/CwX3E+Q==
+X-Google-Smtp-Source: AGHT+IF4cYpCe9MJIWQkAnRZw78HkXOZqK8zKJcRPMIWZdSWdUCVM0fW378yT4mf0/uG22tieiYOjQ==
+X-Received: by 2002:a05:6a20:9184:b0:342:fa5:8b20 with SMTP id
+ adf61e73a8af0-369aa64962cmr13008551637.30.1765853279322; 
+ Mon, 15 Dec 2025 18:47:59 -0800 (PST)
 Received: from cs20-buildserver.. ([2402:7500:502:d4da:9fd1:87b1:de1a:188c])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c0c26eb1d05sm13401606a12.13.2025.12.15.18.47.46
+ 41be03b00d2f7-c0c26eb1d05sm13401606a12.13.2025.12.15.18.47.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Dec 2025 18:47:47 -0800 (PST)
+ Mon, 15 Dec 2025 18:47:58 -0800 (PST)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com,
 	jim.t90615@gmail.com,
 	trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/6] modify npcm7xx/8xx feature and bug fixed
-Date: Tue, 16 Dec 2025 10:47:23 +0800
-Message-Id: <20251216024729.1031306-1-JJLIU0@nuvoton.com>
+Cc: u-boot@lists.denx.de,
+	Stanley Chu <yschu@nuvoton.com>
+Subject: [PATCH v1 1/6] watchdog: npcm: Support more timeout value
+Date: Tue, 16 Dec 2025 10:47:24 +0800
+Message-Id: <20251216024729.1031306-2-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251216024729.1031306-1-JJLIU0@nuvoton.com>
+References: <20251216024729.1031306-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,27 +102,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-modify npcm7xx/8xx feature and bug fixed
+From: Stanley Chu <yschu@nuvoton.com>
 
-Jim Liu (2):
-  gpio: sgpio: modify persist check condition
-  arm: dts: Add SGPIO node in dts
+Calculate a timeout value that is close to the requested value.
 
-Stanley Chu (3):
-  watchdog: npcm: Support more timeout value
-  pinctrl: npcm8xx: Add smb11ddc pin config
-  dts: fix typo in the pin name of GPIO191/GPIO192
+Signed-off-by: Stanley Chu <yschu@nuvoton.com>
+---
+ drivers/watchdog/npcm_wdt.c | 25 +++++--------------------
+ 1 file changed, 5 insertions(+), 20 deletions(-)
 
-Ted Lee (1):
-  pinctrl: npcm8xx: Remove incorrect spi0cs2_pins and spi0cs3_pins
-
- arch/arm/dts/nuvoton-npcm845-pincfg.dtsi  | 10 ++---
- arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi  | 46 +++++++++++++++++++----
- drivers/gpio/npcm_sgpio.c                 |  8 ++--
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c |  6 ++-
- drivers/watchdog/npcm_wdt.c               | 25 +++---------
- 5 files changed, 56 insertions(+), 39 deletions(-)
-
+diff --git a/drivers/watchdog/npcm_wdt.c b/drivers/watchdog/npcm_wdt.c
+index 57b61215a2a..7becc646fda 100644
+--- a/drivers/watchdog/npcm_wdt.c
++++ b/drivers/watchdog/npcm_wdt.c
+@@ -27,26 +27,11 @@ struct npcm_wdt_priv {
+ static int npcm_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ {
+ 	struct npcm_wdt_priv *priv = dev_get_priv(dev);
+-	u32 time_out, val;
+-
+-	time_out = (u32)(timeout_ms) / 1000;
+-	if (time_out < 2)
+-		val = 0x800;
+-	else if (time_out < 3)
+-		val = 0x420;
+-	else if (time_out < 6)
+-		val = 0x810;
+-	else if (time_out < 11)
+-		val = 0x430;
+-	else if (time_out < 22)
+-		val = 0x820;
+-	else if (time_out < 44)
+-		val = 0xc00;
+-	else if (time_out < 87)
+-		val = 0x830;
+-	else if (time_out < 173)
+-		val = 0xc10;
+-	else if (time_out < 688)
++	u32 val;
++
++	if (timeout_ms < 343552)
++		val = ((timeout_ms / 1342) << 16) + 0x800;
++	else if (timeout_ms < 688000)
+ 		val = 0xc20;
+ 	else
+ 		val = 0xc30;
 -- 
 2.34.1
 
