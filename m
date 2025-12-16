@@ -4,83 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76754D5B87A
-	for <u-boot@archiver.kernel.org>; Mon, 15 Dec 2025 23:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B07BD5B87D
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 01:14:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A41CA800D0;
-	Tue, 16 Dec 2025 00:26:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AB12A80077;
+	Tue, 16 Dec 2025 02:14:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gvUV7ste";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="ojo8kn7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A62B8036B; Tue, 16 Dec 2025 00:26:39 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8C742800AB; Tue, 16 Dec 2025 01:54:05 +0100 (CET)
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3914A80077
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 00:26:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A32498003E
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 01:54:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-3e89d226c3aso2733641fac.2
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 15:26:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765841196; x=1766445996; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3f3eZsXTnF8mAis4EZsTp3QIEJ/32I3uL5rcarFw44E=;
- b=gvUV7steUkNIfcGa0FbA0L5kcgPOe0bpWi3/IgxV5fBw3oEPvu2VOsGvu/XyOjfnsa
- 6qOrR+VGY4eczqeW0UwNgJda9DUroMWS/cDViL708T681k6zuTN9bYFrncmWlvmGygar
- oN76/jYwJm4iI0mdc+FSGgwH/zksaWXm8vlCE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765841196; x=1766445996;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3f3eZsXTnF8mAis4EZsTp3QIEJ/32I3uL5rcarFw44E=;
- b=RAHGuUObcyoksFXCW413LA5yjSEm2CXyqjuoX+i5Z0wRiUQBKnfgmAbSc9N3DcZs51
- rJ82rv6tJrs2tDY9LMdb2c1ZcJ1TlgAybC3lEjKBaU4Toya8McN3cgzBfizBtNDypwQ5
- NvHbwMJo1Vr8hUI0n3dCsUAOTgxCEPweCdBaWwOX6yk7hiuWgFKTB6Dz1fdDRm8BYCS+
- 1UmSsU2B8USkA8rx9+DrLq+SYrIOxA8X1DWwpwSg/RK5yKYJfv+uTPqvBxuUaEQlPNZF
- 4xC+qOmg+aCkckKcCp1mG0lzx7Nksuk6iyZBeADFj8+zncfjBcUdu7+c2IBCg8x24ZdT
- Ao1Q==
-X-Gm-Message-State: AOJu0Yz5L8vb+yB9yGan6jI7bpxa4KwVOo1MDkui+QyPAfWlLF3p8aTd
- KtsqXfTbUv/QzrzXnMQHVSn0BcCrewFJfW1gJ6kMkVj5MGGYdFwTF5NBe+2cSruoGexHwa6Vz0N
- 1I2EGuzs=
-X-Gm-Gg: AY/fxX4H2R2Wi3b/uZ47bBk9GaGJDPZygjAWbAZ1LHaaB2vUlnhaKPEi2zn0OGmYH07
- g+Qp6rJkYV+1XwdJNxrf46hnhvEYlnbsQZpcYoCd+iuh1bk70WH/phiUWwLZlZCPrMoMckub0l1
- uOJaWdubqjW2Lrp9QqnA9ekBmH8DLNgwRmfvcZqrs24z/rayhu4zXRjh4xJuemlzYWFXLAqpSbY
- 6sXsSr/heecrNjq39R61yYCkBFWWEQG21x/FAH0ZDHprQ6xrx5GfzflWYg8Ben/H5CWRL3yzNGe
- FhkfBiYzJjBupCZ9gCeOdTP6Bx5CLe5Ia3OPTiZf+Quz0YBOgnVjjOgfNyZznfnZMXAJeVT4dnt
- VNgkRZ/7xfftIEf8PJUPQiPQH3wIuWiM3jPP9fAKZHGy1+r8Lw4n4xawa4VEbXL8StgAY5PRmn2
- MSgUMRKn8g5S2qD4u0n2mBGDXOdwrZWURUBN4X9ofj+pkA1i5u
-X-Google-Smtp-Source: AGHT+IFMJoaaFP+8xQY3WpIaJ0R/eGfVqN/lIGqOuiXeVPTGEEy/MYQ+M7jLRKec8ZOaGN+JVNJRqg==
-X-Received: by 2002:a05:6870:85ce:b0:3f5:4172:17 with SMTP id
- 586e51a60fabf-3f5f8d1a7b6mr5909862fac.56.1765841195861; 
- Mon, 15 Dec 2025 15:26:35 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f614b7efd3sm5284880fac.2.2025.12.15.15.26.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Dec 2025 15:26:35 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251214151030.1461567-1-kever.yang@rock-chips.com>
-References: <20251214151030.1461567-1-kever.yang@rock-chips.com>
-Subject: Re: Pull request: u-boot-rockchip-20251214
-Message-Id: <176584119496.1912790.3995873637248103534.b4-ty@konsulko.com>
-Date: Mon, 15 Dec 2025 17:26:34 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from localhost.localdomain (unknown
+ [IPv6:2a01:e0a:2af:22b0:6c0b:d94b:97c7:89ef])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp3-g21.free.fr (Postfix) with ESMTPSA id 792A713F86A;
+ Tue, 16 Dec 2025 01:53:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1765846441;
+ bh=IPMEZUJS1Kzu2FBpbVrTd6wK0tpnZpXyek2/WzIpOrQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ojo8kn7/Gc231HtVlnKK02x/0JLZPSatEAKmKsn8IxwJzBwaMeXVMC9o073z3VT4t
+ l7ZWPlFnLhonUAU4Vg82zOigp0WzXQwHjADIdIqTzll6wDjx5tKPhSsLFuNz18peyz
+ S8Uc/nFsVhiuss0oWN+9r3TCbuNdbrxzGitljJyyXc+SrRiQARhYo4ZijDqRUEI5WI
+ RzvUUsyGqHsawKF5+aSkcxfokwcHt1sH5II8PoEE+UstCN1sHRMilrzYS+cmNNfFPN
+ yhcjyIxWxBx2tcTqH247Xjhc1i5yO0nVODUHQLlGw/AGjpwUBNDj87u33aGN1T77E2
+ 7pLX1MPCtoCMQ==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
+ seanga2@gmail.com, sjg@chromium.org, Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH] net: mvpp2: fix NULL pointer dereference in mvpp2_phy_connect
+Date: Tue, 16 Dec 2025 01:53:52 +0100
+Message-ID: <20251216005352.92277-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 16 Dec 2025 02:14:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +66,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Dec 2025 23:10:30 +0800, Kever Yang wrote:
+Fix two NULL pointer dereferences in mvpp2_phy_connect():
 
-> Please pull the updates for rockchip platform:
-> - New Board support: rk3588 Radxa ROCK 5T, ROCK 5B+;
-> - I2C Fixes;
-> - RAM boot from maskrom;
-> 
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/28748
-> 
-> [...]
+1. port->phy_dev->dev is used in dev_warn() but
+   port->phy_dev is not assigned yet (assigned later at line below).
 
-Merged into u-boot/master, thanks!
+2. port->phy_dev->dev is used in dev_err() inside
+   the "if (!phy_dev)" block, which means phy_dev is NULL.
 
+Both cases would cause a crash if the PHY detection fails or returns
+a generic PHY. Use the already available 'dev' parameter instead.
+
+Fixes: 9db60ee470c2 ("net: mvpp2: Convert netdev_xxx to dev_xxx")
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
+---
+ drivers/net/mvpp2.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/mvpp2.c b/drivers/net/mvpp2.c
+index ae545fe229c..3f6f1978f2f 100644
+--- a/drivers/net/mvpp2.c
++++ b/drivers/net/mvpp2.c
+@@ -4530,7 +4530,7 @@ static void mvpp2_phy_connect(struct udevice *dev, struct mvpp2_port *port)
+ 		 */
+ 		if (phy_dev &&
+ 		    phy_dev->drv->uid == 0xffffffff) {/* Generic phy */
+-			dev_warn(port->phy_dev->dev,
++			dev_warn(dev,
+ 				 "Marking phy as invalid, link will not be checked\n");
+ 			/* set phy_addr to invalid value */
+ 			port->phyaddr = PHY_MAX_ADDR;
+@@ -4542,7 +4542,7 @@ static void mvpp2_phy_connect(struct udevice *dev, struct mvpp2_port *port)
+ 
+ 		port->phy_dev = phy_dev;
+ 		if (!phy_dev) {
+-			dev_err(port->phy_dev->dev, "cannot connect to phy\n");
++			dev_err(dev, "cannot connect to phy\n");
+ 			return;
+ 		}
+ 		phy_dev->supported &= PHY_GBIT_FEATURES;
 -- 
-Tom
-
+2.43.0
 
