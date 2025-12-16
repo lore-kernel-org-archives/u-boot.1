@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD30D5B87C
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 06:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C36AD5B161
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 06:40:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C2F083642;
+	by phobos.denx.de (Postfix) with ESMTP id 94D93836AC;
 	Tue, 16 Dec 2025 07:40:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="amCHmcPa";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="g0vTwqAM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F91083642; Tue, 16 Dec 2025 07:40:05 +0100 (CET)
+ id 139798003E; Tue, 16 Dec 2025 07:40:06 +0100 (CET)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 183738003E
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 07:39:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45A348334F
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 07:40:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Xw0riGQUVNwp+G86hDoxp9RaA7os5yFBp5OFUB2n7DV2JSaYcEsJzxATEc2Bgs58qCfKKJjMlJQUwCOboc8POrwMwYP7gXEHmlox23owsgkAx/m9mgQAQ7RY93bgv4oLeaw1/K91n30nJjgl0Pg2vjwm5uEhomwN60qB0jBr+qTbp4c4sKxIaeVx1mX9ro3V3HUXFxlhUFnGEKZHt+D15BsMPv96mRSX2D15YKEGP1gwdXMzzd7nmki4AoifXoPRap0vUUQcshIORupN4c3kEJfmJF0u7XP6ByoGMh0YCHeBxygUl5SWDgwS48EUB3k8Zm9eX0+fqX285g7iBv1Ouw==
+ b=MmOGZeb5IiBj6SU4q7zAFZfkXqMl9szLsUGQTtryUB4zMTWbHiQQaHQAu5xx57iRVi0Pr979MWbOoGkTQYoDPTSH28tWUasAyufyMA+SXMEJbqsju6+DDKMx+yM04Y9CIlBs2U6LwcsO9tMRFUabdaHgk5Mh6TGuLpSjKkLoVJERbUgeFEMQE6s9SOllrp3QTfqdTAsLUCEH4KGueLUmqnWS2zO5vgxzea1LD3HHT3agNqzH42yenjFDtUgSi/Lzp15FoTgTeoiIrX8xUD3RCif7894kTZmYeu/YYDXI4TSkaVbScsLG0lB5KxY4IM8Ewf8oKwuELzY2TRNwlzv4pw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VoIXeqRlqPlbXk9KVnJnb+xyx8XOwW0ej9hPf/Os9Mk=;
- b=LiRL5ztLCBQA6iOya7NnD0hlHezl5pI8DDfYyd/gptdhq3weCoCoXjoYCRpDTuTjBQD/UIEqf/n2JSEBp7zbK0JeJQxI9vG9oULNi8n0BO7ich2hNgzo0tUYRzZ2xxVtA1yX1tSBfm4EXqG/jyjHgqe/PsdG1Q3Im2v72O+Utcx9ESlLMIQLPfu6jgO005GxqY+KyKRuLhtkRGmIOb36sl+F9vXoEJEEwTxbZgZ9H2MZxnHTcbIzTrTcT8yWPyM43GmAQsglWfO01CtbZbhyWQ+q7RcDK/jlnOGyM6CIyTP0IJUKU5UrPWfMARcaFy1fZ6R/ND0JEUi5zKIFnTGdng==
+ bh=a9IN1dzDYXI1HZlyaze1LVOvzQ8p3L8oc5Z62L0TIAo=;
+ b=UT4Wu+aEUNLYdPBf2alASiOQnGNuXnb2B2NoJI9M9TnbJK5zIwFuyPrGY9TGPGfHsjHKUXVQi+NSU/iSniYJrE9lusGOxciIYFjVfeBJb75+fEYGNTHiswPsjEzGOrl1GWG4RoWqzlVXj4120cUv62ADnXX8SEapxpUkP8tf6uJAoNQRGHQNSM3fmFgpDkSdI8rAwbswIbNn5YTERKl42ZQ7LhzKlc7dW+suSxotMu6Ey4jEQYR2lRlby656qRQwm3/73HVwLO35sCS7QyTgOqPqUG+gqcBVMq+Hd5FQRWhaRxLIcVOrHWCR2an1TcgTsY3u4gnimG4OvYp4+36dRA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VoIXeqRlqPlbXk9KVnJnb+xyx8XOwW0ej9hPf/Os9Mk=;
- b=amCHmcPaWlwGLe0ZInOgyATxTSgcYeCXybuA5Ps+Cop7S3eKIAAH4QgjrhdOMfPT8omQnkyc2YooGt/nYIFAINjltz8z3k507OJID6dJ8Erl4b4lmAIvQyoDGWYQkFRq42n/MRYkNrg874OFwxLxIF3NyVTQmpPqCLLvCSWe2p3pLYaYUATq9f/Hxh/HfIyfQiL5BYi78aVy/uU23ahLr2tKt5bTGzEKjkzN482MNjYfw0sXI5WA+Bo6DqQwpYkuklv5taJkAl00dZ9S8pyVYNZr3dgLg2Dytdcmez5ssY9DT7kEXFertLCSXEab/ZcSHVQPI1I7rfkU+SjPr2S1rw==
+ bh=a9IN1dzDYXI1HZlyaze1LVOvzQ8p3L8oc5Z62L0TIAo=;
+ b=g0vTwqAMzJvFwq8HG3vR6NQYbPWGkhh01MMmCQpP4bI+4T02koqOCRuL0McRez4e2AfGGofY6DB6cqXUoT45w7k+MVGLESfYV2WrL2xeglxvXLWZQkOubXSdkIRg7v1vb6iU6QAhgL/kr3x6z1M6fGQCq7lAfJEv21NJihSf4z8TsgKYkVA/c6msqzmddm1gE/QJt+n0t8dPnnsTOr0NPfjrOQ56Yp5GlnkviEUBYmj3ARYR914qjoi++yI3K8ExU8CKR8SbfHvBcWkdmwBByzE6SUW/D+MOBf2rcGsOhMPGYSR+zTKws67eiUluFbjx6m1uM3H57sz/YW8oJDA9LA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by AM8PR04MB7794.eurprd04.prod.outlook.com (2603:10a6:20b:247::24)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Tue, 16 Dec
- 2025 06:39:54 +0000
+ 2025 06:39:59 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9434.001; Tue, 16 Dec 2025
- 06:39:54 +0000
+ 06:39:59 +0000
 From: alice.guo@oss.nxp.com
-Date: Tue, 16 Dec 2025 14:38:35 +0800
-Subject: [PATCH v1 3/7] usb: ehci-mx6: Extract PHY initialization into
- reusable function
+Date: Tue, 16 Dec 2025 14:38:36 +0800
+Subject: [PATCH v1 4/7] usb: ci_udc: Convert driver to DM_USB_GADGET
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251216-imx8ulp-v1-3-504115a53020@nxp.com>
+Message-Id: <20251216-imx8ulp-v1-4-504115a53020@nxp.com>
 References: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
 In-Reply-To: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
@@ -81,98 +80,98 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AM8PR04MB7794:EE_
-X-MS-Office365-Filtering-Correlation-Id: e835069c-a586-43df-b92d-08de3c6debb9
+X-MS-Office365-Filtering-Correlation-Id: 54750e7f-2492-47e7-0146-08de3c6def15
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|19092799006|376014|7416014|366016|52116014|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEFzL2wzNDlweHkrbEI5Mng1d2ZmRlVFaWNHTG1odEtIMmJ2dUIzNllUQ1Bt?=
- =?utf-8?B?SDcwTnJocVBzeGJZYktLUlR1NEhSRHVnajByNHhud0FYMlFxTWdISWpjN3h0?=
- =?utf-8?B?TGNqSlYxaHY2ekppKzBGYy80R0JoZEw2eWJUbXNZYUp5ODhsL2p4ZlFGZ1BK?=
- =?utf-8?B?d1l0NXBZdVRMdDR2REpvdzU1QkpvQlR0YmVJSFFzbnBMZEF4YTZVQzlXRlkx?=
- =?utf-8?B?YTlzSkxxL3VsRHhBeHhhRy8xdEswekV0ZEZNTWVkUVd5ZnFWQ0VBYlM1bFVE?=
- =?utf-8?B?YjNObGlFdjNSZjRHNzB5blpLU1JGQllBNDRleWVubGMwWnJmb1VIS0tXaDBB?=
- =?utf-8?B?Y1laYi9NZklaeCt1RmtxNnlsUnlrTTM3UUJXeERPMHdrQS9EVmk1NkhTWFB0?=
- =?utf-8?B?NGVIRURqMTlRblF1NXQ2TE52UC9ZaDVlV3hlRE5zV1pYMlI3UzhleEJ0N0FQ?=
- =?utf-8?B?QU04eEtZZm0wNW5OaTVVRWJ0RkM4cEVhYkN2TzdDQmRzU0x6RTRWbzkzbE9S?=
- =?utf-8?B?VUZKM0t3OHhsc2JITVRmcUUrNm1raC9EQmlOaGlnZk1hNEVxV2tJWTgvTEI3?=
- =?utf-8?B?WjU1bG5BZWZ4K3VTWDQ2VndOc2hQWEpRTmd6ems2dnBWZWJtU2hKbDdKa2lz?=
- =?utf-8?B?TGVQSGVLbXQ2aHhzdFpjUXhWeDBNSEMrajZjcCttbGdhbFQ0S0wwbXR2U3R6?=
- =?utf-8?B?YTRoMm9ZRXdHKzdadnpVMVo0OWQ5TjRHckxzWHMxTFRFeTg5clcwazc3M3di?=
- =?utf-8?B?cC81WWROaHZrZnpBblNORVg5aUI4bWRSeTJQU2lMS2R2ZkFhYW1jb3BrcDdk?=
- =?utf-8?B?cTdWUzExOXdkc2lpWVRZdVlFaytESHBwL2ZYaU04b3p4eTRCdXdzbHZJQXBH?=
- =?utf-8?B?TUdnRW1kNkN3dmo5dEZra0RkdFY5OUYwbFd4eXhxUXY4NXc4R0JmS2Fjd1I0?=
- =?utf-8?B?RG9jWlE4VUovbUtqRjlWamZHWGlOeHowTVRsejlBbXZFdVhFTGpTcy80NFk1?=
- =?utf-8?B?alJVNllWYkJVb3h4NnA0dEdVUHBkQ2UxUzN3K0VSL3V4MVpIbDB6NURGeWJD?=
- =?utf-8?B?Ty9iNko2Y0t0R0N5TVhqN3owNlNUdzZna3I2T2FVYTRHbHo5cEhRbTJJK2Ev?=
- =?utf-8?B?bk02MjFSbXFMSjJ1MUFwZzl1Rm91eUIzT1NjQ0NLOENGOEQyRDBRVmg1U0Uv?=
- =?utf-8?B?ZURXQThZRjVWU0NFZWxTM254WFNRSmxyRjZuclVnaTNVRFVwcTVEU1UvdWNJ?=
- =?utf-8?B?UHdSN2xBL094V25kcUd4VFROT3dSZEs5dkdOSGI0UkwxeUdlcTlKT1pOcW5k?=
- =?utf-8?B?a29GTWQ2T2JaS3lwQTV1Qm85cWY3anRoWndUWG5NbE5scmg2QkxLUzd3MFB4?=
- =?utf-8?B?MXh4TWNHMll0WmQrOEU2S0ZydUNiMS9RZVVtdzVZem5lYmYxRXVaU1VnYnNp?=
- =?utf-8?B?by9WUVV5cnJXcjVCWS9xaEh1K2c1QUoxMWkyaENtWEx3bVZ1WE8wWmorbXd2?=
- =?utf-8?B?T3RTbjV3RFAzMHRkVjlsNVZXbkY1eFJQbVlNVkhadU5kdXJEY2s3aUtzYXdQ?=
- =?utf-8?B?VHJhUmtydGN1blk1WVdkQzRRa3FCZXZsTWNzYVR4dWlUcW5ndHNzQUt4M010?=
- =?utf-8?B?ekh5RFlmOUUxRDc1Z241VlNTV082TnQwUmZWc0l6aFZXeHJVVGkvbEplWWEv?=
- =?utf-8?B?OG5QMXRvdXdBTllCaUdLZWZHc2QyTGcydENtckMxRWJhM29DbFFQU0M5VTRk?=
- =?utf-8?B?amtEby9JQ1BNRGwxdWFyZTREVlU3ZHJLbThwUFZKY2h2QU13UEFycEtRL3VG?=
- =?utf-8?B?dDgrK0xmT3VsS05NZ2s4eEFReXNWTHBYMWUwQmRiT0ROUDhtQmdxaVpHVnhs?=
- =?utf-8?B?ZllqVGVLR1dyZWpKVU01c0F6Y2RzbFlKS0ZROC85cDQzSnhXeXlTRlR0NDJl?=
- =?utf-8?B?U2RaK2E3K3M1MnpPSmgybHBzaVVjN2V0dERTQ1MvZm9YWENPMm5lOFluQzJX?=
- =?utf-8?B?ZFY1RE5QcmFuVC82VzdPOE1nb3hTLytKb2NoMmZUN0hRbGhsbDJVRnZSSXRV?=
- =?utf-8?Q?fpIF5u?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dngvQTcybjdGUHVQSjdhazV1d2tTVGdqTFZnQWtjM29nSk5vOE1HOGgzUU1I?=
+ =?utf-8?B?SHd0MUpDUVpqWWpZZ3RwNGFsVzRNN3A2V0hoTmdPVXc3dTRhbytYT3M2eGVI?=
+ =?utf-8?B?WWY4MHZNdm1Kd3JWem1Ua0c1WFdNNXpnWmtuYUZZV2Z3NHhrNXNUdVNQZmpy?=
+ =?utf-8?B?UEcxMUljZ09qcjJOS3lIeU5NdTF2TUZEYUZwMHdYK2tsMjFqYlNYZ3FwVDdM?=
+ =?utf-8?B?QXJTY3RzbTBxZTNSSWd5Q0h3aldYR2RkT0F1L3BCVlo5ZlJTa2JLTzdOdERs?=
+ =?utf-8?B?RHlsaWdpMUdBbENmQ0VFeG9oaFIxR0ZpSWUybDg4dVpPbms5VHZDV2lzenhX?=
+ =?utf-8?B?a2lNQ1NOd2hhSncyVUQzNE1HUVFRS2dqNzNNVm84NmVqWEllTmxVUy9zVlBG?=
+ =?utf-8?B?b0NuQkppaTl4K2VHcDhhTWZ6bTdrWnBRaHpaclBwSUFzOFR1UEpXZ3Zjc0Z4?=
+ =?utf-8?B?UjVMeXg5bFBsQTcvbXVac0QyRW5NZ04yWWxPSkRaQU5PcE5tcTlDa213d3Nw?=
+ =?utf-8?B?Z0RmU1IyTHBvazgrWXBZeVpqWDZPb3laYm5OeSsrNUZGeWhsa29aZktycVlt?=
+ =?utf-8?B?SjREcldrRm9wc1o5V2QvcG1QVnBRR1B3SUtGK2pKUzN6QU05ODBTbXVvVlMw?=
+ =?utf-8?B?aHpzTnY2N0lCd3orVG5PY2ZtOWJUZDg3Q0lrZFhDR0NuUFNBaE5yT2VZM2ZG?=
+ =?utf-8?B?YTUzVDFYY2VGbnZUemRJMHlYbU10aDNYSC8xZ0RFcXJlMGJtNUZUdW40UXhN?=
+ =?utf-8?B?WW1Lc245OGVRZWs2ekpMVGcrSUkzcnBSbjZvdGJSbTAvMjltU1VSa1NYWGpq?=
+ =?utf-8?B?NVNkbEFOQXYxdmYvWlNEV1pNZnRZVldQYWlxWTllcEdTa0ZJVHVUUzNZSnVI?=
+ =?utf-8?B?aWtiVWhmZ21yYmdzbDdNQU9WSVJDYUxDNGVITVpVK3pFVHRnWGNFMk9Laitj?=
+ =?utf-8?B?ZkVCaUxDVWwzajBnUXlJZ2RteUU2SWIvWUhpWmdrblJpTFN6RGxCd043K3ll?=
+ =?utf-8?B?RmZTZ1VzcnJJN21YZFkrSHBQT2VCZlhoMjhPYmdVYlNOZFM2QVZaRG5rZ3FO?=
+ =?utf-8?B?a1lwMzk2WDNEbWRBaGV0dDZLUWFHZUtTb2Vod1F1UUtwUGpHQkVySjBwR0lW?=
+ =?utf-8?B?Smo2b1hkd05YaS9JUjdxdXdDTHpzRmpMKzZySkk2NEJQdWt5ZEtXSmVwUDEz?=
+ =?utf-8?B?S3g4bzhoRXhXc2NrVWk3dkpocVRCYjNlNldRVitoa2dhb2tNdnJDc002M0x5?=
+ =?utf-8?B?N2RZMEw0MTFTY2xiR2R6WDFoZUh6enFXWXFXaXl5bWxvbU03R0FJV2NzeGwv?=
+ =?utf-8?B?ZkZDeVAzcmw0THo2Mk5KVUI4S240MVBlVzNLd3crUVJQVU9nU1NyVzhSMitz?=
+ =?utf-8?B?eXVEMjFDRVA3cUwvb0pDVnlaM2lSb3V2L2VEb3ZQZzF5OTZqYWRManZHUTU2?=
+ =?utf-8?B?U0pVZnM3bnFadFljSmpKL0JtOW9iNnZlZjRUbTkyZ0d3OHlrWVR2ZlVqdkM1?=
+ =?utf-8?B?Z0tETzF2Q1hoMFNEMnJ1NE1FbVFDeDVseDFuaDlVcXlTWWFPMUg4Vm1uUXlx?=
+ =?utf-8?B?Ky96YlpPdnduakd3ZmpLYWFYeXR4RTIvUTRNT0FHdnRCYzhva2RWekpnMVZx?=
+ =?utf-8?B?ak1EaERtb3I3a2hQb00yeWlLa2dYTWt6dno4aXB6WTNseTI1bVRDbEtnb1Ix?=
+ =?utf-8?B?ZDZtVk1lc0ZZUFNWVWhRN3crWTlwUDUvSzRpY3p1UnJ4aVllS25FOXk4c2tu?=
+ =?utf-8?B?UTZlZjVtY3pDeVZkZzV2eXM3d2VpN1BSQXMwaGlXbjlsdTNQMGZvUWd5T1Vj?=
+ =?utf-8?B?eUNMOFVwZ2I2RFpNa3Jtc2hpK2JWZmY1MlQ5aWdtcFgyaW5YcFFNUDhrWUxP?=
+ =?utf-8?B?eUI1cGFJN1RiN2xUa2NpdG5MczlUZytMczhzVUtaOThwQkZHejk1T2l5MWds?=
+ =?utf-8?B?VXFiSlRLZDJuYzZVeWlKek1qWWVMNnZ5N1FSUExjK3pWUEs5dElhRC9Kc0FY?=
+ =?utf-8?B?Z0lWSm9JWDQ3eUtrUmtnQ2NSbkRSNGRxZlVMbVdjdm0ydVNUNmFtSHV1bEUw?=
+ =?utf-8?Q?cn5LRl?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(19092799006)(376014)(7416014)(366016)(52116014)(1800799024)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U0NhR1lmWjVvQkhrL2liaWpHQkI2cTZJQ1hVSHUwalNld09lY3hRZm56Rk4r?=
- =?utf-8?B?UlJ3cC83djUvQk5qSFo3dmZpWjUvRmh0ZXY4WWdUc2kvNzdMMVUvTWxYSmFQ?=
- =?utf-8?B?ZmIwaFJIQUthcHJJbGxmalcwYXdoRVpmTjJMY3hKMGZhU1lGdEEwaVRqcElY?=
- =?utf-8?B?emJVMU9rWnVxbTFaVjVwaktDbEQrUEhwZEVRUVJiWDJjVjVzWTZFVkNoVlg2?=
- =?utf-8?B?a3lmNGhPdWhQMTlQbzQyMG1nbjVVNUZtUUova0dzWGl5Mkg1cGxRWVEwTGZJ?=
- =?utf-8?B?WDlPUGtpYmxmQ0VmRXFhN1VtZHVIRUMvZE43ZGdOaVM0TjFZcUZJRlMrUnp4?=
- =?utf-8?B?VUU5dWlVVUpoVTNmWGxtQ25ZUjhpN3Vsd214WjhqaDdGY2Z3eks5R25qdGh1?=
- =?utf-8?B?TkI3U2trYjU1cGI2eWN4WEh1a3czZTRUaWRuL0I2QWVmNE5rdXdhbFZoUHJQ?=
- =?utf-8?B?NU5aYzdERm5XUE1ZQk4wdGFZZFB5aWJ2b1JQbTc3WFVoNVRsclQ3ODA0NE1N?=
- =?utf-8?B?TTR2NFVrS0RLU3NUUkFMc1hySEt3OWltVUV0dXJ4RHIzMHpUM201VHl4ZzBh?=
- =?utf-8?B?SWExMGVKYmV1QjlsMTV2ZUJwQUswQ3VPOS9nNmlTUnNOcUxNM1FIaGc0d0lH?=
- =?utf-8?B?WTNVK09DaFhhSmlNeitCQnhZbC8wc0RvZCtlY2RaNGs1bHZoZTZEaDZTMXA5?=
- =?utf-8?B?RDlnci93RXFrMFdQYUQxRURYWGNHRmNvOVM3Z0lNUWdiY2lNdjl1TEk0Mmo3?=
- =?utf-8?B?Mmg5VmwxODd6STA2c0I1VnlvbC9XbENWZyt1S1hWTFg3WnRuVk1ITVVnaHRw?=
- =?utf-8?B?SlB2Y0Erb0lzOWFaTjJIMDhUMHBxa3F0eUdHWnBoUnV3ZmNDVHg3T0FWK1o1?=
- =?utf-8?B?aElEaGNVNDBUU1RXeldISXFsSXZoWmJSNGNsUlBnYjAyQ1VmbFg4SHdFbldG?=
- =?utf-8?B?c1JEak9PUTNLSFZ2NHg0VVhzOUVyelFzZXFObm9QWHNuRmJUVThtdVdHMkxH?=
- =?utf-8?B?V1hRWGJJTkZXekZXaDh1MXpDU1Uybi9ONzhsZDROM3lhNFR4LzdOMUhFa2ly?=
- =?utf-8?B?Nk1lTHB4VXlXaXl1NUwrUFdkK2dsUEpCU1FmMmZ3ekVieUpWb0p6TXB3QmNJ?=
- =?utf-8?B?OVV4NmlHcVVDaUFpMVBnV3FHRXRLbXVvZVNZc3FIQlo3MU1PWURJcU5iZ0dK?=
- =?utf-8?B?V3ovREVxT2pLQVVicXFoWmNpQU1hM3BVbzZRaVlZUElKNUJLcHpUbUU0U1Av?=
- =?utf-8?B?M0VieFJEczNaUjliQ3VNdHRZMUNDRHpncDZ1MVd6bDMwdXI0Q0x0bXV6cnpM?=
- =?utf-8?B?OVhnVVVITHh4bE9BcGpSdzBNWnhrVUFhQkpSdzFUMUxEVE4zclNDTm4vdHA5?=
- =?utf-8?B?NWV4aDdSOTd0UFUzbDNwd2l0ZkZzcU9uekJ4Q3FMbUVjK0NWOVBLeUpnWHQr?=
- =?utf-8?B?QW5QMHFtVXByNjBIOVRBNlJReU9WUDBoQXdSQldaV2JsZm11MmxSd1BhTHEv?=
- =?utf-8?B?NzlWS1ViMkJZRjZZYk5DdTVsSklnZzlJTTdFSjl2VG5lRGRjN3V5KzZHTk1W?=
- =?utf-8?B?L0ZyNW10N29uR1Q3dEYzRjFnemR6c0Q0bGxKTnpoSnhvbWN0aUtrRGJjNlBy?=
- =?utf-8?B?eWZVcG1kYU14MWR4V21saGtYTnVhaHdoa3VQLytobHhvNUloR1NUTE9BRzcw?=
- =?utf-8?B?OE5kcXBMcGl4YVF2Y0hzUXRCMkFraWRaTlRUQ1MzZXJKdFdMRE9ERHZiZTA2?=
- =?utf-8?B?VTFJUWYzL25CcmdjNS9UTkY5TUNOOGpxVWxzSlJ2eFYrZldKQTZDUG83QXA1?=
- =?utf-8?B?dk9DdzNVcWRaVkxyV1BUb1QzaklLcExSWDVxUmc1YmM3MXU1aWhJTDRsalV5?=
- =?utf-8?B?WGh2bjB5LzZxa1h6VEp2SFZ5blllLzVpa3BObHVtbmRlVFlRc0VPZTFBLys0?=
- =?utf-8?B?NG1VNjBSdTZJUFo2Q3pmaTJ1SmFnQXQ3TlBjWkVscE5nMXZUeWVudksyVEMw?=
- =?utf-8?B?ZFJKU3VDZDlYU3ZtZWIweEk0QW1KYzFVeGNoVjVCKzdZSE5mSElmVldKeW4v?=
- =?utf-8?B?c1hTbWhobDNZZGx6WSs1N2t1c0pVQmdxRW1yTnpqZVc0c2lkY1RaNHJJL0VF?=
- =?utf-8?Q?mL42WnXLTHJrsq6FOkMGpC1WK?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VkROZlAzcGFWd2JVTjVJR2NGQTNIYnhGTmVHR1NRQVlVc2hCVnV0MDZzUTQ5?=
+ =?utf-8?B?S2kyRFJsTjZxdWZMUDNucWZQN1NRbnBhd3VkQXVobXc0bVYzMkQ0eERORlJZ?=
+ =?utf-8?B?VDFscFZlZ2ZmV3FvQmpzMWcyYzJDQS90OGJFUVl6MXdsU1RPSmo4MGZOSVhm?=
+ =?utf-8?B?S1ZHUHNNYSt2M3ZCSyt5b0VJUHlFY1NQaTB0Z3orVHZrbWZxa0ZOTk9SRXF1?=
+ =?utf-8?B?U0MwSEdrenFVUlJqRkptaXdZbUhzWXVyUHpjb0dneThjSWVpdlNDamhtMFRj?=
+ =?utf-8?B?UEwrcUxSeW80bW1IWFFuM1ZQMnN6Zis3RGdFRWwycVEvWXFUWXBpdmxSUEhC?=
+ =?utf-8?B?R2NwT1I1aWswaUhQQXY4L09DY2RWNlBSVkR0aWdPOEdQUmZzS1Z3bXNlU3h1?=
+ =?utf-8?B?bDQwMUNUczRQM2lRcFNJRkxnSEZiRzJkanpkTVB6eVVpcExpQXJLbC9wN0NU?=
+ =?utf-8?B?UW03dWRBNUdCaGkyTUlYZmNGdjNqRHBpb0k5eGprWU5raTRMcWF0cjU3clRJ?=
+ =?utf-8?B?ZjlwS2Z2L1VDTWdSRzJORVpjNFA3YjM5K3Q5S0tKb3NWYWNRZjkxZE5pdVd3?=
+ =?utf-8?B?RXNKLzlTNnQ3S1FyOE9seEEvVTBTVkVTLy95czVrUnFUMTltSzlwTEJDMDVM?=
+ =?utf-8?B?NDlmRDk2VHdqUXk4ak1hQzVaNi95Qm1KVWRXbmdrY05MU1F2ajFGTSswQVkx?=
+ =?utf-8?B?Q0N3M3VNM2czeU5DRExQRUNCTWJNY1JXdDFsTVBKSkxKdStCWisrMHVMVElE?=
+ =?utf-8?B?SXNTdkdqeUk2MDc3QmRJQm54Tm00RU94Wmh2QVFxTlJUd2paYjJJTzlXREZw?=
+ =?utf-8?B?SUwyMHJUcGhHSmRjbnlHRVFBaUdmRlpvNEhIWWllYkt3SDF6MkZkYndVNHox?=
+ =?utf-8?B?VmxYL0FTMHBESndnak1BZC8yZlBsMWdBQ3ZPdDFQTkdvYkg3b1Z5V0E4Umx3?=
+ =?utf-8?B?VFZyUnowZHpOM1JwU2YxQ0RoaVlGeXJndnRKbWd0VFNhR08vQlJ3UjNab0tJ?=
+ =?utf-8?B?NklNdnZ6R2JNK3RFcGMwbHRXTmNtbUkxMm9XQk5YeGdUbm9ham5IUEFSeHRM?=
+ =?utf-8?B?dXpickpZaVRNNjQ3T1M0dFM5SFJBS0wxMlozdWpHTkc0K2RmK05zQ2lKV3k5?=
+ =?utf-8?B?ZXZlOXl5NCtLUFAzOTZseGxyMlhOS0hQREphajBicFJJU0pxS2JvK1IyWENV?=
+ =?utf-8?B?dnNrdjNZUmczUkp4MUhnWWxmazJEOHQwNTQ0a3BnSTJIdmg4L0l5YXhXenRG?=
+ =?utf-8?B?eG5KNGhOQ0Racmp2SUxLL1FCWWxFMWh6Vi9rUmQ2V2dvUDhaWTVrcE5NbEdD?=
+ =?utf-8?B?V3BBV1R3eER5dTdSOUFuYlJJTDVoYkx6Z1BaQkZSbmgyc21pdURtNVUxNnM5?=
+ =?utf-8?B?d0FkYjV4TWQrQXFXNmk0UEQ4YkFOSjl4TzFVTWtMQy9IZDlYQkFaRjUwQzFt?=
+ =?utf-8?B?bC8zZzRTZlZxTDRkN1F0MjR6c3hSNFY0VlVNTHl4TXZ2bnN5WWtaNjdmSnBw?=
+ =?utf-8?B?UU0zN21PME91TDAzTGJYdVdJb04xNVY5U2ZQZ2pDODB4am1vUjlveEFEdzNE?=
+ =?utf-8?B?RHhzcU9ERnhveS92MHhGMnBJTnc2QldJY09MOVg0OVd0Z2VjRGhUaTlBeXky?=
+ =?utf-8?B?ZFRqb3BWSGQzcjV2dmhVclAvSG1nWUZ4M0JlczF6V0RhaWE0dDNDdU1VRzlQ?=
+ =?utf-8?B?ckRsdHR0TmFLcUNZTkpJTzJ3VmlOV1duZFJzRVBxZ0VCSEl2UFZ1eFdWSmtJ?=
+ =?utf-8?B?Vy9RcFFtUjJiNXhydGVtZytPbEYxcEF3aHhKVVdUNTJFOTBjMVFXQjNEQWV6?=
+ =?utf-8?B?N3ZCbk9hek5xZUNERjJZSFcxQ2JtMjA4TkFFVFU2WFV1eDk2MXFHWGQ5U0ds?=
+ =?utf-8?B?VXA2SUV5ZWtlTU40bHJiMWlnQWRjY01jUURoeXBXV0FQY0cvWHpsM2MyZ2p4?=
+ =?utf-8?B?K0Q5bWNDYlhoY0RyZUNrcnFZQ2Myb20vTC9BMVA4MjBWbGk3cERZK3BQWkRO?=
+ =?utf-8?B?RUhzeXp3ekZKRUR6MG81a0lNOWhZby9RSTZOSnJKd2hpVytPVUhvNWVveWJy?=
+ =?utf-8?B?Rm1sVjNJaTMvcXE2V3hzSmpTWU5XV0o0ek1BWlVVbHpOWUFHMWplb3JoakRl?=
+ =?utf-8?Q?muCSsZ+hasleyDJIggn+dOmnM?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e835069c-a586-43df-b92d-08de3c6debb9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54750e7f-2492-47e7-0146-08de3c6def15
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 06:39:53.8773 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 06:39:59.5176 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: h2Q7bLJDnHlasVlJFjcjOjNXfOeM9ITTE6fk3n7HZyUiGPBPY+sH0rq3af3Rzmaa/G/dZv0HhM5UX7mDh7N2jA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: cCQ/IJPTCBB9FfCgGCl0gjKzGFC0hfK650vrXF3XFdQH4qteufg4GhcrJhXAZygtlt4n8gq5fQZCStju1StD/g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7794
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,144 +189,428 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+From: Sherry Sun <sherry.sun@nxp.com>
 
-Extract USB PHY initialization code from ehci-mx6.c into a new function
-ehci_mx6_phy_init() that can be shared with the ChipIdea UDC driver.
+Convert the ci_udc driver to driver model by using the uclass
+UCLASS_USB_GADGET_GENERIC. The clk and power of USB controller and USB
+PHY both are initialized by parsing the device tree nodes.
 
+If CONFIG_DM_USB_GADGET is defined, we use the ci_udc driver in DM way,
+if it does not defined, we can use ci_udc driver in its original Non-DM
+way.
+
+Signed-off-by: Sherry Sun <sherry.sun@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Ye Li <ye.li@nxp.com>
 ---
- drivers/usb/host/ehci-mx6.c | 73 ++++++++++++++++++++++++++++++++++++++++++++-
- include/usb/ci_udc.h        |  9 ++++++
- 2 files changed, 81 insertions(+), 1 deletion(-)
+ drivers/usb/gadget/ci_udc.c | 352 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 348 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
-index 03ff4ce10d5..52f14e6eca0 100644
---- a/drivers/usb/host/ehci-mx6.c
-+++ b/drivers/usb/host/ehci-mx6.c
-@@ -12,6 +12,7 @@
- #include <asm/global_data.h>
- #include <linux/compiler.h>
- #include <linux/delay.h>
-+#include <usb/ci_udc.h>
- #include <usb/ehci-ci.h>
- #include <asm/io.h>
- #include <asm/arch/imx-regs.h>
-@@ -168,6 +169,54 @@ static void __maybe_unused
- usb_power_config_mx7ulp(void *usbphy) { }
- #endif
+diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+index 4bff75da759..154a3ab7f22 100644
+--- a/drivers/usb/gadget/ci_udc.c
++++ b/drivers/usb/gadget/ci_udc.c
+@@ -7,9 +7,17 @@
+  * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
+  */
  
-+#if defined(CONFIG_IMX8)
-+static void usb_power_config_imx8(void __iomem *usbphy_base)
-+{
-+	struct usbphy_regs __iomem *usbphy = (struct usbphy_regs __iomem *)usbphy_base;
-+
-+	if (!is_imx8())
-+		return;
-+
-+	int timeout = 1000000;
-+
-+	if (!(readl(&usbphy->usb1_pll_480_ctrl) & PLL_USB_LOCK_MASK)) {
-+		/* Enable the regulator first */
-+		writel(PLL_USB_REG_ENABLE_MASK,
-+		       &usbphy->usb1_pll_480_ctrl_set);
-+
-+		/* Wait at least 25us */
-+		udelay(25);
-+
-+		/* Enable the power */
-+		writel(PLL_USB_PWR_MASK, &usbphy->usb1_pll_480_ctrl_set);
-+
-+		/* Wait lock */
-+		while (timeout--) {
-+			if (readl(&usbphy->usb1_pll_480_ctrl) &
-+			    PLL_USB_LOCK_MASK)
-+				break;
-+			udelay(10);
-+		}
-+
-+		if (timeout <= 0) {
-+			/* If timeout, we power down the pll */
-+			writel(PLL_USB_PWR_MASK,
-+			       &usbphy->usb1_pll_480_ctrl_clr);
-+			return;
-+		}
-+	}
-+
-+	/* Clear the bypass */
-+	writel(PLL_USB_BYPASS_MASK, &usbphy->usb1_pll_480_ctrl_clr);
-+
-+	/* Enable the PLL clock out to USB */
-+	writel((PLL_USB_EN_USB_CLKS_MASK | PLL_USB_ENABLE_MASK),
-+	       &usbphy->usb1_pll_480_ctrl_set);
-+}
-+#else
-+static void __maybe_unused usb_power_config_imx8(void __iomem *usbphy_base) { }
-+#endif
-+
- #if defined(CONFIG_MX6) || defined(CONFIG_MX7ULP) || defined(CONFIG_IMXRT) || \
-     defined(CONFIG_IMX8ULP)
- static const ulong phy_bases[] = {
-@@ -276,7 +325,6 @@ static void ehci_mx6_powerup_fixup(struct ehci_ctrl *ctrl, uint32_t *status_reg,
- 	*reg = ehci_readl(status_reg);
- }
- 
--#if !defined(CONFIG_PHY)
- /* Should be done in the MXS PHY driver */
- static void usb_oc_config(struct usbnc_regs *usbnc, int index)
- {
-@@ -298,7 +346,30 @@ static void usb_oc_config(struct usbnc_regs *usbnc, int index)
- 	clrbits_le32(ctrl, UCTRL_PWR_POL);
- #endif
- }
-+
-+void ehci_mx6_phy_init(struct usb_ehci *ehci, struct ehci_mx6_phy_data *phy_data, int index)
-+{
-+	u32 portsc;
-+
-+	portsc = readl(&ehci->portsc);
-+	if (portsc & PORT_PTS_PHCD) {
-+		debug("suspended: portsc %x, enabled it.\n", portsc);
-+		clrbits_le32(&ehci->portsc, PORT_PTS_PHCD);
-+	}
-+
-+	usb_power_config_mx6(phy_data->anatop_addr, index);
-+	usb_power_config_mx7(phy_data->misc_addr);
-+	usb_power_config_mx7ulp(phy_data->phy_addr);
-+	usb_power_config_imx8(phy_data->phy_addr);
-+
-+	usb_oc_config(phy_data->misc_addr, index);
-+
-+#if defined(CONFIG_MX6) || defined(CONFIG_MX7ULP) || defined(CONFIG_IMXRT) || \
-+    defined(CONFIG_IMX8) || defined(CONFIG_IMX8ULP)
-+	usb_internal_phy_clock_gate(phy_data->phy_addr, 1);
-+	usb_phy_enable(ehci, phy_data->phy_addr);
- #endif
-+}
- 
- #if !CONFIG_IS_ENABLED(DM_USB)
- /**
-diff --git a/include/usb/ci_udc.h b/include/usb/ci_udc.h
-index 9f15dbabe53..ccef4daf741 100644
---- a/include/usb/ci_udc.h
-+++ b/include/usb/ci_udc.h
-@@ -6,7 +6,16 @@
- 
- #ifndef __CI_UDC_H__
- #define __CI_UDC_H__
++#include <asm/arch/sys_proto.h>
++#include <asm/arch/clock.h>
++#include <asm/mach-imx/regs-usbphy.h>
++#include <clk.h>
+ #include <command.h>
+ #include <config.h>
+ #include <cpu_func.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/pinctrl.h>
++#include <power-domain.h>
+ #include <net.h>
+ #include <malloc.h>
+ #include <wait_bit.h>
+@@ -22,6 +30,8 @@
+ #include <linux/types.h>
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
++#include <linux/usb/otg.h>
 +#include <usb/ehci-ci.h>
+ #include <usb/ci_udc.h>
+ #include "../host/ehci.h"
+ #include "ci_udc.h"
+@@ -93,9 +103,18 @@ static int ci_ep_dequeue(struct usb_ep *ep, struct usb_request *req);
+ static struct usb_request *
+ ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags);
+ static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *_req);
++#if CONFIG_IS_ENABLED(DM_USB_GADGET)
++static int ci_udc_gadget_start(struct usb_gadget *g,
++			       struct usb_gadget_driver *driver);
++static int ci_udc_gadget_stop(struct usb_gadget *g);
++#endif
  
- #define EP_MAX_PACKET_SIZE	0x200
- #define EP0_MAX_PACKET_SIZE	64
+ static const struct usb_gadget_ops ci_udc_ops = {
+ 	.pullup = ci_pullup,
++#if CONFIG_IS_ENABLED(DM_USB_GADGET)
++	.udc_start		= ci_udc_gadget_start,
++	.udc_stop		= ci_udc_gadget_stop,
++#endif
+ };
+ 
+ static const struct usb_ep_ops ci_ep_ops = {
+@@ -927,7 +946,7 @@ void udc_irq(void)
+ 	}
+ }
+ 
+-int dm_usb_gadget_handle_interrupts(struct udevice *dev)
++int ci_udc_handle_interrupts(void)
+ {
+ 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+ 	u32 value;
+@@ -1072,6 +1091,19 @@ static int ci_udc_probe(void)
+ 	return 0;
+ }
+ 
++bool dfu_usb_get_reset(void)
++{
++	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
 +
-+struct ehci_mx6_phy_data {
-+	void __iomem *phy_addr;
-+	void __iomem *misc_addr;
-+	void __iomem *anatop_addr;
++	return !!(readl(&udc->usbsts) & STS_URI);
++}
++
++#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
++int dm_usb_gadget_handle_interrupts(struct udevice *dev)
++{
++	return ci_udc_handle_interrupts();
++}
++
+ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+ {
+ 	int ret;
+@@ -1125,10 +1157,322 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+ 
+ 	return 0;
+ }
++#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
+ 
+-bool dfu_usb_get_reset(void)
++static int ci_udc_gadget_start(struct usb_gadget *g,
++			       struct usb_gadget_driver *driver)
+ {
+-	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
++	if (!driver)
++		return -EINVAL;
++	if (!driver->bind || !driver->setup || !driver->disconnect)
++		return -EINVAL;
+ 
+-	return !!(readl(&udc->usbsts) & STS_URI);
++	controller.driver = driver;
++	return 0;
++}
++
++static int ci_udc_gadget_stop(struct usb_gadget *g)
++{
++	controller.driver = NULL;
++
++	ci_ep_free_request(&controller.ep[0].ep, &controller.ep0_req->req);
++	free(controller.items_mem);
++	free(controller.epts);
++	return 0;
++}
++
++struct ci_udc_priv_data {
++	struct ehci_ctrl ctrl;
++	struct udevice otgdev;
++	struct clk_bulk		clks;
++	int phy_off;
++	struct power_domain otg_pd;
++	struct clk phy_clk;
++	struct power_domain phy_pd;
++	struct ehci_mx6_phy_data phy_data;
 +};
 +
-+void ehci_mx6_phy_init(struct usb_ehci *ehci, struct ehci_mx6_phy_data *phy_data, int index);
- #endif /* __CI_UDC_H__ */
++static int ci_udc_gadget_handle_interrupts(struct udevice *dev)
++{
++	return ci_udc_handle_interrupts();
++}
++
++static int ci_udc_phy_setup(struct udevice *dev, struct ci_udc_priv_data *priv)
++{
++	void *__iomem addr;
++	int misc_off;
++	struct udevice __maybe_unused phy_dev;
++
++	priv->phy_off = fdtdec_lookup_phandle(gd->fdt_blob,
++					      dev_of_offset(dev),
++					      "fsl,usbphy");
++	if (priv->phy_off < 0) {
++		priv->phy_off = fdtdec_lookup_phandle(gd->fdt_blob,
++						      dev_of_offset(dev), "phys");
++		if (priv->phy_off < 0)
++			return -EINVAL;
++	}
++
++	addr = (void __iomem *)fdtdec_get_addr(gd->fdt_blob, priv->phy_off, "reg");
++	if ((fdt_addr_t)addr == FDT_ADDR_T_NONE)
++		addr = NULL;
++
++	priv->phy_data.phy_addr = addr;
++
++	misc_off = fdtdec_lookup_phandle(gd->fdt_blob, dev_of_offset(dev), "fsl,usbmisc");
++	if (misc_off < 0)
++		return -EINVAL;
++
++	addr = (void __iomem *)fdtdec_get_addr(gd->fdt_blob, misc_off, "reg");
++	if ((fdt_addr_t)addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	priv->phy_data.misc_addr = addr;
++
++#if defined(CONFIG_MX6)
++	int anatop_off;
++
++	/* Resolve ANATOP offset through USB PHY node */
++	anatop_off = fdtdec_lookup_phandle(gd->fdt_blob, priv->phy_off, "fsl,anatop");
++	if (anatop_off < 0)
++		return -EINVAL;
++
++	addr = (void __iomem *)fdtdec_get_addr(gd->fdt_blob, anatop_off, "reg");
++	if ((fdt_addr_t)addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	priv->phy_data.anatop_addr = addr;
++#endif
++
++	dev_set_ofnode(&phy_dev, offset_to_ofnode(priv->phy_off));
++
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	/* Need to power on the PHY before access it */
++	if (!power_domain_get(&phy_dev, &priv->phy_pd)) {
++		if (power_domain_on(&priv->phy_pd))
++			return -EINVAL;
++	}
++#endif
++
++#if CONFIG_IS_ENABLED(CLK)
++	int ret;
++
++	ret = clk_get_by_index(&phy_dev, 0, &priv->phy_clk);
++	if (ret) {
++		printf("Failed to get phy_clk\n");
++		return ret;
++	}
++
++	ret = clk_enable(&priv->phy_clk);
++	if (ret) {
++		printf("Failed to enable phy_clk\n");
++		return ret;
++	}
++#endif
++
++	return 0;
+ }
++
++static int ci_udc_phy_shutdown(struct ci_udc_priv_data *priv)
++{
++	int ret = 0;
++
++#if CONFIG_IS_ENABLED(CLK)
++	if (priv->phy_clk.dev) {
++		ret = clk_disable(&priv->phy_clk);
++		if (ret)
++			return ret;
++	}
++#endif
++
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	ret = power_domain_off(&priv->phy_pd);
++	if (ret)
++		printf("Power down USB PHY failed! (error = %d)\n", ret);
++#endif
++	return ret;
++}
++
++static int ci_udc_otg_clk_init(struct udevice *dev,
++			       struct clk_bulk *clks)
++{
++#if CONFIG_IS_ENABLED(CLK)
++	int ret;
++
++	ret = clk_get_bulk(dev, clks);
++	if (ret == -ENOSYS)
++		return 0;
++
++	if (ret)
++		return ret;
++
++	ret = clk_enable_bulk(clks);
++	if (ret) {
++		clk_release_bulk(clks);
++		return ret;
++	}
++#else
++	enable_usboh3_clk(1);
++#endif
++
++	return 0;
++}
++
++static int ci_udc_otg_phy_mode(struct udevice *dev)
++{
++	struct ci_udc_priv_data *priv = dev_get_priv(dev);
++
++	void *__iomem phy_ctrl, *__iomem phy_status;
++	void *__iomem phy_base = (void *__iomem)devfdt_get_addr(&priv->otgdev);
++	u32 val;
++
++	if (is_mx6() || is_mx7ulp() || is_imx8()) {
++		phy_base = (void __iomem *)fdtdec_get_addr(gd->fdt_blob,
++							   priv->phy_off,
++							   "reg");
++		if ((fdt_addr_t)phy_base == FDT_ADDR_T_NONE)
++			return -EINVAL;
++
++		phy_ctrl = (void __iomem *)(phy_base + USBPHY_CTRL);
++		val = readl(phy_ctrl);
++		if (val & USBPHY_CTRL_OTG_ID)
++			return USB_INIT_DEVICE;
++		else
++			return USB_INIT_HOST;
++	} else if (is_mx7() || is_imx8mm() || is_imx8mn()) {
++		phy_status = (void __iomem *)(phy_base +
++					      USBNC_PHY_STATUS_OFFSET);
++		val = readl(phy_status);
++		if (val & USBNC_PHYSTATUS_ID_DIG)
++			return USB_INIT_DEVICE;
++		else
++			return USB_INIT_HOST;
++	} else {
++		return -EINVAL;
++	}
++}
++
++static int ci_udc_otg_ofdata_to_platdata(struct udevice *dev)
++{
++	struct ci_udc_priv_data *priv = dev_get_priv(dev);
++	int node = dev_of_offset(dev);
++	int usbotg_off;
++
++	if (usb_get_dr_mode(dev_ofnode(dev)) != USB_DR_MODE_PERIPHERAL) {
++		dev_dbg(dev, "Invalid mode\n");
++		return -ENODEV;
++	}
++
++	usbotg_off = fdtdec_lookup_phandle(gd->fdt_blob,
++					   node,
++					   "chipidea,usb");
++	if (usbotg_off < 0)
++		return -EINVAL;
++	dev_set_ofnode(&priv->otgdev, offset_to_ofnode(usbotg_off));
++	priv->otgdev.parent = dev->parent;
++
++	return 0;
++}
++
++static int ci_udc_otg_probe(struct udevice *dev)
++{
++	struct ci_udc_priv_data *priv = dev_get_priv(dev);
++	struct usb_ehci *ehci;
++	int ret;
++
++	ehci = (struct usb_ehci *)devfdt_get_addr(&priv->otgdev);
++
++	pinctrl_select_state(&priv->otgdev, "default");
++
++#if defined(CONFIG_MX6)
++	if (usb_fused((u32)ehci)) {
++		printf("USB@0x%x is fused, disable it\n", (u32)ehci);
++		return -ENODEV;
++	}
++#endif
++
++	ret = board_usb_init(dev_seq(dev), USB_INIT_DEVICE);
++	if (ret) {
++		printf("Failed to initialize board for USB\n");
++		return ret;
++	}
++
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	if (!power_domain_get(&priv->otgdev, &priv->otg_pd)) {
++		if (power_domain_on(&priv->otg_pd))
++			return -EINVAL;
++	}
++#endif
++
++	ret = ci_udc_phy_setup(&priv->otgdev, priv);
++	if (ret)
++		return ret;
++
++	ret = ci_udc_otg_clk_init(&priv->otgdev, &priv->clks);
++	if (ret)
++		return ret;
++
++	ehci_mx6_phy_init(ehci, &priv->phy_data, dev_seq(dev));
++
++	if (ci_udc_otg_phy_mode(dev) != USB_INIT_DEVICE)
++		return -ENODEV;
++
++	priv->ctrl.hccr = (struct ehci_hccr *)((ulong)&ehci->caplength);
++	priv->ctrl.hcor = (struct ehci_hcor *)((ulong)priv->ctrl.hccr +
++			HC_LENGTH(ehci_readl(&(priv->ctrl.hccr)->cr_capbase)));
++	controller.ctrl = &priv->ctrl;
++
++	ret = ci_udc_probe();
++	if (ret) {
++		DBG("udc probe failed, returned %d\n", ret);
++		return ret;
++	}
++
++	ret = usb_add_gadget_udc((struct device *)dev, &controller.gadget);
++
++	return ret;
++}
++
++static int ci_udc_otg_remove(struct udevice *dev)
++{
++	struct ci_udc_priv_data *priv = dev_get_priv(dev);
++
++	usb_del_gadget_udc(&controller.gadget);
++
++#if CONFIG_IS_ENABLED(CLK)
++	clk_release_bulk(&priv->clks);
++#endif
++	ci_udc_phy_shutdown(priv);
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	if (power_domain_off(&priv->otg_pd)) {
++		printf("Power down USB controller failed!\n");
++		return -EINVAL;
++	}
++#endif
++	board_usb_cleanup(dev_seq(dev), USB_INIT_DEVICE);
++
++	controller.ctrl = NULL;
++	return 0;
++}
++
++static const struct udevice_id ci_udc_otg_ids[] = {
++	{ .compatible = "fsl,imx27-usb-gadget" },
++	{ }
++};
++
++static const struct usb_gadget_generic_ops ci_udc_gadget_ops = {
++	.handle_interrupts	= ci_udc_gadget_handle_interrupts,
++};
++
++U_BOOT_DRIVER(ci_udc_otg) = {
++	.name	= "ci-udc-otg",
++	.id	= UCLASS_USB_GADGET_GENERIC,
++	.of_match = ci_udc_otg_ids,
++	.of_to_plat = ci_udc_otg_ofdata_to_platdata,
++	.probe = ci_udc_otg_probe,
++	.remove = ci_udc_otg_remove,
++	.ops	= &ci_udc_gadget_ops,
++	.priv_auto = sizeof(struct ci_udc_priv_data),
++};
++
++#endif /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
 
 -- 
 2.43.0
