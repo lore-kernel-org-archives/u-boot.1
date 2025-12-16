@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D69D609D3
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 17:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47974D609D3
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 17:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C754983106;
-	Tue, 16 Dec 2025 18:29:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1252A83984;
+	Tue, 16 Dec 2025 18:29:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="icfCO3ZF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EEuYwDrW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09DEB839A5; Tue, 16 Dec 2025 18:29:10 +0100 (CET)
+ id 15D91839D7; Tue, 16 Dec 2025 18:29:13 +0100 (CET)
 Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
  [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE8388334F
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:29:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD0458392C
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:29:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6598413b604so2665087eaf.0
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 09:29:07 -0800 (PST)
+ 006d021491bc7-65b68c8c649so1278122eaf.1
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 09:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765906146; x=1766510946; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765906147; x=1766510947; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XLJugLqAvLFYkF/D/KbhUhoF37XExN0m0iHqQla6+qo=;
- b=icfCO3ZF2UA0F19J44jEsAfPoP8gtHOcm0TLGs1oPOU2oNPI80lESDQ+9EJQ3EmumH
- 44muFfKy21jfcYasMLl4yjrllZlltup6MK/T5CQB5skD9me0kopYURcfxheN2CNu+dDB
- gei3PYbugR0foESMwGZ7/c+qQJ0iDW7KVWj18=
+ bh=rG3EqpuxPbZI0s9VQn2f8BtNT7b24+WOMD25j3FyccU=;
+ b=EEuYwDrWcdlMzqJXN06oRfs0Jdd8/iU1B3sQ+6/koFqlZqfNCsVN3qKz+J+Rfe3vUs
+ Te4prUBJ6c21P75MSe73+3x4uuiXBfjGLoJ4yE6jEewG3++ciRiDZWoUrzCMfsd+MXpU
+ nnXE64f7fAT/G+IMlRhvevlsdd3rAGg827CDg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765906146; x=1766510946;
+ d=1e100.net; s=20230601; t=1765906147; x=1766510947;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=XLJugLqAvLFYkF/D/KbhUhoF37XExN0m0iHqQla6+qo=;
- b=P8No/XwlfJCLCuBJA3Fn0wsG40MPMeYHdMHYP4dkVTIEzpywzDL6Z6vdoJaTuT/8SB
- P8mGnkPje4+kz0avtxr1fg3jHbY5T6u9sGmh/BtyZttLaHPRw7TVM5UOCT9/tABIXWso
- U4LhHzZVhrCZbhZjj7ObOmG72Jkc6gvIgmoNLhK8YC9jbdU1/xYRXdfR5aJdqrAOmZH0
- OQlmV1AMLoWtkLcrkztbCz7fsTCx8FGoBPMg98/aHZHh19hY/RFAB1r5+OhBQRSKadfZ
- PpMAkXrBgNpoGild+3VL+KeiaX6F77PagNWZhJd06tDfyrHfgidkEhxKKpvyrnu9/Adq
- 4YLA==
-X-Gm-Message-State: AOJu0YxeR2DVq2tQkA+NnoRaCDH8ZZKc2xwz43FJqsT00rKjh1Jp1hXy
- zvm5U8q5cxTwivp2tLMj9+V7a9aHQlrkIt8Ojd1usycRjq04IG4H4yi19z0g1iq5tUs=
-X-Gm-Gg: AY/fxX6HEZxO1/mUiBeXEi157K+P3Ll7o9w6n58SblIddX8vu8cau/tw57uBOmveLjr
- uwcqT5hc5nH+H7nzB5PN/k1cq/T15q46Vy/GDlfDh1VzViUbg2dHY+Ebbd4Kl7+t4D9wyWFiYcV
- ZPSOiBBNINMmsiPOzZyj8PxzudFWEF85eHXO5RrQeu+rwxeBEx/cHttT+CT9m5JOAamgElg0TrR
- 5KwxEgYN9urDnfVToRwlwjP+7ktTfFmZbQErK1/377Oi4KsP52Z7i447V5PN7xFbCrHGeDftb4x
- LNuZUbXx6ev1L4W1wEefhafOv7n2N/f61UWcycZT5lzA3Sfw2WtRzEnsvS5ZoSJpeqDSaW469e7
- Qos0cyix6dGX28GbrdZ8ZU1e60NswEkkfAqNGNrfiim4Ll7GK8ASvRB492RmJpu1olpDWTNOvlH
- FUzqESMfg6RPgi4umQOWspGB2OMERp+LKwVYL1r89oYg7uftZ13zYnWwUWW0M=
-X-Google-Smtp-Source: AGHT+IFMwNJhdbYEm26TIZJTTHyt2ZkQeKnbdyAW9jMu8sSi5cb3W4KLxvmUKsdvobBu69BYyy1MzA==
-X-Received: by 2002:a05:6820:61a:b0:65c:714e:efd8 with SMTP id
- 006d021491bc7-65c714ef389mr77405eaf.58.1765906146445; 
- Tue, 16 Dec 2025 09:29:06 -0800 (PST)
+ bh=rG3EqpuxPbZI0s9VQn2f8BtNT7b24+WOMD25j3FyccU=;
+ b=lg47sJK4TjDBm9LZa4FKBME5ehfHQL4saOcaDIplIZAfCoQIrZRgKCP8igbWFih07U
+ MH6JUuAqhi0nAEjAbEqXBqtID7tCr+AfBg8/Og8wkqPn9ts2aXV9wY2oqvHNgs/lhmFE
+ yH6l5e6ykmvAeLsfWfzu7kWZBwoTA4BA0WnmdFW3WqR33TLl09Z+56Yxt+Y9SBDu2eof
+ osskwLhsJgZogTvuqKNNQ0AZRd2hS1NBuVBVYNsF1lvC5PK99D3l8syI0MEgF0dQ++G7
+ XDg/+mR1XwQqHgqt30ZbnGoyTPab3g35SUzqmaWftlIwFX4PDrpbrh+o/fAYXnfw7oou
+ 8CPw==
+X-Gm-Message-State: AOJu0YwlZ1EJGM3KFePvk0Y0PFc9SRFP0KHT3mm1OHhp1ozDuut7htya
+ uCOyS+KR0NZzxl+En75+jC20OZ3qOvA1cLHUcD2aftbA3PBJ2dx16gmx1nD5v/gNXFQ=
+X-Gm-Gg: AY/fxX5Z+oIkE1dV61xwm4v+p40IcIyD4UXonjnoAKQ0/Lz40fS/IaBuIvetIt89sSk
+ n0MCe7FWg4wraLKIJsGgduo0qxNDEIXpWbFTC/0BWKKzs9W/g7nAt54PHeKVN/IP0fLrmM6YcTP
+ GM7dRBdvSe9mON6MteeC/JT5T+LiRXQyhg2nhKpmCVIs8yDc3xG0DoseF9cR3aK52QZtV34o34l
+ 5rsMxQIaD4urr1ZMYjHTvzQ2IdUVV0wHgqXfbvKfmyjTxU+dwtZqAqdj/m+DQKTDb5AX+P1a5oo
+ vZz7Hx3Is9t3CPjAI0JIIf8uqAdtglm545BgPe6lcG5INZSZA2AYkJhzASpjogxlfQNJxfMPUUz
+ z7pcdg031WDTB29pIGwN8tlxhbIQRO3qNvPzNnHcvRIVNP7LcnxBGk0rxkbutspyqDOkkvS964H
+ VY+iyx7An2lyRhK/6v6IU9KqpPAzyKa3vinTZ2SLRxC32r4e/w
+X-Google-Smtp-Source: AGHT+IHO2CQCq0gVeo0YGIwDMTQ9pujHmoBE55w+kgqdhzlDZF1lE+3MpyoYPqlNL02JU7tqwaK8jw==
+X-Received: by 2002:a4a:e907:0:b0:657:432e:a820 with SMTP id
+ 006d021491bc7-65b451684demr6600171eaf.1.1765906147468; 
+ Tue, 16 Dec 2025 09:29:07 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65b86c32d5dsm526682eaf.13.2025.12.16.09.29.05
+ 006d021491bc7-65b86c32d5dsm526682eaf.13.2025.12.16.09.29.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Dec 2025 09:29:06 -0800 (PST)
+ Tue, 16 Dec 2025 09:29:07 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Roger Meier <roger@bufferoverflow.ch>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
- Masahiro Yamada <masahiroy@kernel.org>
-In-Reply-To: <20250826063032.2642263-1-Max.Merchel@ew.tq-group.com>
-References: <20250826063032.2642263-1-Max.Merchel@ew.tq-group.com>
-Subject: Re: [PATCH v2] tools/libfdt/fdt_rw: fix SPDX-License-Identifier
-Message-Id: <176590614572.2175876.13656596746862549865.b4-ty@konsulko.com>
-Date: Tue, 16 Dec 2025 11:29:05 -0600
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+In-Reply-To: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d98f857@baylibre.com>
+References: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d98f857@baylibre.com>
+Subject: Re: [PATCH] clk: mediatek: remove duplicate '@parent' field doc
+Message-Id: <176590614659.2175876.14713216222453991636.b4-ty@konsulko.com>
+Date: Tue, 16 Dec 2025 11:29:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,22 +101,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Aug 2025 08:30:29 +0200, Max Merchel wrote:
+On Thu, 11 Dec 2025 15:05:27 -0600, David Lechner wrote:
 
-> Currently, the terms of both licenses (GPL 2.0 and BSD-2-Clause) must be
-> met.
-> However, before switching to the SPDX license identifier, the license
-> information in the file begins with:
+> Remove duplicate '@parent' field documentation in struct mtk_composite.
+> There is no need to say the same thing twice.
 > 
-> "libfdt is dual licensed: you can use it either under the terms of
-> the GPL, or the BSD license, at your option."
+> Also fix spelling mistake in the word "parent" while we're at it.
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
-[1/1] tools/libfdt/fdt_rw: fix SPDX-License-Identifier
-      commit: 798bef8e8322101a6add9a5797f6dfc748f44ed6
+[1/1] clk: mediatek: remove duplicate '@parent' field doc
+      commit: 9d08916a575beba3632c3969b96f74be08560ef7
 -- 
 Tom
 
