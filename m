@@ -4,176 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B60D5B87C
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 06:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456DFD5B87C
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 07:47:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27F6A8334F;
-	Tue, 16 Dec 2025 07:40:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A9DC80077;
+	Tue, 16 Dec 2025 08:47:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="gwnh+LHY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="abGNaMxU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3413838A0; Tue, 16 Dec 2025 07:40:20 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C9FDF800AB; Tue, 16 Dec 2025 08:47:17 +0100 (CET)
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
+ [IPv6:2a00:1450:4864:20::342])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA8678334F
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 07:40:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A9FE8003E
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 08:47:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PQ2yvoGMzMI52jHQI8Xr6O0KHpZvLgDg5zXYfsLy/GId7XxonW02GxdoaJlOSAxuBRQxgKnqkuFvnZ5nwOQ4FRfFHx1TdR8e1RWaiWVour03gIB4EUHDwk2duZfHJC8iyf+XEEzSlZZIj4Y2hyDB4ZtNTkbtKzcuYGVPeFhlz51BfWzSP6z39zJBfOTgHo/C3RSgiI2sJpvOf+PJkuIG/DOuA/cAAbzYxa3szWtMOe1sPRBgsjowNm48Xte6IV/D+oBcapsSjIB9q5vjLW1PvWy6fwFMS+YgDQ4eO+Ls7rrtVYUid1wfm98lTur2wKHiWxWBU7TOuFtiqYK03Mc0hQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VumIanwsa2Ow7p+SDbl3L7+a1wrgDv/OfIOfPmy3ADw=;
- b=yITVQr+rLUxMODct8z5Axa+SIUZxXYkeohVvdRsPEdyHn4fCR2IMh0ZhEPii7xXhFANkeYTtV9CtTGr42HGvhNYK8UPBh8mzanAwF4y6Md9E19QRc6zAbjmAW3jiDmHq3nd0eFPiStaribCRjT+ZkXoTRmXpz47pOfdO4GMx442O0GEEDB/hiQYEJ4Q3IfroMiyeYF9/0QACrP9B8TRTVnAlbA+qxxpD6yoqietnKtyXw8AqSZlLPowjlGKXFV5moQKM4parQvOc+1G4ZaQ0sgyiFpNZTu2vEZqOY0IY005vVRpL+v2PFHoHwcaJKjwT85XqVKRnL/dxiYzVhew6JQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VumIanwsa2Ow7p+SDbl3L7+a1wrgDv/OfIOfPmy3ADw=;
- b=gwnh+LHYAxTH5IjlbXu8rB3ZiCbHEDVSeEPOFqepGILJRObxZSw6agXLexgOLZBxXa/y9gV1ZWvKmprN0B8WFDXQFxJfmz7+sb06LQyug4Nc7A/98vbviVVkRN3BEcZ8EUoNFVIfY8yeZhg+WAnNwZPBM+AdlBk9DPDXQfa3/P24Kh3ikPacH/p8z2RSOn4ITPbZ8t6UyP4Q7y7bQtZMsHtElBqckeZmLKuUMvEQaWcan8JFtkUnffz7uJZq11XE3UIShuBPP5xjffGmMeaQlHmaILfUqQY93SsSEh6W4H3AUpUg5h9VyNzBwYufMdjsn4L7gwK0VzgAUTUom+cPpw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by AM8PR04MB7794.eurprd04.prod.outlook.com (2603:10a6:20b:247::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Tue, 16 Dec
- 2025 06:40:16 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9434.001; Tue, 16 Dec 2025
- 06:40:15 +0000
-From: alice.guo@oss.nxp.com
-Date: Tue, 16 Dec 2025 14:38:39 +0800
-Subject: [PATCH v1 7/7] imx8ulp_evk: Enable USB controller at 0x29920000 in
- device mode
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251216-imx8ulp-v1-7-504115a53020@nxp.com>
-References: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
-In-Reply-To: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Marek Vasut <marek.vasut@mailbox.org>, Ye Li <ye.li@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lukasz Majewski <lukma@denx.de>, Sherry Sun <sherry.sun@nxp.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- George Chan <gchan9527@gmail.com>, Simon Glass <sjg@chromium.org>, 
- David Zang <davidzangcs@gmail.com>, Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: SI2PR06CA0007.apcprd06.prod.outlook.com
- (2603:1096:4:186::9) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x342.google.com with SMTP id
+ 5b1f17b1804b1-47774d3536dso42781255e9.0
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 23:47:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765871235; x=1766476035; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LqVOYrgNXhtjysfbD5/bFYwaw7PRa/7Me3nmEJObh5g=;
+ b=abGNaMxULVWqymv7V2iWQxPcfImBdUxqSOx07IkZloaihiQD3a/kMHto+gqC6ZPKFP
+ OLh4jXN/KZpLqcTsfYdqGK9v7g9PlkCT0NGNFgodveIhoj/XC48cCf7UsyFw6A6Wh3Pk
+ 7gBXnyE4CtWwiMsn8rlORItULMbmFj5a5fUqjjlB3y5BwKaZ3lwSA5oq4u1dH4RB9SX8
+ BvrLnOGJLi5z3T5Ztwpq4TvO0H3sMeqEqXpxII7QB7/vImxpntAIj1jOQof16fWbtaCG
+ AS9bjZa9f5A3lP+R43BzQRgrO25MpZytl2DsHMvLY0J9TkR0WFFBx59v5Lo5U5Ev5yca
+ jxbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765871235; x=1766476035;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LqVOYrgNXhtjysfbD5/bFYwaw7PRa/7Me3nmEJObh5g=;
+ b=MG9bMEi8LtW0qUn2REAjmxo29Ev3PSuQBTTaniMQs0oWCGX0KCPMBToEdxF2bhk67q
+ nuDbz1y3eNIv2+MREIBrIvgkI7YjnTgsOc1Cf8UOUK8xp/CL1B60gWeIbSSNge0N7JJG
+ rMRgcdETZ6UuUJAh0kSNeVdboNRbyqPf0RaYfeZl7ydj2vSJbOrwkNn4UuxjYwRKNoz+
+ pX8yyq38TJPjPfiFmb9RiSvJY/9KZPVxJ/Y5yJJ8OdtA6IZAWyXMBpFVy+NWlk0qs70V
+ C3O18xjaAqXZ64l/RRUAfR5fKT04u4tPDmcnVMA7CHTxiUnsn6JJ45hrkspWvsveaXq/
+ Q6gw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5nkQgrMqMhsyrQ9jh0Zcp3ldvAgZD6U0NLwEi8Ep+93Zezbo0zTNDXJhUL80QmC68bRyS+bY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyomlRtEPRyctWcnI17KMeTo9XEMGs443W3XtGsu3p1igfKhe/W
+ z7AABvRZsKKJamdoXPq0AQuACDYLaeFyLv20yxgYwZ10acGMFa5cXtdi1UDPEyE91Qk=
+X-Gm-Gg: AY/fxX5PTvSClCPVbDDkJWKQkYsAUkXkXWS6vVbXL+XtIIE7N5WmGXtU5XZeN5dgPZW
+ SoRTOrwFFdg1blWI+Yz4I1cLoDHwwzVNR4Ufl8yAKM+RlFP0ktAGeSuUYmtExDgO5/DI2RTrHKf
+ ESPNF9lvi25nB2Fu7X4HhhSasRDQt8GGM06ul9PsfR0B21aL7u65A/NbLO5JRG4UC5tX+N4OUlq
+ Ft/TVyTy2LCND6S1VD9jhClkJJYFD+3TM40t7T2fEQW4SQVxKnn0lOH5dk1ZBQ9NCfB/8pwgVkf
+ a2rh+Cypm79/GjMgIhO38BPw1kvKcx0BCVXvQ3k57morEIXalZCKu4G9SLhQGVsVLi0jGxPEySw
+ 4EBxbLW5HBZHH5fmMI1POP+VD1RBUTJqWngsZzY1HYrsHUeGe7+lQ+tEB0WJt+az/SmOgslwrub
+ +67tiXuzJtYoYBjgHas7UwWnTj0YqFhU9x2iVli5uCjjga+cJld+B2ojrLXd1gIHz8LmbbwBhq4
+ 9o5Tovr/sP18006ZenNyk+znA/0IGJ6EiBMal6rnlPFTlnbaILjmz7HRa59ZCBvkJnjYmWBpe43
+ 836GtRWXud/rB/63dIrEOSNT+Nip951V+dzJqT+d32JmUrHcCLZHZ1DuhUX7//KFiaE7m0dX/Jm
+ Cq2UPaJ6p0cHolUDWjJoMcZifNmANPRyEMzAf7EvnV8P3iyEJ0U6oudA7lP7SM3tlkUrCc4fz/l
+ jyy2NUBV1fpAcFRvX/S8p4hYvwnlQ/lyX2GCtAHFmMZwyNllyTfLA=
+X-Google-Smtp-Source: AGHT+IFPDOgk9yFnOSJUJ4Wk5eV9QLl+zhpu854CAQVYuGxtebhruZklfJoJ6Sh5tvyZiAbqf17Dgg==
+X-Received: by 2002:a05:600c:1994:b0:471:5c0:94fc with SMTP id
+ 5b1f17b1804b1-47a8f0a444emr144066035e9.6.1765871234704; 
+ Mon, 15 Dec 2025 23:47:14 -0800 (PST)
+Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47a8f768936sm233520825e9.6.2025.12.15.23.47.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Dec 2025 23:47:14 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com,
+	andrew.goodbody@linaro.org
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ John Toomey <john.toomey@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH v3] efi_loader: Trigger capsule updates with automatically
+ generated boot options
+Date: Tue, 16 Dec 2025 09:47:09 +0200
+Message-ID: <20251216074710.270479-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AM8PR04MB7794:EE_
-X-MS-Office365-Filtering-Correlation-Id: b4738e90-6032-4922-dabb-08de3c6df8b9
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|376014|7416014|366016|52116014|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aVQ2eUZCeVBiaHlrNFhTRVM2V2xybHd6OEdvL0huOVQwaDBaVFRRdW9jNE9J?=
- =?utf-8?B?T2VOZ3lhSEpucW9PYllnMkJqTTBjSmdTSVdaczBlaFB0QmNxLzdEZFRrL3R3?=
- =?utf-8?B?Ym94QnZDSDFYR0ZkMVhJSi93VERDL3Ruc1VsZ2hKQTlHeW1FRkx0aEtpVHRP?=
- =?utf-8?B?LzlUUEd1T2lzTDlMNVNnWGdBNEM0L0R2OVNYMXBvby9ZZERmNmJ4b3NZbVZ0?=
- =?utf-8?B?MnJiajBINzN3NllJVXBWdDI5RXAycXBKTDdRTUtaY0dpcTJlS2xyVXRJdHJh?=
- =?utf-8?B?MXk3c0FoRnJxamgyM2lRWGlaaTRGVkxnRFViQVQ2NE1hczQrMzFOZi9OUUJx?=
- =?utf-8?B?YU9BRDFuMnp1S2h6NkdGMFVrVWg5RWZVSDFrbzgybExaU011bUZIS09IaGNu?=
- =?utf-8?B?VVNXVnQ1Q1YyWE93cm9QWjEyTkx2V0JjS1UwMmN5WTRsLzlENnNvRWpReGFD?=
- =?utf-8?B?dGlKOXhvVGtFZEljSWlHTjR4RG5UUndJdlVFVWtVUVFoejdNdjBCUWs0OGdO?=
- =?utf-8?B?WDBPRjBhTXorc0oxb29NNXdUc0IwYldFdkhDQzFPVUw2dVZuby9OZG1wcW92?=
- =?utf-8?B?R1pxdllxZjNSWUtPU0ZleGNZRlNQSjROeUpjbTBkMGxBUjlPSjVpM2Z1T3JG?=
- =?utf-8?B?L1RwN2NxZ2xpYUJDR1FtbjllUTQxcVZhb0VvQTFjeHFkVzVBY3Zoc3hCQ21S?=
- =?utf-8?B?bkVMRUR0OTRERUJIWDQvSXV4VFRnR3EzR2NzUGdpOUhJS2hKV1BzN0Q1Mmtw?=
- =?utf-8?B?c2Z0RWd3MGlTK0lzZzdsUHY4OVRmTGt0S0ViUVJNMGVuZGZrUFVnMEFwdElm?=
- =?utf-8?B?b0tORjJydm9BbTREWUNDTFpxRksraTJEVGp5ZWFlSzFBblhjdFFmT2dqWkY4?=
- =?utf-8?B?cXh5WXdRbi9xams0SnhUZGs2NlpyY0N6bW1HZ2hoaTFoWGw1VWxzOFk1dmlj?=
- =?utf-8?B?dm4ydWE3M0tnL3phRmhWM2t3RmF6V0QyNzFRaTQwdWRoY1M4WjFRNWpnYmZU?=
- =?utf-8?B?YmpWNkVrMUkrMFgwTGl1OW45c0VMV2ZMbnRlMWJCY3d2eUI0SWdFVmVtSXVR?=
- =?utf-8?B?MXZrYmFodUJTOGF0UEt2MzBsanJ6TnRZVHhzNXNCMFZiM01CbWJqcjRyMXR5?=
- =?utf-8?B?bnFmUngvd2xGK0p5M3phWEhBSkNOd0lkcDBtMEZJQ3lQZEhRMnN6MWp2RkJk?=
- =?utf-8?B?WFFybWs2M092NUFZOXQzUldDUWFna1dCallnVXFReEVJOFNVb1NHSjU4eUUw?=
- =?utf-8?B?ZHZXWllQRVJ4d1VHQUNTMkM4cklFb3hvOTFZekh6WEVhclZKREJQdWVIcCtj?=
- =?utf-8?B?WU1aZmc4bHJnZGJya3pFTG5mTnZpTlVoaFloZ3NueDVrVDVTVWxGY29QS3kz?=
- =?utf-8?B?QkI5Z3kzY3lqcWNOY3ppSXBZdUtFVFBSaWNtUDNvRXN1K2JXV0xQcjZxOTB0?=
- =?utf-8?B?dFA5TjYyK0Y1OVVIOU1nZmdyd3VVWldNeGFaanVocnlwa0M5ekRaZTh0T2dU?=
- =?utf-8?B?TTU5RnVTMjJRbTB2cWVuVi95WjJxWlNCS01xWElaU1RxK1FwS3dVY3ZUOHZr?=
- =?utf-8?B?OWNwaThLL1VhdFFZV09xdkZFNXAxcHpBMkNPUlhxNVJjUkhQRkdXZ2RPNVFB?=
- =?utf-8?B?YU9QUE9oNituTHd0OHUrTytKaFc0V2lnYmk0M0x1RFJHWXdjaHEwVk9IVkto?=
- =?utf-8?B?NWZKQ2dKeEJoVU11dVkzTU5lVGJWYk9yWjljQld5WU9vc0ZYUWkvdlpMUFlk?=
- =?utf-8?B?eHMzOHdZd1VBaFRVVDd3N3k0WXBUV0p6d2hkNUJlRHpOTWtvMkJIS3d0bnlr?=
- =?utf-8?B?SnRhRERHQXZkRW11dTZ1WVg2M1IzT2VmNXJnYUxFODFXQy9LZU5nd05uZWla?=
- =?utf-8?B?aXFHVFBXSHQ5MFJISFVnMHRmTTlmOU1FVE0xZzJYWUVRNVd6aTdHd0xQeElC?=
- =?utf-8?B?VnQrai9FblpHdVNxTUVMeENZWTZFcEhaUUQwdHlyUk13VWlmWFhoMGlidmRo?=
- =?utf-8?B?THB4NThmdDR5amMvc1lTcnVoZTVEZkRWYzdBeW9hQUpDcXRQQVJEaWxWZGJs?=
- =?utf-8?Q?yOXhES?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(376014)(7416014)(366016)(52116014)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RmE2dCtCb0s2UEt2c1JXRmpHaVZWK2w5OUgrK2gwdWMrVFAzQXJqOFlMT2pu?=
- =?utf-8?B?M0FEVWZXejFuVlRCMTdkRTFOTXE3RExrU2I1UW1jL0U0M2JzWG13YnkwdmFL?=
- =?utf-8?B?U2NaN2JWT2EvSHZUREx2NDJVeUdtb2kxM0VIN2xzRmQvb0NGM0dZeTBlWnBQ?=
- =?utf-8?B?ZjhFZHhrSmg3bE5NN3pTU0ZSanhZdmw5VXkzZ3dvM3RhaUlPL2N1T3Y0RWVV?=
- =?utf-8?B?SDBuVm1WZ2lpTmtyaG83QXV5Qk5GZld4OEhkUlhkbi80bzFVeGlRTy9iY2FZ?=
- =?utf-8?B?U2pyOUpaWUY5NTdRSEVpbjc5MDEyYjg2bFExZU5WWU9aVnE3em8rVCtic2c5?=
- =?utf-8?B?cjR0dlVzYmJUNmhUUU9mOEF2ZVp2cXNzWmpIVnBrNlpCNzZrblpyeFEyTERJ?=
- =?utf-8?B?SStJUlZNaDR2UFJPc0hXR0VmY1hjVW1oYUdTUlFONUNPQ0diSkJ5NWVGRDNT?=
- =?utf-8?B?d212b1ovS0xPbnlIU1h2NDl0V3NTNk55MlZPMHZkc1NpRUVvdjVualJoemVp?=
- =?utf-8?B?MTA0bG4zUFc1Z3hPRytmekR4OTdTUWg0WTZ4ZnRjS20ycmViWTFkNXRtSHNI?=
- =?utf-8?B?TG1FKzJiMlN5WkE2NTNYbEsxRHJwTVh2R09FbGsrYjdPOFZDaGM3ejI2b0lk?=
- =?utf-8?B?ZXViSC83RFRPT2Z6QkpHWVZLcmhoMUR5ZzdFNC9tU0FPbEJvS01HYThkWUoy?=
- =?utf-8?B?MEVsY1czSGY0RDJEZGptVUVjMmE4dGFZYjZSUHFpSHRDZzR6Z3o2WDR0Mzhu?=
- =?utf-8?B?SzhWajZTS2RTbEhieFNZKzFqb25RZ1p1djk5STk3WEU4b0NVVDdITHVUSWFI?=
- =?utf-8?B?ZkllRWt1OFI3KzExRzlkWC9TK1ZCRWNXVVhYOGVwYWIwNEY4SEg5bDZXdFRO?=
- =?utf-8?B?bk5WTUJuWWNYS1ZpUU50S0d3RnVBL1VzZ0pXYVNJdFRNMUdrUnRLNXhMOXBL?=
- =?utf-8?B?UmtsUkw5amIweTYyOUtUSk53LzBQNjZDUGxSVVFKc0ZTcWRlLzQ3SDZyTFRi?=
- =?utf-8?B?R1JYNWVubWQ0S1hEdExyNnRFRElIcWc0ZktrazVlS1JEaTlpSEtMMWF2Rzly?=
- =?utf-8?B?WTlWdDYrT1c5WEdzSTVSakt4ekx2Z05xeGpjMFM3SWppcnRNRCtFL29reStp?=
- =?utf-8?B?YXNscjFxa0JEWEYvYjM2VFNvb0NpdjcralhDVGw5R09DejVtSUc2UEkxSWJl?=
- =?utf-8?B?Y0taWVNsYzNDSjhCdzlWRWt1dWdCUE9QcjlZSzhnU0M0WTM3am5DOVJVWFB4?=
- =?utf-8?B?Q3J3bTZ3MEh5Vk5BdjhlT0F4RDdFai9WUmYzamlOK3VvMUd3S1hpR3RjUjhy?=
- =?utf-8?B?VUhmQkpFbjVvRHFMNm1IQlp0MzFnR2t1RGVkVzJKUWZ5V3RCQnBmVjN5NFBq?=
- =?utf-8?B?Y21SNHg2Yzc0eFg2VEVDVDdUdU51MUNYMTk4dXVKUXpjVTl2b1VlS1BwNHZt?=
- =?utf-8?B?NjdpMVVWVlY1VUZyL0JSTGdIUzh0ZVBXN1Zuc3BhRVhDeE1rdEl4VDZQd2di?=
- =?utf-8?B?enJXU3B2a0dCeVErMkVndHdCSzRrWCtVWkk2RXNIUFBOQUorckNoWmZzMkVs?=
- =?utf-8?B?VjBYb1p2aVhac0VidHlxZStlc1o2WVBBUWswMEFBUjVlaVFPbFIydlpWV1lx?=
- =?utf-8?B?N3Y2N3FudXZkMEQ3di9QRjk5TWtMSjM0RENqQW0yMzJVUUpUbmFOMm8rZUJN?=
- =?utf-8?B?YnRJVnZLNHNtNHZLMHJ6T2o1OG1hUStOclg3UXhjamlGbzh2a3FUT3RjcnlV?=
- =?utf-8?B?bFkxWElCRFIzazlXSndjRWpzcHUzdHQwZlBmckRCUzhSa2JYdEpmSVdXLzZO?=
- =?utf-8?B?U0I3TDE2VmNobWFvQlhhNWRIRWgyd2NiaDhOT1ozZ3BQTEl3Ty91ZUdnRWxm?=
- =?utf-8?B?QUFFSUY1cFdRTGxqUnBmQUxSM3MzTm84amJoN1JCc2E4enYvYTloMklUb09S?=
- =?utf-8?B?VDhDS29TakZmem1pcW0rSWtMa0w2cXlOOTRtZXk4VW1PUWx1ZGMzbEhHOFUr?=
- =?utf-8?B?U2VHd3J2RHUrQkZMdkVQTkErblJvL1hUWDVwL0RSTnVOL1gzdm5qTzVUK3NK?=
- =?utf-8?B?U1I0UlVGdjVISzdOYW4xMVNQNXN0RzNJU1NENHBUUC9JVktKbWsyT3kzbGpT?=
- =?utf-8?Q?Ds4+LmBbBB1vMnRjPc8xjwmsH?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b4738e90-6032-4922-dabb-08de3c6df8b9
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 06:40:15.7434 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Fp3k9D7sCxjF6uP61UUgoUaaIDd9v65e0SRqctsriEcxqk0xzGyWia+/zeyQGfsZ/NL0Xwt4Q7U901IAz/SsJw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7794
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -190,77 +107,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+The EFI spec in §8.5.5 says
+"The directory \EFI\UpdateCapsule is checked for capsules only within
+ the EFI system partition on the device specified in the active boot
+ option determine by reference to BootNext variable or BootOrder variable
+ processing."
 
-Update the i.MX8ULP EVK device tree files and defconfig to enable the
-second USB controller (base address 0x29920000) on i.MX8ULP EVK in
-device mode, allowing the board to operate as a USB mass storage gadget.
+Automatically generated boot options don't point to the ESP, they point to
+the disk itself and find_handle() won't match when searching for an ESP
+during a capsule update.
+This happens because find_handle() only matches device paths that are
+shorter or equal to the device path passed as an argument.
+Since the EFI spec allows it we want to allow capsule updates, when the
+boot option points to a disk, but that disk contains an ESP with a
+\EFI\UpdateCapsule directory.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
+So, let's change device_is_present_and_system_part() and check if the
+supplied device path contains an ESP. If it does return the handle of
+the device. Otherwise, iterate over child devices and return the handle
+of the first child that contains an ESP.
+
+The returned handle can then be reused later. Rather than calling
+efi_fs_from_path(), we can simply look up the EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
+on the discovered handle, avoiding the need to re-parse device paths.
+
+Reported-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reported-by: John Toomey <john.toomey@amd.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/dts/imx8ulp-evk-u-boot.dtsi | 17 +++++++++++++++++
- configs/imx8ulp_evk_defconfig        |  7 +++++++
- 2 files changed, 24 insertions(+)
+Changes from v2:
+- Changing efi_dp_find_obj() wasn't too intuitive, since we only matched
+  the longest device path we found from a prefix and made the code complex.
+- Change the implementation and iterate over the device children to locate an
+  ESP, if the supplied DP is not one.
 
-diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-index e35653edc29..e4f47bb1dcb 100644
---- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
-@@ -12,6 +12,19 @@
- 		status = "okay";
- 		bootph-all;
- 	};
-+
-+	aliases {
-+		usb_gadget1 = &usbg2;
-+		usb1 = &usbotg2;
-+	};
-+
-+	usbg2: usbg2 {
-+		compatible = "fsl,imx27-usb-gadget";
-+		dr_mode = "peripheral";
-+		chipidea,usb = <&usbotg2>;
-+		status = "okay";
-+		bootph-all;
-+	};
- };
- 
- &soc {
-@@ -38,6 +51,10 @@
- 	compatible = "fsl,imx8ulp-usb", "fsl,imx7ulp-usb", "fsl,imx27-usb";
- };
- 
-+&pinctrl_usb2 {
-+	bootph-all;
-+};
-+
- &iomuxc1 {
- 	bootph-all;
- };
-diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
-index 5fd73ce4ae9..52994e4f785 100644
---- a/configs/imx8ulp_evk_defconfig
-+++ b/configs/imx8ulp_evk_defconfig
-@@ -55,6 +55,7 @@ CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_READ=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
-@@ -95,4 +96,10 @@ CONFIG_DM_SPI=y
- CONFIG_NXP_FSPI=y
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_ULP_WATCHDOG=y
+ lib/efi_loader/efi_capsule.c | 67 +++++++++++++++++++++++++-----------
+ 1 file changed, 46 insertions(+), 21 deletions(-)
 
--- 
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index eafc647f558f..60ce03b4254a 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -8,6 +8,7 @@
+
+ #define LOG_CATEGORY LOGC_EFI
+
++#include <dm/device.h>
+ #include <efi_device_path.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+@@ -878,30 +879,48 @@ static efi_status_t get_dp_device(u16 *boot_var,
+ }
+
+ /**
+- * device_is_present_and_system_part - check if a device exists
++ * get_esp_handle - check if a device exists and contains an ESP
+  *
+  * Check if a device pointed to by the device path, @dp, exists and is
+- * located in UEFI system partition.
++ * either an ESP or a disk containing an ESP.
+  *
+  * @dp		device path
+- * Return:	true - yes, false - no
++ * Return:	ESP handle or NULL
+  */
+-static bool device_is_present_and_system_part(struct efi_device_path *dp)
++efi_handle_t get_esp_handle(struct efi_device_path *dp)
+ {
+-	efi_handle_t handle;
++	efi_handle_t handle, dev_handle;
++	struct udevice *child_dev;
+ 	struct efi_device_path *rem;
++	efi_status_t ret;
+
+ 	/* Check device exists */
+-	handle = efi_dp_find_obj(dp, NULL, NULL);
+-	if (!handle)
+-		return false;
++	dev_handle = efi_dp_find_obj(dp, NULL, NULL);
++	if (!dev_handle)
++		return NULL;
+
+ 	/* Check device is on system partition */
+ 	handle = efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);
+-	if (!handle)
+-		return false;
++	if (handle)
++		return handle;
++
++	/* If it's a disk check its children */
++	list_for_each_entry(child_dev, &dev_handle->dev->child_head, sibling_node) {
++		if (device_get_uclass_id(child_dev) != UCLASS_PARTITION)
++			continue;
++		if (dev_tag_get_ptr(child_dev, DM_TAG_EFI, (void **)&handle))
++			continue;
++
++		ret = EFI_CALL(systab.boottime->open_protocol(
++			       handle, &efi_system_partition_guid, NULL, NULL,
++			       NULL, EFI_OPEN_PROTOCOL_TEST_PROTOCOL));
++		if (ret != EFI_SUCCESS)
++			continue;
+
+-	return true;
++		return handle;
++	}
++
++	return NULL;
+ }
+
+ /**
+@@ -920,6 +939,8 @@ static efi_status_t find_boot_device(void)
+ 	int i, num;
+ 	struct efi_simple_file_system_protocol *volume;
+ 	struct efi_device_path *boot_dev = NULL;
++	struct efi_handler *handler;
++	efi_handle_t esp = NULL;
+ 	efi_status_t ret;
+
+ 	/* find active boot device in BootNext */
+@@ -940,7 +961,8 @@ static efi_status_t find_boot_device(void)
+
+ 		ret = get_dp_device(boot_var16, &boot_dev);
+ 		if (ret == EFI_SUCCESS) {
+-			if (device_is_present_and_system_part(boot_dev)) {
++			esp = get_esp_handle(boot_dev);
++			if (esp) {
+ 				goto found;
+ 			} else {
+ 				efi_free_pool(boot_dev);
+@@ -967,26 +989,29 @@ skip:
+ 		if (ret != EFI_SUCCESS)
+ 			continue;
+
+-		if (device_is_present_and_system_part(boot_dev))
++		esp = get_esp_handle(boot_dev);
++		if (esp)
+ 			break;
+
+ 		efi_free_pool(boot_dev);
+ 		boot_dev = NULL;
+ 	}
++
+ found:
+-	if (boot_dev) {
++	ret = EFI_NOT_FOUND;
++	if (esp) {
+ 		log_debug("Boot device %pD\n", boot_dev);
+
+-		volume = efi_fs_from_path(boot_dev);
+-		if (!volume)
+-			ret = EFI_DEVICE_ERROR;
+-		else
++		efi_free_pool(boot_dev);
++		ret = efi_search_protocol(esp, &efi_simple_file_system_protocol_guid,
++					  &handler);
++		if (ret == EFI_SUCCESS) {
++			volume = handler->protocol_interface;
+ 			ret = EFI_CALL(volume->open_volume(volume,
+ 							   &bootdev_root));
+-		efi_free_pool(boot_dev);
+-	} else {
+-		ret = EFI_NOT_FOUND;
++		}
+ 	}
++
+ out:
+ 	free(boot_order);
+
+--
 2.43.0
 
