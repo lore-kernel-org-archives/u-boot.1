@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7DBD609AA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 15:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92D7D609AA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 15:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C28B8334F;
-	Tue, 16 Dec 2025 16:32:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FA798392C;
+	Tue, 16 Dec 2025 16:32:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NvadbGZn";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cglHAGeK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D0A837F2; Tue, 16 Dec 2025 16:32:03 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 6FAB38392C; Tue, 16 Dec 2025 16:32:09 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6383F80325
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 16:32:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 786A5800AB
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 16:32:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=444537dc73=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BGFTMtg1069088; Tue, 16 Dec 2025 16:32:00 +0100
-Received: from am0pr83cu005.outbound.protection.outlook.com
- (mail-westeuropeazon11010036.outbound.protection.outlook.com [52.101.69.36])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4b39n98401-1
+ 5BGFTUWN1173909; Tue, 16 Dec 2025 16:32:03 +0100
+Received: from as8pr04cu009.outbound.protection.outlook.com
+ (mail-westeuropeazon11011067.outbound.protection.outlook.com [52.101.70.67])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4b11gajxqc-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 16 Dec 2025 16:31:59 +0100 (CET)
+ Tue, 16 Dec 2025 16:32:03 +0100 (CET)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s0qLLx0q1VerbyRN4g9su4eonnM4gP1mKfTL6295Cfvxy5eNSwaew1PUhqgetkQYyYITKWb3zM7TEJabkrv+3eHOJL7e+fJ8A8IScqHyxL8vfoXTJtWjjDq5AnxU47Zjgt4cSs43LDz4O/5dhQmIU9lj0Z3nPB7BhCsoNAp1GLimH+atGb8q5LP8dRBi7NB4/IKhxHoxz6X1TriHsiZEstUUV8mJ2t75XxRTsw3gq0abmWRKqySkd6iMv0zxUNIWPmw0crt1kH/MQhVocLn37NuznMbHslQvmmdHZrdcMhOfdMabtAfbeKUXSelysKaCe/uVkrcYcMuB3q5OdrjVPw==
+ b=S15ZYanXlV3emg5zUUAFo7cYqNnmIxWUFxQOXpx+9+MUc1tZ3sysYWEdrESskMmNXUxufHpZqydBasOYBhA+eiPRFAkPIJC4Sj6jAm9v3XftUH8AeK1EUONVbgqN/C3ajG6WaAu5Y3NrQB18Nnqzlwa7i/6H0uOQ/bv2HIFgH/N9h224QkH9xrVGmY9B51NROjaR0RHqF1R3JZTKHAV9V3VVWZq3RD5GMPb+jYW62FKMGEtPqWCUrOHr+EdAjecDWGIMjnWrhJV74vE5+kpxyVI2qStKMkk0C19S82qYPErT2gAorWzbaLW1oghUq6TkYAqYt5ZIh+6NhY5kLNLzKg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ga6d8snpg+2RgMLRGh3e4+vJBbY/ydIenESEMIkyOKc=;
- b=hhcFVY9/dRBBAgFFPvpO4U9SHRgFIzDxbv1nnU3rL3h82AApcUhu6QLJfgBri2vq7sp14pG7l/50HTKEQYx+IWz5sEf5ZjwENqUA9I9k6M+5cH+7bILluP64Kh3PzCIg7UgYznj8OykfNRBceiplHHhvj3xfWgLEznle2vwK1KRDpAHs9+tsCD9LXhc+d2HQksYdAlte9wZJQA1oTXqDBjODJ4ZKtKnpf9SqpxbCFDv2mrZJZdZgQj75vwE0Fe6o1lTlvdRsyPFLRW1eXeNKRAl0zrbjChKawqVlKOK5aftTXzzrCzWUBG8iY/rFcJ3/uQTv4CuPobTzvHrLib4D1w==
+ bh=GIDtTLe3cZ1qmIJ2But1gwk1Hxqa4cXellaBeEcCQy4=;
+ b=zDMXt7+KI49K2ThTzEBnUb3cy9+MElf5WiawyhgrZJblVIhxJ+sYD9Nnsp+db23jyM72AD+rjztUlT3D8jnhNvg/N2/2OpMI2CHx3k/UCaaAA/gCGWk5y0lK47WNWvZRBEUzW+vTMmTP4oPCSh1R83F978zqC5DIK7l6uvWVPT++xXBM4+OqabTRO/x/v7uBBcsjXAkOprAKwFOqF6fnFcEDyD+tcxvbSeypEhTVV+NoyyBksaetmJokxHYl5A0yJ24ba3F77ddqWOMdJ/AcW2xf+jKY6YRR2ifbu8id9SbaMkvViU1t/bG7Kith76KIg2yI2u9CNN+R0ZdYnrAT/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
  smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
@@ -48,18 +48,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ga6d8snpg+2RgMLRGh3e4+vJBbY/ydIenESEMIkyOKc=;
- b=NvadbGZna9GaVIAFHVx8huFpJJeduJDRIfXrhzNAE27SJV9dGBltMEluvrGOKhQ4kBmhOxPxnI3lAm0vxU+L01NIDSMXukVC4dOZc579VIIN5EvQndOOB3vHlDJ028SnneA7ccQqQNI91+mvZmSAyX6NV58U/poZMR0I9MvPQck5cTgNmiLOgb/acRyrOLKFXIyfC20LMnoxZL1FKs2wCfeG0EUcgnfc5yoJ0OLWYih0cSILF6JIEs+OdiMU1jafVwNR9qOVSRWASscqci2nU3djvogTflA31TGtoXSuZqZCj5cc05m43pxG+bZ5pbF8vtQHrvqjQCqU4A8tRMuZAg==
-Received: from DU2PR04CA0023.eurprd04.prod.outlook.com (2603:10a6:10:3b::28)
- by AM7PR10MB3795.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:17c::19) with
+ bh=GIDtTLe3cZ1qmIJ2But1gwk1Hxqa4cXellaBeEcCQy4=;
+ b=cglHAGeKUrLtVTHlwMirU1063i0babpZdiOxhEZXSBKy474LuNaBIJ+eCaQ6enbLDqd1KfhG4us8iJN0Qd8zeFAgfcp9jO1O+6CJ0JnTw8FHLIflCrImUyIgNv3SqZGz7xBRJp9gJGXFvrwAIS/mQ3p+tv/o+c9sQ6fEj3tQV5PHBO/+loNup4YUVBgvKSJdOuYXtfaECwWUZv7b2a8MPFCDbracC1CgsTpD840wfxCNT0d/mahXxIxoZpPzXcVlJQObjfEN58g7tUBXUiVDeA6BW88qVOpXpJsshZs2kHese7dHFoIfsJs4jICWgkTI++ByQaypHKjDfkWQaImPyQ==
+Received: from DU2PR04CA0012.eurprd04.prod.outlook.com (2603:10a6:10:3b::17)
+ by AM7PR10MB3173.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:10a::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.13; Tue, 16 Dec
- 2025 15:31:55 +0000
+ 2025 15:31:58 +0000
 Received: from DU6PEPF00009524.eurprd02.prod.outlook.com
- (2603:10a6:10:3b:cafe::e7) by DU2PR04CA0023.outlook.office365.com
- (2603:10a6:10:3b::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.6 via Frontend Transport; Tue,
- 16 Dec 2025 15:31:55 +0000
+ (2603:10a6:10:3b:cafe::8b) by DU2PR04CA0012.outlook.office365.com
+ (2603:10a6:10:3b::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.13 via Frontend Transport; Tue,
+ 16 Dec 2025 15:31:58 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -69,22 +69,22 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
 Received: from smtpO365.st.com (164.130.1.60) by
  DU6PEPF00009524.mail.protection.outlook.com (10.167.8.5) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Tue, 16 Dec 2025 15:31:55 +0000
+ 15.20.9434.6 via Frontend Transport; Tue, 16 Dec 2025 15:31:58 +0000
 Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
  (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 16 Dec
- 2025 16:32:39 +0100
+ 2025 16:32:40 +0100
 Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 16 Dec
- 2025 16:31:54 +0100
+ 2025 16:31:55 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 16 Dec 2025 16:31:52 +0100
-Subject: [PATCH 1/3] spi: stm32-ospi: Increase read throughput in indirect mode
+Date: Tue, 16 Dec 2025 16:31:54 +0100
+Subject: [PATCH 3/3] spi: stm32-qspi: Optimize FIFO accesses using u16 or u32
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20251216-next-v1-1-469e1d901920@foss.st.com>
+Message-ID: <20251216-next-v1-3-469e1d901920@foss.st.com>
 References: <20251216-next-v1-0-469e1d901920@foss.st.com>
 In-Reply-To: <20251216-next-v1-0-469e1d901920@foss.st.com>
 To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
@@ -97,84 +97,84 @@ X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF00009524:EE_|AM7PR10MB3795:EE_
-X-MS-Office365-Filtering-Correlation-Id: 210d2f69-5276-4139-a5e5-08de3cb83e94
+X-MS-TrafficTypeDiagnostic: DU6PEPF00009524:EE_|AM7PR10MB3173:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e7899b9-48a6-4b20-db0c-08de3cb84054
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?S3EzeWVFdFBIU2Irc0s2YzV5eW5teUV0ekJ0VVhvYURpaW9Kdm9teUZ0b3Zq?=
- =?utf-8?B?aUxCZnVzV1ZlVkp0cnpDUmlqVld6QVU2RU44dCtZWTFVZnZkd2ZKY2xSVHNp?=
- =?utf-8?B?eXlZcUNGL0RvSFRQakJ5UkdnK01kQUc2MmZpcjhXQmY3T3U0di9rME1mTUpB?=
- =?utf-8?B?cEMrVTdvRGp6ZXZkUkVTWUJ0UjRtNUJ2bzA5dGFSMTNTc2xKeklPRHNEYmNT?=
- =?utf-8?B?TWZIaVcxb2ZOWGRSUCsrdjQ2aXRCV0hCNVBKR0I5ZUJCVnFhRVh2NU43SGFp?=
- =?utf-8?B?Q0pGWUlsOEY0K1lmQm8vSStlbEo3K0NXd3NwN0c4bENoNzQwN3phSllhK0Ny?=
- =?utf-8?B?NDdnMktwUFgwYTBHMHlCdlZqc1BEZTRPTjlaSVQ1cXJHeEZZU3Q5bjB3SzBI?=
- =?utf-8?B?MzlXMTMrVVByaU1qcVRzT0xnVHVBZVh2QThTM3d1YldSRFc1azBvWjdrOGtr?=
- =?utf-8?B?ekwvcVpnTjNDLy9QMVhpU0lpQ1drTFNmdi9XQTdGbGEvZ0dSbDYxekFGN2hN?=
- =?utf-8?B?bkQrUStwZStxWlg5QUppNVdWRVBxZ0pDK2xlUnJ0Ykg2WSs1S0M4YXcxZHlw?=
- =?utf-8?B?RVlGY0EvdTF2ckIvODZCNEN1ZEVtck9ta0IramE0eVh6YnNVcGZsUS9DVk1N?=
- =?utf-8?B?ZlJvdzl0R0MzTmFFaEp5NjkrVmJRalNia3JmN3hYSnNEZkdwVC9vNEVMMCsv?=
- =?utf-8?B?NXAxWGkxMVZKT0VwbnJiaHZVYVU4dGExV0xFMUtra2tvaGxaTG1VMDNPeVRO?=
- =?utf-8?B?ekFONlpvUUdHUGlGbThkWFZ5OTFBd0VWRTdEcW4rT3h1Umt5RHNMTkJtalEv?=
- =?utf-8?B?eHhRcnFDWTNNNTg4Wk1tUXYxdkZNRXI4aVJMK3ZXaHFsR1R4cFY2dG9vY1py?=
- =?utf-8?B?MFU3ZmRsSmJGWmJ5dGZjUDJJTW9aZTNVcUI1Q1hQYnRLVFRjUmNMdzhHRXMy?=
- =?utf-8?B?ZzlmZWhSc1Fib2VERFo5WDY1cnEvQmkwZ242OVBGZXBNRGQ0MjVkdEhsOUdR?=
- =?utf-8?B?amtxYTRkMUlqWlRnM3lQb0pmQXdYeUhnOWZ6NG9SRWIwbnhUZjlQNjlyMGVD?=
- =?utf-8?B?emt0ZGE5NnEzTElRelBRM2toYnVURll0aVllaEhxU3JSaXFXY1JFZ0huaEpX?=
- =?utf-8?B?eTRnaWU5RHNpSm4rWmh5cGNvc2VEQjkzNWd1emt0R21JWUZvaW14RG4zakFa?=
- =?utf-8?B?a2pUWURmbmo1TldzVjIrcE5xdzFFRTU4dys3Uk95ZzJoYmJreGFINHkwRjNt?=
- =?utf-8?B?M3BROHk3Qnd6WUpEODA4Wm13WFg4R1pvdkI0TG5jbGNISS9IWUpGNVh3ME5m?=
- =?utf-8?B?NFBzQ1hIZkM1QUpqS2hBMm9ESEpiS3hsNlQ3b2RVTEFYNjMzbjNId3hDNEt2?=
- =?utf-8?B?ZFVrbmRtbmhxY3k0K05mb0dvcDlwdnF4T1pXd0pzSGZtRTZYbUVFWlh3WnA4?=
- =?utf-8?B?SmJiSS9RSUZIV2VLaUxSTCtsbEdkcTFCY2JjcGI0TEFIbnB5Sy9UcnAwR3U0?=
- =?utf-8?B?aXV1K3pZWml4S0dNZXA2L2NNWEVodWthQ2x2RG5OaDlYQ1J1cjcxYVE0MnQ3?=
- =?utf-8?B?cTA3dHlOR1lZQXJTc05NMzBSNnoyTmZNbENGSDNFWXJpZ2dTR0JBbWhUUXBT?=
- =?utf-8?B?eERYTVhScVZuOTA2eE9xdkZyQ2F5TzBBeDlTWXVYSUIvM3kyMzIrTitIam1R?=
- =?utf-8?B?Q0hUUyszQ2hTRktaK1hBY2I4RDQwVmJwOEFoU0dmOU1ZUG1kVHhINGF3VFhY?=
- =?utf-8?B?ZGRzdnlacHE3N042K1Fnd1cvczNnTlZBaHVHSkZHb0FpR3RXd3dWeFZ2ZFpC?=
- =?utf-8?B?bXdUb3V5SE82ZGtETnB4NGVUVjlXdEhHK2NuZmJva1RVdlhkVFFtSHBXS1di?=
- =?utf-8?B?UE81UHpLV3J3elZ6SUJsZExYVTFBK2dnRWRNMmtiQ2o3UGFSN0hPM2NId3Qr?=
- =?utf-8?B?YnVNeTRUdEEzZ3lyU3Q5d1ovek9hckRRcXpnVkdNK1VMb0ZreHpoa1hCU016?=
- =?utf-8?B?VGxwdWREcFl5Um80cnNxV0JLSlA2eXhadGhtODlpaWxRSGwwazVCYTQ0VlJD?=
- =?utf-8?B?U0RjOGkrQzExSUd5SEN6aGJWTzdWTUNCYVFpT0o3aWxBR2o0QjFTczh0T012?=
- =?utf-8?Q?5S/Y=3D?=
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RjdNSVgyYnZoLy8vdVBydjR1SW5IWWZCeDVkQ3lpa3RyU1F4RVp0cm9mTHpM?=
+ =?utf-8?B?SmFyN3F1a3hpU2J2YTQrWTRuQkI1L0pBS0NMaFQxY3RQZlJTUEcvc2J0eEFZ?=
+ =?utf-8?B?OWsvaERuSy84Smx2YjZoVnpoeVBkYlpTNE5rTTVLdHU5dkNGOTVxcFBVOVJN?=
+ =?utf-8?B?b3NsMVYvQ3crZGZIY0RZZkgwMTFzOEJoRFUyckhCZ1RBUnZ2dm5POE0yOUhk?=
+ =?utf-8?B?bk96N01rZmRUOXk5RFdwTnQyVCtaUGdBZk4yOVdEajhHOE9yTE9Hd0podHJO?=
+ =?utf-8?B?L1JxSWxvOE5tR3FyeUFGTGhrK0NYNURwRzFCSytNb0UrazFXeGRLWDZXaTho?=
+ =?utf-8?B?K21Xb0M3QTlzYW0zWXFJeWhwSHI4YVllRkl1NHM4T2F6M1U1Nk1DNkVqR1l6?=
+ =?utf-8?B?K0d6RGVkUW5hK3orKzBrUXQvZkZ6Y2szMXVhTXE0QStYc3RaL1o0WlJ6NVMz?=
+ =?utf-8?B?Q1MzZnBKcmE5RmdnQlBQSlpOYmN6MEx5VWRrOTZnK0c5U1dlQS9pSnc1Qm11?=
+ =?utf-8?B?ZzBNaWE2VkJ4Q1BkaUZtN3NNalJ1UkhuUXVtMmZQUzZVZ25Sb2NLZkUvSmcz?=
+ =?utf-8?B?NmxPYjRCMURNQU5GcEFKbmRJUFdHd2oyUzFuU1IxbS9vYnpjRUduMU8vUnFX?=
+ =?utf-8?B?ZDc4N2QzV0NNS2dKNlZSY3RxZ25aWkJLK04ydytDVnRiYzZxTEczV2I3U2pR?=
+ =?utf-8?B?SHRqODJXN1VBZ01RekVNckhZellmVUYvYnE3akt5YkE5ZlY3a0RQV3hZR2FD?=
+ =?utf-8?B?U1Y5U2RtdGRTN2NSRHhWbXFNa2FkL3Z1Vi93NVdKQ2JsdWllczBxUWo4dTV6?=
+ =?utf-8?B?T2tLeWo1cmR0d0pZUWp4YUVMdFpnVjUzeEU5MmVYbUxwNWNvR2dLdGVvekRI?=
+ =?utf-8?B?N3E5VUxja09OWHd3dmZKTWgvdlhUTEtlYW1welVVL1ZTdG5OQW1FNVVOQkhu?=
+ =?utf-8?B?RzIzSVBNT29mYWVJYkdFKzB5UE0vMS9sSmJPR254RUxESmNzWXo4VzMrdnhr?=
+ =?utf-8?B?L1FVaWJEV3ZRK1VmK0NzUFRiMzluVFpHU1lIZXF4VFlieXBSbHVMMnlTRlZR?=
+ =?utf-8?B?ZjVyK1dOajR0NGV0VDgxSEdkZUdpbVkwNDkwRzUreXY1R3Z2dE9YMnFtSVNN?=
+ =?utf-8?B?NVBFR2pjT29nTTBkRzVaOTJqZnllN0JGTUlLODJEcnMvblRNQUtGYnYwVUFu?=
+ =?utf-8?B?TThZY2c0MmtWYTFRNC95NWZWTTN0REl6ZGNGYzhTTmp3WVkrTlovSUVudUJ3?=
+ =?utf-8?B?TEJ5M0tKWmptQ0VvZFV0dGZuSWFhWjJzYTVJaFJ5cHRPdDZvU3d5U0VwMUJX?=
+ =?utf-8?B?VUdtRURGU00wWVBzZU16azh2end0OCs0OFNkQjZKQ2NySFVGazlNNHZRd3Yr?=
+ =?utf-8?B?SkNmZlpkU0pOMVRkdjEvN2haeUY2RWxvdTNrb0o5eHp2SW1qeitWSlJ6QUdY?=
+ =?utf-8?B?MjQ0dUMyU1RFa0RCSTl4Z3pONGV2d0xOUWJkZlI1VFFaU3NOSmN1ZlhmSTZH?=
+ =?utf-8?B?dlJwMm5DTEpRbmY1ZTdqVmJwYXJGb3dHUGtpS0Jxb2phZXRFZnJZQzRGSXRX?=
+ =?utf-8?B?TjkweXV4b0w4UzZTSEpyTXZOTk9SZmFMSFM0ZDdtRm04MWJkWnhKdFpPTG5U?=
+ =?utf-8?B?TXFET0xGRXl1WnRiNzViRVkyUkZkUWNaV0ZBcHZINlVIdGh0YkJCWUtlbmcz?=
+ =?utf-8?B?Nmhzc0U5c3krTzQ3NFhsaUxBYnBMaUlnNlhwUm1xNW93bnoxZWlja0RvQU5M?=
+ =?utf-8?B?QjVCUmxUd0JUdllZd0ZiN2NQT3c3K3hlQklJTktEcGxkRjAyTWk3N3FYMFIx?=
+ =?utf-8?B?UmVIekNCaTJmTWhDbUh4bmQwejBYR0N0RXk1VU00QnR4bDd4cVZjS3NVU0lj?=
+ =?utf-8?B?VmRibFdLZG5lWDlQS1hieWpWUVNJR25ITnJIV1cwL3o2aE9kc1NBQStTRzRm?=
+ =?utf-8?B?UU1hSTR3K0lXdjZkZTBTak82VytHU1BZYXQrYXJ6Q09HVFIxaytscDlYelVj?=
+ =?utf-8?B?QS9JOERiNGZId0ltdEhMVFRxd1BITXpwZnlYVVVoN2FlWlhJMTdjWmNDRXB0?=
+ =?utf-8?B?TEJHSzlFVXp2TW12QWc0bmVTeXZtTCtISjFCUVVPZEJ3eGxZTzloL2hwMlg1?=
+ =?utf-8?Q?0Mlw=3D?=
 X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 15:31:55.3689 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 210d2f69-5276-4139-a5e5-08de3cb83e94
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 15:31:58.3056 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e7899b9-48a6-4b20-db0c-08de3cb84054
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
 X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009524.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3795
-X-Authority-Analysis: v=2.4 cv=EK8LElZC c=1 sm=1 tr=0 ts=69417b6f cx=c_pps
- a=A9Qv+eSCmefgJq53fKE2Rg==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3173
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE2MDEzMyBTYWx0ZWRfX/QKbOveFlHWw
+ vMqclxfOcI8YrYQ50kIb1bmRTYMHknaaRE2NInKDraGLiusIpjq193bXWDM8/pPOqgX3xfas/Pw
+ u2wmtGm3TdOtLyqpJZycga4py5xBon32rOYm7g8Jur2MJhX1U/N61P/CPLAfpL5L8BFCIC7y/GC
+ AD6R8X4snfyHGYlmBxQIrFAe7iX221uurIMm6psu5dhCHEioe5+a+ywLJDlysUNCOAMXXwezpOu
+ pK1X449SrLUvFi66xRQytrDVT1VM5dN2FnodZdBYZIAfzLrwtcwCWIkfnxVXMteYkuQlkr7ZEme
+ fIQFjDVM8T6tbA1CoMlewz0davjFooYsCBGnu04V7FCK5L+Bn7FQPJylqHVJJlnv5K7R1XwCbrZ
+ NocGNzEEKLmZETupfuuIGShO5lDC7g==
+X-Authority-Analysis: v=2.4 cv=AtvjHe9P c=1 sm=1 tr=0 ts=69417b73 cx=c_pps
+ a=a6vlzZaZuUzyAnil8qmsbA==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
  a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=WrnwPNJMCOBKHMe7D-YA:9
+ a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=Y1jhug3KDOzITNdQmOoA:9
  a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: hLGJB-kcDtnvC9JAo7P7PC7wxB5xIC9j
-X-Proofpoint-GUID: hLGJB-kcDtnvC9JAo7P7PC7wxB5xIC9j
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE2MDEzMyBTYWx0ZWRfX72kHV/RgIin6
- LXrbsN+OaKh16RNMezwok8QuQ/Erl6y+Mnt0ais+J+D8hTR4hEnf4sBv+iiaLfpxQl0FFttaWwA
- OT7dcZFpA1bxnvZCb8/InfjvIPwIYZX5YBKLwX66VZXOEKgi+Tp2mlKraIhXxXxBzM+oZF1+n5d
- B3DWdpiKFGArp7RACZf55G4/4MOncwEzri8IwNp7PRjfqANNHgUb+gRjZKt1UxF3t9PTb0RvXCg
- iZHgLL+oKuHK+aGFEcujwhCOryC+XUnKGNq3ngjRVXZFOFr5ElL8qzqBzJVBkw21ZnOCCJHEfWl
- w72uRb1W3lDyb18pQES6NHXAVvN/seoaSDbqdZfIH8zwmKMJAAg1zfh44+ZtMKFAAgxnNcJX6CC
- k0fR/Ffw6VSwsKnLyElVYeJrjio64A==
+X-Proofpoint-ORIG-GUID: Mk8ULoNp7BUDAy7U4ot1VGi6yOyWl7WU
+X-Proofpoint-GUID: Mk8ULoNp7BUDAy7U4ot1VGi6yOyWl7WU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-16_02,2025-12-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- impostorscore=0 adultscore=0 lowpriorityscore=0
- bulkscore=0 phishscore=0
- spamscore=0 malwarescore=0 clxscore=1011 priorityscore=1501
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
+ spamscore=0 adultscore=0 clxscore=1011
+ suspectscore=0 malwarescore=0
+ phishscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512160133
 X-BeenThere: u-boot@lists.denx.de
@@ -193,42 +193,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Schedule() is called every u8/u16 or u32 read accesses which is overkill.
-Move schedule() from stm32_ospi_read_fifo() to stm32_ospi_tx_poll()
-and call schedule() only every 1MB chunk of data.
+FIFO accesses uses u8 only for read/write.
+In order to optimize throughput, add u16 or u32 read/write
+accesses when possible.
+Set FIFO threshold level value accordingly.
 
-Test performed by reading 64MB on sNOR on stm32mp257f-ev1 board:
+Test performed by writing and reading 64MB on sNOR on
+stm32mp157c-ev1 board:
 
           before      after    ratio
-Read  :  10.6MB/s    14.2MB/s   +34%
+Write :  428 KB/s   719 KB/s    +68%
+Read  :  520 KB/s  3200 KB/s   +615%
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- drivers/spi/stm32_ospi.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/spi/stm32_qspi.c | 59 ++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 50 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/spi/stm32_ospi.c b/drivers/spi/stm32_ospi.c
-index 01b8f8e4987..9e143a73559 100644
---- a/drivers/spi/stm32_ospi.c
-+++ b/drivers/spi/stm32_ospi.c
-@@ -142,7 +142,6 @@ static void stm32_ospi_read_fifo(void *val, phys_addr_t addr, u8 len)
- 	case sizeof(u8):
- 		*((u8 *)val) = readb_relaxed(addr);
- 	};
--	schedule();
+diff --git a/drivers/spi/stm32_qspi.c b/drivers/spi/stm32_qspi.c
+index 1778f8c1458..a02e0999ccb 100644
+--- a/drivers/spi/stm32_qspi.c
++++ b/drivers/spi/stm32_qspi.c
+@@ -50,6 +50,7 @@ struct stm32_qspi_regs {
+ #define STM32_QSPI_CR_SSHIFT		BIT(4)
+ #define STM32_QSPI_CR_DFM		BIT(6)
+ #define STM32_QSPI_CR_FSEL		BIT(7)
++#define STM32_QSPI_CR_FTHRES_MASK	GENMASK(4, 0)
+ #define STM32_QSPI_CR_FTHRES_SHIFT	8
+ #define STM32_QSPI_CR_TEIE		BIT(16)
+ #define STM32_QSPI_CR_TCIE		BIT(17)
+@@ -162,23 +163,42 @@ static int _stm32_qspi_wait_cmd(struct stm32_qspi_priv *priv,
+ 	return ret;
  }
  
- static void stm32_ospi_write_fifo(void *val, phys_addr_t addr, u8 len)
-@@ -200,6 +199,9 @@ int stm32_ospi_tx_poll(struct udevice *dev, void *buf, u32 len, bool read)
- 		fifo(buf, regs_base + OSPI_DR, step);
- 		len -= step;
- 		buf += step;
-+
-+		if (!(len % SZ_1M))
-+			schedule();
+-static void _stm32_qspi_read_fifo(u8 *val, void __iomem *addr)
++static void _stm32_qspi_read_fifo(void *val, void __iomem *addr, u8 len)
+ {
+-	*val = readb(addr);
++	switch (len) {
++	case sizeof(u32):
++		*((u32 *)val) = readl_relaxed(addr);
++		break;
++	case sizeof(u16):
++		*((u16 *)val) = readw_relaxed(addr);
++		break;
++	case sizeof(u8):
++		*((u8 *)val) = readb_relaxed(addr);
++	};
+ }
+ 
+-static void _stm32_qspi_write_fifo(u8 *val, void __iomem *addr)
++static void _stm32_qspi_write_fifo(void *val, void __iomem *addr, u8 len)
+ {
+-	writeb(*val, addr);
++	switch (len) {
++	case sizeof(u32):
++		writel_relaxed(*((u32 *)val), addr);
++		break;
++	case sizeof(u16):
++		writew_relaxed(*((u16 *)val), addr);
++		break;
++	case sizeof(u8):
++		writeb_relaxed(*((u8 *)val), addr);
++	};
+ }
+ 
+ static int _stm32_qspi_poll(struct stm32_qspi_priv *priv,
+ 			    const struct spi_mem_op *op)
+ {
+-	void (*fifo)(u8 *val, void __iomem *addr);
++	void (*fifo)(void *val, void __iomem *addr, u8 len);
+ 	u32 len = op->data.nbytes, sr;
+-	u8 *buf;
++	void *buf;
+ 	int ret;
++	u8 step = 0;
+ 
+ 	if (op->data.dir == SPI_MEM_DATA_IN) {
+ 		fifo = _stm32_qspi_read_fifo;
+@@ -186,10 +206,10 @@ static int _stm32_qspi_poll(struct stm32_qspi_priv *priv,
+ 
+ 	} else {
+ 		fifo = _stm32_qspi_write_fifo;
+-		buf = (u8 *)op->data.buf.out;
++		buf = (void *)op->data.buf.out;
  	}
  
- 	return 0;
+-	while (len--) {
++	while (len) {
+ 		ret = readl_poll_timeout(&priv->regs->sr, sr,
+ 					 sr & STM32_QSPI_SR_FTF,
+ 					 STM32_QSPI_FIFO_TIMEOUT_US);
+@@ -198,7 +218,23 @@ static int _stm32_qspi_poll(struct stm32_qspi_priv *priv,
+ 			return ret;
+ 		}
+ 
+-		fifo(buf++, &priv->regs->dr);
++		if (!IS_ALIGNED((uintptr_t)buf, sizeof(u32))) {
++			if (!IS_ALIGNED((uintptr_t)buf, sizeof(u16)))
++				step = sizeof(u8);
++			else
++				step = min((u32)len, (u32)sizeof(u16));
++		}
++		/* Buf is aligned */
++		else if (len >= sizeof(u32))
++			step = sizeof(u32);
++		else if (len >= sizeof(u16))
++			step = sizeof(u16);
++		else if (len)
++			step = sizeof(u8);
++
++		fifo(buf, &priv->regs->dr, step);
++		len -= step;
++		buf += step;
+ 
+ 		if (!(len % SZ_1M))
+ 			schedule();
+@@ -383,6 +419,11 @@ static int stm32_qspi_probe(struct udevice *bus)
+ 
+ 	priv->cs_used = -1;
+ 
++	clrsetbits_le32(&priv->regs->cr,
++			STM32_QSPI_CR_FTHRES_MASK <<
++			STM32_QSPI_CR_FTHRES_SHIFT,
++			3 << STM32_QSPI_CR_FTHRES_SHIFT);
++
+ 	setbits_le32(&priv->regs->cr, STM32_QSPI_CR_SSHIFT);
+ 
+ 	/* Set dcr fsize to max address */
 
 -- 
 2.43.0
