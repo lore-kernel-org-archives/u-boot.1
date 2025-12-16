@@ -4,91 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB8CD609B1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 15:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D647D609BB
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 16:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D20CD839A5;
-	Tue, 16 Dec 2025 16:40:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D917B83106;
+	Tue, 16 Dec 2025 17:12:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="e/MB5q5J";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Lw8pZ/UT";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="I/LmtEuE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CA98839FA; Tue, 16 Dec 2025 16:40:46 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 1F9468334F; Tue, 16 Dec 2025 17:12:02 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF32F80107
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 16:40:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 250378042F
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 17:11:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dW1NW3BGBz9tQ8;
- Tue, 16 Dec 2025 16:40:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765899643;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DXKab9F3F3etWB1hFsv89qoG24NDmUafGPaM9hoc3y4=;
- b=e/MB5q5JXm2Ro7Hsq0MG3bqs/2615zvYejmMC3auV8VmZ6z5cUbUH6+iPA3I5HH5GMZew8
- s6qIE6/VFyUivDC0lUYVC6nCQTgLF2e3f3RblPQ+2XdZqFlaz7MQ0Zikk6VVMOJC8LIKTG
- WuCUsoxXntw4uwwIFtWaC4QiqXJktmgLWbclLYQL7sjnHOYl6kVC7IR0gXKuRO7aNNLdKh
- 9JXXFvxz0/Z1mL+YYuYlPRMuoCYceI7hmwl7Fapm8OJ3dfVEX419TBjHrQiWwgwC3vhKC1
- 4Am1M2Hb3t8zO3Vo2YDuFfjaHfdOD9tRpr+FB3e4GbC3pn6ysmD715TOp2gKJg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="Lw8pZ/UT";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <19f3a927-0fb9-4faf-a6a7-ee4a8e758bbc@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765899641;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DXKab9F3F3etWB1hFsv89qoG24NDmUafGPaM9hoc3y4=;
- b=Lw8pZ/UTntkBOT8mU4iYZaUWZQX6j7zJwOXFlJ3aypUA02PBJlGHGyF+uC013w3UwYr01u
- 6sUpMzfnmo5oda+ixwc8x/TgYUFZYBrAinZf1f7jb/81H80og4UfGUAV50Ux7LkQBLYibR
- rS8CkdYM/1AX6UAjyjFIq9Z4hwYOTAK+eHElB7untE7nGDqMSlqeL55aXgWuar0p1zYA67
- ApPTl+MXqlBlHbWqnooTwS+iD2J6rXI5fUCQebuaA3N2tT006YMCw6bOLaTheAYDVZ2bGf
- PnfyQ1Nv58WUJDF3qv9UlGvPLQ4ac9aFSqF/P44htGbQ6H7EG2zowpNt9XUklw==
-Date: Tue, 16 Dec 2025 12:19:36 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8106=6X=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1765901517;
+ bh=XsVHxK9N23BrzlF2RrHC55BPsZIGm57lc3Ai7n+j944=;
+ b=I/LmtEuElm/pMJo1BZ37IJv1103MqNmNzyo+NGvHzc+eeMGnGnt4D+elIay2dOsq9W5mqNl/0
+ vqCKUDgbhW2JI4dNqh2H2VMiFYIVnULXLFwbXq+N+Ho+AuZGhdntubuV325gxCsORsHBgNC3QK9
+ 9vz62Dkxv3getdlnFeOROUtj1CZD9dQ/X6C1Gxg0+sjeKYYgjggoH/+2SfmJ7imLfeda0a+lI6M
+ gYoCqk6WwQ+gVh6f7mf3FV9+ffGa/kALDDuUeydlxbsqlWRy2kOPc/1dh5D992LFFFPTjnSCusV
+ wm7cKiHVtSByzSopbKOZLo/+33go4XMS4kg0vdq72wfw==
+X-Forward-Email-ID: 694184c5fc3bc9a5657cf9d8
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.0.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <b729be6e-3091-4aa1-af7b-266a94bbcc66@kwiboo.se>
+Date: Tue, 16 Dec 2025 17:11:45 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v1 4/7] usb: ci_udc: Convert driver to DM_USB_GADGET
-To: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Marek Vasut <marek.vasut@mailbox.org>, Ye Li <ye.li@nxp.com>,
- Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lukasz Majewski <lukma@denx.de>, Sherry Sun <sherry.sun@nxp.com>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>, George Chan
- <gchan9527@gmail.com>, Simon Glass <sjg@chromium.org>,
- David Zang <davidzangcs@gmail.com>, Alice Guo <alice.guo@nxp.com>
-References: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
- <20251216-imx8ulp-v1-4-504115a53020@nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] rockchip: make rksd the default format for SPI
+ images
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Xuhui Lin <xuhui.lin@rock-chips.com>,
+ Heiko Stuebner <heiko@sntech.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20251216-rockchip-more-template-v2-0-6372e27fc689@cherry.de>
+ <20251216-rockchip-more-template-v2-2-6372e27fc689@cherry.de>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251216-imx8ulp-v1-4-504115a53020@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20251216-rockchip-more-template-v2-2-6372e27fc689@cherry.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 24d0a0643f3d1387845
-X-MBO-RS-META: on8d8cfyy77kto8oh954rxj1z155atm1
-X-Rspamd-Queue-Id: 4dW1NW3BGBz9tQ8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,62 +80,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/16/25 7:38 AM, alice.guo@oss.nxp.com wrote:
-> From: Sherry Sun <sherry.sun@nxp.com>
+Hi Quentin,
+
+On 12/16/2025 12:26 PM, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 > 
-> Convert the ci_udc driver to driver model by using the uclass
-> UCLASS_USB_GADGET_GENERIC. The clk and power of USB controller and USB
-> PHY both are initialized by parsing the device tree nodes.
+> I believe (hope) that the new SoCs should now have this fixed and not
+> require the "hack" implemented in rkspi format which almost doubles the
+> size of TPL+SPL (idbloader.img).
 > 
-> If CONFIG_DM_USB_GADGET is defined, we use the ci_udc driver in DM way,
-> if it does not defined, we can use ci_udc driver in its original Non-DM
-> way.
+> It's known to be fixed on RK3566/RK3568, RK3576 and RK3588(S) (according
+> to the DTS setting the mkimage format for the SPI's idbloader.img to
+> rksd explicitly).
 > 
-> Signed-off-by: Sherry Sun <sherry.sun@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
+> Since I do not have any board with a bootable SPI flash except on RK3399
+> where this work-around is required, I simply invert the logic by having
+> rkspi explicitly set for all SoCs that didn't and remove rksd from SoCs
+> that did. It doesn't mean that the SoC actually requires rkspi format,
+> just that it's been the case until now (maybe because nobody tested).
+> 
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->   drivers/usb/gadget/ci_udc.c | 352 +++++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 348 insertions(+), 4 deletions(-)
+>  arch/arm/dts/px30-u-boot.dtsi     | 12 ++++++++++++
+>  arch/arm/dts/rk3036-u-boot.dtsi   | 13 +++++++++++++
+>  arch/arm/dts/rk3066a-u-boot.dtsi  | 12 ++++++++++++
+>  arch/arm/dts/rk3128-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3188-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk322x-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3288-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3308-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3326-u-boot.dtsi   |  1 -
+>  arch/arm/dts/rk3328-u-boot.dtsi   |  1 -
+>  arch/arm/dts/rk3368-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3399-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk3528-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rk356x-u-boot.dtsi   |  1 -
+>  arch/arm/dts/rk3576-u-boot.dtsi   |  1 -
+>  arch/arm/dts/rk3588s-u-boot.dtsi  |  1 -
+>  arch/arm/dts/rockchip-u-boot.dtsi |  1 -
+>  arch/arm/dts/rv1108-u-boot.dtsi   | 12 ++++++++++++
+>  arch/arm/dts/rv1126-u-boot.dtsi   | 12 ++++++++++++
+>  19 files changed, 157 insertions(+), 6 deletions(-)
 > 
-> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-> index 4bff75da759..154a3ab7f22 100644
-> --- a/drivers/usb/gadget/ci_udc.c
-> +++ b/drivers/usb/gadget/ci_udc.c
-> @@ -7,9 +7,17 @@
->    * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
->    */
->   
-> +#include <asm/arch/sys_proto.h>
-> +#include <asm/arch/clock.h>
-> +#include <asm/mach-imx/regs-usbphy.h>
-> +#include <clk.h>
->   #include <command.h>
->   #include <config.h>
->   #include <cpu_func.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/pinctrl.h>
-> +#include <power-domain.h>
->   #include <net.h>
->   #include <malloc.h>
->   #include <wait_bit.h>
-> @@ -22,6 +30,8 @@
->   #include <linux/types.h>
->   #include <linux/usb/ch9.h>
->   #include <linux/usb/gadget.h>
-> +#include <linux/usb/otg.h>
-> +#include <usb/ehci-ci.h>
->   #include <usb/ci_udc.h>
->   #include "../host/ehci.h"
->   #include "ci_udc.h"
+> diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+> index 2f726b0aaba..7385de7d6ae 100644
+> --- a/arch/arm/dts/px30-u-boot.dtsi
+> +++ b/arch/arm/dts/px30-u-boot.dtsi
+> @@ -27,6 +27,18 @@
+>  	};
+>  };
+>  
+> +#ifdef CONFIG_SPL
+> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> +&binman {
+> +	simple-bin-spi {
+> +		mkimage {
+> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
+> +		};
+> +	};
+> +};
+> +#endif
+> +#endif
 
-Can we reduce the amount of headers included by this driver ?
+This is probably wrong, rk3326 use rksd format.
 
-[...]
+Also seeing how the rk3308 has a later model number than PX30/RK3326
+I would guess that this also applies to RK3308.
 
-> +#if defined(CONFIG_MX6)
+See USB_GADGET_PRODUCT_NUM:
 
-Can we somehow reduce the ifdeffery ? Use if (IS_ENABLED(...)) for example ?
+	default 0x330a if ROCKCHIP_RK3368
+	default 0x330c if ROCKCHIP_RK3399
+	default 0x330d if ROCKCHIP_PX30
+	default 0x330e if ROCKCHIP_RK3308
+	default 0x350a if ROCKCHIP_RK3568
+	default 0x350b if ROCKCHIP_RK3588
+	default 0x350c if ROCKCHIP_RK3528
+	default 0x350e if ROCKCHIP_RK3576
 
-[...]
+> +
+>  &otp {
+>  	bootph-some-ram;
+>  };
+
+[snip]
+
+> diff --git a/arch/arm/dts/rk3528-u-boot.dtsi b/arch/arm/dts/rk3528-u-boot.dtsi
+> index a18d33b3d36..f21d76b0e6e 100644
+> --- a/arch/arm/dts/rk3528-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3528-u-boot.dtsi
+> @@ -30,6 +30,18 @@
+>  	};
+>  };
+>  
+> +#ifdef CONFIG_SPL
+> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> +&binman {
+> +	simple-bin-spi {
+> +		mkimage {
+> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
+> +		};
+> +	};
+> +};
+> +#endif
+> +#endif
+
+This is wrong, please drop for rk3528. I have commits pending for adding
+proper SPI flash boot support on RK3528 once the E24C model lands in
+upstream linux, see commits at [1].
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3528
+
+Regards,
+Jonas
+
+> +
+>  &cru {
+>  	bootph-all;
+>  };
+
+[snip]
