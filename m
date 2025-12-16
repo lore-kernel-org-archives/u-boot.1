@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2461D5C0F2
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 08:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA417D5C0FD
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 08:47:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 947DC836CE;
+	by phobos.denx.de (Postfix) with ESMTP id D5CE483734;
 	Tue, 16 Dec 2025 09:46:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FEVlAjx2";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="nDGG0wyl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EB76837F2; Tue, 16 Dec 2025 09:46:35 +0100 (CET)
+ id 1FCAB836AC; Tue, 16 Dec 2025 09:46:35 +0100 (CET)
 Received: from SN4PR2101CU001.outbound.protection.outlook.com
  (mail-southcentralusazlp170120001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52B2B836AC
+ by phobos.denx.de (Postfix) with ESMTPS id A896683700
  for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 09:46:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iaUDSeis2j9Gcbsvi2U30oNR08TrmLRNVZ7Ydv5XnBbgkhLnn11kcFhzHk5ONA6ys6hQCiKZv2kSkKIhourGlw5o3oZuTYDxbaMkOZTfNuDJwl/n+aXUEDP0Lyth1j7N3btP6hmFxCPuV6AIA5jAiUn4CJfU2lgaju/jPMzcC8UGN6aQoHbZxmpqztoDSMWD0tOjqAyCZQh2ilrCEbe4+G+1qHOYPMIVzBjEOSZkn7P6OkCdCtwZDBs998DnGRPkxWkPKRQJxCy8uMEpk6mnGABX5QWEK2fLsVrfb8PH68R/82qam1WfvE+bUOumj48Rx5Fy/+flnh27X9Y9f61SUw==
+ b=IHeenjo8gs7mMjlztKh3myyUV8ZxGW88QrR+eZRXJlylm1IetZPSnxuVlpKPTzaeIlOauDayUyVYoPtGR8pLjBIj687E3CybA3PIi6dWtiDg1e0LF7qgC+nG+Jq3+sYWgMwJqfrSB02mzPcz/jvtcR2g755H+J9nLr+zpQeRHyWTR5bv6zU0LI+KxYsIh/TeqhHqhJv+vzvSB+QHvnoIGTJQZpLJFU6iDCLSe4MrU5jgekdVXmTcCB1bgn6T0QCU7wwIjYHozldcyJougTHzXU/ROT1dfHJtdKLlaWFkoG0tg3Yp5ROcScQJ8RoAaPZ7FAxE3JZVxn0qyXcmx/n6nA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8gaFNqA/aS7Q+Fxvg2+voJZWtWWVunkbIFm9cDxtT3w=;
- b=NvRisX4S0u+2Tj1B5zWpGxRWozo6Zv8AigvEkWkRPLw+/RGepQnRD8xVPFOjrLKIeyq9RZOjGLU8Pggd0utQhdqbgmclXdCI8Ppsl9ukh5OdMuwZMukR6Y9aHTYw6jEvGFZYuQ2BEfvEM0uZ+HKhgR0brSOQXWS8kG4CyrewBWWgUZmNV9r3gLpw0B2D7KGc+Lzs9eyxlLWVrRuJyxd1V/y5kDnEZRe/lqXc29z1GphJokzCV0Clh6K37A2+o/pG1roVXuWLfuJlh0UqTI7mRYyK4kkxvlwxYVJjHlKKOv3pi0wArYDQqhg6jNTiS62c08nBgrHJXgNBu1WjDpmNvg==
+ bh=ByyCxGpd1WNzYBDcOQjM8NYQPBexGuHC6KtfDLHZe8Y=;
+ b=f0yqCHFKPvP9YBImCXo1zLSmmVDqsmWIrWZK1y0r9hC1UY3lcHRqWSFirPY/6AgmKK9Ev4xGYQbUDfPUlJfnu1j1XOgULwxXr+LO2nOvvIudi5vEReSBFxg2gFbPnI2SR9FgxVAEcDCDQ+FfwgD7pybxMlmtcjAZG+0Tk25vGGyd90sPZQFMsZccmCFm0r4MpUBHyIjGzN5cO/+f/rMtzddib9ZP0mls0CyjxHIpF09bD6+5zIyzR32BJL/MQIDgVOn8jJDL/WGEh4ujItDhXTkStEE8gJaBn/XsCsre/Z4vBGweyb7bjs6C3qv63mGf4GoFbCHsAtLRNG9XR47g5A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8gaFNqA/aS7Q+Fxvg2+voJZWtWWVunkbIFm9cDxtT3w=;
- b=FEVlAjx2XHj/+aE60hZpYW37HOa32afYiTuXT/DMvGJQxvVoBksxGdmoolY5pGFIOKISrUb82q+YycIBTZxxaC1cFgu2Nag9lg4BOrg+Th4fakphaLJ5L7F3Ib/D9ZZi1pQdexswu+V51cFXq5wDIYCVRUezrmpMVh4ZBEA0VBswwLFKnV06s/+aM9q5f66/eeEuR6JomkZi47XWBTZX1SSUb1Ay4I523a06licg+QxVSaAQi9eVAas/M2JhCWv6OrIuo6ldhx2xaqQKy22D7ozVLljIl1xJmQ9z9AlzqBmSJJhDth2guuFHrxH1ZlLm/Mny1k47JoTCvIWpucf/qA==
+ bh=ByyCxGpd1WNzYBDcOQjM8NYQPBexGuHC6KtfDLHZe8Y=;
+ b=nDGG0wylSeI3ULQvqmlmQMs91P+lXY+/Tg93vRerceiUtw8xyHe+uiiT5KFomM5Yf6cN2acHeh0TuWh6ur5/XwAiHIJ2EeqALzEJa9okB1xwY+Z0LRoYnO9mh2UDBLOAtm+ALjcu/5L3yphNfSvO0A5BYzPGBHamAqwA2hUCDqNC8FnHTdKuJXRPMIGzjGdoPLhtIecNjNrMJVTXLmgSJGUr8p1GbOEUkQtm8Ebc3ddmNdpgFNQDtzRLsoSEQffFOIGNEA96LxIKpzNjeKJEzRnKTc7Lk1Bs0xrWctN9LjrqtoMMTS6eNqMOM1NvXuyyU5x5BkzRiaxOfCIrxewXxQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
  by DM6PR03MB5081.namprd03.prod.outlook.com (2603:10b6:5:1f1::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Tue, 16 Dec
- 2025 08:46:29 +0000
+ 2025 08:46:30 +0000
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::d020:3494:f031:fc29%6]) with mapi id 15.20.9434.001; Tue, 16 Dec 2025
@@ -61,9 +61,9 @@ Cc: Marek Vasut <marex@nabladev.com>,
  Brian Sune <briansune@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 3/5] ddr: altera: gen5: Add DRAM size checking
-Date: Tue, 16 Dec 2025 00:46:21 -0800
-Message-ID: <20251216084623.19589-4-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 4/5] ddr: altera: arria10: Add DRAM size checking
+Date: Tue, 16 Dec 2025 00:46:22 -0800
+Message-ID: <20251216084623.19589-5-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com>
 References: <20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com>
@@ -75,79 +75,79 @@ X-ClientProxiedBy: SJ0PR03CA0248.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|DM6PR03MB5081:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e10b63c-344c-4576-2641-08de3c7f9aee
+X-MS-Office365-Filtering-Correlation-Id: b37ce78d-0968-4c60-898c-08de3c7f9b36
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dECc8I94KG6ynJ5chfF+u0dlrOS1YzKwWipU7JmOdCv9JDyzWdf1PDFrtJMF?=
- =?us-ascii?Q?1hNZptkOCKUCCrTm2BXboJ4R2xELarQWje85fbMOZDTHorL6V+kM+u9qov71?=
- =?us-ascii?Q?lfIKqGhjyLp3dwCj+wlWmgU02HReH02Xc7czMJTs2p+aPe8lbZY5P8t8N/xl?=
- =?us-ascii?Q?LKN+Jn/uRiOmOVItg2acsJ3ky5gFaGjyAMhm0+Ubox/CxTkws7FADTPQJ+hX?=
- =?us-ascii?Q?eTd0XfnSq3jNvbSbhns66cVz4kyyX9gNHp++AhfI5h6gFSyNZxEGlbimybLz?=
- =?us-ascii?Q?6EldlV7CtP30d9hZutqvk/ZQOUwqQjlHEPfIkqS4HGNH1s/G/6DwvIDQKop5?=
- =?us-ascii?Q?9KlvH+ZFt2MvqpLOTxIlUssvFcUnaX75+97DaXRyD/K0i0DfdlhZ7SOQFtPs?=
- =?us-ascii?Q?Z3jTedegCBvT3mnWjbAuCdH4L6oRRGcHX/cHkVUlfresE1Y3jcUUeEeviNvF?=
- =?us-ascii?Q?s8LbqMW/iQZ7m2e6Y46s0tZjwyvLhGe2lxNe0QWjRdRfMinlyF17XwJMalhZ?=
- =?us-ascii?Q?JKHJOivbVRCOgL4z3SyiRPO4ftdK+kNOHfoG9PC7Zln8YkVC1FspKCLgSsqd?=
- =?us-ascii?Q?23hxPLa9L5MT0ScORd2KR3CQUCPyFqQegTg8eOZy7ajykTUNHcQFIHHsGGo9?=
- =?us-ascii?Q?NYfeGZJXpEfS1/Yzg00N2VZ73XdqUe1pnCCzYe7lPBEu1GHUGggHCdSecaa6?=
- =?us-ascii?Q?u5RiOE8UPapUw0sCY0dS2tHEVgDU+s+3NCaw461Fp9eo+48AU1g5d2fkedsJ?=
- =?us-ascii?Q?zfv91WyIkrIbHbwnYsJFizxUMqZdy7hnOntULy2aqOIOFLPfbutt0xZUuK8b?=
- =?us-ascii?Q?EuY80/o9p1mBG/CqREocW56N+u0YTpLXxzsariobAYnTOX2a8bY7XgAvZ9GT?=
- =?us-ascii?Q?LOkD7fEJyvLRTsXjRRxwvDr1tEW++A2x1JbrTeGYx6tNfGCcgSYlW61ESURC?=
- =?us-ascii?Q?JimjD2CY3+gUUgkn5TyKgxApeRApLi0+v0oJ9LccGDjDtR85vA/rOO7ttcE3?=
- =?us-ascii?Q?STX9DPDbbXIK119ec/GZca4rwq5D9/rtx5OQJQ3Hungq3PLNaU/24D3+pWx/?=
- =?us-ascii?Q?wJA9McwggpWxMXxuX+oxlCpqVrRM3G6NsTCfLZ0COjC+X6ESKcKhJrLRojrN?=
- =?us-ascii?Q?O+c9kcX4CGvV5s/yCzzYkCpGJNzhaS1H8dfwjQn74O68ELRMR7klqUQ10Oq9?=
- =?us-ascii?Q?vnFiWXXw/Fh+W7zeatr0KgrXerTV/OzHKzBsIJ6KbVRVXXoH9SZ/7eJHYfdz?=
- =?us-ascii?Q?3BZ+KnolpE6ZjOxva4o8JbJLrOFyyjUksEsR9HJuYRDkY/oE1qdjkcdMbF/Y?=
- =?us-ascii?Q?z+SMFTg89UdQXpm0Zt47U+P7DgXFIANS3GzwEMq1I6OFoiB6udhMEd8/iWh4?=
- =?us-ascii?Q?xW5mMbqI77x/+WxOYpUgXAnhvbSaOpyz3kGLrl93McRM9h1AxlGcPl7V5icy?=
- =?us-ascii?Q?x1QKnYHsuu14rBILkMdenvQU2LuQtsev?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cmXMeVyRZGjgkMPQXDqwd69zyM1XNn/n0AtWQiky6pG5SDmqmfg2oHt+lox7?=
+ =?us-ascii?Q?9oYe0F9YM6L2c3HgLMI96vUYixc/FvoXnZg8+v1T1+TGEfFHPsKPv3zZMaxh?=
+ =?us-ascii?Q?pETLVZ0kyhYkIU86CedlID/ui1ElIh7/PXE3k5Qpad3tKEq0zqVd8mjnG/56?=
+ =?us-ascii?Q?d6DlLzOuXXNlTxMUdXigh2C1clnPvUIP700EsUJzdHYIayLQIyKl5E5z+uNv?=
+ =?us-ascii?Q?Pyn3SQ0VseaAGvG7jqxfJNt2VfmuCuvPR0UK1Ywg/YGMHneYezRB7F47WITj?=
+ =?us-ascii?Q?2w2vHiABIULp7FKdJ5H95BnqkM/+Q6rodBiU8SPgDbbANaHCtRF0iWJu5GYt?=
+ =?us-ascii?Q?rYODXZeRGlvLZLBpzWpyzLyhI2ydfThZc8zLWFsWzh5pf50rxS8JauJYqQ5W?=
+ =?us-ascii?Q?cmcg0Ln0Q9YnXxBHVm/yn5DyMJj5O90/zjCmCzED9LaT2+w5b91MS4tckgDg?=
+ =?us-ascii?Q?B7iOTQgVSeBrNmIo1C1qrcdxO7jWR9fVLmLBFqmRGvnPAbdBdq0VWAgKsPCj?=
+ =?us-ascii?Q?dafPhzJgRBKPQJYqEagnxK4dQ91x1fFO99w06Uc2zkQcGY9fhKg9x9GfzT5v?=
+ =?us-ascii?Q?0RDsfmWXqpZM0iQEQ99xa7o8vBgZxRR6BVFRX6zNa0I2H37w3FQ1MdbwrD6t?=
+ =?us-ascii?Q?G7bppjFEOFabae/QvSu5YuM6LCbUcmFTroZ/4LPCHRaoYTlzIXS421Irpiv2?=
+ =?us-ascii?Q?+LSBvpsVXMLCPZ/bZej/d7Xb2CgomTJTqZOp70xGhN89xkg6vFDf8UKnZQdT?=
+ =?us-ascii?Q?YjDfb98eNGpV6fBsnnKclIILJC0Wyr7iLhL+OxyBLldemMr+B471EZSnGXZK?=
+ =?us-ascii?Q?X3R9hkiu2b+5NPylgB6Veml+E4t1rTmk1+Bf7Dgl7MMMfjyZzOSdloqUK6Z8?=
+ =?us-ascii?Q?VZe10PGMI5zAkero5DzV3DIoE0iyfKD6aTJY+Uo7kEOl8/Uie3D/hJFUCC0m?=
+ =?us-ascii?Q?8M8lwPvKE/3yx6KqlIIUF+OzJPUTX2BVcW2zqulNyBBTSnypqOufxp1Klgn1?=
+ =?us-ascii?Q?84plEk8ljIP1nrAVlpBvzXITqCqxG74XaLN0/bUGWl3qO5hqU1olYAJORsJ8?=
+ =?us-ascii?Q?YcbpP8k7uKpJM/LB3v+aMkLYYzv+IsaxyOybbdHn8OWMUhk5hkj7qbR59+mW?=
+ =?us-ascii?Q?W8m/xP8sV2PG28QPtcxC8LW4/QOvM2wcS4JUZlpe0hpHYYJvF4MNnfxUUDy3?=
+ =?us-ascii?Q?HzqVQekhbrAOmna4NWp16SrzXLbhG+k0YHrvJtJ7xsDLoLY3c8/ZlcH5Ybhl?=
+ =?us-ascii?Q?MqFzVDW6AqCgxRZfpb0VaYoeu8JbS1gtszqca3PDyAw8WANCVas52FdmbcQl?=
+ =?us-ascii?Q?uEOpzL6uJAJHgsKuysC+yQyTozzuRDIKJCahQivXeUwEs9Rz3Djsdz5Vc/0x?=
+ =?us-ascii?Q?mM5KlYKBR3nxljqNAYOWIjlqDN6lPHRhPSy878L7u4CZ9hI65EooU4E9sVmR?=
+ =?us-ascii?Q?cPVXLapP1s1fb2CS9nvHU3VKX7u6jrVs?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XEFQBZfM0XE9+mha/Lziz0vczaHbZf+E6xUTVZht5bvtbk2FeR2FxIWfOFRp?=
- =?us-ascii?Q?AlhkETf+ojh1O6Ew87JHuFhqVjuTczOkyxIiVq4DUkvzJS6xZQFnaUBt92ir?=
- =?us-ascii?Q?1yogKsQGY4LHelq/E8uy5L6bb3JaOytsiyKC1CPhT1191EabyUvtZR0RHfX8?=
- =?us-ascii?Q?MQMZNgLUK2Qzr1tnkryiWc2bgio69CBA5oayGIShYyRMFqxqsWH0Gyt25qj2?=
- =?us-ascii?Q?MjmUdgSO6leDrMODUNtqX3da6HyXSvxbktGzwEW1/owZwjIbV6mda0RpfxFE?=
- =?us-ascii?Q?MxF+wovk7jJehKNHaq6DhbKSh94RWIetD7EMXqgLQPNWMr5+ACGHJr5qSJJ7?=
- =?us-ascii?Q?ke6LU8RKqWsYiyehAt0HAWQmQArKomxdH6nOju8nigelCEZmJKxZLVn2NvUG?=
- =?us-ascii?Q?YyRyIlZhgCV1TzjZ0Y14vxj8wgVZRseOZELiUwQ0IoV9n7CttfNIEEvDTc17?=
- =?us-ascii?Q?kU2C4HHebNSS2LXKtNhPTJhzdZgV5VyS44G7sKCWTcGkpP0IKsXqrFFm9g+M?=
- =?us-ascii?Q?fnuuvNBhVM6qP1yf2EzwBWAEeabCVYvyGevW58pAQY35eDPqf9BHPbSSLo+s?=
- =?us-ascii?Q?tOEB0TUC2NI/V/zxb19l1IRi8ZFlsrSgLcWncaxlZpeLZ1ksu13trtWZqGm0?=
- =?us-ascii?Q?0a8m87NZyWcQkvOIo4lwQ6ICHhvNgH4DSq7aibFlc57sdNJTeqUXKAWGNmZP?=
- =?us-ascii?Q?4o+v9K295D+BGIzH0Y0e3R/BgcW0k0s3Kr9TQfGOSLTXTxHJejwiiV08Vamy?=
- =?us-ascii?Q?BW+s+OZtQPMBxpms1KE3GMYCIzleQmcaiwCTOlzKX9p1H31RaLYCQV2kKkXJ?=
- =?us-ascii?Q?3dyJu1R2OgDqz3ES4JLwalyBrapLIWAP2jnYA4eydchQVyTLKyFPVADn6dJs?=
- =?us-ascii?Q?FuOx0CAca7tRh5dnFoln4kENK/HKM5A0Crx4PvxmLBKX8KUoKvbyRrLjrwnB?=
- =?us-ascii?Q?tLRrwdSe2dXhsA+qhiv5f8k1J4m7Q9bUoWifzbeMEJudhfSVBBfMArMpk0h3?=
- =?us-ascii?Q?u+U0uOwhEIa98Fbus2XLugSCTnslDIoiMt+JcBsGNI2ZSGUN2qepoGjdXd9l?=
- =?us-ascii?Q?p89QYFEGeuDQCIXdxVTGr64UUjOU7mG2x4m/tt+tgVIHsprMd+K1OuzeTE4h?=
- =?us-ascii?Q?ObSVI6J5FyDIEIwhZM8NAA/qOXpOO+oAANlytoKk/sA/NBs3OgHByfci9FD7?=
- =?us-ascii?Q?fDFA3sRdKWD5t//oX0+MUz/Va69qXP0O9xRhbq2IzjDkNEoAHAG1l7xxCiBS?=
- =?us-ascii?Q?BzbqcU3HcjmlgId08N4/2Qw+DhUqE317m3YfP5K2STUEERa6F/d5Ra0Gna3i?=
- =?us-ascii?Q?yaWzPWbDW+vnyKkjVWPFx3ICflcFmKuGSCT/BAf1Id3FuMFxzXecMPgBNa3b?=
- =?us-ascii?Q?TbkwALegUyMSbNrWw7NN7KFbD618f8FKhicnDxcgjqLTZwdLshV6v09Hpysd?=
- =?us-ascii?Q?Sm4np3YUKm+pQXyVr7YJtxE5REuSuBLSgjQLjExNmzEKQqRBr+Te+kcDQ3Ao?=
- =?us-ascii?Q?UKv5bc+9FoFkA5jwt3DmVJ5YxzEh4SMkjwmPZXLgA8B+gdMUZNxEAItoZR9m?=
- =?us-ascii?Q?5tcrMC4LJCJdCHxoBsEUW2PJeMpAEHE38vZUD8pIAsWKhh8w8S5LBWXieGbQ?=
- =?us-ascii?Q?yoYj4/BzAIRcP39ThfXjZTTexqzEhLs1ip+gYWu13g/W7sB3/zPwKWvnQdbz?=
- =?us-ascii?Q?GEiv4FIgkaLl6tfupyllXtPh2Juq52AzCNF8MX9QTVjiAv8np2qS77aGfjDw?=
- =?us-ascii?Q?vGpOmMemAtz8Mvx+4PXU0zOVLuCvSvc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kgBn2g/Jb2nT/Q5gKLPSB4CglAQNU/jufq46bBULoY5eZB7lPkCXMQei83yI?=
+ =?us-ascii?Q?Uv0acRhOaRR6xpd6GN3yi2Mu8fDRsQA2/godXwL+9koKkISQjnP0wZGZZDmU?=
+ =?us-ascii?Q?5giVNPKkuBK17/SK3WLj9iRtqbAksjokvrz0fXM+NlRIy4wxWJl/Nd5jXp5O?=
+ =?us-ascii?Q?gmmQiGD4b8ndZkMfYl37GT8pmPeDUWiBdybdftsvqfmPXlHx1OxG5NpUePjR?=
+ =?us-ascii?Q?HE7VkuyNE6Ua/xbsm2qJ41ivADXG5Z4VdVL43a8t76oJuffOFkcQugk+M2BH?=
+ =?us-ascii?Q?T7HfU3fv3/0KziGkvjPxpbAw86o/JoX03DRzbAfOZzlFMRcUYD35bbNkJrVi?=
+ =?us-ascii?Q?xfAzEIiS+rbIIT41LlGIHPTj6Eimbz9puMbGcpJttvtVe12b7+KlYMTrOEno?=
+ =?us-ascii?Q?S8VkEuXLCmdH82pZkEpVWyM3UkLqBKKbf/BJTqqu8hrAljeGjdP8+4oTHNqL?=
+ =?us-ascii?Q?vNPfoWRM8zSldSD2vONl13anSLDLj+N/FB7BOcYdwu7BWU3Xf1yJv5umH97X?=
+ =?us-ascii?Q?MsGygd5Y/bH2roCD24rfznOE01swv+3IshCnQijWIj2iW4ZcHDIRD7VSjEza?=
+ =?us-ascii?Q?H7OI3TM6b6GgbxIYDhIlag0mxXl1cq/OeTElKmTtq94cSN+NbZe/d5LkV+un?=
+ =?us-ascii?Q?nUYoOyBTrXbIfwl5q+xSNvPTxEJ9qD88j3ctz4VsbdsI9+WKosr0VX7ncqLD?=
+ =?us-ascii?Q?3PI7HS9lkenf09J8xEy0mwZDOrGfONz+JWJDWJoNBLbO8olTVrOTfSiwxeWd?=
+ =?us-ascii?Q?JaN3YB9cuU7k7rEwFecMiHC74aYRGcF4rgo5eq8Ss1lLMXuTxtc/w+2wLRt1?=
+ =?us-ascii?Q?ya77EzB6V24d3iX87+5vWiOLo15XOtOvwU2LRbE8TYW7jk8EVHcNLyyzlSvw?=
+ =?us-ascii?Q?Cou7kp7F8xJBP4O5onYiRhNjQvr6p7xvqysqkPeEOUB2jF017M0C0KeQQk0r?=
+ =?us-ascii?Q?UbMvPTDKwk8dDxlQhjyEybaXfqCgWmL6yvLt0q2zVuJiVCdMuU31D09HSV2r?=
+ =?us-ascii?Q?ZEURlG3jdDUeuYr1knjFaR9xqYHFsqhGppkemhbF/DHpr7gHGPGAwpdGD36I?=
+ =?us-ascii?Q?g2QcEq6NZWr5rsT5YzH6y75r/UvVoTuenFyOA0Jiwq45a5J5LzeH/f3cjDZ4?=
+ =?us-ascii?Q?RzC6gYXhApOIrcQkqhD7e2BErH1qQTrcr0X/AhNoS/XJ9cRK8UFCmYsrtESE?=
+ =?us-ascii?Q?b33aAu1lMfzcI6lpd9trBLPFZpyxttRBiZcNofXdQWIy6FrAUcFzuhXiRHUL?=
+ =?us-ascii?Q?iI2klbPO0OjxhZUOt3C3tr0xnmcj6ixgl+tcpzovM53hfC2mJWbMURzS8gxZ?=
+ =?us-ascii?Q?q+K4x8fEoTPnlMlZHMtIAQlEnU9h0QjmLF6h61rzNsy77bLkHD/FXT8Hmixq?=
+ =?us-ascii?Q?hySUJz/NeuxPYIVUtW4AK+nmMdIGbksr5IjXX8FBgSdkH7BTnrg4A8MS/PB5?=
+ =?us-ascii?Q?LwTk6va5IYcWsEAq9ydirgIl1/H8pqxleLQn/dtd0EIvFruk/lQi+HJh4KkY?=
+ =?us-ascii?Q?iHSGw/Uc5AtHQ1wNLxrdE57rpOyYKf3pQuPf8w/CXYPmAISOPzXb8QwYVWQa?=
+ =?us-ascii?Q?F2xizlge/u6fcU/gAmmMaZGeUzAIUA72yr9HbD/j6s4pRwn4aL91WNtLcqSv?=
+ =?us-ascii?Q?bJmEbPn18Os2GV3EqQKEh5PPST/98LmLrGXDedaoWvxyrFDxtmgOvTeb0WTT?=
+ =?us-ascii?Q?X+agwVv4Ro9X6SGB61tnrEobeiNADxpHLbpAQeA4T45hL1hImZCq+2ekLZMX?=
+ =?us-ascii?Q?pAAutYtzA/eT0CdH9IT0g8q+oiOkYYM=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e10b63c-344c-4576-2641-08de3c7f9aee
+X-MS-Exchange-CrossTenant-Network-Message-Id: b37ce78d-0968-4c60-898c-08de3c7f9b36
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 08:46:29.2168 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 08:46:29.6678 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EDOwEZ6hcJwdVepXah8tPleLuAu/ukCAGdqoi7nhI5a1XBHD4Tv17dAyvBjoL8oiX7eV6WTAwNJNR6pw9PLms2d7PsZUmJ65E0KCuwZrPAU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: e5m0w4ds56nY5ycXhrJLYShbyEfNABcfl+J55C8zmvAQZA5MPKvjZ0OiN94z8iOZ3KUIF51qpibFDCEKoXYo/LQvUChAj+ETH+ylzs+xX1Q=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5081
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -174,59 +174,73 @@ Trigger hang if DRAM size from device tree is greater than actual hardware.
 Display warning message if DRAM size mismatch between device tree and
 actual hardware.
 
-get_ram_size() uses size from device tree. So, it has consistency with
-other device families.
-
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- drivers/ddr/altera/sdram_gen5.c | 20 +++++++++++++++++++-
- 1 file changed, 19 insertions(+), 1 deletion(-)
+ drivers/ddr/altera/sdram_arria10.c | 32 ++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sdram_gen5.c
-index 7a0a043557b..d5892850da7 100644
---- a/drivers/ddr/altera/sdram_gen5.c
-+++ b/drivers/ddr/altera/sdram_gen5.c
-@@ -6,6 +6,7 @@
- #include <dm.h>
- #include <errno.h>
- #include <div64.h>
-+#include <hang.h>
+diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera/sdram_arria10.c
+index 0e3a1d42f34..d75c464f42a 100644
+--- a/drivers/ddr/altera/sdram_arria10.c
++++ b/drivers/ddr/altera/sdram_arria10.c
+@@ -8,6 +8,7 @@
+ #include <fdtdec.h>
  #include <init.h>
  #include <log.h>
- #include <ram.h>
-@@ -615,6 +616,22 @@ static int altera_gen5_sdram_probe(struct udevice *dev)
- 	sdram_size = sdram_calculate_size(sdr_ctrl);
- 	debug("SDRAM: %ld MiB\n", sdram_size >> 20);
++#include <hang.h>
+ #include <malloc.h>
+ #include <wait_bit.h>
+ #include <watchdog.h>
+@@ -654,6 +655,22 @@ static int of_sdram_firewall_setup(const void *blob)
+ 	return 0;
+ }
  
-+	/* setup the dram info within bd */
-+	dram_init_banksize();
++static void sdram_size_check(void)
++{
++	phys_size_t ram_check = 0;
 +
-+	if (sdram_size != gd->bd->bi_dram[0].size) {
-+		printf("DDR: Warning: DRAM size from device tree (%d MiB)\n",
-+		       (u32)(gd->bd->bi_dram[0].size >> 20));
-+		printf(" mismatch with hardware (%d MiB).\n",
-+		       (u32)(sdram_size >> 20));
++	debug("DDR: Running SDRAM size sanity check\n");
++
++	ram_check = get_ram_size((long *)gd->bd->bi_dram[0].start,
++				 gd->bd->bi_dram[0].size);
++	if (ram_check != gd->bd->bi_dram[0].size) {
++		puts("DDR: SDRAM size check failed!\n");
++		hang();
 +	}
 +
-+	if (gd->bd->bi_dram[0].size > sdram_size) {
++	debug("DDR: SDRAM size check passed!\n");
++}
++
+ int ddr_calibration_sequence(void)
+ {
+ 	schedule();
+@@ -689,11 +706,26 @@ int ddr_calibration_sequence(void)
+ 	/* setup the dram info within bd */
+ 	dram_init_banksize();
+ 
++	if (gd->ram_size != gd->bd->bi_dram[0].size) {
++		printf("DDR: Warning: DRAM size from device tree (%ld MiB)\n",
++		       gd->bd->bi_dram[0].size >> 20);
++		printf(" mismatch with hardware (%ld MiB).\n",
++		       gd->ram_size >> 20);
++	}
++
++	if (gd->bd->bi_dram[0].size > gd->ram_size) {
 +		printf("DDR: Error: DRAM size from device tree is greater\n");
 +		printf(" than hardware size.\n");
 +		hang();
 +	}
 +
- 	if (sdram_is_ecc_enabled(sdr_ctrl)) {
- 		/* Must set USEECCASDATA to 0 if ECC is enabled */
- 		clrbits_le32(&sdr_ctrl->static_cfg,
-@@ -623,7 +640,8 @@ static int altera_gen5_sdram_probe(struct udevice *dev)
- 	}
+ 	if (of_sdram_firewall_setup(gd->fdt_blob))
+ 		puts("FW: Error Configuring Firewall\n");
  
- 	/* Sanity check ensure correct SDRAM size specified */
--	if (get_ram_size(0, sdram_size) != sdram_size) {
-+	if (get_ram_size(0, gd->bd->bi_dram[0].size) !=
-+			 gd->bd->bi_dram[0].size) {
- 		puts("SDRAM size check failed!\n");
- 		goto failed;
- 	}
+ 	if (sdram_is_ecc_enabled())
+ 		sdram_init_ecc_bits();
+ 
++	sdram_size_check();
++
+ 	return 0;
+ }
 -- 
 2.43.7
 
