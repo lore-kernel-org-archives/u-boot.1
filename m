@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 300DBD5C0C4
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 02:48:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA83D5C0C4
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 02:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419F48042F;
-	Tue, 16 Dec 2025 03:48:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B702F80FA1;
+	Tue, 16 Dec 2025 03:48:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j7fi4+k4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YZQMl+Nh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D03280433; Tue, 16 Dec 2025 03:48:08 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 0F4D58036B; Tue, 16 Dec 2025 03:48:12 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C45A48036B
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 03:48:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9BF482BF2
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 03:48:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-34ccbf37205so303870a91.2
- for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:48:05 -0800 (PST)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-7e2762ad850so4256329b3a.3
+ for <u-boot@lists.denx.de>; Mon, 15 Dec 2025 18:48:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765853284; x=1766458084; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765853288; x=1766458088; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fgweoYRLktKIVWs67kEdaagNoCg0Nqmbut69TrbwGLc=;
- b=j7fi4+k4WXKGAIi8dKvAH4LrnFIKmoBXkOES6M4e5x3FuXlkfBXw9wMbpH76vgtS+b
- e2UCIRUV6LC3WL892t66SWWeg5SDv/We4fdk7cK5NBokP9jJiXahbDNGn2Vqli7h6iQM
- 9jdM0dw3Espm7snfbpa7n5xvRxqO4Ivh8MAxW3owbTjVjnFA9gO0jGga5BNhKNfdDIah
- fajXlPiC/bCNlEkQNRd8m/CvHeLi4jDUo/B9b/6zJcckHzI5N8AKZmyF2UYYelMIPPuZ
- 14C4nC8QT7+ILCsMC7S7UWZBuB58kAvywujZ3fal+qU4kBLT1kyUTwyk+JzKuW8l/73T
- BJ6A==
+ bh=6ecbjpQymzWhM5INOx/qY6mXIEdSbwEBhRyZ6tTIERU=;
+ b=YZQMl+Nhki7/siFmP9RolrCQ/BSC5n8WqjZv1s0UHgfkjSLLbFuNKcDwHkg6fS0Cft
+ UeuftkgVPOLDnPG4nmybv8aCqSkVRvk10cPjlmNK2HHilDLHj41Vm/VMGJbJLgcrk6ss
+ kYqpZNPc+uYRopg9IA5lI0Iji3EA8imZDDj4b9Pq3bFttAUUZl1nZ/m1dUtmhN9hPgZa
+ 12+QckPkC9AU5pYBrpzNDo2FVGQRMjXft688Zfv3sCYTvRxTBbFA0tU5t06YPb1tlZCo
+ k2kZEJgNsvoZwsN2os0U2oTThxx3ANGmARYu8i57MT/d0TlOcHfvMhNipPJNo7DxoX0k
+ EWqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765853284; x=1766458084;
+ d=1e100.net; s=20230601; t=1765853288; x=1766458088;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=fgweoYRLktKIVWs67kEdaagNoCg0Nqmbut69TrbwGLc=;
- b=HNhK/Y+RPx7Pcj7vj1qVUxYhzyusKyDAJYOW9waeQ/N2dUttGZGoK+6/CkK5rBqydJ
- 9wsbaBZKlCePwpUFsnkaAZj0+uuAYUZC1gqxTkVurOBEU4TwhpbR/5fhc2SV99N9TacI
- QGVXVC3oE2mYvyxCbCQuecf3741VgTwHR8K2vZ9+QJrwdbtaUeBKwZx20/Ei4KyZ09R4
- jKydM92ymVzldBL4bIt8FFANFcXYwf6yhDPsZcegEfP8id3fbI9VG4p5ohsP2r9c19Za
- 1SEpivbYVMvZ4bo6we1rK89l7TzRbgxgARquG92mUp7M5dgkuZFLzRp9lpaS26dwM00V
- sYXQ==
-X-Gm-Message-State: AOJu0Yw+z4W2iK19WzmPc3Q+76oVAvSfBjEpkPNo4rArtOt1Mkup25LL
- yBF5DM8kN1123PTMp6tt4p+jI1Pv+Mf/vsOOzvTC+9TQQc/jsfZiPQTC8RpIbJGt
-X-Gm-Gg: AY/fxX7TgDrxmYC1UKt2kcW0P5FOuZ54q9Qd1lAnO00+8Rdb2NX3Nxo1/XZAeG6a78z
- +5egcAXpKHFAbML6kzCojiKwrVnjmYwOVj4bmTC1ArYOG+Wrt1Xt81W4PDJrIAhHgZV42k7a6gq
- ic8na1cNG1d4MpQMHUyKRXeBPdcmjuGmbLSDmYduJfDDh51j7DmJ+D1tYJbPD8uq5Kw6d+qQTiy
- f7ywTlk5mHtEBhFiIvFqTS73NcWNCunV4ltN4viSqjHAjbPVNdIE9Yj7e20yYZzRZAQa+BoNPoP
- LPplG/aFL5d0c8O71Aq+su6Xi34G1BZjLvvp3IWDKkmKdq3VUW98BLTobDgLoiMCD04J5ml/Vnv
- FldOrROaAh9FdzyaludPnm2+uilLpNsJfo23iypU0zgAODIeCWuSXgpfqhWik/zbZ0fzzPJkQzj
- tK828VPlXr0JnRcDb0DMkviQ==
-X-Google-Smtp-Source: AGHT+IEgHpXYgUA8dSvtKelDgudHHA4cp4qF+4gknYD3/ErN7is6epr4ui3chZKFSlHfSqvcSMe/7w==
-X-Received: by 2002:a17:90b:2d46:b0:34c:6124:3616 with SMTP id
- 98e67ed59e1d1-34c61243815mr6476967a91.27.1765853284160; 
- Mon, 15 Dec 2025 18:48:04 -0800 (PST)
+ bh=6ecbjpQymzWhM5INOx/qY6mXIEdSbwEBhRyZ6tTIERU=;
+ b=EcLYWIZ7rqLJOwo5azVt4ttiuSD7mn2fGe5vLkqXm3s0FXXuxUe9Z/bsinJn3XZjUH
+ S+xGbkjYyFz9aFNiP+W7LPuWy50pV5q8ufObXdFbuQSE+cx7fcByGRVxfFEpxPQUo2Cc
+ 5E7i4wJp6gPmPN/LyckbBq98IXuKeu3fh7Kk/MOG2/gphtip/LAdpgOG3r3Zr4La78iz
+ LX2bro4hcR2jLIMlzfLkyGyG5X7xKl+cJfD3mVN+7bgA8x69ZtNoubvl2wxY516pFl+h
+ dm8+3RI1ngoSOmRif80ha0YiEULTb3kuzJlH8v/tWolHES6HvsMScnCTTjo0NULzSKql
+ 4hkw==
+X-Gm-Message-State: AOJu0YwmuzOkfDhn1lV/nuTaN6FeQySMOd+2ld81D0uDO3LBzhFcp1vV
+ Lzb89Is/LDPBCqJTRfEgcJPiBikEbEltAa3EqSCVYyNAUend4cjDfwp2NjFVchEQ
+X-Gm-Gg: AY/fxX59wtSXkxmHs1W4vw9ABjS7snspTIF4fJflx9GvYcrCQOjFdlWksWfZUQFM7zd
+ U05mZnXFhjKfIzE3MZwZKByzFLCAJMOk5GbZb0zeGyn/GN1i//dncpMM4Mr7pZg8o1K9C8er0pu
+ rhdE/tYfeK6UEzNBzX9z3omYi2hJj+SdsftMaMx7LY22y6LL0+WF2cHIv9No0XZW+kzqXQ2W3kk
+ jIV/nDhNSipdCiHnJvmJnE2zhhQ99tq1c2A7qNRLIJymW3UGpw+Q4k0dkkFDsMuYilJuNuau1G9
+ PgBTOhWKI/VpwW/69S0JG+95Vz6+49PuAJgGRuFUl94DSZOy5A4vU2c7Q2QDMxwZnrFkia1N1o0
+ qBvmgLvcZxbshvr34K26bImcHPC9s8Bv2ZTDeE+5wyIeqqryevEYEF9Ii/KCR6OrFQG6H5+9npN
+ veGJ7SgvCCd/5XvXGBQS3lja3rwod4Ni6Z
+X-Google-Smtp-Source: AGHT+IGqtDBjldmdc5bt+vkNpkDoVzHCIU08viEmw+A99vjqJtE7xPLuNt48vGEpVCCkagZ1wmTYiQ==
+X-Received: by 2002:a05:6a20:94c7:b0:357:78fa:b338 with SMTP id
+ adf61e73a8af0-369ae77903emr13134269637.35.1765853288123; 
+ Mon, 15 Dec 2025 18:48:08 -0800 (PST)
 Received: from cs20-buildserver.. ([2402:7500:502:d4da:9fd1:87b1:de1a:188c])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c0c26eb1d05sm13401606a12.13.2025.12.15.18.48.02
+ 41be03b00d2f7-c0c26eb1d05sm13401606a12.13.2025.12.15.18.48.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Dec 2025 18:48:03 -0800 (PST)
+ Mon, 15 Dec 2025 18:48:07 -0800 (PST)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com,
 	jim.t90615@gmail.com,
 	trini@konsulko.com
 Cc: u-boot@lists.denx.de,
-	Stanley Chu <yschu@nuvoton.com>
-Subject: [PATCH v1 2/6] pinctrl: npcm8xx: Add smb11ddc pin config
-Date: Tue, 16 Dec 2025 10:47:25 +0800
-Message-Id: <20251216024729.1031306-3-JJLIU0@nuvoton.com>
+	Ted Lee <xrli@nuvoton.com>
+Subject: [PATCH v1 3/6] pinctrl: npcm8xx: Remove incorrect spi0cs2_pins and
+ spi0cs3_pins
+Date: Tue, 16 Dec 2025 10:47:26 +0800
+Message-Id: <20251216024729.1031306-4-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251216024729.1031306-1-JJLIU0@nuvoton.com>
 References: <20251216024729.1031306-1-JJLIU0@nuvoton.com>
@@ -102,48 +103,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Stanley Chu <yschu@nuvoton.com>
+From: Ted Lee <xrli@nuvoton.com>
 
-smb11ddcm: connect SMB11 to external DDC pins
-smb11ddcs: connect SMB11 to internal GFXDDC
-
-Signed-off-by: Stanley Chu <yschu@nuvoton.com>
+Signed-off-by: Ted Lee <xrli@nuvoton.com>
 ---
- arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi  | 8 ++++++++
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c | 2 ++
- 2 files changed, 10 insertions(+)
+ arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi | 8 --------
+ 1 file changed, 8 deletions(-)
 
 diff --git a/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi b/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
-index 6f933355d9e..cdbe19ccf50 100644
+index cdbe19ccf50..cb57e1bcfd8 100644
 --- a/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
 +++ b/arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi
-@@ -1060,5 +1060,13 @@
- 			groups = "vcdhs";
- 			function = "vcdhs";
+@@ -544,14 +544,6 @@
+ 			groups = "spi0cs1";
+ 			function = "spi0cs1";
  		};
-+		smb11ddcm_pins: smb11ddcm-pins {
-+			groups = "smb11ddcm";
-+			function = "smb11ddcm";
-+		};
-+		smb11ddcs_pins: smb11ddcs-pins {
-+			groups = "smb11ddcs";
-+			function = "smb11ddcs";
-+		};
- 	};
- };
-diff --git a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-index c960ca3393d..0d089110df3 100644
---- a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-+++ b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-@@ -166,6 +166,8 @@ struct npcm8xx_pinctrl_priv {
- 			     213, 214, 215) \
- 	FUNC(spix, MFSEL4, 27, 224, 225, 226, 227, 229, 230) \
- 	FUNC(spixcs1, MFSEL4, 28, 228) \
-+	FUNC(smb11ddcm, MFSEL4, 29) \
-+	FUNC(smb11ddcs, MFSEL4, 30) \
- 	FUNC(spi1cs1, MFSEL5, 0, 233) \
- 	FUNC(jm2, MFSEL5, 1) \
- 	FUNC(j2j3, MFSEL5, 2, 44, 62, 45, 46) \
+-		spi0cs2_pins: spi0cs2-pins {
+-			groups = "spi0cs2";
+-			function = "spi0cs2";
+-		};
+-		spi0cs3_pins: spi0cs3-pins {
+-			groups = "spi0cs3";
+-			function = "spi0cs3";
+-		};
+ 		smb3c_pins: smb3c-pins {
+ 			groups = "smb3c";
+ 			function = "smb3c";
 -- 
 2.34.1
 
