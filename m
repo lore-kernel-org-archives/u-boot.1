@@ -4,68 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22984D609D2
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 17:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F32ED609DE
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 20:18:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C5388392C;
-	Tue, 16 Dec 2025 18:57:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 947B88392C;
+	Tue, 16 Dec 2025 21:18:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IvuQmTh1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z5I/izfa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 314A083979; Tue, 16 Dec 2025 18:57:27 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7CA4A83979; Tue, 16 Dec 2025 21:18:05 +0100 (CET)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D218334F
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:57:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8908334F
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 21:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8106=6X=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1765907843;
- bh=efIU7GE9RwwSSchZxM1k+LC1w8TmeY3HNf0l9UeHQiQ=;
- b=IvuQmTh1Q0tj8mQU8UAOMRgA+R0Z7ZYjB+Pl/S1HTfK+Yb0rR7tx8dOIWp3POLzse3frX/qkT
- /qvl/I3TjgJgDs/WMA5a0jAkDrZpsrj1eHw2krH0Su41dt5e/115tpj2AAZeMojELQcivsmyFco
- 1PSPz3+pBytVkj/j7rHTl9D46PPddwDtENPGCUjmG9x0bSHYeNb9UcFgFPVO9X1CkE/lz3GpR2F
- nr369X3Sqo5iGbR8LFjT5spaG0L5j6bJpgepMZwaWohrVJtEflxQUWsjMuhjgzy7lF+twvszKrm
- LEJenZQJE3zTS6FnCpspIKgjPYJc2X6KUSWnoNmmV92g==
-X-Forward-Email-ID: 69419d7ffc3bc9a5657d3ea9
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.0.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <f5f29e68-aa8f-4534-bc3c-d50b02f0e495@kwiboo.se>
-Date: Tue, 16 Dec 2025 18:57:15 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-c03eb31db80so3570413a12.2
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 12:18:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1765916281; x=1766521081; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CT1Q1h+UcqjvARwk/PPUYmdm3V0ISmpxOBJyZXFXRq0=;
+ b=Z5I/izfaCmpLmJvTw/lcS9ijecm6fEWFznisyneAJmwg1qXVeh0Rt7awUnFq0ifl2w
+ JRxT6HtZaLSyBagohInw7Sd2DBi8VeLzJlf1MaBjIXxum/B3EECP0g9I9MuXD2V1PHUH
+ OCtaTbEGcQxmRbYCOKH1dMrVirrsXgpghLIRa1+vC81INVdxeZCkaluLBjIhdgpbVgox
+ ZRurWIdq9+Jh2wBGdWj5bHvOuqEM1vnPkczNb7y6s1abz+wimcCGpiwhnBdC1xvx8vCF
+ ftau4qJcdnwzNx+5FRZtOJhiH+XXBkxlJr9turzbwmAW9yH9M+XTXImz+UStXmNNahU/
+ Q2aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765916281; x=1766521081;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=CT1Q1h+UcqjvARwk/PPUYmdm3V0ISmpxOBJyZXFXRq0=;
+ b=VhO9lFyrV95z1Nneu6xQFe2n8XbqLbQHl8o0hcXG5wX+9xQ39TvtnwqRuEtARt82Up
+ 2Lqd25q3z30WI3400djIcF/YVJ/BJU72c1TqI/u/wNZcWzC3/JYcZ67TGW6XbmMhnEc4
+ t985wFsEQHDEG7MX3ZkUmVfVMFCKVctzQNTyDPT3sTNbnNmv4VWsaU+rWASDRDSCaNEg
+ mgo0aZaOSESFmA/lKQkRu1dz9o0UknscS+mthTbw0wlqx0unKojPsusi224jvQD8bpVT
+ 1vhwukJeFRzQ/AhbfDDVKLp4PrJiEoDVc38VC7aSwPiEdxr9xBUspIuBdCDL3dcPq4wc
+ O+PQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNwHiJlJxCyHfDYjFGwVDGq17NVyuXY8guT9sfIqfIgQB9lFHWO9NI7st07akdKH+VHDcf69Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRBdZX+XAR80P/UbCS3xFB7nDBrKkXUau/CIR6LIkHF3aB1Sho
+ 3OycTl2/TEYVsZKacjGqu/Y8/qK2NbNYm2BwRs/VlCqhnf1P+KFm+x/rZ+s57I2cj52/e9ZuX/+
+ 5L8Yu7p58BfEB4f0juhfRrpEUzu9Btfj+GyP4E2HWzQ==
+X-Gm-Gg: AY/fxX710XWwdgoaoXkc+wfRIyFyxMbTZ0GIvSKMM40Cgf/VmxYp/NSLRBzyzAASS59
+ 8bxj2es/rdhwVacH3GeIPhw5oAsOz8lmo6mY2ynyiFHJ85F2IPwvC0g+y/bCB+l5r/lOV9Vfcte
+ Lsgv4+Ii0J4XLJskjr9/CJfjhMbtQK4OHWXpAdFVpqaBHB9a8hItuc6HoF69yjoUWtgqGdwAkd7
+ 0mSlWzyhpH4hemzdCKHTEkFhTPjelqni0OYBT6kxf2GL5kU3XAi7F+yYL0jwQoGhmkfQvl4Sw==
+X-Google-Smtp-Source: AGHT+IEf9xGR1mNGgRZ1fr9oewmb0BS/4JANUwj1bltBHFybVYwhFRw76pv8vXg0Gm5txBnjHhSk2j3f0qmZxKEcdA0=
+X-Received: by 2002:a05:7300:d211:b0:2ae:581f:ce5 with SMTP id
+ 5a478bee46e88-2ae581f0dc7mr1127980eec.7.1765916281365; Tue, 16 Dec 2025
+ 12:18:01 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: make rksd the default format for SPI
- images
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- Sumit Garg <sumit.garg@kernel.org>, Xuhui Lin <xuhui.lin@rock-chips.com>,
- Heiko Stuebner <heiko@sntech.de>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20251216-rockchip-more-template-v2-0-6372e27fc689@cherry.de>
- <20251216-rockchip-more-template-v2-2-6372e27fc689@cherry.de>
- <b729be6e-3091-4aa1-af7b-266a94bbcc66@kwiboo.se>
- <7286807c-3846-4b15-bf20-deaae13d25ce@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <7286807c-3846-4b15-bf20-deaae13d25ce@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+ <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+ <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
+ <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
+ <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
+ <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+ <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+ <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
+ <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
+ <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
+ <CANp-EDb+Txnrb15KuXBof6PMZp02WZ1MOy-LkrGoW-OLE8mWCA@mail.gmail.com>
+ <CAN7C2SA=X3Pk9ehcVWDcugUzJ2wD-8ooeA6-=zGnVa-4nQ11Mw@mail.gmail.com>
+In-Reply-To: <CAN7C2SA=X3Pk9ehcVWDcugUzJ2wD-8ooeA6-=zGnVa-4nQ11Mw@mail.gmail.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Tue, 16 Dec 2025 15:17:53 -0500
+X-Gm-Features: AQt7F2obSiQunP6Kq30PVCrDUMp9Jhb_DhB3PYq0Y8maV3oEKXAzlMOZNVk3kus
+Message-ID: <CANp-EDaG1vdok9S-LQuKuK9-fU2=ZbW9qRfEtruGSJMsZKWJ+Q@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
+ "Chee, Tien Fong" <tienfong.chee@altera.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,179 +111,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Thu, Dec 11, 2025 at 2:15=E2=80=AFPM Sune Brian <briansune@gmail.com> wr=
+ote:
+>
+> > > Issue 2:
+> > > For DRAM size larger than 1GB, when w/o O.C. and using as stable
+> > > setting as possible.
+> > > Even it passed the calibration it will not cont'd boot when
+> > > sdram_gen5.c is turned on debug flag via "#define LOG_DEBUG"
+> > > However this issue is not found on 1GB nor 512MB.
+> >
+> > I was able to get access to board with 2GB, and it boots successfully.
+> > Memory calibration completes, and subsequent test with u-boot "mtest"
+> > basic memory test is also passing.
+>
+> For your 2GB case it is w/o CYCLIC and WDT right?
 
-On 12/16/2025 5:35 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 12/16/25 5:11 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 12/16/2025 12:26 PM, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> I believe (hope) that the new SoCs should now have this fixed and not
->>> require the "hack" implemented in rkspi format which almost doubles the
->>> size of TPL+SPL (idbloader.img).
->>>
->>> It's known to be fixed on RK3566/RK3568, RK3576 and RK3588(S) (according
->>> to the DTS setting the mkimage format for the SPI's idbloader.img to
->>> rksd explicitly).
->>>
->>> Since I do not have any board with a bootable SPI flash except on RK3399
->>> where this work-around is required, I simply invert the logic by having
->>> rkspi explicitly set for all SoCs that didn't and remove rksd from SoCs
->>> that did. It doesn't mean that the SoC actually requires rkspi format,
->>> just that it's been the case until now (maybe because nobody tested).
->>>
->>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->>> ---
->>>   arch/arm/dts/px30-u-boot.dtsi     | 12 ++++++++++++
->>>   arch/arm/dts/rk3036-u-boot.dtsi   | 13 +++++++++++++
->>>   arch/arm/dts/rk3066a-u-boot.dtsi  | 12 ++++++++++++
->>>   arch/arm/dts/rk3128-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3188-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk322x-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3288-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3308-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3326-u-boot.dtsi   |  1 -
->>>   arch/arm/dts/rk3328-u-boot.dtsi   |  1 -
->>>   arch/arm/dts/rk3368-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3399-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk3528-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rk356x-u-boot.dtsi   |  1 -
->>>   arch/arm/dts/rk3576-u-boot.dtsi   |  1 -
->>>   arch/arm/dts/rk3588s-u-boot.dtsi  |  1 -
->>>   arch/arm/dts/rockchip-u-boot.dtsi |  1 -
->>>   arch/arm/dts/rv1108-u-boot.dtsi   | 12 ++++++++++++
->>>   arch/arm/dts/rv1126-u-boot.dtsi   | 12 ++++++++++++
->>>   19 files changed, 157 insertions(+), 6 deletions(-)
->>>
->>> diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
->>> index 2f726b0aaba..7385de7d6ae 100644
->>> --- a/arch/arm/dts/px30-u-boot.dtsi
->>> +++ b/arch/arm/dts/px30-u-boot.dtsi
->>> @@ -27,6 +27,18 @@
->>>   	};
->>>   };
->>>   
->>> +#ifdef CONFIG_SPL
->>> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->>> +&binman {
->>> +	simple-bin-spi {
->>> +		mkimage {
->>> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
->>> +		};
->>> +	};
->>> +};
->>> +#endif
->>> +#endif
->>
->> This is probably wrong, rk3326 use rksd format.
->>
-> 
-> Yes, in v1 I said[1] they probably are the same, but I cannot test it so 
-> I leave it as it is today. This patch does NOT aim at fixing anything, 
-> it is simply inverting the logic such that for any *newly* supported 
-> SoC, the default will be rksd format for SPI booting, and not rkspi. For 
-> current support, nothing is changed in this commit, if it currently uses 
-> rkspi (as is the default if unspecified in SoC DTSI), then it'll 
-> explicitly specify rkspi in the SoC DTSI now that rksd will be the 
-> default. If it is using the wrong format, it already is and thus can be 
-> changed in a separate commit. This is intended to be a zero-sum change!
+Correct. Both my 512MB and 2GB are without CYCLIC and WDT.
 
-For boards of most of the SoCs that you flip to add use of rkspi in
-<soc>-u-boot.dtsi do not have any defconfig or implied/selected value
-for ROCKCHIP_SPI_IMAGE and are also missing necessary
-BROM_BOOTSOURCE_SPI* mapping in boot_devices.
+> For this may I ask what DDR3 speed you used? 400MHz?
 
-To me this zero-sum change is just adding lots of unnecessary/unconfirmed
-lines to <soc>-u-boot.dtsi files that is not going to be included anyway,
-adding the rkspi to socs that regardless have broken SPI flash boot
-support make little sense to me.
+Yes, it is 400MHz, at least on the 512MB board.
 
-I would rather you just flip for the socs that have working or at least
-a possibility of working SPI flash boot.
+> For 2GB there are different die configurations 512x16 itself also come wi=
+th
+> different forms. If possible can you provide the actual die part #?
 
-Currently this is following socs, based on U-Boot code, Kconfig and
-Linux DTs.
+Unfortunately I don't have physical access (nor schematics) to check that.
 
-- px30/rk3326
-- rk3288
-- rk3308
-- rk3328
-- rk3368
-- rk3399
-- rk3528
-- rk3568
-- rk3576
-- rk3588
-- rv1126
+> The most puzzling part is this. It only dies on the U-Boot stage.
+> The ddr sequence.c was somehow cropped to a point for only size and
+> speed for the file comments.
+> All boards or cases that even by luck passed the calibration phase on U-B=
+oot
+> do not have any issue on all stressapptest nor memtester under distro.
 
-Adding the possible correct use of rkspi/rksd gives a false sense that
-SPI flash is expected to work for the other socs.
+I guess I have been lucky then. My only real problem was that
+CONFIG_TIMER_COUNTS_DOWN needs to be enabled. And it was quite an
+adventure to find that (using git bisect). There are other issues,
+such as watchdog kicking in if there are too many printfs(), and also
+early uart access is broken.
 
-> 
-> [1] 
-> https://lore.kernel.org/u-boot/5f45b4ed-d01e-41f8-a05e-c617039228e0@cherry.de/
-> 
->> Also seeing how the rk3308 has a later model number than PX30/RK3326
->> I would guess that this also applies to RK3308.
->>
-> 
-> /me shrugs. Not tested, won't guess, not worth it.
-
-I have been told that this 2k for each 4k page read bug should have been
-fixed sometime after rk3399, so far this has been true based on my
-observation, especially for socs using sfc/fspi controller.
-Unfortunately I have no reference to provide.
-
-> 
-> [...]
-> 
->>> diff --git a/arch/arm/dts/rk3528-u-boot.dtsi b/arch/arm/dts/rk3528-u-boot.dtsi
->>> index a18d33b3d36..f21d76b0e6e 100644
->>> --- a/arch/arm/dts/rk3528-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3528-u-boot.dtsi
->>> @@ -30,6 +30,18 @@
->>>   	};
->>>   };
->>>   
->>> +#ifdef CONFIG_SPL
->>> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->>> +&binman {
->>> +	simple-bin-spi {
->>> +		mkimage {
->>> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
->>> +		};
->>> +	};
->>> +};
->>> +#endif
->>> +#endif
->>
->> This is wrong, please drop for rk3528. I have commits pending for adding
->> proper SPI flash boot support on RK3528 once the E24C model lands in
->> upstream linux, see commits at [1].
->>
-> 
-> Maybe it is wrong, but it is the **current** value. If this series is 
-> merged after your (yet-to-be-sent?) series, you'll need to rebase to 
-> remove the args line. If it's the other way around, I'll rebase like I 
-> did for this one after the RAMBoot series got merged and remove the args 
-> line (see what I did for rk3576 between v1 and v2), no biggie :)
-
-What you are adding for rk3528 is wrong, and SPI flash boot is currently
-not enabled/working for any in-tree rk3528 board, because of this I
-intentionally left out use of rksd in rk3528-u-boot.dtsi until SPI flash
-boot could be confirmed working.
-
-Can you please provide a fix commit as part of this series in case you
-insist on flipping current state 100% in this commit?
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+Ralph
