@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47974D609D3
-	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 17:29:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BB0D609D2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Dec 2025 17:29:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1252A83984;
+	by phobos.denx.de (Postfix) with ESMTP id 535B8839D7;
 	Tue, 16 Dec 2025 18:29:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EEuYwDrW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bzx76Cg6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D91839D7; Tue, 16 Dec 2025 18:29:13 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 4BB9B83979; Tue, 16 Dec 2025 18:29:13 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD0458392C
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:29:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A379383984
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 18:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-65b68c8c649so1278122eaf.1
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 09:29:08 -0800 (PST)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3f13043e2fdso1558279fac.1
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 09:29:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765906147; x=1766510947; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765906148; x=1766510948; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rG3EqpuxPbZI0s9VQn2f8BtNT7b24+WOMD25j3FyccU=;
- b=EEuYwDrWcdlMzqJXN06oRfs0Jdd8/iU1B3sQ+6/koFqlZqfNCsVN3qKz+J+Rfe3vUs
- Te4prUBJ6c21P75MSe73+3x4uuiXBfjGLoJ4yE6jEewG3++ciRiDZWoUrzCMfsd+MXpU
- nnXE64f7fAT/G+IMlRhvevlsdd3rAGg827CDg=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FlXfuqpwMYckG5taJzvM8sEgHJG03GHaItlTDmpND/U=;
+ b=bzx76Cg6pA52GZKDKuhLXrVjbo0qFhUCJjeH+TzWaldkGS9R4LFGPEQmzblPlnh4+u
+ wNcGyDf1nouAUmxgTlq1NsZAYb9dA0n/zdu8zPc1XFEpCu8JerW3u8Rk+/Pfx4rFcZ/T
+ ttINet4Vqfse02UtxGOu+T1JVL1N/f4fpBAV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765906147; x=1766510947;
+ d=1e100.net; s=20230601; t=1765906148; x=1766510948;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=rG3EqpuxPbZI0s9VQn2f8BtNT7b24+WOMD25j3FyccU=;
- b=lg47sJK4TjDBm9LZa4FKBME5ehfHQL4saOcaDIplIZAfCoQIrZRgKCP8igbWFih07U
- MH6JUuAqhi0nAEjAbEqXBqtID7tCr+AfBg8/Og8wkqPn9ts2aXV9wY2oqvHNgs/lhmFE
- yH6l5e6ykmvAeLsfWfzu7kWZBwoTA4BA0WnmdFW3WqR33TLl09Z+56Yxt+Y9SBDu2eof
- osskwLhsJgZogTvuqKNNQ0AZRd2hS1NBuVBVYNsF1lvC5PK99D3l8syI0MEgF0dQ++G7
- XDg/+mR1XwQqHgqt30ZbnGoyTPab3g35SUzqmaWftlIwFX4PDrpbrh+o/fAYXnfw7oou
- 8CPw==
-X-Gm-Message-State: AOJu0YwlZ1EJGM3KFePvk0Y0PFc9SRFP0KHT3mm1OHhp1ozDuut7htya
- uCOyS+KR0NZzxl+En75+jC20OZ3qOvA1cLHUcD2aftbA3PBJ2dx16gmx1nD5v/gNXFQ=
-X-Gm-Gg: AY/fxX5Z+oIkE1dV61xwm4v+p40IcIyD4UXonjnoAKQ0/Lz40fS/IaBuIvetIt89sSk
- n0MCe7FWg4wraLKIJsGgduo0qxNDEIXpWbFTC/0BWKKzs9W/g7nAt54PHeKVN/IP0fLrmM6YcTP
- GM7dRBdvSe9mON6MteeC/JT5T+LiRXQyhg2nhKpmCVIs8yDc3xG0DoseF9cR3aK52QZtV34o34l
- 5rsMxQIaD4urr1ZMYjHTvzQ2IdUVV0wHgqXfbvKfmyjTxU+dwtZqAqdj/m+DQKTDb5AX+P1a5oo
- vZz7Hx3Is9t3CPjAI0JIIf8uqAdtglm545BgPe6lcG5INZSZA2AYkJhzASpjogxlfQNJxfMPUUz
- z7pcdg031WDTB29pIGwN8tlxhbIQRO3qNvPzNnHcvRIVNP7LcnxBGk0rxkbutspyqDOkkvS964H
- VY+iyx7An2lyRhK/6v6IU9KqpPAzyKa3vinTZ2SLRxC32r4e/w
-X-Google-Smtp-Source: AGHT+IHO2CQCq0gVeo0YGIwDMTQ9pujHmoBE55w+kgqdhzlDZF1lE+3MpyoYPqlNL02JU7tqwaK8jw==
-X-Received: by 2002:a4a:e907:0:b0:657:432e:a820 with SMTP id
- 006d021491bc7-65b451684demr6600171eaf.1.1765906147468; 
- Tue, 16 Dec 2025 09:29:07 -0800 (PST)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FlXfuqpwMYckG5taJzvM8sEgHJG03GHaItlTDmpND/U=;
+ b=JbklaLDwua+CkAvfICfTu4UDybUM/jletfHGd3drIQ7JQuqoHpGJszYfVb2UITzZSg
+ U/YPiqbRkr8tGSv+tpG7S/lQgDWhnq74uYzC3BRHivtTvmmxWxB60oE5lIX5WyXFZLNY
+ cvMduko+Xox4YLEJX9wqxnSrQZ6rTnD19xPNB5X/3pwelIlN3XjPvOIgFfB7X+jXqwQn
+ 7jUsyHlQGdy0NCRPl6nGagiVmjtJb6WxzitX88KiwSVjPkOsqO4ykvcZ3UU9mvSNSeey
+ jmJkgIPMNcqE5IxaDcSuV0o5SCGtZw0K5dzaSV7twi7CzPsQeXjBbg7FSMOBPal9S5v3
+ 5l8w==
+X-Gm-Message-State: AOJu0YzZ8G4G5BEn/MH72Iklq1l9HsSqKWqpstP99tCvgCmHDtgObvcj
+ s6AoDGkCKwrA/q2PdkZkjTz3mJUtq3sHQ91GYSK7vvsVsmcdkc7pw5pQTMZuj3sQ94tyOOG/tYp
+ Aj6deqBw=
+X-Gm-Gg: AY/fxX5VL8mpd0y4cF+V/uqBNg/t4Z/7a2cM04sC4scV9fvwojIeUTdC/EnxZBSYxLC
+ M20qWyufv5Oe+0KkWS/FywCEvu+1qAADSIiew2zhSL7ippF6BQYBG1vdRovoJ7+nt3n54hryWa0
+ 6S55JT5munrLqOdY8JVEjJuemOBDG9IzxNXUnAE7qRn7G1A4zK2AKt+acwCrjmVwH+1fzSccXLf
+ 3VQichzsPEswMKkT4yIu0R07PF7Z77DIaNsNaVmNwl1U54DmvEuEYPhXpUJKaA59Ey3drkCyIA0
+ Rta+1MtndYCYmtkkxKwhauWw/Dx0Y/7RRqm9D83SnDnWruNJeqjilvMni1/xed3p7GeOIx4qvxA
+ rMJDQ0VTDqYT+w4uAKOwHiAIXzjmRXle5aqxVOn6fYelB5WLFK4Tyqt5mURc+oZ+jdbdJpgaZVF
+ 1eo8JFtr+p+LI+T5Lp8fnhl5zEucsdd6poIVyvXfRbVA4CCGan
+X-Google-Smtp-Source: AGHT+IHY+zy8OYzGn+xRje3+KeJIf3PIve9lfRB+SEgCQZy52TNoxOvyvni0enpdMSBU+mT1yumeNw==
+X-Received: by 2002:a05:6820:81ca:b0:65b:3c3b:699d with SMTP id
+ 006d021491bc7-65b451f310cmr6179772eaf.64.1765906148302; 
+ Tue, 16 Dec 2025 09:29:08 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65b86c32d5dsm526682eaf.13.2025.12.16.09.29.06
+ 006d021491bc7-65b86c32d5dsm526682eaf.13.2025.12.16.09.29.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 16 Dec 2025 09:29:07 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
-In-Reply-To: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d98f857@baylibre.com>
-References: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d98f857@baylibre.com>
-Subject: Re: [PATCH] clk: mediatek: remove duplicate '@parent' field doc
-Message-Id: <176590614659.2175876.14713216222453991636.b4-ty@konsulko.com>
-Date: Tue, 16 Dec 2025 11:29:06 -0600
+To: u-boot@lists.denx.de, Jonathan GUILLOT <jonathan@joggee.fr>
+In-Reply-To: <20251211212039.31628-1-jonathan@joggee.fr>
+References: <20251211212039.31628-1-jonathan@joggee.fr>
+Subject: Re: [PATCH] cmd: part: Fix part argument description for `part number`
+Message-Id: <176590614759.2175876.9905037537056231404.b4-ty@konsulko.com>
+Date: Tue, 16 Dec 2025 11:29:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,19 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 15:05:27 -0600, David Lechner wrote:
+On Thu, 11 Dec 2025 22:20:39 +0100, Jonathan GUILLOT wrote:
 
-> Remove duplicate '@parent' field documentation in struct mtk_composite.
-> There is no need to say the same thing twice.
 > 
-> Also fix spelling mistake in the word "parent" while we're at it.
-> 
-> 
+
 
 Applied to u-boot/master, thanks!
 
-[1/1] clk: mediatek: remove duplicate '@parent' field doc
-      commit: 9d08916a575beba3632c3969b96f74be08560ef7
+[1/1] cmd: part: Fix part argument description for `part number`
+      commit: 47b50fb1125c539d80ed3e7f739c02c6486e1b52
 -- 
 Tom
 
