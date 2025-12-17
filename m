@@ -4,98 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3619ED64086
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 07:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0903D65522
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 09:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A86BC83AA4;
-	Wed, 17 Dec 2025 08:59:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F5D3839FA;
+	Wed, 17 Dec 2025 10:40:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yo4vruy7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o6ROgvwm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4D6783AA4; Wed, 17 Dec 2025 08:59:21 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id EC9FA83AA0; Wed, 17 Dec 2025 10:40:12 +0100 (CET)
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
+ [IPv6:2a00:1450:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98CF083AA0
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:59:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA12183979
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 10:40:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b7672a12eb8so87420366b.3
- for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 23:59:19 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x342.google.com with SMTP id
+ 5b1f17b1804b1-477a2ab455fso59238485e9.3
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 01:40:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765958359; x=1766563159; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3DXRpD1zIhbgrzqi2/5c50uaguUqqf/DgCt4IBHTuBg=;
- b=Yo4vruy7HBSbXBfNLMQOw4B9qkB2ESQzZGY0N1I1YMzFt3EP93kznX5pmkgNFA6RjE
- jl/spY288PmmpODKfyLrO0HEybZ4UR1UFj07CC3q3yEZ8Sz+wZ9ad1R4NF2m2WyOde4t
- ORIWrST5t5upI37wb5YyoqBSupthXkYN+qBkHAgNEH1jvvD5GQJCz4cXc41nwsviLLki
- nB2TpppJDpnBjPF4BCQwWgUOOZ4UYG2pXEmNsJnJMsy2ewlxVmUFY1Aac+O3RnJt9oYi
- 3uBzGcIRnNvOjaTp3eBlHVy1UIvjg8XEpC6u2qCJWjgqeiIps2OlrLSTh0xZFkeRrnab
- Fgcw==
+ d=linaro.org; s=google; t=1765964410; x=1766569210; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zWxExy4iQWukShUQ5TcV/jh98srGWatiFE48A7obtkE=;
+ b=o6ROgvwmJA7NWaJT3+XqmlxrqIcEFbDNarHKBOq+xzaWWK3sr+h1goZWUX6vt9F46x
+ DvB5hYzywhl84kNep1wI2MM266+zwYvC26HQZnIMEdAw9uVEUs5Lpekz8UxWlRdymnE9
+ 2hvDgJvUbhhhmIThli1NT3piaOX+8JEx5Jo2DJ8EyebCGDwT3lQIoxOLMeHZck6Nv3Ym
+ 7vcHwTBPTGZEG4hQjttwODzmqcWttqHdsOrt/1viiPOU/owT/NURIZnOBpG+mCBRCq3v
+ uraIpHdSuRtL6gvIYCqSRqqN3XYA5ymO8W5imQ7sH2JoFhQ25TfurJ27ob/9209k4qj6
+ U9Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765958359; x=1766563159;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3DXRpD1zIhbgrzqi2/5c50uaguUqqf/DgCt4IBHTuBg=;
- b=C6xsLx5vo7x16zskJHvEGmFejQ1iLA7VNcMT7Y+JL1a+HzmcVHUZ5W36f3UdEOtyEd
- OZd+HbeAcbf+I89AaNV8UmYKE62UXwEbUAuar5jZDiPucWEC6r3eQ/wAmgDitebse/ZL
- /FCrHIVwwgnGRefrWVBVaMpruG/RSXU/xeiUocpWRrPRn7xtePqRTsY8LyzsNDCpCDhH
- t0SPqdDYhUVWOgWLmU2go9A98Uj5R42goJ17x7aUnlbXiJLcPmjo+cz2l8KQBzSJrSCy
- LOn8C2SK6VNCml+arPswDYcnwfbGgU1iujRvg7Ynh2KFZSQMzdPAHFyxFZ0B4QOYA5rF
- 4coA==
+ d=1e100.net; s=20230601; t=1765964410; x=1766569210;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zWxExy4iQWukShUQ5TcV/jh98srGWatiFE48A7obtkE=;
+ b=PuxyW+CtTF5D7W7PMxqNhOA7jJx08XD0McaNPVMkMUuN5mf0MXjnQX3TB6hVCO6lUm
+ ILtvUHbq6tKhQZw3KbKKU9GqqDbWDmkJmHrP59s8/+MoVisUoLrwAw/ZOA3C+wOJw5Fn
+ 0b03udFYRT0MZJzeSTOwXV5+rwxUgvihcj5ZKNDZ2xovrGC/AAPeQKbUSRABW44NHuzN
+ KfEoy2uT6pTYzeKJPMZD1UY2g+Vs6nTmmyqhzjC/bzMjaq1n56GjjPLm33/sQ9UpOfmJ
+ lX2gaw5m8oYTRmcODEiTzUCyVBta8qBMoOY3yyWfHnVmsvZDLGaDqdZAz2r6GfcDvA7t
+ U4zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrxVD77wFTKfUnJ7P0lIxZU5wlsgO22Q/dX9D33bQT/cTtms7L5xBnQpvBMj+44ioQWFVphvk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrzJyLKaqAJJwOnhX1sV9u7bDFy+SNr2pdn1E/wAJ3i45JPEvY
- ROXDY+OuNBHemZjKxN5gPCHYg4kcO/uHFg57zHoifRWBkwDe4i2Z8X+R
-X-Gm-Gg: AY/fxX5x1l6egCW3O/enC/zFgZzDLC6krAvqdcjEgUVL+Y8whoeUT5wjLMyKDD+an+4
- mSYkzBibKwHSA+VvIKJv+UnG34xjuXkR+mkjUZEMq3YQZOWPHVYbZ8kn3Ey+RYjwL6ho3EnvZUt
- VVtU2dkrsK/TVDIY0+qW4L3UD52vnt7wGzPUNn/W0a4nMXIYtgiu0ItfKxOL5CzgiZ2/+ROZPLs
- dy6EMO3sInqX6nEcx8ELYfpU4NdUliuVhx6subXm1CweG/u/Uf3zbY7/5qMeVp7uqG4fBvhhNxK
- frLkvQDJlfzHTy46ZAtx6hZO2w5rVNuB0VRu5+Of8zFTfPJR6MIHpca1bMu/l8SZCoG7E8FzFvg
- Zb0RabL5FYUWhhc1IJ1UDX94Te4yfUk8X6S3BMKw2vzispBy2vr/eR8dK2Rdav4DN8BI6rytHGH
- HdN+HziqOj56ecX+uXSF2FT7Ur2FR5lltkmcL3WrFvVgY21SBofQ==
-X-Google-Smtp-Source: AGHT+IFfkxEinegj+7Aa1yvE8PwqiUOgCWO5SY9s7EdbYgaLYypEmV69pIi4ENo1NVmRj33TAulvsA==
-X-Received: by 2002:a17:907:d27:b0:b72:5d4a:45d4 with SMTP id
- a640c23a62f3a-b7d237b540bmr1078469866b.3.1765958358554; 
- Tue, 16 Dec 2025 23:59:18 -0800 (PST)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7cfa29eb69sm1943106466b.6.2025.12.16.23.59.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Dec 2025 23:59:18 -0800 (PST)
-Message-ID: <30bf5f74-b3ee-4f83-974c-44b0155e0839@gmail.com>
-Date: Wed, 17 Dec 2025 08:59:17 +0100
+ AJvYcCX42utPDB3L6qoItQBUWh2zrZnK67BHrPdq/PuO5mW3eVlVotObj/efztewuPXxwpMzNksprb8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrWWR2UQBQMAqYG6js5QiutmcT0Vr3wEagptKqtuJhsISzB7Ua
+ oW8CNZZPqM1FemsaPkiaOiQwEv8ZtVPB2v6tJOrUWDNZ5mJqHXvG3MiuCdbgyALdJbU=
+X-Gm-Gg: AY/fxX6yoR/YXPbQC9CfMKgbxmgw+AzvDACL7KaBsCm395vi+1kJMZuGIsO9xvAC37r
+ OeHvYP7GxiEl2qCjg3zVuQPQDt5xPGBtQc+vGKbSFnm0EkfdQaWEyatmons/fHZr3KeBJm2NBh0
+ lpUR1GViwicwQQ+U9HzXCEkU4Ma63ZdrMha05FgHfa9vGWpOCaUc2joQLj2s960jx5cxxs8ZESY
+ tMihuRC0bcs9ZKDYAr8iW09JRDTe4WutNQy7XpPP1JQ8EDf5FO7Fr6Vx8u7QEVdKtvoZcSpujEi
+ LWlPL5ZYkGPqW6b+5PfktsFrQRPq9G1t2peLx25kMxBP64KOwkLNYmE8NYdso3ujg3sKKONIL85
+ KgTR0zO8IilgmPvUNz7kdiPlJ8AJ35o+6rQwpKnqJLu7J0glATwddyY/zbjEUh4Miu9+Lh48C/N
+ 4tbpo/ilDOFa1MZmjyAsYxN9vErrEpCpwkpuOeyAwR4Id/qd18L26zzZ9K4baAnHx5BGPysTrJ2
+ k/U3D67q/ZeyQfD63Gt0PL7jGcVeHukia7tRIvXbyXHhQiAbxz+Kj90wVtdj9nvW7JkOxVMahAy
+ T1HNf4Tq6Qb0oyLs0vGG8/k04dAcZ7m9fcrqTc37r8ZfEMVeUGD8lZ1/kYQY5dT4hNvGcWhft/Z
+ YYK6nZx/CKSgtTiI8HTp8Z/702Hb3j75Yt2gqGaIDu6FEuFmTYNbM8r/F8YK2LPVp+6w1i4/iRN
+ wgEK8y18eJgiEgbTNg6qqllOS2j7/xoXE0qDDKsuxMbUIYwtwQdnHxqPRiKLNl+A==
+X-Google-Smtp-Source: AGHT+IEzlajLtRnXHerYgQjshY5sGCrdm+9ZN6TOt8/IDVOJeBc+3GE1+VEYdfSYL+Nf4/nbqiiiLg==
+X-Received: by 2002:a05:600c:4e91:b0:477:c37:2ea7 with SMTP id
+ 5b1f17b1804b1-47a8f904609mr181269525e9.21.1765964410173; 
+ Wed, 17 Dec 2025 01:40:10 -0800 (PST)
+Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4310adacfafsm3841840f8f.10.2025.12.17.01.40.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Dec 2025 01:40:09 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com,
+	andrew.goodbody@linaro.org
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ John Toomey <john.toomey@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH v4] efi_loader: Trigger capsule updates with automatically
+ generated boot options
+Date: Wed, 17 Dec 2025 11:40:04 +0200
+Message-ID: <20251217094006.306237-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: make rksd the default format for SPI
- images
-To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Sumit Garg <sumit.garg@kernel.org>, Xuhui Lin <xuhui.lin@rock-chips.com>,
- Heiko Stuebner <heiko@sntech.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20251216-rockchip-more-template-v2-0-6372e27fc689@cherry.de>
- <20251216-rockchip-more-template-v2-2-6372e27fc689@cherry.de>
-Content-Language: en-US
-From: Johan Jonker <jbx6244@gmail.com>
-In-Reply-To: <20251216-rockchip-more-template-v2-2-6372e27fc689@cherry.de>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,210 +107,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The EFI spec in §8.5.5 says
+"The directory \EFI\UpdateCapsule is checked for capsules only within
+ the EFI system partition on the device specified in the active boot
+ option determine by reference to BootNext variable or BootOrder variable
+ processing."
 
+Automatically generated boot options don't point to the ESP, they point to
+the disk itself and find_handle() won't match when searching for an ESP
+during a capsule update.
+This happens because find_handle() only matches device paths that are
+shorter or equal to the device path passed as an argument.
+Since the EFI spec allows it we want to allow capsule updates, when the
+boot option points to a disk, but that disk contains an ESP with a
+\EFI\UpdateCapsule directory.
 
-On 12/16/25 12:26, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> I believe (hope) that the new SoCs should now have this fixed and not
-> require the "hack" implemented in rkspi format which almost doubles the
-> size of TPL+SPL (idbloader.img).
-> 
-> It's known to be fixed on RK3566/RK3568, RK3576 and RK3588(S) (according
-> to the DTS setting the mkimage format for the SPI's idbloader.img to
-> rksd explicitly).
-> 
-> Since I do not have any board with a bootable SPI flash except on RK3399
-> where this work-around is required, I simply invert the logic by having
-> rkspi explicitly set for all SoCs that didn't and remove rksd from SoCs
-> that did. It doesn't mean that the SoC actually requires rkspi format,
-> just that it's been the case until now (maybe because nobody tested).
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  arch/arm/dts/px30-u-boot.dtsi     | 12 ++++++++++++
->  arch/arm/dts/rk3036-u-boot.dtsi   | 13 +++++++++++++
->  arch/arm/dts/rk3066a-u-boot.dtsi  | 12 ++++++++++++
->  arch/arm/dts/rk3128-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3188-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk322x-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3288-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3308-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3326-u-boot.dtsi   |  1 -
->  arch/arm/dts/rk3328-u-boot.dtsi   |  1 -
->  arch/arm/dts/rk3368-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3399-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk3528-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rk356x-u-boot.dtsi   |  1 -
->  arch/arm/dts/rk3576-u-boot.dtsi   |  1 -
->  arch/arm/dts/rk3588s-u-boot.dtsi  |  1 -
->  arch/arm/dts/rockchip-u-boot.dtsi |  1 -
->  arch/arm/dts/rv1108-u-boot.dtsi   | 12 ++++++++++++
->  arch/arm/dts/rv1126-u-boot.dtsi   | 12 ++++++++++++
->  19 files changed, 157 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
-> index 2f726b0aaba..7385de7d6ae 100644
-> --- a/arch/arm/dts/px30-u-boot.dtsi
-> +++ b/arch/arm/dts/px30-u-boot.dtsi
-> @@ -27,6 +27,18 @@
->  	};
->  };
->  
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
->  &otp {
->  	bootph-some-ram;
->  };
-> diff --git a/arch/arm/dts/rk3036-u-boot.dtsi b/arch/arm/dts/rk3036-u-boot.dtsi
-> index 41ac054b81e..988287e2f12 100644
-> --- a/arch/arm/dts/rk3036-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3036-u-boot.dtsi
-> @@ -4,3 +4,16 @@
->   */
->  
->  #include "rockchip-u-boot.dtsi"
-> +
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
-> diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
-> index d99db7853b5..4272bf4a8e2 100644
-> --- a/arch/arm/dts/rk3066a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3066a-u-boot.dtsi
-> @@ -3,6 +3,18 @@
->  #include "rockchip-u-boot.dtsi"
->  #include "rk3xxx-u-boot.dtsi"
->  
+So, let's change device_is_present_and_system_part() and check if the
+supplied device path contains an ESP. If it does return the handle of
+the device. Otherwise, iterate over child devices and return the handle
+of the first child that contains an ESP.
 
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
+The returned handle can then be reused later. Rather than calling
+efi_fs_from_path(), we can simply look up the EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
+on the discovered handle, avoiding the need to re-parse device paths.
 
-I think that we shouldn't add extra functionality to old SOCs that nobody is able to verify on real boards anymore.
-Just skip this for rk30xx/rk31xx except maybe for rk3288 if someone still has hardware. 
+Reported-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reported-by: John Toomey <john.toomey@amd.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-> +#endif
-> +#endif
-> +
->  &gpio6 {
->  	status = "disabled";
->  };
-> diff --git a/arch/arm/dts/rk3128-u-boot.dtsi b/arch/arm/dts/rk3128-u-boot.dtsi
-> index 6d1965e6b52..500791a22e7 100644
-> --- a/arch/arm/dts/rk3128-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3128-u-boot.dtsi
-> @@ -10,6 +10,18 @@
->  	};
->  };
->  
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
->  &cru {
->  	bootph-all;
->  };
-> diff --git a/arch/arm/dts/rk3188-u-boot.dtsi b/arch/arm/dts/rk3188-u-boot.dtsi
-> index 8f2849dda24..a164c94e96e 100644
-> --- a/arch/arm/dts/rk3188-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3188-u-boot.dtsi
-> @@ -6,6 +6,18 @@
->  #include "rockchip-u-boot.dtsi"
->  #include "rk3xxx-u-boot.dtsi"
->  
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
->  &gpio0 {
->  	compatible = "rockchip,gpio-bank";
->  };
-> diff --git a/arch/arm/dts/rk322x-u-boot.dtsi b/arch/arm/dts/rk322x-u-boot.dtsi
-> index aea917544b1..f783a735ca1 100644
-> --- a/arch/arm/dts/rk322x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk322x-u-boot.dtsi
-> @@ -39,6 +39,18 @@
->  	};
->  };
->  
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
->  &cru {
->  	bootph-all;
->  };
-> diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-> index bb0078588fe..97d300a880a 100644
-> --- a/arch/arm/dts/rk3288-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3288-u-boot.dtsi
-> @@ -46,6 +46,18 @@
->  	};
->  };
->  
-> +#ifdef CONFIG_SPL
-> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> +&binman {
-> +	simple-bin-spi {
-> +		mkimage {
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-> +		};
-> +	};
-> +};
-> +#endif
-> +#endif
-> +
->  &bus_intmem {
->  	ddr_sram: ddr-sram@1000 {
->  		compatible = "rockchip,rk3288-ddr-sram";
-[snip]
+Changes from v3:
+- Update comments to better match the function functionality
+
+Changes from v2:
+- Changing efi_dp_find_obj() wasn't too intuitive, since we only matched
+  the longest device path we found from a prefix and made the code complex.
+- Change the implementation and iterate over the device children to locate an
+  ESP, if the supplied DP is not one.
+
+ lib/efi_loader/efi_capsule.c | 68 ++++++++++++++++++++++++------------
+ 1 file changed, 46 insertions(+), 22 deletions(-)
+
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index eafc647f558f..89e63ed8dd5c 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -8,6 +8,7 @@
+ 
+ #define LOG_CATEGORY LOGC_EFI
+ 
++#include <dm/device.h>
+ #include <efi_device_path.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+@@ -878,30 +879,47 @@ static efi_status_t get_dp_device(u16 *boot_var,
+ }
+ 
+ /**
+- * device_is_present_and_system_part - check if a device exists
++ * get_esp_handle - Check if any direct child of the dp handle is an ESP
+  *
+  * Check if a device pointed to by the device path, @dp, exists and is
+- * located in UEFI system partition.
++ * either an ESP or a disk containing an ESP.
+  *
+  * @dp		device path
+- * Return:	true - yes, false - no
++ * Return:	ESP handle or NULL
+  */
+-static bool device_is_present_and_system_part(struct efi_device_path *dp)
++efi_handle_t get_esp_handle(struct efi_device_path *dp)
+ {
+-	efi_handle_t handle;
++	efi_handle_t handle, dev_handle;
++	struct udevice *child_dev;
+ 	struct efi_device_path *rem;
++	efi_status_t ret;
+ 
+ 	/* Check device exists */
+-	handle = efi_dp_find_obj(dp, NULL, NULL);
+-	if (!handle)
+-		return false;
++	dev_handle = efi_dp_find_obj(dp, NULL, NULL);
++	if (!dev_handle)
++		return NULL;
+ 
+-	/* Check device is on system partition */
++	/* Check if the device path points to an EFI system partition */
+ 	handle = efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);
+-	if (!handle)
+-		return false;
++	if (handle)
++		return handle;
++
++	list_for_each_entry(child_dev, &dev_handle->dev->child_head, sibling_node) {
++		if (device_get_uclass_id(child_dev) != UCLASS_PARTITION)
++			continue;
++		if (dev_tag_get_ptr(child_dev, DM_TAG_EFI, (void **)&handle))
++			continue;
++
++		ret = EFI_CALL(systab.boottime->open_protocol(
++			       handle, &efi_system_partition_guid, NULL, NULL,
++			       NULL, EFI_OPEN_PROTOCOL_TEST_PROTOCOL));
++		if (ret != EFI_SUCCESS)
++			continue;
+ 
+-	return true;
++		return handle;
++	}
++
++	return NULL;
+ }
+ 
+ /**
+@@ -920,6 +938,8 @@ static efi_status_t find_boot_device(void)
+ 	int i, num;
+ 	struct efi_simple_file_system_protocol *volume;
+ 	struct efi_device_path *boot_dev = NULL;
++	struct efi_handler *handler;
++	efi_handle_t esp = NULL;
+ 	efi_status_t ret;
+ 
+ 	/* find active boot device in BootNext */
+@@ -940,7 +960,8 @@ static efi_status_t find_boot_device(void)
+ 
+ 		ret = get_dp_device(boot_var16, &boot_dev);
+ 		if (ret == EFI_SUCCESS) {
+-			if (device_is_present_and_system_part(boot_dev)) {
++			esp = get_esp_handle(boot_dev);
++			if (esp) {
+ 				goto found;
+ 			} else {
+ 				efi_free_pool(boot_dev);
+@@ -967,26 +988,29 @@ skip:
+ 		if (ret != EFI_SUCCESS)
+ 			continue;
+ 
+-		if (device_is_present_and_system_part(boot_dev))
++		esp = get_esp_handle(boot_dev);
++		if (esp)
+ 			break;
+ 
+ 		efi_free_pool(boot_dev);
+ 		boot_dev = NULL;
+ 	}
++
+ found:
+-	if (boot_dev) {
++	ret = EFI_NOT_FOUND;
++	if (esp) {
+ 		log_debug("Boot device %pD\n", boot_dev);
+ 
+-		volume = efi_fs_from_path(boot_dev);
+-		if (!volume)
+-			ret = EFI_DEVICE_ERROR;
+-		else
++		efi_free_pool(boot_dev);
++		ret = efi_search_protocol(esp, &efi_simple_file_system_protocol_guid,
++					  &handler);
++		if (ret == EFI_SUCCESS) {
++			volume = handler->protocol_interface;
+ 			ret = EFI_CALL(volume->open_volume(volume,
+ 							   &bootdev_root));
+-		efi_free_pool(boot_dev);
+-	} else {
+-		ret = EFI_NOT_FOUND;
++		}
+ 	}
++
+ out:
+ 	free(boot_order);
+ 
+-- 
+2.43.0
+
