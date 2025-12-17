@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E108FD65C7C
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:24:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DFBD65C7D
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:24:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F2A83BC8;
-	Wed, 17 Dec 2025 17:24:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C12383BA1;
+	Wed, 17 Dec 2025 17:24:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3981783BBE; Wed, 17 Dec 2025 17:24:09 +0100 (CET)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [84.16.66.169])
+ id 2B09A83BDD; Wed, 17 Dec 2025 17:24:13 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFC2783BA1
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:24:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FF1F83B32
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:24:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dWfJ546t2zWl8;
- Wed, 17 Dec 2025 17:24:05 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dWfJB71g9zW4h;
+ Wed, 17 Dec 2025 17:24:10 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dWfJ50wDRzMNG; Wed, 17 Dec 2025 17:24:05 +0100 (CET)
+ id 4dWfJ540RJzKq7; Wed, 17 Dec 2025 17:24:05 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 17 Dec 2025 17:23:57 +0100
-Subject: [PATCH 2/3] doc: cmd: bdinfo: specify required dependency for some
- info
+Date: Wed, 17 Dec 2025 17:23:58 +0100
+Subject: [PATCH 3/3] doc: cmd: bdinfo: document options
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251217-b4-bdinfo-doc-v1-2-83bf7fdb1691@cherry.de>
+Message-Id: <20251217-b4-bdinfo-doc-v1-3-83bf7fdb1691@cherry.de>
 References: <20251217-b4-bdinfo-doc-v1-0-83bf7fdb1691@cherry.de>
 In-Reply-To: <20251217-b4-bdinfo-doc-v1-0-83bf7fdb1691@cherry.de>
 To: u-boot@lists.denx.de
@@ -63,41 +62,97 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The devicetree, current eth and IP addr info are only available when
-certain symbols are defined, so let's make the dependencies explicit.
+bdinfo may also have -a, -e and -m options depending on some symbols
+being set. Document all this and provide an example on how to use them
+and what they typically output.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/usage/cmd/bdinfo.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
+ doc/usage/cmd/bdinfo.rst | 54 +++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 53 insertions(+), 1 deletion(-)
 
 diff --git a/doc/usage/cmd/bdinfo.rst b/doc/usage/cmd/bdinfo.rst
-index a139c9d855c..2a5873a400a 100644
+index 2a5873a400a..b0d636d4b01 100644
 --- a/doc/usage/cmd/bdinfo.rst
 +++ b/doc/usage/cmd/bdinfo.rst
-@@ -77,9 +77,13 @@ Build
- current eth
-     name of the active network device
+@@ -13,12 +13,22 @@ Synopsis
+ ::
  
-+    Only shown if CONFIG_NET=y or CONFIG_NET_LWIP=y.
+     bdinfo
++    bdinfo -a
++    bdinfo -e
++    bdinfo -m
+ 
+ Description
+ -----------
+ 
+ The *bdinfo* command prints information about the board.
+ 
++``bdinfo -a`` command is an alias of the ``bdinfo`` command and prints all
++information about the board.
 +
- IP addr
-     network address, value of the environment variable *ipaddr*
- 
-+    Only shown if CONFIG_NET=y or CONFIG_NET_LWIP=y.
++``bdinfo -e`` command prints network-related information about the board.
 +
- fdt_blob
-     address of U-Boot's own device tree, NULL if none
- 
-@@ -95,6 +99,8 @@ lmb_dump_all
- devicetree
-     source of the device-tree
- 
-+    Only shown if CONFIG_LMB=y and CONFIG_OF_REAL=y.
++``bdinfo -m`` command prints the DRAM-related information about the board.
 +
- arch_number
-     unique id for the board
+ Example
+ -------
  
+@@ -54,7 +64,44 @@ Example
+     irq_sp      = 0x000000013edbada0
+     sp start    = 0x000000013edbada0
+     Early malloc usage: 3a8 / 2000
+-    =>
++    => bdinfo -a
++    boot_params = 0x0000000000000000
++    DRAM bank   = 0x0000000000000000
++    -> start    = 0x0000000040000000
++    -> size     = 0x0000000100000000
++    flashstart  = 0x0000000000000000
++    flashsize   = 0x0000000004000000
++    flashoffset = 0x00000000000e87f8
++    baudrate    = 115200 bps
++    relocaddr   = 0x000000013fefb000
++    reloc off   = 0x000000013fefb000
++    Build       = 64-bit
++    current eth = virtio-net#32
++    ethaddr     = 52:52:52:52:52:52
++    IP addr     = 10.0.2.15
++    fdt_blob    = 0x000000013edbadb0
++    new_fdt     = 0x000000013edbadb0
++    fdt_size    = 0x0000000000100000
++    lmb_dump_all:
++     memory.cnt  = 0x1
++     memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: 0
++     reserved.cnt  = 0x2
++     reserved[0]    [0x13ddb3000-0x13fffffff], 0x0224d000 bytes flags: 0
++     reserved[1]    [0x13edb6930-0x13fffffff], 0x012496d0 bytes flags: 0
++    devicetree  = board
++    arch_number = 0x0000000000000000
++    TLB addr    = 0x000000013fff0000
++    irq_sp      = 0x000000013edbada0
++    sp start    = 0x000000013edbada0
++    Early malloc usage: 3a8 / 2000
++    => bdinfo -e
++    current eth = virtio-net#32
++    ethaddr     = 52:52:52:52:52:52
++    IP addr     = 10.0.2.15
++    => bdinfo -m
++    DRAM bank   = 0x0000000000000000
++    -> start    = 0x0000000040000000
++    -> size     = 0x0000000100000000
+ 
+ boot_params
+     address of the memory area for boot parameters
+@@ -121,3 +168,8 @@ Configuration
+ -------------
+ 
+ The bdinfo command is available if CONFIG_CMD_BDI=y.
++
++The options to bdinfo are only available if CONFIG_GETOPT=y.
++
++The ``-e`` option is additionally only available if CONFIG_NET=y or
++CONFIG_NET_LWIP=y.
 
 -- 
 2.52.0
