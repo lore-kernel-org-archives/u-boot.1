@@ -4,147 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B982FD65C43
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:57:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B496FD6407A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEB4983B48;
-	Wed, 17 Dec 2025 13:57:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C0A683B4F;
+	Wed, 17 Dec 2025 13:57:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="JCVpPVhf";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="jxrDwE21";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OGHp42Yb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B636883AA4; Wed, 17 Dec 2025 08:07:36 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id CF81E83AB0; Wed, 17 Dec 2025 11:43:03 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CECF683623
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:07:34 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T5GV2F1TScIdWqj7joM90DZRM2zudK+O3QE6NXeO1F3wueSgueasF3TQYaFHmgaAIzdMuJeLvOEoMWJNG8r+QZqXimys31u/+s9ltlpx4ImDHL+bhzTMME0tYSTWbXCQtf8/I7ybrn3PlDlsGpwt2ABhPiBG/P9RFS0xw4AVw+YLwaa4vIMB5SDAx9Be0RprG0TtqavpxGpu1sx3pDFCtXurtoG4PLSie3EqroICwri8fDG2tXuHuE05XIcPpXefKatKID96xhtCqSgPD1lMojaJSez/Rihxm6hOUG7+8EMe044gY5NTAKltUjQlXTrcjbGW7OrLaG7CVETyKWmLcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HU2De/BGDm0WwP0FZFDWPDKJfClF2YQ/+Cm0dYk90xc=;
- b=x2++AJR2QXGvGb9oD8b+xNhBvBx5tchhA/TAp2FlKQUHX2ZFVlEYkokd71fSy/6MW79Rryxfu6aPY8HF1KMhxfvU+SMCsmPSpHRH7bSEQXow67iuoY8/+H64c/WgbMhG/T6yfrf6N4aNtWh2MBmLYpK4c98LL9e0eSKedGVoXh6Y3sioMG3RsV5Oz13ZLZbKzGNZs9nAZIcly32UpoJRy7i8crfftjKlPbBwe6BHetbKBgmKk5efrA4A88G0lvq1CRnGohA2na1pnBWxK9E8Jo5rS2ixAzDURdHvIJBxOknN8Rn65IQYQ8jvdQv7fS0e6cxLoJ6ker96woja2B4J/g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HU2De/BGDm0WwP0FZFDWPDKJfClF2YQ/+Cm0dYk90xc=;
- b=JCVpPVhfxhnAy/UV5bhHKd94Kf2nwtSRUgOetPKHWuDqHvZjNrZrkQD/x1aUKB3rSjF5SKrlw/12jdBxYIQX4Umzo1R7coJcKf9APU4cSCWweG8+ql0qOwKT3GwdHru52tTHxaJWR7hCPx7x9RtQlIwuH3/WaX1IKjRR+HfjvYpNyw3kxqcEDU1uNWMM0J603Yf7Dzr4CPZatJ/TIugPSaGnOTKMBidP+z7ny7HaED3NOm8CMo5TvRFP4bkx6N08pRzEfPvOO9hs4eI1Oow2iUV5gS2VxHjKIVIA3WCs32a8/X+0UDEGO6rwOgP5grOn2XMcFyncIhhKAEkhxviEQA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DU4PR04MB11338.eurprd04.prod.outlook.com (2603:10a6:10:5d8::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Wed, 17 Dec
- 2025 07:07:33 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9434.001; Wed, 17 Dec 2025
- 07:07:33 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: sbabic@nabladev.com,
-	festevam@gmail.com
-Cc: marek.vasut+renesas@mailbox.org, uboot-imx@nxp.com, u-boot@lists.denx.de,
- Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH V2] imx9: scmi: clock: Correct imx_clk_scmi_enable
-Date: Wed, 17 Dec 2025 16:20:59 +0800
-Message-ID: <20251217082059.21761-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI1PR02CA0056.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ by phobos.denx.de (Postfix) with ESMTPS id 87E9283979
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 11:42:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5BH9pHPK008920
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 10:42:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=9CGGQcH2angmwwEYwUnzigY6
+ LK6LQs7mZlU3tOpX0YU=; b=jxrDwE21XBTvWmwL4fGgZR4ceqDL1qA2FRTAyvYs
+ uOrWFUlLHCF8LGFL8OF6vr6/mGO7JnbLyt1TqmFTZWZ1+cR5jOXZJyaZI7IYs4Mz
+ Ado7YoGVV/gRbQ18LziE172UBBbq4A1G0BwCM0NpQsdFalpQUzibdnhrFkq7CV2G
+ a1AOAFjaFKupzfA2OHgpJu5s6mMZ57i01xUNBynnfpkQxHueI9NN058bnAh977uT
+ p0riycemP/2fVCxL3JWiR67fmVjYVR4CPgU4NZj768S1QwK7AiEGk/PyKBK69GmA
+ 3mxI3SAcjabE750TIYlAPyxGDcTs+pZF70YPr8elO+fz5w==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b3t8e05em-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 10:42:57 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-34c704d5d15so7716037a91.1
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 02:42:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1765968177; x=1766572977; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9CGGQcH2angmwwEYwUnzigY6LK6LQs7mZlU3tOpX0YU=;
+ b=OGHp42Yb7yPI5RtvcvZm06kaKGXlnyiGFovypEyOBbstPuBJaZ2N3ppSW7hXXkvoRL
+ 0lqpxVPILOl+x6CcXa/Zi7RJ/gYIQpLX21WMx1WeMWJNyxLv+f8OSOgPm/n7PHAKb+j4
+ +56RjnIeio1rYoCu+zhnUx8+lbNM3XzeDZWzPR8HB2sbXabtU+CsDq+DlgrvS0ZN8YOZ
+ 5I6m4EpB1irpEXaOjXNnWHK4VMTWFvNtPCUplCFnoGsQkhmU9kQICrz6cli0Sxg1GoFp
+ 3prLGP2+VXhYJSxcjwpvuLesaBoc3FxCxFOTm9TRodrsnzXsZ1jML0ZQ4/pCl86PY4kz
+ SCxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765968177; x=1766572977;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9CGGQcH2angmwwEYwUnzigY6LK6LQs7mZlU3tOpX0YU=;
+ b=vXbNFVXkZcrsWTepezTWPsWFX4Yniye9+H55fPrzFR3KIPvjjIISI9+nQTI0aQOR9a
+ 0igpwfOh+2w4opaq/e4wD37HJMNNLCsrhiYYaaxDNPdvnOOZ8Ym+t8/KeZ/5bJiGJ3aW
+ LJiO4B3Grny48l4Ornjfovhj4PerqsTb41AEYYeBEbLBjCnV/CbmMR326oJqZYsT1VOU
+ 00SIyG+RLkYmSZ49m5d+5AS7S24Cw4IcpZwQQU4BG1vhtuIBAkPJktRcgAQkMG85c/wR
+ c+0xnoJO9h1kmFwlMUB7zoiLOdudjeSsYl70/BVaECTTzOGA8w6ux05LCwnAIowyiH6K
+ Yzjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXnB7xsUSstXvqd5BTrnhTLIJ9N/vfqcFDY1T9lVCT3YYS5u+y+RzXYEjMOnNu0+LALk8s+BkI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7aQX+O7djUkcROXVExT7SeQ8OPfRR3+eqNk8+KoNXH52Qp2NU
+ nay8yZ1lWImd4ZQVPqsdSkvPHVBVUJy5vSke3+lpobsCnRG2vJjXJUpWJRf7IJqJgGsL2UvXhIn
+ 0OXcLH8qnMqAmsymfpFj7lPvhGSHB3khBRNVGIrsiJkdBTbObDXg5xLT6
+X-Gm-Gg: AY/fxX73wFIT3iuZJ6VvNfjueOYRdAXUspt17fzffXCMdq20nC0MPxhShYXvL6B+RK3
+ ptTdLwAmk6+GZwv1FzsPsLPZSNR9KwCZ6b2KGvW8/7khoBDc7mqFSHBRvRYp/SoS2byTffbki75
+ Azz0NW1T+le8Uda3elKZzVIUzHczvFuz8iqwCE4/oJYJ8VKjk+YFOfgROT9QZtWwjOBNycnq1+D
+ BO2G5oHVgepElb3SfPS1qK/XNxyYUFcNa4jsIcrlD8B42/YeVbDgg3I3iiADZquzsaUHvGqKx6n
+ Pd65caVD/H4jMYRv/txWtqEyZbj/PXiIvF4NpTjgaaxheLtZ5l3SzXUdRBNgKs/Nou32+KBRv34
+ 8kUQKUoypRo7LaB3KBYAoXdsoKHSnq48Ucc+XutukOk+WkcN1PvyXKG3v4duRJXjZTcGHSIohll
+ Y22rUkj7vP7nLNp84fkAzfKqVcipYxjvjbSAk0R28=
+X-Received: by 2002:a05:6a21:6da6:b0:34e:8864:793c with SMTP id
+ adf61e73a8af0-369adad40famr17234903637.8.1765968176875; 
+ Wed, 17 Dec 2025 02:42:56 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHZfhSHLrmxZDEFGkfqW1PixG308y6XXQFDFAEyYq+4ysfBTpMgSfl3BxqZa2iPystnFKuAdg==
+X-Received: by 2002:a05:6a21:6da6:b0:34e:8864:793c with SMTP id
+ adf61e73a8af0-369adad40famr17234868637.8.1765968176341; 
+ Wed, 17 Dec 2025 02:42:56 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c0c2c963b53sm18015514a12.36.2025.12.17.02.42.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Dec 2025 02:42:56 -0800 (PST)
+Date: Wed, 17 Dec 2025 16:12:48 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, jh80.chung@samsung.com, peng.fan@nxp.com,
+ rui.silva@linaro.org, ilias.apalodimas@linaro.org, me@samcday.com,
+ sajattack@postmarketos.org, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, alif.zakuan.yuslaimi@altera.com,
+ tien.fong.chee@altera.com, miquel.raynal@bootlin.com,
+ balaji.selvanathan@oss.qualcomm.com, w.egorov@phytec.de,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v6 3/5] power-domain: Add warning when power-domain
+ driver is missing
+Message-ID: <aUKJKNgBz8YkHDKI@hu-varada-blr.qualcomm.com>
+References: <20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com>
+ <20251113113427.2218045-4-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU4PR04MB11338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d1fd6bf-afdd-4c21-d35d-08de3d3af2f0
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|376014|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?sgw+sVSpYnYWjX7iuFSMDQQ6HZNBrG1k4sJbePt5vC4X1oPos5xNo+rdvDBX?=
- =?us-ascii?Q?Cp5HLtKtrFt/f7moMOt1vXimF/Gpxjv4UNWdWWwDM2uapHGeLKMvnYfJ5amt?=
- =?us-ascii?Q?3cBNHkPhfw38yoY3dXnid+HRE2IL/QLE9mgLBZ5GwC+0WsqX0JvU/6QMgGOE?=
- =?us-ascii?Q?e12tPJ6viZ8Rt7b6gAfAj5c94/jHJckD6BlstWKDRQoaP2OVh52x2dMUFNz9?=
- =?us-ascii?Q?dOxamZULvhFKxqehh7idY5YG0NTZT30MAqylfcfXfcW4FwVcl4M8LNxAWDom?=
- =?us-ascii?Q?8Vrkct9og5uTREURkHJ/EXfTzhWfi8uqW6kuECFfna3Cco5DcqzD9AZwDfwP?=
- =?us-ascii?Q?l1qS2tEkNOEN17M44teAxieiutWsoOdj5yBfTYzBa+Ol5l5tu42zmNOSTFU8?=
- =?us-ascii?Q?mYL/bRyIGGc76zhmFlJIglckNyqgrffisXflNT0J/V8d+At3pQM4nEhEQAPc?=
- =?us-ascii?Q?oC+lH1BOgSoSnVJHsj6zDF0O/SucWj4bASfiSZ5UOR54TJBtIqjGsECN8T9v?=
- =?us-ascii?Q?hGZ/TrEhXBHwkmiQuCB5FVRs54MO3/03gsPjllvT6cOhDDmLLVCqnCnDT4GC?=
- =?us-ascii?Q?fXUvfa+uEbqWbggzsNRtqNtuTsgbUFT09jWgazzgV4ca2v69NkSquW9p/qfm?=
- =?us-ascii?Q?O74/R2uhTowv0Y/9LfnDqGeEY9ELLFnC0dlBGZHAaYJrCo7NlujOTeLetRG3?=
- =?us-ascii?Q?MP7cgdjRNRWMNg5QggmCnon3dVjXI4gDmmCopr5u6bwjwPTAhwe9o86aV6+y?=
- =?us-ascii?Q?dc8u7odHPxwl/PzhkOPsPIrCsUDXTMNoky2lfoAERJLJwWxw583Mk8dx4Aen?=
- =?us-ascii?Q?Sh5RjSFV//dZbDcLNlHJoZSsikdoLXMuM719T0hQQq4T7RAMEqHb3VAQDLrL?=
- =?us-ascii?Q?whqNJUbOL01F+dbUbI6G6Kmk4ii8YUU0iaeMTGZtK/0FY04acgIEWxbLGrcV?=
- =?us-ascii?Q?sKxmL8cxGr4jW+ZtkmsxJCWX1PYJU2ayuMjPlct9oDjWuqKYXj70BW+Gnujv?=
- =?us-ascii?Q?AZtFJJaHoNQM069P0b/8gG5CYXMoMiX1jjQdMk7F6UuswNho2BnIpzPO8YJe?=
- =?us-ascii?Q?oKsw/qxI5EUwR3EPlol0iSrKoeGa2UVoCyBSF4tApYJ+fqDEZz5IUZ3SwDdh?=
- =?us-ascii?Q?PIZzCCcla1ZzGD/byhaEDiEAjAhZRp9kCk/OIR7qdNIdHhJnj7y43P+fRq9W?=
- =?us-ascii?Q?AvTjbNwjEuSS/f9B1KS69xuRKYGLRCsIEe5xT0gLN1EbLWlxwdcsgclrYQmb?=
- =?us-ascii?Q?yAs2GieYy3fM66GCkwfkHvUX74p4smCbBzxAhKApxCmy9VxtPnshUsqXF8OB?=
- =?us-ascii?Q?/HMFCUuuCPn77eMAIWNVeCn+tL1mbiuIp9C5j75pzTAkjpoeDiBlMlJ6EM4Y?=
- =?us-ascii?Q?IjGfT/FNPwK38wKGJh424pPTfNT/vUPi1pX3lDXqgwfLjAxpyeb67n9II0dj?=
- =?us-ascii?Q?G2hmGDx+jkA9QIlq6u7KwCPivMu9f6Rqxm7eApa/8g3S2CiEoXwdMucRD6wr?=
- =?us-ascii?Q?4/uHhxQVvdBrxnjVFKENWE0KE+knCL6zfd+K?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(376014)(52116014)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?U5ew86m+LrMroptkbkrpR+wU75Hl0JCqjQXqDOzLVKjnQkhSORX7TbqaCa6d?=
- =?us-ascii?Q?/iuxV/oWZMOOcaxtmeq/C1swXDjpGeVhDaFHys7nHFHcbkLn9/XGqmnjGp96?=
- =?us-ascii?Q?8Z5BCeOWuzt/DOOf5vhLluOTZkLYs0xx73kBcd/4MTIyZd0bJWX1jQFPoeeH?=
- =?us-ascii?Q?2FTpJUxwqd4eJUp5r6E+ckngrCnYoLq0iHDNbC7AgqA+P48z+Jt9cHIhI9yv?=
- =?us-ascii?Q?/IOu6EBwwE3YRxbRcFOTC1wN0bqRWMC8svit12n6ny5mDA/4JFa1dl/qzYOl?=
- =?us-ascii?Q?SPdjU7CYZw7R//1PWVePE8zEYTwMHtyhlyPyklK+gWMLE5SGc0FMegQiBfKl?=
- =?us-ascii?Q?4HWaN+L90Z9BQo/0Qa4hQmFkgSB4NSEyhkNM0iB6AxfZxvbt6FVVY8A0BXi3?=
- =?us-ascii?Q?nS3n7rXgpj08/iu3ZASRmwJeQlkG4BEbcDOAXKG8Q+41SBqa7kGfXhxS1TDn?=
- =?us-ascii?Q?hsn55SO/ci5dgkdSi0cmikPLmnYpQGYHWzCIGP3FVgvpUXCp5fHZ1k0pJtbG?=
- =?us-ascii?Q?IQIMbk2r5VT7SiwCtkV2IiA+rkLPR/dwxvHZBmTj+h8B5Puv4UrS+C3dXuzj?=
- =?us-ascii?Q?V0qNMZiPhPXa3F5K7Ac/XT16bSiwRsXzxQlayyL/DKWFHCCjjhWhdzkSJ2mv?=
- =?us-ascii?Q?9i7ZHgnQnG9zX2NTynUAtHiViPLFTEzK3/DqIO2WQLgnza+lcTSRKJETSNwm?=
- =?us-ascii?Q?d0JNwBQ0XXKuoUg4KsqPbtRSkTP7ytPhfaEl9xWU6nY6DXaLzi34j5ky5juI?=
- =?us-ascii?Q?CLpwr2lM2yUM/IN48cPfqee6rmXbr6xgVq+BCzwL7d4fQf2aWkS4CIgylaB5?=
- =?us-ascii?Q?uCnHWB8HojHIK2KEkGhHz6RprEKObfMlghEgcMaHklz8chDinl2/mJ0EgWNG?=
- =?us-ascii?Q?jyDRfR0fQc1Z4QY4XlDwB+jNoOo6RZPP/jMcmnRXl/c1evcYlrrzoluLBmP/?=
- =?us-ascii?Q?U7ytIVJ8JjreEByXiF+qRFqpuKWGQgjyMzL7xJkkrUAP+LhRCgblngb6EhTZ?=
- =?us-ascii?Q?0gLiAPCKkCGk54kttgyF8WRXbMinQtJPGpdqlq63NzuQhiawXaTDbmGokVOZ?=
- =?us-ascii?Q?VrUKmgQ9OTjZ8ZmQqFtT+PegNWIb6gAGZCmSmS7S5VWAXQt95pBc+5I51VTM?=
- =?us-ascii?Q?bILJkjVhaZHIyrPArYLJhoTCK46O44zJraRw9kiEjs0cQ4lJKFiXQGsV0aCS?=
- =?us-ascii?Q?30ZtlKwgXgvRbhEDzsFctaAHXNzk6FG5v29y2RcvZZi3lj9uogPnzYxNdkRE?=
- =?us-ascii?Q?nD7pXOolFFVxGIYu1s3QspnW8cv2xD6eFaY8j7+H2P/whYZjR1I/mhTpPk0B?=
- =?us-ascii?Q?TleZ+vcwDHd7IaAdsAnDLtPt45FWVtKwhk25HTziPFMCz9P0Xwi+QfXKqigJ?=
- =?us-ascii?Q?OEyByjssmlB3pKMCEc6oN27YQmPCD1HfsYp0wZk6SJT/u6tzWRGA3ejCSGZq?=
- =?us-ascii?Q?3Q9GOyIbtUAqyJkL7Dx9ecRpC9VX0f4VlnhC9taMeulsuGHlxGM21mebp0t2?=
- =?us-ascii?Q?J2nbdBNOFp01iiwLw+6dfJjfeTG4l5GlTZ1oisQneKlx9opd2US5x21Mu057?=
- =?us-ascii?Q?nwzZiYDfSVT3oH/RKsgfrlP2jDzJQYw6jj//PiHu?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d1fd6bf-afdd-4c21-d35d-08de3d3af2f0
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2025 07:07:33.2100 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: deZB17m4R0cBfCLDJJGTwulwENb6+3+3SxmHP0Ma3VFyP+OHwmL3OJvh1T0nIIVFpWHS2XVvVfqolwdJ3+YimQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11338
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251113113427.2218045-4-aswin.murugan@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE3MDA4NCBTYWx0ZWRfX3gg9nGhlZodm
+ wBiZTaxgC0ELxSIKciJ1vOSVapVnBHYJnssTvTXa8s4517mS899MvE2d4oUxyhv8cqn8LmbrIx5
+ E6tvSkiyMnoBqAas7NAgUj9pb+RdywAcVNYlVdRBPjOciRRaNsOXSBRahuuPfiKgqtSL+bR/13E
+ 4+rC3l6/2Ah+4DYJJzDMKmgVqSCot2q/qakpwPGO7n7sa+fNK0WaMMbIAb8dA+tga6W5a2Ah4HJ
+ JvgtxYs0JOV+R/CbiYiHhwHQAVBP9x0K+8Kmw7wQ/QWPjM4wVqHiHny0F8HYGgGzsCbmMg8adBH
+ qVvQ6sD5rLDEkLh+NVVAeQ+BGUULo02PIsGRo1DoN0mxIMtYpssomUEJqo6B2Da4/0EW5EAENMi
+ x/zOtlg3R/WbC8LCt7zt2lZmlXMtfA==
+X-Proofpoint-GUID: kTQrJYLsdFCxs9tKBaifqmfWRJ_gpeEv
+X-Proofpoint-ORIG-GUID: kTQrJYLsdFCxs9tKBaifqmfWRJ_gpeEv
+X-Authority-Analysis: v=2.4 cv=EsHfbCcA c=1 sm=1 tr=0 ts=69428931 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=-WCB9TnYaejT2uKtaZUA:9
+ a=CjuIK1q_8ugA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-17_01,2025-12-16_05,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
+ clxscore=1011 lowpriorityscore=0 phishscore=0 spamscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512170084
 X-Mailman-Approved-At: Wed, 17 Dec 2025 13:57:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,39 +155,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+On Thu, Nov 13, 2025 at 05:04:25PM +0530, Aswin Murugan wrote:
+> Update dev_power_domain_ctrl() to log a warning if the power-domain
+> driver is not found (-ENODEV). Return 0 in this case to allow continued
+> execution, while preserving error handling for other failures.
+>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+> Changes in v6:
+> - Newly added the change in drivers/power/domain/power-domain-uclass.c to give warning
+>   when power-domain driver is missing
+> ---
+>  drivers/power/domain/power-domain-uclass.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+> index d9fa8ad4bd2..b5d9b08b150 100644
+> --- a/drivers/power/domain/power-domain-uclass.c
+> +++ b/drivers/power/domain/power-domain-uclass.c
+> @@ -10,6 +10,7 @@
+>  #include <malloc.h>
+>  #include <power-domain.h>
+>  #include <power-domain-uclass.h>
+> +#include <dm/device_compat.h>
+>  #include <dm/device-internal.h>
+>
+>  struct power_domain_priv {
+> @@ -184,6 +185,13 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
+>  					    "#power-domain-cells", 0);
+>  	for (i = 0; i < count; i++) {
+>  		ret = power_domain_get_by_index(dev, &pd, i);
+> +
+> +		if (ret) {
+> +			if (ret == -ENODEV)
+> +				dev_warn(dev, "power-domain driver not found\n");
+> +			return (ret == -ENODEV) ? 0 : ret;
+> +		}
+> +
+>  		if (ret)
+>  			return ret;
 
-i.MX9 SCMI Supports CLK SCMI version 3.0, so need to use
-"scmi_clk_state_in_v2".
+The above can be simplified
 
-Per Spec about extended_config_val: "This field is used to set extended
-configuration of the clock device. It can be ignored if extended config
-type specified by Bits[23:16] of the attributes field is set to 0."
+	if (ret == -ENODEV) {
+		dev_warn(dev, "power-domain driver not found\n");
+		return 0;
+	}
 
-So no need initialize extended_config_val.
+	if (ret)
+		return ret;
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
+-Varada
 
-V2:
- drop fixes tag
-
- arch/arm/mach-imx/imx9/scmi/clock_scmi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-index 9030dbf600d..a502f19bca5 100644
---- a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-+++ b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-@@ -10,7 +10,7 @@
- 
- int imx_clk_scmi_enable(u32 clock_id, bool enable)
- {
--	struct scmi_clk_state_in_v1 in = {
-+	struct scmi_clk_state_in_v2 in = {
- 		.clock_id = clock_id,
- 		.attributes = !!enable,
- 	};
--- 
-2.51.0
-
+>  		if (on)
+>
+> --
+> 2.34.1
+>
