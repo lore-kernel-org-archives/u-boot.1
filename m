@@ -4,167 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85092D64087
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 07:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBA3D64087
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 07:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E62083AA0;
-	Wed, 17 Dec 2025 08:35:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id DD42583AA4;
+	Wed, 17 Dec 2025 08:50:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="UH5bMezb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ABF1t/rS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB95C83AEF; Wed, 17 Dec 2025 08:35:16 +0100 (CET)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6EBF683AAC; Wed, 17 Dec 2025 08:50:42 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB7FC83979
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:35:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9E3D83AA0
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:50:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PiGpm4DHnmq6hqWqIgUmcc9saBoO2TiwHt1+SBIYaJZpH59wyxnZS7JMaw9xcjvBDKrFb67HuNBr5k8lzJKD7pwyuQdlRNDrudMgmSiz5kS4jOsYQhJcvyXzI9AcRzss7X0L2ITLWZ40vs8IuXYXtDOO+WSKlg25JVlX8eyGuC+Zs0J+NreKvUfWXXcpDJgXCPJNpUFvLCChpXm1lZbCnEw2BCGrK73XsJUtSXZVPVOhNOFq2cmJJYnX5nL0r6hlQzwQOCTPJYfmEeAKQxENs2UzWV9iYXB56plcldrYNj6cFUqFKOPyW389S+mSZt0bqSVs2uCY8yRWYNsIjCHKoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L3XBxbfUY1RvVJZetWDR69gSfrq6aq9P5y8Fy+G5t9U=;
- b=XR16HBv8/k2r3B/rFgRs9CBVFI+jnZayHi4w5IZbbb5/FSTfDxa6+SqE83uILCuAQKsS3knl3AzvucDLr2FhtxUK5urn9td4InkJ+ar9h1bnpyCwxEGu23AXPs9ETxc2cfxBFYUfy+W3fwMezpW5otL5Ze7Xj4uEdwnwxsm1XdRDooOieq+caQ5cqz/ZglMM3CGOC+2WT6uobNW//0fFL6aeVSWTl5lJLjEZ1RwKrOXTBvTCFSyv4ZIlHDpcpls8qlS73yM+rpBWVRelU5zA5InyR7Ppp3AoD7i1d2jgoMt2JzPgY5nAmeZIJjOevU9985HmZA3T9RRzMmS+AsX7Fw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L3XBxbfUY1RvVJZetWDR69gSfrq6aq9P5y8Fy+G5t9U=;
- b=UH5bMezbKLt76u8e4NdBxAu5QEiz7is0z7sfYONKjt763V3uQ8ZWwayzHFjetqKvkmJ/nNZ1G3o46SMjAxLrqoTs7HjQKVJOboPb4mk5BzKOB6myiVfQwcACMk9ZTVbX5AvycTywzkYAj+w8EL7id1FMrqTXUFWjaMZ20i/7V4IzF573AmQ1PZOoNlJGLEStLlsKra5lIMu8RenzpLaRZTe+eduIrNSCk67jlVVydGsAqXk9so2vUmrWTyLRz86OCQmwvBga1YiIoPUpP8O6ULZcrVoBhWljtgaXhrfVcRWOGdfUSapiSHihYL50CCxjwxjms39iyh0vZqpR69VdUw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by CO1PR03MB5796.namprd03.prod.outlook.com (2603:10b6:303:9a::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Wed, 17 Dec
- 2025 07:35:11 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9434.001; Wed, 17 Dec 2025
- 07:35:11 +0000
-Message-ID: <95782f41-d8fc-4b10-b514-f60e3a7daa29@altera.com>
-Date: Wed, 17 Dec 2025 15:35:04 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] ddr: altera: arria10: Fix incorrect address for mpu1
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20251216082157.15475-1-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-In-Reply-To: <20251216082157.15475-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR01CA0006.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::14) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c77fc7c11bso364886a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Dec 2025 23:50:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1765957838; x=1766562638; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S+HQ50ly5zcrjIGKm9HZqK87udeltfqdvjfk30lf9HU=;
+ b=ABF1t/rSKrF4+k2oCfMDKGVfXrGbpi2/XHzhBCgpwLiXaCDEFVSWj6kEFS4HGEtcSr
+ VCKLCWx03bHEQk63WzZCmPqLTW9+e7OvkYMaPsjMDqBG2mGnve56Lanh9jGNWGaEdKYP
+ 6s+t7BTew0ADDLYlVF1Be3O2Ch8KC0m3tAGgcmf4KW/OrdGco5Z60RtiibgbT987T3jT
+ qL1fDxt7L9pPdaXft0uKtSmCsfnPWbft3mDraY8w67D2uyEqlYdv8eSsTznwHeDmld3C
+ Ef9ARXCjY++w95Zg60FjRkGfV1E8SGyo+tSFhEt4MdLNXitlHLeB9Po6NMG2d+qprJs5
+ FU+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765957838; x=1766562638;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=S+HQ50ly5zcrjIGKm9HZqK87udeltfqdvjfk30lf9HU=;
+ b=Sfhd9nLSHvmB3lSfEiVy1DUGScSjpJsOj//8QuVVbs+MA8Y2QPVIiqg/sCLYwv+uq2
+ euTO+deHoIok7scwPPBcXs9G+dNgC4Gq6bIy73uSjjpZW43gUiJdnWPndoIdu8mS663/
+ cMLBgLdGIb2jp80DORnKYIQ6+gWVBeAcPJ9xyu7yliGYOdj7CRdxBeYnikn7TJKwHFLZ
+ nDk3FjbB1znqIyIKTB2RmbrwT9UfFqTMzxtACl40waT+uifIZnQGDU3oNVBD9NGD8wh8
+ YrVyUgbmZ+XyKHka+4Iu0gj/BO6tdlpxmWJpengOQrVY2UlwTiYKrK73bO+QmkMd6m/t
+ ErUA==
+X-Gm-Message-State: AOJu0Ywxn42hc5gQtAVi3uXaarscbr4aKsaTiWny/ktkbVHKWtbpBJh/
+ 3/yj4xbZ4HMt7A/TWDK+/XXRAlAknLiJvoNaYLBo0wm08Rod6pCMiLfbma6/7Aa3ZjGuaNCoeXW
+ ssIZNTqFU+LIUPIPAy4gBqEpLwE+Cc2LOIm1i
+X-Gm-Gg: AY/fxX4W+jNezR9ZE3+4qGM03H1wyukJHsD5yD8B7wRQIIGJTA9DNv6dU9QxOES9N/W
+ sSeB6r0qLTRxTE4UfDlNLIS+VUuUj+6zS90ONiqoXq270oIWbDz89UFe17rORHZFgg5a1tfKwIh
+ vSwEcplKdia0ivdtuDV53agiRMurvH62c86k9EG27AMzXlOlH8+TO0Qt3KhI09UQpY6M5sJkC8/
+ PrFmXRO2xEspbxeOQeXMf+uS+tZ4DY27x7RRyI3JuiTND2Xq5hNOd07bEkskYHCvynsWmMv
+X-Google-Smtp-Source: AGHT+IFW0D+efwN1rtO/riU04t4RzKVdUCcXAxYPAhBtJ+finTMKFFUgkwZ4slYoEMybEWJ61ly1rxxj+ArIViUteAo=
+X-Received: by 2002:a05:6830:1509:b0:7ca:f4cd:db57 with SMTP id
+ 46e09a7af769-7caf4cddcf6mr5547471a34.17.1765957838158; Tue, 16 Dec 2025
+ 23:50:38 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|CO1PR03MB5796:EE_
-X-MS-Office365-Filtering-Correlation-Id: 25ff9199-745b-4c9a-dbaf-08de3d3ecf93
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RXpHaTJ0cG9BMXc2Yjg2WFpyQlFNM3JOYWE5bEhGN0lVR3QzYk1lM0pHdGZm?=
- =?utf-8?B?OGp2UVpkNEsvOXFIb0RROG9nNXorKzlPU2lNZnZZRUpPbFEvUW1CNmoyOEVh?=
- =?utf-8?B?RnhvaWk2cDhXYlBzc0xNYVBTa0lIYnhEeXB5aU9DaUl2SldxdGtkQXU0akNw?=
- =?utf-8?B?SkdWaVN4NzBqemxaMitiL2FQeUR2OExwYWcraE9vWGNhWTNFTDBWQTBLcXl5?=
- =?utf-8?B?emZ3Ym9JS3pNdVFPV2ZXR2hONEJyQVNFaWtrUlZqWFVVaDlFdHB4cnk0c2Zn?=
- =?utf-8?B?bWhHNUJHRjZ5WlZ0RDJyTU43ZkxzREI2REtXNjJ6RVZhVDlKT3RMSGUySkpx?=
- =?utf-8?B?YkxUb1VHZVR2OG1vRkZzemlhaU95RlhqdkdWN1dhYWNIVi9wbU1mUVJ4eWdV?=
- =?utf-8?B?Unc3Wk9JMUFhNUVJZzRTeTZpVlYycFlJMmJoU3lwdTNvM3lWNUVJL2FSekV3?=
- =?utf-8?B?cDgvNDdLVlJ5c2hVMTdOdHVKeVQyNjI1QWtnUEpzNjNWN01KclJQV28yYXI0?=
- =?utf-8?B?MU9MUWREb0ErU0R1Sk1VRW00cGE5L1QxNWZ4Rzg5U2lyaVl6N1NpYzNPK2lF?=
- =?utf-8?B?NzVtSCt0TFR2SCsrT1lwQkE4bmVlc0lxYVc1OUtrQ3ZzYjdEcTRjSjdJdTNt?=
- =?utf-8?B?NG1sRFRTWFg1U3ZHSFEzb2V3TytrWFpqZGFPZkxIL0tKZkpubnlaTkFJejBz?=
- =?utf-8?B?b2FHOW1CUXdNZGtzMXUxemhBNVZsR2d0MWhlYlZqZGoxK2tPenBseFU0ajRW?=
- =?utf-8?B?K0JXZk1NcTdqYW9PQUlEY2tHOWdQUUxVM2FRcnB3QUpFTnVHZFdmUXo5OWpK?=
- =?utf-8?B?Y3d4THNMaGc1MDVsM0MvalprVDc0b0ZrQmQvWm1ueDhRdm5kemc5OFZlelB3?=
- =?utf-8?B?c0loaXhHUTMxY0JKVnIwdkJmQTBmazNxRXFZUS9vUEtxZXhaTi8yQ1lqUVdI?=
- =?utf-8?B?elp3S25vRVAwb3ZBOGRmTzhUaWdTcEk2K2JncTBYSHNiS3I1cnVINTdoejhD?=
- =?utf-8?B?QkJWWW9BQUxzM0Mxc0IzTjUrdjJDSFR2S0duMmkxcldsdVU5SE1QOC9VdzRz?=
- =?utf-8?B?VVdEWjQ3VVFmQXZ3eURVYmtHR3QrMUo5OVdxQkhwRFlQY1hNTk05NnZXSkNW?=
- =?utf-8?B?d01xMExhTnlGc2VkeExYWFBNY01vbC9JeHhobm9Hc1laS29tL0NVZndkT0RY?=
- =?utf-8?B?NlRTS05qemEyTGQ0RFJsZUgwSG0vQ0Zod2k4QVRGMllRSjMyektSR2drcWNZ?=
- =?utf-8?B?VUoxYXAwRFJUVjgvb1dTSW1iZG5tT2RqbDd5VlAyL2VBVFV1Uy9YWjNDQyty?=
- =?utf-8?B?MUIrZWhicnJRalJUSG5BYmdRRXVPekN5WEl6aEFQZmV4NkpueGdqMkp1TDky?=
- =?utf-8?B?djVZUm9hcWZGS1dFLzhsYUFDZWh5M1lMNVAxZnZZRklScVgzandBZkxDdEF2?=
- =?utf-8?B?bVdpN1NsZSsvZEhsMzY3bEs4MXlERzU0Q2FmeDU1aXNWRUZxeWhxZTI2Vmoz?=
- =?utf-8?B?V0N4UjhSd0JCSmhlR0w2UzJib1lxK2tvSFlCZDZQamppa21kYnkxRlNyZmRP?=
- =?utf-8?B?dnVZd3R6RjNmbmtNeHVvc01NbEdOU2pOU0J5b2Z3TG00WnhqaVk5czZ4RVpx?=
- =?utf-8?B?M1Z0SThHZ05GQjZleDhYRnFpbk9JaTFvUUNZZHkzMGpPamNydS9TcFBsTVhx?=
- =?utf-8?B?TGh6b0svUThpL2UyMTN3SzhGRU5DT0QyWHlPc1BlcG45Q0daMUJDNjA2bHNB?=
- =?utf-8?B?SXFUWEFDQmFaV1dKcnVOdUJTeVNPT2JodnkrWjdYSE42TFdISUxaNUxWQm1u?=
- =?utf-8?B?bmxEYVA0T3orNzdQczZMVjc0eXFrUmFtMk1LVzI4aGNIUjhHaUxocGNwRUZy?=
- =?utf-8?B?dkpEeTdKNnhHN0IyYy8vTnNZYU1uR2UxWERtYTdGRDgwa2NmWHJLRjlYNXVC?=
- =?utf-8?Q?HiQOCbM9f3tLd3wtXVPe4bPiJRbJgl3g?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TUlKbVVGWkZYRGZaYmR2KzRmWTRuT0JReXlMd25RU2lYeHdhYnQrY3hQTVZC?=
- =?utf-8?B?b21iOXI0SmVvV1RYTVpJSWZGRkZwWUhPenVEeXd4OWQ1WWhkV1hRT0Q0S0dY?=
- =?utf-8?B?TGg4NWZTbGFGR1dvZWlyTC9iMnh3Nll6c0FjMmxpaytWWjlYcnI2QlhjRmhM?=
- =?utf-8?B?cmxzY2FJcEFsUDFmK3FMdzcrR3l3eWhqRmttVTg3dG05eFppQTluU2Rxakho?=
- =?utf-8?B?YWFBNE1US2tocDl6UGM0WXIxS0R4R3h1THFNSWhUd0Z3djV5ZWhrM1VjUzN1?=
- =?utf-8?B?SEUwTVhWNzZwR3F1N0szRWF5ZUZ2TENwMnJhd0RjaXdUMkYxMVpGZTRlWFN3?=
- =?utf-8?B?dUgvOEJodGlUZkJ6R1RneUJEaDNRMWVKMktBRUcyeU5SOUpoK2RMZ2p5bmdC?=
- =?utf-8?B?Rmt3djdubk1XSnBWa3lnSjFnVEJrcGdiL0JlaEdaVytlWk9FdlBia1lESlNm?=
- =?utf-8?B?QzhDYWt1ZDFxTnB0UytHbHlRNlY3cURYRTkyUm5hQUFZYnVoTC92RmxQQUpz?=
- =?utf-8?B?cmRnK1NQTmk1U0lubU9rNWFaQkhzOVJ6ZzlOS1VtS3Q3R1Myclp5TkJxTzdR?=
- =?utf-8?B?QTFLTkI1eENIakhERUliQXd5M25rYVdzV05LdDBlRWhMYmtaVXVyVGhkZDYy?=
- =?utf-8?B?dzAyQklldzNzdGRjOVlML2Fka2tqZFd5RUFUcDBBak92SEw0WG43NkhXT3J3?=
- =?utf-8?B?czZCYnRLTEdMVlhISlVvWTFpdnUveUtHbzBVK0ZXeU5OeU5NandrSHlwcGlY?=
- =?utf-8?B?clpGL1VpczUzSUpRVVpOVno3MUJEanpjdHNteUUrL2UwY3F5RzNHN1pPRm95?=
- =?utf-8?B?TTQ1SU1seU9vSUNLMXZINE80NXg3MEZqd1hPU0NNbTNuOGF4L2J5cVZUTGZR?=
- =?utf-8?B?VW1NaTlENit6L0Z5Q2ViZnhnKzlWNis5OXduU1hFTk1rK1UvQVc3bkZIeEYr?=
- =?utf-8?B?RHNpOGxqUEZ4Y201MDQ3RFdnWnBjcXoxRkpLMEZCT2VEcnJLc2xXSTh2MWxt?=
- =?utf-8?B?Z1pOdTkzalBYRnBmcFZiSXJjalRXbi9ZMnAycCtZcTAwcXlGZXlHQzV0bkFU?=
- =?utf-8?B?QnNSRlp1WDJwNS91OEVvdEJac1ZVVzVaa3NmMXdSVi8rUWhIbGp4OXk4a2dj?=
- =?utf-8?B?SmRqdklXSUNBRnh1RXNJZUhxaFA2aGhKWnJOQTFBZXhIYUQzbmU0TFNHMFN1?=
- =?utf-8?B?RVF4RGhaeGFoNld3aUlqdlNpemp2YzJadHRraFRCR2J6WWd2dFRlTnNxNjVG?=
- =?utf-8?B?NjRGOERZQ1d2cUZnMmZhNUxlZFRGWWdXNjF3MzRsbVBhbzdYL1BKZ1NKWVN4?=
- =?utf-8?B?dnpvYTdyY05INUphK3p0UE1TbEp3M1d6UkRLUkVJUnFyUHVCM1kzU0d3S1BS?=
- =?utf-8?B?RmZmdE5VeDJ6UFMyeXlXVFVQVm12QUhyMzNaUmlrWUhQMUdUS2JtaXFrMFRS?=
- =?utf-8?B?eFIxWWhKazFoUUZXb2RKRDdmZDI1MDR3R0dIL2JTTWNXWXQ5NlZLZEZhbFRK?=
- =?utf-8?B?T0MwNC9kb3JtYVRab054OHdyU2VVUVlLZVZ3SXMzTWlKY2xrVjBXYjA5RDZH?=
- =?utf-8?B?S3JMRlpuNHk5SWd1QW81ZE03RHZ1T0NzTXY4bGM1Vm9HSW5NYTMwdTc5YmF4?=
- =?utf-8?B?TmJ0UzJma21YOU5XbkdvQ2F5SDI2TWJ0aEwzZSs1NnpSZ3p6VldLeW5oTnFr?=
- =?utf-8?B?QmtrSzdVQW9ha2ozUTVaUjE2S0tZKzJScjVrVlArWE1nYWl3NTFzMnFJOVJZ?=
- =?utf-8?B?cWNZaXJqb3pRaFRDK2tvOFBmS3loT1doUEhYbkxPOERWVzdFc2dZKzZWQUZY?=
- =?utf-8?B?THpmNkpSNENCNnB5a0hYODZkSXVkSXF2eXF2a0hsOFdPS0l6ZUlXUk5OUS9U?=
- =?utf-8?B?NmZxYmg5VW4yNmlnOUlEQ2EvQVdhUTMwb01sNjZzQUhIc0tvb2ZpWWhHSk5o?=
- =?utf-8?B?YWNyM1FMekhZc2M3Y2FyZ1hPMUhkcFhhZDhxb3ZVME12UGVBdktWZFRrQ1dD?=
- =?utf-8?B?OTdzaUxHcE9IeGtBL21UQi9peXBRVEVhaHhQbU5kVzlSNHBCMjQ2L2xBQ2tl?=
- =?utf-8?B?S2xmL1JUSU1RU2s5aEJhU2pqc1c4RzczOFAzSVZvejJIQUQvT2pWbzhtTlZ2?=
- =?utf-8?B?cGJPUjQydmhNM240Vm1NOGdPcHpFK1JhSTBNamJSMGY1eW14Tjk3VFpRcHNh?=
- =?utf-8?B?UTROSmtlNXVGL0xHUE5ZUFpoMmNzNjBKMjdTclhQSEpwWkRIQTEyK1VDUGtZ?=
- =?utf-8?B?SnlhQVpQTW5mQUNvVTVRZmMwcDZCZDF0RlpjUGx3R3JaejlBMHF5UVJ2RmYy?=
- =?utf-8?B?dHVYS1RKVmNVcE5tajNEYlgwcVN4ZjFlNWVxWkZGR21NbmlPWVpzSEN1VStI?=
- =?utf-8?Q?qgN2QiArvxV5j+0w=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25ff9199-745b-4c9a-dbaf-08de3d3ecf93
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2025 07:35:11.6306 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FRPYYKRImUxN5zXwckkJDFtY6iX7zk4QOhobz/x4F7FL3+8q7jXHZWmSwegbkBTkLvCFhqYMg5m3kSiEc5mfoAArbzjNnSnNXjBdmoPTkyc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5796
+References: <20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com>
+ <20251216084623.19589-3-alif.zakuan.yuslaimi@altera.com>
+ <CAN7C2SCMJ4bK0eQc15zGtn1g9-EOuOucY1z+_AjLwrV6dbY3QQ@mail.gmail.com>
+ <bdc886c5-c101-426c-844e-ef5b5eaac120@altera.com>
+In-Reply-To: <bdc886c5-c101-426c-844e-ef5b5eaac120@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Wed, 17 Dec 2025 15:50:26 +0800
+X-Gm-Features: AQt7F2qjJGw0fy3H_d0LP1yTRAe_s5qqa3uLhlGl9Hqnbnw9DRWu11hj0k3_sc8
+Message-ID: <CAN7C2SCdBe_ZqT0U89mcEjQki6viQVcg4-VwT93oBkhFMUYUtw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/5] ddr: socfpga: Add ECC DRAM scrubbing support for
+ Gen5/Arria10
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: u-boot@lists.denx.de, Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,37 +97,359 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alif,
 
-On 16/12/2025 4:21 pm, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On Wed, Dec 17, 2025 at 3:27=E2=80=AFPM Yuslaimi, Alif Zakuan
+<alif.zakuan.yuslaimi@altera.com> wrote:
 >
-> SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS is already added in
-> SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS_OFFSET() macro.
+> Hi Brian,
 >
-> Remove extra SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS in mpu1 address
-> computation.
+> On 16/12/2025 5:46 pm, Sune Brian wrote:
+> > [CAUTION: This email is from outside your organization. Unless you trus=
+t the sender, do not click on links or open attachments as it may be a frau=
+dulent email attempting to steal your information and/or compromise your co=
+mputer.]
+> >
+> > Hi Alif,
+> >
+> > I have a question on sdram_arria10.c
+> > Why spl_gen5.c requires:
+> > static struct bd_info bdata __attribute__ ((section(".data")));
+> > with gd->bd =3D &bdata;
+> > But on arria10 this is not required, it is done on another file?
+> >
+> > Thank you,
+> > Brian
+> >
 >
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> ---
->   drivers/ddr/altera/sdram_arria10.c | 1 -
->   1 file changed, 1 deletion(-)
+> I found that removing these will cause failure to boot U-Boot SPL after
+> trying to reboot from Linux, SPL will keep on looping during DDR
+> initialization.
 >
-> diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera/sdram_arria10.c
-> index d3305a6c82d..a4f941a2215 100644
-> --- a/drivers/ddr/altera/sdram_arria10.c
-> +++ b/drivers/ddr/altera/sdram_arria10.c
-> @@ -475,7 +475,6 @@ const struct firewall_entry firewall_table[] = {
->   	},
->   	{
->   		"mpu1",
-> -		SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS +
->   		SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS_OFFSET(mpuregion1addr),
->   		SOCFPGA_SDR_FIREWALL_MPU_FPGA_ADDRESS_OFFSET(enable),
->   		ALT_NOC_FW_DDR_SCR_EN_MPUREG1EN_SET_MSK
+> This could be because of the missing board info in the memory, leading
+> to a failed initialization as gd->bd is not set up properly after a warm
+> reset.
+>
+> SPL runs from the small OCRAM before DRAM is available. CycloneV has a
+> much more limited OCRAM space compared to Arria10.
 
+I am referring to the A10 case here. Maybe you confused my previous questio=
+n.
+Why I am asking this question is because both A10 and GEN5 aka C5 use
+the same soc32.c. Hence, the ECC will require the gd->bd-> to be defined
+in order for .size or .start etc to be used.
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
++       start_addr =3D gd->bd->bi_dram[0].start;
++       size =3D gd->bd->bi_dram[0].size;
 
-Best regards,
-Tien Fong
+So your dynamic means it is well set up before the ECC init uses those
+variables?
+As I am not finding, gd->bd is not set in the a10_spl.c at least not
+really distinct as "=3D"
 
+Thanks,
+Brian
+
+>
+> Due to this memory space limitation, there is no dynamic memory
+> allocation in Gen5 SPL, therefore bd_info must be allocated statically.
+>
+> By declaring bd_info as static and placing it in .data section, we can
+> minimize Gen5 SPL OCRAM usage, as well as making the SPL execution much
+> more simpler and robust.
+>
+> Thanks,
+> Alif
+>
+> > On Tue, Dec 16, 2025 at 4:46=E2=80=AFPM <alif.zakuan.yuslaimi@altera.co=
+m> wrote:
+> >>
+> >> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> >>
+> >> The SDRAM must first be rewritten by zeroes if ECC is used to initiali=
+ze
+> >> the ECC metadata. Make the CPU overwrite the DRAM with zeroes in such =
+a
+> >> case.
+> >>
+> >> This scrubbing implementation turns the caches on temporarily,
+> >> then overwrites the whole RAM with zeroes, flushes the caches and turn=
+s
+> >> them off again. This provides satisfactory performance.
+> >>
+> >> Move common code sdram_init_ecc_bits() to new common file sdram_soc32.=
+c.
+> >> Preparation for Gen5 uses the same memory initialization function as
+> >> Arria10.
+> >>
+> >> Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
+> >> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> >> ---
+> >>   arch/arm/mach-socfpga/spl_gen5.c   |  4 ++
+> >>   drivers/ddr/altera/Makefile        |  4 +-
+> >>   drivers/ddr/altera/sdram_arria10.c | 25 +++-------
+> >>   drivers/ddr/altera/sdram_gen5.c    | 18 ++++++++
+> >>   drivers/ddr/altera/sdram_soc32.c   | 74 ++++++++++++++++++++++++++++=
+++
+> >>   drivers/ddr/altera/sdram_soc32.h   | 11 +++++
+> >>   6 files changed, 115 insertions(+), 21 deletions(-)
+> >>   create mode 100644 drivers/ddr/altera/sdram_soc32.c
+> >>   create mode 100644 drivers/ddr/altera/sdram_soc32.h
+> >>
+> >> diff --git a/arch/arm/mach-socfpga/spl_gen5.c b/arch/arm/mach-socfpga/=
+spl_gen5.c
+> >> index df79cfe0f7f..5c78a4c1fea 100644
+> >> --- a/arch/arm/mach-socfpga/spl_gen5.c
+> >> +++ b/arch/arm/mach-socfpga/spl_gen5.c
+> >> @@ -27,6 +27,8 @@
+> >>
+> >>   DECLARE_GLOBAL_DATA_PTR;
+> >>
+> >> +static struct bd_info bdata __attribute__ ((section(".data")));
+> >> +
+> >>   u32 spl_boot_device(void)
+> >>   {
+> >>          const u32 bsel =3D readl(socfpga_get_sysmgr_addr() +
+> >> @@ -146,6 +148,8 @@ void board_init_f(ulong dummy)
+> >>          /* enable console uart printing */
+> >>          preloader_console_init();
+> >>
+> >> +       gd->bd =3D &bdata;
+> >> +
+> >>          ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
+> >>          if (ret) {
+> >>                  debug("DRAM init failed: %d\n", ret);
+> >> diff --git a/drivers/ddr/altera/Makefile b/drivers/ddr/altera/Makefile
+> >> index 7ed43965be5..b9e3302d714 100644
+> >> --- a/drivers/ddr/altera/Makefile
+> >> +++ b/drivers/ddr/altera/Makefile
+> >> @@ -7,8 +7,8 @@
+> >>   # Copyright (C) 2014-2025 Altera Corporation <www.altera.com>
+> >>
+> >>   ifdef CONFIG_$(PHASE_)ALTERA_SDRAM
+> >> -obj-$(CONFIG_TARGET_SOCFPGA_GEN5) +=3D sdram_gen5.o sequencer.o
+> >> -obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) +=3D sdram_arria10.o
+> >> +obj-$(CONFIG_TARGET_SOCFPGA_GEN5) +=3D sdram_soc32.o sdram_gen5.o seq=
+uencer.o
+> >> +obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) +=3D sdram_soc32.o sdram_arria10=
+.o
+> >>   obj-$(CONFIG_TARGET_SOCFPGA_STRATIX10) +=3D sdram_soc64.o sdram_s10.=
+o
+> >>   obj-$(CONFIG_TARGET_SOCFPGA_AGILEX) +=3D sdram_soc64.o sdram_agilex.=
+o
+> >>   obj-$(CONFIG_TARGET_SOCFPGA_N5X) +=3D sdram_soc64.o sdram_n5x.o
+> >> diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera/s=
+dram_arria10.c
+> >> index d3305a6c82d..0e3a1d42f34 100644
+> >> --- a/drivers/ddr/altera/sdram_arria10.c
+> >> +++ b/drivers/ddr/altera/sdram_arria10.c
+> >> @@ -21,9 +21,14 @@
+> >>   #include <linux/bitops.h>
+> >>   #include <linux/delay.h>
+> >>   #include <linux/kernel.h>
+> >> +#include <linux/sizes.h>
+> >> +
+> >> +#include "sdram_soc32.h"
+> >>
+> >>   DECLARE_GLOBAL_DATA_PTR;
+> >>
+> >> +#define PGTABLE_OFF    0x4000
+> >> +
+> >>   static void sdram_mmr_init(void);
+> >>   static u64 sdram_size_calc(void);
+> >>
+> >> @@ -192,24 +197,6 @@ static int sdram_is_ecc_enabled(void)
+> >>                    ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK);
+> >>   }
+> >>
+> >> -/* Initialize SDRAM ECC bits to avoid false DBE */
+> >> -static void sdram_init_ecc_bits(u32 size)
+> >> -{
+> >> -       icache_enable();
+> >> -
+> >> -       memset(0, 0, 0x8000);
+> >> -       gd->arch.tlb_addr =3D 0x4000;
+> >> -       gd->arch.tlb_size =3D PGTABLE_SIZE;
+> >> -
+> >> -       dcache_enable();
+> >> -
+> >> -       printf("DDRCAL: Scrubbing ECC RAM (%i MiB).\n", size >> 20);
+> >> -       memset((void *)0x8000, 0, size - 0x8000);
+> >> -       flush_dcache_all();
+> >> -       printf("DDRCAL: Scrubbing ECC RAM done.\n");
+> >> -       dcache_disable();
+> >> -}
+> >> -
+> >>   /* Function to startup the SDRAM*/
+> >>   static int sdram_startup(void)
+> >>   {
+> >> @@ -706,7 +693,7 @@ int ddr_calibration_sequence(void)
+> >>                  puts("FW: Error Configuring Firewall\n");
+> >>
+> >>          if (sdram_is_ecc_enabled())
+> >> -               sdram_init_ecc_bits(gd->ram_size);
+> >> +               sdram_init_ecc_bits();
+> >>
+> >>          return 0;
+> >>   }
+> >> diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sdra=
+m_gen5.c
+> >> index 3c79bb11802..7a0a043557b 100644
+> >> --- a/drivers/ddr/altera/sdram_gen5.c
+> >> +++ b/drivers/ddr/altera/sdram_gen5.c
+> >> @@ -2,6 +2,7 @@
+> >>   /*
+> >>    * Copyright Altera Corporation (C) 2014-2015
+> >>    */
+> >> +#include <cpu_func.h>
+> >>   #include <dm.h>
+> >>   #include <errno.h>
+> >>   #include <div64.h>
+> >> @@ -17,8 +18,12 @@
+> >>   #include <asm/bitops.h>
+> >>   #include <asm/io.h>
+> >>   #include <dm/device_compat.h>
+> >> +#include <linux/sizes.h>
+> >>
+> >>   #include "sequencer.h"
+> >> +#include "sdram_soc32.h"
+> >> +
+> >> +#define PGTABLE_OFF    0x4000
+> >>
+> >>   #ifdef CONFIG_XPL_BUILD
+> >>
+> >> @@ -562,6 +567,12 @@ static unsigned long sdram_calculate_size(struct =
+socfpga_sdr_ctrl *sdr_ctrl)
+> >>          return temp;
+> >>   }
+> >>
+> >> +static int sdram_is_ecc_enabled(struct socfpga_sdr_ctrl *sdr_ctrl)
+> >> +{
+> >> +       return !!(readl(&sdr_ctrl->ctrl_cfg) &
+> >> +                 SDR_CTRLGRP_CTRLCFG_ECCEN_MASK);
+> >> +}
+> >> +
+> >>   static int altera_gen5_sdram_of_to_plat(struct udevice *dev)
+> >>   {
+> >>          struct altera_gen5_sdram_plat *plat =3D dev_get_plat(dev);
+> >> @@ -604,6 +615,13 @@ static int altera_gen5_sdram_probe(struct udevice=
+ *dev)
+> >>          sdram_size =3D sdram_calculate_size(sdr_ctrl);
+> >>          debug("SDRAM: %ld MiB\n", sdram_size >> 20);
+> >>
+> >> +       if (sdram_is_ecc_enabled(sdr_ctrl)) {
+> >> +               /* Must set USEECCASDATA to 0 if ECC is enabled */
+> >> +               clrbits_le32(&sdr_ctrl->static_cfg,
+> >> +                            SDR_CTRLGRP_STATICCFG_USEECCASDATA_MASK);
+> >> +               sdram_init_ecc_bits();
+> >> +       }
+> >> +
+> >>          /* Sanity check ensure correct SDRAM size specified */
+> >>          if (get_ram_size(0, sdram_size) !=3D sdram_size) {
+> >>                  puts("SDRAM size check failed!\n");
+> >> diff --git a/drivers/ddr/altera/sdram_soc32.c b/drivers/ddr/altera/sdr=
+am_soc32.c
+> >> new file mode 100644
+> >> index 00000000000..b8b42ef8e03
+> >> --- /dev/null
+> >> +++ b/drivers/ddr/altera/sdram_soc32.c
+> >> @@ -0,0 +1,74 @@
+> >> +// SPDX-License-Identifier: GPL-2.0
+> >> +/*
+> >> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+> >> + */
+> >> +
+> >> +#include "sdram_soc32.h"
+> >> +#include <string.h>
+> >> +#include <linux/sizes.h>
+> >> +#include <cpu_func.h>
+> >> +#include <watchdog.h>
+> >> +#include <wait_bit.h>
+> >> +#include <asm/global_data.h>
+> >> +#include <asm/system.h>
+> >> +#if !defined(CONFIG_HW_WATCHDOG)
+> >> +#include <asm/arch/reset_manager.h>
+> >> +#endif
+> >> +
+> >> +DECLARE_GLOBAL_DATA_PTR;
+> >> +
+> >> +#define PGTABLE_OFF    0x4000
+> >> +
+> >> +/* Initialize SDRAM ECC bits to avoid false DBE */
+> >> +void sdram_init_ecc_bits(void)
+> >> +{
+> >> +       u32 start;
+> >> +       phys_addr_t start_addr;
+> >> +       phys_size_t size, size_init;
+> >> +
+> >> +       start =3D get_timer(0);
+> >> +
+> >> +       start_addr =3D gd->bd->bi_dram[0].start;
+> >> +       size =3D gd->bd->bi_dram[0].size;
+> >> +
+> >> +       printf("DDRCAL: Scrubbing ECC RAM (%ld MiB).\n", size >> 20);
+> >> +
+> >> +       memset((void *)start_addr, 0, PGTABLE_SIZE + PGTABLE_OFF);
+> >> +       gd->arch.tlb_addr =3D start_addr + PGTABLE_OFF;
+> >> +       gd->arch.tlb_size =3D PGTABLE_SIZE;
+> >> +       start_addr +=3D PGTABLE_SIZE + PGTABLE_OFF;
+> >> +       size -=3D PGTABLE_OFF + PGTABLE_SIZE;
+> >> +
+> >> +       dcache_enable();
+> >> +
+> >> +       while (size > 0) {
+> >> +               size_init =3D min((phys_addr_t)SZ_1G, (phys_addr_t)siz=
+e);
+> >> +               memset((void *)start_addr, 0, size_init);
+> >> +               size -=3D size_init;
+> >> +               start_addr +=3D size_init;
+> >> +
+> >> +#ifdef CONFIG_HW_WATCHDOG
+> >> +               /*
+> >> +                * In case the watchdog is enabled, make sure to
+> >> +                * (re-)configure watchdog so that the defined timeout=
+ is
+> >> +                * valid.
+> >> +                */
+> >> +               debug("%s: %d\n", __func__, __LINE__);
+> >> +               hw_watchdog_init();
+> >> +#else
+> >> +               /*
+> >> +                * If the HW watchdog is NOT enabled, make sure it is =
+not
+> >> +                * running, because it is enabled in the preloader and
+> >> +                * causing boot loop if is not handled.
+> >> +                */
+> >> +               debug("%s: %d\n", __func__, __LINE__);
+> >> +               socfpga_per_reset(SOCFPGA_RESET(L4WD0), 1);
+> >> +               socfpga_per_reset(SOCFPGA_RESET(L4WD0), 0);
+> >> +#endif
+> >> +       }
+> >> +
+> >> +       dcache_disable();
+> >> +
+> >> +       printf("DDRCAL: SDRAM-ECC initialized success with %d ms\n",
+> >> +              (u32)get_timer(start));
+> >> +}
+> >> diff --git a/drivers/ddr/altera/sdram_soc32.h b/drivers/ddr/altera/sdr=
+am_soc32.h
+> >> new file mode 100644
+> >> index 00000000000..85a951a5a74
+> >> --- /dev/null
+> >> +++ b/drivers/ddr/altera/sdram_soc32.h
+> >> @@ -0,0 +1,11 @@
+> >> +/* SPDX-License-Identifier: GPL-2.0 */
+> >> +/*
+> >> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+> >> + */
+> >> +
+> >> +#ifndef        _SDRAM_SOC32_H_
+> >> +#define        _SDRAM_SOC32_H_
+> >> +
+> >> +void sdram_init_ecc_bits(void);
+> >> +
+> >> +#endif /* _SDRAM_SOC32_H_ */
+> >> --
+> >> 2.43.7
+> >>
+>
