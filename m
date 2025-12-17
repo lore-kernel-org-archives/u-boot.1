@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C45DD65C77
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CD9D65C7C
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B6EC83B32;
-	Wed, 17 Dec 2025 17:06:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 985AA83B32;
+	Wed, 17 Dec 2025 17:20:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arturia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aezeRqqf";
+	dkim=pass (2048-bit key; unprotected) header.d=arturia.com header.i=@arturia.com header.b="VTKYQR34";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E737083B32; Wed, 17 Dec 2025 17:06:05 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
+ id 1BC4F83B95; Wed, 17 Dec 2025 17:10:03 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3602483AA0
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:06:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33E6083AA0
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:10:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=arturia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7c750b10e14so2538417a34.2
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:06:00 -0800 (PST)
+ spf=pass smtp.mailfrom=victor.krawiec@arturia.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-477a219dbcaso52276105e9.3
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 08:10:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765987559; x=1766592359; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DmNmwsd8e/5r9Rl6W982/Ln6PNy6fCMnSBCVGatc0lU=;
- b=aezeRqqfB2YlgjWkU1JR1NtGTjE9kBt/sC9Cko5YWbXrOeJcMklkbgG4dzDJxk1Ndi
- XbktuSVY90Qlt0xOj5J2XLdpdPKGnZjvo58wi6p4Mvm9G7byoFjzLJeaiekGzJdg1bW8
- cpwLGzwKp/p0hWxLYBsLWn8e33fn9GHH4x5qc=
+ d=arturia.com; s=arturia; t=1765987799; x=1766592599; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0hEpsGuxPHQrewl36Q/v878nLi0AoFZXWqC5DjOrzZY=;
+ b=VTKYQR34keKHdx1aiIkrtTUpuLhzk1baEwUtivFs/6QqvQcue6/Kqga8Na5CBqv0wb
+ 2MeUU9DG/XdtFpBNrNzWeTKQsd5JC6SX5vaJFJ4QNbw0ZTLq1N1SzfWwGlxnf8O1kk5l
+ WQtZuC3S/p+Wl8MlMr/euKlDUPLO6YWC447zTuMQd9XVuMjGVK3KvCDdwnL8FoLP5KJD
+ GrnzomjC/WPMPbgSCiFwmT+SPHH9Hn4/8ynSHxzIqyMgDyBvTSXEvPP0r2kVfPH2JXIv
+ T5G5I3UAi0xyCobl/QYUU9hc6TbG35CC0f+qBYIe98o4CLdxhuktx9CfdX2QHNa/n/uf
+ jNNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765987559; x=1766592359;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DmNmwsd8e/5r9Rl6W982/Ln6PNy6fCMnSBCVGatc0lU=;
- b=q2797/miSzf7upznrfTvkzP3bMdqZTdY/9lgSHf4TP+jX9lMfINQIsUL0HNfuHZr2l
- eC+MuoCql+2VLS59Pe98u7zrIkqPRycxvokyFWhrsugV0DIwzAj4wd9sdfgPqIkgMZWt
- UBIOaSsa8tjafAJyFpmm5K0wnnvmwElFTKsDaHZFnX13Hs9ycTzen/KQlePEE4YzXBvK
- ZN4DtC4WuctiUnPD0KlHJqphdleNV/qgsMk8EOj+YOvja73zwScpSQ7wzdA0U2mEYBUK
- Va0edFelG2vC2iUaTPSo68hHfrV8YbyDhqlxGq6ti9OhMzeDor6U0eoeQG2321jbc6PF
- sq8A==
-X-Gm-Message-State: AOJu0YyItGlOeLbw11mReLBbme5hBoCEet0jT7mjwGl3A0RN2/dnRvqb
- eviwzapADyB9aULwLcDXF4OZgtnb+VKj8azODScqEJRd1tA216WMo8ahvha0ZvO7ID+0ivXhZEo
- 7lds9EWc=
-X-Gm-Gg: AY/fxX4EedvQ90QM9T0Jh2K0K2mSSU3V3GsQv+IaFEx9ulBbgFDjg8+v4IwAm5oIQAp
- xgt5gMpEgK66v8kHybV8rYiYZE3nC6e5aTKhx37C2wiQVENeKWO4m4+yAX89a2jPEd4cAnHQ/JQ
- RaacvOgTTtlAFZTSsxIfEBqrZdbOMgbk9rMdW8DM11FMhJ1G6KGEfsqwCwvdXPPJdeiGBuXRya0
- EFFDEZKou/I9r8s7kNiIWdfRO+7dHRWIOyZKSz+2fhVyYY0s4SKay3Bj01oZ2Y8YCOhREl3Gp4B
- rKyUAkyueR0Y0qJfnGCliIH9zO3q6D5e6k8yDIpCzercn18W6fWTmSzdMGVkkY+9rx1U+bnGU8Q
- J3a8a0vvm4LpNCr4oiWwSA1OLw9hnGUvGHC57H+nkWh2YOOLufxGGdiDDV9VAYSK2IGCspLo+Dr
- Sh+PhdvDCQReiIStA0hS/Zw0p7lQ0UXr42UWaF0n/kuVClFSHZ/A==
-X-Google-Smtp-Source: AGHT+IFaIyKVmI3LIqGTNJOFceoQPZHslX4tb1dmAnXeBKbv6TdFnv5zMAP819E+PlUhgyvEoNIiGA==
-X-Received: by 2002:a05:6830:2405:b0:7c7:1c77:f107 with SMTP id
- 46e09a7af769-7cae8398d68mr10057288a34.34.1765987558778; 
- Wed, 17 Dec 2025 08:05:58 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cadb3246b3sm13388882a34.21.2025.12.17.08.05.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Dec 2025 08:05:58 -0800 (PST)
-Date: Wed, 17 Dec 2025 10:05:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>
-Subject: Re: [GIT PULL] please pull scmi-master-2025-12-17
-Message-ID: <20251217160556.GE303283@bill-the-cat>
-References: <aUK3gznUWeKoLi_j@nxa18884-linux.ap.freescale.net>
+ d=1e100.net; s=20230601; t=1765987799; x=1766592599;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0hEpsGuxPHQrewl36Q/v878nLi0AoFZXWqC5DjOrzZY=;
+ b=gfW9XK8DBCJTXrGAw59ZY3GCeyoSRC9jUF7BBrcRSUFYY3DZXlzFMH+S52RvXllfvk
+ +u2NF2kysnVb4xO0GXXkP5KZlXwfdr1uWeatgL6g78tvNQbXoLJiUZEFrzMPIaySYnTE
+ bq2jFJjB+vX3BiI1ITb1J8ZXPS0VAnixYCbRgLjMfu4LQJd/+vN9KQp41JJsVx9BahTS
+ 1hB4CDWQ4A7mzlxXDlq251J+SlkaolwpC6lnbCVLV5AvJ3Nml9mIa6gaCT8r7ZJ1/hbN
+ GptHbiCeSb7JTtMYw1nn7GzFsiiEVASBsa5uejzoyO6bif5tl5ZtpPn7ANR3hJ1PF/D5
+ flzA==
+X-Gm-Message-State: AOJu0YyHqP5RKMU8OCci8CpKhiTYlvnODqYrZORaIjDSnV6rCCArkyaw
+ VK1f7jQH8g+GtCOEJl6E9c2ZiMr31p6qa37UDmPCJiA+CeUUMp5HzLC0sY878aVxGoBbQczcm0E
+ ZFJjIz9yDf02fvkmdiqMjCzijLFcRggkrH/+MRozORBRYYANc8z5sEMUFaZ66QCLCrby/zIkBKy
+ yDaGG2LjYDr2P9ccry6Lw6Am5INNilyYPf76Uaoin9vOjAo7e+
+X-Gm-Gg: AY/fxX5vTLVSJhQO8i3UHA8Vr7LD+XWF1H295jEAVsHyZoC75x34zyoK7GfDzGIgZAn
+ ansRw8gENyW5zgjfVo+zcb225s4RXvsAQwJ8ghxRF1LMwUXR4tdsD5wCCJyDSBt6Bk27oAx6yHR
+ 47SNLyFtF45mS8G0/MUOJk6tkCPIay01ZloLzSAdGI9YI177N36uYYNHjIoqP2hYcYeof77wUsT
+ DWMNaXSwqNo3ysQTbrqH4KndpqSaVlSmJlWDUxsFT6y1KIaNrF+q7CVOeToZoGsIWCq4H7gN6ky
+ 8XTaQGUC5ZYaFai5khrfYKn4XuLCW1jhSTPNFQ0t/XA3rgBIGzkuJtpawXlHIKLirKTk/YessNe
+ BU4+nLEITAioqnYFnQfB6DDiuwE4AZAjaBnCq0mk93CZ+lPSvcjCAfLQapELMy/o9uijctlKDbc
+ ny+PyBjw7TOxT5DG8/iBrkeag7cVh57Gn1uQ0M3Pa4BMup9FB3ZeWrNUbMlQVn1g==
+X-Google-Smtp-Source: AGHT+IGhE9NXIjFpO1iooh1XxV1+fi59IfB2zk/S9sFiOKpUjclDrERZzDAdUeMYtO2mtRoyufMZvg==
+X-Received: by 2002:a05:600c:4e09:b0:477:9c73:267f with SMTP id
+ 5b1f17b1804b1-47a8f914a25mr220593925e9.33.1765987799026; 
+ Wed, 17 Dec 2025 08:09:59 -0800 (PST)
+Received: from [192.168.32.21] (226.142.197.77.rev.sfr.net. [77.197.142.226])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47bd995d52csm31490175e9.17.2025.12.17.08.09.58
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Dec 2025 08:09:58 -0800 (PST)
+Message-ID: <0d8cb0a2-5581-4885-b7bc-34402a4ec3c8@arturia.com>
+Date: Wed, 17 Dec 2025 17:09:57 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Rf4ZyvP9Bue+vUXR"
-Content-Disposition: inline
-In-Reply-To: <aUK3gznUWeKoLi_j@nxa18884-linux.ap.freescale.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de
+From: Victor Krawiec <victor.krawiec@arturia.com>
+Subject: Rockchip RK3399 SOC is very slow
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 17 Dec 2025 17:20:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,71 +101,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello U-Boot community,
 
---Rf4ZyvP9Bue+vUXR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I recently moved from Rockchip's vendor U-Boot to mainline U-Boot. I noticed that the boot time on RK3399 is very slow compared to the vendor version. It takes around 8 seconds from power up to kernel start while the vendor one takes 2 seconds.
 
-On Wed, Dec 17, 2025 at 10:00:35PM +0800, Peng Fan wrote:
+In README.rockchip "Future work" section it is written "Run CPU at full speed (code exists but we only see ~60 DMIPS maximum)" which implies that the current mainline implementation lacks CPU configuration to make it fast.
 
-> Hi Tom,
->=20
-> Please pull scmi-master-2025-12-17 scmi clk fixes for master.
->=20
-> ---------------------------------------------------------
-> Fix non-CCF priv initialization in scmi_clk_gate()
-> Fix typo in scmi_clk_get_attibute()
-> Remove duplicated scmi_generic_protocol_version() request
-> ---------------------------------------------------------
->=20
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/287=
-70
->=20
-> Thanks,
-> Peng
->=20
-> The following changes since commit 47b50fb1125c539d80ed3e7f739c02c6486e1b=
-52:
->=20
->   cmd: part: Fix part argument description for `part number` (2025-12-16 =
-11:14:53 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/scmi=
--master-2025-12-17
->=20
-> for you to fetch changes up to c3c30da46fb7aa31de428bcbb96c973493d70695:
->=20
->   clk: scmi: Remove duplicated scmi_generic_protocol_version() request (2=
-025-12-17 16:36:32 +0800)
->=20
-> ----------------------------------------------------------------
-> Patrice Chotard (3):
->       clk: scmi: Fix typo scmi_clk_get_attibute
->       clk: scmi: Fix priv initialization in scmi_clk_gate()
->       clk: scmi: Remove duplicated scmi_generic_protocol_version() request
->=20
->  drivers/clk/clk_scmi.c | 22 ++++++++++++++--------
->  1 file changed, 14 insertions(+), 8 deletions(-)
+I'm very interested in a fix for this problem. The vendor Rockchip tree is based on U-Boot 2017 and its getting more and more difficult to use it. 
 
-I saw Marek had comments on at least one of these patches already, so
-lets get that addressed, thanks.
+Therefore I have some questions to start working on this topic:
+- Could anyone point me in which part of the code to start digging for a potential fix ? Is it related to the PMIC or another subsystem ?
+- Has anyone tried to fix this problem and if yes why was the development abandoned ?
 
---=20
-Tom
-
---Rf4ZyvP9Bue+vUXR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaULU1gAKCRAr4qD1Cr/k
-CiiGAP4/QTnLaJsLpGVQtzprCemF4Mu3V4R1Zr1R2xx5R4wshwD+PhHJf1ikq6vk
-6z2nc9SfnA5SyyVmmORQ4OtRDHeUswg=
-=Uu11
------END PGP SIGNATURE-----
-
---Rf4ZyvP9Bue+vUXR--
+Best regards
+Victor
