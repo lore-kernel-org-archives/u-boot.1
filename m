@@ -4,91 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB387D65559
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0ECD65C43
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:51:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A13A839FA;
-	Wed, 17 Dec 2025 13:41:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B59E83B30;
+	Wed, 17 Dec 2025 13:51:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MURCuYaV";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zpnuRp6+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E3CF83B21; Wed, 17 Dec 2025 13:41:45 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6129A83B32; Wed, 17 Dec 2025 13:51:18 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E401D83979
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 13:41:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F13083AA0
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 13:51:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-42fbc305552so3384970f8f.0
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 04:41:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1765975302; x=1766580102; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=X2pixzsEAXGp3h/d6CVs1Trq43EtXDzyaDpeGJDu4xI=;
- b=MURCuYaVkxBAHIYF2AvSp6vnqeen2s73570KOWAAzMV/W8bddQnKLglTTfT2eGLcPF
- b6/PUolpE/jU+ubCaKhjUvEQDSx9sWFPF5Nn71NTZTASmlKh090jciajbDZKtX80uBb5
- kC8RojqwDCsrkWqyeYFCqYEpalUbQV0ayNiMEg7ryxZ46k2wWj37xTLVyLiyDrzOlc0q
- eEg+RPzp2i9vPFcEb3Fi7o8x79AaxYsatE0RiKahnM+uAG/OUh1iLbptY3VtuLkvYeFv
- 11I2oriikl+wXyhxSe72735xJ0uRLA/RYfsmsn6muGiwEHJOJagmlmHg25fOB6HfbbYF
- J6gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765975302; x=1766580102;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X2pixzsEAXGp3h/d6CVs1Trq43EtXDzyaDpeGJDu4xI=;
- b=a6jx8Pnaw26ZuI3QeD1Pk2/vB5Yq+K1xRLbmXLk8nVqGgMBCEu/gs/njXjP0XuhEl2
- DUQ0vAKzNpiTStXAIfePl7sak+ZPHp/TTz0SfDgZ2zyiUlJBy0wzWtQgxBK8CCqhQwKU
- 9Ps1U5R6ohXnlq7yNaOgJf3cwfFKSlBP+vSDIGRuzdeUdWth5SfuXK9lIRooR3zLoSFV
- quUk0FfjxuGNWHfX9ij+LXxdA7jHUGkX1LAAwWduvsd8gQC3BtpZkLuRKxnOpO0ARRIZ
- /7W8CjFfJ0Pz0FpGqoCpBjJlrwapJJzOJHWwdeA0DimnuQegFUrQcVsnHwFkGbfd7f9z
- iE6Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUrdbmzKdjudoK9m8rRUWmShsCsVoLFUaXqYb+XFcBu6k8H+2MYn6ZvjLfumtM7b0DkaKkLJ7c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXlH6RVoz4d5c7zg9KNp1EFPtE0h7O9InQosQOsItnmtvTspzD
- Uj1EDWARkyoMTJU8qAr+09LTjTWrRtfMBKUht0CWIdnf4UiikHhfhRJqKgaYFOrTLrg=
-X-Gm-Gg: AY/fxX4KLfO/TNJdIQPf3RzFnNVVMwzYe1te3c6qLZhCTKNnQkK2gSQDa/1Ou0V/lcn
- fs4T3EAyIbNKnLLCsDKOToj+C6gQlxEgvgqwLu5FjKlbYZCADl+6xaUXhXBmjdL00LTJRmQwJFf
- 8aZmKRj+7jze2G3xe58UZNITjVgSSBxVKoKXZTuChC3iYqr+U+P6IK8fJOcuI/6fj9lnj3/RUts
- BYu1Lt68IhWFUfG57e6A/olVQDYl/OeG4lhwBmMUycDXFkmzfLM5FIQNYpl68rupVsdm+BPkTwR
- oGZCk0hFTWVd+LSYvYwkX6J3C+z1OElZuZDdREdGpJOdkVPlI3FOW7si931ivK7ly3coSrb1weY
- yfvmwoxldxhCkhPuRmzx+dTF9a3ZEXz3eAZk28yJhwDBcYRG3De/iFkiXfGfv2Wgg3Wfn7/Vzzj
- Y26DGGrLPZkeSZ8oj2mqTNYqbvhcfj1xRgTs48+GYaSJiT5Xh2ql7QGdUzPbNTFKQigcrk
-X-Google-Smtp-Source: AGHT+IHUb/ABHMrRMhKi37RXptEmcIOkfhNcbxanBuKURDEcX/ZYdb4qh1TCgTqPzP81Z0r56g7axg==
-X-Received: by 2002:a5d:6941:0:b0:42f:b707:56f0 with SMTP id
- ffacd0b85a97d-42fb7075b96mr15600670f8f.37.1765975302263; 
- Wed, 17 Dec 2025 04:41:42 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1236:7c01:43a2:9012:56dd:2d0c?
- ([2a0a:ef40:1236:7c01:43a2:9012:56dd:2d0c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4310adeee5dsm4772271f8f.30.2025.12.17.04.41.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Dec 2025 04:41:41 -0800 (PST)
-Message-ID: <f88cd0fc-2a93-4f17-9ff4-5b916e614fe9@linaro.org>
-Date: Wed, 17 Dec 2025 13:41:40 +0100
+ spf=fail smtp.mailfrom=neal.frager@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LBYQWN459+xGVgL7ovwX1UHR8klpX52yN6gLGeQKdpRw7dXgbwvilXIb+hqSpiO+YETUMosZvv3gtaHtg5UwAY+EOftbA2gt7PMilhifcQpnPtKw2HMcCe7UrCa+J7o8LWMACCAMqnl91/ozMTBzvmuaH0gNZkvhJeKjvNsmK4LsKqhkwpyZhfziroZOywv7PiEvy0ZI5EmdpjfZYZ/vBU5GtAwaz452SdAAX605JzKiX1l8vk5BVFbgSZjZCLCOQmgK8HAgPVR+B/zMJMdLV2gsXI+AT0QEMfZ7FxryU9DZnTIvYzbpBG50CWuUZQTizs6meSDDhSJKD1IOYrrHAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Vvq9qxK09+1ZB3EKSiIbck+EJMg06nyjEGEXY7gwVtY=;
+ b=Q8a2QZqTFzX/O4f6oWy8k8FCL7B35UIHCsUm1U5HECUag3c1jXjRZWZt+OV4xo2B+v6mJ/k7mHQA3Y1w48TtJCTp6oMWyQK+ynsC1e+ozyjc95L3ATMEpK19GL0PYe9U8tkK/KvaAsRGHRoXXtEJrqXMrMrIMbaE9kZesUnOKfYUHMXTof567GOVQtE6Lkq3i+s6e8eCRKVpx1gcBeJDR1v9tVlMPCQFiPGqXizLmtTA1X2smpxpv+m8OI2us7mRCwXmeIbu+MhEJac7q4n85m7C9wZ4ILOVbphqHAg0u4bYPgWsFmUhiyGpNoePtXSGQFEVSvJ99KZog6SegOZUQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Vvq9qxK09+1ZB3EKSiIbck+EJMg06nyjEGEXY7gwVtY=;
+ b=zpnuRp6+PIsHAqpu334vG0aqIHsh52I9mgc524hjcDYW0szMFY7XzzfjiOVapt5uN7UuoCXg3hTTh3SBcdMpovPGV2SCWl8u8LB+J3Ad+j4ip73x9uM6kH/CtkAhCOxzNv0Q0sL6mPTH+xs5+SQdzNEWdcKHhCFI25Ffx9EmgfM=
+Received: from DS7PR03CA0072.namprd03.prod.outlook.com (2603:10b6:5:3bb::17)
+ by SJ2PR12MB8690.namprd12.prod.outlook.com (2603:10b6:a03:540::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Wed, 17 Dec
+ 2025 12:51:11 +0000
+Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::9b) by DS7PR03CA0072.outlook.office365.com
+ (2603:10b6:5:3bb::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.13 via Frontend Transport; Wed,
+ 17 Dec 2025 12:51:10 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.6 via Frontend Transport; Wed, 17 Dec 2025 12:51:10 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 17 Dec
+ 2025 06:51:10 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 17 Dec
+ 2025 04:51:10 -0800
+Received: from xirengwts09.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 17 Dec 2025 06:51:09 -0600
+From: Neal Frager <neal.frager@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <fabio.caccamo@amd.com>, Neal Frager
+ <neal.frager@amd.com>
+Subject: [PATCH v1 1/1] arch/arm/mach-zynqmp: configure default BL32_LOAD_ADDR
+Date: Wed, 17 Dec 2025 12:51:07 +0000
+Message-ID: <20251217125107.1095397-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] phy: Add MSM8996 support to Qualcomm QUSB2 phy
-To: nathbappai@gmail.com, u-boot@lists.denx.de
-Cc: u-boot-qcom@groups.io, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- bhupesh.linux@gmail.com
-References: <20251207184919.12202-1-nathbappai@gmail.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251207184919.12202-1-nathbappai@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|SJ2PR12MB8690:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fe3ad16-ad88-454b-505c-08de3d6af451
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?j2IpM1rCKLRIRZmxihS/cxdSuuh8jmOvP93DpIGxi3SahUb3ofBl7TXwkrx5?=
+ =?us-ascii?Q?ylHv6ShbNx7+e5miJ4bYp+74GMRHElsLhIO4rukY8h5izoTDKfglyIpE/ns2?=
+ =?us-ascii?Q?v5oxmC4YbDrFTtUdF+C2DN0ETAOxumUwK2tCZXL+5XYnaSLweYvD4WpXW2z2?=
+ =?us-ascii?Q?QTdUYIZR4vGqKnmwylpwAyaRsRtqLj+EA5JzaMgFKo8g8BO7FQosyzFQAYnc?=
+ =?us-ascii?Q?Mtpt4rnHN1N9+wygk6T1vfl/tKvGzkLPNIFYyFzuEdnmTk3Gm7duCjFKXcbc?=
+ =?us-ascii?Q?CiSF8gPR9N9T1Cfc9CQMZqi5M5Wse/1PpDpAedA1hIinZYwdzBd7qZPJ9YBD?=
+ =?us-ascii?Q?CsIX5pRDlI+9xzAPnLFBwLw/rFWLX7VMeonzE6/ysRYM4eGWXrfBtlRoNQ67?=
+ =?us-ascii?Q?7937Irm0QL5AeEOzf9uBuAwjDu0zWsJ7K5SmYN2jzkhaLVBNwXCe0B7mo6Gp?=
+ =?us-ascii?Q?GH/dFV8m7tY3E6nPsu4QiqzokWpRmFd+jrg0XTlzzUE0PKCQC4HZQjdQUpyU?=
+ =?us-ascii?Q?rSSlSS7itIhbyMYRdLWkPuGbEWOv1n7QWzwozlTDq4aadiqFamT+Frqow9BU?=
+ =?us-ascii?Q?VujrJxXZ5DnouXKj2LcCrvzoqirAJvfzbqlEPbkjbRyOQZlD12wwzL5rbYv8?=
+ =?us-ascii?Q?+HM9ovfKK/eBXjj+II2c9jEhnhdMTI1zCWN0cgqzxyhcoolajBUbivgw9G3d?=
+ =?us-ascii?Q?37ZP/8LvaJD28s8yo90wsUKA8Q8E8NIJjTGr2ZrKUIS0ELZTozzaFFA+qdi5?=
+ =?us-ascii?Q?XYtdn6nysGLiTdDmxB39YkGNLVvhhMeyxQIYOY6sdgnTpc9y28Hw7zI9cQ4+?=
+ =?us-ascii?Q?VfoEZVrzhwIsNA3Rc3qzYhaNEXJp21/fe81Yp8FvKEtr10/6pgrbu87ffU3K?=
+ =?us-ascii?Q?vt7X9UZ5mpV5SpUy1Y7cK4PHbZyNNGFxJ+mEJ2kBaJMJ02kl/FO/a2o9gEmP?=
+ =?us-ascii?Q?8CpfW8SBpdzx7daB8UJ4AETt5ScE78RpmuKqutGkU+7gxBKZ4cGcxZIkYh/3?=
+ =?us-ascii?Q?8P7D5B5ja2/goJ+3DQRqFHd8ceJuYBwyEny58AjWdA8EkOglfYE/RFnYjPiV?=
+ =?us-ascii?Q?NNZ84x0ouSjuGr4V47xjLMyqY4DttNO7nZU999DLFw6DdDV2ZgG0irN3KIxb?=
+ =?us-ascii?Q?FE837almVayNRQGJL7a/kVJNOkUruollHEnEv/qmeWkwU8QnETT1ah6jbIp9?=
+ =?us-ascii?Q?R4luGJ2WApaLrY69Kz5R5HUPqeSUUtMlTwIYGYnE16MWUevL0j2PJg+m+Me3?=
+ =?us-ascii?Q?BUt2qxNeuSuvqJAmw1d1tZJHZAjnxm8oXB+kbMVCef2lWmPkF+tDH8i9i1rb?=
+ =?us-ascii?Q?QIELaQtVLp010QUJ/57O7IXww9sCFOJ8fTZ/Eph1OzwubDKVW1w2keh3jBL8?=
+ =?us-ascii?Q?xb09fdRbo4HK45RAhe9O4w+PxTRPq+o7tlV/Y+LVJDDx6GGESZ87AEZm8Kt+?=
+ =?us-ascii?Q?Zt2Nf54mkS1faFgApYi836bzVflQxlnEXmezawVNiCC6JizTxBxApSjWzOuq?=
+ =?us-ascii?Q?tfIGJAi0BKIvd8jxrHr/OIIxBPFi6eHo3SL0OPO1xQGhjlhxqCEZzn0CFTI4?=
+ =?us-ascii?Q?T7Uv676mPCLplxV1LHo=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2025 12:51:10.7201 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fe3ad16-ad88-454b-505c-08de3d6af451
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8690
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,56 +149,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Biswapriyo,
+The default entry point address for the optee-os tee.bin for the zynqmp
+platform is 0x60000000. For this reason, set the default u-boot BL32_LOAD_ADDR
+to match the default optee-os entry point address of 0x60000000.
 
-On 12/7/25 19:49, nathbappai@gmail.com wrote:
-> From: Biswapriyo Nath <nathbappai@gmail.com>
-> 
-> This change is imported from Linux driver and tested with SM6125 SoC.
-> Note, the msm8996_phy_cfg struct is same as sdm660_phy_cfg but
-> qusb2_phy_cfg::se_clk_scheme_default differs only.
-> 
-> Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
+Signed-off-by: Neal Frager <neal.frager@amd.com>
+---
+ arch/arm/mach-zynqmp/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks for this! Excited to see sm6125 support :D
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> ---
-> 
->   drivers/phy/qcom/phy-qcom-qusb2.c | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
-> 
-> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
-> index d98f6108..9e821365 100644
-> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
-> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-> @@ -224,6 +224,18 @@ static const unsigned int qusb2_v2_regs_layout[] = {
->   	[QUSB2PHY_INTR_CTRL] = 0x230,
->   };
->   
-> +static const struct qusb2_phy_cfg msm8996_phy_cfg = {
-> +	.tbl = msm8996_init_tbl,
-> +	.tbl_num = ARRAY_SIZE(msm8996_init_tbl),
-> +	.regs = sm6115_regs_layout,
-> +
-> +	.has_pll_test = true,
-> +	.se_clk_scheme_default = true,
-> +	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
-> +	.mask_core_ready = PLL_LOCKED,
-> +	.autoresume_en = BIT(3),
-> +};
-> +
->   static const struct qusb2_phy_cfg sm6115_phy_cfg = {
->   	.tbl = sm6115_init_tbl,
->   	.tbl_num = ARRAY_SIZE(sm6115_init_tbl),
-> @@ -450,6 +462,8 @@ static struct phy_ops qusb2phy_ops = {
->   };
->   
->   static const struct udevice_id qusb2phy_ids[] = {
-> +	{ .compatible = "qcom,msm8996-qusb2-phy",
-> +	  .data = (ulong)&msm8996_phy_cfg },
->   	{ .compatible = "qcom,qusb2-phy" },
->   	{ .compatible = "qcom,qcm2290-qusb2-phy",
->   	  .data = (ulong)&sm6115_phy_cfg },
+diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
+index 151cfada436..8a4356bc060 100644
+--- a/arch/arm/mach-zynqmp/Kconfig
++++ b/arch/arm/mach-zynqmp/Kconfig
+@@ -138,7 +138,7 @@ config BL31_LOAD_ADDR
+ 
+ config BL32_LOAD_ADDR
+ 	hex "Load address of BL32 image (mostly secure OS)"
+-	default 0
++	default 0x60000000
+ 	help
+ 	  The load address for the BL32 image. This value is used to build the
+ 	  FIT image header that places BL32 in memory where it will run.
+-- 
+2.25.1
 
