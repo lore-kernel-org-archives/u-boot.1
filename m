@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08B6D66B85
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 20:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AEE9D66BA1
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 20:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EF5183BC9;
-	Wed, 17 Dec 2025 21:13:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E259B83C51;
+	Wed, 17 Dec 2025 21:13:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MPZN2tK1";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="d/nlXy28";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OvOmS3sT";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g+ZR8tnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B2983C4B; Wed, 17 Dec 2025 21:13:34 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id C692683C08; Wed, 17 Dec 2025 21:13:35 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A61CF83C08
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 21:13:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B744F83B49
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 21:13:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,47 +30,47 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dWlNr39Gtz9tZ4;
- Wed, 17 Dec 2025 21:13:32 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dWlNs3WHYz9v94;
+ Wed, 17 Dec 2025 21:13:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766002412;
+ s=mail20150812; t=1766002413;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YUj+eZ3CzGC0a6wI5QwYOLpkIBM7A1wRSd7+s0WmfTk=;
- b=MPZN2tK1wlCRYv69KzfE9GPY2NiwQ6GjjtFiEG1zI8ewEAVBAEua6w+3lEOpJJmk7kjBEm
- tk4/4ZBoM14NM11Amx25B62wsO0r3GcT3TXCzh48btuVClM0CiVJ80/J6FfmjWGoKiIPdA
- Jh7FEeIDy0NPIScshF5/pj0gR5CIFT2649vjfwGoOyCdQVV8k/LMT4h++Y27dlTuyw1UJZ
- cD9gGz4uy+PpIfi2TNLDzwsdroDB+nCrksTba33T+NaRBJcmh32E716JOfAiGxOUzfNgnk
- uvPBxnZrvApEuudaGO6YKtftnLK5DVv9KoBadBbZR8tUVt/y08r1JKcwsfS3kQ==
+ bh=TgJ6AxG+Ba8udzIDbZjLlJD0ZQJA975b/i3VFLmU7XY=;
+ b=OvOmS3sTnse9P0wE4Lm29ajC3DS+JxNH43DxjPxJiXRLMapqEyQbX7DE1nx+ftEFgywIBg
+ JN9qAc0Nlmgv7y9oPfjyQyIIrQurshBWT0kr+4HtvcGVySo/2gDYYw/Qm//YG4c3Zy+xeF
+ B7UBsUxVZSQNcJXl9jHwkDw5/waUfhaA4SxLk11ilMaNlEpaBTzz8R4xtVbe/4BKB69Fq+
+ I1XUr+dfkUu77gDIjRZBtROt2Pecde+cJKwRmN2HI7M7PE8T313CxMQpkihFYSBRhwehFZ
+ GEG1UonVpLJkogofflqb8/HFvOefcWMQzgHZ5hZvtY6lmVyJZcZD4ARG8gqtTA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766002410;
+ s=mail20150812; t=1766002411;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YUj+eZ3CzGC0a6wI5QwYOLpkIBM7A1wRSd7+s0WmfTk=;
- b=d/nlXy28OtCexMO6Mu4+DS594ve3RjNeSECjvb2olg6z+lwNztNDilKRV+zmGqMwAyde31
- 8ha7ub7wS5XDNwoWBfmyvOIT6lRa3wXM8n3E7kNY/JKhxQXG3mi4WXNBOtJs9qcNIFLDn3
- nBSYwInw1GnQdjDwyrho2BlmF5hG5JrdmjG/tkvACjF4abmr58/FX4LsRu7sj7dMpRw50b
- 2TI0qvUQ9/P8wcItUOq9l32khAxD9sp37Jg4Ln0lqiXBxKd7dLRmZOGsTw49sljeDyvjEW
- Yvp5f/HF+C4DPSJUtBf8+FId2L1hrROTXJzgB920aMZoULT4yxS0Qct9+VhD3g==
+ bh=TgJ6AxG+Ba8udzIDbZjLlJD0ZQJA975b/i3VFLmU7XY=;
+ b=g+ZR8tnUnS+2uuyARo2UmDw0m/8PWWjZVEBnbZ5s7d7TAWPLToDFeEFlZGHKWQz7rVbNoV
+ fg4BNTGEkEW9LncRbR6Wr1JktNacsdTdteEyzO9AudIVbJy8PCvzhoGOUJhMv0lJSbH5aj
+ 6PZP6kSnbdtzg3o5kpeTGYALIJFl3n67fv2BdPpolrIGFVZnhwGcBOdHRD4yNyOSKqahxO
+ OJSbdWPeq2URFrDB0Jk0nm2IIeNy7HHL6DNMQ9FwJc+4M1YGxsWz40FWwJyxNuIMC5EGF9
+ h5JF4t4uZfZAKcV54SgFg4yhDbXai/Pg7BnMoRhlcl/2NdzpLH4b/igPzgXWzw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] test: env: Add test for environment storage in SPI NOR
-Date: Wed, 17 Dec 2025 21:12:32 +0100
-Message-ID: <20251217201323.756419-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] env: Add single to redundant environment upgrade path
+Date: Wed, 17 Dec 2025 21:12:33 +0100
+Message-ID: <20251217201323.756419-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20251217201323.756419-1-marek.vasut+renesas@mailbox.org>
 References: <20251217201323.756419-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 294f22524ecf580fd5d
-X-MBO-RS-META: kndgq6q3w58irptcg7znghyeta784czm
+X-MBO-RS-ID: 10563f02b234f5d8dc4
+X-MBO-RS-META: mokznnotz5a8fsz6feagdhpwhi1ufynf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,9 +87,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test for environment stored in SPI NOR. The test works in a very
-similar way to the current test for environment stored in ext4 FS,
-except it generates spi.bin file backing the SPI NOR.
+Add support for converting single-copy environment to redundant environment.
+In case CRC checks on both redundant environment copies fail, try one more
+CRC check on the primary environment copy and treat it as single environment.
+If that check does pass, rewrite the single-copy environment into redundant
+environment format, indicate the environment is valid, and import that as
+usual primary copy of redundant environment. Follow up 'env save' will then
+store two environment copies and the system will continue to operate as
+regular redundant environment system.
+
+Add test which validates this upgrade path. The test starts with spi.bin
+which is pre-populated as single-copy environment and then upgrades that
+environment to dual-copy environment.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -99,61 +108,112 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 99 insertions(+)
+ env/common.c              | 31 ++++++++++++++++-
+ test/py/tests/test_env.py | 73 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 103 insertions(+), 1 deletion(-)
 
+diff --git a/env/common.c b/env/common.c
+index 05e78d63874..f97536af7f2 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -473,14 +473,24 @@ int env_import(const char *buf, int check, int flags)
+ #ifdef CONFIG_ENV_REDUNDANT
+ static unsigned char env_flags;
+ 
++#define ENV_SINGLE_HEADER_SIZE	(sizeof(uint32_t))
++#define ENV_SINGLE_SIZE		(CONFIG_ENV_SIZE - ENV_SINGLE_HEADER_SIZE)
++
++typedef struct {
++	uint32_t	crc;			/* CRC32 over data bytes */
++	unsigned char	data[ENV_SINGLE_SIZE];	/* Environment data */
++} env_single_t;
++
+ int env_check_redund(const char *buf1, int buf1_read_fail,
+ 		     const char *buf2, int buf2_read_fail)
+ {
+-	int crc1_ok = 0, crc2_ok = 0;
++	int crc1_ok = 0, crc2_ok = 0, i;
+ 	env_t *tmp_env1, *tmp_env2;
++	env_single_t *tmp_envs;
+ 
+ 	tmp_env1 = (env_t *)buf1;
+ 	tmp_env2 = (env_t *)buf2;
++	tmp_envs = (env_single_t *)buf1;
+ 
+ 	if (buf1_read_fail && buf2_read_fail) {
+ 		puts("*** Error - No Valid Environment Area found\n");
+@@ -498,6 +508,25 @@ int env_check_redund(const char *buf1, int buf1_read_fail,
+ 				tmp_env2->crc;
+ 
+ 	if (!crc1_ok && !crc2_ok) {
++		/*
++		 * Upgrade single-copy environment to redundant environment.
++		 * In case CRC checks on both environment copies fail, try
++		 * one more CRC check on the primary environment copy and
++		 * treat it as single-copy environment. If that check does
++		 * pass, rewrite the single-copy environment into redundant
++		 * environment format and indicate the environment is valid.
++		 * The follow up calls will import the environment as if it
++		 * was a redundant environment. Follow up 'env save' will
++		 * then store two environment copies.
++		 */
++		if (!buf1_read_fail &&
++		    crc32(0, tmp_envs->data, ENV_SINGLE_SIZE) == tmp_envs->crc) {
++			for (i = ENV_SIZE - 1; i >= 0; i--)
++				tmp_env1->data[i] = tmp_envs->data[i];
++			tmp_env1->flags = 0;
++			gd->env_valid = ENV_VALID;
++			return 0;
++		}
+ 		gd->env_valid = ENV_INVALID;
+ 		return -ENOMSG; /* needed for env_load() */
+ 	} else if (crc1_ok && !crc2_ok) {
 diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 383e26c03b0..48e31f19b3c 100644
+index 48e31f19b3c..b968321b12a 100644
 --- a/test/py/tests/test_env.py
 +++ b/test/py/tests/test_env.py
-@@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
-     utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
-     return fs_img
+@@ -477,6 +477,21 @@ def mk_env_spi_flash(state_test_env):
+     utils.run_and_log(c, ['cp',  '-f', persistent, spi_flash_img])
+     return spi_flash_img
  
-+def mk_env_spi_flash(state_test_env):
++def mk_env_spi_flash_single(state_test_env):
 +
-+    """Create an empty SPI NOR image."""
++    """Create an single-copy SPI NOR image with foo=bar entry."""
 +    c = state_test_env.ubman
 +    filename = 'spi.bin'
-+    persistent = c.config.persistent_data_dir + '/' + filename
 +    spi_flash_img = c.config.source_dir  + '/' + filename
 +
-+    if os.path.exists(persistent):
-+        c.log.action('SPI NOR image file ' + persistent + ' already exists')
-+    else:
-+        try:
-+            utils.run_and_log(c, 'dd if=/dev/zero of=%s bs=1M count=2' % persistent)
-+        except CalledProcessError:
-+            call('rm -f %s' % persistent, shell=True)
-+            raise
++    try:
++        call('( echo foo=bar | mkenvimage -s 8192 -p 0x00 - ; dd if=/dev/zero bs=2088960 count=1 2>/dev/null ) > %s' % spi_flash_img, shell=True)
++    except CalledProcessError:
++        call('rm -f %s' % spi_flash_img, shell=True)
++        raise
 +
-+    utils.run_and_log(c, ['cp',  '-f', persistent, spi_flash_img])
 +    return spi_flash_img
 +
  @pytest.mark.boardspec('sandbox')
  @pytest.mark.buildconfigspec('cmd_echo')
  @pytest.mark.buildconfigspec('cmd_nvedit_info')
-@@ -544,6 +564,85 @@ def test_env_ext4(state_test_env):
-         if fs_img:
-             call('rm -f %s' % fs_img, shell=True)
+@@ -574,6 +589,64 @@ def test_env_spi_flash(state_test_env):
  
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_echo')
-+@pytest.mark.buildconfigspec('cmd_nvedit_info')
-+@pytest.mark.buildconfigspec('cmd_nvedit_load')
-+@pytest.mark.buildconfigspec('cmd_nvedit_select')
-+@pytest.mark.buildconfigspec('env_is_in_spi_flash')
-+def test_env_spi_flash(state_test_env):
-+
-+    """Test ENV in SPI NOR on sandbox."""
-+    c = state_test_env.ubman
+     """Test ENV in SPI NOR on sandbox."""
+     c = state_test_env.ubman
 +    spi_flash_img = ''
 +    try:
-+        spi_flash_img = mk_env_spi_flash(state_test_env)
++        spi_flash_img = mk_env_spi_flash_single(state_test_env)
++
++        response = c.run_command('sf probe')
++        assert 'SF: Detected m25p16 with page size 256 Bytes, erase size 64 KiB, total 2 MiB' in response
 +
 +        # force env location: SF
 +        response = c.run_command('env select SPIFlash')
 +        assert 'Select Environment on SPIFlash: OK' in response
++
++        response = c.run_command('env load')
++        assert 'Loading Environment from SPIFlash... OK' in response
++
++        response = c.run_command('env print foo')
++        assert 'foo=bar' in response
 +
 +        response = c.run_command('env save')
 +        assert 'Saving Environment to SPIFlash' in response
@@ -161,40 +221,20 @@ index 383e26c03b0..48e31f19b3c 100644
 +        response = c.run_command('env load')
 +        assert 'Loading Environment from SPIFlash... OK' in response
 +
-+        response = c.run_command('env info')
-+        assert 'env_valid = valid' in response
-+        assert 'env_ready = true' in response
-+        assert 'env_use_default = false' in response
++        response = c.run_command('env print foo')
++        assert 'foo=bar' in response
 +
-+        response = c.run_command('env info -p -d')
-+        assert 'Environment was loaded from persistent storage' in response
-+        assert 'Environment can be persisted' in response
++        response = c.run_command('env save')
++        assert 'Saving Environment to SPIFlash' in response
 +
-+        response = c.run_command('env info -d -q')
-+        assert response == ""
-+        response = c.run_command('echo $?')
-+        assert response == "1"
-+
-+        response = c.run_command('env info -p -q')
-+        assert response == ""
-+        response = c.run_command('echo $?')
-+        assert response == "0"
-+
-+        response = c.run_command('env erase')
-+        assert 'OK' in response
++        response = c.run_command('env save')
++        assert 'Saving Environment to SPIFlash' in response
 +
 +        response = c.run_command('env load')
-+        assert 'Loading Environment from SPIFlash... ' in response
-+        assert 'bad CRC, using default environment' in response
++        assert 'Loading Environment from SPIFlash... OK' in response
 +
-+        response = c.run_command('env info')
-+        assert 'env_valid = invalid' in response
-+        assert 'env_ready = true' in response
-+        assert 'env_use_default = true' in response
-+
-+        response = c.run_command('env info -p -d')
-+        assert 'Default environment is used' in response
-+        assert 'Environment can be persisted' in response
++        response = c.run_command('env print foo')
++        assert 'foo=bar' in response
 +
 +        # restore env location: NOWHERE (prio 0 in sandbox)
 +        response = c.run_command('env select nowhere')
@@ -216,9 +256,9 @@ index 383e26c03b0..48e31f19b3c 100644
 +        if spi_flash_img:
 +            call('rm -f %s' % spi_flash_img, shell=True)
 +
- def test_env_text(ubman):
-     """Test the script that converts the environment to a text file"""
- 
+     spi_flash_img = ''
+     try:
+         spi_flash_img = mk_env_spi_flash(state_test_env)
 -- 
 2.51.0
 
