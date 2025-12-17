@@ -4,157 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CBFCD65C7B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F873D65C7C
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 16:45:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96BE683B55;
-	Wed, 17 Dec 2025 17:35:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A96A483B99;
+	Wed, 17 Dec 2025 17:45:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Ci9lRg96";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KC6pX2iV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86C4883B99; Wed, 17 Dec 2025 17:35:07 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id D12F783BC7; Wed, 17 Dec 2025 17:45:38 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56A4683B55
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:35:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C17F83B32
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 17:45:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QYqmETXYsF8LwMv9WpGSieTJIfPRfsJk6tcAe6TWeQqFZ/3tSUD1UK+Vm32cl0K7ZUj/tSzInHZZSf9h6BdYoAjORXzcVIJ+m7qnVCR5ziZ1SuvS08LCe10ahNGZ6n2RuHEnay+hu5uxMAis5gwJcLKvcC91Tj00z5iTiqyV/KwtQpusAdWZdH7LYl+1RfcoP1BWmC+7TTz1QFLzyuk14yb3zpu6qtkXp9yRgWUsGYq4py3O1jPIzhLhvHBCZlLwhbuUUe+ZvrJyNTLeJSqLVyslIc/JUldRMz2VJvAxQYSOBTsVw0zW/g5z8E3zywMhzA2kaM/MbetODnZBuumlqQ==
+ b=o82nBZxv8MxoiBpZlqhdGelusKJ5QP9gMhoY32IZugbg4e1jGPUiJ22zA4xboBy4UotcFbt/t4djM9w2CzrdxjdmR/n4fNpyDXLy6kRVRsluDioZKtVe73QrQxp3oZs9wiIQcUc2wUWFmODMjsn44c7tA/iHXzCd/u5+Pye3eDOh24sxARdlG1H+3kb96XW1xVjn6MJCkT5Efo2aVM9fe/CCMmI7H4Tq8uhxwHxhcYhrmagMMhHmzWmniZlbqvFYkvnDi1u5TyMhwZ9jB5QkHEWVKndOW6rznw6D4oSaS1XB5Lt6YFJC5Lzj/UubW+9aLWLOj8FLuQdKR90Ce4LaDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oRC9D0no6pnk/Qox8A08yQ6TAUTzfvmRiuZCfcpMc7Y=;
- b=ikrc+NoGih12UzyTLsNuJcxzxjbKRWYK7KWPErTryxNkBw/BB6sKbgRA1GDDpvo6qvPyVZoyG+1aRNj+ZzEPBQg0NAgk+KeaqAy9AxYzMHE4u6ocX/AO+2RuNe/LoNrzro6zbrwRue3wyf3nGXF7sJ6ttB02gL8UZM0BmYjInhv20aauUrJmEY3hYZVb3/p6vtKzswEgBPYIeB4FA9Bx8L4Ou20yrZ8LLU4IXKWXTmZgsJt7rBhkGBNGZBDqe+l8Yt5qmpvxgsAoTV3PYNs51oyeuwOAA7udIIvtLdxZQkN1CelpegjWkgHNZ2Udd8JAgyxy2bL+Xvvx5Qqg85uLTA==
+ bh=oLCfmHT2BguxHOBBfpThfyZDPmGZ3nItYu9DsaERnZw=;
+ b=I8mXbTomvSwHVaN48/ZvBPyIczXfyMLFoPruYaAjecP/bJYrVviSq34xWCzdNrH5xaA+vXvQnemurikjb7IQfwRXoVqaMhksRiYqDdfN+WrqXHTEKwhxgbj+/rkvmOT2bm5VpngaA3CmkOr5OAW3MPHZ8K/Ji8qlVcY4ZFBcWC2/CfNNYt9nGbBzIFS/jmAMTyUqa0nD+BaIu2edkN8n6iIFO3g+oKKnSm6xvv8ZDXvdDiNxs6YLJe13FMf1uI2VSPVHhq5EUDGmgs/Z602yZb3PRCeptS43d9/pWkzZoQk1FSg5x7U7HBxL3W9pQgG77KOo3TXPrNSJTF9SihiyVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oRC9D0no6pnk/Qox8A08yQ6TAUTzfvmRiuZCfcpMc7Y=;
- b=Ci9lRg96DyyOo2+8xRVnvYHziZTOMglR+a7ral4bf544fqyF+fSgMYGHCov5pNZfQ2wMY8SrNmR7bkTT82uN4X34/9JMAiXrQRXkCaShKwLkUmRzu67EN3q/K8ubNYBU6LOMusYDpRyyc8aOCYlo0wiGkS/SSPLl0CNeyESlj3kVDOxLX6ZVxZHOlZc1JG+GC+VZYERl82NjpL8taxX35Ckr+CW804g0zseNApvVw3jXQHoUGsWn7LGP69KZM1+mdYWLAhaQwmyQcAppAdS8ohG+d+hw6Ox6j9j/NH4WDAVJqUOUF2rIS5X+XONBJJ9tOrdbAwghdnv/eoVcYA70Pg==
-Received: from AM9P250CA0010.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:21c::15)
- by VI1PR10MB7634.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1c4::7)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=oLCfmHT2BguxHOBBfpThfyZDPmGZ3nItYu9DsaERnZw=;
+ b=KC6pX2iVFooHkNinQH22QS64H7Hk9VVj+Vo6cdW5Eo/3E3lHtHzGYA8UjlZTavdt2hmXs6OSaoA6xTOGkm+H7JxxPVexfaljEaHiPAL2QWo9tbWLzwxy6pRvMZPOhuby4K1rxjuqmIDlvWJEFCxecyxNdgOUjv/UP2bpKcNZaUNiT9ocgRdieb/khAFDvIxqYQN3NtYxFvzhDjyxHlwfJLKcHy5qgQa6TUWHRYPhZC66I5h1pziNUEPVE+yvG0rh/2MgZO/nsGIaP3HHW+M/cZalkKbxDFO9CVvyUrbvGqU4bRHFHLrX5oCnMiCo99aGCDoC0pOWNEf0Y6pxGb1qxA==
+Received: from DU7P194CA0008.EURP194.PROD.OUTLOOK.COM (2603:10a6:10:553::25)
+ by VE1PR10MB3822.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:160::13) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Wed, 17 Dec
- 2025 16:34:56 +0000
-Received: from AM4PEPF00027A64.eurprd04.prod.outlook.com
- (2603:10a6:20b:21c:cafe::90) by AM9P250CA0010.outlook.office365.com
- (2603:10a6:20b:21c::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.11 via Frontend Transport; Wed,
- 17 Dec 2025 16:34:55 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ 2025 16:45:33 +0000
+Received: from DU2PEPF00028D10.eurprd03.prod.outlook.com
+ (2603:10a6:10:553:cafe::37) by DU7P194CA0008.outlook.office365.com
+ (2603:10a6:10:553::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.6 via Frontend Transport; Wed,
+ 17 Dec 2025 16:45:31 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM4PEPF00027A64.mail.protection.outlook.com (10.167.16.75) with Microsoft
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DU2PEPF00028D10.mail.protection.outlook.com (10.167.242.24) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Wed, 17 Dec 2025 16:34:55 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9412.4 via Frontend Transport; Wed, 17 Dec 2025 16:45:32 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 17 Dec
- 2025 17:35:43 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 17:46:17 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 17 Dec
- 2025 17:34:54 +0100
-Message-ID: <a67bb8ef-00c4-473c-9761-506a577c013c@foss.st.com>
-Date: Wed, 17 Dec 2025 17:34:53 +0100
+ 2025 17:45:31 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH v3 0/3] clk: scmi: various fixes
+Date: Wed, 17 Dec 2025 17:45:29 +0100
+Message-ID: <20251217-sqqs-v3-0-f3405fb2ad1f@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] clk: scmi: Fix priv initialization in
- scmi_clk_gate()
-To: Marek Vasut <marek.vasut@mailbox.org>, Vinh Nguyen
- <vinh.nguyen.xz@renesas.com>, <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACneQmkC/12MQQ6CMBBFr2Jmbcl0oCm48h7GRYFWupBKhzQaw
+ t0txIW6fD//vQXYRm8ZTocFok2efRgzlMcDdIMZb1b4PjMQkpKEteBpYqHruupb11fOaMjXR7T
+ OP/fM5Zp58DyH+NqrSW7rXyBJgYIadKiaypbYnl1gLnguunCHLZHoS5Pqo1HWGiOVIUJNrf7V1
+ nV9A3UJhdPRAAAA
+X-Change-ID: 20251208-sqqs-7884dbfd4fa7
+To: Vinh Nguyen <vinh.nguyen.xz@renesas.com>, <u-boot@lists.denx.de>
 CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, "Peng
- Fan" <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Alice Guo
- <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>
-References: <20251215-sqqs-v2-0-9a15a22072b7@foss.st.com>
- <20251215-sqqs-v2-2-9a15a22072b7@foss.st.com>
- <c1b0ecd6-2697-4b81-9b63-1c5b3d243a86@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <c1b0ecd6-2697-4b81-9b63-1c5b3d243a86@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ Fan" <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Alice Guo <alice.guo@nxp.com>, "Patrick
+ Delaunay" <patrick.delaunay@foss.st.com>, Valentin Caron
+ <valentin.caron@foss.st.com>, Kamlesh Gurudasani <kamlesh@ti.com>, "Patrice
+ Chotard" <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A64:EE_|VI1PR10MB7634:EE_
-X-MS-Office365-Filtering-Correlation-Id: 981be077-68de-4ddf-5250-08de3d8a3640
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D10:EE_|VE1PR10MB3822:EE_
+X-MS-Office365-Filtering-Correlation-Id: 499fd4ca-492e-41c4-26a2-08de3d8bb1db
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cnhQdE9GUUlmRVhBV2QyNjAzaktNaUxxeTd1MXhPTkE5eEhTNXNqcjZPMW5U?=
- =?utf-8?B?M3FtM0R4OXpaeG1ZL21DZStnakZ6YWNuaE5ad1hvMHJvMXlyWUlRZEdMYTVB?=
- =?utf-8?B?aUE1UHV4NDVEbXU1VlJoUElLYVUwdlFHMnMxbElVa2Fmcm1vdDZ5V2N5bGt5?=
- =?utf-8?B?SFJldTdieU00aXhWSm5JK1krZSs5R0pOZ0lpQnhVWnNRZnFudUxPN2FtY1NT?=
- =?utf-8?B?RlV3UVR3M0tsMml2a1dPVTZNWnhCUTV2bE5IZjlLT2NnbHNmZ3BTYWRwYVJm?=
- =?utf-8?B?emo2ZzhJSVFMSW5udnduWDE1ZEVSRUdKSnVDQ1owVDF0aXVWSWxmK1E0OFRj?=
- =?utf-8?B?bTFndlU2bHRHUjJaTXhtcGRvWHVYT1RaYm9KQ2FKbUdJdk1YZFE0aFVhWVho?=
- =?utf-8?B?ZjlKQTBZeVIwcis5bVhwTUNON2pudWhtTmVhd2J1UmZvdjM3UjI5MVltMjJX?=
- =?utf-8?B?VGovSkE5Z1RsbWFGYmlVdHhtN3dvdjFTcWlwWkh3d093dDN2UTJLVXBvQk11?=
- =?utf-8?B?cFdDOHBleU9nL29ULzFSblM4YnBvTUwxTFRaVkNUejc2THJ1eW5PajlYNFky?=
- =?utf-8?B?cTVrM1BwLzJQdWYzT3VvRjBxRDY2L0J5Yjd0eEtpTUhyT3pEb1BMUHB4YVdW?=
- =?utf-8?B?TzVDdXpFYWpOU1BDOW5QT1hYNzZKUGI4UHFEclJ2L0E1K1JQU0ZLbGE0UXZl?=
- =?utf-8?B?YzVLdTdONElXYzFKbDU5Q1JUVFo3MlA4RCtvcmVYZXFQcUJ1SDdDUW1WdW5W?=
- =?utf-8?B?WGVCUnZhckdDUFNEeDVGdXUzZHBaaHJTSUJqbWRIWVUrTkVrelkxTEswOVJ4?=
- =?utf-8?B?OVI3SUdjSGdjSmhpRDJlVU9EMlcxUTVHeTJUNDdsMlFqNEVxVytTWkVRTWht?=
- =?utf-8?B?RlVzUEFKMTVyaG1PckdVZUpxWktrS1VNUVh0dERWSCtOZU85UG1ncHlVRDlD?=
- =?utf-8?B?b0FoVTYxZUpMUDFySXpkQkYxcjU2R2hUd1ZENWxrbDlkSXM0WFczSW13RVZw?=
- =?utf-8?B?Q1BCSzRYOVZ1bkNwN0dyTlZZZm9TYW1ITGF5cU9ZSHk3S0JySW1pTS8wL2tI?=
- =?utf-8?B?UWhZRFBTcmE2NkVwUWdRNld1OHoyZThSOTdQQVY0SjYrZ0orWlViWFQwb014?=
- =?utf-8?B?MGtyVjRnYTlDYVlGTkdrVEFmcnVLTk9yQ2FZUDlTb2cxU1RMeFk1c3c3MkVz?=
- =?utf-8?B?T0hrRzNOQkprUG1QSmg3WjQyeFhUa1U4aFlTUURCaFlzYUlHZnV1cFhhM0N3?=
- =?utf-8?B?RUJHRjJIbmVhcVJyY0xGR3RYMlNQVUtRZWM1MHlLZ21Yb3RjYXIyNUs4WkZi?=
- =?utf-8?B?dlR5V0tIckRzNVlLb1R6RHBnS21xaVdIaGpldlQ3SHo5aUNzZ2RsdkhYQkdM?=
- =?utf-8?B?cTV6Mi84R0kwYk11ckFzNVJzQ09neTZSOHpZN3h0azVmc2FKRlUyMTgzV2x6?=
- =?utf-8?B?NHRRdUxjMDhSZnF1VmFlL1VsU1cvZmNOV2g4T2k2S3pFb3BxRFltdXd3QnNG?=
- =?utf-8?B?alh0cUtBT0RwT0szOEU2RWtvaGg2dzRieUJMVGFyV1JmSkhjKzN5c3RGWkNN?=
- =?utf-8?B?S3IyV1RpQm5CY2xMY3JOS2Q1U1JzS1pURXB4SHYwYkFHTUtKYVVBV1loRjBi?=
- =?utf-8?B?QXVhVGYxdmp2bzFPR3FRUmN2aWpKbFVCaGVRbHk2b3BGQnlqcjdnZ3g4R3o5?=
- =?utf-8?B?NGliNFR2UjZaN3pMRlE2bWFCMkZtR3JxcHhjcFdOeUVjZEFxMTBrenZZNlVL?=
- =?utf-8?B?SW1IZlZPQ2lkNVRkVzF2Z05aNFhDTlJxNUszQm40RnFFcGltSUc4TGNiOTFP?=
- =?utf-8?B?L3AxSVRYN2NEWHlJcGUyUmdDZXRoU2tYZDFaekxsUnhUaXRpd2RtejJ2SFBZ?=
- =?utf-8?B?M2VYVnJKQk5jSXVpeVJuMGp1SitsandVL1A2VWw1c1JMV0FaOFNpdVFnQlhi?=
- =?utf-8?B?clJDbE9FNEVVTWdJSlJ2L29CV3IvUFk5N3dGRU0vb1dsZ3VZYTlYdTdhdEt0?=
- =?utf-8?B?R25qQmZhTU5tT0VVcnh5bDE5STRucmZCeDBoVldaRG9XQUphSlN2Vk1EcWhh?=
- =?utf-8?B?ZzNPUEZ0bVpNektxd29GbE81ZFM4bUxMTXRneU0yWDRldUU0NUZxZlZWNUxV?=
- =?utf-8?Q?PMAM=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|36860700013|82310400026|1800799024|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NWFSV0ZaSHBOMU1mWmRzakZlUkZJenU2UkFuQnZNaUY1bTNhWm11V2JiUFB4?=
+ =?utf-8?B?NUp6QU0yM0xOc1gvUzFjT0RjSU51Z3JUVmdiUzd3dlpLakNzODZudXhJLzZT?=
+ =?utf-8?B?TFIwUXhjeG9sRFZQeUxTbzVyeUVQcUNyVmNLcUdFR3k4cHJmQU1pZHl5aUpR?=
+ =?utf-8?B?NFJ4MVBuV0E4TWtOc1lSZXJ0NGl4YXNWNHo5UjhGOStFSWlFOGJWZG1vYXYx?=
+ =?utf-8?B?UTJPV0xUWEZCWjNZd3ViQkZwa0Nhd1VoY1RvTWVBeFB6c1dSLzBhYThMZXpG?=
+ =?utf-8?B?eHoyN1VHR3RuZk9pcjFTZXZUdXp4aEo4cVIzUFBEb0F1cmV2KzE1REtSSWxL?=
+ =?utf-8?B?VktnejFCd3RQMkNaNCtEb0V6VVF6SDE0Q1ovcXNQekYxUGp5M2F1VkZZS0pX?=
+ =?utf-8?B?QS83Ny8xS1ZnUVdRZjgxTmJTeWdsbnFUeXdOc2VuYUcwRTJ1Y00wSEJ0OE5t?=
+ =?utf-8?B?U1RKbVdpRE5oWGljTURrM2ZrYVNlVCtjMWU0QTQya01jS2tyelZrTWJuQVJz?=
+ =?utf-8?B?MG5YN0pqRkpKR1RvZkVvYjhKVWhwUzV1SldJWFlqMktEM2F2S2NvUnFmRUtJ?=
+ =?utf-8?B?WGRuSEFVcUp6aTNqckhpbnhHRS9aVXVSc3o5c0NrZHNPbEhaSm5CeFpOUHM1?=
+ =?utf-8?B?RXErTzAxZGpvRXd0Z2F1bmVJc0dpQm0zQm5sVFRSRDkrYjhZd1l0UFF6V1NH?=
+ =?utf-8?B?a3RHQUxKM0ZyZkwxUUhWMTVSVWNLRjNzblZzWHVheEExTFUzK3J4ckdZUmcy?=
+ =?utf-8?B?T0dyRUZnNkcyUTBHd0FFWW5PRVlsSjV2OUtqdmR4YmRHUjgvQThONXVrVGNS?=
+ =?utf-8?B?KzVnak5XQUd5Mm92V003emhBMjZiM3hreFkybHJLdzBxMjc4OElQY0NxZ0Nz?=
+ =?utf-8?B?LzNOdCt4bzFzRGxDdXBMdW1YSkkyMmNTK1JsV1d4dmpSbFZTaVpOTTFubmgr?=
+ =?utf-8?B?Z0FrUVRrb21xVWxOTmpGWkV2L0FQRDNKSzNvb2FSN3VEQnJzcldLa2E5ejY5?=
+ =?utf-8?B?U0NVRG1MTG50V04zK1BneElEcUVGNUZKOU9rVkgveDBPOUxuZGRwaXBaa3Ju?=
+ =?utf-8?B?NHM5dXRGUGJ4c0Roa2YxMFM2RmNHV1Nqb2V0TVRmQlVMSENMVzJVY2N5enN6?=
+ =?utf-8?B?Z1crTDVtcDZUOFM2Q2tjZDIyYzdpcjkra1p4Tms3NWVmUDFhb05tbUZMbGUx?=
+ =?utf-8?B?eHZNV21oRjd2d0laQnZNbXMxOVZKOWMwK0pNVGxZbGtQVThoKzRYb3RsRFNh?=
+ =?utf-8?B?NTVMdnVsdCt0aGdrUXBRSHMzSnJrdVZxS0lVT0dZN1NacU5FeCtvaDlyUTMy?=
+ =?utf-8?B?c2xRT1dJSVRSK0FoMVNZS1hRbDRQUTZsenN0Q0QyU2RIZXVaU0NNWjVPVEUy?=
+ =?utf-8?B?LzhoRk9VWHo4RDRNV3ZFamVFNjJQVjZXQ3JXZWUzL2NpMjJjZkZvT0Y2Uk1N?=
+ =?utf-8?B?b0hGN0RjRW9FQUZHbXVtcTFGQnlPYkQvZENyZEpaY0szYWEzSnBONzV1ZytV?=
+ =?utf-8?B?TkxENjFCdUlraFJGb3ZaVzh6UWNkWjVSQm80ajkvMXlNdkY5ei9oSzVOTThx?=
+ =?utf-8?B?UVAxNlY5Y1NvclNaU0docjNDc1ZiN0ZaNWxWMnQvalhBbXEra0FHNEFLdDVx?=
+ =?utf-8?B?dEliRGJoUm9wQ1BTYXhJRVVXQVp4ekFON08yelFxaEFqNitwZ2Vtd1FKSUxR?=
+ =?utf-8?B?NzBiaGkxTGVmSzZYSmx6Yy90NE15UlAwMW5zTWJ6d2poa0M2STVvR1JJV3M2?=
+ =?utf-8?B?R3gwckZHRElqTlBKbklLQzNnMHZrbWVpK2lha2c2REhIaFRoMFRIWWlDbTJP?=
+ =?utf-8?B?dk45T1cyS0FaVU9qWFJKSU5IYmIySmpuRjhiSmtZRzIxQzkyMnJFZklXWXFG?=
+ =?utf-8?B?N1RVejZ1SmhKYm1rTTN6SE1tQkgvUnlxbEhHRUJBY1liUUMzMkZFbXdoSFFM?=
+ =?utf-8?B?ZzRaV2FId0V3OUVKL0E2b1dpankxczFQUGJpeVVmdGo0aFUvRFIwWkFBYjFR?=
+ =?utf-8?B?OWZzcE96cUZ3NTErVE1CQUpOcGlZbUJyMmJQSzhIS0d3SitrTUN4MnBBNDVV?=
+ =?utf-8?B?Y2pzSHJGTVdFN2tJRERXdzNYejhSU1pkSng1b3FaME1OLzVHaG5wRHFieDNj?=
+ =?utf-8?Q?LLFl+pC2wxo2A5VhJQxcwHM4D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014)(13003099007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: AcaQVIXSuNJHGf8ZSJZRkSPSK2UXjC3kZyZQP8iE6Z2eZ0d+BWNxunSib7Wz0rXiSz9BjqTbfY+Zz110eCmL0Kl8NyS76TIdsX/LCBZbKdPIoGMNaWW1jJ1kDubgghUOm253N7TCwO04PUAeCidSWpfrs4dyARzVwsgq4Ygu2DCoGkI6Crvv0Wml+sl7ivTPuFjLy0MOYD3sW+OBA3mOBcyNMUOT/qCVtJVrwgmkmfaqEJWZzhFR+zWHJkJDtxTHIQpPSpogZf1hSPAJf1MxzRpRcnEPmmaQCzbCo7pEsTMW4O4g2kKT+GaDC3x7UzywKsmnJ0P1FEUMEIzzOB5psweGvFTjQjhob9NB3bSCSwHUAY52H31XtyigBQl+vkN94X7lNcY4DfOIug1kY2sNMCj3Y0FVimv3ty+hP5assFoQxpIuDqzL7UgA/IOJ+zpujhQgI9o//AXCI8QRQiIwNdeg6Y+hZJLCA2qwVbQBLnYcoqTm0NPjV00/TFp0Sbrs+uAyaef4aeq50l8MLCypCEsWJAVXqxWO54EJ79QbXE98pT8PbkIeLvSZeZWNeOMlcBwTjmZUuDaA8/04ETnbPgj1Yz/y2lEfjiXT3g4k45xKPCK50lECJgrUNMnWgUiJO+LuiFNFuhcOkamsr34mSFCFPgfU9ukSFvfhktyVYaWzndKg5v44vONOzotYaDZrjGefULcPhpf2A/tdb04kWA==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: H4KeS7P35d+FNt3stGlpSH7wWDrrW9snLo5ovL9pf2QNhFhcrjqe1/rdjMX/wUL4CA/rujtd84U/xpF31iz/7qTDjoqR4/Um47NV/yljg9R+pciUkc7Z+toW7yYtf3mm6SPU146oH87Jsye9waBzUeX1jO1yZKVDyYk/u0yBGv46XaLn9HKyH/gf9NTswrKbZ0teHSYEjOrUKREI6I4M7/wLtNZsD1K8r3zp1JP0khQXpE8N/jDcOstgq7dH8vZOxTmTPBMrWYaLNYiWF67aqvWSM3yrM3exVi2BOGsdUTK9aF1WPHSK9fmzYNeigZT1brM1VzgHuTlaE1kAZgVY1I9+4FHGnNR31xIiRtoI38+LVncnyT7SgqTEV00US0+N3VPZ6Z7oJGitto96QNgCnlBDAdL2QocjuiRBRZEKi7cuPy2YVJRpgo2EOE3aCj4fdJp7x7gtQaaCuJM7uUitFnIui1/9vEMBUguNGxQtXOdsV0gDDiCkj0Qcz1+yneQwXKTnQr/1lLF8S9T2O/8FUXZPcFNCjWTy8DQKIRcemK1ARfq8m5LWFpVV/kN3Ok6Y2FvW7/MmisUiHFT6CeBY5VuI+2tC1DJ/9D2xo+DlO4Ww75N+g84IfMM+k8q8t5WgmLkfACiuKLd+UKRCrqCSXyNnu6/G9RIbwoWDrqaauk5wHcel27U1bC9SRuWtHJMWtDivQ/neUbMqyOwdl3xIqQ==
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2025 16:34:55.7329 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 981be077-68de-4ddf-5250-08de3d8a3640
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2025 16:45:32.5767 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 499fd4ca-492e-41c4-26a2-08de3d8bb1db
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A64.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D10.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB7634
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR10MB3822
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,74 +170,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Fix typo scmi_clk_get_attibute.
+- Fix priv initialization in scmi_clk_gate() which leads to
+  clock_enable() error when CONFIG_CLK_CCF is not set.
+- Remove duplicated scmi_generic_protocol_version() call in 
+  scmi_clk_probe().
+ 
 
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+Changes in v3:
+- invert CLK_CCF conditional in scmi_clk_gate().
+- Link to v2: https://lore.kernel.org/r/20251215-sqqs-v2-0-9a15a22072b7@foss.st.com
 
-On 12/17/25 14:02, Marek Vasut wrote:
-> On 12/15/25 8:38 AM, Patrice Chotard wrote:
->> In scmi_clk_probe(), in case of CLK_CCF is not enabled, parent private
->> data is not set, so in scmi_clk_gate(), an uninitialized priv struct is
->> retrieved.
->>
->> SCMI request is performed either using scmi_clk_state_in_v1 or
->> scmi_clk_state_in_v2 struct depending of the unpredictable value of
->> priv->version which leads to error during SCMI clock enable.
->>
->> Issue detected on STM32MP157C-DK2 board using the SCMI device tree
->> stm32mp157c-dk2-scmi.dts.
->>
->> Fixes: 0619cb32030b ("firmware: scmi: Add clock v3.2 CONFIG_SET support")
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>
->> Cc: Alice Guo <alice.guo@nxp.com>
->> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Peng Fan <peng.fan@nxp.com>
->> Cc: Sean Anderson <seanga2@gmail.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: Valentin Caron <valentin.caron@foss.st.com>
->> Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
->> Cc: u-boot@lists.denx.de
->> Reviewed-by: Peng Fan <peng.fan@nxp.com>
->> ---
->>   drivers/clk/clk_scmi.c | 11 ++++++++++-
->>   1 file changed, 10 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
->> index f6132178205..5c99f3708c3 100644
->> --- a/drivers/clk/clk_scmi.c
->> +++ b/drivers/clk/clk_scmi.c
->> @@ -137,7 +137,7 @@ static int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name,
->>     static int scmi_clk_gate(struct clk *clk, int enable)
->>   {
->> -    struct scmi_clock_priv *priv = dev_get_parent_priv(clk->dev);
->> +    struct scmi_clock_priv *priv;
->>       struct scmi_clk_state_in_v1 in_v1 = {
->>           .clock_id = clk_get_id(clk),
->>           .attributes = enable,
->> @@ -156,6 +156,15 @@ static int scmi_clk_gate(struct clk *clk, int enable)
->>                            in_v2, out);
->>       int ret;
->>   +    /*
->> +     * retrieve the correct priv which was set in scmi_clk_probe().
->> +     * in case CLK_CCF is set, priv was set in parent_priv
->> +     */
->> +    if (!CONFIG_IS_ENABLED(CLK_CCF))
-> 
-> Please invert the conditional here , no need for the if (!...) .
+Changes in v2:
+- Add Peng Fan's Reviewed-by.
+- Add comment in scmi_clk_gate()
+- Link to v1: https://lore.kernel.org/r/20251208-sqqs-v1-0-290f0594e30b@foss.st.com
 
-Ok
+---
+Patrice Chotard (3):
+      clk: scmi: Fix typo scmi_clk_get_attibute
+      clk: scmi: Fix priv initialization in scmi_clk_gate()
+      clk: scmi: Remove duplicated scmi_generic_protocol_version() request
 
-Thanks
-Patrice
+ drivers/clk/clk_scmi.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+---
+base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+change-id: 20251208-sqqs-7884dbfd4fa7
 
-> 
->> +        priv = dev_get_priv(clk->dev);
->> +    else
->> +        priv = dev_get_parent_priv(clk->dev);
->> +
->>       ret = devm_scmi_process_msg(clk->dev,
->>                       (priv->version < CLOCK_PROTOCOL_VERSION_2_1) ?
->>                       &msg_v1 : &msg_v2);
->>
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
