@@ -4,75 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65F3D65C44
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 13:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CDFFD65C49
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 14:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 651ED83B4F;
-	Wed, 17 Dec 2025 14:03:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4B01083B2C;
+	Wed, 17 Dec 2025 15:01:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vhHh7tm5";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="X8YC93eN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C50A483B7F; Wed, 17 Dec 2025 14:03:45 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 44C9D83B32; Wed, 17 Dec 2025 15:01:20 +0100 (CET)
+Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
+ [45.157.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1C9E83B32
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 14:03:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5018D83B21
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 15:01:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dWYrv5752z9tcZ;
- Wed, 17 Dec 2025 14:03:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765976623;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NKIj/O3gGqxd9DzLHx42AUWdSJDjYYbdEQ9lPVhDwe4=;
- b=vhHh7tm5sIfEQ0ugFrjlw0khCa5KpZycAFPQnAiZsZS0FXt8j8C6/0wnPcWGu91198RUF7
- 90JaZRdbtqw5CWrSnliC8Oz+O9cTEoTxNt147qCfxjn9yNZaYOifjcBlmqM65fyBU9AIfP
- dbDrm//OB2ZK7wAalfaiRjyGxGK6hxzmZ9fmd9jRGUKDgP9qyYBQpT/TyeUpjwFEp2Xal4
- svAkFgHonExqoxl5vE+OMfnodhuMpB+MbiPKoJVjfNoj/ETZrELSYvGN/I7qASKFpSO4Ti
- +fJBPQxZIp/bTrmqgI60casezxpNi+mhGVGdyRIA0Qf1snBr4/+tDg4MQx+p+w==
-Message-ID: <f82fa5fb-ef56-4581-9e06-735e3dc062ea@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765976621;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NKIj/O3gGqxd9DzLHx42AUWdSJDjYYbdEQ9lPVhDwe4=;
- b=X8YC93eNKl8ACQyyxzmqxoNsri2+4T7kR0+xdPGMm9trrGZ06et5NPJQjiFD8XEzTb5m9R
- jMmhSZYIWhNj2wZfDPEiQhx5yUYOuCtrnbT7sWZCPlv6QbqNGg2opCfc1zlMjimSvwEXvm
- F8SHUmGc7FQ8DWnur9rpuJsVhvYViYrGqtO/7L+e7EoFaah3/S0ohjeAyRCbo9nQAF02wr
- YCTIBFXgysUpWxE1PiB99rvpOYVxeJYdVQxjz+TaU/WN+PVr4D6nkZbCS+lP750402bLmB
- VVg8zKOMVqIAe9Ngzc9kIZcs7hqXEgZ0iKXLCexLG/6xC3dHOYM42b8cVcpp2Q==
-Date: Wed, 17 Dec 2025 14:03:38 +0100
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dWb7K6P1Sz4Yn;
+ Wed, 17 Dec 2025 15:01:17 +0100 (CET)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dWb7K2Gdtz4T9; Wed, 17 Dec 2025 15:01:17 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 17 Dec 2025 15:01:10 +0100
+Subject: [PATCH] cmd: bdinfo: fix incorrect Kconfig options check for
+ print_eth()
 MIME-Version: 1.0
-Subject: Re: [PATCH V2] imx9: scmi: clock: Correct imx_clk_scmi_enable
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, sbabic@nabladev.com,
- festevam@gmail.com
-Cc: marek.vasut+renesas@mailbox.org, uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Peng Fan <peng.fan@nxp.com>
-References: <20251217082059.21761-1-peng.fan@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251217082059.21761-1-peng.fan@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 67b9fb6bc222ad71309
-X-MBO-RS-META: mzfe68xeuq7p7zpbddwyitw4q7q6jsaw
+Message-Id: <20251217-bdinfo-lwip-v1-1-849cf060bf12@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avIrBNSMKmrRAvNsQZCRaEC8e5Jy
+ 7f4v0LBTFhgYRUy3lQohg4xMNhPEw7k5LpBjlIJKTS3joKP/HoocURjlZ38rI2AXqSMnt7/tm6
+ tfeQAlYRdAAAA
+X-Change-ID: 20251217-bdinfo-lwip-eeab5b6f97a1
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,13 +63,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/17/25 9:20 AM, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> i.MX9 SCMI Supports CLK SCMI version 3.0, so need to use
-> "scmi_clk_state_in_v2".
-> 
-> Per Spec about extended_config_val: "This field is used to set extended
-> configuration of the clock device. It can be ignored if extended config
-> type specified by Bits[23:16] of the attributes field is set to 0."
-Please include information which spec this refers to and its version.
+From: Quentin Schulz <quentin.schulz@cherry.de>
+
+CMD_NET_LWIP has never existed so it cannot be right. I'm guessing the
+intent was to allow print_eth() to be called when NET_LWIP is defined
+(NET means "legacy networking stack" as opposed to NET_LWIP which is the
+ newest (and incompatible) stack). There probably was some mix-up
+between CMD_NET and NET options.
+
+The dependency on CMD_NET seems unnecessary as it seems perfectly fine
+to run bdinfo without CMD_NET (build and run tested). So let's instead
+make the dependency on NET || NET_LWIP.
+
+Fixes: 95744d2527cb ("cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y")
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ cmd/bdinfo.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index 20c8c97f0cd..09fe8067642 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -152,7 +152,7 @@ static int bdinfo_print_all(struct bd_info *bd)
+ 	bdinfo_print_num_l("relocaddr", gd->relocaddr);
+ 	bdinfo_print_num_l("reloc off", gd->reloc_off);
+ 	printf("%-12s= %u-bit\n", "Build", (uint)sizeof(void *) * 8);
+-	if (IS_ENABLED(CONFIG_CMD_NET) || IS_ENABLED(CONFIG_CMD_NET_LWIP))
++	if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP))
+ 		print_eth();
+ 	bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+@@ -193,8 +193,8 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		case 'a':
+ 			return bdinfo_print_all(bd);
+ 		case 'e':
+-			if (!IS_ENABLED(CONFIG_CMD_NET) &&
+-			    !IS_ENABLED(CONFIG_CMD_NET_LWIP))
++			if (!IS_ENABLED(CONFIG_NET) &&
++			    !IS_ENABLED(CONFIG_NET_LWIP))
+ 				return CMD_RET_USAGE;
+ 			print_eth();
+ 			return CMD_RET_SUCCESS;
+
+---
+base-commit: 47b50fb1125c539d80ed3e7f739c02c6486e1b52
+change-id: 20251217-bdinfo-lwip-eeab5b6f97a1
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
