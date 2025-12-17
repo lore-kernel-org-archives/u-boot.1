@@ -4,137 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8666D6407A
-	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:57:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA79D65C43
+	for <u-boot@archiver.kernel.org>; Wed, 17 Dec 2025 12:57:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6B2683B64;
-	Wed, 17 Dec 2025 13:57:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C68483979;
+	Wed, 17 Dec 2025 13:57:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="VgdOdY10";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SA3bP7Eg";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="kkKNfHHY";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="g3ynB/O5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7403A83AB0; Wed, 17 Dec 2025 11:51:50 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id A378183AB0; Wed, 17 Dec 2025 12:00:24 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 398FC83979
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 11:51:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41D6283979
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 12:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BH4XUlM2316144
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 10:51:46 GMT
+ 5BHA8fGl1500904
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 11:00:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=Fz1ZLPSB+M2BtLRIgKE0/sx6
- 5U3nbdo5dKEAI3dls7k=; b=VgdOdY10ZB99VY0y0rQcr5WoTucLh8OwwFB9RQ0k
- AbD4KFbWqi84OlSTsGafNX/nNzyYszWd6kzqWWpZvLqxCnUWXjTe82nzJQYFVJL8
- 3RwIeqY4yVJ+OgmOam8daEJx2rWTk7gO1sX6sGQblf/D/tNBfM2W9Xl14OfWB2NV
- 2ArZQTu7+d0km0IP91SkFDbW3r4N3X5cGzierVE7jNXeItbqWHeDWnU0CuvIbGNn
- 3LWqWVpSloQTjgDrvgEWwLRNLFnvxmlOx5gl0rWaas+ZRAU74SCKhVKrTPA1hEvE
- VjifZjk46t93TyujNr09YlKsD1h93vlB2Trtf5oxEFFQ/w==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b3nkkh6f8-1
+ :references:subject:to; s=qcppdkim1; bh=xSwQA24fh/0p8toF1HI5X/kj
+ pZm0eDKYS86lErHMvC0=; b=kkKNfHHY2TRSXT8PdWOn8ea8ilc/27N1ce6ULJ30
+ 6XlzbfmyLlD0GsgCqPUy0fWhTOXFnqSy3pKmkwXof8+aFmhH2yAv40oY1zf1dDEm
+ F3RAyoSdH1AIruYKcDRqhtFVpcfYXOxGJF5P/r7eACz39JnuoXPvKWe4qN6YQgz0
+ zEaLgf5tdpqsF22ziHauZi7FCaMbQNE0eBpzL8JkeM/5EIWKOQIJZ3VBAeic0Daw
+ Jls6N0HjkljqfgzbDXUiCg9lbx8Nbss4T+a8xNPxcqUSODtrYxLQt0EGwjhv45Xl
+ CWZQibKs0i5PGJXGQDNEAF6W0b2IiNJ8cJckoptOKy33kA==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b3kkeshss-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 10:51:46 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-34e5a9de94bso608997a91.0
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 02:51:46 -0800 (PST)
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 11:00:20 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-7ba92341f38so6454989b3a.0
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 03:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1765968705; x=1766573505; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1765969219; x=1766574019; darn=lists.denx.de; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Fz1ZLPSB+M2BtLRIgKE0/sx65U3nbdo5dKEAI3dls7k=;
- b=SA3bP7EggRpRoozkgJhVVnBEqOXe6UDevoRZfCGs/0e+GnQSOY7AdqE7HiScjbPgv0
- nhsGlkumNiP9uHiiv3iZAEmNjJ4fvtbrg70FPfkSqijWfc2NX73nft/2zXroQMTX5f3g
- 9UstQNNDvbtJa44g97FxDzTLMr0Fmj1bszV5URYjFClRHBFAI/UDst9YeRRF2YvXRiIo
- f0ArhShf9bQS+kQOpyJHug/YBOjUYcBjBAmFG86P1sJZ6A3YgD1QrChdEooekGwgnH7I
- z2hkp5Qv0/bFXDtUqsLKjV+zVtSgQcaVh5xZu67B18TrqDnbBtD4koQcAbn8hr9oD2WJ
- apng==
+ bh=xSwQA24fh/0p8toF1HI5X/kjpZm0eDKYS86lErHMvC0=;
+ b=g3ynB/O5xu+h6RPYLDDPAH3bKflDbb6oC5sTsjKnHIBGJRG6h6yBVys39a67/hd9K9
+ TFgMNSKhM3PGSAvUT7ScX45cvkPBzqlKZOyi77S+B0fP0xs5aEzZarGh4xX76xICKNb5
+ jVqVEIRNjVwCl94hnlkiwbkbWejvYPr9TkiCm95+vcDbYL88pI8NdAfgiXJXa5c7Q9y5
+ XiM10aspAizm/MWyJVArPhyQhgL3tojMVFMj0FQc7PX7oBkj1/JHsrQifbTcWDYpnkd+
+ +anlXggzXKoEjhojZIpVFoYQczxiFI0ZCXiwuqU9ybXRriOyrIVDqp/+kib7siSFPO1L
+ GIgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765968705; x=1766573505;
+ d=1e100.net; s=20230601; t=1765969219; x=1766574019;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Fz1ZLPSB+M2BtLRIgKE0/sx65U3nbdo5dKEAI3dls7k=;
- b=sFJkPpqVvXCjzRZKxVDJsO5+UQQT9txWW2RpCOKt5yYYqVKPfJ1LN2tns7dC3bxRin
- O76lFuS+cZQUiZrpQDo6oTct+vWtel3xfm3km1UVPk7XWesuxAqfiDUH5iQNPf+S1G6h
- ukdq794oiepZj1KxnCGuOik6k1x3tn1z42Nwdt/0eRGGEtJQmAyXKw98u3PUiMvwTVBy
- C1HDjDZSZsf3BuDIq5a1iuHxrIEZpNwfmLFLXn37UmgWNhxHC1+6HN0syJq1by/DLfET
- 8fcII+gTeRyxd+tQKsPXDC+5aYVvZ99EuwUAqbKNzRNCGzIKQWNY4ZDxSAC3BiOAamAF
- T3sQ==
+ bh=xSwQA24fh/0p8toF1HI5X/kjpZm0eDKYS86lErHMvC0=;
+ b=uUPlMQ5gPFxMMgB9yhh9fZ7Hpe9jO1NZ88eOEXrHwBLW5hdPxKYhYmNQ0CmyNYGCO4
+ 6+fJN+hCu5mA2q2kUoNeLPkflzxRHDdnoFDwgpqzIoqTCR9fuILunTQCCNmhXlDEd9T0
+ WcKeXnL2hfOYhfAyiTWcsVQmZc1AEyFt+F9P7KDHd+BZZyFFITbeNgT6HKn6z7ilDbMG
+ MiDl4a6yoJ1WrwSKQSbb04G7/gkX7xeOiJEsayL92dYxG/VjgXXkdZ4Y30j7C+DCY8mL
+ ayZN5N+m3tXJNKSW9orDKHKxfSINF6u2yu71F4HIJFwKSckSBo1TPdrC6Ee1LLeYcX3o
+ EUGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuyXqibNYa6psOK6kweynPcj/iVB+aJJqcZq/z2ZGYE1FTS+a8TtG31wF34aG9uNp3nYjy0Nk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxS5x84BPuRS5kZ/S7CsNfvS41Sai/9rqvJIl5bXxlQvsTA5dXw
- 2YfUkKrnqRaR3pAvaQcLgirA8PsQ65oxs+Vl4C3OUXL4zsYX91H4JEfZ9eb5zWg3jc3D+F6F+Bo
- YOxQvJgydWzdHIV5D9AdGpekc8A4NOsrAI3kO3osK88H0DVdL3L3aoihm
-X-Gm-Gg: AY/fxX62IaAvKHUxB2D78mOcfmtK84govXwykSCDPe+oCHFOba4nGWsMHZaTL6iVqWy
- PIt+RiTmkY+bYygjLpXW2ewwNxS+/20Uqow5Ts2cmhM+KKC4BHOom0sFi6iP9n2/gTtRcRcD00w
- MSVO1M3yT2qK5jW3V8W6uONwZ4DZSz4bHgNTJRSiq2rAaWw+rRFr1lfE6rbvu1q0LnSQLjFPTKH
- wzRJ9rxz2WtjLvxze0ZAMKxipA+T1jMQrnc+97+VMgYuNrs/V0BgFdxhXy3ShtW8UYoo0ArWtGt
- 3uux/CbUdihQASPucVZZ5etAmk5KdLgGcW1WQGqAd+XfOct00mk0owwmDuBUFPLwsbRC4iRGa0P
- wEiWc9VTK4/nh7oe4Re14eaRC/8SBn+PUAjPt8xoUfHpbTjKB30j2dS6TcwiSOWwuJGn0marRpo
- ImpkEnyGxOjOC8wF3DIZ8U4ZNAe5GX5PPuRu1IOtA=
-X-Received: by 2002:a05:6a20:e293:b0:352:d5b:c427 with SMTP id
- adf61e73a8af0-369ad9d75b4mr17256595637.3.1765968705532; 
- Wed, 17 Dec 2025 02:51:45 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG6xuJbqbPDBkBIqfI6MmJC8IcY+ccw3pB6sH5w6b6iQDGz+musrsdYTWZQU5PX5ulwzk/xnw==
-X-Received: by 2002:a05:6a20:e293:b0:352:d5b:c427 with SMTP id
- adf61e73a8af0-369ad9d75b4mr17256570637.3.1765968705036; 
- Wed, 17 Dec 2025 02:51:45 -0800 (PST)
+ AJvYcCXS8Ik6wNXnv4zj007AGQypF5QdjrHFIigvH9n9sPAlSZrELAtgTIzzrJ1AIZhg4OV9wU50Kjo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxmhmRbZe30g9zL7eDgWUqATTstR4YfPfWAcLSrrq+/aILiEP+v
+ g5ADy9Dw/9q7pTgYDQlce3Ujr/S6WhxHoyQKP/PjKeU0hQb6kjGHN4KbQ9Ztwb+CoO7XIZ1p/yI
+ 4AaDlC07UokUuVuhZ2C116rh2qZRMl0uJB0ZaqYbz88Z4vzoRHOU91I1T
+X-Gm-Gg: AY/fxX78b8tBR/OXFbD8KNIL3FQTovLvfsilwEceaPHE1JvwaMZs9UYOgW+c0+ODmoq
+ d6P1QVnq5ToSuxI4Z4aGLKq+CHsmwYWXwKGGBZEbcMFBk2stbOi9uyzEs9WIldS4k6VbR6H7u5G
+ zPfRd3Kvi+7Gf+KrRpjGlhZ7/V7IamDhtI8b+oZ19avfrPL4FOlpQ5XFxT49AdPwVqCpSWXwILe
+ PHtB4B+R1VDx7MSMLWyUZjJynRGDkhEbTMV6HLhxGOzk6oC3z2Y5clL9IZaTi3FRXjxN9EKcsZm
+ vrcl1cs4QynGgAycSOLKQPQaPBoQvteqF/dB12jty0flEnKo8FUrNNhd+RScE+UuBPO9ADDMyp+
+ NNEIuZ1B14kPuNILPns5MTYsggPfHQfuEj12Luuq1Q/PywJtOEQjJTgVpCejO2w4NnwZU3ulQ84
+ khl9djMwl+AjTmJvRCuBJmMOBrVmgbAYdsBpmm9jY=
+X-Received: by 2002:a05:6a00:429b:b0:7e8:43f5:bd55 with SMTP id
+ d2e1a72fcca58-7f669c8ba28mr14226046b3a.65.1765969219378; 
+ Wed, 17 Dec 2025 03:00:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF/LH9iqv6/XkJszcCIqPJ4b9erCz4EUXOS2crBk+4Dc8cx4t5rnRbVPcUXhYnSVj00CcGpJw==
+X-Received: by 2002:a05:6a00:429b:b0:7e8:43f5:bd55 with SMTP id
+ d2e1a72fcca58-7f669c8ba28mr14226009b3a.65.1765969218704; 
+ Wed, 17 Dec 2025 03:00:18 -0800 (PST)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c0c264211cbsm17861187a12.11.2025.12.17.02.51.40
+ d2e1a72fcca58-7fcbbbd89a1sm2367158b3a.52.2025.12.17.03.00.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Dec 2025 02:51:44 -0800 (PST)
-Date: Wed, 17 Dec 2025 16:21:37 +0530
+ Wed, 17 Dec 2025 03:00:18 -0800 (PST)
+Date: Wed, 17 Dec 2025 16:30:13 +0530
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, jh80.chung@samsung.com, peng.fan@nxp.com,
- rui.silva@linaro.org, ilias.apalodimas@linaro.org, me@samcday.com,
- sajattack@postmarketos.org, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, alif.zakuan.yuslaimi@altera.com,
- tien.fong.chee@altera.com, miquel.raynal@bootlin.com,
- balaji.selvanathan@oss.qualcomm.com, w.egorov@phytec.de,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v6 4/5] mach-snapdragon: fixup power-domains
-Message-ID: <aUKLOTD0Hgi3kbpk@hu-varada-blr.qualcomm.com>
-References: <20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com>
- <20251113113427.2218045-5-aswin.murugan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1] smem: msm: Fix memory-region lookup, direct <reg>
+ mapping and update SMEM host count
+Message-ID: <aUKNPZU9NHcD9EvL@hu-varada-blr.qualcomm.com>
+References: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251113113427.2218045-5-aswin.murugan@oss.qualcomm.com>
-X-Proofpoint-GUID: gFpQOqc06OWbN2Hh80iyl9In9u63GUHf
-X-Proofpoint-ORIG-GUID: gFpQOqc06OWbN2Hh80iyl9In9u63GUHf
-X-Authority-Analysis: v=2.4 cv=f/RFxeyM c=1 sm=1 tr=0 ts=69428b42 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+In-Reply-To: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE3MDA4NiBTYWx0ZWRfX9LpD8ci0FAGN
+ gg85rWGJsfSox2VpfVX6XQxqIZ3R4sUIllXUoKr7Dp0m54seY3+Nie9wYoHSty/HAznUZiG1Cj6
+ EjUu6il5vXgxXFfbutE9X23ICF1cp3PaCYYPxzn/LXKSpR0OBxDZzwCDjTCEH/loWFFM1LfaiD/
+ R5XQcMv/Up2kTFy4qtTIgw6gjBBaVFRJxQ0pe4lSVkIh+V+A1tEHvz7A+Epju10TEOZjC8pJUy0
+ DYHjZR2L8x9OJLqbg7STYcv5YlyDUfZN+5cDOEb9Ptcp4/g86ICfrNo3kSvldyVNzaq9uvGNPqK
+ j9ZFQcq4ey6iUCkssZOvuaJb5f8uJ9Z3/qrZnlq3NkihQpyPf3XPfpjOFmRSmvMGhPHFxS/EaHL
+ l8Z1hSCO6gfUC5z4afW6rkv28S53wg==
+X-Proofpoint-GUID: lCrmNxnNlsgyJLaSnr0wLu6zd9ByIj3U
+X-Authority-Analysis: v=2.4 cv=Fcw6BZ+6 c=1 sm=1 tr=0 ts=69428d44 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=Po2OY-HkD6r4WAYvqj0A:9
- a=CjuIK1q_8ugA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE3MDA4NiBTYWx0ZWRfXwwW2u5Wy22HP
- /O1DEBP+7+gd+N2Q9//IiJAWK7AQMSo3Ff3FaIFgNkZ3VcRh7jRhm3ALMQS3y0sGxPwmhYp4mVx
- l8UXA9+B2j5+7h/I3gy7jVt9QW6j+nv2eaE7w7MQCHdyTRTWQxW+ALoOCmParwq+UuOeVxKp3rT
- bmM7fzJrlxkZOeCTDZAKSJKU7mFLbPKAgOuFmgXgrXX/1oihlDBQiyTB+2BPkH6buqN6Jwqfe6e
- m8UhFtcoE5sxGnRHkLOlypabTvaI1obNnIIMIdGu/XGW/pPNyNBvW8nW2FoTHRHG6l7N/SV0d64
- 2uv/SVOCVpDrN8h3wn+Ho0Rx5CDx4hI2C7w6DCMoxmXokwOrYDhtoj/BrFLHrbVZVCaz+npg1gs
- X9tvIsNCT4cuPW8N2/hErYMHGe2p7A==
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=Fj4oBCRoZbI8LasV2noA:9
+ a=CjuIK1q_8ugA:10 a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-ORIG-GUID: lCrmNxnNlsgyJLaSnr0wLu6zd9ByIj3U
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-17_01,2025-12-16_05,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015
- priorityscore=1501 malwarescore=0 adultscore=0 bulkscore=0 impostorscore=0
+ lowpriorityscore=0 clxscore=1015 malwarescore=0 spamscore=0 suspectscore=0
+ impostorscore=0 priorityscore=1501 phishscore=0 bulkscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512170086
 X-Mailman-Approved-At: Wed, 17 Dec 2025 13:57:17 +0100
@@ -154,82 +149,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 13, 2025 at 05:04:26PM +0530, Aswin Murugan wrote:
-> RPMH power domain properties were initially removed from the
-> device tree due to the absence of driver support. Since RPMH
-> power domain driver is added now, the fixups are removed.
+On Wed, Nov 12, 2025 at 10:28:51PM +0530, Aswin Murugan wrote:
+> The SMEM driver was failing to resolve memory regions on some boards
+> because `dev_of_offset()` + `fdtdec_lookup_phandle()` did not yield a
+> valid DT node. Modernize the code to use driver-model/ofnode accessors
+> and make the probe robust for both DT styles (direct `reg` vs
+> `memory-region` phandle).
+>
+> - qcom_smem_map_memory():
+>   * Drop fdtdec path; use dev_read_phandle_with_args() +
+>     ofnode_read_resource().
+>   * Use dev_read_phandle_with_args() +
+>     fnode_read_resource().
+>
+> - qcom_smem_probe():
+>   * Try dev_read_addr_size() first (map via <reg>), else fall back to
+>     qcom_smem_map_memory() with "memory-region".
+>   * Check "qcom,rpm-msg-ram" presence to add second region.
+>
+> - Additionally, SMEM_HOST_COUNT is increased to support newer SMEM
+>   versions that include more remote processors. This avoids failures
+>   during processor ID checks.
 
 Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
-> v6:
-> - No changes to this patch in v6
+>  drivers/smem/msm_smem.c | 56 +++++++++++++++++++++++++++++------------
+>  1 file changed, 40 insertions(+), 16 deletions(-)
 >
-> v5:
-> - No changes to this patch in v5
+> diff --git a/drivers/smem/msm_smem.c b/drivers/smem/msm_smem.c
+> index ccd145f9afb..b6b92d3530d 100644
+> --- a/drivers/smem/msm_smem.c
+> +++ b/drivers/smem/msm_smem.c
+> @@ -88,7 +88,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>  #define SMEM_GLOBAL_HOST	0xfffe
 >
-> v4:
-> - Reverted the inclusion of qcom-rpmpd.h header in pervious versions.
+>  /* Max number of processors/hosts in a system */
+> -#define SMEM_HOST_COUNT		10
+> +#define SMEM_HOST_COUNT		25
 >
-> v3:
-> - Removed OF_LIVE_SA8775P config, since there is no SA8775P specific fixups are done
+>  /**
+>   * struct smem_proc_comm - proc_comm communication struct (legacy)
+> @@ -821,23 +821,34 @@ static int qcom_smem_enumerate_partitions(struct qcom_smem *smem,
+>  static int qcom_smem_map_memory(struct qcom_smem *smem, struct udevice *dev,
+>  				const char *name, int i)
+>  {
+> -	struct fdt_resource r;
+>  	int ret;
+> -	int node = dev_of_offset(dev);
+> +	struct ofnode_phandle_args args;
+> +	struct resource r;
 >
-> v2:
-> - Removed the power domain fixups, since the power domains are handled in qcom-rpmhpd driver
-> ---
->  arch/arm/mach-snapdragon/of_fixup.c | 31 -----------------------------
->  1 file changed, 31 deletions(-)
->
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index eec2c0c757e..93c16821e54 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -116,36 +116,6 @@ static void fixup_usb_nodes(struct device_node *root)
+> -	ret = fdtdec_lookup_phandle(gd->fdt_blob, node, name);
+> -	if (ret < 0) {
+> -		dev_err(dev, "No %s specified\n", name);
+> +	if (!dev_read_prop(dev, name, NULL)) {
+> +		dev_err(dev, "%s prop not found\n", name);
+>  		return -EINVAL;
 >  	}
->  }
 >
-> -/* Remove all references to the rpmhpd device */
-> -static void fixup_power_domains(struct device_node *root)
-> -{
-> -	struct device_node *pd = NULL, *np = NULL;
-> -	struct property *prop;
-> -	const __be32 *val;
-> -
-> -	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-> -	for_each_of_allnodes_from(root, pd) {
-> -		if (pd->name && !strcmp("power-controller", pd->name))
-> -			break;
-> -	}
-> -
-> -	/* Sanity check that this is indeed a power domain controller */
-> -	if (!of_find_property(pd, "#power-domain-cells", NULL)) {
-> -		log_err("Found power-controller but it doesn't have #power-domain-cells\n");
-> -		return;
-> -	}
-> -
-> -	/* Remove all references to the power domain controller */
-> -	for_each_of_allnodes_from(root, np) {
-> -		if (!(prop = of_find_property(np, "power-domains", NULL)))
-> -			continue;
-> -
-> -		val = prop->value;
-> -		if (val[0] == cpu_to_fdt32(pd->phandle))
-> -			of_remove_property(np, prop);
-> -	}
-> -}
-> -
->  #define time_call(func, ...) \
->  	do { \
->  		u64 start = timer_get_us(); \
-> @@ -158,7 +128,6 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
->  	struct device_node *root = event->data.of_live_built.root;
+> -	ret = fdt_get_resource(gd->fdt_blob, ret, "reg", 0, &r);
+> -	if (ret)
+> -		return ret;
+> +	ret = dev_read_phandle_with_args(dev, name, NULL, 0, 0, &args);
+> +	if (ret) {
+> +		dev_err(dev, "%s phandle read failed\n", name);
+> +		return -EINVAL;
+> +	}
 >
->  	time_call(fixup_usb_nodes, root);
-> -	time_call(fixup_power_domains, root);
+> +	if (!ofnode_valid(args.node)) {
+> +		dev_err(dev, "Invalid node from phandle args\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = ofnode_read_resource(args.node, 0, &r);
+> +	if (ret) {
+> +		dev_err(dev, "Can't get mmap base address(%d)\n", ret);
+> +		return ret;
+> +	}
+>  	smem->regions[i].aux_base = (u32)r.start;
+> -	smem->regions[i].size = fdt_resource_size(&r);
+> -	smem->regions[i].virt_base = devm_ioremap(dev, r.start, fdt_resource_size(&r));
+> +	smem->regions[i].size = resource_size(&r);
+> +	smem->regions[i].virt_base = devm_ioremap(dev, r.start, resource_size(&r));
+>  	if (!smem->regions[i].virt_base)
+>  		return -ENOMEM;
 >
->  	return 0;
->  }
+> @@ -852,10 +863,14 @@ static int qcom_smem_probe(struct udevice *dev)
+>  	int num_regions;
+>  	u32 version;
+>  	int ret;
+> -	int node = dev_of_offset(dev);
+> +	fdt_addr_t addr;
+> +	fdt_size_t size;
+> +
+> +	if (__smem)
+> +		return 0;
+>
+>  	num_regions = 1;
+> -	if (fdtdec_lookup_phandle(gd->fdt_blob, node, "qcomrpm-msg-ram") >= 0)
+> +	if (dev_read_prop(dev, "qcom,rpm-msg-ram", NULL))
+>  		num_regions++;
+>
+>  	array_size = num_regions * sizeof(struct smem_region);
+> @@ -866,9 +881,18 @@ static int qcom_smem_probe(struct udevice *dev)
+>  	smem->dev = dev;
+>  	smem->num_regions = num_regions;
+>
+> -	ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
+> -	if (ret)
+> -		return ret;
+> +	addr = dev_read_addr_size(dev, &size);
+> +	if (addr == FDT_ADDR_T_NONE) {
+> +		ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
+> +		if (ret)
+> +			return ret;
+> +	} else {
+> +		smem->regions[0].aux_base = (u32)addr;
+> +		smem->regions[0].size = size;
+> +		smem->regions[0].virt_base = devm_ioremap(dev, addr, size);
+> +		if (!smem->regions[0].virt_base)
+> +			return -ENOMEM;
+> +	}
+>
+>  	if (num_regions > 1) {
+>  		ret = qcom_smem_map_memory(smem, dev,
 >
 > --
 > 2.34.1
