@@ -4,85 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852CED68BE7
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 07:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2360ED68BED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 08:04:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B833783C2B;
-	Thu, 18 Dec 2025 08:51:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C71C83C94;
+	Thu, 18 Dec 2025 09:04:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UnkXpIZw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ubk9XDIV";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="S2xCJYlB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492BA83C54; Thu, 18 Dec 2025 08:51:28 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D50F883CAA; Thu, 18 Dec 2025 09:04:34 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1C8283C2B
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:51:25 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c730af8d69so213389a34.1
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 23:51:25 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EF9283C54
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:04:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5BI1YZeS4147974
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:04:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=q0Hn/NNZnglya3aTsa99H6wW
+ drz0fzsHZewJGi6ToRg=; b=Ubk9XDIV9n60rywC06rPc+2LVPU7YgePlG4EyjGa
+ lIudwL43kjfu9KJ7O0rcilKEQPWMq58UnGUsfcTMJXEsYMuM0ZNLhBog2F5MnQTS
+ jR5leVCvxgRvIrfKtp8K99JLYVdbIIMpIkNYs9B8M/BloTL2RsxF+W+iTV3blEnA
+ V5tjexRzhEFHT8hr72y+yrA///v7wGEDT/5BNlcEZ/RmZzqztkWq0SmloaYorUGy
+ LRcXkO/M0gsel6QBs9/3RJsjR8u6Z+lmwLrehpR8al6afDJsXB9s75J6Bn1HTACp
+ 2B9iil7IYlFH5AVrx3LG+9okCMLS8CmWzWmVSGkNDQ0wiQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b40u7a7a8-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:04:30 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-29efd658fadso11849935ad.0
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 00:04:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766044284; x=1766649084; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xmJ6NP9Pe3VNi5JFI3V89TfIObLzwWSB6ljxLbxFFIs=;
- b=UnkXpIZwyqTxf6y/xdw8Q9/DHI1QdUQoKKkFH5Ew5oK4LG5D+YVQZI9lWSD7uA2hmD
- ILLpo2+jtANdCtkNVVwklvrP5zOvXna084f/0t0SxrlBBaahTx65BiU9p/eQjI/6fewd
- 8nNBEMHPD5CTCCshmeVWFQWwG0izpwcNIz1Kz6Ag+m8VxYR3mH2b+xtOi8BYrjPKFJSt
- M8Yy7GROUR7YZvP+vSo9vz7ctTiUEmJkRjGXTJBHQsjTZPryenWFUZs4Bu59nZlNaawF
- w7CDafotV7pNV+3avMQwhtJosCB7A1U2ilBlcqzVDQ382LrqO7hc8pXK5r2e8RKIiL+D
- kB8w==
+ d=oss.qualcomm.com; s=google; t=1766045070; x=1766649870; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=q0Hn/NNZnglya3aTsa99H6wWdrz0fzsHZewJGi6ToRg=;
+ b=S2xCJYlBJHnk9tNnrVSrFjnU6kASoNIoqYxNdwzs7ICpS1WcHuENDKkB4eQGlhQlEv
+ H9oAXN2uvUjfGB+tD0YY6KaIBC4mfQyiKjX+qo5I3Gt0UZgKKm0XqkKaeqZSP71UxVVk
+ bLJ8g02Sf7orAQ6FZ9U7QBf/035RA5FFgUoW2vkcuYPxzVGUxI/Sib1gYzSFs5zyevX7
+ mTgW+8LGXz+YRQhT2kTHVIJ6UJaZZlGKlEj2iMbfbGp8v6dKwn90Z8+fhPnA5Pkj625S
+ bubCy5ha2RRUnPLaMAYOUg2V5TYpUJ+cE9/8pVw8nw7Rzh6G7ypvAkHmuyT4IXh88FL2
+ 2SdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766044284; x=1766649084;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xmJ6NP9Pe3VNi5JFI3V89TfIObLzwWSB6ljxLbxFFIs=;
- b=jA1MGH0/TGu2G54IpAJCDOPd0r21QiQRn4v8TKbFEDRCIFDV3mSA4AEveBoeEdInlT
- QCJavN087V1s+HDzhKozl/g82xoWCm/8wVgwueWFzIT0PpLhGmkWQ2+LjUV35ObG29Pe
- JB2Ndjz98hxi3hk9EtppdEsiYNMvwJCT2vhRywesNnlsraXjmGMaI2rdmfoSZZhJ1D7H
- efHdCtjAJnCnES6Z27TKOQv4JVW7yjaFQf6W51FGpOBFelOM8BGhrsTmPLPnHU03DiaJ
- SwCC33iREO6qs1IL9uFSiC74mUsvkXVbvQ07I2b3F0gSsp61XCd4TJNRZg6YAtwFcNa4
- kGQw==
-X-Gm-Message-State: AOJu0YxyGw3jfcf4iwHrJBZUzzIiDbe1Q7Qe7Ck1nc6fAMWFV7mEMKjc
- idygPtzGLAqoWAyLV+COXkInPhau5zxU4wSYFJZ7VEcGH7k6DOGW0s+Or1xBj/kjjeyUqBt/Vpo
- 1QOzDOOmaovnCd0iMU9BPQm3+yiwink5gt8sf
-X-Gm-Gg: AY/fxX5aP+Xgm8DJGWcxF26DYNfY4waMFZFeKl51NTPCZ7rDS7K2sMqIsWxGtdbb/0V
- DJprSjekdPt4X9Hf0hR3PflNnOUun7nP2QP+zUIBn0XWfbA2V2JHeBhjzzdlQ4Ho7RwJTMpO39I
- 9KTsaS1sasAvkuTPaTDapzH3iMABwMOuYumeoWg0g1NT+G9gTYvk832lgrWWY0PUEFJwASlxtWE
- 2mrhYhrlP/kF5zhc54BdafpRxvUak13MCQeooy/pfk+DxzfIE7522LetDwMDNZkobDESLu6
-X-Google-Smtp-Source: AGHT+IGzXG/UGpa0EbHwowQSoxyHyrTYXssKx4mBrXEVD44XFSZVDwpARrDUoueUNqULjU9C/k9yLYoXqvxkpLPNLk0=
-X-Received: by 2002:a05:6830:442a:b0:7c7:68d8:f702 with SMTP id
- 46e09a7af769-7cae82e25bdmr10806934a34.9.1766044284313; Wed, 17 Dec 2025
- 23:51:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1766045070; x=1766649870;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q0Hn/NNZnglya3aTsa99H6wWdrz0fzsHZewJGi6ToRg=;
+ b=OBZh/etcqNrs6ZRFKvPwPVM5imCLZ7NBv/EokJcBPQ6TPtfuZzijusSm3FFHtgt8zq
+ I7COxA1FderZEaKq7x5J6GIdjmoDJRD7VJUPHaSNfp9xH1DsDiU8U8DypzuVd6pWzInv
+ aoyEpZP0nA252WCKrZ/icmBK3ENBNS+IoBxaOJYDc0vtN3Q02huDTqilGLjkwzrXSpJL
+ +eZ4sXdV82zIpVumFh9/5Xq6Slj8nEDMSRpp3oU3x12jJaDmJjBsb9bKtay350zjblD3
+ lAxyfs8T1gm3sApRH+yAUBb/jZQQUImy6JHg9dGh6vJZtWW9CryyXspRk2yDB6WpXH1g
+ dodQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKp7mhbE8VaszPgnMpwY2CYnaNwpa5f2k/vK039zyROWYeeMeR6Frlpu5bi48RDiVu9YXnx+c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzoBaPO8fMQmmzXodUyLLsEfiQL2hmT19zrcXQ9czCKkuONU4WB
+ CLnlp/0iE37skib6mApqnKVXSEYcdmgLkmsMDM4qmEDv7G+fqLwRum9GUkAddJXNlWgDZKhlgj8
+ jNvmB1LME//wV9XmiBU6bUwBYebKcZ8F2ZL+yNlvikBHaqhh9IEEbUCVO
+X-Gm-Gg: AY/fxX4V2R5thMiKhprboyte0cNCGxHnw2F8q5G1k4UXQHK0tRW8h8axxDkcDGCrXQM
+ 3mxu0iD+9QOkr29q9ThWwNYL0boim/RtaYAClij7NGCJcMLe8uYngUeLmuWEziChCjF5fgK2LXq
+ 87QrbV/52b25RQA8IdrZubqR8Dhxp4cxpPW3lMPWBRn/f25oqctspVa1SEZjHrOvgNLm1Zmzwkp
+ ioSR8m/RbNQdr54TtFIf+cqDFFW29DbCXh5NF2BP9D3NGMSfGEbbkwagYbLaH6jRhX9CDCiWdbN
+ S1O20hM6pCywnN4MwbYS5F1M5PQ8uhra+aQNHfRIRwcv+thPxVS7I91+KBh29HKKeD3Dp3cxF7g
+ W2Rp8683fHfPt9gwbhAc3ahI3w7DbcFJKGgHYkIIFw3JbQfYdAeuo4iplrdoBwOzHLR3gVej78r
+ E8HCtFK0m9mBewF6qmmmlVc/lP7xMOTe1XAo4sCHk=
+X-Received: by 2002:a17:902:ea0c:b0:2a1:325b:2cba with SMTP id
+ d9443c01a7336-2a1325b2e27mr95250465ad.53.1766045069621; 
+ Thu, 18 Dec 2025 00:04:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG5UUEPiwcAQMV4ybY8JPaupUlzQRfg/sJYS31Xzy4i7jWC6KGG+WS6nCDr+NbFia7BIwj90Q==
+X-Received: by 2002:a17:902:ea0c:b0:2a1:325b:2cba with SMTP id
+ d9443c01a7336-2a1325b2e27mr95250025ad.53.1766045069032; 
+ Thu, 18 Dec 2025 00:04:29 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a2d0889379sm16201425ad.24.2025.12.18.00.04.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Dec 2025 00:04:28 -0800 (PST)
+Date: Thu, 18 Dec 2025 13:34:19 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com, marex@denx.de,
+ malysagreg@gmail.com, vasileios.bimpikas@analog.com,
+ utsav.agarwal@analog.com, arturs.artamonovs@analog.com,
+ nathan.morrison@timesys.com, peng.fan@nxp.com,
+ kory.maincent@bootlin.com, patrice.chotard@foss.st.com,
+ sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
+ stefan.roese@mailbox.org, mkorpershoek@kernel.org,
+ alif.zakuan.yuslaimi@altera.com, hs@nabladev.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, luca.weiss@fairphone.com,
+ quic_varada@quicinc.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v3 4/6] arch: arm: mach-snapdragon: Auto-detect USB SSPHY
+ driver support
+Message-ID: <aUO1g+0MEzrad577@hu-varada-blr.qualcomm.com>
+References: <20251203110735.1959862-1-balaji.selvanathan@oss.qualcomm.com>
+ <20251203110735.1959862-5-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com>
- <20251216084623.19589-3-alif.zakuan.yuslaimi@altera.com>
- <CAN7C2SCMJ4bK0eQc15zGtn1g9-EOuOucY1z+_AjLwrV6dbY3QQ@mail.gmail.com>
- <bdc886c5-c101-426c-844e-ef5b5eaac120@altera.com>
- <CAN7C2SCdBe_ZqT0U89mcEjQki6viQVcg4-VwT93oBkhFMUYUtw@mail.gmail.com>
- <a6a96fdc-3208-4c10-b65e-c3bdbe7f9657@altera.com>
-In-Reply-To: <a6a96fdc-3208-4c10-b65e-c3bdbe7f9657@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 18 Dec 2025 15:51:12 +0800
-X-Gm-Features: AQt7F2olWQg7CVoqwMnl_w-q59TK40MTUwDVq3NhNgB9efFtG7pzGMSvg_xdiqU
-Message-ID: <CAN7C2SA8vdtaqjucjEEM6hax-rEhW-kWkETXKGHL3QYyN-pnVQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/5] ddr: socfpga: Add ECC DRAM scrubbing support for
- Gen5/Arria10
-To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-Cc: u-boot@lists.denx.de, Tien Fong Chee <tien.fong.chee@altera.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251203110735.1959862-5-balaji.selvanathan@oss.qualcomm.com>
+X-Proofpoint-GUID: TSTRv3tFaqyotTAjcfnXNW782wClNLvP
+X-Authority-Analysis: v=2.4 cv=Z8Th3XRA c=1 sm=1 tr=0 ts=6943b58e cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=sb7SZJ5qkl1fgBpHmBIA:9
+ a=CjuIK1q_8ugA:10 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-ORIG-GUID: TSTRv3tFaqyotTAjcfnXNW782wClNLvP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDA2NCBTYWx0ZWRfX3+9l33QgfL3n
+ P2yU7D1r1GhfvR6D/JUAMeFZBvqvAYzUKn5rBkUME68EhAh5mnmQ8J0ky59gxzSPzKZy1hYzITT
+ rxhCScejvqqxaemCHn7PTPXjegPzSNbWpX3LZdE4IKNlV5BSGW+IgFgQ6K+HycUzinUoDRiMZAI
+ ij8iCS3mL3xeJcCLDox7K63bPmThkhdhuALIeYauRRNXBVAyBqyumUujTWRYHH6g6G9Lb/dVdaO
+ 9mdg3dXSUb7jr2kR5VfdQW6M+4ZH4eQDRjAMSjmjvr28bH4FsNbmYZX8ziGja36k8ChoReujkvU
+ YozKjZGGdqZPYdsUAnBI7kTHLzvcvD8zFY5strlx+VZvaCR8E+5gQssql8XcC7y58I9sNhaXp8Q
+ SYvp3iXTrB+jMoXqwlTbgg8IKJyCdA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-18_01,2025-12-17_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0
+ impostorscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512180064
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,403 +157,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
+On Wed, Dec 03, 2025 at 04:37:33PM +0530, Balaji Selvanathan wrote:
+> Automatically detect super-speed USB PHY driver availability and
+> skip the USB speed fixup if driver is available, eliminating the need
+> for manual configuration.
+>
+> Previously, U-Boot unconditionally limited USB to high-speed mode
+> on all Qualcomm platforms because most lacked super-speed PHY
+> drivers.
+>
+> This change implements runtime detection that checks if a PHY
+> driver exists for the super-speed PHY node referenced by the DWC3
+> controller. The fixup is automatically skipped when a compatible
+> driver is found, allowing the hardware to operate at full
+> capability. Platforms without super-speed PHY drivers continue to
+> receive the fixup automatically.
+> ---
+> v3:
+> - Removed support to manually disable the fixup via Kconfig.
+> - Instead added code to automatically detect if
+>   SSPHY driver is available.
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-On Thu, Dec 18, 2025 at 2:43=E2=80=AFPM Yuslaimi, Alif Zakuan
-<alif.zakuan.yuslaimi@altera.com> wrote:
->
-> Hi Brian,
->
-> On 17/12/2025 3:50 pm, Sune Brian wrote:
-> > [CAUTION: This email is from outside your organization. Unless you trus=
-t the sender, do not click on links or open attachments as it may be a frau=
-dulent email attempting to steal your information and/or compromise your co=
-mputer.]
-> >
-> > Hi Alif,
-> >
-> > On Wed, Dec 17, 2025 at 3:27=E2=80=AFPM Yuslaimi, Alif Zakuan
-> > <alif.zakuan.yuslaimi@altera.com> wrote:
-> >>
-> >> Hi Brian,
-> >>
-> >> On 16/12/2025 5:46 pm, Sune Brian wrote:
-> >>> [CAUTION: This email is from outside your organization. Unless you tr=
-ust the sender, do not click on links or open attachments as it may be a fr=
-audulent email attempting to steal your information and/or compromise your =
-computer.]
-> >>>
-> >>> Hi Alif,
-> >>>
-> >>> I have a question on sdram_arria10.c
-> >>> Why spl_gen5.c requires:
-> >>> static struct bd_info bdata __attribute__ ((section(".data")));
-> >>> with gd->bd =3D &bdata;
-> >>> But on arria10 this is not required, it is done on another file?
-> >>>
-> >>> Thank you,
-> >>> Brian
-> >>>
-> >>
-> >> I found that removing these will cause failure to boot U-Boot SPL afte=
-r
-> >> trying to reboot from Linux, SPL will keep on looping during DDR
-> >> initialization.
-> >>
-> >> This could be because of the missing board info in the memory, leading
-> >> to a failed initialization as gd->bd is not set up properly after a wa=
-rm
-> >> reset.
-> >>
-> >> SPL runs from the small OCRAM before DRAM is available. CycloneV has a
-> >> much more limited OCRAM space compared to Arria10.
-> >
-> > I am referring to the A10 case here. Maybe you confused my previous que=
-stion.
-> > Why I am asking this question is because both A10 and GEN5 aka C5 use
-> > the same soc32.c. Hence, the ECC will require the gd->bd-> to be define=
-d
-> > in order for .size or .start etc to be used.
-> >
-> > +       start_addr =3D gd->bd->bi_dram[0].start;
-> > +       size =3D gd->bd->bi_dram[0].size;
-> >
-> > So your dynamic means it is well set up before the ECC init uses those
-> > variables?
-> > As I am not finding, gd->bd is not set in the a10_spl.c at least not
-> > really distinct as "=3D"
-> >
-> > Thanks,
-> > Brian
-> >
->
-> Yes, just like you have mentioned, both Arria10 and Gen5 require gd->bd
-> to be defined before ECC scrubbing in sdram_soc32.c.
->
-> However, unlike Gen5, Arria10 is able to leverage common SPL=E2=80=99s
-> (common/spl/spl.c) generic fallback function - spl_set_bd(), thanks to
-> the larger OCRAM which allows more flexibility for SPL to use U-Boot=E2=
-=80=99s
-> generic memory allocation and initialization mechanisms.
+Move 'Signed-off-by:' above the '---' line.
 
-So for the GEN 5 case the spl_set_bd() is not possible I guess.
-1M vs 64K on A10 indeed much much more room to work things.
-Thank you for the detailed explanations.
+> ---
+>  arch/arm/mach-snapdragon/of_fixup.c | 130 ++++++++++++++++++++++++----
+>  1 file changed, 112 insertions(+), 18 deletions(-)
+>
+> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+> index eec2c0c757e..85dc1c4573d 100644
+> --- a/arch/arm/mach-snapdragon/of_fixup.c
+> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+> @@ -4,7 +4,7 @@
+>   *
+>   * This file implements runtime fixups for Qualcomm DT to improve
+>   * compatibility with U-Boot. This includes adjusting the USB nodes
+> - * to only use USB high-speed.
+> + * to only use USB high-speed if SSPHY driver is not available.
+>   *
+>   * We use OF_LIVE for this rather than early FDT fixup for a couple
+>   * of reasons: it has a much nicer API, is most likely more efficient,
+> @@ -21,32 +21,108 @@
+>  #include <dt-bindings/input/linux-event-codes.h>
+>  #include <dm/of_access.h>
+>  #include <dm/of.h>
+> +#include <dm/device.h>
+> +#include <dm/lists.h>
+>  #include <event.h>
+>  #include <fdt_support.h>
+>  #include <linux/errno.h>
+> +#include <linker_lists.h>
+>  #include <stdlib.h>
+>  #include <time.h>
+>
+> -/* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
+> - * USB controllers. Rather than requiring source level DT changes, we fix up
+> - * DT here. This improves compatibility with upstream DT and simplifies the
+> - * porting process for new devices.
+> +/**
+> + * find_ssphy_node() - Find the super-speed PHY node referenced by DWC3
+> + * @dwc3: DWC3 device node
+> + *
+> + * Returns: Pointer to SS-PHY node if found, NULL otherwise
+> + */
+> +static struct device_node *find_ssphy_node(struct device_node *dwc3)
+> +{
+> +	const __be32 *phandles;
+> +	const char *phy_name;
+> +	int len, i, ret;
+> +
+> +	phandles = of_get_property(dwc3, "phys", &len);
+> +	if (!phandles)
+> +		return NULL;
+> +
+> +	len /= sizeof(*phandles);
+> +
+> +	/* Iterate through PHY phandles to find the SS-PHY */
+> +	for (i = 0; i < len; i++) {
+> +		ret = of_property_read_string_index(dwc3, "phy-names", i, &phy_name);
+> +		if (ret)
+> +			continue;
+> +
+> +		/* Check if this is the super-speed PHY */
+> +		if (!strncmp("usb3-phy", phy_name, strlen("usb3-phy")) ||
+> +		    !strncmp("usb3_phy", phy_name, strlen("usb3_phy"))) {
+> +			return of_find_node_by_phandle(NULL, be32_to_cpu(phandles[i]));
+> +		}
+> +	}
 
-Brian
+fixup_qcom_dwc3() somehow assumes the second phandle *will* be usb3 phy.
+Can't we continue with the assumption here too?
 
+> +
+> +	return NULL;
+> +}
+> +
+> +/**
+> + * has_driver_for_node() - Check if any PHY driver can bind to this node
+> + * @np: Device node to check
+> + *
+> + * Returns: true if a PHY driver with matching compatible string exists, false otherwise
+>   */
+> +static bool has_driver_for_node(struct device_node *np)
+> +{
+> +	struct driver *driver = ll_entry_start(struct driver, driver);
+> +	const int n_ents = ll_entry_count(struct driver, driver);
+> +	const char *compat_list, *compat;
+> +	int compat_length, i;
+> +	struct driver *entry;
+> +
+> +	if (!np)
+> +		return false;
+> +
+> +	/* Get compatible strings from the node */
+> +	compat_list = of_get_property(np, "compatible", &compat_length);
+> +	if (!compat_list)
+> +		return false;
+> +
+> +	/* Check each compatible string against PHY drivers only */
+> +	for (i = 0; i < compat_length; i += strlen(compat) + 1) {
+> +		compat = compat_list + i;
+> +
+> +		/* Iterate through all registered drivers */
+> +		for (entry = driver; entry != driver + n_ents; entry++) {
+> +			const struct udevice_id *of_match = entry->of_match;
+> +
+> +			/* Skip non-PHY drivers to improve performance */
+> +			if (entry->id != UCLASS_PHY)
+> +				continue;
+> +
+> +			if (!of_match)
+> +				continue;
+
+		if (entry->id != UCLASS_PHY || !of_match)
+			continue;
+
+> +			while (of_match->compatible) {
+> +				if (!strcmp(of_match->compatible, compat)) {
+> +					debug("Found PHY driver '%s' for SS-PHY compatible '%s'\n",
+> +					      entry->name, compat);
+> +					return true;
+> +				}
+> +				of_match++;
+> +			}
+> +		}
+> +	}
+> +
+> +	return false;
+> +}
+> +
+>  static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np)
+>  {
+> -	struct device_node *dwc3;
+> +	struct device_node *dwc3, *ssphy_np;
+>  	int ret, len, hsphy_idx = 1;
+>  	const __be32 *phandles;
+>  	const char *second_phy_name;
 >
-> Thanks,
-> Alif
+> -	debug("Fixing up %s\n", glue_np->name);
+> -
+> -	/* Tell the glue driver to configure the wrapper for high-speed only operation */
+> -	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
+> -	if (ret) {
+> -		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
+> -		return ret;
+> -	}
+> +	debug("Checking USB configuration for %s\n", glue_np->name);
 >
-> >>
-> >> Due to this memory space limitation, there is no dynamic memory
-> >> allocation in Gen5 SPL, therefore bd_info must be allocated statically=
-.
-> >>
-> >> By declaring bd_info as static and placing it in .data section, we can
-> >> minimize Gen5 SPL OCRAM usage, as well as making the SPL execution muc=
-h
-> >> more simpler and robust.
-> >>
-> >> Thanks,
-> >> Alif
-> >>
-> >>> On Tue, Dec 16, 2025 at 4:46=E2=80=AFPM <alif.zakuan.yuslaimi@altera.=
-com> wrote:
-> >>>>
-> >>>> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> >>>>
-> >>>> The SDRAM must first be rewritten by zeroes if ECC is used to initia=
-lize
-> >>>> the ECC metadata. Make the CPU overwrite the DRAM with zeroes in suc=
-h a
-> >>>> case.
-> >>>>
-> >>>> This scrubbing implementation turns the caches on temporarily,
-> >>>> then overwrites the whole RAM with zeroes, flushes the caches and tu=
-rns
-> >>>> them off again. This provides satisfactory performance.
-> >>>>
-> >>>> Move common code sdram_init_ecc_bits() to new common file sdram_soc3=
-2.c.
-> >>>> Preparation for Gen5 uses the same memory initialization function as
-> >>>> Arria10.
-> >>>>
-> >>>> Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
-> >>>> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com=
+>  	/* Find the DWC3 node itself */
+>  	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
+> @@ -58,20 +134,38 @@ static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np
+>  	phandles = of_get_property(dwc3, "phys", &len);
+>  	len /= sizeof(*phandles);
+>  	if (len == 1) {
+> -		log_debug("Only one phy, not a superspeed controller\n");
+> +		debug("Only one phy, not a superspeed controller\n");
+
+Undo.
+
+>  		return 0;
+
+Earlier, the fixup was at the top, so you can return here. Now you have
+to apply the fixup in this case.
+
+>  	}
 >
-> >>>> ---
-> >>>>    arch/arm/mach-socfpga/spl_gen5.c   |  4 ++
-> >>>>    drivers/ddr/altera/Makefile        |  4 +-
-> >>>>    drivers/ddr/altera/sdram_arria10.c | 25 +++-------
-> >>>>    drivers/ddr/altera/sdram_gen5.c    | 18 ++++++++
-> >>>>    drivers/ddr/altera/sdram_soc32.c   | 74 +++++++++++++++++++++++++=
-+++++
-> >>>>    drivers/ddr/altera/sdram_soc32.h   | 11 +++++
-> >>>>    6 files changed, 115 insertions(+), 21 deletions(-)
-> >>>>    create mode 100644 drivers/ddr/altera/sdram_soc32.c
-> >>>>    create mode 100644 drivers/ddr/altera/sdram_soc32.h
-> >>>>
-> >>>> diff --git a/arch/arm/mach-socfpga/spl_gen5.c b/arch/arm/mach-socfpg=
-a/spl_gen5.c
-> >>>> index df79cfe0f7f..5c78a4c1fea 100644
-> >>>> --- a/arch/arm/mach-socfpga/spl_gen5.c
-> >>>> +++ b/arch/arm/mach-socfpga/spl_gen5.c
-> >>>> @@ -27,6 +27,8 @@
-> >>>>
-> >>>>    DECLARE_GLOBAL_DATA_PTR;
-> >>>>
-> >>>> +static struct bd_info bdata __attribute__ ((section(".data")));
-> >>>> +
-> >>>>    u32 spl_boot_device(void)
-> >>>>    {
-> >>>>           const u32 bsel =3D readl(socfpga_get_sysmgr_addr() +
-> >>>> @@ -146,6 +148,8 @@ void board_init_f(ulong dummy)
-> >>>>           /* enable console uart printing */
-> >>>>           preloader_console_init();
-> >>>>
-> >>>> +       gd->bd =3D &bdata;
-> >>>> +
-> >>>>           ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
-> >>>>           if (ret) {
-> >>>>                   debug("DRAM init failed: %d\n", ret);
-> >>>> diff --git a/drivers/ddr/altera/Makefile b/drivers/ddr/altera/Makefi=
-le
-> >>>> index 7ed43965be5..b9e3302d714 100644
-> >>>> --- a/drivers/ddr/altera/Makefile
-> >>>> +++ b/drivers/ddr/altera/Makefile
-> >>>> @@ -7,8 +7,8 @@
-> >>>>    # Copyright (C) 2014-2025 Altera Corporation <www.altera.com>
-> >>>>
-> >>>>    ifdef CONFIG_$(PHASE_)ALTERA_SDRAM
-> >>>> -obj-$(CONFIG_TARGET_SOCFPGA_GEN5) +=3D sdram_gen5.o sequencer.o
-> >>>> -obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) +=3D sdram_arria10.o
-> >>>> +obj-$(CONFIG_TARGET_SOCFPGA_GEN5) +=3D sdram_soc32.o sdram_gen5.o s=
-equencer.o
-> >>>> +obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) +=3D sdram_soc32.o sdram_arria=
-10.o
-> >>>>    obj-$(CONFIG_TARGET_SOCFPGA_STRATIX10) +=3D sdram_soc64.o sdram_s=
-10.o
-> >>>>    obj-$(CONFIG_TARGET_SOCFPGA_AGILEX) +=3D sdram_soc64.o sdram_agil=
-ex.o
-> >>>>    obj-$(CONFIG_TARGET_SOCFPGA_N5X) +=3D sdram_soc64.o sdram_n5x.o
-> >>>> diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera=
-/sdram_arria10.c
-> >>>> index d3305a6c82d..0e3a1d42f34 100644
-> >>>> --- a/drivers/ddr/altera/sdram_arria10.c
-> >>>> +++ b/drivers/ddr/altera/sdram_arria10.c
-> >>>> @@ -21,9 +21,14 @@
-> >>>>    #include <linux/bitops.h>
-> >>>>    #include <linux/delay.h>
-> >>>>    #include <linux/kernel.h>
-> >>>> +#include <linux/sizes.h>
-> >>>> +
-> >>>> +#include "sdram_soc32.h"
-> >>>>
-> >>>>    DECLARE_GLOBAL_DATA_PTR;
-> >>>>
-> >>>> +#define PGTABLE_OFF    0x4000
-> >>>> +
-> >>>>    static void sdram_mmr_init(void);
-> >>>>    static u64 sdram_size_calc(void);
-> >>>>
-> >>>> @@ -192,24 +197,6 @@ static int sdram_is_ecc_enabled(void)
-> >>>>                     ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK);
-> >>>>    }
-> >>>>
-> >>>> -/* Initialize SDRAM ECC bits to avoid false DBE */
-> >>>> -static void sdram_init_ecc_bits(u32 size)
-> >>>> -{
-> >>>> -       icache_enable();
-> >>>> -
-> >>>> -       memset(0, 0, 0x8000);
-> >>>> -       gd->arch.tlb_addr =3D 0x4000;
-> >>>> -       gd->arch.tlb_size =3D PGTABLE_SIZE;
-> >>>> -
-> >>>> -       dcache_enable();
-> >>>> -
-> >>>> -       printf("DDRCAL: Scrubbing ECC RAM (%i MiB).\n", size >> 20);
-> >>>> -       memset((void *)0x8000, 0, size - 0x8000);
-> >>>> -       flush_dcache_all();
-> >>>> -       printf("DDRCAL: Scrubbing ECC RAM done.\n");
-> >>>> -       dcache_disable();
-> >>>> -}
-> >>>> -
-> >>>>    /* Function to startup the SDRAM*/
-> >>>>    static int sdram_startup(void)
-> >>>>    {
-> >>>> @@ -706,7 +693,7 @@ int ddr_calibration_sequence(void)
-> >>>>                   puts("FW: Error Configuring Firewall\n");
-> >>>>
-> >>>>           if (sdram_is_ecc_enabled())
-> >>>> -               sdram_init_ecc_bits(gd->ram_size);
-> >>>> +               sdram_init_ecc_bits();
-> >>>>
-> >>>>           return 0;
-> >>>>    }
-> >>>> diff --git a/drivers/ddr/altera/sdram_gen5.c b/drivers/ddr/altera/sd=
-ram_gen5.c
-> >>>> index 3c79bb11802..7a0a043557b 100644
-> >>>> --- a/drivers/ddr/altera/sdram_gen5.c
-> >>>> +++ b/drivers/ddr/altera/sdram_gen5.c
-> >>>> @@ -2,6 +2,7 @@
-> >>>>    /*
-> >>>>     * Copyright Altera Corporation (C) 2014-2015
-> >>>>     */
-> >>>> +#include <cpu_func.h>
-> >>>>    #include <dm.h>
-> >>>>    #include <errno.h>
-> >>>>    #include <div64.h>
-> >>>> @@ -17,8 +18,12 @@
-> >>>>    #include <asm/bitops.h>
-> >>>>    #include <asm/io.h>
-> >>>>    #include <dm/device_compat.h>
-> >>>> +#include <linux/sizes.h>
-> >>>>
-> >>>>    #include "sequencer.h"
-> >>>> +#include "sdram_soc32.h"
-> >>>> +
-> >>>> +#define PGTABLE_OFF    0x4000
-> >>>>
-> >>>>    #ifdef CONFIG_XPL_BUILD
-> >>>>
-> >>>> @@ -562,6 +567,12 @@ static unsigned long sdram_calculate_size(struc=
-t socfpga_sdr_ctrl *sdr_ctrl)
-> >>>>           return temp;
-> >>>>    }
-> >>>>
-> >>>> +static int sdram_is_ecc_enabled(struct socfpga_sdr_ctrl *sdr_ctrl)
-> >>>> +{
-> >>>> +       return !!(readl(&sdr_ctrl->ctrl_cfg) &
-> >>>> +                 SDR_CTRLGRP_CTRLCFG_ECCEN_MASK);
-> >>>> +}
-> >>>> +
-> >>>>    static int altera_gen5_sdram_of_to_plat(struct udevice *dev)
-> >>>>    {
-> >>>>           struct altera_gen5_sdram_plat *plat =3D dev_get_plat(dev);
-> >>>> @@ -604,6 +615,13 @@ static int altera_gen5_sdram_probe(struct udevi=
-ce *dev)
-> >>>>           sdram_size =3D sdram_calculate_size(sdr_ctrl);
-> >>>>           debug("SDRAM: %ld MiB\n", sdram_size >> 20);
-> >>>>
-> >>>> +       if (sdram_is_ecc_enabled(sdr_ctrl)) {
-> >>>> +               /* Must set USEECCASDATA to 0 if ECC is enabled */
-> >>>> +               clrbits_le32(&sdr_ctrl->static_cfg,
-> >>>> +                            SDR_CTRLGRP_STATICCFG_USEECCASDATA_MASK=
-);
-> >>>> +               sdram_init_ecc_bits();
-> >>>> +       }
-> >>>> +
-> >>>>           /* Sanity check ensure correct SDRAM size specified */
-> >>>>           if (get_ram_size(0, sdram_size) !=3D sdram_size) {
-> >>>>                   puts("SDRAM size check failed!\n");
-> >>>> diff --git a/drivers/ddr/altera/sdram_soc32.c b/drivers/ddr/altera/s=
-dram_soc32.c
-> >>>> new file mode 100644
-> >>>> index 00000000000..b8b42ef8e03
-> >>>> --- /dev/null
-> >>>> +++ b/drivers/ddr/altera/sdram_soc32.c
-> >>>> @@ -0,0 +1,74 @@
-> >>>> +// SPDX-License-Identifier: GPL-2.0
-> >>>> +/*
-> >>>> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
-> >>>> + */
-> >>>> +
-> >>>> +#include "sdram_soc32.h"
-> >>>> +#include <string.h>
-> >>>> +#include <linux/sizes.h>
-> >>>> +#include <cpu_func.h>
-> >>>> +#include <watchdog.h>
-> >>>> +#include <wait_bit.h>
-> >>>> +#include <asm/global_data.h>
-> >>>> +#include <asm/system.h>
-> >>>> +#if !defined(CONFIG_HW_WATCHDOG)
-> >>>> +#include <asm/arch/reset_manager.h>
-> >>>> +#endif
-> >>>> +
-> >>>> +DECLARE_GLOBAL_DATA_PTR;
-> >>>> +
-> >>>> +#define PGTABLE_OFF    0x4000
-> >>>> +
-> >>>> +/* Initialize SDRAM ECC bits to avoid false DBE */
-> >>>> +void sdram_init_ecc_bits(void)
-> >>>> +{
-> >>>> +       u32 start;
-> >>>> +       phys_addr_t start_addr;
-> >>>> +       phys_size_t size, size_init;
-> >>>> +
-> >>>> +       start =3D get_timer(0);
-> >>>> +
-> >>>> +       start_addr =3D gd->bd->bi_dram[0].start;
-> >>>> +       size =3D gd->bd->bi_dram[0].size;
-> >>>> +
-> >>>> +       printf("DDRCAL: Scrubbing ECC RAM (%ld MiB).\n", size >> 20)=
-;
-> >>>> +
-> >>>> +       memset((void *)start_addr, 0, PGTABLE_SIZE + PGTABLE_OFF);
-> >>>> +       gd->arch.tlb_addr =3D start_addr + PGTABLE_OFF;
-> >>>> +       gd->arch.tlb_size =3D PGTABLE_SIZE;
-> >>>> +       start_addr +=3D PGTABLE_SIZE + PGTABLE_OFF;
-> >>>> +       size -=3D PGTABLE_OFF + PGTABLE_SIZE;
-> >>>> +
-> >>>> +       dcache_enable();
-> >>>> +
-> >>>> +       while (size > 0) {
-> >>>> +               size_init =3D min((phys_addr_t)SZ_1G, (phys_addr_t)s=
-ize);
-> >>>> +               memset((void *)start_addr, 0, size_init);
-> >>>> +               size -=3D size_init;
-> >>>> +               start_addr +=3D size_init;
-> >>>> +
-> >>>> +#ifdef CONFIG_HW_WATCHDOG
-> >>>> +               /*
-> >>>> +                * In case the watchdog is enabled, make sure to
-> >>>> +                * (re-)configure watchdog so that the defined timeo=
-ut is
-> >>>> +                * valid.
-> >>>> +                */
-> >>>> +               debug("%s: %d\n", __func__, __LINE__);
-> >>>> +               hw_watchdog_init();
-> >>>> +#else
-> >>>> +               /*
-> >>>> +                * If the HW watchdog is NOT enabled, make sure it i=
-s not
-> >>>> +                * running, because it is enabled in the preloader a=
-nd
-> >>>> +                * causing boot loop if is not handled.
-> >>>> +                */
-> >>>> +               debug("%s: %d\n", __func__, __LINE__);
-> >>>> +               socfpga_per_reset(SOCFPGA_RESET(L4WD0), 1);
-> >>>> +               socfpga_per_reset(SOCFPGA_RESET(L4WD0), 0);
-> >>>> +#endif
-> >>>> +       }
-> >>>> +
-> >>>> +       dcache_disable();
-> >>>> +
-> >>>> +       printf("DDRCAL: SDRAM-ECC initialized success with %d ms\n",
-> >>>> +              (u32)get_timer(start));
-> >>>> +}
-> >>>> diff --git a/drivers/ddr/altera/sdram_soc32.h b/drivers/ddr/altera/s=
-dram_soc32.h
-> >>>> new file mode 100644
-> >>>> index 00000000000..85a951a5a74
-> >>>> --- /dev/null
-> >>>> +++ b/drivers/ddr/altera/sdram_soc32.h
-> >>>> @@ -0,0 +1,11 @@
-> >>>> +/* SPDX-License-Identifier: GPL-2.0 */
-> >>>> +/*
-> >>>> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
-> >>>> + */
-> >>>> +
-> >>>> +#ifndef        _SDRAM_SOC32_H_
-> >>>> +#define        _SDRAM_SOC32_H_
-> >>>> +
-> >>>> +void sdram_init_ecc_bits(void);
-> >>>> +
-> >>>> +#endif /* _SDRAM_SOC32_H_ */
-> >>>> --
-> >>>> 2.43.7
-> >>>>
-> >>
+> -	/* Figure out if the superspeed phy is present and if so then which phy is it? */
+> +	/* Figure out if the superspeed phy is present */
+>  	ret = of_property_read_string_index(dwc3, "phy-names", 1, &second_phy_name);
+>  	if (ret == -ENODATA) {
+> -		log_debug("Only one phy, not a super-speed controller\n");
+> +		debug("Only one phy, not a super-speed controller\n");
+
+Undo.
+
+>  		return 0;
+
+Can't return. Same as above.
+
+>  	} else if (ret) {
+>  		log_err("Failed to read second phy name: %d\n", ret);
+>  		return ret;
+>  	}
+>
+> +	/* Find the super-speed PHY node and check if a driver is available */
+> +	ssphy_np = find_ssphy_node(dwc3);
+> +	if (ssphy_np && has_driver_for_node(ssphy_np)) {
+> +		debug("Skipping USB fixup for %s (SS-PHY driver available)\n",
+> +		      glue_np->name);
+> +		return 0;
+
+Both the node and driver can be present. Should we consider the
+possibility of phy DT node status = "disabled"?
+
+> +	}
+> +
+> +	/* No driver available - apply the fixup */
+> +	debug("Applying USB high-speed fixup to %s\n", glue_np->name);
+> +
+> +	/* Tell the glue driver to configure the wrapper for high-speed only operation */
+> +	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
+> +	if (ret) {
+> +		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
+> +		return ret;
+> +	}
+> +
+>  	/*
+>  	 * Determine which phy is the superspeed phy by checking the name of the second phy
+>  	 * since it is typically the superspeed one.
+> @@ -150,7 +244,7 @@ static void fixup_power_domains(struct device_node *root)
+>  	do { \
+>  		u64 start = timer_get_us(); \
+>  		func(__VA_ARGS__); \
+> -		debug(#func " took %lluus\n", timer_get_us() - start); \
+> +		printf(#func " took %lluus\n", timer_get_us() - start); \
+>  	} while (0)
+>
+>  static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
+> --
+> 2.34.1
 >
