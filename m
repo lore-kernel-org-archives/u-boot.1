@@ -4,107 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEE2D6E2BF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 17:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C98D6E2BF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 17:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5549839D7;
-	Thu, 18 Dec 2025 18:18:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B7232800AB;
+	Thu, 18 Dec 2025 18:27:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="U+a1NE6d";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="khjnmjHe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7389C80077; Thu, 18 Dec 2025 18:18:23 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 10F0980325; Thu, 18 Dec 2025 18:27:20 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43324836CE
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 18:18:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0FED80050
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 18:27:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-3f0c93ecf42so1260610fac.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:18:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766078291; x=1766683091;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dLKwZZC24pumN41pEQsuk9P9tjQkkR3Je9PDljIN3Do=;
- b=U+a1NE6dBDF0JRJEcbiZ9rbNrJufQDtI/iHDM8fyrzAani50T67Lfr8Kit6ZpRk7Jv
- a+ikgmmZEAjCLbJxAYst7yt4Il84AQLFj0qqXR6AWElT3Tzb+s8NfErupOsJ9xahnTmn
- 2hsjX47d61alC05NwMRzTHz+pAbJUSuI9grOMsZgKvay4wkznjmUT7ju3OsSiQZg4cQc
- J+JwvjA1U2wp3N6KOe937cTA/VjsZPERoIPSuZZvEfGPFqvlQhQngROdFC5QT5caZG1h
- /E5tWknacIl+mWMpvCrFJ6dSXoNOsCheMx62PVFj8NYmgDQquzIAUDK6hCyMSiih7rv9
- 7ExQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766078291; x=1766683091;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=dLKwZZC24pumN41pEQsuk9P9tjQkkR3Je9PDljIN3Do=;
- b=AjxrqyR1gzzRKG/orNEseC3fynO9whZWqXMth9xqpVNP1hpM2GBdNteMiJvV7GHpyl
- W7zuBO1tFgxqDSjHdrnA1zTmSVeQgBxu1BHDTF9ctxyL0Jvs71rTu73sUUJDFPHc+77o
- yBv3eXZNLuozh8V/9qakb+FMsmqBdO/qRBp7/z9eOXzgso8kPua/yf7ooPmfnT0p7dI9
- 7W9iSJUiA5HDSM4RnhE9P2oXlJqx2U5PY5C6lZzTFKSof+iFT/ApjEiGI+TNxAwPQGGZ
- L+f8FYDznfMaslmKc+S1CzoyFxVaZ0ZwC7jcyHzMR134skiAb9Ekr0Sinat33rTkqbJt
- gBkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWcnjfMKlEW50C6QrR14xMDtM2tzOXDgR7E4W8F6drCTuBAV4pTawkMkx+LR//KehI4pztWIY0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgE7ihrYIz+g5X0mvBxx24TtEFbf3HCB83KowojwPO9gdlvr+P
- qVCZkkaUpZEWy14ExTI24kESjwgvsZHqtK8lAa6A9iivYsa6IdKaUVOzYJcGaVK0NZM=
-X-Gm-Gg: AY/fxX4onk/JCT0KjnoyAVd58F60AeM3R02bxyaaWlKOIy+aR9k/fJ6QdfJJmxfqbRH
- gRc4tvQjNCXj/trY+cGDHLYwBsOTweYPdtiAS/bO2pfWcN8pXDmdpmr1CKYPJvRoP8X+DHJ638N
- N/r4VwXO94XYKfgsBf1pudZ0EZeA9f9F2rKjkSsNXphktNo7cyadDm2WI5nIIqLd4qgdlnB8B/5
- 2auohG+WfNwXRsjD9iZpQ2esy3t5sT+JERv6izyHwt1uk5Ejf+4UP6whxyh4FJ+9xL0/oXJnVJc
- M1HrKYjFYehm+4yn6uxP4x07QnAG92Jl9Vsca99M8VNMoBoL5ds5CX63zc6KhigXbY04UZfzOZH
- yAmVaCidm4VFvjw0UYkqUf+7pHXS0G0G5/WauP6GUtxqoNaU366/6HE+KWP/l0wW086KTJFXrfx
- sl+D5f8bXtR3QlzWo=
-X-Google-Smtp-Source: AGHT+IHIOidLd02tQ9z8pAl8LeYyi/3d5bN3yb7XtWYr9Cbp1oKCN8A7QL4hoE+x3To4OnhULdXwDA==
-X-Received: by 2002:a05:6820:6106:b0:65c:fb36:f246 with SMTP id
- 006d021491bc7-65d0e386ec8mr102240eaf.19.1766078290908; 
- Thu, 18 Dec 2025 09:18:10 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:e5ea:76dc:e589:2d5e])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65cff214d66sm1316372eaf.9.2025.12.18.09.18.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 09:18:10 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 18 Dec 2025 11:17:06 -0600
-Subject: [PATCH 8/8] clk: mediatek: implement dump callbacks
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kOzjy3RJsI34Y7vJm1jfHWGnT7KtqP4mESavOMgl82tFLHPeqKncMWIrQdiYDKlioJn0H3DdWFR8KexEZsLXSxkDo9GdDoGg1fBd/xAIi+9wjopNG9aF963rvFGYIDKR57ya2ypLWW+P20+LMJR9AX1vCAgbdTOUYKX81a/vNAEK0IwpMeJ4bWiKnSap7Q2DmFlVHJGX8dnOAEPnak13iR+MGX46vFWerGNTPWr1ujwt+gBnDBuLTj3XeTWRWaWG3TWf5FkB08c1vQyx+qkYm/0XiUbcgXwJlZG7jHxHr7kcF5nJKFUUHt3YluN5uvy/pmdIJ8/Y3N/RdfmsmFT0Sw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hFDefOTNMveAOfJwQuRwlNdxomL8/nda4alEbAO/v64=;
+ b=r1xvUvJkFvxs/XZf0adxbKACLSBkQY4FDS7g7eqXYvQY2CkRXBcnPxhaOveQX5DCalRxIyBHL6NtD8Ow1fsh05STolwfF3KO09rc+dqVLn1b2YgLaG/DgJ3Bn/2ToaPPRheqUpVBNjYDDM88QBgUlkgkHsP5sRTC6vz00uvpBV9V9+WaEizdQyNJRgD0Rbrfizcqe9DvfFIXMpIF360gDtWH1sKSVxX3JpqvQJ4SRm59Akt2cVIe3dGmJotI0ne3F9wMuQt87F2wfeSpj1T3vEM/JeWtibdZPsxI/UNSFHBBCQFen7ie2rZvtZKKV85kaEbA7Q7CoULaqDzAyOwo8A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=renesas.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hFDefOTNMveAOfJwQuRwlNdxomL8/nda4alEbAO/v64=;
+ b=khjnmjHegancImyDxys5i4zNYENDhKUKu4vi/aTHV34WJHP1C7t07DGlssi5W72BHdrWU4PgFMBV3EfGG7Cdk0ALmaJZStxdDjCzKrOMBYXAE+2+ReX6QwOUtD7TVZ4y4yw7Z5QpRw3PHSvf8cFi8mKQaxlEZFUuUYDEc9IwyQLp99PVE8KmmfY5VmirQysfxYL4ghLmKzrCRv1fCW7nvgOPuSiprjBZKmbcvPtYoCp162PChOQrCN5MzQn5/7ZbjJUW0svfGtT1syLCQZ6hyrRpLMqN9os5DKzExo6wpv+yiXCRYwC13PuQvPpCJj8moeKnIRA0TqBah7L7n71aHw==
+Received: from DUZPR01CA0217.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b4::11) by VI0PR10MB8354.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:800:21b::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Thu, 18 Dec
+ 2025 17:27:15 +0000
+Received: from DU2PEPF00028D13.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b4:cafe::7b) by DUZPR01CA0217.outlook.office365.com
+ (2603:10a6:10:4b4::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.8 via Frontend Transport; Thu,
+ 18 Dec 2025 17:27:27 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DU2PEPF00028D13.mail.protection.outlook.com (10.167.242.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.6 via Frontend Transport; Thu, 18 Dec 2025 17:27:15 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 18 Dec
+ 2025 18:27:56 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 18 Dec
+ 2025 18:27:07 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Thu, 18 Dec 2025 18:27:03 +0100
+Subject: [PATCH v5 3/3] clk: scmi: Remove duplicated
+ scmi_generic_protocol_version() request
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251218-clk-mtk-improvements-v1-8-72db131ba148@baylibre.com>
-References: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
-In-Reply-To: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
+Message-ID: <20251218-sqqs-v5-3-9c7e2466b797@foss.st.com>
+References: <20251218-sqqs-v5-0-9c7e2466b797@foss.st.com>
+In-Reply-To: <20251218-sqqs-v5-0-9c7e2466b797@foss.st.com>
+To: Vinh Nguyen <vinh.nguyen.xz@renesas.com>, <u-boot@lists.denx.de>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, "Peng
+ Fan" <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Alice Guo <alice.guo@nxp.com>, "Patrick
+ Delaunay" <patrick.delaunay@foss.st.com>, Valentin Caron
+ <valentin.caron@foss.st.com>, Kamlesh Gurudasani <kamlesh@ti.com>, "Patrice
+ Chotard" <patrice.chotard@foss.st.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9849; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=rKIQcrfxCiRLbqu0MfsR9wpIbJzyepYas0StyDOKlZ4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpRDdE3aW14uUhPslBnxlKDwKo5maaaY5OWZdy0
- 406JSbExRiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaUQ3RBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ALwwH/0TcsR78k1dlnh20IaAcRPsSz8qSPShC+dArQs5
- QTOWGMP7zR6jIAk9H25Xd4Ppq1zU9pAzKapIK2GHyoHP901rpkpLeV60Im8ZIssW3FDg6nvNtiH
- /Hpca+yyTt23rfCyA1BvgF0vK0ZRXpyhn2zihtGvShf0eJhMJxv0imEHl1/fjVCIO8mt6bWd00w
- 3Jz5QNu2Wose0Dvs4N2uK+euZ+bWBPa7LhUlWjpu5OBqnbD9DPUXjP1uNNlLUEbEcu6fhJB/cES
- inp3aoSH4RC4TsBew0BhEV2B+TC08+m8jA2w1SwtPmg+85mQhbzLu67j5iwqEfpuSjzhQ3pZtLB
- YarI=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Thu, 18 Dec 2025 18:18:40 +0100
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D13:EE_|VI0PR10MB8354:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9687a899-401d-43d6-f753-08de3e5aafdf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|1800799024|376014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bXdjcmgyRm51aU1LbWlUYmlBYXJMbnNVMWMrQUxlcjBOWG4xYVhLRksyZlZ5?=
+ =?utf-8?B?bWxldkt5L0t0V1YrY2RhYm5lZENQS0JKQ2hMcXRERFF3aytHNjZ6dW9qWjY0?=
+ =?utf-8?B?TXZ4OEZmZWE1S3JTZUlPQjN1cHR4YWtoa2thL3RIQkhmU2FlRzJHdnh0Qmsx?=
+ =?utf-8?B?aTJkZ3VyTGdGQktkUkp2QlFuNXp1cEY3elNHOTZpS1l5UEZKU0lQcFFIdU0r?=
+ =?utf-8?B?RzdXMFREbSs4WFJsbWlUbDd6LzN2ZWUwTVp4RmFqcDlabUl0WDdTNEZUQjVD?=
+ =?utf-8?B?ZTY4Y2dnL1Q4VU9tTDlQZTF4WnZTUHExcFlCdDgzNHhEdzhJMjJvTDNYZTAr?=
+ =?utf-8?B?eWFtMVdCa2IzRGFzM2hlQ3U4ZzZxNXBWaTMzTE9zeGVOQUJ2bVhBU1JmRUk1?=
+ =?utf-8?B?a1VTWStwWUU5QmxWd0p0ZFhxYXJTcklydjJCYkk0dXRWVHlKZ0ZSRHBGMUNj?=
+ =?utf-8?B?ZGtIYlpqQzgxOUMydEQ1c0ZmY3gzaWV4dGR1QVhuK1N5SjZYYTNxSVJvU0Vs?=
+ =?utf-8?B?ekhwQlJnV3ZvQlpmNTRONERmSWd4VzVYeCtSRDByZXN4VGFGNkRwbGdHMENl?=
+ =?utf-8?B?Wk9sS25OYVNoTk0zU1pmMTB4bUVaZHVLd3lpZllmRWhzaUlZSDNSZjVXbGlZ?=
+ =?utf-8?B?THRwVERtb0pYWDNWRjVZVVJZYXdzODdZQ201a3lXR2IrM2pyUFBTM01iYUF1?=
+ =?utf-8?B?dkpPS1didEExenpYR05OWlFoYkxYUEYyMkRIUTNucWhHeDF1SDFrTkp6RHY2?=
+ =?utf-8?B?WC9rWm1MQ2wxb08rTk03aDV3R2p6WCt6TGNKV250ZlFZSnhZbTB5Y1NUOFQ5?=
+ =?utf-8?B?Q1VFemVZKzZ5OWJLWTBQTGZKajYwTnNyNEp0eGw1SHFBSCt4NGkwbWwreDJw?=
+ =?utf-8?B?QlpiMU9ZWnJHUkQ5TmxEb1ZPa25iZFluY1hhQ2ttUVRkMFZ1SXJlRnFaRVQy?=
+ =?utf-8?B?bWxQUC9Yd2M4WWVzVEZYamNiMzM4Qm0zS1lWanc5eGFVWXFkaEs2dTJ2eXVj?=
+ =?utf-8?B?M1pRYVBhWUlOdDAxYWszSk8vQytwdFd2S1Z5TWppTFQ3VUlpN1puUncvZmNI?=
+ =?utf-8?B?azlKNUlFdE9oTzg0eW01bjF5QXhtcFV4dkhsd0xxay90REtWUWtLQk9HRHEz?=
+ =?utf-8?B?b1RldnBCeUY2UUFhU3ZmaGlQV0Q1enFYYXBMUSszZW92cHZ5QUxqcDZDK3pO?=
+ =?utf-8?B?RDRDY1lpYzB2T0M3OE5BZmVoZnUxZHY3NTBGMk1NbmVHMmJCS0NsbHpKVHp0?=
+ =?utf-8?B?RThST2tYMFFvUEo4M0hsaWh5dzhuSmlkTy8reDRtMzdTRVhuUExhRlhQbzJ0?=
+ =?utf-8?B?WTBsSDdlemxNVC8wSVo5SUF4QVFLNS81b1h4TGp2Rk1XSWQ4SlJxcDVTaGNS?=
+ =?utf-8?B?RGpDbnJ3WmF5RFBKS20rcGQ4Z0F2Q1dvdkhuSmRFb0J4R05BM1A5dzArUGJa?=
+ =?utf-8?B?cjRWeHROMG1JUVJVZWJneitleVV6ZzlnL2tkb0JENmg0Q2dlUVIvTUFpM25C?=
+ =?utf-8?B?T2VKS3NSU1kwU2xaVkFHT0dicmdQWC85Y2Y2VGZPUVI0R0YyQzFVYzFaTTRY?=
+ =?utf-8?B?blpNbXhQRktrRUxXWk5FbktYaDdrenpRaG1LMEs0akpJTUJoek91cllFQXdw?=
+ =?utf-8?B?ekUwTTU3bW14SGxIMDZTV2s3azVYNmJaeGcreHlRVDVrWG5SYnZhWEZDM3JJ?=
+ =?utf-8?B?ZHB2K1h2OHpIa2dUQWZNY3d4ZFU2c1J6dGpXQ1NZTndqbU9NdUFoYitnVFNO?=
+ =?utf-8?B?R25tZ0o0OG00Nkd4RytRa0lGN1VPcWRzVWNSb3pURzNCVVpCS1MxUGk3KzRL?=
+ =?utf-8?B?dm1naTNkbTlRTHVoYU9UUzRkM1FkbXFNd0prTHRaTWorekovTU1raVBEY1hM?=
+ =?utf-8?B?REs0K3JYY0Y5VnRRTjVqTUtiWEtTM1ZUQnp0cE4raDl2cm84Nyt1eUNmS2pU?=
+ =?utf-8?B?eGsrYk8xVlhCakVBNW9YcmxUeFlzWURtcDBISXRza2Vqc2JFcjRYYitJNkFz?=
+ =?utf-8?B?S29pTFNzSzF4Z3psb3c1eERjZlNuUWU0WXZjZnlVeU1aZEdLZUcrb3l2VTB6?=
+ =?utf-8?B?NGUvZkM1MlhoR2pPTzRFcjNpZTlYOHpNaVcyYlJyUmVaZndRdEtkNGpaSkJh?=
+ =?utf-8?Q?4ebY=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: HWs1iy8CeJTARojR7IIff52ZJ3Y5Uk13V/v0e6KQZ+FBdhhxnZpNZ+wi6fFdgKxakg59rtqRQ+FH02c3NF8S1/K5z5oZ44p5oTq+asv6zxqCht5aq0X4F9dCKbAm5FpwyyQnN6PC4EcHOxrTbIT+AI7gFXK0G0EQziPsJ2UzjSiZnHIaVA9JMunk8nGwfSjzfCsEeLnc1zf513LAgjmv4gfWPaMx5468Ee6Nb30P+IT0T1nz9LS4+4EToZ5o5NrK7MyxrZ8W4p3bmlmY6VSW6hx70oaEdRfETzp0/xssFexNdm22E+JjwHHaXigiaMzvcOoSdn9SMJLcaHYFM/Vi/P5VeoaR8KN7H7mSnKoYNgdBwP0N05nwNTleEKxmxzDSPUwNIC29DNK5Ho3Dt34V/7LNy97dFffpPrrm2k3rp119YsWdgj1ss5Ww5qOgY0nSPOO8xIZ+TZ0tbO3V2cVPXtLx0aacvRUFZ3s8UsXiaVAkk+OgH+qC+O7exOvl/1PyaAdx5BiwEKDFxUzSeRRstJhMAuUvUi3oqkWLNQjQIztnqvqHH4N7kwe3nwZH/LCCuBlMv0smQtr0bSGcxW0h8TlJUHKGXT94m+LFO+Mrepa9r1/QAw0zyHp7trih36QQ4xTiRjVvwrrSxUPKSW/d5faW7hFgB+C5/4itgfGYIoz9joC0/vGNPq9I1s77G8bwqw414xOypAun+3URj1tU7Q==
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 17:27:15.0740 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9687a899-401d-43d6-f753-08de3e5aafdf
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D13.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB8354
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,336 +168,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement dump callbacks for Mediatek clocks. On these platforms, there
-are 100s of clocks, so it can be easy to miss mistakes. The dump
-callbacks will be useful for debugging and verifying clock configs.
+scmi_generic_protocol_version() request is done twice in scmi_clk_probe().
+Remove first call which is useless.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Fixes: ae7e0330ce22 ("clk: scmi: add compatibility with clock protocol 2.0")
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- drivers/clk/mediatek/clk-mtk.c | 248 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 248 insertions(+)
+Cc: Alice Guo <alice.guo@nxp.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Valentin Caron <valentin.caron@foss.st.com>
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/clk/clk_scmi.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 1539dc6cbcc..a3dd18363f6 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -193,6 +193,108 @@ static int mtk_clk_mux_set_parent(void __iomem *base, u32 parent,
- 	return 0;
- }
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index a4fc4f8da89..ee237ed6337 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -344,9 +344,6 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return 0;
  
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+static void mtk_clk_print_dev_parent(struct udevice *parent)
-+{
-+	printf("Parent device: %s %s\n", parent->driver->name, parent->name);
-+}
-+
-+static void mtk_clk_print_mapped_id(int unmapped_id, int mapped_id, bool has_map)
-+{
-+	/*
-+	 * If there is a ID map, then having unmapped and mapped IDs differ is
-+	 * expected. On the other hand, if there is no map, then they should be
-+	 * the same, and it is a programming error if they differ.
-+	 */
-+	if (has_map)
-+		printf(", (mapped ID: %u)", mapped_id);
-+	else if (unmapped_id != mapped_id)
-+		printf(", (error! should be %u)", mapped_id);
-+}
-+
-+static void mtk_clk_print_rate(struct udevice *dev, int mapped_id)
-+{
-+	struct clk clk = {
-+		.dev = dev,
-+		.id = mapped_id,
-+	};
-+	long rate = clk_get_rate(&clk);
-+
-+	if (rate < 0)
-+		printf(", error! clk_get_rate() failed: %ld", rate);
-+	else
-+		printf(", Rate: %lu Hz", rate);
-+}
-+
-+static void mtk_clk_print_parent(const char *prefix, int parent, u32 flags)
-+{
-+	const char *parent_type_str;
-+
-+	switch (flags & CLK_PARENT_MASK) {
-+	case CLK_PARENT_APMIXED:
-+		parent_type_str = "apmixedsys";
-+		break;
-+	case CLK_PARENT_TOPCKGEN:
-+		parent_type_str = "topckgen";
-+		break;
-+	case CLK_PARENT_INFRASYS:
-+		parent_type_str = "infrasys";
-+		break;
-+	case CLK_PARENT_XTAL:
-+		parent_type_str = "xtal";
-+		break;
-+	case CLK_PARENT_MIXED:
-+		parent_type_str = "mixed";
-+		break;
-+	default:
-+		parent_type_str = "default";
-+		break;
-+	}
-+
-+	printf("%s%s-%u", prefix, parent_type_str, parent);
-+}
-+
-+static void mtk_clk_print_single_parent(int parent, u32 flags)
-+{
-+	mtk_clk_print_parent(", Parent: ", parent, flags);
-+}
-+
-+static void mtk_clk_print_mux_parents(struct mtk_clk_priv *priv,
-+				      const struct mtk_composite *mux)
-+{
-+	const char *prefix = "";
-+	u32 selected;
-+	int i;
-+
-+	printf(", Parents: ");
-+
-+	selected = readl(priv->base + mux->mux_reg);
-+	selected &= mux->mux_mask << mux->mux_shift;
-+	selected >>= mux->mux_shift;
-+
-+	/* Print parents separated by "/" and selected parent enclosed in "*"s */
-+	for (i = 0; i < mux->num_parents; i++) {
-+		if (i == selected) {
-+			printf("%s", prefix);
-+			prefix = "*";
-+		}
-+
-+		if (mux->flags & CLK_PARENT_MIXED) {
-+			const struct mtk_parent *parent = &mux->parent_flags[i];
-+
-+			mtk_clk_print_parent(prefix, parent->id, parent->flags);
-+		} else {
-+			mtk_clk_print_parent(prefix, mux->parent[i], mux->flags);
-+		}
-+
-+		prefix = "/";
-+
-+		if (i == selected)
-+			printf("*");
-+	}
-+}
-+#endif
-+
- /* apmixedsys functions */
- 
- static const int mtk_apmixedsys_of_xlate(struct clk *clk,
-@@ -437,6 +539,36 @@ static int mtk_apmixedsys_disable(struct clk *clk)
- 	return 0;
- }
- 
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+static void mtk_apmixedsys_dump(struct udevice *dev)
-+{
-+	struct mtk_clk_priv *priv = dev_get_priv(dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+	u32 i;
-+
-+	mtk_clk_print_dev_parent(priv->parent);
-+
-+	for (i = 0; i < tree->num_plls; i++) {
-+		const struct mtk_pll_data *pll = &tree->plls[i];
-+
-+		printf("[PLL%u] DT: %u", i, pll->id);
-+		mtk_clk_print_mapped_id(pll->id, i, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i);
-+		printf("\n");
-+	}
-+
-+	for (i = 0; i < tree->num_gates; i++) {
-+		const struct mtk_gate *gate = &tree->gates[i];
-+
-+		printf("[GATE%u] DT: %u", i, gate->id);
-+		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i + tree->gates_offs);
-+		mtk_clk_print_single_parent(gate->parent, gate->flags);
-+		printf("\n");
-+	}
-+}
-+#endif
-+
- /* topckgen functions */
- 
- static const int mtk_topckgen_of_xlate(struct clk *clk,
-@@ -651,6 +783,48 @@ static int mtk_common_clk_set_parent(struct clk *clk, struct clk *parent)
- 			&priv->tree->muxes[clk->id - priv->tree->muxes_offs]);
- }
- 
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+static void mtk_topckgen_dump(struct udevice *dev)
-+{
-+	struct mtk_clk_priv *priv = dev_get_priv(dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+	u32 i;
-+
-+	mtk_clk_print_dev_parent(priv->parent);
-+
-+	for (i = 0; i < tree->num_fclks; i++) {
-+		const struct mtk_fixed_clk *fclk = &tree->fclks[i];
-+
-+		printf("[FCLK%u] DT: %u", i, fclk->id);
-+		mtk_clk_print_mapped_id(fclk->id, i, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i);
-+		/* FIXME: fclk needs flags to fully determine parent. */
-+		mtk_clk_print_single_parent(fclk->parent, 0);
-+		printf("\n");
-+	}
-+
-+	for (i = 0; i < tree->num_fdivs; i++) {
-+		const struct mtk_fixed_factor *fdiv = &tree->fdivs[i];
-+
-+		printf("[FDIV%u] DT: %u", i, fdiv->id);
-+		mtk_clk_print_mapped_id(fdiv->id, i + tree->fdivs_offs, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i + tree->fdivs_offs);
-+		mtk_clk_print_single_parent(fdiv->parent, fdiv->flags);
-+		printf(", Mult: %u, Div: %u\n", fdiv->mult, fdiv->div);
-+	}
-+
-+	for (i = 0; i < tree->num_muxes; i++) {
-+		const struct mtk_composite *mux = &tree->muxes[i];
-+
-+		printf("[MUX%u] DT: %u", i, mux->id);
-+		mtk_clk_print_mapped_id(mux->id, i + tree->muxes_offs, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i + tree->muxes_offs);
-+		mtk_clk_print_mux_parents(priv, mux);
-+		printf("\n");
-+	}
-+}
-+#endif
-+
- /* infrasys functions */
- 
- static const int mtk_infrasys_of_xlate(struct clk *clk,
-@@ -793,6 +967,44 @@ static ulong mtk_infrasys_get_rate(struct clk *clk)
- 	return rate;
- }
- 
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+static void mtk_infrasys_dump(struct udevice *dev)
-+{
-+	struct mtk_clk_priv *priv = dev_get_priv(dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+	u32 i;
-+
-+	mtk_clk_print_dev_parent(priv->parent);
-+
-+	for (i = 0; i < tree->num_fdivs; i++) {
-+		const struct mtk_fixed_factor *fdiv = &tree->fdivs[i];
-+
-+		printf("[FDIV%u] DT: %u", i, fdiv->id);
-+		mtk_clk_print_mapped_id(fdiv->id, i + tree->fdivs_offs, tree->id_offs_map);
-+		mtk_clk_print_single_parent(fdiv->parent, fdiv->flags);
-+		printf(", Mult: %u, Div: %u\n", fdiv->mult, fdiv->div);
-+	}
-+
-+	for (i = 0; i < tree->num_muxes; i++) {
-+		const struct mtk_composite *mux = &tree->muxes[i];
-+
-+		printf("[MUX%u] DT: %u", i, mux->id);
-+		mtk_clk_print_mapped_id(mux->id, i + tree->muxes_offs, tree->id_offs_map);
-+		mtk_clk_print_mux_parents(priv, mux);
-+		printf("\n");
-+	}
-+
-+	for (i = 0; i < tree->num_gates; i++) {
-+		const struct mtk_gate *gate = &tree->gates[i];
-+
-+		printf("[GATE%u] DT: %u", i, gate->id);
-+		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
-+		mtk_clk_print_single_parent(gate->parent, gate->flags);
-+		printf("\n");
-+	}
-+}
-+#endif
-+
- /* CG functions */
- 
- static const int mtk_clk_gate_of_xlate(struct clk *clk,
-@@ -869,12 +1081,36 @@ static ulong mtk_clk_gate_get_rate(struct clk *clk)
- 	return mtk_clk_find_parent_rate(clk, gate->parent, parent);
- }
- 
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+static void mtk_clk_gate_dump(struct udevice *dev)
-+{
-+	struct mtk_cg_priv *priv = dev_get_priv(dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+	u32 i;
-+
-+	mtk_clk_print_dev_parent(priv->parent);
-+
-+	for (i = 0; i < priv->num_gates; i++) {
-+		const struct mtk_gate *gate = &priv->gates[i];
-+
-+		printf("[GATE%u] DT: %u", i, gate->id);
-+		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i + tree->gates_offs);
-+		mtk_clk_print_single_parent(gate->parent, gate->flags);
-+		printf("\n");
-+	}
-+}
-+#endif
-+
- const struct clk_ops mtk_clk_apmixedsys_ops = {
- 	.of_xlate = mtk_apmixedsys_of_xlate,
- 	.enable = mtk_apmixedsys_enable,
- 	.disable = mtk_apmixedsys_disable,
- 	.set_rate = mtk_apmixedsys_set_rate,
- 	.get_rate = mtk_apmixedsys_get_rate,
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+	.dump = mtk_apmixedsys_dump,
-+#endif
- };
- 
- const struct clk_ops mtk_clk_fixed_pll_ops = {
-@@ -882,6 +1118,9 @@ const struct clk_ops mtk_clk_fixed_pll_ops = {
- 	.enable = mtk_dummy_enable,
- 	.disable = mtk_dummy_enable,
- 	.get_rate = mtk_topckgen_get_rate,
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+	.dump = mtk_topckgen_dump,
-+#endif
- };
- 
- const struct clk_ops mtk_clk_topckgen_ops = {
-@@ -890,6 +1129,9 @@ const struct clk_ops mtk_clk_topckgen_ops = {
- 	.disable = mtk_clk_mux_disable,
- 	.get_rate = mtk_topckgen_get_rate,
- 	.set_parent = mtk_common_clk_set_parent,
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+	.dump = mtk_topckgen_dump,
-+#endif
- };
- 
- const struct clk_ops mtk_clk_infrasys_ops = {
-@@ -898,6 +1140,9 @@ const struct clk_ops mtk_clk_infrasys_ops = {
- 	.disable = mtk_clk_infrasys_disable,
- 	.get_rate = mtk_infrasys_get_rate,
- 	.set_parent = mtk_common_clk_set_parent,
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+	.dump = mtk_infrasys_dump,
-+#endif
- };
- 
- const struct clk_ops mtk_clk_gate_ops = {
-@@ -905,6 +1150,9 @@ const struct clk_ops mtk_clk_gate_ops = {
- 	.enable = mtk_clk_gate_enable,
- 	.disable = mtk_clk_gate_disable,
- 	.get_rate = mtk_clk_gate_get_rate,
-+#if CONFIG_IS_ENABLED(CMD_CLK)
-+	.dump = mtk_clk_gate_dump,
-+#endif
- };
- 
- static int mtk_common_clk_init_drv(struct udevice *dev,
+-	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
+-					    &priv->version);
+-
+ 	/* register CCF children: CLK UCLASS, no probed again */
+ 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+ 		return 0;
 
 -- 
 2.43.0
