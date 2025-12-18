@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0596D711C8
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 23:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C2D9D711C8
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 23:37:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2E9483936;
-	Fri, 19 Dec 2025 00:29:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
+	by phobos.denx.de (Postfix) with ESMTP id 4AFC7836AC;
+	Fri, 19 Dec 2025 00:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icloud.com header.i=@icloud.com header.b="MTzbNUtG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j4gJrjPt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF83180077; Thu, 18 Dec 2025 23:05:07 +0100 (CET)
-Received: from outbound.ms.icloud.com
- (p-west3-cluster2-host2-snip4-1.eps.apple.com [57.103.74.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E5D4283710; Fri, 19 Dec 2025 00:37:00 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A40388003E
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 23:05:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=icloud.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8D8B8800AB
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 00:36:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yuri.honegger@icloud.com
-Received: from outbound.ms.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-3a-60-percent-5 (Postfix) with ESMTPS id
- A76051800128
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 22:05:02 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
- bh=RK/BZCJd7dfLl0HKdErbZxW6FWUw8WfZKUIwYJ1gwqo=;
- h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
- b=MTzbNUtGkpMTj5TBSyEowU+X3uwDHplVaRtNqXn0QpbjIhJISXssMAcpj5f6VTr9Cn/FK/0bBgoKkCwy85XNLEHZlcdsF0mD6eQ2WnnlVj8XHFcLZl1vgGAxPWmoGOmnm4J6J6+NP7luN5lnx2MkV8h4iw6MQudTs88emlVO1MXzUCnyXSO2OMUZ91W25ziny6PpyhfSHKAcK6AipkrqgFMlAedWKHFJc0iaCFiFHNp0G88FDfVogMHY0NfXYcF02WTThiO3XjpxzCv7QBjdB0xfs4GMWoCyAapsZhCAJW0dj5FXvm1cGf8g7dwY4b1GMBje7/eZ40Vsv/Si9cPCBA==
-Received: from smtpclient.apple (unknown [17.57.154.37])
- by p00-icloudmta-asmtp-us-west-3a-60-percent-5 (Postfix) with ESMTPSA id
- 86ACD18000B3
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 22:05:01 +0000 (UTC)
-From: Yuri Honegger <yuri.honegger@icloud.com>
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
-Subject: Placement of FDT in memory
-Message-Id: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
-Date: Thu, 18 Dec 2025 23:04:59 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-65cfc0cbaa7so445213eaf.2
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:36:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766101017; x=1766705817; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gJP+5AKr0YY6xawjHUyjtAUx6K2+O2cZ61IQmCn6oRk=;
+ b=j4gJrjPt4gyCn1nVDYU1PWA+5SrTbzfltM4n+Fk/eB34k7+FBqanwk8saRXh1YuCgc
+ baundVf6uE9hDQghl6RUheqdBeJ/HJxGUTRVmCqf7wi83g48SggX/xmYXgptjrNfvxT2
+ 9SRFaoD0VbiGrwvdZens0LyuzqQryywZwezvg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766101017; x=1766705817;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=gJP+5AKr0YY6xawjHUyjtAUx6K2+O2cZ61IQmCn6oRk=;
+ b=FNrrXhG3jfVA+UOXYkBQMwatdkdiZ5BZOUH7ZlHJdrOMCZtU8cwgrIXYW0gHl20KdV
+ fz+gzs/BdY4wbLFy1K1zqO02MxK/lSCN7PkFYUlZiM2JJw37ovUzCDt9blDA3b1ZTh+G
+ iJ+OiRTH1SrJ+2acjPtXHdDvNIyH7Q8NRCPbyCQn0rEPy5/zHlhjP/jb8JVZYHkih/cZ
+ 0GeJEmLh8l5tk9IpvsKg1qbKsc8elZUX+4Xn7rd8D3anLJflk8FKbWgTGtBRLpNZWM10
+ xj9YfcPUHYY1WLGIss6FCC1MrIhP5IE4/Q0g4m0T/LHp2REA1lI66x5LlZQeXDevKBFJ
+ ZD+Q==
+X-Gm-Message-State: AOJu0Yz2qsOpNMItIpJzWUbLzJ9d8YgXrS62r0mx1VH3oFHFLrcEympO
+ xdTncZnlbVLJdlpPQdP1TxGffdWo0U8PYhNR+GV4MK9OD+15Jz6/it5Xoj31huXskB+singC5W9
+ FMnVMqL4=
+X-Gm-Gg: AY/fxX4zgfxcBQ06Uk54FZoe1K5CYeOK9/efgRrMep1QMQv2bGDaEH/qGKfwnHa7jBP
+ x7CNutc8cAfVnjKR+Y3JC+Qdvq+4jrenbdFqK6j9TOcHzn68ZOtVCO5b7JpPPSuc9UAdPqup0QI
+ uDxawPeWL8rxP9QchSMpoRy0dBGlxOEDns3tPukQaE0jmsM1aKflGaCXYplx+IEfXJfGan3Af6w
+ UwzQzx5o05l113kqk/qOu+LXac2Dk7P6xbpoo9WiSdoZMMDCwrNG1OuW8xcsoZnEwLdiexCBJ0G
+ 2Y9P/FpJGixsD7hwa2kzLsMFPGAkO/oXwNDEYdck9/Vag7+e1S8fA2BUo9HDbAvy/Vt4E1QyPw5
+ JZ8ZK5kqmM421kTUl1aQkurWzPdQs6bR9B/oo+4mx5rtNOQJSZz2URhwwkA8iLI03sNeT+1e52F
+ jBRd3ogegylIsegc47EAx5NN77Sz3KVvPVoFfaAWKAUFQ1F98XZHDL
+X-Google-Smtp-Source: AGHT+IGbgwouEHkjuTct+7lwbeAHpcB/t7p5RpRqDL+RGw+bxMxNs49vagfJ7tOMyGcnVfgN35cW0g==
+X-Received: by 2002:a05:6820:2d93:20b0:65c:f9c1:cba2 with SMTP id
+ 006d021491bc7-65d0ea694aemr402961eaf.30.1766101017341; 
+ Thu, 18 Dec 2025 15:36:57 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3fdaab5ccb9sm449605fac.10.2025.12.18.15.36.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Dec 2025 15:36:56 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-X-Mailer: Apple Mail (2.3826.600.51.1.1)
-X-Proofpoint-ORIG-GUID: IBIcjpkvDhu7bx3dIt-GBoitMzz3YTbv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDE4NCBTYWx0ZWRfXxqv21HHvcda0
- s7oZh50a6kZvW9MCw6OnEkNC19wP9mguf6l1ZjM36Bq+j2W2YvrV4VZ7b0oZhQcSYLvLHqBBPRG
- KPA+CUMAcfOk800W74SHuCvvixq4aPAdR+ySCFDEU0GBYly+q7QhFhKkTuIor7dvjl7pHJvOSMg
- OtfSOZCBe/4qB7l6Ws/5sO9wRciD0R6awWkbOhphWhgZFM0lTmdrsm1uLhBIFHwRb9pbYcj0ClN
- om2nc+yj0OrzJX76P3YBvpwfYciKw2nYLQvHhe+vmQoS7I+no0gX2SLIOuDtdt1Ckbp/V+u6C9V
- muG3PJdgyMv6Sx/dkLT
-X-Authority-Info: v=2.4 cv=aom/yCZV c=1 sm=1 tr=0 ts=69447a8e cx=c_apl:c_pps
- a=qkKslKyYc0ctBTeLUVfTFg==:117 a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10
- a=x7bEGLp0ZPQA:10 a=MquUGpQHRscA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=T-LVa3Hi2K__c9wZpccA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-GUID: IBIcjpkvDhu7bx3dIt-GBoitMzz3YTbv
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-18_03,2025-12-17_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- adultscore=0 malwarescore=0 mlxlogscore=959 suspectscore=0 phishscore=0
- mlxscore=0 spamscore=0 clxscore=1011 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512180184
-X-JNJ: AAAAAAAB8AWShEVBSo3r0friaH1LIJ4z+ZJTh9in+AOOwzOPbo0kDOzntHANprDLXw7xhC4pbP8kFN+soDPSbslF+7HwTfIecAWBqNkjhLhuGnSa7XxrBQV4eW4nCmc7EYIZMAfpsd0Y13hQDTjeDr6MaOJOuTIMdCt2k/LDTwSTJHzEsJf0Hq3zLvAGqgY0HgOfAKT6cAn38t+LM++nV5jOAoUgjPljkeUv1C72JtL4peb5wrXFbtXF1wF7S2T6sbuJBVmfeRzE/1K2+afXGHyxM/e99QSbDWhdMTQwiNw7VNu4bDqaVm4Rs6QxIMWcKesZTmQlSvQZhO54bfKm+6qYQwwYLypsWTC0pLt5vqn+pZf/JKbhv4Vw0E35thvujIZe6hAHyv13TFc1KjeXqCHRIP3/PKmTBUlRhpZXLr9rfBAH1yaW9XBoBSpdipmDA5IjF61JoWjMzFtB95j1sVFN6ylXHiBgZpb+/e9+O7sngqZ1DlEcj4gW8+br8vs17H2OFQQXHxfQRCXRdfwTR2+GQyfba/4m9JvQT296buCcdlrz3/KalwwRWA14HlBA4oImirpzNh39tPlzz+dPQlrQjL0ak59xDR3GqRWljr+52w==
-X-Mailman-Approved-At: Fri, 19 Dec 2025 00:29:09 +0100
+Cc: Darek <x64x6a@gmail.com>
+Subject: [PATCHv1 0/3] lzma: Update to 25.01 release of LZMA SDK
+Date: Thu, 18 Dec 2025 17:30:55 -0600
+Message-ID: <20251218233654.3938385-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251218232255.3934258-1-trini@konsulko.com>
+References: <20251218232255.3934258-1-trini@konsulko.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,45 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-Recently I've been playing around with the imx23-olinuxino=20
-(mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During that, =
-I've=20
-noticed that NetBSD panics because u-boot places the device tree in the =
-BSS
-section of NetBSD. NetBSD clears the BSS section and then complains=20
-that the device tree is corrupt.
+Hey all,
 
-Reading the logs, it appears that FDT and kernel get loaded at =
-non-overlapping
-ranges, but then u-boot relocates the device tree right after the kernel =
-into
-the BSS section.
+As I mentioned in the RFC cover letter, the RFC version of this patch
+set was expanded for easier review of the changes. This series is
+intended for merge and so I've squashed all of the updates together.
+There is no actual change between the two otherwise.
 
-## Booting kernel from Legacy Image at 42000000 ...
-Image Name: NetBSD/earmv5 11.99.4
-Image Type: ARM Linux Kernel Image (no loading done) (uncompressed)
-Data Size: 11950164 Bytes =3D 11.4 MiB
-Load Address: 00000000
-Entry Point: 00000000
-Verifying Checksum ... OK
-## Flattened Device Tree blob at 41000000
-Booting using the fdt blob at 0x41000000
-Working FDT set to 41000000
-XIP Kernel Image (no loading done) to 42000040
-Loading Device Tree to 42b93000, end 42b99a0a ... OK
-Working FDT set to 42b93000
-Starting kernel ...
+As potential future work, the LZMA SDK now includes an optimized
+assembly routine for decompression for aarch64 and x86, of which the
+aarch64 one at least at first glance looks possible to integrate with
+our codebase.
 
-The bootm command seems to insist on having to relocate the device tree.
+Link: https://lore.kernel.org/r/20251218232255.3934258-1-trini@konsulko.com
+-- 
+Tom
 
-Is this something the OS is expected to deal with?
-
-In the meantime, I've managed to work around this by running
-env set fdt_high 0x41000000;
-before bootm. Is there a better solution than this to force the =
-placement
-of the device tree?
-
-Thank you,
-Yuri
