@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F626D68BD9
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 04:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BDCBD68BD9
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 04:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9CC283C6E;
-	Thu, 18 Dec 2025 05:23:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1575A83C64;
+	Thu, 18 Dec 2025 05:23:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CbbdLIZL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ULs4cj36";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F3B383B49; Thu, 18 Dec 2025 05:23:06 +0100 (CET)
+ id 713A283C62; Thu, 18 Dec 2025 05:23:08 +0100 (CET)
 Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
  [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43A8F83C67
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 05:22:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6109E83C62
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 05:23:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
 Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-29f2676bb21so2514615ad.0
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 20:22:58 -0800 (PST)
+ d9443c01a7336-2a0b4320665so3019315ad.1
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 20:23:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766031777; x=1766636577; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1766031783; x=1766636583; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ufVWzI2/mSqW8rtxrGSvMrBkIuFiaXM9e2tHnCm0C2U=;
- b=CbbdLIZLMcqoAlUGpy0F236YPbVG9wJ1Q7Z+dons6E1j5SSeGekPEOo78vg43ws7nz
- 3VjW5jEtnrdlHYDjaahI2RVV3KlA1zGlahrgidBp/g6g/KjdONJwBEMsTo1lAGTYsnxk
- IEGfBaYODUUyPND1bdjHRQcD3/uYjbfVyLHDIzhTWNsj5Ta88qYyVFswZiiGTkv+nsFw
- 9LH+zifgx+2vqyXMeQO8i9bxc7/ILOy6A/Rgt6vHqBE98LFCVktTFtK7V0mCLt4UtvnS
- EdeP8QYRdVEBEB+uTJy58Dbo8S/zEN5O+E7EsvwuJjyL+IVSQsjpA8eIN3vG09s6ZHmR
- v6eA==
+ bh=6V9cL+nf1Xux910qPZ9kd9vVdBqg+Kc/kCgrDG51D0w=;
+ b=ULs4cj36hvrGKa/cXt8KPKdAxNswZJkXMjjM6rA2m+8Ngbt3wXgSPf14e4iHSvmkX+
+ lU+NcApiS3q3H6Al+MdRccpYV4UD3PxOw/V/NvEu2FNDxAV/RDS0c5SC2P23Pb6d3lFS
+ 9v2PrV08/ZBZM6utVNv3e+XVCFcoRMCM7JnMlhc6PiYo+4LRprC+2cSE3RfrqhuXC+bv
+ /aqL1mnqHfLviOdwikFOqsIXV7CTNe6AdlDDG8f1ueLjkZ4KixHvoDQOTXKY7bHI54K4
+ 5DQIkAaCkxd7Hb/1bqrrPPBg5Ie/3MGJuhsNqr5gXXJY820yRweeB1OWJ+pYJwSeoljb
+ Zypg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766031777; x=1766636577;
+ d=1e100.net; s=20230601; t=1766031783; x=1766636583;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ufVWzI2/mSqW8rtxrGSvMrBkIuFiaXM9e2tHnCm0C2U=;
- b=Ryncl2R9TfIHI5Ak6V60Qo7IBvjq3kn6fyvJYfU/jjjr7i5xv8NpqzZ5oeCAG9NnKC
- q2jI+5/b0RnP3+bdao4RRFWjmR2YJS6kig8B9AzqvFc5HMeUsOO4ZjF9ryKnmLApfbhR
- 6Nbe4Fg5fvYOXnY/yn4W9N0ImpIWZpliDTHlXLKNYIu3+SF6ID6UDOz3df4HXZ8VU8sX
- sKyjru5v1M2R8txP7YTDM1946awNBtqRiXDqOJLraujEGesio+QFUu9cORV+RVpw7WyB
- 1tGhcngTk6aNivlxRNShNSmzEH733cwki00EPVY8bn54sCMO0Av8DUeBFoYlsLXmS8JH
- 8GjQ==
-X-Gm-Message-State: AOJu0Yyobr7iJBoDml8jt7hYvb34MLo6SfHwMj/aby86uGI+W+Hn3ETQ
- qEqsl/wyUoiWKH432ZT0v93Z91q7UDYvRnOqJXxVU1TUuv2WiyjMA1zc
-X-Gm-Gg: AY/fxX5mdPhTg0ZeycLlj+JVcrg8UuG5S9kLiANNaeUDsunsI877AnB5dWNXDfmH2wV
- aCnzVgTHbP4ciYv1Q7OdGDWgYTAdhwxNajKgD7fybN6pq9Y6FJ2fOtgCQyAyORbOsIXSLXEM7As
- bA4/Tv24nmQZDLg6h+GqmvNaoVo0Qd++yR2mIfFrRvt40x3HIsQV1cEMBnWLKEBJ+xQqCAPqdsO
- +kFaZeqKy7Uqzsi2++E/LibZziJNj8x+lxu8NrsuxPwtSTqnCUENXG9Fzfo+UqfFk0DXs2Pg9HR
- ICUghz+T4Ws9sFjGCLE8hmvOthDTw7L5otd2/r9HyoGEWU6E/lX5h2OLWhHZRMLhT0eVbw8CB3G
- 4Tb45Qmf4TRMJf1+ouIyPECIAdDix/a6WIScJNqZ32cdiqc/H+Wf7FpmcQRgZWs4JL21TPXOnZd
- CYjQWLp2pWWOLCm/75ttydHjUZ
-X-Google-Smtp-Source: AGHT+IHokbSlswmwkCGkbKhosVu+QxClOyIeQiDnhI+hco4iiMnvmwCcueG9gBvEjhFDW2CkwURBxw==
-X-Received: by 2002:a17:903:240f:b0:2a0:a8c2:be5d with SMTP id
- d9443c01a7336-2a0a8c2c178mr174349315ad.5.1766031776686; 
- Wed, 17 Dec 2025 20:22:56 -0800 (PST)
+ bh=6V9cL+nf1Xux910qPZ9kd9vVdBqg+Kc/kCgrDG51D0w=;
+ b=ldSMq04BnwqXFPkb1WYWj//SepVqsD7a34WNRKvwSLbRYlHxk23FLl8R38LRS4WXdZ
+ yRqLQMH8KLBbeskvoebUb5gl2MaAak9DI9R38V0cOuUQ6a8+6kFvyGuoq7OssdLVxvwJ
+ DJWUQ6/VrweIkQRw41hs54A8vetgNuSlET366L2lfmqhcFvbNoI8aAvd3ZD/sKitpQ2A
+ yaTSe/nWIqp6737MUOsIoosq5soIG7kc7L1fk5hMY7eneGX/vjE8N5ZoIWvCCFqT260S
+ n/IvlPzlH/knhdj6bnI2kyRyZZE01QofUs0xkCiKuU9NZPX7Oxkl+2wqkxueBbEgWFLI
+ nUJw==
+X-Gm-Message-State: AOJu0Yxo+VLWQxmPdd7fd8mAcYSKWN0p/fiKSUUJUozrE6xklfU3Lgtz
+ Ss1Z4V1bpqw/NUWJR3wbhgpnPRlupILZPO6CV4TRRFYEXe9yilNIGwpf
+X-Gm-Gg: AY/fxX4GeAU0sFovHoxsEbbsykoxADbbPuthWmXwNGCxBPnLSNbJhu9XzVM6h3iSx0M
+ EExuq125J40bZLtg5H4QU0jtrNYR1XnpaJRPUvxq/YssmCgGr0QMPiVyRq21Rx0OWhOcgJEDFqS
+ eYmM9lKsQVow2SjiQxD7mZ1vd/iOmM7yoPIK0tj0lqWpSz8XIGwN3jiQd0oCmHiivDP1TrVwN3N
+ OTrbx/CdWOJYod9MESJX6GL6JzUfnewCzNiWKUIFQScB3oTXh0n0CstQkvHkIZaxiYS34guTf8l
+ lJSsFxYrknmUdEJeQsxkxL+mCkxVt52s5sikrRQLfJOUAEFCyu7o65cQUbXMavBQyPQykDkrALq
+ T6SK/Ob7zM6vYsLsdfDl76Q5oQ+hsY0GDxzyTdPVmnViVwavBvERG6QJs34yN8O1M2nF1kzoHgK
+ ZlCwshKKEe2TnhF4M07PrESbHN
+X-Google-Smtp-Source: AGHT+IFjaEUNYMmTJocR/u4N733MNielVRimlQfdEfM1O9Ldyy6xiUi0OVGUvRR6xSCaX97hOfLahA==
+X-Received: by 2002:a17:902:c403:b0:29d:9db2:f833 with SMTP id
+ d9443c01a7336-29f23b77308mr220868645ad.25.1766031782844; 
+ Wed, 17 Dec 2025 20:23:02 -0800 (PST)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:73ef:52b5:685b:7c64])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2d087d485sm9305655ad.16.2025.12.17.20.22.53
+ d9443c01a7336-2a2d087d485sm9305655ad.16.2025.12.17.20.23.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Dec 2025 20:22:56 -0800 (PST)
+ Wed, 17 Dec 2025 20:23:02 -0800 (PST)
 From: Chris Packham <judge.packham@gmail.com>
 To: trini@konsulko.com,
 	stefan.roese@mailbox.org,
 	seanga2@gmail.com
 Cc: u-boot@lists.denx.de,
 	Chris Packham <judge.packham@gmail.com>
-Subject: [PATCH 1/3] mtd: nand: pxa3xx: Use pr_err() in some places
-Date: Thu, 18 Dec 2025 17:22:42 +1300
-Message-ID: <20251218042244.1833380-2-judge.packham@gmail.com>
+Subject: [PATCH 3/3] arm: mvebu: Add Allied Telesis x220
+Date: Thu, 18 Dec 2025 17:22:44 +1300
+Message-ID: <20251218042244.1833380-4-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251218042244.1833380-1-judge.packham@gmail.com>
 References: <20251218042244.1833380-1-judge.packham@gmail.com>
@@ -101,53 +101,532 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-info->controller.active is not initialised so the dev_err() call ends up
-dereferencing a null pointer causing a crash instead of outputting the
-error. Use pr_err() instead as there isn't a convenient dev in the
-places info->controller.active->mtd.dev was being used.
+Add the Allied Telesis x220 board. There are a number of other variants
+with the same CPU block that are sold under some different brand names
+but the x220 was first.
 
-Fixes: 661c98121d49 ("mtd: nand: pxa3xx: Fix not calling dev_xxx with a device")
+The x220 uses the AlleyCat3 switch chip with integrated ARMv7 CPU.
+Because of this it is reliant on a binary blob for the DDR training. In
+upstream u-boot this is replaced by an empty file.
+
 Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
- drivers/mtd/nand/raw/pxa3xx_nand.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+ arch/arm/dts/Makefile                    |   1 +
+ arch/arm/dts/armada-xp-atl-x220.dts      | 162 +++++++++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig              |   7 +
+ board/alliedtelesis/x220/.gitattributes  |   1 +
+ board/alliedtelesis/x220/.gitignore      |   1 +
+ board/alliedtelesis/x220/MAINTAINERS     |   7 +
+ board/alliedtelesis/x220/Makefile        |  14 ++
+ board/alliedtelesis/x220/README          |   4 +
+ board/alliedtelesis/x220/binary.0        | Bin 0 -> 423 bytes
+ board/alliedtelesis/x220/kwbimage.cfg.in |  12 ++
+ board/alliedtelesis/x220/x220.c          |  67 ++++++++++
+ configs/x220_defconfig                   |  76 +++++++++++
+ include/configs/x220.h                   |  20 +++
+ 13 files changed, 372 insertions(+)
+ create mode 100644 arch/arm/dts/armada-xp-atl-x220.dts
+ create mode 100644 board/alliedtelesis/x220/.gitattributes
+ create mode 100644 board/alliedtelesis/x220/.gitignore
+ create mode 100644 board/alliedtelesis/x220/MAINTAINERS
+ create mode 100644 board/alliedtelesis/x220/Makefile
+ create mode 100644 board/alliedtelesis/x220/README
+ create mode 100644 board/alliedtelesis/x220/binary.0
+ create mode 100644 board/alliedtelesis/x220/kwbimage.cfg.in
+ create mode 100644 board/alliedtelesis/x220/x220.c
+ create mode 100644 configs/x220_defconfig
+ create mode 100644 include/configs/x220.h
 
-diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c b/drivers/mtd/nand/raw/pxa3xx_nand.c
-index 7bf54fa46540..e1d8515bd9b1 100644
---- a/drivers/mtd/nand/raw/pxa3xx_nand.c
-+++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
-@@ -588,8 +588,7 @@ static void drain_fifo(struct pxa3xx_nand_info *info, void *data, int len)
- 			ts = get_timer(0);
- 			while (!(nand_readl(info, NDSR) & NDSR_RDDREQ)) {
- 				if (get_timer(ts) > TIMEOUT_DRAIN_FIFO) {
--					dev_err(info->controller.active->mtd.dev,
--						"Timeout on RDDREQ while draining the FIFO\n");
-+					pr_err("Timeout on RDDREQ while draining the FIFO\n");
- 					return;
- 				}
- 			}
-@@ -641,8 +640,7 @@ static void handle_data_pio(struct pxa3xx_nand_info *info)
- 				   DIV_ROUND_UP(info->step_spare_size, 4));
- 		break;
- 	default:
--		dev_err(info->controller.active->mtd.dev,
--			"%s: invalid state %d\n", __func__, info->state);
-+		pr_err("%s: invalid state %d\n", __func__, info->state);
- 		BUG();
- 	}
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index fcad6fb2fc71..797d9a61154c 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -155,6 +155,7 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
+ 	armada-388-gp.dtb			\
+ 	armada-388-helios4.dtb			\
+ 	armada-38x-controlcenterdc.dtb		\
++	armada-xp-atl-x220.dtb			\
+ 	armada-xp-crs305-1g-4s.dtb		\
+ 	armada-xp-crs305-1g-4s-bit.dtb		\
+ 	armada-xp-crs326-24g-2s.dtb		\
+diff --git a/arch/arm/dts/armada-xp-atl-x220.dts b/arch/arm/dts/armada-xp-atl-x220.dts
+new file mode 100644
+index 000000000000..5b3307ed2884
+--- /dev/null
++++ b/arch/arm/dts/armada-xp-atl-x220.dts
+@@ -0,0 +1,162 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Device Tree file for x220 board
++ *
++ * Copyright (C) 2025 Allied Telesis Labs
++ */
++
++/dts-v1/;
++#include <dt-bindings/gpio/gpio.h>
++#include "armada-xp-98dx3236.dtsi"
++#include "mvebu-u-boot.dtsi"
++
++/ {
++	model = "x220";
++	compatible = "marvell,armadaxp-98dx3236", "marvell,armadaxp-mv78260",
++		     "marvell,armadaxp", "marvell,armada-370-xp";
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++		bootargs = "console=ttyS0,115200";
++	};
++
++	aliases {
++		i2c0 = &i2c0;
++		spi0 = &spi0;
++	};
++
++	memory {
++		device_type = "memory";
++		reg = <0x00000000 0x00000000 0x00000000 0x20000000>;
++	};
++};
++
++&L2 {
++	arm,parity-enable;
++	marvell,ecc-enable;
++};
++
++&devbus_bootcs {
++	status = "okay";
++
++	/* Device Bus parameters are required */
++
++	/* Read parameters */
++	devbus,bus-width    = <16>;
++	devbus,turn-off-ps  = <60000>;
++	devbus,badr-skew-ps = <0>;
++	devbus,acc-first-ps = <124000>;
++	devbus,acc-next-ps  = <248000>;
++	devbus,rd-setup-ps  = <0>;
++	devbus,rd-hold-ps   = <0>;
++
++	/* Write parameters */
++	devbus,sync-enable = <0>;
++	devbus,wr-high-ps  = <60000>;
++	devbus,wr-low-ps   = <60000>;
++	devbus,ale-wr-ps   = <60000>;
++};
++
++&uart0 {
++	status = "okay";
++};
++
++&i2c0 {
++	clock-frequency = <100000>;
++	status = "okay";
++
++	rtc@68 {
++		compatible = "dallas,ds1340";
++		reg = <0x68>;
++	};
++
++	adt7476a@2e {
++		compatible = "adi,adt7476";
++		reg = <0x2e>;
++	};
++
++	sfpgpio: gpio@27 {
++		#address-cells = <2>;
++		#size-cells = <0>;
++		compatible = "nxp,pca9555";
++		reg = <0x27>;
++		gpio-controller;
++		#gpio-cells = <2>;
++	};
++
++	systemgpio: gpio@25 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "nxp,pca9555";
++		reg = <0x25>;
++		gpio-controller;
++		#gpio-cells = <2>;
++
++		nand-protect {
++			gpio-hog;
++			gpios = <6 GPIO_ACTIVE_HIGH>;
++			output-high;
++			line-name = "nand-protect";
++		};
++
++		usb-enable {
++			gpio-hog;
++			gpios = <9 GPIO_ACTIVE_HIGH>;
++			output-high;
++			line-name = "usb-enable";
++		};
++
++		phy-reset {
++			gpio-hog;
++			gpios = <5 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "phy-reset";
++		};
++
++		led-enable {
++			gpio-hog;
++			gpios = <13 GPIO_ACTIVE_HIGH>;
++			output-low;
++			line-name = "led-enable";
++		};
++	};
++};
++
++&watchdog {
++	status = "okay";
++};
++
++&usb0 {
++	status = "okay";
++};
++
++&spi0 {
++	status = "okay";
++
++	spi-flash@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "spi-flash", "jedec,spi-nor";
++		reg = <0>; /* Chip select 0 */
++		spi-max-frequency = <20000000>;
++	};
++};
++
++&nand_controller {
++	compatible = "marvell,armada370-nand-controller";
++	label = "pxa3xx_nand-0";
++	status = "okay";
++	nand-rb = <0>;
++	nand-on-flash-bbt;
++	nand-ecc-strength = <4>;
++	nand-ecc-step-size = <512>;
++};
++
++&{/} {
++	boot-board {
++		compatible = "atl,boot-board";
++		present-gpio = <&systemgpio 12 GPIO_ACTIVE_HIGH>;
++		override-gpio = <&gpio0 31 GPIO_ACTIVE_HIGH>;
++	};
++};
++
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index b76510ab4527..bc009163ed96 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -226,6 +226,10 @@ config TARGET_X240
+ 	select ALLEYCAT_5
+ 	imply BOOTSTD_DEFAULTS
  
-@@ -1560,9 +1558,8 @@ static int pxa_ecc_init(struct pxa3xx_nand_info *info,
- 		ecc->size = 512;
++config TARGET_X220
++	bool "Support Allied Telesis x220"
++	select 98DX3336
++
+ config TARGET_DB_XC3_24G4XG
+ 	bool "Support DB-XC3-24G4XG"
+ 	select 98DX3336
+@@ -310,6 +314,7 @@ config SYS_BOARD
+ 	default "x530" if TARGET_X530
+ 	default "x250" if TARGET_X250
+ 	default "x240" if TARGET_X240
++	default "x220" if TARGET_X220
+ 	default "db-xc3-24g4xg" if TARGET_DB_XC3_24G4XG
+ 	default "crs3xx-98dx3236" if TARGET_CRS3XX_98DX3236
+ 	default "mvebu_alleycat-5" if TARGET_MVEBU_ALLEYCAT5
+@@ -335,6 +340,7 @@ config SYS_CONFIG_NAME
+ 	default "x530" if TARGET_X530
+ 	default "x250" if TARGET_X250
+ 	default "x240" if TARGET_X240
++	default "x220" if TARGET_X220
+ 	default "db-xc3-24g4xg" if TARGET_DB_XC3_24G4XG
+ 	default "crs3xx-98dx3236" if TARGET_CRS3XX_98DX3236
+ 	default "mvebu_alleycat-5" if TARGET_MVEBU_ALLEYCAT5
+@@ -360,6 +366,7 @@ config SYS_VENDOR
+ 	default "alliedtelesis" if TARGET_X530
+ 	default "alliedtelesis" if TARGET_X250
+ 	default "alliedtelesis" if TARGET_X240
++	default "alliedtelesis" if TARGET_X220
+ 	default "mikrotik" if TARGET_CRS3XX_98DX3236
+ 	default "Marvell" if TARGET_MVEBU_ALLEYCAT5
  
- 	if (ecc_stepsize != 512 || !(nfc_layouts[i].strength)) {
--		dev_err(info->controller.active->mtd.dev,
--			"ECC strength %d at page size %d is not supported\n",
--			strength, page_size);
-+		pr_err("ECC strength %d at page size %d is not supported\n",
-+		       strength, page_size);
- 		return -ENODEV;
- 	}
- 
+diff --git a/board/alliedtelesis/x220/.gitattributes b/board/alliedtelesis/x220/.gitattributes
+new file mode 100644
+index 000000000000..2aeb4eee6416
+--- /dev/null
++++ b/board/alliedtelesis/x220/.gitattributes
+@@ -0,0 +1 @@
++binary.0 binary
+diff --git a/board/alliedtelesis/x220/.gitignore b/board/alliedtelesis/x220/.gitignore
+new file mode 100644
+index 000000000000..775b9346b859
+--- /dev/null
++++ b/board/alliedtelesis/x220/.gitignore
+@@ -0,0 +1 @@
++kwbimage.cfg
+diff --git a/board/alliedtelesis/x220/MAINTAINERS b/board/alliedtelesis/x220/MAINTAINERS
+new file mode 100644
+index 000000000000..299ccda45e20
+--- /dev/null
++++ b/board/alliedtelesis/x220/MAINTAINERS
+@@ -0,0 +1,7 @@
++x220 BOARD
++M:	Chris Packham <chris.packham@alliedtelesis.co.nz>
++S:	Maintained
++F:	board/alliedtelesis/x220
++F:	include/configs/x220.h
++F:	configs/x220_defconfig
++F:	arch/arm/dts/armada-xp-atl-x220.dts
+diff --git a/board/alliedtelesis/x220/Makefile b/board/alliedtelesis/x220/Makefile
+new file mode 100644
+index 000000000000..a74f0a769484
+--- /dev/null
++++ b/board/alliedtelesis/x220/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2025 Allied Telesis Labs
++
++obj-y	:= x220.o
++extra-y	:= kwbimage.cfg
++
++quiet_cmd_sed = SED     $@
++      cmd_sed = sed $(SEDFLAGS_$(@F)) $< >$(dir $@)$(@F)
++
++SEDFLAGS_kwbimage.cfg =-e "s|^BINARY.*|BINARY $(srctree)/$(@D)/binary.0 0000005b 00000068|"
++$(obj)/kwbimage.cfg: $(src)/kwbimage.cfg.in include/autoconf.mk \
++		include/config/auto.conf
++	  $(call if_changed,sed)
+diff --git a/board/alliedtelesis/x220/README b/board/alliedtelesis/x220/README
+new file mode 100644
+index 000000000000..b90f0f879ddf
+--- /dev/null
++++ b/board/alliedtelesis/x220/README
+@@ -0,0 +1,4 @@
++To generate binary.0 from Marvell's bin_hdr.elf use the following command
++
++    arm-softfloat-linux-gnueabi-objcopy -S -O binary bin_hdr.elf \
++       board/alliedtelesis/x220/binary.0
+diff --git a/board/alliedtelesis/x220/binary.0 b/board/alliedtelesis/x220/binary.0
+new file mode 100644
+index 0000000000000000000000000000000000000000..8dd687286a001c5df3cbc878d527d2a764f8c40b
+GIT binary patch
+literal 423
+zcmYk2F>b>!3`KXHf(NjDfNtqhWN3z>MaF`*7)y;z29zAvw=ZR<MFmad=l_pv+x@xo
+z;q7!hy*#-`p>^*eX1K&ekb}(0!ysHRGL%5jNB#_6VI(HSLLT~cYly}%GA4LMy;Dl=
+zqkR@B5T{$BiOiuy;SLVj<Q8Cmm{qNjR^Te+A<f<lx1^YV4eq4bCL34?0^SMGSJh^6
+zOE^%F<VhRIVnr+)%^vRJgd@R#3_blrUShG$3XrO3?wmVbV3qk{4_B7Owv{@xh+ZR)
+ze|uj<t5l&ERNvGvt_Als=K@TXOh9QP+aU{mm;IiB)Eq5*W3*GEt`G<f-ywS&8)UlG
+J%kTW1`vEC^lKcPw
+
+literal 0
+HcmV?d00001
+
+diff --git a/board/alliedtelesis/x220/kwbimage.cfg.in b/board/alliedtelesis/x220/kwbimage.cfg.in
+new file mode 100644
+index 000000000000..8beda907ba45
+--- /dev/null
++++ b/board/alliedtelesis/x220/kwbimage.cfg.in
+@@ -0,0 +1,12 @@
++#
++# Copyright (C) 2025 Allied Telesis Labs
++#
++
++# Armada XP uses version 1 image format
++VERSION		1
++
++# Boot Media configurations
++BOOT_FROM	spi
++
++# Binary Header (bin_hdr) with DDR3 training code
++BINARY board/alliedtelesis/x220/binary.0 0000005b 00000068
+diff --git a/board/alliedtelesis/x220/x220.c b/board/alliedtelesis/x220/x220.c
+new file mode 100644
+index 000000000000..7c9a73de9a24
+--- /dev/null
++++ b/board/alliedtelesis/x220/x220.c
+@@ -0,0 +1,67 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025 Allied Telesis Labs
++ */
++
++#include <i2c.h>
++#include <init.h>
++#include <asm/global_data.h>
++#include <asm/gpio.h>
++#include <linux/bitops.h>
++#include <linux/mbus.h>
++#include <linux/io.h>
++#include <asm/arch/cpu.h>
++#include <asm/arch/soc.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define X220_GPP_OUT_ENA_LOW	(~(BIT(12) | BIT(17) | BIT(18) | BIT(31)))
++#define X220_GPP_OUT_ENA_MID	(~(0))
++#define X220_GPP_OUT_VAL_LOW	(BIT(12) | BIT(18))
++#define X220_GPP_OUT_VAL_MID	0x0
++#define X220_GPP_POL_LOW	0x0
++#define X220_GPP_POL_MID	0x0
++
++int board_early_init_f(void)
++{
++	/* Configure MPP */
++	writel(0x44042222, MVEBU_MPP_BASE + 0x00);
++	writel(0x11000004, MVEBU_MPP_BASE + 0x04);
++	writel(0x44444004, MVEBU_MPP_BASE + 0x08);
++	writel(0x04444444, MVEBU_MPP_BASE + 0x0c);
++	writel(0x00000004, MVEBU_MPP_BASE + 0x10);
++
++	/* Set GPP Out value */
++	writel(X220_GPP_OUT_VAL_LOW, MVEBU_GPIO0_BASE + 0x00);
++	writel(X220_GPP_OUT_VAL_MID, MVEBU_GPIO1_BASE + 0x00);
++
++	/* Set GPP Polarity */
++	writel(X220_GPP_POL_LOW, MVEBU_GPIO0_BASE + 0x0c);
++	writel(X220_GPP_POL_MID, MVEBU_GPIO1_BASE + 0x0c);
++
++	/* Set GPP Out Enable */
++	writel(X220_GPP_OUT_ENA_LOW, MVEBU_GPIO0_BASE + 0x04);
++	writel(X220_GPP_OUT_ENA_MID, MVEBU_GPIO1_BASE + 0x04);
++
++	return 0;
++}
++
++int board_init(void)
++{
++	/* address of boot parameters */
++	gd->bd->bi_boot_params = mvebu_sdram_bar(0) + 0x100;
++
++	/* Disable MBUS Err Prop - in order to avoid data aborts */
++	clrbits_le32(MVEBU_CPU_WIN_BASE + 0x200, (1 << 8));
++
++	return 0;
++}
++
++#ifdef CONFIG_DISPLAY_BOARDINFO
++int checkboard(void)
++{
++	puts("Board: Allied Telesis x220\n");
++
++	return 0;
++}
++#endif
+diff --git a/configs/x220_defconfig b/configs/x220_defconfig
+new file mode 100644
+index 000000000000..4318f5e6ef1d
+--- /dev/null
++++ b/configs/x220_defconfig
+@@ -0,0 +1,76 @@
++CONFIG_ARM=y
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_ARCH_MVEBU=y
++CONFIG_SYS_KWD_CONFIG="board/alliedtelesis/x220/kwbimage.cfg"
++CONFIG_TEXT_BASE=0x00800000
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
++CONFIG_TARGET_X220=y
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0x100000
++CONFIG_ENV_SECT_SIZE=0x40000
++CONFIG_DEFAULT_DEVICE_TREE="armada-xp-atl-x220"
++CONFIG_SYS_LOAD_ADDR=0x800000
++CONFIG_PCI=y
++CONFIG_SYS_MEMTEST_START=0x00800000
++CONFIG_SYS_MEMTEST_END=0x00ffffff
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_FIT_BEST_MATCH=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_SYS_MAXARGS=96
++CONFIG_CMD_MEMTEST=y
++CONFIG_SYS_ALT_MEMTEST=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_MTDIDS_DEFAULT="nand0=nand"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=nand:112M(user),8M(errlog),8M(nand-bbt)"
++CONFIG_CMD_UBI=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ARP_TIMEOUT=200
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_GPIO_HOG=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_MVTWSI=y
++# CONFIG_MMC is not set
++CONFIG_MTD_RAW_NAND=y
++CONFIG_SYS_NAND_USE_FLASH_BBT=y
++CONFIG_NAND_PXA3XX=y
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_SST=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_PCI_MVEBU=y
++CONFIG_SYS_NS16550=y
++CONFIG_KIRKWOOD_SPI=y
++CONFIG_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_STORAGE=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_ETHER_ASIX88179=y
++CONFIG_USB_ETHER_MCS7830=y
++CONFIG_USB_ETHER_RTL8152=y
++CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_WDT=y
++CONFIG_WDT_ORION=y
+diff --git a/include/configs/x220.h b/include/configs/x220.h
+new file mode 100644
+index 000000000000..3022ad491b7e
+--- /dev/null
++++ b/include/configs/x220.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2025 Allied Telesis Labs
++ */
++
++#ifndef _CONFIG_X220_H
++#define _CONFIG_X220_H
++
++/* Keep device tree and initrd in lower memory so the kernel can access them */
++#define CFG_EXTRA_ENV_SETTINGS	\
++	"fdt_high=0x10000000\0"		\
++	"initrd_high=0x10000000\0"
++
++/*
++ * mv-common.h should be defined after CMD configs since it used them
++ * to enable certain macros
++ */
++#include "mv-common.h"
++
++#endif /* _CONFIG_X220_H */
 -- 
 2.52.0
 
