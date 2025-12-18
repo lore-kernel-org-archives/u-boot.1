@@ -4,142 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5412FD6ACF1
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 12:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DED1D6ACF1
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 12:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2EF383E13;
-	Thu, 18 Dec 2025 13:13:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+	by phobos.denx.de (Postfix) with ESMTP id 7677A83D00;
+	Thu, 18 Dec 2025 13:14:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="UHGHt3Wj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CqiQWLb6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77CA583C6C; Thu, 18 Dec 2025 07:48:57 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazolkn190100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d200::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5310383D71; Thu, 18 Dec 2025 12:23:59 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C7D983C28
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:48:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EED7183D00
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 12:23:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k1b++BqxedhUqL7boMil5atOLkamL0Dq4GD1bQ7+jMSt6LxY6POWt7QO99+vzyVUE9O/Nnu3w6eAClIRvVszUqabUXlRn9NWtumTvR6k2MoZtqc3KqIz+nu+RwijCRYRgJenJtoz9IPL9uCMsO514aNge8Iko7+lnV6g5nnmcPsX3gJm1OeYvP4a+yKE2IbbaNCDvcb5kExYPh3SbqBPljC/YrN9lSkkuQr4FSAzE6UYw+tN48kr2MUP8iutfsFWD/33C26Y/PjLRR44Sqy8cjREXYXfK9geFXbs9dj3VhHnIAhNkbPqCsl0I/7ay4sNMasSLm12g0qqN6ykTuJ37A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dtdvC1ZeHYx3xw8/+16HyDp9CA7j2PBID019bJcp9q0=;
- b=mBI8JGOiviTsvp0WGIcDF2zD6xaqs5pF1sMzY0tT8jGGihAb33GLBReiGQFZrClgPDmMCLHSd0b9waRs24Zjy2Os5OhZRu5fQoFE+GsWleTwn7lHqfbEoTDju6FlnGRK+XyoRtJo06sTkNFxAtGYjxTHakaLt0LXgBU4yXpVEmU0bXeaKZWrmXfVNx9QQtcHKIyC1balyFa2T7sb0f8b2KcaHufc5sRS6DmWfGKhMCWCE6T0SuRTWy4+k2qMcZXsLS7AfbHQbBCQ1ZSZ6elSkTiwzT/m4gx9wn3Ip+zh12lABeQId7bRZuBieXJqeVjXa7WtPzu4D3HqeB8SscP73g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dtdvC1ZeHYx3xw8/+16HyDp9CA7j2PBID019bJcp9q0=;
- b=UHGHt3WjbaQR7b2rOVDKHaUVwTJihzk2Vx0q4efNqpaNXYkdqLZZUwl7E6QrZWxK7SCM0SUeAOQEVjzQm0U3cHSJNnK4omZ32eaQI0Oc/fmEcVtFUp+YoPfPOGG7wqathEfDq+w1AoFVKlc5jD5InwCp5ZKP6TEYLWWPZvuvgBLYlChREjb5tY18R8TFFQkoBNMnvdAM450e5EFYApd9AJl8wuDotHtg7DVwAIugjNmgiBbLrT7H805JZhx0Z1qWbWgQbrg6J3JwLS4g4o8elNXOaE2x5mCDDa1eKi1+u1CTyaPGWmWTCQX7x3HL1hTpAyh2GpOfTSf0gaCCUZgdIw==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- PR3P194MB0587.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:36::23) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6; Thu, 18 Dec 2025 06:48:54 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9434.001; Thu, 18 Dec 2025
- 06:48:54 +0000
-Message-ID: <BESP194MB28058E0F0D6E468ED7661716DAA8A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Thu, 18 Dec 2025 07:48:51 +0100
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-477a1c28778so5414265e9.3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 03:23:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1766057036; x=1766661836; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3+b6x9ITlZKpK5T09VnjugF+rK1FzUiwJa2xyqP+t5Q=;
+ b=CqiQWLb6tZ1w5kewtrRaU4c+8mcs39sW5E15c3C/8kXIQHWLg38NRUr2rAqjgb08Ec
+ pTYPOxriPw8am1fSZx1DVkPKAHy1RtP+nYkovbCXO1HE0iyyYo75L38+PL2S4Nv6RWdX
+ ZNMposawvGueUZA7STeYbHvwCm4OvxvqfE4QwpZfUomNpCxrcxv2kS3MvNweoPam6H8T
+ UOYTz0FgrQwgDXWIfTAu9b6VlRoMFEAcgmZ+NeSZuTnrNiy8r6WPe/fgB+sNwEU19mLK
+ ubTLeZCQC8n2hAFetyftueCaYQxC6wrWyaTP+9u5oh7yVTqdzIokLxIqlGyUFUqZvunC
+ 6QdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766057036; x=1766661836;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3+b6x9ITlZKpK5T09VnjugF+rK1FzUiwJa2xyqP+t5Q=;
+ b=S6wRKRKmBL841LLZlLN0w9xGc+cbegzrsNmTmi0XK3bPy0dfmr4x+U21jzH/BAXTEU
+ 4o/WOB4sjmCGLKkABtO0wCwaAkYVgcOXnsc+mTXmXATDv32VHnk8OTWz7xMRqclrg3f9
+ lfGjuJ0hFAXpQfnaMea4RKI+1RHhsMmLTNJGISFFlKLE99iaO9tIVJnKYWw1nifYWKRy
+ /Xihu7UluGnl9bLugAQqA3N7kaTPtLWxilRyvNsgXQHjtbrIaJkWC4wajXhzpOM60ANW
+ aemiZD6iLL4CLPIluKr8UMyDpBNu4csU8NQTpqKv44DIJSqaHMCZxeZdP1NuM8Y+CGd0
+ JFdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXHEllhNOA1m43kCbXVvup5Te1vjY5mRMFnSFqxbHDg0WadznYPRKSOkZR5BEpNsOO4IURrn8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/VA0z/z6PflMnvr278QXbrw87RaVcmnyD0cQX9YV58WLeuGeY
+ ngxtdBp3+sNz1qHLG9JiVFl5CXiLBo+PKjQ6gZ98cPHtmkdWeAVvUVHeybaiG1KsQpM=
+X-Gm-Gg: AY/fxX5feLnn15Wr6Mn3qx4B5X6pR31jW9ICHYh0zdVamj9gG92kIsWLHvxNUfruc/T
+ ZkIdf4878eFvDKuBZl+LUKPaXsmSkUWE+bg7HS+zh9YavmOtBr2oF8RVa6ou6G6q7KcZkP9uIl4
+ jkKvqW6jgObeS60bUDkK+ovX808Bt+5J1lpDSPuEtepjpykzcW4JBVeSNb4SqRB83aGWkgY2O4O
+ 3nww8UMrbXFboRx2x7xGtQcyj1oWQ8X8+mHA5jHltnUY387eFI3oifv56c4kVCEEaodH/SaGkmW
+ NqKkNcXR0o7GWWvaz8zFcIKq+CN7eYaGuYV7588wmxT05ifYjkkNdVm6utC/xEU8vT+bcNZcmT8
+ pdP0txpMRXEziHMaUa+MCJGwlSGsi5W5VzD8KBNJygH6RbKWyQH0a4FzfmwpbFg1VnG73MwCpZg
+ KBzJKjvAY/dUiS8psghBX/LY3/g7nJMGqQwXu0/6ZYlV/lg3PgMKM8i7eSDKu+Rww=
+X-Google-Smtp-Source: AGHT+IFjo2TMquSCzEpz+OqOXSxwWxwtRTmZ1iYCzcbZl5rF1c8ZM9oYE2XqRMWDMMIiyO6RiOPuLQ==
+X-Received: by 2002:a05:600c:828f:b0:46e:7e22:ff6a with SMTP id
+ 5b1f17b1804b1-47a8f8d3010mr247560025e9.15.1766057036311; 
+ Thu, 18 Dec 2025 03:23:56 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:e23:4251:1cd1:b5c0?
+ ([2a01:e0a:3cb:7bb0:e23:4251:1cd1:b5c0])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47be26a81b6sm39381215e9.0.2025.12.18.03.23.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Dec 2025 03:23:56 -0800 (PST)
+Message-ID: <58e56eda-d51f-44c0-b435-b07c4afa230a@linaro.org>
+Date: Thu, 18 Dec 2025 12:23:54 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] cmd: bdinfo: fix incorrect Kconfig options check for
+ print_eth()
+To: Quentin Schulz <foss+uboot@0leil.net>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20251218-bdinfo-lwip-v2-1-f6188a2f376a@cherry.de>
 Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] cmd: onenand: Fix handling error path in onenand_block_test
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20251218-bdinfo-lwip-v2-1-f6188a2f376a@cherry.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PR1P264CA0046.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:2cb::17) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <3ca5c0ea-2bbf-4342-a1b9-7acf7c7ae63e@outlook.fr>
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|PR3P194MB0587:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5df986f-5794-49b0-549b-08de3e018255
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5062599005|461199028|5072599009|6090799003|51005399006|8060799015|41001999006|19110799012|23021999003|15080799012|3412199025|440099028|40105399003|12091999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a3VvN2ZyNkwraUhpdDkrd1NoNThjNFg5MG5jSnV0MU04NDE4eHpjVEY1ZW91?=
- =?utf-8?B?YmpYOERvMmZIZWtESWk4eHdrQ1ZxVzZZd1VzbytydVhEWm92Q2hFREwwckVK?=
- =?utf-8?B?akdXeTRIaHpVckk2Nm92RldsWm03MThnckdpTS9BN3pQZlNIbTdmbVpibHVu?=
- =?utf-8?B?Vi8zL2FCeWhPaE52ZG0xMkxtdXMyL1plV29nbGh1UC9TSXNuQUx3OXI5Uytv?=
- =?utf-8?B?V3FJYnJhZjc2dUp5bWM1UHRqZzIwZU43MjBieGlZdkxKTHNwOEk1WXJYOUJo?=
- =?utf-8?B?TkVxaWExTHVFUEdhbURpY0ZvaE1sS1d1VWhLUVBrSFRhSlJURFNKOFNsRTB1?=
- =?utf-8?B?WDhpRmVOSlBaYzhKci9uTU5GSU9kUC9FSDM2dERXR1VGekttSXBhS3VXY1lR?=
- =?utf-8?B?OGUyeTB2cG9CaUhZQVZvRDNaL0gwMSsyOTc1WmhIakQzclJlV1lqOEx3VDZX?=
- =?utf-8?B?RXNVUWNjSlpUNnZ3RU1CbWNkVXVDZTlWbXhObXpkb0k4ekliRUhQNXExSVQ0?=
- =?utf-8?B?WjdVQ3lCaENZUnJYemZ3Um1zUWxZYUlwUzA4ckJsK01TellLWjZmVllueEc5?=
- =?utf-8?B?UnpJZUdFWkQ2dnlJdzQzZE5yMHd6MTd3bUlTVTN5Rm8vYzhJZUxMZkxoNFJi?=
- =?utf-8?B?TjV3MjEra1duakhuTm5sMXZuTkUrd2crdHIrdC9DeUZSTUtta0VyS2FWcFVG?=
- =?utf-8?B?MFpGTCtsbXBSclNJaXFEd2g5SWxuWFNGZjJuRm5HQmd6TjJDRHFNalZzR3Ax?=
- =?utf-8?B?MGNpTlFNTzZpTndmTmFzL1VpTGZYOFJxd3FWTCt0TUIyVFh5emZIYmNBWUlV?=
- =?utf-8?B?d2Q2QlRPdnpVWmNWUFNaWkJweW1Bb0pQdkJtRGUvYTU2akZHQ2RzYTRsWkpS?=
- =?utf-8?B?V2txQUtwWVNJOGd3U2ZDKzBzREJkK2E2TkFyRE5OL0NWYWJhVjQwWWJyTnJn?=
- =?utf-8?B?MFZFWWZldHNjdDVhbDNiQmlwRG1xSk53NXdkUmsvaTlsZEREZFIxd284dUJ5?=
- =?utf-8?B?SmlXU0hMYjkvSVh5WlUrTkhJOE0vZDVncFE0ejk4Z2VyUGVmalQ2ZXR6OE1G?=
- =?utf-8?B?MVBkanZJTnZXckUyMjg2Rmk2aW9lY3h2c0tkckR3MmplMTVHSXhORDdXQm4r?=
- =?utf-8?B?Vzhrc2I5bnlmTXFsMDR0YngyenMwd3VjSFhGcnRVbjRzNm5rdkJWR2w3NUhG?=
- =?utf-8?B?Yy9VdkJlTUdMSmI1ekc0dkE0N1JlR1JnM0FSdHRGZ24rOE1CRVE1R2VCSFRa?=
- =?utf-8?B?a2FQeU42UUZyS3RONGxkQWJGTjhKRVh6R3FaN1N5MFE5Uy81b3ZrQk1wOURE?=
- =?utf-8?B?SDhBU1VUZTdNNE1wY2xNUVJ5MTJkSTI0d1FCRE9KS1JPcmdtMjFtY1lObWZ5?=
- =?utf-8?B?clB0MEtPc05TbG8rMGxrUTZ0aXovRWVzMHZ1c2hPVXhWRHhaSGh1UE1LbGk1?=
- =?utf-8?B?UTlhK1RzdjdPTWJyWkdzNk8wZVgweFFvVHRFdjlCZzlsTHRScXQyemFncWhQ?=
- =?utf-8?B?b0ZwTDNndE8ya0M5YmtoZHNsRkxOWDVyUWlmVWNqSUdqZUdINXBJNEl6S0pD?=
- =?utf-8?B?TjNxN1RQV1VUaGFiOTBCOUpSK1AzVG5ZcDZCdUQ2blN6YVdYK2R2T2xVWGJ4?=
- =?utf-8?B?RTk3UE9qZ3AwdCtQcGMxVWttUjdwWHorYXNySTh3M0pscURQdzlpRENtRHBp?=
- =?utf-8?B?SmFqMzVsWVAvck1KKzJmNC8xYmhObFRpYVBQektWWEI4RWtHTkRrdERweGNi?=
- =?utf-8?Q?MGiAArtBhEVmBslXog=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eVRlTXE2TWlTME9Cald0YzR2eUE4ZEhYRGJsbXF2UTNaNWJseC9wUzBHUExQ?=
- =?utf-8?B?S21Ga2RXQjBqamRqMlN5cnNWRDdJUHJXazZFTkpmSDlqUWtOZDRJZ2l5TG9X?=
- =?utf-8?B?TzNrWVdrMEpRRkxkQXVaOUwyQ0FGQTZaN2xjNjhVa3M4c0duanIvSnU4Slg2?=
- =?utf-8?B?VkxaUm1rRm5nUllNLzdMSFRXVUNBbzBreGFTTkNaTnNJSElxd2J4MjR5V1NP?=
- =?utf-8?B?aFpqbXRMWHhBUTJ3blNLeHJsN2dFd2xrUnk4c3dDUU1CZWl3WXJBQldOK1NS?=
- =?utf-8?B?MXRuT0t4TmFvc2RnSWdwUGVMcnBpVlNCQWpBYTMwQ1dTNmxETW1xdWFmMjgv?=
- =?utf-8?B?aUx6UERhbjAwR3pMMUlrdWVtY0hwUXRaaHE0ZXlsdzNWNVpHL2NEY0NuQVFN?=
- =?utf-8?B?dVFpeXdTSXl0SGIvZ0tjaTUrTWhkM052dk12c3dTZzBHbW4yaXdoL3pxQjZm?=
- =?utf-8?B?bXZFcjhwK2syaGlnejBIanhQb2dsU1NKRzJVOUoyMFYzSGhVaXp3dEg2c01E?=
- =?utf-8?B?V0VXUGdJUUE2N1JGRHZ5RUdSdXN5MENvOVQ4ZlB0SmlqenNyWDdkNXVoRFNK?=
- =?utf-8?B?MFBmdUJoM3RUR1Y4TkhFd0k1a3EvMDZtU1I5SGRSeVhoaXlZL3RUSTVFTVBy?=
- =?utf-8?B?VDBXYjdrSWZreUN1OEFNT3dpZU1mY0RWRjlGRjhuMXdhVk9kclFCNXlQcWlI?=
- =?utf-8?B?cnNKekk2d011NHVDSDFEOUR4bExUUExLSHRDQTJIZTBGUTQ1S2tEek16SFVp?=
- =?utf-8?B?TlR5SjdtUWp0NndrdGRvaGszanFzYWNwUm5halYwWCs3VUJLNVNLb01FeWlz?=
- =?utf-8?B?Z2ZSTTNSU2hOV2FLYjFUUlRQeFcxMFFvSHFsRW5nVldxTis1RzVUMzg3WWpE?=
- =?utf-8?B?OUcxZG5PSG96RklyNy9zK3FmYTFYRzE3M1Via1FQbGJzZWxadVBOdVg5YTBm?=
- =?utf-8?B?OU0vRlRUNDg3NHBuUC9GU2x5WXY0VnAyMnJhZnc3TW44QlFIYUVpbDVqdEVC?=
- =?utf-8?B?eFpqako2cnpiSmU2eWoxN0RIOXNiR2ZkR3d1cmRPZzdkZ1BjVnQxckplbEVN?=
- =?utf-8?B?bHZRUzFwMmVvZHhmeStnWVVkN2djd3RrR3UyQkNnZzhXaE1GcVBYSDdwRFN2?=
- =?utf-8?B?L090c2ZGTHc3OEFpcDAxTjlXeG9JNXAyVGdmMkhUSmhJeTUxYTBsNEdtL3lz?=
- =?utf-8?B?dHdMZGFOcHkxN20vRXgrZ0ZnNmR2NUEvZHppNFUrY05Fc1BEYjFDUlk3MFo3?=
- =?utf-8?B?T0xlTno4WkZyNWZXdWk0QWpFS2hSODlFcVNQT3FTN3h0RWU2MkxmWi8rTlJF?=
- =?utf-8?B?bG5Md21JMGhJMVdjcWlLRlN1VkhjcTZ1RzdkRGY0WnBkK2UwZkJzZ3JwRXFo?=
- =?utf-8?B?b0pZSzVYelA1SWJRN1liNHB3TzhZWm9UeWNwaVBqYldLcmsyeGgzYVJkT1l1?=
- =?utf-8?B?UktBRFdpNk1TRWl2ZXlWVDBTZ3JoQlBMT3pleWxpQzFNUnFjcXMyelBGSHVq?=
- =?utf-8?B?SVFxeGg3SHRIR3lnaUNGR09xUDBTeU9nU0c2cy9sYVJ1aDRnT1pnRDBvdUdj?=
- =?utf-8?B?Z3YyNzRjdzZzY1lnTGdUcm9lN3FFU1ZrT0lBUzlEbTVLUGpXSEIyTTJJRUVs?=
- =?utf-8?Q?sMq6D91BCCqIJa1GBEjcwsffs4j/LM+KruVOyB4N2ptY=3D?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-e7640.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5df986f-5794-49b0-549b-08de3e018255
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 06:48:54.2190 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P194MB0587
-X-Mailman-Approved-At: Thu, 18 Dec 2025 13:13:57 +0100
+X-Mailman-Approved-At: Thu, 18 Dec 2025 13:14:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,27 +110,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If memory allocation for verify_buf fails, then one
-needs to make sure that memory allocated for buf is
-released.
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
----
- cmd/onenand.c | 1 +
- 1 file changed, 1 insertion(+)
+On 12/18/25 11:59, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> CMD_NET_LWIP has never existed so it cannot be right. I'm guessing the
+> intent was to allow print_eth() to be called when NET_LWIP is defined
+> (NET means "legacy networking stack" as opposed to NET_LWIP which is the
+>  newest (and incompatible) stack). There probably was some mix-up
+> between CMD_NET and NET options.
+> 
+> The dependency on CMD_NET seems unnecessary as it seems perfectly fine
+> to run bdinfo without CMD_NET (build and run tested). So let's instead
+> make the dependency on NET || NET_LWIP.
+> 
+> Let's sync the unit test as well.
+> 
+> Fixes: 95744d2527cb ("cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Changes in v2:
+> - fixed unit tests for the bdinfo command,
+> - Link to v1: https://patch.msgid.link/20251217-bdinfo-lwip-v1-1-849cf060bf12@cherry.de
+> ---
+>  cmd/bdinfo.c      | 6 +++---
+>  test/cmd/bdinfo.c | 4 ++--
+>  2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/onenand.c b/cmd/onenand.c
-index 6e808ce3fce..90f4f52f4af 100644
---- a/cmd/onenand.c
-+++ b/cmd/onenand.c
-@@ -236,6 +236,7 @@ static int onenand_block_test(u32 start, u32 size)
- 
- 	verify_buf = malloc(blocksize);
- 	if (!verify_buf) {
-+		free(buf);
- 		printf("Not enough malloc space available!\n");
- 		return -1;
- 	}
+
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Thanks,
 -- 
-2.43.0
-
+Jerome
