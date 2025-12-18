@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08723D6ACD5
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 09:13:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62F4DD6ACD4
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 09:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A62E83C54;
-	Thu, 18 Dec 2025 10:13:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 83BC583C2B;
+	Thu, 18 Dec 2025 10:31:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xpg3A8QP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZKH7uw0N";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YIK522ND";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9476D83CAA; Thu, 18 Dec 2025 10:13:11 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9C35083C54; Thu, 18 Dec 2025 10:31:20 +0100 (CET)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEE3A83C2B
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 10:13:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED17483936
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 10:31:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dX4hN2hS3z9tHg;
- Thu, 18 Dec 2025 10:13:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766049188;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qf9LVesuPVduFcEa78XOJlJs/qX1Kr43H/XPsPIeK9o=;
- b=xpg3A8QPbnVZlDm7nTvaSRv9+4IymcPuCk2Uzik1LwAYHhfDsZ7Q1SkO0vtcyW+qKPE340
- ExPO6OSxzkCRqPSMswiZOjl3rQseH5QWeMsAf/yoPQhAJe2f5pzXieGHB80e7XjFf1hJAH
- q4Tf96Pje2zenJuypknetk6bGft9xT+FUXrr19jg+wMK0yamM3WjcNXPg4z7r4u1F5cKp+
- yO8YUUedRg9QP/hes9QwaeE3mfNEo5gAY0bwHii9YwyYwoPFsKcM5SsV+Z4jx/RfXqCMlB
- Wi2rMcW+8FotGvIGVKnh6/84nvZV5vwXOHco83Skz8fTk1oDjVBIW06EQAdp4Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ZKH7uw0N;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <93f17cf0-542c-4c0c-a97f-40dd328afd5d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766049186;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qf9LVesuPVduFcEa78XOJlJs/qX1Kr43H/XPsPIeK9o=;
- b=ZKH7uw0N6VIz3rBxsREiyZ5cgSjNZkvsbdDS0IcBV9FlW42kqG1cl10xSSU3PncFlWGB05
- WygdHF39fJ7EFZewvhx1txO7/caAv8h27VVShsP41HJTQd2qZgPoqeiqMIecSbRvfMpwJG
- LT1t42Ivbb3AAZ/dQK2MaTMA1GEDtuJ/Qjte4JgrK5hcTb0ZqKf0+rxaQrdBIZVu8vpPs4
- 4sdf9E2ClewIn+jjqSpxd+Nql4V4rThXVeO8H8NR3evSMpZaHK1ZGg1ykh7XRpFfm6fcjD
- YpINNhIo0Ow2gO7jGRae3VOxQqIVQ9DmA3GOmm65KmxgsbD4coT5hQSnXo/efA==
-Date: Thu, 18 Dec 2025 10:13:02 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-6446fcddf2fso370665d50.0
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 01:31:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1766050276; x=1766655076; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qbuZIPBoa4IY19OhiDY4ijFUVIx6W7PGvaAsQ958CAY=;
+ b=YIK522NDzryxyJMhz64Mb314zhhF61l1Ckcf9WUb/NRhkyMNGMisjV+wjGv4qPwak8
+ eewAwTSTW1Phec3Lby07n8eqgALqM0uUNEfWD/lU0kue08kfGAEmtr/FB4e0WKuCozrj
+ CeCKgKj8WGbaL8BNEVaHhIHIRB/SAVYuvzy3pDorXKS2IoGGO2tjyI9iokLP+dMiH4au
+ Qm8br2PP6kJnU/iBndL5kO+MnAR+hOhCvJIoj4IW8bBIfyEO3sXyD9eIsnBI1LELAmDE
+ 0MfrnuXmg/qtyjUkuB4aRF5w95TrL7BLDZIVgaSSCwXfTNUj+3Cd0go8bUuTbnu4r3az
+ mhHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766050276; x=1766655076;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=qbuZIPBoa4IY19OhiDY4ijFUVIx6W7PGvaAsQ958CAY=;
+ b=ev3oaAFJRVHPXL0h8I37z54OgynVwfgTpjapKEUkDSmX88/Q/qiOMcAurMG8Rjc7v+
+ XyTWNINwAcRaXEPnUlI/yBPJF2anwv4IDDrzZxnUVRE5lepjLbnqdM6yleV/rpxwY2RA
+ Exf1XQaC8EVWOcmWg68RiqPh7+sQTMV3OGucmZzMqoAV++LmRAVlLvxcE/Oth9M2toQl
+ wCrvizvKPIE+JI9PXyk9JfCVGv6m0lm6kDTyE8Votnjz6ncSNy5z+aPW5tx5Opttk++S
+ YUe7rUnINtQAKRf3jT7/NSJfqCU1D9C3SfzXm4iqxWChl3CKKmbYAK+1Sqyeon3JORKk
+ igfw==
+X-Gm-Message-State: AOJu0Yyi6S15ZgZYHe59cyw+4vmtj1evTOHOkWXXEfE0Vs2R+oFSbeRn
+ yPqV3PUZwijJWE20Yd7I6KafVm8KqFjO/AzAHEH2ROMvJaWXsRSrKFamiNtfQsxC2dWl62CrTPg
+ kLnbThan98/4dNzl4Sg55wd/zmxAIoarXtJn7MoKkGA==
+X-Gm-Gg: AY/fxX4YowXd2Tsf0W7NjohwyIf0gkHRrFuYXgJOq7+rksJ58EdiRt0zJJBpX9phgvI
+ Obow1LNnt3k4e/wGX5Yp9l7Cdot7VxATTwA5ahkVl0oDfLNjq+9UqI/X4WbJ5td0HCDN6JOM1HW
+ P2fEj28f1UYzb0WZVbz6POFjNCXU/LtKgIVbpoXDSAEQ99dutzgu2XKiSXpWZqIzpMqb4nKQp6q
+ 28i65q1nlikh6fhs55/ZEgBdstq5ySkQN+LeGuu8VcUs9UE+fw3Rhxo+MsaygQ/x9wvETbfK9ga
+ tT7LB9VJotfoR7gFRacsUafOpVRpV5GYD12o54vcQY+GqvUg5rOk369Hvf8h7DTSX9K0uzlppyy
+ bpMyDZHTgHiMzuEknisKDa2kPPplCyooJBUrVVeBXMdN3TzPoCxrSbkBIz6zl1NquOoHDGuaBlF
+ ZHq0UZ1ADbamu2xU6KJd6BRzqGJBiLfEBaIsnqQzC2+qfFU9KYteTwhNJXOeCMJWl5E9PBke+nE
+ 3RFxqaF/OsqkbIbCWRA+WZhuA30QHxXUm/qHSWxDvk97DarGGSw9P+UZ6gc939TK6kPdAHaGx4L
+ TVHwXc9UyylPmGwQhm9Db60+PFBni+8=
+X-Google-Smtp-Source: AGHT+IFujo7cSq8p9/WBcrkD3T88HwelMyESE7QHh7VPgXWCQNaCBXwso/BRZo+cZYUvnvIf1XQLmUe3Vt8jgbFCPUc=
+X-Received: by 2002:a05:690e:191a:b0:641:718:8a04 with SMTP id
+ 956f58d0204a3-64555643613mr15917988d50.56.1766050275644; Thu, 18 Dec 2025
+ 01:31:15 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 2/3] clk: scmi: Fix priv initialization in
- scmi_clk_gate()
-To: Patrice Chotard <patrice.chotard@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>
-References: <20251218-sqqs-v4-0-ff95bf2062ab@foss.st.com>
- <20251218-sqqs-v4-2-ff95bf2062ab@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251218-sqqs-v4-2-ff95bf2062ab@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 1ea47b4464eab0e0e86
-X-MBO-RS-META: eo43pjyehm7ynwiu6kz4dk9pneg1hisz
-X-Rspamd-Queue-Id: 4dX4hN2hS3z9tHg
+References: <20251217195811.754518-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251217195811.754518-1-marek.vasut+renesas@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 18 Dec 2025 11:30:39 +0200
+X-Gm-Features: AQt7F2qeZHfnfhyzpv4h2ZEy0msf_HmUnoczTQ9-trTPK3lr0t93cRO92lZJtYM
+Message-ID: <CAC_iWj+Z577Z2cXbCahAENpNnmZ+unx+fSLGuZ6yr9Zyp6a+iQ@mail.gmail.com>
+Subject: Re: [PATCH] cmd: nvedit: Validate argument count before use
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Patrick Delaunay <patrick.delaunay@st.com>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,69 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/25 9:26 AM, Patrice Chotard wrote:
-> In scmi_clk_probe(), in case of CLK_CCF is not enabled, parent private
-> data is not set, so in scmi_clk_gate(), an uninitialized priv struct is
-> retrieved.
-> 
-> SCMI request is performed either using scmi_clk_state_in_v1 or
-> scmi_clk_state_in_v2 struct depending of the unpredictable value of
-> priv->version which leads to error during SCMI clock enable.
-> 
-> Issue detected on STM32MP157C-DK2 board using the SCMI device tree
-> stm32mp157c-dk2-scmi.dts.
-> 
-> Fixes: 0619cb32030b ("firmware: scmi: Add clock v3.2 CONFIG_SET support")
-> 
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+On Wed, 17 Dec 2025 at 21:58, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> Avoid NULL pointer dereference in case 'env select' is invoked
+> without parameters, check the arg count and make sure it is at
+> least 2, otherwise print usage.
+>
+> The crash is easy to trigger e.g. in sandbox:
+> $ ./u-boot -Tc "env select"
+>
+> Fixes: a97d22ebba23 ("cmd: env: add env select command")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Alice Guo <alice.guo@nxp.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Patrick Delaunay <patrick.delaunay@st.com>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Valentin Caron <valentin.caron@foss.st.com>
-> Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+> Cc: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
 > Cc: u-boot@lists.denx.de
 > ---
->   drivers/clk/clk_scmi.c | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-> index f6132178205..a4fc4f8da89 100644
-> --- a/drivers/clk/clk_scmi.c
-> +++ b/drivers/clk/clk_scmi.c
-> @@ -137,7 +137,7 @@ static int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name,
->   
->   static int scmi_clk_gate(struct clk *clk, int enable)
->   {
-> -	struct scmi_clock_priv *priv = dev_get_parent_priv(clk->dev);
-> +	struct scmi_clock_priv *priv;
->   	struct scmi_clk_state_in_v1 in_v1 = {
->   		.clock_id = clk_get_id(clk),
->   		.attributes = enable,
-> @@ -156,6 +156,16 @@ static int scmi_clk_gate(struct clk *clk, int enable)
->   					     in_v2, out);
->   	int ret;
->   
-> +	/*
-> +	 * In scmi_clk_probe(), in case of CLK_CCF is set, SCMI clock
-> +	 * version is set in dev's parent priv struct. Otherwise
-> +	 * SCMI clock version is set in dev priv struct.
-> +	 */
-> +	if (CONFIG_IS_ENABLED(CLK_CCF))
-> +		priv = dev_get_parent_priv(clk->dev);
-> +	else
-> +		priv = dev_get_priv(clk->dev);
-On your hardware, do you have CCF enabled or not ?
-
-What does this print output if added here ?
-
-printf("clk->dev->name=%s clk->dev->parent->name=%s\n", clk->dev->name, 
-clk->dev->parent->name);
-
-I think it should be something like this:
-
-clk->dev->name=scmi-325 clk->dev->parent->name=protocol@14
+>  cmd/nvedit.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+> index 11c3cea882b..636bddee1be 100644
+> --- a/cmd/nvedit.c
+> +++ b/cmd/nvedit.c
+> @@ -499,6 +499,9 @@ static int do_env_load(struct cmd_tbl *cmdtp, int fla=
+g, int argc,
+>  static int do_env_select(struct cmd_tbl *cmdtp, int flag, int argc,
+>                          char *const argv[])
+>  {
+> +       if (argc < 2)
+> +               return CMD_RET_USAGE;
+> +
+>         return env_select(argv[1]) ? 1 : 0;
+>  }
+>  #endif
+> --
+> 2.51.0
+>
