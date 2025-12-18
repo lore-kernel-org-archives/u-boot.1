@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DDBBD6ACE4
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 11:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D551D6ACE6
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 11:17:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67A9783D00;
-	Thu, 18 Dec 2025 12:17:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AE0FF83D71;
+	Thu, 18 Dec 2025 12:17:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="FFl2ZiP1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Srzte9aY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCFE983D77; Thu, 18 Dec 2025 12:17:11 +0100 (CET)
+ id D6F0683DA8; Thu, 18 Dec 2025 12:17:12 +0100 (CET)
 Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
  [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AA8883D77
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 12:17:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E1D083C54
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 12:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
 Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4775e891b5eso2078675e9.2
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 03:17:09 -0800 (PST)
+ 5b1f17b1804b1-4779cc419b2so3482715e9.3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 03:17:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766056629; x=1766661429;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766056630; x=1766661430;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CBwiaKkvO5eXDRopF8AQNlDioUaSlMXOzj94JLV1Qtw=;
- b=FFl2ZiP15/aRmFy6RKaK6chYHWEA1HBweN7rMwrnTV4X3R1LAkHDmMdyEWc0iYghXj
- 2Rj57p1Vs64si0feN3upahtxbLANJrg6rSGAntjF4O0pDBg3NjddcizfKzhJ3J9MopE8
- JhG0RZD6tjACN0tGju4KJUzW6m5Rc7ra3s/zhqBlKnvhw/LJy/7/+eVjMm78gv4vwHjQ
- VMJNz0z/fSuZPoa9n2OtjbNSt9RQdoQkKOj/vENWiW41AqULNuvbViFupL4c5+Zr509h
- 2CqwPH3cj9c81zXQwtHXdR+iWHoj2dw2XH/+Zu1mceVdqwxtmipRV2+c3ehsJUM/JRUg
- xpBQ==
+ :reply-to; bh=BiLBQtc68JLc4djYm1anPNIWN1eh6hnbQf51fNuoAVE=;
+ b=Srzte9aYX2Mu4TBa5fVtPJgpzdnvX3lJSjFiLPHVKeAkILRTjASYp5/yIc0iLIIFp1
+ gEHzO9ZvSeCYJwgB+/QTfmbbNzEzJ3Uny1x/ZcPzGvnOE/Lz2wsTP8lmskg0KJ9hvldk
+ fMSt5XWxiIj05bRSzOM1s7M2wTzAb0nN3wCnwfFI5kCHJcYJ/CqwDG2ZrZZkFtacztnA
+ 8MfeQ6ZbpD8jj3ulHvzyGgoPUfXpVZwI1JLQhDSwrjDCi7ePSbyTcsunoTnofAUamtH2
+ qMQtYKoULaaVq4DxzgKeeg4GY1sQYzGYnOngnc6lIaqdKs8pXR41K5vOmimqII9IE+rU
+ zP0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766056629; x=1766661429;
+ d=1e100.net; s=20230601; t=1766056630; x=1766661430;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CBwiaKkvO5eXDRopF8AQNlDioUaSlMXOzj94JLV1Qtw=;
- b=HFGaeiuF1DBhkbZD5/AQNol6dqbJsf5VtgBeYz7lWnQJS0oh4MN8/iatHajF71ftay
- 2we/VY/gh6uzEpIGPQIpKAZyzAin0qDT9GHFPt5JXSIEwyCLXMV4PBqMhnsr6IJ2lY+1
- U3sYhn8gv1oF0Dy0RsY7X8un5hB6pnt4bzHHZcJ0eqawfSJSmrhTYB3qNErBg3O0gcC7
- DiSyc/aBiZLbuJVtf96rJx6abOwsXFGmWRx4u0pXXWlMO31aDE1WbMAWa5yS+ZFXhpkp
- t0XOKli7xjbElIlEX3ypNLc3S7X23OUVNCIA/G9TpyJPgQwGh5iZNoY2gOFAJwCtnYiY
- +50w==
+ bh=BiLBQtc68JLc4djYm1anPNIWN1eh6hnbQf51fNuoAVE=;
+ b=tKWwx/OkNhGwuC5PP9Lto+zEGY5Dkl4fA4L3s9i39SYBdn7F/4OKhLtiyFUPhokYHj
+ oHoO7kvFm3W7DBqeyfmFn9hSoFnWJUUjV0hXGsYn+YyxilaFocflfnpuMKvp0AmLIr1r
+ N7HTF1s6fyrJk09dkqF5UsDmguwJ7PjWcU0Ib1aLuPDBqUsJdpv06aNpsLwDBh/X4cJS
+ toprFTepnYnilK2V7yNZO5+R4c/RUwpU/MuRcjskqbXhsfGAZVswMeTIEVG2kuJmZfqa
+ Fn2SE2OlfUVpBocP3rdoRdP+GysAsZefcr+YVhbqFTXx+KCnxqj0GBfT+CqyG7yBR26f
+ uxoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjElTZcORzBwKW4p8iNwdkJi7m9fiDBgZpcAW5Vq4Gue8j5IIr4Ojdef7mTfn8kIm00CgG1fk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0jQxP9Krd4X7n5T7ExdXGUy+sjXYG0KTWtvqnfbDnFTOeRdLP
- Gfc6rqh3IbXBfYD8MquU4LrXqPPsivlt8x2tB8pBtjHuixVU4QRDvFxaTCYja+zbOu0=
-X-Gm-Gg: AY/fxX4v4GOzoKAiRksq7nD8ruRu1LgzYyCZt5xpAoeHfG92Ft+YCWni0resfGLSRxb
- YfJB9iEfx1Q0SjvxugsPVqKrSCqaC//V5qZjRozfSxDkVheAEE8a7ppR8PQxShe0lnEkhyxTel+
- xcamaErv9dXpf+smW1EGKSZc6B4M/Iu0WN4f1bMPaCV2KXHK02OIQgdnssQab5AjWZ55UAnoQPl
- Deba9HNXSz7GGZt1hiBf4WwvfLKl6bFR6/5MY/XkG7MnsXH0yObCTjIHe2w3GJ19QYCMtY89Ymq
- vuL27mqoWF8DUrdbhPRTOONmYs4Upzfe/DeWz0IIvJF1YWN5IPEdjo2Bp60r4keOuZs3NPwu5UL
- eLPHfOH45VFqhwKE6DVmnRuZxuetjKKu/Vwxi0WzI1eYgAMvksoXKRUYrMYvGIg0RFKLNzbX3TJ
- 67BcaaHFm4FsUKJQ==
-X-Google-Smtp-Source: AGHT+IEG+jrk2MDLw48Yb+qde1p3ZkHbFumfcMUuS+a88umRyUHRFj/Wn27zfZW67IcW4Cq33Te29A==
-X-Received: by 2002:a05:600c:46cb:b0:477:7a78:3016 with SMTP id
- 5b1f17b1804b1-47a8f8a7f0fmr227346215e9.8.1766056628927; 
- Thu, 18 Dec 2025 03:17:08 -0800 (PST)
+ AJvYcCU92OoeWu78RQ4WMANIM2sXnWHyZ/shozdJ/whDfE+XtVmVHEgIGONg9k70lBnSqtCkYjezBds=@lists.denx.de
+X-Gm-Message-State: AOJu0YzurPshKpWsvl7iRxvLWl0FQtiUYm9FEk2Drz0DmmFUugQUhVnL
+ xCsmmYKPCRZScfrF+lfhvu1ZjYJeQs0fnlCh60G4G3NxNeyDLnmW8ug0OzSm6/YJv+0=
+X-Gm-Gg: AY/fxX4wL4hb8i1qAHGPtSpIiLR1ZHNgb7geWREcYU9xJ5g+xsiKSV7sm1cMAVkX63w
+ XLRy9vIX2tFew5aUESXyKfusfeoocwJM3GwsWZeXga9TSVOwvG2W/uhBSSv7puGSCdnsLCOJrwo
+ 9WHpvpZ1wP3EkI4ah/PI9kEHBHFAzmPMFyuKifjrzQ2IXSfJZjf9MMwE8UBcwbCz2sVYK+W7cdP
+ u9QoUFsO0mPlwaBcICkINUtd48ttnkqOAIp0CPmGXWOk8cWvY7WtsIBMI5BLYWnr17SZbphiqPJ
+ CgNvAw0yfNDESXAH7Cnsb1f7Hlg/xvuld/R9dDqB1CO8wTr8/Xb19cwTC4s4hkfiPvUboCH6enu
+ aXGXQoao8m2G6o5491cKsMVvbCQPYmx4Nv31UBjCJkam9qhjKXmcGFhQCzc3av0zz75smhGTE4x
+ yh0yfTj1zWJNKntA==
+X-Google-Smtp-Source: AGHT+IEZKuG46QUDa2aiwNOpIDkLxnlPR5RsnmyIIb4aP9K1LRhFR75ZZoyb7IJKNZAgZ44kTxCqUA==
+X-Received: by 2002:a05:600c:3146:b0:479:3a88:de5f with SMTP id
+ 5b1f17b1804b1-47a8f9174f3mr194719265e9.36.1766056629912; 
+ Thu, 18 Dec 2025 03:17:09 -0800 (PST)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860:3734:1277:36b8:3f57])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be273f147sm38070965e9.7.2025.12.18.03.17.07
+ 5b1f17b1804b1-47be273f147sm38070965e9.7.2025.12.18.03.17.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 03:17:08 -0800 (PST)
+ Thu, 18 Dec 2025 03:17:09 -0800 (PST)
 From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Thu, 18 Dec 2025 12:16:57 +0100
-Subject: [PATCH v4 2/5] boot: android: Add sandbox memory mapping support
+Date: Thu, 18 Dec 2025 12:16:58 +0100
+Subject: [PATCH v4 3/5] boot: android: Add bootconfig support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251218-bootconfig-v4-2-5bbbdb0be1dc@baylibre.com>
+Message-Id: <20251218-bootconfig-v4-3-5bbbdb0be1dc@baylibre.com>
 References: <20251218-bootconfig-v4-0-5bbbdb0be1dc@baylibre.com>
 In-Reply-To: <20251218-bootconfig-v4-0-5bbbdb0be1dc@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -111,134 +111,215 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use map_to_sysmem() to convert header pointers to physical addresses
-in parse_hdr functions, and add proper map_sysmem()/unmap_sysmem()
-calls in android_image_get_data() for sandbox compatibility.
+For android vendor boot image version 4 bootconfig is mandatory.[1]
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+In the android_image_get_ramdisk function, after copying both vendor and
+boot ramdisks, we extract all androidboot.* entries from the kernel
+command line. These entries are added to the bootconfig section.
+We then update the sizes of the ramdisk and bootconfig.
+Finally, all androidboot.* entries are removed from the kernel command
+line.
+
+[1] https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions#bootloader-support
+
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- boot/image-android.c | 41 ++++++++++++++++++++++++++++-------------
- 1 file changed, 28 insertions(+), 13 deletions(-)
+ boot/image-android.c | 174 +++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 163 insertions(+), 11 deletions(-)
 
 diff --git a/boot/image-android.c b/boot/image-android.c
-index 877cd39fbef..48886f39e4c 100644
+index 48886f39e4c..76600aec863 100644
 --- a/boot/image-android.c
 +++ b/boot/image-android.c
-@@ -114,7 +114,7 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
- 	 * The header takes a full page, the remaining components are aligned
- 	 * on page boundary.
- 	 */
--	end = (ulong)hdr;
-+	end = map_to_sysmem(hdr);
- 	end += ANDR_GKI_PAGE_SIZE;
- 	data->kernel_ptr = end;
- 	data->kernel_size = hdr->kernel_size;
-@@ -127,7 +127,7 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
- 	if (hdr->header_version > 3)
- 		end += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
- 
--	data->boot_img_total_size = end - (ulong)hdr;
-+	data->boot_img_total_size = end - map_to_sysmem(hdr);
+@@ -505,6 +505,166 @@ ulong android_image_get_kcomp(const void *hdr,
+ 		return image_decomp_type(p, sizeof(u32));
  }
  
- static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot_img_hdr
-@@ -146,7 +146,7 @@ static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot
- 	data->ramdisk_addr = hdr->ramdisk_addr;
- 	data->dtb_load_addr = hdr->dtb_addr;
- 	data->bootconfig_size = hdr->bootconfig_size;
--	end = (ulong)hdr;
-+	end = map_to_sysmem(hdr);
- 
- 	if (hdr->header_version > 3)
- 		end += ALIGN(ANDR_VENDOR_BOOT_V4_SIZE, hdr->page_size);
-@@ -167,12 +167,16 @@ static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot
- 	end += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
- 	data->bootconfig_addr = end;
- 	if (hdr->bootconfig_size) {
--		data->bootconfig_size += add_trailer(data->bootconfig_addr,
-+		void *bootconfig_ptr = map_sysmem(data->bootconfig_addr,
-+						  data->bootconfig_size +
-+						  BOOTCONFIG_TRAILER_SIZE);
-+		data->bootconfig_size += add_trailer((ulong)bootconfig_ptr,
- 						     data->bootconfig_size);
-+		unmap_sysmem(bootconfig_ptr);
- 		data->ramdisk_size += data->bootconfig_size;
- 	}
- 	end += ALIGN(data->bootconfig_size, hdr->page_size);
--	data->vendor_boot_img_total_size = end - (ulong)hdr;
-+	data->vendor_boot_img_total_size = end - map_to_sysmem(hdr);
- }
- 
- static void android_boot_image_v0_v1_v2_parse_hdr(const struct andr_boot_img_hdr_v0 *hdr,
-@@ -187,7 +191,7 @@ static void android_boot_image_v0_v1_v2_parse_hdr(const struct andr_boot_img_hdr
- 	data->header_version = hdr->header_version;
- 	data->dtb_load_addr = hdr->dtb_addr;
- 
--	end = (ulong)hdr;
-+	end = map_to_sysmem(hdr);
- 
- 	/*
- 	 * The header takes a full page, the remaining components are aligned
-@@ -220,7 +224,7 @@ static void android_boot_image_v0_v1_v2_parse_hdr(const struct andr_boot_img_hdr
- 		end += ALIGN(hdr->dtb_size, hdr->page_size);
- 	}
- 
--	data->boot_img_total_size = end - (ulong)hdr;
-+	data->boot_img_total_size = end - map_to_sysmem(hdr);
- }
- 
- bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size)
-@@ -271,31 +275,42 @@ bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img
- bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
- 			    struct andr_image_data *data)
- {
-+	const struct andr_boot_img_hdr_v0 *bhdr;
-+	const struct andr_vnd_boot_img_hdr *vhdr;
++/**
++ * android_boot_append_bootconfig() - Append bootconfig parameters to ramdisk
++ * @img_data: Pointer to Android image data
++ * @params: Pointer to boot config parameters to append
++ * @params_len: Length of boot config parameters
++ * @ramdisk_dest: Destination address for the merged ramdisk
++ *
++ * This function copies the vendor ramdisk, boot ramdisk, and bootconfig to
++ * the destination. It then appends the provided bootconfig parameters.
++ *
++ * Return: Bytes added to the bootconfig on success, negative on error.
++ */
++static long android_boot_append_bootconfig(const struct andr_image_data *img_data,
++					   char *params, long params_len,
++					   void *ramdisk_dest)
++{
++	void *vendor_ramdisk_src;
++	void *boot_ramdisk_src;
++	void *bootconfig_src;
++	long bytes_added = 0;
 +
- 	if (!boot_hdr || !data) {
- 		printf("boot_hdr or data params can't be NULL\n");
- 		return false;
- 	}
- 
--	if (!is_android_boot_image_header(boot_hdr)) {
-+	bhdr = map_sysmem((ulong)boot_hdr, sizeof(*bhdr));
-+	if (!is_android_boot_image_header(bhdr)) {
- 		printf("Incorrect boot image header\n");
-+		unmap_sysmem(bhdr);
- 		return false;
- 	}
- 
--	if (((struct andr_boot_img_hdr_v0 *)boot_hdr)->header_version > 2) {
-+	if (bhdr->header_version > 2) {
- 		if (!vendor_boot_hdr) {
- 			printf("For boot header v3+ vendor boot image has to be provided\n");
-+			unmap_sysmem(bhdr);
- 			return false;
++	/* Map sources */
++	vendor_ramdisk_src = map_sysmem(img_data->vendor_ramdisk_ptr,
++					img_data->vendor_ramdisk_size);
++	boot_ramdisk_src = map_sysmem(img_data->ramdisk_ptr,
++				      img_data->boot_ramdisk_size);
++
++	/* Copy Vendor Ramdisk */
++	memcpy(ramdisk_dest, vendor_ramdisk_src, img_data->vendor_ramdisk_size);
++
++	/* Copy Boot Ramdisk */
++	memcpy((char *)ramdisk_dest + img_data->vendor_ramdisk_size,
++	       boot_ramdisk_src, img_data->boot_ramdisk_size);
++
++	/* Copy Bootconfig and Append Params */
++	if (img_data->bootconfig_size) {
++		bootconfig_src = map_sysmem(img_data->bootconfig_addr,
++					    img_data->bootconfig_size);
++		memcpy((char *)ramdisk_dest + img_data->vendor_ramdisk_size +
++		       img_data->boot_ramdisk_size,
++		       bootconfig_src, img_data->bootconfig_size);
++		unmap_sysmem(bootconfig_src);
++
++		if (params && params_len > 1) {
++			void *bootconfig_ptr = (char *)ramdisk_dest +
++					       img_data->vendor_ramdisk_size +
++					       img_data->boot_ramdisk_size;
++			bytes_added = add_bootconfig_parameters(params, params_len,
++								(ulong)bootconfig_ptr,
++								img_data->bootconfig_size);
++		}
++	}
++
++	unmap_sysmem(boot_ramdisk_src);
++	unmap_sysmem(vendor_ramdisk_src);
++
++	if (bytes_added < 0)
++		return bytes_added;
++
++	return bytes_added;
++}
++
++/**
++ * android_image_set_bootconfig() - Extract androidboot.* args and append to bootconfig
++ * @hdr: Pointer to boot image header
++ * @vendor_boot_img: Pointer to vendor boot image header
++ * @ramdisk_addr: Destination address for the merged ramdisk
++ *
++ * Return: Size of the bootconfig section (including new params) on success, negative on error.
++ */
++static long android_image_set_bootconfig(const void *hdr,
++					 const void *vendor_boot_img,
++					 ulong ramdisk_addr)
++{
++	const char *bootargs = env_get("bootargs");
++	char *params = NULL;
++	char *new_bootargs = NULL;
++	long params_len = 0; /* Renamed from androidboot_params_len */
++	struct andr_image_data img_data;
++	long ret;
++	size_t len;
++	const char *src;
++	char *bc_dst;
++	char *args_dst;
++	ulong total_size;
++	void *ramdisk_dest;
++
++	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
++		return -EINVAL; /* Use errno */
++
++	/* Extract androidboot.* parameters from bootargs */
++	if (bootargs && img_data.bootconfig_size) {
++		len = strlen(bootargs);
++		src = bootargs;
++
++		params = malloc(len + 1);
++		new_bootargs = malloc(len + 1);
++		if (!params || !new_bootargs) {
++			free(params);
++			free(new_bootargs);
++			printf("Error: malloc failed\n");
++			return -ENOMEM;
++		}
++
++		bc_dst = params;
++		args_dst = new_bootargs;
++
++		/* Extract androidboot.* and build new bootargs in one pass */
++		while (*src) {
++			/* Skip leading spaces */
++			while (*src == ' ')
++				src++;
++			if (!*src)
++				break;
++
++			/* Check if this param starts with androidboot. */
++			if (strncmp(src, "androidboot.", 12) == 0) {
++				/* Copy to bootconfig (add newline if not first) */
++				if (bc_dst != params)
++					*bc_dst++ = '\n';
++				while (*src && *src != ' ')
++					*bc_dst++ = *src++;
++			} else {
++				/* Copy to new bootargs (add space if not first) */
++				if (args_dst != new_bootargs)
++					*args_dst++ = ' ';
++				while (*src && *src != ' ')
++					*args_dst++ = *src++;
++			}
++		}
++
++		*bc_dst++ = '\n'; /* Final newline for bootconfig */
++		*bc_dst = '\0';
++		*args_dst = '\0';
++		params_len = bc_dst - params;
++
++		/* Update bootargs if we extracted any androidboot params */
++		if (params_len > 1)
++			env_set("bootargs", new_bootargs);
++	}
++
++	/* Calculate total size for mapping */
++	total_size = img_data.ramdisk_size + img_data.bootconfig_size;
++	if (params_len > 1)
++		total_size += params_len + BOOTCONFIG_TRAILER_SIZE;
++
++	/* Map Dest */
++	ramdisk_dest = map_sysmem(ramdisk_addr, total_size);
++
++	/* Copy data */
++	ret = android_boot_append_bootconfig(&img_data, params, params_len,
++					     ramdisk_dest);
++
++	unmap_sysmem(ramdisk_dest);
++	free(params);
++	free(new_bootargs);
++
++	return ret;
++}
++
+ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 			      ulong *rd_data, ulong *rd_len)
+ {
+@@ -536,17 +696,9 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 			ramdisk_ptr = img_data.ramdisk_addr;
  		}
--		if (!is_android_vendor_boot_image_header(vendor_boot_hdr)) {
-+		vhdr = map_sysmem((ulong)vendor_boot_hdr, sizeof(*vhdr));
-+		if (!is_android_vendor_boot_image_header(vhdr)) {
- 			printf("Incorrect vendor boot image header\n");
-+			unmap_sysmem(vhdr);
-+			unmap_sysmem(bhdr);
- 			return false;
- 		}
--		android_boot_image_v3_v4_parse_hdr(boot_hdr, data);
--		android_vendor_boot_image_v3_v4_parse_hdr(vendor_boot_hdr, data);
-+		android_boot_image_v3_v4_parse_hdr((const struct andr_boot_img_hdr_v3 *)bhdr, data);
-+		android_vendor_boot_image_v3_v4_parse_hdr(vhdr, data);
-+		unmap_sysmem(vhdr);
+ 		*rd_data = ramdisk_ptr;
+-		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
+-		       img_data.vendor_ramdisk_size);
+-		ramdisk_ptr += img_data.vendor_ramdisk_size;
+-		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
+-		       img_data.boot_ramdisk_size);
+-		ramdisk_ptr += img_data.boot_ramdisk_size;
+-		if (img_data.bootconfig_size) {
+-			memcpy((void *)
+-			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
+-			       img_data.bootconfig_size);
+-		}
++		if (img_data.header_version > 3)
++			img_data.ramdisk_size +=
++				android_image_set_bootconfig(hdr, vendor_boot_img, ramdisk_ptr);
  	} else {
--		android_boot_image_v0_v1_v2_parse_hdr(boot_hdr, data);
-+		android_boot_image_v0_v1_v2_parse_hdr(bhdr, data);
- 	}
- 
-+	unmap_sysmem(bhdr);
- 	return true;
- }
- 
+ 		/* Ramdisk can be used in-place, use current ptr */
+ 		if (img_data.ramdisk_addr == 0 ||
 
 -- 
 2.34.1
