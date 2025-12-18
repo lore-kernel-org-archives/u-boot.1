@@ -4,132 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35ABBD68BDD
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 06:17:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDF5D68BDD
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 06:17:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33DA183CC7;
-	Thu, 18 Dec 2025 07:16:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF29483CEE;
+	Thu, 18 Dec 2025 07:16:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="iPQ35Srj";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fjboCTbv";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gKCodGpk";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JH9KnJsM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF10E83B55; Thu, 18 Dec 2025 07:16:33 +0100 (CET)
+ id 6DA7583B55; Thu, 18 Dec 2025 07:16:37 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5260F83CC7
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:16:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BCD083CE3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:16:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BI1Z80F168160
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 06:16:29 GMT
+ 5BI1YPj54189407
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 06:16:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=AI/EKejlBei
- lOiRSx52YN638I0SlHOkh5rh3MtdLEqY=; b=iPQ35Srjb+ST16YXP+lca21LpAO
- S9sTtMfQXPnEDj6L7BZ8ST2KoKF+FFYnuHg+akIw0erOEnzoOB08hipRHDQVuSPa
- jFx5zmmueLd0cB0QDaFXwL3+lDGFf+j8DFYs9mHMdnfStLaq39Eof9Fx0wu9QMrJ
- Dc9pLqrXxyCSWXMLkw2QPP/fHTr1+YT++brN9yrSRxsYwj28rp2DndHbwAnqZyJD
- 9vebMGW3CulOu0aWeNCnGBYagXYB3aLRcI3ZFKZfKr5xLUTgGcZZmIARzDpqk0pB
- 1hT/S+GASPIgN/KXfzncfrUWFMTYKt9mc6iT4BNsqefYHIhIjXsVnjHmyhA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b45w51152-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=hKwvEqjYm/J
+ uBROJ3kMWVcoO2T9r2D6qTXRDYp6DPE4=; b=gKCodGpko5IMPu8QFf9Z/JNvujF
+ l+AsHL1bSt3g2CfUItjJCESqI8bg9uw5HsRu36F7GO/ke3+9/YRTc79OrSOE3LvH
+ 8GEWlTHCnFVYX1jN1/uFSSrpgzaXekBM+XdDKVHQe2N2ssxEhdRrj8Vp7wwUe/HE
+ 9lLykWBj9pS6lUWO9c+XTiqOH1S9Alhgj11GW/v5UYxO8eCOBfWddpoJ1A9oQ3Cf
+ PztIwcz8HHKkM8X1x42WM4Jt16TNGvWU/3ldoh7ETaZOIGjgTC9evrQyKWCybbWn
+ 3ozOPGNXeCGQV4BhOpM5YnxjUYhCpsr3J5IghGjXLFj4WU4YWAm+aefFYww==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b47pkgqtj-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 06:16:29 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-34c6cda4a92so647015a91.3
- for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 22:16:29 -0800 (PST)
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 06:16:33 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-34c43f8ef9bso1338269a91.1
+ for <u-boot@lists.denx.de>; Wed, 17 Dec 2025 22:16:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1766038589; x=1766643389; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1766038593; x=1766643393; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=AI/EKejlBeilOiRSx52YN638I0SlHOkh5rh3MtdLEqY=;
- b=fjboCTbvMF3+B5DjHZmMbYXWnz0t1bEhjcFpY8qSnjY+qoJsXic5yTLRRoRPCwppwz
- iRR7TyjXbNjUHZzXwI+cqOMkOVrGJTQSqerWhNV+s5TlJeBWRfvP9FruWHHWg91hg+2X
- aD/+MkF6twMuzRjd00akyhsfCsWHF3GVMUMPybstZbDAlDd2sZOiducN8++vJtYSLbI+
- +H9nrJXfrFfHuGtlnehMMcO1vnLfiu3S41M29bGVUS7XoFicOXKkbx7lEdcPQ6HfgBRZ
- cW7fC44EXdsRjADejhuzwXrJUviJgRyX8mAUdl9XakbvDgfGhE1taT8iXkk9XKVsjuxU
- fN9A==
+ :reply-to; bh=hKwvEqjYm/JuBROJ3kMWVcoO2T9r2D6qTXRDYp6DPE4=;
+ b=JH9KnJsMPiLoFNxBi4L4yZfnnEQ21U4mLtutMWiFQSvb3D96++sQ1GDPaM0ewiRSkK
+ luQQfFK3ih5924vfPyBjBdf/W+r4gqFfAxVOXDKeaOZG+f0q5GitrVUdAOP8n8kP4jxy
+ qL5fN7KiotKmQ2zO+XnRhHha0QXemHSpUng6tVx4PzsDgJTpzyoGkGeRXDtyj0AwNnM5
+ 9osKPQpKI/cEdf5HBIgk+0RxE9kBGHWrYTO+xiOgoAeISKPaaRshkauRy42tOaimxOYS
+ rZOJOWDDB6W9f9OWTccZFfHgfg2OqPuUdonJVTtEUqwGo/yP1iU+4quAh0RGkP5pAe0j
+ 8Tpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766038589; x=1766643389;
+ d=1e100.net; s=20230601; t=1766038593; x=1766643393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=AI/EKejlBeilOiRSx52YN638I0SlHOkh5rh3MtdLEqY=;
- b=Du2UYBTqEC6ZjqcGeasyk9Ds4/Dj+R0r3Rk142eMuDh0gePym+DjkOenecmHAszjeF
- HtIzkidliDQn+8ks5KSUpOZTlxJT7Vs8uIPF6z5OIyRr6ybsYexgS99dMWIB3bXdfRoJ
- OYSnOz0pc5AZlnOTHFk1XHIZodAKKDGb1Bwwe0cDqrK0iQei1kTOp2aA2rI5ATOCVZeb
- OLMf1JfnlflTAcGvPqQY23U8I7X2mYtqimmdxGXiRbYBmcHqe85oy8IQbVg/FRAhHK8u
- //fKOO/JqUON4FGDp4ww7J0IivV6q6layGFv0TIjmqc0Ms6akmbSEQWD5rrk6s9e1IBs
- JX0A==
+ bh=hKwvEqjYm/JuBROJ3kMWVcoO2T9r2D6qTXRDYp6DPE4=;
+ b=sPmBOMhzfuR8DRfiRrNoui/AGUlsPZBvwD8KPR2BKudCI+itT2El+ehgj+G475PDQA
+ VD8tdCPJ7LINLesiV8a1jDxq1ZiiON84/9QnODeCkGsUU7lSMlTOTlsOAG5eYshQxNmr
+ ZIVe+N6CKA/E/RWGZyRuUSd7Oejmv01TkUoJJHEootN4h8NJPUGAI4NK0L2cVdnBE7lW
+ RTV6+bG/FEE1JKzlG7akfA5bYthFy8ClJsf3PXFjy709n6c6Ef66ogSf3GBI99bTQs6M
+ eF9MVZ40UxOGYzb9uR+/MJ4lvU6J44dfy75BIDbo6kW5ANuXMDuvLcwxw8iLF5+37FWO
+ OecQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7GIZcq3ggHZneW+ArgAqtLY5A6uuOHbpEvMIu2r0EHl5PWOt2oUtO8VLfiN1zm0vkQa3ccnU=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywq455Sd+Cc4piUfDa+MbIcsPYPp+VNCA93ocFDFTx1h8vdJDIw
- PIAA5zn6taeTY371NVWzbXh8YW+g3e2b+Z6nHm0iKYFKTo8tgIXqVkiiR9yRZsPmiUquZvn8J5U
- 1Eru1Yfrfe1mUsOkib2NJTN88ptJkA97ZjqwBtaHPc0ZC2Ak/jXaWeX8G
-X-Gm-Gg: AY/fxX6DvCZzGk7SN90wcQuC/h7HLj++mwglEU2jdnQlFJI4Omi3Z+s0/SWeGfzqkKD
- VAs8euLpXRoUgjupbQksW15llu+2eGtLA5Fyahjz8lS2cw+kVwQfmwkbt9TmNJV8v/OMnQFkRvH
- ZeOxSjNj0+6QBLwkBJmkwx/dIfL4dHdVSxIjz5t3eWYLXm/E77kK2sNXwSObxboyJ4a+/l5n21h
- iyITCqVUbYwp+hNCftEhXOWtrgr8mE1aL36FPx/tPWcpXlYDBtxIbXwrInD6WHDMnyqkixbWRVf
- h1G2jaFaNs1U0dJI1QAqa27jD3EGge3sGSxM5FWeA1RMw6/nJkUc37MZ0OZjLkIPZcuczZLKEpH
- Jdq4dYH4uDoVL3JJ34x9sXZvB6xuLPNd5d027oy2GSFm77DSTy0paVBZHcxu4APSy9cnf3gkvY+
- Ha4vdan29N5Js5otQuAswQoh7QX7sOHhQ3aOpwVeQ=
-X-Received: by 2002:a17:90b:17d0:b0:34c:7183:e290 with SMTP id
- 98e67ed59e1d1-34c7183e3dfmr11485088a91.31.1766038588673; 
- Wed, 17 Dec 2025 22:16:28 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF2KsfRVeRdPUYuJOGU1cyc4oFmSA+vGfV60KYfnA3sCgzll06COSuSNM1aJQbA4uzXWvPd2g==
-X-Received: by 2002:a17:90b:17d0:b0:34c:7183:e290 with SMTP id
- 98e67ed59e1d1-34c7183e3dfmr11485071a91.31.1766038588228; 
- Wed, 17 Dec 2025 22:16:28 -0800 (PST)
+ AJvYcCUdyhMwdc43JPYjSDKTGg9FbHf5LjAdtZdPVV/DfSvuhE0h5nBxzP2in4XrCs5E8wHrnBfSQXc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywid6oPZ78asGIkirtbKKiETpOewDb2agJYyZyD4pc/jD5XMyli
+ C+NQK5i+l/z1v7WBIhs473+hNzBEcCNZ3fJaTKJ5vlP2WWJAGKVUrgK/9lGS6sZSu9Pl7jBvwOd
+ OF8OOfkMBSIDXhTlwNCpS29ZLpi9UodbtXpnoBvZbLuSdAlAsz1IMFWlsEUO4mHJF
+X-Gm-Gg: AY/fxX6ckBGAaNTI0HoN5paA5mBfH7ctzDf69GPMJrr9GXa765PRAELeHvldlhXq2ze
+ cejFdpgStAQurg9OBvZFGhyrfW1hfmCva2S8q8L6qSAN/87Acp8izX6U4WGm9BesEuGV54Boogz
+ px5c+UdIoM/0WaRUr2IFzRZXuxsG4xrdAOKytIvJAu/ItIXBMFtxGT6DSKxmc7tZ3GxL24Tkm7Z
+ htzuKPhDkIgy9rA7jvwwvaFFMLRv0/wxk7dTZFrcG/5qEZE8x4xcKzmCUJQMtRuewsI9R+M/DvQ
+ v6l09xeaw1tP8+6vjdEL3JgIkgSqE2tL9kEF/jYUXsj+a9Fnps00bNSNhxcOfyhQjmuChLNbikE
+ IK7M4Hs4FyBLvPSorxzmJX9F2WRrmrrCUZF9tpuOssPLhHS2vDcx4bJFGDJ3D+4QPVJmufHeES6
+ /RxrTD/PDxus0hsZcDcDAC9/j5Nj5v6NCgw/YWmfs=
+X-Received: by 2002:a05:6a20:72a8:b0:375:4503:ef0e with SMTP id
+ adf61e73a8af0-375520c5881mr2395984637.14.1766038592582; 
+ Wed, 17 Dec 2025 22:16:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGhGc95L62zY6Ve4HlEniptQFsMZD49JiGvQZgqUStmlOKxKniBV4h16V8KuINdK6eyx17/yg==
+X-Received: by 2002:a05:6a20:72a8:b0:375:4503:ef0e with SMTP id
+ adf61e73a8af0-375520c5881mr2395952637.14.1766038592094; 
+ Wed, 17 Dec 2025 22:16:32 -0800 (PST)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c1d2fa228b5sm1198995a12.18.2025.12.17.22.16.24
+ 41be03b00d2f7-c1d2fa228b5sm1198995a12.18.2025.12.17.22.16.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Dec 2025 22:16:27 -0800 (PST)
+ Wed, 17 Dec 2025 22:16:31 -0800 (PST)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
  lukma@denx.de, varadarajan.narayanan@oss.qualcomm.com,
  marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
  alexeymin@postmarketos.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [RESEND v2 5/6] dts: ipq9574-rdp433-u-boot: Enable USB device mode
- and MMC
-Date: Thu, 18 Dec 2025 11:45:56 +0530
-Message-Id: <20251218061557.1999367-6-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [RESEND v2 6/6] doc: board/qualcomm: Update RDP flashing instructions
+Date: Thu, 18 Dec 2025 11:45:57 +0530
+Message-Id: <20251218061557.1999367-7-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: PD5F9Vr3fle571RUsrVrTv5GiYlUWFh_
-X-Authority-Analysis: v=2.4 cv=eKceTXp1 c=1 sm=1 tr=0 ts=69439c3d cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: eZC9eMUIofvE3iHERdyfsUotgzV8bEV_
+X-Authority-Analysis: v=2.4 cv=Md9hep/f c=1 sm=1 tr=0 ts=69439c41 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=CNuWJGMGguEIvuNeiLgA:9 a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: PD5F9Vr3fle571RUsrVrTv5GiYlUWFh_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDA0OSBTYWx0ZWRfX5+Z5T4NtVMpL
- zULyGyFkeXG0omDp8vX2KMOQfjooZqnfk9jd2b97GevxVEHdChuuLx7tBOzs1OLVtZyK+5T6sCR
- lDGbc0rnAm/Bnj+sTHXN7zYLie0plC4gUfqCufJsfkdC2IyX1ZvAv2wT1DsP8uDIGOIsqd28PaM
- AntbAHoQobBfsKDmgW5KUE46zH86BYPnOMkYSBg47Ku1CG7mt3O8lvnD3ZUBKXcecvjijV1JTYM
- ZoPkF5XgJ+jSKRzG6J3nrtBGJHKSLaLfQgnlnD8PFV9FRf1HzMlv9pPuD14cU58+5ZMhLgSqdoY
- y3GGs6ZMGCOqtlNtENwEzTi0nl2mcbxX/3vdnCgemEvKivcpXLb44T1jqCe/uwL9lYqMzp9G5ey
- 52X4QGwwvmaO5TBqnL9Lbdn4IUBawA==
+ a=EUspDBNiAAAA:8 a=r5MC_wQ6cbKlY4jr-AgA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDA0OSBTYWx0ZWRfX1piFCj2vkZhh
+ OVjTeb4nWHnWt3i50PEysPx2khtE6q/isInG66C/RRooCM/DtgK3yXJbzia8BZfBqB330AJ4lPO
+ MtKtGXUe0YgHCcnHIkk4qaNSXP6lD9YVCHAm0+uqMm9sg/YeEJkam3e/QEnEXvSEDJ8Lcca7yvP
+ Jmuq7/XGxxicIvtrHqttSnAxenLk5V8YTMNt4RxBkydOoMa/R0JKyXBu53e0/dDRKiXsRwwatRA
+ Bexr39OjElBZb1MSDEchtILXl4+SagUSVqhZXyX+iRP7lbaEK7JkalzszXWHh6gJ0vlGniIz2qr
+ pdjvl/ZpbXTR00wUDba4doFLxnnzHPfLvfqmPI/Aua/xLjFR0A1YycVtv/+IEczMFY04oD2LuPa
+ RupQV7z7+bX6dA9Gxpg03V50am0DMQ==
+X-Proofpoint-GUID: eZC9eMUIofvE3iHERdyfsUotgzV8bEV_
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-18_01,2025-12-17_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 adultscore=0 clxscore=1015 malwarescore=0
- spamscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0
+ malwarescore=0 clxscore=1015 adultscore=0 spamscore=0 lowpriorityscore=0
+ priorityscore=1501 suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512180049
 X-BeenThere: u-boot@lists.denx.de
@@ -148,29 +147,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable MMC and USB device mode by default to be able to use
-fastboot for flashing images to IPQ9574 based boards.
+Update the flashing instructions to include fastboot.
 
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- arch/arm/dts/ipq9574-rdp433-u-boot.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+ doc/board/qualcomm/rdp.rst | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
-index 390e2338d65..9f04c0c1077 100644
---- a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
-+++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
-@@ -22,4 +22,10 @@
- 	 * reset done sdhci_init() times out.
- 	 */
- 	resets = <&gcc GCC_SDCC_BCR>;
+diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+index 99cf8eba57c..97a64e4677c 100644
+--- a/doc/board/qualcomm/rdp.rst
++++ b/doc/board/qualcomm/rdp.rst
+@@ -42,6 +42,20 @@ on your device with::
+ 
+ U-Boot should be running after a reboot (``reset``).
+ 
++This U-Boot doesn't have the n/w driver. To restore the original U-Boot or flash
++modified versions of the above built U-Boot, 'fastboot' can be used.
 +
-+	status = "okay";
-+};
++  => setenv serial# ipq9574
++  => fastboot usb 0
 +
-+&usb_0_dwc3 {
-+	dr_mode = "peripheral";
- };
++  C:\>.\fastboot.exe devices
++  ipq9574  fastboot
++
++  C:\>.\fastboot flash 0:APPSBL u-boot.mbn
++  Sending '0:APPSBL' (620 KB)                        OKAY [  0.042s]
++  Writing '0:APPSBL'                                 OKAY [  0.030s]
++  Finished. Total time: 0.342s
++
+ .. WARNING
+ 	Boards with newer software versions would automatically go the emergency
+ 	download (EDL) mode if U-Boot is not functioning as expected. If its a
 -- 
 2.34.1
 
