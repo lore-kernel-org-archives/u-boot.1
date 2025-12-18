@@ -4,57 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF166D6ACE5
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 10:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8EA9D6ACE2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 11:00:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A2C483B21;
-	Thu, 18 Dec 2025 11:59:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D06583D92;
+	Thu, 18 Dec 2025 12:00:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J7Nq38bF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BDC383C54; Thu, 18 Dec 2025 11:59:37 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 82DA383B2C; Thu, 18 Dec 2025 12:00:25 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc09])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E833383936
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:59:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 03EC783B2C
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 12:00:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 36B2143B32;
- Thu, 18 Dec 2025 10:59:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0D32C4CEFB;
- Thu, 18 Dec 2025 10:59:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766055573;
- bh=bL9p3x1nwW8kEVfomKWPC0iB7+P5WrXPgk3jHpxClLU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=J7Nq38bFeOuOpVeT0qY5J/RQjxeKHaRFgaP5MkQT2OQGdrJZHBdK4kCGresMvjJ9j
- jLZDfPOyF0kuS6m4ESZutIy+5L4ItZSuMCV8coY/o/wMpD05YxeVabgJwNPg7FlH/E
- jnF2vKzmkDTYvYG99FE3SBJ9EYwUwaCC/2nB4qGtlEQytDSM77+1ST/xkho/zg7o6w
- fAHIiEWdLGYzLk0CWNayhYUzIKx82npj7vm2DYd0jb1V3xgDkBetR5Mr1SjJa7SxWl
- uIkWiGckPbyyJDQILOcfIQMiPB8WMTrA38/c8DQVJNKfDdpKI/UjRolR5n5FnMTfRd
- xIZhrJxPtY2fg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, David
- Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH v2 0/3] a few test.py improvements
-In-Reply-To: <20251217-a-few-test-py-improvements-v2-0-e1f91e3bf551@baylibre.com>
-References: <20251217-a-few-test-py-improvements-v2-0-e1f91e3bf551@baylibre.com>
-Date: Thu, 18 Dec 2025 11:59:30 +0100
-Message-ID: <87fr98cay5.fsf@kernel.org>
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dX7453cFhznyj;
+ Thu, 18 Dec 2025 12:00:21 +0100 (CET)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dX7444pvszS0y; Thu, 18 Dec 2025 12:00:20 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Thu, 18 Dec 2025 11:59:58 +0100
+Subject: [PATCH v2] cmd: bdinfo: fix incorrect Kconfig options check for
+ print_eth()
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251218-bdinfo-lwip-v2-1-f6188a2f376a@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23MQQ6CMBCF4auQWTum0wiIK+5hWNAytZOYQlqDE
+ tK7W1m7/F/yvh0SR+EEt2qHyKskmUMJfarA+jE8GGUqDVrpmjS1aCYJbsbnWxZkHk1tGte1I0F
+ 5LJGdfA7tPpT2kl5z3A58pd/631kJCa+XzjrVKONI99ZzjNt5Yhhyzl8C2nvSpgAAAA==
+X-Change-ID: 20251217-bdinfo-lwip-eeab5b6f97a1
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,56 +65,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Thank you for the series
+CMD_NET_LWIP has never existed so it cannot be right. I'm guessing the
+intent was to allow print_eth() to be called when NET_LWIP is defined
+(NET means "legacy networking stack" as opposed to NET_LWIP which is the
+ newest (and incompatible) stack). There probably was some mix-up
+between CMD_NET and NET options.
 
-On Wed, Dec 17, 2025 at 12:42, David Lechner <dlechner@baylibre.com> wrote:
+The dependency on CMD_NET seems unnecessary as it seems perfectly fine
+to run bdinfo without CMD_NET (build and run tested). So let's instead
+make the dependency on NET || NET_LWIP.
 
-> While trying to run the test suite for the first time, I encountered a
-> few minor issues. Here are a few patches to address them.
->
-> ---
-> Changes in v2:
-> - Dropped patch adding setuptools to test/py/requirements.txt
-> - New patch to add setuptools to scripts/dtc/pylibfdt/requirements.txt
->   instead.
-> - Changed test.py patch to set ubconfig to None rather than checking for
->   its existence in globals().
-> - Link to v1: https://lore.kernel.org/r/20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com
+Let's sync the unit test as well.
 
-Tested on a fresh fedora container with:
+Fixes: 95744d2527cb ("cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y")
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v2:
+- fixed unit tests for the bdinfo command,
+- Link to v1: https://patch.msgid.link/20251217-bdinfo-lwip-v1-1-849cf060bf12@cherry.de
+---
+ cmd/bdinfo.c      | 6 +++---
+ test/cmd/bdinfo.c | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-$ python -m venv venv
-$ source venv/bin/activate
-$ pip install -r test/py/requirements.txt
-$ pip install -r scripts/dtc/pylibfdt/requirements.txt
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index 20c8c97f0cd..09fe8067642 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -152,7 +152,7 @@ static int bdinfo_print_all(struct bd_info *bd)
+ 	bdinfo_print_num_l("relocaddr", gd->relocaddr);
+ 	bdinfo_print_num_l("reloc off", gd->reloc_off);
+ 	printf("%-12s= %u-bit\n", "Build", (uint)sizeof(void *) * 8);
+-	if (IS_ENABLED(CONFIG_CMD_NET) || IS_ENABLED(CONFIG_CMD_NET_LWIP))
++	if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP))
+ 		print_eth();
+ 	bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+@@ -193,8 +193,8 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		case 'a':
+ 			return bdinfo_print_all(bd);
+ 		case 'e':
+-			if (!IS_ENABLED(CONFIG_CMD_NET) &&
+-			    !IS_ENABLED(CONFIG_CMD_NET_LWIP))
++			if (!IS_ENABLED(CONFIG_NET) &&
++			    !IS_ENABLED(CONFIG_NET_LWIP))
+ 				return CMD_RET_USAGE;
+ 			print_eth();
+ 			return CMD_RET_SUCCESS;
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 28d448a0866..2ba57edc685 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -170,7 +170,7 @@ static int bdinfo_test_all(struct unit_test_state *uts)
+ 	ut_assertok(test_num_l(uts, "reloc off", gd->reloc_off));
+ 	ut_assert_nextline("%-12s= %u-bit", "Build", (uint)sizeof(void *) * 8);
+ 
+-	if (IS_ENABLED(CONFIG_CMD_NET))
++	if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP))
+ 		ut_assertok(test_eth(uts));
+ 
+ 	/*
+@@ -281,7 +281,7 @@ static int bdinfo_test_eth(struct unit_test_state *uts)
+ 	ut_assertok(run_commandf("bdinfo -e"));
+ 	if (!CONFIG_IS_ENABLED(GETOPT))
+ 		ut_assertok(bdinfo_test_all(uts));
+-	else if (IS_ENABLED(CONFIG_CMD_NET))
++	else if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP))
+ 		ut_assertok(test_eth(uts));
+ 	ut_assert_console_end();
+ 
 
-Then I could build and test with:
+---
+base-commit: 47b50fb1125c539d80ed3e7f739c02c6486e1b52
+change-id: 20251217-bdinfo-lwip-eeab5b6f97a1
 
-$ ./test/py/test.py --bd sandbox --build -k ut
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
-Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org> # sandbox
-
-Also, all patches look good to me, so:
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
->
-> ---
-> David Lechner (3):
->       test.py: check ubconfig exists before using it
->       doc: pytest: mention additional requirements for venv
->       pylibfdt: add requirements.txt for setuptools
->
->  doc/develop/pytest/usage.rst          | 4 ++++
->  scripts/dtc/pylibfdt/requirements.txt | 1 +
->  test/py/conftest.py                   | 5 +++--
->  3 files changed, 8 insertions(+), 2 deletions(-)
-> ---
-> base-commit: a333d9e59f6675c9541c34643f334dbf50898647
-> change-id: 20251121-a-few-test-py-improvements-b91babfc3e05
->
-> Best regards,
-> -- 
-> David Lechner <dlechner@baylibre.com>
