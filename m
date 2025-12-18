@@ -4,158 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A08D6D232
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 15:25:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB05D6D237
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 15:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5A1383DEE;
-	Thu, 18 Dec 2025 16:25:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3956683E28;
+	Thu, 18 Dec 2025 16:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arturia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TBuvPeVB";
+	dkim=pass (2048-bit key; unprotected) header.d=arturia.com header.i=@arturia.com header.b="Nc2cREB2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C66AD83E0E; Thu, 18 Dec 2025 16:25:16 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9379783E3A; Thu, 18 Dec 2025 16:33:51 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AE2783DE4
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 16:25:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D99A383DEE
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 16:33:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kTv+Mq6rMd1cFGj4/UX4cHTZ82l+28hJu43oYvtLulV7KTYa0/r5kWm5ivGqiNIclPEoiE+sT9yzhGUmU/X5CmCGhRqdNN26KUqtytAvjmZoF7L7hKSXGGx86VB5n2ACqYmKHSZZyheKIK9QOeW+bRizU+mF/1osVw7ZzX9Qr3GnwLSJERErzfAGP/mv1gZwbNexi95ca6uVyLxJ/WmpSZUTujCd2pH+yX1K+hA9dvIy5y0Uh64Qp8MetT3r66q3cglGLdg+vccj3jUMlRxT/Dc++dKt2+dnNPplwXHDJxLqIfl+iW5SiMucMwYqbckSfAqOLemURJRbLNXXM0AjJQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4RA3WDdcRuK4b9pKcfm/LQvt2uzopM9jo+5E9FZLWB4=;
- b=LX4Qo8Wql3hYVejCUebb+vCr2mn0DbTj3qAUh3JvSwWVe2x642P+c0UmKku+1JMXVJpsxwpYxfw4MtkcN4kkB3xmeXdVp2QDqO64NjiGGMd3KKVYaYqS1OInaGyseddGr7Lu+e84kR/8H1lw3IaI7SKD+C6sacVbRNY5YDu9ldE73aPLJ41slcL/TgWibHFEzWZWqObw7KD0He3yUX6sFjBnJ6AOziexd8s4wEbRD/sjRopJr9HfbLSp9unhYoeyg+t6S+ddlzAEhxo1gv8qwPAHHL1oChTAC9n7gnxmARhDJ2mDkNBtB0IQDC2OWiwowTcMeFh85za4qYqrWo4PWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=dh-electronics.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4RA3WDdcRuK4b9pKcfm/LQvt2uzopM9jo+5E9FZLWB4=;
- b=TBuvPeVB9vI7ao1kOmKw6enNvFxsHVwTVy2czhZv+8uVxSCr5FzBeAN7crSydMhCCt/IxZM4NYjKRp6YUTnY7poH3gFUbD3PmsjK35N+zfM+LENrPkqPis31oOlF2TCMce2alxTwbTKkUJkPT2xFKS1s6tGJ+Jv/7EH+QgIPG1o=
-Received: from MN0P220CA0022.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::12)
- by DM4PR10MB6205.namprd10.prod.outlook.com (2603:10b6:8:88::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6; Thu, 18 Dec 2025 15:25:08 +0000
-Received: from BN3PEPF0000B372.namprd21.prod.outlook.com
- (2603:10b6:208:52e:cafe::1b) by MN0P220CA0022.outlook.office365.com
- (2603:10b6:208:52e::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.8 via Frontend Transport; Thu,
- 18 Dec 2025 15:25:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN3PEPF0000B372.mail.protection.outlook.com (10.167.243.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9456.0 via Frontend Transport; Thu, 18 Dec 2025 15:25:07 +0000
-Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
- 2025 09:25:04 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
- 2025 09:25:03 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 18 Dec 2025 09:25:03 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BIFP3Ga3572581;
- Thu, 18 Dec 2025 09:25:03 -0600
-Message-ID: <c8296852-16ce-4775-bdbd-6a41d4600619@ti.com>
-Date: Thu, 18 Dec 2025 09:25:03 -0600
+ dmarc=pass (p=none dis=none) header.from=arturia.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=victor.krawiec@arturia.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-430f3ef2d37so550081f8f.3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:33:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arturia.com; s=arturia; t=1766072027; x=1766676827; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=0h20yh3DyAU+o7VOngk2Ty5Vi1+kNKYJ8hnJUiYFLzw=;
+ b=Nc2cREB2sxkEIq0ktfmgowjerNLnc6lgoTqA14RhTFXa2SSWHZWk6ss/TprRi/pCR1
+ uj0zpT8Eu5CSPVS22tpOckpaJmtLBptHfTRY+yGFdAQx197kbb62+IZWF7gJlpKhGu92
+ VwAw+R1iYYb8j6FNITrHYeoa59CmODIjIPRiU66z00+PTblUKvUDIk9pvTAvLGdORPJ1
+ yto2jvf3Uho/wqzcUGWqQ6yPMpbSFtvZrZl77eKM5Hukr8VL39P5L9P+PcGjG0bi8mJ0
+ cJgCWoqSgPjqgCsVEiq77dBHUmtfmbbiGtHUPuvPjdCxi8ITcm5X40kX1mcEoxvwNKBL
+ X6HQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766072027; x=1766676827;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0h20yh3DyAU+o7VOngk2Ty5Vi1+kNKYJ8hnJUiYFLzw=;
+ b=vJn9Vzw7g65YcqqNrqc0vdS8oFkDI+DeGTN04PcesLfoP3DpabjSTZtKZwAr5fHAJs
+ kJO6O/QnTbb5TGHBBNqlmrWJitUjVLi3naFvn6uhwy+0Re21GunKeT4JL/1+4j3J57ID
+ 7f8eIdd3iv4NgfnfbUG6bSb8xT6VlvRw9QeNZbT4bbPh40joVr+Fc154TuK2zxEwRXHl
+ sNMO4eOGO5WRdTYmCCQzy7IUsd05NDU4fAIaJxRCWgCU5nierBhzI8HH1F3n+oeNlqco
+ LFSkxZnFHIqrICj2aq3gQ8hOTz83ZMN7MhLJGePBswL7CcDC30h88kpP9wY+3+v/asa3
+ 2ihA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlbeWSVkvepLm6T0YFhe9Yl4OUf+fLM4nZz1F5xlO4hc/6yYwcGO93ny9tHFII5MB4n20rqXY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdkjUO6y1ULPwgCCL/BTTl2y66DHkJAgTItJYRCVc/phS+rfwN
+ AFwE0heWyebqRau1WW65jFtE6ondF5EyydM0j6P8fV9bC4CUj0QIlWi+ZtW6Sctx4tk=
+X-Gm-Gg: AY/fxX7XvNEJ8Igkf+aBL2T1GmJ/g2rFZSamyZmHFOWgk1q3VW6NUBYRay7e8vQ4ObM
+ 7OOby6yvbkKfLqg93YW0l1dfSpatWiV4WkSU4ZOIe6BTRk6smeTVd0Gv0OhZFeWiOOe/hv4YTUF
+ 9vhYebKVkfIW4GYovOwdiTWwUbOK9qprN1rDhYJ1Moz6Emhm+QOGOHhi5nIrEAys4VsC6FeUtun
+ Y38ETMquWrmsFAZGGHz8Ka/Vwn9LuSl3IjPMehrwWpHOz04bC9p5gx30awwW19GUE4Fwm8lcPKZ
+ GP4UKF7AXqGMIVfO3XhGT9LZd12QwJmED4eIJnKSfRRJGQATLLQdsn2AhgJl59poSKoftxseElO
+ x0QFQRuEFE5ezglsDtriFMx2YdSyt899nh0+SW3ONLPLyBFO7olTNyOSjotRoc0yMIfm0gAJATs
+ nrWslSwSUAhjzpfDCv/BQCYmd5BLH0cdnrgv6buhZMqkEB8Cruelk=
+X-Google-Smtp-Source: AGHT+IEMZoDpUByGjmjHH+HcbCH0LIruSmAiBLFkvyorRRf4MBtHEicxyQHAIDyFVRsHBwakqUNmnA==
+X-Received: by 2002:a05:6000:1785:b0:430:f5dc:d34a with SMTP id
+ ffacd0b85a97d-430f5dcd4c2mr20516755f8f.29.1766072027136; 
+ Thu, 18 Dec 2025 07:33:47 -0800 (PST)
+Received: from [192.168.32.21] (226.142.197.77.rev.sfr.net. [77.197.142.226])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43244934cd4sm5518226f8f.7.2025.12.18.07.33.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Dec 2025 07:33:46 -0800 (PST)
+Message-ID: <edd2a55a-8e72-442b-916c-cc07c44df561@arturia.com>
+Date: Thu, 18 Dec 2025 16:33:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v3] Kconfig: select
- SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3
-To: Tom Rini <trini@konsulko.com>
-CC: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>, Judith Mendez
- <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, Hrushikesh Salunke
- <h-salunke@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh R
- <vigneshr@ti.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>
-References: <20251204-am65_dfu_fix-v3-1-de18ed3f346d@ti.com>
- <DEZHV1ELFZ43.E3FN619R0UNY@ti.com> <20251216140104.GU303283@bill-the-cat>
- <DF08W9D84X84.1DQ1VM5S8TT9D@ti.com> <20251218141653.GI303283@bill-the-cat>
- <210ecc7f-4de4-40e8-8c15-5a6231df48a4@ti.com>
- <20251218145801.GJ303283@bill-the-cat>
+Subject: Re: Rockchip RK3399 SOC is very slow
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <0d8cb0a2-5581-4885-b7bc-34402a4ec3c8@arturia.com>
+ <f5007ce0-e5b7-403a-8f1a-8c6f69239235@cherry.de>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251218145801.GJ303283@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B372:EE_|DM4PR10MB6205:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3f67b3b3-8854-4544-9802-08de3e49a013
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bFhvM2pIVndVWUJkOEVCb3lRYy9SMUFGNHJyWVNPMHViSWhGekttdU02aFFE?=
- =?utf-8?B?ZkJxYTl0a1gzWWdVcUNIYWtYeDFQM0xDbHRvcWRQN2V0R3phbW9sL1RrZ21J?=
- =?utf-8?B?QUluSDVVV0s5eFpnSkRMcVZQQnpzSFRhdmMwMVl0US90cVphSUpJWWh5bm5z?=
- =?utf-8?B?TzBKbmVtTnUwWFdhcVZhQlRsMWNuOFdENTB4NmE1cS95L1krOEZFTytIMlVT?=
- =?utf-8?B?RmV2ejc0S3hveHNNMElTVzBNVGxHYnZmcVlORjlaSU1TSysxTmFsQm5Va2J5?=
- =?utf-8?B?WFUwUUZxbXM4N0d6Ny8veHlTZG5QK2JaUFJVcGYyNnR2SFZoVmxtSURnZVlB?=
- =?utf-8?B?QkZFOXFZNVJsUlpiaFRvWExBY2dQRU9DNXhyUXlHMWRWcCt2WGYvaldQQkYr?=
- =?utf-8?B?V25Nek9oaVd4TnNVUFpZY3pFTWVlR0x2RmhDZlZGL2ZoRStoWTBXNVpnNXJT?=
- =?utf-8?B?RU5TUk8rUVhkRnBmRDVFSkxUdDZoNkZ0UytISWhZdDVoRmpVQWltUjdTMEc2?=
- =?utf-8?B?Nms5eVdQSVJwWEVwZXVtT05ydE5YR1djQVVFSnI3MFhrVDZMclpEQ1FqQ2tw?=
- =?utf-8?B?cUxHT0pNZ1Vrdm1vMUZnZWwyMXF0N3BhSHJzQ29ETTNTV2QzcFU1RkQzRTF4?=
- =?utf-8?B?MXBBbTdja2RpRTJ4dUc2ckFEaFpWN2xZRHNiN2FESDNra3B6OEFnc1Rub244?=
- =?utf-8?B?TXlkVkViMHYrb09VeVVQMFo4QndsbU82TGJOSmtKcW9sQm5EMm9lUXBCMXdz?=
- =?utf-8?B?aGF3MmF2TEtuU2dxVkdwN2RabXNkejVWQWNYMzloTHQxVU1xMHVjM0ZWSHpF?=
- =?utf-8?B?dUdTbmdIeUhRSkkvM012K0xtcmt4S0hhdzRTR2NWRlIva2EreTN5M3pzUTZw?=
- =?utf-8?B?ZG0ya3IvR3hDS1VtQWF6d1ZrTUdXMysvbVFrY3RKbWNoaWkxVGVOb3MyZUNW?=
- =?utf-8?B?ZFVhdUJOOFMvRkVHUDYrS1JRNWVjWXh3eHA5eEhKQnZsR0tQL2IrSW9FRFhW?=
- =?utf-8?B?NXl6Rk1yTnVVVkpQREp6OGlXNXM2bEk1NEVFMTZkR2tzV1IvSDhlajdwVDdY?=
- =?utf-8?B?blJFRWxtRXNpdnMvVytscWU5am4zaEFHRmdsTnpFc2tCeS9Zakhad09TWCtN?=
- =?utf-8?B?eXo4ckIzWWNCcWU4NWV2d0I5em5Td1JZOUx4S3VWbUJqdE5sOVhwWXppazVX?=
- =?utf-8?B?UjNoVmdBaDJQVWloL2hDU3NuWnh3Z0NWR1NRNnBubDJycjZJbTJQbjgwOFZP?=
- =?utf-8?B?YTExSnVpMmhJd0MyU1JNMU1OOURzMTlEQTM3aElnaGJqS1E0S3NxUmFtQmk3?=
- =?utf-8?B?SlJEbUw4NGU1RjRrYmY3dENuTDNZSk1ITUhyV2pOYmgyMXk0SU9PV1VoLzV4?=
- =?utf-8?B?MXYvbkFiTFQ3aWlESXlRbnQrR3pORkQrQVFCZHBzeXQ4dGdlV3RnZmRrQ01q?=
- =?utf-8?B?aGtEUzJTTko1eS9rZ29VYWo4WTdqWXpUNy9GUDhqNFd0NW43R1pwVmdpSE0v?=
- =?utf-8?B?UHhFMnhSTGMrWXhTSDdON08vcTA3VWZabFNGUmtBUWZEbFlMTG9kMGdtT1p3?=
- =?utf-8?B?bkh2YkNNTER2d3pxbDZhMVc4WWdiODJFVXJ5K2kzYkkrVlN6NTNJOFA1NXhy?=
- =?utf-8?B?TWpaOVlaOEJYZE91SlU1Zk05VEVvMWx2WkJoaHRGejhRSDBoY3JpeHRnbnJC?=
- =?utf-8?B?WkxwRncxK1llaGRSd1dGbWVzVzlqaTVEeFNMMlc2Z1VnZnBXMndoNU5hT21y?=
- =?utf-8?B?YktXY0Y1TDF1aTV5cUp3ZmlZOUZkUGR0R0xBZ2h4K3RWRGZqYmRDMkIyajhp?=
- =?utf-8?B?T2FlR2VDN1M0ekpoOUkwT0tiR1NBbVNmVG5TdjFkbS84bkVQNnhxMDRkT2gv?=
- =?utf-8?B?dUEyU2drZGRFV1BrQk5pcSthUzdrNzRkN0c4MnBsQ0V6MXkzQ2x3eDMyRyt4?=
- =?utf-8?B?R1hQUFg0RzF0RUdkRHN6b3hzU2VKbElnTmMrUWsreHpvV0VOdHNIS2tJbGl3?=
- =?utf-8?B?anZUUVhiRHRtQ3Q4d0VIa1d1bXdud2lvOTNaS2JPMTRWd0RFWkJBUzQ3aU5T?=
- =?utf-8?B?cGxDTGdDVlJiRENXUjNOaGtabGdJbHRjUlBjMjNlUndDQWwzT3U4YW9Nakt6?=
- =?utf-8?Q?oogs=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 15:25:07.1156 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3f67b3b3-8854-4544-9802-08de3e49a013
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B372.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6205
+From: Victor Krawiec <victor.krawiec@arturia.com>
+In-Reply-To: <f5007ce0-e5b7-403a-8f1a-8c6f69239235@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,97 +103,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/25 8:58 AM, Tom Rini wrote:
-> On Thu, Dec 18, 2025 at 08:41:57AM -0600, Andrew Davis wrote:
->> On 12/18/25 8:16 AM, Tom Rini wrote:
->>> On Wed, Dec 17, 2025 at 11:03:43AM +0530, Anshul Dalal wrote:
->>>> On Tue Dec 16, 2025 at 7:31 PM IST, Tom Rini wrote:
->>>>> On Tue, Dec 16, 2025 at 01:52:37PM +0530, Anshul Dalal wrote:
->>>>>> Hi all,
->>>>>>
->>>>>> Any updates on this patch? If possible could we pull this fix into
->>>>>> master as well for the 2026.01 release?
->>>>>
->>>>> I thought the feedback was that this was a generic problem and so the
->>>>> Kconfig logic should be universal, or there was an incorrectly /
->>>>> sub-optimally handled case in the tiny printf code, that needs fixing.
->>>>
->>>> We have a few ways to go about fixing this:
->>>>
->>>> 1. Fix the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
->>>>      with an extra Kconfig"):
->>>>
->>>>      Pointer formatting used to fall back to %x handling before the
->>>>      commit. Though going by the commit description, it looks like the
->>>>      change was intended. So, I'm unsure if we should re-introduce the
->>>>      confusing handling back where %p is handled but not %pa or %pap.
->>>>
->>>> 2. Add SPL_USE_TINY_PRINTF_POINTER_SUPPORT per defconfig:
->>>>
->>>>      This was what v2 of the series were attempting to do but as Andrew
->>>>      pointed out, there might be other platforms with similar issues and
->>>>      it would be better to fix it for K3 overall.
->>>>
->>>> 3. Change usage of %p in k3_sysfw_dfu_download to %x:
->>>>
->>>>      This is a suitable fix imo but we might still have to fix similar
->>>>      usages of %p in other places. We'd also have to be more careful when
->>>>      bringing proper U-Boot code to SPL since %p would not work the same
->>>>      way.
->>>>
->>
->> For what it's worth my preference would be this one. We should just work
->> to avoid using %p in general outside of debug statements.
-> 
-> I'm also fine with that.
-> 
->>>> 4. Unconditionally select SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3:
->>>>
->>>>      This allows us to remedy the problems with above 3 solutions with
->>>>      very little overhead to the SPL size (<100 bytes).
->>>>
->>
->> How about unconditionally select this for all platforms? If it is only
->> saving 100 bytes it shouldn't be an issue for most, then platforms that
->> have verified they do not need it (or need to save every last byte) can
->> then disable it. Seems odd to make a change like "1e24e84db41a" and not
->> have the default be the existing behavior.
-> 
-> There's just lots of platforms that can't afford much growth.
-> 
->>>> If this problem is faced by non K3 platforms as well, perhaps it might
->>>> be better to take the hit and make SPL_USE_TINY_PRINTF_POINTER_SUPPORT
->>>> default y.
->>>
->>> Ah, so now I understand the problem, with point 3. So yes, I think the
->>> right fix is to add "select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if
->>> SPL_USE_TINY_PRINTF && DFU && CPU_V7R" under the ARCH_K3 symbol.
->>>
->>
->> Just the length and specificity of that conditional string is making
->> me think that is not the right solution. What happens when we find
->> the same issue for SPL DFU on ARM64, or in some other code not
->> related to DFU, etc..
-> 
-> Part of the answer is that since we should be printing "?" now instead
-> of the wrong value, it should be easier to spot the wrong code. Perhaps
-> we also need something in doc/develop/spl.rst to talk about it (we
-> default to a tiny subset printf, some things don't work without
-> additional options, avoid %p unless you must and then enable
-> SPL_USE...)?
-> 
+Hello Quentin,
 
-That's fair, hopefully folks understand that to make "tiny" printf
-so "tiny" some things needed to be removed, best we can do is thoroughly
-document exactly what those removed features are. The issue here was this
-was a feature that *did* work before in tiny printf, and was since
-removed, more documentation wouldn't have helped.
+Thanks for your answer.
 
-The only way we would hit this issue again now that the feature is removed
-by default is if we are taking code from U-Boot proper where the feature
-does work, and running it in an SPL environment. Maybe we should work
-towards using tiny printf in regular U-Boot also. Would keep function
-behaviors more consistent.
+On 12/17/25 18:02, Quentin Schulz wrote: 
+> Is Rockchip's fork actually running at a different frequency? I will bet that not.
 
-Andrew
+Thanks to the code you pointed to me in clk_rk3399.c I was able to check in Rockchip's fork. They are using 816MHz. So it is a bit faster but it does not explain such a difference.
 
+> We default to 600MHz for both the LITTLE and big clusters on RK3399 as far as I remember. I believe it's because it's the default frequency of the cores and so, if we have booted into U-Boot it means the power is stable enough and at the proper clock frequency. Can't confirm, it was a long time ago I looked at that. c.f. drivers/clk/rockchip/clk_rk3399.c rk3399_configure_cpu_l and rk3399_configure_cpu_b and specifically PLL_DIVISORS in apll_b_600_cfg and apll_l_600_cfg. One of the issues we have is that this driver is the same for all variants of RK3399 and they don't all have the same OPPs (OP1, RK3399K, RK3399T, ...) except for the default which has worked nicely until now it seems.
+> 
+> The issue is that you need to configure the regulator for the LITTLE and/or big clusters to what is required for the higher frequency to work reliably. We don't have cpufreq support in U-Boot so it'll essentially be stuck to one OPP at this time. If for some reason you're running at that OPP for a long time and you don't have appropriate cooling, we also do not have thermal devfreq for the CPU which means it won't slow down to not burn itself. Therefore, only the HW thermal limit will kill the CPU (usually around 115°C if I remember correctly). When you change the frequency of a clock used by other devices, you need to make sure the other ones aren't modified in a way it breaks other devices (which is something the clock subsystem hopefully should be doing for you, but I don't know if it's as advanced as in the Linux kernel).
+ 
+I was afraid messing with CPU frequency would be too complicated and risky. Thanks for confirming this.
+
+> If you want something fast, you can also look into falcon boot, which skips U-Boot proper entirely and loads a FIT from SPL with the Linux kernel (you also need TF-A in it). I haven't done this as it limits what you can do with the board and we're selling SoM with BSP, not final products so we don't know how it'll be used, better have something casting a wider net and have less to support customers.
+
+I will definitely look into this. I knew about falcon boot but I did not use it because one of my goal was also to display a splashcreen. We make music instruments so having direct feedback on the screen at power up is nice. But anyway since the splashcreen appears after 7 seconds using U-Boot proper I might try falcon and display the splashscreen in Linux.
+
+> You can check also if you have enabled everything that makes your devices go fast enough. If you're using eMMC, does it support HS200/HS400/HS400-ES? If yes, did you enable support in U-Boot for it? In the Device Tree? Same for SD card with SDR-104, etc...
+
+I am using eMMC with HS400-ES. "mmc info" displays the correct settings but I will double check the configuration.
+
+> On RK3399 Puma, with master, it takes slightly more than 5 seconds to jump into the kernel by loading everything from SD card (so, typically slower than eMMC), see the log at the end of the mail. I have not optimized the defconfig for speed right now. Note that I'm using baudrate 115200 which is much slower than Rockchip's typical default of 1500000, so it probably is at least a few hundreds of ms faster with that baudrate.
+
+I could probably reduce the boot time with some optimisation. I already saved few hundreads of milliseconds removing CONFIG_NET.
+But 5 seconds is still 3 seconds more than the vendor fork. I really wonder how to explain such a difference, since the CPU frequency is not entirely to blame. And on the vendor fork I'm not optimizing anything.
+
+> You can see from the logs that BL31 takes 1.5 seconds to jump back to U-Boot proper... that's something you need to optimize in TF-A directly. I guess you can disable bootflow/distroboot and avoid a bunch of device probing and configuration.
+> 
+> You can disable what you don't need and optimize away. We have CONFIG_BOOTSTAGE + CONFIG_CMD_BOOSTAGE that may help you figuring out what is taking the most time I believe?
+> 
+> There are easier steps to take than go play with higher CPU OPPs right now I think, so start with that or identify places where we can improve?
+
+Thanks a lot for all the leads. I'll keep you updated on the results.
+
+Best,
+Victor
