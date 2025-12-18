@@ -4,82 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34ACCD711CC
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 23:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793D9D711CD
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 23:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E636C83971;
-	Fri, 19 Dec 2025 00:23:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EDB81835B3;
+	Fri, 19 Dec 2025 00:28:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qQvfkBmY";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NMc5du5x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA53483106; Fri, 19 Dec 2025 00:23:11 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 0538D8309A; Fri, 19 Dec 2025 00:24:37 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFDB483710
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 00:23:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A9B183106
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 00:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c6e815310aso886343a34.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:23:07 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c730af8d69so808071a34.1
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766100186; x=1766704986; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zRG15/W9yTFWr9lS/HK1LKao4suPeIwdY3gEU9/tIi4=;
- b=qQvfkBmYufwrGE7jC6cmg+uIy35SXYdCSJKEStZEt2AAyqKLHNaOAstVhBG+QolWZG
- x99MGWkSmDAkCXDk7L2at2xVbIS5H1WEXASanFBN8tnC9A96zTAZl++BchsVIjiR4Nfk
- kBzkm/czQCSPPDcA2pRuWYQf/IU9pTdC1mIsg=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766100273; x=1766705073;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8IyDUlmXoCKHa8U5JNuV0xKkT/AGwhd2jT8amyDSPH8=;
+ b=NMc5du5xpujr53FAzpR7wGK/KgJ8wiB3L8oPggB0sRbOlMEu7lWXywm8JKjcBm0biY
+ dFpGoFHFM5K/HcyvhzSts/1mJA9y6amI2RMUogfLmI4MIccoicaWdWcHcX66gBAiR2V1
+ nDImCdSlkde30hdCqcWsB1rdiMzBxUaeSqeLxW3WAOJORjDhykZVJ5Ue4/EVZkKKHUp7
+ yQgjkdI+E7pp4ofioSh5YIt69woUPOP/bOcIRQRKtSKaZJz578ZKPp90S43PiBncagf3
+ Fns1T3miLc/PcF8dBqW3VNyqqFAQYwgZe6iGYkqSVRVkhKyxDpCLRd+5f9SN6i8znxz+
+ P48Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766100186; x=1766704986;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zRG15/W9yTFWr9lS/HK1LKao4suPeIwdY3gEU9/tIi4=;
- b=hWQRqYD9BpnwWoAr76DGp5N6snIN27AcoRgAVVyLzayVU+gkq9wDVKeeUopxRqiXY1
- fo9PuDc6W+BRgL30SNajwe3/st1leGNP/U+pyLDZW79Zks6EiKdzvjnRODwCCEGwPvrZ
- rITnlVMelqWn+ivF3HIjS83PGNeCfM+C1VVRE0pa4hRXyQbUQrRx6ldJ7UBF4Fv2KEcg
- Hftw+xoqN9fDqbOTmbXLRU2LyAV3NzbIoxhhuNQTk+F7pZbMEgVF7O0sV6wu4xWQaEd4
- l0uABsR132/l6FS3+michijbU9XvuXXWzgPTAx5t2makcGt+RM60NxI1Oju8ju8iPJyn
- /8tQ==
-X-Gm-Message-State: AOJu0Yyz1ULc/1Cg8gvdIL2b0nPBa+1Lt6XTz1W8kH2eo//wRueKlQ53
- xTbSScNrepcM9ZwejhjVM7s1lhGI/2Fe7WPdo3oUMXHW2r8CqBCtcOeFcmpKV2aJd2UayKnUmjO
- ED16plbU=
-X-Gm-Gg: AY/fxX7XqYjn6vmCTvjdPnJcuJERqgzHRxp/7CggDjt8kDknXZkvdaEi+irjyEF9xZJ
- 6qbNfNdrsE1XgDvwc+DX2GzZ69Iem1ZsibIsKhQR1DHra7pBwlcaiscAasFm6UeZKDhDCNQ6sr3
- ogt/tbxgCodfNDygJHLPYKKGDT5lGlvEbFHpZTxOPAwvfCDUe3UOYFjB2jMHbsfX5ZY0Fy8AZIA
- TPJtvc0sEAJ3oF11Rihbq4DXMmR58UBZ9JdQk1JH6az5P8OzN0LDYLVpmu9WgsOIeIpwMHhsF6W
- bsdEvRMMXlLJt6NhqhtBNNXVn219gEzs1NIaOzGhVcu+r5qQPJ9I9PDW3qXQNXPxYe+1Iplo4ua
- mFtN8OcWjNtdfOc1V8sKUlZV7Fn2GkNY6wBa8ZIaXAh7kkrtEE5QSDeYQ/om8HFSqbs6lfgnKZe
- SrkjQFsq1OwotWYJasfifXlDl08JAkwFvFrUr1bd0WlT9r2iFCrk6W
-X-Google-Smtp-Source: AGHT+IH3Xk4nkJOZwxal3fmyy7TpNilPZKYAKswXcQB78D1RI4itJifjvjaRax02a9WuPEH+Rp0TMA==
-X-Received: by 2002:a05:6808:4fd1:b0:44e:2f1b:e4b0 with SMTP id
- 5614622812f47-457b21ceeb3mr536838b6e.51.1766100186323; 
- Thu, 18 Dec 2025 15:23:06 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-457b3cc0928sm295333b6e.10.2025.12.18.15.23.05
+ d=1e100.net; s=20230601; t=1766100273; x=1766705073;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8IyDUlmXoCKHa8U5JNuV0xKkT/AGwhd2jT8amyDSPH8=;
+ b=fhKhXtvNQ7p6PJniYzI04+RngDiE3g2jmJ/kUHF96tAdXsvXyNutkibZV4nlwZWl4n
+ mwDRf+uSVI2tniMuNwXBT5a5CXYVvobKub9SBnACtrQquomNOwP86o1jpYrJ/RCv5qM+
+ lg9E2BEmS0jGkB06QR9JCxT+Hh0A4fav43lC/ECCRuue7eaCNInLZb8KNMgoLjrkF7Ng
+ XrU8yLC46FvBu9U5LQqd0cra0/aY99IM7layoq50wH2ycOKzynFQqQ2RSnPQvwueXbH3
+ jzOVV2m9+SuVXuUsVKiCm3oaDzYPDs7A5r13BWXgE3kjYKldvwGFDKHOr9hb8381uaFr
+ AUnA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmC+1jJZJwPokxfb1Vk7gjO5oHn5MSvWAOIKpaS8GCVUmOWrSiRVJSQw3BdCwZn2sY1RbvoyQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywxj9P/JYnMbh52u9UVzmgXIhUGJQun70LxKIpCMI9ej+/OqCfS
+ 7k4tcjhLE8/2t+YVrP4qpkm23FJuGZ9/QKGzpJwslBKk48Ia6ZGkU3KYugbDdj0DCW4=
+X-Gm-Gg: AY/fxX40XPyPab9BaaF3PPVEfe1PEVCN9ifMgpXEABrWvRheRokiUaSv/H2hROjnik4
+ 7q2zlQpwY/oMhibb7VtQqkXJVoTtIJvAP5x4RtZ8jbGm2K0QxbHsruUajUMLFZ8JkiUZtrzMm9K
+ 1g1uP65bNnuceS5zS4DwbuIkZXzVU4xdr1VNIH9QnZ923lJSyszDd/1qdBvYB+wtcfRZQ0W9myQ
+ klLHIyph96wnVD26r+Sw+jwyxnjqVpcAbi4/N71Kx/dliJpIY6VLx2E4cZhQRq0B/7I1IlkXlYi
+ Qvt1j6kAEOEpNdQoENYEXMDQ/Bw7XYMB6CSlCYNpW3/Lh0ai0h+r3Ou7ipGPeEb2z1hkMSAaagb
+ ILaHSjiuTJQLEV+XQrxCNr0X5faiUhayUc4lZ5xxZp5jZYzz+5uyuCFGQqwXyZPuQ2BG7od1e1A
+ S5Tz+VyZNjKEfjzW8=
+X-Google-Smtp-Source: AGHT+IEuj567Y/8goyzkBR7rKbLCeUKkDdtZTJ9SozQX3WtPqSYGXDgT+K2OQnaKmuyxkZ/0gU0K5w==
+X-Received: by 2002:a05:6808:191b:b0:450:d471:dce5 with SMTP id
+ 5614622812f47-457b2102193mr584536b6e.6.1766100272975; 
+ Thu, 18 Dec 2025 15:24:32 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:67e5:27b0:56a0:f05d])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-457b3be228asm300334b6e.9.2025.12.18.15.24.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 15:23:05 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Darek <x64x6a@gmail.com>
-Subject: [RFC PATCH 8/9] lzma: Restore spacing fixes
-Date: Thu, 18 Dec 2025 17:10:20 -0600
-Message-ID: <20251218232255.3934258-9-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251218232255.3934258-1-trini@konsulko.com>
-References: <20251218232255.3934258-1-trini@konsulko.com>
+ Thu, 18 Dec 2025 15:24:32 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/9] clk: mediatek: mt8365: fix clocks
+Date: Thu, 18 Dec 2025 17:23:20 -0600
+Message-Id: <20251218-clk-mtk-mt8365-fixes-v1-0-4f8ff0de3268@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02PzU7DMBCEXyXymYWs09DUQoj3QBVy4k27am0Hr
+ xuKqr477g+Iwx5mR/ON5qSEEpMoU51UopmFYygCHyo1bG3YELArWulat6ixg2G/A58v1zXPLYx
+ 8JIEObYOaOjvqTpXolOhqlOT7+qYTfR4KPd+eypOIvdJN9XKH12CTB5cFPDm2mXYgX5yH7W9Zj
+ hDHj8MkOZH1MCMgLLHBJbW1W+Dirbffe+4TPQ7Rv6r/G0x1L2n/FrCfUpzJUyiNrq/7lUPXIDZ
+ mxku2t0JQQJ6zqWLiDYenQMes1ufzD2/b28s4AQAA
+X-Change-ID: 20251218-clk-mtk-mt8365-fixes-81a312e8af28
+To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3226; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=e3Hs6OXfBwpZ8jlyh4EIys1tvd3byqHX/rQlnoE8E9M=; 
+ b=owGbwMvMwMV46IwC43/G/gOMp9WSGDJdet790jKvefTAW13YtjFccX/6QvGDO7Zw9PcZKbyt3
+ LAlTlK8k9GLhYGRi8FETJHljcTNeUl8zdfm3MiYATOIlQlkiphMSk5qckZeapFDUmJlTmZSUape
+ cn4uAxenAExh7wL2f1qauzVWL8rbUbejNUcorGr7MY9e2XKLgk5ZhTbdHPF7wge/ltXkF8/YYvj
+ YKM3SbY5DgcLmhom1cz8X9m5P7Nu5o8XTobKqPWt92PxHj01isx+J5s69JJgWnPs/UU83xf3n12
+ iOWpOGzxMWpQav/J3Huueo3qOCWQVu4Y3r85YFP7SeVRAQaaA/781C022zu1kPRL/Z6rCgTSXhY
+ aHk3X/7+E/oyct9chO8fCbBVbuVb79livqPnr1f9ufzfL90yK6i/OGig7ayPxfmKam+aO/kfK7q
+ /iytwN+97WD8I7eGmYyX+N9vuO0VEh34686EWbOWZ1iIf1cvcxG4Zxcvca3W9NzeDDW2jH16f0M A
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Fri, 19 Dec 2025 00:28:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,479 +124,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This once again removes all trailing blanks and extra empty new lines to
-bring the code closer to our normal coding style.
+There were a number of bugs in the clock definitions for the mt8365
+clock drivers. This series aims to fix the obvious issues.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+This builds on [1] that implements the clk dump command to inspect the
+clock trees at runtime. Using that revealed quite a few mistakes in
+the clock definitions.
+
+Additionally, the topckgen-cg hack is removed for mt8365 since it would
+require an extra devicetree node using the same address space as the
+topckgen node. This would not be accepted upstream in Linux, so we
+shouldn't do it in U-Boot either. mt85{12,16,18} also have this hack.
+I didn't attempt to remove it from those platforms since I don't have
+hardware to test on.
+
+[1]: https://lore.kernel.org/u-boot/20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com/
+
+Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- lib/lzma/7zTypes.h  | 36 ++----------------------------------
- lib/lzma/Compiler.h |  8 +-------
- lib/lzma/LzmaDec.c  | 18 ------------------
- lib/lzma/LzmaDec.h  |  6 ------
- lib/lzma/Precomp.h  |  2 --
- 5 files changed, 3 insertions(+), 67 deletions(-)
+David Lechner (9):
+      mt8365_evk_defconfig: enable clk command
+      clk: mediatek: mt8365: fix missing and out of order clocks
+      clk: mediatek: add separate gates_offs for cg gates
+      clk: mediatek: fix fixed clock parents
+      clk: mediatek: mt8365: fix some clock parents
+      clk: mediatek: mt8365: split struct mtk_clk_tree
+      clk: mediatek: allow gates in topckgen drivers
+      clk: mediatek: mt8365: remove separate topckgen-cg driver
+      clk: mediatek: mt8365: fix missing topckgen IDs
 
-diff --git a/lib/lzma/7zTypes.h b/lib/lzma/7zTypes.h
-index 9a605468643b..18c804cf3b29 100644
---- a/lib/lzma/7zTypes.h
-+++ b/lib/lzma/7zTypes.h
-@@ -44,7 +44,6 @@ EXTERN_C_BEGIN
- 
- typedef int SRes;
- 
--
- #ifdef _MSC_VER
-   #if _MSC_VER > 1200
-     #define MY_ALIGN(n) __declspec(align(n))
-@@ -60,7 +59,6 @@ typedef int SRes;
-   #define MY_ALIGN(n) __attribute__ ((aligned(n)))
- #endif
- 
--
- #ifdef _WIN32
- 
- /* typedef DWORD WRes; */
-@@ -165,7 +163,6 @@ typedef unsigned long UINT_PTR;
- 
- #endif
- 
--
- #ifndef RINOK
- #define RINOK(x) { const int _result_ = (x); if (_result_ != 0) return _result_; }
- #endif
-@@ -186,7 +183,6 @@ typedef int Int32;
- typedef unsigned int UInt32;
- #endif
- 
--
- #ifndef _WIN32
- 
- typedef int INT;
-@@ -218,10 +214,8 @@ typedef size_t SIZE_T;
- 
- #endif //  _WIN32
- 
--
- #define MY_HRES_ERROR_INTERNAL_ERROR  ((HRESULT)0x8007054FL)
- 
--
- #ifdef Z7_DECL_Int64_AS_long
- 
- typedef long Int64;
-@@ -248,7 +242,6 @@ typedef unsigned long long int UInt64;
- 
- #define UINT64_CONST(n) n
- 
--
- #ifdef Z7_DECL_SizeT_AS_unsigned_int
- typedef unsigned int SizeT;
- #else
-@@ -269,7 +262,6 @@ typedef int BoolInt;
- #define True 1
- #define False 0
- 
--
- #ifdef _WIN32
- #define Z7_STDCALL __stdcall
- #else
-@@ -318,7 +310,6 @@ typedef int BoolInt;
- 
- #endif //  _MSC_VER
- 
--
- /* The following interfaces use first parameter as pointer to structure */
- 
- // #define Z7_C_IFACE_CONST_QUAL
-@@ -330,21 +321,18 @@ typedef int BoolInt;
-   typedef struct a ## _ a; \
-   struct a ## _
- 
--
- Z7_C_IFACE_DECL (IByteIn)
- {
-   Byte (*Read)(IByteInPtr p); /* reads one byte, returns 0 in case of EOF or error */
- };
- #define IByteIn_Read(p) (p)->Read(p)
- 
--
- Z7_C_IFACE_DECL (IByteOut)
- {
-   void (*Write)(IByteOutPtr p, Byte b);
- };
- #define IByteOut_Write(p, b) (p)->Write(p, b)
- 
--
- Z7_C_IFACE_DECL (ISeqInStream)
- {
-   SRes (*Read)(ISeqInStreamPtr p, void *buf, size_t *size);
-@@ -360,7 +348,6 @@ SRes SeqInStream_ReadMax(ISeqInStreamPtr stream, void *buf, size_t *processedSiz
- // SRes SeqInStream_Read2(ISeqInStreamPtr stream, void *buf, size_t size, SRes errorType);
- SRes SeqInStream_ReadByte(ISeqInStreamPtr stream, Byte *buf);
- 
--
- Z7_C_IFACE_DECL (ISeqOutStream)
- {
-   size_t (*Write)(ISeqOutStreamPtr p, const void *buf, size_t size);
-@@ -376,7 +363,6 @@ typedef enum
-   SZ_SEEK_END = 2
- } ESzSeek;
- 
--
- Z7_C_IFACE_DECL (ISeekInStream)
- {
-   SRes (*Read)(ISeekInStreamPtr p, void *buf, size_t *size);  /* same as ISeqInStream::Read */
-@@ -385,7 +371,6 @@ Z7_C_IFACE_DECL (ISeekInStream)
- #define ISeekInStream_Read(p, buf, size)   (p)->Read(p, buf, size)
- #define ISeekInStream_Seek(p, pos, origin) (p)->Seek(p, pos, origin)
- 
--
- Z7_C_IFACE_DECL (ILookInStream)
- {
-   SRes (*Look)(ILookInStreamPtr p, const void **buf, size_t *size);
-@@ -404,7 +389,6 @@ Z7_C_IFACE_DECL (ILookInStream)
- #define ILookInStream_Read(p, buf, size)   (p)->Read(p, buf, size)
- #define ILookInStream_Seek(p, pos, origin) (p)->Seek(p, pos, origin)
- 
--
- SRes LookInStream_LookRead(ILookInStreamPtr stream, void *buf, size_t *size);
- SRes LookInStream_SeekTo(ILookInStreamPtr stream, UInt64 offset);
- 
-@@ -412,15 +396,14 @@ SRes LookInStream_SeekTo(ILookInStreamPtr stream, UInt64 offset);
- SRes LookInStream_Read2(ILookInStreamPtr stream, void *buf, size_t size, SRes errorType);
- SRes LookInStream_Read(ILookInStreamPtr stream, void *buf, size_t size);
- 
--
- typedef struct
- {
-   ILookInStream vt;
-   ISeekInStreamPtr realStream;
-- 
-+
-   size_t pos;
-   size_t size; /* it's data size */
--  
-+
-   /* the following variables must be set outside */
-   Byte *buf;
-   size_t bufSize;
-@@ -430,7 +413,6 @@ void LookToRead2_CreateVTable(CLookToRead2 *p, int lookahead);
- 
- #define LookToRead2_INIT(p) { (p)->pos = (p)->size = 0; }
- 
--
- typedef struct
- {
-   ISeqInStream vt;
-@@ -439,8 +421,6 @@ typedef struct
- 
- void SecToLook_CreateVTable(CSecToLook *p);
- 
--
--
- typedef struct
- {
-   ISeqInStream vt;
-@@ -449,7 +429,6 @@ typedef struct
- 
- void SecToRead_CreateVTable(CSecToRead *p);
- 
--
- Z7_C_IFACE_DECL (ICompressProgress)
- {
-   SRes (*Progress)(ICompressProgressPtr p, UInt64 inSize, UInt64 outSize);
-@@ -459,8 +438,6 @@ Z7_C_IFACE_DECL (ICompressProgress)
- 
- #define ICompressProgress_Progress(p, inSize, outSize) (p)->Progress(p, inSize, outSize)
- 
--
--
- typedef struct ISzAlloc ISzAlloc;
- typedef const ISzAlloc * ISzAllocPtr;
- 
-@@ -477,10 +454,6 @@ struct ISzAlloc
- #define IAlloc_Alloc(p, size) ISzAlloc_Alloc(p, size)
- #define IAlloc_Free(p, a) ISzAlloc_Free(p, a)
- 
--
--
--
--
- #ifndef MY_offsetof
-   #ifdef offsetof
-     #define MY_offsetof(type, m) offsetof(type, m)
-@@ -492,8 +465,6 @@ struct ISzAlloc
-   #endif
- #endif
- 
--
--
- #ifndef Z7_container_of
- 
- /*
-@@ -556,18 +527,15 @@ struct ISzAlloc
- #define Z7_CONTAINER_FROM_VTBL_TO_DECL_VAR_pp_vt_p(type) \
-   Z7_CONTAINER_FROM_VTBL_TO_DECL_VAR(pp, type, vt, p)
- 
--
- // #define ZIP7_DECLARE_HANDLE(name)  typedef void *name;
- #define Z7_DECLARE_HANDLE(name)  struct name##_dummy{int unused;}; typedef struct name##_dummy *name;
- 
--
- #define Z7_memset_0_ARRAY(a)  memset((a), 0, sizeof(a))
- 
- #ifndef Z7_ARRAY_SIZE
- #define Z7_ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
- #endif
- 
--
- #ifdef _WIN32
- 
- #define CHAR_PATH_SEPARATOR '\\'
-diff --git a/lib/lzma/Compiler.h b/lib/lzma/Compiler.h
-index b266b277bdb3..ee9afcee4dfd 100644
---- a/lib/lzma/Compiler.h
-+++ b/lib/lzma/Compiler.h
-@@ -100,7 +100,6 @@ typedef void (*Z7_void_Function)(void);
- #endif
- #endif
- 
--
- #ifdef _MSC_VER
- 
-   #ifdef UNDER_CE
-@@ -122,7 +121,7 @@ typedef void (*Z7_void_Function)(void);
- // winnt.h: 'Int64ShllMod32'
- #pragma warning(disable : 4514) // unreferenced inline function has been removed
- #endif
--    
-+
- #if _MSC_VER < 1300
- // #pragma warning(disable : 4702) // unreachable code
- // Bra.c : -O1:
-@@ -163,7 +162,6 @@ typedef void (*Z7_void_Function)(void);
- #endif // _MSC_VER > 1200
- #endif // _MSC_VER
- 
--
- #if defined(__clang__) && (__clang_major__ >= 4)
-   #define Z7_PRAGMA_OPT_DISABLE_LOOP_UNROLL_VECTORIZE \
-     _Pragma("clang loop unroll(disable)") \
-@@ -191,8 +189,6 @@ typedef void (*Z7_void_Function)(void);
-   #define Z7_PRAGMA_OPTIMIZE_DEFAULT
- #endif
- 
--
--
- #if defined(MY_CPU_X86_OR_AMD64) && ( \
-        defined(__clang__) && (__clang_major__ >= 4) \
-     || defined(__GNUC__) && (__GNUC__ >= 5))
-@@ -205,7 +201,6 @@ typedef void (*Z7_void_Function)(void);
-   Z7_ATTRIB_NO_VECTORIZE \
-   Z7_ATTRIB_NO_SSE
- 
--
- #if defined(__clang__) && (__clang_major__ >= 8) \
-   || defined(__GNUC__) && (__GNUC__ >= 1000) \
-   /* || defined(_MSC_VER) && (_MSC_VER >= 1920) */
-@@ -220,7 +215,6 @@ typedef void (*Z7_void_Function)(void);
-   // #define Z7_likely
- #endif
- 
--
- #if (defined(Z7_CLANG_VERSION) && (Z7_CLANG_VERSION >= 30600))
- 
- #if (Z7_CLANG_VERSION < 130000)
-diff --git a/lib/lzma/LzmaDec.c b/lib/lzma/LzmaDec.c
-index da2ec5336279..9cbe36af7182 100644
---- a/lib/lzma/LzmaDec.c
-+++ b/lib/lzma/LzmaDec.c
-@@ -68,7 +68,6 @@
- 
- #endif // Z7_LZMA_DEC_OPT
- 
--
- #define NORMALIZE_CHECK if (range < kTopValue) { if (buf >= bufLimit) return DUMMY_INPUT_EOF; range <<= 8; code = (code << 8) | (*buf++); }
- 
- #define IF_BIT_0_CHECK(p) ttt = *(p); NORMALIZE_CHECK bound = (range >> kNumBitModelTotalBits) * (UInt32)ttt; if (code < bound)
-@@ -81,12 +80,10 @@
- #define TREE_DECODE_CHECK(probs, limit, i) \
-   { i = 1; do { GET_BIT_CHECK(probs + i, i) } while (i < limit); i -= limit; }
- 
--
- #define REV_BIT_CHECK(p, i, m) IF_BIT_0_CHECK(p + i) \
-   { UPDATE_0_CHECK  i += m; m += m; } else \
-   { UPDATE_1_CHECK  m += m; i += m; }
- 
--
- #define kNumPosBitsMax 4
- #define kNumPosStatesMax (1 << kNumPosBitsMax)
- 
-@@ -160,12 +157,10 @@
-   #error Stop_Compiling_Bad_LZMA_PROBS
- #endif
- 
--
- #define LZMA_LIT_SIZE 0x300
- 
- #define LzmaProps_GetNumProbs(p) (NUM_BASE_PROBS + ((UInt32)LZMA_LIT_SIZE << ((p)->lc + (p)->lp)))
- 
--
- #define CALC_POS_STATE(processedPos, pbMask) (((processedPos) & (pbMask)) << 4)
- #define COMBINED_PS_STATE (posState + state)
- #define GET_LEN_STATE (posState)
-@@ -225,7 +220,6 @@ Out:
-       p->reps[*]    : undefined
- */
- 
--
- #ifdef Z7_LZMA_DEC_OPT
- 
- int Z7_FASTCALL LZMA_DECODE_REAL(CLzmaDec *p, SizeT limit, const Byte *bufLimit);
-@@ -619,8 +613,6 @@ int Z7_FASTCALL LZMA_DECODE_REAL(CLzmaDec *p, SizeT limit, const Byte *bufLimit)
- }
- #endif
- 
--
--
- static void Z7_FASTCALL LzmaDec_WriteRem(CLzmaDec *p, SizeT limit)
- {
-   unsigned len = (unsigned)p->remainLen;
-@@ -659,7 +651,6 @@ static void Z7_FASTCALL LzmaDec_WriteRem(CLzmaDec *p, SizeT limit)
-   }
- }
- 
--
- /*
- At staring of new stream we have one of the following symbols:
-   - Literal        - is allowed
-@@ -675,7 +666,6 @@ We use early check of (RangeCoder:Code) over kBadRepCode to simplify main decodi
-   #error Stop_Compiling_Bad_LZMA_Check
- #endif
- 
--
- /*
- LzmaDec_DecodeReal2():
-   It calls LZMA_DECODE_REAL() and it adjusts limit according (p->checkDicSize).
-@@ -707,8 +697,6 @@ static int Z7_FASTCALL LzmaDec_DecodeReal2(CLzmaDec *p, SizeT limit, const Byte
-   }
- }
- 
--
--
- typedef enum
- {
-   DUMMY_INPUT_EOF, /* need more input data */
-@@ -717,7 +705,6 @@ typedef enum
-   DUMMY_REP
- } ELzmaDummy;
- 
--
- #define IS_DUMMY_END_MARKER_POSSIBLE(dummyRes) ((dummyRes) == DUMMY_MATCH)
- 
- static ELzmaDummy LzmaDec_TryDummy(const CLzmaDec *p, const Byte *buf, const Byte **bufOut)
-@@ -933,7 +920,6 @@ void LzmaDec_Init(CLzmaDec *p)
-   LzmaDec_InitDicAndState(p, True, True);
- }
- 
--
- /*
- LZMA supports optional end_marker.
- So the decoder can lookahead for one additional LZMA-Symbol to check end_marker.
-@@ -950,13 +936,11 @@ When the decoder lookahead, and the lookahead symbol is not end_marker, we have
-      LZMA_STATUS_FINISHED_WITH_MARK or LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK.
- */
- 
--
- #define RETURN_NOT_FINISHED_FOR_FINISH \
-   *status = LZMA_STATUS_NOT_FINISHED; \
-   return SZ_ERROR_DATA; // for strict mode
-   // return SZ_OK; // for relaxed mode
- 
--
- SRes LzmaDec_DecodeToDic(CLzmaDec *p, SizeT dicLimit, const Byte *src, SizeT *srcLen,
-     ELzmaFinishMode finishMode, ELzmaStatus *status)
- {
-@@ -1203,8 +1187,6 @@ SRes LzmaDec_DecodeToDic(CLzmaDec *p, SizeT dicLimit, const Byte *src, SizeT *sr
-   return SZ_ERROR_FAIL;
- }
- 
--
--
- SRes LzmaDec_DecodeToBuf(CLzmaDec *p, Byte *dest, SizeT *destLen, const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status)
- {
-   SizeT outSize = *destLen;
-diff --git a/lib/lzma/LzmaDec.h b/lib/lzma/LzmaDec.h
-index c4fec841b016..9e0ef3ef5835 100644
---- a/lib/lzma/LzmaDec.h
-+++ b/lib/lzma/LzmaDec.h
-@@ -20,7 +20,6 @@ typedef
- #endif
-   CLzmaProb;
- 
--
- /* ---------- LZMA Properties ---------- */
- 
- #define LZMA_PROPS_SIZE 5
-@@ -42,7 +41,6 @@ Returns:
- 
- SRes LzmaProps_Decode(CLzmaProps *p, const Byte *data, unsigned size);
- 
--
- /* ---------- LZMA Decoder state ---------- */
- 
- /* LZMA_REQUIRED_INPUT_MAX = number of required input bytes for worst case.
-@@ -114,7 +112,6 @@ typedef enum
- 
- /* ELzmaStatus is used only as output value for function call */
- 
--
- /* ---------- Interfaces ---------- */
- 
- /* There are 3 levels of interfaces:
-@@ -124,7 +121,6 @@ typedef enum
-    You can select any of these interfaces, but don't mix functions from different
-    groups for same object. */
- 
--
- /* There are two variants to allocate state for Dictionary Interface:
-      1) LzmaDec_Allocate / LzmaDec_Free
-      2) LzmaDec_AllocateProbs / LzmaDec_FreeProbs
-@@ -188,7 +184,6 @@ Returns:
- SRes LzmaDec_DecodeToDic(CLzmaDec *p, SizeT dicLimit,
-     const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
- 
--
- /* ---------- Buffer Interface ---------- */
- 
- /* It's zlib-like interface.
-@@ -205,7 +200,6 @@ finishMode:
- SRes LzmaDec_DecodeToBuf(CLzmaDec *p, Byte *dest, SizeT *destLen,
-     const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
- 
--
- /* ---------- One Call Interface ---------- */
- 
- /* LzmaDecode
-diff --git a/lib/lzma/Precomp.h b/lib/lzma/Precomp.h
-index 7747fdd74c64..38f3d1eb6fdb 100644
---- a/lib/lzma/Precomp.h
-+++ b/lib/lzma/Precomp.h
-@@ -84,7 +84,6 @@
-   #endif
- #endif // Z7_WIN32_WINNT_MIN
- 
--
- #ifndef Z7_DO_NOT_DEFINE_WIN32_WINNT
- #ifdef _WIN32_WINNT
-   // #error Stop_Compiling_Bad_WIN32_WINNT
-@@ -101,7 +100,6 @@ Z7_DIAGNOSTIC_IGNORE_END_RESERVED_MACRO_IDENTIFIER
- #endif
- #endif // Z7_DO_NOT_DEFINE_WIN32_WINNT
- 
--
- #ifndef _MBCS
- #ifndef Z7_NO_UNICODE
- // UNICODE and _UNICODE are used by <windows.h> and by 7-zip code.
+ configs/mt8365_evk_defconfig      |   1 +
+ drivers/clk/mediatek/clk-mt7622.c |  31 ++--
+ drivers/clk/mediatek/clk-mt7623.c |  41 +++---
+ drivers/clk/mediatek/clk-mt7629.c |  34 +++--
+ drivers/clk/mediatek/clk-mt7981.c |  27 ++--
+ drivers/clk/mediatek/clk-mt7986.c |  23 +--
+ drivers/clk/mediatek/clk-mt7987.c |  21 +--
+ drivers/clk/mediatek/clk-mt7988.c |  37 ++---
+ drivers/clk/mediatek/clk-mt8183.c |  14 +-
+ drivers/clk/mediatek/clk-mt8365.c | 297 ++++++++++++++++++++++++++++----------
+ drivers/clk/mediatek/clk-mt8512.c |  11 +-
+ drivers/clk/mediatek/clk-mt8516.c |  14 +-
+ drivers/clk/mediatek/clk-mt8518.c |  16 +-
+ drivers/clk/mediatek/clk-mtk.c    |  88 ++++++++---
+ drivers/clk/mediatek/clk-mtk.h    |   8 +-
+ 15 files changed, 454 insertions(+), 209 deletions(-)
+---
+base-commit: 930eff5416ea98ebd09cec73f5d06a7033b4d52e
+change-id: 20251218-clk-mtk-mt8365-fixes-81a312e8af28
+prerequisite-message-id: <20251210-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-71317e50d414@baylibre.com>
+prerequisite-patch-id: 3520ac6a30d21a4efac14c4d2cae0d72912f9f13
+prerequisite-change-id: 20251215-clk-mtk-improvements-db0b9d1d3113:v1
+prerequisite-patch-id: 2ae6231f7dcfd6fb770d0633c3feb5ee2a3dab1a
+prerequisite-patch-id: 3520ac6a30d21a4efac14c4d2cae0d72912f9f13
+prerequisite-patch-id: b7eb936e644b8123b484e53d0f3ecae2bdad642a
+prerequisite-patch-id: 98d2cd7251129d2e91759a5f18aa10946e465e25
+prerequisite-patch-id: 8214f8af75d20b73a605ad78255b21cedffe68b1
+prerequisite-patch-id: 539af724f889b136a758a6833dbe4d3eaa986a8b
+prerequisite-patch-id: 3330313a7c4178da97b50159ca627aafadfb0049
+prerequisite-patch-id: 96f170f2b16aeacc404270b8444dfe5a928f8a93
+prerequisite-patch-id: 7379668c38c251dbcd81c4d5b72ba5fdaad91a0d
+prerequisite-patch-id: fbe17c1c0d5f18e2a33a8208e63e73292a6b4a5c
+
+Best regards,
 -- 
-2.43.0
+David Lechner <dlechner@baylibre.com>
 
