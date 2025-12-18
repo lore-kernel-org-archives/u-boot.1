@@ -4,87 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A338BD6D226
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 13:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8F7D6D22A
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 14:11:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C61EF83D07;
-	Thu, 18 Dec 2025 14:59:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E533C83DE0;
+	Thu, 18 Dec 2025 15:11:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aoLr3/gE";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="UVmIzhPf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1A6C83DEE; Thu, 18 Dec 2025 14:59:05 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CD7883DEE; Thu, 18 Dec 2025 15:11:35 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2CEE8309A
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 14:58:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBA6883C2B
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:11:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-65b3d3ac90fso203749eaf.1
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 05:58:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766066336; x=1766671136; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1aRHkdlYbGndCTz6Rk0xtRgaGoLRJm2pADeKwRXijuo=;
- b=aoLr3/gEsZ4XppKzPWlj4H819KeByghgqUMpw1FgiWD9KNGsyTrbu/d2G5i9oRa4n4
- J44QMr0ayx0D9TWwljAjgWq/QhPL7boOtKxYqBn8FeCbutu5B4H7PHXD16PCT1VcVTXo
- tVYB/LjSeKnl0zNydYy9UHikoqJTkUvSDkmT0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766066336; x=1766671136;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1aRHkdlYbGndCTz6Rk0xtRgaGoLRJm2pADeKwRXijuo=;
- b=iGXJY6DvwCFurHrLm5vblQ3LQpleqPmG7VBkN7HQCONY4InuOlhmm/O6Pz3XYbvGVK
- CdbJcbDiLJPVH/USqufa5rJeaG4t48oO1JyBtMz/f1njbQuDEZgPI94N/U63lh3HZq7K
- YMkwTo89FvyGkOcx+4uvoX70Rj3GXwx1vCrDI3wsDJ2vKHF6xIDlDFsKJV5h3qgCfX3H
- BtyLHR7Z5fJg4LUD+MzdUXe6F0/JaaYXqACiescSHzy9/SZfeMPKKv59TH9qyJmcufwX
- h+3BMO8e6u6+6IvWe69l57Cphz+SQapbgxeDtLycXRI16dO3tpCBZPH9MFeUgMqZq7yk
- 3RCA==
-X-Gm-Message-State: AOJu0YzQY4rHXVVY9k/0/gZTcwKjhPB2/SH73InOHDvc2iG/y482h8ch
- 6Wcmd1UHuKjZO5W/9V/nS1qiCo0d2wh5wWDX1irCer7CBTBzMxrMbsXFM2JkYDKNRMI=
-X-Gm-Gg: AY/fxX5WcYgukUMIXIdE67X2YlHPXzGLEcw+z4GuNjmnHAadNLbMtF9tAywtP3H4M1o
- 6t3yEN1i0jDF2YdZB+MAsHDTpIzITtAjYpADWfZ22vs/NB+9/4uUJdoWfU3/pACdOeOm+BMxpGG
- zL2ZoV2oD0hqJ9dr5oi37a08hLOuwUr53CjATchUdgsX30q7ucFxS9AabE0BX0Lo/NKchC6k1bF
- 4sFFCA9FHNOBZ9OcaafaJwdR5F1h/22gUYIaGOoIqPmTzJiIye3mIYDcFMMPS8ABAfcEbn0+Fc6
- ErvuMHlcCwezwdq+GsjOLEmr1iZcQzP8xzNHR96YwqvTuFqbwYJGhakMJFlCxWPqQA6b04kVSSF
- aUPVWGb6j3rekPlgbbU1HtHR7oGVHbfhdTJAojKWOO2aW9wNvEwlcHfsH/6fqUIG9dhFsIM8Mis
- qNJLucyV3vj/xy36N0wjc0JEliGq+Ypg4s+URA+n+mKmX58F1ZyA==
-X-Google-Smtp-Source: AGHT+IFmjs+hNLRnpWLuoOSXjUElZ6hrRrYJWt6U+Wv33lsPoxQstNzmai23s5q5m59u5RHJ0DizOA==
-X-Received: by 2002:a05:6820:168b:b0:65d:b36:bdc2 with SMTP id
- 006d021491bc7-65d0b36c30bmr165135eaf.36.1766066336344; 
- Thu, 18 Dec 2025 05:58:56 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fa18024d96sm1669110fac.22.2025.12.18.05.58.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 05:58:55 -0800 (PST)
-Date: Thu, 18 Dec 2025 07:58:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 3/3] env: Add single to redundant environment upgrade path
-Message-ID: <20251218135853.GG303283@bill-the-cat>
-References: <20251217201323.756419-1-marek.vasut+renesas@mailbox.org>
- <20251217201323.756419-3-marek.vasut+renesas@mailbox.org>
- <20251217205610.GF303283@bill-the-cat>
- <bdfbfcbc-74f3-4191-b4e9-b4de0e8cbd16@mailbox.org>
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id BC125C1A5AF;
+ Thu, 18 Dec 2025 14:11:07 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 3E15E606B6;
+ Thu, 18 Dec 2025 14:11:32 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 594C2102F0B2D; Thu, 18 Dec 2025 15:11:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1766067087; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=E8Z8/XF6pB4JqVePhR339DrZcrbDLGbVqeUExgXqmis=;
+ b=UVmIzhPftbpy8dYhKU7I/imDBuHYr4aJy4cAAaexbP3Nq8x+HD8SjHTmq4dFIHd/M/FKZQ
+ FBM/tT+S2JjHWtuMfaelKbXT73iAfEzQFEKGTO7YmcKdELwwEZhJDGVaa5v5fatLh3B9pL
+ NIE2L9HDBYCeLQfXfTQpfZqkYCFod/EUJWLYOr6YmFVxIvWI4hNDc9InxhXWJrPv/tjZo3
+ 52f3uc35Uux9gSYGwxl/t4RMI1NO961F37H1NXBQ0QiWOOnlkkMPxrR8Il/NwG2lNhCYto
+ tCgL+GFbm2uDVrgfJAPld3+UUiawEsMalEYKuCR17nZd3Y9yucl3kaA9cG/zFg==
+Date: Thu, 18 Dec 2025 15:11:21 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Julien Masson <jmasson@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de, Tom
+ Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Wallner
+ <wolfgang.wallner@at.abb.com>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] boot: fix missing dependency for BOOTMETH_ANDROID
+Message-ID: <20251218151121.7a4a3d32@kmaincent-XPS-13-7390>
+In-Reply-To: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
+References: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KzCEyKzmGFLKBsAu"
-Content-Disposition: inline
-In-Reply-To: <bdfbfcbc-74f3-4191-b4e9-b4de0e8cbd16@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,79 +77,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 18 Dec 2025 13:19:07 +0100
+Quentin Schulz <foss+uboot@0leil.net> wrote:
 
---KzCEyKzmGFLKBsAu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>=20
+> The code depends on set_avendor_bootimg_addr and set_abootimg_addr
+> functions which are only defined in cmd/abootimg.c, only built when
+> CMD_ABOOTIMG=3Dy so let's add a dependency.
+>=20
+> It should be "depends on" to be properly implemented, but we get a
+> circular dependency otherwise:
+> boot/Kconfig:566:error: recursive dependency detected!
+> boot/Kconfig:566:	symbol BOOTMETH_ANDROID depends on CMD_ABOOTIMG
+> cmd/Kconfig:504:	symbol CMD_ABOOTIMG depends on ANDROID_BOOT_IMAGE
+> boot/Kconfig:7:	symbol ANDROID_BOOT_IMAGE is selected by
+> BOOTMETH_ANDROID
+>=20
+> so instead we do a select. It is safe because CMD_ABOOTIMG depends on
+> ANDROID_BOOT_IMAGE which we select here as well.
+>=20
+> Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Wed, Dec 17, 2025 at 11:58:15PM +0100, Marek Vasut wrote:
-> On 12/17/25 9:56 PM, Tom Rini wrote:
-> > On Wed, Dec 17, 2025 at 09:12:33PM +0100, Marek Vasut wrote:
-> >=20
-> > > Add support for converting single-copy environment to redundant envir=
-onment.
-> > > In case CRC checks on both redundant environment copies fail, try one=
- more
-> > > CRC check on the primary environment copy and treat it as single envi=
-ronment.
-> > > If that check does pass, rewrite the single-copy environment into red=
-undant
-> > > environment format, indicate the environment is valid, and import tha=
-t as
-> > > usual primary copy of redundant environment. Follow up 'env save' wil=
-l then
-> > > store two environment copies and the system will continue to operate =
-as
-> > > regular redundant environment system.
-> > >=20
-> > > Add test which validates this upgrade path. The test starts with spi.=
-bin
-> > > which is pre-populated as single-copy environment and then upgrades t=
-hat
-> > > environment to dual-copy environment.
-> > >=20
-> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > ---
-> > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> > > Cc: Simon Glass <sjg@chromium.org>
-> > > Cc: Tom Rini <trini@konsulko.com>
-> > > Cc: u-boot@lists.denx.de
-> >=20
-> > For merging, a cover letter makes things so much easier, please add one
-> > for v2. And, I think this needs a Kconfig option. I'm sure you added
-> > this because someone has a valid use case but it's going to grow too
-> > many platforms where that feature isn't likely desired. Thanks.
-> Do you actually observe growth ? Because this is calling existing functio=
-ns,
-> so the growth has to be in units of bytes tops.
+Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 
-A good question, I was assuming so but checking xilinx_versal_virt (a
-platform with redundant env) shows yes, it does:
-01: Merge patch series "fit: print conf node compatibles + use property str=
-ing constants"
-05: env: Add single to redundant environment upgrade path
-   aarch64: (for 1/1 boards) all +96.0 text +96.0
-            xilinx_versal_virt: all +96 text +96
-               u-boot: add: 0/0, grow: 1/0 bytes: 84/0 (84)
-                 function                                   old     new   d=
-elta
-                 env_check_redund                           316     400    =
- +84
-
+Thank you!
 --=20
-Tom
-
---KzCEyKzmGFLKBsAu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUQImgAKCRAr4qD1Cr/k
-CkjCAP4rAuxZbphZmKnkqRvyiNItrw+mJz0OLu9+5iRsUij8mwD8CeXYzd95hfar
-8zZ7A+ZBzL/RwT/lXF9EkbgE4RbJ/Qg=
-=bKiF
------END PGP SIGNATURE-----
-
---KzCEyKzmGFLKBsAu--
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
