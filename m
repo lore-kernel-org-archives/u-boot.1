@@ -4,106 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD2FBD6D22E
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 15:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A08D6D232
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 15:25:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56F7083DEE;
-	Thu, 18 Dec 2025 16:03:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A5A1383DEE;
+	Thu, 18 Dec 2025 16:25:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d7eWjDLh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TBuvPeVB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7374683E21; Thu, 18 Dec 2025 16:03:04 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C66AD83E0E; Thu, 18 Dec 2025 16:25:16 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3E6983DE4
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 16:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AE2783DE4
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 16:25:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-78e7cfd782aso6031747b3.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:03:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1766070179; x=1766674979; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gu0vdhcHChm9g7IpJld7/CqnvFxY8y+ABgkNcRGUgNA=;
- b=d7eWjDLh0dzr2JPcJCG6KIwYX3lbASaKHaAmYt/H8cG2N377qq0kvg0HQPqH8i8Mie
- ClcfOJ1jNgzGpM1iPXLQom38wMghSeCQnXUhY8BtqVxgzN1wVMj2iit/AevyYsa4058R
- E3ok6h9lpTOS1KB5+6sdBkv7NH06wR8znL8R7mRKs8gINjHS3jRLcpvC8LR661CtrCOX
- baId9n5YONI2y2DVA/9QzxPEf5rPZFqxB0ZMXqRmhdwbE9FsjzIorgc6z8TVPP98le+B
- a6Xt8l6o+rUdLJzJPHpKCGS/ko42R1bg2U5hQmXh7oaW44pxg0p05HZhevXIKWB5KfLX
- U5nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766070179; x=1766674979;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gu0vdhcHChm9g7IpJld7/CqnvFxY8y+ABgkNcRGUgNA=;
- b=Q9TKbzcgCqN3DCRmiTqsOIIVr3xUbMLztdz1a4iNaJ7seJjaNyQUzzROLvwI8d3ZLj
- CU3nbyA7eQf8P0nPadmbvAM+h5jp03phom/h6l4+8EiwsKF5TM8PfI/elLU1r0FmNnB9
- AKdMameVOZtObtkq8c5/3lryj7A8khqLcvHc3lblBN8dFELpBByJY1e8o6pvOKYfOkva
- d09ZYqcA9Gy0+bomQps0ihYRwJOJ0EtnAo2Rxq3EY899DrqdcURLN7jTQy72eZuH2GJB
- c9tmkd6S8lIwb6HkZuKD8AN8Wz2RyCp4b5IO/KRSpdX6jDwWPbuLI6dbtW/J/OdL+kpI
- xt8w==
-X-Gm-Message-State: AOJu0Yz8SVhbdMjJ9nbSQ1xz45MoEIM1hCanxofTNxO7ZxS1hIqhic69
- Wza8b/YGRBcx193EBL8CxCUrSEOKfHOK5taAPbGNqHAbxcRHtxTv48kff1Ev10QQinw9KJzE4xL
- uTdJs0lZEPYRrR+yNLWeN8RB8GmZVQ84PL2E5BNXXeQ==
-X-Gm-Gg: AY/fxX7UKBTLYKRduWMY/HGfSu2S9au7D415di0dE/vFIpcK44Z8tTureTtjzHJMqW7
- 2yi8EVs08J40aWbsxmpCPdY4/LL7n1z9TyVXnm205+V3aRLzby/DkALRrkTbJ6lX7vQeOmhMV7J
- ZpMTMEnrIfkMFgMqnRggipeMUuhVt3OKaQ1OvEFZH/ASXD8iHjXqsPC4hgXYrLhdTgUTMoQBVm7
- A5rwpWtaO3MDGNd+1WKxrUZyfpAKk8jh3ldGS9D+HVy9ZXThrCkgAhJhyR9d0naI6bidr/BfnvD
- Cj7OXU8tKKPn7UfWIS7f5H3DVPm98anK0onO4XcyFX3uLjmFQvBucldlRHvW9NkQB2QnUlwlLfP
- aWpArQjqiuPSzMhXKjBkV3cZsUdxUquqoDHW0owD5AZ53i/fCN3gTM7EIjqSB9X9XavFWNKYOzD
- x8bSf4M6PTyCbYZYw9h9P1IJsXD5pN9Ue27/iqAPfu1kDzYE8cHF9kTtbAR0DDE/U8Jw1Dwh+CA
- 6OJny8sLiKYgpDJr8qAPV48U8Idjw4Hp4en+wpcnNgfuHw/7y2MgKbH6OZczi95FRamJixTuQez
- fPVeH9CCpEEldFRWwCf4VrcNlgEbX78=
-X-Google-Smtp-Source: AGHT+IFc51+GT4YtJj15SPxqs5yeCYCAfOI6Amxy22IKnmH3z6/+qwDvwH0L/atCRT12tPOnQ9/PFGQh2BplnAja5BU=
-X-Received: by 2002:a05:690e:1405:b0:63f:abf6:1c9 with SMTP id
- 956f58d0204a3-645555e893dmr15912752d50.25.1766070177813; Thu, 18 Dec 2025
- 07:02:57 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kTv+Mq6rMd1cFGj4/UX4cHTZ82l+28hJu43oYvtLulV7KTYa0/r5kWm5ivGqiNIclPEoiE+sT9yzhGUmU/X5CmCGhRqdNN26KUqtytAvjmZoF7L7hKSXGGx86VB5n2ACqYmKHSZZyheKIK9QOeW+bRizU+mF/1osVw7ZzX9Qr3GnwLSJERErzfAGP/mv1gZwbNexi95ca6uVyLxJ/WmpSZUTujCd2pH+yX1K+hA9dvIy5y0Uh64Qp8MetT3r66q3cglGLdg+vccj3jUMlRxT/Dc++dKt2+dnNPplwXHDJxLqIfl+iW5SiMucMwYqbckSfAqOLemURJRbLNXXM0AjJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4RA3WDdcRuK4b9pKcfm/LQvt2uzopM9jo+5E9FZLWB4=;
+ b=LX4Qo8Wql3hYVejCUebb+vCr2mn0DbTj3qAUh3JvSwWVe2x642P+c0UmKku+1JMXVJpsxwpYxfw4MtkcN4kkB3xmeXdVp2QDqO64NjiGGMd3KKVYaYqS1OInaGyseddGr7Lu+e84kR/8H1lw3IaI7SKD+C6sacVbRNY5YDu9ldE73aPLJ41slcL/TgWibHFEzWZWqObw7KD0He3yUX6sFjBnJ6AOziexd8s4wEbRD/sjRopJr9HfbLSp9unhYoeyg+t6S+ddlzAEhxo1gv8qwPAHHL1oChTAC9n7gnxmARhDJ2mDkNBtB0IQDC2OWiwowTcMeFh85za4qYqrWo4PWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=dh-electronics.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4RA3WDdcRuK4b9pKcfm/LQvt2uzopM9jo+5E9FZLWB4=;
+ b=TBuvPeVB9vI7ao1kOmKw6enNvFxsHVwTVy2czhZv+8uVxSCr5FzBeAN7crSydMhCCt/IxZM4NYjKRp6YUTnY7poH3gFUbD3PmsjK35N+zfM+LENrPkqPis31oOlF2TCMce2alxTwbTKkUJkPT2xFKS1s6tGJ+Jv/7EH+QgIPG1o=
+Received: from MN0P220CA0022.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::12)
+ by DM4PR10MB6205.namprd10.prod.outlook.com (2603:10b6:8:88::5) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.6; Thu, 18 Dec 2025 15:25:08 +0000
+Received: from BN3PEPF0000B372.namprd21.prod.outlook.com
+ (2603:10b6:208:52e:cafe::1b) by MN0P220CA0022.outlook.office365.com
+ (2603:10b6:208:52e::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.8 via Frontend Transport; Thu,
+ 18 Dec 2025 15:25:08 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN3PEPF0000B372.mail.protection.outlook.com (10.167.243.169) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9456.0 via Frontend Transport; Thu, 18 Dec 2025 15:25:07 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
+ 2025 09:25:04 -0600
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
+ 2025 09:25:03 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 18 Dec 2025 09:25:03 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BIFP3Ga3572581;
+ Thu, 18 Dec 2025 09:25:03 -0600
+Message-ID: <c8296852-16ce-4775-bdbd-6a41d4600619@ti.com>
+Date: Thu, 18 Dec 2025 09:25:03 -0600
 MIME-Version: 1.0
-References: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
- <CAC_iWjLT1OJxADQ5bZaz_E7shWbGUJSnDQK7_dQM7agOKEvK0A@mail.gmail.com>
- <20251218144902.62ca232b@kmaincent-XPS-13-7390>
-In-Reply-To: <20251218144902.62ca232b@kmaincent-XPS-13-7390>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 18 Dec 2025 17:02:21 +0200
-X-Gm-Features: AQt7F2rYoMJKuJ8RLqOal8FFFr7k342Equy0l1CydZUi2eI0gGW_eGFI4U06CgM
-Message-ID: <CAC_iWjKmPDxupZ2pP-ZouxsOLPWKdo7pkgPgR4VFgOjnt=BQiw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] Add support for fwumdata
-To: Kory Maincent <kory.maincent@bootlin.com>,
- Jose Marinho <Jose.Marinho@arm.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Jerome Forissier <jerome.forissier@linaro.org>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- E Shattow <e@freeshell.de>, 
- Raymond Mao <raymondmaoca@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Daniel Golle <daniel@makrotopia.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Yao Zi <ziyao@disroot.org>, 
- Leonard Anderweit <l.anderweit@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next v3] Kconfig: select
+ SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3
+To: Tom Rini <trini@konsulko.com>
+CC: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>, Judith Mendez
+ <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, Hrushikesh Salunke
+ <h-salunke@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh R
+ <vigneshr@ti.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>
+References: <20251204-am65_dfu_fix-v3-1-de18ed3f346d@ti.com>
+ <DEZHV1ELFZ43.E3FN619R0UNY@ti.com> <20251216140104.GU303283@bill-the-cat>
+ <DF08W9D84X84.1DQ1VM5S8TT9D@ti.com> <20251218141653.GI303283@bill-the-cat>
+ <210ecc7f-4de4-40e8-8c15-5a6231df48a4@ti.com>
+ <20251218145801.GJ303283@bill-the-cat>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20251218145801.GJ303283@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B372:EE_|DM4PR10MB6205:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f67b3b3-8854-4544-9802-08de3e49a013
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bFhvM2pIVndVWUJkOEVCb3lRYy9SMUFGNHJyWVNPMHViSWhGekttdU02aFFE?=
+ =?utf-8?B?ZkJxYTl0a1gzWWdVcUNIYWtYeDFQM0xDbHRvcWRQN2V0R3phbW9sL1RrZ21J?=
+ =?utf-8?B?QUluSDVVV0s5eFpnSkRMcVZQQnpzSFRhdmMwMVl0US90cVphSUpJWWh5bm5z?=
+ =?utf-8?B?TzBKbmVtTnUwWFdhcVZhQlRsMWNuOFdENTB4NmE1cS95L1krOEZFTytIMlVT?=
+ =?utf-8?B?RmV2ejc0S3hveHNNMElTVzBNVGxHYnZmcVlORjlaSU1TSysxTmFsQm5Va2J5?=
+ =?utf-8?B?WFUwUUZxbXM4N0d6Ny8veHlTZG5QK2JaUFJVcGYyNnR2SFZoVmxtSURnZVlB?=
+ =?utf-8?B?QkZFOXFZNVJsUlpiaFRvWExBY2dQRU9DNXhyUXlHMWRWcCt2WGYvaldQQkYr?=
+ =?utf-8?B?V25Nek9oaVd4TnNVUFpZY3pFTWVlR0x2RmhDZlZGL2ZoRStoWTBXNVpnNXJT?=
+ =?utf-8?B?RU5TUk8rUVhkRnBmRDVFSkxUdDZoNkZ0UytISWhZdDVoRmpVQWltUjdTMEc2?=
+ =?utf-8?B?Nms5eVdQSVJwWEVwZXVtT05ydE5YR1djQVVFSnI3MFhrVDZMclpEQ1FqQ2tw?=
+ =?utf-8?B?cUxHT0pNZ1Vrdm1vMUZnZWwyMXF0N3BhSHJzQ29ETTNTV2QzcFU1RkQzRTF4?=
+ =?utf-8?B?MXBBbTdja2RpRTJ4dUc2ckFEaFpWN2xZRHNiN2FESDNra3B6OEFnc1Rub244?=
+ =?utf-8?B?TXlkVkViMHYrb09VeVVQMFo4QndsbU82TGJOSmtKcW9sQm5EMm9lUXBCMXdz?=
+ =?utf-8?B?aGF3MmF2TEtuU2dxVkdwN2RabXNkejVWQWNYMzloTHQxVU1xMHVjM0ZWSHpF?=
+ =?utf-8?B?dUdTbmdIeUhRSkkvM012K0xtcmt4S0hhdzRTR2NWRlIva2EreTN5M3pzUTZw?=
+ =?utf-8?B?ZG0ya3IvR3hDS1VtQWF6d1ZrTUdXMysvbVFrY3RKbWNoaWkxVGVOb3MyZUNW?=
+ =?utf-8?B?ZFVhdUJOOFMvRkVHUDYrS1JRNWVjWXh3eHA5eEhKQnZsR0tQL2IrSW9FRFhW?=
+ =?utf-8?B?NXl6Rk1yTnVVVkpQREp6OGlXNXM2bEk1NEVFMTZkR2tzV1IvSDhlajdwVDdY?=
+ =?utf-8?B?blJFRWxtRXNpdnMvVytscWU5am4zaEFHRmdsTnpFc2tCeS9Zakhad09TWCtN?=
+ =?utf-8?B?eXo4ckIzWWNCcWU4NWV2d0I5em5Td1JZOUx4S3VWbUJqdE5sOVhwWXppazVX?=
+ =?utf-8?B?UjNoVmdBaDJQVWloL2hDU3NuWnh3Z0NWR1NRNnBubDJycjZJbTJQbjgwOFZP?=
+ =?utf-8?B?YTExSnVpMmhJd0MyU1JNMU1OOURzMTlEQTM3aElnaGJqS1E0S3NxUmFtQmk3?=
+ =?utf-8?B?SlJEbUw4NGU1RjRrYmY3dENuTDNZSk1ITUhyV2pOYmgyMXk0SU9PV1VoLzV4?=
+ =?utf-8?B?MXYvbkFiTFQ3aWlESXlRbnQrR3pORkQrQVFCZHBzeXQ4dGdlV3RnZmRrQ01q?=
+ =?utf-8?B?aGtEUzJTTko1eS9rZ29VYWo4WTdqWXpUNy9GUDhqNFd0NW43R1pwVmdpSE0v?=
+ =?utf-8?B?UHhFMnhSTGMrWXhTSDdON08vcTA3VWZabFNGUmtBUWZEbFlMTG9kMGdtT1p3?=
+ =?utf-8?B?bkh2YkNNTER2d3pxbDZhMVc4WWdiODJFVXJ5K2kzYkkrVlN6NTNJOFA1NXhy?=
+ =?utf-8?B?TWpaOVlaOEJYZE91SlU1Zk05VEVvMWx2WkJoaHRGejhRSDBoY3JpeHRnbnJC?=
+ =?utf-8?B?WkxwRncxK1llaGRSd1dGbWVzVzlqaTVEeFNMMlc2Z1VnZnBXMndoNU5hT21y?=
+ =?utf-8?B?YktXY0Y1TDF1aTV5cUp3ZmlZOUZkUGR0R0xBZ2h4K3RWRGZqYmRDMkIyajhp?=
+ =?utf-8?B?T2FlR2VDN1M0ekpoOUkwT0tiR1NBbVNmVG5TdjFkbS84bkVQNnhxMDRkT2gv?=
+ =?utf-8?B?dUEyU2drZGRFV1BrQk5pcSthUzdrNzRkN0c4MnBsQ0V6MXkzQ2x3eDMyRyt4?=
+ =?utf-8?B?R1hQUFg0RzF0RUdkRHN6b3hzU2VKbElnTmMrUWsreHpvV0VOdHNIS2tJbGl3?=
+ =?utf-8?B?anZUUVhiRHRtQ3Q4d0VIa1d1bXdud2lvOTNaS2JPMTRWd0RFWkJBUzQ3aU5T?=
+ =?utf-8?B?cGxDTGdDVlJiRENXUjNOaGtabGdJbHRjUlBjMjNlUndDQWwzT3U4YW9Nakt6?=
+ =?utf-8?Q?oogs=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 15:25:07.1156 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f67b3b3-8854-4544-9802-08de3e49a013
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B372.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6205
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,179 +172,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kory,
+On 12/18/25 8:58 AM, Tom Rini wrote:
+> On Thu, Dec 18, 2025 at 08:41:57AM -0600, Andrew Davis wrote:
+>> On 12/18/25 8:16 AM, Tom Rini wrote:
+>>> On Wed, Dec 17, 2025 at 11:03:43AM +0530, Anshul Dalal wrote:
+>>>> On Tue Dec 16, 2025 at 7:31 PM IST, Tom Rini wrote:
+>>>>> On Tue, Dec 16, 2025 at 01:52:37PM +0530, Anshul Dalal wrote:
+>>>>>> Hi all,
+>>>>>>
+>>>>>> Any updates on this patch? If possible could we pull this fix into
+>>>>>> master as well for the 2026.01 release?
+>>>>>
+>>>>> I thought the feedback was that this was a generic problem and so the
+>>>>> Kconfig logic should be universal, or there was an incorrectly /
+>>>>> sub-optimally handled case in the tiny printf code, that needs fixing.
+>>>>
+>>>> We have a few ways to go about fixing this:
+>>>>
+>>>> 1. Fix the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
+>>>>      with an extra Kconfig"):
+>>>>
+>>>>      Pointer formatting used to fall back to %x handling before the
+>>>>      commit. Though going by the commit description, it looks like the
+>>>>      change was intended. So, I'm unsure if we should re-introduce the
+>>>>      confusing handling back where %p is handled but not %pa or %pap.
+>>>>
+>>>> 2. Add SPL_USE_TINY_PRINTF_POINTER_SUPPORT per defconfig:
+>>>>
+>>>>      This was what v2 of the series were attempting to do but as Andrew
+>>>>      pointed out, there might be other platforms with similar issues and
+>>>>      it would be better to fix it for K3 overall.
+>>>>
+>>>> 3. Change usage of %p in k3_sysfw_dfu_download to %x:
+>>>>
+>>>>      This is a suitable fix imo but we might still have to fix similar
+>>>>      usages of %p in other places. We'd also have to be more careful when
+>>>>      bringing proper U-Boot code to SPL since %p would not work the same
+>>>>      way.
+>>>>
+>>
+>> For what it's worth my preference would be this one. We should just work
+>> to avoid using %p in general outside of debug statements.
+> 
+> I'm also fine with that.
+> 
+>>>> 4. Unconditionally select SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3:
+>>>>
+>>>>      This allows us to remedy the problems with above 3 solutions with
+>>>>      very little overhead to the SPL size (<100 bytes).
+>>>>
+>>
+>> How about unconditionally select this for all platforms? If it is only
+>> saving 100 bytes it shouldn't be an issue for most, then platforms that
+>> have verified they do not need it (or need to save every last byte) can
+>> then disable it. Seems odd to make a change like "1e24e84db41a" and not
+>> have the default be the existing behavior.
+> 
+> There's just lots of platforms that can't afford much growth.
+> 
+>>>> If this problem is faced by non K3 platforms as well, perhaps it might
+>>>> be better to take the hit and make SPL_USE_TINY_PRINTF_POINTER_SUPPORT
+>>>> default y.
+>>>
+>>> Ah, so now I understand the problem, with point 3. So yes, I think the
+>>> right fix is to add "select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if
+>>> SPL_USE_TINY_PRINTF && DFU && CPU_V7R" under the ARCH_K3 symbol.
+>>>
+>>
+>> Just the length and specificity of that conditional string is making
+>> me think that is not the right solution. What happens when we find
+>> the same issue for SPL DFU on ARM64, or in some other code not
+>> related to DFU, etc..
+> 
+> Part of the answer is that since we should be printing "?" now instead
+> of the wrong value, it should be easier to spot the wrong code. Perhaps
+> we also need something in doc/develop/spl.rst to talk about it (we
+> default to a tiny subset printf, some things don't work without
+> additional options, avoid %p unless you must and then enable
+> SPL_USE...)?
+> 
 
-+CC Jose who maintains the spec from Arm
+That's fair, hopefully folks understand that to make "tiny" printf
+so "tiny" some things needed to be removed, best we can do is thoroughly
+document exactly what those removed features are. The issue here was this
+was a feature that *did* work before in tiny printf, and was since
+removed, more documentation wouldn't have helped.
 
-On Thu, 18 Dec 2025 at 15:49, Kory Maincent <kory.maincent@bootlin.com> wro=
-te:
->
-> Hello Ilias,
->
-> On Thu, 18 Dec 2025 14:04:12 +0200
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->
-> > Hi Kory,
-> >
-> > I haven't lost track of this, I'll try to have a look as soon as I can.
-> > For the record, I still don't think this is a great idea. I'd rather
-> > have people follow the design docs.
->
-> I don't get it. What are your arguments against this tool? It is a simple=
- way
-> to change the content of the FWU metadata from Linux.
+The only way we would hit this issue again now that the feature is removed
+by default is if we are taking code from U-Boot proper where the feature
+does work, and running it in an SPL environment. Maybe we should work
+towards using tiny printf in regular U-Boot also. Would keep function
+behaviors more consistent.
 
-DEN0118 doesn't explicitly require UEFI. However,  the Arm
-architecture is officially supporting the EFI spec. Even from a Linux
-kernel perspective, booting with EFI is encouraged. There is certain
-functionality you don't get without EFI. On top, there are
-manufacturers that keep the metadata in the secure world. I understand
-that the tool is a handy way to change that from Linux.
+Andrew
 
->
-> > I understand the acceptance capsule feels 'weird', but there was a
-> > good reason for it. There's a PR with an update to the spec, which
-> > makes the acceptance substantially easier now that all the ecosystem
-> > parts are in place [0[
-> >
-> > [0] https://github.com/ARM-software/edge-iot-arch-guide/pull/21
->
-> This design guideline is for one use case of FWU Metadata. It needs UEFI =
-and
-> capsule update.
->
-> FWU Metadata is an update standard for ARM architecture, it is not depend=
-ent on
-> the implementation. UEFI with capsule update is one implementation, but w=
-e could
-> have others.
-> https://documentation-service.arm.com/static/660be6391bc22b03bca92702
-
-I've been involved in the document design since the beginning and the
-primary goal was to consume this via EFI & capsules. That's why that
-second document(MBFW) I pointed to exists.
-
->
-> On my case (ST board) there is no UEFI, I have TF-A (FSBL) that reads the=
- FWU
-> metadata to know the location of the FIP Image (SSBL which contain U-boot=
- and
-> OPTEE).
-> During the OTA process, Linux is updating the FWU metadata to change the =
-active
-> bank and the bank state with this new fwumdata tool.
->
-> Note that the previous development of FWU support in U-boot as not been
-> developed in a generic way but bound to the UEFI capsule framework which =
-is not
-> ideal.
-
-Yes, that was on purpose, I reviewed and helped in most of that.
-
-> On my case if I want to read FWU metadata in U-boot I have to enable the
-> UEFI capsule config for nothing.
-
-That's ok. That's an ST call, but I am merely trying to explain the
-reasoning behind the two specs
-
-Regards
-/Ilias
->
-> Regards,
->
-> >
-> > Cheers
-> > /Ilias
-> >
-> > On Fri, 12 Dec 2025 at 18:23, Kory Maincent <kory.maincent@bootlin.com>=
- wrote:
-> > >
-> > > Add a new fwumdata tool to allows users to read, display, and modify =
-FWU
-> > > (Firmware Update) metadata from Linux userspace. It provides function=
-ality
-> > > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-> > > metadata, change active/previous bank indices, modify bank states, an=
-d set
-> > > image acceptance flags. Configuration is done via fwumdata.config fil=
-e.
-> > >
-> > > Made a few change to mkfwumdata tool along the way.
-> > >
-> > > Here is an output example
-> > >
-> > > $ ./fwumdata -l
-> > > FWU Metadata:
-> > >         Version:            2
-> > >         Active Index:       0
-> > >         Previous Index:     1
-> > >         CRC32:              0x1f21ff7b
-> > >         Metadata Size:      120 bytes
-> > >         Descriptor Offset:  32
-> > >         Bank States:
-> > >                 Bank 0: accepted (0xfc)
-> > >                 Bank 1: accepted (0xfc)
-> > >
-> > >         Firmware Store Descriptor:
-> > >                 Number of Banks:       2
-> > >                 Number of Images:      1
-> > >                 Image Entry Size:      80
-> > >                 Bank Info Entry Size:  24
-> > >
-> > >         Images:
-> > >                 Image 0:
-> > >                         Image Type GUID:
-> > > 65ae85ad-1fb3-0b46-8c5d-285543aa6eab Location GUID:
-> > > 51513491-da07-2a4f-9bea-375ea53b1b5c Banks:
-> > >                                 Bank 0:
-> > >                                         Image GUID:
-> > > cb2df442-f929-6a44-a374-672d92eb2aa7 Accepted:    yes (1)
-> > >                                 Bank 1:
-> > >                                         Image GUID:
-> > > a839a18f-395c-484f-83b8-0354077c8f9f Accepted:    yes (1)
-> > >
-> > > Changes in v2:
-> > > - Fix a small offset mistake in last patch
-> > >
-> > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > > ---
-> > > Kory Maincent (6):
-> > >       tools: gitignore: Add mkfwumdata to the git ignore file
-> > >       tools: Reorganize mkfwumdata tool into fwumdata_src directory
-> > >       tools: mkfwumdata: Improve error message specificity
-> > >       tools: mkfwumdata: Add bank count validation for FWU metadata v=
-2
-> > >       tools: Add support for fwumdata tool
-> > >       tools: mkfwumdata: Remove dependency on fwu_mdata.h header
-> > >
-> > >  MAINTAINERS                           |   7 +-
-> > >  doc/develop/uefi/fwu_updates.rst      |   4 +-
-> > >  doc/fwumdata.1                        | 222 +++++++++
-> > >  tools/.gitignore                      |   2 +
-> > >  tools/Kconfig                         |   9 +-
-> > >  tools/Makefile                        |   4 +-
-> > >  tools/fwumdata_src/Kconfig            |  19 +
-> > >  tools/fwumdata_src/fwumdata.c         | 854
-> > > ++++++++++++++++++++++++++++++++++ tools/fwumdata_src/fwumdata.config=
-    |
-> > > 33 ++ tools/fwumdata_src/fwumdata.h         | 138 ++++++
-> > >  tools/fwumdata_src/fwumdata.mk        |  10 +
-> > >  tools/{ =3D> fwumdata_src}/mkfwumdata.c | 106 ++---
-> > >  12 files changed, 1315 insertions(+), 93 deletions(-)
-> > > ---
-> > > base-commit: 31bf4a1c308773895a8e7ea047b3cea037e4c922
-> > > change-id: 20251107-feature_fwumdata-58508d61e1d3
-> > >
-> > > Best regards,
-> > > --
-> > > K=C3=B6ry Maincent, Bootlin
-> > > Embedded Linux and kernel engineering
-> > > https://bootlin.com
-> > >
->
->
->
-> --
-> K=C3=B6ry Maincent, Bootlin
-> Embedded Linux and kernel engineering
-> https://bootlin.com
