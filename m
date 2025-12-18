@@ -4,97 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3BFD6ACFB
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 13:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ABEED6D220
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 13:44:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93BE83D8A;
-	Thu, 18 Dec 2025 14:33:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D6EBC83D8A;
+	Thu, 18 Dec 2025 14:44:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eLQxjgBi";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qGBOPqOU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CE7783D8A; Thu, 18 Dec 2025 14:15:56 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C9C283DBD; Thu, 18 Dec 2025 14:44:45 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15D7383D07
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 14:15:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C68083D07
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 14:44:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-47774d3536dso5414095e9.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 05:15:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1766063753; x=1766668553; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YqlnGOKGFryjYQ35+NoEdOPUi/0DjCKE46/trxymfmw=;
- b=eLQxjgBicccbP30V1x4OJ5sQwXhFexJYFcFAsfciVr8NkevSaAg1r+Ae4n8h1bB6tv
- toeKqmAtXAmbfhP2RKRxwBDcw07TZAp2h8Gkjj23jH+xzZmfgLFSKUoUtHcFwPCmTrKH
- VsTmAHMefONS8eCiP/bx57scm01S8Ga11sEt7M1bBwYeShCGAzEYaVLzxsm+0awkU+rc
- ZkKnxobUYxWNs+BfFGjwatx56ip0fLGA5YQAiUEzzJju1STFPS7v/8m6u/i7ZAIFvgeu
- HJuijCcj1yHjJtJZYBKasYKqTxax1GTymMe716ItppysAaCqIL0RHhNncWXHPG+m+pdL
- JYtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766063753; x=1766668553;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YqlnGOKGFryjYQ35+NoEdOPUi/0DjCKE46/trxymfmw=;
- b=nZqS5mkStb2PVfr2Lsw4kr4GwqSmdF9HW/15p/MABdalAdF7MdSTOsqANbepU3wh/P
- Cg0U5QW6SzDlexKenC9VUI8Uqh3UG8cAXTe/Lof3HlgEKRACWmr6iKDdP08IVUuNUty0
- A4GkdK/emIQdJGTb/Owvf2E7rlqadctJImrmwhE+bQbkPZ+1RznCkgVRWwGsMIigiQnI
- BkSlKytqkrdXr+vHEH5Q8LHDsLVtRE2MctYmT4EU5LaE2f2Ld6P+aAVOHBdFSN3dho1k
- MQZwNtdJbaT+VNAKDQScbWL14W9Cckb94oQKovRJgXxOeMsqJPMktTDFGsHmpIJkKVUA
- l5dQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZL8Ll4TviLOWYDQVWd4Z6fbooAC6xRS7+Xa/BtZYegDB1LhN7/YavCbtqziEMVNDbPE8Om84=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywhy7xhZo9WNMzSNNrvApgkEUpvVHv2ZHV9FoDzf5PDH8vPUGSg
- jxOQkE8xhcYy97hqR9CqAf5VK8Qf3M3d7+XUBTEtfuObJgRQX2S4WM0M7xbdK3MVCGw=
-X-Gm-Gg: AY/fxX7h6ZDHuAauDKILYt6dkWnWnYRWqNM1Nn5jN41UXw1IOD1mCXb3hO7W6GGBk14
- kwzMELyNQNOcJgSvpqeHdkIydISLRjRIDqONJAdgR6tlZCjggT1jM/DASD4XgSRPC2dMCZe4Y4f
- 5rE1wroM+rwDHyS6uuOjgkW4zcNQyQ6cL9Gl+ucMR60h3oeXhEKfe/gnBJDZv3zpm3TMoB9mRFB
- AzwQv42XZm7D8GferEeP9KIzTAeFcrMS0HVD/tKz/kIZX/p6tau/Rd1NqLfjT8r9t5NSlXb6QQO
- HNvqULp8a2DSzUZOHX/YH1X7dH7zRifnK2pbTYjYgIuXYmXd0KOM9jVDlyYyahcfn/7vuZaCB+u
- 8wz5EH4XK2IOpHknMYjHD7/uB5Lhzfm1g5TFWlEzYznyqzEuBIYAMIEVAfT3VV20lcJAIk1NaSO
- UqD1RP5vi9fb/emunbzhMQuPmqFXpO76KkEYVsxJ0wkHyKY00C4z5Vukz+X5tiPdlIxg==
-X-Google-Smtp-Source: AGHT+IEcTj8PfnK4CuZGSvUHXw24c1T/lUq3BLuNWi6kW1dq/5mGGmc7rbAmCF25EZ08tAKil/Pp0Q==
-X-Received: by 2002:a05:600c:1d20:b0:477:9890:9ab8 with SMTP id
- 5b1f17b1804b1-47be29a52bfmr31622905e9.3.1766063753453; 
- Thu, 18 Dec 2025 05:15:53 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:cf83:fadc:3e6e:2b4e?
- ([2a01:e0a:3cb:7bb0:cf83:fadc:3e6e:2b4e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be3acdb87sm13437915e9.16.2025.12.18.05.15.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Dec 2025 05:15:53 -0800 (PST)
-Message-ID: <5ee9a4c5-ba21-428c-af12-6a83017c3ca2@linaro.org>
-Date: Thu, 18 Dec 2025 14:15:52 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C82C943255;
+ Thu, 18 Dec 2025 13:44:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34EAFC4CEFB;
+ Thu, 18 Dec 2025 13:44:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1766065481;
+ bh=4cmp3Ud/gOp5GLafInAlnYYbAleYTMPQGV9ejJIIn9w=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=qGBOPqOUVQGB3zWWmXLJBP2TbK0FjUkFkONg/DRvlVESmVYhG7Wba2w45voSRuM7f
+ yyaqoiMQ4yRtrvmRY5rHPB8GWT/Zt+CmvdBEtkeN+PXGxewIX/+oPOK6cRp6C9KPhD
+ OjT7ph0ZHyu+kmKu7f7lntMrj2yVUCC3AQke6NbqiagA5SB2QmJ4Pye2+oBZNvWtMw
+ AlwmFP3ADoJS5N3d3YwwJ+zWfBVf9Dl/NQZBIOTWfBWTmIOsmi74oD9gRohiIp1Gx1
+ 7WheMhSAF0kEQqYuJ1v2k5egY/HpkzvvHW6VhcAmnCPr5H/bbOV9aT1e3kw3dXa+Lt
+ Uviplljd3jUjg==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Quentin Schulz <foss+uboot@0leil.net>, Julien Masson
+ <jmasson@baylibre.com>, Simon Glass <sjg@chromium.org>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, "Kory Maincent (TI.com)"
+ <kory.maincent@bootlin.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Wallner
+ <wolfgang.wallner@at.abb.com>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] boot: fix missing dependency for BOOTMETH_ANDROID
+In-Reply-To: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
+References: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
+Date: Thu, 18 Dec 2025 14:44:38 +0100
+Message-ID: <875xa3dhvd.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spl: fix incorrect dependency for SPL_NET
-To: Quentin Schulz <foss+uboot@0leil.net>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20251218-spl_net-deps-v1-1-e943f3899574@cherry.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20251218-spl_net-deps-v1-1-e943f3899574@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 18 Dec 2025 14:33:52 +0100
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,46 +73,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/25 13:05, Quentin Schulz wrote:
+Hi Quentin,
+
+Thank you for the patch.
+
+On Thu, Dec 18, 2025 at 13:19, Quentin Schulz <foss+uboot@0leil.net> wrote:
+
 > From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> SPL_NET depends on symbols that are only available if the legacy
-> networking stable is made available. It is however possible to build
-
-s/stable/stack/
-
-> U-Boot without a networking stack at all, in which case SPL_NET will not
-> compile. Fix this oversight by making sure a network stack (and the
-> legacy one) is available.
-> 
-> Fixes: 8cb330355bd5 ("net: introduce alternative implementation as net/lwip/")
+>
+> The code depends on set_avendor_bootimg_addr and set_abootimg_addr
+> functions which are only defined in cmd/abootimg.c, only built when
+> CMD_ABOOTIMG=y so let's add a dependency.
+>
+> It should be "depends on" to be properly implemented, but we get a
+> circular dependency otherwise:
+> boot/Kconfig:566:error: recursive dependency detected!
+> boot/Kconfig:566:	symbol BOOTMETH_ANDROID depends on CMD_ABOOTIMG
+> cmd/Kconfig:504:	symbol CMD_ABOOTIMG depends on ANDROID_BOOT_IMAGE
+> boot/Kconfig:7:	symbol ANDROID_BOOT_IMAGE is selected by BOOTMETH_ANDROID
+>
+> so instead we do a select. It is safe because CMD_ABOOTIMG depends on
+> ANDROID_BOOT_IMAGE which we select here as well.
+>
+> Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
 > ---
->  common/spl/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 3b7b6cafef8..ba434d5c46e 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1148,7 +1148,7 @@ config SPL_DM_SPI_FLASH
->  
->  config SPL_NET
->  	bool "Support networking"
-> -	depends on !NET_LWIP
-> +	depends on NET
->  	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
->  	help
->  	  Enable support for network devices (such as Ethernet) in SPL.
-> 
+>  boot/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 245e120c70b..aa135a4e1a5 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -568,6 +568,7 @@ config BOOTMETH_ANDROID
+>  	depends on X86 || ARM || SANDBOX
+>  	depends on CMDLINE
+>  	select ANDROID_BOOT_IMAGE
+> +	select CMD_ABOOTIMG
+>  	select CMD_BCB
+>  	imply CMD_FASTBOOT
+>  	imply FASTBOOT if !NET_LWIP
+>
 > ---
 > base-commit: 47b50fb1125c539d80ed3e7f739c02c6486e1b52
-> change-id: 20251218-spl_net-deps-62072f51243a
-> 
+> change-id: 20251218-bootmeth_android-deps-a16555d168e5
+>
 > Best regards,
-
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-
-Thanks,
--- 
-Jerome
+> -- 
+> Quentin Schulz <quentin.schulz@cherry.de>
