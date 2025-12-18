@@ -4,99 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2360ED68BED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 08:04:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A104ED68BED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 08:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C71C83C94;
-	Thu, 18 Dec 2025 09:04:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB11583C94;
+	Thu, 18 Dec 2025 09:06:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ubk9XDIV";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="S2xCJYlB";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XvAjgyyE";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Z0HcvWJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D50F883CAA; Thu, 18 Dec 2025 09:04:34 +0100 (CET)
+ id A6D2F83CB9; Thu, 18 Dec 2025 09:06:17 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EF9283C54
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:04:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84DA983C54
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:06:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BI1YZeS4147974
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:04:30 GMT
+ 5BI1Yjnk167749
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:06:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=q0Hn/NNZnglya3aTsa99H6wW
- drz0fzsHZewJGi6ToRg=; b=Ubk9XDIV9n60rywC06rPc+2LVPU7YgePlG4EyjGa
- lIudwL43kjfu9KJ7O0rcilKEQPWMq58UnGUsfcTMJXEsYMuM0ZNLhBog2F5MnQTS
- jR5leVCvxgRvIrfKtp8K99JLYVdbIIMpIkNYs9B8M/BloTL2RsxF+W+iTV3blEnA
- V5tjexRzhEFHT8hr72y+yrA///v7wGEDT/5BNlcEZ/RmZzqztkWq0SmloaYorUGy
- LRcXkO/M0gsel6QBs9/3RJsjR8u6Z+lmwLrehpR8al6afDJsXB9s75J6Bn1HTACp
- 2B9iil7IYlFH5AVrx3LG+9okCMLS8CmWzWmVSGkNDQ0wiQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b40u7a7a8-1
+ :references:subject:to; s=qcppdkim1; bh=G2d5+nLcQwRPPciddjJvO20d
+ Kowod+7/PcMa2ATiL+o=; b=XvAjgyyEMZ3UMY9b6b4Ct3k36+uwn2j4vXoTiGNN
+ 0L1e08t6PG2jUfmEfGHFJ3vQVyBgijqbXb12m4uLcN/x8fq7UJlflfVydvUIuPPH
+ dnEyLU1twHkgijXScxsYicEPo2mStTvdV46pvZMn2FNr6LbOSFbvF/FxMwGhl6gy
+ v8wf7Mlj+IwaYv0lW4JU/50v6d0p0GO4t93B0JXcKTAC3dfuV4lPNXC57zkIoLAS
+ dfqhd+0YGJkCm02npGQNEuNG4dmk1xZ0/06ke/ZtephLhdDPeoMd9NXghRRDQhoU
+ S0npWBzfYlN4+yqS3XdP3wHXvOLANz0QuDe6ogtpqTresA==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b45w51b31-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:04:30 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-29efd658fadso11849935ad.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 00:04:30 -0800 (PST)
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:06:13 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-7aa9f595688so737597b3a.2
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 00:06:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1766045070; x=1766649870; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1766045173; x=1766649973; darn=lists.denx.de; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=q0Hn/NNZnglya3aTsa99H6wWdrz0fzsHZewJGi6ToRg=;
- b=S2xCJYlBJHnk9tNnrVSrFjnU6kASoNIoqYxNdwzs7ICpS1WcHuENDKkB4eQGlhQlEv
- H9oAXN2uvUjfGB+tD0YY6KaIBC4mfQyiKjX+qo5I3Gt0UZgKKm0XqkKaeqZSP71UxVVk
- bLJ8g02Sf7orAQ6FZ9U7QBf/035RA5FFgUoW2vkcuYPxzVGUxI/Sib1gYzSFs5zyevX7
- mTgW+8LGXz+YRQhT2kTHVIJ6UJaZZlGKlEj2iMbfbGp8v6dKwn90Z8+fhPnA5Pkj625S
- bubCy5ha2RRUnPLaMAYOUg2V5TYpUJ+cE9/8pVw8nw7Rzh6G7ypvAkHmuyT4IXh88FL2
- 2SdA==
+ bh=G2d5+nLcQwRPPciddjJvO20dKowod+7/PcMa2ATiL+o=;
+ b=Z0HcvWJzMNa69X0fqDHFPMRrsAt8KtfGHZR3tAcZoU4k3TMobOQceJSLi/ry4H2FOE
+ aXdWksxDBgfSCDxVru/O/PfKzESfSWb6s8dPfTfhhNANXoCRdjFMuNNpaGSwjXd8gKOF
+ 232xUg+OUXT6DgIRUask45k4otC0sqxk1AXur4ybeQwTkxRXylIPaCX4MWjSj7BUXt2t
+ jJ4KFB0hVtGe6URXzWLCejR4fdvp6nZRZtrxg9HCplRX8EyxeES1N+HECTv3yhgnmAtj
+ bS4JY45Avt4q5SeG2AspfzldFBeJUAqJM1eOsJGqmHDhg0gCsYFcFxLvOkPtA0vX8lHS
+ HYIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766045070; x=1766649870;
+ d=1e100.net; s=20230601; t=1766045173; x=1766649973;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q0Hn/NNZnglya3aTsa99H6wWdrz0fzsHZewJGi6ToRg=;
- b=OBZh/etcqNrs6ZRFKvPwPVM5imCLZ7NBv/EokJcBPQ6TPtfuZzijusSm3FFHtgt8zq
- I7COxA1FderZEaKq7x5J6GIdjmoDJRD7VJUPHaSNfp9xH1DsDiU8U8DypzuVd6pWzInv
- aoyEpZP0nA252WCKrZ/icmBK3ENBNS+IoBxaOJYDc0vtN3Q02huDTqilGLjkwzrXSpJL
- +eZ4sXdV82zIpVumFh9/5Xq6Slj8nEDMSRpp3oU3x12jJaDmJjBsb9bKtay350zjblD3
- lAxyfs8T1gm3sApRH+yAUBb/jZQQUImy6JHg9dGh6vJZtWW9CryyXspRk2yDB6WpXH1g
- dodQ==
+ bh=G2d5+nLcQwRPPciddjJvO20dKowod+7/PcMa2ATiL+o=;
+ b=j12hVmivhV4FG2tDUv3rEgW1Nqmtpp6sYOC+G3Y2SDggFkboJqNThdvDLDtdePMi6j
+ Ip4wpmyDxOSW34oV93/87TAXT82lKunmloqrKTOJZ6p+awyQuccI4MF2H+ArXcUsLN1p
+ QGWfIgtL2rtZI6mNf5qIpf/uqdnBl8/m4EKFuTfaxMjGsLSljCsvs3j4QqIvzxhsXcuT
+ pmwRZjGsR74v3oiLHj8V87sfCy1tGM9IiDgjwBW+27qgnSrDngm30ZnkvWbSPptPgRFR
+ SKxxeZjxzYbtVdYsN3QvXDLPqxkUsX2/uhS4HugTzOG3bP4jyX3CdmdvjBTkOe8c8Lk+
+ tNAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKp7mhbE8VaszPgnMpwY2CYnaNwpa5f2k/vK039zyROWYeeMeR6Frlpu5bi48RDiVu9YXnx+c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzoBaPO8fMQmmzXodUyLLsEfiQL2hmT19zrcXQ9czCKkuONU4WB
- CLnlp/0iE37skib6mApqnKVXSEYcdmgLkmsMDM4qmEDv7G+fqLwRum9GUkAddJXNlWgDZKhlgj8
- jNvmB1LME//wV9XmiBU6bUwBYebKcZ8F2ZL+yNlvikBHaqhh9IEEbUCVO
-X-Gm-Gg: AY/fxX4V2R5thMiKhprboyte0cNCGxHnw2F8q5G1k4UXQHK0tRW8h8axxDkcDGCrXQM
- 3mxu0iD+9QOkr29q9ThWwNYL0boim/RtaYAClij7NGCJcMLe8uYngUeLmuWEziChCjF5fgK2LXq
- 87QrbV/52b25RQA8IdrZubqR8Dhxp4cxpPW3lMPWBRn/f25oqctspVa1SEZjHrOvgNLm1Zmzwkp
- ioSR8m/RbNQdr54TtFIf+cqDFFW29DbCXh5NF2BP9D3NGMSfGEbbkwagYbLaH6jRhX9CDCiWdbN
- S1O20hM6pCywnN4MwbYS5F1M5PQ8uhra+aQNHfRIRwcv+thPxVS7I91+KBh29HKKeD3Dp3cxF7g
- W2Rp8683fHfPt9gwbhAc3ahI3w7DbcFJKGgHYkIIFw3JbQfYdAeuo4iplrdoBwOzHLR3gVej78r
- E8HCtFK0m9mBewF6qmmmlVc/lP7xMOTe1XAo4sCHk=
-X-Received: by 2002:a17:902:ea0c:b0:2a1:325b:2cba with SMTP id
- d9443c01a7336-2a1325b2e27mr95250465ad.53.1766045069621; 
- Thu, 18 Dec 2025 00:04:29 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG5UUEPiwcAQMV4ybY8JPaupUlzQRfg/sJYS31Xzy4i7jWC6KGG+WS6nCDr+NbFia7BIwj90Q==
-X-Received: by 2002:a17:902:ea0c:b0:2a1:325b:2cba with SMTP id
- d9443c01a7336-2a1325b2e27mr95250025ad.53.1766045069032; 
- Thu, 18 Dec 2025 00:04:29 -0800 (PST)
+ AJvYcCWAgMvoQbexNK9qUS+/UZ3vZdonjAiYjasMpl8n2kDmRZCLZ0Q3e8EBnI53UT7Y0xlhOfQFXAU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwyoAirSKinExTpCd7RIGq3HTslXTOnZiCmo+8KaS+MvuhJjntG
+ oF5p6Eg5MvYDuq4eh3Xkpcaz1WhCjebVBzGEs/R6+Ir9AIGAADHZ5RE5YkfBWKvkZWWGrqI0Xld
+ 0E7X1jD+DUVxnZbOUMbJG/jGgjJwYKuHSyyxSTe6CMO5qieGEfIMjGa9X
+X-Gm-Gg: AY/fxX4T/ED8bpxDQLFkjw+qS0wusP6Eyd0GfR1tpgzBrTNwNvC5U9glqcRz9DVECxf
+ xA9bhYYBD17RdKE4bBDZ7heLAERFfAU3A6UWQPyuu5+BzczwK5Xxe18q1Z1Am4W/rzNikH+xLvQ
+ Mq0y/hept56jFVIS5uKls2dftv7I7GfOdfOe6kBNeE6dUUhoiNjksvsoRROi8f+nQD9LWS1N4rv
+ PiIhiWeFp1B9mWAA/Az3EiW0GpiKE0kBDMYFXwBa0tDAWcaPc1oz6jpEW49CByvMEB9y+msAgH5
+ Din+TZ3C3P0vGCTkuYDWZa07Pttv9kICvPlrw34S/9O2ZcvzkwdZUAKZygmUzmGKUsPyt/RxCAl
+ Ggp0r/IHqVPeqWFQu8ha/lEb3fK/Uy1N/v0c1Ay0afYO5ZhrueMzNBrcGwPpSu3z8FARyT/UtBi
+ meFV4vop0TBrOiCDU2YBWceIcLArNcnmJFo5R4eJU=
+X-Received: by 2002:a05:6a00:3311:b0:7e8:4433:8fa8 with SMTP id
+ d2e1a72fcca58-7f669a9369amr19103831b3a.48.1766045172918; 
+ Thu, 18 Dec 2025 00:06:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFl5TpF7cF029di2jRyNnqi8uNYb6DJVEYSfTGcOstltTLlsYMHORVOl6DdASIB3M8ND9a/zA==
+X-Received: by 2002:a05:6a00:3311:b0:7e8:4433:8fa8 with SMTP id
+ d2e1a72fcca58-7f669a9369amr19103787b3a.48.1766045172442; 
+ Thu, 18 Dec 2025 00:06:12 -0800 (PST)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2d0889379sm16201425ad.24.2025.12.18.00.04.21
+ d2e1a72fcca58-7fe14179645sm1746137b3a.47.2025.12.18.00.06.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 00:04:28 -0800 (PST)
-Date: Thu, 18 Dec 2025 13:34:19 +0530
+ Thu, 18 Dec 2025 00:06:12 -0800 (PST)
+Date: Thu, 18 Dec 2025 13:36:02 +0530
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
@@ -110,37 +110,36 @@ Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  alif.zakuan.yuslaimi@altera.com, hs@nabladev.com, rui.silva@linaro.org,
  ilias.apalodimas@linaro.org, luca.weiss@fairphone.com,
  quic_varada@quicinc.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v3 4/6] arch: arm: mach-snapdragon: Auto-detect USB SSPHY
- driver support
-Message-ID: <aUO1g+0MEzrad577@hu-varada-blr.qualcomm.com>
+Subject: Re: [PATCH v3 5/6] configs: qcm6490: Enable super-speed USB support
+Message-ID: <aUO16hjr/fSgtZnq@hu-varada-blr.qualcomm.com>
 References: <20251203110735.1959862-1-balaji.selvanathan@oss.qualcomm.com>
- <20251203110735.1959862-5-balaji.selvanathan@oss.qualcomm.com>
+ <20251203110735.1959862-6-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251203110735.1959862-5-balaji.selvanathan@oss.qualcomm.com>
-X-Proofpoint-GUID: TSTRv3tFaqyotTAjcfnXNW782wClNLvP
-X-Authority-Analysis: v=2.4 cv=Z8Th3XRA c=1 sm=1 tr=0 ts=6943b58e cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+In-Reply-To: <20251203110735.1959862-6-balaji.selvanathan@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: quvjB3-mVOJpYrxMeEE5_W1Tzrle2KQi
+X-Authority-Analysis: v=2.4 cv=eKceTXp1 c=1 sm=1 tr=0 ts=6943b5f5 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=sb7SZJ5qkl1fgBpHmBIA:9
- a=CjuIK1q_8ugA:10 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: TSTRv3tFaqyotTAjcfnXNW782wClNLvP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDA2NCBTYWx0ZWRfX3+9l33QgfL3n
- P2yU7D1r1GhfvR6D/JUAMeFZBvqvAYzUKn5rBkUME68EhAh5mnmQ8J0ky59gxzSPzKZy1hYzITT
- rxhCScejvqqxaemCHn7PTPXjegPzSNbWpX3LZdE4IKNlV5BSGW+IgFgQ6K+HycUzinUoDRiMZAI
- ij8iCS3mL3xeJcCLDox7K63bPmThkhdhuALIeYauRRNXBVAyBqyumUujTWRYHH6g6G9Lb/dVdaO
- 9mdg3dXSUb7jr2kR5VfdQW6M+4ZH4eQDRjAMSjmjvr28bH4FsNbmYZX8ziGja36k8ChoReujkvU
- YozKjZGGdqZPYdsUAnBI7kTHLzvcvD8zFY5strlx+VZvaCR8E+5gQssql8XcC7y58I9sNhaXp8Q
- SYvp3iXTrB+jMoXqwlTbgg8IKJyCdA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=DvA_g8EdwWjvh1yinrcA:9
+ a=CjuIK1q_8ugA:10 a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-GUID: quvjB3-mVOJpYrxMeEE5_W1Tzrle2KQi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE4MDA2NSBTYWx0ZWRfX9k6nn1kUPG7v
+ iMCs9dIqXwXJRfA76STU8s11vVrkd9nXlco3Pq6q8wVpYuVSK7Q7HhPTH2GwcaubX0wT1K1EOwn
+ Q7+fcwJeBqG51Qw1ebIWCxzOOzOopHaDUjmmcUwxQfP98qaeDFFWD+rcDaFOIqJnQZFFn4Ab1T2
+ f7dhlRuaVSIqqYv8qxUh2o+ntwc1FOtPm4FpJhj+Zw2RR6CgJIy85ED5kA8nbIJfZZQPACuKyKw
+ r+HdOQ09h5aQE6BYEohE8DhHOPPCp6Qbn4SyJzKyVNHIsDW+/1/5j8EarNMmW/0mudNskmIJ+VN
+ ZUlakrY78rNhAmOC7mKxWoI4D5KC7LH0QMUY+x8ZwCHyMUqOZNc8AQGyVpsLNWmXOG6l+MoEjnC
+ L7w/CZucDwV3lwbQ3yhlm0dFXC/InA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-18_01,2025-12-17_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0
- impostorscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0
+ priorityscore=1501 bulkscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ spamscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512180064
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512180065
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,245 +156,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 03, 2025 at 04:37:33PM +0530, Balaji Selvanathan wrote:
-> Automatically detect super-speed USB PHY driver availability and
-> skip the USB speed fixup if driver is available, eliminating the need
-> for manual configuration.
+On Wed, Dec 03, 2025 at 04:37:34PM +0530, Balaji Selvanathan wrote:
+> Enable the QMP Combo PHY driver to allow super-speed USB
+> operation on QCM6490 platforms.
 >
-> Previously, U-Boot unconditionally limited USB to high-speed mode
-> on all Qualcomm platforms because most lacked super-speed PHY
-> drivers.
->
-> This change implements runtime detection that checks if a PHY
-> driver exists for the super-speed PHY node referenced by the DWC3
-> controller. The fixup is automatically skipped when a compatible
-> driver is found, allowing the hardware to operate at full
-> capability. Platforms without super-speed PHY drivers continue to
-> receive the fixup automatically.
+
+Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
 > v3:
-> - Removed support to manually disable the fixup via Kconfig.
-> - Instead added code to automatically detect if
->   SSPHY driver is available.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-
-Move 'Signed-off-by:' above the '---' line.
-
+> - Removed disabling CONFIG_QCOM_USB_FIXUP as it now removed.
 > ---
->  arch/arm/mach-snapdragon/of_fixup.c | 130 ++++++++++++++++++++++++----
->  1 file changed, 112 insertions(+), 18 deletions(-)
+>  configs/qcm6490_defconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index eec2c0c757e..85dc1c4573d 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -4,7 +4,7 @@
->   *
->   * This file implements runtime fixups for Qualcomm DT to improve
->   * compatibility with U-Boot. This includes adjusting the USB nodes
-> - * to only use USB high-speed.
-> + * to only use USB high-speed if SSPHY driver is not available.
->   *
->   * We use OF_LIVE for this rather than early FDT fixup for a couple
->   * of reasons: it has a much nicer API, is most likely more efficient,
-> @@ -21,32 +21,108 @@
->  #include <dt-bindings/input/linux-event-codes.h>
->  #include <dm/of_access.h>
->  #include <dm/of.h>
-> +#include <dm/device.h>
-> +#include <dm/lists.h>
->  #include <event.h>
->  #include <fdt_support.h>
->  #include <linux/errno.h>
-> +#include <linker_lists.h>
->  #include <stdlib.h>
->  #include <time.h>
+> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+> index 54eb5dedaec..2418645003e 100644
+> --- a/configs/qcm6490_defconfig
+> +++ b/configs/qcm6490_defconfig
+> @@ -13,3 +13,5 @@ CONFIG_TEXT_BASE=0x9fc00000
+>  CONFIG_REMAKE_ELF=y
 >
-> -/* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
-> - * USB controllers. Rather than requiring source level DT changes, we fix up
-> - * DT here. This improves compatibility with upstream DT and simplifies the
-> - * porting process for new devices.
-> +/**
-> + * find_ssphy_node() - Find the super-speed PHY node referenced by DWC3
-> + * @dwc3: DWC3 device node
-> + *
-> + * Returns: Pointer to SS-PHY node if found, NULL otherwise
-> + */
-> +static struct device_node *find_ssphy_node(struct device_node *dwc3)
-> +{
-> +	const __be32 *phandles;
-> +	const char *phy_name;
-> +	int len, i, ret;
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
 > +
-> +	phandles = of_get_property(dwc3, "phys", &len);
-> +	if (!phandles)
-> +		return NULL;
-> +
-> +	len /= sizeof(*phandles);
-> +
-> +	/* Iterate through PHY phandles to find the SS-PHY */
-> +	for (i = 0; i < len; i++) {
-> +		ret = of_property_read_string_index(dwc3, "phy-names", i, &phy_name);
-> +		if (ret)
-> +			continue;
-> +
-> +		/* Check if this is the super-speed PHY */
-> +		if (!strncmp("usb3-phy", phy_name, strlen("usb3-phy")) ||
-> +		    !strncmp("usb3_phy", phy_name, strlen("usb3_phy"))) {
-> +			return of_find_node_by_phandle(NULL, be32_to_cpu(phandles[i]));
-> +		}
-> +	}
-
-fixup_qcom_dwc3() somehow assumes the second phandle *will* be usb3 phy.
-Can't we continue with the assumption here too?
-
-> +
-> +	return NULL;
-> +}
-> +
-> +/**
-> + * has_driver_for_node() - Check if any PHY driver can bind to this node
-> + * @np: Device node to check
-> + *
-> + * Returns: true if a PHY driver with matching compatible string exists, false otherwise
->   */
-> +static bool has_driver_for_node(struct device_node *np)
-> +{
-> +	struct driver *driver = ll_entry_start(struct driver, driver);
-> +	const int n_ents = ll_entry_count(struct driver, driver);
-> +	const char *compat_list, *compat;
-> +	int compat_length, i;
-> +	struct driver *entry;
-> +
-> +	if (!np)
-> +		return false;
-> +
-> +	/* Get compatible strings from the node */
-> +	compat_list = of_get_property(np, "compatible", &compat_length);
-> +	if (!compat_list)
-> +		return false;
-> +
-> +	/* Check each compatible string against PHY drivers only */
-> +	for (i = 0; i < compat_length; i += strlen(compat) + 1) {
-> +		compat = compat_list + i;
-> +
-> +		/* Iterate through all registered drivers */
-> +		for (entry = driver; entry != driver + n_ents; entry++) {
-> +			const struct udevice_id *of_match = entry->of_match;
-> +
-> +			/* Skip non-PHY drivers to improve performance */
-> +			if (entry->id != UCLASS_PHY)
-> +				continue;
-> +
-> +			if (!of_match)
-> +				continue;
-
-		if (entry->id != UCLASS_PHY || !of_match)
-			continue;
-
-> +			while (of_match->compatible) {
-> +				if (!strcmp(of_match->compatible, compat)) {
-> +					debug("Found PHY driver '%s' for SS-PHY compatible '%s'\n",
-> +					      entry->name, compat);
-> +					return true;
-> +				}
-> +				of_match++;
-> +			}
-> +		}
-> +	}
-> +
-> +	return false;
-> +}
-> +
->  static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np)
->  {
-> -	struct device_node *dwc3;
-> +	struct device_node *dwc3, *ssphy_np;
->  	int ret, len, hsphy_idx = 1;
->  	const __be32 *phandles;
->  	const char *second_phy_name;
->
-> -	debug("Fixing up %s\n", glue_np->name);
-> -
-> -	/* Tell the glue driver to configure the wrapper for high-speed only operation */
-> -	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
-> -	if (ret) {
-> -		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
-> -		return ret;
-> -	}
-> +	debug("Checking USB configuration for %s\n", glue_np->name);
->
->  	/* Find the DWC3 node itself */
->  	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
-> @@ -58,20 +134,38 @@ static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np
->  	phandles = of_get_property(dwc3, "phys", &len);
->  	len /= sizeof(*phandles);
->  	if (len == 1) {
-> -		log_debug("Only one phy, not a superspeed controller\n");
-> +		debug("Only one phy, not a superspeed controller\n");
-
-Undo.
-
->  		return 0;
-
-Earlier, the fixup was at the top, so you can return here. Now you have
-to apply the fixup in this case.
-
->  	}
->
-> -	/* Figure out if the superspeed phy is present and if so then which phy is it? */
-> +	/* Figure out if the superspeed phy is present */
->  	ret = of_property_read_string_index(dwc3, "phy-names", 1, &second_phy_name);
->  	if (ret == -ENODATA) {
-> -		log_debug("Only one phy, not a super-speed controller\n");
-> +		debug("Only one phy, not a super-speed controller\n");
-
-Undo.
-
->  		return 0;
-
-Can't return. Same as above.
-
->  	} else if (ret) {
->  		log_err("Failed to read second phy name: %d\n", ret);
->  		return ret;
->  	}
->
-> +	/* Find the super-speed PHY node and check if a driver is available */
-> +	ssphy_np = find_ssphy_node(dwc3);
-> +	if (ssphy_np && has_driver_for_node(ssphy_np)) {
-> +		debug("Skipping USB fixup for %s (SS-PHY driver available)\n",
-> +		      glue_np->name);
-> +		return 0;
-
-Both the node and driver can be present. Should we consider the
-possibility of phy DT node status = "disabled"?
-
-> +	}
-> +
-> +	/* No driver available - apply the fixup */
-> +	debug("Applying USB high-speed fixup to %s\n", glue_np->name);
-> +
-> +	/* Tell the glue driver to configure the wrapper for high-speed only operation */
-> +	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
-> +	if (ret) {
-> +		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
-> +		return ret;
-> +	}
-> +
->  	/*
->  	 * Determine which phy is the superspeed phy by checking the name of the second phy
->  	 * since it is typically the superspeed one.
-> @@ -150,7 +244,7 @@ static void fixup_power_domains(struct device_node *root)
->  	do { \
->  		u64 start = timer_get_us(); \
->  		func(__VA_ARGS__); \
-> -		debug(#func " took %lluus\n", timer_get_us() - start); \
-> +		printf(#func " took %lluus\n", timer_get_us() - start); \
->  	} while (0)
->
->  static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
+> +CONFIG_PHY_QCOM_QMP_COMBO=y
 > --
 > 2.34.1
 >
