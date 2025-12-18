@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E89DD6D232
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 15:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53874D6E2AD
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 16:23:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB56883DEE;
-	Thu, 18 Dec 2025 16:51:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BFE2583DEE;
+	Thu, 18 Dec 2025 17:23:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uihyavFU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ORv+oAeC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EC1583E0E; Thu, 18 Dec 2025 16:51:23 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 55B1E83E0E; Thu, 18 Dec 2025 17:22:58 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2BC383DE4
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 16:51:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8390283DE4
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 17:22:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c765f41346so363714a34.3
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 07:51:20 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-42fbc305552so654596f8f.0
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 08:22:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766073079; x=1766677879; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dnZ4cSgkkSmaEBqVOwygz5NAtfYza80dHdI0y73tgyI=;
- b=uihyavFU82jNSTDOUg2aYDdghYFhWUoyCsUJ6l011TEtROi3MVoaNkr4luJvGHM7ae
- r76USb90h4/T8Kt1MsSQ+J63isZk6jdXIpaPSzX5PfNOVyB85jy5jdci95H0SZOZf6Hh
- KGHbri2+OcCLoo7h965V/JL7EqTx7sLVyT9Lk=
+ d=linaro.org; s=google; t=1766074975; x=1766679775; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1iqSlKXi6acI7jAGOtBjufl8cO1dUGd47Z3YftKzcEA=;
+ b=ORv+oAeCasw0Ohp16CWvh3bAn1plRD5GZ9chm6h7P4KnaLiaaWBqQOP4m2QUVNpmo6
+ LVM6lxML77TOR25Ey4YNpbK95ZKPZYmFD41Zxh23k2rufit+Gqjc2BQlvNni1P2wnapf
+ WcPX3h9gzYuDav8aLvL24IiTLVX86EUXbZSvbq0EFmHjdqjR7MAx1x6vsWIa/+jNwBDo
+ pk0/RTMeky0G6nZPqVUQhoSESIkjn8RhbWWG86dPfLBZEsa51n4pZkBEvl94r8SsBWGb
+ 1k/0YffBH3JZnjP/CzAAL/l0nLUtvKb58tgDVRLl6hvxbtErZ9B+nBqv97Jl3/CRP6qY
+ xtog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766073079; x=1766677879;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dnZ4cSgkkSmaEBqVOwygz5NAtfYza80dHdI0y73tgyI=;
- b=I0/Wzeelv7YjZMZkg00EMeYpwY5e6KqLtwmA2hf1VYdH6W3SLplKkP6Tv2Yf2FQwlB
- PQa9Q5tax+/G7ICI6m8WZnYYU9ycbKX73ultg5V578GiZlvW+DXDI0+JESyb7et0Cwmu
- 2qMeBGwXi3H5My+5XZIYhFr0N8N3zC59P2vYLM6ykoHSpiBsS74W+gMIiORwBWShOu1R
- aKtHXpa+KJ70hE0w2ie7c8BnX0RRVExUNQTBtPoRiW8365hxCt9NXQJtYbmu53xonUa1
- Q1oBxH9wPqEAUlhZxCiesTIPcpYPvZ5ife1+YQJDt3g/YVYv/fI5AAgk5FktG8U21g6M
- LkOA==
-X-Gm-Message-State: AOJu0Yw0mzdzhs6xP1AX/u5tPJtJ1bEQeENr5eQvk4GNv5GmhT4/UMVR
- LRwm3QLlJr5rVO8/pGQ46BGayX9Z/3yKyrq5MEeKDwkfdqX2xEeEMujZGd9PW1SsFTklcaEK9XI
- YN09oCXY=
-X-Gm-Gg: AY/fxX5A5bXi+yeJMLgsHQvH+8Jb8bE47r3zDtWiRP4G22o5FqQl+ze52hqFxDiLqUb
- qXcrg0l56KD/GkjzAx1ROMKA9RJY6mVsJLM6LJ1AbTPlQeNxLBybU2vOJH2f9f9e/avBX6vcA6X
- Q1mu8AXBUD9EZB8DYdES3T0P2GUviDAJoiouLydtqYtoBAkDPuGTlTYNDROR8yc45vcmbK2kqeL
- 4cz58Q/2z15gHTAOjAerKvmPcSAJo8KQ99cqXWT4N1fVLuURaTawLh/3kRjjR82TAykBb3r7gdd
- hzUhjFTBQSmPAWTYiXoCdAyAogigKA3HBaxAVOwY0HlEqDZC/4+IiX9gJAKno0vTVg6y9w5sSht
- aX20MxTDbtVG0vYy4uZORDW7DtZmDNQme5KZ1uzcWUa6l5M5SsSac30lG0DdZbuDiVp0Q2M0UFK
- TUn7ccxSNBKLHYcxfZVQ4jZ43yh0d6ZxPFMwFCyzWtDo7h+0e5K/ekz/hH06Ex
-X-Google-Smtp-Source: AGHT+IFNbbtPqFL2um1Fht3S2aX35r0fPngq/6J3JxY72NdWLxUZ4lpGeUxWt889aARH47cKwofeVQ==
-X-Received: by 2002:a05:6808:15a9:b0:455:bf27:e960 with SMTP id
- 5614622812f47-457b1ee2ba9mr29754b6e.24.1766073079322; 
- Thu, 18 Dec 2025 07:51:19 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-457a42f816csm1428476b6e.2.2025.12.18.07.51.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 07:51:18 -0800 (PST)
-Date: Thu, 18 Dec 2025 09:51:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: u-boot@lists.denx.de,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
-Subject: Re: Pull request: SoCFPGA changes for u-boot-socfpga-next-20251217
-Message-ID: <20251218155116.GK303283@bill-the-cat>
-References: <08e65074-4fb9-4ba6-8cdf-5e51659f8ddf@altera.com>
+ d=1e100.net; s=20230601; t=1766074975; x=1766679775;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1iqSlKXi6acI7jAGOtBjufl8cO1dUGd47Z3YftKzcEA=;
+ b=qXxEJleQZ6IJnIAXz/SpuaWySvjl8+Irwh7HusEBUm0G078J27I9ZSAxnYbZtlOA+O
+ 4SksvHnYEfNz2dakYYfzMw5ivWe+T2vir9O6P1i8HRpB9YRx5w2+JUlsmnL0HEuS3It2
+ wmdUTmYNQUGgbqtxKopepGjrPKxYaZQMgLArYcbv+II5M6M2DC/XVjCt/6LgKJ8+ogCm
+ xCjJhz+f3LkX19rZA94sTxbq40X+ACDC6XJx/pyxmiJ4XDd0tb5Cvmv5LPqe1hrZI4XO
+ 0PcooyWjAkcXX0Afc7I296QZASFkgVOXb8iKhpMMcVPxCdag5KEjFsNuf1TroXIHdkru
+ FcMA==
+X-Gm-Message-State: AOJu0YyzK+pyhpdmc1wKgw6iXNbGcABSa5SnS/RIkPR2h8cx+ApuRe+0
+ cpCAQBJe89qgaixmO49d871aq2wwMrPDdj2eHmyrMoocY4oF6MCN5MKjf12Ff+P5R+g=
+X-Gm-Gg: AY/fxX4pYtv5O6ZFVxltjClDjYreUtVDpBj7bqpRDrqAtmBWlWd08dlDWqM5Eiq2WaV
+ kEIwDz3KgCcXnOn776T0jvrkkfUge/r6BlQiLB/Z5zDxiYrLrpaFx0YP/Fs5HYOcRr6yo+K3V4T
+ 6rdfv3VbNMNAKOOjVJXsn0Ryx68didhQaBvpzKk6At1VGz8fGExzC8Q+Xt7TL6/ghaL03wrSTFZ
+ jnWSk7jbfTs0niAjOzJTiBaJRkSwBTPlHEqOmTRqEX5dYemNeYs22IWFKeip7EnjgUTI60JL+iF
+ 11aGccNYOy+HrS61637J+9ihr3P1UbYUkT2Dxq8CsrkCXYv5oRVbAjK9bQDjQxcAXfWlmdmBtYP
+ X4h2xGyiiVMIqFc3O/rAYS5wif3jf+DYXht7jWSppxU/UVUTjmp4+ZgPCGvxzPGkM6P29R+9baM
+ Gr/XtL9VXyvNwXSCJtRrW0AbYay7+S0bY9ijYbM5rFG3bNpbiLpx7gDam/b+Fd1fJylw==
+X-Google-Smtp-Source: AGHT+IFFXx3oo+oyOfs/6mtNj6wzcc0nAZt7pMr4Ny472+tECeCvBtrwd28eUg2UlqCKImU7/8HR2g==
+X-Received: by 2002:a05:6000:2890:b0:430:f65d:c0df with SMTP id
+ ffacd0b85a97d-4324e7090d2mr30637f8f.56.1766074974887; 
+ Thu, 18 Dec 2025 08:22:54 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:cf83:fadc:3e6e:2b4e?
+ ([2a01:e0a:3cb:7bb0:cf83:fadc:3e6e:2b4e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43244999258sm5873418f8f.37.2025.12.18.08.22.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Dec 2025 08:22:54 -0800 (PST)
+Message-ID: <8fd28ccb-9122-40ad-a434-b18db0f26e1e@linaro.org>
+Date: Thu, 18 Dec 2025 17:22:54 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LzdR9le9dB+eJ2KM"
-Content-Disposition: inline
-In-Reply-To: <08e65074-4fb9-4ba6-8cdf-5e51659f8ddf@altera.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Please pull net-20251218
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 18 Dec 2025 17:23:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,103 +100,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---LzdR9le9dB+eJ2KM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 47b50fb1125c539d80ed3e7f739c02c6486e1b52:
 
-On Wed, Dec 17, 2025 at 10:05:31PM +0800, Chee, Tien Fong wrote:
+  cmd: part: Fix part argument description for `part number` (2025-12-16 11:14:53 -0600)
 
-> Dear Tom,
->=20
-> SoCFPGA updates for next (2025-12-17)
-> This pull request brings together a set of fixes and enhancements
-> across the SoCFPGA platform family, with a focus on MMC/SPL robustness,
-> EFI boot enablement, and Agilex5 SD/eMMC support.
-> Highlights:
->=20
->  *
->    SPL / MMC:
->      o
->        Fix Kconfig handling for
->        SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
->      o
->        Correct raw sector calculations and respect explicit sector values
->        when loading U-Boot from MMC in SPL
->      o
->        Adjust raw MMC loading logic for SoCFPGA platforms
->  *
->    EFI boot:
->      o
->        Permit EFI booting on SoCFPGA platforms
->      o
->        Disable mkeficapsule tool build for Arria 10 where unsupported
->  *
->    Agilex5:
->      o
->        Upgrade SDHCI controller from SD4HC to SD6HC
->      o
->        Enable MMC and Cadence SDHCI support in defconfig
->      o
->        Add dedicated eMMC device tree and defconfig for Agilex5 SoCDK
->      o
->        Revert incorrect GPIO configuration for SDIO_SEL
->      o
->        Refine U-Boot DT handling for SD and eMMC boot variants
->  *
->    SPI:
->      o
->        Allow disabling the DesignWare SPI driver in SPL via Kconfig
->  *
->    Board / configuration fixes:
->      o
->        Enable random MAC address generation for Cyclone V
->      o
->        Fix DE0-Nano-SoC boot configuration
->      o
->        Remove obsolete or conflicting options from multiple legacy
->        SoCFPGA defconfigs
->=20
->=20
-> Pipelines test passinghttps://source.denx.de/u-boot/custodians/u-boot-soc=
-fpga/-/pipelines/28776
->=20
-> Thanks.
->=20
-> Best regards,
-> Tien Fong
->=20
-> The following changes since commit 47b50fb1125c539d80ed3e7f739c02c6486e1b=
-52:
->=20
-> cmd: part: Fix part argument description for `part number` (2025-12-16
-> 11:14:53 -0600)
->=20
-> are available in the Git repository at:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-socfpga.git
-> tags/u-boot-socfpga-next-20251217
->=20
-> for you to fetch changes up to 6f419247baa45917fcdd67062e271b8884d8c7aa:
->=20
-> configs: socfpga: Permit EFI booting (2025-12-17 18:50:33 +0800)
->=20
+are available in the Git repository at:
 
-Applied to u-boot/next, thanks!
+  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20251218
 
---=20
-Tom
+for you to fetch changes up to a8a81af848b88d7ecee64d98a08f6415630305b3:
 
---LzdR9le9dB+eJ2KM
-Content-Type: application/pgp-signature; name="signature.asc"
+  cmd: lwip/wget: avoid NULL dereference in _set_cacert() (2025-12-18 16:27:15 +0100)
 
------BEGIN PGP SIGNATURE-----
+----------------------------------------------------------------
+Pull request net-20251218.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUQi8QAKCRAr4qD1Cr/k
-CrBaAP9IY4xSl5ntplInUy1/snkAFbbArtCenFYSOE7Uy4pSpwEA8aIRR5mbNeI2
-bX192BG7YhoGhFmg4MhRXk/DF26TVgE=
-=ZAIr
------END PGP SIGNATURE-----
+net-lwip:
+- Avoid NULL dereference in _set_cacert()
+- Fix filename handling in TFTP
 
---LzdR9le9dB+eJ2KM--
+----------------------------------------------------------------
+Andrew Goodbody (1):
+      net: lwip: tftp: Fix filename handling
+
+Heinrich Schuchardt (1):
+      cmd: lwip/wget: avoid NULL dereference in _set_cacert()
+
+ cmd/lwip/wget.c | 3 ++-
+ net/lwip/tftp.c | 5 +++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/28786
+
+Thanks,
+-- 
+Jerome
