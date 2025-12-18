@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1769ED6E2C7
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 17:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B59D6E2CA
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 19:00:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9697980077;
-	Thu, 18 Dec 2025 18:33:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 33E7280050;
+	Thu, 18 Dec 2025 20:00:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XLtm5g7Q";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="JKUXtgaR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F+oh9pxf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84385800AB; Thu, 18 Dec 2025 18:33:33 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A9DFF800AB; Thu, 18 Dec 2025 20:00:45 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9707780050
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 18:33:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE55D8003E
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 20:00:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dXHnl2Gqvz9t8Y;
- Thu, 18 Dec 2025 18:33:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766079211;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=C5kNB//CYBg7TEn2wM5yBCUt4B/pt/K8Aom45PYCmCY=;
- b=XLtm5g7QiAsM9o9KCBXDRYklmbJkRBudHNJppjP0ifnIZRNPTkM+9yfaqlEXGC5OM6i7il
- admVGh3VjOwTEFsAsX3MJ05Ae+xHRjaTVHCGk0WC6acIOgM2cihprwQzrI/VN7298FAAGo
- iZ5PZwiqVA22qbd6lD1anAttUMDUzYReSRStN3NzQC6el1Z4D1FJqPUQK2Htnm1n5jzBKK
- bNp9aM4LWmmS8YU71BhlXft57MJ493Av14LDpGyXCEf8WcYPpdiOJqSn8TjO7hjaSrKNgF
- AU/wtcvf6QZtYaov40t65WR8+9VRPkU+0e7Ea6ddAVKhOc8wdudyg7f5RjW1jA==
-Message-ID: <730c310e-7587-42ac-8f84-223b0d26d03b@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766079209;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=C5kNB//CYBg7TEn2wM5yBCUt4B/pt/K8Aom45PYCmCY=;
- b=JKUXtgaRf/dtCd4j03lxtKkMiWstsdlV0OWFu0CoEHfRkRwTdDExkPIi4Vf7bUHAit2xPS
- s7PzqG8JyHmYfdrD38P42OP670rKy7yhOPy3U47CH6YIJ+fqMr4/bEihfq3jLgUkDPZg7U
- 5dwcjBk8GRW6ITMHj0iCZ1Rh8G9R0mbaXcn9Ek2aCiZdUvM8c8dW4UCvIqPdncZ0LvfbFF
- i8fm3rS8oiHtuhbRAtPkjtAdKXZiHL3XSobetWGV/3bBlca03Pe0WmtXRmUvGMUkdsxSzZ
- TZDLPOUGBE4ZvWJCifDE1A8qs2M2pShwY0IriDObbQ8JwKgryAX36dyc7DlBVA==
-Date: Thu, 18 Dec 2025 18:25:29 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-65cff0b394aso569505eaf.0
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:00:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766084436; x=1766689236; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CwPYmHbOIO3cyAVLbswkbislhWdkY82XwpVa7zEHsS0=;
+ b=F+oh9pxfpdmZzJ/Xtm99JVxqrv/EUh4m3lzp8UA3jxwi6T6GkS9ZjseTjbYULmH0jP
+ jNl8sY5H+p85jZ6v0ZHFAZ+2wM6L7EZ8ROdb0RqBjTt0M93R2/1RgHChlV9Uqry39di6
+ I12bLQrc8pjUSHOKk0snZMejb9yVfAym9EG1A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766084436; x=1766689236;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CwPYmHbOIO3cyAVLbswkbislhWdkY82XwpVa7zEHsS0=;
+ b=qY1qriT35PDT+dyJEZ4amjumZT+sxUz8V6k93qpzvD94R8/SMylxVOt8L4bHMMWX2E
+ OimI0lh768IyfC7QQLIdV7++16aRIBD2LaeA3VfzDvnm+JEhYvYaDhBoYFdNvLF/THsa
+ EsvuwqpLI77H4wx/epNB5cjJXqB1qxMwPdqqSvIRK8rFspu+SfkzG1sVrIBdlqsNDXq6
+ kSqi8fr5hfU8kcKDnr4Ot4LmrGBdzZIiL5/zEw6TG0W6EJwA/PeootFdPWL3/+CIkx7P
+ 7mYFjGLlS/kTLjpagN/fSdAtY9fqxRGMvEBygqz8AIk8Tqd25ugdUDbGUlpGIXT7WKzV
+ EJxQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVt7Hg6CSVguhWmkhOCNTJVT2rYnYX4tf3H4rGNtC/1hdikiPYdqjlJenluyB+ieNWb22EQvfo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpMy0jfoaHpfhqbPYgWGSLQZGWriNDzn2ArziOeEnyu5XiEUFU
+ hHpp39DpUriy4NoeB8SlD6/sFDRwaJ4UTnCfct9uMqhUKyi0TI7i2FSJv0scrkPcVos=
+X-Gm-Gg: AY/fxX6AJzPwOXRhAXoVMeqFeVFD93xkTABzLkQLXED0DnvfPY8E4cFIXEymTRmHWkl
+ RABrTYorJnn4WVEQX4NT8+plzboxLMQr6mMhgkhuplSS69DqnHNiMhZoRYlWyW8sISFDdW6sAmW
+ uiIFrSRSTKEYReHRkgx5c2Q+x1qJVsHXnHcaplgROAro5Sbe6trjPRFFVDZMlgA+XC92HdBnPV4
+ nfqxAKX8Mx9fx0PvnFLiCM35r5NXDLct8G1xSO41srYM8vdNteNR2xC9z9Gnuwjx+dJ7ZR882x/
+ ZExvaMTJ0ZyqYQVVNGr3bQJKGpkxLnBLI9kke8//mE6E0vAW64x1nWZlc+7p1YXqeX6O/z6ZMTi
+ iEYI2ygs7yfg8q4Hn5qv6TQHdswQwmuOIC7ycSJFiiInKgC8G6JlrU23jEUKiIS9OYAWzOYnm3G
+ cTn6WIfMyg9p1O7TUvxU5Y1mRgBC/Y7TjC7dcCgPqxztIODfyFEQ==
+X-Google-Smtp-Source: AGHT+IG7ZQEBXGaUYFSDvWVOvyZinBCGf23JBWttCjrYPud29BFIpOlggb0d1iBD2yfXYp1281tPPg==
+X-Received: by 2002:a4a:ba10:0:b0:659:9a49:9020 with SMTP id
+ 006d021491bc7-65d0eaf3c3dmr171971eaf.77.1766084434994; 
+ Thu, 18 Dec 2025 11:00:34 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65d0f6f0e78sm95786eaf.15.2025.12.18.11.00.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Dec 2025 11:00:34 -0800 (PST)
+Date: Thu, 18 Dec 2025 13:00:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, jserv@ccns.ncku.edu.tw,
+ eleanor15x@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] m68k: Add support for M68040 CPU
+Message-ID: <20251218190032.GL303283@bill-the-cat>
+References: <20251218185252.957388-1-visitorckw@gmail.com>
+ <20251218185252.957388-3-visitorckw@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 0/2] clk: scmi: Fix name defer
-To: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Alice Guo
- <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>
-References: <20251211-clk-scmi-imx-fix-v1-0-9579567da829@nxp.com>
- <PAXPR04MB8459088345D73E40394E121988AEA@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <030912f8-7bcd-4e4f-a63e-85fa8eb27917@mailbox.org>
- <PAXPR04MB8459F29BBA73A78228B31EFB88AFA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PAXPR04MB8459F29BBA73A78228B31EFB88AFA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: yyuompqm6gfyjn6n6het6uhymrwdd4kh
-X-MBO-RS-ID: bb49ada67a02d0c3a45
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ML7PWzh8hdQNV4Mj"
+Content-Disposition: inline
+In-Reply-To: <20251218185252.957388-3-visitorckw@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +100,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/13/25 12:36 PM, Peng Fan wrote:
-> Hi Marek,
-> 
->> Subject: Re: [PATCH 0/2] clk: scmi: Fix name defer
->>
->> On 12/12/25 7:32 AM, Peng Fan wrote:
->>
->> Hello Peng,
->>
->>>> Subject: [PATCH 0/2] clk: scmi: Fix name defer
->>>
->>> I see this patchset is delegated to you, mainly because patch 2 is to
->>> fix imx95-blk-ctrl. Since this patchset is based on Patrice's clk scmi
->>> fixes, I am thinking to pick all the scmi fixes including this
->>> patchset to send a PR to Tom for master soon.
->> Please don't, I think this implementation has unresolved questions and
->> frankly, I also think this is completely wrong approach. You should
->> model the relationship between clock in DT using "clock" property and
->> phandles, and then let the U-Boot clock core resolve those
->> relationships.
-> 
-> Ah, I need to give a look to model it in DT, but the DT is already in
-> Linux Upstream. Driver using current DT is broken.
-> 
-> Without this fix, we need to live with it in this release cycle.
-> 
-> Updating DT and drivers requires more time.
-How does this even work in Linux ? The clock relationships must be 
-somehow established there too, right ?
 
-Note that you can always use -u-boot.dtsi to add u-boot specific tweaks, 
-ST does it extensively anyway.
+--ML7PWzh8hdQNV4Mj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 18, 2025 at 06:52:51PM +0000, Kuan-Wei Chiu wrote:
+> Add support for the Motorola 68040 architecture. Currently, m68k
+> support in U-Boot is primarily focused on ColdFire (MCF5xxx) variants.
+> Introduce the necessary infrastructure to support the classic M680x0
+> series, specifically targeting the M68040 as emulated by QEMU.
+>=20
+> The implementation includes exception vectors, early startup code, and
+> minimal CPU initialization and relocation stubs. It also defines the
+> standard m68k boot information structure used for passing hardware
+> information to the operating system. To ensure compatibility, ColdFire-
+> specific library objects such as cache and interrupt handling are
+> excluded from the build when M68040 is selected.
+>=20
+> Additionally, apply a specific workaround during the early memory
+> reservation stage. Use a manual loop to clear global data instead of
+> the standard memset() function, as utilizing memset() at this point was
+> observed to cause a hang on the QEMU platform.
+>=20
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+[snip]
+> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+> index 8ade6f7b9d1..a41c375f6be 100644
+> --- a/arch/m68k/Kconfig
+> +++ b/arch/m68k/Kconfig
+> @@ -56,6 +56,9 @@ config MCF5441x
+>          select DM_SERIAL
+>  	bool
+> =20
+> +config M68040
+> +    bool
+> +
+
+The file is unfortunately inconsistent about tabs vs spaces, but all the
+new options should be tab-indent only, and no extra blank lines added.
+
+--=20
+Tom
+
+--ML7PWzh8hdQNV4Mj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaURPTQAKCRAr4qD1Cr/k
+CiTTAQDIEBTDB5IU6QAqcnLFkS8+JPOSkxKSXnKVNWubzLSfVgD/dJSl05BMr6ll
+5TOvmN+2jpaJyaloIvz7yRfF/bYlSAo=
+=ibpq
+-----END PGP SIGNATURE-----
+
+--ML7PWzh8hdQNV4Mj--
