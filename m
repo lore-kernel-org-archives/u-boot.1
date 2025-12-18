@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B105DD711A1
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 19:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF1FD6E2DC
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 19:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 513FB836AC;
-	Thu, 18 Dec 2025 20:52:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 915F98042F;
+	Thu, 18 Dec 2025 20:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RRKNvgsT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lul07Uvp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71AAE80050; Thu, 18 Dec 2025 20:52:02 +0100 (CET)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 3D598800AB; Thu, 18 Dec 2025 20:52:04 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 345DD8042F
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 20:52:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B181D83106
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 20:51:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-657490df6f3so523938eaf.2
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:52:00 -0800 (PST)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-65b6b69baf8so297848eaf.3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:51:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766087519; x=1766692319; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1766087515; x=1766692315; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ne0xpYoHq1G3ZMNGd/Lk+JZu0TJ7gPzoYuVl72Vttqc=;
- b=RRKNvgsTgAIs3DpXOhEO7G+7TkH4Z8YeSiH4hZv91ZexN34u6knP6VjYaXyxEJSBAv
- XGmF4rWIOP7eAYn7wF6P/9SzMJRyJu85Iwq8FC6QMQvPB4V8p99nREx746gBhnPIDHRo
- yTpThAHixig0jO98h2oP5GBqjS1HWISBxSOJ8=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YP22DqiqQru5hhRlVRNBLWZ/b/Fj4EWzMbhftq2YyK8=;
+ b=Lul07UvpnfDyKvxRypJ/DEzcz6FapSd8UnXjq3hHhZO8witghsr0s/NF4W/kjPzbQ0
+ 2DuAViI+TR1QbLnC0s8JVKS+AdzwzTZhwXn3ainO1uHmG8/mV3sZ8FUIRpXPpoG+LyNu
+ uptP9APQ6L4YciK4/o2xW+FG0F5L0aIGVFnjQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766087519; x=1766692319;
+ d=1e100.net; s=20230601; t=1766087515; x=1766692315;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ne0xpYoHq1G3ZMNGd/Lk+JZu0TJ7gPzoYuVl72Vttqc=;
- b=MShXQ0KBZjwMJAZBGQf5FdqNSMDuceJTxppznrn7vMJWYGboUBTMIuksInkldf/mQl
- ECo9fbdhLGI08xos6g1mtTu0XkNcrjP21Pki4LF5/uMYcWIOZ5MiBd3TPynt8vQV2gqf
- jTBL9ax/7WEt06NVxJbDHxv/7aw4rh3t3ggqaINN7axJnkhH15LlcDGa+Vi90Pa/Kn9O
- Z2oGjJmZh4DV//ELvaBpDWWFNUqGZxokXXRzoBcQMgBDYzc8KnOTr5tY48rBpPBelLtJ
- g/7RwwnXecrew4C4375GAtEnZONEn8IJVGV2VZ6dB3K2siK0sw57mqcNzJ8g8N4U5kNo
- rXkA==
-X-Gm-Message-State: AOJu0YxTdZL81uU9cUA8YeAHaVskHGru1mxuyDOyVPlvmIjqO044RudL
- piF3qTv7wV2Tg24qNHzacpeOs1+COQBjkGK9321K8pbvthwSPwrgM7rY4ud+/5SzyMM=
-X-Gm-Gg: AY/fxX7Ltr9IEqWkWWCJWAoOUTcfXP7ssbdHz8eW03N+LKYkW14qf/jRkbvmacMlhx+
- zrRuDAS9WWt6moqryPhaE5Zcj9m2Hdiu5Ket8NpI8Mw4nSUCEan3574mkKeDz+c9AhwHgGxeYOn
- ktDjV4QTmI51oB1J3Xe1wDpgxG7wfICuCS1PPTOls7dKH+1e4a6SKQUxu/369duS21rJoKhE9cK
- 7VVbED6m4vwIRXodnUVt6gMsTOpns3OsbDEj2CPKW/0J7sN+5AB3kAWsLCH2JPFedU/ZdGb8Don
- BJfbX3sVBDeSwMsaouBXVlZSCM1L0bH2wlze3cP5/O4EHNpXdiaFnqyNMaZon0kxA5bA1utO3tF
- BbvA9C5kZQIZL/N21SLBEZuFrKquGAwMV/jIjv/UJhC17nGc4HB8plBHDbGyQmFexQO1NATVI+/
- GtzEgUq4O0UdZqJ5SWnGG2U6zL3gShj3SQq8lwe0wyDFzKuRc8
-X-Google-Smtp-Source: AGHT+IEwN3GJxe+r64u9ahgCkAlRP3OIFNkmgdKfhOEoCIViuDGZrqvQ3JfvCEKd1R+zAFKOMH3Okg==
-X-Received: by 2002:a4a:ddd0:0:b0:659:9a49:9012 with SMTP id
- 006d021491bc7-65d0eaa41bdmr248907eaf.63.1766087518997; 
- Thu, 18 Dec 2025 11:51:58 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=YP22DqiqQru5hhRlVRNBLWZ/b/Fj4EWzMbhftq2YyK8=;
+ b=PkTaaC+svcjhL6kZ8GZnipAuo85MdX6c318S8CBUDUzsDduZYYz2DHQ0TY4bPSqsRQ
+ SAopHRoig4rnWsBWM25qOpuQFkFiOnRPDw/wRkJzdLrekmd+1V8ZCtvJ1gdssiFEPUVW
+ MqdK7uRZlGMoFC3HvsoFY+eowEPsFGrp2U3/WjK1MRoN2xnP0OTX620lyhO3m8pVEgtb
+ +BlpkiEa3mDopig9LaCxF+NDDCTo8QOPrpkaaEFKj1tdU505q/pYCMxN2/FT51s5o2bn
+ tuIAaZLHXvEwUbkCXUMPmyQT2Gb/IzIT1hV9NYvtvs3aHAbpFTJMH1FLjaFFBkyBxym1
+ WM5w==
+X-Gm-Message-State: AOJu0YwpmEkOZHdJCVo9A5UuBneiqTxgS7iZK18KhKNt6D3TsUIC/3JW
+ NGbTlHenlQZOYszgVKV2UBFaSSkbkGXh3sZlVh8TfHhCwBhZH6+04F5Rmixy8VpB6wZ15lRRIPv
+ 8lLtDFPk=
+X-Gm-Gg: AY/fxX7evoRr+vy5W8rmkTCbfQL4D0SgsvxppEuDtuH0qvhqGjP/EW5wxMJAwVW43Q6
+ l2WG0nhDIf0bF+aG9DOYgbitj20Z6MiCvFiDaorVD/jyXorC7fOKIFz1FwgCmwFEWDHS/ABoceJ
+ lRjj/5WnAhTZkAR6QJkSAne9zkZcK2qQ9iKsc5k9w29nuG3VJS8oeZrz/mf758MrmF4WQlo1CKg
+ waGJAvDvxF6T4jiWl54tLJRq6p3WFVBj7Q+5YpIjFPqUHi0ZzceeTs6ShLaUH2jf5CaC8kBF/K0
+ ubBW6ke0kHQSgzynyQXz1RFxZV2nf1ZeNpzXsDCg6yz22lcXdmQFr2LQw3oyckL5ptTNtnWXAlz
+ ethaTfN9sPAw4ybar3DQ+Zmaj5O75tTsOTt6JPJm5qX9rUY6WusLmpd1zH/Gq3ITZXdedy9RQj1
+ 5XswxBJSHQ29GY5HPQ89UJDErP8/dCALvINfZqF8ZPhKeSSIkZ
+X-Google-Smtp-Source: AGHT+IH34eZup2lso0ldmGV/AtgESwbcylWZ9G/QnWv/EctnceADGCqBgGr1184IpCZI6f9bbb6V/g==
+X-Received: by 2002:a05:6820:1501:b0:659:9a49:8e4c with SMTP id
+ 006d021491bc7-65d0e9bad4emr283694eaf.28.1766087515413; 
+ Thu, 18 Dec 2025 11:51:55 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f710763sm181837eaf.16.2025.12.18.11.51.58
+ 006d021491bc7-65d0f710763sm181837eaf.16.2025.12.18.11.51.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 11:51:58 -0800 (PST)
+ Thu, 18 Dec 2025 11:51:55 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251216221935.2230490-1-trini@konsulko.com>
-References: <20251216221935.2230490-1-trini@konsulko.com>
-Subject: Re: [PATCH] test/py, buildman: Update filelock package version
-Message-Id: <176608751850.3734627.6535662415946132409.b4-ty@konsulko.com>
-Date: Thu, 18 Dec 2025 13:51:58 -0600
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <8fd28ccb-9122-40ad-a434-b18db0f26e1e@linaro.org>
+References: <8fd28ccb-9122-40ad-a434-b18db0f26e1e@linaro.org>
+Subject: Re: Please pull net-20251218
+Message-Id: <176608751478.3734627.10838476577269157275.b4-ty@konsulko.com>
+Date: Thu, 18 Dec 2025 13:51:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,17 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Dec 2025 16:19:35 -0600, Tom Rini wrote:
+On Thu, 18 Dec 2025 17:22:54 +0100, Jerome Forissier wrote:
 
-> The GitHub dependabot tool has reported a "medium" priority bug
-> CVE-2025-68146, with this package. Update to the patched version.
+> The following changes since commit 47b50fb1125c539d80ed3e7f739c02c6486e1b52:
 > 
+>   cmd: part: Fix part argument description for `part number` (2025-12-16 11:14:53 -0600)
 > 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20251218
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] test/py, buildman: Update filelock package version
-      commit: d24f4ae65433aa7720c075a9f1d1aaf7e1985ced
 -- 
 Tom
 
