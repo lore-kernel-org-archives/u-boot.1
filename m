@@ -4,156 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293B4D6D22C
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 14:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13D4D6D22A
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 14:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43CB083DEE;
-	Thu, 18 Dec 2025 15:42:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44D0F83DEE;
+	Thu, 18 Dec 2025 15:58:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BaPbsAGU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DN1O77Mm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD4C583E0E; Thu, 18 Dec 2025 15:42:11 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6AC1283E0E; Thu, 18 Dec 2025 15:58:23 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E99D183D8A
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01F1983DE4
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 15:58:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WS5plwk96Asxs0rgrrCBhFOhUn6Q2tHwp0AIhrwV5RQREV9d8vXI9VRQJaxG5PyWLG+Q04ixkobNT8aocezoi30ZHvQD8UEeuUdP/PV3+VCmpKdzW2qfFgQpJqBkisM5wlgdWU1+gdTB8vwwPGqdNW4T9Btdbd7ewzPqot/VlU6uO/LSlgRD5R4KPfuEMbQBq/GvioSybqUb6eYCZLRsf1jeON/dCEeCYXbQrFY8mkuQZedCmxDlG59OO1sfvgRHDOAh/luOSmwYDdXLV2epZtkQ9tnAOEKlVyNhWfnwCuiFjt7ZBNr7mqwsO8TPSBoW7crH7tY2bcYzoR0LUkTezg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sBdohLKd/M3cV3pvja44WTtigre57TCnfVlLVOCJ9oE=;
- b=urxVxWQEO296oUjnK5bA3Xf45XG8JFToOdL9zIo6BwHac6DMksm4uDUYE1V8B82oRbC6t5kCyQcKA6Hp6lBmqN2wuMVrFGHzPlEgu16AV6X01FJH5x2yLyVBR+th88h/iZ91shTJ0mRj0Iom5/PF8XhP7JHqMOtcDolOeKuxN2mg1JxfH1izrqOs6E5UbcqgP9uyu0cLd7uZl22F60bhBjFE2ffZ2NQ2VLs37CehvxlxUWnFIfwQYWhhr5GwtDqLGO6wtGvP0M5ra7NOx1xtGxWr+twS/mBkf899l6W28OUNjvqM1rh1V64iOpcXIqUU1qBtz0uUq3GEXE1oJuXRPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=dh-electronics.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sBdohLKd/M3cV3pvja44WTtigre57TCnfVlLVOCJ9oE=;
- b=BaPbsAGU04Vg7qPIbkFL3wcPtaNjbZq65hEvXy0ZYpML2AVIK0IA5BXn/m0tfW0CZVJjOQGoSgko7wgX/Hs5zKvytuUZ9AOlCxbL5eYVJfV2WwfiRbxjx6GonZssch1UZxf6e6bytRZHGxJokdIn3kDiz+fF7iPT3t7dsPVdNAI=
-Received: from SJ0PR13CA0141.namprd13.prod.outlook.com (2603:10b6:a03:2c6::26)
- by LV3PR10MB7964.namprd10.prod.outlook.com (2603:10b6:408:215::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Thu, 18 Dec
- 2025 14:42:02 +0000
-Received: from SJ1PEPF00002317.namprd03.prod.outlook.com
- (2603:10b6:a03:2c6:cafe::b2) by SJ0PR13CA0141.outlook.office365.com
- (2603:10b6:a03:2c6::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.5 via Frontend Transport; Thu,
- 18 Dec 2025 14:41:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF00002317.mail.protection.outlook.com (10.167.242.171) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Thu, 18 Dec 2025 14:42:01 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
- 2025 08:41:58 -0600
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 18 Dec
- 2025 08:41:58 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 18 Dec 2025 08:41:58 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BIEfwxq3515821;
- Thu, 18 Dec 2025 08:41:58 -0600
-Message-ID: <210ecc7f-4de4-40e8-8c15-5a6231df48a4@ti.com>
-Date: Thu, 18 Dec 2025 08:41:57 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-45392215f74so317063b6e.3
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 06:58:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766069885; x=1766674685; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wvEqpKH2rcu1c9eErxjkzOza72SgXAzjkxaZkVdv/Ms=;
+ b=DN1O77MmPbaqRyEY53K79lYZrIxNENKbsAkbjUWlSACrwPYm1xH16pvM2vnOPsCNHf
+ Rz2M3KzYkHvnvVs8RdRm/WWpx6Nj4g9zDK7vyByCploUQqBr3e6j/Y61JpmBhnsxMaPd
+ KJfAE4+wwtO5LUjMCdAoPJdAsyVMz7aJ61kUY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766069885; x=1766674685;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wvEqpKH2rcu1c9eErxjkzOza72SgXAzjkxaZkVdv/Ms=;
+ b=ThvTzkCu3+6psW9X14paT9qUXw9TpSb+QwXUQCZRP5v7vG+b5r6YaestQ6UUEKoZFl
+ zXgeqjezaS+AGoA3NJheglql3Jdg+5NyGjZQgPCu1KvBdoRgQnN/Bwa+Bdus1x1cfpII
+ oJk9gvb2ujdNiIRmZ7BxC6ElXFfSkuuP6kqMqfXtZZNouUvVE9yhrX8fAeBOfnMKODIY
+ vM9Pa3gipPx6/W76zJ1jd/3NFl3mN4czncweNP2Gpem+tAmVP5Qo3tXblqOn3TCi6G8x
+ dGtv8caIynxhojGvk5h5vd/OD1gXdcZJh/vmKm6vjoRUPI+qZNK2tftVvQpBaZmuRhwl
+ qJ5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXAgmSiR5QnkHaxQfOad8oqoQTaniExliZpeOBgU3ThjVxR8LssI+i0picGYB1a4Zh+U1V7Zo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEWA6OvXlawtemXi0s/OY3PkrDr9uQ/FEhUjGixH8NfXvv4CVL
+ rdzN53Z/vUOEWW05qlysM4ZGbKDnUjtZXsEunb6fc/f8F7lkBGRj7cwGJyxt9NDgTNw=
+X-Gm-Gg: AY/fxX6y8j7A7KGuegrwcHWt7vkiKYIqdVQUwXZKWAme2Gll3LPHxoOU4yRCOaKGsdz
+ ZNLEuP72HMrx4nwfktB52d+61cDfRFHMbPpgLTvPmlbsIlcCy74motcea6biUR10SCwQGmiiiuv
+ WHmyk9jo1dHxo6JyIPygX40W7qcHsbe6jxof8xTkJSHccIry8iI9a7yA1HeTnQiE2UDUv9YlpwR
+ mZ8VfgtUnL0BVElKFWipR1v0453kE+oDQE3ZVLVr46D0tTX8kwcrHwgBxdt2QM9jHjCpUBUfzcT
+ gRzPMipVpv04ejkvfwUerrBHCKrJCXyK2KsJIyWhoerGJHDr9vpLYUpl0XCeLgxTGYZ/yZijjvU
+ JdZsL67PeKwvkmyEilMsnsqIsumgvg9aWSvtK6bpAEAD/+/Z14iPG6cwRMXOY/T/wmy+OTbi+Y+
+ Z5VT3NsM22rT4MqAmuLmz4pg6RJAY0UmlE8vRo2iZz3y171pwqhQ==
+X-Google-Smtp-Source: AGHT+IF+O3kFpjtePED8olcO9PbYT8ERyQp0huNpVa1aXyGUlMXvY19tg6MDnrdx7MmeF+RGBg32AA==
+X-Received: by 2002:a05:6808:f90:b0:44e:c106:8192 with SMTP id
+ 5614622812f47-455ac7de007mr9901593b6e.11.1766069884577; 
+ Thu, 18 Dec 2025 06:58:04 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-457a42f7eb3sm1354730b6e.4.2025.12.18.06.58.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Dec 2025 06:58:03 -0800 (PST)
+Date: Thu, 18 Dec 2025 08:58:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Davis <afd@ti.com>
+Cc: Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
+ Judith Mendez <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Vignesh R <vigneshr@ti.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>
 Subject: Re: [PATCH next v3] Kconfig: select
  SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3
-To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, Judith Mendez <jm@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Vignesh R <vigneshr@ti.com>, Christoph Niedermaier
- <cniedermaier@dh-electronics.com>
+Message-ID: <20251218145801.GJ303283@bill-the-cat>
 References: <20251204-am65_dfu_fix-v3-1-de18ed3f346d@ti.com>
- <DEZHV1ELFZ43.E3FN619R0UNY@ti.com> <20251216140104.GU303283@bill-the-cat>
- <DF08W9D84X84.1DQ1VM5S8TT9D@ti.com> <20251218141653.GI303283@bill-the-cat>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251218141653.GI303283@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002317:EE_|LV3PR10MB7964:EE_
-X-MS-Office365-Filtering-Correlation-Id: eb246f0d-6301-49bb-630f-08de3e439ad1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eFQ1SDRUTlN3aDZtWXM5cThFcUxNdHRvbkF1dURDNXNOeWo2K3p2QlZlSzJt?=
- =?utf-8?B?aWk0QXJORlB6T3UyODdjQWU0VGd2T0dBZ2tRZmUxZDNwNFEzNXJIZEVucFdj?=
- =?utf-8?B?NlZnLzFvbmxILzZSL0I3MlVHalBnWjdlUEZCUVYrVW9RVWdkMEp5SXFaY0Rv?=
- =?utf-8?B?N1VlR3l3WnB1em1oUXpSbVM3a3ZhRFR1dUhVWmc4azlrZWgvdGs4VklJNUZF?=
- =?utf-8?B?eW5URVlsSXVtWGdKRTZBUDNpd1QrRy82TDJUSmdwVjl1Q3h0amowWCtGUG4z?=
- =?utf-8?B?cHA2ZUtzeXRBekN2a1p5Yno2TXNwMHVCNnNzTnBCTWF1VWVXZm53WnRJeERV?=
- =?utf-8?B?WTNZNXhDV2dXTzZaSk9qOWlzajVXMGdBWjIvNGEwaDFyZmJSRHZpK3NQZ21R?=
- =?utf-8?B?TTRKNEpTL20vamdreUlKaTU5aVFrM09QTkhncWF0K1hQWjZEWXJ1elY4Slcx?=
- =?utf-8?B?c2xYRmcyL2w5N3MyTnNHYVhScHpvQldoTFBpTHFYTlBPZ0dQWDBvK0MyU1lX?=
- =?utf-8?B?bFRiVEFBZVIxRWw0NE5HR1k1a0xuaVdIa1lZRmNvVVp2bmFNUzIzK1l4d1B4?=
- =?utf-8?B?c2hHWlY4dStucVZRUlJIN3c2VG9xM1VPb3NRQTRYNVRwUG05MkRPanhtRm5Q?=
- =?utf-8?B?NGx4WCtVVThuUWN2NFQ5anRwNThlb0Irc2lIbTk2N1Fra0U2V0lkTFpKMjAw?=
- =?utf-8?B?dUZXbkhNTlZ1UTU3YUNURVBPckw0TW9rZDdKTUF4aGtWRHI0bXBJNUpabnJx?=
- =?utf-8?B?akZvYlNWTWt6VE15bE9KUUFBODlqYWo4bldUWU5UZEoyRE1jR3VKQmNoZ2VW?=
- =?utf-8?B?dkZHd2NSYW1nY3NZY2t6dnJQcUxTZXRFZzJPTFVyTC9HOXFEZjVON1RLTzVn?=
- =?utf-8?B?SEk1TG5UVHVwcno3MXlUcDkvQUlZc3hmZU1uUWhkNzQzVWNWZTlQbVAxR21w?=
- =?utf-8?B?UTZoYjh5N0RDRm1VMVlIbWFIN2FobjZCUkpERUFlOGxoYVBNNlFVL3ArWkxW?=
- =?utf-8?B?MS84Qk93Q3VLaDhIYTlIejhrRktWQlk5cnBVb2JiVVFIRG9DcnU1UExxOElk?=
- =?utf-8?B?S2NuRUIzSU1UR2VPZjZGdUNXNkl5MmJUR2pONlNHTzdlWlEyOVFseVJRcWE4?=
- =?utf-8?B?TWt1RUk2a1h4c1ZHeXMxOVJraGFja2ZnNHhKbkJnZmlHSVBMaVkvNG9tbkFu?=
- =?utf-8?B?OWhOZGZ2a0xzWlIwYjhPcTUyb01yRWlHWjJoZ1BBSzlvR3lhUCt6Mmk2aXhN?=
- =?utf-8?B?RUJ5RExlZGNsRmw4MUFBRDBtWGhJN3BkTnd0Nmo1M3ErazBoYVRTcUpSakhp?=
- =?utf-8?B?ODh1Vy8ycm5BbUNMUXN1MXJCNWNSUThrUXEvNVhOSWJjK082WEtLUU1sb3hj?=
- =?utf-8?B?bXpTUmJQemxiR2hsaW94TDBWSmNJSnNrZmIxMkdldjFmaVQxb3E4QlBYTGdN?=
- =?utf-8?B?a3Z0VytKTmFhY09XTkc1NmY0UHVZMG5lQlZWczdJVk8yTUxZSEZNUzZ0MFVv?=
- =?utf-8?B?TyswN2NUbE1hQjEyR3NmUDh5QTNxK1IrSklKMzdaQUJJRGpCc0w4a3h1SjJT?=
- =?utf-8?B?NVV2UUM2WjVMMFZ5OHA2U3ZXY1ZxdzJuWmxyNllxZng2d2NRUWdFbDYzT0Jv?=
- =?utf-8?B?WkpxS0NGUnFXbkdzMnBSOUFQMDYyODVGOW96S1k4UWhJQ043UTU3MnZOZnJ4?=
- =?utf-8?B?ZHVpeXpMdlk1cS81VU1JTnZNMmVjUVJrdHdjYXhsS0tnQTNjMFhSbm5PaGlC?=
- =?utf-8?B?UUdxVUx2dUtVQjByMmpSNlVKSmh1YUVuWkpBcVRqVXk2eVcrSWJ0VS9HRXVr?=
- =?utf-8?B?SGFjYktEK1AvU2p3UGZKVDQ3WkpUMjVxQTRVNjFManJ0VGZMSGZlVHhMaklr?=
- =?utf-8?B?dys2azZiRWNUbHFBc09aYU92dXdVdHh3WTJCS1FpTTZNeDlJWVJUNVFtWnBK?=
- =?utf-8?B?eC9xTEJxcWlZTjdMSmhFcXovKzRpeGRycnVNR24rdldnNFlXNzdaUkhoYyti?=
- =?utf-8?B?YlJkWUxOY0xxMS9pWldGb04xNDE5aDY0akdNNlp2ZDV0Y3hrVy9tWTFGRmVC?=
- =?utf-8?B?ZGlHNU9DVXdqbVQ5YjJzQVZDUWNudTNnWUxzcmpmYXBCcWY3KzN0VVVKcENt?=
- =?utf-8?Q?f910=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 14:42:01.3579 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb246f0d-6301-49bb-630f-08de3e439ad1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002317.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7964
+ <DEZHV1ELFZ43.E3FN619R0UNY@ti.com>
+ <20251216140104.GU303283@bill-the-cat>
+ <DF08W9D84X84.1DQ1VM5S8TT9D@ti.com>
+ <20251218141653.GI303283@bill-the-cat>
+ <210ecc7f-4de4-40e8-8c15-5a6231df48a4@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3UfaZ+8GnZF8v8ec"
+Content-Disposition: inline
+In-Reply-To: <210ecc7f-4de4-40e8-8c15-5a6231df48a4@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,70 +108,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/25 8:16 AM, Tom Rini wrote:
-> On Wed, Dec 17, 2025 at 11:03:43AM +0530, Anshul Dalal wrote:
->> On Tue Dec 16, 2025 at 7:31 PM IST, Tom Rini wrote:
->>> On Tue, Dec 16, 2025 at 01:52:37PM +0530, Anshul Dalal wrote:
->>>> Hi all,
->>>>
->>>> Any updates on this patch? If possible could we pull this fix into
->>>> master as well for the 2026.01 release?
->>>
->>> I thought the feedback was that this was a generic problem and so the
->>> Kconfig logic should be universal, or there was an incorrectly /
->>> sub-optimally handled case in the tiny printf code, that needs fixing.
->>
->> We have a few ways to go about fixing this:
->>
->> 1. Fix the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
->>     with an extra Kconfig"):
->>
->>     Pointer formatting used to fall back to %x handling before the
->>     commit. Though going by the commit description, it looks like the
->>     change was intended. So, I'm unsure if we should re-introduce the
->>     confusing handling back where %p is handled but not %pa or %pap.
->>
->> 2. Add SPL_USE_TINY_PRINTF_POINTER_SUPPORT per defconfig:
->>
->>     This was what v2 of the series were attempting to do but as Andrew
->>     pointed out, there might be other platforms with similar issues and
->>     it would be better to fix it for K3 overall.
->>
->> 3. Change usage of %p in k3_sysfw_dfu_download to %x:
->>
->>     This is a suitable fix imo but we might still have to fix similar
->>     usages of %p in other places. We'd also have to be more careful when
->>     bringing proper U-Boot code to SPL since %p would not work the same
->>     way.
->>
 
-For what it's worth my preference would be this one. We should just work
-to avoid using %p in general outside of debug statements.
+--3UfaZ+8GnZF8v8ec
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->> 4. Unconditionally select SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3:
->>
->>     This allows us to remedy the problems with above 3 solutions with
->>     very little overhead to the SPL size (<100 bytes).
->>
+On Thu, Dec 18, 2025 at 08:41:57AM -0600, Andrew Davis wrote:
+> On 12/18/25 8:16 AM, Tom Rini wrote:
+> > On Wed, Dec 17, 2025 at 11:03:43AM +0530, Anshul Dalal wrote:
+> > > On Tue Dec 16, 2025 at 7:31 PM IST, Tom Rini wrote:
+> > > > On Tue, Dec 16, 2025 at 01:52:37PM +0530, Anshul Dalal wrote:
+> > > > > Hi all,
+> > > > >=20
+> > > > > Any updates on this patch? If possible could we pull this fix into
+> > > > > master as well for the 2026.01 release?
+> > > >=20
+> > > > I thought the feedback was that this was a generic problem and so t=
+he
+> > > > Kconfig logic should be universal, or there was an incorrectly /
+> > > > sub-optimally handled case in the tiny printf code, that needs fixi=
+ng.
+> > >=20
+> > > We have a few ways to go about fixing this:
+> > >=20
+> > > 1. Fix the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
+> > >     with an extra Kconfig"):
+> > >=20
+> > >     Pointer formatting used to fall back to %x handling before the
+> > >     commit. Though going by the commit description, it looks like the
+> > >     change was intended. So, I'm unsure if we should re-introduce the
+> > >     confusing handling back where %p is handled but not %pa or %pap.
+> > >=20
+> > > 2. Add SPL_USE_TINY_PRINTF_POINTER_SUPPORT per defconfig:
+> > >=20
+> > >     This was what v2 of the series were attempting to do but as Andrew
+> > >     pointed out, there might be other platforms with similar issues a=
+nd
+> > >     it would be better to fix it for K3 overall.
+> > >=20
+> > > 3. Change usage of %p in k3_sysfw_dfu_download to %x:
+> > >=20
+> > >     This is a suitable fix imo but we might still have to fix similar
+> > >     usages of %p in other places. We'd also have to be more careful w=
+hen
+> > >     bringing proper U-Boot code to SPL since %p would not work the sa=
+me
+> > >     way.
+> > >=20
+>=20
+> For what it's worth my preference would be this one. We should just work
+> to avoid using %p in general outside of debug statements.
 
-How about unconditionally select this for all platforms? If it is only
-saving 100 bytes it shouldn't be an issue for most, then platforms that
-have verified they do not need it (or need to save every last byte) can
-then disable it. Seems odd to make a change like "1e24e84db41a" and not
-have the default be the existing behavior.
+I'm also fine with that.
 
->> If this problem is faced by non K3 platforms as well, perhaps it might
->> be better to take the hit and make SPL_USE_TINY_PRINTF_POINTER_SUPPORT
->> default y.
-> 
-> Ah, so now I understand the problem, with point 3. So yes, I think the
-> right fix is to add "select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if
-> SPL_USE_TINY_PRINTF && DFU && CPU_V7R" under the ARCH_K3 symbol.
-> 
+> > > 4. Unconditionally select SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3:
+> > >=20
+> > >     This allows us to remedy the problems with above 3 solutions with
+> > >     very little overhead to the SPL size (<100 bytes).
+> > >=20
+>=20
+> How about unconditionally select this for all platforms? If it is only
+> saving 100 bytes it shouldn't be an issue for most, then platforms that
+> have verified they do not need it (or need to save every last byte) can
+> then disable it. Seems odd to make a change like "1e24e84db41a" and not
+> have the default be the existing behavior.
 
-Just the length and specificity of that conditional string is making
-me think that is not the right solution. What happens when we find
-the same issue for SPL DFU on ARM64, or in some other code not
-related to DFU, etc..
+There's just lots of platforms that can't afford much growth.
 
-Andrew
+> > > If this problem is faced by non K3 platforms as well, perhaps it might
+> > > be better to take the hit and make SPL_USE_TINY_PRINTF_POINTER_SUPPORT
+> > > default y.
+> >=20
+> > Ah, so now I understand the problem, with point 3. So yes, I think the
+> > right fix is to add "select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if
+> > SPL_USE_TINY_PRINTF && DFU && CPU_V7R" under the ARCH_K3 symbol.
+> >=20
+>=20
+> Just the length and specificity of that conditional string is making
+> me think that is not the right solution. What happens when we find
+> the same issue for SPL DFU on ARM64, or in some other code not
+> related to DFU, etc..
+
+Part of the answer is that since we should be printing "?" now instead
+of the wrong value, it should be easier to spot the wrong code. Perhaps
+we also need something in doc/develop/spl.rst to talk about it (we
+default to a tiny subset printf, some things don't work without
+additional options, avoid %p unless you must and then enable
+SPL_USE...)?
+
+--=20
+Tom
+
+--3UfaZ+8GnZF8v8ec
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUQWdgAKCRAr4qD1Cr/k
+ChMNAQCbWuewCLKAtNk+sOS5ReDheqaCw5Usg//9euBNB4lMRQD9GgKvm0k3opkb
+8PIEItLhssELw1LctJf6Fvls8Btn7AM=
+=IgB9
+-----END PGP SIGNATURE-----
+
+--3UfaZ+8GnZF8v8ec--
