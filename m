@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECEDD6D226
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 13:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A338BD6D226
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 13:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EB3283D07;
-	Thu, 18 Dec 2025 14:49:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C61EF83D07;
+	Thu, 18 Dec 2025 14:59:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="EKcv1F+z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aoLr3/gE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBAB583D8A; Thu, 18 Dec 2025 14:49:17 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D1A6C83DEE; Thu, 18 Dec 2025 14:59:05 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 049C080325
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 14:49:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2CEE8309A
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 14:58:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id CE176C1A5AF;
- Thu, 18 Dec 2025 13:48:49 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 5A78F606B6;
- Thu, 18 Dec 2025 13:49:14 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 04EA7102F0B3B; Thu, 18 Dec 2025 14:49:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1766065752; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=WEYZIim9YL7BsiecXoVULNdpZLl+lTZNE/xWFd5wI20=;
- b=EKcv1F+zxWZq83LIKtC9j0DkoGHnU2GWvOjnuQmot5xnUzhFqXCAK3pIjj2IDDT4GlRX4s
- Ol2CTc5M/Ly9NdauFpCntNQ6AOuWafE7wTa1Xon/LDNDW2jKd0B0CqmJb4VSKpX00IXt5L
- ezXfHu8hYyBSqsGucdZH751KHusR2HRgM2MF2OS1e7GnKP3a3JGjZ6n6GKUzVE68l97/S9
- PVulP/4fEKeRmy+4fT4eLOz9ZfVnQhTnLkBJjjnLQoNWTQR1mcf+nIxR6dH3arD36DhyK+
- a8dXIQTyFODIXDd9aLgqemjt0d4h+mmrjugCHA4Q93mLBCvgtoS/j/+Lt0wplA==
-Date: Thu, 18 Dec 2025 14:49:02 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Greg Malysa <malysagreg@gmail.com>, Arturs Artamonovs
- <arturs.artamonovs@analog.com>, Vasileios Bimpikas
- <vasileios.bimpikas@analog.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Peng Fan
- <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Duje =?UTF-8?B?TWloYW5vdmnEhw==?=
- <duje@dujemihanovic.xyz>, Stefan Roese <stefan.roese@mailbox.org>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
- Heiko Schocher <hs@nabladev.com>, Alif Zakuan Yuslaimi
- <alif.zakuan.yuslaimi@altera.com>, E Shattow <e@freeshell.de>, Raymond Mao
- <raymondmaoca@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang
- <yangshiji66@outlook.com>, Daniel Golle <daniel@makrotopia.org>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Yao Zi <ziyao@disroot.org>, Leonard
- Anderweit <l.anderweit@phytec.de>
-Subject: Re: [PATCH v2 0/6] Add support for fwumdata
-Message-ID: <20251218144902.62ca232b@kmaincent-XPS-13-7390>
-In-Reply-To: <CAC_iWjLT1OJxADQ5bZaz_E7shWbGUJSnDQK7_dQM7agOKEvK0A@mail.gmail.com>
-References: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
- <CAC_iWjLT1OJxADQ5bZaz_E7shWbGUJSnDQK7_dQM7agOKEvK0A@mail.gmail.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-65b3d3ac90fso203749eaf.1
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 05:58:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766066336; x=1766671136; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1aRHkdlYbGndCTz6Rk0xtRgaGoLRJm2pADeKwRXijuo=;
+ b=aoLr3/gEsZ4XppKzPWlj4H819KeByghgqUMpw1FgiWD9KNGsyTrbu/d2G5i9oRa4n4
+ J44QMr0ayx0D9TWwljAjgWq/QhPL7boOtKxYqBn8FeCbutu5B4H7PHXD16PCT1VcVTXo
+ tVYB/LjSeKnl0zNydYy9UHikoqJTkUvSDkmT0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766066336; x=1766671136;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1aRHkdlYbGndCTz6Rk0xtRgaGoLRJm2pADeKwRXijuo=;
+ b=iGXJY6DvwCFurHrLm5vblQ3LQpleqPmG7VBkN7HQCONY4InuOlhmm/O6Pz3XYbvGVK
+ CdbJcbDiLJPVH/USqufa5rJeaG4t48oO1JyBtMz/f1njbQuDEZgPI94N/U63lh3HZq7K
+ YMkwTo89FvyGkOcx+4uvoX70Rj3GXwx1vCrDI3wsDJ2vKHF6xIDlDFsKJV5h3qgCfX3H
+ BtyLHR7Z5fJg4LUD+MzdUXe6F0/JaaYXqACiescSHzy9/SZfeMPKKv59TH9qyJmcufwX
+ h+3BMO8e6u6+6IvWe69l57Cphz+SQapbgxeDtLycXRI16dO3tpCBZPH9MFeUgMqZq7yk
+ 3RCA==
+X-Gm-Message-State: AOJu0YzQY4rHXVVY9k/0/gZTcwKjhPB2/SH73InOHDvc2iG/y482h8ch
+ 6Wcmd1UHuKjZO5W/9V/nS1qiCo0d2wh5wWDX1irCer7CBTBzMxrMbsXFM2JkYDKNRMI=
+X-Gm-Gg: AY/fxX5WcYgukUMIXIdE67X2YlHPXzGLEcw+z4GuNjmnHAadNLbMtF9tAywtP3H4M1o
+ 6t3yEN1i0jDF2YdZB+MAsHDTpIzITtAjYpADWfZ22vs/NB+9/4uUJdoWfU3/pACdOeOm+BMxpGG
+ zL2ZoV2oD0hqJ9dr5oi37a08hLOuwUr53CjATchUdgsX30q7ucFxS9AabE0BX0Lo/NKchC6k1bF
+ 4sFFCA9FHNOBZ9OcaafaJwdR5F1h/22gUYIaGOoIqPmTzJiIye3mIYDcFMMPS8ABAfcEbn0+Fc6
+ ErvuMHlcCwezwdq+GsjOLEmr1iZcQzP8xzNHR96YwqvTuFqbwYJGhakMJFlCxWPqQA6b04kVSSF
+ aUPVWGb6j3rekPlgbbU1HtHR7oGVHbfhdTJAojKWOO2aW9wNvEwlcHfsH/6fqUIG9dhFsIM8Mis
+ qNJLucyV3vj/xy36N0wjc0JEliGq+Ypg4s+URA+n+mKmX58F1ZyA==
+X-Google-Smtp-Source: AGHT+IFmjs+hNLRnpWLuoOSXjUElZ6hrRrYJWt6U+Wv33lsPoxQstNzmai23s5q5m59u5RHJ0DizOA==
+X-Received: by 2002:a05:6820:168b:b0:65d:b36:bdc2 with SMTP id
+ 006d021491bc7-65d0b36c30bmr165135eaf.36.1766066336344; 
+ Thu, 18 Dec 2025 05:58:56 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3fa18024d96sm1669110fac.22.2025.12.18.05.58.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Dec 2025 05:58:55 -0800 (PST)
+Date: Thu, 18 Dec 2025 07:58:53 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 3/3] env: Add single to redundant environment upgrade path
+Message-ID: <20251218135853.GG303283@bill-the-cat>
+References: <20251217201323.756419-1-marek.vasut+renesas@mailbox.org>
+ <20251217201323.756419-3-marek.vasut+renesas@mailbox.org>
+ <20251217205610.GF303283@bill-the-cat>
+ <bdfbfcbc-74f3-4191-b4e9-b4de0e8cbd16@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KzCEyKzmGFLKBsAu"
+Content-Disposition: inline
+In-Reply-To: <bdfbfcbc-74f3-4191-b4e9-b4de0e8cbd16@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,146 +101,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ilias,
 
-On Thu, 18 Dec 2025 14:04:12 +0200
-Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+--KzCEyKzmGFLKBsAu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Kory,
->=20
-> I haven't lost track of this, I'll try to have a look as soon as I can.
-> For the record, I still don't think this is a great idea. I'd rather
-> have people follow the design docs.
+On Wed, Dec 17, 2025 at 11:58:15PM +0100, Marek Vasut wrote:
+> On 12/17/25 9:56 PM, Tom Rini wrote:
+> > On Wed, Dec 17, 2025 at 09:12:33PM +0100, Marek Vasut wrote:
+> >=20
+> > > Add support for converting single-copy environment to redundant envir=
+onment.
+> > > In case CRC checks on both redundant environment copies fail, try one=
+ more
+> > > CRC check on the primary environment copy and treat it as single envi=
+ronment.
+> > > If that check does pass, rewrite the single-copy environment into red=
+undant
+> > > environment format, indicate the environment is valid, and import tha=
+t as
+> > > usual primary copy of redundant environment. Follow up 'env save' wil=
+l then
+> > > store two environment copies and the system will continue to operate =
+as
+> > > regular redundant environment system.
+> > >=20
+> > > Add test which validates this upgrade path. The test starts with spi.=
+bin
+> > > which is pre-populated as single-copy environment and then upgrades t=
+hat
+> > > environment to dual-copy environment.
+> > >=20
+> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > ---
+> > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > > Cc: u-boot@lists.denx.de
+> >=20
+> > For merging, a cover letter makes things so much easier, please add one
+> > for v2. And, I think this needs a Kconfig option. I'm sure you added
+> > this because someone has a valid use case but it's going to grow too
+> > many platforms where that feature isn't likely desired. Thanks.
+> Do you actually observe growth ? Because this is calling existing functio=
+ns,
+> so the growth has to be in units of bytes tops.
 
-I don't get it. What are your arguments against this tool? It is a simple w=
-ay
-to change the content of the FWU metadata from Linux.
-
-> I understand the acceptance capsule feels 'weird', but there was a
-> good reason for it. There's a PR with an update to the spec, which
-> makes the acceptance substantially easier now that all the ecosystem
-> parts are in place [0[
->=20
-> [0] https://github.com/ARM-software/edge-iot-arch-guide/pull/21
-
-This design guideline is for one use case of FWU Metadata. It needs UEFI and
-capsule update.
-
-FWU Metadata is an update standard for ARM architecture, it is not dependen=
-t on
-the implementation. UEFI with capsule update is one implementation, but we =
-could
-have others.
-https://documentation-service.arm.com/static/660be6391bc22b03bca92702
-
-On my case (ST board) there is no UEFI, I have TF-A (FSBL) that reads the F=
-WU
-metadata to know the location of the FIP Image (SSBL which contain U-boot a=
-nd
-OPTEE).
-During the OTA process, Linux is updating the FWU metadata to change the ac=
-tive
-bank and the bank state with this new fwumdata tool.
-
-Note that the previous development of FWU support in U-boot as not been
-developed in a generic way but bound to the UEFI capsule framework which is=
- not
-ideal. On my case if I want to read FWU metadata in U-boot I have to enable=
- the
-UEFI capsule config for nothing.
-
-Regards,
-
->=20
-> Cheers
-> /Ilias
->=20
-> On Fri, 12 Dec 2025 at 18:23, Kory Maincent <kory.maincent@bootlin.com> w=
-rote:
-> >
-> > Add a new fwumdata tool to allows users to read, display, and modify FWU
-> > (Firmware Update) metadata from Linux userspace. It provides functional=
-ity
-> > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-> > metadata, change active/previous bank indices, modify bank states, and =
-set
-> > image acceptance flags. Configuration is done via fwumdata.config file.
-> >
-> > Made a few change to mkfwumdata tool along the way.
-> >
-> > Here is an output example
-> >
-> > $ ./fwumdata -l
-> > FWU Metadata:
-> >         Version:            2
-> >         Active Index:       0
-> >         Previous Index:     1
-> >         CRC32:              0x1f21ff7b
-> >         Metadata Size:      120 bytes
-> >         Descriptor Offset:  32
-> >         Bank States:
-> >                 Bank 0: accepted (0xfc)
-> >                 Bank 1: accepted (0xfc)
-> >
-> >         Firmware Store Descriptor:
-> >                 Number of Banks:       2
-> >                 Number of Images:      1
-> >                 Image Entry Size:      80
-> >                 Bank Info Entry Size:  24
-> >
-> >         Images:
-> >                 Image 0:
-> >                         Image Type GUID:
-> > 65ae85ad-1fb3-0b46-8c5d-285543aa6eab Location GUID:
-> > 51513491-da07-2a4f-9bea-375ea53b1b5c Banks:
-> >                                 Bank 0:
-> >                                         Image GUID:
-> > cb2df442-f929-6a44-a374-672d92eb2aa7 Accepted:    yes (1)
-> >                                 Bank 1:
-> >                                         Image GUID:
-> > a839a18f-395c-484f-83b8-0354077c8f9f Accepted:    yes (1)
-> >
-> > Changes in v2:
-> > - Fix a small offset mistake in last patch
-> >
-> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > ---
-> > Kory Maincent (6):
-> >       tools: gitignore: Add mkfwumdata to the git ignore file
-> >       tools: Reorganize mkfwumdata tool into fwumdata_src directory
-> >       tools: mkfwumdata: Improve error message specificity
-> >       tools: mkfwumdata: Add bank count validation for FWU metadata v2
-> >       tools: Add support for fwumdata tool
-> >       tools: mkfwumdata: Remove dependency on fwu_mdata.h header
-> >
-> >  MAINTAINERS                           |   7 +-
-> >  doc/develop/uefi/fwu_updates.rst      |   4 +-
-> >  doc/fwumdata.1                        | 222 +++++++++
-> >  tools/.gitignore                      |   2 +
-> >  tools/Kconfig                         |   9 +-
-> >  tools/Makefile                        |   4 +-
-> >  tools/fwumdata_src/Kconfig            |  19 +
-> >  tools/fwumdata_src/fwumdata.c         | 854
-> > ++++++++++++++++++++++++++++++++++ tools/fwumdata_src/fwumdata.config  =
-  |
-> > 33 ++ tools/fwumdata_src/fwumdata.h         | 138 ++++++
-> >  tools/fwumdata_src/fwumdata.mk        |  10 +
-> >  tools/{ =3D> fwumdata_src}/mkfwumdata.c | 106 ++---
-> >  12 files changed, 1315 insertions(+), 93 deletions(-)
-> > ---
-> > base-commit: 31bf4a1c308773895a8e7ea047b3cea037e4c922
-> > change-id: 20251107-feature_fwumdata-58508d61e1d3
-> >
-> > Best regards,
-> > --
-> > K=C3=B6ry Maincent, Bootlin
-> > Embedded Linux and kernel engineering
-> > https://bootlin.com
-> > =20
-
-
+A good question, I was assuming so but checking xilinx_versal_virt (a
+platform with redundant env) shows yes, it does:
+01: Merge patch series "fit: print conf node compatibles + use property str=
+ing constants"
+05: env: Add single to redundant environment upgrade path
+   aarch64: (for 1/1 boards) all +96.0 text +96.0
+            xilinx_versal_virt: all +96 text +96
+               u-boot: add: 0/0, grow: 1/0 bytes: 84/0 (84)
+                 function                                   old     new   d=
+elta
+                 env_check_redund                           316     400    =
+ +84
 
 --=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Tom
+
+--KzCEyKzmGFLKBsAu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUQImgAKCRAr4qD1Cr/k
+CkjCAP4rAuxZbphZmKnkqRvyiNItrw+mJz0OLu9+5iRsUij8mwD8CeXYzd95hfar
+8zZ7A+ZBzL/RwT/lXF9EkbgE4RbJ/Qg=
+=bKiF
+-----END PGP SIGNATURE-----
+
+--KzCEyKzmGFLKBsAu--
