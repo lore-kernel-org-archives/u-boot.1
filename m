@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F2C1D6ACED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 11:45:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9821AD6ACED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 11:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF89A83DA7;
-	Thu, 18 Dec 2025 12:44:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2432B83D90;
+	Thu, 18 Dec 2025 12:44:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26D7683C54; Thu, 18 Dec 2025 12:44:52 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id E64EA83D7A; Thu, 18 Dec 2025 12:44:53 +0100 (CET)
+Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::190d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AF2083D5D
+ by phobos.denx.de (Postfix) with ESMTPS id 7EEB783D7A
  for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 12:44:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dX83P5bqCzH5g;
- Thu, 18 Dec 2025 12:44:49 +0100 (CET)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dX83Q1m1BzF1p;
+ Thu, 18 Dec 2025 12:44:50 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dX83P1kNFzcqy; Thu, 18 Dec 2025 12:44:49 +0100 (CET)
+ id 4dX83P5H9HzfGF; Thu, 18 Dec 2025 12:44:49 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 18 Dec 2025 12:44:41 +0100
-Subject: [PATCH v2 1/3] cmd: bdinfo: provide long help with all options
+Date: Thu, 18 Dec 2025 12:44:42 +0100
+Subject: [PATCH v2 2/3] doc: cmd: bdinfo: specify required dependency for
+ some info
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251218-b4-bdinfo-doc-v2-1-2fb328750026@cherry.de>
+Message-Id: <20251218-b4-bdinfo-doc-v2-2-2fb328750026@cherry.de>
 References: <20251218-b4-bdinfo-doc-v2-0-2fb328750026@cherry.de>
 In-Reply-To: <20251218-b4-bdinfo-doc-v2-0-2fb328750026@cherry.de>
 To: u-boot@lists.denx.de
@@ -64,63 +65,40 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Document the bdinfo -a, -e and -m options in the long help, but only
-when they can be used. The string concatenation is a bit odd with two
-newlines, but it does render properly once in U-Boot CLI.
+The devicetree, current eth and IP addr info are only available when
+certain symbols are defined, so let's make the dependencies explicit.
 
-Tested-by: Michal Simek <michal.simek@amd.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- cmd/bdinfo.c      | 16 +++++++++++++++-
- test/cmd/bdinfo.c | 11 +++++++++++
- 2 files changed, 26 insertions(+), 1 deletion(-)
+ doc/usage/cmd/bdinfo.rst | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-index 09fe8067642..f36c6123ca7 100644
---- a/cmd/bdinfo.c
-+++ b/cmd/bdinfo.c
-@@ -212,5 +212,19 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- U_BOOT_CMD(
- 	bdinfo,	2,	1,	do_bdinfo,
- 	"print Board Info structure",
--	""
-+// Long help prepended with command's name, and `bdinfo` is a valid command
-+	"\n"
-+#if CONFIG_IS_ENABLED(GETOPT)
-+	"bdinfo -a\n"
-+#endif
-+	"  - print all Board Info structure"
-+#if CONFIG_IS_ENABLED(GETOPT)
-+	"\n"
-+#if IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP)
-+	"bdinfo -e\n"
-+	"  - print Board Info related to network\n"
-+#endif
-+	"bdinfo -m\n"
-+	"  - print Board Info related to DRAM"
-+#endif
- );
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 2ba57edc685..5112c399931 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -254,6 +254,17 @@ static int bdinfo_test_help(struct unit_test_state *uts)
- 		ut_assert_nextline_empty();
- 		ut_assert_nextlinen("Usage:");
- 		ut_assert_nextlinen("bdinfo");
-+		if (CONFIG_IS_ENABLED(GETOPT))
-+			ut_assert_nextlinen("bdinfo -a");
-+		ut_assert_nextlinen("  - print all Board Info structure");
-+		if (CONFIG_IS_ENABLED(GETOPT)) {
-+			if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP)) {
-+				ut_assert_nextlinen("bdinfo -e");
-+				ut_assert_nextlinen("  - print Board Info related to network");
-+			}
-+			ut_assert_nextlinen("bdinfo -m");
-+			ut_assert_nextlinen("  - print Board Info related to DRAM");
-+		}
- 	}
- 	ut_assert_console_end();
+diff --git a/doc/usage/cmd/bdinfo.rst b/doc/usage/cmd/bdinfo.rst
+index a139c9d855c..2a5873a400a 100644
+--- a/doc/usage/cmd/bdinfo.rst
++++ b/doc/usage/cmd/bdinfo.rst
+@@ -77,9 +77,13 @@ Build
+ current eth
+     name of the active network device
+ 
++    Only shown if CONFIG_NET=y or CONFIG_NET_LWIP=y.
++
+ IP addr
+     network address, value of the environment variable *ipaddr*
+ 
++    Only shown if CONFIG_NET=y or CONFIG_NET_LWIP=y.
++
+ fdt_blob
+     address of U-Boot's own device tree, NULL if none
+ 
+@@ -95,6 +99,8 @@ lmb_dump_all
+ devicetree
+     source of the device-tree
+ 
++    Only shown if CONFIG_LMB=y and CONFIG_OF_REAL=y.
++
+ arch_number
+     unique id for the board
  
 
 -- 
