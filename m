@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD77D6E2B1
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 17:20:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEE2D6E2BF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 17:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83242839A8;
+	by phobos.denx.de (Postfix) with ESMTP id C5549839D7;
 	Thu, 18 Dec 2025 18:18:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MDSI696y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="U+a1NE6d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F1258367F; Thu, 18 Dec 2025 18:18:16 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 7389C80077; Thu, 18 Dec 2025 18:18:23 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2D7180077
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 18:18:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43324836CE
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 18:18:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-659848c994bso439879eaf.3
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:18:08 -0800 (PST)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3f0c93ecf42so1260610fac.0
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 09:18:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766078287; x=1766683087;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766078291; x=1766683091;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1g7Mf1akq7KTGjVZGl8MgTI8h2J5H+hHLZsBMzPd4s0=;
- b=MDSI696ykKHIZQh4vIuLkWzrYXVHN1Sy0T882gADE51Cj3OPi9gP3/PUnMXLp80bnN
- VmIxAmPCeL+SUcc3LZf3S6SCaoYJUKmDrcsUFC2BhwEbMflvpylEVMaOnsSf9BOwwgnx
- 7XIxH7G+pdap67FwyuuCuLsuzq7eCRyYxsC3WClYaqNVJz2MMlaOx9DKm39AsbTlvc4A
- oU2rk8iEZj0uwg0snzCH0s0citY14UgAuqFynzAZ+iZdzR+XBajIk5qHBN3ENxwRDcyZ
- Z/2youbHVw2X0oasRVC+qCJd/oqiCi7ADp8UNZMm8x93poDNGZk28rqPf9eQp61WDJNY
- kobg==
+ :reply-to; bh=dLKwZZC24pumN41pEQsuk9P9tjQkkR3Je9PDljIN3Do=;
+ b=U+a1NE6dBDF0JRJEcbiZ9rbNrJufQDtI/iHDM8fyrzAani50T67Lfr8Kit6ZpRk7Jv
+ a+ikgmmZEAjCLbJxAYst7yt4Il84AQLFj0qqXR6AWElT3Tzb+s8NfErupOsJ9xahnTmn
+ 2hsjX47d61alC05NwMRzTHz+pAbJUSuI9grOMsZgKvay4wkznjmUT7ju3OsSiQZg4cQc
+ J+JwvjA1U2wp3N6KOe937cTA/VjsZPERoIPSuZZvEfGPFqvlQhQngROdFC5QT5caZG1h
+ /E5tWknacIl+mWMpvCrFJ6dSXoNOsCheMx62PVFj8NYmgDQquzIAUDK6hCyMSiih7rv9
+ 7ExQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766078287; x=1766683087;
+ d=1e100.net; s=20230601; t=1766078291; x=1766683091;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=1g7Mf1akq7KTGjVZGl8MgTI8h2J5H+hHLZsBMzPd4s0=;
- b=W67zJiyu1npkUkVKUTtmjo0tjgiPdBrkENeEYOaD/jDfSPYcpnVd2hfQ+q0nxYc6s0
- d9s9WmqAZECzxNEpb6PsWwF9kvF/UWYq4PdHuj3Fxtq10F88ZDQWN9YABYDlCCJEmGO+
- dB6tJjKPoG41exTp+mjnsDgHkA7p69jAVqKLDPOmNktxWem1JeHDYB3CzRt7OOLElzL9
- QKTVwXuooNHP1NV4593oWlZjvtR+lUL79p3+Hm2TXhvODApQEH98l3lla8CXiKUSIgfi
- 7geA8wAnnclSjDaO+baHOzfFtb+DP112cnUM3xEFYAPqsSro5XJidkiWMxUbEfcJqh1G
- Zwog==
+ bh=dLKwZZC24pumN41pEQsuk9P9tjQkkR3Je9PDljIN3Do=;
+ b=AjxrqyR1gzzRKG/orNEseC3fynO9whZWqXMth9xqpVNP1hpM2GBdNteMiJvV7GHpyl
+ W7zuBO1tFgxqDSjHdrnA1zTmSVeQgBxu1BHDTF9ctxyL0Jvs71rTu73sUUJDFPHc+77o
+ yBv3eXZNLuozh8V/9qakb+FMsmqBdO/qRBp7/z9eOXzgso8kPua/yf7ooPmfnT0p7dI9
+ 7W9iSJUiA5HDSM4RnhE9P2oXlJqx2U5PY5C6lZzTFKSof+iFT/ApjEiGI+TNxAwPQGGZ
+ L+f8FYDznfMaslmKc+S1CzoyFxVaZ0ZwC7jcyHzMR134skiAb9Ekr0Sinat33rTkqbJt
+ gBkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXH2d3MZQfMK19Wm6L6oXD9jV0K6TxMWynoP76nIp/+rw/fNdhKizsndFRjz/nmhh56QSsFevA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQIZSeY5wzvIj7mhFR/Up5aWvz8ggKM2Uy3S8rVwzdpLoYO3b5
- c9LDqbaalyOMWZczQGmJMR9PbUw+cE6NHnt9tvUmViGVTWKRsexdBZblcOs8/4DgUBQ=
-X-Gm-Gg: AY/fxX77TpY+r5tytCTKf31f6ZWZ7BfKuU5yLB4EELZxALGAOwDUbYGKP4cM3XAHqZX
- mwKsLnCtZoouMEeXfGdfnDbG2WQSBQ/lEVU3sk8W35UjZjufmCshf0XTvGdFFIZtHeRtXwMzY6T
- maOcDOSELaZFnS++PCYEf6lQ0Pa8k0Ic1EPpSYAuW8+4oTz42Z1kZlnQm0t7LQS+q5iHxKNzKZA
- +LM3oUVmxa8PImb9KQBrugz1G0cq3DGUqAY/0l21mZL5lDctY8hTYr73Yy2BrKzG1Ph4arJp3oN
- 9y0cktHm55qQLqQKN+qGlqPffZbiWSVd4or9LQjWUouhSaiGsuUTs3yiRm6rvgMNRLuP026MvJJ
- gypcjMSWrRXL/eB6NvqMLhkY6wU8vn0VIOk1YYfp21bMtFefXeGuBWYwRCFyYvJv17zXLTiiqu5
- Fo0BAcgJacrsQCK6g=
-X-Google-Smtp-Source: AGHT+IEExEek4qo+w2Xrzm9Rtr+u5cyB0Sp8bhbMHtWNMU8dKmxeuzYW4XdHTlIlP1d0STIdm4yGzA==
-X-Received: by 2002:a05:6820:178:b0:659:9a49:8fe8 with SMTP id
- 006d021491bc7-65d0e9620c8mr88889eaf.21.1766078287438; 
- Thu, 18 Dec 2025 09:18:07 -0800 (PST)
+ AJvYcCWcnjfMKlEW50C6QrR14xMDtM2tzOXDgR7E4W8F6drCTuBAV4pTawkMkx+LR//KehI4pztWIY0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgE7ihrYIz+g5X0mvBxx24TtEFbf3HCB83KowojwPO9gdlvr+P
+ qVCZkkaUpZEWy14ExTI24kESjwgvsZHqtK8lAa6A9iivYsa6IdKaUVOzYJcGaVK0NZM=
+X-Gm-Gg: AY/fxX4onk/JCT0KjnoyAVd58F60AeM3R02bxyaaWlKOIy+aR9k/fJ6QdfJJmxfqbRH
+ gRc4tvQjNCXj/trY+cGDHLYwBsOTweYPdtiAS/bO2pfWcN8pXDmdpmr1CKYPJvRoP8X+DHJ638N
+ N/r4VwXO94XYKfgsBf1pudZ0EZeA9f9F2rKjkSsNXphktNo7cyadDm2WI5nIIqLd4qgdlnB8B/5
+ 2auohG+WfNwXRsjD9iZpQ2esy3t5sT+JERv6izyHwt1uk5Ejf+4UP6whxyh4FJ+9xL0/oXJnVJc
+ M1HrKYjFYehm+4yn6uxP4x07QnAG92Jl9Vsca99M8VNMoBoL5ds5CX63zc6KhigXbY04UZfzOZH
+ yAmVaCidm4VFvjw0UYkqUf+7pHXS0G0G5/WauP6GUtxqoNaU366/6HE+KWP/l0wW086KTJFXrfx
+ sl+D5f8bXtR3QlzWo=
+X-Google-Smtp-Source: AGHT+IHIOidLd02tQ9z8pAl8LeYyi/3d5bN3yb7XtWYr9Cbp1oKCN8A7QL4hoE+x3To4OnhULdXwDA==
+X-Received: by 2002:a05:6820:6106:b0:65c:fb36:f246 with SMTP id
+ 006d021491bc7-65d0e386ec8mr102240eaf.19.1766078290908; 
+ Thu, 18 Dec 2025 09:18:10 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:e5ea:76dc:e589:2d5e])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65cff214d66sm1316372eaf.9.2025.12.18.09.18.06
+ 006d021491bc7-65cff214d66sm1316372eaf.9.2025.12.18.09.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 09:18:07 -0800 (PST)
+ Thu, 18 Dec 2025 09:18:10 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 18 Dec 2025 11:17:02 -0600
-Subject: [PATCH 4/8] clk: mediatek: organize infrasys functions
+Date: Thu, 18 Dec 2025 11:17:06 -0600
+Subject: [PATCH 8/8] clk: mediatek: implement dump callbacks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251218-clk-mtk-improvements-v1-4-72db131ba148@baylibre.com>
+Message-Id: <20251218-clk-mtk-improvements-v1-8-72db131ba148@baylibre.com>
 References: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
 In-Reply-To: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +91,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9172; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9849; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=TYRtyRMhClQZdqEY+bMNXpL6cr8A1jJOedj+qplCJ40=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpRDcpLyqCg62VGWD0Qiq5lY9uvaHYy341900/G
- fuKDZ3gwxqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaUQ3KRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ACaUH/i3t73n2Nj27jot8Q0f82Rh+L54CI3ifZ7BVgpt
- e8AX+MD8PqPYcIdFhMI0BxstgzI9JEanauUjXWBSy5HQtttiXliot71nIV9L+LaqqvFGuoKJlvE
- LJ7eTpEykNXhYBOW1OYCWSdhWhxawoIzhT3kqNT/kLpY5hrRaTlUbK3ALxW1ypvQAGhAZzbshl6
- xJjEjjl+aOploGvwlOwRESSiqORzfUhUiz50ej/rzq3u/R/taZNpqlGzofK+S71+A8P4MFHKbST
- IJmOMaZ1YZGOZzSsDmvP3GGkcDwCdIeByuGCfB6D0TahdbzeAswFgmfo9wD7Yh49ZHR0R58DdIk
- DxY8=
+ bh=rKIQcrfxCiRLbqu0MfsR9wpIbJzyepYas0StyDOKlZ4=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpRDdE3aW14uUhPslBnxlKDwKo5maaaY5OWZdy0
+ 406JSbExRiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaUQ3RBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ALwwH/0TcsR78k1dlnh20IaAcRPsSz8qSPShC+dArQs5
+ QTOWGMP7zR6jIAk9H25Xd4Ppq1zU9pAzKapIK2GHyoHP901rpkpLeV60Im8ZIssW3FDg6nvNtiH
+ /Hpca+yyTt23rfCyA1BvgF0vK0ZRXpyhn2zihtGvShf0eJhMJxv0imEHl1/fjVCIO8mt6bWd00w
+ 3Jz5QNu2Wose0Dvs4N2uK+euZ+bWBPa7LhUlWjpu5OBqnbD9DPUXjP1uNNlLUEbEcu6fhJB/cES
+ inp3aoSH4RC4TsBew0BhEV2B+TC08+m8jA2w1SwtPmg+85mQhbzLu67j5iwqEfpuSjzhQ3pZtLB
+ YarI=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Thu, 18 Dec 2025 18:18:40 +0100
@@ -121,292 +121,336 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move all infrasys ops and related functions next to each other in the
-file for better organization.
-
-Generally all ops functions are grouped together like this for the other
-ops types (apmixedsys, topckgen, etc). However the infrasys functions
-were mixed in with the other sections making them harder to find. This
-will also give a logical place to add any future infrasys-specific
-functions.
+Implement dump callbacks for Mediatek clocks. On these platforms, there
+are 100s of clocks, so it can be easy to miss mistakes. The dump
+callbacks will be useful for debugging and verifying clock configs.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Note: the diff looks a bit strange because some functions were quite
-similar, but this is just cut and paste reordering of 5 functions
-without changing any code.
----
- drivers/clk/mediatek/clk-mtk.c | 200 +++++++++++++++++++++--------------------
- 1 file changed, 101 insertions(+), 99 deletions(-)
+ drivers/clk/mediatek/clk-mtk.c | 248 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 248 insertions(+)
 
 diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index ffaecbfd306..6ed0f23f685 100644
+index 1539dc6cbcc..a3dd18363f6 100644
 --- a/drivers/clk/mediatek/clk-mtk.c
 +++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -424,27 +424,6 @@ static ulong mtk_topckgen_get_factor_rate(struct clk *clk, u32 off)
- 	return mtk_factor_recalc_rate(fdiv, rate);
+@@ -193,6 +193,108 @@ static int mtk_clk_mux_set_parent(void __iomem *base, u32 parent,
+ 	return 0;
  }
  
--static ulong mtk_infrasys_get_factor_rate(struct clk *clk, u32 off)
--{
--	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
--	const struct mtk_fixed_factor *fdiv = &priv->tree->fdivs[off];
--	ulong rate;
--
--	switch (fdiv->flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_TOPCKGEN:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent,
--						priv->parent);
--		break;
--	case CLK_PARENT_XTAL:
--		rate = priv->tree->xtal_rate;
--		break;
--	default:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent, NULL);
--	}
--
--	return mtk_factor_recalc_rate(fdiv, rate);
--}
--
- static ulong mtk_topckgen_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
- 					   const int parent, u16 flags)
- {
-@@ -504,33 +483,6 @@ static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
- 	}
- }
- 
--static ulong mtk_infrasys_get_mux_rate(struct clk *clk, u32 off)
--{
--	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
--	const struct mtk_composite *mux = &priv->tree->muxes[off];
--	u32 index;
--
--	index = readl(priv->base + mux->mux_reg);
--	index &= mux->mux_mask << mux->mux_shift;
--	index = index >> mux->mux_shift;
--
--	/*
--	 * Parents can be either from TOPCKGEN or INFRACFG,
--	 * inspect the mtk_parent struct to check the source
--	 */
--	if (mux->flags & CLK_PARENT_MIXED) {
--		const struct mtk_parent *parent = &mux->parent_flags[index];
--
--		return mtk_find_parent_rate(priv, clk, parent->id, parent->flags);
--	}
--
--	if (mux->parent[index] == CLK_XTAL &&
--	    !(priv->tree->flags & CLK_BYPASS_XTAL))
--		return priv->tree->xtal_rate;
--
--	return mtk_find_parent_rate(priv, clk, mux->parent[index], mux->flags);
--}
--
- static ulong mtk_topckgen_get_rate(struct clk *clk)
- {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -546,42 +498,6 @@ static ulong mtk_topckgen_get_rate(struct clk *clk)
- 						 priv->tree->muxes_offs);
- }
- 
--static ulong mtk_infrasys_get_rate(struct clk *clk)
--{
--	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
--	int id = mtk_clk_get_id(clk);
--	ulong rate;
--
--	if (id < priv->tree->fdivs_offs) {
--		rate = priv->tree->fclks[id].rate;
--	} else if (id < priv->tree->muxes_offs) {
--		rate = mtk_infrasys_get_factor_rate(clk, id -
--						    priv->tree->fdivs_offs);
--	/* No gates defined or ID is a MUX */
--	} else if (!priv->tree->gates || id < priv->tree->gates_offs) {
--		rate = mtk_infrasys_get_mux_rate(clk, id -
--						 priv->tree->muxes_offs);
--	/* Only valid with muxes + gates implementation */
--	} else {
--		struct udevice *parent = NULL;
--		const struct mtk_gate *gate;
--
--		gate = &priv->tree->gates[id - priv->tree->gates_offs];
--		if (gate->flags & CLK_PARENT_TOPCKGEN)
--			parent = priv->parent;
--		/*
--		 * Assume xtal_rate to be declared if some gates have
--		 * XTAL as parent
--		 */
--		else if (gate->flags & CLK_PARENT_XTAL)
--			return priv->tree->xtal_rate;
--
--		rate = mtk_clk_find_parent_rate(clk, gate->parent, parent);
--	}
--
--	return rate;
--}
--
- static int mtk_clk_mux_enable(struct clk *clk)
- {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -661,22 +577,23 @@ static int mtk_common_clk_set_parent(struct clk *clk, struct clk *parent)
- 			&priv->tree->muxes[id - priv->tree->muxes_offs]);
- }
- 
--/* CG functions */
-+/* infrasys functions */
- 
--static int mtk_clk_gate_enable(struct clk *clk)
-+static int mtk_clk_infrasys_enable(struct clk *clk)
- {
- 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
- 	int id = mtk_clk_get_id(clk);
- 	const struct mtk_gate *gate;
- 
--	if (id < priv->tree->gates_offs)
--		return -EINVAL;
-+	/* MUX handling */
-+	if (!priv->tree->gates || id < priv->tree->gates_offs)
-+		return mtk_clk_mux_enable(clk);
- 
--	gate = &priv->gates[id - priv->tree->gates_offs];
-+	gate = &priv->tree->gates[id - priv->tree->gates_offs];
- 	return mtk_gate_enable(priv->base, gate);
- }
- 
--static int mtk_clk_infrasys_enable(struct clk *clk)
-+static int mtk_clk_infrasys_disable(struct clk *clk)
- {
- 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
- 	int id = mtk_clk_get_id(clk);
-@@ -684,13 +601,99 @@ static int mtk_clk_infrasys_enable(struct clk *clk)
- 
- 	/* MUX handling */
- 	if (!priv->tree->gates || id < priv->tree->gates_offs)
--		return mtk_clk_mux_enable(clk);
-+		return mtk_clk_mux_disable(clk);
- 
- 	gate = &priv->tree->gates[id - priv->tree->gates_offs];
--	return mtk_gate_enable(priv->base, gate);
-+	return mtk_gate_disable(priv->base, gate);
- }
- 
--static int mtk_clk_gate_disable(struct clk *clk)
-+static ulong mtk_infrasys_get_factor_rate(struct clk *clk, u32 off)
++#if CONFIG_IS_ENABLED(CMD_CLK)
++static void mtk_clk_print_dev_parent(struct udevice *parent)
 +{
-+	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct mtk_fixed_factor *fdiv = &priv->tree->fdivs[off];
-+	ulong rate;
++	printf("Parent device: %s %s\n", parent->driver->name, parent->name);
++}
 +
-+	switch (fdiv->flags & CLK_PARENT_MASK) {
++static void mtk_clk_print_mapped_id(int unmapped_id, int mapped_id, bool has_map)
++{
++	/*
++	 * If there is a ID map, then having unmapped and mapped IDs differ is
++	 * expected. On the other hand, if there is no map, then they should be
++	 * the same, and it is a programming error if they differ.
++	 */
++	if (has_map)
++		printf(", (mapped ID: %u)", mapped_id);
++	else if (unmapped_id != mapped_id)
++		printf(", (error! should be %u)", mapped_id);
++}
++
++static void mtk_clk_print_rate(struct udevice *dev, int mapped_id)
++{
++	struct clk clk = {
++		.dev = dev,
++		.id = mapped_id,
++	};
++	long rate = clk_get_rate(&clk);
++
++	if (rate < 0)
++		printf(", error! clk_get_rate() failed: %ld", rate);
++	else
++		printf(", Rate: %lu Hz", rate);
++}
++
++static void mtk_clk_print_parent(const char *prefix, int parent, u32 flags)
++{
++	const char *parent_type_str;
++
++	switch (flags & CLK_PARENT_MASK) {
++	case CLK_PARENT_APMIXED:
++		parent_type_str = "apmixedsys";
++		break;
 +	case CLK_PARENT_TOPCKGEN:
-+		rate = mtk_clk_find_parent_rate(clk, fdiv->parent,
-+						priv->parent);
++		parent_type_str = "topckgen";
++		break;
++	case CLK_PARENT_INFRASYS:
++		parent_type_str = "infrasys";
 +		break;
 +	case CLK_PARENT_XTAL:
-+		rate = priv->tree->xtal_rate;
++		parent_type_str = "xtal";
++		break;
++	case CLK_PARENT_MIXED:
++		parent_type_str = "mixed";
 +		break;
 +	default:
-+		rate = mtk_clk_find_parent_rate(clk, fdiv->parent, NULL);
++		parent_type_str = "default";
++		break;
 +	}
 +
-+	return mtk_factor_recalc_rate(fdiv, rate);
++	printf("%s%s-%u", prefix, parent_type_str, parent);
 +}
 +
-+static ulong mtk_infrasys_get_mux_rate(struct clk *clk, u32 off)
++static void mtk_clk_print_single_parent(int parent, u32 flags)
 +{
-+	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct mtk_composite *mux = &priv->tree->muxes[off];
-+	u32 index;
-+
-+	index = readl(priv->base + mux->mux_reg);
-+	index &= mux->mux_mask << mux->mux_shift;
-+	index = index >> mux->mux_shift;
-+
-+	/*
-+	 * Parents can be either from TOPCKGEN or INFRACFG,
-+	 * inspect the mtk_parent struct to check the source
-+	 */
-+	if (mux->flags & CLK_PARENT_MIXED) {
-+		const struct mtk_parent *parent = &mux->parent_flags[index];
-+
-+		return mtk_find_parent_rate(priv, clk, parent->id, parent->flags);
-+	}
-+
-+	if (mux->parent[index] == CLK_XTAL &&
-+	    !(priv->tree->flags & CLK_BYPASS_XTAL))
-+		return priv->tree->xtal_rate;
-+
-+	return mtk_find_parent_rate(priv, clk, mux->parent[index], mux->flags);
++	mtk_clk_print_parent(", Parent: ", parent, flags);
 +}
 +
-+static ulong mtk_infrasys_get_rate(struct clk *clk)
++static void mtk_clk_print_mux_parents(struct mtk_clk_priv *priv,
++				      const struct mtk_composite *mux)
 +{
-+	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	int id = mtk_clk_get_id(clk);
-+	ulong rate;
++	const char *prefix = "";
++	u32 selected;
++	int i;
 +
-+	if (id < priv->tree->fdivs_offs) {
-+		rate = priv->tree->fclks[id].rate;
-+	} else if (id < priv->tree->muxes_offs) {
-+		rate = mtk_infrasys_get_factor_rate(clk, id -
-+						    priv->tree->fdivs_offs);
-+	/* No gates defined or ID is a MUX */
-+	} else if (!priv->tree->gates || id < priv->tree->gates_offs) {
-+		rate = mtk_infrasys_get_mux_rate(clk, id -
-+						 priv->tree->muxes_offs);
-+	/* Only valid with muxes + gates implementation */
-+	} else {
-+		struct udevice *parent = NULL;
-+		const struct mtk_gate *gate;
++	printf(", Parents: ");
 +
-+		gate = &priv->tree->gates[id - priv->tree->gates_offs];
-+		if (gate->flags & CLK_PARENT_TOPCKGEN)
-+			parent = priv->parent;
-+		/*
-+		 * Assume xtal_rate to be declared if some gates have
-+		 * XTAL as parent
-+		 */
-+		else if (gate->flags & CLK_PARENT_XTAL)
-+			return priv->tree->xtal_rate;
++	selected = readl(priv->base + mux->mux_reg);
++	selected &= mux->mux_mask << mux->mux_shift;
++	selected >>= mux->mux_shift;
 +
-+		rate = mtk_clk_find_parent_rate(clk, gate->parent, parent);
++	/* Print parents separated by "/" and selected parent enclosed in "*"s */
++	for (i = 0; i < mux->num_parents; i++) {
++		if (i == selected) {
++			printf("%s", prefix);
++			prefix = "*";
++		}
++
++		if (mux->flags & CLK_PARENT_MIXED) {
++			const struct mtk_parent *parent = &mux->parent_flags[i];
++
++			mtk_clk_print_parent(prefix, parent->id, parent->flags);
++		} else {
++			mtk_clk_print_parent(prefix, mux->parent[i], mux->flags);
++		}
++
++		prefix = "/";
++
++		if (i == selected)
++			printf("*");
 +	}
-+
-+	return rate;
 +}
++#endif
 +
-+/* CG functions */
-+
-+static int mtk_clk_gate_enable(struct clk *clk)
- {
- 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
- 	int id = mtk_clk_get_id(clk);
-@@ -700,20 +703,19 @@ static int mtk_clk_gate_disable(struct clk *clk)
- 		return -EINVAL;
+ /* apmixedsys functions */
  
- 	gate = &priv->gates[id - priv->tree->gates_offs];
--	return mtk_gate_disable(priv->base, gate);
-+	return mtk_gate_enable(priv->base, gate);
+ static const int mtk_apmixedsys_of_xlate(struct clk *clk,
+@@ -437,6 +539,36 @@ static int mtk_apmixedsys_disable(struct clk *clk)
+ 	return 0;
  }
  
--static int mtk_clk_infrasys_disable(struct clk *clk)
-+static int mtk_clk_gate_disable(struct clk *clk)
- {
- 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
- 	int id = mtk_clk_get_id(clk);
- 	const struct mtk_gate *gate;
++#if CONFIG_IS_ENABLED(CMD_CLK)
++static void mtk_apmixedsys_dump(struct udevice *dev)
++{
++	struct mtk_clk_priv *priv = dev_get_priv(dev);
++	const struct mtk_clk_tree *tree = priv->tree;
++	u32 i;
++
++	mtk_clk_print_dev_parent(priv->parent);
++
++	for (i = 0; i < tree->num_plls; i++) {
++		const struct mtk_pll_data *pll = &tree->plls[i];
++
++		printf("[PLL%u] DT: %u", i, pll->id);
++		mtk_clk_print_mapped_id(pll->id, i, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i);
++		printf("\n");
++	}
++
++	for (i = 0; i < tree->num_gates; i++) {
++		const struct mtk_gate *gate = &tree->gates[i];
++
++		printf("[GATE%u] DT: %u", i, gate->id);
++		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i + tree->gates_offs);
++		mtk_clk_print_single_parent(gate->parent, gate->flags);
++		printf("\n");
++	}
++}
++#endif
++
+ /* topckgen functions */
  
--	/* MUX handling */
--	if (!priv->tree->gates || id < priv->tree->gates_offs)
--		return mtk_clk_mux_disable(clk);
-+	if (id < priv->tree->gates_offs)
-+		return -EINVAL;
- 
--	gate = &priv->tree->gates[id - priv->tree->gates_offs];
-+	gate = &priv->gates[id - priv->tree->gates_offs];
- 	return mtk_gate_disable(priv->base, gate);
+ static const int mtk_topckgen_of_xlate(struct clk *clk,
+@@ -651,6 +783,48 @@ static int mtk_common_clk_set_parent(struct clk *clk, struct clk *parent)
+ 			&priv->tree->muxes[clk->id - priv->tree->muxes_offs]);
  }
  
++#if CONFIG_IS_ENABLED(CMD_CLK)
++static void mtk_topckgen_dump(struct udevice *dev)
++{
++	struct mtk_clk_priv *priv = dev_get_priv(dev);
++	const struct mtk_clk_tree *tree = priv->tree;
++	u32 i;
++
++	mtk_clk_print_dev_parent(priv->parent);
++
++	for (i = 0; i < tree->num_fclks; i++) {
++		const struct mtk_fixed_clk *fclk = &tree->fclks[i];
++
++		printf("[FCLK%u] DT: %u", i, fclk->id);
++		mtk_clk_print_mapped_id(fclk->id, i, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i);
++		/* FIXME: fclk needs flags to fully determine parent. */
++		mtk_clk_print_single_parent(fclk->parent, 0);
++		printf("\n");
++	}
++
++	for (i = 0; i < tree->num_fdivs; i++) {
++		const struct mtk_fixed_factor *fdiv = &tree->fdivs[i];
++
++		printf("[FDIV%u] DT: %u", i, fdiv->id);
++		mtk_clk_print_mapped_id(fdiv->id, i + tree->fdivs_offs, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i + tree->fdivs_offs);
++		mtk_clk_print_single_parent(fdiv->parent, fdiv->flags);
++		printf(", Mult: %u, Div: %u\n", fdiv->mult, fdiv->div);
++	}
++
++	for (i = 0; i < tree->num_muxes; i++) {
++		const struct mtk_composite *mux = &tree->muxes[i];
++
++		printf("[MUX%u] DT: %u", i, mux->id);
++		mtk_clk_print_mapped_id(mux->id, i + tree->muxes_offs, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i + tree->muxes_offs);
++		mtk_clk_print_mux_parents(priv, mux);
++		printf("\n");
++	}
++}
++#endif
++
+ /* infrasys functions */
+ 
+ static const int mtk_infrasys_of_xlate(struct clk *clk,
+@@ -793,6 +967,44 @@ static ulong mtk_infrasys_get_rate(struct clk *clk)
+ 	return rate;
+ }
+ 
++#if CONFIG_IS_ENABLED(CMD_CLK)
++static void mtk_infrasys_dump(struct udevice *dev)
++{
++	struct mtk_clk_priv *priv = dev_get_priv(dev);
++	const struct mtk_clk_tree *tree = priv->tree;
++	u32 i;
++
++	mtk_clk_print_dev_parent(priv->parent);
++
++	for (i = 0; i < tree->num_fdivs; i++) {
++		const struct mtk_fixed_factor *fdiv = &tree->fdivs[i];
++
++		printf("[FDIV%u] DT: %u", i, fdiv->id);
++		mtk_clk_print_mapped_id(fdiv->id, i + tree->fdivs_offs, tree->id_offs_map);
++		mtk_clk_print_single_parent(fdiv->parent, fdiv->flags);
++		printf(", Mult: %u, Div: %u\n", fdiv->mult, fdiv->div);
++	}
++
++	for (i = 0; i < tree->num_muxes; i++) {
++		const struct mtk_composite *mux = &tree->muxes[i];
++
++		printf("[MUX%u] DT: %u", i, mux->id);
++		mtk_clk_print_mapped_id(mux->id, i + tree->muxes_offs, tree->id_offs_map);
++		mtk_clk_print_mux_parents(priv, mux);
++		printf("\n");
++	}
++
++	for (i = 0; i < tree->num_gates; i++) {
++		const struct mtk_gate *gate = &tree->gates[i];
++
++		printf("[GATE%u] DT: %u", i, gate->id);
++		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
++		mtk_clk_print_single_parent(gate->parent, gate->flags);
++		printf("\n");
++	}
++}
++#endif
++
+ /* CG functions */
+ 
+ static const int mtk_clk_gate_of_xlate(struct clk *clk,
+@@ -869,12 +1081,36 @@ static ulong mtk_clk_gate_get_rate(struct clk *clk)
+ 	return mtk_clk_find_parent_rate(clk, gate->parent, parent);
+ }
+ 
++#if CONFIG_IS_ENABLED(CMD_CLK)
++static void mtk_clk_gate_dump(struct udevice *dev)
++{
++	struct mtk_cg_priv *priv = dev_get_priv(dev);
++	const struct mtk_clk_tree *tree = priv->tree;
++	u32 i;
++
++	mtk_clk_print_dev_parent(priv->parent);
++
++	for (i = 0; i < priv->num_gates; i++) {
++		const struct mtk_gate *gate = &priv->gates[i];
++
++		printf("[GATE%u] DT: %u", i, gate->id);
++		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
++		mtk_clk_print_rate(dev, i + tree->gates_offs);
++		mtk_clk_print_single_parent(gate->parent, gate->flags);
++		printf("\n");
++	}
++}
++#endif
++
+ const struct clk_ops mtk_clk_apmixedsys_ops = {
+ 	.of_xlate = mtk_apmixedsys_of_xlate,
+ 	.enable = mtk_apmixedsys_enable,
+ 	.disable = mtk_apmixedsys_disable,
+ 	.set_rate = mtk_apmixedsys_set_rate,
+ 	.get_rate = mtk_apmixedsys_get_rate,
++#if CONFIG_IS_ENABLED(CMD_CLK)
++	.dump = mtk_apmixedsys_dump,
++#endif
+ };
+ 
+ const struct clk_ops mtk_clk_fixed_pll_ops = {
+@@ -882,6 +1118,9 @@ const struct clk_ops mtk_clk_fixed_pll_ops = {
+ 	.enable = mtk_dummy_enable,
+ 	.disable = mtk_dummy_enable,
+ 	.get_rate = mtk_topckgen_get_rate,
++#if CONFIG_IS_ENABLED(CMD_CLK)
++	.dump = mtk_topckgen_dump,
++#endif
+ };
+ 
+ const struct clk_ops mtk_clk_topckgen_ops = {
+@@ -890,6 +1129,9 @@ const struct clk_ops mtk_clk_topckgen_ops = {
+ 	.disable = mtk_clk_mux_disable,
+ 	.get_rate = mtk_topckgen_get_rate,
+ 	.set_parent = mtk_common_clk_set_parent,
++#if CONFIG_IS_ENABLED(CMD_CLK)
++	.dump = mtk_topckgen_dump,
++#endif
+ };
+ 
+ const struct clk_ops mtk_clk_infrasys_ops = {
+@@ -898,6 +1140,9 @@ const struct clk_ops mtk_clk_infrasys_ops = {
+ 	.disable = mtk_clk_infrasys_disable,
+ 	.get_rate = mtk_infrasys_get_rate,
+ 	.set_parent = mtk_common_clk_set_parent,
++#if CONFIG_IS_ENABLED(CMD_CLK)
++	.dump = mtk_infrasys_dump,
++#endif
+ };
+ 
+ const struct clk_ops mtk_clk_gate_ops = {
+@@ -905,6 +1150,9 @@ const struct clk_ops mtk_clk_gate_ops = {
+ 	.enable = mtk_clk_gate_enable,
+ 	.disable = mtk_clk_gate_disable,
+ 	.get_rate = mtk_clk_gate_get_rate,
++#if CONFIG_IS_ENABLED(CMD_CLK)
++	.dump = mtk_clk_gate_dump,
++#endif
+ };
+ 
+ static int mtk_common_clk_init_drv(struct udevice *dev,
 
 -- 
 2.43.0
