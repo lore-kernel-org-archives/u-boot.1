@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E215D711A1
-	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 19:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30892D711A1
+	for <u-boot@archiver.kernel.org>; Thu, 18 Dec 2025 19:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B41F98309A;
-	Thu, 18 Dec 2025 20:52:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F8E880433;
+	Thu, 18 Dec 2025 20:52:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="upt9n1fy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TmrSoTvZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5291280433; Thu, 18 Dec 2025 20:52:00 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id C543A8334F; Thu, 18 Dec 2025 20:52:01 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9583833C6
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 20:51:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B74CB8003E
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 20:51:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-3f0c93ecf42so1355773fac.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:51:57 -0800 (PST)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-656d9230cf2so516590eaf.1
+ for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 11:51:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766087516; x=1766692316; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1766087517; x=1766692317; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PWyctP+AXcGnFrikNUpv32Bqwtjk/agnR3DpYENS5Lk=;
- b=upt9n1fye2LYeIjw/YAJNlCIJx4bawTsSKq1pOIrMxTAwyNt2w3TqozxAfuIH5hUoD
- KXLUEs73xRboCqaE23t7+3gKqrQk198O2nxJ2x6y3OsrzLDO68FlQRauMcilU4mjTM0J
- D8m56/WGVmVA/lowHQbs1QPIpGOAxMkZ3BmTQ=
+ bh=8Aov3HGBDeOwaxqgWdaVTfItC3tt/Da5NQFW/abnS7o=;
+ b=TmrSoTvZzoplNcLV+hsoe0+sFgfxssmez7EtSxb+hg6fd2ZCB4QtZItbGjagNE27rW
+ yFj/5WjsZ264gLa6nL3Ckhp7AIq1quenLOG8Bdw0GBW8MlqgZS1ufIQ/Hcy2xgX8lKzL
+ F6cv9qzMubOBqZ+nrUtdA4g/2D5AnK0u2Tf+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766087516; x=1766692316;
+ d=1e100.net; s=20230601; t=1766087517; x=1766692317;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PWyctP+AXcGnFrikNUpv32Bqwtjk/agnR3DpYENS5Lk=;
- b=uSt8Ds+Qj11+9EkajVtfnUSht5AgZTx/+o0SPv6XOHPZ16HVjrnQ+5zbkcNtK8yRE2
- 0ILWwub5sQueOX+sIB+DV4w1n5Gcbrg0z8hRkwVosKoo494v0gjPip+Yu5MW8lFsrztt
- cE0Ekj2KqGhq8Wdd8R+IIJxmSluQWWv8l5wGGxOYuQXUg5w+5eD/LsNyPeC+W/t++Fhi
- dKcrhXhVxQmLrPgWnNVR46Xk6k80owxclHKestQEjfmX7DItYPlENO/eljNtDuLretBN
- Uxv9SrXZpFDBlEnVLrxw1WICPMyzKi6XxrdfCvNRQq1IjPPFDu0kyHPG5trCCO1PTlw8
- iuXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWy0ZQuU/TnPu0pnkJjBPYaIrZ3LDwQ6zWkeNKf7Y6UpAHMHAmrHV64PzTWxxxIMuXpHUdE6OI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhsHCdHWulAUCxpDZ6kN/OfpnzsFES2r8VjE3Yi9dpTmuiyoM/
- NQJPvAKlPRCr1z7ZVECeKzrbtXLEpgFwNqPXVyK01lq4muydT9FtHYMs0XrvdDQKM17cOdRZf4r
- 0JT1aEbI=
-X-Gm-Gg: AY/fxX6Lkce+q/LBRzlexFLNE8dvoUzlbcB9C7Qpir5wcB3NfW7QY898oZ7X0MAVicl
- fXZIEenVozhDaJrtRyhqFCxhOwflR8myGdOSCz/12KVCoeG6gAqH7Weez8fRe+gJcJ7wPRw+3bJ
- oLrJs48eCzyDAKg6pt2ZuLnFWgf+3B5/u05Vwa6NEJbmeBFlvLK+ykcy37VnWKVTZhDX/U2YBiq
- yqYEw5LEQGCnFCHUL1s17Ktb0vbuCfMOzP/APYLxpPbF7SN+1flbEAkvZISC3/0g9tR+Dt0OLgK
- 6q4VcIyqXBLYe5qgKMdoP0NAXAHxrm/D5doidkF3DAtirFQJZATV3VAFq4Y/lvGMnXMZS1+3egu
- qWsFLTd/9yoVTm+FZVMMvzU8NLB8CcBI8IWdVpRRlhIK+PTjRsEaGne65rKOVCSmYM/hZQP1nX+
- 9Xs6Qp/Z4YN79NoBH527OqlgP7zjKlgRLpHzgPc8ePWT2sl9g2
-X-Google-Smtp-Source: AGHT+IHIHjpWK1gbqbNZGYsL0SkGAZH0ZEOhMVcoXPizZqXfAq9GPLv2t21t6LI96yWbvFgH+wcZHQ==
-X-Received: by 2002:a05:6820:f028:b0:659:9a49:8ee6 with SMTP id
- 006d021491bc7-65d0e3856femr386562eaf.26.1766087516628; 
- Thu, 18 Dec 2025 11:51:56 -0800 (PST)
+ bh=8Aov3HGBDeOwaxqgWdaVTfItC3tt/Da5NQFW/abnS7o=;
+ b=QwDWpTKbXoDAsJMf5T+tK0DNEJp9aqC3qiirQQz3ekS4TqRGy/9/4nl0Ar6dAV2bzZ
+ 8oMReB67J1e2p0t0XJl+jMwM19tIXg0fvTDCbcoHIyMu2wjuzqxhIEAIZnHUhbA5imGB
+ XAx1/5ewryU02bKDAyoaSRvTKJwnwTIHULsIpV/3+dd9TGJiFjaeWwvp8btbdmD20qtf
+ GM9vuWXfp28i9XTFwZIWRZuWSCg0iF2hhTyZY5OJlK79Kjb4ocuuYjN3+LCzV7yd13ku
+ rQlXRF2nYbI+gfAie1vYKc5DtTBKxqgtCmop6dRAOs2tfSzOZFNnDNtuiOqWcOZ9SeBG
+ f0mQ==
+X-Gm-Message-State: AOJu0YzYBcfOJc+JEN8MMe55FQEWQFyUYmhSSeqkEZkWuqDKWOGu7wG8
+ cyPrc3Ws/XELaehIkfrDJwkJXGd03HGI26EDyyDN7patZxSR5G1664o7/rlStSiCGsvGI4bQOv4
+ +klwKSDc=
+X-Gm-Gg: AY/fxX4oCwdbD7uKmLKl/O9KbFr4WSKyAImd/uLzOpqJ7DEyn9eZhs3bUhz9JtRumrT
+ KS/3z1P7TssbfMZ3YQydt7l6BfytgbaElRm8h5MuMZCerSns2R7tsCUmGw2rqJDGnmyMSAN02I/
+ +PePR/FoYg6pKkMNIcp6/ES9NKzuoDz+OR/fiox4SminYom4OkIXLiM/J7CRkOdbnwFZZ2iXBV5
+ nbI1wvqplOvVN36DUkK/6Vjfp5xvq20adLTnBkX5pBtjNKhLIWgoKkWET7O0sjDD27uhWwxJXIl
+ NIXyaed9i4grwDkH1dsGmL7zJ9xEW5QUBBRxkJFYg+uk3C4xOWFta19RbGrFXc5kvx6dE66hGLF
+ DgF4g9cgDpBjeFkcvtzzXARejQO7+o54m/xZTj7SHyt1CQEUEhHG6EeVgN+w4f1RrAKzNsaVXdc
+ c4q0VuZgMcDQ82o23GxU4dy2RAaslGNSt/Ba/mEmpcgV3W2UaK
+X-Google-Smtp-Source: AGHT+IFPzqGc8EamLZotRPFrk/r2hklxq1XOWC6EoDsGGkzgvdeGsJAfN4oOIS6PIlUNgCGoAU0wRw==
+X-Received: by 2002:a05:6820:1ca0:b0:659:9a49:8fb0 with SMTP id
+ 006d021491bc7-65d0eb2ffbcmr286769eaf.41.1766087517445; 
+ Thu, 18 Dec 2025 11:51:57 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f710763sm181837eaf.16.2025.12.18.11.51.55
+ 006d021491bc7-65d0f710763sm181837eaf.16.2025.12.18.11.51.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 11:51:56 -0800 (PST)
+ Thu, 18 Dec 2025 11:51:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Sjoerd Simons <sjoerd@collabora.com>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de, 
- Anshul Dalal <anshuld@ti.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251218-dfu_doc_fix-v1-1-d7a9eb033b92@ti.com>
-References: <20251218-dfu_doc_fix-v1-1-d7a9eb033b92@ti.com>
-Subject: Re: [PATCH master] doc: board: ti: fix alt name for tispl.bin in
- DFU mode
-Message-Id: <176608751572.3734627.12666395825002530677.b4-ty@konsulko.com>
-Date: Thu, 18 Dec 2025 13:51:55 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+In-Reply-To: <20251217195811.754518-1-marek.vasut+renesas@mailbox.org>
+References: <20251217195811.754518-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] cmd: nvedit: Validate argument count before use
+Message-Id: <176608751677.3734627.8204043051416660907.b4-ty@konsulko.com>
+Date: Thu, 18 Dec 2025 13:51:56 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,21 +100,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Dec 2025 10:31:55 +0530, Anshul Dalal wrote:
+On Wed, 17 Dec 2025 20:57:38 +0100, Marek Vasut wrote:
 
-> The alt name for tispl binary is "tispl.bin" and not "tispl", this patch
-> fixes the documentation to the correct alt name.
+> Avoid NULL pointer dereference in case 'env select' is invoked
+> without parameters, check the arg count and make sure it is at
+> least 2, otherwise print usage.
 > 
-> Fixes: def64b493748 ("doc: board: Add document for DFU boot on am62x SoCs")
-> Fixes: 3633fdbb6b90 ("ti: add support for AM6254atl SiP")
-> 
+> The crash is easy to trigger e.g. in sandbox:
+> $ ./u-boot -Tc "env select"
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] doc: board: ti: fix alt name for tispl.bin in DFU mode
-      commit: d865f2f0162b1121f271bd3e6c1e3f171036aec9
+[1/1] cmd: nvedit: Validate argument count before use
+      commit: 2333d446b7b133ddfb9dea2d53996d560796ecd9
 -- 
 Tom
 
