@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7782D711D3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 01:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD7DD70E0C
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 02:38:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA59780077;
-	Fri, 19 Dec 2025 02:51:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C800800AB;
+	Fri, 19 Dec 2025 03:38:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BW+gPtHh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cN8TOX29";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qNTYW523";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0957800AB; Fri, 19 Dec 2025 02:51:25 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B9C6A80433; Fri, 19 Dec 2025 03:38:27 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E18A80050
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 02:51:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D2F980050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 03:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-64b9dfc146fso92695a12.0
- for <u-boot@lists.denx.de>; Thu, 18 Dec 2025 17:51:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766109083; x=1766713883; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UQQQ/NO6hJAQKi3OZI5WtoDAH1W4Lm/UswBK3Ra1n+M=;
- b=BW+gPtHhoSjEL0Q/mSu88kupqdcpHlrT2fFXmgXoDN+bAMKihDyF9y9bKpLmnyd9Oz
- MHlUAIcmZ911/0R7rJq3rW2qKHyGfTaD6rpyyELYa2ViI1nBldbhbdBAc1vptzCmNR8n
- 9XDvMpMI0TfjiGfG0CADcb6K+SAWC6s6jPPpdntd/MQ6VvuUMuedgo0JNfYD0FesFo+Y
- SmYX71e3vRvLjIuo6N//PcXZjFJj89aG7a1vvsV+dsioZmC0rY3t7oxyVPtZRPQ8g63N
- H5uGsgSLlpiVqZCWMpDULXX5lAnseJMV5KlPRq+IoJaznk3nw9lK1NHg60cY0998to1L
- McEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766109083; x=1766713883;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UQQQ/NO6hJAQKi3OZI5WtoDAH1W4Lm/UswBK3Ra1n+M=;
- b=Ncc6yIX5ETfKNiq4co8k5oqXbYgslH5aunlDDorPH/U9dqZQrlmjyr9QNCfgTssxaw
- pOE0IvZSxmm/FTe9O8YSYfusGEYw7sXp7RR3UIR8poq4/Muv/iNrmO7xO9FsTqZFN6ga
- vNaybY1wYojNQDfDNGle31AQ5Y2++D0TBaoSe7ec4Hc+M+NkuJJEmNAXCFshulLNYu6Z
- leCx0w4Xli76dbvVAhxxJh9jf1EKewThPVeOOi/whP/5I+116injecaCwBalFSlIL/8B
- 8NiVddT+XcZQhS57sbIJ4bX+e0dxTGMXuIUaHMc/f7M94ShqKkNT2FWCdtzWNJPcwWML
- pI2g==
-X-Gm-Message-State: AOJu0Yzbr7reOr4GnTPFuNFJ42RZG0yYLxisgLQt7LcVR26+h60EfoTc
- Y7YrnilLyobTbT8EGrKdzHPCaPwEesoP6QMz0bLyRoi48dT0FgmUFaCm9lw0BxogTXCkvfmY93Z
- kax/XyiG9sBpm0YStrCEQ0YKG4CgRJW8=
-X-Gm-Gg: AY/fxX4QkpnS587zxqwODcEwrkdRydaE6fCG7Hv2Q9YV03TTeSr/7MYO5wjrl6PcoDh
- X8ChqGLznrYNW75/cl2GweTFsXc5TLjPTq6X5WM0gm+dElLYqZ7/PlDDW5i/6WgLsPrHx6RZPNl
- bQRqkRzMhBo/HJQlsuCJkA5Ai8QG9X6fY4c600BPFhud2c+rqW2hfVTwl/5Ht497xcTZJr2WQWG
- rJucKJxBaNRFYRui0ykJB3v3SrhkZ9lWVd6DHBUq3jfeyvhxy/T26NdB+7INPCfrSJxLBzCTz8V
- 5LTLfzhSpxHz0OyMEZenVc1be7wgsJVmFuimUi97MS1u3UmI2NqjSFVTiH5xfPfiH1xfXqOVzS6
- OXZw62umIfbQ4d/EBXxViKGOv6YZ7in+0Z6cfig==
-X-Google-Smtp-Source: AGHT+IGWDalrcRZfR6n/ND9gsD0JxyDraEPmWbEvBzsWTWBtGBK8S5uxLOLl7EpOy7K1CjGBXYox81/fBKOSv5pVU6g=
-X-Received: by 2002:a05:6402:1467:b0:64b:5851:5e7b with SMTP id
- 4fb4d7f45d1cf-64b8d34f12dmr1525624a12.14.1766109082835; Thu, 18 Dec 2025
- 17:51:22 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dXWtR6Nn7z9smP;
+ Fri, 19 Dec 2025 03:38:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1766111903;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+5Iypo2mBNRaLUnWpm91JUO12CvZhdChcVxQLBPI5R0=;
+ b=cN8TOX2947GoR9C9Ytbyg5pTGjlANFZDfp3GrErsugLzjzppetY4MUsB63mWZmkiTuZxlT
+ qSJJAn04h7hXaRT5zT3XSLMd1JQHTuBEw2WZ7c6pVLxV2vhC5Qzn6phbdOccd/NpCvSf+x
+ cKT5vbGVLhSw4fBVlSu+niYkhrsDwoKAga7orv6VYBUALrc31jh3aQvsg/km5RnRR2D1lj
+ 64AxIr9jjKqXF1z3zsuayNwa2G+wxf1hncZyh1qar2e4lrn/j1Lpo4TnLyXjheMV9IusAW
+ cQaO2cbqIVwU7/US5hhK0QVl4JmVLFJtAPmfchX/J/qsUkWlKBuHSO+GaThCzg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qNTYW523;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1766111902;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+5Iypo2mBNRaLUnWpm91JUO12CvZhdChcVxQLBPI5R0=;
+ b=qNTYW523fuPFo3ZZBWNq0dIBkvWPnK/vuqBJPTD2vQG8l7H2K2NcP6RzSIpQyNGRrCF0Qn
+ ANoolHaESWDIUnq23FJm97yyf53hZUIQoXCSdAAsPYb7K/5fhFJT5XeSX0x30ApHrfOXlu
+ MTxT0SryjQHPNTiQK7MPrwRiUO+X0c6wjV71YeJYxO7ziNSBcTmbNTnKf5Lv0BozrHy9hW
+ FdR9lzeJtCLPWjx4pYM4clZxe5CRzcWBnTJJRjY00ohe6I2GfccXhZ7Dn8gh/pOqcRM6mx
+ OMnGSd10fet2eB4SJX74BHZWy80I4bgYrnqICShBu41+e5eM88mKtwrOn07nkw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] kbuild: Produce diff between base DT and U-Boot augmented
+ DT if DEVICE_TREE_DEBUG=1
+Date: Fri, 19 Dec 2025 03:37:32 +0100
+Message-ID: <20251219023818.144681-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251218232255.3934258-1-trini@konsulko.com>
-In-Reply-To: <20251218232255.3934258-1-trini@konsulko.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 19 Dec 2025 01:51:11 +0000
-X-Gm-Features: AQt7F2r1xMETn4vOxSL8QDi7k6CgvJNqH-UecPCIXQpvWHAVHVn7cdOLwLxBTyo
-Message-ID: <CALeDE9OaXG5FYCBDmDCP6EDw9CSHsic+EDfiSjsAu_BOryk_+Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/9] Update lzma to current version of LZMA SDK
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Darek <x64x6a@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5fa9124108984cc4018
+X-MBO-RS-META: tnpygbhwcct5fqdisu854jskzjd4zmy8
+X-Rspamd-Queue-Id: 4dXWtR6Nn7z9smP
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +93,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Dec 2025 at 23:29, Tom Rini <trini@konsulko.com> wrote:
->
-> Hey all,
->
-> A long while ago, Darek reported that our copy of the LZMA SDK library
-> is quite old and so vulnerable to at least one possible security issue
-> he found that was fixed upstream.
->
-> This RFC series does a few things. First, we introduce a Kconfig option
-> to enable LZMA's size reduction option, and enable it on
-> gardena-smart-gateway-mt7688. This is not critical at the start, but is
-> as we move forward. Next, we remove some files from our initial import
-> of the library that do not make sense to keep in-tree. After that, the
-> next 5 patches update us from the imported version to the current
-> release of 25.01. This is split up such that few have the very few
-> places where the update requires some slight changes to our code be more
-> visible. This in turn is mainly that the file that says the license has
-> changed, and that we need to guard around some unused upstream code that
-> also conflicts with our own code. Finally, we restore the spacing
-> changes that our copy of the code had, and then improve things by adding
-> SPDX tags to the LZMA code so the license is more visible overall.
+In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
+DT with U-Boot extras, to show how much does the U-Boot DT differ from
+the base DT. This is particularly useful together with OF_UPSTREAM, to
+minimize the diff between upstream DTs and U-Boot DTs.
 
-Does it make sense to try and get the SPDX bits back upstream so we
-have less delta the next time we rebase?
+This requires DTC 1.7.2 which does not resolve phandles when used in
+the 'dtc -I dts -O dts ...' mode. With older DTC, the diff is full of
+churn due to the resolved phandles.
 
-> I've marked this as RFC in part because I plan to follow-up with v1
-> shortly where patches 2 through 8 are squashed together as they're
-> mainly separate right now for ease of review, but the split doesn't make
-> sense I believe to preserve in git as our changes are so isolated.
->
-> Link: https://lore.kernel.org/u-boot/CAC7rXdTb5u5pzP-mr_+pddCxzfcO8Vm_t-=_+5wxRitMjy6-JA@mail.gmail.com/
-> --
-> Tom
->
+Example usage:
+$ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=1
+$ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: - Update commit message to mention DTC 1.7.2
+    - Fix failure when building without DEVICE_TREE_DEBUG , in that
+      case set cmd_dtc_diff = true
+---
+ scripts/Makefile.lib | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index b062db7e87f..04220111ba6 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -388,10 +388,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+ DTC_FLAGS += -@
+ endif
+ 
++# In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
++# DT with U-Boot extras, to show how much does the U-Boot DT differ from
++# the base DT. This is particularly useful together with OF_UPSTREAM, to
++# minimize the diff between upstream DTs and U-Boot DTs.
++ifdef DEVICE_TREE_DEBUG
++cmd_dtc_diff = \
++	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtn-tmp) $< ; \
++	$(DTC) -s -O dts -o $@.clean.dts -b 0 \
++		-i $(dir $<) $(DTC_FLAGS) $(dtn-tmp) || \
++		(echo "Check $(shell pwd)/$< for errors" && false); \
++	$(DTC) -s -O dts -o $@.full.dts -b 0 \
++		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) $(dtc-tmp) || \
++		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false); \
++	(diff -Naru $@.clean.dts $@.full.dts > $@.diff || true)
++
++dtn-tmp = $(subst $(comma),_,$(dot-target).dtn.tmp)
++else
++cmd_dtc_diff = true
++endif
++
+ quiet_cmd_dtc = DTC     $@
+ # Modified for U-Boot
+ # Bring in any U-Boot-specific include at the end of the file
+ # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
++
+ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 	(cat $< > $(pre-tmp)); \
+ 	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
+@@ -402,7 +423,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
+ 		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+ 		; \
+-	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
++	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile) ; \
++	$(cmd_dtc_diff)
+ 
+ dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
+ 
+-- 
+2.51.0
+
