@@ -4,60 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0187AD78786
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 14:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07913D78786
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 15:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5491B80077;
-	Fri, 19 Dec 2025 15:44:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E185A80077;
+	Fri, 19 Dec 2025 16:12:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JKZZ2GqK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qa5dhgaU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9542E80433; Fri, 19 Dec 2025 15:44:08 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65167803F5; Fri, 19 Dec 2025 16:12:08 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AC0580050
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 15:44:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id F097D80050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 16:12:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 52EE460008;
- Fri, 19 Dec 2025 14:44:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 739C4C4CEF1;
- Fri, 19 Dec 2025 14:43:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766155445;
- bh=MfAQx+kdJ6MO1u62/+1UEzdZO4Fyio4dZehVqIHqtzQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=JKZZ2GqKtn4+O3KFQ9yCPMljIyMczqN/qpLmR5uSzKdwqo28I6AUpRTQYqrgSM/Lg
- IEHLpHoNLMNU8LC8rF5OEpAZtzf8vT1uNNw03n++PYo6hiH52h4T2f7fEf6K8O7Qfo
- ZuEfhU2hgUghIbz4jbgLroWv+BsznnXPv2bDV4MaF1htjrRlPemYzUhCq5fw6094Uu
- 0MYPeM7RGjZszNThw6xkauyY6PMXuG8pe6dZhYgbA9VTbdBjo1ak097dpowu6W52bM
- ZJqqB2FTOaDAj4RfIe6Deukr868WW2BMrY8AOOiHB+uXek+0GwoTBUIKswoSOF7es0
- XR8YNGLz5U52g==
-Date: Fri, 19 Dec 2025 20:13:55 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, alexeymin@postmarketos.org,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [RESEND v2 6/6] doc: board/qualcomm: Update RDP flashing
- instructions
-Message-ID: <aUVkq7zt5PG7nZZo@sumit-xelite>
-References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
- <20251218061557.1999367-7-varadarajan.narayanan@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c76d855ddbso553063a34.3
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 07:12:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766157125; x=1766761925; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zsGwmUaO4AWFM4oLl4mFaTfyYQqcn4KbJigNrSWWPCM=;
+ b=Qa5dhgaU1ccwbE5i3+LYQES/6Epa4xbAWjcrsBMnqb68xnZgVC/MSFTU/n5thYuJ58
+ 93BbCOTvtP7TOwpzyJQzCGeEflPUTg2ssZMEa1I9pp5Sfjn01eoyPJoaZy4rQDYUl6s4
+ S7K/qQ0uOkHjhEmuxEY4Jc0LRTXFNfiqLTRi0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766157125; x=1766761925;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zsGwmUaO4AWFM4oLl4mFaTfyYQqcn4KbJigNrSWWPCM=;
+ b=une8chjCwRKsMmfGdHtVIIwwalSlVYS1GccqEyIJdTFFgDDegPQhFXpEKFvQWotq4V
+ AgUe4a2cX//tprTk3u2S3ZVhb39G9xaMqY3tqLS2INR1WTxnAlBbLaw1l9oEY4zQjRAx
+ SBndeBOPZkN7K3IEqGhk8ht6ZkKhbnct0nCStJkx+Y9pYdGCN4nmA/X++Uc8mTnblN4X
+ yYh44k4T07b1KPrl4jb1opX9cUak0n4dKlntqKD781uHo6HSg69X1BEGCyqD7oAQWMvT
+ eFl4Bnsln1qI7jC4MLn9H6GjYZYptVJ73VGn9gCcUxKPBlc6ddSJ2drydGlDPivZ4Zwv
+ 6y1A==
+X-Gm-Message-State: AOJu0YxJ5QyP0MlKniXaWS5knvlKq2MW6F/heTLOn5wFEcS03Tib48q+
+ 3aDyGhWGHx8gETp6l9rOKvq8AQoFKEkxMKSC8y80dC49TTxezOqcNqRWA+pgGRWWkSM=
+X-Gm-Gg: AY/fxX5MHH9c8e9+o94CYNua7wBw/ULRqaVsiNxyudgRoLGTza0c0PQD44CvdsKMaO2
+ 12V/KhDM5bHztzJkZLCWNiF2TP07mVDf3FJ203H+csqILEvr2BK/awoJAFQle1bksyQMmEeUM64
+ 11L1Me+vca1qZrDkKsgC9G1/UDzDV8BDTVE1MyXsAd498+fERErNJ3EiLnZuSbk9V2GzR8qPuAl
+ ZQFtIGDjS6yXCJs1GVK4bQOLgtnL28JXG6uZjylIqY+wJGgqt28+hAkGwOt8TYDiM2Uocdh/0ha
+ CRalrdNxQO+FJbXlXrT8qzs1crArhjMjrlhyrHFOX+7OHYv9eWQ6iDvHUZSUnOok6/Nrw4oHpwm
+ r3SUTPa9hMym7/aaS7Smyh65EUiFGpAwnqSkBSSCmIoQz3n90LQk6JzjZHivl3CdLwJaez1H2rk
+ tjHyURvCHcDiyQyAgG2xT5J7BIyOLxFMGQX2ohkYkYYFZ6fU0vUw==
+X-Google-Smtp-Source: AGHT+IFWBFXRgB84wZK/A0zDIme3kawKQxzuDKJ+r8r7SgDGXIB/zvIQJlRgc+Ud1zy43/l2giPhRA==
+X-Received: by 2002:a05:6808:c28a:b0:450:7a38:cabd with SMTP id
+ 5614622812f47-457b20b7725mr1724058b6e.25.1766157124601; 
+ Fri, 19 Dec 2025 07:12:04 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-457b3ba4221sm1210383b6e.3.2025.12.19.07.12.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Dec 2025 07:12:04 -0800 (PST)
+Date: Fri, 19 Dec 2025 09:12:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Darek <x64x6a@gmail.com>
+Subject: Re: [RFC PATCH 0/9] Update lzma to current version of LZMA SDK
+Message-ID: <20251219151201.GR303283@bill-the-cat>
+References: <20251218232255.3934258-1-trini@konsulko.com>
+ <CALeDE9OaXG5FYCBDmDCP6EDw9CSHsic+EDfiSjsAu_BOryk_+Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="f7RN0QHTGCUHs09B"
 Content-Disposition: inline
-In-Reply-To: <20251218061557.1999367-7-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <CALeDE9OaXG5FYCBDmDCP6EDw9CSHsic+EDfiSjsAu_BOryk_+Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,45 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 18, 2025 at 11:45:57AM +0530, Varadarajan Narayanan wrote:
-> Update the flashing instructions to include fastboot.
-> 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
->  doc/board/qualcomm/rdp.rst | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
-> 
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> index 99cf8eba57c..97a64e4677c 100644
-> --- a/doc/board/qualcomm/rdp.rst
-> +++ b/doc/board/qualcomm/rdp.rst
-> @@ -42,6 +42,20 @@ on your device with::
->  
->  U-Boot should be running after a reboot (``reset``).
->  
-> +This U-Boot doesn't have the n/w driver.
 
-Can you expand a bit on "n/w driver" a bit?
+--f7RN0QHTGCUHs09B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--Sumit
+On Fri, Dec 19, 2025 at 01:51:11AM +0000, Peter Robinson wrote:
+> On Thu, 18 Dec 2025 at 23:29, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > Hey all,
+> >
+> > A long while ago, Darek reported that our copy of the LZMA SDK library
+> > is quite old and so vulnerable to at least one possible security issue
+> > he found that was fixed upstream.
+> >
+> > This RFC series does a few things. First, we introduce a Kconfig option
+> > to enable LZMA's size reduction option, and enable it on
+> > gardena-smart-gateway-mt7688. This is not critical at the start, but is
+> > as we move forward. Next, we remove some files from our initial import
+> > of the library that do not make sense to keep in-tree. After that, the
+> > next 5 patches update us from the imported version to the current
+> > release of 25.01. This is split up such that few have the very few
+> > places where the update requires some slight changes to our code be more
+> > visible. This in turn is mainly that the file that says the license has
+> > changed, and that we need to guard around some unused upstream code that
+> > also conflicts with our own code. Finally, we restore the spacing
+> > changes that our copy of the code had, and then improve things by adding
+> > SPDX tags to the LZMA code so the license is more visible overall.
+>=20
+> Does it make sense to try and get the SPDX bits back upstream so we
+> have less delta the next time we rebase?
 
-> To restore the original U-Boot or flash
-> +modified versions of the above built U-Boot, 'fastboot' can be used.
-> +
-> +  => setenv serial# ipq9574
-> +  => fastboot usb 0
-> +
-> +  C:\>.\fastboot.exe devices
-> +  ipq9574  fastboot
-> +
-> +  C:\>.\fastboot flash 0:APPSBL u-boot.mbn
-> +  Sending '0:APPSBL' (620 KB)                        OKAY [  0.042s]
-> +  Writing '0:APPSBL'                                 OKAY [  0.030s]
-> +  Finished. Total time: 0.342s
-> +
->  .. WARNING
->  	Boards with newer software versions would automatically go the emergency
->  	download (EDL) mode if U-Boot is not functioning as expected. If its a
-> -- 
-> 2.34.1
-> 
+Upstream seems to be done very much as a one person as they like it
+project. There is an issue tracker. I'll sign up and file a request at
+least.
+
+--=20
+Tom
+
+--f7RN0QHTGCUHs09B
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUVrPgAKCRAr4qD1Cr/k
+CmvjAP9KPxye6B5XJu6eocadOLVOPqe5SO9qae+GBiWhOvyn8gD/X+pml8FtyTmQ
+d5mCpXPgoVc0uiy1Bp0qPgc6itEQsAY=
+=2nL9
+-----END PGP SIGNATURE-----
+
+--f7RN0QHTGCUHs09B--
