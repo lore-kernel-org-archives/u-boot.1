@@ -4,85 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE47D767C3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 10:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41851D78771
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 13:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B33B580050;
-	Fri, 19 Dec 2025 11:54:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 216F380077;
+	Fri, 19 Dec 2025 14:42:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JjVBIuAy";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FYIRA9b6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 215E580077; Fri, 19 Dec 2025 11:54:40 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A5ADA803F5; Fri, 19 Dec 2025 14:42:36 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazon11013066.outbound.protection.outlook.com
+ [52.101.83.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B768E8003E
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 11:54:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA7380050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 14:42:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b73a9592fb8so333599066b.1
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 02:54:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1766141677; x=1766746477;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VzomSwqh2smGp9BMUOshZdwJS5OXXoq5A6WsVmN/hDE=;
- b=JjVBIuAyyt1vOKrLHBFq5sD8hsZHOTs09ElVH5wVSBvBTE9BX/bFr2gLg/CCJouJo7
- w3snHJeJVMJKzIYIiAeTMWB7MZCvdS9ID8DVHiF3GwVxtvxnjCrQbrfF5z4N5mS93lsa
- xMq582ajjIjeEAFhZRlyrdCPErx2GOd+gWxajIx1vWrgmMJEVT1FYD6Ozkvk4sqpnHoX
- o3BrTCJ+iUOb1pVK1c+dOtiafgytcSSIGAyjfpTFxcy3h9jD4+4QJaXT/vnYMD6vFrCD
- tbdThZxUWiIEfjvjOI5ri3r6lYKYBEohVqspgGeDvJC8wpC6PII3QlzNljKe7vCVeH67
- LNjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766141677; x=1766746477;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VzomSwqh2smGp9BMUOshZdwJS5OXXoq5A6WsVmN/hDE=;
- b=X6KiB37oRrx2MrdGDLlcwmVYt2CsiOPsAGIOllA0tkej6ts3xE5Al8pc/XQgcnOvyK
- kN3SJPKDsn7+6X6ZgZ5MXWDq1R7VroYaEmnI+tIZ1ein4Px8x1fqMnwBNV7bZPajTv4K
- nayhOeYDtagvdLktAoXAuLb7vAEvyngfkyBrRlw15YynWOQhODlsjBQCuXKLSl43Tlz3
- iArnnYfz6E148gi9i5mLsBMP3k+cqA5MHz4mDssyJCYIfr2U/3k0oU+CpdG3kLvNlVnE
- NTTpmLaQggu4qc67JclYbBS13wOb0BBQMGy7kAiT0Sr7tIsfrtBtkand8e/YpTJ/3IRO
- zdSw==
-X-Gm-Message-State: AOJu0YxIO5zlW+nanXY2LekaWaQ705MYAxuaoYb0gw+bHURxO/baPxmg
- taGs49XjVY7GEpySUKlgGkQXndF0S97kZo9tgdxmrOqHURFLfJm93Q4BEsSkyysaj8QgUM/t2RQ
- 56LseeQ==
-X-Gm-Gg: AY/fxX5iXqXlZTRniFQCPplnuBMPt2ymuEcvGH4ocpZPf0E5Fy7KHe2tdi5o/GjRsCh
- +8fb7SGPz+ED4WzlNU3mqJClM0+MWvNNbB8Jsln7lzDmGf6bnQeYaK4kb3amFyUXghhxZcggtTj
- tZuWGLYWw/vpjjfB+6DVOCdS6xnKLad1gpO8e2ypyM/Fdr8ZyRqbWI/HnZvyP0Vz+OUgdfvBw5p
- /Yd96C0IBvzO2lH5h7Uv2bxJ6CxxNDQ/MKqyCrhX76IdRfq6DB8hVtH9sPenH+nud/h4twBKNuL
- WpdREmAx3OPfvoOn+owSRq/e9zWrAJW/4Z0VjEkv0vanzfRz+VLUj4uFpPUuejhnsOXAhyXzsR3
- 9cQ83dFPA7xpqItfDXxaYNhIduIadCGo8Bhg11DBlMHEJw1Vf/hNsTyBR9xl5TZ5Q6WJwhDwlIz
- TJ4GczWM4aYS/d
-X-Google-Smtp-Source: AGHT+IFsL1GiHjvA1EP373Wsqt1GB1OVG2EOu2q8HdauGEv8lR18XUVvYiBOQoYUUe0wDLNCKYtcbQ==
-X-Received: by 2002:a17:907:1b26:b0:b72:84bd:88f3 with SMTP id
- a640c23a62f3a-b803563ee36mr275583466b.11.1766141676940; 
- Fri, 19 Dec 2025 02:54:36 -0800 (PST)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8037ad2732sm203694366b.20.2025.12.19.02.54.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Dec 2025 02:54:36 -0800 (PST)
-Message-ID: <21930cc8-6895-4722-8caa-9d222a4d563a@monstr.eu>
-Date: Fri, 19 Dec 2025 11:54:32 +0100
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kzoAYKaYLFXP4bRScU5qafJVDSQretPg6oLGK7CV48UlnIZTXk88VZmetf9mBLx7c2hEiWxP4e8pkupQ7kuTgvfvrz7MurrhiWL8LreEfmh/7bG/Tm8hX+C/MYHB4rLOVusZq3ZCG5hwrF3pkePFlB6hCinfHhWeBSm+Zh2eDk1aoPFTIjD8PO/q68gsfMZsGWsxQlwu0RBZA3tCesW/76G2XIwpIR53d0N0qzLVZz6RLyA9YfIpgRis83574S6ad9sp94LSynQzBnSqTDGtNh73cyYm+dQMECWUZ3j3bMgu7YhUkTs7DOk7v9POYCvdR3jALVvy7C9CLR7P35axYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rYfimk0nhuC5I/uVlj+9zg2RldTGtixeHdy2WHHcpVk=;
+ b=u3xuG15Sq37BbM+CD1tC24tzwecPGraIDtlqP71AvZ9134Nx1u17sDsoaRjk0jeddDUy4nE42dYXAwZyzqyFohjX7azvep4XpqUO+ngXCVjc+4mLTPmObNdfdDVnG7AiVrdCoxVbi9lY2XugNJq3MTd1PHL97zLV5xpg22jHZQ3dBAtU8bg3IC5WruYBxqK2ln6Cdv69EIqzQA7umBjrvOJVQozVNo+SHMo4BJ8EenT+kL5HecFJaq0+KVzcZKNcaIawyPhgMBN4CuqbOjQ8vL9OepR7KwkHjDgfa337eEoGCkMh16qhlS7+4trdzzs21xWuZG94VS3p1T9kF4yfJw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rYfimk0nhuC5I/uVlj+9zg2RldTGtixeHdy2WHHcpVk=;
+ b=FYIRA9b6YghT59ZnHZtKfDKAbVBJbih6Q4mI0lBjAkMNecJ3Vc5EHqF6+260xC+6ax+IBqKsXNvYWBCRYOQ0Sd61r9qu4ABQswLRWuky65yMWx6pPa3p+k2AKhnBbCS9yy6kxf2hhzjwXiCCvj3Uew7Gv3zL/1XIPX1spcEjdZtf7pSIruY7OJh0HgCht26HotKLqRx1Dm1BFFRdf0dMJQS+gROlmOeXL+TG3tWciyY2dj50f50yb7ncy2yibReqeTEVrGb83tNMwa4WH9p+QESj7alyMf2VWWPsvEh6EF5yHTmi4YyWIOdsKNMjBXZOCqoC+IFThdLrjCJnSMS0kA==
+Received: from AM8P190CA0009.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:219::14)
+ by AS2PR10MB6894.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5f9::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Fri, 19 Dec
+ 2025 13:42:17 +0000
+Received: from AM3PEPF0000A79B.eurprd04.prod.outlook.com
+ (2603:10a6:20b:219:cafe::78) by AM8P190CA0009.outlook.office365.com
+ (2603:10a6:20b:219::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.9 via Frontend Transport; Fri,
+ 19 Dec 2025 13:42:12 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF0000A79B.mail.protection.outlook.com (10.167.16.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.6 via Frontend Transport; Fri, 19 Dec 2025 13:42:16 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 19 Dec
+ 2025 14:43:02 +0100
+Received: from [10.252.21.85] (10.252.21.85) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 19 Dec
+ 2025 14:42:15 +0100
+Message-ID: <1cbe447d-dac1-4dcb-9a96-51c4ee0bcf3e@foss.st.com>
+Date: Fri, 19 Dec 2025 14:42:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/3] Restore boot for STM32MP13/STM32MP2 board family
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>, "Peng
+ Fan" <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
+CC: Lukasz Majewski <lukma@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut@mailbox.org>, Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
+ Valentin Caron <valentin.caron@foss.st.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>, Lionel Debieve <lionel.debieve@foss.st.com>
+References: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-0-d055da246e55@foss.st.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] AMD/Xilinx changes for 2026.04-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-0-d055da246e55@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.21.85]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A79B:EE_|AS2PR10MB6894:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4aa47ec7-ee0b-439c-77b8-08de3f046c84
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|376014|1800799024|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?blZVVk12b252VVNLOTIzbnhtMlRHMGVwZjdxeWthSlhHWENZSm1NYWdNdXgy?=
+ =?utf-8?B?TGZZNzEzVkwxY0FaZWxVdFdyNVB1bFBmeHNCWFY0K1ZJV3p1L1prb2xTb1hK?=
+ =?utf-8?B?cmlWcGN6U0hSZGNjQWdYZzFUL2NsUDRMREJhS3VBb1ZCSzdTb3lGb284a0hQ?=
+ =?utf-8?B?VDgzeGZLa2ovbVNMZFV0VSt3M3ROSVoxOVhsOENkYTNqRlVSeUNNYXBhMjJ3?=
+ =?utf-8?B?STdsTW9TRFcwbGRYVmJTdFVCcWczQXkvTk9KbEpvT2FZeEtCbVRDelhoa0Za?=
+ =?utf-8?B?aUFjaHdJL2V5L1VWNDBRa0hoenZUVXVTeGlic1pUSW0rQzN5aDM5VHlseFR5?=
+ =?utf-8?B?RGcvVUxBQ3hWWm01RTlXaVdIOVAzM3VsQVhjTnVjNHFCb0Z2UXhmNnBWMXZo?=
+ =?utf-8?B?RUgxTTFod1E2YmRwZDRYUC9tdlRxcUl1VlZEa1QwdzIrNkZiNXEzQmxsdysx?=
+ =?utf-8?B?S21hU2dUTFpZbXZrTVZ4U3pwWVdqU0dCMkJMdGU4QWpzL0lhSUFZQzBYYU95?=
+ =?utf-8?B?NzNxV1QxSzNwSFZJQkxMUzhCOVk0d3duckFqLzhkMnZ2Z3JBU3gyd0YrcWR6?=
+ =?utf-8?B?WUZqK1dPRFlLUUhIQTYrMGNqOW1rdmFqR2s0SVM4eWEvaW1zdHF6NUVZZFZM?=
+ =?utf-8?B?VlBOa1YzeXpPd0lRR2lGKzc2WDl4SExPTnlOalNYV1dtbzNxMlBzc29ZcWdY?=
+ =?utf-8?B?WTAvWm54YTRpWkVGQ2hZakxtbDdVamNEN2Z6VDVkbWgxb002dExaZ0NXbEow?=
+ =?utf-8?B?RTFBNjFqL01rems3UFYxbEdINmRWZmpvSDR2UkIxcktTN0Q1RUh4M1pnZDRI?=
+ =?utf-8?B?bnRMTDJHMjJsME11S282V241K2pNdklIWGlMOGg1a20rTDdha1poRk5HNFE0?=
+ =?utf-8?B?Y2cxUEI3aTJNWklpNDUvU0Z0UjZyYUkwZ1lIakFLQzE2bVhBcHNuMDBGRVNE?=
+ =?utf-8?B?VE5WTi9rb1dUblNERnFvcVNGNkR6SE90cHNaWHdtcy81NXdsVVVKM2FVVEIy?=
+ =?utf-8?B?L1IrK2Y0aTR5UHlZaTVtc09rM1l2cU44M05hVm1ldGozd2ZvY21hcElzeFl6?=
+ =?utf-8?B?bWNHSmYwWDZlNDRpdUNIRS9hcUpWVHgwQzlMMTVvZG85c0YwNjBZbWVRajN1?=
+ =?utf-8?B?UTh5YXEzd1QyLzJEbFhxcVZuMVh3WGN4SHFEUWd2Rm5oRXZ1UnB4UGdnUE8x?=
+ =?utf-8?B?a0NFRG5nNXlZZEI1K3pkVXJpL3Z5RHVqVlkyZ2s4RnZpZWlkQUdaVkdiQWJO?=
+ =?utf-8?B?RUh3THUzK0Z4RGdhWnV4SXl5cktpSnFleWxyZnFDa1pHSlJwNVFIbVNNZkx1?=
+ =?utf-8?B?RkpiK2l5c3NEQ0JSUXkvSm5TQjFpTytLZDYwamxiZkxsVktYaU1CazRUWGpw?=
+ =?utf-8?B?dHQrS2NkM0pkTXgzL0M0NlNaQlN0dXd0dk50REt3VVNaM2dwQWhRcWUvWldF?=
+ =?utf-8?B?MEN0bmkxWmJlNHYwS2ZPQWpDNEF5engzV1VZSHJPems2MHpTclkvNGRvaEZt?=
+ =?utf-8?B?UzNndkFZTG4vYzJsdGFHQlpWaHgrTHlaSGE2RGlpc3ZOR1E4and1a2wveTZ3?=
+ =?utf-8?B?ZVdyRWFmLzlBZld5aGxwRVcycXp4L0RSQ0hxeGFCcjV6djJsNVVsUTU2djBv?=
+ =?utf-8?B?Y2h0QVh0bkduWEgwUWw3Y3lTcVlvWG1raVhOQjBuM3pyZ2J2d2M1YUppSS9C?=
+ =?utf-8?B?akhXSVZqMDZ1ckRndkxOazZ2SFl1VWpvWDFhNzJEdDFpcU1wcEM4aFluZXRa?=
+ =?utf-8?B?Ull6dVBuUng0ZmF4SkhCeHB3Q0hGVXd0bXQ1VU9iOW9Ec0NsKzZMeFIzWVU3?=
+ =?utf-8?B?Y1ZUTXNFQWYxSnF6bXhITFFZb3FCakx6Rjl3a09WalRMRkRBeGZUb3o5eHNx?=
+ =?utf-8?B?YmFjRWFEaFBIdERDN3J1RGNYUjBESVJOR2JaRytzaWxGWWVDQm1mNnVtNW4z?=
+ =?utf-8?B?SFFPbHN0cXJBd1gvNUtFdE9zZ0poNUxjL3BWRnFZalJuL2J5Q1BMUVc5L2RS?=
+ =?utf-8?B?M1lJM3NzQTdGWU5CaFR0TmI5d0pTUEpGejF5THphOWIzVjg5UFVZM2Zkanpo?=
+ =?utf-8?B?ZjFEc3dmTkdLaE83ZUl1RHlpcnFJUDlLdTVhZVBEaFFabmRvU3FGS1N2WXZr?=
+ =?utf-8?Q?ayw8=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: N7YKIoSXWcz8NkUiPUt8GnXe1xq6PJhxjdvDHJjpDNjQ41hGqEedD63rBujoCryo7isKTFlU1b1xra1xkxqNR4/dzXab+2vOnOJFe05WkR19zOyNJOJQOYtco+iKUUMpEueEmgt9v7p8OxOF4XbagqH5ewKJuN0rNlsarbtvB3VhVigj4FGuHnhpoV8KSofulqHy+IK5ikRSO/WlhwtGqzzzcORdiDWABliTfR73yE8Cc6d8irrrhO38ybprPr5HksGN7qS74wSwxYVA5Tsmdhc/VXkn8+phlCvlrpV5FykucTviS2VUz6WNbOiryiFKvp7Lx5YxFs+Tjttn/ZsbZzt2QepjTxJwsYGmzT7Ux7x6W2t60Bj5EXXioPJEuKj/TZxrOH4zDJQqO7A+TbPyRIfinPGqYzrrtTjvyW6XPlde13yMHa7f3uBkilIEXwGl/KIoSjc5t+I6onvxCGyzGlrLKhF3w52h27W/AqTcxhN2NyLAVg9HrR1el5uSEajPYw0lKC2Z11RapsFZTbrrWJzZwiERW2dRvUxIM3iSWnoYtsLae8cI1IP02fvzRo8VU194/X/W/fpBvQ8JK3rzHmvdtFfv4B+prwbX6nLkXZg8gVz++0LgnFNXCCJEZ29HxAIG3MFBpIecUA0skJDSIiy5TjY4h7h55AHiE1FtqolJo30fysxtcwqK8yJdMdXHFGVx8UeOgE7yiqTjb/uwXg==
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2025 13:42:16.5377 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4aa47ec7-ee0b-439c-77b8-08de3f046c84
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A79B.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6894
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,141 +168,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek
 
-it is time to cleanup my queue. I can't see any issue in CI. I hope that 
-removing cdns,is-dma property again is not going to cause issues on other 
-platforms that's why I want to also get it to next sooner rather then later.
+Can you give this patchset a try on STM32MP13 DHCOR board in SPL ?
 
-There are multiple patches related to UFS which have been sent and also some 
-other platform related one that's why I expect another pull request for rc1 in 
-future.
+Thanks
+Patrice
 
-Thanks,
-Michal
-
-
-The following changes since commit 930eff5416ea98ebd09cec73f5d06a7033b4d52e:
-
-   Merge tag 'u-boot-socfpga-next-20251217' of 
-https://source.denx.de/u-boot/custodians/u-boot-socfpga into next (2025-12-18 
-08:06:10 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2026.04-rc1
-
-for you to fetch changes up to 0b880fc95dbaed88dd55060730857b8f52765c57:
-
-   arch/arm/mach-zynqmp: configure default BL32_LOAD_ADDR (2025-12-19 10:57:58 
-+0100)
-
-----------------------------------------------------------------
-AMD/Xilinx/FPGA changes for v2026.04-rc1
-
-xilinx:
-- Sync ESRT with detected GUID
-- DT cleanups
-- Add logic for FRU information multiple times
-- Enable more drivers pca9541, usb5744
-- Enable more commands
-- Cleanup firmware DT bindings
-
-firmware:
-- Add enhancement SMC format support
-
-clk/versal:
-- Various cleanups
-- Add support for Versal Gen 2
-
-i2c:
-- cdns: Add timeout for RXDV status bit polling
-
-spi:
-- cadence: Remove cdns,is-dma DT property
-- cadence: Remove duplicated return
-- cadence_versal: Update flash reset delay
-
-memtop:
-- Update max memory reserved spaces to 64
-
-Versal Gen 2:
-- Aligned addresses with default memory map
-- Add support for reading multiboot value
-
-MB-V:
-- Make SPL smaller
-- Add support for SPI
-- Move SPL to run out of BRAM
-
-ZynqMP:
-- Change default load address for BL32
-
-----------------------------------------------------------------
-Michal Simek (13):
-       clk: versal: Use __data macro for moving variable to data section
-       clk: versal: Add support for CLK_AUTO_ID
-       clk: versal: Cleanup driver
-       firmware: xilinx: Add support for enhancement SMC format
-       clk: versal: Enable clock driver for Versal Gen 2
-       spi: cadence: Remove cdns,is-dma DT property
-       arm64: xilinx: Remove unnecessary #address/size-cells
-       xilinx: amd: Enable the PCA9541 I2C Bus arbiter
-       arm64: versal2: Enable USB5744 usb hub
-       cadence_qspi: Remove duplicated return
-       arm64: versal2: Read and show multiboot value
-       xilinx: versal: Get rid of xlnx-versal-power.h from bindings
-       xilinx: mbv32: Disable floating point
-
-Neal Frager (1):
-       arch/arm/mach-zynqmp: configure default BL32_LOAD_ADDR
-
-Padmarao Begari (7):
-       board: xilinx: Update ESRT after copying GUID
-       board: xilinx: Retry FRU EEPROM read on timeout
-       i2c: cdns: Add timeout for RXDV status bit polling
-       xilinx: mbv: Disable SPL GZIP
-       xilinx: mbv: Remove debug UART support
-       board: xilinx: add SPL boot device support
-       xilinx: mbv: Update defconfigs as per memory map
-
-Venkatesh Yadav Abbarapu (4):
-       common: memtop: Update the MEM_RGN_COUNT macro to 64
-       arm64: versal2: Update the text base and dtb address
-       arm64: versal2: Enable reset and poweroff via sysreset framework
-       cadence_qspi: Update the delays for flash reset
-
-  arch/arm/dts/versal-mini-ospi.dtsi             |  3 +-
-  arch/arm/dts/versal-net-mini-ospi.dtsi         |  3 +-
-  arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso |  3 --
-  arch/arm/mach-versal2/include/mach/hardware.h  |  4 +-
-  arch/arm/mach-zynqmp/Kconfig                   |  2 +-
-  board/amd/versal2/board.c                      | 22 ++++++++
-  board/xilinx/common/board.c                    | 23 ++++++++-
-  board/xilinx/mbv/board.c                       | 14 +++--
-  common/memtop.c                                |  2 +-
-  configs/amd_versal2_virt_defconfig             |  5 ++
-  configs/xilinx_mbv32_defconfig                 | 19 ++++---
-  configs/xilinx_versal_virt_defconfig           |  1 +
-  configs/xilinx_zynqmp_virt_defconfig           |  1 +
-  drivers/clk/Kconfig                            |  2 +-
-  drivers/clk/clk_versal.c                       | 49 +++++++++++++-----
-  drivers/firmware/firmware-zynqmp.c             | 36 +++++++++++++
-  drivers/i2c/i2c-cdns.c                         | 11 ++++
-  drivers/spi/cadence_ospi_versal.c              |  7 ++-
-  drivers/spi/cadence_qspi.c                     | 23 ++++++---
-  drivers/spi/cadence_qspi.h                     |  2 -
-  include/dt-bindings/power/xlnx-versal-power.h  | 54 --------------------
-  include/zynqmp_firmware.h                      |  8 +++
-  22 files changed, 188 insertions(+), 106 deletions(-)
-  delete mode 100644 include/dt-bindings/power/xlnx-versal-power.h
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+On 12/15/25 15:56, Patrice Chotard wrote:
+> Commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
+> is breaking boot for STM32MP1/STM32MP2 family board.
+> 
+> The issue is due to registering clock with default name "scmi-%zu".
+> If one of these clocks has children clocks, it will generate an error
+> when trying to register their child's clocks as shown below:
+> 
+> ...
+> clk_register: failed to get ck_axi device (parent of qspi_k)
+> clk_register: failed to get pll4_p device (parent of spi2_k)
+> clk_register: failed to get pll4_p device (parent of spi3_k)
+> clk_register: failed to get ck_hsi device (parent of usart3_k)
+> clk_register: failed to get ck_hsi device (parent of uart5_k)
+> clk_register: failed to get ck_hsi device (parent of uart7_k)
+> ...
+> 
+> Clock management update for STM32MP13 and STM32MP25 SoCs family
+> to no longer use clock name to establish relationship between
+> parent and child clocks.
+> 
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+> Changes in v3:
+> - Rework clock management for STM32MP13/2
+> - Link to v2: https://lore.kernel.org/r/20251211-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v2-0-44e6e7de2beb@foss.st.com
+> 
+> ---
+> Patrice Chotard (3):
+>       clk: stm32mp13: Reorder include files
+>       ARM: dts: stm32: Add SCMI clocks in rcc node for stm32mp131.dtsi
+>       clk: stm32: Update clock management for STM32MP13/25
+> 
+>  arch/arm/dts/stm32mp13-u-boot.dtsi |  27 +++
+>  drivers/clk/stm32/clk-stm32-core.c | 111 +++++++++-
+>  drivers/clk/stm32/clk-stm32-core.h |  39 +++-
+>  drivers/clk/stm32/clk-stm32mp13.c  | 441 +++++++++++++++++++++++++------------
+>  drivers/clk/stm32/clk-stm32mp25.c  | 405 +++++++++++++++++++++-------------
+>  5 files changed, 707 insertions(+), 316 deletions(-)
+> ---
+> base-commit: 0e0a198a68be71148f5ec27ef86796174f91436f
+> change-id: 20251211-restore_boot_for_stm32mp13_stm32mp25_boards_v2-e7497f503414
+> 
+> Best regards,
 
