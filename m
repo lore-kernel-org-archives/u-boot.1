@@ -4,184 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025FAD78776
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 13:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB558D78776
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 13:58:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 917708309A;
-	Fri, 19 Dec 2025 14:56:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D71080077;
+	Fri, 19 Dec 2025 14:58:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="CMkRSurG";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eGGYf2ru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDDCF8309A; Fri, 19 Dec 2025 14:56:14 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id DF53E8042F; Fri, 19 Dec 2025 14:58:17 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81FB480077
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 14:56:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88F2180050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 14:58:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4448c59c8f=gabriel.fernandez@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BJDpi3n806282; Fri, 19 Dec 2025 14:56:07 +0100
-Received: from am0pr02cu008.outbound.protection.outlook.com
- (mail-westeuropeazon11013039.outbound.protection.outlook.com [52.101.72.39])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4b4r32kjq0-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 19 Dec 2025 14:56:07 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=x0uCBGPcayr4N7gB60NT2ShnoM1+r+3HTHuMHR18kli4lc85L6TE1SUU1hS1AuV/6qMdw+g+Tw95Szzxelp65PMrNwvhh3It4BPdMCYPrPbUzywJIJxOEHA6cH2kL8n1Nlkq5oUQ/DbLbuzLD/5R91cT3dBXhec1eBMEZku92CwScMDeEfsLt4gzVEUx8cexS/TA5CBtNFFevUUtfltmNGEBaOG4mJmwz+v1/elkrCQ0H79hhlNIfjiyb8nyZ7zY9W/iTmI0fQFxyEvEBb5WYCPQZTpcKiO06w9luKn4eBMtj6WcpxplV8KD8pwPtz86a0kiBm2RrAx27N41F23e4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WqPimxAjwgeY//UWa+AF8BPTe2KOOcHFSV58l3d65KY=;
- b=i23uPvUl8waS74teE5Q4ZyGO0f37vYjwYpN9OIoiyaj2XuFWUbtsXNiM/2R68LtYNXIDEj0C3JPCv3l+lVipJXuCra2nO7oJ4OE4YMB42P7h/sYEJQkVWQLpdKD7hJXSngeclKCa6OC9X9ZjOpRWg9vTbASi8hPzNOMmxLlTDLEaC42atVneGbeUzwCBAx271uPcWElE/R2AMgSW8BGgOEfhhpdh6yhW3GdzEjrXRHdJGKcDChmoebP0yJDEFRvhjzYRy+THQd3k7QMwA5EvVO77YwJZ5sLouVC13cgaYGluplYEOlodj1dBYhRNpdFUbybAN73lHWjqPQ90PGy32A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WqPimxAjwgeY//UWa+AF8BPTe2KOOcHFSV58l3d65KY=;
- b=CMkRSurGtR8U8dJ53FBFCx32oYJFQhtTXd4M9k1eee3W8+QZ84McKJGtHU0mZo3Z2zihUG0fW5+8v+DI0NT/Bgw6eu2OAZoX5kS6c+0fZRtdTFn4DizstjCHlp501t7J5GnIYVfM3e7UTc+714roIW1xWn5XjInwtAkDNbd1quvTomhpFm9GrI1WFMObJdOYnvy+Ih1LlLs9HVDwnF7W+EolkyaVddyKTZkpAFXBVGGPkB1QBuGM7vMGzhoPnGVueDZOX8Y3vEPtT2QDX9LLIqSIKj7BCEva0nqr16mbwNP2Df0vPTL16DbFAWE/98rggyCm0bgQjP5kNpJJ7Gc+Cw==
-Received: from DU2PR04CA0273.eurprd04.prod.outlook.com (2603:10a6:10:28c::8)
- by GV2PR10MB6526.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:bc::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.9; Fri, 19 Dec
- 2025 13:56:05 +0000
-Received: from DB1PEPF000509EC.eurprd03.prod.outlook.com
- (2603:10a6:10:28c:cafe::4f) by DU2PR04CA0273.outlook.office365.com
- (2603:10a6:10:28c::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.7 via Frontend Transport; Fri,
- 19 Dec 2025 13:55:48 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB1PEPF000509EC.mail.protection.outlook.com (10.167.242.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Fri, 19 Dec 2025 13:56:04 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 19 Dec
- 2025 14:56:53 +0100
-Received: from [10.48.87.14] (10.48.87.14) by STKDAG1NODE2.st.com
- (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 19 Dec
- 2025 14:56:03 +0100
-Message-ID: <054ff1e4-3f50-4a2d-b852-dd1c3414e43e@foss.st.com>
-Date: Fri, 19 Dec 2025 14:56:02 +0100
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id DF27543B3A;
+ Fri, 19 Dec 2025 13:58:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94B99C4CEF1;
+ Fri, 19 Dec 2025 13:58:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1766152693;
+ bh=KJiqT3PSab0Dc2WcXOfyGZxxQ2zsByR14G7Rvn9xes4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=eGGYf2ruaxvVfDfwBdjpIz6b2fTl6TvLM3INlPzcMlCkHOp3QfhO3BRD+fuFidGg6
+ xly5V/WXfyNTqvKw33jbMiISO6FI2KiVXKr8M0K6MG8UdT1ndj6DNbQE7OsEpOT3I+
+ 18lGXouxmjvXu78UAvqVXJoUZDDGZcBbFwlldosIJS25L3ttIAkeuSQt5lRwWw5giP
+ CYqr25asaPZEFQiGK+HgS3+NmRtSfk8kaVcCKwvow1S+hLT76ZR1sS/Jlde5bIQbkN
+ YKfP29ph41Gc6xt7Sim75v7bwPt8X+cLqJfeuvbdvPMGIc1iRHJY1rpDGKg5KShevz
+ I1oWPSoiINY6g==
+Date: Fri, 19 Dec 2025 19:28:05 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ lukma@denx.de, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, alexeymin@postmarketos.org,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [RESEND v2 1/6] clk/qcom: Add USB related clocks for IPQ9574
+Message-ID: <aUVZ7VQrcjPV4Ftu@sumit-xelite>
+References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20251218061557.1999367-2-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] clk: stm32mp13: Reorder include files
-To: Patrice Chotard <patrice.chotard@foss.st.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-CC: Lukasz Majewski <lukma@denx.de>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
- <marek.vasut@mailbox.org>, Valentin Caron <valentin.caron@foss.st.com>,
- Gatien Chevallier <gatien.chevallier@foss.st.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>
-References: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-0-d055da246e55@foss.st.com>
- <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-1-d055da246e55@foss.st.com>
-Content-Language: en-US
-From: Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>
-In-Reply-To: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-1-d055da246e55@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.14]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509EC:EE_|GV2PR10MB6526:EE_
-X-MS-Office365-Filtering-Correlation-Id: e90ac095-279e-428b-f1fa-08de3f065a28
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SzQ0bFY0QXBUWlZDQkdQUEpmU1RQOTRFeVNWRFJpWXpnV0xWZTFENitFQjhO?=
- =?utf-8?B?NUR3dUVISlNETG9MNjkxd2ZIYmdPbTVPYTZmdmwwQnBxdi9PWnNPditNdVF5?=
- =?utf-8?B?WFpxQk80Z2VyL09iOVRpSmZlamZmT1JscXNZNWMxT3hXWDg1bEtoeHRJbTBv?=
- =?utf-8?B?TlVJZmlJUzQyWHROTitPZE1UWEFTekhKRkNTNXZBQ2pMQ0Qzc0NWUm1ZTXZj?=
- =?utf-8?B?U080SVRVTW1rU0tLOXN3RFBUbGl3RVRaVzY4UE1KL01aTzNLTkU0Tk1TbE5q?=
- =?utf-8?B?ZGNYbnhXWjN6TDVyWXBjeCtSS1M2NFM0NGNiODRySHIyT2wxc2psQ3dsallx?=
- =?utf-8?B?WGl1aVlEQldTaFdZLzVkY1hPSmdaUFZJRmdkcVNxQks2Y21HL3NxN1NMc3ZO?=
- =?utf-8?B?VGJsUGJDVnMzUUQwOHV1N1NDN2s0akUrTk9YRytJbFpHR3hUdWRJTlcvTDUy?=
- =?utf-8?B?VlFnUW1uZEUwcThhekFrTnJGMkFGYksyNStVZmZWeExWeEtwTjMwN3dpODJU?=
- =?utf-8?B?OTMrdElBdnM2N3lSbHpVZFBaYWdHakpPUXZobjZzMjFFRWJIMnFXTWI0RGNa?=
- =?utf-8?B?Vk5VM3A0OVNzZ2hZNHBPa25FTVlNTjEvc2lObDVKVHpKRXlGWTJaclNQYklh?=
- =?utf-8?B?akV1R3FveGdWaW02eUFLZFVkeXk2UEE2VGxhR0Y5VGdmd0NxQ1dJWUN6UUtn?=
- =?utf-8?B?MlhDR2FlZ1JZN2dVbVU0aVJEbmlHWmZoaG1JVEhQZDlLcHAwVVNYcWRMY0w5?=
- =?utf-8?B?MHIrd1dkbThML1NTS3ZMRkdYRjE3L1F5VE5DNnJOUWxNVFRsZFl6TXdMYmpH?=
- =?utf-8?B?SGt0ZFhnRU0wL0JYeUs2TVhvbkszeFBSQ2F1djd2OEp5aEVXemlMSkVrVlht?=
- =?utf-8?B?cFJSaVVFNXNYYUdsTUVXa1lHNnRIb1loSnhGRXVVTjJCL2Q0UjNId1QyYzZt?=
- =?utf-8?B?YSt5Z1FzREJzTm05UUZyVVZFc2NjNXRvWGsyZHJQaEVRVGlVVFVGYzhWaE1U?=
- =?utf-8?B?S3U2WmJLVVNrMkxHZkFNUFZXem1id3YvSGx5bTdKUEtYRHQxMHdxYk9jenVm?=
- =?utf-8?B?ajVCeG5WM1lQTVZuSDBHbGQ5N1lOK1pWc0dOL0haVTVEY0tpd2piZUphLzVW?=
- =?utf-8?B?dk1Vdk1SUldaQVV4blV3Vm1xQVdlNVRERmhqY0dWYU1USk9iajhGa0JYc1g1?=
- =?utf-8?B?NS9iUnFLSmYvZTByQ3pGTnVjcUtadTJYWnF3QUxxTUFXVkJ1M2FzcXRxdWpj?=
- =?utf-8?B?UzU4TW9VZld1RVROTS9NaVRWQzRuK0tFMkJOc1VsU1l5eXQzNVFZQXRyOUJS?=
- =?utf-8?B?WlREdW1lWTNLbFpIakFyNFdWQ3JtOXJyZTJTb01PcWJkSHVWK0ZvbGs1THdR?=
- =?utf-8?B?M2JUZlB1c3hRT2VSMnI5VWJMTGVEQUJNZ1diNG5rbTZKcDFDcmNsa3JzTlgx?=
- =?utf-8?B?amxwQ01PTDcxS1ZRUW1KRmRkL2hSL2lpaFZxQnRscnk0NmJZK29ueEZUdVJM?=
- =?utf-8?B?MnBZVUxxeXdKbnN2bjN1ODR1cUIwZWJZOEg0N0hvVEoydWZ0bUo5R2FORzVL?=
- =?utf-8?B?V1o5NllzWUVjK2pZUWZ5MFduY1Y1T2NRZzlBZi9WQURraUxlelVEOTZ5bGxn?=
- =?utf-8?B?cjB6dGFlS1pxZ2pLQkFaZzJSQmR0dThHay9UYzlLSFdHU040RXk1dVVjbHdt?=
- =?utf-8?B?VVR5TWNMNzRtNkRObXZqd2EvVENjSWJydHUzazd6WGtpdmgyNlU1L0hsVHpD?=
- =?utf-8?B?TTVWMnhYYzRIeTNrZ1F4TDJtblJsWXNOVHdBTTFZQWJHOEdGSmxoclkrd3JH?=
- =?utf-8?B?RjhwWDhnRGlrK3o0d0ZRY0FOWTlLd01yM1BRU0tyVjIySDFBZlFWNUtGRzNy?=
- =?utf-8?B?ZlU3NG9kS3RLYVRpTmFQRlkwM3cyS1NlUnhKRWw5ZFMvME1vTGdvNi9uVmZr?=
- =?utf-8?B?VnI4T1A3c1liWWw2N3BmRDYxcVY2bE5CRjZQYk9va0NaNG92cjB0MTVKN1kw?=
- =?utf-8?Q?l7AAtcCzp5rZThAvNwTg8xe7HtcIuw=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2025 13:56:04.6994 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e90ac095-279e-428b-f1fa-08de3f065a28
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509EC.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6526
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE5MDExNiBTYWx0ZWRfX87kbuMw1zqUl
- B9YPpBP4NrW1D/sZyYHgBmT1oIwo+hyjVrdAgTHgUvpiDEyHvdwcxab6EJwSNiKwFe/PjWcpU7u
- EMq486dl+Jl9lO2MG35+ce7eRopU8BroAFugZR8J08tZcL5vO4LX1h1GgAdZMr3N1M+xfy/G/2d
- H5xpIgGY55X2oNU6Y46KUVcYWjntJvw8fUvLMW8fQ9B/rTX6zDMRTE6IuNPhw7YPQ4DluaHyRKI
- x92wgjlx/Z5DgcNQQzWvZlsBrvUxxDdVrmIHQhMXMKYNVSLtQZ46viPJQFgkJU9GM+RTODh/S6y
- siSS9/yB/q2vAc34MwbtghyQvBN2XcrKiEYU6q1IqBITY1Pk3l2CoLxrSMBU7oP7UmpxPTsTF+x
- InnvhJisD2x/jPWsk+7Xy3zJ6QyAQGmqrmFRw1F3tByBTgte19PXEWIHQK6jHMKRaNmVqBejFqS
- J+2hRfbpUEItldlnraw==
-X-Proofpoint-GUID: kZjdJajRhU4SeQJPN9PHkgNzJM2LeNy0
-X-Authority-Analysis: v=2.4 cv=XdyEDY55 c=1 sm=1 tr=0 ts=69455977 cx=c_pps
- a=pv+iSUMxSX8tKyfHAWeKVg==:117 a=d6reE3nDawwanmLcZTMRXA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=o3YcbkTvxikA:10 a=IkcTkHD0fZMA:10
- a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=XpE1AkgCAAAA:8 a=8b9GpE9nAAAA:8
- a=goFYKN2dyGwo_dc-xmwA:9 a=QEXdDO2ut3YA:10 a=_VNrz7lXTIYA:10
- a=dpZMgbseYPk84XhQl7oQ:22 a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: kZjdJajRhU4SeQJPN9PHkgNzJM2LeNy0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-19_05,2025-12-17_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 adultscore=0 suspectscore=0 clxscore=1015 spamscore=0
- impostorscore=0 bulkscore=0 phishscore=0 malwarescore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2512190116
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251218061557.1999367-2-varadarajan.narayanan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -198,65 +73,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
-
-You can add my : reviewed-by Gabriel FERNANDEZ 
-<gabriel.fernandez@foss.st.com>
-
-Best regards
-Gabriel
-
-On 12/15/25 15:56, Patrice Chotard wrote:
-> Reorder include following rules available here :
-> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+On Thu, Dec 18, 2025 at 11:45:52AM +0530, Varadarajan Narayanan wrote:
+> Add the USB controller and phy related clocks.
+> 
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
->   drivers/clk/stm32/clk-stm32mp13.c | 24 +++++++++++-------------
->   1 file changed, 11 insertions(+), 13 deletions(-)
+>  drivers/clk/qcom/clock-ipq9574.c | 28 ++++++++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
 >
-> diff --git a/drivers/clk/stm32/clk-stm32mp13.c b/drivers/clk/stm32/clk-stm32mp13.c
-> index b4d0890f902..18e9ab364b4 100644
-> --- a/drivers/clk/stm32/clk-stm32mp13.c
-> +++ b/drivers/clk/stm32/clk-stm32mp13.c
-> @@ -5,28 +5,26 @@
->    */
->   #define LOG_CATEGORY UCLASS_CLK
->   
-> -#include <clk-uclass.h>
-> -#include <dm.h>
-> -#include <log.h>
-> -#include <asm/io.h>
-> -#include <dt-bindings/clock/stm32mp13-clks.h>
-> -#include <linux/clk-provider.h>
-> -#include <dt-bindings/clock/stm32mp13-clksrc.h>
-> -#include <asm/arch/sys_proto.h>
-> -#include <asm/global_data.h>
->   #include <clk-uclass.h>
->   #include <div64.h>
-> -#include <dm/device_compat.h>
-> +#include <dm.h>
->   #include <init.h>
-> -#include <linux/bitops.h>
-> -#include <linux/io.h>
-> -#include <linux/iopoll.h>
-> +#include <log.h>
->   #include <regmap.h>
->   #include <spl.h>
->   #include <syscon.h>
->   #include <time.h>
->   #include <vsprintf.h>
-> +#include <asm/io.h>
-> +#include <asm/global_data.h>
->   #include <asm/arch/sys_proto.h>
-> +#include <dm/device_compat.h>
-> +#include <dt-bindings/clock/stm32mp13-clks.h>
-> +#include <dt-bindings/clock/stm32mp13-clksrc.h>
-> +#include <linux/bitops.h>
-> +#include <linux/clk-provider.h>
-> +#include <linux/io.h>
-> +#include <linux/iopoll.h>
->   
->   #include "clk-stm32-core.h"
->   #include "stm32mp13_rcc.h"
->
+
+Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+
+-Sumit
+
+> diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
+> index b0af4036059..1f5146b29a1 100644
+> --- a/drivers/clk/qcom/clock-ipq9574.c
+> +++ b/drivers/clk/qcom/clock-ipq9574.c
+> @@ -25,6 +25,9 @@
+>  #define GCC_SDCC1_AHB_CBCR			0x33034
+>  #define GCC_SDCC1_APPS_CMD_RCGR			0x33004
+>  #define GCC_SDCC1_ICE_CORE_CBCR			0x33030
+> +#define GCC_USB0_MASTER_CMD_RCGR		0x2c004
+> +#define GCC_USB0_MOCK_UTMI_CMD_RCGR		0x2c02c
+> +#define GCC_USB0_AUX_CMD_RCGR			0x2C018
+>  
+>  static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
+>  {
+> @@ -39,6 +42,17 @@ static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
+>  		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
+>  				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
+>  		return rate;
+> +	case GCC_USB0_MASTER_CLK:
+> +		clk_rcg_set_rate(priv->base, GCC_USB0_MASTER_CMD_RCGR,
+> +				 4, CFG_CLK_SRC_GPLL0);
+> +		return rate;
+> +	case GCC_USB0_MOCK_UTMI_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_USB0_MOCK_UTMI_CMD_RCGR,
+> +				     0, 0, 0, CFG_CLK_SRC_CXO, 8);
+> +		return rate;
+> +	case GCC_USB0_AUX_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_USB0_AUX_CMD_RCGR, 0, 0, 0,
+> +				     CFG_CLK_SRC_CXO, 8);
+>  	default:
+>  		return -EINVAL;
+>  	}
+> @@ -50,6 +64,14 @@ static const struct gate_clk ipq9574_clks[] = {
+>  	GATE_CLK(GCC_SDCC1_AHB_CLK,		0x33034, 0x00000001),
+>  	GATE_CLK(GCC_SDCC1_APPS_CLK,		0x3302C, 0x00000001),
+>  	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,	0x33030, 0x00000001),
+> +	GATE_CLK(GCC_SNOC_USB_CLK,		0x2e058, 0x00000001),
+> +	GATE_CLK(GCC_USB0_MASTER_CLK,		0x2c044, 0x00000001),
+> +	GATE_CLK(GCC_ANOC_USB_AXI_CLK,		0x2e084, 0x00000001),
+> +	GATE_CLK(GCC_USB0_SLEEP_CLK,		0x2c058, 0x00000001),
+> +	GATE_CLK(GCC_USB0_MOCK_UTMI_CLK,	0x2c04c, 0x00000001),
+> +	GATE_CLK(GCC_USB0_PHY_CFG_AHB_CLK,	0x2c05c, 0x00000001),
+> +	GATE_CLK(GCC_USB0_AUX_CLK,		0x2c048, 0x00000001),
+> +	GATE_CLK(GCC_USB0_PIPE_CLK,		0x2c054, 0x00000001),
+>  };
+>  
+>  static int ipq9574_enable(struct clk *clk)
+> @@ -67,6 +89,10 @@ static int ipq9574_enable(struct clk *clk)
+>  }
+>  
+>  static const struct qcom_reset_map ipq9574_gcc_resets[] = {
+> +	[GCC_USB_BCR] = { 0x2c000 },
+> +	[GCC_QUSB2_0_PHY_BCR] = { 0x2c068 },
+> +	[GCC_USB0_PHY_BCR] = {0x2c06c, 0},
+> +	[GCC_USB3PHY_0_PHY_BCR] = {0x2c070, 0},
+>  	[GCC_SDCC_BCR] = { 0x33000 },
+>  };
+>  
+> @@ -75,6 +101,8 @@ static struct msm_clk_data ipq9574_gcc_data = {
+>  	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
+>  	.enable = ipq9574_enable,
+>  	.set_rate = ipq9574_set_rate,
+> +	.clks = ipq9574_clks,
+> +	.num_clks = ARRAY_SIZE(ipq9574_clks),
+>  };
+>  
+>  static const struct udevice_id gcc_ipq9574_of_match[] = {
+> -- 
+> 2.34.1
+> 
