@@ -4,63 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD7DD70E0C
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 02:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B00D711D3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 02:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C800800AB;
-	Fri, 19 Dec 2025 03:38:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7561F800AB;
+	Fri, 19 Dec 2025 03:41:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cN8TOX29";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qNTYW523";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XnFLsRt4";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jITMSj9c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9C6A80433; Fri, 19 Dec 2025 03:38:27 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 0F6688309A; Fri, 19 Dec 2025 03:41:09 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D2F980050
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 03:38:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ECA3C80050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 03:41:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dXWtR6Nn7z9smP;
- Fri, 19 Dec 2025 03:38:23 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dXWxZ4hKnz9spZ;
+ Fri, 19 Dec 2025 03:41:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766111903;
+ s=mail20150812; t=1766112066;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=+5Iypo2mBNRaLUnWpm91JUO12CvZhdChcVxQLBPI5R0=;
- b=cN8TOX2947GoR9C9Ytbyg5pTGjlANFZDfp3GrErsugLzjzppetY4MUsB63mWZmkiTuZxlT
- qSJJAn04h7hXaRT5zT3XSLMd1JQHTuBEw2WZ7c6pVLxV2vhC5Qzn6phbdOccd/NpCvSf+x
- cKT5vbGVLhSw4fBVlSu+niYkhrsDwoKAga7orv6VYBUALrc31jh3aQvsg/km5RnRR2D1lj
- 64AxIr9jjKqXF1z3zsuayNwa2G+wxf1hncZyh1qar2e4lrn/j1Lpo4TnLyXjheMV9IusAW
- cQaO2cbqIVwU7/US5hhK0QVl4JmVLFJtAPmfchX/J/qsUkWlKBuHSO+GaThCzg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qNTYW523;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=gZ9kDmChZKdxExgXyY+PGrOiL7UjGRcODpcb9/gBBxE=;
+ b=XnFLsRt4nRHDZnoWOsDOdnZAcGVydn63k3kD5YlO9ip0TsvFTL3zIzt4u89hM1RbO3/KYp
+ 0WZN7ZphB0o/DyRKuAhADilZhdBmrMMwBohUr1PeEM+P9sK3DKZFtV4GR4ac+2no0KTx9H
+ yVKm4/nfJROcvmaDSlayM1/eaTNsARWz9XCQK9tZBeGPk3xUcuD6G6rdDItHsdURuTtaYw
+ h7FbKKMj8oPfqqrGtXeG7l3uOIOAgz+wRDFP5yV/8iU6LzhBe9Kgh4RGZ3sn+fhhspM3Hc
+ KW5dUMy8OHT5InRrb4qizqS7Lx/I2K0IhxG1Gqyr0ejdQ4WerrSTZffqYkV3uA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766111902;
+ s=mail20150812; t=1766112064;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=+5Iypo2mBNRaLUnWpm91JUO12CvZhdChcVxQLBPI5R0=;
- b=qNTYW523fuPFo3ZZBWNq0dIBkvWPnK/vuqBJPTD2vQG8l7H2K2NcP6RzSIpQyNGRrCF0Qn
- ANoolHaESWDIUnq23FJm97yyf53hZUIQoXCSdAAsPYb7K/5fhFJT5XeSX0x30ApHrfOXlu
- MTxT0SryjQHPNTiQK7MPrwRiUO+X0c6wjV71YeJYxO7ziNSBcTmbNTnKf5Lv0BozrHy9hW
- FdR9lzeJtCLPWjx4pYM4clZxe5CRzcWBnTJJRjY00ohe6I2GfccXhZ7Dn8gh/pOqcRM6mx
- OMnGSd10fet2eB4SJX74BHZWy80I4bgYrnqICShBu41+e5eM88mKtwrOn07nkw==
+ bh=gZ9kDmChZKdxExgXyY+PGrOiL7UjGRcODpcb9/gBBxE=;
+ b=jITMSj9cYyQkJJyX8CzEMV3Lmk5nrn2Coh7Lnc66YFmJ7sd8fVfCdGomk8d8vgBEGi/gqS
+ s4LzAw93izPPjixU1/LTbNF+xDTQYeLlaltinb0EWfeuEJEkQEHxkODpMQDvu3VvPP0VJB
+ MDuhwYq8rmhI1dyFVvK3RzwiuAbXX1OFCVeDeqldLhqYriTrjP3nSn/mCaEf8kUt4jw8yy
+ 5oX5SJwoNjbD5ZLoF1pANN4aVxWpnoidAeURzIlM4fUMRVDvKKkmFmzSPth6bXiSY4EVfc
+ VF9O11bEjIdnX9bjvM2uT4t1/MZi+//AbPB/FyM20BR0za4xcrs+6llmm6CkzQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Adriano Cordova <adrianox@gmail.com>,
@@ -68,15 +62,14 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] kbuild: Produce diff between base DT and U-Boot augmented
+Subject: [PATCH v3] kbuild: Produce diff between base DT and U-Boot augmented
  DT if DEVICE_TREE_DEBUG=1
-Date: Fri, 19 Dec 2025 03:37:32 +0100
-Message-ID: <20251219023818.144681-1-marek.vasut+renesas@mailbox.org>
+Date: Fri, 19 Dec 2025 03:40:44 +0100
+Message-ID: <20251219024102.145220-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 5fa9124108984cc4018
-X-MBO-RS-META: tnpygbhwcct5fqdisu854jskzjd4zmy8
-X-Rspamd-Queue-Id: 4dXWtR6Nn7z9smP
+X-MBO-RS-ID: 055a85a344f488781b0
+X-MBO-RS-META: uqafwq6a39tgr818g5x3j6kgorptfq4s
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,15 +112,16 @@ Cc: u-boot@lists.denx.de
 V2: - Update commit message to mention DTC 1.7.2
     - Fix failure when building without DEVICE_TREE_DEBUG , in that
       case set cmd_dtc_diff = true
+V3: Drop extra newline leftover
 ---
- scripts/Makefile.lib | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
+ scripts/Makefile.lib | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index b062db7e87f..04220111ba6 100644
+index b062db7e87f..22960e46a6b 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -388,10 +388,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+@@ -388,6 +388,26 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
  DTC_FLAGS += -@
  endif
  
@@ -154,12 +148,7 @@ index b062db7e87f..04220111ba6 100644
  quiet_cmd_dtc = DTC     $@
  # Modified for U-Boot
  # Bring in any U-Boot-specific include at the end of the file
- # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
-+
- cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 	(cat $< > $(pre-tmp)); \
- 	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
-@@ -402,7 +423,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+@@ -402,7 +422,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
  		-d $(depfile).dtc.tmp $(dtc-tmp) || \
  		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
  		; \
