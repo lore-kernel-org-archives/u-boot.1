@@ -4,111 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D96D767C7
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 10:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE47D767C3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 10:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5DBB80050;
-	Fri, 19 Dec 2025 11:32:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B33B580050;
+	Fri, 19 Dec 2025 11:54:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BuPcm47J";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JjVBIuAy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D72E80077; Fri, 19 Dec 2025 11:32:52 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 215E580077; Fri, 19 Dec 2025 11:54:40 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080298003E
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 11:32:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B768E8003E
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 11:54:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47775fb6cb4so10294215e9.0
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 02:32:49 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b73a9592fb8so333599066b.1
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 02:54:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1766140368; x=1766745168; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sWTpmjAkQnB5pDtjtyF4kzRBOmjFn5a0N6wX+RDlrK8=;
- b=BuPcm47JciR4OzztA4Fbu7x6RAKUKGxMLdIG5x4rLgVbR81RARz3vCqLZgjfwVETEq
- mf8b1+W2CSDFGDHBoEvAfwKJo8t96Gr1k7qsZKFKSHJdJhPpkjxi2n4ifKgUtVxyeuj6
- /JYwr7vKBvbx51mWubfFZeMgh8KQAmpUZIwkyuy0YozyD+xtgA27Oj1pZIUFu0HjZQaJ
- iUtlIXzLLYpz45EW8ipxdZdm+wqGQJi+woQX5qjU/XFrixabb9xr2Z+sTATNtrYO+rc4
- h+tyEAX7UUBVujZkrLY8auCGxvHEuUHJLa6hpydaMU4kuOD/slfQm4VH4DD4jVftr1VR
- know==
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1766141677; x=1766746477;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VzomSwqh2smGp9BMUOshZdwJS5OXXoq5A6WsVmN/hDE=;
+ b=JjVBIuAyyt1vOKrLHBFq5sD8hsZHOTs09ElVH5wVSBvBTE9BX/bFr2gLg/CCJouJo7
+ w3snHJeJVMJKzIYIiAeTMWB7MZCvdS9ID8DVHiF3GwVxtvxnjCrQbrfF5z4N5mS93lsa
+ xMq582ajjIjeEAFhZRlyrdCPErx2GOd+gWxajIx1vWrgmMJEVT1FYD6Ozkvk4sqpnHoX
+ o3BrTCJ+iUOb1pVK1c+dOtiafgytcSSIGAyjfpTFxcy3h9jD4+4QJaXT/vnYMD6vFrCD
+ tbdThZxUWiIEfjvjOI5ri3r6lYKYBEohVqspgGeDvJC8wpC6PII3QlzNljKe7vCVeH67
+ LNjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766140368; x=1766745168;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sWTpmjAkQnB5pDtjtyF4kzRBOmjFn5a0N6wX+RDlrK8=;
- b=giBSqX5yKRPfkOSgGpgHd9jJSe8YcOwlNh/OC1JI8q/AoiKJFx4z7NIL1CbL1aS55L
- ayY1Cv1fbq4rDHm+IRU6CeqoDF2xKjH+yXNFRiPexiCPI5TCggMN3oPlfw+lHbmoa5tx
- H//XT7LDidynX9Wfl4AJ2AXqrcQJ57fH6R4ghC9QYA7/ObgC55IJiDtA3lM9xHuPXlGX
- dwSHmJ2VW9ynyjPOhpPN6BTslbXz3sVQYXTydSawtKbQ5GuMmClSIiwRbQwmJL+5C+jR
- 5j+ovvdf4SLgpChoIWDBvyc8uXyd5jannDps8N+6PxQrszFhuMhuSZNhJJWCFTqKxIMQ
- iVEg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyMhelHrHwPWLoqYX4SeZLO45nx/uK07wsdtcjNiup0JUyUFbjLKMHOFbruZImCOGsYosGM4s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyUFBIgrA7MxU4gSOQQBKayIWjyU4oj4kaM61KSOpWZEOxPtI7G
- PIuYI8yfvhWdIIguAZ9eUvSpeLhFbn3NigY2jDWe4k0znQ8Mm04wg/4AQPnb/mfGtBQ=
-X-Gm-Gg: AY/fxX4DlgNwmzdIOL0h4nZIyBq+7KcafaSZGZazeQpxFTiYOALA873EH9wlwI5icJq
- ClIXtV/ukY4H3QDCzgLVYM8VFFmS68WczJFJu9xZYJhRiMvOl9ZXtl2k2NCZXXMVQLwCQL2DUni
- +pbadGTs5HXhgBOoTI6Thpcz3xc92v2JwSY57JxjaJ2ETk+HeasaGtCB6mXcmx+namCsqWT7yFb
- aOJ/gPbcpJwHNdAoKaJtubODqDDx4Ga83JaGYkAInnUb/6H8dC+Ialm4IX7MWVCxb2NozBPytRg
- o8SlY4zRwA57KoZonuYTVhqx/905/JypFmpbnpEHyi8F3WgrIXFDTUrZzzRwgPLHjpuseyzp3Ql
- 737SRXKlGgWsZXU/9b5XUPJQ6QLXx+K1/jMHd08CZPPc6TfPKO0P6ABKjilfQN2OOeQKo6Z6PrH
- k7GGATwysZFAtXnLYNzmxg5u8a3j/xv/sGa8xw+cWQVvdOPesuBnCy520wYz9gY1w=
-X-Google-Smtp-Source: AGHT+IHE3x8SDUiRwxNfGZ2qxjw3MfDuuQ3OajLsMDoA4xyQtRFUSxU5439dtxgqH7vAuZLJetWvrA==
-X-Received: by 2002:a05:600c:35c4:b0:475:dd9a:f791 with SMTP id
- 5b1f17b1804b1-47d195869e7mr24528085e9.28.1766140368292; 
- Fri, 19 Dec 2025 02:32:48 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:254d:4d6d:3f4e:5bd1?
- ([2a01:e0a:3d9:2080:254d:4d6d:3f4e:5bd1])
+ d=1e100.net; s=20230601; t=1766141677; x=1766746477;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VzomSwqh2smGp9BMUOshZdwJS5OXXoq5A6WsVmN/hDE=;
+ b=X6KiB37oRrx2MrdGDLlcwmVYt2CsiOPsAGIOllA0tkej6ts3xE5Al8pc/XQgcnOvyK
+ kN3SJPKDsn7+6X6ZgZ5MXWDq1R7VroYaEmnI+tIZ1ein4Px8x1fqMnwBNV7bZPajTv4K
+ nayhOeYDtagvdLktAoXAuLb7vAEvyngfkyBrRlw15YynWOQhODlsjBQCuXKLSl43Tlz3
+ iArnnYfz6E148gi9i5mLsBMP3k+cqA5MHz4mDssyJCYIfr2U/3k0oU+CpdG3kLvNlVnE
+ NTTpmLaQggu4qc67JclYbBS13wOb0BBQMGy7kAiT0Sr7tIsfrtBtkand8e/YpTJ/3IRO
+ zdSw==
+X-Gm-Message-State: AOJu0YxIO5zlW+nanXY2LekaWaQ705MYAxuaoYb0gw+bHURxO/baPxmg
+ taGs49XjVY7GEpySUKlgGkQXndF0S97kZo9tgdxmrOqHURFLfJm93Q4BEsSkyysaj8QgUM/t2RQ
+ 56LseeQ==
+X-Gm-Gg: AY/fxX5iXqXlZTRniFQCPplnuBMPt2ymuEcvGH4ocpZPf0E5Fy7KHe2tdi5o/GjRsCh
+ +8fb7SGPz+ED4WzlNU3mqJClM0+MWvNNbB8Jsln7lzDmGf6bnQeYaK4kb3amFyUXghhxZcggtTj
+ tZuWGLYWw/vpjjfB+6DVOCdS6xnKLad1gpO8e2ypyM/Fdr8ZyRqbWI/HnZvyP0Vz+OUgdfvBw5p
+ /Yd96C0IBvzO2lH5h7Uv2bxJ6CxxNDQ/MKqyCrhX76IdRfq6DB8hVtH9sPenH+nud/h4twBKNuL
+ WpdREmAx3OPfvoOn+owSRq/e9zWrAJW/4Z0VjEkv0vanzfRz+VLUj4uFpPUuejhnsOXAhyXzsR3
+ 9cQ83dFPA7xpqItfDXxaYNhIduIadCGo8Bhg11DBlMHEJw1Vf/hNsTyBR9xl5TZ5Q6WJwhDwlIz
+ TJ4GczWM4aYS/d
+X-Google-Smtp-Source: AGHT+IFsL1GiHjvA1EP373Wsqt1GB1OVG2EOu2q8HdauGEv8lR18XUVvYiBOQoYUUe0wDLNCKYtcbQ==
+X-Received: by 2002:a17:907:1b26:b0:b72:84bd:88f3 with SMTP id
+ a640c23a62f3a-b803563ee36mr275583466b.11.1766141676940; 
+ Fri, 19 Dec 2025 02:54:36 -0800 (PST)
+Received: from [10.254.183.223] ([149.199.62.131])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be3a33c1csm36332845e9.1.2025.12.19.02.32.47
+ a640c23a62f3a-b8037ad2732sm203694366b.20.2025.12.19.02.54.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Dec 2025 02:32:47 -0800 (PST)
-Message-ID: <e151667a-9f5b-4baa-84b6-5a243ec88545@linaro.org>
-Date: Fri, 19 Dec 2025 11:32:47 +0100
+ Fri, 19 Dec 2025 02:54:36 -0800 (PST)
+Message-ID: <21930cc8-6895-4722-8caa-9d222a4d563a@monstr.eu>
+Date: Fri, 19 Dec 2025 11:54:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20251219
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] AMD/Xilinx changes for 2026.04-rc1
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -122,7 +94,6 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -130,118 +101,139 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-Here's a set of Amlogic changes, the principal change is the initial SPL implementation
-for GX SoCs, ditching the vendor BL2 by an open source implementation.
-Then a frequency lowering on the MMC driver and support for EFI capsules
-update for all Amlogic boards.
+it is time to cleanup my queue. I can't see any issue in CI. I hope that 
+removing cdns,is-dma property again is not going to cause issues on other 
+platforms that's why I want to also get it to next sooner rather then later.
+
+There are multiple patches related to UFS which have been sent and also some 
+other platform related one that's why I expect another pull request for rc1 in 
+future.
 
 Thanks,
-Neil
+Michal
 
 
-The following changes since commit 66be03b7ee19444b23aae3990a434a7470fc1641:
+The following changes since commit 930eff5416ea98ebd09cec73f5d06a7033b4d52e:
 
-   binman: blob_dtb: improve error message when SPL is not found (2025-12-10 13:45:29 -0600)
+   Merge tag 'u-boot-socfpga-next-20251217' of 
+https://source.denx.de/u-boot/custodians/u-boot-socfpga into next (2025-12-18 
+08:06:10 -0600)
 
 are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20251219
+   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2026.04-rc1
 
-for you to fetch changes up to 6e844dd4df6765e5e772b5606a675c16fe98d9ac:
+for you to fetch changes up to 0b880fc95dbaed88dd55060730857b8f52765c57:
 
-   board: libre-computer: use common Amlogic EFI capsule support (2025-12-11 17:27:15 +0100)
-
-----------------------------------------------------------------
-- Add u-boot SPL support for GX SoCs
-- meson_gx_mmc: reduce maximum frequency
-- Add support for EFI capsule updates on all Amlogic boards
+   arch/arm/mach-zynqmp: configure default BL32_LOAD_ADDR (2025-12-19 10:57:58 
++0100)
 
 ----------------------------------------------------------------
-Ferass El Hafidi (11):
-       mmc: meson_gx_mmc: add minimal non-DM driver
-       serial: serial_meson: add minimal non-DM driver
-       arm: meson: initial u-boot SPL support for GX SoCs
-       arm: meson: spl: add support for SPL DRAM init
-       arm: dts: meson: add meson-gxbb-u-boot.dtsi
-       arm: dts: meson-gx-u-boot: add binman configuration for U-Boot SPL
-       board: amlogic: add kconfig fragments for SPL
-       spl: meson: set SPL max size for GX SoCs
-       doc: board: amlogic: add u-boot-spl documentation
-       arm: meson: add support for EFI capsule updates
-       board: libre-computer: use common Amlogic EFI capsule support
+AMD/Xilinx/FPGA changes for v2026.04-rc1
 
-Jonas Karlman (1):
-       tools: mkimage: Add Amlogic Boot Image type
+xilinx:
+- Sync ESRT with detected GUID
+- DT cleanups
+- Add logic for FRU information multiple times
+- Enable more drivers pca9541, usb5744
+- Enable more commands
+- Cleanup firmware DT bindings
 
-Nick Xie (1):
-       mmc: meson_gx_mmc: reduce maximum frequency
+firmware:
+- Add enhancement SMC format support
 
-  MAINTAINERS                                        |   1 +
-  arch/arm/dts/meson-gx-u-boot.dtsi                  | 125 ++++++
-  arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi        |   2 +-
-  arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi      |   2 +-
-  arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi       |   2 +-
-  arch/arm/dts/meson-gxbb-p200-u-boot.dtsi           |   2 +-
-  arch/arm/dts/meson-gxbb-p201-u-boot.dtsi           |   2 +-
-  arch/arm/dts/meson-gxbb-u-boot.dtsi                |  27 ++
-  arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi      |   2 +-
-  arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi    |   2 +-
-  arch/arm/dts/meson-gxl-u-boot.dtsi                 |  20 +
-  arch/arm/include/asm/arch-meson/boot.h             |   2 +
-  arch/arm/include/asm/arch-meson/clock-gx.h         |  14 +
-  arch/arm/include/asm/arch-meson/dram-gx.h          | 341 +++++++++++++++++
-  arch/arm/include/asm/arch-meson/dram-gxbb.h        | 168 +++++++++
-  arch/arm/include/asm/arch-meson/dram-gxl.h         | 193 ++++++++++
-  arch/arm/include/asm/arch-meson/dram-settings-gx.h | 296 +++++++++++++++
-  arch/arm/include/asm/arch-meson/dram-timings-gx.h  | 117 ++++++
-  arch/arm/include/asm/arch-meson/gx.h               |  41 ++
-  arch/arm/mach-meson/Kconfig                        | 112 +++++-
-  arch/arm/mach-meson/Makefile                       |  12 +-
-  arch/arm/mach-meson/board-common.c                 |  16 +
-  arch/arm/mach-meson/capsule.c                      |  61 +++
-  arch/arm/mach-meson/dram-gx.c                      | 419 +++++++++++++++++++++
-  arch/arm/mach-meson/dram-gxbb.c                    | 174 +++++++++
-  arch/arm/mach-meson/dram-gxl.c                     | 167 ++++++++
-  arch/arm/mach-meson/spl-gx.c                       | 168 +++++++++
-  arch/arm/mach-meson/spl-gxbb.c                     | 113 ++++++
-  arch/arm/mach-meson/spl-gxl.c                      |  39 ++
-  arch/arm/mach-meson/spl.c                          | 123 ++++++
-  board/amlogic/p200/spl-odroid-c2.config            |  38 ++
-  board/amlogic/p200/spl-videostrong-kii-pro.config  |  39 ++
-  board/amlogic/p212/spl-libretech-cc-1gb.config     |  36 ++
-  board/amlogic/p212/spl-libretech-cc-2gb.config     |  38 ++
-  board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  14 -
-  board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   |  13 -
-  board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  14 -
-  boot/image.c                                       |   1 +
-  common/spl/Kconfig                                 |   1 +
-  doc/board/amlogic/index.rst                        |   1 +
-  doc/board/amlogic/pre-generated-fip.rst            |   9 +
-  doc/board/amlogic/spl.rst                          |  77 ++++
-  drivers/mmc/meson_gx_mmc.c                         |  79 +++-
-  drivers/serial/serial.c                            |   2 +
-  drivers/serial/serial_meson.c                      | 119 +++++-
-  include/image.h                                    |   1 +
-  tools/Makefile                                     |   1 +
-  tools/amlimage.c                                   | 255 +++++++++++++
-  48 files changed, 3449 insertions(+), 52 deletions(-)
-  create mode 100644 arch/arm/dts/meson-gxbb-u-boot.dtsi
-  create mode 100644 arch/arm/include/asm/arch-meson/dram-gx.h
-  create mode 100644 arch/arm/include/asm/arch-meson/dram-gxbb.h
-  create mode 100644 arch/arm/include/asm/arch-meson/dram-gxl.h
-  create mode 100644 arch/arm/include/asm/arch-meson/dram-settings-gx.h
-  create mode 100644 arch/arm/include/asm/arch-meson/dram-timings-gx.h
-  create mode 100644 arch/arm/mach-meson/capsule.c
-  create mode 100644 arch/arm/mach-meson/dram-gx.c
-  create mode 100644 arch/arm/mach-meson/dram-gxbb.c
-  create mode 100644 arch/arm/mach-meson/dram-gxl.c
-  create mode 100644 arch/arm/mach-meson/spl-gx.c
-  create mode 100644 arch/arm/mach-meson/spl-gxbb.c
-  create mode 100644 arch/arm/mach-meson/spl-gxl.c
-  create mode 100644 arch/arm/mach-meson/spl.c
-  create mode 100644 board/amlogic/p200/spl-odroid-c2.config
-  create mode 100644 board/amlogic/p200/spl-videostrong-kii-pro.config
-  create mode 100644 board/amlogic/p212/spl-libretech-cc-1gb.config
-  create mode 100644 board/amlogic/p212/spl-libretech-cc-2gb.config
-  create mode 100644 doc/board/amlogic/spl.rst
-  create mode 100644 tools/amlimage.c
+clk/versal:
+- Various cleanups
+- Add support for Versal Gen 2
+
+i2c:
+- cdns: Add timeout for RXDV status bit polling
+
+spi:
+- cadence: Remove cdns,is-dma DT property
+- cadence: Remove duplicated return
+- cadence_versal: Update flash reset delay
+
+memtop:
+- Update max memory reserved spaces to 64
+
+Versal Gen 2:
+- Aligned addresses with default memory map
+- Add support for reading multiboot value
+
+MB-V:
+- Make SPL smaller
+- Add support for SPI
+- Move SPL to run out of BRAM
+
+ZynqMP:
+- Change default load address for BL32
+
+----------------------------------------------------------------
+Michal Simek (13):
+       clk: versal: Use __data macro for moving variable to data section
+       clk: versal: Add support for CLK_AUTO_ID
+       clk: versal: Cleanup driver
+       firmware: xilinx: Add support for enhancement SMC format
+       clk: versal: Enable clock driver for Versal Gen 2
+       spi: cadence: Remove cdns,is-dma DT property
+       arm64: xilinx: Remove unnecessary #address/size-cells
+       xilinx: amd: Enable the PCA9541 I2C Bus arbiter
+       arm64: versal2: Enable USB5744 usb hub
+       cadence_qspi: Remove duplicated return
+       arm64: versal2: Read and show multiboot value
+       xilinx: versal: Get rid of xlnx-versal-power.h from bindings
+       xilinx: mbv32: Disable floating point
+
+Neal Frager (1):
+       arch/arm/mach-zynqmp: configure default BL32_LOAD_ADDR
+
+Padmarao Begari (7):
+       board: xilinx: Update ESRT after copying GUID
+       board: xilinx: Retry FRU EEPROM read on timeout
+       i2c: cdns: Add timeout for RXDV status bit polling
+       xilinx: mbv: Disable SPL GZIP
+       xilinx: mbv: Remove debug UART support
+       board: xilinx: add SPL boot device support
+       xilinx: mbv: Update defconfigs as per memory map
+
+Venkatesh Yadav Abbarapu (4):
+       common: memtop: Update the MEM_RGN_COUNT macro to 64
+       arm64: versal2: Update the text base and dtb address
+       arm64: versal2: Enable reset and poweroff via sysreset framework
+       cadence_qspi: Update the delays for flash reset
+
+  arch/arm/dts/versal-mini-ospi.dtsi             |  3 +-
+  arch/arm/dts/versal-net-mini-ospi.dtsi         |  3 +-
+  arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso |  3 --
+  arch/arm/mach-versal2/include/mach/hardware.h  |  4 +-
+  arch/arm/mach-zynqmp/Kconfig                   |  2 +-
+  board/amd/versal2/board.c                      | 22 ++++++++
+  board/xilinx/common/board.c                    | 23 ++++++++-
+  board/xilinx/mbv/board.c                       | 14 +++--
+  common/memtop.c                                |  2 +-
+  configs/amd_versal2_virt_defconfig             |  5 ++
+  configs/xilinx_mbv32_defconfig                 | 19 ++++---
+  configs/xilinx_versal_virt_defconfig           |  1 +
+  configs/xilinx_zynqmp_virt_defconfig           |  1 +
+  drivers/clk/Kconfig                            |  2 +-
+  drivers/clk/clk_versal.c                       | 49 +++++++++++++-----
+  drivers/firmware/firmware-zynqmp.c             | 36 +++++++++++++
+  drivers/i2c/i2c-cdns.c                         | 11 ++++
+  drivers/spi/cadence_ospi_versal.c              |  7 ++-
+  drivers/spi/cadence_qspi.c                     | 23 ++++++---
+  drivers/spi/cadence_qspi.h                     |  2 -
+  include/dt-bindings/power/xlnx-versal-power.h  | 54 --------------------
+  include/zynqmp_firmware.h                      |  8 +++
+  22 files changed, 188 insertions(+), 106 deletions(-)
+  delete mode 100644 include/dt-bindings/power/xlnx-versal-power.h
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+
