@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB0F5D7879F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 19:51:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D33E66882
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 20:21:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F5E4833C6;
-	Fri, 19 Dec 2025 20:51:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8C848309A;
+	Fri, 19 Dec 2025 21:21:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aIRw6joi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NNoHBZ2G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F5C183642; Fri, 19 Dec 2025 20:51:50 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id AAB73835B3; Fri, 19 Dec 2025 21:21:30 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43E2C8334F
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 20:51:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84C3D803F5
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 21:21:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-65cfb4beabcso1207466eaf.3
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 11:51:46 -0800 (PST)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c6d13986f8so1783822a34.0
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 12:21:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766173905; x=1766778705; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SixjM8LCDtsJOpY/P7eyM3bvC6T+8JwWxE72Agk+4pE=;
- b=aIRw6joirQ8DxPxKc+QtZSwtkzq6VGT1r0H3/BeHo6pAwPYtc/AoblKTs/LUil+a/6
- qIqn6UQjV1pPDByrKw1EUPOnBQM9LjZsByUjVaySq+6EFalhsQnRXi0+tXdgLLUO4dtu
- 9yiBcnXYkTz3E+31UXkrp0T+ICm7jZcrM9NGo=
+ d=konsulko.com; s=google; t=1766175687; x=1766780487; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=x5bonrti5FluwqnbsM1uXHSx5pRT8Ba38Uat7459Eyg=;
+ b=NNoHBZ2GnyrXc9JP1V8RqTYXR5vLwjtaYOhXQBXJFrLZebgkP4HXyPuAWKXFwGHRzW
+ oVEy1H++u+Vl2+WHejrSlIogHACe4vyJxhFQzXzGEGO3CpOKrqIrjSjhS+mRfOwnqU6I
+ g8QAfHqYn14Ti+sIPAeByMGlJlkuqBx50QiVs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766173905; x=1766778705;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=SixjM8LCDtsJOpY/P7eyM3bvC6T+8JwWxE72Agk+4pE=;
- b=AyKAg4vgqKs3Dx/TeK1h7S7acEvcE69KdnQgepAgoeGQT/PKJmTtfEi0JMAtHdNbPH
- G8H9nhCgmpTId+MseJwcfMkiC1HWAhm9qku16Dw015EF6FZuPqLOFl13xBccvtzsHl7G
- 36Uq+xsRmh+bBqzxd5fMdlWwAx4ANrvSPcP2nzyx3dEZYXJ38Pnn6G7M63z1Yez7+sf0
- I4RepFL7vCYPZCvNuNYIQVKSxmKpXt6DIIYNOFrh/h6cn7q4JslMAD2tU6uSJEoa99Nb
- Zsd7wUUIXvJuDLelzvF73gp/Fw/Sph3MRJeum8YWMn9TF2fXuBe1hJxLZhSE/QrsoNA2
- 89YA==
-X-Gm-Message-State: AOJu0Yybbd8kHMn16jWlqsk4lcJv3PcMaLe98cZkLQb3H2SEWhkxe50L
- xf6Uy3H27jCL9v4i6EiRYM1GxqJpPqh+YNbO3o9x89DVT6cZBqAe/caQLnhbpnXt4ys=
-X-Gm-Gg: AY/fxX7WsMiTh036gcPrg4bnfX55NE4L9xUoIonxEl8lenqH+Oh2HUDy0GW00gFXx/n
- OGh2FOSWJZh8ge3WgZ3sB6NAPsQe2vghLHyfB5L4s4pzyFC90H4KhmLpNS+pz4ROZeXs0dyjaPd
- 1kto3eKk6OKTdo5HWrd283scjQYSeTOZzE2PodLhk+Sp/LazlNAeCEoXJT5AJllWPPW7cnEBhDr
- bBJuYB4x9YbQGvb21jZosO99Q/kJTfsP/3gyjw8xSdbrbFB+4jMwQ8cp8wdGpzOL2xELqF/z9qg
- PksZu/mdmyj7kj77+MPYvovSaOWW2zLgha6yQNgx1lrDOTc8wtL6xPQ58rZ+cG7KT+6lNrDgjRC
- CWKXWJ7HXhGv9fiBXgw+0s1APY0wCzy5LBiiJG2iE8xjmjvXRdS1ODympc20p4YDp8o4zHf9moN
- eM6sFmZrt6xlPi3bLeo44dVlY0kJEh8F+JXDZt8o1z8p4olb2w
-X-Google-Smtp-Source: AGHT+IGdR64yNBUQCs/Zyite4zk959S8Ck9O6fmH26LhavhiS5YKz2qIec6Fc/p0qZoqDwkPPkO1aA==
-X-Received: by 2002:a05:6820:1628:b0:65d:ba7:f659 with SMTP id
- 006d021491bc7-65d0e6c358dmr1769296eaf.0.1766173905033; 
- Fri, 19 Dec 2025 11:51:45 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1766175687; x=1766780487;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x5bonrti5FluwqnbsM1uXHSx5pRT8Ba38Uat7459Eyg=;
+ b=A/mpbFXubiOicOnDcLiOKlb0kmeRSWBdueTXg6h+AUwLVfzpUIRSzO1OZEp/vdE//3
+ KY3vsJqfCq3oOxhScgTlclxhS0SFMf37eZ85SQnGt8wtK+DF5x8y5ObyMeEKNPGd4Llk
+ PTIcVgYuSRxfbBAZ+0wwmQYsN8C1nMhtWKi/foeKnm9MUqoZj6PBORLh9XuG4JsnnRW4
+ xKuku483nnoEcIe0noOXwF0XDtp/FUbPZEwnYyqiISg9+Z84qfQ2gdGEl7bXyxK5dJ1l
+ LhTkqYeRokQxrq4AoW/8pD6FYhXaN+mJCl+98KwgpRJqdvWkhfSxwSE0xDV1EAC8f+DR
+ N9gw==
+X-Gm-Message-State: AOJu0YwUmpaKwAUKuNFHQhhV+uXzvZJ29YArtVE/uODZkDK/xHzyFVmJ
+ Dr3ykAITJGEiBxGv/iODS2XxqYFao0zwYlyk6FWbjiPliwYdVfrBJn3KpgRjXnPmK+sWVvTM8Dy
+ DkRwSCrg=
+X-Gm-Gg: AY/fxX6uFFi3ABihHj5ahTzCCvAW2D/vu16ciOnOF64gBgG85Z3mntOpluMjyU7P7+y
+ ev9c74zqqxLM2ZnJm4hvrCD829IHwllIMag5U3noy0OXOJ0W7N/3EGN9a3Wn4p/kU4dZTVieUJj
+ 2V4B/Czq41IC8idCH6YjCOVvonRM0o3kRX7CRtG4EuysBlRST5fdq/1Wx0qITkuyECP5+ij6rI3
+ po/GjrfZgSEKokMHsahryAaOUqTJLdbDVPSCN6IoEadq7Al7XSpm3hQsxRyZPFMdDBtNg03dywj
+ U5RqlD/EuZZGikdwlmS2/9Nw5LwABhHgxHrZHpgdxziiHH+fel+JsvZFyFs1vuFdXAYCDUSehzp
+ 9oa6dqCdhxrjGBKaiqT/2S4z/eaS7GCGfk7GinSAumzyX36hSeeq8IPKlX8svCfyYnElv2HglHw
+ I/cZyHeJCVdYZWK97snGuNpxXKxt05Gnw/uYxB6J3GegoaAEGyADCuuao+8kj3Sks=
+X-Google-Smtp-Source: AGHT+IEmmSg9gid3SeScnmFxNyI9qAx2CTv2peA1iAOanu2F5sLUJfZT48J+guUGhsMPmbmd+dRcwA==
+X-Received: by 2002:a05:6830:6e12:b0:7c7:ad8:68b3 with SMTP id
+ 46e09a7af769-7cc592a5296mr3733938a34.14.1766175687066; 
+ Fri, 19 Dec 2025 12:21:27 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f46c775sm1899236eaf.5.2025.12.19.11.51.44
+ 46e09a7af769-7cc6673c32esm2359189a34.9.2025.12.19.12.21.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Dec 2025 11:51:44 -0800 (PST)
+ Fri, 19 Dec 2025 12:21:26 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-In-Reply-To: <21930cc8-6895-4722-8caa-9d222a4d563a@monstr.eu>
-References: <21930cc8-6895-4722-8caa-9d222a4d563a@monstr.eu>
-Subject: Re: [GIT PULL] AMD/Xilinx changes for 2026.04-rc1
-Message-Id: <176617390438.4176400.3283567478608311669.b4-ty@konsulko.com>
-Date: Fri, 19 Dec 2025 13:51:44 -0600
+To: u-boot@lists.denx.de
+Cc: Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH 0/3] Enable / require DEVRES for devm_.alloc usage outside xPL
+Date: Fri, 19 Dec 2025 14:13:40 -0600
+Message-ID: <20251219202121.4180810-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Dec 2025 11:54:32 +0100, Michal Simek wrote:
+Hey all,
 
-> it is time to cleanup my queue. I can't see any issue in CI. I hope that
-> removing cdns,is-dma property again is not going to cause issues on other
-> platforms that's why I want to also get it to next sooner rather then later.
-> 
-> There are multiple patches related to UFS which have been sent and also some
-> other platform related one that's why I expect another pull request for rc1 in
-> future.
-> 
-> [...]
-
-Merged into u-boot/next, thanks!
+As seen by a number of patches fixing memory leaks, U-Boot has a problem
+with developer expectations around devm_kmalloc and friends. Namely,
+whereas in Linux these memory allocations will be freed automatically in
+most cases, in U-Boot this is only true if DEVRES is enabled. Now,
+intentionally, in xPL phases, we do not (and do not offer as an option)
+enabling DEVRES. However in full U-Boot this is left either to the user,
+or some drivers have select'd DEVRES on their own. This inconsistency is
+a problem. This series goes and deals with two small issues that were
+shown by having all drivers that use devm_.alloc to allocate memory also
+select DEVRES and then we make DEVRES no longer be a prompted option and
+instead select'd as needed. We do not make this unconditional as it
+would result in growing the resulting binary on the many platforms which
+have no users of the devm_.alloc family of functions.
 
 -- 
 Tom
-
 
