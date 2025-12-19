@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD210D78785
-	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 14:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0AC0D78786
+	for <u-boot@archiver.kernel.org>; Fri, 19 Dec 2025 14:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C43980077;
-	Fri, 19 Dec 2025 15:29:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF80080077;
+	Fri, 19 Dec 2025 15:41:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="P0cH9uGh";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XGg6XYQs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43D7A803F5; Fri, 19 Dec 2025 15:29:37 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id BFCF7803F5; Fri, 19 Dec 2025 15:41:44 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4351A80050
- for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 15:29:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B518180050
+ for <u-boot@lists.denx.de>; Fri, 19 Dec 2025 15:41:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 382D760008;
- Fri, 19 Dec 2025 14:29:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91117C4CEF1;
- Fri, 19 Dec 2025 14:29:28 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0A45540D5E;
+ Fri, 19 Dec 2025 14:41:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73BAAC4CEF1;
+ Fri, 19 Dec 2025 14:41:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766154573;
- bh=D9HRnLGdZbWS42Q//0jkN45P3wjlAjxwIkLKhKVAfYk=;
+ s=k20201202; t=1766155300;
+ bh=8UPPg1KnyPkKQYhhd7Oi7TyuLcv5qFG6uBFj9LlDNlc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=P0cH9uGhedgtUvBEpuDp/lywIGO16gTuU+mwuUwgFaRMSe94p/9K5UH1GfHHbMLfx
- hFAofcGoHA3aULqw91RMUzeATZ3KA4hwjLom/ROWggC6TFZU9v34F6aP4XENmrLnDc
- 8Zhy7p5zw8nI6Izl1c3q/jt/MBoSwzErD3Y1CAbaTE1UgLlB1/F/AalIrXhLhZPBAZ
- eX6h3WmaCcT3XCtV1UcmSNmV79gdzwhTbXxRyUtO95TPuMMVuF1DhgCLjGDwPuD86x
- bbsuse/xZJj882Pdy16sEkhfmucoHBb4CGrUUNCoPzcoMPgU+MdzZpCwzLMZMDoZQa
- o3gYkBAL6l2ow==
-Date: Fri, 19 Dec 2025 19:59:24 +0530
+ b=XGg6XYQsLzgFdBqz9uE/PwpXc7CkWFFRiEID2gAZ7hCSlJJNStSuaEcnajo/MUwgp
+ fX2iSQjOcXgGgas5GghOoxoU8504Otryah7ge7f6e8UWUZt5UlPiCld+ih4XLurGXM
+ 057Pj8zodcMrINyFR8yPVt0ZKUI/jvdEyeSIWupyzVOKx/ziifYEfOMtVw93vkrt0w
+ 0DUyIDV94lgZNieWdFW9wdAQq5mwvpaIZPIh4X/ygEphnIdu3ZfUqVlm5T8t+NNTOA
+ aF6C7d49VIdIVrtL+5q6I0Krq9FxmygyfGjLEs7CJB41ydS0t3ZXvii+/IhSLXw4ox
+ adi0KpFyMMcSA==
+Date: Fri, 19 Dec 2025 20:11:29 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Cc: trini@konsulko.com, casey.connolly@linaro.org,
@@ -49,14 +48,15 @@ Cc: trini@konsulko.com, casey.connolly@linaro.org,
  lukma@denx.de, marek.vasut+renesas@mailbox.org,
  michal.simek@amd.com, alexeymin@postmarketos.org,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [RESEND v2 4/6] configs: ipq9574: Enable fastboot support
-Message-ID: <aUVhRIWmfRHPnhRV@sumit-xelite>
+Subject: Re: [RESEND v2 5/6] dts: ipq9574-rdp433-u-boot: Enable USB device
+ mode and MMC
+Message-ID: <aUVkGe7PSVF5wble@sumit-xelite>
 References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
- <20251218061557.1999367-5-varadarajan.narayanan@oss.qualcomm.com>
+ <20251218061557.1999367-6-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251218061557.1999367-5-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20251218061557.1999367-6-varadarajan.narayanan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,67 +73,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 18, 2025 at 11:45:55AM +0530, Varadarajan Narayanan wrote:
-> Enable relevant configs like USB PHY, gadget, fastboot,
-> fastboot MMC support etc. to enable fastboot flashing
-> of IPQ9574 based boards.
+On Thu, Dec 18, 2025 at 11:45:56AM +0530, Varadarajan Narayanan wrote:
+> Enable MMC and USB device mode by default to be able to use
+> fastboot for flashing images to IPQ9574 based boards.
 > 
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
->  configs/qcom_ipq9574_mmc_defconfig | 22 +++++++++++++++++++++-
->  1 file changed, 21 insertions(+), 1 deletion(-)
+>  arch/arm/dts/ipq9574-rdp433-u-boot.dtsi | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
-> diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-> index 6592d9de39d..ac534738994 100644
-> --- a/configs/qcom_ipq9574_mmc_defconfig
-> +++ b/configs/qcom_ipq9574_mmc_defconfig
-> @@ -45,7 +45,7 @@ CONFIG_DWC_ETH_QOS=y
->  CONFIG_DWC_ETH_QOS_QCOM=y
->  CONFIG_RGMII=y
->  CONFIG_PHY=y
-> -CONFIG_PHY_QCOM_QMP_UFS=y
+> diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> index 390e2338d65..9f04c0c1077 100644
+> --- a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> +++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> @@ -22,4 +22,10 @@
+>  	 * reset done sdhci_init() times out.
+>  	 */
+>  	resets = <&gcc GCC_SDCC_BCR>;
+> +
+> +	status = "okay";
 
-Any reason to drop this?
+Why it's not enabled in upstream kernel DT?
 
-> +CONFIG_PHY_QCOM_QMP_USB=y
->  CONFIG_PHY_QCOM_QUSB2=y
->  CONFIG_PINCTRL=y
->  CONFIG_PINCONF=y
-> @@ -54,3 +54,23 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_MSM_SERIAL=y
->  CONFIG_MSM_GENI_SERIAL=y
->  CONFIG_SOC_QCOM=y
-> +CONFIG_USB=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_DM_USB_GADGET=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GADGET=y
-> +CONFIG_MISC=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_FUNCTION_FASTBOOT=y
-> +CONFIG_FASTBOOT=y
-> +CONFIG_CMD_FASTBOOT=y
-> +CONFIG_FASTBOOT_BUF_ADDR=y
-> +CONFIG_FASTBOOT_BUF_SIZE=y
-> +CONFIG_FASTBOOT_FLASH=y
-> +CONFIG_FASTBOOT_FLASH_MMC=y
-> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> +};
+> +
+> +&usb_0_dwc3 {
+> +	dr_mode = "peripheral";
 
-> +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
-> +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
-
-You should rather try to update following for fastboot:
-
-$ git grep -nr ARCH_QCOM drivers/usb/gadget/Kconfig
-drivers/usb/gadget/Kconfig:64:  default 0x18d1 if ARCH_QCOM
-drivers/usb/gadget/Kconfig:92:  default 0x4ee0 if ARCH_QCOM
-
-> +CONFIG_FASTBOOT_BUF_ADDR=0x50000000
-> +CONFIG_FASTBOOT_BUF_SIZE=0x4000000
+I suppose then you would rather want "otg" mode in upstream DT which
+will default to "peripheral" in U-Boot. And in Linux you should then be
+able to support both modes.
 
 -Sumit
 
+>  };
 > -- 
 > 2.34.1
 > 
