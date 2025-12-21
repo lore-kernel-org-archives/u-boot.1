@@ -4,74 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD6BE6748D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B71E67496
+	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:58:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9619A8398D;
-	Sun, 21 Dec 2025 02:59:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4652A8389A;
+	Sun, 21 Dec 2025 03:58:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sbDITdBK";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.b="W4PFjD33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C57883979; Sun, 21 Dec 2025 02:59:18 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC4F8388D
- for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 02:59:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (dynamic-046-114-001-171.46.114.pool.telefonica.de
- [46.114.1.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C84A2409D9; 
- Sun, 21 Dec 2025 01:59:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1766282355;
- bh=BEHZikxDvGT9hUgBSWfXziIqKD9+DpDJ8RzWsdOiSNQ=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=sbDITdBKa+/I5cNfEQiiixpmefy66VvSdO3D7GQJPiwGBn1QASciv3Zi4Y2EP14ek
- BIKL9YvjbmgvVdRCkPNVr5uQVP0JaOY/6N/TYcCsJKDhmQlwaelMdIY4C0WgmtbOx9
- jXQlP1cFomFprOavYd0J1qTPSl60iPCAaDe6st/uuCNhc70CPk1szryPvfSVs7RyBq
- vtWDVsz90w5SIKqJjP1xmNuRKy6oEmfKFEqEpaHBsrjoPIPMsoFXe/RU77zBIcnoN7
- ULcYvkYJ5hqzbgBq3qimwahQdVRs+yIXoloReLn4ncN0gL9ssw0MmO9viG2YRWRVPb
- iOO5XJ1TpnvAsL3BxoG6Z3yJai+zZAxDeond5/TuWo5nDNLinwqTvHChZPGzPDvHwO
- NCCyCHnnu75PjFsnFvPyWP/v/JvxubzRDw4DqLtHeTlD4wf4YT3xALX0yGb5C5o9aw
- s4u3zJEbpurLJ3IhiG9dfChEfQesfJZLjOGfMnnR2b6Fk9uY6GTsRaPVgj8aKHDyKl
- LtPqaLx4J8BzSsxZnydOSSoVXs9kaCm2WV6CVBspCrUG4yjmjwpuj2KEPXcDtmLtSw
- i1+Eh+UeQNvPCSy5J+bPsu9WJnWvA+QXG9Kb4+QsBu++S/nKBIdD7y1GBmh4LpZeFQ
- Nw+H3kh4EX/loJVez6dNceo8=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>, Heiko Schocher <hs@nabladev.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 8/8] test: clean up test_trace.py code
-Date: Sun, 21 Dec 2025 02:58:59 +0100
-Message-ID: <20251221015859.738112-9-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
-References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
+ id 1C054838A5; Sun, 21 Dec 2025 03:58:37 +0100 (CET)
+Received: from mail94.out.titan.email (mail94.out.titan.email [54.235.81.176])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AEB178388D
+ for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 03:58:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+Received: from localhost (localhost [127.0.0.1])
+ by smtp-out.flockmail.com (Postfix) with ESMTP id 4dYmDn4X1mz7t7y;
+ Sun, 21 Dec 2025 02:58:33 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; bh=eDNWGROvrP1NJ4J0goNLYv9zud1Ys9CCwCzs2LzoSf0=; 
+ c=relaxed/relaxed; d=ziyao.cc;
+ h=message-id:date:to:cc:references:mime-version:in-reply-to:from:subject:from:to:cc:subject:date:message-id:in-reply-to:references:reply-to;
+ q=dns/txt; s=titan1; t=1766285913; v=1;
+ b=W4PFjD336S1JA7XhkILX/kkDuT41OwvzIngGVKPdj9hyDE7jzPtYs+tgp/9wt0Yr0P+PyulX
+ ZMBQCbWPJat1BKOQBy9ml8nQBsSciIVV9zh4PF5SLfW3S99OAN6dH9ui0oLPE3O/MpXseuk/O9M
+ ImeYu+8EsYSWsVNN2AXHkFz4=
+Received: from pie (unknown [117.171.66.90])
+ by smtp-out.flockmail.com (Postfix) with ESMTPA id 4dYmDk4wyqz7t7T;
+ Sun, 21 Dec 2025 02:58:30 +0000 (UTC)
+Date: Sun, 21 Dec 2025 02:58:21 +0000
+Feedback-ID: :me@ziyao.cc:ziyao.cc:flockmailId
+From: Yao Zi <me@ziyao.cc>
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com,
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] serial: Add Goldfish TTY driver
+Message-ID: <aUdiTV_roNLPUt-y@pie>
+References: <20251218185252.957388-1-visitorckw@gmail.com>
+ <20251218185252.957388-2-visitorckw@gmail.com>
+ <aUTC-8hYsPDVFOly@pie> <aUbOwayeH6nAYmMi@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aUbOwayeH6nAYmMi@google.com>
+X-F-Verdict: SPFVALID
+X-Titan-Src-Out: 1766285913438108146.30087.7268545309552845212@prod-use1-smtp-out1002.
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.4 cv=TPG/S0la c=1 sm=1 tr=0 ts=69476259
+ a=rBp+3XZz9uO5KTvnfbZ58A==:117 a=rBp+3XZz9uO5KTvnfbZ58A==:17
+ a=kj9zAlcOel0A:10 a=MKtGQD3n3ToA:10 a=CEWIc4RMnpUA:10 a=VwQbUJbxAAAA:8
+ a=pGLkceISAAAA:8 a=Op86XdCbNhy7LfjcVHwA:9 a=CjuIK1q_8ugA:10
+ a=3z85VNIBY5UIEeAh_hcH:22 a=NWVoK91CQySWRX1oVYDe:22
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,111 +76,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-* Add module doc string
-* Correct sequence of imports
-* Correct long exceeding 100 characters
-* Remove unused variables
-* Remove module level invocation of check_flamegraph
-* Add encoding to open() calls
+On Sun, Dec 21, 2025 at 12:28:49AM +0800, Kuan-Wei Chiu wrote:
+> Hi Yao,
+> 
+> On Fri, Dec 19, 2025 at 03:14:03AM +0000, Yao Zi wrote:
+> > On Thu, Dec 18, 2025 at 06:52:50PM +0000, Kuan-Wei Chiu wrote:
+> > > Add support for the Google Goldfish TTY serial device. This virtual
+> > > device is commonly used in QEMU virtual machines (such as the m68k
+> > > virt machine) and Android emulators.
+> > > 
+> > > The driver implements basic console output and input polling using the
+> > > Goldfish MMIO interface.
+> > > 
+> > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > > ---
+> > >  MAINTAINERS                      |   6 ++
+> > >  drivers/serial/Kconfig           |   8 +++
+> > >  drivers/serial/Makefile          |   1 +
+> > >  drivers/serial/serial_goldfish.c | 112 +++++++++++++++++++++++++++++++
+> > >  include/goldfish_tty.h           |  18 +++++
+> > >  5 files changed, 145 insertions(+)
+> > >  create mode 100644 drivers/serial/serial_goldfish.c
+> > >  create mode 100644 include/goldfish_tty.h
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- test/py/tests/test_trace.py | 35 +++++++++++++++++------------------
- 1 file changed, 17 insertions(+), 18 deletions(-)
+...
 
-diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
-index bbe6dd7de41..fc881a1b7a1 100644
---- a/test/py/tests/test_trace.py
-+++ b/test/py/tests/test_trace.py
-@@ -2,9 +2,11 @@
- # Copyright 2022 Google LLC
- # Written by Simon Glass <sjg@chromium.org>
- 
-+"""Tests for the function trace facility"""
-+
- import os
--import pytest
- import re
-+import pytest
- 
- import utils
- 
-@@ -183,26 +185,25 @@ def check_funcgraph(ubman, fname, proftool, map_fname, trace_dat):
-     """
- 
-     # Generate the funcgraph format
--    out = utils.run_and_log(
--        ubman, [proftool, '-t', fname, '-o', trace_dat, '-m', map_fname,
--               'dump-ftrace', '-f', 'funcgraph'])
-+    utils.run_and_log(ubman, [proftool, '-t', fname, '-o', trace_dat, '-m',
-+                      map_fname, 'dump-ftrace', '-f', 'funcgraph'])
- 
-     # Check that the trace has what we expect
-     cmd = f'trace-cmd report -l {trace_dat} |head -n 70'
-     out = utils.run_and_log(ubman, ['sh', '-c', cmd])
- 
-     # First look for this:
--    #  u-boot-1     0.....   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
-+    #  u-boot-1     0.....   282.101360: funcgraph_entry:   0.004 us   |    initf_malloc();
-     # ...
--    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |    initf_bootstage() {
--    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |      bootstage_init() {
--    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |        dlmalloc() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |    initf_bootstage() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |      bootstage_init() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |        dlmalloc() {
-     # ...
--    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.001 us   |        }
-+    #  u-boot-1     0.....   282.101375: funcgraph_exit:    0.001 us   |        }
-     # Then look for this:
--    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
-+    #  u-boot-1     0.....   282.101375: funcgraph_exit:    0.006 us   |      }
-     # Then check for this:
--    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    event_init();
-+    #  u-boot-1     0.....   282.101375: funcgraph_entry:   0.000 us   |    event_init();
- 
-     expected_indent = None
-     found_start = False
-@@ -218,7 +219,7 @@ def check_funcgraph(ubman, fname, proftool, map_fname, trace_dat):
-             if found_end:
-                 upto = func
-                 break
--            elif func == 'initf_bootstage() ':
-+            if func == 'initf_bootstage() ':
-                 found_start = True
-                 expected_indent = indent + '  '
-             elif found_start and indent == expected_indent and brace == '}':
-@@ -268,9 +269,8 @@ def check_flamegraph(ubman, fname, proftool, map_fname, trace_fg):
-     """
- 
-     # Generate the flamegraph format
--    out = utils.run_and_log(
--        ubman, [proftool, '-t', fname, '-o', trace_fg, '-m', map_fname,
--               'dump-flamegraph'])
-+    utils.run_and_log(ubman, [proftool, '-t', fname, '-o', trace_fg, '-m', map_fname,
-+                      'dump-flamegraph'])
- 
-     # Generate the timing graph
-     utils.run_and_log(
-@@ -279,16 +279,15 @@ def check_flamegraph(ubman, fname, proftool, map_fname, trace_fg):
- 
-     # Add up all the time spend in initf_dm() and its children
-     total = 0
--    with open(trace_fg, 'r') as fd:
-+    with open(trace_fg, 'r', encoding='utf-8') as fd:
-         for line in fd:
-             line = line.strip()
-             if line.startswith('initf_dm'):
--                func, val = line.split()
-+                _, val = line.split()
-                 count = int(val)
-                 total += count
-     return total
- 
--check_flamegraph
- @pytest.mark.slow
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('trace')
--- 
-2.51.0
+> For reference, here is the planned update for v2:
+> 
+> struct goldfish_tty_priv {
+> 	void __iomem *base;
+> 	u8 rx_buf;
+> };
+> 
+> static int goldfish_serial_getc(struct udevice *dev)
+> {
+> 	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> 	unsigned long base = (unsigned long)priv->base;
+> 	unsigned long paddr;
+> 	u32 count;
+> 
+> 	count = __raw_readl((void *)(base + GOLDFISH_TTY_BYTES_READY));
+> 	if (count == 0)
+> 		return -EAGAIN;
+> 
+> 	paddr = virt_to_phys((void *)&priv->rx_buf);
+> 
+> 	__raw_writel(0, (void *)(base + GOLDFISH_TTY_DATA_PTR_HIGH));
+> 	__raw_writel(paddr, (void *)(base + GOLDFISH_TTY_DATA_PTR));
+> 	__raw_writel(1, (void *)(base + GOLDFISH_TTY_DATA_LEN));
+> 
+> 	__raw_writel(CMD_READ_BUFFER, (void *)(base + GOLDFISH_TTY_CMD));
+> 
+> 	return priv->rx_buf;
+> }
 
+Thanks for the explanation, this version looks fine to me.
+
+> Regards,
+> Kuan-Wei
+
+Regards,
+Yao Zi
+
+> > > +}
+> > 
+> > Best regards,
+> > Yao Zi
+> > 
+> > [1]: https://lore.kernel.org/u-boot/20251212142859.GQ303283@bill-the-cat
