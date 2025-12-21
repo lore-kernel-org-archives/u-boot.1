@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381BAE6748D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 316A6E67495
+	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:00:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F24108397D;
-	Sun, 21 Dec 2025 02:59:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 589BF8389A;
+	Sun, 21 Dec 2025 02:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nKsOdlRK";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tLQ3Z4cy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E451B80325; Sun, 21 Dec 2025 02:59:15 +0100 (CET)
+ id 1C13380325; Sun, 21 Dec 2025 02:59:17 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0849D8388D
- for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 02:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30F6E83935
+ for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 02:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-001-171.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D4689409D7; 
- Sun, 21 Dec 2025 01:59:12 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D4054409D8; 
+ Sun, 21 Dec 2025 01:59:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1766282353;
- bh=9gRJgXqMFAgBBv3FrfQp54D03gF4KSHbuTX+DJAx7pw=;
+ s=20251003; t=1766282354;
+ bh=C+U+L5/E6IIg6VaIrdAHfhqaC2FdMWazFTZ+civiAwU=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=nKsOdlRKc+T9Y+GMz4LefZmbkZgIbjJWXAkoXUrFDbyVx7ASWmF0RwRlbaBISP9Cx
- oj2yz/9haxNem7NTgB8PnfV9gIiut+ZHUTXJpGJCT6jA1eLvV5hmmu+kLbGP0bWnQT
- uuaXAlheGH8v/j3g3KU7craNiyiwX7DG/5htWU7l7/y1iVJSk6fbbVCuKW2dzRGXjx
- X8VRNgPxq/L5oso6YQgwPPrO4VcYVxJgwpxRV3vvqeAkfNvFzrWRf4Uwjt/8IFdACC
- W6lmgWdVjPpxWSqf3MST541k+cg53fxD/zSKAn0bIHJQjzXpQq0JIvvxSFvl8cr8VV
- VoGJYkx3K8opNUX2M/j99vxjszG5oNx6bhxrJb31qh2TWSRIz9Ic2qq9L9Ehe6ltMg
- GsDqvvBN19QOFAsrs7vRXyFz/ncptqNybUPapPG9vCFkIb071bUSHYeM54xHQqYk1L
- AB5F7PAqE30q+6AOzM2DDGoDsmT6iNfemFoD+w+DbNE048Clr1jezRjo5ZxwYm/NYj
- oDZxwQ5r9iR9Xmt7p3pdNfjGENNLx4wU4c+wgnRVljM1XHKk+qAjyLBnMRmUfVZD3Q
- DlrK0erqMg8QhDcSwRSuHIxPgGaW73+vxNW6uA8QyLWnroNNItazRwLSF41orkl9uV
- fjU3I1PIe7/rPzN0MkxDqMhs=
+ b=tLQ3Z4cyPDKJtgRotI1t8NShEjtOHePKRC91FZ4oE7EmAqv9D/b3xzMG3ncXUzEvm
+ QHyGSsH+KWtRuezPmt3QRgOmEi3jdSw8p0Oj14DNWgXD4CsaG293zVYC+EiMN4Vnl1
+ 86wnCnsXtvqJwW1+ndrcnopPYZCX7/jId47OtpJ+ALnJV8qm0pjaFqY8pkJ2pUaNzl
+ MoBp3WACvkg0ULhzcB8fqkFs+q4cFy4RXMa0nxgLDBsua/2RgwPTe2wg68P6N1oD+q
+ nHrKKfXj+uyPCzKmqTXdZvQhHQI7OxnzsViTLSu0T4a0jCiIgE1rsSGiKVAto9GHtd
+ bq+mW9cv/MhilXi4X8YdACeYLQAhwNl7oKGnfYTVav2THLtWULl28SSVI5iujwTP+U
+ iSfwDLC1QKWHm8DeImBxG/lQ1IxEBLomHa7v/8Q1L41GHxnL6S9z/FbhvS6T38Wxgz
+ wYb9MxXUWnsza+akiIGABqomzWBTXMKNzIleKwDo0yoyQdKYRYFr4srEKpMEngvKGE
+ 6RL8h9T1XXY8XYqMWYZJoypyBwZ4ao3H0FLvWVcrVlnLxVJw9iz0u0RzFXsLkWCOCx
+ w0olflYue6g8tGb7MsA36XgLDd1+yO6YjogyDOg0oDeBOKvIdcR2Stow+iy5zbh31p
+ jjn/GHGlfXX/0gvNdHc1mlR8=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -64,9 +64,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 6/8] test: cmd: consider configuration in meminfo test
-Date: Sun, 21 Dec 2025 02:58:57 +0100
-Message-ID: <20251221015859.738112-7-heinrich.schuchardt@canonical.com>
+Subject: [RFC 7/8] test: initf_malloc is only traced with EARLY_TRACE
+Date: Sun, 21 Dec 2025 02:58:58 +0100
+Message-ID: <20251221015859.738112-8-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
 References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
@@ -88,57 +88,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The output of the meminfo command depends on several Kconfig variables.
-These need to be taken into account to provide valid test results.
+Only if early tracing is enable the function initf_malloc can be traced.
+
+Add a configuration check.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/meminfo.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ test/py/tests/test_trace.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/test/cmd/meminfo.c b/test/cmd/meminfo.c
-index 9224b9589f3..d91fa6fcead 100644
---- a/test/cmd/meminfo.c
-+++ b/test/cmd/meminfo.c
-@@ -15,24 +15,34 @@ static int cmd_test_meminfo(struct unit_test_state *uts)
- {
- 	ut_assertok(run_command("meminfo", 0));
- 	ut_assert_nextlinen("DRAM:  ");
-+
-+	if (!IS_ENABLED(CMD_MEMINFO_MAP))
-+		return 0;
-+
- 	ut_assert_nextline_empty();
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index 7f897e4c366..bbe6dd7de41 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -159,7 +159,8 @@ def check_function(ubman, fname, proftool, map_fname, trace_dat):
+             base = timestamp
  
- 	ut_assert_nextline("Region                Base          Size           End           Gap");
- 	ut_assert_nextlinen("-");
+     # Check for some expected functions
+-    assert 'initf_malloc' in vals.keys()
++    if ubman.config.buildconfig.get('config_trace_early'):
++        assert 'initf_malloc' in vals.keys()
+     assert 'initr_watchdog' in vals.keys()
+     assert 'initr_dm' in vals.keys()
  
- 	/* For now we don't worry about checking the values */
--	ut_assert_nextlinen("video");
-+	if (IS_ENABLED(CONFIG_VIDEO))
-+		ut_assert_nextlinen("video");
-+	if (IS_ENABLED(CONFIG_TRACE))
-+		ut_assert_nextlinen("trace");
- 	ut_assert_nextlinen("code");
- 	ut_assert_nextlinen("malloc");
- 	ut_assert_nextlinen("board_info");
- 	ut_assert_nextlinen("global_data");
- 	ut_assert_nextlinen("devicetree");
--	ut_assert_nextlinen("bootstage");
--	ut_assert_nextlinen("bloblist");
-+	if (IS_ENABLED(CONFIG_BOOTSTAGE))
-+		ut_assert_nextlinen("bootstage");
-+	if (IS_ENABLED(CONFIG_BLOBLIST))
-+		ut_assert_nextlinen("bloblist");
- 	ut_assert_nextlinen("stack");
- 
- 	/* we expect at least one lmb line, but don't know how many */
--	ut_assert_nextlinen("lmb");
-+	if (IS_ENABLED(CONFIG_LMB))
-+		ut_assert_nextlinen("lmb");
- 	ut_assert_skip_to_linen("free");
- 
- 	ut_assert_console_end();
 -- 
 2.51.0
 
