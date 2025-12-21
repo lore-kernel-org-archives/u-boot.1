@@ -4,89 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63ADFE668BB
-	for <u-boot@archiver.kernel.org>; Sat, 20 Dec 2025 23:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3CDDE67496
+	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 01:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6EE983935;
-	Sun, 21 Dec 2025 00:43:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CC3A0836A3;
+	Sun, 21 Dec 2025 02:59:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mHEmLZqC";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ovJloY2S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68152803F5; Sat, 20 Dec 2025 17:48:16 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4FEB783759; Sun, 21 Dec 2025 02:59:10 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1EB280050
- for <u-boot@lists.denx.de>; Sat, 20 Dec 2025 17:48:12 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-7b6dd81e2d4so2913486b3a.0
- for <u-boot@lists.denx.de>; Sat, 20 Dec 2025 08:48:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766249291; x=1766854091; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2Zl0i5A1RWRecgeLvL7zLaMhSAddCUhcwLGQbqIIVzo=;
- b=mHEmLZqCHlCur+75P/J4Tej5b/eSShYM7WHWkx8Bk+iFJ60l9x14iTRHYq1VRWLxol
- qfYaQqu35USCvev4gWZ4xfyVZIp6zlPbMmyT1ukBiBvaHvIhdNB2v039hmZu0xoN8Nnc
- 4VaMQIOgJO9p3ZR0vw0g3ymetrnE5zqFSI2QLVfA9+2LCJYbauVFgHMK+L7+Fw4IuF2h
- ge5/elxcCfBZ1F0Mte7ltNi06REygDJQCVESWITJ2xlKulmf5Ip8I2/chHDLqKRgH5mK
- 5M7qhYd/MAgxZRJq0kliP8qtgiOnPUlsp4VNLbguGscojI+W+opL/1keS3GgJpwu1jme
- lneg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766249291; x=1766854091;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2Zl0i5A1RWRecgeLvL7zLaMhSAddCUhcwLGQbqIIVzo=;
- b=sC5GWNabcGjK+caoXnHLIPFbZ/vlLnIDoT9Z6wZjNdMmOwcGA1eoHgY5dyiC6i5ifM
- h39MOayXsxSjgUBsSlp84F1xwiAxZp4V1fy6QwUhEg8bkrctaxXLI09qY8SUHth/Jsy6
- u5kZI2lcc26mDeO8P5hdTmK6CeR3TjvTLM8vybiyPXNZRA5f5r4H+4j5SMvGQZgHyWb1
- IoLGf4uN0UzF/D3GHGHRgfhe/HGZeDWUFW2RgkOilfETWwloB7vlP1eoL/H/DHuYRNmk
- kqU/ZeXKuCyGEGzhEr9zhs+KDB+Lc+hSIAa3L037/EoQ5XrAey+7VuoPITZ1Ix4KxWu0
- Hrig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/YE3KWFcLMG4WeRvGW6iXm5L49nWQre7ESrRvG25oF9TSfTGN861vVwyoGT3uk0w3DhYa6uw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywn9+uGKzY3lqALbup3Aed5lVJ/+byl6x5am04MASmbWhPcVRke
- nCMSfSybFeCnBcuapgNtDtSkS/7voBWMWpQY0rUx5XB41hestig6M+CvB7BuzQ==
-X-Gm-Gg: AY/fxX5BfXXZvbhIvpxYHm0Iq9dcQG7mrbmI7Sa90BSH5t2VVev/fDiJZpYdCsXC2kt
- AJj6PSRun4wrmQU/nFUU5Qd9o647WBQlWHuI0+xysJzs5cnYUxebI16cO+inpEPs4/r6dG6iUsE
- azcXAKqFCC89OMvEfAcrGeHVZHtpvjIklGAcDYpkHoTBoFBJdcQYhmDIEwNeAEn4nXIlMaMz4ZK
- AXI6lm4KpUhYhiY1yXerGknMDpK+cqMclInFo9WERqqlbTm84nWuHHD2/zvXUNIitiYs2gMeoQC
- f28jgmefg1qORdnrWm6kbrVT6oprIavL7LXZW5tENUdtB6FS0G7diJcOHFJyHLpf5Yhg2BnLQIA
- x8PEWs+JgehYUzZImu7ROeYNFogvaDI6LRlzG+NxAHts/XAoPXIhEYrYp3O46PJIt9TMVrHdaCR
- QpdgNE2wpxZVrziPB1v3R5dO8=
-X-Google-Smtp-Source: AGHT+IF+IcbZQiw1V2g7Pc6TLO9cae7kRo/8dTVFbNbWmx9A3Vb35X4wCMbqoAaXrYhKMfHaB6I6Bw==
-X-Received: by 2002:a05:6a00:e12:b0:7f6:2b06:7134 with SMTP id
- d2e1a72fcca58-7ff66175a58mr5902843b3a.32.1766249291002; 
- Sat, 20 Dec 2025 08:48:11 -0800 (PST)
-Received: from google.com ([2402:7500:499:de94:15e:4c73:9b28:3ab7])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7e588a30sm5669977b3a.55.2025.12.20.08.48.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Dec 2025 08:48:10 -0800 (PST)
-Date: Sun, 21 Dec 2025 00:48:07 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 3B0CC80325
+ for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 02:59:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (dynamic-046-114-001-171.46.114.pool.telefonica.de
+ [46.114.1.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D88F9409C0; 
+ Sun, 21 Dec 2025 01:59:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1766282347;
+ bh=TUuUNUX/oJErM/phPLhnvq3XZv1PjGqgtD2KJeXgdZQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ovJloY2S/XzQV7kqzB8K0ac5Pn+yA7ZGxFKENNdiOiTjAftu0vCR5uvJXTJd6yHW7
+ vvYTYIsywBfh/hnWkDtbOdw9FPq5VxFmbQjNzHUyKn4KiD/oz7FwtciTkzllbHMwXf
+ Ja9UF4X5jOeyx6JhP13s0u9ko/B6jf+X3X8bp2E6eo0AuvqR7AUAEWVl1ls7rIDWNY
+ RDG03PtHctW9xm9JH4Hit6qzJNHBs4kvNKPRPkW/c44WBMsjbfMXntNzxJm2iC4ibk
+ N4JafKoCn03TDzxpzueC6MenOGC9pVC/8LklJoiTuP1I5Cxtd6Y+FWrju213iGlVA9
+ VFq7Vz5zORMPJv74eT0TzkYNYnvwMOlOES4S9S8nKOqlk1eoyc6pxVLufzBtb3JOYW
+ baVVV9zLT1inVSu+ukmpeFWNVuRpq/SiKlxHquXSsFkI4w0ZlSjBqP3vYiKyA+msXK
+ gp81FAShPmsiw+/pkct0BwTqsL583rzWcsQh7di6qhj2cl+LljZ183WY8I/2svxm80
+ bngZSInTqTQLn2SPYr2apgtjekM9LId11p5kY+GvC3UFgdVxlLV1B1GfGMa1QzddBn
+ KnxDDNwICTGDksjvjk+fB7cFzEayctoD4yqZf9gxuZ8u2GcJmZkXintGH96SNxiDmA
+ gCYWC9NV6JEtLYbuZJq0kqbg=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, jserv@ccns.ncku.edu.tw,
- eleanor15x@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] board: Add QEMU m68k virt board support
-Message-ID: <aUbTR-3HyU9-CONS@google.com>
-References: <20251218185252.957388-1-visitorckw@gmail.com>
- <20251218185252.957388-4-visitorckw@gmail.com>
- <20251218190415.GN303283@bill-the-cat>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Sean Edmond <seanedmond@microsoft.com>, Heiko Schocher <hs@nabladev.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [RFC 0/8] trace: improve support
+Date: Sun, 21 Dec 2025 02:58:51 +0100
+Message-ID: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251218190415.GN303283@bill-the-cat>
-X-Mailman-Approved-At: Sun, 21 Dec 2025 00:43:30 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,89 +85,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+In the current state the trace functionality is not usable.
+With CONFIG_TRACE=y not even QEMU can boot.
 
-On Thu, Dec 18, 2025 at 01:04:15PM -0600, Tom Rini wrote:
-> On Thu, Dec 18, 2025 at 06:52:52PM +0000, Kuan-Wei Chiu wrote:
-> 
-> > Add support for the QEMU 'virt' machine on the m68k architecture. This
-> > board emulates a generic machine based on the Motorola 68040 CPU
-> > equipped with Goldfish virtual peripherals.
-> > 
-> > Introduce the necessary board configuration and initialization
-> > infrastructure. The implementation includes logic to parse the QEMU
-> > bootinfo interface, enabling dynamic detection of system RAM size to
-> > adapt to the virtual machine's configuration.
-> > 
-> > Enable the Goldfish TTY driver to provide a serial console, which
-> > facilitates interaction when running QEMU with the -nographic option.
-> > Additionally, include comprehensive documentation covering build
-> > instructions and usage examples to guide users in deploying U-Boot
-> > within the virtualization environment.
-> > 
-> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> [snip]
-> > diff --git a/board/emulation/qemu-m68k/MAINTAINERS b/board/emulation/qemu-m68k/MAINTAINERS
-> > new file mode 100644
-> > index 00000000000..c2f4cc40a56
-> > --- /dev/null
-> > +++ b/board/emulation/qemu-m68k/MAINTAINERS
-> > @@ -0,0 +1,10 @@
-> > +QEMU M68K VIRT BOARD
-> > +M:  Kuan-Wei Chiu <visitorckw@gmail.com>
-> > +S:  Maintained
-> > +F:  board/emulation/qemu-m68k/
-> > +F:  board/emulation/common/
-> > +F:  include/configs/qemu-m68k.h
-> > +F:  configs/qemu-m68k_defconfig
-> > +F:  arch/m68k/cpu/m68040/
-> > +F:  arch/m68k/include/asm/bootinfo.h
-> > +F:  doc/board/emulation/qemu-m68k.rst
-> 
-> There was Kconfig spacing issues here as well, but also MAINTAINERS
-> files are usually tab not spaces. But if get_maintainer.pl is fine, OK.
+With this series CONFIG_TRACE becomes usable on
+qemu-riscv64_smode_defconfig.
 
-Will convert them to tabs in v2.
+It all starts with correcting the handling of recursive calls
+to the measuring functions at the entry and exit points.
 
-> 
-> > diff --git a/configs/qemu-m68k_defconfig b/configs/qemu-m68k_defconfig
-> > new file mode 100644
-> > index 00000000000..765ed9b7424
-> > --- /dev/null
-> > +++ b/configs/qemu-m68k_defconfig
-> > @@ -0,0 +1,17 @@
-> > +CONFIG_M68K=y
-> > +CONFIG_TARGET_QEMU_M68K=y
-> > +CONFIG_TEXT_BASE=0x00000000
-> > +CONFIG_SYS_LOAD_ADDR=0x00000000
-> > +CONFIG_SYS_MONITOR_LEN=262144
-> > +CONFIG_SYS_BOOTM_LEN=0x1000000
-> > +CONFIG_SYS_MALLOC_LEN=0x20000
-> > +# CONFIG_DISPLAY_BOARDINFO is not set
-> > +CONFIG_BAUDRATE=115200
-> > +
-> > +# CONFIG_OF_CONTROL is not set
-> 
-> This wasn't made with "make savedefconfig" and needs to be, please
-> generate it that way.
+When a function is entered we record the time and reading the
+timer leads to a recursion which should not switch of recording
+traces but just be ignored.
 
-Will rectify that in v2.
+The meminfo patches are in the series because the output
+of the meminfo command depends on CONFIG_TRACE.
 
-> 
-> > diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
-> > new file mode 100644
-> > index 00000000000..19898e17cfc
-> > --- /dev/null
-> > +++ b/doc/board/emulation/qemu-m68k.rst
-> > @@ -0,0 +1,38 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +.. Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-> 
-> Docs are good, thank you. But it needs to update the index.rst file too
-> to be included and also not trigger CI failure when building docs.
+Also the Pythontrace test does not consider that output depends on
+configuration.
 
-Sorry for missing that. I will fix it in v2 and ensure the docs build
-successfully before respinning.
+There are still issues with qemu-x86_64_defconfig when trying to
+trace. But I would like to collect early feedback.
 
-Regards,
-Kuan-Wei
+Thanks to Patrick Rudolph for pointing to his issues with tracing.
+
+Heinrich Schuchardt (8):
+  trace: correct handling of recursive call
+  trace: initr_trace must succeed initr_dm
+  test: test_trace: remove invalid assert
+  trace: increase TRACE_CALL_DEPTH_LIMIT
+  cmd/meminfo: display of addresses above 4 GiB
+  test: cmd: consider configuration in meminfo test
+  test: initf_malloc is only traced with EARLY_TRACE
+  test: clean up test_trace.py code
+
+ cmd/meminfo.c               |  8 ++---
+ common/board_r.c            |  2 +-
+ lib/Kconfig                 |  2 +-
+ lib/trace.c                 | 59 +++++++++++++++++--------------------
+ test/cmd/meminfo.c          | 20 +++++++++----
+ test/py/tests/test_trace.py | 52 +++++++++++++-------------------
+ 6 files changed, 68 insertions(+), 75 deletions(-)
+
+-- 
+2.51.0
+
