@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 316A6E67495
-	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD6BE6748D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Dec 2025 02:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 589BF8389A;
-	Sun, 21 Dec 2025 02:59:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9619A8398D;
+	Sun, 21 Dec 2025 02:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tLQ3Z4cy";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sbDITdBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C13380325; Sun, 21 Dec 2025 02:59:17 +0100 (CET)
+ id 9C57883979; Sun, 21 Dec 2025 02:59:18 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30F6E83935
+ by phobos.denx.de (Postfix) with ESMTPS id EBC4F8388D
  for <u-boot@lists.denx.de>; Sun, 21 Dec 2025 02:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-001-171.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D4054409D8; 
- Sun, 21 Dec 2025 01:59:13 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C84A2409D9; 
+ Sun, 21 Dec 2025 01:59:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1766282354;
- bh=C+U+L5/E6IIg6VaIrdAHfhqaC2FdMWazFTZ+civiAwU=;
+ s=20251003; t=1766282355;
+ bh=BEHZikxDvGT9hUgBSWfXziIqKD9+DpDJ8RzWsdOiSNQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=tLQ3Z4cyPDKJtgRotI1t8NShEjtOHePKRC91FZ4oE7EmAqv9D/b3xzMG3ncXUzEvm
- QHyGSsH+KWtRuezPmt3QRgOmEi3jdSw8p0Oj14DNWgXD4CsaG293zVYC+EiMN4Vnl1
- 86wnCnsXtvqJwW1+ndrcnopPYZCX7/jId47OtpJ+ALnJV8qm0pjaFqY8pkJ2pUaNzl
- MoBp3WACvkg0ULhzcB8fqkFs+q4cFy4RXMa0nxgLDBsua/2RgwPTe2wg68P6N1oD+q
- nHrKKfXj+uyPCzKmqTXdZvQhHQI7OxnzsViTLSu0T4a0jCiIgE1rsSGiKVAto9GHtd
- bq+mW9cv/MhilXi4X8YdACeYLQAhwNl7oKGnfYTVav2THLtWULl28SSVI5iujwTP+U
- iSfwDLC1QKWHm8DeImBxG/lQ1IxEBLomHa7v/8Q1L41GHxnL6S9z/FbhvS6T38Wxgz
- wYb9MxXUWnsza+akiIGABqomzWBTXMKNzIleKwDo0yoyQdKYRYFr4srEKpMEngvKGE
- 6RL8h9T1XXY8XYqMWYZJoypyBwZ4ao3H0FLvWVcrVlnLxVJw9iz0u0RzFXsLkWCOCx
- w0olflYue6g8tGb7MsA36XgLDd1+yO6YjogyDOg0oDeBOKvIdcR2Stow+iy5zbh31p
- jjn/GHGlfXX/0gvNdHc1mlR8=
+ b=sbDITdBKa+/I5cNfEQiiixpmefy66VvSdO3D7GQJPiwGBn1QASciv3Zi4Y2EP14ek
+ BIKL9YvjbmgvVdRCkPNVr5uQVP0JaOY/6N/TYcCsJKDhmQlwaelMdIY4C0WgmtbOx9
+ jXQlP1cFomFprOavYd0J1qTPSl60iPCAaDe6st/uuCNhc70CPk1szryPvfSVs7RyBq
+ vtWDVsz90w5SIKqJjP1xmNuRKy6oEmfKFEqEpaHBsrjoPIPMsoFXe/RU77zBIcnoN7
+ ULcYvkYJ5hqzbgBq3qimwahQdVRs+yIXoloReLn4ncN0gL9ssw0MmO9viG2YRWRVPb
+ iOO5XJ1TpnvAsL3BxoG6Z3yJai+zZAxDeond5/TuWo5nDNLinwqTvHChZPGzPDvHwO
+ NCCyCHnnu75PjFsnFvPyWP/v/JvxubzRDw4DqLtHeTlD4wf4YT3xALX0yGb5C5o9aw
+ s4u3zJEbpurLJ3IhiG9dfChEfQesfJZLjOGfMnnR2b6Fk9uY6GTsRaPVgj8aKHDyKl
+ LtPqaLx4J8BzSsxZnydOSSoVXs9kaCm2WV6CVBspCrUG4yjmjwpuj2KEPXcDtmLtSw
+ i1+Eh+UeQNvPCSy5J+bPsu9WJnWvA+QXG9Kb4+QsBu++S/nKBIdD7y1GBmh4LpZeFQ
+ Nw+H3kh4EX/loJVez6dNceo8=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -64,9 +64,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 7/8] test: initf_malloc is only traced with EARLY_TRACE
-Date: Sun, 21 Dec 2025 02:58:58 +0100
-Message-ID: <20251221015859.738112-8-heinrich.schuchardt@canonical.com>
+Subject: [RFC 8/8] test: clean up test_trace.py code
+Date: Sun, 21 Dec 2025 02:58:59 +0100
+Message-ID: <20251221015859.738112-9-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
 References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
@@ -88,29 +88,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Only if early tracing is enable the function initf_malloc can be traced.
-
-Add a configuration check.
+* Add module doc string
+* Correct sequence of imports
+* Correct long exceeding 100 characters
+* Remove unused variables
+* Remove module level invocation of check_flamegraph
+* Add encoding to open() calls
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/py/tests/test_trace.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ test/py/tests/test_trace.py | 35 +++++++++++++++++------------------
+ 1 file changed, 17 insertions(+), 18 deletions(-)
 
 diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
-index 7f897e4c366..bbe6dd7de41 100644
+index bbe6dd7de41..fc881a1b7a1 100644
 --- a/test/py/tests/test_trace.py
 +++ b/test/py/tests/test_trace.py
-@@ -159,7 +159,8 @@ def check_function(ubman, fname, proftool, map_fname, trace_dat):
-             base = timestamp
+@@ -2,9 +2,11 @@
+ # Copyright 2022 Google LLC
+ # Written by Simon Glass <sjg@chromium.org>
  
-     # Check for some expected functions
--    assert 'initf_malloc' in vals.keys()
-+    if ubman.config.buildconfig.get('config_trace_early'):
-+        assert 'initf_malloc' in vals.keys()
-     assert 'initr_watchdog' in vals.keys()
-     assert 'initr_dm' in vals.keys()
++"""Tests for the function trace facility"""
++
+ import os
+-import pytest
+ import re
++import pytest
  
+ import utils
+ 
+@@ -183,26 +185,25 @@ def check_funcgraph(ubman, fname, proftool, map_fname, trace_dat):
+     """
+ 
+     # Generate the funcgraph format
+-    out = utils.run_and_log(
+-        ubman, [proftool, '-t', fname, '-o', trace_dat, '-m', map_fname,
+-               'dump-ftrace', '-f', 'funcgraph'])
++    utils.run_and_log(ubman, [proftool, '-t', fname, '-o', trace_dat, '-m',
++                      map_fname, 'dump-ftrace', '-f', 'funcgraph'])
+ 
+     # Check that the trace has what we expect
+     cmd = f'trace-cmd report -l {trace_dat} |head -n 70'
+     out = utils.run_and_log(ubman, ['sh', '-c', cmd])
+ 
+     # First look for this:
+-    #  u-boot-1     0.....   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
++    #  u-boot-1     0.....   282.101360: funcgraph_entry:   0.004 us   |    initf_malloc();
+     # ...
+-    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |    initf_bootstage() {
+-    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |      bootstage_init() {
+-    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |        dlmalloc() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |    initf_bootstage() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |      bootstage_init() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:              |        dlmalloc() {
+     # ...
+-    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.001 us   |        }
++    #  u-boot-1     0.....   282.101375: funcgraph_exit:    0.001 us   |        }
+     # Then look for this:
+-    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
++    #  u-boot-1     0.....   282.101375: funcgraph_exit:    0.006 us   |      }
+     # Then check for this:
+-    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    event_init();
++    #  u-boot-1     0.....   282.101375: funcgraph_entry:   0.000 us   |    event_init();
+ 
+     expected_indent = None
+     found_start = False
+@@ -218,7 +219,7 @@ def check_funcgraph(ubman, fname, proftool, map_fname, trace_dat):
+             if found_end:
+                 upto = func
+                 break
+-            elif func == 'initf_bootstage() ':
++            if func == 'initf_bootstage() ':
+                 found_start = True
+                 expected_indent = indent + '  '
+             elif found_start and indent == expected_indent and brace == '}':
+@@ -268,9 +269,8 @@ def check_flamegraph(ubman, fname, proftool, map_fname, trace_fg):
+     """
+ 
+     # Generate the flamegraph format
+-    out = utils.run_and_log(
+-        ubman, [proftool, '-t', fname, '-o', trace_fg, '-m', map_fname,
+-               'dump-flamegraph'])
++    utils.run_and_log(ubman, [proftool, '-t', fname, '-o', trace_fg, '-m', map_fname,
++                      'dump-flamegraph'])
+ 
+     # Generate the timing graph
+     utils.run_and_log(
+@@ -279,16 +279,15 @@ def check_flamegraph(ubman, fname, proftool, map_fname, trace_fg):
+ 
+     # Add up all the time spend in initf_dm() and its children
+     total = 0
+-    with open(trace_fg, 'r') as fd:
++    with open(trace_fg, 'r', encoding='utf-8') as fd:
+         for line in fd:
+             line = line.strip()
+             if line.startswith('initf_dm'):
+-                func, val = line.split()
++                _, val = line.split()
+                 count = int(val)
+                 total += count
+     return total
+ 
+-check_flamegraph
+ @pytest.mark.slow
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('trace')
 -- 
 2.51.0
 
