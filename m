@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50633E674B2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 13:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50483E674B5
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 13:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0D583E88;
+	by phobos.denx.de (Postfix) with ESMTP id DCF5B83EDF;
 	Mon, 22 Dec 2025 14:55:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kImsY2fp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FAKWSG8K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 553F683E70; Mon, 22 Dec 2025 10:04:01 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 8715683C94; Mon, 22 Dec 2025 10:22:04 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14E7D83B99
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 10:03:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 231A583B99
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 10:22:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2a0d67f1877so46751315ad.2
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 01:03:59 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2a0bb2f093aso38612425ad.3
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 01:22:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766394237; x=1766999037; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1766395319; x=1767000119; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=M+vTvYgXElUumICRwAasux8z3olpSz5DRn0/4qVoVBQ=;
- b=kImsY2fpEpJZdOz/o774yq1eUcLDBh8DA4IioVC1Id3Hy0Xd1RBJ8CANveDCiouXUY
- 7SWYm5tR4SVmzWGMosGKkWUVTzZcRb5FEUHJaWi5a6+zgkkIyxZ8922c4xoqNxgNIzE3
- qTY4vj09cRJ/SBDO3xjxeZfDJTETSRoHrtzCkzex3jVidGjkB/QvuAHSq/q+AYhmQ4j3
- y2WU3KNP9Xd6WcbN/S6qehQJVtD6T0M2brnMr4mNd6uaWuY0JGqa7GBFkWvwlk98vyB7
- yewHRn01GG428b3zZy+m1oy6IKNTuZsTiAvYsuBhLvxfo/QmGOx47lP+rgpS+ga9IZuG
- bEmA==
+ bh=jsBuU0mgFol719I2sVhbLZ37dg4dSR+6XzgF410nLm0=;
+ b=FAKWSG8K7kPbJZB44u1v3N9vtRSa4KuHdHwJ+RRlMqE4/MjIbuPl9Y7Fvxw6b8h5B1
+ hHv5CeoQCy+grQEVAl4G44ScaPrRtEORiKpl/Q5UZoO127C5GBXqY6IfUpuR2PWtr0Hi
+ 7BiwTOAT9XRtndWkgjGkLsZ7BmOOagp7p9IWeuCU5UlbQzKXPWqh1kNZVUoiZwKUryrm
+ lBLaM6Z4tqJf8yhu0HS28vFnWkFOKv95yQvL8f1YUIsmSRSsEFaIbU2aJobdfv5K/1jX
+ peOenskz2R/NRIMZUbBd/6wtsf9F9Py/AyBUJXs+jjPWsFrHAYP10tn/N0WaF5oMwUvT
+ xnRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766394237; x=1766999037;
+ d=1e100.net; s=20230601; t=1766395319; x=1767000119;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M+vTvYgXElUumICRwAasux8z3olpSz5DRn0/4qVoVBQ=;
- b=um5a38d70io2Cu4beEe8ip2zw0EdncLI+sHwWT3f+qf/yiqLB4cgMu+JhP+TNIasnX
- aj/9vPbJvffMSvhKK/LjuXb6p4ISQWCwB92ClaQarbl3vuEXbd34vcZ/ZUvpmBHlAI0S
- rOb8zOSSHi3FeZv3FZMhOomb4uyLSYGxmrImMgKGg8UbU64yQSzqMApUxPmtJuYBcDER
- Mz0Nn3vZ68G3o8MFN4qVeL9E/m9cdQFt6rYYI3+5IXuADIZnBTgAUKdl8SX0Sh1vVOTd
- UDbSKtOKn/2h+qY+MiIhiRfanuiVwrLs5TsOd76Ko4LYzdFr3D1dbjqP0oodf0mYZHfp
- GG8g==
+ bh=jsBuU0mgFol719I2sVhbLZ37dg4dSR+6XzgF410nLm0=;
+ b=FJsn5eYfiJsywukXqoGSIWWkj2VNYRdofkCXBLHzJ3UBdrCIuYA+K9RLthIGiyRFxJ
+ 1qsIWNqFdmQciKz038VfC63BzFELVqCZiSN6CuIrxxUsnj5k2ZmkmXndMVxhkp3RCOGi
+ AHrgx/AEV+bii8LPjl4Bd5dljFaRomuXkSiBAaJPb2gL/jF/TP+yIdkqTxbD020BYg/Y
+ x9t/MdJ0JS9j2LFLeo5Mz3xelXiwsuPoZm4BaUl8ORjA5tNTpwta3Qox0MGEkGNPH3Il
+ xAi2mQGIamhcnGMAbg7idrcV16r6HqR5vb4sEKkwgaMUyoTlRriERTlxrOu4AZDy7fEF
+ kScw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrPzOhtFBytu3BN9Mv10as6+T0bfw+Yiuq1YUMTg6o4Mevg/URq9WFzFFSwRywgIEx3RYcaxY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgoSuHSk86RnnXpbOyA9/1fVeWmfiYGFQ6NkK7aL/EqugbpQ3s
- 2VFDUbGjYz2IblN41z11ZtIbgxuSzoevS7TkqPfxiBCFcKmdweu8OWxalqKBEw==
-X-Gm-Gg: AY/fxX7rvAAo92b81FTKxGUW5dmCFXIQH2LoxR6UdLdWCSYMvo1qzwL54Bp+6pYeS6R
- vFg8FxVvd4sYmakMAhQVq2Z9sLoGEHFsR/9NWl/zPi+IpreP+qDIC6fbsNapWoc0j5+ipGIkH4A
- wrFX8RIkbvtmpwX2ofDG7MKu6OpeOHH8siHXB/oRzs/ASfoyPD/Khg+ruzfMzs402hUxLi+26Q4
- 3nN1Kl22KsGuUU7QEA3sCjkhPf7WSmIFkT3ig1pzULpd92i5MT3nWdimknDvzv647Is51EkSuwA
- WIIFFWPxtIQKV37JkxOsJqJAO1RaavhHMA+CMkDcH3ODHo+ujvVr12uzCy2zZdl62L6soAj79/s
- SRgvFL4XfZHzWEcok/tGaaX1XjU8k+DMgxHRx91QKJFYHtnNmmsU4mEFLVWe6yO0+k2NHZ8wxRE
- zXbQlzCn/Wn1ypG0xhwKI=
-X-Google-Smtp-Source: AGHT+IG5/fkHcaTwIE7lyAlZ3aalWSel7LIIh6Rk6G5HIyDIT/K9vsyRhVKHqkVysXYXFwwRatLs3g==
-X-Received: by 2002:a17:902:ecd2:b0:2a2:f2a5:4136 with SMTP id
- d9443c01a7336-2a2f2a54320mr102646705ad.22.1766394237490; 
- Mon, 22 Dec 2025 01:03:57 -0800 (PST)
+ AJvYcCW2nWsjpy7w5QBTiOb34hF6XIUgLHacfpWrWWnL2RGE3H8oFICfP6Q+/PBmOQ1zjAjBXO4+exg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1aFgcL7QZt6smeEpKD+Oc72rt3wTG7p/AwCaL8Ftzau7wVp6S
+ 92kXhEXTvTclPfl7qgis16HjBpOC8e/X4LdW2aAjkZsLQq3pm0LNnlCZ
+X-Gm-Gg: AY/fxX5oknoN3ids2WN0uuM3sZUB4gyIEsIMZysPLoKbTg9HaaS8dlziqih7dG03xTL
+ tFbYIfUMwWzO+zmlkDV1b/f79+70U3fvafC0kT9YWeNSO/UnBB8KyL6fznyof2g18/gVeXmUVrG
+ 6KHo6B6Cv3YPnU+lpPZslW9CwADC+4jQttV850GfmViboxWbAlpB17CZD6td3fJmChgg8/PBYvb
+ FGuyqS+rd5Ty8c5+ATLDsMtipUJlJa0dnJ5Avmxu+4EANV0kpKx6Uv7UQF8aJ5lwaKoNyX+A3+L
+ VBqEqC8Q5smgK+9CSvDsUi+hBHZTROlE3hNbGC8EfVY6WEHbJbbb/lSFjZBcjUNREZOOcU0FJLX
+ nPzbKmYQBhQ5RzoXdckvaAVag9wEKn6mdzNs7ToZf6pGPMb0G3u7YwXr2SjX0GIOGJNxBLGNgkz
+ MCO1A3BcsgkDg7seg9F7A=
+X-Google-Smtp-Source: AGHT+IFUMP995VeLnZoBaxDT5GXw3L5Rp0RiIVz2eDNMOJ/clKj4c0IFxL08xmgVZVMq1+I/86vBzQ==
+X-Received: by 2002:a17:903:2a8b:b0:29d:975a:2123 with SMTP id
+ d9443c01a7336-2a2f2a4a33dmr83191555ad.60.1766395319405; 
+ Mon, 22 Dec 2025 01:21:59 -0800 (PST)
 Received: from google.com ([2401:fa00:95:201:c4df:6c40:67fe:ebe3])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2f3d4d869sm91913305ad.53.2025.12.22.01.03.55
+ d9443c01a7336-2a2f3c666d5sm90520905ad.21.2025.12.22.01.21.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 01:03:57 -0800 (PST)
-Date: Mon, 22 Dec 2025 17:03:54 +0800
+ Mon, 22 Dec 2025 01:21:59 -0800 (PST)
+Date: Mon, 22 Dec 2025 17:21:56 +0800
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: Daniel Palmer <daniel@0x0f.com>
 Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com,
  jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] board: Add QEMU m68k virt board support
-Message-ID: <aUkJenUcKCUMgzCS@google.com>
+Subject: Re: [PATCH 2/3] m68k: Add support for M68040 CPU
+Message-ID: <aUkNtKvooP4Ivblz@google.com>
 References: <20251218185252.957388-1-visitorckw@gmail.com>
- <20251218185252.957388-4-visitorckw@gmail.com>
- <CAFr9PXk5x5RczuE95A64EVu+i_DwWd2hUdU2Wv1dUrwfppJwtA@mail.gmail.com>
+ <20251218185252.957388-3-visitorckw@gmail.com>
+ <CAFr9PXmwBpQW60jZDFf+iqCaSbW4z25=OMN5XXBkBMH5AW-t_A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFr9PXk5x5RczuE95A64EVu+i_DwWd2hUdU2Wv1dUrwfppJwtA@mail.gmail.com>
+In-Reply-To: <CAFr9PXmwBpQW60jZDFf+iqCaSbW4z25=OMN5XXBkBMH5AW-t_A@mail.gmail.com>
 X-Mailman-Approved-At: Mon, 22 Dec 2025 14:55:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,50 +105,46 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-On Sun, Dec 21, 2025 at 01:37:24PM +0900, Daniel Palmer wrote:
-> Hi Kuan-Wei,
+On Sun, Dec 21, 2025 at 01:53:40PM +0900, Daniel Palmer wrote:
+> Hi Kuan-Wei
 > 
 > On Fri, 19 Dec 2025 at 04:06, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 > >
-> > Add support for the QEMU 'virt' machine on the m68k architecture. This
-> > board emulates a generic machine based on the Motorola 68040 CPU
-> > equipped with Goldfish virtual peripherals.
+> > Add support for the Motorola 68040 architecture. Currently, m68k
+> > support in U-Boot is primarily focused on ColdFire (MCF5xxx) variants.
+> > Introduce the necessary infrastructure to support the classic M680x0
+> > series, specifically targeting the M68040 as emulated by QEMU.
 > 
-> Since I already have this setup working and able to boot linux I will
-> add some input:
-> - The virt machine can use any supported CPU type, even 000 without
-> mmu, you should really handle that.
+> For all of this: It really needs to be split into the bits for all
+> classic 68K and then the supplemental bits for 040 (basically the
+> cache stuff that you only have stubs for).
+> That way if your parts get merged I can rework my support for 000, 030
+> etc on top of that.
 
-You're right. Regarding the support for other 680x0 CPUs, would you
-prefer to see them included in v2, or would you think that it is better
-to integrate them incrementally after this baseline series is merged?
+Yeah, proper split is definitely needed for the long term.
 
-> - m68k linux for mmu machines uses "bootinfo" that is a structure
-> after the kernel image that the bootloader prepares so linux can work
-> out what CPU etc is present. QEMU does this as well but it will be
-> after the u-boot image now, so to boot linux you must save it before
-> it gets destroyed and when the kernel is loaded copy it to after the
-> kernel. I use ELF images to boot linux. I have a hack in bootelf to
-> put the bootinfo in place just before jumping to the entry point.
-> - Since QEMU gives you the bootinfo and you need to parse it to work
-> out how much to save either way you should use it to detect the
-> selected CPU in u-boot. If the code is built for 000 it will run on
-> anything and just needs to handle the differences in the caches. In my
-> setup I fixup the cpu compatible string in u-boot's devicetree and
-> then use that to work out what cache function to call for the current
-> CPU.
+Here is my plan for v2 to address this. Could you let me know if this
+structure matches what you have in mind?
 
-Currently, I only parse the bootinfo to retrieve the RAM size and
-haven't looked into the specific requirements for booting Linux yet.
+1. Create a common directory for Classic m68k (non-ColdFire):
+   Possible path: arch/m68k/cpu/classic/
 
-If full Linux boot support isn't a blocker for this initial series,
-could you advise on any specific structural adjustments I should make
-now to facilitate that integration later?
+   I plan to move the following generic parts there:
+   - start.S: The entry point, basic stack setup, and exception vector
+     definitions (likely shared across 000-060).
+   - bootinfo.h: Since this is standard for m68k Linux.
 
-> 
-> Glad to see I'm not alone in messing around with this. :)
+2. Keep 040-specific code in arch/m68k/cpu/classic/m68040/:
+   - cpu.c: Containing 040-specific cache handling (or stubs for
+     now) and specific initialization.
 
-Same here! Glad to know I'm not the only one. :)
+3. Refactor arch/m68k/lib/Makefile:
+   Instead of using ifndef CONFIG_M68040 to exclude ColdFire files, I
+   should probably restructure it to clearly distinguish between
+   "ColdFire common" and "Classic m68k common" libraries.
+
+Does this separation align with your requirements for layering 000/030
+support on top of it later?
 
 Regards,
 Kuan-Wei
