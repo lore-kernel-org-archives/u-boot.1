@@ -4,89 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 884C0E677EF
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 16:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63490E67801
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 16:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD1CC83B99;
-	Mon, 22 Dec 2025 17:20:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CF1083B99;
+	Mon, 22 Dec 2025 17:56:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rKhl5p+q";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="e1FAwwQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D8E683D1A; Mon, 22 Dec 2025 17:20:32 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 6C5F983C28; Mon, 22 Dec 2025 17:06:23 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62E6183B95
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 17:20:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1D0683B95
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 17:06:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3ec5df386acso3035228fac.1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 08:20:30 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-64b4b35c812so5578098a12.0
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 08:06:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766420429; x=1767025229; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U9RvC4nlHs12D9i171XV9Mnuvk921hcXcV/MRhS3ekc=;
- b=rKhl5p+qvnFUz+9Dik13iAPITYkt/iJWH7623RL2LFA5TOxJoxK2MireAEq2mmWU2c
- fYTejgGnRqoZQSmhE3pz8u48AyUOZYlR5pM9EnRaZnlWDBYwGffoNVqjiwmH5ARb89+x
- DkqEe3/lKiekoqEqXhzxKBs8NqrmlWembtKV8=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766419579; x=1767024379;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fu91PANJrExnx4W8OoUXjbqOJIg20QTTnT+bGZ0D6vY=;
+ b=e1FAwwQjq4bD7G7ziPzIzsP1zlQh1XjvhsJSE+UMxe+T0aswLQaMpDwC6a2/owb8HP
+ 0C71KSGw/0zYMRH7ZTnpGT5jndD7fHjFXLjirBe6gt7LCXkLLoaRQ1JV8jn1YLo+s49a
+ wtmwgHW+lFV4dwEfjSSmlpojqFnf9I3ZfNiEJqFPFe9XUUJXbfWMX7L+Rg8d/d3VvtGi
+ AoBqxNXQrUdDEa1Vz8wPUEAqkTeC0Y2dANQlDVV9tdLzjcN8j0z2Mp8MDVeoR/naa3QI
+ 8hgFcySfuFYZc4YfGHQcubrB56SDswBqc75zUJkKQPHUS8tGXdsSA+ixi4YEkm/Ml58+
+ lzHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766420429; x=1767025229;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U9RvC4nlHs12D9i171XV9Mnuvk921hcXcV/MRhS3ekc=;
- b=OhJGJOckNGy7D1zPnT0SschKHwBiWSTdtJ3OdykcGVG0U7vx1oGDr1I3dLGSTsvTUR
- bHJ5WikucvCYPVes2qNHr0uCKkv5aBN1gC29ucSkU12TCJ7YtyMTqIwocBludCoyLibT
- x5F7tA/ujoxn/JIQLOZDpLl3LYFCrG/EgMQKzgvSm6ma4pRByGqwHKHjJWdqjsSZdXcu
- 6V+N8Gb6F+RCKSPrSC2kl0usGmf0Sq+CGe5bMzF/NYUBVeGYu8wuauPkjLcWiKE0tOSJ
- +QTv3kqHmulbiqtlG32u/M17QQaNpEdUY080Rf1YUnaKqjbCIQDGfxaQ73A5bYwd7qNq
- Mj2Q==
+ d=1e100.net; s=20230601; t=1766419579; x=1767024379;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Fu91PANJrExnx4W8OoUXjbqOJIg20QTTnT+bGZ0D6vY=;
+ b=GJrNQPlFcxzimdtaXV8pvrtsoOKN1G4UzMW7TivxAu2PWZnhC6JBFdW3a9s09JN2L2
+ vU04O94WnVc2hI+tnwDMyMt4/D8lDbBWi9z+axH9sPtG9D/n/rX6YZF+DkeNqFQcUS0W
+ R5svj8QXFNdByDcJUT6WCiJFIoQFiwzRssn7MOocKyYCFEBD692LWsqIsZquLkfITflg
+ AVbWdOHLmJOLGaBP3u/rCnlbCCxOx7Kd7o7zGlpADQ/sSQf6hSTQnMqxmnXKGv7MQ9R5
+ mkpR861GTQ+/SC26aGNkZ20INQULb8a8HRZSnUGeDOXRWUSHwybYhGNiIseHOM6xXeuX
+ ltCg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmkjyVn3fmAQJSs4wsAs5wTz3cnNLYGuLhOZnsU7fCiSmPQTMuFgFQ9tBwa6D7/wIjfUHBKkI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZr+arrVQmAxyB7Jni4pLi+9pnyxfaluJWS4bP4zOKLcCYZ61B
- zg9RBJ7241s9nHcWeet2PpOZw04oSTU8pSpwDruvWkrJhw0lReAFztciyZkvqjugHc8tjUC06V8
- dncNlZDE=
-X-Gm-Gg: AY/fxX4Xz8QV9er02HFsZ7VhaHvndfj3dnUOsQczmiMmxE4QF6/b80wuQ/2ypJD92Yx
- oklnfSahIUmEQE2029ESUfgU12H2YP4zfoir7c2B4D7ooCXPAsvKRrcCFPRe2Mm1GJdq5hpV/Sl
- Ol6j09e4nB84ln867KvA1s/AXV14I627YPeNEGbpgMyewyzNs/kWKEkivmG0EKtEBiOrP0A0no8
- oglqO8N8bp0vWDbDJ5Kp+KDYdFXRXvhfYiuecK08X1NMM1iEV7KzLB2lCztTflcX5WFEGPeE1m4
- V2WaD8OFvOnqRbgTY16OJC/1/uUDwOM8e6GukCi8r0mKvRrouEiSDMvn92KkX+OtlxVf0ID6m0B
- iyy3CmXEwFocxsgR1/lOK4gCo35duPS+hg5eOucLPs256oKG9dEbCYgOmOEqAo55OcDd9JcrwEp
- RaHi1Ytac0KJ/TIbG3VV0Ha732TlzV3DFmIycKJaq3tBoSNJksQQ==
-X-Google-Smtp-Source: AGHT+IELT2rXECrlRsZnm2VavYphaQ+14/AjDt/AzK8WHEFuZwJ6KHj7/WKkXsKc6DOGTrH/JADKgQ==
-X-Received: by 2002:a05:6870:2149:b0:3d2:ddfa:dfdb with SMTP id
- 586e51a60fabf-3fda5238100mr5324879fac.13.1766420429012; 
- Mon, 22 Dec 2025 08:20:29 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa8d4521sm6963047fac.4.2025.12.22.08.20.27
+ AJvYcCV6NpgTIpV6P4opVvbH8RYjvnieqIzNMxFqf+XzJWDXZueHrB0huLjctFUtj8xjKqJIQjZLVdk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkNSKbnAY6mEvcBWK2pKfAPPkm5fnfRyC9/KuWlOZq6RzBp+b3
+ CAXaeSSGGI8Zc0sGoxe5kj4GZ1plaMO9EXcLR8vSMW1FpFlOVPGPcRa1XfROTk0yFJ8=
+X-Gm-Gg: AY/fxX4PPVGHLxUO73EoRhNMjF43ZgyZaVn4DEzkp6mH3ukTLTL/YlGgnugYzLZfV16
+ 4gUJIWhkREGjWeqxAPQsvdJVsQsJOA3JGB7tDA7ph/Lbis/4MvXHxvIyasLc/xHkDNN24ZPVmH8
+ /rq/FyW4e8T95l8xWV0AMtXXG49DFZ4EIEYZH9VEJ7ITJL/1Tvyx514mJV+k5mJNhOE6DG/ufjS
+ etLZ9bX3rXL7I3KcrUK02XqEFYMGEGTq6/q1fMsxcr1ZTC0f50cHeB0adqZu1ym5pkmXTonfSqK
+ WIAy0sS+cRWhTsuMfM7F0yE9+XYx1il77tXxpUrkSEUfurU9hVydRvKi/e6JA5F2jRBN5CtOIiI
+ yJ5jlYNhKqaQN1n8QrPvw8Coeqo7a95OHsFDOgagbxTK9x93lnJ+wm393BE8jjF0JTt+fBcdApV
+ SJ9NBd
+X-Google-Smtp-Source: AGHT+IH9634n+dDLkX3jnCmRlsSl1z8irYo6WAgme6lUWWRHilQVClFwpLHoNWnaiM0LQJAc3iPX7g==
+X-Received: by 2002:a17:907:7703:b0:b80:3fc0:834 with SMTP id
+ a640c23a62f3a-b803fc0088dmr803440066b.10.1766419579066; 
+ Mon, 22 Dec 2025 08:06:19 -0800 (PST)
+Received: from localhost ([195.52.160.197]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8037f3ffbasm1135411166b.61.2025.12.22.08.06.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 08:20:28 -0800 (PST)
-Date: Mon, 22 Dec 2025 10:20:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, jserv@ccns.ncku.edu.tw,
- eleanor15x@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] m68k: Add support for M68040 CPU
-Message-ID: <20251222162026.GA847766@bill-the-cat>
-References: <20251218185252.957388-1-visitorckw@gmail.com>
- <20251218185252.957388-3-visitorckw@gmail.com>
- <20251218190032.GL303283@bill-the-cat>
- <aUbSHO5Z1w86MG1e@google.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7akBX0SNifFuLPn8"
-Content-Disposition: inline
-In-Reply-To: <aUbSHO5Z1w86MG1e@google.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ Mon, 22 Dec 2025 08:06:18 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=6b3a34bc2183ae0612edf7f3f1b86c9227acc9681cb7a72b6eaf8be375cf;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Mon, 22 Dec 2025 17:06:07 +0100
+Message-Id: <DF4VH6TD31UZ.ITG8JJL63AE7@baylibre.com>
+Cc: "Vishal Mahaveer" <vishalm@ti.com>, "Kevin Hilman"
+ <khilman@baylibre.com>, "Dhruva Gole" <d-gole@ti.com>, "Sebin Francis"
+ <sebin.francis@ti.com>, "Kendall Willis" <k-willis@ti.com>, "Akashdeep
+ Kaur" <a-kaur@ti.com>, <u-boot@lists.denx.de>, "Anshul Dalal"
+ <anshuld@ti.com>, "Moteen Shah" <m-shah@ti.com>, "Santhosh Kumar K"
+ <s-k6@ti.com>, "Nathan Morrisson" <nmorrisson@phytec.com>, "Garrett
+ Giordano" <ggiordano@phytec.com>, "Judith Mendez" <jm@ti.com>, "Aparna
+ Patra" <a-patra@ti.com>, "Jayesh Choudhary" <j-choudhary@ti.com>, "Chintan
+ Vankar" <c-vankar@ti.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Neha Malcom Francis" <n-francis@ti.com>,
+ "Prasanth Babu Mantena" <p-mantena@ti.com>, "Sughosh Ganu"
+ <sughosh.ganu@linaro.org>, "Beleswar Padhi" <b-padhi@ti.com>, "Manorit
+ Chawdhry" <m-chawdhry@ti.com>, "Andrew Davis" <afd@ti.com>, "Wadim Egorov"
+ <w.egorov@phytec.de>, "Andrew Goodbody" <andrew.goodbody@linaro.org>, "E
+ Shattow" <e@freeshell.de>, "Devarsh Thakkar" <devarsht@ti.com>, "Peng Fan"
+ <peng.fan@nxp.com>, "Jerome Forissier" <jerome.forissier@linaro.org>, "Sam
+ Protsenko" <semen.protsenko@linaro.org>, "Marek Vasut"
+ <marek.vasut+renesas@mailbox.org>, "Andre Przywara"
+ <andre.przywara@arm.com>, =?utf-8?q?Th=C3=A9o_Lebrun?=
+ <theo.lebrun@bootlin.com>
+Subject: Re: [PATCH v7 06/13] arm: mach-k3: common: Add lpm_resume_from_ddr
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>, "Tom Rini" <trini@konsulko.com>, "Sumit Garg"
+ <sumit.garg@kernel.org>, "Nishanth Menon" <nm@ti.com>, "Robert Nelson"
+ <robertcnelson@gmail.com>, "Vignesh Raghavendra" <vigneshr@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>
+X-Mailer: aerc 0.21.0
+References: <20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com>
+ <20251210-topic-am62-ioddr-v2025-04-rc1-v7-6-f113b156f83f@baylibre.com>
+ <c82bed01-8e24-48b7-bd30-d378f12940a1@ti.com>
+In-Reply-To: <c82bed01-8e24-48b7-bd30-d378f12940a1@ti.com>
+X-Mailman-Approved-At: Mon, 22 Dec 2025 17:56:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,74 +126,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---7akBX0SNifFuLPn8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--6b3a34bc2183ae0612edf7f3f1b86c9227acc9681cb7a72b6eaf8be375cf
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, Dec 21, 2025 at 12:43:08AM +0800, Kuan-Wei Chiu wrote:
-> Hi Tom,
->=20
-> On Thu, Dec 18, 2025 at 01:00:32PM -0600, Tom Rini wrote:
-> > On Thu, Dec 18, 2025 at 06:52:51PM +0000, Kuan-Wei Chiu wrote:
-> > > Add support for the Motorola 68040 architecture. Currently, m68k
-> > > support in U-Boot is primarily focused on ColdFire (MCF5xxx) variants.
-> > > Introduce the necessary infrastructure to support the classic M680x0
-> > > series, specifically targeting the M68040 as emulated by QEMU.
-> > >=20
-> > > The implementation includes exception vectors, early startup code, and
-> > > minimal CPU initialization and relocation stubs. It also defines the
-> > > standard m68k boot information structure used for passing hardware
-> > > information to the operating system. To ensure compatibility, ColdFir=
-e-
-> > > specific library objects such as cache and interrupt handling are
-> > > excluded from the build when M68040 is selected.
-> > >=20
-> > > Additionally, apply a specific workaround during the early memory
-> > > reservation stage. Use a manual loop to clear global data instead of
-> > > the standard memset() function, as utilizing memset() at this point w=
-as
-> > > observed to cause a hang on the QEMU platform.
-> > >=20
-> > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> > [snip]
-> > > diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-> > > index 8ade6f7b9d1..a41c375f6be 100644
-> > > --- a/arch/m68k/Kconfig
-> > > +++ b/arch/m68k/Kconfig
-> > > @@ -56,6 +56,9 @@ config MCF5441x
-> > >          select DM_SERIAL
-> > >  	bool
-> > > =20
-> > > +config M68040
-> > > +    bool
-> > > +
-> >=20
-> > The file is unfortunately inconsistent about tabs vs spaces, but all the
-> > new options should be tab-indent only, and no extra blank lines added.
->=20
-> I'll fix this in v2.
->=20
-> BTW, do you think it would be helpful to add a check in checkpatch.pl
-> to warn about space indentation in Kconfig files?
+On Sat Dec 13, 2025 at 7:47 AM CET, Udit Kumar wrote:
+>
+> On 12/10/2025 7:39 PM, Markus Schneider-Pargmann (TI.com) wrote:
+>> This is a common function that helps to resume from DDR. There are two
+>> pointers which are fetched from DDR to resume, the TIFS context pointer
+>> which points to the context in DDR. There is another pointer to the DM
+>> loadaddr to jump back into DM.
+>>
+>> Tested-by: Anshul Dalal <anshuld@ti.com>
+>> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+>> ---
+>>   arch/arm/mach-k3/common.c | 49 +++++++++++++++++++++++++++++++++++++++=
+++++++++
+>>   arch/arm/mach-k3/common.h |  1 +
+>>   2 files changed, 50 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+>> index 81e180c8706445c270cfecb0500015eee7547f98..ee56f0b86ce303e319cfcd2b=
+0db3bade1540635b 100644
+>> --- a/arch/arm/mach-k3/common.c
+>> +++ b/arch/arm/mach-k3/common.c
+>> @@ -193,6 +193,55 @@ int __maybe_unused wkup_ctrl_remove_can_io_isolatio=
+n_if_set(void)
+>>   	return 0;
+>>   }
+>>  =20
+>> +#if IS_ENABLED(CONFIG_K3_IODDR)
+>> +static int lpm_restore_context(u64 ctx_addr)
+>> +{
+>> +	struct ti_sci_handle *ti_sci =3D get_ti_sci_handle();
+>> +	int ret;
+>> +
+>> +	ret =3D ti_sci->ops.lpm_ops.min_context_restore(ti_sci, ctx_addr);
+>> +	if (ret)
+>> +		printf("Failed to restore context from DDR %d\n", ret);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +struct lpm_meta_data {
+>> +	u64 dm_jump_address;
+>> +	u64 tifs_context_save_address;
+>> +	u64 reserved[30];
+>> +} __packed__;
+>> +
+>> +void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
+>> +{
+>> +	struct lpm_meta_data lpm_data =3D *(struct lpm_meta_data *)(uintptr_t)=
+meta_data_addr;
+>> +	typedef void __noreturn (*image_entry_noargs_t)(void);
+>> +	image_entry_noargs_t image_entry;
+>> +	int ret;
+>> +
+>> +	ret =3D lpm_restore_context(lpm_data.tifs_context_save_address);
+>> +	if (ret)
+>> +		panic("Failed to restore context from 0x%x%08x\n",
+>> +		      (u32)(lpm_data.tifs_context_save_address >> 32),
+>> +		      (u32)lpm_data.tifs_context_save_address);
+>> +
+>> +	image_entry =3D (image_entry_noargs_t)(uintptr_t)lpm_data.dm_jump_addr=
+ess;
+>> +	printf("Resuming from DDR, jumping to stored DM loadaddr 0x%x%08x, TIF=
+S context restored from 0x%x%08x\n",
+>> +	       (u32)(lpm_data.dm_jump_address >> 32),
+>> +	       (u32)lpm_data.dm_jump_address,
+>> +	       (u32)(lpm_data.tifs_context_save_address >> 32),
+>> +	       (u32)lpm_data.tifs_context_save_address);
+>
+> you want printf, here or could be debug info ?
 
-I checked and the linux kernel has many space-not-tab in Kconfig files,
-so it would be a change to add it to the U-Boot specific tests part of
-checkpatch.pl, and a patch to do so would be welcome, thanks!
+I think it would be good to have this as printf instead of debug info in
+case something goes wrong at some point.
 
---=20
-Tom
+Best
+Markus
 
---7akBX0SNifFuLPn8
+
+--6b3a34bc2183ae0612edf7f3f1b86c9227acc9681cb7a72b6eaf8be375cf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUlvxgAKCRAr4qD1Cr/k
-CsUlAP9RvYRL/lvJUiIPiQtEB2S8RQgFRKqlu65HuFXSsa+JHwEA6SpvG1v6u/gt
-SR0/5UJ5VtPRyNsc7ei87kWfcp6zFwM=
-=7XSF
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaUlscBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlN3
+EgD9GUJP16vaksu+ZXuA9UbTUmTfsZDs9CrLXIN/dH6xOkABAKxwiGyXu04h3IbO
+qAL5O/A5CeH9/ZjUGdvXmUhDlzEA
+=L28S
 -----END PGP SIGNATURE-----
 
---7akBX0SNifFuLPn8--
+--6b3a34bc2183ae0612edf7f3f1b86c9227acc9681cb7a72b6eaf8be375cf--
