@@ -4,138 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55237E6748D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 08:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44691D711D5
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 08:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA17E83C94;
-	Mon, 22 Dec 2025 09:44:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7400F83BF1;
+	Mon, 22 Dec 2025 09:54:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="VRyBHiYw";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UI8MQrfs";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uwTqZ0Av";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B43EE83D1A; Mon, 22 Dec 2025 09:44:21 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 4C54783C28; Mon, 22 Dec 2025 09:54:31 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE67783BF1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 09:44:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BM5g5aO2189489
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 08:44:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=f+1JwQzr8zCf4YGsBwfVv0RM
- IobwpHhGus36u6YvTnU=; b=VRyBHiYwWHySu48HdoDTJ7R9fe2Fv1Ec8Xu99hpa
- qwCsMGG1BSCOnCjEBw3YZxvQ+XzNI9wS8/WdhY2mpp3cglLXM3QvLyBUbxp2HHgI
- 2Djw4nEk91u8FXWrKTZd70V8KkZ5DKtpGdQ4/4gv2lgdAK9gS4s5/RJSyLeQsMJ8
- 12EsaoLqJcdrJpcUQrqjv7sgmlupe36jij/1jsTYEK86oRWDb0kKVLgKvdAe5JCx
- nFKFRiC4T9nXaud7hXLEUX8b2EbYCrdJu1nukubDGgToqIN36TnzO7mnmNDIfUme
- wlYaEVh9E1gla5TRpPff/Iiw/AqN0zXcES+kL8h5FOJgBg==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b702t8hcp-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 08:44:16 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2a07fa318fdso67357305ad.0
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 00:44:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1766393056; x=1766997856; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=f+1JwQzr8zCf4YGsBwfVv0RMIobwpHhGus36u6YvTnU=;
- b=UI8MQrfs1ulz+3+oKyDOFZPljNGzlelms3zlTbjOBMI39WGI/+FSIe1FVPO/Otw6sR
- FQQzDYeBmdAFMOBCaGHm6383bCkMFUGQwyurRMtTrdWX1PoeO91RfekkhRnoH3Q2J3+Z
- tmWvIuRx/OmlbkvqY36cYxtmwcegN+y0o3g6C26h/31HC8qqLWve3fRY57n6WMtuNh0W
- fZLqpqLyBQ4NfGmRgaf8ZdM1TBT7VngK+rDD01g09TjsPJh5dtSKM+eEc74Rg/xhisot
- fBGxKwM4jk9NDsS8IxyAIwmvjTy9P3QZxeSUqh9dEel7/YyjDPGaK1cjqxFvmVorX+Qp
- PS+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766393056; x=1766997856;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f+1JwQzr8zCf4YGsBwfVv0RMIobwpHhGus36u6YvTnU=;
- b=K88UCHqrOdoIOPH1rfjDzynJFltKDEsQI1BR4qkZdUKDFMr6/wUslogtbr5pr15b9v
- gv/B9Dew3vBuwwOuNqMHv4DChlC5oHG2ePsimogEFrYtyuk5bwNaz4kOHOB+IHT28RSt
- mwWadNfl50AWtq6JlBGOc0rEPDPYeyzF8kQpgqYB5HMt176Lxb4tKbQPe6KMZpxViMUI
- gvgFhycYVn+MiWAHdQ6nshgZRJ/EdugjAAWES+ge6s3kiJ86vznFyCRZKPuqHgX4gkK+
- 9BBjbY9i14B2gM+01fLjSJXTS4/Xu8EBG22xzH7moiFnoozevzl2SnM5yoW+qw9dfXsY
- ciWw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXIwVJTt+DHmAY6WoDFFvBY2uThkeYbjhsYjNQ4krP7ohtXY3lwjQ1Me45QPWd6a2dc9Buau5c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9TuJojGfB0Z6cYZV8wlq0q8sHn+o5Zv8r1FCrPdVJ0XS0ZGSw
- GfDFa3/wirUY2+Hr7gduEKf9YwtmDYfWlBfaY0P/jYgpKylIZFvNnO2mMlX56IVILgL9wxnRYYa
- N3JKuvrrhd+J8Ie+OQUQRhBA6eBgxPSw9KUa2i/dTDnFRh3fXcZnAg+DK
-X-Gm-Gg: AY/fxX595hdJlCE0EO1iZ9XdsYrm00XhA57mryRd2aMOOBesThok/kEGTcSqAWmPYiu
- 67lUxp3aerglO05FGszqrDzcJZ2VF1bkynQeTa9zHSf9e/MG+MX4mTJgBZ5dCNfY+KjwpT8XAf3
- dmzXOYmbT8O6T0TK753FC4/+7ZXp8/UwX0eZMQBk7pS5TXUTKTR02LQHAh43PpW5KwupbVOV3Bu
- mLIOFEGLjEAyM6/lF1y34TWfcdG0P+zPtK9HSwljprUnwjwTgNPf+Spfd0Qi19F/2x4dnmeKjQB
- hzZ4BraRY2LszJXBKuePfB/C1zafgMfoVRcQR/FpXbPfbjAxKYzUYtdLnNqB86IOCv8hAimVLTV
- 28vEMp/c6aWh/Z2aqnPMvJt3BgqNuG8/6QR6aKdGNu8BBVH+O79GxiAjLRpab2Kq83djMOa6b0Y
- wrwQiy31jgsjbYcBD8rhA3TMjPhXdsIDIezTyhTKM=
-X-Received: by 2002:a17:903:fad:b0:271:479d:3dcb with SMTP id
- d9443c01a7336-2a2f2212bc9mr112109615ad.6.1766393056185; 
- Mon, 22 Dec 2025 00:44:16 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG8jyV7WXI1k02jIkki7aSweWNyXtR88E9w+U5PltAOYNWCBRsKtXJ1v5Tg55WLMSb+C5fn3A==
-X-Received: by 2002:a17:903:fad:b0:271:479d:3dcb with SMTP id
- d9443c01a7336-2a2f2212bc9mr112109395ad.6.1766393055727; 
- Mon, 22 Dec 2025 00:44:15 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2f3c74490sm89604085ad.5.2025.12.22.00.44.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 00:44:15 -0800 (PST)
-Date: Mon, 22 Dec 2025 14:14:09 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- alexeymin@postmarketos.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [RESEND v2 4/6] configs: ipq9574: Enable fastboot support
-Message-ID: <aUkE2UOHEp6LYN/M@hu-varada-blr.qualcomm.com>
-References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
- <20251218061557.1999367-5-varadarajan.narayanan@oss.qualcomm.com>
- <aUVhRIWmfRHPnhRV@sumit-xelite>
+ by phobos.denx.de (Postfix) with ESMTPS id 385C283AAE
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 09:54:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dZX4z2BTKz9tG4;
+ Mon, 22 Dec 2025 09:54:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1766393667;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pBUEGxXvVigvp/KRTsk9rX/7m3tyyKMGK5XuUm/hY0k=;
+ b=uwTqZ0AvWBORiYx0geHFlbN1MNcFPZgk0zjV1pm8qOTaBZG44bPi+WCICQfxFAL7dr5TTe
+ fc75owpEQU9D/GzCEpizmYKbG+7fFFZfaAn/aeFark9aw3Uj/EPROLN95bUOvJdcL5khdY
+ Mk52I1QcqeMNir/GbjeZTsi2XCfjH0xTcxmDMba5rHg0KFN1loHdKV9wzCSSO5Lx1nsVbD
+ F4ZecaLPor/Np+6dcwz7/5WF0BJ1Xg6wXWpEJPi6m7T53Syd8VgtBn/0IDJFR0IlWLvuHz
+ ZlE4TlMte925et82GNLvtYQCHjIUZRlsAoehI8qr08uVhZsfR8ZWvoHyAYTudg==
+Message-ID: <158c0ef8-a5fb-474b-805e-a85c4ff4447c@mailbox.org>
+Date: Mon, 22 Dec 2025 09:54:26 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aUVhRIWmfRHPnhRV@sumit-xelite>
-X-Authority-Analysis: v=2.4 cv=SIhPlevH c=1 sm=1 tr=0 ts=694904e0 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=FprwbJpvJ3V8Eb-ZiP8A:9
- a=CjuIK1q_8ugA:10 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-ORIG-GUID: NDM06EspXmEAHVpVxHmWw1NURdg8bDQX
-X-Proofpoint-GUID: NDM06EspXmEAHVpVxHmWw1NURdg8bDQX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjIyMDA3OCBTYWx0ZWRfX+GSGePtc4/O7
- RhscPGxx+YnjjSd6ZQDBD+eDK+HVYksksG8BdX7p3CDE0P5Jg9BU4beIv9JnA8MR5QnHH+/9MSB
- 9gGv3WkEVrtrkjYM3F3wAzBrv/jnYF1X+RZV2rUzGsK3S9mgtiV8vWwWKkJ4Fg1ou92T59KCkGI
- YTZZ916y/dXYxS013gW/Y/xI06hlr8Pcbl/GaFeonG18QlCQ2DA5C/6BWni2RWzOwkOhDGbxryy
- g0sPa2svnSOO709CMm2fNpRZmEcUIFys4JMpS3w2yJ59sx7xIkNSbXMzdlnEC2Ji5NTk2/LdWTi
- ErNPvStKH4rhelckf95ZV1KY9blUhofhLvvNUY1QW0mkWULOjCcCz/EHM3dHngRntCn+SzFjI3J
- /azSlHr5NhhrF0oxLw1HWRj+zIv4tAYpd70+TPjEmcWKNHTS1yD494iN9IxxQH+V8+mzEghweLu
- 3QQQEcZ1kDCRubC+fUQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-21_05,2025-12-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- adultscore=0 phishscore=0 spamscore=0 suspectscore=0 clxscore=1015
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
- definitions=main-2512220078
+Subject: Re: [PATCH] watchdog: orion_wdt: Add support for armada-xp
+To: Chris Packham <judge.packham@gmail.com>, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <20251216041438.1945123-1-judge.packham@gmail.com>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20251216041438.1945123-1-judge.packham@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: o1duzjcr66t6wqdr7qnoswnx6bmob6zf
+X-MBO-RS-ID: 7f52731bc6c20bbb9c3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,69 +75,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 19, 2025 at 07:59:24PM +0530, Sumit Garg wrote:
-> On Thu, Dec 18, 2025 at 11:45:55AM +0530, Varadarajan Narayanan wrote:
-> > Enable relevant configs like USB PHY, gadget, fastboot,
-> > fastboot MMC support etc. to enable fastboot flashing
-> > of IPQ9574 based boards.
-> >
-> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> > ---
-> >  configs/qcom_ipq9574_mmc_defconfig | 22 +++++++++++++++++++++-
-> >  1 file changed, 21 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-> > index 6592d9de39d..ac534738994 100644
-> > --- a/configs/qcom_ipq9574_mmc_defconfig
-> > +++ b/configs/qcom_ipq9574_mmc_defconfig
-> > @@ -45,7 +45,7 @@ CONFIG_DWC_ETH_QOS=y
-> >  CONFIG_DWC_ETH_QOS_QCOM=y
-> >  CONFIG_RGMII=y
-> >  CONFIG_PHY=y
-> > -CONFIG_PHY_QCOM_QMP_UFS=y
->
-> Any reason to drop this?
+Hi Chris,
 
-ipq9574 doesn't have UFS.
+On 12/16/25 05:14, Chris Packham wrote:
+> Update the orion_wdt.c to support armada-xp and similar SoCs. The WDT
+> block used in armada-xp is fairly close to the armada-380 with just a
+> few differences that can be handled based on the compatible property.
+> 
+> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+> ---
+>   drivers/watchdog/orion_wdt.c | 99 +++++++++++++++++++++++++++++++++---
+>   1 file changed, 93 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/watchdog/orion_wdt.c b/drivers/watchdog/orion_wdt.c
+> index 4562b2a37e34..3b76c0fd2ea1 100644
+> --- a/drivers/watchdog/orion_wdt.c
+> +++ b/drivers/watchdog/orion_wdt.c
+> @@ -43,8 +43,14 @@ struct orion_wdt_priv {
+>   #define TIMER_A370_STATUS		0x04
+>   
+>   #define WDT_AXP_FIXED_ENABLE_BIT	BIT(10)
+> +#define TIMER1_FIXED_ENABLE_BIT	BIT(12)
+>   #define WDT_A370_EXPIRED		BIT(31)
+>   
+> +struct orion_watchdog_data {
+> +	int (*plat_start)(struct udevice *dev, u64 timeout, ulong flags);
+> +	int (*plat_stop)(struct udevice *dev);
+> +};
+> +
+>   static int orion_wdt_reset(struct udevice *dev)
+>   {
+>   	struct orion_wdt_priv *priv = dev_get_priv(dev);
+> @@ -56,7 +62,59 @@ static int orion_wdt_reset(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> -static int orion_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +static int armadaxp_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	struct orion_wdt_priv *priv = dev_get_priv(dev);
+> +	u32 reg;
+> +
+> +	priv->timeout = DIV_ROUND_UP(timeout_ms, 1000);
+> +
+> +	/* Fix the wdt and timer1 clock freqency to 25MHz */
+> +	reg = readl(priv->reg + TIMER_CTRL);
+> +	reg |= (WDT_AXP_FIXED_ENABLE_BIT | TIMER1_FIXED_ENABLE_BIT);
+> +	writel(reg, priv->reg + TIMER_CTRL);
+> +
+> +	/* Set watchdog duration */
+> +	writel(priv->clk_rate * priv->timeout,
+> +	       priv->reg + priv->wdt_counter_offset);
+> +
+> +	/* Clear the watchdog expiration bit */
+> +	reg = readl(priv->reg + TIMER_A370_STATUS);
+> +	reg &= ~WDT_A370_EXPIRED;
+> +	writel(reg, priv->reg + TIMER_A370_STATUS);
+> +
+> +	/* Enable watchdog timer */
+> +	reg = readl(priv->reg + TIMER_CTRL);
+> +	reg |= WDT_ENABLE_BIT;
+> +	writel(reg, priv->reg + TIMER_CTRL);
+> +
+> +	/* Enable reset on watchdog */
+> +	reg = readl(priv->rstout);
+> +	reg |= RSTOUT_ENABLE_BIT;
+> +	writel(reg, priv->rstout);
+> +
+> +	return 0;
+> +}
+> +
+> +static int armadaxp_wdt_stop(struct udevice *dev)
+> +{
+> +	struct orion_wdt_priv *priv = dev_get_priv(dev);
+> +	u32 reg;
+> +
+> +	/* Disable reset on watchdog */
+> +	reg = readl(priv->rstout);
+> +	reg &= ~RSTOUT_ENABLE_BIT;
+> +	writel(reg, priv->rstout);
+> +
+> +	/* Disable watchdog timer */
+> +	reg = readl(priv->reg + TIMER_CTRL);
+> +	reg &= ~WDT_ENABLE_BIT;
+> +	writel(reg, priv->reg + TIMER_CTRL);
 
-> > +CONFIG_PHY_QCOM_QMP_USB=y
-> >  CONFIG_PHY_QCOM_QUSB2=y
-> >  CONFIG_PINCTRL=y
-> >  CONFIG_PINCONF=y
-> > @@ -54,3 +54,23 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
-> >  CONFIG_MSM_SERIAL=y
-> >  CONFIG_MSM_GENI_SERIAL=y
-> >  CONFIG_SOC_QCOM=y
-> > +CONFIG_USB=y
-> > +CONFIG_USB_GADGET=y
-> > +CONFIG_DM_USB_GADGET=y
-> > +CONFIG_CMD_USB=y
-> > +CONFIG_USB_DWC3=y
-> > +CONFIG_USB_DWC3_GADGET=y
-> > +CONFIG_MISC=y
-> > +CONFIG_USB_DWC3_GENERIC=y
-> > +CONFIG_USB_FUNCTION_FASTBOOT=y
-> > +CONFIG_FASTBOOT=y
-> > +CONFIG_CMD_FASTBOOT=y
-> > +CONFIG_FASTBOOT_BUF_ADDR=y
-> > +CONFIG_FASTBOOT_BUF_SIZE=y
-> > +CONFIG_FASTBOOT_FLASH=y
-> > +CONFIG_FASTBOOT_FLASH_MMC=y
-> > +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
->
-> > +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
-> > +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
->
-> You should rather try to update following for fastboot:
->
-> $ git grep -nr ARCH_QCOM drivers/usb/gadget/Kconfig
-> drivers/usb/gadget/Kconfig:64:  default 0x18d1 if ARCH_QCOM
-> drivers/usb/gadget/Kconfig:92:  default 0x4ee0 if ARCH_QCOM
->
-> > +CONFIG_FASTBOOT_BUF_ADDR=0x50000000
-> > +CONFIG_FASTBOOT_BUF_SIZE=0x4000000
+Does it make sense to use some helper functions to clear or set some
+bits in those registers above?
 
-Ok.
+#define clrbits_le32(addr, clear) clrbits(le32, addr, clear)
+#define setbits_le32(addr, set) setbits(le32, addr, set)
+#define clrsetbits_le32(addr, clear, set) clrsetbits(le32, addr, clear, set)
 
-Thanks
-Varada
+Other than this:
+
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
+
+> +
+> +	return 0;
+> +}
+> +
+> +static int armada380_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>   {
+>   	struct orion_wdt_priv *priv = dev_get_priv(dev);
+>   	u32 reg;
+> @@ -94,7 +152,7 @@ static int orion_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>   	return 0;
+>   }
+>   
+> -static int orion_wdt_stop(struct udevice *dev)
+> +static int armada380_wdt_stop(struct udevice *dev)
+>   {
+>   	struct orion_wdt_priv *priv = dev_get_priv(dev);
+>   	u32 reg;
+> @@ -116,6 +174,22 @@ static int orion_wdt_stop(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static int orion_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	struct orion_watchdog_data *data =
+> +			(struct orion_watchdog_data *)dev_get_driver_data(dev);
+> +
+> +	return data->plat_start(dev, timeout_ms, flags);
+> +}
+> +
+> +static int orion_wdt_stop(struct udevice *dev)
+> +{
+> +	struct orion_watchdog_data *data =
+> +			(struct orion_watchdog_data *)dev_get_driver_data(dev);
+> +
+> +	return data->plat_stop(dev);
+> +}
+> +
+>   static inline bool save_reg_from_ofdata(struct udevice *dev, int index,
+>   					void __iomem **reg, int *offset)
+>   {
+> @@ -144,8 +218,10 @@ static int orion_wdt_of_to_plat(struct udevice *dev)
+>   	if (!save_reg_from_ofdata(dev, 1, &priv->rstout, NULL))
+>   		goto err;
+>   
+> -	if (!save_reg_from_ofdata(dev, 2, &priv->rstout_mask, NULL))
+> -		goto err;
+> +	if (device_is_compatible(dev, "marvell,armada-380-wdt")) {
+> +		if (!save_reg_from_ofdata(dev, 2, &priv->rstout_mask, NULL))
+> +			goto err;
+> +	}
+>   
+>   	return 0;
+>   err:
+> @@ -176,9 +252,20 @@ static const struct wdt_ops orion_wdt_ops = {
+>   	.stop = orion_wdt_stop,
+>   };
+>   
+> +static struct orion_watchdog_data armada380_data = {
+> +	.plat_start = armada380_wdt_start,
+> +	.plat_stop = armada380_wdt_stop,
+> +};
+> +
+> +static struct orion_watchdog_data armadaxp_data = {
+> +	.plat_start = armadaxp_wdt_start,
+> +	.plat_stop = armadaxp_wdt_stop,
+> +};
+> +
+>   static const struct udevice_id orion_wdt_ids[] = {
+> -	{ .compatible = "marvell,armada-380-wdt" },
+> -	{}
+> +	{ .compatible = "marvell,armada-380-wdt", .data = (ulong)&armada380_data},
+> +	{ .compatible = "marvell,armada-xp-wdt", .data = (ulong)&armadaxp_data},
+> +	{ }
+>   };
+>   
+>   U_BOOT_DRIVER(orion_wdt) = {
+
