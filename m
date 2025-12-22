@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F890E674B2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 13:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83EA5E674AF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 13:34:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 543F483B99;
-	Mon, 22 Dec 2025 14:32:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D9B5883B99;
+	Mon, 22 Dec 2025 14:34:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d3QRIBzx";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SvVag08b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CAD683C28; Mon, 22 Dec 2025 14:32:54 +0100 (CET)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
+ id 1E51E83D3C; Mon, 22 Dec 2025 14:34:44 +0100 (CET)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F2AF83B95
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 14:32:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D6C83B95
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 14:34:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-641e942242cso3084067d50.1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 05:32:50 -0800 (PST)
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-640d4f2f13dso3554040d50.1
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 05:34:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1766410370; x=1767015170; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1766410480; x=1767015280; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bVQFq2Ben8EWJGKJuNIDB2SI6i/yhLM1jISdSoPV158=;
- b=d3QRIBzxWQhFEfQ+SK+28CTOG4qiUZu+oIuBj7um6stusOBap/k7RuHK1otH1LFQzg
- TGN6iK7LTtKTl9n405UD6yevE4c3PtgIB5IlQK+WYoKr6dFq9yFzaeZK8p7Ugmujhypm
- 6v2Mcw4LlFsSDXwn1XTMS20g08B8nwPhj1LDxUs++edYBNePJFSr4qXvhSorEKtgMQp9
- QM0wS8mPjo3knyKHZPv9jQpgTZPpdSVjUWnnPHA2yB2LFCHlSSlqXmIUDYaDhrLDdApw
- 8Xdm+3Jy8qLQ2LT9718HZgWpgTrwmwqhJk0tslqtsqzNHKwK9+XwO2MKkrysK10hCr+P
- cpsg==
+ bh=j1+jZFYevFZZZfazHGj83XdajQtaGu/ZwzCl8Z4+7oA=;
+ b=SvVag08bK+1VNb1CCK0CpOvt1gfTUzt++B+IdKvODOHonMkDVb34fHWyoGSNx0xIAF
+ uL8XMS2ix1X5h8tlVH/MDVlIS6r+iUdxn67oNiCiiQejHeNJoVQ1r4EjWnJaFguQlFQc
+ hpGbVk11U9E0eV1xxvd+YXvGFOzg1FQphrksMb78KtZ6sZm8DX0T7rL94uxb43KDn5UT
+ QRGNiIjq5Z5pKNHEP6hCsDpIQhyv2yax5JaKOMR7gV5PMOgUB1y46iIz2mV0wlN734tk
+ i4gvNNx94CSPZ6DYS21L1dQvi7Y5eaxRp8T4uE537pNchL+Xo401rMbqSiqJoshRpvB1
+ SKDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766410370; x=1767015170;
+ d=1e100.net; s=20230601; t=1766410480; x=1767015280;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bVQFq2Ben8EWJGKJuNIDB2SI6i/yhLM1jISdSoPV158=;
- b=I7SQIwFWd+HhoncE6f3yrdsvFQfivu73Pv4XpCxY2gh2CgO5RXuDtvAa7CrFgy4f50
- zgPUOG8m1w0aP91SVAI6bl2CiwXiGiqbTmoKvQFBsUVjQbKQhNV/PMnXeZ+k9GiuEFgU
- McndfiD3u8/aYU4AhUa/mUFSjyyw7Bv1jmNgTHrAwaQXcbO3COVldF5eHMrfbk8+042e
- 31Fbiu0GPKdZqOZgm3IHBctt8y9FIAt9Krwj/3SjforON9Fu/vxvtKWiupKy7FBdlJOO
- Bpxj2pxpI7lr6cWNTGYiCuxCbDNjazfvS7VDPxLDggylHffHEiZ6v72MCK/5jgOu/HZA
- pHLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU94duBUu49WH8j0xIsOCrfpuoiPodRZ3G/Q+HuzWeZY3Gl9QxcQjcRk1TBN7Un/9nEVPBOtCk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMry9+iQGjL6fs2P64CktLt+qlsu5Uh8ZptaIz5TGFijLKy+cl
- BO/z9+kbIpLjGYBtSO+qg2IlY577JeocsYGpJS+pBMs0zKSl4HMuml1t+QEImlu1d1dXuqJG7vO
- g8zXBZPvKKaExLV2ckwQJZDriOpK+7d7mXxD84GK14fIndrvt/fXsj8nc4Q==
-X-Gm-Gg: AY/fxX6mNZWxKwn6DEBoEOEUoUNHXj8WPHD8ZCJZdqdJrCFpafg5zJbJZOBPmvNdP7G
- 2jDsAh9wvsiWLgfTG8u/DFhqbDX7XraFrRAVjL9eySEeYWopJKvltrjXfarXF2PAghkJIFWEB97
- DubrPkujIPIDiioP/suc4KqUklobrctGgFfH3L0efYNThaoXuYVu/eMu0n5L10bPGihtkdHXojW
- JCch9yc7Ufq/dzB8huVTbA3H8EMiC79rHDf7nY7Ha0qiaphiN7XwHpf+P6b4lE8vWf3u8a0yNMo
- AVcwAPlFjCfwcR9d5JjvUpLQt21Y0ojGT6uRLVx51MQjjxZwNAj/tGckYzBp+imuSPblzcE4ECx
- +3mRbV9GS1ca5DW/Nd3AhLuagV5DfBy0JFX6U1/kIWFGrpux16O/fmsl+NY5aCDz3+mjHDuvaQ4
- jgTtolFQXaCBo7eXa7Nh9ZRirFAPvEvoQg4eMvYvp9Dyk9RJVgDeZAVlbQsMAZb8orvA+fHRfXl
- rY+6h2+PQ5gRiTZa9KQ2RhIoD8DWkUKmj4HOL2TkPQeIaexl5VZHbcqoorjfc8I9PqYjh063EIZ
- 3yK7wDo+L3sCbuih5Q4O6y851HPpzPve
-X-Google-Smtp-Source: AGHT+IHONyroy84WKNzP7kTkD59NYw6qjyoEiLOS8md4ERnVLj7fWEA2nRkodguv7SINFqmlQcf2+tLLrXW0fzWging=
-X-Received: by 2002:a05:690e:1502:b0:644:60d9:866b with SMTP id
- 956f58d0204a3-6466a9265a2mr7495060d50.92.1766410369726; Mon, 22 Dec 2025
- 05:32:49 -0800 (PST)
+ bh=j1+jZFYevFZZZfazHGj83XdajQtaGu/ZwzCl8Z4+7oA=;
+ b=HPmZ4shRgKLY1f1pNibFOM1sHt0FBxQbljjYpQMEhsTwYoA8eTCh/u9dM6blR3Wnd8
+ T8zcVmpnd1tNdFWhNHDaDjbo+gCCqjwzVRiCPij+Dh4XampcwgVT5IzeKfWTjF7qZV77
+ MVKRhDu5T1tSjVI4WvBt/nebhIOBocnE3D7Y1PTxLkm2XjM53zu+FI9DxJFAnJELB5kI
+ LptXoqgXXVTaVxCPWcTsl1GME3T/TL3OkklRiGztT78/tU8ref/hkeMSt/CGNq80hPeM
+ kveKFemGghqpiqAOPnXHQxka7p2Swxy8Ki9KnTFcGCUA8NvlglG1d8VzaYBRRDW7crqc
+ Sp1w==
+X-Gm-Message-State: AOJu0Yyif+s3c/CEgVWu36y4R7Ts8doPY2E/+KzbDJ3DgC7i0oOEOH98
+ LRpUMDmx3D0n2Kajhcej2yDw0uWTX/pHyn4Tl1tME4W5zfXt++MmgczB/fI4DC/ejzxA8GS46pI
+ N85GEIC66/4BQ+bDA38BDQJTYehIh38a1bg6ZYf1pEQ==
+X-Gm-Gg: AY/fxX4vIuNB87gRaBrU//ARPoVI3SPGIsF9mFtoSQKsmq+HSl40nb/8yJ8IM6GmgQY
+ w02zwjFPbhBCKGPi7ZhJ5RchvT+U+rOT5d6FfjYZMAfqlvCC88DWpQ93S0s+vvYgnqDJX5HvLfY
+ e4jTJTnSp8xTarJN/etdW6+r7FPxehqzPEfgGvYtKLz5PiH+BBTtqVBb5uozalWGsuo7rvf+1EL
+ q0I67XSstj+SftNwzBO2zC3yeI4448RkmjSiOj8ubFGPzzB8dn87Q3wsz7k7oxjQ1iUCIeW3YvC
+ yRBd9f4U39kyn7Z6bSYySMWSLTgrRQgLEMfVs/gLCEOxAtT98qr9EiwyrCfmYHIDQBMjpD/w9ch
+ bA57CsgkIwOyn3vqJqqUuadI4LFrrZrXFVZx3jZz7wpTAXwRYJipKFrrNkShKXjRNaWotncrWey
+ G1PVWMmtbRAOsebg3hi1HVzSYi7XnycpUgvX6IWx1QJnPwSTkjRBS2wONiTzAKLNF+708n8Fj3Y
+ lq6lqA48Bbk5+gB1Ai8xfqknCZacoqoYKl24SRKWCZfdxwFuQ0k/rrSyrhKNNMJHhvitACaLzL2
+ 61bh59nWk9I2274KxYN5DWPs/kS2fdULWzZ1yAF7Ryw=
+X-Google-Smtp-Source: AGHT+IEh19GQ/ArmFJ6EH5/pQHc6oGnTjMMcBjk0nqetINA45mtXjWeUlL7jA4dbLte3l5Tqyy1z6Xz+lStNvaxtD9s=
+X-Received: by 2002:a05:690e:189e:b0:646:78d8:d2bc with SMTP id
+ 956f58d0204a3-64678d8d459mr4726446d50.32.1766410480374; Mon, 22 Dec 2025
+ 05:34:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20251219224326.195190-1-heinrich.schuchardt@canonical.com>
- <CAC_iWjL94aX+9dGfYsG6ut0MSXB97Ta_C20nkj1SEeQGiErSiQ@mail.gmail.com>
- <1626dd9c-30ca-4275-9688-b79a8110ba01@canonical.com>
-In-Reply-To: <1626dd9c-30ca-4275-9688-b79a8110ba01@canonical.com>
+References: <20251219214812.168957-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251219214812.168957-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 22 Dec 2025 15:32:13 +0200
-X-Gm-Features: AQt7F2qndArtGkVWYSY2Q9AHqMz-fo-sdMzYDobuiDpEyV49_V0jAMPyAix8t60
-Message-ID: <CAC_iWjLN_KdLtH46pbqCawJ0Fd5vAPAb3_xoiWP=TN3ee7cXxQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] test: The LMB test depends on CONFIG_LMB
+Date: Mon, 22 Dec 2025 15:34:04 +0200
+X-Gm-Features: AQt7F2oQ1TPjax84N2eJeHG0Wt3BBqJ2e1TP2SzcJRJoIrmDGWbLIHNehOzbOTI
+Message-ID: <CAC_iWjJBNSeTCNG96EnNNLc8RGhBq5mRCc88Z8TC7WktHDiYAA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_selftest: remove unnecessary __efi_runtime_data
+ attribute
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -102,68 +97,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Dec 2025 at 13:41, Heinrich Schuchardt <
+On Fri, 19 Dec 2025 at 23:48, Heinrich Schuchardt <
 heinrich.schuchardt@canonical.com> wrote:
 
-> On 12/22/25 09:17, Ilias Apalodimas wrote:
-> > Hi Heinrich,
-> >
-> > On Sat, 20 Dec 2025 at 00:43, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com
-> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> >
-> >     We cannot build the LMB test without the LMB library.
-> >
-> >
-> > This was always building LMB. do we need to adjust any Kconfigs with
-> > this change?
+> Assigning a single variable to section __efi_runtime_date while the rest of
+> the test is in the boottime section does not make much sense.
 >
-> We should be able to enable CONFIG_UNIT_TEST on any board.
+> As we do not set a virtual address map here, we don't need a runtime
+> section.
 >
-> Many boards use CONFIG_LMB=y but not all, e.g.
-> amd_versal2_mini_defconfig. Building this board with CONFIG_UNIT_TEST=y
-> fails:
->
-> aarch64-linux-gnu-ld:
-> test/lib/lmb.c:411:(.text.test_noreserved+0x428):
-> undefined reference to `lmb_free'
->
-> With this patch on top there is no build issue.
+> Update the variables at runtime test.
 >
 
-Ok, please update the commit message when merging
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+Thanks!
+/Ilias
+
+
 >
-> Best regards
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_selftest/efi_selftest_variables_runtime.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> Heinrich
+> diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c
+> b/lib/efi_selftest/efi_selftest_variables_runtime.c
+> index 0886b4894b8..fd570d673f0 100644
+> --- a/lib/efi_selftest/efi_selftest_variables_runtime.c
+> +++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
+> @@ -17,8 +17,7 @@
+>  #define EFI_ST_MAX_VARNAME_SIZE 40
 >
-> >
-> >
-> >     Signed-off-by: Heinrich Schuchardt
-> >     <heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>>
-> >     ---
-> >       test/lib/Makefile | 2 +-
-> >       1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> >     diff --git a/test/lib/Makefile b/test/lib/Makefile
-> >     index 7c9dc180c8d..f25383a40e5 100644
-> >     --- a/test/lib/Makefile
-> >     +++ b/test/lib/Makefile
-> >     @@ -16,7 +16,7 @@ obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_ctz.o
-> >       endif
-> >       obj-y += hexdump.o
-> >       obj-$(CONFIG_SANDBOX) += kconfig.o
-> >     -obj-y += lmb.o
-> >     +obj-$(CONFIG_LMB) += lmb.o
-> >       obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
-> >       obj-$(CONFIG_SANDBOX) += membuf.o
-> >       obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
-> >     --
-> >     2.51.0
-> >
+>  static const efi_guid_t guid_vendor0 = EFI_GLOBAL_VARIABLE_GUID;
+> -static const efi_guid_t __efi_runtime_data efi_rt_var_guid =
+> -       U_BOOT_EFI_RT_VAR_FILE_GUID;
+> +static const efi_guid_t efi_rt_var_guid = U_BOOT_EFI_RT_VAR_FILE_GUID;
+>
+>  /**
+>   * execute() - execute unit test
+> --
+> 2.51.0
 >
 >
