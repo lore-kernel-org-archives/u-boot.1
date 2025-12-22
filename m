@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADB6E6ADF9
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 22:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78949E6ADF9
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 22:31:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7522483F59;
-	Mon, 22 Dec 2025 23:26:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E1FF584131;
+	Mon, 22 Dec 2025 23:31:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBzy0DoD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FeOwMovV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C88F83E83; Mon, 22 Dec 2025 23:26:27 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id BB96783F4C; Mon, 22 Dec 2025 23:31:46 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07B6B83F14
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 23:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 339F9840CC
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 23:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c6cc366884so2094645a34.1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 14:26:24 -0800 (PST)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c6d1ebb0c4so3063835a34.1
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 14:31:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766442384; x=1767047184; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5UiSbQ+p8pn+hr51duCHBjixSaTSzHgqd/E0dKVmRQ0=;
- b=YBzy0DoD6ppZMWVfrB+1hoUVggQ8DEehKEpUURm2EDNf1w4EMItR8GEkDp95xTFosx
- IA5G7+Oe7ED023dWvPqk9wNtBazQzE4kau6GqMmrSJzdDVTBU42RJz+oMyqDccHoLnUE
- Mulw0oHWHe7l/ucC3hHxfQ3V9gDgC/+XgoSgA=
+ d=konsulko.com; s=google; t=1766442701; x=1767047501; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5uu6hbNDqgm26iROgN7LSUh+EIqHpiZF9NTowIK9Lfo=;
+ b=FeOwMovVSGMg24k4KUEeXk++ofUkl7j9DX0yccVM3Lk1jjs1whUlADAuJ1nbKLm5tX
+ oy8HxLjIHA6zQBzDiQtHVReBO3KdFA/lhmNMkAV1liA16JDtw0u9yHM+skCbK1W7rb2Q
+ wJgLq2gl8lLEU2+w17RBL3fGgAGc/8jXWRkc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766442384; x=1767047184;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=5UiSbQ+p8pn+hr51duCHBjixSaTSzHgqd/E0dKVmRQ0=;
- b=IM9hgmkrUOS9kiqIzK4//ZZ+awLkDgHfYma8yfm6pF2KFZvcBsUnlnsyfxPhvu6IXN
- 5yV5yn8Cu3NcpRTyEDQ7KRfr8mDKChI/dNkkfgMRHO+oWnBU8jnxbnOwAgqN8AykKnjR
- a99xnKKGPJY/z+P9qcTphoqdgrXSBgBsXGEThgReheXWcvWRCRorciC+6x4WAmX8kJN7
- GdeQODmmBR6FK+Vdz0EbqpFu33xAa64OKGCiH925J+dhEIGPYbKD4ZI3s8lQa5Cd0ALx
- DNHwkYMqMe1UdOGGQ50464/PdYKd+aEa2o/AxmsMcSJB7MmkWwdkaZ0z5IesUOIdF+A0
- v+3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLBOKXroz316VWHSLqO7BeVzW83dh4Cndjmu8BE9LjlddCx/AGmLnRXayAOYMTiyAZ4Jl/DbU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9gETDUWC6UyCRCIsBWE7QND3FMwatTDEsoz+oGhlIuC2VxYUP
- ScZob1cFofi4v862YlVF0f/NDJ6x64TwCSJ8OpB9Mug/0O62fDcL1QRZjl8Css0jlcY=
-X-Gm-Gg: AY/fxX7oW3MxgHjr180A6rn5XSrC2vlY9f16wEm42HM5H2V0vhDNKK9Yn4QiqaT2bn6
- 7irDUHHYBKysyVQ765erleWW+YzXHA61FQD/uyeHmFYoPDAXkJvueecSQzvQjPbnQo9ZWn69XVG
- 9Zo9JExfZux4ZZnygsfZhq++qRU1XFNMzJeuoQs4JQGahWf3o9EJgfrGjmW1EX84jvKkmMgO5HC
- Z5g2ImuigyUDnrC9UnuCbIsTmjPTmlK/gwQWaFgsI4gW2awXZoj8YqV2Bo5BGUXAjq7G0VOjWlZ
- H9jvk3cZOA6OOjzP4fnuT+HxFwLL3m5nN1wnikr2ByOQmmunwmA11Of7/1FFT3gEhyiNh9nmTyb
- MhvzQyhMTrkohdQfeQz+Xk6GhJnJ7eSLZ8VOw/fMKmDwKELjzExNDwhhdxb+ynLiE3il0zP3A5F
- h1rVn0SRG93+SqJz/gdV5f4Z1dJbGDh7skIpOTuCt0UWqtvQij
-X-Google-Smtp-Source: AGHT+IHen2Iwtv7vyMgiVp315eR5+Mhxr6GZ3qQc5bFlYqDayzIuNW6wQBqEMIo0wfoa+GahlxwEjA==
-X-Received: by 2002:a05:6830:410f:b0:745:a41d:22c8 with SMTP id
- 46e09a7af769-7cc6689c924mr5918637a34.1.1766442383800; 
- Mon, 22 Dec 2025 14:26:23 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1766442701; x=1767047501;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5uu6hbNDqgm26iROgN7LSUh+EIqHpiZF9NTowIK9Lfo=;
+ b=IO2TkLx7uFL6rx31GRQS9TuScBppfkhGkV6Ec43Y0P3nVev4PKb+JK3YcRC1bxhKN3
+ 1IWfE1Fds/iH9yIUcmZMfx2WL2qKK3B89OQQHUdvxabd48MlmbD+VT9Lg7YzYcJBvFlU
+ Fn8EgAM3tXiltlHAKrcjnaBcm2vskytQwqg93D/ndqF6N1KgonjRENY07zCprd1CC5l1
+ vpgzRezUZMQjM6KxJ57L5wyz2VXl+miM2c0z/L6E6Dj6I6TnD3jMpLm87r2Y30Pmlx7+
+ k2f5vhx06EzReBacKsq73BSpJJOokGpkt3c96kCx60ddGRl21LRJ5Dg1obVxruxJjw79
+ nOwg==
+X-Gm-Message-State: AOJu0YxL+CmbprZjEZellnsR3scjiFhUclokIvxEaRy0PAJX5KnCAJm+
+ mQ3c3R4aBhiApeYV2CJVmFejL3AwqFI0qt2IJ2hJL5BlBV00xcXK6Mn8oh7AbRECCjpy+pVAcAW
+ V8MAneNg=
+X-Gm-Gg: AY/fxX5HihES3wgz0CGF+RJbwkW/mdQjiJJGlNQN1WWBpX7AaCHJ0TAaEXYpXSBP7hM
+ TqpLNDv62ZAYqDO/T5VIDqKdi/ir2+TLg+ASVzX3vZWQgZvW+SI7znwc+ma5btyUK+BzoYkqs8y
+ 28og1JFKm5uHIX74IGCUEceqAqYPCbJ0jfYZfwEuSej6e4fzfImY4lp6EmeQvsBJAOU5/2jDH7T
+ AnlKju+BOyZy0r3DP0pBsN70m9Lp6BUTQtMoOsnLLzQgIPC35hgez0ZUeLwhhd80/OycRs/q4iu
+ mj2MpV3IHqio+ixG2vLhfqYf0Q3He4YNNAZY+U9QwdTgFYpPfA9UorOrzkpCNJXLXTwbDRT44It
+ FjyBZ+1HFrKme4nja1FMILwF+xuTM7hQ5H5nxp/LeYlwilhJEl5xsCp5VSb/iFdoZ5X2qZdsZLO
+ EOcLhhAeB4U8sNkQ5yH3xQOCMVx3oJShcDizFUzJS1NlolQOjwhg==
+X-Google-Smtp-Source: AGHT+IGfsxHdwhfhRGT7YXnMDoGcer8feI5ognCVu/QUFInzdLvfFCIDVyQnjKo6yUZqSA+UR+8m8A==
+X-Received: by 2002:a05:6830:4410:b0:7ca:ea23:f851 with SMTP id
+ 46e09a7af769-7cc668c4a26mr7095644a34.13.1766442700932; 
+ Mon, 22 Dec 2025 14:31:40 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc6673c32esm8283376a34.9.2025.12.22.14.26.23
+ 46e09a7af769-7cc667d7f1dsm8185415a34.15.2025.12.22.14.31.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 14:26:23 -0800 (PST)
+ Mon, 22 Dec 2025 14:31:40 -0800 (PST)
+Date: Mon, 22 Dec 2025 16:31:38 -0600
 From: Tom Rini <trini@konsulko.com>
-To: neil.armstrong@linaro.org, quic_varada@quicinc.com, 
- casey.connolly@linaro.org, andrew.goodbody@linaro.org, bmeng.cn@gmail.com, 
- u-boot@lists.denx.de, mibodhi@gmail.com, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20251222090105.2275585-1-balaji.selvanathan@oss.qualcomm.com>
-References: <20251222090105.2275585-1-balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v2] drivers: scsi: fix double decrement of block count
- in 64-bit LBA path
-Message-Id: <176644238299.926535.14000759304743520383.b4-ty@konsulko.com>
-Date: Mon, 22 Dec 2025 16:26:22 -0600
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.01-rc5 released
+Message-ID: <20251222223138.GD847766@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6qFHos5mICec7U4H"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +94,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Dec 2025 14:31:05 +0530, Balaji Selvanathan wrote:
 
-> The scsi_read function incorrectly decrements the block count twice
-> when handling large disks that trigger the CONFIG_SYS_64BIT_LBA code
-> path (reads beyond block 268,435,455). The variable 'blks' was being
-> decremented both inside the 64-bit LBA block and after the successful
-> scsi_exec() call, causing incorrect block count tracking and data
-> abort errors on large capacity disks.
-> 
-> [...]
+--6qFHos5mICec7U4H
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+Hey all,
 
-[1/1] drivers: scsi: fix double decrement of block count in 64-bit LBA path
-      commit: c0add0039825fbd40620284c202f7c4569154605
--- 
+It is once again release day, and so here is -rc5. Given the upcoming
+holidays between here and release day in much of the world, I'm hoping
+for very little changes between here and release. I'm quite happy to see
+pull requests for the next branch of changes people have outstanding,
+and as always if people know of regression fixes that haven't been
+picked up please point them out to me.
+
+We're continuing with a community meeting following the release and the
+calendar link is
+https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DZGNsNT=
+h2YWQ2YTB0ajAzZXRkdDVhdjFuNmpfMjAyNTEwMjhUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
+mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
+89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
+lendar.google.com&scp=3DALL
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+December 23rd, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+In terms of a rough changelog:
+- Assorted minor to us security fixes
+- Scattered code corrections
+- Some rockchip and stm32 and TI specific fixes.
+
+This is the last scheduled rc before the final release which will be on
+05 January 2026.
+
+Thanks all!
+
+--=20
 Tom
 
+--6qFHos5mICec7U4H
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUnGygAKCRAr4qD1Cr/k
+CvnaAP9RHoRwVoflrBf9FQbPrDdQLXGs2bxWg0skbnMeZftnugD+IdXTxjt22zsj
+vzvex/1wkfzaTIrMqRQyn/Uva+U25wU=
+=Ie/N
+-----END PGP SIGNATURE-----
+
+--6qFHos5mICec7U4H--
