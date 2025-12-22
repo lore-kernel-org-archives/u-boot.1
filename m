@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 183CAE69166
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 20:06:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF6EE69160
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 20:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5798E83FC5;
+	by phobos.denx.de (Postfix) with ESMTP id 94CD08412A;
 	Mon, 22 Dec 2025 21:04:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="U+s5BGED";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QJqbiyGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A1DC83E88; Mon, 22 Dec 2025 21:03:05 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 4941783EC0; Mon, 22 Dec 2025 21:03:06 +0100 (CET)
+Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
+ [IPv6:2a00:1450:4864:20::343])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1488283B95
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 21:03:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 478ED83B99
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 21:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-4779a4fc95aso25919345e9.1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 12:03:03 -0800 (PST)
+Received: by mail-wm1-x343.google.com with SMTP id
+ 5b1f17b1804b1-4779ce2a624so32360655e9.2
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 12:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766433782; x=1767038582;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1766433784; x=1767038584;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zF/5UH6gL4zSa9KYCQ6MMPjHMcYSpf7GvHImAbRf7iQ=;
- b=U+s5BGEDIIaUzV3m3Jbo6wlV4a44obFc+0VqclsZCU1gzR1o4TYlqvvq/8QvZdTvzk
- C0cVWRFNWG8707+nOc6s/9MoiJJyj7uRUtLr9n6ZKCZ5isZB9ukRUujV4Cz2lZBwBsDH
- 0rkMeIsWSpDJxrpCdubvbfntcV5U0CEz6Tl/GBXODBQNbPzaNO9F5Jtjb/c2e207O4+E
- t/OjW4KTdvCqLwt3XLaRDwAl7TTcsVsVHekImzDemV2OtnuetFwExEd2abpQjqLidcpV
- Jma8dDVf1eQBJJW+TAz0CtsfSgLN2AlLD03QCFideDPHpaM3jeGgZep8BQt7RtnvJT5r
- 2j6A==
+ :reply-to; bh=AwLU3YUkEos43VqpyHz3sA1hNnWziyeOM5Ldk8d7XBs=;
+ b=QJqbiyGLr3BqdlsNrVtSEuIk52tweTCRs1E7zf2xfml3UKPrtTQ/EBEcKKQpyfDOYE
+ qyoIW78lxxMM7Wcq8jkX2mL5JGkwnMSMSHqFmy9n5g6VA28WHazTshXmDwEpxQvYzOIy
+ Eq4LQn+V3jZJu4FtA8DrA6Nyhq9Sc2YJRhK+IiU0uLCgKnw/kCCC8ddIlHVDBdMVGJYj
+ OciYsTB1bQliDruRIM8pWAL8PAIFhubUO7XQtEsCjDV8L1nv8j+ifr3zJci7wdEtIJam
+ 5q+1xQ2b+q61dvg0SMXi3zUvb7BwxEUUH3wc8QZAPZ+M8EJPhsBtos5/8EI0F2MHMhjL
+ B3+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766433782; x=1767038582;
+ d=1e100.net; s=20230601; t=1766433784; x=1767038584;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=zF/5UH6gL4zSa9KYCQ6MMPjHMcYSpf7GvHImAbRf7iQ=;
- b=RNSThe0kFMgA72tJowJfpJpUxvGWgVPB17JkSrfGXj2xWWAV1et/1xJmdvHTyJ+7B1
- r1HB6EO9u01CYZdf6zhMIWyATTrV5zhWbHfrpIzAC2tO8VozMREm7mncIEBS1gGJp6vh
- eirS6mDqwBn+z13Y/Q5w+l69iJEHAUVSqJT6RAgbk9XCxCPhasEhY/VYb0mUkEkBqzgN
- XI3AfZps85C3PrQkv/JSl0CjGsL/qewyALOGFUwD0CfFAgT8TQy7MYm/T86YhX/ESOS5
- tZzpN36YEpmxVJDvJw6t+m0XM0ptVYlx0dMI1sleceyxOYJfewnxnGo6ggoDl6X3UAMi
- EcgA==
+ bh=AwLU3YUkEos43VqpyHz3sA1hNnWziyeOM5Ldk8d7XBs=;
+ b=bnHVvsgs7EZpQLhr4HoXcC/f0gVnpjr9M1TF5V2zh5guai8o96Q0OSYg4rCE+r+WCc
+ q7Ak4fcDFcGmdmtgWsOWUeU1SuvjTpTUud0tsYvbwA42iuiAOBaJw5sHupPdt2aEHq6/
+ Seaelo9nOADqGGsahUrwy7k+Hokr7oU+nMH0n5stdChxFiQ7pzxKzsTo0JhRKix+1hnV
+ gL8bK0KrGfUFcNtm7yNi9m3t3dr6q8TPpJVXoDhQ2/kZ6zvucCa4VEkYUcHpwuvEtZPO
+ y75pbaENHmV1/rdyyvXVE74fZirTUjN4lqz1VVnmUh7Ov9bVZSQvQpdSLu1ruYMORRTt
+ WNyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6w10NWy+WODiLze9LkmZBUP1/DeUCwp9QNO0JpKRxWrUPtL1VwHLdUwM9lQ5iQBKKqvBBrJk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOiBgGw/vCNVF3kbseFK0Rcdh4xky1y1kiOvikI1ZiQjCxNntr
- bWdfqfohODVvWuqHC0hut4gcsSFRKfPdIjRryRvPOTxosXsN6xjstVttmw69Q2raQxU=
-X-Gm-Gg: AY/fxX7Fs3HFX9u5FLj2TJc+a6THwZ2V8/y8gPK89hX8YKKjVTHxShCLuiqAXaz0rD0
- rtHHGx1jqHSlOeDj14TXxRjdo8Dz0NDhHD27KTlyIj6XZy2LP9oUQbfCqaeW3h25fa4SNpbcjbd
- DwvUgGxb9ZL0P7cFVanUBc1AWkeX8njbGXIO5qz7l4hdyWQJ7aApN6PQlVwmZf4ySQ1jBCZz1hP
- V2CHvJ3eDz8JxYo1U4KZMs7vq9LfgIJ+CkqhB+W+PPt1ObBWfw/DWVXoai+YSb/micTa8smddCT
- 35+Cc9ncoNv50ghUmncj89M3ZBvdeEWLZcWklYELfzOXs/IFzQ3g3ooldRp/v8Eu75dORXigf5C
- 1RiOamDFxwP13mrE4pOVJIbQeS+3w+OKOJKgXN1gvWBqPMGXGAtUmOkAEaGgmbIDe3+y1fTVBWL
- QMKVwtd5px
-X-Google-Smtp-Source: AGHT+IGrKiaTmpODSiVAcqhhNUrG9n4qmUbxpueKTNjblsSLbatVtcDNnf0+D7i0hRoosNKOdYCSgA==
-X-Received: by 2002:a05:600c:6610:b0:477:a219:cdc3 with SMTP id
- 5b1f17b1804b1-47d18bd56b8mr121668275e9.12.1766433782479; 
- Mon, 22 Dec 2025 12:03:02 -0800 (PST)
+ AJvYcCW9SWdYNJpfwiJB1rDXtyV2ts6tr/FanjVv2GxYnc9JT7G+USmO8QWM6K6ixYBWqPIzhiIu7vA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNEnH9IYMG5KFBmcrZnwm44awqlfMsRXuxPVd9TnQT6GGjv66+
+ xUljuXR+6MDE7SPj+iiOrdsj1oOiBMPV0DwwJfvYvSmErUsqP5YwuCKDkinnE2lKVYA=
+X-Gm-Gg: AY/fxX5Q2Aq30enYCd18QSVCd8rSiVpWzuWM3hF84J2v06V+718EGIUYS8RGtPnKytW
+ u0fLARD/Xv4Apaht5VkQs4L2nizbZKexxLJGlGsdEXguCSi29DphdNwTvq0LmDmrOEvmQqGndHC
+ cTWV5kdsNhNvk+NFNomFf/BswPRWskpWTk7nTrGRUIDF9bb4yfdoyXibARSB555ww7L2vbMIfsQ
+ yWc+eXoVztj2BTspg2F9JTgYSt49kI3oyI9fp8DbpjgbglsaQTnkn3XQf3lCofR/j2vM4XCglaO
+ 3/zUxq8e05IQfK8cYDX7EKaFLwCZAmt+QreXEtLRlLhwn9d0V7bxyc6p950hZQM27ESYExseW+r
+ K3zcvCCr43rIQCJyUZKV66zFRmusMq3+63FJEDk5ruWddGc0hCn9j8dgkbeO3W8CSulLaKSlpcS
+ opUoYA6M3C
+X-Google-Smtp-Source: AGHT+IEX52Wj9c9t8S7MhoTMnJR8/NdTjcpP0JrJNq75WVH4ioftTkaceF199Z2gZEeMaRkRklf2uw==
+X-Received: by 2002:a05:6000:186a:b0:430:f301:3e6c with SMTP id
+ ffacd0b85a97d-4324e4fdcd8mr12122828f8f.34.1766433783615; 
+ Mon, 22 Dec 2025 12:03:03 -0800 (PST)
 Received: from localhost ([2001:4091:a246:82fd:4350:c3d9:84a3:70dd])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be3bbe1c8sm102137655e9.11.2025.12.22.12.03.01
+ ffacd0b85a97d-4324ea830fesm23992967f8f.20.2025.12.22.12.03.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 12:03:02 -0800 (PST)
+ Mon, 22 Dec 2025 12:03:03 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 22 Dec 2025 21:01:32 +0100
-Subject: [PATCH v8 11/13] arm: dts: k3-am62p: Add r5 device nodes
+Date: Mon, 22 Dec 2025 21:01:33 +0100
+Subject: [PATCH v8 12/13] configs: am62ax_evm_r5: Enable IODDR resume support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251222-topic-am62-ioddr-v2025-04-rc1-v8-11-e70fed16b166@baylibre.com>
+Message-Id: <20251222-topic-am62-ioddr-v2025-04-rc1-v8-12-e70fed16b166@baylibre.com>
 References: <20251222-topic-am62-ioddr-v2025-04-rc1-v8-0-e70fed16b166@baylibre.com>
 In-Reply-To: <20251222-topic-am62-ioddr-v2025-04-rc1-v8-0-e70fed16b166@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -107,12 +107,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=780; i=msp@baylibre.com;
- h=from:subject:message-id; bh=IR3ZGyvRn5SQ5Y2r5+Lc01qHOn6U2D0tHEfc8+7Sn4A=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzPxRdzIraFbRd9KRCyzczJUJm3ZHH0ric9Uq9s/J20x
- PYx7FzcUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABMpXc/IMNszNlVYcoFioeAf
- 89MG81nfCl1dIrqkeFaeTGkk+3S1LYwM27tygxntw7cLNy/cutFBubGuK+POhAeVZ/f/C9mX3+L
- CAgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=723; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=JkFmmLrvgUAC6JGhHpGA9eAAYn1Yn+JaFiZUvH0W7C0=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzPxdeqmGTPVO+t3vLF6txlkQfL3VQ2b2Wd93hSbFP8N
+ 6+NndJJHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCR6OmMDHs2JFzd4uDDsPKd
+ rmzRQkdpVVfv+V+DVMM0p4Se4V9fpsPwPzl52RWpi2enNpbN3s9y4meYv2D19XdP+luuXK0LuK3
+ 3lRUA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 22 Dec 2025 21:04:36 +0100
@@ -132,34 +132,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are needed in SPL to be able to resume from DDR immediately after
-booting from IO+DDR.
+Enable K3_IODDR to enable support to resume from DDR after exiting
+IO+DDR.
 
+Reviewed-by: Kendall Willis <k-willis@ti.com>
 Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/am62ax_evm_r5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-index cf087c6e343a8af6f4bb2093bb6c3f28395a2686..26133d818973214914f68838f678dda5aba63970 100644
---- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-@@ -13,6 +13,14 @@
- 	};
- };
- 
-+&wkup_r5fss0_core0_memory_region {
-+	bootph-pre-ram;
-+};
-+
- &dmsc {
- 	bootph-pre-ram;
- };
-+
-+&wkup_r5fss0_core0 {
-+	bootph-pre-ram;
-+};
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index 64886986c4264a5d9272228e468f7057c195593a..3a9f382193532dc3b712a1bd3fa16a9c0de3fedb 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -106,3 +106,4 @@ CONFIG_SPL_TIMER=y
+ CONFIG_OMAP_TIMER=y
+ CONFIG_LIB_RATIONAL=y
+ CONFIG_SPL_LIB_RATIONAL=y
++CONFIG_K3_IODDR=y
 
 -- 
 2.51.0
