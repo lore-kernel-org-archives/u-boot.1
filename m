@@ -4,137 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035E0E6749C
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 11:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F890E674B2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 13:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EFF2840C3;
-	Mon, 22 Dec 2025 12:52:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 543F483B99;
+	Mon, 22 Dec 2025 14:32:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XBmcQiZ9";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jI7SoixG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d3QRIBzx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 112D784042; Mon, 22 Dec 2025 12:52:24 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0CAD683C28; Mon, 22 Dec 2025 14:32:54 +0100 (CET)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB18D83F64
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 12:52:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6F2AF83B95
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 14:32:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5BM8DU17101413
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 11:52:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=85gkO+xRE3Q
- EgsElQo8dl7869tJvBKeOFLDserG9pEM=; b=XBmcQiZ9sWqOMM+X9S8syc8h2CV
- hoaFZHbHq06n3vdPEfQzwMqtYt93zuk8SpQHIe2E3kyhPLbs0yXNT4jT1mgJ6Gzn
- U97a7uMFbJZM+tdDa1sXllCJrBp3Pu1V7LDPL3flAJvEHwXaNfOp1Bs92va5TJUW
- m34CkJa2mm0dMdwQ9mC+kl3AGRNYMPB23zkpBhoQhk205yOUGiaTGLMJvjVETI5s
- nZmzXk2kVzrJua7kvTERHZVcVOnmaawJ0UiR9VOe1y0qQg/5q2hrCYwGeRbATtFq
- NV8646BmVjmoCzR5I263cMKgnNdySHhHAzsxNZ0AdqzQtsLgdILD021Yj0w==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b5mracvar-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 11:52:19 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-29f13989cd3so119406565ad.1
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 03:52:19 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-641e942242cso3084067d50.1
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 05:32:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1766404338; x=1767009138; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=85gkO+xRE3QEgsElQo8dl7869tJvBKeOFLDserG9pEM=;
- b=jI7SoixGDMHveNMH1cMjLe2lEB4zqHZhE15nMLU0UlklODYK5nDZ2oC2iVtWOFe27E
- YssClDAzPkQx4ZDVTZtxzOPunRVQvHMjCBwxDPRPodfNOdYgsNvV+AthdC2YpgTC4CpO
- 8yYraTK/plGR03t2MfmlAs5plyK0wELN2+WbHTRgIde8EO9QU/ZrCQRbANq5lbUMHjlh
- ob/YE/peSRCOmxduHCrGw6P4WazQJk2Wu0FmofsOSN5XP4xdzx889bqlixnLQbOKAitV
- cbswL5qqkfR1viQZCDPYC4TIA/7TgeL8rHo8Wl8WM12mvaC0KGvJf6wmaHLsNbDSVljH
- yaew==
+ d=linaro.org; s=google; t=1766410370; x=1767015170; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bVQFq2Ben8EWJGKJuNIDB2SI6i/yhLM1jISdSoPV158=;
+ b=d3QRIBzxWQhFEfQ+SK+28CTOG4qiUZu+oIuBj7um6stusOBap/k7RuHK1otH1LFQzg
+ TGN6iK7LTtKTl9n405UD6yevE4c3PtgIB5IlQK+WYoKr6dFq9yFzaeZK8p7Ugmujhypm
+ 6v2Mcw4LlFsSDXwn1XTMS20g08B8nwPhj1LDxUs++edYBNePJFSr4qXvhSorEKtgMQp9
+ QM0wS8mPjo3knyKHZPv9jQpgTZPpdSVjUWnnPHA2yB2LFCHlSSlqXmIUDYaDhrLDdApw
+ 8Xdm+3Jy8qLQ2LT9718HZgWpgTrwmwqhJk0tslqtsqzNHKwK9+XwO2MKkrysK10hCr+P
+ cpsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766404338; x=1767009138;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=85gkO+xRE3QEgsElQo8dl7869tJvBKeOFLDserG9pEM=;
- b=bVsikIQ001Bt9hUIdMjuKUt8qfJg3XcR5RFMOk6w4yzShxrE4QyaZv1bwgCI5i4HcD
- OAmy3wztEnnhd8ncaJkVgma5T9xjMNSdCuhbs7ddTZlVR8CY7h9Zz0QhaXj1U3JnIfrS
- 6MLs6ZK7EZ9MwFOul0LO5rkqzakM36veCgul6Q6loLUfvK8k7odxVlARD6R/w1ieyrJb
- 0bz/xQFrDVgJPRz8m8y9foJaT1UaXyZGVfuOfrEkisD9pToYHyBcWwFM2XlQqI7Jp1oL
- Ep5X3MuNZK1S7/+e3M8JmEHbLeRN6WmzM/H/StqEt8KTMhm9Mgsv1ijaWRHhgI+aCrBx
- e2lA==
+ d=1e100.net; s=20230601; t=1766410370; x=1767015170;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bVQFq2Ben8EWJGKJuNIDB2SI6i/yhLM1jISdSoPV158=;
+ b=I7SQIwFWd+HhoncE6f3yrdsvFQfivu73Pv4XpCxY2gh2CgO5RXuDtvAa7CrFgy4f50
+ zgPUOG8m1w0aP91SVAI6bl2CiwXiGiqbTmoKvQFBsUVjQbKQhNV/PMnXeZ+k9GiuEFgU
+ McndfiD3u8/aYU4AhUa/mUFSjyyw7Bv1jmNgTHrAwaQXcbO3COVldF5eHMrfbk8+042e
+ 31Fbiu0GPKdZqOZgm3IHBctt8y9FIAt9Krwj/3SjforON9Fu/vxvtKWiupKy7FBdlJOO
+ Bpxj2pxpI7lr6cWNTGYiCuxCbDNjazfvS7VDPxLDggylHffHEiZ6v72MCK/5jgOu/HZA
+ pHLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVB1fqjBvBOCoSKCAp4BRLB94sT2hgh2W2xgNZl20JM5otZykE+VfceL06+UUYGKa/KcLmHlPQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8NVY9YNMSbktOaAhT5lTFgSDSibrBuT+xCjf5NbxA+y7wj38l
- rKP/nIPSQU3ywJUKUTAdgY+Izxt+oB3pmLz9maJwh+QjgEknVU4+ZI0koEGmuoDqm4PijSwlSMo
- dfGWtZxm+rxzWKwhb+gr0n/uNpqlh5ToGOgEcKu1im/0mvQqp+w6al0jp
-X-Gm-Gg: AY/fxX4U9qF6srzErcVIDhKja1TlWM/ieecB6q+SBzSRCklgZMjfqCmiJ0JhIO5dB7N
- Yj9Gnfb5LFXWrvkRgei2XUmF848f86NTRIdEgQtSwCHek54/0gOSUiTpDnm8SG8BrfOVUHk6yBB
- tt5KPxpOqv/bvjA9x0BQpPbOfIjSfAHNHVElZ0hFeVrhGTf6N2dmpN1aVEnJPAlNcF7COlQ0P0i
- 9oamwYWGjapgv5L2vP/fm4rvBgJeFjHFgsJgSJ6UIs4eBmdAiFFEqrzuKoLgipdhxN7sRL996eq
- S5A8Z1d7ublNz5EtYH81c3MRQoQb92knwVNnMZ9+7vAkxH/gbLqWY9zktEYQfRpctqnI857BxUA
- HQACCYIGRNjRcXewccDj6ZelNNPI9/LvBNU46/cMcEfMScTkRBWrt6qvNTZEUzVuYb1jg5AY4qv
- suKrKHYwmkSFkidjKaebeYg5ihlJ3t
-X-Received: by 2002:a17:903:32d2:b0:295:ed0:f7bf with SMTP id
- d9443c01a7336-2a2f2a4932dmr87157745ad.58.1766404337837; 
- Mon, 22 Dec 2025 03:52:17 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHBlRlkC8efkrb++HLLsJ/RooyQkno7KbWPaUwjp3p2tA+26GyG04FXHBV5LNxPYbDNkk72tg==
-X-Received: by 2002:a17:903:32d2:b0:295:ed0:f7bf with SMTP id
- d9443c01a7336-2a2f2a4932dmr87157615ad.58.1766404337422; 
- Mon, 22 Dec 2025 03:52:17 -0800 (PST)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2f3d5d20dsm96656055ad.67.2025.12.22.03.52.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 03:52:17 -0800 (PST)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
- christopher.obbard@linaro.org, quic_varada@quicinc.com, me@samcday.com,
- marek.vasut+renesas@mailbox.org, alexeymin@postmarketos.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: [PATCH v1 2/2] configs: qcom_defconfig: Remove redundant pinctrl
- driver selections
-Date: Mon, 22 Dec 2025 17:21:44 +0530
-Message-Id: <20251222115144.2146964-3-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251222115144.2146964-1-aswin.murugan@oss.qualcomm.com>
-References: <20251222115144.2146964-1-aswin.murugan@oss.qualcomm.com>
+ AJvYcCU94duBUu49WH8j0xIsOCrfpuoiPodRZ3G/Q+HuzWeZY3Gl9QxcQjcRk1TBN7Un/9nEVPBOtCk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMry9+iQGjL6fs2P64CktLt+qlsu5Uh8ZptaIz5TGFijLKy+cl
+ BO/z9+kbIpLjGYBtSO+qg2IlY577JeocsYGpJS+pBMs0zKSl4HMuml1t+QEImlu1d1dXuqJG7vO
+ g8zXBZPvKKaExLV2ckwQJZDriOpK+7d7mXxD84GK14fIndrvt/fXsj8nc4Q==
+X-Gm-Gg: AY/fxX6mNZWxKwn6DEBoEOEUoUNHXj8WPHD8ZCJZdqdJrCFpafg5zJbJZOBPmvNdP7G
+ 2jDsAh9wvsiWLgfTG8u/DFhqbDX7XraFrRAVjL9eySEeYWopJKvltrjXfarXF2PAghkJIFWEB97
+ DubrPkujIPIDiioP/suc4KqUklobrctGgFfH3L0efYNThaoXuYVu/eMu0n5L10bPGihtkdHXojW
+ JCch9yc7Ufq/dzB8huVTbA3H8EMiC79rHDf7nY7Ha0qiaphiN7XwHpf+P6b4lE8vWf3u8a0yNMo
+ AVcwAPlFjCfwcR9d5JjvUpLQt21Y0ojGT6uRLVx51MQjjxZwNAj/tGckYzBp+imuSPblzcE4ECx
+ +3mRbV9GS1ca5DW/Nd3AhLuagV5DfBy0JFX6U1/kIWFGrpux16O/fmsl+NY5aCDz3+mjHDuvaQ4
+ jgTtolFQXaCBo7eXa7Nh9ZRirFAPvEvoQg4eMvYvp9Dyk9RJVgDeZAVlbQsMAZb8orvA+fHRfXl
+ rY+6h2+PQ5gRiTZa9KQ2RhIoD8DWkUKmj4HOL2TkPQeIaexl5VZHbcqoorjfc8I9PqYjh063EIZ
+ 3yK7wDo+L3sCbuih5Q4O6y851HPpzPve
+X-Google-Smtp-Source: AGHT+IHONyroy84WKNzP7kTkD59NYw6qjyoEiLOS8md4ERnVLj7fWEA2nRkodguv7SINFqmlQcf2+tLLrXW0fzWging=
+X-Received: by 2002:a05:690e:1502:b0:644:60d9:866b with SMTP id
+ 956f58d0204a3-6466a9265a2mr7495060d50.92.1766410369726; Mon, 22 Dec 2025
+ 05:32:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: DAYxT4vnF5bwcg5UusDrFPTFhb-pjtPr
-X-Proofpoint-GUID: DAYxT4vnF5bwcg5UusDrFPTFhb-pjtPr
-X-Authority-Analysis: v=2.4 cv=e9wLiKp/ c=1 sm=1 tr=0 ts=694930f4 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=3Ywh16zS-PkExWgXSrwA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjIyMDEwNyBTYWx0ZWRfX1A4aMb+1Uwwx
- CNrS4Xol+lf0cws2WpvdfL09NoJfuIvF8pjxgSmYbyKdcKx5WYRQYxUu3W9P8HfJB3Jps3POn2r
- /3d/dckLfBW69HvboEkqyCqsfx0QTi3KSNmHaQ6NxJEOBIsaVHxNVtuVEkBP8FdL+rSEyZmrtem
- g4Taif7xF1UTLNUYw3tUPk/nAKVQUhkI9XLmEEa5w61G2wDU6h2J8PQwheO2SgGPNxxvQVxxdAi
- hkflgPu79kQAFYbFvaFkcCDxZ7cYP4rg4EOraqp8Xa3xmcQVyOdJE6+kN67cDzZNhM2sVhtLM/B
- GSoa+FuvVJvD4QCUjXbUSl+dwtDZSaCh8+9Th3YR0dpn0lLQBKiD2NuZSPqOjmj+gDt2fVL2dZJ
- ahgWxsmPeJOvAs5uupROecs5l0YsTiXogcNBnacaJ6Z4nJLuElHUp33dPVfZWE0I6DyfEsGfjwY
- qmL+X2j+8wMINzvibwQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-21_05,2025-12-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 impostorscore=0 clxscore=1015 phishscore=0
- adultscore=0 spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2512220107
+References: <20251219224326.195190-1-heinrich.schuchardt@canonical.com>
+ <CAC_iWjL94aX+9dGfYsG6ut0MSXB97Ta_C20nkj1SEeQGiErSiQ@mail.gmail.com>
+ <1626dd9c-30ca-4275-9688-b79a8110ba01@canonical.com>
+In-Reply-To: <1626dd9c-30ca-4275-9688-b79a8110ba01@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 22 Dec 2025 15:32:13 +0200
+X-Gm-Features: AQt7F2qndArtGkVWYSY2Q9AHqMz-fo-sdMzYDobuiDpEyV49_V0jAMPyAix8t60
+Message-ID: <CAC_iWjLN_KdLtH46pbqCawJ0Fd5vAPAb3_xoiWP=TN3ee7cXxQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] test: The LMB test depends on CONFIG_LMB
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,44 +102,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These pinctrl drivers are now automatically enabled via Kconfig
-defaults based on ARCH_SNAPDRAGON, so explicit selection in the
-defconfig is no longer needed.
+On Mon, 22 Dec 2025 at 13:41, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- configs/qcom_defconfig | 18 ------------------
- 1 file changed, 18 deletions(-)
+> On 12/22/25 09:17, Ilias Apalodimas wrote:
+> > Hi Heinrich,
+> >
+> > On Sat, 20 Dec 2025 at 00:43, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com
+> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
+> >
+> >     We cannot build the LMB test without the LMB library.
+> >
+> >
+> > This was always building LMB. do we need to adjust any Kconfigs with
+> > this change?
+>
+> We should be able to enable CONFIG_UNIT_TEST on any board.
+>
+> Many boards use CONFIG_LMB=y but not all, e.g.
+> amd_versal2_mini_defconfig. Building this board with CONFIG_UNIT_TEST=y
+> fails:
+>
+> aarch64-linux-gnu-ld:
+> test/lib/lmb.c:411:(.text.test_noreserved+0x428):
+> undefined reference to `lmb_free'
+>
+> With this patch on top there is no build issue.
+>
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 919897b8d40..e1ae0d946ee 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -110,24 +110,6 @@ CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PHY_QCOM_SNPS_EUSB2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
--CONFIG_PINCTRL_QCOM_APQ8016=y
--CONFIG_PINCTRL_QCOM_APQ8096=y
--CONFIG_PINCTRL_QCOM_QCM2290=y
--CONFIG_PINCTRL_QCOM_QCS404=y
--CONFIG_PINCTRL_QCOM_QCS615=y
--CONFIG_PINCTRL_QCOM_SA8775P=y
--CONFIG_PINCTRL_QCOM_SC7280=y
--CONFIG_PINCTRL_QCOM_SDM670=y
--CONFIG_PINCTRL_QCOM_SDM660=y
--CONFIG_PINCTRL_QCOM_SDM845=y
--CONFIG_PINCTRL_QCOM_SM6115=y
--CONFIG_PINCTRL_QCOM_SM6350=y
--CONFIG_PINCTRL_QCOM_SM7150=y
--CONFIG_PINCTRL_QCOM_SM8150=y
--CONFIG_PINCTRL_QCOM_SM8250=y
--CONFIG_PINCTRL_QCOM_SM8550=y
--CONFIG_PINCTRL_QCOM_SM8650=y
--CONFIG_PINCTRL_QCOM_X1E80100=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
- CONFIG_DM_REGULATOR=y
--- 
-2.34.1
+Ok, please update the commit message when merging
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >
+> >     Signed-off-by: Heinrich Schuchardt
+> >     <heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>>
+> >     ---
+> >       test/lib/Makefile | 2 +-
+> >       1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> >     diff --git a/test/lib/Makefile b/test/lib/Makefile
+> >     index 7c9dc180c8d..f25383a40e5 100644
+> >     --- a/test/lib/Makefile
+> >     +++ b/test/lib/Makefile
+> >     @@ -16,7 +16,7 @@ obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_ctz.o
+> >       endif
+> >       obj-y += hexdump.o
+> >       obj-$(CONFIG_SANDBOX) += kconfig.o
+> >     -obj-y += lmb.o
+> >     +obj-$(CONFIG_LMB) += lmb.o
+> >       obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
+> >       obj-$(CONFIG_SANDBOX) += membuf.o
+> >       obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
+> >     --
+> >     2.51.0
+> >
+>
+>
