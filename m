@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA2E1E67803
-	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 18:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B0BE67497
+	for <u-boot@archiver.kernel.org>; Mon, 22 Dec 2025 18:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A874783E70;
-	Mon, 22 Dec 2025 19:04:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E79B83DEB;
+	Mon, 22 Dec 2025 19:13:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sk2wHwIU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r4/BDfEs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46CC083D1A; Mon, 22 Dec 2025 18:43:14 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id E31B083DEB; Mon, 22 Dec 2025 19:13:28 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C48F83B95
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 18:43:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CF9583B99
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 19:13:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-34ab8e0df53so4045327a91.3
- for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 09:43:11 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7cdae63171aso1162145a34.1
+ for <u-boot@lists.denx.de>; Mon, 22 Dec 2025 10:13:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766425390; x=1767030190; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BPY8ZnhOKfwYeYYJXbbaC+yQlVtyDPvYfLlFBjOalnE=;
- b=Sk2wHwIUWmXve87UFyWt9Znl89iMIKM6xijaEChxKOV5RGTpIgnfykK9uNIfql//4i
- k/+3FUhtgRblnSLIr6kxj8dHMAMCdD0uUdZY4GCCoRE5q5QH+lqLbDz5bd079hPlxwi4
- cgdoTWDTm1xcxioXOoBMbv0vg556TufJM6I/UrAckdcYb8SDj8rKOPFJT6ErFzBlVvkh
- bzGgNCcFIl+E0yJsVYL2Ahpsvh+rFvs56CEQ6TESVPOIw4by4YxTKA4/cRNNQPdUfWeM
- nkE2ColKMG2DurRZbdF3HNbm9O9E70V0AYxpu5BVBCuRFKj9Xwjf+oMw3ZUR4iNNObtj
- 8NlQ==
+ d=konsulko.com; s=google; t=1766427205; x=1767032005; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ojiGWFXO5RyaSxqBw6xELaUUrhVVTgtiulNESjGpz0=;
+ b=r4/BDfEsbGxmaMfZs5hDT2zLZ6RvT+1PzED3iCnO6h89hbWV546v0AOee+DH8f8aGy
+ I+0wAPYsmhiCZ2FJ9zv2Qa7NY8HxjET+VdOW3Oaq0QUnBeJS0V10DQbR+isLpb9Wxno8
+ W2brFABqM55AQB69MhbL2szK5q6ikx8ZY9ux4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766425390; x=1767030190;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BPY8ZnhOKfwYeYYJXbbaC+yQlVtyDPvYfLlFBjOalnE=;
- b=JAqiJsTAY2QGc+2WfPWvyxJ+3IhzK/zfZ918ZOjBmlmOvORBhFtfM7ohgV5PJgBka4
- 4vdcBBd/FbGumRnoaYx5VK/uq/aznIaNo+bQXvLBSj6JHt4C/4RT/Bu0AS1yxhZ9zT/a
- pXQWZbC6QvqmA7BnF+RK6NEuDaRq1BV9CNzh9bAdthDJg6RjLZKJUPR0eOQMeOK2hzTd
- LX2gwGmkyHvv7oc/IzApzYB19P6WJ2V1D5VSliOCs423AaQqdMQ+qINQvjTejWsUVOPe
- Q47JGd3OsId3ct0s4h6+YgeWtF5roM7ls0CPIo7kZmJ8rtSPaP7amP34oEsZM6/nUn+5
- iJHg==
-X-Gm-Message-State: AOJu0Yzk+RXMLjQbi6LC3IceTtJA34KMm/n3W+gBjnF+Ar0kLjzRvTVa
- k7YKsC9R2JcbmkZiATYAzHW6TOWxbLi/RxMCLJDRKuMlNJd7tNXf8OZU
-X-Gm-Gg: AY/fxX5uY1QN/d3gk3VHWNCMeIs5laj/WS1RUjnV9Q/lhri9j1KbGx8gBUNxmam77IW
- kE2TElMeNZgnk+hB9fbKatOQEfmvT+nLKJRXG4MIrpHBMhJZYE5u0dp3Y6PFIg01MBgIiotFonz
- DngaxvrAGc2o3S/uAUDNwcLcvjZDtSgUMLwcgU68RMY3YgrIas0oYWPz77ZiGnrrHs+tSBAU2Yc
- BkxdPQR0qjZ3oYQvDuJmc+5V/trnZtHQfRifouVE2WlXjG4fd0cMHa7voSrSPzBYGu7u/C3xxqG
- 4QM42MT7gaWlirneOWLhZqcE/9DL8yJ3p7Bep6O6ismxqkfZb8GkYebXF5fUWLfaiGo3L+POhXD
- dZtdEWqrO/zFad72o9D+ki6z8v2scrl4six3qmQowUyZfDV7N8+avKT6uCQgS/wdtni+nthsUyq
- yt6PsSQRfHNR4kR3AaMN5sCiBLEOnBwx1t2dpLqzJ4CEY/94GDG6evJJIL9XcbueciyTx/zh7f4
- DE8zvocFwgGVuovzon4LA==
-X-Google-Smtp-Source: AGHT+IHPr/wDReRR8MrQaP43Qpb+TZR50iRiNbigjNTxljUDtcD9O7r03QjdTVmj1U9Bh9fndxmnEQ==
-X-Received: by 2002:a17:90b:1f8a:b0:340:f05a:3eca with SMTP id
- 98e67ed59e1d1-34e921beb7fmr10109482a91.20.1766425389572; 
- Mon, 22 Dec 2025 09:43:09 -0800 (PST)
-Received: from visitorckw-work01.c.googlers.com.com
- (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34e7710a5f8sm5353064a91.6.2025.12.22.09.43.08
+ d=1e100.net; s=20230601; t=1766427205; x=1767032005;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7ojiGWFXO5RyaSxqBw6xELaUUrhVVTgtiulNESjGpz0=;
+ b=kINVprFkeugiL3WugExV4JSkRGdB7LAuq1NhJDq8hMsuaEwvhKxeSOsQAVJ1Ukjgql
+ 6yC5p0g7u2YbwLV94zll7en557AxHa/PdL07G2AhXhy9w+kmBwyZJwLKYUWzvuUZo0Bu
+ x/dw27IPmMBLTcgOKPntwchUxEjNuujnwg50sT6umPvX/CdKtFJGeb2mT0WHKEUHykEV
+ T6x1Uw+MkfbvNQhGURzv/zXqlCdtYaNVO/01Jq3bwKi6wRo8yuPiEQBEPRuSjJV4ZMi5
+ yfCcwmVTlblzRdmDcg0s4ZRC4Fw7mZ59sTZEzhsVnFTcGul+GYQd6Sb2SVKZ4QxBtvCP
+ Zk5w==
+X-Gm-Message-State: AOJu0Yw2djKF8/zERJv/GrPsCP/dEBk8iZc0sqd+UwAFphOSZD7w5lP2
+ IM4MBYnaNv64KHCT0iSisJDEX0cef2O9sXIHdUyKhEGaZcPoKnsCb/NZE35LeRDq4pI=
+X-Gm-Gg: AY/fxX7oOTn5LLhcOt2bYLNv6qUl6iPVStRPhyQIzXoIpSdbeMeKcmmeX+J21wnVojx
+ PHEHLcxZrTGHW5NmDYx/8C5m6uELKM7MtXnL3NM3vVRwf/DuQU3vk1IuwAirQ448Llj+wfPpPwg
+ o3ToeykaWffsiGlHNJa8rNF1HsJusuCDHs7LXejRjrk3tz2aeDThKOh+bBGREjtBD9iP+UPSf1j
+ zGRItBCjbISwC8EQYFZAAf8tVtAs1s/u8U+pG60ArTwJO/dbqkrIMhGHpFuVg2ApPSPgC99mNL/
+ DYDZpWGdRWn0xAa4ZkuMVtOM7adFgGa4NjhnImIF4zU/1TsNZvHQCpRtwpNug+bH5GBdRGPO7fF
+ gk0e3Ce5ankQH1ZCht9GJXWJkTdfZV2SfbwL+JU11MjUEy8h8xSiaN8SDRbf6m9c3L7qAGZFoeE
+ ow9Q1tfTQ8z71M2h2LhGQzMpXExKLGEDKUVOUW8cZvR4uBgV53gQ==
+X-Google-Smtp-Source: AGHT+IHVY8Niw1vzrd2cJjrsCG8uCYVr9orAvaoFZLUGAxYKDzVaIkIB+uZJ15O/a+LzgjgYpMVPhg==
+X-Received: by 2002:a05:6830:4103:b0:758:1417:7ee7 with SMTP id
+ 46e09a7af769-7cc66a0b453mr6372199a34.5.1766427204927; 
+ Mon, 22 Dec 2025 10:13:24 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667f9201sm7800388a34.26.2025.12.22.10.13.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 09:43:09 -0800 (PST)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH] checkpatch: Add check for space indentation in Kconfig
-Date: Mon, 22 Dec 2025 17:42:55 +0000
-Message-ID: <20251222174256.2455458-1-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.52.0.322.g1dd061c0dc-goog
+ Mon, 22 Dec 2025 10:13:24 -0800 (PST)
+Date: Mon, 22 Dec 2025 12:13:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: u-boot@lists.denx.de, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com
+Subject: Re: [PATCH] checkpatch: Add check for space indentation in Kconfig
+Message-ID: <20251222181321.GB847766@bill-the-cat>
+References: <20251222174256.2455458-1-visitorckw@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 22 Dec 2025 19:04:16 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QNdty6EYn9ZGEWwt"
+Content-Disposition: inline
+In-Reply-To: <20251222174256.2455458-1-visitorckw@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,65 +96,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot requires Kconfig options to be indented with tabs, whereas Linux
-allows spaces. Add a U-Boot specific check to warn when spaces are used
-for indentation in Kconfig files.
 
-To ensure this check is executed, move the u_boot_line() invocation in
-process() to occur before the valid source file check. Previously,
-Kconfig files were skipped by the file extension filter before the
-U-Boot specific checks could run.
+--QNdty6EYn9ZGEWwt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Example warning:
+On Mon, Dec 22, 2025 at 05:42:55PM +0000, Kuan-Wei Chiu wrote:
 
-WARNING: Kconfig indentation should use tabs
-+    bool
+> U-Boot requires Kconfig options to be indented with tabs, whereas Linux
+> allows spaces. Add a U-Boot specific check to warn when spaces are used
+> for indentation in Kconfig files.
+>=20
+> To ensure this check is executed, move the u_boot_line() invocation in
+> process() to occur before the valid source file check. Previously,
+> Kconfig files were skipped by the file extension filter before the
+> U-Boot specific checks could run.
+>=20
+> Example warning:
+>=20
+> WARNING: Kconfig indentation should use tabs
+> +    bool
+>=20
+> Link: https://lore.kernel.org/u-boot/20251222162026.GA847766@bill-the-cat/
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 
-Link: https://lore.kernel.org/u-boot/20251222162026.GA847766@bill-the-cat/
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
- scripts/checkpatch.pl | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+Thanks!
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index c755880ef93..7e4d6cd227c 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -2753,6 +2753,12 @@ sub u_boot_line {
- 		ERROR("CONFIG_xPL_BUILD",
- 		      "Do not use CONFIG_xPL_BUILD in device trees\n" . $herecurr);
- 	}
-+
-+	# Kconfig should use tabs for indentation
-+	if ($realfile =~ /Kconfig/ && $line =~ /^\+ /) {
-+		WARN("KCONFIG_INDENT",
-+		     "Kconfig indentation should use tabs\n" . $herecurr);
-+	}
- }
- 
- sub exclude_global_initialisers {
-@@ -3943,6 +3949,10 @@ sub process {
- 			     "It's generally not useful to have the filename in the file\n" . $herecurr);
- 		}
- 
-+		if ($u_boot) {
-+			u_boot_line($realfile, $line, $rawline, $herecurr);
-+		}
-+
- # check we are in a valid source file if not then ignore this hunk
- 		next if ($realfile !~ /\.(h|c|rs|s|S|sh|dtsi|dts|env)$/);
- 
-@@ -4034,10 +4044,6 @@ sub process {
- 			     "Avoid using '.L' prefixed local symbol names for denoting a range of code via 'SYM_*_START/END' annotations; see Documentation/core-api/asm-annotations.rst\n" . $herecurr);
- 		}
- 
--		if ($u_boot) {
--			u_boot_line($realfile, $line, $rawline, $herecurr);
--		}
--
- # check we are in a valid source file C or perl if not then ignore this hunk
- 		next if ($realfile !~ /\.(h|c|pl|dtsi|dts)$/);
- 
--- 
-2.52.0.322.g1dd061c0dc-goog
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--QNdty6EYn9ZGEWwt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaUmKPgAKCRAr4qD1Cr/k
+ClZ5AQDkseUiKT/rHPhvEQspXYlNzLh3DJZwipFh/EvdkgcrlwEAlDNp4Oa0NF/c
+C8BO0Q0fWKWwJXBnUCfNHTAu7Ygx/QI=
+=x9Fo
+-----END PGP SIGNATURE-----
+
+--QNdty6EYn9ZGEWwt--
