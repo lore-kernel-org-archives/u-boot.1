@@ -4,81 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06BAE6F079
-	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 09:29:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F0EE6F088
+	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 12:20:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF9783EE2;
-	Tue, 23 Dec 2025 10:29:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B0D183D1A;
+	Tue, 23 Dec 2025 13:20:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JeaY9Wkl";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="GracaUxH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C817183F4C; Tue, 23 Dec 2025 10:29:40 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5E4A83F4C; Tue, 23 Dec 2025 13:20:46 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 825A983BF1
- for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 10:29:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDC8683CB9
+ for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 13:20:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-430f5ecaa08so2152362f8f.3
- for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 01:29:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766482178; x=1767086978; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tJP7EAtmkUkw61d2c+evq30/RuLZhPfLyOH24mrKedU=;
- b=JeaY9WklVbbXLOz9EFR49ecVov1rwHlHguKjE5hIt3DNjNTaqr56qkKgmLJxDEpm07
- wNMHwHc3D1FE7pkBHpNBLFqO203tebJVA5cVlT2DKriVaCFEy5erW8RSO1B31sgRX3WT
- GW3CSB7um/iBkq/27ajCxWkqX1q72Xu5zEy1LQ+tYYM77UgKpNKTXYX395wU7ktwqF2Q
- qheXDnTcdtbGQoHcVhw7aKCDpoMPezopgTTt89hkV/91cmcBVR1cbCfzytxZpx/7OOkt
- +PBNCMMe5lcaPsrdbJnz5xhOXUj2HIRwik4nUkt0X92HtCa29XRolSYjuK1wXoWDs6Rc
- mmVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766482178; x=1767086978;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tJP7EAtmkUkw61d2c+evq30/RuLZhPfLyOH24mrKedU=;
- b=GU/CaI+J4zbElilpH1TEMg0poaTmgMNI/xZMCqEyU1Vm79j6x5keMdpXmuQH3kvPP3
- EC74ulLEPeLF2oXz/K0doPguhqfgcADxxDeKaGEMYWvkIRkKix2pfscq+SfNfGd7a0N/
- QnM/2a+AUVH9cfDoc9ucicZlqK8K/kMvVczRwR1UdwFj6xdIOrOgh6Cl2e//f3dpfWRv
- XwNOLI1aUVPUhZENd47nmZ8+SHlfKEZRPg/wehglWWXN+GSljGtVchzxR19xMdTpXuwf
- AaMzlcq6+aB14hKT2t5CjsJ0CLozo9aKr7lsj7M/cYyruZP0oqD7RWYKA5r6AOPMRSV+
- mDsg==
-X-Gm-Message-State: AOJu0YyWS0/eoDRM3ODSB56XEfO0RsTmfrJGDlMd/GYLkwBEXu8Mcx2K
- s1nmK5DeySCh/NVKDsJ6eddvRN29/AgaYUMk0c4kztREEGc8wK1Xnjv+pC/NiA==
-X-Gm-Gg: AY/fxX6tWQhh1VNVJ5yTsxjxv/zvbYndOR+ZKyyUr+AHfgBrOP2FlXU4eSGG3aLE1Kw
- MA0XLmywxQ97fwAoDbL7OMKn8yEVNlMjTuvyUjYubcK+lcDM28uYJeJ8Jbad5RXW8xwL8ZUOfLL
- 28DXJ6AcQzG28bueC5ZrbbM5725hoF+Lwr76nMios0lhdYFJOnPbcgS1LyRbecE3XONGHubXOco
- 6ViCnM5MCCOyqp9CYknBGFJlb3sK30LCyzvbUEN7aFxB4aI/wsDPJ3oY3+u3sO0U1OfXf/TfDRb
- nOiGC4yVZHsoaS0yIbZHAUyBQXkXtpcZsYG+y6nI1xkPtYLZKGxZOAziM8Pji6FYIAvzjrFKlEj
- w3q1z/+DoSjghofKYP8SGAKzQPZrsZ4jWyDp3v8MWlm3WOnco3Lc4kbvq84/09Xnov5lvWy8SHt
- rU
-X-Google-Smtp-Source: AGHT+IGG+0Ae/RA0818ttMdI+woWrEBCSrXVORugySXMGpqj3NlON9Sag1mOrgieZyMUy/298oD+Dw==
-X-Received: by 2002:a05:6000:2204:b0:431:a0:7dea with SMTP id
- ffacd0b85a97d-4324e4fcdd7mr13320476f8f.40.1766482177684; 
- Tue, 23 Dec 2025 01:29:37 -0800 (PST)
-Received: from xeon ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4324eaa477bsm26996719f8f.36.2025.12.23.01.29.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Dec 2025 01:29:37 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Please pull u-boot-tegra staging
-Date: Tue, 23 Dec 2025 11:28:58 +0200
-Message-ID: <20251223092858.5563-1-clamor95@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1vY1NV-0006hN-Ap; Tue, 23 Dec 2025 07:20:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=HZ4N02sLZUhWy4VhDRrKjBQfiW3sNkIXgZjfnc6nnH8=; b=GracaUxH+kNf2rWvbJg/
+ aNo1TEwTcixpvh0z9Uncjj8AFEYteUhTNrSiTdnFvrd1nLiphPgsZk2er/rzJ4lChneqcTAZf+DKW
+ V9k7VZ9tno0VJ1UkFjjxW/z451ikGy7dbb+19LNk/d6lfg9Om/JwaJMTSDmKH/wLDI9MwnSQUQuvA
+ p1ZDTsqjpqzhHXmpW0pUj8C4q1DNKqzCiF0xg/jDhCaFRzN8PFXW0P0Tec3X0T1oE1hUHJ9rOd7Kb
+ KY7gfOclW93K1Lzn26ayzhJPz1xa8hGKvc4Z2+zxaOJOPVHzwyz1BQBIyZB74HtWCkXYMhYgJ2HWy
+ YfkZoH3N4uNC2w==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: u-boot@lists.denx.de
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,  Joe Hershberger
+ <joe.hershberger@ni.com>,  Ramon Fried <rfried.dev@gmail.com>,  Jerome
+ Forissier <jerome.forissier@linaro.org>,  Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] net: ravb: Configure CXR31 and CXR35 on rzg2l
+In-Reply-To: <20251210141706.32760-1-othacehe@gnu.org>
+References: <20251210141706.32760-1-othacehe@gnu.org>
+Date: Tue, 23 Dec 2025 13:20:33 +0100
+Message-ID: <875x9xfkz2.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,26 +66,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
 
-The following changes since commit d24f4ae65433aa7720c075a9f1d1aaf7e1985ced:
+Hello.
 
-  test/py, buildman: Update filelock package version (2025-12-18 10:28:10 -0600)
+> As in Linux with d78c0ced60 ("net: ravb: Make write access to CXR35 first
+> before accessing other EMAC register"), configure CXR31 and CXR35 correctly
+> on rzg2. MII mode does not work correctly unless those registers are
+> properly configured.
 
-are available in the Git repository at:
+Friendly ping :) This patch fixes networking when using MII on RZG2L in
+U-Boot.
 
-  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
-
-for you to fetch changes up to 5467cd5ffdbd6bdd042affb681db3615d41a4f1e:
-
-  configs: tegra-common-post: Stop disabling device tree relocation (2025-12-21 17:01:12 +0200)
-
-----------------------------------------------------------------
-Tom Rini (1):
-      configs: tegra-common-post: Stop disabling device tree relocation
-
- include/configs/tegra-common-post.h | 3 ---
- 1 file changed, 3 deletions(-)
-
-Thanks,
-Svyatoslav Ryhel.
+Mathieu
