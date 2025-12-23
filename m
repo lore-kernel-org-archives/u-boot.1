@@ -4,139 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B48EE6FE23
-	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 17:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB38E6FE23
+	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 17:43:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B828C84158;
-	Tue, 23 Dec 2025 18:32:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A19C88415E;
+	Tue, 23 Dec 2025 18:43:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Fzw2f+Qa";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hOtZHQxA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23F88415D; Tue, 23 Dec 2025 18:32:51 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 77D2384164; Tue, 23 Dec 2025 18:43:04 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9973884148
- for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 18:32:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF60C84148
+ for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 18:43:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1766511169; x=1767115969; i=xypron.glpk@gmx.de;
- bh=WnwAEHZ0R0jHUhq0i3cdTZ1FhzusuNY13sh9bOAEHhw=;
+ s=s31663417; t=1766511781; x=1767116581; i=xypron.glpk@gmx.de;
+ bh=AlwmIJcTx3iqcHBaRzxJ1FGTj7PYhmvh7n2dPIOQQJI=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=Fzw2f+QaVWIZaMkyTqZvOMIejlAiYrNKmy0pSgwE1CbYgJS9tq9Lz560c5z+YsXw
- JBrVNEGd6F+C9vATbau1+YQ+rzLNM3LqE1XT6WRRctRgMSMJH6m4r72ahEXCN8H7n
- VP+15WPo/DBKYLWQ+fpaQAO48fPEcQ6nBp9RZik21fjaI8/QpV5bXeO+J+Kcb77US
- F9AZmzPV4TkKMmfngDv88jazm3ude1+AGGZGRN0xg5E+S9w0QM7kmak8KQXHcC3CQ
- 2XjBJ8N5kUCCN+0x0nJgeIwNbMk8ExUUFObovxBIN02lY2bYFX7gmeeoUtfr3dXC3
- 4EbnU1grZHw7ffz3YA==
+ b=hOtZHQxAZlVkuj/vLQC1x42CTsIBT/epFZoV1vnajnHyuHvt93jCu0OhIJDEiMao
+ dHUAzSivqOHJDlTcXlSpvVJ46dr4aIC4/HDrNXqBaJF1U0Kd5nPOnZSTpaPinVEj3
+ omoqw2WuDT8X/Zlnu8YOdJQ6cvA9xag+0ZYBIjEeEYd1+L4v85PfWU96/w9HOjQB3
+ TOS4b0HutwBjBn/f1/QncZvHi6S0KZ1r1Ghk/aeXWQ5ml+o8ljNqO549Tyfp00LWc
+ vtwhqLS0GXfj3WmoZfJZm2gcxyux69G4OV+pCUUbcHXTKUN4kXf1meRnNxU+3lyH5
+ lqqERGyr2mLCWKYTmw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.125] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MJmGP-1vEW6K0WaH-00PsnB; Tue, 23
- Dec 2025 18:32:49 +0100
-Message-ID: <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
-Date: Tue, 23 Dec 2025 18:32:44 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wKq-1vX0Tx0gxQ-007XPY; Tue, 23
+ Dec 2025 18:43:01 +0100
+Message-ID: <ac80d9cd-4890-4382-9ce6-2f237933d32c@gmx.de>
+Date: Tue, 23 Dec 2025 18:43:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in SPI
- NOR
+Subject: Re: [PATCH v2 2/3] env: Add single to redundant environment upgrade
+ path
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
+ <20251223143130.16266-2-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251223143130.16266-2-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:WqVZvgmql1kN5oB76pxZ9HNMQ98Lo9Ec7I9lPGAa+XODLEATRo2
- 1I0jtPXrjkznmqGjk3++aZytdRpdJrr0z6170OENXQYT74bLOjb6/pTNUqmuOPYrmvt3VmK
- E2tRS8+78+rU+YzZ/R9OWrCnVx3dlJB8Tjpea4etBMmhXkTkZBMnL15mp+h7+vz7yqfGFxF
- KS9QZ2aClyVr5xtc46vjQ==
-UI-OutboundReport: notjunk:1;M01:P0:n+s1Wc5y0HA=;gaPAxYMjFy5kaDlkMRFyJic4fBs
- +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
- A4aq1f8w=
+X-Provags-ID: V03:K1:veRxDyZn58/RTewtTMng+2++MZH3e+Lx668x/vkpnewjfpI54mO
+ oxHAxecrE06BdldNxtbRQz4Dix4P7/kKUAkNmO5cd/bGE+6iGveHeoTvIqTWrWVotAoTpHA
+ Hvx8dWKyNa1cRLhMH+2lp3GcKAojMWLB5EBuvvQ67SlyJHhq6KdM9pS0T9Vfc7kg3eunRoA
+ 1vYjUB0yRtv0sqcE8IU3g==
+UI-OutboundReport: notjunk:1;M01:P0:gXp+QMcTzp4=;sEw+a+NSguVnwHxr+TzQXEIBJL+
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,9 +155,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/23/25 15:31, Marek Vasut wrote:
-> Add test for environment stored in SPI NOR. The test works in a very
-> similar way to the current test for environment stored in ext4 FS,
-> except it generates spi.bin file backing the SPI NOR.
+> Add support for converting single-copy environment to redundant environm=
+ent.
+> In case CRC checks on both redundant environment copies fail, try one mo=
+re
+> CRC check on the primary environment copy and treat it as single environ=
+ment.
+
+Why would a CRC check suddenly succeed if it has failed before?
+
+This needs some more explanation.
+
+> If that check does pass, rewrite the single-copy environment into redund=
+ant
+> environment format, indicate the environment is valid, and import that a=
+s
+> usual primary copy of redundant environment. Follow up 'env save' will t=
+hen
+> store two environment copies and the system will continue to operate as
+> regular redundant environment system.
+>=20
+> Add test which validates this upgrade path. The test starts with spi.bin
+> which is pre-populated as single-copy environment and then upgrades that
+> environment to dual-copy environment.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -166,87 +187,168 @@ On 12/23/25 15:31, Marek Vasut wrote:
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
-> V2: No change
+> V2: - Gate the option behind ENV_REDUNDANT_UPGRADE
+>      - Fix up mkenvimage path in env test
 > ---
->   test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 99 insertions(+)
+>   env/Kconfig               | 11 ++++++
+>   env/common.c              | 31 +++++++++++++++-
+>   test/py/tests/test_env.py | 74 +++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 115 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-> index 383e26c03b0..48e31f19b3c 100644
-> --- a/test/py/tests/test_env.py
-> +++ b/test/py/tests/test_env.py
-> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
->       utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
->       return fs_img
+> diff --git a/env/Kconfig b/env/Kconfig
+> index 4430669964c..b312f9b5324 100644
+> --- a/env/Kconfig
+> +++ b/env/Kconfig
+> @@ -489,6 +489,17 @@ config ENV_REDUNDANT
+>   	  which is used by env import/export commands which are independent o=
+f
+>   	  storing variables to redundant location on a non volatile device.
 >  =20
-> +def mk_env_spi_flash(state_test_env):
+> +config ENV_REDUNDANT_UPGRADE
+> +	bool "Enable single-copy to redundant environment upgrade support"
+> +	depends on ENV_REDUNDANT
+> +	help
+> +	  Normally, redundant environment is expected to always operate on
+> +	  two copies of the environment. However, hardware that may have
+> +	  originally shipped with single-copy environment can be upgraded
 
-Thank you for adding the test.
+%s/with single-copy/with a single-copy/
+%s/can be/that can be/
 
-Unfortunately pylint doesn't like your code. Please have a look.
+> +	  to redundant environment without loss of existing environment
+> +	  content by correctly configuring the location of the redundant
+> +	  environment copy and by enabling this option.
 
-W0621: Redefining name 'state_test_env' from outer scope (line 95)=20
-(redefined-outer-name)
+Why do we have to make this an option?
+Shouldn't we always try to restore the environment?
 
 > +
-> +    """Create an empty SPI NOR image."""
-> +    c =3D state_test_env.ubman
-> +    filename =3D 'spi.bin'
-> +    persistent =3D c.config.persistent_data_dir + '/' + filename
-> +    spi_flash_img =3D c.config.source_dir  + '/' + filename
+>   config ENV_FAT_INTERFACE
+>   	string "Name of the block device for the environment"
+>   	depends on ENV_IS_IN_FAT
+> diff --git a/env/common.c b/env/common.c
+> index 05e78d63874..b2adbe93dbe 100644
+> --- a/env/common.c
+> +++ b/env/common.c
+> @@ -473,14 +473,24 @@ int env_import(const char *buf, int check, int fla=
+gs)
+>   #ifdef CONFIG_ENV_REDUNDANT
+>   static unsigned char env_flags;
+>  =20
+> +#define ENV_SINGLE_HEADER_SIZE	(sizeof(uint32_t))
+> +#define ENV_SINGLE_SIZE		(CONFIG_ENV_SIZE - ENV_SINGLE_HEADER_SIZE)
 > +
-> +    if os.path.exists(persistent):
-> +        c.log.action('SPI NOR image file ' + persistent + ' already exi=
-sts')
-> +    else:
-> +        try:
-> +            utils.run_and_log(c, 'dd if=3D/dev/zero of=3D%s bs=3D1M cou=
-nt=3D2' % persistent)
+> +typedef struct {
+> +	uint32_t	crc;			/* CRC32 over data bytes */
+> +	unsigned char	data[ENV_SINGLE_SIZE];	/* Environment data */
+> +} env_single_t;
+> +
+>   int env_check_redund(const char *buf1, int buf1_read_fail,
+>   		     const char *buf2, int buf2_read_fail)
+>   {
+> -	int crc1_ok =3D 0, crc2_ok =3D 0;
+> +	int crc1_ok =3D 0, crc2_ok =3D 0, i;
+>   	env_t *tmp_env1, *tmp_env2;
+> +	env_single_t *tmp_envs;
+>  =20
+>   	tmp_env1 =3D (env_t *)buf1;
+>   	tmp_env2 =3D (env_t *)buf2;
+> +	tmp_envs =3D (env_single_t *)buf1;
+>  =20
+>   	if (buf1_read_fail && buf2_read_fail) {
+>   		puts("*** Error - No Valid Environment Area found\n");
+> @@ -498,6 +508,25 @@ int env_check_redund(const char *buf1, int buf1_rea=
+d_fail,
+>   				tmp_env2->crc;
+>  =20
+>   	if (!crc1_ok && !crc2_ok) {
 
-C0209: Formatting a regular string which could be an f-string=20
-(consider-using-f-string)
+Do we really have a third location to copy from when both store 1 and=20
+store 2 are defective? I would have expected that if a vendor provides a=
+=20
+single copy then exactly one of crc1_ok or crc2_ok is true and the other=
+=20
+is false.
 
-> +        except CalledProcessError:
-> +            call('rm -f %s' % persistent, shell=3DTrue)
-
-C0209: Formatting a regular string which could be an f-string=20
-(consider-using-f-string)
-
-Except for the pylint issues the patch looks good to me.
+Please, provide a documentation update explaining how this all works.
 
 Best regards
 
 Heinrich
 
-> +            raise
+> +		/*
+> +		 * Upgrade single-copy environment to redundant environment.
+> +		 * In case CRC checks on both environment copies fail, try
+> +		 * one more CRC check on the primary environment copy and
+> +		 * treat it as single-copy environment. If that check does
+> +		 * pass, rewrite the single-copy environment into redundant
+> +		 * environment format and indicate the environment is valid.
+> +		 * The follow up calls will import the environment as if it
+> +		 * was a redundant environment. Follow up 'env save' will
+> +		 * then store two environment copies.
+> +		 */
+> +		if (CONFIG_IS_ENABLED(ENV_REDUNDANT_UPGRADE) && !buf1_read_fail &&
+> +		    crc32(0, tmp_envs->data, ENV_SINGLE_SIZE) =3D=3D tmp_envs->crc) {
+> +			for (i =3D ENV_SIZE - 1; i >=3D 0; i--)
+> +				tmp_env1->data[i] =3D tmp_envs->data[i];
+> +			tmp_env1->flags =3D 0;
+> +			gd->env_valid =3D ENV_VALID;
+> +			return 0;
+> +		}
+>   		gd->env_valid =3D ENV_INVALID;
+>   		return -ENOMSG; /* needed for env_load() */
+>   	} else if (crc1_ok && !crc2_ok) {
+> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+> index 48e31f19b3c..f8713a59ba9 100644
+> --- a/test/py/tests/test_env.py
+> +++ b/test/py/tests/test_env.py
+> @@ -477,6 +477,22 @@ def mk_env_spi_flash(state_test_env):
+>       utils.run_and_log(c, ['cp',  '-f', persistent, spi_flash_img])
+>       return spi_flash_img
+>  =20
+> +def mk_env_spi_flash_single(state_test_env):
 > +
-> +    utils.run_and_log(c, ['cp',  '-f', persistent, spi_flash_img])
+> +    """Create an single-copy SPI NOR image with foo=3Dbar entry."""
+> +    c =3D state_test_env.ubman
+> +    filename =3D 'spi.bin'
+> +    spi_flash_img =3D c.config.source_dir  + '/' + filename
+> +
+> +    try:
+> +        mkenvimage =3D os.path.join(c.config.build_dir, 'tools/mkenvima=
+ge')
+> +        call('( echo foo=3Dbar | %s -s 8192 -p 0x00 - ; dd if=3D/dev/ze=
+ro bs=3D2088960 count=3D1 2>/dev/null ) > %s' % ( mkenvimage , spi_flash_i=
+mg ), shell=3DTrue)
+> +    except CalledProcessError:
+> +        call('rm -f %s' % spi_flash_img, shell=3DTrue)
+> +        raise
+> +
 > +    return spi_flash_img
 > +
 >   @pytest.mark.boardspec('sandbox')
 >   @pytest.mark.buildconfigspec('cmd_echo')
 >   @pytest.mark.buildconfigspec('cmd_nvedit_info')
-> @@ -544,6 +564,85 @@ def test_env_ext4(state_test_env):
->           if fs_img:
->               call('rm -f %s' % fs_img, shell=3DTrue)
+> @@ -574,6 +590,64 @@ def test_env_spi_flash(state_test_env):
 >  =20
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('cmd_echo')
-> +@pytest.mark.buildconfigspec('cmd_nvedit_info')
-> +@pytest.mark.buildconfigspec('cmd_nvedit_load')
-> +@pytest.mark.buildconfigspec('cmd_nvedit_select')
-> +@pytest.mark.buildconfigspec('env_is_in_spi_flash')
-> +def test_env_spi_flash(state_test_env):
-> +
-> +    """Test ENV in SPI NOR on sandbox."""
-> +    c =3D state_test_env.ubman
+>       """Test ENV in SPI NOR on sandbox."""
+>       c =3D state_test_env.ubman
 > +    spi_flash_img =3D ''
 > +    try:
-> +        spi_flash_img =3D mk_env_spi_flash(state_test_env)
+> +        spi_flash_img =3D mk_env_spi_flash_single(state_test_env)
+> +
+> +        response =3D c.run_command('sf probe')
+> +        assert 'SF: Detected m25p16 with page size 256 Bytes, erase siz=
+e 64 KiB, total 2 MiB' in response
 > +
 > +        # force env location: SF
 > +        response =3D c.run_command('env select SPIFlash')
 > +        assert 'Select Environment on SPIFlash: OK' in response
+> +
+> +        response =3D c.run_command('env load')
+> +        assert 'Loading Environment from SPIFlash... OK' in response
+> +
+> +        response =3D c.run_command('env print foo')
+> +        assert 'foo=3Dbar' in response
 > +
 > +        response =3D c.run_command('env save')
 > +        assert 'Saving Environment to SPIFlash' in response
@@ -254,41 +356,20 @@ Heinrich
 > +        response =3D c.run_command('env load')
 > +        assert 'Loading Environment from SPIFlash... OK' in response
 > +
-> +        response =3D c.run_command('env info')
-> +        assert 'env_valid =3D valid' in response
-> +        assert 'env_ready =3D true' in response
-> +        assert 'env_use_default =3D false' in response
+> +        response =3D c.run_command('env print foo')
+> +        assert 'foo=3Dbar' in response
 > +
-> +        response =3D c.run_command('env info -p -d')
-> +        assert 'Environment was loaded from persistent storage' in resp=
-onse
-> +        assert 'Environment can be persisted' in response
+> +        response =3D c.run_command('env save')
+> +        assert 'Saving Environment to SPIFlash' in response
 > +
-> +        response =3D c.run_command('env info -d -q')
-> +        assert response =3D=3D ""
-> +        response =3D c.run_command('echo $?')
-> +        assert response =3D=3D "1"
-> +
-> +        response =3D c.run_command('env info -p -q')
-> +        assert response =3D=3D ""
-> +        response =3D c.run_command('echo $?')
-> +        assert response =3D=3D "0"
-> +
-> +        response =3D c.run_command('env erase')
-> +        assert 'OK' in response
+> +        response =3D c.run_command('env save')
+> +        assert 'Saving Environment to SPIFlash' in response
 > +
 > +        response =3D c.run_command('env load')
-> +        assert 'Loading Environment from SPIFlash... ' in response
-> +        assert 'bad CRC, using default environment' in response
+> +        assert 'Loading Environment from SPIFlash... OK' in response
 > +
-> +        response =3D c.run_command('env info')
-> +        assert 'env_valid =3D invalid' in response
-> +        assert 'env_ready =3D true' in response
-> +        assert 'env_use_default =3D true' in response
-> +
-> +        response =3D c.run_command('env info -p -d')
-> +        assert 'Default environment is used' in response
-> +        assert 'Environment can be persisted' in response
+> +        response =3D c.run_command('env print foo')
+> +        assert 'foo=3Dbar' in response
 > +
 > +        # restore env location: NOWHERE (prio 0 in sandbox)
 > +        response =3D c.run_command('env select nowhere')
@@ -310,7 +391,7 @@ onse
 > +        if spi_flash_img:
 > +            call('rm -f %s' % spi_flash_img, shell=3DTrue)
 > +
->   def test_env_text(ubman):
->       """Test the script that converts the environment to a text file"""
->  =20
+>       spi_flash_img =3D ''
+>       try:
+>           spi_flash_img =3D mk_env_spi_flash(state_test_env)
 
