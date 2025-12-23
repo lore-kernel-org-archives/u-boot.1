@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FD4BE6F093
-	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 14:20:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE72EE6F096
+	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 14:31:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05A6B83FFA;
-	Tue, 23 Dec 2025 15:20:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1999F83FD4;
+	Tue, 23 Dec 2025 15:31:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="va3ufbQO";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aSGE/yix";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DlZJMsEo";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="H4IaURxH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C9EB840CC; Tue, 23 Dec 2025 15:20:22 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id D580984119; Tue, 23 Dec 2025 15:31:41 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9139B83FD4
- for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 15:20:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C52DF83BF1
+ for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 15:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dbHGV46Nyz9sqW;
- Tue, 23 Dec 2025 15:20:18 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dbHWb3lHCz9v7q;
+ Tue, 23 Dec 2025 15:31:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766499618;
+ s=mail20150812; t=1766500299;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vNbQBKoK3OPYMdASqve7f91RVjRTbMWBvhTR1WbwvsE=;
- b=va3ufbQOfgvCktWky57SdIUoMgE/CUWEJ+D/C3PFDaE8X+kGWZAjOnpn0Hlmn4f3mi/TjN
- R9aBe4/A717Daue25rpjiuTImcpr8n/qQssmD6sNHwi81xAkQkbJfU0isJEGr9o+sbe+6j
- fKd+zyP1QWQC75I/1PKjnMHxCqoHNYBb6EwH/fMhWoZin7yxjk2LlJxTT94kMEuBHFVBsY
- xL8XtbA+tlAdUDC3wKJm/ddt8LIFOuN48ekXySjfcMYixi6OWQW81agTHmuyD2fsSgrWZW
- Y3mmMoz5/yz1mmNuUE4kt2HfOqgVFvtDC3ZTaJVIMB8/dHkGEDtVJ1qmghy92w==
-Message-ID: <73c4c418-c538-49fd-a441-4769e60b6e5b@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sxGWmS3Ge7P6cPJDen6WMCFCyJGSr/Gb0N5X6nzDLL0=;
+ b=DlZJMsEou5P63OPMxeQublZsZhGpqKude1myQPaQ+BRzzJvykR4Qw92Qed01AW2I4flIUp
+ RyUleGFgyEbmV4bGzlKWx4Dg4Rqh+RJ45lCDNBpz6ubCPoTwhp/ouTL5LEIKpBrADo8UNW
+ uzP86WUoLLwgW6rPuEVplycIxGIobOcfWGq13xtITq8m4Q7JNK1idVMelpxM1HOAmA983Z
+ 6+FaWIVYJSKWMtzaKBFP32DyIi0pXtrOqcBucpoBl+8VN29mvmePnknnYKQ0dnKrjDTPLn
+ jpZc9KXWi698nkbyrqQNZ6LmKJFVg+7tHT0FRamqVGYWjpz3pYGDxWhkbsX/xA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=H4IaURxH;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766499616;
+ s=mail20150812; t=1766500297;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vNbQBKoK3OPYMdASqve7f91RVjRTbMWBvhTR1WbwvsE=;
- b=aSGE/yixbhMteelWSsnBaBgMe4VUHDkT2WcdIG5ZdoZc2ZLI9CKd9mJquxXj5ssBgZmqm+
- H9ih6NLvGJD7GKpSTGRBn6F8hmUna7+RkjVPEq7/P+LpQ8w01cjVJYXMrlbMNaG3+4M7hx
- YzVSbSuFOQcn3qevM3HNIL5PdOz/Yl53+ShjnDG+F/gxdJWRE3tfQ+sEMKOANvyX3MXXUe
- 3lc7hKmi1DQCZ/ckh4nukIb38Yr5OKpeYHqN2qQBXSBkvv64Nx1Q9KA8T02m1CxLk/35lJ
- HiDNfsJMI5qLLSXpUQEQCRT8NHh5MxSeBHz4LuazkYQYFzxt9wuAPvwuiJ+x9w==
-Date: Tue, 23 Dec 2025 15:20:13 +0100
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sxGWmS3Ge7P6cPJDen6WMCFCyJGSr/Gb0N5X6nzDLL0=;
+ b=H4IaURxHKeOas/fH/4zni1j+1fuTEp6mfNzF/4DtVkA31l/sDCvOsVaiEtsZ4NI7Cn6SFb
+ iFoJjjKbWpVPB0yaR89diMeMrtceZhlyAmZRzsrJCr6iqPi2ZvsB4n7eBOgN7g3zMURBQg
+ UKXUz8AjJX7ny/EvP1nCbUnMKcf5+LA2F88adyZelujRO+g7YUusZgl68BS+Q/5iorXHok
+ GtfLYCiNZGT8vAosTi8LfSt5t5UevABhGdyUZlveVlDxgPE5/V1cdb5SBdImUyRJ4aBWim
+ XfeVza+Hl/FK+ALoC5O41CHn7Vxhpvh7QUiUQhDRAooZVrVNDuwZAhbYDLBQEg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/3] test: env: Add test for environment storage in SPI NOR
+Date: Tue, 23 Dec 2025 15:31:10 +0100
+Message-ID: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] net: ravb: Configure CXR31 and CXR35 on rzg2l
-To: Mathieu Othacehe <othacehe@gnu.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: anton.reding@landisgyr.com
-References: <20251210141706.32760-1-othacehe@gnu.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251210141706.32760-1-othacehe@gnu.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: d7c9bea63d064f87d25
-X-MBO-RS-META: dua47a11p6t8i4sg4e1pskshahoz9yp9
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 4b8a36ef127bbeabb8a
+X-MBO-RS-META: cjsq1qxa4yg5z8h6mubf3n4yq1h1s8fe
+X-Rspamd-Queue-Id: 4dbHWb3lHCz9v7q
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,13 +90,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/10/25 3:17 PM, Mathieu Othacehe wrote:
-> As in Linux with d78c0ced60 ("net: ravb: Make write access to CXR35 first
-> before accessing other EMAC register"), configure CXR31 and CXR35 correctly
-> on rzg2. MII mode does not work correctly unless those registers are
-> properly configured.
-> 
-> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Add test for environment stored in SPI NOR. The test works in a very
+similar way to the current test for environment stored in ext4 FS,
+except it generates spi.bin file backing the SPI NOR.
 
-Thank you.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: No change
+---
+ test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 99 insertions(+)
+
+diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+index 383e26c03b0..48e31f19b3c 100644
+--- a/test/py/tests/test_env.py
++++ b/test/py/tests/test_env.py
+@@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
+     utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
+     return fs_img
+ 
++def mk_env_spi_flash(state_test_env):
++
++    """Create an empty SPI NOR image."""
++    c = state_test_env.ubman
++    filename = 'spi.bin'
++    persistent = c.config.persistent_data_dir + '/' + filename
++    spi_flash_img = c.config.source_dir  + '/' + filename
++
++    if os.path.exists(persistent):
++        c.log.action('SPI NOR image file ' + persistent + ' already exists')
++    else:
++        try:
++            utils.run_and_log(c, 'dd if=/dev/zero of=%s bs=1M count=2' % persistent)
++        except CalledProcessError:
++            call('rm -f %s' % persistent, shell=True)
++            raise
++
++    utils.run_and_log(c, ['cp',  '-f', persistent, spi_flash_img])
++    return spi_flash_img
++
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('cmd_echo')
+ @pytest.mark.buildconfigspec('cmd_nvedit_info')
+@@ -544,6 +564,85 @@ def test_env_ext4(state_test_env):
+         if fs_img:
+             call('rm -f %s' % fs_img, shell=True)
+ 
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_echo')
++@pytest.mark.buildconfigspec('cmd_nvedit_info')
++@pytest.mark.buildconfigspec('cmd_nvedit_load')
++@pytest.mark.buildconfigspec('cmd_nvedit_select')
++@pytest.mark.buildconfigspec('env_is_in_spi_flash')
++def test_env_spi_flash(state_test_env):
++
++    """Test ENV in SPI NOR on sandbox."""
++    c = state_test_env.ubman
++    spi_flash_img = ''
++    try:
++        spi_flash_img = mk_env_spi_flash(state_test_env)
++
++        # force env location: SF
++        response = c.run_command('env select SPIFlash')
++        assert 'Select Environment on SPIFlash: OK' in response
++
++        response = c.run_command('env save')
++        assert 'Saving Environment to SPIFlash' in response
++
++        response = c.run_command('env load')
++        assert 'Loading Environment from SPIFlash... OK' in response
++
++        response = c.run_command('env info')
++        assert 'env_valid = valid' in response
++        assert 'env_ready = true' in response
++        assert 'env_use_default = false' in response
++
++        response = c.run_command('env info -p -d')
++        assert 'Environment was loaded from persistent storage' in response
++        assert 'Environment can be persisted' in response
++
++        response = c.run_command('env info -d -q')
++        assert response == ""
++        response = c.run_command('echo $?')
++        assert response == "1"
++
++        response = c.run_command('env info -p -q')
++        assert response == ""
++        response = c.run_command('echo $?')
++        assert response == "0"
++
++        response = c.run_command('env erase')
++        assert 'OK' in response
++
++        response = c.run_command('env load')
++        assert 'Loading Environment from SPIFlash... ' in response
++        assert 'bad CRC, using default environment' in response
++
++        response = c.run_command('env info')
++        assert 'env_valid = invalid' in response
++        assert 'env_ready = true' in response
++        assert 'env_use_default = true' in response
++
++        response = c.run_command('env info -p -d')
++        assert 'Default environment is used' in response
++        assert 'Environment can be persisted' in response
++
++        # restore env location: NOWHERE (prio 0 in sandbox)
++        response = c.run_command('env select nowhere')
++        assert 'Select Environment on nowhere: OK' in response
++
++        response = c.run_command('env load')
++        assert 'Loading Environment from nowhere... OK' in response
++
++        response = c.run_command('env info')
++        assert 'env_valid = invalid' in response
++        assert 'env_ready = true' in response
++        assert 'env_use_default = true' in response
++
++        response = c.run_command('env info -p -d')
++        assert 'Default environment is used' in response
++        assert 'Environment cannot be persisted' in response
++
++    finally:
++        if spi_flash_img:
++            call('rm -f %s' % spi_flash_img, shell=True)
++
+ def test_env_text(ubman):
+     """Test the script that converts the environment to a text file"""
+ 
+-- 
+2.51.0
+
