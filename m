@@ -4,65 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92BDE6FE24
-	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 18:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A51BE6FE51
+	for <u-boot@archiver.kernel.org>; Tue, 23 Dec 2025 23:15:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FA6784179;
-	Tue, 23 Dec 2025 19:55:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 56AD384191;
+	Wed, 24 Dec 2025 00:15:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OmsJrEgI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OUWsdgY5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E29184180; Tue, 23 Dec 2025 19:55:51 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D970A83F50; Wed, 24 Dec 2025 00:15:46 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 616FD84167
- for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 19:55:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABA4783F50
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 00:15:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dbPNM21Qmz9tGQ;
- Tue, 23 Dec 2025 19:55:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766516147;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vKm86w/L3El0iZmsEX64Y/gq7/GxXYvaFnGaQmgUR9s=;
- b=OmsJrEgIT2Dwf9gRQXi1m3nMZ5zi7mlEted6gQXX6GzM4u4w1UFhgV44A0SnW1Eg3dNodD
- kGDc7hfyZDYaoVFJi8dNd5tDQMzN24VI6JcAygTZiAi59VIB7k6cErjiHQRoQtnt2yLwx3
- FCyIHmuAhh58jqiJusQluVhU/d9UlvXv2fBIdP8gU2YU+vcXHAzJSDdtNLFlc2ZaRrf2L9
- sns7HqWqGo3YZOf2B+xysMHN/sOvYfGDXF6MODqwxZh5KJ67OYN6rJkgN/zFyI9mEgopXU
- KKb9iSnWt1Nh+bvao5GwxlMmh4190ujdAiB3IH9Chh4aNCzSi0QaSZkBFY+OWA==
-Message-ID: <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
-Date: Tue, 23 Dec 2025 19:55:45 +0100
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c77fc7c11bso5786243a34.1
+ for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 15:15:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1766531743; x=1767136543; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dEeliqJVOGK1YAxz443UnvxUqXPBYg+0C43CCmwmBVk=;
+ b=OUWsdgY5BdmKt5/oPOKa6+RGWKNIrQ290CxvL5bZjWkY8Sdt3S82nDEQYhcdDbpNNC
+ d8vzG8ihKGTXrud4j7GVkPdSIY9OK/UfreJkXLSarn1wi9liMhpT/tAP8w5rJxWQ7OSv
+ 4x3FKXUssspOP5tQfdFATs1PCw7RII3lYX165HPi7rhLzvCLliuBxxjHvaRsEcSb/Ren
+ nbjZIwRpPzpvQEkxMkW+jjyNzDP+dAxHVzADzWV4lRIR0wU56Nzila9L645F8RLgfuSE
+ bQjvL0acEKf5NlHaFYChzSB/jP4jksRbv5bC24+sE8o+IjeHozem0f5XFWhN44HIyGsP
+ wasA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766531743; x=1767136543;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dEeliqJVOGK1YAxz443UnvxUqXPBYg+0C43CCmwmBVk=;
+ b=d5DFpLt/osbNvWIzNPlJJdFmXpvY8yR37L+k7xDrY4epGbnPg0RECx+Tnt6TtBxzag
+ NlwCayzrBWnsJu3qBl6gVgpSh+Hi3nogceH/3t3Zx2K4WKNuJv7R2mXQGG15qEnGNott
+ 9LeHnoS1Onn4O+hdjqQbkXJ7PqSE+azqxqN17QkzZpf28Lygcxrd2wjZoXMSt6U2ZQw4
+ h5alfYqqDWqs6IgUIbI/umKFMkZXf1zWKFpoJhMDE5mZyFb+7IAWl0gF63gl//4irS2m
+ +OJvq+Anjt5QmNkLrbjsahjtpUbrcmYPKQtHlZBaxReZTTlfIgP4K0idrJYQL4wpVmgE
+ kUuQ==
+X-Gm-Message-State: AOJu0YwU+p0g/ryQTCiUCQzpiWkuXOmpcENAcZNJ73XDM55mlGJYZfMR
+ mTqs3g1uxSUu0znP1tmVFifDVPDJZqBPNCbQWdyJFEx/xGPc74011SfCBi/aGd0s
+X-Gm-Gg: AY/fxX6rWnuWfrlH0POWGtjOsU+sHjoX5lyXZBvMK26/P0dB1HIIE78Siz9WcuFIszP
+ r2eHSCRvj9jw7KNxXwBCY1f1qlSFVXCQryORoVdbJJ9HLrTm9XEhl/lH6eV/4iIsvna2EIlY8+v
+ 0tzh3fweZ7nFTB/T5gk/pz4yuH2whJt99OI8YfGqPMDaN16oYweqCJ1fLt9qmUupBlZJHnCfKxk
+ rfEGz7CW777e5bR7Gkz5NuyMd8dHwvnKEFG98qNL1G/VOuSMydZZIAdm+gLUQQRNfJwEvwWcORU
+ AhNGxlNQb4nZk0ZzxmR2gdUpBYSFFwRGFtL5dW4wDpL5qd/3yYWBoLGKWZza80ILu4r8PYkrDqB
+ /jG7np+fvStwkumMKsRorUeEI8iz98BhNRm2q01adUChbGqzfhLdcuSvqbykzO1Z3dw/8Vd3qWV
+ vq4uiCIRSp
+X-Google-Smtp-Source: AGHT+IGPpWo2C8iAxlLhfeARdmnunapvKax83HmyGcPJ3jkSiIDW9MPLcCdRdVucW7BP+63DQxquSA==
+X-Received: by 2002:a05:6830:6c0c:b0:7ca:f4cd:db57 with SMTP id
+ 46e09a7af769-7cc592fc20emr9549234a34.17.1766531743028; 
+ Tue, 23 Dec 2025 15:15:43 -0800 (PST)
+Received: from localhost.localdomain ([2600:1700:fb0:1bc0::54])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667d4f62sm10352037a34.19.2025.12.23.15.15.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Dec 2025 15:15:42 -0800 (PST)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: thinhn@synopsys.com, neil.armstrong@linaro.org, quic_varada@quicinc.com,
+ felipe.balbi@linux.intel.com, mkorpershoek@kernel.org, lukma@denx.de,
+ trini@konsulko.com, marex@denx.de, Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH 0/2] USB Fixes for Gadget Mode on DWC3
+Date: Tue, 23 Dec 2025 17:13:09 -0600
+Message-ID: <20251223231311.1983423-1-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in SPI
- NOR
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
- <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6d0124f2d28c5e12f2c
-X-MBO-RS-META: nci48we7r9s5qe6nda5g8kuh7dfacr55
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,38 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
-> On 12/23/25 15:31, Marek Vasut wrote:
->> Add test for environment stored in SPI NOR. The test works in a very
->> similar way to the current test for environment stored in ext4 FS,
->> except it generates spi.bin file backing the SPI NOR.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> V2: No change
->> ---
->>   test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
->>   1 file changed, 99 insertions(+)
->>
->> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
->> index 383e26c03b0..48e31f19b3c 100644
->> --- a/test/py/tests/test_env.py
->> +++ b/test/py/tests/test_env.py
->> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
->>       utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
->>       return fs_img
->> +def mk_env_spi_flash(state_test_env):
-> 
-> Thank you for adding the test.
-> 
-> Unfortunately pylint doesn't like your code. Please have a look.
+From: Chris Morgan <macromorgan@hotmail.com>
 
-Is this something we run in CI ? If so, CI builds did pass.
+In order to get gadget mode functional (for fastboot and ums) I need to
+pull two patches in from mainline Linux. After applying these two
+patches to U-Boot I am able to use ums and fastboot on my Anbernic
+RG353P device for testing purposes.
 
-If not, how do I trigger this ?
+Chris Morgan (2):
+  usb: dwc3: gadget: Don't send unintended link state change
+  usb: dwc3: core: improve reset sequence
+
+ drivers/usb/dwc3/core.c   | 31 +++++++++++++++++++++----------
+ drivers/usb/dwc3/gadget.c | 20 +++++++++-----------
+ drivers/usb/dwc3/gadget.h | 14 ++++++++++++++
+ 3 files changed, 44 insertions(+), 21 deletions(-)
+
+-- 
+2.43.0
+
