@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B64F4E7848A
-	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 19:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19DEEE7848C
+	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 19:38:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDF90842B7;
-	Wed, 24 Dec 2025 20:37:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D9D3842FC;
+	Wed, 24 Dec 2025 20:37:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Od3WS78p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RTm2e3ib";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25ECD842B6; Wed, 24 Dec 2025 20:32:29 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 2203584301; Wed, 24 Dec 2025 20:32:31 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C28A8842B6
- for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 20:32:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00E2E842C2
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 20:32:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=george.mccollister@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6d13986f8so5110693a34.0
- for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 11:32:26 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4503ee5c160so3654581b6e.1
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 11:32:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766604745; x=1767209545; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/GQi83yd3HbUhmGBn6/dxm+KMLJCRlVMDmRJ8c54xqg=;
- b=Od3WS78pp9dizFDIuV7wNnwXiEHbzNzmTafz3hsCBXF7Xe7Z9uguc31nx2u8ylJfdW
- Kv2/IOcN8dIZySwGiuiOxDx2SLOYI5nUvlNN1yfcKY1sBHNOqVCw3snmgaTJzH2yUvBX
- d8hUsnbIFKaV9a3zolX6KAGH/o0qgZP+Mh9ek=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766604745; x=1767209545;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1766604746; x=1767209546; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/GQi83yd3HbUhmGBn6/dxm+KMLJCRlVMDmRJ8c54xqg=;
- b=f/k4X/uXZT0BHgIoRD/3wAvXnDujkdDD3PjlQIYV8bLZ1nx7XzL7DCe6nIIJxRms+o
- Nprf3pnqisI0PsXHBkuPQmUXWAyhYQ+20upSxpUVJQK5Nysm3KpozXhyQ0rJ/QaBqMYs
- O6aT5S/H++gZOesKe5XIplDaHhp6sArfH06iQBUQbrUXsAkFoHw9LzRUY0m707O0NGlZ
- MGXTvRgn3Uf/RJiAjMgoqhvLAu74oDEjMtVGwQe8D7h0lNryIXILf4vU0Lpf3TwEeRHH
- 1Igo2bHJcW7ZzmTbuAbesjdKavN5BSvk7FJXxP5rGnv3GLrxLuvfXYO9tyfosA82y8Lb
- AADg==
-X-Gm-Message-State: AOJu0Ywh746jBrINPzmPh78Nfb2RZiyeVocmr9vVhLbVwG+3x4ugiKlJ
- +gI4Mf027OOrgIflQ/kHBjkQaRX56G4P1lC/hOhkoOmt2zB189EnGxIrI91F/9srupLDtl+z0xl
- xJ6Eo+HQ=
-X-Gm-Gg: AY/fxX4BQHOcKOVL5OFjH+T/dF+zaAZGuSX31dmtqBCQRLzCpkxqLWKlHO+yJY3nT3X
- iRJeWPFM7pTNzDAKrlZ719dnCG1sF3qUFpjsY9SprfJG5ntp+MUfXygvTzsPbcN7vWQXSOsJ98m
- cZh5x/jVnYt6dbxQOxpQ0w1/9MDn9pD5vIJEQKNFfStyfATRrMPlc07C3S9EqlrpQp8Se0ZsyWV
- /FeHCKt9m56S5C0NVgQmz24UiXHdtpcRn6zDFGCh0QjUc1b+tt9/0Tffg4vDkc0VD7k29JKouAx
- +yrfyx2XtqNeRHVFmnfHbTS6M99zBBBSAjUzA2KyAk6UsBj6/StGntdKWHVS4HHOlvmtiAXGL7H
- dx+dnrqH52Wsp/TA4DJWlEJqsHuDsfcXfq/5rHJf+2ILVPBunauNfZJqenfjvavmlngN44cMD/X
- Ntvvmybzx53bD28x0nC7WerdlwQm9DkUuOTF8=
-X-Google-Smtp-Source: AGHT+IGf5j1WxjAGQi5HaR8tQICTOR3FOAxBDgZ1YUd0KVJPULIH4uFzDIPPWjN+Su+IswJU3gsE7g==
-X-Received: by 2002:a05:6830:6e12:b0:7c7:ad8:68b3 with SMTP id
- 46e09a7af769-7cc592a5296mr11057901a34.14.1766604745179; 
- Wed, 24 Dec 2025 11:32:25 -0800 (PST)
+ bh=eVRX5BzEPwGLDpCl/EoTPMMZ1uHTfBFHcmXhYtc7Fqg=;
+ b=RTm2e3ibM19pvdj5QB03zYygbySVSZqw24ZW1hLCfYc1AQ/MjAfdwlN5gYsdgXM4+K
+ Kt0TYavOHW81tnRQEtYS3o2Vt90A7nvcc3zeIQalGxViQ505tQUgzHleP60mXJmOx0M3
+ Gu7n9MsKbPaZfD4nuDkZX8MRtGeSFHPZkFKnc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766604746; x=1767209546;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=eVRX5BzEPwGLDpCl/EoTPMMZ1uHTfBFHcmXhYtc7Fqg=;
+ b=pqUftbq5QX9pPtZ2IEw7xvz4fIMHjlAZKpymt56BlAdDspHYv08SMOGMft2OMBz8f7
+ YE9MeyraOW7pnxsZ67+jmOqqJo1rCVnUabCAT/6ja1DXgPEmidYx3xY1W4jfdXQP26a7
+ vzlnQgCxMG5HjGPvlESsho1rWQCONrSGX/MhJdl/tmpPDxuGlmOr9wcdiLnh5X6IHWxC
+ RllUDBpx2/xzIatV7fT+bQxzjx9rZWpZkEvhF+osCQ2jACOxkPWnpI21lV6a5Jg8RcS6
+ lIHaYrvifGCWorPsO0uPe9/Lpaa4SMZRO3UF5rUvPiFA12kLv2RMPrRWQc21oK/ewzVO
+ iYBg==
+X-Gm-Message-State: AOJu0Yx8ti4F3CUbC1DuYggDdK5BAri2iUaPRbb47ItdQYN1c0cBwmJo
+ M3lzZCXqotNaEh/iG5NDN3wJouQZWGU/nlIyTVERGJmNwf6BEyA1NFLDiApS0+1b/adkU0fzULG
+ kWkYnhc8=
+X-Gm-Gg: AY/fxX5Nzk1Rr8xmLa6jcpZLlf/CrDIVfwaQyh4dXhqMtOKYu43EulymrBCBPfTR0V/
+ OJt6WJLDvWduNlYLn+WFMnVQhnrpQWTuNhatFfWwBz/XSy7mADM//IMhY3x7vBkDrek/n/HhZhw
+ yxJOSMUjCxKLx150PfbW7qzogUy4cXXcovhHIUtMbZ1TzoBaDVDYZk1AppkS2b7/IJFWHU9kBMu
+ yKNtYQllC8wE+GaQwF6Q1BwvZK5o3K6LXgwhOn3nmXWsGF2s22LcuOYpAicc8WxB0N/+4lhHRil
+ iU1OibTvCaCF2JnvGejfl1z+GryOXXHUZJjonT/S7oaiR7xxYKCWyLNbpf/3yrDtUzvHleOlYlJ
+ wlhTZr45z+MvkpVpg6GRm+gVZzJX0oy6q+d+R5lDd9Gm52ZeMtHpmXE4gJzatjqRFsmA4Vb2M66
+ i9CZdKHEAGTF2cLLAGw/EdZXCoh+VPjDhQ520=
+X-Google-Smtp-Source: AGHT+IH3BpwpGgJuN/xqbO0wAHphwRSCqvV6vH2kVH9wJsMwp50b7urm0lBBB8RDQj/ULmX8P7t1zw==
+X-Received: by 2002:a05:6808:6f8c:b0:455:7fe4:b215 with SMTP id
+ 5614622812f47-457b21d3073mr9388262b6e.53.1766604746423; 
+ Wed, 24 Dec 2025 11:32:26 -0800 (PST)
 Received: from ryzen.localdomain ([136.33.243.183])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc6673bc05sm12049723a34.8.2025.12.24.11.32.23
+ 46e09a7af769-7cc6673bc05sm12049723a34.8.2025.12.24.11.32.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Dec 2025 11:32:24 -0800 (PST)
+ Wed, 24 Dec 2025 11:32:26 -0800 (PST)
 From: George McCollister <george.mccollister@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Bryan Brattlof <bb@ti.com>,
  George McCollister <george.mccollister@konsulko.com>,
- Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anshul Dalal <anshuld@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Judith Mendez <jm@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
- Vaishnav Achath <vaishnav.a@ti.com>
-Subject: [PATCH 0/6] arm: k3: j722s: add PCIe support
-Date: Wed, 24 Dec 2025 13:31:58 -0600
-Message-ID: <20251224193213.802246-1-george.mccollister@konsulko.com>
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/6] pci: skip unnecessary PCIe scanning
+Date: Wed, 24 Dec 2025 13:31:59 -0600
+Message-ID: <20251224193213.802246-2-george.mccollister@konsulko.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251224193213.802246-1-george.mccollister@konsulko.com>
+References: <20251224193213.802246-1-george.mccollister@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 24 Dec 2025 20:37:54 +0100
@@ -103,33 +99,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series brings over several changes from Linux that are required to get PCIe working on the j722s and also enables PCIe in j722s_evm_a53_defconfig. This allows Linux to be booted from an NVMe drive.
+Use the same mechanism as the Linux kernel to skip unnecessary (and in
+the case of the J722S, errant) scanning of direct children of root
+ports, downstream ports or bridges.
 
-The J722S SoC provides pcie0 (using pcie_cdns_ti) thru serdes1 (using phy-cadence-torrent)
-thru serdes_wiz1 (using phy-j721e-wiz). Changes to the three drivers needed to be ported from Linux to enable the REFCLK output which is used with this SoC. These changes should be tested on other platforms using these drivers by those with the hardware available to make sure no problems were introduced.
+Based on Linux PCI code in the following files as of b927546677c8:
+  drivers/pci/probe.c
+  drivers/pci/pci.h
+  include/linux/pci.h
 
-The PCIe controller in this SoC relies on the code performing the PCI scan not scanning devices which cannot exist. In Linux this is implemented as only_one_child() in probe.c. If this mechanism is not used, PCI config reads for subsequent functions will return information for device 0 resulting in U-Boot detecting 32 devices when only 1 is present. This change should be tested on other platforms with PCI to ensure the same PCI devices are enumerated before and after the patch is applied.
+Signed-off-by: George McCollister <george.mccollister@konsulko.com>
+---
 
-I would like to thank Opto 22 for sponsoring the initial development and anyone that is able to contribute to testing of patches.
+ drivers/pci/pci-uclass.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-
-George McCollister (6):
-  pci: skip unnecessary PCIe scanning
-  phy: ti: j721e-wiz: Enable reference clock output in cmn_refclk_<p/m>
-  phy: cadence-torrent: Add support to drive refclk out
-  pci: pcie_cdns_ti: Add support to provide refclk to PCIe connector
-  pci: pcie_cdns_ti: Add PCIe support for J722S SoC
-  configs: j722s_evm_a53_defconfig: enable PCIe
-
- configs/j722s_evm_a53_defconfig           |   8 ++
- drivers/pci/pci-uclass.c                  |  32 +++++
- drivers/pci/pcie_cdns_ti.c                |  23 +++
- drivers/phy/cadence/phy-cadence-torrent.c | 168 ++++++++++++++++++++++
- drivers/phy/ti/phy-j721e-wiz.c            |  46 ++++++
- 5 files changed, 277 insertions(+)
-
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index c370f8c6400d..8a1fb76b365c 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -872,6 +872,35 @@ __weak extern void board_pci_fixup_dev(struct udevice *bus, struct udevice *dev)
+ {
+ }
+ 
++static int only_one_child(struct udevice *bus)
++{
++	int pos;
++
++	/*
++	 * A PCIe Downstream Port normally leads to a Link with only Device
++	 * 0 on it (PCIe spec r3.1, sec 7.3.1).  As an optimization, scan
++	 * only for Device 0 in that situation.
++	 */
++	pos = dm_pci_find_capability(bus, PCI_CAP_ID_EXP);
++	if (pos) {
++		ulong reg;
++		ulong pcie_type;
++
++		dm_pci_read_config(bus, pos + PCI_EXP_FLAGS,
++				   &reg, PCI_SIZE_16);
++
++		pcie_type = (reg & PCI_EXP_FLAGS_TYPE) >> 4;
++
++		if (pcie_type == PCI_EXP_TYPE_ROOT_PORT ||
++		    pcie_type == PCI_EXP_TYPE_DOWNSTREAM ||
++		    pcie_type == PCI_EXP_TYPE_PCIE_BRIDGE) {
++			return 1;
++		}
++	}
++
++	return 0;
++}
++
+ int pci_bind_bus_devices(struct udevice *bus)
+ {
+ 	ulong vendor, device;
+@@ -895,6 +924,9 @@ int pci_bind_bus_devices(struct udevice *bus)
+ 		if (PCI_FUNC(bdf) && !found_multi)
+ 			continue;
+ 
++		if (only_one_child(bus) && (PCI_MASK_BUS(bdf) > 0))
++			continue;
++
+ 		/* Check only the first access, we don't expect problems */
+ 		ret = pci_bus_read_config(bus, bdf, PCI_VENDOR_ID, &vendor,
+ 					  PCI_SIZE_16);
 -- 
 2.51.2
 
-base-commit: baf076aeb32dcdd2b022405088c3288ffc160fcf
-branch: j722s-pcie-next
