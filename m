@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D8DE7491E
-	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 07:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86873E74AE0
+	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 08:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98164841BE;
-	Wed, 24 Dec 2025 08:45:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CDFEE841D5;
+	Wed, 24 Dec 2025 09:03:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GP4NDPKR";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oXOwOdAr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7413841CD; Wed, 24 Dec 2025 08:45:15 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 58D6E841D6; Wed, 24 Dec 2025 09:03:21 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7833B84198
- for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 08:45:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47E54841D2
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 09:03:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,35 +31,31 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8192B3FF71; 
- Wed, 24 Dec 2025 07:45:12 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B9BBF3F295; 
+ Wed, 24 Dec 2025 08:03:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1766562312;
- bh=KW2LIRtiuJWTpCvnWSr2zW4iDSTxWyWeS3DMOzGyfiY=;
+ s=20251003; t=1766563398;
+ bh=BvXCUjQm1a7520OK+KCLbykT3mxLy9mDNCn0aehjE5c=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=GP4NDPKRkGWYcwp1ng3FjRgstz+p3qW4TYZvEAL7kTir3h9vzcK00PDaqaZTYDJdA
- dTWUUPeuiGIiHf9lxJahaE1Z9WV7lWHWzvKQ9+G6Onuesg6Cndgrp3Jar23BW6GPlS
- oIlbXy3/imz4Iko9VsaDJVkXO+tz0GL8Gv9fp8+KVEX8CeN0/Y+23BzaRfKe6d7rRF
- iFycMj3ycrk7M5U53BlzyFoRc9tZySEe6aGrQhPC0ZOyOtOLWle4ExxgR37ZDPi4Jv
- zWl7HxisoeHFgU26IdyaafCgCo5x7coESQYM3KhNkHISjjaDY+iSIiouQBt7A9nBFs
- eLrMHm8+wv24DEF+GdTSoyLpUQKNdSV2FmE0Kps+m9MUWspiYTAtcW0n+9KL1iYAsV
- Ic3V6TZSuwDHTOVQcYeGuI8PqM+gOo9mitlxrYsfsb6plM9GoVYH2yPQoXN5Q3yVJy
- +XRUOyvs4t/5qbyOnEDh3/kil9JYjjS3f/t0b4vozz+Hs4LQYPShY3d78tHZPsYNGY
- pESB198PceuD77HX9JVlhuR7cbo1TKKnggHxrgOwddrqYBfDSgoeNrjAGHEKUhVUP6
- aKl05cgMKUvwMOgzmmba7bfQB1jWq820q/aTFtqMbYvyd+Aerp8vyWs9VMPQp2t8I2
- wcFyMVWs8itlDRlMhCOFzflE=
+ b=oXOwOdArPg/TcOTumyOV/geexTC+J43bCYEpCDOwvRqZvHHjGyw9vjbNvkyc8tJ8a
+ LSlGqm2Tk4mj0AsB84Y9PIvAux8pGocyAOKORUF6PdhzczKW9Y3CxZZAZpbUB6L34p
+ fcK/YIZixz5TBad9vVf3R29faYw2DYLUspQDXyQNINvWn/+3x2D7IHmyCshBSaJMpL
+ oXdlMCZ7ftIk/Oo6JNPYZBPtBhqtSsuhXWn+Z2E8x18ZKCpTCL3yT3od5MrO+Tujm8
+ UREjcetnmQwkUoLaCM4aBH5pXWiNyFmQFrNtCq1jEDnrha00igQUthJXcC4LNZSMjt
+ kOtIoOtoaazJBAvLszVUi39DQ6sr8nllVIm0U6RG+1TPQTAtOuDFBgwfYpJzbHI39v
+ zOSWE30bWeIJ9XV0yvChoMluao4lot3wbcEXc01WFagyfJQhMgQekIEEfMnvNioLcL
+ nPOuScb2ozS6IU1Slw1DBluhbuHcV+5hjENjZ623b04YswYTYA8rnlriDlGW3hxlN6
+ PcNndR6Z/hIvEq0udhYX1rULVXuQ+dJBzxNjq+LCsrnbyve7r2hhO+JgRWivQdsRet
+ EpFsMSHg8R+9WvUOESg9sT7DzBxp9U8ktxUoYGlJCSVci1qgUXnVj7d0LAoeh+yock
+ lHOxqY6g+b8pHzwqm5z1JhC8=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de,
+Cc: Stephen Warren <swarren@nvidia.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] test: The LMB test depends on CONFIG_LMB
-Date: Wed, 24 Dec 2025 08:45:07 +0100
-Message-ID: <20251224074507.15540-1-heinrich.schuchardt@canonical.com>
+Subject: [U-Boot testhooks][PATCH v2 1/1] py/travis-ci: add
+ u_boot_boardenv_qemu_riscv64_smode_(acpi_)na.py
+Date: Wed, 24 Dec 2025 09:03:14 +0100
+Message-ID: <20251224080314.17188-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -79,41 +75,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Many boards use CONFIG_LMB=y but not all, e.g.
-amd_versal2_mini_defconfig. Building this board with CONFIG_UNIT_TEST=y
-fails:
+Add missing boardenv files for
 
-    aarch64-linux-gnu-ld:
-    test/lib/lmb.c:411:(.text.test_noreserved+0x428):
-    undefined reference to `lmb_free'
+* qemu-riscv64_smode_defconfig
+* qemu-riscv64_smode_acpi_defconfig
 
-We should be able to enable CONFIG_UNIT_TEST on any board.
+to enable network testing.
 
-With this patch the LMB test is only built if LMB is enabled which
-overcomes the build issue.
+As the environment can be the same as in u_boot_boardenv_qemu_riscv64_na.py
+use symbolic links.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	Extend the commit message.
+	use symbolic links
 ---
- test/lib/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py | 1 +
+ py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py      | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 120000 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+ create mode 120000 py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
 
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index 7c9dc180c8d..f25383a40e5 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -16,7 +16,7 @@ obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_ctz.o
- endif
- obj-y += hexdump.o
- obj-$(CONFIG_SANDBOX) += kconfig.o
--obj-y += lmb.o
-+obj-$(CONFIG_LMB) += lmb.o
- obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
- obj-$(CONFIG_SANDBOX) += membuf.o
- obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
+diff --git a/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+new file mode 120000
+index 0000000..7745909
+--- /dev/null
++++ b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_acpi_na.py
+@@ -0,0 +1 @@
++u_boot_boardenv_qemu_riscv64_na.py
+\ No newline at end of file
+diff --git a/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
+new file mode 120000
+index 0000000..7745909
+--- /dev/null
++++ b/py/travis-ci/u_boot_boardenv_qemu_riscv64_smode_na.py
+@@ -0,0 +1 @@
++u_boot_boardenv_qemu_riscv64_na.py
+\ No newline at end of file
 -- 
 2.51.0
 
