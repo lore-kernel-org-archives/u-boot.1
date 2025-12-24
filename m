@@ -4,139 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35ACE74908
-	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 03:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BEFE7490D
+	for <u-boot@archiver.kernel.org>; Wed, 24 Dec 2025 04:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AC4D8419A;
-	Wed, 24 Dec 2025 04:19:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 38146841BC;
+	Wed, 24 Dec 2025 05:48:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ns/r+jO9";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gK3w/sk7";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DT93odhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2050E841A5; Wed, 24 Dec 2025 04:19:04 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 97E56841BD; Wed, 24 Dec 2025 05:48:06 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94E0F84198
- for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 04:19:01 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1766546341; x=1767151141; i=xypron.glpk@gmx.de;
- bh=ZTwW65Mc1CQ0iW+SsNxs7MwayRz/uGqmt2g8/wlE+HY=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=ns/r+jO99sCaVdMQmgLPXrOvunGk6hmBEOhCgXTacovWA1Byw1RQat0M7aUL3hTd
- tqUtbCNlsDL4Gz+bThAP3grltNks5T3azwsozbHc05ri0VHdtXhuIFbFlwGK1koAc
- XnWo8BqHoq5bQOnTYBDcvv001qOGXvvMojJAF0JqvpGFnGsXQPyNNfIx5RmJ8bEoP
- U/IbD20jJml0xCS3iV/ROE2JZLxEoGt+YL/FrMoM8cSbt2RfiiraYyb/h+j7kYKOM
- S14C6vIf9k2LrbCimwTxnuee2J8dyXJPVO50qfPfmZ8x4hgRa/DVjkMN4G4Pj9JSd
- KOkRF9gi22cfGGaBHg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from ehlo.thunderbird.net ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mr9Fs-1wLLn83bHS-00mDCM; Wed, 24
- Dec 2025 04:19:00 +0100
-Date: Wed, 24 Dec 2025 04:18:57 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Marek Vasut <marek.vasut@mailbox.org>
-CC: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id 898FF84198
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 05:47:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5BNJCrqb1056218
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 04:47:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=3sEktVcYI/kpco4D5J7+jG1hC+ETkI0+hsy
+ n6cv/IPs=; b=gK3w/sk7QjPm677adwk+v4w/MjcnlK1+caLUA1Q4G+iShSgtyLR
+ 5VjhhttBxRKN3p7a1gWUQnNVgL/PnwhQa9T2n3uYkrPxs98p7ughLcJMJpV5vSUY
+ WgG/1H5bRph0jbnbvqoE1QZ/cXCi5jDHHhFRgZ5ONodex4filYq+0trk5KEGdOQ7
+ kqBFw/WaEyls0ApsZDPnXuVJfd1wivoSwnZn3+Uj/svY9wpn3rJ6KZ9NvokMVD/l
+ rKYuDxqUwzxjiz8GT4U+tHfM5MYG8OnIq9u17BWF0pMRpVk/iZqCwwwbuwNwYGqD
+ 190ZPlsx/K+LaO3yUf7SUiULIWJ6ZEyc8iQ==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4b811v1ak0-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 24 Dec 2025 04:47:56 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-7baaf371585so3827145b3a.0
+ for <u-boot@lists.denx.de>; Tue, 23 Dec 2025 20:47:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1766551676; x=1767156476; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3sEktVcYI/kpco4D5J7+jG1hC+ETkI0+hsyn6cv/IPs=;
+ b=DT93odhjRr3aUPuIeWaXOUBa2Gnqo3FMM7u+kA0Cj8Oa8925WWh+ws/Ls+xQvCJBy/
+ MujLgv+iZmcS+d4HAadJccS/UltUJs9k00sPpz/oomRi98mr7b7CnfDaGv0p3fsez2ba
+ HFYHPUVY4k/201qr3aImxodWeFMrQpVMIvapGyRMHfDSG+I6xqRUx/oQi98rL51vpFr5
+ DJZ2vMKE+dXW8KbS3BGxokrXEcwCTQ77mu1W7jD6adJhFG5egXF/kU32BaXacVqkiTEW
+ NJAahwgpFX4zJ2YmVjB2mr76CnCRXblMx4fptySn+WOqYoibyj+dTB04RRi06lOG9OLh
+ L+zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766551676; x=1767156476;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3sEktVcYI/kpco4D5J7+jG1hC+ETkI0+hsyn6cv/IPs=;
+ b=TWPefKy/FbH2T1vlKsyA6+2mOnucgPzphFlWE/ZUFU0FPKUZdvUcXsYmLom8fkl+JG
+ Lt6a/f6aOf4Vw0P6vlm6HdWRsgErS9Jyl1zXC0vt54Aq7PV2drvm0LZ4/K3TyBGRs6TC
+ TegewtEwbAZS/wnerUSF7SCOR5ynICgxYnsMK3AzqzTW/CMzWaWORO0FqnC/UAViTB0V
+ XCHJKhGPYQslZMod0VhYjNhwiRXqxmeL5+qJQpKcyRrkvhBZAqSyR9S+bT3ttPnRKI5n
+ zkIYP7E5Pbj/WR94Yj0ZI+wcyIdxc0i8Sg5PCcd1ZeFxlOhXSZMtfI0es6HX3JggJYW5
+ f/9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVvH18YWUtVZbfrTC4OGgYbb5kOA5WEqSHpGYarjuhoMhC65NTLC+zDEIQlGkA3MquEgJ2RNaw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtUgFNDqyQuLJ8grSJmu8XnS8bKXx0xouOZLWuVOg610RKu1LW
+ HCHqqlHRKA3IgChREW6CEGjzgvnd8tamKmaitYyp56IlEpvi6IisdgPTAFwbSXeYP6dFZ1mk0N2
+ G7dynUsWwe38dEi5n7Wa32c/Z15eAdWI20eB7g4eDfcfJZE2d1z/TrRzU
+X-Gm-Gg: AY/fxX5RwJHSrQpCLf7uo0bOUb3SbgIarl9Tkqjorrqt4EAM0xzGBUMr9ycVphyYsWn
+ j6rmQpn5lVAfrCQU8zL/Y0UuDC6jJjpmsWcGHsgr0J/hNE8jHy/Cq3M8bpJKpieB8O6u0hfaK8a
+ DIgmyIMoaenPJpsS89YmW/UbTBqfU/oychRTOd8jum8FfASY9Pqdc2GJEcnQ4GX/StsdMxi2rwz
+ jmg9LWJj+I8waB3K6SDSLe/zBmjE4+6hAWEZ0ZQI+MeO6SsCv5hTMlCLEUvjhrISZLoYvXHpmjV
+ SUxDqrnbBAgjTJMyXSsNrL/wjv+3A/yyhwBASLn2SgelTlr2n6qfyYDUD73OzB5OetxYYb1+CKH
+ gVovIKRgs0Hh97Qef05xRBKXyq+M6fBFLQUBTsW3NI0/3TXIiQHUEtzIgXcVrO++4pX75wEfY8u
+ bHneS1gC7fd5yZmHN92EDD3MYuQoAc0R0ECO6UdA==
+X-Received: by 2002:aa7:9309:0:b0:7e8:3fcb:bc41 with SMTP id
+ d2e1a72fcca58-7ff547df601mr15079685b3a.22.1766551675857; 
+ Tue, 23 Dec 2025 20:47:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFf+ifd2PQizTx/GlK4OSfe83xLZueXuLFJK5U5xHmea5TcMrvrLEa0pcxLFy6EFDLVostSsw==
+X-Received: by 2002:aa7:9309:0:b0:7e8:3fcb:bc41 with SMTP id
+ d2e1a72fcca58-7ff547df601mr15079666b3a.22.1766551675325; 
+ Tue, 23 Dec 2025 20:47:55 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7ff7dfac28fsm15248263b3a.32.2025.12.23.20.47.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Dec 2025 20:47:55 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: lukma@denx.de, mkorpershoek@kernel.org, marex@denx.de, trini@konsulko.com, 
+ kever.yang@rock-chips.com, jonas@kwiboo.se, quentin.schulz@cherry.de,
+ gchan9527@gmail.com, balaji.selvanathan@oss.qualcomm.com,
  u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_1/3=5D_test=3A_env=3A_Add_te?=
- =?US-ASCII?Q?st_for_environment_storage_in_SPI_NOR?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
-References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
- <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
- <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
-Message-ID: <61B4E140-F702-49F2-8F9A-CBCC5C8498AE@gmx.de>
+Subject: [PATCH v2] usb: gadget: Kconfig: Correct Qualcomm config name used
+Date: Wed, 24 Dec 2025 10:17:47 +0530
+Message-Id: <20251224044747.3898137-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HhQubn7/KIN33IEuAgZ9SbgAWraZHcNKTkvvSzuPl6gthkgV9EW
- OBT0jFWQN8ZFN61oqHEmdn/KlziCnGJZzdbZqLASGDDtKcRdmD56YP+sLC5XTGlhQ5M5mJp
- 9NhHYevoMYU1EE9pym9TenGzhi/OCHiMbOpkBxQ5DHdvv+nTqdLS6DH4dncnKz25TKsBcqJ
- IV0WZCpflSz9JIMa4P9qA==
-UI-OutboundReport: notjunk:1;M01:P0:KRyhEB+y8T4=;7DmKN/POiyeXUP4Icd34Ykw+FSu
- RjkvHQXVq1kz0nn+2Pu53E3hKMNbEZ8vaJ+ZcKlmNwqZAIV2hABLMQH8lp3h2jG8NX6KXFwYx
- 0LncGJxKgv9E/ltWoEL9o0CiAHpO4lzmJ0klMxFu+hnOVImjZfwXwKIbXQ8oUDZAzEOuzqdY/
- CH3rve03tCLLYouZOaTKgCH9g2ywLeTNKAJ49wV8VrDq3/Gn7KJUjtcG9kbRQW/2BolRsU//s
- ooW3Sdlim8ohapf8R2LMRhxZlVfZB4yPHy0GfivnwINaBAgLik42nBJ79ZkODU3/lNFuPJSQz
- gCJ7ikeHDzRaZvuX+ydNQWlstaw/dLece1Ts4jwDKQTu2xs3fIaPCnGwh40z4h3egMqMNNi+W
- kBKoqfxpeltFEvwu9v0vb8dYhjG8XuCorp0SmzWQzs8DS3n7PWHv8EXrkaoZRYm/ac5qxNutw
- jNKFeHeIU9ZpuPTDSbp9zDoYsH0jHwzosja2cg5dkKNyr6v7+Hy0psULX/DWl+dAQ4/17hLV1
- icpuG+JKOtEHY5oCTgCFoFRY5d/F/FAI4uhDKCRVdPLzfgsFj3AnKpMic3lE9dUy4Pt6V12i/
- OAmBxeuBZTSDctLKSsXWANU7G4sNsgfvP0fLHSZ24m08HAryeCCFrD6PdY2kEcUdrtTkpAeXt
- pneBjj5OR2T+XK64Qkn3diKbygZvVAy3EeFlmmy3sWwBQ6IsvcrTQp0KXaLGm5VRfXO6HjS2p
- vPZ1112qiHTK5YmCWjuaq77s582A+WdL9rjkyAU2mC7trmGscAQZQYvuKMMzEW8KEWADGPl/R
- GBT/qt6Rvp42WmqGcJ+HUHa++ulsh3aiRjDkJfG+Ykvro7uoNaRnJaymlP2au0q9fFQuZ6+fC
- WwlGAysOF2nSpXCKEY4tM5pt5g4YbGWyN/ePt0VKCk3kz1kjW9RinuBGsxOb/mEiwM+Z+XDn9
- iXOxTVrD8sbpG5depxTqJzoHlYUyDVjetnUvpPiaEejHsPWAwR1FZTPwDfQP45akZ5lKHsEdB
- jcOlYoW46lcM+qvH5SoJXA/ipH5Nth7NVPQJTtjDhZ8gd+x+jBIm04p5pxwZTp61jDXau67JG
- wseS2wY4kZMKBBTWZTsMjpv4TkdJICUhz10pV+5Ns3eFQoXwm3xTgoGAPLCN8/uLe2u6ywnQh
- NRLNVzdttwlxmzzGIne8sK7ZYZHdXyD4Fm6eAwfgfhHWnUmerdlAXkbfsrMq/wIm7lGloRHlr
- AGlrkd30vgJe9UK85oOu7Aud6xlu5caF2q4/RpXEYcpRjcbaKNfqYWAxo8LkkiZKE0hLYGhLU
- +oCD9pvcr1f6Fb3EJMVf1tPtYKhJkBVDrQH8EImN6kGfe+sGoJpYxkqgTPezkBWNnEoRdj4HW
- 9K9V1lTAgfYH/mjsNeMmjkYaQjKOwOu4NANl0DT/4uz1WBplvOsSc4d1K3mduh+52gRrFaoyx
- Igt7454N5Fs7pOFWeJ0GQrbct8/kHoE9qV+A1zAKDmO62XxNGMAF/aM3cnXfajh01190KuEC/
- TyNWieVDetf1Wo2G9WyjC8WCqaMwXhcFEsy9KihtF7uEZoHbmUHdBtP8AQwyrgOP3ZJcjF2l4
- rSb3D2XcD5+o6HiW+Is/FqXtbLFTvyQnahKMEnl56PPeQ5mzusIUKpmw6qggFr1q2YVpCaVBt
- 8GcDiIwUXCNpOBL6MXbIJNWL2Oo099SpBfBUK/wKu4gFwX3ylqHTQFIScT4Y7ZIDU6ho5c2Qj
- fCniJ/CuPNgFKfB2DLXeKaS6fxs6wDbMfvN86A287UJzuJDrrg6gRLyNmiVXZzgtCLT9fnjIb
- 1EHY9Jf+ss10nOokLCO6TQUGokzER1gyZiPIbM+cMwPdPmmuiwGRDzvx+DcsuDLWBUOUATjpL
- v7YJ+KRmy1fbssBJwBVB3zpMzEBX26bB+8TCo/vBwTQ3ZnV5dlxN19bVQ6hr/03frLacHPgdf
- BShzhQu37ainNYnovdNRbA1Aho4i0uM+EXeBiNLtP4OQ0++zUrP1T+M7qVCtsbylqgKxg3MhO
- d9TOHIdJjerg1p5qVcNkBdrk7AARjpeZpWVodbP27Gs+IsqEWQPkORuc0gn50VhN0jOdXpqRV
- PR3iBd2N/WYV0ZC+wJljC/zuirS61lNpidUH6PIX1jTAQC0EeNy8ZWhCJYvqH/VHp0k8Sd2TG
- +FerPiAUZ0Wlh2u0/rbgOlrDAssyjbasrffl75I8XrUacgr79++gXKrpYtdarrIo9tpbkzKLR
- FqAIzrq2Opc4b9DN0PLOG9LSRQnLu+tWxdvrDBi4kY6uDscAX6IXTfOupi/FV8eDCM11qRsIs
- 8bZ9mYZpJoAD3M1znr2nyzaiSTSOapN6DGVpSDJxrFysDpArRDEg1lbC7x71Inujx7hC8iXXM
- iIlh+kSROHUDAOFcCMIEpP52Qx3Qx5T9aQiecBdYeHXsrkrfqqUlly4C61+J9CyCg7ktkjPMZ
- bf8a0DDNXiQ/eMVS0dqv93WQT6yjLCKk1zmNYWPAlSNu9j/KgcCN5f/lzYC0Y7lubhUKBnN6F
- PGFMZKxBUqJ+ji9VWM7JATSZ4t+terW8vpc++ZT7htxTGR6Q+HjRHbUQJhY9GcAYOqB9Ag2uY
- oT+t+VA2IEFd8eTNOwts+VSwZ2K6lW854k4XUg/MTQCg/H7JuJywPRXgssbgnThAwHK/E0Iyp
- FlaUI/rc2wzJyCkEQplBIsN0f0Jmcx/+q1Kr8emDhs2wsqQPCfzAa3t9j3z7ZoaGnWETnfHXT
- UnyUQB2S4bN+6gHgGK50O6zsfiQ5AIxqOKTPJKWfFGhGkPzWGalFqphJ4Pk8lfr6X373QJ3Of
- 9Sin6PQ0DQvGBDK64yO+bzPdAT5J/T2JjbSVViL1ruGpWJTgdjJTN2LReJ+ywFAtttyPX1wVJ
- LQ68p+RS71w7ImdDXjokD2Rj7RiTmO52/0blJHi7d/yOKlTTrCnU7pUUv45bXLnwU8UKlzMid
- 6nFKyLP/U/om/nH+LaPemOI/QiwvOr/KX7n2jMf2qYjtbhQ8qMVsGSBgsvm26CeyFisDgnD/M
- OcF3gXZVmvNHzA/wfb7ma6dr1A0sHc2rrkrRTptkM6vh510WfOUJ7YwqUWVzST5jOcDTPDsNB
- gDs8Nj8Snc7CMJKrssvNAu1Sp4ehrsT+3E2SW+k20m96SVCcAof7xd6WvfA07cFS+LPxrzkrU
- IbLEkI4gWlGtpqlAu52eS1yvhopKMDktH3HSBaM/9H4tDhGS1P7feD8UmNVILHDlRub361uC7
- 5Cu2w4rMRUA5KJcq7aXvwWTgo2kJGslx/k7rVxD1Ak0qoK/Vh5hXAemGSNFDuFRIb7qirSZCW
- i9Zp5dBSppZ8FtmHRCoSy0TfLGAmYunhXObcbdepjR+4im3cAPD6HXbgFd8kyRKw7sS9EPgUH
- tQzRRgUndQliqstoAPP2lFVWmQTIE4AA/w7vPKM6Me9u66ZLyl+Ubn17MhvMNn1+7dn/p8lMU
- NqdDf0g6Xaonf1/SBRNdojOrDHDMvCtx+NP8KKUo+kYwgg0tYQ2bWoMT8r5g+Kzt7cCblyEk0
- TeAQfB8LPYjCbfpZpEXXGu35myUrpuPYOMHdeAYdqwIrSI9WphtpEdBTATv6kJp4cxVT14I+d
- ehzsl49axw+6LFO3F8HRBEldUnJfE/ZX1atz7Zd8AP2AkBKRRHQ0ycXu5iJAoXYC5GjeSxen7
- aGfVwrrssDqXpzAt5v+NAcooxSjlA9+5Fgl2s6vZ29TCckF05lCnyvLpBXz7SNSjP/kENCdbP
- GX6Oj54Ly6bpvHdT6tGT6Ubr+hSaH5rH4frTBIWtEWdoZxfwf8BEugX/BzXDDLM93lOJkVUTU
- j0dRjHOOu7vaLoRBfEGr9/q4BGr3okNAKqClY9Q33x4UzKDNsyD/CcV9+5Lb0pFkmhb+VzI+h
- nLEPyUbKLaECiI9er+t2Q3q/yh+ciQdm1rQFMFDwBqZPikiFv45Z1OABzlRgB8SNe9E6r6618
- Vt7E8z52ZsNykpT83vi1IWulId2K/cQ2uCrxhs2rqVbNDP7I7XNZp0dZX0SQCHx0x6dng0kIB
- Js5iEOw5+41sjDrwb/ePzT7TjYP/aPmdI9Tv1trPuttYD/hr58OMPsHCZqboK9ZsHlY6k1Yx8
- miUPege+9HNAN1C628CNUfwYkF+adJ6Hk+RUIq28sMys1oCW/DnP5CWul2wnRxQuk9WPfxlLl
- smri+gfoS6aXNppCZr0V7ozMJ8aDZOrBP4MxvDBPpP0YuqwELXTJrzLdG1jgIoC1W0jLglndR
- tn5OZbtRNAPJgzO6XAu5Lfsae5NXPFPosvXtNSPq042jWcuFZ2dJSINnDlwwfZfqko/CGyq4x
- vJEllVGxHDm2q25nmS4k8eHkdmySOYo4PUYAyQGto8wq1Sgunc0XeItIG7wp7/vsNlks6L+up
- IMHkio45lJQwLtTQ/oFLXj7HyVuvT58NHvvwsj7sC/jC/p5BYkR7A4UO4UEk9GlgdtDK5/Eds
- ZVgXet6INRwXSWlLyFWaEAXIxVgMAKsF4j6OaRN2yQh2yCyYFUHwHkFVNpLr6hpGM+7T8+jAW
- EJPiYsoB1q3Gtzavvnl9dS9jpZU5jVgUoTMadZjiNRViOl1OZ0z0kIdv+919kYEKD8rJykcUV
- jium9RpYXeGOinvjPoDdbzG8YLKXzimnu6g/2MB5Kvoks35h/k0nXsZdFyGSr4XjyP+4pURWg
- wy5nLWpQsz3OGPQd5WS/mTOnvRiz/ppa1ypKGRilTjHBPj72F3ul3fh26HcsUIOmlnAqIauHz
- fbaAMz66yRKnarzlcW48ORDR5r37z9V/sD3EDAf7rix1Suz/xh7/zqBvrUeELxzu7M8Ck2Cv8
- yo5KiSVN5EhmZyELP8JOlR+Ni92bdEP2Mt01ExPoV2zxGdavew5vp72hzzq4Mq9LoDls5UBfO
- +6xYyEu4M302+OxAAW0lMXID/eLMkGQOVZ2bELpnZc+iFU5fwG6TPG56TF9HA7TU0aWWHfLZ5
- cI3O5AjNniIYmS+4zshjMc8+bDZJ2BSZeU55IN+CCJ4fez3PWeCioDUbkqT6GxaMVhAklsVgG
- vXlkaYFFXSGPCmRwd1CWuWFFl0EOkHAwYSJ1FxehTouLYei/Q+hYphec0MY2/89RkCXf6ElHZ
- 4SQFPW6/YgHUlVd/066Z9AmUcMBC7t81Hqql0riP+fqMFhIgLH6FYf5DkGGg==
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjI0MDAzNyBTYWx0ZWRfX+Sz+oVez6U79
+ jtj6BBta3VJjYt+0Va59kPYcBfqS+/zD3f/YznEr4YswSbF+K6ZIEbV7EwdfmaJjDFHLKGe39a0
+ 3duwY3790GSNChScJs9hhBn6QeFVJfrKHm13OKDNsprohkYvqKxXsPVJXZKzHVeCVAkDGCjoTs5
+ 4otGkxUBrRe8AL+i+CJj2nX9p8vWazkftcH+kFlpU3MNsQOAAHsscwaqg2ojtZSp63rqWsPW6zt
+ 8OqWrDzz/gqk3mXpP84bznPkYN+iZYRA4mPiSdFnF929k7Y3OlegSyG93dYqQR/GXQxYvF5RGPk
+ yCNDX1YVJMHn7viI7QLfkSqgib1j7n5TZ50YipE8goeokqW+3UErzDT3HDOSe5vEk20wkw/ddq8
+ 4FijBvnr3tksFd68+WEAdCi8KDZQVEnn7VVWGo7zTw+UJKnpAG8RduwUrZ1FOJmAfutpJFCTHK1
+ Y7UgEFZ4YOvKiw5mrIQ==
+X-Proofpoint-ORIG-GUID: BmJ15uW2dMpFcsuh98Yw3avKjCkEMSWi
+X-Authority-Analysis: v=2.4 cv=WegBqkhX c=1 sm=1 tr=0 ts=694b707c cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ztfn3FVH9eksO_uVlSgA:9
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-GUID: BmJ15uW2dMpFcsuh98Yw3avKjCkEMSWi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-24_01,2025-12-22_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 bulkscore=0 adultscore=0 spamscore=0
+ phishscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
+ definitions=main-2512240037
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,49 +147,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 23=2E Dezember 2025 19:55:45 MEZ schrieb Marek Vasut <marek=2Evasut@mail=
-box=2Eorg>:
->On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
->> On 12/23/25 15:31, Marek Vasut wrote:
->>> Add test for environment stored in SPI NOR=2E The test works in a very
->>> similar way to the current test for environment stored in ext4 FS,
->>> except it generates spi=2Ebin file backing the SPI NOR=2E
->>>=20
->>> Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
->>> ---
->>> Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->>> Cc: Jerome Forissier <jerome=2Eforissier@linaro=2Eorg>
->>> Cc: Simon Glass <sjg@chromium=2Eorg>
->>> Cc: Tom Rini <trini@konsulko=2Ecom>
->>> Cc: u-boot@lists=2Edenx=2Ede
->>> ---
->>> V2: No change
->>> ---
->>> =C2=A0 test/py/tests/test_env=2Epy | 99 ++++++++++++++++++++++++++++++=
-+++++++++
->>> =C2=A0 1 file changed, 99 insertions(+)
->>>=20
->>> diff --git a/test/py/tests/test_env=2Epy b/test/py/tests/test_env=2Epy
->>> index 383e26c03b0=2E=2E48e31f19b3c 100644
->>> --- a/test/py/tests/test_env=2Epy
->>> +++ b/test/py/tests/test_env=2Epy
->>> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 utils=2Erun_and_log(c, ['cp',=C2=A0 '-f=
-', persistent, fs_img])
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return fs_img
->>> +def mk_env_spi_flash(state_test_env):
->>=20
->> Thank you for adding the test=2E
->>=20
->> Unfortunately pylint doesn't like your code=2E Please have a look=2E
->
->Is this something we run in CI ? If so, CI builds did pass=2E
->
->If not, how do I trigger this ?
+Correct ARCH_QCOM to ARCH_SNAPDRAGON as ARCH_QCOM is outdated/unused
+config. Using ARCH_QCOM was causing USB fastboot mode to fail.
 
-I just ran pylint from the command line=2E
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+v2:
+- Corrected ARCH_QCOM to ARCH_SNAPDRAGON
+- Link to v1: https://lore.kernel.org/u-boot/20251114063507.3834973-1-balaji.selvanathan@oss.qualcomm.com/
+---
+ drivers/usb/gadget/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Best regards=20
-
-Heinrich
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 7e08aeab904..ebb306852a6 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -61,7 +61,7 @@ config USB_GADGET_VENDOR_NUM
+ 	default 0x0955 if ARCH_TEGRA
+ 	default 0x1f3a if ARCH_SUNXI
+ 	default 0x2207 if ARCH_ROCKCHIP
+-	default 0x18d1 if ARCH_QCOM
++	default 0x18d1 if ARCH_SNAPDRAGON
+ 	default 0x0
+ 	help
+ 	  Vendor ID of the USB device emulated, reported to the host device.
+@@ -89,7 +89,7 @@ config USB_GADGET_PRODUCT_NUM
+ 	default 0x350b if ROCKCHIP_RK3588
+ 	default 0x350c if ROCKCHIP_RK3528
+ 	default 0x350e if ROCKCHIP_RK3576
+-	default 0x4ee0 if ARCH_QCOM
++	default 0x4ee0 if ARCH_SNAPDRAGON
+ 	default 0x0
+ 	help
+ 	  Product ID of the USB device emulated, reported to the host device.
+-- 
+2.34.1
 
