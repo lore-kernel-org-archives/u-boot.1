@@ -4,71 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D14E7AD44
-	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 14:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78156E7AD52
+	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 15:06:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C7D68435C;
-	Thu, 25 Dec 2025 15:04:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+	by phobos.denx.de (Postfix) with ESMTP id A9C5B84368;
+	Thu, 25 Dec 2025 16:06:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="gTBLLdw6";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="GcIm3C2G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FETXtlvd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 493698432F; Thu, 25 Dec 2025 07:36:23 +0100 (CET)
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7DACA8436C; Thu, 25 Dec 2025 16:06:46 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A0C84119
- for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 07:36:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=mainlining.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1137A842F2
+ for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 16:06:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dang.huynh@mainlining.org
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1766644534; bh=HqF88bytGQIk7yDX+xpEdUx
- 44yknsmO8nQRjxwa45xw=; b=gTBLLdw6dredl0tCnuEJwx3AohdWXj2aRrzaSuNgQGL5fSWku/
- yOE5AKT+P6eOjIdX0C6eKkLkg782cRIJT0wiWisiOpbFoFZ4iS+dvdssQJhwxc+Qfv9EAPpdZxt
- iKkYKNkwRL3szMW6ZxKzPo/nDE6zc5nU3SR2fvFGZrvr1SoUsjBvEELHTvxgEZHjna4K/eQCxCW
- bwIf29woYMWSe0cgudaua8apx5Zd3V9aVeu45bk1EAJXeRCKUxz1FkpWZRp45MMoBfUGf1iaNl9
- /+isl/XE03uy65UrewZuVYR276ErP9tJaYYAWG+A9VH+gzbwd6P1D6Fxgij893vIkTw==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1766644534; bh=HqF88bytGQIk7yDX+xpEdUx
- 44yknsmO8nQRjxwa45xw=; b=GcIm3C2GRQzKrL7Sd3gMnLs2tGzv5i3/XCQT0b/qat1XVynx8Q
- HtAQfHysK0FzQxJjTEVIk1v/rkT+JoVQ7FCQ==;
-Date: Thu, 25 Dec 2025 13:35:25 +0700
-From: Dang Huynh <dang.huynh@mainlining.org>
-To: Chaoyi Chen <chaoyi.chen@rock-chips.com>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ondrej Jirman <megi@xff.cz>,
- Ion Agorria <ion@agorria.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dragan Simic <dsimic@manjaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Piotr Zalewski <pZ010001011111@proton.me>, 
- Andy Yan <andy.yan@rock-chips.com>, Sandy Huang <hjc@rock-chips.com>
-Subject: Re: [PATCH v6 06/12] video: rockchip: Add VOP2 support
-Message-ID: <aUzY3XaTsyv7zG6l@meltbook-pro>
-References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
- <20251108-vop2-pt2-v6-6-d04c699262fb@mainlining.org>
- <fa8c6acb-5251-4f0c-8b9b-c7f97203903c@rock-chips.com>
- <chchtfgy2g6wvapy2u3t7cbtlwoexqd4ir2u23tq5kxeltcqbb@xo5cmulfjhtv>
- <cc837fc5-f31e-4ce1-9e93-78d8a8fcfceb@rock-chips.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c701097a75so3589027a34.3
+ for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 07:06:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1766675203; x=1767280003; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=X4b3xtFHotFObE1mbXlwDPczUeJBUne5ihsWRT7qjrk=;
+ b=FETXtlvd1ewnWg90fu4Q6vbh2hBNIVs1UfGs8uDbu/vSWeezHDCWrwUM3OWnDrovQ6
+ FcRSXq4tYWK9Zv0/9XnivsLLUoavPFZzWwe6D9Sy9qpF+Pt7ZzZGCFhaepEHtI/ZRUkk
+ GhqnU7LML5X9CWJhFBCh+ZcCh2QfvbjB2LUNs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766675203; x=1767280003;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X4b3xtFHotFObE1mbXlwDPczUeJBUne5ihsWRT7qjrk=;
+ b=VqNr/kowUDUlCwMbG7cDICByG8lu1/URMRvq4V9TmU+CJf8qk+YpT4R46lIi4fOKJS
+ IerXg5mPbMXVp/xeG4D7hbRexCKm3LZdQ9EaoX10z8O46akGxi3hb6Ae8p7dmvB1GL5k
+ TLm5WxX/HxHjWMXfPz8RwAcLNeW+2KR50M1ngEuSL2vSrcDZs+5WdGO1iEI/0IYLLlEs
+ RCRO9ZG+6B+ydA28bpgHlmTp2AsHL7FvEOdVIkdUHCX0lGWwkxcJRkpmqcT2jVXUzMne
+ gqPjYPo5XoHUmdB8db3G7UzaDo3DAoTtCxBYEJbWaNgAp6WCsOGAj859bCtfz0Y40R0r
+ dr4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhxx99ILs5HVfwJwmXBg+9+D7fSA9fY/KFqf6n1GgkopQy5EAWcju/6+jcvWLEUh0mPz/CrPE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzC+I0suLwEu75pkN8zLz76hLqikYbXQ8J8j3wdvjKWy6nsehPA
+ MgPLU0yqnRoHasJX3vKmGVbCFf+shchbg/aEIJ7YCwAEDF/VRxMb0KTptzkAE7lq50o=
+X-Gm-Gg: AY/fxX7puDUQcuhzlwGnIH6Q/qFUuK5YfKaDmLcEfnpKMB7FFrpUX9es/Hc8Bt25RH6
+ 6e+sDObbMgm+XVdBgbuHytxdCkRxvXCbdKRt2Gzcp+HhV6gxsSjKg7RP2f7bT6sN+MKTiYYWadD
+ dzJYckjNi9efiYO0OvL+a7UZhVCjNvH2rANBUrZX8sVf6/S+hR/4nwYSZGBjtx0o+/djvrh11xI
+ DXAxicm0lU/aPLAxw0lfeJIzG718Py57mLobkOmKJojaxyjsOUIr/dYggu6JfKLgp+ctr7Ed1EH
+ R0cYc7Xoexl3Q/VgIizsEHCA1mAMcc+m5eNqHWR7he2nhCLER2HygCWh6F+fgGKAE9uqGp9AjVd
+ t+QDSkj3WWh/+HTSJfRoS20H7f8LlUOa1Oek5mw9puL5cMvwYZCuz2GRf24kstemW5eFUMhRKsh
+ /uhKRAK2+E1++XFShQe2CjCrI06W4PAMYkpIbt+6VsIeAxmw6ykw==
+X-Google-Smtp-Source: AGHT+IETkcYvTMNzCM56rN8LHVRdFt6uyGbGc6yFgAeLIPfxco45iT6xKwrafgUwfAZSL8vWTsYdxA==
+X-Received: by 2002:a05:6830:44aa:b0:7c7:6977:17cb with SMTP id
+ 46e09a7af769-7cc66a0eb4amr8647313a34.21.1766675202692; 
+ Thu, 25 Dec 2025 07:06:42 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667f9201sm13312405a34.26.2025.12.25.07.06.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Dec 2025 07:06:41 -0800 (PST)
+Date: Thu, 25 Dec 2025 09:06:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ dl-uboot-imx <uboot-imx@nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@denx.de>,
+ Marek Vasut <marek.vasut@mailbox.org>, Ye Li <ye.li@nxp.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Lukasz Majewski <lukma@denx.de>, Sherry Sun <sherry.sun@nxp.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>,
+ Simon Glass <sjg@chromium.org>, David Zang <davidzangcs@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>
+Subject: Re: =?utf-8?B?5Zue5aSN?= =?utf-8?Q?=3A?= [PATCH v1 5/7] usb:
+ Kconfig: imply DM_USB_GADGET
+Message-ID: <20251225150639.GA710860@bill-the-cat>
+References: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
+ <20251216-imx8ulp-v1-5-504115a53020@nxp.com>
+ <13e5946a-26d7-4b60-91f1-df9a3ba36f52@cherry.de>
+ <PAXPR04MB9644C66E9B8C3109941561E1E2B3A@PAXPR04MB9644.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4CpZJjgutH60JG/T"
 Content-Disposition: inline
-In-Reply-To: <cc837fc5-f31e-4ce1-9e93-78d8a8fcfceb@rock-chips.com>
-X-Mailman-Approved-At: Thu, 25 Dec 2025 15:04:18 +0100
+In-Reply-To: <PAXPR04MB9644C66E9B8C3109941561E1E2B3A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,708 +114,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chaoyi,
 
-On Tue, Dec 23, 2025 at 09:34:54AM +0800, Chaoyi Chen wrote:
-> Hello Dang,
-> 
-> On 12/18/2025 12:47 PM, Dang Huynh wrote:
-> > On Mon, Nov 10, 2025 at 11:24:01AM +0800, Chaoyi Chen wrote:
-> >> On 11/8/2025 1:38 PM, Dang Huynh via B4 Relay wrote:
-> >>
-> >>> From: Dang Huynh <dang.huynh@mainlining.org>
-> >>>
-> >>> VOP2 (Video Output Processor v2) is a display controller on Rockchip
-> >>> SoCs. It can be found on RK3566/8 and RK3588.
-> >>>
-> >>> This commit currently only supports RK3566/8.
-> >>>
-> >>> Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
-> >>> ---
-> >>>   arch/arm/include/asm/arch-rockchip/vop_rk3568.h | 280 +++++++++++++
-> >>>   drivers/video/rockchip/Makefile                 |   3 +-
-> >>>   drivers/video/rockchip/rk3568_vop.c             | 260 ++++++++++++
-> >>>   drivers/video/rockchip/rk_vop2.c                | 520 ++++++++++++++++++++++++
-> >>>   drivers/video/rockchip/rk_vop2.h                |  76 ++++
-> >>>   5 files changed, 1138 insertions(+), 1 deletion(-)
-> >>
-> >> [...]
-> >>
-> >>> +
-> >>> +/*
-> >>> + * RK3566 datasheet omits the VP2, even though it exist in the hardware
-> >>> + * so let's not use it.
-> >>> + */
-> >>> +struct rkvop2_platdata rk3566_platdata = {
-> >>> +	.delay = 20,
-> >>> +	.bg_dly = {42, 40, -1},
-> >>> +	/* SMART0, ESMART0 */
-> >>> +	.vp_lyr = {3, 2, -1},
-> >>
-> >> For RK3566, this should be "SMART0, SMART1" or "ESMART0, ESMART1".
-> >>
-> >> You can not use esmart and smart layers at the same time. And the two layers need to have the same MST address.
-> >>
-> > You can use ESMART0 and SMART0 at the same time? That's how Linux 6.18 would configure VOP for both VP0 and VP1.
-> > 
-> 
-> No. I mean you can not use SMART0 for VP0 and ESMART0 for VP1. They
-> should be same win type.
-> 
-Given in v2 I've been told by Andy to made it platform-specific..
-https://lore.kernel.org/all/79e71a91.ebe.1955eb65686.Coremail.andyshrk@163.com/
+--4CpZJjgutH60JG/T
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-How does Linux turn off the layer if we aren't resetting the controller?
-Because currently the (E)SMART layer is disabled before booting Linux or VOP2 will malfunction.
+On Thu, Dec 25, 2025 at 10:16:29AM +0000, Alice Guo (OSS) wrote:
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Quentin Schulz <quentin.schulz@cherry.de>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B412=E6=9C=8816=E6=97=
+=A5 17:50
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>; d=
+l-uboot-imx
+> > <uboot-imx@nxp.com>; u-boot@lists.denx.de
+> > =E6=8A=84=E9=80=81: Stefano Babic <sbabic@nabladev.com>; Fabio Estevam
+> > <festevam@gmail.com>; Tom Rini <trini@konsulko.com>; Marek Vasut
+> > <marex@denx.de>; Marek Vasut <marek.vasut@mailbox.org>; Ye Li
+> > <ye.li@nxp.com>; tharvey@gateworks.com; Peng Fan <peng.fan@nxp.com>;
+> > Mattijs Korpershoek <mkorpershoek@kernel.org>; Lukasz Majewski
+> > <lukma@denx.de>; Sherry Sun <sherry.sun@nxp.com>; Kever Yang
+> > <kever.yang@rock-chips.com>; Jonas Karlman <jonas@kwiboo.se>; George
+> > Chan <gchan9527@gmail.com>; Simon Glass <sjg@chromium.org>; David Zang
+> > <davidzangcs@gmail.com>; Alice Guo <alice.guo@nxp.com>
+> > =E4=B8=BB=E9=A2=98: Re: [PATCH v1 5/7] usb: Kconfig: imply DM_USB_GADGET
+> >=20
+> > Hi Alice,
+> >=20
+> > On 12/16/25 7:38 AM, alice.guo@oss.nxp.com wrote:
+> > > From: Sherry Sun <sherry.sun@nxp.com>
+> > >
+> > > Since the ci_udc driver has been converted to DM driver, the
+> > > CONFIG_DM_USB_GADGET should also be selected when CONFIG_CI_UDC is
+> > > enabled, then we can use DM ci_udc driver.
+> > >
+> >=20
+> > Is DM_USB_GADGET *required* for CI_UDC to work? "imply" allows to have
+> > DM_USB_GADGET=3Dy AND CI_UDC=3Dn, which is probably not what you want. =
+You
+> > probably simply want "depends on DM_USB_GADGET"
+>=20
+> There are 2 implementations supported in drivers/usb/gadget/ci_udc.c: a n=
+on-DM path and a DM-based path. The current commit log wording might be amb=
+iguous.
 
-> >>
-> >>> +	.layers = {ROCKCHIP_VOP2_CLUSTER0, ROCKCHIP_VOP2_RESERVED,
-> >>> +		   ROCKCHIP_VOP2_ESMART0, ROCKCHIP_VOP2_SMART0,
-> >>> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED,
-> >>> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED},
-> >>> +};
-> >>> +
-> >>> +struct rkvop2_platdata rk3568_platdata = {
-> >>> +	.delay = 20,
-> >>> +	.bg_dly = {42, 40, 40},
-> >>> +	/* SMART0, SMART1, ESMART1 */
-> >>> +	.vp_lyr = {3, 7, 6},
-> >>> +	.layers = {ROCKCHIP_VOP2_CLUSTER0, ROCKCHIP_VOP2_CLUSTER1,
-> >>> +		   ROCKCHIP_VOP2_ESMART0, ROCKCHIP_VOP2_SMART0,
-> >>> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED,
-> >>> +		   ROCKCHIP_VOP2_ESMART1, ROCKCHIP_VOP2_SMART1},
-> >>> +};
-> >>> +
-> >>> +struct rkvop2_driverdata rk3566_driverdata = {
-> >>> +	.features = VOP_FEATURE_OUTPUT_10BIT,
-> >>> +	.set_pin_polarity = rk3568_set_pin_polarity,
-> >>> +	.enable_output = rk3568_enable_output,
-> >>> +	.platdata = &rk3566_platdata,
-> >>> +};
-> >>> +
-> >>> +struct rkvop2_driverdata rk3568_driverdata = {
-> >>> +	.features = VOP_FEATURE_OUTPUT_10BIT,
-> >>> +	.set_pin_polarity = rk3568_set_pin_polarity,
-> >>> +	.enable_output = rk3568_enable_output,
-> >>> +	.platdata = &rk3568_platdata,
-> >>> +};
-> >>> +
-> >>> +static const struct udevice_id rk3568_vop_ids[] = {
-> >>> +	{ .compatible = "rockchip,rk3566-vop",
-> >>> +	  .data = (ulong)&rk3566_driverdata },
-> >>> +	{ .compatible = "rockchip,rk3568-vop",
-> >>> +	  .data = (ulong)&rk3568_driverdata },
-> >>> +	{ }
-> >>> +};
-> >>> +
-> >>> +static const struct video_ops rk3568_vop_ops = {
-> >>> +};
-> >>> +
-> >>> +U_BOOT_DRIVER(rk3568_vop) = {
-> >>> +	.name	= "rk3568_vop",
-> >>> +	.id	= UCLASS_VIDEO,
-> >>> +	.of_match = rk3568_vop_ids,
-> >>> +	.ops	= &rk3568_vop_ops,
-> >>> +	.bind	= rk_vop2_bind,
-> >>> +	.probe	= rk3568_vop_probe,
-> >>> +	.remove = rk3568_vop_remove,
-> >>> +	.priv_auto = sizeof(struct rk_vop2_priv),
-> >>> +#if CONFIG_IS_ENABLED(VIDEO_REMOVE)
-> >>> +	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
-> >>> +#else
-> >>> +	.flags = DM_FLAG_PRE_RELOC,
-> >>> +#endif
-> >>> +};
-> >>> diff --git a/drivers/video/rockchip/rk_vop2.c b/drivers/video/rockchip/rk_vop2.c
-> >>> new file mode 100644
-> >>> index 00000000000..992f215d416
-> >>> --- /dev/null
-> >>> +++ b/drivers/video/rockchip/rk_vop2.c
-> >>> @@ -0,0 +1,520 @@
-> >>> +// SPDX-License-Identifier: GPL-2.0
-> >>> +/*
-> >>> + * Copyright (c) 2024 - 2025 Dang Huynh <dang.huynh@mainlining.org>
-> >>> + *
-> >>> + * Based on rk_vop.c:
-> >>> + *   Copyright (c) 2015 Google, Inc
-> >>> + *   Copyright 2014 Rockchip Inc.
-> >>> + */
-> >>> +
-> >>> +#include <clk.h>
-> >>> +#include <display.h>
-> >>> +#include <dm.h>
-> >>> +#include <dm/device_compat.h>
-> >>> +#include <edid.h>
-> >>> +#include <log.h>
-> >>> +#include <regmap.h>
-> >>> +#include <reset.h>
-> >>> +#include <syscon.h>
-> >>> +#include <video.h>
-> >>> +#include <asm/global_data.h>
-> >>> +#include <asm/gpio.h>
-> >>> +#include <asm/io.h>
-> >>> +#include <asm/arch-rockchip/clock.h>
-> >>> +#include <asm/arch-rockchip/vop_rk3568.h>
-> >>> +#include <dm/device-internal.h>
-> >>> +#include <dm/uclass-internal.h>
-> >>> +#include <efi.h>
-> >>> +#include <efi_loader.h>
-> >>> +#include <linux/bitops.h>
-> >>> +#include <linux/err.h>
-> >>> +#include <power/regulator.h>
-> >>> +
-> >>> +#include "rk_vop2.h"
-> >>> +
-> >>> +DECLARE_GLOBAL_DATA_PTR;
-> >>> +
-> >>> +enum vop_pol {
-> >>> +	HSYNC_POSITIVE = 0,
-> >>> +	VSYNC_POSITIVE = 1,
-> >>> +	DEN_NEGATIVE   = 2,
-> >>> +	DCLK_INVERT    = 3
-> >>> +};
-> >>> +
-> >>> +static void rkvop2_cfg_regdone(struct rk3568_vop_sysctrl *sysctrl, int port)
-> >>> +{
-> >>> +	u32 reg;
-> >>> +
-> >>> +	reg = M_GLOBAL_REGDONE;
-> >>> +
-> >>> +	/*
-> >>> +	 * For RK3588, changes will only take effect when the same bit is
-> >>> +	 * leftshifted by 16.
-> >>> +	 */
-> >>> +	reg |= M_LOAD_GLOBAL(port) | M_LOAD_GLOBAL(port) << 16;
-> >>> +
-> >>> +	writel(reg, &sysctrl->reg_cfg_done);
-> >>> +}
-> >>> +
-> >>> +static int rkvop2_enable(struct udevice *dev, ulong fbbase,
-> >>> +			 int fb_bits_per_pixel, const struct display_timing *edid,
-> >>> +			 int port, int win_id, struct rkvop2_platdata *platdata)
-> >>> +{
-> >>> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
-> >>> +	struct rk3568_vop_overlay *overlay = priv->regs + VOP2_OVERLAY_OFFSET;
-> >>> +	struct rk3568_vop_esmart *esmart;
-> >>> +	bool is_cluster = false;
-> >>> +	u8 layer;
-> >>> +	u32 reg;
-> >>> +	u32 rgb_mode;
-> >>> +	u32 hactive = edid->hactive.typ;
-> >>> +	u32 vactive = edid->vactive.typ;
-> >>> +
-> >>> +	if (platdata->layers[win_id] < 0)
-> >>> +		return -EINVAL;
-> >>> +
-> >>> +	switch (platdata->layers[win_id]) {
-> >>> +	case ROCKCHIP_VOP2_CLUSTER0:
-> >>> +	case ROCKCHIP_VOP2_CLUSTER1:
-> >>> +	case ROCKCHIP_VOP2_CLUSTER2:
-> >>> +	case ROCKCHIP_VOP2_CLUSTER3:
-> >>> +		is_cluster = true;
-> >>> +		break;
-> >>> +	default:
-> >>> +		break;
-> >>> +	}
-> >>> +
-> >>> +	layer = platdata->layers[win_id];
-> >>> +
-> >>> +	debug("(%s, %s): win_id = %d - layer = %d - cluster: %d\n",
-> >>> +	      dev_read_name(dev),  __func__, win_id, layer, is_cluster);
-> >>> +
-> >>> +	/* TODO: Support VOP2 CLUSTER */
-> >>> +	if (is_cluster) {
-> >>> +		dev_err(dev, "win_id is a cluster, not supported.\n");
-> >>> +		return -ENOSYS;
-> >>> +	}
-> >>> +
-> >>> +	esmart = priv->regs + VOP2_ESMART_OFFSET(layer - 4);
-> >>> +
-> >>> +	debug("(%s, %s): esmart addr: 0x%p\n", dev_read_name(dev), __func__, esmart);
-> >>> +
-> >>> +	writel(V_ACT_WIDTH(hactive - 1) | V_ACT_HEIGHT(vactive - 1),
-> >>> +	       &esmart->esmart_region0_act_info);
-> >>> +
-> >>> +	/* Set offset to 0,0 */
-> >>> +	writel(0, &esmart->esmart_region0_dsp_offset);
-> >>> +
-> >>> +	writel(V_DSP_WIDTH(hactive - 1) |
-> >>> +			V_DSP_HEIGHT(vactive - 1),
-> >>> +			&esmart->esmart_region0_dsp_info);
-> >>> +
-> >>> +	switch (fb_bits_per_pixel) {
-> >>> +	case 16:
-> >>> +		rgb_mode = RGB565;
-> >>> +		writel(V_RGB565_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
-> >>> +		break;
-> >>> +	case 24:
-> >>> +		rgb_mode = RGB888;
-> >>> +		writel(V_RGB888_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
-> >>> +		break;
-> >>> +	case 32:
-> >>> +	default:
-> >>> +		rgb_mode = ARGB8888;
-> >>> +		writel(V_ARGB888_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
-> >>> +		break;
-> >>> +	}
-> >>> +
-> >>> +	writel(fbbase, &esmart->esmart_region0_mst_yrgb);
-> >>> +
-> >>> +	writel(V_ESMART_REGION0_DATA_FMT(rgb_mode) | M_ESMART_REGION0_MST_EN,
-> >>> +	       &esmart->esmart_region0_mst_ctl);
-> >>> +
-> >>> +	/* Set esmart to the destination video port */
-> >>> +	reg = V_ESMART_SEL_PORT(layer - 4, port);
-> >>> +
-> >>> +	/*
-> >>> +	 * VOP2 requires every port mux to be configured.
-> >>> +	 *
-> >>> +	 * As U-Boot only supports singledisplay, we'll set all
-> >>> +	 * unused ports to set layer to 8 (disabled).
-> >>> +	 */
-> >>> +	for (int i = 0; i < 4; i++) {
-> >>> +		if (i != port)
-> >>> +			reg |= V_PORT_MUX(8, i);
-> >>> +	}
-> >>> +
-> >>> +	writel(reg, &overlay->port_sel);
-> >>> +
-> >>> +	/* Set layer 0 to win_id */
-> >>> +	writel(V_LAYER_SEL(0, win_id), &overlay->layer_sel);
-> >>> +
-> >>> +	reg = readl(&overlay->overlay_ctrl) | M_LAYER_SEL_REGDONE_EN;
-> >>> +	writel(reg, &overlay->overlay_ctrl);
-> >>> +
-> >>> +	priv->layer = layer;
-> >>> +
-> >>> +	return 0;
-> >>> +}
-> >>> +
-> >>> +static void rkvop2_set_pin_polarity(struct udevice *dev,
-> >>> +				    enum vop_modes mode, u32 polarity)
-> >>> +{
-> >>> +	struct rkvop2_driverdata *ops =
-> >>> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
-> >>> +
-> >>> +	if (ops->set_pin_polarity)
-> >>> +		ops->set_pin_polarity(dev, mode, polarity);
-> >>> +}
-> >>> +
-> >>> +static void rkvop2_enable_output(struct udevice *dev, enum vop_modes mode, u32 port)
-> >>> +{
-> >>> +	struct rkvop2_driverdata *ops =
-> >>> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
-> >>> +
-> >>> +	if (ops->enable_output)
-> >>> +		ops->enable_output(dev, mode, port);
-> >>> +}
-> >>> +
-> >>> +static void rkvop2_mode_set(struct udevice *dev,
-> >>> +			    const struct display_timing *edid,
-> >>> +		enum vop_modes mode, int port,
-> >>> +		struct rkvop2_platdata *platdata)
-> >>> +{
-> >>> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
-> >>> +	struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
-> >>> +	struct rk3568_vop_post *post = priv->regs + VOP2_POST_OFFSET(port);
-> >>> +	struct rkvop2_driverdata *data =
-> >>> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
-> >>> +
-> >>> +	debug("(%s, %s): port addr: 0x%p\n", dev_read_name(dev), __func__, post);
-> >>> +
-> >>> +	u32 hactive = edid->hactive.typ;
-> >>> +	u32 vactive = edid->vactive.typ;
-> >>> +	u32 hsync_len = edid->hsync_len.typ;
-> >>> +	u32 hback_porch = edid->hback_porch.typ;
-> >>> +	u32 vsync_len = edid->vsync_len.typ;
-> >>> +	u32 vback_porch = edid->vback_porch.typ;
-> >>> +	u32 hfront_porch = edid->hfront_porch.typ;
-> >>> +	u32 vfront_porch = edid->vfront_porch.typ;
-> >>> +	int mode_flags;
-> >>> +	u32 pin_polarity;
-> >>> +	u32 reg;
-> >>> +
-> >>> +	pin_polarity = BIT(DCLK_INVERT);
-> >>> +	if (edid->flags & DISPLAY_FLAGS_HSYNC_HIGH)
-> >>> +		pin_polarity |= BIT(HSYNC_POSITIVE);
-> >>> +	if (edid->flags & DISPLAY_FLAGS_VSYNC_HIGH)
-> >>> +		pin_polarity |= BIT(VSYNC_POSITIVE);
-> >>> +
-> >>> +	rkvop2_enable_output(dev, mode, port);
-> >>> +	rkvop2_set_pin_polarity(dev, mode, pin_polarity);
-> >>> +
-> >>> +	mode_flags = 0;  /* RGB888 */
-> >>> +	if ((data->features & VOP_FEATURE_OUTPUT_10BIT) &&
-> >>> +	    mode == VOP_MODE_HDMI)
-> >>> +		mode_flags = 15;  /* RGBaaa */
-> >>
-> >> You should also set RGBaaa for VOP_MODE_EDP.
-> >>
-> > Will do in next series.
-> > 
-> >>
-> >>> +
-> >>> +	reg = V_DSP_OUT_MODE(mode_flags);
-> >>> +
-> >>> +	debug("(%s, %s): bg_dly: %d\n",
-> >>> +	      dev_read_name(dev), __func__, platdata->bg_dly[port]);
-> >>> +
-> >>> +	if (platdata->bg_dly[port] < 0) {
-> >>> +		dev_err(dev, "bg_dly is zero for vp%d\n", port);
-> >>> +		return;
-> >>> +	}
-> >>> +
-> >>> +	writel(((platdata->bg_dly[port] + (hactive >> 1) - 1) << 16) | hsync_len,
-> >>> +	       &post->prescan_htimings);
-> >>> +
-> >>> +	writel(V_HSYNC(hsync_len) |
-> >>> +			V_HORPRD(hsync_len + hback_porch + hactive + hfront_porch),
-> >>> +			&post->dsp_htotal_hs_end);
-> >>> +
-> >>> +	writel(V_HEAP(hsync_len + hback_porch + hactive) |
-> >>> +			V_HASP(hsync_len + hback_porch),
-> >>> +			&post->dsp_hact_st_end);
-> >>> +
-> >>> +	writel(V_VAEP(vsync_len + vback_porch + vactive) |
-> >>> +			V_VASP(vsync_len + vback_porch),
-> >>> +			&post->dsp_vact_st_end);
-> >>> +
-> >>> +	writel(V_VSYNC(vsync_len) |
-> >>> +			V_VERPRD(vsync_len + vback_porch + vactive + vfront_porch),
-> >>> +			&post->dsp_vtotal_vs_end);
-> >>> +
-> >>> +	writel(V_HEAP(hsync_len + hback_porch + hactive) |
-> >>> +			V_HASP(hsync_len + hback_porch),
-> >>> +			&post->dsp_hact_info);
-> >>> +
-> >>> +	writel(V_VAEP(vsync_len + vback_porch + vactive) |
-> >>> +			V_VASP(vsync_len + vback_porch),
-> >>> +			&post->dsp_vact_info);
-> >>> +
-> >>> +	/* No scaling */
-> >>> +	writel(0x10001000, &post->scl_factor_yrgb);
-> >>> +
-> >>> +	writel(reg, &post->dsp_ctrl);
-> >>> +
-> >>> +	rkvop2_cfg_regdone(sysctrl, port);
-> >>> +}
-> >>> +
-> >>> +/**
-> >>> + * rk_display_init() - Try to enable the given display device
-> >>> + *
-> >>> + * This function performs many steps:
-> >>> + * - Finds the display device being referenced by @ep_node
-> >>> + * - Puts the VOP's ID into its uclass platform data
-> >>> + * - Probes the device to set it up
-> >>> + * - Reads the timing information (from EDID or panel)
-> >>> + * - Sets up the VOP clocks, etc. for the selected pixel clock and display mode
-> >>> + * - Enables the display (the display device handles this and will do different
-> >>> + *     things depending on the display type)
-> >>> + * - Tells the uclass about the display resolution so that the console will
-> >>> + *     appear correctly
-> >>> + *
-> >>> + * @dev:	VOP device that we want to connect to the display
-> >>> + * @fbbase:	Frame buffer address
-> >>> + * @vp_node:	Device tree node to process
-> >>> + * Return: 0 if OK, -ve if something went wrong
-> >>> + */
-> >>> +static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
-> >>> +{
-> >>> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
-> >>> +	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
-> >>> +	struct rkvop2_driverdata *drvdata =
-> >>> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
-> >>> +	struct rkvop2_platdata *platdata =
-> >>> +		(struct rkvop2_platdata *)drvdata->platdata;
-> >>> +	ofnode ep_node;
-> >>> +	int vop_id, port_id, win_id;
-> >>> +	struct display_timing timing;
-> >>> +	struct udevice *disp;
-> >>> +	int ret;
-> >>> +	u32 remote_phandle;
-> >>> +	struct display_plat *disp_uc_plat;
-> >>> +	enum video_log2_bpp l2bpp;
-> >>> +	ofnode remote;
-> >>> +	const char *compat;
-> >>> +	char dclk_name[9];
-> >>> +	struct clk dclk;
-> >>> +
-> >>> +	debug("%s(%s, 0x%lx, %s)\n", __func__,
-> >>> +	      dev_read_name(dev), fbbase, ofnode_get_name(vp_node));
-> >>> +
-> >>> +	port_id = ofnode_read_u32_default(vp_node, "reg", -1);
-> >>> +	if (port_id < 0) {
-> >>> +		debug("%s(%s): no video port id\n", __func__, dev_read_name(dev));
-> >>> +		return port_id;
-> >>> +	}
-> >>> +
-> >>> +	ep_node = ofnode_first_subnode(vp_node);
-> >>> +	if (!ofnode_valid(ep_node)) {
-> >>> +		debug("%s(%s): no valid subnode\n", __func__, dev_read_name(dev));
-> >>> +		return -EINVAL;
-> >>> +	}
-> >>> +
-> >>> +	ret = ofnode_read_u32(ep_node, "remote-endpoint", &remote_phandle);
-> >>> +	if (ret) {
-> >>> +		debug("%s(%s): no remote-endpoint\n", __func__, dev_read_name(dev));
-> >>> +		return ret;
-> >>> +	}
-> >>> +
-> >>> +	remote = ofnode_get_by_phandle(remote_phandle);
-> >>> +	if (!ofnode_valid(remote))
-> >>> +		return -EINVAL;
-> >>> +
-> >>> +	remote = ofnode_get_parent(remote);
-> >>> +	if (!ofnode_valid(remote))
-> >>> +		return -EINVAL;
-> >>> +
-> >>> +	/*
-> >>> +	 * The remote-endpoint references into a subnode of the encoder
-> >>> +	 * (i.e. HDMI, MIPI, etc.) with the DTS looking something like
-> >>> +	 * the following:
-> >>> +	 *
-> >>> +	 * hdmi: hdmi@fe0a0000 {
-> >>> +	 *   ports {
-> >>> +	 *     hdmi_in: port {
-> >>> +	 *       hdmi_in_vp0: endpoint { ... };
-> >>> +	 *     }
-> >>> +	 *   }
-> >>> +	 * }
-> >>> +	 *
-> >>> +	 * This isn't any different from how VOP1 works, so we'll adapt
-> >>> +	 * the same method of finding the display from the original code
-> >>> +	 * (find the enclosing device of "UCLASS_DISPLAY")
-> >>> +	 *
-> >>> +	 * We also look for UCLASS_VIDEO_BRIDGE so we can use the existing
-> >>> +	 * DW MIPI DSI driver for Rockchip.
-> >>> +	 */
-> >>> +	while (ofnode_valid(remote)) {
-> >>> +		remote = ofnode_get_parent(remote);
-> >>> +		if (!ofnode_valid(remote)) {
-> >>> +			debug("%s(%s): no UCLASS_DISPLAY for remote-endpoint\n",
-> >>> +			      __func__, dev_read_name(dev));
-> >>> +			return -EINVAL;
-> >>> +		}
-> >>> +
-> >>> +		uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
-> >>> +		if (disp)
-> >>> +			break;
-> >>> +	};
-> >>> +	compat = ofnode_get_property(remote, "compatible", NULL);
-> >>> +	if (!compat) {
-> >>> +		debug("%s(%s): Failed to find compatible property\n",
-> >>> +		      __func__, dev_read_name(dev));
-> >>> +		return -EINVAL;
-> >>> +	}
-> >>> +	if (strstr(compat, "edp")) {
-> >>> +		vop_id = VOP_MODE_EDP;
-> >>> +	} else if (strstr(compat, "mipi")) {
-> >>> +		vop_id = VOP_MODE_MIPI;
-> >>> +	} else if (strstr(compat, "hdmi")) {
-> >>> +		vop_id = VOP_MODE_HDMI;
-> >>> +	} else if (strstr(compat, "rk3588-dp")) {
-> >>
-> >> Can we directly use "dp" ?
-> >>
-> > We can, however if the device tree is misconfigured then it'll pick up VP connected devices with "dp" (such
-> > as "rk3588-h*dp*tx-phy") and consider that to be a displayport device.
-> > 
-> >>
-> >>> +		vop_id = VOP_MODE_DP;
-> >>> +	} else if (strstr(compat, "lvds")) {
-> >>> +		vop_id = VOP_MODE_LVDS;
-> >>> +	} else {
-> >>> +		debug("%s(%s): Failed to find vop mode for %s\n",
-> >>> +		      __func__, dev_read_name(dev), compat);
-> >>> +		return -EINVAL;
-> >>> +	}
-> >>> +	debug("vop_id=%d - port=%d\n", vop_id, port_id);
-> >>> +
-> >>> +	/* Get the video port clock and enable it */
-> >>> +	snprintf(dclk_name, sizeof(dclk_name), "dclk_vp%d", port_id);
-> >>> +	ret = clk_get_by_name(dev, dclk_name, &dclk);
-> >>> +	if (ret < 0)
-> >>> +		return ret;
-> >>> +
-> >>> +	disp_uc_plat = dev_get_uclass_plat(disp);
-> >>> +	debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
-> >>> +	if (display_in_use(disp)) {
-> >>> +		debug("   - device in use\n");
-> >>> +		return -EBUSY;
-> >>> +	}
-> >>> +
-> >>> +	disp_uc_plat->source_id = vop_id;
-> >>> +	disp_uc_plat->src_dev = dev;
-> >>> +
-> >>> +	ret = device_probe(disp);
-> >>> +	if (ret) {
-> >>> +		debug("%s: device '%s' display won't probe (ret=%d)\n",
-> >>> +		      __func__, dev->name, ret);
-> >>> +		return ret;
-> >>> +	}
-> >>> +
-> >>> +	ret = display_read_timing(disp, &timing);
-> >>> +	if (ret) {
-> >>> +		debug("%s: Failed to read timings\n", __func__);
-> >>> +		return ret;
-> >>> +	}
-> >>> +
-> >>> +	/* Set clock rate on video port to display timings */
-> >>> +	ret = clk_set_rate(&dclk, timing.pixelclock.typ);
-> >>> +	if (ret < 0) {
-> >>> +		dev_err(dev, "Failed to set clock rate: %d\n", ret);
-> >>> +		return ret;
-> >>> +	}
-> >>> +
-> >>> +	debug("%s(%s): %s clkrate %lu\n", __func__, dev_read_name(dev),
-> >>> +	      dclk_name, clk_get_rate(&dclk));
-> >>> +
-> >>> +	/* Set bitwidth for vop display according to vop mode */
-> >>> +	switch (vop_id) {
-> >>> +	case VOP_MODE_EDP:
-> >>> +	case VOP_MODE_MIPI:
-> >>> +	case VOP_MODE_HDMI:
-> >>> +	case VOP_MODE_DP:
-> >>> +	case VOP_MODE_LVDS:
-> >>> +		l2bpp = VIDEO_BPP32;
-> >>> +		break;
-> >>> +	default:
-> >>> +		l2bpp = VIDEO_BPP16;
-> >>
-> >> It seems that we always end up with VIDEO_BPP32?
-> >>
-> > U-Boot doesn't support VIDEO_BPP24 format.
-> > 
-> >>
-> >>> +	}
-> >>> +
-> >>> +	/*
-> >>> +	 * We'll use the default platform-specific win_id from Linux
-> >>> +	 * so that Linux can take over U-Boot plane when Linux reconfigures
-> >>> +	 * VOP2.
-> >>> +	 */
-> >>> +	win_id = platdata->vp_lyr[port_id];
-> >>> +	if (win_id < 0) {
-> >>> +		dev_err(dev, "win_id is null, don't setup\n");
-> >>> +		return -EINVAL;
-> >>> +	}
-> >>> +
-> >>> +	ret = rkvop2_enable(dev, fbbase, 1 << l2bpp, &timing, port_id, win_id, platdata);
-> >>> +	if (ret < 0)
-> >>> +		return ret;
-> >>> +
-> >>> +	rkvop2_mode_set(dev, &timing, vop_id, port_id, platdata);
-> >>> +
-> >>> +	ret = display_enable(disp, 1 << l2bpp, &timing);
-> >>> +	if (ret)
-> >>> +		return ret;
-> >>> +
-> >>> +	uc_priv->xsize = timing.hactive.typ;
-> >>> +	uc_priv->ysize = timing.vactive.typ;
-> >>> +	uc_priv->bpix = l2bpp;
-> >>> +
-> >>> +	priv->vp = port_id;
-> >>> +
-> >>> +	debug("fb=%lx, size=%d %d\n", fbbase,
-> >>> +	      uc_priv->xsize, uc_priv->ysize);
-> >>> +
-> >>> +	return 0;
-> >>> +}
-> >>> +
-> >>> +int rk_vop2_probe(struct udevice *dev)
-> >>> +{
-> >>> +	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-> >>> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
-> >>> +	int ret = 0;
-> >>> +	ofnode port, node;
-> >>> +
-> >>> +	/* Before relocation we don't need to do anything */
-> >>> +	if (!(gd->flags & GD_FLG_RELOC))
-> >>> +		return 0;
-> >>> +
-> >>> +	if (IS_ENABLED(CONFIG_EFI_LOADER)) {
-> >>> +		debug("Adding to EFI map %d @ %lx\n", plat->size, plat->base);
-> >>> +		efi_add_memory_map(plat->base, plat->size, EFI_RESERVED_MEMORY_TYPE);
-> >>> +	}
-> >>> +
-> >>> +	priv->regs = dev_read_addr_ptr(dev);
-> >>> +
-> >>> +	/* Try all the ports until we find one that works. */
-> >>> +	port = dev_read_subnode(dev, "ports");
-> >>> +	if (!ofnode_valid(port)) {
-> >>> +		debug("%s(%s): 'port' subnode not found\n",
-> >>> +		      __func__, dev_read_name(dev));
-> >>> +		return -EINVAL;
-> >>> +	}
-> >>> +
-> >>> +	for (node = ofnode_first_subnode(port);
-> >>> +			ofnode_valid(node);
-> >>> +			node = dev_read_next_subnode(node)) {
-> >>> +		ret = rk_display_init(dev, plat->base, node);
-> >>> +		if (ret)
-> >>> +			debug("Device failed: ret=%d\n", ret);
-> >>> +		if (!ret)
-> >>> +			break;
-> >>> +	}
-> >>> +	video_set_flush_dcache(dev, true);
-> >>> +
-> >>> +	return ret;
-> >>> +}
-> >>> +
-> >>> +int rk_vop2_bind(struct udevice *dev)
-> >>> +{
-> >>> +	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-> >>> +
-> >>> +	plat->size = 4 * (CONFIG_VIDEO_ROCKCHIP_MAX_XRES *
-> >>> +			CONFIG_VIDEO_ROCKCHIP_MAX_YRES);
-> >>> +
-> >>> +	return 0;
-> >>> +}
-> >>> diff --git a/drivers/video/rockchip/rk_vop2.h b/drivers/video/rockchip/rk_vop2.h
-> >>> new file mode 100644
-> >>> index 00000000000..5d668070014
-> >>> --- /dev/null
-> >>> +++ b/drivers/video/rockchip/rk_vop2.h
-> >>> @@ -0,0 +1,76 @@
-> >>> +/* SPDX-License-Identifier: GPL-2.0 */
-> >>> +/*
-> >>> + * Copyright (c) 2017 Theobroma Systems Design und Consulting GmbH
-> >>> + */
-> >>> +
-> >>> +#ifndef __RK_VOP2_H__
-> >>> +#define __RK_VOP2_H__
-> >>> +
-> >>> +#include <asm/arch-rockchip/vop_rk3568.h>
-> >>> +
-> >>> +struct rk_vop2_priv {
-> >>> +	void *grf;
-> >>> +	void *regs;
-> >>> +	int vp;
-> >>> +	int layer;
-> >>> +};
-> >>> +
-> >>> +enum vop2_features {
-> >>> +	VOP_FEATURE_OUTPUT_10BIT = (1 << 0),
-> >>> +};
-> >>> +
-> >>> +enum vop2_layer {
-> >>> +	ROCKCHIP_VOP2_CLUSTER0 = 0,
-> >>> +	ROCKCHIP_VOP2_CLUSTER1,
-> >>> +	ROCKCHIP_VOP2_CLUSTER2,
-> >>> +	ROCKCHIP_VOP2_CLUSTER3,
-> >>> +	ROCKCHIP_VOP2_ESMART0,
-> >>> +	ROCKCHIP_VOP2_ESMART1,
-> >>> +	ROCKCHIP_VOP2_ESMART2,
-> >>> +	ROCKCHIP_VOP2_ESMART3,
-> >>> +	ROCKCHIP_VOP2_SMART0 = 6,
-> >>
-> >> Why is it necessary to assign a value?
-> >>
-> > SMART0/1 shares the same address and map as ESMART2/3.
-> >
-> 
-> That make sense. Please add some comments to describe this :)
-> 
-> -- 
-> Best, 
-> Chaoyi
+OK. But the key here is that we shouldn't keep code around for the case
+of both non-DM and full U-Boot. It's valid to have non-DM and xPL, or DM
+and xPL or DM and full U-Boot. We just need to be clear and sure that
+we're doing this in both code and commit message.
+
+--=20
+Tom
+
+--4CpZJjgutH60JG/T
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaU1S/AAKCRAr4qD1Cr/k
+ChbcAQCoGZyGxNvuwRj6kWNScImgzY5tkDOeRG9BrsPlyDEM4AD/RJtjKHc6741m
+SCWzM+PXXSJHyECt5rXQ1SY6swWhmgU=
+=Bk56
+-----END PGP SIGNATURE-----
+
+--4CpZJjgutH60JG/T--
