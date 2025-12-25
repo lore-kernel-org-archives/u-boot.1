@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544BBE7AD6C
-	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 19:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D1DE7AD4B
+	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 21:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 265C68420D;
-	Thu, 25 Dec 2025 20:48:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E3A2E84214;
+	Thu, 25 Dec 2025 22:46:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rKFxPyQK";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gRWCrdbu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F70984230; Thu, 25 Dec 2025 20:48:17 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 031B884218; Thu, 25 Dec 2025 22:46:11 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87250841DD
- for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 20:48:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4DBE84212
+ for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 22:46:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-65cfddebfd0so4106917eaf.0
- for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 11:48:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766692093; x=1767296893; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pBNuMvhcPFwbjTaCmH3lDPsBV+Pdl5QQ5FbdMVugesE=;
- b=rKFxPyQKa2tPpa8qNKKjSM5oNuVqcN6fptf/XWlgeuY67ip6tt8uHmCSALiYSS+Ml4
- qcuafg8i5rvAZEseX0oWhGlhmmM8GYEw/+W1dO+NKJ3jk8yS6TA17WLJQitJ8WfteA33
- xasUnKbWquT9jtzWKyFcdTWhf6hc+mfO4FGcg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766692093; x=1767296893;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pBNuMvhcPFwbjTaCmH3lDPsBV+Pdl5QQ5FbdMVugesE=;
- b=qUq5cwCdNcGCslptuKm2QZVD11zdivN6Nqg34pr0ZFelz5LAPdHrv4rwdrmuD8PGWP
- Shb/gnlelc1U+5vD+p7zx7HDLk10PjaqFerCYaFg/aj7emilT+0dDQTe/z64zRql+G/3
- 54YVEGVFbP9D6Wouov8zXUEqguqoSrP0nFYJ5yC+572oLSGYdoUWAcVkG8AmkZUQAewH
- QhNODzThzPDOxTsVgvmcXLUIAGLgOnmDKI1ls9a1bLXAgiteE22izklXVwUNN70kO0Y6
- 2T5PEZFBUN8cNT1CJfkPkt+R1wRrmjbjOD8PcfID1tkq5p98mHiciWsiTE+JcPgDvNl6
- ir0Q==
-X-Gm-Message-State: AOJu0YykceX9Gh/fLteXZE2wxAJsBiOfrzC8n0Bbikzo1r0XXkRU1Ft4
- jGAkhgmeASEl8kvXU2ZM1d3tBKK2tZArZCbMLfW7C+E3p19VgsP5m3Ip3k34/qfeLfI=
-X-Gm-Gg: AY/fxX7uZcEaS1GrYgpL4VKWbBiAHS3luhzSFBE3Ptq8xS9SIPCnhrlurZmuqCu56QW
- 7JpPwcynY80+WLDvs4q+AutOh+q+mT9+CoD7X9rSjoZAtrCQBme1g8JEiw6IiWQMZWGgLcEU0Gc
- PMgZcdGSmKZAXSea7Z/c8ZWoUYBL4AtPcB9Umevw2t4/r9y6Er7e3aUfYU81MsnWCXNjg+1Ctk3
- qDQ01lgUkNZdFAC+LZjz10y1Whb/1lCQP+uaHWAkJi5OhihtCJ95XNKvfL7loogucVobV8BJbY6
- UPaLDkWcbwxmEsBkXlhHcRCj7jmav5LW/0Jh+DGF6AQuG+Nv7XwpfZE8/nyw3wB16PZCdB4geyN
- x5Yt3NqVMOmZ2/sxwQVV3YZ19zdE+veINcViNYblc5SrcOlVJDBrVtPgDeOKIBk5KkeBL1OIy9K
- TdIHEoKBYkSH/Zh05mFjpdETfI88b+NfeF4yN1bmODWzDd8y+aLcnNu7kDwd0=
-X-Google-Smtp-Source: AGHT+IGOA+FFzK5ULBRW6StC+BpQJIL6MnRq1t3M1GS64Fg/0WlGI+2Q6lOntwbJQLtj3qDTujY4lQ==
-X-Received: by 2002:a05:6820:626:b0:659:9a49:8f04 with SMTP id
- 006d021491bc7-65d0e99feedmr9155620eaf.21.1766692093298; 
- Thu, 25 Dec 2025 11:48:13 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f515721sm12794412eaf.8.2025.12.25.11.48.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Dec 2025 11:48:12 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Francois Berder <fberder@outlook.fr>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20251219202121.4180810-1-trini@konsulko.com>
-References: <20251219202121.4180810-1-trini@konsulko.com>
-Subject: Re: (subset) [PATCH 0/3] Enable / require DEVRES for devm_.alloc
- usage outside xPL
-Message-Id: <176669209209.1263958.1138442633587348782.b4-ty@konsulko.com>
-Date: Thu, 25 Dec 2025 13:48:12 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dcj3y6T1Pz9shl;
+ Thu, 25 Dec 2025 22:46:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1766699166;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+kXpQ1WSvF5H7DhwsEd4lOIV3IA94YM+a0FbX+JUnrs=;
+ b=gRWCrdbuvL6FbLKp7ztGI2yWTxyHV8ISj+LhOVBEee1HRDp9WCTsLWnWnFK4tvz5nw0Nbj
+ AjtiDi/qqF2FjcTghzG3jaY2fLHHRiuPz2W1i0H91pSqLKPpcLcjCV94Kxe7l66DxSmpFY
+ CndvH1Hez2i6RVcXeJCzue4Vg6h1VtiANTjLx86V85RK1M4hdOhPDXzfK0Fae8i09corRK
+ Tp9NOMZAw8KgqsEMjNXFxBRD90i4VmHS3kEOnWqhkxUKW8bTpcshbu8qNbrTPLBgM02TaS
+ r1XB8+vYep4K4XONE3mQ7Tkyjo1cJbGQ28ZbCty+v/iY4ib2SuHAYTXXihmYIw==
+Message-ID: <2efa3ff6-646f-4d46-80f9-7cfe2b971641@mailbox.org>
+Date: Thu, 25 Dec 2025 21:56:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHYxIDIvN10gdXNiOiBlaGNpLW14Njog?=
+ =?UTF-8?Q?Fix_usb=5Foc=5Fconfig=28=29_for_i=2EMX7/8M/9/7ULP/8_and_8ULP_plat?=
+ =?UTF-8?Q?forms?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, Peng Fan
+ <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Lukasz Majewski <lukma@denx.de>, Sherry Sun <sherry.sun@nxp.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>, George Chan
+ <gchan9527@gmail.com>, Simon Glass <sjg@chromium.org>,
+ David Zang <davidzangcs@gmail.com>, Alice Guo <alice.guo@nxp.com>
+References: <20251216-imx8ulp-v1-0-504115a53020@nxp.com>
+ <20251216-imx8ulp-v1-2-504115a53020@nxp.com>
+ <e314692d-452c-452e-ba44-1469a8bcd9b5@mailbox.org>
+ <PAXPR04MB9644117D0D40EE8A9FFE5CB3E2B3A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <PAXPR04MB9644117D0D40EE8A9FFE5CB3E2B3A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MBO-RS-META: a5r4a7dxdbnpyw59g91wje9srzcdu1cz
+X-MBO-RS-ID: 74a5bfecc722ab9028d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,31 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Dec 2025 14:13:40 -0600, Tom Rini wrote:
+On 12/25/25 11:41 AM, Alice Guo (OSS) wrote:
 
-> Hey all,
+Hello Alice,
+
+>>> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+>>> index cfaf49d67f0..03ff4ce10d5 100644
+>>> --- a/drivers/usb/host/ehci-mx6.c
+>>> +++ b/drivers/usb/host/ehci-mx6.c
+>>> @@ -280,7 +280,12 @@ static void ehci_mx6_powerup_fixup(struct ehci_ctrl
+>> *ctrl, uint32_t *status_reg,
+>>>    /* Should be done in the MXS PHY driver */
+>>>    static void usb_oc_config(struct usbnc_regs *usbnc, int index)
+>>>    {
+>>> +#if defined(CONFIG_MX6)
+>>>    	void __iomem *ctrl = (void __iomem *)(&usbnc->ctrl[index]);
+>>> +#elif defined(CONFIG_USB_EHCI_MX7) || defined(CONFIG_MX7ULP) ||
+>> defined(CONFIG_IMX8) || \
+>>> +      defined(CONFIG_IMX8ULP)
+>>> +	void __iomem *ctrl = (void __iomem *)(&usbnc->ctrl[0]); #endif
+>> Can we simply pass 0 to this function as index for non-MX6 instead of this
+>> ifdeffery ?
 > 
-> As seen by a number of patches fixing memory leaks, U-Boot has a problem
-> with developer expectations around devm_kmalloc and friends. Namely,
-> whereas in Linux these memory allocations will be freed automatically in
-> most cases, in U-Boot this is only true if DEVRES is enabled. Now,
-> intentionally, in xPL phases, we do not (and do not offer as an option)
-> enabling DEVRES. However in full U-Boot this is left either to the user,
-> or some drivers have select'd DEVRES on their own. This inconsistency is
-> a problem. This series goes and deals with two small issues that were
-> shown by having all drivers that use devm_.alloc to allocate memory also
-> select DEVRES and then we make DEVRES no longer be a prompted option and
-> instead select'd as needed. We do not make this unconditional as it
-> would result in growing the resulting binary on the many platforms which
-> have no users of the devm_.alloc family of functions.
-> 
-> [...]
-
-Applied to u-boot/next, thanks!
-
-[1/3] mips: Reduce size in gardena-smart-gateway-mt7688
-      commit: 22ef38f6933adfa0d89b6841f4671f6595f967d5
--- 
-Tom
-
-
+> Even if I move the condition from inside the usb_oc_config() to the call site, I still cannot avoid conditional compilation because the logic is platform-specific.
+> Given this, is it acceptable to keep the current change as it is?
+Can we please somehow weed out the ifdeffery ?
