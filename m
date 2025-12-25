@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C69EE7AD44
-	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 15:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E0BDE7AD44
+	for <u-boot@archiver.kernel.org>; Thu, 25 Dec 2025 16:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F0B84372;
-	Thu, 25 Dec 2025 16:37:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37D278424E;
+	Thu, 25 Dec 2025 17:14:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cMdVdjCI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QMZPp4QI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95BD384375; Thu, 25 Dec 2025 16:37:27 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 0C65D84261; Thu, 25 Dec 2025 17:14:37 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13BBB84371
- for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 16:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E538C84212
+ for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 17:14:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3f584ab62c6so2771977fac.1
- for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 07:37:25 -0800 (PST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-3fe3cc80bc3so998299fac.0
+ for <u-boot@lists.denx.de>; Thu, 25 Dec 2025 08:14:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766677044; x=1767281844; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7FKp5ax4YBNkiSBfKTM7AwrAThK6Ycz7jEyRteP2rd0=;
- b=cMdVdjCI6pru744JOqX/MK2GdgapoZXlMMi2a2KXTwZCtz+NHkY5oTF5hTiPftWWD4
- xBOfiIlbvCC+LzYxi2/kK23JGSs7kChgy4taml9NEDQEFNyw+j9LrUfw3AQtOwDls1sZ
- XRS3yX3a1oXM47aGeq0Qz/+HPRIXj3slw74Y4=
+ d=konsulko.com; s=google; t=1766679273; x=1767284073; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dY5yg/IQpIy2/i9j2NvBrpv/s2RjfyCjPljfAFWtDkg=;
+ b=QMZPp4QItC5fvkRknX+kEkzfVAWHKxZ6PFPPm/ndJSvx9q50DJN81ShoH8thtRgn+D
+ 7Pnqh1Jd9xc+pzJJk7qAYkGZRqGRVC77jueUQzeImkGNX8dgXBKX+hNhF3cHl8DXZo5X
+ 6RUCKS45GrRPOtHfwz+0/+IwV/b/NqHUT2QpU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766677044; x=1767281844;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7FKp5ax4YBNkiSBfKTM7AwrAThK6Ycz7jEyRteP2rd0=;
- b=WOXxpG8QFo2lQxiDBjXd4T1bfAkL0Xc0raWgn85ZK0ezpCKNc9klb6JcqOlNSMBgjX
- Gfl1InmuyIDjyYWkiWFW/xM3TW30+t5ySNUvzYU2lbeqjRO7VhrDAswQJ7VmWgM42ZwM
- zeiF4kE3it3N9T90vVpYnHJk+ZATawxnp2ti+Vo+aEtEzpKl9C29pop6w+yrMNeQcRqH
- 1efllTsL4Z6Ekg1Zwo3Ov56+78FsvgEihWsZWTGdidrjiIvZxQAsgXpUk8ZriVzkQh1b
- 99s++eSCqkD1FI+3BVk0F1I+wODlWBKigoUCmtMqcYq88nqQX3DD71tN88UgoB1h7HTy
- uwuA==
-X-Gm-Message-State: AOJu0YyBQfUWZ03chXI/PwOAYEsDai6/XrjvzLJqMPyT7TFPGfzMICX3
- XZ79zvlz7Wb/zNFU4X38NY8USsNizH80GbveeMLzWA4Iu/+hYZ9w64k9J/gEe/YUi/yFNjTtD0R
- oA7HikNE=
-X-Gm-Gg: AY/fxX6w1T51282O9agZCdPakl9br8CW56K9DJ96g6FMTuf1F7GsPxrhfGso32WaSLh
- C8uUTHfwI+b4kQe+QkP90d1DDJ33amH13wPfTAziUO9/DuLqu5zNHuV+Ln0YGY+VtFDvajGtiu8
- epd4EV/G/5E5WXVQtd4GRvhhUMcVtAYgZpt+X7+IQ7HZdrkaOlAtyX0q4h+Ce3IF/kBuNUVw9r8
- Xf3MX4bmoBoRqO2TmbwuF6cmoUQR4g0EI/sFYh2NMgn3G5wpctYiGnaw7ELf7rTJIc0zENCdamE
- gWxAwbmRTuov/aaFiBbMAtKBaRr23wBp5BD8wckNTpxPHaZA9puPTcHgW+pBnd1bS3sPwlqHrs5
- 9HIQbqwkbeuL8tw2ej9biwEEK6lHJRJzZCluw6YD2U+4LdJmO6KFARTDxtQDpllIm+ZrVsOfAKu
- X2EbdwLLwoAQZkUhjwYhbkQKAmmliip99hYtn+x9NfKBASMfYgi1vE
-X-Google-Smtp-Source: AGHT+IGde6AZj3Irdh2vdxqLEtZXh+G8C6wqhP00W/jxj+fwXcSDYnuwISgVjzc+ASo72TRu2quQiw==
-X-Received: by 2002:a4a:e602:0:b0:65d:bee:4c7 with SMTP id
- 006d021491bc7-65d0eb1f940mr6361106eaf.42.1766677043718; 
- Thu, 25 Dec 2025 07:37:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1766679273; x=1767284073;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dY5yg/IQpIy2/i9j2NvBrpv/s2RjfyCjPljfAFWtDkg=;
+ b=CQlJ8oZlc+29g2n5nJzLamuDiPyAk929Z7JppdB6dxBfEddOha6o8ZKZrxgzmH0alh
+ FPVhxMroZ0wv8F95HKPYCDF5nToy5booBwLBL6L8n3MMBToYm4d65bLiMwvtobnkfV5x
+ /SSw7Hpli6AneT9ZT6cO+nWhLmcJH+Vf/ZaxXjNOwdgVzA3yDklL6IjVyebnZVwv5NeC
+ OM9VA5/3MuZsEmikQXbuzVuKa670YuvuesTl/IkmZPjcPIDtDWy2S1/9G6FXTslqxHnf
+ sGlB8US+OU7LKEN0E7xsZhp8pcsdfO+MuAHICXzYPJROP+UX7K+qc/BI81Z7gGCtJRrD
+ 6b2g==
+X-Gm-Message-State: AOJu0YxepshoNGUZo3TSdpsaommSfaPPS9Sp2c8d49Z7IqphN/jjGuPs
+ BEEWVAh6QjK+/p96vG57AJfrSY8wi/05oIsYdy0zHSeqGVDAY21eziD61NuVTir05DtQVsCERqo
+ racRL07k=
+X-Gm-Gg: AY/fxX49Hg6hTWkyJMdf9n4eikSiJ5Tc4UuzNeHsBmHbuavbZIqMibDniEVbgv+H7T1
+ 7gptAD7Y1Lj4Qwl6KjYBemhpq6n/LIEMLRn/O1Sh6tnNbh8CxuzWftn/nZj2Op/+AKQNfya5uOg
+ QUdmPbMIsmwT4QrFlozH6qsv/9J9kAYal+MdkKKng4oh+1M3Uk9bj68x+CmTC71RMtMLW3Wfy4r
+ zN+/kgstrwiEw8v1v4Rui8GyyXChaExYXau2qiEdMhu14obDzDdyM831Ps7gVZixTR8GIw3OsNx
+ 30WtPm6YlsMP/hF4/XlsMBTjXAf0Tg5LI5aw2AcanqZxMSXb6MIdonwsqcdAWjWB8j1fh1RCCNT
+ dmaPwWN5ROHTR+RG/nHUy6xpITWlYozO7uO+SB8YfKjUC1JUuaWYq+665k6Di3o2B4b/36mUnLu
+ AFTNl32ifEFp9Yl+Z0yGQAo8cFI0qOEFpwdBNdIfWrXcKA99zBHiRq
+X-Google-Smtp-Source: AGHT+IE+KJkpdyduCFXKzWjbVWt9Z8oo601JV54tfZunnDRdR9BYo9pBfiSdOA7a8/bCfBJx9EKRfA==
+X-Received: by 2002:a05:6820:1519:b0:65d:1336:f673 with SMTP id
+ 006d021491bc7-65d13372053mr7573583eaf.74.1766679273562; 
+ Thu, 25 Dec 2025 08:14:33 -0800 (PST)
 Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f6eb26fsm12473073eaf.14.2025.12.25.07.37.22
+ 006d021491bc7-65d0f3f8812sm12343652eaf.1.2025.12.25.08.14.32
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Dec 2025 07:37:23 -0800 (PST)
+ Thu, 25 Dec 2025 08:14:33 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-Subject: [PATCH] net: tftpput: Rework to exclude code from xPL phases
-Date: Thu, 25 Dec 2025 09:37:21 -0600
-Message-ID: <20251225153721.1217202-1-trini@konsulko.com>
+Subject: [PATCH] Gitlab CI: Add BeagleBone Black to sage lab
+Date: Thu, 25 Dec 2025 10:14:31 -0600
+Message-ID: <20251225161431.1224448-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,137 +93,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Given how the support for CONFIG_CMD_TFTPPUT is woven through the
-support for the tftp protocol we currently end up including "put"
-support in xPL phases, if enabled. This in turn can lead to size
-overflow on those platforms as xPL tends to be constrained. To resolve
-this, use "CMD_TFTPPUT" in the code to check for both CONFIG_CMD_TFTPPUT
-being true and not being in an xPL build phase.
+This adds support for a BeagleBone Black platform to the sage lab. We
+test with both the legacy network stack and lwIP.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Jerome Forissier <jerome.forissier@arm.com>
----
- net/tftp.c | 31 ++++++++++++++++++++-----------
- 1 file changed, 20 insertions(+), 11 deletions(-)
+ .gitlab-ci-sage-lab.yml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 3b0f4cd2006e..78ec44159c1b 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -22,6 +22,15 @@
+diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
+index f2fa0e3e7719..e9fa3e5f6f38 100644
+--- a/.gitlab-ci-sage-lab.yml
++++ b/.gitlab-ci-sage-lab.yml
+@@ -85,6 +85,23 @@
+       junit: results.xml
+     expire_in: 1 week
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-+/*
-+ * We cannot use the 'tftpput' command in xPL phases. Given how the
-+ * support is integrated in the code, this is how we disable that support
-+ * in xPL.
-+ */
-+#if defined(CONFIG_CMD_TFTPPUT) && !defined(CONFIG_XPL_BUILD)
-+#define CMD_TFTPPUT
-+#endif
++BeagleBone Black:
++  <<: *sage_lab_dfn
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-bbb-1"
++    LG_PLACE: "bbb-1"
++    TEST_PY_BD: "am335x_evm"
++    OVERRIDE: "-a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_HELLO -a CMD_BOOTEFI_SELFTEST"
 +
- /* Well known TFTP port # */
- #define WELL_KNOWN_PORT	69
- /* Millisecs to timeout for lost pkt */
-@@ -95,7 +104,7 @@ static ushort	tftp_windowsize;
- static ushort	tftp_next_ack;
- /* Last nack block we send */
- static ushort	tftp_last_nack;
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- /* 1 if writing, else 0 */
- static int	tftp_put_active;
- /* 1 if we have sent the last block */
-@@ -183,13 +192,13 @@ static void new_transfer(void)
- 	tftp_prev_block = 0;
- 	tftp_block_wrap = 0;
- 	tftp_block_wrap_offset = 0;
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 	tftp_put_final_block_sent = 0;
- #endif
- 	led_activity_blink();
- }
- 
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- /**
-  * Load the next block from memory to be sent over tftp.
-  *
-@@ -329,7 +338,7 @@ static void tftp_send(void)
- 	case STATE_SEND_WRQ:
- 		xp = pkt;
- 		s = (ushort *)pkt;
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 		*s++ = htons(tftp_state == STATE_SEND_RRQ ? TFTP_RRQ :
- 			TFTP_WRQ);
- #else
-@@ -372,7 +381,7 @@ static void tftp_send(void)
- 		s[0] = htons(TFTP_ACK);
- 		s[1] = htons(tftp_cur_block);
- 		pkt = (uchar *)(s + 2);
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 		if (tftp_put_active) {
- 			int toload = tftp_block_size;
- 			int loaded = load_block(tftp_cur_block, pkt, toload);
-@@ -437,7 +446,7 @@ static void tftp_send(void)
- 		net_set_state(NETLOOP_FAIL);
- }
- 
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- static void icmp_handler(unsigned type, unsigned code, unsigned dest,
- 			 struct in_addr sip, unsigned src, uchar *pkt,
- 			 unsigned len)
-@@ -476,7 +485,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
- 		break;
- 
- 	case TFTP_ACK:
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 		if (tftp_put_active) {
- 			timeout_count = 0;
- 			if (tftp_put_final_block_sent) {
-@@ -578,7 +587,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
- 
- 		tftp_next_ack = tftp_windowsize;
- 
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 		if (tftp_put_active && tftp_state == STATE_OACK) {
- 			/* Get ready to send the first block */
- 			tftp_state = STATE_DATA;
-@@ -854,7 +863,7 @@ void tftp_start(enum proto_t protocol)
- 			tftp_block_size_option = TFTP_MTU_BLOCKSIZE6;
- 	} else {
- 		printf("TFTP %s server %pI4; our IP address is %pI4",
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 	       protocol == TFTPPUT ? "to" : "from",
- #else
- 	       "from",
-@@ -888,7 +897,7 @@ void tftp_start(enum proto_t protocol)
- 	}
- 
- 	putc('\n');
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 	tftp_put_active = (protocol == TFTPPUT);
- 	if (tftp_put_active) {
- 		printf("Save address: 0x%lx\n", image_save_addr);
-@@ -911,7 +920,7 @@ void tftp_start(enum proto_t protocol)
- 
- 	net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
- 	net_set_udp_handler(tftp_handler);
--#ifdef CONFIG_CMD_TFTPPUT
-+#ifdef CMD_TFTPPUT
- 	net_set_icmp_handler(icmp_handler);
- #endif
- 	tftp_remote_port = WELL_KNOWN_PORT;
++BeagleBone Black (lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "BeagleBone Black" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-bbb-1"
++    LG_PLACE: "bbb-1"
++    TEST_PY_BD: "am335x_evm"
++    OVERRIDE: "-a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_HELLO -a CMD_BOOTEFI_SELFTEST -a NET_LWIP"
++
+ Pine64+:
+   <<: *sage_lab_dfn
+   variables:
 -- 
 2.43.0
 
