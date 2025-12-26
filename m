@@ -4,69 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399B1E8FDA1
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 07:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F3CE8FDA6
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 07:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CF6284228;
-	Fri, 26 Dec 2025 08:27:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id BAB4E8425C;
+	Fri, 26 Dec 2025 08:38:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ieWpgj3n";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8354D84241; Fri, 26 Dec 2025 08:27:53 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D49AF84212
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 08:27:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ id 85BBD84260; Fri, 26 Dec 2025 08:38:07 +0100 (CET)
+Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
+ by phobos.denx.de (Postfix) with ESMTP id 666EB83B95
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 08:38:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 910746000A;
- Fri, 26 Dec 2025 07:27:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87401C4CEF7;
- Fri, 26 Dec 2025 07:27:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766734068;
- bh=mVyEa/oX4sRBX9t6QULUZN4ECCufIbzpLFQA3djS1uo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ieWpgj3nVvl+t4cn9Qw74I6xHEMKqXn0KzAteukW0l8tY3tfJGNFjXIXh2glM7sOz
- d3lHlxnw75UdhtMvS1K3h+O50PCm/wdevoX60fJLyC7e5crh8izy1921hf78ErLI/o
- NSatC5Ho4Yr15g9jajCa962DKv2lvHIHK9KXh/p+qukuhbpEVLoPjsnX9PHndzY7Ok
- 6UkiL8IO5snSQMi07ZdAOcYQ0AF5Jl1BISVnDEC1YuUhi5diRzmEfU/zZdFulfbaiy
- xpXYiA9MlkF3mHXZJQLMksSGFekr0/Vl0vEEjamk7YVX/vFD6WmMmOLLz0ZR6iX9lo
- KLia0zrvOz3XA==
-Date: Fri, 26 Dec 2025 12:57:35 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, lukma@denx.de, seanga2@gmail.com,
- marex@denx.de, malysagreg@gmail.com, arturs.artamonovs@analog.com,
- utsav.agarwal@analog.com, vasileios.bimpikas@analog.com,
- ian.roberts@timesys.com, nathan.morrison@timesys.com,
- peng.fan@nxp.com, alif.zakuan.yuslaimi@altera.com,
- kory.maincent@bootlin.com, sjg@chromium.org,
- jerome.forissier@linaro.org, ziyao@disroot.org,
- stefan.roese@mailbox.org, mkorpershoek@kernel.org,
- rui.silva@linaro.org, ilias.apalodimas@linaro.org,
- luca.weiss@fairphone.com, quic_varada@quicinc.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 2/7] drivers: usb: dwc3: Add delay after core soft reset
-Message-ID: <aU4457bE6qsGoC9p@sumit-xelite>
-References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
- <20251124155503.2839766-3-balaji.selvanathan@oss.qualcomm.com>
- <aUpbSgCIdKgtoSyT@sumit-xelite>
- <bfba5df8-9694-4ae4-b378-1a9bd81d11fa@oss.qualcomm.com>
+ dmarc=fail (p=none dis=none) header.from=socionext.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hayashi.kunihiko@socionext.com
+Received: from unknown (HELO kinkan3-ex.css.socionext.com) ([172.31.9.52])
+ by mx.socionext.com with ESMTP; 26 Dec 2025 16:38:00 +0900
+Received: from mail.mfilter.local (mail-arc01.css.socionext.com [10.213.46.36])
+ by kinkan3-ex.css.socionext.com (Postfix) with ESMTP id E8DB220695EB;
+ Fri, 26 Dec 2025 16:37:59 +0900 (JST)
+Received: from iyokan3.css.socionext.com ([172.31.9.53]) by m-FILTER with
+ ESMTP; Fri, 26 Dec 2025 16:37:59 +0900
+Received: from [10.212.247.110] (unknown [10.212.247.110])
+ by iyokan3.css.socionext.com (Postfix) with ESMTP id 3633A10A003;
+ Fri, 26 Dec 2025 16:37:59 +0900 (JST)
+Message-ID: <dac913bb-b8f5-46e4-b729-3387bc8988f1@socionext.com>
+Date: Fri, 26 Dec 2025 16:38:02 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <bfba5df8-9694-4ae4-b378-1a9bd81d11fa@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] bootm: fix boot failure from compressed image for
+ IH_OS_EFI
+From: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+To: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: kojima.masahisa@socionext.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, morimoto.masashi@socionext.com
+References: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
+ <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
+ <b7e755f4-2925-4400-9efd-7cb8ca781847@socionext.com>
+Content-Language: en-US
+In-Reply-To: <b7e755f4-2925-4400-9efd-7cb8ca781847@socionext.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,115 +64,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 24, 2025 at 11:26:12AM +0530, Balaji Selvanathan wrote:
+On 2025/11/28 20:34, Kunihiko Hayashi wrote:
+> Hi Heinrich,
 > 
-> On 12/23/2025 2:35 PM, Sumit Garg wrote:
-> > On Mon, Nov 24, 2025 at 09:24:58PM +0530, Balaji Selvanathan wrote:
-> > > Add a 100 ms delay after clearing the core soft reset bit to ensure
-> > > the DWC3 controller has sufficient time to complete its reset
-> > > sequence before subsequent register accesses.
-> > > 
-> > > Without this delay, USB initialization can fail on some Qualcomm
-> > > platforms, particularly when using super-speed capable PHYs like
-> > > the QMP USB3-DP Combo PHY on SC7280/QCM6490.
-> > > 
-> > > The change is taken from following upstream Linux implementation:
-> > > https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/usb/dwc3/core.c?id=f88359e1588b85cf0e8209ab7d6620085f3441d9
-> > If I understand correctly the kernel change here especially following
-> > comment:
-> > 
-> > 	/*
-> > 	 * Wait for internal clocks to synchronized. DWC_usb31 and
-> > 	 * DWC_usb32 may need at least 50ms (less for DWC_usb3). To
-> > 	 * keep it consistent across different IPs, let's wait up to
-> > 	 * 100ms before clearing GCTL.CORESOFTRESET.
-> > 	 */
-> > 
-> > the delay is required before clearing GCTL.CORESOFTRESET and not after
-> > which your change seems to do. Also, here we aren't doing any role
-> > switch too, right?
+> On 2025/11/21 17:41, Heinrich Schuchardt wrote:
+>> On 11/21/25 00:38, Masahisa Kojima wrote:
+>>> The bootm command can handle the compressed image, but current
+>>> code fails to boot from it.
+>>>
+>>>        ## Loading kernel (any) from FIT Image at a8000000 ...
+>>>        <snip>
+>>>             Compression:  gzip compressed
+>>>             Data Start:   0xa80000d4
+>>>             Data Size:    10114520 Bytes = 9.6 MiB
+>>>             Architecture: AArch64
+>>>             OS:           EFI Firmware
+>>>             Load Address: 0x90000000
+>>>
+>>>        <snip>
+>>>           Uncompressing Kernel Image to 90000000
+>>>        ## Transferring control to EFI (at address a80000d4) ...
+>>>        Booting <NULL>
+>>>        Not a PE-COFF file
+>>>        Loading image failed
+>>>
+>>> To take care of the compressed image, the load address needs
+>>> to be passed instead of the original compressed image address.
+>>>
+>>> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+>>
+>> Hello Masahisa,
+>>
+>> Thank you for diving into this problem.
+>>
+>> In test/py/tests/test_efi_fit.py we are testing on the sandbox with and
+>> without compression. Why would the problem not show up in the test?
+>>
+>> 539         # Run tests
+>> 540         # - fdt OFF, initrd OFF, gzip OFF
+>> 541         launch_efi(False, False, False)
+>> 542         # - fdt ON, initrd OFF, gzip OFF
+>> 543         launch_efi(True, False, False)
+>> 544         # - fdt OFF, initrd ON, gzip OFF
+>> 545         launch_efi(False, True, False)
+>> 546
+>> 547         if is_sandbox:
+>> 548             # - fdt OFF, initrd OFF, gzip ON
+>> 549             launch_efi(False, False, True)
+>> 550             # - fdt ON, initrd OFF, gzip ON
+>> 551             launch_efi(True, False, True)
+>> 552             # - fdt OFF, initrd ON, gzip ON
+>> 553             launch_efi(False, True, True)
+>>
+>> The test should be corrected to show you issue.
 > 
-> Hi Sumit,
+> Can you show us how to run it with sandbox?
 > 
-> You're correct about the Linux implementation. However, in U-Boot's case,
-> the context is different:
+> To understand the situation, I tried running the test using v2025.10.
 > 
-> 1. Linux: The delay is during role switching in dwc3_set_mode(), where only
-> GCTL.CORESOFTRESET is toggled.
+>       ./test/py/test.py --bd sandbox   --build  -k efi_fit
+>       ./test/py/test.py --bd sandbox64 --build  -k efi_fit
 > 
-> 2. U-Boot: The delay is in dwc3_core_soft_reset() during initial boot, which
-> has a more complex sequence:
+> The test was skipped as follows:
+>       test/py/tests/test_efi_fit.py::test_efi_fit_launch SKIPPED (.config
+> feature "generate_acpi_table" enabled)
 > 
->    - Sets GCTL.CORESOFTRESET
->    - Asserts PHY resets (USB2/USB3)
->    - Waits 100ms
->    - Clears PHY resets
->    - Waits 100ms (for PHY stabilization)
->    - Clears GCTL.CORESOFTRESET
-> The additional delay after clearing the reset bit is needed in U-Boot to
-> ensure the controller is fully operational before subsequent register
-> accesses, particularly for super-speed PHYs on QCM6490/SC7280. Otherwise,
-> fastboot mode is not working sometimes (stability issue).
->
+> After disabling ACPI, the test failed with the following error
+> and could not be reproduced.
 
-I would rather suggest you to explore following kernel driver init
-sequence:
+It was a bit tricky, however, I have successfully reproduce the test in sandbox64.
+(sandbox causes SEGV because of the other issue).
 
-dwc3_core_init() ->
-  dwc3_core_soft_reset()
+Before executing the test, disable the following definitions:
 
-and see if you can have a better explanation for the delay requirement
-here similar to following quote:
+     CONFIG_ACPI
+     CONFIG_BINFMT_FDT
 
-        /*
-         * For DWC_usb31 controller 1.80a and prior, once DCTL.CSFRST bit
-         * is cleared, we must wait at least 50ms before accessing the PHY
-         * domain (synchronization delay).
-         */
-        if (DWC3_VER_IS_WITHIN(DWC31, ANY, 180A))
-                msleep(50);
+This test includes three items with gzip.
 
-> Would you be okay with adding this delay after clearing GCTL.CORESOFTRESET?
+     # - fdt OFF, initrd OFF, gzip ON
+     launch_efi(False, False, True)
+     # - fdt ON, initrd OFF, gzip ON
+     launch_efi(True, False, True)
+     # - fdt OFF, initrd ON, gzip ON
+     launch_efi(False, True, True)
 
-Adding random delays in the common code may have impact on boot times
-for all the platforms. We really should understand the root cause here
-in case if this delay requirement is specific to a particular DWC
-controller version or not?
+"initrd = ON" test item can't be executed.
 
-And since your problem relates to DWC controller operating in device
-mode, so you should focus on the gaps you see with corresponding kernel
-driver device mode init sequence. As the kernel driver has been well
-supported on Qcom platforms with adb working fine in user-space.
+     INITRD Dump
+     ===========
+     => load
+     Load File2 protocol not found
 
--Sumit
+This item uses File2 protocol to read "initrd" file, however,
+test_efi_fit.py uses "bootm" on the FIT image, so there is no chance
+to set FilePathList in EFI.
 
-> 
-> Regards,
-> 
-> Balaji
-> 
-> > 
-> > -Sumit
-> > 
-> > > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > > ---
-> > > v2:
-> > > - Gave correct commit id for linux implementation
-> > > ---
-> > >   drivers/usb/dwc3/core.c | 2 ++
-> > >   1 file changed, 2 insertions(+)
-> > > 
-> > > diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> > > index 847fa1f82c3..ff0bca0dd8e 100644
-> > > --- a/drivers/usb/dwc3/core.c
-> > > +++ b/drivers/usb/dwc3/core.c
-> > > @@ -94,6 +94,8 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
-> > >   	reg &= ~DWC3_GCTL_CORESOFTRESET;
-> > >   	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-> > > +	mdelay(100);
-> > > +
-> > >   	return 0;
-> > >   }
-> > > -- 
-> > > 2.34.1
-> > > 
+At this time, all we need to do is launch the compressed EFI app,
+so we can disable "initrd" test item tentatively.
+
+I found an error in this test before applying the patch,
+
+     Booting /\home\user\u-boot\build-sandbox64\test-efi-fit.fit
+     Not a PE-COFF file
+     Loading image failed
+     ...
+     FAILED test/py/tests/test_efi_fit.py::test_efi_fit_launch - assert 'Hello, world'
+
+and found no error after applying the patch.
+
+     test/py/tests/test_efi_fit.py .                                    [100%]
+
+Tested-by: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+
+If this patch is out of patchwork, maybe it should be re-posted with this tag.
+
+Thank you,
+
+---
+Best Regards
+Kunihiko Hayashi
