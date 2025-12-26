@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F40E8FDBE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5023CE8FDBE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EFA383B34;
+	by phobos.denx.de (Postfix) with ESMTP id C167983B4B;
 	Sat, 27 Dec 2025 00:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JleAs8Rr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g4tQcexk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9647E839FA; Fri, 26 Dec 2025 18:54:41 +0100 (CET)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id 80345839E2; Fri, 26 Dec 2025 18:55:26 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D4D7838FA
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47C17838FA
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-7f0db5700b2so6507760b3a.0
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:39 -0800 (PST)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7baf61be569so7716279b3a.3
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:55:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766771678; x=1767376478; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BVLXJ67XnSSJEEYJiSh8qh1vjhK2+oqsYc9QG/pORd8=;
- b=JleAs8Rr+dZKTPmSeQK45VtKx1qQYeRtt+A/8Bti2hSjkJ+NBUCPxZj2ArABRf/1YR
- O+wHfTvxxgZ2FPZLYHFHxt8sV9v5cZ7xvGegYCliD2/YwBoQe4HQwci22/ZQWrGRzqs5
- upvaO5/vb4TBDOA4aD5KOKxN6HdGPcXNeyjw1bx3jcKMHAIPZBnuU1GbPGdY2kCbZGM3
- JLDztxTcvB+jx8//chWoGTZQiVdgStmaDWRccPRRMRSgkoYrs92lgTiMgwKcos5/4g0i
- wzDqulzyRLRcgexIYMyBBwti5/uiido8wGGRdzh6U1KmeFeiLzkT0TWFiUwXLgd4fXJ9
- C20w==
+ d=gmail.com; s=20230601; t=1766771723; x=1767376523; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rh7gudSFuPfmQzeA7ZOkJGax7cWs0jx6PVo8zTUOtp8=;
+ b=g4tQcexkrzyD1NdbfCAaXKchXW72i5HI2/v0ysA9m02uBSyEECaQy2hhjPXyt6u0gA
+ 4vN/yNsgoUG+6N/7uyd51rAvgxeaJ/VOtI7qmgXlsfgKT7Y15MiSGIO/hSXzTTYqFg2i
+ 33NNgv1QzmJR29rrrAbeVga9biS/vRom9pyPgHswTmUvlPVu5x4nZXwkyJuqHo3dtj6J
+ 02QCFYI3VWCpZ3zhbqhMYcZK9+B+GGIBCU50oJCxkod+mvgNCBiVOFFeJcC2S6omZjzR
+ bNkuPDBB99ZlXjhrJ/j3Y1UsQPptzaa/y92Ajxl/04HEv7cauzkv6TNiw5F41nNCqiAo
+ 8Hew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766771678; x=1767376478;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=BVLXJ67XnSSJEEYJiSh8qh1vjhK2+oqsYc9QG/pORd8=;
- b=qP8I9ZjEnIh9b3G6QU2143efK2pF7wSaTGH0ch7TCj0xrY7kV8slTePdcwv32GBUFe
- YOq3Vvkuf4BJp+CD7VFJKMP+zJTq/F4uW4eSHlVN/5dC1eiD6G6lhUW8v0lQwOIH0JzL
- bWkCZ13SsvvEj25crGUkW16uH7ZZhFh4r7P06HsX6oC09dpQtPBNfTXkBx9xhWIpVEh2
- jjnUUjTnACybtMvihYThVaw5CMk6Q+3QlQjufRs/0azLXZYpozRtb1O1rVvLGAdNdtmO
- mGQxSqH3AJDUGPRsIi5lP5/BOrWEDGuhpXCP+wKPzYJuxdat0a+V0EF72g0BGBlJgJA0
- sVqQ==
+ d=1e100.net; s=20230601; t=1766771723; x=1767376523;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rh7gudSFuPfmQzeA7ZOkJGax7cWs0jx6PVo8zTUOtp8=;
+ b=o2VaDdAVrzP18raqGMnbQDkTL3h9d0pepPYkIeQn6fCKw3yQo97ZGwFuEJOaP3PaYl
+ WLR5C71chIH0MGSZabaijHWLAiby457E5bzq5qDGyDg4DczSyffgo4Ph/uOzitlDwM4a
+ LT8WxfjRqc1niYhLgqSkxuZTP74MDXX2DkeQZtpmQcm8bpehxMyLIFp6FnMwyF7aAlUf
+ +il4y9zfNOGDNA3m0muSDqA9ifSy653aG8wWUdtxWyypMQwokU9gMHjEFJkhuW1Pi61z
+ hcxuIvjwUOQSlJWRkORkkukcDHTkbs8VfE59hEz9xP/SLhFNNjR4PM3Fa+0gyXFndnV2
+ LP2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXKxrp+t1Hn4mvAGl4dyBcO7Kv+aIgoZ86wy7XBjA2FgMFsIrFAXZAL2WNjVQCtTrUMIDxiVVY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxJN/jhHRQ5+/TFAusYYkkXrNWPw7xR4Z/d6hmggLioFynhG0C
- iQPfkdG7c6+lO7dX/y/tw1GuZT95SqSHqwK+qn2TWQGOXOFrBxvgvEw8eidpuw==
-X-Gm-Gg: AY/fxX418s5JitG7/XpMCzuzs9K3P4nitEEmgoXdWNABJUpAbtyq6FGRr9MDxDgkszX
- 5CuyayD9dXmCNR/wBmm/68YWHMIphHoJF4uDJgRx1UfuHJHBnHeFVvYPdzaK1KAEbDAAtb7r5TZ
- gWvcRxE9NjkTNzAa74gnIBr40JDFbPv3123cTvipmYKdIrkP0qzRW5t2LELz/otvq11JPeTRgwl
- I796Yzw6DAVp5gDs21/Wu46MW3Vddk1fXfiKjydAF1e/ysesDn4zJIE6LYv11TJm/ctB+cIeq+x
- 8ih5zbp9wVTOIFzTsr1DVUJbT5jlhESUx3xciyP4QoVDHuBTMprunm6s6PXCxFVCRf3m4WJ5fwy
- OPuOUKNBlxPo+JONx8i3Au08EdjzyT1dSz6fu7mN9YHbp8xx9iHBblcabF7fg/m8OO8ZNIYqO2i
- 7dWjoaop8Hs1nC5PK+eDKkcVjfkkuzY4je+aqjIaeVzGbc15IUfTCcDb9E3zNkoinvZZYq79Uce
- gwYzzAu2hW+Rk7bvEaLHw==
-X-Google-Smtp-Source: AGHT+IF6jFCxX8oHzgxt8BMDvnMcp9FOoZ6/TyL6gd+vq7gGP7JiRJPKCp9xvBQX6EDav1dWTdCL3w==
-X-Received: by 2002:a05:6a00:1bca:b0:7e8:4398:b358 with SMTP id
- d2e1a72fcca58-7ff6607b228mr18219021b3a.43.1766771677802; 
- Fri, 26 Dec 2025 09:54:37 -0800 (PST)
+ AJvYcCUwRQOL6y5h1m9gH/ad8BXrFJKzBGQ8XHG4M/4fv6zN03oVherzzCegLbSDB+zdT774xK34WDw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6hLbFodUbRlUkl4prfZBBbH9GvzVJeow/veF1vX7vGSMbv9dD
+ ucGyt2galcHdvR+dfR/KTR+/fvKcdGE4q0B1K0/hzytIzX5n2NHRFPNR
+X-Gm-Gg: AY/fxX5KOfRHxU36wNY7IfBKRBIswQf5Czs6oua11CLh+bNhm0YSGe1PGmMTpxtT3s8
+ xNjbta8krG58NpOMcHEVdiLdbx/UeSF+eeTR2eRkKKYeVEXKYbv+fc45Y67OEBh0cOIcmsTEZOC
+ FVEHKInq9a8UBHwWxtqXwH54fybPP++OrHYpMYm/Gs+vhVFSL30BbzclXg+7y8CRtyboIATQ3Sz
+ mYlCNCHb0GjZzsRN3Lm5xpwOzHL0X8/ibDF+JlLae7g/+3nXMh9C18AQiaznYqlq9iF6IvOcgR0
+ 61GjfQiUC+ESqOc5wdj5mztPZ6Mpy9X8SDeNISxqNQqsGSjomUwVAwl3K7U38lpqBFqMe6wuefQ
+ 6yjptVeaCiiu+g6we/c7jorWc9AqEVgP09tLe4FiGx4SxUXRmMtbpnkk8ROtLorNtgfDbcth6Ek
+ 45yqJ1F86HwrDTaPcjaVAnBeCWJF8rHUWYPZhOWblJr+MhkVv6PMG+juSb2ft8JZI3Exu3w94Y9
+ WNhp1SZsRBVpUMjbP2Z5g==
+X-Google-Smtp-Source: AGHT+IHF7j0hOA8IdlnA2t3GWb/KbAQ/AhwQUVQiUxWjCfeNjhorDT1Zj9GfoNZttBH5xltX0+JmUw==
+X-Received: by 2002:a05:6a20:748a:b0:340:cc06:94ee with SMTP id
+ adf61e73a8af0-376aacfe565mr22044175637.60.1766771722763; 
+ Fri, 26 Dec 2025 09:55:22 -0800 (PST)
 Received: from visitorckw-work01.c.googlers.com.com
  (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.36
+ 98e67ed59e1d1-34e70dbc9d6sm23853898a91.10.2025.12.26.09.55.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 09:54:37 -0800 (PST)
+ Fri, 26 Dec 2025 09:55:22 -0800 (PST)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: alison.wang@nxp.com,
 	angelo@kernel-space.org
 Cc: trini@konsulko.com, me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
  eleanor15x@gmail.com, u-boot@lists.denx.de,
  Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v2 4/4] CI: Add test jobs for QEMU m68k virt machine
-Date: Fri, 26 Dec 2025 17:54:00 +0000
-Message-ID: <20251226175400.1154417-5-visitorckw@gmail.com>
+Subject: [u-boot-test-hooks][PATCH] travis-ci: Add config for QEMU m68k virt
+ machine
+Date: Fri, 26 Dec 2025 17:55:12 +0000
+Message-ID: <20251226175512.1154919-1-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
-In-Reply-To: <20251226175400.1154417-1-visitorckw@gmail.com>
-References: <20251226175400.1154417-1-visitorckw@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 27 Dec 2025 00:03:47 +0100
@@ -106,60 +104,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CI testing for the newly introduced QEMU m68k 'virt' board on
-both GitLab CI and Azure Pipelines. This ensures the new M68040
-architecture support is built and booted correctly in the emulated
-environment.
+Add the configuration file required to run tests for the QEMU m68k
+'virt' board. This setup uses 'qemu-system-m68k' with the '-M virt'
+machine type and '-cpu m68040'.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
-Changes in v2:
-- New patch to add CI testing jobs for gitlab and azure pipelines.
+ bin/travis-ci/conf.qemu-m68k_qemu | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 bin/travis-ci/conf.qemu-m68k_qemu
 
-Note: This patch depends on a corresponding patch to the
-u-boot-test-hooks repository to provide the necessary QEMU
-configuration: "travis-ci: Add config for QEMU m68k virt machine"
-
-The gitlab CI job has been verified locally using gitlab-ci-local tool
-with a passing result. Azure Pipelines has not been verified.
-
- .azure-pipelines.yml | 4 ++++
- .gitlab-ci.yml       | 7 +++++++
- 2 files changed, 11 insertions(+)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index e4695f1c55b..41bba8ed0f1 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -518,6 +518,10 @@ stages:
-           TEST_PY_ID: "--id qemu"
-           TEST_PY_TEST_SPEC: "not sleep and not efi"
-           OVERRIDE: "-a CONFIG_M68K_QEMU=y -a ~CONFIG_MCFTMR"
-+        qemu_m68k_virt:
-+          TEST_PY_BD: "qemu-m68k"
-+          TEST_PY_ID: "--id qemu"
-+          TEST_PY_TEST_SPEC: "not sleep"
-         qemu_malta:
-           TEST_PY_BD: "malta"
-           TEST_PY_ID: "--id qemu"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index e7234e003ea..08dbffc74bd 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -408,6 +408,13 @@ qemu_m68k test.py:
-     OVERRIDE: "-a CONFIG_M68K_QEMU=y -a ~CONFIG_MCFTMR"
-   <<: *buildman_and_testpy_dfn
- 
-+qemu_m68k_virt test.py:
-+  variables:
-+    TEST_PY_BD: "qemu-m68k"
-+    TEST_PY_ID: "--id qemu"
-+    TEST_PY_TEST_SPEC: "not sleep"
-+  <<: *buildman_and_testpy_dfn
+diff --git a/bin/travis-ci/conf.qemu-m68k_qemu b/bin/travis-ci/conf.qemu-m68k_qemu
+new file mode 100644
+index 0000000..311177e
+--- /dev/null
++++ b/bin/travis-ci/conf.qemu-m68k_qemu
+@@ -0,0 +1,28 @@
++# Copyright (c) 2025 Kuan-Wei Chiu <visitorkcw@gmail.com>
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
 +
- qemu_malta test.py:
-   variables:
-     TEST_PY_BD: "malta"
++console_impl=qemu
++qemu_machine="virt"
++qemu_binary="qemu-system-m68k"
++qemu_cpu="m68040"
++qemu_extra_args="-nographic"
++qemu_kernel_args="-kernel ${U_BOOT_BUILD_DIR}/u-boot"
++reset_impl=none
++flash_impl=none
 -- 
 2.52.0.358.g0dd7633a29-goog
 
