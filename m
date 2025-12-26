@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4A7E8FDBE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F40E8FDBE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:04:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DE1683B27;
+	by phobos.denx.de (Postfix) with ESMTP id 7EFA383B34;
 	Sat, 27 Dec 2025 00:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pv9oaDX9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JleAs8Rr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3691839FA; Fri, 26 Dec 2025 18:54:36 +0100 (CET)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 9647E839FA; Fri, 26 Dec 2025 18:54:41 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69EA7838FA
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D4D7838FA
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-7b89c1ce9easo8349773b3a.2
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:34 -0800 (PST)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-7f0db5700b2so6507760b3a.0
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766771673; x=1767376473; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1766771678; x=1767376478; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GvdAIoZJCjAYVL2gh/7iLWqPBJF8cbBnVLtHG+PLSX8=;
- b=Pv9oaDX9sP5RoklhKoKAEoFPLe2EVxYorV/Jh8tOtU/ks/d3UxzxbAELlCzYkyjhTx
- aYKRnelnTf3OppCETIZlIbwRNCvVxhtj6iHdEtIOjzgT5EKNp7b5kMSibVd4uYAT19h3
- WtxGneRjeUzW0RPUX7T/jY6jZc/hluzSaMygvZHWZn7LJP9oeQjK3NR/xj6E7n3nueLI
- uYWTjezku69+FTeayXsIDgx7yOpvMgf3V5NevP1agvm6RyRuVojtrJRxszYunFK0zNni
- j9Ws6B1Z4QsIO2bJ0dyFFeI4Mx8MY6Ew0Lvnv96OZW95t5h+pxmPZKxuo38AfHztop2Q
- p1Sg==
+ bh=BVLXJ67XnSSJEEYJiSh8qh1vjhK2+oqsYc9QG/pORd8=;
+ b=JleAs8Rr+dZKTPmSeQK45VtKx1qQYeRtt+A/8Bti2hSjkJ+NBUCPxZj2ArABRf/1YR
+ O+wHfTvxxgZ2FPZLYHFHxt8sV9v5cZ7xvGegYCliD2/YwBoQe4HQwci22/ZQWrGRzqs5
+ upvaO5/vb4TBDOA4aD5KOKxN6HdGPcXNeyjw1bx3jcKMHAIPZBnuU1GbPGdY2kCbZGM3
+ JLDztxTcvB+jx8//chWoGTZQiVdgStmaDWRccPRRMRSgkoYrs92lgTiMgwKcos5/4g0i
+ wzDqulzyRLRcgexIYMyBBwti5/uiido8wGGRdzh6U1KmeFeiLzkT0TWFiUwXLgd4fXJ9
+ C20w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766771673; x=1767376473;
+ d=1e100.net; s=20230601; t=1766771678; x=1767376478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=GvdAIoZJCjAYVL2gh/7iLWqPBJF8cbBnVLtHG+PLSX8=;
- b=v7kdsxfw1rM05Cr3ZkaXbYdcsyP9X0hXuC3ZMNmW2oGijYNYco4UHcBNFftGfzc7j/
- A8srl4/9VZcavG9n7yDjVVurp5evvgTf0qO8+PTQmI/ocR7InI0xW8OcufScvnxRwxcl
- Avr63ziAP+KNq51efdYg1zPKAgqzja5xVWkANbPZyuWxSyE6Y0Qj51Iio0LL7/OZdzlo
- Zt6Y0g4UMMQkC7AiskdtejXpQInb5UpGRjFo45h3LLpW+QH7kf2w45I8xzVpHwpI85XF
- OYCf3PzejqZ6krJuO9zNGXF9KRqafhqKYf0YX/5acs1hXecx0I5K3YpA4oSLgQlRascz
- rAWg==
+ bh=BVLXJ67XnSSJEEYJiSh8qh1vjhK2+oqsYc9QG/pORd8=;
+ b=qP8I9ZjEnIh9b3G6QU2143efK2pF7wSaTGH0ch7TCj0xrY7kV8slTePdcwv32GBUFe
+ YOq3Vvkuf4BJp+CD7VFJKMP+zJTq/F4uW4eSHlVN/5dC1eiD6G6lhUW8v0lQwOIH0JzL
+ bWkCZ13SsvvEj25crGUkW16uH7ZZhFh4r7P06HsX6oC09dpQtPBNfTXkBx9xhWIpVEh2
+ jjnUUjTnACybtMvihYThVaw5CMk6Q+3QlQjufRs/0azLXZYpozRtb1O1rVvLGAdNdtmO
+ mGQxSqH3AJDUGPRsIi5lP5/BOrWEDGuhpXCP+wKPzYJuxdat0a+V0EF72g0BGBlJgJA0
+ sVqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBSD9qEqtp/f3s2eSb1yOB63vmExwmd+rwNW2sZKNSj6nWlkAcjsW6vyZ3L9ZISmOEG3FY534=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrIixpJ2uVHiohlq70ozCuysjHoaYEj/oeNFb3Mf2Z0zJSa1yk
- 1MAEKvuV7OWrcaz3KIkzTR1SJ6pkfw7xzWWHPK4t+aNzoii4BOUyd18p
-X-Gm-Gg: AY/fxX5IhB11ROI4GZCCVTUefY/6zoiekR+Qf0tUQSRjoC/a/H9efngVJJcmmmCnyBv
- qp3sOeCDOPUG3G2pUrNB0f+JX6xPIepSf5K5XZMqE5gdnNl9o6x1ee2BPIKYfZ05VjZ7sMYjQjk
- hNui8E0YyTQwM1Dfs6PqMnb9EAZv1RsSsy8bq8YMoO9ldLFyFVmNEvRyVfE1bzfi8v/AOJNEduM
- vJ/5teJUHLEq7acO3OCdwsLumYjute9JNvpd5656dPQ0mprwdW4o3LvGa7UPTjWOtFNlEvrtw6g
- 9EAR6LcOvnj3em8rsErnh+h+wHsrEFeH6yQlB0WFiFU2oQygVXeYKVHwGGZ1x0S47tArT1/7bvp
- kN9bZd8744yGQn8EwpDqlBGW3U18SkuyjnunNuwdoodxpXOxzFi6Fz8Hrl8GwP14s5iqx0vOgI4
- eQqPLe/hQRBE564ZoKyIvn14YAMR4Cvd9iNBZ+f/sA/fCxXwEJ2SWfMoiVt1SeSXEK9JD+htZ2I
- J6Cd6diXQ0ENOU8uF6Jtg==
-X-Google-Smtp-Source: AGHT+IFTgZcrMzn1117BSzjVuZcVjdYQhoyvpPvt5ABUlwdl3alWHtFhhQ04as/TTlqAB8pOS50OIA==
-X-Received: by 2002:a05:6a00:340b:b0:7aa:81fc:a83a with SMTP id
- d2e1a72fcca58-7ff657a107emr23270257b3a.6.1766771672843; 
- Fri, 26 Dec 2025 09:54:32 -0800 (PST)
+ AJvYcCXKxrp+t1Hn4mvAGl4dyBcO7Kv+aIgoZ86wy7XBjA2FgMFsIrFAXZAL2WNjVQCtTrUMIDxiVVY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxJN/jhHRQ5+/TFAusYYkkXrNWPw7xR4Z/d6hmggLioFynhG0C
+ iQPfkdG7c6+lO7dX/y/tw1GuZT95SqSHqwK+qn2TWQGOXOFrBxvgvEw8eidpuw==
+X-Gm-Gg: AY/fxX418s5JitG7/XpMCzuzs9K3P4nitEEmgoXdWNABJUpAbtyq6FGRr9MDxDgkszX
+ 5CuyayD9dXmCNR/wBmm/68YWHMIphHoJF4uDJgRx1UfuHJHBnHeFVvYPdzaK1KAEbDAAtb7r5TZ
+ gWvcRxE9NjkTNzAa74gnIBr40JDFbPv3123cTvipmYKdIrkP0qzRW5t2LELz/otvq11JPeTRgwl
+ I796Yzw6DAVp5gDs21/Wu46MW3Vddk1fXfiKjydAF1e/ysesDn4zJIE6LYv11TJm/ctB+cIeq+x
+ 8ih5zbp9wVTOIFzTsr1DVUJbT5jlhESUx3xciyP4QoVDHuBTMprunm6s6PXCxFVCRf3m4WJ5fwy
+ OPuOUKNBlxPo+JONx8i3Au08EdjzyT1dSz6fu7mN9YHbp8xx9iHBblcabF7fg/m8OO8ZNIYqO2i
+ 7dWjoaop8Hs1nC5PK+eDKkcVjfkkuzY4je+aqjIaeVzGbc15IUfTCcDb9E3zNkoinvZZYq79Uce
+ gwYzzAu2hW+Rk7bvEaLHw==
+X-Google-Smtp-Source: AGHT+IF6jFCxX8oHzgxt8BMDvnMcp9FOoZ6/TyL6gd+vq7gGP7JiRJPKCp9xvBQX6EDav1dWTdCL3w==
+X-Received: by 2002:a05:6a00:1bca:b0:7e8:4398:b358 with SMTP id
+ d2e1a72fcca58-7ff6607b228mr18219021b3a.43.1766771677802; 
+ Fri, 26 Dec 2025 09:54:37 -0800 (PST)
 Received: from visitorckw-work01.c.googlers.com.com
  (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.31
+ d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 09:54:32 -0800 (PST)
+ Fri, 26 Dec 2025 09:54:37 -0800 (PST)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: alison.wang@nxp.com,
 	angelo@kernel-space.org
 Cc: trini@konsulko.com, me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
  eleanor15x@gmail.com, u-boot@lists.denx.de,
  Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v2 3/4] board: Add QEMU m68k virt board support
-Date: Fri, 26 Dec 2025 17:53:59 +0000
-Message-ID: <20251226175400.1154417-4-visitorckw@gmail.com>
+Subject: [PATCH v2 4/4] CI: Add test jobs for QEMU m68k virt machine
+Date: Fri, 26 Dec 2025 17:54:00 +0000
+Message-ID: <20251226175400.1154417-5-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
 In-Reply-To: <20251226175400.1154417-1-visitorckw@gmail.com>
 References: <20251226175400.1154417-1-visitorckw@gmail.com>
@@ -106,305 +106,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the QEMU 'virt' machine on the m68k architecture. This
-board emulates a generic machine based on the Motorola 68040 CPU
-equipped with Goldfish virtual peripherals.
-
-Introduce the necessary board configuration and initialization
-infrastructure. The implementation includes logic to parse the QEMU
-bootinfo interface, enabling dynamic detection of system RAM size to
-adapt to the virtual machine's configuration.
-
-Enable the Goldfish TTY driver to provide a serial console, which
-facilitates interaction when running QEMU with the -nographic option.
-Additionally, include comprehensive documentation covering build
-instructions and usage examples to guide users in deploying U-Boot
-within the virtualization environment.
+Enable CI testing for the newly introduced QEMU m68k 'virt' board on
+both GitLab CI and Azure Pipelines. This ensures the new M68040
+architecture support is built and booted correctly in the emulated
+environment.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
 Changes in v2:
-- Update SPDX license identifier to GPL-2.0-or-later.
-- Sort header inclusions alphabetically.
-- Fix tabs vs spaces in MAINTAINERS.
-- Add qemu-m68k entry to doc/board/emulation/index.rst.
-- Regenerate defconfig using make savedefconfig.
+- New patch to add CI testing jobs for gitlab and azure pipelines.
 
- arch/m68k/Kconfig                     |  8 +++
- board/emulation/qemu-m68k/Kconfig     | 12 ++++
- board/emulation/qemu-m68k/MAINTAINERS |  8 +++
- board/emulation/qemu-m68k/Makefile    |  5 ++
- board/emulation/qemu-m68k/qemu-m68k.c | 84 +++++++++++++++++++++++++++
- configs/qemu-m68k_defconfig           | 12 ++++
- doc/board/emulation/index.rst         |  1 +
- doc/board/emulation/qemu-m68k.rst     | 38 ++++++++++++
- include/configs/qemu-m68k.h           | 18 ++++++
- 9 files changed, 186 insertions(+)
- create mode 100644 board/emulation/qemu-m68k/Kconfig
- create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
- create mode 100644 board/emulation/qemu-m68k/Makefile
- create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
- create mode 100644 configs/qemu-m68k_defconfig
- create mode 100644 doc/board/emulation/qemu-m68k.rst
- create mode 100644 include/configs/qemu-m68k.h
+Note: This patch depends on a corresponding patch to the
+u-boot-test-hooks repository to provide the necessary QEMU
+configuration: "travis-ci: Add config for QEMU m68k virt machine"
 
-diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-index de7c673c376..605ae5ec20c 100644
---- a/arch/m68k/Kconfig
-+++ b/arch/m68k/Kconfig
-@@ -183,6 +183,13 @@ config TARGET_STMARK2
-         select CF_DSPI
-         select M54418
+The gitlab CI job has been verified locally using gitlab-ci-local tool
+with a passing result. Azure Pipelines has not been verified.
+
+ .azure-pipelines.yml | 4 ++++
+ .gitlab-ci.yml       | 7 +++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index e4695f1c55b..41bba8ed0f1 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -518,6 +518,10 @@ stages:
+           TEST_PY_ID: "--id qemu"
+           TEST_PY_TEST_SPEC: "not sleep and not efi"
+           OVERRIDE: "-a CONFIG_M68K_QEMU=y -a ~CONFIG_MCFTMR"
++        qemu_m68k_virt:
++          TEST_PY_BD: "qemu-m68k"
++          TEST_PY_ID: "--id qemu"
++          TEST_PY_TEST_SPEC: "not sleep"
+         qemu_malta:
+           TEST_PY_BD: "malta"
+           TEST_PY_ID: "--id qemu"
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index e7234e003ea..08dbffc74bd 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -408,6 +408,13 @@ qemu_m68k test.py:
+     OVERRIDE: "-a CONFIG_M68K_QEMU=y -a ~CONFIG_MCFTMR"
+   <<: *buildman_and_testpy_dfn
  
-+config TARGET_QEMU_M68K
-+    bool "Support QEMU m68k virt"
-+    select M68040
-+    help
-+      This target supports the QEMU m68k virtual machine (-M virt).
-+      It simulates a Motorola 68040 CPU with Goldfish peripherals.
++qemu_m68k_virt test.py:
++  variables:
++    TEST_PY_BD: "qemu-m68k"
++    TEST_PY_ID: "--id qemu"
++    TEST_PY_TEST_SPEC: "not sleep"
++  <<: *buildman_and_testpy_dfn
 +
- endchoice
- 
- config SYS_CPU
-@@ -208,6 +215,7 @@ source "board/freescale/m5329evb/Kconfig"
- source "board/freescale/m5373evb/Kconfig"
- source "board/sysam/amcore/Kconfig"
- source "board/sysam/stmark2/Kconfig"
-+source "board/emulation/qemu-m68k/Kconfig"
- 
- config M68K_QEMU
- 	bool "Build with workarounds for incomplete QEMU emulation"
-diff --git a/board/emulation/qemu-m68k/Kconfig b/board/emulation/qemu-m68k/Kconfig
-new file mode 100644
-index 00000000000..aae6dfe400f
---- /dev/null
-+++ b/board/emulation/qemu-m68k/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_QEMU_M68K
-+
-+config SYS_BOARD
-+	default "qemu-m68k"
-+
-+config SYS_VENDOR
-+	default "emulation"
-+
-+config SYS_CONFIG_NAME
-+	default "qemu-m68k"
-+
-+endif
-diff --git a/board/emulation/qemu-m68k/MAINTAINERS b/board/emulation/qemu-m68k/MAINTAINERS
-new file mode 100644
-index 00000000000..90414c58465
---- /dev/null
-+++ b/board/emulation/qemu-m68k/MAINTAINERS
-@@ -0,0 +1,8 @@
-+QEMU M68K VIRT BOARD
-+M:	Kuan-Wei Chiu <visitorckw@gmail.com>
-+S:	Maintained
-+F:	board/emulation/qemu-m68k/
-+F:	board/emulation/common/
-+F:	include/configs/qemu-m68k.h
-+F:	configs/qemu-m68k_defconfig
-+F:	doc/board/emulation/qemu-m68k.rst
-diff --git a/board/emulation/qemu-m68k/Makefile b/board/emulation/qemu-m68k/Makefile
-new file mode 100644
-index 00000000000..5cb2886ff5a
---- /dev/null
-+++ b/board/emulation/qemu-m68k/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-+
-+obj-y += qemu-m68k.o
-diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-new file mode 100644
-index 00000000000..89e66050bb9
---- /dev/null
-+++ b/board/emulation/qemu-m68k/qemu-m68k.c
-@@ -0,0 +1,84 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-+ */
-+
-+#include <asm-generic/sections.h>
-+#include <asm/bootinfo.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <config.h>
-+#include <dm/platdata.h>
-+#include <goldfish_tty.h>
-+#include <init.h>
-+#include <linux/errno.h>
-+#include <serial.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/* QEMU Virt Machine Hardware Map */
-+#define VIRT_GF_TTY_MMIO_BASE  0xff008000
-+#define VIRT_CTRL_MMIO_BASE    0xff009000
-+#define VIRT_CTRL_RESET        0x01
-+
-+int board_early_init_f(void)
-+{
-+	return 0;
-+}
-+
-+int checkboard(void)
-+{
-+	puts("Board: QEMU m68k virt\n");
-+	return 0;
-+}
-+
-+int dram_init(void)
-+{
-+	struct bi_record *record;
-+	ulong addr;
-+
-+	/* Default: 16MB */
-+	gd->ram_size = 0x01000000;
-+
-+	/* QEMU places bootinfo after _end, aligned to 2 bytes */
-+	addr = (ulong)&_end;
-+	if (addr & 1)
-+		addr++;
-+
-+	record = (struct bi_record *)addr;
-+
-+	if (record->tag != BI_MACHTYPE)
-+		return 0;
-+
-+	while (record->tag != BI_LAST) {
-+		if (record->tag == BI_MEMCHUNK) {
-+			gd->ram_size = record->data[1];
-+			break;
-+		}
-+		record = (struct bi_record *)((ulong)record + record->size);
-+	}
-+
-+	return 0;
-+}
-+
-+void reset_cpu(unsigned long addr)
-+{
-+	writel(VIRT_CTRL_RESET, VIRT_CTRL_MMIO_BASE);
-+	while (1)
-+		;
-+}
-+
-+int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	reset_cpu(0);
-+	return 0;
-+}
-+
-+static const struct goldfish_tty_plat serial_plat = {
-+	.base = (void __iomem *)VIRT_GF_TTY_MMIO_BASE,
-+};
-+
-+U_BOOT_DRVINFO(goldfish_serial) = {
-+	.name = "serial_goldfish",
-+	.plat = &serial_plat,
-+};
-diff --git a/configs/qemu-m68k_defconfig b/configs/qemu-m68k_defconfig
-new file mode 100644
-index 00000000000..db6c9b1c771
---- /dev/null
-+++ b/configs/qemu-m68k_defconfig
-@@ -0,0 +1,12 @@
-+CONFIG_M68K=y
-+CONFIG_TEXT_BASE=0x00000000
-+CONFIG_SYS_MALLOC_LEN=0x20000
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_SYS_MONITOR_LEN=262144
-+CONFIG_SYS_BOOTM_LEN=0x1000000
-+CONFIG_SYS_LOAD_ADDR=0x00000000
-+CONFIG_TARGET_QEMU_M68K=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SERIAL_GOLDFISH=y
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index f8908166276..4f7c812d493 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -15,6 +15,7 @@ Emulation
-    qemu-sbsa
-    qemu-x86
-    qemu-xtensa
-+   qemu-m68k
- 
- Also see
- 
-diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
-new file mode 100644
-index 00000000000..36e51e8107f
---- /dev/null
-+++ b/doc/board/emulation/qemu-m68k.rst
-@@ -0,0 +1,38 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+.. Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-+
-+QEMU m68k
-+=========
-+
-+QEMU for m68k supports a special 'virt' machine designed for emulation and
-+virtualization purposes. This document describes how to run U-Boot under it.
-+
-+The QEMU virt machine models a generic m68k virtual machine with Goldfish
-+interfaces. It supports the Motorola 68040 CPU architecture.
-+
-+Building U-Boot
-+---------------
-+Set the CROSS_COMPILE environment variable to your m68k toolchain, and run:
-+
-+.. code-block:: bash
-+
-+    export CROSS_COMPILE=m68k-linux-gnu-
-+    make qemu-m68k_defconfig
-+    make
-+
-+Running U-Boot
-+--------------
-+The minimal QEMU command line to get U-Boot up and running is:
-+
-+.. code-block:: bash
-+
-+    qemu-system-m68k -M virt -cpu m68040 -nographic -kernel u-boot
-+
-+Note that the `-nographic` option is used to redirect the console to stdio,
-+which connects to the emulated Goldfish TTY device.
-+
-+Hardware Support
-+----------------
-+The following QEMU virt peripherals are supported in U-Boot:
-+
-+* Goldfish TTY (Serial Console)
-diff --git a/include/configs/qemu-m68k.h b/include/configs/qemu-m68k.h
-new file mode 100644
-index 00000000000..1d8aa92fe80
---- /dev/null
-+++ b/include/configs/qemu-m68k.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-+ */
-+
-+#ifndef __QEMU_M68K_H
-+#define __QEMU_M68K_H
-+
-+/* Memory Configuration */
-+#define CFG_SYS_SDRAM_BASE       0x00000000
-+
-+/*
-+ * Initial Stack Pointer:
-+ * Place the stack at 4MB offset to avoid overwriting U-Boot code/data.
-+ */
-+#define CFG_SYS_INIT_SP_ADDR     (CFG_SYS_SDRAM_BASE + 0x400000)
-+
-+#endif /* __QEMU_M68K_H */
+ qemu_malta test.py:
+   variables:
+     TEST_PY_BD: "malta"
 -- 
 2.52.0.358.g0dd7633a29-goog
 
