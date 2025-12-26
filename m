@@ -4,155 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6BE3E8FDB8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4AFE8FDBE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1850B83A83;
-	Sat, 27 Dec 2025 00:03:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DAB783AAC;
+	Sat, 27 Dec 2025 00:03:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VPBQyk3F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DnlmhbW0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23D7F83A94; Sat, 27 Dec 2025 00:03:36 +0100 (CET)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B55A5839FA; Fri, 26 Dec 2025 18:54:23 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B18C3839F1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 00:03:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1DDF838FA
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=v382iEqxsh+bIGxEOEGC5jBJCtAmjKd3XocJFxcFWr/61t/ePwjJ+dNNQu88gIQBwBZ72q0vkSpBePg4cFfr7tNQEOIBkmtNFAW9y6fLxmAOE5wHDQbjPNGZznj/A1MTZUAepLao33uwH1uBHBn3uNWwvrZ0+Wo2QYQptF4UNzsw1QVOiJngS5u8FWUfh36Tv48V3SiIFA9XTqGnkW36Nu0To4+N21s+5WyOcwobGorfslXofPxWG7Za15pqZ2KOfxV4BS6oUwgjxWsyKFKLAolCRgdFcQSrundonPpuKbdHa6jn+48HB2Nppw4lUM2Rsp45u9kPIpYArPLtdGo3tA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xQ+VJmYZ53L40kPQorizibeeMRfHF0MmLC2hZdaHEZM=;
- b=tdq9FPkmIG+aeINstOZagwkGFh1xWmTpw4vNAxJ/4aCo+RPSjpodJzfnnOHH9ZvpP+PLx50h4WSJoiU2mxHMOeT3Nd3s8ZZqPcUgJKDBkdLIE4ztp0CcCBj0B8tzJzsJJ6xXd4uOBo7tjNeoEnaSEkNkoxMqCnCk+WwWyNT8ilgGlaWeEaq6nd50MRh4PRP8i7FwWpn6SAxFRRPG9OcmVDOEXGQtgVGESKUNxgdJvWzPXZE4KRmksekHDlefNRxY09eLeIJQZo1DEn7SyXqk56CZ8/z2JQtaDqtcbBurAQn4iAzgSEWHQ8zoQDEGKOZW8F2njb8zh8gOjlJTY8uLOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xQ+VJmYZ53L40kPQorizibeeMRfHF0MmLC2hZdaHEZM=;
- b=VPBQyk3F79lOuH5VBzlBgpj519Keu1iUlw8khjS3eETWnUpM6QdXameeJGZ72s5xicvtLAmzreNPNVoKJwh0H7EfA79K5giY76CT0kd/f85q+cZ5f8hti16xskyWfcGJYI2BDZ4FFLnXj0ZsqLVjCclXmnXYckmECwmxxhrFesk=
-Received: from CH3P221CA0014.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1e7::34)
- by DS3PR10MB997724.namprd10.prod.outlook.com (2603:10b6:8:346::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.11; Fri, 26 Dec
- 2025 23:03:30 +0000
-Received: from CH1PEPF0000AD82.namprd04.prod.outlook.com
- (2603:10b6:610:1e7:cafe::d3) by CH3P221CA0014.outlook.office365.com
- (2603:10b6:610:1e7::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9456.12 via Frontend Transport; Fri,
- 26 Dec 2025 23:03:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH1PEPF0000AD82.mail.protection.outlook.com (10.167.244.91) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9456.9 via Frontend Transport; Fri, 26 Dec 2025 23:03:30 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 26 Dec
- 2025 17:03:29 -0600
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 26 Dec
- 2025 17:03:28 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 26 Dec 2025 17:03:28 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BQN3S0v4027943;
- Fri, 26 Dec 2025 17:03:28 -0600
-From: Bryan Brattlof <bb@ti.com>
-Date: Fri, 26 Dec 2025 17:03:26 -0600
-Subject: [PATCH] configs: am62[ap]x_evm_r5: enable SUPPORT_EMMC_BOOT
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7f651586be1so3469590b3a.1
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1766771659; x=1767376459; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=96IPq7fsTIUkq85KHkhd42Z+/5jipLFzjgx5YF6xDVU=;
+ b=DnlmhbW0cTWItEBhGquFeC8r9bZjwoi0spdj1nEIOBR0oDHivbBZMCp6tKxHv8mRQk
+ i9EMRCFZ7aDAWGMYJU6SgDZwmI+QoG8cygS/koafq2TXPp+LUfXE2nltUVXDdjAq4RtL
+ 7A6d2tKhNwU7DEHdb1MeS6ZqVeLVXVxUbqc5bQmhGMprQFssnupWLDFe0grcMFO9KQEL
+ AmztZ5gcIm9TujkrKkEnOQCApZwWhT+GO9pRjIBPNex0pEOSC9bwiJ8dSpiuDc74zGy5
+ /qWBY6uxzVmQhZpij9cZ2JDkaV2Cx1bFSBPJSkQLuJTv73fVLXHnnw60smclynyAMzN7
+ GwSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766771659; x=1767376459;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=96IPq7fsTIUkq85KHkhd42Z+/5jipLFzjgx5YF6xDVU=;
+ b=dYb+UF28fYZsffDPJ/TxkV1AZ073uFRyWUSeFRNeQ1QtG2RS7mYWzzAngPLl81a9QD
+ 5M3958iezXLL8yl7mDPxIg1aaTUl19CPM3xtEOhGX8jLwZRLFf+8Lw773N0CXXhRVkMy
+ ic69WkYCQxNRU/WCWoGACT3tCRHx8r48QwRBd2aMhpXj5XG9htjjS9eSPVaIwNhKxQS4
+ NHkkZE0GaltFbXvbpwz93xjpyq+/MugiYzHBwfOm3+IW7APVsz2EYBCDeCQNAQvDpECT
+ XNEMciQyBSUiCMDuLITxVZO8OkmkTjoheQEECafK3Nth8JP2IxPRGlCMViL9Sdc2Le1r
+ pa2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3Um7ZovGJEdVme/8WxEXZJJQ9aC8gFkYPq79ISVJYiaReSJN+70XS3PKtOJ6criH8s6JfOX0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5vc+CnzGuIXpz+bdYdr1hfQlXe97NypGCZEUIEiVfIasDpffq
+ XfIum1BMXkXoBpdcKjd57Lqnjq+obtx6oa39tn8xqtQZ9XApfIE5pAFJ
+X-Gm-Gg: AY/fxX4Oe/gSqEjFTaJU9A3IwguswvABFxqkdL0472WEA2d/+pm6CvSgsEhtUkU9Mgp
+ pGjnIwAUW5/+77ltPLj0+/lQs9XDDuhxJoMKCx2SwqL5bqzds/E8YpzKetMAD6LzOyRNjLjlTOO
+ VprTjzyk/uKncH1upWRWRafxv6sMtSABAqC105QAaymne1XevGCtdFZZ31HgiCi7YwRdoGyE9bg
+ MaynuYoqCLp6DsUDqO5/naMYH0zr4uMuqI7wnkVsLbwEESwg4nv7KjkVf3oeBCrSJ4k+4iceU8F
+ 522mN9+c+Tg0LbKpKlyPGxCaVUDNJeOICH0Zsnv20mQQZFu2xFIYqMPhq4rlTl4yu/OqzoTwQEY
+ M7Bu5TADJFu6gZflDsd37RYc0MLvhbiRJq5pjY4qHxo3Cu4PyHTIdeIHDVXZCFZsEVXM86eu//q
+ +R4THFD9BY3SFl+IUVEXfl+EPMUwZNTCvNZE2Gywh7XHUyk//SKJpkZbwu/ioUug2oGScMKU0gK
+ 054LaePr47X1ap3VE88vBbGZutIyJ+R
+X-Google-Smtp-Source: AGHT+IE19CA1FoAC0K/G0KcV7bUJNI2LAGcm2E/ortIqvwyJTGRm468OEGWY+bCtkv24XErUBko8DQ==
+X-Received: by 2002:a05:6a00:944e:b0:7e8:3fcb:9afd with SMTP id
+ d2e1a72fcca58-7fe0d79eabamr23940351b3a.19.1766771659188; 
+ Fri, 26 Dec 2025 09:54:19 -0800 (PST)
+Received: from visitorckw-work01.c.googlers.com.com
+ (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Dec 2025 09:54:18 -0800 (PST)
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: alison.wang@nxp.com,
+	angelo@kernel-space.org
+Cc: trini@konsulko.com, me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
+ eleanor15x@gmail.com, u-boot@lists.denx.de,
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH v2 0/4] m68k: Add support for QEMU virt machine
+Date: Fri, 26 Dec 2025 17:53:56 +0000
+Message-ID: <20251226175400.1154417-1-visitorckw@gmail.com>
+X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251226-emmc-boot-fix-v1-1-417959ba4e9a@ti.com>
-X-B4-Tracking: v=1; b=H4sIAD0UT2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDIyMz3dTc3GTdpPz8Et20zApdY3MD0xQj88Rkc0tjJaCegqJUoDDYvOj
- Y2loAOQp2q18AAAA=
-X-Change-ID: 20251226-emmc-boot-fix-3705d27ac793
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>,
- Judith Mendez <jm@ti.com>, Santhosh Kumar K <s-k6@ti.com>, Sam Protsenko
- <semen.protsenko@linaro.org>, Andrew Davis <afd@ti.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, "Bryan
- Brattlof" <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD82:EE_|DS3PR10MB997724:EE_
-X-MS-Office365-Filtering-Correlation-Id: 98edeb1f-2aa7-4940-3a70-08de44d2fccc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VysxYlJjMTMzVWtKSm9qYlpSSmlZTURpWi9OUVpFb3lPRkFuZGNTVVNobzJp?=
- =?utf-8?B?L0k4eUdTazRQY2dobFlJK1NaTHEyU056b1JLMHBISDZFZVEvdVJpVFgwaTlV?=
- =?utf-8?B?Ull0eFFJaWxZbGw1ZW9DQWJ4d05ZUXZQMmVXbWhGUVJ4UHJneGpSVWFmSi9v?=
- =?utf-8?B?aWtPTGpBRHZqc080Nm9KOUpOUjlZamI1ZWd3aENCU3NhTk1GZ1JzaVJaREJp?=
- =?utf-8?B?bjQzREVJZis5eFU4QnhkelQ1YjVZY0trNmEyaEZYVEpuVStKcWxBSlFmQTY1?=
- =?utf-8?B?YlM4WUlrbUU5Ri9kcVlJeGhhRm9Lc1NudVQxTzJYb1hxdEg1eVJDR0ZZQ1hs?=
- =?utf-8?B?bTRKZitwT3p5VHpJZGkrT3JyR29lZDlNSjhvYmd3d2szeGUxUVo3aHZZWjF5?=
- =?utf-8?B?T09qanhlNWtVUE9oalR3ak9Qc2ExZ1pmeDdxeHc1NUxOYzFIRWY5ajIvZ283?=
- =?utf-8?B?ZmJIK2N3Ukl6UVkzY2gxNnhNNTBtWGkwd2JXaVhBTWJYMEFqYjRoUzBHWnBE?=
- =?utf-8?B?UU5KMWJhd1lnazhsdlVnNXRRUzNUZ0NLbUJVZXY1bHR4MGcwUC9aOU92KzF4?=
- =?utf-8?B?aldYU2VPS0ZYM0NQaEFneHBNL2hoU1FvM0U3M25rL0xUZkRZcE44K0F3SStR?=
- =?utf-8?B?cHR0ZUFlRUh6Wk85dnJyM0ZWWkVORnpjUjFPK3plQUdnalJVcjErYmJCTjBi?=
- =?utf-8?B?aVo1NWt0TmlvOGdqQjVZbktKaHhkM1g3MXZsU05QbHhBWlErNTA5eG9ieERi?=
- =?utf-8?B?SExRTm9kU1ZWaTI1SlBTdlFhTXMzS0FDQjlyN2o3WDdHWWRqaXkwblpKSnhU?=
- =?utf-8?B?TjRKN3pESFFaNXhuRmVNNFd5MkcrN1ZHQnpHUEVRSmpUWXhJbVVtNlIyZVhW?=
- =?utf-8?B?M1RRRlN6NlZ4bjFoT1ZvZTlWc1V4WXBaZFZhSXNOWnJkZFZPUGJIdHNtTCsz?=
- =?utf-8?B?bGswT2xQdUlMdTc5dXhWclIrSlpNTjBlL3BxZ2NWbkFKaFBCbGFBcnZBajZJ?=
- =?utf-8?B?WkowcmtLSm9KVGFOdjdLcnJ1ZzhnY2xUMWd0ZjFBMTA0eXl4R2p4djVLL1FW?=
- =?utf-8?B?a0xIcU9VeGgza1FaM3lpN2ZPeDFRbHBWQ3VKOW12TWZiMVZFcXQzRVN4UjI4?=
- =?utf-8?B?NmFNVnp2eWpTL2JzMXZtUUp2Yy9FUG9VMmtDd3VoelhGS041WW9WTzBsV3Jy?=
- =?utf-8?B?NG5mVVJBTjhCVTZmUE1TRzRxRXE3eXUxMERTVHVPOXlkdUcranh1Mi9ORjlV?=
- =?utf-8?B?QnYzYTNXRVMzRFJyWDc4VjcrLzQ5azdRTFNNU0MwU1JRbFBmWDZBaFYyWHFY?=
- =?utf-8?B?TnpXOFYyNG54RVZHTDE3WkVlNUNkczREWUxRak9yQzhjY3RaSEdGZzN1c1Rt?=
- =?utf-8?B?VjZYSG5rcFBEVnREOUZsOTdsdVp0T3dIMWx2M3NXZnNndzJ6NFBFdythd2F3?=
- =?utf-8?B?QTIxUkgyQ3RnNUx2NWV6TTlVbGJ2M2prMkkxT2M5R2pBcXNkVHFaUUE5THIw?=
- =?utf-8?B?TDRHUFFzOTY2Uzh3WEF0N2JMdE01clBwTG1TWWtQUW8yNVExVENZQ05QN3pO?=
- =?utf-8?B?SHB5SzRIL3ZiaWxSeHBMd3UzeE1kaGw0VzFIY2hlVXZjZ2ZON0hWbmxkZ0w5?=
- =?utf-8?B?eVhrY2pwNXh1cHc2a1FRRFJ5Wjc3cFo2b2VYRGI3QnVtclRxQWZKOW5GMUl6?=
- =?utf-8?B?QUhDL05qb3hrTkhUWjhUTXFJMHZCY1FqV3lTVml6bUc2bzN0OThUZGR0NnpY?=
- =?utf-8?B?WlJjTndGNkF4U3VEbVRKaWJYOG9oWWo0NGV0MEZoZlBmRGJpb1RSMkxGckZK?=
- =?utf-8?B?VmdXMEpudWx0MkJHWFplb2ZHanVRYjdYaWJxUS9raTdBK2thWXJqTHNXMm5M?=
- =?utf-8?B?UTRhRUtIK2YwRnFpWDRnNjNNS3JnK3FLOGhFbFpyb1FyT2RXVjd1TWt5ODFW?=
- =?utf-8?B?bDZndUlkZ2krL3BSL1B1aHVaaEJHTDUydzJaR1g2NlBZRXlVdkFoOFAwa0gr?=
- =?utf-8?B?UGxJWDlDTnVQMks5LzVqRlJJZ3RmYmd3c0pMQVFBSkZ6Sk15K1EyTmlmc1Z5?=
- =?utf-8?B?c1ROOEorWkZyWWhoOTc2azc1WDNSZklGbFZZcGFtSWU2ZXlSZUJQU2xreE9h?=
- =?utf-8?Q?aPrA=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Dec 2025 23:03:30.7595 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 98edeb1f-2aa7-4940-3a70-08de44d2fccc
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD82.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS3PR10MB997724
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 27 Dec 2025 00:03:47 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,51 +103,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When unifying the SD/eMMC boot behavior between the different AM62*
-reference boards we missed enabling SUPPORT_EMMC_BOOT. This causes the
-SPL in tiboot3.bin to look for the tispl.bin in the UDA partition in the
-eMMC and fail.
+Add support for the QEMU 'virt' machine on the m68k architecture. The
+QEMU virt machine models a generic system utilizing Goldfish virtual
+peripherals and is capable of emulating various classic 68k CPUs.
 
-Enable SUPPORT_EMMC_BOOT at the tiboot3 stage to load the next boot
-binary from the active boot partition when in RAW MMC boot modes.
+Currently, U-Boot's m68k architecture support focuses on ColdFire
+variants. Expand this to include the classic M680x0 architecture,
+implementing the necessary exception vectors, startup code, and a
+bootinfo parser compatible with the QEMU interface. A driver for the
+Goldfish TTY is also added to enable serial console output.
 
-Fixes: 3b7893145e36 ("mach-k3: add eMMC FS boot support for am62[ap]")
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+The implementation has been verified on QEMU targeting the M68040 CPU,
+confirming successful hardware initialization and boot to the U-Boot
+command shell. Additionally, the CI configuration was verified locally
+using gitlab-ci-local "qemu_m68k_virt test.py", resulting in
+PASS qemu_m68k_virt test.py.
 ---
- configs/am62ax_evm_r5_defconfig | 1 +
- configs/am62px_evm_r5_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+Changes in v2:
+- Refactor Goldfish TTY driver to use priv data for the RX buffer and
+  ensure single-byte reads.
+- Rename arch/m68k/cpu/m68040 to arch/m68k/cpu/m680x0 to separate the
+  architecture family from the specific CPU model.
+- Introduce M680x0 Kconfig symbol and separate MAINTAINERS entries for
+  the architecture and the board.
+- Regenerate qemu-m68k_defconfig using make savedefconfig and add the
+  board to the documentation index.
+- Add a new patch to enable CI testing on GitLab and Azure Pipelines.
+- Update SPDX identifiers to GPL-2.0-or-later.
+- Sort headers alphabetically.
+- Fix tabs vs spaces.
 
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 64886986c4264a5d9272228e468f7057c195593a..68442947be2620cc7588503c32d40c532b42ffa3 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -82,6 +82,7 @@ CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_ESM_K3=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_SPL_MMC_SDHCI_ADMA=y
-diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
-index c9592d7b6c4cc037a886fe81385791269a825aa3..cf4282eac02d4381215f59285a2e0a89ba129e75 100644
---- a/configs/am62px_evm_r5_defconfig
-+++ b/configs/am62px_evm_r5_defconfig
-@@ -87,6 +87,7 @@ CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_ESM_K3=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
+v1: https://lore.kernel.org/u-boot/20251218185252.957388-1-visitorckw@gmail.com/
 
----
-base-commit: 56cac250b0839ddbad1311d3ca4231f532b5aadf
-change-id: 20251226-emmc-boot-fix-3705d27ac793
+Kuan-Wei Chiu (4):
+  serial: Add Goldfish TTY driver
+  m68k: Add support for M68040 CPU
+  board: Add QEMU m68k virt board support
+  CI: Add test jobs for QEMU m68k virt machine
 
-Best regards,
+ .azure-pipelines.yml                  |   4 +
+ .gitlab-ci.yml                        |   7 ++
+ MAINTAINERS                           |  12 +++
+ arch/m68k/Kconfig                     |  24 ++++++
+ arch/m68k/Makefile                    |   1 +
+ arch/m68k/config.mk                   |  10 ++-
+ arch/m68k/cpu/m680x0/Makefile         |   6 ++
+ arch/m68k/cpu/m680x0/cpu.c            |  77 +++++++++++++++++++
+ arch/m68k/cpu/m680x0/start.S          |  73 ++++++++++++++++++
+ arch/m68k/cpu/m680x0/u-boot.lds       |  47 ++++++++++++
+ arch/m68k/include/asm/bootinfo.h      |  31 ++++++++
+ arch/m68k/lib/Makefile                |   9 +--
+ board/emulation/qemu-m68k/Kconfig     |  12 +++
+ board/emulation/qemu-m68k/MAINTAINERS |   8 ++
+ board/emulation/qemu-m68k/Makefile    |   5 ++
+ board/emulation/qemu-m68k/qemu-m68k.c |  84 +++++++++++++++++++++
+ configs/qemu-m68k_defconfig           |  12 +++
+ doc/board/emulation/index.rst         |   1 +
+ doc/board/emulation/qemu-m68k.rst     |  38 ++++++++++
+ drivers/serial/Kconfig                |   8 ++
+ drivers/serial/Makefile               |   1 +
+ drivers/serial/serial_goldfish.c      | 104 ++++++++++++++++++++++++++
+ include/configs/qemu-m68k.h           |  18 +++++
+ include/goldfish_tty.h                |  18 +++++
+ 24 files changed, 602 insertions(+), 8 deletions(-)
+ create mode 100644 arch/m68k/cpu/m680x0/Makefile
+ create mode 100644 arch/m68k/cpu/m680x0/cpu.c
+ create mode 100644 arch/m68k/cpu/m680x0/start.S
+ create mode 100644 arch/m68k/cpu/m680x0/u-boot.lds
+ create mode 100644 arch/m68k/include/asm/bootinfo.h
+ create mode 100644 board/emulation/qemu-m68k/Kconfig
+ create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+ create mode 100644 board/emulation/qemu-m68k/Makefile
+ create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+ create mode 100644 configs/qemu-m68k_defconfig
+ create mode 100644 doc/board/emulation/qemu-m68k.rst
+ create mode 100644 drivers/serial/serial_goldfish.c
+ create mode 100644 include/configs/qemu-m68k.h
+ create mode 100644 include/goldfish_tty.h
+
 -- 
-Bryan Brattlof <bb@ti.com>
+2.52.0.358.g0dd7633a29-goog
 
