@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D4DE8FDB8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7851CE8FDB8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:12:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1603B83B63;
-	Sat, 27 Dec 2025 00:03:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DC6C483B03;
+	Sat, 27 Dec 2025 00:12:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SgDS+dyr";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="fAfAlVwd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 516A083A2D; Fri, 26 Dec 2025 19:57:19 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id 3BE7283B03; Sat, 27 Dec 2025 00:12:42 +0100 (CET)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 131858398D
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 19:57:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8862383AB8
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 00:12:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-34c1d84781bso8499437a91.2
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 10:57:17 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-c1e4a9033abso6472480a12.3
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 15:12:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766775435; x=1767380235; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NWcf9Ow6tbOoEwFtUbTuzfNjDjvi/vE7rpStlSjOqV0=;
- b=SgDS+dyrjj9WYuw+Tf0Yu9pvqO5v5WLG5hvJ5r1P5KN4x6Dr9jjn2s7X2jQQ8LVc+n
- C5844hoSdN78hLGNOmHQg9j5ql8gwQ4iszvE9lJayMmtnE+qwsEw8uNnlxkj2disMTbN
- o+geWZRVmV4Ycq2lXYfYJ5b5GX45VL3QWXHPdc29RcGvcAVKNvwyYfR7jE+4SbuwDrsu
- ysPEAX0fAIjfeYNpwnONuq34lLmuaT1cvm0WqJcFTJPG35ceVif7HWP0eeI7hnYJgQHO
- PTOD2aRO6EeI/gS6a/dNM4wPVcxw7s0XKtRpy2xQbDvKqSapuHqgFMEcgcr5Q7GhUxqp
- bfLw==
+ d=amarulasolutions.com; s=google; t=1766790758; x=1767395558;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mCQ+0dBLPkdhsfHQrwb+wknZ5AlmdnpxZRkcXgkg1oc=;
+ b=fAfAlVwdquf4V4yh+87PFi8Hzd3wKkLuLgh5CMp7oX2FHtwACX9KhjN7qBwruX8Ehy
+ Et0FoVt60i6YsD2ZwXfTGMDCdcCwuPZS8UrPGDHmDHBtU7ZaM6X0E72jzjKezA4/mqBf
+ zvjJcQfaGPuMLqGaTh0c18fr9vZmZ9iBmnfyk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766775435; x=1767380235;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NWcf9Ow6tbOoEwFtUbTuzfNjDjvi/vE7rpStlSjOqV0=;
- b=pWU4KjFY3Vu6sUcezYawXn6n7DuAL53jparyTy1vG5V/H77KJ/oQL8x+4KF3WDkFie
- 31x2BetEVfrMZVMaLTG7KK+kAE/s1BbflZ4Etc2TnkEuFh2WgfIx4D/SFrhrtpOkY9vl
- s7NyiKhFdeoXRJiNexATUebNpOSJc26swTPB6J3BTqzOjDWNCJTIFPXv8MgSK9VOTSk7
- L0aM1N7RPon0qEOkb58N7TihhqxFfsIMcMewkd4VFaY802W1Js7FPdfR2QOPQnzRSJ0D
- mh2Y37VAPT+15wj4laF68DfLdZ5wcUUHNnuk+jBIFqBPkmlSo1X+EzEivO8Nb6ajgzaW
- +d6w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9ehxWUq2Iv0w8zliyEAuNtClFdKD9zmvKebSp8MUeMWwrxdo4RJYFmKZfNUVJQZOm0i29C5k=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywliaf3AOS04roBQ3pAlxfVI15tUVD5YGByF7Y9zqv9ug326Qfg
- bQ7FBOH5krj9DyhHFfHur8aMzRMVuBkbte6H2X3tiDwUUBjnn++K/boV
-X-Gm-Gg: AY/fxX43Na8KvtT6FQq/hhKosaC17WCdF3YIBQY13H2O+qvi+GrJthlWnv5oq49T5ST
- TGR9sMB4quNWJ9Go+CSEiDzmxlBqG6lufyI95aT3t5WT5ppZ1jFesRAsr2gETmMFAHE1ok+nVJ5
- GtHbvHTsi1dflJxnit4OQmSenMtooYqbwdlXH8iAE3s77vfbSM6/BSldxgbwQfaWUJrd3cBabmZ
- qrByCJjsD4ZcEHUx1eIZ64Zuw9ZzdEgXrL82voIKlWNqTxJiLZQJRS6aGQiSc6s+pbz2dwFK5UI
- 9ykjYHWpEa3+sWLvKMC0HBZSNBtwEQtMwJKtX+WxB54+ATwVm/oeNux3zxUy9dfxKuJE6XQOrvf
- 1AOzp7aXwGCe4G9ezCdZBZbYCMfhbSXARvwzSycYkG36on3hJYxWH0FOb6oJ3Brg9h+zISOXvir
- o02nRRDrmxkLUnA0ORBs8U98Xq4/D0a261WoxMNbSfxD9EwpoPT6zo2Hzzqg==
-X-Google-Smtp-Source: AGHT+IE10MbZv8k8CKvMz5eML34IhOHPb+47uCE0/L8w+5lAaMzIVkLDEyMO9g7p9/BzX4vijVnoDw==
-X-Received: by 2002:a17:90b:134d:b0:34c:ab9b:76d6 with SMTP id
- 98e67ed59e1d1-34e921b9fb1mr19427152a91.25.1766775435401; 
- Fri, 26 Dec 2025 10:57:15 -0800 (PST)
-Received: from google.com (61-230-47-222.dynamic-ip.hinet.net. [61.230.47.222])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34e9224d9e5sm21101792a91.17.2025.12.26.10.57.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 10:57:14 -0800 (PST)
-Date: Sat, 27 Dec 2025 02:57:11 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, me@ziyao.cc,
- daniel@0x0f.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 4/4] CI: Add test jobs for QEMU m68k virt machine
-Message-ID: <aU7ah4cc1maMH1KU@google.com>
-References: <20251226175400.1154417-1-visitorckw@gmail.com>
- <20251226175400.1154417-5-visitorckw@gmail.com>
- <20251226180904.GF710860@bill-the-cat>
+ d=1e100.net; s=20230601; t=1766790758; x=1767395558;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mCQ+0dBLPkdhsfHQrwb+wknZ5AlmdnpxZRkcXgkg1oc=;
+ b=fcxJPclDs5OtaG3ld0eQ0SvEPnRSGmmjTNUzdfdl+ETyjZkipQ1x3zdfBHRpQTHF20
+ mujDMIrXIX6bS+EV8J48TZSkWQAliPaFqL2rtoLxFYJRuMjqS/IXLhmqSxRBMxVueiRp
+ ABOBlBdOo5FWgSqI8UKt07jlFmKSmxS+zv1aK+msTnU6MDgkkxhPrDkSONTRfPfi1Q8l
+ KvDE1XNvfVVtADgkk/aQ48t0E7mJcbiguxVg8VCSpv3cz0R+Mlw33JN9YAJAWBl2QMTq
+ 2fLQ/boCmkWtYD6lAEpyedfSOMMyDR0u1XuPR6wE2jbOwaHpGf/U5aQDTVk7FYU0MPp3
+ AiuQ==
+X-Gm-Message-State: AOJu0Yxy5hrBR6eHNBMV4cfV3RuCfRdrduJe7XTSonr2Re+XUTmorVnI
+ pM1Plq9RhpJ2JLjMVpwhc9awpa4GTcD67atLyF64yJ+GAF3rfZM9tOE1TlXYOBdoITDCG/koWPW
+ blEw1HqhbtwFiVBnp2cZskYPyznCl/IsvMiViTiglemj9wkUQ8YY5+tkosw==
+X-Gm-Gg: AY/fxX40UVF9ihLXizHYYjuIGz5GRv0xE3SeKfe8XJnp6V7N4z6BgAANjuXQjuJy1Cg
+ CRo022xt8lQwDog9Od34JqV1rhym45ZVuD5EWV2o/EKGF3nAwIdUh8Keup7n1qM9oW/JnTZNcrj
+ mtIIHDJMPjPBdGZgP8nnSDC2RSJMMx0DF9Rianm63JUUdMvh2apwCXeryV6ghWdeWGdN9Vgisww
+ p1ZPggqsX8qJtDI+wcRlxBA0GSZPyfuseViyBBy0RzkW0KX94oym93CU83WDjvQHSFexX0NUl0A
+ 8VzaMMUYFE4YDgaIbMh+TXw=
+X-Google-Smtp-Source: AGHT+IEOup3v1d/U+uodXAE+1FAGKeHjlfmLDXwzYhjIgxYseyAmD9G8GRlvzo6TQ6LzoBxBGee3O5bJx1lk5hHKIxg=
+X-Received: by 2002:a05:7301:df4a:b0:2ac:2c08:9017 with SMTP id
+ 5a478bee46e88-2b05ec6fdedmr13990622eec.28.1766790757879; Fri, 26 Dec 2025
+ 15:12:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251226180904.GF710860@bill-the-cat>
-X-Mailman-Approved-At: Sat, 27 Dec 2025 00:03:47 +0100
+References: <20251219202121.4180810-1-trini@konsulko.com>
+ <20251219202121.4180810-4-trini@konsulko.com>
+ <CAOf5uw=86_NwDM=96Jpz+5o4HDh628KTfhqjJJEmdLNEv55JOQ@mail.gmail.com>
+ <20251226185752.GG710860@bill-the-cat>
+ <CAOf5uwksV4-nCKKQbeJJR8-tUkgC_fKDYVKBG8K6qtC2zOfOjg@mail.gmail.com>
+ <20251226225100.GI710860@bill-the-cat>
+In-Reply-To: <20251226225100.GI710860@bill-the-cat>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 27 Dec 2025 00:12:26 +0100
+X-Gm-Features: AQt7F2oj7zvIVti_AZvnlXyJAQL5vkZ7Ut0r65QfQhdBTDNA3-UjIRj5ePAVcNo
+Message-ID: <CAOf5uwmsdAfR2p77APbCEWzds-cdpQjx3rbPXPi1C8pcy8Nr4g@mail.gmail.com>
+Subject: Re: [PATCH 3/3] dm: core: Default to using DEVRES outside of xPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,56 +97,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi
 
-On Fri, Dec 26, 2025 at 12:09:04PM -0600, Tom Rini wrote:
-> On Fri, Dec 26, 2025 at 05:54:00PM +0000, Kuan-Wei Chiu wrote:
-> > Enable CI testing for the newly introduced QEMU m68k 'virt' board on
-> > both GitLab CI and Azure Pipelines. This ensures the new M68040
-> > architecture support is built and booted correctly in the emulated
-> > environment.
-> > 
-> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> > ---
-> > Changes in v2:
-> > - New patch to add CI testing jobs for gitlab and azure pipelines.
-> > 
-> > Note: This patch depends on a corresponding patch to the
-> > u-boot-test-hooks repository to provide the necessary QEMU
-> > configuration: "travis-ci: Add config for QEMU m68k virt machine"
-> > 
-> > The gitlab CI job has been verified locally using gitlab-ci-local tool
-> > with a passing result. Azure Pipelines has not been verified.
-> > 
-> >  .azure-pipelines.yml | 4 ++++
-> >  .gitlab-ci.yml       | 7 +++++++
-> >  2 files changed, 11 insertions(+)
-> > 
-> > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > index e4695f1c55b..41bba8ed0f1 100644
-> > --- a/.azure-pipelines.yml
-> > +++ b/.azure-pipelines.yml
-> > @@ -518,6 +518,10 @@ stages:
-> >            TEST_PY_ID: "--id qemu"
-> >            TEST_PY_TEST_SPEC: "not sleep and not efi"
-> >            OVERRIDE: "-a CONFIG_M68K_QEMU=y -a ~CONFIG_MCFTMR"
-> > +        qemu_m68k_virt:
-> > +          TEST_PY_BD: "qemu-m68k"
-> > +          TEST_PY_ID: "--id qemu"
-> 
-> I see why you set TEST_PY_ID but that's only used in this manner for
-> platforms which can be real or virtualized, for the qemu targets we just
-> omit that (and then name the u-boot-test-hooks files to be "_na" or can
-> just omit that part. Thanks for adding this!
+On Fri, Dec 26, 2025 at 11:51=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Fri, Dec 26, 2025 at 08:55:40PM +0100, Michael Nazzareno Trimarchi wro=
+te:
+> > Hi
+> >
+> > On Fri, Dec 26, 2025 at 7:57=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
+rote:
+> > >
+> > > On Fri, Dec 26, 2025 at 07:28:43PM +0100, Michael Nazzareno Trimarchi=
+ wrote:
+> > > > Hi Tom
+> > > >
+> > > > On Fri, Dec 19, 2025 at 9:21=E2=80=AFPM Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > >
+> > > > > The devm alloc functions that we have may follow the Linux kernel=
+ model
+> > > > > where allocations are (almost always) automatically free()'d. How=
+ever,
+> > > > > quite often we don't enable, in full U-Boot, the corresponding au=
+tomatic
+> > > > > free. This in turn leads to memory leaks. Rather than manually tr=
+acking
+> > > > > allocations and implementing frees, rework things so that we foll=
+ow
+> > > > > expectations now and enable the DEVRES functionality to manage fr=
+ees.
+> > > > >
+> > > > > This turns DEVRES from a prompted symbol to a symbol that must be
+> > > > > select'd, and we now remove our non-managed alloc/free functions =
+from
+> > > > > outside of xPL builds.
+> > > [snip]
+> > > > > @@ -279,8 +280,8 @@ config DEVRES
+> > > > >           released whether initialization fails half-way or the d=
+evice gets
+> > > > >           detached.
+> > > > >
+> > > > > -         If this option is disabled, devres functions fall back =
+to
+> > > > > -         non-managed variants.  For example, devres_alloc() to k=
+zalloc(),
+> > > > > +         This option is disabled in xPL phases anddevres functio=
+ns fall back
+> > > >
+> > > > Fix this typo
+> > >
+> > > OK.
+> > >
+> > > [snip]
+> > > > Can you please in the commit message a concrete example on what thi=
+s
+> > > > commit takes care of?
+> > > > In short expand here:
+> > > > " in full U-Boot, the corresponding automatic free. This in turn le=
+ads
+> > > > to memory leaks."
+> > >
+> > > Sure. So for example:
+> > > commit 00e1fed93c8c3e4c9037741ea1b70a9e693a6e65
+> > > Author: Francois Berder <fberder@outlook.fr>
+> > > Date:   Tue Nov 11 11:30:19 2025 +0100
+> > >
+> > >     firmware: ti_sci: Fix memory leaks in devm_ti_sci_get_of_resource
+> > >
+> > >     - Fix temp memory leak
+> > >     - Free memory during error handling
+> > >
+> > >     Signed-off-by: Francois Berder <fberder@outlook.fr>
+> > >
+> > > Is needed (I'd have to re-read the threads to see if in whole or in
+> > > part) because DEVRES is optional today. And barring
+> > > drivers/core/devres.c doesn't work the way it's documented and expect=
+ed,
+> > > the normal unwind path will eventually say "Ah, and devm_kfree these
+> > > devm_kmalloc'd areas". This was part of either the discussion for tha=
+t
+> > > patch, or another one of Francois' patches adding devm_kfree() calls =
+to
+> > > devm_kmalloc()'d areas.
+> >
+> > As far as I understand the devres_release_probe should then free the re=
+sources
+> > allocated to dm_device.
+>
+> Right. And without DEVRES enabled we don't have this match between alloc
+> and free, which is unexpected by most users of devm_kmalloc/etc as that
+> path is not optional in the kernel.
+>
 
-Thanks for the quick feedback!
-I'll fix the TEST_PY_ID usage.
+Please add in your commit, including the typo
 
-Is there a preferred waiting period (like the 24 hr rule in Linux
-netdev) before I send v3? I can send the fix immediately, but I want to
-make sure I'm following the proper etiquette, especially during the
-Christmas holidays.
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-Regards,
-Kuan-Wei
+> --
+> Tom
 
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
