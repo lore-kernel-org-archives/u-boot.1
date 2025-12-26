@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39ABDE8FDA6
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 10:22:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA89E8FDA5
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 10:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 983768412A;
-	Fri, 26 Dec 2025 11:22:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 04B93841C2;
+	Fri, 26 Dec 2025 11:29:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="g99NV5q7";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aP6afwaq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C4648415E; Fri, 26 Dec 2025 11:22:54 +0100 (CET)
+ id B6D51841CF; Fri, 26 Dec 2025 11:29:43 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22B1883B95
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 11:22:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD09783B95
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 11:29:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 20C944036C;
- Fri, 26 Dec 2025 10:22:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC695C4CEF7;
- Fri, 26 Dec 2025 10:22:45 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 3865442088;
+ Fri, 26 Dec 2025 10:29:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE142C4CEF7;
+ Fri, 26 Dec 2025 10:29:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766744569;
- bh=Lnad35AYdtUj5qm+dEh6VThBL93e26m6fJLeppJJCmI=;
+ s=k20201202; t=1766744979;
+ bh=RNIMsOTwWJ/XhJRYF3i+cR5K/ht6+jP2nZnhTcYQhwk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=g99NV5q7FJ1hnPrp7WUhT0jLsIPP4PbrNohGi6yBcOC5P5uJtKRerbIiQ4TCsUUpA
- aobtKhvv+8FrN6MbKstLvIBg0xOcEdNMf1cCXfe8VDTieryAuTN6axhTEexUS11sRH
- 3LKHwgNwlyEj8Q6IUcTQcx9YoMyLSW2MaowgJKBiDIs/tFHU/0TK/pnQdnNNxr+bUf
- 2VBCza4DK1llUuIR3xpXuXTmW4jae5AFuEy/lAmFXuTniTTGG9GQDOQ2vacxnrUwcs
- AlZwo2HlsKwxhVoKnJAtKakywOiwRd6Ma3EtwkZnNgijeiPnv9IxoLRySjf3gy67TM
- Ih9mC7TKWy1Kw==
-Date: Fri, 26 Dec 2025 15:52:41 +0530
+ b=aP6afwaqMECeu3J3WBWATmHsb4Q8MB7EIebem9b7jpjce7KvHHE49vYPy9wsj3HHH
+ +vNyJ7PWhIxQDxwhmPM5LQ8V2RcpnjeVyztB6Bw2Q6TUB9E1VbXgKB586oqJvYUgm7
+ kZzUrXqJVT1VGUBtxy6SkQ3cq/qFI7Y9gexoS5CdjjTW22ynZgab3dRfV+ZqY2j7I9
+ MjZb8GW7LWRktCPytWjVMM15BVrVE5uxnAvxn7UgXIxjwerDw7Aa0gOA/lslPt7e4U
+ MWb/6GIdtUTgbLGK9fk8TQWtJFwwYOO2Qv3zRF675UavYctGRN3AsHfqiWcYGYF+1Y
+ JEsAHRZXk3M7w==
+Date: Fri, 26 Dec 2025 15:59:30 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: trini@konsulko.com, aswin.murugan@oss.qualcomm.com, lukma@denx.de,
  seanga2@gmail.com, casey.connolly@linaro.org,
  neil.armstrong@linaro.org, alexeymin@postmarketos.org,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v1 1/3] arm: dts: qcs615-ride: Remove unsupported USB
- clock reference
-Message-ID: <aU5h8TrvG7GALEMc@sumit-xelite>
+Subject: Re: [PATCH v1 3/3] phy: qcom: qusb2: Add QCS615 QUSB2 PHY support
+Message-ID: <aU5jiji7JN0AItZZ@sumit-xelite>
 References: <20251114063804.3835132-1-balaji.selvanathan@oss.qualcomm.com>
- <20251114063804.3835132-2-balaji.selvanathan@oss.qualcomm.com>
+ <20251114063804.3835132-4-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251114063804.3835132-2-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20251114063804.3835132-4-balaji.selvanathan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,45 +72,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 14, 2025 at 12:08:02PM +0530, Balaji Selvanathan wrote:
-> Remove GCC_USB3_PRIM_CLKREF_CLK from the USB controller node as it is
-> not implemented in the U-Boot clock driver. Keep only the supported
-> clocks to avoid clock warnings during boot.
+On Fri, Nov 14, 2025 at 12:08:04PM +0530, Balaji Selvanathan wrote:
+> Add support for QCS615 QUSB2 PHY by introducing platform-specific
+> initialization table and register layout. The implementation reuses
+> the IPQ6018 register layout and defines QCS615-specific tuning
+> parameters for proper USB PHY operation.
+> 
+> This change is based on the upstream Linux kernel implementation:
+> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/phy/qualcomm/phy-qcom-qusb2.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b0
+>
 
-Rather than overriding DT, why can't this be implmented in U-Boot? And
-how why it isn't an essential clock for U-Boot operation?
+This kernel reference doesn't contain qcs615 specific implementation.
+Once you update that, feel free to add:
+
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
-> 
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  arch/arm/dts/qcs615-ride-u-boot.dtsi | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
+>  drivers/phy/qcom/phy-qcom-qusb2.c | 38 +++++++++++++++++++++++++++++++
+>  1 file changed, 38 insertions(+)
 > 
-> diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> index 68fffc70fcb..d8af124cc27 100644
-> --- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> +++ b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> @@ -11,4 +11,18 @@
->  		      <0x0 0xc0000000 0x0 0xc0000000>,
->  		      <0x1 0x80000000 0x1 0x00000000>;
->  	};
-> +	soc@0 {
-> +		/* Remove GCC_USB3_PRIM_CLKREF_CLK from usb_1 node to avoid U-Boot clock warnings */
-> +		usb_1: usb@a6f8800 {
-> +			/delete-property/ clocks;
-> +			/delete-property/ clock-names;
-> +			/* Keep only the clocks that are implemented in U-Boot clock driver */
-> +			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
-> +				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
-> +				 <&gcc GCC_AGGRE_USB3_PRIM_AXI_CLK>,
-> +				 <&gcc GCC_USB30_PRIM_SLEEP_CLK>,
-> +				 <&gcc GCC_USB30_PRIM_MOCK_UTMI_CLK>;
-> +			clock-names = "cfg_noc", "core", "iface", "sleep", "mock_utmi";
-> +		};
-> +	};
+> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+> index d98f6108e69..a5d724eebd4 100644
+> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
+> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
+> @@ -176,6 +176,19 @@ static const unsigned int sm6115_regs_layout[] = {
+>  	[QUSB2PHY_PORT_POWERDOWN] = 0xb4, [QUSB2PHY_INTR_CTRL] = 0xbc,
 >  };
+>  
+> +static const unsigned int ipq6018_regs_layout[] = {
+> +	[QUSB2PHY_PLL_STATUS] = 0x38,
+> +	[QUSB2PHY_PORT_TUNE1] = 0x80,
+> +	[QUSB2PHY_PORT_TUNE2] = 0x84,
+> +	[QUSB2PHY_PORT_TUNE3] = 0x88,
+> +	[QUSB2PHY_PORT_TUNE4] = 0x8C,
+> +	[QUSB2PHY_PORT_TUNE5] = 0x90,
+> +	[QUSB2PHY_PORT_TEST1] = 0x98,
+> +	[QUSB2PHY_PORT_TEST2] = 0x9C,
+> +	[QUSB2PHY_PORT_POWERDOWN] = 0xB4,
+> +	[QUSB2PHY_INTR_CTRL] = 0xBC,
+> +};
+> +
+>  static const struct qusb2_phy_init_tbl msm8996_init_tbl[] = {
+>  	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
+>  	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xb3),
+> @@ -189,6 +202,19 @@ static const struct qusb2_phy_init_tbl msm8996_init_tbl[] = {
+>  	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
+>  };
+>  
+> +static const struct qusb2_phy_init_tbl qcs615_init_tbl[] = {
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xc8),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xb3),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x83),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0xc0),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9f),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
+> +};
+> +
+>  static const struct qusb2_phy_init_tbl qusb2_v2_init_tbl[] = {
+>  	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_ANALOG_CONTROLS_TWO, 0x03),
+>  	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CLOCK_INVERTERS, 0x7c),
+> @@ -248,6 +274,16 @@ static const struct qusb2_phy_cfg sdm660_phy_cfg = {
+>  	.autoresume_en = BIT(3),
+>  };
+>  
+> +static const struct qusb2_phy_cfg qcs615_phy_cfg = {
+> +	.tbl = qcs615_init_tbl,
+> +	.tbl_num = ARRAY_SIZE(qcs615_init_tbl),
+> +	.regs = ipq6018_regs_layout,
+> +
+> +	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
+> +	.mask_core_ready = PLL_LOCKED,
+> +	.autoresume_en = BIT(0),
+> +};
+> +
+>  static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
+>  	.tbl = qusb2_v2_init_tbl,
+>  	.tbl_num = ARRAY_SIZE(qusb2_v2_init_tbl),
+> @@ -453,6 +489,8 @@ static const struct udevice_id qusb2phy_ids[] = {
+>  	{ .compatible = "qcom,qusb2-phy" },
+>  	{ .compatible = "qcom,qcm2290-qusb2-phy",
+>  	  .data = (ulong)&sm6115_phy_cfg },
+> +	{ .compatible = "qcom,qcs615-qusb2-phy",
+> +	  .data = (ulong)&qcs615_phy_cfg },
+>  	{ .compatible = "qcom,sdm660-qusb2-phy",
+>  	  .data = (ulong)&sdm660_phy_cfg },
+>  	{ .compatible = "qcom,sm6115-qusb2-phy",
 > -- 
 > 2.34.1
 > 
