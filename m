@@ -4,109 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0686E8FDA7
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 14:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D8D9E8FDB0
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 17:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3329A839E4;
-	Fri, 26 Dec 2025 15:57:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 59E92839AC;
+	Fri, 26 Dec 2025 18:44:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cnGdNTz9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XxrlKP/E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50D7C839E8; Fri, 26 Dec 2025 15:57:55 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 951D8839AC; Fri, 26 Dec 2025 18:44:28 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2335A83990
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 15:57:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B4A283990
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:44:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c78d30649aso4772260a34.2
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 06:57:53 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-64d1ef53cf3so6486019a12.0
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:44:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766761072; x=1767365872; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=evFT6Tlsazc8P+HLjoMqis5U15Tux5EPkelX3GAFCu4=;
- b=cnGdNTz970AGDf/g8MBGLmjI0hK+COUxNNhZCME2bo9rs1PwzxG9h/GfgLURo1IUki
- fwscb+e4ls7rmqKiWuppEGa4Hq70dliWhku54uL2F8HKi/leSOVbe3rCrv5JbIoi3Y86
- fkH4RLL06kU34TJoWgF6ntztIaP8laKDgVOis=
+ d=chromium.org; s=google; t=1766771065; x=1767375865; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xkILvB/m5iZwZPhTgUOxp2H6xzbjTkFGKr/cf/SEk0U=;
+ b=XxrlKP/EuiP+wwKb2fDI87GHeaFCXy2z4G60AMl+1fOhP4A21EzQj9h9fpbwzAtcxm
+ mxn7AaJDQySDQY3L3KveOFeH2Ey92srzrTBZFZkqEiE5wABC4Y+2SPNZq04mo/0NbPsP
+ XaEQvEsIKqU25F13sC9ghfBd4gyZGl8paCOuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766761072; x=1767365872;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=evFT6Tlsazc8P+HLjoMqis5U15Tux5EPkelX3GAFCu4=;
- b=aZUwBNo+5C7MdxZxRCzSV6bjaMWUmYIQgFPK51Dbakcmc+WO/n2Ky5h5//JrBN5vvm
- zbdrok+FjtmEbL05HHzHmJiTlUkUUNxerw0hiqmlOstbjXCcNjGMe0VXLNFlU+iVdgkR
- c/X8Zi29hr/73Wb5yvB0/oEIp2ngezrt8Vl5kJaSqvx/SQ3GgjUvONxVfK0zKxS3Y7YR
- PipRmVBlJAqnXnS8s18cctafKpFng5g2pGUY37sUxrYhthZx8zk2cWa1PHo9whwaMeAi
- oi9i5GrRl8XUTNNE7D4JE7vpZj1720pfrG0NuuUvZ4Ilu8IyIx9gMpY7pG9OeoYHlyDq
- 8FWw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzrJW3DDy0y7am72ojkGmWnVuMZPoxzyaTHaKTy0Bnv/mOA5TC+4rw6jnVLS5A7dfFDDaXAUg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRaH4ro8u5OY3GToCXvn0bB/CHY96t/PpqOXebqtC+S/2sbr4H
- 5mR/jgWTW1M2xBnuy4B8vGbjypMpEo5iLT9N1Qz7YVm1EY5tFkXd0++tNm6zcHIzr4E=
-X-Gm-Gg: AY/fxX6oo/PyD+V/BJrpamrHI57xnJkC5MMEMRbh8NoIFWagUQdGaLlBZ67ErQaAT2s
- Rr28uz3AVG6Zqu03Sh8W8TuXV+QVWnCmaHSY9bdcF7wKbchJ2MUEonNVUUPWaFNa5HzQUandmog
- 92bxvE6siAT6iM9b5adGKczFTVECcnG3/KWJdigQsDCZYo/zcvLX0qaFJgIXqMssF5x8rncHNwH
- OJ5ahVxrUgfJ7ubCRPZ/2m+3mW9QxYY6G3cqELQZQhYt4Uj/j/ZNC0bzx62y84/AtjGsWvNVcn5
- sgjr+Ds67owQKeDggDATpfCX09cGR1UgSp6nkmXgoO0DhKqHICaJRpT0+HFsRiTXY6irYJGW8B0
- w0uWoXWy3iu6b0HjRUEfSupbOCKVTeRA4RBpxRckNwUcbJWjNOaJ6ISfpGXbnPOOYoXxhe3qool
- ZAKDw5ETYS/moSSKlFjeHoOrRVBmIqk2nUdvRQtsvq44fkSzospUWtKI0nQWyp
-X-Google-Smtp-Source: AGHT+IGlXw6upzPJaqsuDF7L+zT18R7kkxzxIoIjK8jEpM1GFFqzq8csx3grwWiifxxjRYKJpYBX6w==
-X-Received: by 2002:a05:6830:34a8:b0:7c7:6063:8e02 with SMTP id
- 46e09a7af769-7cc668a4ba5mr12540798a34.6.1766761071869; 
- Fri, 26 Dec 2025 06:57:51 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667d7f1dsm14994165a34.15.2025.12.26.06.57.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 06:57:51 -0800 (PST)
-Date: Fri, 26 Dec 2025 08:57:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: alice.guo@oss.nxp.com
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Jagan Teki <jagan@amarulasolutions.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Heiko Schocher <hs@nabladev.com>, Alexander Dahl <ada@thorsis.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v2 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
- controller
-Message-ID: <20251226145748.GD710860@bill-the-cat>
-References: <20251226-xspi-v1-0-4bb116750dba@nxp.com>
- <20251226-xspi-v1-1-4bb116750dba@nxp.com>
+ d=1e100.net; s=20230601; t=1766771065; x=1767375865;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xkILvB/m5iZwZPhTgUOxp2H6xzbjTkFGKr/cf/SEk0U=;
+ b=R9zMpk9EYGir7X6znvocQkSNl+JwCv2DIEgWAp7MLdd84ABQ/85tZgeZm97da4aVqf
+ Xw2vyV3a7xxPz/2hXJQJJUq0Z8430GyrIU2xDFl9KE7SfPHuV+1cUvUsWQTJ4bKIirAI
+ QeiV0vmGle6GF9B+7i8HcH3/BJ4WBUbGLwLnHBdgyLCC47Rcz0Cr22XsgSFnupZKwnD5
+ fdkv08WWUvnL8dPnR4ZrydAzHhHObhHkZfW02VcHKJS+U9uT62S6UCOfCOlGx+eDZufi
+ T9GXnXLcyDRmgoTFC2ZvSpH1JjwLWHDD02ed5kAVS51uQkp/LWx4+Y+0EBnFBI+U4gee
+ OlQg==
+X-Gm-Message-State: AOJu0Yxz9omGbz8kfR4EGBHFXzS/Jw+tApmgL0wqYNtd0IEUBBrmzhuQ
+ HG/P34tWvIHyRNp13KdsmWa9cpVUOujoUjRQcivYTc2rmkJ+WCFGAkyGfV/MsdHFpQl37HqDbU1
+ 8aCvyUssd3p+rrtvZHWdr4+qdsoFnZd+KV705qmlt
+X-Gm-Gg: AY/fxX5XQnyHKfFZ1Jpvvj006FXTO4y0G41/jXxe8QRXhiJBFebFRennLL8jPe9S+xc
+ tJIwgx21BEwX2ZfGudpFQDV0SotLaO/NJJ0V/5uTAbmylw1aIt2YIge5moR1JbGElqmdWYDzy/y
+ QTGXsq38uqP0Qsiw9DuaK/nq8MT+dej8sV1VjV8iGvcKOJ83LJP14w33SsZTB30Af1pf4MGR5V2
+ WYevLMuXQie3AmdsvAxI3JR7gzDcHukQS3i7Y1S/YdmnzyQ3fxKenz/Q+5qnxbVD+dkZsS9faP4
+ uVqc
+X-Google-Smtp-Source: AGHT+IGjnbdws0T7/HFsoaOGmQXwKDU2urZjcMtLDuB3XCQfOQLr348B6YOPxc5mhfz48+n2MlqxQn73hyqKeV29X0M=
+X-Received: by 2002:a17:907:d0c:b0:b73:9280:2e7 with SMTP id
+ a640c23a62f3a-b80371a3eacmr2314608366b.34.1766771065419; Fri, 26 Dec 2025
+ 09:44:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vjBfjkIOhHfzAhA0"
-Content-Disposition: inline
-In-Reply-To: <20251226-xspi-v1-1-4bb116750dba@nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251219202121.4180810-1-trini@konsulko.com>
+ <20251219202121.4180810-4-trini@konsulko.com>
+ <CAFLszTjyO9d+QzwC=9t-cJ1Kx9oNcNSD3f7T+11zWwD-PJeYag@mail.gmail.com>
+ <20251226145347.GB710860@bill-the-cat>
+In-Reply-To: <20251226145347.GB710860@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 26 Dec 2025 10:44:16 -0700
+X-Gm-Features: AQt7F2rjGzT5UrnJSUu8ixF7qGmMz3QpcvX-VeJhDavAmi3IaJv2bkkayTC6s7g
+Message-ID: <CAFLszTg3RBxzLG_iom6ogCSFSxoK9=HMxnwtKXuC35K6J+LRPw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] dm: core: Default to using DEVRES outside of xPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,73 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---vjBfjkIOhHfzAhA0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 26 Dec 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Dec 24, 2025 at 09:23:59AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 19 Dec 2025 at 13:21, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > The devm alloc functions that we have may follow the Linux kernel model
+> > > where allocations are (almost always) automatically free()'d. However,
+> > > quite often we don't enable, in full U-Boot, the corresponding automatic
+> > > free. This in turn leads to memory leaks. Rather than manually tracking
+> > > allocations and implementing frees, rework things so that we follow
+> > > expectations now and enable the DEVRES functionality to manage frees.
+> > >
+> > > This turns DEVRES from a prompted symbol to a symbol that must be
+> > > select'd, and we now remove our non-managed alloc/free functions from
+> > > outside of xPL builds.
+> >
+> > Most of the time boards don't enable DM_DEVICE_REMOVE to save code
+> > size.
+>
+> I'm not talking about DM_DEVICE_REMOVE anywhere in this series.
 
-On Fri, Dec 26, 2025 at 10:27:40PM +0800, alice.guo@oss.nxp.com wrote:
-> From: Alice Guo <alice.guo@nxp.com>
->=20
-> Add new driver to support NXP XSPI controller for NOR and NAND flash.
-> XSPI controller also uses a programmable sequence engine to provide
-> flexibility to support existing and future memory devices. It supports
-> single, dual, quad, octal modes of operation.
->=20
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
->  MAINTAINERS            |   1 +
->  drivers/spi/Kconfig    |   7 +
->  drivers/spi/Makefile   |   1 +
->  drivers/spi/nxp_xspi.c | 881 +++++++++++++++++++++++++++++++++++++++++++=
-++++++
->  drivers/spi/nxp_xspi.h | 705 +++++++++++++++++++++++++++++++++++++++
->  5 files changed, 1595 insertions(+)
->=20
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6ce0bbce13d..262cd85b1f4 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -322,6 +322,7 @@ F:	doc/imx/
->  F:	drivers/mailbox/imx-mailbox.c
->  F:	drivers/remoteproc/imx*
->  F:	drivers/serial/serial_mxc.c
-> +F:	drivers/spi/nxp_xspi.c
->  F:	include/imx_container.h
-> =20
->  ARM HISILICON
-> diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-> index 2afb15fff1e..f703c880563 100644
-> --- a/drivers/spi/Kconfig
-> +++ b/drivers/spi/Kconfig
-> @@ -406,6 +406,13 @@ config NXP_FSPI
->  	  Enable the NXP FlexSPI (FSPI) driver. This driver can be used to
->  	  access the SPI NOR flash on platforms embedding this NXP IP core.
-> =20
-> +config NXP_XSPI
-> +	bool "NXP XSPI driver"
-> +	depends on SPI_MEM
-> +	help
-> +	  Enable the NXP External SPI (XSPI) driver. This driver can be used to
-> +	  access the SPI NOR/NAND flash on platforms embedding this NXP IP core.
+Without that, devres_release_all() is never called. How are you
+expecting things to be freed?
 
-Does this driver build on sandbox? If yes, great, if not, this needs
-more specific "depends on" logic.
+>
+> > We certainly don't unbind devices. A memory leak implies some
+> > sort of problem, but if we are booting the OS, all the memory is
+> > 'freed' by that process.
+> >
+> > What problem are you solving here? It is missing from your commit.
+>
+> The problem being solved is stated in the commit message.
 
---=20
-Tom
+Can you elaborate a bit? I see a vague reference to memory leaks, but
+you should explain the problem. Are you trying to free memory before
+booting an OS? Are you worried about devices being repeatedly probed
+and removed, thus causing a memory leak within U-Boot? It's just too
+unclear.
 
---vjBfjkIOhHfzAhA0
-Content-Type: application/pgp-signature; name="signature.asc"
+Depending on what you are trying to achieve, we should perhaps make
+DEVRES depend on DM_DEVICE_REMOVE
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaU6ibAAKCRAr4qD1Cr/k
-ClHfAQCnMG+iigZk07wh/aPDK8wUvWeMDnpo0UiBmL9Yrj2k9AEAhBVSUnoZnkGJ
-lHGtWS7RIjCpZJz6fik0s8EK86IBWgM=
-=/ewh
------END PGP SIGNATURE-----
-
---vjBfjkIOhHfzAhA0--
+Regards,
+Simon
