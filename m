@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4AFE8FDBE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB425E8FDB8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Dec 2025 23:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DAB783AAC;
+	by phobos.denx.de (Postfix) with ESMTP id B7BCE83AED;
 	Sat, 27 Dec 2025 00:03:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DnlmhbW0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dmfgXI8H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B55A5839FA; Fri, 26 Dec 2025 18:54:23 +0100 (CET)
+ id D77E8839FA; Fri, 26 Dec 2025 18:54:26 +0100 (CET)
 Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
  [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1DDF838FA
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 684E5838FA
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
 Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7f651586be1so3469590b3a.1
- for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:20 -0800 (PST)
+ d2e1a72fcca58-7d26a7e5639so8339423b3a.1
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 09:54:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766771659; x=1767376459; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=96IPq7fsTIUkq85KHkhd42Z+/5jipLFzjgx5YF6xDVU=;
- b=DnlmhbW0cTWItEBhGquFeC8r9bZjwoi0spdj1nEIOBR0oDHivbBZMCp6tKxHv8mRQk
- i9EMRCFZ7aDAWGMYJU6SgDZwmI+QoG8cygS/koafq2TXPp+LUfXE2nltUVXDdjAq4RtL
- 7A6d2tKhNwU7DEHdb1MeS6ZqVeLVXVxUbqc5bQmhGMprQFssnupWLDFe0grcMFO9KQEL
- AmztZ5gcIm9TujkrKkEnOQCApZwWhT+GO9pRjIBPNex0pEOSC9bwiJ8dSpiuDc74zGy5
- /qWBY6uxzVmQhZpij9cZ2JDkaV2Cx1bFSBPJSkQLuJTv73fVLXHnnw60smclynyAMzN7
- GwSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766771659; x=1767376459;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1766771663; x=1767376463; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=96IPq7fsTIUkq85KHkhd42Z+/5jipLFzjgx5YF6xDVU=;
- b=dYb+UF28fYZsffDPJ/TxkV1AZ073uFRyWUSeFRNeQ1QtG2RS7mYWzzAngPLl81a9QD
- 5M3958iezXLL8yl7mDPxIg1aaTUl19CPM3xtEOhGX8jLwZRLFf+8Lw773N0CXXhRVkMy
- ic69WkYCQxNRU/WCWoGACT3tCRHx8r48QwRBd2aMhpXj5XG9htjjS9eSPVaIwNhKxQS4
- NHkkZE0GaltFbXvbpwz93xjpyq+/MugiYzHBwfOm3+IW7APVsz2EYBCDeCQNAQvDpECT
- XNEMciQyBSUiCMDuLITxVZO8OkmkTjoheQEECafK3Nth8JP2IxPRGlCMViL9Sdc2Le1r
- pa2g==
+ bh=PJRhgZhJco4Dbtut/rPo88zSQmgZXi8DS476u4qxSdc=;
+ b=dmfgXI8H/uCFBJ643UbDzRMelM0EePIEpNSUirOCCYpAp8ro4+AFvAYtEVmK9iTSvS
+ 4sjgi6+ok/XWIPTYLffsdTFbD0oChl1VuDWPubo2ujzK4Tr5y+3hDvckZgJQbkS7p1bL
+ 5PmvzeXyI+LgF6uoBLl1HvRmyTX9Xw9S6TT5HULx2im0fdm7e59szW+UR/4GA9QxHQzB
+ 9fA6B0ttrGdyFGXCPkemUGX+SsC80N5x0AnINEKwqyWUj9rNO1e2qAlfkIw/Mqpr2G5y
+ R3qY5zJCePAt02bfES29kXuoLy5JQgpxLbWS80cSdZFedz04rGDTl4EHPI/LUkJCI/gu
+ lpZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766771663; x=1767376463;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PJRhgZhJco4Dbtut/rPo88zSQmgZXi8DS476u4qxSdc=;
+ b=AntHNFBif2gJ78tueTK5/8RfGgCMHZwyMOTJ6J3SYkStTHHRJmzcFd3GJcLCt96vsM
+ /0RQ2/0ET5HUfNjHsuXttiwj55J7bu+fQtNRCCjwxDaG4iXW3U9mQ93ANyV5YRhuI7NI
+ Enqs06lRhTj1hiUUsf62Hqhm3a8A1bacW6vi9TpA0TmyKJE0OcjjyseuFu/+nZ7TL1kq
+ Xy2dj8k/pzhmdIsanCcZt2cGmz0jeb5tKlcJ/sJ85f7tjJS5acWDhNHyTikcn7/fpx9w
+ wFvkbK9N4L5DqpZrv2gjl+LLlxUo6mcANC2gb0Fqvhr4aMQ4gZ2mx7Kzi4454g9kGICC
+ VvVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3Um7ZovGJEdVme/8WxEXZJJQ9aC8gFkYPq79ISVJYiaReSJN+70XS3PKtOJ6criH8s6JfOX0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5vc+CnzGuIXpz+bdYdr1hfQlXe97NypGCZEUIEiVfIasDpffq
- XfIum1BMXkXoBpdcKjd57Lqnjq+obtx6oa39tn8xqtQZ9XApfIE5pAFJ
-X-Gm-Gg: AY/fxX4Oe/gSqEjFTaJU9A3IwguswvABFxqkdL0472WEA2d/+pm6CvSgsEhtUkU9Mgp
- pGjnIwAUW5/+77ltPLj0+/lQs9XDDuhxJoMKCx2SwqL5bqzds/E8YpzKetMAD6LzOyRNjLjlTOO
- VprTjzyk/uKncH1upWRWRafxv6sMtSABAqC105QAaymne1XevGCtdFZZ31HgiCi7YwRdoGyE9bg
- MaynuYoqCLp6DsUDqO5/naMYH0zr4uMuqI7wnkVsLbwEESwg4nv7KjkVf3oeBCrSJ4k+4iceU8F
- 522mN9+c+Tg0LbKpKlyPGxCaVUDNJeOICH0Zsnv20mQQZFu2xFIYqMPhq4rlTl4yu/OqzoTwQEY
- M7Bu5TADJFu6gZflDsd37RYc0MLvhbiRJq5pjY4qHxo3Cu4PyHTIdeIHDVXZCFZsEVXM86eu//q
- +R4THFD9BY3SFl+IUVEXfl+EPMUwZNTCvNZE2Gywh7XHUyk//SKJpkZbwu/ioUug2oGScMKU0gK
- 054LaePr47X1ap3VE88vBbGZutIyJ+R
-X-Google-Smtp-Source: AGHT+IE19CA1FoAC0K/G0KcV7bUJNI2LAGcm2E/ortIqvwyJTGRm468OEGWY+bCtkv24XErUBko8DQ==
-X-Received: by 2002:a05:6a00:944e:b0:7e8:3fcb:9afd with SMTP id
- d2e1a72fcca58-7fe0d79eabamr23940351b3a.19.1766771659188; 
- Fri, 26 Dec 2025 09:54:19 -0800 (PST)
+ AJvYcCVqmkmlp7zijRD0dTJ0Htg7jB3Qi6kSe0AoNXlcxohwt8XGlbzHmNQh6eIPRUUdew25L1Bhcbk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUbnWyUreqqwQwPEjsqetabh3Fo1CnmiNIij4SAquPKJiCxIkq
+ Ir/l9sfxEPr/EpcngWW9xHbnfqniyR7QnwShNVTvyE4GWCV1C/Wxg9n+
+X-Gm-Gg: AY/fxX7pI9CMdwdrfZ6EozEqSvu4Tj1CqBI8Tnz2+RpLQfFtNs7zcGE3hMtFiK8s9uG
+ 5vYoNsO4/LR8COvA0TB9QWIGiX/fYtu9Bw6MioT25+nq7MT7S6u3efk1iky7hf0URlQ4mL6blMc
+ k7dvvs0DhSJHgLmcoIqqwdNLW5R+nCVNx1Tf4WcMOfUf9xgqZ03EBPhmzPPsAlFC1No1we2Gtcd
+ PRoEprNBCX7CZnxyk8EKFgUgwvLFmjEdoE5xBUr6IvnMc8Ej6arZ4UJI4PpjDbz+0SWZW+TZU1Y
+ rU0HW/tWezaQESa9Dalyl7T+SFgAk2vKgVpfgw9CSLJDq4O3ht2p0XVpCbh0DmT3vbp5i5VIwyu
+ JGnRt9Qowi9nPJ5/eWQw7YOOrtnvUTMJK+/pG+NavxyTPWeAXn99JmQmA4EP0e281OWJ5qP4D0n
+ ln9dgnvFe6anE5UwW8QGwFCM8S/mUDISfcgofRjQhyFCBaCc9xCnd9+pGlIWU2xUERPZJ8mxECJ
+ OmlP5Jmcitdy4esikRfxg==
+X-Google-Smtp-Source: AGHT+IGGmOkGkSQco6pjGOkiFXRfqkq1AhDEIZdEDTvjlKTxpl8ydQwODZJqSDEiX3TdeXRRHWn25Q==
+X-Received: by 2002:a05:6a00:39a1:b0:7ff:9fe7:9811 with SMTP id
+ d2e1a72fcca58-7ff9fe7a134mr19767008b3a.31.1766771662803; 
+ Fri, 26 Dec 2025 09:54:22 -0800 (PST)
 Received: from visitorckw-work01.c.googlers.com.com
  (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.17
+ d2e1a72fcca58-7ff7e0a0595sm22463704b3a.44.2025.12.26.09.54.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 09:54:18 -0800 (PST)
+ Fri, 26 Dec 2025 09:54:22 -0800 (PST)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: alison.wang@nxp.com,
 	angelo@kernel-space.org
 Cc: trini@konsulko.com, me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
  eleanor15x@gmail.com, u-boot@lists.denx.de,
  Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v2 0/4] m68k: Add support for QEMU virt machine
-Date: Fri, 26 Dec 2025 17:53:56 +0000
-Message-ID: <20251226175400.1154417-1-visitorckw@gmail.com>
+Subject: [PATCH v2 1/4] serial: Add Goldfish TTY driver
+Date: Fri, 26 Dec 2025 17:53:57 +0000
+Message-ID: <20251226175400.1154417-2-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
+In-Reply-To: <20251226175400.1154417-1-visitorckw@gmail.com>
+References: <20251226175400.1154417-1-visitorckw@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 27 Dec 2025 00:03:47 +0100
@@ -103,84 +106,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the QEMU 'virt' machine on the m68k architecture. The
-QEMU virt machine models a generic system utilizing Goldfish virtual
-peripherals and is capable of emulating various classic 68k CPUs.
+Add support for the Google Goldfish TTY serial device. This virtual
+device is commonly used in QEMU virtual machines (such as the m68k
+virt machine) and Android emulators.
 
-Currently, U-Boot's m68k architecture support focuses on ColdFire
-variants. Expand this to include the classic M680x0 architecture,
-implementing the necessary exception vectors, startup code, and a
-bootinfo parser compatible with the QEMU interface. A driver for the
-Goldfish TTY is also added to enable serial console output.
+The driver implements basic console output and input polling using the
+Goldfish MMIO interface.
 
-The implementation has been verified on QEMU targeting the M68040 CPU,
-confirming successful hardware initialization and boot to the U-Boot
-command shell. Additionally, the CI configuration was verified locally
-using gitlab-ci-local "qemu_m68k_virt test.py", resulting in
-PASS qemu_m68k_virt test.py.
+Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
 Changes in v2:
-- Refactor Goldfish TTY driver to use priv data for the RX buffer and
-  ensure single-byte reads.
-- Rename arch/m68k/cpu/m68040 to arch/m68k/cpu/m680x0 to separate the
-  architecture family from the specific CPU model.
-- Introduce M680x0 Kconfig symbol and separate MAINTAINERS entries for
-  the architecture and the board.
-- Regenerate qemu-m68k_defconfig using make savedefconfig and add the
-  board to the documentation index.
-- Add a new patch to enable CI testing on GitLab and Azure Pipelines.
-- Update SPDX identifiers to GPL-2.0-or-later.
-- Sort headers alphabetically.
-- Fix tabs vs spaces.
+- Update SPDX license identifier to GPL-2.0-or-later.
+- Sort header inclusions alphabetically.
+- Move RX buffer into goldfish_tty_priv instead of using a static buffer.
+- Make sure getc only read a single byte at a time.
 
-v1: https://lore.kernel.org/u-boot/20251218185252.957388-1-visitorckw@gmail.com/
-
-Kuan-Wei Chiu (4):
-  serial: Add Goldfish TTY driver
-  m68k: Add support for M68040 CPU
-  board: Add QEMU m68k virt board support
-  CI: Add test jobs for QEMU m68k virt machine
-
- .azure-pipelines.yml                  |   4 +
- .gitlab-ci.yml                        |   7 ++
- MAINTAINERS                           |  12 +++
- arch/m68k/Kconfig                     |  24 ++++++
- arch/m68k/Makefile                    |   1 +
- arch/m68k/config.mk                   |  10 ++-
- arch/m68k/cpu/m680x0/Makefile         |   6 ++
- arch/m68k/cpu/m680x0/cpu.c            |  77 +++++++++++++++++++
- arch/m68k/cpu/m680x0/start.S          |  73 ++++++++++++++++++
- arch/m68k/cpu/m680x0/u-boot.lds       |  47 ++++++++++++
- arch/m68k/include/asm/bootinfo.h      |  31 ++++++++
- arch/m68k/lib/Makefile                |   9 +--
- board/emulation/qemu-m68k/Kconfig     |  12 +++
- board/emulation/qemu-m68k/MAINTAINERS |   8 ++
- board/emulation/qemu-m68k/Makefile    |   5 ++
- board/emulation/qemu-m68k/qemu-m68k.c |  84 +++++++++++++++++++++
- configs/qemu-m68k_defconfig           |  12 +++
- doc/board/emulation/index.rst         |   1 +
- doc/board/emulation/qemu-m68k.rst     |  38 ++++++++++
- drivers/serial/Kconfig                |   8 ++
- drivers/serial/Makefile               |   1 +
- drivers/serial/serial_goldfish.c      | 104 ++++++++++++++++++++++++++
- include/configs/qemu-m68k.h           |  18 +++++
- include/goldfish_tty.h                |  18 +++++
- 24 files changed, 602 insertions(+), 8 deletions(-)
- create mode 100644 arch/m68k/cpu/m680x0/Makefile
- create mode 100644 arch/m68k/cpu/m680x0/cpu.c
- create mode 100644 arch/m68k/cpu/m680x0/start.S
- create mode 100644 arch/m68k/cpu/m680x0/u-boot.lds
- create mode 100644 arch/m68k/include/asm/bootinfo.h
- create mode 100644 board/emulation/qemu-m68k/Kconfig
- create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
- create mode 100644 board/emulation/qemu-m68k/Makefile
- create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
- create mode 100644 configs/qemu-m68k_defconfig
- create mode 100644 doc/board/emulation/qemu-m68k.rst
+ MAINTAINERS                      |   6 ++
+ drivers/serial/Kconfig           |   8 +++
+ drivers/serial/Makefile          |   1 +
+ drivers/serial/serial_goldfish.c | 104 +++++++++++++++++++++++++++++++
+ include/goldfish_tty.h           |  18 ++++++
+ 5 files changed, 137 insertions(+)
  create mode 100644 drivers/serial/serial_goldfish.c
- create mode 100644 include/configs/qemu-m68k.h
  create mode 100644 include/goldfish_tty.h
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6ce0bbce13d..da4a6e4d518 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1259,6 +1259,12 @@ S:	Maintained
+ F:	drivers/misc/gsc.c
+ F:	include/gsc.h
+ 
++GOLDFISH SERIAL DRIVER
++M:	Kuan-Wei Chiu <visitorckw@gmail.com>
++S:	Maintained
++F:	drivers/serial/serial_goldfish.c
++F:	include/goldfish_tty.h
++
+ I2C
+ M:	Heiko Schocher <hs@nabladev.com>
+ S:	Maintained
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 371d7aa5bba..b84cb9ec781 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -1193,4 +1193,12 @@ config SYS_SDMR
+ 	depends on MPC8XX_CONS
+ 	default 0x0
+ 
++config SERIAL_GOLDFISH
++	bool "Goldfish TTY support"
++	depends on DM_SERIAL
++	help
++	  Select this to enable support for the Goldfish TTY serial port.
++	  This virtual device is commonly used by QEMU virtual machines
++	  (e.g. m68k virt) for console output.
++
+ endif
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index 8eaae62b0fc..fe8d23be512 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -63,3 +63,4 @@ obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
+ obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
+ 
+ obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
++obj-$(CONFIG_SERIAL_GOLDFISH) += serial_goldfish.o
+diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
+new file mode 100644
+index 00000000000..ce5bff6bf4c
+--- /dev/null
++++ b/drivers/serial/serial_goldfish.c
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
++ * Goldfish TTY driver for U-Boot
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <goldfish_tty.h>
++#include <linux/types.h>
++#include <serial.h>
++
++/* Goldfish TTY Register Offsets */
++#define GOLDFISH_TTY_PUT_CHAR       0x00
++#define GOLDFISH_TTY_BYTES_READY    0x04
++#define GOLDFISH_TTY_CMD            0x08
++#define GOLDFISH_TTY_DATA_PTR       0x10
++#define GOLDFISH_TTY_DATA_LEN       0x14
++#define GOLDFISH_TTY_DATA_PTR_HIGH  0x18
++#define GOLDFISH_TTY_VERSION        0x20
++
++/* Commands */
++#define CMD_WRITE_BUFFER   2
++#define CMD_READ_BUFFER    3
++
++struct goldfish_tty_priv {
++	void __iomem *base;
++	u8 rx_buf;
++};
++
++static int goldfish_serial_getc(struct udevice *dev)
++{
++	struct goldfish_tty_priv *priv = dev_get_priv(dev);
++	unsigned long base = (unsigned long)priv->base;
++	unsigned long paddr;
++	u32 count;
++
++	count = __raw_readl((void *)(base + GOLDFISH_TTY_BYTES_READY));
++	if (count == 0)
++		return -EAGAIN;
++
++	paddr = virt_to_phys((void *)&priv->rx_buf);
++
++	__raw_writel(0, (void *)(base + GOLDFISH_TTY_DATA_PTR_HIGH));
++	__raw_writel(paddr, (void *)(base + GOLDFISH_TTY_DATA_PTR));
++	__raw_writel(1, (void *)(base + GOLDFISH_TTY_DATA_LEN));
++
++	__raw_writel(CMD_READ_BUFFER, (void *)(base + GOLDFISH_TTY_CMD));
++
++	return priv->rx_buf;
++}
++
++static int goldfish_serial_putc(struct udevice *dev, const char ch)
++{
++	struct goldfish_tty_priv *priv = dev_get_priv(dev);
++
++	__raw_writel(ch, priv->base + GOLDFISH_TTY_PUT_CHAR);
++
++	return 0;
++}
++
++static int goldfish_serial_pending(struct udevice *dev, bool input)
++{
++	struct goldfish_tty_priv *priv = dev_get_priv(dev);
++
++	if (input)
++		return __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
++
++	return 0;
++}
++
++static int goldfish_serial_probe(struct udevice *dev)
++{
++	struct goldfish_tty_priv *priv = dev_get_priv(dev);
++	struct goldfish_tty_plat *plat = dev_get_plat(dev);
++
++	if (!plat)
++		return -EINVAL;
++
++	priv->base = plat->base;
++
++	return 0;
++}
++
++static const struct dm_serial_ops goldfish_serial_ops = {
++	.putc = goldfish_serial_putc,
++	.pending = goldfish_serial_pending,
++	.getc = goldfish_serial_getc,
++};
++
++static const struct udevice_id goldfish_serial_ids[] = {
++	{ .compatible = "google,goldfish-tty" },
++	{ }
++};
++
++U_BOOT_DRIVER(serial_goldfish) = {
++	.name	= "serial_goldfish",
++	.id	= UCLASS_SERIAL,
++	.of_match = goldfish_serial_ids,
++	.probe	= goldfish_serial_probe,
++	.ops	= &goldfish_serial_ops,
++	.priv_auto = sizeof(struct goldfish_tty_priv),
++	.flags	= DM_FLAG_PRE_RELOC,
++};
+diff --git a/include/goldfish_tty.h b/include/goldfish_tty.h
+new file mode 100644
+index 00000000000..8777da4942d
+--- /dev/null
++++ b/include/goldfish_tty.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
++ */
++
++#ifndef _GOLDFISH_TTY_H_
++#define _GOLDFISH_TTY_H_
++
++#include <linux/types.h>
++
++/* Platform data for the Goldfish TTY driver
++ * Used to pass hardware base address from Board to Driver
++ */
++struct goldfish_tty_plat {
++	void __iomem *base;
++};
++
++#endif /* _GOLDFISH_TTY_H_ */
 -- 
 2.52.0.358.g0dd7633a29-goog
 
