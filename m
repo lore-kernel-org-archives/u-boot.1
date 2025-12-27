@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 702F6E8FDD8
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 14:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A0BE8FDD8
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 14:52:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2A0D83BC9;
-	Sat, 27 Dec 2025 15:52:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2318383C01;
+	Sat, 27 Dec 2025 15:52:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QDwSLPH3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IYXyyBZn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ADBE83BF1; Sat, 27 Dec 2025 15:52:47 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 8BCBD83C04; Sat, 27 Dec 2025 15:52:50 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A8E383B82
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 15:52:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FEAC83C01
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 15:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b728a43e410so1477881766b.1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 06:52:45 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b7a02592efaso1192061966b.1
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 06:52:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1766847164; x=1767451964; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1766847168; x=1767451968; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FbemfJLQWFzE+uKlEWHZbWlcpZHgeaORmxrtitndMsM=;
- b=QDwSLPH3Da+MJCHLjM3VSWIxTfH2UmuFoQ8tH36/ETtSOee59gbc22a7WgW82239wp
- 9mJ7VPUGVCu7L0+fnzD+ndUHzpZTqbKInaKAT7sxU0ShvwROsHzND4hlt2uI+74QO7wb
- KBSmAeEYTQhXJL6d597Xmf1wjltsBHTY/2Q5o=
+ bh=ieMg7hU/mzRqQhCKwqKXeTioOU9MQehAwCi/qKCFN24=;
+ b=IYXyyBZn6CeiCbHPb9FEXmuXmm9r8Crkeuqsrm0hE9Qay+xeq314HhPxYPfulezEU5
+ ih35SspNmTK+SZZzxTtw4/87ekdNsktzotfNz9SJ89jyDtfxJ8y5PCZSSeFnYnS4gb9f
+ ltnOGjUg/d3bMB2if8fr2hArR8cJX+IWpTFEY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766847164; x=1767451964;
+ d=1e100.net; s=20230601; t=1766847168; x=1767451968;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FbemfJLQWFzE+uKlEWHZbWlcpZHgeaORmxrtitndMsM=;
- b=Jv5mEt1pSAKZ970IExF01as8htSZrWPR3w/9vqOUE8Do14YAag7cURbQp+qRp3i1yG
- 7eBSsBAQM0zjnKzZkGS9bmWRkGkK2+qC4rb85SVmxmIufBAxT5u+SzxmuKf/0FH2Y8XF
- ZNuoa2BdoAiIM1x/fiFnuFGNxrR8b2EN2Ob4804lWCUc4utQFrjnE4mPSlOlC5jBniYE
- HAK3MYYB4fBQ4XGDs0mqRBEGROkJ2wyWE7q5dXfaEDtrIZBXeLECp2u26oLlVsWMHBG5
- yX5gEPcA10gwSLQUpJEwDNmBDxnbuywUnaAxpJfw7cihoHr6xqtMog4xqGgu8dNEe89/
- eVrQ==
+ bh=ieMg7hU/mzRqQhCKwqKXeTioOU9MQehAwCi/qKCFN24=;
+ b=bAJKoUnd6GdyS0Azx/Na/UfEeGaVXuko3qcsdFQry5frm+m7d1J9TA5+h1YioZQLRW
+ gYI4fKEQA8BEbZPt5uOD4/Po5UlvKWWaH0+iclA1P04KS1RFHr+VqpcJnBzbrJSCifAR
+ KhH72yr8oVbyib1ipDNkDfwmdm1aEy7VSpv1zu1Q7K7Bz6lS2fXOxx1STLrwtGnBvMEe
+ tmWRMFIsvxaRi9J4n7+8dU6P09aIfJ7fs7CDK3dn8Qj9aItV7adlPqB9QqEp6UfZX7jw
+ RvQf+N3W+KJXxaDTyC7n6eh9MhGZvRph88ZMPtYHjt8cNC1bMcDLUfsy/fjk7toRdIIQ
+ eQYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVH6aLVchq/cpBPl6mHJxHLGzSq3xfJXMK/Bk4JmEwsGMtrbift0mYhdq9GDDmKWhFw3L2Xdfc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZ4XQZxIURUAA87oVlVutgnVdnM50yeDb1Bxk6pInvFp8dKWmP
- Y7AKP2jcQeywANvob1+LwmlHyjJSNmUhprl7Fo4Ng3qz1MbYIkeQZNmwPKNi4nwumcyioTaoy1M
- 2nIVvTUdCOpaBj9EJghQTdHCCVuXqzpp6/WsAT6ij
-X-Gm-Gg: AY/fxX7IQTLGL6rWz8SD8oXW66d5MCqaB/4IiblKnVeMIYFpXjy/Jddl4pdd7Ksmwtz
- 8sq9sr4y8NyJcFaxEm5ZSUPZsCXDNz2QYM11IQgY3f3zKM1FUrG23MySacPDNQoqcbPOl9OIgT9
- zPLx2z0ir5VnSl9YKYt33Dy6gtYozwF9RPoXV4MlMxJfHMKeGfAcdAoHdi2wCXVt8v+COLz5CxL
- cqLT+qogzxAacH6UjCGrbSJgZwXqKBhVjtahQ9hiDe0oKYKw3+x2cfMQQ8IgnnIoJg+lDor0LR8
- NP62
-X-Google-Smtp-Source: AGHT+IEWTvF6DcGYKcYrY9VMcREs2N3vYqvNr70cUdw8NrJxecv1+BFmUKswtGn5UXtjP1kQSD7k8agwzbDz5idFbno=
-X-Received: by 2002:a17:907:a09:b0:b83:3294:af62 with SMTP id
- a640c23a62f3a-b8332950f5dmr705401866b.64.1766847164523; Sat, 27 Dec 2025
- 06:52:44 -0800 (PST)
+ AJvYcCWBUoafcI0JXhiutp1wcNXupm4MSPZ+BazWm28UiNwMuQnwYICTsnjBWAi3fkQItAMi9++hp7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFNZqsrnjeL76qmRAAsMSQHjVlfQF2r0xuNi05YklMM+6JT7Sv
+ /ims9e+o3PTU7eDRe+rT3iZpp11o9c+ABHJL8LFXDOhi3UyZ5oL37u9DeeICE4kYvr2f+BEeL7u
+ Em4VpLamDW0IKGbjFhBXw/tIKa2kzT3CyVV8Xi8dU
+X-Gm-Gg: AY/fxX4pDrdXuZFkipNjP7tjK304LzJN2MNe1DSGBJygrrsjEms9VgFR0Pn4YnvW7lM
+ WGmBNqRt7Gee1KwmPbJEhBu7N2P7XBPJL3ylkjYqJhpV6uY8aHH+Pd5L2IWotaM6pp6HQXU72si
+ G9pHxaGOMKBJ01DOnmUISVC/hb3oecJSwObHV8n0NO1UYB6PuEvAHtgtmZW9m5pwEGk3ZtOgImn
+ msanuyxOhLmvQX0TfjbgVfWqMpg+/Z8iSskX9oGGctDtTDarHnwCG/3ZBpK1lQ/fCTaCg==
+X-Google-Smtp-Source: AGHT+IH2XDLlB1MDCBAiry3Bf0FM4YCfyXb0xp1VmehJs+MkR1b09NHqtxpFYsSqiNRxSSH4qCxgfbt2xGauHDidAHM=
+X-Received: by 2002:a17:907:7621:b0:b80:3fff:420d with SMTP id
+ a640c23a62f3a-b803fff4ee0mr1748513466b.24.1766847167732; Sat, 27 Dec 2025
+ 06:52:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20251217-a-few-test-py-improvements-v2-0-e1f91e3bf551@baylibre.com>
- <20251217-a-few-test-py-improvements-v2-1-e1f91e3bf551@baylibre.com>
-In-Reply-To: <20251217-a-few-test-py-improvements-v2-1-e1f91e3bf551@baylibre.com>
+ <20251217-a-few-test-py-improvements-v2-2-e1f91e3bf551@baylibre.com>
+In-Reply-To: <20251217-a-few-test-py-improvements-v2-2-e1f91e3bf551@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 27 Dec 2025 07:52:31 -0700
-X-Gm-Features: AQt7F2qQtXBl9-Z3UDPs0F9CulPBwsg3pPr9MYTrf_5Kg1gCWy1yVTE5EoU1jc0
-Message-ID: <CAFLszThobMWaKv5pP=kr_9nzWWKaF2mLjn-swEDQ_0aFDxazGQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] test.py: check ubconfig exists before using it
+Date: Sat, 27 Dec 2025 07:52:33 -0700
+X-Gm-Features: AQt7F2qHkOHrr2x7C3_tkbLhDd_t7-TbbeOhYTkQTIOCA-RKacFk32CnPMiwD50
+Message-ID: <CAFLszTgkXmb=MTe-VQujfvhsfY8R40n3end4ZyNvcjzQvjn3Yw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] doc: pytest: mention additional requirements for
+ venv
 To: David Lechner <dlechner@baylibre.com>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -94,67 +94,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
-
 On Wed, 17 Dec 2025 at 11:43, David Lechner <dlechner@baylibre.com> wrote:
 >
-> Set ubconfig to None and add a check in the show_timings() function of
-> test/py/test.py to ensure that the global ubconfig variable was actually
-> initialized before access attributes.
->
-> If tests fail early, e.g. because --build failed, ubconfig may not have
-> been initialized yet and results in an exception in an atexit handler.
-> Adding this check avoids unnecessary noise in the output.
->
->     Exception ignored in atexit callback: <function cleanup at 0x7de475ea6b60>
->     Traceback (most recent call last):
->     File "u-boot/test/py/conftest.py", line 669, in cleanup
->         show_timings()
->     File "u-boot/test/py/conftest.py", line 616, in show_timings
->         if ubconfig.timing:
->         ^^^^^^^^
->     NameError: name 'ubconfig' is not defined
+> Add a paragraph explaining that in addition to the requirements.txt
+> for test/py/test.py itself, users may need to install additional python
+> packages depending on the U-Boot configuration being built.
 >
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
-> v2 changes:
-> - Set to None and check for not None instead of using 'in globals()'
+> v2 changes: none
 > ---
->  test/py/conftest.py | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index 8ce680a92a0..5689fcd0349 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -28,9 +28,10 @@ import sys
->  from spawn import BootFail, Timeout, Unexpected, handle_exception
->  import time
->
-> -# Globals: The HTML log file, and the top-level fixture
-> +# Globals: The HTML log file, the top-level fixture and the config container
->  log = None
->  ubman_fix = None
-> +ubconfig = None
->
->  TEST_PY_DIR = os.path.dirname(os.path.abspath(__file__))
->
-> @@ -613,7 +614,7 @@ def show_timings():
->          if too_long:
->              show_bar(f'>{get_time_delta(max_dur)}', too_long_msecs, too_long)
->          log.info(buf.getvalue())
-> -    if ubconfig.timing:
-> +    if ubconfig is not None and ubconfig.timing:
+>  doc/develop/pytest/usage.rst | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-if ubconfig and ubconfig.timing
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
->          print(buf.getvalue(), end='')
+
+
 >
+> diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
+> index df3821da20d..f8b32c07edd 100644
+> --- a/doc/develop/pytest/usage.rst
+> +++ b/doc/develop/pytest/usage.rst
+> @@ -90,6 +90,10 @@ environment.  This can be done via the following commands:
+>      $ . ./venv/bin/activate
+>      $ pip install -r test/py/requirements.txt
+>
+> +In order to use the ``--build`` option of ``test.py`` there may be additional
+> +python packages required depending on the configuration being built. These can
+> +be found with ``find . -name "*.requirements*.txt"``.
+> +
+>  Testing sandbox
+>  ---------------
 >
 >
 > --
 > 2.43.0
 >
-
-Regards,
-SImon
