@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC327E8FDCC
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 13:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2EB3E8FDD8
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 13:45:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05A9483B5E;
-	Sat, 27 Dec 2025 14:45:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7574183B7E;
+	Sat, 27 Dec 2025 14:45:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fy18Qwr3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="clnpWbaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5856A83B6C; Sat, 27 Dec 2025 14:45:20 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4BC4F83B7F; Sat, 27 Dec 2025 14:45:25 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED696838FA
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 14:45:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F78483B72
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 14:45:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b7a02592efaso1187427266b.1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 05:45:17 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-64d30dc4ed7so9078208a12.0
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 05:45:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1766843117; x=1767447917; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1766843123; x=1767447923; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=taZyx01nj3n+tBYWupCI8mIwVLg6KNk7/FLbQ5mPEzg=;
- b=Fy18Qwr3BGh4uAPNZpzygSsM7YP3tAiPMlLL+FHecoua1HZDolQLytNN9EM4eJC0xR
- R+lKxkDvDc4twWM7z6GhVozsZICriW6dU26XkuHp3tCXwrGo6+Wv8OB2wfmGqUpwA2o/
- dPGJTb6mwCES/vL5cI4HOEi0G5X+5m5mv9vUc=
+ bh=uMSzFBWysZOgUE7tMlIqYrN789qLxOQD78vvDGmBna8=;
+ b=clnpWbaPADmUx6MB1CIlyoMEbBaOfqhIY7StL3qe7+LVZQaBBULyMfjHc5nbgmBBdt
+ HvnCX/2HFZql7Qdlo7BITdnsaY+Tec2GTN8g1u0Tra5SnX5nUGzzU4hJN/tUJJLkoU2e
+ q24jEE2RFlrAjvkpKfWtpGyji9Yz9+yhBbLfg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766843117; x=1767447917;
+ d=1e100.net; s=20230601; t=1766843123; x=1767447923;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=taZyx01nj3n+tBYWupCI8mIwVLg6KNk7/FLbQ5mPEzg=;
- b=Q3PrRwoPE58lqZLEXbJGEvyh922Oy4IF2GvSI5KyJUtOKBbH5I6JhPQOsXOa8hDWr1
- +fsv+1gVj4eEUkmE8lkxT7kH7A/T+m2iegJIdkl73Ot/H+ojm2uxWUhjsoJLxo+q5okK
- ATUeXnJlbUi5TbznvlWYnKpTxWwb/rRac5Dd+7qTva5N/CWaUeDjH7OjjlLlOdMc/aUh
- Pnnjb/ZEka5ZFV7ACHy4oA7SXy89tuzxxGm4FWZmxe6jTFhBtCXwv+QYiDIscX1gTZoQ
- 9IMIxDjBf5s51k/9U2vVBKdmXsaA8Z+u5Um08SEkSIigsyyRGyTuFmnj9+V9yx3H+b3p
- fIWQ==
+ bh=uMSzFBWysZOgUE7tMlIqYrN789qLxOQD78vvDGmBna8=;
+ b=fxyDtnoleINab9O8oIxMsKYD0H008mYL4uTxy1L+FJiGQza1cfA52QpcHj98gHZthy
+ 9X3aBTo/+YlExewzVN0hEXCuAmG5x1jd7L1Lr9mmwjxYVIfTQZexansXb/FcrQsakEjC
+ 8884Q2/jBR70FrRSi/gOvaLIsyTWnt/Q1ru4HPY+1yXWCDfRE8g00SXvAd3u6sEvdhoc
+ UFQlviuGSAiSi7pUBWBk+m3zBAeN5Xvdp7TFuPsxT7qU05EpNr0H/gfdCtLcINPzO0Y0
+ HrPGUoFVHLhmjlo0x3mW04avleAx433rhb5GNRWO9ffH1Y1GzXfb7mVjpCcEYWO3gOxH
+ RLig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWlEdYLX1OjrNG0noLFhE3IRSS11VbmAU6KpdYbPv1E3j235ssGbG3ClWaHN97iRGX/U7JThTs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxa+DKnBlg0iL8RKIpmlRZpf6G8lmyJtW74/VGNhRgpJYWWEagf
- KG3YSa/kVM9LtiNRN585M/oMFCMlnQIH2sBi/YAVUzJkgK3Zoc48qsskvukruPXWh4/EWfllaKY
- gBZfmUdOk+fIvKNJ7oT0qXCrPf0l3D03NOfMCxf4A
-X-Gm-Gg: AY/fxX41u9rRtoaaaodPLZUg8LIS7rm1XD7vEuzGTf8MdVoXa+nTKWoEk2xV+4ixcPt
- Pt5FZ5iwKwdc9huxN0ruMd8+HWTTvMWVf6gKADLnxBEQsE/PQKXUt5aEuMoS/ZjmJWUVevdPrQF
- ScuKQs2AtfDcfyx6QiY7HRf5hlFo9adKUO7Mnmrq8ZkJ6Csi32J5BDhemcGR2DlxzSisJRDnNm+
- CChiq0HyGDkjtLOttYZ5UqY4l0SNvDRspNoCUlMWv+6uXYEreD0pNylHdhmP4g7XO2kWw==
-X-Google-Smtp-Source: AGHT+IF3KNNEvr7IQAc33uIys/gVzEa4gObN5n+EgY678D6QSAVAu/4FjLIBawRqqNvETHAmA0iAufKKu11Kf3ztDHM=
-X-Received: by 2002:a17:907:97cf:b0:b7a:72bd:ac65 with SMTP id
- a640c23a62f3a-b8036ec9e68mr2658266566b.9.1766843117340; Sat, 27 Dec 2025
- 05:45:17 -0800 (PST)
+ AJvYcCUf5quwqRIQFCC+sYIxHpOZEjK7DUon1uF1XfauU7DAUpUilD0oZvqEWG9bZ4lEk/Rk9OC9a2Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3oQ8X+5/C5AjZjnbntb8+pqyiWE6QOwCfrmy6pb4BHXt6ogr7
+ HXuIK1Y12wpR+ffY9szYnfqKi0TfuDW0Qubr3oaaXVpIUkUuhTs8QebPG4PKvY1STtR0s/4NROx
+ 9UoOVKHAC1BJYRZZ3kIRYfHHNBMza9jj1uFOf5ftO
+X-Gm-Gg: AY/fxX4+A8UAYi3XZLYlcB54PBWRp9l9JAeNmX80pe6A8S5cwQx0WhGppxo6pRKLydu
+ 1+0YJDXRSvlQ9VQIfqvSZjcaAyGszmtbryuS2zuAj7W8bKd4sYu+KQ4xKLu5MoAYx1HTac3h39k
+ xpBCkkMQaTthAFyzFDSMiMhdw9doZ20wZaML+iMp88hnf3NyPtZDE4aXrhsNZz8gerzojisrirp
+ HbYsHONk9Hbqnq3wMUUyzbNpK0s+LykafNBvsCdPsZB7PuVHdCLRwcQkhgUMsRSizejnvfoskuG
+ c9X+
+X-Google-Smtp-Source: AGHT+IEbFEm0Y2HLABL0SDWFZXvnTjq4TlMXUW11mGFQgINJBQjBkpKwAGaTpX01zufY82wjnIrA4eg/q+hMjlpPfgM=
+X-Received: by 2002:a17:907:3f23:b0:b74:9862:3e36 with SMTP id
+ a640c23a62f3a-b8037198d15mr2888178466b.51.1766843122702; Sat, 27 Dec 2025
+ 05:45:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
- <20251221015859.738112-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251221015859.738112-2-heinrich.schuchardt@canonical.com>
+ <20251221015859.738112-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251221015859.738112-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 27 Dec 2025 06:45:04 -0700
-X-Gm-Features: AQt7F2q3aBbYtnpQPrhzWO2_GoMCIZRT8T8ijhxadmCnLMlyMX-2QQ_3TAINpZk
-Message-ID: <CAFLszTgiG=NyaVrGAnTJsmkpYc4OOaUo5ebKy=mTrw4Nwc46jw@mail.gmail.com>
-Subject: Re: [RFC 1/8] trace: correct handling of recursive call
+Date: Sat, 27 Dec 2025 06:45:06 -0700
+X-Gm-Features: AQt7F2rY2uwDVoT0JB11IfGRsMGgk516A8TghkuRegXuRvCfd5F10uLI-1K84Zk
+Message-ID: <CAFLszTg8f+gRehmoBVL4fvSdQo-ABkKZHoKnnh1M0RAHN4bZ+Q@mail.gmail.com>
+Subject: Re: [RFC 2/8] trace: initr_trace must succeed initr_dm
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -105,35 +106,63 @@ Hi Heinrich,
 On Sat, 20 Dec 2025 at 18:59, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> __cyg_profile_func_enter() adds timer information to function traces.
+> qemu-riscv64_smode_defconfig with function tracing enables ends in an
+> endless loop in notify_dynamic. When iterating over state->spy_head,
+> list_for_each_entry_safe() does not discover the end of the list.
 >
-> Commit 852d4dbd70ba ("trace: Detect an infinite loop") introduced a logic
-> letting any recursive call to __cyg_profile_func_enter() deactivate
-> tracing.
+> The reason is that the address of state->spy_head has been relocated but
+> state->spy_head.next and state>spy_head.prev still point to the unrelocated
+> address. Therefore list_for_entry_safe() does not discover the end of the
+> list.
 >
-> This implies that a lot of the DM core and timer drivers functions need to
-> be marked as `notrace`. This in not desirable as those functions are part
-> of what we want to trace when not invoked by __cyg_profile_func_enter().
+> We cannot start tracing before initr_reloc().
+
+There is a step missing here...why is initr_reloc() sending an event?
+Also it isn't clear what this has to do with tracing.
+
 >
-> A better approach than switching of tracing is to immediately leave
-> __cyg_profile_func_enter() when reentered.
+> When placing INITCALL(initr_trace) directly after INITCALL(initr_reloc) the
+> timer driver panics with
 >
-> Reported-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+>     Could not initialize timer (err -11).
+>
+> Tracing uses the timer driver to add timestamps. The driver model needs
+> to be initialized to use the timer driver.
+>
+> INITCALL(initr_trace) needs to be placed after INITCALL(initr_dm) in
+> initcall_run_r() to let the timer driver work properly.
+>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/trace.c | 59 ++++++++++++++++++++++++-----------------------------
->  1 file changed, 27 insertions(+), 32 deletions(-)
+>  common/board_r.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 76f9fc090fb..2b8f5a423a6 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -604,7 +604,6 @@ static void initcall_run_r(void)
+>          * Please do not add logic to this function (variables, if (), etc.).
+>          * For simplicity it should remain an ordered list of function calls.
+>          */
+> -       INITCALL(initr_trace);
+>         INITCALL(initr_reloc);
+>         INITCALL(event_init);
+>         /* TODO: could x86/PPC have this also perhaps? */
+> @@ -635,6 +634,7 @@ static void initcall_run_r(void)
+>  #if CONFIG_IS_ENABLED(DM)
+>         INITCALL(initr_dm);
+>  #endif
+> +       INITCALL(initr_trace);
+
+No, this is far too late.
+
+>  #if CONFIG_IS_ENABLED(ADDR_MAP)
+>         INITCALL(init_addr_map);
+>  #endif
+> --
+> 2.51.0
 >
 
-Please see here:
-
-https://docs.u-boot.org/en/latest/develop/trace.html#board-requirements
-
-This really just papers over the problem you are having. You cannot
-use driver model to obtain the timer as tracing starts before that.
-
-So please instead do the small extra work of defining timer_get_us()
-for your board.
-
 Regards,
-SImon
+Simon
