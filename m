@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08088E92710
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 18:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03938E92716
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 20:12:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2DF383C93;
-	Sat, 27 Dec 2025 19:51:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AC73983CDC;
+	Sat, 27 Dec 2025 21:12:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W4uELYGN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gNl2xi0E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFE4F83CB1; Sat, 27 Dec 2025 19:51:16 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id C26CB83CD3; Sat, 27 Dec 2025 21:11:58 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EAF83C6C
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 19:51:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B46383C6C
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 21:11:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b7a02592efaso1208389566b.1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 10:51:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3e83c40e9dfso5173752fac.1
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 12:11:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1766861474; x=1767466274; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M10WPkpxFO62WeR+gd6q/teBT5HhycqO8GTpoPeSOU4=;
- b=W4uELYGNXMW7cGl83FVw1duLP179VznvrnjtmKqj3u6fQiufo56Q1Rr61wcsqrXg3X
- wRCCOCV7ljFhzAwInN07ZQPYocf96PwMSFwaMA08iqLtOlJLcB+wRnvUhFjr5JXDElir
- Y2q6NlSk866PpoPr0cS4pXSBJoiVBRMRlYeqs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766861474; x=1767466274;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1766866315; x=1767471115; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M10WPkpxFO62WeR+gd6q/teBT5HhycqO8GTpoPeSOU4=;
- b=IdYJjNXpoBBqnZlzukkf2StyD4+pUNalistzQnIiM6d2YN7ne1fYB3x+g8AEwHSZ/J
- iMZDCFFyN1k9Lwg8ImaexSJayqZrIvk+rWvtqtmdhRAh5Z2y+31+MeyBdM3KtL7ZjYQD
- 5UoWHVkha1td7JHelZiUhSN3K8/l7ceIKK+p2TvbdO8NJZDJTPZi+t3l34oLOW9+1IUK
- H+Lzk4cGfd6tlkvPKYBKw+9gKhXeIlYyLnbG5kKZW29Ft38CP9sZ94j/+/Maym0Dvd8z
- APFzPklX/jdk5F3jajrLqZf7VW8P7UfKn7xz6SdyKKsw9Q2RusYR2JIgvM0p8a6bPfPE
- jBRw==
-X-Gm-Message-State: AOJu0YzL0/Pae3co199ymcHCvGKWYSs1BCLm+f6Ok9ampEDdvYWdfwOp
- uYQ7rh7qyEBn8lqVPnaYoad3PSuxs9XRo5oW59TwJNtOiEPn09bhneupx/MbEiFEltsqw18NM/t
- REvMeB/9VbPm6QhEJehubZXnaXAmWnybeSOAxxI9W
-X-Gm-Gg: AY/fxX5IGxwsLiZakZJnwNl+bpY6LKentXgJ9uWKtuki+ql74e0YuPK99uQgs46hty/
- xtbtwNWioIoqhclGYCV8jzDMGoLnnTj4rmZsm7zVVONNe2lQJD/z21CEP/JM/5cFMbJtS7coQQO
- 8S6Dlw6XLNrCPcHk7qjL4t9jKNfYPTW66yV8U/Mr+tTlba6I+S0GnPriz0qkgzn7RMJmWqqGqob
- G1EgAKzs8lqOwytQtEAUo8W/Wm8b5MYOR1mgliEr+Ab8SGsVXdEtZgwWuPoMe11pflXuA==
-X-Google-Smtp-Source: AGHT+IGXNA470NWLwiMsVPentjRLtc4XBICniTEohKu4jty95vLhadFCabkoWTcPSChXvaz3GZjavGHF/SPNbSVYrDI=
-X-Received: by 2002:a17:907:1b15:b0:b73:9792:918b with SMTP id
- a640c23a62f3a-b8036f5fcf3mr2966240966b.27.1766861473638; Sat, 27 Dec 2025
- 10:51:13 -0800 (PST)
+ bh=g2AtMm5IAiWLWXLvPV2Fz5ECvzEmZ5HtEHgxlWs1gXI=;
+ b=gNl2xi0EIuIglslxZPdFAwoBaoWdggpFWMgXKZ26pCDufQEk+3O6JgKkEjpDiXjw+V
+ fBwDKQlOGFSCJXcctBQdaDaBFtApxbC7bXHouyK5pRX7/Pr8/Xy5wU8hDs2cWEcvnrkN
+ RVKbv+c8Ui+ilwLJG1xWxUyQyF5g3TbqD9bWo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766866315; x=1767471115;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=g2AtMm5IAiWLWXLvPV2Fz5ECvzEmZ5HtEHgxlWs1gXI=;
+ b=Dn2Mphj+/yQaOsZrmshFSkgPVU3+NUapb7XGQWKb6J5/5J3oqHM2qhfbLUTo3Q4XkP
+ 7pyYeZkQy+N1XoHKkOuX+QnqgETdNm2YBqhbcLbL6/cENsKGqyqIeSJZEhiMMYi7Jvoa
+ E3oOAwakPSs+FejjFlCxzDqhahItCViMQ08t1xME650adGHRjQBr98JHDzJtCFHtAy17
+ Ud8QmncBtbtbGV8Vnm4EoN6EVz/OMf27hfUEsT21BgsaOy7qc7GPsJZsKo74z/Q+LCZt
+ cZ8gswxTaZSbhaGI7rntZ+6r/AFYlGaVX4G+Tl4837+IIWhqr7eAkp3AIYcqDkcwpmtS
+ 1JuQ==
+X-Gm-Message-State: AOJu0YxO1wpiCCSCOkMvFFSDxucn2unRS2xWO9tgCfYi6vaxqdNxmDhB
+ hgg1IzLJOEa7bPrqfQzKPBIuvhFy+OdSC/TYvrAwsM16nCa6Dp5hEjc+uA6JCdVGReoTdwOTKmO
+ SdRctNZY=
+X-Gm-Gg: AY/fxX4rh2stWe21uj1KIPQgOLKFDf+2oVauXg4uWgytxf1kBMvZDSdjFv40/f7HE9d
+ zUbrV6kNkyM/qT5+/wx7adF4xj2qb9wQVJJijXACrVyGQK4KQPQpggr10rBXkx7CjfLZKYnn14A
+ kzsg4ZvXYIUTCRw7MMRiTT2SUC/Gbwk9iyBQFepee5X4qkGsrDS1N6bGX0XWSFdsRsou1w9/mnK
+ Z92mH57uesCboXG3yLLu6hz4IR8zySxSsUJXeC0qHa4VVntVs32RdEmN5DSfYKyYqiDvvaE/yZ2
+ UezkfKJXp0CiiBQ9vqM7uc026ycWd1NaxnIDp/4OPHCe+9ubiPeyJ9GI8wklc5sChXlD9O4D1Jp
+ +di/WpfxoPCAUcBjcyzpLxVA8GAxi6QLKo0+BsDS0pTH3LMvRqP9+Ow8LRULh93T85EqoK/luIX
+ 7xT8EkzJGzznbuY3oxvIFyb/ZX1PB7RwV1KE5vctA98OgZY2dC
+X-Google-Smtp-Source: AGHT+IHXL0TVMk3IwpdLXmEvX9w2E5P37CZWScj5cTVAflX8XlJrt8QluVZDXRBrUPDFibFfBCYThQ==
+X-Received: by 2002:a05:6870:868a:b0:3f4:fa99:29fa with SMTP id
+ 586e51a60fabf-3fda56bf997mr11939106fac.24.1766866314660; 
+ Sat, 27 Dec 2025 12:11:54 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3fdaa8d366esm16223040fac.5.2025.12.27.12.11.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 27 Dec 2025 12:11:53 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20251121161751.11849-1-marek.vasut+renesas@mailbox.org>
+References: <20251121161751.11849-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v2] clk: fixed_rate: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+Message-Id: <176686631317.2992512.2694965427082582275.b4-ty@konsulko.com>
+Date: Sat, 27 Dec 2025 14:11:53 -0600
 MIME-Version: 1.0
-References: <20251201194857.2371332-1-simon.glass@canonical.com>
- <CAFLszTiS_hQbKnguY=ykyNOKk_hsMzBOAZAnOPjn7U49eunuFw@mail.gmail.com>
- <20251227144800.GJ710860@bill-the-cat>
- <CAFLszTib_BXUxdfkNTey0_r+RV9bKLwv6mqMd8P-ab-YevoWLA@mail.gmail.com>
- <20251227150651.GK710860@bill-the-cat>
-In-Reply-To: <20251227150651.GK710860@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 27 Dec 2025 11:51:02 -0700
-X-Gm-Features: AQt7F2przHIAwZ8vAE0emv4oldX-D9eElp99fLALXtCmG0B_niOKXySfW6gFzUU
-Message-ID: <CAFLszTg+yDdJ4TFPJF=_Z9f_aT7M1fuVCBc54sLcYfyfvvd97g@mail.gmail.com>
-Subject: Re: [PATCH] dm: core: Create ofnode stubs when OF_REAL is disabled
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Claude <noreply@anthropic.com>, Anurag Dutta <a-dutta@ti.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,100 +100,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, 21 Nov 2025 17:17:37 +0100, Marek Vasut wrote:
 
-On Sat, 27 Dec 2025 at 08:06, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Dec 27, 2025 at 07:58:10AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 27 Dec 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Dec 27, 2025 at 04:44:07AM -0700, Simon Glass wrote:
-> > > > Hi,
-> > > >
-> > > > On Mon, 1 Dec 2025 at 12:49, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > When there is no device tree there is not point in trying to find nodes,
-> > > > > etc. since they will all be null.
-> > > > >
-> > > > > Add static inlines to skip the code in that case.
-> > > > >
-> > > > > Unfortunately this makes the file a little convoluted and there are
-> > > > > two inlines for ofnode_is_enabled() and ofnode_first/next_subnode(). But
-> > > > > it seems better than the alternative.
-> > > > >
-> > > > > We could also consider splitting up the header file.
-> > > > >
-> > > > > Also add a rule in drivers/Makefile to compile ofnode.o when OF_REAL is
-> > > > > enabled but DM is not (for kontron-sl-mx6ul) and move the
-> > > > > ofnode_for_each_compatible_node/prop() macros outside the OF_REAL
-> > > > > condition, since they only use functions that have stubs.
-> > > > >
-> > > > > Co-developed-by: Claude <noreply@anthropic.com>
-> > > > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> > > > > ---
-> > > > >
-> > > > >  drivers/Makefile      |   4 +
-> > > > >  drivers/core/Makefile |   3 +-
-> > > > >  include/dm/ofnode.h   | 714 +++++++++++++++++++++++++++++++++++++-----
-> > > > >  3 files changed, 641 insertions(+), 80 deletions(-)
-> > > >
-> > > > Any thoughts on this patch, please?
-> > >
-> > > I'm not sure what you're expecting for AI-developed patches after we
-> > > talked on the community call about not doing that.
-> >
-> > I haven't been able to join recently but should be able to join the
-> > one in a few weeks. Which meeting was it?
->
-> The last call you joined, where you asked about briging up AI, and I
-> explained why I didn't think it was a good idea, and we should at least
-> wait until after kernel summit, which was going to talk about it, before
-> we do anything else.
+> If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
+> with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
+> call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
+> and passes result of ofnode_to_offset(node) as an offset parameter into it.
+> 
+> The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
+> fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
+> because libfdt can not handle negative node offsets without full tree check,
+> which U-Boot inhibits to keep size lower.
+> 
+> [...]
 
-Oh, that call. Yes I heard what you said. I didn't got to plumbers,
-but Marek might have heard something.
+Applied to u-boot/next, thanks!
 
-See this patch for the current state:
+[1/1] clk: fixed_rate: Avoid calling dev_read_*() if CONFIG_OF_PLATDATA=y
+      commit: 3c43ca3025ef424a484101e265b8427e3a364303
+-- 
+Tom
 
-https://lore.kernel.org/ksummit/20251114183528.1239900-1-dave.hansen@linux.intel.com/
 
-There will likely be a discussion next year about which tag to use.
-But I suppose this is relevant too:
-
-https://www.linuxfoundation.org/legal/generative-ai
-
->
-> > > That absolute briefest review I can give is that it didn't solve the
-> > > problem either, and so you didn't test it correctly.
-> > >
-> > > I was just planning to ignore this, rather than get in to another long
-> > > thread with you that I suspect few people would read.
-> >
-> > The problem solved is in the commit message. Is that the problem you
-> > are referring to, or is there another one? We can discuss it in the
-> > next call if you prefer.
->
-> It seems like you forgot why you made this patch. But your patch also
-> doesn't solve the problem it states, which you would have also found if
-> you did more in-depth testing.
->
-> This patch is I think a great example of why as a project U-Boot should
-> have a "Don't use AI" policy. If with all your experience with the
-> project this is the best you can get I fear others will have even worse
-> quality output.
-
-It seems like you have reviewed the patch and have some feedback, but
-you want me to guess what it might be? Is that correct?
-
-That patch took quite a while to put together and is fairly ugly. I am
-sure I could split it up, particularly if it doesn't have to be
-bisectable. But it could easily become 10 patches and a few separate
-files, given the current state of ofnode.h
-
-But no, I don't know what is wrong with it. If you would like to tell
-me I can take a look.
-
-Regards,
-Simon
