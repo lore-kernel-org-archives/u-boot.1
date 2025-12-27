@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A0BE8FDD8
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 14:52:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6397FE8FDCC
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 14:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2318383C01;
-	Sat, 27 Dec 2025 15:52:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FFD883C08;
+	Sat, 27 Dec 2025 15:52:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IYXyyBZn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IdC0EFHh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BCBD83C04; Sat, 27 Dec 2025 15:52:50 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id B5BF683B82; Sat, 27 Dec 2025 15:52:56 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FEAC83C01
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 15:52:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFA9183C0C
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 15:52:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b7a02592efaso1192061966b.1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 06:52:48 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b73161849e1so1537159166b.2
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 06:52:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1766847168; x=1767451968; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1766847174; x=1767451974; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ieMg7hU/mzRqQhCKwqKXeTioOU9MQehAwCi/qKCFN24=;
- b=IYXyyBZn6CeiCbHPb9FEXmuXmm9r8Crkeuqsrm0hE9Qay+xeq314HhPxYPfulezEU5
- ih35SspNmTK+SZZzxTtw4/87ekdNsktzotfNz9SJ89jyDtfxJ8y5PCZSSeFnYnS4gb9f
- ltnOGjUg/d3bMB2if8fr2hArR8cJX+IWpTFEY=
+ bh=Ze4qhsbtKGDrJacUSoOe2beM2bKhXT35GxZKJHyJgnU=;
+ b=IdC0EFHhwrsAskytmcULtWcH++kMbwbeRhmFQiygYbMic9tQpBz36wA4e5lmA4K3eo
+ IDN9sS0uEA9BhiEmk22VqN5aHBBLn4Vygw3jF47xExV0YWVt+2Y7SiYqq8ASNTPXJwuA
+ iEfnCvBxL/O0DIKl+PJQG5jJtfNl1ELw7pFr0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766847168; x=1767451968;
+ d=1e100.net; s=20230601; t=1766847174; x=1767451974;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ieMg7hU/mzRqQhCKwqKXeTioOU9MQehAwCi/qKCFN24=;
- b=bAJKoUnd6GdyS0Azx/Na/UfEeGaVXuko3qcsdFQry5frm+m7d1J9TA5+h1YioZQLRW
- gYI4fKEQA8BEbZPt5uOD4/Po5UlvKWWaH0+iclA1P04KS1RFHr+VqpcJnBzbrJSCifAR
- KhH72yr8oVbyib1ipDNkDfwmdm1aEy7VSpv1zu1Q7K7Bz6lS2fXOxx1STLrwtGnBvMEe
- tmWRMFIsvxaRi9J4n7+8dU6P09aIfJ7fs7CDK3dn8Qj9aItV7adlPqB9QqEp6UfZX7jw
- RvQf+N3W+KJXxaDTyC7n6eh9MhGZvRph88ZMPtYHjt8cNC1bMcDLUfsy/fjk7toRdIIQ
- eQYA==
+ bh=Ze4qhsbtKGDrJacUSoOe2beM2bKhXT35GxZKJHyJgnU=;
+ b=rHrQzMPI/b05Be0K4pxQdtw/EOzbi/yim+Yod0IgPRClNN8CPeA9uO/RE+3YXvBe3c
+ h0bC30daSRPOwGRMo9YvYwhOlYV0U06ST8mKcg1KWnQ3GtQX5VX/76gGJkyJgyrt0UX0
+ dfYAS4uqJGYM4PuzUMlRh/5rV4Vyt98m6cvM8/ID/tnhjac5qARyWhPWw0cLjPSJ5/Im
+ 4NP7+CfjakAFcmh4hF5QzCAwnUkGYrywI1mBWvwz55oLNDFtHQ1JM/6swO0a8/fU0B1G
+ /nMYxAjQ3EVbADCEh4LlfYaZaT0/3KflK1K7/g2yGNggHFyF+UaAO/OQEYYsKz5iuh+m
+ zl+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBUoafcI0JXhiutp1wcNXupm4MSPZ+BazWm28UiNwMuQnwYICTsnjBWAi3fkQItAMi9++hp7o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFNZqsrnjeL76qmRAAsMSQHjVlfQF2r0xuNi05YklMM+6JT7Sv
- /ims9e+o3PTU7eDRe+rT3iZpp11o9c+ABHJL8LFXDOhi3UyZ5oL37u9DeeICE4kYvr2f+BEeL7u
- Em4VpLamDW0IKGbjFhBXw/tIKa2kzT3CyVV8Xi8dU
-X-Gm-Gg: AY/fxX4pDrdXuZFkipNjP7tjK304LzJN2MNe1DSGBJygrrsjEms9VgFR0Pn4YnvW7lM
- WGmBNqRt7Gee1KwmPbJEhBu7N2P7XBPJL3ylkjYqJhpV6uY8aHH+Pd5L2IWotaM6pp6HQXU72si
- G9pHxaGOMKBJ01DOnmUISVC/hb3oecJSwObHV8n0NO1UYB6PuEvAHtgtmZW9m5pwEGk3ZtOgImn
- msanuyxOhLmvQX0TfjbgVfWqMpg+/Z8iSskX9oGGctDtTDarHnwCG/3ZBpK1lQ/fCTaCg==
-X-Google-Smtp-Source: AGHT+IH2XDLlB1MDCBAiry3Bf0FM4YCfyXb0xp1VmehJs+MkR1b09NHqtxpFYsSqiNRxSSH4qCxgfbt2xGauHDidAHM=
-X-Received: by 2002:a17:907:7621:b0:b80:3fff:420d with SMTP id
- a640c23a62f3a-b803fff4ee0mr1748513466b.24.1766847167732; Sat, 27 Dec 2025
- 06:52:47 -0800 (PST)
+ AJvYcCWVUJ8V9xZjfwzByFgHvUfgQR/fg6fxzRgQHwMhcecuhQRBxnRW8LrE7FXERM3l+MTXgit80VI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWMMGCEzShtaptO0+mCAlhUktgp+AmHLDO2ae43swwfMT7rTdm
+ 6vHQhBrKjDR0RSIHQnoyPDLjvrHFLMLVqAF1uHO8Lrcn1dOKb8jF0k2D/m4kOUHu/j/QsXQjIld
+ Ktw3tn293nykD0L1jHK0sUYlZKVMV0Tf8QWO28xt+
+X-Gm-Gg: AY/fxX6bRn0hVJRkSHhULwKA9GtML798yExT0MgNk619/wj5SXQJqg3FdrVL/ZOYm9q
+ ca9iiridbxfNhXO2+97JPmVOexeWNOQFyWAFZ4ydb5O9lUTS7CAekprs6UpjTjzMFdZYamS8PF7
+ oyTjeEfL4bIc9uq6nA0yvjnBim/No3X7GSy3U5Z4LaD5h3x765OLR9Xi8U6V4LIK18cUKWz+Xpp
+ dlMZT5AuWOyvFoSIYUUWWTeuFGz2JyRKMss+yYvL7omSxrzKAG/NciBKLk2jR15otgN2w==
+X-Google-Smtp-Source: AGHT+IEFQ8eatp5u3hZd17+a247T7okvDabM4LNJMWnz4OlCMgojOX5NT8Vsg0Im1jjV7dbmOBwbTghVGsqcQOO54nY=
+X-Received: by 2002:a17:906:fe41:b0:b73:5a2f:2f0e with SMTP id
+ a640c23a62f3a-b8036ebf4ebmr2593211266b.3.1766847174221; Sat, 27 Dec 2025
+ 06:52:54 -0800 (PST)
 MIME-Version: 1.0
 References: <20251217-a-few-test-py-improvements-v2-0-e1f91e3bf551@baylibre.com>
- <20251217-a-few-test-py-improvements-v2-2-e1f91e3bf551@baylibre.com>
-In-Reply-To: <20251217-a-few-test-py-improvements-v2-2-e1f91e3bf551@baylibre.com>
+ <20251217-a-few-test-py-improvements-v2-3-e1f91e3bf551@baylibre.com>
+In-Reply-To: <20251217-a-few-test-py-improvements-v2-3-e1f91e3bf551@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 27 Dec 2025 07:52:33 -0700
-X-Gm-Features: AQt7F2qHkOHrr2x7C3_tkbLhDd_t7-TbbeOhYTkQTIOCA-RKacFk32CnPMiwD50
-Message-ID: <CAFLszTgkXmb=MTe-VQujfvhsfY8R40n3end4ZyNvcjzQvjn3Yw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] doc: pytest: mention additional requirements for
- venv
+Date: Sat, 27 Dec 2025 07:52:34 -0700
+X-Gm-Features: AQt7F2rC6tCUA1k4iazCNCgjGCCJzv_yFm_YzG7PD4tNjC-myiov5cBMYP2rPlQ
+Message-ID: <CAFLszTgzSGhaFOh7NevH8X3A3858pSi=3KGFBDnYiTU3+zyqfQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] pylibfdt: add requirements.txt for setuptools
 To: David Lechner <dlechner@baylibre.com>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -96,37 +95,31 @@ X-Virus-Status: Clean
 
 On Wed, 17 Dec 2025 at 11:43, David Lechner <dlechner@baylibre.com> wrote:
 >
-> Add a paragraph explaining that in addition to the requirements.txt
-> for test/py/test.py itself, users may need to install additional python
-> packages depending on the U-Boot configuration being built.
+> Add a requirements.txt file to the pylibfdt script directory to specify
+> setuptools as a dependency. This follows the pattern of each tool in
+> U-Boot having its own requirements.txt file. The version is set to
+> 78.1.1 to avoid conflict with the same in tools/patman/requirements.txt.
 >
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
-> v2 changes: none
+> v2 changes:
+> - new patch
 > ---
->  doc/develop/pytest/usage.rst | 4 ++++
->  1 file changed, 4 insertions(+)
+>  scripts/dtc/pylibfdt/requirements.txt | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 
 
 >
-> diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
-> index df3821da20d..f8b32c07edd 100644
-> --- a/doc/develop/pytest/usage.rst
-> +++ b/doc/develop/pytest/usage.rst
-> @@ -90,6 +90,10 @@ environment.  This can be done via the following commands:
->      $ . ./venv/bin/activate
->      $ pip install -r test/py/requirements.txt
->
-> +In order to use the ``--build`` option of ``test.py`` there may be additional
-> +python packages required depending on the configuration being built. These can
-> +be found with ``find . -name "*.requirements*.txt"``.
-> +
->  Testing sandbox
->  ---------------
->
+> diff --git a/scripts/dtc/pylibfdt/requirements.txt b/scripts/dtc/pylibfdt/requirements.txt
+> new file mode 100644
+> index 00000000000..b7dbecdd587
+> --- /dev/null
+> +++ b/scripts/dtc/pylibfdt/requirements.txt
+> @@ -0,0 +1 @@
+> +setuptools==78.1.1
 >
 > --
 > 2.43.0
