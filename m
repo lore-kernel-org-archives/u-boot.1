@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E04B0E92716
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 20:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9395BE9270E
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 20:12:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4902283CB9;
+	by phobos.denx.de (Postfix) with ESMTP id 84DA183D0B;
 	Sat, 27 Dec 2025 21:12:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gO4QK71M";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dsY8jkaA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A90183D00; Sat, 27 Dec 2025 21:12:01 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 2CCE583C6C; Sat, 27 Dec 2025 21:12:03 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18D8383C6C
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 21:11:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6EF83CB9
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 21:12:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-3f5ec7636e2so2677430fac.2
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 12:11:59 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c6e9538945so6054571a34.1
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 12:12:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1766866317; x=1767471117; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1766866319; x=1767471119; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G5Df0rzjEUHEJctVqHB8593PNIKySTWvflrt7ulHvc0=;
- b=gO4QK71MhS+CLVkBmnvfvS10KAwoGpMr1u+2T74xxu5SfdsRDJTgcBT3Y4aoGXqgov
- za+1BTycALfwQLDGIFqak/wKv4yPwBZ2R+TxqbyfStKBIkhkgm6r/sydGngbGpyuej17
- 7+U6Emz83cbBihjZyfIBZzpXdcf1DhUsaat+c=
+ bh=H4U93DXwl+1GePoAxMp2x6eEGk77TTQGHRZcwiUxjQk=;
+ b=dsY8jkaAbzlNBYvUvXAtb5oa3pGeYGCSYTx30ELYaxbf/YC0nurj/067f5lDQJ2sAe
+ WMIYByjmIGdGy+FpgNwoWacvfPSQ15Uu6/gXqu1Hh/lhI0f7MljWhDlBrf+6IUgRxEMd
+ dyadg3AoTIaeFnOTSXcQlAPoyoyVIrMl89POc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766866317; x=1767471117;
+ d=1e100.net; s=20230601; t=1766866319; x=1767471119;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=G5Df0rzjEUHEJctVqHB8593PNIKySTWvflrt7ulHvc0=;
- b=cFuTnv/ns3KRxhi5zKY39FJ2C5XocsU3Q15G3Zsjji5FoF7Ak/3Cby9JF+OIugWyAb
- Os5bSliah06nDa7aF0d21vkacx74txisWt9NgupdJLJwKe2t6vHgu5rs3MEYWBgydWW9
- NitPRe99wKg4VGAc5BCurpXwDxVEFDgEd+KOwIa9M412F6aMOIuHzd3AKhSKkuUSI9mu
- 6/eOVTdyokbliJhDnYVoy7CIuatZTndBBNaBc3SbNA0og/mhg5CQco/ZfZspNQ5rdC7M
- 8lpNxda8l3vQ67SkcFlKY246FLTP/tpBOza2vOjhCOPgdPcoXUPq2vfnoFpYDsCx9wx5
- 1PdQ==
-X-Gm-Message-State: AOJu0Yxv3AO5qfkM6xQWeLkc2WudVfutmq0p8IOOhKhm1DkVtS8v9kln
- 2+PD7JcZy9gm0VY4oOiqqUcn/lSwo1ZlUtDrzgd4IFIWb+bRSesPKpdYO7WY/Rbkk03+SrmcSok
- HGnECa5o=
-X-Gm-Gg: AY/fxX5cZFPnFRI7nS6bBXLTXl8WH1Z7Wlkb+o3Or4Bx3Ylym9XPvPoNIUo151/yFhx
- CYHFAhD+kLWVL4sCmeK6vObG1s6dh8gm7eeeU8cYK5xF0pWxCcYHZWADisOflShhdO14cWto1Vh
- 8EpPkPXWeSU3fIyqo2E34uYsiAql1X6p4ZmIhoO05oefQlUPd3sM7XG+4mNvEqqmljZAAXkMDr9
- uAkfKZAxz+6DOB2BKv8E3BFxvftePGLnmVSlEpVN20od0eeeYx4dGHIvZeovy0yUhtVyhAKs07C
- toQhq3yOYXr4Hh3BP5T8wJeWNmsUFRWZdcMeJOmMmr/7/PhE1ubi9A8eTRo3kHyUZ9W0qYcYcxQ
- JJV0ZoBWJHUKXXCbdr12y0nin/edjwc5fLUSmXJEAVAIgOkopTM3RCCHcvDN3euX2qHAxjN2ZW8
- DiRmpcQsljIx9JG9+k/8ifhvFqJSyiHMDMaPog9WBXnKuINvLf1diHX9P9jvU=
-X-Google-Smtp-Source: AGHT+IFjZKn9jvOSSTsHJ3h0ufTkkSHmQhS0sRzK+AZyE2IBmBC3ECzuQ/h1IncJd4CTiiWHcaoHsg==
-X-Received: by 2002:a05:6871:3869:b0:3e8:8e57:a7a9 with SMTP id
- 586e51a60fabf-3fda592484fmr14204344fac.52.1766866317423; 
- Sat, 27 Dec 2025 12:11:57 -0800 (PST)
+ bh=H4U93DXwl+1GePoAxMp2x6eEGk77TTQGHRZcwiUxjQk=;
+ b=qi86T1wY8QfYezmf0XUqPJ9v2sN5guV+M0j2LFqHUxHvGcBAkYcOej8yOkJnTLKQm8
+ lt398Zwe2naEX+8PjxI4873rrcJHyRMOq2A2ua4zeGTiQVL34Shj3ecALuhuDj7Mhc9P
+ HZRnpqIxatqUUJN1WfA2E6DHnbNVKWBIMxvHZOIUpKrNM8xaepUw3wMKtNJBgdQ17jHE
+ ZxtRjZE4Quqjlwo/8Auf2HVDL2LE/J7saG8OyJJPcwoDBYI2LbFEdBEJeozkk0KkljvV
+ jnH8YRqFlVWC4kQU+yDL+jqeJYGdWXZaCJ6tvo3RdsXhcPqJNV5OJrWr/FU0OPUnx2rF
+ byQA==
+X-Gm-Message-State: AOJu0YwJffXDAP81esiCQq4bfCzC0umH8F/nFlFNWnwDcuhiqch0mIrr
+ 9i7mRpFm+Oe5TGiKOeBbyguSAT/g0W2VcO9Mtzo46oyJO5SMI/7TNMzQxNEpNLfuos78P1xVx0H
+ RfeX023Y=
+X-Gm-Gg: AY/fxX5iRfcuuB6GmsgPn7M/24up7ekISt2YMOAMQT0TXIHqz2N70n0R6cv7OpXiDmX
+ icSnuTF5LbgM5ATc3Tcj1gvGqF9egsuXDMQ+3r6S3ooGEJseIUCOyMZ2tHSIfnzAG3r6SM4jBwJ
+ jYEkS1zFN1yiieOHvWYVWBXkOwFgK0/aM4WqUJeGewVRk9GNd1FoG4cjo7bMAduw6kTyjuaGaOp
+ yfxAqO+OoYVSDcoRlMvyYhakJBw6T9Q2kxz6mQ2NSSIwN3vz5kaUpl1GlDm/knp6FVFUwILGUek
+ VNmwRuoJrxufr7sTLf11uVHJ4Cu+feEV4lSXVwNG4HbU9D3MncFCIuT7jnEsGQXB91Bf979HAsd
+ 4NwfBwAY/VfaavW2lwVYAeHnPkoepQIr1+RJ7CXamVSsG0uC0Ngl80l16MNgVnmQMse/YXovomd
+ NC0qZ4gx5pKdnRNcsmRD6UBoSnyEkLtoppte3TM/EZWCky9D8Ri3Ga2w+wOWw=
+X-Google-Smtp-Source: AGHT+IGPpjfMYvYpxpbO9biUZLFSVBwhQBgr+nKNeMhhYmQbGOLNYcO7nGAlk6dgAEMLGIBryPlFMg==
+X-Received: by 2002:a05:6808:189e:b0:44f:ef44:9cc4 with SMTP id
+ 5614622812f47-457a298b8d7mr15849610b6e.32.1766866318808; 
+ Sat, 27 Dec 2025 12:11:58 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa8d366esm16223040fac.5.2025.12.27.12.11.56
+ 586e51a60fabf-3fdaa8d366esm16223040fac.5.2025.12.27.12.11.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Dec 2025 12:11:56 -0800 (PST)
+ Sat, 27 Dec 2025 12:11:58 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
-In-Reply-To: <20251119174425.58535-1-marek.vasut+renesas@mailbox.org>
-References: <20251119174425.58535-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2] boot: Warn users about fdt_high=~0 usage
-Message-Id: <176686631601.2992512.11115325079245351427.b4-ty@konsulko.com>
-Date: Sat, 27 Dec 2025 14:11:56 -0600
+Cc: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20251124145128.8624-1-marek.vasut+renesas@mailbox.org>
+References: <20251124145128.8624-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v3 1/2] i2c: Inline i2c_chip_of_to_plat() into
+ i2c_child_post_bind()
+Message-Id: <176686631767.2992512.11810242683589941190.b4-ty@konsulko.com>
+Date: Sat, 27 Dec 2025 14:11:57 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,18 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Nov 2025 18:43:53 +0100, Marek Vasut wrote:
+On Mon, 24 Nov 2025 15:51:00 +0100, Marek Vasut wrote:
 
-> In case the 'fdt_high' environment variable is set to ~0, warn users
-> about the dangers of the fdt_high usage. This will hopefully lead to
-> removal of most of the fdt_high ~0 usage over time.
+> The i2c_chip_of_to_plat() is called only from i2c_child_post_bind(),
+> inline i2c_chip_of_to_plat() into i2c_child_post_bind(). Drop the
+> if CONFIG_IS_ENABLED(OF_REAL) and depend on if (!dev_has_ofnode(dev))
+> which does check CONFIG_IS_ENABLED(OF_REAL) internally too.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] boot: Warn users about fdt_high=~0 usage
-      commit: 9235da9446e5e896a06e1555251d11717277a893
+[1/2] i2c: Inline i2c_chip_of_to_plat() into i2c_child_post_bind()
+      commit: 5b968372e2136206585d1b0a1c9e9e683127c057
+[2/2] i2c: Avoid calling dev_read_*() if CONFIG_OF_PLATDATA=y
+      commit: 48e56ac26dd925984d599ce06cb769dabb1251d6
 -- 
 Tom
 
