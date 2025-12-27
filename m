@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32C8E8FDCC
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 13:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F706E8FDCC
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 13:46:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73FDD83B9B;
-	Sat, 27 Dec 2025 14:45:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D750C83BB1;
+	Sat, 27 Dec 2025 14:46:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ij0xOJE5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IOoPSI6T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67EE183BA1; Sat, 27 Dec 2025 14:45:57 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 9E87983BC7; Sat, 27 Dec 2025 14:46:39 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A067F83B72
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 14:45:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40CD783B9D
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 14:46:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-34c7d0c5ddaso4317297a91.0
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 05:45:54 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-34c1d84781bso9023683a91.2
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 05:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1766843153; x=1767447953; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1766843196; x=1767447996; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=m+ZlkyEY8GO+Urs2+easilV/2nyJcyqHf2iKeeCfdGk=;
- b=ij0xOJE5qbJjj2nY4GreuJ1By5u0gDjR5sGR0grqdp+MJ1JVncmDtqI/J2EKVv+SQO
- N8JUItnky5m/6AR4nPDGhUaQM6T4QhqVHTBa43cq0C8WZ5TROhYYIa83E+77qyiakOzi
- b0NNkdiLuU0pfu/Tqm3F3JNpZZ/GYVxFB1IEM=
+ bh=evKjL943kXgdWaXi4GDAedH+lnr7pMc1vx/ruHui2Ns=;
+ b=IOoPSI6T3TsCq23Inp3WIMZTAPO5Xi82swHqI3+pHs6ncfXkjGJEcW5L366NKqZQCL
+ XVgU3t0Qz1XL8GwrToi4THLAT5RY18JmvEk+lcrdax5MzVtZdpqAAw03HYHgyx2Re6F1
+ ojK7uvGzgifToRqSV5DOKZWHlCGPnqeQ9kkUs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766843153; x=1767447953;
+ d=1e100.net; s=20230601; t=1766843196; x=1767447996;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m+ZlkyEY8GO+Urs2+easilV/2nyJcyqHf2iKeeCfdGk=;
- b=LiRN1/+8tJnsj+odOf3VvWUWrVzX9R0xoyMAzlgn406T/VYV6A27yK/MWYDBKk7qEE
- /QlA+O7p2fr5KqLTlnwl6jQHWkYPAITUcC9UMTerIudBtr3iBuQmGX368mY7uZ5CP39T
- BMDweE/dkL5UGt2ZpD4+/rLsanptgoGpJXqXDlSi/w1QwHvIdbjm6sNF6/hGZhsZlOl3
- SWaWW0rXLd7+EbLuZ+D4s46WoCcokRhE74BtfCmvnAzymIuKJnqGqNWRyN29ehXY3MJs
- uptDb0vVlijswZ4aepX9sVB2ZhVU15TBNwfJnuRY1sUa6UPklTTQnqp7kAgsdlFxXR85
- FvZw==
+ bh=evKjL943kXgdWaXi4GDAedH+lnr7pMc1vx/ruHui2Ns=;
+ b=iRqVlPKhTa0CZeopm6obXkYhKjztrJ65fGR1HbWRJ5JnRgw8q1ZtBFAF9pZEZjcD9X
+ 0GC2o7CbZclgNbdd5aHksz/5fyQP6EWghUusPT+vBkl4X467iKnJAMdAop+FHYQPNPq1
+ oswndVcfcnL+cukEjFUGwZp9s/W9X7pKyvbzT5UMtJUhqfm27Yw4DcLLcsPW9qRbNdXN
+ YstgN/B/nZbczHUE0RiJiPWDOrcNKYPb5fZeRf0GD+kjasXYcpbpO7FU5AP4IrwgymS2
+ za4Vf3OV3apTMXk69/3KXVghwVK0FXT3KbiCn4lQuZwHDC7pylYakva5iX2o0wozhnR6
+ bGDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMm/a8nJfMw8eZjCp7SSYUaXAhkwjSWwPv4K0mSMeJ3mk1CiH6yzoAAa+Wq/sC93muRIp1T0E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yws+B8ZVVNcf7w14ShqT/txLidIGVLCCRFmIJGVCiR+oNddeXzJ
- XYp1Oz6lrjQIdGwpps+yOWJFGeBizLJBIlQu+ZyvnqONAfGPJMjgCFmaDjKs/Z2Cd4HJgqwA0jb
- kinCJuwT26VgP5Z5xQ4hrz9QP4Apl+kbNTRs5n/Nc
-X-Gm-Gg: AY/fxX5ztwjCD8Oatlh8mWv9IhnEHkQ0KU5olLJV02yciNJbO+e2rVdDTiu6Bm5h8ID
- z4x2D0nBbho5/fXPN2mI9mcuhfwfEnmx1XXYu/XrNBC9JIW/7DGJhsND27xxVdc7/a5XDd1jXAU
- /oZsiLUAiNZVrIkS6yH1pUT39598WzYIqoJTfh37cV0mVEZXKuZ4/OP2U1NgoTIPbFI7S7o5C1F
- Ff549Hc6SptJCAdCr76h+eHDxXnMbLdNwn1mJ2As4Tsp+rzymo+IwpiUU5ILxmRtYXJ+A==
-X-Google-Smtp-Source: AGHT+IE5LyuWdsYNBYZjElNthhPzaqIdfR5ovMTe2y3M836NEEmjpb0i2SyjWZhzAxrSy6xsOpgbZZoJofUvmhsCqWA=
-X-Received: by 2002:a17:90b:17cf:b0:34b:75f4:96d3 with SMTP id
- 98e67ed59e1d1-34e71d80c4bmr23316677a91.5.1766843153055; Sat, 27 Dec 2025
- 05:45:53 -0800 (PST)
+ AJvYcCX2KKM5n1clS+6hQ1CteRD2rGazZkENtkmbu1hFMqnVhnpUvL6d70/fWqFFCFRQNo7/SZJTyJM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyL4m5mQqyRWKS+9ywq5rXB47vrLFoh8JMHqcrUMJbkKHsH2Z7R
+ 9NPqGEv21Fck2txGh5Qpw9GD+dWhSmKRFGYaYCcuSD9uz8g/o1k4jyBzm5AE+5+YdLq50wdrSzH
+ +e7rQw7OQP3dXyx0V7DkUssZVAMqwCA4COxfxxlBT
+X-Gm-Gg: AY/fxX4/kV2n5Rv8WsFE+JefYVuUgvEEpmqUtd3MWtMXIm+OhHrLcpekk7GpdZwXymr
+ KpFcqRxA7aX21NUxctR10BaYY3AK+5YXMMBzEkYnvP7f50EywH1q/g13fbCwcsHa0hL8V2KRzVS
+ Mb5PF6wdMxFi9qa2dY7B4TuJ7mipNPBPy6Zj7upqmnB+tykWmzRgJCsA5FYTm7pAkN9K93zqOkt
+ LT2Z2VFhDdRVojqRNwMO+ycNHX02kf72aL4jh0LRrLVTFA22mTSagwORT4S0Cj4wvWRnw==
+X-Google-Smtp-Source: AGHT+IFfwzUX+hPGalEVtIv1BWuhvI9JbF0IqlRDaHE8w6pKMs3UKCu+4pc7Pjw35Pu3Z4BjzU8icHoZscOqfB3jPqE=
+X-Received: by 2002:a17:90b:568c:b0:34a:b4a2:f0bf with SMTP id
+ 98e67ed59e1d1-34e92142b2fmr26241559a91.16.1766843195186; Sat, 27 Dec 2025
+ 05:46:35 -0800 (PST)
 MIME-Version: 1.0
 References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
- <20251221015859.738112-7-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251221015859.738112-7-heinrich.schuchardt@canonical.com>
+ <20251221015859.738112-8-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251221015859.738112-8-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 27 Dec 2025 06:45:09 -0700
-X-Gm-Features: AQt7F2peuaA5nZSlYaGqdw_5P-5-n_pfGBLHnZn7Nvm9BGmhMmp19Qa1qcYFJVY
-Message-ID: <CAFLszTgOXPK_LvWVfnAkAgoWk5g8XXdh6rt9J==hax7BXA7KqA@mail.gmail.com>
-Subject: Re: [RFC 6/8] test: cmd: consider configuration in meminfo test
+Date: Sat, 27 Dec 2025 06:45:10 -0700
+X-Gm-Features: AQt7F2o0-ObaH8f4IZoNzt3GTSjNmP4cOELYGnTuYiDIiGT9JmHBjn8RUngm_Hw
+Message-ID: <CAFLszTj+NXRZ=Q0D5-rD03NkSbfhwUMs4WL2pPDDHEE0gLtWEQ@mail.gmail.com>
+Subject: Re: [RFC 7/8] test: initf_malloc is only traced with EARLY_TRACE
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -103,62 +103,34 @@ X-Virus-Status: Clean
 On Sat, 20 Dec 2025 at 18:59, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The output of the meminfo command depends on several Kconfig variables.
-> These need to be taken into account to provide valid test results.
+> Only if early tracing is enable the function initf_malloc can be traced.
+>
+> Add a configuration check.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/cmd/meminfo.c | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
->
+>  test/py/tests/test_trace.py | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 
 
-> diff --git a/test/cmd/meminfo.c b/test/cmd/meminfo.c
-> index 9224b9589f3..d91fa6fcead 100644
-> --- a/test/cmd/meminfo.c
-> +++ b/test/cmd/meminfo.c
-> @@ -15,24 +15,34 @@ static int cmd_test_meminfo(struct unit_test_state *uts)
->  {
->         ut_assertok(run_command("meminfo", 0));
->         ut_assert_nextlinen("DRAM:  ");
-> +
-> +       if (!IS_ENABLED(CMD_MEMINFO_MAP))
-> +               return 0;
-> +
->         ut_assert_nextline_empty();
 >
->         ut_assert_nextline("Region                Base          Size           End           Gap");
->         ut_assert_nextlinen("-");
+> diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+> index 7f897e4c366..bbe6dd7de41 100644
+> --- a/test/py/tests/test_trace.py
+> +++ b/test/py/tests/test_trace.py
+> @@ -159,7 +159,8 @@ def check_function(ubman, fname, proftool, map_fname, trace_dat):
+>              base = timestamp
 >
->         /* For now we don't worry about checking the values */
-> -       ut_assert_nextlinen("video");
-> +       if (IS_ENABLED(CONFIG_VIDEO))
-> +               ut_assert_nextlinen("video");
-> +       if (IS_ENABLED(CONFIG_TRACE))
-> +               ut_assert_nextlinen("trace");
->         ut_assert_nextlinen("code");
->         ut_assert_nextlinen("malloc");
->         ut_assert_nextlinen("board_info");
->         ut_assert_nextlinen("global_data");
->         ut_assert_nextlinen("devicetree");
-> -       ut_assert_nextlinen("bootstage");
-> -       ut_assert_nextlinen("bloblist");
-> +       if (IS_ENABLED(CONFIG_BOOTSTAGE))
-> +               ut_assert_nextlinen("bootstage");
-> +       if (IS_ENABLED(CONFIG_BLOBLIST))
-> +               ut_assert_nextlinen("bloblist");
->         ut_assert_nextlinen("stack");
+>      # Check for some expected functions
+> -    assert 'initf_malloc' in vals.keys()
+> +    if ubman.config.buildconfig.get('config_trace_early'):
+> +        assert 'initf_malloc' in vals.keys()
+>      assert 'initr_watchdog' in vals.keys()
+>      assert 'initr_dm' in vals.keys()
 >
->         /* we expect at least one lmb line, but don't know how many */
-> -       ut_assert_nextlinen("lmb");
-> +       if (IS_ENABLED(CONFIG_LMB))
-> +               ut_assert_nextlinen("lmb");
->         ut_assert_skip_to_linen("free");
->
->         ut_assert_console_end();
 > --
 > 2.51.0
 >
