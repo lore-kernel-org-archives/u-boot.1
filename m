@@ -4,62 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C3FE8FDB1
-	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 02:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E654CE8FDBE
+	for <u-boot@archiver.kernel.org>; Sat, 27 Dec 2025 02:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6385E83AC5;
-	Sat, 27 Dec 2025 03:08:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id DA62483B22;
+	Sat, 27 Dec 2025 03:55:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.b="HcOOH6GT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TcsODBB8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EB0F83B21; Sat, 27 Dec 2025 03:08:02 +0100 (CET)
-Received: from mail98.out.titan.email (mail98.out.titan.email [54.147.227.70])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80C6A83AB0
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 03:07:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-Received: from localhost (localhost [127.0.0.1])
- by smtp-out.flockmail.com (Postfix) with ESMTP id 4ddQqf2hFPz9rwc;
- Sat, 27 Dec 2025 02:07:58 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; bh=cu3Bjkts6tt+86E3qLqReA3hFGqwIBDWYFPLkElAPw0=; 
- c=relaxed/relaxed; d=ziyao.cc;
- h=from:to:cc:subject:message-id:date:references:mime-version:in-reply-to:from:to:cc:subject:date:message-id:in-reply-to:references:reply-to;
- q=dns/txt; s=titan1; t=1766801278; v=1;
- b=HcOOH6GTmK3G8hmYNRyg19yMTlZPETo2TjUe9T0lxcT7w5I0R0IzZq+RUFCsvUcU6Lj2W3Sx
- hoDmGJcemdtPqHUQBmGHkR4e+miQFpekilyxm3dqW0C7zt6/4Aya17800tEt2o7Ywjo1TNeRFvW
- sen+KhKhVeQbQUJYuAKNzhUU=
-Received: from pie (unknown [117.171.66.90])
- by smtp-out.flockmail.com (Postfix) with ESMTPA id 4ddQqb1J26z9rvf;
- Sat, 27 Dec 2025 02:07:54 +0000 (UTC)
-Date: Sat, 27 Dec 2025 02:07:47 +0000
-Feedback-ID: :me@ziyao.cc:ziyao.cc:flockmailId
-From: Yao Zi <me@ziyao.cc>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>, alison.wang@nxp.com,
- angelo@kernel-space.org
-Cc: trini@konsulko.com, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
- eleanor15x@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/4] serial: Add Goldfish TTY driver
-Message-ID: <aU8_VIK_oTHY2RTF@pie>
-References: <20251226175400.1154417-1-visitorckw@gmail.com>
- <20251226175400.1154417-2-visitorckw@gmail.com>
+ id 5C09D83B30; Sat, 27 Dec 2025 03:55:00 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A587C83AB0
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 03:54:57 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b79e7112398so1340698166b.3
+ for <u-boot@lists.denx.de>; Fri, 26 Dec 2025 18:54:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1766804097; x=1767408897; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aiYL25fwaY0EzJfNbNu/6kdSlkydAZT4BRPa4d0UCSM=;
+ b=TcsODBB8fO74+JA7EgKEVfaj2prJVSJ9m8eJUpJlAOZJF6iVTa/hNdfKNPp41UKUHb
+ hpmDFihwHQ7T+/wVOU+DUSnvuN+I6B762c7h5kNkwSSMIRmxqA+lMsE8b4qlCNJAYlIf
+ baD1brHjJpY0W6yH6myPWS8wIqjzQZxFPEIsU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766804097; x=1767408897;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=aiYL25fwaY0EzJfNbNu/6kdSlkydAZT4BRPa4d0UCSM=;
+ b=iMEgvXUsSYQV9qfMyMt3m2Zncu4q1zQIG2XVAkuaOBpe4KCglrz4Qi9E9hmsNLFC7N
+ P4XP3W9En/KEp4//Tk4lrEPdNUukm24atbrnZTzEmtDxo+JOYk/dEkDXrRSoaQ5/Z6Yo
+ Xl2/o/ueifLNPTtrUcEpQP4exoaxQJ5zrv4TwmHdw+yYJuyLMZbhcgr5+aFG3BPUQ9UZ
+ SOFb2NwHBvFQeP08w7fJjdyAIktdeovxJAanz/xuyElhIMW588IAh2cPHhfbxw/kLOB1
+ gLwRg2FO0pxK0jC4B7tygAD6Vy/wZrEIw4Ks1DTTwIVswd+cVfiE+Bqt4hoTCdVw4A7X
+ 3EMA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2zGuCuGjFgz7DqRZ9jQ6ZZjkxMIBOam08hPNFy85U5KRpd+G6epEypGd4t1N2JEqtc5H4vX4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBPYlKxjPGUSf/cBPsxpNZAp//doG0MtRdmmN0Ht2UpU+6x3bO
+ 7VWaeK/7MLPxdpsd6ONr7ZQw5GTac9XbfTxKSizh8nDp6AaNkEi98hLUfw3mJ9Bmmt/XFgir32x
+ gOK2FUprOmIylHMbMNfFNqd2PL7gNGwDbM6c7pKNo
+X-Gm-Gg: AY/fxX4wUO2Hfuz5HPCimLy/520UNNQoM5hGd60bNg+gFUImTT58Ur98j0R+T5CzZGx
+ ofLTUFxgYKWzFfobNVAXGN6AuwG0YXnBjxhOcO4H8LwVp0tbbFj0GXgWE/FfqAqU3ogyvzHB92l
+ iDzbiYEJhUIXOQaM2RvWmWhIWWAU8qXHGIUTLLoUdZlNipIlUGsr/VQRr8fNvYPW/l4E7b5Udzl
+ He/+/EAw5owVsoYrqB1ewIK78rkeCdK73PpvH2MomlUCajFqCAkVWLdEI1q3kEE4pymRQ==
+X-Google-Smtp-Source: AGHT+IGix6nxQ7kr2MsNLnnvLwTwQqZz3bkO5SoLnD5g3uF7FiObhTBUjjp7xphDjQQS5sy4mLXEcqT5q+eWlKOLthQ=
+X-Received: by 2002:a17:907:7f16:b0:b76:7fe7:ff37 with SMTP id
+ a640c23a62f3a-b8036f1424dmr2591749866b.18.1766804097057; Fri, 26 Dec 2025
+ 18:54:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251226175400.1154417-2-visitorckw@gmail.com>
-X-F-Verdict: SPFVALID
-X-Titan-Src-Out: 1766801278196824877.21635.2732056382527454645@prod-use1-smtp-out1003.
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.4 cv=WtDRMcfv c=1 sm=1 tr=0 ts=694f3f7e
- a=rBp+3XZz9uO5KTvnfbZ58A==:117 a=rBp+3XZz9uO5KTvnfbZ58A==:17
- a=kj9zAlcOel0A:10 a=MKtGQD3n3ToA:10 a=CEWIc4RMnpUA:10 a=pGLkceISAAAA:8
- a=NYmWw8xXgvd3pRJF6_MA:9 a=CjuIK1q_8ugA:10 a=dF-1CEOklZHAHjuG_jZJ:22
- a=3z85VNIBY5UIEeAh_hcH:22 a=NWVoK91CQySWRX1oVYDe:22
+References: <20251219202121.4180810-1-trini@konsulko.com>
+ <20251219202121.4180810-4-trini@konsulko.com>
+ <CAOf5uw=86_NwDM=96Jpz+5o4HDh628KTfhqjJJEmdLNEv55JOQ@mail.gmail.com>
+ <20251226185752.GG710860@bill-the-cat>
+In-Reply-To: <20251226185752.GG710860@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 26 Dec 2025 19:54:47 -0700
+X-Gm-Features: AQt7F2prHy4BAd0kFMVllBoEgb6QOCqER2XqqzdqHEH7_SAAhEYRJV4LMO6IAms
+Message-ID: <CAFLszTjkRNmUc6m4MaDQEfdTNQzHedU1iYF=gV6A3Z3e=bZmHg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] dm: core: Default to using DEVRES outside of xPL
+To: Tom Rini <trini@konsulko.com>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,97 +95,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 26, 2025 at 05:53:57PM +0000, Kuan-Wei Chiu wrote:
-> Add support for the Google Goldfish TTY serial device. This virtual
-> device is commonly used in QEMU virtual machines (such as the m68k
-> virt machine) and Android emulators.
-> 
-> The driver implements basic console output and input polling using the
-> Goldfish MMIO interface.
-> 
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> ---
-> Changes in v2:
-> - Update SPDX license identifier to GPL-2.0-or-later.
-> - Sort header inclusions alphabetically.
-> - Move RX buffer into goldfish_tty_priv instead of using a static buffer.
-> - Make sure getc only read a single byte at a time.
-> 
->  MAINTAINERS                      |   6 ++
->  drivers/serial/Kconfig           |   8 +++
->  drivers/serial/Makefile          |   1 +
->  drivers/serial/serial_goldfish.c | 104 +++++++++++++++++++++++++++++++
->  include/goldfish_tty.h           |  18 ++++++
->  5 files changed, 137 insertions(+)
->  create mode 100644 drivers/serial/serial_goldfish.c
->  create mode 100644 include/goldfish_tty.h
+On Fri, 26 Dec 2025 at 11:57, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Dec 26, 2025 at 07:28:43PM +0100, Michael Nazzareno Trimarchi wro=
+te:
+> > Hi Tom
+> >
+> > On Fri, Dec 19, 2025 at 9:21=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
+rote:
+> > >
+> > > The devm alloc functions that we have may follow the Linux kernel mod=
+el
+> > > where allocations are (almost always) automatically free()'d. However=
+,
+> > > quite often we don't enable, in full U-Boot, the corresponding automa=
+tic
+> > > free. This in turn leads to memory leaks. Rather than manually tracki=
+ng
+> > > allocations and implementing frees, rework things so that we follow
+> > > expectations now and enable the DEVRES functionality to manage frees.
+> > >
+> > > This turns DEVRES from a prompted symbol to a symbol that must be
+> > > select'd, and we now remove our non-managed alloc/free functions from
+> > > outside of xPL builds.
+> [snip]
+> > > @@ -279,8 +280,8 @@ config DEVRES
+> > >           released whether initialization fails half-way or the devic=
+e gets
+> > >           detached.
+> > >
+> > > -         If this option is disabled, devres functions fall back to
+> > > -         non-managed variants.  For example, devres_alloc() to kzall=
+oc(),
+> > > +         This option is disabled in xPL phases anddevres functions f=
+all back
+> >
+> > Fix this typo
+>
+> OK.
+>
+> [snip]
+> > Can you please in the commit message a concrete example on what this
+> > commit takes care of?
+> > In short expand here:
+> > " in full U-Boot, the corresponding automatic free. This in turn leads
+> > to memory leaks."
+>
+> Sure. So for example:
+> commit 00e1fed93c8c3e4c9037741ea1b70a9e693a6e65
+> Author: Francois Berder <fberder@outlook.fr>
+> Date:   Tue Nov 11 11:30:19 2025 +0100
+>
+>     firmware: ti_sci: Fix memory leaks in devm_ti_sci_get_of_resource
+>
+>     - Fix temp memory leak
+>     - Free memory during error handling
+>
+>     Signed-off-by: Francois Berder <fberder@outlook.fr>
+>
+> Is needed (I'd have to re-read the threads to see if in whole or in
+> part) because DEVRES is optional today. And barring
+> drivers/core/devres.c doesn't work the way it's documented and expected,
+> the normal unwind path will eventually say "Ah, and devm_kfree these
+> devm_kmalloc'd areas". This was part of either the discussion for that
+> patch, or another one of Francois' patches adding devm_kfree() calls to
+> devm_kmalloc()'d areas.
 
-...
+OK we seem to have got there now.
 
-> diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
-> new file mode 100644
-> index 00000000000..ce5bff6bf4c
-> --- /dev/null
-> +++ b/drivers/serial/serial_goldfish.c
-> @@ -0,0 +1,104 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-> + * Goldfish TTY driver for U-Boot
-> + */
-> +
-> +#include <asm/io.h>
-> +#include <dm.h>
-> +#include <goldfish_tty.h>
-> +#include <linux/types.h>
-> +#include <serial.h>
-> +
-> +/* Goldfish TTY Register Offsets */
-> +#define GOLDFISH_TTY_PUT_CHAR       0x00
-> +#define GOLDFISH_TTY_BYTES_READY    0x04
-> +#define GOLDFISH_TTY_CMD            0x08
-> +#define GOLDFISH_TTY_DATA_PTR       0x10
-> +#define GOLDFISH_TTY_DATA_LEN       0x14
-> +#define GOLDFISH_TTY_DATA_PTR_HIGH  0x18
-> +#define GOLDFISH_TTY_VERSION        0x20
-> +
-> +/* Commands */
-> +#define CMD_WRITE_BUFFER   2
-> +#define CMD_READ_BUFFER    3
-> +
-> +struct goldfish_tty_priv {
-> +	void __iomem *base;
-> +	u8 rx_buf;
-> +};
-> +
-> +static int goldfish_serial_getc(struct udevice *dev)
-> +{
-> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
-> +	unsigned long base = (unsigned long)priv->base;
-> +	unsigned long paddr;
-> +	u32 count;
-> +
-> +	count = __raw_readl((void *)(base + GOLDFISH_TTY_BYTES_READY));
+From my reading of that commit, the author does not understand what
+devres is. The same code in Linux would be just as odd.
 
-I think it's okay to do pointer arithmetic directly against priv->base
-in GNU C, right? In which case void * is treated like char *.
-
-If I'm correct, variable base could be dropped, and we could avoid some
-casts here and below.
-
-> +	if (count == 0)
-> +		return -EAGAIN;
-> +
-> +	paddr = virt_to_phys((void *)&priv->rx_buf);
-> +
-> +	__raw_writel(0, (void *)(base + GOLDFISH_TTY_DATA_PTR_HIGH));
-> +	__raw_writel(paddr, (void *)(base + GOLDFISH_TTY_DATA_PTR));
-> +	__raw_writel(1, (void *)(base + GOLDFISH_TTY_DATA_LEN));
-> +
-> +	__raw_writel(CMD_READ_BUFFER, (void *)(base + GOLDFISH_TTY_CMD));
-> +
-> +	return priv->rx_buf;
-> +}
+So I suggest expanding the help for 'config DEVRES' as well.
 
 Regards,
-Yao Zi
+Simom
