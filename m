@@ -4,54 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA827E784BE
-	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 21:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B40CFD3B7E5
+	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 21:41:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E89C83B97;
+	by phobos.denx.de (Postfix) with ESMTP id AB33D83BC8;
 	Sun, 28 Dec 2025 22:40:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="CUf/zR9n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DTA2JsUH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16D6083A57; Sun, 28 Dec 2025 17:45:43 +0100 (CET)
-Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
- [109.224.244.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CE81583A8C; Sun, 28 Dec 2025 20:13:35 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CDCA83885
- for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 17:45:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 956F983A3D
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 20:13:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=t.preissl@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1766940340; x=1767199540;
- bh=nlc2VCuaB0CuLfJ9/tR9+I5VNv53o92wkdrXSg4YwN4=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=CUf/zR9npUzxZkQ6EvSH0K8TfH8cL3hDPJUE87qx88LsV1hTJ1bM1uraWS/0bVrfU
- DOMOw341wfSjhh2bqFFFOsioXdYtKypEnOLWHjJui2iOll/e3vP/mlkiqoIfaOGtjE
- ld7ZPn7tGikdFJQP9tBN8DLFhE4KO7drssW71/GwlGSWSGZPoTDKeYYnSSqtNtcu9i
- jGm384OsdlcK9x9Bj1jDPgWe+h0fs2ldOld3q2cjWu++U3XMdjx+Y/XowYEpH/Q9GG
- D/ZiDn7zpbPC+rjzCnIS1s1ODgbAGW/H9Qy1wwpRhRJ1GT21KlRcn7yMfU/X+afLkN
- +BlBv3wGYFydg==
-Date: Sun, 28 Dec 2025 16:45:34 +0000
-To: u-boot@lists.denx.de
-From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Subject: [PATCH 4/4] fs: ext4: preventing integer overflow in
- ext4fs_get_bgdtable()
-Message-ID: <20251228164500.313817-5-t.preissl@proton.me>
-In-Reply-To: <20251228164500.313817-1-t.preissl@proton.me>
-References: <20251228164500.313817-1-t.preissl@proton.me>
-Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: bd5effd3999b81434f536910c56f649aa03b675e
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7aa9be9f03aso6914532b3a.2
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 11:13:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1766949212; x=1767554012; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=S6f+hP7GTwuu5m9YyOQEziGynKol8K2Aylj7HBxhysw=;
+ b=DTA2JsUHeA4iK/BeTuTqhPC5IVIkapM+Zow7Txmi2ebMFDL68Sd2iTjJRAOFYfaVoq
+ zzTBH4MbfS+bEp+OSwgH4X3Iwn6gFrsJdClr/wtnwagN8T1qxZcqx+wvkr9wl1K5GKw2
+ +zn80M9tqvdSiZj6UQ55iRoYOFss4u5x1hI9K9sAGU/YEOB+xF+pwxxdWT91Zd52L9Rw
+ VXzB65q6od9b/qxdLJRCIoPOXZkYip0OxPSzjnmEy1EVv7ukUqnzUsXMbZNbvXWfkTgb
+ CfcauVYOio9NTr5Z1SMp26mKIMigGeEH5la8KqKzrZQ4ldqOVcv2JYanCMCtG0Ok2IrR
+ 71GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766949212; x=1767554012;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=S6f+hP7GTwuu5m9YyOQEziGynKol8K2Aylj7HBxhysw=;
+ b=AXOKwxR9iQ05IqRDXEuKwP3dUusT4uZw5Rg6nVwOtrFjylTR73cw1MIhRh3yZXDWGt
+ ZhG/8vx4REujIskC3xOxQBHzYi/1DCxMSJrqxhO+lOuUBFwFgraH86SXwd4Uz6JqfzDD
+ QkeGfM0tym2AulRYsJBaMhZ3BezTpH5eYOyQqq6CSryLGsYAZr6rt8T0ejHF/vZGaJba
+ U4qBFuCCHHl4bJOqZfkvyg0Lo6G0fZprsBxoztDrAGcU9CFCmMYz0gSepJJ/c4AMeDr8
+ Py1WX2w4VnTFLS+iI7ZUCEA78bnT44JSW99APdREvPtT3U75QKGLYOgcHCiPLwzMpKtV
+ d3+g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXibogXwYY9Q2oPWOOjSani5n7lMaEJwpZkecbSC/n4brv6pi/tzr+bqC8i+ehHsqzKZgH26gE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZ4RNBL2ulSP6Z6jm8V7PujUwCtFP0FJm3IYDq2V3RCqJR5eBN
+ yzwCqz1gyVSKD5r/1jq1SmI7kjIKC+Sy8zIeaPMqfT8ziBwRlQTbY4Ty
+X-Gm-Gg: AY/fxX6iUDK0qC/dacfGWPjIFfqKj1f8RYgbmR9PVwSu99/B9GWeeCldEfdKag4cn/F
+ r0NsEaizfLhkiaXSIl5E0GCsdj08SBn1AlIsKJaZ3OyBMjkL6zcYzMl0w0O5fNnUcH3Uk+oyZ6s
+ Zu/8kuA39n2YOp/AHETMDp0gSsWdkkMmFbNygv3D+ROwvxfbJ6QyMzcXX6FHPqwIySJC8Nzuzsh
+ WW3vaBqp6PuGCzc+QN+HDAKkW+dxFLcel0U5pzdLks6QcfAu7VZ8PYd6WzyhLrNcKA0z4gC51en
+ CrNYGAQ1Zmp1njbaI8q4mAqiA6C1UndEbXMf6MW2oQ7b5Si+SVJCWSz1Th0LiltDTk12SGz322C
+ qIY8LlHjgVSrHhD1j1a0mEJaipLZ6q/aLdgpn4Rg8UgWRcoWH4yJkiGNGYR7xa6NL1IlkPTRDLw
+ u4JbsyXQvizdKHFFuExS9LYqgd
+X-Google-Smtp-Source: AGHT+IHhgYXoc5DSqKZh+fJ+1bArE8gYeOFj9wq8JM1mP2dIUIblOnnYBNfEL/nZkM0916KdjoYkvg==
+X-Received: by 2002:a05:6a00:44c7:b0:7e8:4471:8d1 with SMTP id
+ d2e1a72fcca58-7ff66872721mr21050990b3a.50.1766949211986; 
+ Sun, 28 Dec 2025 11:13:31 -0800 (PST)
+Received: from google.com ([2402:7500:499:de94:67e0:3b56:a860:6efc])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7ff7a844d5asm27235374b3a.3.2025.12.28.11.13.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Dec 2025 11:13:31 -0800 (PST)
+Date: Mon, 29 Dec 2025 03:13:27 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Daniel Palmer <daniel@0x0f.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com,
+ me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 3/4] board: Add QEMU m68k virt board support
+Message-ID: <aVGBVwgr8528wTcn@google.com>
+References: <20251226175400.1154417-1-visitorckw@gmail.com>
+ <20251226175400.1154417-4-visitorckw@gmail.com>
+ <CAFr9PXnZPOw3V9vwxtpvkVFfjOt10ZmfSjY6yMLcFnGW15bvZQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFr9PXnZPOw3V9vwxtpvkVFfjOt10ZmfSjY6yMLcFnGW15bvZQ@mail.gmail.com>
 X-Mailman-Approved-At: Sun, 28 Dec 2025 22:40:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -69,45 +104,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
----
- fs/ext4/ext4_write.c | 7 ++++++-
- fs/fs.c              | 2 +-
- 2 files changed, 7 insertions(+), 2 deletions(-)
+Hi Daniel,
 
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 5b290f0d80d..02cf9cf0cc3 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -108,7 +108,12 @@ int ext4fs_get_bgdtable(void)
- {
- =09int status;
- =09struct ext_filesystem *fs =3D get_fs();
--=09int gdsize_total =3D ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz);
-+=09size_t alloc;
-+
-+=09if (__builtin_mul_overflow(fs->no_blkgrp ,fs->gdsize, &alloc))
-+=09=09return -1;
-+
-+=09size_t gdsize_total =3D ROUND(alloc, fs->blksz);
- =09fs->no_blk_pergdt =3D gdsize_total / fs->blksz;
-=20
- =09/* allocate memory for gdtable */
-diff --git a/fs/fs.c b/fs/fs.c
-index efcf94caa1b..f22b75573b9 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -1071,7 +1071,7 @@ int do_mv(struct cmd_tbl *cmdtp, int flag, int argc, =
-char *const argv[],
-=20
- =09=09if (__builtin_add_overflow(dst_len, src_len, &total) ||
-    =09=09=09__builtin_add_overflow(total, 2, &total)) {
--  =09  =09return 0;
-+  =09  =09=09return 0;
- =09=09}
-=20
- =09=09new_dst =3D calloc(1, total);
---=20
-2.43.0
+On Sun, Dec 28, 2025 at 10:16:01AM +0900, Daniel Palmer wrote:
+> Hi Kuan-Wei,
+> 
+> On Sat, 27 Dec 2025 at 02:54, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> > diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> 
+> > +int dram_init(void)
+> > +{
+> 
+> > +       /* QEMU places bootinfo after _end, aligned to 2 bytes */
+> > +       addr = (ulong)&_end;
+> > +       if (addr & 1)
+> > +               addr++;
+> 
+> Maybe ALIGN() or round_up() could be used here instead of manually coding it?
 
+Ack. Using ALIGN() is indeed cleaner.
+I will update this in the next version.
+
+> 
+> > +       record = (struct bi_record *)addr;
+> > +
+> > +       if (record->tag != BI_MACHTYPE)
+> > +               return 0;
+> > +
+> > +       while (record->tag != BI_LAST) {
+> > +               if (record->tag == BI_MEMCHUNK) {
+> > +                       gd->ram_size = record->data[1];
+> > +                       break;
+> > +               }
+> > +               record = (struct bi_record *)((ulong)record + record->size);
+> > +       }
+> 
+> One thing I found when I did the bootinfo parsing in my version is if
+> I corrupted (during relocation etc) the bootinfo this type of loop
+> would often get stuck forever.
+> I'm not sure what the technical limit of the number of bootinfo
+> entries is but bounding this to something reasonable feels like a good
+> idea.
+
+In that scenario, I assume the correct error handling would be to add a
+loop limit and trigger a panic() if exceeded?
+
+Regards,
+Kuan-Wei
 
