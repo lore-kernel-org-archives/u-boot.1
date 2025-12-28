@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCFFE92722
-	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 01:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C37E92722
+	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 01:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDB0F8398D;
-	Sun, 28 Dec 2025 02:29:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id 8158F83990;
+	Sun, 28 Dec 2025 02:53:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="NXI/PEJe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ksN1+eI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AA4083990; Sun, 28 Dec 2025 02:29:15 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id ED7FF8399B; Sun, 28 Dec 2025 02:53:46 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80AC183981
- for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 02:29:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4756183981
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 02:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-34cf1e31f85so6610357a91.1
- for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 17:29:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-598f81d090cso8815797e87.2
+ for <u-boot@lists.denx.de>; Sat, 27 Dec 2025 17:53:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1766885351; x=1767490151; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yec+pHDSeoCTKV0S3MsYt88PvWeBr6fRveRKUVs8tKM=;
- b=NXI/PEJepoVlB1CYWXCoXg70WAzFIcBVt5wWZbqB8r9CEUepW7+jz/tD9cM0WjOQ3t
- NFlEysLHLdGEIIfKRroc2edKRqATqLsbb/oTj+8zqBz9Yxzj+QNXV5hN4WvbctR1fX2I
- uUZihQnWgZVjM72o7KZpCOf0HOSsntA+vmAcY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766885351; x=1767490151;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1766886823; x=1767491623; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yec+pHDSeoCTKV0S3MsYt88PvWeBr6fRveRKUVs8tKM=;
- b=K7/QUaMUGHMFpMmDLiwZJU0T4Gj6UYqXtxhHKfhuCvGjmJeUOU7z950Xlj0fdz7/xH
- SxOWlLG71Q8HoSF/CIiFfkwJ/jjH1wIzDea1jWbfvMZIJjDbC5wiuhTbIfxHNLJXk00y
- E4ePZeULcY3/STfmTlFTfKKQpoT7dQuNLG/UYH4K3B0WL3P60CNWUbbr5g+usLGAutl4
- +g3cUF/YGwCZfrXaJw2gNEJdBm9VLMc0Bn2QL+QS7TpFW6/JTD1kjHGOmOvPFXXixTgw
- QLjTj6TTSIKFjmh+FJljsXFYtPlUh62Cb/NsWjhyw20/mefd6z+tyiE15dSYx1BHqPZM
- yODQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGldd9E+iXb1zNA8olTJDxthKjGpvmEjvm3oT8Q5l+5ob/eCzDquRjFabfNex3shGzGamazgk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbwcAAUSjAE719n1VqCmxEhP0slBpmw9PTSYaZHENiYCXT4vY3
- i1dMxdO8s70jXvPSdYsad6d2y3ILv0kOJ/lzGK8jSeRWhKO0Xkp+MMx4r5fYVtLSbUvwSnf3WXZ
- OHdMsfQgeJItdC4oxbBbj8f+sdStsoR8GWPMYwKfYTw==
-X-Gm-Gg: AY/fxX4L4rT9mFk669nbw9cXMWrRqRl6wuWwbLVLvYNKLTaT91vuiJ/fwB6zYeuPYe2
- mN7+3TrpDUtQ3pTwXiil/bE7uScG0UokOgn9bbYxRjno6fsI4qRndRpRgYMfTkDFqW9bkENF0m9
- emJAl75mtiDgL4JI1TMtHFhuU5RiTtSEODYEVykVHb/gQE63c7H0sMljGwRcfFkxL+YF38OMJYH
- p24SI0P9Yu9xadfhdSPrB30wbKty7//xIAGf+G+BRuYS3+gV/4eqqinPuSzeoW9/Q8vjcNa
-X-Google-Smtp-Source: AGHT+IFp8ahy4HHmTwvPjm7N3IvHb0Z6mHGCfU646YQKeEMAviVsfJn4UYZYY1wF+/FGbX2IOCfowyU0zXRsSmLuK6M=
-X-Received: by 2002:a17:90b:224a:b0:343:684c:f8ad with SMTP id
- 98e67ed59e1d1-34e9211c3c1mr24925775a91.4.1766885350720; Sat, 27 Dec 2025
- 17:29:10 -0800 (PST)
+ bh=aP8kZ1XDSI/16gWIUbXb4AO3pGJ8qgCC4VK8V8lYSiU=;
+ b=ksN1+eI4MHD1UhBl2rS7Bm9d7EGjEaXo1AhOT5BtMXRKVT5HA0OvqSLh88CURDlzwN
+ vzpWeBgWUab0+PZNDsYyI0BD/AsanPLqA4Da0ll3cfSg9UEOG5punpQ5UikR+ALUFuBK
+ beW1DILDGBXxtrhWKinZzUoBN0RTZAcoE30+LnqXNs5Fh43DstrwsAGhHKwgZhyoa0oS
+ gcTAr/WzZlT31EboOXIN316loEcPwFR0jdF37zAKiYhBIS7LDB47CuZu8lnpSFMotyTX
+ qAyhzw+TWeX2laEFyjMi3lgqJ5nRYnJLcXQM7bNOomnZh40oNNmwY9rn7nfuXm/KnGxC
+ cRJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766886823; x=1767491623;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=aP8kZ1XDSI/16gWIUbXb4AO3pGJ8qgCC4VK8V8lYSiU=;
+ b=ivLb57KrnDpo38KcRjgKVUSwVz/DkkA/4TqeQOZR5Q16hhZqNArexzYpW1Kq/KWtiF
+ UiZVidYLFZFylNk+Domk56HKAsmEpclRyJI/0oVmDDiHDPuCWRZtJY5/bhSHmkq8Cpo0
+ mcCUS7FpoMOjjH5Yqbc9bi6/2n2JWC5xO2gl4HgzjKbvDKm53ktQoG3L259nGrCJT0Di
+ xymSl2JfSi6CvTwKeXEGwMIwgSBjgHVrYosKKDKR0M3f/jGODkC8N65gKusJ95m9fir4
+ EH/vag4ChJxaBMdg2F+3cBxAalCCR1wijBYqTbtEvezNkjLcNlUfaGeV+sFJ98n1PpIp
+ dpqQ==
+X-Gm-Message-State: AOJu0YyyURE9dElCKRzuh8lEILMl7f7mY9r448n50qSHpXddPXCq5acE
+ /RRmRYc4wLdgs6lA6l9LCpBgKnRUm4xwcZMsvCLwRSjfSDPF3fuZNTSKAdJ6FakOFTgotIZnEBc
+ +RA7GvUflqLAFV5fQxlpoK0/cTpQ1rvg=
+X-Gm-Gg: AY/fxX7I23xzHRtpzNOFkhNbqlignS3InU3X4NysbEbFZK/dhFVC1/sFT2fHY01yAeA
+ 7Ofdjbov5xapqcvuNSyGoeJg2FGqey1bzOsIG8fJeLzU+h+58KpOnhi6Irb5/pu5yH3EOTS1+IO
+ OepTtomUqMTjtRIIZFDpNR1sCEgxCAEA+ftTAPBDAuQIdH2s376Pa/Rb1sXlZCJcgDg6U48t20l
+ UYIEt8hZu9JesV9iqOJ77tt0S24XjuuFbsXWkoCF3d6sWefqDomvusVcTy5gXxSuti2lDTtQB2j
+ 77dKxSvJ
+X-Google-Smtp-Source: AGHT+IFPc3VCL54BvcL6QY6wACZ6S79yDMMc0fTEi1YlQ6MX56mHidA+nwpDZZSOQXJSQxk03oByhWbBg7QhWAa/kjk=
+X-Received: by 2002:a05:6512:3f26:b0:594:4b55:d2dc with SMTP id
+ 2adb3069b0e04-59a17d64f00mr8542396e87.47.1766886823135; Sat, 27 Dec 2025
+ 17:53:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20251226175400.1154417-1-visitorckw@gmail.com>
- <20251226175400.1154417-3-visitorckw@gmail.com>
-In-Reply-To: <20251226175400.1154417-3-visitorckw@gmail.com>
-From: Daniel Palmer <daniel@0x0f.com>
-Date: Sun, 28 Dec 2025 10:28:59 +0900
-X-Gm-Features: AQt7F2p__fePfqoJJClc-Ga3jtIlmtuQTrgciZU1Xgy9trmS_tMThmS5iaHUtgU
-Message-ID: <CAFr9PX=JzXVa-HTvV-Cbw3m+kvwYP_7RiG_jE8+WW+KKG59unw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] m68k: Add support for M68040 CPU
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
- me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
- u-boot@lists.denx.de
+References: <20251218083326.644326-1-brian.ruley@gehealthcare.com>
+ <20251218083326.644326-8-brian.ruley@gehealthcare.com>
+In-Reply-To: <20251218083326.644326-8-brian.ruley@gehealthcare.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 27 Dec 2025 22:53:31 -0300
+X-Gm-Features: AQt7F2roihmtmglaT2U9yHvPGJfFhjAbpf_kvYS7fvJqLdbEasPAmSgzrDU6j38
+Message-ID: <CAOMZO5DOUE2PexcBcVcg3vYTo5eV=LT3=S9cSBosLCyir8Kw5g@mail.gmail.com>
+Subject: Re: [PATCH v1 7/7] video: imx: ipuv3: refactor to use dm-managed state
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, David Zang <davidzangcs@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,45 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+On Thu, Dec 18, 2025 at 5:33=E2=80=AFAM Brian Ruley
+<brian.ruley@gehealthcare.com> wrote:
 
-On Sat, 27 Dec 2025 at 02:54, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> diff --git a/arch/m68k/cpu/m680x0/cpu.c b/arch/m68k/cpu/m680x0/cpu.c
-> new file mode 100644
-> index 00000000000..15e0c30980a
-> --- /dev/null
-> +++ b/arch/m68k/cpu/m680x0/cpu.c
+> diff --git a/arch/arm/mach-imx/cpu.c b/arch/arm/mach-imx/cpu.c
+> index cc215b771ef..2aa9d9c9666 100644
+> --- a/arch/arm/mach-imx/cpu.c
+> +++ b/arch/arm/mach-imx/cpu.c
+> @@ -285,10 +285,10 @@ u32 get_ahb_clk(void)
+>
+>  void arch_preboot_os(void)
+>  {
+> -#if defined(CONFIG_IMX_AHCI)
+>         struct udevice *dev;
+>         int rc;
 
-> +void m68k_virt_init_reserve(ulong base)
-> +{
+This causes failure in CI:
 
-> +       /* FIXME: usage of memset() here caused a hang on QEMU m68k virt. */
-> +       for (i = 0; i < sizeof(*gd_ptr); i++)
-> +               p[i] = 0;
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1340742
 
-Connecting GDB and single stepping to work out where it is going would
-be helpful.
-
-> +void relocate_code(ulong sp, struct global_data *new_gd, ulong relocaddr)
-> +{
-> +       board_init_r(new_gd, relocaddr);
-> +}
-
-I have this working so at a later date we can copy/paste that code and
-clean it up.
-
-> +unsigned long timer_read_counter(void) { return 0; }
-
-Since there is now a goldfish RTC driver upstream
-(drivers/rtc/goldfish_rtc.c) we could take the timer part from my
-version (https://github.com/fifteenhex/u-boot/blob/mc68000/drivers/rtc/goldfish_timer.c)
-and supply a real timer to the board. Right now I think anything that
-uses delays will get stuck constantly reading back 0?
-
-> +void __udelay(unsigned long usec) {}
-
-Or maybe delays just won't happen?
-
-Cheers,
-
-Daniel
+Please fix and resend.
