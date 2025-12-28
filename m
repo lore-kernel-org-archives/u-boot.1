@@ -4,102 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C5ED3B7E5
-	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 13:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5B1E784BE
+	for <u-boot@archiver.kernel.org>; Sun, 28 Dec 2025 15:09:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7995B83A41;
-	Sun, 28 Dec 2025 14:43:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ragnatech.se
+	by phobos.denx.de (Postfix) with ESMTP id ADA03836AC;
+	Sun, 28 Dec 2025 16:09:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ragnatech.se header.i=@ragnatech.se header.b="hNHEzFfN";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="vxidtQOH";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YtTrEr+A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1E77839DF; Sun, 28 Dec 2025 09:13:12 +0100 (CET)
-Received: from fhigh-b2-smtp.messagingengine.com
- (fhigh-b2-smtp.messagingengine.com [202.12.124.153])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8EA5983A91; Sun, 28 Dec 2025 16:09:02 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFE6E8392C
- for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 09:13:10 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=ragnatech.se
+ by phobos.denx.de (Postfix) with ESMTPS id C79368392C
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 16:08:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=niklas.soderlund+renesas@ragnatech.se
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfhigh.stl.internal (Postfix) with ESMTP id BFEC57A0113;
- Sun, 28 Dec 2025 03:13:09 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-02.internal (MEProxy); Sun, 28 Dec 2025 03:13:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ragnatech.se; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1766909589;
- x=1766995989; bh=pCoJls5bidibTMlc9oNrjkkFdEV2CM3UxYDbQ/rGaFg=; b=
- hNHEzFfNnOPXdyGHG5XV+DfqYB67ddNvepEPBgrLz4v00CECLV5NMaRnBtNpKkiu
- KIqwWEEmFtrkBaPywoDAPvYECYwRoHKoTfA6lzsnupMuqKEEGeSUluCkE/aKPkQD
- TD7m7XIkb+H/MOODgaq2F78xBh+lyM/zQNZpidwGTxGoubRv73uX04Ikzo4cCIw0
- PhDw/wev+k5T+I10XzoqDIG3aCxgQdzTxZe5QpAVHlXBEDGEJ0AkMqYShv+fNphx
- QxgUE9nw6rfJr4OqNq0TKFJbwrH7wasWlBW6VBfrrIIyb4hyg6gqAxYZrM8WTuaj
- fXEy6QyzbHfEYF0H+8TlnQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1766909589; x=
- 1766995989; bh=pCoJls5bidibTMlc9oNrjkkFdEV2CM3UxYDbQ/rGaFg=; b=v
- xidtQOHCtGKQETES8vmpgA+thsZ1HDOciMxRzd+yNCImk3rz1s87GpnGpZy2hGGI
- Hz0AU44J7soAEoy80U0gaCJmBJ/ZFMA0ycFE7Ke4ncCx/HWz6Yj5NoUPGRu0jfDr
- g4mUaLQmOIZwQx/UgiF2GlO74uDM4VYfxplfFlX04rFx1hpV+e7mP0A8pVTK7d+y
- +xlVZ0Ky4vB5vKoUcvQorFwaRDEjBro3KSZrW7l1LjyEv+EWj65DHi+Hnya04yHH
- QNVYU5FGL761Cz9TKbyKxbmGMkINqYY0uejE3FLrh0f1EfdZdhj1Y23IYSD5QlZh
- PBnhWWh0zSzCWl152yfaA==
-X-ME-Sender: <xms:leZQabioNerp4klD1IAJV-yXaM5jND09Hk71krrd64DQNic3jbrChQ>
- <xme:leZQae4MOyORv3lvb1boR5wSkanYrlMCglyvs1TUywC-TXJuLs-hmH-JxMkCMWNz3
- dRyTNvGW4hGesvvB7cKo3CS1-XPRJ34V905Yyx6IYaZPtSu3y9XQw>
-X-ME-Received: <xmr:leZQaTboPAAmePDkha64U-z15gf5ab2EyJUV4bwi5_1jeGp8DNjS5Om5JlkDV721_3UFEZI7l_aMJ4_pkOvwJ_e5KkswSsE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdejfeejgecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpeffhffvvefukfhfgggtugfgjgesthekredttddtjeenucfhrhhomheppfhikhhlrghs
- ucfunpguvghrlhhunhguuceonhhikhhlrghsrdhsohguvghrlhhunhguodhrvghnvghsrg
- hssehrrghgnhgrthgvtghhrdhsvgeqnecuggftrfgrthhtvghrnhepfefhleelhfffjefg
- fedugfegjeelhfevheeikefhueelgfdtfeeuhefftddvleeinecuvehluhhsthgvrhfuih
- iivgepudenucfrrghrrghmpehmrghilhhfrhhomhepnhhikhhlrghsrdhsohguvghrlhhu
- nhguodhrvghnvghsrghssehrrghgnhgrthgvtghhrdhsvgdpnhgspghrtghpthhtohephe
- dpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepmhgrrhgvkhdrvhgrshhuthesmhgr
- ihhlsghogidrohhrghdprhgtphhtthhopehifigrmhgrthhsuhesnhhighgruhhrihdroh
- hrghdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepthhrihhn
- iheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrd
- guvghngidruggv
-X-ME-Proxy: <xmx:leZQaT6N-D1UTiZFTbvpZUbID7mnHnYkmhBoWfK5PRb7dbZWyzP_2Q>
- <xmx:leZQaWCU99-5AmSWh9UwS6yG3vYHR1xzqVCZbM7_AJ1JiHCjH06MNg>
- <xmx:leZQaZfGNNi08nwlgEh2XnHSBj8J1bXDMuWaj8pCuFfZRzVTCtQvKg>
- <xmx:leZQaVKAUdRBrbFqkJEi5JS_yS4LSsbhpypcX7AzbNreq-VckNmTdQ>
- <xmx:leZQafdx8Mv-TWX7j9atS6GftZQV_Upj-u1K7OG-pnHwuq7BQtWxmgDo>
-Feedback-ID: i80c9496c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 28 Dec 2025 03:13:09 -0500 (EST)
-Date: Sun, 28 Dec 2025 09:13:08 +0100
-From: Niklas =?utf-8?Q?S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] clk: renesas: Do not disable realtime modules on
- R8A77995 D3
-Message-ID: <20251228081308.GC1315338@ragnatech.se>
-References: <20251228010327.2836161-1-niklas.soderlund+renesas@ragnatech.se>
- <20251228010327.2836161-3-niklas.soderlund+renesas@ragnatech.se>
- <a0c985d7-9a8e-4820-89d1-5f491247869e@mailbox.org>
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-64b8e5d1611so10456523a12.3
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 07:08:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1766934539; x=1767539339;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QdV98Lh2V4nNh/XTX3QeAlqNVCxsCWIqkbJ2eJwv54w=;
+ b=YtTrEr+AZvypm2q6fRdLubH/u2RoqxCTWVxZgltn8/WeHcXjpexPnDkfCG0m931upn
+ A6YZA+QTqcgP8KCqR4iHT/Dm0uABqjh253s63P9nnJjsIHpqZgdFF7hV+DU5TSNlDkmr
+ ggS+UiR2fEWKUaeevNRF4vis7p0mX4pKWs138=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766934539; x=1767539339;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QdV98Lh2V4nNh/XTX3QeAlqNVCxsCWIqkbJ2eJwv54w=;
+ b=M78v9mt+8R/FmKZmxz57aPvxYJ4srtBuCbizxtvnAs4wJrmw05sxFgdxtHmdKfw0b/
+ er/8rH2FHqgmeXjYvQ4C0d0Sg3KV7kFlYE52ViA6n468jt1IhOdcNBbsdsaRa8H7BtHn
+ N8GTQWPj9GUVP331PDW0jG3G8z8md4mBboaDPiiSAUnVIF9pKD7U6Pyh3qvQgfnRP+lQ
+ 79LgCWWefLKtOMGSK3vxV26qg3iI6K0KPImcRKjC+Wmb/Gsmcq+AkqSA0n7gPmiQiG/H
+ IYfDZmadWUwQIeTqDD9u3y9Bz9Z+6B9rL9Z4KJ6SpKXdJlk55ZB5X/MDWP0QmB41ZSxk
+ n0sw==
+X-Gm-Message-State: AOJu0Yw8LhHKXKOOLaTQd6NjjVhhzwLIDJVF6Sqzx+qxP/GkFZLGB4Us
+ SZ0mC1mR6PcST0wpraZXspNvLMpTf0QuuqVllTt9yZNNIXwUUdKBN6wqZBfIPo/SHGdMILJuzGb
+ hLQp1
+X-Gm-Gg: AY/fxX5uGMPDMb6mhpDE6MaZdnrOodL6Lm3mK4jfEXrBeWfWvMGWhBGd6A/THJWeiGO
+ A7FhuVAl2kHIP+X7s81I1wSvCjMRMtgLJk2yasEVsnR9S8ugZRvsMHlRZRkHh9TEvvTkwVbV54T
+ imlNIvyqL8rWuf2Ez5DoySab+skgJXQmFMHpiC6Rf9I7AD823kjqI8NkX/aM3tCtQp4EapnLKGg
+ nnZiOM0dWlm0Ob07KYwcvRse4tuQsxpLptUr8hnBivVwjQr11epa0FAgFXaLx86K1m3lsnTgTiK
+ WZ67yipYsr7HGwwXUc1zofVTbmANYUTh0JzdbUr6HEFoO8zX0RvdcM7aM/Oh52YmU8x5KzDpsQ7
+ jll08YuhMUJZbkMCs6X7cB8BaIZUbZBXDk+LUoj6piPomqpg5WSErKgFK4Cn4WOPyyC4myjPyu2
+ PQRsAd2avrUjBbpPLBh81Z8vSVnPQ2BL1JzeAFVDBYOsqNVR6Ei3CxTQLmpcrJDqeaglXKOwezN
+ eTe5pHIvL942leW7F49JXvrDxhptLvoybTTCyxjTb19pdV4GH5dNfq+qlQ7yMilPoCzqO4sm1Ua
+ iD7HZXr3WdI=
+X-Google-Smtp-Source: AGHT+IGjV6DdBS084zPfaxAWPJkz43g9d9O9YGxz5PyL/q4XmK2DvAuiV6z2Hr0YokkBe+f8uztY1w==
+X-Received: by 2002:a05:6402:535b:20b0:64c:62f7:1ac4 with SMTP id
+ 4fb4d7f45d1cf-64c62f71cb9mr19426440a12.32.1766934538911; 
+ Sun, 28 Dec 2025 07:08:58 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
+ (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-64b91599844sm28835422a12.25.2025.12.28.07.08.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Dec 2025 07:08:58 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] board: stm32mp2: read boot index from backup register
+Date: Sun, 28 Dec 2025 16:08:14 +0100
+Message-ID: <20251228150844.24753-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <a0c985d7-9a8e-4820-89d1-5f491247869e@mailbox.org>
-X-Mailman-Approved-At: Sun, 28 Dec 2025 14:43:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,74 +103,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-12-28 03:04:35 +0100, Marek Vasut wrote:
-> On 12/28/25 2:03 AM, Niklas Söderlund wrote:
-> > Later versions of the datasheet makes it clear D3 do not have any
-> > realtime module stop control registers (RMSTPCRx). Remove the
-> > manipulation of them from the module clock table to match this.
-> > 
-> > Suggested-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > Signed-off-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
-> > ---
-> >   drivers/clk/renesas/r8a77995-cpg-mssr.c | 24 ++++++++++++------------
-> >   1 file changed, 12 insertions(+), 12 deletions(-)
-> > 
-> > diff --git a/drivers/clk/renesas/r8a77995-cpg-mssr.c b/drivers/clk/renesas/r8a77995-cpg-mssr.c
-> > index 0a59a19cb227..736812e04d0b 100644
-> > --- a/drivers/clk/renesas/r8a77995-cpg-mssr.c
-> > +++ b/drivers/clk/renesas/r8a77995-cpg-mssr.c
-> > @@ -216,18 +216,18 @@ static const struct rcar_gen3_cpg_pll_config cpg_pll_configs[2] __initconst = {
-> >   };
-> >   static const struct mstp_stop_table r8a77995_mstp_table[] = {
-> > -	{ 0x00210000, 0x0, 0x00210000, 0 },
-> > -	{ 0x03e01000, 0x0, 0x03e01000, 0 },
-> > -	{ 0x000e2fdc, 0x2000, 0x000e2fd8, 0 },
-> > -	{ 0xc00014df, 0x400, 0xc00014df, 0 },
-> > -	{ 0x80000004, 0x0, 0x80000004, 0 },
-> > -	{ 0x40d20004, 0x0, 0x40d20004, 0 },
-> > -	{ 0x08c0008c, 0x0, 0x08c0008c, 0 },
-> > -	{ 0x09941c18, 0x0, 0x09941c18, 0 },
-> > -	{ 0x00801087, 0x0, 0x00801087, 0 },
-> > -	{ 0xf143dfc0, 0x0, 0xf143dfc0, 0 },
-> > -	{ 0x063e1820, 0x0, 0x063e1820, 0 },
-> > -	{ 0x00000000, 0x0, 0x00000000, 0 },
-> > +	{ 0x00210000, 0x0, 0, 0 },
-> > +	{ 0x03e01000, 0x0, 0, 0 },
-> > +	{ 0x000e2fdc, 0x2000, 0, 0 },
-> > +	{ 0xc00014df, 0x400, 0, 0 },
-> > +	{ 0x80000004, 0x0, 0, 0 },
-> > +	{ 0x40d20004, 0x0, 0, 0 },
-> > +	{ 0x08c0008c, 0x0, 0, 0 },
-> > +	{ 0x09941c18, 0x0, 0, 0 },
-> > +	{ 0x00801087, 0x0, 0, 0 },
-> > +	{ 0xf143dfc0, 0x0, 0, 0 },
-> > +	{ 0x063e1820, 0x0, 0, 0 },
-> > +	{ 0x00000000, 0x0, 0, 0 },
-> >   };
-> >   static const void *r8a77995_get_pll_config(const u32 cpg_mode)
-> 
-> You likely also need this part to avoid any RMSTPCR access:
+Following the commit 95b5a7de30f6 (“FWU: STM32MP1: Add support to read
+boot index from backup register”), this patch enables reading the boot
+index from backup registers on STM32MP2 platforms.
 
-Indeed, thanks! I will respin when we agree about the bits in 1/2.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-> 
-> diff --git a/drivers/clk/renesas/renesas-cpg-mssr.c
-> b/drivers/clk/renesas/renesas-cpg-mssr.c
-> index 39ff4541c1e..4b07dbb3277 100644
-> --- a/drivers/clk/renesas/renesas-cpg-mssr.c
-> +++ b/drivers/clk/renesas/renesas-cpg-mssr.c
-> @@ -127,7 +127,8 @@ int renesas_clk_remove(void __iomem *base, struct
-> cpg_mssr_info *info)
->                                 info->mstp_table[i].sdis,
->                                 info->mstp_table[i].sen);
-> 
-> -               if (info->reg_layout == CLK_REG_LAYOUT_RCAR_GEN4)
-> +               if (info->reg_layout == CLK_REG_LAYOUT_RCAR_GEN4 ||
-> +                   renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77995)
->                         continue;
-> 
->                 clrsetbits_le32(base + RMSTPCR(i),
+---
 
+ arch/arm/mach-stm32mp/include/mach/stm32.h |  4 ++++
+ board/st/stm32mp2/stm32mp2.c               | 21 +++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 2bf50c755cbd..90f06a052d3f 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -188,8 +188,12 @@ enum forced_boot_mode {
+ /* TAMP registers x = 0 to 127 : hardcoded description, waiting NVMEM node in DT */
+ #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * (x))
+ 
++#define TAMP_FWU_BOOT_INFO_REG		TAMP_BACKUP_REGISTER(48)
+ /* TAMP registers zone 3 RIF 1 (RW) at 96*/
+ #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(96)
++
++#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
++#define TAMP_FWU_BOOT_IDX_OFFSET	0
+ #endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
+ 
+ /* offset used for BSEC driver: misc_read and misc_write */
+diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+index a72056e12d63..101f1a494108 100644
+--- a/board/st/stm32mp2/stm32mp2.c
++++ b/board/st/stm32mp2/stm32mp2.c
+@@ -224,3 +224,24 @@ void board_quiesce_devices(void)
+ {
+ 	setup_led(LEDST_OFF);
+ }
++
++#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
++
++#include <fwu.h>
++
++/**
++ * fwu_plat_get_bootidx() - Get the value of the boot index
++ * @boot_idx: Boot index value
++ *
++ * Get the value of the bank(partition) from which the platform
++ * has booted. This value is passed to U-Boot from the earlier
++ * stage bootloader which loads and boots all the relevant
++ * firmware images
++ *
++ */
++void fwu_plat_get_bootidx(uint *boot_idx)
++{
++	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
++		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
++}
++#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
 -- 
-Kind Regards,
-Niklas Söderlund
+2.43.0
+
+base-commit: 56cac250b0839ddbad1311d3ca4231f532b5aadf
+branch: stm32mp2-active-index
