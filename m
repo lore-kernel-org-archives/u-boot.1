@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD12E784BE
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 00:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE954D3B7E5
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 01:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5629A83869;
-	Mon, 29 Dec 2025 01:42:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4035183B6C;
+	Mon, 29 Dec 2025 02:43:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ROfRl7aa";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hRtTpK5x";
+	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="YJVqNH1C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8762E83BFE; Mon, 29 Dec 2025 01:42:52 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6129183BFE; Mon, 29 Dec 2025 02:43:10 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83B4B83759
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 01:42:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0DF983B48
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 02:43:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dfcrV2HDqz9tv3;
- Mon, 29 Dec 2025 01:42:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766968970;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DIlWZDJ/bNIzOdDmIth4U9B61LUH+q+vwUNlIpsA8eA=;
- b=ROfRl7aavv8UBPskveVLa3mrm0XplKr4G03sHgomBHe0ehCUX3rSYW9CnBlPLe7JrvPUcP
- XbFX4U6idcPUrIakPIXw3nBkZyfPETiRL4Jt0PgGcPFPRfE1uxltbY5tX2Ql6rIkOb/bqW
- okNcM2QsxQdxP2O5/YtzWsCTsU/iJ2ueotHhQ/7pQPiULomn5/VKEzbwt51gzBBv1h39WG
- jkDqlr+QkrLr9CVJ834Uxj8X02HG8vwhJ78vupN8PMwE8BoiHeRdyYYYBI95cgAV7YUHi+
- yWzSvfV+OC8FQnCd9P1V7aRgJvZ/ytl2C9dbwbXyAzmZo7qwCulg3AJeU6TUcQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=hRtTpK5x;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <1fd09fd2-0603-4347-b27e-4c041069db48@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1766968968;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DIlWZDJ/bNIzOdDmIth4U9B61LUH+q+vwUNlIpsA8eA=;
- b=hRtTpK5xebyBeEFpFnGSoqT7CDQZ8gI3olwVIS0GslrGY6cRPO35LrR34p57tLMMpcJlFQ
- /ice+gszpo6IHUZ+EobSJdlBDM2pP5ydzGJgQqjOoB/EZzcMd0S0T0sU53/5MaeToOJtd9
- Kbu59Ey6QVSfHBgsvREO5g8nv5yAJK0dmN0HioyaF1LfiwzePzPU1F3d7LVJA8n56qJB6a
- Fg2dPTDNQebQ+WksdIRGoEumbi+WvjiRmMfc/zrIXrGjIP/B3Kuvw/6FoQ9D645l/Fv2lC
- 7JTDV69w2VKxkKMVC2grceLFF5o1m3zbg7c9NRsepEkB3urOEnnPXAl1qSHGYA==
-Date: Mon, 29 Dec 2025 00:07:28 +0100
+ dmarc=none (p=none dis=none) header.from=0x0f.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-34f0bc64a27so871217a91.1
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 17:43:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=0x0f.com; s=google; t=1766972585; x=1767577385; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0ibrk0qGNX9HB0+fiBPtlfKiJvpD6UxkBCY0j35hJwM=;
+ b=YJVqNH1CshHBXNqftaVgQm1feJp+1BA/CFmz2gNshwy91k+6WzeFOHXT18KlN4srvK
+ /uY4r+zCtw+wgWykQbMhQvTdbtJvpJLDsx14scdcOM0uWSQsq+QzsONu2di3S1Ot7i43
+ MUoLYj0rpouwXqyjPEn/2MH5aqot7jipm2uEY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766972585; x=1767577385;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0ibrk0qGNX9HB0+fiBPtlfKiJvpD6UxkBCY0j35hJwM=;
+ b=jo9fjH+fIuTlpuGoKsYyIXboPv1BD9n30Zu0YXU0tVFIiNC8c07QeDs3YZPr/UaGY9
+ qXLt9HrnlPG/qyOyexYQq+JTVYYkw6utU+wQClPAGeLyrmwg1aIXLaPeentIHsNnkw5N
+ wB8TozmwkHdJsgaTD0ODnHj0Z0GVz+KhcGwfjRRuyYvMZ3tR9VFLPv2gqgK4gDwyELw+
+ HXdX1u3NUPWPhNhB1SyWGTLRq1YVBIt4Vvfcp6a/PWA3rkHpZCJFgg63KNyW9mk6v05P
+ X1ThPdkeapQibjFNK20JqsE1yDDpoUb4snQ4GtZdSE57XJednrMZ/UceWnX2VHLZvG4P
+ Mc3A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5pfkFOT5hASUsRmDBFhKIrrlIVM3rChmpfmcS36WKvK7VW/PbGjnEGS7qj8uYK1i9uOvhOi0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbSOhn0f498ctZ9xM8kaUpZpj7kfn3BiZYjCujm+X+Qn17KaD9
+ xG7NUNqa7ffnNyGmYI9r+GirGEeMdRgT8vZ7C0aDN15f66tmwlTBPGpY3ZNgCbMac3OR7Zbrvu6
+ llfj4sLQLygpIgevaE3Eef9jypuG+djemNKMANQF1LQ==
+X-Gm-Gg: AY/fxX4Rw0EJwHR2hWN04r0ivLN1gwmpZF/Cb9xTMgqY5qdw9b9vebuZYzSlLjF9Zwd
+ UUN4w+HX/EYFtY8Q7uNqeEi1FU1xVfZG8qoE628rqp0mu2zBm/6PEdbIcQdgGX3IQcvlCvNopzQ
+ QlbISn6msHiV3porgkV3h4kNu1P/L/1SU+V98vTVXz5HP+W/pL2qtu/b+nFDTNYoXjJU8rQI2pl
+ e9Fe3aOqdxYxr70VCnWAFJJF25Ut1dqIs39c8ZInhpUYrYfvogKoj1mZtWH5uBYTWRNJW37
+X-Google-Smtp-Source: AGHT+IEVADFglOUr8Y6HtvrwqV4KrWodsHWcoOWxjkDfaGj5iHDEq2ogbQPP1mKxN3O8/Erq/uH51vnWwoxAGWY6yFE=
+X-Received: by 2002:a17:90b:4c07:b0:34c:fe57:278c with SMTP id
+ 98e67ed59e1d1-34e921f7e5amr24326045a91.34.1766972584963; Sun, 28 Dec 2025
+ 17:43:04 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] clk: renesas: Do not enable MSTP4 extra modules on
- R8A77995 D3
-To: =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251228220717.3630713-1-niklas.soderlund+renesas@ragnatech.se>
- <20251228220717.3630713-2-niklas.soderlund+renesas@ragnatech.se>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251228220717.3630713-2-niklas.soderlund+renesas@ragnatech.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b6d2975d2b51204b908
-X-MBO-RS-META: hnkegypfaim8w1afs6duns9uoiu9x83f
-X-Rspamd-Queue-Id: 4dfcrV2HDqz9tv3
+References: <20251226175400.1154417-1-visitorckw@gmail.com>
+ <20251226175400.1154417-4-visitorckw@gmail.com>
+ <CAFr9PXnZPOw3V9vwxtpvkVFfjOt10ZmfSjY6yMLcFnGW15bvZQ@mail.gmail.com>
+ <aVGBVwgr8528wTcn@google.com>
+In-Reply-To: <aVGBVwgr8528wTcn@google.com>
+From: Daniel Palmer <daniel@0x0f.com>
+Date: Mon, 29 Dec 2025 10:42:54 +0900
+X-Gm-Features: AQt7F2r-k1ngpEUETLF516BKJOtQaQ8qHTl85KVpxLW4veyOYLgt___PT01oP-A
+Message-ID: <CAFr9PXkk_eVwFG4SA1BCB_S+kUoJHPSdsOJZK5bXB+=_an91Mw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] board: Add QEMU m68k virt board support
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
+ me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,15 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/28/25 11:07 PM, Niklas Söderlund wrote:
-> Since commit a2bd99549c61 ("clk: renesas: Tear clock controller down
-> last before booting OS") enabling the module gated by bit 8 in MSTP4
-> prevents Linux from booting. The bits 8 and 7 of MSTP4 where only
-> documented in early versions of the datasheet and have since been
-> removed.
-> 
-> To allow Linux to boot update the MSTP4 enable value to reflect the
-> hardware default, 0x80.
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Hi Kuan-Wei,
 
-Thanks
+On Mon, 29 Dec 2025 at 04:13, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> >
+> > One thing I found when I did the bootinfo parsing in my version is if
+> > I corrupted (during relocation etc) the bootinfo this type of loop
+> > would often get stuck forever.
+> > I'm not sure what the technical limit of the number of bootinfo
+> > entries is but bounding this to something reasonable feels like a good
+> > idea.
+>
+> In that scenario, I assume the correct error handling would be to add a
+> loop limit and trigger a panic() if exceeded?
+
+Yeah I think so, if you didn't find the last bootinfo entry within
+some reasonable bounds everything is probably broken and you shouldn't
+continue.
+I think for most real machines (Amiga etc) there aren't many entries
+but for the virt machine maybe there is an entry per virtio mmio
+device so there might actually be a lot of them there.
+
+Cheers,
+
+Daniel
