@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CBD5E92733
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 15:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C061E92733
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 15:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5081C83E57;
-	Mon, 29 Dec 2025 16:34:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 97BFC83E83;
+	Mon, 29 Dec 2025 16:34:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GwBr88IF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j4rS+wPG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0E4F83E86; Mon, 29 Dec 2025 16:34:08 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 1D39983E88; Mon, 29 Dec 2025 16:34:11 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1878083E36
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 16:34:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A4483E83
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 16:34:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2a2ea96930cso105946745ad.2
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 07:34:05 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2a12ed4d205so80241795ad.0
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 07:34:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767022443; x=1767627243; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767022445; x=1767627245; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4zMGxiKAtgOI29JxVKNTqZ7Z39TwCuY5WL/S/fiDh44=;
- b=GwBr88IFncdJqTihA8DW72Iauj0Gdq/1jShlgGy9xSy3IDeUP0rC0dgB5G671gUHKr
- 5wzz/Xi8HdZslLHmOqk3eS42EXyQbvz85RIeP+zRSA3RRsZ/vsOE2poaJvnauFZMSnVC
- DRSAanunRQCdqVEf1slNvJdjIErXhZ9L8tJusPuZYNknw1p9eT9p+WdS5pKIIVpmcU78
- bEZSw7FkTokaZUd+bXisHs1VaUIPtY8mZyTnVQ9OUKacKYr73HApk2sk+ND9KQ79ld70
- ydTStTX7g5qMuJj5mNnpk8F5uRTwHIg6BCLem7oRQWs3BNFK0rdzsXgljKIcyGguJx6F
- ycLg==
+ bh=r2/qwzdwuVVq0xRmobEoRMXS4EBCoeBKUmTz2eguxT8=;
+ b=j4rS+wPGJxpFC0gNQMqFY4uV3gw7KIGtdJ6tV7R7gX85sRmbfNYZs7nwiFf/DQ/ymz
+ aLSD6l7P9TiM4V5g/CqxwdGSkzFUjfJgv3XAbONhsGglaLwkvsUTQjaCgs7upS9cORU/
+ 0g0XNog9U9vZwHCYAaOToqfzXqUDc0bKIUzDld17D36Z5BZz7DWEYl+EU+XFu/LVkeju
+ lUvRv4AZM+FqkDsFbHp+0XpR6Hu3VJ69piWRsh97C1VWVNeK48oFMyeDmlFAo1wMDi0d
+ /CFCg4JEDXouXRhJ/N76EkbuEIJjXfo3nf9LLJoX/cXGxVEUFrbKKuTy6VgLjswSNlDr
+ AO2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767022443; x=1767627243;
+ d=1e100.net; s=20230601; t=1767022445; x=1767627245;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4zMGxiKAtgOI29JxVKNTqZ7Z39TwCuY5WL/S/fiDh44=;
- b=g2qSF9c/4xvf9w90CoA6PhNFyrXoXEKKVUTahIFRQq5Km4gsFASwSKcuxZu084mlZW
- gY1w0iws+ze74cqAl3InkF6AzobaKlWdrbbfuXusWqcqYWQCe9Poy6LipNuiSfK/fvrB
- 6i9htKlNVI03cBNLbRmD93JC+ID6dtE4rvY+Z8DSK6zK2OY9cJSXgW7spo0O4nsyCWMu
- QvQYhKsN2WJeJsqtGIoYY0MGuJTtUh0Z6usIyKwALnuR/DVHEELjYugiv+2hp/9mPC0f
- B9cN2GOWDW7WsvDZn4BoHPeCjqD56fNOekXfcaaCkArmmcC1Amae4RE68LTZBT+54FbW
- vwMw==
-X-Gm-Message-State: AOJu0Yyx4lGR/Np4/yyunoTcO6xA+MPdbZg3Ma+e/2jQBF05Kn3UGGRj
- PzY3aBeVkmo/72CzxvqbLdoEo4/LLJsyKAJIHWISKApah73eAu5nCs9do4px4CihsD0=
-X-Gm-Gg: AY/fxX5Pkd8HxJ+hifRWCu0zYjngz0ds/zpTAwIG8h4ugNMrAqZjVgh9+YUBIGqEggh
- p1Wd9hzdkRukW9eAS+sLR7d4gzJZfBsNA7pClda/sMauTAi4XJ1mr1MsiXIrNKyFNnEIRmmLn0x
- F2+q8aRfYPalaWYCtvY4qQtI7Ct9j+S0e14rR+HDLjyI+2y7BEo/xKKXPIHm/B0iFGINsaf1E0u
- 36laJU+kSftGyrvYuCwXRCPCAKRMIMh4IKWiJRxrp40/u99djvfj6GYAxJe8XKvYZ0dTmPWFhjB
- xF71sSEjZ4wa8IZ/4oIykP8jfVcggys3ovBNuDV7uQj76zzfdRHm3h54TqO/wes2jKz7Sl9szZI
- RNASGT7SUl3CijEugc/+423Gavt+cul+STPv7b+AHE0pq4MoL9uBCpgv9Kb3tj/KwYR//gzxiNB
- q++6QoH4IDWlrJnchaDOjkdk1Dk67SmgBU5A==
-X-Google-Smtp-Source: AGHT+IGTbd9vWzO1JtCw62XTUgO1QQq+Gkf1PXgWRmbRJGviS7uXvgKFqBA07GjKeVC6vZNhOh9a5A==
-X-Received: by 2002:a17:902:e543:b0:267:a95d:7164 with SMTP id
- d9443c01a7336-2a2f2a48978mr233043625ad.60.1767022442856; 
- Mon, 29 Dec 2025 07:34:02 -0800 (PST)
+ bh=r2/qwzdwuVVq0xRmobEoRMXS4EBCoeBKUmTz2eguxT8=;
+ b=tIqail1V4ZgN7TaGYF0jXsh/oHfq9UvSX9m146aXOj4LwA74CwppWYoXUU5AgCpl90
+ zK23O3JLI0vcZRzwqpmhxAKq0nY5FHjBCyz1QRzKLei6P2JB5KItRjEUeBsD0SEZ7XFG
+ bTtVQk+KNggPou7X6MbglUL4ElGR88P4iximI8mlPuLOKhaAFYgG6D1JuJ/y8wlI5WTw
+ rEg8MspllVnXlt28r9LSOB5fpmvHAGCoIcaTF0fr7yjnuIOnXs8sunANVlwDT2WcXmDz
+ Bk24Z4w1F1TTN1F/g1Viu9wDtre5xJw8Qf3hEIoNjKUo5vrhmDKXFTzQ77aadCxbfaDB
+ IY/g==
+X-Gm-Message-State: AOJu0YxoVcIpJchmXk6ZBUpy2X4qBIJh8KI3kd33AXMgzLGxzMtICfPw
+ cu0CU1tg7Pv+yCdOM4sJxRqgRbfUk5czNW1hG3AUMXrYHQQfHKTge4J+RvGKJBfrAVk=
+X-Gm-Gg: AY/fxX7+GkL/jhNyv08+Guauv+7TaL8MsGVC0MSziG+U2z2FVplPquj3Dg3H2HifDrJ
+ gZSOZsJDETWkzVEszj0eCCWWG2++p3d3Ch4yIgHJN6rPC5unExvVd3Cok2zSbiPiw6m0XDRxF62
+ icOlwC9Q2vbURt4w91F1cDpcPSxoTd72exsLBItP/oWzDI3fJRC8UKnvFf933H1DUg3nCDhyJEw
+ 4KJEWZP6nT2GZWyhY9j01BXXZMkIY7SS37GzDS4hDosFrsX/twDR7KRHoI1TVa/Xut1hdhmn4YR
+ 0YIQk6LiVhKlwvykDgfjiHgLJU1+JvnwJT9iaPpiT4Wcdzmw6nGkGs+Dfu3rA+TVTvFTA5NmIJw
+ tjH364O7mBbW1Gww9j5UP8vvEjVYvjPdBjitKj+Au7K5jI3ZQ4EvB5l83CbcaCDzFq9fszoJNhr
+ 93+BeHndOlA27fYVR8xfthgYjpf/N85uFmAw==
+X-Google-Smtp-Source: AGHT+IETIunaYsLbpUgvpHqxgqWt9rQGZkFKTwizQg+fx1pNYFwGAY3ZFILgo+v9QU0qMi5V52XEPw==
+X-Received: by 2002:a17:902:e808:b0:29e:facd:7bf4 with SMTP id
+ d9443c01a7336-2a2f2940511mr288952765ad.50.1767022445153; 
+ Mon, 29 Dec 2025 07:34:05 -0800 (PST)
 Received: from intel-VirtualBox.. ([185.213.82.123])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a2f3d76ceesm279825195ad.91.2025.12.29.07.34.01
+ d9443c01a7336-2a2f3d76ceesm279825195ad.91.2025.12.29.07.34.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Dec 2025 07:34:02 -0800 (PST)
+ Mon, 29 Dec 2025 07:34:04 -0800 (PST)
 From: Brian Sune <briansune@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Tien Fong Chee <tien.fong.chee@altera.com>,
  Brian Sune <briansune@gmail.com>
-Subject: [PATCH v2 1/2] Add CoreCourse socfpga Board - AC501
-Date: Mon, 29 Dec 2025 23:33:53 +0800
-Message-Id: <20251229153354.5558-2-briansune@gmail.com>
+Subject: [PATCH v2 2/2] Add CoreCourse socfpga Board - AC550
+Date: Mon, 29 Dec 2025 23:33:54 +0800
+Message-Id: <20251229153354.5558-3-briansune@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251229153354.5558-1-briansune@gmail.com>
 References: <20251229153354.5558-1-briansune@gmail.com>
@@ -102,55 +102,40 @@ X-Virus-Status: Clean
 
 CoreCourse Altera GEN5 Cyclone V board
 do support different size and formfactor.
-Now introducing AC501 C5 to mainstream u-boot
-This is a UBGA-484 based board with basic
+Now introducing AC550 C5 to mainstream u-boot
+This is a more complex and unified board with
 feature. More info on [1]
 
-[1] https://corecourse.cn/forum.php?mod=viewthread&tid=27704&highlight=AC501
+[1] https://corecourse.cn/forum.php?mod=viewthread&tid=29788&extra=page%3D1
 
 Signed-off-by: Brian Sune <briansune@gmail.com>
 ---
- arch/arm/dts/Makefile                         |   2 +
- arch/arm/dts/socfpga_cyclone5_ac501soc.dts    |  86 +++
- .../dts/socfpga_cyclone_ac501soc-u-boot.dtsi  |  44 ++
- arch/arm/mach-socfpga/Kconfig                 |  14 +
- board/corecourse/ac501soc/MAINTAINERS         |   6 +
- board/corecourse/ac501soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
- board/corecourse/ac501soc/qts/pinmux_config.h | 222 ++++++
- board/corecourse/ac501soc/qts/pll_config.h    |  86 +++
- board/corecourse/ac501soc/qts/sdram_config.h  | 349 +++++++++
- configs/socfpga_ac501soc_defconfig            |  85 +++
- include/configs/socfpga_ac501soc.h            |  16 +
- 11 files changed, 1574 insertions(+)
- create mode 100644 arch/arm/dts/socfpga_cyclone5_ac501soc.dts
- create mode 100644 arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi
- create mode 100644 board/corecourse/ac501soc/MAINTAINERS
- create mode 100644 board/corecourse/ac501soc/qts/iocsr_config.h
- create mode 100644 board/corecourse/ac501soc/qts/pinmux_config.h
- create mode 100644 board/corecourse/ac501soc/qts/pll_config.h
- create mode 100644 board/corecourse/ac501soc/qts/sdram_config.h
- create mode 100644 configs/socfpga_ac501soc_defconfig
- create mode 100644 include/configs/socfpga_ac501soc.h
+ arch/arm/dts/socfpga_cyclone5_ac550soc.dts    | 132 ++++
+ .../dts/socfpga_cyclone_ac550soc-u-boot.dtsi  |  44 ++
+ board/corecourse/ac550soc/MAINTAINERS         |   6 +
+ board/corecourse/ac550soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+ board/corecourse/ac550soc/qts/pinmux_config.h | 222 ++++++
+ board/corecourse/ac550soc/qts/pll_config.h    |  86 +++
+ board/corecourse/ac550soc/qts/sdram_config.h  | 349 +++++++++
+ configs/socfpga_ac550soc_defconfig            |  85 +++
+ include/configs/socfpga_ac550soc.h            |  16 +
+ 9 files changed, 1604 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac550soc.dts
+ create mode 100644 arch/arm/dts/socfpga_cyclone_ac550soc-u-boot.dtsi
+ create mode 100644 board/corecourse/ac550soc/MAINTAINERS
+ create mode 100644 board/corecourse/ac550soc/qts/iocsr_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pinmux_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pll_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/sdram_config.h
+ create mode 100644 configs/socfpga_ac550soc_defconfig
+ create mode 100644 include/configs/socfpga_ac550soc.h
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index fcad6fb2fc7..40a69a13c4b 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -468,6 +468,8 @@ dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
- 	socfpga_cyclone5_socrates.dtb			\
- 	socfpga_cyclone5_sr1500.dtb			\
- 	socfpga_cyclone5_vining_fpga.dtb		\
-+	socfpga_cyclone5_ac501soc.dtb			\
-+	socfpga_cyclone5_ac550soc.dtb			\
- 	socfpga_n5x_socdk.dtb				\
- 	socfpga_stratix10_socdk.dtb
- 
-diff --git a/arch/arm/dts/socfpga_cyclone5_ac501soc.dts b/arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+diff --git a/arch/arm/dts/socfpga_cyclone5_ac550soc.dts b/arch/arm/dts/socfpga_cyclone5_ac550soc.dts
 new file mode 100644
-index 00000000000..2c11e2088e3
+index 00000000000..1d26607ca9f
 --- /dev/null
-+++ b/arch/arm/dts/socfpga_cyclone5_ac501soc.dts
-@@ -0,0 +1,86 @@
++++ b/arch/arm/dts/socfpga_cyclone5_ac550soc.dts
+@@ -0,0 +1,132 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2025, Brian Sune
@@ -162,7 +147,7 @@ index 00000000000..2c11e2088e3
 +#include "socfpga-common-u-boot.dtsi"
 +
 +/ {
-+	model = "CoreCourse AC501SoC";
++	model = "CoreCourse AC550SoC,AC802-CVA6";
 +	compatible = "altr,socfpga-cyclone5", "altr,socfpga";
 +
 +	chosen {
@@ -175,10 +160,56 @@ index 00000000000..2c11e2088e3
 +		udc0 = &usb1;
 +	};
 +
-+	memory {
++	memory@0 {
 +		name = "memory";
 +		device_type = "memory";
 +		reg = <0x0 0x40000000>; /* 1GB */
++	};
++
++	leds {
++		compatible = "gpio-leds";
++		hps0 {
++			label = "hps_led0";
++			gpios = <&portb 6 1>;
++		};
++
++		hps1 {
++			label = "hps_led1";
++			gpios = <&porta 9 1>;
++		};
++	};
++
++	buttons {
++		compatible = "gpio-keys";
++		hps0 {
++			label = "HPS GPIO0";
++			gpios = <&porta 0 0>;
++		};
++	};
++};
++
++&i2c0 {
++	status = "okay";
++	clock-frequency = <100000>;
++};
++
++&i2c3 {
++	status = "okay";
++	clock-frequency = <100000>;
++
++	i2c-sda-falling-time-ns = <5000>;
++	i2c-scl-falling-time-ns = <5000>;
++
++	eeprom@50 {
++		compatible = "atmel,24c64";
++		reg = <0x50>;
++		pagesize = <32>;
++	};
++
++	rtc@51 {
++		compatible = "nxp,pcf8563";
++		reg = <0x51>;
++		#clock-cells = <0>;
 +	};
 +};
 +
@@ -237,11 +268,11 @@ index 00000000000..2c11e2088e3
 +&watchdog0 {
 +	status = "disabled";
 +};
-diff --git a/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi b/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi
+diff --git a/arch/arm/dts/socfpga_cyclone_ac550soc-u-boot.dtsi b/arch/arm/dts/socfpga_cyclone_ac550soc-u-boot.dtsi
 new file mode 100644
 index 00000000000..8d2caf69dd1
 --- /dev/null
-+++ b/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_cyclone_ac550soc-u-boot.dtsi
 @@ -0,0 +1,44 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
@@ -287,68 +318,23 @@ index 00000000000..8d2caf69dd1
 +&portc {
 +	bank-name = "portc";
 +};
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index f2e959b5662..69af0b48348 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -239,6 +239,14 @@ config TARGET_SOCFPGA_TERASIC_SOCKIT
- 	bool "Terasic SoCkit (Cyclone V)"
- 	select TARGET_SOCFPGA_CYCLONE5
- 
-+config TARGET_SOCFPGA_CORECOURSE_AC501SOC
-+	bool "CoreCourse AC501SoC (Cyclone V)"
-+	select TARGET_SOCFPGA_CYCLONE5
-+
-+config TARGET_SOCFPGA_CORECOURSE_AC550SOC
-+	bool "CoreCourse AC550SoC (Cyclone V)"
-+	select TARGET_SOCFPGA_CYCLONE5
-+
- endchoice
- 
- config SYS_BOARD
-@@ -263,6 +271,8 @@ config SYS_BOARD
- 	default "sr1500" if TARGET_SOCFPGA_SR1500
- 	default "stratix10-socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
- 	default "vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
-+	default "ac501soc" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
-+	default "ac550soc" if TARGET_SOCFPGA_CORECOURSE_AC550SOC
- 
- config SYS_VENDOR
- 	default "intel" if TARGET_SOCFPGA_AGILEX7M_SOCDK
-@@ -284,6 +294,8 @@ config SYS_VENDOR
- 	default "terasic" if TARGET_SOCFPGA_TERASIC_DE10_NANO
- 	default "terasic" if TARGET_SOCFPGA_TERASIC_DE10_STANDARD
- 	default "terasic" if TARGET_SOCFPGA_TERASIC_SOCKIT
-+	default "corecourse" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
-+	default "corecourse" if TARGET_SOCFPGA_CORECOURSE_AC550SOC
- 
- config SYS_SOC
- 	default "socfpga"
-@@ -310,5 +322,7 @@ config SYS_CONFIG_NAME
- 	default "socfpga_sr1500" if TARGET_SOCFPGA_SR1500
- 	default "socfpga_stratix10_socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
- 	default "socfpga_vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
-+	default "socfpga_ac501soc" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
-+	default "socfpga_ac550soc" if TARGET_SOCFPGA_CORECOURSE_AC550SOC
- 
- endif
-diff --git a/board/corecourse/ac501soc/MAINTAINERS b/board/corecourse/ac501soc/MAINTAINERS
+diff --git a/board/corecourse/ac550soc/MAINTAINERS b/board/corecourse/ac550soc/MAINTAINERS
 new file mode 100644
-index 00000000000..e0479c9921d
+index 00000000000..db5b4b2cea3
 --- /dev/null
-+++ b/board/corecourse/ac501soc/MAINTAINERS
++++ b/board/corecourse/ac550soc/MAINTAINERS
 @@ -0,0 +1,6 @@
 +SOCFPGA BOARD
 +M:	Brian Sune <briansune@gmail.com>
 +S:	Maintained
-+F:	board/corecource/ac501soc/
-+F:	include/configs/socfpga_ac501soc.h
-+F:	configs/socfpga_ac501soc_defconfig
-diff --git a/board/corecourse/ac501soc/qts/iocsr_config.h b/board/corecourse/ac501soc/qts/iocsr_config.h
++F:	board/corecource/ac550soc/
++F:	include/configs/socfpga_ac550soc.h
++F:	configs/socfpga_ac550soc_defconfig
+diff --git a/board/corecourse/ac550soc/qts/iocsr_config.h b/board/corecourse/ac550soc/qts/iocsr_config.h
 new file mode 100644
-index 00000000000..cce43c54377
+index 00000000000..b63746efc1e
 --- /dev/null
-+++ b/board/corecourse/ac501soc/qts/iocsr_config.h
++++ b/board/corecourse/ac550soc/qts/iocsr_config.h
 @@ -0,0 +1,664 @@
 +/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 +/*
@@ -395,34 +381,34 @@ index 00000000000..cce43c54377
 +};
 +
 +const unsigned long iocsr_scan_chain1_table[] = {
-+	0x000C0300,
++	0x00100000,
 +	0x300C0000,
 +	0x300000C0,
 +	0x000000C0,
 +	0x000300C0,
-+	0x80008000,
-+	0x0000007F,
-+	0x0001FE00,
-+	0x07F80000,
-+	0xE0000000,
-+	0x0000001F,
++	0x00008000,
++	0x00080000,
++	0x20000000,
++	0x00000000,
++	0x00000080,
++	0x00020000,
 +	0x00004000,
 +	0x000300C0,
-+	0x0C030000,
++	0x10000000,
 +	0x0C000000,
 +	0x00000030,
 +	0x0000C030,
 +	0x00002000,
-+	0x00018060,
-+	0x00007F80,
++	0x06018060,
++	0x06018000,
 +	0x01FE0000,
 +	0xF8000000,
 +	0x00000007,
 +	0x00001000,
 +	0x0000C030,
 +	0x0300C000,
-+	0x00000000,
-+	0x00000010,
++	0x03000000,
++	0x0000300C,
 +	0x0000300C,
 +	0x00000800,
 +	0x00000000,
@@ -452,40 +438,40 @@ index 00000000000..cce43c54377
 +};
 +
 +const unsigned long iocsr_scan_chain2_table[] = {
-+	0x300C0300,
-+	0x00000000,
++	0x000C0300,
++	0x300C0000,
 +	0x0FF00000,
 +	0x00000000,
-+	0x0C0300C0,
++	0x000300C0,
 +	0x00008000,
-+	0x18060180,
-+	0x18060000,
++	0x00080000,
++	0x20000000,
 +	0x18000000,
-+	0x00018060,
++	0x00000060,
 +	0x00018060,
 +	0x00004000,
 +	0x200300C0,
 +	0x0C030000,
++	0x0C000000,
 +	0x00000030,
-+	0x00000000,
-+	0x0300C030,
++	0x0000C030,
 +	0x00002000,
-+	0x10018060,
-+	0x00000000,
++	0x00018060,
++	0x06018000,
 +	0x06000000,
 +	0x00010018,
-+	0x01806018,
++	0x00006018,
 +	0x00001000,
 +	0x0000C030,
 +	0x00000000,
 +	0x03000000,
-+	0x0000800C,
++	0x0000000C,
 +	0x00C0300C,
 +	0x00000800,
 +};
 +
 +const unsigned long iocsr_scan_chain3_table[] = {
-+	0x0C420D80,
++	0x0C820D80,
 +	0x082000FF,
 +	0x0A804001,
 +	0x07900000,
@@ -536,15 +522,15 @@ index 00000000000..cce43c54377
 +	0x00001000,
 +	0xA0000034,
 +	0x0D000001,
-+	0xC0680A28,
-+	0x41034030,
-+	0x02081A00,
++	0x40680A28,
++	0x49034051,
++	0x12481A02,
 +	0x80A280D0,
-+	0x34030C06,
++	0x34051406,
 +	0x01A02490,
 +	0x280D0000,
 +	0x30C0680A,
-+	0x00410340,
++	0x02490340,
 +	0xD000001A,
 +	0x0680A280,
 +	0x10040000,
@@ -611,8 +597,8 @@ index 00000000000..cce43c54377
 +	0xA0000034,
 +	0x0D000001,
 +	0xC0680A28,
-+	0x49034030,
-+	0x12481A02,
++	0x41034030,
++	0x02081A00,
 +	0x80A280D0,
 +	0x34030C06,
 +	0x01A00040,
@@ -620,7 +606,7 @@ index 00000000000..cce43c54377
 +	0x30C0680A,
 +	0x02490340,
 +	0xD012481A,
-+	0x0680A280,
++	0x06802080,
 +	0x10040000,
 +	0x00200000,
 +	0x10040000,
@@ -640,7 +626,7 @@ index 00000000000..cce43c54377
 +	0xAA0D4000,
 +	0x01C3A800,
 +	0xAA0D4000,
-+	0x01C3A800,
++	0x01C3A890,
 +	0xAA0D4000,
 +	0x01C3A800,
 +	0x00040100,
@@ -658,7 +644,7 @@ index 00000000000..cce43c54377
 +	0x0002A000,
 +	0x0001E400,
 +	0x5506A000,
-+	0x00E1D400,
++	0x00E1D448,
 +	0x00000000,
 +	0xC880090C,
 +	0x00003001,
@@ -668,9 +654,9 @@ index 00000000000..cce43c54377
 +	0x2A835000,
 +	0x0070EA00,
 +	0x2A835000,
-+	0x0070EA00,
++	0x0070EA24,
 +	0x2A835000,
-+	0x0070EA00,
++	0x0070EA24,
 +	0x00010040,
 +	0x00000200,
 +	0x00000000,
@@ -686,17 +672,17 @@ index 00000000000..cce43c54377
 +	0x1A041414,
 +	0x00D00000,
 +	0x14864000,
-+	0x69A47A05,
-+	0xF228A3D9,
-+	0xF4D1451E,
-+	0x0352D348,
++	0x59647A05,
++	0xFB2CA3D8,
++	0xF719651E,
++	0x03409248,
 +	0x821A0000,
 +	0x0000D000,
 +	0x05140680,
-+	0xD969A47A,
-+	0x1EF228A3,
-+	0x48F4D145,
-+	0x00035292,
++	0xD869A47A,
++	0x1EFB2CA3,
++	0x48F71145,
++	0x000341D3,
 +	0x00080200,
 +	0x00001000,
 +	0x00080200,
@@ -704,8 +690,8 @@ index 00000000000..cce43c54377
 +	0x000A8000,
 +	0x00075000,
 +	0x541A8000,
-+	0x03875001,
-+	0x0000FF00,
++	0x03875121,
++	0x10000000,
 +	0x00000000,
 +	0x0080C000,
 +	0x41000000,
@@ -714,15 +700,163 @@ index 00000000000..cce43c54377
 +	0xAA0D4000,
 +	0x01C3A800,
 +	0xAA0D4000,
-+	0x01C3A800,
++	0x01C3A890,
 +	0xAA0D4000,
 +	0x01C3A800,
 +	0x00040100,
 +	0x00000800,
 +	0x00000000,
 +	0x00001208,
-+	0xF8482000,
-+	0x00000007,
++	0x00482000,
++	0x00008000,
++	0x00000000,
++	0x00410482,
++	0x0006A000,
++	0x0001B400,
++	0x00020000,
++	0x00000400,
++	0x00020080,
++	0x00000400,
++	0x5506A000,
++	0x00E1D448,
++	0x00000000,
++	0x0000090C,
++	0x00000010,
++	0x90400000,
++	0x00000000,
++	0x2020C243,
++	0x2A835000,
++	0x0070EA00,
++	0x2A835000,
++	0x0070EA24,
++	0x2A835000,
++	0x0070EA24,
++	0x00015000,
++	0x0000F200,
++	0x00000000,
++	0x00000482,
++	0x00120800,
++	0x00600391,
++	0x80000000,
++	0x00104120,
++	0x00000200,
++	0xAC0D5F80,
++	0xFFFFFFFF,
++	0x14F3690D,
++	0x1A041414,
++	0x00D00000,
++	0x14864000,
++	0x59647A05,
++	0xBA28A3D8,
++	0xF711451E,
++	0x0350D348,
++	0x821A0186,
++	0x0000D000,
++	0x00000680,
++	0xD869A47A,
++	0x1EBA28A3,
++	0x48F71145,
++	0x000341D3,
++	0x00080200,
++	0x00001000,
++	0x00080200,
++	0x00001000,
++	0x000A8000,
++	0x00075000,
++	0x541A8000,
++	0x03875121,
++	0x10000000,
++	0x00000000,
++	0x0080C000,
++	0x41000000,
++	0x04000002,
++	0x00820000,
++	0xAA0D4000,
++	0x01C3A800,
++	0xAA0D4000,
++	0x01C3A890,
++	0xAA0D4000,
++	0x01C3A800,
++	0x00040100,
++	0x00000800,
++	0x00000000,
++	0x00001208,
++	0x00482000,
++	0x00008000,
++	0x00000000,
++	0x00410482,
++	0x0006A000,
++	0x0001B400,
++	0x00020000,
++	0x00000400,
++	0x0002A000,
++	0x0001E400,
++	0x5506A000,
++	0x00E1D448,
++	0x00000000,
++	0xC880090C,
++	0x00003001,
++	0x90400000,
++	0x00000000,
++	0x2020C243,
++	0x2A835000,
++	0x0070EA00,
++	0x2A835000,
++	0x0070EA24,
++	0x2A835000,
++	0x0070EA24,
++	0x00010040,
++	0x00000200,
++	0x00000000,
++	0x00000482,
++	0x00120800,
++	0x00002000,
++	0x80000000,
++	0x00104120,
++	0x00000200,
++	0xAC0D5F80,
++	0xFFFFFFFF,
++	0x14F3690D,
++	0x1A041414,
++	0x00D00000,
++	0x04864000,
++	0xE9A47A01,
++	0xBB2CA3D0,
++	0xF711451E,
++	0x0350D348,
++	0x821A0000,
++	0x0000D000,
++	0x00000680,
++	0xD869A47A,
++	0x1EBA28A3,
++	0x48F71145,
++	0x000341D3,
++	0x00080200,
++	0x00001000,
++	0x00080200,
++	0x00001000,
++	0x000A8000,
++	0x00075000,
++	0x541A8000,
++	0x03875001,
++	0x10000000,
++	0x00000000,
++	0x0080C000,
++	0x41000000,
++	0x04000002,
++	0x00820000,
++	0xAA0D4000,
++	0x01C3A800,
++	0xAA0D4000,
++	0x01C3A890,
++	0xAA0D4000,
++	0x01C3A890,
++	0x00040100,
++	0x00000800,
++	0x00000000,
++	0x00001208,
++	0x00482000,
++	0x00008000,
 +	0x00000000,
 +	0x00410482,
 +	0x0006A000,
@@ -742,157 +876,9 @@ index 00000000000..cce43c54377
 +	0x2A835000,
 +	0x0070EA00,
 +	0x2A835000,
-+	0x0070EA00,
++	0x0070EA24,
 +	0x2A835000,
-+	0x0070EA00,
-+	0x00015000,
-+	0x0000F200,
-+	0x00000000,
-+	0x00000482,
-+	0x00120800,
-+	0x00600391,
-+	0x80000000,
-+	0x00104120,
-+	0x00000200,
-+	0xAC0D5F80,
-+	0xFFFFFFFF,
-+	0x14F3690D,
-+	0x1A041414,
-+	0x00D00000,
-+	0x04864000,
-+	0x69A47A01,
-+	0xF228A3D9,
-+	0xF4D1451E,
-+	0x0352D348,
-+	0x821A028A,
-+	0x0000D000,
-+	0x00000680,
-+	0xD559647A,
-+	0x1EF228A3,
-+	0x48F4D145,
-+	0x000352D3,
-+	0x00080200,
-+	0x00001000,
-+	0x00080200,
-+	0x00001000,
-+	0x000A8000,
-+	0x00075000,
-+	0x541A8000,
-+	0x03875001,
-+	0x0000FF00,
-+	0x00000000,
-+	0x0080C000,
-+	0x41000000,
-+	0x00003FC2,
-+	0x00820000,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0x00040100,
-+	0x00000800,
-+	0x00000000,
-+	0x00001208,
-+	0xF8482000,
-+	0x00000007,
-+	0x00000000,
-+	0x00410482,
-+	0x0006A000,
-+	0x0001B400,
-+	0x00020000,
-+	0x00000400,
-+	0x0002A000,
-+	0x0001E400,
-+	0x5506A000,
-+	0x00E1D400,
-+	0x00000000,
-+	0xC880090C,
-+	0x00003001,
-+	0x90400000,
-+	0x00000000,
-+	0x2020C243,
-+	0x2A835000,
-+	0x0070EA00,
-+	0x2A835000,
-+	0x0070EA00,
-+	0x2A835000,
-+	0x0070EA00,
-+	0x00010040,
-+	0x00000200,
-+	0x00000000,
-+	0x00000482,
-+	0xFE120800,
-+	0x00000001,
-+	0x80000000,
-+	0x00104120,
-+	0x00000200,
-+	0xAC0D5F80,
-+	0xFFFFFFFF,
-+	0x14F3690D,
-+	0x1A041414,
-+	0x00D00000,
-+	0x14864000,
-+	0x59647A05,
-+	0xF228A3D5,
-+	0xF4D1451E,
-+	0x03429248,
-+	0x821A0000,
-+	0x0000D000,
-+	0x00000680,
-+	0xD969A47A,
-+	0x1EF228A3,
-+	0x48F4D145,
-+	0x00034AD3,
-+	0x00080200,
-+	0x00001000,
-+	0x00080200,
-+	0x00001000,
-+	0x000A8000,
-+	0x00075000,
-+	0x541A8000,
-+	0x03875001,
-+	0x0000FF00,
-+	0x00000000,
-+	0x0080C000,
-+	0x41000000,
-+	0x00003FC2,
-+	0x00820000,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0xAA0D4000,
-+	0x01C3A800,
-+	0x00040100,
-+	0x00000800,
-+	0x00000000,
-+	0x00001208,
-+	0xF8482000,
-+	0x00000007,
-+	0x00000000,
-+	0x00410482,
-+	0x0006A000,
-+	0x0001B400,
-+	0x00020000,
-+	0x00000400,
-+	0x00020080,
-+	0x00000400,
-+	0x5506A000,
-+	0x00E1D400,
-+	0x00000000,
-+	0x00FF090C,
-+	0x00000000,
-+	0x90400000,
-+	0x00000000,
-+	0x2020C243,
-+	0x2A835000,
-+	0x0070EA00,
-+	0x2A835000,
-+	0x0070EA00,
-+	0x2A835000,
-+	0x0070EA00,
++	0x0070EA24,
 +	0x00010040,
 +	0x00000200,
 +	0x00000000,
@@ -907,18 +893,18 @@ index 00000000000..cce43c54377
 +	0x14F1690D,
 +	0x1A041414,
 +	0x00D00000,
-+	0x14864000,
-+	0x69A47A05,
-+	0xF228A3D9,
-+	0xF4D1451E,
-+	0x0352D348,
++	0x04864000,
++	0xE9A47A01,
++	0xBA28A3D0,
++	0xF711451E,
++	0x03409248,
 +	0x821A0000,
 +	0x0000D000,
 +	0x00000680,
-+	0xD969A47A,
-+	0x1EF228A3,
-+	0x48F4D145,
-+	0x00035292,
++	0xD0E9A47A,
++	0x1EBA28A3,
++	0x48F71145,
++	0x00034092,
 +	0x00080200,
 +	0x00001000,
 +	0x00080200,
@@ -927,11 +913,11 @@ index 00000000000..cce43c54377
 +	0x00075000,
 +	0x541A8000,
 +	0x03875001,
-+	0x0000FF00,
++	0x10000000,
 +	0x00000000,
 +	0x0080C000,
 +	0x41000000,
-+	0x00003FC2,
++	0x04000002,
 +	0x00820000,
 +	0x00489800,
 +	0x801A1A1A,
@@ -942,12 +928,12 @@ index 00000000000..cce43c54377
 +	0x00000200,
 +	0x80000004,
 +	0x00000200,
-+	0xC0000004,
-+	0x0000003F,
-+	0x0000FF00,
-+	0x03FC0000,
-+	0xF0000000,
-+	0x0000000F,
++	0x00000004,
++	0x00040000,
++	0x10000000,
++	0x00000000,
++	0x00000040,
++	0x00010000,
 +	0x40002000,
 +	0x00000100,
 +	0x40000002,
@@ -956,12 +942,12 @@ index 00000000000..cce43c54377
 +	0x00000100,
 +	0x40000002,
 +	0x00000100,
-+	0xE0000002,
-+	0x0000001F,
-+	0x00007F80,
-+	0x01FE0000,
-+	0xF8000000,
-+	0x00000007,
++	0x00000002,
++	0x00020000,
++	0x08000000,
++	0x00000000,
++	0x00000020,
++	0x00008000,
 +	0x20001000,
 +	0x00000080,
 +	0x20000001,
@@ -970,12 +956,12 @@ index 00000000000..cce43c54377
 +	0x00000080,
 +	0x20000001,
 +	0x00000080,
-+	0xF0000001,
-+	0x0000000F,
-+	0x00003FC0,
++	0x00000001,
++	0x00010000,
++	0x04000000,
 +	0x00FF0000,
-+	0xFC000000,
-+	0x00000003,
++	0x00000000,
++	0x00004000,
 +	0x00000800,
 +	0xC0000001,
 +	0x00041419,
@@ -1004,9 +990,9 @@ index 00000000000..cce43c54377
 +	0x00000401,
 +	0x80000008,
 +	0x0000007F,
-+	0x0001FE00,
-+	0x07F80000,
-+	0xE0000000,
++	0x20000000,
++	0x00000000,
++	0xE0000080,
 +	0x0000001F,
 +	0x00004000,
 +};
@@ -1014,11 +1000,11 @@ index 00000000000..cce43c54377
 +
 +
 +#endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
-diff --git a/board/corecourse/ac501soc/qts/pinmux_config.h b/board/corecourse/ac501soc/qts/pinmux_config.h
+diff --git a/board/corecourse/ac550soc/qts/pinmux_config.h b/board/corecourse/ac550soc/qts/pinmux_config.h
 new file mode 100644
-index 00000000000..462cde84565
+index 00000000000..ac31e93e8f2
 --- /dev/null
-+++ b/board/corecourse/ac501soc/qts/pinmux_config.h
++++ b/board/corecourse/ac550soc/qts/pinmux_config.h
 @@ -0,0 +1,222 @@
 +/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 +/*
@@ -1068,22 +1054,22 @@ index 00000000000..462cde84565
 +	0, /* GENERALIO0 */
 +	1, /* GENERALIO1 */
 +	1, /* GENERALIO2 */
-+	1, /* GENERALIO3 */
-+	1, /* GENERALIO4 */
-+	1, /* GENERALIO5 */
-+	1, /* GENERALIO6 */
++	0, /* GENERALIO3 */
++	0, /* GENERALIO4 */
++	0, /* GENERALIO5 */
++	0, /* GENERALIO6 */
 +	1, /* GENERALIO7 */
 +	1, /* GENERALIO8 */
-+	3, /* GENERALIO9 */
-+	3, /* GENERALIO10 */
-+	3, /* GENERALIO11 */
-+	3, /* GENERALIO12 */
++	0, /* GENERALIO9 */
++	0, /* GENERALIO10 */
++	0, /* GENERALIO11 */
++	0, /* GENERALIO12 */
 +	0, /* GENERALIO13 */
 +	0, /* GENERALIO14 */
-+	1, /* GENERALIO15 */
-+	1, /* GENERALIO16 */
-+	1, /* GENERALIO17 */
-+	1, /* GENERALIO18 */
++	0, /* GENERALIO15 */
++	0, /* GENERALIO16 */
++	0, /* GENERALIO17 */
++	0, /* GENERALIO18 */
 +	0, /* GENERALIO19 */
 +	0, /* GENERALIO20 */
 +	0, /* GENERALIO21 */
@@ -1112,12 +1098,12 @@ index 00000000000..462cde84565
 +	2, /* MIXED1IO12 */
 +	2, /* MIXED1IO13 */
 +	0, /* MIXED1IO14 */
-+	0, /* MIXED1IO15 */
-+	0, /* MIXED1IO16 */
-+	0, /* MIXED1IO17 */
-+	0, /* MIXED1IO18 */
-+	0, /* MIXED1IO19 */
-+	0, /* MIXED1IO20 */
++	3, /* MIXED1IO15 */
++	3, /* MIXED1IO16 */
++	3, /* MIXED1IO17 */
++	3, /* MIXED1IO18 */
++	3, /* MIXED1IO19 */
++	3, /* MIXED1IO20 */
 +	0, /* MIXED1IO21 */
 +	0, /* MIXED2IO0 */
 +	0, /* MIXED2IO1 */
@@ -1225,16 +1211,16 @@ index 00000000000..462cde84565
 +	0, /* UART0USEFPGA */
 +	0, /* RGMII1USEFPGA */
 +	0, /* SPIS0USEFPGA */
-+	0, /* CAN0USEFPGA */
++	1, /* CAN0USEFPGA */
 +	0, /* I2C0USEFPGA */
 +	0, /* SDMMCUSEFPGA */
 +	0, /* QSPIUSEFPGA */
 +	0, /* SPIS1USEFPGA */
 +	0, /* RGMII0USEFPGA */
-+	0, /* UART1USEFPGA */
-+	0, /* CAN1USEFPGA */
++	1, /* UART1USEFPGA */
++	1, /* CAN1USEFPGA */
 +	0, /* USB1USEFPGA */
-+	0, /* I2C3USEFPGA */
++	1, /* I2C3USEFPGA */
 +	0, /* I2C2USEFPGA */
 +	0, /* I2C1USEFPGA */
 +	0, /* SPIM1USEFPGA */
@@ -1242,11 +1228,11 @@ index 00000000000..462cde84565
 +	0 /* SPIM0USEFPGA */
 +};
 +#endif /* __SOCFPGA_PINMUX_CONFIG_H__ */
-diff --git a/board/corecourse/ac501soc/qts/pll_config.h b/board/corecourse/ac501soc/qts/pll_config.h
+diff --git a/board/corecourse/ac550soc/qts/pll_config.h b/board/corecourse/ac550soc/qts/pll_config.h
 new file mode 100644
-index 00000000000..88e0b2a3776
+index 00000000000..4e89cab2732
 --- /dev/null
-+++ b/board/corecourse/ac501soc/qts/pll_config.h
++++ b/board/corecourse/ac550soc/qts/pll_config.h
 @@ -0,0 +1,86 @@
 +/* SPDX-License-Identifier: BSD-3-Clause */
 +/*
@@ -1266,7 +1252,7 @@ index 00000000000..88e0b2a3776
 +#define CFG_HPS_MAINPLLGRP_MPUCLK_CNT 0
 +#define CFG_HPS_MAINPLLGRP_MAINCLK_CNT 0
 +#define CFG_HPS_MAINPLLGRP_DBGATCLK_CNT 0
-+#define CFG_HPS_MAINPLLGRP_MAINQSPICLK_CNT 511
++#define CFG_HPS_MAINPLLGRP_MAINQSPICLK_CNT 3
 +#define CFG_HPS_MAINPLLGRP_MAINNANDSDMMCCLK_CNT 511
 +#define CFG_HPS_MAINPLLGRP_CFGS2FUSER0CLK_CNT 15
 +#define CFG_HPS_MAINPLLGRP_MAINDIV_L3MPCLK 1
@@ -1289,16 +1275,16 @@ index 00000000000..88e0b2a3776
 +#define CFG_HPS_PERPLLGRP_PERBASECLK_CNT 4
 +#define CFG_HPS_PERPLLGRP_S2FUSER1CLK_CNT 511
 +#define CFG_HPS_PERPLLGRP_DIV_USBCLK 0
-+#define CFG_HPS_PERPLLGRP_DIV_SPIMCLK 0
-+#define CFG_HPS_PERPLLGRP_DIV_CAN0CLK 4
++#define CFG_HPS_PERPLLGRP_DIV_SPIMCLK 4
++#define CFG_HPS_PERPLLGRP_DIV_CAN0CLK 1
 +#define CFG_HPS_PERPLLGRP_DIV_CAN1CLK 1
 +#define CFG_HPS_PERPLLGRP_GPIODIV_GPIODBCLK 6249
 +#define CFG_HPS_PERPLLGRP_SRC_SDMMC 2
 +#define CFG_HPS_PERPLLGRP_SRC_NAND 2
 +#define CFG_HPS_PERPLLGRP_SRC_QSPI 1
 +
-+#define CFG_HPS_SDRPLLGRP_VCO_DENOM 0
-+#define CFG_HPS_SDRPLLGRP_VCO_NUMER 31
++#define CFG_HPS_SDRPLLGRP_VCO_DENOM 2
++#define CFG_HPS_SDRPLLGRP_VCO_NUMER 127
 +#define CFG_HPS_SDRPLLGRP_VCO_SSRC 0
 +#define CFG_HPS_SDRPLLGRP_DDRDQSCLK_CNT 1
 +#define CFG_HPS_SDRPLLGRP_DDRDQSCLK_PHASE 0
@@ -1315,15 +1301,15 @@ index 00000000000..88e0b2a3776
 +#define CFG_HPS_CLK_F2S_PER_REF_HZ 0
 +#define CFG_HPS_CLK_MAINVCO_HZ 1600000000
 +#define CFG_HPS_CLK_PERVCO_HZ 1000000000
-+#define CFG_HPS_CLK_SDRVCO_HZ 800000000
++#define CFG_HPS_CLK_SDRVCO_HZ 1066666667
 +#define CFG_HPS_CLK_EMAC0_HZ 1953125
 +#define CFG_HPS_CLK_EMAC1_HZ 250000000
 +#define CFG_HPS_CLK_USBCLK_HZ 200000000
 +#define CFG_HPS_CLK_NAND_HZ 50000000
 +#define CFG_HPS_CLK_SDMMC_HZ 200000000
-+#define CFG_HPS_CLK_QSPI_HZ 3125000
-+#define CFG_HPS_CLK_SPIM_HZ 200000000
-+#define CFG_HPS_CLK_CAN0_HZ 12500000
++#define CFG_HPS_CLK_QSPI_HZ 400000000
++#define CFG_HPS_CLK_SPIM_HZ 12500000
++#define CFG_HPS_CLK_CAN0_HZ 100000000
 +#define CFG_HPS_CLK_CAN1_HZ 100000000
 +#define CFG_HPS_CLK_GPIODB_HZ 32000
 +#define CFG_HPS_CLK_L4_MP_HZ 100000000
@@ -1334,11 +1320,11 @@ index 00000000000..88e0b2a3776
 +#define CFG_HPS_ALTERAGRP_DBGATCLK 3
 +
 +#endif /* __SOCFPGA_PLL_CONFIG_H__ */
-diff --git a/board/corecourse/ac501soc/qts/sdram_config.h b/board/corecourse/ac501soc/qts/sdram_config.h
+diff --git a/board/corecourse/ac550soc/qts/sdram_config.h b/board/corecourse/ac550soc/qts/sdram_config.h
 new file mode 100644
-index 00000000000..43cf307847e
+index 00000000000..e46aaa83132
 --- /dev/null
-+++ b/board/corecourse/ac501soc/qts/sdram_config.h
++++ b/board/corecourse/ac550soc/qts/sdram_config.h
 @@ -0,0 +1,349 @@
 +/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 +/*
@@ -1378,21 +1364,21 @@ index 00000000000..43cf307847e
 +#define CFG_HPS_SDR_CTRLCFG_DRAMODT_READ			0
 +#define CFG_HPS_SDR_CTRLCFG_DRAMODT_WRITE			1
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_AL			0
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TCL			11
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TCWL			8
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TFAW			12
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TRFC			104
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TRRD			3
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TRCD		6
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TREFI		3120
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TRP		6
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TWR		6
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TCL			7
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TCWL			6
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TFAW			27
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TRFC			187
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING1_TRRD			6
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TRCD		7
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TREFI		4160
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TRP		7
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TWR		8
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING2_IF_TWTR		4
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TCCD			4
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TMRD			4
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRAS			14
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRC			20
-+#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRTP			3
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRAS			20
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRC			27
++#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING3_TRTP			4
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING4_PWRDOWNEXIT		3
 +#define CFG_HPS_SDR_CTRLCFG_DRAMTIMING4_SELFRFSHEXIT		512
 +#define CFG_HPS_SDR_CTRLCFG_EXTRATIME1_CFG_EXTRA_CTL_CLK_RD_TO_WR 2
@@ -1475,18 +1461,18 @@ index 00000000000..43cf307847e
 +#define RW_MGR_ZQCL	0x06
 +
 +/* Sequencer defines configuration */
-+#define AFI_CLK_FREQ	401
++#define AFI_CLK_FREQ	534
 +#define AFI_RATE_RATIO	1
-+#define CALIB_LFIFO_OFFSET	12
-+#define CALIB_VFIFO_OFFSET	10
++#define CALIB_LFIFO_OFFSET	8
++#define CALIB_VFIFO_OFFSET	6
 +#define ENABLE_SUPER_QUICK_CALIBRATION	0
 +#define IO_DELAY_PER_DCHAIN_TAP	25
 +#define IO_DELAY_PER_DQS_EN_DCHAIN_TAP	25
-+#define IO_DELAY_PER_OPA_TAP	312
++#define IO_DELAY_PER_OPA_TAP	234
 +#define IO_DLL_CHAIN_LENGTH	8
 +#define IO_DQDQS_OUT_PHASE_MAX	0
-+#define IO_DQS_EN_DELAY_MAX	31
-+#define IO_DQS_EN_DELAY_OFFSET	0
++#define IO_DQS_EN_DELAY_MAX	15
++#define IO_DQS_EN_DELAY_OFFSET	16
 +#define IO_DQS_EN_PHASE_MAX	7
 +#define IO_DQS_IN_DELAY_MAX	31
 +#define IO_DQS_IN_RESERVE	4
@@ -1510,10 +1496,10 @@ index 00000000000..43cf307847e
 +#define RW_MGR_MEM_VIRTUAL_GROUPS_PER_READ_DQS	1
 +#define RW_MGR_MEM_VIRTUAL_GROUPS_PER_WRITE_DQS	1
 +#define RW_MGR_TRUE_MEM_DATA_MASK_WIDTH	4
-+#define TINIT_CNTR0_VAL	99
++#define TINIT_CNTR0_VAL	132
 +#define TINIT_CNTR1_VAL	32
 +#define TINIT_CNTR2_VAL	32
-+#define TRESET_CNTR0_VAL	99
++#define TRESET_CNTR0_VAL	132
 +#define TRESET_CNTR1_VAL	99
 +#define TRESET_CNTR2_VAL	10
 +
@@ -1521,16 +1507,16 @@ index 00000000000..43cf307847e
 +const u32 ac_rom_init[] = {
 +	0x20700000,
 +	0x20780000,
-+	0x10080471,
-+	0x10080570,
++	0x10080831,
++	0x10080930,
 +	0x10090006,
-+	0x100a0218,
++	0x100a0208,
 +	0x100b0000,
 +	0x10380400,
-+	0x10080469,
-+	0x100804e8,
++	0x10080849,
++	0x100808c8,
 +	0x100a0006,
-+	0x10090218,
++	0x10090210,
 +	0x100b0000,
 +	0x30780000,
 +	0x38780000,
@@ -1689,11 +1675,11 @@ index 00000000000..43cf307847e
 +};
 +
 +#endif /* __SOCFPGA_SDRAM_CONFIG_H__ */
-diff --git a/configs/socfpga_ac501soc_defconfig b/configs/socfpga_ac501soc_defconfig
+diff --git a/configs/socfpga_ac550soc_defconfig b/configs/socfpga_ac550soc_defconfig
 new file mode 100644
-index 00000000000..09f8ea2e611
+index 00000000000..df1dc6acf9a
 --- /dev/null
-+++ b/configs/socfpga_ac501soc_defconfig
++++ b/configs/socfpga_ac550soc_defconfig
 @@ -0,0 +1,85 @@
 +CONFIG_ARM=y
 +CONFIG_SYS_L2_PL310=y
@@ -1704,18 +1690,18 @@ index 00000000000..09f8ea2e611
 +CONFIG_ENV_SIZE=0x2000
 +CONFIG_ENV_OFFSET=0x4400
 +CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_ac501soc"
++CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_ac550soc"
 +CONFIG_DM_RESET=y
 +CONFIG_SPL_STACK=0x0
 +CONFIG_SPL_TEXT_BASE=0xFFFF0000
-+CONFIG_TARGET_SOCFPGA_CORECOURSE_AC501SOC=y
++CONFIG_TARGET_SOCFPGA_CORECOURSE_AC550SOC=y
 +CONFIG_SPL_FS_FAT=y
 +# CONFIG_SPL_SPI is not set
 +CONFIG_TIMESTAMP=y
 +CONFIG_FIT=y
 +CONFIG_DISTRO_DEFAULTS=y
 +CONFIG_BOOTCOMMAND="run fatscript;bridge enable; run distro_bootcmd"
-+CONFIG_DEFAULT_FDT_FILE="socfpga_cyclone5_ac501soc.dtb"
++CONFIG_DEFAULT_FDT_FILE="socfpga_cyclone5_ac550soc.dtb"
 +CONFIG_SYS_CONSOLE_IS_IN_ENV=y
 +CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
 +CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
@@ -1780,18 +1766,18 @@ index 00000000000..09f8ea2e611
 +# CONFIG_TOOLS_MKEFICAPSULE is not set
 +CONFIG_CMD_C5_PL330_DMA=y
 +CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/include/configs/socfpga_ac501soc.h b/include/configs/socfpga_ac501soc.h
+diff --git a/include/configs/socfpga_ac550soc.h b/include/configs/socfpga_ac550soc.h
 new file mode 100644
-index 00000000000..1da5c866220
+index 00000000000..754d2e89747
 --- /dev/null
-+++ b/include/configs/socfpga_ac501soc.h
++++ b/include/configs/socfpga_ac550soc.h
 @@ -0,0 +1,16 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Copyright (C) 2025 Brian Sune <briansune@gmail.com>
 + */
-+#ifndef __CONFIG_CORESOURCE_AC501SOC_H__
-+#define __CONFIG_CORESOURCE_AC501SOC_H__
++#ifndef __CONFIG_CORESOURCE_AC550SOC_H__
++#define __CONFIG_CORESOURCE_AC550SOC_H__
 +
 +#include <asm/arch/base_addr_ac5.h>
 +
@@ -1801,7 +1787,7 @@ index 00000000000..1da5c866220
 +/* The rest of the configuration is shared */
 +#include <configs/socfpga_common.h>
 +
-+#endif	/* __CONFIG_CORESOURCE_AC501SOC_H__ */
++#endif	/* __CONFIG_CORESOURCE_AC550SOC_H__ */
 -- 
 2.34.1
 
