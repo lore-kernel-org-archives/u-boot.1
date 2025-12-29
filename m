@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C504E92FD9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 20:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CEFE92FD7
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 20:37:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C71C83F1F;
+	by phobos.denx.de (Postfix) with ESMTP id 8200E83F2E;
 	Mon, 29 Dec 2025 21:36:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="RpB7z/w8";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="FK8l+Kzv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81EC083EF9; Mon, 29 Dec 2025 20:44:31 +0100 (CET)
-Received: from mail-106121.protonmail.ch (mail-106121.protonmail.ch
- [79.135.106.121])
+ id 3828283F01; Mon, 29 Dec 2025 20:44:38 +0100 (CET)
+Received: from mail-43101.protonmail.ch (mail-43101.protonmail.ch
+ [185.70.43.101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9629783EA6
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 20:44:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3279883EF9
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 20:44:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=t.preissl@proton.me
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=sdzgmpj2krbrlgupbogxcjdxji.protonmail; t=1767037468; x=1767296668;
- bh=bhqZCajeYwyuiUv/RvSL8RsYb4fYLbCI8O0x0PeWSo8=;
+ s=qotweefh7fe3rawhjtpkdpaoui.protonmail; t=1767037475; x=1767296675;
+ bh=3Mdnlnlx9smVlETvC/5wWn90n9OpIxzJjcTdw2O0U/c=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=RpB7z/w8chbzYBcujp+doQcX32YlGXfrIaeuhLciTPhrT/RuByCMgrEi8+bsdQOUY
- E9cFYTdUIb1zunW2RzeGySx6D+wFXhSnLw5kksBomE64G4otrXiXFnv51r/0FwEHzr
- ATypgM4JYzGodeYDnCs7KdKeAdr6LWHiS6o2eNkBzArjLT0yemmh0hS2EiE8++xe/+
- Nc7QIQZg4iOHarIy1yoVlVwH9wxDp7y0yA3690PaYgXnBxd2RfmSpWQZRJT0p2tW6M
- wxZownNXlBPMr+3APXwmGOrm9fI/R30cbx/3dSUVakQ86ECoYzUOEYVr1XA3Jjr+ri
- 6HKRTYrIf1dew==
-Date: Mon, 29 Dec 2025 19:44:25 +0000
+ b=FK8l+KzvmHq+n4LfUcHWlrX7SD/YkF0maIN0Nzyyw28FJ0u38Prt+CUI6WfSzhNdU
+ US1hpSwjGokumV0s/U/Ea8R6NilZEqneDeQ4Gdu92BWzugo8H+hyXrfrjdtymlUA2k
+ L+wZ/SQyzAVntR2ITaBOVa1FPWiKfw9xr8CgdC/bo7b6dzOQbJffNTDI3QMBJVArw0
+ JyCB4xWPO2fiSADoNIke1kzGQP60xn0qJJmkLu3JM3//mZA6Xi+HgfY3id8eapy5vE
+ 0ull9r17AizwPsstMvLuVGk4d2nFGEzqi14bCC6novLbkllfBAwv6qWnywagE/P5RM
+ 1LMxzzs+kfMqw==
+Date: Mon, 29 Dec 2025 19:44:31 +0000
 To: u-boot@lists.denx.de
 From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
 Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Subject: [PATCH 1/4] fs: prevent integer overflow in fs.c do_mv
-Message-ID: <20251229194418.69780-2-t.preissl@proton.me>
+Subject: [PATCH 2/4] fs: prevent integer overflow in zfs_nvlist_lookup
+Message-ID: <20251229194418.69780-3-t.preissl@proton.me>
 In-Reply-To: <20251229194418.69780-1-t.preissl@proton.me>
 References: <20251229194418.69780-1-t.preissl@proton.me>
 Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: 4e790aee72188ce9bb40664f4d285cd89576f601
+X-Pm-Message-ID: 2645732f806b95a99624ec3fad18c3009115ca76
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -68,48 +68,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An integer overflow in size calculations could lead to
-under-allocation and potential heap buffer overflow.
+An integer overflow in nvlist size calculation could lead
+to under-allocation and heap buffer overflow.
 
 Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
 ---
- fs/fs.c | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ fs/zfs/zfs.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index c7706d9af85..319c55c440a 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -1059,15 +1059,25 @@ int do_mv(struct cmd_tbl *cmdtp, int flag, int argc=
-, char *const argv[],
+diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
+index 410a61aa611..624f4e48cc8 100644
+--- a/fs/zfs/zfs.c
++++ b/fs/zfs/zfs.c
+@@ -1627,7 +1627,10 @@ zfs_nvlist_lookup_nvlist(char *nvlist, char *name)
+ =09 * nvlist to hold the encoding method, and two zero uint32's after the
+ =09 * nvlist as the NULL terminator.
  =09 */
- =09if (dirs) {
- =09=09char *src_name =3D strrchr(src, '/');
--=09=09int dst_len;
-=20
- =09=09if (src_name)
- =09=09=09src_name +=3D 1;
- =09=09else
- =09=09=09src_name =3D src;
-=20
--=09=09dst_len =3D strlen(dst);
--=09=09new_dst =3D calloc(1, dst_len + strlen(src_name) + 2);
-+=09=09size_t dst_len =3D strlen(dst);
-+=09=09size_t src_len =3D strlen(src_name);
-+=09=09size_t total;
+-=09ret =3D calloc(1, size + 3 * sizeof(uint32_t));
++=09if (__builtin_add_overflow(size, 3 * sizeof(uint32_t), &alloc))
++=09=09return 0;
 +
-+=09=09if (__builtin_add_overflow(dst_len, src_len, &total) ||
-+=09=09    __builtin_add_overflow(total, 2, &total)) {
-+=09=09=09return 0;
-+=09=09}
-+
-+=09=09new_dst =3D calloc(1, total);
-+=09=09if (!new_dst)
-+=09=09=09return 0;
-+
- =09=09strcpy(new_dst, dst);
-=20
- =09=09/* If there is already a trailing slash, don't add another */
++=09ret =3D calloc(1, alloc);
+ =09if (!ret)
+ =09=09return 0;
+ =09memcpy(ret, nvlist, sizeof(uint32_t));
 --=20
 2.43.0
 
