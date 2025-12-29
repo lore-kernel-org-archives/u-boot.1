@@ -4,54 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5BB7E92FD9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 20:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 605CEE92FDD
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 20:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A90C83F4D;
-	Mon, 29 Dec 2025 21:36:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id 8C4D883EF5;
+	Mon, 29 Dec 2025 21:55:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="IiTq7WKd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IZxV4zOb";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="j7mOQTFw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC3AC83EA6; Mon, 29 Dec 2025 20:44:43 +0100 (CET)
-Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
- [79.135.106.28])
+ id 1C18083EF9; Mon, 29 Dec 2025 21:55:02 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E21D283EF5
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 20:44:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 92CCA83E21
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 21:54:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=t.preissl@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1767037481; x=1767296681;
- bh=zu7/NbeXBxY5YFw9w3SXHKGJUQFxvf5pf7a3V4dXJjQ=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=IiTq7WKdLZcaWGAx43v9lYOZqOEVHaOR1eJ9uMq4J/+OfqFNSlFFpT/6prWYULwQm
- 1SFydeembUnpeo0OekQ9DIQfuAOqVmwFoejePmFLN/8wY67TAh/e1Wtbane6g9lxb9
- q3liuJMznCLUfOdyh0Dpa1/hawWYGa1BwVjn8vp0G5rk/WOeIUA1RsGcfilZUZoeZH
- K0+Z10YCbIr24cb9KpDVUeP1nOzY7G+PE8nxzMBNlhfRySEWS6EQyJyK9HR2qG7HyP
- 85BCMcvrD327xjEIlRUTTSiWUOtMVIoFTWfeu4XTPS52j44jD9U3Y4t1zfwVRQNWFJ
- QP7QwrMnIXNmg==
-Date: Mon, 29 Dec 2025 19:44:36 +0000
-To: u-boot@lists.denx.de
-From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Subject: [PATCH 4/4] fs: prevent integer overflow in ext4fs_get_bgdtable
-Message-ID: <20251229194418.69780-5-t.preissl@proton.me>
-In-Reply-To: <20251229194418.69780-1-t.preissl@proton.me>
-References: <20251229194418.69780-1-t.preissl@proton.me>
-Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: b6895ff2bb7e6b09a1e8cba852e7ecc3b2741315
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dg7l72R82z9tDR;
+ Mon, 29 Dec 2025 21:54:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767041699;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9tIWdl3z4VbPK3xT5m0tZg2D1WHiNuGcifjV6vazGoM=;
+ b=IZxV4zObzCeSDb/gvOpdLhf7GKDtvZ6Z2x/ib4C7X7QMLD3kStMH8vryQsryc2Or8WRkD+
+ 4bbHdh33JF7CLMMsMWfY/VintHVP7RUYLiBQv9bjex1noSFrKoj2BQ8vSt+diOIulYJ4AC
+ 6aASeAMdkA8ASJTBGRWSWkwHfizS2eReGtDnI1YhaCPWJKjPyT/kP4c5FbL6tSPd1NvN2n
+ r8hHoze0UBrF3dUb3cdwGGci/M7McuU12Ubhlv0iJtEvnUFG3ppfFB2fgG7j3RvQ8zeusX
+ d4bolvYp8QlFUwhvhsQPTX0m3PYjASzdwxUwuzl0/wENaOo4wgQRCPGnfR9N0Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=j7mOQTFw;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767041697;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9tIWdl3z4VbPK3xT5m0tZg2D1WHiNuGcifjV6vazGoM=;
+ b=j7mOQTFw/3mFEnudpLYg3JqRKXSr5qRs36mozK967IZKz8zTQ+PTzhcDDsUoTYAtbRYlOa
+ qMmueup+70abwZoDV4pW7vKRVO4L6j+ENwjXVrRG80DTemv9lK1tyy1bwdAhwR21Jn4lbN
+ 3XCriNdW/zynYLEG4/Oi4a754pXCTbEQxKIqnSJwFG/qtwC45CMzJ/wExd9rZhYN8wMMkd
+ SMXyGhPfw4dnEUStPTB7fT3iye1Sr7f+kXMdBnzgzFVkreocLtw63Y3DY9zAvP0EZtLeic
+ AMRyiFRJbUPtIobAYFSJ4vwmzbN716UE5K7wG0FFRVHSJct3e8voBeiPtupujw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>
+Subject: [PULL] u-boot-sh/master
+Date: Mon, 29 Dec 2025 21:53:59 +0100
+Message-ID: <20251229205431.89734-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 29 Dec 2025 21:36:43 +0100
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 34wydtxx4sdkr3kbp5mt67pkdbq3unqj
+X-MBO-RS-ID: 6b9cf343ce0ec59b890
+X-Rspamd-Queue-Id: 4dg7l72R82z9tDR
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,33 +90,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An integer overflow in gdsize_total calculation could lead
-to under-allocation and heap buffer overflow.
+Fix R-Car D3 ability to boot Linux kernel. This is for 2026.01 .
 
-Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
----
- fs/ext4/ext4_write.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+The following changes since commit 56cac250b0839ddbad1311d3ca4231f532b5aadf:
 
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 5b290f0d80d..b826a8807c5 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -108,7 +108,12 @@ int ext4fs_get_bgdtable(void)
- {
- =09int status;
- =09struct ext_filesystem *fs =3D get_fs();
--=09int gdsize_total =3D ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz);
-+=09size_t alloc;
-+
-+=09if (__builtin_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc))
-+=09=09return -1;
-+
-+=09size_t gdsize_total =3D ROUND(alloc, fs->blksz);
- =09fs->no_blk_pergdt =3D gdsize_total / fs->blksz;
-=20
- =09/* allocate memory for gdtable */
---=20
-2.43.0
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2025-12-23 11:17:37 -0600)
 
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to 06df1a5072af74039732dee631c810dd8cd3471c:
+
+  clk: renesas: Do not disable realtime modules on R8A77995 D3 (2025-12-29 20:47:53 +0100)
+
+----------------------------------------------------------------
+Niklas Söderlund (2):
+      clk: renesas: Do not enable MSTP4 extra modules on R8A77995 D3
+      clk: renesas: Do not disable realtime modules on R8A77995 D3
+
+ drivers/clk/renesas/r8a77995-cpg-mssr.c | 24 ++++++++++++------------
+ drivers/clk/renesas/renesas-cpg-mssr.c  |  3 ++-
+ 2 files changed, 14 insertions(+), 13 deletions(-)
