@@ -4,67 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F74D3B7E5
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 09:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A51FE8FDB1
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 10:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38E4283B48;
-	Mon, 29 Dec 2025 10:49:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C888F83D07;
+	Mon, 29 Dec 2025 11:26:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jT21ZK0v";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HeL3+JsB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C477B83B48; Mon, 29 Dec 2025 10:49:46 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0B64283D8A; Mon, 29 Dec 2025 11:26:16 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBD8283B48
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 10:49:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03C7483B82
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 11:26:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=1fd3=7D=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1767001781;
- bh=Skhg1KEmIoxU/8F+eDSKyByGrrykxSrFtQMwIob0ZYs=;
- b=jT21ZK0v0LwjJFSAPK95UukfxDzPNuNyoy190SdW5nNAgpvbPejDB79Ii5v+Z/VJut37yLOpe
- ukQc/EyN5ln5SZNdxtBOwhWoqnq5GVT2weW5srjdh0ZprOtSc6S6uilhL6kE3eOCuvu1Zd9ALr6
- SnfCRA0XvKHrJbtBAb1a8h/ftJzyXOsBJhpXTzqFPEymqSZv2Xuhk/5ttB8axYj3wF9RHlzF4S+
- g1aoWUugSDy/njuCVEacBqgrdAdCDq7BapZLlfCmKRpSYjrwa62tWYtKGHGUf8Iy9+E8Xe8b1G8
- eUMrM+ONVAV0y+BwVsVFfGreE+mB/3UmnWhDpUxvWX/Q==
-X-Forward-Email-ID: 69524ea70cc3759ebd0ba1f9
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.0.11
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <dc6ddbfe-df79-4dcf-90e3-76068e5a5e40@kwiboo.se>
-Date: Mon, 29 Dec 2025 10:49:22 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=aargri@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-37b96cbd875so74196391fa.3
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 02:26:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1767003973; x=1767608773; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7KEWu0y5K+AU/Okhb8Z2BaPpBgncvjG5bAefs6XHBx4=;
+ b=HeL3+JsB2L40349Mq+esErpFWO5AD28I2TT3Y4Ikuadbt4/a12VW7i4mMUSK35VZTh
+ +Vkw8xgFE+l3ifLENrelcGssNqXMTjA+VF+T/8nlBcTIM4D+MqwYlVFv0IdrHvb+yjV7
+ wfbiY+tSD1KAKUBo/Dzhy4xvzuWHqYmCpEnkaxlrUjqnG9t/PAQsmBfPUYoqutUY5Tfh
+ +nRmH/I0kdwZz7dzmNeiNA9wE6pXBHEwvv95ENOzf/vleMlcQvtQzIDa18Tc+x9M7j/e
+ vufQb13uwnExMm2IuGyMcp1zs34BNBJTsPtHUHC4dd62C0NskFiYvjQpLesdbBTJxBMh
+ tq3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767003973; x=1767608773;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7KEWu0y5K+AU/Okhb8Z2BaPpBgncvjG5bAefs6XHBx4=;
+ b=G/ub7EYUChBEwpxBo4YF3zk8QfpXHvv4ns1+yphXTKre58fF4qaDJzbeERGHp4x0Do
+ 7RIOsQP7IZaBYZhj4Cw3P9szYeu/fOlsetw0RhasM6p9VUgedt+9Zc6lvaVN/dhT2OR8
+ bd1Xqc9ynUbGuZLX61qZpHaubqaOKGbPC2bANM9hIQscMyj5xnfboMcCymHcWfMCRh/5
+ SGdHhPeYn7xALBm6jglrt6KH5DJRrh2KoR6stIXXsOP6glLgQrFxE759PW7G2h63TdrM
+ o2lpCA7cM9S902U1Pu4bVuub5cmBrfr5ot6P11F604cIdHRgLeRq4JQWrJJgy3atLrlU
+ JD9g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWelCp9DC/iG572/qrquWxW59rhRvubTlx5pT5hdXmbCGJOxpZpjDCZvbCWWdmEtwzAm0Xp9YQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YywHjbnWjB97BSdheQu85Sup9chwUpiJi1RADB9iQBvV55iJzFq
+ FYgTX7YiBd1xDbDnO6BoQ0PEr+WtY62d3xTy1aQjMpbGoXyPKJW+jbPxrWtiuTvvlJfqaJqMBS8
+ ruPyGwezV4OoGNGg4ya61s+75cjCo1qk=
+X-Gm-Gg: AY/fxX5bG0qHjXzg5vCFaziMXWJZe2b95s6oaOBZjoofpSbcnhHpUqhRT9NfQFSUaf7
+ TWfPc3yP9tkVFIQQ5sfzeoi2jpMcaNUwIsKICM40jEg2zt+peXfFvtT8tZU6SAFjNWZTthblfEY
+ mC3P7fKY9uhCq6O454Byqk3xR6+c28kzPCIFIVKQvoAZz8r8Jbco1jfL7N73ZMmhFWsx2LZUGdz
+ zVAcQVql1pZwKDC+zsPd3Ew0fL/ir64FUH3VWWddCtnIVRrcIMizn9pd7vCtrJsWW30kKmhjDsd
+ skgSfQBhLec82duJAHsdJmPoMbc=
+X-Google-Smtp-Source: AGHT+IHKg9cTEcceFQIYKnP4YKxUEU3Bk6usLEENdXhfhsRrjI2euy0TJcIaBxHUlIW4t7V77wYNIqMPh1rBe+fT5xI=
+X-Received: by 2002:a2e:b895:0:b0:372:8cc8:fc3d with SMTP id
+ 38308e7fff4ca-38121552cc3mr96212641fa.1.1767003972903; Mon, 29 Dec 2025
+ 02:26:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+References: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
+ <dc6ddbfe-df79-4dcf-90e3-76068e5a5e40@kwiboo.se>
+In-Reply-To: <dc6ddbfe-df79-4dcf-90e3-76068e5a5e40@kwiboo.se>
+From: Aaron Griffith <aargri@gmail.com>
+Date: Mon, 29 Dec 2025 05:26:01 -0500
+X-Gm-Features: AQt7F2rFv-Vx_upKZdnaEy5pIECDFfI9-YH6gUt3jitWHTy4c_XkR4GL-Cz_peY
+Message-ID: <CAPcvo0S-ft94KFN6f2ZPr5KEMoEmATcFkTQk8O6PjFkJn3Ak0g@mail.gmail.com>
 Subject: Re: [PATCH 0/5] rockchip: sdram: allow reading memory info from TPL
  on non-ARM64
-To: Aaron Griffith <aargri@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Chris Morgan <macromorgan@hotmail.com>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Chris Morgan <macromorgan@hotmail.com>, 
  Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, u-boot@lists.denx.de
-References: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,64 +104,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aaron,
+Hello Jonas!
 
-On 12/29/2025 1:05 AM, Aaron Griffith wrote:
-> The RK3506 TPL provides memory info to the bootloader via ATAGS. There
-> is already an implementation that reads this information on RK3588 and
-> others, but it is currently gated behind CONFIG_ARM64. The RK3506 is
-> *not* ARM64.
+On Mon, Dec 29, 2025 at 4:49=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wro=
+te:
+> [..]
+>
+> Is there anything useful encoded in the RK ATAGS that we need on any
+> other SoC ? (with the goal of using mainline TF-A and/or OP-TEE)
 
-Use of the RK ATAGS was initially only introduced in mainline U-Boot due
-to a memory hole on RK3588 devices with more than 16 GiB DRAM. With [1]
-applied this should no longer really be needed.
+Not that I know of. I must admit, I'm new to this codebase and so I'm
+mostly looking at what code already exists and what the Rockchip fork
+does to try and synthesize a solution. The Rockchip fork reads this
+info, and it was a simple change, so that felt like the right path.
 
-Is there anything useful encoded in the RK ATAGS that we need on any
-other SoC ? (with the goal of using mainline TF-A and/or OP-TEE)
+> Nice!, please also see my rk3506 branch [2] for a mainline u-boot branch
+> that is mostly just waiting on upstream Linux support before being sent
+> out. Should have good support for most Luckfox Lyra variants and the
+> ArmSoM Forge1.
 
-Use of ramboot also overwrite the RK ATAGS with all zero, so we cannot
-expect the atags to always be there, only to assist in some cases.
+Oh, fantastic! I started working on this as a way to learn my way
+around U-boot, but I've been learning that adding RK3506 support might
+have been ambitious. What I have boots just fine and I learned a lot,
+but... more experience here is definitely for the best.
 
-> 
-> This patch series aims to allow this code to be used on non-ARM64, by
-> 
->  * adding a new config option to read this info from the TPL,
->  * allowing the ATAGS memory area it uses to be set in config headers,
->  * placing truly ARM64-specific logic behind CONFIG_ARM64.
-> 
-> I'm working on upstreaming RK3506 support, and this is the first patch
-> series of hopefully many in that direction.
+(Your link [2] to your rk3506 branch is a 403 for me. Is that temporary,
+or..?)
 
-Nice!, please also see my rk3506 branch [2] for a mainline u-boot branch
-that is mostly just waiting on upstream Linux support before being sent
-out. Should have good support for most Luckfox Lyra variants and the
-ArmSoM Forge1.
+I'm happy to either continue with these patches if they seem useful
+for any other reason, or to drop them if not. RK3506 is the only
+reason I had for them myself.
 
-I will shortly rebase the rk3506 branch and can possible send out part
-of it now that initial parts for rk3506 has landed in upstream Linux.
-
-[1] https://lore.kernel.org/all/20250802220738.3018910-4-jonas@kwiboo.se/
-[2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3506
-
-Regards,
-Jonas
-
-> 
-> Signed-off-by: Aaron Griffith <aargri@gmail.com>
-> ---
-> Aaron Griffith (5):
->       rockchip: sdram: add option to read bank information from TPL
->       rockchip: sdram: remove redundant configuration checks
->       rockchip: sdram: allow config headers to override ATAGs location
->       rockchip: sdram: refactor bi_dram logic into separate function
->       rockchip: sdram: only reserve BL31 and use mem_map on ARM64
-> 
->  arch/arm/mach-rockchip/Kconfig |  11 +++
->  arch/arm/mach-rockchip/sdram.c | 195 ++++++++++++++++++++++-------------------
->  2 files changed, 118 insertions(+), 88 deletions(-)
-> ---
-> base-commit: 0f6ff53d55ba254de8a995c2a2f5a313acd40ac7
-> change-id: 20251226-rockchip-tpl-use-atags-bf3d14a840ca
-> 
-> Best regards,
-
+Thanks,
+ -Aaron
