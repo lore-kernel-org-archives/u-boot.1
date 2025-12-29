@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC14E8FDB1
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 12:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAFDAE8FDB1
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 12:41:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B25683DFA;
+	by phobos.denx.de (Postfix) with ESMTP id 93F4983E16;
 	Mon, 29 Dec 2025 13:40:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="BeAOpVpB";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="HIlcCdzY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D27B83DAE; Mon, 29 Dec 2025 11:49:00 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id B099183DA9; Mon, 29 Dec 2025 11:49:00 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D967A83DBF
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBF583DA9
  for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 11:48:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lCBia17ySjaPx6wXoU8u6C91fQsZXzzpayy+ov40YlYTTrHZsF6SeAo6kyvdPvLfFaYOl2ohD0EMB2pRwUjRRbm+7fjGnIvD0fZbKiS3HxSNWHqVvtCMSb9jZaqF7IauuC65LevNE/BFvjIhDTHID2v7OhEs8aKdeFQXQOvFpVsAj/CZLfa1iVtjDoboWK7dTOl3k7iKq0PrlANh9VazAShwjCgdSWCZa8FUXPbcYrnD5qxKB1RQyi5nwG3Gw9QrquWAewduvWAAJw9At44yZC9eB55GnXEj/htxIrGQV1o/8W/UCbPJdHHhhb3zp7DXqsMrjXMABlgiWIcHgv3wPA==
+ b=u/Qnjrl6x1CpQRTNXruuZ212/owyxCsEn+cj0QCmPna+9/mP4MQnUKM+IDpcVhe62tgEyLn9jQBeY2vleoRukzlHcTEmyq6BAILgqk5c7azQW13oxOyzo/L90DLcq6PWgE/ID0L1ezy6Cbb5ugGj0YYmUVD64vjZuiiMP8sIiDxMAUqJUgko4OvaGneUe7+AIBY+XHMoxT+ZC9kcWgNXKJ7H7BuevAuedEQhvWwKNpOaDxM/G+cuikFIT5qHjziTlwIo7Y48prRQgtsN1q3yjI/U5XzTC0NWJxHYWhGLAWWsCMeUhYkRmzR1/jNc6YSiqtXdAGIr/tuf8cuYOGGdkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nDiVT/HKi+WyYoTFEfc9djQdzBMzs8Z8GFO8mFakGRk=;
- b=uLI7eR1ZkWH15WCQg7hA42X2RoJHXBMNuxu82sWcJCPLog6YdNgdLnB/mofHalaGEsCEKN2tv0dfd0q7M2PhzJQdKd6WFSsp9Al/fVp5aZ1Gdz2bhE5GhDHcZU7wMYmX19La+7QMIE0C+jrZ5opt3Uyd1gyU7qivnOFy2A+eoRjYE4e2R/HVW6dWEISevSlzZQ1+t9yNs1ovdKyeM24mOV8n2EOXfVy2IUjDzdD3wHOS2Xkm+rAU0icnx3QvVZUbRTzn6Rcokeyh+wR18I3X28Oo2nfeMJ80dXx8Zn+oCNcPjJeVwPqAliAryvLnWncx67ydTEeWUJp9ecN1VvQsIg==
+ bh=2mcNU5+zAhkPfrTHcheJ2tOXoS8tLZyk86Ou0Ild3e4=;
+ b=w3ooX36NBTWF8HS6IU27QsYF0OLlkK1nrvUFWUrQwdUrtkBv4BChkjxIu0iM3nqb0Z188/zYF+qOOkhBgakSuitgZQ5Hyj9xqonir4K79q+6ryTDtoreE/t3OLc3HaXAqiOJ2VvJASuluDJ2bq4Y54nOO3s+Bv3H0cywZDeLdD3SygxvGQd7tLWK79BPxIfaSFI4nVSUOqvNzy3Hzx70AaUM2ej3JTJXB//6CkTt4B2MTXCNch2hqJP0uZujTBUpIcpYGdHWXjuHzKCrDbRUPVO/F/sCbVWQ5kZNVccGhfMlw31cGzUMpu0eecd+ajm5izFDIx42HN6Lg3+DDCXbSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,18 +42,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nDiVT/HKi+WyYoTFEfc9djQdzBMzs8Z8GFO8mFakGRk=;
- b=BeAOpVpB+ekDmcYgshBkAgVxPDumSGOQXryZuHJbSq3qrahHd4Q2jjKdY3W5A9YieWmeiDJ3Iw53QPFdI2V/hNIZCB1mrycljiRH9FxSjLllNMk8kwR0YuqZNvLWQbHiyta6/1i6DToiHYt2rwKg9dWjjfA8YWSOV4OsDW28e87vH63MnaAXm+NsX/B3faxrN89L0QVO7X2EojQbLjTHTFozdWyYO41Ikh4C5s+T4RecdQEowD0dDcHHn46TQ8ZhhCYW0Mt7imofV5tlv7f28xv0ehjsSg2n+r6dwO/vsiZxmQF/XjtQEW8HxUbNCMd3ziNn0AybTygbczb+Hzvoyg==
-Received: from PH7P220CA0161.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:33b::20)
- by LV8PR22MB5947.namprd22.prod.outlook.com (2603:10b6:408:266::12)
+ bh=2mcNU5+zAhkPfrTHcheJ2tOXoS8tLZyk86Ou0Ild3e4=;
+ b=HIlcCdzYQ6zAF++eDKrIwb1+3k+PYfXBNUJkB4e8ODRFDIDWv9yHgM7xSIV8yxoo5h7w8vOM8KbezNvNbpgusVicrDRtnu5yrv72+a5IYzP0CifnSyR+ipu8mYL/rfompbR0YFaxpUmDzMc3RM6R4d56QQgLc/Bnn2oMTFgMDiH98AY/yHxwowi1gi15mcAbkUYIXf4OddmSNU+9GOgaBNWSeojDOSEXFPBu+by5q/U3L0I8pmJjuSH0zN+udVWSiH9BtEBZVmUf1/2ZLSzDutzt1sy9O9AsHPKsg4oY2l1Xvf1uD1Nt72/wSmixAx5qdLZLVYeyqcoocZYJUAgAlQ==
+Received: from PH7P220CA0159.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:33b::28)
+ by CH2PR22MB6020.namprd22.prod.outlook.com (2603:10b6:610:281::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.14; Mon, 29 Dec
- 2025 10:48:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.12; Mon, 29 Dec
+ 2025 10:48:52 +0000
 Received: from CY4PEPF0000EDD6.namprd03.prod.outlook.com
- (2603:10b6:510:33b:cafe::be) by PH7P220CA0161.outlook.office365.com
- (2603:10b6:510:33b::20) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:510:33b:cafe::d1) by PH7P220CA0159.outlook.office365.com
+ (2603:10b6:510:33b::28) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9456.14 via Frontend Transport; Mon,
- 29 Dec 2025 10:48:53 +0000
+ 29 Dec 2025 10:48:47 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
  smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
@@ -64,76 +64,79 @@ Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
 Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
  CY4PEPF0000EDD6.mail.protection.outlook.com (10.167.241.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9478.4 via Frontend Transport; Mon, 29 Dec 2025 10:48:52 +0000
+ 15.20.9478.4 via Frontend Transport; Mon, 29 Dec 2025 10:48:50 +0000
 Received: from zoo11.fihel.lab.ge-healthcare.net
  (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 9F288F2E5C;
- Mon, 29 Dec 2025 12:48:50 +0200 (EET)
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id DD6A5DBCE0;
+ Mon, 29 Dec 2025 12:48:46 +0200 (EET)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
 Cc: Brian Ruley <brian.ruley@gehealthcare.com>,
- Stefano Babic <sbabic@nabladev.com>
-Subject: [PATCH v2 6/7] video: imx: ipuv3: use CONFIG_IS_ENABLED
-Date: Mon, 29 Dec 2025 12:48:06 +0200
-Message-Id: <20251229104807.3104-7-brian.ruley@gehealthcare.com>
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ David Zang <davidzangcs@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/7] Refactor i.MX IPU driver
+Date: Mon, 29 Dec 2025 12:48:00 +0200
+Message-Id: <20251229104807.3104-1-brian.ruley@gehealthcare.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251229104807.3104-1-brian.ruley@gehealthcare.com>
+In-Reply-To: <"CAOMZO5DOUE2PexcBcVcg3vYTo5eV=LT3=S9cSBosLCyir8Kw5g@mail.gmail.com">
 References: <"CAOMZO5DOUE2PexcBcVcg3vYTo5eV=LT3=S9cSBosLCyir8Kw5g@mail.gmail.com">
- <20251229104807.3104-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD6:EE_|LV8PR22MB5947:EE_
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD6:EE_|CH2PR22MB6020:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 8470c5c9-973c-448c-fc50-08de46c7db7a
+X-MS-Office365-Filtering-Correlation-Id: 23ed4343-6d18-42fd-a20f-08de46c7da6f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8nYRs7s5+ULRyfoFsazGKK8xNi/bkkj5/EfBRzuDLO9cYYLmbzTuh5ghcwds?=
- =?us-ascii?Q?oFDkzXF8Si7/DBcQKKE/yYo0aMhLzdGf3ZuRQXBMunqGFmZEbsC+U5BTZK/B?=
- =?us-ascii?Q?zhFEPY27EFcMUMlyOCempqcMeHCBGIo1kbGBoZlsma2s1B08wY9GhWvuygvP?=
- =?us-ascii?Q?G6+EKxpZk7Q7yDnrsB2VXpNvHJH4y+kFnxjFZg2RCUXnem5aqwVgL5K/JjUk?=
- =?us-ascii?Q?fL9Ojuxx3hxHcSOCxp/UehFzd4mjcn3m1U7nBaqALp9/oRMyUkFN8epmV1kg?=
- =?us-ascii?Q?FcXBEc39QCq3smc6NORmbcb4ImzWd2TKVU01Cw7XI2kBFTJdxlyjU5rPkRA8?=
- =?us-ascii?Q?E69STOeqgdPsYgx5OqNZyiModP0l5oGAeThLdSiVmovC4uDV4y3OEdXV7iM9?=
- =?us-ascii?Q?bPHts2Qr1JZGjy23EdWbkiAzeD3Om2iSC7yHFnLZp4xYO/Fe2TZVymwEqLk3?=
- =?us-ascii?Q?VScnvD0Ecu+OqAz5nbgBiGDD1QypKX+1cVP5CAHbilSswTNRL5i4O8KqCVDw?=
- =?us-ascii?Q?++UyWx5CVGie5v8Fkr07D4mIPLXrV4TXhXZz0TO5R1OgcEPdHRlvPrx5Y21p?=
- =?us-ascii?Q?5BRfoXNrnzE4ErOVooaQZmzCJCOr2iXKouVhHWVmsZ90T9yZ+DtBihuAb8Xe?=
- =?us-ascii?Q?bd3UfUJQexYsB+c2k/dHCdmOI3libqNki0sVKCqq7zcanpnvMeZqTCx2Pugh?=
- =?us-ascii?Q?GoUFXuf4WO7EATZSd3v7PFHsDDwpYT39X/7AF4T0u0LqVqCQWmJVCbD8Sm/e?=
- =?us-ascii?Q?u7k1WGyCeEJ4yO2H2J2y62BO6bMvCb8jYlygNZBTC6MuPRwRciWRZpw5kiiw?=
- =?us-ascii?Q?MNNr7IupFTBGT/2iFrIyxthttI9lJPG0WsJ3iNQO5mzIwioBvGL87xK/7vHS?=
- =?us-ascii?Q?stNiS91BRw6NHa/zbQV84MVwReVIdoGgZlj9mSt906F3MN+9EU8flqNVQgsm?=
- =?us-ascii?Q?0SqE1uhFQ/9jLdTjbHxqNIJ0DrVJvzKHlp1JB8HtZWNtSvxEz4bWSs4Vivpj?=
- =?us-ascii?Q?JgXPXrBxMUY9bAXDXI58TUHUSKpOa2xDdyMSxORygjCnfQjlqANV0ZTJmXuW?=
- =?us-ascii?Q?B6XxmlIGwAAtpiCOX8WgASY5dqD9LHaLl1yVagX7Pem/ioCfXwzrBYPgE0LP?=
- =?us-ascii?Q?gm8dmaSpMV0vSiFnj1GIuxkCF4JPtHvTyWJ4mPKoivm5pQMBvv80DhYa7cNM?=
- =?us-ascii?Q?YZQLQrTWEarvLBvb2HtrSiZd+7tXi9xgSvwYwZ0A8QVEMhliEUjqJ3S8uGiP?=
- =?us-ascii?Q?UtBmtP4Ztco4tJ8KeHYWKZ+TTQI+MhP4qYGh8NNkOmSZOJiuHa1k3KelSOoF?=
- =?us-ascii?Q?HcFHshHjGU6jtHyi6Oy2/7JV274LeZB/Y81sOMpB7VhOnNFGPrXxCSqfu2gc?=
- =?us-ascii?Q?f/p20VdD28UyykLQN+SbHr5uTanLzWcaBt9uKQ6WXeSErRPQ/K0VaCp9nkF4?=
- =?us-ascii?Q?OyN5kF6XZuc/KkNB8CvCUPQSTA3RF/JlsuX3npu8ETSUuhQXTrpsRdXyxV3f?=
- =?us-ascii?Q?9+zeg7xF3DGe4vSFBqxduzZemGBWSjJwXuS5KArOVcvTyhgwxhZ1ud9PuKKA?=
- =?us-ascii?Q?PWsmIhLePIBhfFQFrx0=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?y34apoN9m9vEKCH4OOC/LQDqY0s1AE6xTtYMMLp7uCDqh04HvRhkx9No8+d7?=
+ =?us-ascii?Q?OZeiutjAVzFey0uht8zSgjCgZjG/E9O/wT3x5fqmqd2ou2FZHtcFJikP70So?=
+ =?us-ascii?Q?JW5EKtUWdoTbj39hrS50P7SKwfeh370nJmwooz67gtGSOE629KagTMZha4fI?=
+ =?us-ascii?Q?W/JmEbepWgzxGm+BagXC8bUmUkoZwubi93ZizqqTVsGasFF8hn+KIPYDZbdB?=
+ =?us-ascii?Q?fcDvGiLvLv6VjcqUmDVbU2soBbfqrzqW1gU4lBaWsJSoEyeZqgqdTSjlLUVM?=
+ =?us-ascii?Q?B3sqUdCJfUSpfU/6kEcBmUOU/lDixSBISHkqamJvtBEZwaFGt17rxLhPMSA4?=
+ =?us-ascii?Q?PcUrKkk9UzqBmuSx6FzDAKIfCeCDkR7bM6OOrdiV2Jzfy8FXLCah4o7mY4/x?=
+ =?us-ascii?Q?XgzSQHTjQMC61APHf7vsehTJeEL2sp4trWjLW6gJAALMG9Y3kp80Lp7JKX6S?=
+ =?us-ascii?Q?uhg0kw2ZXeBhedLMgIdEcPFfZmpD05XHT/EztfKlWy6dzdqXwKYpmEbMym1v?=
+ =?us-ascii?Q?zYin2x+5HhC3c88/vkhWYMEm//+C/hJpRUTkURiFj5QgdLZMa1u2aFJXRITQ?=
+ =?us-ascii?Q?obUlfGFAF/uXM6i4vVAxqp3QI8zpaZ67BBS1tT3kwoX83DEiR922RaNMVS9N?=
+ =?us-ascii?Q?Pw3zas9VkrosxiahVHs6FYQsVaIhVL7SmZwDLCmSrweraEDX8joHATmVfSxA?=
+ =?us-ascii?Q?PX/zKSW8t+hWXc/anVy/CVTwKzmxA6DgV4keI3VQeIBSoC/ueb6M59WVjjA/?=
+ =?us-ascii?Q?G8a3EwN2xu93JEi3OjFTpyFRazidY81nOj8FmZVsByRI8XwgoqaJuX/IjJTg?=
+ =?us-ascii?Q?XT54OB78qTrm9Qea78yqzLZbtzjbt3jHAhW1KC69ecTa9iP2fO/HTZ3CahEk?=
+ =?us-ascii?Q?3DJv+c9pb+4VZB/T2Qo+uPGs64au61y9qgi1yrdo4AxRrs/wyLTuQUC2ppED?=
+ =?us-ascii?Q?faO9MiLFDC2avUzBEKGavnwnk7H/WVqHhr1gyGMSdwhaAsxpXLRx41/hO8Op?=
+ =?us-ascii?Q?RCq3UUEJHIruH2UQ6Aw6wcXEY27MoL13Pepw/y9iBEPgtS/timLVyOlL+cpS?=
+ =?us-ascii?Q?RSMAqUveQmuhr8l7s7ahQI/I25upbIHGRLdGT1SEiXx29IBr1Mr1t+VN4zIU?=
+ =?us-ascii?Q?qPsgcGlYjDrh/25OZiHK8KI2sbFgW7LS53a2HpDtD1WC+FpKvqwUvyS4qivd?=
+ =?us-ascii?Q?Mcl+/Vk5d7aMpFiiOU6FW+eWqaFGJ/ezZ7C1yIh0+XN39iXCqAjLS4jmKl+m?=
+ =?us-ascii?Q?rNRgkX00lG5y6t+FEDS7krAvWflM8InxzdeWZ7//XkbfMHC8xSLq+S/Jh+GX?=
+ =?us-ascii?Q?/SmKNMVO4w+v0Wbqmg+OXSz0dEmuurlQoUh+Z5s108TaxZmJo8YTowJkrmM5?=
+ =?us-ascii?Q?foARyHfIh5q947Nz8fcb3AReRSD6YXhJ+DcgU2HHiTOOA8D7uSCFg2NlH/BE?=
+ =?us-ascii?Q?YPK+sWjFBwS/c1hwE7mxK5u7hF7kD/DTf5u9+IwuMRoaVmzIA3NvIV48LIUy?=
+ =?us-ascii?Q?f6uLp0yOIqht7M3qyjA903ctNgBBQeCAPORhDrgLhADMYk6chUlpiWIesP1T?=
+ =?us-ascii?Q?acXzgFTyyiFrklNBZRs=3D?=
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Dec 2025 10:48:52.6140 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8470c5c9-973c-448c-fc50-08de46c7db7a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Dec 2025 10:48:50.8609 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23ed4343-6d18-42fd-a20f-08de46c7da6f
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
  Helo=[mkerelay1.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CY4PEPF0000EDD6.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR22MB5947
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR22MB6020
 X-Mailman-Approved-At: Mon, 29 Dec 2025 13:40:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,89 +154,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bring driver up-to-date with U-Boot conventions, but also takes into
-account SPL and TPL, let compiler optimize while keeping code more
-readable.
 
-Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
----
+This patch series is designed facilitate the porting of the i.MX IPU
+video driver to use the generic clock framework instead of relying on
+its own clk definitions, which is known to cause problems as noted in
+a prior patch series [1].
+
+This brings some much needed clean-up and gets rid of nasty globals by
+instead utilizing structs that are managed by the driver instance. This
+approach resembles the architecture used in Linux.
+
+The changes were tested on a bx50v3 device, which is powered by the
+Advantech i.MX6 Q7 module.
+
+Let me know what you think!
+
+Best regards,
+Brian Ruley, GE HealthCare
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-August/562204.html
 
 Changes in v2:
 - Fix unintended spelling error in comment
+- Fix unused variable error
 
- drivers/video/imx/ipu_common.c | 11 ++++++-----
- drivers/video/imx/ipu_regs.h   |  4 ++--
- 2 files changed, 8 insertions(+), 7 deletions(-)
+Brian Ruley (7):
+  video: imx: ipuv3: remove undefined function declarations
+  video: imx: ipuv3: apply clang-format
+  video: imx: ipuv3: prefer kernel types
+  video: imx: ipuv3: fix camel cases
+  video: imx: ipuv3: add names to clk function identifiers
+  video: imx: ipuv3: use CONFIG_IS_ENABLED
+  video: imx: ipuv3: refactor to use dm-managed state
 
-diff --git a/drivers/video/imx/ipu_common.c b/drivers/video/imx/ipu_common.c
-index 6ce44e42349..560ee89f0f7 100644
---- a/drivers/video/imx/ipu_common.c
-+++ b/drivers/video/imx/ipu_common.c
-@@ -168,7 +168,7 @@ static int clk_ipu_enable(struct clk *clk)
- 	reg |= MXC_CCM_CCGR_CG_MASK << clk->enable_shift;
- 	__raw_writel(reg, clk->enable_reg);
- 
--#if defined(CONFIG_MX51) || defined(CONFIG_MX53)
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
- 	/* Handshake with IPU when certain clock rates are changed. */
- 	reg = __raw_readl(&mxc_ccm->ccdr);
- 	reg &= ~MXC_CCM_CCDR_IPU_HS_MASK;
-@@ -190,7 +190,7 @@ static void clk_ipu_disable(struct clk *clk)
- 	reg &= ~(MXC_CCM_CCGR_CG_MASK << clk->enable_shift);
- 	__raw_writel(reg, clk->enable_reg);
- 
--#if defined(CONFIG_MX51) || defined(CONFIG_MX53)
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
- 	/*
- 	 * No handshake with IPU whe dividers are changed
- 	 * as its not enabled.
-@@ -208,7 +208,7 @@ static void clk_ipu_disable(struct clk *clk)
- 
- static struct clk ipu_clk = {
- 	.name = "ipu_clk",
--#if defined(CONFIG_MX51) || defined(CONFIG_MX53)
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
- 	.enable_reg =
- 		(u32 *)(CCM_BASE_ADDR + offsetof(struct mxc_ccm_reg, CCGR5)),
- 	.enable_shift = MXC_CCM_CCGR5_IPU_OFFSET,
-@@ -485,13 +485,14 @@ int ipu_probe(void)
- 	g_pixel_clk[1] = &pixel_clk[1];
- 
- 	g_ipu_clk = &ipu_clk;
--#if defined(CONFIG_MX51)
-+#if CONFIG_IS_ENABLED(MX51)
- 	g_ipu_clk->rate = IPUV3_CLK_MX51;
--#elif defined(CONFIG_MX53)
-+#elif CONFIG_IS_ENABLED(MX53)
- 	g_ipu_clk->rate = IPUV3_CLK_MX53;
- #else
- 	g_ipu_clk->rate = is_mx6sdl() ? IPUV3_CLK_MX6DL : IPUV3_CLK_MX6Q;
- #endif
-+
- 	debug("ipu_clk = %u\n", clk_get_rate(g_ipu_clk));
- 	g_ldb_clk = &ldb_clk;
- 	debug("ldb_clk = %u\n", clk_get_rate(g_ldb_clk));
-diff --git a/drivers/video/imx/ipu_regs.h b/drivers/video/imx/ipu_regs.h
-index 8e57a2add69..21bdff9363c 100644
---- a/drivers/video/imx/ipu_regs.h
-+++ b/drivers/video/imx/ipu_regs.h
-@@ -33,14 +33,14 @@
- #define IPU_DC_REG_BASE 0x00058000
- #define IPU_DMFC_REG_BASE 0x00060000
- #define IPU_VDI_REG_BASE 0x00680000
--#if defined(CONFIG_MX51) || defined(CONFIG_MX53)
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
- #define IPU_CPMEM_REG_BASE 0x01000000
- #define IPU_LUT_REG_BASE 0x01020000
- #define IPU_SRM_REG_BASE 0x01040000
- #define IPU_TPM_REG_BASE 0x01060000
- #define IPU_DC_TMPL_REG_BASE 0x01080000
- #define IPU_ISP_TBPR_REG_BASE 0x010C0000
--#elif defined(CONFIG_MX6)
-+#elif CONFIG_IS_ENABLED(MX6)
- #define IPU_CPMEM_REG_BASE 0x00100000
- #define IPU_LUT_REG_BASE 0x00120000
- #define IPU_SRM_REG_BASE 0x00140000
+ arch/arm/mach-imx/cpu.c          |  10 +-
+ drivers/video/imx/ipu.h          | 222 +++++---
+ drivers/video/imx/ipu_common.c   | 841 ++++++++++++++++---------------
+ drivers/video/imx/ipu_disp.c     | 752 +++++++++++++--------------
+ drivers/video/imx/ipu_regs.h     | 270 +++++-----
+ drivers/video/imx/mxc_ipuv3_fb.c | 277 +++++-----
+ include/ipu_pixfmt.h             |   3 +-
+ 7 files changed, 1200 insertions(+), 1175 deletions(-)
+
 -- 
 2.39.5
 
+base-commit: 56cac250b0839ddbad1311d3ca4231f532b5aadf
+branch: video-imx-dm-clk-fix
