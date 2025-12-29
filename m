@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D618E784BE
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 01:49:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9077CE784BE
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 01:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E93683C65;
+	by phobos.denx.de (Postfix) with ESMTP id 7C01683C91;
 	Mon, 29 Dec 2025 02:48:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XXdkgqDc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aObkCFOt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3459B80325; Mon, 29 Dec 2025 01:06:00 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id D952583BC7; Mon, 29 Dec 2025 01:06:03 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00A478003E
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 01:05:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A32E8003E
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 01:06:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=aargri@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c75fc222c3so4018959a34.0
- for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 16:05:57 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7cc50eb0882so3154065a34.3
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 16:06:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766966757; x=1767571557; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1766966759; x=1767571559; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cUvMQ3xZaXZhiELlYbthjMqzCPf37by5U4ZKP1wq7zU=;
- b=XXdkgqDcEMGtsIafx89ZvJ041l/c/DDxPT07kfNE2E1Sz6le5+KoZqyHs3qrOiuzsN
- dJXMKdpKvaOzceSp+/GKoXv80fF+G4qsfLXODOMqdcstlB48nuZj0LEfaBqKA4lsJWm1
- lr+cnZjQLw+bDP8vpJgkqZsDzoy9rX5wg70BLX4dKvq7aJ15NlyBbva0EPYXUbKoHmJS
- 5jC23J+GKHKUY5Il/lJYfJGOwxjWwOGd8rfDkNWlDi3pNjWhCGnKvWb/UUQx7DdxkpNy
- xNgPEMS9gnhGiI3KDPi6xasePFWDWZ7QuzJhirF8FZ7xKgiNltv+C5QBq/O13//VKQz2
- IPOg==
+ :reply-to; bh=ASbNUpp4CR8+wf2i7X4zV9LkWIIw3TXk+Bx8AQgLRq0=;
+ b=aObkCFOtkN+VVqysrnJr6cTPocvjJv7KY9j48z3dUhqqbrl1vHEMjgaVu+BaSkyKSa
+ 2Bp+7gEk2a7TRbi39DkzMrRCANkKNbu7aiy5QeYGHzoALI9sMAHBL/YCF8QTnC497SkH
+ /inioAIhXWYqHmepOd1L8H4ybxlY5G7WlIgoNX3IL+fcy5qA4OzXZWAXVPQx24w+PKOa
+ iklVKEaMU09nCuQKJy281wC2aF8j0emomGG3axLiCPP8K6y7GNa8oUCJeD7Dm5irqb24
+ hvvEwiTZ1mswdEH+aZ/Eumz5fATQsVmpLk70NBxd/d3r0xqSitpVlKtlupIDmigxJsTK
+ z1kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766966757; x=1767571557;
+ d=1e100.net; s=20230601; t=1766966759; x=1767571559;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=cUvMQ3xZaXZhiELlYbthjMqzCPf37by5U4ZKP1wq7zU=;
- b=rIGWeypETD3WhWWjkCNpY7ChNZzdxCgSwxnKcxnVv59JICzqAJ9b/g/3gLrIbtcO4Y
- FyuCVckpnXJLhnOcCtuSGx4CmiSQpKhUiLPK4b9fbG+WZtT92ePK3r9CiL02gzD8Fb4H
- GAgA+ewTjwB6bCXiFElGtRWO0jdzAAK8tNxrqMu19K2Aw0dHirogZ6oKG4iSHL33TM53
- LImnAefhqZ/bHz/tY3Y37lKaTKl2vL3K9Lkpqp+1D/oac+R7/6PjG2wJU+FpUwvLCWmD
- /WJctHYGJcM7dvXvnx/0ZZO3oo9/IxJP4wdUdiuWkxsNvWnsy9m/lAkwWlekb4eS9coH
- aXyA==
-X-Gm-Message-State: AOJu0Ywdb66YSiQru/wBmzS99/po+mPX+D46fpAKx4bx3qKvEK1yR8t4
- l+9qtl9XrJ0HXgI0+/KU8iMqfG9sDhGfY2mWoBXjhSESZvw3rR5oHZLV
-X-Gm-Gg: AY/fxX7mWwCARSRF2teLVgOQwK8Z1ScLhVBeu+lU+Ma55uIcRubA3ZLdPRgNHxOthDv
- +Fzlj2mQXFBzKdRQ7k9THMtlsWQ3elaUI2FATZbr0qFfBQsA8QvIHfW2xF/ue4vXQ9R1jEFF3Bo
- 5We8QjRMOkDljN8cmydF/rASHFl4FDfntU3DLdWBP7q1Xz+TlL9HVj7SyLTQc+LKn1Zw/mctWMn
- ZI1z8dEmkvho2zjd+ZTpjKTrH9jJFXPyGn2IT/Uq7L6gQVbLk8N7Bba3pNQ9yKQnUXOBc/p1jJO
- pozKIdML+j0Gi5ymFyspej9RgYIFvjDwxaZREOpPjvnq88Zs2DJA021JCYSvGlVLq8idaEUQQko
- Tq+asNXlSoJdMZcbSjfFAutMrxsKBuBCJA0u65tY7izSfDnZKhRY4gUR7AOvQimIinYrkg6K28s
- rPAuIM3ActJloNb9Btyp9Ft9j/YKSZzV21432TcoaNkjl8h4b7+6zWV7oT
-X-Google-Smtp-Source: AGHT+IEe8j2p9u5lCmuUoFI22AgtpkD3rVZFoo/iaRs8sEL221ZiawJwE7iu5Zjz8kkzZQcHH1wa2Q==
-X-Received: by 2002:a05:6830:4ac4:b0:7c7:6063:8e0f with SMTP id
- 46e09a7af769-7cc668eb42emr14402662a34.15.1766966756713; 
- Sun, 28 Dec 2025 16:05:56 -0800 (PST)
+ bh=ASbNUpp4CR8+wf2i7X4zV9LkWIIw3TXk+Bx8AQgLRq0=;
+ b=XUwVomazB7tOVmSY+a0a/K3L4hVqvP7ScveMu0iBT4Fdc32jH69Vx8og46Pk7LMIVZ
+ bFJqMLLsPK8TFQ6o/rmE3m7ZxRlzNyp8NRaeAKa8KcC5kyat57OGAmQTyDbz7hYGpX4n
+ wvtbJZjJp/JgDQc0NFlxEp5lGGBgXirV/hPtJlT96srf9GdJTNz/KKccER/u6MLxQ3Pq
+ ZoKCeivmLilAB4Ssd3w/7bPBt1fcMMgUUhm4poddl91rAKt5YcJrZgUkFWakuUDVNNBv
+ aXLzW7CZZuJJvmyvJSBtrlNWSNL+FOZlaEQk6j/r3E5zCty+TG72Q/ydAv+JbDgQdLa4
+ BtAA==
+X-Gm-Message-State: AOJu0YzMIEusdemkUvreJvKk5cLFPy7YU1yJVHBkPvgnnhjIWL6IDPki
+ CFnMv4nq6MMeH5SKHxWZCtsW3VYYrCn7T+ZpO2LyyRZIgA2dNuFY/Gwz
+X-Gm-Gg: AY/fxX69rFtv2UJ4H0nYvLFROvINRxQxHQp2xU3+v2OOA+dEpLbqUYa+dMvuCMX3+OK
+ 7Mk9UJv0Eapkc2O7dHi9X90+7o7ZZldiIWwFrGn8Dou/iTqrffmbp57TNEo0cNG6OetQe1v9ExV
+ rYKPzthoeZ6jAzE90o7WfPj8/XgKE51mdM1xmXgV/zggohQ9FyQnlBXtPVrX9vPeV3O/o1ALSGV
+ fl8TSUQAEB4bQvyD/++tpnZvDUJdY3x2mrEzJtA59osyAt4F0paMYArLxGWWc9t1xfDuOk5R6iJ
+ WxuPoEEZWHT7sJa4MhuBrvPJgXjx+YwRh3PwBoFPspqYrZ6jRNbEu5GlsECyrU6SkB82YO3s/rz
+ EeLvpGRKzVqkVSzreSQwqmVUdknnXmwvUKoyiGIlA82PuCi9eq2+i6cxpbpfvWRkscjdlaLuxi6
+ V2mSh+Ro954QU3fgo2LBkOnb9uaLvAXtKqrw2/b97TDDviOkxKFq9fgHth
+X-Google-Smtp-Source: AGHT+IHD2qYaHIMNME07D68LoQrecjSI+VbBlVZUyiv35TD7JuKN4qVyuT4zhjXP8MODQ1v+2WC5YQ==
+X-Received: by 2002:a05:6830:923:b0:7c7:2d7d:5d0f with SMTP id
+ 46e09a7af769-7cc66a4b655mr14664892a34.20.1766966758977; 
+ Sun, 28 Dec 2025 16:05:58 -0800 (PST)
 Received: from [127.0.1.1] (172-2-191-226.lightspeed.clmboh.sbcglobal.net.
  [172.2.191.226]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667f9468sm19397294a34.28.2025.12.28.16.05.53
+ 46e09a7af769-7cc667f9468sm19397294a34.28.2025.12.28.16.05.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Dec 2025 16:05:55 -0800 (PST)
+ Sun, 28 Dec 2025 16:05:58 -0800 (PST)
 From: Aaron Griffith <aargri@gmail.com>
-Date: Sun, 28 Dec 2025 19:05:23 -0500
-Subject: [PATCH 1/5] rockchip: sdram: add option to read bank information
- from TPL
+Date: Sun, 28 Dec 2025 19:05:24 -0500
+Subject: [PATCH 2/5] rockchip: sdram: remove redundant configuration checks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251228-rockchip-tpl-use-atags-v1-1-8ac5140c3763@gmail.com>
+Message-Id: <20251228-rockchip-tpl-use-atags-v1-2-8ac5140c3763@gmail.com>
 References: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
 In-Reply-To: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
 To: u-boot@lists.denx.de
@@ -108,126 +107,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Existing code to read DDR_MEM tags from the Rockchip external TPL is
-gated behind CONFIG_ARM64. These changes instead place it behind a new
-config, ROCKCHIP_EXTERNAL_TPL_DDR_MEM. This option is implied by the
-four SoCs that currently use this feature (RK3528, RK3568, RK3576, and
-RK3588).
+The new config option that enables this code guarantees
+ROCKCHIP_EXTERNAL_TPL, and is implied by these four SoC configs,
+making these checks redundant.
 
 Signed-off-by: Aaron Griffith <aargri@gmail.com>
 ---
- arch/arm/mach-rockchip/Kconfig | 11 +++++++++++
- arch/arm/mach-rockchip/sdram.c | 12 +++++++-----
- 2 files changed, 18 insertions(+), 5 deletions(-)
+ arch/arm/mach-rockchip/sdram.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index e32e49ff59acc633feba96f8870754b60fc366c6..1f80ff3136e2bb565a2f4be59d9b025dd0d70d95 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -348,6 +348,7 @@ config ROCKCHIP_RK3528
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- 	imply ROCKCHIP_OTP
- 	imply SPL_ATF
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-@@ -392,6 +393,7 @@ config ROCKCHIP_RK3568
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- 	imply ROCKCHIP_OTP
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
- 	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-@@ -432,6 +434,7 @@ config ROCKCHIP_RK3576
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- 	imply ROCKCHIP_OTP
- 	imply SPL_ATF
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-@@ -477,6 +480,7 @@ config ROCKCHIP_RK3588
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- 	imply ROCKCHIP_OTP
- 	imply SCMI_FIRMWARE
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-@@ -608,6 +612,13 @@ config ROCKCHIP_EXTERNAL_TPL
- 	  Enable this option and build with ROCKCHIP_TPL=/path/to/ddr.bin to
- 	  include the external TPL in the image built by binman.
- 
-+config ROCKCHIP_EXTERNAL_TPL_DDR_MEM
-+	bool "Use DDR_MEM information from external TPL"
-+	depends on ROCKCHIP_EXTERNAL_TPL
-+	help
-+	  Some Rockchip external TPLs provide information about DDR memory.
-+	  Enable this option to parse and use this information.
-+
- config ROCKCHIP_BOOT_MODE_REG
- 	hex "Rockchip boot mode flag register address"
- 	help
 diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-index d560f90e873d02e1a799ab0d7c1e085df0c1c54a..f549baaa8e7e0664029f37de012dd22dfe92b07f 100644
+index f549baaa8e7e0664029f37de012dd22dfe92b07f..2f39928bcbda2936fb4f079bbb72fa13f80af6c0 100644
 --- a/arch/arm/mach-rockchip/sdram.c
 +++ b/arch/arm/mach-rockchip/sdram.c
-@@ -36,7 +36,7 @@ struct tos_parameter_t {
- 	s64 reserve[8];
- };
+@@ -109,15 +109,6 @@ static int rockchip_dram_init_banksize(void)
+ 	u32 calc_hash;
+ 	u8 i, j;
  
--#ifdef CONFIG_ARM64
-+#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- /* Tag size and offset */
- #define ATAGS_SIZE		SZ_8K
- #define ATAGS_OFFSET		(SZ_2M - ATAGS_SIZE)
-@@ -287,14 +287,14 @@ static int rockchip_dram_init_banksize(void)
- 
- 	return 0;
- }
--#endif
-+#endif /* CONFIG_ROCKCHIP_EXTERNAL_TPL_DDR_MEM */
- 
- int dram_init_banksize(void)
- {
- 	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
- 	size_t top = min((unsigned long)ram_top, (unsigned long)(gd->ram_top));
- 
--#ifdef CONFIG_ARM64
-+#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL_DDR_MEM
- 	int ret = rockchip_dram_init_banksize();
- 
- 	if (!ret)
-@@ -302,7 +302,9 @@ int dram_init_banksize(void)
- 
- 	debug("Couldn't use ATAG (%d) to detect DDR layout, falling back...\n",
- 	      ret);
-+#endif
- 
-+#ifdef CONFIG_ARM64
- 	/* Reserve 2M for ATF bl31 */
- 	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE + SZ_2M;
- 	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
-@@ -314,7 +316,7 @@ int dram_init_banksize(void)
- 	} else if (ram_top > SZ_4G && top == SZ_4G) {
- 		gd->bd->bi_dram[0].size = ram_top - gd->bd->bi_dram[0].start;
- 	}
--#else
-+#else /* !CONFIG_ARM64 */
- #ifdef CONFIG_SPL_OPTEE_IMAGE
- 	struct tos_parameter_t *tos_parameter;
- 
-@@ -340,7 +342,7 @@ int dram_init_banksize(void)
- 	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
- 	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
- #endif
--#endif
-+#endif /* CONFIG_ARM64 */
- 
- 	return 0;
- }
+-	if (!IS_ENABLED(CONFIG_ROCKCHIP_RK3588) &&
+-	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3576) &&
+-	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3568) &&
+-	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3528))
+-		return -ENOTSUPP;
+-
+-	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
+-		return -ENOTSUPP;
+-
+ 	/* Find DDR_MEM tag */
+ 	while (addr < (u32 *)ATAGS_PHYS_END) {
+ 		tag_h = (const struct tag_header *)addr;
 
 -- 
 2.47.3
