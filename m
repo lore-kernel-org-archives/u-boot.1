@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 268ABE8FDB1
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 11:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F43E8FDB1
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 11:43:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CD5483A94;
-	Mon, 29 Dec 2025 12:43:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB08583DA9;
+	Mon, 29 Dec 2025 12:43:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="quNFXtWe";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="agdskvrb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035A183B0B; Mon, 29 Dec 2025 12:43:38 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 340B183DB6; Mon, 29 Dec 2025 12:43:43 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7AF83966
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 12:43:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E6B8283DA9
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 12:43:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AEFE160010;
+ by sea.source.kernel.org (Postfix) with ESMTP id 61A6043578;
+ Mon, 29 Dec 2025 11:43:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A6B8C19422;
  Mon, 29 Dec 2025 11:43:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8D86C116D0;
- Mon, 29 Dec 2025 11:43:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767008614;
- bh=iu12h08Bd529YbowTWTu/ABoRg5Y3fIE5tw/2dSfr5w=;
- h=From:To:Cc:Subject:Date:From;
- b=quNFXtWeXcJx1l962nORcuVEj2t0UidXSqPQd7B9dge87NuI9awyitFQV96+o73sT
- awYWaVsAetTh8Sj8ZgPOaW8WzzifHr7ZACmnDVNMxBBdyPC0aiPHH3n954FnhIB2QT
- Js3R28A5yKfZkrSC0ED6cHPDEHQANKJr4uar6TUBe9Ds45MrgjVu77xLpBv3RwbDiv
- 1giwdZX24OrN0Va5bOaNKCPMqV1KWwP2qbHcfqViva9zhHJYyGSC53Gd/mmZcSw7e7
- Tw/Zyry9GvDLtngsn7iW+pI3ca27hm6gMaW4b4D19bYYZsvp/TObQ2hDG8kcNhtYXF
- RpaTNy860/hyA==
+ s=k20201202; t=1767008619;
+ bh=FAUA4QBL3dJ6+mozl7wciV4Rq1kV7lEzRX0THjm7TWU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=agdskvrbBAR1UZ8/HSog9CZCIr/stWkHQL/p0iIMojnkZWtRJhfp3Wv5ZVBcU5Tew
+ +bu+NzSjMRBW2Brv/NurLwquU4cc0JR5wYCSpestDTsVjSOfHqhxh4Nyh3Y8/HwQ5G
+ l4ISQbCtUev1sG6D0hr0r8mE7HW2RA13Fm+D8YWJI+8NzYejO4kc5RvUhjz7wlpXP5
+ ylZvK7gV8SZtfoO8WgU4oReIpRXzXfwgmjPU45vyWgyKXRIpCwtzGZ7FNHaJZtvfxl
+ QZAjUVyrSBMtWR6YjotgYY87fNm4XiFVJ/Exvg2C0aTAvC36VE9voNwXSqJzSErSZd
+ yueGFqirH4wwQ==
 From: Sumit Garg <sumit.garg@kernel.org>
 To: u-boot-qcom@groups.io,
 	u-boot@lists.denx.de
 Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  jorge.ramirez@oss.qualcomm.com, varadarajan.narayanan@oss.qualcomm.com,
  tonyh@qti.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH 1/2] mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
-Date: Mon, 29 Dec 2025 17:13:11 +0530
-Message-ID: <20251229114312.668068-1-sumit.garg@kernel.org>
+Subject: [PATCH 2/2] configs: Add generic qcom_tfa_optee_defconfig
+Date: Mon, 29 Dec 2025 17:13:12 +0530
+Message-ID: <20251229114312.668068-2-sumit.garg@kernel.org>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251229114312.668068-1-sumit.garg@kernel.org>
+References: <20251229114312.668068-1-sumit.garg@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,70 +72,38 @@ X-Virus-Status: Clean
 
 From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Add support for OP-TEE live tree DT fixup support which enables U-Boot
-OP-TEE driver to be probed. As well as the EFI DT fixup protocol allows
-the live tree fixup to be carried over to the OS for the OP-TEE driver
-in the OS to probe as well.
+Recently upstream TF-A/OP-TEE has started gaining support for Qcom
+platforms. RB3Gen2 being the first one and more to come. U-Boot in
+corresponding boot flow is packaged as a position independent executable.
 
-Note that this fixup only gets applied if CONFIG_OPTEE gets enabled.
+So, lets add a generic U-Boot defconfig for Qcom platforms to support
+TF-A/OP-TEE based TrustZone stack. Build command:
+
+$ make qcom_tfa_optee_defconfig
+$ make -j`nproc` DEVICE_TREE=qcom/qcs6490-rb3gen2
+
+For more information refer here:
+https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
 
 Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 ---
- arch/arm/mach-snapdragon/of_fixup.c | 34 +++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
+ configs/qcom_tfa_optee_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 configs/qcom_tfa_optee_defconfig
 
-diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-index eec2c0c757e..29a99f73cf3 100644
---- a/arch/arm/mach-snapdragon/of_fixup.c
-+++ b/arch/arm/mach-snapdragon/of_fixup.c
-@@ -146,6 +146,37 @@ static void fixup_power_domains(struct device_node *root)
- 	}
- }
- 
-+static void add_optee_node(struct device_node *root)
-+{
-+	struct device_node *fw = NULL, *optee = NULL;
-+	int ret;
+diff --git a/configs/qcom_tfa_optee_defconfig b/configs/qcom_tfa_optee_defconfig
+new file mode 100644
+index 00000000000..c398521770f
+--- /dev/null
++++ b/configs/qcom_tfa_optee_defconfig
+@@ -0,0 +1,7 @@
++# Configuration for building a generic U-Boot image
++# with support for TF-A/OP-TEE based Arm TrustZone stack.
 +
-+	fw = of_find_node_by_path("/firmware");
-+	if (!fw) {
-+		log_err("Failed to find /firmware node\n");
-+		return;
-+	}
++#include "qcom_defconfig"
 +
-+	ret = of_add_subnode(fw, "optee", strlen("optee") + 1, &optee);
-+	if (ret) {
-+		log_err("Failed to add 'maximum-speed' property: %d\n", ret);
-+		return;
-+	}
-+
-+	ret = of_write_prop(optee, "compatible", strlen("linaro,optee-tz") + 1,
-+			    "linaro,optee-tz");
-+	if (ret) {
-+		log_err("Failed to optee 'compatible' property: %d\n", ret);
-+		return;
-+	}
-+
-+	ret = of_write_prop(optee, "method", strlen("smc") + 1, "smc");
-+	if (ret) {
-+		log_err("Failed to optee 'method' property: %d\n", ret);
-+		return;
-+	}
-+}
-+
- #define time_call(func, ...) \
- 	do { \
- 		u64 start = timer_get_us(); \
-@@ -160,6 +191,9 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
- 	time_call(fixup_usb_nodes, root);
- 	time_call(fixup_power_domains, root);
- 
-+	if (IS_ENABLED(CONFIG_OPTEE))
-+		time_call(add_optee_node, root);
-+
- 	return 0;
- }
- 
++CONFIG_TEE=y
++CONFIG_OPTEE=y
 -- 
 2.51.0
 
