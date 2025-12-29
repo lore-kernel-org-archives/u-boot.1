@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF37BE784BE
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 01:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D32F3E784BE
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 01:49:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1577283CF5;
+	by phobos.denx.de (Postfix) with ESMTP id 583AE83D52;
 	Mon, 29 Dec 2025 02:49:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N2Q4tFoa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nE9jMoMj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C28B383BC7; Mon, 29 Dec 2025 01:06:06 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 4BD878003E; Mon, 29 Dec 2025 01:06:08 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA5828003E
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 01:06:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C9FA83C0C
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 01:06:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=aargri@gmail.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c7533dbd87so6449975a34.2
- for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 16:06:03 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c6cc366884so4117161a34.1
+ for <u-boot@lists.denx.de>; Sun, 28 Dec 2025 16:06:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766966762; x=1767571562; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1766966764; x=1767571564; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DDIBwgMBjHIU3/XnRBYmOu1vv20nNiMVSgKhCKogHw0=;
- b=N2Q4tFoaJW6r6T6NAq8nJLi62UmkGGzHo6UEAew8ZyfX7nsaz7d6fk18PG0UcnGHno
- zKvTx2ePB2ZWl3ECScMxiAKElZYKSlWxkbk8SpdH6mAeszEspc7yF/2GjbdvFiYD1/WV
- 9rwEG2+J+I59p7zYkY31yz3JaOkCA0WWR8P6/8wmKIV6u70v0pWVSlk5bqN26N/nYsLO
- sAxxYVQfbve1H1SZuwaZdxQ5sdHhnCS9hI5zdg+LGzwnmSD9sO963VIViXid38JzpnP4
- GW8JeDl0LSnQCZi1PuH/1445AET4CusvJgU0PJkuKAblEP3wnePDsT6hNGpqWPXLD91n
- PTEw==
+ :reply-to; bh=QD9TkyZRKMbzBP6Ai6d2A/qiqHMDAd4Xt3Y+qdKdx6k=;
+ b=nE9jMoMjWQMTeN50lbr6gsxmDDBvDK/zYuA+HM792yJruZWzvwC7XurZtQvbU84hlF
+ RJaNVvDtsofEF5SBbiYNddaVHAi4nMxi3VzHiqURH64mg861eDvJ1Atm1VthIOO9JWQn
+ VfC8cFF8vzCzgD9HvZNBujzIhgE5P6JgDV2P8KUDVl/roiPcVXxUwhn0jYs0U6tMktl7
+ omlqhGUQTirGj6xAWhVKeZiGEAUB8Erz3mv3xeZAq8NHSO/AvT5z79grqY9o1feXgwr+
+ LA9//wgYQ8uU1MS77wbf8toJuiwrK1D5UVwEQ3JBWrTbimzTcwGOYrqAVpqX5YFDvTap
+ hxNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766966762; x=1767571562;
+ d=1e100.net; s=20230601; t=1766966764; x=1767571564;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=DDIBwgMBjHIU3/XnRBYmOu1vv20nNiMVSgKhCKogHw0=;
- b=PJerN1G9mvmlZS7uAfuNayVfyO6GVpGDJgKwONldBjnVp+273+7hfFg0HoUB9yU+3F
- bPXumJYQLQtN2339Q2WGmuUeG8Tw8RwwQJFjlk6P0IijQpG2MyNrriONw2LNuZbbtn9C
- ZAT8ck5A0jAA05qixeQXOdrO7P5WPrhVQPJVwfdIhrb7mhzz0OqgQNtkxGDz+FU+GD9W
- 0u3tMidNUtQTaU8OqHfF0vxe2pCj42RZjvaomnnLvT1orKQJO/dPhYd4/OjKPA17Jg+e
- 5xo9atxx0s6WvUgJAB7VF2lxlQUDjhGwfa5p6dLWc7xE2felCXYaZXvdtvg8BAtly1y8
- zNoQ==
-X-Gm-Message-State: AOJu0YzmmH2VxxPxGaWN20VcZhUvWIXTIaY9neY/d0r470UvjQOEM1Dm
- rkIFFwhMn3VtlbFqZ7hQXGMAxlFM79i1TAam3deEXUn3R9BuHT9bhRuX
-X-Gm-Gg: AY/fxX7hY6pj7Le/8CHY5bhjImybkyx1WcZq+0fDrXIcc6w6NyDvk0EIrPyJmhToLbE
- k0xoGUqxQZJ54OQSJ0kj+qihnZDeW4uS9sT3q80G1x8+iygBSYlsnupGwUyR4XcQaZB64iYNH0O
- a0JLk40dwMwqPOwJEL2Y6kD5+eprokziUV74ppmUa6nJwc2yvdGmtYTh9SWB/NeK/PX20pWHdEh
- 3aayI20XnpPo8Dkkz8agTX4esNKO5a3UWQQmyhSX1fbOJNj/QbCRCst3c2bDTiV9LrGIIkcgJXC
- 9vxm2zNn8sgralXRyBQ5Zq//UBo2ukWlQ9BSaDeoUKrvVY81/vTW4ZaMWOtg8krgQ8Sx6iApY0t
- JtI0E82SJo6B96Zq4VWRAiYrxspYYvNZ92bPNxx3ha9XuepH6x3J1t8wmDnhO33fU5ATVOUASTl
- GpEmbk/vyK/XWtcTEDEwvTdhu15X9TpqQrxjt8h4zWE+qeZ/h9QTgRQthn
-X-Google-Smtp-Source: AGHT+IHd+M3wC8jnXENDUXXpCRDWpMoZb04a/7gWKHciwnTQnt4hAJPVElqvipnvULisPXebKAT0EQ==
-X-Received: by 2002:a05:6830:2b07:b0:7c7:5d72:567b with SMTP id
- 46e09a7af769-7cc66a19be4mr15511692a34.23.1766966762545; 
- Sun, 28 Dec 2025 16:06:02 -0800 (PST)
+ bh=QD9TkyZRKMbzBP6Ai6d2A/qiqHMDAd4Xt3Y+qdKdx6k=;
+ b=beaIe3Zih0LtkBszO6cr4LIlvSairy144Yq7q/HTkMhUWR2qF9PeCiLP3dbuv4MhnR
+ i/Y7BKElvqmYE8gf0gA9+Zd1a0JLIYBSwEpBeQJrkkQF3ugEnVkci9ZsFwRdNKkr9k3u
+ hSDCwHEfQIJ8Ku72I0Br6ztX6EStCqFnomOGrkXmfpLYiY54/bXsmZM7o2aVo4SgJc5y
+ Ti2TaBXCOddmvFh9ZjLpKBayR/RBqnKq8eKFB0rRQ+gfjUi0P9IdSr8A92DjWsjCh1Cx
+ AkXyjufCZ3UGrDulAp5v8RLGr4u0ChiKmtf9X1CPypwhU1CdtczhNLgRM7hWCoKQk6W+
+ EBxA==
+X-Gm-Message-State: AOJu0YyQd5mM7OlleHlA6Cx8eB+LXvkJCH0JYI/gh5ALuYkPva7fZR1j
+ 79XJ2p60guMiS/xyx2KASqGAvsAPSIWgZK5eI6wBUMJH48Kut0htfelm
+X-Gm-Gg: AY/fxX4+UEoGyKEBL1utRDaiXwj8yFCbIvWCvrdvsOgtV6UW7FC+IbOEWI1GP52p9M2
+ VKKx94+Y4Memp7b/xyjqRkWj5XlqXaggX8zdbKTidHuyesqKQqXjJ8ERu0fLNz4TvewFSY1gXL6
+ 6zPr2mei4WJk3DDJXQmvJXeibTKledv9sOqyqyC7gCMIOI+oYcGtZXX9pizdC8iijII7UTcYl7J
+ 4OQTCiKu06B7VX3P9mYHijJqOCCoXHQVuRH8BQJN2Y91eMkcKne+839E1thTTbgdDLDEkoP5aef
+ oj9BElEBis3xBvxsvnWXGZobn4mP8KHDBxCIdrDUfzWw/LkrVCTUV8132EkNMf3c+9XkH/IMjtG
+ ET6LfcLOtFHkyZXlfuY6q5AJqlIcYQqx3WHQVOWbZe9ZK3PKDs4pR0dALkYmke/YGq1/Y+uR73P
+ qhx+V0Jc4IExDWWDO56CZszRsfg6Bb6MpEMBU56pgTWasf9HCXV9B0vdSiN0kBREyyTSA=
+X-Google-Smtp-Source: AGHT+IE9bn0eFSCYGJgBRsnm2YtZLNnbtl/F0SyhBv6fn7se3X7uO33bsu9WS0n0lYThMShlLH6TnA==
+X-Received: by 2002:a05:6808:1526:b0:450:3ff9:f4dd with SMTP id
+ 5614622812f47-457b20b7730mr14279949b6e.24.1766966763842; 
+ Sun, 28 Dec 2025 16:06:03 -0800 (PST)
 Received: from [127.0.1.1] (172-2-191-226.lightspeed.clmboh.sbcglobal.net.
  [172.2.191.226]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667f9468sm19397294a34.28.2025.12.28.16.06.00
+ 46e09a7af769-7cc667f9468sm19397294a34.28.2025.12.28.16.06.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Dec 2025 16:06:02 -0800 (PST)
+ Sun, 28 Dec 2025 16:06:03 -0800 (PST)
 From: Aaron Griffith <aargri@gmail.com>
-Date: Sun, 28 Dec 2025 19:05:26 -0500
-Subject: [PATCH 4/5] rockchip: sdram: refactor bi_dram logic into separate
- function
+Date: Sun, 28 Dec 2025 19:05:27 -0500
+Subject: [PATCH 5/5] rockchip: sdram: only reserve BL31 and use mem_map on
+ ARM64
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251228-rockchip-tpl-use-atags-v1-4-8ac5140c3763@gmail.com>
+Message-Id: <20251228-rockchip-tpl-use-atags-v1-5-8ac5140c3763@gmail.com>
 References: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
 In-Reply-To: <20251228-rockchip-tpl-use-atags-v1-0-8ac5140c3763@gmail.com>
 To: u-boot@lists.denx.de
@@ -108,285 +108,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This part of rockchip_dram_init_banksize decides what to do with the
-memory information it reads out of ATAGS. Right now, this is used to
-add holes for reserved memory from mem_map and for BL31.
+This logic to reserve space for BL31 and to add memory holes from
+mem_map only makes sense on ARM64. This change simply wraps all of
+this logic to only run if CONFIG_ARM64 is enabled. On non-ARM64, it
+falls back to accepting memory info from the TPL unmodified.
 
-This change factors it out into a separate function. This function is
-marked weak, so that a board or SoC can implement its own logic for
-reserved memory. For example, the RK3506 has no BL31, and should not
-reserve memory for it.
-
-This new function body is a copy of the existing code with only two
-small changes:
-
- * Replace index j with *next_bank in function body.
-
- * Increment *next_bank at the end of the function, rather than in the
-   for-loop that calls this function. This makes the meaning of the
-   *next_bank argument more consistent: it is always incremented when
-   a bank is added.
+This is useful on e.g. RK3506, which is not ARM64, but which does
+receive memory information from the TPL.
 
 Signed-off-by: Aaron Griffith <aargri@gmail.com>
 ---
- arch/arm/mach-rockchip/sdram.c | 234 ++++++++++++++++++++++-------------------
- 1 file changed, 127 insertions(+), 107 deletions(-)
+ arch/arm/mach-rockchip/sdram.c | 154 +++++++++++++++++++++--------------------
+ 1 file changed, 78 insertions(+), 76 deletions(-)
 
 diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-index 98c02570dc4e4a8315c25a5caad5d568db10c5d8..287073c0e50839cc9366baacbc47512dbe2b4476 100644
+index 287073c0e50839cc9366baacbc47512dbe2b4476..82e8e2876f6faca71ff0a8622f08ab3c10a7390a 100644
 --- a/arch/arm/mach-rockchip/sdram.c
 +++ b/arch/arm/mach-rockchip/sdram.c
-@@ -105,6 +105,129 @@ static u32 js_hash(const void *buf, u32 len)
- 	return hash;
- }
+@@ -115,103 +115,105 @@ static u32 js_hash(const void *buf, u32 len)
+ __weak int rockchip_dram_init_banksize_add_bank(u8 *next_bank, phys_addr_t start_addr,
+ 						phys_size_t size)
+ {
+-	struct mm_region *tmp_mem_map = mem_map;
+-	phys_addr_t end_addr;
++	if (IS_ENABLED(CONFIG_ARM64)) {
++		struct mm_region *tmp_mem_map = mem_map;
++		phys_addr_t end_addr;
  
-+/*
-+ * Populate gd->bd->bi_dram[*next_bank] (and possibly banks after) with
-+ * the memory region received from the TPL starting at start_addr with
-+ * given size.
-+ *
-+ * Increment *next_bank by the number of used banks.
-+ */
-+__weak int rockchip_dram_init_banksize_add_bank(u8 *next_bank, phys_addr_t start_addr,
-+						phys_size_t size)
-+{
-+	struct mm_region *tmp_mem_map = mem_map;
-+	phys_addr_t end_addr;
-+
-+	/*
-+	 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
-+	 * have it, so force this space as reserved.
-+	 */
-+	if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
-+		size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
-+		start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
-+	}
-+
-+	/*
-+	 * Put holes for reserved memory areas from mem_map.
-+	 *
-+	 * Only check for at most one overlap with one reserved memory
-+	 * area.
-+	 */
-+	while (tmp_mem_map->size) {
-+		const phys_addr_t rsrv_start = tmp_mem_map->phys;
-+		const phys_size_t rsrv_size = tmp_mem_map->size;
-+		const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
-+
-+		/*
-+		 * DRAM memories are expected by Arm to be marked as
-+		 * Normal Write-back cacheable, Inner shareable[1], so
-+		 * let's filter on that to put holes in non-DRAM areas.
+-	/*
+-	 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
+-	 * have it, so force this space as reserved.
+-	 */
+-	if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
+-		size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
+-		start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
+-	}
+-
+-	/*
+-	 * Put holes for reserved memory areas from mem_map.
+-	 *
+-	 * Only check for at most one overlap with one reserved memory
+-	 * area.
+-	 */
+-	while (tmp_mem_map->size) {
+-		const phys_addr_t rsrv_start = tmp_mem_map->phys;
+-		const phys_size_t rsrv_size = tmp_mem_map->size;
+-		const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
+-
+-		/*
+-		 * DRAM memories are expected by Arm to be marked as
+-		 * Normal Write-back cacheable, Inner shareable[1], so
+-		 * let's filter on that to put holes in non-DRAM areas.
+-		 *
+-		 * [1] https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
+-		 */
+-		const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			PTE_BLOCK_INNER_SHARE;
+ 		/*
+-		 * (AttrIndx | SH) in Lower Attributes of Block
+-		 * Descriptor[2].
+-		 * [2] https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
++		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
++		 * have it, so force this space as reserved.
+ 		 */
+-		const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
+-
+-		if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
+-			tmp_mem_map++;
+-			continue;
++		if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
++			size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
++			start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
+ 		}
+ 
+ 		/*
+-		 * If the start of the DDR_MEM tag is in a reserved
+-		 * memory area, move start address and resize.
++		 * Put holes for reserved memory areas from mem_map.
 +		 *
-+		 * [1] https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
-+		 */
-+		const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			PTE_BLOCK_INNER_SHARE;
-+		/*
-+		 * (AttrIndx | SH) in Lower Attributes of Block
-+		 * Descriptor[2].
-+		 * [2] https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
-+		 */
-+		const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
-+
-+		if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
-+			tmp_mem_map++;
-+			continue;
-+		}
-+
-+		/*
-+		 * If the start of the DDR_MEM tag is in a reserved
-+		 * memory area, move start address and resize.
-+		 */
-+		if (start_addr >= rsrv_start && start_addr < rsrv_end) {
-+			if (rsrv_end - start_addr > size) {
-+				debug("Would be negative memory size\n");
-+				return -EINVAL;
-+			}
-+
-+			size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
-+			start_addr = rsrv_end;
-+			break;
-+		}
-+
-+		if (start_addr < rsrv_start) {
-+			end_addr = start_addr + size;
-+
-+			if (end_addr <= rsrv_start) {
-+				tmp_mem_map++;
-+				continue;
-+			}
-+
++		 * Only check for at most one overlap with one reserved memory
++		 * area.
+ 		 */
+-		if (start_addr >= rsrv_start && start_addr < rsrv_end) {
+-			if (rsrv_end - start_addr > size) {
+-				debug("Would be negative memory size\n");
+-				return -EINVAL;
+-			}
+-
+-			size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
+-			start_addr = rsrv_end;
+-			break;
+-		}
++		while (tmp_mem_map->size) {
++			const phys_addr_t rsrv_start = tmp_mem_map->phys;
++			const phys_size_t rsrv_size = tmp_mem_map->size;
++			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
+ 
+-		if (start_addr < rsrv_start) {
+-			end_addr = start_addr + size;
 +			/*
-+			 * If the memory area overlaps a reserved memory
-+			 * area with start address outside of reserved
-+			 * memory area and...
++			 * DRAM memories are expected by Arm to be marked as
++			 * Normal Write-back cacheable, Inner shareable[1], so
++			 * let's filter on that to put holes in non-DRAM areas.
 +			 *
-+			 * ... ends in the middle of reserved memory
-+			 * area, resize.
++			 * [1] https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
 +			 */
-+			if (end_addr <= rsrv_end) {
-+				size = rsrv_start - start_addr;
++			const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++				PTE_BLOCK_INNER_SHARE;
++			/*
++			 * (AttrIndx | SH) in Lower Attributes of Block
++			 * Descriptor[2].
++			 * [2] https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
++			 */
++			const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
+ 
+-			if (end_addr <= rsrv_start) {
++			if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
+ 				tmp_mem_map++;
+ 				continue;
+ 			}
+ 
+ 			/*
+-			 * If the memory area overlaps a reserved memory
+-			 * area with start address outside of reserved
+-			 * memory area and...
+-			 *
+-			 * ... ends in the middle of reserved memory
+-			 * area, resize.
++			 * If the start of the DDR_MEM tag is in a reserved
++			 * memory area, move start address and resize.
+ 			 */
+-			if (end_addr <= rsrv_end) {
+-				size = rsrv_start - start_addr;
++			if (start_addr >= rsrv_start && start_addr < rsrv_end) {
++				if (rsrv_end - start_addr > size) {
++					debug("Would be negative memory size\n");
++					return -EINVAL;
++				}
++
++				size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
++				start_addr = rsrv_end;
+ 				break;
+ 			}
+ 
+-			/*
+-			 * ... ends after the reserved memory area,
+-			 * split the region in two, one for before the
+-			 * reserved memory area and one for after.
+-			 */
+-			gd->bd->bi_dram[*next_bank].start = start_addr;
+-			gd->bd->bi_dram[*next_bank].size = rsrv_start - start_addr;
++			if (start_addr < rsrv_start) {
++				end_addr = start_addr + size;
++
++				if (end_addr <= rsrv_start) {
++					tmp_mem_map++;
++					continue;
++				}
++
++				/*
++				 * If the memory area overlaps a reserved memory
++				 * area with start address outside of reserved
++				 * memory area and...
++				 *
++				 * ... ends in the middle of reserved memory
++				 * area, resize.
++				 */
++				if (end_addr <= rsrv_end) {
++					size = rsrv_start - start_addr;
++					break;
++				}
++
++				/*
++				 * ... ends after the reserved memory area,
++				 * split the region in two, one for before the
++				 * reserved memory area and one for after.
++				 */
++				gd->bd->bi_dram[*next_bank].start = start_addr;
++				gd->bd->bi_dram[*next_bank].size = rsrv_start - start_addr;
++
++				*next_bank += 1;
++
++				size = end_addr - rsrv_end;
++				start_addr = rsrv_end;
+ 
+-			*next_bank += 1;
+-
+-			size = end_addr - rsrv_end;
+-			start_addr = rsrv_end;
 +				break;
 +			}
-+
-+			/*
-+			 * ... ends after the reserved memory area,
-+			 * split the region in two, one for before the
-+			 * reserved memory area and one for after.
-+			 */
-+			gd->bd->bi_dram[*next_bank].start = start_addr;
-+			gd->bd->bi_dram[*next_bank].size = rsrv_start - start_addr;
-+
-+			*next_bank += 1;
-+
-+			size = end_addr - rsrv_end;
-+			start_addr = rsrv_end;
-+
-+			break;
-+		}
-+
-+		tmp_mem_map++;
-+	}
-+
-+	if (*next_bank > CONFIG_NR_DRAM_BANKS) {
-+		debug("Too many banks, max allowed (%d)\n",
-+		      CONFIG_NR_DRAM_BANKS);
-+		return -ENOMEM;
-+	}
-+
-+	gd->bd->bi_dram[*next_bank].start = start_addr;
-+	gd->bd->bi_dram[*next_bank].size = size;
-+
-+	*next_bank += 1;
-+
-+	return 0;
-+}
-+
- static int rockchip_dram_init_banksize(void)
- {
- 	const struct tag_header *tag_h = NULL;
-@@ -168,116 +291,13 @@ static int rockchip_dram_init_banksize(void)
- 	 * Rockchip guaranteed DDR_MEM is ordered so no need to worry about
- 	 * bi_dram order.
- 	 */
--	for (i = 0, j = 0; i < ddr_info->count; i++, j++) {
-+	for (i = 0, j = 0; i < ddr_info->count; i++) {
- 		phys_size_t size = ddr_info->bank[(i + ddr_info->count)];
- 		phys_addr_t start_addr = ddr_info->bank[i];
--		struct mm_region *tmp_mem_map = mem_map;
--		phys_addr_t end_addr;
--
--		/*
--		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
--		 * have it, so force this space as reserved.
--		 */
--		if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
--			size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
--			start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
--		}
--
--		/*
--		 * Put holes for reserved memory areas from mem_map.
--		 *
--		 * Only check for at most one overlap with one reserved memory
--		 * area.
--		 */
--		while (tmp_mem_map->size) {
--			const phys_addr_t rsrv_start = tmp_mem_map->phys;
--			const phys_size_t rsrv_size = tmp_mem_map->size;
--			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
--
--			/*
--			 * DRAM memories are expected by Arm to be marked as
--			 * Normal Write-back cacheable, Inner shareable[1], so
--			 * let's filter on that to put holes in non-DRAM areas.
--			 *
--			 * [1] https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
--			 */
--			const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--				PTE_BLOCK_INNER_SHARE;
--			/*
--			 * (AttrIndx | SH) in Lower Attributes of Block
--			 * Descriptor[2].
--			 * [2] https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
--			 */
--			const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
--
--			if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
--				tmp_mem_map++;
--				continue;
--			}
--
--			/*
--			 * If the start of the DDR_MEM tag is in a reserved
--			 * memory area, move start address and resize.
--			 */
--			if (start_addr >= rsrv_start && start_addr < rsrv_end) {
--				if (rsrv_end - start_addr > size) {
--					debug("Would be negative memory size\n");
--					return -EINVAL;
--				}
--
--				size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
--				start_addr = rsrv_end;
--				break;
--			}
--
--			if (start_addr < rsrv_start) {
--				end_addr = start_addr + size;
--
--				if (end_addr <= rsrv_start) {
--					tmp_mem_map++;
--					continue;
--				}
--
--				/*
--				 * If the memory area overlaps a reserved memory
--				 * area with start address outside of reserved
--				 * memory area and...
--				 *
--				 * ... ends in the middle of reserved memory
--				 * area, resize.
--				 */
--				if (end_addr <= rsrv_end) {
--					size = rsrv_start - start_addr;
--					break;
--				}
--
--				/*
--				 * ... ends after the reserved memory area,
--				 * split the region in two, one for before the
--				 * reserved memory area and one for after.
--				 */
--				gd->bd->bi_dram[j].start = start_addr;
--				gd->bd->bi_dram[j].size = rsrv_start - start_addr;
--
--				j++;
--
--				size = end_addr - rsrv_end;
--				start_addr = rsrv_end;
--
--				break;
--			}
--
--			tmp_mem_map++;
--		}
--
--		if (j > CONFIG_NR_DRAM_BANKS) {
--			debug("Too many banks, max allowed (%d)\n",
--			      CONFIG_NR_DRAM_BANKS);
--			return -ENOMEM;
--		}
-+		int ret = rockchip_dram_init_banksize_add_bank(&j, start_addr, size);
  
--		gd->bd->bi_dram[j].start = start_addr;
--		gd->bd->bi_dram[j].size = size;
-+		if (ret)
-+			return ret;
+-			break;
++			tmp_mem_map++;
+ 		}
+-
+-		tmp_mem_map++;
  	}
  
- 	return 0;
+ 	if (*next_bank > CONFIG_NR_DRAM_BANKS) {
 
 -- 
 2.47.3
