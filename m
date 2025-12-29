@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9155E92733
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 17:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8B5E92733
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 17:20:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8CBA83AAE;
-	Mon, 29 Dec 2025 18:19:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ED1E7838BB;
+	Mon, 29 Dec 2025 18:20:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ljTxpT0P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IVEKcpDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93DD283DE4; Mon, 29 Dec 2025 18:19:53 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 34CF483EA9; Mon, 29 Dec 2025 18:20:20 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02A11838BB
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 18:19:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C356A838BB
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 18:20:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c75387bb27so3856917a34.1
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 09:19:49 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c765f41346so3997015a34.3
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 09:20:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767028788; x=1767633588; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767028816; x=1767633616; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=23sUi8wRSuf/sqmvMA/2n2wP5UoqvEM7f70AjRT8jNU=;
- b=ljTxpT0P/QdeXvBx090odjOlptsXFyY9jWEZXb2/1YQd4leF8sejMYx+jErbs2gdZY
- qzCNVjMFaMLVklL5Mhm5LE5V7bFWZRWZNf6P/tKxUwDuRieSCwonxy1OhRxLBe3qTWHU
- hol5bgPa/12VHZtIXJ//zzsl5QTPxN3mQfML1d25miM48q+fMzQIjPPTC15X8nslfEh7
- hTnNzJjGwfxIwk4BOmdRLfcG2xPLr+jBzsvhcEiRgazNv6gX8y1vbENqOWzr54C+ac9q
- mtqwpc9SGaNx0inPX9g0QQTweQB9U6LKOBbuUW1/R3EaAjiYEO8EvP34wHkJRmD4IxEY
- WIWA==
+ bh=fUdZ9tGT/9YMR5gIdNwQJdOQpq2oALkSTLW1/0/OLI0=;
+ b=IVEKcpDSMYbWjEz51kbr6kQLPU0npxJxity7oF4YD0L7udP80WyBk81WFRgaKNhrtu
+ 0Bi9o+VYyNV8oGo5OvTQ4YdmN8lMoKGQe7DzD1HEu109tpGTKFim0RnsPAxMmc/L3Yl9
+ mW9MakAQXl2nc9MuL2lrHKgDF7BoSgnfoNLkgsiESskQJ3flJ3SVmMkAbuJ6R4w4mzbH
+ YWIG2gUIiN8u/TcGvmNVkTDte/mHENnAGnm4Ghvz1wXjKXf1Mc6vXoy+3IF2wZaDqFJD
+ jhWZxH/WSVcStA0C1oKEUURQNiAELGtip2dyHNnAvVYQFOpU9bXht3lL+j1RwrCaYjeJ
+ oOIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767028788; x=1767633588;
+ d=1e100.net; s=20230601; t=1767028816; x=1767633616;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=23sUi8wRSuf/sqmvMA/2n2wP5UoqvEM7f70AjRT8jNU=;
- b=LITMrOT1oYJ+xJ2hS997a4NHfhwHSY6smdLcVr85uWz/duyw0usV3ir8gm7+PN8C8A
- SuRpOdRYMqFxbsbVh04MkbbA7sDRFGwsPQoyqXBuRCRywaUwRZn4J0QVo6aXz9nm96U3
- AFIvL3wdCoXdE8FUwJKWmVXZoW75FhYwLIITOU0sVSoXC7gih/DAaylf/NpxS5KzMZ5h
- 6YVplttA5s5AAddqQJARrNQxoVNqi0cszod9W8NJgZqOGzta6eq4/vV3+6iuta01+5hI
- Gv89s1lxpIv2k5doXZcaruDb959uCk40By8Foe+KRSz51IKjUNCOSVFvqxlRh/j4hJ7t
- mpEQ==
-X-Gm-Message-State: AOJu0YyGj0lLFl/GmhqwVlRNTjEjHG7Ok+D34Q7+rAMviELRhzZagO0u
- xIBMYCI4/SYYeWiY58DgGc6/FcAn86aF8I47YZkG5qOyNfcWi7SAo6VueIVdSXAsIBcf/uMLlUC
- Oi19VtnBh7oyIh9+d21jkqCi0f6taVY0OZBLyFNw=
-X-Gm-Gg: AY/fxX6PxISVImj785KQU2vEITPTGEtw0qurlQEDIRcrtII+Fy8qOZyYEmIdPXVykqJ
- QYeKPw0DjO91Y3E68Ob9julYuQlHBcocxbK6Mq4fJZVmRKgWBKK+VbMIhYoh5oTwn2ggkGlBQAL
- o61eQMZf6/N++b1UUEufAcYTfscXc6FWALNvJW5DPcu62M1QMFdain+Cf+6rFCb79AlzviEc/rb
- 1OW2erFvi/BurYttPV63MVBObbjsRtXed74AcaQX1F0h6Yni2yIIwgeru9UDRYulKLq9mFZ
-X-Google-Smtp-Source: AGHT+IE+fpB1xVNyVsSlYg6E+LDmHbdgABIuJOh2rLgk3Iwx5MD0WsonCBUvPvQytnZ6+YeRO8zZhvBELuMa1CRpSTc=
-X-Received: by 2002:a05:6830:82a1:b0:7c7:8280:9208 with SMTP id
- 46e09a7af769-7cc66aad8a2mr16025823a34.38.1767028788592; Mon, 29 Dec 2025
- 09:19:48 -0800 (PST)
+ bh=fUdZ9tGT/9YMR5gIdNwQJdOQpq2oALkSTLW1/0/OLI0=;
+ b=dydsleJci/eCX6VdbuX89CxCJRh9X0pDw/uOy9gi946JvE3LItrfEov6+c7luGuO86
+ ieJbCssiKdf/6tB1GCY9KfV6LYFXJv6nqSq8kYRWayHGrrnNz08u2jPtZoNB47e9OIbg
+ Ac/k0Pd+gbufInwZfJqhOwNmKyMPO3JqEUPtEbEFb3hbEBQqZ1wN/+T5v/002682kZq8
+ OyuhIo5+OxYqnKsUwnro1hG80huse6Smo0EiLeIt0pMT3LMXR3hMpaJPPFUlnF2N9cyG
+ lRQUOHUbpH8c/c53GIHWZSpM/nkg3FRBGBLFmfaZLQvX2ozsPsolcNhHPyOPMKM7PxVU
+ 3zXg==
+X-Gm-Message-State: AOJu0YxXzlaTsabC15iY6E7YwXQFLgDOvkMNIssXsqVG9bPIrTc/CGbo
+ 2Qnam5YfzWaHcbrwaa27nDyarMG1M1TJEzvxBAGMHi6FARBkOpSU69yxAOvx5gpZ4nS8K9KDp2V
+ Jiwk5jEQA2gvCT1a/ft3Q/iDAXRbEKKq8BZ64UpDyyg==
+X-Gm-Gg: AY/fxX5bd95AEpIX/rSH6U//J2o9NGXxysnTLW6qun3oPraG8vXvcPaFJLXBe20xV90
+ yU7oT9aQYol3Ud2PVTI4Hrj7PBQ9Jd49eExVPLH15fWMvlhMO85f+qTtWpv5JrvxuL5hT+VtnoT
+ 8UIoNez01jZzMBiar9aS3dm8cRfHuE9HmLcJyGYMjk6V23Dsge5vSQ0yE0cUI6bLw3PF/b5qCT/
+ ++Jtn3xecVqKcSrw9WhKL8XRmPlMH9MenH5xEWN3Mhofmlc24uyGfiFEzqC6NheGUlruw0ZhhiI
+ GSNMy8A=
+X-Google-Smtp-Source: AGHT+IFIKYjVp1EJMaw3VF8JnjRzjC7NT+y2xBC4Cmq4vdhpElUtKpblR6V1NIYcZIw8LzW51TC8PtNUvRb0eczsh6o=
+X-Received: by 2002:a05:6830:4c07:b0:7c7:63b6:89d3 with SMTP id
+ 46e09a7af769-7cc66a6f406mr18375048a34.19.1767028816281; Mon, 29 Dec 2025
+ 09:20:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20251229151837.4587-1-briansune@gmail.com>
-In-Reply-To: <20251229151837.4587-1-briansune@gmail.com>
+References: <20251229152200.4805-1-briansune@gmail.com>
+In-Reply-To: <20251229152200.4805-1-briansune@gmail.com>
 From: Sune Brian <briansune@gmail.com>
-Date: Tue, 30 Dec 2025 01:19:38 +0800
-X-Gm-Features: AQt7F2pcirFL87ayhHLUNc8SdJYUoYA861PgF1V9kmuf8aEWv9IWpJ-DK2k7aXc
-Message-ID: <CAN7C2SBsdGqt7PEUGqCnrmg6-6GATr-71mGhQB-W_PRmBZPrCQ@mail.gmail.com>
-Subject: Re: [PATCH v1] Add CoreCourse socfpga Board - AC501
+Date: Tue, 30 Dec 2025 01:20:06 +0800
+X-Gm-Features: AQt7F2qnl06w3dDp5UDbntJ5WStMUtXBXH7QSXwC3lO7F9eKWeviaxaRlRWmBUQ
+Message-ID: <CAN7C2SC4NgEOmhzaB5Ss+KL9JuU7Maq=cCd-jfC0hFyLG-Qygw@mail.gmail.com>
+Subject: Re: [PATCH v1] Add CoreCourse socfpga Board - AC550
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Cc: Tien Fong Chee <tien.fong.chee@altera.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -99,16 +100,16 @@ Discard this patch, wrongly sent.
 Thanks,
 Brian
 
-On Mon, Dec 29, 2025 at 11:18=E2=80=AFPM Brian Sune <briansune@gmail.com> w=
+On Mon, Dec 29, 2025 at 11:22=E2=80=AFPM Brian Sune <briansune@gmail.com> w=
 rote:
 >
 > CoreCourse Altera GEN5 Cyclone V board
 > do support different size and formfactor.
-> Now introducing AC501 C5 to mainstream u-boot
-> This is a UBGA-484 based board with basic
+> Now introducing AC550 C5 to mainstream u-boot
+> This is a more complex and unified board with
 > feature. More info on [1]
 >
-> [1] https://corecourse.cn/forum.php?mod=3Dviewthread&tid=3D27704&highligh=
-t=3DAC501
+> [1] https://corecourse.cn/forum.php?mod=3Dviewthread&tid=3D29788&extra=3D=
+page%3D1
 >
 > Signed-off-by: Brian Sune <briansune@gmail.com>
