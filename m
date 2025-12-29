@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E1F6E92733
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 16:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3160E92733
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 16:18:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A61583E7F;
-	Mon, 29 Dec 2025 17:18:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC59683E92;
+	Mon, 29 Dec 2025 17:18:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hh/EPfoR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtBjXNWi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEC9783E85; Mon, 29 Dec 2025 17:18:23 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id DAD5883E21; Mon, 29 Dec 2025 17:18:28 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 458DB83E21
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 17:18:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFEF883E92
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 17:18:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-64b61f82b5fso12251031a12.0
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 08:18:20 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-64b608ffca7so11291309a12.3
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 08:18:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767025100; x=1767629900; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767025106; x=1767629906; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s3X9xdbmucKB/kXWtMLQ3GW+c0vETVxPvsqQBst+eK8=;
- b=Hh/EPfoRqGuVaI2GaXzlfYuMvVb7vltWGSxbTyDw+wOj0Ddza0ElbWbVlVVdbKCQ6v
- FiicfzjSjF0/1w79HTQ+7BmTUUY3iMkDtH6iINmjf2sUu+ouA1xTBLZ8Xj+GUUHpqLoI
- HgyXwIGlMNLscYHxOIEHRbg7Deri6R/erIdow=
+ bh=C0RHC7xnnvbxfWpqC/Lsz3MymqNxAHUt8gXwdDvkLfM=;
+ b=TtBjXNWiOWH7F5i+ozsXPf+ciIPQSu4Ej9eooSzp+wzeeKnWYmcN79LRlftP3NxMcR
+ 1aYfSyJeQpTduggyW7eTzPEMKURJxdFQkHs3hlembkFiW5wGU9LJDJYcwbUb45EOws1S
+ AomfeOHOOJYqVDt/PbJGV9DY8wQK9Z1RWrNWM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767025100; x=1767629900;
+ d=1e100.net; s=20230601; t=1767025106; x=1767629906;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s3X9xdbmucKB/kXWtMLQ3GW+c0vETVxPvsqQBst+eK8=;
- b=AQZOBPtPdqJLvTbk7F3O27t8Q1qXg7FZsrvubkDYo5SF9uikCsf3icSHH7U0eGomcu
- wxWI/msNDn/MbBJXSUEaPvgpk9IF7mQeXStwr0D3SP+MXU8y7CNfPKMpK51zX0Rou5Va
- +h7ZFB14zc8IbEkrhpY+6s+c+dFbVTEeV9erKorKvtX/i6QKkCznLS5OK47G6604JUeh
- wJi3eyW4O37IdnWWn1AcTpBUQLRQ5laVqzug+2MjyscDc+CcQFaFxkUR9iquS1KNN8LD
- f3Y/fyeokyWTRu8ctM5+P6ad7DtrlSYzhOAEFUTxSrvtDLjJsmTIild9kCpGEvHzxS0T
- QggA==
+ bh=C0RHC7xnnvbxfWpqC/Lsz3MymqNxAHUt8gXwdDvkLfM=;
+ b=uPbvD2jKsoj595mFb+sBOZENA0w7Tve1htOofMLFQWs/EGm893bSsYk//rgunYN3nB
+ 9zQj0k2X8Xa+GrO6zmFiji3UTYI46gIDSRUR7qPI5npArZ3N2Qh33SWMeGwCvSOU7G1j
+ Cl5toN6CEz3uRBcrZBMebbP58xzSzprJUMNUclCew1Y5tguZ5LcOp573kotbXaiLUCZL
+ SwOCsEu64HsUM58UvCh9WyWlML/m6FDVsynqFBoiZEdXk5O3iOV9vQRl0xmsfKqJsVCC
+ lSDaz27tJ2Tt49KqS+ttCK/T0h6164MrxFz4nI9c6hZlbBUYZU6oKUfLDuJXx/qxPKsZ
+ Fh5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXioYCG1AfQDi99nS/AITIrpxuOoy542zHjpkaMyplqWb41r/1x+BZLTPFlzBoonzs1sqr5dtg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywc6bUdyjlm8lImtqeVhEDJNgR7eoR2DXZBrC/goypTiWlESATz
- uXAFhq4J25LWL9mw3e6w7OU37fa9iBPSjl+Lsz4B4rkSqTd/M7HHan/IW9SG4aFdQ+NZ8ZYkWMt
- zhx0inHBtvrLsYPktbDAf7AcC++LmMPShykxffJPu
-X-Gm-Gg: AY/fxX7wYyfueZkicD53SxEajMG3+inC6NxK/CVvJNcpUWye0Yil2rQi2sAWVz/TYm/
- SrXCqFBNj/XGFVQ36vBDyhEG49MWECYhIzrQYhvaU2GPEqSi/dnf8RIA4TETruwNl4EeHXCM+oS
- kVQ4bwHVptcX/Q7jBMo2o7i7AmmHiUCv589ERvfmifY6lEk7cjoIg2YhJ0bJ7ZsU2XIBSQf4Dqt
- Gpn6tyMKC/QGzvHIzgjqqfR/mTBnMJSibzkFCMU7WJYC6DV3wLK21GZpP/XFq/x+0oX7Q==
-X-Google-Smtp-Source: AGHT+IGmlh+V7X6RTwim2SkHPFfICZX3o5wmivauabx1S9E1cRPQSPhP4kLD9ze6OXSMD5MaNx7AiLDLfVifbNkwL8I=
-X-Received: by 2002:a17:907:3f89:b0:b72:134a:48c8 with SMTP id
- a640c23a62f3a-b8036f63805mr3353366266b.14.1767025100096; Mon, 29 Dec 2025
- 08:18:20 -0800 (PST)
+ AJvYcCVghnkaUSdZPzAfZvk5dzqaouiA2KDrHs5yJy1seXR7NANeXY/ziI2GX25+YV0x+60wwjn7270=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7nm72dUcl1gEA5Sm7HuBZxkeLF7PMB+P3AjkCjzA5aUYcYCbU
+ NfXRptfax4mr5xtlnp/r7xxFCVPWeiMRFo+dFv8pmtJq5O00rx+ooyzb2CSc4ddVTrOquLbeG8N
+ HQdUkUXdyVzbXls+hROpUbok9mhfp6I44N4/IvSZe
+X-Gm-Gg: AY/fxX66IXdfXVmxBctpOGaW35TNZdlWAznmo41eLUcpoFTFsbO/5gvCxFvPM++yY88
+ ZCl04QPjvKJy85ptCbFotlo8aVWFDELETY9TNHkOlqBnE7VrB7n3OvKzTCy4Q3TkRjyrwBWr9/d
+ T6anZRkNdoQnc28I+g3aRabzC4IgUvQtO0/wTb9fGIPatQOHaRfMumTMT/2mxmx3E7ekvn1EJJJ
+ oNVDNvQlQab49RW6UWXsQT6KcAByDOQgLY93mqs/ucD+B610CV11faShvGgNbc+/ZeCDQ==
+X-Google-Smtp-Source: AGHT+IHaSNNbiBfUjJtjEAtQJjZ+yKrJRo8NyDpKVdmTN4j1rpfU7MEL4oIDXURLCbUBS3ihy2alsyTyBuayMfI6wcM=
+X-Received: by 2002:a17:907:3da8:b0:b76:b76e:112a with SMTP id
+ a640c23a62f3a-b8036ece49dmr3200331266b.11.1767025106360; Mon, 29 Dec 2025
+ 08:18:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20251221015859.738112-1-heinrich.schuchardt@canonical.com>
- <20251221015859.738112-2-heinrich.schuchardt@canonical.com>
- <CAFLszTgiG=NyaVrGAnTJsmkpYc4OOaUo5ebKy=mTrw4Nwc46jw@mail.gmail.com>
- <fc5976c3-0cb1-488c-ad66-1adc5510ea00@canonical.com>
-In-Reply-To: <fc5976c3-0cb1-488c-ad66-1adc5510ea00@canonical.com>
+References: <20251229161045.177883-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251229161045.177883-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Dec 2025 09:18:07 -0700
-X-Gm-Features: AQt7F2p_PPgbC2SNQRAjJgig7WfjSMzWD8pfY4PeZhxT9k_ArmLUFM_av5WG8dc
-Message-ID: <CAFLszTgqkwe7EbEqovaOpZaxrx7s+p-bJVojshyYvM3GsrT8ew@mail.gmail.com>
-Subject: Re: [RFC 1/8] trace: correct handling of recursive call
+Date: Mon, 29 Dec 2025 09:18:14 -0700
+X-Gm-Features: AQt7F2p2SWTAb7dEXJ1C3ytLPdCEZys8HjlbCBBREkm_I-536WC6AqF75-fcKFY
+Message-ID: <CAFLszTiPqK=znJEk6_M2XYEk2ZvSfiBUOtQEsYryYcD+d9u0VA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] .gitignore: add vpl/
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Yao Zi <me@ziyao.cc>, 
- Raymond Mao <raymondmaoca@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
- Heiko Schocher <hs@nabladev.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
+Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Javier Tia <javier.tia@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,75 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Mon, 29 Dec 2025 at 05:27, Heinrich Schuchardt
+On Mon, 29 Dec 2025 at 09:10, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On 12/27/25 14:45, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Sat, 20 Dec 2025 at 18:59, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> __cyg_profile_func_enter() adds timer information to function traces.
-> >>
-> >> Commit 852d4dbd70ba ("trace: Detect an infinite loop") introduced a logic
-> >> letting any recursive call to __cyg_profile_func_enter() deactivate
-> >> tracing.
-> >>
-> >> This implies that a lot of the DM core and timer drivers functions need to
-> >> be marked as `notrace`. This in not desirable as those functions are part
-> >> of what we want to trace when not invoked by __cyg_profile_func_enter().
-> >>
-> >> A better approach than switching of tracing is to immediately leave
-> >> __cyg_profile_func_enter() when reentered.
-> >>
-> >> Reported-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   lib/trace.c | 59 ++++++++++++++++++++++++-----------------------------
-> >>   1 file changed, 27 insertions(+), 32 deletions(-)
-> >>
-> >
-> > Please see here:
-> >
-> > https://docs.u-boot.org/en/latest/develop/trace.html#board-requirements
-> >
-> > This really just papers over the problem you are having. You cannot
-> > use driver model to obtain the timer as tracing starts before that.
-> >
-> > So please instead do the small extra work of defining timer_get_us()
-> > for your board.
+> Directory vpl/ only contains generated files. Git should ignore it.
 >
-> Hello Simon,
->
-> Thank you for reviewing the series.
->
-> Making timer_get_us() driver model independent could alleviate the
-> issues that I tried to address with patch 2/8 (trace: initr_trace must
-> succeed initr_dm). Yet, the current patch is about handling recursive calls.
->
-> I think we should use notrace only on the minimum set of functions that
-> are used by tracing only. All functions that may also be used from
-> outside of the tracing framework should be instrumented.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  .gitignore | 1 +
+>  1 file changed, 1 insertion(+)
 
-Yes I agree with that, so long as we include 'get the current
-timestamp' as part of the tracing framework.
-
->
-> This patch addresses how to avoid recursion when instrumented functions
-> are called by the instrumentation entry and exit functions. This should
-> be handled gracefully instead marking it as a total failure and
-> disabling the tracing framework.
-
-Adding a trace record requires a timestamp. Are you saying that you
-want to trace (for example) timer_get_us() in the normal case, but
-want tracing to be automatically disabled for that function only when
-it is called from the entry/exit functions?
-
-To me that seems more reasonable, although I worry it will paper over
-problems that people should look at, like having a trace-safe timer.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
