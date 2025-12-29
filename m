@@ -4,85 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC97E92724
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 14:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6D0D3B7E5
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 14:45:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 369A283DFF;
-	Mon, 29 Dec 2025 15:42:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D79B836A3;
+	Mon, 29 Dec 2025 15:45:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VCQhofy3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QQ+CwpbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EDD183E0F; Mon, 29 Dec 2025 15:42:17 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 32DF883DE4; Mon, 29 Dec 2025 14:27:36 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F397183DDF
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 15:42:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25C9583DCA
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 14:27:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-3e0f19a38d0so6569593fac.0
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 06:42:14 -0800 (PST)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2a09d981507so66733385ad.1
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 05:27:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767019334; x=1767624134; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767014838; x=1767619638; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KbU0SBlhStmdN6cnUxESldCK/mke8rwFtSRFBSRD92s=;
- b=VCQhofy3zAnmO74HOhv81iLButUPtLqxqXDkEsB4DbV9+yJOB80qI0x6UPeUeOo3Tn
- lfdDxxFxFyQV6LavShJVFUAixHxl/pNV97uQrkMwJu5YF23GeSVwKLrU9uEIgDdmi1vr
- 4OsYpEm+FQD5ghH8Sp+dTbPnTxrvJjtT6xqyc=
+ bh=4T+9o336SkmuAk1EyKQ8ulFneKs66tn8uOB4VD4m4Xw=;
+ b=QQ+CwpbFYNMS5ZHhf9/BzODJ4hfbwCYAdYXh2XaklTaTnq1RfuDNdel4wcm+nzkRCe
+ X24QNmLcNfY+1PohWjCvyTeHcvRNdRYkGLvnpPnWNsV85yHhiaGeWXOGs0wYyr6sRpPg
+ 484v/0y8O7qhKutVvonsdm4dsVBPqrFnWr/ArAYdrjEsMygqEHHsHUFwoN7rBkOJHttg
+ LO8KYmoBnWROV4X79Zs9BLhoATY6QZoMRzFsy/ihJ9eRQyqHrCN0/G+rMSYU3cwV3YJK
+ Id4hYs7AQpviG3xy9jn0Qu/weyNzB0mpo7e97OJLpwvKFHwCOublb95ZdH47sEymQqH2
+ 70Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767019334; x=1767624134;
+ d=1e100.net; s=20230601; t=1767014838; x=1767619638;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KbU0SBlhStmdN6cnUxESldCK/mke8rwFtSRFBSRD92s=;
- b=tJXgsDC8yOFG8bBQK80AAsrj5bfwsph6AJePAqb5YQzGslKCJtb66Q+78Zuz/MwvdA
- rjIvtdWBPx1tAfn4YsoMH2l19aw+OOXG3XFcedzRsIozfp0GWtGyZtlIl15Sv6aCgG2e
- tslzhK/U2WOe+VED0e0Avg6+KcElmO5+ZzjF3aEvaSZxMsvhcf/8d6pS2/U0vplyGcGI
- RfqU7BbbNlYZuMrrppexmdfO9T8ROaE73u3ysKoKwNJqARN080CtATEVaVVrrjAiSs2T
- Sz54Y40gE8c7kk7a67urVRwFyrb8uoXfTW0diTKZho/DH42YZunzb+Yypu0QzfEiGYKU
- Fx3A==
-X-Gm-Message-State: AOJu0YxmFOhwDVOWHdE5K6huwIkKbVYq5vrjJtN4/pKP8H+Yw87rBp3K
- PA6Sel6mpnyyzrB8eQfb2gmQ4Ifj6X2jC12mdsMzJzaFpfMva3jYREExzQHUNc56dVhHfwK0H6q
- 583HhMX4=
-X-Gm-Gg: AY/fxX6OL41L+p/BRzLjTinUHm0AI90MB3rRqp+fJk+cw0Rc3CgMdJ51YvIVXfkolbD
- 4NnAdJdWZXIL/+e5wvXkJWIDi6G0bkp4AzUtcbCyTAu+mKCU+wr7EApbqQ84Gfjp/Ck5BKc42sf
- A74CZTUC753zAAEd96LEGZf5e2ZbSfikSg2JYxhJ0NNkwsn60dYLQAq7ufhv77NZgU0YNxEIngj
- 8lrz2/dIMEP2L/9izfZJ6yXqwSv2hjq4i56vao3NLLf/EI4HoFrmx+puuv3T7l35WfpHXBna7Hx
- uGpdSwHWkH+MIeaO44rfS8DAUl6jBMHacyVpRcdOS1sPnU6M/S4ADd8pdVZu+cArXfJcZA1KlWA
- CT+WLTt6x7+YBFctEaoN0Gt5QwXMvCk+kQho7lgststS30jQ54vASCFMjGj1CmiYMX2XfukC0ev
- qVgF2cJw3B2ChoJ84fCRxlq5j3UD1tjARLaVMnO2ANbgWH3+ZrtyGGGRqamZn3lEZHqbYb65tgp
- pvL9+VCau99iPJsUkDntD8AjyDeG4E/n/mz8oToH102GUfW4A==
-X-Google-Smtp-Source: AGHT+IH2W7WqP2dekkEYVuGFXseKNEThwHRTqyd+UhVkBpedUCB14GccXJXTlmP5r5M5xGpzmraGGA==
-X-Received: by 2002:a05:6870:b52a:b0:3e8:9b86:3c6b with SMTP id
- 586e51a60fabf-3fda58e33abmr17190336fac.44.1767019333660; 
- Mon, 29 Dec 2025 06:42:13 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaab65763sm18808753fac.13.2025.12.29.06.42.12
+ bh=4T+9o336SkmuAk1EyKQ8ulFneKs66tn8uOB4VD4m4Xw=;
+ b=FHQeBCJotcdM2c8vhiK6NfXuEzwa1xegnIQp5q7A/nZJF1PFvPxIe188YMo8cDcKzl
+ n1QP0jPFJMdPWtmhMEIw3nWPrXy4O/bcDCWSCamMv2qMQV+UgJuAUSlZ0jGN6QyCgySK
+ JbIw3OEhlOCjV9r1d1qUlk8C8MrUPFEd43gjuGPXYkdakGNdwYoZSunliHlzzzAybd9b
+ wrBQwTCE474n6cM16z4dFxUwnckn1qNpk9y0Kw1NB0AAnVlrn60Ja/HbUlLtCh8mJq9x
+ hQZTytMm7NL4JEKdrrpqE59lMPmZvEmA0u527NzySVjvHeLA2XCQWluHptTmZa+fmSSB
+ bNrQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzx9mzsELQrywV8Zkj56pb+8G0qEi7HJXN5vZGBMkT/YuKuegkFiC4iNPXOgLV70m9yraR6c8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5N9PxdSVSN5lqjTCzOXVQ1b+H5claBNNKzwAr3bJm++PNQB8W
+ BuWF38/OVNqhrdXa9Y9JDd0jnmR6/uxqcGP3OOyKomcgnjv01bR5wsBl
+X-Gm-Gg: AY/fxX4ddZsOpHaD/8FKl44xrXHJFJRhjfMtkwkyIomVlNcGe81weRqNcKGRRQrV0oR
+ m1IOIKzeKtQIq9AYiS54kEzYOJM0CDh4wpDTE9nvOWjJ0B6+q8qFQt6r7qrC3wENGZs9Pd1KnWr
+ GySMxHQCL9iRvRbSNc95vnQ7wrOJKn7b1f1riuysOotpG0oDQ71l2S6QoQBpCe2yzlLlfXwt/+1
+ 6wt2J5FRzuEv2QIKNMRmvST35BRooKddSS6ntyn1CrPzul9ltjkLtAYIKuefatLLJz+jrgRTFA0
+ UxVouktFPv15REcQl5fs7iytgwFhn6NMmjI4SrCrcgWEqXyu/tti9a6J1kCKO/pn65gyVnnarD5
+ peX3Es/Kc800Cd35bbZk1yJSq+lSV//YMLj0SQ7r+JtKPoQiyqLhMRtMcF5KCeUpYvK+vnbn2to
+ cVXlJz2DnIvvtrlslUbqGM/T3y
+X-Google-Smtp-Source: AGHT+IEYzY7e9Iy7rnvDwasiwKfhEzGQ58Ihh0U1EmZtPt0XXU28eRITrHMeW2N9+0mXY5TkkfXUYg==
+X-Received: by 2002:a17:902:e845:b0:2a0:7f8b:c0cb with SMTP id
+ d9443c01a7336-2a2f0caa42amr344756215ad.4.1767014838324; 
+ Mon, 29 Dec 2025 05:27:18 -0800 (PST)
+Received: from google.com ([2402:7500:499:de94:39b1:7962:379a:1a23])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a2f3d76ceesm277575085ad.91.2025.12.29.05.27.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Dec 2025 06:42:13 -0800 (PST)
-Date: Mon, 29 Dec 2025 08:42:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: u-boot@lists.denx.de, Tien Fong Chee <tien.fong.chee@altera.com>
-Subject: Re: [PATCH v1 3/3] Add CoreCourse socfpga Board
-Message-ID: <20251229144211.GO710860@bill-the-cat>
-References: <20251228223821.22260-1-briansune@gmail.com>
- <20251228223821.22260-4-briansune@gmail.com>
+ Mon, 29 Dec 2025 05:27:17 -0800 (PST)
+Date: Mon, 29 Dec 2025 21:27:13 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Daniel Palmer <daniel@0x0f.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com,
+ me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/4] m68k: Add support for M68040 CPU
+Message-ID: <aVKBsTYOxu82pFHs@google.com>
+References: <20251226175400.1154417-1-visitorckw@gmail.com>
+ <20251226175400.1154417-3-visitorckw@gmail.com>
+ <CAFr9PX=JzXVa-HTvV-Cbw3m+kvwYP_7RiG_jE8+WW+KKG59unw@mail.gmail.com>
+ <aVGFEFCFKsmYIT0b@google.com>
+ <CAFr9PXkL8pDrtM86pmaw3U9RXCH2z-33X4hjqKUiJQAnQk-K0g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="V7Mcgr6A4sZLfIDS"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251228223821.22260-4-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFr9PXkL8pDrtM86pmaw3U9RXCH2z-33X4hjqKUiJQAnQk-K0g@mail.gmail.com>
+X-Mailman-Approved-At: Mon, 29 Dec 2025 15:45:36 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,36 +106,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Daniel,
 
---V7Mcgr6A4sZLfIDS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Dec 29, 2025 at 10:54:45AM +0900, Daniel Palmer wrote:
+> Hi Kuan-Wei,
+> 
+> On Mon, 29 Dec 2025 at 04:29, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> > > Connecting GDB and single stepping to work out where it is going would
+> > > be helpful.
+> >
+> > I did attempt to investigate this using gdb, but unfortunately, the
+> > root cause remains elusive. memset itself appears to execute correctly,
+> > successfully zeroing out the global data. However, using it seems to
+> > trigger a side effect where initcall_run_f() returns (which should not
+> > happen), leading to the hang.
+> 
+> Maybe a QEMU bug? If I get some time I will try to reproduce it.
+> 
+> > > Since there is now a goldfish RTC driver upstream
+> > > (drivers/rtc/goldfish_rtc.c) we could take the timer part from my
+> > > version (https://github.com/fifteenhex/u-boot/blob/mc68000/drivers/rtc/goldfish_timer.c)
+> > > and supply a real timer to the board. Right now I think anything that
+> > > uses delays will get stuck constantly reading back 0?
+> >
+> > My original plan was to focus on a minimal boot to shell support in
+> > this series and add rtc/timer support later. However, if you prefer to
+> > have them included in this series, I am fine with that.
+> 
+> I looked at adding the timer parts of my "goldfish rtc" driver to the
+> upstream one and it's not very clean.
+> So I have removed the unfinished RTC bits from my driver and moved the
+> whole thing to drivers/timers/.
+> That seems like a better way to go. I think having working delays etc
+> would be nice even for the initial support.
+> I guess if you send your initial stuff and someone asks "why is there
+> no timer?" you can tell them I'll send a driver for that in the next
+> series?
 
-On Mon, Dec 29, 2025 at 06:38:21AM +0800, Brian Sune wrote:
-> Enable CoreCourse Altera GEN5 Cyclone V
-> board build support to mach-socfpga
->=20
-> Signed-off-by: Brian Sune <briansune@gmail.com>
-> ---
->  arch/arm/dts/Makefile         |  2 ++
->  arch/arm/mach-socfpga/Kconfig | 14 ++++++++++++++
->  2 files changed, 16 insertions(+)
+Sure, I will add rtc and timer support in the next version. Thanks!
 
-These changes should be in patch 1 or 2 itself, depending on the board.
+> 
+> > Since the timer driver is authored by you, I assume I should add
+> > Co-developed-by and Signed-off-by tags with your name to credit you
+> > properly. I wanted to explicitly ask for your permission first.
+> 
+> If there is anything in my branch you find useful you have my
+> permission to just copy and paste without adding any tags etc.
+> Credit is nice but I don't really mind.
 
---=20
-Tom
+Got it. Thanks.
 
---V7Mcgr6A4sZLfIDS
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> > Also, regarding the tags, would you prefer I send the integrated patch
+> > to you privately for verification before posting v3, or is posting it
+> > directly to the list fine?
+> 
+> Can you put the branch on github or something for me? If you send me
+> patches I'm going to have to import them to my local checkout to look
+> at so if you have a branch I can access that's less steps. :D
 
------BEGIN PGP SIGNATURE-----
+Sure, I will push the series to github and share the link.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVKTQwAKCRAr4qD1Cr/k
-Cu3yAPoC4RhpCIZQOHndHXfYH6cpa1g8jPLQbTcttvnA0iVWfgD6A7L3MLTIi4r1
-C5d/iAa86ERKy60wXnmhwfM5HgAL3ww=
-=iVtj
------END PGP SIGNATURE-----
+Regards,
+Kuan-Wei
 
---V7Mcgr6A4sZLfIDS--
