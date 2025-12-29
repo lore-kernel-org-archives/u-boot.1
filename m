@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E78FE92FE0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 21:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE4EE92FE2
+	for <u-boot@archiver.kernel.org>; Mon, 29 Dec 2025 22:37:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C61A83EF9;
-	Mon, 29 Dec 2025 22:16:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 63A2283F0A;
+	Mon, 29 Dec 2025 23:37:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="llkrv44r";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l/1cyvnf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25E0583F0A; Mon, 29 Dec 2025 22:16:29 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 08FF283F26; Mon, 29 Dec 2025 23:37:26 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A12683EA6
- for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 22:16:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70B7183EC8
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 23:37:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dg8Cs2j53z9tLX;
- Mon, 29 Dec 2025 22:16:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767042985;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3WLSBBEsJyI9oirX5r/GhurjzPMtx4wxD+9Lb39ijWI=;
- b=llkrv44rvMjWYZqmXRwbx/UZCGyC3+CcFM3VYbXUvywQrdV+kp8px9hk2p+9Q8oum1k1b/
- itJSqVBTPNfF/8wn4jRa8aT+JaLjwnHawFL4E2P78zyXqauwhy36Ik0tOhT3pY2syHtY+x
- A7AnefmZJ1b9RoTNw0Y3+benSpgqWeafF5S4RN0EdC0mVvZp30r5Q4Cw4vnRJMAjiFd8LO
- HeHw8OvNYcQdOdn3lFkk4RUF9FWD3Q7yC/l24eCS13+llZiV7ibccpuhT7pn/o0rs8rlWR
- i+ikFyfp7/mt6Ln903WdAc4cb/ejwP6IenqSCZ0osZ0N/+W1tqs1IfcmFsyRYw==
-Message-ID: <9a56b395-3cc8-437a-b3d1-4629f1f47481@mailbox.org>
-Date: Mon, 29 Dec 2025 22:16:23 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c7533dbd87so7042240a34.2
+ for <u-boot@lists.denx.de>; Mon, 29 Dec 2025 14:37:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767047842; x=1767652642; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JED+bTPFGYwok9V8VC3/DTPyZhRQetWMapYgJSKsmEY=;
+ b=l/1cyvnfxtgTJTwldC2w5uuZ185uYw6383cIvWM/xJ/dx+vTR3yfabIPlHS5i6YR6k
+ fYeit8OeHpT7UkwI7ieA5GSIojcMnA9Izo/04Z/5lhp3EwwjVxC5/XpAITBY608JAVe9
+ PSx0IDIGCYB8mU2bMvYQmaQc53/BHPOR6iVPo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767047842; x=1767652642;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=JED+bTPFGYwok9V8VC3/DTPyZhRQetWMapYgJSKsmEY=;
+ b=ZGQCM9Ppd0LNmxSdT0gcD5hb9F5D4NDKa8izcA2dwQZDZNPQqFwEuE9JOuR6yrLvkF
+ oS1hT4huu1Mnz/hJKM8kX1betUcGjWF8nKG7G+Z9STwJndTki66E5TqR9uUIO3Trpb3+
+ 5nMCbikmu6Xe2nvKATPFUq6qmycwxLuzPnOykfHAwq0m6iikkGiIGvvdKLDWD5jQgm1W
+ 86aVtlVBxrhlSggkqphQLj+k3uuIJRs6HzETq4ZuuaL9BwBJIYQCk2DoAHUowi56DjH8
+ GiJQR2R2JpGghS6qhVmyUHggBCsG9QafI+pYgfPL0BDTiZc5oMIBQOa/bnHh/PtqNM7C
+ olzQ==
+X-Gm-Message-State: AOJu0YzxK9vtw1H2LxV+YLJim2BMNouCQyYSl+sNjZ3iIUIcMJEZD84S
+ cFeluVagcNLWsX7gswFvLF/piy9PuX+OuFK5n8EEgVCs9Ew+r/Og42AErRjM1m8OKAY=
+X-Gm-Gg: AY/fxX6ZKBizVjEd+82hVjolaZ5Aoxw4exRYQGxEudYBAxpZsNBMIQTc4YLIOtoiJf8
+ MTLcqmKb5qP/elDfWrSq7MSgdyk/kWaaw3DsaruW3xqlb1vowh5U+V8RBVl7vXn+FXd0UVmU+07
+ o2KW7QAYlR0z/YTb9ie4fLyLrdioi32fsxPezbdVtaIYJHOz4K3gv0YngPUnKHOfR8QdCehcBAt
+ LQmJvbfyUf3xICqtQceVZ8dJhfT9UZLoozljjzmntLYGf90q3O9ymMGJPVQduaYtykYMpQflT/X
+ P5/dGwTt+B66o4C5iBACfLd+wJD5WBijKxJNbcLnKsHPGSzevAhr5/SjDx91W76wFWXyTtFCim1
+ BnDbY6SB8xIoF57+mN7eaCAkf79qIDJT7GkpfUxxsLEBgEPNeJ7pU+AMkBJjcq6ZM78dgeC/G3Q
+ X4MS/77yA4VZlRYM+z9DNUjNx9hiVtUC9QdDGhSQpilROv6M80m99XtXfJYvyqgF0qRRSLnBZqs
+ CgoD4X+RXo09kb66TdliZLgLo/GeWlmusEFew==
+X-Google-Smtp-Source: AGHT+IH0kDbAomg0MPNiX6K/j4uzhhoaJkZSAB/r+L1rFrOn4hlZb3EglwmVIgXhmdYZT3X7grSn1Q==
+X-Received: by 2002:a05:6830:264a:b0:7c5:3045:6c79 with SMTP id
+ 46e09a7af769-7cc668bdd63mr16823347a34.1.1767047842117; 
+ Mon, 29 Dec 2025 14:37:22 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667284fdsm21623639a34.2.2025.12.29.14.37.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Dec 2025 14:37:21 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20251229181523.3450679-1-festevam@gmail.com>
+References: <20251229181523.3450679-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20251229
+Message-Id: <176704784133.3602672.17304390055851398654.b4-ty@konsulko.com>
+Date: Mon, 29 Dec 2025 16:37:21 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] clk: renesas: Do not enable MSTP4 extra modules on
- R8A77995 D3
-From: Marek Vasut <marek.vasut@mailbox.org>
-To: =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251228220717.3630713-1-niklas.soderlund+renesas@ragnatech.se>
- <20251228220717.3630713-2-niklas.soderlund+renesas@ragnatech.se>
- <1fd09fd2-0603-4347-b27e-4c041069db48@mailbox.org>
-Content-Language: en-US
-In-Reply-To: <1fd09fd2-0603-4347-b27e-4c041069db48@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: m6org69z1b98wucoiksf8qsnoy1ndtj9
-X-MBO-RS-ID: ac2578db6f6c7c51384
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,15 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/29/25 12:07 AM, Marek Vasut wrote:
-> On 12/28/25 11:07 PM, Niklas Söderlund wrote:
->> Since commit a2bd99549c61 ("clk: renesas: Tear clock controller down
->> last before booting OS") enabling the module gated by bit 8 in MSTP4
->> prevents Linux from booting. The bits 8 and 7 of MSTP4 where only
->> documented in early versions of the datasheet and have since been
->> removed.
->>
->> To allow Linux to boot update the MSTP4 enable value to reflect the
->> hardware default, 0x80.
-> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Applied both, thanks !
+On Mon, 29 Dec 2025 15:15:23 -0300, Fabio Estevam wrote:
+
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit f24a2124d26eb6b1aab3b20923359ede80105a8b:
+> 
+>   Merge tag 'efi-next-20251225' of https://source.denx.de/u-boot/custodians/u-boot-efi into next (2025-12-25 11:31:11 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
+
+Merged into u-boot/next, thanks!
+
+-- 
+Tom
+
+
