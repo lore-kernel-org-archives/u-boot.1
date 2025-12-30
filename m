@@ -4,76 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8D3EE0213
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 15:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCE3EE0218
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 15:48:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C51583F53;
-	Tue, 30 Dec 2025 16:45:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id EB8B583F7D;
+	Tue, 30 Dec 2025 16:48:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="F8VKW96A";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="12CfYiyp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 196C783F70; Tue, 30 Dec 2025 16:45:51 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E5EBE83F7F; Tue, 30 Dec 2025 16:48:53 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5643A83DA9
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 16:45:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C967683F6A
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 16:48:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=manjae.cho@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20251230154545epoutp04764d0dc66ed87aed684f730eb74be911~GCMTnyyEq1304513045epoutp04Q
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 15:45:45 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20251230154545epoutp04764d0dc66ed87aed684f730eb74be911~GCMTnyyEq1304513045epoutp04Q
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1767109545;
- bh=wINHWN8O5NRubWx+JWqF+AkoY7ieIHr+V2vw8skbmRk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=F8VKW96A3x4GIgWHYdLYCNl1XhduEgMAtm5Fe2tggnvcLDj3c0s1TOEEqNHerNoXj
- CQ4jbV3MEyd1vnXcb+uLHRvxtqj+J1oNw2LqNKUfWnFT0ovmplqchQf1uvByL3p3Wk
- p1lkInEWahoFQY5wpt7y1kT6spwYJkn+DQ7H32d8=
-Received: from epsnrtp01.localdomain (unknown [182.195.42.153]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPS id
- 20251230154545epcas1p3dd360b75066935abb9a4f2d40067026f~GCMTXcjcJ2016520165epcas1p34;
- Tue, 30 Dec 2025 15:45:45 +0000 (GMT)
-Received: from epcas1p4.samsung.com (unknown [182.195.38.117]) by
- epsnrtp01.localdomain (Postfix) with ESMTP id 4dgcqr6dlBz6B9m4; Tue, 30 Dec
- 2025 15:45:44 +0000 (GMT)
-Received: from epsmtip1.samsung.com (unknown [182.195.34.30]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20251230154543epcas1p1fccdde722bb4c0c3de6e64ef12d4a334~GCMR7Wahk1941219412epcas1p1A;
- Tue, 30 Dec 2025 15:45:43 +0000 (GMT)
-Received: from manjaecho-VirtualBox.. (unknown [10.89.15.251]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20251230154543epsmtip18ae083cc502cf58bca8d4c50d872d087~GCMR5R03-3032630326epsmtip1N;
- Tue, 30 Dec 2025 15:45:43 +0000 (GMT)
-From: Manjae Cho <manjae.cho@samsung.com>
-To: u-boot@lists.denx.de
-Cc: heinrich.schuchardt@canonical.com, trini@konsulko.com,
- sujin.u@mobis.com, Manjae Cho <manjae.cho@samsung.com>
-Subject: [PATCH v2 2/2] doc: emulation: Add network testing documentation
-Date: Wed, 31 Dec 2025 00:45:29 +0900
-Message-ID: <20251230154529.29724-3-manjae.cho@samsung.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251230154529.29724-1-manjae.cho@samsung.com>
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b8018eba13cso1556839166b.1
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 07:48:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767109731; x=1767714531;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jYKyCI3OyUGHxkKyVo2hnaial7OcyYRBSgZhycM8A6U=;
+ b=12CfYiyp8Ccw/SPgMw/NIgFAb9EeVaFVSY/7CXC5I2IELIiQAl0mHEabIqpTYJq1Ds
+ uZqzCdxEZ+d0JMbF+4Xiig84ywH4mNRcvCO9DACPfDMjueGpB6NWaEHLrkLvS56WpqZJ
+ Bxt97Zyt8vJRMLW7ehYr9Ky8q/mqz/hkUW7ExTatnJlsf4zmq61k20vrLJJpUleLdO7U
+ u6iehE+77Ks/vSNC1CshJyZfiCl2BThjM/70qAncmOy+DtLtkfpEc1wOsLSZLsQStN4I
+ uX4KShjUWQf6IPi8WbdhRWjUaY1xx77SNKlalLrx0o4r7eEHOiOb7HtPXWIsg/sa2cSZ
+ yPdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767109731; x=1767714531;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=jYKyCI3OyUGHxkKyVo2hnaial7OcyYRBSgZhycM8A6U=;
+ b=fbaGAdowHNbPACQ696Nd3lyMXm0Vy4aktq9xYfY/s4pMw+y7gnPXMnDMcwf6nTI2Hq
+ zL4zXXNMphJko6Q+sgCGMepmqYzu76KMf7q9ihc02xUwDcKYk3Ds2VPQne54IKhbecyL
+ WHI/iTQlbeFujsvcWbGAdd9GBUeg+oMi4VRGQfIxX/HUBbgUWBPrLffEQ1HKRNHj4TsN
+ PlLH6OYcRfUw2SC40G8BgwAe8/u8Y8wYtCGniOWBAX1lB47xWTetXv9r/M2UxEEVKHep
+ nP0kNVgIYTVvh4GlY/2B6EA4Bc3L+7UwSpUqBtn6uS/yFl5DrOz7wIpJueYCscewWyjC
+ dCYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUvEmYSgXVyieUXq7iHrEB7izrxJRrdvFdl6hNT1ZlLuacNVBlKqvlsW0Z5g1RN5q/GKhdZaE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwVWE8oE9wbONSloDy8bR1u927w/IM1mdXdoWgnRgGnU+Pjbj9n
+ PlFQJisrceN+l7i7mauVplir/D0Y4ZjUCTngyLqEaMDZkPzSYZx+0NI55zVaizwwF2L3djl6oq1
+ Qd4AymqhgKws2ppBk2e9ZXl0x439XW3XQ+cuHIyOiaQ==
+X-Gm-Gg: AY/fxX6nnIQS5mOHQIp8Tqn/W8JrNLGRMUw3EXsuMiFiotzJta4RcnMJliLngKxE/Rl
+ 4FGkguGCJUuNXdRAE2BAG5BfZVi3bq8/YiIgULOHYshpexhksO1CMmpr9TDBsVMc+AUrX1rRaWi
+ oYBspKrP77p4sGD2/AtfN7/XW3mgGbXdwBPygRkAblTtjl3jqOae+/ELeNr6wVXcUU1DXPiqjJZ
+ mm6xlNt26CjOlxeEuE47Er09OLpFFTrAHlzsXQAG9Teqiq2lz/Xng8immLbeRc02VsSvxEyzMXC
+ ZxU3cNl+ooa2JjeCh2iHrsGuAPh9tx95Jn/0KyQ=
+X-Google-Smtp-Source: AGHT+IEZtOX4ZYKCe15igZcW1Cwvi4alZTd/BV3uXWkd97loux47/EI/hvld9wMzCSgE4ah4vT7RM+s4CAFC/Fktprw=
+X-Received: by 2002:a17:907:94ca:b0:b40:b54d:e687 with SMTP id
+ a640c23a62f3a-b80371d1dd3mr3616301766b.47.1767109731177; Tue, 30 Dec 2025
+ 07:48:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20251230154543epcas1p1fccdde722bb4c0c3de6e64ef12d4a334
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-cpgsPolicy: CPGSC10-702,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20251230154543epcas1p1fccdde722bb4c0c3de6e64ef12d4a334
-References: <20251227142036.10661-1-manjae.cho@samsung.com>
- <20251230154529.29724-1-manjae.cho@samsung.com>
- <CGME20251230154543epcas1p1fccdde722bb4c0c3de6e64ef12d4a334@epcas1p1.samsung.com>
+References: <20251218-clk-mtk-mt8365-fixes-v1-0-4f8ff0de3268@baylibre.com>
+ <20251218-clk-mtk-mt8365-fixes-v1-4-4f8ff0de3268@baylibre.com>
+In-Reply-To: <20251218-clk-mtk-mt8365-fixes-v1-4-4f8ff0de3268@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Tue, 30 Dec 2025 16:48:41 +0100
+X-Gm-Features: AQt7F2rVsfp9pochwDDqi5mqo9bU3Z55yx8m7ZU2hvHQWO0gEu4JdA18wuH8lKs
+Message-ID: <CAEHHSvba7Lr0DvGu8Zd_nZvbsCyft7AZe+oqOahqR3WLNaMs3A@mail.gmail.com>
+Subject: Re: [PATCH 4/9] clk: mediatek: fix fixed clock parents
+To: David Lechner <dlechner@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,101 +102,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add network testing documentation for QEMU emulation based on actual
-runtime testing with qemu-system-riscv64 and U-Boot.
+Le ven. 19 d=C3=A9c. 2025 =C3=A0 00:24, David Lechner <dlechner@baylibre.co=
+m> a =C3=A9crit :
+>
+> Add a flags field to struct mtk_fixed_clk to allow properly resolving
+> the parent clock. All chip-specific clocks are updated to populate this
+> field correctly.
+>
+> The parent is currently only used for printing debug information, so
+> there are no functional bugs being fixed.
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  drivers/clk/mediatek/clk-mt7622.c | 23 +++++++++++++----------
+>  drivers/clk/mediatek/clk-mt7623.c | 33 ++++++++++++++++++---------------
+>  drivers/clk/mediatek/clk-mt7629.c | 23 +++++++++++++----------
+>  drivers/clk/mediatek/clk-mt7981.c | 21 ++++++++++++---------
+>  drivers/clk/mediatek/clk-mt7986.c | 21 ++++++++++++---------
+>  drivers/clk/mediatek/clk-mt7987.c | 19 +++++++++++--------
+>  drivers/clk/mediatek/clk-mt7988.c | 29 ++++++++++++++++-------------
+>  drivers/clk/mediatek/clk-mt8183.c | 12 +++++++++---
+>  drivers/clk/mediatek/clk-mt8365.c | 16 +++++++++++-----
+>  drivers/clk/mediatek/clk-mt8512.c |  7 +++++--
+>  drivers/clk/mediatek/clk-mt8516.c | 12 +++++++++---
+>  drivers/clk/mediatek/clk-mt8518.c | 14 ++++++++++----
+>  drivers/clk/mediatek/clk-mtk.c    |  3 +--
+>  drivers/clk/mediatek/clk-mtk.h    |  4 +++-
+>  14 files changed, 143 insertions(+), 94 deletions(-)
+>
+> diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk=
+-mt7622.c
+> index 9621d5efe11..93e87ee399d 100644
+> --- a/drivers/clk/mediatek/clk-mt7622.c
+> +++ b/drivers/clk/mediatek/clk-mt7622.c
+> @@ -85,6 +85,9 @@ static const struct mtk_gate apmixed_cgs[] =3D {
+>  };
+>
+>  /* topckgen */
+> +#define FIXED_CLK0(_id, _rate)                                 \
+> +       FIXED_CLK(_id, CLK_XTAL, CLK_PARENT_XTAL _rate)
+> +
 
-Tested and verified:
-- VirtIO network device detection (virtio-net-device)
-- DHCP client functionality
-- TFTP file loading from QEMU's built-in TFTP server
+Hi David,
 
-The documentation covers VirtIO devices for both MMIO-based (RISC-V)
-and PCI-based (x86) machines, with practical examples of U-Boot commands
-and expected output.
+There is a typo here: s/CLK_PARENT_XTAL _rate/CLK_PARENT_XTAL_, rate
 
-Signed-off-by: Manjae Cho <manjae.cho@samsung.com>
----
- doc/board/emulation/index.rst   |  1 +
- doc/board/emulation/network.rst | 58 +++++++++++++++++++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 doc/board/emulation/network.rst
+>  #define FACTOR0(_id, _parent, _mult, _div)                     \
+>         FACTOR(_id, _parent, _mult, _div, CLK_PARENT_APMIXED)
+>
+> @@ -95,16 +98,16 @@ static const struct mtk_gate apmixed_cgs[] =3D {
+>         FACTOR(_id, _parent, _mult, _div, 0)
+>
+>  static const struct mtk_fixed_clk top_fixed_clks[] =3D {
+> -       FIXED_CLK(CLK_TOP_TO_U2_PHY, CLK_XTAL, 31250000),
+> -       FIXED_CLK(CLK_TOP_TO_U2_PHY_1P, CLK_XTAL, 31250000),
+> -       FIXED_CLK(CLK_TOP_PCIE0_PIPE_EN, CLK_XTAL, 125000000),
+> -       FIXED_CLK(CLK_TOP_PCIE1_PIPE_EN, CLK_XTAL, 125000000),
+> -       FIXED_CLK(CLK_TOP_SSUSB_TX250M, CLK_XTAL, 250000000),
+> -       FIXED_CLK(CLK_TOP_SSUSB_EQ_RX250M, CLK_XTAL, 250000000),
+> -       FIXED_CLK(CLK_TOP_SSUSB_CDR_REF, CLK_XTAL, 33333333),
+> -       FIXED_CLK(CLK_TOP_SSUSB_CDR_FB, CLK_XTAL, 50000000),
+> -       FIXED_CLK(CLK_TOP_SATA_ASIC, CLK_XTAL, 50000000),
+> -       FIXED_CLK(CLK_TOP_SATA_RBC, CLK_XTAL, 50000000),
+> +       FIXED_CLK0(CLK_TOP_TO_U2_PHY, 31250000),
+> +       FIXED_CLK0(CLK_TOP_TO_U2_PHY_1P, 31250000),
+> +       FIXED_CLK0(CLK_TOP_PCIE0_PIPE_EN, 125000000),
+> +       FIXED_CLK0(CLK_TOP_PCIE1_PIPE_EN, 125000000),
+> +       FIXED_CLK0(CLK_TOP_SSUSB_TX250M, 250000000),
+> +       FIXED_CLK0(CLK_TOP_SSUSB_EQ_RX250M, 250000000),
+> +       FIXED_CLK0(CLK_TOP_SSUSB_CDR_REF, 33333333),
+> +       FIXED_CLK0(CLK_TOP_SSUSB_CDR_FB, 50000000),
+> +       FIXED_CLK0(CLK_TOP_SATA_ASIC, 50000000),
+> +       FIXED_CLK0(CLK_TOP_SATA_RBC, 50000000),
+>  };
+>
+>  static const struct mtk_fixed_factor top_fixed_divs[] =3D {
+> diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk=
+-mt7623.c
+> index 3509ea67e7d..093577c4ee4 100644
+> --- a/drivers/clk/mediatek/clk-mt7623.c
+> +++ b/drivers/clk/mediatek/clk-mt7623.c
+> @@ -259,6 +259,9 @@ static const int top_id_offs_map[CLK_TOP_NR + 1] =3D =
+{
+>         [CLK_TOP_AUD_I2S6_MCLK]                 =3D 158,
+>  };
+>
+> +#define FIXED_CLK0(_id, _rate)                                 \
+> +       FIXED_CLK(_id, CLK_XTAL, CLK_PARENT_XTAL _rate)
+> +
 
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index f8908166276..507c38825c1 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -8,6 +8,7 @@ Emulation
- 
-    acpi
-    blkdev
-+   index
-    qemu-arm
-    qemu-mips
-    qemu-ppce500
-diff --git a/doc/board/emulation/network.rst b/doc/board/emulation/network.rst
-new file mode 100644
-index 00000000000..6a08a6611b4
---- /dev/null
-+++ b/doc/board/emulation/network.rst
-@@ -0,0 +1,58 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Emulation of network devices
-+-----------------------------
-+
-+QEMU can emulate network devices for testing U-Boot networking functionality.
-+The device type depends on the machine architecture:
-+
-+* VirtIO (for RISC-V and other virtio-bus machines)
-+
-+  .. code-block:: bash
-+
-+      qemu-system-riscv64 -nographic -machine virt -bios opensbi.bin \
-+      -kernel u-boot.bin -m 256M \
-+      -netdev user,id=net0 -device virtio-net-device,netdev=net0
-+
-+* VirtIO PCI (for x86 and other PCI-based machines)
-+
-+  .. code-block:: bash
-+
-+      qemu-system-x86_64 -nographic -bios u-boot.bin \
-+      -netdev user,id=net0 -device virtio-net-pci,netdev=net0
-+
-+The 'user' networking backend provides a simple way to test DHCP and basic
-+networking without host configuration. In U-Boot, you can verify the network
-+device is detected:
-+
-+.. code-block:: none
-+
-+    => net list
-+    eth0 : virtio-net#0 52:54:00:12:34:56 active
-+
-+TFTP boot
-+^^^^^^^^^
-+
-+QEMU's user networking includes a built-in TFTP server. To enable it, specify
-+a host directory to serve files from:
-+
-+.. code-block:: bash
-+
-+    -netdev user,id=net0,tftp=/path/to/tftp/root
-+
-+From U-Boot, you can load files using DHCP and TFTP:
-+
-+.. code-block:: none
-+
-+    => setenv autoload no
-+    => dhcp
-+    DHCP client bound to address 10.0.2.15 (1 ms)
-+    => tftp ${loadaddr} test.txt
-+    Using virtio-net#0 device
-+    TFTP from server 10.0.2.2; our IP address is 10.0.2.15
-+    Filename 'test.txt'.
-+    Load address: 0x80200000
-+    Loading: *
-+             15.6 KiB/s
-+    done
-+    Bytes transferred = 16 (10 hex)
--- 
-2.43.0
+same here.
 
+Cheers
+Julien
