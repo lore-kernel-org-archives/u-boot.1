@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C54DEE020B
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 15:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 320ABEE0214
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 15:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2542F83F5B;
-	Tue, 30 Dec 2025 16:11:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6CACE83DE4;
+	Tue, 30 Dec 2025 16:31:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wt++A2ut";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QVls3AQ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8CC983F5B; Tue, 30 Dec 2025 16:11:51 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6175E83F53; Tue, 30 Dec 2025 16:31:21 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A40BA83DA9
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 16:11:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1377583DA9
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 16:31:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-64b7318f1b0so11917098a12.2
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 07:11:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-4510974a6bbso3024450b6e.3
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 07:31:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767107508; x=1767712308; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+WQgG7fQTxW5tFBAiwVAR5DEAeQDHBQrYDuB+kdq/c=;
- b=Wt++A2utcugi3kbA6kfoM5oB7SmuyAdm5uqSGN0PZwzT3hXB5szxa6IJjfLzh/Emop
- Wb9GPEOgPE2gjvozERcCEHrVAjzHkGfogtu7NBpdb3LKah+af3VvkMVFXKNY9GxK9X42
- ULa5l30BpMYQUQNnPUCgGrirdDcDJhtM7zqXI=
+ d=konsulko.com; s=google; t=1767108677; x=1767713477; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Qvw7cUpbJ/OLc71itHiugQizfujVbE8jXb65OSYFp4=;
+ b=QVls3AQ+Eb82ohD54Lnui6IJSeGWWH0aDN8NIm/ubfPylPk2IVJcoYUlMwMNgv4Uwy
+ TomgtfidFW5DZA0PD5ccKOZlhYcZ49ZIVN3ZwoMdB5f6HBEOJs6cHz3zQa2isYt2/VQc
+ BkvcBMruwCmIb/Ysb9fPNO5seLezItzOJIB+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767107508; x=1767712308;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q+WQgG7fQTxW5tFBAiwVAR5DEAeQDHBQrYDuB+kdq/c=;
- b=A6r6o5PhRKy4YyeM/lC5APfHfM+qaHlLrwE7nQdjQxqOMFD8BuOQjHQNn4JCAueQcb
- 6TCS/i77Ene9gBxZoejfdIZYRm+4Jq2lWrHuFBs+rXQMa1MbwuycUszWS5TG3GMhQKsB
- AWWIMMzjG9dKJMwO1T6zsS411CF/xAFrH3DCDkrhybRdpaELbmtNl82zeUmaWXPyH2AY
- VwqZYiV8c04MtppcdKXsUbAf8jDaA8KeuWrKHAtpPIBkqpbevLVJPCubYd3FnOkEK1pI
- S38OD52M/n6NjeqBF6jJCkBFEqKiA6SJLLZMtTso5cmPlMFIlJNBkhJ/l/KDS/+N6lVA
- r7eg==
-X-Gm-Message-State: AOJu0YxV6tmX0NZd1iT9dxi6GJCFZSpW0SYjSWNN704Pb6TpQZ0sh+VS
- HRzcFwwBI8kr8fexMzkuZLcofe0PmwpP+odGXRgLRxSuB1i/+zc76w4OEey3YFErwbYMUCEMloq
- SyWP3TxSgx18n9zuSWbUyl7uK/9ufmK+m5gycGlLw
-X-Gm-Gg: AY/fxX5qGeBDfYJwlqPOZr0TcoxSPNbl57Lh2KtepSbOxJRaNtuMnmhHz2WBNW8rMZ4
- go8YliXmzsjxf1hUtdYjGAZE2VEb0/0FKTpFgP4tcAfL/SC8ALwDYiaJ85C3ZEewQZAhyC+zTEr
- k66oDfdX9uZbvaKJ7gdLSv3E0oq2eQ9Lzyl0Q0+flAxCzNZdrPta61hTPzmg+fMF7VgjelLVCKs
- NTEJkKoOu1j9lG123SHhWYvNnO/JzO4rmBfU6XDK86+/YcH79VEHr0aR2KfI+Ly6r3PiF5LeaE0
- S1OZ
-X-Google-Smtp-Source: AGHT+IG+KZp/Io8NBIyCLyOzmxgL6WtLhXoshS/agX9GJVAARVFf2gtvH48lkvyJfhcblzwIalDE/54hxOQDMNOZjM4=
-X-Received: by 2002:a17:906:eecd:b0:b83:7b8c:7c5f with SMTP id
- a640c23a62f3a-b837b8c7d0fmr573671966b.1.1767107507764; Tue, 30 Dec 2025
- 07:11:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767108677; x=1767713477;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0Qvw7cUpbJ/OLc71itHiugQizfujVbE8jXb65OSYFp4=;
+ b=EBTcGwKZuvE/t0i2kT6n1C5s+E8iDaaL6ZIFCMiFSjchYHCRPWes7wU/mK2THcOUHH
+ UfXd6Qo6y22IqlV271H3G/adZvOUl4Ts+Ujd/nVgT7ZB+2/ft7nWCZgrKK5/boEMNKEH
+ U9FDGvssu3VkZ2dmzPVMtdWl6jCufawOhZ1Ys3ny8FKBOBeWvAdPYUHVB4QErPI4VkKZ
+ /dffNzl1h7mUehdMfnEj8DrEaxMAWzk9Y2skF5cUuwyZ4TPAYE/xmW1wFsYQt3PO8Z01
+ gvD1P1XSqts3ZWV5zdcxxQK3wuOsVbC3NXeSNJsHaN9BgNzrTWJEigqx6qW2gTHX/DcF
+ ySRg==
+X-Gm-Message-State: AOJu0YxmWY78YjUFBH1/yKLf3NOQhvEePyANN/mvbk6Ri8EiNYLqwbJd
+ NZU5DszFjHtb4NuCN5SepJPlfxcqFnQxX1Udt16Id/DFWqkeZmqTtOiT+fjk9E1j57uopaii9bg
+ LLAqcL5s=
+X-Gm-Gg: AY/fxX6+krZ554pbth1VwlERafOFbSHVixnzLNp+cluuSWx4OwjB6nRvUClC0OWsGtH
+ 9rBHrXUv3wnF291pYXGwafsUsaacgp6/so/2RizpbNyDLWkvccBP1ic/426TFv/E0FV8RWUtdxi
+ DD+6bnhtXoym+QpNxMkPxS+OpGQdkK1YwUtGHHEvLfK0nvNrfIXj1+GZqrPmhDB4g74etlyAFrI
+ oyvk/zTch1wKf6+ujRAqJEGpQkO0wUhPoqiIdJeeV/BMMf26h+Dnx5WaCpXa9z0/qsIOuiqHb3U
+ gHJ5M9db6CsQV0hmJtw60j4rMrsJzYvzZAxqUMKg+j/mXVDgwMwLOM4mhDRWKVTZjqzQc4OfhOP
+ BteePuKo2I2DuFD4deTS5UADkb2Qm7u8aKhjgLQTJbm5GqBQt8+lDK10hWV6z4mMIIs1CW3fx39
+ i8s4Ao0jKlt6mhH6EGy1pOHitFsm3UgBlxX6l0yAsPCXBWTioIUYhgo7yxLn4CxsR6AcLllvI4p
+ zB6MCKzxi2TV61/sRlx+Tr5K39lV6S48DQRdH0=
+X-Google-Smtp-Source: AGHT+IEqh156ycDa577D3aTXH/ao11geP43zUSRUJSvsAOmPuy92MaR17gKhkju1ndQ2bf6OPmmH4g==
+X-Received: by 2002:a05:6808:4fd1:b0:450:f3e4:eb0f with SMTP id
+ 5614622812f47-457b20ad5b6mr17152427b6e.20.1767108677630; 
+ Tue, 30 Dec 2025 07:31:17 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3fdaac0273bsm20501162fac.20.2025.12.30.07.31.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Dec 2025 07:31:17 -0800 (PST)
+Date: Tue, 30 Dec 2025 09:31:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jun Chang <jun.chang@metanoia-comm.com>
+Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+Subject: Re: [PATCH 1/1] board: mt5824: Add initial support for Metanoia
+ MT5824 EVB
+Message-ID: <20251230153115.GR710860@bill-the-cat>
+References: <20251230030328.215240-1-jun.chang@metanoia-comm.com>
+ <20251230030328.215240-2-jun.chang@metanoia-comm.com>
 MIME-Version: 1.0
-References: <20251201194857.2371332-1-simon.glass@canonical.com>
- <CAFLszTiS_hQbKnguY=ykyNOKk_hsMzBOAZAnOPjn7U49eunuFw@mail.gmail.com>
- <20251227144800.GJ710860@bill-the-cat>
- <CAFLszTib_BXUxdfkNTey0_r+RV9bKLwv6mqMd8P-ab-YevoWLA@mail.gmail.com>
- <20251227150651.GK710860@bill-the-cat>
- <CAFLszTg+yDdJ4TFPJF=_Z9f_aT7M1fuVCBc54sLcYfyfvvd97g@mail.gmail.com>
- <20251227203009.GM710860@bill-the-cat>
-In-Reply-To: <20251227203009.GM710860@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 30 Dec 2025 08:11:36 -0700
-X-Gm-Features: AQt7F2oVm26ItxY3AWfywo5I8g6b9oGjLxxHA194b-bL2_ASQsALacDrP28S8FQ
-Message-ID: <CAFLszTiNVr4SxM32sggDG8QxeshOBMz2ggKhdWTEp4tjuB=WUA@mail.gmail.com>
-Subject: Re: [PATCH] dm: core: Create ofnode stubs when OF_REAL is disabled
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Anurag Dutta <a-dutta@ti.com>, Christian Marangi <ansuelsmth@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Pavel Herrmann <morpheus.ibis@gmail.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MfqV83wNq6c6a2pg"
+Content-Disposition: inline
+In-Reply-To: <20251230030328.215240-2-jun.chang@metanoia-comm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,189 +101,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Sat, 27 Dec 2025 at 13:30, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Dec 27, 2025 at 11:51:02AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 27 Dec 2025 at 08:06, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Dec 27, 2025 at 07:58:10AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 27 Dec 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, Dec 27, 2025 at 04:44:07AM -0700, Simon Glass wrote:
-> > > > > > Hi,
-> > > > > >
-> > > > > > On Mon, 1 Dec 2025 at 12:49, Simon Glass <sjg@chromium.org>
-wrote:
-> > > > > > >
-> > > > > > > When there is no device tree there is not point in trying to
-find nodes,
-> > > > > > > etc. since they will all be null.
-> > > > > > >
-> > > > > > > Add static inlines to skip the code in that case.
-> > > > > > >
-> > > > > > > Unfortunately this makes the file a little convoluted and
-there are
-> > > > > > > two inlines for ofnode_is_enabled() and
-ofnode_first/next_subnode(). But
-> > > > > > > it seems better than the alternative.
-> > > > > > >
-> > > > > > > We could also consider splitting up the header file.
-> > > > > > >
-> > > > > > > Also add a rule in drivers/Makefile to compile ofnode.o when
-OF_REAL is
-> > > > > > > enabled but DM is not (for kontron-sl-mx6ul) and move the
-> > > > > > > ofnode_for_each_compatible_node/prop() macros outside the
-OF_REAL
-> > > > > > > condition, since they only use functions that have stubs.
-> > > > > > >
-> > > > > > > Co-developed-by: Claude <noreply@anthropic.com>
-> > > > > > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> > > > > > > ---
-> > > > > > >
-> > > > > > >  drivers/Makefile      |   4 +
-> > > > > > >  drivers/core/Makefile |   3 +-
-> > > > > > >  include/dm/ofnode.h   | 714
-+++++++++++++++++++++++++++++++++++++-----
-> > > > > > >  3 files changed, 641 insertions(+), 80 deletions(-)
-> > > > > >
-> > > > > > Any thoughts on this patch, please?
-> > > > >
-> > > > > I'm not sure what you're expecting for AI-developed patches after
-we
-> > > > > talked on the community call about not doing that.
-> > > >
-> > > > I haven't been able to join recently but should be able to join the
-> > > > one in a few weeks. Which meeting was it?
-> > >
-> > > The last call you joined, where you asked about briging up AI, and I
-> > > explained why I didn't think it was a good idea, and we should at
-least
-> > > wait until after kernel summit, which was going to talk about it,
-before
-> > > we do anything else.
-> >
-> > Oh, that call. Yes I heard what you said. I didn't got to plumbers,
-> > but Marek might have heard something.
-> >
-> > See this patch for the current state:
-> >
-> >
-https://lore.kernel.org/ksummit/20251114183528.1239900-1-dave.hansen@linux.intel.com/
-> >
-> > There will likely be a discussion next year about which tag to use.
-> > But I suppose this is relevant too:
-> >
-> > https://www.linuxfoundation.org/legal/generative-ai
->
-> Yes, and there's an LWN article about the summit portion. I also thought
-> the need to not worry about slop yet since it hasn't happened yet funny,
-> in light how of much slop gets posted everywhere else. And the comment
-> about it just reproducing kernel code anyways so no need to worry about
-> copyright reminded me of https://github.com/ocaml/ocaml/pull/14369 yet
-> again.
->
-> But the huge point was "no AI", which you ignored.
+--MfqV83wNq6c6a2pg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That's quite entertaining! I had vaguely heard about that one before. It
-shows the perils of people using AI when they know nothing about the code
-base, or even maybe software development. I hope you are not suggesting it
-has any relevance to my use of AI here!
+On Tue, Dec 30, 2025 at 11:03:28AM +0800, Jun Chang wrote:
 
-Since we are talking about the same meeting that I was in, we discussed AI
-and you suggested delaying a formal decision until the kernel maintainers
-summit, to see what they come up with. I agreed with that. It seems they
-are landing on 'disclosure', but certainly not a ban.
+> - Add RISC-V target for MT5824
+> - Add board defconfig and DTS for MT5824 EVB
+> - Add SPL and U-Boot board support for MT5824 EVB
+> - Add DDR init for MT5824 EVB
+>=20
+> Signed-off-by: Jun Chang <jun.chang@metanoia-comm.com>
+> ---
+>  arch/riscv/Kconfig                    |   4 +
+>  arch/riscv/dts/mt5824-evb.dts         | 232 +++++++++++++++++
 
-For reference, the LWN article is here <https://lwn.net/Articles/1049830/>.
-I read through some of the comments. I recently read a book called 'Don't
-Be a Luddite: Learning to Love Change in a World that Fears It' (it's an
-'airport' book, so I'm not necessarily recommending it) which has loads of
-examples about how each new technology generally hit huge resistance at
-first.
+What is the status on upstreaming this device tree?
 
->
-> > > > > That absolute briefest review I can give is that it didn't solve
-the
-> > > > > problem either, and so you didn't test it correctly.
-> > > > >
-> > > > > I was just planning to ignore this, rather than get in to another
-long
-> > > > > thread with you that I suspect few people would read.
-> > > >
-> > > > The problem solved is in the commit message. Is that the problem you
-> > > > are referring to, or is there another one? We can discuss it in the
-> > > > next call if you prefer.
-> > >
-> > > It seems like you forgot why you made this patch. But your patch also
-> > > doesn't solve the problem it states, which you would have also found
-if
-> > > you did more in-depth testing.
-> > >
-> > > This patch is I think a great example of why as a project U-Boot
-should
-> > > have a "Don't use AI" policy. If with all your experience with the
-> > > project this is the best you can get I fear others will have even
-worse
-> > > quality output.
-> >
-> > It seems like you have reviewed the patch and have some feedback, but
-> > you want me to guess what it might be? Is that correct?
->
-> Well, that's half correct. I could send along what a friend of mine had
-> Claude review it and say needs to be done, or what Gemini Pro "thinking"
-> told me needs to be done. But it also doesn't solve the problem you were
-> going to solve, because you didn't like Marek's approach. And you then
-> didn't test the available failure case.
->
-> And of course both of the AI reviews start from the premise that your
-> patch correctly does what it describes, and that it's a good idea to do
-> what you describe. Neither of which are good assumptions to make for
-> actual review.
->
-> > That patch took quite a while to put together and is fairly ugly. I am
-> > sure I could split it up, particularly if it doesn't have to be
-> > bisectable. But it could easily become 10 patches and a few separate
-> > files, given the current state of ofnode.h
-> >
-> > But no, I don't know what is wrong with it. If you would like to tell
-> > me I can take a look.
->
-> I'm not sure what the point would be. It doesn't solve the problem that
-> lead you down this path (I've now pushed the patches that do). The next
-> problem is the seemingly countless times you've been asked to provide
-> changes in a reviewable state, of which this patch is not. Finally, if
-> you had reviewed the outputs you might have noticed and then wondered
-> how this could result in size growth of the platforms that should see a
-> size reduction because they don't set OF_REAL.
->
-> But really, most critically, the current policy is Don't use AI. It is
-> producing lower quality work that is difficult to review.
+[snip]
+> diff --git a/board/metanoia/mt5824/lpddr4.h b/board/metanoia/mt5824/lpddr=
+4.h
+> new file mode 100644
+> index 00000000000..5de70c536ca
+> --- /dev/null
+> +++ b/board/metanoia/mt5824/lpddr4.h
+> @@ -0,0 +1,91 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2025 Metanoia Communications Inc.,
+> + * Jun Chang, Metanoia Communications Inc. <jun.chang@metanoia-comm.com>
+> + */
+> +
+> +#ifndef __COBRA_DDR_H
+> +#define __COBRA_DDR_H
+> +
+> +#include <asm/io.h>
+> +
+> +#define UMCTL2_REGS_BASE_ADDR 0x10060000
+> +
+> +#define reg8_write(addr, data) \
+> +	writeb((uint8_t)(data), (volatile void __iomem *)(addr))
+> +#define reg16_write(addr, data) \
+> +	writew((uint16_t)(data), (volatile void __iomem *)(addr))
+> +#define reg32_write(addr, data) \
+> +	writel((uint32_t)(data), (volatile void __iomem *)(addr))
 
-Please see above. BTW I often ask Claude to do a code review, particularly
-with Python. It does a pretty good job of the basics. It can undertake a
-refactoring, but struggles to see when one is needed/useful. Anyway, my
-commit message is:
+We really don't already have an appropriate macro here to use?
 
-"When there is no device tree there is no(t) point in trying to find nodes,
-etc. since they will all be null.
+[snip]
+> +#endif /* __COBRA_DDR_H */
+> \ No newline at end of file
 
-Add static inlines to skip the code in that case."
+Please fix that globally.
 
-So that is the problem I am trying to solve. Probably what I would like to
-do is turn it into a series which splits up ofnode.h so that the inline
-portions are not in the same file. I haven't tried that approach, though -
-it is just an idea. What do you think?
+> diff --git a/board/metanoia/mt5824/lpddr4_helper.c b/board/metanoia/mt582=
+4/lpddr4_helper.c
+> new file mode 100644
+> index 00000000000..3bc447038dc
+> --- /dev/null
+> +++ b/board/metanoia/mt5824/lpddr4_helper.c
+[snip]
+> +#if 0 /* Enable for debugging */
+> +		if (i < 10) {
+> +			printf("  [%02d] 0x%08x =3D 0x%08x\n", i, reg_addr, reg_value);
+> +		}
+> +#endif
 
-Re the size issue, I see this in exactly two boards: am335x_evm and
-kontron-sl-mx6ul. I honestly didn't notice. There are quite a few
-combinations to consider and it seems I didn't get them all. I will take a
-look.
+Just use debug() here? And remove other "if 0" or commented out code
+globally.
 
-Regards,
-Simon
+[snip]
+> diff --git a/board/metanoia/mt5824/mt5824.c b/board/metanoia/mt5824/mt582=
+4.c
+> new file mode 100644
+> index 00000000000..f385de1d897
+> --- /dev/null
+> +++ b/board/metanoia/mt5824/mt5824.c
+> @@ -0,0 +1,188 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2025 Metanoia Communications Inc.,
+> + * Jun Chang, Metanoia Communications Inc. <jun.chang@metanoia-comm.com>
+> + */
+> +
+> +#include <log.h>
+> +#include <asm/csr.h>
+> +#include <asm/sbi.h>
+> +#include <config.h>
+> +#include <cpu_func.h>
+> +#include <image.h>
+> +#include <init.h>
+> +#include <net.h>
+> +#include <asm/global_data.h>
+> +#include <linux/io.h>
+> +#include <fdtdec.h>
+> +#include <dm.h>
+> +#include <hang.h>
+> +#include <misc.h>
+> +#include <hexdump.h>
+> +#include <env_internal.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+
+Globally, please audit your include list.
+
+[snip]
+> diff --git a/configs/mt5824_evb_defconfig b/configs/mt5824_evb_defconfig
+> new file mode 100644
+> index 00000000000..74f6ceb2284
+> --- /dev/null
+> +++ b/configs/mt5824_evb_defconfig
+> @@ -0,0 +1,61 @@
+> +CONFIG_RISCV=3Dy
+> +CONFIG_RISCV_ANDES=3Dy
+> +CONFIG_ARCH_RV64I=3Dy
+> +CONFIG_RISCV_SMODE=3Dy
+> +
+
+Please re-generate this with "make savedefconfig".
+
+[snip]
+> diff --git a/include/configs/mt5824.h b/include/configs/mt5824.h
+> new file mode 100644
+> index 00000000000..9809080b805
+> --- /dev/null
+> +++ b/include/configs/mt5824.h
+[snip]
+> +/* environments */
+> +
+> +/* SPI FLASH */
+> +
+> +/*
+> + * For booting Linux, the board info and command line data
+> + * have to be in the first 16 MB of memory, since this is
+> + * the maximum mapped by the Linux kernel during initialization.
+> + */
+> +
+> +/* Initial Memory map for Linux*/
+> +#define CFG_SYS_BOOTMAPSZ	(64 << 20)
+> +/* Increase max gunzip size */
+> +
+> +/* Support autoboot from RAM (kernel image is loaded via debug port) */
+> +#define BOOTENV_DEV_NAME_RAM(devtypeu, devtypel, instance) \
+> +	"ram "
+> +
+> +#define BOOTENV_DEV_RAM(devtypeu, devtypel, instance) \
+> +	"bootcmd_ram=3D" \
+> +	"bootm ${fit_addr}\0"
+> +
+> +#define BOOTENV_DEV_LEGACY_MMC(devtypeu, devtypel, instance) \
+> +	"bootcmd_" #devtypel #instance "=3D" \
+> +	"setenv mmcdev " #instance"; "\
+> +	"setenv bootpart " #instance":2 ; "\
+> +	"run mmcboot\0"
+> +
+> +#define BOOTENV_DEV_NAME_LEGACY_MMC(devtypeu, devtypel, instance) \
+> +	#devtypel #instance " "
+> +
+> +#define BOOTENV_DEV_NAME_TFTP(devtypeu, devtypel, instance) \
+> +	#devtypel " "
+> +
+> +#define BOOTENV_DEV_TFTP(devtypeu, devtypel, instance) \
+> +	"bootcmd_" #devtypel "=3D" \
+> +	"tftpboot ${fit_addr} $serverip:fitImage-dev-image-initramfs; " \
+> +	"bootm ${fit_addr}\0"
+> +
+> +/* Enable distro boot */
+> +#define BOOT_TARGET_DEVICES(func) \
+> +	func(TFTP, tftp, na) \
+> +	func(RAM, ram, na)
+> +
+> +#include <config_distro_bootcmd.h>
+> +
+> +#define CFG_EXTRA_ENV_SETTINGS	\
+> +	"bootcmd=3Dbootm 90000000\0" \
+> +	"kernel_addr_r=3D82000000\0" \
+> +	"pxefile_addr_r=3D0x83f00000\0" \
+> +	"scriptaddr=3D0x83f00000\0" \
+> +	"fdt_addr_r=3D0x68010000\0" \
+> +	"ramdisk_addr_r=3D0x83000000\0" \
+> +	"fit_addr=3D0x83000000\0" \
+> +	"initrd_high=3D0x100000000\0" \
+> +	BOOTENV
+
+Please switch to plain text environment and consider standard boot,
+thanks.
+
+--=20
+Tom
+
+--MfqV83wNq6c6a2pg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVPwPwAKCRAr4qD1Cr/k
+CiMWAQCa8apJzLAEVF1stiize66hypwEhzNeBUYPBR5PYk4H4AEAsSnpnBngPBP9
+JHGh0DuCRmAirKFU/rAFEOpX7TN5Pgk=
+=kQlk
+-----END PGP SIGNATURE-----
+
+--MfqV83wNq6c6a2pg--
