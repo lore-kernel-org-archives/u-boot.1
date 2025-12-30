@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63094EE498F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 16:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF5FEE498E
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 16:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4B3583F95;
-	Tue, 30 Dec 2025 17:55:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F4EC83F9D;
+	Tue, 30 Dec 2025 17:55:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Baow7uUu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IRoR4eGN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FD3B83F70; Tue, 30 Dec 2025 17:01:39 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id EDBFC83F6D; Tue, 30 Dec 2025 17:01:41 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFF8083F69
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:01:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7BEA83F69
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:01:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7f1243792f2so6746153b3a.1
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 08:01:36 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-34ccb7ad166so9297048a91.2
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 08:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767110495; x=1767715295; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767110498; x=1767715298; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k05dlRgwx4NWz/cN62LjJevS5zuxD5l8gaNrOk7T5XI=;
- b=Baow7uUuOZ67reeyx7t0DCX+6oqu/xzOxG4w9KR00zwSrrtmA/AFbeGYQDD2aWzWYL
- Sb6A/i8aJWgEUOSaGSgNAVSsa/y6qGa/3XHQqKGy9NBCIJz7e6CvhrVNuNoZCUTd+sjk
- p2mcCBoP86LQqQ3wpL8iTDporw+kcxLEUcFxHmykpSNPwrH5M0+Owv5O09qcb5GFVhba
- GyUY7WclC3yzJE2ec02zt808rsdhsdaXiPl0nJp1x0l3OXcriGDBpLQ7F0OIK0VK9pU0
- vA9q0Doc1HSTh5aaxEOWKteFUS6bvOuQUBvEGDQPQeJeH8/hs4rUMWFj72j1sBmiqzY0
- kihA==
+ bh=mCRmkMHV2EDtCDLkzM4fJdX2WrXLQOnX6j9Xc2hL0Gg=;
+ b=IRoR4eGNkg4IfE0IH+acphVJGXAS1FYwsiB3CqCdyq2YBmYEso4XQbkXRvDPwNoSYS
+ ptVEiuvqVg1Sg50naenJo6HQZHh5bo2DX+YK8CmNSyRmDoatLY1Ospxs5cbT68wE7npu
+ WtVDj8uxEIHPr5usIOvOq2SgWmXFewEaGA4Sd2y3g1II5bBxUtbdIHuRpYMgM2LfiKAT
+ 5dYQMjSW4C56K6sUxV131bE6UJn//EifNJ1jQOqnpgu6vwGkJxqP4YYvMv0MxaX+sdbP
+ C97GiCCqYvsBpR5tYOHAhmn+xWHUAeR62+D9fEM9rH9AO3TSmespiLcMOtLkwIWRvypn
+ eCZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767110495; x=1767715295;
+ d=1e100.net; s=20230601; t=1767110498; x=1767715298;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=k05dlRgwx4NWz/cN62LjJevS5zuxD5l8gaNrOk7T5XI=;
- b=dgFGQxJll81Lq2EPR9YbgF+nQVcFZ4Aa+z8l6mFr60PuYehhs0WLD+jxj1DBB9aCQI
- ZKAEAfuQtEVUCNwnU7L3vGMl550q8SXfRlLgFYnBu2T7zKtpSpWWKoUjvSSQOHss6QA3
- c55BQeaGyi6gfX4ivzOYGmW4g81E6p8ZdMdYeA5dJrPX/+SLm9B95P2/IlP+LcF5VYoz
- 6DUxycmMfRQcWCQR5sHrOoaaCJTLZr0SKEmo41EVz7o7sI4eccmbSUOhQCDccfy2vgFA
- JJ95WqGi95rx8RP/b/Ih9jPTWNmWiul+qV31lXXJaAZQDzMy3rKbtreE36DqVEYPqQK0
- oABA==
+ bh=mCRmkMHV2EDtCDLkzM4fJdX2WrXLQOnX6j9Xc2hL0Gg=;
+ b=QRderH7vkRZmdg8CaAocN3smv0VnuIeEyw4lVM7ae/vv7nN22yQGVR03uL+syQw7Iz
+ fbnNmLxy8CLjUGlb15I23X8mETbnCN53Vo3bVNNhb4QNg5ySerpRgokHE2SKAzm0XVb+
+ aV07j6OIN6eWJ4mwRnleoAXfnNe32MdAHhvGfEfSigA+IC27m7XPH93xHe7luE5HEPlH
+ rMt1q0lpqMuPc7JeC8hU2+dzSpqiy3UuJxPAvoGxVuNVhV8RmdXLNKn2xHnwAyFe1QwJ
+ d0dFOva8VYS6YMtQy11RwKFuGUsn/Jec25JCrqhHYTmo6gvO0SYT2glDw6KFdg1gN1ud
+ Utgw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNwPS7CglNBPGy5ftVAkjTicE5Jb/WTD3S/q/AjXnSGubnq1z18gXH4yKfHNuqiRzyZ4NnASw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyrN+6RvSXkBOaF9ijfUsRaletUd2zsv3RDS8c20F5O+oLn8o8p
- 9Y8kb0rX/8D/EIjAcyr32gV4DhpUxgMG/f5nMkfyp8mRIdfyA24GcnMx
-X-Gm-Gg: AY/fxX7CHg5jbKJhrDNe2SFHz9BvYXH33qWthJYuxQr80a2zi9/qlSCNgB95auRNvrC
- sh40iBJSG4RuStr3fMNK6pBwUbwVtsriYbw6H7iM6477v3aMcEJz4+wyZrobskZKWTGzgJyQ/d8
- EZ36K40lprvWBb9O2BOBeurmXJiXxI0iBdm4xfDLm35HGJK/NWgUMWb4eOKIzO+AnS9MEBTf3SN
- N1RQirSH7z3jl1A0YerFb09NnWk9Gp3ymR/6GSXh0Te00RJ9oud9XZqU4UaKlY3Q3VqhmEcL4yp
- KfYt/mODIAgLIHHWlor/FXgVGjTc1ed4o+PCKjsN74ZojxbkdMX7mxISD/Shwzau2GgEZuHypR3
- WQWSR/ZeFh3llVyw2+P+seZzCOe7VtYwVaShLcx7K4wlfKkZe7GOK+9fYD+XoKpmJ+Etap6f3I3
- bCjZGsWj0LeNZMICU5J9yTJ38E9+do26MjkT2dkQCB+484Oh+UeowWf2bYrrA2TIcZB9PE6lIP+
- NoDb5Y9RdQL9EMmz384RA==
-X-Google-Smtp-Source: AGHT+IHRnK9v6akXT6uvb9HOi1VO7TqVlGUPqJKu3QaUzGtzKH5AvqWzBG4DSJHtE2OwRN2Bdk9DAQ==
-X-Received: by 2002:a05:6a21:3290:b0:35e:3d4b:4cfe with SMTP id
- adf61e73a8af0-376a94c773bmr28308143637.39.1767110494789; 
- Tue, 30 Dec 2025 08:01:34 -0800 (PST)
+ AJvYcCU74tvuXiC2ZfiiV0Gwor93RUHmp9wz9sqa1QlC0JNagl/phfS9C/iVpy/fHtpjJSRw51aiwtE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3ZfmnF2RMlnCZY4udASa/Dr7zUAgRVRaHZuDh7XYrav0hRVeM
+ TDu7KnLOy9t5aN3JmDVsj6Pp0+EBVBhietScO8hhj7sL4CdXjD3CyNVh
+X-Gm-Gg: AY/fxX4NeGacpJBDbES7PgoUkyAB8t8P34ZCvNPuce1qEpM4GQei1I7APq0zU/ok4RZ
+ ilKLb+9eHJCHPaihefgttxlthhmq2/qgpAOCPfwmWp9ywwiVo4QGrdhg/rdewnM7EFkl0s7RM3i
+ 1XtSqcAwbLpEx4HIMn3IIQWE8V0sE21QkR9N/4+TDATMdbDyNuvFm2Ek8SYclnJS7M9iqexQnkv
+ SyrO39TkUbVRHSO/1RHvSs10UC0qSd5w1WTEDGwEHQx4/fcP3gbst7SDzXkMLLXJy+1gRQIFcAD
+ Nmrne/r7u9MSUAxT6m9q2jhFYJXu/x6mrJ1FZUZ5pmp2/kByechXoGQlhal2zqrQOTZWLP3rjZ3
+ FL9aIFdOvehbFp50lOpc183wELUjLdAU1mEgbkqV8cyi1uQfDVN6Hcp4GzPjbXMbhWO30Jgdy8u
+ S6YXS/ZM/7rbMLFFA5qSSKELQt9cn8phN++93ZQ4KbW1Jjxffly5zxnFaDlp8JKcqjbbi/PR5zG
+ L9q7G1Rrpod3MlOUExF0w==
+X-Google-Smtp-Source: AGHT+IH2GHjhkILCMI5XSpBtJnQwUFnQ1uNMa3+EiB7KReOUHWBbC3Rkuuwstmq6IMW0QPtHhMPeGg==
+X-Received: by 2002:a17:90b:1e42:b0:341:6164:c27d with SMTP id
+ 98e67ed59e1d1-34e92137f6fmr26625033a91.3.1767110497787; 
+ Tue, 30 Dec 2025 08:01:37 -0800 (PST)
 Received: from visitorckw-work01.c.googlers.com.com
  (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c1e7961c8a2sm28558883a12.6.2025.12.30.08.01.33
+ 41be03b00d2f7-c1e7961c8a2sm28558883a12.6.2025.12.30.08.01.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Dec 2025 08:01:34 -0800 (PST)
+ Tue, 30 Dec 2025 08:01:37 -0800 (PST)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: alison.wang@nxp.com,
 	angelo@kernel-space.org,
 	trini@konsulko.com
 Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
  u-boot@lists.denx.de, Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v3 2/6] timer: Add Goldfish timer driver
-Date: Tue, 30 Dec 2025 16:01:08 +0000
-Message-ID: <20251230160112.3045527-3-visitorckw@gmail.com>
+Subject: [PATCH v3 3/6] rtc: goldfish: Support platform data for non-DT probing
+Date: Tue, 30 Dec 2025 16:01:09 +0000
+Message-ID: <20251230160112.3045527-4-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
 In-Reply-To: <20251230160112.3045527-1-visitorckw@gmail.com>
 References: <20251230160112.3045527-1-visitorckw@gmail.com>
@@ -106,163 +106,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the Goldfish timer driver. This driver utilizes the
-Goldfish RTC hardware to provide a nanosecond-resolution timer. This
-virtual device is commonly found in QEMU virtual machines (such as the
-m68k virt machine) and Android emulators.
+Currently, the Goldfish RTC driver exclusively relies on device tree
+to retrieve the base address, failing immediately if dev_read_addr()
+returns FDT_ADDR_T_NONE. This restriction prevents the driver from
+being used on platforms that instantiate devices via U_BOOT_DRVINFO()
+instead of device tree, such as the QEMU m68k virt machine.
 
-The driver implements the standard U-Boot timer UCLASS interface,
-exposing a 64-bit monotonically increasing counter with a 1GHz clock
-rate derived from the RTC registers.
+Add support for platform data to address this limitation. Update the
+probe function to fall back to retrieving the base address from
+struct goldfish_rtc_plat if the device tree address is unavailable.
+Introduce a new header file include/goldfish_rtc.h to define the
+platform data structure.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
 Changes in v3:
 - New patch.
 
-The link provided by Daniel [1] returned a 404 error.
-Since the implementation is straightforward, I wrote this driver from
-scratch.
+It appears there is no specific maintainer listed for this driver?
 
-[1]: https://github.com/fifteenhex/u-boot/blob/mc68000/drivers/rtc/goldfish_timer.c
+ drivers/rtc/goldfish_rtc.c | 10 ++++++++--
+ include/goldfish_rtc.h     | 15 +++++++++++++++
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 include/goldfish_rtc.h
 
- MAINTAINERS                    |  6 ++++
- drivers/timer/Kconfig          |  8 +++++
- drivers/timer/Makefile         |  1 +
- drivers/timer/goldfish_timer.c | 60 ++++++++++++++++++++++++++++++++++
- include/goldfish_timer.h       | 13 ++++++++
- 5 files changed, 88 insertions(+)
- create mode 100644 drivers/timer/goldfish_timer.c
- create mode 100644 include/goldfish_timer.h
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index da4a6e4d518..fcc437a53ce 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1265,6 +1265,12 @@ S:	Maintained
- F:	drivers/serial/serial_goldfish.c
- F:	include/goldfish_tty.h
+diff --git a/drivers/rtc/goldfish_rtc.c b/drivers/rtc/goldfish_rtc.c
+index e63a2766c76..900daabccb9 100644
+--- a/drivers/rtc/goldfish_rtc.c
++++ b/drivers/rtc/goldfish_rtc.c
+@@ -9,6 +9,7 @@
  
-+GOLDFISH TIMER DRIVER
-+M:	Kuan-Wei Chiu <visitorckw@gmail.com>
-+S:	Maintained
-+F:	drivers/timer/goldfish_timer.c
-+F:	include/goldfish_timer.h
-+
- I2C
- M:	Heiko Schocher <hs@nabladev.com>
- S:	Maintained
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index f9511503b02..a84a0dc0539 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -340,4 +340,12 @@ config STARFIVE_TIMER
- 	  Select this to enable support for the timer found on
- 	  Starfive SoC.
+ #include <div64.h>
+ #include <dm.h>
++#include <goldfish_rtc.h>
+ #include <mapmem.h>
+ #include <rtc.h>
+ #include <linux/io.h>
+@@ -77,11 +78,16 @@ static int goldfish_rtc_set(struct udevice *dev, const struct rtc_time *time)
+ static int goldfish_rtc_probe(struct udevice *dev)
+ {
+ 	struct goldfish_rtc *priv = dev_get_priv(dev);
++	struct goldfish_rtc_plat *plat;
+ 	fdt_addr_t addr;
  
-+config GOLDFISH_TIMER
-+	bool "Goldfish Timer support"
-+	depends on TIMER
-+	help
-+	  Select this to enable support for the Goldfish Timer.
-+	  It uses the Goldfish RTC hardware to provide a nanosecond-resolution
-+	  timer, commonly found in QEMU virt machines.
-+
- endmenu
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index a72e411fb2f..d8b3f2b65d4 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -36,3 +36,4 @@ obj-$(CONFIG_MCHP_PIT64B_TIMER)	+= mchp-pit64b-timer.o
- obj-$(CONFIG_IMX_GPT_TIMER)	+= imx-gpt-timer.o
- obj-$(CONFIG_XILINX_TIMER)	+= xilinx-timer.o
- obj-$(CONFIG_STARFIVE_TIMER)	+= starfive-timer.o
-+obj-$(CONFIG_GOLDFISH_TIMER)	+= goldfish_timer.o
-diff --git a/drivers/timer/goldfish_timer.c b/drivers/timer/goldfish_timer.c
+ 	addr = dev_read_addr(dev);
+-	if (addr == FDT_ADDR_T_NONE)
+-		return -EINVAL;
++	if (addr == FDT_ADDR_T_NONE) {
++		plat = dev_get_plat(dev);
++		if (!plat)
++			return -EINVAL;
++		addr = (fdt_addr_t)plat->base;
++	}
+ 	priv->base = map_sysmem(addr, 0x20);
+ 
+ 	return 0;
+diff --git a/include/goldfish_rtc.h b/include/goldfish_rtc.h
 new file mode 100644
-index 00000000000..8205ac77853
+index 00000000000..bb113a0bd79
 --- /dev/null
-+++ b/drivers/timer/goldfish_timer.c
-@@ -0,0 +1,60 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-+ *
-+ * Goldfish Timer driver
-+ */
-+
-+#include <dm.h>
-+#include <timer.h>
-+#include <asm/io.h>
-+#include <linux/errno.h>
-+#include <goldfish_timer.h>
-+
-+/* Goldfish RTC registers used as Timer */
-+#define TIMER_TIME_LOW	0x00
-+#define TIMER_TIME_HIGH	0x04
-+
-+static u64 goldfish_timer_get_count(struct udevice *dev)
-+{
-+	struct goldfish_timer_plat *plat = dev_get_plat(dev);
-+	u32 low, high;
-+	u64 time;
-+
-+	/*
-+	 * Goldfish RTC provides time in nanoseconds.
-+	 * We read the high 32-bits and low 32-bits to construct the 64-bit value.
-+	 */
-+	low = readl(plat->base + TIMER_TIME_LOW);
-+	high = readl(plat->base + TIMER_TIME_HIGH);
-+
-+	time = ((u64)high << 32) | low;
-+
-+	return time;
-+}
-+
-+static int goldfish_timer_probe(struct udevice *dev)
-+{
-+	struct goldfish_timer_plat *plat = dev_get_plat(dev);
-+	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+
-+	if (!plat || !plat->base)
-+		return -EINVAL;
-+
-+	/* Goldfish RTC counts in nanoseconds, so the rate is 1GHz */
-+	uc_priv->clock_rate = 1000000000;
-+
-+	return 0;
-+}
-+
-+static const struct timer_ops goldfish_timer_ops = {
-+	.get_count = goldfish_timer_get_count,
-+};
-+
-+U_BOOT_DRIVER(goldfish_timer) = {
-+	.name	= "goldfish_timer",
-+	.id	= UCLASS_TIMER,
-+	.ops	= &goldfish_timer_ops,
-+	.probe	= goldfish_timer_probe,
-+	.plat_auto = sizeof(struct goldfish_timer_plat),
-+};
-diff --git a/include/goldfish_timer.h b/include/goldfish_timer.h
-new file mode 100644
-index 00000000000..2ea28170759
---- /dev/null
-+++ b/include/goldfish_timer.h
-@@ -0,0 +1,13 @@
++++ b/include/goldfish_rtc.h
+@@ -0,0 +1,15 @@
 +/* SPDX-License-Identifier: GPL-2.0-or-later */
 +/*
 + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
 + */
 +
-+#ifndef _GOLDFISH_TIMER_H_
-+#define _GOLDFISH_TIMER_H_
++#ifndef _GOLDFISH_RTC_H_
++#define _GOLDFISH_RTC_H_
 +
-+struct goldfish_timer_plat {
++#include <linux/types.h>
++
++struct goldfish_rtc_plat {
 +	void __iomem *base;
 +};
 +
-+#endif /* _GOLDFISH_TIMER_H_ */
++#endif /* _GOLDFISH_RTC_H_ */
 -- 
 2.52.0.358.g0dd7633a29-goog
 
