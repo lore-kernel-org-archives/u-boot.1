@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D6BEE498E
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 17:50:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E6CEE01F6
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 21:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B19583F4C;
-	Tue, 30 Dec 2025 18:50:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E0E0A83FAF;
+	Tue, 30 Dec 2025 22:02:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IkCjzyhY";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="h5vTNECn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C94083FA4; Tue, 30 Dec 2025 18:50:19 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 7947683FC0; Tue, 30 Dec 2025 22:02:11 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A44683F4C
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 18:50:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F8DA83FA4
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 22:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c6e815310aso8295830a34.0
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 09:50:16 -0800 (PST)
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-47774d3536dso82567795e9.0
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 13:02:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767117015; x=1767721815; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Lz4L0m+1ikLswLogREfLDamAAJWwQWVodt0xlL6PHJE=;
- b=IkCjzyhYFcs11SeAzWNBhlT3X6NYS1chliprgq+kktnhjHp3su1CelnO/zmBwMhDF2
- 2xPh2BlhRyMmF8Muxiy2ZgXgoT860yopJBvmtVyq+JymVtHDvajQ3FUZ1tP/FMNrsNBu
- Sl8qXj+CuWUwDRpssyt+AIBXNmTLvQmsOlbO4=
+ d=sartura.hr; s=sartura; t=1767128529; x=1767733329; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=I/+VHts8cXn3PAzdXGW0BHBgRVOSDRN8eT3+lGKniNY=;
+ b=h5vTNECnsVeC6rBFYoYRzTdOrAgWy2PslKZgUmoSkqAMB3BUPcw9Rp+5hUzPBqg07Z
+ pKdv45E05qgDlEZfUFvPFBD4Ke/hEIKkrmERz2vPkCmamZGO0dNOI8uuYQD0hONXMZ0e
+ dJpnGl5+SE4GZYCbeguwcY+Z49yiTjSweghX45pg5pZntFhP+8dyoqJcqfBvK+j5+Wsq
+ YG8rLiX5VA4tirKyYQTr6MRMTiLbjZkvHDHIE3n+0EjEZ8XYI3IJ9mUKRfnckeON/NQ7
+ i9RGCqzdvLaLoas3/J3UQchHlcsYaRHxOxMg+qes86RwtBbF7o0gdLneTJgsy3u3dWq4
+ Mq0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767117015; x=1767721815;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lz4L0m+1ikLswLogREfLDamAAJWwQWVodt0xlL6PHJE=;
- b=cb33g2qhd98LoHaz1d4AGYGx7A4FU4arP+YXTX7iTpLIX1OI2L/zieFICYES3Wy3RD
- q0AKm7p8rDAtO8JWXmcrcDx9v7qFvgOaafW+EwijQzgbuSoqTI1T++aVBuJVgFe2CLe7
- tFQ3dD3wqq+W1MoD7aY8TXmYR5WlEUIAWPxt0AIWdF/uyU9LGETCIi+7ViIr7t5wspVW
- FMaOQq9pL3Yp0gkByWbsjTqZZ2Y2OgtaASNjztYDUWuXAEi/c9ns9/o/y/XqVECA8C8g
- CjkWsU/JUiqcSmaGJPePioxG7MDnNVAlylFn8MaXF3GDvyazfFvle8BpbSQ2l6Wrm+wS
- 4f8g==
+ d=1e100.net; s=20230601; t=1767128529; x=1767733329;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I/+VHts8cXn3PAzdXGW0BHBgRVOSDRN8eT3+lGKniNY=;
+ b=ndE5mtppzYfbhZZgu613XjnTHN5u1u3A4V2WVd0TBsYs85DaPLQc2IF4G4JmFde5WH
+ kTuHkNEhGhlTkJzlbNmv1+y2GhIo7CqZMi9z1/D0UXPHdELlIOhZzt/iurwZEiGZnwXz
+ 24gbqUKaGwbh5vcoNxwEPV1SigsiBQRt//Vz6mWrnEzCzibCfFDpE6XZvsUMhdujdp8q
+ oDGEAghJSnOCGLTK9qa4E0BOlt+7e8/MenrB6gDYCXs4nBfSPZlXHNGMvSJiuelxH1IR
+ J38kjVpZNLn7eOI/ZA6MN/931iXC6OHOnrqlVliL6abYWOhHWh9K7zHXjDmHP6W+tfBT
+ OlYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLRfHzOlltTvd4M7QUD8+xkUdH444/KaS9gmi1h6RB5zVM8BL79gFEWcNRR2mPuV2pO9XZDtw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyR7PfqEe4qvsd7OTwYzrUCKaKVmvvQwE5ZG5SWL9AjRQDBFPK
- s2VOJ02oOYY3V9O30Zn4RsqQVl3Ngl2fXslZjW0NnsjI9b+ubt9ZV2NQm/W7Wvh1cRE=
-X-Gm-Gg: AY/fxX7uhAI+VBx3tppuvdkFcSEw4sQBE0NcxUjNFdj4qnocKa+uc6UEcd/NJ8tOwTA
- i1G4/lnQSiFe+kpCUE3Ga6U2wIHc5+OrczdRCZ7066Oz/DE4kJaiAjojqP/aon9mb+ifio5Xcer
- C1caK7itJVsTUtYsujqJGfS9YfPwILHInkguQyTIRyZDGymh1EGuSlU70kYlfdroP9O+c/8bdZC
- ZK4yauGj2K5YFQoQY8DNSgaz+kkSxsqGHUebMjJ+EOq9I5Y5WBeKJe/D9FQb+X+tUDIYnugPpxp
- YnIt/wubOEDle1HJqaqczx2SXizLh73yxG77Wmete6kbBrp7AfqEwsByfyg3mfSrzZhTu0W7Pqi
- xt+IVR3RN48sNIDUVtSus9835D5e01D9Uc6DxTA5Nhs4r6khhRfHg2tWqT6y2X2T3dszcqM9kM1
- q6EbYJEFGmiE1P4gJ7WBQXZBhkwg5Nkbod2YzxGod9nMcR9bED9qP9d2uq3E5TwgDoqiseSKiBB
- /S9CxZlU6RcFkjQ6ANY9W0oeQDd+F0d9uM708fzR7ltGsEcZg==
-X-Google-Smtp-Source: AGHT+IGXJGujUffEt97KUktDG4qcWnCS43vTP8dK9kHcIThLuGGdKz5k4gajuOou3/fT7c5yGY2OGg==
-X-Received: by 2002:a05:6830:6688:b0:7c7:5974:3563 with SMTP id
- 46e09a7af769-7cc66a15846mr15683263a34.29.1767117015248; 
- Tue, 30 Dec 2025 09:50:15 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc6673ccc2sm22921199a34.12.2025.12.30.09.50.14
+ AJvYcCWSArBHwSPUQIpugmZP74cRTf6ORmxGb9V7ZIqJAhDb5JaF3xJYWkIHDENc3he1D7nL9MXajPs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyy3wpAChAzXAh3Iw0Ceccpw2wU9U9ZOHYV7CnkbruvRfOmt76K
+ mwe7+0wRcBA8E6YGL2XqfniDh33+QQSk+MsKd8OGeQXsE8T5kRpE8gerePVQ8MUkhutjjVD75mo
+ zM3UrEUI=
+X-Gm-Gg: AY/fxX54xnKlhPSbqf3oqGkzDOPzuBuoJGhjSyI7PxU47NqX65IO/NWTX6BpWvj+qE/
+ U3q7qdvm5CSeJhigNQ3b9UEVPWxvJW/MZmjTLMJcoByiBDlwh4HETf0bFKRvnnBXE4saNcDNaKk
+ QgteT9SQcTqhslWEVMX7/wcbDa4CnbX1LjLITl4TV7PPPZ80gm+Ngn/n8IKs6906FxERxEsJW9u
+ Ky1fpOO6bL47p85xXKUrlV4wWm4Pu4miw4uyJcZynG9SLUmJ2HQpSwcpfuAfdSWBQccw8oQ0+Uw
+ vsQxo7Pdcnw/CbVclGyfDttwK9NoMmwqoHYb/A+CiXA+era41cHTkU8wPuBhAX5ccGBIcCcGDmi
+ 3qGA848oz8z6avWkW5ck96uQBaMpSjQQ2mGjNSbNG9YvnkL5Jm0CjkDjAW9jFpXx0Qnb6Ro4Ph+
+ j9QD5ypzURqCG/J1ol7qkbuTMnSj+axWkGR4qHUX3PWA5zxQQGDUFh7F2C2TC1jE7WaY1wLEvll
+ N+OiyDw2GsGyHgVSUbrpyIgp+BVgAmIzqQjnic=
+X-Google-Smtp-Source: AGHT+IGTQiYkapsLRzFKADqUqt4Ov7ilg2/b+2GRupERtp2b7NuiVrFmL8eYqFU4IVpaqYHKTCLSGA==
+X-Received: by 2002:a7b:ca4a:0:b0:477:75b4:d2d1 with SMTP id
+ 5b1f17b1804b1-47be29f3835mr325101335e9.15.1767128528752; 
+ Tue, 30 Dec 2025 13:02:08 -0800 (PST)
+Received: from fedora (cpezg-94-253-146-116-cbl.xnet.hr. [94.253.146.116])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-43264613923sm55194994f8f.26.2025.12.30.13.02.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Dec 2025 09:50:14 -0800 (PST)
-Date: Tue, 30 Dec 2025 11:50:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Swamil Jain <s-jain1@ti.com>
-Cc: devarsht@ti.com, aradhya.bhatia@linux.dev, n-jain1@ti.com,
- tomi.valkeinen@ideasonboard.com, vigneshr@ti.com, praneeth@ti.com,
- h-shenoy@ti.com, u-kumar1@ti.com, n-francis@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 2/2] configs: am62x_evm_a53_defconfig: Enable A53
- splashscreen at u-boot SPL
-Message-ID: <20251230175012.GA256115@bill-the-cat>
-References: <20251106085842.629521-1-s-jain1@ti.com>
- <20251106085842.629521-3-s-jain1@ti.com>
+ Tue, 30 Dec 2025 13:02:08 -0800 (PST)
+From: Robert Marko <robert.marko@sartura.hr>
+To: eugen.hristev@linaro.org, trini@konsulko.com, sjg@chromium.org,
+ hs@nabladev.com, u-boot@lists.denx.de
+Cc: luka.perkov@sartura.hr,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH 1/4] arm: at91: move atmel_serial.h to include/dm/platform_data
+Date: Tue, 30 Dec 2025 22:01:36 +0100
+Message-ID: <20251230210201.496403-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+uh6ENeArvgtzCDK"
-Content-Disposition: inline
-In-Reply-To: <20251106085842.629521-3-s-jain1@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,45 +101,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move the arch specific atmel_serial.h header from AT91 to the generic
+include/dm/platform_data.
 
---+uh6ENeArvgtzCDK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This will be used for support on Microchip LAN969x.
 
-On Thu, Nov 06, 2025 at 02:28:42PM +0530, Swamil Jain wrote:
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+---
+ board/bluewater/gurnard/gurnard.c                               | 2 +-
+ board/siemens/corvus/board.c                                    | 2 +-
+ board/siemens/smartweb/smartweb.c                               | 2 +-
+ board/siemens/taurus/taurus.c                                   | 2 +-
+ drivers/serial/atmel_usart.c                                    | 2 +-
+ .../include/mach => include/dm/platform_data}/atmel_serial.h    | 0
+ 6 files changed, 5 insertions(+), 5 deletions(-)
+ rename {arch/arm/mach-at91/include/mach => include/dm/platform_data}/atmel_serial.h (100%)
 
-> From: Devarsh Thakkar <devarsht@ti.com>
->=20
-> Enable A53 splashscreen at u-boot SPL stage. SPL_MAX_SIZE is bumped up
-> to 0x80000 to accommodate splash related code. SPL Board initialization
-> Kconfig is set to dynamically update simple-framebuffer and
-> reserved-memory DT nodes before kernel bootup.
->=20
-> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> Signed-off-by: Swamil Jain <s-jain1@ti.com>
-> ---
->  configs/am62x_a53_splashscreen.config | 17 +++++++++++++++++
->  configs/am62x_evm_a53_defconfig       |  3 ++-
->  2 files changed, 19 insertions(+), 1 deletion(-)
->  create mode 100644 configs/am62x_a53_splashscreen.config
+diff --git a/board/bluewater/gurnard/gurnard.c b/board/bluewater/gurnard/gurnard.c
+index 3275803226a..71db6409721 100644
+--- a/board/bluewater/gurnard/gurnard.c
++++ b/board/bluewater/gurnard/gurnard.c
+@@ -29,7 +29,7 @@
+ #include <asm/arch/at91_rstc.h>
+ #include <asm/arch/at91_rtc.h>
+ #include <asm/arch/at91_sck.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/clk.h>
+ #include <asm/arch/gpio.h>
+ #include <dm/uclass-internal.h>
+diff --git a/board/siemens/corvus/board.c b/board/siemens/corvus/board.c
+index a8714e055d7..7a70a7dfc8b 100644
+--- a/board/siemens/corvus/board.c
++++ b/board/siemens/corvus/board.c
+@@ -20,7 +20,7 @@
+ #include <asm/arch/at91sam9_smc.h>
+ #include <asm/arch/at91_common.h>
+ #include <asm/arch/at91_rstc.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/gpio.h>
+ #include <asm/arch/clk.h>
+diff --git a/board/siemens/smartweb/smartweb.c b/board/siemens/smartweb/smartweb.c
+index 6fa3ca573ae..ce16aad3b98 100644
+--- a/board/siemens/smartweb/smartweb.c
++++ b/board/siemens/smartweb/smartweb.c
+@@ -25,7 +25,7 @@
+ #include <asm/arch/at91sam9260_matrix.h>
+ #include <asm/arch/at91sam9_smc.h>
+ #include <asm/arch/at91_common.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/at91_spi.h>
+ #include <spi.h>
+ #include <asm/arch/clk.h>
+diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
+index 252b0787124..690c00046fa 100644
+--- a/board/siemens/taurus/taurus.c
++++ b/board/siemens/taurus/taurus.c
+@@ -24,7 +24,7 @@
+ #include <asm/arch/at91_rstc.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/arch/at91sam9_sdramc.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/clk.h>
+ #include <asm/gpio.h>
+ #include <linux/mtd/rawnand.h>
+diff --git a/drivers/serial/atmel_usart.c b/drivers/serial/atmel_usart.c
+index 0b35582aaa4..d6c3d4cbcc8 100644
+--- a/drivers/serial/atmel_usart.c
++++ b/drivers/serial/atmel_usart.c
+@@ -18,7 +18,7 @@
+ 
+ #include <asm/io.h>
+ #if CONFIG_IS_ENABLED(DM_SERIAL)
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #endif
+ #include <asm/arch/clk.h>
+ #include <asm/arch/hardware.h>
+diff --git a/arch/arm/mach-at91/include/mach/atmel_serial.h b/include/dm/platform_data/atmel_serial.h
+similarity index 100%
+rename from arch/arm/mach-at91/include/mach/atmel_serial.h
+rename to include/dm/platform_data/atmel_serial.h
+-- 
+2.52.0
 
-This in turn makes am62x_evm_a53_ethboot too big to compile. Please
-figure out how to re-factor these changes, or update the _ethboot
-version to disable this again. Thanks.
-
---=20
-Tom
-
---+uh6ENeArvgtzCDK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVQQ0QAKCRAr4qD1Cr/k
-CrqgAP9KJ4pKdqK8Wj0K1obRCBd4dRbt2mv74VnNC/5KbsCVHgEA/ZGfe0J8puPu
-vZTZGL8V1v9HbAeNX/WnUMbGosUm8Qs=
-=IfsD
------END PGP SIGNATURE-----
-
---+uh6ENeArvgtzCDK--
