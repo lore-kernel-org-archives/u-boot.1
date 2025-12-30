@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEB1EE4981
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 16:04:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E58EE4981
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 16:09:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E448D83F6A;
-	Tue, 30 Dec 2025 17:04:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DC6283F7F;
+	Tue, 30 Dec 2025 17:09:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vz7umZds";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ClrADvad";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E89783F6D; Tue, 30 Dec 2025 17:04:28 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 5F21383F82; Tue, 30 Dec 2025 17:09:43 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1520583F69
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:04:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A3F83F69
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:09:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c6d13986f8so8365364a34.0
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 08:04:26 -0800 (PST)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c7545310b8so4994026a34.1
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 08:09:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767110664; x=1767715464; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767110980; x=1767715780; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mcrbhodIsOmPSJlOkLIfmuztsg0+Oc8Iofx18eSB2rQ=;
- b=Vz7umZdszN6KL/g14saamlTUo1o2Myrg42U99N0oxhJAH6bzlr9ccJadnCoePZ62go
- hNkfJxhTrMVU6CK/SjV4w20P2cGo++k47m+Fkn5UMJ7MO3IN0eq6c+nDwnPYoEIcHMdt
- eVI5itR4HytIZ4rgd3fPRTwaAd4VX4KWFenVY=
+ bh=vSzvQwF0fg0ISF+Gcd5htUz6K3HQqvtChOwT4nb3kKI=;
+ b=ClrADvad3uhe3Cxnl3m6SLsiBouwSCJxf9Wj5k12ut9Vhr1JphVm9RXq64XQNZcZ8M
+ RHh4UNEYd4lstPbAmTv2I0pAwC0UR+o6dVuDTL9Ms+vBp5QRr6EDpXnmpyhJlG5MomUV
+ 65BQZr6plbCx7QrIuJQA/2D67CHP0AOnzh2tc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767110664; x=1767715464;
+ d=1e100.net; s=20230601; t=1767110980; x=1767715780;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mcrbhodIsOmPSJlOkLIfmuztsg0+Oc8Iofx18eSB2rQ=;
- b=VTIBYWnewKWjsFFtjNCkKpJWZxYfiVDS9Vnqgq1ywOiY4kSOrvFS7wMGwA9alIw6L1
- 1LrmJPx/fANDCQj7Pihzh8V0i9yR4Rzh+cDdu8/yTTM0KnrkkcmW6M5+B4+HiS3aZWBN
- S4zuJJ6PGBZHll7ci+QDuRsWYezPfhEnjnFWJGLAORC3Yt53L51kX8ZbN17JHsC+oCDC
- MhVTCtRy+/Eqs0MBgYrgfSjTh91AX/BTFbxrARyAai9Nou6zjkftElfAQXcODpTaXFbE
- EgAzhvMZRwHsgnEESWqdiT0imog5z3gYbL4ABBThfiNWO057Rd77W4e+XOnZ3XG06wz1
- xKPw==
-X-Gm-Message-State: AOJu0YycYVU72vJ1Api3qrX8v7U6+01qBVSETihVOWR5+sKq00dSjd5Z
- ZqmYoJrtfZy0DKVfqRjQ7FyUaHvi61i7K2wVuMHVKNuUgrLH89Ex/heoth84dUPgBTs=
-X-Gm-Gg: AY/fxX4YTWagULTaMbpSzbk2/33eHdx+t0BbHvafwrxeuqVe8a15hdSCOdnn2CRco0p
- wAtpQTqhw2Wk3cZTqRJgYFpoCCKDVCs42PqlKqLV89Xqv1HdjVJyEId01F1uoygDxnEV9L7J+B3
- nWI3ICKuM+OFDDx/bkm71iB4dWJw1gMnfnEf+SyiyTeotSMeseRGqHPxDkOMPrCeoxEyAn8KutB
- mgM/qEu0BUpWqVllrN+qc7F1OiJtxXgbpeDd4JD/anHXI93jRpLX0rIrFRbPfITagi/pSe6AwZl
- tVhemE769c9LCcNuk5p9eZvacFarqu10MU2nSGBKdnTnESNzelUqnLODmptdiE5DNmA8LdlP1AW
- Q5+rdB3qm/HQHMtTTgDzSCeCv9ZcbxhafiepkWy2J2pZRloknXXCalZGB8RN3AhrdbftIsYnWPv
- yEWcnBffXkAQypm9Pa3uQY5mKEeHFNp9Tk7eHyIlIIztDEZ8YdYbVhi7Ub7jg9Pw9co77rCXOmr
- SanVmBGTcvhq+mYtpYRZ82Lx5GYPUMb/3wnXQc=
-X-Google-Smtp-Source: AGHT+IE5URQ97xuyeFAd1bxKlRzAXE3AQ5R6b7XF+4DxN4Et2GswSv+57njCT2S37F91M/DVViPiWg==
-X-Received: by 2002:a05:6830:2463:b0:7c7:538a:c6fd with SMTP id
- 46e09a7af769-7cc5926f92amr16715900a34.12.1767110664599; 
- Tue, 30 Dec 2025 08:04:24 -0800 (PST)
+ bh=vSzvQwF0fg0ISF+Gcd5htUz6K3HQqvtChOwT4nb3kKI=;
+ b=e0mNDKCO+sySdxiteWclM4Bd4b+/ZZ9QXSWsnIJm2xsA40tDDm4RJ9LUJxJrOxhLMH
+ g2q31vJyDQa35oQN9NQAfvZxRThhF7PL6hMWe+hMFotCQqH5wLCsJfzxhrRyM6msHZLP
+ TLaEqVH3BlHxfUOwdfpKYhZoM5cf8efW1xvYF0znP6PSV6w42bvcWUm54PvuM0FjMTO9
+ E3ppD79is1v9ahiIJtbVxEP3Xn/lwbnoJVIZXeLYLSFUCGu8Qx/edSkf7qwjqASIXoSW
+ Yij1erVo+ofUpbDqseX6ILeGuU9L3dlJDJWfC6jfp4F9PWOxLah/O02ehUhyCcX87MeZ
+ EM/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUn5I+nVmOE4DogmFZWIsXR3Er6U0OIz2Viz/DgpHcpE40XRpW5bYdBtnQUTuGthTvY2aJHmY0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzvBOJIsaB9i1GX2oPQfm7/Me4CKtZu4HPcUjAQg8SjE7DecGA
+ 8OCJksOaUi56fwoQrXFAX1ectdEsBzfJSjXMd5MvNemQGSiRBYiKpnA2Q5jqAGb9DUU=
+X-Gm-Gg: AY/fxX4J4LzoiPpUDzcnVUUkMizYkFnpvZttU8ko3TS2PEJ2Qri36QBJl2qR/jjYbE+
+ CK30/O9MfDq4I5OGJKzzLYXGoI/qVtt6NrEGcT6QXClVFF+DQwwZuG86R1LjvDa01bvAyaI2row
+ KBV9Se9tOoEzbpdArAAIHnII60xqBLzfMS7IaENSqgtCXuNXM72dREKlV6ib1J5/gRBnP/pqak+
+ QlrrHfg4314PfPOs84q2zZgTIXbc24W58ZXadKZNsQ1bWAUnL6kf5Fls9tj4XWqLAeqtMY6hL/5
+ f2t9eN4ZLMDviPdORw6HXvy+9X9bYkLywmgaLvNKoYhfUOndSuDOCI3GsWeuem+P2CyXakyEHzJ
+ dt6rXONnGPkIhAb1FmR9wHeqgBkAqoC9JFB/4PS3hiR3hY50Wq5RqzDsDNV9eDgT+PaCtYqb1NV
+ /vhKAWu82v7r7weqUvZkTFGJ55O1ZvK4SwNhjhCKGMQze6bEqjAu2FPTPVK6tFyDMcsVIUV/8+h
+ ODpt5loBH5i2WQOgzZH09dpQZ3DhrWfCKGMp8A=
+X-Google-Smtp-Source: AGHT+IEuvLD3JBF3RlnGk3WoMvn9Wi2x/BwQuc2PwDpGQoblgnWvfpZXKfnesq9mPzg1qTap1TKCzw==
+X-Received: by 2002:a05:6830:719c:b0:7ca:e8bf:8c2f with SMTP id
+ 46e09a7af769-7cc66a36d07mr15669472a34.25.1767110975033; 
+ Tue, 30 Dec 2025 08:09:35 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667f958asm22394721a34.27.2025.12.30.08.04.23
+ 46e09a7af769-7cc66645494sm22836084a34.0.2025.12.30.08.09.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Dec 2025 08:04:24 -0800 (PST)
-Date: Tue, 30 Dec 2025 10:04:21 -0600
+ Tue, 30 Dec 2025 08:09:34 -0800 (PST)
+Date: Tue, 30 Dec 2025 10:09:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Parvathi Pudi <parvathi@couthit.com>,
- Basharath Hussain Khaja <basharath@couthit.com>,
- Paul Barker <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [PATCH v3 0/9] arm: am335x: Switch to upstream devicetree
-Message-ID: <20251230160421.GS710860@bill-the-cat>
-References: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, me@ziyao.cc,
+ daniel@0x0f.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 6/6] CI: Add test jobs for QEMU m68k virt machine
+Message-ID: <20251230160932.GT710860@bill-the-cat>
+References: <20251230160112.3045527-1-visitorckw@gmail.com>
+ <20251230160112.3045527-7-visitorckw@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="70843hrd6j882IjG"
+ protocol="application/pgp-signature"; boundary="ql+Qp/P8oqShE5Jl"
 Content-Disposition: inline
-In-Reply-To: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
+In-Reply-To: <20251230160112.3045527-7-visitorckw@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,61 +103,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---70843hrd6j882IjG
+--ql+Qp/P8oqShE5Jl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 04, 2025 at 11:25:36AM +0100, Markus Schneider-Pargmann (TI.com=
-) wrote:
+On Tue, Dec 30, 2025 at 04:01:12PM +0000, Kuan-Wei Chiu wrote:
 
-> The series is split into two logical groups:
+> Enable CI testing for the newly introduced QEMU m68k 'virt' board on
+> both GitLab CI and Azure Pipelines. This ensures the new M68040
+> architecture support is built and booted correctly in the emulated
+> environment.
 >=20
-> - Patches 1-4: Fixes for am335x-evm to boot and support the LCD panel
->   with the current u-boot devicetree.
-> - Patches 5-8: Make upstream devicetree working with uboot. This
->   adds tick-timer, adds compatibility of the board code for different
->   USB probing and updates the defconfig.
-[snip]
-> base-commit: f4cc2a9f36bdc1b9731aa285cc305d76c48ec79c
-> change-id: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
-> prerequisite-change-id: 20251125-topic-am33-clk-regmap-dep-v2026-01-2682a=
-39beeda:v2
-> prerequisite-patch-id: adc433677bb6413c278d00b9e1d6b04b12d4a825
-> prerequisite-patch-id: 949cc619ccbb8cca5b29ab30ac37377e45ae607f
-> prerequisite-change-id: 20251125-topic-musb-probing-v2026-01-1343fff8176b=
-:v1
-> prerequisite-patch-id: b8514a3b43228ff9ef6812dc5fe5eb53e2f141ae
-> prerequisite-patch-id: abfdeaa1999e4cbf98229c4eeafa9dd8dac4509e
-> prerequisite-patch-id: c6cc3f7eba8b785fbb8ea91cea349517c7c364fe
-> prerequisite-patch-id: 37352dffe91e2aef085c2a08fcbc922723dae7c1
-> prerequisite-change-id: 20251128-topic-simple-pm-bus-optional-clocks-v202=
-6-01-1cd38bd8d3d8:v1
-> prerequisite-patch-id: af032219347b46e51f58b7d26dac1f59de77fda9
-> prerequisite-change-id: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc=
-:v2
-> prerequisite-patch-id: 8fb4900ad4d09bcd2018ca4a1cf3066352a0c62c
-> prerequisite-patch-id: 08f3d2573f9574db8df2489d9637806362022fde
-> prerequisite-patch-id: e3832aecf03b9de58a4903c0372a20d9f9db86f6
-> prerequisite-patch-id: 65efd192958e9b5f852dc4bafb30afe526624649
-> prerequisite-change-id: 20251128-topic-omap-prm-v2026-01-c97c20cd5eaa:v1
-> prerequisite-patch-id: 92857feb9e8685fe0e68a0e8e18dcdb57df56634
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 
-Please note that this feature here of b4 isn't quite ready yet, and
-leads to it grabbing already applied patches for me. No need to re-post.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---70843hrd6j882IjG
+--ql+Qp/P8oqShE5Jl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVP4AgAKCRAr4qD1Cr/k
-Cl0dAQDWc7qQqQJ3Q1YTE5hl43EmIKmRhhpUV96tqvyxRWGDEQEAmJ26+UhAxsuF
-kqPAxevv9NWHAsBB09c2rBgSyUNOsAY=
-=v005
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVP5PAAKCRAr4qD1Cr/k
+Cmn5AQDEmqrXtUAvcE1wGpWAl/wj2BIf2gTVX21wQFJ+N0k5MgEAlrERpLBUZi9D
+9VAJlFgorPggHjcgnCymsitW2xd4nAI=
+=TTgO
 -----END PGP SIGNATURE-----
 
---70843hrd6j882IjG--
+--ql+Qp/P8oqShE5Jl--
