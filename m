@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1B5EE498B
-	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 17:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A9AEE4990
+	for <u-boot@archiver.kernel.org>; Tue, 30 Dec 2025 17:30:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B979D83F98;
-	Tue, 30 Dec 2025 18:10:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E750E8393F;
+	Tue, 30 Dec 2025 18:30:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D0hyZr3t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VcN7n9/9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA02683F9C; Tue, 30 Dec 2025 18:10:43 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 2528D83FA4; Tue, 30 Dec 2025 18:30:19 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3DAC83F93
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 18:10:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5F7A8392C
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 18:30:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3e7f68df436so7443115fac.1
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 09:10:41 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-65b855fba0fso3914935eaf.2
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 09:30:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767114640; x=1767719440; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=WTYCWgJjK6lAj+GVkpfK3P9YZ4/tC8XoKyKSf7VDSzc=;
- b=D0hyZr3taEDSYapjUCoEfps7B68sRMS2FSMH7Cv/pXSpOkn0qxQBAfNIekS26qwypK
- l7YYyzPqc0yTu4NYDCh7M62L+kZw73oN72EjJsGdaBNpbKJT0lZhaReUsFBk94uCCOy4
- Me3CdVRwDDL55bmIcfTpa6AbmdlHSAHizrqx8=
+ d=konsulko.com; s=google; t=1767115815; x=1767720615; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ywTdkRcc+hJzoyLPMBXzpVEs2pZc3gKKpEiX1UKYn1g=;
+ b=VcN7n9/9F+kiBjG4Dgld0kwvp/X4Cs4xGqvbApVNwq0hPmdrWSidRx9uViRqCjk5U9
+ Fm23zRuJGJp3Hqvlh0d0TrxbhPa140V4NFhntfaSKiZeqMaP7WDpeGNkZuv0mDkd8ncz
+ eF64XS8n7pe7QA6YUuRFhtijQNLS6+MrkmovI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767114640; x=1767719440;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WTYCWgJjK6lAj+GVkpfK3P9YZ4/tC8XoKyKSf7VDSzc=;
- b=NPqgskeEIF8rIxH5IWlRDNfeJ9Mk7q8jcmvEYewW/4vazeMZyUu7K99Vz6/kR6E8pa
- DGc6DwIgYJG81jH/Kcodx+tPcSoz4QL1bkhJ2QUmIgRqpjtVNHt/tlmDtMTX5HzFTYBn
- ObYYAwFBWCPD4FBb4MIDn7FtUlIl52kkZCWK+NCqwfznI83W2WfK17CGJ3OqSyRiaBlX
- uZtq1NbpTB9RzOa5Gk6Yh9mMKZt0fycpbdaBW+tIdIDQ8bvPPk3hOghY3r1NiOZ5sJEK
- GPnbKhF1hS4JLmwn+5UgoEH6NJatPkeZLLCReYCurKlSQ5b1V4BgZANj0aeW2t2KvFgv
- of3g==
-X-Gm-Message-State: AOJu0Yyo3Eg9A8FUWD+bZ57xKgHfqhlRhgJYIzMGWPM1Po4pgoDHNllr
- GVxMJuY3vt1hl/70l9oCHJ6l0w9AoaoFAEHY6KQKycw+YJBGHd4Hddiv4V3sGTdm+j8VxQLhYa2
- YII7Fp5E=
-X-Gm-Gg: AY/fxX6/JZmtijcCm7jwtAgXwLTQami40K8hKZT9W2mnHR7S6DTp2VhIE3Bs9dfu8GV
- GwLUYNZGwE1affzK4HOXQqRXBrqnlZBii4skZVBfgguZGyhewcd/4DhKj1Xx64aooq7dQLcCGj3
- BB9J6aUVEFxWfgB3wezGZsrY7TWppByICBQA9jOiTpbyOY8Hgv2xgC0mGgz+EUJmBivqcwzn6f9
- xVFWN021cyi27oK3FHOmRuqjoGih3yiF46P+J8i0XfMt8jV5J20kvoJW5IjWv/eCKjMBtz4OP0C
- sdA4hg0h1bs1fnTDi2nGYnna9gcMnSv6TgOm7JaKKRMet69ikZUCTSBvoKjuJzbi8WPxLLWKEPJ
- ThuoZovirfEpU02XpH6bBAg8biYZSHyFB7OnNZjDRcD6yYz4gesb91UcXJrEYR2eiF4WwgBPIVR
- p2QR83Arwn7i/c1KSDQM+2nETYJ8s4ZhAOA/po4tcjlFARuKszToZSFkaC4LKdzZ3eITNosdlTj
- pWt4oUW6PomlZwsTjOTwnsEuiTsF7Q38G3uvECXIA==
-X-Google-Smtp-Source: AGHT+IExCyuOdW1X9+GC1YuLXiefXxnZoYpTU0oo+8VsJXh3ap9wjyT3cTqWn3Ca4gmqm19g4mN0yA==
-X-Received: by 2002:a05:6870:a44f:b0:3e8:8e57:a40a with SMTP id
- 586e51a60fabf-3fa16b8d74emr17655605fac.26.1767114640150; 
- Tue, 30 Dec 2025 09:10:40 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1767115815; x=1767720615;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ywTdkRcc+hJzoyLPMBXzpVEs2pZc3gKKpEiX1UKYn1g=;
+ b=cMIwcVZvzv8n2IAevVvWu1eOenAofsM8R5pGNCIyB3K3K1Qaecn6puSs0SBuh9RLSK
+ 3i2QQ2yYWLfiXJFnR1AXV6NVNB8bd/6vwgEGjoCVI1qIdoJzNM1BKHrK0l6GOEyF7pRI
+ kNMGLebff2DJHsrPh2jHpMydGhfYTuXwrvf38JRgDaZnVuIviAGIyOo7B/FcNk26uUyE
+ KO+Ysmk9Rr25PIkr8dKX+OlrXs+iananxFCRow5UJHM9v8S6brdCPatf7BHk7ZDJRHc0
+ G94vqVX3wNynX3vNCUgo8WnmBTLqKe1UC9HkOiiltntzT2Fuae/gTVxOjwJwepYLolee
+ JStg==
+X-Gm-Message-State: AOJu0YzMXeDwDVTuCCjF6T0pBVEdj4k6rl8pn1mxg2iJxhZ4LKpu0olk
+ ut90EKqm5FZmGbq803LTzkDlKyCPJmIjs3F3RtfFZ0TIeq5+MeNWAgXkgW3onZhzNACncWNGCRb
+ lk613eZ8=
+X-Gm-Gg: AY/fxX6JBJGOoPHvXoU7idx81wTqZgjCaOZvPO2lfxV/XF5gCCZrYf3ackTYJHejkBw
+ /xvXXm37173Uo7iAdo4v/IeMTnUTHjEatXyDrI0rbxy/SwhhVWBUD/kWlg7mMzXqgXswCczeoIs
+ w1Q1VNOqbLJzbx2HGyOYER2uBLG5Z6L4jzC8ymW3ISZ9nDqVM1es7u5/CQ3Vjaj5+EjI9iv77Lc
+ vrQ4+D3hr4S/sOg/FNLLbWU90gG0/dGXFdgqZdsga7MR5IJRSELGPQFIg4Wf+X5mHJG/1ODMSOG
+ 7burX9zK15IRs5zFE7iT3M3E0GUey2pzYuNUfv8paDK1oRZYHJbgRY8wEcds7oc59vr2FPS2bnA
+ a+X3n7ajhMGXxghOH8U6HJvJOELcRZL9QIwuy/KtYAjNxvAHnMt90Kkjm9VQ9dPfBB81vfF1YOV
+ bsohABpDpy4LCL4R2iJhbBMMGewZ+XvP3rqSoYtfDhwudfoXorWgKboFSWtuuWbiRK+m4vBHXrV
+ iWPAw6FM3TmhHK82U9wQR6hKC8gWHUQOhq98eM=
+X-Google-Smtp-Source: AGHT+IGdqss0+fqJZ2KEgwa1agfhpeZTqZfFmpgJ3bJgFnAiKUvvjMenQX1DPWHP22jSDmyDyMaXiA==
+X-Received: by 2002:a05:6820:330d:b0:65c:f046:bb71 with SMTP id
+ 006d021491bc7-65d0ea9933fmr10041063eaf.46.1767115815241; 
+ Tue, 30 Dec 2025 09:30:15 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa8d44fdsm20309462fac.3.2025.12.30.09.10.39
- for <u-boot@lists.denx.de>
+ 006d021491bc7-65d0f3f9d15sm21487447eaf.4.2025.12.30.09.30.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Dec 2025 09:10:39 -0800 (PST)
+ Tue, 30 Dec 2025 09:30:14 -0800 (PST)
+Date: Tue, 30 Dec 2025 11:30:12 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] spi: Correct dependencies on AIROHA_SNFI_SPI
-Date: Tue, 30 Dec 2025 11:10:38 -0600
-Message-ID: <20251230171038.4155709-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [PATCH v3 3/4] video: simple_panel: Add tfc_s9700rtwv43tr_01b
+Message-ID: <20251230173012.GA147611@bill-the-cat>
+References: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
+ <20251204-topic-am33-evm-lcd-v2026-01-v3-3-ca74853bd5f0@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="s+ghvP7/WfcZ4TUF"
+Content-Disposition: inline
+In-Reply-To: <20251204-topic-am33-evm-lcd-v2026-01-v3-3-ca74853bd5f0@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,28 +103,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver is only possible to build on ARCH_AIROHA, so update the
-dependencies.
 
-Fixes: 6134e4efd432 ("spi: airoha: Add Airoha SPI NAND driver")
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- drivers/spi/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--s+ghvP7/WfcZ4TUF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index e31db9d4e31b..63d61ccf8ed2 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -61,7 +61,7 @@ config ADI_SPI3
- 
- config AIROHA_SNFI_SPI
- 	bool "Airoha SPI memory controller driver"
--	depends on SPI_MEM
-+	depends on SPI_MEM && ARCH_AIROHA
- 	help
- 	  Enable the Airoha SPI memory controller driver. This driver is
- 	  originally based on the Airoha SNFI IP core. It can only be
--- 
-2.43.0
+On Thu, Dec 04, 2025 at 09:31:16AM +0100, Markus Schneider-Pargmann (TI.com=
+) wrote:
 
+> Add timing data for tfc_s9700rtwv43tr_01b from Linux to the simple-panel
+> driver. To support hardcoded timing data as Linux does, add a new struct
+> simple_panel_drv_data which holds a struct display_timing pointer as
+> well. The hardcoded timing data is preferred over DT parsing.
+>=20
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> ---
+>  drivers/video/simple_panel.c | 62 ++++++++++++++++++++++++++++++++++++++=
++-----
+>  1 file changed, 56 insertions(+), 6 deletions(-)
+
+This leads to CI failures in test:
+https://source.denx.de/u-boot/u-boot/-/jobs/1341980#L269
+
+--=20
+Tom
+
+--s+ghvP7/WfcZ4TUF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVQMIQAKCRAr4qD1Cr/k
+CuRFAP9/ZsKVuDHgb1DQ3O1sYKKlFVYQbv9vXNvjuQrtOtXTNQEAwnX0pvxuMqKs
+1OqYGDc25pCHC+cnLg77ARB3N7QFeQg=
+=YLTj
+-----END PGP SIGNATURE-----
+
+--s+ghvP7/WfcZ4TUF--
