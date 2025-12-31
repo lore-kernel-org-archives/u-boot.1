@@ -4,89 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8FFEE6428
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 14:34:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD548EE6446
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 14:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78D2184073;
-	Wed, 31 Dec 2025 15:34:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E207583936;
+	Wed, 31 Dec 2025 15:46:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YER/jQKR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QbJPQPDb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF3C184027; Wed, 31 Dec 2025 15:34:13 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id D673B83979; Wed, 31 Dec 2025 15:46:18 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C2E684073
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:34:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F26383700
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:46:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-65d132240b5so6194308eaf.2
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 06:34:09 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-bc4b952cc9dso9358979a12.3
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 06:46:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767191648; x=1767796448; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vqrIjvUpTdp345H36M7dDpx58LTMHZSzrBj00yme6EA=;
- b=YER/jQKR3mmobNpkEL9MJVpsAZgW30sqgZYKUaEep6Ii5cOm6gAFladGK2zrLOzgvH
- F6mQOYOqRJdnxspfjB3NqvL0cm8wrOCCNF77uBT0lP8Fv9dobyiB2FIZZ1eW633bOEfu
- PliQr6WQe3lXDC5hcujAknDReQRYdEqrx0h/8=
+ d=gmail.com; s=20230601; t=1767192375; x=1767797175; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GyRGDyIEEOzBSsw4XTkXpbtKubwq+0N5niMT+kpfHxQ=;
+ b=QbJPQPDbi5fbX2iD9nTbjDSN3iWCbzhPdheS+uxyF9E28TML/OoGfW4GxhjrxD6oia
+ Mfywygbq1aKzhcyXxgrn7vlg8bJ/N7iYn036Q3OQFuBeRDFj3/5aJwx+/UoQfv3ij+6B
+ yt8XiyuGXa12RdpjQxzxzq2ntFU3T0TA8QhA61hxSECmXHcpfBetEYnY7VWWfdgpwt+P
+ 4AtfRpLkWQBL8kQU3zi3ini2MZj1wNmgY7dBLuYMWBXkOtxodSiYJCblwAkBgJEm37af
+ LvcquEu78pcCXk3bomDnJAFQyBobpa1AW8prP1joEBdMFPpneZpssYofvSHS6hNu53CN
+ fVaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767191648; x=1767796448;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vqrIjvUpTdp345H36M7dDpx58LTMHZSzrBj00yme6EA=;
- b=T+6tYhj01ilwFUzc0MeKsNp1kDs0+egJgV6QlcCQ0zLSXP/2A6QL0uIbPnD0Qc1GSd
- qu1Z8+ZWjtPIBEPASEWbE4LLMidbdnWhIlx8MKpGWe/LYLwTTuA4DS0mFyh4qcVBGj5E
- I0uHHceP/NLxgBxowEz30njXI8MGUqoUm1+s+4HyhABc090fpDMqy0cc5usVAqP58m6Z
- 6zKaUE/gqH+rrjDZZPjYCNksCL+AW4Sz9GvYjaTJ/L+7f7bognDHBkSNrikQhhOCq3QN
- ZEqBoYJPIPT7kdJ0eGXqraSYPBQroF0eZkpgJXkQCaUz9EyVTpcent2+IJTGeP3m/WLG
- 14MQ==
-X-Gm-Message-State: AOJu0YwggEsjzmOPNHZr7PULUPiXAHWt2sQIK6AWgN0e4lOInBaa8ayf
- aYtA9sGYQaT6XrunlkDu9EbryxKMVJ8GUbe9Eldo438O3P1QLrGmxfBGEW262H51Jun2x3nVxKG
- RwzgWWVE=
-X-Gm-Gg: AY/fxX4zm+xa0/pM5S2P8xL5ogWlczkkuk6lfhsIq3RtxCes5AkjZc5G4FbKBvndsKQ
- 157MAONI4Jh0TZaia7bbptElZvhvzq+i1weCQm0UR+p/ddyxNnQuIbuTgIkT2EsYO4UTjtsB9Z4
- 3+PKcZQHJu/5F/KdnjbXXxTIBsufM+hk62Mzip4Xgx2k8NySa5jklAIkAwd6xiOYoQdN1i5jgDj
- VYeWbhI5qyyty3EkyBnrA/s6fCc9a1HsQPB3BrAhGUrZLiqpE4Yv/8oNaFTHBY0XzQql4CGjA2H
- FMG0NpVJlT7lKaZvuyJ1sz/aSgjjH9Gt4WR1k84hOC1kkuI3yywTE4fJI/x9nh2ElSqFyOHAJkm
- FlSr0tHEPg4/K2em+5KvsXnkNTLaQilFr8VeYs3RjqhRkBId3F+6aBIzvo3LedBmUaum3e4EbBl
- vtEOjA9sgS7sKSeL0Y/rQq4CHgCoGfGeHE5a0AmRU0p7ZxsOkjX98BEr+8u/0sP/6XJ647+EUYq
- h2B3j8GlAWCJ7jWg/isK4ZY7jQ9cil097kVNz8=
-X-Google-Smtp-Source: AGHT+IF0C8R9O8aEtEp6kvqjkdmYsE2Mekm2V27dPa4i0olvHM8yP7ZJyMxo07kGY2CYjvbHyg3FDw==
-X-Received: by 2002:a05:6820:8512:b0:65c:ff20:a3b5 with SMTP id
- 006d021491bc7-65d0ebee5e1mr8840102eaf.77.1767191647952; 
- Wed, 31 Dec 2025 06:34:07 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f723ab6sm22557411eaf.17.2025.12.31.06.34.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 06:34:06 -0800 (PST)
-Date: Wed, 31 Dec 2025 08:34:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jun Chang <jun.chang@metanoia-comm.com>
-Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-Subject: Re: [PATCH 1/1] board: mt5824: Add initial support for Metanoia
- MT5824 EVB
-Message-ID: <20251231143404.GX710860@bill-the-cat>
-References: <20251230030328.215240-1-jun.chang@metanoia-comm.com>
- <20251230030328.215240-2-jun.chang@metanoia-comm.com>
- <20251230153115.GR710860@bill-the-cat>
- <e4a70eae-37fd-4648-bb17-66975c6d09af@metanoia-comm.com>
+ d=1e100.net; s=20230601; t=1767192375; x=1767797175;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GyRGDyIEEOzBSsw4XTkXpbtKubwq+0N5niMT+kpfHxQ=;
+ b=lS8uONZlc4Xp3bBziXEYv636p4eBh6AYyq+wkp80T+hhMflKnu7hG1AVVcKG+QnyCt
+ cmh3Gg2+11r+Ua86B5+R32ZJz7GvDGafcDk3Q2P7gH94+0kT21cml/yXLkS6R92Eai3R
+ CvDA2nkHdYlHryqYCECrd/F3dkXhah147hYBreiLZuAbDhArkqLSShobtQ6QcWGB+yS1
+ 0bRw0e4o0x0VpeNQ7dP/FAvoYbbyYc1Bx0E/i1/nOWMlTq1PrsgcHu/zWIIbWTGXNwH4
+ PgfAJRLlHtRpqhhYPDErT+0B3otvVp9OUL7fh3/sYl4vaPcTHYJpGJHXx2TDt0M2pOFs
+ RMAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUisgu+HJnZdWDZoYywg4Y3Diqy0tiv2RSMXwjQFC3fK9DM8D5UdN0qTVcmJfybErxUbHH9JJo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPnn7ubS/q2PcoG4Iqv+M9snxmxV2N8v6Rj+5CzIT+FHvs8pHE
+ iktN2vRaspFMOWSp/J0ca1dZfAPze1xiET2+SQinCujk+aheQQXrGQmU3zYcVVIxepWFSASqXaw
+ Egxit558wk2gAspQR1rtcSDob5CeL3l0=
+X-Gm-Gg: AY/fxX7NJGFd90m11PD4RpO7IqxLrG/2ty+CoMnGTT4szaByBcM1Gb4VqUUgPVkqRlM
+ WYE/nhy1zu+JbBF2MntryioCKCusOeM5N4568wi7MSExYZYwhIVwYyvv8qTeGORlmHIQQfiNGFK
+ HAJs30S9yMj/rEe22TKXBJDdWROgZ8GbRn3WT+Z5dQ+sGg+8EHQ/SNifTyQVruIFh1bWQHSN/67
+ AaAyL3pnzVhGDusaj2tnLlVh/Tfy03j90H7fgLOFQesoB0hhBxGc5afhjg/p8kh/4p9Tw==
+X-Google-Smtp-Source: AGHT+IHvwRUOh5k5XIMZQI+JCKqjYJWJFWdMsiThtJoOR6+K21HXqof9yHpp535c/B1Ep+7SrRk0pMT6hZ8cK4zBlh8=
+X-Received: by 2002:a05:7300:d110:b0:2b0:4902:c560 with SMTP id
+ 5a478bee46e88-2b05ec73ec1mr25316452eec.26.1767192374439; Wed, 31 Dec 2025
+ 06:46:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rPFMCsGM+vLjMHS/"
-Content-Disposition: inline
-In-Reply-To: <e4a70eae-37fd-4648-bb17-66975c6d09af@metanoia-comm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CA+DkFDbQr40f2V8eKD5cSECVTM6aZyeZNxbZMqT4SeQJjMu3fQ@mail.gmail.com>
+ <20251216-left-mournful-0bdb19f7c060@thorsis.com>
+In-Reply-To: <20251216-left-mournful-0bdb19f7c060@thorsis.com>
+From: Patryk <pbiel7@gmail.com>
+Date: Wed, 31 Dec 2025 15:46:02 +0100
+X-Gm-Features: AQt7F2oIXupH4x0hbJBMaBEkE09QTgp2jQh83_VXfDyG5W5usOe-03Drl9pYtwU
+Message-ID: <CA+DkFDZAgjL3amMoLqSTQbbKngeBk0EMBTciBDDKrxV-UsP=fg@mail.gmail.com>
+Subject: Re: Standard Boot integration - script validation before execution
+To: Patryk <pbiel7@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,46 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---rPFMCsGM+vLjMHS/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+wt., 16 gru 2025 o 15:59 Alexander Dahl <ada@thorsis.com> napisa=C5=82(a):
+> Reminds me on the problems I faced when trying to implement Secure
+> Boot with A/B rootfs.  IIRC there were two things I ended up doing:
+>
+> 1. putting the boot script in a separate volume outside of rootfs and
+> the A/B scheme.
+>
+> 2. use signed FIT image for the boot script instead of the old
+> fashioned U-Boot script, enable CONFIG_FIT_SIGNATURE, and disable (!)
+> CONFIG_LEGACY_IMAGE_FORMAT.
+>
+> Not sure how this plays together with standard boot, but once you
+> instruct U-Boot to only accept signed FIT images, that also applies
+> for scripts put into a FIT image.
+>
+> Greets
+> Alex
 
-On Wed, Dec 31, 2025 at 02:32:45PM +0800, Jun Chang wrote:
-> On 12/30/2025 11:31 PM, Tom Rini wrote:
-> > On Tue, Dec 30, 2025 at 11:03:28AM +0800, Jun Chang wrote:
-> >=20
-> >> - Add RISC-V target for MT5824
-> >> - Add board defconfig and DTS for MT5824 EVB
-> >> - Add SPL and U-Boot board support for MT5824 EVB
-> >> - Add DDR init for MT5824 EVB
-> >>
-> >> Signed-off-by: Jun Chang <jun.chang@metanoia-comm.com>
-> >> ---
-> >>  arch/riscv/Kconfig                    |   4 +
-> >>  arch/riscv/dts/mt5824-evb.dts         | 232 +++++++++++++++++
-> >=20
-> > What is the status on upstreaming this device tree?
->=20
-> The device tree is able to boot to U-Boot with shell prompt by the JTAG.
+As you suggested, I played a bit with the boot script and fit image
+and indeed it's possible to include bootscript only in the fit image
+thus verifying it using a verified boot mechanism. It can also be
+loaded by the bootmeth_script. That solves part of my problem. Thanks
+for that suggestion. I didn't know about it before. However this is
+only part of the problem I'm trying to solve as I said and would be
+grateful for other suggestions as well, but first I will outline what
+I actually want to achieve.
 
-Since I wasn't clear enough, I meant the status on getting this in the
-linux kernel tree so that OF_UPSTREAM can be enabled and we use the copy
-found under dts/upstream/src/riscv instead.
+I'm trying to implement firmware and software updates for my board,
+but have some problems on how to approach it.
+As a second stage bootloader (that gets loaded by the BootROM) I'm
+using BL2 from TF-A. Its purpose is to load FIP (Firmware Image
+Package) that contains BL31 (EL3 Runtime Services), BL32 (OPTEE), BL33
+(U-BOOT). Then, once the u-boot is loaded it is supposed to load the
+Linux kernel. Following my requirements I need to be able to update
+almost all components namely: FIP (thus BL31, BL32, BL33), kernel
+image (including bootscript) and rootfs.
 
---=20
-Tom
+TF-A supports something called PSA Firmware Update that allows the
+selection of a FIP bank, just an ordinary A/B scheme where there are
+FIP-A and FIP-B copies, and the selection happens through so-called
+metadata. It also supports a boot counter that allows it to roll back
+when the boot counter reaches max boot attempt. Up to this point
+everything is quite straightforward.
 
---rPFMCsGM+vLjMHS/
-Content-Type: application/pgp-signature; name="signature.asc"
+Things get more complicated when the boot process reaches the u-boot
+stage. As I pointed out I need to have two copies of kernel image and
+boot script thus I need the following:
+- bootscript-a
+- fitImage-a (kernel image)
+- bootscript-b
+- fitImage-b (kernel image)
+I am aware that I can embed the bootscript in the fitImage however, as
+I said before my fitImage is stored on the disk in the encrypted form,
+so the bootscript is used to decrypt the kernel image before loading.
+I decided to follow A/B paths for each component thus the TF-A is the
+source of the boot index.
+The information about the boot index selected by TF-A (A or B) is
+propagated to u-boot, so u-boot indeed has such information. The boot
+index can be then used to select bootscript-a/fitImage-a or
+bootscript-b/fitImage-b. However I'm not sure how to do this. I mean
+it's not technically difficult, it's rather a matter of "how it should
+be done correctly". What's more I want to make use of Standard Boot
+instead of old distro boot. Looking at the Standard Boot methods there
+is e.g. bootmeth_script available however I don't see how this could
+work in my case. This bootmeth_script just simply looks for a
+bootscript and if it finds it, then it loads it. As I said in my case
+I have bootscript-a/b, not just a single bootscript. What's even worse
+I cannot make separate boot partitions for boot-a and boot-b as the
+only partitioning scheme available on my SoC is MBR which allows you
+to create up to 4 partitions. I already reached this limit (boot,
+root-a, root-b, data), so the only reasonable solution for me would be
+to put the A/B artifacts in subdirectories under /boot part. To sum
+this up - the only sensible solution that comes to my mind is to
+create my own boot method that will use the TF-A provided boot index,
+then will scan /boot partition looking for e.g. boot-a/boot-b
+subdirectories (depending on the boot index) and the required
+bootscript (wrapped into fit Image so that it can be verified by the
+verified boot mechanism).
+However, to be honest I'm not sure if this is the right solution.
+Would be grateful for some suggestions.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVU0WQAKCRAr4qD1Cr/k
-CjI9AP0ZRE4b9qQ2w63UlWQSTf3uPpGXJwWm/7T29hU0iNxvoAD9FidW3jBtvgtE
-59wW6f6pPGyi5LEEdQEKn868Y834FQ0=
-=ynZg
------END PGP SIGNATURE-----
-
---rPFMCsGM+vLjMHS/--
+BR
+Patryk
