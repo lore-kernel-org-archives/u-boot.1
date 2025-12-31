@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C55CE9410D
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 03:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D85AEE49BD
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 03:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28A0F83FFF;
-	Wed, 31 Dec 2025 04:49:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E819784009;
+	Wed, 31 Dec 2025 04:53:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="bqiYWXmW";
+	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="a8RyWwfv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79B3D84006; Wed, 31 Dec 2025 04:49:23 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id BD5E48400F; Wed, 31 Dec 2025 04:53:06 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44F6A83FC6
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 04:49:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E24283FC6
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 04:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-7b7828bf7bcso12360037b3a.2
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 19:49:19 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7ade456b6abso8554435b3a.3
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 19:53:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1767152958; x=1767757758; darn=lists.denx.de;
+ d=0x0f.com; s=google; t=1767153183; x=1767757983; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wX9c7Etxkax1sX207H2c1h0k6th35OY+Dzf1xto0HyM=;
- b=bqiYWXmW8cWKQEPNOp9ilKX8BVZpRcp1NPSbAArQBQTMnefwmVvQm7x3wObWaLV4dN
- 1WCgIlMpf1qms21BceI9WEbAp+veokNOms9wBw/7d2Gl15Bhga9ZRygzgAnT+rHpWzWK
- 4LWvwsfgTfSxp1jbqGLxuDLPlA8Co+mx9l+KQ=
+ bh=rWbRukvhhPOJmRuhaqlo079lqhYzPaWf/8H1oZn7jsc=;
+ b=a8RyWwfvomVIMa7c/VwTNUajpui9IyVQ+JD9+T6NXFJw9+CFqpLgEAhF/T39/sZKNy
+ N/Q8lNozVa8L4hS3aCUVOp8He5eR8RXtz9TLfTy1UfAlr4Vn5Z1YkRenBTGOpDTtwhBF
+ uOjxsjSd9KB+CMrO6T6xECrlTMcZ+22HS5q8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767152958; x=1767757758;
+ d=1e100.net; s=20230601; t=1767153183; x=1767757983;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wX9c7Etxkax1sX207H2c1h0k6th35OY+Dzf1xto0HyM=;
- b=wYek/7htjqqbA/+ipVMd8MTHrgua3RjuugD8lxCbsZLvUzw0frpko5sbQzCgzhPq3c
- sU+a4N0N05B/o8uSXg8stIoJ2w9/KPiRJCE6eB+OX++GH2B7iPjiOV31rngiLididyOD
- Ifqcy20BBrXJU+vjsUpMQuT3yChjBBlMyGI77BXqO6S7f3Y7NzRfpXtvgmcMSW3EYDov
- Wtr+yCeze0WprGtSXaPSycqcewMqYYQtZCPTbHgcq26GuB5Rd5jZFi4OQZtgiNqMgpBi
- dVoQ/rFHhAnRmSP3Zc4Cx+tnMWm575iIdRGa1u0Id6dSjGc9HyMm2z0m/EkwHBzy8t9m
- 7Mcg==
+ bh=rWbRukvhhPOJmRuhaqlo079lqhYzPaWf/8H1oZn7jsc=;
+ b=iI6qerNGnmjivwq/LVcn0y0xY+UI016x0pOqCZauTTz7EvHiK+jky4GYDWkrURsH2D
+ xaWgiJlRU5Klwymr2Zi+momyJzWPMBpOMqG0gW9gvzoiMV0OqOuFDhnfXcH6pdQMzO/w
+ BaJkyq97qb4YOpqLnev5/2gsuF1wna7YsbLg1xAiMOn8vzHNuRvWabiQKsuumBp75Du3
+ w9p6wCcW+cJfrxj6kcz6tR/LMeZJpZpTv10jDz2htrD+JW9CBtu4LYDvNVwiveVuQEqb
+ nnS1Ty7O48b94noE46JQVwSreMNLpvB9y3Gl3z+iP6c6ZoDVvbQNy8wVVy31r2AqAMoM
+ joNQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6kix6Vv9TAFu+zOkDKbhjBFFz1szdEBJH1idSkIUHl03MldWECozP+bEr6yC0C8xZdbXdJOU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxieW9RzFRMiM0fcKBM3QxFW93nH2gmP9R2lR5E4zgLhMJWg5Fm
- yOPvPhw/WaXB8cKClcir53e3ecQgq6x7WwcFw8aQp7zU7DR4HI9KQUiQ1cBpyPFaRdTMv+FRXbI
- 2I6aCv9YsTLYULIgIwqEQqVYfrHmUTDCkKf+7LEW1cy9eHqTlvsE2FNOMIg==
-X-Gm-Gg: AY/fxX64VibD7WLd3M62twgfCIRsbpyXlnvH4tzERj68zlbkzaJ+35sbYNho0TSX5vu
- xn7Pd7YLpr7ftkBc2vQJYjRYCZWtH9Zt9xNGW4tCfm4rZuqct1RHXcSCa7wLTP0Dkl6STggdCNc
- rBmTVrA/Is2WWzve/s66avq7J/TN+4zmn93LUMTUPpVAHnNBQUi/jD5p3TOtG9oK9p4XfEFb/EX
- t99MALVGQynAf+OeqfYL6kK6i+GHjSgCSdeM8sdxgYEs1WyBKoXl+/C2+vx2ROVauWKK6mS
-X-Google-Smtp-Source: AGHT+IHBxIrBMO3U7fjKX1mCgHNcXE3t/Vv7uuxnIJpZ4z1zyV//Fza1OdJwTht9nzsrNsYVaO3CK27BM4acbjzGB+g=
-X-Received: by 2002:a05:6a20:7489:b0:366:1953:1d30 with SMTP id
- adf61e73a8af0-376a81e2ab5mr30232660637.5.1767152958490; Tue, 30 Dec 2025
- 19:49:18 -0800 (PST)
+ AJvYcCWZ8wZvP60PeFwOadjw1jQEWZbg9HW1GOBl72rt2gF628SRMlfMhLEQsVZd4oO9tb0m38RdN1I=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyeNHbPtxAF/fNzaGmKqYWhElNr2E/fcStHtcZLAjbNUdh6pIS
+ unkaXkol5CHFWJQrQmvOmrHdqQry9/Kl0rfJdlLCtomnNM1WQS3hA30eeyIO56dX6g1gHUZ8P3r
+ FTQXYL4JLxiKPGenLmlssf/DJRRGfc6kvB5YDPgfpwA==
+X-Gm-Gg: AY/fxX7xaXd83egMRx7bG5VnUqEgvEMu6QqTbO5fscH4zTiNJh5f73LAYyF7OU+Rle7
+ keuKkRg60t8g48t1MyiT53BZ3vV2mkY73fRXJB/KBLPQj/DMS400NdmIuca3PfdcGfarR5D5+V5
+ xdLZ0qROBDBy/xmcNYAC56FHlRvqo73K6bQe7mKBhS6LR3GerLfAipenTtv4eAgo+eCtFgzKBX/
+ g2XXgfyqUs10JcCiYhR+zJD2yGrSt0UVLLOiseUvtuN8Ln8T5e2Ixq7BZDQ2ucRQAMiWrtd
+X-Google-Smtp-Source: AGHT+IHq/blEjbvsW4KEdEx7hjBOUZel5MBG5l0AnBGUYOE3zT11w6gN5/DpK5h4PrOHw5imrOqTQ9gSQ1brQ66DOjE=
+X-Received: by 2002:a05:6a20:7f81:b0:366:197a:ece6 with SMTP id
+ adf61e73a8af0-376a77f12ddmr31372476637.1.1767153182850; Tue, 30 Dec 2025
+ 19:53:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20251230160112.3045527-1-visitorckw@gmail.com>
- <20251230160112.3045527-3-visitorckw@gmail.com>
-In-Reply-To: <20251230160112.3045527-3-visitorckw@gmail.com>
+ <20251230160112.3045527-2-visitorckw@gmail.com>
+In-Reply-To: <20251230160112.3045527-2-visitorckw@gmail.com>
 From: Daniel Palmer <daniel@0x0f.com>
-Date: Wed, 31 Dec 2025 12:49:07 +0900
-X-Gm-Features: AQt7F2prd7oWO4JcwILFRCBcsxbFw7no9hZA_36cHQrUBol_Z7PJmogioA6gseg
-Message-ID: <CAFr9PX=x0bRe9FL=srwGt1YEdyF3KGDUzz4D+uKQYC1-hoP1GA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] timer: Add Goldfish timer driver
+Date: Wed, 31 Dec 2025 12:52:52 +0900
+X-Gm-Features: AQt7F2rmFupiCrZNlvY5e56bc-753laY6NdggmH9a3srYlftuAbiEDa68cQiDYU
+Message-ID: <CAFr9PXmkcU4J8_wjReaf-cY9UAf4vFa7w+uTe727v0Wu5A1y6Q@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] serial: Add Goldfish TTY driver
 To: Kuan-Wei Chiu <visitorckw@gmail.com>
 Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
  me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
@@ -95,24 +95,15 @@ Hi Kuan-Wei,
 
 On Wed, 31 Dec 2025 at 01:01, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 >
-> Add support for the Goldfish timer driver. This driver utilizes the
-> Goldfish RTC hardware to provide a nanosecond-resolution timer. This
-> virtual device is commonly found in QEMU virtual machines (such as the
-> m68k virt machine) and Android emulators.
+> Add support for the Google Goldfish TTY serial device. This virtual
+> device is commonly used in QEMU virtual machines (such as the m68k
+> virt machine) and Android emulators.
 >
-> The driver implements the standard U-Boot timer UCLASS interface,
-> exposing a 64-bit monotonically increasing counter with a 1GHz clock
-> rate derived from the RTC registers.
+> The driver implements basic console output and input polling using the
+> Goldfish MMIO interface.
 >
 > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 
->The link provided by Daniel [1] returned a 404 error.
->Since the implementation is straightforward, I wrote this driver from
->scratch.
->[1]: https://github.com/fifteenhex/u-boot/blob/mc68000/drivers/rtc/goldfish_timer.c
-
-Oops, I moved it and force pushed. Sorry about that.
-
-Works as expected.
+Tested that this works as expected for the console.
 
 Tested-by: Daniel Palmer <daniel@0x0f.com>
