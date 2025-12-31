@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6EEEE645E
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 566F0EE645A
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4872383D62;
-	Wed, 31 Dec 2025 20:00:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F3CD8412C;
+	Wed, 31 Dec 2025 20:00:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ASUUMn5Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N+L87DoC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5D2584131; Wed, 31 Dec 2025 20:00:24 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 6DF6E83D1A; Wed, 31 Dec 2025 20:00:25 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A12383D1A
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:00:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5259383DA9
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:00:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6575e760f06so2877295eaf.0
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:00:21 -0800 (PST)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3e83c40e9dfso7244179fac.1
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:00:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767207620; x=1767812420; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767207622; x=1767812422; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/aSYc6HKTQoVL2i0a7eIydVGJ3T43HE1SbfagG92p8Q=;
- b=ASUUMn5ZXdxSpEfolAitYehdQYFUS7lymu5kLaxHW35K+AFgUb+GYlkyE4sOKZtOGm
- vBIl1J98H0iKtojeMKkYCDqvUyZoTXP63Xp1SMpOefmsR3zeeJskRdMUkyxBD4jlXAL0
- Pr/zQwadVnDvl2RCjKQEb/7scWhFely1vc7+Y=
+ bh=A3fgps7texUuxzRWPRAgAPDbxneWL1+UXouAdNcQVTY=;
+ b=N+L87DoCayYc4MvL0ozdJC78wk8rVE2eFO+n9wDN+zgs2AB+jdMwPDcFtWqkRJOYkN
+ bTn0Y3j7hrn39ezU2awlyMkEIkOu+ka+7bLD3H/0/qeiAn60CfxcW9S6XeziZdLkpjFS
+ guk77HwBVDF4WAdcdl0fZ2Ox7rfHabP98RFPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767207620; x=1767812420;
+ d=1e100.net; s=20230601; t=1767207622; x=1767812422;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/aSYc6HKTQoVL2i0a7eIydVGJ3T43HE1SbfagG92p8Q=;
- b=JdICQnC8gboTEFIzVpry2NyKXrWzsiSqKRrMtQo+ITs3cuswJDqCIVUthkGTT4O/35
- rYgekVwc9wB1uDnJKtdB5rgmklsEWtEnIT54UD9/39KfHq6YKhW4byXyjok8SDioFzfP
- ruBIT5NRi9/yCuumLY7/6gH5jiIbCeUKPTmmFDZC6EhY3mhFMYgwJLaMjfnNIIZccq99
- JTD95FENNwXvOhYqWrCzoDyPZgonLgbKFIAElRUlo5AZ09HskupK8h+m/08svP0loW7X
- 2JOE2DdVZi+rc7zMqJLQMEr9m9j/ThvFBOKshxt2IPCB+h1jJJVs0WhUaWh21jPPkAYW
- ZNmg==
-X-Gm-Message-State: AOJu0YypViZbVqPsPm15PL2N8IT6ul7+qCsyrLCvTvf21n1MM18xrerk
- RkBse5l05cLaL8J5O70t3RTpz7VH3qk8cSCt2rXaU0YLktVxXL/VxViLV2t3LCjBATI=
-X-Gm-Gg: AY/fxX6Oay28jtqqMLvtYLTr9Ua5Ch3psq9xg0zqpywgFWXqHrLawNrpbF7Yf12iyCc
- nZhCfJg8CJblv4XchJ2PG53xeoRgA3DAGcTxZTdqpszy816eImwaFiWsj0fTlU6vupydkHD4AwL
- Y7//fISFqNFjcWZo0bP/WZIasl9ceS6BCDf/Ez/cWTd6KrvvtKrBevn0AEb6ZfJSU59HhEfTFE8
- nPqX2zcSxSoiv1mvEq7Z4oSEybx+4ZYemU19JjYswmEP9825NWLtl0GvelTeF+fvdG9kQgI9pLv
- ZLwLU1Vt9EY6JCxPk5o6nY7MGKBI8OohbbtFuKFxye6HG5ePqff980/YMZhXDXncPVulgwT6Zqz
- 0OvBS/Kl30gV5+rM57WdbWHb29qMB4fDZGi9fazGlJGhPGWBqxA0T+m/lQnKrloETV//fGh1gKx
- f7gWRX7Qsk0Napgb7i89uyaRikEHfxOgFLNtElbCKcjI4eNb8lwZYrUdrZfDBX5GMzeDfjahUQY
- JNvPuA+MhZyGMdjS1xO6ichJz6HaNzrfacqtQ==
-X-Google-Smtp-Source: AGHT+IGT+VghxkNCahQJDvKps7eZBcJ/PLLDN0AH1+p/Q7JSC1CvWxuMAUAl5jRnpEn6B/CH5CcYHw==
-X-Received: by 2002:a05:6820:8319:b0:659:9a49:8e82 with SMTP id
- 006d021491bc7-65d0eb53f84mr9838736eaf.82.1767207620364; 
- Wed, 31 Dec 2025 11:00:20 -0800 (PST)
+ bh=A3fgps7texUuxzRWPRAgAPDbxneWL1+UXouAdNcQVTY=;
+ b=alADUJEVw44PV6LfktxFticfhqi/oRgQ3pk/HZia7K/hT03DV6VMzp4Jmx8bnLvPYJ
+ xBkp+VV6i9PLgaqVHu1T2TfApTbZdm+qHmJDc3gy5ekg36Szc6lA8yxzhl5QJ7W0bZ0e
+ cTg46TmF5EsEAH2b++CZut8Al9FIXhopuDHskFfhtW1Mt4j/L7wfDb0GBYmkmd8xM2y+
+ XDH6dwW/vJp1XqPseDGn1l8tXHVE09nAxxCXfwM4gegkGJrbmP09fWNZ+Wa7LkCLWG2u
+ qCPH4YNjB6RqBo2T90Du9byWVjhjJ0KBMW6bSB+HwrU1Ef1CKL0TX9lOnkKokJ5PD+6M
+ 0CgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaR6z5VLxSWsTWO8dZ6686Kktq2TOw7N3nHzIGCStlwaN/7ioFh5zZ9CtTRSJ2Fy76XzbCwtM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyO4SVnrcjUdfBvRjdn4H9SAgeNJM32iIHqL0MKHa+g5IkJ1OXL
+ hEur4RGPX9fDl39+oLAzqgHCr0OI589FuB/2A+1Le13/9kqh4VtWrx4XZr6hipOjwO4=
+X-Gm-Gg: AY/fxX4825ozBQpTKDCkoeWeBgEPlwtewXEAsQ+nJhaIjUSwGjrNEzLAbJFWgLL5smI
+ rCuUu6PjX/xNyNMnZLgL2/HXPqdnFFazu4xChXwmnBTauW1WJArDBoPdUHQlGuvNUiMGA31E4EV
+ 9QPEAXydd+HYtSS6uyYC8zH7CeJpTclv1ilZWZfk9DmmJ+Mrpml/+yosH0HiBNDpuKpFQMtNrnT
+ 8o2asVn8CZxmql0woj3p4ARIemJ8/qmp5SKZhmsdx8pfW9BNxpwZBxB6J/Xcgma4BpClAfrJt+I
+ J9KzXdUo3xG4XjjtzUw75fleFxrrvbBZPxu0s2y0yEdJC11lAqaNn8XRHzMV6o/I0fsGEkWG6fe
+ NXgEe2/Tf3iG8IXgSY3uyk7dUkM7Z1ikI+Y6uJXkaIj6rbJHTuigTBqz+us9KTPgZasojiZDLX1
+ BSCf9GTCtpTRrTgC/jq1DECi0vcVrK8Lp19DZLq5EtKkUgbF2umg49zFhO9GiXASAI3HkWpROB3
+ E+B+gnef5fn5Yj7Gf9l1qIWAiwTcXfsN8TeOw==
+X-Google-Smtp-Source: AGHT+IGK7dYv8hbuOh4EGGqou7mRzMscmMXnXWvJ8aBBy5IWHUuu1lfRmzWKqTCSDHgZeHk/vBcJiQ==
+X-Received: by 2002:a05:6820:2290:b0:659:9a49:8f6c with SMTP id
+ 006d021491bc7-65d0ea9a1f2mr17343202eaf.49.1767207621729; 
+ Wed, 31 Dec 2025 11:00:21 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f69b9e9sm22099392eaf.12.2025.12.31.11.00.19
+ 006d021491bc7-65d0f69b9e9sm22099392eaf.12.2025.12.31.11.00.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 11:00:19 -0800 (PST)
+ Wed, 31 Dec 2025 11:00:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251208190635.2044082-1-afd@ti.com>
-References: <20251208190635.2044082-1-afd@ti.com>
-Subject: Re: [PATCH 1/4] configs: Remove default malloc length for K3 R5
- SPL
-Message-Id: <176720761951.3066473.8280878361087035040.b4-ty@konsulko.com>
-Date: Wed, 31 Dec 2025 13:00:19 -0600
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ u-boot@lists.denx.de, Julien Masson <jmasson@baylibre.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>
+In-Reply-To: <20251210-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-71317e50d414@baylibre.com>
+References: <20251210-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-71317e50d414@baylibre.com>
+Subject: Re: [PATCH RESEND] arm: dts: mediatek: switch mt8365 to
+ OF_UPSTREAM
+Message-Id: <176720762053.3066473.10729163425674291127.b4-ty@konsulko.com>
+Date: Wed, 31 Dec 2025 13:00:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +107,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Dec 2025 13:06:32 -0600, Andrew Davis wrote:
+On Wed, 10 Dec 2025 17:40:14 -0600, David Lechner wrote:
 
-> These values are already the default, remove them from these defconfigs.
+> Change mt8365_evk_defconfig to use CONFIG_OF_UPSTREAM=y and delete the
+> U-Boot copy of the devicetree source files for mt8365.
 > 
+> The upstream devicetree is identical to the U-Boot one being removed
+> (other than having more nodes for devices not used by U-Boot and
+> upstream fixed a compatible string in &scpsys, also not affecting
+> U-Boot).
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/4] configs: Remove default malloc length for K3 R5 SPL
-      commit: 0082756320d713c412d6df13c0a3be9b29cf7496
-[2/4] spl: Kconfig: k3: Increase malloc size after relocation for R5
-      commit: d2bd9ee7de35b80092e1abaf8feb576dba25128f
-[3/4] spl: Kconfig: k3: Set common default for CUSTOM_SYS_MALLOC items
-      commit: 6de07498790d8af3073be3a73dff918e410cff66
-[4/4] spl: Kconfig: k3: Set common default for SPL_LOAD_FIT(_ADDRESS)
-      commit: dc1c7526b1cb64526601d81f70a87f57aeac1e9a
+[1/1] arm: dts: mediatek: switch mt8365 to OF_UPSTREAM
+      commit: fd104bea0c9596d34d5ff9fb1071936b42c333e0
 -- 
 Tom
 
