@@ -4,140 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA5AEEB565
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BA5EEB565
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8AFB840E6;
-	Wed, 31 Dec 2025 18:36:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 286B2840F8;
+	Wed, 31 Dec 2025 18:36:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="srH6uOd5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OYHcOznH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A16840F6; Wed, 31 Dec 2025 18:36:40 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 2EAD9840DE; Wed, 31 Dec 2025 18:36:41 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C8F7840DE
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:36:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D397F840EE
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E9OcPGn2YELjGRobPgZpdi9O3o3pYDklHp8LIMyB2ItMh0wXJOgIL/c3Z0z4CpQ8GmrpJZi73EElaeTovelHD7nGppuv8sEm367PS6/p0Ce/NdWm4s9k5jdKCxMspaDkw8h+HNKA3mc64X9VdPkdOcTAQfigXb52ot6C6SSKyqOTYzmfg4KhaJqhaWNPtpmQWBETGzglsIgPOvmTLNeX+BMAcuSNE6AJ7Qqod0AXT2x8n/UznI1ZGSkplpcfb+Ke5DcgC2ookUMOz/SNYWTuNddIEovBkUfbrxU7BAv/ES6eHlnh5OFEKFUYCEFKnRmwQgb8t0HcALIz/dpbg4OidA==
+ b=gKlX0TbOQLP9ved8iFC5dp++NUyey4aBHnD6/VjizMzeIt1oHrk5Q3C5orIxtnII+O6XynziazlggAkdqIqly2kormSXdlZsFY5Wv3aWDghaZX2A5ZBVaDBadFzRDVduKhFf7Qf3cRxP3AEeFPtwR5VsPn9/vDu9LAatZ0c67TSibxj7I1XXGxPj+hevuRW53Fgp/FIzDVwWrFJ8sUbChMxYNv3/EwSdo1lbbirLdeq7YyM+DUSWQ87tqfedLMfJvrTaM7/nxoUI5invd8XFhaMonAQjWLlflklrRSayyCGrL5otO/Dt1ChqLlcjOed/9q6frrJeo5/0LFW866mXnQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Boka77yTx4cqYwTJEL23gd1+ue/IrEeQf8s0Kp6rEmc=;
- b=NtWkDxRdqGLc19hUc799RkwqQsh9jVkg+dePL0srlw8A0CzihcB1mpwF/Ahl+ZDNnZ1yNmpB0PBIG6WAOYyOfXnY4Urae8LljiL2Hx7a3m0BRGZv3jYGOzgYT2/B8Jw4VjQ5W9oF5WrPbDSboRWntmECvwWKWS179Gz50xoeAJrX5H0ZPOHKCRVDX6ZUF91MdwdE2DHbhYOZKUBgUcaDKQ8icsHehhKSiXeXhWLwv1HKcwboVLcWa8UFt4h64n9rcr6L3+0sYZnyWcjcQEF3FvoyqgmwU+H6G8s7FZQFMV9aUQbQcJ1rykkHciWVPFVAPz8NkQ0AWgDS1pjhuAq+/g==
+ bh=yGr9vMVBd1UFCuxIpW7MkMT9vN9iR5zibdF7KoyF7nA=;
+ b=dWoNfFSqh7uH1ibEx3hIq6IBz4JKtj6YSCSI0ZbU9r1xOFjo1DxxyGZJk3TcKDyoLbK/PXqcIbcD3h0R4caAz0BN7xZyjUSyGdutRRd5WuL5jfTNXCUNi94MlEmlymoHiRKOXj6zwzuspJExowXSiFn2cHXQDpMEAHcS36Hw29gC8ge68mLkjGG2wtKfudl/C/P2SPmhRELf2sRPTDJxhuynsmYzQ8ozgFtnkU7/zBBtXxYo18HB47VnipaL0m+/vKwJpRTfsd81BSKyVQ17My/DJUWf6LpqJF/yc9Q8BBlKT2gA1bzu6YS5bnm/S3qPcR+4Zhsuy+GrY0bU/j/lQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Boka77yTx4cqYwTJEL23gd1+ue/IrEeQf8s0Kp6rEmc=;
- b=srH6uOd5TadsJgfFSotTQToq4MrGZysHjLgi0IrTH9p3lELJbtNxsRBMzsoQSI3tpU8HUAIt2d36S26mmxThkdOeDKsLKl/odYGmUN3rnr62YMrWKJYKbbaUMYdRXO1owLNRaM5duTLJcqd9MYnLx+CV8YLrhj3Sx2KTZmq60gY=
-Received: from BN9PR03CA0182.namprd03.prod.outlook.com (2603:10b6:408:f9::7)
- by MW4PR10MB6395.namprd10.prod.outlook.com (2603:10b6:303:1ea::20) with
+ bh=yGr9vMVBd1UFCuxIpW7MkMT9vN9iR5zibdF7KoyF7nA=;
+ b=OYHcOznHlC0w/f1htm5eo/FA5q+AEedyGKG59EoqOJLiQVqfWQFXhf+no/UoT9x4v6yo73pxcn4nL/Jep4Wtv6Gg0ZkuVtv4HVGSE/fs/eL3MMQZciHfyzN9FcrFWbWYUekqqBBz/h7r/ELqzIE5YVQNxrvxpK8OmWVANDVbdew=
+Received: from DS7PR03CA0069.namprd03.prod.outlook.com (2603:10b6:5:3bb::14)
+ by BN0PR10MB4952.namprd10.prod.outlook.com (2603:10b6:408:122::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.14; Wed, 31 Dec
- 2025 17:36:34 +0000
-Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
- (2603:10b6:408:f9:cafe::6e) by BN9PR03CA0182.outlook.office365.com
- (2603:10b6:408:f9::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Wed, 31 Dec
+ 2025 17:36:36 +0000
+Received: from DS3PEPF000099DE.namprd04.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::76) by DS7PR03CA0069.outlook.office365.com
+ (2603:10b6:5:3bb::14) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Wed,
- 31 Dec 2025 17:36:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 31 Dec 2025 17:36:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS3PEPF000099DE.mail.protection.outlook.com (10.167.17.200) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 17:36:33 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 17:36:34 +0000
+Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
- 2025 11:36:27 -0600
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 11:36:33 -0600
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
- 2025 11:36:27 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 11:36:33 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 31 Dec 2025 11:36:27 -0600
+ Transport; Wed, 31 Dec 2025 11:36:33 -0600
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BVHaOqp2541396;
- Wed, 31 Dec 2025 11:36:24 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BVHaOqq2541396;
+ Wed, 31 Dec 2025 11:36:30 -0600
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
  <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 00/11] Add support to boot TI K3 HSM M4 core
-Date: Wed, 31 Dec 2025 23:06:10 +0530
-Message-ID: <20251231173621.1069988-1-b-padhi@ti.com>
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 01/11] spl: Use FIT data address as fallback when 'load'
+ property is absent
+Date: Wed, 31 Dec 2025 23:06:11 +0530
+Message-ID: <20251231173621.1069988-2-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251231173621.1069988-1-b-padhi@ti.com>
+References: <20251231173621.1069988-1-b-padhi@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|MW4PR10MB6395:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0b49c7ed-03d2-4205-b507-08de4893241e
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DE:EE_|BN0PR10MB4952:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8dd78646-97e7-4bfc-6f16-08de489324c6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4EvBjaUH1WSjHUs9jUXa22A+9FEtnnd+uzm/5tGA0Ab66DPEVdUymRmSv+p7?=
- =?us-ascii?Q?g8U64QzlgtGCKU6Xrn1H02tpeaMWz989B1L1+uCjSjnLfR+ow7HeSDpqyuyh?=
- =?us-ascii?Q?GUiIE+V8jb9/NSg/TWxA38nUo5wFf9RAQSo1ODv0q5Gjy7+RlmDKlvGOtBQo?=
- =?us-ascii?Q?DyJeNqYjp+eDg/E5KjxNji7rBJCuvjXLwfhSLduDWhovx7FUqReyVgVcmy/F?=
- =?us-ascii?Q?OH2nawCcYKhCpY52Du3fxF8eFUWiwnrpWq38antCQrC3nmogT+nfQTjijTsU?=
- =?us-ascii?Q?2VSNotzXo8Zp9Wb+z63NB/NIxgKu8CmAWhj1Dk6qGm9IyJfevLdLG5TxuH1w?=
- =?us-ascii?Q?5ZoWo7GX9E5wsflvgxxizKQmlSjXQMifxvnzuThDg1gJyHpyigdckaDGoV4+?=
- =?us-ascii?Q?DWmzIRDcHyzRUa5etjvv5h5QwWlZcrTDKQYRhpdz699ibb97M3JcG0ky8xQ2?=
- =?us-ascii?Q?x1nJbqO0oVgADjhy9IsMWyJ01l6ofZgTcLf3B3BhkPFWfNC0yxK65Ak42wTd?=
- =?us-ascii?Q?34a/50TasBaz8joipVvWMrDmexVMiGUyzcIM+OtmXSwF8ywqFV3TvlaUsKFr?=
- =?us-ascii?Q?kfH5I0nakr+Rab0ZXtE60QL+PrQzqrprmFbr20y8bXZ7XWDzargg4pu3kaq0?=
- =?us-ascii?Q?ShKyn8/1Yq+ZP3pMm5bVAbz8M1NZeua0eCuOqbbtkfgp3jq8Fq1u1vRkQkO7?=
- =?us-ascii?Q?pOY+RkwqBOpnabPN5UiCPZAfLsZ7EXpdJ7ZxaiQ4PcGVseulnfhuKXcUJoU8?=
- =?us-ascii?Q?qlPJU4dxlJSvtRaf1G9VXNTtivPcRbOoMZUNTNlCUS973SGTq7hRXTT0LGQU?=
- =?us-ascii?Q?qgLVAFuoXr2XTrdzomfV5+8cY9z1jTfUUnQ06b3dPScQvwteUVogZOfD7u8a?=
- =?us-ascii?Q?5vcGRHA2/yFWrRMJuHjQPW7PLR35/ax2u6AzyELMtCtjud7OMXPjxdiqMCvK?=
- =?us-ascii?Q?wCtfRWXVvFCeYWllmK3EvI9CpigIhsLI6dFSJmiXjoG31aJYI7GU1MsGuugZ?=
- =?us-ascii?Q?mBdrvqzOpEawhW/+RX0NpC4RT62qpl4JrsSZ0RqUW8Tv/+qJozske7f98b6/?=
- =?us-ascii?Q?Kfqw/D3VpouXyD1F1FrMIguSWYED2wU2kwg82WOR5A/vPkwGgA1oBIfEiy3m?=
- =?us-ascii?Q?Mg1jpuEA9U5XcTwNoZuPa0J4w36U1BcuKaoZrU6tdZJX44WYGHzAtxcVnL8O?=
- =?us-ascii?Q?zxGrcHOnsHn75Bd2x+oBcZcm+O68LcklJkQyOrm/y2aSFbufWImVP1CTTXho?=
- =?us-ascii?Q?JmEpdsa77gA3m6SqI+K2PW/bA1DfiZsCD0q+PbO9YKMgkm1oLLCdeTPsewIM?=
- =?us-ascii?Q?O7kAaeyFyKaaytmsrff1nyIj6HhgdTSNuprJjhn5NQSnWR7sZda3Tj4pVSQc?=
- =?us-ascii?Q?CWCKslJFgkdo24jsCZQLy7MGQKtqzevug2Ib52Km89XBskf5tl4YjITm11Ix?=
- =?us-ascii?Q?8IsJHxC/ytrW59FNHwLWL1kwlw8i15i/TdAd/FGdX177AnYZ7twK8S+Ml5yn?=
- =?us-ascii?Q?wFiZUeZrjdGwUK6k93PU2GEwpQNvQB/VDgqWSGfr4WINGR7Nt8aFkqWdc2RJ?=
- =?us-ascii?Q?HPF1xg9VuhF/tzV8gCi8Hq8VJXGmHY+mxwuqV20i?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);
+ ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?C8U5bNJpQmGf6Z9ZiAo9Wnewwu9KzYuaJf+H2mfIxceK40nkdECRLmKF2evJ?=
+ =?us-ascii?Q?sznMboF/5BSeWa9fIay4/POAyP8wkbun52Qpl8mssDGnXThTgO5kbOcufseT?=
+ =?us-ascii?Q?wOox+hnY2AcXXAfAgVmK0Q/DYLQM3P3acgDmbc77V6205XvUfnMhLpDnVVlC?=
+ =?us-ascii?Q?5wFG42ik/KWRxXTOxsp9Uv7KxzNIiZoWJ3SHUxVRKJL39QhUNKoQT4oxhIL8?=
+ =?us-ascii?Q?9i0Xdlkj9vcIh2vcXRHNbeyBcO9conQ+IIYWy1Xrpj6uVsawLOybvbRGuTDd?=
+ =?us-ascii?Q?K3jvcgfjvWCSoufdvIlmLNBslU4Coe2p/hPzsWQx9u93HRtShu5XTRcy5GiU?=
+ =?us-ascii?Q?hoLTLqfcqxqGWY7TYB75tKUyvHk8fwX113hqmFWpb750TIGsUhXHcGSPwKYE?=
+ =?us-ascii?Q?MQffG+Quu3mXcqWCfWBMkqLuzCH49pV+PLbPG7ScyajwRp8Cg2+xWz83+jPq?=
+ =?us-ascii?Q?QrVVNM6yOsB8vScqu8ckc1UClBR7vxznuOdlGpqTkQWsGSLJQtVwZnAvhtdm?=
+ =?us-ascii?Q?vqP4UDbuvOVwB90er9TsH47Qw5Lygrp3PoYaKTvMCVpM79sU2gVtqZwu5AMA?=
+ =?us-ascii?Q?Y7JzfyXS2tlnIFLI0fvmyiJ7UGCzs4Q0RsS/eG3k3/Mr2nePp+kLstlHexqX?=
+ =?us-ascii?Q?dnhbSw4NZm+nPFAXmbu66XIxTB5pkjmLgy19FaDhV2Urpnl2xHBbCdllhAc2?=
+ =?us-ascii?Q?tO8TmAVC4z4LQZCDb/8E92FslfiEOvofLctyqFTD+cDH87wO8aetILEQAMvz?=
+ =?us-ascii?Q?VlZfcCkvMZmM8o9jtYurAXZ3x6gldZw0rkaxrh1pRqr0Sr2thuH6et5nnoeB?=
+ =?us-ascii?Q?WPNacv6Y5uBp8sdHR0SeOL8uA1d2iY96wnsTJR3Modkq6TY/5swxFv295N/R?=
+ =?us-ascii?Q?Ucg9fJzQWvTeZKE65E39/VBzZHT1kr+HYXH5I+d14uWvWKCxUak9RR4Vgdjj?=
+ =?us-ascii?Q?vaK3C1xNMVSOdB7xOcLEtUmzihu77ORfIboi6AXC8glD3aPah+GvOZUg58pG?=
+ =?us-ascii?Q?VTWcOKP+KKOsWp97sC3+lxOg+c0XWQOoyfPju0mC0jf6rjWlj+67gwBjgj9Q?=
+ =?us-ascii?Q?Lt49h+YHN5uL2DnlQd+nws7t4ToQ71Yy7wQBYl4t9Rdum/vre3kJj2JUCw3v?=
+ =?us-ascii?Q?1fyML5hOWsRXMLreIjh3mQJEWp5jqJK3Vs5YMgKXAhFyO1YRGbT8JtlkpIpm?=
+ =?us-ascii?Q?Ann+IFD9CYtaipeLTM2tX/1cLxcyzr5bFFko3AKFqLsAi3sgN1wMct16uRiz?=
+ =?us-ascii?Q?6qFJCqJZdzLuGxabfS1wxi8tdpZ/57/9yGyHrZHGIe6PH3pqwyCQcOH+VUmT?=
+ =?us-ascii?Q?4tq7NtnCY2SsUEKLPKFsPmM4909wo4xX8ISjiv+lz3EnUNU74UIpkHb+NJdx?=
+ =?us-ascii?Q?lvd3nzen2rwjDsvD9B4ZORLkJwaST6lfAdwqwvfPEi6adCmOPBdE+fFomdRl?=
+ =?us-ascii?Q?g4ZOxExpifZGcYZfu/W9mbMNHsNGg4A+FZZ9PtMf65YquNEdT3mG8RRS0g82?=
+ =?us-ascii?Q?TkujWPLq+OseenPUEdEewJopfn8XZS5VpzqUkhCQQsSLDjx25YUthEzLrSj2?=
+ =?us-ascii?Q?Vn6tbru59LOTstKCgEE=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 17:36:33.5902 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b49c7ed-03d2-4205-b507-08de4893241e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 17:36:34.6939 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8dd78646-97e7-4bfc-6f16-08de489324c6
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DE.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6395
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4952
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,98 +157,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some TI K3 SoCs like J721S2, J784S4, and J722S have a HSM (High Security
-Module) M4F core in the Wakeup Voltage Domain which could be used to
-run secure services like Authentication. Boot flow for HSM M4 core is
-different than the general purpose M4F cores, and is as below:
+In cases where the 'load' property is not defined in a FIT image node,
+fallback to using the data address returned by `fit_image_get_data()`.
+This enables FIT images to omit the 'load' property during FIT creation.
 
-1. Request control of HSM M4F remote processor.
-2. Assert Reset on the HSM M4F remote processor.
-3. Request Secure Entity to Authenticate and Load HSM firmware into
-   core's internal SRAM memory region. For GP device, load the firmware
-   manually into core's SRAM region.
-4. Deassert Reset on the HSM M4F remote processor.
-5. Release control of HSM M4F remote processor.
-
-This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
-firmware is packed inside the tispl.bin fit image. The firmware is
-unpacked into a temporary DDR address which is then used to load HSM
-core. The configs to boot HSM M4 core are disabled by default.
-
-Note:
-This series is dependent on the device-tree changes series posted to
-Kernel mailing list:
-https://lore.kernel.org/all/20251231165102.950644-1-b-padhi@ti.com/
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+---
+Cc: Simon Glass <sjg@chromium.org>
 
 v3: Changelog:
-[Andrew]:
- 1. Added dedicated remoteproc driver for booting HSM core.
- 2. Added support for signing HSM firmware images in U-Boot. [Anshul]
-General:
- 1. Add support for booting HSM on J722S SoC as well.
+1. None
 
 Link to v2:
-http://lore.kernel.org/all/20250506104202.16741-1-b-padhi@ti.com/
+https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
 
 v2: Changelog:
-[Andrew]:
- 1. Added support in SPL to load FIT images with no 'load' property.
- 2. Removed 'default = n' in CONFIG option.
- 3. Used __maybe_unused to decrease preprocessing.
- 4. Better error messages with error code. 
-[Udit]:
- 1. Added 'HSM' entries in enum at the last.
- 2. Added error condition in if-elseif-else ladder.
- 3. Hang System boot when HSM failed to boot properly.
+1. New patch. Add support to load images without 'load' property.
 
-Link to v1:
-https://lore.kernel.org/all/20250422095430.363792-1-b-padhi@ti.com/
+ common/spl/spl_fit.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-Testing done:
-1. Tested HSM boot across GP, HS-FS, HS-SE device types for J721S2,
-J784S4 and J722S SoCs.
-
-Logs after enabling HSM boot configs:
-https://gist.github.com/3V3RYONE/ad33683652c8c49e4fedab49f0493e79
-
-Beleswar Padhi (11):
-  spl: Use FIT data address as fallback when 'load' property is absent
-  arm: mach-k3: Use FIT image data addr as fallback if 'load' prop is
-    missing
-  arm: mach-k3: Explicitly identify TIFSSTUB images when discarding
-    buffers
-  arm: mach-k3: Add config option for packaging HSM firmware
-  arm: dts: k3-binman: Add template for packing HSM firmware
-  arm: dts: k3-{j721s2/j722s/j784s4}-binman: Pack HSM firmware inside
-    tispl.bin
-  binman: openssl: Add boot and load extensions to x509 cert
-  arm: dts: k3-{j721s2/j722s/j784s4}-r5.dtsi: Enable HSM core
-  remoteproc: k3-hsm: Introduce a remoteproc driver for K3 HSM core
-  arm: mach-k3: r5: common: Invoke boot of HSM M4 core
-  configs: j722s_evm_r5_hsmboot: Add new defconfig to show HSM boot
-
- MAINTAINERS                            |   1 +
- arch/arm/dts/k3-binman.dtsi            |  20 ++
- arch/arm/dts/k3-j721s2-binman.dtsi     |  12 ++
- arch/arm/dts/k3-j721s2-r5.dtsi         |   5 +
- arch/arm/dts/k3-j722s-binman.dtsi      |  12 ++
- arch/arm/dts/k3-j722s-r5-evm.dts       |   5 +
- arch/arm/dts/k3-j784s4-binman.dtsi     |  14 ++
- arch/arm/dts/k3-j784s4-r5.dtsi         |   4 +
- arch/arm/mach-k3/Kconfig               |   7 +
- arch/arm/mach-k3/r5/common.c           |  43 ++++-
- common/spl/spl_fit.c                   |  16 +-
- configs/j722s_evm_r5_hsmboot_defconfig |  41 ++++
- drivers/remoteproc/Kconfig             |  10 +
- drivers/remoteproc/Makefile            |   1 +
- drivers/remoteproc/ti_k3_hsm_rproc.c   | 252 +++++++++++++++++++++++++
- tools/binman/btool/openssl.py          |  49 ++++-
- tools/binman/etype/ti_secure.py        |  18 ++
- tools/binman/etype/x509_cert.py        |   4 +-
- 18 files changed, 505 insertions(+), 9 deletions(-)
- create mode 100644 configs/j722s_evm_r5_hsmboot_defconfig
- create mode 100644 drivers/remoteproc/ti_k3_hsm_rproc.c
-
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index a588d13eb40..c18c98b2959 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -803,6 +803,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ {
+ 	struct spl_image_info image_info;
+ 	struct spl_fit_info ctx;
++	const void *fit_image_loadaddr;
++	size_t fit_image_size;
+ 	int node = -1;
+ 	int ret;
+ 	int index = 0;
+@@ -893,7 +895,19 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 		if (firmware_node == node)
+ 			continue;
+ 
+-		image_info.load_addr = 0;
++		/*
++		 * If the 'load' property is not present in the image node,
++		 * use the FIT image's data address as the fallback load
++		 * address. This allows flexibility in omitting the load address
++		 * during FIT creation time.
++		 */
++		ret = fit_image_get_data(ctx.fit, node,
++					 &fit_image_loadaddr, &fit_image_size);
++		if (ret < 0)
++			panic("Error accessing node = %d in FIT (%d)\n", node,
++			      ret);
++
++		image_info.load_addr = (ulong)fit_image_loadaddr;
+ 		ret = load_simple_fit(info, offset, &ctx, node, &image_info);
+ 		if (ret < 0 && ret != -EBADSLT) {
+ 			printf("%s: can't load image loadables index %d (ret = %d)\n",
 -- 
 2.34.1
 
