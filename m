@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BA5EEB565
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D0B1EEB565
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 286B2840F8;
-	Wed, 31 Dec 2025 18:36:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69355840F6;
+	Wed, 31 Dec 2025 18:36:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OYHcOznH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ug6rbkki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EAD9840DE; Wed, 31 Dec 2025 18:36:41 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 9ED62840DE; Wed, 31 Dec 2025 18:36:47 +0100 (CET)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D397F840EE
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:36:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A19884105
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:36:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gKlX0TbOQLP9ved8iFC5dp++NUyey4aBHnD6/VjizMzeIt1oHrk5Q3C5orIxtnII+O6XynziazlggAkdqIqly2kormSXdlZsFY5Wv3aWDghaZX2A5ZBVaDBadFzRDVduKhFf7Qf3cRxP3AEeFPtwR5VsPn9/vDu9LAatZ0c67TSibxj7I1XXGxPj+hevuRW53Fgp/FIzDVwWrFJ8sUbChMxYNv3/EwSdo1lbbirLdeq7YyM+DUSWQ87tqfedLMfJvrTaM7/nxoUI5invd8XFhaMonAQjWLlflklrRSayyCGrL5otO/Dt1ChqLlcjOed/9q6frrJeo5/0LFW866mXnQ==
+ b=WT6yOXlCOzlfm2tlYE5QFwd/oZl1q4j/RNTE1pnEBPmiBTEFXss4Nb0+yvfczIk6EUHsGkdDZ8Q1yrWRTpgMsIqvPChPO4mQ9OZuK85/kglAfX14+a1MYqgoHBJ18fAkCDFyxOHlzNN/k7sHEupTmRI08btV/WPuHZEo5CQ8bzxJ8mk5knfUgct1QXaBwGjpZfSvHVMXPxv/nCHRK3FeHbhx7a8zA1p6iw7bioDIXTDR7io4Lt90Q0cJrM+bu7YoUm5+bBtb4zixvL/bVqzeDdPm9JaI7YOUe16M0h9ztk+o+u+7RUhS78XI50Byn3X5ehN8YQXb20xj4IMtxNNUBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yGr9vMVBd1UFCuxIpW7MkMT9vN9iR5zibdF7KoyF7nA=;
- b=dWoNfFSqh7uH1ibEx3hIq6IBz4JKtj6YSCSI0ZbU9r1xOFjo1DxxyGZJk3TcKDyoLbK/PXqcIbcD3h0R4caAz0BN7xZyjUSyGdutRRd5WuL5jfTNXCUNi94MlEmlymoHiRKOXj6zwzuspJExowXSiFn2cHXQDpMEAHcS36Hw29gC8ge68mLkjGG2wtKfudl/C/P2SPmhRELf2sRPTDJxhuynsmYzQ8ozgFtnkU7/zBBtXxYo18HB47VnipaL0m+/vKwJpRTfsd81BSKyVQ17My/DJUWf6LpqJF/yc9Q8BBlKT2gA1bzu6YS5bnm/S3qPcR+4Zhsuy+GrY0bU/j/lQg==
+ bh=NIlfB8ivqiCtB1QeppKhhiNGbQkPMBZcbUzr1WRUDeE=;
+ b=mTBxp6tY1dHFCa7a4DHljoj8DhlohrQTYvcZMLwOWMFRLMb+MY2ldIettASXsMsbjFAsY6KtW+sKFuK/Ezlk+RWVtEGmLVroF9bYP/E3vNVGoFe/5EuWdJQt4pDyowRJL0oXF1kvufGgoG59CIpBkKpqxxg188OR45+D6VnaTyp5Dt6x/hmOoyt4DnoqANiHj559wgIQnlyDMgFt9nJVOS6FNK0I1uLnH/+Jg2N2Qa6seIZ33ZPh3AH/bu45ODT0zBERrKZjR939516Y0AabBq+G+Cnm8o262F9zJ/yYNmfts3mk0VrwdpvA3dc5QYno2sB6FV/htUgR5d2H1WPI5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yGr9vMVBd1UFCuxIpW7MkMT9vN9iR5zibdF7KoyF7nA=;
- b=OYHcOznHlC0w/f1htm5eo/FA5q+AEedyGKG59EoqOJLiQVqfWQFXhf+no/UoT9x4v6yo73pxcn4nL/Jep4Wtv6Gg0ZkuVtv4HVGSE/fs/eL3MMQZciHfyzN9FcrFWbWYUekqqBBz/h7r/ELqzIE5YVQNxrvxpK8OmWVANDVbdew=
-Received: from DS7PR03CA0069.namprd03.prod.outlook.com (2603:10b6:5:3bb::14)
- by BN0PR10MB4952.namprd10.prod.outlook.com (2603:10b6:408:122::13) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=NIlfB8ivqiCtB1QeppKhhiNGbQkPMBZcbUzr1WRUDeE=;
+ b=ug6rbkkiACl2KTa8oi4j11U8eN5Lm+vGjTILaS08XSRVi6QS8jooy+aWpYX0f4Lsp2M+UbD3+WBUl3Sc1ygZ4DYKBLJ5XxsWhuDggHzqesi14GlII8hycf1oJKV3ERu+owhNc+c6pHKxH3IDOwgYhqOpJH/HjjZWiGl7Up1ojHA=
+Received: from BN9PR03CA0266.namprd03.prod.outlook.com (2603:10b6:408:ff::31)
+ by PH7PR10MB6060.namprd10.prod.outlook.com (2603:10b6:510:1fc::6)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Wed, 31 Dec
- 2025 17:36:36 +0000
-Received: from DS3PEPF000099DE.namprd04.prod.outlook.com
- (2603:10b6:5:3bb:cafe::76) by DS7PR03CA0069.outlook.office365.com
- (2603:10b6:5:3bb::14) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 17:36:42 +0000
+Received: from BN2PEPF000044A2.namprd02.prod.outlook.com
+ (2603:10b6:408:ff:cafe::6d) by BN9PR03CA0266.outlook.office365.com
+ (2603:10b6:408:ff::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Wed,
- 31 Dec 2025 17:36:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 31 Dec 2025 17:36:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- DS3PEPF000099DE.mail.protection.outlook.com (10.167.17.200) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ BN2PEPF000044A2.mail.protection.outlook.com (10.167.243.153) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 17:36:34 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 17:36:42 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
- 2025 11:36:33 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 11:36:36 -0600
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
- 2025 11:36:33 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 11:36:36 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 31 Dec 2025 11:36:33 -0600
+ Transport; Wed, 31 Dec 2025 11:36:36 -0600
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BVHaOqq2541396;
- Wed, 31 Dec 2025 11:36:30 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BVHaOqr2541396;
+ Wed, 31 Dec 2025 11:36:33 -0600
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
  <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 01/11] spl: Use FIT data address as fallback when 'load'
- property is absent
-Date: Wed, 31 Dec 2025 23:06:11 +0530
-Message-ID: <20251231173621.1069988-2-b-padhi@ti.com>
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v3 02/11] arm: mach-k3: Use FIT image data addr as fallback if
+ 'load' prop is missing
+Date: Wed, 31 Dec 2025 23:06:12 +0530
+Message-ID: <20251231173621.1069988-3-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251231173621.1069988-1-b-padhi@ti.com>
 References: <20251231173621.1069988-1-b-padhi@ti.com>
@@ -94,53 +94,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DE:EE_|BN0PR10MB4952:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8dd78646-97e7-4bfc-6f16-08de489324c6
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A2:EE_|PH7PR10MB6060:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2de24af6-40c9-4b99-4c33-08de4893293c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?C8U5bNJpQmGf6Z9ZiAo9Wnewwu9KzYuaJf+H2mfIxceK40nkdECRLmKF2evJ?=
- =?us-ascii?Q?sznMboF/5BSeWa9fIay4/POAyP8wkbun52Qpl8mssDGnXThTgO5kbOcufseT?=
- =?us-ascii?Q?wOox+hnY2AcXXAfAgVmK0Q/DYLQM3P3acgDmbc77V6205XvUfnMhLpDnVVlC?=
- =?us-ascii?Q?5wFG42ik/KWRxXTOxsp9Uv7KxzNIiZoWJ3SHUxVRKJL39QhUNKoQT4oxhIL8?=
- =?us-ascii?Q?9i0Xdlkj9vcIh2vcXRHNbeyBcO9conQ+IIYWy1Xrpj6uVsawLOybvbRGuTDd?=
- =?us-ascii?Q?K3jvcgfjvWCSoufdvIlmLNBslU4Coe2p/hPzsWQx9u93HRtShu5XTRcy5GiU?=
- =?us-ascii?Q?hoLTLqfcqxqGWY7TYB75tKUyvHk8fwX113hqmFWpb750TIGsUhXHcGSPwKYE?=
- =?us-ascii?Q?MQffG+Quu3mXcqWCfWBMkqLuzCH49pV+PLbPG7ScyajwRp8Cg2+xWz83+jPq?=
- =?us-ascii?Q?QrVVNM6yOsB8vScqu8ckc1UClBR7vxznuOdlGpqTkQWsGSLJQtVwZnAvhtdm?=
- =?us-ascii?Q?vqP4UDbuvOVwB90er9TsH47Qw5Lygrp3PoYaKTvMCVpM79sU2gVtqZwu5AMA?=
- =?us-ascii?Q?Y7JzfyXS2tlnIFLI0fvmyiJ7UGCzs4Q0RsS/eG3k3/Mr2nePp+kLstlHexqX?=
- =?us-ascii?Q?dnhbSw4NZm+nPFAXmbu66XIxTB5pkjmLgy19FaDhV2Urpnl2xHBbCdllhAc2?=
- =?us-ascii?Q?tO8TmAVC4z4LQZCDb/8E92FslfiEOvofLctyqFTD+cDH87wO8aetILEQAMvz?=
- =?us-ascii?Q?VlZfcCkvMZmM8o9jtYurAXZ3x6gldZw0rkaxrh1pRqr0Sr2thuH6et5nnoeB?=
- =?us-ascii?Q?WPNacv6Y5uBp8sdHR0SeOL8uA1d2iY96wnsTJR3Modkq6TY/5swxFv295N/R?=
- =?us-ascii?Q?Ucg9fJzQWvTeZKE65E39/VBzZHT1kr+HYXH5I+d14uWvWKCxUak9RR4Vgdjj?=
- =?us-ascii?Q?vaK3C1xNMVSOdB7xOcLEtUmzihu77ORfIboi6AXC8glD3aPah+GvOZUg58pG?=
- =?us-ascii?Q?VTWcOKP+KKOsWp97sC3+lxOg+c0XWQOoyfPju0mC0jf6rjWlj+67gwBjgj9Q?=
- =?us-ascii?Q?Lt49h+YHN5uL2DnlQd+nws7t4ToQ71Yy7wQBYl4t9Rdum/vre3kJj2JUCw3v?=
- =?us-ascii?Q?1fyML5hOWsRXMLreIjh3mQJEWp5jqJK3Vs5YMgKXAhFyO1YRGbT8JtlkpIpm?=
- =?us-ascii?Q?Ann+IFD9CYtaipeLTM2tX/1cLxcyzr5bFFko3AKFqLsAi3sgN1wMct16uRiz?=
- =?us-ascii?Q?6qFJCqJZdzLuGxabfS1wxi8tdpZ/57/9yGyHrZHGIe6PH3pqwyCQcOH+VUmT?=
- =?us-ascii?Q?4tq7NtnCY2SsUEKLPKFsPmM4909wo4xX8ISjiv+lz3EnUNU74UIpkHb+NJdx?=
- =?us-ascii?Q?lvd3nzen2rwjDsvD9B4ZORLkJwaST6lfAdwqwvfPEi6adCmOPBdE+fFomdRl?=
- =?us-ascii?Q?g4ZOxExpifZGcYZfu/W9mbMNHsNGg4A+FZZ9PtMf65YquNEdT3mG8RRS0g82?=
- =?us-ascii?Q?TkujWPLq+OseenPUEdEewJopfn8XZS5VpzqUkhCQQsSLDjx25YUthEzLrSj2?=
- =?us-ascii?Q?Vn6tbru59LOTstKCgEE=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jjnXpqb6beFT7iHfI419SK54N2W8FKUoEAdoNCm9COLrVF6Cw4phscC7pcnM?=
+ =?us-ascii?Q?BsFzeB/UtBLF3pFsWpAktmljAhaTcmxoUOAQ3BjrSM4YoXHVf7LrOuN5nSav?=
+ =?us-ascii?Q?yUtu2edtoDLZf7J+VXV/oiYWd2pZPV6rUA2wHd6gl0sVwlJKWEu11s27WZe2?=
+ =?us-ascii?Q?R2Q9glfPnehFWmWhk58g5WdqbOtFprRWVM/PCW4NH2JgxL4l/uSbXENHo31N?=
+ =?us-ascii?Q?5nZ2RYITOPmhBIuuFtJIN/a0uXoGf/wSpsvO1Q89h7IF+rXUhfWSC2wLmy8z?=
+ =?us-ascii?Q?nzmVxLhQiJyuCx8lC//ldAp+na9lN17bjSNv9YqolBXy9tOKXXoeYMqkYnyN?=
+ =?us-ascii?Q?45/E8cObbA/9UBWi+kQs7XETxtLSoCCvDwwTncnk25PdF58pHuwi6Pz6Xfa9?=
+ =?us-ascii?Q?Zar/YilFH7DxLBO2Zd426Y8ljAQXuUTmQSGZxX+Ef/l1Lj7/NiI+oSQ8hHt2?=
+ =?us-ascii?Q?AAOIA1bDXrEIwIQoh/Y6FaKC3DtQlnEYArkeEwZ70dU2/q3+b1K+Cj3jsdPZ?=
+ =?us-ascii?Q?cc0VQWNXQVIwhSYk/c+JG1rlr/bNFt4GjVgCsVtwWB9XTcru3ViKHtcUMJrb?=
+ =?us-ascii?Q?hV5e3zeojsaSIFeIbP4+jCXwx6uY6p6i9PzvPc97z13uoGBQdzJPH0IFTOnV?=
+ =?us-ascii?Q?p1lFLCLVgRvG1mL5uesn84qaOgf72MDosGXKEm+8bJcBYCpWyDcITJvJY9q9?=
+ =?us-ascii?Q?dklmankAsnRdSenOj2RMYgHAbeZZ+c9WaDXpICusPXbg17mn1VaQ7xexXga+?=
+ =?us-ascii?Q?WJo5zzoToVwflWnITLQYcMGJKfrkrO+P4GpAImQy/mutokXjzGrS2IO9bm1c?=
+ =?us-ascii?Q?+AdHtnrJdhHV2Fs8GL4+dvQXUuxRugms6qH+lWPwSiT005wqkz1ofmLWflnz?=
+ =?us-ascii?Q?BN7JcNf7uEcQJud9O0n82iO1uQWspqg7AqMBE6CN6UnCN47Fy4OmfYBUFsGV?=
+ =?us-ascii?Q?tV7e9tUB2rHKkGbmZtTNcB7Wd4D5akkYm174JFv3PEPtxnxpS3XjdxmjqJDN?=
+ =?us-ascii?Q?+gkBt7+goZhhZqsk0F0946f8gZPZfXBBuIjMHVvqrUNtkAPUdXbHesKXMe6/?=
+ =?us-ascii?Q?be42J+SZNX5/8Uy7VUx9IDBs5PWjjj8mdlRkWAixASqk4JHduy5Lr0CKKLNZ?=
+ =?us-ascii?Q?4CL3hZ4mN9DIfRhqHCPrMT8FZU1R5RkhINiIfgIf6Ryjts0oP5Pga6K7CXBd?=
+ =?us-ascii?Q?e8F7xMM/RtgJ4pzJUdFnAK1kKbibyIuWRoN4WSUSge9/zA6FgBkF3oAeTWSs?=
+ =?us-ascii?Q?ZGyguMFgQEmfQWbdtowi3sGbEGRaOrEs9SViFUIIkfaPKJ9LMaZJaZ0z96Ep?=
+ =?us-ascii?Q?H1Q7IU8i1kpkLOfQZ1sHjPvYdJ0b4CktHYyd0DVcNUFyA3CuizWGsr9573r8?=
+ =?us-ascii?Q?WS6xTMvu9rAYTdId4Nmj9gAGn49ylTxEyXZeE2ZHeZTVEGpsO2nyQmSOHrOF?=
+ =?us-ascii?Q?KKjmBIsRNPKCCKQKzvJ3UKaDJJLNu/SzZ9vtqD7CTzkPaaqk8/rbcALHJ8NX?=
+ =?us-ascii?Q?OyKtn9tfEz+hRTZM2iFgdQfMfBjucjVuXOHteYEjt/6kVYNm+h6zu6cZyhJu?=
+ =?us-ascii?Q?4dMGKqjUsAqM6BuCdkw=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 17:36:34.6939 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8dd78646-97e7-4bfc-6f16-08de489324c6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 17:36:42.1174 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2de24af6-40c9-4b99-4c33-08de4893293c
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DE.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A2.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4952
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6060
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,60 +157,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In cases where the 'load' property is not defined in a FIT image node,
-fallback to using the data address returned by `fit_image_get_data()`.
-This enables FIT images to omit the 'load' property during FIT creation.
+It is possible for FIT Images to skip mentioning the pre-defined 'load'
+address property. In those cases, SPL uses the actual address of the FIT
+Image data as the fallback load address. Use this FIT data address for
+referencing the image when the 'load' property is missing.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
-
 v3: Changelog:
 1. None
 
 Link to v2:
-https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
+https://lore.kernel.org/all/20250506104202.16741-6-b-padhi@ti.com/
 
 v2: Changelog:
-1. New patch. Add support to load images without 'load' property.
+1. New patch. Fetch FDT Data addr for accessing image if 'load' prop is
+not present in node.
 
- common/spl/spl_fit.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/r5/common.c | 23 +++++++++++++++++++++--
+ 1 file changed, 21 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index a588d13eb40..c18c98b2959 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -803,6 +803,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index 03638366046..390e1324fb9 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -328,12 +328,15 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
+ 				  size_t *p_size)
  {
- 	struct spl_image_info image_info;
- 	struct spl_fit_info ctx;
+ 	int len;
+-	int i;
++	int i, ret;
+ 	const char *os;
+-	u32 addr;
++	u32 addr, load_addr;
 +	const void *fit_image_loadaddr;
 +	size_t fit_image_size;
- 	int node = -1;
- 	int ret;
- 	int index = 0;
-@@ -893,7 +895,19 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 		if (firmware_node == node)
- 			continue;
  
--		image_info.load_addr = 0;
-+		/*
-+		 * If the 'load' property is not present in the image node,
-+		 * use the FIT image's data address as the fallback load
-+		 * address. This allows flexibility in omitting the load address
-+		 * during FIT creation time.
-+		 */
-+		ret = fit_image_get_data(ctx.fit, node,
-+					 &fit_image_loadaddr, &fit_image_size);
-+		if (ret < 0)
-+			panic("Error accessing node = %d in FIT (%d)\n", node,
-+			      ret);
-+
-+		image_info.load_addr = (ulong)fit_image_loadaddr;
- 		ret = load_simple_fit(info, offset, &ctx, node, &image_info);
- 		if (ret < 0 && ret != -EBADSLT) {
- 			printf("%s: can't load image loadables index %d (ret = %d)\n",
+ 	os = fdt_getprop(fit, node, "os", &len);
+ 	addr = fdt_getprop_u32_default_node(fit, node, 0, "entry", -1);
++	load_addr = fdt_getprop_u32_default_node(fit, node, 0, "load", -1);
+ 
+ 	debug("%s: processing image: addr=%x, size=%d, os=%s\n", __func__,
+ 	      addr, *p_size, os);
+@@ -342,6 +345,22 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
+ 		if (!strcmp(os, image_os_match[i])) {
+ 			fit_image_info[i].image_start = addr;
+ 			fit_image_info[i].image_len = *p_size;
++			/*
++			 * If the 'load' property is missing in the FIT image,
++			 * fall back to using the actual in-memory address of
++			 * the FIT image data.
++			 */
++			if (load_addr == -1) {
++				ret = fit_image_get_data(fit, node,
++							 &fit_image_loadaddr,
++							 &fit_image_size);
++				if (ret < 0)
++					panic("Error accessing node os = %s in FIT (%d)\n",
++					      os, ret);
++				fit_image_info[i].load = (ulong)fit_image_loadaddr;
++			} else {
++				fit_image_info[i].load = load_addr;
++			}
+ 			debug("%s: matched image for ID %d\n", __func__, i);
+ 			break;
+ 		}
 -- 
 2.34.1
 
