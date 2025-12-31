@@ -4,90 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA598EE6458
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5E1EE645A
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:50:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF005840AE;
-	Wed, 31 Dec 2025 17:33:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AC039840B5;
+	Wed, 31 Dec 2025 17:50:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BY1Im326";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="J1c+a5GE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB46E840B5; Wed, 31 Dec 2025 17:33:17 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 30E59840CB; Wed, 31 Dec 2025 17:50:39 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5013883F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:33:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF3868401F
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:50:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3f11ad6e76fso9164914fac.1
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:33:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767198794; x=1767803594; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=u0SgsKTe/aj9qBE01JzEHhoyDejUHgg/mtH6KDsz8cU=;
- b=BY1Im326crUAZqIT+r+04w0f5elCocj83mPdqDevUlphVEsMe8fgAzmOjzqbaxikzd
- H7hxMfVaL1jIlwZfARfKhZO3uiOfWpInx68o0k1i0rirGJrNnXxcLqjDcq1DTaCP+ST1
- I+WwbGTxmnMQvZEVbNxmcILcoyhxKfEzj1J+Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767198794; x=1767803594;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u0SgsKTe/aj9qBE01JzEHhoyDejUHgg/mtH6KDsz8cU=;
- b=fbtUUJucdbVd/hfNgBseygQT+Li3+ozD6u4viCKfHqvuXghCp7NZTf/DEc/P2t+KIe
- r2jrkNWB2FA9HRxRErCK2AZsjA90vjJ/8II/h7RqqKgMgFvPRfw7aCEVP7c6n/GssnRK
- NsUqifCMQWDENOGQL5qMH7OgOS9GzFRInUJozXXGOxD0/RPemOs9DEFwbYu/EqOT+eOl
- u9/k17tOOuUN6pAWJCoG19yo80MElIlzl27wMWA7abxK5nBH4swkMbTp9wq0fVGnJL79
- x16qXj9Rpz0YsDrLkeebYY3tdBuTIB0J3C/qx3QfIAibPaHKOiQI8dXmwAkd+rNVO/q3
- vNJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWpAMZxQdcdun/ZzZHDAbAyVJ9EY3lCWv8adS2c7QLeelBkQ2fEhmFQMrc1AP6GATEEYNIAfPI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlWn+HwG5CglJLrfou29Rwb+pAmAaWDN3uVmFH4z8hhF5htvQq
- Cz6bBygKNtOSatl43yvVX21Dhb7ZD3d1+xRXIfRkbdBlAo6BRtsViSgsIWcsxNamrs4=
-X-Gm-Gg: AY/fxX7bevgAzGLb7HrLmy+7HLA5LKLd+jQhnthZVrQ1IymCca870sfTyOFlO2Ung7s
- J7PVa6Jh2LlQH7sL4G8blc5gSSz2zNlUulOwAPFo/G3BT5rODVMed/8KPdx8wM2gCADFqBuc2cd
- yQ03BBq6aEeb/mkx6OVPDwqqAFwtH6zr8em+vaDTuGnLKmn/0do8bVUcObxADYXzJxjZzS3a0nz
- s+RThWkMSUc6Rm41Z0eGtu5eg3lIRJu/xsZudvkkoaxvJE9rq6TNmK4L5pELCkq2qz8jX7oV6QK
- EjowFyqt/akBjc5F2cLt8+Xb8TYk7ZNrCT3U4L5QuecyuNW5ZyQ+8aToSshZZGfZHBB2gtgQQrk
- gtITwNlvodpj4+q/HVT8QBxvDVH0rD8JFdfaG/cqTqaxqtbh00JNtqX+7kndX7Nl0FaDbZoGkxP
- 8Cqekwie8S6ix0zpEAVp9g6W2tRSq+Ckli05aTRYDqc51Es5S1rfTrDVzUOm38c7PfOFk8zNyor
- Zz2obO9RJ8nlYT4krTlAy5up2XS2ZUbuK5HvpA=
-X-Google-Smtp-Source: AGHT+IFwsQvJxt1ivIofK9wbxQLk0feC2p6SatbaX6YoOUoKK4QLJFDB8tgBNNr5L5/Qmiicm4Wqow==
-X-Received: by 2002:a05:6871:5e18:b0:3ec:a020:4c70 with SMTP id
- 586e51a60fabf-3fda523a217mr16292756fac.14.1767198794060; 
- Wed, 31 Dec 2025 08:33:14 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa9370c4sm23030697fac.9.2025.12.31.08.33.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 08:33:13 -0800 (PST)
-Date: Wed, 31 Dec 2025 10:33:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, me@ziyao.cc,
- daniel@0x0f.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
- u-boot@lists.denx.de
-Subject: Re: [u-boot-test-hooks][PATCH v2] travis-ci: Add config for QEMU
- m68k virt machine
-Message-ID: <20251231163310.GC710860@bill-the-cat>
-References: <20251230160651.3049301-1-visitorckw@gmail.com>
- <20251230161545.GU710860@bill-the-cat>
- <aVVP7LjBqbfY1Q5P@google.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dhGD95TJcz9tNb;
+ Wed, 31 Dec 2025 17:50:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767199833;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=O0SHgSQ8Lgkv90XMZ+dJGRCTMoNGvasX658GsfzFS6g=;
+ b=J1c+a5GEBCpoQ57r1h4w9OggEeRa1K0vYF5K7dlK+DaIE3k6dKt7euWA37NmEcTkAxG//P
+ RGDuGcG/F0ILOQlNyCk/copU8DABd40N+NZspEUv7pRMChO1yRh39G0W5kx2zlgsHA0uyD
+ mSEMEoJ2RW0Y67TmqM/tQwLJ93YmuAm2qeh3RabYXDoPa9dihZH0OnW6S4a3tXAtoV/KS4
+ WXGebwbp9OV+a2nATipTEMO6ReycoagoMu7WniBPhZTKclDznAEhDCTMKgP2qKAetfYOCb
+ L+DGqposeaFNl0WzzWU+eA+2Bhzk6uE1ZASE2l4pMKk6qrCi8dFyTvoql93HWw==
+Message-ID: <364a3396-8c37-49af-b4da-01ab5dfc5c16@mailbox.org>
+Date: Wed, 31 Dec 2025 17:50:31 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3stapuYOz3MFie3g"
-Content-Disposition: inline
-In-Reply-To: <aVVP7LjBqbfY1Q5P@google.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in SPI
+ NOR
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
+ <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
+ <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
+ <20251223233205.GG847766@bill-the-cat>
+ <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
+ <20251231161120.GB710860@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251231161120.GB710860@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: o1u7ucpyzjeoowtxbwbyx5uaxit6qhmr
+X-MBO-RS-ID: cfa82325cd1ae85a7e2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,56 +83,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---3stapuYOz3MFie3g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jan 01, 2026 at 12:31:40AM +0800, Kuan-Wei Chiu wrote:
-> Hi Tom,
->=20
-> On Tue, Dec 30, 2025 at 10:15:45AM -0600, Tom Rini wrote:
-> > On Tue, Dec 30, 2025 at 04:06:51PM +0000, Kuan-Wei Chiu wrote:
-> >=20
-> > > Add the configuration file required to run tests for the QEMU m68k
-> > > 'virt' board. This setup uses 'qemu-system-m68k' with the '-M virt'
-> > > machine type and '-cpu m68040'.
-> > >=20
-> > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> > > ---
-> > > Changes in v2:
-> > > - Rename to conf.qemu-m68k_na
-> > >=20
-> > >  bin/travis-ci/conf.qemu-m68k_na | 28 ++++++++++++++++++++++++++++
-> > >  1 file changed, 28 insertions(+)
-> > >  create mode 100644 bin/travis-ci/conf.qemu-m68k_na
-> >=20
-> > It would be good, but not a big deal either way, to also leverage
-> > py/travis-ci/u_boot_boardenv_M5208EVBE_qemu.py here. And I say "would be
-> > good" because really, we need because I'm not sure it will add any
-> > coverage over what we have today.
->=20
-> I checked py/travis-ci/u_boot_boardenv_M5208EVBE_qemu.py and it appears
-> to be primarily for network-related tests. Since I haven't implemented
-> virtIO mmio support for network access yet, I think it would be better
-> to introduce such tests in future along with the network support?
-
-Indeed, I just assumed networking was present in your patches, so later
-here is correct.
-
---=20
-Tom
-
---3stapuYOz3MFie3g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVQQwAKCRAr4qD1Cr/k
-CrHLAQDu7yHIEAJoOM+D8C7h2uYS1yXZPTPlAPQ2shQt8C5f5gD9FY+AUaPaDpN1
-vj40wl7oH97ncnSSdz7tXUZxJnLX7w0=
-=B11H
------END PGP SIGNATURE-----
-
---3stapuYOz3MFie3g--
+On 12/31/25 5:11 PM, Tom Rini wrote:
+> On Wed, Dec 31, 2025 at 05:07:31PM +0100, Marek Vasut wrote:
+>> On 12/24/25 12:32 AM, Tom Rini wrote:
+>>> On Tue, Dec 23, 2025 at 07:55:45PM +0100, Marek Vasut wrote:
+>>>> On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
+>>>>> On 12/23/25 15:31, Marek Vasut wrote:
+>>>>>> Add test for environment stored in SPI NOR. The test works in a very
+>>>>>> similar way to the current test for environment stored in ext4 FS,
+>>>>>> except it generates spi.bin file backing the SPI NOR.
+>>>>>>
+>>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>>> ---
+>>>>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>>>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>>>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>>>> Cc: u-boot@lists.denx.de
+>>>>>> ---
+>>>>>> V2: No change
+>>>>>> ---
+>>>>>>     test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
+>>>>>>     1 file changed, 99 insertions(+)
+>>>>>>
+>>>>>> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+>>>>>> index 383e26c03b0..48e31f19b3c 100644
+>>>>>> --- a/test/py/tests/test_env.py
+>>>>>> +++ b/test/py/tests/test_env.py
+>>>>>> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
+>>>>>>         utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
+>>>>>>         return fs_img
+>>>>>> +def mk_env_spi_flash(state_test_env):
+>>>>>
+>>>>> Thank you for adding the test.
+>>>>>
+>>>>> Unfortunately pylint doesn't like your code. Please have a look.
+>>>>
+>>>> Is this something we run in CI ? If so, CI builds did pass.
+>>>>
+>>>> If not, how do I trigger this ?
+>>>
+>>> We only run pylint_err not pylint in CI. The "make pylint" target has
+>>> been unused for so long that the baseline itself is out of date. I don't
+>>> object to trying to improve our python code to match standard practices
+>>> better, but this isn't the place to start adding complaints.
+>>>
+>>> All that said, a newline before a new function is just a normal good
+>>> practice and so at least the quoted here example should be fixed, just
+>>> like if it was in C :)
+>> There is a newline before the function, the code is incorrectly quoted in
+>> this discussion, see e.g. patchwork for the actual content of this patch:
+>>
+>> https://patchwork.ozlabs.org/project/uboot/patch/20251223143130.16266-1-marek.vasut+renesas@mailbox.org/
+>>
+>> So, what exactly should be fixed in this patch ?
+> 
+> Thanks for explaining. The only problem I have now is you didn't give a
+> cover letter explaining the feature and so I need to come up with
+> something when merging the series as a merge commit. I can do that, it's
+> just easier when I don't have to.
+2/3 basically describes why this series is needed, and implements the 
+actual functionality. I can send a V3 with no changes and cover letter 
+if still needed.
