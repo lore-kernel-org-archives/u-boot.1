@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDD7EE645A
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F11D3EE645E
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C553E841B9;
-	Wed, 31 Dec 2025 20:31:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 49FA084179;
+	Wed, 31 Dec 2025 20:47:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VKwpEAh6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="McCXCs2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE1DD84179; Wed, 31 Dec 2025 20:31:04 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A899F84183; Wed, 31 Dec 2025 20:47:02 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 302D7841BC
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:31:01 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b79f8f7ea43so2491364966b.2
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:31:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767209461; x=1767814261; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nNN3ugMXFKLlPtQpiabvdNcV0dM7PfwcCCmI7eZegKo=;
- b=VKwpEAh6Bk1i29SD5DCJ7ye4ayeSqrW1Z43wUl5Fs95CSJv68yzFWzHrqhkFkLAqTc
- dP26zlk6Y5yAkddCBeDPhUqFeBYiwCo01ccB+ZBvQIerPoKmnc+N5Pz88o2i2/tjShiz
- 2I7wsVPfdJhEzw03F88jcOem2py+1xCMZs1Mc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767209461; x=1767814261;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nNN3ugMXFKLlPtQpiabvdNcV0dM7PfwcCCmI7eZegKo=;
- b=XC7C46Kv+eluJH3MRtFzC4pnmJeWrkfs5aXAARmpCbQ+1DXyXFpOlfWYnK/CiSQAEp
- 3UJNamD31HaM2vglyr5GzRwtzLmWXl4g5JNAqItULZ+PXVIWYdQR46iW91+k8jHEwiL5
- SYHs2lAqtptFknVLxT0j7h3XefbSCpSBLFs/ozoaIT9l3LVwXKpiPInzfk3m5o2gocEC
- UmgjonUd1TA53Bl339k89YaJmwsGKlaIOMEUV63IFan8DIX8G7ipgSypFaA7IxFJQt2E
- /RiXegGdUn+LiUNy8bDd2Gp5Cqguxp7A2jAXB+PG2+Ny/x88iyD8aB6Zxf1EfzigqEsc
- HHYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWslYW4jx9b40muDpyD8auzhOuKhmNOBQ+ExN1/vGns0Ybi2/UfeaLkKPeZcUvNmtfnaLIXbE0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZnplJsFCTBwdjL+uHfAh23IXHC0Fm+WK070myDCBBn32QJIBW
- C4bj0AvgL8bHNqWzjvSB4+jKWeYmDsV6obMd8q8Whh/HUSYsDikLe2c6w89La+PUZzpst6iZzTZ
- dUssxl6InGkA3YPQb5nbqVRyKw17VjuKSlyHoU7tU
-X-Gm-Gg: AY/fxX5RTRCFWI+ySoBkk9b+zWjIN3E1b+zw769H6qEXSemwD5mnBtTKsXIn4INVgUt
- tOGvBoAVJ5D/VcfJS4aA/2PZl00Y+dtXNKctTx6TcggXGZeNJcMnqEDcs3O4nMv0RCdHJWGcfQB
- D5O8w19AGDXOGyBAYASsLLnujyNesstrWbaC9Rc2Uu+sqNy7Y+6UiyeyMi+C1AwTNvotcN/P+He
- ruXG4+Vv1iL4RZZK6kiD6iyfSvy//8E4H/JBaGVOrAx9+GMvYKCShdLo+p96wTkY+NLIQ==
-X-Google-Smtp-Source: AGHT+IGaI/O6yALq0QkPNdmOj1MjLHyiLkAtoo48jAAK3+CDeBG4kNtpItmgkYdOZPzRinmY4iFHitMh2N6l8jDHGkU=
-X-Received: by 2002:a17:907:7753:b0:b83:1326:7d46 with SMTP id
- a640c23a62f3a-b831326eb32mr1644422666b.30.1767209460639; Wed, 31 Dec 2025
- 11:31:00 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AF4784164
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:46:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 2A32060008;
+ Wed, 31 Dec 2025 19:46:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D188AC113D0;
+ Wed, 31 Dec 2025 19:46:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1767210417;
+ bh=VY0qFCGgBWAtB+Kfas6tC7Etu2f2QEWRCYZERkvRd1Y=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=McCXCs2bQwwwgbJ+AZhhFUXZrVeJPe/scRGrnshj2KtBRfp3HDfYeIq0KWNU1ruOv
+ /r9rIEGYNp4PXS4QwaxOqrXIB8DDced1dSV01MjbyUh88htOJKMMNKJyKcfXN7HO6h
+ c3DRRsVlXYXC90TzYFDPVjVWWTLKuT8mbJ2cxpXIvr4s1BiRLTZxHyX2ORojvMoQsb
+ TwosqvU2pArIbGjCUnVgwAVO8LgJA/8gpVMD/36361/G38VZddAqocuqRRjsGIcs6V
+ i30gG3POtUNhlm6RmRfzkCEcAZw431YJN+lajnXH/Kg+l0oUKEwjTquL1JD2YCpwQM
+ sCWL6nDwcPkww==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id BF636EE57C5;
+ Wed, 31 Dec 2025 19:46:57 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Wed, 31 Dec 2025 20:45:03 +0100
+Subject: [PATCH next] board: amediatech: Add X96Q support
 MIME-Version: 1.0
-References: <20251231141550.64310-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251231141550.64310-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Dec 2025 12:30:44 -0700
-X-Gm-Features: AQt7F2qhAl47vNYUsywicBkyzJ4OdZclTsV4gnbInaBOcPKkTnpLPx1XWKS5gHM
-Message-ID: <CAFLszTiWCR=GbYvZg3p3d5PEd2YC3azCyHGRP808wdJ72Hh6gQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: command `font` should depend on CONSOLE_TRUETYPE
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20251231-x96q-v1-1-316d703b8f03@posteo.net>
+X-B4-Tracking: v=1; b=H4sIAD59VWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDI2ND3QpLs0JdS0uLZENjc7PUpKQ0JaDSgqLUtMwKsDHRSnmpFSVKsbW
+ 1APXQEa9cAAAA
+X-Change-ID: 20251231-x96q-998c1376ebbf
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Peter Geis <pgwipeout@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Junhui Liu <junhui.liu@pigmoral.tech>, 
+ =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767210416; l=5199;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=DW6XfQTXEVovMGUjbqnFXyz4iJ8rNX4DfzYlvi/iLRI=;
+ b=mPMQT9vStbtOzmSpCjA3U3FEl2qXjcYFcRbGjb/g01Au6ZR8StSEoUIW9OYUZLvlcc7u1XIXL
+ lUU0pbGFnwHBGeHG2m8Cf/eqS2I2Am+qAXcBgiYY05sTMXYWQ6ulhhd
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,44 +83,185 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-On Wed, 31 Dec 2025 at 07:16, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The font command is not usable without CONSOLE_TRUETYPE.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  cmd/Kconfig | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index b71ac554c0b..b5b03eb5363 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2649,8 +2649,8 @@ config CMD_VIDCONSOLE
->
->  config CMD_SELECT_FONT
->         bool "select font size"
-> -       depends on VIDEO
-> -       default y if CONSOLE_TRUETYPE
-> +       depends on CONSOLE_TRUETYPE
-> +       default y
->         help
->           Enabling this will provide 'font' command.
->           Allows font selection at runtime.
-> --
-> 2.51.0
->
+The X96Q is a set-top box with an H313 SoC, AXP305 PMIC, 1 or 2 GiB RAM,
+8 or 16 GiB eMMC flash, 2x USB A, Micro-SD, HDMI, Ethernet, audio/video
+output, and infrared input.
 
-It should be possible to change between bitmap fonts if you enable
-multiple ones.
+  https://x96mini.com/products/x96q-tv-box-android-10-set-top-box
 
-Regards,
-Simon
+This commit adds a defconfig and some documentation. The devicetree is
+already in dts/upstream.
+
+The CONFIG_DRAM_SUNXI_* settings are chosen such that the register
+values in the DRAM PHY's MMIO space are as close as possible to those
+observed when booting with the preinstalled vendor U-Boot.
+
+---
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
+ configs/x96q_defconfig         | 46 ++++++++++++++++++++++++++++++++++
+ doc/board/amediatech/index.rst |  9 +++++++
+ doc/board/amediatech/x96q.rst  | 57 ++++++++++++++++++++++++++++++++++++++++++
+ doc/board/index.rst            |  1 +
+ 4 files changed, 113 insertions(+)
+
+diff --git a/configs/x96q_defconfig b/configs/x96q_defconfig
+new file mode 100644
+index 00000000000..650fecca624
+--- /dev/null
++++ b/configs/x96q_defconfig
+@@ -0,0 +1,46 @@
++CONFIG_ARM=y
++CONFIG_ARCH_SUNXI=y
++CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h313-x96q"
++CONFIG_SPL=y
++
++CONFIG_DRAM_CLK=600
++CONFIG_DRAM_SUNXI_DX_ODT=0x03030303
++CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
++CONFIG_DRAM_SUNXI_CA_DRI=0x1f12
++CONFIG_DRAM_SUNXI_TPR0=0xc0001002
++CONFIG_DRAM_SUNXI_TPR2=0x00000100
++CONFIG_DRAM_SUNXI_TPR10=0x002f0107
++CONFIG_DRAM_SUNXI_TPR11=0xddddcccc
++CONFIG_DRAM_SUNXI_TPR12=0xeddc7665
++
++CONFIG_MACH_SUN50I_H616=y
++CONFIG_SUNXI_DRAM_H616_DDR3_1333=y    # DDR3 is correct, but vendor uboot mentions 600 MHz DRAM CLK
++#CONFIG_MMC_SUNXI_SLOT_EXTRA=2
++CONFIG_R_I2C_ENABLE=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_I2C=y
++CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_SYS_I2C_SLAVE=0x7f
++CONFIG_SYS_I2C_SPEED=400000
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_AXP305_POWER=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_OHCI_HCD=y
++
++CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT=y
++CONFIG_CMD_UFETCH=y
++#CONFIG_SPL_PAYLOAD="u-boot.img"
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x60
++
++CONFIG_CMD_CAT=y
++
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=60   # os = 0, uboot not detected
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=61   # e59f002c e5810000 f57ff04f f57ff06f (4a0000cc)
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=62   # a9431e66 a9442668 a9452e6a a946366c (4a0002cc)
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=64   # 52800000 91008081 79400025 34000080 (4a0006cc)
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=96   # 340007c0 f9401673 eb1302ff 54000760 (4a006acc)
++#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=112  # f9003fe0 f94047e0 6b1c001f 54fffcc0 (4a0162cc)
++
++CONFIG_SUN8I_EMAC=y
++CONFIG_FIT_BEST_MATCH=y
+diff --git a/doc/board/amediatech/index.rst b/doc/board/amediatech/index.rst
+new file mode 100644
+index 00000000000..7bc42833ec0
+--- /dev/null
++++ b/doc/board/amediatech/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Amediatech
++==========
++
++.. toctree::
++   :maxdepth: 2
++
++   x96q
+diff --git a/doc/board/amediatech/x96q.rst b/doc/board/amediatech/x96q.rst
+new file mode 100644
+index 00000000000..27485c1b363
+--- /dev/null
++++ b/doc/board/amediatech/x96q.rst
+@@ -0,0 +1,57 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++U-Boot for the Amediatech X96Q set-top box
++==========================================
++
++Quick Start
++-----------
++
++- Get and Build the ARM Trusted Firmware (TF-A)
++- Build U-Boot
++- Write U-Boot to a microSD card
++- Boot
++
++Get and Build the ARM Trusted Firmware (TF-A)
++---------------------------------------------
++
++.. code-block:: bash
++
++    $ echo "Downloading and building TF-A..."
++    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
++    $ cd trusted-firmware-a
++
++Then build TF-A:
++
++.. code-block:: bash
++
++    $ export CROSS_COMPILE=aarch64-linux-gnu-
++    $ make PLAT=sun50i_h616 bl31
++    $ cp build/sun50i_h616/release/bl31.bin ../
++
++Build U-Boot
++------------
++
++.. code-block:: bash
++
++    $ export CROSS_COMPILE=aarch64-none-elf-
++    $ make x96q_defconfig
++    $ make
++
++After the build succeeds, you will obtain the final ``u-boot-sunxi-with-spl.bin``
++image, which you can then write to a microSD card.
++
++Write U-Boot to a microSD card
++------------------------------
++
++You can then flash U-Boot to the microSD card (replace ``/dev/sdX`` with the
++card's device file):
++
++.. code-block:: bash
++
++    $ dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=8k seek=1
++
++Boot
++----
++
++When the X96Q is booted with the prepared microSD card inserted, it should boot
++into the freshly installed U-Boot.
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 7870f1bc246..767e1831912 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -9,6 +9,7 @@ Board-specific doc
+    acer/index
+    actions/index
+    advantech/index
++   amediatech/index
+    andestech/index
+    allwinner/index
+    amlogic/index
+
+---
+base-commit: 8f520c0d5656196ec4912c837cc156a399350c33
+change-id: 20251231-x96q-998c1376ebbf
+
+Best regards,
+-- 
+J. Neuschäfer <j.ne@posteo.net>
+
+
