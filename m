@@ -4,107 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65677EE642F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 12:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F4EEE642F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 12:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD6F683F8F;
-	Wed, 31 Dec 2025 13:25:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A03C84019;
+	Wed, 31 Dec 2025 13:33:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YcCiTraR";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="J5pp19On";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 932C48401F; Wed, 31 Dec 2025 13:25:15 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id EF09E8402F; Wed, 31 Dec 2025 13:33:35 +0100 (CET)
+Received: from OS0P286CU010.outbound.protection.outlook.com
+ (mail-japanwestazolkn190110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d406::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B50483F6D
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 13:25:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 048753F861
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 12:25:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767183913;
- bh=zC8G0X3ojWPyrSPOLg15fZr96P+YQTJTkHXVWnUFAFs=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=YcCiTraRJw/zOoyuu8QlV9qxGo/zbgnV4rf8R4pnJruN+4eH3dfXhT3kFCQgSOnNC
- ssBlwO6e2frjXBzBcU/9Ck7DtuqJNWXgnTiRPBN6wdqzzZ/xPPOW3Qmddlw44m+vKo
- LypYKG6021edUrAj9obFIXw21A8r1Uq8rQ/T/zPO6/wV8juqN46ZDVNR4dzG62qMuf
- qBAv08Ix9sJSAj4EupeifMLdFwKkygwADu1wyN8RiTiNsOEiBcCr1JF+9UhJ4DluMw
- 5QuNl+ASTMVmgAc5kKwNf+lm2d6EzYv0cxop5S/2u3Z6HhXpI7MO0n1qxlzDg6e5rA
- 65xyDSF0cubw40SyKiW4zRNA7hCmHGG6QgUtiIYx0qvvJgbY7bDHQ/7LZUk5ll5XxN
- 9yDvcuGHlqV5BEdnMUSefVzFXKP5VGxvWcp/QDE+FnFZ/aANAnb4pkPYIRDIcr5u70
- UH3V7l3gBmOQrDvd7SDa3ro9mQadww+2EqeGtSrniiIZ5+VO7yYWCHkgq+G31wf0/9
- kC7MaZ1Wu4mu0svy1fht0qLCugKx50yjKmj3oiXFNdPDnDAu1fQyqw+T7ODDegHzis
- nzarSv7OK6htMt5unSybLj9P1TIW+DNcCvNVgWjAAmEjHP+SxEqAPiS6pkDjvtsutV
- V/OoXwyesGl13aD0nOmSHMiU=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4775f51ce36so95602885e9.1
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 04:25:13 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767183912; x=1767788712;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zC8G0X3ojWPyrSPOLg15fZr96P+YQTJTkHXVWnUFAFs=;
- b=FGwcQC783h7AkVoG+o+sDnssbbmOZUU9/yRvZ5+/thKAMxQgOKLZlG4yM4pH+06gbB
- m+VzLu4irb819GmmO3r6m2V9cCVmn4qwauET1j4jNnrpiDvUfiPGyvo4AB0VeAl7568w
- 6NAIbBOWJZ/DILspn5wAMrQsFL013PHmIow6xrJmqWQmdXyruSFhS1qh25qfugEU5glT
- roo+ytwzA/CGSu7Pu/23nW0M41wN78E2Ut+av+zX5/Spda7BuO5RdUASAJg9pj3KZNur
- LRv283X2UHAwyoPN5R8g+UpxVodbiCuscyvI8PN6CsI7YKTuH9VaEdYPiqftrBKsR3Am
- 7qlw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJBjrf1NOHFb28VbRORudq0s85fcQ1LTms0Kse9YqKBmUJMePhIGF/BBnOYh2pAELsUFOLtVQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIjpt4J9C1kT9nh0lKFzeGIIpazslpSrx3JNyQYzBNu2Qg6mQX
- 7Z1g6pWmFVyADAVwQMCHqJSFvv7rVyDR7MMwF8fou3GW8hY6U29GRQJGja818lx7aoLImoUe20k
- bXh6A6QDW+Ia75jQRiMMpSBSu/RVbqeJP7PCijsEvSgrN1AQJLvvytigamTQrH1HJAmwMmfs=
-X-Gm-Gg: AY/fxX4hca/0UvZ5uqLWWRfelqsHlm/tOvoSgpeLZWPZ3ncX8VHraBg7SqY8yvGaAoN
- S3cELqA01C4rReYnwloW/onyuNFUM6BNhXuFmfwNcNjvc6nzr0zwVrWRstoWcaLp7+O3bqCMBDH
- aZXfWj9G4d0n/WtKVTGtNRRrndyz33TjaZjqRBU3eVzm60XuwyJvBdoOyWgig9VRhzRbNqbP8+E
- XAOYOh1sWppLW70VoUP+DRuiQnUIR35LrC3wLSud91brFQ/dXhbCfiN+r6g8YvJ4TW7S2sfej5s
- nxSpTnpSUWPsFJax+97o/lD7TAVo4Xoo5jw+q0aiobRMSroM4vF7f/knLxZsAlJLxM381CidGaS
- iMKeCka7Bb0A836g1yDFVRZ6u7QQJn7KOqg1AX37QQgJUDRfsCmR5ZD9EbndSz5Cz/g==
-X-Received: by 2002:a05:600c:5487:b0:47b:da85:b9f3 with SMTP id
- 5b1f17b1804b1-47d195a72c0mr474394425e9.23.1767183912414; 
- Wed, 31 Dec 2025 04:25:12 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFXO9SE+/GgP3NkQggaKCv0qoVMSoG+y5ibbPiV8+8QbNbxGyVt3Gp3sJaR4Kn8nJjqTJFYkg==
-X-Received: by 2002:a05:600c:5487:b0:47b:da85:b9f3 with SMTP id
- 5b1f17b1804b1-47d195a72c0mr474394105e9.23.1767183912029; 
- Wed, 31 Dec 2025 04:25:12 -0800 (PST)
-Received: from [192.168.103.126]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be2723b2bsm693683025e9.3.2025.12.31.04.25.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Dec 2025 04:25:11 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <4138cb5f-590f-4e80-b88c-2c2dd8894c2e@gmx.de>
-Date: Wed, 31 Dec 2025 13:25:10 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 1039483F6D
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 13:33:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=yangshiji66@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fEVCI/7UX6ZCVJfGuVsR3OiDVd8o83NgaQJ+UcTBWTrwspEjiLKpmL3RhK7IDCiATG9Ok9TEzqozwPBelaTPcfoazSpWp6QU8StP8kSLFEkGyA8AUazmZ6oLKzMzUc9go50gtz6iQK3Z+Wha5/ZbdVVZNkf0swdQnpCfpdujHdBTvTEWVIqTzBLYvg6mZHdl0/diIb1hvEMSQi40UqSEDHFXaF7wsO9kTk0Nq3O3Som8iuk9RLJiv667nmfoHyG0GA51ivWluUubohvwnpRm+my/C31ood+JvaHyBU4KM0OD7Q0tKK0ls22BSBW71FMrca26Am0CFeyIdEGqHPOL0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M2VHY+4HPv72IiIj6oTHtjM2O1Kfop6HiwOKrHfjd9w=;
+ b=dQ/jidd/ICRJfRtV8gSOA8kG1sLYYWT7DRqCJeM7JpCW5p26KlF8MFLimes7lgoFBNJrGEDvDh9sfHd80mImCW/LOHUH0UScyEKmEpjMwzrRqND1gscRLoZxvr6FEp582hHbZzxqEjtn3jHaet+tOYusfCkzVKGsY6YDhRTySwsUJzRuXlflGIT8nY8682gAu+5DRG3AZVbGHNA+v/DZJr5qCVhsFsry5MNz5q8T43ZEgKv1GBa6XmJgZYCBO5FFFYju8ak+vfCDSbNsDmbXdtNAqGeFoP2QySS6dreS1Vv4OQZpekTyJI9QQqzTO1CBsvCq+YZfuMYe9y+zZ1qsbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M2VHY+4HPv72IiIj6oTHtjM2O1Kfop6HiwOKrHfjd9w=;
+ b=J5pp19On36cxMgrlZs6U5VHCrxBLx+qxThKgZG9+/jXodXqbUrZvypiKnoxJW0CbeNKboF3Oqr/ua9ZVWp3p1+jUQPQp7IkeugMtLH0tYgKk6c5wVG/t/ntKG+GvKvQVu3Iy0qGmPOFtxCNUtiH3dqZ0HprAPNq9B4Mk1ONVyry6xqex4Zgf/PaX8AHciCereoJ666VXqqhpL8amCFJGOKT5jwxYpeT9/noQ5zw3/ds+6XpHEP8BTQub5GJp+v9MePC02U2VWsIVrq6NM30tj+Ig1qSV2P1TwU3YPg1Kclpz8HK4GRjebV+AWsIqODS4HUyJ1Whou2635Ch8E+5t/g==
+Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
+ (2603:1096:604:36a::14) by OSAPR01MB7303.jpnprd01.prod.outlook.com
+ (2603:1096:604:140::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Wed, 31 Dec
+ 2025 12:33:23 +0000
+Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
+ ([fe80::6e58:e4b5:3405:28d6]) by OS7PR01MB13834.jpnprd01.prod.outlook.com
+ ([fe80::6e58:e4b5:3405:28d6%4]) with mapi id 15.20.9478.004; Wed, 31 Dec 2025
+ 12:33:23 +0000
+From: Shiji Yang <yangshiji66@outlook.com>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Shiji Yang <yangshiji66@outlook.com>
+Subject: [PATCH 0/2] mtd: spi: add support for new Flash chip BoyaMicro
+ BY25Q256FS
+Date: Wed, 31 Dec 2025 20:32:31 +0800
+Message-ID: <OS7PR01MB13834542EA65B2EEC830EE37CBCBDA@OS7PR01MB13834.jpnprd01.prod.outlook.com>
+X-Mailer: git-send-email 2.51.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2P153CA0038.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::7)
+ To OS7PR01MB13834.jpnprd01.prod.outlook.com
+ (2603:1096:604:36a::14)
+X-Microsoft-Original-Message-ID: <20251231123234.1323171-1-yangshiji66@outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] serial: Add Goldfish TTY driver
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
- eleanor15x@gmail.com, u-boot@lists.denx.de, alison.wang@nxp.com,
- angelo@kernel-space.org, trini@konsulko.com
-References: <20251230160112.3045527-1-visitorckw@gmail.com>
- <20251230160112.3045527-2-visitorckw@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20251230160112.3045527-2-visitorckw@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: OS7PR01MB13834:EE_|OSAPR01MB7303:EE_
+X-MS-Office365-Filtering-Correlation-Id: e6be1bbc-7ea8-4f36-cdf8-08de4868c960
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|8060799015|15080799012|461199028|23021999003|19110799012|5072599009|10035399007|440099028|3412199025|52005399003|40105399003|1710799026;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YHb+dR8mPSiHMNBlF4NsK2ydASxU5bnVDp3HXNOGeW4ec3Plau4LTEbZrtAL?=
+ =?us-ascii?Q?UXACFlXs0JUTPSqnYHOHoQJHnGQAMoRfYj0Heoepm8NK1ipYYqQiCIc+dnv5?=
+ =?us-ascii?Q?OWNMSmgpULyPrVrYcH2+bjmbSC+A9tFupFZTi+Wbnc9bxhHmrMOl86ETi1Ff?=
+ =?us-ascii?Q?aIY8xOEdiDJnTxBAHsR7Sefw5iiZrCcbfbsgOZtXn0i+l/73hIJTwQ3ti7uv?=
+ =?us-ascii?Q?+ZvGnk8sEYKLeNF8ut2FJTb6EGArWZz/43npj4QfQ6AksGfCSIh+Urj1x2mY?=
+ =?us-ascii?Q?4k4roTUv1uzkDeZdUqaQnQWPDMUkr/37BrQHx5iCtuysck3OmrSEWc8dMEGA?=
+ =?us-ascii?Q?HtXnDrZzRx6ODcFUYYRabrromEY6UAwnCprOzDaC97mqqe+wyLVO8wImGxCr?=
+ =?us-ascii?Q?4BBZW+One31+j/WvOYJrXbMXKxLC9P0owXzqy5/xqIoEkznfdChu7Z7fpNH6?=
+ =?us-ascii?Q?Pe6T/yJtTaZRYCA1xP3F46kPZVahVjgrwgr3l5H/XyV1bA080vacC+sdeRuV?=
+ =?us-ascii?Q?CIj6ssvCXm+FANAcoI6tRRXcnxjhCaQXDtqV9oExcTMSr48fpyBzQUru/AZH?=
+ =?us-ascii?Q?9Jx18wS77byqWwGIFIjtjBFqNJy1N94pcEDDLzlfZRB/s/gdvr2nhP9PU6wD?=
+ =?us-ascii?Q?4Bgl4N7NVq/E40g6VZUEb2K92D6agsODdlpmvJiVRDewPM/ACMf0M6UnZETJ?=
+ =?us-ascii?Q?+V0ActNxoivcQxi5v1MqqYl/DNHtGTXuVK3SluhpmncL952YWBnx5S/RdQK6?=
+ =?us-ascii?Q?wFFWXf0fAey1NRO/TsaBxUfTUn3O9x52gKhHsp8jM3bYu5AnTKlq5J1gb4QF?=
+ =?us-ascii?Q?9WK1Zk86Q42xujDBNhy1nbkcfmTq1CWoZFIVG3FwfRx+/bIeheNnurv32jLn?=
+ =?us-ascii?Q?Yu+e5nrNVIDU/MIduA3bhGpJkiVs805eks12+WYSpdROMYE6HnW+M8NjyeVE?=
+ =?us-ascii?Q?I3aHi87a7XQ3FlHNPrwgWEf+zjGEi5k80u0Gq9U1+E0rMKE3cFL7rJJ652W2?=
+ =?us-ascii?Q?7O9dqTzeRMCI4AGa+G2qjHouMvPH8QqBobH6gZp+iaOhrD+4Fu4dhvIayo8Z?=
+ =?us-ascii?Q?aGvaObCABouBLfbz6XzaOsjryIXA571UpGG1ezilRTSGJTGmFs5qR0ZfXWzo?=
+ =?us-ascii?Q?nOeU23mYecUVoJQWKaGKxaM3sqmvFGgYViByHAyyTyJS0VIJywpqleOH/IJ2?=
+ =?us-ascii?Q?88EiWc7KO5Hu6KJ+Jclr0HqPqRl+h4ZO96XkZg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?AmVQubn2RgDQT8jGs1nvdZc8sWH/gAaV6AZAVvkQUozi2maOlooKDvIKU9sJ?=
+ =?us-ascii?Q?G3tC8GnLJ0dhS63ElIpDB/JAtu/x7Slm/olRqFlYf/70cFQaGZ+ljO3zVqYj?=
+ =?us-ascii?Q?NBvFC0X0XNyuHmQxmOIzHqbxsDG/aeFhSn7e7PNgeZ1rhtd19ADLvx1VV2y1?=
+ =?us-ascii?Q?z++eRarzMcbaiRugj+26M6dTkfgAVGqTWlE1SXgc9CtrRRh2SYQmgeqz62fl?=
+ =?us-ascii?Q?qJ5oW67cvP5OqVmLwU4NY0/oXn4TbORETWYldGU9ABsSvua75soF7RmFTXvS?=
+ =?us-ascii?Q?BPapbjzx0k2zKivIIKHoa4dZqapnaXCKfVuu5NhGbgVM/tWqZTaJgbr7K1gN?=
+ =?us-ascii?Q?Oa6DZSFkuqNI/51iu+0pp/s9lRvszg+X6ySruDs/RDe4pYyX/43P78dbx//4?=
+ =?us-ascii?Q?1pJJdit8AQ8itfdKx8DMPRnOYmTh0HnGBSNlYQv7IvHlm7EcpCnOwpQGswpQ?=
+ =?us-ascii?Q?iIdlrqUvkidvV0LV5T+eQOhIRZquv7UgPXf17RQkmsA15Nduj0eZisxC+Jf0?=
+ =?us-ascii?Q?vW0ijP1tWPj73LAYRyB2EBznpkHBaG3mV4uWiG6kLUGim/N8YokxQFNFwjLE?=
+ =?us-ascii?Q?PNsWtfmWVDfVwaJ/LyTMuuX8dCQyENRb2WkTzpfpAAA+lYmAAnq/93K67jGI?=
+ =?us-ascii?Q?j3gcaAvgux+G+s/oEHHJuM7ukhGQe8vUvhyugGtHxuW2JELPRR+HlbTFyzM6?=
+ =?us-ascii?Q?CUm1965raropdnY+tw85j6wFW9rsHKEKEAsYnHmSCSECnFQytmI1seC1qS2w?=
+ =?us-ascii?Q?SN8eJv0YJWgFJynyJ29jPdEb6GCmmy75TffSV3FHLxqq1vuIyIsjZgv8EBGT?=
+ =?us-ascii?Q?3wX1o1CKcJWqbajv3ypPuuLVWTp2ZJqLMTcoeZzKKONrWPyTSssVju+FqyPT?=
+ =?us-ascii?Q?jWWiCoOWJQ1OE2qn7rG5gh+SSEijICKByiqOJeCB0bJbh0fPbHjGuaRK8GFT?=
+ =?us-ascii?Q?YRYIYZu8tfVQiE5uDEsbaSRPxg13cSEfCPVgnYrcy1rBSWlHvppY0fXb0jyH?=
+ =?us-ascii?Q?P1Vg6ggXnnjDsBiZi5wuiBMhob0NT5lPQJQe3kNrqmidTUNELCMOhdLwBBiO?=
+ =?us-ascii?Q?/XbieX64pwgl5H6nGR+2lzR8J+JlFtouhLiCUZzONjAOHcrw56quhpCK2b3n?=
+ =?us-ascii?Q?db7G8K7NIrlGyxRV4aosOi6E5hsbenBKHY6B2ixKp84GrUWCX0J0flEzjlis?=
+ =?us-ascii?Q?ejG1HV9HAZPlG+QZsdskFj/A/WuUIldaOrxaUI9YLHSFtqSJIFE8V6oKjtXb?=
+ =?us-ascii?Q?/XIE8qo6ufs5hDFKWl5+m+j+ysqKTdqQk7xDoVYHaCDszw+0DVIrmdk1Csz4?=
+ =?us-ascii?Q?JzDmv60/KadP8cMa6yEvRLdHyhVNr6FD8lfE58cWMB1+UrLboOR6oBPnBoTv?=
+ =?us-ascii?Q?pOcuzmBaeEYANGQm6ab2fxoNXuUe?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6be1bbc-7ea8-4f36-cdf8-08de4868c960
+X-MS-Exchange-CrossTenant-AuthSource: OS7PR01MB13834.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 12:33:23.0331 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSAPR01MB7303
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,222 +153,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/30/25 17:01, Kuan-Wei Chiu wrote:
-> Add support for the Google Goldfish TTY serial device. This virtual
-> device is commonly used in QEMU virtual machines (such as the m68k
-> virt machine) and Android emulators.
-> 
-> The driver implements basic console output and input polling using the
-> Goldfish MMIO interface.
-> 
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> ---
-> Changes in v3:
-> - Remove unnecessary type casts for MMIO register access.
-> 
->   MAINTAINERS                      |   6 ++
->   drivers/serial/Kconfig           |   8 +++
->   drivers/serial/Makefile          |   1 +
->   drivers/serial/serial_goldfish.c | 102 +++++++++++++++++++++++++++++++
->   include/goldfish_tty.h           |  18 ++++++
->   5 files changed, 135 insertions(+)
->   create mode 100644 drivers/serial/serial_goldfish.c
->   create mode 100644 include/goldfish_tty.h
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6ce0bbce13d..da4a6e4d518 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1259,6 +1259,12 @@ S:	Maintained
->   F:	drivers/misc/gsc.c
->   F:	include/gsc.h
->   
-> +GOLDFISH SERIAL DRIVER
-> +M:	Kuan-Wei Chiu <visitorckw@gmail.com>
-> +S:	Maintained
-> +F:	drivers/serial/serial_goldfish.c
-> +F:	include/goldfish_tty.h
-> +
->   I2C
->   M:	Heiko Schocher <hs@nabladev.com>
->   S:	Maintained
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index 371d7aa5bba..b84cb9ec781 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -1193,4 +1193,12 @@ config SYS_SDMR
->   	depends on MPC8XX_CONS
->   	default 0x0
->   
-> +config SERIAL_GOLDFISH
-> +	bool "Goldfish TTY support"
-> +	depends on DM_SERIAL
-> +	help
-> +	  Select this to enable support for the Goldfish TTY serial port.
-> +	  This virtual device is commonly used by QEMU virtual machines
-> +	  (e.g. m68k virt) for console output.
-> +
->   endif
-> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
-> index 8eaae62b0fc..fe8d23be512 100644
-> --- a/drivers/serial/Makefile
-> +++ b/drivers/serial/Makefile
-> @@ -63,3 +63,4 @@ obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
->   obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
->   
->   obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
-> +obj-$(CONFIG_SERIAL_GOLDFISH) += serial_goldfish.o
-> diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
-> new file mode 100644
-> index 00000000000..1d2977d809d
-> --- /dev/null
-> +++ b/drivers/serial/serial_goldfish.c
-> @@ -0,0 +1,102 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-> + * Goldfish TTY driver for U-Boot
-> + */
-> +
-> +#include <asm/io.h>
-> +#include <dm.h>
-> +#include <goldfish_tty.h>
-> +#include <linux/types.h>
-> +#include <serial.h>
-> +
-> +/* Goldfish TTY Register Offsets */
-> +#define GOLDFISH_TTY_PUT_CHAR       0x00
-> +#define GOLDFISH_TTY_BYTES_READY    0x04
-> +#define GOLDFISH_TTY_CMD            0x08
-> +#define GOLDFISH_TTY_DATA_PTR       0x10
-> +#define GOLDFISH_TTY_DATA_LEN       0x14
-> +#define GOLDFISH_TTY_DATA_PTR_HIGH  0x18
-> +#define GOLDFISH_TTY_VERSION        0x20
-> +
-> +/* Commands */
-> +#define CMD_WRITE_BUFFER   2
-> +#define CMD_READ_BUFFER    3
-> +
-> +struct goldfish_tty_priv {
-> +	void __iomem *base;
-> +	u8 rx_buf;
-> +};
-> +
-> +static int goldfish_serial_getc(struct udevice *dev)
-> +{
-> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
-> +	unsigned long paddr;
-> +	u32 count;
-> +
-> +	count = __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
-> +	if (count == 0)
-> +		return -EAGAIN;
-> +
-> +	paddr = virt_to_phys((void *)&priv->rx_buf);
-> +
-> +	__raw_writel(0, priv->base + GOLDFISH_TTY_DATA_PTR_HIGH);
-> +	__raw_writel(paddr, priv->base + GOLDFISH_TTY_DATA_PTR);
-> +	__raw_writel(1, priv->base + GOLDFISH_TTY_DATA_LEN);
-> +	__raw_writel(CMD_READ_BUFFER, priv->base + GOLDFISH_TTY_CMD);
-> +
-> +	return priv->rx_buf;
-> +}
-> +
-> +static int goldfish_serial_putc(struct udevice *dev, const char ch)
-> +{
-> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
-> +
-> +	__raw_writel(ch, priv->base + GOLDFISH_TTY_PUT_CHAR);
-> +
-> +	return 0;
-> +}
-> +
-> +static int goldfish_serial_pending(struct udevice *dev, bool input)
-> +{
-> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
-> +
-> +	if (input)
-> +		return __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
-> +
-> +	return 0;
-> +}
-> +
-> +static int goldfish_serial_probe(struct udevice *dev)
-> +{
-> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
-> +	struct goldfish_tty_plat *plat = dev_get_plat(dev);
-> +
-> +	if (!plat)
-> +		return -EINVAL;
-> +
-> +	priv->base = plat->base;
+This patch series will add a new SPI NOR Flash chip BoyaMicro BY25Q256FS.
 
-The Linux binding documentation in 
-Documentation/devicetree/bindings/goldfish/tty.txt has this example:
+datasheet: https://www.boyamicro.com/storage/upload/pdf/BY25Q256FS.pdf
 
-         goldfish_tty@1f004000 {
-                 compatible = "google,goldfish-tty";
-                 reg = <0x1f004000 0x1000>;
-                 interrupts = <0xc>;
-         };
+Shiji Yang (2):
+  mtd: spi: simplify the conditional compilation of quad_enable feature
+  mtd: spi: add support for BoyaMicro BY25Q256FS
 
-The driver should take the reg value as address and use plat->base only 
-as fallback for devices that don't provide a proper device-tree.
+ drivers/mtd/spi/Kconfig        |  5 +++++
+ drivers/mtd/spi/spi-nor-core.c | 30 +++++++++++++++++++++---------
+ drivers/mtd/spi/spi-nor-ids.c  |  7 +++++++
+ drivers/mtd/spi/spi-nor-tiny.c | 29 +++++++++++++++++++----------
+ include/linux/mtd/spi-nor.h    |  1 +
+ 5 files changed, 53 insertions(+), 19 deletions(-)
 
-We already do this for the RTC driver. Please, apply the same logic to 
-all Goldfish drivers.
-
-Best regards
-
-Heinrich
-
-
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dm_serial_ops goldfish_serial_ops = {
-> +	.putc = goldfish_serial_putc,
-> +	.pending = goldfish_serial_pending,
-> +	.getc = goldfish_serial_getc,
-> +};
-> +
-> +static const struct udevice_id goldfish_serial_ids[] = {
-> +	{ .compatible = "google,goldfish-tty" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(serial_goldfish) = {
-> +	.name	= "serial_goldfish",
-> +	.id	= UCLASS_SERIAL,
-> +	.of_match = goldfish_serial_ids,
-> +	.probe	= goldfish_serial_probe,
-> +	.ops	= &goldfish_serial_ops,
-> +	.priv_auto = sizeof(struct goldfish_tty_priv),
-> +	.flags	= DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/include/goldfish_tty.h b/include/goldfish_tty.h
-> new file mode 100644
-> index 00000000000..8777da4942d
-> --- /dev/null
-> +++ b/include/goldfish_tty.h
-> @@ -0,0 +1,18 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
-> + */
-> +
-> +#ifndef _GOLDFISH_TTY_H_
-> +#define _GOLDFISH_TTY_H_
-> +
-> +#include <linux/types.h>
-> +
-> +/* Platform data for the Goldfish TTY driver
-> + * Used to pass hardware base address from Board to Driver
-> + */
-> +struct goldfish_tty_plat {
-> +	void __iomem *base;
-> +};
-> +
-> +#endif /* _GOLDFISH_TTY_H_ */
+-- 
+2.51.0
 
