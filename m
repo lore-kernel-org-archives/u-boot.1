@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19ED0EE645E
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98114EE645E
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7895084120;
-	Wed, 31 Dec 2025 20:11:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BF56284172;
+	Wed, 31 Dec 2025 20:11:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hfMrMn8U";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Uj/To5wR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FA5684131; Wed, 31 Dec 2025 20:11:14 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 72FE284131; Wed, 31 Dec 2025 20:11:15 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F3518408D
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:11:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BFCE84105
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:11:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,62 +31,63 @@ Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D8F003F863
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 19:11:11 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E6FB93FCEA
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 19:11:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767208271;
- bh=P102rswwvO94fI0y/XrZL8+0LvsF+hK9sKTcNwk5TqA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=hfMrMn8UASrkIUU2UKOvTTepSZK28QLp6dGsjS0TXRyLmCxsKuWmtouYVnuwYmBU8
- Wp97H4suL2kDt4S+wjtOvpex0zTeDf26/ZPIoOTECIFFQ8ydrOsRL6FtQG9uolQ5eK
- vTa9UOXXfqim3VTHIGZ7KJWTTh8+SlzFF9ttCLyrXp8LF1h9WqhygOYt3aOvO9L/OY
- aQAzyImw/IKDz6Cmu7UlFRQFS8FpbiaoTOO67zhRSbttk37RkE8dve/+H0keMkQMBE
- WUBEPI2wOan9aOWUBmVpq+uIHNwblcEu7nXsl5gUJ2R+DPSCe5J6GpPPfE6aqXN1sD
- W2gX2lyxxZ62bneCx3umSC1413KRoRjoEcrqVpZtVr7rgy+ceFWN54aFpyxnj1o/tJ
- hppzjLJzTwaA5Pp96lLD4gwsc74WuJ4nC+7jltrBDnfVIhaU3g7J36S2rwxN2IdW2O
- ZvnI+SLBzlm2Vb1zAqyVMYQdCyR10OT+jrCk3l0hio/QDLrhuj7hVoN+Xo5Ke1QTqq
- w2ISidNZLqiExdGUxuAM8VMsNTXpS2BnmrW5kf2ZgBkrbxMSzjRfCIQFz4CrQm4Gzl
- vCF3GnRj6QltpWou+yO8OsTegCYcFcXi9ZOdP5FD+O7Kft5X53mm7Y7ctKdMUKFD/f
- w4AciVV6KoMpJ1tSiwrcjGXQ=
+ s=20251003; t=1767208272;
+ bh=xswHFqilHHbyuxCItkI5MhXh+w9ExGMFeb7zWdsQBAs=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=Uj/To5wRL2iwCbAeYkDX4CfV4r0S8nbXUZBfa86Sli/1ZaRKohufk8D6N4USjzwIC
+ DVVGNgDSrtxCvNE/976/dFn8qqAkazhaHmKUhFz7JomAWwBB5FJcVIiSWw4d/4uVmW
+ hzauEOqGRTvIFqIuIxvQtmnEreS7Fpt/7GnYgMqO5rnHCyo1WqYDJgWa8x7D6eKuKx
+ mo1xkJTshtHlyD/RKlW8g1XF5WWDoqBoeiQyCo97AaMjK4MW5kg/ItSPuLN8IoAy9M
+ komB5QSzMSbR+qVtzoTauvqkOlQAveZg2L+WVrJ0tkjUkl5sF3fmS6LU9fq7IqNP5o
+ BNqqoOdOrNjBJKiPoopkNukvfoRLfqBR9gjaC1cq/KMk1jvklIkVve0P9GA3UzDOjs
+ oewbFJV9U3FbXocLiTZKxQhYGP1bXTVl+CSIcUrLwzX67ECkPDHj1D67g2Rv0lN3zt
+ 5oMydHLQ7Jm+B8RHW3dKtYLP2KZRrZ/+Stq5i17LAde5d+YZWayBYwi/shrVfiwyiE
+ de+6seTSMyHs+oS22BFFPpbfRFgQ/iMoTmkwgbK5ep+AL0/ynYgTCSxlldOl7AiZzm
+ CVsekRTX0ppjMGCuJh78KSTbCOkke3jr2CUrhbtv82/Vf3f3Rf4KnTOjlox7GRYbJc
+ wfbDtJmeYzRdYyh1dOs859dA=
 Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-477a1e2b372so87269705e9.2
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:11:11 -0800 (PST)
+ 5b1f17b1804b1-47918084ac1so91738085e9.2
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:11:12 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767208271; x=1767813071;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P102rswwvO94fI0y/XrZL8+0LvsF+hK9sKTcNwk5TqA=;
- b=gU3k3xjhJNKVtYSFAklcc6E7am3gQHrEIrIZt7oBuOXijAAQdcv/N1kqv1zNxx7aWH
- 7SlDBz5CLlAPM3Oeql1nj9AmDDoIyoWcR/V81/TfmFHWZTKBd6MB2xW/HHvbRDHjydIa
- 2nbJB07gMgWO8ka6ovruomLhuuJ1/itXbGVaN+ZVhFv5LqNkoS2GbLkLaqz2QDgxlYID
- qnIiCQMQ+1z9mEAC3yCh8BQAYze4192b1FFm8/3b7SvSeE1sST1ORGi+J2SOhyquKMmY
- HQ3LYBvLqjkrmMXKn80Ze1PhTB16VpsrVqCLD/ADVUmraXN1kIjRKuUk7lG1SMKsE1pY
- QSVA==
+ d=1e100.net; s=20230601; t=1767208272; x=1767813072;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xswHFqilHHbyuxCItkI5MhXh+w9ExGMFeb7zWdsQBAs=;
+ b=re3BtqQmPOL+fAnkjDBFdNGPohOpsT67n75nVCSlpOebi8DIpabVfdpcqL79aoivV4
+ QuGYV7Y2Y9gUr4Znl1HrVA92/GZxajXsArLEzyAFxK42O6pdQviNq8wvLu2klRX6O6p5
+ XBb+sqMDyyGqcLnslf/OZU14ifftz3YbCll9n6o4vRGnJkVkS28crn2zN6WbcHvyZ1Co
+ QlVuzs9pdjldPLU7y0ElanbYyWRjwgna6dhuM6kdsj+Ak7vCYKaw7br3gNYWq6wS8zTT
+ 9W2apkmt9YRXWwCvF6JB/Pu9nXQ4N96QE+wXtZhuuxHPBjD5TtjFJqEjtMGR+5Xa/3uq
+ kcDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWh84axHDhmZ+TRZMzaacYNmFjtzQqQGU8gcyvAZsNGCq+6honaLj/i/vBa1eLzGc/wwdagSyE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCPnLXZq2apZXijLQ73/6JPWGoqPyC5O36/yqrAAh71XkSyvu+
- GRgP9bJmE60Xg6+Im/WFs4i4+ThKfkhh08E79MaJmrAj2Li4Cc++RG8qZ9/mTZUXhHSzASW1bFA
- ZcjI8TFJ5JuJDWJn+PTFCorXZ+BrcuyijUwO3Qle3Bn7NcrOC7XFSOJaHbOK1dtm+IzMXml4=
-X-Gm-Gg: AY/fxX7oBsQ6eOKFkRVSJZ1tHPMjcPgP/lKF5huR4kOzyaEGRqAsrK/XToJ2nrIl/Af
- 5fqnFBiTxQPDojOn6zxMUgA/Mw3zX8tJkmJbegsgJBO42IoGTkXH7pvf2jA62u+5lInxaiPNqcT
- s6bLRPtw8wFGtkYLxX8q7qnNb3JFjEb3WjtVVkHxuVYSCby7X6ms9bKZmFfDGLMfGZ/p6X0Ek9w
- 2InREMsd3l4bIUY1SZVNqnjr4PX3+mWRBJ6l5GqA9g2fVjNGmCzIhZmoSn6t7qDQBDZwNrra6w3
- nvVedYqreTtytD3Pp1Lo4FEOMyYYY2ZNaCLyVlZXGFfJsWa/XMIrkQhk6LWYuQ7iDaM4Gc6ZwJb
- pmK4v6teKej0bRFneKqsvOnPOxEpTTVbrwFAw39z3emfqCVrvufkuL8DsMzvscm2LEc7He+fpRG
- nL
-X-Received: by 2002:a05:600c:3f14:b0:47d:5e02:14e5 with SMTP id
- 5b1f17b1804b1-47d5e02182dmr78982955e9.5.1767208271417; 
- Wed, 31 Dec 2025 11:11:11 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEuTwxUYnK04GBgNbLZcJk7WHsZ/SaBZS+TPsJFUZnlHgKx4DSKIP1J7e+dEkMOxydyhwXdqg==
-X-Received: by 2002:a05:600c:3f14:b0:47d:5e02:14e5 with SMTP id
- 5b1f17b1804b1-47d5e02182dmr78982645e9.5.1767208271025; 
+ AJvYcCXza3QnaFZCsYeKfFcklsQA9aouHyBpPOIc5FAsTw/sRWUjEQsLSbcU5AcU5v+TfnfpFk6lazY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLzBySuiECGV9Nt7RmYnOb5NF/4zXbaZI7gnPCA0LClO3Y2vst
+ 2W8D5ilBYHFjAnTnH4mhltWIP7CyynX5p6x6qKQ+7CiJMJB92ch9kZmVtfXg2NkBbI5ILseRpMq
+ mBIYxrxGT122x0bPJO8Gl60yA7zsA+vw2fzEsh1PT+0WssmmawcwYd3ro0MksCTXYigXPJ8A=
+X-Gm-Gg: AY/fxX5jywhPzWZ5cn63zSJuBhlBTuqeoiyzJwH2Yo5PbQ6yMVzG/YZQGKGOTTlIHPn
+ GEm2LbOWsemFvIKI7KcCM78bZYFXtrjqLP2FiydxEWDxUfal1f/QqjfSd9N8domAwV64b2J0kd0
+ tSNR+ttoFf8lhahd98223DXT1RVziwfMsT9GIKkTKfqvzt3N2lNyZfI1PbfELnFBJWUOI0eNnOy
+ pGxZOrqGSUZJKGXnx3E6oyuUKgkQYDpQ++8i+W5W/YaTapko+TzDY/49D/LvhnXHwFhICVKkCAr
+ 5sfuTlUbkG/f9A3aagtdLDETW9Kv/P0sjzJwrdieOAQR3qhH8cbKfLPrbzoAP5cHM1EiA2XACSI
+ Dm9AbmtHjVQ0U2/WP/C6EM9BZ5T1DgZy0gduFnnPhVOwlelKES75XcUoA7D8RHBdIZb0zc74eh0
+ 17
+X-Received: by 2002:a05:600c:4f52:b0:477:a978:3a7b with SMTP id
+ 5b1f17b1804b1-47d1958a5d5mr534015905e9.22.1767208272325; 
+ Wed, 31 Dec 2025 11:11:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG1R5qK17SXB70qWK/RjLn+Wqz6xEwIZBixrJuUFADcCOcp07myOEFw4sJ0YmHZRq8vKg1gag==
+X-Received: by 2002:a05:600c:4f52:b0:477:a978:3a7b with SMTP id
+ 5b1f17b1804b1-47d1958a5d5mr534015595e9.22.1767208271940; 
  Wed, 31 Dec 2025 11:11:11 -0800 (PST)
 Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
  [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47be272eaf8sm701685995e9.5.2025.12.31.11.11.10
+ 5b1f17b1804b1-47be272eaf8sm701685995e9.5.2025.12.31.11.11.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 11:11:10 -0800 (PST)
+ Wed, 31 Dec 2025 11:11:11 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -94,10 +95,12 @@ Cc: Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/4] Fix CONFIG_CC_OPTIMIZE_FOR_DEBUG support
-Date: Wed, 31 Dec 2025 20:10:50 +0100
-Message-ID: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/4] Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support
+Date: Wed, 31 Dec 2025 20:10:51 +0100
+Message-ID: <20251231191054.247270-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -116,44 +119,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When trying to build qemu-riscv64_smode_defconfig with
-CONFIG_CC_OPTIMIZE_FOR_DEBUG=y it became evident that the build was not
-using -Og as expected. This is due to an incorrect update of the build
-system with commit 5f520875bdf0 ("kbuild: Bump the build system to 5.1").
+Since commit 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
+CONFIG_CC_OPTIMIZE_FOR_DEBUG has no effect on the non-host code.
 
-The first patch reestablishes setting the build flag.
+This patch reestablishes the prior logic to add
 
-But now the build failed due to missing symbols.
+    -Og -Wno-maybe-uninitialized
 
-We have opted to prefer 'if' over '#if' to more easily see problems in
-contributed code.
+to KBUILD_CFLAGS.
 
-When compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y the compiler does not
-execute all optimization paths and references to unused functions are
-introduced.
+Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-The issue is resolved by using #ifdef around os_malloc() in our test
-code and adding stubs for live-tree functions.
-
-Maybe we should inject CONFIG_CC_OPTIMIZE_FOR_DEBUG=y into some of our CI
-builds to ensure that building remains possible.
-
-Heinrich Schuchardt (4):
-  Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support
-  test: do not imply os_malloc() outside of the sandbox
-  dm: add missing includes in dm/of_addr.h
-  dm: dummy implementations of live-tree functions
-
- Makefile                  |   5 +
- drivers/core/Makefile     |   6 +-
- drivers/core/nof_access.c | 246 ++++++++++++++++++++++++++++++++++++++
- drivers/core/nof_addr.c   |  37 ++++++
- include/dm/of_addr.h      |   4 +
- test/test-main.c          |   2 +
- 6 files changed, 299 insertions(+), 1 deletion(-)
- create mode 100644 drivers/core/nof_access.c
- create mode 100644 drivers/core/nof_addr.c
-
+diff --git a/Makefile b/Makefile
+index 6b5c5ee019e..2a972af4906 100644
+--- a/Makefile
++++ b/Makefile
+@@ -869,6 +869,11 @@ endif
+ 
+ ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
+ KBUILD_CFLAGS	+= -Os
++else ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUG
++-KBUILD_CFLAGS  += -Og
++# Avoid false positives -Wmaybe-uninitialized
++# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394
++KBUILD_CFLAGS  += -Wno-maybe-uninitialized
+ else
+ KBUILD_CFLAGS   += -O2
+ endif
 -- 
 2.51.0
 
