@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F15EE645E
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4B30EE645E
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C23784198;
-	Wed, 31 Dec 2025 20:30:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DBE58419C;
+	Wed, 31 Dec 2025 20:30:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i+rlql61";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CEEiohWI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 900CD84199; Wed, 31 Dec 2025 20:30:50 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 0421A84183; Wed, 31 Dec 2025 20:30:56 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A847584183
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:30:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D6888419C
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-64d2c50f0d6so13417138a12.3
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:30:48 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b8010b8f078so1588826566b.0
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 11:30:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767209448; x=1767814248; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767209453; x=1767814253; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8P4C4+BQMEArfyeAK52HaqMNA2d3hGAhtNU7oI6ZDOI=;
- b=i+rlql61WOSJytpDoQ+T1F5MUZZvarVTQqPL8lmi2HjEco1Utrm+R5H4oQ36nzAqjM
- dcjL5X8aL8pOemS8zc2lKbLzwLKOfFkVFO+i7pK8weOd7eM5fZvxTgAPJ9zJIR0sV9Rt
- arOoRmqkPiG4hsZAJI5kHDVQhnjVdQTJY96b8=
+ bh=CRuHR4yBzg0KPNeF4Bzjhp5VczdW9irHqMAukkja0/c=;
+ b=CEEiohWIaBDm+l7g1f8CeTInsKDz+lPIC/OPH6SHzmqU0sC0wDebmj8xcM7pKj1tOV
+ kyWwdfx+RXyMarwQ0/ybxT9EmcXzFAj8wJ30mO77JuftbZIFMOsWa0YnYSN2dRMA2Nwb
+ ccmnZfJgNSjIl4SYwJPqSIKD+L9Ps+/Bgvfuw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767209448; x=1767814248;
+ d=1e100.net; s=20230601; t=1767209453; x=1767814253;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8P4C4+BQMEArfyeAK52HaqMNA2d3hGAhtNU7oI6ZDOI=;
- b=pbNWkquC3iKg+y2sueenhKO6UGeloECW2pErjDiJ7TT2Uy6aKTrJDiGttCDg82hcEW
- gkz25cbv45jm1+K2E8hHDGIsUEhBTWnOxd+BeGFMrph+HjXwJFP1ZXKZ+OW2nEeHK3p8
- PW6N2S0j3iCLXXmUP5rBkAuBe3RMm5ooDOcCuy3VxdG5ZxYklps70UcTlKXvEeNulX67
- T0pWUG4zOt6Ih8MdF8N/sIsn0OAz+og5lVPjvPmbxIropnntbUzKx0vx3r+cr47VH+A6
- 2MjPsQ/1zs2RiBXxg2Oz2fFRm5Wq/C7vM1QkCD7jyBiSrTI9fkGqHXT8uItKP4cu/0B6
- O0vg==
+ bh=CRuHR4yBzg0KPNeF4Bzjhp5VczdW9irHqMAukkja0/c=;
+ b=VaJDOLFMa1j3Ha+BVwFypHNcxKU0lBkRiyzu1NDtKoRfZhomoJdT9Awe++hz2jc5og
+ GUoeHFBAkIQQSY6Oa57yaNoBXOqkFaJvHdF9dgYTTp5jJlDHDj7BqI0pCFgtMw1slHp3
+ 93sPnxJxDoPzAzWbg1rAoXwwPDerZBnKBcFude4m5cz+Ghv22KQahD2GUBktk0BpZ1e0
+ AZtlNbpYN+HQY3jfz/tRYtU1hq8IwrUyajmgKgkKNIfVNExaYEm/HdRnhhWDco2iF4hs
+ nW7BETaK+PHXyp3l82cckSefIo9UzjXkJO2f/lsiOgUiBlKdfNuCrZwuYHI6HxVFJ0eU
+ pkNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXY3stQbvkh9ND2DpQcyzw+AuHf8hGwpHARPO697m5fZ5AzKWGPYsSc8qpei6lgRanSnPM4VA4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwT2k8kdfH19RGKvqPgfWd+hqUp+d77pEumqyJYJMJHr1lonUki
- BIxOGfmleW+EMtIAYd/sQuBBVk9s+BN+kdFfABrmMqEPWKMbZpC01ZvT6hcg5phVM/ZR/EeiJy5
- YNsdPpaIt3nTFLBxEFhazoP2yclxrJ1VineR3VZtc
-X-Gm-Gg: AY/fxX7NMCuXYcTKjrXp6Ed+cNeEHfi60Q0TPeVq4HkWUhV6pU9HxMsuVldpZXLp7Jp
- Afyu1cWb274NQms/7c87oWaNjv/6+8ou9CQ3LbFZFt4H0Cm66lg896mYSH849/XzKQT20yf0F6Y
- udQHqCn2aCZP4jI3MbWbdMl6TnNxL8FA5Ijo1fej8Jw8mqc4PGiMrjHtnYB5dWdDnHd77jokLuQ
- vEu+PKrdpD1EArLUsgw3NiBgTXegSf1Y5ohJmjf4y4HwXRNeJ3/JzYj0FXFOrHj0DF7vg==
-X-Google-Smtp-Source: AGHT+IEqYaWT6T7lO/y5jIfTTDIMxgOVzJeHDBmZifLLPshlZXUpQZFv/uINtJotirnxFfMBCOu3JNJwPNwiBt4yKpc=
-X-Received: by 2002:a17:907:e109:b0:b80:4030:1eca with SMTP id
- a640c23a62f3a-b804030298fmr2792718066b.2.1767209448136; Wed, 31 Dec 2025
- 11:30:48 -0800 (PST)
+ AJvYcCUkviu7D+j8QAQVEdm01qimDouZiUne1EQLYSObrAKAHkg9hA/s+4Srzb1eJpWnhPMT4jAx4f0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsQy6h0kiwL4XF1KO/f5pA9KpvZdv7s64vXTR97s//0joa3X4h
+ g1OWJfuG3yoSsJgmHkj4KEYTjz5uYnpavBhwgF8y3b27r/G6EsRJKpbEYQR3ocF70woy890RtoM
+ hr+ztpYLWWdMb7aTZS1DpZwdCgcQSmHz7Q9BR011O
+X-Gm-Gg: AY/fxX4hKTj9Fyb8KfZsAVF3GIUe9YBrSy86Ad+ZETCZIRY8VypL3V6kNn8H0D+nf7c
+ wKqHZNm4dGGqP7Ab81cY3AanPxSkUcgNhxRKEXHuuBDpV2Ktaq5mr4VYdeSRwBsvdz0M2kfGtJS
+ oPo1dzuZ4bRlsYs5P6aJHjhmFKqXoJNpasjBMCSTN0KmSCzo/ZcXI4twQSJjz/Mppukem04JgL8
+ IRaxCVd4fNT4/whS4CXxLO2jJ77mf97F0NjNv0pt9K6fSNl7xWe915al+hxN4EVCvQln/NiK+Jx
+ U3j6
+X-Google-Smtp-Source: AGHT+IFupQg4ZkzCdRSMT7T9NX/mC67swFDBX4q7cwx3+ovdS6MyqTeOukMEqpJatxve6kTTDmFAY2fbdEQpAUDgLt4=
+X-Received: by 2002:a17:906:c147:b0:b80:751:ee5f with SMTP id
+ a640c23a62f3a-b80371d448amr3928526466b.52.1767209453418; Wed, 31 Dec 2025
+ 11:30:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
+References: <20251231134320.53025-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251231134320.53025-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Dec 2025 12:30:34 -0700
-X-Gm-Features: AQt7F2oLR3H_2lM-M81kpGsEjs1XXo9xIseQdy0cikHkXrLiNpy0qAnwxek5iKo
-Message-ID: <CAFLszTjwFv8U-Y9OWwid-072TQGAF4HwCk62p7GPJFcsxP=eEA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] video: menu "TrueType Fonts" depends on TrueType
- enabled
+Date: Wed, 31 Dec 2025 12:30:40 -0700
+X-Gm-Features: AQt7F2q0xXdeU0NeOEbbwAIwZSDwQX8NT75Zcj15nwwXSTpDWtbiQOkcOUiRfXM
+Message-ID: <CAFLszTjnzMJOPWnA-qfLaUO-4p6RBzPmjDqf12oxzydoVnkgfg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] doc: describe QEMU VGA emulation
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Alexander Graf <agraf@csgraf.de>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ion Agorria <ion@agorria.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,19 +90,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Dec 2025 at 07:14, Heinrich Schuchardt
+Hi Heinrich,
+
+On Wed, 31 Dec 2025 at 06:44, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The Kconfig menu "TrueType Fonts" should only be shown if TrueType is
-> enabled.
->
-> Put all TrueType dependent customization within one if statement.
-> Remove `depends TRUETYPE` clauses.
+> Describe how the QEMU defconfigs can be used with an emulated GPU.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/video/Kconfig       | 10 ++++++----
->  drivers/video/fonts/Kconfig |  4 ----
->  2 files changed, 6 insertions(+), 8 deletions(-)
+>  doc/board/emulation/index.rst |  1 +
+>  doc/board/emulation/video.rst | 63 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 64 insertions(+)
+>  create mode 100644 doc/board/emulation/video.rst
 
 Reviewed-by: Simon Glass <simon.glass@canonical.com>
+
+>
+> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> index f8908166276..bda2240725f 100644
+> --- a/doc/board/emulation/index.rst
+> +++ b/doc/board/emulation/index.rst
+> @@ -15,6 +15,7 @@ Emulation
+>     qemu-sbsa
+>     qemu-x86
+>     qemu-xtensa
+> +   video
+>
+>  Also see
+>
+> diff --git a/doc/board/emulation/video.rst b/doc/board/emulation/video.rst
+> new file mode 100644
+> index 00000000000..4943dcabeab
+> --- /dev/null
+> +++ b/doc/board/emulation/video.rst
+> @@ -0,0 +1,63 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +Emulation of a graphics adapter
+> +===============================
+> +
+> +Currently QEMU's ``bochs-display`` is the only emulated GPU that U-Boot's
+> +generic QEMU defconfigs support. It emulates a PCIe connected graphics card
+
+PCIe-connected
+
+> +with VESA 2.0 VBE extensions.
+> +
+> +The following parameters can be specified.
+> +
+> +edid
+> +    controls if EDID information is available. Allowable values are ``off`` and
+> +    ``on``. The default is on.
+> +
+> +vgamem
+> +    specifies the display memory size. The default value is 16 MiB.
+> +    For UHD resolution 32 MiB is required.
+> +
+> +The following configuration parameters are relevant:
+> +
+> +CONFIG_VIDEO_BOCHS
+> +    enable support for the Bochs GPU.
+> +
+> +CONFIG_VIDEO_BOCHS_SIZE_X
+> +    defines the display width.
+> +
+> +CONFIG_VIDEO_BOCHS_SIZE_Y
+> +    defines isplay height.
+
+display
+
+> +
+> +CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE
+> +    sets the framebuffer size that QEMU can use for a device driver that is
+> +    enabled after relocation. This should be chosed as
+
+chosen
+
+> +
+> +    .. code-block::
+> +
+> +        CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE >=
+> +       4 * CONFIG_VIDEO_BOCHS_SIZE_X * CONFIG_VIDEO_BOCHS_SIZE_Y
+> +
+> +Here is an example QEMU invocation for qemu-riscv64_smode_defconfig:
+> +
+> +.. code-block:: bash
+> +
+> +    qemu-system-riscv64 \
+> +      -M virt \
+> +      -device bochs-display,vgamem=33554432 \
+> +      -serial mon:stdio \
+> +      -device qemu-xhci \
+> +      -device usb-kbd \
+> +      -kernel u-boot
+> +
+> +``mon:stdio`` provides a serial console. ``qemu-xhci`` a USB root hub.
+> +``usb-kbd`` a USB keyboard.
+> +
+> +To start QEMU without GPU emulation use parameter ``-nographic`` like in the
+> +following example.
+> +
+> +.. code-block:: bash
+> +
+> +    qemu-system-riscv64 \
+> +      -M virt \
+> +      -nographic \
+> +      -kernel u-boot
+> --
+> 2.51.0
+>
+
+The Concept tree has build-qemu which handles these details. I wonder
+if those scripts could be put into the extra repo Tom created?
+
+Regards,
+Simon
