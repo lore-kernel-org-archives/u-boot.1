@@ -4,97 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CEEEE6446
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 14:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5BEEE57D7
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 15:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84CB0839DE;
-	Wed, 31 Dec 2025 15:49:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DF37584081;
+	Wed, 31 Dec 2025 16:08:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SuAPWHGC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l4EekF4p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3FA984081; Wed, 31 Dec 2025 15:49:29 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 86DA784097; Wed, 31 Dec 2025 16:08:19 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7B7D83700
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:49:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0C9783F6D
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 16:08:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c76f65feb5so8165640a34.0
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 06:49:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b7633027cb2so1973483266b.1
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 07:08:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767192564; x=1767797364; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=07QZdLO/l1m1pH+g8EaRp5CVhiNTt/GuAINGpOPOYAs=;
- b=SuAPWHGCP0tIh23/8FUvqVZbdO3bNulLDbLSJypiSdE1gs1VFHaKv5WsSFwcaCc1Ta
- h52/3YwkzDjyqdrOH2NDHmeBvQcdryRC4gC+b8myqL+5sXa7D+goG/w1Oi2fc80cPV95
- d1a9D92lb3GZaKox86aL1Yw+LJjooQD8jFo/o=
+ d=chromium.org; s=google; t=1767193696; x=1767798496; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tW6KWRSFI95PuuPG9egiXu+oyV+TJN3dGq8OI8zByzc=;
+ b=l4EekF4poAaXJwGsr8UMmptBM6zwCI07EHjd1BBjgvw8Vzic3xhdbwg5ZhMGq7/XjZ
+ LmFk9LaQ/Rf+tWLNr2nzaV/LMb/1kgD10OqRU6dJfnzB6WBBLfdm1HsL1uZJlHNPbsXr
+ S2TwOEZa9nynZWtNF/EVojfbOJgUIrvxLKFhc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767192564; x=1767797364;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=07QZdLO/l1m1pH+g8EaRp5CVhiNTt/GuAINGpOPOYAs=;
- b=sHaqBdIbKgQbPhwwahpz3hoL07GV2E1XvZdym3Kkxavt8/9h2xYHLJwOlc2Urzy8jV
- GOoWFnP0aVQiAUUUweah8IIZqrSsvXX7tPlCIgpdKXyjkKkk/LgRnqB6JDtBRdOlv2Ev
- oATHXn7donjrCAUaPWeFf2lpvEc1VWJduEaDYAZW21USeXpA6/zrgOpwGW58ABWX+4jf
- zS2pyVzZWMnwzU90MbXEBkYvGQfC4mCg/U68cgu2vOhYiM0Wn5XdPaOX/XO84QKet4Tf
- rHBN+Brd8DrAcis8rcc2Zl4dfYYs2NssyTcxZ4OzMGpnvO9BnI0lLhq4/meMVYiePQnO
- 0o1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWK322sqaRnSCu3tST2FJiyDwGogG7C8ebubI3KAmdiKv7ghlkc1l1HCArGycxLtc3jHTu+0/U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzqovihHeR7ol9kennNQ36z1Fp76HZwBJ286qE60sv7gOi2aTq
- ltIGNVA+cn+vZDrrUV+BEShoDKlsOwK8SlmvaJSgkKllqBCjxnTFALXdm2lvEuVgRzM=
-X-Gm-Gg: AY/fxX7oX4QshhhqnxbTzaQbsUV5sJDHlFT6Ct1CbwurQSB/kk5h3FzzDfofS9U3ob9
- cyjlZibxbrLJpXo9eWd8m1fsacpSxvffApEP011LAhZybtvkwIkbR1XqGcj+XVGQPKzLXb+D+rM
- ZPBY92uCskTitjO9hmJQAM6yZ5rjfUZJVsPo6VCNX1Ls+khURKuICogVpSj5U4MXjnupReMGKAG
- cCFX/SnSQdGTar1wlc2/vmPIONBcRSABHOhnQ4wIie+CtzT45SxLeB4v9HQp+TnPPXgMbVeuGKZ
- 2c+MWUdcHMB6lLFBSak358EzppXsyGvQnhIYJQQpwphI8hK89g0ZwgxcnjVJSIFyj9pjIpuoj9D
- no+mVTsQrP3aPOB1EyMWdLN1rPNL6f3uR4T2H1pGEkWJPcUag2iShmEk76FlTEIVstas6506PKn
- cSjnUJqgbInkj50pACjM0o7/4BICIs1p7RcHVIezoKY631LgMSi7not+8uz1FH4t0Ovq/x6dLbP
- OC2KqRRvRF/h3mTjW8U1vYjhkMcwXA3WxF3n8c=
-X-Google-Smtp-Source: AGHT+IGWFFxOnIu3hcbMuB1oPF/2FtzdoG0BvAOSKDfKcvMImF8PKBXjpnDyTDBEGHAOHuGEyNKGYw==
-X-Received: by 2002:a05:6830:2e06:b0:7c9:596c:a7c0 with SMTP id
- 46e09a7af769-7cc66a4f398mr20457282a34.36.1767192564546; 
- Wed, 31 Dec 2025 06:49:24 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667f9201sm24521534a34.26.2025.12.31.06.49.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 06:49:23 -0800 (PST)
-Date: Wed, 31 Dec 2025 08:49:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Luke Wang <ziniu.wang_1@nxp.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "bhimeswararao.matsa@gmail.com" <bhimeswararao.matsa@gmail.com>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
- "kauschluss@disroot.org" <kauschluss@disroot.org>,
- "andrew.goodbody@linaro.org" <andrew.goodbody@linaro.org>,
- "tanmay.kathpalia@altera.com" <tanmay.kathpalia@altera.com>,
- Ye Li <ye.li@nxp.com>, Bough Chen <haibo.chen@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [EXT] Re: [PATCH] mmc: Add power stabilization delay in
- mmc_power_on()
-Message-ID: <20251231144921.GY710860@bill-the-cat>
-References: <20251230103950.1543515-1-ziniu.wang_1@nxp.com>
- <ce85424e-b18f-4dc7-b62b-a8220e9ed7a1@mailbox.org>
- <DU2PR04MB85677D23C8B9723BD6E525C6EDBDA@DU2PR04MB8567.eurprd04.prod.outlook.com>
+ d=1e100.net; s=20230601; t=1767193696; x=1767798496;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tW6KWRSFI95PuuPG9egiXu+oyV+TJN3dGq8OI8zByzc=;
+ b=BOFdo52WWGGjrbIZ/nTLS7J+ThMvDaxQediV/Qdg94L/Y1yyTbgiFpMlvLAQwzB8ft
+ EaeDpvO64w96wNgZbEQONlzWErtHYVzjju4bHpU4iV7a5AuGUyQSrmQmtGgH7A/bt8ZN
+ x6iWM/GvIB7GlSkcz0Kco+SEfBMtwYdL0d3uAd/rGm8E8xF2kH5z6EKNJr1bRCSy+QKK
+ RBN+x7kDO5ItdVBjFGhlW4PATeXfHqlZy4RPEYmvKzoKqZiSGVINlzMBcmxZSw6qFs+/
+ wrmCoRjxOEJ3YHr+cxFz5O9b9iLHrBf2rTap9DwJotuAEMpooM5A3rXA8E6T1l5lfHfd
+ 762Q==
+X-Gm-Message-State: AOJu0YwMstmEdG1T3WU5LAWxnRQRi4zt3Dm8zsXqn9gmODPxJrT48BNy
+ FXw98LagzJJCj14Wm3Pj08OqGVw9EV3VDb2Xx9vJxSbnqPmxHabG2dgfxOKSsw4X2ImB73bC6SV
+ XFSMhcF7sPqC2tYWT4glGBIFV5wRemhcGufQq21Zl60JSnPPyzJ8=
+X-Gm-Gg: AY/fxX605FYAPhkCuaRepNA+1+wI4AG0FJeFMHuyFmPC9tn3hHUp6cXe7b51bC6PyUy
+ oGIwv/b+VtsZc8LsoO0I1B9EgCaI65Fc5cH+o3tM9nfiM1RIzIL6aGxgDGlspxdwcXQ4j3Dux/A
+ KXq/GWkcyu29x06YKuP1mRllo3HPSUGeFWDcMoitSf57dBf4dSgoM3S0W8VnSrHCwPZFbJmeAky
+ 9+KQd8EJBF5evrpBXgNvNG+Db/HFHwycKAhy3V8IsEPjTnsCazLKpqR7KAA0Nu42Bgnbw==
+X-Google-Smtp-Source: AGHT+IFM1kDEnz6ORuXSTpHdAnGJjcE522e80TY/hKYGaz8BE8IIz6rAziNrLTyqZhHsPrijnXV6fGqIQQhiTY9oGD8=
+X-Received: by 2002:a17:907:2da0:b0:b73:5958:7e6c with SMTP id
+ a640c23a62f3a-b8036f0add4mr4082776366b.3.1767193696258; Wed, 31 Dec 2025
+ 07:08:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fnRJzimTDKPFOJAT"
-Content-Disposition: inline
-In-Reply-To: <DU2PR04MB85677D23C8B9723BD6E525C6EDBDA@DU2PR04MB8567.eurprd04.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CA+DkFDbQr40f2V8eKD5cSECVTM6aZyeZNxbZMqT4SeQJjMu3fQ@mail.gmail.com>
+ <20251216-left-mournful-0bdb19f7c060@thorsis.com>
+ <CA+DkFDZAgjL3amMoLqSTQbbKngeBk0EMBTciBDDKrxV-UsP=fg@mail.gmail.com>
+In-Reply-To: <CA+DkFDZAgjL3amMoLqSTQbbKngeBk0EMBTciBDDKrxV-UsP=fg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 31 Dec 2025 08:08:04 -0700
+X-Gm-Features: AQt7F2rRtZJaeNHJLzmtjRYkTefR9ikzssiUweuxDjLf6BnzISJmWpVQ59ECRU8
+Message-ID: <CAFLszThCnj+35+C1s3nFR0Rcofz7jTyymKyP9ofMTZMt2t4uWA@mail.gmail.com>
+Subject: Re: Standard Boot integration - script validation before execution
+To: Patryk <pbiel7@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,104 +90,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patryk,
 
---fnRJzimTDKPFOJAT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 31 Dec 2025 at 07:46, Patryk <pbiel7@gmail.com> wrote:
+>
+> Hello,
+>
+> wt., 16 gru 2025 o 15:59 Alexander Dahl <ada@thorsis.com> napisa=C5=82(a)=
+:
+> > Reminds me on the problems I faced when trying to implement Secure
+> > Boot with A/B rootfs.  IIRC there were two things I ended up doing:
+> >
+> > 1. putting the boot script in a separate volume outside of rootfs and
+> > the A/B scheme.
+> >
+> > 2. use signed FIT image for the boot script instead of the old
+> > fashioned U-Boot script, enable CONFIG_FIT_SIGNATURE, and disable (!)
+> > CONFIG_LEGACY_IMAGE_FORMAT.
+> >
+> > Not sure how this plays together with standard boot, but once you
+> > instruct U-Boot to only accept signed FIT images, that also applies
+> > for scripts put into a FIT image.
+> >
+> > Greets
+> > Alex
+>
+> As you suggested, I played a bit with the boot script and fit image
+> and indeed it's possible to include bootscript only in the fit image
+> thus verifying it using a verified boot mechanism. It can also be
+> loaded by the bootmeth_script. That solves part of my problem. Thanks
+> for that suggestion. I didn't know about it before. However this is
+> only part of the problem I'm trying to solve as I said and would be
+> grateful for other suggestions as well, but first I will outline what
+> I actually want to achieve.
+>
+> I'm trying to implement firmware and software updates for my board,
+> but have some problems on how to approach it.
+> As a second stage bootloader (that gets loaded by the BootROM) I'm
+> using BL2 from TF-A. Its purpose is to load FIP (Firmware Image
+> Package) that contains BL31 (EL3 Runtime Services), BL32 (OPTEE), BL33
+> (U-BOOT). Then, once the u-boot is loaded it is supposed to load the
+> Linux kernel. Following my requirements I need to be able to update
+> almost all components namely: FIP (thus BL31, BL32, BL33), kernel
+> image (including bootscript) and rootfs.
+>
+> TF-A supports something called PSA Firmware Update that allows the
+> selection of a FIP bank, just an ordinary A/B scheme where there are
+> FIP-A and FIP-B copies, and the selection happens through so-called
+> metadata. It also supports a boot counter that allows it to roll back
+> when the boot counter reaches max boot attempt. Up to this point
+> everything is quite straightforward.
+>
+> Things get more complicated when the boot process reaches the u-boot
+> stage. As I pointed out I need to have two copies of kernel image and
+> boot script thus I need the following:
+> - bootscript-a
+> - fitImage-a (kernel image)
+> - bootscript-b
+> - fitImage-b (kernel image)
+> I am aware that I can embed the bootscript in the fitImage however, as
+> I said before my fitImage is stored on the disk in the encrypted form,
+> so the bootscript is used to decrypt the kernel image before loading.
+> I decided to follow A/B paths for each component thus the TF-A is the
+> source of the boot index.
+> The information about the boot index selected by TF-A (A or B) is
+> propagated to u-boot, so u-boot indeed has such information. The boot
+> index can be then used to select bootscript-a/fitImage-a or
+> bootscript-b/fitImage-b. However I'm not sure how to do this. I mean
+> it's not technically difficult, it's rather a matter of "how it should
+> be done correctly". What's more I want to make use of Standard Boot
+> instead of old distro boot. Looking at the Standard Boot methods there
+> is e.g. bootmeth_script available however I don't see how this could
+> work in my case. This bootmeth_script just simply looks for a
+> bootscript and if it finds it, then it loads it. As I said in my case
+> I have bootscript-a/b, not just a single bootscript. What's even worse
+> I cannot make separate boot partitions for boot-a and boot-b as the
+> only partitioning scheme available on my SoC is MBR which allows you
+> to create up to 4 partitions. I already reached this limit (boot,
+> root-a, root-b, data), so the only reasonable solution for me would be
+> to put the A/B artifacts in subdirectories under /boot part. To sum
+> this up - the only sensible solution that comes to my mind is to
+> create my own boot method that will use the TF-A provided boot index,
+> then will scan /boot partition looking for e.g. boot-a/boot-b
+> subdirectories (depending on the boot index) and the required
+> bootscript (wrapped into fit Image so that it can be verified by the
+> verified boot mechanism).
+> However, to be honest I'm not sure if this is the right solution.
+> Would be grateful for some suggestions.
 
-On Wed, Dec 31, 2025 at 09:51:13AM +0000, Luke Wang wrote:
->=20
->=20
-> > -----Original Message-----
-> > From: Marek Vasut <marek.vasut@mailbox.org>
-> > Sent: Tuesday, December 30, 2025 9:37 PM
-> > To: Luke Wang <ziniu.wang_1@nxp.com>; Peng Fan <peng.fan@nxp.com>;
-> > jh80.chung@samsung.com; trini@konsulko.com
-> > Cc: marek.vasut+renesas@mailbox.org; bhimeswararao.matsa@gmail.com;
-> > xypron.glpk@gmx.de; kauschluss@disroot.org; andrew.goodbody@linaro.org;
-> > tanmay.kathpalia@altera.com; Ye Li <ye.li@nxp.com>; Bough Chen
-> > <haibo.chen@nxp.com>; u-boot@lists.denx.de
-> > Subject: [EXT] Re: [PATCH] mmc: Add power stabilization delay in
-> > mmc_power_on()
-> >=20
-> > Caution: This is an external email. Please take care when clicking link=
-s or
-> > opening attachments. When in doubt, report the message using the 'Repor=
-t this
-> > email' button
-> >=20
-> >=20
-> > On 12/30/25 11:39 AM, ziniu.wang_1@nxp.com wrote:
-> > > From: Luke Wang <ziniu.wang_1@nxp.com>
-> > >
-> > > After enabling vmmc supply, add 10ms delay to allow voltage to
-> > > stabilize before SD initialization starts. Without this delay,
-> > > some SD cards fail to initialize because the initial clock cycles
-> > > are sent while power is still ramping up.
-> > Details please. Which exact cards ? With which controller/SoC ? Does
-> > this problem happen on another SoC/controller ?
->=20
-> MMC initialization failed on IMX7ULP-EVK with the SanDisk Ultra
-> 64GB card (CID: 035344534436344785569a5ab5018400). However,
-> SanDisk Ultra 32GB and 16GB cards did not encounter this issue
-> (both have CID: 035344534331364780c86726e1012700).
->=20
-> The root cause of this issue is that this SD card requires at
-> least 74 clock cycles after power-up, otherwise CMD8 will not
-> receive a response. For other SD cards that initialize normally,
-> the initial clock cycles are not mandatory - they can still
-> initialize successfully even without them.
->=20
-> On the IMX7ULP-EVK, the SD power-up time takes approximately 2ms
-> to reach VDD MIN voltage. However, the current code does not wait
-> for the voltage to stabilize before sending the initial clock
-> cycles. This results in the VDD voltage being only around 1V when
-> the initial clock cycles are sent, causing the SD card to
-> completely miss these initial clock cycles.
->=20
-> We could add regulator-ramp-delay or startup-delay-us values in
-> the dts vmmc regulator, but I have checked some dts files and
-> found that many of them do not configure these two values - not
-> just for the IMX series, but across different platforms. If we
-> were to add them in dts, it would require modifying a very large
-> number of dts files.
->=20
-> Alternatively, we could follow the approach in the Linux kernel's
-> mmc_power_up() function and wait 10ms after power on.
->=20
-> This card does not encounter issues on the IMX8MM platform because
-> the IMX8MM's SD power only needs about 0.5ms to stabilize. Sending
-> 1ms of initial clock cycles ensures that the SD card can still
-> receive at least 74 clock cycles after the voltage has stabilized.
-> Even though no issue was encountered, sending initial clocks during
-> the power ramp-up phase still does not comply with the description
-> in Section 6.4.1 of the SD Physical Layer Specification Version
-> 3.00.
->=20
-> Additionally, I believe the 1000us delay at the beginning of the
-> mmc_go_idle() function exists for a similar reason. Without this
-> 1000us delay, CMD0 would be sent even before the voltage reaches
-> VDD_MIN.
->=20
-> This should be a common issue, not limited to the IMX platform.
-> We can either add a delay in the code or add regulator-ramp-delay/
-> startup-delay-us in numerous dts files.
+I'm not sure if this will help or not, but there is VBE (Verified Boot
+for Embedded) which uses a new phase (VPL) to verify things before
+SPL, TF-A, etc. are loaded. It has an A/B/recovery bootmeth. Various
+things have been written about it (e.g. [1]) and the docs landing page
+is [2]. There is also a conference talk at [3].
 
-Please condense this slightly and expand the commit message, thanks!
+While bootstd[4] was about 5 years late, VBE is a little ahead of its
+time, but I believe something like it (everything in FIT, a VPL phase)
+is where we will land eventually. As you say, you want to update
+everything possible - I would add that you cannot update something
+which might allow the device to be bricked.
 
---=20
-Tom
+For security I would advise to eventually move away from using scripts
+(perhaps in a second generation as it is challenging today). Yes they
+can be signed, but there is a lot of code involved in running
+them...turning off CMDLINE almost halves the size of U-Boot and
+therefore the attack surface.
 
---fnRJzimTDKPFOJAT
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Simon
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVU37gAKCRAr4qD1Cr/k
-CvA0AQCLXvHrNxdpCIJInK0Owl+3cza4BMNbjEP+5GBC4hbFFQEAg+Y1yPCCAt09
-o5gysjwRzPxP9f/3Ow3cnZKzhG9ndwg=
-=oxxU
------END PGP SIGNATURE-----
-
---fnRJzimTDKPFOJAT--
+[1] https://u-boot.org/blog/verified-boot-for-embedded-on-rk3399/?print=3Dp=
+rint
+[2] https://docs.u-boot.org/en/latest/develop/vbe.html
+[3] https://elinux.org/Boot_Loaders#U-Boot
+[4] https://docs.u-boot.org/en/latest/develop/bootstd/index.html
