@@ -4,91 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B61DEE6457
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2476EE6457
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4BCF84027;
-	Wed, 31 Dec 2025 17:07:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 46332840B1;
+	Wed, 31 Dec 2025 17:07:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MV5dwwNi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mlysE/b5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3988840AE; Wed, 31 Dec 2025 17:06:59 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4AE45840B5; Wed, 31 Dec 2025 17:07:37 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDDE883F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:06:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1817183F69
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:07:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-65cfb4beabcso6859672eaf.3
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:06:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767197215; x=1767802015; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hbCLdESiI/sHzZYLHfNC23XHNKIlTulC1eur9QO0pew=;
- b=MV5dwwNi9XAKnBSnldwo9c7k/dp7lgAfCRQIYSdDAbQ1rTnGK/RhAltCcGgSCz3LUd
- +0Y+91MhK+WTgEmd2mb6s5BzfVhfUmfALplKtkONFQoJEOSAgK8JObUV02+PQUA582qV
- pNtFkvmYfCyfNKOS8ZphZjDZ/fv989aBOcFz4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767197215; x=1767802015;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hbCLdESiI/sHzZYLHfNC23XHNKIlTulC1eur9QO0pew=;
- b=wI5XBfXz4FXSU603yFrW1W3gWWzTlywVdwJ4R4hpZXvOCCa2dpiBJBhLhyVJ4b0T8Y
- QUhgLBf9SZ+S3sxTNrW3obKmXDGhVgnZXmDmqpXRWouor+Tc4Do9v9hPWulV8iR20bKy
- 360u3nv7RTt5/ohnzM/KRCwZjxswtPJ/yM4MG9DOthTEwwqWqbbE4npzakPr0nXZS2Qr
- AZ6zy6XKwE2ERnN7nux6sbtuxJG3Typmp06cJe6HN8TeQK8FVkFrtXRuUvfQj5HAVbCf
- rCRmSKDmCA11o+paeOQpqR/eIH3r/4dW5jSQuoNCx+7jAvHK4AQVhd8/TYlwC5DoS8+h
- xvlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIkdqtuxqit9poB6shH8U9HXgRG7cIdMLDxuURLvl1p/xvDqVjmBms8Rmvch8dqR2HZf/DRV8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcwALM6KcaJcTryCsTUJIskZ3on/4099UEVY6KFMts+q2Ak2xf
- A+mijwn1K2FxBY0wPhLVjY9/nwnByR7I6F5zutZ15lCOEVMSduoUZr3THEPl/Gku2W0=
-X-Gm-Gg: AY/fxX4P+HqlmjNjQf3skSmyvEx8oJYbnCUCIvDKziBW0mriVyE7BSMv8EgBooQEofb
- wQcLtauamEukZU9cP480/Z6LNikIZfyb9TVJw1uWbNUwJEcm561ZFNKOaOB++fx79r7kXerumCm
- i3+hEBxIoXD6BZnhnccPNb7bstHSKeTHxtIugJbIspYAowpwmd57T4wF/MFWkNWGpZOfHbSTfH/
- g62av3r0QoZDXPP2KM7lItpwBucqHAhxBb0wrRJWWVknRkfkOv+K6DvafMk4gD9Wa5pijsqIdHd
- EIyjfiut1YWZUG2NYoss4XIjwikhrITxccjlyd1ZVFmDFJhHrjE9BePNXGVTPA3WRjr4U5MF+x5
- 4zftZ7JJWMCoJ6lF43UHk/92q2ScwSu9HAiXb+fYh7778G8BB8VP8AVgOfzAe+luw0v/dZh2KLP
- 5uL4fv5uATx9Kmh+KQdgxU6sGvfNWQe+RP/t0Uyi5lHcvt9ICwm7V/NMHbT20sSLSO0TVEImxSj
- 0fBC61x6SIqL2CjVBWh5YsZztX39Hi5y5eywQY=
-X-Google-Smtp-Source: AGHT+IFeb/9e4Rrw80LrfMuksf/a/74FQrnSLekBeGe/hqVStFY1Jh7oWQdAAIkVLBjVZvQWGqWYbA==
-X-Received: by 2002:a05:6820:4a83:b0:65d:48c:34c4 with SMTP id
- 006d021491bc7-65d0eb93836mr12873154eaf.63.1767197214886; 
- Wed, 31 Dec 2025 08:06:54 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f1f1caesm21813515eaf.0.2025.12.31.08.06.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 08:06:54 -0800 (PST)
-Date: Wed, 31 Dec 2025 10:06:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ion Agorria <ion@agorria.com>, Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] video: menu "TrueType Fonts" depends on TrueType
- enabled
-Message-ID: <20251231160651.GZ710860@bill-the-cat>
-References: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dhFGX5zy9z9spM;
+ Wed, 31 Dec 2025 17:07:32 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767197252;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LMXYu9LY0yJ9Ab0AKcqNw+WDKgqaNA/o29d5lEFjiEw=;
+ b=mlysE/b5KRvfDKtIQ/8TEei7F2vP0w8x8ltL3rmFkdsq3MK3yf5FizetgAowZRwGfcOd0R
+ /zdXzp7AU6HgvO3sewEwRWO5DBEiYUJyjJ1VRyIsoL8KXKnauRC/unCWDoOAykUwBam+G/
+ gt4DwXO/zhlj4qkzVaQaqiXW0PY1VICHfOA8tbaa6oszWiB0YrzTyv0BckyT2N80YJOUfm
+ TXoXchAmxvZygxBwZYUpvTDpuJaT5zBvmwnAzqbqkJ7afQ+6SjSsXkQsA2hnLMBxCHnIvf
+ HsBe0XQo4xU7vLYSxYrUn4bC2zNFfY1MI58Y5wUOtKqH4nH7uOUWgLn8y/J+zg==
+Message-ID: <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
+Date: Wed, 31 Dec 2025 17:07:31 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dVQBsmVmLIvC0rou"
-Content-Disposition: inline
-In-Reply-To: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in SPI
+ NOR
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
+ <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
+ <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
+ <20251223233205.GG847766@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251223233205.GG847766@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: e60aa2fc60c39417bcf
+X-MBO-RS-META: uw5onbier77e9i347u3n369dt17ib8r7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,36 +79,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/24/25 12:32 AM, Tom Rini wrote:
+> On Tue, Dec 23, 2025 at 07:55:45PM +0100, Marek Vasut wrote:
+>> On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
+>>> On 12/23/25 15:31, Marek Vasut wrote:
+>>>> Add test for environment stored in SPI NOR. The test works in a very
+>>>> similar way to the current test for environment stored in ext4 FS,
+>>>> except it generates spi.bin file backing the SPI NOR.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> ---
+>>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>> Cc: u-boot@lists.denx.de
+>>>> ---
+>>>> V2: No change
+>>>> ---
+>>>>    test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
+>>>>    1 file changed, 99 insertions(+)
+>>>>
+>>>> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+>>>> index 383e26c03b0..48e31f19b3c 100644
+>>>> --- a/test/py/tests/test_env.py
+>>>> +++ b/test/py/tests/test_env.py
+>>>> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
+>>>>        utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
+>>>>        return fs_img
+>>>> +def mk_env_spi_flash(state_test_env):
+>>>
+>>> Thank you for adding the test.
+>>>
+>>> Unfortunately pylint doesn't like your code. Please have a look.
+>>
+>> Is this something we run in CI ? If so, CI builds did pass.
+>>
+>> If not, how do I trigger this ?
+> 
+> We only run pylint_err not pylint in CI. The "make pylint" target has
+> been unused for so long that the baseline itself is out of date. I don't
+> object to trying to improve our python code to match standard practices
+> better, but this isn't the place to start adding complaints.
+> 
+> All that said, a newline before a new function is just a normal good
+> practice and so at least the quoted here example should be fixed, just
+> like if it was in C :)
+There is a newline before the function, the code is incorrectly quoted 
+in this discussion, see e.g. patchwork for the actual content of this patch:
 
---dVQBsmVmLIvC0rou
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+https://patchwork.ozlabs.org/project/uboot/patch/20251223143130.16266-1-marek.vasut+renesas@mailbox.org/
 
-On Wed, Dec 31, 2025 at 03:13:44PM +0100, Heinrich Schuchardt wrote:
-
-> The Kconfig menu "TrueType Fonts" should only be shown if TrueType is
-> enabled.
->=20
-> Put all TrueType dependent customization within one if statement.
-> Remove `depends TRUETYPE` clauses.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---dVQBsmVmLIvC0rou
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVKGAAKCRAr4qD1Cr/k
-CvdTAP0QqV3XKON5qCaED/ACkfNtRpcrVUXBzp3NZrj6Ak1ThgEAq3eo71q20zS6
-FS8SLE0+DwpFpGdxESJEtSLyjbTu5Ag=
-=rGBz
------END PGP SIGNATURE-----
-
---dVQBsmVmLIvC0rou--
+So, what exactly should be fixed in this patch ?
