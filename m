@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1759EEE6428
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:08:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB5BEE6457
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBD1840BE;
-	Wed, 31 Dec 2025 17:08:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 27508840D4;
+	Wed, 31 Dec 2025 17:11:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FlOOCPjp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SGNI3ix0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A794E840C1; Wed, 31 Dec 2025 17:08:12 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id DFDAB840CF; Wed, 31 Dec 2025 17:11:27 +0100 (CET)
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
+ [IPv6:2607:f8b0:4864:20::241])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9014E83F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:08:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70E6D840CB
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:11:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-4511f736011so6995204b6e.0
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:08:10 -0800 (PST)
+Received: by mail-oi1-x241.google.com with SMTP id
+ 5614622812f47-45358572a11so5981557b6e.3
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:11:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767197289; x=1767802089; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767197483; x=1767802283; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F9ajNO6EARFiuYd2+g0NCy/Qp4gDgyo9eBuNMk+RYoY=;
- b=FlOOCPjpDYhdnOaGS3hYY0mWvV9lU6+44IaIWPIpvqiigAoL4cOzBHYMT4WPn/7+Kl
- YJgrrx4amm2wrrfYTbFq/GhgcFBVQFm0papGb/kySwcFEXrUcsmaDjsDItTBUNwWtrSV
- b4Ba6wfC0V+dJPB206q8DzlsK/kxjvc/Uoy8I=
+ bh=tlEnJ486HQRQdZUN7GUmNLoKLz7s7/s97aOsLr7ZMGc=;
+ b=SGNI3ix0L2PXDpFP3QzqdM5BNJ48NGcgpMWA5S724VvrIlW9nZHa3drRaVoR4QMqsH
+ lMw31Ma16/PpTtO0m/sUMm0/GRyn4BrOOYP26xTgBYpH7a2kBhPp7c1cUQ9nbHGPiZap
+ YZeAuqExc3A49+89IR9guJVM9I73aiysUEkGo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767197289; x=1767802089;
+ d=1e100.net; s=20230601; t=1767197483; x=1767802283;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F9ajNO6EARFiuYd2+g0NCy/Qp4gDgyo9eBuNMk+RYoY=;
- b=mrZIHtFYeoktLIONgpIPEs2MmVr6BmHKuJVPjO9A3//xlZjYn9/h+xohvVoKMW2VsI
- b7VeeihcVPQwMYRNaw0jtpHiCMnVfD6TzctVU/C0/pECObAuKFE36HOIYPOKGXz5XJSZ
- Bqo31yYAfIj23ndR2f+Mg9BlDL1PpvZzzmpn+Gbjgm1MWyq+Rh+p18kW1guZ1uNsULer
- xfCPTaITuAYNXCtl4zC53cOWi6Xvlry7iljwwXSGSvwXhHgsqFjl1DWIMO+YnGPx7s7j
- pLB19z4ReKMROvsQ+wQT60h9qNeXGWoJ2VPWGqzVhl6+LcwrlQ0eJowd54BnJ+YYCmzW
- pXuA==
+ bh=tlEnJ486HQRQdZUN7GUmNLoKLz7s7/s97aOsLr7ZMGc=;
+ b=rNqEPW+muJe+F1cwamgB0OOkf4CaGgkC5bE5twprDB8UpSWYZL5+hLuw0+MjTBXNTt
+ +YwTg7ccqazh0hHWIrZ2sahltyGi+dSSf0jD94ied/qLlVIYmLJBpNwOc1V1up3R82aT
+ VgI9mMRcBRK6VPMgoS92f8ioTCDuCzkC7ttq/Uo8cGGzo38zAjq180IhJ+JpXc6tZzdl
+ Dnxbl/S5Hf6wpAV/ARW1kjf51YjDCbN6Dt8kLXXwBLdH7Tcwxf0kSz+XUIKzAmH0YaTX
+ aCke7yKDf3Rhu2i4rNVU1pPDSCvOcqI0uUom/EtwvWb8SEad+kPv9MZYmIuNq7CUvDSd
+ XHMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXN7SkXN+sdy+PceTn+Aici8LC46NIVQydg4ai70PD9x5rJPD9yo+1nxZnBCgZ2I25vsb2Ojgw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywy+hLR8Vc1rOs239at2FXtgXfEEnkvIQrLuM4gabI/1pTq8uQT
- T0KzoiToanJ/9jFTctNquaoir+co2whPJHo8QXCzqR2l4K8ivQQb0+sBCVrCpCQmboY=
-X-Gm-Gg: AY/fxX5ByU2N5S0N76vOAPgfomaCSljaMdOTHZvP4yjjyUi2jKSOO2WpSjYJwryZ7fQ
- 7o2i8bQ3YLTwXpFXp2v3ymASH9kQWq6xVVv2PTbs4LUm+fh0AE+LWwHQFwRpqA2c/s3qgmJuD6Y
- jD4omnLctaziLqazBAEDdudMlTjkdEOgxPfgvE2qJDD20BHK9TJH+yRR7vTWIIe6VcX7atppXKy
- 9CxmKDkQfxPl/wAlkm5f/hUSwQUpyMO2rAO8LwgS086ccW7bZvK/B4+P+xt36zmhYdHk2uxhvih
- DVzQ4+My2DFTaZSLZpvV4YoJ0qqL3y6Epz2ipIRX+CGumj0qk2pLBgG4V0DumYiU6l1AKgTgLv8
- WDtQ2NhNrF71Y0iKH27yMJJsoYZ9chkEL6oXyGYjNOgBiBbR6YpDax+9msck9AEGv19fWyTNTZx
- nEZ7RdVSPL/iDP1AVHtx4A4ZhoG5NdT1LfZbobUXfFobH6Y+1TJmVTe+MpS9e7qsaRvqpxqAMhN
- 0+UCeG2Sol8I88h5Ph5wBS0FAmJiyuS/e/+9yxOb5D2XVwOtw==
-X-Google-Smtp-Source: AGHT+IEaUr5g2B/Yyxp+HKSTLGpYL8KwgZTI5Phc4wTCze4ySWNx3A3ckkl7JfmAbc0y09GRn4rOPQ==
-X-Received: by 2002:a05:6808:690a:b0:450:826e:5df1 with SMTP id
- 5614622812f47-457b221e342mr15958654b6e.19.1767197289313; 
- Wed, 31 Dec 2025 08:08:09 -0800 (PST)
+ AJvYcCX7Bm/GzXIeUOCp0AS/d7Uunj1e1cx1skj4U6MzySeXhfiBZS2at2mLP3B8bXw+dzdFqk7sRkI=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywtk90euScJ6IfpMkO02DAsPg5dppqODXEKcsj/Hig4kSBcToGL
+ zBuH6B0Tjf5FFNiaficS6e0iKgd8LAzo3X0KYr2I6QLN/JNHxTSCxhj4suXykmchoTtp/vxoJvH
+ fAlKiCZw=
+X-Gm-Gg: AY/fxX4phdk6d855UU+Z26xY5zCtx+T61BRc7oZViOvkRW6AqbAGtMYcdMPuIpPnO8U
+ 7TurCp9k0TRDuk425PNYvZ2tXHh51L4xGOKZ+8FoXKg7iZnhSXUm1Qzi+G62P2PQtkUhABtVqHb
+ /qN6RmAm7D3hWM/JbMktHvRI+UCBbV4FcG1qCguPb5VZfRVomw8AwkfBeA/geDwm9mEha97wSOo
+ fYTi4UFYGz9oheBdIZBvP9hFayaB8/zdo+B3Zp6iSdjwGihCQla0w+fCEYeWx8zI4gbyMklXce4
+ dSwSewHsmR2udWs9IadkubgHeAvMwakICMYkdFOj9udtADC3iR1i/EfiK0Zs415Y86/vWv8C858
+ pKtd69eYLcBESGeajS7DBeM4q84tFnRyuP5m769ph7GFRPxVyZ0EWIUjxG64yVe5v4qVElXH/AP
+ 7HsFClxF12Gsnedj3J6rjbgwi49Af7PySx4q1igbrdZFmoSPTtX/eshE+wCl8/vX6sE02wCK0Eo
+ oiELF+bKdwSnwMMOedBnxusU7G2NmS72DRcHF8N6jtDf9X3Ag==
+X-Google-Smtp-Source: AGHT+IEyo0CBNaznA8clL9SAcaX9Bgi221rNz4hV8m/HDJZCgZS8s0F/Bt5hi0AjqDngg7tm9FOXcQ==
+X-Received: by 2002:a05:6808:3085:b0:450:c63e:440 with SMTP id
+ 5614622812f47-457b2047bc9mr15105494b6e.66.1767197483176; 
+ Wed, 31 Dec 2025 08:11:23 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-457b3be18e1sm17716530b6e.6.2025.12.31.08.08.08
+ 5614622812f47-457b3be2223sm17331290b6e.8.2025.12.31.08.11.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 08:08:08 -0800 (PST)
-Date: Wed, 31 Dec 2025 10:08:06 -0600
+ Wed, 31 Dec 2025 08:11:22 -0800 (PST)
+Date: Wed, 31 Dec 2025 10:11:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] video: correct label for cyclic video_idle
-Message-ID: <20251231160806.GA710860@bill-the-cat>
-References: <20251231153719.84716-1-heinrich.schuchardt@canonical.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in
+ SPI NOR
+Message-ID: <20251231161120.GB710860@bill-the-cat>
+References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
+ <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
+ <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
+ <20251223233205.GG847766@bill-the-cat>
+ <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DuckPAMWqINDH+L9"
+ protocol="application/pgp-signature"; boundary="N2CPZRE6jcXFaXki"
 Content-Disposition: inline
-In-Reply-To: <20251231153719.84716-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,36 +108,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DuckPAMWqINDH+L9
-Content-Type: text/plain; charset=us-ascii
+--N2CPZRE6jcXFaXki
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 31, 2025 at 04:37:19PM +0100, Heinrich Schuchardt wrote:
+On Wed, Dec 31, 2025 at 05:07:31PM +0100, Marek Vasut wrote:
+> On 12/24/25 12:32 AM, Tom Rini wrote:
+> > On Tue, Dec 23, 2025 at 07:55:45PM +0100, Marek Vasut wrote:
+> > > On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
+> > > > On 12/23/25 15:31, Marek Vasut wrote:
+> > > > > Add test for environment stored in SPI NOR. The test works in a v=
+ery
+> > > > > similar way to the current test for environment stored in ext4 FS,
+> > > > > except it generates spi.bin file backing the SPI NOR.
+> > > > >=20
+> > > > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > > > ---
+> > > > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> > > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > Cc: u-boot@lists.denx.de
+> > > > > ---
+> > > > > V2: No change
+> > > > > ---
+> > > > >  =A0 test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++=
+++++++++++
+> > > > >  =A0 1 file changed, 99 insertions(+)
+> > > > >=20
+> > > > > diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+> > > > > index 383e26c03b0..48e31f19b3c 100644
+> > > > > --- a/test/py/tests/test_env.py
+> > > > > +++ b/test/py/tests/test_env.py
+> > > > > @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
+> > > > >  =A0=A0=A0=A0=A0 utils.run_and_log(c, ['cp',=A0 '-f', persistent,=
+ fs_img])
+> > > > >  =A0=A0=A0=A0=A0 return fs_img
+> > > > > +def mk_env_spi_flash(state_test_env):
+> > > >=20
+> > > > Thank you for adding the test.
+> > > >=20
+> > > > Unfortunately pylint doesn't like your code. Please have a look.
+> > >=20
+> > > Is this something we run in CI ? If so, CI builds did pass.
+> > >=20
+> > > If not, how do I trigger this ?
+> >=20
+> > We only run pylint_err not pylint in CI. The "make pylint" target has
+> > been unused for so long that the baseline itself is out of date. I don't
+> > object to trying to improve our python code to match standard practices
+> > better, but this isn't the place to start adding complaints.
+> >=20
+> > All that said, a newline before a new function is just a normal good
+> > practice and so at least the quoted here example should be fixed, just
+> > like if it was in C :)
+> There is a newline before the function, the code is incorrectly quoted in
+> this discussion, see e.g. patchwork for the actual content of this patch:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20251223143130.16266-1-m=
+arek.vasut+renesas@mailbox.org/
+>=20
+> So, what exactly should be fixed in this patch ?
 
-> When the cyclic function video_idle() takes too long a message like the
-> following is displaced:
->=20
->    cyclic function video_init took too long: 87707us vs 5000us max
->=20
-> The text "video_init" is misleading. Replace it by "video_idle".
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Thanks for explaining. The only problem I have now is you didn't give a
+cover letter explaining the feature and so I need to come up with
+something when merging the series as a merge commit. I can do that, it's
+just easier when I don't have to.
 
 --=20
 Tom
 
---DuckPAMWqINDH+L9
+--N2CPZRE6jcXFaXki
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVKZgAKCRAr4qD1Cr/k
-CvzGAP4m0Ae7jXB/NsIlDFYUzaFrHXDTDZggkRJV3j9jfw9pQwD/bkQuWVCwN0Zu
-VWceeTDOPh2yOsbG8/4GtC9Exldz6wM=
-=l77F
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVLKAAKCRAr4qD1Cr/k
+CsHSAP4+xBAsXIDF4BZiixp7jif05KVfUIQ0Fqs6x+tcol1lywEAnjRLGkSQeolu
+8KJuE47wo5Qo08ZHo7Yfucvl+Uu0mAo=
+=8oeq
 -----END PGP SIGNATURE-----
 
---DuckPAMWqINDH+L9--
+--N2CPZRE6jcXFaXki--
