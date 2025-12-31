@@ -4,68 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F8C9EE57F0
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 15:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A37EE57F0
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 15:23:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDDC48409A;
-	Wed, 31 Dec 2025 16:17:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E41F83F6D;
+	Wed, 31 Dec 2025 16:23:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lnuJV9ZJ";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GG+3zuCU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7AC98409B; Wed, 31 Dec 2025 16:17:34 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id E9B3E84097; Wed, 31 Dec 2025 16:23:25 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFA4083F6D
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 16:17:31 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ by phobos.denx.de (Postfix) with ESMTPS id 19A73839A5
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 16:23:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dhD8n0pgFz9tYL;
- Wed, 31 Dec 2025 16:17:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767194249;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=yCLV+3R3+NjohxLIi3ydopK53CvTATiLRLkG7zQXAgo=;
- b=lnuJV9ZJGtJOyCSQ41asf2EgDnwkt+rSWbJQYaDERmtrxSdcpM9dsjKDsJm61t5H76MCjG
- yOfrEgarw3rRpsGZ2SkztmJxBfeD+BSNSaBiVgtBppmETtahzgoXSVHX2/bCwLrh0YbF4l
- e1iSnCK4cEY3RdlPsRdxf1S+Jcodpfwy77g6LU9w0by9LvD16Kiw9Yw+R8+K14t9PI0hG+
- tcxo8omnAZm9HWc0ei2RHNcdn8qRVH3HPSHqmanABoKnAK2XRNaNzSOsi27uKqZw9mk3aJ
- d+ke0TXYE1Smoo4yJJ/NqcjSfEtMRY/Dwhw1DGluyfa/nn/eIfW3z9dt/jQLRg==
-Message-ID: <2cfb2514-4b9d-43ee-b3b5-e670ce5a3d70@mailbox.org>
-Date: Wed, 31 Dec 2025 16:17:27 +0100
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9A4723F452
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:23:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767194602;
+ bh=Kw/ELyAaZcUWTw8BzVy/TcDkvRqMvuTbOM9F26mZsEk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=GG+3zuCU354t3ynUBKac5l1Z35Z4X/BrtsElZmcGWktftV2gpiwyEs1IXj5ruV2yK
+ J57RUNZ7zrOXmFYhwkYy/6MZTgVCw4Idh6nBI7YMDxYMixFs+A7GFFPx6Nm07vZptu
+ xxtUMwmdXgnRUAE8lZstmmtBZSkKgbOoRNwekCNzbKZBW5r/LDYF0fuHBlm7r963WT
+ x8flP/plk+7Ykb9cqkcMRnHC7rMdnEbQHGR0ZM4C3hVyGVSoUXkyPoqZ0trfa1Y/7v
+ 2IXACWR+iuzawIbdK9XL5P7VpjSJUovvcw3O0nB6qp4OB3iKecbZKG8K77sm5zXEIq
+ 2ERA2UYvJqYSxKEWrzHCkrsfzd6neqJtsn99KwvBAzr8MlmK5AqSudlOBYGujAp5nT
+ EhERsiSr9TdVNGWc9AjlnfQqrgyqBo5fkNW+TPrwWSHqpgjvLAOAFMv9L/aFsv1iTX
+ fSdwrbv5ZPtJDeTFnfoZGKPz2IHcsB/JtOlnyi5jeH40t2JPdIunbiIU4qzeUS0jO4
+ cSwemWgjpFJudX33Tsw5mcf8m9xEYBx0tCmegGIzub+X41vlEyFjSteMxWns8qnV/p
+ 3Nwu2tMZcd0tdQl9c7SlGzWatfWxU7NBSyK72wD93n3mDwkxujGbLEIrky7D5kWMk6
+ 0V/F78nIF/Hqi598HFbIE230=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-47775585257so76023815e9.1
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 07:23:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767194602; x=1767799402;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Kw/ELyAaZcUWTw8BzVy/TcDkvRqMvuTbOM9F26mZsEk=;
+ b=LSSf2kImtoKtm/MSiZeO4GE+Ls+rCyJZBtrjXrEX3f9XusEI1QTd22pRgCR58MZChq
+ K8xr/RZ09i8xnJLx8xhne20HMSOftTaYxkXlSyKbY0w/IBxd4ZeuukS6ZliXB8gswtmB
+ cHRZA2yi1rscT10a1eEyG3A97DjlDGhzUT4JppRz2XVnvRufdMJDswxbOZyfvQoZ6UKk
+ gDJ9stXtCpEZ8EUAws5N00OERT8fsDa2rwYPcHBkErs3K7iGkVR2H3/SmoqgGd/7KEB0
+ VJn/awN2e4NA4AgX197eVIzqxmFitZGvYdBZJocbo4i2Sf0gt53meLrWdgG0Z3pQxFUL
+ xrnw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrU1exHUAveddtfz93jHYfcCeNgMHuUQ06XXK7DDVhHmvzVqZx98c+YB9dxTvgT7MBp2CCPOQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2njCfiXLOgYOksgtVIVxTHr6CO7CNWET61KXrAsO+M20rWu3L
+ sL0zm7sP2NEmLr5FKEnlEjl+bllutCZEBIGsQ7nJytfIJKcUvLICI+0VKLj4+6XH3oCYkSbAyLk
+ gdhFP9aEpTasPJVjbUSzXpoQpey+fOCXtmoGIbgoEAlWDP7joc8GfzFhWrxOEzXI6DSzRsIg=
+X-Gm-Gg: AY/fxX6vH8zt+w/nX/9JXWL93f3xGsVeAeKA/Y2Z0HmcUvFb2Oxjz/7qoIG2mV2D9Yg
+ CZOL0fcEIeUo+RXZw3TqEoadggf98NjcI7DEvH9iOCL9bJ/U4U25wl9ty+k1X5gBNbLQw95a03y
+ RkVylL7mDcVs868jVtoAAMfXGttWX4AQXZmTBGX0IdqiLO4Q4VR1c7KkrkiUqdx1HsK88urz2sq
+ UlxX/ZYeP+XSjUCME8EuE11uM6ebiF3rdtB9xJzSwVmCLn91RVnFcHH2Bqq9+30YsFcpftSN/59
+ /r8l1yz7iOeIfObfS9++0leolVWjIbwH+XXFqUFJTuUXuUvD8CV4yxE0vH2nF9TK0u742janFKJ
+ 6uFnCbERNQITW50Q/uS11W8BLDcDgQ8naX/D1TzEpoUq8yigKLXgSEL9jW0nA61BKxYTr+fmymp
+ UaoMWO7i8=
+X-Received: by 2002:a05:600c:1d1d:b0:477:632a:fd67 with SMTP id
+ 5b1f17b1804b1-47d19546487mr434959605e9.12.1767194602046; 
+ Wed, 31 Dec 2025 07:23:22 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE6We5G7FdZ3sCbA75Vk/luRGuSEG7zQpZppEbqtDFxgKcBawevHuPktpCpjUkpolxPIuvR/w==
+X-Received: by 2002:a05:600c:1d1d:b0:477:632a:fd67 with SMTP id
+ 5b1f17b1804b1-47d19546487mr434959295e9.12.1767194601591; 
+ Wed, 31 Dec 2025 07:23:21 -0800 (PST)
+Received: from [192.168.103.126]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47be2723d19sm761862225e9.2.2025.12.31.07.23.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Dec 2025 07:23:21 -0800 (PST)
+Message-ID: <c31964fd-67ea-43fc-a6c2-7ee04ed1c1dd@canonical.com>
+Date: Wed, 31 Dec 2025 16:23:19 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/3] env: Add single to redundant environment upgrade path
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>
-References: <20251217201323.756419-1-marek.vasut+renesas@mailbox.org>
- <20251217201323.756419-3-marek.vasut+renesas@mailbox.org>
- <20251217205610.GF303283@bill-the-cat>
- <bdfbfcbc-74f3-4191-b4e9-b4de0e8cbd16@mailbox.org>
- <20251218135853.GG303283@bill-the-cat>
- <0af71280-1b23-4439-9f85-89f4341b084e@mailbox.org>
- <20251218232228.GP303283@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] doc: emulation: Add network testing documentation
+To: Manjae Cho <manjae.cho@samsung.com>
+Cc: trini@konsulko.com, sujin.u@mobis.com, u-boot@lists.denx.de
+References: <20251227142036.10661-1-manjae.cho@samsung.com>
+ <20251230154529.29724-1-manjae.cho@samsung.com>
+ <CGME20251230154543epcas1p1fccdde722bb4c0c3de6e64ef12d4a334@epcas1p1.samsung.com>
+ <20251230154529.29724-3-manjae.cho@samsung.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251218232228.GP303283@bill-the-cat>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251230154529.29724-3-manjae.cho@samsung.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 34d201efc94f134d6b6
-X-MBO-RS-META: h4uczok81kntashpt7xnb9apezpjknkz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,55 +122,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/19/25 12:22 AM, Tom Rini wrote:
-> On Fri, Dec 19, 2025 at 12:09:28AM +0100, Marek Vasut wrote:
->> On 12/18/25 2:58 PM, Tom Rini wrote:
->>> On Wed, Dec 17, 2025 at 11:58:15PM +0100, Marek Vasut wrote:
->>>> On 12/17/25 9:56 PM, Tom Rini wrote:
->>>>> On Wed, Dec 17, 2025 at 09:12:33PM +0100, Marek Vasut wrote:
->>>>>
->>>>>> Add support for converting single-copy environment to redundant environment.
->>>>>> In case CRC checks on both redundant environment copies fail, try one more
->>>>>> CRC check on the primary environment copy and treat it as single environment.
->>>>>> If that check does pass, rewrite the single-copy environment into redundant
->>>>>> environment format, indicate the environment is valid, and import that as
->>>>>> usual primary copy of redundant environment. Follow up 'env save' will then
->>>>>> store two environment copies and the system will continue to operate as
->>>>>> regular redundant environment system.
->>>>>>
->>>>>> Add test which validates this upgrade path. The test starts with spi.bin
->>>>>> which is pre-populated as single-copy environment and then upgrades that
->>>>>> environment to dual-copy environment.
->>>>>>
->>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>>> ---
->>>>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->>>>>> Cc: Simon Glass <sjg@chromium.org>
->>>>>> Cc: Tom Rini <trini@konsulko.com>
->>>>>> Cc: u-boot@lists.denx.de
->>>>>
->>>>> For merging, a cover letter makes things so much easier, please add one
->>>>> for v2. And, I think this needs a Kconfig option. I'm sure you added
->>>>> this because someone has a valid use case but it's going to grow too
->>>>> many platforms where that feature isn't likely desired. Thanks.
->>>> Do you actually observe growth ? Because this is calling existing functions,
->>>> so the growth has to be in units of bytes tops.
->>>
->>> A good question, I was assuming so but checking xilinx_versal_virt (a
->>> platform with redundant env) shows yes, it does:
->>> 01: Merge patch series "fit: print conf node compatibles + use property string constants"
->>> 05: env: Add single to redundant environment upgrade path
->>>      aarch64: (for 1/1 boards) all +96.0 text +96.0
->>>               xilinx_versal_virt: all +96 text +96
->>>                  u-boot: add: 0/0, grow: 1/0 bytes: 84/0 (84)
->>>                    function                                   old     new   delta
->>>                    env_check_redund                           316     400     +84
->> Correct, and the growth is minimal and gated by ENV_REDUND already.
->>
->> I think it would still be good not to confuse users with too many additional
->> Kconfig symbols, but if you insist, I will add one ?
+On 12/30/25 16:45, Manjae Cho wrote:
+> Add network testing documentation for QEMU emulation based on actual
+> runtime testing with qemu-system-riscv64 and U-Boot.
 > 
-> Yes, please add one, it's 188 platforms that'll grow and I do think
-> migration from single to redundant env is a niche use case. Thanks.
-Just for completeness, added in V2.
+> Tested and verified:
+> - VirtIO network device detection (virtio-net-device)
+> - DHCP client functionality
+> - TFTP file loading from QEMU's built-in TFTP server
+> 
+> The documentation covers VirtIO devices for both MMIO-based (RISC-V)
+> and PCI-based (x86) machines, with practical examples of U-Boot commands
+> and expected output.
+
+In the meantime I sent
+
+[PATCH 1/1] doc: describe QEMU networking
+https://lore.kernel.org/u-boot/20251229163448.182538-1-heinrich.schuchardt@canonical.com/
+
+Did you have a chance to look at it?
+
+> 
+> Signed-off-by: Manjae Cho <manjae.cho@samsung.com>
+> ---
+>   doc/board/emulation/index.rst   |  1 +
+>   doc/board/emulation/network.rst | 58 +++++++++++++++++++++++++++++++++
+>   2 files changed, 59 insertions(+)
+>   create mode 100644 doc/board/emulation/network.rst
+> 
+> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> index f8908166276..507c38825c1 100644
+> --- a/doc/board/emulation/index.rst
+> +++ b/doc/board/emulation/index.rst
+> @@ -8,6 +8,7 @@ Emulation
+>   
+>      acpi
+>      blkdev
+> +   index
+>      qemu-arm
+>      qemu-mips
+>      qemu-ppce500
+> diff --git a/doc/board/emulation/network.rst b/doc/board/emulation/network.rst
+> new file mode 100644
+> index 00000000000..6a08a6611b4
+> --- /dev/null
+> +++ b/doc/board/emulation/network.rst
+> @@ -0,0 +1,58 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+see https://spdx.org/licenses/GPL-2.0-or-later.html
+
+> +
+> +Emulation of network devices
+> +-----------------------------
+> +
+> +QEMU can emulate network devices for testing U-Boot networking functionality.
+> +The device type depends on the machine architecture:
+> +
+> +* VirtIO (for RISC-V and other virtio-bus machines)
+
+RISC-V also supports PCI. For productive use the important message is 
+that virtio-net provides the fastest emulation by hardware emulation.
+
+> +
+> +  .. code-block:: bash
+> +
+> +      qemu-system-riscv64 -nographic -machine virt -bios opensbi.bin \
+> +      -kernel u-boot.bin -m 256M \
+> +      -netdev user,id=net0 -device virtio-net-device,netdev=net0
+> +
+> +* VirtIO PCI (for x86 and other PCI-based machines)
+> +
+> +  .. code-block:: bash
+> +
+> +      qemu-system-x86_64 -nographic -bios u-boot.bin \
+> +      -netdev user,id=net0 -device virtio-net-pci,netdev=net0
+> +
+> +The 'user' networking backend provides a simple way to test DHCP and basic
+> +networking without host configuration. In U-Boot, you can verify the network
+> +device is detected:
+> +
+> +.. code-block:: none
+> +
+> +    => net list
+> +    eth0 : virtio-net#0 52:54:00:12:34:56 active
+
+
+
+> +
+> +TFTP boot
+> +^^^^^^^^^
+
+TFTP boot is disabled via `setenv autoload no`. The heading seems not to 
+match the content of the section.
+
+The dhcp, net, and tftpboot commands should be documented in 
+doc/usage/cmd/. But mentioning them here looks ok to me.
+
+Best regards
+
+Heinrich
+
+
+> +
+> +QEMU's user networking includes a built-in TFTP server. To enable it, specify
+> +a host directory to serve files from:
+> +
+> +.. code-block:: bash
+> +
+> +    -netdev user,id=net0,tftp=/path/to/tftp/root
+> +
+> +From U-Boot, you can load files using DHCP and TFTP:
+> +
+> +.. code-block:: none
+> +
+> +    => setenv autoload no
+> +    => dhcp
+> +    DHCP client bound to address 10.0.2.15 (1 ms)
+> +    => tftp ${loadaddr} test.txt
+> +    Using virtio-net#0 device
+> +    TFTP from server 10.0.2.2; our IP address is 10.0.2.15
+> +    Filename 'test.txt'.
+> +    Load address: 0x80200000
+> +    Loading: *
+> +             15.6 KiB/s
+> +    done
+> +    Bytes transferred = 16 (10 hex)
+
