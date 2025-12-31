@@ -4,94 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7343DEE645A
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA5AEEB565
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:36:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0628840ED;
-	Wed, 31 Dec 2025 18:18:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D8AFB840E6;
+	Wed, 31 Dec 2025 18:36:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fCwfdcaw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="srH6uOd5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F23F840EE; Wed, 31 Dec 2025 18:18:11 +0100 (CET)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D8A16840F6; Wed, 31 Dec 2025 18:36:40 +0100 (CET)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62D14840E6
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:18:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C8F7840DE
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 18:36:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7cdd651c884so3761579a34.1
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 09:18:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767201487; x=1767806287; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1BQOBK0OB7M0Mao5UdYOk2FPO7wmNkReAOPYfAqKZbM=;
- b=fCwfdcawkdRBCU2a7LnticqkaBo5AfeNtCC8sHEmR2rinVJ9ORrf5DwhONhxGdt+3K
- MwdWmvAln1fEy5bD2morSt3xzm4OGbvdU49l1ASl9GzVRFgN2TH/OuJvk8h0bcuIq8MH
- ZmqpbuRl0ksGT7oXtropMyBjX45slyQcnznb0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767201487; x=1767806287;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1BQOBK0OB7M0Mao5UdYOk2FPO7wmNkReAOPYfAqKZbM=;
- b=jWyUvRzmU1lQ6smVlTybkvGxoYbNnQGaZ1j62RfD47zwB2ODJSBx3FJgRwNkUMVo8f
- rcwZT82rGZ6vofp20bbgjcWIEl+qI92e9xqd3gLxaw2vhXYhrLxZ2dO3v77Xz8s9dGWQ
- LZ1HaaftLOdrs1EI/L8ZkeYchLfJsIT9ADPbIKw9K8mOZyjPs6xYEyUEviUmRTCaIVLE
- J2aWbDLF05wzYxyVPkIbpv5bHex9We2WBy2N5RVc0n+ETssK6VNw/bk8aoZgnrLvPF75
- W9JRfyVueKWCDzKm+O5nYs4KhnEYYPAe1wB+KZ+s2fCBuZPXioMSJrnZFYJpwTp4+7WI
- UBqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXwksvrBTIBENLRRQ5eS2QbKNXVtNJ7Qj3BlfRmnMUEeFDnzn56uCwX+sUgckZXMma3fOmB8zU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyuL1aBvumqBTzU9Oj+3np3lF8VteWwQ9/XJQgDJiVZNOprkRtK
- pyK6hkfqUR7IrqwhFf+eEVpMddaZjo9evsYN4FeCxnjebNbT+A1sCUJLzgmLPlHB9B8=
-X-Gm-Gg: AY/fxX7/QIV04HdbEgq0bLaQTVHTnRmss8UgGTrOXPlN/6JN0J+G83SswyoD0++qJzj
- uqUWwdXfFuZBeu6Z03Yf3BX5Ag0OiTI35dLL0i87Y69x0JBGT2EWy0H9QDX9qNueWCQoPQU67Z5
- TNHNea1Fwhbn7eJivgZSwpMU5k8b8J72WP82HzzAS+aff4IUe0FaCyu8PtYkrW9YZi2qJNMQ0KP
- AKRm6PqFZFqjdawJmxZPO5DOEsF+8CvcWxGeXPMbh0Zfo9PAZzMF5jzDsXTayWua+qRFKu0dVAo
- DSvWKk6+gi3Ha48uOqvDzFPIn/rHgSldAnBOKG+MUnvkqLraw8hPGQtnR7SM6exXQQrEJN1t6xl
- TtCwiR0rS6z3IICMoz7gFCfGtGs+d7UgDaoNp9ZIgYWdqjWiCmigdwwD1uPAfdiIKtSLFzc24pM
- Hr8M0/uINCIoGJj71dKHX+aW04VvGgLemszxthwXloCOXTrkvLR9N913sIObG0jn2/IbY8QNZmL
- 1fMgyYNM9eAuQlVoi7s89PCV08ehAooh3CpW4c=
-X-Google-Smtp-Source: AGHT+IHkFeAqi0kq0qZOXxE0Ruqq/Qq7g5EDTla6sd2FfvYzxZv0/MxuU6Dr6iZxvqxoaDtLgULBzw==
-X-Received: by 2002:a05:6830:44a2:b0:7ca:d139:387c with SMTP id
- 46e09a7af769-7cc65d71dbcmr24649396a34.5.1767201487017; 
- Wed, 31 Dec 2025 09:18:07 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667ebea3sm24767464a34.22.2025.12.31.09.18.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 09:18:06 -0800 (PST)
-Date: Wed, 31 Dec 2025 11:18:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in
- SPI NOR
-Message-ID: <20251231171804.GD710860@bill-the-cat>
-References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
- <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
- <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
- <20251223233205.GG847766@bill-the-cat>
- <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
- <20251231161120.GB710860@bill-the-cat>
- <364a3396-8c37-49af-b4da-01ab5dfc5c16@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=E9OcPGn2YELjGRobPgZpdi9O3o3pYDklHp8LIMyB2ItMh0wXJOgIL/c3Z0z4CpQ8GmrpJZi73EElaeTovelHD7nGppuv8sEm367PS6/p0Ce/NdWm4s9k5jdKCxMspaDkw8h+HNKA3mc64X9VdPkdOcTAQfigXb52ot6C6SSKyqOTYzmfg4KhaJqhaWNPtpmQWBETGzglsIgPOvmTLNeX+BMAcuSNE6AJ7Qqod0AXT2x8n/UznI1ZGSkplpcfb+Ke5DcgC2ookUMOz/SNYWTuNddIEovBkUfbrxU7BAv/ES6eHlnh5OFEKFUYCEFKnRmwQgb8t0HcALIz/dpbg4OidA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Boka77yTx4cqYwTJEL23gd1+ue/IrEeQf8s0Kp6rEmc=;
+ b=NtWkDxRdqGLc19hUc799RkwqQsh9jVkg+dePL0srlw8A0CzihcB1mpwF/Ahl+ZDNnZ1yNmpB0PBIG6WAOYyOfXnY4Urae8LljiL2Hx7a3m0BRGZv3jYGOzgYT2/B8Jw4VjQ5W9oF5WrPbDSboRWntmECvwWKWS179Gz50xoeAJrX5H0ZPOHKCRVDX6ZUF91MdwdE2DHbhYOZKUBgUcaDKQ8icsHehhKSiXeXhWLwv1HKcwboVLcWa8UFt4h64n9rcr6L3+0sYZnyWcjcQEF3FvoyqgmwU+H6G8s7FZQFMV9aUQbQcJ1rykkHciWVPFVAPz8NkQ0AWgDS1pjhuAq+/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Boka77yTx4cqYwTJEL23gd1+ue/IrEeQf8s0Kp6rEmc=;
+ b=srH6uOd5TadsJgfFSotTQToq4MrGZysHjLgi0IrTH9p3lELJbtNxsRBMzsoQSI3tpU8HUAIt2d36S26mmxThkdOeDKsLKl/odYGmUN3rnr62YMrWKJYKbbaUMYdRXO1owLNRaM5duTLJcqd9MYnLx+CV8YLrhj3Sx2KTZmq60gY=
+Received: from BN9PR03CA0182.namprd03.prod.outlook.com (2603:10b6:408:f9::7)
+ by MW4PR10MB6395.namprd10.prod.outlook.com (2603:10b6:303:1ea::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.14; Wed, 31 Dec
+ 2025 17:36:34 +0000
+Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
+ (2603:10b6:408:f9:cafe::6e) by BN9PR03CA0182.outlook.office365.com
+ (2603:10b6:408:f9::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Wed,
+ 31 Dec 2025 17:36:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 17:36:33 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
+ 2025 11:36:27 -0600
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 31 Dec
+ 2025 11:36:27 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 31 Dec 2025 11:36:27 -0600
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BVHaOqp2541396;
+ Wed, 31 Dec 2025 11:36:24 -0600
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
+ <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v3 00/11] Add support to boot TI K3 HSM M4 core
+Date: Wed, 31 Dec 2025 23:06:10 +0530
+Message-ID: <20251231173621.1069988-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Pasfik5NysC8eGPr"
-Content-Disposition: inline
-In-Reply-To: <364a3396-8c37-49af-b4da-01ab5dfc5c16@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|MW4PR10MB6395:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0b49c7ed-03d2-4205-b507-08de4893241e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4EvBjaUH1WSjHUs9jUXa22A+9FEtnnd+uzm/5tGA0Ab66DPEVdUymRmSv+p7?=
+ =?us-ascii?Q?g8U64QzlgtGCKU6Xrn1H02tpeaMWz989B1L1+uCjSjnLfR+ow7HeSDpqyuyh?=
+ =?us-ascii?Q?GUiIE+V8jb9/NSg/TWxA38nUo5wFf9RAQSo1ODv0q5Gjy7+RlmDKlvGOtBQo?=
+ =?us-ascii?Q?DyJeNqYjp+eDg/E5KjxNji7rBJCuvjXLwfhSLduDWhovx7FUqReyVgVcmy/F?=
+ =?us-ascii?Q?OH2nawCcYKhCpY52Du3fxF8eFUWiwnrpWq38antCQrC3nmogT+nfQTjijTsU?=
+ =?us-ascii?Q?2VSNotzXo8Zp9Wb+z63NB/NIxgKu8CmAWhj1Dk6qGm9IyJfevLdLG5TxuH1w?=
+ =?us-ascii?Q?5ZoWo7GX9E5wsflvgxxizKQmlSjXQMifxvnzuThDg1gJyHpyigdckaDGoV4+?=
+ =?us-ascii?Q?DWmzIRDcHyzRUa5etjvv5h5QwWlZcrTDKQYRhpdz699ibb97M3JcG0ky8xQ2?=
+ =?us-ascii?Q?x1nJbqO0oVgADjhy9IsMWyJ01l6ofZgTcLf3B3BhkPFWfNC0yxK65Ak42wTd?=
+ =?us-ascii?Q?34a/50TasBaz8joipVvWMrDmexVMiGUyzcIM+OtmXSwF8ywqFV3TvlaUsKFr?=
+ =?us-ascii?Q?kfH5I0nakr+Rab0ZXtE60QL+PrQzqrprmFbr20y8bXZ7XWDzargg4pu3kaq0?=
+ =?us-ascii?Q?ShKyn8/1Yq+ZP3pMm5bVAbz8M1NZeua0eCuOqbbtkfgp3jq8Fq1u1vRkQkO7?=
+ =?us-ascii?Q?pOY+RkwqBOpnabPN5UiCPZAfLsZ7EXpdJ7ZxaiQ4PcGVseulnfhuKXcUJoU8?=
+ =?us-ascii?Q?qlPJU4dxlJSvtRaf1G9VXNTtivPcRbOoMZUNTNlCUS973SGTq7hRXTT0LGQU?=
+ =?us-ascii?Q?qgLVAFuoXr2XTrdzomfV5+8cY9z1jTfUUnQ06b3dPScQvwteUVogZOfD7u8a?=
+ =?us-ascii?Q?5vcGRHA2/yFWrRMJuHjQPW7PLR35/ax2u6AzyELMtCtjud7OMXPjxdiqMCvK?=
+ =?us-ascii?Q?wCtfRWXVvFCeYWllmK3EvI9CpigIhsLI6dFSJmiXjoG31aJYI7GU1MsGuugZ?=
+ =?us-ascii?Q?mBdrvqzOpEawhW/+RX0NpC4RT62qpl4JrsSZ0RqUW8Tv/+qJozske7f98b6/?=
+ =?us-ascii?Q?Kfqw/D3VpouXyD1F1FrMIguSWYED2wU2kwg82WOR5A/vPkwGgA1oBIfEiy3m?=
+ =?us-ascii?Q?Mg1jpuEA9U5XcTwNoZuPa0J4w36U1BcuKaoZrU6tdZJX44WYGHzAtxcVnL8O?=
+ =?us-ascii?Q?zxGrcHOnsHn75Bd2x+oBcZcm+O68LcklJkQyOrm/y2aSFbufWImVP1CTTXho?=
+ =?us-ascii?Q?JmEpdsa77gA3m6SqI+K2PW/bA1DfiZsCD0q+PbO9YKMgkm1oLLCdeTPsewIM?=
+ =?us-ascii?Q?O7kAaeyFyKaaytmsrff1nyIj6HhgdTSNuprJjhn5NQSnWR7sZda3Tj4pVSQc?=
+ =?us-ascii?Q?CWCKslJFgkdo24jsCZQLy7MGQKtqzevug2Ib52Km89XBskf5tl4YjITm11Ix?=
+ =?us-ascii?Q?8IsJHxC/ytrW59FNHwLWL1kwlw8i15i/TdAd/FGdX177AnYZ7twK8S+Ml5yn?=
+ =?us-ascii?Q?wFiZUeZrjdGwUK6k93PU2GEwpQNvQB/VDgqWSGfr4WINGR7Nt8aFkqWdc2RJ?=
+ =?us-ascii?Q?HPF1xg9VuhF/tzV8gCi8Hq8VJXGmHY+mxwuqV20i?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 17:36:33.5902 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b49c7ed-03d2-4205-b507-08de4893241e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6395
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,106 +154,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Some TI K3 SoCs like J721S2, J784S4, and J722S have a HSM (High Security
+Module) M4F core in the Wakeup Voltage Domain which could be used to
+run secure services like Authentication. Boot flow for HSM M4 core is
+different than the general purpose M4F cores, and is as below:
 
---Pasfik5NysC8eGPr
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+1. Request control of HSM M4F remote processor.
+2. Assert Reset on the HSM M4F remote processor.
+3. Request Secure Entity to Authenticate and Load HSM firmware into
+   core's internal SRAM memory region. For GP device, load the firmware
+   manually into core's SRAM region.
+4. Deassert Reset on the HSM M4F remote processor.
+5. Release control of HSM M4F remote processor.
 
-On Wed, Dec 31, 2025 at 05:50:31PM +0100, Marek Vasut wrote:
-> On 12/31/25 5:11 PM, Tom Rini wrote:
-> > On Wed, Dec 31, 2025 at 05:07:31PM +0100, Marek Vasut wrote:
-> > > On 12/24/25 12:32 AM, Tom Rini wrote:
-> > > > On Tue, Dec 23, 2025 at 07:55:45PM +0100, Marek Vasut wrote:
-> > > > > On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
-> > > > > > On 12/23/25 15:31, Marek Vasut wrote:
-> > > > > > > Add test for environment stored in SPI NOR. The test works in=
- a very
-> > > > > > > similar way to the current test for environment stored in ext=
-4 FS,
-> > > > > > > except it generates spi.bin file backing the SPI NOR.
-> > > > > > >=20
-> > > > > > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > > > > > ---
-> > > > > > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > > > > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> > > > > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > > > > Cc: u-boot@lists.denx.de
-> > > > > > > ---
-> > > > > > > V2: No change
-> > > > > > > ---
-> > > > > > >   =A0 test/py/tests/test_env.py | 99 ++++++++++++++++++++++++=
-+++++++++++++++
-> > > > > > >   =A0 1 file changed, 99 insertions(+)
-> > > > > > >=20
-> > > > > > > diff --git a/test/py/tests/test_env.py b/test/py/tests/test_e=
-nv.py
-> > > > > > > index 383e26c03b0..48e31f19b3c 100644
-> > > > > > > --- a/test/py/tests/test_env.py
-> > > > > > > +++ b/test/py/tests/test_env.py
-> > > > > > > @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
-> > > > > > >   =A0=A0=A0=A0=A0 utils.run_and_log(c, ['cp',=A0 '-f', persis=
-tent, fs_img])
-> > > > > > >   =A0=A0=A0=A0=A0 return fs_img
-> > > > > > > +def mk_env_spi_flash(state_test_env):
-> > > > > >=20
-> > > > > > Thank you for adding the test.
-> > > > > >=20
-> > > > > > Unfortunately pylint doesn't like your code. Please have a look.
-> > > > >=20
-> > > > > Is this something we run in CI ? If so, CI builds did pass.
-> > > > >=20
-> > > > > If not, how do I trigger this ?
-> > > >=20
-> > > > We only run pylint_err not pylint in CI. The "make pylint" target h=
-as
-> > > > been unused for so long that the baseline itself is out of date. I =
-don't
-> > > > object to trying to improve our python code to match standard pract=
-ices
-> > > > better, but this isn't the place to start adding complaints.
-> > > >=20
-> > > > All that said, a newline before a new function is just a normal good
-> > > > practice and so at least the quoted here example should be fixed, j=
-ust
-> > > > like if it was in C :)
-> > > There is a newline before the function, the code is incorrectly quote=
-d in
-> > > this discussion, see e.g. patchwork for the actual content of this pa=
-tch:
-> > >=20
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20251223143130.16266=
--1-marek.vasut+renesas@mailbox.org/
-> > >=20
-> > > So, what exactly should be fixed in this patch ?
-> >=20
-> > Thanks for explaining. The only problem I have now is you didn't give a
-> > cover letter explaining the feature and so I need to come up with
-> > something when merging the series as a merge commit. I can do that, it's
-> > just easier when I don't have to.
-> 2/3 basically describes why this series is needed, and implements the act=
-ual
-> functionality. I can send a V3 with no changes and cover letter if still
-> needed.
+This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
+firmware is packed inside the tispl.bin fit image. The firmware is
+unpacked into a temporary DDR address which is then used to load HSM
+core. The configs to boot HSM M4 core are disabled by default.
 
-I'll just paraphrase things from 2/3 and note this extends tests. But
-for future reference, please do cover letters. It both makes my life
-easier (b4 shazam -SM, re-read, commit, begin tests) and helps make sure
-I don't mis-characterize something.
+Note:
+This series is dependent on the device-tree changes series posted to
+Kernel mailing list:
+https://lore.kernel.org/all/20251231165102.950644-1-b-padhi@ti.com/
 
---=20
-Tom
+v3: Changelog:
+[Andrew]:
+ 1. Added dedicated remoteproc driver for booting HSM core.
+ 2. Added support for signing HSM firmware images in U-Boot. [Anshul]
+General:
+ 1. Add support for booting HSM on J722S SoC as well.
 
---Pasfik5NysC8eGPr
-Content-Type: application/pgp-signature; name="signature.asc"
+Link to v2:
+http://lore.kernel.org/all/20250506104202.16741-1-b-padhi@ti.com/
 
------BEGIN PGP SIGNATURE-----
+v2: Changelog:
+[Andrew]:
+ 1. Added support in SPL to load FIT images with no 'load' property.
+ 2. Removed 'default = n' in CONFIG option.
+ 3. Used __maybe_unused to decrease preprocessing.
+ 4. Better error messages with error code. 
+[Udit]:
+ 1. Added 'HSM' entries in enum at the last.
+ 2. Added error condition in if-elseif-else ladder.
+ 3. Hang System boot when HSM failed to boot properly.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVayAAKCRAr4qD1Cr/k
-CpU2AQDHNzKHyEMGklhy/Ge418amRDbGdxNmQDWIHMyZjN5y6wD/a5XFNaGaYQWL
-ALYnAYEcC+b5utmHogdPyx6BxoQL2gI=
-=EYpc
------END PGP SIGNATURE-----
+Link to v1:
+https://lore.kernel.org/all/20250422095430.363792-1-b-padhi@ti.com/
 
---Pasfik5NysC8eGPr--
+Testing done:
+1. Tested HSM boot across GP, HS-FS, HS-SE device types for J721S2,
+J784S4 and J722S SoCs.
+
+Logs after enabling HSM boot configs:
+https://gist.github.com/3V3RYONE/ad33683652c8c49e4fedab49f0493e79
+
+Beleswar Padhi (11):
+  spl: Use FIT data address as fallback when 'load' property is absent
+  arm: mach-k3: Use FIT image data addr as fallback if 'load' prop is
+    missing
+  arm: mach-k3: Explicitly identify TIFSSTUB images when discarding
+    buffers
+  arm: mach-k3: Add config option for packaging HSM firmware
+  arm: dts: k3-binman: Add template for packing HSM firmware
+  arm: dts: k3-{j721s2/j722s/j784s4}-binman: Pack HSM firmware inside
+    tispl.bin
+  binman: openssl: Add boot and load extensions to x509 cert
+  arm: dts: k3-{j721s2/j722s/j784s4}-r5.dtsi: Enable HSM core
+  remoteproc: k3-hsm: Introduce a remoteproc driver for K3 HSM core
+  arm: mach-k3: r5: common: Invoke boot of HSM M4 core
+  configs: j722s_evm_r5_hsmboot: Add new defconfig to show HSM boot
+
+ MAINTAINERS                            |   1 +
+ arch/arm/dts/k3-binman.dtsi            |  20 ++
+ arch/arm/dts/k3-j721s2-binman.dtsi     |  12 ++
+ arch/arm/dts/k3-j721s2-r5.dtsi         |   5 +
+ arch/arm/dts/k3-j722s-binman.dtsi      |  12 ++
+ arch/arm/dts/k3-j722s-r5-evm.dts       |   5 +
+ arch/arm/dts/k3-j784s4-binman.dtsi     |  14 ++
+ arch/arm/dts/k3-j784s4-r5.dtsi         |   4 +
+ arch/arm/mach-k3/Kconfig               |   7 +
+ arch/arm/mach-k3/r5/common.c           |  43 ++++-
+ common/spl/spl_fit.c                   |  16 +-
+ configs/j722s_evm_r5_hsmboot_defconfig |  41 ++++
+ drivers/remoteproc/Kconfig             |  10 +
+ drivers/remoteproc/Makefile            |   1 +
+ drivers/remoteproc/ti_k3_hsm_rproc.c   | 252 +++++++++++++++++++++++++
+ tools/binman/btool/openssl.py          |  49 ++++-
+ tools/binman/etype/ti_secure.py        |  18 ++
+ tools/binman/etype/x509_cert.py        |   4 +-
+ 18 files changed, 505 insertions(+), 9 deletions(-)
+ create mode 100644 configs/j722s_evm_r5_hsmboot_defconfig
+ create mode 100644 drivers/remoteproc/ti_k3_hsm_rproc.c
+
+-- 
+2.34.1
+
