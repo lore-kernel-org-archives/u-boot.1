@@ -4,77 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CA2E9410D
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 03:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF2DDEE57D1
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 04:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1ACC84011;
-	Wed, 31 Dec 2025 04:59:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id E366184006;
+	Wed, 31 Dec 2025 05:52:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="KWIJtxLq";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="O7OUUbLp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1509284011; Wed, 31 Dec 2025 04:59:42 +0100 (CET)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1682A83FEE; Wed, 31 Dec 2025 02:43:51 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4A7F83FC6
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 04:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C231083F69
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 02:43:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-7ade456b6abso8557024b3a.3
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 19:59:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1767153577; x=1767758377; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CfpXE79ruIGaiNVPzK7von9NkCsxsBBHW+k5RGHkJHw=;
- b=KWIJtxLqRxLT2/rjQl4LeSEA2N8vS9ZNgkFmH0dbVLJET8KTqOQeX4ic6bMBc/5xWb
- Z37zp54P0sRsNKzf58xUL9ovU8bfjWK2PkzhJYdARi7JvRE+yUmZjrLXMUokOv2LxZFB
- 6d7lSx8VgLTCZkder9e4g32BesqO2NmDdIw7o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767153577; x=1767758377;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CfpXE79ruIGaiNVPzK7von9NkCsxsBBHW+k5RGHkJHw=;
- b=xGTDWd+DyUin+uvGuJSSIqA8UaQ4SQ1Um2VCdGGWctJpStGdY6CVd/dtL6iGeyOgQn
- a0TvPoOH4nc5ACdbRm84JgXxCZBMpVXIwK76BuEeW+LWaITNPuUeiLnyNW8n0y7BtZ9V
- T4zAlgdBm42GuIWBNldL0Pa+VvBJpyVc2rubuVQw4FB2DLMGSZRGh06xAGn6vbI+f3Vk
- fxE09dXXQic/oP2ot1O+4UBppYRjLTuHwp605kC4dNLXfGoxo/P3bPdkXlhgedUwee0b
- rSO97wtu25xDf8GWofovGmFGKPISu6c7XcAuHr9DCZNIETCO6Y0qNJ5baJq3EokXkDvX
- 6svA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXrE3/vfVkZZqP1H/uRF9PN98aZtplGY1olkeP/eKKurwrywiuDg9hlkHwQezIznmwihub5vnU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzARXVejO4xakA5KCdX3ceRNBuzk5bRFCjQv6TrID4mQnd2VnB
- YyhtolmS1FjA09nY9dQe3xszCPfesLe4QHCVwxMhyss/B4RIzJsuTH1gS4m3NqhMja7A59d+po9
- akpDTuIgrJVx4ZhFIzM+J0haE5/H9iV2kM2pw6KqOHQ==
-X-Gm-Gg: AY/fxX4nl8laLY8j6GOIO9VOvUxxVQ643rIr40LwdVaj2PSZWB8qN2aXVFkZLr2f07W
- gbCH2X2FCGviBZ5UJURXG0TseH3B4t1b5fZ8W6ZIhudmrnVfHdlhYTo4I+0p1/1Ob3OkFdhGTNE
- BVnCUtKBamiE0qFMRH9OXwAJXXplaYKtEeoywsDAVLSGmcEAu9Kt2NZWe3d7u9DS0rie5G/QDuo
- SNvs7gIYJux6f/xSBIAl2IvL7AfE0Tf2H5jyftPYJx7L8Nl6tHqJ5gLbDo1u8CCeV9f2rhR
-X-Google-Smtp-Source: AGHT+IHavRssdPPYEIUDsK0oCRxZFMBEppuR9qxYZLEo2JcYQgKwtc4XjJjrdhWDXfioo6r760eBlVzSq1LlcFdlr8M=
-X-Received: by 2002:a05:6a21:32a3:b0:361:63eb:d024 with SMTP id
- adf61e73a8af0-376a7cf4ea4mr31940029637.23.1767153577071; Tue, 30 Dec 2025
- 19:59:37 -0800 (PST)
+ spf=pass smtp.mailfrom=D.Haller@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IU0qLBYN9UqUnU9FG2HDUKPJqbSaeDwd2GoH0jEyoPp1mwC12U8UxhRT1RJh7eaLrENifYLscKl3mU2pCtgpCr4MQZWSF4Wj9GhdCPShYjvcZqw5J+0EONW8Vb+UNPIt5ML9uVpB77/SantCYbKPA79dv1uhU9SJNtD3xyRCF40gV6lSvDINUJESrYGz08plne2lybbV4oDM1OioLkN3U/YRWgm5Be+Lc6ocOsGHMwcjvly/ESuZOJRw4FzQj7XdvY8z1f8APiQKthhdxYqboRGegcyvg6LSO2jR05KfjXrlxwxQ6jVp/z4tEHuxC41Lg8kn4C+g/wjrBIa3E7RNvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MAVzFJkKHZ3Rp/Uby2+fBWkuAlLYcLRqIUajaVemruo=;
+ b=JoVJF0oKpor9vzeS4GkIUabjxxj5UqFdrQAJJK+hmMtpqDINInfp/i3a/8DFILlMlvzfRnLPLq7WLIFJvVqJxSyShxFNMknF+FRAht/v9g+Vnq0zjt8oZvBN1t16CoxT1UKtEg00ruilxxVeWWW8bKJdjKJ4AcgXgYAVl1+dfmSnWWD/9BDNKZLVriA7ytDm+D+pWflaxamBRflNKu7fgSJ+7YPJpf0R+/SF0AQQQkayYEhK+CQvaajrlczzgYeBY6KM+xyRgUqlk6Hrqllc78I3alX7Pw3btivCYPZf/5KaJulSTCRzLg+k7N/3Ch5clMPQAryGI0ofJ8MdGwd7pQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MAVzFJkKHZ3Rp/Uby2+fBWkuAlLYcLRqIUajaVemruo=;
+ b=O7OUUbLpMoVBVhS2LZ0weYCZ+AxLu1WSndxtIxqsQZKyhSjnt6qBLHWCZIv+dPysfGQaylwxHd1QXceKPgt9IvFq7BV5bTP+Bs93zzb4f3NMyKtBp7Aytki/38tLppgVOHEaPLVExMddRicW4lBSVLdHidbD3YUjc1SMX6xt72p6LuSt9ztV6f0+15HIUtCZfwBQc9homP7T8xMLr6H2J5amSBtnGslaUACVhJU2X9tN8G9eXEKIq887ttYSaxeh8iMnnldI7/+BStreKrXMzfTyOqbYaLgVJ71yfR/xkEa3mRTHUO45sHattCgPi6fJx21HJyG+fiY2Msur/1Z2ag==
+Received: from CWLP123CA0235.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19f::23)
+ by GV2P195MB1990.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:77::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.14; Wed, 31 Dec
+ 2025 01:43:35 +0000
+Received: from AMS0EPF00000192.eurprd05.prod.outlook.com
+ (2603:10a6:400:19f:cafe::d8) by CWLP123CA0235.outlook.office365.com
+ (2603:10a6:400:19f::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Wed,
+ 31 Dec 2025 01:43:33 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ AMS0EPF00000192.mail.protection.outlook.com (10.167.16.218) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9478.4 via Frontend Transport; Wed, 31 Dec 2025 01:43:35 +0000
+Received: from lws-haller-privat.phytec.de (172.25.39.212) by Postix.phytec.de
+ (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 31 Dec
+ 2025 02:43:32 +0100
+From: Dominik Haller <d.haller@phytec.de>
+To: Tom Rini <trini@konsulko.com>, Dominik Haller <d.haller@phytec.de>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <upstream@lists.phytec.de>, <u-boot@lists.denx.de>
+Subject: [PATCH 2/3] board: phytec: Add PHYTEC phyCORE-AM68x/TDA4x SoM
+Date: Tue, 30 Dec 2025 17:42:51 -0800
+Message-ID: <20251231014255.87648-2-d.haller@phytec.de>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251231014255.87648-1-d.haller@phytec.de>
+References: <20251231014255.87648-1-d.haller@phytec.de>
 MIME-Version: 1.0
-References: <20251230160112.3045527-1-visitorckw@gmail.com>
- <20251230160112.3045527-6-visitorckw@gmail.com>
-In-Reply-To: <20251230160112.3045527-6-visitorckw@gmail.com>
-From: Daniel Palmer <daniel@0x0f.com>
-Date: Wed, 31 Dec 2025 12:59:26 +0900
-X-Gm-Features: AQt7F2qypL7oPaUePw8O_NBRRvRCJrLK9TKnNaUbqdVHscbM7R44_p-SK5JIs0w
-Message-ID: <CAFr9PXmPL_5sS6oyZxt=eM+AcQnqn7HjVFGOLL+jTQDyD2YQ9A@mail.gmail.com>
-Subject: Re: [PATCH v3 5/6] board: Add QEMU m68k virt board support
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
- me@ziyao.cc, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.39.212]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF00000192:EE_|GV2P195MB1990:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3dba5fb-88a5-4fba-46ff-08de480e030d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|36860700013|13003099007|7142099003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?58zRGwlhxmGqvX/8oSl5OQvfnxfhO7gmqtUPKOS2VQ5lbE0o6/wJ2u6KYcd1?=
+ =?us-ascii?Q?yxSeQKinJ2x9RhGUkoxwMbntRh3Q5ONgtr1bG+sC/JHnhpZ3UI4R6jvb0LxB?=
+ =?us-ascii?Q?oQ4kFHSpfGGZMZzpqXhjdRqh+LBVXUqYihbB93CnASRBAtIW1X/MBUBq6Uu6?=
+ =?us-ascii?Q?ZUKFXOQaPLNyXOGKyOQD/XcxmeHI46vkII4o41DVJYmUdxPRFiIAo97bPEfN?=
+ =?us-ascii?Q?ssgxJRatM0Lb8PpiZo+cfoonX4uheYhagfrYehZeK4t3H5SE6H69DEPQitjI?=
+ =?us-ascii?Q?5mZb3KDTavmfRAu4+/oURE772VyycHuvatE0pClsqZwxZgdAMCnw/ugQUJwG?=
+ =?us-ascii?Q?+CUKYC70PWuXIUstLlVYlACt3MTTbA2KPvBkUBvMJg22JNHkOaiT9IIa6biX?=
+ =?us-ascii?Q?5eEnL8MSSsZfzCWT5Gf1GfJVynG3T/78jJWcEUFz8IMDCiM9Upe3ChZAHJyy?=
+ =?us-ascii?Q?djQ5h4XHjmov/pVIeuYgzpKuFfImaPxUYY9vivjnqqDmVEhSqYH9uQjx32BK?=
+ =?us-ascii?Q?ROkdSFPUN9cw6cRJAjF0SK3Lj9ut+QDq4hQsub+auoebv0ODNpiykSCsN0oi?=
+ =?us-ascii?Q?BuR8CLMOkowbOXIRigXN+QQrrC55a5x8T94ptMAlTDR4aUZOknIqQytw89fd?=
+ =?us-ascii?Q?NpQdwq15nv7+OSZZbmUp3TQ7+LEJpKIeaQQntZ+EiyOWfZ1iNlZVDsHZTUiY?=
+ =?us-ascii?Q?fgARf1gLo0TLMaAYhazJD6W3co3qE+WecXqLm8t9ewIBsfykmsiR5zKMLSbc?=
+ =?us-ascii?Q?2QiCzvvt0y55B8SvYJjJ+n27YRFNko+RKfCvzt+ekLYm9vRInGNtYxqaKM3i?=
+ =?us-ascii?Q?HWiHxCZf9ONSkwF1auuDj7F+XM7ij9Mluw3mbwDjy8gFaw1axp58Y/XBpCQW?=
+ =?us-ascii?Q?XOWnn3+EscURWClEcRFCDvtPvKxHrp1MAECD4gmXRr3wEV3lEi5QEZTpkd6R?=
+ =?us-ascii?Q?kVv9eIW9uDsqLRaFjFV1JcVEfd/0FQ6SwkY/k/obJvB19EtVx/ogcTOB5IHR?=
+ =?us-ascii?Q?LXwF1OxN/3BwFN9SxDkqGR4yFGwjUWdFxoFT+1jq2erCH/eC2/3ayibL4Nhp?=
+ =?us-ascii?Q?hBItMr4GW0nebw25cYsBcCIMwW9sXudsj4GsEGB/EExt/DU3lxedpjNJDopG?=
+ =?us-ascii?Q?H3n+4Bw18T83rYvCssmu2Cf++DMJ7fMlzQUgH1OpW9ZsbCV66JPUIfMMLwjs?=
+ =?us-ascii?Q?J6wzqriWjn42canXyrLel8TqS4T/bo/OLmsryP4JD9FHNUJg5I7dNzZDzIte?=
+ =?us-ascii?Q?WipBwviKvZ55dL8Cfltot9sGjLNWNjrwRaC1auCdmRB6Tyo4s8DKuG9XuQF1?=
+ =?us-ascii?Q?LcieYBpGGxC1ORrIhXeK6S0bvAY+uDp+NThBTdUic+UTdC9+Q2MSt9l1bWI8?=
+ =?us-ascii?Q?Ak4O0whjYT9QO4HWT3P03mtYmKyjwCgpfMASwyEnCHoaEvFK4SnXOyafJYY5?=
+ =?us-ascii?Q?IE4yxoeAcBdThQEcS+n5FgzTCv9EyGiPcYW/V1Iy2o9sl7Tkp6vFREYYV3+5?=
+ =?us-ascii?Q?Y440kUzS0g8EmzxBtmtrup6RuKsJ7Xx4Jtcd?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013)(13003099007)(7142099003);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2025 01:43:35.0652 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3dba5fb-88a5-4fba-46ff-08de480e030d
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000192.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P195MB1990
+X-Mailman-Approved-At: Wed, 31 Dec 2025 05:52:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,35 +147,8584 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+Add support for the PHYTEC phyCORE-AM68x/TDA4x (J721S2 family) SoM.
 
-On Wed, 31 Dec 2025 at 01:01, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
->
-> Add support for the QEMU 'virt' machine on the m68k architecture. This
-> board emulates a generic machine based on the Motorola 68040 CPU
-> equipped with Goldfish virtual peripherals.
->
-> Introduce the necessary board configuration and initialization
-> infrastructure. The implementation includes logic to parse the QEMU
-> bootinfo interface, enabling dynamic detection of system RAM size to
-> adapt to the virtual machine's configuration.
->
-> Enable the Goldfish TTY driver for serial console output. Additionally,
-> enable Goldfish RTC and timer drivers to support real-time clock
-> functionality and nanosecond-resolution delays. Include comprehensive
-> documentation covering build instructions and usage examples.
->
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Supported features:
+- 4GB LPDDR4 RAM
+- eMMC
+- SD-Card
+- Ethernet
+- OSPI
+- AVS
+- debug UART
 
-I have roughly tested this in QEMU and everything seems to work as expected.
+Signed-off-by: Dominik Haller <d.haller@phytec.de>
+---
+ .../k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi | 4387 +++++++++++++++++
+ .../arm/dts/k3-am68-phyboard-izar-u-boot.dtsi |   21 +
+ arch/arm/dts/k3-am68-phycore-som-binman.dtsi  |  430 ++
+ arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts   |   20 +
+ arch/arm/mach-k3/j721s2/Kconfig               |   20 +
+ board/phytec/phycore_am68x/Kconfig            |   41 +
+ board/phytec/phycore_am68x/MAINTAINERS        |   12 +
+ board/phytec/phycore_am68x/Makefile           |    6 +
+ board/phytec/phycore_am68x/board-cfg.yaml     |   36 +
+ board/phytec/phycore_am68x/phycore-am68x.c    |   99 +
+ board/phytec/phycore_am68x/phycore_am68x.env  |   22 +
+ board/phytec/phycore_am68x/pm-cfg.yaml        |   12 +
+ board/phytec/phycore_am68x/rm-cfg.yaml        | 2523 ++++++++++
+ board/phytec/phycore_am68x/sec-cfg.yaml       |  379 ++
+ configs/phycore_am68x_a72_defconfig           |  204 +
+ configs/phycore_am68x_r5_defconfig            |  184 +
+ include/configs/phycore_am68x.h               |   25 +
+ 17 files changed, 8421 insertions(+)
+ create mode 100644 arch/arm/dts/k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi
+ create mode 100644 arch/arm/dts/k3-am68-phyboard-izar-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am68-phycore-som-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts
+ create mode 100644 board/phytec/phycore_am68x/Kconfig
+ create mode 100644 board/phytec/phycore_am68x/MAINTAINERS
+ create mode 100644 board/phytec/phycore_am68x/Makefile
+ create mode 100644 board/phytec/phycore_am68x/board-cfg.yaml
+ create mode 100644 board/phytec/phycore_am68x/phycore-am68x.c
+ create mode 100644 board/phytec/phycore_am68x/phycore_am68x.env
+ create mode 100644 board/phytec/phycore_am68x/pm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am68x/rm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am68x/sec-cfg.yaml
+ create mode 100644 configs/phycore_am68x_a72_defconfig
+ create mode 100644 configs/phycore_am68x_r5_defconfig
+ create mode 100644 include/configs/phycore_am68x.h
 
-Tested-by: Daniel Palmer <daniel@0x0f.com>
+diff --git a/arch/arm/dts/k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi b/arch/arm/dts/k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi
+new file mode 100644
+index 000000000000..dd1561bf158b
+--- /dev/null
++++ b/arch/arm/dts/k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi
+@@ -0,0 +1,4387 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2023 Texas Instruments Incorporated - http://www.ti.com/
++ * This file was generated by the Jacinto7_DDRSS_RegConfigTool, Revision: 0.10.0
++ * This file was generated on 22/05/2023
++ */
++
++#define DDRSS_PLL_FHS_CNT 3
++#define DDRSS_PLL_FREQUENCY_0 27500000
++#define DDRSS_PLL_FREQUENCY_1 1066500000
++#define DDRSS_PLL_FREQUENCY_2 1066500000
++
++#define MULTI_DDR_CFG_INTRLV_GRAN 0
++#define MULTI_DDR_CFG_INTRLV_SIZE 7
++#define MULTI_DDR_CFG_ECC_ENABLE 0
++#define MULTI_DDR_CFG_HYBRID_SELECT 0
++#define MULTI_DDR_CFG_EMIFS_ACTIVE 3
++
++#define DDRSS0_CTL_00_DATA 0x00000B00
++#define DDRSS0_CTL_01_DATA 0x00000000
++#define DDRSS0_CTL_02_DATA 0x00000000
++#define DDRSS0_CTL_03_DATA 0x00000000
++#define DDRSS0_CTL_04_DATA 0x00000000
++#define DDRSS0_CTL_05_DATA 0x00000000
++#define DDRSS0_CTL_06_DATA 0x00000000
++#define DDRSS0_CTL_07_DATA 0x00002AF8
++#define DDRSS0_CTL_08_DATA 0x0001ADAF
++#define DDRSS0_CTL_09_DATA 0x00000005
++#define DDRSS0_CTL_10_DATA 0x0000006E
++#define DDRSS0_CTL_11_DATA 0x000681C8
++#define DDRSS0_CTL_12_DATA 0x004111C9
++#define DDRSS0_CTL_13_DATA 0x00000005
++#define DDRSS0_CTL_14_DATA 0x000010A9
++#define DDRSS0_CTL_15_DATA 0x000681C8
++#define DDRSS0_CTL_16_DATA 0x004111C9
++#define DDRSS0_CTL_17_DATA 0x00000005
++#define DDRSS0_CTL_18_DATA 0x000010A9
++#define DDRSS0_CTL_19_DATA 0x01010000
++#define DDRSS0_CTL_20_DATA 0x02011001
++#define DDRSS0_CTL_21_DATA 0x02010000
++#define DDRSS0_CTL_22_DATA 0x00020100
++#define DDRSS0_CTL_23_DATA 0x0000000B
++#define DDRSS0_CTL_24_DATA 0x0000001C
++#define DDRSS0_CTL_25_DATA 0x00000000
++#define DDRSS0_CTL_26_DATA 0x00000000
++#define DDRSS0_CTL_27_DATA 0x03020200
++#define DDRSS0_CTL_28_DATA 0x00005656
++#define DDRSS0_CTL_29_DATA 0x00100000
++#define DDRSS0_CTL_30_DATA 0x00000000
++#define DDRSS0_CTL_31_DATA 0x00000000
++#define DDRSS0_CTL_32_DATA 0x00000000
++#define DDRSS0_CTL_33_DATA 0x00000000
++#define DDRSS0_CTL_34_DATA 0x040C0000
++#define DDRSS0_CTL_35_DATA 0x12481248
++#define DDRSS0_CTL_36_DATA 0x00050804
++#define DDRSS0_CTL_37_DATA 0x09040008
++#define DDRSS0_CTL_38_DATA 0x15000204
++#define DDRSS0_CTL_39_DATA 0x1760008B
++#define DDRSS0_CTL_40_DATA 0x1500422B
++#define DDRSS0_CTL_41_DATA 0x1760008B
++#define DDRSS0_CTL_42_DATA 0x2000422B
++#define DDRSS0_CTL_43_DATA 0x000A0A09
++#define DDRSS0_CTL_44_DATA 0x0400078C
++#define DDRSS0_CTL_45_DATA 0x1E161104
++#define DDRSS0_CTL_46_DATA 0x100124A4
++#define DDRSS0_CTL_47_DATA 0x1E161110
++#define DDRSS0_CTL_48_DATA 0x100124A4
++#define DDRSS0_CTL_49_DATA 0x02030410
++#define DDRSS0_CTL_50_DATA 0x2C060500
++#define DDRSS0_CTL_51_DATA 0x08292C29
++#define DDRSS0_CTL_52_DATA 0x14000E0A
++#define DDRSS0_CTL_53_DATA 0x04010A0A
++#define DDRSS0_CTL_54_DATA 0x01010004
++#define DDRSS0_CTL_55_DATA 0x0454540A
++#define DDRSS0_CTL_56_DATA 0x04313104
++#define DDRSS0_CTL_57_DATA 0x00003131
++#define DDRSS0_CTL_58_DATA 0x00010100
++#define DDRSS0_CTL_59_DATA 0x03010000
++#define DDRSS0_CTL_60_DATA 0x00001008
++#define DDRSS0_CTL_61_DATA 0x000000CE
++#define DDRSS0_CTL_62_DATA 0x00000256
++#define DDRSS0_CTL_63_DATA 0x0000207C
++#define DDRSS0_CTL_64_DATA 0x00000256
++#define DDRSS0_CTL_65_DATA 0x0000207C
++#define DDRSS0_CTL_66_DATA 0x00000005
++#define DDRSS0_CTL_67_DATA 0x00040000
++#define DDRSS0_CTL_68_DATA 0x00950012
++#define DDRSS0_CTL_69_DATA 0x00950408
++#define DDRSS0_CTL_70_DATA 0x00400408
++#define DDRSS0_CTL_71_DATA 0x00120103
++#define DDRSS0_CTL_72_DATA 0x00100005
++#define DDRSS0_CTL_73_DATA 0x330C0010
++#define DDRSS0_CTL_74_DATA 0x05050133
++#define DDRSS0_CTL_75_DATA 0x0401030A
++#define DDRSS0_CTL_76_DATA 0x041E100B
++#define DDRSS0_CTL_77_DATA 0x100B0401
++#define DDRSS0_CTL_78_DATA 0x0001041E
++#define DDRSS0_CTL_79_DATA 0x00100010
++#define DDRSS0_CTL_80_DATA 0x02660266
++#define DDRSS0_CTL_81_DATA 0x02660266
++#define DDRSS0_CTL_82_DATA 0x03050505
++#define DDRSS0_CTL_83_DATA 0x03010303
++#define DDRSS0_CTL_84_DATA 0x200B100B
++#define DDRSS0_CTL_85_DATA 0x04041004
++#define DDRSS0_CTL_86_DATA 0x200B100B
++#define DDRSS0_CTL_87_DATA 0x04041004
++#define DDRSS0_CTL_88_DATA 0x03010000
++#define DDRSS0_CTL_89_DATA 0x00010000
++#define DDRSS0_CTL_90_DATA 0x00000000
++#define DDRSS0_CTL_91_DATA 0x00000000
++#define DDRSS0_CTL_92_DATA 0x01000000
++#define DDRSS0_CTL_93_DATA 0x80104002
++#define DDRSS0_CTL_94_DATA 0x00000000
++#define DDRSS0_CTL_95_DATA 0x00040005
++#define DDRSS0_CTL_96_DATA 0x00000000
++#define DDRSS0_CTL_97_DATA 0x00050000
++#define DDRSS0_CTL_98_DATA 0x00000004
++#define DDRSS0_CTL_99_DATA 0x00000000
++#define DDRSS0_CTL_100_DATA 0x00040005
++#define DDRSS0_CTL_101_DATA 0x00000000
++#define DDRSS0_CTL_102_DATA 0x00003380
++#define DDRSS0_CTL_103_DATA 0x00003380
++#define DDRSS0_CTL_104_DATA 0x00003380
++#define DDRSS0_CTL_105_DATA 0x00003380
++#define DDRSS0_CTL_106_DATA 0x00003380
++#define DDRSS0_CTL_107_DATA 0x00000000
++#define DDRSS0_CTL_108_DATA 0x000005A2
++#define DDRSS0_CTL_109_DATA 0x00081F00
++#define DDRSS0_CTL_110_DATA 0x00081F00
++#define DDRSS0_CTL_111_DATA 0x00081F00
++#define DDRSS0_CTL_112_DATA 0x00081F00
++#define DDRSS0_CTL_113_DATA 0x00081F00
++#define DDRSS0_CTL_114_DATA 0x00000000
++#define DDRSS0_CTL_115_DATA 0x0000E364
++#define DDRSS0_CTL_116_DATA 0x00081F00
++#define DDRSS0_CTL_117_DATA 0x00081F00
++#define DDRSS0_CTL_118_DATA 0x00081F00
++#define DDRSS0_CTL_119_DATA 0x00081F00
++#define DDRSS0_CTL_120_DATA 0x00081F00
++#define DDRSS0_CTL_121_DATA 0x00000000
++#define DDRSS0_CTL_122_DATA 0x0000E364
++#define DDRSS0_CTL_123_DATA 0x00000000
++#define DDRSS0_CTL_124_DATA 0x00000000
++#define DDRSS0_CTL_125_DATA 0x00000000
++#define DDRSS0_CTL_126_DATA 0x00000000
++#define DDRSS0_CTL_127_DATA 0x00000000
++#define DDRSS0_CTL_128_DATA 0x00000000
++#define DDRSS0_CTL_129_DATA 0x00000000
++#define DDRSS0_CTL_130_DATA 0x00000000
++#define DDRSS0_CTL_131_DATA 0x0B030500
++#define DDRSS0_CTL_132_DATA 0x00040B04
++#define DDRSS0_CTL_133_DATA 0x0A090000
++#define DDRSS0_CTL_134_DATA 0x0A090701
++#define DDRSS0_CTL_135_DATA 0x0900000E
++#define DDRSS0_CTL_136_DATA 0x0907010A
++#define DDRSS0_CTL_137_DATA 0x00000E0A
++#define DDRSS0_CTL_138_DATA 0x07010A09
++#define DDRSS0_CTL_139_DATA 0x000E0A09
++#define DDRSS0_CTL_140_DATA 0x07000401
++#define DDRSS0_CTL_141_DATA 0x00000000
++#define DDRSS0_CTL_142_DATA 0x00000000
++#define DDRSS0_CTL_143_DATA 0x00000000
++#define DDRSS0_CTL_144_DATA 0x00000000
++#define DDRSS0_CTL_145_DATA 0x00000000
++#define DDRSS0_CTL_146_DATA 0x00000000
++#define DDRSS0_CTL_147_DATA 0x00000000
++#define DDRSS0_CTL_148_DATA 0x08080000
++#define DDRSS0_CTL_149_DATA 0x01000000
++#define DDRSS0_CTL_150_DATA 0x800000C0
++#define DDRSS0_CTL_151_DATA 0x800000C0
++#define DDRSS0_CTL_152_DATA 0x800000C0
++#define DDRSS0_CTL_153_DATA 0x00000000
++#define DDRSS0_CTL_154_DATA 0x00001500
++#define DDRSS0_CTL_155_DATA 0x00000000
++#define DDRSS0_CTL_156_DATA 0x00000001
++#define DDRSS0_CTL_157_DATA 0x00000002
++#define DDRSS0_CTL_158_DATA 0x0000100E
++#define DDRSS0_CTL_159_DATA 0x00000000
++#define DDRSS0_CTL_160_DATA 0x00000000
++#define DDRSS0_CTL_161_DATA 0x00000000
++#define DDRSS0_CTL_162_DATA 0x00000000
++#define DDRSS0_CTL_163_DATA 0x00000000
++#define DDRSS0_CTL_164_DATA 0x000B0000
++#define DDRSS0_CTL_165_DATA 0x000E0006
++#define DDRSS0_CTL_166_DATA 0x000E0404
++#define DDRSS0_CTL_167_DATA 0x00D601AB
++#define DDRSS0_CTL_168_DATA 0x10100216
++#define DDRSS0_CTL_169_DATA 0x01AB0216
++#define DDRSS0_CTL_170_DATA 0x021600D6
++#define DDRSS0_CTL_171_DATA 0x02161010
++#define DDRSS0_CTL_172_DATA 0x00000000
++#define DDRSS0_CTL_173_DATA 0x00000000
++#define DDRSS0_CTL_174_DATA 0x00000000
++#define DDRSS0_CTL_175_DATA 0x3FF40084
++#define DDRSS0_CTL_176_DATA 0x33003FF4
++#define DDRSS0_CTL_177_DATA 0x00003333
++#define DDRSS0_CTL_178_DATA 0x36000000
++#define DDRSS0_CTL_179_DATA 0x27270036
++#define DDRSS0_CTL_180_DATA 0x0F0F0000
++#define DDRSS0_CTL_181_DATA 0x16000000
++#define DDRSS0_CTL_182_DATA 0x00841616
++#define DDRSS0_CTL_183_DATA 0x3FF43FF4
++#define DDRSS0_CTL_184_DATA 0x33333300
++#define DDRSS0_CTL_185_DATA 0x00000000
++#define DDRSS0_CTL_186_DATA 0x00363600
++#define DDRSS0_CTL_187_DATA 0x00002727
++#define DDRSS0_CTL_188_DATA 0x00000F0F
++#define DDRSS0_CTL_189_DATA 0x16161600
++#define DDRSS0_CTL_190_DATA 0x00000020
++#define DDRSS0_CTL_191_DATA 0x00000000
++#define DDRSS0_CTL_192_DATA 0x00000001
++#define DDRSS0_CTL_193_DATA 0x00000000
++#define DDRSS0_CTL_194_DATA 0x01000000
++#define DDRSS0_CTL_195_DATA 0x00000001
++#define DDRSS0_CTL_196_DATA 0x00000000
++#define DDRSS0_CTL_197_DATA 0x00000000
++#define DDRSS0_CTL_198_DATA 0x00000000
++#define DDRSS0_CTL_199_DATA 0x00000000
++#define DDRSS0_CTL_200_DATA 0x00000000
++#define DDRSS0_CTL_201_DATA 0x00000000
++#define DDRSS0_CTL_202_DATA 0x00000000
++#define DDRSS0_CTL_203_DATA 0x00000000
++#define DDRSS0_CTL_204_DATA 0x00000000
++#define DDRSS0_CTL_205_DATA 0x00000000
++#define DDRSS0_CTL_206_DATA 0x02000000
++#define DDRSS0_CTL_207_DATA 0x01080101
++#define DDRSS0_CTL_208_DATA 0x00000000
++#define DDRSS0_CTL_209_DATA 0x00000000
++#define DDRSS0_CTL_210_DATA 0x00000000
++#define DDRSS0_CTL_211_DATA 0x00000000
++#define DDRSS0_CTL_212_DATA 0x00000000
++#define DDRSS0_CTL_213_DATA 0x00000000
++#define DDRSS0_CTL_214_DATA 0x00000000
++#define DDRSS0_CTL_215_DATA 0x00000000
++#define DDRSS0_CTL_216_DATA 0x00000000
++#define DDRSS0_CTL_217_DATA 0x00000000
++#define DDRSS0_CTL_218_DATA 0x00000000
++#define DDRSS0_CTL_219_DATA 0x00000000
++#define DDRSS0_CTL_220_DATA 0x00000000
++#define DDRSS0_CTL_221_DATA 0x00000000
++#define DDRSS0_CTL_222_DATA 0x00001000
++#define DDRSS0_CTL_223_DATA 0x006403E8
++#define DDRSS0_CTL_224_DATA 0x00000000
++#define DDRSS0_CTL_225_DATA 0x00000000
++#define DDRSS0_CTL_226_DATA 0x00000000
++#define DDRSS0_CTL_227_DATA 0x15110000
++#define DDRSS0_CTL_228_DATA 0x00040C18
++#define DDRSS0_CTL_229_DATA 0xF000C000
++#define DDRSS0_CTL_230_DATA 0x0000F000
++#define DDRSS0_CTL_231_DATA 0x00000000
++#define DDRSS0_CTL_232_DATA 0x00000000
++#define DDRSS0_CTL_233_DATA 0xC0000000
++#define DDRSS0_CTL_234_DATA 0xF000F000
++#define DDRSS0_CTL_235_DATA 0x00000000
++#define DDRSS0_CTL_236_DATA 0x00000000
++#define DDRSS0_CTL_237_DATA 0x00000000
++#define DDRSS0_CTL_238_DATA 0xF000C000
++#define DDRSS0_CTL_239_DATA 0x0000F000
++#define DDRSS0_CTL_240_DATA 0x00000000
++#define DDRSS0_CTL_241_DATA 0x00000000
++#define DDRSS0_CTL_242_DATA 0x00030000
++#define DDRSS0_CTL_243_DATA 0x00000000
++#define DDRSS0_CTL_244_DATA 0x00000000
++#define DDRSS0_CTL_245_DATA 0x00000000
++#define DDRSS0_CTL_246_DATA 0x00000000
++#define DDRSS0_CTL_247_DATA 0x00000000
++#define DDRSS0_CTL_248_DATA 0x00000000
++#define DDRSS0_CTL_249_DATA 0x00000000
++#define DDRSS0_CTL_250_DATA 0x00000000
++#define DDRSS0_CTL_251_DATA 0x00000000
++#define DDRSS0_CTL_252_DATA 0x00000000
++#define DDRSS0_CTL_253_DATA 0x00000000
++#define DDRSS0_CTL_254_DATA 0x00000000
++#define DDRSS0_CTL_255_DATA 0x00000000
++#define DDRSS0_CTL_256_DATA 0x00000000
++#define DDRSS0_CTL_257_DATA 0x01000200
++#define DDRSS0_CTL_258_DATA 0x00370040
++#define DDRSS0_CTL_259_DATA 0x00020008
++#define DDRSS0_CTL_260_DATA 0x00400100
++#define DDRSS0_CTL_261_DATA 0x00400855
++#define DDRSS0_CTL_262_DATA 0x01000200
++#define DDRSS0_CTL_263_DATA 0x08550040
++#define DDRSS0_CTL_264_DATA 0x00000040
++#define DDRSS0_CTL_265_DATA 0x006B0003
++#define DDRSS0_CTL_266_DATA 0x0100006B
++#define DDRSS0_CTL_267_DATA 0x01010101
++#define DDRSS0_CTL_268_DATA 0x01010000
++#define DDRSS0_CTL_269_DATA 0x00000202
++#define DDRSS0_CTL_270_DATA 0x00000FFF
++#define DDRSS0_CTL_271_DATA 0xFFFFFFFF
++#define DDRSS0_CTL_272_DATA 0x01FF0000
++#define DDRSS0_CTL_273_DATA 0x000001FF
++#define DDRSS0_CTL_274_DATA 0x0FFF0B00
++#define DDRSS0_CTL_275_DATA 0x01010001
++#define DDRSS0_CTL_276_DATA 0x01010101
++#define DDRSS0_CTL_277_DATA 0x01180101
++#define DDRSS0_CTL_278_DATA 0x00010000
++#define DDRSS0_CTL_279_DATA 0x00000000
++#define DDRSS0_CTL_280_DATA 0x00000000
++#define DDRSS0_CTL_281_DATA 0x00000000
++#define DDRSS0_CTL_282_DATA 0x00000000
++#define DDRSS0_CTL_283_DATA 0x00000000
++#define DDRSS0_CTL_284_DATA 0x00000000
++#define DDRSS0_CTL_285_DATA 0x00000000
++#define DDRSS0_CTL_286_DATA 0x00040101
++#define DDRSS0_CTL_287_DATA 0x00000100
++#define DDRSS0_CTL_288_DATA 0x00000000
++#define DDRSS0_CTL_289_DATA 0x00000000
++#define DDRSS0_CTL_290_DATA 0x03030300
++#define DDRSS0_CTL_291_DATA 0x00000001
++#define DDRSS0_CTL_292_DATA 0x00000000
++#define DDRSS0_CTL_293_DATA 0x00000000
++#define DDRSS0_CTL_294_DATA 0x00000000
++#define DDRSS0_CTL_295_DATA 0x00000000
++#define DDRSS0_CTL_296_DATA 0x00000000
++#define DDRSS0_CTL_297_DATA 0x00000000
++#define DDRSS0_CTL_298_DATA 0x00000000
++#define DDRSS0_CTL_299_DATA 0x00000000
++#define DDRSS0_CTL_300_DATA 0x00000000
++#define DDRSS0_CTL_301_DATA 0x00000000
++#define DDRSS0_CTL_302_DATA 0x00000000
++#define DDRSS0_CTL_303_DATA 0x00000000
++#define DDRSS0_CTL_304_DATA 0x00000000
++#define DDRSS0_CTL_305_DATA 0x00000000
++#define DDRSS0_CTL_306_DATA 0x00000000
++#define DDRSS0_CTL_307_DATA 0x00000000
++#define DDRSS0_CTL_308_DATA 0x00000000
++#define DDRSS0_CTL_309_DATA 0x00000000
++#define DDRSS0_CTL_310_DATA 0x00000000
++#define DDRSS0_CTL_311_DATA 0x00000000
++#define DDRSS0_CTL_312_DATA 0x00000000
++#define DDRSS0_CTL_313_DATA 0x01000000
++#define DDRSS0_CTL_314_DATA 0x00020201
++#define DDRSS0_CTL_315_DATA 0x01000101
++#define DDRSS0_CTL_316_DATA 0x01010001
++#define DDRSS0_CTL_317_DATA 0x00010101
++#define DDRSS0_CTL_318_DATA 0x050A0A03
++#define DDRSS0_CTL_319_DATA 0x10081F1F
++#define DDRSS0_CTL_320_DATA 0x00090310
++#define DDRSS0_CTL_321_DATA 0x0B0C030F
++#define DDRSS0_CTL_322_DATA 0x0B0C0306
++#define DDRSS0_CTL_323_DATA 0x0C090006
++#define DDRSS0_CTL_324_DATA 0x0100000C
++#define DDRSS0_CTL_325_DATA 0x08040801
++#define DDRSS0_CTL_326_DATA 0x00000004
++#define DDRSS0_CTL_327_DATA 0x00000000
++#define DDRSS0_CTL_328_DATA 0x00010000
++#define DDRSS0_CTL_329_DATA 0x00280D00
++#define DDRSS0_CTL_330_DATA 0x00000001
++#define DDRSS0_CTL_331_DATA 0x00030001
++#define DDRSS0_CTL_332_DATA 0x00000000
++#define DDRSS0_CTL_333_DATA 0x00000000
++#define DDRSS0_CTL_334_DATA 0x00000000
++#define DDRSS0_CTL_335_DATA 0x00000000
++#define DDRSS0_CTL_336_DATA 0x00000000
++#define DDRSS0_CTL_337_DATA 0x00000000
++#define DDRSS0_CTL_338_DATA 0x00000000
++#define DDRSS0_CTL_339_DATA 0x00000000
++#define DDRSS0_CTL_340_DATA 0x01000000
++#define DDRSS0_CTL_341_DATA 0x00000001
++#define DDRSS0_CTL_342_DATA 0x00010100
++#define DDRSS0_CTL_343_DATA 0x03030000
++#define DDRSS0_CTL_344_DATA 0x00000000
++#define DDRSS0_CTL_345_DATA 0x00000000
++#define DDRSS0_CTL_346_DATA 0x00000000
++#define DDRSS0_CTL_347_DATA 0x00000000
++#define DDRSS0_CTL_348_DATA 0x00000000
++#define DDRSS0_CTL_349_DATA 0x00000000
++#define DDRSS0_CTL_350_DATA 0x00000000
++#define DDRSS0_CTL_351_DATA 0x00000000
++#define DDRSS0_CTL_352_DATA 0x00000000
++#define DDRSS0_CTL_353_DATA 0x00000000
++#define DDRSS0_CTL_354_DATA 0x00000000
++#define DDRSS0_CTL_355_DATA 0x00000000
++#define DDRSS0_CTL_356_DATA 0x00000000
++#define DDRSS0_CTL_357_DATA 0x00000000
++#define DDRSS0_CTL_358_DATA 0x00000000
++#define DDRSS0_CTL_359_DATA 0x00000000
++#define DDRSS0_CTL_360_DATA 0x000556AA
++#define DDRSS0_CTL_361_DATA 0x000AAAAA
++#define DDRSS0_CTL_362_DATA 0x000AA955
++#define DDRSS0_CTL_363_DATA 0x00055555
++#define DDRSS0_CTL_364_DATA 0x000B3133
++#define DDRSS0_CTL_365_DATA 0x0004CD33
++#define DDRSS0_CTL_366_DATA 0x0004CECC
++#define DDRSS0_CTL_367_DATA 0x000B32CC
++#define DDRSS0_CTL_368_DATA 0x00010300
++#define DDRSS0_CTL_369_DATA 0x03000100
++#define DDRSS0_CTL_370_DATA 0x00000000
++#define DDRSS0_CTL_371_DATA 0x00000000
++#define DDRSS0_CTL_372_DATA 0x00000000
++#define DDRSS0_CTL_373_DATA 0x00000000
++#define DDRSS0_CTL_374_DATA 0x00000000
++#define DDRSS0_CTL_375_DATA 0x00000000
++#define DDRSS0_CTL_376_DATA 0x00000000
++#define DDRSS0_CTL_377_DATA 0x00010000
++#define DDRSS0_CTL_378_DATA 0x00000404
++#define DDRSS0_CTL_379_DATA 0x00000000
++#define DDRSS0_CTL_380_DATA 0x00000000
++#define DDRSS0_CTL_381_DATA 0x00000000
++#define DDRSS0_CTL_382_DATA 0x00000000
++#define DDRSS0_CTL_383_DATA 0x00000000
++#define DDRSS0_CTL_384_DATA 0x00000000
++#define DDRSS0_CTL_385_DATA 0x00000000
++#define DDRSS0_CTL_386_DATA 0x00000000
++#define DDRSS0_CTL_387_DATA 0x3A3A1B00
++#define DDRSS0_CTL_388_DATA 0x000A0000
++#define DDRSS0_CTL_389_DATA 0x0000019C
++#define DDRSS0_CTL_390_DATA 0x00000200
++#define DDRSS0_CTL_391_DATA 0x00000200
++#define DDRSS0_CTL_392_DATA 0x00000200
++#define DDRSS0_CTL_393_DATA 0x00000200
++#define DDRSS0_CTL_394_DATA 0x000004D4
++#define DDRSS0_CTL_395_DATA 0x00001018
++#define DDRSS0_CTL_396_DATA 0x00000204
++#define DDRSS0_CTL_397_DATA 0x000040F8
++#define DDRSS0_CTL_398_DATA 0x00000200
++#define DDRSS0_CTL_399_DATA 0x00000200
++#define DDRSS0_CTL_400_DATA 0x00000200
++#define DDRSS0_CTL_401_DATA 0x00000200
++#define DDRSS0_CTL_402_DATA 0x0000C2E8
++#define DDRSS0_CTL_403_DATA 0x000289B0
++#define DDRSS0_CTL_404_DATA 0x00000E15
++#define DDRSS0_CTL_405_DATA 0x000040F8
++#define DDRSS0_CTL_406_DATA 0x00000200
++#define DDRSS0_CTL_407_DATA 0x00000200
++#define DDRSS0_CTL_408_DATA 0x00000200
++#define DDRSS0_CTL_409_DATA 0x00000200
++#define DDRSS0_CTL_410_DATA 0x0000C2E8
++#define DDRSS0_CTL_411_DATA 0x000289B0
++#define DDRSS0_CTL_412_DATA 0x02020E15
++#define DDRSS0_CTL_413_DATA 0x03030202
++#define DDRSS0_CTL_414_DATA 0x00000022
++#define DDRSS0_CTL_415_DATA 0x00000000
++#define DDRSS0_CTL_416_DATA 0x00000000
++#define DDRSS0_CTL_417_DATA 0x00001403
++#define DDRSS0_CTL_418_DATA 0x000007D0
++#define DDRSS0_CTL_419_DATA 0x00000000
++#define DDRSS0_CTL_420_DATA 0x00000000
++#define DDRSS0_CTL_421_DATA 0x00030000
++#define DDRSS0_CTL_422_DATA 0x0007001F
++#define DDRSS0_CTL_423_DATA 0x001B0033
++#define DDRSS0_CTL_424_DATA 0x001B0033
++#define DDRSS0_CTL_425_DATA 0x00000000
++#define DDRSS0_CTL_426_DATA 0x00000000
++#define DDRSS0_CTL_427_DATA 0x02000000
++#define DDRSS0_CTL_428_DATA 0x01000404
++#define DDRSS0_CTL_429_DATA 0x0B1E0B1E
++#define DDRSS0_CTL_430_DATA 0x00000105
++#define DDRSS0_CTL_431_DATA 0x00010101
++#define DDRSS0_CTL_432_DATA 0x00010101
++#define DDRSS0_CTL_433_DATA 0x00010001
++#define DDRSS0_CTL_434_DATA 0x00000101
++#define DDRSS0_CTL_435_DATA 0x02000201
++#define DDRSS0_CTL_436_DATA 0x02010000
++#define DDRSS0_CTL_437_DATA 0x00000200
++#define DDRSS0_CTL_438_DATA 0x28060000
++#define DDRSS0_CTL_439_DATA 0x00000128
++#define DDRSS0_CTL_440_DATA 0xFFFFFFFF
++#define DDRSS0_CTL_441_DATA 0xFFFFFFFF
++#define DDRSS0_CTL_442_DATA 0x00000000
++#define DDRSS0_CTL_443_DATA 0x00000000
++#define DDRSS0_CTL_444_DATA 0x00000000
++#define DDRSS0_CTL_445_DATA 0x00000000
++#define DDRSS0_CTL_446_DATA 0x00000000
++#define DDRSS0_CTL_447_DATA 0x00000000
++#define DDRSS0_CTL_448_DATA 0x00000000
++#define DDRSS0_CTL_449_DATA 0x00000000
++#define DDRSS0_CTL_450_DATA 0x00000000
++#define DDRSS0_CTL_451_DATA 0x00000000
++#define DDRSS0_CTL_452_DATA 0x00000000
++#define DDRSS0_CTL_453_DATA 0x00000000
++#define DDRSS0_CTL_454_DATA 0x00000000
++#define DDRSS0_CTL_455_DATA 0x00000000
++#define DDRSS0_CTL_456_DATA 0x00000000
++#define DDRSS0_CTL_457_DATA 0x00000000
++#define DDRSS0_CTL_458_DATA 0x00000000
++
++#define DDRSS0_PI_00_DATA 0x00000B00
++#define DDRSS0_PI_01_DATA 0x00000000
++#define DDRSS0_PI_02_DATA 0x00000000
++#define DDRSS0_PI_03_DATA 0x00000000
++#define DDRSS0_PI_04_DATA 0x00000000
++#define DDRSS0_PI_05_DATA 0x00000101
++#define DDRSS0_PI_06_DATA 0x00640000
++#define DDRSS0_PI_07_DATA 0x00000001
++#define DDRSS0_PI_08_DATA 0x00000000
++#define DDRSS0_PI_09_DATA 0x00000000
++#define DDRSS0_PI_10_DATA 0x00000000
++#define DDRSS0_PI_11_DATA 0x00000000
++#define DDRSS0_PI_12_DATA 0x00000003
++#define DDRSS0_PI_13_DATA 0x00010001
++#define DDRSS0_PI_14_DATA 0x08000005
++#define DDRSS0_PI_15_DATA 0x00000103
++#define DDRSS0_PI_16_DATA 0x00000005
++#define DDRSS0_PI_17_DATA 0x00000000
++#define DDRSS0_PI_18_DATA 0x00000000
++#define DDRSS0_PI_19_DATA 0x00000000
++#define DDRSS0_PI_20_DATA 0x00000000
++#define DDRSS0_PI_21_DATA 0x00000000
++#define DDRSS0_PI_22_DATA 0x00000000
++#define DDRSS0_PI_23_DATA 0x00000000
++#define DDRSS0_PI_24_DATA 0x00000000
++#define DDRSS0_PI_25_DATA 0x00000000
++#define DDRSS0_PI_26_DATA 0x00010100
++#define DDRSS0_PI_27_DATA 0x00280A00
++#define DDRSS0_PI_28_DATA 0x00000000
++#define DDRSS0_PI_29_DATA 0x05000000
++#define DDRSS0_PI_30_DATA 0x00003200
++#define DDRSS0_PI_31_DATA 0x00000000
++#define DDRSS0_PI_32_DATA 0x00000000
++#define DDRSS0_PI_33_DATA 0x01010102
++#define DDRSS0_PI_34_DATA 0x00000000
++#define DDRSS0_PI_35_DATA 0x000000AA
++#define DDRSS0_PI_36_DATA 0x00000055
++#define DDRSS0_PI_37_DATA 0x000000B5
++#define DDRSS0_PI_38_DATA 0x0000004A
++#define DDRSS0_PI_39_DATA 0x00000056
++#define DDRSS0_PI_40_DATA 0x000000A9
++#define DDRSS0_PI_41_DATA 0x000000A9
++#define DDRSS0_PI_42_DATA 0x000000B5
++#define DDRSS0_PI_43_DATA 0x00000000
++#define DDRSS0_PI_44_DATA 0x00000000
++#define DDRSS0_PI_45_DATA 0x00050500
++#define DDRSS0_PI_46_DATA 0x0000001B
++#define DDRSS0_PI_47_DATA 0x000007D0
++#define DDRSS0_PI_48_DATA 0x00000300
++#define DDRSS0_PI_49_DATA 0x00000000
++#define DDRSS0_PI_50_DATA 0x00000000
++#define DDRSS0_PI_51_DATA 0x01000000
++#define DDRSS0_PI_52_DATA 0x00010101
++#define DDRSS0_PI_53_DATA 0x00000000
++#define DDRSS0_PI_54_DATA 0x00030000
++#define DDRSS0_PI_55_DATA 0x05000000
++#define DDRSS0_PI_56_DATA 0x00000017
++#define DDRSS0_PI_57_DATA 0x00000000
++#define DDRSS0_PI_58_DATA 0x00000000
++#define DDRSS0_PI_59_DATA 0x00000000
++#define DDRSS0_PI_60_DATA 0x0A0A140A
++#define DDRSS0_PI_61_DATA 0x10020201
++#define DDRSS0_PI_62_DATA 0x00020805
++#define DDRSS0_PI_63_DATA 0x01000404
++#define DDRSS0_PI_64_DATA 0x00000000
++#define DDRSS0_PI_65_DATA 0x00000000
++#define DDRSS0_PI_66_DATA 0x01000100
++#define DDRSS0_PI_67_DATA 0x01020205
++#define DDRSS0_PI_68_DATA 0x00340000
++#define DDRSS0_PI_69_DATA 0x00000000
++#define DDRSS0_PI_70_DATA 0x00000000
++#define DDRSS0_PI_71_DATA 0x0000FFFF
++#define DDRSS0_PI_72_DATA 0x01000000
++#define DDRSS0_PI_73_DATA 0x00080100
++#define DDRSS0_PI_74_DATA 0x02000200
++#define DDRSS0_PI_75_DATA 0x01000100
++#define DDRSS0_PI_76_DATA 0x01000000
++#define DDRSS0_PI_77_DATA 0x02000200
++#define DDRSS0_PI_78_DATA 0x00000200
++#define DDRSS0_PI_79_DATA 0x00000000
++#define DDRSS0_PI_80_DATA 0x00000000
++#define DDRSS0_PI_81_DATA 0x00000000
++#define DDRSS0_PI_82_DATA 0x00000000
++#define DDRSS0_PI_83_DATA 0x00000000
++#define DDRSS0_PI_84_DATA 0x00000000
++#define DDRSS0_PI_85_DATA 0x00000000
++#define DDRSS0_PI_86_DATA 0x00000000
++#define DDRSS0_PI_87_DATA 0x00000000
++#define DDRSS0_PI_88_DATA 0x00000000
++#define DDRSS0_PI_89_DATA 0x00000000
++#define DDRSS0_PI_90_DATA 0x00000000
++#define DDRSS0_PI_91_DATA 0x00000400
++#define DDRSS0_PI_92_DATA 0x02010000
++#define DDRSS0_PI_93_DATA 0x00080003
++#define DDRSS0_PI_94_DATA 0x00080000
++#define DDRSS0_PI_95_DATA 0x00000001
++#define DDRSS0_PI_96_DATA 0x00000000
++#define DDRSS0_PI_97_DATA 0x0000AA00
++#define DDRSS0_PI_98_DATA 0x00000000
++#define DDRSS0_PI_99_DATA 0x00000000
++#define DDRSS0_PI_100_DATA 0x00010000
++#define DDRSS0_PI_101_DATA 0x00000000
++#define DDRSS0_PI_102_DATA 0x00000000
++#define DDRSS0_PI_103_DATA 0x00000000
++#define DDRSS0_PI_104_DATA 0x00000000
++#define DDRSS0_PI_105_DATA 0x00000000
++#define DDRSS0_PI_106_DATA 0x00000000
++#define DDRSS0_PI_107_DATA 0x00000000
++#define DDRSS0_PI_108_DATA 0x00000000
++#define DDRSS0_PI_109_DATA 0x00000000
++#define DDRSS0_PI_110_DATA 0x00000000
++#define DDRSS0_PI_111_DATA 0x00000000
++#define DDRSS0_PI_112_DATA 0x00000000
++#define DDRSS0_PI_113_DATA 0x00000000
++#define DDRSS0_PI_114_DATA 0x00000000
++#define DDRSS0_PI_115_DATA 0x00000000
++#define DDRSS0_PI_116_DATA 0x00000000
++#define DDRSS0_PI_117_DATA 0x00000000
++#define DDRSS0_PI_118_DATA 0x00000000
++#define DDRSS0_PI_119_DATA 0x00000000
++#define DDRSS0_PI_120_DATA 0x00000000
++#define DDRSS0_PI_121_DATA 0x00000000
++#define DDRSS0_PI_122_DATA 0x00000000
++#define DDRSS0_PI_123_DATA 0x00000000
++#define DDRSS0_PI_124_DATA 0x00000000
++#define DDRSS0_PI_125_DATA 0x00000008
++#define DDRSS0_PI_126_DATA 0x00000000
++#define DDRSS0_PI_127_DATA 0x00000000
++#define DDRSS0_PI_128_DATA 0x00000000
++#define DDRSS0_PI_129_DATA 0x00000000
++#define DDRSS0_PI_130_DATA 0x00000000
++#define DDRSS0_PI_131_DATA 0x00000000
++#define DDRSS0_PI_132_DATA 0x00000000
++#define DDRSS0_PI_133_DATA 0x00000000
++#define DDRSS0_PI_134_DATA 0x00000002
++#define DDRSS0_PI_135_DATA 0x00000000
++#define DDRSS0_PI_136_DATA 0x00000000
++#define DDRSS0_PI_137_DATA 0x0000000A
++#define DDRSS0_PI_138_DATA 0x00000019
++#define DDRSS0_PI_139_DATA 0x00000100
++#define DDRSS0_PI_140_DATA 0x00000000
++#define DDRSS0_PI_141_DATA 0x00000000
++#define DDRSS0_PI_142_DATA 0x00000000
++#define DDRSS0_PI_143_DATA 0x00000000
++#define DDRSS0_PI_144_DATA 0x01000000
++#define DDRSS0_PI_145_DATA 0x00010003
++#define DDRSS0_PI_146_DATA 0x02000101
++#define DDRSS0_PI_147_DATA 0x01030001
++#define DDRSS0_PI_148_DATA 0x00010400
++#define DDRSS0_PI_149_DATA 0x06000105
++#define DDRSS0_PI_150_DATA 0x01070001
++#define DDRSS0_PI_151_DATA 0x00000000
++#define DDRSS0_PI_152_DATA 0x00000000
++#define DDRSS0_PI_153_DATA 0x00000000
++#define DDRSS0_PI_154_DATA 0x00010001
++#define DDRSS0_PI_155_DATA 0x00000000
++#define DDRSS0_PI_156_DATA 0x00000000
++#define DDRSS0_PI_157_DATA 0x00000000
++#define DDRSS0_PI_158_DATA 0x00000000
++#define DDRSS0_PI_159_DATA 0x00000401
++#define DDRSS0_PI_160_DATA 0x00000000
++#define DDRSS0_PI_161_DATA 0x00010000
++#define DDRSS0_PI_162_DATA 0x00000000
++#define DDRSS0_PI_163_DATA 0x2B2B0200
++#define DDRSS0_PI_164_DATA 0x00000034
++#define DDRSS0_PI_165_DATA 0x00000064
++#define DDRSS0_PI_166_DATA 0x00020064
++#define DDRSS0_PI_167_DATA 0x02000200
++#define DDRSS0_PI_168_DATA 0x48120C04
++#define DDRSS0_PI_169_DATA 0x00104812
++#define DDRSS0_PI_170_DATA 0x000000CE
++#define DDRSS0_PI_171_DATA 0x00000256
++#define DDRSS0_PI_172_DATA 0x0000207C
++#define DDRSS0_PI_173_DATA 0x00000256
++#define DDRSS0_PI_174_DATA 0x0400207C
++#define DDRSS0_PI_175_DATA 0x01010404
++#define DDRSS0_PI_176_DATA 0x00001500
++#define DDRSS0_PI_177_DATA 0x00150015
++#define DDRSS0_PI_178_DATA 0x01000100
++#define DDRSS0_PI_179_DATA 0x00000100
++#define DDRSS0_PI_180_DATA 0x00000000
++#define DDRSS0_PI_181_DATA 0x01010101
++#define DDRSS0_PI_182_DATA 0x00000000
++#define DDRSS0_PI_183_DATA 0x00000000
++#define DDRSS0_PI_184_DATA 0x00000000
++#define DDRSS0_PI_185_DATA 0x15040000
++#define DDRSS0_PI_186_DATA 0x0E0E0215
++#define DDRSS0_PI_187_DATA 0x00040402
++#define DDRSS0_PI_188_DATA 0x000D0035
++#define DDRSS0_PI_189_DATA 0x00218049
++#define DDRSS0_PI_190_DATA 0x00218049
++#define DDRSS0_PI_191_DATA 0x01000101
++#define DDRSS0_PI_192_DATA 0x0004000E
++#define DDRSS0_PI_193_DATA 0x00040216
++#define DDRSS0_PI_194_DATA 0x01000216
++#define DDRSS0_PI_195_DATA 0x000F000F
++#define DDRSS0_PI_196_DATA 0x02170100
++#define DDRSS0_PI_197_DATA 0x01000217
++#define DDRSS0_PI_198_DATA 0x02170217
++#define DDRSS0_PI_199_DATA 0x32103200
++#define DDRSS0_PI_200_DATA 0x01013210
++#define DDRSS0_PI_201_DATA 0x0A070601
++#define DDRSS0_PI_202_DATA 0x1F130A0D
++#define DDRSS0_PI_203_DATA 0x1F130A14
++#define DDRSS0_PI_204_DATA 0x0000C014
++#define DDRSS0_PI_205_DATA 0x00C01000
++#define DDRSS0_PI_206_DATA 0x00C01000
++#define DDRSS0_PI_207_DATA 0x00021000
++#define DDRSS0_PI_208_DATA 0x0024000E
++#define DDRSS0_PI_209_DATA 0x00240216
++#define DDRSS0_PI_210_DATA 0x00110216
++#define DDRSS0_PI_211_DATA 0x32000056
++#define DDRSS0_PI_212_DATA 0x00000301
++#define DDRSS0_PI_213_DATA 0x005B0036
++#define DDRSS0_PI_214_DATA 0x03013212
++#define DDRSS0_PI_215_DATA 0x00003600
++#define DDRSS0_PI_216_DATA 0x3212005B
++#define DDRSS0_PI_217_DATA 0x09000001
++#define DDRSS0_PI_218_DATA 0x06010504
++#define DDRSS0_PI_219_DATA 0x040006CA
++#define DDRSS0_PI_220_DATA 0x0A032001
++#define DDRSS0_PI_221_DATA 0x2C31110A
++#define DDRSS0_PI_222_DATA 0x00002918
++#define DDRSS0_PI_223_DATA 0x60010760
++#define DDRSS0_PI_224_DATA 0x1E202008
++#define DDRSS0_PI_225_DATA 0x2C311116
++#define DDRSS0_PI_226_DATA 0x00002918
++#define DDRSS0_PI_227_DATA 0x60010760
++#define DDRSS0_PI_228_DATA 0x1E202008
++#define DDRSS0_PI_229_DATA 0x00019C16
++#define DDRSS0_PI_230_DATA 0x00001018
++#define DDRSS0_PI_231_DATA 0x000040F8
++#define DDRSS0_PI_232_DATA 0x000289B0
++#define DDRSS0_PI_233_DATA 0x000040F8
++#define DDRSS0_PI_234_DATA 0x000289B0
++#define DDRSS0_PI_235_DATA 0x02660010
++#define DDRSS0_PI_236_DATA 0x03030266
++#define DDRSS0_PI_237_DATA 0x002AF803
++#define DDRSS0_PI_238_DATA 0x0001ADAF
++#define DDRSS0_PI_239_DATA 0x00000005
++#define DDRSS0_PI_240_DATA 0x0000006E
++#define DDRSS0_PI_241_DATA 0x00000010
++#define DDRSS0_PI_242_DATA 0x000681C8
++#define DDRSS0_PI_243_DATA 0x0001ADAF
++#define DDRSS0_PI_244_DATA 0x00000005
++#define DDRSS0_PI_245_DATA 0x000010A9
++#define DDRSS0_PI_246_DATA 0x00000266
++#define DDRSS0_PI_247_DATA 0x000681C8
++#define DDRSS0_PI_248_DATA 0x0001ADAF
++#define DDRSS0_PI_249_DATA 0x00000005
++#define DDRSS0_PI_250_DATA 0x000010A9
++#define DDRSS0_PI_251_DATA 0x01000266
++#define DDRSS0_PI_252_DATA 0x00370040
++#define DDRSS0_PI_253_DATA 0x00010008
++#define DDRSS0_PI_254_DATA 0x08550040
++#define DDRSS0_PI_255_DATA 0x00010040
++#define DDRSS0_PI_256_DATA 0x08550040
++#define DDRSS0_PI_257_DATA 0x00000340
++#define DDRSS0_PI_258_DATA 0x006B006B
++#define DDRSS0_PI_259_DATA 0x08040404
++#define DDRSS0_PI_260_DATA 0x00000055
++#define DDRSS0_PI_261_DATA 0x55083C5A
++#define DDRSS0_PI_262_DATA 0x5A000000
++#define DDRSS0_PI_263_DATA 0x0055083C
++#define DDRSS0_PI_264_DATA 0x3C5A0000
++#define DDRSS0_PI_265_DATA 0x00005508
++#define DDRSS0_PI_266_DATA 0x0C3C5A00
++#define DDRSS0_PI_267_DATA 0x080F0E0D
++#define DDRSS0_PI_268_DATA 0x000B0A09
++#define DDRSS0_PI_269_DATA 0x00030201
++#define DDRSS0_PI_270_DATA 0x01000000
++#define DDRSS0_PI_271_DATA 0x04020201
++#define DDRSS0_PI_272_DATA 0x00080804
++#define DDRSS0_PI_273_DATA 0x00000000
++#define DDRSS0_PI_274_DATA 0x00000000
++#define DDRSS0_PI_275_DATA 0x00330084
++#define DDRSS0_PI_276_DATA 0x00160000
++#define DDRSS0_PI_277_DATA 0x36333FF4
++#define DDRSS0_PI_278_DATA 0x00160F27
++#define DDRSS0_PI_279_DATA 0x36333FF4
++#define DDRSS0_PI_280_DATA 0x00160F27
++#define DDRSS0_PI_281_DATA 0x00330084
++#define DDRSS0_PI_282_DATA 0x00160000
++#define DDRSS0_PI_283_DATA 0x36333FF4
++#define DDRSS0_PI_284_DATA 0x00160F27
++#define DDRSS0_PI_285_DATA 0x36333FF4
++#define DDRSS0_PI_286_DATA 0x00160F27
++#define DDRSS0_PI_287_DATA 0x00330084
++#define DDRSS0_PI_288_DATA 0x00160000
++#define DDRSS0_PI_289_DATA 0x36333FF4
++#define DDRSS0_PI_290_DATA 0x00160F27
++#define DDRSS0_PI_291_DATA 0x36333FF4
++#define DDRSS0_PI_292_DATA 0x00160F27
++#define DDRSS0_PI_293_DATA 0x00330084
++#define DDRSS0_PI_294_DATA 0x00160000
++#define DDRSS0_PI_295_DATA 0x36333FF4
++#define DDRSS0_PI_296_DATA 0x00160F27
++#define DDRSS0_PI_297_DATA 0x36333FF4
++#define DDRSS0_PI_298_DATA 0x00160F27
++#define DDRSS0_PI_299_DATA 0x00000000
++
++#define DDRSS0_PHY_00_DATA 0x000004F0
++#define DDRSS0_PHY_01_DATA 0x00000000
++#define DDRSS0_PHY_02_DATA 0x00030200
++#define DDRSS0_PHY_03_DATA 0x00000000
++#define DDRSS0_PHY_04_DATA 0x00000000
++#define DDRSS0_PHY_05_DATA 0x01030000
++#define DDRSS0_PHY_06_DATA 0x00010000
++#define DDRSS0_PHY_07_DATA 0x01030004
++#define DDRSS0_PHY_08_DATA 0x01000000
++#define DDRSS0_PHY_09_DATA 0x00000000
++#define DDRSS0_PHY_10_DATA 0x00000000
++#define DDRSS0_PHY_11_DATA 0x01000001
++#define DDRSS0_PHY_12_DATA 0x00000200
++#define DDRSS0_PHY_13_DATA 0x000800C0
++#define DDRSS0_PHY_14_DATA 0x060100CC
++#define DDRSS0_PHY_15_DATA 0x00030066
++#define DDRSS0_PHY_16_DATA 0x00000000
++#define DDRSS0_PHY_17_DATA 0x00000301
++#define DDRSS0_PHY_18_DATA 0x0000AAAA
++#define DDRSS0_PHY_19_DATA 0x00005555
++#define DDRSS0_PHY_20_DATA 0x0000B5B5
++#define DDRSS0_PHY_21_DATA 0x00004A4A
++#define DDRSS0_PHY_22_DATA 0x00005656
++#define DDRSS0_PHY_23_DATA 0x0000A9A9
++#define DDRSS0_PHY_24_DATA 0x0000A9A9
++#define DDRSS0_PHY_25_DATA 0x0000B5B5
++#define DDRSS0_PHY_26_DATA 0x00000000
++#define DDRSS0_PHY_27_DATA 0x00000000
++#define DDRSS0_PHY_28_DATA 0x2A000000
++#define DDRSS0_PHY_29_DATA 0x00000808
++#define DDRSS0_PHY_30_DATA 0x0F000000
++#define DDRSS0_PHY_31_DATA 0x00000F08
++#define DDRSS0_PHY_32_DATA 0x10400000
++#define DDRSS0_PHY_33_DATA 0x0C002002
++#define DDRSS0_PHY_34_DATA 0x00000000
++#define DDRSS0_PHY_35_DATA 0x00000000
++#define DDRSS0_PHY_36_DATA 0x55555555
++#define DDRSS0_PHY_37_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_38_DATA 0x55555555
++#define DDRSS0_PHY_39_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_40_DATA 0x00005555
++#define DDRSS0_PHY_41_DATA 0x01000100
++#define DDRSS0_PHY_42_DATA 0x00800180
++#define DDRSS0_PHY_43_DATA 0x00000001
++#define DDRSS0_PHY_44_DATA 0x00000000
++#define DDRSS0_PHY_45_DATA 0x00000000
++#define DDRSS0_PHY_46_DATA 0x00000000
++#define DDRSS0_PHY_47_DATA 0x00000000
++#define DDRSS0_PHY_48_DATA 0x00000000
++#define DDRSS0_PHY_49_DATA 0x00000000
++#define DDRSS0_PHY_50_DATA 0x00000000
++#define DDRSS0_PHY_51_DATA 0x00000000
++#define DDRSS0_PHY_52_DATA 0x00000000
++#define DDRSS0_PHY_53_DATA 0x00000000
++#define DDRSS0_PHY_54_DATA 0x00000000
++#define DDRSS0_PHY_55_DATA 0x00000000
++#define DDRSS0_PHY_56_DATA 0x00000000
++#define DDRSS0_PHY_57_DATA 0x00000000
++#define DDRSS0_PHY_58_DATA 0x00000000
++#define DDRSS0_PHY_59_DATA 0x00000000
++#define DDRSS0_PHY_60_DATA 0x00000000
++#define DDRSS0_PHY_61_DATA 0x00000000
++#define DDRSS0_PHY_62_DATA 0x00000000
++#define DDRSS0_PHY_63_DATA 0x00000000
++#define DDRSS0_PHY_64_DATA 0x00000000
++#define DDRSS0_PHY_65_DATA 0x00000000
++#define DDRSS0_PHY_66_DATA 0x00000104
++#define DDRSS0_PHY_67_DATA 0x00000120
++#define DDRSS0_PHY_68_DATA 0x00000000
++#define DDRSS0_PHY_69_DATA 0x00000000
++#define DDRSS0_PHY_70_DATA 0x00000000
++#define DDRSS0_PHY_71_DATA 0x00000000
++#define DDRSS0_PHY_72_DATA 0x00000000
++#define DDRSS0_PHY_73_DATA 0x00000000
++#define DDRSS0_PHY_74_DATA 0x00000000
++#define DDRSS0_PHY_75_DATA 0x00000001
++#define DDRSS0_PHY_76_DATA 0x07FF0000
++#define DDRSS0_PHY_77_DATA 0x0080081F
++#define DDRSS0_PHY_78_DATA 0x00081020
++#define DDRSS0_PHY_79_DATA 0x04010000
++#define DDRSS0_PHY_80_DATA 0x00000000
++#define DDRSS0_PHY_81_DATA 0x00000000
++#define DDRSS0_PHY_82_DATA 0x00000000
++#define DDRSS0_PHY_83_DATA 0x00000100
++#define DDRSS0_PHY_84_DATA 0x01CC0C01
++#define DDRSS0_PHY_85_DATA 0x1003CC0C
++#define DDRSS0_PHY_86_DATA 0x20000140
++#define DDRSS0_PHY_87_DATA 0x07FF0200
++#define DDRSS0_PHY_88_DATA 0x0000DD01
++#define DDRSS0_PHY_89_DATA 0x10100303
++#define DDRSS0_PHY_90_DATA 0x10101010
++#define DDRSS0_PHY_91_DATA 0x10101010
++#define DDRSS0_PHY_92_DATA 0x00021010
++#define DDRSS0_PHY_93_DATA 0x00100010
++#define DDRSS0_PHY_94_DATA 0x00100010
++#define DDRSS0_PHY_95_DATA 0x00100010
++#define DDRSS0_PHY_96_DATA 0x00100010
++#define DDRSS0_PHY_97_DATA 0x00050010
++#define DDRSS0_PHY_98_DATA 0x51517041
++#define DDRSS0_PHY_99_DATA 0x31C06001
++#define DDRSS0_PHY_100_DATA 0x07AB01AB
++#define DDRSS0_PHY_101_DATA 0x00C0C001
++#define DDRSS0_PHY_102_DATA 0x0E0D0001
++#define DDRSS0_PHY_103_DATA 0x10001000
++#define DDRSS0_PHY_104_DATA 0x0C083E42
++#define DDRSS0_PHY_105_DATA 0x0F0C3701
++#define DDRSS0_PHY_106_DATA 0x01000140
++#define DDRSS0_PHY_107_DATA 0x0C000420
++#define DDRSS0_PHY_108_DATA 0x00000198
++#define DDRSS0_PHY_109_DATA 0x0A0000D0
++#define DDRSS0_PHY_110_DATA 0x00030200
++#define DDRSS0_PHY_111_DATA 0x02800000
++#define DDRSS0_PHY_112_DATA 0x80800000
++#define DDRSS0_PHY_113_DATA 0x000E2010
++#define DDRSS0_PHY_114_DATA 0x76543210
++#define DDRSS0_PHY_115_DATA 0x00000008
++#define DDRSS0_PHY_116_DATA 0x02800280
++#define DDRSS0_PHY_117_DATA 0x02800280
++#define DDRSS0_PHY_118_DATA 0x02800280
++#define DDRSS0_PHY_119_DATA 0x02800280
++#define DDRSS0_PHY_120_DATA 0x00000280
++#define DDRSS0_PHY_121_DATA 0x0000A000
++#define DDRSS0_PHY_122_DATA 0x00A000A0
++#define DDRSS0_PHY_123_DATA 0x00A000A0
++#define DDRSS0_PHY_124_DATA 0x00A000A0
++#define DDRSS0_PHY_125_DATA 0x00A000A0
++#define DDRSS0_PHY_126_DATA 0x00A000A0
++#define DDRSS0_PHY_127_DATA 0x00A000A0
++#define DDRSS0_PHY_128_DATA 0x00A000A0
++#define DDRSS0_PHY_129_DATA 0x00A000A0
++#define DDRSS0_PHY_130_DATA 0x01C200A0
++#define DDRSS0_PHY_131_DATA 0x01A00005
++#define DDRSS0_PHY_132_DATA 0x00000000
++#define DDRSS0_PHY_133_DATA 0x00000000
++#define DDRSS0_PHY_134_DATA 0x00080200
++#define DDRSS0_PHY_135_DATA 0x00000000
++#define DDRSS0_PHY_136_DATA 0x20202020
++#define DDRSS0_PHY_137_DATA 0x20202020
++#define DDRSS0_PHY_138_DATA 0xF0F02020
++#define DDRSS0_PHY_139_DATA 0x00000000
++#define DDRSS0_PHY_140_DATA 0x00000000
++#define DDRSS0_PHY_141_DATA 0x00000000
++#define DDRSS0_PHY_142_DATA 0x00000000
++#define DDRSS0_PHY_143_DATA 0x00000000
++#define DDRSS0_PHY_144_DATA 0x00000000
++#define DDRSS0_PHY_145_DATA 0x00000000
++#define DDRSS0_PHY_146_DATA 0x00000000
++#define DDRSS0_PHY_147_DATA 0x00000000
++#define DDRSS0_PHY_148_DATA 0x00000000
++#define DDRSS0_PHY_149_DATA 0x00000000
++#define DDRSS0_PHY_150_DATA 0x00000000
++#define DDRSS0_PHY_151_DATA 0x00000000
++#define DDRSS0_PHY_152_DATA 0x00000000
++#define DDRSS0_PHY_153_DATA 0x00000000
++#define DDRSS0_PHY_154_DATA 0x00000000
++#define DDRSS0_PHY_155_DATA 0x00000000
++#define DDRSS0_PHY_156_DATA 0x00000000
++#define DDRSS0_PHY_157_DATA 0x00000000
++#define DDRSS0_PHY_158_DATA 0x00000000
++#define DDRSS0_PHY_159_DATA 0x00000000
++#define DDRSS0_PHY_160_DATA 0x00000000
++#define DDRSS0_PHY_161_DATA 0x00000000
++#define DDRSS0_PHY_162_DATA 0x00000000
++#define DDRSS0_PHY_163_DATA 0x00000000
++#define DDRSS0_PHY_164_DATA 0x00000000
++#define DDRSS0_PHY_165_DATA 0x00000000
++#define DDRSS0_PHY_166_DATA 0x00000000
++#define DDRSS0_PHY_167_DATA 0x00000000
++#define DDRSS0_PHY_168_DATA 0x00000000
++#define DDRSS0_PHY_169_DATA 0x00000000
++#define DDRSS0_PHY_170_DATA 0x00000000
++#define DDRSS0_PHY_171_DATA 0x00000000
++#define DDRSS0_PHY_172_DATA 0x00000000
++#define DDRSS0_PHY_173_DATA 0x00000000
++#define DDRSS0_PHY_174_DATA 0x00000000
++#define DDRSS0_PHY_175_DATA 0x00000000
++#define DDRSS0_PHY_176_DATA 0x00000000
++#define DDRSS0_PHY_177_DATA 0x00000000
++#define DDRSS0_PHY_178_DATA 0x00000000
++#define DDRSS0_PHY_179_DATA 0x00000000
++#define DDRSS0_PHY_180_DATA 0x00000000
++#define DDRSS0_PHY_181_DATA 0x00000000
++#define DDRSS0_PHY_182_DATA 0x00000000
++#define DDRSS0_PHY_183_DATA 0x00000000
++#define DDRSS0_PHY_184_DATA 0x00000000
++#define DDRSS0_PHY_185_DATA 0x00000000
++#define DDRSS0_PHY_186_DATA 0x00000000
++#define DDRSS0_PHY_187_DATA 0x00000000
++#define DDRSS0_PHY_188_DATA 0x00000000
++#define DDRSS0_PHY_189_DATA 0x00000000
++#define DDRSS0_PHY_190_DATA 0x00000000
++#define DDRSS0_PHY_191_DATA 0x00000000
++#define DDRSS0_PHY_192_DATA 0x00000000
++#define DDRSS0_PHY_193_DATA 0x00000000
++#define DDRSS0_PHY_194_DATA 0x00000000
++#define DDRSS0_PHY_195_DATA 0x00000000
++#define DDRSS0_PHY_196_DATA 0x00000000
++#define DDRSS0_PHY_197_DATA 0x00000000
++#define DDRSS0_PHY_198_DATA 0x00000000
++#define DDRSS0_PHY_199_DATA 0x00000000
++#define DDRSS0_PHY_200_DATA 0x00000000
++#define DDRSS0_PHY_201_DATA 0x00000000
++#define DDRSS0_PHY_202_DATA 0x00000000
++#define DDRSS0_PHY_203_DATA 0x00000000
++#define DDRSS0_PHY_204_DATA 0x00000000
++#define DDRSS0_PHY_205_DATA 0x00000000
++#define DDRSS0_PHY_206_DATA 0x00000000
++#define DDRSS0_PHY_207_DATA 0x00000000
++#define DDRSS0_PHY_208_DATA 0x00000000
++#define DDRSS0_PHY_209_DATA 0x00000000
++#define DDRSS0_PHY_210_DATA 0x00000000
++#define DDRSS0_PHY_211_DATA 0x00000000
++#define DDRSS0_PHY_212_DATA 0x00000000
++#define DDRSS0_PHY_213_DATA 0x00000000
++#define DDRSS0_PHY_214_DATA 0x00000000
++#define DDRSS0_PHY_215_DATA 0x00000000
++#define DDRSS0_PHY_216_DATA 0x00000000
++#define DDRSS0_PHY_217_DATA 0x00000000
++#define DDRSS0_PHY_218_DATA 0x00000000
++#define DDRSS0_PHY_219_DATA 0x00000000
++#define DDRSS0_PHY_220_DATA 0x00000000
++#define DDRSS0_PHY_221_DATA 0x00000000
++#define DDRSS0_PHY_222_DATA 0x00000000
++#define DDRSS0_PHY_223_DATA 0x00000000
++#define DDRSS0_PHY_224_DATA 0x00000000
++#define DDRSS0_PHY_225_DATA 0x00000000
++#define DDRSS0_PHY_226_DATA 0x00000000
++#define DDRSS0_PHY_227_DATA 0x00000000
++#define DDRSS0_PHY_228_DATA 0x00000000
++#define DDRSS0_PHY_229_DATA 0x00000000
++#define DDRSS0_PHY_230_DATA 0x00000000
++#define DDRSS0_PHY_231_DATA 0x00000000
++#define DDRSS0_PHY_232_DATA 0x00000000
++#define DDRSS0_PHY_233_DATA 0x00000000
++#define DDRSS0_PHY_234_DATA 0x00000000
++#define DDRSS0_PHY_235_DATA 0x00000000
++#define DDRSS0_PHY_236_DATA 0x00000000
++#define DDRSS0_PHY_237_DATA 0x00000000
++#define DDRSS0_PHY_238_DATA 0x00000000
++#define DDRSS0_PHY_239_DATA 0x00000000
++#define DDRSS0_PHY_240_DATA 0x00000000
++#define DDRSS0_PHY_241_DATA 0x00000000
++#define DDRSS0_PHY_242_DATA 0x00000000
++#define DDRSS0_PHY_243_DATA 0x00000000
++#define DDRSS0_PHY_244_DATA 0x00000000
++#define DDRSS0_PHY_245_DATA 0x00000000
++#define DDRSS0_PHY_246_DATA 0x00000000
++#define DDRSS0_PHY_247_DATA 0x00000000
++#define DDRSS0_PHY_248_DATA 0x00000000
++#define DDRSS0_PHY_249_DATA 0x00000000
++#define DDRSS0_PHY_250_DATA 0x00000000
++#define DDRSS0_PHY_251_DATA 0x00000000
++#define DDRSS0_PHY_252_DATA 0x00000000
++#define DDRSS0_PHY_253_DATA 0x00000000
++#define DDRSS0_PHY_254_DATA 0x00000000
++#define DDRSS0_PHY_255_DATA 0x00000000
++#define DDRSS0_PHY_256_DATA 0x000004F0
++#define DDRSS0_PHY_257_DATA 0x00000000
++#define DDRSS0_PHY_258_DATA 0x00030200
++#define DDRSS0_PHY_259_DATA 0x00000000
++#define DDRSS0_PHY_260_DATA 0x00000000
++#define DDRSS0_PHY_261_DATA 0x01030000
++#define DDRSS0_PHY_262_DATA 0x00010000
++#define DDRSS0_PHY_263_DATA 0x01030004
++#define DDRSS0_PHY_264_DATA 0x01000000
++#define DDRSS0_PHY_265_DATA 0x00000000
++#define DDRSS0_PHY_266_DATA 0x00000000
++#define DDRSS0_PHY_267_DATA 0x01000001
++#define DDRSS0_PHY_268_DATA 0x00000200
++#define DDRSS0_PHY_269_DATA 0x000800C0
++#define DDRSS0_PHY_270_DATA 0x060100CC
++#define DDRSS0_PHY_271_DATA 0x00030066
++#define DDRSS0_PHY_272_DATA 0x00000000
++#define DDRSS0_PHY_273_DATA 0x00000301
++#define DDRSS0_PHY_274_DATA 0x0000AAAA
++#define DDRSS0_PHY_275_DATA 0x00005555
++#define DDRSS0_PHY_276_DATA 0x0000B5B5
++#define DDRSS0_PHY_277_DATA 0x00004A4A
++#define DDRSS0_PHY_278_DATA 0x00005656
++#define DDRSS0_PHY_279_DATA 0x0000A9A9
++#define DDRSS0_PHY_280_DATA 0x0000A9A9
++#define DDRSS0_PHY_281_DATA 0x0000B5B5
++#define DDRSS0_PHY_282_DATA 0x00000000
++#define DDRSS0_PHY_283_DATA 0x00000000
++#define DDRSS0_PHY_284_DATA 0x2A000000
++#define DDRSS0_PHY_285_DATA 0x00000808
++#define DDRSS0_PHY_286_DATA 0x0F000000
++#define DDRSS0_PHY_287_DATA 0x00000F08
++#define DDRSS0_PHY_288_DATA 0x10400000
++#define DDRSS0_PHY_289_DATA 0x0C002002
++#define DDRSS0_PHY_290_DATA 0x00000000
++#define DDRSS0_PHY_291_DATA 0x00000000
++#define DDRSS0_PHY_292_DATA 0x55555555
++#define DDRSS0_PHY_293_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_294_DATA 0x55555555
++#define DDRSS0_PHY_295_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_296_DATA 0x00005555
++#define DDRSS0_PHY_297_DATA 0x01000100
++#define DDRSS0_PHY_298_DATA 0x00800180
++#define DDRSS0_PHY_299_DATA 0x00000000
++#define DDRSS0_PHY_300_DATA 0x00000000
++#define DDRSS0_PHY_301_DATA 0x00000000
++#define DDRSS0_PHY_302_DATA 0x00000000
++#define DDRSS0_PHY_303_DATA 0x00000000
++#define DDRSS0_PHY_304_DATA 0x00000000
++#define DDRSS0_PHY_305_DATA 0x00000000
++#define DDRSS0_PHY_306_DATA 0x00000000
++#define DDRSS0_PHY_307_DATA 0x00000000
++#define DDRSS0_PHY_308_DATA 0x00000000
++#define DDRSS0_PHY_309_DATA 0x00000000
++#define DDRSS0_PHY_310_DATA 0x00000000
++#define DDRSS0_PHY_311_DATA 0x00000000
++#define DDRSS0_PHY_312_DATA 0x00000000
++#define DDRSS0_PHY_313_DATA 0x00000000
++#define DDRSS0_PHY_314_DATA 0x00000000
++#define DDRSS0_PHY_315_DATA 0x00000000
++#define DDRSS0_PHY_316_DATA 0x00000000
++#define DDRSS0_PHY_317_DATA 0x00000000
++#define DDRSS0_PHY_318_DATA 0x00000000
++#define DDRSS0_PHY_319_DATA 0x00000000
++#define DDRSS0_PHY_320_DATA 0x00000000
++#define DDRSS0_PHY_321_DATA 0x00000000
++#define DDRSS0_PHY_322_DATA 0x00000104
++#define DDRSS0_PHY_323_DATA 0x00000120
++#define DDRSS0_PHY_324_DATA 0x00000000
++#define DDRSS0_PHY_325_DATA 0x00000000
++#define DDRSS0_PHY_326_DATA 0x00000000
++#define DDRSS0_PHY_327_DATA 0x00000000
++#define DDRSS0_PHY_328_DATA 0x00000000
++#define DDRSS0_PHY_329_DATA 0x00000000
++#define DDRSS0_PHY_330_DATA 0x00000000
++#define DDRSS0_PHY_331_DATA 0x00000001
++#define DDRSS0_PHY_332_DATA 0x07FF0000
++#define DDRSS0_PHY_333_DATA 0x0080081F
++#define DDRSS0_PHY_334_DATA 0x00081020
++#define DDRSS0_PHY_335_DATA 0x04010000
++#define DDRSS0_PHY_336_DATA 0x00000000
++#define DDRSS0_PHY_337_DATA 0x00000000
++#define DDRSS0_PHY_338_DATA 0x00000000
++#define DDRSS0_PHY_339_DATA 0x00000100
++#define DDRSS0_PHY_340_DATA 0x01CC0C01
++#define DDRSS0_PHY_341_DATA 0x1003CC0C
++#define DDRSS0_PHY_342_DATA 0x20000140
++#define DDRSS0_PHY_343_DATA 0x07FF0200
++#define DDRSS0_PHY_344_DATA 0x0000DD01
++#define DDRSS0_PHY_345_DATA 0x10100303
++#define DDRSS0_PHY_346_DATA 0x10101010
++#define DDRSS0_PHY_347_DATA 0x10101010
++#define DDRSS0_PHY_348_DATA 0x00021010
++#define DDRSS0_PHY_349_DATA 0x00100010
++#define DDRSS0_PHY_350_DATA 0x00100010
++#define DDRSS0_PHY_351_DATA 0x00100010
++#define DDRSS0_PHY_352_DATA 0x00100010
++#define DDRSS0_PHY_353_DATA 0x00050010
++#define DDRSS0_PHY_354_DATA 0x51517041
++#define DDRSS0_PHY_355_DATA 0x31C06001
++#define DDRSS0_PHY_356_DATA 0x07AB01AB
++#define DDRSS0_PHY_357_DATA 0x00C0C001
++#define DDRSS0_PHY_358_DATA 0x0E0D0001
++#define DDRSS0_PHY_359_DATA 0x10001000
++#define DDRSS0_PHY_360_DATA 0x0C083E42
++#define DDRSS0_PHY_361_DATA 0x0F0C3701
++#define DDRSS0_PHY_362_DATA 0x01000140
++#define DDRSS0_PHY_363_DATA 0x0C000420
++#define DDRSS0_PHY_364_DATA 0x00000198
++#define DDRSS0_PHY_365_DATA 0x0A0000D0
++#define DDRSS0_PHY_366_DATA 0x00030200
++#define DDRSS0_PHY_367_DATA 0x02800000
++#define DDRSS0_PHY_368_DATA 0x80800000
++#define DDRSS0_PHY_369_DATA 0x000E2010
++#define DDRSS0_PHY_370_DATA 0x76543210
++#define DDRSS0_PHY_371_DATA 0x00000008
++#define DDRSS0_PHY_372_DATA 0x02800280
++#define DDRSS0_PHY_373_DATA 0x02800280
++#define DDRSS0_PHY_374_DATA 0x02800280
++#define DDRSS0_PHY_375_DATA 0x02800280
++#define DDRSS0_PHY_376_DATA 0x00000280
++#define DDRSS0_PHY_377_DATA 0x0000A000
++#define DDRSS0_PHY_378_DATA 0x00A000A0
++#define DDRSS0_PHY_379_DATA 0x00A000A0
++#define DDRSS0_PHY_380_DATA 0x00A000A0
++#define DDRSS0_PHY_381_DATA 0x00A000A0
++#define DDRSS0_PHY_382_DATA 0x00A000A0
++#define DDRSS0_PHY_383_DATA 0x00A000A0
++#define DDRSS0_PHY_384_DATA 0x00A000A0
++#define DDRSS0_PHY_385_DATA 0x00A000A0
++#define DDRSS0_PHY_386_DATA 0x01C200A0
++#define DDRSS0_PHY_387_DATA 0x01A00005
++#define DDRSS0_PHY_388_DATA 0x00000000
++#define DDRSS0_PHY_389_DATA 0x00000000
++#define DDRSS0_PHY_390_DATA 0x00080200
++#define DDRSS0_PHY_391_DATA 0x00000000
++#define DDRSS0_PHY_392_DATA 0x20202020
++#define DDRSS0_PHY_393_DATA 0x20202020
++#define DDRSS0_PHY_394_DATA 0xF0F02020
++#define DDRSS0_PHY_395_DATA 0x00000000
++#define DDRSS0_PHY_396_DATA 0x00000000
++#define DDRSS0_PHY_397_DATA 0x00000000
++#define DDRSS0_PHY_398_DATA 0x00000000
++#define DDRSS0_PHY_399_DATA 0x00000000
++#define DDRSS0_PHY_400_DATA 0x00000000
++#define DDRSS0_PHY_401_DATA 0x00000000
++#define DDRSS0_PHY_402_DATA 0x00000000
++#define DDRSS0_PHY_403_DATA 0x00000000
++#define DDRSS0_PHY_404_DATA 0x00000000
++#define DDRSS0_PHY_405_DATA 0x00000000
++#define DDRSS0_PHY_406_DATA 0x00000000
++#define DDRSS0_PHY_407_DATA 0x00000000
++#define DDRSS0_PHY_408_DATA 0x00000000
++#define DDRSS0_PHY_409_DATA 0x00000000
++#define DDRSS0_PHY_410_DATA 0x00000000
++#define DDRSS0_PHY_411_DATA 0x00000000
++#define DDRSS0_PHY_412_DATA 0x00000000
++#define DDRSS0_PHY_413_DATA 0x00000000
++#define DDRSS0_PHY_414_DATA 0x00000000
++#define DDRSS0_PHY_415_DATA 0x00000000
++#define DDRSS0_PHY_416_DATA 0x00000000
++#define DDRSS0_PHY_417_DATA 0x00000000
++#define DDRSS0_PHY_418_DATA 0x00000000
++#define DDRSS0_PHY_419_DATA 0x00000000
++#define DDRSS0_PHY_420_DATA 0x00000000
++#define DDRSS0_PHY_421_DATA 0x00000000
++#define DDRSS0_PHY_422_DATA 0x00000000
++#define DDRSS0_PHY_423_DATA 0x00000000
++#define DDRSS0_PHY_424_DATA 0x00000000
++#define DDRSS0_PHY_425_DATA 0x00000000
++#define DDRSS0_PHY_426_DATA 0x00000000
++#define DDRSS0_PHY_427_DATA 0x00000000
++#define DDRSS0_PHY_428_DATA 0x00000000
++#define DDRSS0_PHY_429_DATA 0x00000000
++#define DDRSS0_PHY_430_DATA 0x00000000
++#define DDRSS0_PHY_431_DATA 0x00000000
++#define DDRSS0_PHY_432_DATA 0x00000000
++#define DDRSS0_PHY_433_DATA 0x00000000
++#define DDRSS0_PHY_434_DATA 0x00000000
++#define DDRSS0_PHY_435_DATA 0x00000000
++#define DDRSS0_PHY_436_DATA 0x00000000
++#define DDRSS0_PHY_437_DATA 0x00000000
++#define DDRSS0_PHY_438_DATA 0x00000000
++#define DDRSS0_PHY_439_DATA 0x00000000
++#define DDRSS0_PHY_440_DATA 0x00000000
++#define DDRSS0_PHY_441_DATA 0x00000000
++#define DDRSS0_PHY_442_DATA 0x00000000
++#define DDRSS0_PHY_443_DATA 0x00000000
++#define DDRSS0_PHY_444_DATA 0x00000000
++#define DDRSS0_PHY_445_DATA 0x00000000
++#define DDRSS0_PHY_446_DATA 0x00000000
++#define DDRSS0_PHY_447_DATA 0x00000000
++#define DDRSS0_PHY_448_DATA 0x00000000
++#define DDRSS0_PHY_449_DATA 0x00000000
++#define DDRSS0_PHY_450_DATA 0x00000000
++#define DDRSS0_PHY_451_DATA 0x00000000
++#define DDRSS0_PHY_452_DATA 0x00000000
++#define DDRSS0_PHY_453_DATA 0x00000000
++#define DDRSS0_PHY_454_DATA 0x00000000
++#define DDRSS0_PHY_455_DATA 0x00000000
++#define DDRSS0_PHY_456_DATA 0x00000000
++#define DDRSS0_PHY_457_DATA 0x00000000
++#define DDRSS0_PHY_458_DATA 0x00000000
++#define DDRSS0_PHY_459_DATA 0x00000000
++#define DDRSS0_PHY_460_DATA 0x00000000
++#define DDRSS0_PHY_461_DATA 0x00000000
++#define DDRSS0_PHY_462_DATA 0x00000000
++#define DDRSS0_PHY_463_DATA 0x00000000
++#define DDRSS0_PHY_464_DATA 0x00000000
++#define DDRSS0_PHY_465_DATA 0x00000000
++#define DDRSS0_PHY_466_DATA 0x00000000
++#define DDRSS0_PHY_467_DATA 0x00000000
++#define DDRSS0_PHY_468_DATA 0x00000000
++#define DDRSS0_PHY_469_DATA 0x00000000
++#define DDRSS0_PHY_470_DATA 0x00000000
++#define DDRSS0_PHY_471_DATA 0x00000000
++#define DDRSS0_PHY_472_DATA 0x00000000
++#define DDRSS0_PHY_473_DATA 0x00000000
++#define DDRSS0_PHY_474_DATA 0x00000000
++#define DDRSS0_PHY_475_DATA 0x00000000
++#define DDRSS0_PHY_476_DATA 0x00000000
++#define DDRSS0_PHY_477_DATA 0x00000000
++#define DDRSS0_PHY_478_DATA 0x00000000
++#define DDRSS0_PHY_479_DATA 0x00000000
++#define DDRSS0_PHY_480_DATA 0x00000000
++#define DDRSS0_PHY_481_DATA 0x00000000
++#define DDRSS0_PHY_482_DATA 0x00000000
++#define DDRSS0_PHY_483_DATA 0x00000000
++#define DDRSS0_PHY_484_DATA 0x00000000
++#define DDRSS0_PHY_485_DATA 0x00000000
++#define DDRSS0_PHY_486_DATA 0x00000000
++#define DDRSS0_PHY_487_DATA 0x00000000
++#define DDRSS0_PHY_488_DATA 0x00000000
++#define DDRSS0_PHY_489_DATA 0x00000000
++#define DDRSS0_PHY_490_DATA 0x00000000
++#define DDRSS0_PHY_491_DATA 0x00000000
++#define DDRSS0_PHY_492_DATA 0x00000000
++#define DDRSS0_PHY_493_DATA 0x00000000
++#define DDRSS0_PHY_494_DATA 0x00000000
++#define DDRSS0_PHY_495_DATA 0x00000000
++#define DDRSS0_PHY_496_DATA 0x00000000
++#define DDRSS0_PHY_497_DATA 0x00000000
++#define DDRSS0_PHY_498_DATA 0x00000000
++#define DDRSS0_PHY_499_DATA 0x00000000
++#define DDRSS0_PHY_500_DATA 0x00000000
++#define DDRSS0_PHY_501_DATA 0x00000000
++#define DDRSS0_PHY_502_DATA 0x00000000
++#define DDRSS0_PHY_503_DATA 0x00000000
++#define DDRSS0_PHY_504_DATA 0x00000000
++#define DDRSS0_PHY_505_DATA 0x00000000
++#define DDRSS0_PHY_506_DATA 0x00000000
++#define DDRSS0_PHY_507_DATA 0x00000000
++#define DDRSS0_PHY_508_DATA 0x00000000
++#define DDRSS0_PHY_509_DATA 0x00000000
++#define DDRSS0_PHY_510_DATA 0x00000000
++#define DDRSS0_PHY_511_DATA 0x00000000
++#define DDRSS0_PHY_512_DATA 0x000004F0
++#define DDRSS0_PHY_513_DATA 0x00000000
++#define DDRSS0_PHY_514_DATA 0x00030200
++#define DDRSS0_PHY_515_DATA 0x00000000
++#define DDRSS0_PHY_516_DATA 0x00000000
++#define DDRSS0_PHY_517_DATA 0x01030000
++#define DDRSS0_PHY_518_DATA 0x00010000
++#define DDRSS0_PHY_519_DATA 0x01030004
++#define DDRSS0_PHY_520_DATA 0x01000000
++#define DDRSS0_PHY_521_DATA 0x00000000
++#define DDRSS0_PHY_522_DATA 0x00000000
++#define DDRSS0_PHY_523_DATA 0x01000001
++#define DDRSS0_PHY_524_DATA 0x00000200
++#define DDRSS0_PHY_525_DATA 0x000800C0
++#define DDRSS0_PHY_526_DATA 0x060100CC
++#define DDRSS0_PHY_527_DATA 0x00030066
++#define DDRSS0_PHY_528_DATA 0x00000000
++#define DDRSS0_PHY_529_DATA 0x00000301
++#define DDRSS0_PHY_530_DATA 0x0000AAAA
++#define DDRSS0_PHY_531_DATA 0x00005555
++#define DDRSS0_PHY_532_DATA 0x0000B5B5
++#define DDRSS0_PHY_533_DATA 0x00004A4A
++#define DDRSS0_PHY_534_DATA 0x00005656
++#define DDRSS0_PHY_535_DATA 0x0000A9A9
++#define DDRSS0_PHY_536_DATA 0x0000A9A9
++#define DDRSS0_PHY_537_DATA 0x0000B5B5
++#define DDRSS0_PHY_538_DATA 0x00000000
++#define DDRSS0_PHY_539_DATA 0x00000000
++#define DDRSS0_PHY_540_DATA 0x2A000000
++#define DDRSS0_PHY_541_DATA 0x00000808
++#define DDRSS0_PHY_542_DATA 0x0F000000
++#define DDRSS0_PHY_543_DATA 0x00000F08
++#define DDRSS0_PHY_544_DATA 0x10400000
++#define DDRSS0_PHY_545_DATA 0x0C002002
++#define DDRSS0_PHY_546_DATA 0x00000000
++#define DDRSS0_PHY_547_DATA 0x00000000
++#define DDRSS0_PHY_548_DATA 0x55555555
++#define DDRSS0_PHY_549_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_550_DATA 0x55555555
++#define DDRSS0_PHY_551_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_552_DATA 0x00005555
++#define DDRSS0_PHY_553_DATA 0x01000100
++#define DDRSS0_PHY_554_DATA 0x00800180
++#define DDRSS0_PHY_555_DATA 0x00000001
++#define DDRSS0_PHY_556_DATA 0x00000000
++#define DDRSS0_PHY_557_DATA 0x00000000
++#define DDRSS0_PHY_558_DATA 0x00000000
++#define DDRSS0_PHY_559_DATA 0x00000000
++#define DDRSS0_PHY_560_DATA 0x00000000
++#define DDRSS0_PHY_561_DATA 0x00000000
++#define DDRSS0_PHY_562_DATA 0x00000000
++#define DDRSS0_PHY_563_DATA 0x00000000
++#define DDRSS0_PHY_564_DATA 0x00000000
++#define DDRSS0_PHY_565_DATA 0x00000000
++#define DDRSS0_PHY_566_DATA 0x00000000
++#define DDRSS0_PHY_567_DATA 0x00000000
++#define DDRSS0_PHY_568_DATA 0x00000000
++#define DDRSS0_PHY_569_DATA 0x00000000
++#define DDRSS0_PHY_570_DATA 0x00000000
++#define DDRSS0_PHY_571_DATA 0x00000000
++#define DDRSS0_PHY_572_DATA 0x00000000
++#define DDRSS0_PHY_573_DATA 0x00000000
++#define DDRSS0_PHY_574_DATA 0x00000000
++#define DDRSS0_PHY_575_DATA 0x00000000
++#define DDRSS0_PHY_576_DATA 0x00000000
++#define DDRSS0_PHY_577_DATA 0x00000000
++#define DDRSS0_PHY_578_DATA 0x00000104
++#define DDRSS0_PHY_579_DATA 0x00000120
++#define DDRSS0_PHY_580_DATA 0x00000000
++#define DDRSS0_PHY_581_DATA 0x00000000
++#define DDRSS0_PHY_582_DATA 0x00000000
++#define DDRSS0_PHY_583_DATA 0x00000000
++#define DDRSS0_PHY_584_DATA 0x00000000
++#define DDRSS0_PHY_585_DATA 0x00000000
++#define DDRSS0_PHY_586_DATA 0x00000000
++#define DDRSS0_PHY_587_DATA 0x00000001
++#define DDRSS0_PHY_588_DATA 0x07FF0000
++#define DDRSS0_PHY_589_DATA 0x0080081F
++#define DDRSS0_PHY_590_DATA 0x00081020
++#define DDRSS0_PHY_591_DATA 0x04010000
++#define DDRSS0_PHY_592_DATA 0x00000000
++#define DDRSS0_PHY_593_DATA 0x00000000
++#define DDRSS0_PHY_594_DATA 0x00000000
++#define DDRSS0_PHY_595_DATA 0x00000100
++#define DDRSS0_PHY_596_DATA 0x01CC0C01
++#define DDRSS0_PHY_597_DATA 0x1003CC0C
++#define DDRSS0_PHY_598_DATA 0x20000140
++#define DDRSS0_PHY_599_DATA 0x07FF0200
++#define DDRSS0_PHY_600_DATA 0x0000DD01
++#define DDRSS0_PHY_601_DATA 0x10100303
++#define DDRSS0_PHY_602_DATA 0x10101010
++#define DDRSS0_PHY_603_DATA 0x10101010
++#define DDRSS0_PHY_604_DATA 0x00021010
++#define DDRSS0_PHY_605_DATA 0x00100010
++#define DDRSS0_PHY_606_DATA 0x00100010
++#define DDRSS0_PHY_607_DATA 0x00100010
++#define DDRSS0_PHY_608_DATA 0x00100010
++#define DDRSS0_PHY_609_DATA 0x00050010
++#define DDRSS0_PHY_610_DATA 0x51517041
++#define DDRSS0_PHY_611_DATA 0x31C06001
++#define DDRSS0_PHY_612_DATA 0x07AB01AB
++#define DDRSS0_PHY_613_DATA 0x00C0C001
++#define DDRSS0_PHY_614_DATA 0x0E0D0001
++#define DDRSS0_PHY_615_DATA 0x10001000
++#define DDRSS0_PHY_616_DATA 0x0C083E42
++#define DDRSS0_PHY_617_DATA 0x0F0C3701
++#define DDRSS0_PHY_618_DATA 0x01000140
++#define DDRSS0_PHY_619_DATA 0x0C000420
++#define DDRSS0_PHY_620_DATA 0x00000198
++#define DDRSS0_PHY_621_DATA 0x0A0000D0
++#define DDRSS0_PHY_622_DATA 0x00030200
++#define DDRSS0_PHY_623_DATA 0x02800000
++#define DDRSS0_PHY_624_DATA 0x80800000
++#define DDRSS0_PHY_625_DATA 0x000E2010
++#define DDRSS0_PHY_626_DATA 0x76543210
++#define DDRSS0_PHY_627_DATA 0x00000008
++#define DDRSS0_PHY_628_DATA 0x02800280
++#define DDRSS0_PHY_629_DATA 0x02800280
++#define DDRSS0_PHY_630_DATA 0x02800280
++#define DDRSS0_PHY_631_DATA 0x02800280
++#define DDRSS0_PHY_632_DATA 0x00000280
++#define DDRSS0_PHY_633_DATA 0x0000A000
++#define DDRSS0_PHY_634_DATA 0x00A000A0
++#define DDRSS0_PHY_635_DATA 0x00A000A0
++#define DDRSS0_PHY_636_DATA 0x00A000A0
++#define DDRSS0_PHY_637_DATA 0x00A000A0
++#define DDRSS0_PHY_638_DATA 0x00A000A0
++#define DDRSS0_PHY_639_DATA 0x00A000A0
++#define DDRSS0_PHY_640_DATA 0x00A000A0
++#define DDRSS0_PHY_641_DATA 0x00A000A0
++#define DDRSS0_PHY_642_DATA 0x01C200A0
++#define DDRSS0_PHY_643_DATA 0x01A00005
++#define DDRSS0_PHY_644_DATA 0x00000000
++#define DDRSS0_PHY_645_DATA 0x00000000
++#define DDRSS0_PHY_646_DATA 0x00080200
++#define DDRSS0_PHY_647_DATA 0x00000000
++#define DDRSS0_PHY_648_DATA 0x20202020
++#define DDRSS0_PHY_649_DATA 0x20202020
++#define DDRSS0_PHY_650_DATA 0xF0F02020
++#define DDRSS0_PHY_651_DATA 0x00000000
++#define DDRSS0_PHY_652_DATA 0x00000000
++#define DDRSS0_PHY_653_DATA 0x00000000
++#define DDRSS0_PHY_654_DATA 0x00000000
++#define DDRSS0_PHY_655_DATA 0x00000000
++#define DDRSS0_PHY_656_DATA 0x00000000
++#define DDRSS0_PHY_657_DATA 0x00000000
++#define DDRSS0_PHY_658_DATA 0x00000000
++#define DDRSS0_PHY_659_DATA 0x00000000
++#define DDRSS0_PHY_660_DATA 0x00000000
++#define DDRSS0_PHY_661_DATA 0x00000000
++#define DDRSS0_PHY_662_DATA 0x00000000
++#define DDRSS0_PHY_663_DATA 0x00000000
++#define DDRSS0_PHY_664_DATA 0x00000000
++#define DDRSS0_PHY_665_DATA 0x00000000
++#define DDRSS0_PHY_666_DATA 0x00000000
++#define DDRSS0_PHY_667_DATA 0x00000000
++#define DDRSS0_PHY_668_DATA 0x00000000
++#define DDRSS0_PHY_669_DATA 0x00000000
++#define DDRSS0_PHY_670_DATA 0x00000000
++#define DDRSS0_PHY_671_DATA 0x00000000
++#define DDRSS0_PHY_672_DATA 0x00000000
++#define DDRSS0_PHY_673_DATA 0x00000000
++#define DDRSS0_PHY_674_DATA 0x00000000
++#define DDRSS0_PHY_675_DATA 0x00000000
++#define DDRSS0_PHY_676_DATA 0x00000000
++#define DDRSS0_PHY_677_DATA 0x00000000
++#define DDRSS0_PHY_678_DATA 0x00000000
++#define DDRSS0_PHY_679_DATA 0x00000000
++#define DDRSS0_PHY_680_DATA 0x00000000
++#define DDRSS0_PHY_681_DATA 0x00000000
++#define DDRSS0_PHY_682_DATA 0x00000000
++#define DDRSS0_PHY_683_DATA 0x00000000
++#define DDRSS0_PHY_684_DATA 0x00000000
++#define DDRSS0_PHY_685_DATA 0x00000000
++#define DDRSS0_PHY_686_DATA 0x00000000
++#define DDRSS0_PHY_687_DATA 0x00000000
++#define DDRSS0_PHY_688_DATA 0x00000000
++#define DDRSS0_PHY_689_DATA 0x00000000
++#define DDRSS0_PHY_690_DATA 0x00000000
++#define DDRSS0_PHY_691_DATA 0x00000000
++#define DDRSS0_PHY_692_DATA 0x00000000
++#define DDRSS0_PHY_693_DATA 0x00000000
++#define DDRSS0_PHY_694_DATA 0x00000000
++#define DDRSS0_PHY_695_DATA 0x00000000
++#define DDRSS0_PHY_696_DATA 0x00000000
++#define DDRSS0_PHY_697_DATA 0x00000000
++#define DDRSS0_PHY_698_DATA 0x00000000
++#define DDRSS0_PHY_699_DATA 0x00000000
++#define DDRSS0_PHY_700_DATA 0x00000000
++#define DDRSS0_PHY_701_DATA 0x00000000
++#define DDRSS0_PHY_702_DATA 0x00000000
++#define DDRSS0_PHY_703_DATA 0x00000000
++#define DDRSS0_PHY_704_DATA 0x00000000
++#define DDRSS0_PHY_705_DATA 0x00000000
++#define DDRSS0_PHY_706_DATA 0x00000000
++#define DDRSS0_PHY_707_DATA 0x00000000
++#define DDRSS0_PHY_708_DATA 0x00000000
++#define DDRSS0_PHY_709_DATA 0x00000000
++#define DDRSS0_PHY_710_DATA 0x00000000
++#define DDRSS0_PHY_711_DATA 0x00000000
++#define DDRSS0_PHY_712_DATA 0x00000000
++#define DDRSS0_PHY_713_DATA 0x00000000
++#define DDRSS0_PHY_714_DATA 0x00000000
++#define DDRSS0_PHY_715_DATA 0x00000000
++#define DDRSS0_PHY_716_DATA 0x00000000
++#define DDRSS0_PHY_717_DATA 0x00000000
++#define DDRSS0_PHY_718_DATA 0x00000000
++#define DDRSS0_PHY_719_DATA 0x00000000
++#define DDRSS0_PHY_720_DATA 0x00000000
++#define DDRSS0_PHY_721_DATA 0x00000000
++#define DDRSS0_PHY_722_DATA 0x00000000
++#define DDRSS0_PHY_723_DATA 0x00000000
++#define DDRSS0_PHY_724_DATA 0x00000000
++#define DDRSS0_PHY_725_DATA 0x00000000
++#define DDRSS0_PHY_726_DATA 0x00000000
++#define DDRSS0_PHY_727_DATA 0x00000000
++#define DDRSS0_PHY_728_DATA 0x00000000
++#define DDRSS0_PHY_729_DATA 0x00000000
++#define DDRSS0_PHY_730_DATA 0x00000000
++#define DDRSS0_PHY_731_DATA 0x00000000
++#define DDRSS0_PHY_732_DATA 0x00000000
++#define DDRSS0_PHY_733_DATA 0x00000000
++#define DDRSS0_PHY_734_DATA 0x00000000
++#define DDRSS0_PHY_735_DATA 0x00000000
++#define DDRSS0_PHY_736_DATA 0x00000000
++#define DDRSS0_PHY_737_DATA 0x00000000
++#define DDRSS0_PHY_738_DATA 0x00000000
++#define DDRSS0_PHY_739_DATA 0x00000000
++#define DDRSS0_PHY_740_DATA 0x00000000
++#define DDRSS0_PHY_741_DATA 0x00000000
++#define DDRSS0_PHY_742_DATA 0x00000000
++#define DDRSS0_PHY_743_DATA 0x00000000
++#define DDRSS0_PHY_744_DATA 0x00000000
++#define DDRSS0_PHY_745_DATA 0x00000000
++#define DDRSS0_PHY_746_DATA 0x00000000
++#define DDRSS0_PHY_747_DATA 0x00000000
++#define DDRSS0_PHY_748_DATA 0x00000000
++#define DDRSS0_PHY_749_DATA 0x00000000
++#define DDRSS0_PHY_750_DATA 0x00000000
++#define DDRSS0_PHY_751_DATA 0x00000000
++#define DDRSS0_PHY_752_DATA 0x00000000
++#define DDRSS0_PHY_753_DATA 0x00000000
++#define DDRSS0_PHY_754_DATA 0x00000000
++#define DDRSS0_PHY_755_DATA 0x00000000
++#define DDRSS0_PHY_756_DATA 0x00000000
++#define DDRSS0_PHY_757_DATA 0x00000000
++#define DDRSS0_PHY_758_DATA 0x00000000
++#define DDRSS0_PHY_759_DATA 0x00000000
++#define DDRSS0_PHY_760_DATA 0x00000000
++#define DDRSS0_PHY_761_DATA 0x00000000
++#define DDRSS0_PHY_762_DATA 0x00000000
++#define DDRSS0_PHY_763_DATA 0x00000000
++#define DDRSS0_PHY_764_DATA 0x00000000
++#define DDRSS0_PHY_765_DATA 0x00000000
++#define DDRSS0_PHY_766_DATA 0x00000000
++#define DDRSS0_PHY_767_DATA 0x00000000
++#define DDRSS0_PHY_768_DATA 0x000004F0
++#define DDRSS0_PHY_769_DATA 0x00000000
++#define DDRSS0_PHY_770_DATA 0x00030200
++#define DDRSS0_PHY_771_DATA 0x00000000
++#define DDRSS0_PHY_772_DATA 0x00000000
++#define DDRSS0_PHY_773_DATA 0x01030000
++#define DDRSS0_PHY_774_DATA 0x00010000
++#define DDRSS0_PHY_775_DATA 0x01030004
++#define DDRSS0_PHY_776_DATA 0x01000000
++#define DDRSS0_PHY_777_DATA 0x00000000
++#define DDRSS0_PHY_778_DATA 0x00000000
++#define DDRSS0_PHY_779_DATA 0x01000001
++#define DDRSS0_PHY_780_DATA 0x00000200
++#define DDRSS0_PHY_781_DATA 0x000800C0
++#define DDRSS0_PHY_782_DATA 0x060100CC
++#define DDRSS0_PHY_783_DATA 0x00030066
++#define DDRSS0_PHY_784_DATA 0x00000000
++#define DDRSS0_PHY_785_DATA 0x00000301
++#define DDRSS0_PHY_786_DATA 0x0000AAAA
++#define DDRSS0_PHY_787_DATA 0x00005555
++#define DDRSS0_PHY_788_DATA 0x0000B5B5
++#define DDRSS0_PHY_789_DATA 0x00004A4A
++#define DDRSS0_PHY_790_DATA 0x00005656
++#define DDRSS0_PHY_791_DATA 0x0000A9A9
++#define DDRSS0_PHY_792_DATA 0x0000A9A9
++#define DDRSS0_PHY_793_DATA 0x0000B5B5
++#define DDRSS0_PHY_794_DATA 0x00000000
++#define DDRSS0_PHY_795_DATA 0x00000000
++#define DDRSS0_PHY_796_DATA 0x2A000000
++#define DDRSS0_PHY_797_DATA 0x00000808
++#define DDRSS0_PHY_798_DATA 0x0F000000
++#define DDRSS0_PHY_799_DATA 0x00000F08
++#define DDRSS0_PHY_800_DATA 0x10400000
++#define DDRSS0_PHY_801_DATA 0x0C002002
++#define DDRSS0_PHY_802_DATA 0x00000000
++#define DDRSS0_PHY_803_DATA 0x00000000
++#define DDRSS0_PHY_804_DATA 0x55555555
++#define DDRSS0_PHY_805_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_806_DATA 0x55555555
++#define DDRSS0_PHY_807_DATA 0xAAAAAAAA
++#define DDRSS0_PHY_808_DATA 0x00005555
++#define DDRSS0_PHY_809_DATA 0x01000100
++#define DDRSS0_PHY_810_DATA 0x00800180
++#define DDRSS0_PHY_811_DATA 0x00000000
++#define DDRSS0_PHY_812_DATA 0x00000000
++#define DDRSS0_PHY_813_DATA 0x00000000
++#define DDRSS0_PHY_814_DATA 0x00000000
++#define DDRSS0_PHY_815_DATA 0x00000000
++#define DDRSS0_PHY_816_DATA 0x00000000
++#define DDRSS0_PHY_817_DATA 0x00000000
++#define DDRSS0_PHY_818_DATA 0x00000000
++#define DDRSS0_PHY_819_DATA 0x00000000
++#define DDRSS0_PHY_820_DATA 0x00000000
++#define DDRSS0_PHY_821_DATA 0x00000000
++#define DDRSS0_PHY_822_DATA 0x00000000
++#define DDRSS0_PHY_823_DATA 0x00000000
++#define DDRSS0_PHY_824_DATA 0x00000000
++#define DDRSS0_PHY_825_DATA 0x00000000
++#define DDRSS0_PHY_826_DATA 0x00000000
++#define DDRSS0_PHY_827_DATA 0x00000000
++#define DDRSS0_PHY_828_DATA 0x00000000
++#define DDRSS0_PHY_829_DATA 0x00000000
++#define DDRSS0_PHY_830_DATA 0x00000000
++#define DDRSS0_PHY_831_DATA 0x00000000
++#define DDRSS0_PHY_832_DATA 0x00000000
++#define DDRSS0_PHY_833_DATA 0x00000000
++#define DDRSS0_PHY_834_DATA 0x00000104
++#define DDRSS0_PHY_835_DATA 0x00000120
++#define DDRSS0_PHY_836_DATA 0x00000000
++#define DDRSS0_PHY_837_DATA 0x00000000
++#define DDRSS0_PHY_838_DATA 0x00000000
++#define DDRSS0_PHY_839_DATA 0x00000000
++#define DDRSS0_PHY_840_DATA 0x00000000
++#define DDRSS0_PHY_841_DATA 0x00000000
++#define DDRSS0_PHY_842_DATA 0x00000000
++#define DDRSS0_PHY_843_DATA 0x00000001
++#define DDRSS0_PHY_844_DATA 0x07FF0000
++#define DDRSS0_PHY_845_DATA 0x0080081F
++#define DDRSS0_PHY_846_DATA 0x00081020
++#define DDRSS0_PHY_847_DATA 0x04010000
++#define DDRSS0_PHY_848_DATA 0x00000000
++#define DDRSS0_PHY_849_DATA 0x00000000
++#define DDRSS0_PHY_850_DATA 0x00000000
++#define DDRSS0_PHY_851_DATA 0x00000100
++#define DDRSS0_PHY_852_DATA 0x01CC0C01
++#define DDRSS0_PHY_853_DATA 0x1003CC0C
++#define DDRSS0_PHY_854_DATA 0x20000140
++#define DDRSS0_PHY_855_DATA 0x07FF0200
++#define DDRSS0_PHY_856_DATA 0x0000DD01
++#define DDRSS0_PHY_857_DATA 0x10100303
++#define DDRSS0_PHY_858_DATA 0x10101010
++#define DDRSS0_PHY_859_DATA 0x10101010
++#define DDRSS0_PHY_860_DATA 0x00021010
++#define DDRSS0_PHY_861_DATA 0x00100010
++#define DDRSS0_PHY_862_DATA 0x00100010
++#define DDRSS0_PHY_863_DATA 0x00100010
++#define DDRSS0_PHY_864_DATA 0x00100010
++#define DDRSS0_PHY_865_DATA 0x00050010
++#define DDRSS0_PHY_866_DATA 0x51517041
++#define DDRSS0_PHY_867_DATA 0x31C06001
++#define DDRSS0_PHY_868_DATA 0x07AB01AB
++#define DDRSS0_PHY_869_DATA 0x00C0C001
++#define DDRSS0_PHY_870_DATA 0x0E0D0001
++#define DDRSS0_PHY_871_DATA 0x10001000
++#define DDRSS0_PHY_872_DATA 0x0C083E42
++#define DDRSS0_PHY_873_DATA 0x0F0C3701
++#define DDRSS0_PHY_874_DATA 0x01000140
++#define DDRSS0_PHY_875_DATA 0x0C000420
++#define DDRSS0_PHY_876_DATA 0x00000198
++#define DDRSS0_PHY_877_DATA 0x0A0000D0
++#define DDRSS0_PHY_878_DATA 0x00030200
++#define DDRSS0_PHY_879_DATA 0x02800000
++#define DDRSS0_PHY_880_DATA 0x80800000
++#define DDRSS0_PHY_881_DATA 0x000E2010
++#define DDRSS0_PHY_882_DATA 0x76543210
++#define DDRSS0_PHY_883_DATA 0x00000008
++#define DDRSS0_PHY_884_DATA 0x02800280
++#define DDRSS0_PHY_885_DATA 0x02800280
++#define DDRSS0_PHY_886_DATA 0x02800280
++#define DDRSS0_PHY_887_DATA 0x02800280
++#define DDRSS0_PHY_888_DATA 0x00000280
++#define DDRSS0_PHY_889_DATA 0x0000A000
++#define DDRSS0_PHY_890_DATA 0x00A000A0
++#define DDRSS0_PHY_891_DATA 0x00A000A0
++#define DDRSS0_PHY_892_DATA 0x00A000A0
++#define DDRSS0_PHY_893_DATA 0x00A000A0
++#define DDRSS0_PHY_894_DATA 0x00A000A0
++#define DDRSS0_PHY_895_DATA 0x00A000A0
++#define DDRSS0_PHY_896_DATA 0x00A000A0
++#define DDRSS0_PHY_897_DATA 0x00A000A0
++#define DDRSS0_PHY_898_DATA 0x01C200A0
++#define DDRSS0_PHY_899_DATA 0x01A00005
++#define DDRSS0_PHY_900_DATA 0x00000000
++#define DDRSS0_PHY_901_DATA 0x00000000
++#define DDRSS0_PHY_902_DATA 0x00080200
++#define DDRSS0_PHY_903_DATA 0x00000000
++#define DDRSS0_PHY_904_DATA 0x20202020
++#define DDRSS0_PHY_905_DATA 0x20202020
++#define DDRSS0_PHY_906_DATA 0xF0F02020
++#define DDRSS0_PHY_907_DATA 0x00000000
++#define DDRSS0_PHY_908_DATA 0x00000000
++#define DDRSS0_PHY_909_DATA 0x00000000
++#define DDRSS0_PHY_910_DATA 0x00000000
++#define DDRSS0_PHY_911_DATA 0x00000000
++#define DDRSS0_PHY_912_DATA 0x00000000
++#define DDRSS0_PHY_913_DATA 0x00000000
++#define DDRSS0_PHY_914_DATA 0x00000000
++#define DDRSS0_PHY_915_DATA 0x00000000
++#define DDRSS0_PHY_916_DATA 0x00000000
++#define DDRSS0_PHY_917_DATA 0x00000000
++#define DDRSS0_PHY_918_DATA 0x00000000
++#define DDRSS0_PHY_919_DATA 0x00000000
++#define DDRSS0_PHY_920_DATA 0x00000000
++#define DDRSS0_PHY_921_DATA 0x00000000
++#define DDRSS0_PHY_922_DATA 0x00000000
++#define DDRSS0_PHY_923_DATA 0x00000000
++#define DDRSS0_PHY_924_DATA 0x00000000
++#define DDRSS0_PHY_925_DATA 0x00000000
++#define DDRSS0_PHY_926_DATA 0x00000000
++#define DDRSS0_PHY_927_DATA 0x00000000
++#define DDRSS0_PHY_928_DATA 0x00000000
++#define DDRSS0_PHY_929_DATA 0x00000000
++#define DDRSS0_PHY_930_DATA 0x00000000
++#define DDRSS0_PHY_931_DATA 0x00000000
++#define DDRSS0_PHY_932_DATA 0x00000000
++#define DDRSS0_PHY_933_DATA 0x00000000
++#define DDRSS0_PHY_934_DATA 0x00000000
++#define DDRSS0_PHY_935_DATA 0x00000000
++#define DDRSS0_PHY_936_DATA 0x00000000
++#define DDRSS0_PHY_937_DATA 0x00000000
++#define DDRSS0_PHY_938_DATA 0x00000000
++#define DDRSS0_PHY_939_DATA 0x00000000
++#define DDRSS0_PHY_940_DATA 0x00000000
++#define DDRSS0_PHY_941_DATA 0x00000000
++#define DDRSS0_PHY_942_DATA 0x00000000
++#define DDRSS0_PHY_943_DATA 0x00000000
++#define DDRSS0_PHY_944_DATA 0x00000000
++#define DDRSS0_PHY_945_DATA 0x00000000
++#define DDRSS0_PHY_946_DATA 0x00000000
++#define DDRSS0_PHY_947_DATA 0x00000000
++#define DDRSS0_PHY_948_DATA 0x00000000
++#define DDRSS0_PHY_949_DATA 0x00000000
++#define DDRSS0_PHY_950_DATA 0x00000000
++#define DDRSS0_PHY_951_DATA 0x00000000
++#define DDRSS0_PHY_952_DATA 0x00000000
++#define DDRSS0_PHY_953_DATA 0x00000000
++#define DDRSS0_PHY_954_DATA 0x00000000
++#define DDRSS0_PHY_955_DATA 0x00000000
++#define DDRSS0_PHY_956_DATA 0x00000000
++#define DDRSS0_PHY_957_DATA 0x00000000
++#define DDRSS0_PHY_958_DATA 0x00000000
++#define DDRSS0_PHY_959_DATA 0x00000000
++#define DDRSS0_PHY_960_DATA 0x00000000
++#define DDRSS0_PHY_961_DATA 0x00000000
++#define DDRSS0_PHY_962_DATA 0x00000000
++#define DDRSS0_PHY_963_DATA 0x00000000
++#define DDRSS0_PHY_964_DATA 0x00000000
++#define DDRSS0_PHY_965_DATA 0x00000000
++#define DDRSS0_PHY_966_DATA 0x00000000
++#define DDRSS0_PHY_967_DATA 0x00000000
++#define DDRSS0_PHY_968_DATA 0x00000000
++#define DDRSS0_PHY_969_DATA 0x00000000
++#define DDRSS0_PHY_970_DATA 0x00000000
++#define DDRSS0_PHY_971_DATA 0x00000000
++#define DDRSS0_PHY_972_DATA 0x00000000
++#define DDRSS0_PHY_973_DATA 0x00000000
++#define DDRSS0_PHY_974_DATA 0x00000000
++#define DDRSS0_PHY_975_DATA 0x00000000
++#define DDRSS0_PHY_976_DATA 0x00000000
++#define DDRSS0_PHY_977_DATA 0x00000000
++#define DDRSS0_PHY_978_DATA 0x00000000
++#define DDRSS0_PHY_979_DATA 0x00000000
++#define DDRSS0_PHY_980_DATA 0x00000000
++#define DDRSS0_PHY_981_DATA 0x00000000
++#define DDRSS0_PHY_982_DATA 0x00000000
++#define DDRSS0_PHY_983_DATA 0x00000000
++#define DDRSS0_PHY_984_DATA 0x00000000
++#define DDRSS0_PHY_985_DATA 0x00000000
++#define DDRSS0_PHY_986_DATA 0x00000000
++#define DDRSS0_PHY_987_DATA 0x00000000
++#define DDRSS0_PHY_988_DATA 0x00000000
++#define DDRSS0_PHY_989_DATA 0x00000000
++#define DDRSS0_PHY_990_DATA 0x00000000
++#define DDRSS0_PHY_991_DATA 0x00000000
++#define DDRSS0_PHY_992_DATA 0x00000000
++#define DDRSS0_PHY_993_DATA 0x00000000
++#define DDRSS0_PHY_994_DATA 0x00000000
++#define DDRSS0_PHY_995_DATA 0x00000000
++#define DDRSS0_PHY_996_DATA 0x00000000
++#define DDRSS0_PHY_997_DATA 0x00000000
++#define DDRSS0_PHY_998_DATA 0x00000000
++#define DDRSS0_PHY_999_DATA 0x00000000
++#define DDRSS0_PHY_1000_DATA 0x00000000
++#define DDRSS0_PHY_1001_DATA 0x00000000
++#define DDRSS0_PHY_1002_DATA 0x00000000
++#define DDRSS0_PHY_1003_DATA 0x00000000
++#define DDRSS0_PHY_1004_DATA 0x00000000
++#define DDRSS0_PHY_1005_DATA 0x00000000
++#define DDRSS0_PHY_1006_DATA 0x00000000
++#define DDRSS0_PHY_1007_DATA 0x00000000
++#define DDRSS0_PHY_1008_DATA 0x00000000
++#define DDRSS0_PHY_1009_DATA 0x00000000
++#define DDRSS0_PHY_1010_DATA 0x00000000
++#define DDRSS0_PHY_1011_DATA 0x00000000
++#define DDRSS0_PHY_1012_DATA 0x00000000
++#define DDRSS0_PHY_1013_DATA 0x00000000
++#define DDRSS0_PHY_1014_DATA 0x00000000
++#define DDRSS0_PHY_1015_DATA 0x00000000
++#define DDRSS0_PHY_1016_DATA 0x00000000
++#define DDRSS0_PHY_1017_DATA 0x00000000
++#define DDRSS0_PHY_1018_DATA 0x00000000
++#define DDRSS0_PHY_1019_DATA 0x00000000
++#define DDRSS0_PHY_1020_DATA 0x00000000
++#define DDRSS0_PHY_1021_DATA 0x00000000
++#define DDRSS0_PHY_1022_DATA 0x00000000
++#define DDRSS0_PHY_1023_DATA 0x00000000
++#define DDRSS0_PHY_1024_DATA 0x00000000
++#define DDRSS0_PHY_1025_DATA 0x00000000
++#define DDRSS0_PHY_1026_DATA 0x00000000
++#define DDRSS0_PHY_1027_DATA 0x00000000
++#define DDRSS0_PHY_1028_DATA 0x00000000
++#define DDRSS0_PHY_1029_DATA 0x00000100
++#define DDRSS0_PHY_1030_DATA 0x00000200
++#define DDRSS0_PHY_1031_DATA 0x00000000
++#define DDRSS0_PHY_1032_DATA 0x00000000
++#define DDRSS0_PHY_1033_DATA 0x00000000
++#define DDRSS0_PHY_1034_DATA 0x00000000
++#define DDRSS0_PHY_1035_DATA 0x00400000
++#define DDRSS0_PHY_1036_DATA 0x00000080
++#define DDRSS0_PHY_1037_DATA 0x00DCBA98
++#define DDRSS0_PHY_1038_DATA 0x03000000
++#define DDRSS0_PHY_1039_DATA 0x00200000
++#define DDRSS0_PHY_1040_DATA 0x00000000
++#define DDRSS0_PHY_1041_DATA 0x00000000
++#define DDRSS0_PHY_1042_DATA 0x00000000
++#define DDRSS0_PHY_1043_DATA 0x00000000
++#define DDRSS0_PHY_1044_DATA 0x00000000
++#define DDRSS0_PHY_1045_DATA 0x0000002A
++#define DDRSS0_PHY_1046_DATA 0x00000015
++#define DDRSS0_PHY_1047_DATA 0x00000015
++#define DDRSS0_PHY_1048_DATA 0x0000002A
++#define DDRSS0_PHY_1049_DATA 0x00000033
++#define DDRSS0_PHY_1050_DATA 0x0000000C
++#define DDRSS0_PHY_1051_DATA 0x0000000C
++#define DDRSS0_PHY_1052_DATA 0x00000033
++#define DDRSS0_PHY_1053_DATA 0x00543210
++#define DDRSS0_PHY_1054_DATA 0x003F0000
++#define DDRSS0_PHY_1055_DATA 0x000F013F
++#define DDRSS0_PHY_1056_DATA 0x20202003
++#define DDRSS0_PHY_1057_DATA 0x00202020
++#define DDRSS0_PHY_1058_DATA 0x20008008
++#define DDRSS0_PHY_1059_DATA 0x00000810
++#define DDRSS0_PHY_1060_DATA 0x00000F00
++#define DDRSS0_PHY_1061_DATA 0x00000000
++#define DDRSS0_PHY_1062_DATA 0x00000000
++#define DDRSS0_PHY_1063_DATA 0x00000000
++#define DDRSS0_PHY_1064_DATA 0x000305CC
++#define DDRSS0_PHY_1065_DATA 0x00030000
++#define DDRSS0_PHY_1066_DATA 0x00000300
++#define DDRSS0_PHY_1067_DATA 0x00000300
++#define DDRSS0_PHY_1068_DATA 0x00000300
++#define DDRSS0_PHY_1069_DATA 0x00000300
++#define DDRSS0_PHY_1070_DATA 0x00000300
++#define DDRSS0_PHY_1071_DATA 0x42080010
++#define DDRSS0_PHY_1072_DATA 0x0000803E
++#define DDRSS0_PHY_1073_DATA 0x00000001
++#define DDRSS0_PHY_1074_DATA 0x01000102
++#define DDRSS0_PHY_1075_DATA 0x00008000
++#define DDRSS0_PHY_1076_DATA 0x00000000
++#define DDRSS0_PHY_1077_DATA 0x00000000
++#define DDRSS0_PHY_1078_DATA 0x00000000
++#define DDRSS0_PHY_1079_DATA 0x00000000
++#define DDRSS0_PHY_1080_DATA 0x00000000
++#define DDRSS0_PHY_1081_DATA 0x00000000
++#define DDRSS0_PHY_1082_DATA 0x00000000
++#define DDRSS0_PHY_1083_DATA 0x00000000
++#define DDRSS0_PHY_1084_DATA 0x00000000
++#define DDRSS0_PHY_1085_DATA 0x00000000
++#define DDRSS0_PHY_1086_DATA 0x00000000
++#define DDRSS0_PHY_1087_DATA 0x00000000
++#define DDRSS0_PHY_1088_DATA 0x00000000
++#define DDRSS0_PHY_1089_DATA 0x00000000
++#define DDRSS0_PHY_1090_DATA 0x00000000
++#define DDRSS0_PHY_1091_DATA 0x00000000
++#define DDRSS0_PHY_1092_DATA 0x00000000
++#define DDRSS0_PHY_1093_DATA 0x00000000
++#define DDRSS0_PHY_1094_DATA 0x00000000
++#define DDRSS0_PHY_1095_DATA 0x00000000
++#define DDRSS0_PHY_1096_DATA 0x00000000
++#define DDRSS0_PHY_1097_DATA 0x00000000
++#define DDRSS0_PHY_1098_DATA 0x00000000
++#define DDRSS0_PHY_1099_DATA 0x00000000
++#define DDRSS0_PHY_1100_DATA 0x00000000
++#define DDRSS0_PHY_1101_DATA 0x00000000
++#define DDRSS0_PHY_1102_DATA 0x00000000
++#define DDRSS0_PHY_1103_DATA 0x00000000
++#define DDRSS0_PHY_1104_DATA 0x00000000
++#define DDRSS0_PHY_1105_DATA 0x00000000
++#define DDRSS0_PHY_1106_DATA 0x00000000
++#define DDRSS0_PHY_1107_DATA 0x00000000
++#define DDRSS0_PHY_1108_DATA 0x00000000
++#define DDRSS0_PHY_1109_DATA 0x00000000
++#define DDRSS0_PHY_1110_DATA 0x00000000
++#define DDRSS0_PHY_1111_DATA 0x00000000
++#define DDRSS0_PHY_1112_DATA 0x00000000
++#define DDRSS0_PHY_1113_DATA 0x00000000
++#define DDRSS0_PHY_1114_DATA 0x00000000
++#define DDRSS0_PHY_1115_DATA 0x00000000
++#define DDRSS0_PHY_1116_DATA 0x00000000
++#define DDRSS0_PHY_1117_DATA 0x00000000
++#define DDRSS0_PHY_1118_DATA 0x00000000
++#define DDRSS0_PHY_1119_DATA 0x00000000
++#define DDRSS0_PHY_1120_DATA 0x00000000
++#define DDRSS0_PHY_1121_DATA 0x00000000
++#define DDRSS0_PHY_1122_DATA 0x00000000
++#define DDRSS0_PHY_1123_DATA 0x00000000
++#define DDRSS0_PHY_1124_DATA 0x00000000
++#define DDRSS0_PHY_1125_DATA 0x00000000
++#define DDRSS0_PHY_1126_DATA 0x00000000
++#define DDRSS0_PHY_1127_DATA 0x00000000
++#define DDRSS0_PHY_1128_DATA 0x00000000
++#define DDRSS0_PHY_1129_DATA 0x00000000
++#define DDRSS0_PHY_1130_DATA 0x00000000
++#define DDRSS0_PHY_1131_DATA 0x00000000
++#define DDRSS0_PHY_1132_DATA 0x00000000
++#define DDRSS0_PHY_1133_DATA 0x00000000
++#define DDRSS0_PHY_1134_DATA 0x00000000
++#define DDRSS0_PHY_1135_DATA 0x00000000
++#define DDRSS0_PHY_1136_DATA 0x00000000
++#define DDRSS0_PHY_1137_DATA 0x00000000
++#define DDRSS0_PHY_1138_DATA 0x00000000
++#define DDRSS0_PHY_1139_DATA 0x00000000
++#define DDRSS0_PHY_1140_DATA 0x00000000
++#define DDRSS0_PHY_1141_DATA 0x00000000
++#define DDRSS0_PHY_1142_DATA 0x00000000
++#define DDRSS0_PHY_1143_DATA 0x00000000
++#define DDRSS0_PHY_1144_DATA 0x00000000
++#define DDRSS0_PHY_1145_DATA 0x00000000
++#define DDRSS0_PHY_1146_DATA 0x00000000
++#define DDRSS0_PHY_1147_DATA 0x00000000
++#define DDRSS0_PHY_1148_DATA 0x00000000
++#define DDRSS0_PHY_1149_DATA 0x00000000
++#define DDRSS0_PHY_1150_DATA 0x00000000
++#define DDRSS0_PHY_1151_DATA 0x00000000
++#define DDRSS0_PHY_1152_DATA 0x00000000
++#define DDRSS0_PHY_1153_DATA 0x00000000
++#define DDRSS0_PHY_1154_DATA 0x00000000
++#define DDRSS0_PHY_1155_DATA 0x00000000
++#define DDRSS0_PHY_1156_DATA 0x00000000
++#define DDRSS0_PHY_1157_DATA 0x00000000
++#define DDRSS0_PHY_1158_DATA 0x00000000
++#define DDRSS0_PHY_1159_DATA 0x00000000
++#define DDRSS0_PHY_1160_DATA 0x00000000
++#define DDRSS0_PHY_1161_DATA 0x00000000
++#define DDRSS0_PHY_1162_DATA 0x00000000
++#define DDRSS0_PHY_1163_DATA 0x00000000
++#define DDRSS0_PHY_1164_DATA 0x00000000
++#define DDRSS0_PHY_1165_DATA 0x00000000
++#define DDRSS0_PHY_1166_DATA 0x00000000
++#define DDRSS0_PHY_1167_DATA 0x00000000
++#define DDRSS0_PHY_1168_DATA 0x00000000
++#define DDRSS0_PHY_1169_DATA 0x00000000
++#define DDRSS0_PHY_1170_DATA 0x00000000
++#define DDRSS0_PHY_1171_DATA 0x00000000
++#define DDRSS0_PHY_1172_DATA 0x00000000
++#define DDRSS0_PHY_1173_DATA 0x00000000
++#define DDRSS0_PHY_1174_DATA 0x00000000
++#define DDRSS0_PHY_1175_DATA 0x00000000
++#define DDRSS0_PHY_1176_DATA 0x00000000
++#define DDRSS0_PHY_1177_DATA 0x00000000
++#define DDRSS0_PHY_1178_DATA 0x00000000
++#define DDRSS0_PHY_1179_DATA 0x00000000
++#define DDRSS0_PHY_1180_DATA 0x00000000
++#define DDRSS0_PHY_1181_DATA 0x00000000
++#define DDRSS0_PHY_1182_DATA 0x00000000
++#define DDRSS0_PHY_1183_DATA 0x00000000
++#define DDRSS0_PHY_1184_DATA 0x00000000
++#define DDRSS0_PHY_1185_DATA 0x00000000
++#define DDRSS0_PHY_1186_DATA 0x00000000
++#define DDRSS0_PHY_1187_DATA 0x00000000
++#define DDRSS0_PHY_1188_DATA 0x00000000
++#define DDRSS0_PHY_1189_DATA 0x00000000
++#define DDRSS0_PHY_1190_DATA 0x00000000
++#define DDRSS0_PHY_1191_DATA 0x00000000
++#define DDRSS0_PHY_1192_DATA 0x00000000
++#define DDRSS0_PHY_1193_DATA 0x00000000
++#define DDRSS0_PHY_1194_DATA 0x00000000
++#define DDRSS0_PHY_1195_DATA 0x00000000
++#define DDRSS0_PHY_1196_DATA 0x00000000
++#define DDRSS0_PHY_1197_DATA 0x00000000
++#define DDRSS0_PHY_1198_DATA 0x00000000
++#define DDRSS0_PHY_1199_DATA 0x00000000
++#define DDRSS0_PHY_1200_DATA 0x00000000
++#define DDRSS0_PHY_1201_DATA 0x00000000
++#define DDRSS0_PHY_1202_DATA 0x00000000
++#define DDRSS0_PHY_1203_DATA 0x00000000
++#define DDRSS0_PHY_1204_DATA 0x00000000
++#define DDRSS0_PHY_1205_DATA 0x00000000
++#define DDRSS0_PHY_1206_DATA 0x00000000
++#define DDRSS0_PHY_1207_DATA 0x00000000
++#define DDRSS0_PHY_1208_DATA 0x00000000
++#define DDRSS0_PHY_1209_DATA 0x00000000
++#define DDRSS0_PHY_1210_DATA 0x00000000
++#define DDRSS0_PHY_1211_DATA 0x00000000
++#define DDRSS0_PHY_1212_DATA 0x00000000
++#define DDRSS0_PHY_1213_DATA 0x00000000
++#define DDRSS0_PHY_1214_DATA 0x00000000
++#define DDRSS0_PHY_1215_DATA 0x00000000
++#define DDRSS0_PHY_1216_DATA 0x00000000
++#define DDRSS0_PHY_1217_DATA 0x00000000
++#define DDRSS0_PHY_1218_DATA 0x00000000
++#define DDRSS0_PHY_1219_DATA 0x00000000
++#define DDRSS0_PHY_1220_DATA 0x00000000
++#define DDRSS0_PHY_1221_DATA 0x00000000
++#define DDRSS0_PHY_1222_DATA 0x00000000
++#define DDRSS0_PHY_1223_DATA 0x00000000
++#define DDRSS0_PHY_1224_DATA 0x00000000
++#define DDRSS0_PHY_1225_DATA 0x00000000
++#define DDRSS0_PHY_1226_DATA 0x00000000
++#define DDRSS0_PHY_1227_DATA 0x00000000
++#define DDRSS0_PHY_1228_DATA 0x00000000
++#define DDRSS0_PHY_1229_DATA 0x00000000
++#define DDRSS0_PHY_1230_DATA 0x00000000
++#define DDRSS0_PHY_1231_DATA 0x00000000
++#define DDRSS0_PHY_1232_DATA 0x00000000
++#define DDRSS0_PHY_1233_DATA 0x00000000
++#define DDRSS0_PHY_1234_DATA 0x00000000
++#define DDRSS0_PHY_1235_DATA 0x00000000
++#define DDRSS0_PHY_1236_DATA 0x00000000
++#define DDRSS0_PHY_1237_DATA 0x00000000
++#define DDRSS0_PHY_1238_DATA 0x00000000
++#define DDRSS0_PHY_1239_DATA 0x00000000
++#define DDRSS0_PHY_1240_DATA 0x00000000
++#define DDRSS0_PHY_1241_DATA 0x00000000
++#define DDRSS0_PHY_1242_DATA 0x00000000
++#define DDRSS0_PHY_1243_DATA 0x00000000
++#define DDRSS0_PHY_1244_DATA 0x00000000
++#define DDRSS0_PHY_1245_DATA 0x00000000
++#define DDRSS0_PHY_1246_DATA 0x00000000
++#define DDRSS0_PHY_1247_DATA 0x00000000
++#define DDRSS0_PHY_1248_DATA 0x00000000
++#define DDRSS0_PHY_1249_DATA 0x00000000
++#define DDRSS0_PHY_1250_DATA 0x00000000
++#define DDRSS0_PHY_1251_DATA 0x00000000
++#define DDRSS0_PHY_1252_DATA 0x00000000
++#define DDRSS0_PHY_1253_DATA 0x00000000
++#define DDRSS0_PHY_1254_DATA 0x00000000
++#define DDRSS0_PHY_1255_DATA 0x00000000
++#define DDRSS0_PHY_1256_DATA 0x00000000
++#define DDRSS0_PHY_1257_DATA 0x00000000
++#define DDRSS0_PHY_1258_DATA 0x00000000
++#define DDRSS0_PHY_1259_DATA 0x00000000
++#define DDRSS0_PHY_1260_DATA 0x00000000
++#define DDRSS0_PHY_1261_DATA 0x00000000
++#define DDRSS0_PHY_1262_DATA 0x00000000
++#define DDRSS0_PHY_1263_DATA 0x00000000
++#define DDRSS0_PHY_1264_DATA 0x00000000
++#define DDRSS0_PHY_1265_DATA 0x00000000
++#define DDRSS0_PHY_1266_DATA 0x00000000
++#define DDRSS0_PHY_1267_DATA 0x00000000
++#define DDRSS0_PHY_1268_DATA 0x00000000
++#define DDRSS0_PHY_1269_DATA 0x00000000
++#define DDRSS0_PHY_1270_DATA 0x00000000
++#define DDRSS0_PHY_1271_DATA 0x00000000
++#define DDRSS0_PHY_1272_DATA 0x00000000
++#define DDRSS0_PHY_1273_DATA 0x00000000
++#define DDRSS0_PHY_1274_DATA 0x00000000
++#define DDRSS0_PHY_1275_DATA 0x00000000
++#define DDRSS0_PHY_1276_DATA 0x00000000
++#define DDRSS0_PHY_1277_DATA 0x00000000
++#define DDRSS0_PHY_1278_DATA 0x00000000
++#define DDRSS0_PHY_1279_DATA 0x00000000
++#define DDRSS0_PHY_1280_DATA 0x00000000
++#define DDRSS0_PHY_1281_DATA 0x00010100
++#define DDRSS0_PHY_1282_DATA 0x00000000
++#define DDRSS0_PHY_1283_DATA 0x00000000
++#define DDRSS0_PHY_1284_DATA 0x00050000
++#define DDRSS0_PHY_1285_DATA 0x04000000
++#define DDRSS0_PHY_1286_DATA 0x00000055
++#define DDRSS0_PHY_1287_DATA 0x00000000
++#define DDRSS0_PHY_1288_DATA 0x00000000
++#define DDRSS0_PHY_1289_DATA 0x00000000
++#define DDRSS0_PHY_1290_DATA 0x00000000
++#define DDRSS0_PHY_1291_DATA 0x00002001
++#define DDRSS0_PHY_1292_DATA 0x0000400F
++#define DDRSS0_PHY_1293_DATA 0x50020028
++#define DDRSS0_PHY_1294_DATA 0x01010000
++#define DDRSS0_PHY_1295_DATA 0x80080001
++#define DDRSS0_PHY_1296_DATA 0x10200000
++#define DDRSS0_PHY_1297_DATA 0x00000008
++#define DDRSS0_PHY_1298_DATA 0x00000000
++#define DDRSS0_PHY_1299_DATA 0x01090E00
++#define DDRSS0_PHY_1300_DATA 0x00040101
++#define DDRSS0_PHY_1301_DATA 0x0000010F
++#define DDRSS0_PHY_1302_DATA 0x00000000
++#define DDRSS0_PHY_1303_DATA 0x00000064
++#define DDRSS0_PHY_1304_DATA 0x00000000
++#define DDRSS0_PHY_1305_DATA 0x01010000
++#define DDRSS0_PHY_1306_DATA 0x01080402
++#define DDRSS0_PHY_1307_DATA 0x01200F02
++#define DDRSS0_PHY_1308_DATA 0x00194280
++#define DDRSS0_PHY_1309_DATA 0x00000004
++#define DDRSS0_PHY_1310_DATA 0x00042000
++#define DDRSS0_PHY_1311_DATA 0x00000000
++#define DDRSS0_PHY_1312_DATA 0x00000000
++#define DDRSS0_PHY_1313_DATA 0x00000000
++#define DDRSS0_PHY_1314_DATA 0x00000000
++#define DDRSS0_PHY_1315_DATA 0x00000000
++#define DDRSS0_PHY_1316_DATA 0x00000000
++#define DDRSS0_PHY_1317_DATA 0x01000000
++#define DDRSS0_PHY_1318_DATA 0x00000705
++#define DDRSS0_PHY_1319_DATA 0x00000054
++#define DDRSS0_PHY_1320_DATA 0x00030820
++#define DDRSS0_PHY_1321_DATA 0x00010820
++#define DDRSS0_PHY_1322_DATA 0x00010820
++#define DDRSS0_PHY_1323_DATA 0x00010820
++#define DDRSS0_PHY_1324_DATA 0x00010820
++#define DDRSS0_PHY_1325_DATA 0x00010820
++#define DDRSS0_PHY_1326_DATA 0x00010820
++#define DDRSS0_PHY_1327_DATA 0x00010820
++#define DDRSS0_PHY_1328_DATA 0x00010820
++#define DDRSS0_PHY_1329_DATA 0x00000000
++#define DDRSS0_PHY_1330_DATA 0x00000074
++#define DDRSS0_PHY_1331_DATA 0x00000400
++#define DDRSS0_PHY_1332_DATA 0x00000108
++#define DDRSS0_PHY_1333_DATA 0x00000000
++#define DDRSS0_PHY_1334_DATA 0x00000000
++#define DDRSS0_PHY_1335_DATA 0x00000000
++#define DDRSS0_PHY_1336_DATA 0x00000000
++#define DDRSS0_PHY_1337_DATA 0x00000000
++#define DDRSS0_PHY_1338_DATA 0x03000000
++#define DDRSS0_PHY_1339_DATA 0x00000000
++#define DDRSS0_PHY_1340_DATA 0x00000000
++#define DDRSS0_PHY_1341_DATA 0x00000000
++#define DDRSS0_PHY_1342_DATA 0x04102006
++#define DDRSS0_PHY_1343_DATA 0x00041020
++#define DDRSS0_PHY_1344_DATA 0x01C98C98
++#define DDRSS0_PHY_1345_DATA 0x3F400000
++#define DDRSS0_PHY_1346_DATA 0x3F3F1F3F
++#define DDRSS0_PHY_1347_DATA 0x0000001F
++#define DDRSS0_PHY_1348_DATA 0x00000000
++#define DDRSS0_PHY_1349_DATA 0x00000000
++#define DDRSS0_PHY_1350_DATA 0x00000000
++#define DDRSS0_PHY_1351_DATA 0x00010000
++#define DDRSS0_PHY_1352_DATA 0x00000000
++#define DDRSS0_PHY_1353_DATA 0x00000000
++#define DDRSS0_PHY_1354_DATA 0x00000000
++#define DDRSS0_PHY_1355_DATA 0x00000000
++#define DDRSS0_PHY_1356_DATA 0x76543210
++#define DDRSS0_PHY_1357_DATA 0x00010198
++#define DDRSS0_PHY_1358_DATA 0x00000000
++#define DDRSS0_PHY_1359_DATA 0x00000000
++#define DDRSS0_PHY_1360_DATA 0x00000000
++#define DDRSS0_PHY_1361_DATA 0x00040700
++#define DDRSS0_PHY_1362_DATA 0x00000000
++#define DDRSS0_PHY_1363_DATA 0x00000000
++#define DDRSS0_PHY_1364_DATA 0x00000000
++#define DDRSS0_PHY_1365_DATA 0x00000000
++#define DDRSS0_PHY_1366_DATA 0x00000000
++#define DDRSS0_PHY_1367_DATA 0x00000002
++#define DDRSS0_PHY_1368_DATA 0x00000000
++#define DDRSS0_PHY_1369_DATA 0x00000000
++#define DDRSS0_PHY_1370_DATA 0x00000000
++#define DDRSS0_PHY_1371_DATA 0x00000000
++#define DDRSS0_PHY_1372_DATA 0x00000000
++#define DDRSS0_PHY_1373_DATA 0x00000000
++#define DDRSS0_PHY_1374_DATA 0x00080000
++#define DDRSS0_PHY_1375_DATA 0x000007FF
++#define DDRSS0_PHY_1376_DATA 0x00000000
++#define DDRSS0_PHY_1377_DATA 0x00000000
++#define DDRSS0_PHY_1378_DATA 0x00000000
++#define DDRSS0_PHY_1379_DATA 0x00000000
++#define DDRSS0_PHY_1380_DATA 0x00000000
++#define DDRSS0_PHY_1381_DATA 0x00000000
++#define DDRSS0_PHY_1382_DATA 0x000FFFFF
++#define DDRSS0_PHY_1383_DATA 0x000FFFFF
++#define DDRSS0_PHY_1384_DATA 0x0000FFFF
++#define DDRSS0_PHY_1385_DATA 0xFFFFFFF0
++#define DDRSS0_PHY_1386_DATA 0x030FFFFF
++#define DDRSS0_PHY_1387_DATA 0x01FFFFFF
++#define DDRSS0_PHY_1388_DATA 0x0000FFFF
++#define DDRSS0_PHY_1389_DATA 0x00000000
++#define DDRSS0_PHY_1390_DATA 0x00000000
++#define DDRSS0_PHY_1391_DATA 0x00000000
++#define DDRSS0_PHY_1392_DATA 0x00000000
++#define DDRSS0_PHY_1393_DATA 0x0001F7C0
++#define DDRSS0_PHY_1394_DATA 0x00000003
++#define DDRSS0_PHY_1395_DATA 0x00000000
++#define DDRSS0_PHY_1396_DATA 0x00001142
++#define DDRSS0_PHY_1397_DATA 0x040207AB
++#define DDRSS0_PHY_1398_DATA 0x01000080
++#define DDRSS0_PHY_1399_DATA 0x03900390
++#define DDRSS0_PHY_1400_DATA 0x03900390
++#define DDRSS0_PHY_1401_DATA 0x00000390
++#define DDRSS0_PHY_1402_DATA 0x00000390
++#define DDRSS0_PHY_1403_DATA 0x00000390
++#define DDRSS0_PHY_1404_DATA 0x00000390
++#define DDRSS0_PHY_1405_DATA 0x00000005
++#define DDRSS0_PHY_1406_DATA 0x01813FCC
++#define DDRSS0_PHY_1407_DATA 0x000000CC
++#define DDRSS0_PHY_1408_DATA 0x0C000DFF
++#define DDRSS0_PHY_1409_DATA 0x30000DFF
++#define DDRSS0_PHY_1410_DATA 0x3F0DFF11
++#define DDRSS0_PHY_1411_DATA 0x000100F0
++#define DDRSS0_PHY_1412_DATA 0x780DFFCC
++#define DDRSS0_PHY_1413_DATA 0x00007E31
++#define DDRSS0_PHY_1414_DATA 0x000CBF11
++#define DDRSS0_PHY_1415_DATA 0x01990010
++#define DDRSS0_PHY_1416_DATA 0x000CBF11
++#define DDRSS0_PHY_1417_DATA 0x01990010
++#define DDRSS0_PHY_1418_DATA 0x3F0DFF11
++#define DDRSS0_PHY_1419_DATA 0x00EF00F0
++#define DDRSS0_PHY_1420_DATA 0x3F0DFF11
++#define DDRSS0_PHY_1421_DATA 0x01FF00F0
++#define DDRSS0_PHY_1422_DATA 0x20040006
++
++#define DDRSS1_CTL_00_DATA 0x00000B00
++#define DDRSS1_CTL_01_DATA 0x00000000
++#define DDRSS1_CTL_02_DATA 0x00000000
++#define DDRSS1_CTL_03_DATA 0x00000000
++#define DDRSS1_CTL_04_DATA 0x00000000
++#define DDRSS1_CTL_05_DATA 0x00000000
++#define DDRSS1_CTL_06_DATA 0x00000000
++#define DDRSS1_CTL_07_DATA 0x00002AF8
++#define DDRSS1_CTL_08_DATA 0x0001ADAF
++#define DDRSS1_CTL_09_DATA 0x00000005
++#define DDRSS1_CTL_10_DATA 0x0000006E
++#define DDRSS1_CTL_11_DATA 0x000681C8
++#define DDRSS1_CTL_12_DATA 0x004111C9
++#define DDRSS1_CTL_13_DATA 0x00000005
++#define DDRSS1_CTL_14_DATA 0x000010A9
++#define DDRSS1_CTL_15_DATA 0x000681C8
++#define DDRSS1_CTL_16_DATA 0x004111C9
++#define DDRSS1_CTL_17_DATA 0x00000005
++#define DDRSS1_CTL_18_DATA 0x000010A9
++#define DDRSS1_CTL_19_DATA 0x01010000
++#define DDRSS1_CTL_20_DATA 0x02011001
++#define DDRSS1_CTL_21_DATA 0x02010000
++#define DDRSS1_CTL_22_DATA 0x00020100
++#define DDRSS1_CTL_23_DATA 0x0000000B
++#define DDRSS1_CTL_24_DATA 0x0000001C
++#define DDRSS1_CTL_25_DATA 0x00000000
++#define DDRSS1_CTL_26_DATA 0x00000000
++#define DDRSS1_CTL_27_DATA 0x03020200
++#define DDRSS1_CTL_28_DATA 0x00005656
++#define DDRSS1_CTL_29_DATA 0x00100000
++#define DDRSS1_CTL_30_DATA 0x00000000
++#define DDRSS1_CTL_31_DATA 0x00000000
++#define DDRSS1_CTL_32_DATA 0x00000000
++#define DDRSS1_CTL_33_DATA 0x00000000
++#define DDRSS1_CTL_34_DATA 0x040C0000
++#define DDRSS1_CTL_35_DATA 0x12481248
++#define DDRSS1_CTL_36_DATA 0x00050804
++#define DDRSS1_CTL_37_DATA 0x09040008
++#define DDRSS1_CTL_38_DATA 0x15000204
++#define DDRSS1_CTL_39_DATA 0x1760008B
++#define DDRSS1_CTL_40_DATA 0x1500422B
++#define DDRSS1_CTL_41_DATA 0x1760008B
++#define DDRSS1_CTL_42_DATA 0x2000422B
++#define DDRSS1_CTL_43_DATA 0x000A0A09
++#define DDRSS1_CTL_44_DATA 0x0400078C
++#define DDRSS1_CTL_45_DATA 0x1E161104
++#define DDRSS1_CTL_46_DATA 0x100124A4
++#define DDRSS1_CTL_47_DATA 0x1E161110
++#define DDRSS1_CTL_48_DATA 0x100124A4
++#define DDRSS1_CTL_49_DATA 0x02030410
++#define DDRSS1_CTL_50_DATA 0x2C060500
++#define DDRSS1_CTL_51_DATA 0x08292C29
++#define DDRSS1_CTL_52_DATA 0x14000E0A
++#define DDRSS1_CTL_53_DATA 0x04010A0A
++#define DDRSS1_CTL_54_DATA 0x01010004
++#define DDRSS1_CTL_55_DATA 0x0454540A
++#define DDRSS1_CTL_56_DATA 0x04313104
++#define DDRSS1_CTL_57_DATA 0x00003131
++#define DDRSS1_CTL_58_DATA 0x00010100
++#define DDRSS1_CTL_59_DATA 0x03010000
++#define DDRSS1_CTL_60_DATA 0x00001008
++#define DDRSS1_CTL_61_DATA 0x000000CE
++#define DDRSS1_CTL_62_DATA 0x00000256
++#define DDRSS1_CTL_63_DATA 0x0000207C
++#define DDRSS1_CTL_64_DATA 0x00000256
++#define DDRSS1_CTL_65_DATA 0x0000207C
++#define DDRSS1_CTL_66_DATA 0x00000005
++#define DDRSS1_CTL_67_DATA 0x00040000
++#define DDRSS1_CTL_68_DATA 0x00950012
++#define DDRSS1_CTL_69_DATA 0x00950408
++#define DDRSS1_CTL_70_DATA 0x00400408
++#define DDRSS1_CTL_71_DATA 0x00120103
++#define DDRSS1_CTL_72_DATA 0x00100005
++#define DDRSS1_CTL_73_DATA 0x330C0010
++#define DDRSS1_CTL_74_DATA 0x05050133
++#define DDRSS1_CTL_75_DATA 0x0401030A
++#define DDRSS1_CTL_76_DATA 0x041E100B
++#define DDRSS1_CTL_77_DATA 0x100B0401
++#define DDRSS1_CTL_78_DATA 0x0001041E
++#define DDRSS1_CTL_79_DATA 0x00100010
++#define DDRSS1_CTL_80_DATA 0x02660266
++#define DDRSS1_CTL_81_DATA 0x02660266
++#define DDRSS1_CTL_82_DATA 0x03050505
++#define DDRSS1_CTL_83_DATA 0x03010303
++#define DDRSS1_CTL_84_DATA 0x200B100B
++#define DDRSS1_CTL_85_DATA 0x04041004
++#define DDRSS1_CTL_86_DATA 0x200B100B
++#define DDRSS1_CTL_87_DATA 0x04041004
++#define DDRSS1_CTL_88_DATA 0x03010000
++#define DDRSS1_CTL_89_DATA 0x00010000
++#define DDRSS1_CTL_90_DATA 0x00000000
++#define DDRSS1_CTL_91_DATA 0x00000000
++#define DDRSS1_CTL_92_DATA 0x01000000
++#define DDRSS1_CTL_93_DATA 0x80104002
++#define DDRSS1_CTL_94_DATA 0x00000000
++#define DDRSS1_CTL_95_DATA 0x00040005
++#define DDRSS1_CTL_96_DATA 0x00000000
++#define DDRSS1_CTL_97_DATA 0x00050000
++#define DDRSS1_CTL_98_DATA 0x00000004
++#define DDRSS1_CTL_99_DATA 0x00000000
++#define DDRSS1_CTL_100_DATA 0x00040005
++#define DDRSS1_CTL_101_DATA 0x00000000
++#define DDRSS1_CTL_102_DATA 0x00003380
++#define DDRSS1_CTL_103_DATA 0x00003380
++#define DDRSS1_CTL_104_DATA 0x00003380
++#define DDRSS1_CTL_105_DATA 0x00003380
++#define DDRSS1_CTL_106_DATA 0x00003380
++#define DDRSS1_CTL_107_DATA 0x00000000
++#define DDRSS1_CTL_108_DATA 0x000005A2
++#define DDRSS1_CTL_109_DATA 0x00081F00
++#define DDRSS1_CTL_110_DATA 0x00081F00
++#define DDRSS1_CTL_111_DATA 0x00081F00
++#define DDRSS1_CTL_112_DATA 0x00081F00
++#define DDRSS1_CTL_113_DATA 0x00081F00
++#define DDRSS1_CTL_114_DATA 0x00000000
++#define DDRSS1_CTL_115_DATA 0x0000E364
++#define DDRSS1_CTL_116_DATA 0x00081F00
++#define DDRSS1_CTL_117_DATA 0x00081F00
++#define DDRSS1_CTL_118_DATA 0x00081F00
++#define DDRSS1_CTL_119_DATA 0x00081F00
++#define DDRSS1_CTL_120_DATA 0x00081F00
++#define DDRSS1_CTL_121_DATA 0x00000000
++#define DDRSS1_CTL_122_DATA 0x0000E364
++#define DDRSS1_CTL_123_DATA 0x00000000
++#define DDRSS1_CTL_124_DATA 0x00000000
++#define DDRSS1_CTL_125_DATA 0x00000000
++#define DDRSS1_CTL_126_DATA 0x00000000
++#define DDRSS1_CTL_127_DATA 0x00000000
++#define DDRSS1_CTL_128_DATA 0x00000000
++#define DDRSS1_CTL_129_DATA 0x00000000
++#define DDRSS1_CTL_130_DATA 0x00000000
++#define DDRSS1_CTL_131_DATA 0x0B030500
++#define DDRSS1_CTL_132_DATA 0x00040B04
++#define DDRSS1_CTL_133_DATA 0x0A090000
++#define DDRSS1_CTL_134_DATA 0x0A090701
++#define DDRSS1_CTL_135_DATA 0x0900000E
++#define DDRSS1_CTL_136_DATA 0x0907010A
++#define DDRSS1_CTL_137_DATA 0x00000E0A
++#define DDRSS1_CTL_138_DATA 0x07010A09
++#define DDRSS1_CTL_139_DATA 0x000E0A09
++#define DDRSS1_CTL_140_DATA 0x07000401
++#define DDRSS1_CTL_141_DATA 0x00000000
++#define DDRSS1_CTL_142_DATA 0x00000000
++#define DDRSS1_CTL_143_DATA 0x00000000
++#define DDRSS1_CTL_144_DATA 0x00000000
++#define DDRSS1_CTL_145_DATA 0x00000000
++#define DDRSS1_CTL_146_DATA 0x00000000
++#define DDRSS1_CTL_147_DATA 0x00000000
++#define DDRSS1_CTL_148_DATA 0x08080000
++#define DDRSS1_CTL_149_DATA 0x01000000
++#define DDRSS1_CTL_150_DATA 0x800000C0
++#define DDRSS1_CTL_151_DATA 0x800000C0
++#define DDRSS1_CTL_152_DATA 0x800000C0
++#define DDRSS1_CTL_153_DATA 0x00000000
++#define DDRSS1_CTL_154_DATA 0x00001500
++#define DDRSS1_CTL_155_DATA 0x00000000
++#define DDRSS1_CTL_156_DATA 0x00000001
++#define DDRSS1_CTL_157_DATA 0x00000002
++#define DDRSS1_CTL_158_DATA 0x0000100E
++#define DDRSS1_CTL_159_DATA 0x00000000
++#define DDRSS1_CTL_160_DATA 0x00000000
++#define DDRSS1_CTL_161_DATA 0x00000000
++#define DDRSS1_CTL_162_DATA 0x00000000
++#define DDRSS1_CTL_163_DATA 0x00000000
++#define DDRSS1_CTL_164_DATA 0x000B0000
++#define DDRSS1_CTL_165_DATA 0x000E0006
++#define DDRSS1_CTL_166_DATA 0x000E0404
++#define DDRSS1_CTL_167_DATA 0x00D601AB
++#define DDRSS1_CTL_168_DATA 0x10100216
++#define DDRSS1_CTL_169_DATA 0x01AB0216
++#define DDRSS1_CTL_170_DATA 0x021600D6
++#define DDRSS1_CTL_171_DATA 0x02161010
++#define DDRSS1_CTL_172_DATA 0x00000000
++#define DDRSS1_CTL_173_DATA 0x00000000
++#define DDRSS1_CTL_174_DATA 0x00000000
++#define DDRSS1_CTL_175_DATA 0x3FF40084
++#define DDRSS1_CTL_176_DATA 0x33003FF4
++#define DDRSS1_CTL_177_DATA 0x00003333
++#define DDRSS1_CTL_178_DATA 0x36000000
++#define DDRSS1_CTL_179_DATA 0x27270036
++#define DDRSS1_CTL_180_DATA 0x0F0F0000
++#define DDRSS1_CTL_181_DATA 0x16000000
++#define DDRSS1_CTL_182_DATA 0x00841616
++#define DDRSS1_CTL_183_DATA 0x3FF43FF4
++#define DDRSS1_CTL_184_DATA 0x33333300
++#define DDRSS1_CTL_185_DATA 0x00000000
++#define DDRSS1_CTL_186_DATA 0x00363600
++#define DDRSS1_CTL_187_DATA 0x00002727
++#define DDRSS1_CTL_188_DATA 0x00000F0F
++#define DDRSS1_CTL_189_DATA 0x16161600
++#define DDRSS1_CTL_190_DATA 0x00000020
++#define DDRSS1_CTL_191_DATA 0x00000000
++#define DDRSS1_CTL_192_DATA 0x00000001
++#define DDRSS1_CTL_193_DATA 0x00000000
++#define DDRSS1_CTL_194_DATA 0x01000000
++#define DDRSS1_CTL_195_DATA 0x00000001
++#define DDRSS1_CTL_196_DATA 0x00000000
++#define DDRSS1_CTL_197_DATA 0x00000000
++#define DDRSS1_CTL_198_DATA 0x00000000
++#define DDRSS1_CTL_199_DATA 0x00000000
++#define DDRSS1_CTL_200_DATA 0x00000000
++#define DDRSS1_CTL_201_DATA 0x00000000
++#define DDRSS1_CTL_202_DATA 0x00000000
++#define DDRSS1_CTL_203_DATA 0x00000000
++#define DDRSS1_CTL_204_DATA 0x00000000
++#define DDRSS1_CTL_205_DATA 0x00000000
++#define DDRSS1_CTL_206_DATA 0x02000000
++#define DDRSS1_CTL_207_DATA 0x01080101
++#define DDRSS1_CTL_208_DATA 0x00000000
++#define DDRSS1_CTL_209_DATA 0x00000000
++#define DDRSS1_CTL_210_DATA 0x00000000
++#define DDRSS1_CTL_211_DATA 0x00000000
++#define DDRSS1_CTL_212_DATA 0x00000000
++#define DDRSS1_CTL_213_DATA 0x00000000
++#define DDRSS1_CTL_214_DATA 0x00000000
++#define DDRSS1_CTL_215_DATA 0x00000000
++#define DDRSS1_CTL_216_DATA 0x00000000
++#define DDRSS1_CTL_217_DATA 0x00000000
++#define DDRSS1_CTL_218_DATA 0x00000000
++#define DDRSS1_CTL_219_DATA 0x00000000
++#define DDRSS1_CTL_220_DATA 0x00000000
++#define DDRSS1_CTL_221_DATA 0x00000000
++#define DDRSS1_CTL_222_DATA 0x00001000
++#define DDRSS1_CTL_223_DATA 0x006403E8
++#define DDRSS1_CTL_224_DATA 0x00000000
++#define DDRSS1_CTL_225_DATA 0x00000000
++#define DDRSS1_CTL_226_DATA 0x00000000
++#define DDRSS1_CTL_227_DATA 0x15110000
++#define DDRSS1_CTL_228_DATA 0x00040C18
++#define DDRSS1_CTL_229_DATA 0xF000C000
++#define DDRSS1_CTL_230_DATA 0x0000F000
++#define DDRSS1_CTL_231_DATA 0x00000000
++#define DDRSS1_CTL_232_DATA 0x00000000
++#define DDRSS1_CTL_233_DATA 0xC0000000
++#define DDRSS1_CTL_234_DATA 0xF000F000
++#define DDRSS1_CTL_235_DATA 0x00000000
++#define DDRSS1_CTL_236_DATA 0x00000000
++#define DDRSS1_CTL_237_DATA 0x00000000
++#define DDRSS1_CTL_238_DATA 0xF000C000
++#define DDRSS1_CTL_239_DATA 0x0000F000
++#define DDRSS1_CTL_240_DATA 0x00000000
++#define DDRSS1_CTL_241_DATA 0x00000000
++#define DDRSS1_CTL_242_DATA 0x00030000
++#define DDRSS1_CTL_243_DATA 0x00000000
++#define DDRSS1_CTL_244_DATA 0x00000000
++#define DDRSS1_CTL_245_DATA 0x00000000
++#define DDRSS1_CTL_246_DATA 0x00000000
++#define DDRSS1_CTL_247_DATA 0x00000000
++#define DDRSS1_CTL_248_DATA 0x00000000
++#define DDRSS1_CTL_249_DATA 0x00000000
++#define DDRSS1_CTL_250_DATA 0x00000000
++#define DDRSS1_CTL_251_DATA 0x00000000
++#define DDRSS1_CTL_252_DATA 0x00000000
++#define DDRSS1_CTL_253_DATA 0x00000000
++#define DDRSS1_CTL_254_DATA 0x00000000
++#define DDRSS1_CTL_255_DATA 0x00000000
++#define DDRSS1_CTL_256_DATA 0x00000000
++#define DDRSS1_CTL_257_DATA 0x01000200
++#define DDRSS1_CTL_258_DATA 0x00370040
++#define DDRSS1_CTL_259_DATA 0x00020008
++#define DDRSS1_CTL_260_DATA 0x00400100
++#define DDRSS1_CTL_261_DATA 0x00400855
++#define DDRSS1_CTL_262_DATA 0x01000200
++#define DDRSS1_CTL_263_DATA 0x08550040
++#define DDRSS1_CTL_264_DATA 0x00000040
++#define DDRSS1_CTL_265_DATA 0x006B0003
++#define DDRSS1_CTL_266_DATA 0x0100006B
++#define DDRSS1_CTL_267_DATA 0x01010101
++#define DDRSS1_CTL_268_DATA 0x01010000
++#define DDRSS1_CTL_269_DATA 0x00000202
++#define DDRSS1_CTL_270_DATA 0x00000FFF
++#define DDRSS1_CTL_271_DATA 0xFFFFFFFF
++#define DDRSS1_CTL_272_DATA 0x01FF0000
++#define DDRSS1_CTL_273_DATA 0x000001FF
++#define DDRSS1_CTL_274_DATA 0x0FFF0B00
++#define DDRSS1_CTL_275_DATA 0x01010001
++#define DDRSS1_CTL_276_DATA 0x01010101
++#define DDRSS1_CTL_277_DATA 0x01180101
++#define DDRSS1_CTL_278_DATA 0x00010000
++#define DDRSS1_CTL_279_DATA 0x00000000
++#define DDRSS1_CTL_280_DATA 0x00000000
++#define DDRSS1_CTL_281_DATA 0x00000000
++#define DDRSS1_CTL_282_DATA 0x00000000
++#define DDRSS1_CTL_283_DATA 0x00000000
++#define DDRSS1_CTL_284_DATA 0x00000000
++#define DDRSS1_CTL_285_DATA 0x00000000
++#define DDRSS1_CTL_286_DATA 0x00040101
++#define DDRSS1_CTL_287_DATA 0x00000100
++#define DDRSS1_CTL_288_DATA 0x00000000
++#define DDRSS1_CTL_289_DATA 0x00000000
++#define DDRSS1_CTL_290_DATA 0x03030300
++#define DDRSS1_CTL_291_DATA 0x00000001
++#define DDRSS1_CTL_292_DATA 0x00000000
++#define DDRSS1_CTL_293_DATA 0x00000000
++#define DDRSS1_CTL_294_DATA 0x00000000
++#define DDRSS1_CTL_295_DATA 0x00000000
++#define DDRSS1_CTL_296_DATA 0x00000000
++#define DDRSS1_CTL_297_DATA 0x00000000
++#define DDRSS1_CTL_298_DATA 0x00000000
++#define DDRSS1_CTL_299_DATA 0x00000000
++#define DDRSS1_CTL_300_DATA 0x00000000
++#define DDRSS1_CTL_301_DATA 0x00000000
++#define DDRSS1_CTL_302_DATA 0x00000000
++#define DDRSS1_CTL_303_DATA 0x00000000
++#define DDRSS1_CTL_304_DATA 0x00000000
++#define DDRSS1_CTL_305_DATA 0x00000000
++#define DDRSS1_CTL_306_DATA 0x00000000
++#define DDRSS1_CTL_307_DATA 0x00000000
++#define DDRSS1_CTL_308_DATA 0x00000000
++#define DDRSS1_CTL_309_DATA 0x00000000
++#define DDRSS1_CTL_310_DATA 0x00000000
++#define DDRSS1_CTL_311_DATA 0x00000000
++#define DDRSS1_CTL_312_DATA 0x00000000
++#define DDRSS1_CTL_313_DATA 0x01000000
++#define DDRSS1_CTL_314_DATA 0x00020201
++#define DDRSS1_CTL_315_DATA 0x01000101
++#define DDRSS1_CTL_316_DATA 0x01010001
++#define DDRSS1_CTL_317_DATA 0x00010101
++#define DDRSS1_CTL_318_DATA 0x050A0A03
++#define DDRSS1_CTL_319_DATA 0x10081F1F
++#define DDRSS1_CTL_320_DATA 0x00090310
++#define DDRSS1_CTL_321_DATA 0x0B0C030F
++#define DDRSS1_CTL_322_DATA 0x0B0C0306
++#define DDRSS1_CTL_323_DATA 0x0C090006
++#define DDRSS1_CTL_324_DATA 0x0100000C
++#define DDRSS1_CTL_325_DATA 0x08040801
++#define DDRSS1_CTL_326_DATA 0x00000004
++#define DDRSS1_CTL_327_DATA 0x00000000
++#define DDRSS1_CTL_328_DATA 0x00010000
++#define DDRSS1_CTL_329_DATA 0x00280D00
++#define DDRSS1_CTL_330_DATA 0x00000001
++#define DDRSS1_CTL_331_DATA 0x00030001
++#define DDRSS1_CTL_332_DATA 0x00000000
++#define DDRSS1_CTL_333_DATA 0x00000000
++#define DDRSS1_CTL_334_DATA 0x00000000
++#define DDRSS1_CTL_335_DATA 0x00000000
++#define DDRSS1_CTL_336_DATA 0x00000000
++#define DDRSS1_CTL_337_DATA 0x00000000
++#define DDRSS1_CTL_338_DATA 0x00000000
++#define DDRSS1_CTL_339_DATA 0x00000000
++#define DDRSS1_CTL_340_DATA 0x01000000
++#define DDRSS1_CTL_341_DATA 0x00000001
++#define DDRSS1_CTL_342_DATA 0x00010100
++#define DDRSS1_CTL_343_DATA 0x03030000
++#define DDRSS1_CTL_344_DATA 0x00000000
++#define DDRSS1_CTL_345_DATA 0x00000000
++#define DDRSS1_CTL_346_DATA 0x00000000
++#define DDRSS1_CTL_347_DATA 0x00000000
++#define DDRSS1_CTL_348_DATA 0x00000000
++#define DDRSS1_CTL_349_DATA 0x00000000
++#define DDRSS1_CTL_350_DATA 0x00000000
++#define DDRSS1_CTL_351_DATA 0x00000000
++#define DDRSS1_CTL_352_DATA 0x00000000
++#define DDRSS1_CTL_353_DATA 0x00000000
++#define DDRSS1_CTL_354_DATA 0x00000000
++#define DDRSS1_CTL_355_DATA 0x00000000
++#define DDRSS1_CTL_356_DATA 0x00000000
++#define DDRSS1_CTL_357_DATA 0x00000000
++#define DDRSS1_CTL_358_DATA 0x00000000
++#define DDRSS1_CTL_359_DATA 0x00000000
++#define DDRSS1_CTL_360_DATA 0x000556AA
++#define DDRSS1_CTL_361_DATA 0x000AAAAA
++#define DDRSS1_CTL_362_DATA 0x000AA955
++#define DDRSS1_CTL_363_DATA 0x00055555
++#define DDRSS1_CTL_364_DATA 0x000B3133
++#define DDRSS1_CTL_365_DATA 0x0004CD33
++#define DDRSS1_CTL_366_DATA 0x0004CECC
++#define DDRSS1_CTL_367_DATA 0x000B32CC
++#define DDRSS1_CTL_368_DATA 0x00010300
++#define DDRSS1_CTL_369_DATA 0x03000100
++#define DDRSS1_CTL_370_DATA 0x00000000
++#define DDRSS1_CTL_371_DATA 0x00000000
++#define DDRSS1_CTL_372_DATA 0x00000000
++#define DDRSS1_CTL_373_DATA 0x00000000
++#define DDRSS1_CTL_374_DATA 0x00000000
++#define DDRSS1_CTL_375_DATA 0x00000000
++#define DDRSS1_CTL_376_DATA 0x00000000
++#define DDRSS1_CTL_377_DATA 0x00010000
++#define DDRSS1_CTL_378_DATA 0x00000404
++#define DDRSS1_CTL_379_DATA 0x00000000
++#define DDRSS1_CTL_380_DATA 0x00000000
++#define DDRSS1_CTL_381_DATA 0x00000000
++#define DDRSS1_CTL_382_DATA 0x00000000
++#define DDRSS1_CTL_383_DATA 0x00000000
++#define DDRSS1_CTL_384_DATA 0x00000000
++#define DDRSS1_CTL_385_DATA 0x00000000
++#define DDRSS1_CTL_386_DATA 0x00000000
++#define DDRSS1_CTL_387_DATA 0x3A3A1B00
++#define DDRSS1_CTL_388_DATA 0x000A0000
++#define DDRSS1_CTL_389_DATA 0x0000019C
++#define DDRSS1_CTL_390_DATA 0x00000200
++#define DDRSS1_CTL_391_DATA 0x00000200
++#define DDRSS1_CTL_392_DATA 0x00000200
++#define DDRSS1_CTL_393_DATA 0x00000200
++#define DDRSS1_CTL_394_DATA 0x000004D4
++#define DDRSS1_CTL_395_DATA 0x00001018
++#define DDRSS1_CTL_396_DATA 0x00000204
++#define DDRSS1_CTL_397_DATA 0x000040F8
++#define DDRSS1_CTL_398_DATA 0x00000200
++#define DDRSS1_CTL_399_DATA 0x00000200
++#define DDRSS1_CTL_400_DATA 0x00000200
++#define DDRSS1_CTL_401_DATA 0x00000200
++#define DDRSS1_CTL_402_DATA 0x0000C2E8
++#define DDRSS1_CTL_403_DATA 0x000289B0
++#define DDRSS1_CTL_404_DATA 0x00000E15
++#define DDRSS1_CTL_405_DATA 0x000040F8
++#define DDRSS1_CTL_406_DATA 0x00000200
++#define DDRSS1_CTL_407_DATA 0x00000200
++#define DDRSS1_CTL_408_DATA 0x00000200
++#define DDRSS1_CTL_409_DATA 0x00000200
++#define DDRSS1_CTL_410_DATA 0x0000C2E8
++#define DDRSS1_CTL_411_DATA 0x000289B0
++#define DDRSS1_CTL_412_DATA 0x02020E15
++#define DDRSS1_CTL_413_DATA 0x03030202
++#define DDRSS1_CTL_414_DATA 0x00000022
++#define DDRSS1_CTL_415_DATA 0x00000000
++#define DDRSS1_CTL_416_DATA 0x00000000
++#define DDRSS1_CTL_417_DATA 0x00001403
++#define DDRSS1_CTL_418_DATA 0x000007D0
++#define DDRSS1_CTL_419_DATA 0x00000000
++#define DDRSS1_CTL_420_DATA 0x00000000
++#define DDRSS1_CTL_421_DATA 0x00030000
++#define DDRSS1_CTL_422_DATA 0x0007001F
++#define DDRSS1_CTL_423_DATA 0x001B0033
++#define DDRSS1_CTL_424_DATA 0x001B0033
++#define DDRSS1_CTL_425_DATA 0x00000000
++#define DDRSS1_CTL_426_DATA 0x00000000
++#define DDRSS1_CTL_427_DATA 0x02000000
++#define DDRSS1_CTL_428_DATA 0x01000404
++#define DDRSS1_CTL_429_DATA 0x0B1E0B1E
++#define DDRSS1_CTL_430_DATA 0x00000105
++#define DDRSS1_CTL_431_DATA 0x00010101
++#define DDRSS1_CTL_432_DATA 0x00010101
++#define DDRSS1_CTL_433_DATA 0x00010001
++#define DDRSS1_CTL_434_DATA 0x00000101
++#define DDRSS1_CTL_435_DATA 0x02000201
++#define DDRSS1_CTL_436_DATA 0x02010000
++#define DDRSS1_CTL_437_DATA 0x00000200
++#define DDRSS1_CTL_438_DATA 0x28060000
++#define DDRSS1_CTL_439_DATA 0x00000128
++#define DDRSS1_CTL_440_DATA 0xFFFFFFFF
++#define DDRSS1_CTL_441_DATA 0xFFFFFFFF
++#define DDRSS1_CTL_442_DATA 0x00000000
++#define DDRSS1_CTL_443_DATA 0x00000000
++#define DDRSS1_CTL_444_DATA 0x00000000
++#define DDRSS1_CTL_445_DATA 0x00000000
++#define DDRSS1_CTL_446_DATA 0x00000000
++#define DDRSS1_CTL_447_DATA 0x00000000
++#define DDRSS1_CTL_448_DATA 0x00000000
++#define DDRSS1_CTL_449_DATA 0x00000000
++#define DDRSS1_CTL_450_DATA 0x00000000
++#define DDRSS1_CTL_451_DATA 0x00000000
++#define DDRSS1_CTL_452_DATA 0x00000000
++#define DDRSS1_CTL_453_DATA 0x00000000
++#define DDRSS1_CTL_454_DATA 0x00000000
++#define DDRSS1_CTL_455_DATA 0x00000000
++#define DDRSS1_CTL_456_DATA 0x00000000
++#define DDRSS1_CTL_457_DATA 0x00000000
++#define DDRSS1_CTL_458_DATA 0x00000000
++
++#define DDRSS1_PI_00_DATA 0x00000B00
++#define DDRSS1_PI_01_DATA 0x00000000
++#define DDRSS1_PI_02_DATA 0x00000000
++#define DDRSS1_PI_03_DATA 0x00000000
++#define DDRSS1_PI_04_DATA 0x00000000
++#define DDRSS1_PI_05_DATA 0x00000101
++#define DDRSS1_PI_06_DATA 0x00640000
++#define DDRSS1_PI_07_DATA 0x00000001
++#define DDRSS1_PI_08_DATA 0x00000000
++#define DDRSS1_PI_09_DATA 0x00000000
++#define DDRSS1_PI_10_DATA 0x00000000
++#define DDRSS1_PI_11_DATA 0x00000000
++#define DDRSS1_PI_12_DATA 0x00000003
++#define DDRSS1_PI_13_DATA 0x00010001
++#define DDRSS1_PI_14_DATA 0x08000005
++#define DDRSS1_PI_15_DATA 0x00000103
++#define DDRSS1_PI_16_DATA 0x00000005
++#define DDRSS1_PI_17_DATA 0x00000000
++#define DDRSS1_PI_18_DATA 0x00000000
++#define DDRSS1_PI_19_DATA 0x00000000
++#define DDRSS1_PI_20_DATA 0x00000000
++#define DDRSS1_PI_21_DATA 0x00000000
++#define DDRSS1_PI_22_DATA 0x00000000
++#define DDRSS1_PI_23_DATA 0x00000000
++#define DDRSS1_PI_24_DATA 0x00000000
++#define DDRSS1_PI_25_DATA 0x00000000
++#define DDRSS1_PI_26_DATA 0x00010100
++#define DDRSS1_PI_27_DATA 0x00280A00
++#define DDRSS1_PI_28_DATA 0x00000000
++#define DDRSS1_PI_29_DATA 0x05000000
++#define DDRSS1_PI_30_DATA 0x00003200
++#define DDRSS1_PI_31_DATA 0x00000000
++#define DDRSS1_PI_32_DATA 0x00000000
++#define DDRSS1_PI_33_DATA 0x01010102
++#define DDRSS1_PI_34_DATA 0x00000000
++#define DDRSS1_PI_35_DATA 0x000000AA
++#define DDRSS1_PI_36_DATA 0x00000055
++#define DDRSS1_PI_37_DATA 0x000000B5
++#define DDRSS1_PI_38_DATA 0x0000004A
++#define DDRSS1_PI_39_DATA 0x00000056
++#define DDRSS1_PI_40_DATA 0x000000A9
++#define DDRSS1_PI_41_DATA 0x000000A9
++#define DDRSS1_PI_42_DATA 0x000000B5
++#define DDRSS1_PI_43_DATA 0x00000000
++#define DDRSS1_PI_44_DATA 0x00000000
++#define DDRSS1_PI_45_DATA 0x00050500
++#define DDRSS1_PI_46_DATA 0x0000001B
++#define DDRSS1_PI_47_DATA 0x000007D0
++#define DDRSS1_PI_48_DATA 0x00000300
++#define DDRSS1_PI_49_DATA 0x00000000
++#define DDRSS1_PI_50_DATA 0x00000000
++#define DDRSS1_PI_51_DATA 0x01000000
++#define DDRSS1_PI_52_DATA 0x00010101
++#define DDRSS1_PI_53_DATA 0x00000000
++#define DDRSS1_PI_54_DATA 0x00030000
++#define DDRSS1_PI_55_DATA 0x05000000
++#define DDRSS1_PI_56_DATA 0x00000017
++#define DDRSS1_PI_57_DATA 0x00000000
++#define DDRSS1_PI_58_DATA 0x00000000
++#define DDRSS1_PI_59_DATA 0x00000000
++#define DDRSS1_PI_60_DATA 0x0A0A140A
++#define DDRSS1_PI_61_DATA 0x10020201
++#define DDRSS1_PI_62_DATA 0x00020805
++#define DDRSS1_PI_63_DATA 0x01000404
++#define DDRSS1_PI_64_DATA 0x00000000
++#define DDRSS1_PI_65_DATA 0x00000000
++#define DDRSS1_PI_66_DATA 0x00000100
++#define DDRSS1_PI_67_DATA 0x00020205
++#define DDRSS1_PI_68_DATA 0x00340000
++#define DDRSS1_PI_69_DATA 0x00000000
++#define DDRSS1_PI_70_DATA 0x00000000
++#define DDRSS1_PI_71_DATA 0x0000FFFF
++#define DDRSS1_PI_72_DATA 0x01000000
++#define DDRSS1_PI_73_DATA 0x00080100
++#define DDRSS1_PI_74_DATA 0x02000200
++#define DDRSS1_PI_75_DATA 0x01000100
++#define DDRSS1_PI_76_DATA 0x01000000
++#define DDRSS1_PI_77_DATA 0x02000200
++#define DDRSS1_PI_78_DATA 0x00000200
++#define DDRSS1_PI_79_DATA 0x00000000
++#define DDRSS1_PI_80_DATA 0x00000000
++#define DDRSS1_PI_81_DATA 0x00000000
++#define DDRSS1_PI_82_DATA 0x00000000
++#define DDRSS1_PI_83_DATA 0x00000000
++#define DDRSS1_PI_84_DATA 0x00000000
++#define DDRSS1_PI_85_DATA 0x00000000
++#define DDRSS1_PI_86_DATA 0x00000000
++#define DDRSS1_PI_87_DATA 0x00000000
++#define DDRSS1_PI_88_DATA 0x00000000
++#define DDRSS1_PI_89_DATA 0x00000000
++#define DDRSS1_PI_90_DATA 0x00000000
++#define DDRSS1_PI_91_DATA 0x00000400
++#define DDRSS1_PI_92_DATA 0x02010000
++#define DDRSS1_PI_93_DATA 0x00080003
++#define DDRSS1_PI_94_DATA 0x00080000
++#define DDRSS1_PI_95_DATA 0x00000001
++#define DDRSS1_PI_96_DATA 0x00000000
++#define DDRSS1_PI_97_DATA 0x0000AA00
++#define DDRSS1_PI_98_DATA 0x00000000
++#define DDRSS1_PI_99_DATA 0x00000000
++#define DDRSS1_PI_100_DATA 0x00010000
++#define DDRSS1_PI_101_DATA 0x00000000
++#define DDRSS1_PI_102_DATA 0x00000000
++#define DDRSS1_PI_103_DATA 0x00000000
++#define DDRSS1_PI_104_DATA 0x00000000
++#define DDRSS1_PI_105_DATA 0x00000000
++#define DDRSS1_PI_106_DATA 0x00000000
++#define DDRSS1_PI_107_DATA 0x00000000
++#define DDRSS1_PI_108_DATA 0x00000000
++#define DDRSS1_PI_109_DATA 0x00000000
++#define DDRSS1_PI_110_DATA 0x00000000
++#define DDRSS1_PI_111_DATA 0x00000000
++#define DDRSS1_PI_112_DATA 0x00000000
++#define DDRSS1_PI_113_DATA 0x00000000
++#define DDRSS1_PI_114_DATA 0x00000000
++#define DDRSS1_PI_115_DATA 0x00000000
++#define DDRSS1_PI_116_DATA 0x00000000
++#define DDRSS1_PI_117_DATA 0x00000000
++#define DDRSS1_PI_118_DATA 0x00000000
++#define DDRSS1_PI_119_DATA 0x00000000
++#define DDRSS1_PI_120_DATA 0x00000000
++#define DDRSS1_PI_121_DATA 0x00000000
++#define DDRSS1_PI_122_DATA 0x00000000
++#define DDRSS1_PI_123_DATA 0x00000000
++#define DDRSS1_PI_124_DATA 0x00000000
++#define DDRSS1_PI_125_DATA 0x00000008
++#define DDRSS1_PI_126_DATA 0x00000000
++#define DDRSS1_PI_127_DATA 0x00000000
++#define DDRSS1_PI_128_DATA 0x00000000
++#define DDRSS1_PI_129_DATA 0x00000000
++#define DDRSS1_PI_130_DATA 0x00000000
++#define DDRSS1_PI_131_DATA 0x00000000
++#define DDRSS1_PI_132_DATA 0x00000000
++#define DDRSS1_PI_133_DATA 0x00000000
++#define DDRSS1_PI_134_DATA 0x00000002
++#define DDRSS1_PI_135_DATA 0x00000000
++#define DDRSS1_PI_136_DATA 0x00000000
++#define DDRSS1_PI_137_DATA 0x0000000A
++#define DDRSS1_PI_138_DATA 0x00000019
++#define DDRSS1_PI_139_DATA 0x00000100
++#define DDRSS1_PI_140_DATA 0x00000000
++#define DDRSS1_PI_141_DATA 0x00000000
++#define DDRSS1_PI_142_DATA 0x00000000
++#define DDRSS1_PI_143_DATA 0x00000000
++#define DDRSS1_PI_144_DATA 0x01000000
++#define DDRSS1_PI_145_DATA 0x00010003
++#define DDRSS1_PI_146_DATA 0x02000101
++#define DDRSS1_PI_147_DATA 0x01030001
++#define DDRSS1_PI_148_DATA 0x00010400
++#define DDRSS1_PI_149_DATA 0x06000105
++#define DDRSS1_PI_150_DATA 0x01070001
++#define DDRSS1_PI_151_DATA 0x00000000
++#define DDRSS1_PI_152_DATA 0x00000000
++#define DDRSS1_PI_153_DATA 0x00000000
++#define DDRSS1_PI_154_DATA 0x00010001
++#define DDRSS1_PI_155_DATA 0x00000000
++#define DDRSS1_PI_156_DATA 0x00000000
++#define DDRSS1_PI_157_DATA 0x00000000
++#define DDRSS1_PI_158_DATA 0x00000000
++#define DDRSS1_PI_159_DATA 0x00000401
++#define DDRSS1_PI_160_DATA 0x00000000
++#define DDRSS1_PI_161_DATA 0x00010000
++#define DDRSS1_PI_162_DATA 0x00000000
++#define DDRSS1_PI_163_DATA 0x2B2B0200
++#define DDRSS1_PI_164_DATA 0x00000034
++#define DDRSS1_PI_165_DATA 0x00000064
++#define DDRSS1_PI_166_DATA 0x00020064
++#define DDRSS1_PI_167_DATA 0x02000200
++#define DDRSS1_PI_168_DATA 0x48120C04
++#define DDRSS1_PI_169_DATA 0x00104812
++#define DDRSS1_PI_170_DATA 0x000000CE
++#define DDRSS1_PI_171_DATA 0x00000256
++#define DDRSS1_PI_172_DATA 0x0000207C
++#define DDRSS1_PI_173_DATA 0x00000256
++#define DDRSS1_PI_174_DATA 0x0400207C
++#define DDRSS1_PI_175_DATA 0x01010404
++#define DDRSS1_PI_176_DATA 0x00001500
++#define DDRSS1_PI_177_DATA 0x00150015
++#define DDRSS1_PI_178_DATA 0x01000100
++#define DDRSS1_PI_179_DATA 0x00000100
++#define DDRSS1_PI_180_DATA 0x00000000
++#define DDRSS1_PI_181_DATA 0x01010101
++#define DDRSS1_PI_182_DATA 0x00000000
++#define DDRSS1_PI_183_DATA 0x00000000
++#define DDRSS1_PI_184_DATA 0x00000000
++#define DDRSS1_PI_185_DATA 0x15040000
++#define DDRSS1_PI_186_DATA 0x0E0E0215
++#define DDRSS1_PI_187_DATA 0x00040402
++#define DDRSS1_PI_188_DATA 0x000D0035
++#define DDRSS1_PI_189_DATA 0x00218049
++#define DDRSS1_PI_190_DATA 0x00218049
++#define DDRSS1_PI_191_DATA 0x01000101
++#define DDRSS1_PI_192_DATA 0x0004000E
++#define DDRSS1_PI_193_DATA 0x00040216
++#define DDRSS1_PI_194_DATA 0x01000216
++#define DDRSS1_PI_195_DATA 0x000F000F
++#define DDRSS1_PI_196_DATA 0x02170100
++#define DDRSS1_PI_197_DATA 0x01000217
++#define DDRSS1_PI_198_DATA 0x02170217
++#define DDRSS1_PI_199_DATA 0x32103200
++#define DDRSS1_PI_200_DATA 0x01013210
++#define DDRSS1_PI_201_DATA 0x0A070601
++#define DDRSS1_PI_202_DATA 0x1F130A0D
++#define DDRSS1_PI_203_DATA 0x1F130A14
++#define DDRSS1_PI_204_DATA 0x0000C014
++#define DDRSS1_PI_205_DATA 0x00C01000
++#define DDRSS1_PI_206_DATA 0x00C01000
++#define DDRSS1_PI_207_DATA 0x00021000
++#define DDRSS1_PI_208_DATA 0x0024000E
++#define DDRSS1_PI_209_DATA 0x00240216
++#define DDRSS1_PI_210_DATA 0x00110216
++#define DDRSS1_PI_211_DATA 0x32000056
++#define DDRSS1_PI_212_DATA 0x00000301
++#define DDRSS1_PI_213_DATA 0x005B0036
++#define DDRSS1_PI_214_DATA 0x03013212
++#define DDRSS1_PI_215_DATA 0x00003600
++#define DDRSS1_PI_216_DATA 0x3212005B
++#define DDRSS1_PI_217_DATA 0x09000001
++#define DDRSS1_PI_218_DATA 0x06010504
++#define DDRSS1_PI_219_DATA 0x040006CA
++#define DDRSS1_PI_220_DATA 0x0A032001
++#define DDRSS1_PI_221_DATA 0x2C31110A
++#define DDRSS1_PI_222_DATA 0x00002918
++#define DDRSS1_PI_223_DATA 0x60010760
++#define DDRSS1_PI_224_DATA 0x1E202008
++#define DDRSS1_PI_225_DATA 0x2C311116
++#define DDRSS1_PI_226_DATA 0x00002918
++#define DDRSS1_PI_227_DATA 0x60010760
++#define DDRSS1_PI_228_DATA 0x1E202008
++#define DDRSS1_PI_229_DATA 0x00019C16
++#define DDRSS1_PI_230_DATA 0x00001018
++#define DDRSS1_PI_231_DATA 0x000040F8
++#define DDRSS1_PI_232_DATA 0x000289B0
++#define DDRSS1_PI_233_DATA 0x000040F8
++#define DDRSS1_PI_234_DATA 0x000289B0
++#define DDRSS1_PI_235_DATA 0x02660010
++#define DDRSS1_PI_236_DATA 0x03030266
++#define DDRSS1_PI_237_DATA 0x002AF803
++#define DDRSS1_PI_238_DATA 0x0001ADAF
++#define DDRSS1_PI_239_DATA 0x00000005
++#define DDRSS1_PI_240_DATA 0x0000006E
++#define DDRSS1_PI_241_DATA 0x00000010
++#define DDRSS1_PI_242_DATA 0x000681C8
++#define DDRSS1_PI_243_DATA 0x0001ADAF
++#define DDRSS1_PI_244_DATA 0x00000005
++#define DDRSS1_PI_245_DATA 0x000010A9
++#define DDRSS1_PI_246_DATA 0x00000266
++#define DDRSS1_PI_247_DATA 0x000681C8
++#define DDRSS1_PI_248_DATA 0x0001ADAF
++#define DDRSS1_PI_249_DATA 0x00000005
++#define DDRSS1_PI_250_DATA 0x000010A9
++#define DDRSS1_PI_251_DATA 0x01000266
++#define DDRSS1_PI_252_DATA 0x00370040
++#define DDRSS1_PI_253_DATA 0x00010008
++#define DDRSS1_PI_254_DATA 0x08550040
++#define DDRSS1_PI_255_DATA 0x00010040
++#define DDRSS1_PI_256_DATA 0x08550040
++#define DDRSS1_PI_257_DATA 0x00000340
++#define DDRSS1_PI_258_DATA 0x006B006B
++#define DDRSS1_PI_259_DATA 0x08040404
++#define DDRSS1_PI_260_DATA 0x00000055
++#define DDRSS1_PI_261_DATA 0x55083C5A
++#define DDRSS1_PI_262_DATA 0x5A000000
++#define DDRSS1_PI_263_DATA 0x0055083C
++#define DDRSS1_PI_264_DATA 0x3C5A0000
++#define DDRSS1_PI_265_DATA 0x00005508
++#define DDRSS1_PI_266_DATA 0x0C3C5A00
++#define DDRSS1_PI_267_DATA 0x080F0E0D
++#define DDRSS1_PI_268_DATA 0x000B0A09
++#define DDRSS1_PI_269_DATA 0x00030201
++#define DDRSS1_PI_270_DATA 0x01000000
++#define DDRSS1_PI_271_DATA 0x04020201
++#define DDRSS1_PI_272_DATA 0x00080804
++#define DDRSS1_PI_273_DATA 0x00000000
++#define DDRSS1_PI_274_DATA 0x00000000
++#define DDRSS1_PI_275_DATA 0x00330084
++#define DDRSS1_PI_276_DATA 0x00160000
++#define DDRSS1_PI_277_DATA 0x36333FF4
++#define DDRSS1_PI_278_DATA 0x00160F27
++#define DDRSS1_PI_279_DATA 0x36333FF4
++#define DDRSS1_PI_280_DATA 0x00160F27
++#define DDRSS1_PI_281_DATA 0x00330084
++#define DDRSS1_PI_282_DATA 0x00160000
++#define DDRSS1_PI_283_DATA 0x36333FF4
++#define DDRSS1_PI_284_DATA 0x00160F27
++#define DDRSS1_PI_285_DATA 0x36333FF4
++#define DDRSS1_PI_286_DATA 0x00160F27
++#define DDRSS1_PI_287_DATA 0x00330084
++#define DDRSS1_PI_288_DATA 0x00160000
++#define DDRSS1_PI_289_DATA 0x36333FF4
++#define DDRSS1_PI_290_DATA 0x00160F27
++#define DDRSS1_PI_291_DATA 0x36333FF4
++#define DDRSS1_PI_292_DATA 0x00160F27
++#define DDRSS1_PI_293_DATA 0x00330084
++#define DDRSS1_PI_294_DATA 0x00160000
++#define DDRSS1_PI_295_DATA 0x36333FF4
++#define DDRSS1_PI_296_DATA 0x00160F27
++#define DDRSS1_PI_297_DATA 0x36333FF4
++#define DDRSS1_PI_298_DATA 0x00160F27
++#define DDRSS1_PI_299_DATA 0x00000000
++
++#define DDRSS1_PHY_00_DATA 0x000004F0
++#define DDRSS1_PHY_01_DATA 0x00000000
++#define DDRSS1_PHY_02_DATA 0x00030200
++#define DDRSS1_PHY_03_DATA 0x00000000
++#define DDRSS1_PHY_04_DATA 0x00000000
++#define DDRSS1_PHY_05_DATA 0x01030000
++#define DDRSS1_PHY_06_DATA 0x00010000
++#define DDRSS1_PHY_07_DATA 0x01030004
++#define DDRSS1_PHY_08_DATA 0x01000000
++#define DDRSS1_PHY_09_DATA 0x00000000
++#define DDRSS1_PHY_10_DATA 0x00000000
++#define DDRSS1_PHY_11_DATA 0x01000001
++#define DDRSS1_PHY_12_DATA 0x00000200
++#define DDRSS1_PHY_13_DATA 0x000800C0
++#define DDRSS1_PHY_14_DATA 0x060100CC
++#define DDRSS1_PHY_15_DATA 0x00030066
++#define DDRSS1_PHY_16_DATA 0x00000000
++#define DDRSS1_PHY_17_DATA 0x00000301
++#define DDRSS1_PHY_18_DATA 0x0000AAAA
++#define DDRSS1_PHY_19_DATA 0x00005555
++#define DDRSS1_PHY_20_DATA 0x0000B5B5
++#define DDRSS1_PHY_21_DATA 0x00004A4A
++#define DDRSS1_PHY_22_DATA 0x00005656
++#define DDRSS1_PHY_23_DATA 0x0000A9A9
++#define DDRSS1_PHY_24_DATA 0x0000A9A9
++#define DDRSS1_PHY_25_DATA 0x0000B5B5
++#define DDRSS1_PHY_26_DATA 0x00000000
++#define DDRSS1_PHY_27_DATA 0x00000000
++#define DDRSS1_PHY_28_DATA 0x2A000000
++#define DDRSS1_PHY_29_DATA 0x00000808
++#define DDRSS1_PHY_30_DATA 0x0F000000
++#define DDRSS1_PHY_31_DATA 0x00000F08
++#define DDRSS1_PHY_32_DATA 0x10400000
++#define DDRSS1_PHY_33_DATA 0x0C002006
++#define DDRSS1_PHY_34_DATA 0x00000000
++#define DDRSS1_PHY_35_DATA 0x00000000
++#define DDRSS1_PHY_36_DATA 0x55555555
++#define DDRSS1_PHY_37_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_38_DATA 0x55555555
++#define DDRSS1_PHY_39_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_40_DATA 0x00005555
++#define DDRSS1_PHY_41_DATA 0x01000100
++#define DDRSS1_PHY_42_DATA 0x00800180
++#define DDRSS1_PHY_43_DATA 0x00000001
++#define DDRSS1_PHY_44_DATA 0x00000000
++#define DDRSS1_PHY_45_DATA 0x00000000
++#define DDRSS1_PHY_46_DATA 0x00000000
++#define DDRSS1_PHY_47_DATA 0x00000000
++#define DDRSS1_PHY_48_DATA 0x00000000
++#define DDRSS1_PHY_49_DATA 0x00000000
++#define DDRSS1_PHY_50_DATA 0x00000000
++#define DDRSS1_PHY_51_DATA 0x00000000
++#define DDRSS1_PHY_52_DATA 0x00000000
++#define DDRSS1_PHY_53_DATA 0x00000000
++#define DDRSS1_PHY_54_DATA 0x00000000
++#define DDRSS1_PHY_55_DATA 0x00000000
++#define DDRSS1_PHY_56_DATA 0x00000000
++#define DDRSS1_PHY_57_DATA 0x00000000
++#define DDRSS1_PHY_58_DATA 0x00000000
++#define DDRSS1_PHY_59_DATA 0x00000000
++#define DDRSS1_PHY_60_DATA 0x00000000
++#define DDRSS1_PHY_61_DATA 0x00000000
++#define DDRSS1_PHY_62_DATA 0x00000000
++#define DDRSS1_PHY_63_DATA 0x00000000
++#define DDRSS1_PHY_64_DATA 0x00000000
++#define DDRSS1_PHY_65_DATA 0x00000000
++#define DDRSS1_PHY_66_DATA 0x00000104
++#define DDRSS1_PHY_67_DATA 0x00000120
++#define DDRSS1_PHY_68_DATA 0x00000000
++#define DDRSS1_PHY_69_DATA 0x00000000
++#define DDRSS1_PHY_70_DATA 0x00000000
++#define DDRSS1_PHY_71_DATA 0x00000000
++#define DDRSS1_PHY_72_DATA 0x00000000
++#define DDRSS1_PHY_73_DATA 0x00000000
++#define DDRSS1_PHY_74_DATA 0x00000000
++#define DDRSS1_PHY_75_DATA 0x00000001
++#define DDRSS1_PHY_76_DATA 0x07FF0000
++#define DDRSS1_PHY_77_DATA 0x0080081F
++#define DDRSS1_PHY_78_DATA 0x00081020
++#define DDRSS1_PHY_79_DATA 0x04010000
++#define DDRSS1_PHY_80_DATA 0x00000000
++#define DDRSS1_PHY_81_DATA 0x00000000
++#define DDRSS1_PHY_82_DATA 0x00000000
++#define DDRSS1_PHY_83_DATA 0x00000100
++#define DDRSS1_PHY_84_DATA 0x01CC0C01
++#define DDRSS1_PHY_85_DATA 0x1003CC0C
++#define DDRSS1_PHY_86_DATA 0x20000140
++#define DDRSS1_PHY_87_DATA 0x07FF0200
++#define DDRSS1_PHY_88_DATA 0x0000DD01
++#define DDRSS1_PHY_89_DATA 0x10100303
++#define DDRSS1_PHY_90_DATA 0x10101010
++#define DDRSS1_PHY_91_DATA 0x10101010
++#define DDRSS1_PHY_92_DATA 0x00021010
++#define DDRSS1_PHY_93_DATA 0x00100010
++#define DDRSS1_PHY_94_DATA 0x00100010
++#define DDRSS1_PHY_95_DATA 0x00100010
++#define DDRSS1_PHY_96_DATA 0x00100010
++#define DDRSS1_PHY_97_DATA 0x00050010
++#define DDRSS1_PHY_98_DATA 0x51517041
++#define DDRSS1_PHY_99_DATA 0x31C06001
++#define DDRSS1_PHY_100_DATA 0x07AB01AB
++#define DDRSS1_PHY_101_DATA 0x00C0C001
++#define DDRSS1_PHY_102_DATA 0x0E0D0001
++#define DDRSS1_PHY_103_DATA 0x10001000
++#define DDRSS1_PHY_104_DATA 0x0C083E42
++#define DDRSS1_PHY_105_DATA 0x0F0C3701
++#define DDRSS1_PHY_106_DATA 0x01000140
++#define DDRSS1_PHY_107_DATA 0x0C000420
++#define DDRSS1_PHY_108_DATA 0x00000198
++#define DDRSS1_PHY_109_DATA 0x0A0000D0
++#define DDRSS1_PHY_110_DATA 0x00030200
++#define DDRSS1_PHY_111_DATA 0x02800000
++#define DDRSS1_PHY_112_DATA 0x80800000
++#define DDRSS1_PHY_113_DATA 0x000E2010
++#define DDRSS1_PHY_114_DATA 0x76543210
++#define DDRSS1_PHY_115_DATA 0x00000008
++#define DDRSS1_PHY_116_DATA 0x02800280
++#define DDRSS1_PHY_117_DATA 0x02800280
++#define DDRSS1_PHY_118_DATA 0x02800280
++#define DDRSS1_PHY_119_DATA 0x02800280
++#define DDRSS1_PHY_120_DATA 0x00000280
++#define DDRSS1_PHY_121_DATA 0x0000A000
++#define DDRSS1_PHY_122_DATA 0x00A000A0
++#define DDRSS1_PHY_123_DATA 0x00A000A0
++#define DDRSS1_PHY_124_DATA 0x00A000A0
++#define DDRSS1_PHY_125_DATA 0x00A000A0
++#define DDRSS1_PHY_126_DATA 0x00A000A0
++#define DDRSS1_PHY_127_DATA 0x00A000A0
++#define DDRSS1_PHY_128_DATA 0x00A000A0
++#define DDRSS1_PHY_129_DATA 0x00A000A0
++#define DDRSS1_PHY_130_DATA 0x01C200A0
++#define DDRSS1_PHY_131_DATA 0x01A00005
++#define DDRSS1_PHY_132_DATA 0x00000000
++#define DDRSS1_PHY_133_DATA 0x00000000
++#define DDRSS1_PHY_134_DATA 0x00080200
++#define DDRSS1_PHY_135_DATA 0x00000000
++#define DDRSS1_PHY_136_DATA 0x20202020
++#define DDRSS1_PHY_137_DATA 0x20202020
++#define DDRSS1_PHY_138_DATA 0xF0F02020
++#define DDRSS1_PHY_139_DATA 0x00000000
++#define DDRSS1_PHY_140_DATA 0x00000000
++#define DDRSS1_PHY_141_DATA 0x00000000
++#define DDRSS1_PHY_142_DATA 0x00000000
++#define DDRSS1_PHY_143_DATA 0x00000000
++#define DDRSS1_PHY_144_DATA 0x00000000
++#define DDRSS1_PHY_145_DATA 0x00000000
++#define DDRSS1_PHY_146_DATA 0x00000000
++#define DDRSS1_PHY_147_DATA 0x00000000
++#define DDRSS1_PHY_148_DATA 0x00000000
++#define DDRSS1_PHY_149_DATA 0x00000000
++#define DDRSS1_PHY_150_DATA 0x00000000
++#define DDRSS1_PHY_151_DATA 0x00000000
++#define DDRSS1_PHY_152_DATA 0x00000000
++#define DDRSS1_PHY_153_DATA 0x00000000
++#define DDRSS1_PHY_154_DATA 0x00000000
++#define DDRSS1_PHY_155_DATA 0x00000000
++#define DDRSS1_PHY_156_DATA 0x00000000
++#define DDRSS1_PHY_157_DATA 0x00000000
++#define DDRSS1_PHY_158_DATA 0x00000000
++#define DDRSS1_PHY_159_DATA 0x00000000
++#define DDRSS1_PHY_160_DATA 0x00000000
++#define DDRSS1_PHY_161_DATA 0x00000000
++#define DDRSS1_PHY_162_DATA 0x00000000
++#define DDRSS1_PHY_163_DATA 0x00000000
++#define DDRSS1_PHY_164_DATA 0x00000000
++#define DDRSS1_PHY_165_DATA 0x00000000
++#define DDRSS1_PHY_166_DATA 0x00000000
++#define DDRSS1_PHY_167_DATA 0x00000000
++#define DDRSS1_PHY_168_DATA 0x00000000
++#define DDRSS1_PHY_169_DATA 0x00000000
++#define DDRSS1_PHY_170_DATA 0x00000000
++#define DDRSS1_PHY_171_DATA 0x00000000
++#define DDRSS1_PHY_172_DATA 0x00000000
++#define DDRSS1_PHY_173_DATA 0x00000000
++#define DDRSS1_PHY_174_DATA 0x00000000
++#define DDRSS1_PHY_175_DATA 0x00000000
++#define DDRSS1_PHY_176_DATA 0x00000000
++#define DDRSS1_PHY_177_DATA 0x00000000
++#define DDRSS1_PHY_178_DATA 0x00000000
++#define DDRSS1_PHY_179_DATA 0x00000000
++#define DDRSS1_PHY_180_DATA 0x00000000
++#define DDRSS1_PHY_181_DATA 0x00000000
++#define DDRSS1_PHY_182_DATA 0x00000000
++#define DDRSS1_PHY_183_DATA 0x00000000
++#define DDRSS1_PHY_184_DATA 0x00000000
++#define DDRSS1_PHY_185_DATA 0x00000000
++#define DDRSS1_PHY_186_DATA 0x00000000
++#define DDRSS1_PHY_187_DATA 0x00000000
++#define DDRSS1_PHY_188_DATA 0x00000000
++#define DDRSS1_PHY_189_DATA 0x00000000
++#define DDRSS1_PHY_190_DATA 0x00000000
++#define DDRSS1_PHY_191_DATA 0x00000000
++#define DDRSS1_PHY_192_DATA 0x00000000
++#define DDRSS1_PHY_193_DATA 0x00000000
++#define DDRSS1_PHY_194_DATA 0x00000000
++#define DDRSS1_PHY_195_DATA 0x00000000
++#define DDRSS1_PHY_196_DATA 0x00000000
++#define DDRSS1_PHY_197_DATA 0x00000000
++#define DDRSS1_PHY_198_DATA 0x00000000
++#define DDRSS1_PHY_199_DATA 0x00000000
++#define DDRSS1_PHY_200_DATA 0x00000000
++#define DDRSS1_PHY_201_DATA 0x00000000
++#define DDRSS1_PHY_202_DATA 0x00000000
++#define DDRSS1_PHY_203_DATA 0x00000000
++#define DDRSS1_PHY_204_DATA 0x00000000
++#define DDRSS1_PHY_205_DATA 0x00000000
++#define DDRSS1_PHY_206_DATA 0x00000000
++#define DDRSS1_PHY_207_DATA 0x00000000
++#define DDRSS1_PHY_208_DATA 0x00000000
++#define DDRSS1_PHY_209_DATA 0x00000000
++#define DDRSS1_PHY_210_DATA 0x00000000
++#define DDRSS1_PHY_211_DATA 0x00000000
++#define DDRSS1_PHY_212_DATA 0x00000000
++#define DDRSS1_PHY_213_DATA 0x00000000
++#define DDRSS1_PHY_214_DATA 0x00000000
++#define DDRSS1_PHY_215_DATA 0x00000000
++#define DDRSS1_PHY_216_DATA 0x00000000
++#define DDRSS1_PHY_217_DATA 0x00000000
++#define DDRSS1_PHY_218_DATA 0x00000000
++#define DDRSS1_PHY_219_DATA 0x00000000
++#define DDRSS1_PHY_220_DATA 0x00000000
++#define DDRSS1_PHY_221_DATA 0x00000000
++#define DDRSS1_PHY_222_DATA 0x00000000
++#define DDRSS1_PHY_223_DATA 0x00000000
++#define DDRSS1_PHY_224_DATA 0x00000000
++#define DDRSS1_PHY_225_DATA 0x00000000
++#define DDRSS1_PHY_226_DATA 0x00000000
++#define DDRSS1_PHY_227_DATA 0x00000000
++#define DDRSS1_PHY_228_DATA 0x00000000
++#define DDRSS1_PHY_229_DATA 0x00000000
++#define DDRSS1_PHY_230_DATA 0x00000000
++#define DDRSS1_PHY_231_DATA 0x00000000
++#define DDRSS1_PHY_232_DATA 0x00000000
++#define DDRSS1_PHY_233_DATA 0x00000000
++#define DDRSS1_PHY_234_DATA 0x00000000
++#define DDRSS1_PHY_235_DATA 0x00000000
++#define DDRSS1_PHY_236_DATA 0x00000000
++#define DDRSS1_PHY_237_DATA 0x00000000
++#define DDRSS1_PHY_238_DATA 0x00000000
++#define DDRSS1_PHY_239_DATA 0x00000000
++#define DDRSS1_PHY_240_DATA 0x00000000
++#define DDRSS1_PHY_241_DATA 0x00000000
++#define DDRSS1_PHY_242_DATA 0x00000000
++#define DDRSS1_PHY_243_DATA 0x00000000
++#define DDRSS1_PHY_244_DATA 0x00000000
++#define DDRSS1_PHY_245_DATA 0x00000000
++#define DDRSS1_PHY_246_DATA 0x00000000
++#define DDRSS1_PHY_247_DATA 0x00000000
++#define DDRSS1_PHY_248_DATA 0x00000000
++#define DDRSS1_PHY_249_DATA 0x00000000
++#define DDRSS1_PHY_250_DATA 0x00000000
++#define DDRSS1_PHY_251_DATA 0x00000000
++#define DDRSS1_PHY_252_DATA 0x00000000
++#define DDRSS1_PHY_253_DATA 0x00000000
++#define DDRSS1_PHY_254_DATA 0x00000000
++#define DDRSS1_PHY_255_DATA 0x00000000
++#define DDRSS1_PHY_256_DATA 0x000004F0
++#define DDRSS1_PHY_257_DATA 0x00000000
++#define DDRSS1_PHY_258_DATA 0x00030200
++#define DDRSS1_PHY_259_DATA 0x00000000
++#define DDRSS1_PHY_260_DATA 0x00000000
++#define DDRSS1_PHY_261_DATA 0x01030000
++#define DDRSS1_PHY_262_DATA 0x00010000
++#define DDRSS1_PHY_263_DATA 0x01030004
++#define DDRSS1_PHY_264_DATA 0x01000000
++#define DDRSS1_PHY_265_DATA 0x00000000
++#define DDRSS1_PHY_266_DATA 0x00000000
++#define DDRSS1_PHY_267_DATA 0x01000001
++#define DDRSS1_PHY_268_DATA 0x00000200
++#define DDRSS1_PHY_269_DATA 0x000800C0
++#define DDRSS1_PHY_270_DATA 0x060100CC
++#define DDRSS1_PHY_271_DATA 0x00030066
++#define DDRSS1_PHY_272_DATA 0x00000000
++#define DDRSS1_PHY_273_DATA 0x00000301
++#define DDRSS1_PHY_274_DATA 0x0000AAAA
++#define DDRSS1_PHY_275_DATA 0x00005555
++#define DDRSS1_PHY_276_DATA 0x0000B5B5
++#define DDRSS1_PHY_277_DATA 0x00004A4A
++#define DDRSS1_PHY_278_DATA 0x00005656
++#define DDRSS1_PHY_279_DATA 0x0000A9A9
++#define DDRSS1_PHY_280_DATA 0x0000A9A9
++#define DDRSS1_PHY_281_DATA 0x0000B5B5
++#define DDRSS1_PHY_282_DATA 0x00000000
++#define DDRSS1_PHY_283_DATA 0x00000000
++#define DDRSS1_PHY_284_DATA 0x2A000000
++#define DDRSS1_PHY_285_DATA 0x00000808
++#define DDRSS1_PHY_286_DATA 0x0F000000
++#define DDRSS1_PHY_287_DATA 0x00000F08
++#define DDRSS1_PHY_288_DATA 0x10400000
++#define DDRSS1_PHY_289_DATA 0x0C002006
++#define DDRSS1_PHY_290_DATA 0x00000000
++#define DDRSS1_PHY_291_DATA 0x00000000
++#define DDRSS1_PHY_292_DATA 0x55555555
++#define DDRSS1_PHY_293_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_294_DATA 0x55555555
++#define DDRSS1_PHY_295_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_296_DATA 0x00005555
++#define DDRSS1_PHY_297_DATA 0x01000100
++#define DDRSS1_PHY_298_DATA 0x00800180
++#define DDRSS1_PHY_299_DATA 0x00000000
++#define DDRSS1_PHY_300_DATA 0x00000000
++#define DDRSS1_PHY_301_DATA 0x00000000
++#define DDRSS1_PHY_302_DATA 0x00000000
++#define DDRSS1_PHY_303_DATA 0x00000000
++#define DDRSS1_PHY_304_DATA 0x00000000
++#define DDRSS1_PHY_305_DATA 0x00000000
++#define DDRSS1_PHY_306_DATA 0x00000000
++#define DDRSS1_PHY_307_DATA 0x00000000
++#define DDRSS1_PHY_308_DATA 0x00000000
++#define DDRSS1_PHY_309_DATA 0x00000000
++#define DDRSS1_PHY_310_DATA 0x00000000
++#define DDRSS1_PHY_311_DATA 0x00000000
++#define DDRSS1_PHY_312_DATA 0x00000000
++#define DDRSS1_PHY_313_DATA 0x00000000
++#define DDRSS1_PHY_314_DATA 0x00000000
++#define DDRSS1_PHY_315_DATA 0x00000000
++#define DDRSS1_PHY_316_DATA 0x00000000
++#define DDRSS1_PHY_317_DATA 0x00000000
++#define DDRSS1_PHY_318_DATA 0x00000000
++#define DDRSS1_PHY_319_DATA 0x00000000
++#define DDRSS1_PHY_320_DATA 0x00000000
++#define DDRSS1_PHY_321_DATA 0x00000000
++#define DDRSS1_PHY_322_DATA 0x00000104
++#define DDRSS1_PHY_323_DATA 0x00000120
++#define DDRSS1_PHY_324_DATA 0x00000000
++#define DDRSS1_PHY_325_DATA 0x00000000
++#define DDRSS1_PHY_326_DATA 0x00000000
++#define DDRSS1_PHY_327_DATA 0x00000000
++#define DDRSS1_PHY_328_DATA 0x00000000
++#define DDRSS1_PHY_329_DATA 0x00000000
++#define DDRSS1_PHY_330_DATA 0x00000000
++#define DDRSS1_PHY_331_DATA 0x00000001
++#define DDRSS1_PHY_332_DATA 0x07FF0000
++#define DDRSS1_PHY_333_DATA 0x0080081F
++#define DDRSS1_PHY_334_DATA 0x00081020
++#define DDRSS1_PHY_335_DATA 0x04010000
++#define DDRSS1_PHY_336_DATA 0x00000000
++#define DDRSS1_PHY_337_DATA 0x00000000
++#define DDRSS1_PHY_338_DATA 0x00000000
++#define DDRSS1_PHY_339_DATA 0x00000100
++#define DDRSS1_PHY_340_DATA 0x01CC0C01
++#define DDRSS1_PHY_341_DATA 0x1003CC0C
++#define DDRSS1_PHY_342_DATA 0x20000140
++#define DDRSS1_PHY_343_DATA 0x07FF0200
++#define DDRSS1_PHY_344_DATA 0x0000DD01
++#define DDRSS1_PHY_345_DATA 0x10100303
++#define DDRSS1_PHY_346_DATA 0x10101010
++#define DDRSS1_PHY_347_DATA 0x10101010
++#define DDRSS1_PHY_348_DATA 0x00021010
++#define DDRSS1_PHY_349_DATA 0x00100010
++#define DDRSS1_PHY_350_DATA 0x00100010
++#define DDRSS1_PHY_351_DATA 0x00100010
++#define DDRSS1_PHY_352_DATA 0x00100010
++#define DDRSS1_PHY_353_DATA 0x00050010
++#define DDRSS1_PHY_354_DATA 0x51517041
++#define DDRSS1_PHY_355_DATA 0x31C06001
++#define DDRSS1_PHY_356_DATA 0x07AB01AB
++#define DDRSS1_PHY_357_DATA 0x00C0C001
++#define DDRSS1_PHY_358_DATA 0x0E0D0001
++#define DDRSS1_PHY_359_DATA 0x10001000
++#define DDRSS1_PHY_360_DATA 0x0C083E42
++#define DDRSS1_PHY_361_DATA 0x0F0C3701
++#define DDRSS1_PHY_362_DATA 0x01000140
++#define DDRSS1_PHY_363_DATA 0x0C000420
++#define DDRSS1_PHY_364_DATA 0x00000198
++#define DDRSS1_PHY_365_DATA 0x0A0000D0
++#define DDRSS1_PHY_366_DATA 0x00030200
++#define DDRSS1_PHY_367_DATA 0x02800000
++#define DDRSS1_PHY_368_DATA 0x80800000
++#define DDRSS1_PHY_369_DATA 0x000E2010
++#define DDRSS1_PHY_370_DATA 0x76543210
++#define DDRSS1_PHY_371_DATA 0x00000008
++#define DDRSS1_PHY_372_DATA 0x02800280
++#define DDRSS1_PHY_373_DATA 0x02800280
++#define DDRSS1_PHY_374_DATA 0x02800280
++#define DDRSS1_PHY_375_DATA 0x02800280
++#define DDRSS1_PHY_376_DATA 0x00000280
++#define DDRSS1_PHY_377_DATA 0x0000A000
++#define DDRSS1_PHY_378_DATA 0x00A000A0
++#define DDRSS1_PHY_379_DATA 0x00A000A0
++#define DDRSS1_PHY_380_DATA 0x00A000A0
++#define DDRSS1_PHY_381_DATA 0x00A000A0
++#define DDRSS1_PHY_382_DATA 0x00A000A0
++#define DDRSS1_PHY_383_DATA 0x00A000A0
++#define DDRSS1_PHY_384_DATA 0x00A000A0
++#define DDRSS1_PHY_385_DATA 0x00A000A0
++#define DDRSS1_PHY_386_DATA 0x01C200A0
++#define DDRSS1_PHY_387_DATA 0x01A00005
++#define DDRSS1_PHY_388_DATA 0x00000000
++#define DDRSS1_PHY_389_DATA 0x00000000
++#define DDRSS1_PHY_390_DATA 0x00080200
++#define DDRSS1_PHY_391_DATA 0x00000000
++#define DDRSS1_PHY_392_DATA 0x20202020
++#define DDRSS1_PHY_393_DATA 0x20202020
++#define DDRSS1_PHY_394_DATA 0xF0F02020
++#define DDRSS1_PHY_395_DATA 0x00000000
++#define DDRSS1_PHY_396_DATA 0x00000000
++#define DDRSS1_PHY_397_DATA 0x00000000
++#define DDRSS1_PHY_398_DATA 0x00000000
++#define DDRSS1_PHY_399_DATA 0x00000000
++#define DDRSS1_PHY_400_DATA 0x00000000
++#define DDRSS1_PHY_401_DATA 0x00000000
++#define DDRSS1_PHY_402_DATA 0x00000000
++#define DDRSS1_PHY_403_DATA 0x00000000
++#define DDRSS1_PHY_404_DATA 0x00000000
++#define DDRSS1_PHY_405_DATA 0x00000000
++#define DDRSS1_PHY_406_DATA 0x00000000
++#define DDRSS1_PHY_407_DATA 0x00000000
++#define DDRSS1_PHY_408_DATA 0x00000000
++#define DDRSS1_PHY_409_DATA 0x00000000
++#define DDRSS1_PHY_410_DATA 0x00000000
++#define DDRSS1_PHY_411_DATA 0x00000000
++#define DDRSS1_PHY_412_DATA 0x00000000
++#define DDRSS1_PHY_413_DATA 0x00000000
++#define DDRSS1_PHY_414_DATA 0x00000000
++#define DDRSS1_PHY_415_DATA 0x00000000
++#define DDRSS1_PHY_416_DATA 0x00000000
++#define DDRSS1_PHY_417_DATA 0x00000000
++#define DDRSS1_PHY_418_DATA 0x00000000
++#define DDRSS1_PHY_419_DATA 0x00000000
++#define DDRSS1_PHY_420_DATA 0x00000000
++#define DDRSS1_PHY_421_DATA 0x00000000
++#define DDRSS1_PHY_422_DATA 0x00000000
++#define DDRSS1_PHY_423_DATA 0x00000000
++#define DDRSS1_PHY_424_DATA 0x00000000
++#define DDRSS1_PHY_425_DATA 0x00000000
++#define DDRSS1_PHY_426_DATA 0x00000000
++#define DDRSS1_PHY_427_DATA 0x00000000
++#define DDRSS1_PHY_428_DATA 0x00000000
++#define DDRSS1_PHY_429_DATA 0x00000000
++#define DDRSS1_PHY_430_DATA 0x00000000
++#define DDRSS1_PHY_431_DATA 0x00000000
++#define DDRSS1_PHY_432_DATA 0x00000000
++#define DDRSS1_PHY_433_DATA 0x00000000
++#define DDRSS1_PHY_434_DATA 0x00000000
++#define DDRSS1_PHY_435_DATA 0x00000000
++#define DDRSS1_PHY_436_DATA 0x00000000
++#define DDRSS1_PHY_437_DATA 0x00000000
++#define DDRSS1_PHY_438_DATA 0x00000000
++#define DDRSS1_PHY_439_DATA 0x00000000
++#define DDRSS1_PHY_440_DATA 0x00000000
++#define DDRSS1_PHY_441_DATA 0x00000000
++#define DDRSS1_PHY_442_DATA 0x00000000
++#define DDRSS1_PHY_443_DATA 0x00000000
++#define DDRSS1_PHY_444_DATA 0x00000000
++#define DDRSS1_PHY_445_DATA 0x00000000
++#define DDRSS1_PHY_446_DATA 0x00000000
++#define DDRSS1_PHY_447_DATA 0x00000000
++#define DDRSS1_PHY_448_DATA 0x00000000
++#define DDRSS1_PHY_449_DATA 0x00000000
++#define DDRSS1_PHY_450_DATA 0x00000000
++#define DDRSS1_PHY_451_DATA 0x00000000
++#define DDRSS1_PHY_452_DATA 0x00000000
++#define DDRSS1_PHY_453_DATA 0x00000000
++#define DDRSS1_PHY_454_DATA 0x00000000
++#define DDRSS1_PHY_455_DATA 0x00000000
++#define DDRSS1_PHY_456_DATA 0x00000000
++#define DDRSS1_PHY_457_DATA 0x00000000
++#define DDRSS1_PHY_458_DATA 0x00000000
++#define DDRSS1_PHY_459_DATA 0x00000000
++#define DDRSS1_PHY_460_DATA 0x00000000
++#define DDRSS1_PHY_461_DATA 0x00000000
++#define DDRSS1_PHY_462_DATA 0x00000000
++#define DDRSS1_PHY_463_DATA 0x00000000
++#define DDRSS1_PHY_464_DATA 0x00000000
++#define DDRSS1_PHY_465_DATA 0x00000000
++#define DDRSS1_PHY_466_DATA 0x00000000
++#define DDRSS1_PHY_467_DATA 0x00000000
++#define DDRSS1_PHY_468_DATA 0x00000000
++#define DDRSS1_PHY_469_DATA 0x00000000
++#define DDRSS1_PHY_470_DATA 0x00000000
++#define DDRSS1_PHY_471_DATA 0x00000000
++#define DDRSS1_PHY_472_DATA 0x00000000
++#define DDRSS1_PHY_473_DATA 0x00000000
++#define DDRSS1_PHY_474_DATA 0x00000000
++#define DDRSS1_PHY_475_DATA 0x00000000
++#define DDRSS1_PHY_476_DATA 0x00000000
++#define DDRSS1_PHY_477_DATA 0x00000000
++#define DDRSS1_PHY_478_DATA 0x00000000
++#define DDRSS1_PHY_479_DATA 0x00000000
++#define DDRSS1_PHY_480_DATA 0x00000000
++#define DDRSS1_PHY_481_DATA 0x00000000
++#define DDRSS1_PHY_482_DATA 0x00000000
++#define DDRSS1_PHY_483_DATA 0x00000000
++#define DDRSS1_PHY_484_DATA 0x00000000
++#define DDRSS1_PHY_485_DATA 0x00000000
++#define DDRSS1_PHY_486_DATA 0x00000000
++#define DDRSS1_PHY_487_DATA 0x00000000
++#define DDRSS1_PHY_488_DATA 0x00000000
++#define DDRSS1_PHY_489_DATA 0x00000000
++#define DDRSS1_PHY_490_DATA 0x00000000
++#define DDRSS1_PHY_491_DATA 0x00000000
++#define DDRSS1_PHY_492_DATA 0x00000000
++#define DDRSS1_PHY_493_DATA 0x00000000
++#define DDRSS1_PHY_494_DATA 0x00000000
++#define DDRSS1_PHY_495_DATA 0x00000000
++#define DDRSS1_PHY_496_DATA 0x00000000
++#define DDRSS1_PHY_497_DATA 0x00000000
++#define DDRSS1_PHY_498_DATA 0x00000000
++#define DDRSS1_PHY_499_DATA 0x00000000
++#define DDRSS1_PHY_500_DATA 0x00000000
++#define DDRSS1_PHY_501_DATA 0x00000000
++#define DDRSS1_PHY_502_DATA 0x00000000
++#define DDRSS1_PHY_503_DATA 0x00000000
++#define DDRSS1_PHY_504_DATA 0x00000000
++#define DDRSS1_PHY_505_DATA 0x00000000
++#define DDRSS1_PHY_506_DATA 0x00000000
++#define DDRSS1_PHY_507_DATA 0x00000000
++#define DDRSS1_PHY_508_DATA 0x00000000
++#define DDRSS1_PHY_509_DATA 0x00000000
++#define DDRSS1_PHY_510_DATA 0x00000000
++#define DDRSS1_PHY_511_DATA 0x00000000
++#define DDRSS1_PHY_512_DATA 0x000004F0
++#define DDRSS1_PHY_513_DATA 0x00000000
++#define DDRSS1_PHY_514_DATA 0x00030200
++#define DDRSS1_PHY_515_DATA 0x00000000
++#define DDRSS1_PHY_516_DATA 0x00000000
++#define DDRSS1_PHY_517_DATA 0x01030000
++#define DDRSS1_PHY_518_DATA 0x00010000
++#define DDRSS1_PHY_519_DATA 0x01030004
++#define DDRSS1_PHY_520_DATA 0x01000000
++#define DDRSS1_PHY_521_DATA 0x00000000
++#define DDRSS1_PHY_522_DATA 0x00000000
++#define DDRSS1_PHY_523_DATA 0x01000001
++#define DDRSS1_PHY_524_DATA 0x00000200
++#define DDRSS1_PHY_525_DATA 0x000800C0
++#define DDRSS1_PHY_526_DATA 0x060100CC
++#define DDRSS1_PHY_527_DATA 0x00030066
++#define DDRSS1_PHY_528_DATA 0x00000000
++#define DDRSS1_PHY_529_DATA 0x00000301
++#define DDRSS1_PHY_530_DATA 0x0000AAAA
++#define DDRSS1_PHY_531_DATA 0x00005555
++#define DDRSS1_PHY_532_DATA 0x0000B5B5
++#define DDRSS1_PHY_533_DATA 0x00004A4A
++#define DDRSS1_PHY_534_DATA 0x00005656
++#define DDRSS1_PHY_535_DATA 0x0000A9A9
++#define DDRSS1_PHY_536_DATA 0x0000A9A9
++#define DDRSS1_PHY_537_DATA 0x0000B5B5
++#define DDRSS1_PHY_538_DATA 0x00000000
++#define DDRSS1_PHY_539_DATA 0x00000000
++#define DDRSS1_PHY_540_DATA 0x2A000000
++#define DDRSS1_PHY_541_DATA 0x00000808
++#define DDRSS1_PHY_542_DATA 0x0F000000
++#define DDRSS1_PHY_543_DATA 0x00000F08
++#define DDRSS1_PHY_544_DATA 0x10400000
++#define DDRSS1_PHY_545_DATA 0x0C002006
++#define DDRSS1_PHY_546_DATA 0x00000000
++#define DDRSS1_PHY_547_DATA 0x00000000
++#define DDRSS1_PHY_548_DATA 0x55555555
++#define DDRSS1_PHY_549_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_550_DATA 0x55555555
++#define DDRSS1_PHY_551_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_552_DATA 0x00005555
++#define DDRSS1_PHY_553_DATA 0x01000100
++#define DDRSS1_PHY_554_DATA 0x00800180
++#define DDRSS1_PHY_555_DATA 0x00000001
++#define DDRSS1_PHY_556_DATA 0x00000000
++#define DDRSS1_PHY_557_DATA 0x00000000
++#define DDRSS1_PHY_558_DATA 0x00000000
++#define DDRSS1_PHY_559_DATA 0x00000000
++#define DDRSS1_PHY_560_DATA 0x00000000
++#define DDRSS1_PHY_561_DATA 0x00000000
++#define DDRSS1_PHY_562_DATA 0x00000000
++#define DDRSS1_PHY_563_DATA 0x00000000
++#define DDRSS1_PHY_564_DATA 0x00000000
++#define DDRSS1_PHY_565_DATA 0x00000000
++#define DDRSS1_PHY_566_DATA 0x00000000
++#define DDRSS1_PHY_567_DATA 0x00000000
++#define DDRSS1_PHY_568_DATA 0x00000000
++#define DDRSS1_PHY_569_DATA 0x00000000
++#define DDRSS1_PHY_570_DATA 0x00000000
++#define DDRSS1_PHY_571_DATA 0x00000000
++#define DDRSS1_PHY_572_DATA 0x00000000
++#define DDRSS1_PHY_573_DATA 0x00000000
++#define DDRSS1_PHY_574_DATA 0x00000000
++#define DDRSS1_PHY_575_DATA 0x00000000
++#define DDRSS1_PHY_576_DATA 0x00000000
++#define DDRSS1_PHY_577_DATA 0x00000000
++#define DDRSS1_PHY_578_DATA 0x00000104
++#define DDRSS1_PHY_579_DATA 0x00000120
++#define DDRSS1_PHY_580_DATA 0x00000000
++#define DDRSS1_PHY_581_DATA 0x00000000
++#define DDRSS1_PHY_582_DATA 0x00000000
++#define DDRSS1_PHY_583_DATA 0x00000000
++#define DDRSS1_PHY_584_DATA 0x00000000
++#define DDRSS1_PHY_585_DATA 0x00000000
++#define DDRSS1_PHY_586_DATA 0x00000000
++#define DDRSS1_PHY_587_DATA 0x00000001
++#define DDRSS1_PHY_588_DATA 0x07FF0000
++#define DDRSS1_PHY_589_DATA 0x0080081F
++#define DDRSS1_PHY_590_DATA 0x00081020
++#define DDRSS1_PHY_591_DATA 0x04010000
++#define DDRSS1_PHY_592_DATA 0x00000000
++#define DDRSS1_PHY_593_DATA 0x00000000
++#define DDRSS1_PHY_594_DATA 0x00000000
++#define DDRSS1_PHY_595_DATA 0x00000100
++#define DDRSS1_PHY_596_DATA 0x01CC0C01
++#define DDRSS1_PHY_597_DATA 0x1003CC0C
++#define DDRSS1_PHY_598_DATA 0x20000140
++#define DDRSS1_PHY_599_DATA 0x07FF0200
++#define DDRSS1_PHY_600_DATA 0x0000DD01
++#define DDRSS1_PHY_601_DATA 0x10100303
++#define DDRSS1_PHY_602_DATA 0x10101010
++#define DDRSS1_PHY_603_DATA 0x10101010
++#define DDRSS1_PHY_604_DATA 0x00021010
++#define DDRSS1_PHY_605_DATA 0x00100010
++#define DDRSS1_PHY_606_DATA 0x00100010
++#define DDRSS1_PHY_607_DATA 0x00100010
++#define DDRSS1_PHY_608_DATA 0x00100010
++#define DDRSS1_PHY_609_DATA 0x00050010
++#define DDRSS1_PHY_610_DATA 0x51517041
++#define DDRSS1_PHY_611_DATA 0x31C06001
++#define DDRSS1_PHY_612_DATA 0x07AB01AB
++#define DDRSS1_PHY_613_DATA 0x00C0C001
++#define DDRSS1_PHY_614_DATA 0x0E0D0001
++#define DDRSS1_PHY_615_DATA 0x10001000
++#define DDRSS1_PHY_616_DATA 0x0C083E42
++#define DDRSS1_PHY_617_DATA 0x0F0C3701
++#define DDRSS1_PHY_618_DATA 0x01000140
++#define DDRSS1_PHY_619_DATA 0x0C000420
++#define DDRSS1_PHY_620_DATA 0x00000198
++#define DDRSS1_PHY_621_DATA 0x0A0000D0
++#define DDRSS1_PHY_622_DATA 0x00030200
++#define DDRSS1_PHY_623_DATA 0x02800000
++#define DDRSS1_PHY_624_DATA 0x80800000
++#define DDRSS1_PHY_625_DATA 0x000E2010
++#define DDRSS1_PHY_626_DATA 0x76543210
++#define DDRSS1_PHY_627_DATA 0x00000008
++#define DDRSS1_PHY_628_DATA 0x02800280
++#define DDRSS1_PHY_629_DATA 0x02800280
++#define DDRSS1_PHY_630_DATA 0x02800280
++#define DDRSS1_PHY_631_DATA 0x02800280
++#define DDRSS1_PHY_632_DATA 0x00000280
++#define DDRSS1_PHY_633_DATA 0x0000A000
++#define DDRSS1_PHY_634_DATA 0x00A000A0
++#define DDRSS1_PHY_635_DATA 0x00A000A0
++#define DDRSS1_PHY_636_DATA 0x00A000A0
++#define DDRSS1_PHY_637_DATA 0x00A000A0
++#define DDRSS1_PHY_638_DATA 0x00A000A0
++#define DDRSS1_PHY_639_DATA 0x00A000A0
++#define DDRSS1_PHY_640_DATA 0x00A000A0
++#define DDRSS1_PHY_641_DATA 0x00A000A0
++#define DDRSS1_PHY_642_DATA 0x01C200A0
++#define DDRSS1_PHY_643_DATA 0x01A00005
++#define DDRSS1_PHY_644_DATA 0x00000000
++#define DDRSS1_PHY_645_DATA 0x00000000
++#define DDRSS1_PHY_646_DATA 0x00080200
++#define DDRSS1_PHY_647_DATA 0x00000000
++#define DDRSS1_PHY_648_DATA 0x20202020
++#define DDRSS1_PHY_649_DATA 0x20202020
++#define DDRSS1_PHY_650_DATA 0xF0F02020
++#define DDRSS1_PHY_651_DATA 0x00000000
++#define DDRSS1_PHY_652_DATA 0x00000000
++#define DDRSS1_PHY_653_DATA 0x00000000
++#define DDRSS1_PHY_654_DATA 0x00000000
++#define DDRSS1_PHY_655_DATA 0x00000000
++#define DDRSS1_PHY_656_DATA 0x00000000
++#define DDRSS1_PHY_657_DATA 0x00000000
++#define DDRSS1_PHY_658_DATA 0x00000000
++#define DDRSS1_PHY_659_DATA 0x00000000
++#define DDRSS1_PHY_660_DATA 0x00000000
++#define DDRSS1_PHY_661_DATA 0x00000000
++#define DDRSS1_PHY_662_DATA 0x00000000
++#define DDRSS1_PHY_663_DATA 0x00000000
++#define DDRSS1_PHY_664_DATA 0x00000000
++#define DDRSS1_PHY_665_DATA 0x00000000
++#define DDRSS1_PHY_666_DATA 0x00000000
++#define DDRSS1_PHY_667_DATA 0x00000000
++#define DDRSS1_PHY_668_DATA 0x00000000
++#define DDRSS1_PHY_669_DATA 0x00000000
++#define DDRSS1_PHY_670_DATA 0x00000000
++#define DDRSS1_PHY_671_DATA 0x00000000
++#define DDRSS1_PHY_672_DATA 0x00000000
++#define DDRSS1_PHY_673_DATA 0x00000000
++#define DDRSS1_PHY_674_DATA 0x00000000
++#define DDRSS1_PHY_675_DATA 0x00000000
++#define DDRSS1_PHY_676_DATA 0x00000000
++#define DDRSS1_PHY_677_DATA 0x00000000
++#define DDRSS1_PHY_678_DATA 0x00000000
++#define DDRSS1_PHY_679_DATA 0x00000000
++#define DDRSS1_PHY_680_DATA 0x00000000
++#define DDRSS1_PHY_681_DATA 0x00000000
++#define DDRSS1_PHY_682_DATA 0x00000000
++#define DDRSS1_PHY_683_DATA 0x00000000
++#define DDRSS1_PHY_684_DATA 0x00000000
++#define DDRSS1_PHY_685_DATA 0x00000000
++#define DDRSS1_PHY_686_DATA 0x00000000
++#define DDRSS1_PHY_687_DATA 0x00000000
++#define DDRSS1_PHY_688_DATA 0x00000000
++#define DDRSS1_PHY_689_DATA 0x00000000
++#define DDRSS1_PHY_690_DATA 0x00000000
++#define DDRSS1_PHY_691_DATA 0x00000000
++#define DDRSS1_PHY_692_DATA 0x00000000
++#define DDRSS1_PHY_693_DATA 0x00000000
++#define DDRSS1_PHY_694_DATA 0x00000000
++#define DDRSS1_PHY_695_DATA 0x00000000
++#define DDRSS1_PHY_696_DATA 0x00000000
++#define DDRSS1_PHY_697_DATA 0x00000000
++#define DDRSS1_PHY_698_DATA 0x00000000
++#define DDRSS1_PHY_699_DATA 0x00000000
++#define DDRSS1_PHY_700_DATA 0x00000000
++#define DDRSS1_PHY_701_DATA 0x00000000
++#define DDRSS1_PHY_702_DATA 0x00000000
++#define DDRSS1_PHY_703_DATA 0x00000000
++#define DDRSS1_PHY_704_DATA 0x00000000
++#define DDRSS1_PHY_705_DATA 0x00000000
++#define DDRSS1_PHY_706_DATA 0x00000000
++#define DDRSS1_PHY_707_DATA 0x00000000
++#define DDRSS1_PHY_708_DATA 0x00000000
++#define DDRSS1_PHY_709_DATA 0x00000000
++#define DDRSS1_PHY_710_DATA 0x00000000
++#define DDRSS1_PHY_711_DATA 0x00000000
++#define DDRSS1_PHY_712_DATA 0x00000000
++#define DDRSS1_PHY_713_DATA 0x00000000
++#define DDRSS1_PHY_714_DATA 0x00000000
++#define DDRSS1_PHY_715_DATA 0x00000000
++#define DDRSS1_PHY_716_DATA 0x00000000
++#define DDRSS1_PHY_717_DATA 0x00000000
++#define DDRSS1_PHY_718_DATA 0x00000000
++#define DDRSS1_PHY_719_DATA 0x00000000
++#define DDRSS1_PHY_720_DATA 0x00000000
++#define DDRSS1_PHY_721_DATA 0x00000000
++#define DDRSS1_PHY_722_DATA 0x00000000
++#define DDRSS1_PHY_723_DATA 0x00000000
++#define DDRSS1_PHY_724_DATA 0x00000000
++#define DDRSS1_PHY_725_DATA 0x00000000
++#define DDRSS1_PHY_726_DATA 0x00000000
++#define DDRSS1_PHY_727_DATA 0x00000000
++#define DDRSS1_PHY_728_DATA 0x00000000
++#define DDRSS1_PHY_729_DATA 0x00000000
++#define DDRSS1_PHY_730_DATA 0x00000000
++#define DDRSS1_PHY_731_DATA 0x00000000
++#define DDRSS1_PHY_732_DATA 0x00000000
++#define DDRSS1_PHY_733_DATA 0x00000000
++#define DDRSS1_PHY_734_DATA 0x00000000
++#define DDRSS1_PHY_735_DATA 0x00000000
++#define DDRSS1_PHY_736_DATA 0x00000000
++#define DDRSS1_PHY_737_DATA 0x00000000
++#define DDRSS1_PHY_738_DATA 0x00000000
++#define DDRSS1_PHY_739_DATA 0x00000000
++#define DDRSS1_PHY_740_DATA 0x00000000
++#define DDRSS1_PHY_741_DATA 0x00000000
++#define DDRSS1_PHY_742_DATA 0x00000000
++#define DDRSS1_PHY_743_DATA 0x00000000
++#define DDRSS1_PHY_744_DATA 0x00000000
++#define DDRSS1_PHY_745_DATA 0x00000000
++#define DDRSS1_PHY_746_DATA 0x00000000
++#define DDRSS1_PHY_747_DATA 0x00000000
++#define DDRSS1_PHY_748_DATA 0x00000000
++#define DDRSS1_PHY_749_DATA 0x00000000
++#define DDRSS1_PHY_750_DATA 0x00000000
++#define DDRSS1_PHY_751_DATA 0x00000000
++#define DDRSS1_PHY_752_DATA 0x00000000
++#define DDRSS1_PHY_753_DATA 0x00000000
++#define DDRSS1_PHY_754_DATA 0x00000000
++#define DDRSS1_PHY_755_DATA 0x00000000
++#define DDRSS1_PHY_756_DATA 0x00000000
++#define DDRSS1_PHY_757_DATA 0x00000000
++#define DDRSS1_PHY_758_DATA 0x00000000
++#define DDRSS1_PHY_759_DATA 0x00000000
++#define DDRSS1_PHY_760_DATA 0x00000000
++#define DDRSS1_PHY_761_DATA 0x00000000
++#define DDRSS1_PHY_762_DATA 0x00000000
++#define DDRSS1_PHY_763_DATA 0x00000000
++#define DDRSS1_PHY_764_DATA 0x00000000
++#define DDRSS1_PHY_765_DATA 0x00000000
++#define DDRSS1_PHY_766_DATA 0x00000000
++#define DDRSS1_PHY_767_DATA 0x00000000
++#define DDRSS1_PHY_768_DATA 0x000004F0
++#define DDRSS1_PHY_769_DATA 0x00000000
++#define DDRSS1_PHY_770_DATA 0x00030200
++#define DDRSS1_PHY_771_DATA 0x00000000
++#define DDRSS1_PHY_772_DATA 0x00000000
++#define DDRSS1_PHY_773_DATA 0x01030000
++#define DDRSS1_PHY_774_DATA 0x00010000
++#define DDRSS1_PHY_775_DATA 0x01030004
++#define DDRSS1_PHY_776_DATA 0x01000000
++#define DDRSS1_PHY_777_DATA 0x00000000
++#define DDRSS1_PHY_778_DATA 0x00000000
++#define DDRSS1_PHY_779_DATA 0x01000001
++#define DDRSS1_PHY_780_DATA 0x00000200
++#define DDRSS1_PHY_781_DATA 0x000800C0
++#define DDRSS1_PHY_782_DATA 0x060100CC
++#define DDRSS1_PHY_783_DATA 0x00030066
++#define DDRSS1_PHY_784_DATA 0x00000000
++#define DDRSS1_PHY_785_DATA 0x00000301
++#define DDRSS1_PHY_786_DATA 0x0000AAAA
++#define DDRSS1_PHY_787_DATA 0x00005555
++#define DDRSS1_PHY_788_DATA 0x0000B5B5
++#define DDRSS1_PHY_789_DATA 0x00004A4A
++#define DDRSS1_PHY_790_DATA 0x00005656
++#define DDRSS1_PHY_791_DATA 0x0000A9A9
++#define DDRSS1_PHY_792_DATA 0x0000A9A9
++#define DDRSS1_PHY_793_DATA 0x0000B5B5
++#define DDRSS1_PHY_794_DATA 0x00000000
++#define DDRSS1_PHY_795_DATA 0x00000000
++#define DDRSS1_PHY_796_DATA 0x2A000000
++#define DDRSS1_PHY_797_DATA 0x00000808
++#define DDRSS1_PHY_798_DATA 0x0F000000
++#define DDRSS1_PHY_799_DATA 0x00000F08
++#define DDRSS1_PHY_800_DATA 0x10400000
++#define DDRSS1_PHY_801_DATA 0x0C002006
++#define DDRSS1_PHY_802_DATA 0x00000000
++#define DDRSS1_PHY_803_DATA 0x00000000
++#define DDRSS1_PHY_804_DATA 0x55555555
++#define DDRSS1_PHY_805_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_806_DATA 0x55555555
++#define DDRSS1_PHY_807_DATA 0xAAAAAAAA
++#define DDRSS1_PHY_808_DATA 0x00005555
++#define DDRSS1_PHY_809_DATA 0x01000100
++#define DDRSS1_PHY_810_DATA 0x00800180
++#define DDRSS1_PHY_811_DATA 0x00000000
++#define DDRSS1_PHY_812_DATA 0x00000000
++#define DDRSS1_PHY_813_DATA 0x00000000
++#define DDRSS1_PHY_814_DATA 0x00000000
++#define DDRSS1_PHY_815_DATA 0x00000000
++#define DDRSS1_PHY_816_DATA 0x00000000
++#define DDRSS1_PHY_817_DATA 0x00000000
++#define DDRSS1_PHY_818_DATA 0x00000000
++#define DDRSS1_PHY_819_DATA 0x00000000
++#define DDRSS1_PHY_820_DATA 0x00000000
++#define DDRSS1_PHY_821_DATA 0x00000000
++#define DDRSS1_PHY_822_DATA 0x00000000
++#define DDRSS1_PHY_823_DATA 0x00000000
++#define DDRSS1_PHY_824_DATA 0x00000000
++#define DDRSS1_PHY_825_DATA 0x00000000
++#define DDRSS1_PHY_826_DATA 0x00000000
++#define DDRSS1_PHY_827_DATA 0x00000000
++#define DDRSS1_PHY_828_DATA 0x00000000
++#define DDRSS1_PHY_829_DATA 0x00000000
++#define DDRSS1_PHY_830_DATA 0x00000000
++#define DDRSS1_PHY_831_DATA 0x00000000
++#define DDRSS1_PHY_832_DATA 0x00000000
++#define DDRSS1_PHY_833_DATA 0x00000000
++#define DDRSS1_PHY_834_DATA 0x00000104
++#define DDRSS1_PHY_835_DATA 0x00000120
++#define DDRSS1_PHY_836_DATA 0x00000000
++#define DDRSS1_PHY_837_DATA 0x00000000
++#define DDRSS1_PHY_838_DATA 0x00000000
++#define DDRSS1_PHY_839_DATA 0x00000000
++#define DDRSS1_PHY_840_DATA 0x00000000
++#define DDRSS1_PHY_841_DATA 0x00000000
++#define DDRSS1_PHY_842_DATA 0x00000000
++#define DDRSS1_PHY_843_DATA 0x00000001
++#define DDRSS1_PHY_844_DATA 0x07FF0000
++#define DDRSS1_PHY_845_DATA 0x0080081F
++#define DDRSS1_PHY_846_DATA 0x00081020
++#define DDRSS1_PHY_847_DATA 0x04010000
++#define DDRSS1_PHY_848_DATA 0x00000000
++#define DDRSS1_PHY_849_DATA 0x00000000
++#define DDRSS1_PHY_850_DATA 0x00000000
++#define DDRSS1_PHY_851_DATA 0x00000100
++#define DDRSS1_PHY_852_DATA 0x01CC0C01
++#define DDRSS1_PHY_853_DATA 0x1003CC0C
++#define DDRSS1_PHY_854_DATA 0x20000140
++#define DDRSS1_PHY_855_DATA 0x07FF0200
++#define DDRSS1_PHY_856_DATA 0x0000DD01
++#define DDRSS1_PHY_857_DATA 0x10100303
++#define DDRSS1_PHY_858_DATA 0x10101010
++#define DDRSS1_PHY_859_DATA 0x10101010
++#define DDRSS1_PHY_860_DATA 0x00021010
++#define DDRSS1_PHY_861_DATA 0x00100010
++#define DDRSS1_PHY_862_DATA 0x00100010
++#define DDRSS1_PHY_863_DATA 0x00100010
++#define DDRSS1_PHY_864_DATA 0x00100010
++#define DDRSS1_PHY_865_DATA 0x00050010
++#define DDRSS1_PHY_866_DATA 0x51517041
++#define DDRSS1_PHY_867_DATA 0x31C06001
++#define DDRSS1_PHY_868_DATA 0x07AB01AB
++#define DDRSS1_PHY_869_DATA 0x00C0C001
++#define DDRSS1_PHY_870_DATA 0x0E0D0001
++#define DDRSS1_PHY_871_DATA 0x10001000
++#define DDRSS1_PHY_872_DATA 0x0C083E42
++#define DDRSS1_PHY_873_DATA 0x0F0C3701
++#define DDRSS1_PHY_874_DATA 0x01000140
++#define DDRSS1_PHY_875_DATA 0x0C000420
++#define DDRSS1_PHY_876_DATA 0x00000198
++#define DDRSS1_PHY_877_DATA 0x0A0000D0
++#define DDRSS1_PHY_878_DATA 0x00030200
++#define DDRSS1_PHY_879_DATA 0x02800000
++#define DDRSS1_PHY_880_DATA 0x80800000
++#define DDRSS1_PHY_881_DATA 0x000E2010
++#define DDRSS1_PHY_882_DATA 0x76543210
++#define DDRSS1_PHY_883_DATA 0x00000008
++#define DDRSS1_PHY_884_DATA 0x02800280
++#define DDRSS1_PHY_885_DATA 0x02800280
++#define DDRSS1_PHY_886_DATA 0x02800280
++#define DDRSS1_PHY_887_DATA 0x02800280
++#define DDRSS1_PHY_888_DATA 0x00000280
++#define DDRSS1_PHY_889_DATA 0x0000A000
++#define DDRSS1_PHY_890_DATA 0x00A000A0
++#define DDRSS1_PHY_891_DATA 0x00A000A0
++#define DDRSS1_PHY_892_DATA 0x00A000A0
++#define DDRSS1_PHY_893_DATA 0x00A000A0
++#define DDRSS1_PHY_894_DATA 0x00A000A0
++#define DDRSS1_PHY_895_DATA 0x00A000A0
++#define DDRSS1_PHY_896_DATA 0x00A000A0
++#define DDRSS1_PHY_897_DATA 0x00A000A0
++#define DDRSS1_PHY_898_DATA 0x01C200A0
++#define DDRSS1_PHY_899_DATA 0x01A00005
++#define DDRSS1_PHY_900_DATA 0x00000000
++#define DDRSS1_PHY_901_DATA 0x00000000
++#define DDRSS1_PHY_902_DATA 0x00080200
++#define DDRSS1_PHY_903_DATA 0x00000000
++#define DDRSS1_PHY_904_DATA 0x20202020
++#define DDRSS1_PHY_905_DATA 0x20202020
++#define DDRSS1_PHY_906_DATA 0xF0F02020
++#define DDRSS1_PHY_907_DATA 0x00000000
++#define DDRSS1_PHY_908_DATA 0x00000000
++#define DDRSS1_PHY_909_DATA 0x00000000
++#define DDRSS1_PHY_910_DATA 0x00000000
++#define DDRSS1_PHY_911_DATA 0x00000000
++#define DDRSS1_PHY_912_DATA 0x00000000
++#define DDRSS1_PHY_913_DATA 0x00000000
++#define DDRSS1_PHY_914_DATA 0x00000000
++#define DDRSS1_PHY_915_DATA 0x00000000
++#define DDRSS1_PHY_916_DATA 0x00000000
++#define DDRSS1_PHY_917_DATA 0x00000000
++#define DDRSS1_PHY_918_DATA 0x00000000
++#define DDRSS1_PHY_919_DATA 0x00000000
++#define DDRSS1_PHY_920_DATA 0x00000000
++#define DDRSS1_PHY_921_DATA 0x00000000
++#define DDRSS1_PHY_922_DATA 0x00000000
++#define DDRSS1_PHY_923_DATA 0x00000000
++#define DDRSS1_PHY_924_DATA 0x00000000
++#define DDRSS1_PHY_925_DATA 0x00000000
++#define DDRSS1_PHY_926_DATA 0x00000000
++#define DDRSS1_PHY_927_DATA 0x00000000
++#define DDRSS1_PHY_928_DATA 0x00000000
++#define DDRSS1_PHY_929_DATA 0x00000000
++#define DDRSS1_PHY_930_DATA 0x00000000
++#define DDRSS1_PHY_931_DATA 0x00000000
++#define DDRSS1_PHY_932_DATA 0x00000000
++#define DDRSS1_PHY_933_DATA 0x00000000
++#define DDRSS1_PHY_934_DATA 0x00000000
++#define DDRSS1_PHY_935_DATA 0x00000000
++#define DDRSS1_PHY_936_DATA 0x00000000
++#define DDRSS1_PHY_937_DATA 0x00000000
++#define DDRSS1_PHY_938_DATA 0x00000000
++#define DDRSS1_PHY_939_DATA 0x00000000
++#define DDRSS1_PHY_940_DATA 0x00000000
++#define DDRSS1_PHY_941_DATA 0x00000000
++#define DDRSS1_PHY_942_DATA 0x00000000
++#define DDRSS1_PHY_943_DATA 0x00000000
++#define DDRSS1_PHY_944_DATA 0x00000000
++#define DDRSS1_PHY_945_DATA 0x00000000
++#define DDRSS1_PHY_946_DATA 0x00000000
++#define DDRSS1_PHY_947_DATA 0x00000000
++#define DDRSS1_PHY_948_DATA 0x00000000
++#define DDRSS1_PHY_949_DATA 0x00000000
++#define DDRSS1_PHY_950_DATA 0x00000000
++#define DDRSS1_PHY_951_DATA 0x00000000
++#define DDRSS1_PHY_952_DATA 0x00000000
++#define DDRSS1_PHY_953_DATA 0x00000000
++#define DDRSS1_PHY_954_DATA 0x00000000
++#define DDRSS1_PHY_955_DATA 0x00000000
++#define DDRSS1_PHY_956_DATA 0x00000000
++#define DDRSS1_PHY_957_DATA 0x00000000
++#define DDRSS1_PHY_958_DATA 0x00000000
++#define DDRSS1_PHY_959_DATA 0x00000000
++#define DDRSS1_PHY_960_DATA 0x00000000
++#define DDRSS1_PHY_961_DATA 0x00000000
++#define DDRSS1_PHY_962_DATA 0x00000000
++#define DDRSS1_PHY_963_DATA 0x00000000
++#define DDRSS1_PHY_964_DATA 0x00000000
++#define DDRSS1_PHY_965_DATA 0x00000000
++#define DDRSS1_PHY_966_DATA 0x00000000
++#define DDRSS1_PHY_967_DATA 0x00000000
++#define DDRSS1_PHY_968_DATA 0x00000000
++#define DDRSS1_PHY_969_DATA 0x00000000
++#define DDRSS1_PHY_970_DATA 0x00000000
++#define DDRSS1_PHY_971_DATA 0x00000000
++#define DDRSS1_PHY_972_DATA 0x00000000
++#define DDRSS1_PHY_973_DATA 0x00000000
++#define DDRSS1_PHY_974_DATA 0x00000000
++#define DDRSS1_PHY_975_DATA 0x00000000
++#define DDRSS1_PHY_976_DATA 0x00000000
++#define DDRSS1_PHY_977_DATA 0x00000000
++#define DDRSS1_PHY_978_DATA 0x00000000
++#define DDRSS1_PHY_979_DATA 0x00000000
++#define DDRSS1_PHY_980_DATA 0x00000000
++#define DDRSS1_PHY_981_DATA 0x00000000
++#define DDRSS1_PHY_982_DATA 0x00000000
++#define DDRSS1_PHY_983_DATA 0x00000000
++#define DDRSS1_PHY_984_DATA 0x00000000
++#define DDRSS1_PHY_985_DATA 0x00000000
++#define DDRSS1_PHY_986_DATA 0x00000000
++#define DDRSS1_PHY_987_DATA 0x00000000
++#define DDRSS1_PHY_988_DATA 0x00000000
++#define DDRSS1_PHY_989_DATA 0x00000000
++#define DDRSS1_PHY_990_DATA 0x00000000
++#define DDRSS1_PHY_991_DATA 0x00000000
++#define DDRSS1_PHY_992_DATA 0x00000000
++#define DDRSS1_PHY_993_DATA 0x00000000
++#define DDRSS1_PHY_994_DATA 0x00000000
++#define DDRSS1_PHY_995_DATA 0x00000000
++#define DDRSS1_PHY_996_DATA 0x00000000
++#define DDRSS1_PHY_997_DATA 0x00000000
++#define DDRSS1_PHY_998_DATA 0x00000000
++#define DDRSS1_PHY_999_DATA 0x00000000
++#define DDRSS1_PHY_1000_DATA 0x00000000
++#define DDRSS1_PHY_1001_DATA 0x00000000
++#define DDRSS1_PHY_1002_DATA 0x00000000
++#define DDRSS1_PHY_1003_DATA 0x00000000
++#define DDRSS1_PHY_1004_DATA 0x00000000
++#define DDRSS1_PHY_1005_DATA 0x00000000
++#define DDRSS1_PHY_1006_DATA 0x00000000
++#define DDRSS1_PHY_1007_DATA 0x00000000
++#define DDRSS1_PHY_1008_DATA 0x00000000
++#define DDRSS1_PHY_1009_DATA 0x00000000
++#define DDRSS1_PHY_1010_DATA 0x00000000
++#define DDRSS1_PHY_1011_DATA 0x00000000
++#define DDRSS1_PHY_1012_DATA 0x00000000
++#define DDRSS1_PHY_1013_DATA 0x00000000
++#define DDRSS1_PHY_1014_DATA 0x00000000
++#define DDRSS1_PHY_1015_DATA 0x00000000
++#define DDRSS1_PHY_1016_DATA 0x00000000
++#define DDRSS1_PHY_1017_DATA 0x00000000
++#define DDRSS1_PHY_1018_DATA 0x00000000
++#define DDRSS1_PHY_1019_DATA 0x00000000
++#define DDRSS1_PHY_1020_DATA 0x00000000
++#define DDRSS1_PHY_1021_DATA 0x00000000
++#define DDRSS1_PHY_1022_DATA 0x00000000
++#define DDRSS1_PHY_1023_DATA 0x00000000
++#define DDRSS1_PHY_1024_DATA 0x00000000
++#define DDRSS1_PHY_1025_DATA 0x00000000
++#define DDRSS1_PHY_1026_DATA 0x00000000
++#define DDRSS1_PHY_1027_DATA 0x00000000
++#define DDRSS1_PHY_1028_DATA 0x00000000
++#define DDRSS1_PHY_1029_DATA 0x00000100
++#define DDRSS1_PHY_1030_DATA 0x00000200
++#define DDRSS1_PHY_1031_DATA 0x00000000
++#define DDRSS1_PHY_1032_DATA 0x00000000
++#define DDRSS1_PHY_1033_DATA 0x00000000
++#define DDRSS1_PHY_1034_DATA 0x00000000
++#define DDRSS1_PHY_1035_DATA 0x00400000
++#define DDRSS1_PHY_1036_DATA 0x00000080
++#define DDRSS1_PHY_1037_DATA 0x00DCBA98
++#define DDRSS1_PHY_1038_DATA 0x03000000
++#define DDRSS1_PHY_1039_DATA 0x00200000
++#define DDRSS1_PHY_1040_DATA 0x00000000
++#define DDRSS1_PHY_1041_DATA 0x00000000
++#define DDRSS1_PHY_1042_DATA 0x00000000
++#define DDRSS1_PHY_1043_DATA 0x00000000
++#define DDRSS1_PHY_1044_DATA 0x00000000
++#define DDRSS1_PHY_1045_DATA 0x0000002A
++#define DDRSS1_PHY_1046_DATA 0x00000015
++#define DDRSS1_PHY_1047_DATA 0x00000015
++#define DDRSS1_PHY_1048_DATA 0x0000002A
++#define DDRSS1_PHY_1049_DATA 0x00000033
++#define DDRSS1_PHY_1050_DATA 0x0000000C
++#define DDRSS1_PHY_1051_DATA 0x0000000C
++#define DDRSS1_PHY_1052_DATA 0x00000033
++#define DDRSS1_PHY_1053_DATA 0x00543210
++#define DDRSS1_PHY_1054_DATA 0x003F0000
++#define DDRSS1_PHY_1055_DATA 0x000F013F
++#define DDRSS1_PHY_1056_DATA 0x20202003
++#define DDRSS1_PHY_1057_DATA 0x00202020
++#define DDRSS1_PHY_1058_DATA 0x20008008
++#define DDRSS1_PHY_1059_DATA 0x00000810
++#define DDRSS1_PHY_1060_DATA 0x00000F00
++#define DDRSS1_PHY_1061_DATA 0x00000000
++#define DDRSS1_PHY_1062_DATA 0x00000000
++#define DDRSS1_PHY_1063_DATA 0x00000000
++#define DDRSS1_PHY_1064_DATA 0x000305CC
++#define DDRSS1_PHY_1065_DATA 0x00030000
++#define DDRSS1_PHY_1066_DATA 0x00000300
++#define DDRSS1_PHY_1067_DATA 0x00000300
++#define DDRSS1_PHY_1068_DATA 0x00000300
++#define DDRSS1_PHY_1069_DATA 0x00000300
++#define DDRSS1_PHY_1070_DATA 0x00000300
++#define DDRSS1_PHY_1071_DATA 0x42080010
++#define DDRSS1_PHY_1072_DATA 0x0000803E
++#define DDRSS1_PHY_1073_DATA 0x00000001
++#define DDRSS1_PHY_1074_DATA 0x01000102
++#define DDRSS1_PHY_1075_DATA 0x00008000
++#define DDRSS1_PHY_1076_DATA 0x00000000
++#define DDRSS1_PHY_1077_DATA 0x00000000
++#define DDRSS1_PHY_1078_DATA 0x00000000
++#define DDRSS1_PHY_1079_DATA 0x00000000
++#define DDRSS1_PHY_1080_DATA 0x00000000
++#define DDRSS1_PHY_1081_DATA 0x00000000
++#define DDRSS1_PHY_1082_DATA 0x00000000
++#define DDRSS1_PHY_1083_DATA 0x00000000
++#define DDRSS1_PHY_1084_DATA 0x00000000
++#define DDRSS1_PHY_1085_DATA 0x00000000
++#define DDRSS1_PHY_1086_DATA 0x00000000
++#define DDRSS1_PHY_1087_DATA 0x00000000
++#define DDRSS1_PHY_1088_DATA 0x00000000
++#define DDRSS1_PHY_1089_DATA 0x00000000
++#define DDRSS1_PHY_1090_DATA 0x00000000
++#define DDRSS1_PHY_1091_DATA 0x00000000
++#define DDRSS1_PHY_1092_DATA 0x00000000
++#define DDRSS1_PHY_1093_DATA 0x00000000
++#define DDRSS1_PHY_1094_DATA 0x00000000
++#define DDRSS1_PHY_1095_DATA 0x00000000
++#define DDRSS1_PHY_1096_DATA 0x00000000
++#define DDRSS1_PHY_1097_DATA 0x00000000
++#define DDRSS1_PHY_1098_DATA 0x00000000
++#define DDRSS1_PHY_1099_DATA 0x00000000
++#define DDRSS1_PHY_1100_DATA 0x00000000
++#define DDRSS1_PHY_1101_DATA 0x00000000
++#define DDRSS1_PHY_1102_DATA 0x00000000
++#define DDRSS1_PHY_1103_DATA 0x00000000
++#define DDRSS1_PHY_1104_DATA 0x00000000
++#define DDRSS1_PHY_1105_DATA 0x00000000
++#define DDRSS1_PHY_1106_DATA 0x00000000
++#define DDRSS1_PHY_1107_DATA 0x00000000
++#define DDRSS1_PHY_1108_DATA 0x00000000
++#define DDRSS1_PHY_1109_DATA 0x00000000
++#define DDRSS1_PHY_1110_DATA 0x00000000
++#define DDRSS1_PHY_1111_DATA 0x00000000
++#define DDRSS1_PHY_1112_DATA 0x00000000
++#define DDRSS1_PHY_1113_DATA 0x00000000
++#define DDRSS1_PHY_1114_DATA 0x00000000
++#define DDRSS1_PHY_1115_DATA 0x00000000
++#define DDRSS1_PHY_1116_DATA 0x00000000
++#define DDRSS1_PHY_1117_DATA 0x00000000
++#define DDRSS1_PHY_1118_DATA 0x00000000
++#define DDRSS1_PHY_1119_DATA 0x00000000
++#define DDRSS1_PHY_1120_DATA 0x00000000
++#define DDRSS1_PHY_1121_DATA 0x00000000
++#define DDRSS1_PHY_1122_DATA 0x00000000
++#define DDRSS1_PHY_1123_DATA 0x00000000
++#define DDRSS1_PHY_1124_DATA 0x00000000
++#define DDRSS1_PHY_1125_DATA 0x00000000
++#define DDRSS1_PHY_1126_DATA 0x00000000
++#define DDRSS1_PHY_1127_DATA 0x00000000
++#define DDRSS1_PHY_1128_DATA 0x00000000
++#define DDRSS1_PHY_1129_DATA 0x00000000
++#define DDRSS1_PHY_1130_DATA 0x00000000
++#define DDRSS1_PHY_1131_DATA 0x00000000
++#define DDRSS1_PHY_1132_DATA 0x00000000
++#define DDRSS1_PHY_1133_DATA 0x00000000
++#define DDRSS1_PHY_1134_DATA 0x00000000
++#define DDRSS1_PHY_1135_DATA 0x00000000
++#define DDRSS1_PHY_1136_DATA 0x00000000
++#define DDRSS1_PHY_1137_DATA 0x00000000
++#define DDRSS1_PHY_1138_DATA 0x00000000
++#define DDRSS1_PHY_1139_DATA 0x00000000
++#define DDRSS1_PHY_1140_DATA 0x00000000
++#define DDRSS1_PHY_1141_DATA 0x00000000
++#define DDRSS1_PHY_1142_DATA 0x00000000
++#define DDRSS1_PHY_1143_DATA 0x00000000
++#define DDRSS1_PHY_1144_DATA 0x00000000
++#define DDRSS1_PHY_1145_DATA 0x00000000
++#define DDRSS1_PHY_1146_DATA 0x00000000
++#define DDRSS1_PHY_1147_DATA 0x00000000
++#define DDRSS1_PHY_1148_DATA 0x00000000
++#define DDRSS1_PHY_1149_DATA 0x00000000
++#define DDRSS1_PHY_1150_DATA 0x00000000
++#define DDRSS1_PHY_1151_DATA 0x00000000
++#define DDRSS1_PHY_1152_DATA 0x00000000
++#define DDRSS1_PHY_1153_DATA 0x00000000
++#define DDRSS1_PHY_1154_DATA 0x00000000
++#define DDRSS1_PHY_1155_DATA 0x00000000
++#define DDRSS1_PHY_1156_DATA 0x00000000
++#define DDRSS1_PHY_1157_DATA 0x00000000
++#define DDRSS1_PHY_1158_DATA 0x00000000
++#define DDRSS1_PHY_1159_DATA 0x00000000
++#define DDRSS1_PHY_1160_DATA 0x00000000
++#define DDRSS1_PHY_1161_DATA 0x00000000
++#define DDRSS1_PHY_1162_DATA 0x00000000
++#define DDRSS1_PHY_1163_DATA 0x00000000
++#define DDRSS1_PHY_1164_DATA 0x00000000
++#define DDRSS1_PHY_1165_DATA 0x00000000
++#define DDRSS1_PHY_1166_DATA 0x00000000
++#define DDRSS1_PHY_1167_DATA 0x00000000
++#define DDRSS1_PHY_1168_DATA 0x00000000
++#define DDRSS1_PHY_1169_DATA 0x00000000
++#define DDRSS1_PHY_1170_DATA 0x00000000
++#define DDRSS1_PHY_1171_DATA 0x00000000
++#define DDRSS1_PHY_1172_DATA 0x00000000
++#define DDRSS1_PHY_1173_DATA 0x00000000
++#define DDRSS1_PHY_1174_DATA 0x00000000
++#define DDRSS1_PHY_1175_DATA 0x00000000
++#define DDRSS1_PHY_1176_DATA 0x00000000
++#define DDRSS1_PHY_1177_DATA 0x00000000
++#define DDRSS1_PHY_1178_DATA 0x00000000
++#define DDRSS1_PHY_1179_DATA 0x00000000
++#define DDRSS1_PHY_1180_DATA 0x00000000
++#define DDRSS1_PHY_1181_DATA 0x00000000
++#define DDRSS1_PHY_1182_DATA 0x00000000
++#define DDRSS1_PHY_1183_DATA 0x00000000
++#define DDRSS1_PHY_1184_DATA 0x00000000
++#define DDRSS1_PHY_1185_DATA 0x00000000
++#define DDRSS1_PHY_1186_DATA 0x00000000
++#define DDRSS1_PHY_1187_DATA 0x00000000
++#define DDRSS1_PHY_1188_DATA 0x00000000
++#define DDRSS1_PHY_1189_DATA 0x00000000
++#define DDRSS1_PHY_1190_DATA 0x00000000
++#define DDRSS1_PHY_1191_DATA 0x00000000
++#define DDRSS1_PHY_1192_DATA 0x00000000
++#define DDRSS1_PHY_1193_DATA 0x00000000
++#define DDRSS1_PHY_1194_DATA 0x00000000
++#define DDRSS1_PHY_1195_DATA 0x00000000
++#define DDRSS1_PHY_1196_DATA 0x00000000
++#define DDRSS1_PHY_1197_DATA 0x00000000
++#define DDRSS1_PHY_1198_DATA 0x00000000
++#define DDRSS1_PHY_1199_DATA 0x00000000
++#define DDRSS1_PHY_1200_DATA 0x00000000
++#define DDRSS1_PHY_1201_DATA 0x00000000
++#define DDRSS1_PHY_1202_DATA 0x00000000
++#define DDRSS1_PHY_1203_DATA 0x00000000
++#define DDRSS1_PHY_1204_DATA 0x00000000
++#define DDRSS1_PHY_1205_DATA 0x00000000
++#define DDRSS1_PHY_1206_DATA 0x00000000
++#define DDRSS1_PHY_1207_DATA 0x00000000
++#define DDRSS1_PHY_1208_DATA 0x00000000
++#define DDRSS1_PHY_1209_DATA 0x00000000
++#define DDRSS1_PHY_1210_DATA 0x00000000
++#define DDRSS1_PHY_1211_DATA 0x00000000
++#define DDRSS1_PHY_1212_DATA 0x00000000
++#define DDRSS1_PHY_1213_DATA 0x00000000
++#define DDRSS1_PHY_1214_DATA 0x00000000
++#define DDRSS1_PHY_1215_DATA 0x00000000
++#define DDRSS1_PHY_1216_DATA 0x00000000
++#define DDRSS1_PHY_1217_DATA 0x00000000
++#define DDRSS1_PHY_1218_DATA 0x00000000
++#define DDRSS1_PHY_1219_DATA 0x00000000
++#define DDRSS1_PHY_1220_DATA 0x00000000
++#define DDRSS1_PHY_1221_DATA 0x00000000
++#define DDRSS1_PHY_1222_DATA 0x00000000
++#define DDRSS1_PHY_1223_DATA 0x00000000
++#define DDRSS1_PHY_1224_DATA 0x00000000
++#define DDRSS1_PHY_1225_DATA 0x00000000
++#define DDRSS1_PHY_1226_DATA 0x00000000
++#define DDRSS1_PHY_1227_DATA 0x00000000
++#define DDRSS1_PHY_1228_DATA 0x00000000
++#define DDRSS1_PHY_1229_DATA 0x00000000
++#define DDRSS1_PHY_1230_DATA 0x00000000
++#define DDRSS1_PHY_1231_DATA 0x00000000
++#define DDRSS1_PHY_1232_DATA 0x00000000
++#define DDRSS1_PHY_1233_DATA 0x00000000
++#define DDRSS1_PHY_1234_DATA 0x00000000
++#define DDRSS1_PHY_1235_DATA 0x00000000
++#define DDRSS1_PHY_1236_DATA 0x00000000
++#define DDRSS1_PHY_1237_DATA 0x00000000
++#define DDRSS1_PHY_1238_DATA 0x00000000
++#define DDRSS1_PHY_1239_DATA 0x00000000
++#define DDRSS1_PHY_1240_DATA 0x00000000
++#define DDRSS1_PHY_1241_DATA 0x00000000
++#define DDRSS1_PHY_1242_DATA 0x00000000
++#define DDRSS1_PHY_1243_DATA 0x00000000
++#define DDRSS1_PHY_1244_DATA 0x00000000
++#define DDRSS1_PHY_1245_DATA 0x00000000
++#define DDRSS1_PHY_1246_DATA 0x00000000
++#define DDRSS1_PHY_1247_DATA 0x00000000
++#define DDRSS1_PHY_1248_DATA 0x00000000
++#define DDRSS1_PHY_1249_DATA 0x00000000
++#define DDRSS1_PHY_1250_DATA 0x00000000
++#define DDRSS1_PHY_1251_DATA 0x00000000
++#define DDRSS1_PHY_1252_DATA 0x00000000
++#define DDRSS1_PHY_1253_DATA 0x00000000
++#define DDRSS1_PHY_1254_DATA 0x00000000
++#define DDRSS1_PHY_1255_DATA 0x00000000
++#define DDRSS1_PHY_1256_DATA 0x00000000
++#define DDRSS1_PHY_1257_DATA 0x00000000
++#define DDRSS1_PHY_1258_DATA 0x00000000
++#define DDRSS1_PHY_1259_DATA 0x00000000
++#define DDRSS1_PHY_1260_DATA 0x00000000
++#define DDRSS1_PHY_1261_DATA 0x00000000
++#define DDRSS1_PHY_1262_DATA 0x00000000
++#define DDRSS1_PHY_1263_DATA 0x00000000
++#define DDRSS1_PHY_1264_DATA 0x00000000
++#define DDRSS1_PHY_1265_DATA 0x00000000
++#define DDRSS1_PHY_1266_DATA 0x00000000
++#define DDRSS1_PHY_1267_DATA 0x00000000
++#define DDRSS1_PHY_1268_DATA 0x00000000
++#define DDRSS1_PHY_1269_DATA 0x00000000
++#define DDRSS1_PHY_1270_DATA 0x00000000
++#define DDRSS1_PHY_1271_DATA 0x00000000
++#define DDRSS1_PHY_1272_DATA 0x00000000
++#define DDRSS1_PHY_1273_DATA 0x00000000
++#define DDRSS1_PHY_1274_DATA 0x00000000
++#define DDRSS1_PHY_1275_DATA 0x00000000
++#define DDRSS1_PHY_1276_DATA 0x00000000
++#define DDRSS1_PHY_1277_DATA 0x00000000
++#define DDRSS1_PHY_1278_DATA 0x00000000
++#define DDRSS1_PHY_1279_DATA 0x00000000
++#define DDRSS1_PHY_1280_DATA 0x00000000
++#define DDRSS1_PHY_1281_DATA 0x00010100
++#define DDRSS1_PHY_1282_DATA 0x00000000
++#define DDRSS1_PHY_1283_DATA 0x00000000
++#define DDRSS1_PHY_1284_DATA 0x00050000
++#define DDRSS1_PHY_1285_DATA 0x04000000
++#define DDRSS1_PHY_1286_DATA 0x00000055
++#define DDRSS1_PHY_1287_DATA 0x00000000
++#define DDRSS1_PHY_1288_DATA 0x00000000
++#define DDRSS1_PHY_1289_DATA 0x00000000
++#define DDRSS1_PHY_1290_DATA 0x00000000
++#define DDRSS1_PHY_1291_DATA 0x00002001
++#define DDRSS1_PHY_1292_DATA 0x0000400F
++#define DDRSS1_PHY_1293_DATA 0x50020028
++#define DDRSS1_PHY_1294_DATA 0x01010000
++#define DDRSS1_PHY_1295_DATA 0x80080001
++#define DDRSS1_PHY_1296_DATA 0x10200000
++#define DDRSS1_PHY_1297_DATA 0x00000008
++#define DDRSS1_PHY_1298_DATA 0x00000000
++#define DDRSS1_PHY_1299_DATA 0x01090E00
++#define DDRSS1_PHY_1300_DATA 0x00040101
++#define DDRSS1_PHY_1301_DATA 0x0000010F
++#define DDRSS1_PHY_1302_DATA 0x00000000
++#define DDRSS1_PHY_1303_DATA 0x00000064
++#define DDRSS1_PHY_1304_DATA 0x00000000
++#define DDRSS1_PHY_1305_DATA 0x01010000
++#define DDRSS1_PHY_1306_DATA 0x01080402
++#define DDRSS1_PHY_1307_DATA 0x01200F02
++#define DDRSS1_PHY_1308_DATA 0x00194280
++#define DDRSS1_PHY_1309_DATA 0x00000004
++#define DDRSS1_PHY_1310_DATA 0x00042000
++#define DDRSS1_PHY_1311_DATA 0x00000000
++#define DDRSS1_PHY_1312_DATA 0x00000000
++#define DDRSS1_PHY_1313_DATA 0x00000000
++#define DDRSS1_PHY_1314_DATA 0x00000000
++#define DDRSS1_PHY_1315_DATA 0x00000000
++#define DDRSS1_PHY_1316_DATA 0x00000000
++#define DDRSS1_PHY_1317_DATA 0x01000000
++#define DDRSS1_PHY_1318_DATA 0x00000705
++#define DDRSS1_PHY_1319_DATA 0x00000054
++#define DDRSS1_PHY_1320_DATA 0x00030820
++#define DDRSS1_PHY_1321_DATA 0x00010820
++#define DDRSS1_PHY_1322_DATA 0x00010820
++#define DDRSS1_PHY_1323_DATA 0x00010820
++#define DDRSS1_PHY_1324_DATA 0x00010820
++#define DDRSS1_PHY_1325_DATA 0x00010820
++#define DDRSS1_PHY_1326_DATA 0x00010820
++#define DDRSS1_PHY_1327_DATA 0x00010820
++#define DDRSS1_PHY_1328_DATA 0x00010820
++#define DDRSS1_PHY_1329_DATA 0x00000000
++#define DDRSS1_PHY_1330_DATA 0x00000074
++#define DDRSS1_PHY_1331_DATA 0x00000400
++#define DDRSS1_PHY_1332_DATA 0x00000108
++#define DDRSS1_PHY_1333_DATA 0x00000000
++#define DDRSS1_PHY_1334_DATA 0x00000000
++#define DDRSS1_PHY_1335_DATA 0x00000000
++#define DDRSS1_PHY_1336_DATA 0x00000000
++#define DDRSS1_PHY_1337_DATA 0x00000000
++#define DDRSS1_PHY_1338_DATA 0x03000000
++#define DDRSS1_PHY_1339_DATA 0x00000000
++#define DDRSS1_PHY_1340_DATA 0x00000000
++#define DDRSS1_PHY_1341_DATA 0x00000000
++#define DDRSS1_PHY_1342_DATA 0x04102006
++#define DDRSS1_PHY_1343_DATA 0x00041020
++#define DDRSS1_PHY_1344_DATA 0x01C98C98
++#define DDRSS1_PHY_1345_DATA 0x3F400000
++#define DDRSS1_PHY_1346_DATA 0x3F3F1F3F
++#define DDRSS1_PHY_1347_DATA 0x0000001F
++#define DDRSS1_PHY_1348_DATA 0x00000000
++#define DDRSS1_PHY_1349_DATA 0x00000000
++#define DDRSS1_PHY_1350_DATA 0x00000000
++#define DDRSS1_PHY_1351_DATA 0x00010000
++#define DDRSS1_PHY_1352_DATA 0x00000000
++#define DDRSS1_PHY_1353_DATA 0x00000000
++#define DDRSS1_PHY_1354_DATA 0x00000000
++#define DDRSS1_PHY_1355_DATA 0x00000000
++#define DDRSS1_PHY_1356_DATA 0x76543210
++#define DDRSS1_PHY_1357_DATA 0x00010198
++#define DDRSS1_PHY_1358_DATA 0x00000000
++#define DDRSS1_PHY_1359_DATA 0x00000000
++#define DDRSS1_PHY_1360_DATA 0x00000000
++#define DDRSS1_PHY_1361_DATA 0x00040700
++#define DDRSS1_PHY_1362_DATA 0x00000000
++#define DDRSS1_PHY_1363_DATA 0x00000000
++#define DDRSS1_PHY_1364_DATA 0x00000000
++#define DDRSS1_PHY_1365_DATA 0x00000000
++#define DDRSS1_PHY_1366_DATA 0x00000000
++#define DDRSS1_PHY_1367_DATA 0x00000002
++#define DDRSS1_PHY_1368_DATA 0x00000000
++#define DDRSS1_PHY_1369_DATA 0x00000000
++#define DDRSS1_PHY_1370_DATA 0x00000000
++#define DDRSS1_PHY_1371_DATA 0x00000000
++#define DDRSS1_PHY_1372_DATA 0x00000000
++#define DDRSS1_PHY_1373_DATA 0x00000000
++#define DDRSS1_PHY_1374_DATA 0x00080000
++#define DDRSS1_PHY_1375_DATA 0x000007FF
++#define DDRSS1_PHY_1376_DATA 0x00000000
++#define DDRSS1_PHY_1377_DATA 0x00000000
++#define DDRSS1_PHY_1378_DATA 0x00000000
++#define DDRSS1_PHY_1379_DATA 0x00000000
++#define DDRSS1_PHY_1380_DATA 0x00000000
++#define DDRSS1_PHY_1381_DATA 0x00000000
++#define DDRSS1_PHY_1382_DATA 0x000FFFFF
++#define DDRSS1_PHY_1383_DATA 0x000FFFFF
++#define DDRSS1_PHY_1384_DATA 0x0000FFFF
++#define DDRSS1_PHY_1385_DATA 0xFFFFFFF0
++#define DDRSS1_PHY_1386_DATA 0x030FFFFF
++#define DDRSS1_PHY_1387_DATA 0x01FFFFFF
++#define DDRSS1_PHY_1388_DATA 0x0000FFFF
++#define DDRSS1_PHY_1389_DATA 0x00000000
++#define DDRSS1_PHY_1390_DATA 0x00000000
++#define DDRSS1_PHY_1391_DATA 0x00000000
++#define DDRSS1_PHY_1392_DATA 0x00000000
++#define DDRSS1_PHY_1393_DATA 0x0001F7C0
++#define DDRSS1_PHY_1394_DATA 0x00000003
++#define DDRSS1_PHY_1395_DATA 0x00000000
++#define DDRSS1_PHY_1396_DATA 0x00001142
++#define DDRSS1_PHY_1397_DATA 0x040207AB
++#define DDRSS1_PHY_1398_DATA 0x01000080
++#define DDRSS1_PHY_1399_DATA 0x03900390
++#define DDRSS1_PHY_1400_DATA 0x03900390
++#define DDRSS1_PHY_1401_DATA 0x00000390
++#define DDRSS1_PHY_1402_DATA 0x00000390
++#define DDRSS1_PHY_1403_DATA 0x00000390
++#define DDRSS1_PHY_1404_DATA 0x00000390
++#define DDRSS1_PHY_1405_DATA 0x00000005
++#define DDRSS1_PHY_1406_DATA 0x01813FCC
++#define DDRSS1_PHY_1407_DATA 0x000000CC
++#define DDRSS1_PHY_1408_DATA 0x0C000DFF
++#define DDRSS1_PHY_1409_DATA 0x30000DFF
++#define DDRSS1_PHY_1410_DATA 0x3F0DFF11
++#define DDRSS1_PHY_1411_DATA 0x000100F0
++#define DDRSS1_PHY_1412_DATA 0x780DFFCC
++#define DDRSS1_PHY_1413_DATA 0x00007E31
++#define DDRSS1_PHY_1414_DATA 0x000CBF11
++#define DDRSS1_PHY_1415_DATA 0x01990010
++#define DDRSS1_PHY_1416_DATA 0x000CBF11
++#define DDRSS1_PHY_1417_DATA 0x01990010
++#define DDRSS1_PHY_1418_DATA 0x3F0DFF11
++#define DDRSS1_PHY_1419_DATA 0x00EF00F0
++#define DDRSS1_PHY_1420_DATA 0x3F0DFF11
++#define DDRSS1_PHY_1421_DATA 0x01FF00F0
++#define DDRSS1_PHY_1422_DATA 0x20040006
+diff --git a/arch/arm/dts/k3-am68-phyboard-izar-u-boot.dtsi b/arch/arm/dts/k3-am68-phyboard-izar-u-boot.dtsi
+new file mode 100644
+index 000000000000..cd40506d3ac6
+--- /dev/null
++++ b/arch/arm/dts/k3-am68-phyboard-izar-u-boot.dtsi
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0-only OR MIT
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ * Author: Dominik Haller <d.haller@phytec.de>
++ *
++ * https://www.phytec.eu/en/produkte/development-kits/phyboard-izar/
++ */
++
++#include "k3-am68-phycore-som-binman.dtsi"
++
++&cbass_main {
++	bootph-all;
++};
++
++&watchdog1 {
++	status = "disabled";
++};
++
++&mcu_uart0 {
++	bootph-all;
++};
+diff --git a/arch/arm/dts/k3-am68-phycore-som-binman.dtsi b/arch/arm/dts/k3-am68-phycore-som-binman.dtsi
+new file mode 100644
+index 000000000000..a0a82c8b6a2f
+--- /dev/null
++++ b/arch/arm/dts/k3-am68-phycore-som-binman.dtsi
+@@ -0,0 +1,430 @@
++// SPDX-License-Identifier: GPL-2.0-only OR MIT
++/*
++ * Based on k3-j721s2-binman.dtsi
++ *
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ * Author: Dominik Haller <d.haller@phytec.de>
++ */
++
++#include "k3-binman.dtsi"
++
++#ifdef CONFIG_TARGET_PHYCORE_AM68X_R5
++
++&binman {
++	tiboot3-am68x-hs-phycore-som.bin {
++		filename = "tiboot3-am68x-hs-phycore-som.bin";
++		ti-secure-rom {
++			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
++				<&combined_dm_cfg>, <&sysfw_inner_cert>;
++			combined;
++			dm-data;
++			sysfw-inner-cert;
++			keyfile = "custMpk.pem";
++			sw-rev = <1>;
++			content-sbl = <&u_boot_spl>;
++			content-sysfw = <&ti_fs_enc>;
++			content-sysfw-data = <&combined_tifs_cfg>;
++			content-sysfw-inner-cert = <&sysfw_inner_cert>;
++			content-dm-data = <&combined_dm_cfg>;
++			load = <CONFIG_SPL_TEXT_BASE>;
++			load-sysfw = <0x40000>;
++			load-sysfw-data = <0x67000>;
++			load-dm-data = <0x41c80000>;
++		};
++		u_boot_spl: u-boot-spl {
++			no-expanded;
++		};
++		ti_fs_enc: ti-fs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721s2-hs-enc.bin";
++			type = "blob-ext";
++		};
++		combined_tifs_cfg: combined-tifs-cfg.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++		sysfw_inner_cert: sysfw-inner-cert {
++			filename = "ti-sysfw/ti-fs-firmware-j721s2-hs-cert.bin";
++			type = "blob-ext";
++		};
++		combined_dm_cfg: combined-dm-cfg.bin {
++			filename = "combined-dm-cfg.bin";
++			type = "blob-ext";
++		};
++	};
++};
++
++&binman {
++	tiboot3-am68x-hs-fs-phycore-som.bin {
++		filename = "tiboot3-am68x-hs-fs-phycore-som.bin";
++		ti-secure-rom {
++			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
++				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
++			combined;
++			dm-data;
++			sysfw-inner-cert;
++			keyfile = "custMpk.pem";
++			sw-rev = <1>;
++			content-sbl = <&u_boot_spl_fs>;
++			content-sysfw = <&ti_fs_enc_fs>;
++			content-sysfw-data = <&combined_tifs_cfg_fs>;
++			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
++			content-dm-data = <&combined_dm_cfg_fs>;
++			load = <CONFIG_SPL_TEXT_BASE>;
++			load-sysfw = <0x40000>;
++			load-sysfw-data = <0x67000>;
++			load-dm-data = <0x41c80000>;
++		};
++		u_boot_spl_fs: u-boot-spl {
++			no-expanded;
++		};
++		ti_fs_enc_fs: ti-fs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721s2-hs-fs-enc.bin";
++			type = "blob-ext";
++		};
++		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++		sysfw_inner_cert_fs: sysfw-inner-cert {
++			filename = "ti-sysfw/ti-fs-firmware-j721s2-hs-fs-cert.bin";
++			type = "blob-ext";
++		};
++		combined_dm_cfg_fs: combined-dm-cfg.bin {
++			filename = "combined-dm-cfg.bin";
++			type = "blob-ext";
++		};
++	};
++};
++
++&binman {
++	tiboot3-am68x-gp-phycore-som.bin {
++		filename = "tiboot3-am68x-gp-phycore-som.bin";
++		symlink = "tiboot3.bin";
++		ti-secure-rom {
++			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
++				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
++			combined;
++			dm-data;
++			content-sbl = <&u_boot_spl_unsigned>;
++			load = <CONFIG_SPL_TEXT_BASE>;
++			content-sysfw = <&ti_fs_gp>;
++			load-sysfw = <0x40000>;
++			content-sysfw-data = <&combined_tifs_cfg_gp>;
++			load-sysfw-data = <0x67000>;
++			content-dm-data = <&combined_dm_cfg_gp>;
++			load-dm-data = <0x41c80000>;
++			sw-rev = <1>;
++			keyfile = "ti-degenerate-key.pem";
++		};
++		u_boot_spl_unsigned: u-boot-spl {
++			no-expanded;
++		};
++		ti_fs_gp: ti-fs-gp.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721s2-gp.bin";
++			type = "blob-ext";
++		};
++		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
++			filename = "combined-dm-cfg.bin";
++			type = "blob-ext";
++		};
++
++	};
++};
++
++#endif
++
++#ifdef CONFIG_TARGET_PHYCORE_AM68X_A72
++#define SPL_AM68_PHYBOARD_IZAR_DTB "spl/dts/ti/k3-am68-phyboard-izar.dtb"
++#define AM68_PHYBOARD_IZAR_DTB "u-boot.dtb"
++
++&binman {
++	ti-spl {
++		insert-template = <&ti_spl_template>;
++
++		fit {
++			images {
++				atf {
++					ti-secure {
++						auth-in-place = <0xa02>;
++
++						firewall-257-0 {
++							/* cpu_0_cpu_0_msmc Background Firewall */
++							insert-template = <&firewall_bg_1>;
++							id = <257>;
++							region = <0>;
++						};
++
++						firewall-257-1 {
++							/* cpu_0_cpu_0_msmc Foreground Firewall */
++							insert-template = <&firewall_armv8_atf_fg>;
++							id = <257>;
++							region = <1>;
++						};
++
++						firewall-284-0 {
++							/* dru_0_msmc Background Firewall */
++							insert-template = <&firewall_bg_3>;
++							id = <284>;
++							region = <0>;
++						};
++
++						firewall-284-1 {
++							/* dru_0_msmc Foreground Firewall */
++							insert-template = <&firewall_armv8_atf_fg>;
++							id = <284>;
++							region = <1>;
++						};
++
++						/*	firewall-5140-0 {
++						 *		nb_slv0__mem0 Background Firewall
++						 *		Already configured by the secure entity
++						 *	};
++						 */
++
++						firewall-5140-1 {
++							/* nb_slv0__mem0 Foreground Firewall */
++							insert-template = <&firewall_armv8_atf_fg>;
++							id = <5140>;
++							region = <1>;
++						};
++
++						/*	firewall-5140-0 {
++						 *		nb_slv1__mem0 Background Firewall
++						 *		Already configured by the secure entity
++						 *	};
++						 */
++
++						firewall-5141-1 {
++							/* nb_slv1__mem0 Foreground Firewall */
++							insert-template = <&firewall_armv8_atf_fg>;
++							id = <5141>;
++							region = <1>;
++						};
++
++					};
++				};
++
++				tee {
++					ti-secure {
++						auth-in-place = <0xa02>;
++
++						firewall-257-2 {
++							/* cpu_0_cpu_0_msmc Foreground Firewall */
++							insert-template = <&firewall_armv8_optee_fg>;
++							id = <257>;
++							region = <2>;
++						};
++
++						firewall-284-2 {
++							/* dru_0_msmc Foreground Firewall */
++							insert-template = <&firewall_armv8_optee_fg>;
++							id = <284>;
++							region = <2>;
++						};
++
++						firewall-5142-0 {
++							/* nb_slv2__mem0 Background Firewall - 0 */
++							insert-template = <&firewall_bg_3>;
++							id = <5142>;
++							region = <0>;
++						};
++
++						firewall-5142-1 {
++							/* nb_slv2__mem0 Foreground Firewall */
++							insert-template = <&firewall_armv8_optee_fg>;
++							id = <5142>;
++							region = <1>;
++						};
++
++						firewall-5143-0 {
++							/* nb_slv3__mem0 Background Firewall - 0 */
++							insert-template = <&firewall_bg_3>;
++							id = <5143>;
++							region = <0>;
++						};
++
++						firewall-5143-1 {
++							/* nb_slv3__mem0 Foreground Firewall */
++							insert-template = <&firewall_armv8_optee_fg>;
++							id = <5143>;
++							region = <1>;
++						};
++
++						firewall-5144-0 {
++							/* nb_slv4__mem0 Background Firewall - 0 */
++							insert-template = <&firewall_bg_3>;
++							id = <5144>;
++							region = <0>;
++						};
++
++						firewall-5144-1 {
++							/* nb_slv4__mem0 Foreground Firewall */
++							insert-template = <&firewall_armv8_optee_fg>;
++							id = <5144>;
++							region = <1>;
++						};
++
++					};
++				};
++				dm {
++					ti-secure {
++						content = <&dm>;
++						keyfile = "custMpk.pem";
++					};
++					dm: ti-dm {
++						filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
++					};
++				};
++
++				fdt-0 {
++					description = "k3-am68-phyboard-izar";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&spl_am68_phyboard_izar_dtb>;
++						keyfile = "custMpk.pem";
++					};
++					spl_am68_phyboard_izar_dtb: blob-ext {
++						filename = SPL_AM68_PHYBOARD_IZAR_DTB;
++					};
++
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am68-phyboard-izar";
++					firmware = "atf";
++					loadables = "tee", "dm", "spl";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
++};
++
++&binman {
++	u-boot {
++		insert-template = <&u_boot_template>;
++
++		fit {
++			images {
++				uboot {
++					description = "U-Boot for phyBOARD Izar AM68x";
++				};
++
++				fdt-0 {
++					description = "k3-am68-phyboard-izar";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&am68_phyboard_izar_dtb>;
++						keyfile = "custMpk.pem";
++					};
++					am68_phyboard_izar_dtb: blob-ext {
++						filename = AM68_PHYBOARD_IZAR_DTB;
++					};
++
++					hash {
++						algo = "crc32";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am68-phyboard-izar";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
++};
++
++&binman {
++	ti-spl_unsigned {
++		insert-template = <&ti_spl_unsigned_template>;
++
++		fit {
++			images {
++				dm {
++					ti-dm {
++						filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
++					};
++				};
++
++				fdt-0 {
++					description = "k3-am68-phyboard-izar";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					spl_am68_phyboard_izar_dtb_unsigned: blob {
++						filename = SPL_AM68_PHYBOARD_IZAR_DTB;
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am68-phyboard-izar";
++					firmware = "atf";
++					loadables = "tee", "dm", "spl";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
++};
++
++&binman {
++	u-boot_unsigned {
++		insert-template = <&u_boot_unsigned_template>;
++
++		fit {
++			images {
++				uboot {
++					description = "U-Boot for phyBOARD Izar AM68x";
++				};
++
++				fdt-0 {
++					description = "k3-am68-phyboard-izar";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					am68_phyboard_izar_unsigned: blob {
++						filename = AM68_PHYBOARD_IZAR_DTB;
++					};
++					hash {
++						algo = "crc32";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am68-phyboard-izar";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
++};
++#endif
+diff --git a/arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts b/arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts
+new file mode 100644
+index 000000000000..a2674a3e1f8a
+--- /dev/null
++++ b/arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0-only OR MIT
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ * Author: Dominik Haller <d.haller@phytec.de>
++ *
++ * https://www.phytec.eu/en/produkte/development-kits/phyboard-izar/
++ */
++
++/dts-v1/;
++
++#include "k3-am68-phyboard-izar.dts"
++#include "k3-am68-ddr-phycore-som-lp4-4266-4gb.dtsi"
++#include "k3-j721s2-ddr.dtsi"
++#include "k3-am68-phyboard-izar-u-boot.dtsi"
++#include "k3-j721s2-r5.dtsi"
++
++&wkup_vtm0 {
++	bootph-pre-ram;
++	vdd-supply-2 = <&vdd_cpu_avs>;
++};
+diff --git a/arch/arm/mach-k3/j721s2/Kconfig b/arch/arm/mach-k3/j721s2/Kconfig
+index 8b54c0401b68..feb76ab19da8 100644
+--- a/arch/arm/mach-k3/j721s2/Kconfig
++++ b/arch/arm/mach-k3/j721s2/Kconfig
+@@ -29,8 +29,28 @@ config TARGET_J721S2_R5_EVM
+ 	imply SYS_K3_SPL_ATF
+ 	imply TI_I2C_BOARD_DETECT
+ 
++config TARGET_PHYCORE_AM68X_A72
++	bool "PHYTEC phyCORE-AM68x running on A72"
++	select ARM64
++	select BOARD_LATE_INIT
++	select SYS_DISABLE_DCACHE_OPS
++	select BINMAN
++	imply OF_UPSTREAM
++
++config TARGET_PHYCORE_AM68X_R5
++	bool "PHYTEC phyCORE-AM68x running on R5"
++	select CPU_V7R
++	select SYS_THUMB_BUILD
++	select K3_LOAD_SYSFW
++	select RAM
++	select SPL_RAM
++	select K3_DDRSS
++	select BINMAN
++	imply SYS_K3_SPL_ATF
++
+ endchoice
+ 
+ source "board/ti/j721s2/Kconfig"
++source "board/phytec/phycore_am68x/Kconfig"
+ 
+ endif
+diff --git a/board/phytec/phycore_am68x/Kconfig b/board/phytec/phycore_am68x/Kconfig
+new file mode 100644
+index 000000000000..37912fb4ed32
+--- /dev/null
++++ b/board/phytec/phycore_am68x/Kconfig
+@@ -0,0 +1,41 @@
++# SPDX-License-Identifier: GPL-2.0-only OR MIT
++#
++# Copyright (C) 2025 PHYTEC Messtechnik GmbH
++# Author: Dominik Haller <d.haller@phytec.de>
++
++if TARGET_PHYCORE_AM68X_A72
++
++config SYS_BOARD
++       default "phycore_am68x"
++
++config SYS_VENDOR
++       default "phytec"
++
++config SYS_CONFIG_NAME
++       default "phycore_am68x"
++
++config ENV_SOURCE_FILE
++       default "phycore_am68x"
++
++source "board/phytec/common/Kconfig"
++
++endif
++
++if TARGET_PHYCORE_AM68X_R5
++
++config SYS_BOARD
++       default "phycore_am68x"
++
++config SYS_VENDOR
++       default "phytec"
++
++config SYS_CONFIG_NAME
++       default "phycore_am68x"
++
++config ENV_SOURCE_FILE
++       default "phycore_am68x"
++
++source "board/phytec/common/Kconfig"
++source "board/phytec/common/k3/Kconfig"
++
++endif
+diff --git a/board/phytec/phycore_am68x/MAINTAINERS b/board/phytec/phycore_am68x/MAINTAINERS
+new file mode 100644
+index 000000000000..0f729b2ff8fd
+--- /dev/null
++++ b/board/phytec/phycore_am68x/MAINTAINERS
+@@ -0,0 +1,12 @@
++phyCORE-AM68x
++M:      Dominik Haller <d.haller@phytec.de>
++W:      https://www.phytec.eu/en/produkte/system-on-modules/phycore-am68x-tda4x/
++S:      Maintained
++F:      arch/arm/dts/k3-am68-phycore-som-ddr4-4gb.dtsi
++F:      arch/arm/dts/k3-am68-phyboard-izar-u-boot.dtsi
++F:      arch/arm/dts/k3-am68-phycore-som-binman.dtsi
++F:      arch/arm/dts/k3-am68-r5-phycore-som-4gb.dts
++F:      board/phytec/phycore_am68x/
++F:      configs/phycore_am68x_a72_defconfig
++F:      configs/phycore_am68x_r5_defconfig
++F:      include/configs/phycore_am68x.h
+diff --git a/board/phytec/phycore_am68x/Makefile b/board/phytec/phycore_am68x/Makefile
+new file mode 100644
+index 000000000000..a2e141269efa
+--- /dev/null
++++ b/board/phytec/phycore_am68x/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++#
++# Copyright (C) 2025 PHYTEC Messtechnik GmbH
++# Author: Dominik Haller <d.haller@phytec.de>
++
++obj-y += phycore-am68x.o
+diff --git a/board/phytec/phycore_am68x/board-cfg.yaml b/board/phytec/phycore_am68x/board-cfg.yaml
+new file mode 100644
+index 000000000000..94e61ab1dc69
+--- /dev/null
++++ b/board/phytec/phycore_am68x/board-cfg.yaml
+@@ -0,0 +1,36 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++#
++# Board configuration for J721S2
++#
++
++---
++
++board-cfg:
++    rev:
++        boardcfg_abi_maj: 0x0
++        boardcfg_abi_min: 0x1
++    control:
++        subhdr:
++            magic: 0xC1D3
++            size: 7
++        main_isolation_enable: 0x5A
++        main_isolation_hostid: 0x2
++    secproxy:
++        subhdr:
++            magic: 0x1207
++            size: 7
++        scaling_factor: 0x1
++        scaling_profile: 0x1
++        disable_main_nav_secure_proxy: 0
++    msmc:
++        subhdr:
++            magic: 0xA5C3
++            size: 5
++        msmc_cache_size: 0x0
++    debug_cfg:
++        subhdr:
++            magic: 0x020C
++            size: 8
++        trace_dst_enables: 0x00
++        trace_src_enables: 0x00
+diff --git a/board/phytec/phycore_am68x/phycore-am68x.c b/board/phytec/phycore_am68x/phycore-am68x.c
+new file mode 100644
+index 000000000000..94ec04c9be0d
+--- /dev/null
++++ b/board/phytec/phycore_am68x/phycore-am68x.c
+@@ -0,0 +1,99 @@
++// SPDX-License-Identifier: GPL-2.0-only OR MIT
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ * Author: Dominik Haller <d.haller@phytec.de>
++ *
++ * https://www.phytec.eu/en/produkte/system-on-modules/phycore-am68x-tda4x/
++ */
++
++#include <env.h>
++#include <fdt_support.h>
++#include <generic-phy.h>
++#include <image.h>
++#include <init.h>
++#include <log.h>
++#include <net.h>
++#include <asm/arch/hardware.h>
++#include <asm/gpio.h>
++#include <asm/io.h>
++#include <spl.h>
++#include <dm.h>
++#include <dm/uclass-internal.h>
++#include <dm/root.h>
++#include <asm/arch/k3-ddr.h>
++
++#include "../common/am6_som_detection.h"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++#ifdef CONFIG_PHYS_64BIT
++	/* Limit RAM used by U-Boot to the DDR low region */
++	if (gd->ram_top > 0x100000000)
++		return 0x100000000;
++#endif
++
++	return gd->ram_top;
++}
++
++int dram_init(void)
++{
++	s32 ret;
++
++	ret = fdtdec_setup_mem_size_base_lowest();
++	if (ret)
++		printf("Error setting up mem size and base. %d\n", ret);
++
++	return ret;
++}
++
++int dram_init_banksize(void)
++{
++	s32 ret;
++
++	ret = fdtdec_setup_memory_banksize();
++	if (ret)
++		printf("Error setting up memory banksize. %d\n", ret);
++
++	return ret;
++}
++
++#if defined(CONFIG_XPL_BUILD)
++void spl_perform_board_fixups(struct spl_image_info *spl_image)
++{
++	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
++		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
++			fixup_ddr_driver_for_ecc(spl_image);
++	} else {
++		fixup_memory_node(spl_image);
++	}
++}
++#endif
++
++void spl_board_init(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	if (IS_ENABLED(CONFIG_ESM_K3)) {
++		const char * const esms[] = {"esm@700000", "esm@40800000", "esm@42080000"};
++
++		for (int i = 0; i < ARRAY_SIZE(esms); ++i) {
++			ret = uclass_get_device_by_name(UCLASS_MISC, esms[i],
++							&dev);
++			if (ret) {
++				printf("MISC init for %s failed: %d\n", esms[i], ret);
++				break;
++			}
++		}
++	}
++
++	if (IS_ENABLED(CONFIG_ESM_PMIC) && ret == 0) {
++		ret = uclass_get_device_by_driver(UCLASS_MISC,
++						  DM_DRIVER_GET(pmic_esm),
++						  &dev);
++		if (ret)
++			printf("ESM PMIC init failed: %d\n", ret);
++	}
++}
+diff --git a/board/phytec/phycore_am68x/phycore_am68x.env b/board/phytec/phycore_am68x/phycore_am68x.env
+new file mode 100644
+index 000000000000..4908055b5425
+--- /dev/null
++++ b/board/phytec/phycore_am68x/phycore_am68x.env
+@@ -0,0 +1,22 @@
++fdtaddr=0x88000000
++loadaddr=0x82000000
++scriptaddr=0x89100000
++fdt_addr_r=0x88000000
++kernel_addr_r=0x82000000
++ramdisk_addr_r=0x88080000
++fdtoverlay_addr_r=0x89000000
++fit_addr_r=0x90000000
++
++fdtfile=CONFIG_DEFAULT_FDT_FILE
++mmcdev=1
++mmcroot=2
++mmcpart=1
++console=ttyS2,115200n8
++earlycon=ns16550a,mmio32,0x02880000
++
++spi_fdt_addr=0x700000
++spi_image_addr=0x800000
++spi_ramdisk_addr=0x2200000
++
++bootmeths=script efi extlinux pxe
++boot_targets=mmc1 mmc0 spi_flash dhcp
+diff --git a/board/phytec/phycore_am68x/pm-cfg.yaml b/board/phytec/phycore_am68x/pm-cfg.yaml
+new file mode 100644
+index 000000000000..e6496512b6b7
+--- /dev/null
++++ b/board/phytec/phycore_am68x/pm-cfg.yaml
+@@ -0,0 +1,12 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++#
++# Power management configuration for J721S2
++#
++
++---
++
++pm-cfg:
++    rev:
++        boardcfg_abi_maj: 0x0
++        boardcfg_abi_min: 0x1
+diff --git a/board/phytec/phycore_am68x/rm-cfg.yaml b/board/phytec/phycore_am68x/rm-cfg.yaml
+new file mode 100644
+index 000000000000..8796463129d2
+--- /dev/null
++++ b/board/phytec/phycore_am68x/rm-cfg.yaml
+@@ -0,0 +1,2523 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++#
++# Resource management configuration for J721S2
++#
++
++---
++
++rm-cfg:
++    rm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
++        host_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 356
++            host_cfg_entries:
++                -  # 1
++                    host_id: 3
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 2
++                    host_id: 5
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 3
++                    host_id: 12
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 4
++                    host_id: 13
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 5
++                    host_id: 21
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 6
++                    host_id: 23
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 7
++                    host_id: 35
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 8
++                    host_id: 37
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 9
++                    host_id: 40
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 10
++                    host_id: 42
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 11
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 12
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 13
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 14
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 15
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 16
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 17
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 18
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 19
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 20
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 21
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 22
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 23
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 24
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 25
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 26
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 27
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 28
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 29
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 30
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 31
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 32
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++        resasg:
++            subhdr:
++                magic: 0x7B25
++                size: 8
++            resasg_entries_size: 3032
++            reserved: 0
++    resasg_entries:
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 7744
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 24
++            type: 7744
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 24
++            type: 7808
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 16
++            type: 7808
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 48
++            type: 7936
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 8000
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 8000
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 8000
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 8000
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 8000
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 8000
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 9472
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 9472
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 4
++            type: 9472
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 4
++            type: 9472
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 9472
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 8
++            type: 9472
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 12
++            type: 9472
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 12
++            type: 9472
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 16
++            type: 9600
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 50176
++            num_resource: 96
++            type: 14402
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 14403
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 16
++            type: 14414
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 16
++            type: 14414
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 14415
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 14415
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 16
++            type: 14433
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 16
++            type: 14433
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 14434
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 14434
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 100
++            type: 14528
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 110
++            num_resource: 32
++            type: 14528
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 21
++            type: 14528
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 163
++            num_resource: 21
++            type: 14528
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 196
++            num_resource: 28
++            type: 14528
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 228
++            num_resource: 28
++            type: 14528
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 260
++            num_resource: 28
++            type: 14528
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 292
++            num_resource: 28
++            type: 14528
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 400
++            num_resource: 4
++            type: 14528
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 404
++            num_resource: 4
++            type: 14528
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 16266
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 20480
++            num_resource: 1024
++            type: 16269
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 16330
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 22528
++            num_resource: 1024
++            type: 16333
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 16384
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 16384
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 4
++            type: 16384
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 4
++            type: 16384
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 12
++            type: 16384
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 16384
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 16384
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 4
++            type: 16384
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 4
++            type: 16384
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 4
++            type: 16384
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 16
++            type: 16384
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16576
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 423
++            num_resource: 32
++            type: 16577
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 455
++            num_resource: 32
++            type: 16577
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 487
++            num_resource: 182
++            type: 16577
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 669
++            num_resource: 40
++            type: 16577
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 709
++            num_resource: 10
++            type: 16577
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 719
++            num_resource: 10
++            type: 16577
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 729
++            num_resource: 6
++            type: 16577
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 735
++            num_resource: 6
++            type: 16577
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 878
++            num_resource: 128
++            type: 16577
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1006
++            num_resource: 10
++            type: 16577
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 345
++            num_resource: 6
++            type: 16578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 351
++            num_resource: 0
++            type: 16578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 351
++            num_resource: 2
++            type: 16578
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 353
++            num_resource: 2
++            type: 16578
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 355
++            num_resource: 6
++            type: 16578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 361
++            num_resource: 1
++            type: 16578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 362
++            num_resource: 1
++            type: 16578
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 363
++            num_resource: 1
++            type: 16578
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 364
++            num_resource: 2
++            type: 16578
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 366
++            num_resource: 2
++            type: 16578
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 368
++            num_resource: 22
++            type: 16578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 390
++            num_resource: 6
++            type: 16578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 396
++            num_resource: 4
++            type: 16578
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 400
++            num_resource: 4
++            type: 16578
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 404
++            num_resource: 12
++            type: 16578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 416
++            num_resource: 1
++            type: 16578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 417
++            num_resource: 2
++            type: 16578
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 419
++            num_resource: 2
++            type: 16578
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 421
++            num_resource: 2
++            type: 16578
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 6
++            type: 16579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 0
++            type: 16579
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 16579
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 16579
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 6
++            type: 16579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 16579
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 1
++            type: 16579
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 1
++            type: 16579
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 2
++            type: 16579
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 2
++            type: 16579
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 22
++            type: 16579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 6
++            type: 16579
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 55
++            num_resource: 4
++            type: 16579
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 4
++            type: 16579
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 12
++            type: 16579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 75
++            num_resource: 4
++            type: 16579
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 79
++            num_resource: 2
++            type: 16579
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 81
++            num_resource: 2
++            type: 16579
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 2
++            type: 16579
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 85
++            num_resource: 16
++            type: 16580
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 101
++            num_resource: 12
++            type: 16580
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 113
++            num_resource: 2
++            type: 16580
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 115
++            num_resource: 2
++            type: 16580
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 117
++            num_resource: 96
++            type: 16580
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 309
++            num_resource: 32
++            type: 16580
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 343
++            num_resource: 1
++            type: 16581
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 344
++            num_resource: 1
++            type: 16581
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 341
++            num_resource: 1
++            type: 16582
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 342
++            num_resource: 1
++            type: 16582
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 16583
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 16583
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16584
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 16584
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 5
++            type: 16586
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 16586
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 16587
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 16587
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 3
++            type: 16587
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 3
++            type: 16587
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 6
++            type: 16587
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 3
++            type: 16587
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 3
++            type: 16587
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 3
++            type: 16587
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 1
++            type: 16587
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 1
++            type: 16587
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 16587
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 82
++            num_resource: 16
++            type: 16832
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 98
++            num_resource: 16
++            type: 16832
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 114
++            num_resource: 110
++            type: 16832
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16833
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 49152
++            num_resource: 1024
++            type: 16834
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16835
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 6
++            type: 16842
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 0
++            type: 16842
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 16842
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 16842
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 6
++            type: 16842
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 16842
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 1
++            type: 16842
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 1
++            type: 16842
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 2
++            type: 16842
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 2
++            type: 16842
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 22
++            type: 16842
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 6
++            type: 16842
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 55
++            num_resource: 4
++            type: 16842
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 4
++            type: 16842
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 12
++            type: 16842
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 75
++            num_resource: 1
++            type: 16842
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 2
++            type: 16842
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 2
++            type: 16842
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 2
++            type: 16842
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 16843
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 16843
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16844
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 16844
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 6
++            type: 16845
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 0
++            type: 16845
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 16845
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 16845
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 6
++            type: 16845
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 16845
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 1
++            type: 16845
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 1
++            type: 16845
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 2
++            type: 16845
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 2
++            type: 16845
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 22
++            type: 16845
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 6
++            type: 16845
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 55
++            num_resource: 4
++            type: 16845
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 4
++            type: 16845
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 12
++            type: 16845
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 75
++            num_resource: 4
++            type: 16845
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 79
++            num_resource: 2
++            type: 16845
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 81
++            num_resource: 2
++            type: 16845
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 2
++            type: 16845
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 85
++            num_resource: 16
++            type: 16846
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 101
++            num_resource: 12
++            type: 16846
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 113
++            num_resource: 2
++            type: 16846
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 115
++            num_resource: 2
++            type: 16846
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 117
++            num_resource: 96
++            type: 16846
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 309
++            num_resource: 32
++            type: 16846
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 16847
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 16847
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 16848
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 16848
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 86
++            type: 16970
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 120
++            num_resource: 32
++            type: 16970
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 152
++            num_resource: 12
++            type: 16970
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 164
++            num_resource: 12
++            type: 16970
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 176
++            num_resource: 28
++            type: 16970
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 204
++            num_resource: 8
++            type: 16970
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 212
++            num_resource: 12
++            type: 16970
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 12
++            type: 16970
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 236
++            num_resource: 20
++            type: 16970
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 1024
++            type: 16973
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1058
++            num_resource: 512
++            type: 16973
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 1570
++            num_resource: 256
++            type: 16973
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 1826
++            num_resource: 256
++            type: 16973
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 2082
++            num_resource: 512
++            type: 16973
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2594
++            num_resource: 256
++            type: 16973
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 2850
++            num_resource: 256
++            type: 16973
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 3106
++            num_resource: 256
++            type: 16973
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 3362
++            num_resource: 32
++            type: 16973
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 3394
++            num_resource: 32
++            type: 16973
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 3426
++            num_resource: 1182
++            type: 16973
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 1536
++            num_resource: 16
++            type: 16975
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2048
++            num_resource: 16
++            type: 16976
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2560
++            num_resource: 16
++            type: 16977
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 3072
++            num_resource: 32
++            type: 16978
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 3584
++            num_resource: 32
++            type: 16979
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 32
++            type: 16980
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 12
++            type: 17152
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 20
++            type: 17152
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 4
++            type: 17344
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 4
++            type: 17344
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 17344
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 4
++            type: 17344
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 16
++            type: 17344
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 4
++            type: 17344
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 37
++            num_resource: 4
++            type: 17344
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 41
++            num_resource: 4
++            type: 17344
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 45
++            num_resource: 4
++            type: 17344
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 4
++            type: 17344
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 53
++            num_resource: 11
++            type: 17344
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 17408
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 20
++            type: 17409
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 116
++            num_resource: 8
++            type: 17409
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 124
++            num_resource: 8
++            type: 17409
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 132
++            num_resource: 8
++            type: 17409
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 140
++            num_resource: 16
++            type: 17409
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 8
++            type: 17409
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 164
++            num_resource: 8
++            type: 17409
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 172
++            num_resource: 8
++            type: 17409
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 180
++            num_resource: 32
++            type: 17409
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 212
++            num_resource: 12
++            type: 17409
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 28
++            type: 17409
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 4
++            type: 17410
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 0
++            type: 17410
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 1
++            type: 17410
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 55
++            num_resource: 1
++            type: 17410
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 1
++            type: 17410
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 1
++            type: 17410
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 1
++            type: 17410
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 1
++            type: 17410
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 2
++            type: 17410
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 0
++            type: 17410
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 9
++            type: 17410
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 71
++            num_resource: 6
++            type: 17410
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 77
++            num_resource: 1
++            type: 17410
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 1
++            type: 17410
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 79
++            num_resource: 2
++            type: 17410
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 81
++            num_resource: 1
++            type: 17410
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 82
++            num_resource: 1
++            type: 17410
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 1
++            type: 17410
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 3
++            type: 17410
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 87
++            num_resource: 2
++            type: 17410
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 89
++            num_resource: 4
++            type: 17410
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 17411
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 17411
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 1
++            type: 17411
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 17411
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 17411
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 17411
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 17411
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 17411
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 17411
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 0
++            type: 17411
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 9
++            type: 17411
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 6
++            type: 17411
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 1
++            type: 17411
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 1
++            type: 17411
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 31
++            num_resource: 2
++            type: 17411
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 1
++            type: 17411
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 1
++            type: 17411
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 17411
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 3
++            type: 17411
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 2
++            type: 17411
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 41
++            num_resource: 5
++            type: 17411
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 0
++            type: 17413
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 2
++            type: 17413
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 17415
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 17415
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 5
++            type: 17418
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 17418
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 17419
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 17419
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 3
++            type: 17419
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 3
++            type: 17419
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 3
++            type: 17419
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 3
++            type: 17419
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 3
++            type: 17419
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 3
++            type: 17419
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 3
++            type: 17419
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 3
++            type: 17419
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 3
++            type: 17419
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 8
++            type: 17472
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 4
++            type: 17472
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 8
++            type: 17472
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 68
++            num_resource: 4
++            type: 17472
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 4
++            type: 17472
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 4
++            type: 17472
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 8
++            type: 17472
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 88
++            num_resource: 4
++            type: 17472
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 92
++            num_resource: 4
++            type: 17472
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 17473
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 56320
++            num_resource: 256
++            type: 17474
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 17475
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 17482
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 17482
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 1
++            type: 17482
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 17482
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 17482
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 17482
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 17482
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 17482
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 17482
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 0
++            type: 17482
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 9
++            type: 17482
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 6
++            type: 17482
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 1
++            type: 17482
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 1
++            type: 17482
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 31
++            num_resource: 2
++            type: 17482
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 1
++            type: 17482
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 1
++            type: 17482
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 17482
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 3
++            type: 17482
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 2
++            type: 17482
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 41
++            num_resource: 4
++            type: 17482
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 17483
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 17483
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 17485
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 17485
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 1
++            type: 17485
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 17485
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 17485
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 17485
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 17485
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 17485
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 17485
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 0
++            type: 17485
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 9
++            type: 17485
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 6
++            type: 17485
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 1
++            type: 17485
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 1
++            type: 17485
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 31
++            num_resource: 2
++            type: 17485
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 1
++            type: 17485
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 1
++            type: 17485
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 17485
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 3
++            type: 17485
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 2
++            type: 17485
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 41
++            num_resource: 5
++            type: 17485
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 17487
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 17487
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 32
++            type: 17610
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 16
++            type: 17610
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 70
++            num_resource: 8
++            type: 17610
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 8
++            type: 17610
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 86
++            num_resource: 24
++            type: 17610
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 110
++            num_resource: 8
++            type: 17610
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 16
++            type: 17610
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 134
++            num_resource: 16
++            type: 17610
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 150
++            num_resource: 64
++            type: 17610
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 214
++            num_resource: 4
++            type: 17610
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 218
++            num_resource: 38
++            type: 17610
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 16406
++            num_resource: 128
++            type: 17613
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16534
++            num_resource: 128
++            type: 17613
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 16662
++            num_resource: 64
++            type: 17613
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 16726
++            num_resource: 64
++            type: 17613
++            host_id: 23
++            reserved: 0
++        -
++            start_resource: 16790
++            num_resource: 128
++            type: 17613
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16918
++            num_resource: 128
++            type: 17613
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 17046
++            num_resource: 128
++            type: 17613
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 17174
++            num_resource: 128
++            type: 17613
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 17302
++            num_resource: 256
++            type: 17613
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 17558
++            num_resource: 64
++            type: 17613
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 17622
++            num_resource: 298
++            type: 17613
++            host_id: 128
++            reserved: 0
+diff --git a/board/phytec/phycore_am68x/sec-cfg.yaml b/board/phytec/phycore_am68x/sec-cfg.yaml
+new file mode 100644
+index 000000000000..020299186131
+--- /dev/null
++++ b/board/phytec/phycore_am68x/sec-cfg.yaml
+@@ -0,0 +1,379 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++#
++# Security management configuration for J721S2
++#
++
++---
++
++sec-cfg:
++    rev:
++        boardcfg_abi_maj: 0x0
++        boardcfg_abi_min: 0x1
++    processor_acl_list:
++        subhdr:
++            magic: 0xF1EA
++            size: 164
++        proc_acl_entries:
++            -  # 1
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 2
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 3
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 4
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 5
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 6
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 7
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 8
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 9
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 10
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 11
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 12
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 13
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 14
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 15
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 16
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 17
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 18
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 19
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 20
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 21
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 22
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 23
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 24
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 25
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 26
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 27
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 28
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 29
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 30
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 31
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++            -  # 32
++                processor_id: 0
++                proc_access_master: 0
++                proc_access_secondary: [0, 0, 0]
++    host_hierarchy:
++        subhdr:
++            magic: 0x8D27
++            size: 68
++        host_hierarchy_entries:
++            -  # 1
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 2
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 3
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 4
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 5
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 6
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 7
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 8
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 9
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 10
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 11
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 12
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 13
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 14
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 15
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 16
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 17
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 18
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 19
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 20
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 21
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 22
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 23
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 24
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 25
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 26
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 27
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 28
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 29
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 30
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 31
++                host_id: 0
++                supervisor_host_id: 0
++            -  # 32
++                host_id: 0
++                supervisor_host_id: 0
++    otp_config:
++        subhdr:
++            magic: 0x4081
++            size: 69
++        otp_entry:
++            -  # 1
++                host_id: 0
++                host_perms: 0
++            -  # 2
++                host_id: 0
++                host_perms: 0
++            -  # 3
++                host_id: 0
++                host_perms: 0
++            -  # 4
++                host_id: 0
++                host_perms: 0
++            -  # 5
++                host_id: 0
++                host_perms: 0
++            -  # 6
++                host_id: 0
++                host_perms: 0
++            -  # 7
++                host_id: 0
++                host_perms: 0
++            -  # 8
++                host_id: 0
++                host_perms: 0
++            -  # 9
++                host_id: 0
++                host_perms: 0
++            -  # 10
++                host_id: 0
++                host_perms: 0
++            -  # 11
++                host_id: 0
++                host_perms: 0
++            -  # 12
++                host_id: 0
++                host_perms: 0
++            -  # 13
++                host_id: 0
++                host_perms: 0
++            -  # 14
++                host_id: 0
++                host_perms: 0
++            -  # 15
++                host_id: 0
++                host_perms: 0
++            -  # 16
++                host_id: 0
++                host_perms: 0
++            -  # 17
++                host_id: 0
++                host_perms: 0
++            -  # 18
++                host_id: 0
++                host_perms: 0
++            -  # 19
++                host_id: 0
++                host_perms: 0
++            -  # 20
++                host_id: 0
++                host_perms: 0
++            -  # 21
++                host_id: 0
++                host_perms: 0
++            -  # 22
++                host_id: 0
++                host_perms: 0
++            -  # 23
++                host_id: 0
++                host_perms: 0
++            -  # 24
++                host_id: 0
++                host_perms: 0
++            -  # 25
++                host_id: 0
++                host_perms: 0
++            -  # 26
++                host_id: 0
++                host_perms: 0
++            -  # 27
++                host_id: 0
++                host_perms: 0
++            -  # 28
++                host_id: 0
++                host_perms: 0
++            -  # 29
++                host_id: 0
++                host_perms: 0
++            -  # 30
++                host_id: 0
++                host_perms: 0
++            -  # 31
++                host_id: 0
++                host_perms: 0
++            -  # 32
++                host_id: 0
++                host_perms: 0
++        write_host_id: 0
++    dkek_config:
++        subhdr:
++            magic: 0x5170
++            size: 12
++        allowed_hosts: [128, 0, 0, 0]
++        allow_dkek_export_tisci: 0x5A
++        rsvd: [0, 0, 0]
++    sa2ul_cfg:
++        subhdr:
++            magic: 0x23BE
++            size: 0
++        auth_resource_owner: 0
++        enable_saul_psil_global_config_writes: 0
++        rsvd: [0, 0]
++    sec_dbg_config:
++        subhdr:
++            magic: 0x42AF
++            size: 16
++        allow_jtag_unlock: 0x0
++        allow_wildcard_unlock: 0x0
++        allowed_debug_level_rsvd: 0
++        rsvd: 0
++        min_cert_rev: 0x0
++        jtag_unlock_hosts: [0, 0, 0, 0]
++    sec_handover_cfg:
++        subhdr:
++            magic: 0x608F
++            size: 10
++        handover_msg_sender: 0
++        handover_to_host_id: 0
++        rsvd: [0, 0, 0, 0]
+diff --git a/configs/phycore_am68x_a72_defconfig b/configs/phycore_am68x_a72_defconfig
+new file mode 100644
+index 000000000000..22ad5c3d6eec
+--- /dev/null
++++ b/configs/phycore_am68x_a72_defconfig
+@@ -0,0 +1,204 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_J721S2=y
++CONFIG_PHYTEC_SOM_DETECTION=y
++CONFIG_PHYTEC_SOM_DETECTION_BLOCKS=y
++CONFIG_TARGET_PHYCORE_AM68X_A72=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_ENV_OFFSET=0x680000
++CONFIG_ENV_SECT_SIZE=0x20000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am68-phyboard-izar"
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x80a00000
++CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_STACK_R=y
++CONFIG_ENV_OFFSET_REDUND=0x6c0000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++# CONFIG_PSCI_RESET is not set
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
++CONFIG_BOOTSTD_FULL=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="bootflow scan -lb; run ${boot}boot"
++CONFIG_DEFAULT_FDT_FILE="oftree"
++CONFIG_LOGLEVEL=7
++# CONFIG_BOARD_INIT is not set
++CONFIG_SPL_MAX_SIZE=0xc0000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_NOR_SUPPORT=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_DEVICE=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_CMD_BOOTEFI_SELFTEST=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_DFU=y
++# CONFIG_CMD_FLASH is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_SMC=y
++CONFIG_CMD_UBI=y
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_SPL_EFI_PARTITION is not set
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_REDUNDANT=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=1
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x82000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_DM_I2C_GPIO=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_CFI_FLASH=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_FLASH_CFI_MTD=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_MT35XU=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_MULTIPLEXER=y
++CONFIG_MUX_MMIO=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_PHY_FIXED=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PHY=y
++CONFIG_SPL_PHY=y
++CONFIG_PHY_CADENCE_TORRENT=y
++CONFIG_PHY_J721E_WIZ=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_RAM=y
++CONFIG_SPL_RAM=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SCSI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_HAS_CQSPI_REF_CLK=y
++CONFIG_CQSPI_REF_CLK=133333333
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_DM_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_CDNS3=y
++CONFIG_USB_CDNS3_GADGET=y
++CONFIG_USB_CDNS3_HOST=y
++CONFIG_SPL_USB_CDNS3_GADGET=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6168
++CONFIG_SPL_DFU=y
+diff --git a/configs/phycore_am68x_r5_defconfig b/configs/phycore_am68x_r5_defconfig
+new file mode 100644
+index 000000000000..e941c340488b
+--- /dev/null
++++ b/configs/phycore_am68x_r5_defconfig
+@@ -0,0 +1,184 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_J721S2=y
++CONFIG_K3_EARLY_CONS=y
++CONFIG_K3_QOS=y
++CONFIG_TARGET_PHYCORE_AM68X_R5=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41c76000
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am68-r5-phycore-som-4gb"
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_TEXT_BASE=0x41c00000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x41c76000
++CONFIG_SPL_BSS_MAX_SIZE=0xa000
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SIZE_LIMIT=0x80000
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++CONFIG_USE_BOOTCOMMAND=y
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_BOARD_INIT is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0xc0000
++CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_DMA=y
++CONFIG_CMD_ASKENV=y
++CONFIG_ENV_MMC_EMMC_HW_PARTITION=1
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_EXT4=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_NOR_SUPPORT=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_DEVICE=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_DFU=y
++# CONFIG_CMD_FLASH is not set
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_FS_LOADER=y
++CONFIG_SPL_FS_LOADER=y
++CONFIG_K3_AVS0=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_CFI_FLASH=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_FLASH_CFI_MTD=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_MT35XU=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_TPS65941=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_TPS65941=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_HAS_CQSPI_REF_CLK=y
++CONFIG_CQSPI_REF_CLK=133333333
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_DM_THERMAL=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_USB=y
++CONFIG_PHYTEC_SOM_DETECTION=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_USB_CDNS3=y
++CONFIG_USB_CDNS3_GADGET=y
++CONFIG_SPL_USB_CDNS3_GADGET=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6168
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_SPL_DFU=y
++CONFIG_FS_EXT4=y
++CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
++CONFIG_PANIC_HANG=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
+diff --git a/include/configs/phycore_am68x.h b/include/configs/phycore_am68x.h
+new file mode 100644
+index 000000000000..341c3ff4a315
+--- /dev/null
++++ b/include/configs/phycore_am68x.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later OR MIT */
++/*
++ * Configuration header file for PHYTEC phyCORE-AM68x
++ *
++ */
++
++#ifndef __PHYCORE_AM68X_H
++#define __PHYCORE_AM68X_H
++
++/* DDR Configuration */
++#define CFG_SYS_SDRAM_BASE		0x80000000
++
++/* SPL Loader Configuration */
++#if defined(CONFIG_TARGET_PHYCORE_AM68X_A72)
++#define CFG_SYS_UBOOT_BASE              0x50280000
++/* Image load address in RAM for DFU boot*/
++#else
++#define CFG_SYS_UBOOT_BASE              0x50080000
++#endif
++
++#define PHYCORE_AM6XX_FW_NAME_TIBOOT3	u"PHYCORE_AM68X_TIBOOT3"
++#define PHYCORE_AM6XX_FW_NAME_SPL	u"PHYCORE_AM68X_SPL"
++#define PHYCORE_AM6XX_FW_NAME_UBOOT	u"PHYCORE_AM68X_UBOOT"
++
++#endif /* __PHYCORE_AM62AX_H */
+-- 
+2.43.0
 
-If/When this gets merged it'd be nice to get the virtio mmio part
-integrated next so we can access disk/network.
-I think virtio mmio has endian issues in QEMU or u-boot as I had to
-add code to swap everything to make it work in my version of this. :D
-
-Thanks,
-
-Daniel
