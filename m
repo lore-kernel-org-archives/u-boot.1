@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8C0EE645E
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D53EEB56D
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4CDB841BE;
-	Wed, 31 Dec 2025 20:52:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B295C841DA;
+	Wed, 31 Dec 2025 20:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dIhGuAka";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d0qe1BxL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF740841D6; Wed, 31 Dec 2025 20:52:54 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 0D9A2841DA; Wed, 31 Dec 2025 20:52:55 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11C46841BE
+ by phobos.denx.de (Postfix) with ESMTPS id 57208841CC
  for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:52:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DC87060055;
+ by sea.source.kernel.org (Postfix) with ESMTP id A7DAA43641;
  Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 949CBC19423;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 87C92C19421;
  Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1767210769;
- bh=mV8UHmoiiH4wKWps1222J1h4ADs6HydTFuNVRT/KIdw=;
+ bh=TGELeXvBn2nialIUsMM5J4OpE+U4/MKKaCh/X73P5ag=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=dIhGuAkatS8eqpyM+K9qxb3SurxZ9U8eTKmKeHLZb8ICO9b6/aeqyElMc9Fzpk+Yy
- St2Re0qEKZjyrX8DKg+dpSWjuzuKTOaWRK77IPlAQZxmPaD69KZ0yYTnE7D+p+Rz9U
- z2/I55cq/Beo83h2RKaf88jjV9YLsFBBaxBQCXTOx7rHuXEVmNpvh5TP4UKGZyOXcD
- 9Dbom+2d7uR1KVW4TYfqEy6CC6eLWJ5o2PAFLUfkNrh9UmTsZlHceKOeO7n2IeKPjV
- C4RCcT8k59wSYxK3tmNnGgAziX55VO0kGmekt4IWbyKsbZLtMgKCTgqUxgMUTXOX+F
- qebRlkL7bOsKQ==
+ b=d0qe1BxLSGLy6/3hzBB2n57QvcLB/nYTqH9Fv6KUUyYbelFzvpKT1F475rPIYTyv+
+ Hrd6uQ23Wcq95ZIqAfgjISlj6xPTiqKWIk6rQG1z4RXnvbjXPeTYcuJR6MTWwCiS00
+ 2qO/WX7RYY+e4Z+kh/j3qK4g0ubWMQAbz/cfOwe37et8uaXxvtqoEHh5sWAByH1ujN
+ JZmR3zy7ZQHCEqALPYGJGKA8Bf2UHsfBh0WAs1UiHwtVzYbUCDnsgob8yLSnLeZDJx
+ FemY/jpaDxBb9e4vYyT2Ef5Z3x3z6Txaz+H0xDAXFB3dyVpB8qGuqoSWz1xBaCGkwq
+ o8PAdFOU7R9Pg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8D1D3EEB56D;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 80373EEB56F;
  Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Thu, 01 Jan 2026 03:52:50 +0800
-Subject: [PATCH v2 4/5] clk: allow assigning parent lazily
+Date: Thu, 01 Jan 2026 03:52:49 +0800
+Subject: [PATCH v2 3/5] clk: use clk_get_parent() helper in clk_en(dis)able()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260101-clk-reparent-v2-4-3eb42b78c7f1@outlook.com>
+Message-Id: <20260101-clk-reparent-v2-3-3eb42b78c7f1@outlook.com>
 References: <20260101-clk-reparent-v2-0-3eb42b78c7f1@outlook.com>
 In-Reply-To: <20260101-clk-reparent-v2-0-3eb42b78c7f1@outlook.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767210769; l=4869;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767210769; l=1887;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=7wdCMBv677d3gdkHf9pFYWh3TG4TqHVTK1I2zZhAd9k=;
- b=x4nT/ygM9P7HULN5RnPer9Asp3hpcz84Ke+mwj5yKc4wFJKF9Vx018mF5PdJs2Xs4vkUveW0W
- MHYuMwWEUcAATzYeiWOpHMJWrgwGaK70F0nnmtn8gi2EveK3YE3z92r
+ bh=Pih0KZJb5On0c56A8s6D/fXYUeiaLJVvtspf94laL3g=;
+ b=qfaJFyO6eCRYjDrcQc67qR0d6bDdNh5haLiTQeFoFYYtx49hb1PS2cjoXtumEPv1s0h/Ilkti
+ HpC8KYPtG8NBQFRe+rudpkN2+Mfmr9tzDOb55pKRMyNIjaJHI0qWn6s
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -86,158 +87,65 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-Don't mandate the parent device exists when registering a clock.
-
-Instead, cache the parent name in the core clk struct and resolve the
-parent in clk_get_parent(), which is called lazily upon real use.
-
-Disable this feature for xPLs by default to save size.
+Update clk_enable() and clk_disable() to use clk_get_parent() instead of
+manually accessing clk->dev->parent.
 
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/clk/Kconfig      | 12 ++++++++++++
- drivers/clk/clk-uclass.c | 44 ++++++++++++++++++++++++++++++++++++++++++--
- drivers/clk/clk.c        | 14 ++++++++++++--
- include/clk.h            |  2 ++
- 4 files changed, 68 insertions(+), 4 deletions(-)
+ drivers/clk/clk-uclass.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-index 19aa2ffa5396..bb2a97a4a07a 100644
---- a/drivers/clk/Kconfig
-+++ b/drivers/clk/Kconfig
-@@ -40,6 +40,18 @@ config VPL_CLK
- 	  setting up clocks within TPL, and allows the same drivers to be
- 	  used as U-Boot proper.
- 
-+config CLK_LAZY_REPARENT
-+	bool "Enable clock lazy reparenting feature"
-+	depends on CLK_CCF
-+	default n if SPL_CLK || TPL_CLK || VPL_CLK
-+	default y
-+	help
-+	  This option allows registering clocks in a less strict order that
-+	  Parent clocks can be registered before their children. The clock subsystem
-+	  will cache the parent's name and resolve it to the real parent device "lazily".
-+	  This is the default behavior in Linux clock subsystem. Enabling this feature
-+	  should simplifies the porting of Linux clock drivers to U-Boot.
-+
- config CLK_BCM6345
- 	bool "Clock controller driver for BCM6345"
- 	depends on CLK && ARCH_BMIPS
 diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index bfad71e7af70..cea79e05ea09 100644
+index bd18de972bb9..bfad71e7af70 100644
 --- a/drivers/clk/clk-uclass.c
 +++ b/drivers/clk/clk-uclass.c
-@@ -490,6 +490,32 @@ ulong clk_get_rate(struct clk *clk)
- 	return ops->get_rate(clk);
- }
- 
-+static struct udevice *clk_reparent(struct clk *clk, const char *parent_name)
-+{
-+	struct udevice *pdev;
-+	int ret;
-+
-+	if (!clk_valid(clk))
-+		return NULL;
-+
-+	if (!parent_name)
-+		return NULL;
-+
-+	debug("%s(clk=%p) reparenting to %s\n", __func__, clk, parent_name);
-+
-+	ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &pdev);
-+	if (ret) {
-+		log_err("%s(clk=%p) failed to find parent \"%s\"\n", __func__, clk, parent_name);
-+		return NULL;
-+	}
-+
-+	ret = device_reparent(clk->dev, pdev);
-+	if (ret)
-+		return NULL;
-+
-+	return pdev;
-+}
-+
- struct clk *clk_get_parent(struct clk *clk)
+@@ -656,7 +656,7 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
+ int clk_enable(struct clk *clk)
  {
- 	struct udevice *pdev;
-@@ -500,8 +526,18 @@ struct clk *clk_get_parent(struct clk *clk)
- 		return NULL;
+ 	const struct clk_ops *ops;
+-	struct clk *clkp = NULL;
++	struct clk *clkp = NULL, *clk_parent;
+ 	int ret;
  
- 	pdev = dev_get_parent(clk->dev);
--	if (!pdev)
--		return ERR_PTR(-ENODEV);
-+	if (!pdev) {
-+		if (CONFIG_IS_ENABLED(CLK_LAZY_REPARENT)) {
-+			pdev = clk_reparent(clk, clk->parent_name);
-+			free(clk->parent_name);
-+			clk->parent_name = NULL;
+ 	debug("%s(clk=%p name=%s)\n", __func__, clk, clk->dev->name);
+@@ -672,9 +672,10 @@ int clk_enable(struct clk *clk)
+ 				clkp->enable_count++;
+ 				return 0;
+ 			}
+-			if (clkp->dev->parent &&
+-			    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
+-				ret = clk_enable(dev_get_clk_ptr(clkp->dev->parent));
 +
-+			if (!pdev)
-+				return ERR_PTR(-ENODEV);
-+		} else {
-+			return ERR_PTR(-ENODEV);
-+		}
-+	}
++			clk_parent = clk_get_parent(clkp);
++			if (!IS_ERR_OR_NULL(clk_parent)) {
++				ret = clk_enable(clk_parent);
+ 				if (ret) {
+ 					printf("Enable %s failed\n",
+ 					       clkp->dev->parent->name);
+@@ -747,13 +748,16 @@ int clk_disable(struct clk *clk)
+ 				return ret;
+ 		}
  
- 	if (device_get_uclass_id(pdev) != UCLASS_CLK)
- 		return ERR_PTR(-ENODEV);
-@@ -625,6 +661,10 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
- 	debug("%s(clk=%p, parent=%p)\n", __func__, clk, parent);
- 	if (!clk_valid(clk))
- 		return 0;
+-		if (clkp && clkp->dev->parent &&
+-		    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
+-			ret = clk_disable(dev_get_clk_ptr(clkp->dev->parent));
+-			if (ret) {
+-				printf("Disable %s failed\n",
+-				       clkp->dev->parent->name);
+-				return ret;
++		if (clkp) {
++			struct clk *clk_parent = clk_get_parent(clkp);
 +
-+	free(clk->parent_name);
-+	clk->parent_name = NULL;
-+
- 	ops = clk_dev_ops(clk->dev);
- 
- 	if (!ops->set_parent)
-diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-index b8c2e8d531b9..32b3c03ab09a 100644
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -24,8 +24,18 @@ int clk_register(struct clk *clk, const char *drv_name,
- 	if (parent_name) {
- 		ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
- 		if (ret) {
--			log_err("%s: failed to get %s device (parent of %s)\n",
--				__func__, parent_name, name);
-+			log_debug("%s: failed to get %s device (parent of %s)\n",
-+				  __func__, parent_name, name);
-+
-+			if (CONFIG_IS_ENABLED(CLK_LAZY_REPARENT)) {
-+				/*
-+				 * The parent is not yet registered.
-+				 * Cache the parent name and resolve it later.
-+				 */
-+				clk->parent_name = strdup(parent_name);
-+				if (!clk->parent_name)
-+					return -ENOMEM;
-+			}
- 		} else {
- 			log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
- 				  parent->name, parent);
-diff --git a/include/clk.h b/include/clk.h
-index a6ef4e026922..5f684dcbf9d2 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -37,6 +37,7 @@ struct udevice;
- /**
-  * struct clk - A handle to (allowing control of) a single clock.
-  * @dev: The device which implements the clock signal.
-+ * @parent_name: The name of the parent.
-  * @rate: The clock rate (in HZ).
-  * @flags: Flags used across common clock structure (e.g. %CLK_)
-  *         Clock IP blocks specific flags (i.e. mux, div, gate, etc) are defined
-@@ -62,6 +63,7 @@ struct udevice;
-  */
- struct clk {
- 	struct udevice *dev;
-+	char *parent_name;
- 	long long rate;	/* in HZ */
- 	u32 flags;
- 	int enable_count;
++			if (!IS_ERR_OR_NULL(clk_parent)) {
++				ret = clk_disable(clk_parent);
++				if (ret) {
++					printf("Disable %s failed\n",
++					       clkp->dev->parent->name);
++					return ret;
++				}
+ 			}
+ 		}
+ 	} else {
 
 -- 
 2.43.0
