@@ -4,70 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2387AEEB56D
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 19:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF24EE57C5
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 20:01:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4F30841E7;
-	Wed, 31 Dec 2025 20:53:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88CBE841CD;
+	Wed, 31 Dec 2025 21:01:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UGrhAip7";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fNySQz6J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8620841CC; Wed, 31 Dec 2025 20:52:55 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id E01AE841D2; Wed, 31 Dec 2025 21:01:39 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30805841D7
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 20:52:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A14A6841CC
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 21:01:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E7D54600AA;
- Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A0028C19424;
- Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 3857340D8E;
+ Wed, 31 Dec 2025 20:01:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 09182C113D0;
+ Wed, 31 Dec 2025 20:01:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767210769;
- bh=K6znmjsOUSWCzOyNSI+litxh2iflh9CZmXmqNvkrMT8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=UGrhAip7NW+mDOFXHyQD+w61BkGlfsUwb+4i5WVGMazzDPYZjN2Js9uZxxfkig/uO
- h9gr2MornrqnVCnNBveN9w1WuhLllVAya6HskF8wxRkMJegxvaTr1VquChuH0WUwOM
- O68CJixB8YOeWFbd27Ekb1FlqvmaP77piInakS+31z8kQoOICZWOuI1xvnklyDz4fZ
- Xy4gjN712xpsM9r6nFcORC+SIkJh7FlnLhHC3xTEYoerIDuIbIUkLlZo5ZRaIKYIrn
- w+OBj3wctSIa0SYdce/S16toNAnmnrvkTzWmKknCV/+K/VqO3GnFt0vEcRkJSGdqrg
- sSOOwDbHq1dyA==
+ s=k20201202; t=1767211296;
+ bh=CiQpY/kucNbFEJTnPEhH+Pg6KzSabj4gS79Z0TNG3+g=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=fNySQz6JN9pNmzkKcuSCvzFEqbz5Vb8rk0xypk0ArsEzjDzqvi86v8C2acwflEAlb
+ BZWoXBIaeAiKWwxMdd5Iz43Fw+/FpJUVn0r/3eBpX0gDD8ND5CRSrIBmfYiDxG2hJ7
+ 2iC/+fLZmre1+dOc3+6caJio1LZrAckkDx41ov5F7e2y949aFAMW+glTqcUHCG3I2A
+ 1atXCuJvqzkQGv6U94Dwekpnunt0kCC3mE6lIfo11SzM3Cpv8D6s0ohlF9mq2QYdQM
+ UDU+NcFwriEV0gZnZXkm3AT5ijUOecDZdgcxr2Gch01i7pqRlmAJesg7g4Nj4no1Uw
+ rxFfj9ZpocX1Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 9A302EE645E;
- Wed, 31 Dec 2025 19:52:49 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Thu, 01 Jan 2026 03:52:51 +0800
-Subject: [PATCH v2 5/5] test: clk: add test for CLK_LAZY_REPARENT
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E89BFEE57C5;
+ Wed, 31 Dec 2025 20:01:35 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Wed, 31 Dec 2025 21:01:30 +0100
+Subject: [PATCH] Update links to doc/develop/falcon.rst
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260101-clk-reparent-v2-5-3eb42b78c7f1@outlook.com>
-References: <20260101-clk-reparent-v2-0-3eb42b78c7f1@outlook.com>
-In-Reply-To: <20260101-clk-reparent-v2-0-3eb42b78c7f1@outlook.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767210769; l=3118;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=0Pl/4UHRtRVi92DdI/7xYV0tGtA+gqluhy3uohM5ie0=;
- b=V6l/EmNk9rF8Fyy/dPheLmqVFpDUA6zzIcSbzP57DDZpwXrdKw4xM4lSwIdufLty/ZNRgWuMm
- Ai423hmU1vMCBgFquiR8eWT3+WnlXburo2+DbD0LRrSkp5Wn3S7nkwc
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20251231-falcon-v1-1-19c85b9660e6@posteo.net>
+X-B4-Tracking: v=1; b=H4sIABmBVWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDI2ND3bTEnOT8PF3zREtzI0PD1OSkpFQloOKCotS0zAqwQdGxtbUARof
+ SBVgAAAA=
+X-Change-ID: 20251231-falcon-7a97211ecbbe
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Anshul Dalal <anshuld@ti.com>, 
+ Peng Fan <peng.fan@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Sidharth Seela <sidharthseela@gmail.com>, 
+ =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767211294; l=2407;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=J+TyZ145oHtwMkRYzz4f88+nsFYihWKo59QXQ6LSdWA=;
+ b=t7k8bl5fDl8dP/dhs20WLqrjaI4WJFsuIfPEvkOMd3pimQc1b0OaTB40+Tyn5zkLS/inYJwe0
+ K1EiOD5s68kDAQ1tT+17RPEjKsaIo/Yx+g06T9IiZrmhvINO1jSiU60
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,109 +97,78 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-Add a test for the newly introduced CLK_LAZY_PARENT feature.
+README.falcon was converted to HTML in 2023.
 
-Modify clk_sandbox_ccf driver to register two clocks(i2s and i2s_root)
-in reversed order.
-
-The test function then try to acquire the clocks and asserts that their
-internal states are maintained correctly.
-
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
- drivers/clk/clk_sandbox_ccf.c | 10 ++++++++++
- include/sandbox-clk.h         |  2 ++
- test/dm/clk_ccf.c             | 29 +++++++++++++++++++++++++++++
- 3 files changed, 41 insertions(+)
+ cmd/Kconfig                 | 4 ++--
+ common/spl/Kconfig          | 2 +-
+ doc/board/ti/am335x_evm.rst | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
-index f96a15c30b3a..3a11b361cd2b 100644
---- a/drivers/clk/clk_sandbox_ccf.c
-+++ b/drivers/clk/clk_sandbox_ccf.c
-@@ -229,6 +229,7 @@ static const struct udevice_id sandbox_clk_ccf_test_ids[] = {
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b71ac554c0b..fca2a0b0e39 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -620,7 +620,7 @@ config CMD_SPL
+ 	help
+ 	  Falcon mode allows booting directly from SPL into an Operating
+ 	  System such as Linux, thus skipping U-Boot proper. See
+-	  doc/README.falcon for full information about how to use this
++	  doc/develop/falcon.rst for full information about how to use this
+ 	  command.
  
- static const char *const usdhc_sels[] = { "pll3_60m", "pll3_80m", };
- static const char *const i2c_sels[] = { "pll3_60m", "pll3_80m", };
-+static const char *const i2s_sels[] = { "pll3_60m", "pll3_80m", };
+ config CMD_SPL_NAND_OFS
+@@ -629,7 +629,7 @@ config CMD_SPL_NAND_OFS
+ 	default 0x0
+ 	help
+ 	  This provides the offset of the command line arguments for Linux
+-	  when booting from NAND in Falcon mode.  See doc/README.falcon
++	  when booting from NAND in Falcon mode.  See doc/develop/falcon.rst
+ 	  for full information about how to use this option (and also see
+ 	  board/gateworks/gw_ventana/README for an example).
  
- static int sandbox_clk_ccf_probe(struct udevice *dev)
- {
-@@ -277,6 +278,15 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
- 	clk_dm(SANDBOX_CLK_I2C_ROOT,
- 	       sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 4b10e9c3880..f0612acf0c2 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1209,7 +1209,7 @@ config SPL_OS_BOOT
+ 	depends on ARM || MICROBLAZE || PPC
+ 	help
+ 	  Enable booting directly to an OS from SPL.
+-	  for more info read doc/README.falcon
++	  for more info read doc/develop/falcon.rst
  
-+	/* Register i2s_root(child) and i2s(parent) in reverse order to test CLK_LAZY_REPARENT */
-+	clk_dm(SANDBOX_CLK_I2S_ROOT,
-+	       sandbox_clk_gate2("i2s_root", "i2s", base + 0x80, 0));
-+
-+	reg = BIT(29) | BIT(25) | BIT(17);
-+	clk_dm(SANDBOX_CLK_I2S,
-+	       sandbox_clk_composite("i2s", i2s_sels, ARRAY_SIZE(i2s_sels),
-+				     &reg, CLK_SET_RATE_UNGATE));
-+
- 	return 0;
- }
+ config SPL_OS_BOOT_SECURE
+ 	bool "Allow Falcon Mode on secure devices"
+diff --git a/doc/board/ti/am335x_evm.rst b/doc/board/ti/am335x_evm.rst
+index 40e144948a3..a54439de29f 100644
+--- a/doc/board/ti/am335x_evm.rst
++++ b/doc/board/ti/am335x_evm.rst
+@@ -274,7 +274,7 @@ into memory, then written to NAND.
+ Falcon Mode
+ -----------
  
-diff --git a/include/sandbox-clk.h b/include/sandbox-clk.h
-index c2616c27a44a..0cd735e3ad5f 100644
---- a/include/sandbox-clk.h
-+++ b/include/sandbox-clk.h
-@@ -21,6 +21,8 @@ enum {
- 	SANDBOX_CLK_USDHC2_SEL,
- 	SANDBOX_CLK_I2C,
- 	SANDBOX_CLK_I2C_ROOT,
-+	SANDBOX_CLK_I2S,
-+	SANDBOX_CLK_I2S_ROOT,
- };
- 
- enum sandbox_pllv3_type {
-diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
-index ac56f17b775d..c4c1b6ba758a 100644
---- a/test/dm/clk_ccf.c
-+++ b/test/dm/clk_ccf.c
-@@ -209,3 +209,32 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
- 	return 1;
- }
- DM_TEST(dm_test_clk_ccf, UTF_SCAN_FDT);
-+
-+#if CONFIG_IS_ENABLED(CLK_LAZY_REPARENT)
-+/* Test CLK_LAZY_REPARENT feature */
-+static int dm_test_clk_lazy_reparent(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct clk *clk_i2s, *clk_i2s_root;
-+	int ret;
-+
-+	/* Get the device using the clk device */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_CLK, "clk-ccf", &dev));
-+
-+	ret = clk_get_by_id(SANDBOX_CLK_I2S_ROOT, &clk_i2s_root);
-+	ret |= clk_get_by_id(SANDBOX_CLK_I2S, &clk_i2s);
-+	ut_assertok(ret);
-+
-+	ut_asserteq_str(clk_i2s_root->parent_name, "i2s");
-+	ut_assertnull(clk_i2s_root->dev->parent);
-+
-+	ret = clk_enable(clk_i2s_root);
-+	ut_assertok(ret);
-+
-+	ut_assertnull(clk_i2s_root->parent_name);
-+	ut_asserteq_ptr(clk_i2s_root->dev->parent, clk_i2s->dev);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_clk_lazy_reparent, UTF_SCAN_FDT);
-+#endif
+-The default build includes "Falcon Mode" (see doc/README.falcon) via NAND,
++The default build includes "Falcon Mode" (see doc/develop/falcon.rst) via NAND,
+ eMMC (or raw SD cards) and FAT SD cards.  Our default behavior currently is
+ to read a 'c' on the console while in SPL at any point prior to loading the
+ OS payload (so as soon as possible) to opt to booting full U-Boot.  Also
 
+---
+base-commit: 8f520c0d5656196ec4912c837cc156a399350c33
+change-id: 20251231-falcon-7a97211ecbbe
+
+Best regards,
 -- 
-2.43.0
+J. Neuschäfer <j.ne@posteo.net>
 
 
