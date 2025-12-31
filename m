@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A69EE6428
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 14:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02CD1EE6428
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 14:16:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05BED84056;
-	Wed, 31 Dec 2025 15:14:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79E0D84067;
+	Wed, 31 Dec 2025 15:16:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DsdA+6jF";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AFsiKmDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 983618405F; Wed, 31 Dec 2025 15:14:11 +0100 (CET)
+ id C68E584073; Wed, 31 Dec 2025 15:16:06 +0100 (CET)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FB778401F
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:14:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA4878401F
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 15:16:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,73 +31,70 @@ Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D55813F861
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 14:14:08 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AF39D3F863
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 14:16:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767190448;
- bh=Kk5RSo/GTX0k7kJIyvqc8aLO/cfxDyqGKng8pxbp1io=;
+ s=20251003; t=1767190564;
+ bh=9eotYKmUxceOR4fFF2v6qmVUwLm8PYGRh1cBJ+G2tTo=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=DsdA+6jFKI0GkVOrBCfVmgo37E30E/uIY/m4HmlPbEPcMWV6YdLB+Y50Bb1WHn4RH
- PMktbQPpPXVwc9NEV5+Icl0M8fmTFMHg3sJFKqWCzNKRl+wI7VsMdDSlJ7E4lUNaTD
- 69/5SCf3PY7SAUKjWdQtNnPJmQKYCV8KkTHv1ZdL3VVS33FpW2PCoIrxVVoed/fEIc
- pAkkDXYc6hZy+jOyBG5P/iUz/0ZrvH4RLN3QpsnP2S6AQpFpW/UNIXHTYlMxGlS3/l
- aCjfdVIcw3qAUwMbFNPA8aVHiEuUcP4vzcDAAqxc1KP1ES9c5iJ+z2AwXyvPPZLpHG
- RjN35zwZbD8aJoUIcgAuXbJBKPsXPEHhI62UlVljgCl6kAmk55V4LoYo2mEL3NMUPI
- Tmo1qQbxg1XmQKPuabvYjvwkBOriCmiJEz//9Bj/qtt6WncurOBpYvGs4ClTgmQMoc
- jyVCvGW8sbBuvWhXkxYtvZBOi3vBXQpPLIzuAtZ957NMZaKYw6h3yEFDYUwRbMbCEx
- dV2oprMQWL+xYjcH0L0+VZuGBNkwWT9rjK+ppzSu9J7Fxuee/JAWRaLMm9RQVKg3NG
- zMcFAV37Xdwtq1jnL8a6zU3gMHb+cx5IGJWUnWza52rFqWz6cKVhUub+qdT0lzInfx
- /GG8v0Qi5X3CI1ajoB+AncIo=
+ b=AFsiKmDvFN5IsjVcHiNqnqn61PyEqsfBj8geV+YyHZBHZUH41tCdw05McMtnzwLDb
+ myxhy8mfFigWXdOxD+5Yjfee9zQyexPEDAQbTOsYqRo1Z/915c29N/nVcAfFXgRE3C
+ 3eoLR02FW+tc1HHOzTbeFpyQx06yFmcRr7stvFcjpKhcJ9rJTKE0K/F+B6zM/2nv4I
+ HI8q53YcRhm7cxvz2cw7de8oqETdW59yTJkxtABjtrrnITdvZrer2gKHaTk+DVgJTQ
+ rRQfWCSyFegAk9zpiH+vMw+BiMwoVA72rybe4IlzrUWiYT5gDKwzz+A4GbpIo1H323
+ 51EmcM+rJj1IviEMzmPumP5J6LSHsjcDuo8EGadI0C0+Ts7xlfG3oT6UvNY7T4iLTZ
+ jOzM/q+9crWzvIgPhxUxGiCfrlza395NPF74ITY6BbpncpvEykBtr74TP/lt+IZ5Lx
+ MMbiOjNnAWoxTk0RF6P6SKRoLa5981H1d4hsPWAcrmzEnF01OAGdEOSmS4Vr/azG+r
+ 8qZ/2gqyuxikkMoerGTTiA40xfsEhswOPd6V9KkgZZQrlVm/toin3ItlzrM9r8F2up
+ l7s1WzHtF3JIX/TX8g9HUdwzG/1QPVA4GG14H3zZvGEuOR5Ar6fd0eO9Diq0uEf05q
+ zXkOJvkOzMPwEjeYEqcupoas=
 Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4779ecc3cc8so77651725e9.3
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 06:14:08 -0800 (PST)
+ 5b1f17b1804b1-4775e00b16fso39084415e9.2
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 06:16:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767190448; x=1767795248;
+ d=1e100.net; s=20230601; t=1767190564; x=1767795364;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kk5RSo/GTX0k7kJIyvqc8aLO/cfxDyqGKng8pxbp1io=;
- b=ZslPtfvuJDaREtgYLTG44ayTFQQ5y2GvCFSDuEuL1KISWxLETSXWHVxeKOjCCMCbif
- qteMnPRaV+Jh1g5ij3f0bc5Sf90bZCM5EF9uJ0HZj1+YO9Af3RACu7G0cIWju92z0/cx
- WiS7wAjVmIAhSb1W913ASEZeCYfhbDoruc6sb3FPmB2hdXzociJhrFiiBixRocAiCMeJ
- aKi/zlNTmp9/VOzaOScdXFBMwbotw8Uxz/7Zc/2pxfPDRiC3xlPd3XLxcw6L1ztV0/kw
- vagnt4YFr714hX17iAyZw0195Xwko9BaklUYGtcetcKN1/6ZmVj8j0LhkGL36kOU0SIQ
- zLvA==
+ bh=9eotYKmUxceOR4fFF2v6qmVUwLm8PYGRh1cBJ+G2tTo=;
+ b=GGNWsCfsN80Y8FLtf1VnFxhCxkooY+86rej71HCBlk/ZER1RcD8Vx22q2ELKo4mbtl
+ 6PblspzLwx7KB3w0AG9eeFLjmurqVpt/+a4AcvX8hPgZZnrw4aV1buBHRTjULWLoI+ZF
+ y1oaG0tzNxshrozDHKRiJjZqE/lsKFaoxrWNikj+4nJOX1cYCGd357WATf6IlI6zha95
+ JGHGVGv0jm8T6rGfqlc7SgLewlS3q+C8mqIelfqH7dHqT5UdPgE+I1GIPdT2MM+Wha0A
+ Z4ARHdrt1TbZBRrCr0kQ0lkFSKmftnrz2z2fUwK39ziGCGD9dRunvCEowDRBJndoU6xv
+ 3KaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVr1BLJHa1ffLbYP3+o8MIr0uyr9QVS70q3ZwAJoGUJ+/WQjSSVx/ZCgyYiuNeFTbmV6uc3eJg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yygg9vp/+bGB/M5c9SfqRzeGKVkMV/hFVnu7x1MZzbsQTQq+s2z
- oHqliAFyXHRrawtBJkKUxaa4P1If79vcPl8VN1apyUrtF+6tBgkMfdkCOLn7rwCiGvSka4DMQ13
- r+hNr0U2VArufSXzXsDIkt2fwr40y4Vc0ZJsmT/zm6c1dTL9Qox4lLWWPzZkB7VQVOBXp12A=
-X-Gm-Gg: AY/fxX4oWOXN9LRiBbAtpu0cF/ODEL/bq8VE8kNDRMItKdYit4yRjHgbrVuhcBAySWo
- SBOFSNQjPvaKaGFHWWr/n95BVobQz1dBvkCfdjGlnN2rZ3yZcv5sH8EeiQjoXh73CT/Vop6hqD2
- kEluo8obdbOByIjYwGTIOK1cqZicrC60gYElqs2/VX4cM14Z9N2qtgK1GEKiDZd7l8OsAaAeX9m
- PC43mb1n2ZOM6wZPHkJpy4bVcbvZUp1tEv/NPO7Cv3RBWyaBTC+K6c62CtjRqCuhpgv6ky7VCDv
- f9QNKGg3Crmbheyoxo2axaF4x1MhXZaeqhoW3Fsz4eAwZhjXfUgu2E0JcDQ0XCaglDuyTQ5PduA
- hTPutCgWBCkJ9BMJ4HCZ5JUPl/TN0LcJksZhqynQAWI3RTTbtFqKcj6ajZ/Th54/dmrhOUnpFHr
- mG
-X-Received: by 2002:a05:600c:8107:b0:477:6374:6347 with SMTP id
- 5b1f17b1804b1-47d19594ce3mr429322595e9.22.1767190448258; 
- Wed, 31 Dec 2025 06:14:08 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE/FBDB/RlaHNO1apuQmNok9m6J0eKxqgBrtJlfJOHGiB1Wq3jDyWacfoALqNHxOEBiE0ZnmA==
-X-Received: by 2002:a05:600c:8107:b0:477:6374:6347 with SMTP id
- 5b1f17b1804b1-47d19594ce3mr429322185e9.22.1767190447867; 
- Wed, 31 Dec 2025 06:14:07 -0800 (PST)
+ AJvYcCVuuFfHGP0DAhiBGCpBbO+v8mDQFgfiaWKOruyjfz01hymLsaQV9ZYwC5yqIPykqh/uvdJQhsM=@lists.denx.de
+X-Gm-Message-State: AOJu0YybuaJr/VvxU/OE6gUKRt7rrQI1kMK9oXpq+UcLWv7jOYKZq3P2
+ V1im3sObZAOi7feZVWY37SsjdggOBI1Gc7Hnk9z6sU2KM7HcfUuwTzWr/+DWsaeATANsmpw6Dhn
+ qcOarIKE5+qjdy5aB0UGeDChOlZtssr1PKIWOUhGiWb18PVxNKgSGrrHz0J/6qbPDohn6Qhg=
+X-Gm-Gg: AY/fxX43jTwnumyxIWIxuKJiWOhSF/iXtpKP4p4HuGKHDgfFK+8TT4ET1ooPDlRigin
+ DQCWQNMsRJV04npnsC91sSfvRBjK84M2p8TsRCQWpvX0rM9Z0nBU7PcK/6mf7EeSPDBY0YN9TmO
+ YLz9r0VxketvQDI2diEK2T3WYJSahdphcXe2ZNG0pR6tybMXjWCs23qM3vMOmxFOVBAOryuNqZh
+ NkcYmPew/iwRyj+8ZOBS9KPUxRDIiAOYAAdRaZ6/vTSNw2PvBNUtF2rfn5igihze1xf21VbOH+c
+ 26+r6D0WOjuG/Qpl4+4Nbo3qGMmZeRB7ElUDbqM9mHt2Zivz7vLfSaBCc1vxM9RIrAGXqcCf8Dt
+ JmnMaSLX+Wfg/EjyERlTniVWlROATdKxTOc13U7jxVw8ChpsIbRwgBr4fwJUwxEp6wNsDkJcSFZ
+ /y
+X-Received: by 2002:a05:600c:a31a:b0:477:b48d:ba7a with SMTP id
+ 5b1f17b1804b1-47d1afcd9e2mr336758415e9.32.1767190564294; 
+ Wed, 31 Dec 2025 06:16:04 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFQVd37dl3nnrmCA4JvOcz6WmposmO6VfOGLxC0sc6jurOSoQT3iqCxQoDaDRp2L3lp6UKggQ==
+X-Received: by 2002:a05:600c:a31a:b0:477:b48d:ba7a with SMTP id
+ 5b1f17b1804b1-47d1afcd9e2mr336758255e9.32.1767190563945; 
+ Wed, 31 Dec 2025 06:16:03 -0800 (PST)
 Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
  [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d28a33adcsm213457085e9.18.2025.12.31.06.14.06
+ 5b1f17b1804b1-47d19352306sm636689175e9.5.2025.12.31.06.16.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 06:14:07 -0800 (PST)
+ Wed, 31 Dec 2025 06:16:03 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ion Agorria <ion@agorria.com>,
- Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de,
+To: Tom Rini <trini@konsulko.com>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] video: menu "TrueType Fonts" depends on TrueType enabled
-Date: Wed, 31 Dec 2025 15:13:44 +0100
-Message-ID: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd: command `font` should depend on CONSOLE_TRUETYPE
+Date: Wed, 31 Dec 2025 15:15:50 +0100
+Message-ID: <20251231141550.64310-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -117,98 +114,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Kconfig menu "TrueType Fonts" should only be shown if TrueType is
-enabled.
-
-Put all TrueType dependent customization within one if statement.
-Remove `depends TRUETYPE` clauses.
+The font command is not usable without CONSOLE_TRUETYPE.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/video/Kconfig       | 10 ++++++----
- drivers/video/fonts/Kconfig |  4 ----
- 2 files changed, 6 insertions(+), 8 deletions(-)
+ cmd/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 0fc1c161541..566942e16f3 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -211,9 +211,10 @@ config CONSOLE_TRUETYPE
- 	  With this option you can adjust the text size and use a variety of
- 	  fonts. Note that this is noticeably slower than with normal console.
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b71ac554c0b..b5b03eb5363 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2649,8 +2649,8 @@ config CMD_VIDCONSOLE
  
-+if CONSOLE_TRUETYPE
-+
- config CONSOLE_TRUETYPE_SIZE
- 	int "TrueType font size"
--	depends on CONSOLE_TRUETYPE
- 	default 18
+ config CMD_SELECT_FONT
+ 	bool "select font size"
+-	depends on VIDEO
+-	default y if CONSOLE_TRUETYPE
++	depends on CONSOLE_TRUETYPE
++	default y
  	help
- 	  This sets the font size for the console. The size is measured in
-@@ -226,7 +227,6 @@ config CONSOLE_TRUETYPE_SIZE
- 
- config CONSOLE_TRUETYPE_MAX_METRICS
- 	int "TrueType maximum number of font / size combinations"
--	depends on CONSOLE_TRUETYPE
- 	default 10 if EXPO
- 	default 1
- 	help
-@@ -239,6 +239,10 @@ config CONSOLE_TRUETYPE_MAX_METRICS
- 	  font metrics which are expensive to regenerate each time the font
- 	  size changes.
- 
-+source "drivers/video/fonts/Kconfig"
-+
-+endif
-+
- config SYS_WHITE_ON_BLACK
- 	bool "Display console as white on a black background"
- 	default y if ARCH_AT91 || ARCH_EXYNOS || ARCH_ROCKCHIP || ARCH_TEGRA || X86 || ARCH_SUNXI
-@@ -309,8 +313,6 @@ config PANEL_HX8238D
- 	  It can drive a maximum 960x240 dot graphics on a-TFT panel
- 	  displays in 16M colors with dithering.
- 
--source "drivers/video/fonts/Kconfig"
--
- config VIDEO_BOCHS
- 	bool "Enable Bochs video emulation for QEMU"
- 	help
-diff --git a/drivers/video/fonts/Kconfig b/drivers/video/fonts/Kconfig
-index c692fa9602f..5233a277bbd 100644
---- a/drivers/video/fonts/Kconfig
-+++ b/drivers/video/fonts/Kconfig
-@@ -6,7 +6,6 @@ menu "TrueType Fonts"
- 
- config CONSOLE_TRUETYPE_NIMBUS
- 	bool "Nimbus Sans Regular"
--	depends on CONSOLE_TRUETYPE
- 	default y
- 	help
- 	  Nimbus Sans L is a version of Nimbus Sans using Adobe font sources.
-@@ -20,7 +19,6 @@ config CONSOLE_TRUETYPE_NIMBUS
- 
- config CONSOLE_TRUETYPE_ANKACODER
- 	bool "Anka Coder Narrow"
--	depends on CONSOLE_TRUETYPE
- 	help
- 	  The Anka/Coder family is a monospaced, courier-width font for source
- 	  code and terminals, in two styles and weights. Anka/Coder Narrow was
-@@ -32,7 +30,6 @@ config CONSOLE_TRUETYPE_ANKACODER
- 
- config CONSOLE_TRUETYPE_RUFSCRIPT
- 	bool "Ruf Script"
--	depends on CONSOLE_TRUETYPE
- 	help
- 	  A laid-back handwritten font.
- 	  Font: https://fontlibrary.org/en/font/rufscript
-@@ -41,7 +38,6 @@ config CONSOLE_TRUETYPE_RUFSCRIPT
- 
- config CONSOLE_TRUETYPE_CANTORAONE
- 	bool "Cantoraone"
--	depends on CONSOLE_TRUETYPE
- 	help
- 	  Cantora is a friendly semi formal, semi condensed, semi sans-serif
- 	  with a hint of handwriting. Perfect for headlines.
+ 	  Enabling this will provide 'font' command.
+ 	  Allows font selection at runtime.
 -- 
 2.51.0
 
