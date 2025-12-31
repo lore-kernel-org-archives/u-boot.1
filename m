@@ -4,92 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC0BEEB565
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:47:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5149EEB565
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 17:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78A1984175;
-	Wed, 31 Dec 2025 18:47:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B420C8416C;
+	Wed, 31 Dec 2025 18:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lwE7Jzxm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DjAoUbJ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799BC840AE; Wed, 31 Dec 2025 17:23:20 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 2507D840AE; Wed, 31 Dec 2025 17:31:49 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 395CF83F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:23:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E487E840CB
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:31:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-803474aaa8bso3992315b3a.0
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:23:18 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-34c1d98ba11so11745160a91.3
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:31:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767198197; x=1767802997; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=1cs+7CYaqE7Vjw21DUhkqE6QlRPtOA24lVKFpOu2Hao=;
- b=lwE7JzxmvMw1Ctr78n5dlvEQx2HoxQQYnjd6k6a8G4pIg/GhAXIUKfQOnk/PC96WYw
- zlL+o9n6ak6NMAxcqjX3UZrDrIT5sI9iCIRuBcUqKurZDLdG6v9WxJvY521gIAKRKq+3
- R3X8JfoR7CtzcSyD9b4ps85xzyYRyC0M6ZhL7YnDnBDhPvGiny6aOigiNnH2iWCAZGV/
- LhaLftolKD8wWpJ200N5iIPmF8GY3Jk6ijgCQf0APTIuoPE2tS0EgKMwiLKp7uZvuhgU
- Cc2rTdq/RaeGSJHU0xSMxdIdugWR+XKLZLn8VvHbW5Kk+oGH7fxyhGsyKYPg/P7zsRCk
- Wy/g==
+ d=gmail.com; s=20230601; t=1767198705; x=1767803505; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7DcXANPyfdO0tl4mMgQIElKgCSSTem6EhVY+kgegWwY=;
+ b=DjAoUbJ6f5tcvRAgvuPvUly5PtsWXwBzoqE0kHhGYqFogWqS7SshmVKiT3rghMKvU4
+ 5tBHL2lli/xfP61t6eo+TR2HHtEvNWmY5GGTdj3Qy7/1me9lpmLzfcrxX/0TvXmvTuCN
+ LefxWv5AHqHhrghArmDjgRZZP1p3K8astm6MrK+eGTD4K4d7aiXKqBFZGECeW5yT+EGa
+ fMiWKixY72/SkwtShV4W2wzGJtJ695wik0iQqfagxh4nfbQebuS+fmBCUr4T9BsKBLkc
+ 6yKkeXbHX1hOeTf/3wHwCl603IWjRPnakQnANT9j/ZodriIguh8Tm3fZMf5bUZP3v/kR
+ 8YlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767198197; x=1767802997;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1cs+7CYaqE7Vjw21DUhkqE6QlRPtOA24lVKFpOu2Hao=;
- b=kEc98nUyExeex28Ael2sYtBDFG/s+KySqYRp8S3JfhuXlW5afgjjmjhkq8cTGbTl7H
- R9YDQk7wPH1weJCuO6sqxfq9ECbdVnKYjAqPkx1QYqrqYbBAonrhlWbgzhG2w2qm+k01
- skU6faV4HvDpDKcWn3IqGDBLNZ+daR+LC24LcpU78vBj6v7Xs1YtKJilaqOz2BU2tnpJ
- zZMoukrtsnSiiS6IZ36v3TmQav2BmTbUm4y9rgDPeLrtBlRkHLavEHbzV2h+0TRNCvS1
- Ly1lJ1kNZ46ff2oPTLrcb0aOFzjFyaG0zZZ6hYtLZ6rTNjz6lAug0PURiZi9WqFauvB3
- WnSw==
+ d=1e100.net; s=20230601; t=1767198705; x=1767803505;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7DcXANPyfdO0tl4mMgQIElKgCSSTem6EhVY+kgegWwY=;
+ b=HdU9eJFQquwulaAYWncNWiuv58OAmNOpkcbFARMU6gIRyNuxKVtgWoazVp9NozZvaC
+ mxpI2BzoU0V6EAFY+6cQZONVeZkCfalft9ySROkPCbPsr8DP5zT/I9z29nBMfOwztMbH
+ d2G2SErA11AuMDfwzyjE3tF0ETk14ByGLsQEhlVYt/MhOqbkX9Zz5m4ArJgoDFot6pep
+ 4VsIjH98BWIk8r66nu9CFULksP/8BbOhwNGkJAenzq7Fw8Sfk1KniJ092nW7ciJZGF7o
+ 7PCWYKQeKIZf+uOvo4svnfZaQk1wZj+0V4yOC27wl58ZxEHcDSlMZMZxGghbeFaFk8AM
+ fayg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPxi7UOFOiv9n1U69qGLZLwbwBoIg4suJBXoSubibCVoGkp4FfKSrSGbSxIQ8fEC8P5f+8Ibk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf6Tyspg+dLTHGGiJJVeoW0fm1VQKJD83XS1KwTpLHvJJQ+Ftd
- 9PcxzZRPUOrKuS6Pk6SNxpGGhOdLluNhm8KjhieRqvITRgwVzt9l3WKl9h9DYg==
-X-Gm-Gg: AY/fxX4Gjb70ywMaLcEiShISAASikxWvT2QIPWWJzfbnCsEeVW1iMk+nScEcrsBrXmk
- i7DSO2LCh/AMyEMTgQe//8KtM7Xk9WWdEt5Y2UnC5Jlcind4N/HgIvfZYYdj1t3jfW1oPy54s+7
- MwlDJE5jF2isiBtJkMXBrT0GSMaCN5gS31UdV61vZ1tdodi3RGRXaLC16ABsA0WqBSlrtp/CeMN
- Io8UgxUqWRC0iq2k25cSuoPwCor2K7iL8LSD2C3Kn1KRMO36ajhM3aEy5nq7XbkcIsS5PHl+Wpf
- QP6UEFjqnocRmLVB153x73JrvqkxNMbfW6a0Q48QnH9GwUiKXyTrki3/hrPtMnaJCCVXs3l2ClX
- aM+sa44+kjl4rniaJzSyONEgNaJvuQZ9kXOZIOW4F+qmfvvHXOJXGZmYXiz6TIm5Urh4M/JrTey
- zWi8qA1rBJ3GXcFMpYRWwwtgY8
-X-Google-Smtp-Source: AGHT+IEl4aPCyR3MTyXBAxdMZd365KHoLQTBwVTosIxHNT+oZR1gcfqLMSYGsWNWmx0wyV+B/z31vQ==
-X-Received: by 2002:a05:6a00:2f8d:b0:7fb:9851:d520 with SMTP id
- d2e1a72fcca58-7fe0e9303b5mr27782327b3a.35.1767198196508; 
- Wed, 31 Dec 2025 08:23:16 -0800 (PST)
+ AJvYcCUBL3i2EE8T6QqCaMPon47X3njWaCFiiwx3ML6/9F45qHtfEE21qX4bTbnPN946Du73GJIRErg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBYf96ZDbOHgJQysUN3TcaqITI76cCgBXGjlRJcSQThbyeIToQ
+ ssx4JU//Yg1EvVK5v5Qu9JP9GilH5/L/0k2JXn9IN2eMggh2e+rwmdNp
+X-Gm-Gg: AY/fxX5yebiB+qpfHNL5+nrUH58tOSJdrsLmBG2cNr5/qWpD8xkLfDo7Sitpg5Xymio
+ djx9Mc7egVyJ/iJVK9If3cvaynxZnH77tu5cmF9RlAon9HsC6p6KISQUwR4kByseh1E0MeVPn5g
+ 9ExEEX3F3s0gKFr5GZqd/btugrJXItgo9FZXV+NwtFmx5bsT2Zipzbx+0wV2ddixkLL7jdgqDAZ
+ fmeI4400cYYb8JjGEv6MVq28TcDtHl7BF/oGpxdc8UIZilJ/VGs0oZH+VjBTCu+0fVJosT1+319
+ pH4HzJ8Y0IMDbKWsgTyWdtESk8N/UxLnwB+5eJ+rVITBUgozi+mHVW/dECWX6x6L3bzJ4UDu3sV
+ j0DtW8DbGCfgoIq3S2016qDeDLFIaaTqsjWkes0UXK9McwhqcRFO/IhvHP+aUNMp1dWVVTUucPJ
+ eBhZi761EXk/YCr26uP0+dOZV/
+X-Google-Smtp-Source: AGHT+IHv2HwPStQ5SVfVDuyhJ62ZWzcPe2SbtV/CNc6m+y1J3Bk7FW++BPOu/n0YRdbL71q9uTkPQw==
+X-Received: by 2002:a17:90b:54c8:b0:340:b908:9665 with SMTP id
+ 98e67ed59e1d1-34e921ed466mr32708242a91.37.1767198705249; 
+ Wed, 31 Dec 2025 08:31:45 -0800 (PST)
 Received: from google.com ([2402:7500:499:de94:671b:a2e7:4f81:f445])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7b22536esm35323790b3a.23.2025.12.31.08.23.14
+ 98e67ed59e1d1-34e92228b64sm33184210a91.10.2025.12.31.08.31.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Dec 2025 08:23:16 -0800 (PST)
-Date: Thu, 1 Jan 2026 00:23:12 +0800
+ Wed, 31 Dec 2025 08:31:44 -0800 (PST)
+Date: Thu, 1 Jan 2026 00:31:40 +0800
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
- eleanor15x@gmail.com, u-boot@lists.denx.de, alison.wang@nxp.com,
- angelo@kernel-space.org, trini@konsulko.com
-Subject: Re: [PATCH v3 3/6] rtc: goldfish: Support platform data for non-DT
- probing
-Message-ID: <aVVN8CxdN7od62j_@google.com>
-References: <20251230160112.3045527-1-visitorckw@gmail.com>
- <20251230160112.3045527-4-visitorckw@gmail.com>
- <3983ea9a-e965-472f-aced-d74f27ed95e0@gmx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, me@ziyao.cc,
+ daniel@0x0f.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [u-boot-test-hooks][PATCH v2] travis-ci: Add config for QEMU
+ m68k virt machine
+Message-ID: <aVVP7LjBqbfY1Q5P@google.com>
+References: <20251230160651.3049301-1-visitorckw@gmail.com>
+ <20251230161545.GU710860@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <3983ea9a-e965-472f-aced-d74f27ed95e0@gmx.de>
+In-Reply-To: <20251230161545.GU710860@bill-the-cat>
 X-Mailman-Approved-At: Wed, 31 Dec 2025 18:47:14 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,84 +104,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Wed, Dec 31, 2025 at 01:12:45PM +0100, Heinrich Schuchardt wrote:
-> On 12/30/25 17:01, Kuan-Wei Chiu wrote:
-> > Currently, the Goldfish RTC driver exclusively relies on device tree
-> > to retrieve the base address, failing immediately if dev_read_addr()
-> > returns FDT_ADDR_T_NONE. This restriction prevents the driver from
-> > being used on platforms that instantiate devices via U_BOOT_DRVINFO()
-> > instead of device tree, such as the QEMU m68k virt machine.
-> > 
-> > Add support for platform data to address this limitation. Update the
-> > probe function to fall back to retrieving the base address from
-> > struct goldfish_rtc_plat if the device tree address is unavailable.
-> > Introduce a new header file include/goldfish_rtc.h to define the
-> > platform data structure.
+On Tue, Dec 30, 2025 at 10:15:45AM -0600, Tom Rini wrote:
+> On Tue, Dec 30, 2025 at 04:06:51PM +0000, Kuan-Wei Chiu wrote:
+> 
+> > Add the configuration file required to run tests for the QEMU m68k
+> > 'virt' board. This setup uses 'qemu-system-m68k' with the '-M virt'
+> > machine type and '-cpu m68040'.
 > > 
 > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 > > ---
-> > Changes in v3:
-> > - New patch.
+> > Changes in v2:
+> > - Rename to conf.qemu-m68k_na
 > > 
-> > It appears there is no specific maintainer listed for this driver?
-> > 
-> >   drivers/rtc/goldfish_rtc.c | 10 ++++++++--
-> >   include/goldfish_rtc.h     | 15 +++++++++++++++
-> >   2 files changed, 23 insertions(+), 2 deletions(-)
-> >   create mode 100644 include/goldfish_rtc.h
-> > 
-> > diff --git a/drivers/rtc/goldfish_rtc.c b/drivers/rtc/goldfish_rtc.c
-> > index e63a2766c76..900daabccb9 100644
-> > --- a/drivers/rtc/goldfish_rtc.c
-> > +++ b/drivers/rtc/goldfish_rtc.c
-> > @@ -9,6 +9,7 @@
-> >   #include <div64.h>
-> >   #include <dm.h>
-> > +#include <goldfish_rtc.h>
-> >   #include <mapmem.h>
-> >   #include <rtc.h>
-> >   #include <linux/io.h>
-> > @@ -77,11 +78,16 @@ static int goldfish_rtc_set(struct udevice *dev, const struct rtc_time *time)
-> >   static int goldfish_rtc_probe(struct udevice *dev)
-> >   {
-> >   	struct goldfish_rtc *priv = dev_get_priv(dev);
-> > +	struct goldfish_rtc_plat *plat;
-> >   	fdt_addr_t addr;
-> >   	addr = dev_read_addr(dev);
-> > -	if (addr == FDT_ADDR_T_NONE)
-> > -		return -EINVAL;
-> > +	if (addr == FDT_ADDR_T_NONE) {
-> > +		plat = dev_get_plat(dev);
-> > +		if (!plat)
-> > +			return -EINVAL;
-> > +		addr = (fdt_addr_t)plat->base;
+> >  bin/travis-ci/conf.qemu-m68k_na | 28 ++++++++++++++++++++++++++++
+> >  1 file changed, 28 insertions(+)
+> >  create mode 100644 bin/travis-ci/conf.qemu-m68k_na
 > 
-> addr is not a pointer, it is an address in the sandbox virtual memory
-> address space. This is why map_sysmem() is used below.
-> 
-> The suggested code fails to build on sandbox_defconfig with the driver
-> enabled:
-> 
-> drivers/rtc/goldfish_rtc.c: In function ‘goldfish_rtc_probe’:
-> drivers/rtc/goldfish_rtc.c:89:24: warning: cast from pointer to integer of
-> different size [-Wpointer-to-int-cast]
->    89 |                 addr = (fdt_addr_t)plat->base;
->       |
-> 
-> Please, use
-> 
-> 	priv->base = plat->base;
-> 
-> If plat->base is NULL, please, throw -EINVAL.
+> It would be good, but not a big deal either way, to also leverage
+> py/travis-ci/u_boot_boardenv_M5208EVBE_qemu.py here. And I say "would be
+> good" because really, we need because I'm not sure it will add any
+> coverage over what we have today.
 
-My apologies for the oversight.
-I agree with your suggestion.
-
-I will update the code to assign plat->base directly to priv->base in
-the next version. I will also verify the build with sandbox_defconfig
-to ensure there are no issues.
+I checked py/travis-ci/u_boot_boardenv_M5208EVBE_qemu.py and it appears
+to be primarily for network-related tests. Since I haven't implemented
+virtIO mmio support for network access yet, I think it would be better
+to introduce such tests in future along with the network support?
 
 Regards,
 Kuan-Wei
+
