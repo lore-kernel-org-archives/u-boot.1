@@ -4,78 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B54EE57C8
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 01:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C77EE57CE
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 01:55:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F54983FEE;
-	Wed, 31 Dec 2025 02:48:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D662483FBC;
+	Wed, 31 Dec 2025 02:54:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GxTJq95x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tojBVctj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8787483FF5; Wed, 31 Dec 2025 02:48:54 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id EAA9983FD3; Wed, 31 Dec 2025 02:54:57 +0100 (CET)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8FF383F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 02:48:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7A5E83F69
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 02:54:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64b7318f1b0so12385642a12.2
- for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:48:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7cdf7529bb2so2071406a34.2
+ for <u-boot@lists.denx.de>; Tue, 30 Dec 2025 17:54:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767145731; x=1767750531; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H9EQMs4l/Me9Yq8h2b8P8nm0OV3JCAkk+vlaNxM5eSk=;
- b=GxTJq95xDk1UHWY6d6stpcsd8FMukcFN9yAh0+zaJenLERLozTW8F3I+fL5Lx8KoAp
- VfdGRrb8gpxf+Pp24F7iRFMUl85RvFnnkd15vYZDNmuubgfJB6gaOXohM0gbce8z/6DF
- Yb/nrmAXeljHcpPd7D1r8EnLc+1yzQpZ9+ztU=
+ d=konsulko.com; s=google; t=1767146093; x=1767750893; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=THjYJYOUS0M8fu9ZJqSbbit6+zM4B848MBgZEdEXzzI=;
+ b=tojBVctjBZ1f5tpQW3DZMj9OZgAylTbwzqZKQwFV4RbiTeamIQt7UK1Z4UdZsriQhV
+ F6UysqTWw1e35hzhxTY7EXaA/ioCOWdt1mfAsdCbFLPsqEjsTD6UZ5/N4rAzlBVI+aFI
+ lG395YXQIlEVO7JZO+F8gVKwS164lUHsVOkGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767145731; x=1767750531;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=H9EQMs4l/Me9Yq8h2b8P8nm0OV3JCAkk+vlaNxM5eSk=;
- b=iaoy8mRuoyjndKmtstot7vzgVYAhoEbYEmHDKOwYZXung5k/HeyZdx4J0/LTz1Tev8
- 3Vb05eajvsiJgK3bx70OmBYAWGkPL7Qu8jkMqtG2P9IZN0F0QBguw0hsvVJnk98ttOWR
- NAXvE3SCPbO5e/UOac8UNmfvGjbNbcOC2+3HDRjOD9y65DmZlBumxeDeQX35GoLcU18V
- UIfpptF7hgtpBOPlWUc5MNt6J5MfCu2cFpCvVxtMGsmBDJ2jI3Sxe+iBIEMM1ymA9c4C
- ELwFNylHAuwFiqn2xVAp4MEfEhBrQtG+FeHhZ4L/4jt5EB5BodmeNHbuy/Fy1OlBOHUI
- FGTw==
+ d=1e100.net; s=20230601; t=1767146093; x=1767750893;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=THjYJYOUS0M8fu9ZJqSbbit6+zM4B848MBgZEdEXzzI=;
+ b=C+iHs8vs+OoP2A0u7bLJtxDbb5NBsYrSrDHcDQYmgT1355ukFv37NjaDPq4JN6XpWY
+ 4dPGFZPoMfGDtQtXYErf8UA7gn5U/TiM0cycDnyXFiw1H9iCPVmDebgpHozjnigMqM3c
+ j93iT/wFMbYUxKts3nK6gLhldvauk3E+Ii95Scdce28BWXlJScqHbvo6gsRY81R828ta
+ LJ/xMuV122HkShdQrgYG2j/C2v1UUdt9iOh7GS2KOCc8KdS7j+VxIwGiGuWZX1mlUIkR
+ T1aolodbr7ctrZB4QgMgn9VFT2F9FZV1L/ZFAtATkmiZTVyjnHVy1L5rgT6SUM3KdTDT
+ Cobg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwYJJ3PJvYkfcHm0nv2x79IR+vjssf/YACS5A8PnQ65WSzw1Ougsy5ovi/qQ2X0iGHTM3A/qo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqXHiqMPL6NYkUnRfVqeZfs9p6aXwwQFi5p9O/aE198VIt9n6N
- 1YTvu2ZgU7LvLN+xCdg9FigB3lmRl3vS4c4X3Xcd/jlzzEx/0eLwgJ7vjgI54Eh2nBMz72JwSDI
- s7EOrEO/5A1x/ZKOmy0YtpotmzA0Mt5VpxNfTzpsA
-X-Gm-Gg: AY/fxX64AQIZtlz/WxvFILQQqioEcgDeMoQPwWKwSbbnP+AbAODxmtelQQ+oddyAdEA
- osyBf5LvTA2H6HFCF3/6aNp9G3BuPRKPYey1gu6Q01P9EXK2fRz6OVZMD3M7Lsyz90rWvsvz8rn
- VKZWrJtZ7X013bymfy9A5rql4lfLaUwlV21Cl+/tN7RwI2Nity520yrwWA8E/23GXAb1hJ4cDgG
- JFTivtbAHiHF3WUenq2aPKD2Xl7MSeYYoLTFOisPGwDAT6n+9PgVXsxglpa9n71wDWBhw==
-X-Google-Smtp-Source: AGHT+IG+6pOGMUVPJvNYR+YYJ0xUtGj1zOWifZCHoM5sR41SBABSpMBVG/jUffQf0ic35y482afslg/GfLdjhhBH0vQ=
-X-Received: by 2002:a17:907:3da8:b0:b76:b76e:112a with SMTP id
- a640c23a62f3a-b8036ece49dmr3574637966b.11.1767145731095; Tue, 30 Dec 2025
- 17:48:51 -0800 (PST)
-MIME-Version: 1.0
+ AJvYcCUzdVtP7PJc4fxNZza//dMkyind1bYhaHtHQVZX2ooX3EZrKRpg2ysva9RJcgFUs7HzMUFXGt0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy65DLeTNs7BssQTSWaK9Gsjcl6g07zZDsn3K/jcJRv8xvMIQ3t
+ l6cS+Ld5XfHjAIXJRCEPVugQ8CPsjJxuBv08Y/H57uqUBIGEC48x8P/AsfQYtKP3Gwo=
+X-Gm-Gg: AY/fxX4f+gCaM+IW6W8tf0AP8k74f+6OsAa1nVWCE/aEryMbvgSsSK6a0OiNEBTycY8
+ ImP4mavd8AiN4ayex9Fp/NeeZXpTUIRxjALPAVlNz2lPYV1DtqnA/HMJz/MsthG9w9NHplLBjUT
+ ocm4IMAEkPkIHQbkoNpLy9Zw6eRIJW7Wy84pI/9IlyIzxA00QVe5Y1EIkpZWMW70FEV3ZVlce3c
+ Kv4iAYAxJWs2sEfYRO15RQD7u9AXOs9mKcWkic7xFfDt5ZMP2C4phJv8u/ml595bzq5eNMqyf0j
+ f731q6FRtiht7i06P40/x8biygjJkCyZxXk/HjWJnQeEk0OMPDeW04gSMNYFLyTGOP3aWvcxkTw
+ CzBqXsCoj0lPh6AXcYyBQH0YjaEoqS74aDbO1ABkERS3YNJurQ9aLpQsF8emex6zKEDXNhcvXa+
+ jsWTuU5Uu5KhZC7E7lXpbUG/h/hB4PrVUwD0rw9MykXEX0b4XDmt+ISrOh9ZuRpH+zUPee3E7cN
+ MEQF1KTFtUShvmhs19MliB7uc1kTsIquKK4FP0=
+X-Google-Smtp-Source: AGHT+IGNgo7g6Lv3j2gtG3+qQbeSKxXpCGrn7WdqBrIE4G5P0XTZCIp/EOlAJo0DiaADDtgMk3RB/w==
+X-Received: by 2002:a05:6830:4103:b0:758:1417:7ee7 with SMTP id
+ 46e09a7af769-7cc66a0b453mr19385014a34.5.1767146093452; 
+ Tue, 30 Dec 2025 17:54:53 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667f9468sm23200482a34.28.2025.12.30.17.54.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Dec 2025 17:54:52 -0800 (PST)
+Date: Tue, 30 Dec 2025 19:54:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 0/4] fix integer overflows in filesystem code
+Message-ID: <20251231015450.GW710860@bill-the-cat>
 References: <20251228164500.313817-1-t.preissl@proton.me>
  <20251229144813.GP710860@bill-the-cat>
-In-Reply-To: <20251229144813.GP710860@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 30 Dec 2025 18:48:38 -0700
-X-Gm-Features: AQt7F2q6UX5oANe7R2rJv3C9qa86ljDKROOHd_Q1XYyPQ17EmBkFSPrqyHYx8w4
-Message-ID: <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
-Subject: Re: [PATCH 0/4] fix integer overflows in filesystem code
-To: Tom Rini <trini@konsulko.com>
-Cc: =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3x1QFd+lsUNBvo9h"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,40 +102,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Timo,
 
-On Mon, 29 Dec 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Dec 28, 2025 at 04:45:08PM +0000, Timo tp Prei=C3=9Fl wrote:
->
-> > Timo tp Prei=C3=9Fl (4):
+--3x1QFd+lsUNBvo9h
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Dec 30, 2025 at 06:48:38PM -0700, Simon Glass wrote:
+> Hi Timo,
+>=20
+> On Mon, 29 Dec 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > This patch series fixes potential integer overflows in U-Boot
-> > filesystem code. It includes the following patches:
-> >   fs: prevent integer overflow in fs.c do_mv()
-> >   fs: zfs: prevent integer overflow in zfs_nvlist_lookup_nvlist()
-> >   fs: squashfs: prevent integer overflow in sqfs_concat_tokens()
-> >   fs: ext4: preventing integer overflow in ext4fs_get_bgdtable()
+> > On Sun, Dec 28, 2025 at 04:45:08PM +0000, Timo tp Prei=DFl wrote:
 > >
-> >  fs/ext4/ext4_write.c |  7 ++++++-
-> >  fs/fs.c              | 18 ++++++++++++++----
-> >  fs/squashfs/sqfs.c   |  9 +++++++--
-> >  fs/zfs/zfs.c         |  9 ++++++---
-> >  4 files changed, 33 insertions(+), 10 deletions(-)
+> > > Timo tp Prei=DFl (4):
+> > >
+> > > This patch series fixes potential integer overflows in U-Boot
+> > > filesystem code. It includes the following patches:
+> > >   fs: prevent integer overflow in fs.c do_mv()
+> > >   fs: zfs: prevent integer overflow in zfs_nvlist_lookup_nvlist()
+> > >   fs: squashfs: prevent integer overflow in sqfs_concat_tokens()
+> > >   fs: ext4: preventing integer overflow in ext4fs_get_bgdtable()
+> > >
+> > >  fs/ext4/ext4_write.c |  7 ++++++-
+> > >  fs/fs.c              | 18 ++++++++++++++----
+> > >  fs/squashfs/sqfs.c   |  9 +++++++--
+> > >  fs/zfs/zfs.c         |  9 ++++++---
+> > >  4 files changed, 33 insertions(+), 10 deletions(-)
+> > >
+> > > All patches have been tested with:
+> > > - sandbox_defconfig
 > >
-> > All patches have been tested with:
-> > - sandbox_defconfig
->
-> First, thank you for looking in to this. Second, please run
-> "scripts/checkpatch.pl" against each as there's inconsistent spacing
-> used here and that makes review harder (and needs to be fixed before
-> applying). Finally, for each commit please elaborate on the problem
-> being fixed (for example "if ... is corrupted then ... could
-> oveverflow"). Thanks!
+> > First, thank you for looking in to this. Second, please run
+> > "scripts/checkpatch.pl" against each as there's inconsistent spacing
+> > used here and that makes review harder (and needs to be fixed before
+> > applying). Finally, for each commit please elaborate on the problem
+> > being fixed (for example "if ... is corrupted then ... could
+> > oveverflow"). Thanks!
+>=20
+> In case it helps, there was an earlier series here:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/list/?series=3D456262&state=3D*
 
-In case it helps, there was an earlier series here:
+Please don't further confuse things Simon, thanks.
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D456262&state=3D*
+--=20
+Tom
 
-Regards,
-Simon
+--3x1QFd+lsUNBvo9h
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVSCZgAKCRAr4qD1Cr/k
+CpbTAP4zNnPrgRjNKH+Oo0nNjWoX0fQolrauw16TCgAKyDf40AD/WSgycx9sLGbp
+TDsdbkCch7Obp9/w2UEep4FK9A54CwQ=
+=ctHS
+-----END PGP SIGNATURE-----
+
+--3x1QFd+lsUNBvo9h--
