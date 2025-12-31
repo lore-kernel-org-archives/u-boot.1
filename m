@@ -4,65 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2476EE6457
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1759EEE6428
+	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 16:08:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46332840B1;
-	Wed, 31 Dec 2025 17:07:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 9DBD1840BE;
+	Wed, 31 Dec 2025 17:08:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mlysE/b5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FlOOCPjp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AE45840B5; Wed, 31 Dec 2025 17:07:37 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A794E840C1; Wed, 31 Dec 2025 17:08:12 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1817183F69
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:07:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9014E83F69
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 17:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dhFGX5zy9z9spM;
- Wed, 31 Dec 2025 17:07:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767197252;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LMXYu9LY0yJ9Ab0AKcqNw+WDKgqaNA/o29d5lEFjiEw=;
- b=mlysE/b5KRvfDKtIQ/8TEei7F2vP0w8x8ltL3rmFkdsq3MK3yf5FizetgAowZRwGfcOd0R
- /zdXzp7AU6HgvO3sewEwRWO5DBEiYUJyjJ1VRyIsoL8KXKnauRC/unCWDoOAykUwBam+G/
- gt4DwXO/zhlj4qkzVaQaqiXW0PY1VICHfOA8tbaa6oszWiB0YrzTyv0BckyT2N80YJOUfm
- TXoXchAmxvZygxBwZYUpvTDpuJaT5zBvmwnAzqbqkJ7afQ+6SjSsXkQsA2hnLMBxCHnIvf
- HsBe0XQo4xU7vLYSxYrUn4bC2zNFfY1MI58Y5wUOtKqH4nH7uOUWgLn8y/J+zg==
-Message-ID: <56df64f1-f3f8-4fb8-b85b-e1b1e30f5f49@mailbox.org>
-Date: Wed, 31 Dec 2025 17:07:31 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4511f736011so6995204b6e.0
+ for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 08:08:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767197289; x=1767802089; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=F9ajNO6EARFiuYd2+g0NCy/Qp4gDgyo9eBuNMk+RYoY=;
+ b=FlOOCPjpDYhdnOaGS3hYY0mWvV9lU6+44IaIWPIpvqiigAoL4cOzBHYMT4WPn/7+Kl
+ YJgrrx4amm2wrrfYTbFq/GhgcFBVQFm0papGb/kySwcFEXrUcsmaDjsDItTBUNwWtrSV
+ b4Ba6wfC0V+dJPB206q8DzlsK/kxjvc/Uoy8I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767197289; x=1767802089;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=F9ajNO6EARFiuYd2+g0NCy/Qp4gDgyo9eBuNMk+RYoY=;
+ b=mrZIHtFYeoktLIONgpIPEs2MmVr6BmHKuJVPjO9A3//xlZjYn9/h+xohvVoKMW2VsI
+ b7VeeihcVPQwMYRNaw0jtpHiCMnVfD6TzctVU/C0/pECObAuKFE36HOIYPOKGXz5XJSZ
+ Bqo31yYAfIj23ndR2f+Mg9BlDL1PpvZzzmpn+Gbjgm1MWyq+Rh+p18kW1guZ1uNsULer
+ xfCPTaITuAYNXCtl4zC53cOWi6Xvlry7iljwwXSGSvwXhHgsqFjl1DWIMO+YnGPx7s7j
+ pLB19z4ReKMROvsQ+wQT60h9qNeXGWoJ2VPWGqzVhl6+LcwrlQ0eJowd54BnJ+YYCmzW
+ pXuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXN7SkXN+sdy+PceTn+Aici8LC46NIVQydg4ai70PD9x5rJPD9yo+1nxZnBCgZ2I25vsb2Ojgw=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywy+hLR8Vc1rOs239at2FXtgXfEEnkvIQrLuM4gabI/1pTq8uQT
+ T0KzoiToanJ/9jFTctNquaoir+co2whPJHo8QXCzqR2l4K8ivQQb0+sBCVrCpCQmboY=
+X-Gm-Gg: AY/fxX5ByU2N5S0N76vOAPgfomaCSljaMdOTHZvP4yjjyUi2jKSOO2WpSjYJwryZ7fQ
+ 7o2i8bQ3YLTwXpFXp2v3ymASH9kQWq6xVVv2PTbs4LUm+fh0AE+LWwHQFwRpqA2c/s3qgmJuD6Y
+ jD4omnLctaziLqazBAEDdudMlTjkdEOgxPfgvE2qJDD20BHK9TJH+yRR7vTWIIe6VcX7atppXKy
+ 9CxmKDkQfxPl/wAlkm5f/hUSwQUpyMO2rAO8LwgS086ccW7bZvK/B4+P+xt36zmhYdHk2uxhvih
+ DVzQ4+My2DFTaZSLZpvV4YoJ0qqL3y6Epz2ipIRX+CGumj0qk2pLBgG4V0DumYiU6l1AKgTgLv8
+ WDtQ2NhNrF71Y0iKH27yMJJsoYZ9chkEL6oXyGYjNOgBiBbR6YpDax+9msck9AEGv19fWyTNTZx
+ nEZ7RdVSPL/iDP1AVHtx4A4ZhoG5NdT1LfZbobUXfFobH6Y+1TJmVTe+MpS9e7qsaRvqpxqAMhN
+ 0+UCeG2Sol8I88h5Ph5wBS0FAmJiyuS/e/+9yxOb5D2XVwOtw==
+X-Google-Smtp-Source: AGHT+IEaUr5g2B/Yyxp+HKSTLGpYL8KwgZTI5Phc4wTCze4ySWNx3A3ckkl7JfmAbc0y09GRn4rOPQ==
+X-Received: by 2002:a05:6808:690a:b0:450:826e:5df1 with SMTP id
+ 5614622812f47-457b221e342mr15958654b6e.19.1767197289313; 
+ Wed, 31 Dec 2025 08:08:09 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-457b3be18e1sm17716530b6e.6.2025.12.31.08.08.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Dec 2025 08:08:08 -0800 (PST)
+Date: Wed, 31 Dec 2025 10:08:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] video: correct label for cyclic video_idle
+Message-ID: <20251231160806.GA710860@bill-the-cat>
+References: <20251231153719.84716-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] test: env: Add test for environment storage in SPI
- NOR
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20251223143130.16266-1-marek.vasut+renesas@mailbox.org>
- <c31bd8b3-2604-4193-abba-6815845e8967@gmx.de>
- <bb3d1ff2-4cc1-48da-a47f-3aef44277791@mailbox.org>
- <20251223233205.GG847766@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251223233205.GG847766@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e60aa2fc60c39417bcf
-X-MBO-RS-META: uw5onbier77e9i347u3n369dt17ib8r7
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DuckPAMWqINDH+L9"
+Content-Disposition: inline
+In-Reply-To: <20251231153719.84716-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,55 +102,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/24/25 12:32 AM, Tom Rini wrote:
-> On Tue, Dec 23, 2025 at 07:55:45PM +0100, Marek Vasut wrote:
->> On 12/23/25 6:32 PM, Heinrich Schuchardt wrote:
->>> On 12/23/25 15:31, Marek Vasut wrote:
->>>> Add test for environment stored in SPI NOR. The test works in a very
->>>> similar way to the current test for environment stored in ext4 FS,
->>>> except it generates spi.bin file backing the SPI NOR.
->>>>
->>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>> ---
->>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->>>> Cc: Simon Glass <sjg@chromium.org>
->>>> Cc: Tom Rini <trini@konsulko.com>
->>>> Cc: u-boot@lists.denx.de
->>>> ---
->>>> V2: No change
->>>> ---
->>>>    test/py/tests/test_env.py | 99 +++++++++++++++++++++++++++++++++++++++
->>>>    1 file changed, 99 insertions(+)
->>>>
->>>> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
->>>> index 383e26c03b0..48e31f19b3c 100644
->>>> --- a/test/py/tests/test_env.py
->>>> +++ b/test/py/tests/test_env.py
->>>> @@ -457,6 +457,26 @@ def mk_env_ext4(state_test_env):
->>>>        utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
->>>>        return fs_img
->>>> +def mk_env_spi_flash(state_test_env):
->>>
->>> Thank you for adding the test.
->>>
->>> Unfortunately pylint doesn't like your code. Please have a look.
->>
->> Is this something we run in CI ? If so, CI builds did pass.
->>
->> If not, how do I trigger this ?
-> 
-> We only run pylint_err not pylint in CI. The "make pylint" target has
-> been unused for so long that the baseline itself is out of date. I don't
-> object to trying to improve our python code to match standard practices
-> better, but this isn't the place to start adding complaints.
-> 
-> All that said, a newline before a new function is just a normal good
-> practice and so at least the quoted here example should be fixed, just
-> like if it was in C :)
-There is a newline before the function, the code is incorrectly quoted 
-in this discussion, see e.g. patchwork for the actual content of this patch:
 
-https://patchwork.ozlabs.org/project/uboot/patch/20251223143130.16266-1-marek.vasut+renesas@mailbox.org/
+--DuckPAMWqINDH+L9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So, what exactly should be fixed in this patch ?
+On Wed, Dec 31, 2025 at 04:37:19PM +0100, Heinrich Schuchardt wrote:
+
+> When the cyclic function video_idle() takes too long a message like the
+> following is displaced:
+>=20
+>    cyclic function video_init took too long: 87707us vs 5000us max
+>=20
+> The text "video_init" is misleading. Replace it by "video_idle".
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--DuckPAMWqINDH+L9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVVKZgAKCRAr4qD1Cr/k
+CvzGAP4m0Ae7jXB/NsIlDFYUzaFrHXDTDZggkRJV3j9jfw9pQwD/bkQuWVCwN0Zu
+VWceeTDOPh2yOsbG8/4GtC9Exldz6wM=
+=l77F
+-----END PGP SIGNATURE-----
+
+--DuckPAMWqINDH+L9--
