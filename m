@@ -4,87 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8EAEED60F
-	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 14:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B3BEED612
+	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 14:17:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDF1083EB7;
-	Thu,  1 Jan 2026 15:17:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 670BF84051;
+	Thu,  1 Jan 2026 15:17:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jK5C6nLx";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FUYpIaLl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0BA683FC0; Thu,  1 Jan 2026 15:17:13 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 8E13C840A2; Thu,  1 Jan 2026 15:17:50 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E32F83BB1
- for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 15:17:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 81DD583BB1
+ for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 15:17:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AB44F60008;
- Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 59FE2C4CEF7;
- Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767277029;
- bh=UHOa5I4FdX8qTSRHSKE4cmEk3ExnlAZAg2EqFMdzuRE=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=jK5C6nLxFilIl8+eopWUbnP/lEd+tyIoC5O75+/0M9JWu+2ukDlcFsiekofHTWeJR
- JVHZ7fa/2oihZRftL2xbScSMZaISVpMmdUTt4TLXcgZ4e0XVXl38bl2TWnPCEEboFc
- y2JN7rf2kKTsJi1Kw3aKe2S9gqPU4XpmiHmtTy7YhQi4ka8XiT08+I1hRPtorbHjIZ
- EJNqHbBqHrH6qk5INIndVqvLmfqoVNUOlf8bjrNMbbSxGAWwBbMIrvFQFRqUnaSLtI
- 9nYb9LNPTahMfiGLKmP9M9h6oefCBNq/aoEEtq3K+B40eWTcF4aVbEbbNoZwDqu96T
- l4e2E6WKOlupg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 46FE9EED601;
- Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
-From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
- <devnull+j.ne.posteo.net@kernel.org>
-Date: Thu, 01 Jan 2026 15:17:01 +0100
-Subject: [PATCH v2] Update links to doc/develop/falcon.rst
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id DEFDD4003D; 
+ Thu,  1 Jan 2026 14:17:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767277068;
+ bh=srDubR1uFUiq1hjWnFmyHIr2tKXcLAAU9cz5ofWl/Cg=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=FUYpIaLlDwA8e0bfsycD+376zfKMXyIZym8NarBjYB2zXcmeu83eVCBWU4Hscv0ac
+ Sua7SX9a70hqTuHYW5AM9iDeD4OjTK8JZJtVWa8MRPNshW+NtEOeZhY04H+60F5GEc
+ 97xdQ3WAh18YA1oa27Tltw3UVi+cP9LFDeN3fP3+dnOq8syq4mleSBAD0Bs8Jk65Q9
+ EPRCXZd0YrykjWolLaWFf61+ylI3peUQ+cfAMZj47x0GFAxMrN4/dSW19853yvqJqj
+ r4g5205jLHfyZot2yBkT2CBzCYY/QQXJeFdrjgFY5/Unx9rrEo1YM67rzOedF2xXmx
+ xaLnAlYUTZpd5AG5NNl4K5BNSf6HHZSrymsH/B0Z3FxowMeOCbbr2h5mRsM905oA0q
+ 7EHt8jWFRSafWa2SM+rNC4xHw6ozRK5CkRooEy/QpDB57gdUS31qSmSHY0uU/mVmCr
+ +MUpqvZualSOqFX/HcBEKiDA+jeQhceg6EYoj0on15QhAH2dtfUfpKAYAUtVOkINwQ
+ uU+HyiQopcRW9sHvexdKLPfxOCGk+aVduaeABUUzxeGMNn2nFPOQta9yIU67eZ5SSg
+ Eu44qlukwe9tnffW5WAiVGzP50mxZPsVkBKaa8QGdtkvYxQopvTwQtJNTDAlBX0obY
+ vnx8bN+sFBmvc+g9VlUcfok8=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <simon.glass@canonical.com>
+Subject: [PATCH v2 1/1] doc: describe QEMU VGA emulation
+Date: Thu,  1 Jan 2026 15:17:43 +0100
+Message-ID: <20260101141743.17676-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260101-falcon-v2-1-75896535ad0f@posteo.net>
-X-B4-Tracking: v=1; b=H4sIANyBVmkC/2WMQQrDIBBFrxJmXUvGElO7yj1KFmonzUDRoCItw
- bvXZlv+6n0eb4dEkSnBrdshUuHEwTeQpw7cavyTBD8ag+zlgPKCYjEvF7wYjR4lIjlrCZq8RVr
- 4fYTuc+OVUw7xc3QL/t6/REHRpt11sFqpntS0hZQpnD1lmGutX1ReOgKdAAAA
-X-Change-ID: 20251231-falcon-7a97211ecbbe
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Anshul Dalal <anshuld@ti.com>, 
- Peng Fan <peng.fan@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Simon Glass <sjg@chromium.org>, Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Sidharth Seela <sidharthseela@gmail.com>, 
- =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767277028; l=2880;
- i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=uzyoTCT099z/Hlho/K2kyDiQU5MpWiXI/6PFq2lGyu4=;
- b=h1splMZr22ZTTifPeBQXfcAoDneceK8Fanc20Gp6OvJgB8PbHkYJPlCPx2syIz3qYXezvKYFJ
- Xpq5WzB6biFARFZFiTTSJPnO2xnnQGkueJ0L/gXHDEO7T/Ez9rfTKOD
-X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
- pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
-X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
-X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,93 +71,107 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "J. Neuschäfer" <j.ne@posteo.net>
+Describe how the QEMU defconfigs can be used with an emulated GPU.
 
-README.falcon was converted to ReST/HTML in 2023.
-
-Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-Changes in v2:
-- Use a proper link within ReST (thanks to Heinrich Schuchardt's review)
-- Link to v1: https://lore.kernel.org/r/20251231-falcon-v1-1-19c85b9660e6@posteo.net
+v2:
+	fix typos
+	tweak some wording (if -> whether, like in -> as shown in)
+	place video emulation after block device emulation on the index page
 ---
- cmd/Kconfig                 | 4 ++--
- common/spl/Kconfig          | 2 +-
- doc/board/ti/am335x_evm.rst | 2 +-
- doc/develop/falcon.rst      | 1 +
- 4 files changed, 5 insertions(+), 4 deletions(-)
+ doc/board/emulation/index.rst |  1 +
+ doc/board/emulation/video.rst | 63 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 64 insertions(+)
+ create mode 100644 doc/board/emulation/video.rst
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b71ac554c0b..fca2a0b0e39 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -620,7 +620,7 @@ config CMD_SPL
- 	help
- 	  Falcon mode allows booting directly from SPL into an Operating
- 	  System such as Linux, thus skipping U-Boot proper. See
--	  doc/README.falcon for full information about how to use this
-+	  doc/develop/falcon.rst for full information about how to use this
- 	  command.
- 
- config CMD_SPL_NAND_OFS
-@@ -629,7 +629,7 @@ config CMD_SPL_NAND_OFS
- 	default 0x0
- 	help
- 	  This provides the offset of the command line arguments for Linux
--	  when booting from NAND in Falcon mode.  See doc/README.falcon
-+	  when booting from NAND in Falcon mode.  See doc/develop/falcon.rst
- 	  for full information about how to use this option (and also see
- 	  board/gateworks/gw_ventana/README for an example).
- 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 4b10e9c3880..f0612acf0c2 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1209,7 +1209,7 @@ config SPL_OS_BOOT
- 	depends on ARM || MICROBLAZE || PPC
- 	help
- 	  Enable booting directly to an OS from SPL.
--	  for more info read doc/README.falcon
-+	  for more info read doc/develop/falcon.rst
- 
- config SPL_OS_BOOT_SECURE
- 	bool "Allow Falcon Mode on secure devices"
-diff --git a/doc/board/ti/am335x_evm.rst b/doc/board/ti/am335x_evm.rst
-index 40e144948a3..b14ba41917e 100644
---- a/doc/board/ti/am335x_evm.rst
-+++ b/doc/board/ti/am335x_evm.rst
-@@ -274,7 +274,7 @@ into memory, then written to NAND.
- Falcon Mode
- -----------
- 
--The default build includes "Falcon Mode" (see doc/README.falcon) via NAND,
-+The default build includes :ref:`falcon-mode` via NAND,
- eMMC (or raw SD cards) and FAT SD cards.  Our default behavior currently is
- to read a 'c' on the console while in SPL at any point prior to loading the
- OS payload (so as soon as possible) to opt to booting full U-Boot.  Also
-diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
-index 528a9c389bf..3fc23f65c45 100644
---- a/doc/develop/falcon.rst
-+++ b/doc/develop/falcon.rst
-@@ -1,4 +1,5 @@
- .. SPDX-License-Identifier: GPL-2.0-or-later
-+.. _falcon-mode:
- 
- Falcon Mode
- ===========
+diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+index f8908166276..bda2240725f 100644
+--- a/doc/board/emulation/index.rst
++++ b/doc/board/emulation/index.rst
+@@ -15,6 +15,7 @@ Emulation
 
----
-base-commit: 4933a0e67578789a57f540a378ce0698435b7b17
-change-id: 20251231-falcon-7a97211ecbbe
-
-Best regards,
+    acpi
+    blkdev
++   video
+    qemu-arm
+    qemu-mips
+    qemu-ppce500
+diff --git a/doc/board/emulation/video.rst b/doc/board/emulation/video.rst
+new file mode 100644
+index 00000000000..0e08c47787f
+--- /dev/null
++++ b/doc/board/emulation/video.rst
+@@ -0,0 +1,63 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++Emulation of a graphics adapter
++===============================
++
++Currently QEMU's ``bochs-display`` is the only emulated GPU that U-Boot's
++generic QEMU defconfigs support. It emulates a PCIe-connected graphics card
++with VESA 2.0 VBE extensions.
++
++The following parameters can be specified:
++
++edid
++    controls whether EDID information is available. Allowable values are
++    ``off`` and ``on``. The default is ``on``.
++
++vgamem
++    specifies the display memory size. The default value is 16 MiB.
++    For UHD resolution 32 MiB is required.
++
++The following configuration parameters are relevant:
++
++CONFIG_VIDEO_BOCHS
++    enable support for the Bochs GPU.
++
++CONFIG_VIDEO_BOCHS_SIZE_X
++    defines the display width.
++
++CONFIG_VIDEO_BOCHS_SIZE_Y
++    defines the display height.
++
++CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE
++    sets the framebuffer size that QEMU can use for a device driver that is
++    enabled after relocation. This should be chosen as
++
++    .. code-block::
++
++        CONFIG_VIDEO_PCI_DEFAULT_FB_SIZE >=
++        4 * CONFIG_VIDEO_BOCHS_SIZE_X * CONFIG_VIDEO_BOCHS_SIZE_Y
++
++Here is an example QEMU invocation for qemu-riscv64_smode_defconfig:
++
++.. code-block:: bash
++
++    qemu-system-riscv64 \
++      -M virt \
++      -device bochs-display,vgamem=33554432 \
++      -serial mon:stdio \
++      -device qemu-xhci \
++      -device usb-kbd \
++      -kernel u-boot
++
++``mon:stdio`` provides a serial console, ``qemu-xhci`` a USB root hub,
++``usb-kbd`` a USB keyboard.
++
++To start QEMU without GPU emulation, use parameter ``-nographic``, as shown in
++the following example:
++
++.. code-block:: bash
++
++    qemu-system-riscv64 \
++      -M virt \
++      -nographic \
++      -kernel u-boot
 -- 
-J. Neuschäfer <j.ne@posteo.net>
-
+2.51.0
 
