@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8286FEED618
-	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 16:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574DFEED618
+	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 16:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8410483B86;
-	Thu,  1 Jan 2026 17:42:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B287F83BC4;
+	Thu,  1 Jan 2026 17:53:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NI4vCF4a";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="h0Luv412";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AlNVTe5j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C14D083B91; Thu,  1 Jan 2026 17:42:02 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 5827883BC9; Thu,  1 Jan 2026 17:53:28 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6BBA83B82
- for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 17:41:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1329B40E1E;
- Thu,  1 Jan 2026 16:41:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E7F1FC4CEF7;
- Thu,  1 Jan 2026 16:41:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767285717;
- bh=/qtAgGa1uP4rnAkJHtq9R0+0xQOSd1i1jYNvWyQbsV4=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=NI4vCF4a+rt+9q+DPcAnPN6MTiT5jwfS67diLxGDSpzIWtJlAJcI4KTANKnPBQVk/
- H6qJqcYMJ6XoVVs1w9EV4UVVr34Z6xluNHT7MaYvBNXxFPtL/cG1Sk+sCu+hxgh27G
- WvYU+Fe39K8Xw6qgsaJHbwqOqfOoi4MfjfeWEvqSgw2rkZIGJv3iYZOX2eKs3vj9zF
- jsjO0340vqrFWxY/6cklXJ24Ifh0tTpTPaOXlY+Y455KaY6SQ1Ph+RXpl5Uy6uhQon
- LwgvC0lS5fnkl2s0UQhiHziGDJtGPKyZ/Kl+xnLP7vHnns2XO0vVB7vQ0Xr37Eyq8w
- Emhh6mhro7B+Q==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id DB7A0EED618;
- Thu,  1 Jan 2026 16:41:57 +0000 (UTC)
-From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
- <devnull+j.ne.posteo.net@kernel.org>
-Date: Thu, 01 Jan 2026 17:41:55 +0100
-Subject: [PATCH v2] powerpc: mpc83xx: Check the size of peripheral structs
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260101-immap-size-v2-1-31f15acea735@posteo.net>
-X-B4-Tracking: v=1; b=H4sIANKjVmkC/23MQQ7CIBCF4as0sxYDGNvgyns0XdA62FkUCEOI2
- nB3sWuX/0vetwNjImS4dTskLMQUfAt96mBZrX+ioEdr0FJfpVaDoG2zUTB9UCzOuN7JXl0MQjv
- EhI5eBzZOrVfiHNL7sIv6rX+ZooQUzsyo0eAwK3uPgTOGs8cMU631CynIbg2lAAAA
-X-Change-ID: 20250217-immap-size-cf9f6f06139e
+ by phobos.denx.de (Postfix) with ESMTPS id 86E5D83BB1
+ for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 17:53:24 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dhtF01pmGz9tQG;
+ Thu,  1 Jan 2026 17:53:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767286404;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+86Cxy5EelADaalcVL45zePxgjBNGWrin8ipTQ8vEC8=;
+ b=h0Luv412HgRgKk+0lCqsJotYgBgF9tVrg+yT3QFkJKaexL6jClKLlQW7Cqjplm4FJHR8jq
+ ml3fvQABw9wyIcVCrbEb6jbn6Qdq80SWPyYk8rl9XZprg7YAyiMSdJ+6Y7I11gVbkgYFj2
+ v5Wjl1xFoQ2s0kCgEtbMKv7KlsM2Dnj8Wb9MvH6iEeg9RFAZtP1L+EYFo+9+ApR30djtu2
+ evRU4nUdFD3sYc51BfuBEZPCO9ziDaVcGxNbZJjjAWTG+IwLWQT/ZjhzrQa+r6lPVAqHdN
+ VPkVW25x5TOYFEw9YgNRVqcSaVWKU8DOnRgSV2Z69WKVcJSrN0ezEUretg0F/Q==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767286402;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+86Cxy5EelADaalcVL45zePxgjBNGWrin8ipTQ8vEC8=;
+ b=AlNVTe5j/nU1IHhqrbqCPwxVx5anDpx6y3ee2gHAaQ0gCpGVQc0bfcnyAXICaPJ5nVyiHs
+ c5LSd0/4oXrCpe+R9h5ErCCZaIanFgL4MxKYiOpmCznLTsaBcvy9wnjq9w1008nlnMZ7AR
+ tD3aZopxTyI7ropDazQ6KSQSQH6EoH2N/yEW0zzwc9lpxjD0jIveSTZdlSmV9qlNmo8Htk
+ JpDx31e6KwctRJ53frF4TjxCgTNaKhQGxCF/m23JDvlv6ucUFMTMUq2nYoXDPWZl7bd8HE
+ 9Mtvl5BcbPcDXZQymZrdRJhd5ZqqTdxDcIDLsZcK5xw6BNC0wSVYt4RX0Hkrxg==
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767285717; l=10548;
- i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=TVlU3hNU8m5wN24VzurUN8t4Ih+sBa9+LQBrLdMYvL0=;
- b=em5oWHg4H2VTb56cHBddtPTgYhJvZ9n3koCIybuNST720ae8x4UTB+QK+CCzbePG0LWneGFlu
- DzWc4u7Nj6YDwibUUts22Emeq090erfZMqDMssr30dORcd9HL8RViR1
-X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
- pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
-X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
-X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Behun <kabel@kernel.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: phy: marvell10g: Fix PHY mode bitmap handling
+Date: Thu,  1 Jan 2026 17:51:44 +0100
+Message-ID: <20260101165317.25595-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: dz7zpfitetpe37x6ed5dehisbmgn83ff
+X-MBO-RS-ID: dcfd67a9fe407c3f8dc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,390 +78,90 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "J. Neuschäfer" <j.ne@posteo.net>
+Replace PHY interface mode bitmap handling with comparison test to match
+U-Boot PHY subsystem behavior. U-Boot currently implements only single PHY
+interface mode for each PHY. Linux currently uses bitmap of PHY interface
+modes for each PHY.
 
-Peripheral registers on MPC83xx-series chips are declared in
-immap_83xx.h as a set of structs that ultimately fill the entire MMIO
-space of 1 MiB. This patch introduces a compile-time check of the size
-of each peripheral struct. The purpose of these checks is two-fold:
+The reason why in Linux uses bitmap of supported interface modes is so
+that Linux can select the best serdes mode switching behavior for the PHY.
 
-1. To quickly tell readers of the code the total size of each struct
-2. To verify that the size does not change when a struct is edited
+For example if the host only supports 10gbase-r serdes mode, then the PHY
+must always talk to the host in 10gbase-r mode, even if the RJ-45 copper
+speed was autonegotiated to lower speed (i.e. 1Gbps).
 
-If the size of a peripheral struct were to change by a few bytes due
-to an editing error, the result would be mayhem for all following
-peripherals, because all offsets would shift by the amount of the error.
+If the host supports both 10gbase-r and sgmii serdes modes, we want the
+PHY to switch to sgmii if the RJ-45 speed is 1000/100/10, and to switch
+to 10gbase-r if the RJ-45 speed is 10000.
 
-All new checks have been compile-tested.
+U-Boot does not implement this functionality yet, therefore remove modes
+which cannot be currently supported and switch mv_test_bit() to plain
+mode comparison.
 
-Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+Fixes: b6fcab0728cb ("net: phy: marvell10g: Adapt Marvell 10G PHY driver from Linux")
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Changes in v2:
-- Drop patch 2 "powerpc: mpc8xxx_spi: Catch bad chip variants earlier",
-  which turned out to cause failures in too many cases
-- Link to v1: https://lore.kernel.org/r/20250217-immap-size-v1-0-f9be2e9e7b1a@posteo.net
+This is a follow up to this discussion thread:
+https://lore.kernel.org/u-boot/bxuuwcj7jm33go7yj4jnafoowrttu2qvbxej7nvdn3pm5az4sj@6xpf3ym2s2ek/
+
+Large chunk of the commit message is also adapted from the
+aforementioned thread and explanation from Marek Behun, which
+is excellent.
 ---
- arch/powerpc/include/asm/fsl_i2c.h     |  2 ++
- arch/powerpc/include/asm/fsl_lbc.h     |  1 +
- arch/powerpc/include/asm/immap_83xx.h  | 37 ++++++++++++++++++++++++++++++++++
- arch/powerpc/include/asm/mpc8xxx_spi.h |  1 +
- 4 files changed, 41 insertions(+)
-
-diff --git a/arch/powerpc/include/asm/fsl_i2c.h b/arch/powerpc/include/asm/fsl_i2c.h
-index 1b1766180a7..6b728f833db 100644
---- a/arch/powerpc/include/asm/fsl_i2c.h
-+++ b/arch/powerpc/include/asm/fsl_i2c.h
-@@ -15,6 +15,7 @@
- 
- #include <asm/types.h>
- #include <linux/compiler.h>
-+#include <linux/build_bug.h>
- 
- typedef struct fsl_i2c_base {
- 
-@@ -67,6 +68,7 @@ typedef struct fsl_i2c_base {
- 	/* Fill out the reserved block */
- 	u8 res6[0xE8];
- } fsl_i2c_t;
-+static_assert(sizeof(fsl_i2c_t) == 0x100);
- 
- #if CONFIG_IS_ENABLED(DM_I2C)
- struct fsl_i2c_dev {
-diff --git a/arch/powerpc/include/asm/fsl_lbc.h b/arch/powerpc/include/asm/fsl_lbc.h
-index 95f0f559b4c..f07535cb5ea 100644
---- a/arch/powerpc/include/asm/fsl_lbc.h
-+++ b/arch/powerpc/include/asm/fsl_lbc.h
-@@ -526,6 +526,7 @@ typedef struct fsl_lbc {
- 	u8      res9[0xF28];
- #endif
- } fsl_lbc_t;
-+static_assert(sizeof(fsl_lbc_t) == 0x1000);
- 
- #endif /* __ASSEMBLY__ */
- #endif /* __ASM_PPC_FSL_LBC_H */
-diff --git a/arch/powerpc/include/asm/immap_83xx.h b/arch/powerpc/include/asm/immap_83xx.h
-index 24bd438c143..1fa6073b268 100644
---- a/arch/powerpc/include/asm/immap_83xx.h
-+++ b/arch/powerpc/include/asm/immap_83xx.h
-@@ -19,6 +19,7 @@
- #include <asm/mpc8xxx_spi.h>
- #include <asm/fsl_lbc.h>
- #include <asm/fsl_dma.h>
-+#include <linux/build_bug.h>
- 
- /*
-  * Local Access Window
-@@ -27,6 +28,7 @@ typedef struct law83xx {
- 	u32 bar;		/* LBIU local access window base address register */
- 	u32 ar;			/* LBIU local access window attribute register */
- } law83xx_t;
-+static_assert(sizeof(law83xx_t) == 8);
- 
- /*
-  * System configuration registers
-@@ -66,6 +68,7 @@ typedef struct sysconf83xx {
- #endif
- 	u8 res9[0xB8];
- } sysconf83xx_t;
-+static_assert(sizeof(sysconf83xx_t) == 0x200);
- 
- /*
-  * Watch Dog Timer (WDT) Registers
-@@ -78,6 +81,7 @@ typedef struct wdt83xx {
- 	u16 swsrr;		/* System watchdog service register */
- 	u8 res2[0xF0];
- } wdt83xx_t;
-+static_assert(sizeof(wdt83xx_t) == 0x100);
- 
- /*
-  * RTC/PIT Module Registers
-@@ -91,6 +95,7 @@ typedef struct rtclk83xx {
- 	u32 alr;		/* alarm register */
- 	u8 res0[0xE8];
- } rtclk83xx_t;
-+static_assert(sizeof(rtclk83xx_t) == 0x100);
- 
- /*
-  * Global timer module
-@@ -126,6 +131,7 @@ typedef struct gtm83xx {
- 	u16 psr4;		/* Timer4 Prescaler Register */
- 	u8 res[0xC0];
- } gtm83xx_t;
-+static_assert(sizeof(gtm83xx_t) == 0x100);
- 
- /*
-  * Integrated Programmable Interrupt Controller
-@@ -159,6 +165,7 @@ typedef struct ipic83xx {
- 	u32 smvcr;		/* System Management Interrupt Vector Register */
- 	u8 res[0x98];
- } ipic83xx_t;
-+static_assert(sizeof(ipic83xx_t) == 0x100);
- 
- /*
-  * System Arbiter Registers
-@@ -175,6 +182,7 @@ typedef struct arbiter83xx {
- 	u32 aerr;		/* Arbiter Event Response Register */
- 	u8 res1[0xDC];
- } arbiter83xx_t;
-+static_assert(sizeof(arbiter83xx_t) == 0x100);
- 
- /*
-  * Reset Module
-@@ -190,6 +198,7 @@ typedef struct reset83xx {
- 	u32 rcer;		/* Reset Control Enable Register */
- 	u8 res1[0xDC];
- } reset83xx_t;
-+static_assert(sizeof(reset83xx_t) == 0x100);
- 
- /*
-  * Clock Module
-@@ -200,6 +209,7 @@ typedef struct clk83xx {
- 	u32 sccr;		/* system clock control Register */
- 	u8 res0[0xF4];
- } clk83xx_t;
-+static_assert(sizeof(clk83xx_t) == 0x100);
- 
- /*
-  * Power Management Control Module
-@@ -212,6 +222,7 @@ typedef struct pmc83xx {
- 	u32 pmccr2;		/* PMC Configuration Register 2 */
- 	u8 res0[0xEC];
- } pmc83xx_t;
-+static_assert(sizeof(pmc83xx_t) == 0x100);
- 
- /*
-  * General purpose I/O module
-@@ -225,6 +236,7 @@ typedef struct gpio83xx {
- 	u32 icr;		/* external interrupt control register */
- 	u8 res0[0xE8];
- } gpio83xx_t;
-+static_assert(sizeof(gpio83xx_t) == 0x100);
- 
- /*
-  * QE Ports Interrupts Registers
-@@ -236,6 +248,7 @@ typedef struct qepi83xx {
- 	u32 qepicr;		/* QE Ports Interrupt Control Register */
- 	u8 res1[0xE8];
- } qepi83xx_t;
-+static_assert(sizeof(qepi83xx_t) == 0x100);
- 
- /*
-  * QE Parallel I/O Ports
-@@ -248,11 +261,13 @@ typedef struct gpio_n {
- 	u32 ppar1;		/* Pin Assignment Register 1 */
- 	u32 ppar2;		/* Pin Assignment Register 2 */
- } gpio_n_t;
-+static_assert(sizeof(gpio_n_t) == 0x18);
- 
- typedef struct qegpio83xx {
- 	gpio_n_t ioport[0x7];
- 	u8 res0[0x358];
- } qepio83xx_t;
-+static_assert(sizeof(qepio83xx_t) == 0x400);
- 
- /*
-  * QE Secondary Bus Access Windows
-@@ -268,6 +283,7 @@ typedef struct qesba83xx {
- 	u32 sdmcar;		/* Secondary DDR memory controller attributes */
- 	u8 res2[0x378];
- } qesba83xx_t;
-+static_assert(sizeof(qesba83xx_t) == 0x400);
- 
- /*
-  * DDR Memory Controller Memory Map for DDR1
-@@ -278,6 +294,7 @@ typedef struct ddr_cs_bnds {
- 	u32 csbnds;
- 	u8 res0[4];
- } ddr_cs_bnds_t;
-+static_assert(sizeof(ddr_cs_bnds_t) == 8);
- 
- typedef struct ddr83xx {
- 	ddr_cs_bnds_t csbnds[4];/* Chip Select x Memory Bounds */
-@@ -323,6 +340,7 @@ typedef struct ddr83xx {
- 	u32 debug_reg;
- 	u8 res9[0xFC];
- } ddr83xx_t;
-+static_assert(sizeof(ddr83xx_t) == 0x1000);
- #endif
- 
- /*
-@@ -342,6 +360,7 @@ typedef struct duart83xx {
- 	u8 res1[3];
- 	u8 res2[0xEC];
- } duart83xx_t;
-+static_assert(sizeof(duart83xx_t) == 0x100);
- 
- /*
-  * DMA/Messaging Unit
-@@ -364,6 +383,7 @@ typedef struct dma83xx {
- 	u32 res4[0x1E];		/* 0x88-0x99 reserved */
- 	struct fsl_dma dma[4];
- } dma83xx_t;
-+static_assert(sizeof(dma83xx_t) == 0x300);
- 
- /*
-  * PCI Software Configuration Registers
-@@ -374,6 +394,7 @@ typedef struct pciconf83xx {
- 	u32 int_ack;
- 	u8 res[116];
- } pciconf83xx_t;
-+static_assert(sizeof(pciconf83xx_t) == 0x80);
- 
- /*
-  * PCI Outbound Translation Register
-@@ -386,6 +407,7 @@ typedef struct pci_outbound_window {
- 	u32 pocmr;
- 	u8 res2[4];
- } pot83xx_t;
-+static_assert(sizeof(pot83xx_t) == 0x18);
- 
- /*
-  * Sequencer
-@@ -398,6 +420,7 @@ typedef struct ios83xx {
- 	u32 dtcr;
- 	u8 res2[4];
- } ios83xx_t;
-+static_assert(sizeof(ios83xx_t) == 0x100);
- 
- /*
-  * PCI Controller Control and Status Registers
-@@ -434,6 +457,7 @@ typedef struct pcictrl83xx {
- 	u32 piwar0;
- 	u8 res7[132];
- } pcictrl83xx_t;
-+static_assert(sizeof(pcictrl83xx_t) == 0x100);
- 
- /*
-  * USB
-@@ -441,6 +465,7 @@ typedef struct pcictrl83xx {
- typedef struct usb83xx {
- 	u8 fixme[0x1000];
- } usb83xx_t;
-+static_assert(sizeof(usb83xx_t) == 0x1000);
- 
- /*
-  * TSEC
-@@ -448,6 +473,7 @@ typedef struct usb83xx {
- typedef struct tsec83xx {
- 	u8 fixme[0x1000];
- } tsec83xx_t;
-+static_assert(sizeof(tsec83xx_t) == 0x1000);
- 
- /*
-  * Security
-@@ -455,6 +481,7 @@ typedef struct tsec83xx {
- typedef struct security83xx {
- 	u8 fixme[0x10000];
- } security83xx_t;
-+static_assert(sizeof(security83xx_t) == 0x10000);
- 
- /*
-  *  PCI Express
-@@ -564,6 +591,7 @@ typedef struct pex83xx {
- 	struct pex_csb_bridge bridge;
- 	u8 res12[0x160];
- } pex83xx_t;
-+static_assert(sizeof(pex83xx_t) == 0x1000);
- 
- /*
-  * SATA
-@@ -571,6 +599,7 @@ typedef struct pex83xx {
- typedef struct sata83xx {
- 	u8 fixme[0x1000];
- } sata83xx_t;
-+static_assert(sizeof(sata83xx_t) == 0x1000);
- 
- /*
-  * eSDHC
-@@ -578,6 +607,7 @@ typedef struct sata83xx {
- typedef struct sdhc83xx {
- 	u8 fixme[0x1000];
- } sdhc83xx_t;
-+static_assert(sizeof(sdhc83xx_t) == 0x1000);
- 
- /*
-  * SerDes
-@@ -592,6 +622,7 @@ typedef struct serdes83xx {
- 	u32 srdsrstctl;
- 	u8 res1[0xdc];
- } serdes83xx_t;
-+static_assert(sizeof(serdes83xx_t) == 0x100);
- 
- /*
-  * On Chip ROM
-@@ -606,6 +637,7 @@ typedef struct rom83xx {
- typedef struct tdm83xx {
- 	u8 fixme[0x200];
- } tdm83xx_t;
-+static_assert(sizeof(tdm83xx_t) == 0x200);
- 
- /*
-  * TDM DMAC
-@@ -613,6 +645,7 @@ typedef struct tdm83xx {
- typedef struct tdmdmac83xx {
- 	u8 fixme[0x2000];
- } tdmdmac83xx_t;
-+static_assert(sizeof(tdmdmac83xx_t) == 0x2000);
- 
- #if defined(CONFIG_ARCH_MPC834X)
- typedef struct immap {
-@@ -725,6 +758,7 @@ typedef struct immap {
- 	serdes83xx_t		serdes[1];	/* SerDes Registers */
- 	u8			res9[0x1CF00];
- } immap_t;
-+static_assert(sizeof(immap_t) == 0x100000);
- 
- #elif defined(CONFIG_ARCH_MPC837X)
- typedef struct immap {
-@@ -769,6 +803,7 @@ typedef struct immap {
- 	u8			res11[0xCE00];
- 	rom83xx_t		rom;		/* On Chip ROM */
- } immap_t;
-+static_assert(sizeof(immap_t) == 0x100000);
- 
- #elif defined(CONFIG_ARCH_MPC8360)
- typedef struct immap {
-@@ -809,6 +844,7 @@ typedef struct immap {
- 	u8			res10[0xC0000];
- 	u8			qe[0x100000];	/* QE block */
- } immap_t;
-+static_assert(sizeof(immap_t) == 0x200000);
- 
- #elif defined(CONFIG_ARCH_MPC832X)
- typedef struct immap {
-@@ -846,6 +882,7 @@ typedef struct immap {
- 	u8			res8[0xC0000];
- 	u8			qe[0x100000];	/* QE block */
- } immap_t;
-+static_assert(sizeof(immap_t) == 0x200000);
- #endif
- 
- struct ccsr_gpio {
-diff --git a/arch/powerpc/include/asm/mpc8xxx_spi.h b/arch/powerpc/include/asm/mpc8xxx_spi.h
-index 8e9411aefb3..2b2095ad481 100644
---- a/arch/powerpc/include/asm/mpc8xxx_spi.h
-+++ b/arch/powerpc/include/asm/mpc8xxx_spi.h
-@@ -26,6 +26,7 @@ typedef struct spi8xxx {
- 	u32 rx;		/* receive register */
- 	u8 res1[0xFC8];	/* fill up to 0x1000 */
- } spi8xxx_t;
-+static_assert(sizeof(spi8xxx_t) == 0x1000);
- 
- #endif
- 
-
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Marek Behun <kabel@kernel.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 ---
-base-commit: 2522af42b19cced6f5fb487e7eec41a31006d277
-change-id: 20250217-immap-size-cf9f6f06139e
+ drivers/net/phy/marvell10g.c | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
 
-Best regards,
+diff --git a/drivers/net/phy/marvell10g.c b/drivers/net/phy/marvell10g.c
+index 8c95bcbb9ad..d6115eea025 100644
+--- a/drivers/net/phy/marvell10g.c
++++ b/drivers/net/phy/marvell10g.c
+@@ -342,8 +342,7 @@ static int mv2110_select_mactype(struct phy_device *phydev)
+ {
+ 	if (phydev->interface == PHY_INTERFACE_MODE_USXGMII)
+ 		return MV_PMA_21X0_PORT_CTRL_MACTYPE_USXGMII;
+-	else if (phydev->interface == PHY_INTERFACE_MODE_SGMII &&
+-		 !(phydev->interface == PHY_INTERFACE_MODE_10GBASER))
++	else if (phydev->interface == PHY_INTERFACE_MODE_SGMII)
+ 		return MV_PMA_21X0_PORT_CTRL_MACTYPE_5GBASER;
+ 	else if (phydev->interface == PHY_INTERFACE_MODE_10GBASER)
+ 		return MV_PMA_21X0_PORT_CTRL_MACTYPE_10GBASER_RATE_MATCH;
+@@ -381,15 +380,6 @@ static int mv3310_select_mactype(struct phy_device *phydev)
+ {
+ 	if (phydev->interface == PHY_INTERFACE_MODE_USXGMII)
+ 		return MV_V2_33X0_PORT_CTRL_MACTYPE_USXGMII;
+-	else if (phydev->interface == PHY_INTERFACE_MODE_SGMII &&
+-		 phydev->interface == PHY_INTERFACE_MODE_10GBASER)
+-		return MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER;
+-	else if (phydev->interface == PHY_INTERFACE_MODE_SGMII &&
+-		 phydev->interface == PHY_INTERFACE_MODE_RXAUI)
+-		return MV_V2_33X0_PORT_CTRL_MACTYPE_RXAUI;
+-	else if (phydev->interface == PHY_INTERFACE_MODE_SGMII &&
+-		 phydev->interface == PHY_INTERFACE_MODE_XAUI)
+-		return MV_V2_3310_PORT_CTRL_MACTYPE_XAUI;
+ 	else if (phydev->interface == PHY_INTERFACE_MODE_10GBASER)
+ 		return MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER_RATE_MATCH;
+ 	else if (phydev->interface == PHY_INTERFACE_MODE_RXAUI)
+@@ -542,7 +532,7 @@ static bool mv3310_has_downshift(struct phy_device *phydev)
+ }
+ 
+ #define mv_test_bit(iface, phydev)	\
+-	({ if ((phydev)->interface & (iface)) return 0; })
++	({ if ((phydev)->interface == (iface)) return 0; })
+ 
+ static int mv3310_mv3340_test_supported_interfaces(struct phy_device *phydev)
+ {
 -- 
-J. Neuschäfer <j.ne@posteo.net>
-
+2.51.0
 
