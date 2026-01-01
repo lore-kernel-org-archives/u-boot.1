@@ -4,66 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A5BEEED618
-	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 16:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBF2EED628
+	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 17:15:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B00783C01;
-	Thu,  1 Jan 2026 17:57:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0FF6683BC9;
+	Thu,  1 Jan 2026 18:15:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XUTF0sVi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZZzevlt4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A903983C04; Thu,  1 Jan 2026 17:57:48 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 343C783C04; Thu,  1 Jan 2026 18:15:44 +0100 (CET)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6617283BB1
- for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 17:57:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AFF183BB1
+ for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 18:15:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dhtL01Wnlz9scY;
- Thu,  1 Jan 2026 17:57:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767286664;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UXHXjFUTi8XhTRQxOpB3eEWlXBJLUh+YKYQUWQ3t5q8=;
- b=XUTF0sViMmEfmOMj/36aB6Y4VSC0uH383p0BnYVsLSAsC8L74UtkXZoxhgjZ1ERm64l+Ab
- ki3qScgqBaAU1nabrFtA2OR85gm2xl8pqsg4TlIVPbaRNjXVyIyMfgsbxgTmUVnuXUumQQ
- 7yhQU7lGf0m2GYTzk0koOPR2o5GdGn9agD6M1Zb7konbJi05VhCBIdW5skmJPXTWpTZnc0
- dtyjgXisbNxUcsE8eQioOoucmd+IdpuhHGI9TOdGSrOli7E0C+Wdggdnqf3N/wWdjGtZwk
- zpokg3I/HS0c+XjxkrUp0rwrjObC4y+zy3S7ow97o7lHRQlVEIUQV/ynlP68AA==
-Message-ID: <10d320db-2e8a-460b-8ae6-7583c5f2fd57@mailbox.org>
-Date: Thu, 1 Jan 2026 17:54:47 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-65ecd7fcf36so3224254eaf.1
+ for <u-boot@lists.denx.de>; Thu, 01 Jan 2026 09:15:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767287741; x=1767892541; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=E+iJg+R/kQ02+g94OcJYGKFNBIJBVB/T8VB4MVRLmbM=;
+ b=ZZzevlt4pnfwepyn+BJOSJvu6Eh1N2RKFlijAsnZlUgjP4cmhsCXws7LkKTVrBHFwc
+ GUKTD+lSZCdwA6hhhiaQBhV/2zdAGJuiLTDdSAvujS8bP5Uw3zNrJJ3PagLyCUJivcPd
+ E8mELWDUkowMwbvgSqnIwGvsU4B4RBG3AuM40=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767287741; x=1767892541;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E+iJg+R/kQ02+g94OcJYGKFNBIJBVB/T8VB4MVRLmbM=;
+ b=Xdqi3ATedAojRkT8rqCg+vxbUV2k/LgkvMSTh25L3Mtv6I6edN0v39O5AwABtUYIHm
+ I+CF1RmuzdmJYhDrqPuRiPUs7upRkCoQiJ8VScNgDtr1dT7G1xANCn5143eYaQICPJy0
+ fveTsFRGA63H4LJ3Tnl4joeHkEcbM4YOXZnpGKDc4r+szXwunVSSPZFeuG5yHUzgfleh
+ X0zHti7U4hJqALXwMOON2HMy2XN2hrRickIyhbb1dPozS9z525hR/0Gw6AWlImdB94cP
+ GmwCtziJaOaW41YZaApNrW8kjrRdcfonOyKP99ZWsbkCquuFuJurHTpwJqyJv63166/y
+ kZJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXf6bR3w/JWo4WZyZ9vedIeNDBD6qTKwLcforsXcOE+KbFhr33KsAo8HX/zRDSHR/FRmNLCv/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlDLAnrbwQR2l1zry0C78D7RU3d3ulWbaTAtwRLO9H9EqNNjh7
+ I1+Jvs8PjSTfTYZw6jjMfipX5rtdKSp1HT4XbaCSm1VjBVrSweQIdcAUluAl9k/l6nA=
+X-Gm-Gg: AY/fxX4efPT4Bp7dJEsQdLyFHIgjyxgQsI8llUqa8XDfNgjoh3lLXDrvbfjEXGelD5C
+ yGQrNqCuwkpUC4HfZaZ0oxqkC6am8sDwpkX8+0uDR5N5uvkaeUAhiPdWtITq93g6GPTiPpM5gox
+ bVPTwGQYFKEHt2NYIVwigqlhyhWnDu6+zaA7vuDXuppWMwwv/e4fKAkmONVH4rgX4tiAxp4C9Yt
+ xgdHflKv0GtgBqEy6S/gXCD+WAFMhbsCLcz6cvFcDl6cb5XMl27+hhrimrmuEexXoWeK7E5swnZ
+ nQl1cAC56U4Rf6mZCWfE0M2svJeyj0MbIqh+rkLny5kgaWKvkbVCiy8AHU1k2hrnIRs7SWNHLPU
+ 8+3jMVcXzmDi39ExQ3rtkuXh/9q1AznYyeslp2L1J9rZU6ocjXG43klZolzfFOEFUKFLMcgW4o/
+ 8bkwt+W/An6LPMPWg3DdFwhPqgZfnLEQhCxT+cgyA3gGbAnMUqmXocCZGpqyurche0wVGwrR6yF
+ va+qxjf3yBDcA5l93iIcePSAN4EL8nL8+mgG2g=
+X-Google-Smtp-Source: AGHT+IFXEqLoVA1Wv0Riesdmuwishpeof2g7WeBiTRCf3u3EKLXp9aZH0e9igzn+tFoOJ8dKT/Xmlw==
+X-Received: by 2002:a4a:e08e:0:b0:659:9a49:8ffb with SMTP id
+ 006d021491bc7-65d0ea7ab72mr11426267eaf.40.1767287740702; 
+ Thu, 01 Jan 2026 09:15:40 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65d0f515721sm23907010eaf.8.2026.01.01.09.15.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Jan 2026 09:15:39 -0800 (PST)
+Date: Thu, 1 Jan 2026 11:15:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 4/4] dm: dummy implementations of live-tree functions
+Message-ID: <20260101171537.GE710860@bill-the-cat>
+References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+ <20251231191054.247270-5-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Subject: Re: Smatch report for drivers/net/phy/marvell10g.c
-To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <623c39a5-2438-42d5-aafe-bb80dfd12b82@linaro.org>
- <20250806145315.GO124814@bill-the-cat>
- <8a05c8a6-a0eb-4f84-aa48-0d0e0f532fa4@mailbox.org>
- <bxuuwcj7jm33go7yj4jnafoowrttu2qvbxej7nvdn3pm5az4sj@6xpf3ym2s2ek>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <bxuuwcj7jm33go7yj4jnafoowrttu2qvbxej7nvdn3pm5az4sj@6xpf3ym2s2ek>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ba07e8266c97420238a
-X-MBO-RS-META: bpqkihyyxno56hqrtok847k39qgz4sk8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zt9i/YrvOglpOB0w"
+Content-Disposition: inline
+In-Reply-To: <20251231191054.247270-5-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,99 +103,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/7/25 10:36 AM, Marek Behún wrote:
-> On Wed, Aug 06, 2025 at 05:36:27PM +0200, Marek Vasut wrote:
->> On 8/6/25 4:53 PM, Tom Rini wrote:
->>> On Tue, Aug 05, 2025 at 05:30:49PM +0100, Andrew Goodbody wrote:
->>>
->>>> I have these Smatch reports.
->>>>
->>>> drivers/net/phy/marvell10g.c:384 mv3310_select_mactype() warn: was ||
->>>> intended here instead of &&?
->>>> drivers/net/phy/marvell10g.c:387 mv3310_select_mactype() warn: was ||
->>>> intended here instead of &&?
->>>> drivers/net/phy/marvell10g.c:390 mv3310_select_mactype() warn: was ||
->>>> intended here instead of &&?
->>>>
->>>> Now there is obviously incorrect code there as it cannot work correctly as
->>>> is, phydev->interface cannot equal two different enums at the same time, but
->>>> simply swapping the && for || is not going to work either. Could anyone
->>>> please point me in the direction of a fix?
->>>
->>> Adding Marek as r8a779f0_spider and r8a779f4_s4sk are the only two
->>> boards which enable CONFIG_PHY_MARVELL_10G (aside, ./tools/qconfig.py -b
->>> and then ./tools/qconfig.py -f CONFIG_FOO is handy to see what boards
->>> enable a given option and helpful when get_maintainer.pl has nothing
->>> specific).
->> They use the 2xxx series PHY, so this code is avoided. However, it seems
->> even linux-next has the same behavior in .select_mactype() callback . They
->> use test_bit() in there, but otherwise also use && instead of || which looks
->> odd. Maybe that is a genuine bug which got ported over from Linux and needs
->> to be fixed both there and here ?
-> 
-> In linux there is a bitmap of supported interface modes given to the
-> function. Then for example we test whether 10gbase-r and sgmii are both
-> supported by the host (SoC):
-> 
->    ...
->    else if (test_bit(PHY_INTERFACE_MODE_SGMII, interfaces) &&
->             test_bit(PHY_INTERFACE_MODE_10GBASER, interfaces))
->            return MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER;
->    ...
-> 
-> If both 10gbase-r and sgmii are supported by the SoC, we tell the PHY to
-> use mactype 4 (MV_V2_33X0_PORT_CTRL_MACTYPE_10GBASER).
-> 
-> Obiously this does not work in U-Boot it we translate it to
->    interface == MODE_SGMII && interface == MODE_10GBASER
-> since the interface variable is not a bitmap of supported interfaces,
-> but rather the current interface mode (maybe from device-tree).
-> 
-> Looking at U-Boot's marvell10g code, I also see mv_test_bit macro
-> and how it is being used:
-> 
->    #define mv_test_bit(iface, phydev) \
->      ({ if ((phydev)->interface & (iface)) return 0; })
-> 
->    mv_test_bit(PHY_INTERFACE_MODE_SGMII, phydev);
-> 
-> This is completely wrong, since the ->interface member is not a bitmap
-> (rather the currnet selected interface) nor are the PHY_INTERFACE_MODE_*
-> values one-bit values.
-> 
-> So this code will not work correctly at all in U-Boot.
-> 
-> 
-> Now as to why Linux also has interfaces bitmap in addition to the current
-> selected interface.
-> 
-> The reason why in Linux we use bitmap of supported interface modes is so
-> that we can select the best serdes mode switching behavior for the PHY.
-> 
-> For example if the host only supports 10gbase-r serdes mode, then the PHY
-> must always talk to the host in 10gbase-r mode, even if the RJ-45 copper
-> speed was autonegotiated to lower speed (i.e. 1gbps). (There is another
-> complication called rate matching that needs to be done in that case,
-> but this is not important now.)
-> 
-> If the host supports both 10gbase-r and sgmii serdes modes, we want the
-> PHY to switch to sgmii if the RJ-45 speed is 1000/100/10, and to switch
-> to 10gbase-r if the RJ-45 speed is 10000.
-> 
-> The register configuring this behavior is called MACTYPE in the Marvell
-> PHY.
-> 
-> The following table shows how the PHY will change serdes mode depedning
-> on the RJ-45 speed for some of the MACTYPE settings:
-> 
->                 mactype=4   mactype=6  mactype=7  mactype=0
->    RJ-45 speed  sds mode    sds mode   sds mode   sds mode
->    ---------------------------------------------------------
->    10/100/1000  sgmii       10gbase-r  usxgmii    sgmii
->    2500         2500base-x  10gbase-r  usxgmii    2500base-x
->    5000         5gbase-r    10gbase-r  usxgmii    5gbase-r
->    10000        10gbase-r   10gbase-r  usxgmii    rxaui
-Thank you for the excellent detailed explanation. I have finally 
-submitted a fix:
 
-https://lore.kernel.org/u-boot/20260101165317.25595-1-marek.vasut+renesas@mailbox.org/
+--zt9i/YrvOglpOB0w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 31, 2025 at 08:10:54PM +0100, Heinrich Schuchardt wrote:
+
+> We have opted to prefer 'if' over '#if' to more easily see problems in
+> contributed code.
+>=20
+> When compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=3Dy the compiler does not
+> execute all optimization paths and references live-tree functions
+> even if CONFIG_$(PHASE_)OF_LIVE is not defined.
+>=20
+> E.g. building qemu-riscv64_smode_defconfig with
+> CONFIG_CC_OPTIMIZE_FOR_DEBUG=3Dy fails due to missing symbols.
+>=20
+> Provide dummy implementation to allow debug builds.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+I think we need to look harder at re-factoring drivers/core/ofnode.c to
+move the live portions elsewhere. It's 175 platforms out of 1489 using
+it today so we can probably do better. The very first thing I stumbled
+on is that OF_TRANSLATE might have incorrect deps? A quick glance at
+of_translate_dma_address / of_translate_address says to me it should all
+be optimized out in the not-OF_LIVE case.
+
+--=20
+Tom
+
+--zt9i/YrvOglpOB0w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVartQAKCRAr4qD1Cr/k
+CiGAAP9HDyg4xrg4/DWZC1QJnokWZ015/fntDLMDd+iIpu7v3QEA/vspP4TGEOyP
+wQPzP9+TCWpYi2j8Edjm9zvbG6+oVQ0=
+=sUJ/
+-----END PGP SIGNATURE-----
+
+--zt9i/YrvOglpOB0w--
