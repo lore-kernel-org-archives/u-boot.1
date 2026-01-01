@@ -4,71 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74861EE644A
-	for <u-boot@archiver.kernel.org>; Wed, 31 Dec 2025 21:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8EAEED60F
+	for <u-boot@archiver.kernel.org>; Thu,  1 Jan 2026 14:17:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 015DD841E3;
-	Wed, 31 Dec 2025 22:29:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EDF1083EB7;
+	Thu,  1 Jan 2026 15:17:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yrbnEMKw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jK5C6nLx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7655841FA; Wed, 31 Dec 2025 22:29:10 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id B0BA683FC0; Thu,  1 Jan 2026 15:17:13 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 049B3841DD
- for <u-boot@lists.denx.de>; Wed, 31 Dec 2025 22:29:09 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dhNPZ70QHz9sp7;
- Wed, 31 Dec 2025 22:29:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767216547;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zZbs5muWw5CQ+FNezH2D103PNnpab3PN4L1s72ib6og=;
- b=yrbnEMKwGkO7/JV8pKOSIA3D07JRPjDUUbQHZ4c/+kjIHahBXio/MEUoxaWTg/iq2D1P5B
- Kl7sFTKbUTH6xDvdAjmMlN97xd9csgIr5RyHB3wK/K1YqXSVS/0XnXTA89xeMlKVNivDJL
- iFNBSkXduoRxWQ5gwZnmWfnXZqZDRET654f+yGWy19z8Lo2ik0PHir+8v0R53/bRo+smmx
- ZTUnrswqRZ8v62soNI2vsXNAAVlbRhxOeBeEn7QYBYeuaqYeFMcpKYND7RiMVvogs2yRQi
- rkVfxidr5n0f2p280KnC4OgLbbPFwTdPfSiZmxw/blJryZBkglFLyvoR3cEbSA==
-Message-ID: <1f18b0bf-019c-45ee-a38b-5d29f8ee9b12@mailbox.org>
-Date: Wed, 31 Dec 2025 22:27:44 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 3E32F83BB1
+ for <u-boot@lists.denx.de>; Thu,  1 Jan 2026 15:17:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id AB44F60008;
+ Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 59FE2C4CEF7;
+ Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1767277029;
+ bh=UHOa5I4FdX8qTSRHSKE4cmEk3ExnlAZAg2EqFMdzuRE=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=jK5C6nLxFilIl8+eopWUbnP/lEd+tyIoC5O75+/0M9JWu+2ukDlcFsiekofHTWeJR
+ JVHZ7fa/2oihZRftL2xbScSMZaISVpMmdUTt4TLXcgZ4e0XVXl38bl2TWnPCEEboFc
+ y2JN7rf2kKTsJi1Kw3aKe2S9gqPU4XpmiHmtTy7YhQi4ka8XiT08+I1hRPtorbHjIZ
+ EJNqHbBqHrH6qk5INIndVqvLmfqoVNUOlf8bjrNMbbSxGAWwBbMIrvFQFRqUnaSLtI
+ 9nYb9LNPTahMfiGLKmP9M9h6oefCBNq/aoEEtq3K+B40eWTcF4aVbEbbNoZwDqu96T
+ l4e2E6WKOlupg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 46FE9EED601;
+ Thu,  1 Jan 2026 14:17:09 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Thu, 01 Jan 2026 15:17:01 +0100
+Subject: [PATCH v2] Update links to doc/develop/falcon.rst
 MIME-Version: 1.0
-From: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH v5 1/3] Image size checks: Use HAS_SIZE_LIMIT consistently
-To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
- Ye Li <ye.li@nxp.com>
-References: <20251110091256.2422534-1-pro@denx.de>
- <20251110091256.2422534-2-pro@denx.de>
-Content-Language: en-US
-In-Reply-To: <20251110091256.2422534-2-pro@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: axmtof1syg9aknsz9ipnkzmtjog94wm8
-X-MBO-RS-ID: 21ac1bed877e37b5bc1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260101-falcon-v2-1-75896535ad0f@posteo.net>
+X-B4-Tracking: v=1; b=H4sIANyBVmkC/2WMQQrDIBBFrxJmXUvGElO7yj1KFmonzUDRoCItw
+ bvXZlv+6n0eb4dEkSnBrdshUuHEwTeQpw7cavyTBD8ag+zlgPKCYjEvF7wYjR4lIjlrCZq8RVr
+ 4fYTuc+OVUw7xc3QL/t6/REHRpt11sFqpntS0hZQpnD1lmGutX1ReOgKdAAAA
+X-Change-ID: 20251231-falcon-7a97211ecbbe
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Anshul Dalal <anshuld@ti.com>, 
+ Peng Fan <peng.fan@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Sidharth Seela <sidharthseela@gmail.com>, 
+ =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767277028; l=2880;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=uzyoTCT099z/Hlho/K2kyDiQU5MpWiXI/6PFq2lGyu4=;
+ b=h1splMZr22ZTTifPeBQXfcAoDneceK8Fanc20Gp6OvJgB8PbHkYJPlCPx2syIz3qYXezvKYFJ
+ Xpq5WzB6biFARFZFiTTSJPnO2xnnQGkueJ0L/gXHDEO7T/Ez9rfTKOD
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,46 +96,93 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/10/25 10:12 AM, Philip Oberfichtner wrote:
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-[...]
+README.falcon was converted to ReST/HTML in 2023.
 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 8dade2b501e..97c7bfdad47 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -36,19 +36,33 @@ config SPL_FRAMEWORK_BOARD_INIT_F
->   	  - initialize the serial (preloader_console_init)
->   	  Unless you want to provide your own board_init_f, you should say Y.
->   
-> +config HAS_SPL_SIZE_LIMIT
-> +	bool "Enable size limit check for the SPL image"
-> +	depends on !COMPILE_TEST
-> +	depends on SPL
-> +	default y if ARCH_MX6
-> +	default y if ARCH_MVEBU && ARMADA_32BIT
-> +	default y if ARMADA_38X
-> +	default y if K3_DM_FW
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
+Changes in v2:
+- Use a proper link within ReST (thanks to Heinrich Schuchardt's review)
+- Link to v1: https://lore.kernel.org/r/20251231-falcon-v1-1-19c85b9660e6@posteo.net
+---
+ cmd/Kconfig                 | 4 ++--
+ common/spl/Kconfig          | 2 +-
+ doc/board/ti/am335x_evm.rst | 2 +-
+ doc/develop/falcon.rst      | 1 +
+ 4 files changed, 5 insertions(+), 4 deletions(-)
 
-K3_DM_FW is some driver, what you likely want here is:
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b71ac554c0b..fca2a0b0e39 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -620,7 +620,7 @@ config CMD_SPL
+ 	help
+ 	  Falcon mode allows booting directly from SPL into an Operating
+ 	  System such as Linux, thus skipping U-Boot proper. See
+-	  doc/README.falcon for full information about how to use this
++	  doc/develop/falcon.rst for full information about how to use this
+ 	  command.
+ 
+ config CMD_SPL_NAND_OFS
+@@ -629,7 +629,7 @@ config CMD_SPL_NAND_OFS
+ 	default 0x0
+ 	help
+ 	  This provides the offset of the command line arguments for Linux
+-	  when booting from NAND in Falcon mode.  See doc/README.falcon
++	  when booting from NAND in Falcon mode.  See doc/develop/falcon.rst
+ 	  for full information about how to use this option (and also see
+ 	  board/gateworks/gw_ventana/README for an example).
+ 
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 4b10e9c3880..f0612acf0c2 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1209,7 +1209,7 @@ config SPL_OS_BOOT
+ 	depends on ARM || MICROBLAZE || PPC
+ 	help
+ 	  Enable booting directly to an OS from SPL.
+-	  for more info read doc/README.falcon
++	  for more info read doc/develop/falcon.rst
+ 
+ config SPL_OS_BOOT_SECURE
+ 	bool "Allow Falcon Mode on secure devices"
+diff --git a/doc/board/ti/am335x_evm.rst b/doc/board/ti/am335x_evm.rst
+index 40e144948a3..b14ba41917e 100644
+--- a/doc/board/ti/am335x_evm.rst
++++ b/doc/board/ti/am335x_evm.rst
+@@ -274,7 +274,7 @@ into memory, then written to NAND.
+ Falcon Mode
+ -----------
+ 
+-The default build includes "Falcon Mode" (see doc/README.falcon) via NAND,
++The default build includes :ref:`falcon-mode` via NAND,
+ eMMC (or raw SD cards) and FAT SD cards.  Our default behavior currently is
+ to read a 'c' on the console while in SPL at any point prior to loading the
+ OS payload (so as soon as possible) to opt to booting full U-Boot.  Also
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index 528a9c389bf..3fc23f65c45 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -1,4 +1,5 @@
+ .. SPDX-License-Identifier: GPL-2.0-or-later
++.. _falcon-mode:
+ 
+ Falcon Mode
+ ===========
 
-default y if ARCH_K3 && CPU_V7R && !SOC_K3_AM642 && !SOC_K3_AM654 && 
-!CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
+---
+base-commit: 4933a0e67578789a57f540a378ce0698435b7b17
+change-id: 20251231-falcon-7a97211ecbbe
 
-But it seems am64x_evm_r5_defconfig below enables HAS_SPL_SIZE_LIMIT too 
-, so likely remove !SOC_K3_AM642 from the above, which will allow you to 
-reduce the amount of configs/ file changes.
+Best regards,
+-- 
+J. Neuschäfer <j.ne@posteo.net>
 
-> +	default y if SOC_K3_AM625
-> +	default y if SOC_MT7621
-> +	default y if TARGET_SOCFPGA_GEN5
 
-You could also add Xilinx Zynq/ZynqMP into the defaults here, which will 
-further reduce the configs/ file changes.
-
-The rest looks fine, thanks !
