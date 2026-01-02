@@ -4,74 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2F6EEB57B
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 01:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5703FA3724
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 01:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03C3883CDC;
-	Fri,  2 Jan 2026 02:03:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id AE19E83AB8;
+	Fri,  2 Jan 2026 02:48:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nathaniel.land
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Xf2BIRkh";
+	dkim=pass (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="c5BHpVEv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BFD483D1A; Fri,  2 Jan 2026 02:02:59 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F2B6A83C6E; Fri,  2 Jan 2026 02:41:49 +0100 (CET)
+Received: from goldencat.email (goldencat.email [45.45.221.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB43283C6E
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 02:02:44 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=manjae.cho@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20260102010239epoutp0478e445ebf798293603a2c7c834b20613~GxFHPt82q1819518195epoutp04J
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 01:02:39 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20260102010239epoutp0478e445ebf798293603a2c7c834b20613~GxFHPt82q1819518195epoutp04J
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1767315759;
- bh=4F53XJyVEmt+DRJTdkjJkIAboxG/bwyzczgl0MPCGuQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Xf2BIRkhVxEXioDEvZMJAlofrszFlHOKTo0FZQnc5i+MZZrYkC8VifyBAgLtw5SY/
- k0yr/C8N4JK48JvY/+1Tlk1EZPhHTAx6Q81C5vFfNl8wv4fJnLg0gBNPphHSh4tF16
- Kht3fmmiO8jwHydZLLjgSjz7tbYdDYY6O3pJ4eIg=
-Received: from epsnrtp01.localdomain (unknown [182.195.42.153]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPS id
- 20260102010239epcas1p2c3e10d95f6290af5efc54e7e067ae7ba~GxFHAz37y2189021890epcas1p21;
- Fri,  2 Jan 2026 01:02:39 +0000 (GMT)
-Received: from epcas1p1.samsung.com (unknown [182.195.38.116]) by
- epsnrtp01.localdomain (Postfix) with ESMTP id 4dj55V6pRPz6B9m9; Fri,  2 Jan
- 2026 01:02:38 +0000 (GMT)
-Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3~GxFGYEOr_1916919169epcas1p4Y;
- Fri,  2 Jan 2026 01:02:38 +0000 (GMT)
-Received: from manjaecho-VirtualBox.. (unknown [10.89.15.251]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20260102010238epsmtip2eefaff7accddf194d944c2ace068cb0f~GxFGVnd2I0323903239epsmtip2C;
- Fri,  2 Jan 2026 01:02:38 +0000 (GMT)
-From: Manjae Cho <manjae.cho@samsung.com>
-To: xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sujin.u@mobis.com, Manjae Cho
- <manjae.cho@samsung.com>
-Subject: Re: [PATCH v2 2/2] doc: emulation: Add network testing documentation
-Date: Fri,  2 Jan 2026 10:02:36 +0900
-Message-ID: <20260102010236.39626-1-manjae.cho@samsung.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251230154529.29724-3-manjae.cho@samsung.com>
+ by phobos.denx.de (Postfix) with ESMTPS id EF14383AB8
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 02:41:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nathaniel.land
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
+ s=dkim; t=1767318104;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0pMWWXIV670+9Siqm0UkjNzUeb2xhNyeNOSF9uXcilA=;
+ b=c5BHpVEv+Fh3vU6fwAjTjkRwQL79uSKgxd89kq8Hdkj3li5dQjHmi/LKnulMuzj2VCrkJx
+ 0vGVR89PwMwwBonJevRHdifGN6r3DgwPMAC8Mg5vyVTtnVi1kly77i8O4ZGEa6lM1yNTew
+ O3Bfz5sIl4ggRqmdc3fqcCwSzK7B0NtzeqN/yOpWQNwAIjvtejXHNU5NZ+eiJqnHfSw7XS
+ lR+h5vJvuygzPO/Ukgq+IHZuAimN+KtWWT+O0dGo8FiIbLakHWMUCkvaZkeoLA1FhgeGFB
+ MpDJe48CQuFuMDQNu61bodufTcWCVQOXv6wCS1WXVFoyLraVj7UETvax948Leg==
+Authentication-Results: goldencat.email;
+ auth=pass smtp.mailfrom=i@nathaniel.land
+Date: Thu, 01 Jan 2026 19:41:42 -0600
+From: Nathaniel Hourt <i@nathaniel.land>
+To: Yao Zi <me@ziyao.cc>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Minda Chen <minda.chen@starfivetech.com>, Hal Feng
+ <hal.feng@starfivetech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH] riscv: Build SPL with -fno-pic
+In-Reply-To: <20251215172236.52710-2-me@ziyao.cc>
+References: <20251215172236.52710-2-me@ziyao.cc>
+Message-ID: <52a4244d8b819042f18584c889830c89@nathaniel.land>
+X-Sender: i@nathaniel.land
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-cpgsPolicy: CPGSC10-702,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3
-References: <CGME20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3@epcas1p4.samsung.com>
+X-Spamd-Bar: +++++++
+X-Spam: Yes
+X-Mailman-Approved-At: Fri, 02 Jan 2026 02:48:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,13 +73,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On 2025-12-15 11:22, Yao Zi wrote:
+> For RISC-V ports, both SPL and proper U-Boot are unconditionally built
+> with -fpic, i.e. position-independent code, which means symbols may be
+> addressed through GOT. This is useful for proper U-Boot, where we have
+> relocate_code in arch/riscv/cpu/start.S and could relocate the GOT
+> entries and other .data members to run at any address.
+> 
+> But for SPL, there's no self-relocating mechanism, all we could do is
+> relying on the linker to fill correct addresses into the binary at link
+> time, forming a position-dependent image. This effectively makes the
+> GOT, which is generated by usage of -fpic and couldn't be optimized out
+> at link time, an unnecessary size burden.
+> 
+> Moreover, our current linkscript for SPL doesn't take .got section into
+> account, allowing the linker to put the GOT at unexpected positions,
+> like after _end/_image_binary_end symbols. This has caused real-world
+> boot failures[1] when SPL is linked by LLD.
+> 
+> These two reasons make building SPL with -fno-pic good choice,
+> eliminating the usage of GOT at the first place. This patch replaces
+> -fpic with -fno-pic in PLATFORM_CPPFLAGS when building SPL.
+> 
+> We also need to force medany code model for SPL to allow putting the
+> executable at any contiguous 4GiB memory range, instead of only the
+> lowest and highest 2GiB when using medlow. This wans't an issue
+> previously, since GCC ignores -mcmodel=medlow when -fpic is specified,
+> but is problematic with Clang, or without -fpic.
+> 
+> Building position-dependent code also produces bss/data/rodata section
+> variants with "s" prefix on RISC-V, i.e. sbss/sdata/srodata. These are
+> "small" sections which compilers expect to be put together, addressable
+> through a single instruction relative to $gp register and thus saving
+> code size. This is called GP-relaxation[2]. However, U-Boot takes $gp
+> for global data pointer, making it impossible, so these sections are
+> merged into their "larger" variants in linkscript.
+> 
+> Reported-by: Nathaniel Hourt <i@nathaniel.land>
+> Closes: 
+> https://lore.kernel.org/all/932979cb47c4fded7ac19216ca172504@nathaniel.land/
+> Link: 
+> https://lore.kernel.org/all/9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land/ 
+> # [1]
+> Signed-off-by: Yao Zi <me@ziyao.cc>
+> [Patch elided]
 
-Thanks for the pointer - I hadn't seen your patch before sending v2.
-Your version covers much more ground (tap/tun, multiple device types, etc.),
-so I'll drop the networking part from my series.
+Happy New Year, at least for those of us in the west =)
 
-I'll send just the typo fix as a standalone patch instead.
+Thank you, Yao Zi, for making this! I have done some initial testing, 
+based on v2026.01-rc4, on my Mars board, and my results are mixed.
 
-Best regards,
-Manjae Cho
+Right now, it seems to be a coin toss whether any given configuration 
+yields a spl/u-boot-spl-nodtb.bin which is a multiple of 8 bytes, or 4 
+bytes (but not 8). In the latter case, it doesn't work, even though _end 
+points accurately to that 4-byte-aligned end-of-the-image position. In 
+the former case, however, where the -nodtb.bin ends on an 8-byte 
+boundary, it works great.
+
+I have made some attempts to modify u-boot-spl.lds to add an ALIGN(8) 
+directive before the _end symbol, and this makes the _end point to the 
+next 8-byte boundary rather than a 4-byte (and not 8) boundary, but it 
+doesn't cause the -nodtb.bin to be padded with those last 4 bytes. My 
+attempts to pad it manually, concatenate the dtb, and run that through 
+mkimage to get the final u-boot-spl.bin.normal.out image, have yielded 
+no success. This failure surprises me; I was expecting that to work... I 
+haven't had further inspiration on things to try. :-]
+
+In conclusion, it seems to me that your patch is working fine, but I'm 
+still having woes with DTB alignment. For now, I can get working builds 
+by tweaking the config until it happens to give an 8-byte aligned _end 
+pointer.
+
+Oh, and sizes of u-boot-spl.bin.normal.out:
+Without no-fpic patch: 152537
+With no-fpic patch: 151749
+
+—
+Nathaniel
