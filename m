@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA95FC6165
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F441FC6165
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1294783BF1;
+	by phobos.denx.de (Postfix) with ESMTP id 59DEE83C29;
 	Sat,  3 Jan 2026 00:23:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EQcO6ICc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tcYPsaYL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF27B842BC; Sat,  3 Jan 2026 00:23:50 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id B8CEE842CC; Sat,  3 Jan 2026 00:23:52 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAE0D83C29
- for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C17483AAD
+ for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3f9e592af58so7467949fac.2
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:48 -0800 (PST)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3ec3cdcda4eso9083632fac.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767396227; x=1768001027; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767396229; x=1768001029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aKczN3ub7xl4gc96nBzSOBNYSY+cSbaIdfb9F0MuJ/A=;
- b=EQcO6ICcBeh/c/KkdSrrAe9USq2cpnlXC4PSa+gHwQU/jAmixPpLUlkykoOUaxdJ3I
- Mf8Ra/YlcUqPVVKYNmaPWYDRtOPncPmSgtoWHLkLJ7PHKZWb5ke0q7RundrIXOyeHgxS
- SKSNDlUZ4bnirezhq35o0WISzuFIAVsTfi4fw=
+ bh=Ggt71fVmcn6+RkpgL5iq62PhukXFUKIe+zNj1tnGAXE=;
+ b=tcYPsaYLWzJaDnX0M2dIs2OK15SnZdIH79vWzuCt4VMUWU+Xmn2/qX0NBBtcDI+dyZ
+ JJw5bQjN3WndosmMVSm2fLU3JwKYlM98S6wjdlKe+pHM73dJvI7njy2eW3RPs9zjX/qc
+ set6hRoaw/xK3zJYSMJBPCtGHKtr21H4mZ2IA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767396227; x=1768001027;
+ d=1e100.net; s=20230601; t=1767396229; x=1768001029;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=aKczN3ub7xl4gc96nBzSOBNYSY+cSbaIdfb9F0MuJ/A=;
- b=UMXciDzuhyPy+/Hq84VUG5WcvfvpZMhkr3nfxAZzuwUzY5TeTqpUKwn12ptwG44IR6
- 4su4zoQxbPRs24ssneZiVG/oWEznzIHUsWb6qOLVF18XEvAEM/15c509q/q6C+V1ozyg
- r1Hqr5b+upOzgNQf0FlfhphaZ00q86Gx4m0jlWAlv6duIfQG2U0RNmyjSlwIw0/OoBzl
- yR1w+XC8T0US8kftt48Qn/aXtb8+AxoPqBenB9xPx16+CXLyT/pp3s6U1m4rlZCvnxNw
- +9sSk01ELk9B7fxB5SF/lCfi+hfDVfElIF8yvCrwN1Rudfvib/PjmJPoqhEufZkTmuZU
- TS6w==
-X-Gm-Message-State: AOJu0Yx01/V1XlxON+dp5S/GgrmaZRZNXPJ3mWZUYQGcNOUod0sIOGKD
- /Mu+1CTRgIJoXmJIApkafDtZrNiG5qz+GX77b1eoBbJSNRPSy/Kw762dI74BNm0zKFc=
-X-Gm-Gg: AY/fxX7365PPIB399ViEM50BIqdlEr+x5L78v44eiGF1BxkIY3zsExwGoXz8P62onqE
- J1hnDs2BnPDGw4boLgO/l8Irzan+G7yNcIgMLJUolXH3JqzX/4+bihUnh/FKhp7K4+SRXBm1QBT
- J+ctfUtse3bAc3Eu4BqQa7d/FsjbqZmuExYplulCG7pk+epvi6mBJNnT06axXDHcMy+gGYAYSIF
- Y/EAvu95MwGZKGL5MHrM2/xqUUQT6d5PHXO/a6r7aIt1se1sjuNdjtmWCCIS7DpthvWqQr/XDYO
- VKKBuNx3ebIxSCBVKUbHMqoEllMe8eqfwP6F4wt4wReKZGphPmHZGlkVo0rLrPpb/jahYrtd+dO
- FRS5l5hOKasecEOvbSg9tobJrnSi47dGNnH/8yagpcXuD+JnHO/gaX0oU83DnJiWenRF2yAkeEK
- 06BBJwd6kRWXbzBA1mRb/I8BVkDRx20tZm5OXAMzXU4XGbCObcaL8RMSNqpZ0xSOeJqj4jjbBdU
- whM1ncEPKH96F0aRnWqDmOr1kF0OJcMHw+B2A==
-X-Google-Smtp-Source: AGHT+IE4t7r5cfDtdoC1Uf9OpRk6OgcszEi4OnPK+c3MNgbRzst7ZPocD/KazS+UsN9Uxzq52nKGRQ==
-X-Received: by 2002:a05:6870:46a6:b0:3c1:68a1:6b10 with SMTP id
- 586e51a60fabf-3fda51f1632mr22047710fac.6.1767396227488; 
- Fri, 02 Jan 2026 15:23:47 -0800 (PST)
+ bh=Ggt71fVmcn6+RkpgL5iq62PhukXFUKIe+zNj1tnGAXE=;
+ b=pzcbO+0QMz912UEeQvfRIzJ+rQtMWTCFTiSbEmMABx+mO02RDjcs/gIZLNZExulJhh
+ Yq5O3BzZCPLkfPMDhHERwIZsOKYppMCPYIi1PX3M3vn7Ho85v8i8CJyKO8fZFuP+K4v9
+ Tid3ng6WtZnnr2uO7u/W0L6NDFdIMM/lP60vDE5tMaXgobYh+CB/RYyvgF+loEVW577D
+ okt4QuoXJD5FrO3fK55e468n0n8c+/Ptn7dUALasUE3+YKEBt9jN4lzijkMPNEdB5qZR
+ 47bh0uDEXoIVIXfq0f/kMcWj2n05JWmNljkd/HP47NzyutwfUzNnbTBbFGmREOZHsyoM
+ F0pQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMuj2A0wz82roozfKbXcojmNxNkrQb05v9PpMYKW1c+lI7vCfZH/+kHwDl/5x15eJH+D+zpvM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+8jdPTIszmQUGeaP0LFzi5OG94lKMkunpe+sd59jxhrAv5KOs
+ 0dm0iLbML2TgPw/55u/IA4jbUmzVsuRvK4CQJjdwIKOeAQSeYsnk0KT3lgrMppQxPtw=
+X-Gm-Gg: AY/fxX6pljR6Btvv32PzM82MxnOWLtxLJ3SwNge0voq7J3j4MUdeArktuE8afRLnCrU
+ /DorARri4rgQqgbOPalBKm0zotYtodiV+eRgSh4j9zOu0SjiBflZoAm/8lzt0qB8DldgTRAcPWW
+ 56GdJrWETiZdlVPtlcR6Q2sEBcn4uPpT+WAv7q+JxTJPVEs89pcyye8GMUKx7SwK04ipRA5gxlM
+ yKY/Tx/oX+4MA8EsASVthTvCqQ8gEpmt4qygtx4iMdLa9zF94YFEaA60teYfI0v3Bj6rt3PfkNB
+ 7xBhvzvKUNZCzbNo83rR/KwM/g66G0XxI03tX6nPbIMQfJ1AE28OPk9ApI/OQR+W6K2nfsU3N52
+ 7+iaauGrWRleTLHHYWtJuHG0xGYYZdD7bvuq6fdTUi1gXT6Mqk7TeDvhjJnYpp9QZDOY7IRB9El
+ JE+ztudLFGpg0RKIvCUVkG2qAmMiuUycL0G2Jl15pAcvrhbdYgdPyJ7aR++HQe+eNX37tZVVDlp
+ ZDsHAgOYDoLujLztuhDX66YX25t9rbk+vlXvKmxikiUGAX+
+X-Google-Smtp-Source: AGHT+IEV7Bxr0hh2bEK1Am4NmmnAFt64eG9nHEm0kzz+hxiurpyxDWobalZS+JGRDLK9GztWMxuUww==
+X-Received: by 2002:a05:6870:b01b:b0:3ec:a4ed:cf4a with SMTP id
+ 586e51a60fabf-3fda5615ce2mr18144363fac.7.1767396228787; 
+ Fri, 02 Jan 2026 15:23:48 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.46
+ 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 15:23:47 -0800 (PST)
+ Fri, 02 Jan 2026 15:23:48 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
- David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251216-pwm-aspeed-no-printf-pe-v1-1-fd7d1ca726b2@baylibre.com>
-References: <20251216-pwm-aspeed-no-printf-pe-v1-1-fd7d1ca726b2@baylibre.com>
-Subject: Re: [PATCH] pwm: aspeed: replace %pe in dev_err()
-Message-Id: <176739622678.296893.1832797181870368357.b4-ty@konsulko.com>
-Date: Fri, 02 Jan 2026 17:23:46 -0600
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251218-bdinfo-lwip-v2-1-f6188a2f376a@cherry.de>
+References: <20251218-bdinfo-lwip-v2-1-f6188a2f376a@cherry.de>
+Subject: Re: [PATCH v2] cmd: bdinfo: fix incorrect Kconfig options check
+ for print_eth()
+Message-Id: <176739622762.296893.18146732022570531453.b4-ty@konsulko.com>
+Date: Fri, 02 Jan 2026 17:23:47 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,18 +105,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Dec 2025 18:56:35 -0600, David Lechner wrote:
+On Thu, 18 Dec 2025 11:59:58 +0100, Quentin Schulz wrote:
 
-> Replace %pe with %d and adjust the argument accordingly in a dev_err()
-> call in the pwm-aspeed driver. U-boot doesn't support the %pe format
-> specifier. Likely it was copied from Linux.
+> CMD_NET_LWIP has never existed so it cannot be right. I'm guessing the
+> intent was to allow print_eth() to be called when NET_LWIP is defined
+> (NET means "legacy networking stack" as opposed to NET_LWIP which is the
+>  newest (and incompatible) stack). There probably was some mix-up
+> between CMD_NET and NET options.
 > 
+> The dependency on CMD_NET seems unnecessary as it seems perfectly fine
+> to run bdinfo without CMD_NET (build and run tested). So let's instead
+> make the dependency on NET || NET_LWIP.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] pwm: aspeed: replace %pe in dev_err()
-      commit: 1f9e228c2fb739a000bab27d8e09312d425c2a3d
+[1/1] cmd: bdinfo: fix incorrect Kconfig options check for print_eth()
+      commit: 747a24b2291b9f4b3c399737087280322eaad7c5
 -- 
 Tom
 
