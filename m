@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7433FA374B
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A0FFA3729
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:22:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 732D984295;
-	Fri,  2 Jan 2026 16:19:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E2B783A83;
+	Fri,  2 Jan 2026 16:22:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="mnA3tEWZ";
+	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="UXwq4Fr/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CFC842A4; Fri,  2 Jan 2026 16:19:08 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id F1E3B8426C; Fri,  2 Jan 2026 16:22:26 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39CB384295
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:19:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11F3B83A3D
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:22:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=forissier.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome@forissier.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4775ae77516so125301905e9.1
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:19:06 -0800 (PST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-42fb6ce71c7so9837082f8f.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:22:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=forissier.org; s=google; t=1767367146; x=1767971946; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5yE1j7/O7U6NJVns3yNy3pYR6uc0vdplyM4C/7QHXFY=;
- b=mnA3tEWZU2zVY5Ws/WSRjDVilsw2CO6C0eHeOAADW17xUYHckJJLktN06xYRxkn4uv
- dKRrRKsVlxfRlNNYhy1XWFbpt/P6O5suHB/CIp2qa7lXaa8n1TWlPKZ+m4eaWkiCxGaz
- CxkQi2e5/LlZ4EUsr48RdWCnHSwUW/zgBvsXhxgueOgjY1eMomm14t9UcS3usjRnhiCV
- AVT40vwPo/M4JZPYarhAPrIg33UO0OMc0K6WSL/a48RkIXDo0O34bjkv0BR22cfOugkv
- kwnfKOGQMnS2yNuxqidrB0dd9wduBJ6OhFDfYYkKvLC5ZWILrN6gC/Pmi53aaUbgREpx
- Ls1w==
+ d=forissier.org; s=google; t=1767367344; x=1767972144; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8ELBLV9gY+pcOkdtIh7FaI3Ht9iHVXUkcwQNxCknxVw=;
+ b=UXwq4Fr/95So3zG38SkOZiVRRxPaM5l4xVs8DgNW4B2zAllSevh0v+H6528Z6mMZmR
+ woQCy6jPWqkRA+LhzHseP0hpNgvZ6A+DcX/KDMYFJ9FQMF+JXsfNpT6ZcVpqMeG/S43+
+ 83HjL9CRxE7LMjQD5POWgRWExb9s5ea/l60dfXluG5bcOd359oSJP2J+kuFZS4vLBDqu
+ aaypZnmPTpZBM4S4Dpq+sFEMOls7G95Mry3VLoCjvkHdXDGxElDCqkJvpj2ymf1OEsoZ
+ uIZ9qWOB3m8SjmmYJnslqpvb0ZHBWYLzYWOV5vsb4iLy2tMoEzRU+8hrGMrzfVa5ov+l
+ 1s3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767367146; x=1767971946;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1767367344; x=1767972144;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5yE1j7/O7U6NJVns3yNy3pYR6uc0vdplyM4C/7QHXFY=;
- b=kSyZ7Jz5MTa/acgvDENwdgm7AqvV3Dw1GlAuY0OZYMkmUUn/SrMVzD4kd2NwMtcD8e
- nbDNfIHllN1qahyBfQL3/cFQ0ktSs84X9/osAgdgdC5FgtoUdQITAwsVTeiKs/dhRxLQ
- QxbtD10ZrUu3AApMhDBvA9Iv0Rijys8yI4kxq6kVIlu8iEm8/w2i2IOVPj8EN/90/Ws8
- JhlsxkL6m+rXnBNWkRma/WrGhkfGr6GIsFnReWO5XDwPKiW1MmMnzrSrzLDJd/yhXVbc
- rMC6BY6cXCv2PaSEtD+9Jv3ca5K4wapNH3KdU0bjqz9P12TZYagu/l4hE/KjKsaV2+B3
- b5Ng==
+ bh=8ELBLV9gY+pcOkdtIh7FaI3Ht9iHVXUkcwQNxCknxVw=;
+ b=ffH6L8+0uXO17wHa6YIBTMQ4fA7wq2dYL1JPXaT8gac7VuQMAfnme6/gveg9sDosM1
+ ElyhvPGESElEac875JZnV2C6gGfBRXi+bsfinj4ZyxLUjnqafBa3H9nArxxiZCyJdt7K
+ BVuQUKH3kUftZV9qv/UPnNKZNbk7aXpLqJV46wjQ0lGr80bih72ydEy0V2H28QfUZ8yN
+ 1+0W3148XSXGz+WieJi67uOnCMeJmUDXQf5FY/FCtv1BIn+Eyb4DJtcnftXVST0yvhoB
+ nDLQnP5pXi4WzZ/8ufG7cG64rt8BK4R8gdGOWFnozVVzeyl+DUyUvbBr/+xcjQx7EQyX
+ mwPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUI4vMMd7gfMsT6SkjI0WZ8v8ENcYxHfMb/kDbVEl+vcLtjumONKw5X1CFLwY+Vo85mJCYaitc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyr1JL74NCWF1EaGR3yB5i3G5ecbPFUQitM+ClXGYaEZCHXVyTI
- hjE9VfWXbeKJrU/PDGgt+IWSGTNUbEHHtM7hIDKUots7ECrw6E2AV/aIdrAwwOlC+D4kivBZfJG
- PvzqH170=
-X-Gm-Gg: AY/fxX6jHhOn8GO3+jqRQnELuzWQYFxv6540lrB2eIpnZ8q8hglfSehaHKQIwOc4VF7
- RwcaCKuUlc/zcPiCqeh9Lli1CUYLxiIleerlQRZ5HQmttfJYt7gbTUVxvl5WDflhED7fRA8N1Q8
- l86Kn3rQCvGKL3o+tbr8P1SQ1YKrDYig2zNcersqat5Ha/YN8iDD4tYkWt8VOFBh7UQJNFk/hD+
- jiL4Z37G6B6vWkWNYQwXTbXsPn7u8qDEKgsP4/1Xf5dEuUZIgDfVri1Bmnr0AG/TtCEM3brsPTk
- 8aD89B7ECgsbZYarcgn09EL+qfMYQSoIpZIQIp484oHoIAHn4tpBKNGI3Tf/92Msy0lkUUeWvs2
- qjVscGOs7FencaYfcw5IsRrvJKlKcT6/x/bVdQ0/caXEVYz9b7hTTsP/DvnM3bHORLHPxclCL/Y
- 0lRe5lbN3ijZ4+GbWFdAwG+kdWlSxLEZhalOh4ciFIyxE4uqf6WOD2qUCa
-X-Google-Smtp-Source: AGHT+IEAvjgWvejpT1/fHcDDyAWOfbu31sm8QDBK5hr6PBJfpRgpUnraXvoLVDR71CEdtdgdK90SUQ==
-X-Received: by 2002:a05:600c:19c6:b0:471:14f5:126f with SMTP id
- 5b1f17b1804b1-47d195c201bmr550125485e9.33.1767367144784; 
- Fri, 02 Jan 2026 07:19:04 -0800 (PST)
+ AJvYcCVIaiCnzn2Eq6sEeVcdnPTbrCDSlklTlui7XhmlGZJFDCAdGToViRqH83xhbG8hHry6hhkylNc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yww2rtLvaz5eT+GbZXkmNzYn3JOBnlbycQjHrpwjHMVcXDgKNDc
+ bcwhLM+WjQWCU50VX82vu8ePte/qmvxm+m/iwOSjFT3zeDWRW+OAkYqqETT2vMMNDgU=
+X-Gm-Gg: AY/fxX6L9EtkYzjbGtrCAsGDjzzTlqdjRZaYsGresmrmreqpgkFCzSVioWye/qHoI6y
+ kf1p/H2VA3hCdYQdMUYtQJw9C07LI6V4qxuqgrMic0JHdBOuu0YLykjPY9B6sO8Y7Q2xduA02iv
+ FvFZzqduCwEYNCipivKJvrcZ+f4xbUy+HZ0Ul6E4Jef0GCAIPB/uGxm9EZX+LTC3ao8wSNvdRoi
+ 0rfm1CWvZ4bolGPIB3cWN+JIuOuXgqsGwb5g9lj1BOXGL4XB0cCfZ8DUEcjSNFpP1qdXR8cTnvx
+ LZVg/NqxrYRdQwv9A7a4lANEtsBIrDNU7v+Rp7ynuqGZJ5SHjo/eFOedwLtaS1ju/+/sLaZVfj6
+ lABIjO8bKey+G9iFho1V1QvlHknYeEWNB9MKsXyHWMHSIK4CjqQA1wPzzotxTPQ4ugeAjFSSbDP
+ 4IuJinekuJl8zlwIhTn/ReQM91QrzjN73CPCpDvbfRKMz0+vk4Vqsxoo1e
+X-Google-Smtp-Source: AGHT+IGjO+3JFdlWB51gx24g6LjqGVhms3QswZLA1VoDqUuiyY0pbCq8+uBttWrM03dgS/uDqGlWnA==
+X-Received: by 2002:a5d:64e7:0:b0:432:5d73:79a1 with SMTP id
+ ffacd0b85a97d-4325d737a32mr37547343f8f.55.1767367344403; 
+ Fri, 02 Jan 2026 07:22:24 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093?
  ([2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d6ba3b196sm773225e9.6.2026.01.02.07.19.03
+ ffacd0b85a97d-4324eaa477bsm85165254f8f.36.2026.01.02.07.22.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Jan 2026 07:19:04 -0800 (PST)
-Message-ID: <e2529768-467d-4bf5-a27f-9e50b8defdb1@forissier.org>
-Date: Fri, 2 Jan 2026 16:19:03 +0100
+ Fri, 02 Jan 2026 07:22:23 -0800 (PST)
+Message-ID: <fad49c74-fe99-457c-bc3d-58915faf34f9@forissier.org>
+Date: Fri, 2 Jan 2026 16:22:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IFtQQVRDSF0gQWRkIG1pc3Npbmcg4oCcbmV04oCdIHByZWZpeCBp?=
- =?UTF-8?Q?n_help_net?=
-To: Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>, u-boot@lists.denx.de
-References: <20251227181852.4404-1-linkmauve@linkmauve.fr>
+Subject: Re: [PATCH] net: add Microsemi/Microchip MDIO driver
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
+ u-boot@lists.denx.de
+Cc: luka.perkov@sartura.hr
+References: <20251230210633.501526-1-robert.marko@sartura.hr>
 Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>
 From: Jerome Forissier <jerome@forissier.org>
-In-Reply-To: <20251227181852.4404-1-linkmauve@linkmauve.fr>
+In-Reply-To: <20251230210633.501526-1-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,35 +107,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/27/25 19:18, Emmanuel Gil Peyrot wrote:
-> From: Link Mauve <linkmauve@linkmauve.fr>
+On 12/30/25 22:06, Robert Marko wrote:
+> Add Microsemi/Microchip MDIO driver for interfaces found in their network
+> switches.
 > 
-> The usage of the net sub-system was missing the complete command for “net
-> stats”.
+> Driver is based on the Linux version.
 > 
-> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-
-Not sure this is a valid S-o-b as per the U-Boot guidelines (real name
-required?). Tom?
-
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 > ---
->  cmd/net-common.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/cmd/net-common.c b/cmd/net-common.c
-> index 1c6f11cd435..6f33d15d695 100644
-> --- a/cmd/net-common.c
-> +++ b/cmd/net-common.c
-> @@ -103,4 +103,4 @@ static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->  
->  U_BOOT_CMD(net, 3, 1, do_net, "NET sub-system",
->  	   "list - list available devices\n"
-> -	   "stats <device> - dump statistics for specified device\n");
-> +	   "net stats <device> - dump statistics for specified device\n");
+>  drivers/net/Kconfig          |   8 +++
+>  drivers/net/Makefile         |   1 +
+>  drivers/net/mdio-mscc-miim.c | 136 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 145 insertions(+)
+>  create mode 100644 drivers/net/mdio-mscc-miim.c
+LGTM.
 
-Apart from the S-o-b, the rest is:
-
-Reviewed-by: Jerome Forissier <jerome@forissier.org>
+Acked-by: Jerome Forissier <jerome@forissier.org>
 
 Thanks,
 -- 
