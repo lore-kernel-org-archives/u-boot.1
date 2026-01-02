@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85AEDFC6165
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CEEFA3751
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 002AD83B7F;
-	Sat,  3 Jan 2026 00:23:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4076183B30;
+	Sat,  3 Jan 2026 00:23:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hIzaPyis";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F1xjXDJQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EB283C29; Sat,  3 Jan 2026 00:23:47 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id D910583C30; Sat,  3 Jan 2026 00:23:48 +0100 (CET)
+Received: from mail-oo1-xc41.google.com (mail-oo1-xc41.google.com
+ [IPv6:2607:f8b0:4864:20::c41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4B2483AAD
- for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C55ED83B7F
+ for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-44fe903c1d6so2649099b6e.0
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:45 -0800 (PST)
+Received: by mail-oo1-xc41.google.com with SMTP id
+ 006d021491bc7-6575e760f06so3206445eaf.0
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767396224; x=1768001024; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767396225; x=1768001025; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XAPQkOwvlkYjBQJW0Rrrs8iu2064llgiMxzOB0PcmlE=;
- b=hIzaPyisyifjqJkMJtjmOfWZzG3785Dbno9kNRNlXSYnZfA9aoQ7SV6HO/819A+7ZK
- ShWHu5mHVnFxK+Alkw/7HO/l/Aa/Ex8vRUPpq5qyA0kwPk6PWzGmwQxY9hoFAxcxvWOV
- 2eWkdKS4Bjm3HRJXgc7IEdXKGiEPGpUa0um3k=
+ bh=I/6k3BhwblmHZNNpaiO/wKKZbztmVVRqT31oO+/R8s0=;
+ b=F1xjXDJQ0hkO2Mo5R1vrgMe3FlV75Md3nF5vQipVfNnUW+p0QiejppoD4Dwch3eRPN
+ 72x3mGZwVxN2Q9wYtJkFR2rLiXycjejwxq4ZldYfAP2dHfeqGxDeex4G1o4RRGAKbQ84
+ q/EnDxEbBje3iIvdp4cX6/ExrlhL1jrhbL85w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767396224; x=1768001024;
+ d=1e100.net; s=20230601; t=1767396225; x=1768001025;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=XAPQkOwvlkYjBQJW0Rrrs8iu2064llgiMxzOB0PcmlE=;
- b=fOGmJxydZcdzH3lO9zsWIP6qSXKipSy6HInS+hCCNvNl5qCnGw1/ao37w9XxqT0oZ+
- Q1nHIK4JQSPsibvhWJizxen/fU8TeNsqAssprmwhsk1Md84XMleUAe3m70Fc2ZMuYmaI
- lITj3hm9d9aNMm1uWwq3BAcGrnhYHYoCMb23xqv4tDapcyCrOLEi+h6XQI2YhusiQJ0d
- 4HtnePbBdmFPcxEw5IuCOYC7hhaEVCKmEoD3viT/GsfU4bhJNxP3P6s309ZHeIAXQwRG
- bWNv3vut9kJ3IFx+OLONWzOsb6dvaHZDzwhSvLEPW5gGngOTQIB2HNtbvpo8K6KDwpd0
- DPtw==
-X-Gm-Message-State: AOJu0Yw8Z+IS96y8PqHHiA97w1to5qIw9bNS0GdVtVBVVBW55hUzf5Ts
- xfmflMTiZ4fSHeuVob4YFlGpgI1hSEMQBryRoN82Y7rvzrTwmcYb8GWfJnnniBYptSisWBhVXt7
- EtGjHWIY=
-X-Gm-Gg: AY/fxX5FiDyiSVwI28K1+y/Iw7Gi1TiE5qYV/Y1EyPz7wYACElyUmjUruvZhUsRizxB
- UAg04//VO3poPgYdBeeu2BELG/GX14HccstmOt6Z9OgbMgt0e4tLbGnbRHnVzYxEYXV5dK//EA9
- NMWBU9NWYYh4Fk/CcJBfJ5l7JNrPDLpq6qFmfH23D8Rwr+SgGgdxebY3xP6C/Izu2qVKCa5o/c+
- FZw2rhLf1PGunTG3jFoyJOwZB9B2kG5Khi/S+tWtaBj1JjrmqdrLUV+tyorciGSM4sFhPYzfnqj
- Q77tBUIz2ZRLuiYZlnAqstFXuBz7G7QekO4nTH8CvV12wZHU2qbZ/7CEAHlDTBkQbUGGGSC3tuZ
- 5M5LykRT7cgn+aEDa7ZGSP9BIFPrPz/4pbGnSl3CbFR9vWroU5m9LLCaEmlnzLEalsxHxHsCIP1
- lHxQwxpkV3afmt43STTZ+NWOt4WKzx9x1RhAuestDuWNZ70pc9sYXKujB2hRQb70CQ2w/blMenB
- mScjcOlFCb8E7ZHRU5btQ5RuYTTlyldlFmgxg==
-X-Google-Smtp-Source: AGHT+IFo44dOmVz77Kgtx5YAh9XRxGdVrghn/KNRGgrHRKR18B7HeoK6aalH6QrA1ICisPaJfQWk6Q==
-X-Received: by 2002:a05:6808:6715:b0:450:aa96:3c13 with SMTP id
- 5614622812f47-457b2088139mr16100588b6e.3.1767396224619; 
- Fri, 02 Jan 2026 15:23:44 -0800 (PST)
+ bh=I/6k3BhwblmHZNNpaiO/wKKZbztmVVRqT31oO+/R8s0=;
+ b=nDvbjpPx+pE87z6nHDpseYkRCzMekl2XLlp4UXfGdNNMlbyLAUatdogCwnzgAGc5Yo
+ y6+nTZ4/UwM6mpaA3nWfYVC2ty/fy05DUOfA7dJUGYMN7/LAzL2GP7cygBfXeUZdio0b
+ m4imtpoRNxprNypnmND2KPDHOXu3GDsVyV9Or5MY4ReyTeLI5hEg/TYlM4c8hNauYza0
+ 1cfsOKRf1GQx+ij8feCJfjnuCmnqQssA2fzKZ02tX6VtmgRevIL9nnxaISsxMsy0NDM2
+ jALj6WFD5osHoatjzi6VG9YIDqXIDrRfKfQbPCe2KpMDornBu/buXkfbEXxEHYdJriMk
+ n1Ng==
+X-Gm-Message-State: AOJu0YzZHdDtECoUz6QVejML1GNV+l7GfNmuHfFXCkkk49RPuFUp221l
+ l5ZVbkzcnZyoOsvIJxKU5xPSbUXxuqDlin84kPI8GW2RBZniUkkwPVEl89V0R4/sDY9jW0JkLCI
+ iXrOFDM5Hog==
+X-Gm-Gg: AY/fxX7KNxklimslKJfj8ZTjhGfh1KIKFZltvG42J74qA+Nzl5ddp9HtCfQmomNhGHp
+ jvvVYuBkkUBxmJ3XC1gqTwIRmD65+YqktERycbwOqqNKfihOia9RCnbqmT0/TVRs+WqPOvYyxLv
+ NISdTgO4BNfu0vMuzUpgrYj3hNUyNZx74dEgzvSGgSeqWq/S+E/mdyesX/FF2b4rmtoQoQORtHs
+ 95LPOI24uZKArXGup60isjcpWS5TK++jX3tw4pYEMk8NGQrzDmGPoExMYjN6Jdi7ekaartk/pzr
+ RJ/V4XRfJp+kMqog9QRsZgD4i+ASGXR9q3yWQRuUyx2kBqy3ZxARJSvD+LEFUQ8cZWDoObfUnPU
+ daAkVjVCoYqNAq7IKt5Dd/ab3XKkSGWFoSS1IRtH6ybQtxXJy7rb5LAuBMnubv9uviIBAq3R2Ox
+ 6O5nchCbtCCpY7vPCsgbexnirtW8tNRtkX5VsDzWKDpmK+qKl0p7UaXyWRLKlcNVycklK/0ky5S
+ aysJk/geg88FrWJDOB5LO3qtvfWZh8f8Q6Z7g==
+X-Google-Smtp-Source: AGHT+IFHaRAXeAM4yW3DQD//QXqDb2r/9YTDV3GH2ehWsUBbkOm4DoMWhhOQ6VVyHbvGkAfGyuG/Mg==
+X-Received: by 2002:a05:6820:6283:b0:65b:3480:6454 with SMTP id
+ 006d021491bc7-65d0eaf27b9mr13036109eaf.65.1767396225555; 
+ Fri, 02 Jan 2026 15:23:45 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.43
+ 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 15:23:44 -0800 (PST)
+ Fri, 02 Jan 2026 15:23:45 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: u-boot@lists.denx.de, "Ching-Chun (Jim) Huang" <jserv@ccns.ncku.edu.tw>, 
- Andrew Morton <akpm@linux-foundation.org>
-In-Reply-To: <20251211183130.3442378-1-visitorckw@gmail.com>
-References: <20251211183130.3442378-1-visitorckw@gmail.com>
-Subject: Re: [PATCH] lib/bcd: optimize _bin2bcd() for improved performance
-Message-Id: <176739622373.296893.14632837062911055174.b4-ty@konsulko.com>
-Date: Fri, 02 Jan 2026 17:23:43 -0600
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH v2] fs: ext4fs: Free memory while handling errors
+Message-Id: <176739622474.296893.1791035801115848440.b4-ty@konsulko.com>
+Date: Fri, 02 Jan 2026 17:23:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +98,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 18:31:30 +0000, Kuan-Wei Chiu wrote:
+On Mon, 15 Dec 2025 12:34:16 +0100, Francois Berder wrote:
 
-> [ Upstream commit cbf164cd44e06c78938b4a4a4479d3541779c319 ]
+> If zalloc fails, one needs to free memory previously
+> allocated in the function. This commit makes sure that
+> we do not leak any memory.
 > 
-> The original _bin2bcd() function used / 10 and % 10 operations for
-> conversion.  Although GCC optimizes these operations and does not generate
-> division or modulus instructions, the new implementation reduces the
-> number of mov instructions in the generated code for both x86-64 and ARM
-> architectures.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] lib/bcd: optimize _bin2bcd() for improved performance
-      commit: 9ac621e671858bf0b80dd26b883f3781cc5acb34
+[1/1] fs: ext4fs: Free memory while handling errors
+      commit: cec36b777a56b61c347447c12e61a9d1c425f396
 -- 
 Tom
 
