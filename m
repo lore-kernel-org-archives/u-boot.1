@@ -4,89 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A75EED628
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 16:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A70FA3728
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 16:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C918A83B22;
-	Fri,  2 Jan 2026 17:13:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 31DE283B55;
+	Fri,  2 Jan 2026 17:21:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kdshkYQA";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hIavFIc9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A31E83B27; Fri,  2 Jan 2026 17:13:56 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D92A83C04; Fri,  2 Jan 2026 17:21:54 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2064B839A8
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 17:13:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CFDB83B49
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 17:21:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-45391956bfcso9656669b6e.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 08:13:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767370433; x=1767975233; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zyCtT4pZomYY0Y6QH3DdzinXD55fL29j4/1ThwuF1sU=;
- b=kdshkYQAxfo9JhXmAh99KmGIY+IEmM4IUJQRmwlf11XjW1w2MlI3ibQ/fiTi2VGA1H
- 3FmYWjO6aN2jEWajNtfNUxqqk65a/XswfYlgRasNsxjHfFpGXX38ihFKXDGtV6mtRstH
- FCypCCSHaJqTldV0PfLqlasD99b4FeaJr9sc4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767370433; x=1767975233;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zyCtT4pZomYY0Y6QH3DdzinXD55fL29j4/1ThwuF1sU=;
- b=PFyQfy0GKsLZNiXZ61lL9lRHycBsPfLQdhs8WDZEOmRZV9h0lKjj6gdxk3ZPP1RYbW
- puXLkz4Mvg1ptGRDUTOCnlftN0VoKWGKFYAKbqcUc4AKRe8nZ2g4jIk88h71R+HzMCE1
- 4iRHZ9MTAd9Adj6AXxd3iVuGweubWNLyeoJLPs/SS5DU6xxZxlkr5lviq2gVP8ITreKy
- +/8E7fPsqb9AtGRYehwNy2yeskdnYPhDgKEFWezTdm13fU5GBd9HeWXIK5LP72poLE2I
- NOcvT3xAPp33b7/eNz2wA0YKUIO+olqrTj+V79ynyiVryGH37rdObCCKVOTfDuGsIO3Z
- 8XiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGuzLcgnR/+huYINbYz5M0CBNzOH/5NnfxWsWzIPgPK7TgZWRPm567TBMhjQ0MSt3XSfN8ack=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywx5W3t+cD75iofIIr8e5RuCeFSvK2qeothoN8jpeIbPnEWICxq
- L+YWmqrPnal+UCohHPSG41LXF5JX8LTXCoeb9EdgKpYy0xVvPAVWnYuvmLeTdQpiN3TB8FGCUCt
- Lk8Tkowc=
-X-Gm-Gg: AY/fxX4vTqXFSvToVgITeyHxoUCPLjDfNXjPqSj72TW4SRNAHzeWBh871KooRaMIw/g
- axHKxtz+nrBoEUB2s+7v/9ZnkNblC4UtZCM5Eao0yTWpOEEK48bXxQH4a+6z1GRnQTpj4ywrDqt
- TFzk/CDoybAr+n3XTPaZdzmbciB+yYIyMPmxae5yTxEcvCietPDZm8LokcY+vsDbZAY404E6/Ik
- lH04qSv2P/fL2hd2cgrlgKahduA6X6aTl8/qfT/Od93M9dqowGsmIL/q/rzuR+7KE1ftIcSr4YR
- 6K8omuQyS5M+hAhgDV/+s1FvxtUiCzzrBhMZ6v23dG/wStzNdd2jhM34zkzKGObH+QULZvPSQ4q
- kpcQKwnCZz4kvSuk34XkiozC3V39/kJ2XjKonq3hB5DUg4gMV9xfTRs/i0eAGxD5UMNc7ukMtkD
- aFqk8HUlKY2cT6FOzXfdZEWnssI/+uMBFSIlYHw05PMJhDCrbwH7aAelJNLUXe/37hhalo9zIW4
- D52xWn+R3iCJA1f4B6P4ZFGO8zo0jrK//GCnzE=
-X-Google-Smtp-Source: AGHT+IFSIsC0fg5u5S92vQMxVCfn6dEF7JFrKsPpYSqANJWoiNVVrx4723hlbIjsZaPaVeZyy+0QWQ==
-X-Received: by 2002:a05:6830:4990:b0:79d:eccc:96eb with SMTP id
- 46e09a7af769-7cc66a17d4dmr20174188a34.26.1767370432819; 
- Fri, 02 Jan 2026 08:13:52 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667281fesm28442473a34.6.2026.01.02.08.13.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 08:13:52 -0800 (PST)
-Date: Fri, 2 Jan 2026 10:13:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Link Mauve <linkmauve@linkmauve.fr>
-Cc: Jerome Forissier <jerome@forissier.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] Add missing =?utf-8?B?4oCcbmV0?= =?utf-8?B?4oCd?= prefix
- in help net
-Message-ID: <20260102161350.GG6124@bill-the-cat>
-References: <20251227181852.4404-1-linkmauve@linkmauve.fr>
- <e2529768-467d-4bf5-a27f-9e50b8defdb1@forissier.org>
- <20260102154336.GF6124@bill-the-cat> <aVfsRY3_yW3gZudR@luna>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4djTV55bG8z9tDq;
+ Fri,  2 Jan 2026 17:21:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767370909;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vbU+1yyxVtBOvBGZyJ101Za0e7LOf1ghDuL0W074nQs=;
+ b=hIavFIc9jFKd4z47i0oPqmij7hRXXcxTnEmA1EAsNQY3kql8n326r6CYT3DtkU2RkaZFoU
+ PSlnRv5FeBxzBXQk9qUbxbbLSj4M8UZ0kRg5CC4L5Szj9uY5qNBUKA73Eyq/c70oR7JJKh
+ Q+8xInhiHgheym2aZhKzMcdd5UhgTHrlVPYoyUjzR7rvp50V33cbEOxqAoqobSxUGnBb2m
+ 18KDjIxF6jyd2TK7fj3pKA4z5azasRlVFBt5fiKeoDucJ2ZtL2M8swtfKmXPeTRO1MsMB7
+ cY6ug7hXPwHLxGFSaL8H4zxViCgJ6Jtf7JxsL9UGRfUUrJDWRKvkS5vtqZSPFg==
+Message-ID: <9368ca1e-f57b-403b-9d07-fc0e69d3e989@mailbox.org>
+Date: Fri, 2 Jan 2026 17:21:48 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XNsGEV1bW127KX7P"
-Content-Disposition: inline
-In-Reply-To: <aVfsRY3_yW3gZudR@luna>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH 1/1] usb_kbd: remove match string
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20260102125622.144573-1-heinrich.schuchardt@canonical.com>
+ <da40c4d0-8c8a-4341-b779-96f571b7db87@mailbox.org>
+ <CALeDE9Oue=0L3PRVs7O8suPVDFBXL_i6o0hc50jLQ49HtaX2nQ@mail.gmail.com>
+ <67fefad5-ce05-486b-81f9-f28798195bc1@mailbox.org>
+ <CALeDE9NVNR8pA5G6um7p0CTmuQqmK4LWLoxj--jRKnBWJ5+dhg@mail.gmail.com>
+ <18a3fe38-c6dd-48e2-9273-c6862b99b7c9@canonical.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <18a3fe38-c6dd-48e2-9273-c6862b99b7c9@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 333c7702dba3e445dee
+X-MBO-RS-META: zwiarzx17bn7de1ieugt377qjqa43zdp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,52 +79,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/2/26 4:15 PM, Heinrich Schuchardt wrote:
 
---XNsGEV1bW127KX7P
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[...]
 
-On Fri, Jan 02, 2026 at 05:03:17PM +0100, Link Mauve wrote:
-> Hi,
->=20
-> On Fri, Jan 02, 2026 at 09:43:36AM -0600, Tom Rini wrote:
-> > On Fri, Jan 02, 2026 at 04:19:03PM +0100, Jerome Forissier wrote:
-> >=20
-> > > On 12/27/25 19:18, Emmanuel Gil Peyrot wrote:
-> > > > From: Link Mauve <linkmauve@linkmauve.fr>
-> > > >=20
-> > > > The usage of the net sub-system was missing the complete command fo=
-r =E2=80=9Cnet
-> > > > stats=E2=80=9D.
-> > > >=20
-> > > > Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-> > >=20
-> > > Not sure this is a valid S-o-b as per the U-Boot guidelines (real name
-> > > required?). Tom?
-> >=20
-> > As that is presumably Emmanuel's pseudonym, I would prefer their real
-> > name, yes. It's also a trivial enough change that I don't think we need
-> > to be overly concerned.
->=20
-> I use both names undistinguishly, so pick whichever feels more real to
-> you.  I am more well-known as Link Mauve even outside of the Internet,
-> but haven=E2=80=99t changed my legal name to include it so far.
+> Looking at https://gitlab.com/CalcProgrammer1/OpenRGB/ the protocols 
+> used to control keyboard backlights vary a lot between vendors.
 
-Thanks for explaining, Link is fine then.
+openrgb seems to be meant to control various fancy vendor LEDs and such, 
+I'm talking about the boring 1-color keyboard backlight on laptop keyboards.
 
---=20
-Tom
+> But anyway the vendor ID and product ID is used to identify the USB 
+> keyboard and to look up which protocol it uses. There is no need for a 
+> device-tree description.
 
---XNsGEV1bW127KX7P
-Content-Type: application/pgp-signature; name="signature.asc"
+It is in fact the other way around -- if it is a HID keyboard device 
+according to USB descriptor, it doesn't matter which VID/PID it has. The 
+few keyboards described in the usb_kbd.c driver are there because they 
+need quirks.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVfuuQAKCRAr4qD1Cr/k
-CpyGAP0Q/pMoi9uj7XaBBSw7h1Dr/EMePUxxjk6C6ULO1hk4xwD6AopIgewvrSJA
-N7js/J4KWVLldhLV++QZQYGCOW1xUg0=
-=No0r
------END PGP SIGNATURE-----
-
---XNsGEV1bW127KX7P--
+So, to move the discussion along. I can see why an USB keyboard might 
+have to be described in DT. It seems the usb-keyboard DT compatible is 
+not standard. If it should be removed, the commit message needs much 
+better justification for doing so.
