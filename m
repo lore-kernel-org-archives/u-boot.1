@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE4BFEEE25C
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 11:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30031EEE25C
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 11:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B39084214;
-	Fri,  2 Jan 2026 12:03:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A22EE84220;
+	Fri,  2 Jan 2026 12:07:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gYNxah4z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w0cIJBza";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C4E08421C; Fri,  2 Jan 2026 12:03:05 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 1081E84221; Fri,  2 Jan 2026 12:07:04 +0100 (CET)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D23A284207
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 12:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4460E84207
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 12:07:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-787d5555274so109231967b3.1
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 03:03:00 -0800 (PST)
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-642fcb38f35so9040250d50.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 03:07:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767351780; x=1767956580; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767352020; x=1767956820; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E7iqDqX314nX4bODYpOa5xOLyS3OOayaR8PrmzfkHP0=;
- b=gYNxah4zn/x0NRXGaUzAGc33PQBdg4on84LNx8alkZ08hkgDRGKZAluVG3YgoAbR/e
- iSkFRuqd2xlO39slSLufoamFHAOlLeQLfw4JZahHugK1MfKyueV8N9tvtPXQwsvEqrSm
- usqU1BhBjBpB9babMIcQ50dLV4mhtn0KBggEJpzt67yrRT6HkvzfFeFdcjQ9Ionh1XPs
- +cFXictzC43rZIbf5kRHwQvg04KagGBwgOygQkvQDXr4uphfUrlyimJ7yWXVTyiuFSKm
- xHmLT9RzMkigPJ99hnVoDEoHun9Ev8vyxkj8JVJDq1hUgyoPus/UbqJF8k2o47jiBojy
- NumA==
+ bh=cM74lwfNAfTVaW1ZBHCRyb2apJur/9NExX7yCBhqWbo=;
+ b=w0cIJBzae/hVwjbZ5Km8cteiUIm+ue2dVHJY0G7U52bb2RZaK5QIAHY7SyN0u7ikPl
+ GLMMzLDPoNVVhlXQEf+brkA4Gt53jRk2tSUXGuzZ09BjEmntrN/6mutjJ/0pxn56/k/e
+ kNEUMKofthkyw5f8hUdlc2kYBrjKYZ7r+UBgCWGgO8Q2b0Hei/mbc6bl2YFuEFlIxEII
+ F29mCs6gLECUEPWs4uzMwKdFwxEMzbf/3royXc1PMuC4r4xxgMhLA9vLpRt7zw88DsSc
+ 8zg6i/aZNE1vzap6fPsW7VP6a3IvsY5RUq6xKusTMy45OAPC8dJHeNinUdqUogs4ux5D
+ 1B/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767351780; x=1767956580;
+ d=1e100.net; s=20230601; t=1767352020; x=1767956820;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E7iqDqX314nX4bODYpOa5xOLyS3OOayaR8PrmzfkHP0=;
- b=B+W3iGkVgCTjwjtqW6nQ/XIWt2Z702SCZQWfZoSO2LqFeU++JuTurz9JE2b3mU8HUW
- PxDMyWuKIM6f9lSowMZ0DM1XXz7JCzYxkmbR7RtjPTkw9ykfdGi9NBocStupN8WnwcV8
- N1m26xGqQkcZ07ItcGuo3jn1FxAkMyE42c4nW+07ojUbGf1h2tpbqzTqiJn0XAh/vG2I
- rzzS6z3zwpRtBKA+bUjrEfRopmczqsc9opRJXJq9hDh+i54lgNEcJ26SLe1E6Eja2RkU
- 1wt7u09EAOhCkUJlPizomM5UkCzhG+fZgRn7NsgNc0BdPR6Q0KGhHORALxyrVZPF1/nA
- LqQA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVbrhbpeNXxI3bGKYwq2xw+dROCh5xA5HU3Da+jtlpVjExP4pX7CjsI8T9L36DFWbmAkcwoRmM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxH0R1dbhy19EcD4qWBJnJjCm0qAs0WfWeBCWT6ruPTMiiVZUrU
- 71bDKrfjDIEG8/Igh/b9IaxCo/xKBNXVr7doaxBmihUTXcV7cB08TReX1nNnOOhhLC0n7973Auz
- rQqzLZwgnra05x9Znnv/bvyUfZ15fEVZwBmzOrLxokQ==
-X-Gm-Gg: AY/fxX6DbkgwKMdNzWCxZvIjwGKUmA6mnM5KsV9T64/C/FWnYngRzmqvcjfuQg8zakj
- yqkRDrHvOB9k6pcfWl6l6S+W9Une2WpnnTF/0UHDUWrd9jG/HwLj7dpG55X0Tha1urKvBYX5sEF
- 7XfPpcflNWUHFMCkBEGOPpl/VlaZPvG7G2GecFnWVZ/enE+KTpmPRDDOSpHPZh+0BUA08lYtCrZ
- 6J6eTt15e0G7wLMC90agymB4vnIIfG638MGgKYj3BNxCyzgQfWWT1FDIqSE4w7MKnxMcG6YXMs5
- TtitHD+pkyfs4gdWp/KvQxZ+TzFctJoOEMGnNCxUiZbPYkigRmawznz/ljQ3qEdhdtVzuLA8cuh
- zbeT4ZO8LCne+0p/fLrwioYKhZ513Z81kxgBCSaMs6n/+vyjxnrnfe98BpeMAN3vE/KLST8Ck9T
- 0iPEP7X1sG3KVC9MTdfDceFm69vKKOlO1MbsT8w0qxGQ4isGDFlxtDcIBn+4OvZ60Wwq8hu3h/V
- KZYA8OHkpi+zMMbeZZSwjq92FPBD/ulau4b3lz+RVYaXg3CHmVqGY79AQ8HEmSdEj0KLo3KYaYw
- kfDdmY6HsjtYtOh/TU4Mfn8oiIV8Bi8+Wp1eYscWS5r0khx2I+ngIue/LapBLEgxtg==
-X-Google-Smtp-Source: AGHT+IEWQICSWKJ5qX0e/Z1yz4Pm+4ieE5xeQKSb8aE7AC5dbZaIvpW8Ide39q9AaiT/mMdgJq/6yXlsdFXUBo4FWx8=
-X-Received: by 2002:a05:690c:7483:b0:78d:6b8f:bb40 with SMTP id
- 00721157ae682-78fb3f48f06mr309458117b3.30.1767351779538; Fri, 02 Jan 2026
- 03:02:59 -0800 (PST)
+ bh=cM74lwfNAfTVaW1ZBHCRyb2apJur/9NExX7yCBhqWbo=;
+ b=mLFgNQ0R1RgllkWhB0lGKwXIOgMu/AllhvBiOd5zK5xo9bnCUc9WVr7vylfTwKrl9b
+ SezYcmp5sx5xZcp3ntBpHEbLI4SidTQ/E6oEkLsOchpaSqFaUr3Al7lcItDcay7s80Wc
+ Ty+srssA0TWkJAQyC1nwqzs6EAWpUBM5a6pGP8goHF9ZsoPpkF1/Unblivpk7SoUwERT
+ wzdT1ZE6JVM0GSdeQwHc2YSbY4ihJByk+alHjTqeEc/YieboiGPcfSyZaJtUtufViO44
+ wuymfdIwB0dshcCxALCRmz8E2OISRtU7FA8fT9inlYk1JTjOwrsKz/ctP4UR1ucXVL61
+ 2H7w==
+X-Gm-Message-State: AOJu0Yyoc/3rNisPsEF7gQRHgZWbWJ41J46NtYAU5OFO1OgcWeuH0RA0
+ dO7jhsPdotJrZ8IvE/ustjTTGRzIkAD1qIHhfvnB7dPMRCo1LVBEhHFFQffWTWY6wa1siMeLN86
+ Opv4Q/tgClHwTf+29MGFsGo5ugYLZeFair8xoKUSgMp17zlBnH7gss7o=
+X-Gm-Gg: AY/fxX6bKF3MU/tdMuEILRAjfzYs947tY0d7ncnQybO33284D9q+WWc23FH6/iKfqfY
+ /rkjigEVRHc2DHqSPAWp8EfxZrB/SqEIP73WFZChRhCtq0A6uk6tQFVwe+yy3L8X+lsk4bjvLbr
+ +ifHb2pXyjCZcXHaMAq8yEzFVdqd36FvmWKQFrO3Yce0RsE0YLRy7hav1X2iA4gVAYDhu93Mx77
+ JVRkIzglWpQEoiMIGuJ355eRgB7yJXSgPcu6FwdlSmty4C8Pp8tF7HGix8O92t1SmzPzR+RniG7
+ N3Ruqss99qRe4KpQnlRZEtnE9rejzYsBxPmyf1LNS0yB5L1H0XmQIFt9Yurw/r4mutuQnX13Kjo
+ MLdYyLCyswI0q297gwDv2Df5bMUAq/CQuV/F4Pb/r6XP1jZGAP0DU00rAolZg9mA1Iy7EZTR7jt
+ PXp+WTNxJfKzbLfOUN2e/j3wrb5WE9EDIpYqzV+PcZTdgR16lWgQ1grU4jzZbh0qsb9Ip8oChS7
+ re7BNUf0lMjEhFnOcUxHSRJfMHK6WPK1a7X0KwH2Z7T5IhtFDJ34GpN0vwp3igWDgorES+MD1JZ
+ cQjPhBc9cy2MKelA0HsEMGsnRP73Fe8IXZiOTK777/Ugdjo7qHGGVEA9eqHHQTqA9g==
+X-Google-Smtp-Source: AGHT+IEbOfGurWVwNKbvM32W9JMDbb7dMDgSz5lCgck0NiS09cpMt26BCFmIWiQEDVX+ei0zEY74xWK7oSxMs+yOTmo=
+X-Received: by 2002:a53:e7d1:0:b0:644:7a72:a506 with SMTP id
+ 956f58d0204a3-6466a8e7558mr22079101d50.94.1767352019841; Fri, 02 Jan 2026
+ 03:06:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
- <20251231191054.247270-2-heinrich.schuchardt@canonical.com>
- <CAC_iWj+VHVyOv43pMxfdUr=0e+9bjp+Gz4nzuweX1uSibObrXg@mail.gmail.com>
- <f2a7fb41-5059-4b52-95a6-d0754981d3ec@canonical.com>
-In-Reply-To: <f2a7fb41-5059-4b52-95a6-d0754981d3ec@canonical.com>
+References: <20251231104726.14633-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251231104726.14633-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 2 Jan 2026 13:02:22 +0200
-X-Gm-Features: AQt7F2rwhof6SPCayi1wUujKhKLxBenNAjIGlPY57ESSSGtoELmVUnIZX1n7rFk
-Message-ID: <CAC_iWjL1=C88jd4eazziSSwr5RVEfc0t6ZTAmBDrCKgzgbtYOQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support
+Date: Fri, 2 Jan 2026 13:06:24 +0200
+X-Gm-Features: AQt7F2quwAEbO3DsaxGOQZUS0HwjQvh-uqvNVtmQ1N6ZJNjY1g0fXLq36pJq9J4
+Message-ID: <CAC_iWjLH=_OQrVUr2U3uH_5EiRF5ZMuvyv8KBt4-ruq6s4DXdA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: implement a HOB list
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,69 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2 Jan 2026 at 10:27, Heinrich Schuchardt
+Hi Heinrich
+
+On Wed, 31 Dec 2025 at 12:48, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On 1/2/26 08:12, Ilias Apalodimas wrote:
-> > Hi Heinrich,
-> >
-> > On Wed, 31 Dec 2025 at 21:11, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Since commit 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
-> >> CONFIG_CC_OPTIMIZE_FOR_DEBUG has no effect on the non-host code.
-> >>
-> >> This patch reestablishes the prior logic to add
-> >>
-> >>      -Og -Wno-maybe-uninitialized
-> >>
-> >> to KBUILD_CFLAGS.
-> >>
-> >> Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   Makefile | 5 +++++
-> >>   1 file changed, 5 insertions(+)
-> >>
-> >> diff --git a/Makefile b/Makefile
-> >> index 6b5c5ee019e..2a972af4906 100644
-> >> --- a/Makefile
-> >> +++ b/Makefile
-> >> @@ -869,6 +869,11 @@ endif
-> >>
-> >>   ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
-> >>   KBUILD_CFLAGS  += -Os
-> >> +else ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUG
-> >> +-KBUILD_CFLAGS  += -Og
-> >> +# Avoid false positives -Wmaybe-uninitialized
-> >> +# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394
-> >> +KBUILD_CFLAGS  += -Wno-maybe-uninitialized
-> >>   else
-> >
-> > There's a ifdev CONFIG_CC_OPTIMIZE_FOR_DEBUG a few lines above.
-> > Wouldn't it be better to move the HOSTCFLAGS under the new ifdef as
-> > well?
+> The debug version of the UEFI shell on x86 requires a HOB list.
+> This implementation allows to generate an empty HOB list.
 >
-> Whether the Makefile is organized by host vs. device or by Kconfig flags
-> is a matter of taste. In your patch 5f520875bdf0 you opted to organize
-> the code by host vs. device (like in the pre 5f520875bdf0 era) and my
-> patch keeps it that way adding the least invasive change.
+> Generate the HOB list on the sandbox and on x86 by default.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         Free allocated memory if efi_install_configuration_table() fails.
+> ---
+>  include/efi_hob.h          | 32 ++++++++++++++++++++++++++++++++
+>  include/efi_loader.h       |  9 +++++++++
+>  lib/efi_loader/Kconfig     |  8 ++++++++
+>  lib/efi_loader/Makefile    |  1 +
+>  lib/efi_loader/efi_hob.c   | 38 ++++++++++++++++++++++++++++++++++++++
+>  lib/efi_loader/efi_setup.c |  7 +++++++
+>  6 files changed, 95 insertions(+)
+>  create mode 100644 include/efi_hob.h
+>  create mode 100644 lib/efi_loader/efi_hob.c
 
-Ah fair enough. To be honest that wasn't my choice, I just followed
-what the kernel did in the makefiles
+[...]
 
+> +efi_status_t efi_hob_list_register(void)
+> +{
+> +       struct efi_hob_header *hob;
+> +       efi_status_t ret;
+> +
+> +       hob = efi_alloc(sizeof(struct efi_hob_header));
+> +       if (!hob)
+> +               return EFI_OUT_OF_RESOURCES;
+> +
+> +       hob->hob_type = EFI_HOB_TYPE_END_OF_HOB_LIST;
+> +       hob->hob_length = sizeof(struct efi_hob_header);
+
+I generally prefer sizeof(*hob), but up to you
+
+> +       hob->reserved = 0;
+> +
+> +       ret = efi_install_configuration_table(&efi_guid_hob_list, hob);
+> +       if (ret != EFI_SUCCESS)
+> +               efi_free_pool(hob);
+> +
+> +       return ret;
+> +}
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index f06cf49e443..e9b6ffd27b8 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -7,6 +7,7 @@
+>
+>  #define LOG_CATEGORY LOGC_EFI
+>
+> +#include <efi_hob.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+>  #include <log.h>
+> @@ -308,6 +309,12 @@ efi_status_t efi_init_obj_list(void)
+>                         goto out;
+>         }
+>
+> +       if (IS_ENABLED(CONFIG_EFI_HOB)) {
+> +               ret = efi_hob_list_register();
+> +               if (ret != EFI_SUCCESS)
+> +                       goto out;
+> +       }
+> +
+>         if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+>                 ret = efi_tcg2_register();
+>                 if (ret != EFI_SUCCESS)
+> --
+> 2.51.0
+>
+
+With or without the change
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Cheers
-> > /Ilias
-> >>   KBUILD_CFLAGS   += -O2
-> >>   endif
-> >> --
-> >> 2.51.0
-> >>
->
