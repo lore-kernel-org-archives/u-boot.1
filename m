@@ -4,156 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF00EE9410B
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 09:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27B3FA3727
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 09:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20D9D83D1A;
-	Fri,  2 Jan 2026 10:12:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D8B083FB2;
+	Fri,  2 Jan 2026 10:26:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DEX1z0mh";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fkEj+DOP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47F7E83FB2; Fri,  2 Jan 2026 10:12:16 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 4670D841E6; Fri,  2 Jan 2026 10:26:51 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF1E683AED
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 10:12:13 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fp5OVJJX8KQPmB9INs6DjbiOnmjdSDO5SMBOpFQKl0vaof9q6Gi0ogRcb2kEVDS4GlXWblztBoAD2pWIl9dej7STirQ5ELYGAShPpkQErRy3rckPJfeODqjkniSUv2q+esVlBYETVJYKGtV2+URGh/qeCP4HlwWOuDTbm5PqGeUg5CfhD99HrtT8KnwBNs5gbqmTc9qDToANLyKrKOwG1jL0XBtzgenqT4ujFL8YT2USRqD0NiYZDpgMJn1zeajGib7CTnQhtDyibAhJutN7dA1ArQpjawDzlSg0J9RjeQbSI0PnUUFknbLW3F3jr4ucg5+zoXJyZYr/wBSmEjYV/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e3bHt1K1ei2NL/fTh07I0GRL/EWkCKEppzfqsmSwnS8=;
- b=kdQFisj4V2ViHOWbXRIzzbLx7wuujkO+LYNXcvF2Wcb41LSpCYyzjzbTeMF1PGb1jJnuaN/MFtW7uk4c6Q9f71jN/4HHJjI93aVe5gWkxj6gOrEhBGCgfU+IiSdU8lc8FgbAZlxIIAruBu0h0EnZFml8FeGvslKinHG6mA37a7gIsXb1iJs8oWnJZ9xHNokJs0TIfbzH3gJvB+0BR6zgANKaeWUNnnXEguzCPSCGyiwyKiZp5A+DeDrw8hxxXdq08moEVq3ALs64xZTyZuOKn6SNYD4aOBR6Ey+FfKsIJb2T2GU12Zz23Wyp9Xxwguw82cVaMFNakmgCgPq7bDKvog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e3bHt1K1ei2NL/fTh07I0GRL/EWkCKEppzfqsmSwnS8=;
- b=DEX1z0mhwOX0i98MoglgWgQGb6Y0p169f2FKimcCbTo7BPf2j3WDvnL88PlOUsB3b1PeOamBjUuuGqlkrkHz2U+xVSIcLiwzDUHnBYDcMROiRRnGVDGX4YeS8z8mzD92SgjRP1DTGLt4McsuhyBEpgobinKYSj3QgCXUXmRQW28=
-Received: from PH7PR17CA0033.namprd17.prod.outlook.com (2603:10b6:510:323::7)
- by DS4PPFAEF42CAE1.namprd10.prod.outlook.com (2603:10b6:f:fc00::d40)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Fri, 2 Jan
- 2026 09:12:11 +0000
-Received: from CY4PEPF0000EE3F.namprd03.prod.outlook.com
- (2603:10b6:510:323:cafe::cc) by PH7PR17CA0033.outlook.office365.com
- (2603:10b6:510:323::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Fri, 2
- Jan 2026 09:12:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CY4PEPF0000EE3F.mail.protection.outlook.com (10.167.242.17) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.1 via Frontend Transport; Fri, 2 Jan 2026 09:12:10 +0000
-Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 2 Jan
- 2026 03:12:01 -0600
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 2 Jan
- 2026 03:12:01 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 2 Jan 2026 03:12:01 -0600
-Received: from [172.24.233.20] (a0512632.dhcp.ti.com [172.24.233.20])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6029BvCa661910;
- Fri, 2 Jan 2026 03:11:58 -0600
-Message-ID: <7a1750b3-c8b3-4828-a7a6-c1f44aadde34@ti.com>
-Date: Fri, 2 Jan 2026 14:41:57 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id E790E83B22
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 10:26:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 802EB3F5A1
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 09:26:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767346008;
+ bh=3PK81PnvsLWce2reDqIDRi4FM6B9rAklKJ9IVw+Yz7I=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=fkEj+DOPeOtGB1CE79BNvYAi58NAsd+c9XkpNKV56dmLs+/ErUk++LTJkOqH306It
+ nq0LtiJEHMmSa9v0KOCWUzPgSxOuyWFOphWxDnZy9MvWkm6m7dIiDbpnXFMIF1xztn
+ Vwig+m7H50DMcGT1elUOsrrbvXPrIy6LOcOi3Z3M4vLpuZYoq1m3XezlDM39zJtNWS
+ H9bPKp5Udo5/SrmXYozc4+ecvCoXhtDELpRSAokHQHIm5oApWFIaAGakDVQHnLxJZi
+ sZRG1Xg1oKesmwOiz4bS/+U/MCBK4bc45P4ayMw6jALNaOh2+/Pl7Myv+6+Xy1D1BR
+ O84KtA34egrbC8M2h8wML/oYu2yehxYwEWuT26kKhVira46z4F6JYSbPelHtQU3TYd
+ 2GjRkjnihy1mAaHhs3RqWenDbYKgrHrKYL4/GrE9iPFXbWwad4P+gx5auY/pslTt8M
+ UoRKae5WPdAJG+Sp49IOsEYSiA6aceLSzZaSHy/qAy/y+j+uXbKEUVntpESDU3lcvn
+ WeyNYyP4NezvJSPvpHub476ASb/m+hF+Ixhce2wPWzS9PDUHuBw2J1hDLNtG2sezHg
+ wID0V7Bz0QVOIpbrZ9EdGpECUlACoXO3wlxsIsyHY4LTmSFOaQmoChrx9leTsHnt4H
+ pKVAScYoLJlcVEzrCdwiO9eM=
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-430fc83f58dso6609734f8f.2
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 01:26:48 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767346008; x=1767950808;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3PK81PnvsLWce2reDqIDRi4FM6B9rAklKJ9IVw+Yz7I=;
+ b=l5AVqD+LFyT/9JxiG9Z0BS59ZVJ/+RRSaM/vcMh8LbruOel0Rv7/a0mXE5r8WGBRKv
+ 2pWTTvy25wk2CIcB9VnzNXrmBgOVaS6Gj3byCVJlQ1/ohbb84J3v2D9BP9XQiLjsDHbF
+ nYH5OxO2uSGf+oNX18WBziMtNhPq4WpKAMqh1oMF6Fo/B55K2nH0b1ajmmYpo8PmWPcn
+ DSf3C0WMnE++mdPIX9pRPT0QfPCbkjCIlQTUtmNOOkwEyK3Lv1HTw2rMdKniQgU+6/77
+ zA3dKaNQLBjuQcGf7XTj+xh1aO3D7nNCjExJoX36XbD5TqJLtwm/ysEBr1X939VtntnF
+ KxMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFL4ZQ2Si56xjg25dniILP2oKYBHsqU4ZKyC+57tW4A8A4Mrcu0sCRJWktxlZgJgncoI0vcLU=@lists.denx.de
+X-Gm-Message-State: AOJu0YweJXPmT4jFxKCN/uU8qjICd5d0Xy76T8SioS1oJY0sxWLRDL9S
+ aa8BruadOhL4YfUvILA2vL8B49st4zdR50MzQTef+fPfebIz9iqnIAXpgXm0faN/HXJX2yPtMO5
+ OrdyWMe89liUI1W+g8DwF/MH7hcZY1/+U2QJCNFvfd+za+HnvextqkRMSKy3anCiM0oFqkSA=
+X-Gm-Gg: AY/fxX72YLA+QqCFk4yHzYiAQAuZrccXS9jECeWPUqSlbY4/7BsYCztbq97sfyRG+vj
+ OYOvWBmnOrT3qqto/EUjHPTJiG/ckrpD1VBosMJdR2OgEt52cS+y+LMaWPWl2xkpMecKwOKOkGU
+ BRRQE4xiYEk290tG0F5hJEpyfg4V88Abs/sl81gGJ/W1v1ERFzhmJziagOLtmg7x0BbkgsCYGhi
+ p1ejI0R+09QOnuJD4mQxYdAkVoJ/XC1kd7H3Md4uIV7umnjs4AHjNJ9YBPuMPHfh0/Y2UsWd+Nq
+ v1ggwKte884C9s6pjEwpt/tiI6aE3FjqTgiGwXB/sFzSjr0VE/0pt4MzT+orIgRaIIJUJabFkC7
+ /VfMWi8pkIrLe55jXlX1jfvvlpRj421ZeDezw8U5t40rwrDpjT/GuNd+8USmrjHHUAFh9YeQlLY
+ BaFTUzdmg=
+X-Received: by 2002:a5d:4a4d:0:b0:432:5c43:76 with SMTP id
+ ffacd0b85a97d-4325c4302eamr41884690f8f.39.1767346007956; 
+ Fri, 02 Jan 2026 01:26:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEoHrwODGVnaUDVQRDWkrTNh8CGI2ExuKLbYHnpERp/9/ipnJqZ5KwWALWLX2yk7yJnGiIvpg==
+X-Received: by 2002:a5d:4a4d:0:b0:432:5c43:76 with SMTP id
+ ffacd0b85a97d-4325c4302eamr41884660f8f.39.1767346007452; 
+ Fri, 02 Jan 2026 01:26:47 -0800 (PST)
+Received: from [192.168.103.126]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4324ea227e0sm85897809f8f.17.2026.01.02.01.26.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Jan 2026 01:26:46 -0800 (PST)
+Message-ID: <e30ef59f-41e9-4b59-bc65-c963bdfd7e40@canonical.com>
+Date: Fri, 2 Jan 2026 10:26:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] configs: am62x_evm_a53_defconfig: Enable A53
- splashscreen at u-boot SPL
-To: Tom Rini <trini@konsulko.com>
-CC: <devarsht@ti.com>, <aradhya.bhatia@linux.dev>, <n-jain1@ti.com>,
- <tomi.valkeinen@ideasonboard.com>, <vigneshr@ti.com>, <praneeth@ti.com>,
- <h-shenoy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>
-References: <20251106085842.629521-1-s-jain1@ti.com>
- <20251106085842.629521-3-s-jain1@ti.com>
- <20251230175012.GA256115@bill-the-cat>
+Subject: Re: [PATCH v4 5/6] board: Add QEMU m68k virt board support
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
+ eleanor15x@gmail.com, u-boot@lists.denx.de, alison.wang@nxp.com,
+ angelo@kernel-space.org, trini@konsulko.com
+References: <20260101175420.4118024-1-visitorckw@gmail.com>
+ <20260101175420.4118024-6-visitorckw@gmail.com>
 Content-Language: en-US
-From: Swamil Jain <s-jain1@ti.com>
-In-Reply-To: <20251230175012.GA256115@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260101175420.4118024-6-visitorckw@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3F:EE_|DS4PPFAEF42CAE1:EE_
-X-MS-Office365-Filtering-Correlation-Id: 38e6696f-da6f-4140-d25b-08de49df02e7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ajB1K2M1bFNkL1hSUnZQNmFZMllwaHBvbjVyaXlGSjhxandVMjZHdkpkRDZk?=
- =?utf-8?B?VzFsNEtzdysyc0dRSDFWUi9DaDRvQVZQVUgySzBHaU1acmRRRzUzOGU3b3Zh?=
- =?utf-8?B?WmhCV0w5OTV3Vk9MZHVqTk5HYkNsUmh5VUF1LytxNng4cGFDQkFGQk1JQk1m?=
- =?utf-8?B?ZmRMdGl6MkxrK0ZBYlRJeUlnR2xxd1JxUjZCMTRQSVpsQUNXNXJscnNOSmlN?=
- =?utf-8?B?bytha2VadUtqT2tmbm5KRVFaTlIwNHhIMTRYSkYzR2tudE8yVG9BNjE2REdO?=
- =?utf-8?B?MXEvbC95SEhXQnpYaUlHc0k5cVNwZ2NoUHl2Y2V2dHdoNnZBY0grd0NXNWpT?=
- =?utf-8?B?R3dUTFNYYU9ld1BDRnorNHFkSCtDSnFMUkNtVktubkphZ0Z2WlhCREJwS0VC?=
- =?utf-8?B?aFFQU3RQY3RRbURhem1oM2k5ai9NTHJUK2FLN1ZuR1N3aWVmQk1TbzhIeE9E?=
- =?utf-8?B?Q0JHQzl6WGZFTFpxdDdpWXZhYUhSM09kUWFuZ1licVBtdTJ0bWxqa0psQ1BV?=
- =?utf-8?B?MEdzbFc5RnpFcitHbzRBRGtjVmxqMTR4bU9tUm5BeWhMTW1FRmthWXBDR2hQ?=
- =?utf-8?B?ZHRIVUFkaCtNaHZmTUdmUC9KZ0h1bGZTRnhjdlBObS9HWlBwNEkwVXVNblpL?=
- =?utf-8?B?dnRyblliUmF5OVZ0RDNPeXBVWU95UXllb2pHaFc2bWJuS0w1SmIzcmFqWU1S?=
- =?utf-8?B?RmJzTzRYckEwSkdqK2FwTnVZbW0wZkh0M2FTSjVsWm1UOXRjS3NwWHB4LzVL?=
- =?utf-8?B?U1VLNCt2T0s3ZE16ZHQrWFowRjg2Rm5qcU5RbnFKMHVmajZxOVk3NFczWXJ0?=
- =?utf-8?B?cndHdkFZTkZGU3FqQjNvMU1PSmhRMHQrK2lGWFZmTlhadlBpRHRLVnRncWMw?=
- =?utf-8?B?c3ZZNkJQUTBqUEJIeXNYWGRYVVA5cmMvS1NDQ1dkODYzRFQ1dGovYjJnUzMr?=
- =?utf-8?B?UGVBdkc1aFBGQWxCNzVleUx0UHJsVU5mSEptOTJHOEN5Z3plN3QydjNhQjJy?=
- =?utf-8?B?SVM4SjBGdmowVGFqVmdGN2RFYTRxSWFZK0Jla0s1WVZsNlpaZjU2Mm1ySXJn?=
- =?utf-8?B?Q0xVa21sMitYSjNheWpWaHMrZVBxSTBvY0MxQSt6amlUbU5vRlF1aThmOTNp?=
- =?utf-8?B?S1lGTS9TVkYzRW0wOE9FSEszSnpXWW9rMTdVRWtEWG5lUzZybUoyTjVETVlu?=
- =?utf-8?B?U3pqcW5EbGZGUTNBcWU3L0ZqV3RrSHlwdFJ3cXM0UWhlRnplbzhqS2ZjNndD?=
- =?utf-8?B?ME94WkdHeC9JdndCWlhsVWpLQ1NETkxjYUdxL3NEVUtoUStnK1J0elI5WDB4?=
- =?utf-8?B?cHdOQXN2NzhZQUREVUdoYWlyRVVMK3l5SzZOR0Z2cVdFSzN0QzNWRHpuaWZz?=
- =?utf-8?B?Zk5zVE9RQ3MyTS80YVZ1TC9rcGJFdm9tbWFMbXJGcmFkVHNoa1VPaDh3a0Zl?=
- =?utf-8?B?UTNwdGVMOU1vcGxyWC9qa3hIVXVqd3JtMkh3U01mMnJZUThkREx1U1pRZ1BK?=
- =?utf-8?B?YXIrc0NhdmtUaFFDYkhsbURqOGJ5bHRhWnNUK0tucndwUXpkRjJQcXJrYTVm?=
- =?utf-8?B?VS9qM2U4MldsdCtSaVA4b3Jmd2xZRVdkeTgrQlZCeEdlY0p4OTQxZ3dLQm5a?=
- =?utf-8?B?MlhqdkNBMHBRcW0xUGJEYlgyQjlscjRXNUR2WEZ4TkFRSVBVR1BHOVlkbUFO?=
- =?utf-8?B?Q0tsclg2dkQvWWxlUVVWcE5VS2RMWkZiMXdyNnp4dXdwcEsyVGp3QUp3L1ZO?=
- =?utf-8?B?WmMzUVVBRWlUOEZUSFNqc3NobjR3ZXVVbUV3a3QwVUtKQ2hwODl2aU4yY1FL?=
- =?utf-8?B?RUpWUkxTSXl4M250b2dsU3BRR0hyT3VkSW9lSjNlTlNnU3IzdHViN3V6c0pP?=
- =?utf-8?B?L3hEcGtGV0lwanBvSGlYdVRzcXFmeGs0a0ZWVmU2R1JFcW4xVFFnTTI0d205?=
- =?utf-8?B?Nkt6WkdndlUyUUplTXNBN3kwNjVmcHZmVEs5a2U1MEpZVW9FQTZHUDZmU3Zz?=
- =?utf-8?B?R0t0eldJTS9iREFoZnpOTkdnNTUzYlc3cHpHTzVjM3kwSWJkVi9OOHdWWjRs?=
- =?utf-8?B?cW1PclRXV3VHc1JjSlduM2l5eXZmT3JEbDZpRnZNVE5hTWJwNWgwYjg2amt0?=
- =?utf-8?Q?zAkw=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2026 09:12:10.7951 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 38e6696f-da6f-4140-d25b-08de49df02e7
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3F.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPFAEF42CAE1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,32 +122,343 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 12/30/25 23:20, Tom Rini wrote:
-> On Thu, Nov 06, 2025 at 02:28:42PM +0530, Swamil Jain wrote:
+On 1/1/26 18:54, Kuan-Wei Chiu wrote:
+> Add support for the QEMU 'virt' machine on the m68k architecture. This
+> board emulates a generic machine based on the Motorola 68040 CPU
+> equipped with Goldfish virtual peripherals.
 > 
->> From: Devarsh Thakkar <devarsht@ti.com>
->>
->> Enable A53 splashscreen at u-boot SPL stage. SPL_MAX_SIZE is bumped up
->> to 0x80000 to accommodate splash related code. SPL Board initialization
->> Kconfig is set to dynamically update simple-framebuffer and
->> reserved-memory DT nodes before kernel bootup.
->>
->> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
->> Signed-off-by: Swamil Jain <s-jain1@ti.com>
->> ---
->>   configs/am62x_a53_splashscreen.config | 17 +++++++++++++++++
->>   configs/am62x_evm_a53_defconfig       |  3 ++-
->>   2 files changed, 19 insertions(+), 1 deletion(-)
->>   create mode 100644 configs/am62x_a53_splashscreen.config
+> Introduce the necessary board configuration and initialization
+> infrastructure. The implementation includes logic to parse the QEMU
+> bootinfo interface, enabling dynamic detection of system RAM size to
+> adapt to the virtual machine's configuration.
 > 
-> This in turn makes am62x_evm_a53_ethboot too big to compile. Please
-> figure out how to re-factor these changes, or update the _ethboot
-> version to disable this again. Thanks.
+> Enable the Goldfish TTY driver for serial console output. Additionally,
+> enable Goldfish RTC and timer drivers to support real-time clock
+> functionality and nanosecond-resolution delays. Include comprehensive
+> documentation covering build instructions and usage examples.
 > 
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Tested-by: Daniel Palmer <daniel@0x0f.com>
+> ---
+> No changes in v4.
+> 
+>   arch/m68k/Kconfig                     |   8 ++
+>   board/emulation/qemu-m68k/Kconfig     |  12 +++
+>   board/emulation/qemu-m68k/MAINTAINERS |   8 ++
+>   board/emulation/qemu-m68k/Makefile    |   5 ++
+>   board/emulation/qemu-m68k/qemu-m68k.c | 115 ++++++++++++++++++++++++++
+>   configs/qemu-m68k_defconfig           |  16 ++++
+>   doc/board/emulation/index.rst         |   1 +
+>   doc/board/emulation/qemu-m68k.rst     |  39 +++++++++
+>   include/configs/qemu-m68k.h           |  18 ++++
+>   9 files changed, 222 insertions(+)
+>   create mode 100644 board/emulation/qemu-m68k/Kconfig
+>   create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+>   create mode 100644 board/emulation/qemu-m68k/Makefile
+>   create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+>   create mode 100644 configs/qemu-m68k_defconfig
+>   create mode 100644 doc/board/emulation/qemu-m68k.rst
+>   create mode 100644 include/configs/qemu-m68k.h
+> 
+> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+> index de7c673c376..605ae5ec20c 100644
+> --- a/arch/m68k/Kconfig
+> +++ b/arch/m68k/Kconfig
+> @@ -183,6 +183,13 @@ config TARGET_STMARK2
+>           select CF_DSPI
+>           select M54418
+>   
+> +config TARGET_QEMU_M68K
+> +    bool "Support QEMU m68k virt"
+> +    select M68040
 
-Thanks Tom, will fix and resend the patch.
+Not even the dm command is available on the board by default. How about 
+letting TARGET_QEMU_M68K imply CMD_DM like other targets do?
 
-Regards,
-Swamil.
+Best regards
+
+Heinrich
+
+> +    help
+> +      This target supports the QEMU m68k virtual machine (-M virt).
+> +      It simulates a Motorola 68040 CPU with Goldfish peripherals.
+> +
+>   endchoice
+>   
+>   config SYS_CPU
+> @@ -208,6 +215,7 @@ source "board/freescale/m5329evb/Kconfig"
+>   source "board/freescale/m5373evb/Kconfig"
+>   source "board/sysam/amcore/Kconfig"
+>   source "board/sysam/stmark2/Kconfig"
+> +source "board/emulation/qemu-m68k/Kconfig"
+>   
+>   config M68K_QEMU
+>   	bool "Build with workarounds for incomplete QEMU emulation"
+> diff --git a/board/emulation/qemu-m68k/Kconfig b/board/emulation/qemu-m68k/Kconfig
+> new file mode 100644
+> index 00000000000..aae6dfe400f
+> --- /dev/null
+> +++ b/board/emulation/qemu-m68k/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_QEMU_M68K
+> +
+> +config SYS_BOARD
+> +	default "qemu-m68k"
+> +
+> +config SYS_VENDOR
+> +	default "emulation"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "qemu-m68k"
+> +
+> +endif
+> diff --git a/board/emulation/qemu-m68k/MAINTAINERS b/board/emulation/qemu-m68k/MAINTAINERS
+> new file mode 100644
+> index 00000000000..90414c58465
+> --- /dev/null
+> +++ b/board/emulation/qemu-m68k/MAINTAINERS
+> @@ -0,0 +1,8 @@
+> +QEMU M68K VIRT BOARD
+> +M:	Kuan-Wei Chiu <visitorckw@gmail.com>
+> +S:	Maintained
+> +F:	board/emulation/qemu-m68k/
+> +F:	board/emulation/common/
+> +F:	include/configs/qemu-m68k.h
+> +F:	configs/qemu-m68k_defconfig
+> +F:	doc/board/emulation/qemu-m68k.rst
+> diff --git a/board/emulation/qemu-m68k/Makefile b/board/emulation/qemu-m68k/Makefile
+> new file mode 100644
+> index 00000000000..5cb2886ff5a
+> --- /dev/null
+> +++ b/board/emulation/qemu-m68k/Makefile
+> @@ -0,0 +1,5 @@
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#
+> +# Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> +
+> +obj-y += qemu-m68k.o
+> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> new file mode 100644
+> index 00000000000..3b911b95343
+> --- /dev/null
+> +++ b/board/emulation/qemu-m68k/qemu-m68k.c
+> @@ -0,0 +1,115 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + */
+> +
+> +#include <asm-generic/sections.h>
+> +#include <asm/bootinfo.h>
+> +#include <asm/global_data.h>
+> +#include <asm/io.h>
+> +#include <config.h>
+> +#include <dm/platdata.h>
+> +#include <goldfish_rtc.h>
+> +#include <goldfish_timer.h>
+> +#include <goldfish_tty.h>
+> +#include <init.h>
+> +#include <linux/errno.h>
+> +#include <serial.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +/* QEMU Virt Machine Hardware Map */
+> +#define VIRT_GF_RTC_MMIO_BASE  0xff007000
+> +#define VIRT_GF_TTY_MMIO_BASE  0xff008000
+> +#define VIRT_CTRL_MMIO_BASE    0xff009000
+> +#define VIRT_CTRL_RESET        0x01
+> +
+> +/*
+> + * Theoretical limit derivation:
+> + * Max Bootinfo Size (Standard Page) = 4096 bytes
+> + * Min Record Size (Tag + Size)      = 4 bytes
+> + * Max Records = 4096 / 4 = 1024
+> + */
+> +#define MAX_BOOTINFO_RECORDS  1024
+> +
+> +int board_early_init_f(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +int checkboard(void)
+> +{
+> +	puts("Board: QEMU m68k virt\n");
+> +	return 0;
+> +}
+> +
+> +int dram_init(void)
+> +{
+> +	struct bi_record *record;
+> +	ulong addr;
+> +	int loops = 0;
+> +
+> +	/* Default: 16MB */
+> +	gd->ram_size = 0x01000000;
+> +
+> +	/* QEMU places bootinfo after _end, aligned to 2 bytes */
+> +	addr = (ulong)&_end;
+> +	addr = ALIGN(addr, 2);
+> +
+> +	record = (struct bi_record *)addr;
+> +
+> +	if (record->tag != BI_MACHTYPE)
+> +		return 0;
+> +
+> +	while (record->tag != BI_LAST) {
+> +		if (++loops > MAX_BOOTINFO_RECORDS)
+> +			panic("Bootinfo loop exceeded");
+> +		if (record->tag == BI_MEMCHUNK) {
+> +			gd->ram_size = record->data[1];
+> +			break;
+> +		}
+> +		record = (struct bi_record *)((ulong)record + record->size);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +void reset_cpu(unsigned long addr)
+> +{
+> +	writel(VIRT_CTRL_RESET, VIRT_CTRL_MMIO_BASE);
+> +	while (1)
+> +		;
+> +}
+> +
+> +int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +	reset_cpu(0);
+> +	return 0;
+> +}
+> +
+> +static const struct goldfish_rtc_plat rtc_plat = {
+> +	.base = (void __iomem *)VIRT_GF_RTC_MMIO_BASE,
+> +};
+> +
+> +U_BOOT_DRVINFO(goldfish_rtc) = {
+> +	.name = "rtc_goldfish",
+> +	.plat = &rtc_plat,
+> +};
+> +
+> +static const struct goldfish_timer_plat timer_plat = {
+> +	.base = (void __iomem *)VIRT_GF_RTC_MMIO_BASE,
+> +};
+> +
+> +U_BOOT_DRVINFO(goldfish_timer) = {
+> +	.name = "goldfish_timer",
+> +	.plat = &timer_plat,
+> +};
+> +
+> +static const struct goldfish_tty_plat serial_plat = {
+> +	.base = (void __iomem *)VIRT_GF_TTY_MMIO_BASE,
+> +};
+> +
+> +U_BOOT_DRVINFO(goldfish_serial) = {
+> +	.name = "serial_goldfish",
+> +	.plat = &serial_plat,
+> +};
+> diff --git a/configs/qemu-m68k_defconfig b/configs/qemu-m68k_defconfig
+> new file mode 100644
+> index 00000000000..f9294218429
+> --- /dev/null
+> +++ b/configs/qemu-m68k_defconfig
+> @@ -0,0 +1,16 @@
+> +CONFIG_M68K=y
+> +CONFIG_TEXT_BASE=0x00000000
+> +CONFIG_SYS_MALLOC_LEN=0x20000
+> +CONFIG_SYS_MALLOC_F_LEN=0x2000
+> +CONFIG_SYS_MONITOR_LEN=262144
+> +CONFIG_SYS_BOOTM_LEN=0x1000000
+> +CONFIG_SYS_LOAD_ADDR=0x00000000
+> +CONFIG_TARGET_QEMU_M68K=y
+> +# CONFIG_DISPLAY_BOARDINFO is not set
+> +CONFIG_BOARD_EARLY_INIT_F=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_RTC_GOLDFISH=y
+> +CONFIG_DM_SERIAL=y
+> +CONFIG_SERIAL_GOLDFISH=y
+> +CONFIG_TIMER=y
+> +CONFIG_GOLDFISH_TIMER=y
+> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> index f8908166276..4f7c812d493 100644
+> --- a/doc/board/emulation/index.rst
+> +++ b/doc/board/emulation/index.rst
+> @@ -15,6 +15,7 @@ Emulation
+>      qemu-sbsa
+>      qemu-x86
+>      qemu-xtensa
+> +   qemu-m68k
+>   
+>   Also see
+>   
+> diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
+> new file mode 100644
+> index 00000000000..6c4de54cf6a
+> --- /dev/null
+> +++ b/doc/board/emulation/qemu-m68k.rst
+> @@ -0,0 +1,39 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +.. Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> +
+> +QEMU m68k
+> +=========
+> +
+> +QEMU for m68k supports a special 'virt' machine designed for emulation and
+> +virtualization purposes. This document describes how to run U-Boot under it.
+> +
+> +The QEMU virt machine models a generic m68k virtual machine with Goldfish
+> +interfaces. It supports the Motorola 68040 CPU architecture.
+> +
+> +Building U-Boot
+> +---------------
+> +Set the CROSS_COMPILE environment variable to your m68k toolchain, and run:
+> +
+> +.. code-block:: bash
+> +
+> +    export CROSS_COMPILE=m68k-linux-gnu-
+> +    make qemu-m68k_defconfig
+> +    make
+> +
+> +Running U-Boot
+> +--------------
+> +The minimal QEMU command line to get U-Boot up and running is:
+> +
+> +.. code-block:: bash
+> +
+> +    qemu-system-m68k -M virt -cpu m68040 -nographic -kernel u-boot
+> +
+> +Note that the `-nographic` option is used to redirect the console to stdio,
+> +which connects to the emulated Goldfish TTY device.
+> +
+> +Hardware Support
+> +----------------
+> +The following QEMU virt peripherals are supported in U-Boot:
+> +
+> +* Goldfish TTY (Serial Console)
+> +* Goldfish RTC (Real Time Clock)
+> diff --git a/include/configs/qemu-m68k.h b/include/configs/qemu-m68k.h
+> new file mode 100644
+> index 00000000000..1d8aa92fe80
+> --- /dev/null
+> +++ b/include/configs/qemu-m68k.h
+> @@ -0,0 +1,18 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + */
+> +
+> +#ifndef __QEMU_M68K_H
+> +#define __QEMU_M68K_H
+> +
+> +/* Memory Configuration */
+> +#define CFG_SYS_SDRAM_BASE       0x00000000
+> +
+> +/*
+> + * Initial Stack Pointer:
+> + * Place the stack at 4MB offset to avoid overwriting U-Boot code/data.
+> + */
+> +#define CFG_SYS_INIT_SP_ADDR     (CFG_SYS_SDRAM_BASE + 0x400000)
+> +
+> +#endif /* __QEMU_M68K_H */
+
