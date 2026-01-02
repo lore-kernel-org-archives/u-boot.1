@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA53FA3751
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF2DFC6165
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:25:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F375842E1;
-	Sat,  3 Jan 2026 00:23:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E696E842DB;
+	Sat,  3 Jan 2026 00:23:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IwVFuao2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MOo0C842";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EAF3842CE; Sat,  3 Jan 2026 00:23:53 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 8093283CF2; Sat,  3 Jan 2026 00:23:54 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C16683C29
- for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18CF0842C9
+ for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3e89d226c3aso9780672fac.2
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:51 -0800 (PST)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-3f584ab62c6so5248966fac.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767396230; x=1768001030; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767396231; x=1768001031; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P68WPCDUmRFmQHki1+NqhL4HHdduOW136n4Qp2GF0P8=;
- b=IwVFuao2iy3pXO5UbwPcJk2MB7x6Q2i8sup+/iTwLDUV+iYpD+9EFjT7zm0eCZr/cO
- Pt33l+/zX8O2gDlv01wMA7DaCj7FgEEo+Fd4xR2dt4EAE28sotFSDAsHVZ8n8dlS2C/Y
- SzvRG+cFfsUSDRMDSWFGHtOmFWpR/EuLpCdsI=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=JN7Uzt4wXgs6O0a25zlJcjl2B/sRWYs28NJy5vDKvDQ=;
+ b=MOo0C842eV4PgXuJp4XgiFIRe9JAVcywSixYN4rGGxcHIBh5RPoMWAwDyonMkL/LGR
+ rTbnKyoxm+FPGCayC0d+Y8QVDUYJSs6sGBp8DWJ/2Nm1q9FfyKnAzUzV9I16hExNcEbT
+ LteD15I5A9fR1XVJM5VSJNHkXc956g5K93kxQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767396230; x=1768001030;
+ d=1e100.net; s=20230601; t=1767396231; x=1768001031;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=P68WPCDUmRFmQHki1+NqhL4HHdduOW136n4Qp2GF0P8=;
- b=iU8VcrgWQfmdUs9ya6PcheVmzxrxB29GWkoqaR8BMCcnR3Lu6QR8RoILCvEQP9klZe
- hzRxZO7vJUjv50jbi2+4PvWsNsO1s5qia0+mkM74pZNeXRdNqqMH7RVhjuAtARWdsHzr
- HToR/+awuQtd2UzpJn/aTGNYjDff4CLqjHCVtMVOHtDaCdjVa3u4gbSxD6h0DWhMwnec
- Py0R3/J2dnlonLfAPWxyOyoaj+vWudgWx63COIAubgo1RgkaqqQ6K5zx+AgJ7jfwjjCA
- NMqGccEMf1iFn37NXRyvCG4SHqb9wsrcEkcxRdU+05QgzbKgzyTDlWaiyqvW9HpRm6Rd
- WOnQ==
-X-Gm-Message-State: AOJu0YytrgXORs7jTUXlVAaMG4RQkw4ONg92jWCgLSU/pivylwv5RZ2E
- YFYCfEZWs7MfY1nE3QjX431iCpuJlN9r5f2WkXMvPBRPsGxbp2jI5TYosTW/IpaBzMA=
-X-Gm-Gg: AY/fxX6WBEps5xGeUf+8kmbRymU/jHLK8oTZKtxq3altn9Mru6XoJnlR6Fu/FJZfLYc
- ahdSncyGe3ezudOqPEArXUjKsd9XzNaJ7fGIKun/9nOjCdU/IJy89TRgl7OB28zyIyrHfHQ8tc4
- 4LKNiaMFClFCppPx6UO9OiSB1DJ2TqNQthvNn270WBvNyh9d0j7jFiOPrxNTczTNdzR3cNfuLc6
- R6Ag2NFAXOz2aZBGpPMy/ruojOSrCwU06Iou7b8ixa4oGxxkoMybdpkSh0NbEv1kzJJda3XaAi8
- LWfCoCvfTfz3tSW5ZPxsDHnUfQ308oWDIEOdSpYEZng5tdwwsqjvXmszN3Dugyni6aOp/GFgq7q
- RsdwuivApXuaTg5k1yruin0lSeHEJhEMPj95Gtj5MiIClgNYCR7vNrXmS3obFNXDjtfkPm9AK+a
- dd4JlYiITDH9b72/TvobXkSFOYm7oFshRzN9j6hUdiWK74B8xo0yvbDlUwSvVpNgaEimkjDGi0a
- sOmTmy0uwNJGQ1IEh/cLvGJ5odjOo/SV+PsTg==
-X-Google-Smtp-Source: AGHT+IFe3qR9M2zdxDvvhBDhrPBTmFtn/h6wqQ3EqibBQG3j3/4zglcH2OQKiNb/aYzQk12LamJ2GQ==
-X-Received: by 2002:a05:6871:2015:b0:3d2:a9e:f03c with SMTP id
- 586e51a60fabf-3fda5293319mr20975865fac.26.1767396229871; 
- Fri, 02 Jan 2026 15:23:49 -0800 (PST)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=JN7Uzt4wXgs6O0a25zlJcjl2B/sRWYs28NJy5vDKvDQ=;
+ b=xHSjwujZcVsIGYc3EEXzaGwno0DD+SF+eIWBXoLTvV+xf948G4hlIyoC+xkkqBvV5u
+ /x9SwFK4PdvfiDuPXORiUGbrsLR2gZbOV+IT5dSsDya87pv3KWEaPR0PPLkYzeiotJSG
+ r6ks5VGvy29DFQeiWxYGHZOwac4N19N4fFFKuLexy46su0KZ+ha5KV/AkBlo6c7mvgKR
+ vD2mqIx3SfPKS3PvyT++rwI5+eIIUo2lO21Vy0Qdp5SY7x8ue/f1q+Z1yX9HQwETT+po
+ oLK/GIeskMKlxiiSl2yYMNXjaWyWeH7494XLHE//HGuqFKdHfuJkg2nmvhftQF5bXF0v
+ Qu0g==
+X-Gm-Message-State: AOJu0YyVxvuxZu4t+v5q02Om3357vS87qYUEYBsbyVrzlwPLEsLr1PNz
+ iRBbPfp5zCg5xHWUlN+Ao1q+rQwcFOE6AFhLPApiXhIrnI+cjEAOVkIQvBSNWnoE0zi2l+yVCZ1
+ 71+8DSQY=
+X-Gm-Gg: AY/fxX5QLaI19vQQk8aH47eC7uIh//YUgZ1g5QPvPiU6V1b9ju5fO6yR/BkNcuPCrBs
+ Ln6FwPjd+FiTcMyZeeh+o30Kbq+YQ2XPchjLif0Ke8LoU4rStsUi06DttRCOV2ynYyEQBpuz4hX
+ P4jDG6NXZpvlKsj9BKo+hne76E7FaCeG4lW05q6MOFuDlomTJUtrio/K63b4RQHtLENlWeefEM5
+ XmE7Vdgeb4PELRotWMplNsfvCraDag8jmD7Gad7i/zHk1FlFTKiwviaKRo1WXr8Ad+23w/cjDRK
+ 22+4PAYS63Am0Xm8s35DPmNqgv/bhS0BmjoivlUGs3/atDF6BxMZC8vsFoFMOu1NwkUv+/COucg
+ SdjdR2atEUMtAwpjvZ62vhIHCc6RhuR27TVv8KdR9HofArHBSmT+30uflk4J7Fes5Mgcvaq3R58
+ QvAfttpMJogkH+nFZlG1KzXAv6TUJhgWyM26qwLyXqSe3dwKFGfzaAbdm45Qe+Zt8Ia4KaIQVgX
+ Gq6KWGMKOUrRazZu1I9j6imSjGZVz49RA/Tyg==
+X-Google-Smtp-Source: AGHT+IEE/U5wpBKO9+++6Qfd2MvjG1Ox7d17Rh2HzIrO+bo56si6Qg2yzA6W5epQoP3YMxnc788AAQ==
+X-Received: by 2002:a05:6820:6fd7:b0:65d:2f7:6eab with SMTP id
+ 006d021491bc7-65d0ea4a5dfmr16002261eaf.32.1767396230824; 
+ Fri, 02 Jan 2026 15:23:50 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.48
+ 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 15:23:49 -0800 (PST)
+ Fri, 02 Jan 2026 15:23:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20251217200313.755200-1-marek.vasut+renesas@mailbox.org>
-References: <20251217200313.755200-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] configs: sandbox: Select environment in FAT FS support
-Message-Id: <176739622893.296893.6558202372475694539.b4-ty@konsulko.com>
-Date: Fri, 02 Jan 2026 17:23:48 -0600
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+In-Reply-To: <BESP194MB28058E0F0D6E468ED7661716DAA8A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB28058E0F0D6E468ED7661716DAA8A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] cmd: onenand: Fix handling error path in
+ onenand_block_test
+Message-Id: <176739623001.296893.6375286944600113813.b4-ty@konsulko.com>
+Date: Fri, 02 Jan 2026 17:23:50 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,24 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Dec 2025 21:02:50 +0100, Marek Vasut wrote:
+On Thu, 18 Dec 2025 07:48:51 +0100, Francois Berder wrote:
 
-> Commit 2a38e712652f ("sandbox: add FAT to the list of usable env drivers")
-> made environment storage in FAT available on sandbox, but did not enable
-> the matching ENV_IS_IN_FAT in sandbox configs. This leads to environment
-> driver lookup failure when env in non-EXT4 is selected using 'env select':
+> If memory allocation for verify_buf fails, then one
+> needs to make sure that memory allocated for buf is
+> released.
 > 
-> "
-> env_driver_lookup: No environment driver for location 3
-> priority not found
-> "
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] configs: sandbox: Select environment in FAT FS support
-      commit: c55221f1a274886260a7ecdf9da9884bb49f1f38
+[1/1] cmd: onenand: Fix handling error path in onenand_block_test
+      commit: 5e7624979083e2bc163e18165452d8ead462b58c
 -- 
 Tom
 
