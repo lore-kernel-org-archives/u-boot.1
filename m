@@ -4,78 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 521CBFA3738
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 12:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8539FA3741
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 12:57:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A257384207;
-	Fri,  2 Jan 2026 13:30:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4923284221;
+	Fri,  2 Jan 2026 13:56:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lxX+6X6C";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="p6rnbEPI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AADA984221; Fri,  2 Jan 2026 13:30:12 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 627AA84227; Fri,  2 Jan 2026 13:56:58 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A09984206
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 13:30:10 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-64baaa754c6so13377827a12.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 04:30:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767357010; x=1767961810; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K1llqnU0PWQB6Mc/wycEGJekChckhLlde29sc6/EVMM=;
- b=lxX+6X6CXX2mAHePJDh9hQE2AWnRCvyouf1rsBNDJ9OZdvZndDnE8YMzzF+KVnViMT
- qvCE9AqxDVd3ooRUOD8rkg6oXmMNWQRA+ut5Fvf1wd5tRqs/wyw5jeD3eS9NMNTJgS7Q
- O9hnRUWQiTkrDNKYSi2yuBIHQxO7Lw2rMYogA=
+ by phobos.denx.de (Postfix) with ESMTPS id 6A20A84206
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 13:56:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1322E3F2A9
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 12:56:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767358611;
+ bh=EkTpwT3MOXx/tSSnmulaN+HGFUd3lkohVbth5vR6qd8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=p6rnbEPISsIPmo4ThGNfmAh8Y6ex3yOMpR0+wKRN795tcOgTUvu0smVM6nKoPlyrM
+ ZStTL4EuLr2GrvSd5wn4L6nehGfddxY55kbte2gh//1gUMZ0lNbe9xw/5io+vZ57qH
+ M+6RcCPesHlPdD4e8LknZG7MLPsYlWq1t9Ktntfyux1HdlZX9U9m1kU81ayGn/CI/P
+ 5CejWXiWgtXzGZav0KKJWc+bb4VHWX9bst3dFUnTwn7uhbQ9PBB/DxaZbSxO6A5nhw
+ CqHR/mWtFuRUhuEpXmHWRdWBncG1kh7AWXua+h8jhQy2V9kbKnx/XVMRX4fZG9DTYF
+ u7AM+xh6ObtUmWou0bweETbS7gEJ6im37fD6cZIJeo2V0JDizseBl83EvTkeMO6wO1
+ LLtLkFZuVoELztiWioIuGWBOB8K+155x7DzC6RRLHLm9DZ1RiLMo6GKFeMhoXubQ/f
+ PEto3TwtV1aGlk0NQICfayfrwgJhcz1L3264OBu1uV1xpJbbI9s/ljIMC2gFEnRPd5
+ Wyg7gXnnph2+3SqW7nvsyqIg4JCbq5tXv2DOYXntYakm6jeuks1Jbe2DcB+pzEWqq3
+ Q/K4kWV99cJDozda1bZIPnaBqsprw3ZzjxmcQGSMvMJxIa0yMihl+hqlPL0qrSbEXz
+ lKTJvOGEOxkmBQTuUPZAoUfw=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-432a9ef3d86so5437f8f.2
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 04:56:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767357010; x=1767961810;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1767358610; x=1767963410;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K1llqnU0PWQB6Mc/wycEGJekChckhLlde29sc6/EVMM=;
- b=GZ8MBWj5LOCJpYBUCZNi4UHAevxltKD6h3b8UWpWegWzit5Gkg1X8vjs6qO2R4PgKk
- yzW8EqdRpEWrKJfT6d6+nAssurjAghjncSGAFjc1tRWPGF+L1UfXapc/Dqi795bxsl2h
- IJ6XXSpUD0RtOv5HZAwhQPrOSZW8PiwzkADBIa65cLguqn5+3fyEg7KxQRZ8ELB0koX4
- hpIhg5ExrIsj8wloiwyqOxw5GH2i2amuGYREd+aP+p+OrGaruIheKz6g1zZsRuVyRFVI
- aWkNRG9igtLtEvDVUX4K5HNh6RPMrjqPNqKKaX1pEiP96Xe2ayOJUWusoW1euUPuZVJ8
- sGHw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4oflD2TAlWo70gQyiV0q6CoVtbyIDK7+0l5WpdNlYJh0Tyc3/lUwUUpEYaeaqGhVdUjWY/4Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPR2lzUwmS3RCfBQBwj6EPn+Tbtw01SmEGsF+lVXroD1Ym2yhE
- xW+FlQvqWhTOeaec6VaJbXXZXV8yzrL7fBFgubrAVFZsGNzXLFHCzOvO+QYPkGdk1hqyVymny8c
- 4o5tVwmd2J8U3vSXUumTPqIG80LvyKMlRSvGlODFW
-X-Gm-Gg: AY/fxX7YVbgyNwXU620DJ+TD0nU3H2K2Nc+Aksz7gtk0etClLXaEx2WeBa3EoonEjB8
- X6c/lmh+RboaDSDNRyP9qqm5ULWhoJRVB6X81ZHzeGQLbv/LvtjUkc5LpAwarZjV7wlnnnbwT4q
- d3nYTHHKntyRGr9fWXKhMoJMhEXCpfblBy/1NjgTnN+eJ3x7hduRsutWczkOBqUXvU+vbpWCfko
- AhyBkE4kQXeZpstq40lbnePfMtSSDFMFT1bDshNO+KcyB9QiXaghI5CCrtE0hbCwrNOMA==
-X-Google-Smtp-Source: AGHT+IFfYrKw8OW8PKbesrIUsafEtVxJZ2nQiWKc436w4FSD7glulylVMD0XUAmddQdPnhK9PYyxeas7DJA5b4Hp+G0=
-X-Received: by 2002:a17:907:97c2:b0:b73:4b22:19c5 with SMTP id
- a640c23a62f3a-b803722a7f4mr3999303266b.44.1767357010042; Fri, 02 Jan 2026
- 04:30:10 -0800 (PST)
+ bh=EkTpwT3MOXx/tSSnmulaN+HGFUd3lkohVbth5vR6qd8=;
+ b=R9XUz3Sr1fEAC+U6xxitZ0YFDMGexYpwcUKt7Pd2vhxXBi9Ie6rsYNNpI+eHM1QAZJ
+ TArcQPqPCPLBCsSl+WA9UGf+TrwVgtiqLoxAjbNUCf/nsp5ZmBgoXHrbriqgrNKkC7tY
+ SY83jpzOft6xRoPiLzZNjYvwL6Q92EDHcjGtVfwLccYvJolFXWU+daHTH9EfUrruGnm/
+ ql34JLEMYGXQG25LfPfixLqf8Y1KvimV6YIc5FwwVO/dRCNXc1ILGHRVMR+0oFkP4BQQ
+ TAn/GiqxvWyp9S0SgsGZXaEaPDpw58VPCmC99lc8gqDLaTuun2X+BPUq2n2/krnuyLOb
+ J5Zw==
+X-Gm-Message-State: AOJu0YwQzhVF+7sfrRJZh5rDjLMTjUn/j/wfPWdXa17iO+CNPBYtSVoI
+ b+27MYftCe0ju3UC5mXOf4srksTgYEmTko2rBPyq1VjyDBHEDRKB6Z76IepCX3iH/57VfoHDKGb
+ Q0P/qUWc0+sDzdxJgXx776RlU8YbisjvPb71O5j7NfylT6u67eGHEBvqCLbyxACDkON6jh+k=
+X-Gm-Gg: AY/fxX5vvnhtwbvanxYl+5e2jFaxxnRHWCaGyzxP2pDu1sDN8ONZ2vfLdfbZoulBhqp
+ ektARMG8gj2SmWwKpNTjN01d9CedxrvXLi4toSC0lwkgSn3R+clWmrEnXx43Za53w6hd7muBp0I
+ NaDAVJUrOlURdQ5OEp/5W6jDEuDozvYQ09tX9+FDiHz1MqVJCs1jqEW/u5y47c9265Q0U1UoPEw
+ uVG6tU9TB8gHcSO7Qeiiyd15y4dexW8i7bLrkmk2BADsjGphvcRZ/ho7u4VkjZUkAj4Cw+4DXl9
+ QE52jQIc+EsST14wdLLGUksqqWHha/RX1fiCEciAFAHV3ojTDdN+p78DjyugHtju7ZmE8YmrEPx
+ HlTJ4ixbvOjfgfvoMEPQd2NC+4Z912J9i4Jtzlex0AMn7fREDG8POR22egET5eCmtRzzQvpBkGY
+ zs
+X-Received: by 2002:a5d:64e7:0:b0:431:266:d150 with SMTP id
+ ffacd0b85a97d-4324e50c2d8mr48930291f8f.44.1767358610657; 
+ Fri, 02 Jan 2026 04:56:50 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGRS/QjOZRtJw+H7AxamdmjbtQbbPCvmxEGeG7NvZnxZGMXys0wcoQU31wVPuLjNNNXDc/HxA==
+X-Received: by 2002:a5d:64e7:0:b0:431:266:d150 with SMTP id
+ ffacd0b85a97d-4324e50c2d8mr48930275f8f.44.1767358610310; 
+ Fri, 02 Jan 2026 04:56:50 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4325b6bfe88sm76601152f8f.19.2026.01.02.04.56.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Jan 2026 04:56:49 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] usb_kbd: remove match string
+Date: Fri,  2 Jan 2026 13:56:22 +0100
+Message-ID: <20260102125622.144573-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
- <20251231191054.247270-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251231191054.247270-3-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 Jan 2026 05:29:58 -0700
-X-Gm-Features: AQt7F2rT905NXD5AbEeAssYqoULHaGj5z94XvJNaJQgvmbfVHFzc2dWTxx-jXPQ
-Message-ID: <CAFLszTinaB_wvQKijgW=CvP8Qz5dgjOv0ykGrSfEpUG3Jjevtw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] test: do not imply os_malloc() outside of the sandbox
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,49 +111,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+USB keyboards are identified via a USB interface descriptor or via USB
+vendor and product IDs but never via the device-tree.
 
-On Wed, 31 Dec 2025 at 12:11, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> When compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y the C compiler does not
-> execute all optimization paths and add a reference to os_malloc().
->
-> Remove the reference if CONFIG_SANDBOX=n using #ifdef.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  test/test-main.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/test/test-main.c b/test/test-main.c
-> index 3254325e8b1..1815d60acf7 100644
-> --- a/test/test-main.c
-> +++ b/test/test-main.c
-> @@ -734,6 +734,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
->
->         uts->of_root = gd_of_root();
->         uts->runs_per_test = runs_per_test;
-> +#ifdef CONFIG_SANDBOX
->         if (fdt_action() == FDTCHK_COPY && gd->fdt_blob) {
->                 uts->fdt_size = fdt_totalsize(gd->fdt_blob);
->                 uts->fdt_copy = os_malloc(uts->fdt_size);
-> @@ -743,6 +744,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
->                 }
->                 memcpy(uts->fdt_copy, gd->fdt_blob, uts->fdt_size);
->         }
-> +#endif
->         uts->force_run = force_run;
->         ret = ut_run_tests(uts, prefix, tests, count, select_name,
->                            test_insert);
-> --
-> 2.51.0
->
+Remove the device-tree match string.
 
-Oddly I hit this same problem some months back but I didn't end up
-needing to patch it.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ common/usb_kbd.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-Which board are you building here and which toolchain?
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index 36107a3b278..29b01a85955 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -690,15 +690,9 @@ err:
+ 	return ret;
+ }
+ 
+-static const struct udevice_id usb_kbd_ids[] = {
+-	{ .compatible = "usb-keyboard" },
+-	{ }
+-};
+-
+ U_BOOT_DRIVER(usb_kbd) = {
+ 	.name	= "usb_kbd",
+ 	.id	= UCLASS_KEYBOARD,
+-	.of_match = usb_kbd_ids,
+ 	.probe = usb_kbd_probe,
+ 	.remove = usb_kbd_remove,
+ };
+-- 
+2.51.0
 
-Regards,
-Simon
