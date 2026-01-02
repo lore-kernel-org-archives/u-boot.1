@@ -4,89 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F79FA3748
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D52CFA374B
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69075841E6;
-	Fri,  2 Jan 2026 15:47:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EB4B88425A;
+	Fri,  2 Jan 2026 15:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cS4uIdc8";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SI88u79o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8179A84241; Fri,  2 Jan 2026 15:47:17 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 70F3084248; Fri,  2 Jan 2026 15:47:26 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19145839DF
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:47:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-3ec96ee3dabso9574549fac.1
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:47:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767365234; x=1767970034; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LWTyDwghnQ2DVQu0fBrjY+3gyjPx5AGY2sCQ47Sbhg4=;
- b=cS4uIdc8aNq6BxJ5f3T8nY/Hdd4kMJsdfZOKgVuF3vWDxqdY23xbEP6Cbki2gE/NuH
- nUGWt//BWumQXlSGdRQgpA+PhXAWnTvTCunMQBMdfMYXuo5iP5qjMbk70Ml1hhv8e5Hg
- 6Fm1xViyMZNrRY1oulfCOzBLby3eAQDGAoUvE=
+ by phobos.denx.de (Postfix) with ESMTPS id 597EF84248
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:47:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ED2FF41965
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 14:47:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767365240;
+ bh=JnaDYBxAOL7Ni3vlunTq2q7tJElZjhw8iEeQsFbkXo8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SI88u79oevBO7qV0udGwxm4W3k3SGwDgjMhLkVUVV261XgjPTj9oKnv7tyFX7faTO
+ 3Qmvrk5kLzAzesMsSCyAQTEWbI1XdWuIiYiCB0lXDGCt4FKaHwrbWVvdIuaE9aNBVD
+ kL1GJXbhcTbGV6uojyZGcLEMWs++vKSPIQAULvJQ4V5PwpBkpXDoSg3X5xptMgCV7/
+ QOZy6PvrF90+OVlacNG9rBAdqu410ETDOrEh88imgui83MKcEzu2jye9IO8VP0CYax
+ TimbqR7hdtcbfkessYwuq3WJnDYYqHtK+de6mb7Jh5v6hokRiOxM/WBmMoqfJLLg1+
+ 335oE1wWC8x3xlCZKgtJgBmG+gxlV1d1ib92nOvtbP+6mytrZ2Tv7n+3u1u5dKEAb/
+ 0BUjdAEdJx7i3NCtUo9sN5tKixbNC+6LgtSU+utvYs/BD4HU/zem0F914yqquUBd82
+ h0XWvHpOMTUtbmfcG/5d6+TYzkoj1KYFdqjoHCnkuJq4fY9XVn0mYMBKPzmRaWB0bS
+ ideawxdiiNk2m8vrW0eDiJ3MQ/M907yiqG3exriCzUP+F/6am4Bk1UTvJXa+AJAj6L
+ kWhyHaZ7lKa9OQXuWzmSial6/8tzEO4aLRTV77yaTShW81gaEVBrrEVw0d5cRdvqDH
+ VfQHFK12Yjzwb48rHcvA7LnQ=
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-47a97b785bdso84178705e9.3
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:47:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767365234; x=1767970034;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LWTyDwghnQ2DVQu0fBrjY+3gyjPx5AGY2sCQ47Sbhg4=;
- b=MVEvcCoa64WWCm9gcpZXzw7iJL4N2JJTVIxQpqe91ix5Fm6884pv3iz0I8Zrq1n816
- ci4JPgYBQoSligsdol6XF+dNWRwymCL33uJUZgyZ1HsAxUFQZUmxLrrT9+WXP8Jqj+1N
- 4khEPu29p0yNa5/0Bma/qCkJ93c5pIDWI/K9w6VcffWcfk1wbBSSVHXvkSqkQQDpLuf7
- GOj/mwWRf7C/tKZHms1wMUy5TrHs/UtxSUHjs0irimOskAJAHf+YX2AvzZHjfh4DsO6k
- sIoD+PdzHf7PhU4/zOpz7Wc4wxQNxr3Fd2PmKZh+57HtLBJm8/FbWN9X400YAvbTcjQK
- E/qg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQJzi4eAvf6GOwq1v3+x2LruEqHLMf0fe7UAK/YSqqrVYxMfQhQJCcLHFTi+3zJUyqwqzEQ88=@lists.denx.de
-X-Gm-Message-State: AOJu0YzYusTOz5JCtIXo6SVVg2FyzFDN1DUyEzqHB2KyT/Tljpnpxklp
- nh+xSFLxbanIbRemo6CrYv/XbpKIVbwnME+xORc6eAH84oERRklpYahw10NjtTYBggw=
-X-Gm-Gg: AY/fxX5jYlGTMxpb67VZxWIL1+okLGR7WHx5tJi2ODMyEs8qfH0GylqCgcyZF5VdpCq
- D3Fh839ZjFaxQSEi9+hyxLBCZF3QR2Qc7ZZ+xKOewEi6HxsiLBMBG+5CxwtqefaMlCmSZo7FYCG
- 9LhN5Qv5XEfY+bAjnTxj1H0GGOfGLTewIVOb7CWiBj9xwOewdXoijU2ufntGEan3pAvCPBCkQBX
- Q4Ws8+UCfN88IBRu16szcdMeCJ3xkCME1RBTqd48Pg2J1AUERbkI+iXyy/J6Vt5VF+WkHT1BBys
- XQ4xWa1DqrZ7lHdGgR/nuXyUTNvIVbsIULfgfkb3jUOROv5G8x3yD2gFhmdbusl8u9pC8PkOnBC
- rGrXen4brE2LGZ9iwKFspWOCllcRV3+DnBBaFOfISScxHdfhKs6UKNGgK8j+iolzpksRU1y77+1
- zW9vw6ZBPkjlU6db4a+NE8WzN8rZnfUk3xZt3KM2jscbBzRNLCyjBXGPM6WYvGSMqo8m1xMAZvu
- NI52xs4E29uZzObYoeErRnPO0ChetaqXq35tBM=
-X-Google-Smtp-Source: AGHT+IHxzDG3y35ok6PvS99WXtmV/qqdeg+GKzdsWid+UH1RYiy1JFTz89d3shcF9s405A+u/amr3w==
-X-Received: by 2002:a05:6820:f029:b0:65c:f9c1:cb9f with SMTP id
- 006d021491bc7-65d0ea9d732mr21278001eaf.34.1767365233777; 
- Fri, 02 Jan 2026 06:47:13 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65d0f69ae7esm25345267eaf.9.2026.01.02.06.47.12
+ d=1e100.net; s=20230601; t=1767365240; x=1767970040;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JnaDYBxAOL7Ni3vlunTq2q7tJElZjhw8iEeQsFbkXo8=;
+ b=Ol6qKiO4U3m4HeBUECn4lx09kFr1i+3ZTFlNhDacWPl6XX1vYRMNoIEGvbWAc81sWd
+ mT/iHqyUJvIvOA/b8zin/oFWTndmTFRt79tJzkevfKtusOKCuIOrVJXpX5oESOgSrslm
+ 25dxR64zNP/9X7RXGNF8lVdGesz32hyk94TnHYorJEH/mt+QNNxnvImFksNY1ASRirSf
+ QF+IQyFS87vIzH/ucGYdZT5THBOjExo7nAah0+x/AqTPW4/GE1Fq6IJhsCzQ2nhoxTmY
+ Zt+g2e/Uv9nupM8YXfkU50lrEDr7t4Tck7oHjONEo3D2hXkA+W4d2YKfbmxB6MriZHzy
+ VfUw==
+X-Gm-Message-State: AOJu0YzotMIFruc0xUO2qQKHV601a8i0X9BslZVkhMS+d7DCwu4hpLfr
+ Rj+dXf7cIE8Z6HrZSQsqX4Abe1roQJkDOP/mqz7kGNJ+/sk4YYa3eCgJoXGXUMGOtq+ml7aYLu7
+ j0YDVwhAOa9y3dCDdDQobPxElHsmqVzpUlC5Y7j1NlXw3DAOPJwGTv+cp2fS19Tz/P3yjNNQ=
+X-Gm-Gg: AY/fxX7Z8O0NcGgI7ELxLR2zqxZ/v7Ij2aysscwXD1MKYyb9QFvG26Bl5ZmGqJmhHyQ
+ 4VWYMNE6CL9dMhQfx2R/ARYZ9IeSkc3LKjriOD/MhIrkD5HYDHsnoMjNw8CJjXW5iVPszIr9rdt
+ owqWOVW1MNv5mud+3Na6YMW386FpUXZ4R8WMRcsne3Xxz+/KMJEk45hoWBM3WLovH9tIVL0u2na
+ yvH7VA3YHOe8KQtG2kEI6jFRhp7UW81/qRGldoBs2tfi+aWsI4w4/ngUDNqxdOuwN+OrFjR9TkQ
+ dAN4icU6RJ54EbLmQ4CE86lxMABH1h/Y5BqvxA3MCAFWhatopLLeMpL+fuHXAv3yoaOuu2dhYQT
+ NZNXsyjkrbs6+RywByMEKnCwNSw0WrtXqSPyAtQfvPo6RJi/k2RzdYvZ401Lq/S6BCl+1JQA47X
+ MA
+X-Received: by 2002:a05:600c:45c8:b0:477:8a2a:1244 with SMTP id
+ 5b1f17b1804b1-47d195558bemr486487715e9.11.1767365240583; 
+ Fri, 02 Jan 2026 06:47:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGmtS68b7D3JUkiKQjKcLuYcAZ657f45A5nRXfotv8FuYbvGGw5aUTH3FaDolLZhnFP7ILAKA==
+X-Received: by 2002:a05:600c:45c8:b0:477:8a2a:1244 with SMTP id
+ 5b1f17b1804b1-47d195558bemr486487485e9.11.1767365240203; 
+ Fri, 02 Jan 2026 06:47:20 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4324ea82feasm85749911f8f.24.2026.01.02.06.47.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 06:47:13 -0800 (PST)
-Date: Fri, 2 Jan 2026 08:47:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Beleswar Padhi <b-padhi@ti.com>
-Cc: afd@ti.com, bb@ti.com, anshuld@ti.com, hnagalla@ti.com, jm@ti.com,
- nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3 01/11] spl: Use FIT data address as fallback when
- 'load' property is absent
-Message-ID: <20260102144710.GB6124@bill-the-cat>
-References: <20251231173621.1069988-1-b-padhi@ti.com>
- <20251231173621.1069988-2-b-padhi@ti.com>
+ Fri, 02 Jan 2026 06:47:19 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] usb_kbd: remove match string
+Date: Fri,  2 Jan 2026 15:47:15 +0100
+Message-ID: <20260102144715.185656-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1t8jBBG+VWA4R3mw"
-Content-Disposition: inline
-In-Reply-To: <20251231173621.1069988-2-b-padhi@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,86 +111,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot has added a compatible match string "usb-keyboard" to bind the
+USB keyboard driver. But this compatible string is neither used in U-Boot
+nor defined in Linux.
 
---1t8jBBG+VWA4R3mw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+USB keyboards are identified via a USB interface descriptor or via USB
+vendor and product IDs both in U-Boot and in Linux.
 
-On Wed, Dec 31, 2025 at 11:06:11PM +0530, Beleswar Padhi wrote:
+Remove the superfluous match string.
 
-> In cases where the 'load' property is not defined in a FIT image node,
-> fallback to using the data address returned by `fit_image_get_data()`.
-> This enables FIT images to omit the 'load' property during FIT creation.
->=20
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
->=20
-> v3: Changelog:
-> 1. None
->=20
-> Link to v2:
-> https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
->=20
-> v2: Changelog:
-> 1. New patch. Add support to load images without 'load' property.
->=20
->  common/spl/spl_fit.c | 16 +++++++++++++++-
->  1 file changed, 15 insertions(+), 1 deletion(-)
->=20
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index a588d13eb40..c18c98b2959 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -803,6 +803,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_im=
-age,
->  {
->  	struct spl_image_info image_info;
->  	struct spl_fit_info ctx;
-> +	const void *fit_image_loadaddr;
-> +	size_t fit_image_size;
->  	int node =3D -1;
->  	int ret;
->  	int index =3D 0;
-> @@ -893,7 +895,19 @@ int spl_load_simple_fit(struct spl_image_info *spl_i=
-mage,
->  		if (firmware_node =3D=3D node)
->  			continue;
-> =20
-> -		image_info.load_addr =3D 0;
-> +		/*
-> +		 * If the 'load' property is not present in the image node,
-> +		 * use the FIT image's data address as the fallback load
-> +		 * address. This allows flexibility in omitting the load address
-> +		 * during FIT creation time.
-> +		 */
-> +		ret =3D fit_image_get_data(ctx.fit, node,
-> +					 &fit_image_loadaddr, &fit_image_size);
-> +		if (ret < 0)
-> +			panic("Error accessing node =3D %d in FIT (%d)\n", node,
-> +			      ret);
-> +
-> +		image_info.load_addr =3D (ulong)fit_image_loadaddr;
->  		ret =3D load_simple_fit(info, offset, &ctx, node, &image_info);
->  		if (ret < 0 && ret !=3D -EBADSLT) {
->  			printf("%s: can't load image loadables index %d (ret =3D %d)\n",
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	expand the commit message
+---
+ common/usb_kbd.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-What's the IH_TYPE here? Saying to use something in-place is not always
-safe.
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index 36107a3b278..29b01a85955 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -690,15 +690,9 @@ err:
+ 	return ret;
+ }
+ 
+-static const struct udevice_id usb_kbd_ids[] = {
+-	{ .compatible = "usb-keyboard" },
+-	{ }
+-};
+-
+ U_BOOT_DRIVER(usb_kbd) = {
+ 	.name	= "usb_kbd",
+ 	.id	= UCLASS_KEYBOARD,
+-	.of_match = usb_kbd_ids,
+ 	.probe = usb_kbd_probe,
+ 	.remove = usb_kbd_remove,
+ };
+-- 
+2.51.0
 
---=20
-Tom
-
---1t8jBBG+VWA4R3mw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVfabgAKCRAr4qD1Cr/k
-CgMdAQC2Xxjrte/iB2Rc6iFVlytampm9YVGhTHEnFgMpFLJtmwD/cG9f7TctuDJ+
-IBV1V6/mrnGluIFzy3i8zLMjL8UjNgU=
-=hR35
------END PGP SIGNATURE-----
-
---1t8jBBG+VWA4R3mw--
