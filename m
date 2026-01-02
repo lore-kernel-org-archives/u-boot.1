@@ -4,85 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D72FA3751
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:14:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C171AFA3729
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94B0484228;
-	Fri,  2 Jan 2026 16:14:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4EBC98427F;
+	Fri,  2 Jan 2026 16:15:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s9vCigPz";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OEqbgsLr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 447528426C; Fri,  2 Jan 2026 16:14:25 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B372384280; Fri,  2 Jan 2026 16:15:55 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24C468399B
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:14:23 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-3f0cbfae787so10257065fac.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:14:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767366862; x=1767971662; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=T5R5v9TtpFZQofxMQjzt9lgXjtJvUz6fP+HJopHwXOo=;
- b=s9vCigPzCaULu0igbxOHir55IEzGggldv+URlOf2d1+vyXyy27x9RwWacWhz4VD1i4
- rBK8z29ojmkY4x/rKJy3mn73OvPkxKRb5SXfY1DXrpRY5MEGfX86jnMg1KfO01FxMN3f
- tg/xOvSspb/emmA1B+MJuptMGTO1ZHFhqH+bE=
+ by phobos.denx.de (Postfix) with ESMTPS id 5BF4E84255
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:15:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id F21473F5A1
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:15:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1767366953;
+ bh=nUR0y7X9sft5DMemPALEDh9JDsqLOfOgU92BZNduaGc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=OEqbgsLrm2b8M2InfO5h3n51+U4R9cE5m3eoBYRaF+09TsQCOC2ZpJDHr4ez4Dy3f
+ fdGeN/zwiEIzdPeH0Sy4h1vOt1Un1dE1npurI8HQwmbFFp8rtzlQCneAEIK4Y3iwAV
+ kak42otWwrqne9f13e+J4sxoRsv3+/Gxi6MmVO1cnlylECWl3kGIHf5wCz9fvn7IzI
+ n8azd0h9+DUo9S3Vg4DbsIzmfGXaAlgPQ6JgGgO/MUG11HfaEpMyEzbpKar8hgR+h8
+ w8fcqA9ISpbjmZxOqbD1RQ02wVH2N2V9ca1q+CRt2uk0fMwHLytKG8qhsu81kpDd/D
+ Sdyz3P+kViO386GugFaVZd1SiC9rj5lBFdksQeRFdbYAeW7q7TaYEf81o4T8g8y9Ry
+ iZTMMj0lk7LGhhdzvcadojAP2CbY4mtgn8oBY/CouUxjOO0ux7Pczs1R4QTRXwuWtv
+ AB6UPNybWFgdM0TgvbHKsEGseEYIzT3kBySm4f4LaAq79vnd4xS1hykhjEnZPcwW8N
+ 27+cKd0vL4N5vkJErrASrF4LgluH1SB+mYBg57PW3OgN3eC9UurWXsMga+KYWISFU3
+ L2uk5sf/OgyTmLXH9Trxh3k35E2RllSlnNSGpXWl68pyDGvcPoBuIowAxeHJ4lnfb/
+ a0DwqrSzwEE5TZLyo26urRiE=
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-430fcf10280so8690206f8f.0
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:15:52 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767366862; x=1767971662;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T5R5v9TtpFZQofxMQjzt9lgXjtJvUz6fP+HJopHwXOo=;
- b=wqlx0DqjomGxP+dN6QYRhCd+QKh+3pL9p3EGy97jsC5P+bUsXNok2MLcd4T6L1zLLk
- urPJbWOY7evhLMkwP8Q8QkKjkF6JgPFuOM2l8qyLssKfCBCgs8d0FDEolAOYLL+fyQ5k
- 6gDzJt6cxA62T1/ljsvi/sLhDMep2Objd6ovdIoiu/i/4oLXjjV0I4cAc1CtNGvZwus+
- N61SXcFxwiNZHt/5kD9h4ojWMceeuVJCr71iATRujT25BGDzNJ77fjwPvYf5d0U4mle+
- 1mTZRfbWSLd6ylaXTJ2cz5SIfaXBt66zCpdd2Z0c/LEWTkqI1ifguYn/VudW4MMNKhMA
- hVpA==
-X-Gm-Message-State: AOJu0YwWxu6Zl5ssPStsD/rmeMqiwva951vFqr8GqSWc6MhhwKZHH+P5
- 0GT3JKhzZogwWwcCMrW+MJtW82vQV5q9ayAGinuGufRlcGz0AhginlLnUkWspUyf5dDZZaPzQfK
- Qsn5WqGM=
-X-Gm-Gg: AY/fxX6TpQDoBNZpE1m5zd4dUA+DObLT6pYTZId9N/wbxCzwalDota5pAYXisvmStZB
- ssy9RvTDvq9dmMLs1OnnZu7I4V6PlnKPgK12FOi0GemLeKtD7FF8mNhSsCo+OpZV9Ml/IjzGkUv
- MpjL8gfGOlrZCeWYqscEEBaBVvSihcvpe+IAM4mImNSZWp8ThxhiWrInqvlj90QgY7hgFxxxnZY
- BxOtYDnzWgOv3Vfzo9H1hcIeOMIGn2vZV4pe+qgNXzO+47OR9RbUIB7rWiOfxXWMe07H2ImWhGN
- CRxy2RmMZWL8w8Z+b2Rz7Hyev0Ip1FUGPd+0mMhVzj+qpKSlyUDyHB1tB0f26wCl/HhrlyPdck8
- 7uzF2EvJ0uY4iIoohya7RJ4QCB/bZw+FuR4BiI8cTFsZip5RBoqsjY5sbUrbE/HiDpx9t1KKNDd
- iXboemS5rW0wAQLi0XEwxoP2hBgUtZ0oYlZGQoG9lhbrR3ZsyJsxNP5n3SmpQ3N4EyLMDGSvqnX
- G92WTW996z147/JtH1wKSLbmsCoSKBBp5CZkoY=
-X-Google-Smtp-Source: AGHT+IHa9fIPn0qS4685zz3LWoqFTzH6raepI7bXg5FsFWZWDwI6QV3gEfPKFoNmrU/KVWs8Vo03EA==
-X-Received: by 2002:a05:6870:b529:b0:3d4:8741:edd3 with SMTP id
- 586e51a60fabf-3fda56949cemr23713484fac.20.1767366861762; 
- Fri, 02 Jan 2026 07:14:21 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa931b0esm26270668fac.8.2026.01.02.07.14.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 07:14:20 -0800 (PST)
-Date: Fri, 2 Jan 2026 09:14:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome@forissier.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] net: tftpput: Rework to exclude code from xPL phases
-Message-ID: <20260102151419.GE6124@bill-the-cat>
-References: <20251225153721.1217202-1-trini@konsulko.com>
- <47b1c881-07c0-4b8a-a344-6ed09ecd926a@forissier.org>
+ d=1e100.net; s=20230601; t=1767366952; x=1767971752;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nUR0y7X9sft5DMemPALEDh9JDsqLOfOgU92BZNduaGc=;
+ b=GXTKDC9oWMLBYOCgUFV0v/Sb145Qq39DnLUedEh1WE3SmmTRkEKhoWF8t5i2FIcS78
+ eLalusbr584Zy5nQXfQrMT4xlHcFbsbbkxI5gblw7agWyCKsChb774yAOeEkYnEIJnNo
+ uWDuZPIYVF4krY4jjIkAqQTz+kkKtAkA/48RtQj1VbcR60vqJ1IAxTxprKnChPsJDtvo
+ kVI1UPUyYk3zzzTiov2lGsTqNl/X1WhqeCiqzM9xFGaf6pjXoswOX7tDp5oop4raFEhx
+ BwhfU/t2Lnzx+KlpAsuzIhutwBv90/E6RjIleW4agUxX8+B6aZ95KJh/bElem9e8vYzg
+ QAMQ==
+X-Gm-Message-State: AOJu0YzWbD5dQspkKcTrCXUokYNMGAKHZ5eMoVx2m8yvpm0qmb8byBgH
+ Jajq8VXCCJECtoMsNK92kBnyYR9Id2qXvjIBklyBzcwCfyh2uN7TBRuuNQ6dZ9qM2N0ABq1TRy1
+ mtfbt70ET3pSrXjfBISx2affSwZ9vgi0rVTFHM53KvlH90/aqzvFD+L0E+DUXdNWUAm2ZHgk=
+X-Gm-Gg: AY/fxX6HVjpX83hSXjcS2vvXjNPektbdu5bU8r7YVERoja/Fe5+zj+IJrF/SgH4wIBS
+ v3D4HVTHXwI5lKAHBykT6lqLA9Y+dGmoI+dAjkFju92nE5xDBxBtGlyvu4RFqP8x6/NS83pKu9z
+ myB4UNA6WliFG6IxGtjpXzwSrETAcJFWHxsYaWpSDXKgkD5pJLRD7X2zfBOtk22Kx8c4rUD5usl
+ yCckfzROCuF99u7jxZzAt6hJJnSE088x9FwUxtKQP3nOyfqTc1RJIYb2aIJrQp7Ro0FSE2wdOI5
+ +/iwuxr2bBHO18h3kveRrTNxoFOf4FMJbs6TdPK+dE0ZhJamsMCZDPtsIQHARHIPmeaEmWAN/rs
+ mof9bz1V/rJ52d2F+equGgXyi1171WDJmilOch0ikfYJfX+c4CZd1u5wFQKFs0bT5SdILKY1Htp
+ qk3fJxRzQ=
+X-Received: by 2002:a5d:51cb:0:b0:432:7068:17d with SMTP id
+ ffacd0b85a97d-432706801f3mr28866870f8f.20.1767366952452; 
+ Fri, 02 Jan 2026 07:15:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGhmyj36XtRvu0NdYxti/4vxuhjc4YGP+B79COiel4yj5WpHyInmCkCqHweGSmp2JltC235UQ==
+X-Received: by 2002:a5d:51cb:0:b0:432:7068:17d with SMTP id
+ ffacd0b85a97d-432706801f3mr28866836f8f.20.1767366952009; 
+ Fri, 02 Jan 2026 07:15:52 -0800 (PST)
+Received: from [192.168.103.126]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4327791d2f3sm52393553f8f.11.2026.01.02.07.15.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Jan 2026 07:15:51 -0800 (PST)
+Message-ID: <18a3fe38-c6dd-48e2-9273-c6862b99b7c9@canonical.com>
+Date: Fri, 2 Jan 2026 16:15:50 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vxAmpkJcxeJbY5SX"
-Content-Disposition: inline
-In-Reply-To: <47b1c881-07c0-4b8a-a344-6ed09ecd926a@forissier.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] usb_kbd: remove match string
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>
+References: <20260102125622.144573-1-heinrich.schuchardt@canonical.com>
+ <da40c4d0-8c8a-4341-b779-96f571b7db87@mailbox.org>
+ <CALeDE9Oue=0L3PRVs7O8suPVDFBXL_i6o0hc50jLQ49HtaX2nQ@mail.gmail.com>
+ <67fefad5-ce05-486b-81f9-f28798195bc1@mailbox.org>
+ <CALeDE9NVNR8pA5G6um7p0CTmuQqmK4LWLoxj--jRKnBWJ5+dhg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CALeDE9NVNR8pA5G6um7p0CTmuQqmK4LWLoxj--jRKnBWJ5+dhg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,46 +121,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/2/26 15:50, Peter Robinson wrote:
+> On Fri, 2 Jan 2026 at 14:36, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 1/2/26 3:22 PM, Peter Robinson wrote:
+>>> On Fri, 2 Jan 2026 at 13:47, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>>>
+>>>> On 1/2/26 1:56 PM, Heinrich Schuchardt wrote:
+>>>>> USB keyboards are identified via a USB interface descriptor or via USB
+>>>>> vendor and product IDs but never via the device-tree.
+>>>>>
+>>>>> Remove the device-tree match string.
+>>>> The commit message is wrong, you can actually describe USB devices in
+>>>> DT, see e.g. Linux:
+>>>>
+>>>> arch/arm/boot/dts/st/stm32mp15xx-dkx.dtsi:              compatible =
+>>>> "usb424,2514";
+>>>>
+>>>> Documentation/devicetree/bindings/usb/microchip,usb2514.yaml:          -
+>>>> usb424,2514
+>>>
+>>> I think there's nuance there because I think those USB hubs at times
+>>> can have a GPIO to control power or something like that and hence the
+>>> compat.
+>>
+>> I can imagine laptop keyboard can have the same thing, either for power
+>> regulator or for backlight under keys.
+> 
+> To date the backlights have been controlled under different
+> interfaces, at least on the Lenovo laptops, the Pinebooks (the only
+> laptops we have in U-Boot) don't have fancy interfaces like that and
+> the power buttons are some times different GPIO buttons.
 
---vxAmpkJcxeJbY5SX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Looking at https://gitlab.com/CalcProgrammer1/OpenRGB/ the protocols 
+used to control keyboard backlights vary a lot between vendors.
 
-On Fri, Jan 02, 2026 at 04:12:41PM +0100, Jerome Forissier wrote:
-> Hi Tom,
->=20
-> On 12/25/25 16:37, Tom Rini wrote:
-> > Given how the support for CONFIG_CMD_TFTPPUT is woven through the
-> > support for the tftp protocol we currently end up including "put"
-> > support in xPL phases, if enabled. This in turn can lead to size
-> > overflow on those platforms as xPL tends to be constrained. To resolve
-> > this, use "CMD_TFTPPUT" in the code to check for both CONFIG_CMD_TFTPPUT
-> > being true and not being in an xPL build phase.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Jerome Forissier <jerome.forissier@arm.com>
->=20
-> From now on, and pending discussions with my new employer, I'd rather use
-> my personal email (jerome@forissier.org) for open source contributions.
-> I've sent a patch to update MAINTAINERS and .mailmap [1].
+But anyway the vendor ID and product ID is used to identify the USB 
+keyboard and to look up which protocol it uses. There is no need for a 
+device-tree description.
 
-Understood, thanks! I wasn't sure what was valid yet and didn't want
-this missed.
+Best regards
 
---=20
-Tom
+Heinrich
 
---vxAmpkJcxeJbY5SX
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> I think, at least for what we support ATM, this patch should be fine.
+> 
+>>>> However, it seems this particular compatible string is ad-hoc and
+>>>> unused. I wonder if this might break some users like RPi which supply
+>>>> external DT and may depend on this support ?
+>>>
+>>> I've never seen the USB keyboards described in any of the RPi DTs
+>>
+>> OK
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVfgygAKCRAr4qD1Cr/k
-Cg7uAPwPJ9AtLc6zki6Cb+8jvkEjJRvEpokF/tffW+SkXeAXMQEA8rcWmdd1+uO0
-0ofT/mKpw34sXF3UrBeLV4p/N16jtw8=
-=+IiT
------END PGP SIGNATURE-----
-
---vxAmpkJcxeJbY5SX--
