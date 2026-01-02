@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CEEFA3751
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F1BFC6165
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 23:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4076183B30;
-	Sat,  3 Jan 2026 00:23:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CACDE842BC;
+	Sat,  3 Jan 2026 00:23:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F1xjXDJQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nFv207r3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D910583C30; Sat,  3 Jan 2026 00:23:48 +0100 (CET)
-Received: from mail-oo1-xc41.google.com (mail-oo1-xc41.google.com
- [IPv6:2607:f8b0:4864:20::c41])
+ id 15AA383B30; Sat,  3 Jan 2026 00:23:50 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C55ED83B7F
- for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01CD883AAD
+ for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 00:23:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc41.google.com with SMTP id
- 006d021491bc7-6575e760f06so3206445eaf.0
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:46 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3f0cbfae787so10508532fac.3
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 15:23:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767396225; x=1768001025; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767396227; x=1768001027; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I/6k3BhwblmHZNNpaiO/wKKZbztmVVRqT31oO+/R8s0=;
- b=F1xjXDJQ0hkO2Mo5R1vrgMe3FlV75Md3nF5vQipVfNnUW+p0QiejppoD4Dwch3eRPN
- 72x3mGZwVxN2Q9wYtJkFR2rLiXycjejwxq4ZldYfAP2dHfeqGxDeex4G1o4RRGAKbQ84
- q/EnDxEbBje3iIvdp4cX6/ExrlhL1jrhbL85w=
+ bh=jfsehgAlatI9e1rRhDVBxyKMnZuXB3EWlSCbhKcvqT8=;
+ b=nFv207r3Vbogi7zj8j0bqY89pdLEa7VCejXNsTjeMRVRnt6z032UqCmzIVkTmzmiLu
+ tSvast2F72ddMlrIvq07OqZ6AYWBWUi4BGIKn+rl81pXQX/hbowX5HAztEgaHxDusiiO
+ +aUUMEwcPTMt1LWPeWt92E9m7ZLuyhLDVUQ3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767396225; x=1768001025;
+ d=1e100.net; s=20230601; t=1767396227; x=1768001027;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=I/6k3BhwblmHZNNpaiO/wKKZbztmVVRqT31oO+/R8s0=;
- b=nDvbjpPx+pE87z6nHDpseYkRCzMekl2XLlp4UXfGdNNMlbyLAUatdogCwnzgAGc5Yo
- y6+nTZ4/UwM6mpaA3nWfYVC2ty/fy05DUOfA7dJUGYMN7/LAzL2GP7cygBfXeUZdio0b
- m4imtpoRNxprNypnmND2KPDHOXu3GDsVyV9Or5MY4ReyTeLI5hEg/TYlM4c8hNauYza0
- 1cfsOKRf1GQx+ij8feCJfjnuCmnqQssA2fzKZ02tX6VtmgRevIL9nnxaISsxMsy0NDM2
- jALj6WFD5osHoatjzi6VG9YIDqXIDrRfKfQbPCe2KpMDornBu/buXkfbEXxEHYdJriMk
- n1Ng==
-X-Gm-Message-State: AOJu0YzZHdDtECoUz6QVejML1GNV+l7GfNmuHfFXCkkk49RPuFUp221l
- l5ZVbkzcnZyoOsvIJxKU5xPSbUXxuqDlin84kPI8GW2RBZniUkkwPVEl89V0R4/sDY9jW0JkLCI
- iXrOFDM5Hog==
-X-Gm-Gg: AY/fxX7KNxklimslKJfj8ZTjhGfh1KIKFZltvG42J74qA+Nzl5ddp9HtCfQmomNhGHp
- jvvVYuBkkUBxmJ3XC1gqTwIRmD65+YqktERycbwOqqNKfihOia9RCnbqmT0/TVRs+WqPOvYyxLv
- NISdTgO4BNfu0vMuzUpgrYj3hNUyNZx74dEgzvSGgSeqWq/S+E/mdyesX/FF2b4rmtoQoQORtHs
- 95LPOI24uZKArXGup60isjcpWS5TK++jX3tw4pYEMk8NGQrzDmGPoExMYjN6Jdi7ekaartk/pzr
- RJ/V4XRfJp+kMqog9QRsZgD4i+ASGXR9q3yWQRuUyx2kBqy3ZxARJSvD+LEFUQ8cZWDoObfUnPU
- daAkVjVCoYqNAq7IKt5Dd/ab3XKkSGWFoSS1IRtH6ybQtxXJy7rb5LAuBMnubv9uviIBAq3R2Ox
- 6O5nchCbtCCpY7vPCsgbexnirtW8tNRtkX5VsDzWKDpmK+qKl0p7UaXyWRLKlcNVycklK/0ky5S
- aysJk/geg88FrWJDOB5LO3qtvfWZh8f8Q6Z7g==
-X-Google-Smtp-Source: AGHT+IFHaRAXeAM4yW3DQD//QXqDb2r/9YTDV3GH2ehWsUBbkOm4DoMWhhOQ6VVyHbvGkAfGyuG/Mg==
-X-Received: by 2002:a05:6820:6283:b0:65b:3480:6454 with SMTP id
- 006d021491bc7-65d0eaf27b9mr13036109eaf.65.1767396225555; 
- Fri, 02 Jan 2026 15:23:45 -0800 (PST)
+ bh=jfsehgAlatI9e1rRhDVBxyKMnZuXB3EWlSCbhKcvqT8=;
+ b=Iohf+KMtpjqITsewPzPTgz2p3H8ZQkm7gw536xjkSJGGrrsXh3Y0+CJ/njBksu9B89
+ wsHhEsop+SDPiS2bl9jp9Nf+zYgiv64PX/H0Sz4R+xcyAo61U5XbjE4qeFCc7I6BYg2w
+ Ru3MJMDrWfPxzJlBoFc9UxcTkHKl748nLNhKSQn91TM0ymwQbIeRwZnWBIlm6dSeY1cZ
+ A/pjaRG4AThZ8aU1UtdGwGd2x3Bs+7iq6/KVvHlH1rHviC9Z0FgHRGayHF8Y2920Q51U
+ wsGZ+eUX/QDMIci6qxnet1Tyv0mGe0VNW4/jCNuOSytRj+MUOQQdjtq7odc7OA8+wg1G
+ +xaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYZkJMwsCAG0CE0Uc0asAnQLfO7cnwQOSYS8/0hzvz1pKTwOa96ICcbxkQnqqUDCHNFToB3ww=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqZRpmLspActzsOvcQ6qlvi/EPcNo4vUFSOKYwePrPfleoPNLo
+ UzaJ7MjqUcocqdQXAY0oYfyOnyjfNgRy/x/38MaPR2MXK5JNT5ML1tF7IQGvkrPadjw=
+X-Gm-Gg: AY/fxX4jXKckWX1OY/75I+ZpbTaqKAbbuxCIRlQlvNYBP/UsO0glU7Je+yqYyEKKREL
+ eZuCnbk32maCxlnrW+wNk1fbACuRsRWVT4OsDOnHmr8wW35Xtac4Gag0z4IPbty8tqA7exVWTQy
+ Kye+DkP+MbXFfVPI9jj68BiGb0ieDqLAv56aFD8OzqHTuYOYzJeio0u3wjytgywHZ3oLk///i0S
+ GL3+nxet3fLsRcTUxgkpBniw4j4/Gil5Ap5Mz5XsJZpJtjhDdDbIjpOUU8R3RAifjPBMwYctIBT
+ /slnifzJEOeXiTsawS47rn5I7xxbi2Ap56PBtCQG2/DFdXbPYSY1WMnqz3dEZg9XSsTU4eD6Kpk
+ okpG1OOyDh6OGvX4mPXkPyHqBgt4jZIcmMr893OlciFz789qKVDkprAvy+loTn658OxJ1Gkov67
+ zS/ebxGcBQE3fnCV4oUQyCm4OGlRW6Na71rQEf6zyq7VOS8j0FnLYGTDT130Kf0VnJjs2hUDwIY
+ JL/XuxAKXSQBjePyYvTXKb+mJszK42Gs3vqsw==
+X-Google-Smtp-Source: AGHT+IGT/X2RrQ1H9qnYbRhBT5zx3NYQDJj9OKiX99ZpguIv91T/J2Dg7RdX/rUUmeaRXi5C6NRXvg==
+X-Received: by 2002:a05:6870:d10e:b0:3f5:4172:25 with SMTP id
+ 586e51a60fabf-3fda5924993mr21850151fac.58.1767396226632; 
+ Fri, 02 Jan 2026 15:23:46 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.44
+ 586e51a60fabf-3fdaa4e0d18sm24711983fac.0.2026.01.02.15.23.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 15:23:45 -0800 (PST)
+ Fri, 02 Jan 2026 15:23:46 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB28051D632021995D4D572411DAADA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH v2] fs: ext4fs: Free memory while handling errors
-Message-Id: <176739622474.296893.1791035801115848440.b4-ty@konsulko.com>
-Date: Fri, 02 Jan 2026 17:23:44 -0600
+To: Fabio Estevam <festevam@gmail.com>, 
+ Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+In-Reply-To: <20251216084532.613791-1-ghidoliemanuele@gmail.com>
+References: <20251216084532.613791-1-ghidoliemanuele@gmail.com>
+Subject: Re: [PATCH v1] toradex: tdx-cfg-block: add pid4 support for new
+ modules
+Message-Id: <176739622569.296893.9625293977807052788.b4-ty@konsulko.com>
+Date: Fri, 02 Jan 2026 17:23:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +102,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 15 Dec 2025 12:34:16 +0100, Francois Berder wrote:
+On Tue, 16 Dec 2025 09:45:28 +0100, Emanuele Ghidoli wrote:
 
-> If zalloc fails, one needs to free memory previously
-> allocated in the function. This commit makes sure that
-> we do not leak any memory.
+> Add new PID4 to ConfigBlock handling:
+>  - 0217 Lino iMX93 Dual 2GB IT
+>  - 0218 Lino iMX91 Solo 2GB IT
+>  - 0219 OSM iMX93 Dual 2GB IT
+>  - 0220 OSM iMX91 Solo 2GB IT
+>  - 0221 Verdin AM62 Dual 1GB ET
 > 
-> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] fs: ext4fs: Free memory while handling errors
-      commit: cec36b777a56b61c347447c12e61a9d1c425f396
+[1/1] toradex: tdx-cfg-block: add pid4 support for new modules
+      commit: edf95638e20c276f1eb8be16364fa5cce4793a2d
 -- 
 Tom
 
