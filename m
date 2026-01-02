@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72015FA374F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA1EFA374F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:12:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E35A78424E;
-	Fri,  2 Jan 2026 16:08:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 32D2C83A2B;
+	Fri,  2 Jan 2026 16:12:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="THYJQOjD";
+	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="AnppJblf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8816B84255; Fri,  2 Jan 2026 16:08:53 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 8FA1683A3D; Fri,  2 Jan 2026 16:12:45 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0229383A3D
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:08:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 535938399B
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:12:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=forissier.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-459993ff4fcso2148819b6e.1
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:08:50 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome@forissier.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-42fb0fc5aa9so4986651f8f.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:12:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767366530; x=1767971330; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vJaET/OkSW2AaZprVTLQIIaexjR4KIibpwnJfpbWer4=;
- b=THYJQOjDjyYNHB/n6tlmAchyyQs3iWe6dteb1z22Uu5y5VHGKrZGBhdcgythPKH5Yk
- Hhtap1/NCcZbwlnLvobVWu0MPf2ReLqsq60N04FBdDbOXJuMyvtbpL/0wczKnrWB8lo0
- +XI0Uh/e6gN5oGmu34a29RDIP7kkkJNh3LG8c=
+ d=forissier.org; s=google; t=1767366763; x=1767971563; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=RtxWkqbKc+fHoZt1W6zaC67cPyFCcGLyNrruO31BTt4=;
+ b=AnppJblfDZGTKESVIh1zcavprJBAN1FCAauVxl6B/gsXLNgR0xlcT6pQrifMAEQvRV
+ 3riTEsvREKnqij23ZeG3sA3va4ODH1t3CLN2EYtjo/AnzrvPGUdUA9fwop4/Gqcm98zj
+ IBT6HGdJKTWI0YZT2K8c2sZCxoWDLxG2iblG3V6nuUm+JoRoWSeYwOH09koiYizAIqqN
+ m2ubPy/bB6ro9oIVhS/hMGPZKXbePCqRHgzKJrym5YDN8hMJnXLJ6Wyec8xNCOtxEs7H
+ m7YJ9IzWpcT/3fylytDebOHdtF8EmXfeDIYLNTIfihpAy9TLaQOX+tNioMFjrSo9SYex
+ RdVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767366530; x=1767971330;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vJaET/OkSW2AaZprVTLQIIaexjR4KIibpwnJfpbWer4=;
- b=awYHBRM00eLGg6s1Yl4jdLtkI1XrSU7/YftNUKMQWBMyDJbGqC58HaiWV199YmlJZG
- WTHo+6dExBKdGGUZj+iDkDCg5mowt88sc47K/O43Lmuhx/1rPnQ4JHuc4UKO6M4QIEfK
- LWdpZMJCEYfWov5Sb7mfOZlcqUpnHVKwgif1xGY07xFzywhRC86Og+hWQZUUwiKVw4CV
- 1BiG32vCsLshdWXCujBmks1H+0rVqJ7kqyoPmd1DXUrASB6DuahxEzWvpTRg4PjFZzW4
- kshA721DFYQ7pNDV4XQhs8u1190+Zk3Y8419ojaR3EY1wXvHojWT8TVX1AIZ3+5xXeAt
- jroQ==
-X-Gm-Message-State: AOJu0YxBry2W7H6ChO99h90o7IrQSHplBoNUnpTONTs3WausXYI4+m5I
- 9Hhsgd2R7MZ+7F4tnWXkSfC6KeIfCe6EidxjE+6FC0d9LBuwcJtjYof//m4OM4Aoz3E=
-X-Gm-Gg: AY/fxX6MTdErR3JToQVwHE56YKgSwZ4WPxTGenNTB88w+aE8LgRrKHJK92aJHsA0e87
- UMPdwY9RQ9uqbl8MlJu36C6hgaf/VGigdPR9OW47/w6wk0fJQhuNlAFEiaAhQEN3YBiX8xGTaPD
- 0IF7Zxr5Kn8QuJa4U3T6J/yut41bLVYAZhUn8WE8InAj5NOd11C+1L2dAM4n0gs2EA6ZoU2TAUH
- McrsrJ/AWQZQOVBb+TIvPs+crmp8NcEHeuAb01w8biOvu9eIvibFtHGPHnF2LwEt8yW8TDWbcTM
- ZaDpfqOxcb8/1w1f1oSPRYjV7lbTO4nzTFKYtXtzNNxFkKxnFkKUifzQCRPfmD5JVP7+IWoqhDw
- pCY/FMdgE+vKsFWtFTbHcln28w+FaAT5VLhQyM2d6ubYqf9zhUacFPhZWs0p0xTxS2t1KF9fDIx
- X1W1PQBmnKstq1bTZLKRN2Jzy/aRxztK89ei0CNThkI9X0T2RsTD92I8Z6aOfKeYR0qgbXKMe5Z
- ju3r2u2eRd+qJVIY3AQE9cafvTKsf+AkavoRGw=
-X-Google-Smtp-Source: AGHT+IEn83LxxozEXVGuKWvnueHzw7CuamDnhk3N5MUQ0IfQ04qY2rMxb6ubM99alzc2vuUwpeE7OA==
-X-Received: by 2002:a05:6808:1485:b0:450:dce4:8e with SMTP id
- 5614622812f47-457b1fdcb77mr17454088b6e.37.1767366529619; 
- Fri, 02 Jan 2026 07:08:49 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-457b3ba4416sm19242657b6e.1.2026.01.02.07.08.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 07:08:49 -0800 (PST)
-Date: Fri, 2 Jan 2026 09:08:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: j.ne@posteo.net
-Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Peter Geis <pgwipeout@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: Re: [PATCH next] board: amediatech: Add X96Q support
-Message-ID: <20260102150846.GD6124@bill-the-cat>
-References: <20251231-x96q-v1-1-316d703b8f03@posteo.net>
+ d=1e100.net; s=20230601; t=1767366763; x=1767971563;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RtxWkqbKc+fHoZt1W6zaC67cPyFCcGLyNrruO31BTt4=;
+ b=gDDjeq5R9uCtX7+IvDm1S6Gwqwxeq8s+IhBVorlwh37gcSMO0Ur4XWxIgyKcFmVd71
+ y5Y11NOs4BzL8wpA7SlWeAYxiO66+yFYN050XnL2RRHLMADyhOnCDgvCdr0jfNskCFRd
+ p5wjyWekOWN6ZwIksEmo6iB4h83ovmygLs6FB0Nf/R55zSQI/ueEUxriloksuXritOj/
+ 4wUHBKrRH4PUdc3yV4KxsQnGnfVHqIFyjC8dZIOPNoyDAn/ZrODYg6ttL6ZizbydjWgk
+ qibApdBcL3GqwPmFgBbdX/blZ5h1TpDTfTIVRFB6oqNEsRFwcU6tbYInrtOsAF4wWpD4
+ IFeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6MAomczf/sQB6XEsiB4hFLheid6m9+bVLjs9j4PYcUXz0FxauzmfLE5ICB4OquXDGsPRaGRc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxw2BBz3pb62p4PF8NEImdPoFNA9UfTlieoSLeeDJcRj8S41sXi
+ ylMer44nAlXQ2mVHgV6HJk7FG8+cy8Sr5/U43Qy2QORVelocIXyhkM1wiHQ5BqB070TwrNGXPKI
+ 6jbWulMM=
+X-Gm-Gg: AY/fxX4o9v+OkZ0qCdurhFEH9OI7cq4EvExMrVrSulbsoNw5YJO/ISRS1ZLJlEMOQzp
+ dqX85VahfTUP8o3sG8K6ppih+uixT9SVo8r/Cz+ExFOjB6ixgL7Lgw4Z7wP9Rdsq+vqFKGoHdeO
+ 8IrwEWT2wY02rkv0O/E8KSpYz5eQID9WhMbFvYnymiHR6CO8pOZTxz/BJnEWnlhGr3pXwWvv0g8
+ 8s9K6gpASGuvXm8nmhRT3+QknioMWScIpoEcQqEndg9Zh2maSw9fpFn6HpM+gcJb02AviHpAnog
+ jkOVBj/tGczDiipjo/d/fmiieHDHx4ENiEDQFCDZsqIiZExr4IBLzfLSgR6TC7lPsVixbnFfZmw
+ Y0SFIh6e2xR8qyFk1iPl2+B5zaZ8Dwv5SVmAMbKP4v4owysdU8RbpTD1bjEL2R0zAa0p3Rb8Koa
+ 8dYOR9chvoYQzMFa3D+TP0AB8KbCcgkOvcvVMsMtkTywc/04d8e6S4pshTs+ulsBmktlY=
+X-Google-Smtp-Source: AGHT+IE7LqLf1DabWqhlcLwOx+3o/4skD1DLNTIPnwJ4TZ1qNbQzVrbzoTa2p6RcTevvzXHVITNVQA==
+X-Received: by 2002:a5d:64e8:0:b0:42f:f627:3aa7 with SMTP id
+ ffacd0b85a97d-4324e4cbc6emr44882332f8f.16.1767366762765; 
+ Fri, 02 Jan 2026 07:12:42 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093?
+ ([2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4324ea830fesm86108785f8f.20.2026.01.02.07.12.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Jan 2026 07:12:42 -0800 (PST)
+Message-ID: <47b1c881-07c0-4b8a-a344-6ed09ecd926a@forissier.org>
+Date: Fri, 2 Jan 2026 16:12:41 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZJD73//wcVL4shxq"
-Content-Disposition: inline
-In-Reply-To: <20251231-x96q-v1-1-316d703b8f03@posteo.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: tftpput: Rework to exclude code from xPL phases
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20251225153721.1217202-1-trini@konsulko.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome@forissier.org>
+In-Reply-To: <20251225153721.1217202-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,67 +104,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---ZJD73//wcVL4shxq
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Dec 31, 2025 at 08:45:03PM +0100, J. Neusch=E4fer via B4 Relay wrot=
-e:
-
-> From: "J. Neusch=E4fer" <j.ne@posteo.net>
->=20
-> The X96Q is a set-top box with an H313 SoC, AXP305 PMIC, 1 or 2 GiB RAM,
-> 8 or 16 GiB eMMC flash, 2x USB A, Micro-SD, HDMI, Ethernet, audio/video
-> output, and infrared input.
->=20
->   https://x96mini.com/products/x96q-tv-box-android-10-set-top-box
->=20
-> This commit adds a defconfig and some documentation. The devicetree is
-> already in dts/upstream.
->=20
-> The CONFIG_DRAM_SUNXI_* settings are chosen such that the register
-> values in the DRAM PHY's MMIO space are as close as possible to those
-> observed when booting with the preinstalled vendor U-Boot.
->=20
+On 12/25/25 16:37, Tom Rini wrote:
+> Given how the support for CONFIG_CMD_TFTPPUT is woven through the
+> support for the tftp protocol we currently end up including "put"
+> support in xPL phases, if enabled. This in turn can lead to size
+> overflow on those platforms as xPL tends to be constrained. To resolve
+> this, use "CMD_TFTPPUT" in the code to check for both CONFIG_CMD_TFTPPUT
+> being true and not being in an xPL build phase.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Signed-off-by: J. Neusch=E4fer <j.ne@posteo.net>
+> Cc: Jerome Forissier <jerome.forissier@arm.com>
+
+From now on, and pending discussions with my new employer, I'd rather use
+my personal email (jerome@forissier.org) for open source contributions.
+I've sent a patch to update MAINTAINERS and .mailmap [1].
+
+[1] https://lists.denx.de/pipermail/u-boot/2026-January/606610.html
+
 > ---
->  configs/x96q_defconfig         | 46 ++++++++++++++++++++++++++++++++++
+>  net/tftp.c | 31 ++++++++++++++++++++-----------
+>  1 file changed, 20 insertions(+), 11 deletions(-)
 
-This needs to come from "make savedefconfig" and:
-[snip]
-> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=3Dy    # DDR3 is correct, but vendor ub=
-oot mentions 600 MHz DRAM CLK
-[snip]
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D60   # os =3D 0, uboot not de=
-tected
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D61   # e59f002c e5810000 f57f=
-f04f f57ff06f (4a0000cc)
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D62   # a9431e66 a9442668 a945=
-2e6a a946366c (4a0002cc)
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D64   # 52800000 91008081 7940=
-0025 34000080 (4a0006cc)
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D96   # 340007c0 f9401673 eb13=
-02ff 54000760 (4a006acc)
-> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D112  # f9003fe0 f94047e0 6b1c=
-001f 54fffcc0 (4a0162cc)
+Reviewed-by: Jerome Forissier <jerome@forissier.org>
 
-If this information is useful, it needs to be preserved in the docs.
-
---=20
-Tom
-
---ZJD73//wcVL4shxq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVffewAKCRAr4qD1Cr/k
-CqztAQCG95YS3zB55cnq/jSUBJRaaeppw6pqhWdiBB6jiSTSpgEA8Rmg22q7OyT0
-UnObucy5nrZ51DlttOxiE4d0aftZzgY=
-=kd2a
------END PGP SIGNATURE-----
-
---ZJD73//wcVL4shxq--
+Thanks,
+-- 
+Jerome
