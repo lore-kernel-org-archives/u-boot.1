@@ -4,90 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709CCFA374B
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3063FA3748
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBF5184253;
-	Fri,  2 Jan 2026 15:55:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A0D584258;
+	Fri,  2 Jan 2026 15:59:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KadlOKAu";
+	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="h3flVOyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 632C984255; Fri,  2 Jan 2026 15:55:20 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 4CA5E84255; Fri,  2 Jan 2026 15:55:15 +0100 (CET)
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [IPv6:2a00:1450:4864:20::442])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F74B8424E
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:55:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8DE68424E
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:55:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=forissier.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c7503c73b4so6595447a34.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:55:17 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome@forissier.org
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-42b3b0d76fcso6930216f8f.3
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:55:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767365716; x=1767970516; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RUWDxmt4Ei/JOBa4yClbpFLlILePCjFQSPok5VVPiXk=;
- b=KadlOKAuqz+DIQEVwvdmnOfTvj2T5RaH9JwJyc5XQ5sNw6mWT5Hp1WqbMaSOiWhGI/
- WRQ2x5eGCYTqtNyXRARf6F9kQmAHqbKzAKsD1D889AC/6qYSY02lSY3y8GGZTQ0fOZZM
- /GbaKJzOh4QYCCZB6oqU30kYq6Tb2kXtihC08=
+ d=forissier.org; s=google; t=1767365712; x=1767970512; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R8hzba2MVleTXDZJYgXBrfeQsE0VfWLtFqOqOij2Kmg=;
+ b=h3flVOyR1GdZCQVEdzbOIq8+dQ7KsW4pa5wYn1Zzv5ijltsk8SmnQAiK7VJPw5ZebW
+ W4j7EvuJMNwu8L69oolHmCJqyP2AWmzU4GtHb4EYpSkbVZLgFNpOz7ZY03C91S6lKynW
+ betOTIGtr7aRSLp8nD2lSgigt9uSe+h9VQ5VEa+WOeUXpxMbtvgrSAAwTiKmo4eNEBOs
+ yY4fOOzdd0+G7L9CVSV0MllEWlVIaJgyhPYxXJgMTAmoqlyutrsH9U+Auq4kWv2pzZfK
+ nS2eYwghi3SHH0KSaqBknlYv+eI2VVJ0OPIzMVsJ2Uw5U+rLxDAarWigKwbUAoW2yMsF
+ 4hIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767365716; x=1767970516;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RUWDxmt4Ei/JOBa4yClbpFLlILePCjFQSPok5VVPiXk=;
- b=YEhd8LHgX8UqNCABk6Xz5YEKTlSQNid8NgrSS6Ygxwzq8eIvNQI8w/Wlk3y3ErL6P6
- LF2Za+3xGtCxmBAli1L13royOQkKogXeZNPH01HIZN/TchlRAbi1TwAqAL/pLQ89ipEQ
- XirG4XFtPkL0G126/p81aW6tOqX8yHhTJ7XnN0N6hE4RaJ7rVF7uKs1SYVz9AM8zJN7A
- rOca2a4W62bFapwH2BApcwjJkIlaGo9+mL1AgXZHW5V6Ap0kVA3n/fMeWdFKf3L/b+Bb
- t1RYtDReG232OQuYQJPgsAa8otYqYTJNmHVAeF+NW2T3hXEoNt3z+K0M0pxwRr4YVWUL
- hJfA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDdiSLjdNTnnA7fKvqtc/fndwnjYoxxNQfFVkBO+ESgpzmsw9jEkKFDz99+dCui/jcsRfdoNI=@lists.denx.de
-X-Gm-Message-State: AOJu0YypmvCQK2u5t5kV7HiYrakSWrEJvzwN25hbeLTop3dVBxVYzRt4
- 96YOIoQ0LEfVOyOx6zmWnQG7Dl07rn9as73VsoYL1tFyrigU+yR4VNiN9Up+DmdHCtE=
-X-Gm-Gg: AY/fxX7y9Jj6m5vU11iKzcHN/gDoC/e2Js6L6SUtTdUNpoDmt9tcxM5qD+LOIi+YXgg
- rl5mgTiRqxJ4XRCrQY89XmSGEmUYGG/IK5xdHllmdIv0uVgErh4C3uMXu69hXAWXDf5NY/s+vb5
- mWdpH9yXy3e56ONYjlUqF4tTLjQ2Y1Absey4UW6Nx7kl3CU0OV0PZx+p9WplYvVIjFAOQxszD/9
- vYe9lSXJviJc01hukQm35ZxVUhw3EdZQqG+MnfuBlgOsV8epYcry/w3ikMzIp8swVyos9diK+kM
- 4nqzkJN2tP0UFxNwLpL/ut//YMwKlrtSHb2wApVRBa2+B/oq6xsIzTBiV65AlNPGqoqQmuQTV/c
- dmDhgGiAD2/crVgxHNqMm7FqyMaoIuZLNOYcTmsxgoPBoylUecSrPxK8EaHadN7iGNyU1HlxjL2
- g1u4x3UTteqUz2aUzwGrtB/odsY0sdiKvIdUPCD2ecY2zWW0I6KSOjtsWn7IWHHZP1pFZrIeJz2
- mJf2v/8ppW96pFmjcpyZy/BFfuuo5I0ccRmAEA=
-X-Google-Smtp-Source: AGHT+IHONAMd00V5eR4pvjEc7RPuGPwVPFVxhz9Z4/BlGHIyn0g3u3JlP6+EWT2nB+RVQ4/y6rcAYg==
-X-Received: by 2002:a05:6830:91b:b0:743:8af2:1af7 with SMTP id
- 46e09a7af769-7cc66a026fbmr22108579a34.23.1767365716095; 
- Fri, 02 Jan 2026 06:55:16 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cc667f9468sm27852114a34.28.2026.01.02.06.55.14
+ d=1e100.net; s=20230601; t=1767365712; x=1767970512;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R8hzba2MVleTXDZJYgXBrfeQsE0VfWLtFqOqOij2Kmg=;
+ b=NxLzJXS3z4m9IaLU5srQ816tXwOz2CiWIov2HSh6pjMD5LuU8UStJT91JGZcScxgT5
+ LJTsZ9hEoAPNlE9NEQ+iZstYsdb18C2edimPqe4OCMaISN0qQACNvMud2SjgIwPEiVmn
+ hlHMzPRE86o5C8aqf4FRkzu7b0NR61LWz957HzQchv+WNsrlHUzdxXh60BNFRDqTd1hM
+ OQXhLmz2sP3D5mbkxxQ/rga/ga6v3TVZI/M52jPkAOkGPm3X2r4zNTbZoIhc5/BceO4B
+ 6SHXZuJdN7Bsu+A/TCPrrpeIw1PK196JjNlKv2l8yrKOvv7+pohwL9i8T27ZXgCiDkrX
+ vRRQ==
+X-Gm-Message-State: AOJu0YwyDn3+Zun//lWmcQMmqPmyrZ9FQ98R5xlIpMZFW6dKwz5beHbg
+ aqkZUEY1G1Z6RJaDxa0vkK86jCjDfec1nsU+aG3UdzArEXpl3vVh/tuI7HR90UvvBUDYuWifEwp
+ HNOPYzmA=
+X-Gm-Gg: AY/fxX4qToCuBk37gFmOVzVocJBnBOXInsMip0z4SL35cMrySlHolVe4Uub3yx702mc
+ cSlpg1NRsS5MD2OTCQCaMOenFhCqSF/VERwKPmjHvS0FCW32t6FSQxb7XmmKU9Xlf76TRLE0rDm
+ fc2jIFtNyr/3ANMiL7om/m3ISNmriiWo5Gl91neV7vYkqiHZyfgx6g2XBtZE2FdXDNPoj683tgb
+ krT34ij+8og2H8fFbtVemDUNMvPD0AUY0GlVLttU4ABuR0BKwASTT/9/tDNzwIhPVpEmRc8alFc
+ ivMDUpu9+3aFOTKmuSXJG40ITVTBOaneREHK+5zlYkxxERqxf2hIZQFcAr2dqR2tPv6M90u5s3P
+ Ur6greCG7oTmzZaTNaqnpvII45a9/cElNFA0xzwnNsmaPyzI20/VdP7aPDpHpvsbS0S6MPjix4k
+ qBXeHZiKRV
+X-Google-Smtp-Source: AGHT+IFrbhZoJ1zzTP/Uid7ISrzO08XMq1kfjm3Yv3k0zjmdpAIRgfsGrqJLGcOhNIb5I72EQFihbA==
+X-Received: by 2002:a05:6000:186e:b0:432:86e1:bd38 with SMTP id
+ ffacd0b85a97d-43286e1be04mr29855828f8f.39.1767365711569; 
+ Fri, 02 Jan 2026 06:55:11 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:21b:21ff:febc:b336])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4324eab257asm85794529f8f.38.2026.01.02.06.55.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 06:55:15 -0800 (PST)
-Date: Fri, 2 Jan 2026 08:55:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Beleswar Padhi <b-padhi@ti.com>
-Cc: afd@ti.com, bb@ti.com, anshuld@ti.com, hnagalla@ti.com, jm@ti.com,
- nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3 01/11] spl: Use FIT data address as fallback when
- 'load' property is absent
-Message-ID: <20260102145512.GC6124@bill-the-cat>
-References: <20251231173621.1069988-1-b-padhi@ti.com>
- <20251231173621.1069988-2-b-padhi@ti.com>
- <20260102144710.GB6124@bill-the-cat>
+ Fri, 02 Jan 2026 06:55:11 -0800 (PST)
+From: Jerome Forissier <jerome@forissier.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome@forissier.org>,
+ Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Chen-Yu Tsai <wens@kernel.org>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ No generic patch CC mail please <noreply@example.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH] MAINTAINERS: update my email address
+Date: Fri,  2 Jan 2026 15:55:00 +0100
+Message-ID: <20260102145504.3222666-1-jerome@forissier.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IV8jd8HaYctWYL7n"
-Content-Disposition: inline
-In-Reply-To: <20260102144710.GB6124@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 02 Jan 2026 15:59:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,94 +115,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+My linaro.org email isn't valid anymore. Use my personal email instead.
 
---IV8jd8HaYctWYL7n
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Jerome Forissier <jerome@forissier.org>
+---
 
-On Fri, Jan 02, 2026 at 08:47:10AM -0600, Tom Rini wrote:
-> On Wed, Dec 31, 2025 at 11:06:11PM +0530, Beleswar Padhi wrote:
->=20
-> > In cases where the 'load' property is not defined in a FIT image node,
-> > fallback to using the data address returned by `fit_image_get_data()`.
-> > This enables FIT images to omit the 'load' property during FIT creation.
-> >=20
-> > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> > ---
-> > Cc: Simon Glass <sjg@chromium.org>
-> >=20
-> > v3: Changelog:
-> > 1. None
-> >=20
-> > Link to v2:
-> > https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
-> >=20
-> > v2: Changelog:
-> > 1. New patch. Add support to load images without 'load' property.
-> >=20
-> >  common/spl/spl_fit.c | 16 +++++++++++++++-
-> >  1 file changed, 15 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> > index a588d13eb40..c18c98b2959 100644
-> > --- a/common/spl/spl_fit.c
-> > +++ b/common/spl/spl_fit.c
-> > @@ -803,6 +803,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_=
-image,
-> >  {
-> >  	struct spl_image_info image_info;
-> >  	struct spl_fit_info ctx;
-> > +	const void *fit_image_loadaddr;
-> > +	size_t fit_image_size;
-> >  	int node =3D -1;
-> >  	int ret;
-> >  	int index =3D 0;
-> > @@ -893,7 +895,19 @@ int spl_load_simple_fit(struct spl_image_info *spl=
-_image,
-> >  		if (firmware_node =3D=3D node)
-> >  			continue;
-> > =20
-> > -		image_info.load_addr =3D 0;
-> > +		/*
-> > +		 * If the 'load' property is not present in the image node,
-> > +		 * use the FIT image's data address as the fallback load
-> > +		 * address. This allows flexibility in omitting the load address
-> > +		 * during FIT creation time.
-> > +		 */
-> > +		ret =3D fit_image_get_data(ctx.fit, node,
-> > +					 &fit_image_loadaddr, &fit_image_size);
-> > +		if (ret < 0)
-> > +			panic("Error accessing node =3D %d in FIT (%d)\n", node,
-> > +			      ret);
-> > +
-> > +		image_info.load_addr =3D (ulong)fit_image_loadaddr;
-> >  		ret =3D load_simple_fit(info, offset, &ctx, node, &image_info);
-> >  		if (ret < 0 && ret !=3D -EBADSLT) {
-> >  			printf("%s: can't load image loadables index %d (ret =3D %d)\n",
->=20
-> What's the IH_TYPE here? Saying to use something in-place is not always
-> safe.
+ .mailmap    | 1 +
+ MAINTAINERS | 6 +++---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-Looking at the rest of the series, and then going back to v1 and:
-https://lore.kernel.org/all/b6bc14fc-c823-4376-939f-2c0e6b120a2c@ti.com/
-we're IH_TYPE_STANDALONE which *does* require a load address (see
-boot/image-fit.c). You might need to look in to a new type or see if
-another type is reasonable, that doesn't already expect a load address
-set.
+diff --git a/.mailmap b/.mailmap
+index 7b0d730b618a..2fe12e76d0c8 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -69,6 +69,7 @@ Jagan Teki <jagannadha.sutradharudu-teki@xilinx.com>
+ Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de> <jakob.unterwurzacher@theobroma-systems.com>
+ Jay Buddhabhatti <jay.buddhabhatti@amd.com> <jay.buddhabhatti@xilinx.com>
+ Jernej Skrabec <jernej.skrabec@gmail.com> <jernej.skrabec@siol.net>
++Jerome Forissier <jerome@forissier.org> <jerome.forissier@linaro.org>
+ John Linn <john.linn@amd.com> <john.linn@xilinx.com>
+ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyothee@xilinx.com>
+ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyotheeswar.reddy.mutthareddyvari@xilinx.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 27ce73d83f48..4cc34695b525 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1443,7 +1443,7 @@ N:	mmc
+ NETWORK
+ M:	Joe Hershberger <joe.hershberger@ni.com>
+ M:	Ramon Fried <rfried.dev@gmail.com>
+-M:	Jerome Forissier <jerome.forissier@linaro.org>
++M:	Jerome Forissier <jerome@forissier.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
+ F:	drivers/net/
+@@ -1451,7 +1451,7 @@ F:	include/net.h
+ F:	net/
+ 
+ NETWORK (LWIP)
+-M:	Jerome Forissier <jerome.forissier@linaro.org>
++M:	Jerome Forissier <jerome@forissier.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
+ F:	cmd/lwip/
+@@ -1903,7 +1903,7 @@ F:	drivers/usb/host/xhci*
+ F:	include/usb/xhci.h
+ 
+ UTHREAD
+-M:	Jerome Forissier <jerome.forissier@linaro.org>
++M:	Jerome Forissier <jerome@forissier.org>
+ S:	Maintained
+ F:	cmd/spawn.c
+ F:	include/uthread.h
+-- 
+2.48.1
 
---=20
-Tom
-
---IV8jd8HaYctWYL7n
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVfcUAAKCRAr4qD1Cr/k
-CmB+AP9Iv1+IaaGpH5G5UqM0DsSGQKxVE0t2SVvewzMGCYoJaAEAm0vdoy41I+Q2
-4F5hJU3FT3qYKbqqQygtSQgrIKhqOwA=
-=LxXy
------END PGP SIGNATURE-----
-
---IV8jd8HaYctWYL7n--
+base-commit: 601733e7087286f211634204c60fe86856ddbd78
+branch: update-maintainers-jforissier
