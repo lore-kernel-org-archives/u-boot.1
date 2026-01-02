@@ -4,108 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2233EEB57A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 08:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDF5EEB57A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 08:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50EF184105;
-	Fri,  2 Jan 2026 09:28:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3E02841CC;
+	Fri,  2 Jan 2026 09:29:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="E6MsKyw2";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RrrG35Li";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 982EC84164; Fri,  2 Jan 2026 09:28:04 +0100 (CET)
+ id 59CBF841E6; Fri,  2 Jan 2026 09:29:19 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BD7683FB2
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 09:28:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 343FD83FB2
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 09:29:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DB0C63F452
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 08:28:01 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 01C743F3EE
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 08:29:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767342481;
- bh=wPs0HJF5EWu5Oj6eRrn1bY/rPIQxxiYGK6O9Hx6RLTs=;
+ s=20251003; t=1767342557;
+ bh=GLn+P20fruOGI1HJW0W0NU/qOalTbBj1J6xk68EtCNg=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=E6MsKyw2t311bYGrDIxWoCz03zjS/8WRn663FKjCFJE6RrDo9Q4NEyKj9comwu2J5
- T5+zPuD/agG4b+6ijaSUDBLVmPeodkkVGSr3bJanPM0PxiwxP/P9Shrk/uBTZSEGt7
- 8jUnQ5yn0IVCFwRasADn7IGR5nwpPDXRl12VRLXboHQSWo+fDp8tdQxFokiscjftfh
- mc9awuuLEZ22VFt5wlEX930/tR6E8chxT4FS2UGHItGvqdjIqtRFCbQynl+fIGQFPx
- 878CvyFRm3k37KtSqujmwbwhYg8Ws5eqB38tUefl0/908KMPt8oIs5NYBRP/SAjDFZ
- DOERl1v2/vSQHdN7oZoEdVBhoC/TqovfiMeF2LyzddpPm+gGfka8i2AKyMyobqyRQg
- ncbGhJ7Ux8+ZSqes1jYlDLTbxgeJu1StmxPP8bWGDGHtPmfLfHc0+BJE+2CMxxkfoY
- BRzI5nKEHrOA+H2XN/a98WfTZcb+RSlFXodm6qqduXcMaBVcHP0I4ak+IZFE+X0n79
- eVz+PrO3zmbg/Lh6WgUQfa/LSvZxesZVSBYGciYwq4bDTJcilL4F15bkfOC+NZSRBu
- BAh7ewaFfWMCd8R714GnAJR3Ir6eUaZhKOxtJBJqGb9Ybj0MVQYaopUMIZaUPjhQ76
- +geUeoyrV/tLIAsTiTuxSxss=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4779edba8f3so94029075e9.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 00:28:01 -0800 (PST)
+ b=RrrG35Litmp68MpjvnlWuqbGDHwRHMntaa2CCjxpy/4Vxo8UdvOFhQ2jH4yrqozZb
+ YK/rxvoccvzOKMJD3ng9pVWrBU5OLQXnGXkmu8YIP+TqOXupo3j2fF7KpSUGyM1yoA
+ jVGbrTQAVj0pd1obfhh6Ua5iJq0H7ASXU+imdroFzwbF29SLxbwufmCTSDat+8EHnG
+ 58AnLfAMqJa8LNr4ZL2Ab7/Qotq2DV6xNDjd89by6UiQdYZzUzWz6+0ME60UWhPwtS
+ xFPAtzfDrzv20lzK9mdBOgQIrRZWf3fkKdrWpYY94iNB5Euq3OAcuDqNq3+5securZ
+ CIZMjsFHJI4ImRDvr0TCO2GicIglEhkIFtE6XJMvWL9gMK7VzWUZQVamT8uC8cFH6v
+ 7D2+Oiw9s028JAcIiej/0p25P/nU1LXfNLkoCdpDEzjuN6O6DmKXrwLVsJw+rQ4Srw
+ 6oCtdhpl48thAabcFYScao08OPgRCl7+vx6XPD1VfOeeSL8NuhqBmoyjZOCsgn9nCD
+ QYiZ99L2ZdNh6iujnJ37YZ5vD7Ct9JwfGUXYoDaokLqcqfcHsFSSZaHAEzdmuOCdH3
+ +G6qiO6DWfyJQwMJKeNQE+u5/8y4m5W3JXu8Txzvl8j9YSUD+np7GbhSWVMngShjNX
+ YcKgjIONB3pqrgFvGkYHfn5I=
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-42fdbba545fso7147269f8f.0
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 00:29:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767342481; x=1767947281;
+ d=1e100.net; s=20230601; t=1767342556; x=1767947356;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wPs0HJF5EWu5Oj6eRrn1bY/rPIQxxiYGK6O9Hx6RLTs=;
- b=s9NsxVQ7yfGqdpjD80eZHRlq/Pu/zwn5HQlUdLCT3TGV35ZX7uqzxYXhdzQrq15ZB1
- QxhiFsPLQ3c/8/t4B9e6pMskBEIkWhycYllGsAnsTQvkCLK0LVlorppY0f7x0dlKlJv3
- hoMqla5Kr+Vr+IHT7Tg1IceQfFwwidcZaGjwBe/mDxsqGU1h38SqU86PwvbpFs4/nqT/
- 37XHd6D3a/cAtNFLvg9KxTpR5SKeSpVO0yYEHSWLmWr8+HJiuE62nl2118p6lhRT9HvD
- EHnYuWrdHdwCoF7pLibYKl7v0Rb1rtam+AfSFlpxEJx6i5Tr6PzVP2tl5is8kUbIg6H7
- 8npw==
+ bh=GLn+P20fruOGI1HJW0W0NU/qOalTbBj1J6xk68EtCNg=;
+ b=BI5w7UglgBejmMFKLjVVIvvoZNDFrDPuUuPXXgSxeMBxUWx2wzCtQELtoXToT7a/Nr
+ Z1YaVAZfsOiaTUS1cfok1juWV9TfYk5sMFJM80WkKf1LFuoltLql6JhO98MlLtM+2f3G
+ xRJ+2mfxFUw7OX7hfwA+lCkfNJ81hCRGFNfv7KD2jfPeUssM15kvbJyshZny5DAQrA8o
+ 3HkAdFZEYlLNe5EaWqZNV5QV5a6UP9ORmRaOob5NIt1rzxinPhkQxmCXZKkxCl7s+Qpn
+ pFsLWnswDwxG510BEU5PXNgOonWMuwi/gLVsaGvcPmeG91vlEekn6SXZ97HdPn9oc/cC
+ XD4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWx325kj2ajImCYr+2gT47YEAniMWMsQoUvMmzSuh4rZ+UlIOADaJJrPfJt41KL18uAyT26fjM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCYgiwXhCi1ik+AjNEJciFhZ5GG+nQsLfwqfRa3rXY8eyMwjqv
- hsv6m1ObQxn+h/BOtBVbwT5hVS15q98xuE2LypVNUhtpwIGW1I+PApKmv8L7KsRDAk/x+EcoIme
- vxekiMSMMNJO8M4xwBbuOfCJLF4ekPkhgGuNe1PCrarGHljAjaUFGuHMGQPSnEIsd0czFzz9C3I
- bO3lk=
-X-Gm-Gg: AY/fxX5JcLmaKwaKsA1kTrS/aD7BLgF1JZ5pYDmh989axy5Tpum+fmLS0gszVcGOlO2
- /7xX6J+cCDH/ytEoAw05db+De69LtarTq37cGtxTSyu8lXM/C0LSc4nC1FCRFZIAZTse8aEQycd
- 2fMrf3+8BNtcSIgyqhv31AEkf3kys9wST+Qhgeo00jj6p4hOvIctV6RxsTu6wZ8MVRIbYRV/gtX
- b1E0LJXB+/RSvBRsIazexBwZr6n/TrxIQ8VeiueAf7tfqh0Cbv5P2hZ7Ywyv5hBzT5duDN9Fz9T
- eUH+IYplZz5+kEBKZtdQ227Hg81GifMJUqVeIbnVY8ciEhaSmQ+KtfHLW+1D1nccbUGnWHBMbjw
- OGzFaawphBcFmEELUv4Jb5HZVWWrJmFYmK4LKe3zIcPs3dlppzJ4ZlY3bmftnctz1F3vXxf/5i5
- z+12mEZV0=
-X-Received: by 2002:a05:600c:608f:b0:477:63b5:6f76 with SMTP id
- 5b1f17b1804b1-47d19582bfcmr460941265e9.25.1767342481467; 
- Fri, 02 Jan 2026 00:28:01 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEdcmwyvsoe+Tv2QWIt8ES8QrbFo1Y5XNt2lchGdhSAO3HYcRjAKEEhc43jQsHB071JXBU4XA==
-X-Received: by 2002:a05:600c:608f:b0:477:63b5:6f76 with SMTP id
- 5b1f17b1804b1-47d19582bfcmr460941155e9.25.1767342481110; 
- Fri, 02 Jan 2026 00:28:01 -0800 (PST)
+ AJvYcCV4R9awKy7WjIF9B4fRAtj45yHR2Bd/t1dl4HcXbZushPJGxJYW4NcLcOL9duYMoeNAA0ltn2o=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQ7T8X3cYrApawnW3m1hwRp85y3gZQIF9mVY3u0NmT1AAYZDVW
+ i3Q3BA2yTo5w9y3B+mialD8gscRofhT7n/hfFSTcjOx80hYXfDGu50SOlx/69LnZATWubb+GU3+
+ MTkxF/0UNzhrujdno79nSDArcKtKpo9Z5MGyIj4UO7/46njZE9hSUADHgNen4w0+2e7++aD0=
+X-Gm-Gg: AY/fxX5CmvKOWX++tRDpDanodcx1Avl2PpynbCHMhWWtxdsNFrK7B5iZpJ7RD/ACY1l
+ c2hZcAvrGc3VjPuQerdkPcrvTOJQiHoWZuULTQi0dcHZqNsV08SqAWJ+z7eD4Tat3cB3p36va2z
+ 95R7zz8OHzwL6/pPyobo7xwn4bV3ixpM3wZir3kiQ/An+ctkX2Ouu9EyhZl03hAHzkcRwR6X24A
+ 6LB5qgXQlZhX2FP2bADfCzCYJUacjyyP9fcVgy/2095MuU0FV3FWaN7lUJl+rt3FiqvbQu5qhW1
+ Wttz2aHxBt1D5LrqyPk73cdErEz4jsGX356p8UbXho94X3RgxmKQymj3BB7W0tp13QRFhYOgtro
+ wopXLs06vIwphT9K0HthnNpteECjmazRBvbDpVEiHjN0ugEk/TrrGO8sxrnnUEzQhOTIfZPk8Zv
+ +/Mcvda9Q=
+X-Received: by 2002:a05:600c:6610:b0:477:a219:cdc3 with SMTP id
+ 5b1f17b1804b1-47d18bd56b8mr474666315e9.12.1767342556572; 
+ Fri, 02 Jan 2026 00:29:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHxumRj8IiaZ2E0QvIxKHy55dHTpwSypHkyFGh8nh0BKbAhBj5878cHw3dJf+GzwKmpAZiETw==
+X-Received: by 2002:a05:600c:6610:b0:477:a219:cdc3 with SMTP id
+ 5b1f17b1804b1-47d18bd56b8mr474666065e9.12.1767342556129; 
+ Fri, 02 Jan 2026 00:29:16 -0800 (PST)
 Received: from [192.168.103.126]
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d28a33adcsm245729455e9.18.2026.01.02.00.28.00
+ 5b1f17b1804b1-47be3a0fb5bsm321576365e9.1.2026.01.02.00.29.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Jan 2026 00:28:00 -0800 (PST)
-Message-ID: <6d9d6ef2-6aa4-4448-a0ea-73ac1ffd1890@canonical.com>
-Date: Fri, 2 Jan 2026 09:27:59 +0100
+ Fri, 02 Jan 2026 00:29:15 -0800 (PST)
+Message-ID: <618be257-d247-4811-9cfd-e58017aba579@canonical.com>
+Date: Fri, 2 Jan 2026 09:29:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/6] rtc: goldfish: Support platform data for non-DT
- probing
+Subject: Re: [PATCH v4 1/6] serial: Add Goldfish TTY driver
 To: Kuan-Wei Chiu <visitorckw@gmail.com>
 Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw,
  eleanor15x@gmail.com, u-boot@lists.denx.de, alison.wang@nxp.com,
  angelo@kernel-space.org, trini@konsulko.com
 References: <20260101175420.4118024-1-visitorckw@gmail.com>
- <20260101175420.4118024-4-visitorckw@gmail.com>
+ <20260101175420.4118024-2-visitorckw@gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260101175420.4118024-4-visitorckw@gmail.com>
+In-Reply-To: <20260101175420.4118024-2-visitorckw@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -125,86 +123,212 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/1/26 18:54, Kuan-Wei Chiu wrote:
-> Currently, the Goldfish RTC driver exclusively relies on device tree
-> to retrieve the base address, failing immediately if dev_read_addr()
-> returns FDT_ADDR_T_NONE. This restriction prevents the driver from
-> being used on platforms that instantiate devices via U_BOOT_DRVINFO()
-> instead of device tree, such as the QEMU m68k virt machine.
+> Add support for the Google Goldfish TTY serial device. This virtual
+> device is commonly used in QEMU virtual machines (such as the m68k
+> virt machine) and Android emulators.
 > 
-> Add support for platform data to address this limitation. Update the
-> probe function to fall back to retrieving the base address from
-> struct goldfish_rtc_plat if the device tree address is unavailable.
-> Introduce a new header file include/goldfish_rtc.h to define the
-> platform data structure.
+> The driver implements basic console output and input polling using the
+> Goldfish MMIO interface.
 > 
 > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Reviewed-by: Yao Zi <me@ziyao.cc>
+> Tested-by: Daniel Palmer <daniel@0x0f.com>
 
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Acked-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 > ---
 > Changes in v4:
-> - Fix sandbox build warning by removing incorrect pointer casting.
-> - Assign plat->base directly to priv->base instead of using
->    map_sysmem() for platform data.
+> - Support DT probing with platform data as a fallback.
 > 
->   drivers/rtc/goldfish_rtc.c | 13 ++++++++++---
->   include/goldfish_rtc.h     | 15 +++++++++++++++
->   2 files changed, 25 insertions(+), 3 deletions(-)
->   create mode 100644 include/goldfish_rtc.h
+>   MAINTAINERS                      |   6 ++
+>   drivers/serial/Kconfig           |   8 +++
+>   drivers/serial/Makefile          |   1 +
+>   drivers/serial/serial_goldfish.c | 109 +++++++++++++++++++++++++++++++
+>   include/goldfish_tty.h           |  18 +++++
+>   5 files changed, 142 insertions(+)
+>   create mode 100644 drivers/serial/serial_goldfish.c
+>   create mode 100644 include/goldfish_tty.h
 > 
-> diff --git a/drivers/rtc/goldfish_rtc.c b/drivers/rtc/goldfish_rtc.c
-> index e63a2766c76..f6316896595 100644
-> --- a/drivers/rtc/goldfish_rtc.c
-> +++ b/drivers/rtc/goldfish_rtc.c
-> @@ -9,6 +9,7 @@
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 6ce0bbce13d..da4a6e4d518 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1259,6 +1259,12 @@ S:	Maintained
+>   F:	drivers/misc/gsc.c
+>   F:	include/gsc.h
 >   
->   #include <div64.h>
->   #include <dm.h>
-> +#include <goldfish_rtc.h>
->   #include <mapmem.h>
->   #include <rtc.h>
->   #include <linux/io.h>
-> @@ -77,12 +78,18 @@ static int goldfish_rtc_set(struct udevice *dev, const struct rtc_time *time)
->   static int goldfish_rtc_probe(struct udevice *dev)
->   {
->   	struct goldfish_rtc *priv = dev_get_priv(dev);
-> +	struct goldfish_rtc_plat *plat;
->   	fdt_addr_t addr;
+> +GOLDFISH SERIAL DRIVER
+> +M:	Kuan-Wei Chiu <visitorckw@gmail.com>
+> +S:	Maintained
+> +F:	drivers/serial/serial_goldfish.c
+> +F:	include/goldfish_tty.h
+> +
+>   I2C
+>   M:	Heiko Schocher <hs@nabladev.com>
+>   S:	Maintained
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 371d7aa5bba..b84cb9ec781 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -1193,4 +1193,12 @@ config SYS_SDMR
+>   	depends on MPC8XX_CONS
+>   	default 0x0
 >   
->   	addr = dev_read_addr(dev);
-> -	if (addr == FDT_ADDR_T_NONE)
-> -		return -EINVAL;
-> -	priv->base = map_sysmem(addr, 0x20);
+> +config SERIAL_GOLDFISH
+> +	bool "Goldfish TTY support"
+> +	depends on DM_SERIAL
+> +	help
+> +	  Select this to enable support for the Goldfish TTY serial port.
+> +	  This virtual device is commonly used by QEMU virtual machines
+> +	  (e.g. m68k virt) for console output.
+> +
+>   endif
+> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+> index 8eaae62b0fc..fe8d23be512 100644
+> --- a/drivers/serial/Makefile
+> +++ b/drivers/serial/Makefile
+> @@ -63,3 +63,4 @@ obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
+>   obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
+>   
+>   obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
+> +obj-$(CONFIG_SERIAL_GOLDFISH) += serial_goldfish.o
+> diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
+> new file mode 100644
+> index 00000000000..278d0cf3e0d
+> --- /dev/null
+> +++ b/drivers/serial/serial_goldfish.c
+> @@ -0,0 +1,109 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + * Goldfish TTY driver for U-Boot
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <dm.h>
+> +#include <goldfish_tty.h>
+> +#include <linux/types.h>
+> +#include <mapmem.h>
+> +#include <serial.h>
+> +
+> +/* Goldfish TTY Register Offsets */
+> +#define GOLDFISH_TTY_PUT_CHAR       0x00
+> +#define GOLDFISH_TTY_BYTES_READY    0x04
+> +#define GOLDFISH_TTY_CMD            0x08
+> +#define GOLDFISH_TTY_DATA_PTR       0x10
+> +#define GOLDFISH_TTY_DATA_LEN       0x14
+> +#define GOLDFISH_TTY_DATA_PTR_HIGH  0x18
+> +#define GOLDFISH_TTY_VERSION        0x20
+> +
+> +/* Commands */
+> +#define CMD_WRITE_BUFFER   2
+> +#define CMD_READ_BUFFER    3
+> +
+> +struct goldfish_tty_priv {
+> +	void __iomem *base;
+> +	u8 rx_buf;
+> +};
+> +
+> +static int goldfish_serial_getc(struct udevice *dev)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +	unsigned long paddr;
+> +	u32 count;
+> +
+> +	count = __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
+> +	if (count == 0)
+> +		return -EAGAIN;
+> +
+> +	paddr = virt_to_phys((void *)&priv->rx_buf);
+> +
+> +	__raw_writel(0, priv->base + GOLDFISH_TTY_DATA_PTR_HIGH);
+> +	__raw_writel(paddr, priv->base + GOLDFISH_TTY_DATA_PTR);
+> +	__raw_writel(1, priv->base + GOLDFISH_TTY_DATA_LEN);
+> +	__raw_writel(CMD_READ_BUFFER, priv->base + GOLDFISH_TTY_CMD);
+> +
+> +	return priv->rx_buf;
+> +}
+> +
+> +static int goldfish_serial_putc(struct udevice *dev, const char ch)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +
+> +	__raw_writel(ch, priv->base + GOLDFISH_TTY_PUT_CHAR);
+> +
+> +	return 0;
+> +}
+> +
+> +static int goldfish_serial_pending(struct udevice *dev, bool input)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +
+> +	if (input)
+> +		return __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
+> +
+> +	return 0;
+> +}
+> +
+> +static int goldfish_serial_probe(struct udevice *dev)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +	struct goldfish_tty_plat *plat = dev_get_plat(dev);
+> +	fdt_addr_t addr;
+> +
+> +	addr = dev_read_addr(dev);
 > +	if (addr != FDT_ADDR_T_NONE) {
-> +		priv->base = map_sysmem(addr, 0x20);
+> +		priv->base = map_sysmem(addr, 0x1000);
 > +	} else {
 > +		plat = dev_get_plat(dev);
 > +		if (!plat)
 > +			return -EINVAL;
 > +		priv->base = plat->base;
 > +	}
->   
->   	return 0;
->   }
-> diff --git a/include/goldfish_rtc.h b/include/goldfish_rtc.h
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dm_serial_ops goldfish_serial_ops = {
+> +	.putc = goldfish_serial_putc,
+> +	.pending = goldfish_serial_pending,
+> +	.getc = goldfish_serial_getc,
+> +};
+> +
+> +static const struct udevice_id goldfish_serial_ids[] = {
+> +	{ .compatible = "google,goldfish-tty" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(serial_goldfish) = {
+> +	.name	= "serial_goldfish",
+> +	.id	= UCLASS_SERIAL,
+> +	.of_match = goldfish_serial_ids,
+> +	.probe	= goldfish_serial_probe,
+> +	.ops	= &goldfish_serial_ops,
+> +	.priv_auto = sizeof(struct goldfish_tty_priv),
+> +	.flags	= DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/include/goldfish_tty.h b/include/goldfish_tty.h
 > new file mode 100644
-> index 00000000000..bb113a0bd79
+> index 00000000000..8777da4942d
 > --- /dev/null
-> +++ b/include/goldfish_rtc.h
-> @@ -0,0 +1,15 @@
+> +++ b/include/goldfish_tty.h
+> @@ -0,0 +1,18 @@
 > +/* SPDX-License-Identifier: GPL-2.0-or-later */
 > +/*
 > + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
 > + */
 > +
-> +#ifndef _GOLDFISH_RTC_H_
-> +#define _GOLDFISH_RTC_H_
+> +#ifndef _GOLDFISH_TTY_H_
+> +#define _GOLDFISH_TTY_H_
 > +
 > +#include <linux/types.h>
 > +
-> +struct goldfish_rtc_plat {
+> +/* Platform data for the Goldfish TTY driver
+> + * Used to pass hardware base address from Board to Driver
+> + */
+> +struct goldfish_tty_plat {
 > +	void __iomem *base;
 > +};
 > +
-> +#endif /* _GOLDFISH_RTC_H_ */
+> +#endif /* _GOLDFISH_TTY_H_ */
 
