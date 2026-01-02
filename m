@@ -4,65 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A70FA3728
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 16:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2207FA3728
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 17:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31DE283B55;
-	Fri,  2 Jan 2026 17:21:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0DF168424D;
+	Fri,  2 Jan 2026 18:10:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hIavFIc9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ERbGqJxi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D92A83C04; Fri,  2 Jan 2026 17:21:54 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AE3A484248; Fri,  2 Jan 2026 18:09:58 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CFDB83B49
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 17:21:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83AC683A9A
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 18:09:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4djTV55bG8z9tDq;
- Fri,  2 Jan 2026 17:21:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767370909;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vbU+1yyxVtBOvBGZyJ101Za0e7LOf1ghDuL0W074nQs=;
- b=hIavFIc9jFKd4z47i0oPqmij7hRXXcxTnEmA1EAsNQY3kql8n326r6CYT3DtkU2RkaZFoU
- PSlnRv5FeBxzBXQk9qUbxbbLSj4M8UZ0kRg5CC4L5Szj9uY5qNBUKA73Eyq/c70oR7JJKh
- Q+8xInhiHgheym2aZhKzMcdd5UhgTHrlVPYoyUjzR7rvp50V33cbEOxqAoqobSxUGnBb2m
- 18KDjIxF6jyd2TK7fj3pKA4z5azasRlVFBt5fiKeoDucJ2ZtL2M8swtfKmXPeTRO1MsMB7
- cY6ug7hXPwHLxGFSaL8H4zxViCgJ6Jtf7JxsL9UGRfUUrJDWRKvkS5vtqZSPFg==
-Message-ID: <9368ca1e-f57b-403b-9d07-fc0e69d3e989@mailbox.org>
-Date: Fri, 2 Jan 2026 17:21:48 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4511f736011so69499b6e.0
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 09:09:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767373795; x=1767978595; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YXzSZ6+Y7bz3azVivP8th0sONyTY50ofQTAmGe41kgs=;
+ b=ERbGqJximiNstPuMqThOR/Nr69+YRHlrbLtbnJrpLl8vX7X8XwV1xURxXyKsSlhsnW
+ WN4I0WB2mnGQvZCGkW5d4EQEDmKJe9stPDWV1N5vUdZsKfdj21jW3ztSsFFZTOzu3lwJ
+ pjKlnTsp/K9NYZEAgefLRDBWJ+1s0hC/mgDJc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767373795; x=1767978595;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=YXzSZ6+Y7bz3azVivP8th0sONyTY50ofQTAmGe41kgs=;
+ b=lV5hVT8UZGFXINr/krsZslLTj+e1LcC3Qg1Q0H9gfKJKmf0D1Hf15Jf9CVMf9Q++kW
+ kLhu3tEfRPFB55B+66uPjhsr7dc2m4UsZfcVzN12IhgygGgxR9UG7X6av/IOCR7MxMTR
+ FdlmFb3Lfmf2mLZXx6Y2eyWIQqLrjXCjvSbXx8OJS4FYgNfrbeklFaOh3uUVKaKoXTiZ
+ 6Uc+v0KLk5zMyuq4qQBCLYHrKSoW6aG3ANnHVTLuqvFBnnedOPbfI5wHwK58jnO4XzD+
+ YqCcjRBBgB7Xcr20ch1hghjBg8QdnOjfTqLaB+S06+wCL9kWMC51A6LNteT7pIVnTsDc
+ GGTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWdEFyyYGWTZYECUHVBMsM/X1BK45JXwZclW3oAti8nLfkgzx2DBgIDBr61teiMhU7Fv2Yi3TI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3r4I/ZpbxojIW3Pf2tZ97BUdGBe/u9+vV/rWIUX8vTsEFCtal
+ F1eBDbsGMVUvE0FLkG9ObHJF5zVCFZv36efeMeQ1hEHtDlarKCyBzH0G5iH4/tacGFU=
+X-Gm-Gg: AY/fxX5yuvik1EWeEcYfJDhbuSi6tvFygxB+wz1g/UnRPbHY2rTi156pHnMQeDBYdLD
+ wxmPYQAig/hq8Ge0euMnZhF3k9szXdQqndnoRRDb2CNBGYjVAsUIAUbpgYMUjGTKLKY6iKTgFhG
+ dehMjGL08QGPcsKwepniWopIOAuqbR4lWOqOzLz27U0Hf1pwPOwYOAyZdFUpXU3cY0a5JWWn959
+ 1gcbQuzqsDwsCnyS9Z287rI9R8PARNVoXPbwN3qrENivLO8TDSzUjjTVwsJre1OxCrjg9YMC0ie
+ cesVKxeeZQ588Lc9x7jqv6sO/rfhfb5sVrs6ISIIqi9EJjcRpbG/MYkeZCM3cHkTQpXFqlTXdAk
+ nnHj2XdN9k3OoMkkyag0sN8Qnta07/rbSzgPw7dc+IOSArNNFVbGMs0OefWD53PnwygJzyl51Ho
+ nS3Jhbe5drZdS6HCa8sgalvOrr33DVWPMU+SST0UszDvGJJeRl2zix0NXC9h03N429ZVUAos+Ai
+ dlDgo9pQvZxocQ62RWuRfBClsvuFIOggtODWg==
+X-Google-Smtp-Source: AGHT+IFqlrut0G4xwldcYz8RtR734c0zutiRUNrsYYuTNzV8sS2lW+H2+3WSRSAtON4lGNU29Qok6A==
+X-Received: by 2002:a05:6808:1483:b0:44f:8ccd:c489 with SMTP id
+ 5614622812f47-45a26dbbe08mr135125b6e.25.1767373795175; 
+ Fri, 02 Jan 2026 09:09:55 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4598c356623sm14512228b6e.2.2026.01.02.09.09.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Jan 2026 09:09:54 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+Subject: Re: (subset) [PATCH 0/4] Fix CONFIG_CC_OPTIMIZE_FOR_DEBUG support
+Message-Id: <176737379393.117620.5816720928915086730.b4-ty@konsulko.com>
+Date: Fri, 02 Jan 2026 11:09:53 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/1] usb_kbd: remove match string
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20260102125622.144573-1-heinrich.schuchardt@canonical.com>
- <da40c4d0-8c8a-4341-b779-96f571b7db87@mailbox.org>
- <CALeDE9Oue=0L3PRVs7O8suPVDFBXL_i6o0hc50jLQ49HtaX2nQ@mail.gmail.com>
- <67fefad5-ce05-486b-81f9-f28798195bc1@mailbox.org>
- <CALeDE9NVNR8pA5G6um7p0CTmuQqmK4LWLoxj--jRKnBWJ5+dhg@mail.gmail.com>
- <18a3fe38-c6dd-48e2-9273-c6862b99b7c9@canonical.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <18a3fe38-c6dd-48e2-9273-c6862b99b7c9@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 333c7702dba3e445dee
-X-MBO-RS-META: zwiarzx17bn7de1ieugt377qjqa43zdp
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,26 +102,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/2/26 4:15 PM, Heinrich Schuchardt wrote:
+On Wed, 31 Dec 2025 20:10:50 +0100, Heinrich Schuchardt wrote:
 
-[...]
+> When trying to build qemu-riscv64_smode_defconfig with
+> CONFIG_CC_OPTIMIZE_FOR_DEBUG=y it became evident that the build was not
+> using -Og as expected. This is due to an incorrect update of the build
+> system with commit 5f520875bdf0 ("kbuild: Bump the build system to 5.1").
+> 
+> The first patch reestablishes setting the build flag.
+> 
+> [...]
 
-> Looking at https://gitlab.com/CalcProgrammer1/OpenRGB/ the protocols 
-> used to control keyboard backlights vary a lot between vendors.
+Applied to u-boot/next, thanks!
 
-openrgb seems to be meant to control various fancy vendor LEDs and such, 
-I'm talking about the boring 1-color keyboard backlight on laptop keyboards.
+[1/4] Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support
+      commit: 56ae3c2a44fcd8e2f680c51620011273727ae9db
+-- 
+Tom
 
-> But anyway the vendor ID and product ID is used to identify the USB 
-> keyboard and to look up which protocol it uses. There is no need for a 
-> device-tree description.
 
-It is in fact the other way around -- if it is a HID keyboard device 
-according to USB descriptor, it doesn't matter which VID/PID it has. The 
-few keyboards described in the usb_kbd.c driver are there because they 
-need quirks.
-
-So, to move the discussion along. I can see why an USB keyboard might 
-have to be described in DT. It seems the usb-keyboard DT compatible is 
-not standard. If it should be removed, the commit message needs much 
-better justification for doing so.
