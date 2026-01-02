@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3063FA3748
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72015FA374F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A0D584258;
-	Fri,  2 Jan 2026 15:59:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
+	by phobos.denx.de (Postfix) with ESMTP id E35A78424E;
+	Fri,  2 Jan 2026 16:08:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="h3flVOyR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="THYJQOjD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CA5E84255; Fri,  2 Jan 2026 15:55:15 +0100 (CET)
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
+ id 8816B84255; Fri,  2 Jan 2026 16:08:53 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8DE68424E
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:55:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=forissier.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0229383A3D
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:08:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome@forissier.org
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-42b3b0d76fcso6930216f8f.3
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:55:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-459993ff4fcso2148819b6e.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:08:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=forissier.org; s=google; t=1767365712; x=1767970512; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=R8hzba2MVleTXDZJYgXBrfeQsE0VfWLtFqOqOij2Kmg=;
- b=h3flVOyR1GdZCQVEdzbOIq8+dQ7KsW4pa5wYn1Zzv5ijltsk8SmnQAiK7VJPw5ZebW
- W4j7EvuJMNwu8L69oolHmCJqyP2AWmzU4GtHb4EYpSkbVZLgFNpOz7ZY03C91S6lKynW
- betOTIGtr7aRSLp8nD2lSgigt9uSe+h9VQ5VEa+WOeUXpxMbtvgrSAAwTiKmo4eNEBOs
- yY4fOOzdd0+G7L9CVSV0MllEWlVIaJgyhPYxXJgMTAmoqlyutrsH9U+Auq4kWv2pzZfK
- nS2eYwghi3SHH0KSaqBknlYv+eI2VVJ0OPIzMVsJ2Uw5U+rLxDAarWigKwbUAoW2yMsF
- 4hIw==
+ d=konsulko.com; s=google; t=1767366530; x=1767971330; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vJaET/OkSW2AaZprVTLQIIaexjR4KIibpwnJfpbWer4=;
+ b=THYJQOjDjyYNHB/n6tlmAchyyQs3iWe6dteb1z22Uu5y5VHGKrZGBhdcgythPKH5Yk
+ Hhtap1/NCcZbwlnLvobVWu0MPf2ReLqsq60N04FBdDbOXJuMyvtbpL/0wczKnrWB8lo0
+ +XI0Uh/e6gN5oGmu34a29RDIP7kkkJNh3LG8c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767365712; x=1767970512;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R8hzba2MVleTXDZJYgXBrfeQsE0VfWLtFqOqOij2Kmg=;
- b=NxLzJXS3z4m9IaLU5srQ816tXwOz2CiWIov2HSh6pjMD5LuU8UStJT91JGZcScxgT5
- LJTsZ9hEoAPNlE9NEQ+iZstYsdb18C2edimPqe4OCMaISN0qQACNvMud2SjgIwPEiVmn
- hlHMzPRE86o5C8aqf4FRkzu7b0NR61LWz957HzQchv+WNsrlHUzdxXh60BNFRDqTd1hM
- OQXhLmz2sP3D5mbkxxQ/rga/ga6v3TVZI/M52jPkAOkGPm3X2r4zNTbZoIhc5/BceO4B
- 6SHXZuJdN7Bsu+A/TCPrrpeIw1PK196JjNlKv2l8yrKOvv7+pohwL9i8T27ZXgCiDkrX
- vRRQ==
-X-Gm-Message-State: AOJu0YwyDn3+Zun//lWmcQMmqPmyrZ9FQ98R5xlIpMZFW6dKwz5beHbg
- aqkZUEY1G1Z6RJaDxa0vkK86jCjDfec1nsU+aG3UdzArEXpl3vVh/tuI7HR90UvvBUDYuWifEwp
- HNOPYzmA=
-X-Gm-Gg: AY/fxX4qToCuBk37gFmOVzVocJBnBOXInsMip0z4SL35cMrySlHolVe4Uub3yx702mc
- cSlpg1NRsS5MD2OTCQCaMOenFhCqSF/VERwKPmjHvS0FCW32t6FSQxb7XmmKU9Xlf76TRLE0rDm
- fc2jIFtNyr/3ANMiL7om/m3ISNmriiWo5Gl91neV7vYkqiHZyfgx6g2XBtZE2FdXDNPoj683tgb
- krT34ij+8og2H8fFbtVemDUNMvPD0AUY0GlVLttU4ABuR0BKwASTT/9/tDNzwIhPVpEmRc8alFc
- ivMDUpu9+3aFOTKmuSXJG40ITVTBOaneREHK+5zlYkxxERqxf2hIZQFcAr2dqR2tPv6M90u5s3P
- Ur6greCG7oTmzZaTNaqnpvII45a9/cElNFA0xzwnNsmaPyzI20/VdP7aPDpHpvsbS0S6MPjix4k
- qBXeHZiKRV
-X-Google-Smtp-Source: AGHT+IFrbhZoJ1zzTP/Uid7ISrzO08XMq1kfjm3Yv3k0zjmdpAIRgfsGrqJLGcOhNIb5I72EQFihbA==
-X-Received: by 2002:a05:6000:186e:b0:432:86e1:bd38 with SMTP id
- ffacd0b85a97d-43286e1be04mr29855828f8f.39.1767365711569; 
- Fri, 02 Jan 2026 06:55:11 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:21b:21ff:febc:b336])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4324eab257asm85794529f8f.38.2026.01.02.06.55.10
+ d=1e100.net; s=20230601; t=1767366530; x=1767971330;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vJaET/OkSW2AaZprVTLQIIaexjR4KIibpwnJfpbWer4=;
+ b=awYHBRM00eLGg6s1Yl4jdLtkI1XrSU7/YftNUKMQWBMyDJbGqC58HaiWV199YmlJZG
+ WTHo+6dExBKdGGUZj+iDkDCg5mowt88sc47K/O43Lmuhx/1rPnQ4JHuc4UKO6M4QIEfK
+ LWdpZMJCEYfWov5Sb7mfOZlcqUpnHVKwgif1xGY07xFzywhRC86Og+hWQZUUwiKVw4CV
+ 1BiG32vCsLshdWXCujBmks1H+0rVqJ7kqyoPmd1DXUrASB6DuahxEzWvpTRg4PjFZzW4
+ kshA721DFYQ7pNDV4XQhs8u1190+Zk3Y8419ojaR3EY1wXvHojWT8TVX1AIZ3+5xXeAt
+ jroQ==
+X-Gm-Message-State: AOJu0YxBry2W7H6ChO99h90o7IrQSHplBoNUnpTONTs3WausXYI4+m5I
+ 9Hhsgd2R7MZ+7F4tnWXkSfC6KeIfCe6EidxjE+6FC0d9LBuwcJtjYof//m4OM4Aoz3E=
+X-Gm-Gg: AY/fxX6MTdErR3JToQVwHE56YKgSwZ4WPxTGenNTB88w+aE8LgRrKHJK92aJHsA0e87
+ UMPdwY9RQ9uqbl8MlJu36C6hgaf/VGigdPR9OW47/w6wk0fJQhuNlAFEiaAhQEN3YBiX8xGTaPD
+ 0IF7Zxr5Kn8QuJa4U3T6J/yut41bLVYAZhUn8WE8InAj5NOd11C+1L2dAM4n0gs2EA6ZoU2TAUH
+ McrsrJ/AWQZQOVBb+TIvPs+crmp8NcEHeuAb01w8biOvu9eIvibFtHGPHnF2LwEt8yW8TDWbcTM
+ ZaDpfqOxcb8/1w1f1oSPRYjV7lbTO4nzTFKYtXtzNNxFkKxnFkKUifzQCRPfmD5JVP7+IWoqhDw
+ pCY/FMdgE+vKsFWtFTbHcln28w+FaAT5VLhQyM2d6ubYqf9zhUacFPhZWs0p0xTxS2t1KF9fDIx
+ X1W1PQBmnKstq1bTZLKRN2Jzy/aRxztK89ei0CNThkI9X0T2RsTD92I8Z6aOfKeYR0qgbXKMe5Z
+ ju3r2u2eRd+qJVIY3AQE9cafvTKsf+AkavoRGw=
+X-Google-Smtp-Source: AGHT+IEn83LxxozEXVGuKWvnueHzw7CuamDnhk3N5MUQ0IfQ04qY2rMxb6ubM99alzc2vuUwpeE7OA==
+X-Received: by 2002:a05:6808:1485:b0:450:dce4:8e with SMTP id
+ 5614622812f47-457b1fdcb77mr17454088b6e.37.1767366529619; 
+ Fri, 02 Jan 2026 07:08:49 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-457b3ba4416sm19242657b6e.1.2026.01.02.07.08.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jan 2026 06:55:11 -0800 (PST)
-From: Jerome Forissier <jerome@forissier.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome@forissier.org>,
- Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Casey Connolly <casey.connolly@linaro.org>, Chen-Yu Tsai <wens@kernel.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- No generic patch CC mail please <noreply@example.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH] MAINTAINERS: update my email address
-Date: Fri,  2 Jan 2026 15:55:00 +0100
-Message-ID: <20260102145504.3222666-1-jerome@forissier.org>
-X-Mailer: git-send-email 2.48.1
+ Fri, 02 Jan 2026 07:08:49 -0800 (PST)
+Date: Fri, 2 Jan 2026 09:08:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: j.ne@posteo.net
+Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Peter Geis <pgwipeout@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Junhui Liu <junhui.liu@pigmoral.tech>
+Subject: Re: [PATCH next] board: amediatech: Add X96Q support
+Message-ID: <20260102150846.GD6124@bill-the-cat>
+References: <20251231-x96q-v1-1-316d703b8f03@posteo.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 02 Jan 2026 15:59:35 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZJD73//wcVL4shxq"
+Content-Disposition: inline
+In-Reply-To: <20251231-x96q-v1-1-316d703b8f03@posteo.net>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,60 +100,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-My linaro.org email isn't valid anymore. Use my personal email instead.
 
-Signed-off-by: Jerome Forissier <jerome@forissier.org>
----
+--ZJD73//wcVL4shxq
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- .mailmap    | 1 +
- MAINTAINERS | 6 +++---
- 2 files changed, 4 insertions(+), 3 deletions(-)
+On Wed, Dec 31, 2025 at 08:45:03PM +0100, J. Neusch=E4fer via B4 Relay wrot=
+e:
 
-diff --git a/.mailmap b/.mailmap
-index 7b0d730b618a..2fe12e76d0c8 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -69,6 +69,7 @@ Jagan Teki <jagannadha.sutradharudu-teki@xilinx.com>
- Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de> <jakob.unterwurzacher@theobroma-systems.com>
- Jay Buddhabhatti <jay.buddhabhatti@amd.com> <jay.buddhabhatti@xilinx.com>
- Jernej Skrabec <jernej.skrabec@gmail.com> <jernej.skrabec@siol.net>
-+Jerome Forissier <jerome@forissier.org> <jerome.forissier@linaro.org>
- John Linn <john.linn@amd.com> <john.linn@xilinx.com>
- Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyothee@xilinx.com>
- Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyotheeswar.reddy.mutthareddyvari@xilinx.com>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 27ce73d83f48..4cc34695b525 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1443,7 +1443,7 @@ N:	mmc
- NETWORK
- M:	Joe Hershberger <joe.hershberger@ni.com>
- M:	Ramon Fried <rfried.dev@gmail.com>
--M:	Jerome Forissier <jerome.forissier@linaro.org>
-+M:	Jerome Forissier <jerome@forissier.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
- F:	drivers/net/
-@@ -1451,7 +1451,7 @@ F:	include/net.h
- F:	net/
- 
- NETWORK (LWIP)
--M:	Jerome Forissier <jerome.forissier@linaro.org>
-+M:	Jerome Forissier <jerome@forissier.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
- F:	cmd/lwip/
-@@ -1903,7 +1903,7 @@ F:	drivers/usb/host/xhci*
- F:	include/usb/xhci.h
- 
- UTHREAD
--M:	Jerome Forissier <jerome.forissier@linaro.org>
-+M:	Jerome Forissier <jerome@forissier.org>
- S:	Maintained
- F:	cmd/spawn.c
- F:	include/uthread.h
--- 
-2.48.1
+> From: "J. Neusch=E4fer" <j.ne@posteo.net>
+>=20
+> The X96Q is a set-top box with an H313 SoC, AXP305 PMIC, 1 or 2 GiB RAM,
+> 8 or 16 GiB eMMC flash, 2x USB A, Micro-SD, HDMI, Ethernet, audio/video
+> output, and infrared input.
+>=20
+>   https://x96mini.com/products/x96q-tv-box-android-10-set-top-box
+>=20
+> This commit adds a defconfig and some documentation. The devicetree is
+> already in dts/upstream.
+>=20
+> The CONFIG_DRAM_SUNXI_* settings are chosen such that the register
+> values in the DRAM PHY's MMIO space are as close as possible to those
+> observed when booting with the preinstalled vendor U-Boot.
+>=20
+> ---
+> Signed-off-by: J. Neusch=E4fer <j.ne@posteo.net>
+> ---
+>  configs/x96q_defconfig         | 46 ++++++++++++++++++++++++++++++++++
 
-base-commit: 601733e7087286f211634204c60fe86856ddbd78
-branch: update-maintainers-jforissier
+This needs to come from "make savedefconfig" and:
+[snip]
+> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=3Dy    # DDR3 is correct, but vendor ub=
+oot mentions 600 MHz DRAM CLK
+[snip]
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D60   # os =3D 0, uboot not de=
+tected
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D61   # e59f002c e5810000 f57f=
+f04f f57ff06f (4a0000cc)
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D62   # a9431e66 a9442668 a945=
+2e6a a946366c (4a0002cc)
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D64   # 52800000 91008081 7940=
+0025 34000080 (4a0006cc)
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D96   # 340007c0 f9401673 eb13=
+02ff 54000760 (4a006acc)
+> +#CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D112  # f9003fe0 f94047e0 6b1c=
+001f 54fffcc0 (4a0162cc)
+
+If this information is useful, it needs to be preserved in the docs.
+
+--=20
+Tom
+
+--ZJD73//wcVL4shxq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVffewAKCRAr4qD1Cr/k
+CqztAQCG95YS3zB55cnq/jSUBJRaaeppw6pqhWdiBB6jiSTSpgEA8Rmg22q7OyT0
+UnObucy5nrZ51DlttOxiE4d0aftZzgY=
+=kd2a
+-----END PGP SIGNATURE-----
+
+--ZJD73//wcVL4shxq--
