@@ -4,45 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D22DDFA3725
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 00:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2F6EEB57B
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 01:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61DF5841BC;
-	Fri,  2 Jan 2026 01:42:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 03C3883CDC;
+	Fri,  2 Jan 2026 02:03:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Xf2BIRkh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76F13841F4; Fri,  2 Jan 2026 01:42:18 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6C14B841CC
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 01:42:16 +0100 (CET)
+ id 9BFD483D1A; Fri,  2 Jan 2026 02:02:59 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AB43283C6E
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 02:02:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ED5F6497;
- Thu,  1 Jan 2026 16:42:08 -0800 (PST)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 21A603F694;
- Thu,  1 Jan 2026 16:42:13 -0800 (PST)
-Date: Fri, 2 Jan 2026 01:41:24 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Yixun Lan <dlan@gentoo.org>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev, Jagan Teki
- <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, Paul Kocialkowski <contact@paulk.fr>, Samuel
- Holland <samuel@sholland.org>
-Subject: Re: [PATCH v2 10/10] sunxi: mmc: enable support for A733
-Message-ID: <20260102014124.3b35207c@minigeek.lan>
-In-Reply-To: <20251130-01-a733-soc-support-v2-10-18bdd4376fad@gentoo.org>
-References: <20251130-01-a733-soc-support-v2-0-18bdd4376fad@gentoo.org>
- <20251130-01-a733-soc-support-v2-10-18bdd4376fad@gentoo.org>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=manjae.cho@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20260102010239epoutp0478e445ebf798293603a2c7c834b20613~GxFHPt82q1819518195epoutp04J
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 01:02:39 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20260102010239epoutp0478e445ebf798293603a2c7c834b20613~GxFHPt82q1819518195epoutp04J
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1767315759;
+ bh=4F53XJyVEmt+DRJTdkjJkIAboxG/bwyzczgl0MPCGuQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Xf2BIRkhVxEXioDEvZMJAlofrszFlHOKTo0FZQnc5i+MZZrYkC8VifyBAgLtw5SY/
+ k0yr/C8N4JK48JvY/+1Tlk1EZPhHTAx6Q81C5vFfNl8wv4fJnLg0gBNPphHSh4tF16
+ Kht3fmmiO8jwHydZLLjgSjz7tbYdDYY6O3pJ4eIg=
+Received: from epsnrtp01.localdomain (unknown [182.195.42.153]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPS id
+ 20260102010239epcas1p2c3e10d95f6290af5efc54e7e067ae7ba~GxFHAz37y2189021890epcas1p21;
+ Fri,  2 Jan 2026 01:02:39 +0000 (GMT)
+Received: from epcas1p1.samsung.com (unknown [182.195.38.116]) by
+ epsnrtp01.localdomain (Postfix) with ESMTP id 4dj55V6pRPz6B9m9; Fri,  2 Jan
+ 2026 01:02:38 +0000 (GMT)
+Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3~GxFGYEOr_1916919169epcas1p4Y;
+ Fri,  2 Jan 2026 01:02:38 +0000 (GMT)
+Received: from manjaecho-VirtualBox.. (unknown [10.89.15.251]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20260102010238epsmtip2eefaff7accddf194d944c2ace068cb0f~GxFGVnd2I0323903239epsmtip2C;
+ Fri,  2 Jan 2026 01:02:38 +0000 (GMT)
+From: Manjae Cho <manjae.cho@samsung.com>
+To: xypron.glpk@gmx.de
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sujin.u@mobis.com, Manjae Cho
+ <manjae.cho@samsung.com>
+Subject: Re: [PATCH v2 2/2] doc: emulation: Add network testing documentation
+Date: Fri,  2 Jan 2026 10:02:36 +0900
+Message-ID: <20260102010236.39626-1-manjae.cho@samsung.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251230154529.29724-3-manjae.cho@samsung.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+cpgsPolicy: CPGSC10-702,Y
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3
+References: <CGME20260102010238epcas1p467cd3ce7ad8d03eaf35e25563da1d8c3@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,87 +88,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 30 Nov 2025 21:45:19 +0000
-Yixun Lan <dlan@gentoo.org> wrote:
+Hi Heinrich,
 
-> Minor clock adjustment for new A733 MMC controller, the SMHC0_CLK_REG
-> start at offset 0x400, and with step size of 0x10.
-> 
-> Signed-off-by: Yixun Lan <dlan@gentoo.org>
-> ---
->  drivers/mmc/sunxi_mmc.c | 21 ++++++++++++++++++---
->  1 file changed, 18 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-> index e28c81afffe..689bec6693c 100644
-> --- a/drivers/mmc/sunxi_mmc.c
-> +++ b/drivers/mmc/sunxi_mmc.c
-> @@ -112,6 +112,9 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
->  			if (priv->mmc_no == 2)
->  				pll_hz *= 2;
->  		}
-> +
-> +		if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-> +			pll_hz /= 3;
->  	}
->  
->  	div = pll_hz / hz;
-> @@ -167,7 +170,8 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
->  	}
->  
->  	/* The A523 has a second divider, not a shift. */
-> -	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-> +	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523) ||
-> +		IS_ENABLED(CONFIG_MACH_SUN60I_A733))
->  		n = (1U << n) - 1;
->  
->  	writel(CCM_MMC_CTRL_ENABLE| pll | CCM_MMC_CTRL_N(n) |
-> @@ -661,17 +665,28 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
->  	.get_cd		= sunxi_mmc_getcd,
->  };
->  
-> -static unsigned get_mclk_offset(void)
-> +static unsigned int get_mclk_offset(void)
->  {
->  	if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
->  		return 0x410;
->  
-> +	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-> +		return 0xd00;
-> +
->  	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
->  		return 0x830;
->  
->  	return 0x88;
->  };
->  
-> +static unsigned int get_mclk_size(void)
+Thanks for the pointer - I hadn't seen your patch before sending v2.
+Your version covers much more ground (tap/tun, multiple device types, etc.),
+so I'll drop the networking part from my series.
 
-Can you please fold this function into the one above, passing in the
-MMC controller number?
-static unsigned int get_mclk_offset(int mmc_no);
+I'll send just the typo fix as a standalone patch instead.
 
-Thanks,
-Andre
-
-> +{
-> +	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-> +		return 0x10;
-> +
-> +	return 0x4;
-> +};
-> +
->  static int sunxi_mmc_probe(struct udevice *dev)
->  {
->  	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-> @@ -707,7 +722,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
->  	ccu_reg = (u32 *)(uintptr_t)ofnode_get_addr(args.node);
->  
->  	priv->mmc_no = ((uintptr_t)priv->reg - SUNXI_MMC0_BASE) / 0x1000;
-> -	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * 4;
-> +	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * get_mclk_size();
->  
->  	ret = clk_get_by_name(dev, "ahb", &gate_clk);
->  	if (!ret)
-> 
-
+Best regards,
+Manjae Cho
