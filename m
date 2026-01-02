@@ -4,63 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60C01FA3748
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C55FFA3748
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 14:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB418422F;
-	Fri,  2 Jan 2026 15:36:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 925A183A2D;
+	Fri,  2 Jan 2026 15:43:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qkS3xaof";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VcAG2RoT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B26A84241; Fri,  2 Jan 2026 15:36:33 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EDC2A83A3D; Fri,  2 Jan 2026 15:43:16 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66819841E6
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:36:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AE51839AC
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:43:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4djR8Y3gmGz9tcZ;
- Fri,  2 Jan 2026 15:36:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767364589;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OERFb6CKJqukuDfql9DlXUcoFgtbCwR94c+GDjUHqKg=;
- b=qkS3xaof66hT4c8zu1diEVLEO/Yb7zlEqsLrCMnG8h5CaTOafV8gCCUX+DeTA1YZfu75dc
- 36T+Q0/inrAt+NzAC3bk01l1egm0QKgi6K3BN7hN/XfnuFPQatwxMjhF/b0uqkPHPr3COR
- CILmH67F5ruxQSb4qLSjD3y7eV2fW3xLQ8J2k9TzxhNKaG9iupdIzN8QgijjJ2IBf+xEMN
- P/higi9yH0gQB0KDwswCk3WHUkdyhpgWXw6LArN5dTljc5WX/E5stnTyyVTNORRxNtgz04
- If4fxs+FirYUzqai+c0EKV4ICiArFRrbeOP5imHVBDYhXr7zpuGhtL9LleHJ4A==
-Message-ID: <67fefad5-ce05-486b-81f9-f28798195bc1@mailbox.org>
-Date: Fri, 2 Jan 2026 15:36:28 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-45330fe6e1bso7210710b6e.2
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 06:43:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767364993; x=1767969793; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=f6ktQBounpaQArsptfmcKLZONV3pZvxyQ/DPhj7VKpc=;
+ b=VcAG2RoTpVrB22M3DEjT5oAMf4Wck4SXPWTytP6aMTQFSt1OJ5XqN3YOCguxpTQJ7M
+ WA0wOMRpeVyXOagE7QsuPMsbB2RD3UwaWfZRq8QNTF6Y6cey5FrLrWPeSShUlAmN9a5h
+ R2upExzp4LIs94mwpuS05QHmqQbmnwqUUgWpQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767364993; x=1767969793;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=f6ktQBounpaQArsptfmcKLZONV3pZvxyQ/DPhj7VKpc=;
+ b=uUdsjIvtERjSUHUiK9jgNWvMwefyoFiP13WIKATg5LXAObEb+P+sGOJS62wgKhSoKw
+ mtvHDwGTU0tjCaE/dc+3fgXV8jgsnG9qIwM6CB6xoIAncQFZtwTqjx0dv/MQ6121fGjV
+ 138tul9EAi3o7zUmxcRR15/ncwoiodGAW2AIwnVyh0b3znypPESpkX7Egtd/LawfxtD7
+ Ekr9HHjfO/JhVP0bfc4Gl7WSz3sFbBmjnYokfTMq2IhP098pQYpBJ6A0Sv1crRjbJNff
+ o10fALnrc/RJ/7f78p0XcS3GiCWWAMfOLfHhXh93+yVgwVifWOJvm1tTaHcRsjSG5P7D
+ TMVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVI0Jc9cGCwM84KvLZ8M8Bqdwn6rmUp5RjFhTM+IdJ1bN/naQmwOez9erMcSz0wOS5MFYywLx0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxwffM04EwskfVgQn7fEEP0jATf2g2wQ4UVzg9U4rI/VkHrymzg
+ ESio1RiuWpBKx4jEQwUWhsrjOtGFDy0ZsDTLTtYz+rtnuHD04PW1BVl9JlP4gV/n0Nc=
+X-Gm-Gg: AY/fxX6pARUdzs6bClFZb3TtRfER/i0hayASn/TKJK2U3wdqL2iMd5jQL5EjjgskjwQ
+ D8PGL0lof3sTF3dy1ImiJ7k90eAIkOnSiJ+zbxNCpnqoM92LJKWwCgqOn9ww1MaPaKuhS3zKoRR
+ X3RQBO79uEFLu6Z8dYzVcszb24EHObf5GgH2Gw6vVH+z6CBoyYiQN832bYuXrIqg7rko46QFagC
+ ZeA0JgZsZ6nXwoxchRkcS1gYO2AlbChmDj6Rx73O/N2EviIuQcg8ArroH9Ca/UAP6AwsDj0gYyb
+ JitNVYn6SdNb8u83T+D5dwPmRCoqhgdCph1yapwrjibofp5jtLvCu/hLSyDV/SWoDWxBjEZcUJt
+ D4sISi4GEaVCg7p3AypMO/IcSNJS6Bhd6QfOJDibOD4RpYkq/UJGNQx+NjpaYAfv0CXw5DGW88Z
+ hip0gdKe2hQTnnVEqvmqZkKs3TWFvxRKu0HtuAHHpk6c5wVskA/fCyOArcOlMBdg+evsVMh8cMK
+ 5sX+gNc5+iuC+th5wLor3QoCnnRQ/AJZ/vJC80=
+X-Google-Smtp-Source: AGHT+IGlWrWFLJcH4QSCiSKbEtKSc+Hrh/jpuT3PEwA3PNKKgkwRwrrU9jgteROc4Km19YBf9jxtfA==
+X-Received: by 2002:a05:6808:5088:b0:450:b14:7a6a with SMTP id
+ 5614622812f47-457b20403f4mr21106082b6e.60.1767364993135; 
+ Fri, 02 Jan 2026 06:43:13 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cc667563ffsm28460582a34.13.2026.01.02.06.43.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Jan 2026 06:43:12 -0800 (PST)
+Date: Fri, 2 Jan 2026 08:43:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, bb@ti.com, anshuld@ti.com, hnagalla@ti.com, jm@ti.com,
+ nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 00/11] Add support to boot TI K3 HSM M4 core
+Message-ID: <20260102144310.GA6124@bill-the-cat>
+References: <20251231173621.1069988-1-b-padhi@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/1] usb_kbd: remove match string
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- u-boot@lists.denx.de
-References: <20260102125622.144573-1-heinrich.schuchardt@canonical.com>
- <da40c4d0-8c8a-4341-b779-96f571b7db87@mailbox.org>
- <CALeDE9Oue=0L3PRVs7O8suPVDFBXL_i6o0hc50jLQ49HtaX2nQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CALeDE9Oue=0L3PRVs7O8suPVDFBXL_i6o0hc50jLQ49HtaX2nQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: hj1b7my18yiqntharqmmdy4chw6ctum5
-X-MBO-RS-ID: 314b3928e30b2f60cda
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="24w5qNLmg5M0Uto1"
+Content-Disposition: inline
+In-Reply-To: <20251231173621.1069988-1-b-padhi@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,34 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/2/26 3:22 PM, Peter Robinson wrote:
-> On Fri, 2 Jan 2026 at 13:47, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 1/2/26 1:56 PM, Heinrich Schuchardt wrote:
->>> USB keyboards are identified via a USB interface descriptor or via USB
->>> vendor and product IDs but never via the device-tree.
->>>
->>> Remove the device-tree match string.
->> The commit message is wrong, you can actually describe USB devices in
->> DT, see e.g. Linux:
->>
->> arch/arm/boot/dts/st/stm32mp15xx-dkx.dtsi:              compatible =
->> "usb424,2514";
->>
->> Documentation/devicetree/bindings/usb/microchip,usb2514.yaml:          -
->> usb424,2514
-> 
-> I think there's nuance there because I think those USB hubs at times
-> can have a GPIO to control power or something like that and hence the
-> compat.
 
-I can imagine laptop keyboard can have the same thing, either for power 
-regulator or for backlight under keys.
+--24w5qNLmg5M0Uto1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->> However, it seems this particular compatible string is ad-hoc and
->> unused. I wonder if this might break some users like RPi which supply
->> external DT and may depend on this support ?
-> 
-> I've never seen the USB keyboards described in any of the RPi DTs
+On Wed, Dec 31, 2025 at 11:06:10PM +0530, Beleswar Padhi wrote:
+> Some TI K3 SoCs like J721S2, J784S4, and J722S have a HSM (High Security
+> Module) M4F core in the Wakeup Voltage Domain which could be used to
+> run secure services like Authentication. Boot flow for HSM M4 core is
+> different than the general purpose M4F cores, and is as below:
+>=20
+> 1. Request control of HSM M4F remote processor.
+> 2. Assert Reset on the HSM M4F remote processor.
+> 3. Request Secure Entity to Authenticate and Load HSM firmware into
+>    core's internal SRAM memory region. For GP device, load the firmware
+>    manually into core's SRAM region.
+> 4. Deassert Reset on the HSM M4F remote processor.
+> 5. Release control of HSM M4F remote processor.
+>=20
+> This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
+> firmware is packed inside the tispl.bin fit image. The firmware is
+> unpacked into a temporary DDR address which is then used to load HSM
+> core. The configs to boot HSM M4 core are disabled by default.
+>=20
+> Note:
+> This series is dependent on the device-tree changes series posted to
+> Kernel mailing list:
+> https://lore.kernel.org/all/20251231165102.950644-1-b-padhi@ti.com/
 
-OK
+I see there's already feedback there and I expect at least a v2, so I'm
+going to mark this series as RFC. As I expect you'll have to change
+this, please wait to do v4 until the dts portion is in linux-next. I'll
+look over this series itself now for high level things, and leave it to
+TI folks to poke at any specific details, thanks.
+
+--=20
+Tom
+
+--24w5qNLmg5M0Uto1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVfZegAKCRAr4qD1Cr/k
+ChF5AQCPglEVDlRcZeRQLB0t/QldLqz+tMbcKyZZN8DAgL9G7QEAxKSXIrEJ/1r+
+dsJSOscZZiYOnsMaWJh/nXl7q0Sseg8=
+=/0ow
+-----END PGP SIGNATURE-----
+
+--24w5qNLmg5M0Uto1--
