@@ -4,59 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5703FA3724
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 01:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2986AEEB57A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 07:13:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE19E83AB8;
-	Fri,  2 Jan 2026 02:48:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nathaniel.land
+	by phobos.denx.de (Postfix) with ESMTP id 3002A83A94;
+	Fri,  2 Jan 2026 08:13:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="c5BHpVEv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IxnAVKyI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2B6A83C6E; Fri,  2 Jan 2026 02:41:49 +0100 (CET)
-Received: from goldencat.email (goldencat.email [45.45.221.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AE58A83AED; Fri,  2 Jan 2026 08:13:32 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF14383AB8
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 02:41:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nathaniel.land
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
+ by phobos.denx.de (Postfix) with ESMTPS id B9F8683A8E
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 08:13:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-78fb7ab7562so86516727b3.2
+ for <u-boot@lists.denx.de>; Thu, 01 Jan 2026 23:13:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1767338008; x=1767942808; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=o1/7uDKtJLnQgjAhnT1H6yhTTnmAEB62Rc3k+HWa0Nw=;
+ b=IxnAVKyI0X2tC9dvxkrIikzUt2bQ417T743a4vgVW7kdGibOIVFXfnpZu3NnHpu8+3
+ 4nnWWzHd8UyhzLbz0jWSyzTkmlvW2Ctn3dofON84oVcv0hRAXJ130LeqZ+xsunzwwn9B
+ /ldHK4QjpE1I0N2ajCfGd7PL07H37u/XJ01/b5p1QKR8nKSeTrT4pDFK7qPjKzXyA92e
+ kFHH4D8C7WvPL1GKPtP9tNXO0v4i0AVMpOxqMtA04FOHDhlqUb4CPW7HLbi/EFvZ2/SQ
+ Dy0T3HcxmXvkgqlN0Eilxzt8Elj/xcDaphnTAvXM3ZGbt133e+XnnZQo86QjL/zjsEcL
+ V4ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767338008; x=1767942808;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o1/7uDKtJLnQgjAhnT1H6yhTTnmAEB62Rc3k+HWa0Nw=;
+ b=ndc39oXjpJcDFgJaJ50Q5pLDd4PP9B0qK6hs5zTSMvifk1PtLFUg17sXpYlb9oshFj
+ iq3lQEhyOnMhcAgcd1HrHkgtTYJARZ+apmLiMqlJOc9CbYbm2gA5RhZ+oOT3xL/sWBzD
+ woLPd3PaQWbV05/nv9WNEenGPVQHU3dzcJiOzvFnCQETtqfD8oekU9Q6Ck+OGgo4aiZT
+ 9KaY+5IlB+kRG+7AvcpmMUNCiXpFPFvg8gHlXLrgo4dkpXB1P0HctvoCNGTIHpRcUhg5
+ JF8I0tQxxgwcdpjKbiGdVBlPnB2x9JSW2me+HavdLXUH5g/jQ83gSCg/f/jq5tRdOdda
+ ylXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXP61ILJSyaF9NNhnAVMcv13RS5Jape3Lf+S3f6U6ZyMHrmNGyKuRsBihdLihYimV3VF3IOXM4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0nujmKH0pT1vGvIohqZL9ZkBHY900d8PDFHtXMwReFct0JBb/
+ Yh587CZ04UvqD/T6COgFgaRXxqOEd+qLi1sifm+E3DNzdSQrJ0YHTqaQpRAQ+p6ckTD8VGh+B+B
+ 8kJ0GT3nKZHIqV36L7xnbptvJyprSebuNgGwnfieOEg==
+X-Gm-Gg: AY/fxX7jwRGO6mKTcArfRh6RlAJSe9wTAQznzD8qPSE+AxzrW+25mYCWPSKHi9f20lD
+ aEXH+VoDVqi6y4gEmTvsry5pwNEdEFIh2m4Vivc093yO7oG2l0uMB9RQJxv+nTgB0ZV26XJ+SPb
+ IiplzQfXxQVHDJwwo2FPvECFOOKnBs/uUNwk2EDBXMkKg+U737lcMHoxdw7nwNdjieqt/Q1NXv4
+ nZrrAG0bpWOdU93ue3Hd8KxDpCEupnwWcs9F5gAgeo0HkJZ/XVAunLOPBvKt1JEi/t4oNxGy3JY
+ H9GLnKRshR9gPdo/lyeM1sFV07b78kucj6FBEIexlTR2/wAvg94h/DxcrXmFkOoCZe5we0yKsEZ
+ HRxncqRhng5WNPnc23xuJ++N1Pfeh2bOAhDOCLeQgi+JONmBYjKvmPWL0OCj8WOqjRgIFuwJswz
+ 0fmvrHqHPx/IfJSQK+sDBl6+cWeWpuz0DAXhmZwi0Q3WcDLd7hKEbndU+5Rdg/SsXq+v8MyB8K9
+ Wk6EMQVdoViP57fKxtCG5PDq8QvWoSpcOWLHeS71AsjtA87dmIbvypMKiLHBi+AfPIvc4OhF3mW
+ 3rROLg6T1o2uaEMd9nuk94gwM4zUSw8=
+X-Google-Smtp-Source: AGHT+IHDGqjLAOTdo5SUeu2a7iCrhrMPpoalKhYAyi3X3ZnsAFcnGhVdHIR+iCC/wizm05gBAfCrPYe9L+q6/a24Zd0=
+X-Received: by 2002:a05:690c:c4f2:b0:78c:2857:7e78 with SMTP id
+ 00721157ae682-78fb3f71029mr684305207b3.31.1767338008471; Thu, 01 Jan 2026
+ 23:13:28 -0800 (PST)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
- s=dkim; t=1767318104;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0pMWWXIV670+9Siqm0UkjNzUeb2xhNyeNOSF9uXcilA=;
- b=c5BHpVEv+Fh3vU6fwAjTjkRwQL79uSKgxd89kq8Hdkj3li5dQjHmi/LKnulMuzj2VCrkJx
- 0vGVR89PwMwwBonJevRHdifGN6r3DgwPMAC8Mg5vyVTtnVi1kly77i8O4ZGEa6lM1yNTew
- O3Bfz5sIl4ggRqmdc3fqcCwSzK7B0NtzeqN/yOpWQNwAIjvtejXHNU5NZ+eiJqnHfSw7XS
- lR+h5vJvuygzPO/Ukgq+IHZuAimN+KtWWT+O0dGo8FiIbLakHWMUCkvaZkeoLA1FhgeGFB
- MpDJe48CQuFuMDQNu61bodufTcWCVQOXv6wCS1WXVFoyLraVj7UETvax948Leg==
-Authentication-Results: goldencat.email;
- auth=pass smtp.mailfrom=i@nathaniel.land
-Date: Thu, 01 Jan 2026 19:41:42 -0600
-From: Nathaniel Hourt <i@nathaniel.land>
-To: Yao Zi <me@ziyao.cc>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Minda Chen <minda.chen@starfivetech.com>, Hal Feng
- <hal.feng@starfivetech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH] riscv: Build SPL with -fno-pic
-In-Reply-To: <20251215172236.52710-2-me@ziyao.cc>
-References: <20251215172236.52710-2-me@ziyao.cc>
-Message-ID: <52a4244d8b819042f18584c889830c89@nathaniel.land>
-X-Sender: i@nathaniel.land
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: +++++++
-X-Spam: Yes
-X-Mailman-Approved-At: Fri, 02 Jan 2026 02:48:22 +0100
+References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
+ <20251231191054.247270-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251231191054.247270-2-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 2 Jan 2026 09:12:52 +0200
+X-Gm-Features: AQt7F2pt7MNWAu_qAFZMWe7Nhjy2dj94e10eYcW_ADKm0W9iZCV79K4Ps1gTQf0
+Message-ID: <CAC_iWj+VHVyOv43pMxfdUr=0e+9bjp+Gz4nzuweX1uSibObrXg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,80 +100,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-12-15 11:22, Yao Zi wrote:
-> For RISC-V ports, both SPL and proper U-Boot are unconditionally built
-> with -fpic, i.e. position-independent code, which means symbols may be
-> addressed through GOT. This is useful for proper U-Boot, where we have
-> relocate_code in arch/riscv/cpu/start.S and could relocate the GOT
-> entries and other .data members to run at any address.
-> 
-> But for SPL, there's no self-relocating mechanism, all we could do is
-> relying on the linker to fill correct addresses into the binary at link
-> time, forming a position-dependent image. This effectively makes the
-> GOT, which is generated by usage of -fpic and couldn't be optimized out
-> at link time, an unnecessary size burden.
-> 
-> Moreover, our current linkscript for SPL doesn't take .got section into
-> account, allowing the linker to put the GOT at unexpected positions,
-> like after _end/_image_binary_end symbols. This has caused real-world
-> boot failures[1] when SPL is linked by LLD.
-> 
-> These two reasons make building SPL with -fno-pic good choice,
-> eliminating the usage of GOT at the first place. This patch replaces
-> -fpic with -fno-pic in PLATFORM_CPPFLAGS when building SPL.
-> 
-> We also need to force medany code model for SPL to allow putting the
-> executable at any contiguous 4GiB memory range, instead of only the
-> lowest and highest 2GiB when using medlow. This wans't an issue
-> previously, since GCC ignores -mcmodel=medlow when -fpic is specified,
-> but is problematic with Clang, or without -fpic.
-> 
-> Building position-dependent code also produces bss/data/rodata section
-> variants with "s" prefix on RISC-V, i.e. sbss/sdata/srodata. These are
-> "small" sections which compilers expect to be put together, addressable
-> through a single instruction relative to $gp register and thus saving
-> code size. This is called GP-relaxation[2]. However, U-Boot takes $gp
-> for global data pointer, making it impossible, so these sections are
-> merged into their "larger" variants in linkscript.
-> 
-> Reported-by: Nathaniel Hourt <i@nathaniel.land>
-> Closes: 
-> https://lore.kernel.org/all/932979cb47c4fded7ac19216ca172504@nathaniel.land/
-> Link: 
-> https://lore.kernel.org/all/9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land/ 
-> # [1]
-> Signed-off-by: Yao Zi <me@ziyao.cc>
-> [Patch elided]
+Hi Heinrich,
 
-Happy New Year, at least for those of us in the west =)
+On Wed, 31 Dec 2025 at 21:11, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Since commit 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
+> CONFIG_CC_OPTIMIZE_FOR_DEBUG has no effect on the non-host code.
+>
+> This patch reestablishes the prior logic to add
+>
+>     -Og -Wno-maybe-uninitialized
+>
+> to KBUILD_CFLAGS.
+>
+> Fixes: 5f520875bdf0 ("kbuild: Bump the build system to 5.1")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  Makefile | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/Makefile b/Makefile
+> index 6b5c5ee019e..2a972af4906 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -869,6 +869,11 @@ endif
+>
+>  ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
+>  KBUILD_CFLAGS  += -Os
+> +else ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUG
+> +-KBUILD_CFLAGS  += -Og
+> +# Avoid false positives -Wmaybe-uninitialized
+> +# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394
+> +KBUILD_CFLAGS  += -Wno-maybe-uninitialized
+>  else
 
-Thank you, Yao Zi, for making this! I have done some initial testing, 
-based on v2026.01-rc4, on my Mars board, and my results are mixed.
+There's a ifdev CONFIG_CC_OPTIMIZE_FOR_DEBUG a few lines above.
+Wouldn't it be better to move the HOSTCFLAGS under the new ifdef as
+well?
 
-Right now, it seems to be a coin toss whether any given configuration 
-yields a spl/u-boot-spl-nodtb.bin which is a multiple of 8 bytes, or 4 
-bytes (but not 8). In the latter case, it doesn't work, even though _end 
-points accurately to that 4-byte-aligned end-of-the-image position. In 
-the former case, however, where the -nodtb.bin ends on an 8-byte 
-boundary, it works great.
-
-I have made some attempts to modify u-boot-spl.lds to add an ALIGN(8) 
-directive before the _end symbol, and this makes the _end point to the 
-next 8-byte boundary rather than a 4-byte (and not 8) boundary, but it 
-doesn't cause the -nodtb.bin to be padded with those last 4 bytes. My 
-attempts to pad it manually, concatenate the dtb, and run that through 
-mkimage to get the final u-boot-spl.bin.normal.out image, have yielded 
-no success. This failure surprises me; I was expecting that to work... I 
-haven't had further inspiration on things to try. :-]
-
-In conclusion, it seems to me that your patch is working fine, but I'm 
-still having woes with DTB alignment. For now, I can get working builds 
-by tweaking the config until it happens to give an 8-byte aligned _end 
-pointer.
-
-Oh, and sizes of u-boot-spl.bin.normal.out:
-Without no-fpic patch: 152537
-With no-fpic patch: 151749
-
-—
-Nathaniel
+Cheers
+/Ilias
+>  KBUILD_CFLAGS   += -O2
+>  endif
+> --
+> 2.51.0
+>
