@@ -4,110 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7AFCFA374B
-	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7433FA374B
+	for <u-boot@archiver.kernel.org>; Fri,  2 Jan 2026 15:19:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34AFD84292;
-	Fri,  2 Jan 2026 16:19:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 732D984295;
+	Fri,  2 Jan 2026 16:19:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hOW3DDqK";
+	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="mnA3tEWZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F0A684295; Fri,  2 Jan 2026 16:19:04 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 24CFC842A4; Fri,  2 Jan 2026 16:19:08 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41E928428C
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:19:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39CB384295
+ for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 16:19:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id CBFAE3F5B6
- for <u-boot@lists.denx.de>; Fri,  2 Jan 2026 15:19:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767367141;
- bh=Gg/ZrvpRDakCy50NluNdOdSCdDywc7VzEAOCM2BX56k=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=hOW3DDqKqHNFFR0TH64MKcJ8VrLAsMAhysQ7odXC+BLlNAkC5wYXL/t0SC+tgmfGY
- G0xx7p7/IFnuSe9z4RXCCj/OJ9L7g38qaLmGBP7DLfwfGV7vpYCq+KE/h8fBYeNmuI
- 6Di10+TvFlucoI97+Zxq6ZE0D41O2UNrRpVLJXdDigMmsZwcIoWvVrdtarwQ0GUHA0
- m0mIdT+04bzDRwN5eYgUWOuf2crDX8yvMijX7MfJnRqB0qD7DjHAHNR/kf4jNaj0yl
- H6CmElnd60mZR4L0Ho99BDvAht4HxBGbGmoP2azdVXBDklslNKsrO7AP1af1k0cnB5
- hcY2DzHBCDASzp/YWcadG9yOPJ0EuqDmaas6TE+PMZdZBnasPA+Zlsw8voN2fUqpHa
- NtZh8fpeJaFFEZKpjqhw6jSb/UBm49yLKXPofFTNGkIGCeFwyanWhrb+eqyIdDnp5T
- 8i/ihKTrOZdq+UDcg+MhV+Lq6KnzUR2qNlnepH6gfhmYt1IgqCdEHQcK2+tXou59eh
- 5YELynMfN2Vtk1ff1TzbaLd+qvxIKShptBhtSEEMUwaeKfcAWl63RfI6VQhnh9hfgm
- clE4oEsHyEeFR3Iaei2g79PWRRQenLIhj+nn/sx9zxmAXjmCzCF9Q0WzqosI3dKy/j
- JLoI7UeuwOeJJneTqRacwb+4=
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-4325aa61c6bso4586317f8f.0
- for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:19:01 -0800 (PST)
+ header.from=forissier.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome@forissier.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4775ae77516so125301905e9.1
+ for <u-boot@lists.denx.de>; Fri, 02 Jan 2026 07:19:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=forissier.org; s=google; t=1767367146; x=1767971946; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5yE1j7/O7U6NJVns3yNy3pYR6uc0vdplyM4C/7QHXFY=;
+ b=mnA3tEWZU2zVY5Ws/WSRjDVilsw2CO6C0eHeOAADW17xUYHckJJLktN06xYRxkn4uv
+ dKRrRKsVlxfRlNNYhy1XWFbpt/P6O5suHB/CIp2qa7lXaa8n1TWlPKZ+m4eaWkiCxGaz
+ CxkQi2e5/LlZ4EUsr48RdWCnHSwUW/zgBvsXhxgueOgjY1eMomm14t9UcS3usjRnhiCV
+ AVT40vwPo/M4JZPYarhAPrIg33UO0OMc0K6WSL/a48RkIXDo0O34bjkv0BR22cfOugkv
+ kwnfKOGQMnS2yNuxqidrB0dd9wduBJ6OhFDfYYkKvLC5ZWILrN6gC/Pmi53aaUbgREpx
+ Ls1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767367141; x=1767971941;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1767367146; x=1767971946;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Gg/ZrvpRDakCy50NluNdOdSCdDywc7VzEAOCM2BX56k=;
- b=kU/nWxVC4V3GwDoRaGXsMULmTbjP0W4zzT7//VdScSgTwA51o8+kPCfWPO1LsyDy86
- /yMXhaZB/5N7IEfK8PQQinTTDjSQw90oSuQuEdtzRPsgqbuf8m+Sa48uLgS+0d0/s0ID
- MFMPsrpjUMq7gKIYpe7HGyPFn6bC3CmdA0CJIXgNvpvPyQm7B0pPNOHor6NCSm45Yl1T
- rJVDH1vKmUfFKbYsfD1dGvL8ag0DlRGdPlNvAueYaoWtDQTBmc1tPCk25uQlj57rCpLm
- Gc9Y0yMkUWT80pcPRrtiAE33NzsVVoETZb9/JtcJchPjFIONeuEMYRYrunEyEWJ2RG6v
- pMBQ==
+ bh=5yE1j7/O7U6NJVns3yNy3pYR6uc0vdplyM4C/7QHXFY=;
+ b=kSyZ7Jz5MTa/acgvDENwdgm7AqvV3Dw1GlAuY0OZYMkmUUn/SrMVzD4kd2NwMtcD8e
+ nbDNfIHllN1qahyBfQL3/cFQ0ktSs84X9/osAgdgdC5FgtoUdQITAwsVTeiKs/dhRxLQ
+ QxbtD10ZrUu3AApMhDBvA9Iv0Rijys8yI4kxq6kVIlu8iEm8/w2i2IOVPj8EN/90/Ws8
+ JhlsxkL6m+rXnBNWkRma/WrGhkfGr6GIsFnReWO5XDwPKiW1MmMnzrSrzLDJd/yhXVbc
+ rMC6BY6cXCv2PaSEtD+9Jv3ca5K4wapNH3KdU0bjqz9P12TZYagu/l4hE/KjKsaV2+B3
+ b5Ng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUowACAEF3Jic0T4BGZ1DVJ9oTIRQJsmU+D/b7yhW5DnC14h1bi+nvRRnR1M9Cn2bJ2v5kUMxI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy16qBOPCUGKfl3h/xxRyTd99LTRjv++7PTBM5zgT1GEs2ZPJTK
- iv36SMYbL0FtyvUTRmmnsvemJQznj9K3eLBet4vNYuCD0jbkllYpGJTN1RPIjgudoYcc0bXgynx
- f/9Sv80hQx89QfuM+NggsPUcb9me+PCGARBbhczWLXsSclA+PoquC5123vp0W3xRAslC/Y1s=
-X-Gm-Gg: AY/fxX5Jsc6IoxCrKIGgWZnqgSocftyFtj2HuH1UmMWe9xq3Vu+LJjH4lEg5hfaIo2e
- Ztt+OgDSKpg97GdOtV9l2IhCQrGyzxz2jSUxmG4COH1ccqtn5kBdpeFYTm7KGAq34DBFkZ7xMoh
- sWofFSrp4x69HkWdbykd1qFThz4G9fuF2e4NJwKTPoJCHcx2tbfJfgVXeWUbQ3iWFK+lphD8iF+
- JeBkc23whzYFg55W9cIVUSCPPgOvqwDgbJF9FyF4YzLdoa8CMNxafrinTX1dhC3kev6bkcdthBV
- OQ1MLOfFNQcCq/CYx3Ww/9w9R+Vsahko3zxsqYiXJGOn5aTjZfe3QxvyiJi/XeQBvc6/yIVYwTx
- EHp07xuBPkoSh8Xlu4o3hE1ZvDN6bdrfe9vuZKnK0PAGCiGXcGpMaPwJbxHwBWkpu1f4i31AnR0
- +ouW3/4dU=
-X-Received: by 2002:a05:6000:2c0a:b0:430:f742:fbc7 with SMTP id
- ffacd0b85a97d-4324e4cbcafmr58903987f8f.14.1767367141373; 
- Fri, 02 Jan 2026 07:19:01 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGN32fq/kpRAb/lsr88jcB6DWuH2it88pEN0aUrkU/bEo7p/czRtG0UhMRQmtsD96xOq8cgyw==
-X-Received: by 2002:a05:6000:2c0a:b0:430:f742:fbc7 with SMTP id
- ffacd0b85a97d-4324e4cbcafmr58903952f8f.14.1767367141013; 
- Fri, 02 Jan 2026 07:19:01 -0800 (PST)
-Received: from [192.168.103.126]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ AJvYcCUI4vMMd7gfMsT6SkjI0WZ8v8ENcYxHfMb/kDbVEl+vcLtjumONKw5X1CFLwY+Vo85mJCYaitc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyr1JL74NCWF1EaGR3yB5i3G5ecbPFUQitM+ClXGYaEZCHXVyTI
+ hjE9VfWXbeKJrU/PDGgt+IWSGTNUbEHHtM7hIDKUots7ECrw6E2AV/aIdrAwwOlC+D4kivBZfJG
+ PvzqH170=
+X-Gm-Gg: AY/fxX6jHhOn8GO3+jqRQnELuzWQYFxv6540lrB2eIpnZ8q8hglfSehaHKQIwOc4VF7
+ RwcaCKuUlc/zcPiCqeh9Lli1CUYLxiIleerlQRZ5HQmttfJYt7gbTUVxvl5WDflhED7fRA8N1Q8
+ l86Kn3rQCvGKL3o+tbr8P1SQ1YKrDYig2zNcersqat5Ha/YN8iDD4tYkWt8VOFBh7UQJNFk/hD+
+ jiL4Z37G6B6vWkWNYQwXTbXsPn7u8qDEKgsP4/1Xf5dEuUZIgDfVri1Bmnr0AG/TtCEM3brsPTk
+ 8aD89B7ECgsbZYarcgn09EL+qfMYQSoIpZIQIp484oHoIAHn4tpBKNGI3Tf/92Msy0lkUUeWvs2
+ qjVscGOs7FencaYfcw5IsRrvJKlKcT6/x/bVdQ0/caXEVYz9b7hTTsP/DvnM3bHORLHPxclCL/Y
+ 0lRe5lbN3ijZ4+GbWFdAwG+kdWlSxLEZhalOh4ciFIyxE4uqf6WOD2qUCa
+X-Google-Smtp-Source: AGHT+IEAvjgWvejpT1/fHcDDyAWOfbu31sm8QDBK5hr6PBJfpRgpUnraXvoLVDR71CEdtdgdK90SUQ==
+X-Received: by 2002:a05:600c:19c6:b0:471:14f5:126f with SMTP id
+ 5b1f17b1804b1-47d195c201bmr550125485e9.33.1767367144784; 
+ Fri, 02 Jan 2026 07:19:04 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093?
+ ([2a01:e0a:98d:5340:ea5e:8e1b:d9b6:2093])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4324eab2721sm84673780f8f.39.2026.01.02.07.19.00
+ 5b1f17b1804b1-47d6ba3b196sm773225e9.6.2026.01.02.07.19.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Jan 2026 07:19:00 -0800 (PST)
-Message-ID: <7befea69-0f45-4d7c-88e2-04450563cc29@canonical.com>
-Date: Fri, 2 Jan 2026 16:18:59 +0100
+ Fri, 02 Jan 2026 07:19:04 -0800 (PST)
+Message-ID: <e2529768-467d-4bf5-a27f-9e50b8defdb1@forissier.org>
+Date: Fri, 2 Jan 2026 16:19:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] test: do not imply os_malloc() outside of the sandbox
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-References: <20251231191054.247270-1-heinrich.schuchardt@canonical.com>
- <20251231191054.247270-3-heinrich.schuchardt@canonical.com>
- <CAFLszTinaB_wvQKijgW=CvP8Qz5dgjOv0ykGrSfEpUG3Jjevtw@mail.gmail.com>
+Subject: =?UTF-8?B?UmU6IFtQQVRDSF0gQWRkIG1pc3Npbmcg4oCcbmV04oCdIHByZWZpeCBp?=
+ =?UTF-8?Q?n_help_net?=
+To: Emmanuel Gil Peyrot <linkmauve@linkmauve.fr>, u-boot@lists.denx.de
+References: <20251227181852.4404-1-linkmauve@linkmauve.fr>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTinaB_wvQKijgW=CvP8Qz5dgjOv0ykGrSfEpUG3Jjevtw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Tom Rini <trini@konsulko.com>
+From: Jerome Forissier <jerome@forissier.org>
+In-Reply-To: <20251227181852.4404-1-linkmauve@linkmauve.fr>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,54 +106,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/2/26 13:29, Simon Glass wrote:
-> Hi Heinrich,
+On 12/27/25 19:18, Emmanuel Gil Peyrot wrote:
+> From: Link Mauve <linkmauve@linkmauve.fr>
 > 
-> On Wed, 31 Dec 2025 at 12:11, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> When compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y the C compiler does not
->> execute all optimization paths and add a reference to os_malloc().
->>
->> Remove the reference if CONFIG_SANDBOX=n using #ifdef.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   test/test-main.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/test/test-main.c b/test/test-main.c
->> index 3254325e8b1..1815d60acf7 100644
->> --- a/test/test-main.c
->> +++ b/test/test-main.c
->> @@ -734,6 +734,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
->>
->>          uts->of_root = gd_of_root();
->>          uts->runs_per_test = runs_per_test;
->> +#ifdef CONFIG_SANDBOX
->>          if (fdt_action() == FDTCHK_COPY && gd->fdt_blob) {
->>                  uts->fdt_size = fdt_totalsize(gd->fdt_blob);
->>                  uts->fdt_copy = os_malloc(uts->fdt_size);
->> @@ -743,6 +744,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
->>                  }
->>                  memcpy(uts->fdt_copy, gd->fdt_blob, uts->fdt_size);
->>          }
->> +#endif
->>          uts->force_run = force_run;
->>          ret = ut_run_tests(uts, prefix, tests, count, select_name,
->>                             test_insert);
->> --
->> 2.51.0
->>
+> The usage of the net sub-system was missing the complete command for “net
+> stats”.
 > 
-> Oddly I hit this same problem some months back but I didn't end up
-> needing to patch it.
+> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
+
+Not sure this is a valid S-o-b as per the U-Boot guidelines (real name
+required?). Tom?
+
+> ---
+>  cmd/net-common.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Which board are you building here and which toolchain?
+> diff --git a/cmd/net-common.c b/cmd/net-common.c
+> index 1c6f11cd435..6f33d15d695 100644
+> --- a/cmd/net-common.c
+> +++ b/cmd/net-common.c
+> @@ -103,4 +103,4 @@ static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  
+>  U_BOOT_CMD(net, 3, 1, do_net, "NET sub-system",
+>  	   "list - list available devices\n"
+> -	   "stats <device> - dump statistics for specified device\n");
+> +	   "net stats <device> - dump statistics for specified device\n");
 
-I am on Ubuntu 26.04 (gcc 15.2.0-7ubuntu1) and the board was 
-qemu-riscv64_smode_defconfig.
+Apart from the S-o-b, the rest is:
 
-Best regards
+Reviewed-by: Jerome Forissier <jerome@forissier.org>
 
-Heinrich
+Thanks,
+-- 
+Jerome
