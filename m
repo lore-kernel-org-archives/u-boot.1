@@ -4,134 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DBDFC6160
-	for <u-boot@archiver.kernel.org>; Sat,  3 Jan 2026 08:43:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E49AAFC617E
+	for <u-boot@archiver.kernel.org>; Sat,  3 Jan 2026 10:55:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B386D83B6C;
-	Sat,  3 Jan 2026 09:43:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AADF83B49;
+	Sat,  3 Jan 2026 11:55:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="fNCs/3p3";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="cVn2COxC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55EDD83B8F; Sat,  3 Jan 2026 09:43:15 +0100 (CET)
-Received: from TYVP286CU001.outbound.protection.outlook.com
- (mail-japaneastazolkn190110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d405::1])
+ id A017483B4E; Sat,  3 Jan 2026 11:55:11 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E075B83B4E
- for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 09:43:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E60E83B48
+ for <u-boot@lists.denx.de>; Sat,  3 Jan 2026 11:55:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yangshiji66@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EBLKtQ9+U46p8bB1ju0VPl5sDIgwtqzjxz+Si+cZtpCABhFbcbE5CGJtQmtrK7oUb42dwL4BuOq1JNJef3Dq05Y9u/INyGm/yWYQkZJ+8tW/rCJmXVQci2j6lzvdatTbHo/CRnMXvBIi5bq0DZtIs7ZKGYR1ApwkSzY8+Vz0S2vGdMfuQ8TdWDeX4q9aegzjCmSWaMJkdEuVogGnCXpJcuxPmQO44sxmuFo8w4uLOZ6/F4/UnPWnRlbPCYAj19A3JeOT7TSDuE1soSnL3GO6N50dN9iRP4yEPFM2LUEzNxPXSJV9WI9waZohss63kTKy+m/2/tx/lF9abK8Ivi6G1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mTLC4/9/IS1SuS/N/f4yOaFGiGzZiafxlhqMxtojqEo=;
- b=b/fGg+u/Hv2enorLHB3YcbLtK8TMtGe/SZUTRlcfVFS5ZKJpdiu2XLk4kmci4v2fgj4a8eI4kHYN+RKyTeL40FqduiETehWlkDoeu8sUP9dx3GW6mmxTa4elmFc+IBSWNK0VQWvgFUF7SYARm5/n7Jt0oaqsa7dkCcNWe/dnmIsh2DCG9xQTygumkMYFnxBhzPukq1outYU4OqoxUgPGF/MvzKfpZt50BthNMQFwBwmwYpdNNOyH9pOrggH9PPWpLm7bpwF6mzwA5SVWfIrWcIejh2YovCS7jYg39R5rABvIx2FeY4aQBH3v2npKv5AiAfTkN3jQeX00bLMRIEEITA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mTLC4/9/IS1SuS/N/f4yOaFGiGzZiafxlhqMxtojqEo=;
- b=fNCs/3p3/cERLJv17yZdeZfiRmWiy90zSUof/RVsSXSpIADgM61YUKMXc9zsvBrnlAKMoJW7sA49zNev14bf6vI4v11OuhQjJEVbO+PPGLuj7RcNK6VTd4LLeptm7FFUUx5aU5t9iqXRnk6P5GrxX3w33y0+AkD8NbusgOVvdus/VK7XQzdUEsXLv448c7biB2RSPMK4Or7Mj0+aM8nHBARdPNnljuGMnPssg/oNqLynh2rj4x2zDK9Y5HuwaAOEOpuBPQzbAMOnW6lokv7c8XG/OIxvdiH4XguLDXf0EhwLzI/4nzBjiJ/vJvoeYtbhL/kUC1Xjk5z5g+xTJH9TNw==
-Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
- (2603:1096:604:36a::14) by TY3PR01MB11642.jpnprd01.prod.outlook.com
- (2603:1096:400:370::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.1; Sat, 3 Jan
- 2026 08:43:08 +0000
-Received: from OS7PR01MB13834.jpnprd01.prod.outlook.com
- ([fe80::6e58:e4b5:3405:28d6]) by OS7PR01MB13834.jpnprd01.prod.outlook.com
- ([fe80::6e58:e4b5:3405:28d6%4]) with mapi id 15.20.9499.001; Sat, 3 Jan 2026
- 08:43:08 +0000
-From: Shiji Yang <yangshiji66@outlook.com>
-To: u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Sam Shih <sam.shih@mediatek.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH] pinctrl: mediatek: MT7981: fix GPIO9 register map
-Date: Sat,  3 Jan 2026 16:42:39 +0800
-Message-ID: <OS7PR01MB1383436D15128C22D7F9203D6BCB8A@OS7PR01MB13834.jpnprd01.prod.outlook.com>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0019.apcprd02.prod.outlook.com
- (2603:1096:4:195::13) To OS7PR01MB13834.jpnprd01.prod.outlook.com
- (2603:1096:604:36a::14)
-X-Microsoft-Original-Message-ID: <20260103084240.3142599-1-yangshiji66@outlook.com>
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1767437709; x=1768042509; i=frank-w@public-files.de;
+ bh=q3aDVAyV+vLa4RBiZTeput2gN+r4deYjVejJItsk3eQ=;
+ h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Subject:
+ Content-Type:Date:cc:content-transfer-encoding:content-type:date:
+ from:message-id:mime-version:reply-to:subject:to;
+ b=cVn2COxCvuMmRTu5zf8PpmJ8nZUbBZRGaW55syROJ/9KMAl7i/jIwliM54Fkk+mj
+ EPNrsYXqjFzbqOsuq1E4LDOfIQeCJGg2ko7UQJ3eIQ0ct5Rs9u4TOQr4BkbxXurcf
+ Xy5+JTVEMaUiRa+iJdZoJZ+WjJmtcM6JBy2I31MBpYiSxhxvSoR1Qvsaz3DrxmUnl
+ X6MpCfJ5YPjF4xFpbf5vrX2EJdgGAaSBBDYRNOMPpkyvSwEiJCVvnRsCs1ZhF1MOs
+ d3/npaXEKLtkKVF4deviFZfD3AsMawyR29R2jbHZ7KhskIUyvkCfdZOjZ7Ihs25ds
+ BVzWWvp0IYj2v7NcVQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [80.245.77.161] ([80.245.77.161]) by
+ trinity-msg-rest-gmx-gmx-live-5bb597646f-r2jdb (via HTTP); Sat, 3 Jan 2026
+ 10:55:09 +0000
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: OS7PR01MB13834:EE_|TY3PR01MB11642:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb20e377-3900-40a8-2fb8-08de4aa41e54
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|19110799012|5072599009|23021999003|5062599005|8060799015|15080799012|461199028|3412199025|440099028|40105399003|52005399003|1710799026;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?B6Cm0VAMCM4C1BFJAvFYuFsbzYE3w7e8fGab4ivhZovXGw8DuGl3ErwaOxHn?=
- =?us-ascii?Q?W1G5fvfeYGOwt010uXDsifPE0kPTndyhFQgX5Exx5sH/1nxq6pOG3pvyOsVu?=
- =?us-ascii?Q?HDqt+Xa2nz9Xlo0jOrcAXdviYpZfXZzsOJGlBi6qv7W5qfXvGePXg9Aq9ZuE?=
- =?us-ascii?Q?pX/3nDH2kWET0sH3BsjAowZ0BHPXVHYrHFFRVzijHMomSMAvImer9FHL5Wlx?=
- =?us-ascii?Q?2kZ4KeaTntLENq1lNTTZccnNY58ksxoBEyrAozpKmwCgLdiQ9BXrv+2Pz33h?=
- =?us-ascii?Q?+EP9T5V9rZp3yo1q/CyHm7C6A9Ey9+3a+/LA14E5+1jBFtYxv2GI4/L/ZOCb?=
- =?us-ascii?Q?dE42V9/9YKFyUrImC0JWUTxfdt39zAatT6oRBuUh6oOhw9LNSwkRZSkrZ/bU?=
- =?us-ascii?Q?Jaycf9aTz9dTUbCQt/KLW+MPao7oeq3ZEqSZmzv5dvjGTpoRNSj13ZZGKbKG?=
- =?us-ascii?Q?T2zzhRJHCCtrcT8CSjKRHbNXUzC6wMsVUijTraFAs1Aiu8G4pskMcvGJ6/Hk?=
- =?us-ascii?Q?igyXMim2Pnv4WLAt/jmFsZ20nHT0qJrCVc8Kjpk4yN4iy5jzj7Y/MU3+k6Bw?=
- =?us-ascii?Q?cCHZk14Swc4pyg9CQecIMn4vtJY3/wNgfGsgfnJzjEaWlrTFNQba5H1yAh/1?=
- =?us-ascii?Q?cOdq/4XrLX32Pik9lHk9E2990t3NlEogWj5OtVxbKqO78zHa4T8yG+99QEPp?=
- =?us-ascii?Q?UpBIPMaCDPNlBlEpU2zi862n1lHKeyJ5Dw1NoY6VKOSJYzvlOBKYLTzn+uvh?=
- =?us-ascii?Q?cmzn/sSllJLTpghWeYO2Al9odyrVU8sBIlCEkVYL+BIyLvwJUhQjSFD4n8tQ?=
- =?us-ascii?Q?upZ4VaNASAW/bsvJg3jZN3++yZ2uAfeVnij8c4k8HLNzFsZcWs93bA3Y5GsT?=
- =?us-ascii?Q?2QglfEAY7HMDZrD535mfssO8zMdOlrnEV2v2JJTuw/k25C9Svs0G/DbQcQG9?=
- =?us-ascii?Q?7+KATMT4DbkzUu0qoluJ79s2PZ/maiRYbFFJ5l1/yQmwNtTLi6wcTA8k0m5B?=
- =?us-ascii?Q?Jlex3L4dx2+0jFRYcELKuSew4fDJRuZBu/WFbc9j17EHj6LFO9udBrhcD4/2?=
- =?us-ascii?Q?SBR84S1QUprnZJFYoDWbIytXvOGSFSlNudAtC/MG8/qqVqzjM2K/rCdQhdRu?=
- =?us-ascii?Q?+dXwQH7eULN2OWIRPK3cytcmlAYuQQp52KV1/opRNb5AeMpkfzVziggCYvk/?=
- =?us-ascii?Q?JBDx4qmP5PpFMMTb/s4KbHn0RmplCuHfOvCT3N2M21xfrGZgw5Qset3lgHk?=
- =?us-ascii?Q?=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4MhM4jhSJwCKQ3CT32ssftaodtoPG9kkdaCN723cScuje6rl7C5pTQVSQQ2/?=
- =?us-ascii?Q?T60r62z/MvvMy3q0yeGqTaFhbo7rZNeJtBgcJgCp9reXKyusQjnavBEgejvW?=
- =?us-ascii?Q?aDpBuSw9eECVXQuP/7VLg19ea21XNildVa9XwyBvs+8ID64eKdE3q5PWE+GB?=
- =?us-ascii?Q?gd0cR4dMiJOwW8nyr40fNv9uw/SQlE6fBGtEmqqMPIKKVh48H63F7doEBNII?=
- =?us-ascii?Q?lPwAbZ02SyNX7wfV7wHyZDO48MGLCprxtd5xCDFXGx0BmrImJoTK33J3oEQW?=
- =?us-ascii?Q?Wl+0LNV7bcbSbXabQVU8efRpnuyUMRezQn3GTPZeBVa1/qiElI1MsIX2KnbO?=
- =?us-ascii?Q?1CCrvM5fvFm5bZS3AEmkC+JCLv3N21YYi5M9kR94p7PQnsN5Q7i7ikaBxofZ?=
- =?us-ascii?Q?dsPKVgq5DSscsy35vsKLzVgv1hxpd0eLJtuT6ogw2L0hoAP7ynp63vrZITiR?=
- =?us-ascii?Q?seUWsqATphSdkZaoTwoeGdYWIIf8i6vNVEPRNvO8Ha1Bi+5YboARWLFLUjuL?=
- =?us-ascii?Q?P6oAVY/YRS7wFxt1qtHn1AeU0KkGzV0TNgME/Nsscwj8yI0JCmjPJbpgDRwr?=
- =?us-ascii?Q?jGHH/47o5EMayvXLxl8e2QMF7nLiNoZDRaxmxKHQy3v/rQLBY2zM5WA/yMbs?=
- =?us-ascii?Q?SvjYb8CNIEbrPcJTk59srHriw4P88BpKk8QxseKGECCD6kRiXfFl+ltd6OM7?=
- =?us-ascii?Q?7fSyTrfw0AOGtF64SqV3Z8N22jMVPp/s4327QDXWMt5F9/qorJa9eRUfCHc9?=
- =?us-ascii?Q?hD4u3gRi/g8fW9LfpAeZqNVPA0rYe2VApBsxN6e1Gw+8RK3T8sQH+3txI9Xl?=
- =?us-ascii?Q?anx+YC0FK/p5PiQ8db/HTHg17SRx72XVMijZI8+M4RHLffqUYYJ4rIw23SwP?=
- =?us-ascii?Q?lUGjuDpdT8D3GT5LoT6kqyDdt3+lB8e94ZVJyF4iu/ZrHyOl9ETaAebLpOEo?=
- =?us-ascii?Q?jAd+QTVPo+uSXaquAHZIO3jDmtXXGK8tqPSPn2HoQ6Dg66Y9o1hlis69bJEc?=
- =?us-ascii?Q?wkgFmHhV9LFVTT86xzgG+MbTH1lmeB/VRQ4BVddCFAqrPTn9g/SL2SSnNC+v?=
- =?us-ascii?Q?1m/GMFlwHfRTVgW7KIWsw5p4smRjL4zFULH1t+grb8Fr5KbiXdX0dW0Yu2Zk?=
- =?us-ascii?Q?E9sOkzUBtM+rGGc2ArlCtCMHd/QIMWAQMrFBLGBrFTw8sNH2zkKnyPWj/XeA?=
- =?us-ascii?Q?q0goTqOyQZ4C84rdvB5BmKaUplXeTmpaAqar6+LWqddeZPh5/Qtny+kfQxYX?=
- =?us-ascii?Q?YqLlhInpdynibO9vYm+bLc9hwO1eTZXhwHFgzLX6iXEnhzKk3hqm3GfzVale?=
- =?us-ascii?Q?xocc1zarG6rPUQadj9RuhMvX2bh2KS4T3d//At6x1Ow8qg3hBi2lH5zzF2a4?=
- =?us-ascii?Q?CGI2SQQB13y72tzrHQO3vCEUlbbunOlvHFp1E4HY9bzqovYnMA=3D=3D?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb20e377-3900-40a8-2fb8-08de4aa41e54
-X-MS-Exchange-CrossTenant-AuthSource: OS7PR01MB13834.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2026 08:43:08.1663 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY3PR01MB11642
+Message-ID: <trinity-3f748198-84ca-4da1-a48d-3f6e1c1818af-1767437709081@trinity-msg-rest-gmx-gmx-live-5bb597646f-r2jdb>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: u-boot@lists.denx.de
+Subject: u-boot.dtsi also possible for dtso?
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 3 Jan 2026 10:55:09 +0000
+X-UI-CLIENT-META-MAIL-DROP: W10=
+X-Provags-ID: V03:K1:QngpjkKlwemrTB19Yg+hi74GSBKTynrrR0OpWgl88XnWS9sAX4XudTyQq1yKDv5X3PoXS
+ HqRtfjl9u5BVO2NcJW6Eoco5xiYDha9YX5GOG4U7UbqgcgthUyaM/fxJRL/uDGPBuvh69So7OU8K
+ sAecuDIO1uyGOJ4hogTgZwWY/YJvElHOWaSidtWT5YmiYnrrycXTRrxC56nCs2Nt2qC1jN9/b40B
+ gVvCUJhXpgGf7uHRAeCfJaGjfDRG5N9R/LdwX9/7ZduEg+wytpAhPa0DdDg2hw01LIzVPyIxkXyb
+ B1+Nd9Tnlf1BSeX+e4On4/ZukvP4mt5Mzc1v6XuYs+NbBg1mKVCyE791h4ilVX8AMA=
+UI-OutboundReport: notjunk:1;M01:P0:vJv+6A4CCq8=;v13jJZQ9WYWBKsw5dmTV4G6AYCp
+ 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
+ G6qKuNYzbfX6uRXN3C5D65HoHdk/
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,78 +137,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ported from the Mediatek SDK. The upstream Linux kernel also has the
-same register map as the SDK.
+Hi,
 
-Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
----
- drivers/pinctrl/mediatek/pinctrl-mt7981.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+i make new attempt to change mediatek boards to OF_UPSTREAM because i found out, that dtbo merging is now possible.
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mt7981.c b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-index 6b9769067b0..13c3dc143cb 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-@@ -103,8 +103,8 @@ static const struct mtk_pin_field_calc mt7981_pin_ies_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x20, 0x10, 3, 1),
- 	PIN_FIELD_BASE(7, 7, 4, 0x20, 0x10, 0, 1),
- 	PIN_FIELD_BASE(8, 8, 4, 0x20, 0x10, 4, 1),
--	PIN_FIELD_BASE(9, 9, 4, 0x20, 0x10, 9, 1),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x20, 0x10, 9, 1),
- 	PIN_FIELD_BASE(10, 10, 5, 0x20, 0x10, 8, 1),
- 	PIN_FIELD_BASE(11, 11, 5, 0x40, 0x10, 10, 1),
- 	PIN_FIELD_BASE(12, 12, 5, 0x20, 0x10, 7, 1),
-@@ -172,8 +172,8 @@ static const struct mtk_pin_field_calc mt7981_pin_smt_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x80, 0x10, 3, 1),
- 	PIN_FIELD_BASE(7, 7, 4, 0x80, 0x10, 0, 1),
- 	PIN_FIELD_BASE(8, 8, 4, 0x80, 0x10, 4, 1),
--	PIN_FIELD_BASE(9, 9, 4, 0x80, 0x10, 9, 1),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x90, 0x10, 9, 1),
- 	PIN_FIELD_BASE(10, 10, 5, 0x90, 0x10, 8, 1),
- 	PIN_FIELD_BASE(11, 11, 5, 0x90, 0x10, 10, 1),
- 	PIN_FIELD_BASE(12, 12, 5, 0x90, 0x10, 7, 1),
-@@ -285,8 +285,8 @@ static const struct mtk_pin_field_calc mt7981_pin_drv_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x00, 0x10, 9, 3),
- 	PIN_FIELD_BASE(7, 7, 4, 0x00, 0x10, 0, 3),
- 	PIN_FIELD_BASE(8, 8, 4, 0x00, 0x10, 12, 3),
--	PIN_FIELD_BASE(9, 9, 4, 0x00, 0x10, 27, 3),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x00, 0x10, 27, 3),
- 	PIN_FIELD_BASE(10, 10, 5, 0x00, 0x10, 24, 3),
- 	PIN_FIELD_BASE(11, 11, 5, 0x00, 0x10, 0, 3),
- 	PIN_FIELD_BASE(12, 12, 5, 0x00, 0x10, 21, 3),
-@@ -354,8 +354,8 @@ static const struct mtk_pin_field_calc mt7981_pin_pupd_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x30, 0x10, 3, 1),
- 	PIN_FIELD_BASE(7, 7, 4, 0x30, 0x10, 0, 1),
- 	PIN_FIELD_BASE(8, 8, 4, 0x30, 0x10, 4, 1),
--	PIN_FIELD_BASE(9, 9, 4, 0x30, 0x10, 9, 1),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x30, 0x10, 9, 1),
- 	PIN_FIELD_BASE(10, 10, 5, 0x30, 0x10, 8, 1),
- 	PIN_FIELD_BASE(11, 11, 5, 0x30, 0x10, 10, 1),
- 	PIN_FIELD_BASE(12, 12, 5, 0x30, 0x10, 7, 1),
-@@ -404,8 +404,8 @@ static const struct mtk_pin_field_calc mt7981_pin_r0_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x40, 0x10, 3, 1),
- 	PIN_FIELD_BASE(7, 7, 4, 0x40, 0x10, 0, 1),
- 	PIN_FIELD_BASE(8, 8, 4, 0x40, 0x10, 4, 1),
--	PIN_FIELD_BASE(9, 9, 4, 0x40, 0x10, 9, 1),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x40, 0x10, 9, 1),
- 	PIN_FIELD_BASE(10, 10, 5, 0x40, 0x10, 8, 1),
- 	PIN_FIELD_BASE(11, 11, 5, 0x40, 0x10, 10, 1),
- 	PIN_FIELD_BASE(12, 12, 5, 0x40, 0x10, 7, 1),
-@@ -454,8 +454,8 @@ static const struct mtk_pin_field_calc mt7981_pin_r1_range[] = {
- 	PIN_FIELD_BASE(6, 6, 4, 0x50, 0x10, 3, 1),
- 	PIN_FIELD_BASE(7, 7, 4, 0x50, 0x10, 0, 1),
- 	PIN_FIELD_BASE(8, 8, 4, 0x50, 0x10, 4, 1),
--	PIN_FIELD_BASE(9, 9, 4, 0x50, 0x10, 9, 1),
- 
-+	PIN_FIELD_BASE(9, 9, 5, 0x50, 0x10, 9, 1),
- 	PIN_FIELD_BASE(10, 10, 5, 0x50, 0x10, 8, 1),
- 	PIN_FIELD_BASE(11, 11, 5, 0x50, 0x10, 10, 1),
- 	PIN_FIELD_BASE(12, 12, 5, 0x50, 0x10, 7, 1),
--- 
-2.51.0
+but i faced a problem:
 
+e.g. BPI-R3 has 2 SPI-devices (nand,nor) on same spi switchable via hw. i need both in dts to probe the right
+device for linux and to allow install from sdmmc to both of these devices based on hw switch.
+
+currently in uboot the nor is device 0 (unit-address and reg) and nand is 1. this does not work in linux, so i need a
+way to overwrite the dtso from linux with the new values in uboot.
+
+for dts there is a way using -u-boot.dtsi files...do they also work for dtso? where do they need to be placed?
+
+regards Frank
