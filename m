@@ -4,69 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6103DC2A069
-	for <u-boot@archiver.kernel.org>; Sun,  4 Jan 2026 04:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EEA3C2A062
+	for <u-boot@archiver.kernel.org>; Sun,  4 Jan 2026 15:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6720983AB7;
-	Sun,  4 Jan 2026 05:34:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A284683AAB;
+	Sun,  4 Jan 2026 16:23:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qVZtU3To";
+	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="JZbvJV+9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D770283C54; Sun,  4 Jan 2026 05:34:14 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 9290283AB7; Sun,  4 Jan 2026 15:02:18 +0100 (CET)
+Received: from mxe-3-78e.seznam.cz (mxe-3-78e.seznam.cz
+ [IPv6:2a02:598:96:8a00::1200:78e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B29A83AAD
- for <u-boot@lists.denx.de>; Sun,  4 Jan 2026 05:34:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3D5983A24
+ for <u-boot@lists.denx.de>; Sun,  4 Jan 2026 15:02:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dkPhf1VbCz9spq;
- Sun,  4 Jan 2026 05:34:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767501250;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MPboXRffdHgqH1x9ctg3DJaD0Sv8s8hIqBccW9bPmCM=;
- b=qVZtU3ToES0jDk2DNpSOmwNnyiFizfi2rDU7HSUg7qedJbAbOyXJKVTIk81GWX0E64TnQm
- 5yHfRzkOLc0E3MZJslFkG2Zmc+i4D+mTDQ76ulxe4snDPWVhFsgxP62ytc9hyljTjQF/IH
- 21xSyQvZKrxjTa+Ksb2tAg/CN5V3b/Aqgm5N7obDfl7z2ex4XZiohFbn3PdQI4uvuVFIwC
- B+MTILAJ8JqEUuFwefk63Ke2wKrwH+qungP6mUxOgIHkcr/iSTIgHZmv7zXMV3ZC1M46TR
- kjhlt8/R2qr7UQySnqvMyunAdYy51sP1X8rjdGOLYS4NpSGR0cZDX8WVNmfjJw==
-Message-ID: <2c9bb8b6-d919-442d-8336-95158cb6865b@mailbox.org>
-Date: Sat, 3 Jan 2026 19:06:27 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] usb: dwc3-generic: allow fallback of dr_mode
- property to "otg"
-To: Kaustabh Chakraborty <kauschluss@disroot.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Minkyu Kang <mk7.kang@samsung.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20260103-usb-dwc3-exynos7870-v2-0-67441680d287@disroot.org>
- <20260103-usb-dwc3-exynos7870-v2-1-67441680d287@disroot.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260103-usb-dwc3-exynos7870-v2-1-67441680d287@disroot.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: b9821ac908c21349ee4
-X-MBO-RS-META: w9g18iy1x8u1cmdequ44pxmai3rcebz4
+ spf=pass smtp.mailfrom=tomaspaukrt@email.cz
+Received: from email.seznam.cz by smtpc-mxe-76f795765d-zqk4m
+ (smtpc-mxe-76f795765d-zqk4m [2a02:598:96:8a00::1200:78e])
+ id 48d68f63b6223dc94858017b; Sun, 04 Jan 2026 15:02:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
+ s=szn20221014; t=1767535335;
+ bh=YT7our6/SpK7gate0qA+O7Tj2kkW8jQPBsQ5tNc8X7s=;
+ h=From:To:Cc:Subject:Date:Message-Id:Mime-Version:Content-Type:
+ Content-Transfer-Encoding;
+ b=JZbvJV+9OLda6OPeOkJ6mWnXqdSWCrAOUZ0+20CFceCVS/1FcvN6S6Yk4x2fO1HRM
+ wPGiitBmeSZt7al30ajtUy1EPMl+b4/ID1IpaLiAjV1ALiWTqlPKBykV30ywwfADPg
+ AODvda1ZiOz/cVJAgeKwWDNxzMERLukLjqkWqlU6mDUPcRH5MqjSddXZ/czRWKiUKU
+ Lm0IU1yzLkE4QhQqhRk1MkU4K48uKCR3tsk7S5euTNkRG2s8Aa4o0ik57Ty40RFUXi
+ yNPKWzTRAZ4LenUDT90WigSlcG32G5VCktD39r4tmxVpALobJfZng2UTOY5xHozzEQ
+ SImQpN1AIjiiw==
+Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
+ by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
+ Sun, 04 Jan 2026 15:02:11 +0100 (CET)
+From: "Tomas Paukrt" <tomaspaukrt@email.cz>
+To: <u-boot@lists.denx.de>
+Cc: "Tom Rini" <trini@konsulko.com>
+Subject: [PATCH] lib: crypt: remove dependency on autoboot
+Date: Sun, 04 Jan 2026 15:02:11 +0100 (CET)
+Message-Id: <4fK.Z}kd.3rlt0vRvdGr.1fMdBZ@seznam.cz>
+Mime-Version: 1.0 (szn-mime-2.1.91)
+X-Mailer: szn-UNKNOWN-unknown
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 04 Jan 2026 16:23:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,54 +71,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/3/26 1:28 PM, Kaustabh Chakraborty wrote:
-> Documentation [1] states that the default value of the dr_mode property
-> is "otg". It also isn't marked a mandatory node, so it may or may not be
-> set. So, accordingly if dr_mode is not mentioned in the devicetree node,
-> OTG mode must be assumed.
-> 
-> In this driver however, this case is not handled. If dr_mode is not
-> mentioned, USB_DR_MODE_UNKNOWN is set. The logic implemented raises an
-> error, instead of falling back to USB_DR_MODE_OTG. Correct this to
-> conform to the specification.
-> 
-> Link: https://elixir.bootlin.com/u-boot/v2025.10/source/dts/upstream/Bindings/usb/usb-drd.yaml#L23 [1]
+Make crypt_compare() accessible from board-specific code
+by removing its dependency on the autoboot feature.
 
-Please update the link to point to git.kernel.org , that's where the DT 
-bindings reside.
+Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
+---
+ lib/crypt/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index c09014aec60..1967594f48a 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -173,8 +173,8 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
->   		node = dev_ofnode(dev->parent);
->   		plat->dr_mode = usb_get_dr_mode(node);
->   		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
-> -			pr_err("Invalid usb mode setup\n");
-> -			return -ENODEV;
-> +			pr_info("No USB mode specified. Using 'otg'\n");
+diff --git a/lib/crypt/Kconfig b/lib/crypt/Kconfig
+index 22af6834d93..452b645831b 100644
+--- a/lib/crypt/Kconfig
++++ b/lib/crypt/Kconfig
+@@ -1,6 +1,5 @@
+ menuconfig CRYPT_PW
+ 	bool "Add crypt support for password-based unlock"
+-	depends on AUTOBOOT_KEYED && AUTOBOOT_ENCRYPTION
+ 	help
+ 	  Enable support for crypt-style hashed passphrases.
+ 	  This will then be used as the mechanism of choice to
+-- 
+2.17.1
 
-dev_info(dev, ...
-
-> +			plat->dr_mode = USB_DR_MODE_OTG;
->   		}
->   	}
->   
-> @@ -516,6 +516,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
->   	if (!dr_mode)
->   		dr_mode = usb_get_dr_mode(node);
->   
-> +	/* usb mode must fallback to peripheral if not known */
-> +	if (dr_mode == USB_DR_MODE_UNKNOWN)
-> +		dr_mode = USB_DR_MODE_OTG;
-With those two fixed:
-
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
-
-Thanks
