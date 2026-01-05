@@ -4,126 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B958C79F9D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:19:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA753C79F9F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:19:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54DD783E16;
-	Mon,  5 Jan 2026 16:18:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8FB1583DEA;
+	Mon,  5 Jan 2026 16:18:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HfwvJAao";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lINbPZtE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2D9E839DE; Mon,  5 Jan 2026 16:18:24 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id C523583DEA; Mon,  5 Jan 2026 16:18:34 +0100 (CET)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 860C3836D3
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:18:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01EC5836D3
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:18:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3fe3cc80bc3so20526fac.0
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:18:22 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-4779aa4f928so209615e9.1
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:18:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767626301; x=1768231101; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R5TcLAwe1wXQgrvLG1JeKGSRbDfB+q/vP9FaIvhHUkc=;
- b=HfwvJAaoaECf25DMPq9gybl837xLhkvBtf3STCPtYzO2tjU+fVBMWBVfY3EdJ1/1V4
- DKWaakB75Q/3S5gW+g6Xltlv6W10a/1VZ4xHGvXTplwgDmFN4QnUto4indfCmwYocVAl
- Q7a2ekZS63z52WCkDuDvvrpIuqWEawKt/kBOU=
+ d=linaro.org; s=google; t=1767626311; x=1768231111; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=oqNy55eIJDrDrlvyXMiIIf0YBF/KeGLBmvZY3Nk5BZ0=;
+ b=lINbPZtElFl3nx9wKWKmUozyj1BIetjVm++ZXG/s3+lL/52T8fbnoftPd7DVXUJZZs
+ vp7B8ceJrVIwGaCqVhtpx67Y0TO9h5sDdK2nbkFlMPi96lLywQUOmKPlveS0b49tJLJ3
+ CUrQp0FXUE36MMfbydqzlxuaSPTk7es6+J8irEvBEYo2eq8MmlDpPFDjU+230cVZFMlS
+ V9uapeXPyLEF+EwtJ9AVq7F8Un1Rz/5HUhj9zGcLzTmiBpACRdF9Ps61T+JR32dbIXai
+ n63mzrWTdjMs3vOAnfokzGdvmMvlHd0Tvp83P+ZujJ1jjXZqfDdEH/XtGd2Ix5TyU5Uh
+ XqHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767626301; x=1768231101;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1767626311; x=1768231111;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R5TcLAwe1wXQgrvLG1JeKGSRbDfB+q/vP9FaIvhHUkc=;
- b=Wpc2sYcktRV5Z0HlY/YF/5wLXlCt0ejpSS7qauAJSN9sb1YMTuRl21MBz5pcuTtCGy
- KF1m1NdyDdNwPi1RsUwH2I4apsuRJRaRs6g3NZrGuv7as4kTtk2CjVvjfDay7PUtWfC6
- Y3mR8OULrrGyvxhUpvliYM1nkjmCPGMr+guZK6SthADGAJURvHBM0ieWDbdqZ/zBXsCr
- OTJ9mVWkaDK/NNDbGOCTqezrv/z85p4lzkjIjzkqehCD104tO8E5QNo1vrLqNN1TYBRS
- Pz622qZtwYq+JLctVVstm0bcP22X8eivpHa6L38iMPOrChIwYo7ExtSUvFg0bUX9KIJ8
- LWZQ==
-X-Gm-Message-State: AOJu0YwpGAkDFXEaX1pxDQDPWswywpapl2ZsDnW+QtDw7PTH1LOEKaQb
- uZy/oeXcEiAvcjmIyQ+5GSIP/GuPuFGlimCLW2kkSFw7SY0z8OstkzBZuGB1TjhYKGg=
-X-Gm-Gg: AY/fxX7WOMluZ8Dppc7TAL/yENrqrZJ58YzsxAKQt0vByPZS3qcWdpleP2alufPdIP9
- lnlC1ij/ousxQ54BiCEbg74c0xho2RO303NXHfoM/Uu7afC7Hzvto2ZgKjOoncfN5fwi+J8YMzm
- 0lt2uaE1JfgO3LVBCHFXOm0oS4ty0rSKq9pSBw7j4XSkP1PiqV7agYc1ybJ6NNA93eZAvEVwEGf
- y7DQhU6DNdw9jhNUKeSHGVyejHX275d01P6LTV29FxfJ/DfGf8XS6vdMY87h4Aiubavdk4xlxsj
- 3zPTk0mRsF6IqzJ4x5pRL5G1vYCMvqs7e1oWmwy6p/FptOP9uVcwBVUHImtFVdCa39CVb0XznTd
- xCn8dP1jCnbaYWD8w4mgcc4BhCtVcHYwxMkkd80DhwUK0QK5I5ibUmoG5lhzj3H4u/mQe0iu1gQ
- H+JKtU4aUOLbX51xagxk2qLr4LpCPh051Ci6K/YKMmZQ5hNQzNtRHmrP15iAQ2VGxcydwgOXPoo
- 1VDvlx0rdzFs3SrnONrgyKl3xRLNevt88uQxY3AYd88AkY3Ww==
-X-Google-Smtp-Source: AGHT+IEg9TmZLYEl8+s7ZnP55RGgbYeC2ZexF+phf/UGTBc8jQ9uJwp9Us/bJ8PPN8/kaOMC0WGAEA==
-X-Received: by 2002:a05:6870:f112:b0:3e0:df48:d5df with SMTP id
- 586e51a60fabf-3fda53d1f18mr25137014fac.34.1767626301125; 
- Mon, 05 Jan 2026 07:18:21 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3fdaa8d44fdsm29722532fac.3.2026.01.05.07.18.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jan 2026 07:18:20 -0800 (PST)
-Date: Mon, 5 Jan 2026 09:18:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Alexey Charkov <alchark@gmail.com>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Elaine Zhang <zhangqing@rock-chips.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Yao Zi <me@ziyao.cc>, Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heiko Schocher <hs@nabladev.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sumit Garg <sumit.garg@kernel.org>, Anshul Dalal <anshuld@ti.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Xuhui Lin <xuhui.lin@rock-chips.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Johan Jonker <jbx6244@gmail.com>, Dhruva Gole <d-gole@ti.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Huan Zhou <me@per1cycle.org>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Joseph Chen <chenjh@rock-chips.com>
-Subject: Re: [PATCH v2 1/3] spl: Make UFS available for SPL builds
-Message-ID: <20260105151816.GM6124@bill-the-cat>
-References: <20260105-rk3576-ufs-v2-0-caba979a0d6b@gmail.com>
- <20260105-rk3576-ufs-v2-1-caba979a0d6b@gmail.com>
+ bh=oqNy55eIJDrDrlvyXMiIIf0YBF/KeGLBmvZY3Nk5BZ0=;
+ b=JqBBTNtL4rJIBDCURhMX20YWvHLo0UmfHZvqqw/JoSmhHWKadjA5VEL3a3krzcxaqy
+ 5+afuarMag5lBLzh+VFTRbwYpaFMEVrLlpyZw+9IGuZshCSQ3j7ydGq/mEK4JDxGSSky
+ LToYkAeczieXigflyXQ2HiGya4FS70ayY5leY80QolB+a2nCQ2GzMwJtruI/Tk1fQmZK
+ aOhqD/dYorw/ZU6DosGFxVT3IyJhl9MZrYzpYCgwZyXwK3cGTAUPaqQ/eKrdNFA4mOIV
+ 9uoGK1DZK5YHMeH8pz1J3DkGuUc1lShYN4/24pqanMLyaYGObsM7ekrintmZ4XOjjNu3
+ 9OJw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCLjgoD8wSkBp0q40D1F9w5ijWsc8NHRK82VF3+J6FFjggQvxetzcx00KEd0lBKu+Lpl0JtH0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzap2kG8i3Qnu10sxA9W3wjMO3L+QKS5qOuZSCOkNZd8lACYXwK
+ 82YlLp21xpwBAIyPGJq/ZfOCDccVqMNujC4uOrtO/4T9TYTBUNO9kfiRiAuSX/TE5KA=
+X-Gm-Gg: AY/fxX7qKyL0h9mDZTJfNc26musVsfiG3PhECndwbgS9GUqNG0aIqVN0ZouGIeROitp
+ 0NzTc5WJN4jME2OGO4Q2FtSjpWLp/F9ehXPR7OQ9soayfwgI2PhUH7BHg2FboW6PK2CII9CxKeV
+ bopwg2y9HFjVOVzeceCdbkJp7/5G2a/Y9tsf39Df/ruV1QcS2tvCxYOmi61A8tJT0mrCSuQuc8m
+ 75/KwWQbPuWH+T2cxxRC2awv6EOJMeowvTYcSJKLrDbJxZqBUy88oYD/YXe9WbR1nYfhJJYGuEN
+ C63QRBIBtPM+7C2KQLCBAehM5AhjKVPi6+YqpR9JjjxCXD7r9eHvXbzSXhc0NwcUZKHnHXk2FCL
+ ZBeqocqZk/UigQ6QcAo06Fiv4Z0Z3+iigtxwWZHH/CCvFcOc//on7W+IXBDbdThTfDK3rKtSeN3
+ SGgFdXfdfqPKK8nDDWm2GS1mSiW2uLZatbHLFEl2wq7KfD4V/NawgXV8yV2hLRWyAQnDkGlUUbq
+ A==
+X-Google-Smtp-Source: AGHT+IFjqYndfdB0IUwr6L6EQCqnthefvFgyOl+m0vdtuI1x8DO2fgwJIR5gQ1yne9u96rkFGOI9dA==
+X-Received: by 2002:a05:600c:c0d2:20b0:47d:264e:b371 with SMTP id
+ 5b1f17b1804b1-47d264eb6b0mr417240525e9.18.1767626311096; 
+ Mon, 05 Jan 2026 07:18:31 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:d4c1:5589:eadb:1033?
+ ([2a01:e0a:3d9:2080:d4c1:5589:eadb:1033])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-432bca569e6sm51599f8f.31.2026.01.05.07.18.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Jan 2026 07:18:30 -0800 (PST)
+Message-ID: <2b4dca05-4b07-469d-bc68-a1406b7dec59@linaro.org>
+Date: Mon, 5 Jan 2026 16:18:29 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s1R33QbwoX81Y31b"
-Content-Disposition: inline
-In-Reply-To: <20260105-rk3576-ufs-v2-1-caba979a0d6b@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Mon, 05 Jan 2026 16:18:31 +0100
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] ufs: amd-versal2: Fix clock name with binding
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <eadc8d159b6d822077549722c9ec5a96a4d16c2a.1765973221.git.michal.simek@amd.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <eadc8d159b6d822077549722c9ec5a96a4d16c2a.1765973221.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,65 +128,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/17/25 13:07, Michal Simek wrote:
+> Align clockt name with DT binding.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+> Binding is available here:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/ufs/amd,versal2-ufs.yaml?h=v6.19-rc1
+> ---
+>   drivers/ufs/ufs-amd-versal2.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
+> index 97de0756f70a..dd62c9819ba1 100644
+> --- a/drivers/ufs/ufs-amd-versal2.c
+> +++ b/drivers/ufs/ufs-amd-versal2.c
+> @@ -305,7 +305,7 @@ static int ufs_versal2_init(struct ufs_hba *hba)
+>   
+>   	priv->phy_mode = UFSHCD_DWC_PHY_MODE_ROM;
+>   
+> -	ret = clk_get_by_name(hba->dev, "core_clk", &clk);
+> +	ret = clk_get_by_name(hba->dev, "core", &clk);
+>   	if (ret) {
+>   		dev_err(hba->dev, "failed to get core_clk clock\n");
+>   		return ret;
 
---s1R33QbwoX81Y31b
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-On Mon, Jan 05, 2026 at 07:05:36PM +0400, Alexey Charkov wrote:
-
-> Add minimal infrastructure to build SPL images with support for UFS
-> storage devices. This also pulls in SCSI support and charset functions,
-> which are dependencies of the UFS code.
->=20
-> With this, only a fixed offset is supported for loading the next image,
-> which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-> number of 4096-byte sectors into the UFS block device.
->=20
-> Signed-off-by: Alexey Charkov <alchark@gmail.com>
-[snip]
-> +config SPL_UFS_SUPPORT
-> +	bool "Support loading from UFS"
-> +	select SPL_LOAD_BLOCK
-> +	help
-> +	  Enable support for UFS in SPL. This allows
-> +	  use of UFS devices such as hard drives and flash drivers for
-> +	  loading U-Boot.
-> +
-> +config SPL_UFS_BOUNCE_BUF
-> +	bool "Use a bounce buffer for UFS loading"
-> +	depends on SPL_UFS_SUPPORT
-> +	default y if ARCH_ROCKCHIP
-> +	help
-> +	  On some platforms the UFS host controller may be unable to load all
-> +	  image segments directly to their required memory locations (e.g. due
-> +	  to DMA constraints). This option enables an interim bounce buffer in
-> +	  system RAM to let such platforms boot directly from UFS, at a cost of
-> +	  an additional memory move while loading the image.
-
-So, the full U-Boot rockchip UFS driver does not use the generic
-BOUNCE_BUFFER mechanism. Is this because of memory constraints in SPL?
-Second, can we not just re-use the generic bounce buffer code
-(common/bouncebuf.c) ? Thanks.
-
---=20
-Tom
-
---s1R33QbwoX81Y31b
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVvWNAAKCRAr4qD1Cr/k
-CuTOAP4y7muWIandoALM1G6x0W0dam0UBhrmMKsyvd2ayOP6qAD/fgNNEy+PV4xQ
-KUr8v0gB7ph4+F2FN6nrrV9/9hlB0Q8=
-=myl/
------END PGP SIGNATURE-----
-
---s1R33QbwoX81Y31b--
+Thanks,
+Neil
