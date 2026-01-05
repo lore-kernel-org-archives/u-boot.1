@@ -4,110 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1EACD0402
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 21:15:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9474CD0402
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 21:22:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA98B83E48;
-	Mon,  5 Jan 2026 22:15:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E10A483D17;
+	Mon,  5 Jan 2026 22:22:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="beSKaOUc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B7a7RDrR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B213783A24; Mon,  5 Jan 2026 21:47:50 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8C7C183D62; Mon,  5 Jan 2026 22:22:32 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7367083936
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:47:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9929383A24
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 22:22:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-65d1f0a9f54so93478eaf.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 12:47:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767646057; x=1768250857;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1ygLvWqskVBEVU8wly+gu4bVYJF46nN9Ow66mudZJqA=;
- b=beSKaOUcgQD/nr1wS4wGifY1kexaxJne8VcQw7G+UI+eXcv4Mn1q/6qYvWMzjaUaMf
- rojX11o+k91GXibzIh23lOy5NRm4IxcWb1wvaVd31CgjaEo25H3X1Oa/YL9awsi7DiMW
- fyofPv+T/mxPvSKf0Mj9hqjitdfNcKOSkQc6iLzQHa3nGpUgW1UfE+7aUS7maVNlMWCZ
- j0O5BQC4c6mQfagqqn70WwmG+ibol4iUekpmnP+aeffEZh3fYoK5Mogp+bA+U71VlziU
- SwQMI/Cn6TowvevC7dwFk/a+FMOhFtMv/LMgKs7WxmIUfz4POMudgAJWhqLzleTzHWxB
- WBPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767646057; x=1768250857;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1ygLvWqskVBEVU8wly+gu4bVYJF46nN9Ow66mudZJqA=;
- b=IHrl7giI2zpUBEgcR1L0suDLbjnV/x0UwC4HM4bFE/BsBoU9pewxtvN8jmGweIyC1C
- tSpAnRmpooKSRSW0ixz0KBUnRwsKES3dB7fz6Pw/Pv1vjwo3s38CoyuXHCmKnBsifWo2
- aE5u6Vg+rM8oIuMUVb0NNevnLkne7/7ld0EDfijefKtX9gBQs70FOHvip5F0o5cAC+k3
- 4y+zt6vfjdSAGUliWoKPHtepxmbkzP6D/5sG3fK7FjmnJc3fT75X75UK9fTkmM2R++YT
- 7ZQ71LF0/FFsQSyuZDFbqrwzOJePTMAEsfcQ2gdMcK7BWy8FSEhn2+AyaN1oe/owLtbH
- sisA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLUGCZ9vNI5hJNYn+pSt5HIPgbBSigV3uvjXz9Fd4fJWg+z6vucxTeEz3eSEff2GS+JWC+CGI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzE3NBZ7GBeH8UtYgX6W4bCC9zieMRMsXPspHjBtp3SXqn7efC4
- 7mWp0SbpAMg8ZyIHA3YH/tPSCY+goB66jF9aGvPcVmIvjGlckchkuGWvVqTOiabGWL7P3b1eScO
- ZOIR0
-X-Gm-Gg: AY/fxX75zASAeoac6SwyXZxQFq03SxcUBV7KvgObgq7GfHuM+P+wlxNDdlxIxqugBlS
- YdFZxDU+HOZWIdYgnMBmHImZyat0cRkjP5ZXSrwj8PnLSqfkG5aA2+VCTswu8Vx5xX9URLn5dWk
- wNvtOEtp5343Ximt2XWf7uFwVJr7sX2U8Tq5jYorMvxbHw0fts1t716VoqpvozJkFyFUfUlWmzX
- ZhlXyHvyS7enalVjtLK3gP+CXRzpaHVy5MnMnMUlBey/WH7h1MLCswbjWQAz6bhvXa9CvRkAMA3
- EOk9HyIMHVYDNQcYlOXlAA59CbF3C8b5QVWKBr4fS4KZ/3sJca067Z4fuLYvGDwkBcfY4EVAUJw
- 13rLpYbvtV9gjCC4iP6NyR4AznqWRQq4aQ31KedD83TUoLKiwUEOaqaCQRMwqyK4TMewizpJ6sQ
- 4yLuWp8GxqH6Z0PQ==
-X-Google-Smtp-Source: AGHT+IGBu5uFN65sTlKyh+OXxKG17CvRKQpm1QJA+0Wfehz2oZqHkLFvQ3vgLuMM2U58I/fbr7AlGQ==
-X-Received: by 2002:a05:6820:2282:b0:659:9a49:8df9 with SMTP id
- 006d021491bc7-65f47a5e5bfmr406797eaf.59.1767646057145; 
- Mon, 05 Jan 2026 12:47:37 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:df5e:737c:7b32:e5d])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48cb1444sm81199eaf.11.2026.01.05.12.47.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jan 2026 12:47:36 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 05 Jan 2026 14:47:21 -0600
-Subject: [PATCH] arm: mediatek: remove extra gpio header
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dlS1c4fPVz9tRH;
+ Mon,  5 Jan 2026 22:22:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767648148;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ffsxHHAYFpTvcyZckAXruY0WAaKny5nwI+zaRh+eAxc=;
+ b=B7a7RDrRzN8ZigRVoEb0Na5r2APZXHRNjEtIGd0aLRJkrz48GlrZ0z9Db4jxoWaP1kAqpM
+ U1sFQZ8duu8aZt2gkkIpT2XIGq6x0prZuNu0GDXLNRsu337k7LtxBZ4CAwM4QX2MbZJLKy
+ 2Ea9MWfaoMbrlsl4P05qWsNxqwF6EZei9zdqbQxt9A89l8XyD6Y7gRxdDdP8IWhBg+jkCs
+ Aa7mwuq8iQKECP7ouFr7levt1zxia3PhiRnAPoQwSQW08R7iZCYX62EIhGCy52LvXs1V5b
+ Nawf1QPMmhby/FXn8/QZopt2NW5dRrApXRH+awOaJpDnA77k5Zc65RTPEqQeaA==
+Message-ID: <5a4ea825-3a89-4856-b9d8-d1df827f9b9c@mailbox.org>
+Date: Mon, 5 Jan 2026 22:22:25 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260105-mtk-remove-empty-gpio-header-v1-1-01dc6c70eccd@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqDMBBG4avIrDsQNemiVyldmOZXhxITJiIW8
- e4Glx883kEFKij0ag5SbFIkLRXto6HvPCwTWEI1daZ7mtY4juuPFTFtYMS8/nnKknjGEKDsa+R
- sb42Ho7rIilH2e//+nOcFBBqYz24AAAA=
-X-Change-ID: 20260105-mtk-remove-empty-gpio-header-b26054340be5
-To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1322; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=SOz7haH3EtvmLoySUVq3QqDdpmvmPy9E9hz6oPHbXew=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXCNh90wCqs4QPVbZ8Hbp/kXeTZLOfJXPzfeAI
- lFl8i+gq5GJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaVwjYRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AU1gH/1SSTF9TUR/D3lfe40Ccf/ym90RXCBDPPTCfr9a
- Cq+6OHwvCnslJRBlqtarTlRA8zeAS5WRWoo1agY2Cg/Bv58zQvo+HnZqSU/ffVcG4zeUQc7rerA
- qfgoZsnLQkfSgXKOpMSqiBLZl5VynUj1CJdu5FOK1tBkkPeCNqOjA7W3X8Tdi2O5CLJM+bgQHi3
- k0rsvtDtxORevkV7tp1x30HmW9Qgl0bAaMPWxWe/qg8/tNWA+R8DoBi+OqwwLBs5pKof1Hv0EIk
- Vw3S1iJBVoLgNQWFrnmicvh3C1isD9ulfgPqNKaaIHsH6g35u8SiXwvpgWykzydh6SI8j9wt4BA
- 735o=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Mon, 05 Jan 2026 22:15:13 +0100
+Subject: Re: [PATCH v3 3/3] clk: stm32: Update clock management for
+ STM32MP13/25
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Gatien Chevallier <gatien.chevallier@foss.st.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>
+References: <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-0-d055da246e55@foss.st.com>
+ <20251215-restore_boot_for_stm32mp13_stm32mp25_boards_v2-v3-3-d055da246e55@foss.st.com>
+ <869f8843-8d43-4c1f-b6ae-0116fcf64ac4@foss.st.com>
+ <f6140b6b-2dba-4bfe-bdf8-11a9793916ee@mailbox.org>
+ <020df345-65df-4d5b-945c-36db65428587@foss.st.com>
+ <5f0174c7-6791-4fc3-80df-62812baed40c@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <5f0174c7-6791-4fc3-80df-62812baed40c@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: ad41856f0f562ad68a1
+X-MBO-RS-META: qusfn1d9uni66as1jwsugdtuiyetffwt
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,49 +87,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove empty gpio.h header file and CONFIG_GPIO_EXTRA_HEADER on
-ARCH_MEDIATEK. There is no reason to have these since the header
-doesn't contain anything.
+On 1/5/26 3:30 PM, Patrice CHOTARD wrote:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- arch/arm/Kconfig                          | 1 -
- arch/arm/include/asm/arch-mediatek/gpio.h | 9 ---------
- 2 files changed, 10 deletions(-)
+Hello Patrice,
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 0485fe78e10..1a6b77cb2b5 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -865,7 +865,6 @@ config ARCH_MESON
- config ARCH_MEDIATEK
- 	bool "MediaTek SoCs"
- 	select DM
--	select GPIO_EXTRA_HEADER
- 	select OF_CONTROL
- 	select SPL_DM if SPL
- 	select SPL_LIBCOMMON_SUPPORT if SPL
-diff --git a/arch/arm/include/asm/arch-mediatek/gpio.h b/arch/arm/include/asm/arch-mediatek/gpio.h
-deleted file mode 100644
-index 4ea1020634e..00000000000
---- a/arch/arm/include/asm/arch-mediatek/gpio.h
-+++ /dev/null
-@@ -1,9 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2018 MediaTek Inc.
-- */
--
--#ifndef __MEDIATEK_GPIO_H
--#define __MEDIATEK_GPIO_H
--
--#endif	/* __MEDIATEK_GPIO_H */
+>>>>>        /* WWDG */
+>>>>> -    STM32_GATE(CK_BUS_WWDG1, "ck_icn_p_wwdg1", "ck_icn_apb3", 0, GATE_WWDG1,
+>>>>> +    STM32_GATE(CK_BUS_WWDG1, "ck_icn_p_wwdg1", IDX_ICN_APB3, 0, GATE_WWDG1,
+>>>>>               SEC_RIFSC(103)),
+>>>>> -    STM32_GATE(CK_BUS_WWDG2, "ck_icn_p_wwdg2", "ck_icn_ls_mcu", 0, GATE_WWDG2,
+>>>>> +    STM32_GATE(CK_BUS_WWDG2, "ck_icn_p_wwdg2", IDX_ICN_LS_MCU, 0, GATE_WWDG2,
+>>>>>               SEC_RIFSC(104)),
+>>>>>    };
+>>>>>   
+>>>> Hi Marek
+>>>>
+>>>> Can you give this patchset a try on DHCOR board in SPL ?
+>>> I have bad news, the SPL does not even start with this, no output on UART even. The problem seems to be in 3/3 , if I apply only 1/3 and 2/3 the board does boot just fine.
+> 
+> Hi Marek
+> 
+> Happy new year ;-)
 
----
-base-commit: c457e4b5f47ba854721b7c1ece501eb324b032ee
-change-id: 20260105-mtk-remove-empty-gpio-header-b26054340be5
+Thank you, Happy New Year to you too.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+> Have you tried with DEBUG_UART ?
 
+No, that is not enabled in the DHSBC config.
+
+You should be able to try the SPL on MP13 EV if you pick the changes 
+from these three commits (a few DT changes and a few config options), it 
+should be straightforward to port over and help you debug the problem:
+
+bf53344bff8d ("ARM: dts: stm32: Add STM32MP13x SPL specific DT additions")
+1143fd4c3507 ("ARM: dts: stm32: Add SPL specifics for DH STM32MP13xx 
+DHCOR DHSBC")
+998da69da678 ("ARM: dts: stm32: Switch defconfig to SPL for DH 
+STM32MP13xx DHCOR DHSBC")
+
+If this doesn't work quickly for you, I can try to set up the MP13 DHSBC 
+with DEBUG_UART later this week.
