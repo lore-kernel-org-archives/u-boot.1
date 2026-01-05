@@ -4,143 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28A7DC98331
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 20:20:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41C3CD0402
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 20:51:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 510C6839DE;
-	Mon,  5 Jan 2026 21:20:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lechnology.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C82C83D17;
+	Mon,  5 Jan 2026 21:51:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lechnology.com header.i=@lechnology.com header.b="Q3zSPWbn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R9jsIMQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EC0F83A26; Mon,  5 Jan 2026 21:18:31 +0100 (CET)
-Received: from galaxy.gendns.com (galaxy.gendns.com [66.235.175.158])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9729583D9F; Mon,  5 Jan 2026 21:51:20 +0100 (CET)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B858839B7
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:18:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=lechnology.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2D24083A5A
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:51:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=david@lechnology.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=lechnology.com; s=default; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tSnvLVUmseo9TpnnRdfLoFLAligTEsydnrUJv94D8B8=; b=Q3zSPWbnoMLQvhVsO8OfKbrBH3
- uSCJxMtNrCEzlC6hIw86y+Yc1TM+v+0t6mTmGrKXAvbW2FU7hiyRyMKQX92IDF0T2s+M5XXVcM9QH
- yzGx7BUcgdgrPij9BHUIgSZppO2YtJPmN+mGJ3r9x2+JNAP7PZPfOzt5AdLhbb+yChoKUMak7rIYk
- KeLdi4ZQawgSo/Zg0OfgZaW6MkzrEIW+FhcO3A1F9JZv0P8QxCCQQ7tMb+7Xy/CvbFf69r2+U6VDw
- 2tcO5HmmjjvZO0djc4h/ww1tpIOLpv2XQFLOZVIsdpkznD0peP84IZSd0kKO2e3NWssnDYo8qHgOl
- 2cLLmeuA==;
-Received: from ip98-183-112-25.ok.ok.cox.net ([98.183.112.25]:41620
- helo=[192.168.1.142])
- by galaxy.gendns.com with essmtpa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
- (Exim 4.99) (envelope-from <david@lechnology.com>)
- id 1vcr1j-00000008Zgf-0s11; Mon, 05 Jan 2026 15:18:07 -0500
-Message-ID: <e96f07ef-3b11-428d-8c8b-88c11c977cc2@lechnology.com>
-Date: Mon, 5 Jan 2026 14:18:02 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7c6dbdaced8so307556a34.1
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 12:51:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767646269; x=1768251069; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=h8a/aq2fGDRuJtC253aP2MyjObv3I5pX9wkuwAkCR5k=;
+ b=R9jsIMQuXs5Zi+X6lJWlvMT9uH6Rl2FK1lQea6RsVgihzebjazKM6a/mWiGMvRLQOh
+ B/ipYvq8TayPcT1FxvoA4NKv4MFyIDldt22wdDPGv7ZdWixS9/DFQ0fBIGlnKLhMip+/
+ lDvtJ7nasm2gPKWUe4AlgftISN9rTnuH1IFpE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767646269; x=1768251069;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=h8a/aq2fGDRuJtC253aP2MyjObv3I5pX9wkuwAkCR5k=;
+ b=XmL/85TgiuVlC9Mu62fpDsIVOFQOVBbXVXH3TLbKZL7t8d4ZiJ6T884odmYm6GSE5E
+ /hDXQlibXQScUO1lruBo8kv1otMfYKBcvxsJamt/rWJINQUD6/YP3xcSD4g09CFqREkP
+ PeocChruHy7pS+zm612beDJqVxIpAEZvzFW/xKJLv3NFu+SA5M8ZYuOJrBTPvghbI0Gi
+ IIUFKIn0d05EcSvSGlB0lwWno6GamkNJFf0NBxFH+gy63f1H6vY5C2Jbdyezz9r7Z6Q8
+ wMhAt3BX7HjJyyunDJTn8HclE/hCLEH/1mv4T0CkfSbBB91+VGjBQ9x3N0ebgL+Tn7Cn
+ I81A==
+X-Gm-Message-State: AOJu0YzZpjDk7ONNuMIKqOf0ggdojhywDkVf9zpLs7206mKvnmukre+S
+ b7I29U8/uXm/EdB5HPQFsnWMlpP0OAIimx6Yw8h5JV6shF5DzJvPuEQOsRcT8Q3l5G9rah1CCtC
+ gHq/VVM0=
+X-Gm-Gg: AY/fxX4kNwDQjKHex9+DPPYCqIRvYi5ji8LjHISrEidxDc570YPvBDbnVr0j/yOIQiJ
+ EgRjlL2onC16I2HqJlxx5WRG8WkfOTW6p/5fYfOrh13L0Z0OM4cAnOUX5Ea46JKDzLNpSNPgqRA
+ sJ2dbHSwTcXt2ojGpChQC8z9nFYQOeX6/vjaFs28C5YN59R0jKth4nD+ED+uokcPEKV6mZil1h6
+ MNnU3a3sUwtTGn3LvyEAd6N0EU7ZdAkGabIwuiNkSBFNGyfoYtZMvW9I71UJ8AI2KGr0FjvIo9N
+ aqKTxD3wN2qIvZkfhiSv9/a3orUjlrfX/UpObnHK6RtZFqsoaZGq0ETFq16KkyEOhn7H3ZvetXD
+ wXc2uG0sDi3UT1zAFQ2MCcMFjJHKIYn5JWmVMCCE0ZRJKY0TE1RWA/OV+bdMbgD5u9CWdwjPjsw
+ G29cyqLv3MkAU8/SnxnZD/TwZ8yxRmvg/gK2GpHeprk/2mUbM/YMCN63I04J6Tl20bfg/rvcRXQ
+ wKOxBva1JWJEJ/hmpMlsxK/P57AOojl3BzHGxo=
+X-Google-Smtp-Source: AGHT+IFmyNoG+Owu6gddwzepXjay9TCCOFwFwJ7HiqeQNT1Ohph8qsnU09f9CAHjZCtZslcoAC7uiw==
+X-Received: by 2002:a05:6830:2e05:b0:7cb:1270:1255 with SMTP id
+ 46e09a7af769-7ce466d19c4mr386378a34.16.1767646268875; 
+ Mon, 05 Jan 2026 12:51:08 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478da6f6sm46343a34.25.2026.01.05.12.51.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 12:51:08 -0800 (PST)
+Date: Mon, 5 Jan 2026 14:51:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.01 released
+Message-ID: <20260105205105.GA3270357@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] kbuild: Bump the build system to 6.1
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, "Andrew F. Davis" <afd@ti.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Michal Simek <michal.simek@amd.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, Minkyu Kang <mk7.kang@samsung.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- Varshini Rajendran <varshini.rajendran@microchip.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
- Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- E Shattow <e@freeshell.de>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Sam Edwards
- <cfsworks@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Greg Malysa <malysagreg@gmail.com>,
- James Hilliard <james.hilliard1@gmail.com>, Yao Zi <me@ziyao.cc>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
- Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de
-References: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: David Lechner <david@lechnology.com>
-Autocrypt: addr=david@lechnology.com; keydata=
- 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
-In-Reply-To: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - galaxy.gendns.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lechnology.com
-X-Get-Message-Sender-Via: galaxy.gendns.com: authenticated_id:
- davidmain+lechnology.com/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: galaxy.gendns.com: davidmain@lechnology.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Mailman-Approved-At: Mon, 05 Jan 2026 21:20:03 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UhEiFJ34qGR32ya2"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,51 +95,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/16/25 3:16 AM, Ilias Apalodimas wrote:
-> From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> 
-> Our last sync with the kernel was 5.1.
-> 
-> We are so out of sync now, that tracking the patches and backporting
-> them one by one makes little sense and it's going to take ages.
-> 
-> This is an attempt to sync up Makefiles to 6.1.
-> Unfortunately due to sheer amount of patches this is not easy to review,
-> but that's what we decided during a community call for the bump to 5.1,
-> so we are following the same guidelines here.
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>a #rebased on -next
-> 
 
-...
+--UhEiFJ34qGR32ya2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> @@ -129,14 +131,14 @@ include/config.h: scripts/Makefile.autoconf create_symlink FORCE
->  PHONY += create_symlink
->  create_symlink:
->  ifdef CONFIG_CREATE_ARCH_SYMLINK
-> -ifneq ($(KBUILD_SRC),)
-> +ifdef building_out_of_srctree
->  	$(Q)mkdir -p include/asm
-> -	$(Q)if [ -d $(KBUILD_SRC)/arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
-> +	$(Q)if [ -d $(srctree)/arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
->  		dest=arch/$(ARCH)/mach-$(SOC)/include/mach;			\
->  	else									\
->  		dest=arch/$(ARCH)/include/asm/arch-$(if $(SOC),$(SOC),$(CPU));	\
->  	fi;									\
-> -	ln -fsn $(KBUILD_SRC)/$$dest include/asm/arch
-> +	ln -fsn $(srctree)/$$dest include/asm/arch
->  else
->  	$(Q)if [ -d arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
->  		dest=../../mach-$(SOC)/include/mach;			\
-This breaks out-of-tree builds because the symlink created is broken. For example,
-I have O=build-mt8365_evk so the build directory is a subdirectory of the source
-directory. This causes $(srctree) to be ".." and therefore the link is:
+Hey all,
 
-build-mt8365_evk/include/asm/arch -> ../arch/arm/include/asm/arch-mediatek
+So it's release day and so here is v2026.01. I will be merging the next
+branch back to master shortly and pushing that out as well.
 
-Obviously, there should be a few more ../ in there or it should use an absolute
-path. I'm guessing previously $(KBUILD_SRC) was an absolute path?
+As this is a full release, and not just a release candidate I'm once
+again hoping for a few more people to read this than do my -rc emails or
+just regular mailing list posts. Continuing on with what I've mentioned
+in previous releases, we're now officially part of the Software Freedom
+Conservancy:
+https://sfconservancy.org/news/2025/dec/29/u-boot-has-joined-sfc/
 
-I will see if I can come up with a fix unless someone has any immediate suggestions.
+With that said, we'll have our regularly
+scheduled community meeting tomorrow.  The meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+January 6th, 2025. 9am (UTC/GMT -06:00)
 
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+A high level changelog from v2025.10 until now is:
+- We're on v6.17-dts for upstream device trees/bindings. The v6.18-dts
+  tag was too late for our release cycle.
+- Lots of platform updates. I don't like to single any particular vendor
+  or architecture out. Lots of updates in lots of places.
+- Lots of fixing of issues reported by Smatch, and in some cases
+  Coverity too. Not quite relatedly, some dead code removal as well.
+- Continued work on improving our old pre-rST docs and converting them
+  to rST.
+- Fixes in our DFU, MMC, PMIC, USB, UBI, UFS, SCMI, MTD, UEFI and
+  networking subsystems.
+- Some cleanups and improvements to Falcon mode, so that we can now
+  support this in some secure boot cases.
+- We can again use clang to build on 64bit ARM platforms.
+
+And I'm sure there's things I've missed.
+
+With all of that said, we're on our usual cycle of 3 weeks for -rc1,
+which will be January 26th and then every other week for -rc tags until the
+release of v2026.04 on April 6th, 2026.
+
+Thanks all!
+
+--=20
+Tom
+
+--UhEiFJ34qGR32ya2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVwkOQAKCRAr4qD1Cr/k
+Cq5zAQCSuwgiOcV79IviD8AWsWOwZi24vIPzGdtGLoVKgtTfLgEAiT4SexkmSdK9
+qNU1o5gzg/G60oQxMiKbDj7qS6Singw=
+=ZHfT
+-----END PGP SIGNATURE-----
+
+--UhEiFJ34qGR32ya2--
