@@ -4,82 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D8DAC79F9E
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:43:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC436C79F9E
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 16:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29B2183D6C;
-	Mon,  5 Jan 2026 16:42:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id CAFCD838CE;
+	Mon,  5 Jan 2026 17:15:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="lCa8gyqh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aXhq4pnV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0EE683E21; Mon,  5 Jan 2026 16:42:52 +0100 (CET)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6721780325; Mon,  5 Jan 2026 17:15:22 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9685183CBD
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:42:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A35A839DF
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:15:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-6467ac59e16so16825d50.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:42:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1767627769; x=1768232569;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wDtbyf7MBSeKzO2xNlgCAl+ke2yve7AsaMV5NbW1uLY=;
- b=lCa8gyqhaZwLEypHSoqH260Uvhf6QzgNBvhBJ3a6lx/TzDesj3q5ivfWxY6gSW0kGM
- KRGUz0jXADfdFHzkECtBfMjX88sYaA5saTfy/gfWvG0PzW2/jYPiTwZq/fPWZ3xXtQ+c
- T68WnFttV96mbrCbFU50gWsH1gXFcJtrP24Ty/HQROPxFVpSGo32v5Lu5hrrBmB8j2Kv
- o+ZBeau/OQ1vH2ls4suPKISuNJ2pZPxE7ZVx6SIkTNGz9jjg9VlUfeQMOoH99RZZGcvF
- ofEmHjVKGWxlX9vgkJEmaa34lKoAgZtBNMjtK7xvyA3IxITc4YAYHovvdETyIC7GtVeX
- 3SzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767627769; x=1768232569;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wDtbyf7MBSeKzO2xNlgCAl+ke2yve7AsaMV5NbW1uLY=;
- b=KXu70ht3v9p1ZY4JEuad9kvViGnZmD6ofLlyC7XIqC1zNKRQsJx6KFX2KBxqFgs5rD
- 2IRWl+rr19UourTlxrHKYqLdt/1baxfuYClscSNrUr7m4JyvFtFuxvNhslwWBRglu8HI
- TzIUO7qp5b83s+Gi7ZQcu1vwulYPmufiUEG0XcaR+C5rJx6bXMN+xgZ6MfJBcV0VBDjB
- db/zOR9tE6OyWtlDnjxW4e+4c6m/orlf3E78TifsX3z8qPxlyIDeVBmXoLRJ3o81/lCl
- 4Ud8sxzRUUdDbHepOXoEs8BH3YYHiwd4Srwe1mF1ZkbkMp4kN2z5ojlxX11691KejEOO
- +7EA==
-X-Gm-Message-State: AOJu0Yyy77UTq16WaridVcVAhlm6VdN3pleSCcU6diOp/to3NslRe5Fh
- SeIqBmjLmdFynK/htSxK0/8Shj7BIVU6xzP08Balz1A/XfZf1VkMzAuH0LdbLUXCdbYwAX16Ql/
- XCXwsJpocA7LVOsf4JqncCU9Tnz4QVda0SPy6RF2h
-X-Gm-Gg: AY/fxX4M8Dluy+d3UxPDY0Kbno/gXvPExwbBUVIfwVrnbL4qTIZIaMkscGMJNW6ByfJ
- /XvesuDKfDq7eftmNJyqOkEPu6rTf7heR3cs2rUMb8qs4E/Z8nr/i9oUNbyomq7hgUY5CibRg6K
- rp+EM5F31mcVDCQ6KNkHH6uFWG+AZDcsUOYm+Q9q2AXx3+w4LtHN3xJgcJJM1U8KiQsc62DTL89
- 9sq0PnvZXdOkRe8s7ZIzSdkUr3R/wyrv5G82lYmDROtfd9RyjlsKjcAyO30eFAWgHZ2iq4Q
-X-Google-Smtp-Source: AGHT+IHb+L660YuPT9uxqKBhXhhNQRdDFGmGsQgIT+9SZomWHAT+9/lLvmdY5N3PKs1I4SVNedVytuczCfGDJGIqkyg=
-X-Received: by 2002:a53:bbcb:0:b0:644:7398:6670 with SMTP id
- 956f58d0204a3-6466a834c30mr32925273d50.7.1767627769406; Mon, 05 Jan 2026
- 07:42:49 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YEtO09gZgSPRT5Km2iUZkh+oAmQHWzSKubWYjSWVXIIy+DbQP2f631K8o6MD/kKtsK5K8fJOaaEGPTkxXAQ1L2i2Y6cCjraFwpssReumWLir8KTtYAbBdDgOEs0BEHhkymKph0bQoH784IiIOoySqxktG5UGibFblfg9YfcrMwB0VVLWQ8ZHQxWC7BUC+xm5fUDcJo7Sk9xjmEF6NOh6ygY+hHMqQRNWhjMpys+XsN+ptWg7dsl0egcLQpXU8Q7EdjgLf1PTcWeafEr8bWiN2Mp/PH3E5fAyilxvoxxr5EsMa923KMpMoed0J5pkMOW36luSntZSNjpCookVDP2heQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ijJ95qwGmoX7n3wCKHnvLg/ii6oyH7lLWFgaD5mpiAU=;
+ b=R6tvhPYFMAn34ugmtUT0RORTbtmRr/qZe/lQgsxfR+3HgeFtmsmLBCUIePqIELt5v6T6Q5s0M1bRZJiFiSbqkv+YxqOj09SgIyb1IxLz+mx24wcnxxmELOl9yDc5mrz2v7nENHNPba93JkiJPLUec4wuymPQRDRc4AXY4jUFlKnJkM9Z3Sec1yQMbd/qbdircLrd4kLdjZnq8eaYa7wEc9wI8xYLstdECmS0vxHMmhEprvFwIPAYV5SE8zHDahY8UQ/DoraNyLek7w0GyNebMrUnN486Y+L03EK9DbZGUdbRh+4Br/yp6Hp87VSAQPTpV1Hit3oeUqwqrlDKkc7zRQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ijJ95qwGmoX7n3wCKHnvLg/ii6oyH7lLWFgaD5mpiAU=;
+ b=aXhq4pnVfDGHPs0vcxlmzoPWI81YL/oNPEn5ORjHpV1dNcwY2kaUj2O0mcwRXom4cIJ9eDepysU4+X76QoedDYSy5v3bGFDmkjgcJt/5K3T3eBDeh+HJmMFTwv8hq9vAxHtm0oVL/iaGSWxd5Q/zuiG/765T8HOSuvqA225w27E=
+Received: from BN9PR03CA0538.namprd03.prod.outlook.com (2603:10b6:408:131::33)
+ by DM4PR10MB6790.namprd10.prod.outlook.com (2603:10b6:8:10a::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
+ 2026 16:15:14 +0000
+Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
+ (2603:10b6:408:131:cafe::8c) by BN9PR03CA0538.outlook.office365.com
+ (2603:10b6:408:131::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Mon, 5
+ Jan 2026 16:14:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.0 via Frontend Transport; Mon, 5 Jan 2026 16:15:12 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
+ 2026 10:15:10 -0600
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
+ 2026 10:15:10 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 5 Jan 2026 10:15:10 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 605GFAOK1550091;
+ Mon, 5 Jan 2026 10:15:10 -0600
+Message-ID: <90c90e57-5ec9-43e0-bcec-80db29516b70@ti.com>
+Date: Mon, 5 Jan 2026 10:15:05 -0600
 MIME-Version: 1.0
-References: <20251228151824.25667-1-dario.binacchi@amarulasolutions.com>
- <20251228151824.25667-6-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20251228151824.25667-6-dario.binacchi@amarulasolutions.com>
-From: Michal Simek <monstr@monstr.eu>
-Date: Mon, 5 Jan 2026 16:42:36 +0100
-X-Gm-Features: AQt7F2rzWAYQyN0jCxUsrDpKcRQIijwAQeSmWJc6st-bWsEObV9Je113ziJ5kNQ
-Message-ID: <CAHTX3dJ-PKO6Ckhqc0MMTY6j+d9J-SbF9gcG0axhan=FijdEYg@mail.gmail.com>
-Subject: Re: [PATCH 5/5] tools: build dumpfwumdata with tools-only_defconfig
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] configs: am57xx_hs_evm_defconfig: Reserve EMIF memory
+ used by PPA
+To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20251229051113.2136908-1-b-padhi@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20251229051113.2136908-1-b-padhi@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|DM4PR10MB6790:EE_
+X-MS-Office365-Filtering-Correlation-Id: a504fe6e-715f-4df2-1998-08de4c759ad2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?N0tmRFpQcFVKME5tbSs3Y3lxUWUwdy9DbzhqY2pubURFZDI5S1pFUHlqem5Y?=
+ =?utf-8?B?RkhVNmxwNm90TnlMcDJKY1RMenhGQ2xGaVhBRG8wcUErRGY5clZWMjM5UUlC?=
+ =?utf-8?B?NWxvcFkyWXptZnE0U2hFa3A3SEp3UmxuKzdSZHJGUzZtaW4zMDh4ckxUQ0p6?=
+ =?utf-8?B?Rll3Z2pyOFpiSzFpbDVCTEtpYndzeU5tN2dwTmpGQ2hhRlpWMkdzelNORENY?=
+ =?utf-8?B?c2cyWTBtbzZNK2tYSkFWSDZiWXpFOGFabmxTR05xV0sybWZRTjdKUnFzN2t1?=
+ =?utf-8?B?Y2h4amNCaGFzT0NScEE0MEQyMEw4VUNLQ3BHMW4wNTUweU11cXU1UmVycFJv?=
+ =?utf-8?B?TGlZNFo5eWYrRzRPczBVakd3UjlRQ1BlWDQxU0FNaHc3ZTV4R3VPNktyVG5E?=
+ =?utf-8?B?NlBWYXJ2bmdMM3oyVnV5dzhlRUF4ODJGVSszbUE3NTgzanZncUlsWW4wclFI?=
+ =?utf-8?B?aUUvd3ZwWEF2MjNYdUVsaWV5RmtQSGsvZmg5WEUvcEZISkJGYjJreTRhc0t5?=
+ =?utf-8?B?blBWM2Y2Sm90TlhTZGNzNFhBeitzRkJMQ0xDQldCbCs5UXJrTUJUWUdPdVor?=
+ =?utf-8?B?VXdYVXloclRmTGlJamQrSUtkSDNWa1dwN3d4TFNBWnZrZmNVVWdvUmhWa1Vz?=
+ =?utf-8?B?b1N0MlozajlHYm5nOHhBdFJDS3RrNVlOTDNoL3EwU1p0MGlGaGdGU3ZJbTJx?=
+ =?utf-8?B?dkNsTXh6T3FuUmZHbS9QUTA3Y3pNd2ZqOTJsVCtuQlVCNGNFc1k1WUF5MUZj?=
+ =?utf-8?B?MVpmN0EzbkxLTGdqRURnZXU4bmxDWncrSFhaWGxHc1ZUVTJnNHlrdk1KZ21l?=
+ =?utf-8?B?ekJOOUxyVlp4WnNEMVdnZExBdjlkTHB4a1RjbloyamZpOFVxSStGdmsrLzdV?=
+ =?utf-8?B?K2dmMzhTY3RWYlJWYXVzMVJyZmtvdEwvWTlxVU0wdzNFVFZUdjFJeHdhUE5C?=
+ =?utf-8?B?WTlJaFA0V3pPaHIzVzhOMDlRU3h3TzJNL20yd05NWkdZdU5PWlJkOGVZcEJu?=
+ =?utf-8?B?SVRiQ3VlOStwc0tUS2Ntemxack4xL0h0QlR4VjhkV2R3c0FqMDBWVG9FYTU3?=
+ =?utf-8?B?N2c0VlY4cjE0Mm5pckxKbW1oeE5kRW9IRDVnTitNemcxSjRnT3NMT1REMmxO?=
+ =?utf-8?B?Tnc0aEtjNkpwd21NbGtHNjJRSENXenAvV1MxRVBXbXlIWnl2U1FmQVpFcXFR?=
+ =?utf-8?B?UkFEc0RhU2htTjZJMk9yUjNHS1RJL1dlajNlSS9JV3lhTTJ5aElVaWZPL2Iy?=
+ =?utf-8?B?Wm42MnZYQ0JUTkluODhCMnpicCt4MHovNUhYeXVnZ1B5a0VTWmxwMGxlWFBw?=
+ =?utf-8?B?akUxR0QzcHBOc3lXZFVrVkRGVWloY0NONHZodHZ2alRHS3MxQUs2SEpXbmly?=
+ =?utf-8?B?RXNvanRaSEt1WlM3SWRIeVBsbW1JelV2c1JBNGJkVGxTaGlBdisyeFZYZ1Nm?=
+ =?utf-8?B?RWxBYjFqZEFTeTd0clNWUjJWWVNsYzJGeEk4cVFqS0FxaDJVam1RZ3FaT3Ny?=
+ =?utf-8?B?K0kyQmRkd1VDOUg4eDA3Mk90VjhIK0I3ZG5UODRiMkdOdTg4N2N2ZTNhZFN2?=
+ =?utf-8?B?aGg1bGFPUVUySm5JQW1RampzU0NXUWY2MnVFVnRISVNoWWt6dnFQcUc3NWZ6?=
+ =?utf-8?B?WVpJQzBrT1BadnRMMDUvc0FJRlBiN3VnOTBzRE8zTVFkQ0xyTWZPQVBnMDgw?=
+ =?utf-8?B?WU5GajF1TGdDaVdkUzB5MXg0RjZOZlcza3l4N1hFWkdwc3krNzRxNVlUUWpp?=
+ =?utf-8?B?ZzI4YUwycDMrNThRUk45eDVZcThlYmNLWlFSZDQ5QmZxT0RPcjQ3cUMxakw4?=
+ =?utf-8?B?bnpQSC82cmNZbXNzYXRXTTJSVThraHZab1lXYU8zby82cHhQUkNvQ2YyaWJB?=
+ =?utf-8?B?YzJOY3lKamN5REVWNkNzRHFYUVA5WmRNc054enBPTVozOWxKVTZKdDh1TSta?=
+ =?utf-8?B?ank2WGFYa0FNdHcveXNZcWJGZ1hrY01nMlZESFMwWFFFMU9NNWsvMzlRMXNt?=
+ =?utf-8?B?dmt6WjFmek5CUnNid3FmVzZVVUFueGdtS2NKMTZqZGVkVWR1VWlGeFBaaWpG?=
+ =?utf-8?B?QWxXQXhlOHdlRGJSQldoK1ludU1sMEY4cXd0SnFRa29rbSt4TGVGVlNWTWQv?=
+ =?utf-8?Q?zQl3wJdE41Pwrzhvxqbzocnyc?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 16:15:12.4344 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a504fe6e-715f-4df2-1998-08de4c759ad2
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6790
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,28 +165,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ne 28. 12. 2025 v 16:19 odes=C3=ADlatel Dario Binacchi
-<dario.binacchi@amarulasolutions.com> napsal:
->
-> Always build dumpfwumdata when using tools-only_defconfig.
->
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->
+On 12/28/25 11:11 PM, Beleswar Padhi wrote:
+> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+> top 37 MB is used by PPA and is firewalled. This results in an exception
+> and the boot fails. Set CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB
+> memory (aligned to 2MB as per page size for ARM32) to fix the boot.
+> 
+> Note: This limitation does not exist for other AM57x devices, but this
+> config is applied in the common defconfig since adding a separate
+> defconfig only for AM571x is not justified. Losing 38MB of memory at the
+> bootloader stage on other devices is acceptable.
+> 
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 > ---
->
->  configs/tools-only_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/configs/tools-only_defconfig b/configs/tools-only_defconfig
-> index bdc646e29b32..bbcb64879fac 100644
-> --- a/configs/tools-only_defconfig
-> +++ b/configs/tools-only_defconfig
-> @@ -41,3 +41,4 @@ CONFIG_VIRTIO_SANDBOX=3Dn
->  CONFIG_GENERATE_ACPI_TABLE=3Dn
->  CONFIG_TOOLS_MKEFICAPSULE=3Dy
->  CONFIG_TOOLS_MKFWUMDATA=3Dy
-> +CONFIG_TOOLS_DUMPFWUMDATA=3Dy
 
-Order is different. This should be above CONFIG_TOOLS_MKFWUMDATA.
+Reviewed-by: Andrew Davis <afd@ti.com>
 
-M
+> Fix boot for TI AM571x HS EVM board
+> 
+> v3: Changelog:
+> 1. Carry the changes in the common am57xx_hs_evm_defconfig file
+> 
+> Link to v2:
+> https://lore.kernel.org/all/20251128150455.3279166-1-b-padhi@ti.com/
+> 
+> v2: Changelog:
+> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
+> memory node in DT as it is done by U-Boot as part of FDT fixups
+> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-common.c#L72-L107
+> 2. Add entry in MAINTAINERS for new config.
+> 3. Update commit message to use memory size in MB than raw hex bytes
+> 
+> Link to v1:
+> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
+> 
+> Test logs:
+> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
+> 
+>   configs/am57xx_hs_evm_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
+> index 6e4704470e8..3db30d2397e 100644
+> --- a/configs/am57xx_hs_evm_defconfig
+> +++ b/configs/am57xx_hs_evm_defconfig
+> @@ -16,6 +16,7 @@ CONFIG_SPL=y
+>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>   CONFIG_SPL_SPI=y
+>   CONFIG_ARMV7_LPAE=y
+> +CONFIG_SYS_MEM_TOP_HIDE=0x2600000
+>   CONFIG_AHCI=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_DISTRO_DEFAULTS=y
+
