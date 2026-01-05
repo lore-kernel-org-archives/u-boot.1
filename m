@@ -4,97 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 448C3C79F89
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 13:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E66FBC79F8B
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 13:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45FBD83DEA;
+	by phobos.denx.de (Postfix) with ESMTP id ACBCC83DF2;
 	Mon,  5 Jan 2026 14:03:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=metanoia-comm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HkgvJGng";
+	dkim=pass (1024-bit key; unprotected) header.d=metanoiacomm.onmicrosoft.com header.i=@metanoiacomm.onmicrosoft.com header.b="X2+reL86";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB96183CEA; Mon,  5 Jan 2026 10:37:07 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E1CD083D52; Mon,  5 Jan 2026 12:39:51 +0100 (CET)
+Received: from TYPPR03CU001.outbound.protection.outlook.com
+ (mail-japaneastazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c405::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D2BD83AB7
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 10:37:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40B01839DD
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 12:39:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=metanoia-comm.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4775ae77516so144783775e9.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 01:37:05 -0800 (PST)
+ spf=pass smtp.mailfrom=jun.chang@metanoia-comm.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=M0rUPEc8p296Bzbvy9eq2dhBWeMOrdZazzX4ohnea+mo3CHK3iSrr9uGs7IBZXC7ualh+jAY21zy4cYq/SnpaDCLjBMMt3YGgukXLdyzUPgFMwKaz1ixB94oq3XTn3FDEeiNihf8KslSB19F4pl0OiTyGFktLDxcK6kN4RzVpPfP9KMCElI/Wt6j2hJJrOcMxDfEuFOEb2L3+lvNACqnbwwfFsDbiXCN7hecQvKHYPzavLGlRWCE1lO3wnRjLYVOAuxoJc6whFxU5Vo5HKAZe8EU8OPSJaNiPMVChLR1GDFNRippDL0O8VT052BWL0Cjaz4HhnUxOtsxnS08atpQ6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YJdOTsgJhm1nQsZKE217UQrRO4Czjavvt5V+qZ2cVRM=;
+ b=afYkv8y+NTzOFCg2pPTD604IJ0mYDU0p0m+sw6l1JumbF9PQ1XL2dc1RVKyuvyTfQ1Re3aiX/f57gKgPDFGJ+sTDxdJsD/pjfk2hbPJtN1PbtSKJc1wanmdwNROeeiXTFkrJH1XAnJsAeCf9HFzWJr9cISz1MB4bf03HlkkkSdjjT/Ll0GaDAwVPAfdfF+eJpGPZigEFq+4c6Vk5PkdUpLHZWPqOMgNhASA2kXCpGvuRHqP7RBx78jIG9CY2zRyVEBdF/QmwFzGP+Btj3ArIG1kSpy+DUOQI01vagEU2cOJeZsySVvM4aO+svatUZXcHjtkL4Ns8ox4P+6LaGGtkpg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=metanoia-comm.com; dmarc=pass action=none
+ header.from=metanoia-comm.com; dkim=pass header.d=metanoia-comm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767605825; x=1768210625;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vVL7W+VJNYZCVENkgVRkKLKuEBNKdeJGqIsQ4VzhMA8=;
- b=HkgvJGngiZn/UcI/D+dFm9qFc6jXFxluWUvbkydEy7yFOwZA8kQvtRIG8QXL118jzt
- TXNwqhvQgZzwFh8MNuWhwVyGsypHQMGjqRJ2g0uTcP7h9l2bAvjV7ZkqAxDAu5iFykgj
- wJIMYLGS69h9M+SRTiiDZ4PObIE8UmlZP8SXuZSRtLpyDD1rTKawdfP9LuZyUj9yuy9w
- 5FwhChQuopMaYKcy3HLC3No7veSnT1w9BS8YBSr00RJndvSkGxOQIF2g6vopBnxyy+Bb
- /HD0E8OFOtUgb6oKbEFiYRQuuFdEJTdvOz+6UrGnevBECbiRnAiM90gprfQKz0lYBxtD
- 72Xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767605825; x=1768210625;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=vVL7W+VJNYZCVENkgVRkKLKuEBNKdeJGqIsQ4VzhMA8=;
- b=NH+Xxy6WVi16JKoxwwNWPuIFZe8mJI/zpnyoMeRelIIntq5VvdSM3eo1+l2Z8Uppm1
- iJvttfKAUhmWmVTjtWNSEjbKK/izzREgVYoCs4R3Bk7m2I+T4sA5peswg07TFRECPZ8Q
- /tEZH7GL+ZngR7DCPprlG6V2RdZj2edZM3CrolnjiThfXz9LQ3MGnLSnoOywmFAoxsnc
- +tr50xVvONUf1ePnQQ4YGcGS3RoIy1KmObIhme6aiQBSUHbPIJzACqPxpAAPY9MsvOLs
- fSXQ1a4TeUIs21le/7JaH7o6NEAIeQTMakAZ8nzuDZ27ASo4Ow/Bl7jGZgSEDMS88wwv
- wfQw==
-X-Gm-Message-State: AOJu0YwoR8HUbL0KTBGordS/04C7ekHeHWYgJsKb891dvi+JoG+kMmov
- PaDucRX5cdCFt406P/5hOSdo8kGeoxkemFS+oGcippmVBNAlNGCKpo9C7wCRwbQTfi4=
-X-Gm-Gg: AY/fxX5Ja4BaXhefDcgJ0/mIA4nUUJbub9hF9YoJm9zUfe+ZAljuRWZaswwKCoXOcC3
- zzmLbtRT3YDqLzZ8ih2t4DPjkKcXh30EpWpjxvEJWQxpNXzYG2pONLXQ5IIu/xRrHXUtaeT9E4x
- 1c7R0wM+NuJqNQngjswsDaRtnunUwNf3/lf4PJt6wdJ4rBFdcbZziEPuLx59KeaqD+++KBIilQU
- MfrLzLWji6hOh3ScEgbg7u7r8Nz7nHoQVvoZHodpIERJQoNQw6fyAr5UNBYqDjyqB1cek/oWhF0
- 3wGNJt12wpLkSd7+5dLvdLrGamik0NGJgaYG6Ty0vr9xzhPFrZ9D07cKeSf/pjDtJJmYac3cArI
- xtWjXC7qs/60LAa+pOJjy6Uz+75hYCZY0uI1bBJtHrlL9y723lgnI50S3r/wk/IUlyuwekpbNMc
- CzqlyVMFAs
-X-Google-Smtp-Source: AGHT+IGiEnDy5racmRSgBmtDHZmWFvOq8RBXNl9ktU9vEjlKwHD6N8zUXX829xsR8Dyilr/dA6q1HA==
-X-Received: by 2002:a05:600c:4e42:b0:47b:de05:aa28 with SMTP id
- 5b1f17b1804b1-47d1956eb65mr487451615e9.2.1767605824606; 
- Mon, 05 Jan 2026 01:37:04 -0800 (PST)
-Received: from localhost ([2001:4091:a246:82fd:4350:c3d9:84a3:70dd])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d6d14912asm141389205e9.8.2026.01.05.01.37.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jan 2026 01:37:04 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 05 Jan 2026 10:36:29 +0100
-Subject: [PATCH v4 4/4] video: ti: am335x: Support OF graph
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ d=metanoiacomm.onmicrosoft.com; s=selector1-metanoiacomm-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YJdOTsgJhm1nQsZKE217UQrRO4Czjavvt5V+qZ2cVRM=;
+ b=X2+reL863Wz7sSuJYeJrLHhFbO2SAmb9ZvGJdYtll/jjxAPPfNeY++Zj9aDQOtMpLmQjltwBD02DcgWLvQRD6y8h97ZrXmU7cknNGhOcWt9ER7sE+ciHE0pCFwR1FeIInDNs19/Jb+oCN4VxJtO17iqBBW9rTQ7C9G7f+Cel+gw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=metanoia-comm.com;
+Received: from TYSPR06MB7207.apcprd06.prod.outlook.com (2603:1096:405:8f::6)
+ by SEYPR06MB8247.apcprd06.prod.outlook.com (2603:1096:101:2f3::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
+ 2026 11:39:45 +0000
+Received: from TYSPR06MB7207.apcprd06.prod.outlook.com
+ ([fe80::94f8:90c4:2339:9639]) by TYSPR06MB7207.apcprd06.prod.outlook.com
+ ([fe80::94f8:90c4:2339:9639%2]) with mapi id 15.20.9478.004; Mon, 5 Jan 2026
+ 11:39:45 +0000
+Message-ID: <c3d448db-54ce-482a-9d34-47395e415881@metanoia-comm.com>
+Date: Mon, 5 Jan 2026 19:39:44 +0800
+User-Agent: Mozilla Thunderbird
+From: Jun Chang <jun.chang@metanoia-comm.com>
+Subject: Re: [PATCH 1/1] board: mt5824: Add initial support for Metanoia
+ MT5824 EVB
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+References: <20251230030328.215240-1-jun.chang@metanoia-comm.com>
+ <20251230030328.215240-2-jun.chang@metanoia-comm.com>
+ <20251230153115.GR710860@bill-the-cat>
+ <e4a70eae-37fd-4648-bb17-66975c6d09af@metanoia-comm.com>
+ <20251231143404.GX710860@bill-the-cat>
+Content-Language: en-US
+In-Reply-To: <20251231143404.GX710860@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260105-topic-am33-evm-lcd-v2026-01-v4-4-7617591b8159@baylibre.com>
-References: <20260105-topic-am33-evm-lcd-v2026-01-v4-0-7617591b8159@baylibre.com>
-In-Reply-To: <20260105-topic-am33-evm-lcd-v2026-01-v4-0-7617591b8159@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2969; i=msp@baylibre.com;
- h=from:subject:message-id; bh=BLqCJ5mUVvTnsP3XHcrulNh/wDuhDSCUp6GaeQHqvYA=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhszoNtNLX4TsdaeoChhIP1eOnHM7r/2ZUNHb2iclHJfDO
- nwWd+3oKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIn8ZGX4ZxX38FiY2TmuDy0n
- wn2ZDiw/udjknWhPgcnhxsB379lPdDAy7Fv12dKKJX+9xVSz4FXnfdb3BLs++8Lw8eHac+cmb17
- IwggA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
+X-ClientProxiedBy: TP0P295CA0011.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:2::17) To TYSPR06MB7207.apcprd06.prod.outlook.com
+ (2603:1096:405:8f::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYSPR06MB7207:EE_|SEYPR06MB8247:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ad2ecd1-b41d-424e-64db-08de4c4f1fb8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a3Y1N1VvMU56ZHRmdnVPNVdqM0RXb3hnS0pjYkdSNC9NKzNpWUtIdHBrQmo2?=
+ =?utf-8?B?SDFwSVFKNGY4clpJL2JoQ3hQTTM3dExya1huZTAzWTlQQTN4MmY4dTFwRys1?=
+ =?utf-8?B?NkU2dnpoYnJRRHVYZzJYRDdTQ0oyRVg1Mko0RXFQUHUvWlFaWlBTYWIxUVh1?=
+ =?utf-8?B?ZkdqU29uc1h6eEQxeGQwWmljRHI5NXRteE5LVjRJTll3b3ZINncwM3dQWHh1?=
+ =?utf-8?B?dFhnU0x5bHdyM3hjbDBjUU1FRVA1RFhENGZvYVVXNWZhVjFEem9RanpWc2V4?=
+ =?utf-8?B?VkphLzkxQTc1blVjYzRWRlpTWkFha01DU1BxRGd3VjR4SC9yZGtkWnRqaHVX?=
+ =?utf-8?B?U1VrWnpxcjdmWjBUb1RMYUZHdjE3c1U4WDNoakhyelFidk1FZko4TnQ1Qm1U?=
+ =?utf-8?B?QWRCNWh6YUdFY2hzbndBR0lQUVljUnFCM0Y0Q0dRVEVyWnp1UlZDRjRndlpF?=
+ =?utf-8?B?NFhlU25SemFvMWIrVzRGWDlWakJWekFXS0duSEw4ZWNiWTBHMWJrODBXQzVj?=
+ =?utf-8?B?clJtMmE2ZEViS2ZuSEt4T29NWFJlRkZQQ3lEdXBPY25nWkNmc2VVM0tFakRw?=
+ =?utf-8?B?Tm4xMWFUWDZCZjFpK3NibzlmRnoreTkrMkhNN2tOaGZDbWFhUmJuWUYvR094?=
+ =?utf-8?B?SWwzc0FwZ0tSbTBBQm1Bc0hXOG15M0hYSk1VRkl1aWgrQ3NXZGhseEYwWVdR?=
+ =?utf-8?B?OGM0b2VLV1FvdGVkM2xNdEJWRXdpeUFhOE5wUnZLQ2U0bEUxMTR2MHZ0bjRS?=
+ =?utf-8?B?UEFpM2NsbVUwbDM0OFREa3NmZUNNaUVMZFJKOFFCek5oKzhybjFxSWNvV2VX?=
+ =?utf-8?B?LzNnOVU5UEdkejE5NTlzQnFrM0tZUzU1T1B0LzYvMmN2T2JNbWpGWHQ1SlJB?=
+ =?utf-8?B?QmlBSXNjVzZpV0pHeWhVbGlpd2JVWGY2ekowQnIveU5lODRzREJEUXRkZ28r?=
+ =?utf-8?B?TEZDcjhnOEI5bms5elhGbjMxMlo3d2QrUVdFZ2haaE5oTmlSZHNSSk1HQjQz?=
+ =?utf-8?B?NVV5ZHFnTlVNV3BFQWdscWJEbXA2RXlZWlRiYzd5K1ZDbjdRTFlOaFRvdFMr?=
+ =?utf-8?B?NkdLTFhJUmtJK2xZTUJRUzlHZVFxaFZ6Rk11YlVmZUQranpPNjNPSEFTdjBS?=
+ =?utf-8?B?c21BZ0N1QlluZG5oek5nNEFySEFCQXVOTHM0c1ZzeUNvN3d0TS9SUlZITy80?=
+ =?utf-8?B?VHhrVVYzdmJ3dk5SK1J3MzFNUFMyejZyMktSUE5lUW5vc3V0ZXRlc3hVMzdx?=
+ =?utf-8?B?WEtnWlZxSE5kT3MvbVU0enB1bDNQR3pKRzlhQkppOCs2aFpVajQwOGFBWGto?=
+ =?utf-8?B?Z3FLYWJNSG5adTUvQWF4TldFc3lrbmgycXcvZytlaitTV2VIdU0xQ0xYampt?=
+ =?utf-8?B?VUxTcWVZUCtVSkF4WncwTVZrZ3djOXJTNGEvc1g1R21WanFPY3hNRXo0VEV6?=
+ =?utf-8?B?UWNVTG9UaEtWMUg4VWFya0ZYYVpRYlNLd0VTSFFQWVlrMzNiMG1mNkZYVDFv?=
+ =?utf-8?B?c0xOU3k4S3NwYnZFVFRyUURHZmNqMndYbE4yL2NMNkp5alh1dTRTa0hBZ2cz?=
+ =?utf-8?B?b04wb1FKeHRQMmQxYUJYeExQMUJjT3ViV2lydHYvdWV5bW93Rm8zRzZJYzAz?=
+ =?utf-8?B?YVJCbi9XUGgwaXRzOUpmS09LeXBFSmVEYkxScDNVemJxMzUyS1YrZGNLYndy?=
+ =?utf-8?B?ekNiSkdobGxrZGM2YktZKzlaUDBhZXl0akduVkF2SUVKZVJjaDhiQjVYajE1?=
+ =?utf-8?B?aXVpbjJtOG1RMkNNV1M0OVVmTlY5RE9SRVFzUnJvbWRBeTZHa25YZGs2aEIz?=
+ =?utf-8?B?amU2Y1JtZklkVnk2NVF3ODBrQVhsaG1hdVdGRlU4MTAwYlFHOUJ1N0pjTDdQ?=
+ =?utf-8?B?K0JlMWhvME5ISGJlOWJuL2JUK0dDMDBaSEZtMGIyZzhxMS9BenVjUjI5K1pB?=
+ =?utf-8?Q?4UNolWpWTTWFxX2jOUj0cHvW4kNxmo8m?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYSPR06MB7207.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WG14YnVlT3F6a1lEUEVpS2UyOVBSTDFFSVExeUdzMlh5T0VvVVdudnpxREVW?=
+ =?utf-8?B?eWZ1VHk3L2ovM2dxeE5JZ1pIVzQ5cE1pZGQ3S21zdGlta0lyZFB4a3h4OUhO?=
+ =?utf-8?B?ekhXZWFXdVFlSDdGb2RSQWgwblB4dU9tVHlGQk5yekEyVE8reDZPSS91b1Vv?=
+ =?utf-8?B?dzNxWWRISEFQclgyUkJIeGlLQVIrU3FyWlhpaGJMK0svdnI5R2o4cHpxNWI0?=
+ =?utf-8?B?c0drN1Bldm42WEg4alllK1JZU3JYQVZFY1UrQWhva3pLbS8wdlJ6ZE9nK0FY?=
+ =?utf-8?B?U1kwdlR5YUxLeGpPcjRQS2hCWmR2bnFpMSs1WWRKaXFiZEVIcVRxYnRDSU5K?=
+ =?utf-8?B?ZmRxdTVBbjhCZXhjT2ZmRWRLaVVhWnZwMWRpNnJEMVBMNWw2b3RHSUJhVWox?=
+ =?utf-8?B?SExwdDdrQmlFbXVXczYvNHY2QU1hVWpGZStTa3I2K3g2YjMxL29acTlLRXhr?=
+ =?utf-8?B?UnR5VTloMEpFcGw5MnVndGQwWEVmVFN5QXQ4cHYvZk9kYkgwb2JTQWZodzRm?=
+ =?utf-8?B?N3FuemoyckYvdVRVYTBJUEFuTThhaUxXU2w5VndZcGc2dWZJVitIWUhtZk41?=
+ =?utf-8?B?SXYvNUhHTzB0MFJTUDlROVp0SHFJRXhXa1FONGdhRE9VQmZOU1BVdU9LRWxh?=
+ =?utf-8?B?Y3NwN2N1YXlZSVhVYVZXRVFFaW1OdUFWRXU0bENJTlovNktZS0M4b0E2UmFS?=
+ =?utf-8?B?S1JsTjkvU2xNOFBxK0lVY0lpOGhmNXF0RzRwWjl6cmtKNnlMR0xnbjhuR1lp?=
+ =?utf-8?B?UkRBMzRvektMMFNGUFF4SXMyZUZBMXdEUmxKenFPWFhPc05TWmYya0Q3Nmht?=
+ =?utf-8?B?eDNhR2d0NUJSK0M0Z1JLcTFSckNyRmZKaTVHdjROcjBILzNEY2V5VUsyNjln?=
+ =?utf-8?B?eVhpaDNzK25lcm0xWmdRaTRCeFd1ZEFDcC9YeEU5amljMzVmVWlwZU9FaHFq?=
+ =?utf-8?B?c2F6OWZjM09zK0xNWmRiTVdkc0Vic2MzUXNIZmRDL1IyYUcvVVJJM2lVODI5?=
+ =?utf-8?B?bkNYME1lSXVjVUFyMExPT3pleUsrYTNmcXZ1em9WZ2FvK0g3OS9WM2pmZ3hG?=
+ =?utf-8?B?OG5xVmU5NW5VRDlBeFhjdTREWDcvNjlKT2k0SHQwOFV5OHZFbm5nRE4ySzR2?=
+ =?utf-8?B?VTJlNStuYjVYbElXZUl2VGVJbEhJSTNmZXJzZ0EvUzNlMDgvY2UzcnZxallM?=
+ =?utf-8?B?MEMyd1hTMTNXSHJhcHUvc2RnTkNmZ2F6a2RWV2RLMytHM0pFM1BNc0dxTW5X?=
+ =?utf-8?B?aU0vYzJpRXY2WjhUcTREV3JqZHVhSVpncU9DemZIVmVEcmFsS3YvN2JNdm54?=
+ =?utf-8?B?U2J1dUpWY0E3U2JhRVZoVlAydm0vQlpSWTR6aVZacDQ0bmY2VlZjRXZTcGho?=
+ =?utf-8?B?dVpYZ25MZTRhL2luazZBdjlWMDBQSHYvZ045MUFwUEpyZjhoaytqVVNWRGZM?=
+ =?utf-8?B?UnA2Y01VaXM2d2NpNlNNcWkwcXg5cGdVRGkvdVZHbUdtVkYrSGF5VWZaQkZ0?=
+ =?utf-8?B?cS96MmRrTVhQM0c0Q2g2d3hCdGNwYkllN1JoQTZZV1FnaENzSTZiZHhwcjVm?=
+ =?utf-8?B?V01YL0JQcGs4MFpCRDVmYmgyc3Q1OEQ2VGc4UzFZenovVncvUUZvNlJET1o5?=
+ =?utf-8?B?MnlrQ1hueUpwelBaMm9QZHpUU3VjR25KdzBUK3lkQnZITGJaUm5qTGdUNTNO?=
+ =?utf-8?B?Y2JOSUF4Z0hady8xL2tmaldrUXpNRjZHZEVmVWxQejFXNG44OWZvVWpBSjBV?=
+ =?utf-8?B?U3BEeWxUZ29UN0NvM01tem55MnJvVnhycHJjc1p6STArTFBGWitkSGIvdFk1?=
+ =?utf-8?B?dGFWQVNENjFtYm1uRUI1YnRPWUtkeTlZdzMySmxNd2hJWHNaSXlWRkZicm1V?=
+ =?utf-8?B?MTREUnZ0M0JMWEpmYmJpNmlGWVdzVk1KYm01RStnZFVVRFR6OXlHRTU0VENI?=
+ =?utf-8?B?anpDUHkrZDIwNGNTbHBLRk5pZzhUMS9xQkEwUnFNS1N3ejBuUFpIdkQxNmJV?=
+ =?utf-8?B?a0Zab29HRGlDKzlMUFpTOUVCM0Q5QzdkcEZsNHpQOVl4MDZ5ME5ONXdLd3No?=
+ =?utf-8?B?Qys4Sk9BMXpWdHNDdUZVVFdxQWdMVnVtM0J3OGlJNFZQTG83NE9iNkxqbWkx?=
+ =?utf-8?B?ZnNWYnJTRDZrODFOUWdlT2JEMVgrcmFRNlEzSU9KTC9BMUFDM09TSWFSUEgw?=
+ =?utf-8?B?K2MvL2RqcVI3TTRVb3J6ZXo1VjBtV1RzdGdsaHIydHZUT1NOanRtWVNCRDlp?=
+ =?utf-8?B?czhGNFFXR0VKNTdVNnRITGpBZHVDaFo4KzVUNE0rcmRTSWJ5RlFTYkhpQlh6?=
+ =?utf-8?B?eSs4SHRtRWltZ01QUVpaTUJhUE4vaGFZbUJ4amZ4N1V2eUR5aTZLYTZERlpq?=
+ =?utf-8?Q?0c3v9nZ6YAAuLt4A=3D?=
+X-OriginatorOrg: metanoia-comm.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ad2ecd1-b41d-424e-64db-08de4c4f1fb8
+X-MS-Exchange-CrossTenant-AuthSource: TYSPR06MB7207.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 11:39:45.2843 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 31a25295-9a4d-4cf7-b9ce-e250507bb0c3
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: B6F4r+c9VZNTjYHBRPM4nTUe0N3DBOWKN9EoqaMwZyzUHKxROI89jmAMypZgyU4dlVptvT7gSp82sBTBoz8/HM/K2leTxtJs9YzOUll1iE0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB8247
 X-Mailman-Approved-At: Mon, 05 Jan 2026 14:03:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,100 +185,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for OF graph parsing. When using OF graph the default
-tilcdc_panel_info is used which is the same as defined in Linux.
+On 12/31/2025 10:34 PM, Tom Rini wrote:
+> On Wed, Dec 31, 2025 at 02:32:45PM +0800, Jun Chang wrote:
+>> On 12/30/2025 11:31 PM, Tom Rini wrote:
+>>> On Tue, Dec 30, 2025 at 11:03:28AM +0800, Jun Chang wrote:
+>>>
+>>>> - Add RISC-V target for MT5824
+>>>> - Add board defconfig and DTS for MT5824 EVB
+>>>> - Add SPL and U-Boot board support for MT5824 EVB
+>>>> - Add DDR init for MT5824 EVB
+>>>>
+>>>> Signed-off-by: Jun Chang <jun.chang@metanoia-comm.com>
+>>>> ---
+>>>>  arch/riscv/Kconfig                    |   4 +
+>>>>  arch/riscv/dts/mt5824-evb.dts         | 232 +++++++++++++++++
+>>>
+>>> What is the status on upstreaming this device tree?
+>>
+>> The device tree is able to boot to U-Boot with shell prompt by the JTAG.
+> 
+> Since I wasn't clear enough, I meant the status on getting this in the
+> linux kernel tree so that OF_UPSTREAM can be enabled and we use the copy
+> found under dts/upstream/src/riscv instead.
+> 
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- drivers/video/ti/tilcdc.c | 46 ++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 38 insertions(+), 8 deletions(-)
+Thanks for the clarification.
 
-diff --git a/drivers/video/ti/tilcdc.c b/drivers/video/ti/tilcdc.c
-index 340c79299bacabc5a95dbeafbed3cb729afe7576..b498e81864b87464c00c1b23cb1d35394b06d9e8 100644
---- a/drivers/video/ti/tilcdc.c
-+++ b/drivers/video/ti/tilcdc.c
-@@ -6,6 +6,7 @@
- #include <clk.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-+#include <dm/ofnode_graph.h>
- #include <log.h>
- #include <panel.h>
- #include <video.h>
-@@ -113,6 +114,18 @@ struct tilcdc_priv {
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+static const struct tilcdc_panel_info tilcdc_panel_info_default = {
-+		.ac_bias                = 255,
-+		.ac_bias_intrpt         = 0,
-+		.dma_burst_sz           = 16,
-+		.bpp                    = 16,
-+		.fdd                    = 0x80,
-+		.tft_alt_mode           = 0,
-+		.sync_edge              = 0,
-+		.sync_ctrl              = 1,
-+		.raster_order           = 0,
-+};
-+
- static ulong tilcdc_set_pixel_clk_rate(struct udevice *dev, ulong rate)
- {
- 	struct tilcdc_priv *priv = dev_get_priv(dev);
-@@ -173,6 +186,8 @@ static int tilcdc_probe(struct udevice *dev)
- 	struct udevice *panel, *clk_dev;
- 	struct tilcdc_panel_info info;
- 	struct display_timing timing;
-+	bool is_legacy_panel = false;
-+	ofnode remote;
- 	ulong rate;
- 	u32 reg;
- 	int err;
-@@ -181,10 +196,21 @@ static int tilcdc_probe(struct udevice *dev)
- 	if (!(gd->flags & GD_FLG_RELOC))
- 		return 0;
- 
--	err = uclass_get_device(UCLASS_PANEL, 0, &panel);
--	if (err) {
--		dev_err(dev, "failed to get panel\n");
--		return err;
-+	/* Try using remote node first, then fall back to using UCLASS_PANEL */
-+	remote = ofnode_graph_get_remote_node(dev_ofnode(dev), -1, -1);
-+	if (ofnode_valid(remote)) {
-+		err = uclass_get_device_by_ofnode(UCLASS_PANEL, remote, &panel);
-+		if (err) {
-+			dev_err(dev, "failed to get panel via OF graph\n");
-+			return err;
-+		}
-+	} else {
-+		err = uclass_get_device(UCLASS_PANEL, 0, &panel);
-+		if (err) {
-+			dev_err(dev, "failed to get panel\n");
-+			return err;
-+		}
-+		is_legacy_panel = true;
- 	}
- 
- 	err = panel_get_display_timing(panel, &timing);
-@@ -205,10 +231,14 @@ static int tilcdc_probe(struct udevice *dev)
- 	if (timing.vactive.typ > LCDC_MAX_HEIGHT)
- 		timing.vactive.typ = LCDC_MAX_HEIGHT;
- 
--	err = tilcdc_panel_get_display_info(panel, &info);
--	if (err) {
--		dev_err(dev, "failed to get panel info\n");
--		return err;
-+	if (is_legacy_panel) {
-+		err = tilcdc_panel_get_display_info(panel, &info);
-+		if (err) {
-+			dev_err(dev, "failed to get panel info\n");
-+			return err;
-+		}
-+	} else {
-+		info = tilcdc_panel_info_default;
- 	}
- 
- 	switch (info.bpp) {
-
--- 
-2.51.0
-
+The device tree for Linux kernel is not yet submitted to the upstream.
+We would like to go with the U-Boot first.
