@@ -4,151 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC436C79F9E
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 16:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC14C79FA9
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 16:42:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAFCD838CE;
-	Mon,  5 Jan 2026 17:15:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E1A4283990;
+	Mon,  5 Jan 2026 17:42:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aXhq4pnV";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="blbJKU5W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6721780325; Mon,  5 Jan 2026 17:15:22 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9D95883E2B; Mon,  5 Jan 2026 16:44:13 +0100 (CET)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A35A839DF
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:15:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90B4683D6C
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:44:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YEtO09gZgSPRT5Km2iUZkh+oAmQHWzSKubWYjSWVXIIy+DbQP2f631K8o6MD/kKtsK5K8fJOaaEGPTkxXAQ1L2i2Y6cCjraFwpssReumWLir8KTtYAbBdDgOEs0BEHhkymKph0bQoH784IiIOoySqxktG5UGibFblfg9YfcrMwB0VVLWQ8ZHQxWC7BUC+xm5fUDcJo7Sk9xjmEF6NOh6ygY+hHMqQRNWhjMpys+XsN+ptWg7dsl0egcLQpXU8Q7EdjgLf1PTcWeafEr8bWiN2Mp/PH3E5fAyilxvoxxr5EsMa923KMpMoed0J5pkMOW36luSntZSNjpCookVDP2heQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ijJ95qwGmoX7n3wCKHnvLg/ii6oyH7lLWFgaD5mpiAU=;
- b=R6tvhPYFMAn34ugmtUT0RORTbtmRr/qZe/lQgsxfR+3HgeFtmsmLBCUIePqIELt5v6T6Q5s0M1bRZJiFiSbqkv+YxqOj09SgIyb1IxLz+mx24wcnxxmELOl9yDc5mrz2v7nENHNPba93JkiJPLUec4wuymPQRDRc4AXY4jUFlKnJkM9Z3Sec1yQMbd/qbdircLrd4kLdjZnq8eaYa7wEc9wI8xYLstdECmS0vxHMmhEprvFwIPAYV5SE8zHDahY8UQ/DoraNyLek7w0GyNebMrUnN486Y+L03EK9DbZGUdbRh+4Br/yp6Hp87VSAQPTpV1Hit3oeUqwqrlDKkc7zRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ijJ95qwGmoX7n3wCKHnvLg/ii6oyH7lLWFgaD5mpiAU=;
- b=aXhq4pnVfDGHPs0vcxlmzoPWI81YL/oNPEn5ORjHpV1dNcwY2kaUj2O0mcwRXom4cIJ9eDepysU4+X76QoedDYSy5v3bGFDmkjgcJt/5K3T3eBDeh+HJmMFTwv8hq9vAxHtm0oVL/iaGSWxd5Q/zuiG/765T8HOSuvqA225w27E=
-Received: from BN9PR03CA0538.namprd03.prod.outlook.com (2603:10b6:408:131::33)
- by DM4PR10MB6790.namprd10.prod.outlook.com (2603:10b6:8:10a::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 16:15:14 +0000
-Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
- (2603:10b6:408:131:cafe::8c) by BN9PR03CA0538.outlook.office365.com
- (2603:10b6:408:131::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Mon, 5
- Jan 2026 16:14:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.0 via Frontend Transport; Mon, 5 Jan 2026 16:15:12 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
- 2026 10:15:10 -0600
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
- 2026 10:15:10 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 5 Jan 2026 10:15:10 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 605GFAOK1550091;
- Mon, 5 Jan 2026 10:15:10 -0600
-Message-ID: <90c90e57-5ec9-43e0-bcec-80db29516b70@ti.com>
-Date: Mon, 5 Jan 2026 10:15:05 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] configs: am57xx_hs_evm_defconfig: Reserve EMIF memory
- used by PPA
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20251229051113.2136908-1-b-padhi@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251229051113.2136908-1-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|DM4PR10MB6790:EE_
-X-MS-Office365-Filtering-Correlation-Id: a504fe6e-715f-4df2-1998-08de4c759ad2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?N0tmRFpQcFVKME5tbSs3Y3lxUWUwdy9DbzhqY2pubURFZDI5S1pFUHlqem5Y?=
- =?utf-8?B?RkhVNmxwNm90TnlMcDJKY1RMenhGQ2xGaVhBRG8wcUErRGY5clZWMjM5UUlC?=
- =?utf-8?B?NWxvcFkyWXptZnE0U2hFa3A3SEp3UmxuKzdSZHJGUzZtaW4zMDh4ckxUQ0p6?=
- =?utf-8?B?Rll3Z2pyOFpiSzFpbDVCTEtpYndzeU5tN2dwTmpGQ2hhRlpWMkdzelNORENY?=
- =?utf-8?B?c2cyWTBtbzZNK2tYSkFWSDZiWXpFOGFabmxTR05xV0sybWZRTjdKUnFzN2t1?=
- =?utf-8?B?Y2h4amNCaGFzT0NScEE0MEQyMEw4VUNLQ3BHMW4wNTUweU11cXU1UmVycFJv?=
- =?utf-8?B?TGlZNFo5eWYrRzRPczBVakd3UjlRQ1BlWDQxU0FNaHc3ZTV4R3VPNktyVG5E?=
- =?utf-8?B?NlBWYXJ2bmdMM3oyVnV5dzhlRUF4ODJGVSszbUE3NTgzanZncUlsWW4wclFI?=
- =?utf-8?B?aUUvd3ZwWEF2MjNYdUVsaWV5RmtQSGsvZmg5WEUvcEZISkJGYjJreTRhc0t5?=
- =?utf-8?B?blBWM2Y2Sm90TlhTZGNzNFhBeitzRkJMQ0xDQldCbCs5UXJrTUJUWUdPdVor?=
- =?utf-8?B?VXdYVXloclRmTGlJamQrSUtkSDNWa1dwN3d4TFNBWnZrZmNVVWdvUmhWa1Vz?=
- =?utf-8?B?b1N0MlozajlHYm5nOHhBdFJDS3RrNVlOTDNoL3EwU1p0MGlGaGdGU3ZJbTJx?=
- =?utf-8?B?dkNsTXh6T3FuUmZHbS9QUTA3Y3pNd2ZqOTJsVCtuQlVCNGNFc1k1WUF5MUZj?=
- =?utf-8?B?MVpmN0EzbkxLTGdqRURnZXU4bmxDWncrSFhaWGxHc1ZUVTJnNHlrdk1KZ21l?=
- =?utf-8?B?ekJOOUxyVlp4WnNEMVdnZExBdjlkTHB4a1RjbloyamZpOFVxSStGdmsrLzdV?=
- =?utf-8?B?K2dmMzhTY3RWYlJWYXVzMVJyZmtvdEwvWTlxVU0wdzNFVFZUdjFJeHdhUE5C?=
- =?utf-8?B?WTlJaFA0V3pPaHIzVzhOMDlRU3h3TzJNL20yd05NWkdZdU5PWlJkOGVZcEJu?=
- =?utf-8?B?SVRiQ3VlOStwc0tUS2Ntemxack4xL0h0QlR4VjhkV2R3c0FqMDBWVG9FYTU3?=
- =?utf-8?B?N2c0VlY4cjE0Mm5pckxKbW1oeE5kRW9IRDVnTitNemcxSjRnT3NMT1REMmxO?=
- =?utf-8?B?Tnc0aEtjNkpwd21NbGtHNjJRSENXenAvV1MxRVBXbXlIWnl2U1FmQVpFcXFR?=
- =?utf-8?B?UkFEc0RhU2htTjZJMk9yUjNHS1RJL1dlajNlSS9JV3lhTTJ5aElVaWZPL2Iy?=
- =?utf-8?B?Wm42MnZYQ0JUTkluODhCMnpicCt4MHovNUhYeXVnZ1B5a0VTWmxwMGxlWFBw?=
- =?utf-8?B?akUxR0QzcHBOc3lXZFVrVkRGVWloY0NONHZodHZ2alRHS3MxQUs2SEpXbmly?=
- =?utf-8?B?RXNvanRaSEt1WlM3SWRIeVBsbW1JelV2c1JBNGJkVGxTaGlBdisyeFZYZ1Nm?=
- =?utf-8?B?RWxBYjFqZEFTeTd0clNWUjJWWVNsYzJGeEk4cVFqS0FxaDJVam1RZ3FaT3Ny?=
- =?utf-8?B?K0kyQmRkd1VDOUg4eDA3Mk90VjhIK0I3ZG5UODRiMkdOdTg4N2N2ZTNhZFN2?=
- =?utf-8?B?aGg1bGFPUVUySm5JQW1RampzU0NXUWY2MnVFVnRISVNoWWt6dnFQcUc3NWZ6?=
- =?utf-8?B?WVpJQzBrT1BadnRMMDUvc0FJRlBiN3VnOTBzRE8zTVFkQ0xyTWZPQVBnMDgw?=
- =?utf-8?B?WU5GajF1TGdDaVdkUzB5MXg0RjZOZlcza3l4N1hFWkdwc3krNzRxNVlUUWpp?=
- =?utf-8?B?ZzI4YUwycDMrNThRUk45eDVZcThlYmNLWlFSZDQ5QmZxT0RPcjQ3cUMxakw4?=
- =?utf-8?B?bnpQSC82cmNZbXNzYXRXTTJSVThraHZab1lXYU8zby82cHhQUkNvQ2YyaWJB?=
- =?utf-8?B?YzJOY3lKamN5REVWNkNzRHFYUVA5WmRNc054enBPTVozOWxKVTZKdDh1TSta?=
- =?utf-8?B?ank2WGFYa0FNdHcveXNZcWJGZ1hrY01nMlZESFMwWFFFMU9NNWsvMzlRMXNt?=
- =?utf-8?B?dmt6WjFmek5CUnNid3FmVzZVVUFueGdtS2NKMTZqZGVkVWR1VWlGeFBaaWpG?=
- =?utf-8?B?QWxXQXhlOHdlRGJSQldoK1ludU1sMEY4cXd0SnFRa29rbSt4TGVGVlNWTWQv?=
- =?utf-8?Q?zQl3wJdE41Pwrzhvxqbzocnyc?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 16:15:12.4344 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a504fe6e-715f-4df2-1998-08de4c759ad2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6790
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-47a95efd2ceso364125e9.2
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:44:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767627851; x=1768232651;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NrSLZcyyfGH6MxvEKLXBxDrIH5t1eSZucWOx4roNi8g=;
+ b=blbJKU5W6Np2g7SkJ3qfdArF+WTOFUTdGkynl50mawxlbVl4x0T7WNzFfzZI55G+N3
+ ho4KNsZUdSoOVkjVjiWRhg8hZ43OfPfBP6rlf3bMYCSrW8n/L5+u61EfqBEtBcJRgM4D
+ UfvQQSEXCYkFqoEwLZoV+8mNpagIVQSPiFq+VWMAULD0XiMxm31Ye+gD2T53SK2Z6nAa
+ X+xGdOely4IO8zDLAPg2d/rP+lOTsoMaero5jIybJe452TOehO+YCkVlUGgWjFAgCFNY
+ C4lHrpH2rx1qObFYZiarW4rRkJTwm8hbeDlgaEzqNmQrkF8MfsvT1lPP+8t+755gpgED
+ mbjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767627851; x=1768232651;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NrSLZcyyfGH6MxvEKLXBxDrIH5t1eSZucWOx4roNi8g=;
+ b=FMM7ulEx3YN5i2qS/IK5y2ZiaSDDGP4PBa5NACUaKHBomFJ8/K8biubtTQATe9YCU4
+ PkX4wd0/Pv2wlrvks4GZIhsh1O26CPocrUoFFrziICiyeleehip2TGUw5XTzLJIp1qe0
+ uhMocaNIMczSwXTbt9PM0vvjvklONp5qVkn6d5dVKQFkpbfppF+EZlZRBXyhYwa6fsG9
+ soeSv5nnN/6vld4IjDj3KbMDDll+3qgPcW1qIQkJlPilI/s/VI2M3IJdo9fiEJaGi+Um
+ VFOc18sExmanida6f9XRLjawHw4CoIQb0Q1MbJxp7bSiop9MWuZ90QyX2+SGykKZ0sBn
+ kpWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJhFggqKus//solMSDdTKWd06Dv4dlxQXnUZcFD00c/FD86fcy/iMwjUtMV10sMCk6YWCi69w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/6U18qQFUC0C4GUUpLzaDPxxSObk98H9t7yg2crVJ3BL32KfX
+ f7vu2UDL/Da8SJxiaFDF11Mq9BYDm2Q5KI0ld8A+J0Vax0DcWnbUGPiiL8Jbs3uqA7o=
+X-Gm-Gg: AY/fxX4K1kTo2G/WBIW8JH7kZCYlg/B8gR80y7ebcWc0bb38bfuiojccqV9kuhGxD4U
+ 9fyq8xWWU+hjZw00CAM9DMMrBR27A2VZM/fygMNa7GpSOM2x4aB4YaMCMTPYyL5CN6P092bj9xF
+ 7Ncqpuq06UTCbwCa0lTWkGgls8nUk7qo/JgRUA8oMs5J2xJ5fBlPx8F1gqYPN5O6RL4xGiz4h1M
+ dRkMt6Uvsb31HoxC+gtOy2TldDx5m+87Dsnd+X23vEfbl6ZvTwiTAebCOtYnbIMpgHi2XvqepS0
+ dmND+HGKp3Qk49w/Ao1aTu1U8cQiKXOCKt0a2EwGGw2SXMbtat0D/qfvFnImLXLREhNmom/pwPW
+ YZHZUP4+U36xoz+KxO3UAMALjdGIHSQaQZd3CA2BOLJpKSI4wfvL2oXMdOMxSRbfiqxLqFtvoYn
+ 1oFDvf
+X-Google-Smtp-Source: AGHT+IFl9RZn4Bf4/Y68tY5NGSlyQNvSWhE/R0ovq0nTMaaJIN2o7mYDHr2HA0bcgE0+30AGiZ7O6w==
+X-Received: by 2002:a05:600c:858e:b0:46f:c55a:5a8d with SMTP id
+ 5b1f17b1804b1-47d1c629902mr486035155e9.4.1767627850988; 
+ Mon, 05 Jan 2026 07:44:10 -0800 (PST)
+Received: from localhost ([195.52.160.197]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-432bca5a132sm132000f8f.39.2026.01.05.07.44.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 07:44:10 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=b5a035c087770d340ae973a64daaa9a6d3f8a2e92857123483851049004b;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Mon, 05 Jan 2026 16:44:02 +0100
+Message-Id: <DFGRRWEVBH0U.Z1093DOR6RQ9@baylibre.com>
+Cc: "Vishal Mahaveer" <vishalm@ti.com>, "Kevin Hilman"
+ <khilman@baylibre.com>, "Dhruva Gole" <d-gole@ti.com>, "Sebin Francis"
+ <sebin.francis@ti.com>, "Kendall Willis" <k-willis@ti.com>, "Akashdeep
+ Kaur" <a-kaur@ti.com>, <u-boot@lists.denx.de>, "Anshul Dalal"
+ <anshuld@ti.com>, "Moteen Shah" <m-shah@ti.com>, "Santhosh Kumar K"
+ <s-k6@ti.com>, "Nathan Morrisson" <nmorrisson@phytec.com>, "Garrett
+ Giordano" <ggiordano@phytec.com>, "Judith Mendez" <jm@ti.com>, "Aparna
+ Patra" <a-patra@ti.com>, "Jayesh Choudhary" <j-choudhary@ti.com>, "Chintan
+ Vankar" <c-vankar@ti.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Neha Malcom Francis" <n-francis@ti.com>,
+ "Prasanth Babu Mantena" <p-mantena@ti.com>, "Beleswar Padhi"
+ <b-padhi@ti.com>, "Manorit Chawdhry" <m-chawdhry@ti.com>, "Andrew Davis"
+ <afd@ti.com>, "Wadim Egorov" <w.egorov@phytec.de>, "Andrew Goodbody"
+ <andrew.goodbody@linaro.org>, "E Shattow" <e@freeshell.de>, "Devarsh
+ Thakkar" <devarsht@ti.com>, "Peng Fan" <peng.fan@nxp.com>, "Jerome
+ Forissier" <jerome.forissier@linaro.org>, "Sam Protsenko"
+ <semen.protsenko@linaro.org>, "Marek Vasut"
+ <marek.vasut+renesas@mailbox.org>, "Andre Przywara"
+ <andre.przywara@arm.com>, =?utf-8?q?Th=C3=A9o_Lebrun?=
+ <theo.lebrun@bootlin.com>
+Subject: Re: [PATCH v8 08/13] arm: mach-k3: am62a7_init: Resume on LPM exit
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>, "Tom Rini" <trini@konsulko.com>, "Sumit Garg"
+ <sumit.garg@kernel.org>, "Nishanth Menon" <nm@ti.com>, "Robert Nelson"
+ <robertcnelson@gmail.com>, "Vignesh Raghavendra" <vigneshr@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>
+X-Mailer: aerc 0.21.0
+References: <20251222-topic-am62-ioddr-v2025-04-rc1-v8-0-e70fed16b166@baylibre.com>
+ <20251222-topic-am62-ioddr-v2025-04-rc1-v8-8-e70fed16b166@baylibre.com>
+ <094bbc1c-8a97-4f75-992f-c53615f22d46@ti.com>
+In-Reply-To: <094bbc1c-8a97-4f75-992f-c53615f22d46@ti.com>
+X-Mailman-Approved-At: Mon, 05 Jan 2026 17:42:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,57 +126,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/28/25 11:11 PM, Beleswar Padhi wrote:
-> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
-> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
-> top 37 MB is used by PPA and is firewalled. This results in an exception
-> and the boot fails. Set CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB
-> memory (aligned to 2MB as per page size for ARM32) to fix the boot.
-> 
-> Note: This limitation does not exist for other AM57x devices, but this
-> config is applied in the common defconfig since adding a separate
-> defconfig only for AM571x is not justified. Losing 38MB of memory at the
-> bootloader stage on other devices is acceptable.
-> 
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
+--b5a035c087770d340ae973a64daaa9a6d3f8a2e92857123483851049004b
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Reviewed-by: Andrew Davis <afd@ti.com>
+Hi Udit,
 
-> Fix boot for TI AM571x HS EVM board
-> 
-> v3: Changelog:
-> 1. Carry the changes in the common am57xx_hs_evm_defconfig file
-> 
-> Link to v2:
-> https://lore.kernel.org/all/20251128150455.3279166-1-b-padhi@ti.com/
-> 
-> v2: Changelog:
-> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
-> memory node in DT as it is done by U-Boot as part of FDT fixups
-> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-common.c#L72-L107
-> 2. Add entry in MAINTAINERS for new config.
-> 3. Update commit message to use memory size in MB than raw hex bytes
-> 
-> Link to v1:
-> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
-> 
-> Test logs:
-> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
-> 
->   configs/am57xx_hs_evm_defconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
-> index 6e4704470e8..3db30d2397e 100644
-> --- a/configs/am57xx_hs_evm_defconfig
-> +++ b/configs/am57xx_hs_evm_defconfig
-> @@ -16,6 +16,7 @@ CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI=y
->   CONFIG_ARMV7_LPAE=y
-> +CONFIG_SYS_MEM_TOP_HIDE=0x2600000
->   CONFIG_AHCI=y
->   CONFIG_SPL_LOAD_FIT=y
->   CONFIG_DISTRO_DEFAULTS=y
+On Tue Dec 23, 2025 at 9:10 AM CET, Udit Kumar wrote:
+> Hi Markus
+>
+> On 12/23/2025 1:31 AM, Markus Schneider-Pargmann (TI.com) wrote:
+>> When exiting a low power mode with DDR self-refresh, we can directly
+>> resume after DDR setup is done. Call the common function to resume.
+>>
+>> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+>> ---
+>>   arch/arm/mach-k3/am62ax/am62a7_init.c | 9 +++++++++
+>>   1 file changed, 9 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am=
+62ax/am62a7_init.c
+>> index c1c7d669a45f53b7528c80d44bf9b914fed1cc10..51b0386853b065d62cd0ecac=
+589e316de5ab4038 100644
+>> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+>> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+>> @@ -198,6 +198,15 @@ void board_init_f(ulong dummy)
+>>   	ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
+>>   	if (ret)
+>>   		panic("DRAM init failed: %d\n", ret);
+>> +
+>> +	if (wkup_ctrl_is_lpm_exit()) {
+>> +		u64 meta_data_addr;
+>> +
+>> +		ret =3D wkup_r5f_am62_lpm_meta_data_addr(&meta_data_addr);
+>> +		if (ret)
+>> +			panic("Failed to get LPM meta data address %d\n", ret);
+>> +		lpm_resume_from_ddr(meta_data_addr);
+>> +	}
+>
+> Could you help, how qos will be set after s2r
 
+Yes, you are right, a misunderstanding on my side. I swapped
+spl_enable_cache() and setup_qos() for the next version and only do
+setup_qos() before lpm resume.
+
+Thanks for all your reviews.
+
+Best
+Markus
+
+--b5a035c087770d340ae973a64daaa9a6d3f8a2e92857123483851049004b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaVvcQhsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlNn
+ZgD/bJk0AHgZ5t7Oxlo7Bnsk/kCWk0zQ8luYZ8wcfutj+6YBAL9Vf5JMBnIEp5yS
+tQhcnHN1katIcnhxTVwURckrOm4H
+=Q7S6
+-----END PGP SIGNATURE-----
+
+--b5a035c087770d340ae973a64daaa9a6d3f8a2e92857123483851049004b--
