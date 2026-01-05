@@ -4,156 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E13C79F8B
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 13:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8234AC79F8B
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 13:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D89DD83D6C;
-	Mon,  5 Jan 2026 14:03:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 37F9283D7D;
+	Mon,  5 Jan 2026 14:03:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="qjLDjuMj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k6eSG12T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E086283A26; Mon,  5 Jan 2026 03:37:49 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B04B183D17; Mon,  5 Jan 2026 10:37:03 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08824839F1
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 03:37:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C575B83AB7
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 10:37:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vPzytQkirAOBtKA8ljncUFusy22vwHlHz3CN1LEMHS8LJr51DtzD4LgQRPZulhBsMl9dBBcOV1BJk1xU4GL4+acNbMoZ3FqQmJV2n1YEK8PLKtOjRXbvU+Z5gaMP733Z5qfOFvcVgYl57jJwb4zTpCFWTldh2mRAb3IwGYdkLeMSFQXlhD8UMe4iKSkgCVfxKaGPJKNer6s3vKPJgdgwCwg1I1aMVO9ZA/5MOctsxQlfHDF/RpscFVeNj4cPytgx4Y8205ml4po2OGCxExFvFbzrTqCSkHx+m+UxXXOlubN21ifjb486Vff1Rh4EWpiYgcTXzBtco2qZaQa2zboTKg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qYbMprhNEiOwlLANjzPAfy8+KCzfZxwrhIy1ZAdv2ns=;
- b=pdWrVSq1qMvVeLW2bg8jPQr8FP0DlpF3DXqobBawtxmIxENdS6XFkA6lPA5ypRdBJY79Z+LeY7ZXEyB6TGbHKAVagCOd+E1goNUA0O3BwGcRniFHwOVk9Il0//6lacnFSyKZ8x1RYZSbFLmVyTRrtp3nI+vdk8hNqs37nTDncCUOE0ZCuIwqkk/Z+WfpM12OKzXMn9HnHUAkQGHSeZdVkvjTCbOCfN/egWbBDaS7gOO8RGDrApQ5ioaA2S2tl6kERyLY2/C9Uic4qWfgRbuwKL3DoF4SgBI28M4xKradoaa/G3A0ypoHH71BwI0iS3ZrjjEwdSQb3LFpvHF/L27bUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qYbMprhNEiOwlLANjzPAfy8+KCzfZxwrhIy1ZAdv2ns=;
- b=qjLDjuMjYcBglYajdmOreSt2X8+IcaIvPr7psOPq38Gq26KZNEqdTvjiCCE3gYaoS65xrS1XoDpjaacRmRiloSTn+SeRqDLiM/QZQo3YTfp5lrWUwZjSuYtzg2S1RXp27cpK3cb/0CMJPqZbdAcjxoKnqrk3ofY8I2ZDkQZH+eK2yUkcpT2zIaMYOYggbXVmqPq9poeC/ClFJKpFdo4wc6u4zNHj+vQVj5tncps6DGd4iHinRVXWkZj3euhe42acOnjqp7KZfgnP6X90AyeYqSOB9zzQj9R/Coy3uxDovx0MY6NRA0KBGC+G7siy3Kvo/P1+zImdeO4fK5+kptepGA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by OSMPR04MB11294.eurprd04.prod.outlook.com (2603:10a6:e10:93::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 02:37:45 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9478.004; Mon, 5 Jan 2026
- 02:37:45 +0000
-Date: Mon, 5 Jan 2026 11:51:47 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>
-Subject: Re: [PATCH v5 0/3] clk: scmi: various fixes
-Message-ID: <aVs1U0T0HuirQNh1@nxa18884-linux.ap.freescale.net>
-References: <20251218-sqqs-v5-0-9c7e2466b797@foss.st.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251218-sqqs-v5-0-9c7e2466b797@foss.st.com>
-X-ClientProxiedBy: SI2PR06CA0003.apcprd06.prod.outlook.com
- (2603:1096:4:186::14) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4779cb0a33fso142955695e9.0
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 01:37:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767605820; x=1768210620;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+5xdQx+6M/6CAYLRoAlezOvYDZWZzGC0WoBFw9D1knQ=;
+ b=k6eSG12To6KUdUFJNo/nLmcfLOFWXLlH3AGwVFxRTCjVP18tIltuDBMErqx8W/iakU
+ A5UGUf2RanFk2tLhUhriDAGUPpWXAamwcv4wskK9f802qTMECEHl1L/Agp2/V841RxlQ
+ xjh5HgfOee2JI9FI/NZ+5VleTxItdoWe+adRKdI2gqTMFLG9nTZ6cT9hqmiEv03bkge/
+ drdDq36C2idIQGlGCAbVUtFogMRVGebLtpZaLvv/9sw0K43sAismRh9c2pNyfxJMdigt
+ QHM9c+g332MIS+xu9D+kyJhruZs5f7GcW6gsNxeN0CWIsaQSus9Uw9HqLSDpua/2fuKU
+ mwjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767605820; x=1768210620;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+5xdQx+6M/6CAYLRoAlezOvYDZWZzGC0WoBFw9D1knQ=;
+ b=DrPdcvvWHkQNeVgVaLUef199kqZQUKEaVbOtdcrs6pJT8xUGY8HMTWuAhEPIUReOFF
+ BdsJmVFbpUzaqZeVkw0cB/Sv9psdW+TLhZK696eDEuzPIEt1kDktArKlUz404JnkuYX9
+ jknRfRUdPI5lVj3iQVExjrfJ0oYYv6Pleb/47EhEsbEainEXV2KcYIu24f3mlWuXsvTR
+ yHaVY4AoyYgPSn9l4QCYUIGLH8mUpB/xsMxJdGoaKp79PpfVx6DW4DZd5FQTSrknQyBp
+ A+SsbkOtx5bQ0UGj7UySYlBzXQ0Sg56hs05yuRYLUWA5rBan7pnEGq0RcYA0wyCKnqUV
+ P+Xg==
+X-Gm-Message-State: AOJu0YwonfXiZDWpFafiXaNVhSMzBYeriZpxFrKn5LGvqCxyVk4bumvS
+ tDJaUNp4idQ4xYPyI7YuZfdiyZ3NmeETvMVSdMs96+YSmRTs5zY4I/Om6z9GTCQjLOQ=
+X-Gm-Gg: AY/fxX6ViG1KTQtHZPZYacDan8V75XmdfLnJKjeyjO5pgzmRPOTgr67hkC/xbmexR89
+ WXpExkJ7fq0Nsv3Z3K5TRTtEXUDDZdkik0nAvnq83fwJbWOgVQALYymK2Is1gfbcih0FHJFM4V1
+ nuKiSKiiQfTcweItqkxhy2M8AvfmQRMgHHd5j3OxdmiPYfxQNjdUhetr6QYqmy4jWUS7rQ4kbOc
+ w/ug8LC4FKPoY5tsbF74vnbIToBNN0HXNWbYn3fLTfahjute2AZaDFTTs536RgYT8sYUJb5dRJk
+ aD6Klnmwud43Zkfquoe3yjvCcTN6B5u1jdnTDIj3JZgTDkBC+5ID5OVuRvi3c3ymLTB+H5aqdri
+ 5FYglBsPYalTC3cw29Kd3VIYzXigUZsMavoWkulvz9H6pCUvLdOpH0p00m0dL5CAj/cj5H36JJa
+ jn0cURTJrkYBYXkFIlZ0Y=
+X-Google-Smtp-Source: AGHT+IHYDokQqBfSY1VAqSmxUQEj4EGnIsdcwVQsEiMLl96QiECPSl3jn7nSSqZ0ZH0H2czdsMnU0g==
+X-Received: by 2002:a05:600c:444b:b0:477:557b:691d with SMTP id
+ 5b1f17b1804b1-47d1959fa3emr601060265e9.25.1767605820094; 
+ Mon, 05 Jan 2026 01:37:00 -0800 (PST)
+Received: from localhost ([2001:4091:a246:82fd:4350:c3d9:84a3:70dd])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47d6d452c69sm175808175e9.9.2026.01.05.01.36.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 01:36:59 -0800 (PST)
+From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Subject: [PATCH v4 0/4] video: simple_panel support for am335x evm panel
+Date: Mon, 05 Jan 2026 10:36:25 +0100
+Message-Id: <20260105-topic-am33-evm-lcd-v2026-01-v4-0-7617591b8159@baylibre.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|OSMPR04MB11294:EE_
-X-MS-Office365-Filtering-Correlation-Id: 82e98464-5ade-4c80-76d7-08de4c03687d
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|52116014|19092799006|366016|7416014|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5QXgtwezs7sYulbFTeFnYhMPoQGsKgRcgCLsEvtFerscJi8oZIuBsRgOaGjg?=
- =?us-ascii?Q?8kc5qpoEq6jeHgCprGMosdCKrIvC4+vqJZTNCf53FZU4sd81HtQtKoES3/6D?=
- =?us-ascii?Q?z8H49fzGnb2PCW3DbyP2IluE83Y0B8uENeRf2ZsEYjkEPHnp5hdOnOFRstX4?=
- =?us-ascii?Q?uw80md2hlzOkb6u2vjtKHXthBpdRRQOfeA9uCoElMmm/0ucUn/R8lY9m0QVY?=
- =?us-ascii?Q?UQD+d4MMVn37fiOyJZQKhuKCETfhrWc20khiPN4VsS5KekmySjKthPcmwrSD?=
- =?us-ascii?Q?/Gxagq5/oFMU1uQFEMprs9LjsLLfnwPYUNVK/qoE+8zdhZz2B5JU1FUxvJ4t?=
- =?us-ascii?Q?zrnHfD3xVc0RJw++1CDFaiWrZjJrdCOLG1Ph7kbXZr0vqCPxlqv1p3apvsHW?=
- =?us-ascii?Q?KWuTUJeXo2vcVinnzaztdFnoQiig4mRI5HjKhrJFEJr4ExhzhJ/Vob4zwr99?=
- =?us-ascii?Q?mApkHCcQeBoLk9U1A0oOGaOpzsW3bA/vM+EZhTH2MhBjQ1gR52MQGw8XMD2Z?=
- =?us-ascii?Q?4LOXKABahkw57DTTPfafpP97T/ci9JgkxlDLof1KtBOszWF/RfA6qMrfctXi?=
- =?us-ascii?Q?rp9GUpMNj9LtiKCmcFAgZFwNFSw+dxY6lyero7aQD6oQZ+vNwpbYee21jbhy?=
- =?us-ascii?Q?8Wx1QlmuPBsNirkZtjpKdJigejNusj6WXpstHyBfA0VVYp6J/28MmjPjCqk6?=
- =?us-ascii?Q?3JST1fmqVk3LWLGPI0GFsnKzSNheh9DhH7atE/ulVdKMSGRTbVePvXVw6Exv?=
- =?us-ascii?Q?Mi/76VYyue/ytndVbFc1j/eLnxJDoTyc5r+lMcnAU75zu9Tsd23/oped4fvR?=
- =?us-ascii?Q?QSSPRowJNMWHbLIaushgS7MMUixWCIJvVYVxinHjBYwItk/I6gLJlyEn0CBM?=
- =?us-ascii?Q?K63ruzy4pQLn8sQ4FlLHQ5ubZJY49lyA/89nV0uv6ayPQZJCWIhfZiNt8EFJ?=
- =?us-ascii?Q?ZFaJZymVb7zy80fVGkxN60sMgfg5BFvA/xM65KDikllZ3cwq2bpm86YyavqR?=
- =?us-ascii?Q?r4dTeRYUFhV/ul9xRZssMejXRWf0SjcPwqN8bawyuPNh2T70OdZQyfcHGdiH?=
- =?us-ascii?Q?dsyPSeeAotGSVrSERJxHWIsPn/ovg/0oSv6rTtbycN7/wcktpMfVUzyQGCKR?=
- =?us-ascii?Q?GGFCDQDz5+E//SLiV4LBpXY6pdg4SyDQtKnTug8mqqPPLJMx+b8x5rNlQXtC?=
- =?us-ascii?Q?eAfAVazrHvSLReNbWPLFgbSRTtCVdfny/9GN+bdXKYByJIonHAt30Nm7MJGC?=
- =?us-ascii?Q?2FU4FSN3C6NIM0jidE653aErOfSuC/6haLvfziRK6H/t5DdWy+h5/YYqw2kU?=
- =?us-ascii?Q?jDCi97Gbe4ERLnFSYDjUliFBWw7Gvzz1MMc738o/H3kGMUoGMoV/3U/0W+G1?=
- =?us-ascii?Q?NTYc9GnvJ2cGXQuzpwOnpRSpZmegTYbO8sTl+dXTRsFEnWoLFG23W06tJEM4?=
- =?us-ascii?Q?lMGtDETLCPTJ43ZBoj7/X6x5/Ln1MM0NTOgGlhoSFMtR9BsqH7ZNq+wXGSeC?=
- =?us-ascii?Q?K79q7iib1Jqn8eKtLDDhBikRc2ld8y+A6URi?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(52116014)(19092799006)(366016)(7416014)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o1b+Tl7hgj4l3z+bEB+3eKQK3n6/kLONnuQa97oGwYJeGe08LvmeWA9yIoWp?=
- =?us-ascii?Q?IT/+h2esvh/jCnrUxXPnCOjCgLtacKz0ANpe6YEDYBI6YJQRx12YjE7MDJV/?=
- =?us-ascii?Q?yWqB2qmRYt79JWgBvNRaVrxR/OxN3N4cRfI3WvgkqM6DKER1W11ja5MVHZEn?=
- =?us-ascii?Q?VNmHDAqZfvMPenQQgr3WVupX+Dn7Id5FRLkBJt4o3tSapT5anF1cyYywzHKj?=
- =?us-ascii?Q?67HjEJMsupcew9IAINWD6/k2Hhva/fbVD2O8TX+kXX8FIrZ6lXnDKfNgoB+v?=
- =?us-ascii?Q?OAn4YUFrUSh4/9gVXOOUjqJn4Q6xg617Dt32CYDUMrE6NkzwBXR5uWH5mjlC?=
- =?us-ascii?Q?lsPKznds38X1prCtsJq1R/BL3XgB23RsIZ1xN5ezzOkNbhQSPvz7DLLlyMIP?=
- =?us-ascii?Q?vDs8oFtN3r3zLhe5ZHYoMYe9w+KleAQbeSclPqzQJ4O0CZqaN2LVr9hudUe5?=
- =?us-ascii?Q?0UaiQuWb1AoYhUxSd+y5QB2v066DOHjIdpp5JWxKQFKjHrBkSB2xMKHBu8ro?=
- =?us-ascii?Q?SNIeuBo4aC0bO1GnEB89IUfAbi6UrWftaxMEs5BnPDlX0uxIfvGHMudY2IGb?=
- =?us-ascii?Q?eWg58HkSAAB56noHHND6gu2YTe+2jMOO31tuI4hITsqfP/LNprK2E9d5JGfm?=
- =?us-ascii?Q?8GIqN1e6oJ5hWHoMaJZ5vy5wmDS9hBH25+hPwFpX7sWHp82UYBjnlfBXQmp6?=
- =?us-ascii?Q?/Lp86wQx71UCImmRs557WfJHHSTQ2GG9x9AstueHyz7eig7i6vjwmATSL+2l?=
- =?us-ascii?Q?waD2kzzG1HsPdDdFmxgiRUBVlC7Je3qiW0wSAaGUjxRZPNBGr5eywJc37E5U?=
- =?us-ascii?Q?0JwUGgHTutSdNkbjoW7I66lgyYAhHNQSam0V9O+t1GuuGl6rz7KKYnNsSyHe?=
- =?us-ascii?Q?QdGQYhXMKCcL8nub8pfxrCbMP+eZQV66u47DwNJb74hMSLCkqINS92XXPdq0?=
- =?us-ascii?Q?4Lggw9bOqb2icUTQJLSfyjxWfhI7nwQYtOcLmRcLXhZGNTLMYtFojQUhyIEH?=
- =?us-ascii?Q?cGdL+y0/8frBbH/vbTS61fMZlHInY/HFcDw//xdL1TMJewjVHCrZrc6WZcPx?=
- =?us-ascii?Q?lqStO9g3WwtbAgfzvF7ES7LN5gsNUyvko3kQOlB/p9RBrQBnOYZ2I6xCiEMm?=
- =?us-ascii?Q?FObWM4HluDFRL1iLtNaQVkEtfrSasBQSweQnoc2U586gABBOlwbC24eAN6Li?=
- =?us-ascii?Q?Ngg4kqwxfCXRJjOjdxoq76jMK490ksv6UzvOjqtQ61WAcI/fN/ZwcbkSvHdr?=
- =?us-ascii?Q?LwIuPAQepNVUo1djZolG1mQK+iIDcZQLnU0Mv78NcgZiE0jsfuDD71ElEh0l?=
- =?us-ascii?Q?jJhFIFEnQSATJVhyfq4TCouygSwsa3zQVyyZcF+TBKy6BtIxXXYBdNS9xxo/?=
- =?us-ascii?Q?/peiZLIA1v5Cta5Di6TG1Kn/iIxE8mTbRS7+i2HlPRpsGQ3DCA+Woj4Ks0zj?=
- =?us-ascii?Q?OO5AllIA4fDRWoxg0rRc0J6hEDWTPgRO4NVhYXf08DJ/yRuIWjc1TPV9sJzl?=
- =?us-ascii?Q?ZLvroJT29JlCjDoAZzWftWvO6SaiQz/1QZCh0HryaQpvrEZdzLMY9szIJI6q?=
- =?us-ascii?Q?0hZybNDA9D6rProdJIiqRBBocB+AExkE7RhhOyX5WgZr7duHUOT7FHnsmpiA?=
- =?us-ascii?Q?eUfJcMehuIGTxPh+zu6oeHFXm+46R2c/IwAsjP1aDb3kaLo6keVvJ9Rh/38C?=
- =?us-ascii?Q?EvaCWK1oRcZElxx+Ga2BfSE0g6hmyutNOqv+C9uSdFQJzgrUkuubYb6dJjKB?=
- =?us-ascii?Q?QL6LAhkmqg=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82e98464-5ade-4c80-76d7-08de4c03687d
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 02:37:45.6450 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KFjyxWS0I8VWHNE2s9+DwhG0ZfXWeXFyqer3JJIuBRIE55IOLl9VgzDtaoNdP+Pc6DVYNXMbDVpPtjJeX1FW+A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSMPR04MB11294
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABmGW2kC/43NwQrCMAzG8VeRno10SevEk+8hHro01YJzo5Oij
+ L27nRdFRDz+v8AvoxokRRnUdjGqJDkOsbuUMMuF4pO7HAWiL61Qo60q3MC16yODa4lAcgtn9pD
+ LcQ26Aq1NqI1D5sCqCH2SEG9PfX8ofYrDtUv357Nczet/bi40SKitN0Tak9817n6OTZIVd62a6
+ YwvDjX95rBwuEYOJpCRxn7h6J0zvzkqHLvabCw13gb9wU3T9AC/Okq5ZwEAAA==
+X-Change-ID: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
+To: u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1924; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=A68nUP3YmDF0IboBzPu/y5M3x4lSMDncdxQpwOVM4IE=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhszoNvnvG6JrClrnfzJyXtTS1bCuJst+Uorub3Ou2xqRf
+ 3bc2ZzTUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABMRaGJkWOe3fsE+QTXZD8K2
+ +oek7NRZ+8+5J+f9UjhdzvXoIbvlXUaGZyKHLgmev9guXM4Q87Dw5wIX1tf3PUNaTCTOzJ1x0G0
+ mLwA=
+X-Developer-Key: i=msp@baylibre.com; a=openpgp;
+ fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 05 Jan 2026 14:03:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,17 +115,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 18, 2025 at 06:27:00PM +0100, Patrice Chotard wrote:
->- Fix typo scmi_clk_get_attibute.
->- Fix priv initialization in scmi_clk_gate() which leads to
->  clock_enable() error when CONFIG_CLK_CCF is not set.
->- Remove duplicated scmi_generic_protocol_version() call in 
->  scmi_clk_probe().
-> 
->
->Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Hi,
 
-Applied!
+this series adds the capability to define hardcoded panel settings to
+the simple_panel driver similar to the Linux Kernel and adds the panel
+used on am335x evm. panel-uclass.c is extended to support get_modes()
+for panels and drm_display_mode conversion. In a second step the tilcdc
+is extended to support OF graph to be able to connect to the simple
+panel devicetree node.
 
-Thanks,
-Peng
+Best
+Markus
+
+Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+---
+Changes in v4:
+- Fix missing null pointer check in check for data->mipi_dsi
+- Link to v3: https://lore.kernel.org/r/20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com
+
+Changes in v3:
+- Fix typo in first patch timining -> timing
+- Link to v2: https://lore.kernel.org/r/20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com
+
+Changes in v2:
+- Add support for struct drm_display_mode in u-boot and in particular
+  the simple panel driver to make copying definitions from Linux easier
+  as suggested by Fabio
+- Link to v1: https://lore.kernel.org/r/20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com
+
+---
+Markus Schneider-Pargmann (TI.com) (4):
+      panel: Add missing comment for the timing argument
+      panel: Lightweight support of get_modes()
+      video: simple_panel: Add tfc_s9700rtwv43tr_01b
+      video: ti: am335x: Support OF graph
+
+ drivers/video/panel-uclass.c | 38 +++++++++++++++++++++--
+ drivers/video/simple_panel.c | 62 ++++++++++++++++++++++++++++++++++----
+ drivers/video/ti/tilcdc.c    | 46 +++++++++++++++++++++++-----
+ include/panel.h              | 72 +++++++++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 200 insertions(+), 18 deletions(-)
+---
+base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+change-id: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
+
+Best regards,
+-- 
+Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+
