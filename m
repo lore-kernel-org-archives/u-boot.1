@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA753C79F9F
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB30DC79F9F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FB1583DEA;
-	Mon,  5 Jan 2026 16:18:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F043B83E23;
+	Mon,  5 Jan 2026 16:18:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lINbPZtE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wdUIwVNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C523583DEA; Mon,  5 Jan 2026 16:18:34 +0100 (CET)
+ id 00F2483990; Mon,  5 Jan 2026 16:18:55 +0100 (CET)
 Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
  [IPv6:2a00:1450:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01EC5836D3
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:18:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B998B83E28
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:18:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
 Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-4779aa4f928so209615e9.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:18:31 -0800 (PST)
+ 5b1f17b1804b1-4779ce2a624so138995e9.2
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:18:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767626311; x=1768231111; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767626317; x=1768231117; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=oqNy55eIJDrDrlvyXMiIIf0YBF/KeGLBmvZY3Nk5BZ0=;
- b=lINbPZtElFl3nx9wKWKmUozyj1BIetjVm++ZXG/s3+lL/52T8fbnoftPd7DVXUJZZs
- vp7B8ceJrVIwGaCqVhtpx67Y0TO9h5sDdK2nbkFlMPi96lLywQUOmKPlveS0b49tJLJ3
- CUrQp0FXUE36MMfbydqzlxuaSPTk7es6+J8irEvBEYo2eq8MmlDpPFDjU+230cVZFMlS
- V9uapeXPyLEF+EwtJ9AVq7F8Un1Rz/5HUhj9zGcLzTmiBpACRdF9Ps61T+JR32dbIXai
- n63mzrWTdjMs3vOAnfokzGdvmMvlHd0Tvp83P+ZujJ1jjXZqfDdEH/XtGd2Ix5TyU5Uh
- XqHA==
+ :reply-to; bh=NfsRk7cfjQX3ZxHDJ5XuKm46fDmZbpIYnGFKjzeAtPk=;
+ b=wdUIwVNyc21de0X8thvQIRDHxvlu5NA9d9KZypXX3EeNgI7a0j9OMySb34CGTV7UUy
+ JFOLDnq/uiT+eSUuFzPb1MYz+BHdtyy89fmCaLabDWKQansHzjAvQi7U2IZx5NC8zE45
+ MGVQWInxgVLHYbY6CKu2RZaXJMtMS/AhbhLVDqnLKzR2rYJ8kUmGEVDgrIE6UU5ooFUe
+ xaZi1qRe3IwU5wCmWfcpkzOjWVBSu13hFgrcJtzHypV8IMSDlO0bqBKPUjeoceNfXoXE
+ krdXcdBPE5od+jSUFnwGA43OrVNz8OkiwqMYIrxhvn1IzYARadGbxVhWea5WbUbzLFpQ
+ brHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767626311; x=1768231111;
+ d=1e100.net; s=20230601; t=1767626317; x=1768231117;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oqNy55eIJDrDrlvyXMiIIf0YBF/KeGLBmvZY3Nk5BZ0=;
- b=JqBBTNtL4rJIBDCURhMX20YWvHLo0UmfHZvqqw/JoSmhHWKadjA5VEL3a3krzcxaqy
- 5+afuarMag5lBLzh+VFTRbwYpaFMEVrLlpyZw+9IGuZshCSQ3j7ydGq/mEK4JDxGSSky
- LToYkAeczieXigflyXQ2HiGya4FS70ayY5leY80QolB+a2nCQ2GzMwJtruI/Tk1fQmZK
- aOhqD/dYorw/ZU6DosGFxVT3IyJhl9MZrYzpYCgwZyXwK3cGTAUPaqQ/eKrdNFA4mOIV
- 9uoGK1DZK5YHMeH8pz1J3DkGuUc1lShYN4/24pqanMLyaYGObsM7ekrintmZ4XOjjNu3
- 9OJw==
+ bh=NfsRk7cfjQX3ZxHDJ5XuKm46fDmZbpIYnGFKjzeAtPk=;
+ b=DoesGViO5uCrTRf19mqYqhpcvQi1cfwZHzlQS+bZALW0FBo69OHfw0xlm62EarR0j0
+ 49l0S0gOtxzyOHWSuxR47eSYIExJe1GBzfvPagNEkofTl4KP5EUrrwmgablMPotQneSw
+ NKoE4w+AL8AEdlxJLHNtT8HJ3jyk55e7HDi4w2g9Y+p9F9LjqIvdgcAmZUmK0haS4A+X
+ w4UJiFf6yxfl/mkQZ0ScdEOtBRJBBc5hqueZFBZcmg8YBJN4Fvih+1wrzxj5g206js5A
+ +UIl8pFkndFEsffsUS1qfB6mtCcCh/MBEM1FMR/sSm4CWwUg7GYlD7j7QdVtLw+EAFYi
+ YhwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCLjgoD8wSkBp0q40D1F9w5ijWsc8NHRK82VF3+J6FFjggQvxetzcx00KEd0lBKu+Lpl0JtH0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzap2kG8i3Qnu10sxA9W3wjMO3L+QKS5qOuZSCOkNZd8lACYXwK
- 82YlLp21xpwBAIyPGJq/ZfOCDccVqMNujC4uOrtO/4T9TYTBUNO9kfiRiAuSX/TE5KA=
-X-Gm-Gg: AY/fxX7qKyL0h9mDZTJfNc26musVsfiG3PhECndwbgS9GUqNG0aIqVN0ZouGIeROitp
- 0NzTc5WJN4jME2OGO4Q2FtSjpWLp/F9ehXPR7OQ9soayfwgI2PhUH7BHg2FboW6PK2CII9CxKeV
- bopwg2y9HFjVOVzeceCdbkJp7/5G2a/Y9tsf39Df/ruV1QcS2tvCxYOmi61A8tJT0mrCSuQuc8m
- 75/KwWQbPuWH+T2cxxRC2awv6EOJMeowvTYcSJKLrDbJxZqBUy88oYD/YXe9WbR1nYfhJJYGuEN
- C63QRBIBtPM+7C2KQLCBAehM5AhjKVPi6+YqpR9JjjxCXD7r9eHvXbzSXhc0NwcUZKHnHXk2FCL
- ZBeqocqZk/UigQ6QcAo06Fiv4Z0Z3+iigtxwWZHH/CCvFcOc//on7W+IXBDbdThTfDK3rKtSeN3
- SGgFdXfdfqPKK8nDDWm2GS1mSiW2uLZatbHLFEl2wq7KfD4V/NawgXV8yV2hLRWyAQnDkGlUUbq
- A==
-X-Google-Smtp-Source: AGHT+IFjqYndfdB0IUwr6L6EQCqnthefvFgyOl+m0vdtuI1x8DO2fgwJIR5gQ1yne9u96rkFGOI9dA==
-X-Received: by 2002:a05:600c:c0d2:20b0:47d:264e:b371 with SMTP id
- 5b1f17b1804b1-47d264eb6b0mr417240525e9.18.1767626311096; 
- Mon, 05 Jan 2026 07:18:31 -0800 (PST)
+ AJvYcCXD/Sv7ykeGMnS7rxAtotVL0IhkCy3yXC0X68btmxTZjPby/SodB4HujJMXLQBoEizFLQMIJpo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsfiMdW9jhNyiSZLS2BSkN3DnZBOmJbNIhedfJ7/xOUQDePGOU
+ pzZTlK2QsbtL9gXO4Uy1zZgyHL7uu+2ewaAdlEotpjwCWgf1B3/382VAJvu8u+Bz+zY=
+X-Gm-Gg: AY/fxX605fSARgihf7T40QNUzZAJEAE+MOSnjeX97Fp57MHDM4Ws0gp1scbp01yx5R9
+ 9nPt8kFXkqtYtJKREM7nbzpoINK4MkooDmWA7sszELRTmF0/e3PTEit7sHkfiqgp3R4792vJfy6
+ qRLwiQ2LoQwbDAIfxgOrJzdqORJfzNiawHSL5oKOkEBc+Fo1H0yv96aiqGiOJeATYVWthYGsola
+ NNoWwrkqK3lSKrQez/DKnI/O9CPb4bpryjUohB6o4xKQ7y9heno0M99SK+O7SiQuQ9qvkOs1ljm
+ SxVF5c5Q/bmIGtPi3gVv9qszKabHKNCKOf0RfpwetkkbxJmTbOMaxqpjWGAiWHdGiOdgCunbSxS
+ BuH4aXWyhEfExOJWLQ4a6o6uzasqwGEO0XY2Yh6PNvBinAoQyQXG6JuHPbo/IAE/UTManLSsS+a
+ qfyqoj7V5Py4Rw7rFvn/cIYWZk9TuvHqJljShXWcHtiFEpTmiu/dRgAMm+nAEzvU9Oph1yTeHsI
+ g==
+X-Google-Smtp-Source: AGHT+IEbtpQ6Mqy0Ca6nP8wUO+xKjhKAWZ8qPhoBM6KnkzgsbJrPp6HL/dWcMsPdQ/CZaMCzUteAXQ==
+X-Received: by 2002:a05:600c:8183:b0:477:fad:acd9 with SMTP id
+ 5b1f17b1804b1-47d195a9834mr583413435e9.34.1767626317044; 
+ Mon, 05 Jan 2026 07:18:37 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080:d4c1:5589:eadb:1033?
  ([2a01:e0a:3d9:2080:d4c1:5589:eadb:1033])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bca569e6sm51599f8f.31.2026.01.05.07.18.29
+ ffacd0b85a97d-432bca569e6sm51599f8f.31.2026.01.05.07.18.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Jan 2026 07:18:30 -0800 (PST)
-Message-ID: <2b4dca05-4b07-469d-bc68-a1406b7dec59@linaro.org>
-Date: Mon, 5 Jan 2026 16:18:29 +0100
+ Mon, 05 Jan 2026 07:18:35 -0800 (PST)
+Message-ID: <4e8ca8c4-132d-4470-ba8b-bfab30301d53@linaro.org>
+Date: Mon, 5 Jan 2026 16:18:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] ufs: amd-versal2: Fix clock name with binding
+Subject: Re: [PATCH] ufs: amd-versal2: Fix reset names with binding
 To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
 Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <eadc8d159b6d822077549722c9ec5a96a4d16c2a.1765973221.git.michal.simek@amd.com>
+References: <e1082054610fe73d4487d12f4274315030592c77.1765813212.git.michal.simek@amd.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -114,7 +114,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <eadc8d159b6d822077549722c9ec5a96a4d16c2a.1765973221.git.michal.simek@amd.com>
+In-Reply-To: <e1082054610fe73d4487d12f4274315030592c77.1765813212.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -134,8 +134,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/17/25 13:07, Michal Simek wrote:
-> Align clockt name with DT binding.
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks,
+NeilOn 12/15/25 16:40, Michal Simek wrote:
+> Align reset names with DT binding.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
@@ -143,24 +147,34 @@ On 12/17/25 13:07, Michal Simek wrote:
 > Binding is available here:
 > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/ufs/amd,versal2-ufs.yaml?h=v6.19-rc1
 > ---
->   drivers/ufs/ufs-amd-versal2.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/ufs/ufs-amd-versal2.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 > 
 > diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-> index 97de0756f70a..dd62c9819ba1 100644
+> index bf23439e59d7..97de0756f70a 100644
 > --- a/drivers/ufs/ufs-amd-versal2.c
 > +++ b/drivers/ufs/ufs-amd-versal2.c
-> @@ -305,7 +305,7 @@ static int ufs_versal2_init(struct ufs_hba *hba)
+> @@ -1,6 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0
+>   /*
+> - * Copyright (C) 2024 Advanced Micro Devices, Inc.
+> + * Copyright (C) 2024-2025 Advanced Micro Devices, Inc.
+>    */
 >   
->   	priv->phy_mode = UFSHCD_DWC_PHY_MODE_ROM;
+>   #include <clk.h>
+> @@ -319,12 +319,12 @@ static int ufs_versal2_init(struct ufs_hba *hba)
+>   	}
+>   	priv->host_clk = core_clk_rate;
 >   
-> -	ret = clk_get_by_name(hba->dev, "core_clk", &clk);
-> +	ret = clk_get_by_name(hba->dev, "core", &clk);
->   	if (ret) {
->   		dev_err(hba->dev, "failed to get core_clk clock\n");
->   		return ret;
+> -	priv->rstc = devm_reset_control_get(hba->dev, "ufshc-rst");
+> +	priv->rstc = devm_reset_control_get(hba->dev, "host");
+>   	if (IS_ERR(priv->rstc)) {
+>   		dev_err(hba->dev, "failed to get reset ctl: ufshc-rst\n");
+>   		return PTR_ERR(priv->rstc);
+>   	}
+> -	priv->rstphy = devm_reset_control_get(hba->dev, "ufsphy-rst");
+> +	priv->rstphy = devm_reset_control_get(hba->dev, "phy");
+>   	if (IS_ERR(priv->rstphy)) {
+>   		dev_err(hba->dev, "failed to get reset ctl: ufsphy-rst\n");
+>   		return PTR_ERR(priv->rstphy);
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-Thanks,
-Neil
