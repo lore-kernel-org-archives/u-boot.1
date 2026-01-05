@@ -4,60 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92255C2A07E
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 09:36:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F11C2A07E
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 09:41:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E217683AB7;
-	Mon,  5 Jan 2026 10:36:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3524783AB7;
+	Mon,  5 Jan 2026 10:41:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G1cAHlEn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qpND0Ndz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0537E83CBD; Mon,  5 Jan 2026 10:36:11 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 8CB1283CE3; Mon,  5 Jan 2026 10:41:03 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 456FE83A9F
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 10:36:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47DFD83A9F
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 10:40:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B22ED44319;
- Mon,  5 Jan 2026 09:36:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1874FC19423;
- Mon,  5 Jan 2026 09:36:05 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1BBFD60128;
+ Mon,  5 Jan 2026 09:40:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F246C116D0;
+ Mon,  5 Jan 2026 09:40:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767605766;
- bh=1YlpjpDSqF+F3kWIx5yrwQfdbTMxNdw/DhJmO4S9hjU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=G1cAHlEnT1RQrDzdHwMkSRGQkvcMydEXynmsled8Yd5+aOr8pqAKIr2mrFc3L8jcZ
- QLg806WlWBhTI+UFHvcBo3Q5CDYdsxQsDTMmkuKxWboCTxiPbZJbnOHLV7gxz30mZG
- jwzt/cJ6lDa94DDlTT/Ab6so/uJCZSsPLQFZfrD1u/P88fA5gFEminysWRUhbOvbMi
- XiUKUgLawtr7gb5UDGOdh4ZqDS/FoiZ0DKXVXEnCMCMMWli1PyDU0vBjjIQHMQscjY
- yUUQxzB/FK7Vqm3ZnuMt6XXcI9cXeFybXQ5LR3/vcpaWoCvq/Zh95DcTU+ms10B2ZG
- LTvnbW6BPT5Ng==
+ s=k20201202; t=1767606054;
+ bh=UXs6QSKq5jSPYh3aeasDd+zYn+jBXHuoRYeIcquiusA=;
+ h=From:To:Subject:In-Reply-To:References:Date:From;
+ b=qpND0Ndzg2aXNdim0Yccm5WB5t+PzRH69yGZRMoMqsj5DTSUW4Pt9e5E7wl9onrge
+ 869wskYOVR/fA/YfCz13L6BmTSFNQD2wkVNhBPpRZUobYHmaKXMdOzLFoF+mClAyXU
+ TqlCt6qUkQB1/rPHZByxK1caYuZUr+Vduw06UM4Gxrfa2q/8W0kbMDsI5595QQ3HNh
+ xjPhUDKcPL17ZeFXwHVHblXqwXUZ6gN0krmgyvb/9h0TdiMgAdJ8b3EMsUT0RJSPYy
+ dEX7Pwy/Bh88B0hzjNnQ5qwbO+1k3po88LXnJb+id6sXdbcODyzQATGdTT1uuc43b0
+ v4U5VvuK80GyQ==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Eddie Kovsky <ekovsky@redhat.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini
- <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>, Jan
- Stancek <jstancek@redhat.com>, Enric Balletbo i Serra
- <eballetb@redhat.com>, a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] Add support for OpenSSL Provider API
-In-Reply-To: <aUmB_fvpK1macga7@daedalus>
-References: <20251027195834.71109-1-ekovsky@redhat.com>
- <c2b48b27-9d4e-4be8-b94a-4aac7ef922a8@cherry.de>
- <aSCsgniomRMN0u1m@daedalus> <87fr9h5swg.fsf@kernel.org>
- <aUmB_fvpK1macga7@daedalus>
-Date: Mon, 05 Jan 2026 10:36:04 +0100
-Message-ID: <87zf6sflkr.fsf@kernel.org>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, lukma@denx.de,
+ mkorpershoek@kernel.org, marex@denx.de, trini@konsulko.com,
+ kever.yang@rock-chips.com, jonas@kwiboo.se, quentin.schulz@cherry.de,
+ gchan9527@gmail.com, balaji.selvanathan@oss.qualcomm.com,
+ u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>
+Subject: Re: [PATCH v2] usb: gadget: Kconfig: Correct Qualcomm config name used
+In-Reply-To: <20251224044747.3898137-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20251224044747.3898137-1-balaji.selvanathan@oss.qualcomm.com>
+Date: Mon, 05 Jan 2026 10:40:52 +0100
+Message-ID: <87wm1wflcr.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -76,73 +69,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 22, 2025 at 10:38, Eddie Kovsky <ekovsky@redhat.com> wrote:
+Hi Balaji,
 
-> On 12/11/25, Mattijs Korpershoek wrote:
->> Hi Eddie,
->> 
->> Thank you for working on this. It would be really nice if we could build
->> U-Boot on more recent Linux distros without bridge packages such as
->> openssl-devel-engine.
->> 
->> 
->> I also don't linke this double negative.
->> As you already shared, Linux solved this via:
->> 
->> #if OPENSSL_VERSION_MAJOR >= 3
->> 
->> Why can't we have something similar?
->> See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=558bdc45dfb2669e1741384a0c80be9c82fa052c
->> 
+Thank you for the patch.
+
+On Wed, Dec 24, 2025 at 10:17, Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com> wrote:
+
+> Correct ARCH_QCOM to ARCH_SNAPDRAGON as ARCH_QCOM is outdated/unused
+> config. Using ARCH_QCOM was causing USB fastboot mode to fail.
 >
-> Hi Mattijs
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+Casey, this is assigned to you on patchwork. Feel free to pick it up.
+
+If you want me to take it instead, please assign to me on patchwork!
+
+Mattijs
+
+> ---
+> v2:
+> - Corrected ARCH_QCOM to ARCH_SNAPDRAGON
+> - Link to v1: https://lore.kernel.org/u-boot/20251114063507.3834973-1-balaji.selvanathan@oss.qualcomm.com/
+> ---
+>  drivers/usb/gadget/Kconfig | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Yes, we could also implement it this way with the extra USE_PKCS11_XXX
-> symbol. Jan's original patch I based my work on does something similar,
-> and I perhaps oversimplified it.
-
-In my experience, when porting things from the Linux kernel into U-Boot,
-we try to keep the code as similar as possible. This helps reducing
-maintainance burden.
-
-Sometimes, we can't do that. In that case, we should explain why.
-
-Do we have a strong reason for *not* reusing OPENSSL_VERSION_MAJOR with
-USE_PKCS11_XXX ?
-
-[...]
-
->> >> 
->> >
->> > It's not the prettiest code. But I'm trying to be very conservative
->> > in making these changes so that no one's workflow is disrupted.
->> > Developers should be able to build U-Boot with the latest OpenSSL
->> > without impacting developers who are in environments utilizing the
->> > Engine API. The goal here is to preserve feature parity between the two
->> > APIs. Adding support for custom Providers is outside the scope of this
->> > change, but could certainly be added later.
->> 
->> I'd be in favor to drop CONFIG_OPENSSL_NO_DEPRECATED all together and
->> just use "#if OPENSSL_VERSION_MAJOR >= 3".
->> 
->> Tom, or anyone else, is there a particular` reason for gating this in a
->> Kconfig ?
->> 
->> The oldest Ubuntu version that seems supported (22.04) already has
->> OpenSSL version 3:
->> 
->> $ podman run -it /bin/bash ubuntu:22.04
->> root@6dc347676b8a:~# apt update && apt install -y openssl
->> root@6dc347676b8a:~# openssl version
->> OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
->> 
->
-> I assumed that we would want this to be an explicit config option, but
-> logically there is no reason that it has to be. I'd be happy to spin up
-> a v3 if there's agreement that the Kconfig isn't needed.
-
-Tom, do you have an opinion on this? It seems you are listed as
-maintainer for this (THE REST).
-
->
-> Eddie
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> index 7e08aeab904..ebb306852a6 100644
+> --- a/drivers/usb/gadget/Kconfig
+> +++ b/drivers/usb/gadget/Kconfig
+> @@ -61,7 +61,7 @@ config USB_GADGET_VENDOR_NUM
+>  	default 0x0955 if ARCH_TEGRA
+>  	default 0x1f3a if ARCH_SUNXI
+>  	default 0x2207 if ARCH_ROCKCHIP
+> -	default 0x18d1 if ARCH_QCOM
+> +	default 0x18d1 if ARCH_SNAPDRAGON
+>  	default 0x0
+>  	help
+>  	  Vendor ID of the USB device emulated, reported to the host device.
+> @@ -89,7 +89,7 @@ config USB_GADGET_PRODUCT_NUM
+>  	default 0x350b if ROCKCHIP_RK3588
+>  	default 0x350c if ROCKCHIP_RK3528
+>  	default 0x350e if ROCKCHIP_RK3576
+> -	default 0x4ee0 if ARCH_QCOM
+> +	default 0x4ee0 if ARCH_SNAPDRAGON
+>  	default 0x0
+>  	help
+>  	  Product ID of the USB device emulated, reported to the host device.
+> -- 
+> 2.34.1
