@@ -4,146 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1C7DCD0408
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 21:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8DACD0402
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 21:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B2F283A24;
+	by phobos.denx.de (Postfix) with ESMTP id 8FE8283D7A;
 	Mon,  5 Jan 2026 22:15:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="a9DTYJ86";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="wHANaryQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26E66839DE; Mon,  5 Jan 2026 21:26:21 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazolkn190130003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65A9783936; Mon,  5 Jan 2026 21:35:23 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00867839A5
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:26:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FE17839A5
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:35:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xLgN4jTPgYQxE7V3eEut72ynbHJGp+Z427INI8s6KJK5hpgzXUq0cvcGsMxd/OpxMdCllNQxSaomFSMnrUgacqX8XjhNmRw0TrNf1X7uTC1DzoUs2waO3JFipgTtZxH5fzdjs3FY9P5d7gCQlrW6Ro5yKt2Lqwu6EcvRXd8f/1ptA51POGGr3LT41/FN204Mm9auWneqRZkwzlp9ym9M8tQMBHq06S/0w8CDavfEj1dkYmgehshTyaWkmz0AnobjH4UbO72Crrjrqt8PfA83v16tCvyVD6lkbuI6VenYZzJZCpfzObmHNTyG6OV3FThjs6GbMUYSdj9hxwSIlneL5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DAcWNKARR9niYPZSoJ7dQ3q8mqClQYr+sAMr4bxMm5Y=;
- b=jtKgLYJABkn/W1MN+xd6QV4yeU+kvv1sKxZ7z4m8Qu1v+hHbobS+5nsWqqzmIPxTGPYUfvsWLcBScGNx2ksRr22UC8WBbFW9nxNS/HXrNweTIkoymVRau8+tBhAio0f1BAe5vEEOQN5BOa0FWwkfk/Xfnc6CqyJN8jltq/CpJTqWvjFUqNr3Y8GdouhYCqzvRw+xkJSaSn0j1NVh9xbh9kL4jnUZZDLZRMBqpkqB3HgHPb+kTgAC1NW96xerqsm7Qlw/ibzxUrS0ZaucrnMiJ9a3jwvmyjbvuxkRkLaux197OSZdQ9Q1qcxBYWSIXMlzIMV+ZWfxTrXIakOt4V32tg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DAcWNKARR9niYPZSoJ7dQ3q8mqClQYr+sAMr4bxMm5Y=;
- b=a9DTYJ86/9oiH16/2flsgQi85M1NSx7PJCGVw7P8Wn+xUI9n6ROhXajOdYtL3cvF9kXTEvF/1VPFniQEPyX+pRsxwEYRFQtH9//b87yqF5abfalNcwTg2enJ6iAkNi2LhIr94OYBBqRVbQPFG0W2eEsoB0QmmA441rWdXtkNQMTP7v845IqJl3Gi5b2jIzwQW8dZn9FgF1J1a9SVPg2QKwmmQ7NRHFkDlIiqwcWvSI0UNfF+3SdELzxWIy4pEddGzIihbGcSaP2K96tCbBs5sy+Pl7ekX0ZHq1d1glC8Fq98x3FHr5GMJF+VFpjgWyN+tjv3iTbwFnAHj2qvcq7ofw==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- GV1P194MB2292.EURP194.PROD.OUTLOOK.COM (2603:10a6:150:1c5::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9478.4; Mon, 5 Jan 2026 20:26:17 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9478.005; Mon, 5 Jan 2026
- 20:26:17 +0000
-Message-ID: <BESP194MB28050FDFC3929BDBF71ED475DA86A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Mon, 5 Jan 2026 21:26:14 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] bootstd: rauc: Free memory during error handling
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PR3PR09CA0010.eurprd09.prod.outlook.com
- (2603:10a6:102:b7::15) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <5e1c015f-0567-437a-969e-4a144264df70@outlook.fr>
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7ce229972f1so295077a34.3
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 12:35:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767645315; x=1768250115;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sldHNUCO/9tZrp/QpLA0LDrYvGz/l9QR2vSCmz4lNXE=;
+ b=wHANaryQDr6n1OLkd2ce8xs6NUTG570GKGO7LDvB3VYSORfpsQPJAxiDBm3HOzxD6j
+ ksU3c3WxHosiAKk7V4iurZYdSfFg/7jPACixKp5x6fuU6rGjG5LbsYTxnpni7eU0ICLW
+ VwpoTKMh68tCb/cRNv67AOmkqYI6xUiRhIA+f6YHLsW5hlrzj+dXKZbnixErWd94cM0F
+ 8VeebGqcMHrvCPQT+AIjR2vJ7r/Fynve8o5TyQmkuNN9kntuvk6uccIqj5wYwdGJIooz
+ UpCqYV2/Xapbp63xpavCH1LvKRLybnlsUkDMPaVRn3wyzXk43mHCuq6BuQLiGh5dTXUg
+ pcYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767645315; x=1768250115;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sldHNUCO/9tZrp/QpLA0LDrYvGz/l9QR2vSCmz4lNXE=;
+ b=bnA0pbWYabPDzamkuvs8xWuP5+e63I7bI4zWaHlOJlOS41pHi9+pCeBH/E5G/CKwIm
+ 4StyiBJhp3CGI0eR33aLIl0FqgZoeSYz+WNFmIP8Uud6ZUO8LnjJXYNX8j0ArYwEeFMh
+ pY0pQTlgr4Qq4LcWrfUQNJuLhIhF4y6/2WUUG3jgRwGE3bjQIao9zhSasOtIweynETUD
+ 8iH7tb45zZsZMftjab22REBD8MB9PwESnbTMX1Lmbd7rPZs0ABACxEPOEtP1rf1yAWhj
+ HyAR404VAgRMOPF+2auXvdNucDC1iJh028myM9rSA9uBA+8krxey7G61ajsnEzZBDooX
+ +0LQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxWL5QnjXc6Nj2Ljc5zj7SbGjbSaKfbrphrYy3UR3O2/FYIspalP+XjgtccWH/eWQIhMD8Y/8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/OYZ4RvWkSBK0oahowlAyXpI4tmc9wT+bCH4mw0T5ExE9KI7L
+ JXNQzvNtAtzPLRy6p/eg8tQMyhf15cIhEiBpy/GP9MeCzG5t7ZEExn9gKmoZ43svd68=
+X-Gm-Gg: AY/fxX6VKRF6fKjaIJBSWV3BT6DvRMbPxSURY06BnQbcvx4wjSaQ/XuRDqSYI19uoe3
+ zHBtIyZCxQltHZpVCCg58VzFRP99Mtor1fz+yVHkKma2YUTlXbaQRdqpQ8zl8T04+U048tC4yUV
+ 9fTeGVofHCkbhF65kbC4amHBT8o99LsldTBpCfPXzyd0x1QjWAebiY3B8cb+R89IBWABX1CBVGF
+ NI4cLQ8ytFDeGLNKHVMm+b6rozA3oHwm2vvlMmoqK4S7u3CGgbDVfsFMNiBLeSn12cqvPwqHDo2
+ jGGLzOzDX/Kcjdb5S2DbkMh3ao9bL09sYqUr45D/r7dtAp0vGUVIfLdv/DQoc0fTjvaX01gIcE+
+ KlDjJ5GZiVWCmZgu+5etNGZ6Jw2hOjVposVu1QV2p5UEFVvgyI/Fk4nmBqNKszIdpvcqeC6bxkg
+ VpsOfgD1yLKeLz5Q==
+X-Google-Smtp-Source: AGHT+IGEG02Xuf1Vb8sdYcWsnixK/05LTh+TmbQ/nUl11ao9VAAd/FPhjcILovP65NoJNqNan8imnQ==
+X-Received: by 2002:a05:6830:668c:b0:7c7:1e8a:c9d8 with SMTP id
+ 46e09a7af769-7ce46745fcamr416380a34.36.1767645314780; 
+ Mon, 05 Jan 2026 12:35:14 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:df5e:737c:7b32:e5d])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478ee668sm22788a34.29.2026.01.05.12.35.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 12:35:14 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Date: Mon, 05 Jan 2026 14:35:04 -0600
+Subject: [PATCH] scripts/Makefile.autoconf: use abs_srctree for out-of-tree
+ symlink
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|GV1P194MB2292:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4d6c898e-1960-4ee4-5781-08de4c98ae01
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5062599005|8060799015|461199028|6090799003|51005399006|19110799012|41001999006|15080799012|23021999003|5072599009|3412199025|440099028|40105399003|11031999003|12091999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V2JRZlJDUDlzb1RtVy9lK3FabWRQemJJM1YyZHltSWZ1MEpCcWMwMld1eGRy?=
- =?utf-8?B?SWh1YUpjQVBvR2pwWlNuSXBUeWpiYUtPcUpBclR6NUdRZFQ1N1MxR1IrOXF2?=
- =?utf-8?B?aS92bUdQMWJnQlZqNkFEMWc3SUJmbkZpdWRDWkdsVWhYbERlN3ZzdUhoa0V2?=
- =?utf-8?B?VGtBd1YyVytySncyeEE3R1o3dXJTeEFnUEd0SmdWQXJvc1BBSnRMU3Vmd1hr?=
- =?utf-8?B?QjEvUHpMOXBFdXpLQ3Y0MERyUnE0Qm5jeHFxRjR4dEY5M2puZWV1ZTBudlRS?=
- =?utf-8?B?YW5GKzVzTlFYWHNpUkJYK2lzOGI4TFpEbWJXSGFUaXlWSjVzdG9xU1dmU0tH?=
- =?utf-8?B?RHJCdE5GZU1SejJjSTJwbzFWanlsS0JjMkNpL0YrTVFKL2p1ZWtvTmpkbmY2?=
- =?utf-8?B?aUJJODdxRTZ3aFgycnM1TDdiMktZVzcrV3h0WGovVVhYTWcwVVFpNE9xcGx6?=
- =?utf-8?B?M2ZzcTRibmFWcy9lNnN4RlFPMUFaY2dQSVBWd043dThuSVVISVF1TXFMemgw?=
- =?utf-8?B?SDN2RmZ4eWZaUnhORzZpR3N6bHVyWmZOLyszNXFtaXVBZmhDVnRJK2x3V1h2?=
- =?utf-8?B?SHBqS05jems0b3puUmdrQ20xZmZwb0lCZStjb2Z0RDdrejZsUGxkeklqWjh1?=
- =?utf-8?B?Y1FUTVVXejYwcFhlVERnK2dWY242L3FNeDYzTjZmWnNsRERJdjA4dkFaOEpJ?=
- =?utf-8?B?eTVjU0MxM2VEOWRoTFRXRDErUjVNMEdpYitsQk40QlhMeSs1Szd0eWpweXkz?=
- =?utf-8?B?MjJNRGRzYzgrNkZEYzlGVTFYWmY0R25Oa2ZPRmRLc3BhdC9YNXRNU2NlVUww?=
- =?utf-8?B?SCtuTGI4bzlUNDBvc1VBU0pEaGR3Q1NsdURLVUpUUTd1VWloWDN3YVpmTUFL?=
- =?utf-8?B?Qy9iQ2s0cjFyMnFsMGxET1R5VWFMVDlOUGxveDhFUW1xZWx0a1gyOVNLMlVR?=
- =?utf-8?B?eCs5bnMycFFzVnV3U1lVWEZsc3NQVDZIdDJtWUJlYXZ5YnVpQmJ2eWhQajJq?=
- =?utf-8?B?N3JIV3AzZ0tCNzNpaE5ndkJHdUIxQjN2QzBSU041ajdPOVVUbzJXQkozc0xZ?=
- =?utf-8?B?N1hpdDBMYlBIdlNVUDViejh4aGlmS1QrRnRpeWNGOEtUeWw4TnVDY1JIZkxU?=
- =?utf-8?B?ZXZieVpsUERJNjlHWFY0MXBvMDJCMlA3VkUxRytIdkk0aFNrREZaVmhQazJH?=
- =?utf-8?B?dDkzSTJDUDdNT1pqdEVUdEM1aEhCUW1rejJYYXpFcHkxWnBrOVE5VGpWb1k2?=
- =?utf-8?B?cXlYRWZIVHlQeEczUVFLWUdJelhHeDlja3hOSUd4SGZITThGeGVqVGNUcVYz?=
- =?utf-8?B?blp4aXFoa2dESHgzY0dySXowRmJRdEJHS2YvaDR6WnJtV1BUMG51ZG1nQTla?=
- =?utf-8?B?WkhINVZKRHJwd2VqZGVLek1VSHBsN2NaaFAzQ0d3QmtIOGJlU0hmbTA4K2dQ?=
- =?utf-8?B?Ui94M3ZtSXY5SmE0dmZzSEZsT1pCdU1vVnIyQzBjcWdZbllkbDZOZWpIdDh4?=
- =?utf-8?B?MVJ4cWYyWWM5VG5TTWVuTFpiSG9Sc1ZaMDQvcWI1R3VxRUMvV1d3dWxPZ3Ru?=
- =?utf-8?B?SzdCcDE4b3pUZkRuelNXa0pPYjBHRGZaNXpYTnVva3NtWnkxVklOZDlEQWlM?=
- =?utf-8?B?VlJqMkRnMm1LVWpwK2tYMi94WW0rbzJtN3pKTUY0Wno2T2VwZEZyZ0ZJUG9C?=
- =?utf-8?B?clVSelZEM1ByWnhvZWxxRTZmWUJCa2lhc3NwSUhBK05mQ3FoanVtcm5XdUxD?=
- =?utf-8?B?N1ZoS1pyM2gyemtuVEFtYnIwdGZQd0p1T1VPTk1CUEZRQUdaamtjYVJJbkoy?=
- =?utf-8?B?YkwxdHV2LzhCTGdWWVVUdz09?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aVJBS2ZWZWk2b0ZtSlhSelhQMVhZeUlrWUdCcFdUdjhtUVdCZFFJT0gwaE14?=
- =?utf-8?B?MTdDb1NkZlpkNTZXSzQ5WTNjVTFJMCtzMkR0MmdlK2E2YUZmVEtrSW83eHcz?=
- =?utf-8?B?Yjhxb2diZGhudEYyWkJ1WWRUQ0JaTnd4Z2U3bE1jQzdhMDlmVk1adzVxdmdL?=
- =?utf-8?B?V2ZGOUJTaUlFVHQvcjVCRWNqenhvSUhhUjJENWNTaEdLc3krbitiS3hNRXgy?=
- =?utf-8?B?UWptYlZBd3dINWVwckM4eUJ1ZU5HRTV5WWhxNHZJM1liUnpmcWlFazZUbGN6?=
- =?utf-8?B?MHIxNGYrWmpiZFFGaTBrTElxcTFrUUo3S1h6WjJxcWx3WVlXUTB4S2lXeDk2?=
- =?utf-8?B?MDRtOUNkUUhTcGRweEJOdGNmZnRYci93cTdPNEFIZEt1MVd3S0kwUW5Fa0hz?=
- =?utf-8?B?SDExb0VGdU5zaHp4QmtJY2NBaVdtUTlqdThnVjJFVXFnN2FNeGtjUWthaUxQ?=
- =?utf-8?B?dWZQd1ovcEJEUiswdU9HS0pHS2pxd29VbTlOZHhndkRtMlVhdUVWTU1QeGVW?=
- =?utf-8?B?SVM3bTRJRGtTT3lDa3FZQzBjSjRJdnRDc0hocVpCVWxBcjkyQUlmdTVJNVV1?=
- =?utf-8?B?Y2RNb3ZaSjJrZkppSGxOTEorMVhMbVdOWWdtc3YvZmthdjh3T0VnbVdwdjN2?=
- =?utf-8?B?UXk5Qmx5L3JyUkVldWhuSlk4TGJqYUd2cTZtbXJvbUxFc0gvRllOaVlJTENp?=
- =?utf-8?B?emNlMHdvQ3RNVkxCK3UvM0ZmWHpDSnRMNXlvamN5eXRyelRXK25TTTdRV2da?=
- =?utf-8?B?NGZyZlRGSlFGK0tzRnhYbUxTdFRxcmpHa2ExMlZCYTVVS05DeHBmMUNXTG81?=
- =?utf-8?B?MEFqd1d0bVY3TnVIWk9ocGN4RHhkN3B0bThlRjNNZmVqQkVnR1BEN3VzUEFr?=
- =?utf-8?B?OHo2bnJQNU5tMzZhMEFIZmVGUVBwazBETGU2L2V3QWt0bFVuK3dKMUU4N1Ju?=
- =?utf-8?B?SlQvZGVKRnlXY3E2S0ZVU3RGSjF2ZGJjdjFybDlzVE1wK3ZxZDhhUCtBd2ZC?=
- =?utf-8?B?K0VCbmtvR3ZpbVFneTBwOUhRY1pPQVlqNFI4bDdKRHlvaXpoMGRsVE9CbUdZ?=
- =?utf-8?B?dmZLb0FNcGczUE1UQi9zd3BEWVB2YjdLNjhYb0dXMTdUZGxKQWhNaE80MTJ3?=
- =?utf-8?B?ek9TVmQvRGN6SFMrVWtZSjI1cEhRTTNmeSs3dDZTYWFIL1luK1pDUkVlMlJ2?=
- =?utf-8?B?Q24xUFlRaGtHTS8xeElGWFJJWDEyazRkV29vOU1peThjZXBaZ0xacEZ5RXVl?=
- =?utf-8?B?RnN3QmRjRnA3QVYyYkZQMmNSazR2ZVNRNEJYdlBSbkFtZSt2ZGM0R1ZLTnlM?=
- =?utf-8?B?cko2ekdyblZYMHc0WFNmUzRqcnlHdndvVUNjbExuOTZDeEh5WmhCWGZsdGxz?=
- =?utf-8?B?TmdTUlNOaDJQdERRZzBpSVZOWFpMQ0djVVdLTG15Um53NU5sTWY1OWpUcVJw?=
- =?utf-8?B?SkJhdzBFbjU0clRCSmNZSHNidUR1ay83eVRwdldmK25KZVVZQjNqS1VaSEFu?=
- =?utf-8?B?Sko2TTdIS0JVQkZ4cW55MU93NXgyWDNpS0p4aXM1V1BwT29zUzF5WHRKVDB2?=
- =?utf-8?B?eDdXMUJZUXc3bE92ZGtKMmFOenVpVjRZOUVpbnpGd3ZveWJIdERJNXR4NTZB?=
- =?utf-8?B?NU1hZmlocXdNY2lBRDZtME1xTUoxQ2RNdTA5VjkwclQ5KzJ5Wmx6TXlCNDRY?=
- =?utf-8?B?RmFyc3pXTTVOYmxScVNJRUFUdEZWUFJ0amhxMWk0R3hCSUlWM0RwVmtUSW1J?=
- =?utf-8?B?Nm9GSVZ0K1IrZDdXOVJTV3NsM0laekFmb3hhNGhObHduVjFDUDVlWHNnYTg2?=
- =?utf-8?B?VU1LdHNieWU5NXB4RUp6bXFCZi9JMFF4QXZCQlBGRG8vNnlibFNoYkcvU2Jw?=
- =?utf-8?Q?NU9a3tyVRb91Y?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-e7640.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d6c898e-1960-4ee4-5781-08de4c98ae01
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 20:26:17.6549 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P194MB2292
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260105-mtk-fix-build-after-kconfig-change-v1-1-7185a081f7c0@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2NQQ6DIBAAv0L23E2AKi39ivGAuuDGFg3Yponx7
+ xLjcQ4zs0GmxJThJTZI9OPMcyygbgL60cVAyENh0FIbqWSNn3VCz3/svvwe0PmVEk79HD0HvAy
+ rdX1/Vg/rrIESWhIV45w07b4f3tiRoHQAAAA=
+X-Change-ID: 20260105-mtk-fix-build-after-kconfig-change-922538479a96
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1516; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=PYNQJK5WPmMzBuTSATGFOjoehdxHlV4vwJaWB2t34vE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXCB6GLTf2UfPnu1/RJ0nyYKgGjxkgSXaw3fvt
+ WjhlqvB3XuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaVwgehYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AjW8H/joU0T5yoAL8dyh0dkOwPl9Mb7lKiv7qu5xPuSf
+ PeJcoA7t4a2212BnsFn/mkZeq0sCTIzeuvOgOP5MpclzpkzIpfcH2KKSWCUaPTp00Z9/SZ2q8b8
+ nc64XqPdoVBTt59bVXePYW5uN46ExDaM65De98E+4UPScJwmi3ystFwEsG5KGfHcM9Or3BIU5Up
+ wdPwVcrJF/yWPK2H93qXF/G0HCK1OKBefRxViTgg1JvC8g0dNdsEuzT04v3udkCIdElqTULVjHk
+ C4l+w5kitgiUP17rSwkyzsJ/KVJoZ6eClrwylCg6yUMN2D26B39ao07rHBXvyq9HeVkUX9p/xb7
+ d+7A=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Mon, 05 Jan 2026 22:15:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,112 +121,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While reading bootflow, memory was not released if an
-error occurred.
+Replace usage of $(srctree) with $(abs_srctree) when creating a symlink
+to include/asm/arch in out of tree builds.
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
+When building_out_of_srctree is true, $(srctree) is just "..", so the
+created symlink was broken, for example:
+
+    build-mt8365_evk/include/asm/arch -> ../arch/arm/include/asm/arch-mediatek
+
+Which would resolve to a non-existent path:
+
+    build-mt8365_evk/include/asm/arch/arm/include/asm/arch-mediatek
+
+To fix, we need to use the absolute path to the source tree since we
+don't know where the build tree is located relative to the source tree.
+
+Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- boot/bootmeth_rauc.c | 51 ++++++++++++++++++++++++++++++++++----------
- 1 file changed, 40 insertions(+), 11 deletions(-)
+ scripts/Makefile.autoconf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
-index 833715e1395..432d170e006 100644
---- a/boot/bootmeth_rauc.c
-+++ b/boot/bootmeth_rauc.c
-@@ -139,12 +139,12 @@ static int distro_rauc_scan_parts(struct bootflow *bflow)
- 
- static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- {
--	struct distro_rauc_priv *priv;
--	int ret;
-+	struct distro_rauc_priv *priv = NULL;
-+	int ret = 0;
- 	char *slot;
- 	int i;
--	char *partitions;
--	char *boot_order;
-+	char *partitions = NULL;
-+	char *boot_order = NULL;
- 	const char *default_boot_order;
- 	const char **default_boot_order_list;
- 	char *boot_order_copy;
-@@ -176,10 +176,22 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
- 	if (!priv)
- 		return log_msg_ret("buf", -ENOMEM);
- 	priv->slots = calloc(1, sizeof(struct distro_rauc_slot));
-+	if (!priv->slots) {
-+		free(priv);
-+		return log_msg_ret("buf", -ENOMEM);
-+	}
- 
- 	/* Copy default boot_order, so we can leave the original unmodified */
- 	boot_order_copy = strdup(default_boot_order);
-+	if (!boot_order_copy) {
-+		ret = log_msg_ret("buf", -ENOMEM);
-+		goto rauc_read_bootflow_err;
-+	}
- 	partitions = strdup(CONFIG_BOOTMETH_RAUC_PARTITIONS);
-+	if (!partitions) {
-+		ret = log_msg_ret("buf", -ENOMEM);
-+		goto rauc_read_bootflow_err;
-+	}
- 
- 	for (i = 1;
- 	     (parts = strsep(&partitions, " ")) &&
-@@ -189,13 +201,26 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
- 		struct distro_rauc_slot **new_slots;
- 
- 		s = calloc(1, sizeof(struct distro_rauc_slot));
-+		if (!s) {
-+			ret = log_msg_ret("buf", -ENOMEM);
-+			goto rauc_read_bootflow_err;
-+		}
- 		s->name = strdup(slot);
-+		if (!s->name) {
-+			free(s);
-+			ret = log_msg_ret("buf", -ENOMEM);
-+			goto rauc_read_bootflow_err;
-+		}
- 		s->boot_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
- 		s->root_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
- 		new_slots = realloc(priv->slots, (i + 1) *
- 				    sizeof(struct distro_rauc_slot));
--		if (!new_slots)
--			return log_msg_ret("buf", -ENOMEM);
-+		if (!new_slots) {
-+			free(s->name);
-+			free(s);
-+			ret = log_msg_ret("buf", -ENOMEM);
-+			goto rauc_read_bootflow_err;
-+		}
- 		priv->slots = new_slots;
- 		priv->slots[i - 1] = s;
- 		priv->slots[i] = NULL;
-@@ -204,15 +229,19 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
- 	bflow->bootmeth_priv = priv;
- 
- 	ret = distro_rauc_scan_parts(bflow);
--	if (ret < 0) {
--		distro_rauc_priv_free(priv);
--		free(boot_order_copy);
--		return ret;
--	}
-+	if (ret < 0)
-+		goto rauc_read_bootflow_err;
- 
- 	bflow->state = BOOTFLOWST_READY;
- 
- 	return 0;
-+
-+rauc_read_bootflow_err:
-+	distro_rauc_priv_free(priv);
-+	free(boot_order_copy);
-+	free(partitions);
-+
-+	return ret;
- }
- 
- static int distro_rauc_read_file(struct udevice *dev, struct bootflow *bflow,
+diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+index e3c88badb52..47c49a018bf 100644
+--- a/scripts/Makefile.autoconf
++++ b/scripts/Makefile.autoconf
+@@ -138,7 +138,7 @@ ifdef building_out_of_srctree
+ 	else									\
+ 		dest=arch/$(ARCH)/include/asm/arch-$(if $(SOC),$(SOC),$(CPU));	\
+ 	fi;									\
+-	ln -fsn $(srctree)/$$dest include/asm/arch
++	ln -fsn $(abs_srctree)/$$dest include/asm/arch
+ else
+ 	$(Q)if [ -d arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
+ 		dest=../../mach-$(SOC)/include/mach;			\
+
+---
+base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
+change-id: 20260105-mtk-fix-build-after-kconfig-change-922538479a96
+
+Best regards,
 -- 
-2.43.0
+David Lechner <dlechner@baylibre.com>
 
