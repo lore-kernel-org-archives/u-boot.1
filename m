@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B3BCD0425
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC5FCD0425
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:31:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A39483E0E;
+	by phobos.denx.de (Postfix) with ESMTP id D2E3B83E8E;
 	Tue,  6 Jan 2026 00:30:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l+KEJNEV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="leeVXxx+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D2D83E62; Tue,  6 Jan 2026 00:30:51 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 6A39D83E21; Tue,  6 Jan 2026 00:30:52 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D0E283E21
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 765AC839F1
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b7355f6ef12so92348766b.3
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:49 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b76b5afdf04so88261566b.1
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767655849; x=1768260649; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767655845; x=1768260645; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aT4cyC0+/zsCCu0DV9uExKEW1lsfx0ZlzUdfRu+p+KM=;
- b=l+KEJNEVCFTZ7L/8LFF26SfgvpqK6VPq27KgTn5u5m5Q7z6TNYd3PYPTzePnc49Sa/
- wgvPj2J25mOaY3eKsa4g/Hb4HzD4Ia6vkx+BK8W3sNQnxrs5cSapM85zOIm/SE26AoNI
- gdgpeuiyAbTR1R7SFpiErsu0ZOkgwxZc8dDAE=
+ bh=YOvWyXskgiWVRxzXCq36zFXU84BbX+hLYRSOPpNSTfM=;
+ b=leeVXxx+GUGYb8Tb6meneAEKOQ1oj+MqubldbACMm9vmERtQkIj/g/0V/ZvL0Ey1O1
+ a7c9ffWEZTV2tF28GWs1SHimudhD8OFXDptHUTp3Xx62KF0S6pQeGREc1h2q55GmK6Qv
+ 5Mgf3FHxcJCENgnp+eWKyXz1VP/kJ/W3W7AWE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767655849; x=1768260649;
+ d=1e100.net; s=20230601; t=1767655845; x=1768260645;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aT4cyC0+/zsCCu0DV9uExKEW1lsfx0ZlzUdfRu+p+KM=;
- b=gMMvCn0+Faat/SkXS8FOPdUHy9saG9c98Vcsc18+GvFrroB4k3SfaKJ3Vrg7yJ8eLS
- rlUnVCez+wTHwMZ3dx0oX8aGNmuUg9BAUmI+sYU5tiqagklVqAOAZ4yD7Ss/jqNKclte
- 0kLS4TwTnBPWw+i7YDR09q7tE7mATPUmS4gepvpNqlKwkkN/EmAK2r6ZwcrAs169p6t2
- Mm1C8iFZ2trhWMN1F8Hj8kfNqlSzC8Jbh05xH9aQmhmPV0s43wtyatp7BLas/NnhNAGk
- JHskLjtIA1k5ZZyv4oPem8Vz9ETj5GOBEVzWjWMiWqZ7eIXJLxqOKrvTpVf1w0hyCl3w
- iwlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXvRbM9PeJapJx9X7PaDXMTGCynd88jAshU3JiJPDJCWV4facG8f3ZravWURAxqh3DzaOAZTFU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUitzBEzJLcCiLQ0HaxpTv9F/UiS84T/3NFXSwvA/8Zbt7RT/H
- /O1A87uNFBpVOSGeVDNqVZ+R3XOjDiVS9mFknR1Fg6HuqqsMd5cQUE9m23xNwO6D78kveBfWNTk
- 1iMirYYuuN0w78HpXmymb41PxjB/ZsXZRLJ6LoYCTqSuKQ723DcQ=
-X-Gm-Gg: AY/fxX51C2A8xUaKHVz3F42rE5tZoXfTt9cK3w3YSr4/xN6RAI2WdCYypkVIKDTd8qH
- FvXUMhvLL7uzokdew/MHYJJafpwmza6KH2IGZ3oS2oZeZn81+9yQRlc+Ql74j13/BYCDMd9rIFQ
- 7+mTME9MajMh4PiAI1txuYGIHRUBpE9r357sRbhHBJy42F5kyAO4lbkbiEJf9bxx8zJ6ndI4TX9
- aBwFx9GyJHA68njT31b/w1SqM4YxDnDOP2ht423SWOccx43pivhGz/JziBKkijx7TXiGw==
-X-Google-Smtp-Source: AGHT+IHt4nlL/HXarjrfyWxiLUDA4SJqb2H7SppWnLJaYf6pfT4/tPDxjHhQe4gar1CPXx0nN++Fn/TeWlIqCjtiNAk=
-X-Received: by 2002:a17:907:1c88:b0:b73:7ac4:a5f with SMTP id
- a640c23a62f3a-b8426a84deemr133594166b.21.1767655848966; Mon, 05 Jan 2026
- 15:30:48 -0800 (PST)
+ bh=YOvWyXskgiWVRxzXCq36zFXU84BbX+hLYRSOPpNSTfM=;
+ b=XAeaCNoFBXlRbCeRBfr36TO+xmSpqgml9jzR/rD35EcQ2yKEOG7zgxlEuTuJGisbAP
+ OlRnx5hXS9cvApSDycNAeMzL51C11ge0MSI1UAmXFjAOBS1lkccUJTSD+6krNZBQVOyx
+ 6XxEGb5Sd4qE4PhwNxakJwi73Jno8eLWwt1uEdxFSIkPPvQ9f84HvCwyxjDFqwoVbLMj
+ bURUaVlNKN2qxg96Pka2KiNuE9e/4cMeR3NWiz0Reg6AHNvffSbAChcK5EMRxVNXRq31
+ w6UZvZ9Ml5d+Ntz9InF373v+/k2Kvv/jGCzSgGxwb9WPL7G3c6K99X6x1bx6eOP/AhgM
+ b93Q==
+X-Gm-Message-State: AOJu0YyIFflv1L2NZmEe8ppiROs9RlexwNJpjrV77cSgY84zNwN/qReJ
+ V6WKk5bX1lOejBk639ZxEi2aS3ca5B8A11y39XmkMuNvrcYV4+D7I83zw9AACjTdmCHoo5li4Nr
+ Ir9lypFSy/Bpy/5Fq3IdgzOX6z0e7PDSTycpWAPr7Byt38Ajw6BA=
+X-Gm-Gg: AY/fxX6Sb+TAoAGg6mRE8AEvOZtNKM/EkVU1xSHcAiEy1H4/P+dzkkJMwuWR0ySwcJ1
+ 4s9bhaQMVMKfm4vgvFU19s99gAM7Ek5kEzjHTJ/lW6jBoF+pCGrdM6tiHL3DeDoHAKLsov6StzP
+ 1tfvVwnkdLrCi4Ky9qwgG0YdAzjEwSXt3FtgqXYptLnm8RIREq+9QOK+F8dwaeXLJhqFal3Hqa/
+ YB5w2Z1bg2zTagxmLkTPTdU2zD4XCzrpiumPSRzHrqzO2u9P6JRYKLtfHI7htzEJybCJQ==
+X-Google-Smtp-Source: AGHT+IEahPXvCdOrfVSbi2hXhdAQBEqUFiDlHKsllFP+AwsO0urb0+GUiZcIvqu/HmpH1/7bo3P+Sf9lm8KD6aWKD0s=
+X-Received: by 2002:a17:907:3e82:b0:b83:7b8c:7c5f with SMTP id
+ a640c23a62f3a-b8426a425aemr116737166b.1.1767655844575; Mon, 05 Jan 2026
+ 15:30:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20260105165221.1816070-1-visitorckw@gmail.com>
- <20260105165221.1816070-3-visitorckw@gmail.com>
-In-Reply-To: <20260105165221.1816070-3-visitorckw@gmail.com>
+References: <OS7PR01MB138347050E7E700D57ECA698EBCBEA@OS7PR01MB13834.jpnprd01.prod.outlook.com>
+In-Reply-To: <OS7PR01MB138347050E7E700D57ECA698EBCBEA@OS7PR01MB13834.jpnprd01.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
 Date: Mon, 5 Jan 2026 16:30:25 -0700
-X-Gm-Features: AQt7F2r2D7puRrSCjCXNrWpgo1dHIZhUOKolSPWL71G-s7GtNIaH77MgaxOsGjg
-Message-ID: <CAFLszTjBFGeWS8QoVRGWq44LMjUgDpE7B3ssFLY0sZHZrLfG5Q@mail.gmail.com>
-Subject: Re: [PATCH v5 2/7] timer: Add Goldfish timer driver
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
- me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com, 
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
+X-Gm-Features: AQt7F2omGiA25ghu98km4gyd8Ci-iLQAC0w8DssNACyI4PKEWyYB2fcOwbRw0mo
+Message-ID: <CAFLszThO9+aN+bAx39a4eQtfm=3CMq0=YjDYJZ3Etuk3NL97+Q@mail.gmail.com>
+Subject: Re: [PATCH v2] common: cli_hush: terminate all commands when Ctrl-C
+ is pressed
+To: Shiji Yang <yangshiji66@outlook.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Anton Moryakov <ant.v.moryakov@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,33 +89,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 5 Jan 2026 at 11:20, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+Hi Shiji,
+
+On Sun, 28 Dec 2025 at 04:04, Shiji Yang <yangshiji66@outlook.com> wrote:
 >
-> Add support for the Goldfish timer driver. This driver utilizes the
-> Goldfish RTC hardware to provide a nanosecond-resolution timer. This
-> virtual device is commonly found in QEMU virtual machines (such as the
-> m68k virt machine) and Android emulators.
+> Check Ctrl-C status before executing each command in the pipeline so
+> that the Ctrl-C can skip all subsequent commands. in the meantime, we
+> need to clear the ctrlc status at the end of a pipeline. This should
+> be the default behavior of most shell parsers.
 >
-> The driver implements the standard U-Boot timer UCLASS interface,
-> exposing a 64-bit monotonically increasing counter with a 1GHz clock
-> rate derived from the RTC registers.
+> Before the change:
+> ```
+> => echo start; while true; do echo loop; sleep 1; done; echo int; if true; then echo if; fi; echo stop
+> start
+> loop
+> loop    <-- Input Ctrl-C
+> int
+> if
+> stop
+> =>
+> ```
+> After the change:
+> ```
+> => echo start; while true; do echo loop; sleep 1; done; echo int; if true; then echo if; fi; echo stop
+> start
+> loop
+> loop    <-- Input Ctrl-C
+> ^C
+> =>
+> ```
 >
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Tested-by: Daniel Palmer <daniel@0x0f.com>
-> Reviewed-by: Yao Zi <me@ziyao.cc>
+> Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
 > ---
-> Changes in v5:
-> - Rebase on u-boot/next branch.
+> v1 --> v2:
+>  - use puts() instead of printf()
+>  - only clear Ctrl-C status when one pipe reaches the end
 >
->  MAINTAINERS                    |  6 +++
->  drivers/timer/Kconfig          |  8 ++++
->  drivers/timer/Makefile         |  1 +
->  drivers/timer/goldfish_timer.c | 81 ++++++++++++++++++++++++++++++++++
->  include/goldfish_timer.h       | 13 ++++++
->  5 files changed, 109 insertions(+)
->  create mode 100644 drivers/timer/goldfish_timer.c
->  create mode 100644 include/goldfish_timer.h
+>  common/cli_hush.c | 20 ++++++++++++--------
+>  1 file changed, 12 insertions(+), 8 deletions(-)
+>
+> diff --git a/common/cli_hush.c b/common/cli_hush.c
+> index 7bd6943d3ed..3f6adc01934 100644
+> --- a/common/cli_hush.c
+> +++ b/common/cli_hush.c
+> @@ -1792,16 +1792,15 @@ static int run_list_real(struct pipe *pi)
+>                 }
+>         }
+>         for (; pi; pi = (flag_restore != 0) ? rpipe : pi->next) {
+> -               if (pi->r_mode == RES_WHILE || pi->r_mode == RES_UNTIL ||
+> -                       pi->r_mode == RES_FOR) {
+>  #ifdef __U_BOOT__
+> -                               /* check Ctrl-C */
+> -                               ctrlc();
+> -                               if ((had_ctrlc())) {
+> -                                       return 1;
+> -                               }
+> +               /* check Ctrl-C */
+> +               ctrlc();
+> +               if (had_ctrlc())
+> +                       return 1;
+>  #endif
+> -                               flag_restore = 0;
+> +               if (pi->r_mode == RES_WHILE || pi->r_mode == RES_UNTIL ||
+> +                   pi->r_mode == RES_FOR) {
+> +                       flag_restore = 0;
+>                                 if (!rpipe) {
+>                                         flag_rep = 0;
+>                                         rpipe = pi;
+> @@ -3207,6 +3206,11 @@ static int parse_stream_outer(struct in_str *inp, int flag)
+>                         run_list(ctx.list_head);
+>  #else
+>                         code = run_list(ctx.list_head);
+> +                       /* clear Ctrl-C status when one pipe reaches the end */
+> +                       if (had_ctrlc() && !(flag & FLAG_REPARSING)) {
+> +                               puts("^C\n");
+> +                               clear_ctrlc();
+> +                       }
+>                         if (code == -2) {       /* exit */
+>                                 b_free(&temp);
+>                                 code = 0;
+> --
+> 2.51.0
+>
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+I'm not an expert on this but it seems reasonable. Is there a way we
+can test this behaviour?
 
-You can also implement timer_get_boot_us() if you want to use bootstage.
+Regards,
+Simon
