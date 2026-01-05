@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9022EC79F9D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A75C79F9D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 15:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C80483E7A;
-	Mon,  5 Jan 2026 16:20:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E3AF83E62;
+	Mon,  5 Jan 2026 16:20:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nINsqtWG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t+J7g4GJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E98483E7F; Mon,  5 Jan 2026 16:20:25 +0100 (CET)
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
+ id 2C2EE83E76; Mon,  5 Jan 2026 16:20:43 +0100 (CET)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCA4283E76
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:20:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F78C83DEA
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 16:20:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x441.google.com with SMTP id
- ffacd0b85a97d-42fb0fc5aa4so11118365f8f.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:20:22 -0800 (PST)
+Received: by mail-wr1-x443.google.com with SMTP id
+ ffacd0b85a97d-42fbc305882so6801640f8f.0
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 07:20:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767626422; x=1768231222; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767626439; x=1768231239; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=2HYpGbixQrYB0VD8C9FlpTZDqQE2VMP+THHUxNtTjeU=;
- b=nINsqtWG5PSXCeW9Mf2mMFp/KJgDNDB4Nyp9YMIgG9aOQsUBKoCJCMGO777QjuTo6M
- zsCmggj9mQ3sarEJEBqeWRQQoxc1zYkvPYQWDXG6jdbG1xygAgNLi0hZJLGx76Oa2KCj
- 8D2kgSGcxqan8H0sLl5gMsEAoSg+eSsmyLrM2ZTjfA+swHkvFnEZuKKHxatpyudod98+
- 15wFseqVYD5LTWQlPymeyZgySvFxE2R7zFQlDVNdc2b1kNSz7DHfvFMc3y/+Lw+UGdAa
- hJ+GlNZETL+FNhtZefMgt9q9HYrSAI4PWPu2t8/PxmVkEmvC58iq5VUD7YIuHCU5wJXB
- 6EZg==
+ :reply-to; bh=EfGR42vRJtBkHu8nsjmr1AN/Y9syEISZCHonEXAy+sM=;
+ b=t+J7g4GJoQCxcn2+JTjwlfQZ2sKNysiM1fGRztv+SJ6p51Xw7SbeShHhDPR+ySBHJh
+ dfuSpesDcBZ7vAS3pU3J5M/2/TSfnFq1v/vkbbwGEwUPmGddev1sq35fA0HZPM1OdmTz
+ mDxfGJzkjdCE409qkXXjX5cXGueUcBkrHuDykxKH6B7cQKhnQzP7bAr2OCbm6j1QEGFM
+ 2rOkKZoaNomxJwbQS0WYTa1GkziLGrWj2unNDAhbdLWtfSsUwfZiXQIjUiVAXI+6pxO1
+ 805IOJloEm0IDY3wzuSsAIGqY6yGhM5fZAj5GLpoiSXx5lZD0RME5LERTuxes+soc8vL
+ C3gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767626422; x=1768231222;
+ d=1e100.net; s=20230601; t=1767626439; x=1768231239;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2HYpGbixQrYB0VD8C9FlpTZDqQE2VMP+THHUxNtTjeU=;
- b=Hg19P3aWAlKBmCj1OsIIzejowDf/oj7wZw4Fv5MLVLPPo+GTOWuR0dgQJJ3A3ssajX
- 6V010UgHXJgqREK8l7J2wznAwX8OXdvriiCoAE/EUQsHvviO4uo0sGPMvqUNNr3xFe3v
- fy2qJFqOCrMcDJJGpyfXaAA8U4DVukevWbBCfqOeQTbbd2ba0vRz8eEY3Ln1wPnynaVn
- SnkmwoTXdXJG/xnI1VO2mhQ4ry0cNwEm5U6Tzt8Xuixf+I0XyQMmp66gN5jXzuIbzj9K
- b9Yd2H8qfLpWV97nEPAmE/pSbYo5eo3K2+7nU+4pa2cRMul1f4lSjbj7T3/Ccb+W6qxN
- RuCQ==
+ bh=EfGR42vRJtBkHu8nsjmr1AN/Y9syEISZCHonEXAy+sM=;
+ b=qbisGn1uEoCVjH35dg7csEoo8s4jQVPMn0jW8GAlQPSxySsPpU82XpGNaHDCiZ2tvR
+ oSrsRUmBL74prG5+0GhcjyeUKBd61jzNSB6vI4oNO7lqHmrPiS7R5re9b1V2WpacrAOR
+ meOIPhmlbTN0TRmHw9C3XbB9VBaFiK1gpzE0Z0ewj7f0jYAePCw1Cdq+T8vbuwnR/Kdu
+ 0KFKjMkQ5sbPW4smqSheHywbdHwj4pXqhgvMAApfj+g1InEHAaAwXrWZcbFn98ek5d7G
+ meanFwgMoZAdicNgnX30Fp3FrKqsGi7JKNDehSdLS4lWoeDcm0LDi4JEFw1P/045SGN7
+ 25gA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXIvOE+y7SmMYdFP+jTyOaLhpNHLD/QWUpgPSnrdcJlrRM9kTNw4JG3pluARbyHJIa0u9d0D5U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDHkNw0XRlxMCQS1jDfdprIfuaKnkx4+MfLEbLmqp9YJepEV0J
- xQArDItgGLEgnXOhgkOn+OQgjW35T0mo3j0ltmQZeCQHqM7LWgtOcFGYqFldvlmtZso=
-X-Gm-Gg: AY/fxX5du3xZdZKSpWCsZOrP8XJV00IzbOtTTrdJc7xXVw2wsIS2Axa0XNqDrFhK9r2
- TxYeuOS/I/8woH5enEkukxMkANRgKR+/3SdZMCzjuajEfaGduOk8wab1M24nxKVQktEr1PKUFon
- /JQRDMwMyE2kgx0SgrTkZl8GKRpNnaXfqDywBE1ysk1NTzccjOR8SPPM7rj67ctbBP12ZLwGBFU
- 4Ri5lIPYuPpxjvgcjBfI9ddR9WzwBwZKoBEuFUjuBri6js/KNkxLdamx4T0nEEgl4G3B6aBonkm
- 5Tof3oss2Ok7mK4GDlIZYC31jhPRIpDvhAefMECPnACbLcAATlIMmWhnfof8tEh/cREKAsSsmRb
- VAZBklvjT1DDCiiCOV7svC/rrel0Mu6Q0FiNlj17ArPbbzlyfsMW9yS+InRRTgAH9tcifTPIVMG
- 5IlHILo4VsBQ8Bm4L6w2Znt4VBbs4DGuIItEQ1XeKfwhebYWMSwplbpHpK3Rl5Tjg=
-X-Google-Smtp-Source: AGHT+IHmE5JwUAru/wlggCks+J0xaou7CdxgyWjpzRIs4icmqvT4wiMr0NlaPwr0viec4Ald8XPOGw==
-X-Received: by 2002:a05:6000:1786:b0:431:342:ad42 with SMTP id
- ffacd0b85a97d-432bc9f56d0mr150134f8f.44.1767626422127; 
- Mon, 05 Jan 2026 07:20:22 -0800 (PST)
+ AJvYcCXFSQdToDVP4YAvgwsNfEnf0F6Tz0L+gXPjqfMDl02mIzO1cqhjgkYKR24iEzQnB5Fet5BohZs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxE38xbrx2eJFaK105zT1igLPdS/H0m7rFSC5OC1tmVhj8rs6J7
+ jqY7ajUKQqW7oH8VkmJ5RhvAY+kvmuusZpU2/5nmSmzIp7hBp5K8JsX6LpvpVkBCMC3AHY0bPE6
+ tu5/t
+X-Gm-Gg: AY/fxX47B1BxZ0jdH/hAM59gX3zgwohzA99I3lVAsuKRIEfgu69hMFgyAA8x7ciD6Mj
+ sahcMWfnHwg+ZRDYDHXK5zrKssHB+PKo7K70/I3RCHpAr7eDerZHH8aNw8qkhePhMXoKvRspiZ2
+ xiP/9EAHYCIIMHUAYd5JJPKZvGsek5hXEKwkddhJv6ip0avOmwK29SEwtjF3ensoKU+6Q++5VXL
+ 49WunV2SIBcYJdFSgvlNIOQA4JS5mpqLTKyQ2OmUGPgOU6l5Odf0VaJwdsEfQiSX21oGR3p9La3
+ FAtzQ9xsQOvaWuD7+wExlqMJE8djG73tNuklKVrg/DGSq4Soy9UVWqumcNrTfiqugYDg3E7fjnx
+ nRYV75Y6uLRtFwZiN5AyLWfLpGaljaQQBPNhp7xEosd9kD8KzIr7YsCiAbfLmoQK7lvdTaePBCY
+ Wljb+kC7ugVpVKhpKSZoC/GMeDFeS/HSQyVKmiKLTfkSSGj4l/MsBrA9lUSaupDfbJEM6Rtfog3
+ w==
+X-Google-Smtp-Source: AGHT+IH0VC2BUfqhsMEh1Cck6V41p0TEvD+hCZgnsUaSV5ToVvqDZq8QZcTXn3e8XhWHBo72BTI4sw==
+X-Received: by 2002:a05:6000:18a6:b0:431:701:4a22 with SMTP id
+ ffacd0b85a97d-432bca3e417mr124376f8f.27.1767626438699; 
+ Mon, 05 Jan 2026 07:20:38 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080:d4c1:5589:eadb:1033?
  ([2a01:e0a:3d9:2080:d4c1:5589:eadb:1033])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bca57019sm67763f8f.37.2026.01.05.07.20.21
+ ffacd0b85a97d-432bca2f83dsm99150f8f.13.2026.01.05.07.20.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Jan 2026 07:20:21 -0800 (PST)
-Message-ID: <aa3ea5e2-d0f3-4af0-b181-0e93b5dd8a8a@linaro.org>
-Date: Mon, 5 Jan 2026 16:20:21 +0100
+ Mon, 05 Jan 2026 07:20:38 -0800 (PST)
+Message-ID: <a99b6773-5bd4-4030-9308-59db9d4d0fbc@linaro.org>
+Date: Mon, 5 Jan 2026 16:20:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/5] scsi: ufs: renesas: Refactor 0x10ad/0x10af PHY
- settings
+Subject: Re: [PATCH 5/5] scsi: ufs: renesas: Add reusable functions
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
  Geert Uytterhoeven <geert+renesas@glider.be>,
@@ -89,7 +90,7 @@ Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
 References: <20260103002254.183357-1-marek.vasut+renesas@mailbox.org>
- <20260103002254.183357-4-marek.vasut+renesas@mailbox.org>
+ <20260103002254.183357-5-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,7 +117,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260103002254.183357-4-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260103002254.183357-5-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -139,15 +140,15 @@ X-Virus-Status: Clean
 On 1/3/26 01:22, Marek Vasut wrote:
 > From: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 > 
-> Extract specific PHY setting of the 0x10a[df] registers into a new
-> function.
+> Since some settings can be reused on other UFS controller (R-Car S4-8
+> ES1.2), add reusable functions.
 > 
 > Ported from Linux kernel commit
-> cca2b807c227 ("scsi: ufs: renesas: Refactor 0x10ad/0x10af PHY settings")
+> 44ca16f4970e ("scsi: ufs: renesas: Add reusable functions")
 > 
 > Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 > Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> Link: https://lore.kernel.org/r/110eafd1ee24f9db0285a5e2bca224e35962268a.1741179611.git.geert+renesas@glider.be
+> Link: https://lore.kernel.org/r/446d67b751a96645799de3aeefec539735aa78c8.1741179611.git.geert+renesas@glider.be
 > Signed-off-by: Martin K. Petersen <martin.petersen@oracle.com>
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -158,17 +159,73 @@ On 1/3/26 01:22, Marek Vasut wrote:
 > Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 > Cc: u-boot@lists.denx.de
 > ---
->   drivers/ufs/ufs-renesas.c | 37 ++++++++++++++-----------------------
->   1 file changed, 14 insertions(+), 23 deletions(-)
+>   drivers/ufs/ufs-renesas.c | 71 +++++++++++++++++++++++++++------------
+>   1 file changed, 50 insertions(+), 21 deletions(-)
 > 
 > diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
-> index c8fbe61901b..b2edc3b5497 100644
+> index b2edc3b5497..5652309911e 100644
 > --- a/drivers/ufs/ufs-renesas.c
 > +++ b/drivers/ufs/ufs-renesas.c
-> @@ -130,6 +130,16 @@ static void ufs_renesas_indirect_poll(struct ufs_hba *hba, u32 gpio, u32 addr,
+> @@ -130,21 +130,8 @@ static void ufs_renesas_indirect_poll(struct ufs_hba *hba, u32 gpio, u32 addr,
 >   	ufs_renesas_write(hba, 0xf0, 0);
 >   }
 >   
+> -static void ufs_renesas_write_phy_10ad_10af(struct ufs_hba *hba,
+> -					    u32 data_10ad, u32 data_10af)
+> +static void ufs_renesas_init_step1_to_3(struct ufs_hba *hba)
+>   {
+> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0001);
+> -	ufs_renesas_write_phy(hba, 0x10ad, data_10ad);
+> -	ufs_renesas_write_phy(hba, 0x10af, data_10af);
+> -	ufs_renesas_write_phy(hba, 0x10b6, 0x0001);
+> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
+> -}
+> -
+> -static void ufs_renesas_pre_init(struct ufs_hba *hba)
+> -{
+> -	u32 timer_val;
+> -
+> -	/* This setting is for SERIES B */
+>   	ufs_renesas_write(hba, 0xc0, 0x49425308);
+>   	ufs_renesas_write_d0_d4(hba, 0x00000104, 0x00000002);
+>   	udelay(1);
+> @@ -158,7 +145,10 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
+>   
+>   	ufs_renesas_write(hba, 0xc0, 0x49425308);
+>   	ufs_renesas_write(hba, 0xc0, 0x41584901);
+> +}
+>   
+> +static void ufs_renesas_init_step4_to_6(struct ufs_hba *hba)
+> +{
+>   	ufs_renesas_write_d0_d4(hba, 0x0000080c, 0x00000100);
+>   	ufs_renesas_write_d0_d4(hba, 0x00000804, 0x00000000);
+>   	ufs_renesas_write(hba, 0xd0, 0x0000080c);
+> @@ -168,6 +158,11 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
+>   
+>   	ufs_renesas_write(hba, 0xd0, 0x00000804);
+>   	ufs_renesas_poll(hba, 0xd4, BIT(8) | BIT(6) | BIT(0), BIT(8) | BIT(6) | BIT(0));
+> +}
+> +
+> +static u32 ufs_renesas_init_disable_timer(struct ufs_hba *hba)
+> +{
+> +	u32 timer_val;
+>   
+>   	ufs_renesas_write(hba, 0xd0, 0x00000d00);
+>   	timer_val = ufs_renesas_read(hba, 0xd4) & 0x0000ffff;
+> @@ -179,6 +174,45 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
+>   	ufs_renesas_write(hba, 0xd0, 0x00000d2c);
+>   	ufs_renesas_poll(hba, 0xd4, BIT(0), BIT(0));
+>   
+> +	return timer_val;
+> +}
+> +
+> +static void ufs_renesas_init_enable_timer(struct ufs_hba *hba, u32 timer_val)
+> +{
+> +	ufs_renesas_write(hba, 0xf0, 0);
+> +	ufs_renesas_write(hba, 0xd0, 0x00000d00);
+> +	ufs_renesas_write(hba, 0xd4, timer_val);
+> +}
+> +
 > +static void ufs_renesas_write_phy_10ad_10af(struct ufs_hba *hba,
 > +					    u32 data_10ad, u32 data_10af)
 > +{
@@ -179,43 +236,51 @@ On 1/3/26 01:22, Marek Vasut wrote:
 > +	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
 > +}
 > +
->   static void ufs_renesas_pre_init(struct ufs_hba *hba)
->   {
->   	u32 timer_val;
-> @@ -204,29 +214,10 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
->   	ufs_renesas_write_phy(hba, 0x4000, 0x0000);
->   	ufs_renesas_write_phy(hba, 0x4001, 0x0000);
->   
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ad, 0x0000);
-> -	ufs_renesas_write_phy(hba, 0x10af, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10b6, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
-> -
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ad, 0x0000);
-> -	ufs_renesas_write_phy(hba, 0x10af, 0x0002);
-> -	ufs_renesas_write_phy(hba, 0x10b6, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
-> -
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ad, 0x0080);
-> -	ufs_renesas_write_phy(hba, 0x10af, 0x0000);
-> -	ufs_renesas_write_phy(hba, 0x10b6, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
-> -
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ad, 0x0080);
-> -	ufs_renesas_write_phy(hba, 0x10af, 0x001a);
-> -	ufs_renesas_write_phy(hba, 0x10b6, 0x0001);
-> -	ufs_renesas_write_phy(hba, 0x10ae, 0x0000);
+> +static void ufs_renesas_init_compensation_and_slicers(struct ufs_hba *hba)
+> +{
 > +	ufs_renesas_write_phy_10ad_10af(hba, 0x0000, 0x0001);
 > +	ufs_renesas_write_phy_10ad_10af(hba, 0x0000, 0x0002);
 > +	ufs_renesas_write_phy_10ad_10af(hba, 0x0080, 0x0000);
 > +	ufs_renesas_write_phy_10ad_10af(hba, 0x0080, 0x001a);
+> +}
+> +
+> +static void ufs_renesas_pre_init(struct ufs_hba *hba)
+> +{
+> +	u32 timer_val;
+> +
+> +	/* This setting is for SERIES B */
+> +	ufs_renesas_init_step1_to_3(hba);
+> +
+> +	ufs_renesas_init_step4_to_6(hba);
+> +
+> +	timer_val = ufs_renesas_init_disable_timer(hba);
+> +
+>   	/* phy setup */
+>   	ufs_renesas_indirect_write(hba, 1, 0x01, 0x001f);
+>   	ufs_renesas_indirect_write(hba, 7, 0x5d, 0x0014);
+> @@ -214,10 +248,7 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
+>   	ufs_renesas_write_phy(hba, 0x4000, 0x0000);
+>   	ufs_renesas_write_phy(hba, 0x4001, 0x0000);
+>   
+> -	ufs_renesas_write_phy_10ad_10af(hba, 0x0000, 0x0001);
+> -	ufs_renesas_write_phy_10ad_10af(hba, 0x0000, 0x0002);
+> -	ufs_renesas_write_phy_10ad_10af(hba, 0x0080, 0x0000);
+> -	ufs_renesas_write_phy_10ad_10af(hba, 0x0080, 0x001a);
+> +	ufs_renesas_init_compensation_and_slicers(hba);
 >   
 >   	ufs_renesas_indirect_write(hba, 7, 0x70, 0x0016);
 >   	ufs_renesas_indirect_write(hba, 7, 0x71, 0x0016);
+> @@ -244,9 +275,7 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
+>   	ufs_renesas_indirect_poll(hba, 7, 0x41, 0, BIT(7));
+>   	/* end of phy setup */
+>   
+> -	ufs_renesas_write(hba, 0xf0, 0);
+> -	ufs_renesas_write(hba, 0xd0, 0x00000d00);
+> -	ufs_renesas_write(hba, 0xd4, timer_val);
+> +	ufs_renesas_init_enable_timer(hba, timer_val);
+>   }
+>   
+>   static int ufs_renesas_hce_enable_notify(struct ufs_hba *hba,
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
