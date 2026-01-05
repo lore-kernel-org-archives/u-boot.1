@@ -4,121 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F75C79FBD
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 19:55:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28A7DC98331
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 20:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EBB1836A3;
-	Mon,  5 Jan 2026 20:55:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 510C6839DE;
+	Mon,  5 Jan 2026 21:20:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lechnology.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b8GdOUDv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lechnology.com header.i=@lechnology.com header.b="Q3zSPWbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 121EE83D62; Mon,  5 Jan 2026 20:51:13 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4EC0F83A26; Mon,  5 Jan 2026 21:18:31 +0100 (CET)
+Received: from galaxy.gendns.com (galaxy.gendns.com [66.235.175.158])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0248D82B20
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 20:51:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B858839B7
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 21:18:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=lechnology.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-8b25dd7ab33so22473785a.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 11:51:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767642669; x=1768247469; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Le7UhoIFOLTec4IX99i8QE/FWjxFWOWhC1QTGixpu3I=;
- b=b8GdOUDvNpA7NaH8ZisY83uVian8YcTwCugm6URQHGZntqiTmfe0/Xt2tcWNhQ26lj
- 8u814O6U1Y0dy/pJCbYhe7F8UYA+ct2HoYWrVlI9OxQrP9SpSleF+GJZC072+jcPXbb2
- d9PnM1oZHt563TEjUXxYYIEFWyKyww+pqSL8Ofxj0qhnH7d/xZhHyLcWUuQ4slbWJb5A
- qRlZYPknJ5vHOHNvxj3Gg/mJvEKhX+SIi2B9ETW9r5Bhs9IvZp3Z5/1lLYGjwAzh8xTJ
- z9Ln2v55Yln9x1ao3fkWlXy1xHuKQyzVQMuYzdQuc9fcC7NaqDNAce7pGLluwnrZhodW
- 2xfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767642669; x=1768247469;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Le7UhoIFOLTec4IX99i8QE/FWjxFWOWhC1QTGixpu3I=;
- b=EyIgxbuzbMUGXUrs6F4tRdFEU1Vv3LpnfOmSPp+DiQiXMcZZOYLUX6jI1BZIt6+eNl
- T5zotzN7b/rhtKQpP1rC0Rj+NFjTBwL6QKa0MCc7Gn3VPtsGXudF++TruS+4jZv6Tlan
- pKMaVJ6CNXirl3ies+oiaQCWX2bqA7d3TkEzKitNvetDUPX5DIH4mATr/Y9h/H4567/1
- w9SFawefFi6f87YbfeAKo4e69ih7nmMf/Ut3WUn4RMGc3qhpWKFHVFD7OC2QElOEUCPr
- jl5TZUxtcAqnj9pryDcmIMQAx7RiHdi62b57Elro+fWU8/znaL/4LsXXaciZKV4LlQw2
- pS2Q==
-X-Gm-Message-State: AOJu0YxXPU5L/ogX7JK2zMTDsXbr41gCwh/dcrU8fY4H590knJiF/r/8
- GXNWsh0WMSlB5tbtW+XR0RQgT3n6gUE/2sskQufLytgQNM56yVpEqZIRa1aIFIuJLnsK+US2sDW
- Y6v2m3NqAgsitsS0fOmCLZX808EYdguU=
-X-Gm-Gg: AY/fxX6ROlwNM6bbMoeoJ3T+Y1A3UuUDeKiO631e0Zq97hwu4n6EG3APePcZ14E8a+o
- EkygzTMB1m5tm6uT+ygJVrty9ACBuIkn3CjDvoUMf4OKksDIpE/NKXZk1N/P37aDd1weDKy1LFX
- DbCAZGSIH2BHQJ15Rm6FCnwLuR1Skzsf6golnyZCERRqyhaypVYBOHryWVdqRrAvccEi3/slzOJ
- 2nchfJB2muXR2R4QqxBbWO7FuJtyipGiqAE5D0nKWHYas0SRRP+llsh7vpAsNKAycm2K7lk5+r2
- licLXXKxqcsaTcJ5E+OaGQgGandp
-X-Google-Smtp-Source: AGHT+IGvELj172weYTCrFI8PzinB0HPwE7R5ez/XPY2/fKSNE1mqHbnzf3GprO/0rEvjDG8vkHttVXAn2xeoGN0a3o4=
-X-Received: by 2002:a05:622a:2597:b0:4ee:2984:7d95 with SMTP id
- d75a77b69052e-4ffa76a1fa9mr11289281cf.13.1767642668487; Mon, 05 Jan 2026
- 11:51:08 -0800 (PST)
+ spf=pass smtp.mailfrom=david@lechnology.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=lechnology.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=tSnvLVUmseo9TpnnRdfLoFLAligTEsydnrUJv94D8B8=; b=Q3zSPWbnoMLQvhVsO8OfKbrBH3
+ uSCJxMtNrCEzlC6hIw86y+Yc1TM+v+0t6mTmGrKXAvbW2FU7hiyRyMKQX92IDF0T2s+M5XXVcM9QH
+ yzGx7BUcgdgrPij9BHUIgSZppO2YtJPmN+mGJ3r9x2+JNAP7PZPfOzt5AdLhbb+yChoKUMak7rIYk
+ KeLdi4ZQawgSo/Zg0OfgZaW6MkzrEIW+FhcO3A1F9JZv0P8QxCCQQ7tMb+7Xy/CvbFf69r2+U6VDw
+ 2tcO5HmmjjvZO0djc4h/ww1tpIOLpv2XQFLOZVIsdpkznD0peP84IZSd0kKO2e3NWssnDYo8qHgOl
+ 2cLLmeuA==;
+Received: from ip98-183-112-25.ok.ok.cox.net ([98.183.112.25]:41620
+ helo=[192.168.1.142])
+ by galaxy.gendns.com with essmtpa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+ (Exim 4.99) (envelope-from <david@lechnology.com>)
+ id 1vcr1j-00000008Zgf-0s11; Mon, 05 Jan 2026 15:18:07 -0500
+Message-ID: <e96f07ef-3b11-428d-8c8b-88c11c977cc2@lechnology.com>
+Date: Mon, 5 Jan 2026 14:18:02 -0600
 MIME-Version: 1.0
-References: <20260105-rk3576-ufs-v2-0-caba979a0d6b@gmail.com>
- <20260105-rk3576-ufs-v2-1-caba979a0d6b@gmail.com>
- <20260105151816.GM6124@bill-the-cat>
- <CABjd4YzxpEFA0qCgUT4T1Z3R4O0W7LqPNdFWn7=5NDHO8K7XKQ@mail.gmail.com>
-In-Reply-To: <CABjd4YzxpEFA0qCgUT4T1Z3R4O0W7LqPNdFWn7=5NDHO8K7XKQ@mail.gmail.com>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Mon, 5 Jan 2026 23:50:58 +0400
-X-Gm-Features: AQt7F2rA51Aw0dOcgo3T7njkQu2wVtyHqKmvYgOYzsSP-SJnx2cJyqWc6IsRnG4
-Message-ID: <CABjd4YwuqFH9gzDmmxD4rq-VXK0jBB98-giNWvMrWMAP6KAJbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] spl: Make UFS available for SPL builds
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Heiko Stuebner <heiko@sntech.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Elaine Zhang <zhangqing@rock-chips.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sumit Garg <sumit.garg@kernel.org>, 
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut@mailbox.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Dhruva Gole <d-gole@ti.com>, Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Finley Xiao <finley.xiao@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 05 Jan 2026 20:55:41 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] kbuild: Bump the build system to 6.1
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, "Andrew F. Davis" <afd@ti.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Luka Kovacic <luka.kovacic@sartura.hr>, Minkyu Kang <mk7.kang@samsung.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Varshini Rajendran <varshini.rajendran@microchip.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
+ Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
+ E Shattow <e@freeshell.de>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Sam Edwards
+ <cfsworks@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ James Hilliard <james.hilliard1@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de
+References: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: David Lechner <david@lechnology.com>
+Autocrypt: addr=david@lechnology.com; keydata=
+ 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
+In-Reply-To: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - galaxy.gendns.com
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - lechnology.com
+X-Get-Message-Sender-Via: galaxy.gendns.com: authenticated_id:
+ davidmain+lechnology.com/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: galaxy.gendns.com: davidmain@lechnology.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Mailman-Approved-At: Mon, 05 Jan 2026 21:20:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,104 +157,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 5, 2026 at 10:15=E2=80=AFPM Alexey Charkov <alchark@gmail.com> =
-wrote:
->
-> Hi Tom, Neil,
->
-> Your replies came pretty much simultaneously :)
->
-> On Mon, Jan 5, 2026 at 7:18=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > On Mon, Jan 05, 2026 at 07:05:36PM +0400, Alexey Charkov wrote:
-> >
-> > > Add minimal infrastructure to build SPL images with support for UFS
-> > > storage devices. This also pulls in SCSI support and charset function=
-s,
-> > > which are dependencies of the UFS code.
-> > >
-> > > With this, only a fixed offset is supported for loading the next imag=
-e,
-> > > which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-> > > number of 4096-byte sectors into the UFS block device.
-> > >
-> > > Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> > [snip]
-> > > +config SPL_UFS_SUPPORT
-> > > +     bool "Support loading from UFS"
-> > > +     select SPL_LOAD_BLOCK
-> > > +     help
-> > > +       Enable support for UFS in SPL. This allows
-> > > +       use of UFS devices such as hard drives and flash drivers for
-> > > +       loading U-Boot.
-> > > +
-> > > +config SPL_UFS_BOUNCE_BUF
-> > > +     bool "Use a bounce buffer for UFS loading"
-> > > +     depends on SPL_UFS_SUPPORT
-> > > +     default y if ARCH_ROCKCHIP
-> > > +     help
-> > > +       On some platforms the UFS host controller may be unable to lo=
-ad all
-> > > +       image segments directly to their required memory locations (e=
-.g. due
-> > > +       to DMA constraints). This option enables an interim bounce bu=
-ffer in
-> > > +       system RAM to let such platforms boot directly from UFS, at a=
- cost of
-> > > +       an additional memory move while loading the image.
-> >
-> > So, the full U-Boot rockchip UFS driver does not use the generic
-> > BOUNCE_BUFFER mechanism. Is this because of memory constraints in SPL?
-> > Second, can we not just re-use the generic bounce buffer code
-> > (common/bouncebuf.c) ? Thanks.
->
-> On Mon, Jan 5, 2026 at 7:22=E2=80=AFPM Neil Armstrong <neil.armstrong@lin=
-aro.org> wrote:
-> > Can't this be replaced by the SCSI bounce buffer ?
->
-> Thanks for the pointers. Frankly, I've overlooked the existing generic
-> functionality, being somewhat new to the codebase.
->
-> It seems that the current UFSHC driver only deals with broken 64-bit
-> addressing when deciding to use a generic bounce buffer, while the
-> constraint in this case is that part of the FIT image containing the
-> ATF wants to load itself not to system RAM, but to a PMU SRAM region,
-> which is inaccessible to the UFSHC's DMA engine either due to security
-> firewall settings (as Jonas Karlman proposed in his comments to v1 of
-> this series) or some other reason.
->
-> I guess I could add a per-variant override of the scsi_ops
-> ->buffer_aligned() callback (which in turn gets propagated to
-> blk_ops), checking if the requested buffer is above/below the start of
-> RAM on Rockchip RK3576 specifically? Just wondering whether that would
-> be considered an abuse of the interface, given that it's not really
-> anything to do with alignment as the callback name implies.
+On 12/16/25 3:16 AM, Ilias Apalodimas wrote:
+> From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> 
+> Our last sync with the kernel was 5.1.
+> 
+> We are so out of sync now, that tracking the patches and backporting
+> them one by one makes little sense and it's going to take ages.
+> 
+> This is an attempt to sync up Makefiles to 6.1.
+> Unfortunately due to sheer amount of patches this is not easy to review,
+> but that's what we decided during a community call for the bump to 5.1,
+> so we are following the same guidelines here.
+> 
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>a #rebased on -next
+> 
 
-Quick update. I can confirm that the following one-liner works just
-fine instead of my open-coded version:
+...
 
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 3c8e4299259c..eb2882d35e03 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -2257,7 +2257,7 @@ static int ufs_scsi_buffer_aligned(struct
-udevice *scsi_dev, struct bounce_buffe
-                return 0;
-        }
- #endif
--       return 1;
-+       return (ulong)state->user_buffer >=3D CFG_SYS_SDRAM_BASE;
- }
- #endif /* CONFIG_BOUNCE_BUFFER */
+> @@ -129,14 +131,14 @@ include/config.h: scripts/Makefile.autoconf create_symlink FORCE
+>  PHONY += create_symlink
+>  create_symlink:
+>  ifdef CONFIG_CREATE_ARCH_SYMLINK
+> -ifneq ($(KBUILD_SRC),)
+> +ifdef building_out_of_srctree
+>  	$(Q)mkdir -p include/asm
+> -	$(Q)if [ -d $(KBUILD_SRC)/arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
+> +	$(Q)if [ -d $(srctree)/arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
+>  		dest=arch/$(ARCH)/mach-$(SOC)/include/mach;			\
+>  	else									\
+>  		dest=arch/$(ARCH)/include/asm/arch-$(if $(SOC),$(SOC),$(CPU));	\
+>  	fi;									\
+> -	ln -fsn $(KBUILD_SRC)/$$dest include/asm/arch
+> +	ln -fsn $(srctree)/$$dest include/asm/arch
+>  else
+>  	$(Q)if [ -d arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
+>  		dest=../../mach-$(SOC)/include/mach;			\
+This breaks out-of-tree builds because the symlink created is broken. For example,
+I have O=build-mt8365_evk so the build directory is a subdirectory of the source
+directory. This causes $(srctree) to be ".." and therefore the link is:
 
-Would anything of this sort be acceptable? Happy to adjust in v3.
+build-mt8365_evk/include/asm/arch -> ../arch/arm/include/asm/arch-mediatek
 
-I'm guessing that DMA reads to an address not in SDRAM is a niche
-situation, so no one should be too upset about them going through a
-bounce buffer. Furthermore, this block of code would currently only
-apply to Rockchip RK3576 and Renesas gen4/gen5 by the virtue of
-Kconfig dependencies.
+Obviously, there should be a few more ../ in there or it should use an absolute
+path. I'm guessing previously $(KBUILD_SRC) was an absolute path?
 
-Best regards,
-Alexey
+I will see if I can come up with a fix unless someone has any immediate suggestions.
+
