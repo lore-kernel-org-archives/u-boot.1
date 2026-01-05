@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E294C79FBD
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 19:48:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E793BC79FBC
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 19:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C41383EDE;
-	Mon,  5 Jan 2026 20:47:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8264C83DEB;
+	Mon,  5 Jan 2026 20:47:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="aJg2saY2";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="mmFVJG3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E0438398C; Mon,  5 Jan 2026 20:47:40 +0100 (CET)
+ id 88FA983EA6; Mon,  5 Jan 2026 20:47:41 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D4B6839F1
+ by phobos.denx.de (Postfix) with ESMTPS id F0D1983E62
  for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 20:47:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
@@ -28,27 +28,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  s=gloria202408;
  h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type;
- bh=b24oqV4YQABXLyTm3Z5B9YO3FPLqs4k4pjWpq/TV9So=; b=aJg2saY2Y+lkEyksHcB7c91gHz
- YwMEMV/BslaWGJr5yE4vqEeomkVwtpLRZrSUmhN6oA62OhADYQW+84PdWKyng3jMkMhOyc1HztJ6f
- Ij0stFdPE6YGis6T1wwMvqQ91wXurnEibghU9HF6ZR9eMKGaxK716Pd7jH15XISXm2Yn5mhpHL3gl
- Ka4F+TccEPIhNWLP5XGWAaTBk8cID5GGnzhMopd7KZ2CrWwcju07Hn6+WGYkv04F54s6i3naIP21p
- udmJ10P+JvgZ1wgGozCWmCZej5WMziIs4XudcfQRDvO3PCXFVAmiW9j2W05Siq79aFkyqfxrF2Ixr
- hnGvnLRQ==;
+ bh=T7mF5A6qUp0PlWQ+Hv6iWG8n2ERM54sSnPLkEA6En8I=; b=mmFVJG3IvujcvZZmXFVGI99XMA
+ Ao/Yh36C1eo5UqXd7Dy7G/NgH3k8lHfaCiBCnyNYbtp8/crOQSnyyeKHVNfRMayji6MGcL31stAdQ
+ K4Fh9FyPL5ais3cBk6mcoKzbFJJFfAw4EWSh6qBFPurww1Oei7oX81rHB5QTocpZ7JoY0cA5YPgvm
+ Usoqq8OIcJ6wNvBlgWhS6cuMSOnSXPX7/mfHsvK5I84hq8SaRmSaXD8aKTm6B/ssXKIDN7c3F4nK1
+ fEm9vrGlHxdmscjDvtTolqkx1JVUvUmbs14qVnANMyTI53ntbziLoQ1+f+hBhD8Ma4hjuJCjfE/so
+ ryNv5LgQ==;
 Received: from i53875bd9.versanet.de ([83.135.91.217] helo=phil..)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1vcqY8-001AcR-Mw; Mon, 05 Jan 2026 20:47:33 +0100
+ id 1vcqYA-001AcR-0X; Mon, 05 Jan 2026 20:47:34 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
 	kever.yang@rock-chips.com
-Cc: heiko@sntech.de, trini@konsulko.com, u-boot@lists.denx.de,
- Daniel Bast <2790401+dbast@users.noreply.github.com>
-Subject: [PATCH 04/12] rockchip: board: qnap-ts433: Update documentation to
- recent tool versions
-Date: Mon,  5 Jan 2026 20:47:15 +0100
-Message-ID: <20260105194723.2928608-5-heiko@sntech.de>
+Cc: heiko@sntech.de,
+	trini@konsulko.com,
+	u-boot@lists.denx.de
+Subject: [PATCH 08/12] arm64: dts: rockchip: describe mcu eeprom cells on
+ rk3568-ts433
+Date: Mon,  5 Jan 2026 20:47:19 +0100
+Message-ID: <20260105194723.2928608-9-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20260105194723.2928608-1-heiko@sntech.de>
 References: <20260105194723.2928608-1-heiko@sntech.de>
@@ -70,46 +71,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ddr_tool was migrated from a binary to a python implementation ddr_tool.py
-The ddr-init binaries were also upgraded to new versions.
+The MCU's eeprom contains the unit's serial and a number of slots for
+mac-addresses. As the MCU seems to be used in different devices, up to
+8 mac addresses can live there and the unused slots are actually
+initialized with empty mac-address strings like 00:00:00:00:05:09 .
 
-Suggested-by: Daniel Bast <2790401+dbast@users.noreply.github.com>
+Interestingly on the TS-433, the PCIe ethernet adapter brings its own
+memory to hold its mac, and the gmac0 is supposed to get its mac from
+the second mac-slot, while the first one stays empty.
+
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
----
- doc/board/qnap/ts433.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Link: https://patch.msgid.link/20251112214206.423244-3-heiko@sntech.de
 
-diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
-index 5e5f0394ada..2cd7cf13d67 100644
---- a/doc/board/qnap/ts433.rst
-+++ b/doc/board/qnap/ts433.rst
-@@ -36,7 +36,7 @@ modification and also a new maskrom downloader can be build:
+[ upstream commit: 81f116991433d2547d7f350873cb4511ebcd4fec ]
+
+(cherry picked from commit 51b234a762b64dd4d8b1f338b4abbcf7cfc748a4)
+---
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 62 +++++++++++++++++++
+ 1 file changed, 62 insertions(+)
+
+diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
+index 5656554ca28..224db87973b 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
++++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
+@@ -655,6 +655,68 @@
+ 			#cooling-cells = <2>;
+ 			cooling-levels = <0 64 89 128 166 204 221 238>;
+ 		};
++
++		nvmem-layout {
++			compatible = "fixed-layout";
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			serial-number@0 {
++				reg = <0x0 0x13>;
++			};
++
++			ext-port@22 {
++				reg = <0x22 0x2>;
++			};
++
++			mac0: mac@24 {
++				compatible = "mac-base";
++				reg = <0x24 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac1: mac@35 {
++				compatible = "mac-base";
++				reg = <0x35 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac2: mac@46 {
++				compatible = "mac-base";
++				reg = <0x46 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac3: mac@57 {
++				compatible = "mac-base";
++				reg = <0x57 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac4: mac@68 {
++				compatible = "mac-base";
++				reg = <0x68 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac5: mac@79 {
++				compatible = "mac-base";
++				reg = <0x79 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac6: mac@8a {
++				compatible = "mac-base";
++				reg = <0x8a 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++
++			mac7: mac@9b {
++				compatible = "mac-base";
++				reg = <0x9b 0x11>;
++				#nvmem-cell-cells = <1>;
++			};
++		};
+ 	};
+ };
  
- .. code-block:: bash
- 
--    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
-+    $ tools/ddrbin_tool.py rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.23.bin
-     $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
- 
- Building U-Boot
-@@ -45,8 +45,8 @@ Building U-Boot
- .. code-block:: bash
- 
-     $ export CROSS_COMPILE=aarch64-linux-gnu-
--    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
--    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
-+    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.45.elf
-+    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1560MHz_v1.23.bin
-     $ make qnap-ts433-rk3568_defconfig
-     $ make
- 
-@@ -87,5 +87,5 @@ example as package of that name in Debian-based distributions:
- 
- .. code-block:: bash
- 
--    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
-+    $ rkdeveloptool db rk356x_spl_loader_v1.23.114.bin
-     $ rkdeveloptool wl 64 u-boot-rockchip.bin
 -- 
 2.47.2
 
