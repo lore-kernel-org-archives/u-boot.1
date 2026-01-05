@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A12BC79FA7
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 16:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C12C79FA5
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 16:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E64383E7A;
+	by phobos.denx.de (Postfix) with ESMTP id CCC0883E8E;
 	Mon,  5 Jan 2026 17:42:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ezMRqEAs";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="VLTs9ilV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACDDB8398C; Mon,  5 Jan 2026 17:41:27 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 0C50E8398C; Mon,  5 Jan 2026 17:41:28 +0100 (CET)
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
+ [IPv6:2a00:1450:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB541839A8
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:41:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D794183D71
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:41:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-4775ae5684fso632425e9.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 08:41:20 -0800 (PST)
+Received: by mail-wm1-x342.google.com with SMTP id
+ 5b1f17b1804b1-4779adb38d3so882905e9.2
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 08:41:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767631280; x=1768236080;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767631284; x=1768236084;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=RHXPZe9dbcdOmSXhq8dWJDr6LjV41dKHJL0H+2mhSJA=;
- b=ezMRqEAsaqi3PJuSY2mcPzY4j+As7hnzfQO4gaxucv8TqkTUb+7wXF/Gxn1pdn8tXF
- 0kll7bEodDa0vHBC+tl1hJKPXnftuo+v2ZkcRKo4hrwe9AAJVD62x/rgyMzi1pn6O1NJ
- ghQ3adbrG0NLF5wA5+j4dGOFqlLy+/9e2mnPbHfR4xR7tr36QujcB3tT3vyR3Do6k6er
- ltiQhTo/81rfLEV52f7Vg5/O4136Es2Okm3J87FZuJfW561LWey8DiEniPRdWCmfou1u
- IhIgwbr5VA7pS2oKW9qOC2eCK7CCHtD5kipJH5pwqRR4MFKDCPNQlFkEDR0xCPxfbsbQ
- XqrA==
+ :reply-to; bh=LXGqqMhOgM72PicPapDZFM/cucF/bdSLxHj+FrqVzi4=;
+ b=VLTs9ilVxB/sf/AxKF9Ntlr/ko0Fz1PV1ht90L7H/ytBbCsQj7Sw+mFgSYblJxCqgV
+ zHsUo90pF2nH02JJtv9f3FJ8Ugd5lcBgDcVl7vd/GQMbIuQGYbGAY/kXXlnWdeI1Yo4y
+ Q9b3XzJ0tGNqHGtPiCLtBixy3kjeTskNiXWjseaPOyyCIpGIl1HS+qkn03s6czpzC8p/
+ v94jw50VnYpFkvmuiWifgo+31wz8DRKRB/fuVfkWM78X83BRPhmbtWd3AYjEzLgODypi
+ VxxDs/naXsE5dYd2h+3REYtRcZqIFjiy0DKNyLr0IAzFCJmFHsVA7lUNF90BIQ3jAfFq
+ ombQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767631280; x=1768236080;
+ d=1e100.net; s=20230601; t=1767631284; x=1768236084;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=RHXPZe9dbcdOmSXhq8dWJDr6LjV41dKHJL0H+2mhSJA=;
- b=D5a0Y3q6Osm+gCIvYDMM8rCvNbi0KJ+PFXCA5J2+fHBbNMOqzwyzXgOl/h0tl8DjwT
- HfVove/pO8UT/TEIPFxgohOYPn71vS+ATOxrl6ACcrhyCLnRw7E8wRSKihkFBwYzX9P8
- aKlewAZ5WXXYDndjxnb1d0A87Lyu9B9cK20TrTgM/aF7LKA/OvEdqOG07JtFRdJoWn2W
- JCzKqGkw9INQy34PbMXhEGb771I3No2czzxekdH+fq/UamXSqLHneiv/oj3qsa2fFdpf
- IHQkz7sOiIUpOHgH762oCQrYq/S6Xl+leXDT2Jo/IAwnDypzcYkSk7d4KaKNtPo/Azf9
- UP3w==
+ bh=LXGqqMhOgM72PicPapDZFM/cucF/bdSLxHj+FrqVzi4=;
+ b=Nyxw1hBIusP6BPwZkSZ+Ehgv66Wg8BTkpieuY+f4To+WZH8HKzp3Y9WU/2B9MJYIOk
+ NvaAlzv27uik2Fzo544k4B8DTm0nGPfkScw6aJJtGn/ZuV6CiJ+xSNoFpcqrzOFcyUfN
+ MMuqKspUt0NP/BwYcL4eKyR1AiLISVPaLk+hkTiadeMBV5EtbclhR7Ye7rx8NNOVNkSi
+ BeL+A1MHPpv1nSWuFny93Jw0Yk2ajIonXwpkjfUKu/epOOKE+fiHaXZ6uLrM5PSdf5CT
+ UbYBpphDYOOn3aXqJK/RueqSKxfnkhBojjUexO/1I8z/VvTlMV/gmeHYlMYBou+vS7zA
+ GEvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVic7vzqL9DtFAkydgjA9VISHQRCundy2BtuPKMRkVUWW2shuCFHCfc58E/4NyN/2tZ7XZR8dU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyh1IqHZrFVWGf8VSpHhSOq4I90ISUg2/gD7qJ4a+RKgntulo7E
- 4Va3RV2t5h8hYwIqPNAcrVOex3/qoaiKNBGqFM6cOUiUFbuKMwsw115SRIFKyuTJkrI=
-X-Gm-Gg: AY/fxX7YKUXfkBAZkK5/Ha6pyNBEKDtaSvnkh/+rkatetT4mYa1cuFx1AqQqLanQZWV
- HnhS81S+IYyWvUpPjv28m41xNxQRlyRxl0yzMC4O1S0z7740XrUkTHAact3tL3iaE0sBus4b2Gk
- kuNZ5rP3Ed7FDW6pul5Cirbk0TwS5PkdQmbIa35oHmiq/rrVmjpB0usCerk1j+gjpGBnuoIQvzP
- Z6Lg7vXci7t7ys4f8KpTLUKGnHzFe6/fzf9+C1UGnJ4oyTLvlRr/BObnEi5JlwXJU/YWRMOSmo8
- toWPaILG2N0GKpnbMsJdcgL5eihHsgeBldqNFBeV8IKb46Zq2Et725wXpFOuzvTL+TidEgK4ErJ
- VRpMN7kJEfraDxK64/j8P1OUpKUTA9EY2xjfdTS5GgEJ0xVfLatmNkCOTdiBKUGOB3BedIxjqSW
- S1ttmMXlwy
-X-Google-Smtp-Source: AGHT+IG/kQXKadG74SCnM+YbYULEFgbw32dHlgga9iGPl2tn0Xii/MofUs+1/2i7h4n9PMzOcWL5Jg==
-X-Received: by 2002:a05:600c:3506:b0:477:63a4:88fe with SMTP id
- 5b1f17b1804b1-47d195499e5mr549527015e9.2.1767631279956; 
- Mon, 05 Jan 2026 08:41:19 -0800 (PST)
+ AJvYcCUt9ApBs+kJV1VuNpgTjV768olWDuIPruX3yqpYBB2FSfZlffPo/oU5kCiACIX+H+syElNi/Uo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkCHNRVFDvboRgL03M5/LWAam1tawIiZD5ADgRLBMfG49aUsiv
+ s65CdxCEFIYtsOtJ0w5gnde6/QnxF9HQ7rMOjpzvhFeGDNgwg1CSKDsS8XMShIysawE=
+X-Gm-Gg: AY/fxX7gFpJkiRfuzwJg/XkEEUdMY9feW7L2O3iJoJPF1EGFPZtJSiMSi1c6OOBxok7
+ F/tPSsq4Gh1S0vK91zIWobI8hYj4dxEpWVJVeHeCv908N9TpzreLWLcMwQkUPg8/MSOTKE3pEZ9
+ j6UG+7s2dEvPrp4RTJ5iKOZ1HBB1ApWKtnfCizcLy9PxMdzyxcbl4EuKLOJ815moX+WP/ZqEmhS
+ oG6A4+eQWKOt6MfSzBVEnOQS/EZnQtTo4i9zKSL4W+50o45++l27nUIRedkl9ThWrnjEvT1fpOE
+ Wz6B05ZE4/ctjgn83Dazw0ip+pbtYCSKiF8xwk1XIBFkauxNNxUPn6ZopQFiRuGkT8skv/kZ2cq
+ kP2mnrEgx+c2cpPdh4ytN//PgwjNV+rSDlT1GM/9ydWsOPSGBQPbTyVYBwZV0FrZS+scU1f/b3Y
+ I4MckqYgV1
+X-Google-Smtp-Source: AGHT+IEaR3prmk7z0MWU+5o/1hZr9yYR9Lbc7c4MGc7QyH4VxnSPxog+WOPfsJshSvHaEVdAwMK/Gw==
+X-Received: by 2002:a05:600c:1f8b:b0:45d:d97c:236c with SMTP id
+ 5b1f17b1804b1-47d4846e310mr464544275e9.21.1767631284190; 
+ Mon, 05 Jan 2026 08:41:24 -0800 (PST)
 Received: from localhost ([2001:4091:a246:82fd:4350:c3d9:84a3:70dd])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d73066fdbsm111088445e9.15.2026.01.05.08.41.19
+ 5b1f17b1804b1-47d6d45bb57sm179261215e9.14.2026.01.05.08.41.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jan 2026 08:41:19 -0800 (PST)
+ Mon, 05 Jan 2026 08:41:23 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 05 Jan 2026 17:38:49 +0100
-Subject: [PATCH v9 04/13] ram: k3-ddrss: Add support for DDR in
- self-refresh
+Date: Mon, 05 Jan 2026 17:38:52 +0100
+Subject: [PATCH v9 07/13] arm: mach-k3: am62xx-lpm-common: Helper for LPM
+ meta data address from DT
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260105-topic-am62-ioddr-v2025-04-rc1-v9-4-7e33f2c77dbf@baylibre.com>
+Message-Id: <20260105-topic-am62-ioddr-v2025-04-rc1-v9-7-7e33f2c77dbf@baylibre.com>
 References: <20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com>
 In-Reply-To: <20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,12 +108,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11775; i=msp@baylibre.com;
- h=from:subject:message-id; bh=d1zdUs9OSougRzOX5s5C+tdgdJfeL5FyL+hT2FBVj64=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhszol2UcfbvuP5safWbCP5dL1234tP5Pi7W8uGtGtqZh/
- r5a0QDRjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZhI+TSGf1aXhZ/3KJRlTek3
- Z4u9mfo8aEFvH58Ed29cXqXa+RUcWQz/NIO/HNm7Jkq79iX/h9O67Su5zANnKPrGCa+s/vGd0c6
- BBwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3214; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=duT2j41enchv6Pq/f138ksXQNbnczAJlrcW1tiJJiIk=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhszol61sO+abP8vhUT+ve/djXGGNVYhQrU/SqsIpHZkPG
+ pjUHs3pKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIn8f8fIsEJYlk/I8d7y2XtW
+ Xl9Yd13pka7ZhB9uc7b2fFdaH3z6XB3D/4LNZflv5Bp2TDnr0DLJJuJf857sW6t8rdc8SHqt5a7
+ WzQEA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 05 Jan 2026 17:42:35 +0100
@@ -133,333 +133,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-powered off completely. During boot the normal initialization routine of
-DDR is slightly different to exit self-refresh and keep the DDR contents.
+Add a small helper that uses memory regions referenced by the R5
+devicetree node to calculate the LPM meta data address.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/ram/k3-ddrss/Makefile       |   1 +
- drivers/ram/k3-ddrss/k3-ddrss-lpm.c | 181 ++++++++++++++++++++++++++++++++++++
- drivers/ram/k3-ddrss/k3-ddrss-lpm.h |  20 ++++
- drivers/ram/k3-ddrss/k3-ddrss.c     |  26 +++++-
- 4 files changed, 227 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/am62xx-lpm-common.c | 45 ++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-k3/am62xx-lpm-common.h |  1 +
+ 2 files changed, 46 insertions(+)
 
-diff --git a/drivers/ram/k3-ddrss/Makefile b/drivers/ram/k3-ddrss/Makefile
-index 823d1887178174021778296e6626cadfd11170de..8a2ece1c27eeae51593467259337483a852f5f85 100644
---- a/drivers/ram/k3-ddrss/Makefile
-+++ b/drivers/ram/k3-ddrss/Makefile
-@@ -4,6 +4,7 @@
- #
- 
- obj-$(CONFIG_K3_DDRSS) += k3-ddrss.o
-+obj-$(CONFIG_K3_DDRSS) += k3-ddrss-lpm.o
- obj-$(CONFIG_K3_DDRSS) += lpddr4_obj_if.o
- obj-$(CONFIG_K3_DDRSS) += lpddr4.o
- ccflags-$(CONFIG_K3_DDRSS) += -Idrivers/ram/k3-ddrss/
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss-lpm.c b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..20181d0a876dbb723920efb78ed980948eec117f
---- /dev/null
-+++ b/drivers/ram/k3-ddrss/k3-ddrss-lpm.c
-@@ -0,0 +1,181 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * K3 DDRSS LPM specific functions
-+ *
-+ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2025 BayLibre, SAS
-+ */
-+
-+#include <asm/io.h>
-+#include <linux/compiler_types.h>
-+#include <linux/types.h>
-+#include <time.h>
-+#include <vsprintf.h>
-+#include <wait_bit.h>
-+
-+#include "k3-ddrss-lpm.h"
-+
-+#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL				0x430080d0
-+#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD		BIT(31)
-+#define AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK	GENMASK(3, 0)
-+
-+#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1				0x4301830c
-+#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE		BIT(0)
-+
-+#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT			0x43018318
-+#define AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
-+
-+#define K3_DDRSS_CFG_DENALI_CTL_20				0x0050
-+#define K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE		BIT(24)
-+#define K3_DDRSS_CFG_DENALI_CTL_21				0x0054
-+#define K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE		BIT(8)
-+#define K3_DDRSS_CFG_DENALI_CTL_106				0x01a8
-+#define K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT		BIT(16)
-+#define K3_DDRSS_CFG_DENALI_CTL_160				0x0280
-+#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK			GENMASK(14, 8)
-+#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY		BIT(9)
-+#define K3_DDRSS_CFG_DENALI_CTL_169				0x02a4
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK	GENMASK(27, 24)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK	GENMASK(19, 16)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK		GENMASK(14, 8)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT		8
-+#define K3_DDRSS_CFG_DENALI_CTL_345				0x0564
-+#define K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT	16
-+#define K3_DDRSS_CFG_DENALI_CTL_353				0x0584
-+#define K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT	16
-+#define K3_DDRSS_CFG_DENALI_PI_6				0x2018
-+#define K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R	BIT(8)
-+#define K3_DDRSS_CFG_DENALI_PI_146				0x2248
-+#define K3_DDRSS_CFG_DENALI_PI_150				0x2258
-+#define K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN		BIT(8)
-+#define K3_DDRSS_CFG_DENALI_PHY_1820				0x5C70
-+#define K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT	16
-+
-+#define AM62XX_WKUP_CTRL_DDRSS_RETENTION_TIMEOUT_MS	5000
-+#define K3_DDRSS_LPM_TIMEOUT_MS				5000
-+
-+static void k3_ddrss_reg_update_bits(void __iomem *addr, u32 offset, u32 mask, u32 set)
-+{
-+	u32 val = readl(addr + offset);
-+
-+	val &= ~mask;
-+	val |= set;
-+	writel(val, addr + offset);
-+}
-+
-+void k3_ddrss_self_refresh_exit(void __iomem *ddrss_ctl_cfg)
-+{
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_169,
-+				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
-+				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
-+				 0x0);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PHY_1820,
-+				 0,
-+				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_106,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
-+	writel(0, ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PI_150,
-+				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
-+				 0x0);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PI_6,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_21,
-+				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
-+				 0);
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_20,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
-+}
-+
-+void k3_ddrss_lpm_resume(void __iomem *ddrss_ctl_cfg)
-+{
-+	int ret;
-+	unsigned long timeout_start;
-+
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_160,
-+				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
-+				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
-+	ret = wait_for_bit_32(ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345,
-+			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
-+			      true, 5000, false);
-+	if (ret)
-+		panic("Failed waiting for low power command %d\n", ret);
-+
-+	k3_ddrss_reg_update_bits(ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_353,
-+				 0,
-+				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
-+
-+	timeout_start = get_timer(0);
-+	while (1) {
-+		if (get_timer(timeout_start) > K3_DDRSS_LPM_TIMEOUT_MS)
-+			panic("Failed waiting for low power state\n");
-+
-+		if ((readl(ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
-+		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) ==
-+		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
-+			break;
-+	}
-+}
-+
-+void am62xx_ddrss_deassert_retention(void)
-+{
-+	int ret;
-+
-+	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
-+				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
-+				 0);
-+	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
-+
-+	ret = wait_for_bit_32((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+			      AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+			      true, AM62XX_WKUP_CTRL_DDRSS_RETENTION_TIMEOUT_MS, false);
-+	if (ret)
-+		panic("Failed waiting for latching of retention %d\n", ret);
-+
-+	k3_ddrss_reg_update_bits((void *)AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 AM62XX_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+				 0);
-+}
-+
-+static bool am62xx_wkup_conf_canuart_wakeup_active(void)
-+{
-+	u32 active;
-+
-+	active = readl((void *)AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
-+
-+	return !!(active & AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
-+}
-+
-+static bool am62xx_wkup_conf_canuart_magic_word_set(void)
-+{
-+	u32 magic_word;
-+
-+	magic_word = readl((void *)AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT);
-+
-+	return magic_word == AM62XX_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
-+}
-+
-+bool am62xx_wkup_conf_boot_is_resume(void)
-+{
-+	return IS_ENABLED(CONFIG_K3_IODDR) &&
-+		am62xx_wkup_conf_canuart_wakeup_active() &&
-+		am62xx_wkup_conf_canuart_magic_word_set();
-+}
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss-lpm.h b/drivers/ram/k3-ddrss/k3-ddrss-lpm.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..742d224327e45b926508cf6b1fb14f4f7323cd76
---- /dev/null
-+++ b/drivers/ram/k3-ddrss/k3-ddrss-lpm.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * K3 DDRSS LPM specific functions
-+ *
-+ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2025 BayLibre, SAS
-+ */
-+
-+#ifndef _K3_DDRSS_LPM_H_
-+#define _K3_DDRSS_LPM_H_
-+
-+#include <linux/compiler_types.h>
-+#include <linux/types.h>
-+
-+void k3_ddrss_self_refresh_exit(void __iomem *ddrss_ctl_cfg);
-+void k3_ddrss_lpm_resume(void __iomem *ddrss_ctl_cfg);
-+void am62xx_ddrss_deassert_retention(void);
-+bool am62xx_wkup_conf_boot_is_resume(void);
-+
-+#endif  /* _K3_DDRSS_LPM_H_ */
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 5144470b931384534e78fbfcea5e66b7083c9f07..27823e91d5efbd7e6629f60921aebc6c834f6989 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -20,6 +20,7 @@
+diff --git a/arch/arm/mach-k3/am62xx-lpm-common.c b/arch/arm/mach-k3/am62xx-lpm-common.c
+index fa068c60ce9ccf9cec89aeae1d224b07091a3298..6870395aec838949b5c25a32262a6c30e6c88d2e 100644
+--- a/arch/arm/mach-k3/am62xx-lpm-common.c
++++ b/arch/arm/mach-k3/am62xx-lpm-common.c
+@@ -9,6 +9,8 @@
+ #include <config.h>
+ #include <asm/arch/hardware.h>
+ #include <asm/io.h>
++#include <dm/of_access.h>
++#include <dm/ofnode.h>
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <vsprintf.h>
  #include <wait_bit.h>
- #include <power/regulator.h>
+@@ -48,6 +50,8 @@
+ #define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x18318
+ #define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
  
-+#include "k3-ddrss-lpm.h"
- #include "lpddr4_obj_if.h"
- #include "lpddr4_if.h"
- #include "lpddr4_structs_if.h"
-@@ -119,6 +120,8 @@ enum intrlv_size {
++#define K3_R5_MEMREGION_LPM_METADATA_OFFSET	0x108000
++
+ #define CLKSTOP_TRANSITION_TIMEOUT_MS	10
  
- struct k3_ddrss_data {
- 	u32 flags;
-+	bool (*is_lpm_resume)(void);
-+	void (*ddrss_deassert_retention)(void);
- };
+ static int wkup_ctrl_remove_can_io_isolation(void)
+@@ -126,6 +130,43 @@ int __maybe_unused wkup_ctrl_remove_can_io_isolation_if_set(void)
+ }
  
- enum ecc_enable {
-@@ -866,6 +869,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
- 
- static int k3_ddrss_probe(struct udevice *dev)
+ #if IS_ENABLED(CONFIG_K3_IODDR)
++int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
++{
++	struct ofnode_phandle_args memregion_phandle;
++	ofnode memregion;
++	ofnode wkup_bus;
++	int ret;
++
++	wkup_bus = ofnode_path("/bus@f0000/bus@b00000");
++	if (!ofnode_valid(wkup_bus)) {
++		printf("Failed to find wkup bus\n");
++		return -EINVAL;
++	}
++
++	memregion = ofnode_by_compatible(wkup_bus, "ti,am62-r5f");
++	if (!ofnode_valid(memregion)) {
++		printf("Failed to find r5f devicetree node ti,am62-r5f\n");
++		return -EINVAL;
++	}
++
++	ret = ofnode_parse_phandle_with_args(memregion, "memory-region", NULL,
++					     0, 1, &memregion_phandle);
++	if (ret) {
++		printf("Failed to parse phandle for second memory region\n");
++		return ret;
++	}
++
++	ret = ofnode_read_u64_index(memregion_phandle.node, "reg", 0, meta_data_addr);
++	if (ret) {
++		printf("Failed to read memory region offset\n");
++		return ret;
++	}
++
++	*meta_data_addr += K3_R5_MEMREGION_LPM_METADATA_OFFSET;
++
++	return 0;
++}
++
+ static int lpm_restore_context(u64 ctx_addr)
  {
-+	struct k3_ddrss_data *ddrss_data = (struct k3_ddrss_data *)dev_get_driver_data(dev);
- 	u64 end, bank0, bank1, bank0_size;
- 	int ret;
- 	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
-@@ -873,6 +877,7 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	__maybe_unused u32 inst;
- 	__maybe_unused struct k3_ddrss_ecc_region *range = ddrss->ecc_ranges;
- 	__maybe_unused struct k3_msmc *msmc_parent = NULL;
-+	bool is_lpm_resume;
+ 	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
+@@ -167,6 +208,10 @@ void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
+ 	image_entry();
+ }
+ #else
++int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
++{
++	return -EINVAL;
++}
  
- 	debug("%s(dev=%p)\n", __func__, dev);
+ void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
+ {
+diff --git a/arch/arm/mach-k3/am62xx-lpm-common.h b/arch/arm/mach-k3/am62xx-lpm-common.h
+index d5793759da4a05d355f5d88fbd8e103ebc46f9cc..741e3ccbcbd082da9d11c61624df8a4f456fd724 100644
+--- a/arch/arm/mach-k3/am62xx-lpm-common.h
++++ b/arch/arm/mach-k3/am62xx-lpm-common.h
+@@ -13,6 +13,7 @@
  
-@@ -880,6 +885,10 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
+ bool wkup_ctrl_is_lpm_exit(void);
+ int wkup_ctrl_remove_can_io_isolation_if_set(void);
++int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr);
+ void lpm_resume_from_ddr(u64 meta_data_addr);
  
-+	is_lpm_resume = ddrss_data->is_lpm_resume && ddrss_data->is_lpm_resume();
-+	if (is_lpm_resume)
-+		dev_info(dev, "Detected IO+DDR resume\n");
-+
- 	ddrss->dev = dev;
- 	ret = k3_ddrss_power_on(ddrss);
- 	if (ret)
-@@ -895,12 +904,21 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	k3_lpddr4_init(ddrss);
- 	k3_lpddr4_hardware_reg_init(ddrss);
- 
-+	if (is_lpm_resume)
-+		k3_ddrss_self_refresh_exit(ddrss->ddrss_ctl_cfg);
-+
- 	ret = k3_ddrss_init_freq(ddrss);
- 	if (ret)
- 		return ret;
- 
-+	if (is_lpm_resume && ddrss_data->ddrss_deassert_retention)
-+		ddrss_data->ddrss_deassert_retention();
-+
- 	k3_lpddr4_start(ddrss);
- 
-+	if (is_lpm_resume)
-+		k3_ddrss_lpm_resume(ddrss->ddrss_ctl_cfg);
-+
- 	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
- 		if (!ddrss->ddrss_ss_cfg) {
- 			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
-@@ -1020,12 +1038,18 @@ static const struct k3_ddrss_data k3_data = {
- 	.flags = SINGLE_DDR_SUBSYSTEM,
- };
- 
-+static const struct k3_ddrss_data am62xx_data = {
-+	.flags = SINGLE_DDR_SUBSYSTEM,
-+	.is_lpm_resume = am62xx_wkup_conf_boot_is_resume,
-+	.ddrss_deassert_retention = am62xx_ddrss_deassert_retention,
-+};
-+
- static const struct k3_ddrss_data j721s2_data = {
- 	.flags = MULTI_DDR_SUBSYSTEM,
- };
- 
- static const struct udevice_id k3_ddrss_ids[] = {
--	{.compatible = "ti,am62a-ddrss", .data = (ulong)&k3_data, },
-+	{.compatible = "ti,am62a-ddrss", .data = (ulong)&am62xx_data, },
- 	{.compatible = "ti,am64-ddrss", .data = (ulong)&k3_data, },
- 	{.compatible = "ti,j721e-ddrss", .data = (ulong)&k3_data, },
- 	{.compatible = "ti,j721s2-ddrss", .data = (ulong)&j721s2_data, },
+ #endif  /* _AM62XX_LPM_COMMON_H_ */
 
 -- 
 2.51.0
