@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC5FCD0425
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A04CCD0425
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:31:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2E3B83E8E;
-	Tue,  6 Jan 2026 00:30:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B76F583E7F;
+	Tue,  6 Jan 2026 00:31:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="leeVXxx+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H5kmRZ5r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A39D83E21; Tue,  6 Jan 2026 00:30:52 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 5718383E7F; Tue,  6 Jan 2026 00:31:00 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 765AC839F1
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE52C83EC9
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b76b5afdf04so88261566b.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:45 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b7ce5d6627dso93490966b.2
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767655845; x=1768260645; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767655857; x=1768260657; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YOvWyXskgiWVRxzXCq36zFXU84BbX+hLYRSOPpNSTfM=;
- b=leeVXxx+GUGYb8Tb6meneAEKOQ1oj+MqubldbACMm9vmERtQkIj/g/0V/ZvL0Ey1O1
- a7c9ffWEZTV2tF28GWs1SHimudhD8OFXDptHUTp3Xx62KF0S6pQeGREc1h2q55GmK6Qv
- 5Mgf3FHxcJCENgnp+eWKyXz1VP/kJ/W3W7AWE=
+ bh=AHLjLbP0hJw3oqb/wag4KY7ilXTXOyIpbkwRPQRHpRc=;
+ b=H5kmRZ5rd5X0XnCZ1Ptgyrx56pXlsHrUba31Zb59vzRiqLF8Lb8Z1m2/L+QcC+IZr3
+ 8uzGtLBdA3mTbS758FhQhmpqenQC7YhlKgQ25RcyQudvXTsYuMn6Jwqx8koUqdsgkLPZ
+ 0wgI2UWlKJ0EwvWRevSsrH6caGhB+OTJ7tnVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767655845; x=1768260645;
+ d=1e100.net; s=20230601; t=1767655857; x=1768260657;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YOvWyXskgiWVRxzXCq36zFXU84BbX+hLYRSOPpNSTfM=;
- b=XAeaCNoFBXlRbCeRBfr36TO+xmSpqgml9jzR/rD35EcQ2yKEOG7zgxlEuTuJGisbAP
- OlRnx5hXS9cvApSDycNAeMzL51C11ge0MSI1UAmXFjAOBS1lkccUJTSD+6krNZBQVOyx
- 6XxEGb5Sd4qE4PhwNxakJwi73Jno8eLWwt1uEdxFSIkPPvQ9f84HvCwyxjDFqwoVbLMj
- bURUaVlNKN2qxg96Pka2KiNuE9e/4cMeR3NWiz0Reg6AHNvffSbAChcK5EMRxVNXRq31
- w6UZvZ9Ml5d+Ntz9InF373v+/k2Kvv/jGCzSgGxwb9WPL7G3c6K99X6x1bx6eOP/AhgM
- b93Q==
-X-Gm-Message-State: AOJu0YyIFflv1L2NZmEe8ppiROs9RlexwNJpjrV77cSgY84zNwN/qReJ
- V6WKk5bX1lOejBk639ZxEi2aS3ca5B8A11y39XmkMuNvrcYV4+D7I83zw9AACjTdmCHoo5li4Nr
- Ir9lypFSy/Bpy/5Fq3IdgzOX6z0e7PDSTycpWAPr7Byt38Ajw6BA=
-X-Gm-Gg: AY/fxX6Sb+TAoAGg6mRE8AEvOZtNKM/EkVU1xSHcAiEy1H4/P+dzkkJMwuWR0ySwcJ1
- 4s9bhaQMVMKfm4vgvFU19s99gAM7Ek5kEzjHTJ/lW6jBoF+pCGrdM6tiHL3DeDoHAKLsov6StzP
- 1tfvVwnkdLrCi4Ky9qwgG0YdAzjEwSXt3FtgqXYptLnm8RIREq+9QOK+F8dwaeXLJhqFal3Hqa/
- YB5w2Z1bg2zTagxmLkTPTdU2zD4XCzrpiumPSRzHrqzO2u9P6JRYKLtfHI7htzEJybCJQ==
-X-Google-Smtp-Source: AGHT+IEahPXvCdOrfVSbi2hXhdAQBEqUFiDlHKsllFP+AwsO0urb0+GUiZcIvqu/HmpH1/7bo3P+Sf9lm8KD6aWKD0s=
-X-Received: by 2002:a17:907:3e82:b0:b83:7b8c:7c5f with SMTP id
- a640c23a62f3a-b8426a425aemr116737166b.1.1767655844575; Mon, 05 Jan 2026
- 15:30:44 -0800 (PST)
+ bh=AHLjLbP0hJw3oqb/wag4KY7ilXTXOyIpbkwRPQRHpRc=;
+ b=YTRgIsZ5LAX6syfJZ64mEZ9Zwi7nqj9e8dEtAl1znJjOmQMGSQBxSlBH+vxoyOs1PU
+ MzYJq9GadH8uGJssThIfWUh3ufNkh4xxVuqK/IgygMAMi4GAv0JNddrsIty3XQmLJdiq
+ DoRvpvjEuN56DggaTfd4SL9nTgNa9+VjrOuiwtTs6RwyG0y43uzkHRsdsAq/b5nWPvgJ
+ JufOEPoKGWo9ifgxFXvcIdilok7RBJQ9m/fwS+RkRCRQzZC8xHVClE8EkG0Dk/3roSmA
+ bqKOAYDwdMupQeqSkHgLN9yAha2sMEcqUhu6BvXH9kcr4jEQoRO8mdXhJH3SIXQc9jAD
+ 60HA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX1luuAyMut0Pf5eISSNVX9uu0sBCGCJSo2wCWpOs4AK1ncHNgx0qCNu/qjjzEHu5YU4z3Hyxo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZ2oRue51EGYbqZYtGQ+HmSl8F47u1mYJQn0C9/HOpknxa6X6S
+ O7vHlo9lxsTbKgOaG4ImQXKeb7qktcDQEnURmCGkuSeJ+C5t4nRtLghH+FLbRl6OkxeJnYuc1Z0
+ rQNHvngdpfK45mBufHAmATo3Z4du+DZ5t/0vCdSV0
+X-Gm-Gg: AY/fxX4a03QqaNtMCNZ/x2LwJaJ4uXwyVfemFa7aCewjW12JzxCsP1zsu5Urm9o9rH+
+ 1gymwCSbJumYyt6CB4cvf+ZRmHogV9SVzzLTHndYsOgvO8LNGQE2rDiZwO8tBDqr8LoWdlmjp5d
+ zh9utWeobP7bHelKfolTe1yRer9Yr02CjsdscXsLTUrdyPszLdg1rFcpqTSBK/6zAPRwaUHPOn1
+ FSqJ50xi8zUw4Ga8vCTzdmHneKdEIq6eUdGJxpCtcTMSb2Wl7IJ6u9I9pZo3mLaVlR8cA==
+X-Google-Smtp-Source: AGHT+IF24LXl6eMGrESCPuv4DG45xnSxSCgFUqEtIs+fQJxVSlafGohV7bGcdrPtiT/50ZIZjXvPKC74EEncxfxAKjg=
+X-Received: by 2002:a17:907:97c7:b0:b75:7b39:847a with SMTP id
+ a640c23a62f3a-b8426c1ebe4mr115660166b.60.1767655857257; Mon, 05 Jan 2026
+ 15:30:57 -0800 (PST)
 MIME-Version: 1.0
-References: <OS7PR01MB138347050E7E700D57ECA698EBCBEA@OS7PR01MB13834.jpnprd01.prod.outlook.com>
-In-Reply-To: <OS7PR01MB138347050E7E700D57ECA698EBCBEA@OS7PR01MB13834.jpnprd01.prod.outlook.com>
+References: <20260105165221.1816070-1-visitorckw@gmail.com>
+ <20260105165221.1816070-4-visitorckw@gmail.com>
+In-Reply-To: <20260105165221.1816070-4-visitorckw@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 5 Jan 2026 16:30:25 -0700
-X-Gm-Features: AQt7F2omGiA25ghu98km4gyd8Ci-iLQAC0w8DssNACyI4PKEWyYB2fcOwbRw0mo
-Message-ID: <CAFLszThO9+aN+bAx39a4eQtfm=3CMq0=YjDYJZ3Etuk3NL97+Q@mail.gmail.com>
-Subject: Re: [PATCH v2] common: cli_hush: terminate all commands when Ctrl-C
- is pressed
-To: Shiji Yang <yangshiji66@outlook.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Anton Moryakov <ant.v.moryakov@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>
+Date: Mon, 5 Jan 2026 16:30:26 -0700
+X-Gm-Features: AQt7F2q6OdoxxiwTPPLCXF9ld014tbwUtMz7t0r1hnL7XGqTIh52WVHATFQXkXo
+Message-ID: <CAFLszTiMZLXoXEk=JL3siZURVD2YdnmQ7HXy=Viw8uUFbrL6qg@mail.gmail.com>
+Subject: Re: [PATCH v5 3/7] rtc: goldfish: Support platform data for non-DT
+ probing
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
+ me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com, 
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,91 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shiji,
+Hi Kuan-Wei,
 
-On Sun, 28 Dec 2025 at 04:04, Shiji Yang <yangshiji66@outlook.com> wrote:
+On Mon, 5 Jan 2026 at 11:20, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 >
-> Check Ctrl-C status before executing each command in the pipeline so
-> that the Ctrl-C can skip all subsequent commands. in the meantime, we
-> need to clear the ctrlc status at the end of a pipeline. This should
-> be the default behavior of most shell parsers.
+> Currently, the Goldfish RTC driver exclusively relies on device tree
+> to retrieve the base address, failing immediately if dev_read_addr()
+> returns FDT_ADDR_T_NONE. This restriction prevents the driver from
+> being used on platforms that instantiate devices via U_BOOT_DRVINFO()
+> instead of device tree, such as the QEMU m68k virt machine.
 >
-> Before the change:
-> ```
-> => echo start; while true; do echo loop; sleep 1; done; echo int; if true; then echo if; fi; echo stop
-> start
-> loop
-> loop    <-- Input Ctrl-C
-> int
-> if
-> stop
-> =>
-> ```
-> After the change:
-> ```
-> => echo start; while true; do echo loop; sleep 1; done; echo int; if true; then echo if; fi; echo stop
-> start
-> loop
-> loop    <-- Input Ctrl-C
-> ^C
-> =>
-> ```
+> Add support for platform data to address this limitation. Update the
+> probe function to fall back to retrieving the base address from
+> struct goldfish_rtc_plat if the device tree address is unavailable.
+> Introduce a new header file include/goldfish_rtc.h to define the
+> platform data structure.
 >
-> Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> v1 --> v2:
->  - use puts() instead of printf()
->  - only clear Ctrl-C status when one pipe reaches the end
+> Changes in v5:
+> - Rebase on u-boot/next branch.
 >
->  common/cli_hush.c | 20 ++++++++++++--------
->  1 file changed, 12 insertions(+), 8 deletions(-)
->
-> diff --git a/common/cli_hush.c b/common/cli_hush.c
-> index 7bd6943d3ed..3f6adc01934 100644
-> --- a/common/cli_hush.c
-> +++ b/common/cli_hush.c
-> @@ -1792,16 +1792,15 @@ static int run_list_real(struct pipe *pi)
->                 }
->         }
->         for (; pi; pi = (flag_restore != 0) ? rpipe : pi->next) {
-> -               if (pi->r_mode == RES_WHILE || pi->r_mode == RES_UNTIL ||
-> -                       pi->r_mode == RES_FOR) {
->  #ifdef __U_BOOT__
-> -                               /* check Ctrl-C */
-> -                               ctrlc();
-> -                               if ((had_ctrlc())) {
-> -                                       return 1;
-> -                               }
-> +               /* check Ctrl-C */
-> +               ctrlc();
-> +               if (had_ctrlc())
-> +                       return 1;
->  #endif
-> -                               flag_restore = 0;
-> +               if (pi->r_mode == RES_WHILE || pi->r_mode == RES_UNTIL ||
-> +                   pi->r_mode == RES_FOR) {
-> +                       flag_restore = 0;
->                                 if (!rpipe) {
->                                         flag_rep = 0;
->                                         rpipe = pi;
-> @@ -3207,6 +3206,11 @@ static int parse_stream_outer(struct in_str *inp, int flag)
->                         run_list(ctx.list_head);
->  #else
->                         code = run_list(ctx.list_head);
-> +                       /* clear Ctrl-C status when one pipe reaches the end */
-> +                       if (had_ctrlc() && !(flag & FLAG_REPARSING)) {
-> +                               puts("^C\n");
-> +                               clear_ctrlc();
-> +                       }
->                         if (code == -2) {       /* exit */
->                                 b_free(&temp);
->                                 code = 0;
-> --
-> 2.51.0
+>  drivers/rtc/goldfish_rtc.c | 13 ++++++++++---
+>  include/goldfish_rtc.h     | 15 +++++++++++++++
+>  2 files changed, 25 insertions(+), 3 deletions(-)
+>  create mode 100644 include/goldfish_rtc.h
 >
 
-I'm not an expert on this but it seems reasonable. Is there a way we
-can test this behaviour?
+You can package your own devicetree in the U-Boot source, to handle
+what you need.
+
+> diff --git a/drivers/rtc/goldfish_rtc.c b/drivers/rtc/goldfish_rtc.c
+> index e63a2766c76..f6316896595 100644
+> --- a/drivers/rtc/goldfish_rtc.c
+> +++ b/drivers/rtc/goldfish_rtc.c
+> @@ -9,6 +9,7 @@
+>
+>  #include <div64.h>
+>  #include <dm.h>
+> +#include <goldfish_rtc.h>
+>  #include <mapmem.h>
+>  #include <rtc.h>
+>  #include <linux/io.h>
+> @@ -77,12 +78,18 @@ static int goldfish_rtc_set(struct udevice *dev, const struct rtc_time *time)
+>  static int goldfish_rtc_probe(struct udevice *dev)
+>  {
+>         struct goldfish_rtc *priv = dev_get_priv(dev);
+> +       struct goldfish_rtc_plat *plat;
+>         fdt_addr_t addr;
+>
+>         addr = dev_read_addr(dev);
+> -       if (addr == FDT_ADDR_T_NONE)
+> -               return -EINVAL;
+> -       priv->base = map_sysmem(addr, 0x20);
+> +       if (addr != FDT_ADDR_T_NONE) {
+> +               priv->base = map_sysmem(addr, 0x20);
+> +       } else {
+> +               plat = dev_get_plat(dev);
+> +               if (!plat)
+> +                       return -EINVAL;
+> +               priv->base = plat->base;
+> +       }
+>
+>         return 0;
+>  }
+> diff --git a/include/goldfish_rtc.h b/include/goldfish_rtc.h
+> new file mode 100644
+> index 00000000000..bb113a0bd79
+> --- /dev/null
+> +++ b/include/goldfish_rtc.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + */
+> +
+> +#ifndef _GOLDFISH_RTC_H_
+> +#define _GOLDFISH_RTC_H_
+> +
+> +#include <linux/types.h>
+> +
+> +struct goldfish_rtc_plat {
+> +       void __iomem *base;
+> +};
+> +
+> +#endif /* _GOLDFISH_RTC_H_ */
+> --
+> 2.52.0.358.g0dd7633a29-goog
+>
 
 Regards,
 Simon
