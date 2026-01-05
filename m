@@ -4,121 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7BE7C79FB7
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 18:20:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F12EC79FB7
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 18:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3049783E7A;
-	Mon,  5 Jan 2026 19:19:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5526E83D8A;
+	Mon,  5 Jan 2026 19:19:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eQVuD8+r";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lgog5AQH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46A5E83A26; Mon,  5 Jan 2026 19:16:02 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 7665183DEE; Mon,  5 Jan 2026 17:52:40 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 064558398C
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 19:16:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B98F183D71
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:52:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4f4c89f8cc6so1782361cf.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 10:15:59 -0800 (PST)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2a0a33d0585so921685ad.1
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 08:52:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767636959; x=1768241759; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eZEIrKZ+XY5kVT38ye5jD00eR6kl00BHJjpMu9BB8mI=;
- b=eQVuD8+rCHAe1k4uQSul9mCLtznJF4SAXxg9pcLP3ekya/IIMazqTHv/5u7b3jmpuB
- oiYekz35ZOT12jTte0rhOWriBf/IAyNhV1fA2kZPWbaGbVa+tVMXNv5jWMHYPFlJeO68
- DtiqAwXwFRsF63QqOZTH7F4OHKUPMY8ZZ8AtE+aixMHbjvdLb9ZntvG2D0DRrHjjtk3i
- DoP4CFb+Fun56FGmTUJK4SBZnYC97IMCHJG+zrNeDnjaQUovB6+2a7hryZY0V90lmr5F
- KDqgK7+6IDO3+gw3oLeH7pjJ8HpyHx3vMkcymugsgsLoajt5xvu7kyI6uqfVuKrpEJoj
- pCbg==
+ d=gmail.com; s=20230601; t=1767631956; x=1768236756; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O6tUzJTT+bA1naNelFfJLm7pgmXpUcWb7Mgg/zoOWK4=;
+ b=lgog5AQH/wVn5aVCB18vHlWCica0ByphdX4cfiGtpiY+wdH9KnOXFHRFiDphYOF4ij
+ y4ScqeDvyFfREyXMmJinjiewmeJscFFQpEDtoBlTnL9p8djdhsE+fkO6bRWhcbCmikao
+ /QGnIqyqwohjMFjpXaccjz1bcgv+r2CoplQxuIO2eG7xmxKRdCmxabnQnOmb/AsMMT/Y
+ QvxiSmddi5bJZkOXBVn546srXQ+uitSt2w2CjovBMWKCdkgkpRgrKvQHKt6Gf+ZRWqPp
+ siFIViGpxesJ261NGrIgolMjSmAlktQhyY3kCU2sX6+YBIpst9JrA5ycw0kGIVNRvAwR
+ IIiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767636959; x=1768241759;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=eZEIrKZ+XY5kVT38ye5jD00eR6kl00BHJjpMu9BB8mI=;
- b=pzg7xmystbYO812lHa4RvqXbQaQK45kWg0czY8zTw59Iy2FJ2Zmrhg3y30AdF604uI
- pVI1mNeAqW0QFmVqQ4kOrfS3ZKE+6T073C3dGm7YRvprq3LPnBihJ1Nk5+zpsAe/4rml
- pgoa+yxptM2QG2tWGJ0fP+1n48w/ssWyYpdGFzlmo3q+5wup1CIr7YvwjEGmUH6Q8g58
- JcJjISSY3gy90poKCy591hbfMbsjhKbljgjXfo+A9JR5HGfUzSegsDqcwvQ6zn9YN+Ml
- 1RX3jYtt5ZszO0oCGQB3zpPWQ5uLw82VY87of8RSUGdTITjic8FKGxCQcRfdKm9BouU6
- cHKQ==
-X-Gm-Message-State: AOJu0YxYAmAhp9GhkRPk13CVyXOcQ2ypPTfdOIpYPG9AiaNvFo07ONGH
- WFQieXSuIxCOb/DV18KwuqSJe8AeSkwmky3ioNaKUaDizR/teLPjVwxTTYjGJRcIbRikPNhFArC
- aJIojBWdPO4NYwcyS934EvB90o4+8424=
-X-Gm-Gg: AY/fxX5GuAGPXlhWKe9gAKzgkvp6q/FFvOcRxb5i9LZc5k3aBNNM+ddo+OJWVv3LdIs
- NS3wAmn+5qxK0GIn+sTOmQdZd0aTkviSyiZhaIWW6+LSwzQRltSMr6jPXDQSCSsXcsGDD/S6XrX
- AFifBD2IUbKjFp+pmPL9DRNCjq6uN+TVbqZY0vg1bQIVHe7rR6dNjO8MYzhSwORpUpWI8a5M+3h
- 3RoIGRF722qrlaNc6DocgNAJs290AWYCWj5U91dYGFqOfN2CaMuapKnEcC/pF2CI0445DSuYaUL
- onDLkXUKPWJCnNOnU1N8SU8LXrLOjFsexAXkVZ4=
-X-Google-Smtp-Source: AGHT+IGOF8eu4wgvVcyiR8KPIRjNOuG2+X3jFxXbrWNrk6wkg9C/Q45H+vxMWSMPGzENq+NfcgktLWcUhTjZfdp0BFs=
-X-Received: by 2002:a05:622a:2590:b0:4b0:6205:d22b with SMTP id
- d75a77b69052e-4ffa77a77damr5923191cf.52.1767636958432; Mon, 05 Jan 2026
- 10:15:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767631956; x=1768236756;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O6tUzJTT+bA1naNelFfJLm7pgmXpUcWb7Mgg/zoOWK4=;
+ b=RQZTd5HZZA64PxFux21FKxM2vVaZAcm0sSqH9pKf78ElZCx1s+tdIvZkdtIFy/vsO/
+ SA0/XdUznvvUFAlEDIIsrPnIVFZVMm68EbsT9+tXL2Xo4zho7xByY01rH1PdcMwLXLR2
+ CtH5B/nlGNIJfTg8OGFwJl0gpogXCzqGVJK06mcPbKMI8FEb2/zqC5/1cmKPpVBMRe6I
+ EDm5cPwFt0d+7atbejRKzqM/KqXGB+wcr1oRV/wGyu3iXWkLsSRVOl4Eyd8byz1xSAZw
+ ATz8CfspfesbEHjdUelLNzbrHMKp6NWlkUjNBfEZ78N8QXVXDg3x49MskwxzeQgCKmH6
+ D5aA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWBpuQbXUBHYEtgdasQ9nSB8AUXr97mayuFiNujwdqxOvy8scbdlpRuOjCvr25FjmJTV4dFv8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuXzS26si0rqgkPwhDYAZH7utj5B6nfbVZFYSG4juQ8kv8MAlh
+ MEKwZ1jJ3yZaPa+/y2cKhtln0ioRSY/ebgzlG3OmXC+za9jf6bLjuTZ/
+X-Gm-Gg: AY/fxX6BF1tGCmskCOxHRKJk3zq5NS2ydeKmVD2IPsBIxTv8PDGYXYWz+1gjLn8/3ju
+ Dy9AfptKGAZLg6dq96OXN/7ulVwyoebzHc3s39uk7UczzdYR/JYBT5ve6TC7csN9OA5drJRT+FV
+ ht7gN0gRj7Z2rM9e3SrOK5SQO4HYuSnx+aEJviq/9zxJS60qDiGPF8WdOEq2SGVH09LWjHlr/Ur
+ xYJnr2fyVljUNmOt0ZxALDcU7ZPt2bgaK4aAHm9J91xBkNbWYyNIxge7nzmMS1/jofnsFLv7AA4
+ PcCzEJrZFrjZ6ljge0MbukME8CtYqF6iLue5PjrnQUHCOUnZBlAcvw3C6YvciMJ5fd7bZXmMZrz
+ 8Mphu3N0nbNvXbyJAwNKafvkMt0f0A8WoKcPJDSXhzLfENXD2JXQ2+CRL+5LmB9X1UF6YzkuN3j
+ shVGE2DjDiZPo851FtdRPrRQY/MogrjuF7wN46voO2j6ADXuu6Iv6mnRcAbr/8Ru2S0YXs6Hif5
+ tKj9HSWaSjNe3Qk/w7VlF1gH7llyYhr
+X-Google-Smtp-Source: AGHT+IFJtbutFY4TSul+pLj5BK112S+/f37/iyd7B/ajGPZ601b94iTxjAbL+029oaN8OFKrztaF2g==
+X-Received: by 2002:a17:903:b8b:b0:2a2:acc7:f1ea with SMTP id
+ d9443c01a7336-2a3e2e3861amr2217405ad.59.1767631955982; 
+ Mon, 05 Jan 2026 08:52:35 -0800 (PST)
+Received: from visitorckw-work01.c.googlers.com.com
+ (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a3e2ba8748sm2707435ad.101.2026.01.05.08.52.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 08:52:35 -0800 (PST)
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: alison.wang@nxp.com,
+	angelo@kernel-space.org,
+	trini@konsulko.com
+Cc: me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com,
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de,
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH v5 0/7] m68k: Add support for QEMU virt machine
+Date: Mon,  5 Jan 2026 16:52:14 +0000
+Message-ID: <20260105165221.1816070-1-visitorckw@gmail.com>
+X-Mailer: git-send-email 2.52.0.358.g0dd7633a29-goog
 MIME-Version: 1.0
-References: <20260105-rk3576-ufs-v2-0-caba979a0d6b@gmail.com>
- <20260105-rk3576-ufs-v2-1-caba979a0d6b@gmail.com>
- <20260105151816.GM6124@bill-the-cat>
-In-Reply-To: <20260105151816.GM6124@bill-the-cat>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Mon, 5 Jan 2026 22:15:47 +0400
-X-Gm-Features: AQt7F2pfeVGURNUE183WBM9xg9TIMZDOl0V_3BvcgSQVD-TkO8abIcY8VR_dLYA
-Message-ID: <CABjd4YzxpEFA0qCgUT4T1Z3R4O0W7LqPNdFWn7=5NDHO8K7XKQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] spl: Make UFS available for SPL builds
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Heiko Stuebner <heiko@sntech.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Elaine Zhang <zhangqing@rock-chips.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sumit Garg <sumit.garg@kernel.org>, 
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut@mailbox.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Dhruva Gole <d-gole@ti.com>, Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Finley Xiao <finley.xiao@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 05 Jan 2026 19:19:09 +0100
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 05 Jan 2026 19:19:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,73 +104,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Neil,
+Add support for the QEMU 'virt' machine on the m68k architecture. The
+QEMU virt machine models a generic system utilizing Goldfish virtual
+peripherals and is capable of emulating various classic 68k CPUs.
 
-Your replies came pretty much simultaneously :)
+Currently, U-Boot's m68k architecture support focuses on ColdFire
+variants. Expand this to include the classic M680x0 architecture,
+implementing the necessary exception vectors, startup code, and a
+bootinfo parser compatible with the QEMU interface. A driver for the
+Goldfish TTY is also added to enable serial console output.
 
-On Mon, Jan 5, 2026 at 7:18=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Jan 05, 2026 at 07:05:36PM +0400, Alexey Charkov wrote:
->
-> > Add minimal infrastructure to build SPL images with support for UFS
-> > storage devices. This also pulls in SCSI support and charset functions,
-> > which are dependencies of the UFS code.
-> >
-> > With this, only a fixed offset is supported for loading the next image,
-> > which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-> > number of 4096-byte sectors into the UFS block device.
-> >
-> > Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> [snip]
-> > +config SPL_UFS_SUPPORT
-> > +     bool "Support loading from UFS"
-> > +     select SPL_LOAD_BLOCK
-> > +     help
-> > +       Enable support for UFS in SPL. This allows
-> > +       use of UFS devices such as hard drives and flash drivers for
-> > +       loading U-Boot.
-> > +
-> > +config SPL_UFS_BOUNCE_BUF
-> > +     bool "Use a bounce buffer for UFS loading"
-> > +     depends on SPL_UFS_SUPPORT
-> > +     default y if ARCH_ROCKCHIP
-> > +     help
-> > +       On some platforms the UFS host controller may be unable to load=
- all
-> > +       image segments directly to their required memory locations (e.g=
-. due
-> > +       to DMA constraints). This option enables an interim bounce buff=
-er in
-> > +       system RAM to let such platforms boot directly from UFS, at a c=
-ost of
-> > +       an additional memory move while loading the image.
->
-> So, the full U-Boot rockchip UFS driver does not use the generic
-> BOUNCE_BUFFER mechanism. Is this because of memory constraints in SPL?
-> Second, can we not just re-use the generic bounce buffer code
-> (common/bouncebuf.c) ? Thanks.
+The implementation has been verified on QEMU targeting the M68040 CPU,
+confirming successful hardware initialization and boot to the U-Boot
+command shell. Additionally, the CI configuration was verified locally
+using gitlab-ci-local "qemu_m68k_virt test.py", resulting in
+PASS qemu_m68k_virt test.py.
+---
+Changes in v5:
+- Rebase on u-boot/next branch.
+- Add 'imply CMD_DM' to TARGET_QEMU_M68K in Kconfig.
+- Add a new patch to update the M68K entry in MAINTAINERS and add myself
+  as a co-maintainer.
 
-On Mon, Jan 5, 2026 at 7:22=E2=80=AFPM Neil Armstrong <neil.armstrong@linar=
-o.org> wrote:
-> Can't this be replaced by the SCSI bounce buffer ?
+Changes in v4:
+- Support DT probing with platform data as a fallback. (serial & timer)
+- Fix sandbox build warnings by removing incorrect type casting.
+- Add comment explaining read latching behavior in the timer driver.
+- Sort headers alphabetically in the timer driver.
 
-Thanks for the pointers. Frankly, I've overlooked the existing generic
-functionality, being somewhat new to the codebase.
+Changes in v3:
+- Add Goldfish timer driver.
+- Update Goldfish RTC driver to support non-DT probing.
+- Enable Goldfish RTC and Timer support in board configuration.
+- Add safety loop limit to bootinfo parsing in dram_init.
+- Remove dummy timer functions from architecture code.
+- Remove unnecessary type casts in Goldfish TTY driver.
+- Remove TEST_PY_ID from CI job definitions.
+- Update documentation to include new RTC support.
 
-It seems that the current UFSHC driver only deals with broken 64-bit
-addressing when deciding to use a generic bounce buffer, while the
-constraint in this case is that part of the FIT image containing the
-ATF wants to load itself not to system RAM, but to a PMU SRAM region,
-which is inaccessible to the UFSHC's DMA engine either due to security
-firewall settings (as Jonas Karlman proposed in his comments to v1 of
-this series) or some other reason.
+Changes in v2:
+- Refactor Goldfish TTY driver to use priv data for the RX buffer and
+  ensure single-byte reads.
+- Rename arch/m68k/cpu/m68040 to arch/m68k/cpu/m680x0 to separate the
+  architecture family from the specific CPU model.
+- Introduce M680x0 Kconfig symbol and separate MAINTAINERS entries for
+  the architecture and the board.
+- Regenerate qemu-m68k_defconfig using make savedefconfig and add the
+  board to the documentation index.
+- Add a new patch to enable CI testing on GitLab and Azure Pipelines.
+- Update SPDX identifiers to GPL-2.0-or-later.
+- Sort headers alphabetically.
+- Fix tabs vs spaces.
 
-I guess I could add a per-variant override of the scsi_ops
-->buffer_aligned() callback (which in turn gets propagated to
-blk_ops), checking if the requested buffer is above/below the start of
-RAM on Rockchip RK3576 specifically? Just wondering whether that would
-be considered an abuse of the interface, given that it's not really
-anything to do with alignment as the callback name implies.
+v4: https://lore.kernel.org/u-boot/20260101175420.4118024-1-visitorckw@gmail.com/
+v3: https://lore.kernel.org/u-boot/20251230160112.3045527-1-visitorckw@gmail.com/
+v2: https://lore.kernel.org/u-boot/20251226175400.1154417-1-visitorckw@gmail.com/
+v1: https://lore.kernel.org/u-boot/20251218185252.957388-1-visitorckw@gmail.com/
 
-Best regards,
-Alexey
+Kuan-Wei Chiu (7):
+  serial: Add Goldfish TTY driver
+  timer: Add Goldfish timer driver
+  rtc: goldfish: Support platform data for non-DT probing
+  m68k: Add support for M68040 CPU
+  board: Add QEMU m68k virt board support
+  CI: Add test jobs for QEMU m68k virt machine
+  MAINTAINERS: Update m68k entry
+
+ .azure-pipelines.yml                  |   3 +
+ .gitlab-ci.yml                        |   6 ++
+ MAINTAINERS                           |  21 ++++-
+ arch/m68k/Kconfig                     |  25 ++++++
+ arch/m68k/Makefile                    |   1 +
+ arch/m68k/config.mk                   |  10 ++-
+ arch/m68k/cpu/m680x0/Makefile         |   6 ++
+ arch/m68k/cpu/m680x0/cpu.c            |  72 ++++++++++++++++
+ arch/m68k/cpu/m680x0/start.S          |  73 ++++++++++++++++
+ arch/m68k/cpu/m680x0/u-boot.lds       |  47 +++++++++++
+ arch/m68k/include/asm/bootinfo.h      |  31 +++++++
+ arch/m68k/lib/Makefile                |   9 +-
+ board/emulation/qemu-m68k/Kconfig     |  12 +++
+ board/emulation/qemu-m68k/MAINTAINERS |   8 ++
+ board/emulation/qemu-m68k/Makefile    |   5 ++
+ board/emulation/qemu-m68k/qemu-m68k.c | 115 ++++++++++++++++++++++++++
+ configs/qemu-m68k_defconfig           |  16 ++++
+ doc/board/emulation/index.rst         |   1 +
+ doc/board/emulation/qemu-m68k.rst     |  39 +++++++++
+ drivers/rtc/goldfish_rtc.c            |  13 ++-
+ drivers/serial/Kconfig                |   8 ++
+ drivers/serial/Makefile               |   1 +
+ drivers/serial/serial_goldfish.c      | 109 ++++++++++++++++++++++++
+ drivers/timer/Kconfig                 |   8 ++
+ drivers/timer/Makefile                |   1 +
+ drivers/timer/goldfish_timer.c        |  81 ++++++++++++++++++
+ include/configs/qemu-m68k.h           |  18 ++++
+ include/goldfish_rtc.h                |  15 ++++
+ include/goldfish_timer.h              |  13 +++
+ include/goldfish_tty.h                |  18 ++++
+ 30 files changed, 773 insertions(+), 12 deletions(-)
+ create mode 100644 arch/m68k/cpu/m680x0/Makefile
+ create mode 100644 arch/m68k/cpu/m680x0/cpu.c
+ create mode 100644 arch/m68k/cpu/m680x0/start.S
+ create mode 100644 arch/m68k/cpu/m680x0/u-boot.lds
+ create mode 100644 arch/m68k/include/asm/bootinfo.h
+ create mode 100644 board/emulation/qemu-m68k/Kconfig
+ create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+ create mode 100644 board/emulation/qemu-m68k/Makefile
+ create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+ create mode 100644 configs/qemu-m68k_defconfig
+ create mode 100644 doc/board/emulation/qemu-m68k.rst
+ create mode 100644 drivers/serial/serial_goldfish.c
+ create mode 100644 drivers/timer/goldfish_timer.c
+ create mode 100644 include/configs/qemu-m68k.h
+ create mode 100644 include/goldfish_rtc.h
+ create mode 100644 include/goldfish_timer.h
+ create mode 100644 include/goldfish_tty.h
+
+-- 
+2.52.0.358.g0dd7633a29-goog
+
