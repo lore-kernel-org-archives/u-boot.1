@@ -4,154 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF19CC79FA7
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 17:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE5BC79FB7
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 18:19:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3D7583D7A;
-	Mon,  5 Jan 2026 18:19:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C5701839DD;
+	Mon,  5 Jan 2026 19:19:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i8WKrKNy";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TZ6j9xRD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1C5F83A26; Mon,  5 Jan 2026 18:19:57 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9531D83935; Mon,  5 Jan 2026 17:49:52 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E7E583D8A
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 18:19:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E706583935
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 17:49:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WYn0nwa93b8A6+x0rcmKINMDBNSlmIAT0S5UbFAUmV+sEJXKp8fdAaA4Pd/7fWxPFpHVx8bici72yUaP7fWzcgUfOMJ7KHzFOna1g3e3/tepJLnA2lFdJWgOEuNGgvSJ+bIqfT97obrjLTdyvRVWiYFDEXBibCzdR1HmpT3N7kEhjmBSjNTiEHndkM26IpKebe9DUidRQ5pL75xDoj9WayRViI6UoQVsCYlQMHBbcZaHUBeiMtCWMyvgsu6cvowQTTqxHOVS4z5PTIzK/mHUlpeq+LrPqNROS5QpyAiMQNk33tMDWexIjTjEB6/+6svnKMeDPJU1p5PffjRzAoAXdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5Fk11wmhftDs5ZfoIUI3qwadRY2SklhO7ui2ztLH6sE=;
- b=r8q8+s6G9muOI6J54q4y5U1+kM58oMv1CUhywkcUmkNp42IOT9UrBMWIObuovGnvggkNI4gBUnj6jn821KvACirgZwTigWp4Yg4/4aCdiKex343PusWxkn6FT2vXSKixW2fIcWiMYHv0w61RjVgCD/V39KIc1ZVGp1M8/UU3/jUY5TZ0It7aSeWOmEYHyrv9UhzeZVcjh0/GmktRBHqq4GbLB8lPj16BM1QuNn9jgZAYRFLwhXLmI1JN9E+2/TpN907NoOgkKM8gGE18RjKfWJdayHAUKjRMBhrAjzgs/7Z7nW5+bV1ydN46vPnljWUHKRTkiGphhpT2ZOlU0tNTMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5Fk11wmhftDs5ZfoIUI3qwadRY2SklhO7ui2ztLH6sE=;
- b=i8WKrKNyYc9gg3JWf/VDaJkZbh0Jccx02Z6+n1aQRrQj4wLGe3a7YNLIfZnMvfg3Ufs6hr0YXu2jJw/losxfvQ8qNtHx9ZYA8E6Kg+6qblT838wJDGQLoGzlUcDwlkdijqCUPgr5dM0cIixaXBFXNm4v8xE4SzrH2fwgteiiu4s=
-Received: from CY5PR18CA0033.namprd18.prod.outlook.com (2603:10b6:930:13::16)
- by IA1PR10MB8211.namprd10.prod.outlook.com (2603:10b6:208:463::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 17:19:53 +0000
-Received: from CY4PEPF0000FCBF.namprd03.prod.outlook.com
- (2603:10b6:930:13:cafe::5c) by CY5PR18CA0033.outlook.office365.com
- (2603:10b6:930:13::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Mon, 5
- Jan 2026 17:19:52 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CY4PEPF0000FCBF.mail.protection.outlook.com (10.167.242.101) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.1 via Frontend Transport; Mon, 5 Jan 2026 17:19:52 +0000
-Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
- 2026 11:19:50 -0600
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 5 Jan
- 2026 11:19:49 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 5 Jan 2026 11:19:49 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 605HJnC61520463;
- Mon, 5 Jan 2026 11:19:49 -0600
-Message-ID: <f30315f1-484c-4350-b1f4-e3927c62b4dc@ti.com>
-Date: Mon, 5 Jan 2026 11:19:44 -0600
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4507605e19aso93322b6e.2
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 08:49:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767631788; x=1768236588;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=16A18qsDZDKL5CtG+j74h0JvN5k5CXtAZppVCScBrKA=;
+ b=TZ6j9xRDczX3W8krzgCQff08l2qb8RTkT2e/4J2EQtvkDklVB4uMMdtNO7dcCq+VIU
+ nlJnPglHMekcx9XKKodb8N7k+fssw+i/dq/zHnhbIj95EoxzX70GpmmZCaSNbSyAAyYP
+ doLWO1V+fIB7jP+/rIEJSSdHws1R08bTDxdv8NO/6MibFrZUP+PF5xV+l+fBQd4+S6DJ
+ O2GjsyqpwZE7vW7zK3tSlQ5c/hpnMUMVdkZS4AbfR26bPG1hDg7kUy5S+iILxo3xUElo
+ WLb0Lkq2wZYIhnTsyWX5yDQNJml5Ky4oPHtUGYAdWKMRGODZHgNYyGmn9rgh9p2otGb5
+ F2fQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767631788; x=1768236588;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=16A18qsDZDKL5CtG+j74h0JvN5k5CXtAZppVCScBrKA=;
+ b=UmU3RWJrszl+wXih0VBZIX+0NgJiOuzDqytInGapnUAFibPUnCbU1YTfVErg+CEiye
+ 2XqSgr+wjGVsPuh7sQGTeYwIm5+BjM76Dr/gB9EheL1nBgCBAKUg3ADptZRBK4fX87Br
+ aiQFVD/VF32nmj2TldS6jEPotbOoGshZJ9l+uXGm6dG/PRRwEFJ5dFeBNCVNdo7Jg9CR
+ bLjOipnsu5u6hEq9If4LIpEItBrKGzFJamK4CuJEg8lCTvQfeHoxZZvG0bfd2qznAZAc
+ Sc+GLmXhXtqEZfE7JvX3wlpa5V/6nKd62Ttq65HvGkCEx/fDA/RxLAWi0nHMGSv7KyE8
+ d7Jw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXIjcr1XmlSaCvjAg4ExmcYyx7T9bZF3qS+D3+sz4niTVXp+GGtZxt6ShAssvOpeucMgRoqWk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwI+y0G6+7V9sofde7MRKgq02AQNFxK6WZ1MDsbjJz+ewDZDZe2
+ tXnKnnfvJl8lj341XjIGZUHoNeiqQyIodssCh6LfkMSL9MEgNUvbLdnsKAsz//EV54o=
+X-Gm-Gg: AY/fxX4a+G2lFOBBJVWzRoITpC/WcwvEqNIaAi0FcVfge/2zxO4vIOoFYai7YnaP2XB
+ Zb/O4vidFXCGsid2mLTnQxuu1iJ2w6B55ITIbUP0wqdeQkkBi/vj69m/5Q3gRXepcN1+HAt3blF
+ CYONjplf61m5mqSpcJIDm7aZ5sOTJ+M9EOkN5i75PgjZrL3N4uTXABM8rHKYlujskk3e2PlClep
+ D7IAreahzkoCJHF5uQhGwf0zwe5NcIL1UXWq0MTdwaX5ICOG7T/vICLOTd+QDD2Me1MKdId1p4g
+ 2990Ia8b59zHJkhmXXCcOxXbojCx6YLLcYyQbW418+YWzVokkqDMUd8lQUxjThGQJjcy0/majH6
+ +S+iQk+SXcPUytOaBSp7Z9wSHuzXoyfpH6odv6UqBT2w6+GUR5oTu1N59lRilkFMbMDw6wQj6yW
+ 4RkvslVaRexwzN3w==
+X-Google-Smtp-Source: AGHT+IGVwTjZKZZqXufLsQV0EMx4U0BTeOj51YuOF1zCYzOw5QgJGV8+Lffh/MzdiUNXa12WHOkSUA==
+X-Received: by 2002:a05:6808:c1f1:b0:450:ac57:48a7 with SMTP id
+ 5614622812f47-45a5b14cb23mr162910b6e.59.1767631788650; 
+ Mon, 05 Jan 2026 08:49:48 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:df5e:737c:7b32:e5d])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa0078968sm67524fac.2.2026.01.05.08.49.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 08:49:48 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v3 0/3] a few test.py improvements
+Date: Mon, 05 Jan 2026 10:49:12 -0600
+Message-Id: <20260105-a-few-test-py-improvements-v3-0-fea38243ca5b@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/11] configs: j722s_evm_r5_hsmboot: Add new defconfig
- to show HSM boot
-To: Bryan Brattlof <bb@ti.com>, Beleswar Padhi <b-padhi@ti.com>
-CC: <trini@konsulko.com>, <anshuld@ti.com>, <hnagalla@ti.com>, <jm@ti.com>,
- <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20251231173621.1069988-1-b-padhi@ti.com>
- <20251231173621.1069988-12-b-padhi@ti.com>
- <20260105141105.ykq2uaelapfqb2m2@bryanbrattlof.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20260105141105.ykq2uaelapfqb2m2@bryanbrattlof.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBF:EE_|IA1PR10MB8211:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1def2b2c-f562-4bca-bbce-08de4c7ea364
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M0JLQmFpbWx5Q3FvSk5hUTRZUjRPTytuZGF0YzNCa3lLZFJ1WUg1K29lK1Iv?=
- =?utf-8?B?ZTNINFIzM1o0SnBXOVpjRklSRWpMeGdCRnFpakpHK0VXcERrd2p5T0Q4dG9K?=
- =?utf-8?B?bWdmSVZZc1dpMlFJcXpqV3JnRTloVS9IZFFIZm5zdjk4YndVa0dWZ2x3RWty?=
- =?utf-8?B?RU9rZ081K2ZSMmx6RWZtSzZPWlNOSEgyQ0JJemhpN1RFcFpnaDA0clZnb3E3?=
- =?utf-8?B?Ym1NTUkvbFdmUDFDU2haRlN2Y2dOZWVGaGJOM2pjSWJsZUdDZk9PN1krelEw?=
- =?utf-8?B?R0tlTEFOVlRKcmZUa3V0aVFPQ1NzbWRNMVdHK0ZqZnA4Ly90aEMvNVZ0aE80?=
- =?utf-8?B?RmdpUDV0c3krV1N3TkpSZHVSVTNKb25USjVaMVZ2cjA5K3FXbWFnNkpsM2Vm?=
- =?utf-8?B?TTlLUm04RmxhQXVIRjhicXpydm9pdzFkTW8zWG9hOGNyYzhHSCtIZDNwdi9W?=
- =?utf-8?B?ampMTU1iVUlXSmh1SC9sUjlNOWpWaEliMWFza1lIbG5PVHdzRldrWWZnSjh5?=
- =?utf-8?B?UWphL3pKS2tmYTQ0WktLalVwYVk3WU1ZWVVBZHg2VGl5YytIeHZBTjF1b3BS?=
- =?utf-8?B?TEhTTVlLUkNDeGhHazhOaEZEM1M3eUZjSDhycUxsN0lVM1U2S00rRlVISlhX?=
- =?utf-8?B?UXRhRWNQRHFUNzlsYXhRdVlLaVlzVjJPOStVbVdLbTdoMFZ5NWVqa0k1dkRR?=
- =?utf-8?B?cW56VVdsakdCOGZkRHRZd0tQTUxLcStvT1hVd0VSRGIzNG10MWJLaGQreTl0?=
- =?utf-8?B?ZGd6S1hNZ0RobGdKa0IxQ3JKd2VZRW0wVWhSMC8yb3UwejFGbE00dzdxbit3?=
- =?utf-8?B?L2ZRSi96Z3NXekVmTzh5NmxTYlU4VFB1UmQ1d1BZbWpOdVJzdm5yWkxrZEp1?=
- =?utf-8?B?M1JoaWREL2Y0Q0J2N0pKbjJSK2RmZ2ZNeVFaaU5vODRNZUcyellyOGxhcDN4?=
- =?utf-8?B?ZzFpTFZra21RZzZtckZVT09LRTNLNk4vL25FM0sydk4rUFZPS1NIWVJPVlA0?=
- =?utf-8?B?a1N1Vk9qVFVhNDZobkhobXYzMGZhK3lNYWhXV3REcnZnM1IxMXBtM0VKVEtm?=
- =?utf-8?B?NUY5UEJnM1JmV3NVRHpLVEZlb1huZnZFSVlPSURyNmN6WHd0OHlTWlFuZHJj?=
- =?utf-8?B?TlhESUFTbWZLcStEK2pBamJ3L09ObERKZlZDM1hvV0hYYmtYTzFzbW5ZeWRM?=
- =?utf-8?B?MVduRURlQ1Q5bDZRVDJpTEd4ZmNXWmJDcWM4Znd5cWd5SzIrbmpPOC83b3do?=
- =?utf-8?B?c2ZNL1NsNXB2d0RkS2F3NUwxRC83WktzT1paYVZRMkVZLzlXSUEzMWpPNGVJ?=
- =?utf-8?B?d3NMWWJETFdnVWE4emJoMHBKQUNWOHVBMHJGeTA4TnFiQVV5bE14eWFBK1Uw?=
- =?utf-8?B?SE92TmNrT08wVU9HVDRwcjRBS0VMRjNib01xdUJnZHJJNTNnS29EUXZ1Vkpi?=
- =?utf-8?B?NzY2dUQyRFJlVlQwOE9RRWc5Ui9oYkxNU2U0OVlMSDRaTmQzd3ZHbGw1SENm?=
- =?utf-8?B?ckdTU3JVVlMzR1pPRnEwdWlYN08xaGdzOVgvTDJwZi9KUnE1c1ZwQlA4WHAx?=
- =?utf-8?B?ZFFmY1R0cXQxZWREUFlFMFhZQi9EeUcxZkFxTG4yc1QzMHlXNURsZmpyMVkz?=
- =?utf-8?B?alBRODB0dXJsYU1Ud1BIVHMyMnFPNC9weXhzUkZLbVI2N3poOUZadkpuS0dq?=
- =?utf-8?B?SUJCMXFPcFU3WkZsVFZZRCtpcm1jdnJoSzFvZjk4cTNBb3gyTFd2bTM4NFhU?=
- =?utf-8?B?WFJCQ0ZYbXp3Q0cwODM2VVd5YW05bzBKTkUzd3pxSUQ3S0NjSmFBOUdNWWg5?=
- =?utf-8?B?djU1OVN0ZEtVQlQwYUxuQTNNRi9XOUhjTE10cnF3UFdHZ2FNL2pvdmNUOW1n?=
- =?utf-8?B?WU84NWpFU0h6VXBING5aZmp6N0RtczJTUUxXanh1OE0vakdaSW12M1BwSHpw?=
- =?utf-8?B?bFhyU0wybGl0OVIzYUp1L0tlZFFkRFkyc2FkYWJEZDkxZGViNHA1OEpRTE5L?=
- =?utf-8?B?TjYyL2tJODV1czhTclRweWFkdVV4a3RIeVNSc08vM2RvdEVhQ0dDcVRWVVdJ?=
- =?utf-8?B?ZS9oVkNqWlpBNGpobzR3Y2J4U3U4ZmxlY3ZyVG0vUmczTnRCczFqT0NaNHZa?=
- =?utf-8?Q?1DnM=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 17:19:52.3520 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1def2b2c-f562-4bca-bbce-08de4c7ea364
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCBF.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB8211
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NQQ6CMBCF4auYrh3TKRDFlfcwLjowlSZCSdtUC
+ eHuFjYmLozL/y2+N4vA3nIQ590sPCcbrBtyFPudaDo93Blsm1soqSpEhaDB8BMihwjjBLYfvUv
+ c8xADUI2kyTQFy0pkYPRs7GvDr7fcnQ3R+Wn7Sriuf7EJQQLphkosT4ZkeyE9PSx5PjSuF6uc1
+ EdTePypqawxmhq5IFNV+KUty/IGXJKwphUBAAA=
+X-Change-ID: 20251121-a-few-test-py-improvements-b91babfc3e05
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>, 
+ Simon Glass <simon.glass@canonical.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1284; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=ETtWiZI9te9opsEEYCTjBfIWyZtfLEh5IqN+4RJxk40=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpW+uQwVkI/9EvaKIYh6aF++OrMRHijKL+VLa6O
+ un0PB20WCKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaVvrkBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AtDEH/i9qGzPS8DSDarCW1fB4Cxhc+yux6sgryFjrlab
+ /3PwFSJ8H0Qzr2w0hyqYWoJhKVdpqjLMomPEFxWLJZdKAiZf6y0m8E9cKBI0iw/XZEPjxoFpCki
+ mz9mvAh/qWUDgby+Vpk1exCBpQ72SYfMkajUhea4JH5WlxuPK3UnE1a5LIacRqTdlLJwkU3ddS/
+ 3Ir5IxmByuICEkRdTy2LHdaQ/EKdvWZv3FUDOHirzrZm/p1AYG01SWiRNsLjcguMvuWwvAx4Xkh
+ biUMLIYvHRJcY8ut47udv+najI709FyZNPwTK0om2ulK/c8nVzhJCcR6/v8lDaQy1qX+jrITHV+
+ oC38=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Mon, 05 Jan 2026 19:19:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,42 +124,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/5/26 8:11 AM, Bryan Brattlof wrote:
-> On December 31, 2025 thus sayeth Beleswar Padhi:
->> Up until now, the R5 SPL in J722S platform was configured to start out
->> of the SMS0_HSM_SRAM0_0 (0x0043C00000, 512KB) memory region. However,
->> with the requirement of loading HSM M4F core with its own secure
->> firmware, R5 SPL can no longer utilize that memory to execute itself.
->>
->> Therefore, utilize the MSRAM8KX256E0_RAM (0x0043C40000, 256KB) memory
->> region for loading and executing R5 SPL. Naturally, the SPL size has now
->> to be trimmed to be fit inside the smaller 256KB region.
->>
->> As an example, create a new defconfig (j722s_evm_r5_hsmboot_defconfig)
->> which removes the SPI related configs to trim down the SPL size to
->> ~175KB. The above defconfig demonstrates loading HSM core with SD, eMMC
->> and UART bootmodes.
-> 
-> I am worried we will need to find a better way to handle the defconfigs
-> which are mainly here for testing things. I agree we should have a way
-> to test this driver but if we go this route we will have too many
-> defconfigs and build instructions for each evaluation board to get our
-> code coverage to the levels we want.
-> 
-> And it really only confuses people who are getting started.
-> 
+While trying to run the test suite for the first time, I encountered a
+few minor issues. Here are a few patches to address them.
 
-+1
+---
+Changes in v3:
+- Picked up review/test tags.
+- Drop `is not None` in Python code.
+- Link to v2: https://lore.kernel.org/r/20251217-a-few-test-py-improvements-v2-0-e1f91e3bf551@baylibre.com
 
-Using the SMS_HSM_SRAM for the R5 SPL was always a bit hacky, might be
-better to move the default defconfig over to using MSRAM for R5 SPL. This
-would of course mean we have to shrink it down a bit, but the Sitara
-platforms get by with as much SRAM without much issue already.
+Changes in v2:
+- Dropped patch adding setuptools to test/py/requirements.txt
+- New patch to add setuptools to scripts/dtc/pylibfdt/requirements.txt
+  instead.
+- Changed test.py patch to set ubconfig to None rather than checking for
+  its existence in globals().
+- Link to v1: https://lore.kernel.org/r/20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com
 
-How far is the current R5 SPL on J722S from fitting in MSRAM currently?
+---
+David Lechner (3):
+      test.py: check ubconfig exists before using it
+      doc: pytest: mention additional requirements for venv
+      pylibfdt: add requirements.txt for setuptools
 
-Andrew
+ doc/develop/pytest/usage.rst          | 4 ++++
+ scripts/dtc/pylibfdt/requirements.txt | 1 +
+ test/py/conftest.py                   | 5 +++--
+ 3 files changed, 8 insertions(+), 2 deletions(-)
+---
+base-commit: 9579616d2348e206fc5f0a04cc3348e8e89d0a4c
+change-id: 20251121-a-few-test-py-improvements-b91babfc3e05
 
-> ~Bryan
-> 
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
