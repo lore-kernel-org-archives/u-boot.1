@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2F0CD0422
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B3BCD0425
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA5A83D9F;
-	Tue,  6 Jan 2026 00:30:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A39483E0E;
+	Tue,  6 Jan 2026 00:30:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kTrFkuyD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l+KEJNEV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8707583DEB; Tue,  6 Jan 2026 00:30:42 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 77D2D83E62; Tue,  6 Jan 2026 00:30:51 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3541283D9F
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D0E283E21
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:30:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-65063a95558so614047a12.0
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:40 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b7355f6ef12so92348766b.3
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:30:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767655840; x=1768260640; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767655849; x=1768260649; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=24/X3eGSXq42BdWLsg2Znarq7MEhZ/QuKMTSedoqPCM=;
- b=kTrFkuyDo6rhtCp5J/DUieEoWGsQEWadSBs8axaXOQFPK3tjny61+4FvKjdCmKGCGH
- b9ohzKoQDklYsBbLSxgT23nY0OY74E7Xwu9CnmCn6nb2c/c0psMlAxqLQuiMLmYUmQdF
- SSsbmDrl9sWo//zQypjlflniFu6ec6NR88u94=
+ bh=aT4cyC0+/zsCCu0DV9uExKEW1lsfx0ZlzUdfRu+p+KM=;
+ b=l+KEJNEVCFTZ7L/8LFF26SfgvpqK6VPq27KgTn5u5m5Q7z6TNYd3PYPTzePnc49Sa/
+ wgvPj2J25mOaY3eKsa4g/Hb4HzD4Ia6vkx+BK8W3sNQnxrs5cSapM85zOIm/SE26AoNI
+ gdgpeuiyAbTR1R7SFpiErsu0ZOkgwxZc8dDAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767655840; x=1768260640;
+ d=1e100.net; s=20230601; t=1767655849; x=1768260649;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=24/X3eGSXq42BdWLsg2Znarq7MEhZ/QuKMTSedoqPCM=;
- b=fxQkI+A13z+H4IN+uR7rh0qZkfx4FaUREpnYflqiagnh1o86EY4KaiYi/reozCWOn0
- on8W7Z5MLjOOA72ObdBu3Hbl9CyKhqoxlAjZBZhkInjcoUwDbcKz95fhZS03S+yAK7Ho
- CDAM12iOfDBwldAlN6/gXg63rZkfS9QfM1Nf52EwOgZH3AJmPBF9KgR0E/wnMozmOG7l
- rnJNWRQ9/ukKKRVFF4CKsBaNgca9ep4dfWrovl2wwsSIZtM8eqe5ZznMcKTm3/+ZqbXd
- qTu6wog0yLhnAgiawlqm06tpWjLHQUP3hg0uXG8DVgGlT1O0kjVqjlyuvzNCusBbBrah
- kTsQ==
+ bh=aT4cyC0+/zsCCu0DV9uExKEW1lsfx0ZlzUdfRu+p+KM=;
+ b=gMMvCn0+Faat/SkXS8FOPdUHy9saG9c98Vcsc18+GvFrroB4k3SfaKJ3Vrg7yJ8eLS
+ rlUnVCez+wTHwMZ3dx0oX8aGNmuUg9BAUmI+sYU5tiqagklVqAOAZ4yD7Ss/jqNKclte
+ 0kLS4TwTnBPWw+i7YDR09q7tE7mATPUmS4gepvpNqlKwkkN/EmAK2r6ZwcrAs169p6t2
+ Mm1C8iFZ2trhWMN1F8Hj8kfNqlSzC8Jbh05xH9aQmhmPV0s43wtyatp7BLas/NnhNAGk
+ JHskLjtIA1k5ZZyv4oPem8Vz9ETj5GOBEVzWjWMiWqZ7eIXJLxqOKrvTpVf1w0hyCl3w
+ iwlg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmOq6K4wEhXhJ+OVjSFjzJSvxz+t4ZtQ/DWfQx2sc5Bip8pvuD40gAur7HI1GBKh5s5aqy7Ho=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMDLysmsJiy3C7wqPjj6q8e4rd+2se/OpabkPqkEypXuY1A/t7
- KP63pRQjCUwNKV/1fp4OoQLjtM9ZYfeUeABpZBkbOOaA6g/uhjBf69J9zldJKyA+DOh5H4Kgg+a
- ErIKdYDIZ/UNWTuIFIuYmHcP+ro1CHyCW+IfohB46
-X-Gm-Gg: AY/fxX6q8IkibmxpTY/ubdH7m815pFVQv72YTE8wrP60E5RSHLgoujkbwG4cUQZ9qJt
- z14GHFUnp/p+KIn9oJpowU/EjsIKgsibHLcXQEoBr8QZHgitX/YKMa8CLjpyjhDGQkF49/a6I+6
- b2Ezj6WOwVpjOdybiYEXZCv7jEG122IOGEEg2hBROw8eXsdP/YKsGTnca9u2kFt7yI0uLW39+aY
- k/gpRrr9Pj4fUwiDOfc3qDG4KJ9vBukJ+KzeQAj9UlLm1wa9csCILY304YHN0bgtUVuqQ==
-X-Google-Smtp-Source: AGHT+IEG0ohLrTf2ZXxtezaYr1oEA6DF5BzCcgFq07ldz8NJ7OX9Qins/MQF5lwAgCUoZCzmuk8pWXX7RdsZ1brak8M=
-X-Received: by 2002:a17:907:9347:b0:b74:984c:a3de with SMTP id
- a640c23a62f3a-b8426acbb4dmr154927066b.28.1767655839656; Mon, 05 Jan 2026
- 15:30:39 -0800 (PST)
+ AJvYcCXvRbM9PeJapJx9X7PaDXMTGCynd88jAshU3JiJPDJCWV4facG8f3ZravWURAxqh3DzaOAZTFU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUitzBEzJLcCiLQ0HaxpTv9F/UiS84T/3NFXSwvA/8Zbt7RT/H
+ /O1A87uNFBpVOSGeVDNqVZ+R3XOjDiVS9mFknR1Fg6HuqqsMd5cQUE9m23xNwO6D78kveBfWNTk
+ 1iMirYYuuN0w78HpXmymb41PxjB/ZsXZRLJ6LoYCTqSuKQ723DcQ=
+X-Gm-Gg: AY/fxX51C2A8xUaKHVz3F42rE5tZoXfTt9cK3w3YSr4/xN6RAI2WdCYypkVIKDTd8qH
+ FvXUMhvLL7uzokdew/MHYJJafpwmza6KH2IGZ3oS2oZeZn81+9yQRlc+Ql74j13/BYCDMd9rIFQ
+ 7+mTME9MajMh4PiAI1txuYGIHRUBpE9r357sRbhHBJy42F5kyAO4lbkbiEJf9bxx8zJ6ndI4TX9
+ aBwFx9GyJHA68njT31b/w1SqM4YxDnDOP2ht423SWOccx43pivhGz/JziBKkijx7TXiGw==
+X-Google-Smtp-Source: AGHT+IHt4nlL/HXarjrfyWxiLUDA4SJqb2H7SppWnLJaYf6pfT4/tPDxjHhQe4gar1CPXx0nN++Fn/TeWlIqCjtiNAk=
+X-Received: by 2002:a17:907:1c88:b0:b73:7ac4:a5f with SMTP id
+ a640c23a62f3a-b8426a84deemr133594166b.21.1767655848966; Mon, 05 Jan 2026
+ 15:30:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20251231173621.1069988-1-b-padhi@ti.com>
- <20251231173621.1069988-8-b-padhi@ti.com>
-In-Reply-To: <20251231173621.1069988-8-b-padhi@ti.com>
+References: <20260105165221.1816070-1-visitorckw@gmail.com>
+ <20260105165221.1816070-3-visitorckw@gmail.com>
+In-Reply-To: <20260105165221.1816070-3-visitorckw@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 5 Jan 2026 16:30:24 -0700
-X-Gm-Features: AQt7F2oMfsER16S4GoTH_bX6tIaOrm1vo87IFfqFOuOd_TqrVPe6fjAO9ak8npA
-Message-ID: <CAFLszTi73RSFM4d2fzvndyw9mOq4D-gqQ2Gp-YGcYdp5gu-s1g@mail.gmail.com>
-Subject: Re: [PATCH v3 07/11] binman: openssl: Add boot and load extensions to
- x509 cert
-To: Beleswar Padhi <b-padhi@ti.com>
-Cc: trini@konsulko.com, afd@ti.com, bb@ti.com, anshuld@ti.com, hnagalla@ti.com,
- jm@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
+Date: Mon, 5 Jan 2026 16:30:25 -0700
+X-Gm-Features: AQt7F2r2D7puRrSCjCXNrWpgo1dHIZhUOKolSPWL71G-s7GtNIaH77MgaxOsGjg
+Message-ID: <CAFLszTjBFGeWS8QoVRGWq44LMjUgDpE7B3ssFLY0sZHZrLfG5Q@mail.gmail.com>
+Subject: Re: [PATCH v5 2/7] timer: Add Goldfish timer driver
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
+ me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com, 
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,168 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Beleswar,
-
-On Wed, 31 Dec 2025 at 10:37, Beleswar Padhi <b-padhi@ti.com> wrote:
+On Mon, 5 Jan 2026 at 11:20, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 >
-> The boot and load extensions in the x509 certificate are required for
-> requesting the secure entity (TIFS) to boot a core. These fields are
-> defined in the binman node for each core that must be booted by TIFS
-> and must be included when generating the signed certificate.
+> Add support for the Goldfish timer driver. This driver utilizes the
+> Goldfish RTC hardware to provide a nanosecond-resolution timer. This
+> virtual device is commonly found in QEMU virtual machines (such as the
+> m68k virt machine) and Android emulators.
 >
-> Add support to parse the boot and load extension properties from the
-> binman node and populate them into the certificate. If any of the
-> mandatory properties for an extension are missing, that respective
-> extension section is NOT added to the certificate.
+> The driver implements the standard U-Boot timer UCLASS interface,
+> exposing a 64-bit monotonically increasing counter with a 1GHz clock
+> rate derived from the RTC registers.
 >
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Tested-by: Daniel Palmer <daniel@0x0f.com>
+> Reviewed-by: Yao Zi <me@ziyao.cc>
 > ---
-> v3: Changelog:
-> 1. New patch. Add support to sign HSM firmware here in U-Boot.
+> Changes in v5:
+> - Rebase on u-boot/next branch.
 >
->  tools/binman/btool/openssl.py   | 49 ++++++++++++++++++++++++++++++---
->  tools/binman/etype/ti_secure.py | 18 ++++++++++++
->  tools/binman/etype/x509_cert.py |  4 ++-
->  3 files changed, 66 insertions(+), 5 deletions(-)
->
-> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-> index b26f087c447..35898aa488b 100644
-> --- a/tools/binman/btool/openssl.py
-> +++ b/tools/binman/btool/openssl.py
-> @@ -82,7 +82,8 @@ imageSize              = INTEGER:{len(indata)}
->          return self.run_cmd(*args)
->
->      def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
-> -                  config_fname, req_dist_name_dict, firewall_cert_data):
-> +                  config_fname, req_dist_name_dict, firewall_cert_data,
-> +                  boot_ext_data, load_ext_data):
->          """Create a certificate to be booted by system firmware
->
->          Args:
-> @@ -101,12 +102,52 @@ imageSize              = INTEGER:{len(indata)}
->                  extended certificate
->                - certificate (str): Extended firewall certificate with
->                  the information for the firewall configurations.
-> +            boot_ext_data (dict):
-> +              - proc_id (int): The processor ID of core being booted
-> +              - flags_set (int): The config flags to set for core being booted
-> +              - flags_clr (int): The config flags to clear for core being booted
-> +              - reset_vector (int): The location of reset vector for core being
-> +                booted
-> +            load_ext_data (dict):
-> +              - dest_addr (int): The address to which image has to be copied
-> +              - auth_type (int): Contains the host ID for core being booted and
-> +                how the image is to be copied
->
->          Returns:
->              str: Tool output
->          """
->          indata = tools.read_file(input_fname)
->          hashval = hashlib.sha512(indata).hexdigest()
-> +
-> +        if boot_ext_data is not None:
-> +            boot_ext = f'''
-> +[ sysfw_boot_seq ]
-> +bootCore = INTEGER:{boot_ext_data['proc_id']}
-> +bootCoreOpts_set = INTEGER:{boot_ext_data['flags_set']}
-> +bootCoreOpts_clr = INTEGER:{boot_ext_data['flags_clr']}
-> +resetVec = FORMAT:HEX,OCT:{boot_ext_data['reset_vector']:08x}
-> +# Reserved for future use
-> +flagsValid = FORMAT:HEX,OCT:00000000
-> +rsvd1 = INTEGER:0x00
-> +rsdv2 = INTEGER:0x00
-> +rsdv3 = INTEGER:0x00
-> +'''
-> +        else:
-> +            boot_ext = ""
-> +
-> +        if load_ext_data is not None:
-> +            load_ext = f'''
-> +[ sysfw_image_load ]
-> +destAddr = FORMAT:HEX,OCT:{load_ext_data['dest_addr']:08x}
-> +authInPlace = INTEGER:{load_ext_data['auth_type']}
-> +'''
-> +        else:
-> +            load_ext = f'''
-> +[ sysfw_image_load ]
-> +destAddr = FORMAT:HEX,OCT:00000000
-> +authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
-> +'''
-> +
->          with open(config_fname, 'w', encoding='utf-8') as outf:
->              print(f'''[ req ]
->  distinguished_name     = req_distinguished_name
-> @@ -138,9 +179,9 @@ shaType                = OID:2.16.840.1.101.3.4.2.3
->  shaValue               = FORMAT:HEX,OCT:{hashval}
->  imageSize              = INTEGER:{len(indata)}
->
-> -[ sysfw_image_load ]
-> -destAddr = FORMAT:HEX,OCT:00000000
-> -authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
-> +{boot_ext}
-> +
-> +{load_ext}
->
->  [ firewall ]
->  numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
-> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
-> index f6caa0286d9..bc44b684892 100644
-> --- a/tools/binman/etype/ti_secure.py
-> +++ b/tools/binman/etype/ti_secure.py
-> @@ -116,6 +116,7 @@ class Entry_ti_secure(Entry_x509_cert):
->          if auth_in_place:
->              self.firewall_cert_data['auth_in_place'] = auth_in_place
->              self.ReadFirewallNode()
-> +        self.ReadLoadableCoreNode()
->          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
->          self.req_dist_name = {'C': 'US',
->                  'ST': 'TX',
-> @@ -126,6 +127,23 @@ class Entry_ti_secure(Entry_x509_cert):
->                  'emailAddress': 'support@ti.com'}
->          self.debug = fdt_util.GetBool(self._node, 'debug', False)
->
-> +    def ReadLoadableCoreNode(self):
-> +        boot_ext_props = ['proc_id', 'flags_set', 'flags_clr', 'reset_vector']
-> +        load_ext_props = ['dest_addr', 'auth_type']
-> +
-> +        self.boot_ext = self.ReadDictFromList(boot_ext_props)
-> +        self.load_ext = self.ReadDictFromList(load_ext_props)
-> +
-> +    def ReadDictFromList(self, props):
-> +        props_dict = dict.fromkeys(props)
-> +        for prop in props:
-> +            val = fdt_util.GetInt(self._node, prop)
-> +            if val is None:
-> +                return None
-> +            else:
-> +                props_dict[prop] = val
-> +        return props_dict
-> +
+>  MAINTAINERS                    |  6 +++
+>  drivers/timer/Kconfig          |  8 ++++
+>  drivers/timer/Makefile         |  1 +
+>  drivers/timer/goldfish_timer.c | 81 ++++++++++++++++++++++++++++++++++
+>  include/goldfish_timer.h       | 13 ++++++
+>  5 files changed, 109 insertions(+)
+>  create mode 100644 drivers/timer/goldfish_timer.c
+>  create mode 100644 include/goldfish_timer.h
 
-It looks like you are adding new code but without a test. Please can
-you run 'binman test -T' and ensure you cover all lines.
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
->      def ReadFirewallNode(self):
->          self.firewall_cert_data['certificate'] = ""
->          self.firewall_cert_data['num_firewalls'] = 0
-> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> index b6e8b0b4fb0..b6028f6be84 100644
-> --- a/tools/binman/etype/x509_cert.py
-> +++ b/tools/binman/etype/x509_cert.py
-> @@ -102,7 +102,9 @@ class Entry_x509_cert(Entry_collection):
->                  config_fname=config_fname,
->                  sw_rev=self.sw_rev,
->                  req_dist_name_dict=self.req_dist_name,
-> -                firewall_cert_data=self.firewall_cert_data)
-> +                firewall_cert_data=self.firewall_cert_data,
-> +                boot_ext_data=self.boot_ext,
-> +                load_ext_data=self.load_ext)
->          elif type == 'rom':
->              stdout = self.openssl.x509_cert_rom(
->                  cert_fname=output_fname,
-> --
-> 2.34.1
->
-
-Regards,
-Simon
+You can also implement timer_get_boot_us() if you want to use bootstage.
