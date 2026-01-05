@@ -4,92 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73348C2A062
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 00:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 741D9C2A073
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 01:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CABD883990;
-	Mon,  5 Jan 2026 01:32:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id ACE168398C;
+	Mon,  5 Jan 2026 02:49:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="FUyXuMtd";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="KD/DXjSG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDF0F83A57; Sun,  4 Jan 2026 21:22:02 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 368A783A26; Mon,  5 Jan 2026 02:49:23 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49BC383A3D
- for <u-boot@lists.denx.de>; Sun,  4 Jan 2026 21:21:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4775895d69cso57089215e9.0
- for <u-boot@lists.denx.de>; Sun, 04 Jan 2026 12:21:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767558119; x=1768162919;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0eDfOhXwhmFmTB2j/SkXkwpf4/IyPaMNHRZS+exep0M=;
- b=FUyXuMtdFASn1lCiNmDrltR8Plul/yKG5KToq+J3PQyNVWU51+kAD/BH3KvtWoCFxt
- FMrTTciIXprrlMAPbetge9/Q6xQVokhFPysDTHobQFse+yk2RMuTRzDvJgclGPf5AKjf
- abof7gWfL7gi/+8J4QQNwHn74qRca+b9nnLbAtPKxO2mHUaIMhdsd35UY/p1pVQ+uG5d
- Eau9zaxWISfWt4ufEP0SdGNeDonCPYQQprwaUxSpRcFjwHIraTPZhOTtUFUC3qn5JXoH
- mM6ZamiZg0mgjrjg5Ic1twSouYHejvzoPjlbqrn3o1BzdJHzgYH76Me7oZonMfzo0876
- C9fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767558119; x=1768162919;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0eDfOhXwhmFmTB2j/SkXkwpf4/IyPaMNHRZS+exep0M=;
- b=LpcyjMGOjyFVI6ygmkjzoM4Z5OH4wOFvaP5BY38TIg8mAGD2wCNJogjOpwRKMG94B9
- +kmGm9en7UStarPQycc7A0GUvr85p6d2DxmH7cWqXSvsv82SnZaD9UtdZcqnzhxGhT49
- SFx+EKfdkemA+QbkH6Ulkhub1J17nFQjwToDu2JMs7SFqgVpuhhbJf/c0m/cbA3i33y5
- hqpp7eBM1hPvYLS3/cOZT4RGw3iKx9i1/GYQg+LIwwTQ/iOhtT64g5BMfLpW9/FgPxyb
- q7tljfBATTPxfu/EYHjS0Vfd9Uy7VYA9iCgXDhnxCkRtK4a2JsTYiMwcRxrFwUQwi1jn
- WI1Q==
-X-Gm-Message-State: AOJu0Yx2hAUyLtNIgM9tZ69OSTnWH4Qgr3oL06nCYuYjbXqLk/6iq/bi
- q8Z6e1XNrFZ60BThT9xcysdHu+OZTIUN+5BMhFkcW5uaj8gGRvFIiuaudIboXuWyTQ0=
-X-Gm-Gg: AY/fxX5244my0rEgN+MJn0STsaIZhmIYxYXN2jjsbAeINvtbAEwpnqy3ncNgtyEjEf4
- sJogTeA0qox4g1LdhiRRQCnDbz/jYr2+4UURw+uSg+xFVO+yolT2HcX3fsaqmUGTQ2vlNJQV/0g
- 1Yy7bEM4QV7lpdI9eDIbGX2UMPsyM0TnS0fde5uSe6b+zagYwfQFIZWtNPwDh9VOls9cLplZLzf
- D3UlxLZv2uKNPvd70Zp8KjQw7sA+WOtCBB1EGarY8obRsYa4i4LrSOwK4A5YnUtVwcKl01Ym9ug
- CKwh4dwecNurYUqX7LbI27GV9w1KIizrCswj7wcJj4sXPO7RsAzZPSkJSacrVUDO4qgxLMdjFx9
- bStvSDvV0+fu9hGr6tRFseBrIMAqiXqyByDiV5z69lCYoYWujFeLwDpWNVQ3y+j/Hdsl5lyKrDx
- Y46tTo
-X-Google-Smtp-Source: AGHT+IFSh+Rn1npP0X1iNF38rcsyZEMuaT/2WTlDMThFevKbGZhv5Y2gbaorP/z7LAtnfFKhMw2rKw==
-X-Received: by 2002:a05:600c:1d0b:b0:479:2a0b:180d with SMTP id
- 5b1f17b1804b1-47d1954a5f7mr576733205e9.11.1767558118567; 
- Sun, 04 Jan 2026 12:21:58 -0800 (PST)
-Received: from localhost ([195.52.160.197]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d6d34500fsm111585005e9.15.2026.01.04.12.21.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 Jan 2026 12:21:57 -0800 (PST)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=59e2924ea8f8f7f32b1852b8c144dc4aaffc969841d920aa98c74d1ee494;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Sun, 04 Jan 2026 21:21:48 +0100
-Message-Id: <DFG3210Q1SC6.2U3BQSG1DEGUT@baylibre.com>
-Cc: <u-boot@lists.denx.de>, "Anatolij Gustschin" <ag.dev.uboot@gmail.com>,
- "Yannick Fertre" <yannick.fertre@foss.st.com>, "Patrice Chotard"
- <patrice.chotard@foss.st.com>, "Raphael Gallais-Pou"
- <raphael.gallais-pou@foss.st.com>, "Sukrut Bellary"
- <sbellary@baylibre.com>, "Fabio Estevam" <festevam@gmail.com>
-Subject: Re: [PATCH v3 3/4] video: simple_panel: Add tfc_s9700rtwv43tr_01b
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Tom Rini" <trini@konsulko.com>, "Markus Schneider-Pargmann (TI.com)"
- <msp@baylibre.com>
-X-Mailer: aerc 0.21.0
-References: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
- <20251204-topic-am33-evm-lcd-v2026-01-v3-3-ca74853bd5f0@baylibre.com>
- <20251230173012.GA147611@bill-the-cat>
-In-Reply-To: <20251230173012.GA147611@bill-the-cat>
-X-Mailman-Approved-At: Mon, 05 Jan 2026 01:32:34 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id AB25B800AB
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 02:49:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1767577747;
+ bh=3vVkikqeQEM70uQSZmbZsL2Sj9Hq6iNmwku6XAAEgDc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KD/DXjSGCLaZGu+aD+pXQMU3fZ1y8Wn5bhBbV3tCuOUP1zpzXZ3JlPycBIU8m5zWO
+ cj8JOeKGlK4AaSVJOmKCPFy+1hRzsXuA/98kbx1Cpj7lCX4Lb2GVTISXsqzKeCGWfs
+ Ge+mnNk+kYrxtkEmulp6u36/N+UF5tZTMhaVclkgzr0FKKmYM6qQjVPVIGVMPcgnNS
+ SlZwZXk03GVewh9uAOi7Th/aYF1GhmW1SdQ1zVrqJTJujC/p4KhIiFPu6p9h5fnZfL
+ tfHSR65sFw5x+0OufAjczFcPw/PUkL5hKkrsMG+Xdxthsi2jxZ77ouXyZQ/ojBX2st
+ T9bM2k1NPZIvw==
+Received: from [IPV6:2605:59c0:2078:cf00:c0b6:e37b:5515:2b98] (unknown
+ [IPv6:2605:59c0:2078:cf00:c0b6:e37b:5515:2b98])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 44B4DB2200EC;
+ Mon,  5 Jan 2026 02:49:06 +0100 (CET)
+Message-ID: <8c751618-ed62-4cc9-abf0-b673f5a15d85@freeshell.de>
+Date: Sun, 4 Jan 2026 17:49:03 -0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: Pull request efi-next-20251225 (for next branch)
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <1faefbf2-e8b0-4c94-85f5-025355915e0d@gmx.de>
+ <176669208910.1263958.8972451881709434686.b4-ty@konsulko.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <176669208910.1263958.8972451881709434686.b4-ty@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,47 +71,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---59e2924ea8f8f7f32b1852b8c144dc4aaffc969841d920aa98c74d1ee494
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi,
 
-Happy new year!
+On 12/25/25 11:48, Tom Rini wrote:
+> On Thu, 25 Dec 2025 11:13:02 +0100, Heinrich Schuchardt wrote:
+> 
+>> The following changes since commit baf076aeb32dcdd2b022405088c3288ffc160fcf:
+>>
+>>    Merge branch 'staging' of
+>> https://source.denx.de/u-boot/custodians/u-boot-tegra into next
+>> (2025-12-23 08:11:36 -0600)
+>>
+>> are available in the Git repository at:
+>>
+>> [...]
+> 
+> Merged into u-boot/next, thanks!
+> 
 
-On Tue Dec 30, 2025 at 6:30 PM CET, Tom Rini wrote:
-> On Thu, Dec 04, 2025 at 09:31:16AM +0100, Markus Schneider-Pargmann (TI.c=
-om) wrote:
+Tom:
+
+NAK 4c105d2ae7b "Update StarFive Jh7110 common description" that has
+been incorrectly applied and the result contains factual errors I did
+not author which are now (wrongly) attributed to me:
+
+> diff --git a/doc/board/starfive/jh7110_common.rst
+b/doc/board/starfive/jh7110_common.rst
+> index 9beab941cc1..77102fcc189 100644
+> --- a/doc/board/starfive/jh7110_common.rst
+> +++ b/doc/board/starfive/jh7110_common.rst
+> @@ -232,16 +232,11 @@ pull-down.
+>  RGPIO1 RGPIO0 StarFive loader function @ 0x2A00_0000
+>  ====== ====== ======================================
+>  0      0      1-bit QSPI Flash offset 0x0
+> -0      1      SDIO3.0
+> -1      0      eMMC5.0 or eMMC5.1
+> +0      1      SDIO3.0 *(deprecated)*
+> +1      0      eMMC5.0 or eMMC5.1 *(deprecated)*
+>  1      1      UART Serial XMODEM loader
+>  ====== ====== ======================================
 >
->> Add timing data for tfc_s9700rtwv43tr_01b from Linux to the simple-panel
->> driver. To support hardcoded timing data as Linux does, add a new struct
->> simple_panel_drv_data which holds a struct display_timing pointer as
->> well. The hardcoded timing data is preferred over DT parsing.
->>=20
->> Reviewed-by: Fabio Estevam <festevam@gmail.com>
->> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
->> ---
->>  drivers/video/simple_panel.c | 62 +++++++++++++++++++++++++++++++++++++=
-++-----
->>  1 file changed, 56 insertions(+), 6 deletions(-)
->
-> This leads to CI failures in test:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1341980#L269
+> -Booting from SD-card or eMMC is only available on boards that have
+separate
+> -switches for RGPIO0 and RGPIO1 (Milk-V Mars, StarFive VisionFive 2,
+Pine64
+> -Star64). Due to reported compatibility issues with some SD-cards it is
+> -considered deprecated by StarFive.
+> -
+>  According to `JH-7110 Boot User Guide BootROM`_ the StarFive loader
+code reads
+>  content to SRAM @ 0x0800_0000 from different media selected by
+[RGPIO1,RGPIO0].
 
-Thank you! I missed checking if the data pointer exists before checking
-if data->mipi_dsi exists. Sorry, will fix!
+Please revert 4c105d2ae7b and re-apply from the publicly reviewed patch:
 
-Best
-Markus
+"[PATCH v4] doc: board: starfive: update jh7110 common description"
+https://lore.kernel.org/u-boot/20251221113616.166463-1-e@freeshell.de/
 
---59e2924ea8f8f7f32b1852b8c144dc4aaffc969841d920aa98c74d1ee494
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaVrL3BsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMc
-jgEA/E13kqj2XC3Adm95PYrx/15Y9s4Tq5GFMTyIMBwDcNQA/j7x3S5vdwNk8ka8
-FTuvrfp7+jjv+lFIY4DfQWr69+MP
-=qnMR
------END PGP SIGNATURE-----
-
---59e2924ea8f8f7f32b1852b8c144dc4aaffc969841d920aa98c74d1ee494--
+-E
