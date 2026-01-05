@@ -4,80 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 520D0C2A07A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 09:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F272FC2A09B
+	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 11:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BADAB83AB7;
-	Mon,  5 Jan 2026 10:46:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 411C083CBD;
+	Mon,  5 Jan 2026 12:38:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LAjFMK1K";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XkrkK+ga";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DsEv+In1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2854683CBD; Mon,  5 Jan 2026 10:46:57 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC30B83CE3; Mon,  5 Jan 2026 12:38:50 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBEF783A9F
- for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 10:46:54 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-bc4b952cc9dso12010329a12.3
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 01:46:54 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4960839DD
+ for <u-boot@lists.denx.de>; Mon,  5 Jan 2026 12:38:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6058wAoc594026
+ for <u-boot@lists.denx.de>; Mon, 5 Jan 2026 11:38:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=XONa+2HybbD+UMtx5dR3/P53
+ AvROPc3de0uIcdi2Gxc=; b=XkrkK+gaT1muaBOhlGhpd2DkuSjm1g4pCC988evw
+ B4Lliz2fCoC48WW6AaRjkZauOzSjqZJs2/B519krn9UIO5WHxAFjfN2ASM8IHhb9
+ JvgxsNEzabWGt82f9ueOj37AxK4hmxriF1Hep6GmwQXuX19X/6UV0aQWNgyr47Wy
+ XNBxXvXVdWVbsUUgF3JCzf4mxxeSBZjSHToGWHY0Kkauwnj9yTH4BuSgAdYDhbhT
+ 5KO7F82FGNa6J2aqeOS1+76WE8rIcsyu4sXbs27YlqUbg3vkiW1m8qwvjICgN41J
+ 7fkoXFo7sF11yYkR1wqZcVT9v1t+yzYlRYN+KwdmookgrQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bga8pge7h-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 11:38:46 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2a0dabc192eso325860935ad.0
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 03:38:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767606413; x=1768211213; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lh91TB8ippQwS0FEUlJ2+Vs9dsb+v9VCC9J/FCIYk/E=;
- b=LAjFMK1Kqad9F2tWhnN5GjEdR0sAs7hV0OrS20F03Q1OPcvk04a10iSVwoWx5kCyQ3
- 4u4iEI9HzbmqsczBsGf2MqatbG3sNRcFXWdvOf3G6cBXva8oFd+Suokl/nRaKTDpf+hT
- eKhWM1a3ZxW+W97TMzbQP+XVyzG018DRaH4/YA+mNcsR0SJrL5dy4DG2CJWro0Oa4cXU
- HuUzUfzsBrBWuCKLhAZH73mCOxuMIPdLC870EWRk7ZG5l8cDRmgAm7ofM809QJLmlmN4
- hGT/CXi9yJG30E9DYSeNlt+iw559Bjo5OgVDPTGlpdT3fDb5UuKGdHcFOHgLna6BhA3n
- 7qRA==
+ d=oss.qualcomm.com; s=google; t=1767613126; x=1768217926; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XONa+2HybbD+UMtx5dR3/P53AvROPc3de0uIcdi2Gxc=;
+ b=DsEv+In1xpxtx6XIGX9cpzpxN9xzXqBFmP0cEGCacCGKShA9WJzoEoYHfPLwkc3/40
+ JeRxRq6CRwhtbE5Q1cSx5iro7Btkz8MFd3aA2uJea+1WORPXcFPFT7fNZ4pECQawxWs1
+ oBp0Zr52PlP/zgFmr0CvWqQW//sBoF4PSsPV2y6GhG16r/63FqEzW0Uvn9H5cO0ipE3q
+ 9Q3HLyxsLH7N+A3Hmn+jbGMFJb80jZ5uuhEnlnaX0F0QcPbt4v5eIh8UF/6fd9Dcepgx
+ fxhZyrlGP3IFKWYCezozKV0F8o/CfKXkCKzniko6NNFgu5msfz5O28fkuDO5zqxwxx7Y
+ 7CAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767606413; x=1768211213;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Lh91TB8ippQwS0FEUlJ2+Vs9dsb+v9VCC9J/FCIYk/E=;
- b=ZplBdrOKpfAlZHDe0+ciTJVshc8vNoOtd5111hYLnwIm3rPcKbDIFikjwlQXiMyP18
- Ki23oUfdxo8jEdk+0fC7wlLOcTteHXY/NVmcoX/PtcWDpLwJDS2QK0wd4wscOXw5jNkr
- lRCw4cpkyt0Uh85YJBAU6UCJQfWEOdiZy/TLFD5qWnTanmNIze3Bg90M50GMyYypREtW
- SWNgHv11izSuWBz0hO7NC7LVLiQvPCKIuiExFlj7jhLchu8VB+Q1avjnZWgOyjgXPkdX
- 9Ov2jG9evcTxQLYZ1QRDfblncYvC7upfvGyB6Gl9j15YGCjIHO9mbFKhmW5HKq7i6jtZ
- uJKQ==
-X-Gm-Message-State: AOJu0YykaucA53ns/pEOgaPfwy2jICMaIDnXRfotd9RZTd329Htw+XiA
- 50h76Pftj8PaaHoYixp+ydZg38Bbug+BnkDb8MN1QYHw96pgQU0C6ocy9j7a5UxJoy1HsaeXHhP
- nWV4z5T1DR88vEz7LCLfcwDz7z64qYfI=
-X-Gm-Gg: AY/fxX5DcFDm6vTTvolu5ICmaAySCHGN2bbEUd5OJ/SzgM1Ck6dGWBJIwa1+Eu3vWPh
- 8eIjp7RGdHJV1CDXH+YmiQEUqyJ4aIQAu2bZxbpoH12TtMSP0HbIAh+1o+lD1nlfA9sfuqJeJqO
- TaA15QaHYjiYmCuHU+cxezkK0zOtsEdA5JnW/p1RS539726hNrWE1uxFwGbgFhtpU42lb2t/8Cf
- qjfK3jnRwjUlB7l69SmjDt3k9I8fzA6mOEE3bvvzi/Oc++Uq0qjODrl540oewQ+oiVRyA==
-X-Google-Smtp-Source: AGHT+IEqs8sahKX03fCqalQT+dvgxgG0QPW5XJPpSAbHJOsAyl7GoXmrbG6kBqb8uhMj+blA9YzaDdkg/ddqT0KEZl4=
-X-Received: by 2002:a05:7300:7f23:b0:2b0:5c02:7516 with SMTP id
- 5a478bee46e88-2b05ec06078mr35253381eec.15.1767606413140; Mon, 05 Jan 2026
- 01:46:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767613126; x=1768217926;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XONa+2HybbD+UMtx5dR3/P53AvROPc3de0uIcdi2Gxc=;
+ b=sFaU8Y1LA+H+5T4zduMDDfb0sQNS38uYotpB4le5KSsl5IUNB6KMEZpnwxN6FIaPG7
+ G2HrzwlXeloMB4lKTA09k5M7wAwrDP29bvXjyPNRyDGvKC4/99LYVQxVhZUVwtW2ks0t
+ CZ2xGOT1/KPbQbBLjinw2lY4AzeGFu/+9ZVEFVC6Ax80zkKFwIsRc1jHvLrySvUUFTfj
+ JIbBwundRKIPSm8aVnVKR2otidDr1h0YXz3SaLWdr07FxWYyHlP5tlOS9qj50d5a+Qsg
+ f+bxL7UIPJXeV0oD1t0gvcRnf/FWeSuXC2sz5EoVNppsHRPHZ5JfFA7oB8hK3gGTU85r
+ cQiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsKGJCuNp7L/bcai9ak6FB0WSE4sXB1GeB1xmIj9SEu5vQhQJx/tor1ZrBS5PqXmnzksLPcZo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxqp+q4WnWtKqqkytqnBSwoPADjnQEA61k/i6VZJafgkJbx0FvJ
+ 2Off6W3QwghXfgBl29vOR7K7A9u2rEHcYp0UNUVTrWFkANxNEySLnPMMPLJglCSv5wX2LkrhqTI
+ 1h6ghUHfCe+CuE+w8+gQGFjljtFrzNDikStZFkU/ic14iz6drsa4jO/X6
+X-Gm-Gg: AY/fxX5Yce90+yxZuo/Bl5L3yUsVAT7U3F5VT50vsolDJl9d288qQmaymiWezZo9uNu
+ G++wKf36ryfkXtm3inCXLCAAxCWLXulqZm58LfsNFWMEZuCxGlvGGISEfXZJW1YWmqONCGp49Qo
+ wClnlF0ufvvHzy95WvjJQhqTHLNzJOYvIqOxHfX9KHYDKOomBO1YKk8NvcwTgCo0qTmzGy1PjJM
+ 0Niv2pR7HpCB/1dK6vW+y5aIATcym5bPP/Kb7yeFaHYxQv7zlqWeaVyDVDo4KJyze3F4Ea7uziI
+ RNooi8sOFz1i4sTbZ2utHDENgeJiYbwpVMDuWrFzkU2vFy/svKjtWoM7Fppa6iqYNrJ5vfELEA8
+ WAfBAXdAcY5/72o3PkMhGh86dSW2FYK5Jf6F79qDHABU6E+BMrdQ2n8kaScsUjlqqyrJgCJ19iD
+ NefDCMK97MucbIpJG7J/ym5bPBqD05x5dh3MjmH3U=
+X-Received: by 2002:a17:902:d2c6:b0:2a0:7f60:9786 with SMTP id
+ d9443c01a7336-2a2f2329b92mr478057315ad.26.1767613125818; 
+ Mon, 05 Jan 2026 03:38:45 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEm4g2aCkVzaX3ytZC3EmWgYXOxCWvdltbAGg53QyofZoaoQmgA6+Rlm54xWxrNiC4sNi8cDw==
+X-Received: by 2002:a17:902:d2c6:b0:2a0:7f60:9786 with SMTP id
+ d9443c01a7336-2a2f2329b92mr478057165ad.26.1767613125366; 
+ Mon, 05 Jan 2026 03:38:45 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a2f3c839b7sm452946825ad.37.2026.01.05.03.38.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 03:38:45 -0800 (PST)
+Date: Mon, 5 Jan 2026 17:08:39 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org, casey.connolly@linaro.org, 
+ quic_varada@quicinc.com, bmeng.cn@gmail.com,
+ andrew.goodbody@linaro.org, u-boot@lists.denx.de,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] scsi: Enable FUA bit and remove per-write SYNC_CACHE
+ operations
+Message-ID: <aVuiv/ZfPHWs3QfJ@hu-varada-blr.qualcomm.com>
+References: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <CA+DkFDbQr40f2V8eKD5cSECVTM6aZyeZNxbZMqT4SeQJjMu3fQ@mail.gmail.com>
- <20251216-left-mournful-0bdb19f7c060@thorsis.com>
- <CA+DkFDZAgjL3amMoLqSTQbbKngeBk0EMBTciBDDKrxV-UsP=fg@mail.gmail.com>
- <CAFLszThCnj+35+C1s3nFR0Rcofz7jTyymKyP9ofMTZMt2t4uWA@mail.gmail.com>
-In-Reply-To: <CAFLszThCnj+35+C1s3nFR0Rcofz7jTyymKyP9ofMTZMt2t4uWA@mail.gmail.com>
-From: Patryk <pbiel7@gmail.com>
-Date: Mon, 5 Jan 2026 10:46:41 +0100
-X-Gm-Features: AQt7F2puV4xPgh1n9Qp1bIWZtqdACOa7Y6c-ruBo8DinErXLHqtaAaXvJmMTsCY
-Message-ID: <CA+DkFDZxC=i-wQqY6OV2rLO5CPFeXLWCKUYRNcDJz_AMt8eZVw@mail.gmail.com>
-Subject: Re: Standard Boot integration - script validation before execution
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA1MDEwMiBTYWx0ZWRfXwFSxmpD7498d
+ r6WMJ7V/Pdbs+nsRiw8O+N+nezN5dzADNzcua8keUpLEpYTzKWUU1deig0SWmtRKtA8XlK0/0pb
+ l+JmRaX3dxkxwS7ihVI9jmEVVS49n1jcfaObyQy9j/asUEoEqu7uQx8vuI2WNIl9ZYZYmptyi4y
+ j9EMMC5ZnlPZ9RbT34vVuD9LCcyr4TvwvvcqWaSEtw5pEP3isTB3mZmCtu1BtaT4IaiXDrL0cBo
+ d/ZqCwNNd4kEyNLyprYh0E/xytvsNY+z+keO+tZiWuVCE3PjiNsOZ4BuFAvRgTakIyWcwlWwSD+
+ UaSQL5luweitfo+B/CVYLhKKU03n2TM5GkIbFqcMC9N+aCFxyaudK2dII2BOnwgnncl8hXLhFSZ
+ PsOZle9ANVqdeGQ7LXj+ddKGywKjKMzbcRzmMNCmZdqcce5Xt84kMrjPGU5tGhpb4B7YXF302to
+ CdepiByhH50neZYUkgg==
+X-Authority-Analysis: v=2.4 cv=JfWxbEKV c=1 sm=1 tr=0 ts=695ba2c6 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=OpxT9wzapyYwnj1NZEoA:9
+ a=CjuIK1q_8ugA:10 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-ORIG-GUID: ny8k0TVo8clPe_0kWwNdVSJmSrKcWiMP
+X-Proofpoint-GUID: ny8k0TVo8clPe_0kWwNdVSJmSrKcWiMP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-05_01,2025-12-31_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 lowpriorityscore=0 spamscore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601050102
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,73 +150,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-=C5=9Br., 31 gru 2025 o 16:08 Simon Glass <sjg@chromium.org> napisa=C5=82(a=
-):
-> I'm not sure if this will help or not, but there is VBE (Verified Boot
-> for Embedded) which uses a new phase (VPL) to verify things before
-> SPL, TF-A, etc. are loaded. It has an A/B/recovery bootmeth. Various
-> things have been written about it (e.g. [1]) and the docs landing page
-> is [2]. There is also a conference talk at [3].
+On Mon, Jan 05, 2026 at 10:55:26AM +0530, Balaji Selvanathan wrote:
+> Enable the Force Unit Access (FUA) bit in SCSI WRITE10 commands to
+> ensure writes bypass the device's volatile cache and go directly to
+> non-volatile storage. This provides write-through behavior without
+> requiring explicit cache flushes after each write operation.
 >
-> While bootstd[4] was about 5 years late, VBE is a little ahead of its
-> time, but I believe something like it (everything in FIT, a VPL phase)
-> is where we will land eventually. As you say, you want to update
-> everything possible - I would add that you cannot update something
-> which might allow the device to be bricked.
+> Remove the SYNC_CACHE command that was being issued after every
+> scsi_write() call, as it is redundant when FUA is enabled and was
+> causing system hangs during large sparse image flashing operations.
+>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-I have already seen this and it looks interesting but I need to dig
-into it more to have a better understanding but I'm just afraid that
-I'll not make it until my current deadline, so if we decide to use it,
-it will most probably be in gen 2.
-Just out of curiosity - does vbe support the boot process where the
-second stage bootloader (the one that gets loaded usually by boot ROM)
-is TF-A not the U-BOOT? On our SoC TF-A BL2 is loaded by BootROM and
-then BL2 loads the u-boot (contained in FIP).
+Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
-> For security I would advise to eventually move away from using scripts
-> (perhaps in a second generation as it is challenging today). Yes they
-> can be signed, but there is a lot of code involved in running
-> them...turning off CMDLINE almost halves the size of U-Boot and
-> therefore the attack surface.
-
-Regarding my question: the more I think about it, the more I am
-inclined to implement my own boot method, although I am still not
-entirely convinced this is the right approach. If I were to rely on a
-boot script, I would most likely need to introduce bootscript-a and
-bootscript-b, along with a mechanism to select the appropriate one.
-This is clearly not supported out of the box by bootmeth_script, so I
-would end up implementing custom logic anyway.
-I looked at bootmeth_android as a reference, and it appears to provide
-the following features:
-- slot selection based on the BCB (in my case, the boot index is
-passed to U-Boot from TF-A),
-- support for booting in an unlocked mode (I will also need a way to
-unlock the device to allow booting a customer-provided image, should
-that be required).
-
-In addition, my use case requires:
-- decrypting the image containing the kernel (a FIT image, decrypted
-using the SoC vendor-specific mechanism),
-- image verification (handled out of the box via Verified Boot),
-- rollback protection (validating the image against a minimum allowed versi=
-on).
-
-Of course, I do not intend to use this method to boot my distro, but
-my reasoning is as follows: if someone decided to implement a custom
-boot method for Android, why wouldn=E2=80=99t I implement my own boot metho=
-d
-for my distro when none of the existing solutions fully meet my
-requirements? As mentioned earlier, I could move most of this logic
-into a boot script; however, first I would still need a way to decide
-which boot script to use (bootscr-a vs. bootscr-b), and second, as you
-pointed out, this would increase the attack surface.
-
-That said, I still have a question: does this align with the
-recommended U-Boot design approach, or is there a more idiomatic way
-to implement this?
-
-Would be grateful for some guidance.
-Best regards,
-Patryk
+> ---
+>  drivers/scsi/scsi.c | 7 +------
+>  1 file changed, 1 insertion(+), 6 deletions(-)
+>
+> diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+> index 8fe6b38a8c7..b755616bf3f 100644
+> --- a/drivers/scsi/scsi.c
+> +++ b/drivers/scsi/scsi.c
+> @@ -124,7 +124,7 @@ static void scsi_setup_write_ext(struct scsi_cmd *pccb, lbaint_t start,
+>  				 lbaint_t blocks)
+>  {
+>  	pccb->cmd[0] = SCSI_WRITE10;
+> -	pccb->cmd[1] = 0;
+> +	pccb->cmd[1] = 0x08; /* Set FUA bit to bypass write cache */
+>  	pccb->cmd[2] = (unsigned char)(start >> 24) & 0xff;
+>  	pccb->cmd[3] = (unsigned char)(start >> 16) & 0xff;
+>  	pccb->cmd[4] = (unsigned char)(start >> 8) & 0xff;
+> @@ -301,11 +301,6 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>  		buf_addr += pccb->datalen;
+>  	} while (blks != 0);
+>
+> -	/* Flush the SCSI cache so we don't lose data on board reset. */
+> -	scsi_setup_sync_cache(pccb, 0, 0);
+> -	if (scsi_exec(bdev, pccb))
+> -		scsi_print_error(pccb);
+> -
+>  	debug("%s: end startblk " LBAF ", blccnt " LBAF " buffer %lX\n",
+>  	      __func__, start, blocks, buf_addr);
+>  	return blkcnt;
+> --
+> 2.34.1
+>
