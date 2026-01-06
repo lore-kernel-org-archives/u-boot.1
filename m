@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EBC4CD0429
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 00:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9E7CD042A
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 01:13:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643CC83A7A;
-	Tue,  6 Jan 2026 01:58:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E22683D9F;
+	Tue,  6 Jan 2026 02:13:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="VJwR09zO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P5T06YGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAE5783D9F; Tue,  6 Jan 2026 01:58:45 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id ADB2C83E7F; Tue,  6 Jan 2026 02:13:42 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DDAF839F1
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 01:58:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70F1A839F1
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 02:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-34ccdcbe520so301176a91.1
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 16:58:42 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-7bab7c997eeso645022b3a.0
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 17:13:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1767661121; x=1768265921; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H4+Yto72WQAncu5cJL1JBbnaWQJKTJ/NnYjTeZQoPNI=;
- b=VJwR09zOzyz/hp+S4jQ74R2JOnHEWyNN0JfY6rGHhROxQUAYZ0xfUvCC9flRelJgYU
- 85UyMTPLH/lZgI5QbXsC9e40U0SrzgjgMvd1REboLs22FzA07A6JWXoCBcCKF/2fa3w1
- 4QlBjrnMOsTyMGgHcRXNX4IbUwJPSSN1eeQvU=
+ d=gmail.com; s=20230601; t=1767662019; x=1768266819; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Y9Rj3TaCPbF3HtfHFolal30c36J6+vdSY3GJFKWY9s=;
+ b=P5T06YGiOsyZHrg277H0CXyPfyOErqFw16Xpr4lhqwS/Fs3ws/fFdv7VKRFgeRdFF6
+ QEIRKzPED43fWcSb2i0NZ2CBsF5tMfbxdj9aEkYf+BqmqvpxzQVcLNJGOlqUbFvGFFXD
+ akr01hA8VOcSTIo6PxSUXAdUWCu0WSYbpBy0s35wIRMY8VzEDjaVuG5YBE6aoY/exUnc
+ AZPHNt0ZQ7IOj4i0GbmRU6Ka5cDL0J2OEBsljqzGondamAM6E2cxlG/XS005I81saQz4
+ JJTqxz2wRuuXLHi2+8XC0fJRv3po8XSYQgHUXAhXUmTMn7gsQk2pppVx5tZVkM04myfN
+ Aesg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767661121; x=1768265921;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1767662019; x=1768266819;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H4+Yto72WQAncu5cJL1JBbnaWQJKTJ/NnYjTeZQoPNI=;
- b=EMjVbq4xHuHpVlLUYYeEu5SoqeyHKLAEV9SPvSRyWUhhKjQkzBL3ZSXhIFW/Fs/g7Q
- 5ZPBnN2lRVxRCgpJWjuYPdikjTIwnm51+Cxck1gvt3ghvura6LGDcvx9xX1Piq/6I2xl
- w5cWb9mPAgF26XwW5ZWPFSwu7VpV7IhfZXdRCdc+Bu3z5n/7Zkaq1eefzDtDJCJqqvhA
- LhTFxNOYEwiNJlfI3mjTdVtjgFbUWdDFCpD7d9hzGl5hDXOzdVRDLMLZ4lmM3ZboxP9J
- xFCDDWWQatFEYZn7IicJL4X3Bw1A/J0lU4hl+QHLIWzMIALA7CxhWgVCAw5KgmtWwau+
- 4sqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIXTnsgTiALXcdN2w2qTqiq6WjS5hqn/FO7/gSAkKZYxPcm6Jh2HK2mXCJtajsC3L80tkIbhY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwykPC1kg9dTTsDZ468pBCrEfLsfUTi8S+SRmJUpHrIh5Cw+oRl
- nkfP+05OrydLEU0BryZwIju8KJK3Z708WAbnJzJuRSy4aP19VLn3kQI9Y5yCl26/7m58oj+HlhB
- XKwKwGp9nxvGfqMN7CEPfuaJOPNCI9y1npuiBVobNuQ==
-X-Gm-Gg: AY/fxX6pYKIBknRImpJkEVhZEnO2fthGSfHDUOKeKKMRRWONobHSLJXq1o8mKQlXi+Q
- NnauL7IkeYIZ8o79ID9EcGHpRZ7cGkesSdqzEfKHcFbCqjzNBThnMQ8l0Mt2c5LIbMsDICp5fiD
- j7Wj+9dEaqwgy+StZKzZ/NrKAp6jaKFEyn8AC2n2Io0sbTUv7H655b6WnUhsQ3SHkKvf3FN/em4
- iJfKoe2gnRu1qJD8IMYlxSdvr3b4fxrt6bY6Tp0ZP+wuFBsQaZ0LUFIynDQ2ITHL5cEV0xt
-X-Google-Smtp-Source: AGHT+IG9UfL+j2sPoC7TwdZvBJ89norKTDBXQg+C/zkuzHg2jnqO6/QD4KtNZaYdCTTL7/vu16Zic+9qZbKBgIHWf28=
-X-Received: by 2002:a17:90b:4c50:b0:340:b501:7b83 with SMTP id
- 98e67ed59e1d1-34f5f89ac09mr695702a91.10.1767661120818; Mon, 05 Jan 2026
- 16:58:40 -0800 (PST)
+ bh=8Y9Rj3TaCPbF3HtfHFolal30c36J6+vdSY3GJFKWY9s=;
+ b=XZEdhpWnSPtPhhwsedrVDtdrac5aTY6tx7w/fp9kwC4Zf+GumUXgorVZ4wWRvTVfKi
+ sxd4I+2o+MrfFFSw7nZm/1iVLwvLy8qpeU+myGJSldS3Oxxaivj/evWa87Ogoa3DDEeR
+ or/xlH5aIyxHJkLIv7N9Jqc8JrIEPgm+APcJ93nStGWS4uVq2VZ3sr8S4lIENFCoZakZ
+ jng3Mx3fccugpWNN0CUsFEYTxyMQvoikrz57OP8SVQ7D3tbjF5nowcC40nLRQkhrRrey
+ zdmmPJZ13gEzYO/sZ3u6TylvWG7yu+5T8iFJKQKHSqF2iwxarQlm4E0KBxa1s1oF72lB
+ FSqg==
+X-Gm-Message-State: AOJu0YyUTOOxdNRfEdCJEJpKAXz5zp2e59YzOQmJE33/l8iStU1ZxUP5
+ MpeVHr/PaK6sEaNOM2wq+E6xRy3kV1crxjThnKU486gt+yKA4xJ5wGufgr/mwS3Y
+X-Gm-Gg: AY/fxX5O1qf2ag/5JHL3FlQ5loT3A11B4vojn4bHN1dGSnjfBtLyRaD7hTlvvx8lS/S
+ uwJiuuiqnXJ0O79UI2tXsZ4QtMF58IBBgnMJt32L+5NDhKJGZnlsPfFxkqwdx8lOBeu0Fh9osa0
+ 4Fdthe1oQZjpEy6NeArrl4houyaXR9CFkb5Et0sBiGTjZ48DFbKXXuW1gH1o1NQkkUmmQRerbEL
+ ww+HkXHtSjQ/aly8zPowdXxaalL7zrSCCKMNlHVABNwhgbmGpXXRUISCWmhBWAhVlBLX8uVRDGz
+ eXAOSF55GycfZXOeHIEz9EOo7T2soZnSWkqhDOSV3A9g19SjJTXMhO/M400bOBXI7E152g6+5TV
+ m3iKz29XLP7DAU08AuJEVv3hjmTw4pX8Z0BfWIWeBdm0v3RnhDudqBOQLpXnNz7BqDthXK3ApOc
+ k6Tshjr8G3GquueIUPHATtFpleU829qNKp
+X-Google-Smtp-Source: AGHT+IHZOtf1meZoD/4ORHAyRvgjm5nqpot+hqPdJHz/8JRFDfUTv7VaGz3SSahn3gHbKMBQxedrfQ==
+X-Received: by 2002:a05:6a20:3ca2:b0:387:963b:68ae with SMTP id
+ adf61e73a8af0-389823ddc44mr973128637.80.1767662018673; 
+ Mon, 05 Jan 2026 17:13:38 -0800 (PST)
+Received: from intel-VirtualBox.. ([94.156.205.11])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c4cbfd27953sm555733a12.11.2026.01.05.17.13.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jan 2026 17:13:38 -0800 (PST)
+From: Brian Sune <briansune@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinh Nguyen <dinguyen@kernel.org>, Brian Sune <briansune@gmail.com>
+Subject: [PATCH v3 0/2] Add-CoreCourse-socfpga-Boards
+Date: Tue,  6 Jan 2026 09:13:23 +0800
+Message-Id: <20260106011325.4634-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260105165221.1816070-1-visitorckw@gmail.com>
- <20260105165221.1816070-4-visitorckw@gmail.com>
- <CAFLszTiMZLXoXEk=JL3siZURVD2YdnmQ7HXy=Viw8uUFbrL6qg@mail.gmail.com>
- <20260105234725.GA3416603@bill-the-cat>
-In-Reply-To: <20260105234725.GA3416603@bill-the-cat>
-From: Daniel Palmer <daniel@0x0f.com>
-Date: Tue, 6 Jan 2026 09:58:30 +0900
-X-Gm-Features: AQt7F2pjcxJMUAq6zFvuEmqGitaY_nMwY66wYnH8JR9zL1sIa9T_0efUT9tp_b0
-Message-ID: <CAFr9PX=S7X0Y5Rg2ySN8H_g7ot1R-Ksu+SZL=Ot4Yx=N2YDW6w@mail.gmail.com>
-Subject: Re: [PATCH v5 3/7] rtc: goldfish: Support platform data for non-DT
- probing
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- alison.wang@nxp.com, 
- angelo@kernel-space.org, me@ziyao.cc, heinrich.schuchardt@canonical.com, 
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +97,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Simon,
+Introduce CoreCourse boards to mainstream.
 
-On Tue, 6 Jan 2026 at 08:47, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Jan 05, 2026 at 04:30:26PM -0700, Simon Glass wrote:
-> > Hi Kuan-Wei,
+Altera SoCFPGA GEN5 boards:
+AC501 - small formfactor
+AC550 - complex development board
 
-> >
-> > You can package your own devicetree in the U-Boot source, to handle
-> > what you need.
->
-> That's not helpful feedback here, the correct path is to use the machine
-> as QEMU provides it and not start yet another pointless argument with
-> QEMU. And this probably applies to some of your other feedback as well,
-> thanks.
->
-> --
-> Tom
+Brian Sune (2):
+  Add CoreCourse socfpga Board AC501
+  Add CoreCourse socfpga Board AC550
 
-My version of this converts the bootinfo from QEMU to a devicetree
-inside of u-boot and then u-boot uses that going forward.
-I have suggested to the m68k kernel side that we allow bootinfo to
-pass a devicetree pointer and/or use embedded devicetrees in the
-kernel selected by the machine type in the bootinfo.
+ arch/arm/dts/Makefile                         |   2 +
+ arch/arm/dts/socfpga_cyclone5_ac501soc.dts    |  86 +++
+ arch/arm/dts/socfpga_cyclone5_ac550soc.dts    | 132 ++++
+ .../dts/socfpga_cyclone_ac501soc-u-boot.dtsi  |  44 ++
+ .../dts/socfpga_cyclone_ac550soc-u-boot.dtsi  |  44 ++
+ arch/arm/mach-socfpga/Kconfig                 |  14 +
+ board/corecourse/ac501soc/MAINTAINERS         |   6 +
+ board/corecourse/ac501soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+ board/corecourse/ac501soc/qts/pinmux_config.h | 222 ++++++
+ board/corecourse/ac501soc/qts/pll_config.h    |  86 +++
+ board/corecourse/ac501soc/qts/sdram_config.h  | 349 +++++++++
+ board/corecourse/ac550soc/MAINTAINERS         |   6 +
+ board/corecourse/ac550soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+ board/corecourse/ac550soc/qts/pinmux_config.h | 222 ++++++
+ board/corecourse/ac550soc/qts/pll_config.h    |  86 +++
+ board/corecourse/ac550soc/qts/sdram_config.h  | 349 +++++++++
+ configs/socfpga_ac501soc_defconfig            |  85 +++
+ configs/socfpga_ac550soc_defconfig            |  85 +++
+ include/configs/socfpga_ac501soc.h            |  16 +
+ include/configs/socfpga_ac550soc.h            |  16 +
+ 20 files changed, 3178 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac550soc.dts
+ create mode 100644 arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_cyclone_ac550soc-u-boot.dtsi
+ create mode 100644 board/corecourse/ac501soc/MAINTAINERS
+ create mode 100644 board/corecourse/ac501soc/qts/iocsr_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/pinmux_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/pll_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/sdram_config.h
+ create mode 100644 board/corecourse/ac550soc/MAINTAINERS
+ create mode 100644 board/corecourse/ac550soc/qts/iocsr_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pinmux_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pll_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/sdram_config.h
+ create mode 100644 configs/socfpga_ac501soc_defconfig
+ create mode 100644 configs/socfpga_ac550soc_defconfig
+ create mode 100644 include/configs/socfpga_ac501soc.h
+ create mode 100644 include/configs/socfpga_ac550soc.h
 
-My plan is once this very basic part is merged I will rebase my stuff
-onto this and then start spamming Kuan-Wei with patches to add in
-devicetree etc. ;)
+-- 
+2.34.1
 
-Cheers,
-
-Daniel
