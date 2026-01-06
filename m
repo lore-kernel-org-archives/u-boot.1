@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15887CEFD03
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 20:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E72CEFD04
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 20:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8D4D83FDA;
+	by phobos.denx.de (Postfix) with ESMTP id E635083FEE;
 	Tue,  6 Jan 2026 21:16:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="le0UuxRk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hRMHmQG9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF7BB83F01; Tue,  6 Jan 2026 21:16:20 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1E54583FE1; Tue,  6 Jan 2026 21:16:22 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A7D483FBE
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 21:16:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 815C883FD3
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 21:16:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-4557f0e5e60so881329b6e.3
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 12:16:18 -0800 (PST)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso1105129a34.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 12:16:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767730577; x=1768335377; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767730578; x=1768335378; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zqPykRl/OQ7aYCH69ufabJVD2eLGWm9RYbgrhA00UNI=;
- b=le0UuxRkPxcAgSGrA7tSjOyD28EhbjvSt0Faj9zXpyOXfe5kmKyG3l098Y4GN4gDoR
- OcWvIJb0+e7djRtOlHjiBKL1uaxlUC0/UGp3Ii7zVxwd+XSiY5cwnpT38SyOTOFgVjFd
- MMn9SWEsHt4sdXRBzxyQa8d9sM5bF035AAFY0=
+ bh=Nax9NcxffdgcfNya6FbRUfHDPx0w/ZIBqB8CId/N17s=;
+ b=hRMHmQG9A906YAnlNOB4KJ6o4WwUnZ7lK6CeMxo2eFE9eInPnOg/48czsVfni2WRRC
+ KFytrrpGP4l0n72l64JNNUY7+PokNMywKBVbZIOP02Uc/VKj+WEtm2DMHR3jd3P5wZli
+ fO1/DVW+4NztYuDmRgyhj1s3YrEj+3o+Kq14w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767730577; x=1768335377;
+ d=1e100.net; s=20230601; t=1767730578; x=1768335378;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=zqPykRl/OQ7aYCH69ufabJVD2eLGWm9RYbgrhA00UNI=;
- b=UfMjvM12wh791so0OAPWekPQRqYdcQ3+PZEkH0HsvVU/vFkqR+OQipHxrwPJRv3QxA
- dsU1I4hq6W89Z54gKFVTzxeGdlwhPpAvbOUbwqzW2KFU2JusYj1Q4rJwNsdjeCTQghum
- ntPRoU9WHWF2m+edTJrZ9gPAzuwTkmbtOZeSNu/Xpo2OH8IgFkzmtYXH4JhFgVuF1psm
- O4JP+3XmJZ4twYQQz1gAA3Y7fxXauljsNQFgG8g/VoFYkCXKqTgQQutNUQ4HIK8v3mPs
- D6aJX9XksHoQPtArMd2QEUt9DfPnmW06jHma7zw8TjnA1RXPieVRvpKyy4OpjqmEF04c
- d83A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZBnSpmVsTj8Hsk+BYX1oPwU7SMDFpFg4j59nReNs4hmQQrNLu4dMcVnILRL9Z3t5YadA1Ebk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzUNBhCWz0bTcONU5CMKPBhSVEiaKWUbZIrOQ9QP8BBe6WGdEq
- Et15k+gE6qhedTkGFOrGXOtq5EXDLJpUUlN5nXV2qh1C42INAWq6X7RfIQrTHYLobQU=
-X-Gm-Gg: AY/fxX5zKF4vaLdUVj0tmUVgw5kYXkRVkK9YYYhJ+wjzeDUsaRx08qQBM/PusYpCuxo
- Lc4HQCLfZkghjGyqJHmqPRa0UiLvXYpywn+IpIIrPByM48dBg5dUE5HSO3u47EW1QGjeE5uvt6D
- gb0YA66nZgcIzm9oSFLLHpp6lbd5geEVGgmTB9E4PxqxO5HHYLloF+N03FXQkobQ4Unh31hPmb9
- m5KeVEqH9ccAAMR248dsYO+AHR+f+bWUfpDxOxxS/nYn8FzmPmk+J7nQAjZJfYqWRd4uaDgXVHf
- ZGM9JM+19T9I28ajAKn1ucO3SgxPzLFdcupsPRKGMwXfT773pFtYTyYQzW/Grhu3LtNAaNgU+qE
- SsKqT6j629T8JmFduXtbJzOI9i3/IMOdO1ZdtvoV3+CxOH+Tx1pNAZHGMAZtUtUwBmT3NV0O1RU
- jm89JxXFNN4uu/BujosqHgnNrLzvxjLB2XscxLyidZVvBfzMjt6n8eCwuGjFp5Gqq8XuB4Zjl8x
- OZbP6NaZ1r5L4aKgOyxOgq2HkZ5zm/HfmimwA==
-X-Google-Smtp-Source: AGHT+IHeUL79UN+iNE7/lqCtMCCP96mlVp40dvKW82ui/ZB3AKsjb/kDsLyjVJEv4bMuzyAR18q6EA==
-X-Received: by 2002:a05:6808:5149:b0:450:f17d:860e with SMTP id
- 5614622812f47-45a6be8d6d2mr124580b6e.47.1767730577409; 
- Tue, 06 Jan 2026 12:16:17 -0800 (PST)
+ bh=Nax9NcxffdgcfNya6FbRUfHDPx0w/ZIBqB8CId/N17s=;
+ b=dBw1JmANp4j86bitQ6tiZdVCNrFCtIHAiGpsUXC3pNZ1WpLykjCRaMj8G1Ahk95Uaj
+ 60pZvD2rT6UAMSrqCWhP6jNInL9wSR87qia2gid2D/24PQYGctUytr4XiE5sEIu87IAo
+ LoIyUvwHiTJs1bHp6eo7bzAGn7pxYm1AyjuF9oyHIvsns/1MYeyvKyh7b0/mYuTTdFZh
+ wABTyGgEAzefQVSUps9sBXlgYCqD0Q8UpHuNmwpeS/9nbOtgceAlkeP24MjflYIeFVdZ
+ IXpsM1ptsrMbNPmCGG90u6Qg3AcIR5bvK/SxKpFPLTbqrX9TTyZQkRJS1OG1oabF0Iv2
+ WlTw==
+X-Gm-Message-State: AOJu0YxmOPdi31Ucxu/f+DQ1lrS9vx3Xc2IjlkZM2PlME+0N0glq0ZAT
+ nBp/O/9dYjqe2yl0sa01IZj3zC5WCHuMhOhMYR9MzfIQTsT9LcHLPIcr4GRzhHos9N8=
+X-Gm-Gg: AY/fxX7Y9Nr5k7sg0ahPCGGXra73MnlNtJM4A+xRTWWL/dsvmunj1YGw5HLlUqlzzlL
+ 5niExv86Ytxuiad51yOKN52dztrYjsgaZDz2hVasPLAYGI3mvSHZIwd7Mm8oRDJHt+jSUGcDogi
+ yAwgLtlRZv7abor/f7WmOSVNGMrX30sx3VWIDG7f7xqjQGjmJYUMquQ6NPWtuHe64QBCNlBQ+GN
+ AURb48d7oKCAMavugrw07yklJ7x0jBKxEBR/PlLNtDpBWPimM8aGszuyESnjsUVyD5aMzcFBo6T
+ YGQ3KuwegEolKn845FvxEfCYZKN6xth5ZX8jOfgp8xDz8wT7y2j3XBXw96WcQyMLmgVI5/nj6XU
+ T6fdAH5zNGVSJqv9NpAqj7Wn+Gb7FaMcp2cV2TUeiqJwG+y9dH6Y+AKeN8ASbwMxQCQnOe+lm9q
+ Ez9CTq6UcD8vIMh/+ED6jlgv7TfkD1L/FgoN+KuPZ8VIgoJSRu4vc5Bc8jf8v5t1m1ybqBDulJW
+ 1/uoWCP/KMV5Hxkyv5jCmuDARiQg7zL0wsU3Q==
+X-Google-Smtp-Source: AGHT+IF8ysBO3VWWiB219ImWhr2V+NBZEZJi+s16KlIqfBRcUdaqannf7Y2Zg+N8aAcsihdxVL/QnA==
+X-Received: by 2002:a05:6830:34a4:b0:7c7:6043:dd87 with SMTP id
+ 46e09a7af769-7ce50aff2a4mr213260a34.6.1767730578235; 
+ Tue, 06 Jan 2026 12:16:18 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478af63bsm1962355a34.16.2026.01.06.12.16.16
+ 46e09a7af769-7ce478af63bsm1962355a34.16.2026.01.06.12.16.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 06 Jan 2026 12:16:17 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20251211-clk-mtk-remove-aliases-v1-1-6a7212269fc4@baylibre.com>
-References: <20251211-clk-mtk-remove-aliases-v1-1-6a7212269fc4@baylibre.com>
-Subject: Re: [PATCH] clk: mediatek: remove CLOCK_PARENT_* aliases
-Message-Id: <176773057653.3765597.12541147208276463656.b4-ty@konsulko.com>
-Date: Tue, 06 Jan 2026 14:16:16 -0600
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: u-boot@lists.denx.de, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com
+In-Reply-To: <20251222174256.2455458-1-visitorckw@gmail.com>
+References: <20251222174256.2455458-1-visitorckw@gmail.com>
+Subject: Re: [PATCH] checkpatch: Add check for space indentation in Kconfig
+Message-Id: <176773057754.3765597.891851544595053836.b4-ty@konsulko.com>
+Date: Tue, 06 Jan 2026 14:16:17 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,17 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 16:32:10 -0600, David Lechner wrote:
+On Mon, 22 Dec 2025 17:42:55 +0000, Kuan-Wei Chiu wrote:
 
-> Remove the CLOCK_* aliases of the CLOCK_PARENT_* macros. One name for
-> each flag is sufficient.
+> U-Boot requires Kconfig options to be indented with tabs, whereas Linux
+> allows spaces. Add a U-Boot specific check to warn when spaces are used
+> for indentation in Kconfig files.
 > 
+> To ensure this check is executed, move the u_boot_line() invocation in
+> process() to occur before the valid source file check. Previously,
+> Kconfig files were skipped by the file extension filter before the
+> U-Boot specific checks could run.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] clk: mediatek: remove CLOCK_PARENT_* aliases
-      commit: e21edf2620749f1390c9ac3ebe329a6fd261c65a
+[1/1] checkpatch: Add check for space indentation in Kconfig
+      commit: eea1c6ec4ead013fcdbc1f4ee1a5f595d58ca303
 -- 
 Tom
 
