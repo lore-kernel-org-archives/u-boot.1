@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1761DCE9D6F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 16:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594B3CE9D78
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 16:24:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0D383FBC;
-	Tue,  6 Jan 2026 17:23:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA67283FBC;
+	Tue,  6 Jan 2026 17:24:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q1kvtB5q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DdFnggVu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 585BA83FC8; Tue,  6 Jan 2026 17:23:54 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id BA2BD83FCF; Tue,  6 Jan 2026 17:24:34 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3239883F9B
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 17:23:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F73D83F9B
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 17:24:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-bd1b0e2c1eeso841566a12.0
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 08:23:52 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-34c708702dfso1090897a91.1
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 08:24:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767716631; x=1768321431; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767716671; x=1768321471; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0zCon2aV98761RPG2w8gXYDUpI9D5J04SYAshpc94V0=;
- b=Q1kvtB5quPOUFVr2EC1Xvd3NwAXDVwO0MoDZ4rSMpKY8sAdxgEJzxWe8kEMEb8XZKB
- lqejCQkCAZ7ivrPafuQulO6WWObXFWh/GlKLttdvntfevuRbRwl9hzhEp72Ym9kY/MH2
- uyhbf1dDcxi6pCpRcxFMNDGDowaInbFK3nLuY=
+ bh=dgPwQP6k4rccKSoek4CALkNhI9b8rgWE24Vqwj2hVHE=;
+ b=DdFnggVuZXffxz+7wVZ66NG7o3snu4cyQaPhRM1/M4cyazuM/vAHpPADucQTDOP+mr
+ elCvEpsn//ChxG6zh7ziYoSBzAtc65prIa6O4yLI5XSu4X39yxuOLAt1v66PIFoUWN4X
+ UncTt6yDj++CqRcSJBEGGucw3twk15pQRTq2o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767716631; x=1768321431;
+ d=1e100.net; s=20230601; t=1767716671; x=1768321471;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0zCon2aV98761RPG2w8gXYDUpI9D5J04SYAshpc94V0=;
- b=ipr6dVB0//h+KlGYjpB4mEL1OReRlndK56sMtF6OPPc/JZN9lQIhx4TR4jay/DGfy/
- gpS6JW/a4Lm9wo+ZE+1CQCQBRxNqdGzwRCLCQ7QJlCPzzumTnXHf8VxFyiIv1AoKdLVz
- z997NmXrVKQjQwv+2kkuL9tu+iqiUjOLP8Z9inNZixQTgMIKY0CqptIwSLVUjSxVWwkv
- bKdFY+d3yzorL9qUo76CkPiNW6dYt4dzdWGD0hLmqiYDTUooXF2FVcPYsl9GgWn7y7Of
- EA+bcFKD69BTXzsxcSFYU6KkTWoD3FFCFhPbnuPaAxd7vU7CjkQlr8n1o7B21rDXGUC2
- YAsw==
+ bh=dgPwQP6k4rccKSoek4CALkNhI9b8rgWE24Vqwj2hVHE=;
+ b=pjpjDGi4bwj/IOQDkyBi1rLlnYUBB4nEtpT86B7JtUA3d+VYexl7NyoTO25trb8/Bg
+ 7/Dp76HFQf9avYRfrtSARaYKAgORtCLRWve+BbIRJWV6/wAo+0iL5ljjTBN2XM/rG5er
+ NNTItsrGGSogRdeb6K3D4sSQ2hY55bFxnXOulARe8Do+CZjELq2azJbtrUFAzN3VD8Eq
+ 7xBBbDR7+A2GstREcQ2GEoL9SHLZysY70lB5CwQLGKOHeg3SKF1z0RHuLdzvbRvQwjHM
+ cO0TXF5aaVTlUXd7S9i81CzeHBhc27je1wBGfv5XNVAF00LOLPTuU67fmqMB42k0ZreS
+ 349w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9jtTvBNB4va1Isn6bcugFOGXxJLAGKLrMymJVfXMnJc9OaLdWRg5lVaAb80da+aRdAM06gHM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwECYVSICzqW9NtDm8AumO8qBH5fvDrpUprGb7ooO1WlMjDJBDH
- 5T9ZiecRM4FNsHMbFEFvhi/0A3WtCOHqe/F5mONuLfRLUeLdt+o1PtZXcIvkt+HDd/HoXuRqNoY
- KFf6fuajFBbLOLckXUrvQQWUFrd9O+v1aK0qNZM6GCZE++Y0i0BE=
-X-Gm-Gg: AY/fxX5d8j9gHjnRa3DgC+O+WAuPPwVdP/VU4ZP/yY5bU0a8uxBICHTZgMst21lys3t
- wQD2IVj918IKhUbbOzDn5uY9LULWIZ/2kS1UYwQPnrbGko1k/08SrCMTo0w5JfMveZuz2pJ0gB3
- v2CDiXeeU4dlKILdreXxh05lrR17ZBjQUNeJ5z9bhend+wgo1NjVVg/We3c8RHlO/Olc9m9DssC
- bTxPlSHEBEqT8kP29wYNd0yNhJTuyDHk08qlGUo81aHSx2bBb7me/7dVv0F2tG51H8WPA==
-X-Google-Smtp-Source: AGHT+IG1S67zrNXSSDo8uFhwItV74dAnpLILv4UaeEGtWOezcVXw/xIer47RD2C7bGyVy8jPh/nNDIKpsdkiwka0CYQ=
-X-Received: by 2002:a17:90b:1c0f:b0:340:2a59:45c6 with SMTP id
- 98e67ed59e1d1-34f5f25a1d0mr3405214a91.4.1767716630665; Tue, 06 Jan 2026
- 08:23:50 -0800 (PST)
+ AJvYcCWWiWSuSvitwUOZlWgl48z8+ZPeId4U7lJWln78N16qfYVa/u98Cy+PVnqz3P7L4b4z1z2Sl34=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/basblHu8E79R0TEn86JSaj2oImf8TonRXkR1dm0P1BhUOGrz
+ IyDwxVzDbErGBNS9jzaX4nnLP8YcxUlaYvQmU+OokFHQXSpJDh2H0OH6CHrmJsHYJhhI3iVIoT+
+ RYH39562HHy4lPGW0h9WtB+QIk6Ss9w04lmtJgyar
+X-Gm-Gg: AY/fxX5fRpVE/SLlZuXsFLpzNm1ZkG0v9eEkrVVvtn/Dk6VAwfQWDZj7GXfErZwOJjE
+ z9BfCpKB2cTpT9Wwbu+4jEZ1wZe++UtbFJ8My2yvH5J5JDTTi5975WNiAU4OaYbLUZQvN0Tz602
+ 4JN+jWRMqXtaaeegOdgPylH+3/Jq49AN1DxumojdiF3yXf9Ydb79Utjymd9u+/tuP0L3yRTR/UH
+ 9ao4NfA67LYu0MyZ3m6kjTZL0Es61xRpkVlBsgAZdSNh1xfsQDENHW6Wv5EBol2i723Kg==
+X-Google-Smtp-Source: AGHT+IGXoZlY2qn0TVQQWzeQ8GA4vixFJ3geTBohPQT3AoLqUCM/jWEGgxagDMBkz2G6JqnlzFbn592FIHKBPejYr6c=
+X-Received: by 2002:a17:90b:48c8:b0:34c:27ad:71e7 with SMTP id
+ 98e67ed59e1d1-34f5f34384emr2756024a91.35.1767716670739; Tue, 06 Jan 2026
+ 08:24:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20260101-clk-reparent-v2-0-3eb42b78c7f1@outlook.com>
- <20260101-clk-reparent-v2-4-3eb42b78c7f1@outlook.com>
-In-Reply-To: <20260101-clk-reparent-v2-4-3eb42b78c7f1@outlook.com>
+ <20260101-clk-reparent-v2-5-3eb42b78c7f1@outlook.com>
+In-Reply-To: <20260101-clk-reparent-v2-5-3eb42b78c7f1@outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Jan 2026 09:22:26 -0700
-X-Gm-Features: AQt7F2qoow5rsvZZ6ofOPJmFU_xT9DlCALBOztAdlWUysoiljzfdGKf8aWNVc9E
-Message-ID: <CAFLszTgJ8R1doWmsXab=1M88sOFjJkVLBOxhQaQx8fVzcGsfJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] clk: allow assigning parent lazily
+Date: Tue, 6 Jan 2026 09:23:52 -0700
+X-Gm-Features: AQt7F2qEhvtVdYSLD53-eUe3cR3hjmU_FB-ddrO_8g0KUJXxYLQp4CYt_yQ60Lw
+Message-ID: <CAFLszTgGFgUoqPMffSgM4XsgQL0rOjeknhxhh+QK-XN3VKYNxA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] test: clk: add test for CLK_LAZY_REPARENT
 To: forbidden405@outlook.com
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
@@ -90,24 +90,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
+
 On Wed, 31 Dec 2025 at 12:52, Yang Xiwen via B4 Relay
 <devnull+forbidden405.outlook.com@kernel.org> wrote:
 >
 > From: Yang Xiwen <forbidden405@outlook.com>
 >
-> Don't mandate the parent device exists when registering a clock.
+> Add a test for the newly introduced CLK_LAZY_PARENT feature.
 >
-> Instead, cache the parent name in the core clk struct and resolve the
-> parent in clk_get_parent(), which is called lazily upon real use.
+> Modify clk_sandbox_ccf driver to register two clocks(i2s and i2s_root)
+> in reversed order.
 >
-> Disable this feature for xPLs by default to save size.
+> The test function then try to acquire the clocks and asserts that their
+> internal states are maintained correctly.
 >
 > Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 > ---
->  drivers/clk/Kconfig      | 12 ++++++++++++
->  drivers/clk/clk-uclass.c | 44 ++++++++++++++++++++++++++++++++++++++++++--
->  drivers/clk/clk.c        | 14 ++++++++++++--
->  include/clk.h            |  2 ++
->  4 files changed, 68 insertions(+), 4 deletions(-)
+>  drivers/clk/clk_sandbox_ccf.c | 10 ++++++++++
+>  include/sandbox-clk.h         |  2 ++
+>  test/dm/clk_ccf.c             | 29 +++++++++++++++++++++++++++++
+>  3 files changed, 41 insertions(+)
+>
+> diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
+> index f96a15c30b3a..3a11b361cd2b 100644
+> --- a/drivers/clk/clk_sandbox_ccf.c
+> +++ b/drivers/clk/clk_sandbox_ccf.c
+> @@ -229,6 +229,7 @@ static const struct udevice_id sandbox_clk_ccf_test_ids[] = {
+>
+>  static const char *const usdhc_sels[] = { "pll3_60m", "pll3_80m", };
+>  static const char *const i2c_sels[] = { "pll3_60m", "pll3_80m", };
+> +static const char *const i2s_sels[] = { "pll3_60m", "pll3_80m", };
+>
+>  static int sandbox_clk_ccf_probe(struct udevice *dev)
+>  {
+> @@ -277,6 +278,15 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
+>         clk_dm(SANDBOX_CLK_I2C_ROOT,
+>                sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
+>
+> +       /* Register i2s_root(child) and i2s(parent) in reverse order to test CLK_LAZY_REPARENT */
+> +       clk_dm(SANDBOX_CLK_I2S_ROOT,
+> +              sandbox_clk_gate2("i2s_root", "i2s", base + 0x80, 0));
+> +
+> +       reg = BIT(29) | BIT(25) | BIT(17);
+> +       clk_dm(SANDBOX_CLK_I2S,
+> +              sandbox_clk_composite("i2s", i2s_sels, ARRAY_SIZE(i2s_sels),
+> +                                    &reg, CLK_SET_RATE_UNGATE));
+> +
+>         return 0;
+>  }
+>
+> diff --git a/include/sandbox-clk.h b/include/sandbox-clk.h
+> index c2616c27a44a..0cd735e3ad5f 100644
+> --- a/include/sandbox-clk.h
+> +++ b/include/sandbox-clk.h
+> @@ -21,6 +21,8 @@ enum {
+>         SANDBOX_CLK_USDHC2_SEL,
+>         SANDBOX_CLK_I2C,
+>         SANDBOX_CLK_I2C_ROOT,
+> +       SANDBOX_CLK_I2S,
+> +       SANDBOX_CLK_I2S_ROOT,
+>  };
+>
+>  enum sandbox_pllv3_type {
+> diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
+> index ac56f17b775d..c4c1b6ba758a 100644
+> --- a/test/dm/clk_ccf.c
+> +++ b/test/dm/clk_ccf.c
+> @@ -209,3 +209,32 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>         return 1;
+>  }
+>  DM_TEST(dm_test_clk_ccf, UTF_SCAN_FDT);
+> +
+> +#if CONFIG_IS_ENABLED(CLK_LAZY_REPARENT)
+> +/* Test CLK_LAZY_REPARENT feature */
+> +static int dm_test_clk_lazy_reparent(struct unit_test_state *uts)
+> +{
+> +       struct udevice *dev;
+> +       struct clk *clk_i2s, *clk_i2s_root;
+> +       int ret;
+> +
+> +       /* Get the device using the clk device */
+> +       ut_assertok(uclass_get_device_by_name(UCLASS_CLK, "clk-ccf", &dev));
+> +
+> +       ret = clk_get_by_id(SANDBOX_CLK_I2S_ROOT, &clk_i2s_root);
+> +       ret |= clk_get_by_id(SANDBOX_CLK_I2S, &clk_i2s);
+> +       ut_assertok(ret);
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Perhaps two separate ut_assertok() calls?
+
+> +
+> +       ut_asserteq_str(clk_i2s_root->parent_name, "i2s");
+> +       ut_assertnull(clk_i2s_root->dev->parent);
+> +
+> +       ret = clk_enable(clk_i2s_root);
+> +       ut_assertok(ret);
+
+join those two lines up?
+
+> +
+> +       ut_assertnull(clk_i2s_root->parent_name);
+> +       ut_asserteq_ptr(clk_i2s_root->dev->parent, clk_i2s->dev);
+> +
+> +       return 0;
+> +}
+> +DM_TEST(dm_test_clk_lazy_reparent, UTF_SCAN_FDT);
+> +#endif
+>
+> --
+> 2.43.0
+>
+>
+
+Could you look at tests to cover some of the other changes you made in
+this series? This is a critical subsystem so it feels strange to set a
+patch that changes existing behaviour but doesn't change any existing
+test.
+
+Regards,
+Simon
