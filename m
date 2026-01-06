@@ -4,132 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D832CDC188
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 12:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A66CDC199
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 12:59:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAD9E83F5D;
-	Tue,  6 Jan 2026 13:37:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 556C483F54;
+	Tue,  6 Jan 2026 13:59:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tbdqDNBG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="EtSSBiDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 547FF83F63; Tue,  6 Jan 2026 13:37:47 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 8FE1083F5C; Tue,  6 Jan 2026 13:59:13 +0100 (CET)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 923FB83F5C
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 13:37:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CA3883F20
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 13:59:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=neal.frager@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gqer0foEU4OP7sOdnH6LwRgJwVp7l/FRtuaiIC54YvFABuyXS0JECYjMNadG/tCR2nql7/M15mN1kH1EfsfUcyvwYoJWnUEnaG3NSkmIg0oyltjGBhSm9c9S+2FFoPUACi74q7M2PAGA7O5JNvFZDFwhVQt5GR+BpqKhP1kM6i76e1xvIoFkt25CiYkXCtwP+G3tFvO0ZezbRFm+sA4z2kwo3NDNwNGSbw7m5LavLYwyBeSCv6Lr3FcTgUwqopvdBTuJqJ0uUuimNfJc3JWyyD5ZpAvO2WwOtk4x/PwtGBoON4nPobyhPAcdgfY95cH1lTMuDU8R4niHqjl50yXsPQ==
+ b=aLLCYk64isBwVSJTU2SHkJEsWeBhbYmifVHFx/2F5jxH/HxL30ZmNs7OGkeeivpHG/kRxaLUNmKXeKmG25r42JNhHN3HxNwZG5kiRrlpzZsJ8ojUr0Yarh+Mps/ZvHAkbhlJkTQOeRcr6knFot0lMF5YHUYFwL60N2flSf/7sX6L2MgeiXuIa++d3okw18DiTib4HXQG0xqM2QJE09oYOmB4/KZdszv61o8frEqK4VyihP4dpaEKQZUuleo3irGvIGuIIZ70cGS//A3xk+qntcNmBSed75xZitJ/AV9e1iFDFY9vSsPQCDQqQbP6izfhy0iGAQZ72I+UCMK4FHw7yg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1hwjJDKFWfe9IKnd8Fykd8lQlG2mPiw354H0ashQq4Q=;
- b=W2ULyIuQ8Vi+ZhXbP+cHYpfglNPDiOp5gMJBzi/LZ/V2kCe+y09OhOpMvu/0L38yaT8LC4X03h5JM+liK7yebrkcXQs15Du72NK5unfOj8IEsvFzj+3NcsFESG2fi8o6inZvBNWA2+OJADDToJ4pbSeXA/jI95lecGEre9U7TFR2N+Zynq7tT6X5HbYiXFEkznp535dvxvwtRIDHI0ANIBY6fc3iNlTKclKJebVcEydLdCCg8svj2tcpgoRlPtNDGVPf+3/Qk4wKUys5gP2Y4L90l+s1sOUVj7DvNoof2QxH/e05122uj8WWu+P3bLZg7G3B0+46wjYer+CZZe6W0Q==
+ bh=t9lyg/7Jw9Bka73rZQb+4HC0chW34UTOUhi+9gQBVyw=;
+ b=mHqBU1NZZfl+kctK0Rg4a2+SuckUPdU47kvdj/38rXAvcifEYkAYPU9NZ6rdZtzBCmXYRc29VmK6zA3Ov5fAhDjrEFsPalAnkmC0UaWtu0jN7oS1l4kn37cRswRXf1bjyvdop+Vx4cpEee6GfPr8A6tPR2CtCnjyMncIv+KcHp8d2JgNmu3iBBUtvX2JjRGEE3HVNFP9k001Uja7NOJeYy0cHbVyaizFvTDIa7BZlxCR05fiwjMa4JrR2XgocaRotuYPvZsU6Hy4KEm4pRAcC7SmubJZBFmBhgCxGvcc3v5n/yy1IYjzm+T1z1MFZTZUUvMZxsZJ/fQYacaId50z8Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1hwjJDKFWfe9IKnd8Fykd8lQlG2mPiw354H0ashQq4Q=;
- b=tbdqDNBGkKdH8WGnAqLhdWSRdJPTf2Al+VFu3OPM8UWjLS8F/aPXk1u2bBRhzwUEFfHJ/5Qorgrzqh9o9C2IN36cIk6x6L4PvWVJrWrJ4UmVecYUKHcFElMjyKNSIy6UpijVZq3sOoprGXBh9iN1UtC6DSgggz0WxZISDcwUtvQ=
-Received: from DS7PR05CA0043.namprd05.prod.outlook.com (2603:10b6:8:2f::22) by
- DS7PR12MB5960.namprd12.prod.outlook.com (2603:10b6:8:7f::14) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.2; Tue, 6 Jan 2026 12:37:34 +0000
-Received: from SJ1PEPF000026C6.namprd04.prod.outlook.com
- (2603:10b6:8:2f:cafe::c8) by DS7PR05CA0043.outlook.office365.com
- (2603:10b6:8:2f::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.1 via Frontend Transport; Tue, 6
- Jan 2026 12:37:34 +0000
+ bh=t9lyg/7Jw9Bka73rZQb+4HC0chW34UTOUhi+9gQBVyw=;
+ b=EtSSBiDskc1Ba2rYrgDLOAdtGHbLNO+ahRKfFIwVZwIFZiQR/ncdJYsHK/sWxXUX3NwF6OrUcpxbFvFhgTSb6yWB7dZhBKd1a/prAErms+5I/2qD+7sWStLwMpK6WweQ/usdhqVTeFUauhaCcsgP1B0PCS9yZvf6rniab3vRii8=
+Received: from BYAPR11CA0107.namprd11.prod.outlook.com (2603:10b6:a03:f4::48)
+ by DS2PR12MB9568.namprd12.prod.outlook.com (2603:10b6:8:27c::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Tue, 6 Jan
+ 2026 12:59:07 +0000
+Received: from SJ1PEPF000026CA.namprd04.prod.outlook.com
+ (2603:10b6:a03:f4:cafe::fe) by BYAPR11CA0107.outlook.office365.com
+ (2603:10b6:a03:f4::48) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Tue, 6
+ Jan 2026 12:59:06 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000026C6.mail.protection.outlook.com (10.167.244.103) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ1PEPF000026CA.mail.protection.outlook.com (10.167.244.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.1 via Frontend Transport; Tue, 6 Jan 2026 12:37:34 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9499.1 via Frontend Transport; Tue, 6 Jan 2026 12:59:06 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 6 Jan
- 2026 06:37:33 -0600
+ 2026 06:59:05 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 6 Jan
+ 2026 04:59:05 -0800
 Received: from xirengwts09.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Tue, 6 Jan 2026 06:37:33 -0600
+ Transport; Tue, 6 Jan 2026 06:59:04 -0600
 From: Neal Frager <neal.frager@amd.com>
 To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <ricardo@foundries.io>, Neal Frager
+CC: <michal.simek@amd.com>, <igor.opaniuk@foundries.io>, Neal Frager
  <neal.frager@amd.com>
-Subject: [PATCH v1 1/1] board: zynqmp: allow env in fat/ext when booting out
- of qspi
-Date: Tue, 6 Jan 2026 12:37:29 +0000
-Message-ID: <20260106123729.1483656-1-neal.frager@amd.com>
+Subject: [PATCH v1 1/1] board: zynqmp: add cmd for getting boot auth state
+Date: Tue, 6 Jan 2026 12:59:01 +0000
+Message-ID: <20260106125901.1491300-1-neal.frager@amd.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C6:EE_|DS7PR12MB5960:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a35d0c1-688f-450b-6324-08de4d205dee
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026CA:EE_|DS2PR12MB9568:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68085ac1-390d-4357-9209-08de4d235ffc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ITW1hRAqGjK4IG+A4qy6eqYeu6sAOmmt3yNKG0m8qLG14yrSNYgIvwCxvtIr?=
- =?us-ascii?Q?RoXxtszTPa/ZbKvOwxxOiDlp5EOe6XN3oAAXOkL7KjzIxjVPCOC+iNDvWJkT?=
- =?us-ascii?Q?+//nhiXf5zNDpyjLBBPDcIbuFOEwogVItrhavHv8KSFf72eSVJtJU2mKjfC2?=
- =?us-ascii?Q?MZZCqAj/7b1MK6myf9keluOK3+wD53H6r/4oODPwGI0AZnUoV3bft9wj2ISu?=
- =?us-ascii?Q?AD//SN9esioxx3kNMEdw+JLRwEmQuPH3bpSEtPnhAit8/L9aBTSZ4H9BQZkJ?=
- =?us-ascii?Q?CXPmLfK7kl0YR4VnVBk9mp89eipwQfU+uSBgfrxkp77HPF5yzlWT5UfkScnV?=
- =?us-ascii?Q?JXvlxwo6cwW6sCjRREd20nRNpV7QIXn7TI607WV3bgnm0dBpCQb2GoDmsjHd?=
- =?us-ascii?Q?ibTdCE9ZQBus5H3yfaJtDlOhPdmgt43gxUjCexiOa2WUwiwtL1eV8xJS2IvU?=
- =?us-ascii?Q?iic4+6C+5BderX1dQ8GaKO+nXmtIUjqoIwx1WPpLnbXJhv9BT0xGooh+Pw8s?=
- =?us-ascii?Q?6N+2Ol0O3ql2/SY+kJsHtgeJtE9OQYRCp9QqjEVE8hd9gCzPG6Mzw4NSVb3R?=
- =?us-ascii?Q?+EtEM8Txs2dDT9YGjLJKJU1RRJBIDPEhk8e5pAODWRlljsYR+l34X0zR2u2J?=
- =?us-ascii?Q?Ftb+8c6W8MWUCp+gF1BdM6fJy5LzuOtXYxaT+/MF0UiibQFjPxqb0KyjkDRI?=
- =?us-ascii?Q?pBFlp7vW1nywevqT6x06qMMhAIRWXYx07+pTeS3F/jWLHbdqXzOher6GFBv8?=
- =?us-ascii?Q?CxjIsm5CBxPhAb4E4HJKqJlkUcg3jjyH4QLeU9cxkvgQgpAqU5e6PPk1JjHh?=
- =?us-ascii?Q?WwiDx3bPYZWFkObNePp8rQD+uczMXNq1CqWNL8Aaq2glUyqVYXExgVGoU6p8?=
- =?us-ascii?Q?phE9TCd/mpSnD1S4w1efduE9exFhXioPwrhooo9HxCd94peq215NJQ3Wej+/?=
- =?us-ascii?Q?jUxjN/zj1cLg1QDNE3pt6ABNoG28vqFw8l3/QkIkxaUL/3YUbAh/NXW0lJuL?=
- =?us-ascii?Q?6/s+ORDmUpX+tllHUj7MG3n2Kme3FPtzmqY1TSclVrk8z4oD30bYGy8gTIxR?=
- =?us-ascii?Q?rYHGyw+rmgc5tjgfoUh+WsreMS8KVk6gK0FtrmiPTRXtAIed0xT3nYR8nJ9l?=
- =?us-ascii?Q?fj8R9HiO6YbZWt6O9bT1A/4YRYpGqq4Bp4op0wVHNc1awtiDqV/tv3bnqlcJ?=
- =?us-ascii?Q?7+17gCNVHg/YqRsna3l6x3+hZTT9O9bwkolLJ4ERvHHz72ywyk+J3OPOTXNg?=
- =?us-ascii?Q?+GMZyqNq2d0zNm5ItKhooikHWRSJI9MDjBSbxVrnx+YqVSkI5LavLMsZyk4S?=
- =?us-ascii?Q?9+KMJd3cRxMVkaqiDGf9n8yDL6d9rU5jGO4zbhG2Uz4KEcPlb3trJZZHJRM7?=
- =?us-ascii?Q?Nx1HbXiz/y6FLY/zD8AVX7M+dMwht63k4milfn92CPIE01MhsGY9Eb17pAAu?=
- =?us-ascii?Q?XwGXEHBycqYhTjuG2/So7gMWkZtrHGLGqvQiqnEAvpxKZ+3o566L0EKgoTv1?=
- =?us-ascii?Q?A+7q5wtDJ5yct3GXlDI5YtNL+H7wtCPQyvaNnUYJmkJuPTnWC8Fdqay+4P9E?=
- =?us-ascii?Q?zZXqyw16L5sFCzDd9Yg=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bLw40batUB86P1YItddNJmkiHYgwnEfO+EL+9sG+40vbR2rh1vRJtW26tbyp?=
+ =?us-ascii?Q?IFoIHeLSXg6roRYAepPKEcW+xJRfBsX7v54goQLv0QHDjpeWYzhNsUkkFXPx?=
+ =?us-ascii?Q?GTY81/MNIrBbfzs6tHNzqfH4SX2DJH7DQ8kiCDVKxN3EYBzgypfStZGxulbn?=
+ =?us-ascii?Q?XdO28X6rFFV/oop0aamJyr9zBkfH4OlfuTmZFKTBCcw1mhBSjP8ty76FwxzL?=
+ =?us-ascii?Q?djB6kqOeYAMmaZBoeSdpkEQFm4KUWfsux33Mi1+DSVFLWoNmp6QvpJMH91BS?=
+ =?us-ascii?Q?D0yHWJhFWAW7ahytvkZnl+NVOB9iZ7NilSYi+GOpc2hU4hPKazc322Vv5ECb?=
+ =?us-ascii?Q?ursoHKyT0KylOJQCxz4YT2dqH05wCk6YS+nNOoPCqucB1LsjvKLg0MVSXpZs?=
+ =?us-ascii?Q?WvxKRBzzR86mmO9P18/eJiNS/ZYoa/vGZr8+F/LNPJCqvWMUauvbsaxaQ60q?=
+ =?us-ascii?Q?Sp99j7xTLoOK35mc8gCBlifv0A3BJgptUclte7Y1zLN4mKZzfv/We/o+npRM?=
+ =?us-ascii?Q?hZFXPK6FXCUTF4Z1LOsmEfML52vPnzqstcM51F8yKz256b+BAmG4yB7nJIk9?=
+ =?us-ascii?Q?/c97oAFB5SxgfwgTa8K3SJWkyuklrfOXolh/MMV5FuLTorZpJgQxeRki9Lxf?=
+ =?us-ascii?Q?byXMAOersqJnD83frvsH6WZplv3oUXtLT0AojV1zjI0Tqq6npfhoORJ9KmYQ?=
+ =?us-ascii?Q?YAFJdCNqtXfGFYf6036lXWnVYyGU+NSMQVeD0hSDB1x/orY2bZmwYgYnMHyR?=
+ =?us-ascii?Q?yYeKAaW6tsA6VD4iA1TJ08tzrsuAT+SqL9DsklMvbEZYLkKgN22UJX/nttDy?=
+ =?us-ascii?Q?Z2Jpy84hc7xpT4MaEk4A7pgNhuz1675smFE6ChoFVUPDLd4OkNPXhrCjtUNB?=
+ =?us-ascii?Q?SSVD2umt0sycG2fevc9IH8nZzu9HtYeEkthY6SGhVfN5w+UF6ZjNQgQtSm4A?=
+ =?us-ascii?Q?Dz5pQPRsqCPkdLSEaHFTxYg9WjVPnRUqCqtbR/ZdTMU028EmCCU5m7ATWqMn?=
+ =?us-ascii?Q?+4kEHh8AG6bmFqKLxoXkemt4wps9HyihYyXk31fuduiNtzIis3bZpLRzZuIj?=
+ =?us-ascii?Q?5ePVAMQH0wa2nhpFf9bVwvgXyXvxr1BUlZknwpJ+mRA1GByjbi6JNlwal7M3?=
+ =?us-ascii?Q?6J96IaRZbSZoZUu8BWFUH97IwFEfLcOFwJqfMkTy8CILEv/ODwEm0ogaWE9J?=
+ =?us-ascii?Q?y1BeW6wKNfiSm5VcE0V2yU1AdM+MqmguxnTPbKFq/Uox6OFeK0tvQHJngiGV?=
+ =?us-ascii?Q?Mkn0bcbHSRaDvxtScQl8KamjCIwNoJspOCb+g+SVE563D2Upd2FUkcH3AKv+?=
+ =?us-ascii?Q?CMMfgb7hxU0NKKa5oJTowOzSjHEP08fNFTSV+PtVx+hzcnU3O/brBR/vXR/p?=
+ =?us-ascii?Q?/pehoduplQ+0gZXjyj5OYdgOBMGgNH4GnAHHyDNGh0BHWMUKgB9zC6RQ1FB7?=
+ =?us-ascii?Q?TFqa1gnsoWWT38gWWw0Yuoc6Ln1hVqwf4E//sstFirGvcoon6EC1xMhJ0CWv?=
+ =?us-ascii?Q?NxHJ24SRcDujK6YYTyTu4Mp0E8uwykbIstLSV9qkIb9P/pEmkCvhS964MemY?=
+ =?us-ascii?Q?tWIgQB9rYIXe6IDPT10=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 12:37:34.2539 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a35d0c1-688f-450b-6324-08de4d205dee
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 12:59:06.1651 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68085ac1-390d-4357-9209-08de4d235ffc
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C6.namprd04.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026CA.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5960
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9568
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,29 +149,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow saving the environment in fat and in ext4 when bootmode is qspi.
+Add command for checking if boot was authenticated.
 
-Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 Signed-off-by: Neal Frager <neal.frager@amd.com>
 ---
- board/xilinx/zynqmp/zynqmp.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ board/xilinx/zynqmp/zynqmp.c | 38 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
 diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 3b28ba62374..769e52bcfb5 100644
+index 3b28ba62374..92351aca36c 100644
 --- a/board/xilinx/zynqmp/zynqmp.c
 +++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -628,6 +628,10 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 	case QSPI_MODE_32BIT:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
- 			return ENVL_SPI_FLASH;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+			return ENVL_FAT;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+			return ENVL_EXT4;
- 		return ENVL_NOWHERE;
- 	case JTAG_MODE:
- 	default:
+@@ -149,6 +149,44 @@ static void print_secure_boot(void)
+ 	       status & ZYNQMP_CSU_STATUS_ENCRYPTED ? "" : "not ");
+ }
+ 
++static bool is_boot_authenticated(void)
++{
++	u32 status = 0;
++	int ret;
++
++	ret = zynqmp_mmio_read((ulong)&csu_base->status, &status);
++	if (ret) {
++		printf("Can't obtain boot auth state");
++		return false;
++	}
++
++	return (status & BIT(0));
++}
++
++static int do_is_boot_authenticated(struct cmd_tbl *cmdtp, int flag,
++				    int argc, char * const argv[])
++{
++	int ret;
++
++	if (is_boot_authenticated()) {
++		printf("Board is in closed state\n");
++
++		ret = env_set("board_is_closed", "1");
++		if (ret)
++			return CMD_RET_FAILURE;
++	} else {
++		printf("Board is in open state\n");
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++U_BOOT_CMD(
++	is_boot_authenticated, CONFIG_SYS_MAXARGS, 1,
++	do_is_boot_authenticated,
++	"Check if the board is authenticated", ""
++);
++
+ int board_init(void)
+ {
+ #if CONFIG_IS_ENABLED(FPGA) && defined(CONFIG_FPGA_ZYNQMPPL)
 -- 
 2.25.1
 
