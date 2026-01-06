@@ -4,103 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85662CEFD0C
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:57:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C784FCEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:57:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 244778400F;
+	by phobos.denx.de (Postfix) with ESMTP id 65BA584016;
 	Tue,  6 Jan 2026 23:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UCE7qvnA";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hmMfwj7R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7127783935; Tue,  6 Jan 2026 23:06:01 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 9BCBB83B9D; Tue,  6 Jan 2026 23:10:44 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A3CC83936
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:05:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CBA383936
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:10:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-459a6261428so179437b6e.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 14:05:59 -0800 (PST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-3f551ad50d1so572699fac.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 14:10:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767737158; x=1768341958;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767737441; x=1768342241;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Bp8yU+2GFvew1JKiMXntk/9uLwVDMhGhjN/Xj+VT22U=;
- b=UCE7qvnAB8rGHGhYl91lkeCSucTh2AOHB/ZFIaQuIKEgRKQBPxL8N70Y9rGzls3B2H
- Txu1Kjf/0rsYbisXjzhlYBcz6tCnXaG6vGir+yrghzzg2iIPqlagT9U66uhkoCDL6h+/
- eQDpurNQCQ1l3r6M9kQs9XZcz+vAt0vRJZdycZ4/nE40zAZNE31Co9NNbQBoBqRvtikv
- yeV0WuWHHrOk9lSyQv3KqGAzWx3y9KJZ+iZc85K8b/XNcI2RFEKSXq6yZbwTp4mmfNrq
- 3G7SSK/0Cl1kV6+HlFPM7i90p3PxNfgd/j4J/7kIEG1BddT3hBAGkO+kIRBF4ODoJOrM
- raTw==
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PLZYYLT2oxqrQ0fNwujg933sQjY2TkZVV106QV/BPfw=;
+ b=hmMfwj7RcPNpeICXNpgA+yhfeZBg9TZHeP8HH07DgQm/MGil0MXkTkgtSqV7+5qLI3
+ 0MG9p3A5Fjvxv9/kZnELn6GAodxq7vElusIxliEYwwMNTkRg9J2r3ceeaOhhYRu2VN1g
+ klys3OTX0mKTi6M/V/5TgxmjN1aOAe9USPz0RAIsFqc/nqC/UQck1NIReuGBiq37PKdh
+ cF1XYNey510N67J0NJedZeBprP0/U8M34LN5+JNEFQDLPnKi/rwSG9cdLnvEHFYJNUZs
+ pV42lcS6BM7WdpsE8fjI7R18v/Jve/gTY6KOIbiEzs/pnIPn09/p341GgwC29mA2eOWC
+ Y9kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767737158; x=1768341958;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Bp8yU+2GFvew1JKiMXntk/9uLwVDMhGhjN/Xj+VT22U=;
- b=bEegU/yDmL6+ptvds0xl1SYBCn9qKMvQY9XUpBopR7qJzEQBO03SinJ8ok4fCoey0B
- vyghBm9RlImnY3uHNGAfA564QT+DSD3lkLCUlvuapfLuB0ERoFbX30uVsZdHWptfp+x+
- DFE4imw4F17JX+kLrHuMOhdkg4r4DnJDJ1lXaAKLUEYQ2xkFsqa5lbCOg41LLwMOq7xQ
- 6/i/fw0dKA5Ay/JA4gqvvK2NCXA38nwFj3Kb2/FfWLk5blrRxsAFIBmSVlHoELZH6zyw
- mpg4uRvqhBX7Pr0gnCKdVlGGiH21vZy/E7KxghFlqx+Gspz8oZJEvvCLdjOoIppVKVYC
- R8MA==
+ d=1e100.net; s=20230601; t=1767737441; x=1768342241;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PLZYYLT2oxqrQ0fNwujg933sQjY2TkZVV106QV/BPfw=;
+ b=OP7HzBwamT+8VezrxRUv5hwX9nSDHhWW3v+qufw+Szy6j1mNNS+sYYM8FJ7sQkeJdi
+ ezQ9xLIl4NPfYSCPztpS3wNecIXcYnSn8KW0gK6FjYFCva12Ei8PhTseFUiKzDAhOFLm
+ +t3eC5W+ExqZHp5B40jlQdvj5o4bf1XiPCNSTByarXf2YJ6nZ9amT3AKYqGMA6YmvpVY
+ 5vsfwmHNSGNbqcp386m5ASQdEws47mmfhpmDBQ1WnptjNwcja+fU3GMso0DlQ8fcEeKg
+ SK+rCusyOCxxBK9uI789DW1a12mzzevaVRFswK7tLMMYwewjCO0ya0SUFNoovZrnweG9
+ M2xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVP8EyS4Yxm441Veje+eYgWjLC4DLNekNtAqBRN6uL3bIpyo9sUWpnQw8bQC83vpqy/UyktdB0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+ukj8g+oWaqHxrxTgbJFuRAwMMN5t1UGFwT6xBW1zNI6+W7jg
- nXYPpzZIOuwQMnfY8fkI+ZSjZ3/0AOoRLb7TOtzZ7Es9zoqWhQ7lsrmiQqqyvfJ+asY=
-X-Gm-Gg: AY/fxX51N2I9x/SOxuuCqK/fTgkr616YTr/rZfGIXfacqcxzFOdb0nQf6pHNipdRNa0
- ajdNiHkq3RF9ZxaRnuZ9ckKQSEsE0nsST+iW4iuThWP+czNUmZNL9HRgsU8+rgieOL632M7qwu0
- nWuU49oOsb2+8xS/OhEkkuyjEwD8o5KtLV04CiWGfcu9+8X/N/jRMJNgxle8vTOHDcYnYoST7hE
- LX3HqmVNaLUBd/Rr3uBlWaYyxns6TToQqfWfuxA8CHR6oyMtTSlE7BVEFCv7MWFcFlSLSmxzU4J
- CJV+5KhPJ9mu4MSUReTuLq50frNQ109IOlNSwdgSMhTerjLhXADzD82BjsXawFhq58P8+IIaLUN
- 06MhoMJR6B6y1ERrZqw1tej1ikEM8nOLdA3WdDHmtHnnXor2hjsYQQVHR2efJvTT9e2sfAV9DuE
- VfIKTbPr5TduweJ0g=
-X-Google-Smtp-Source: AGHT+IH+XRXsquAft6k7ZlbFnCxZYqMaXmKQZZOvXkw3E0fSzp8eoUdFR5VcjACz6rCBWNUsEHrfKg==
-X-Received: by 2002:a05:6808:6618:b0:459:f014:3cfe with SMTP id
- 5614622812f47-45a5ca9f17dmr2183213b6e.23.1767737158030; 
- Tue, 06 Jan 2026 14:05:58 -0800 (PST)
+ AJvYcCU7N9R/xYAzHQ0ALDz8mg+7DLwfIWw3Fvv8EOyp9he4L+L859SE9XIcEY3uekSmd7QOZdFRXxU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8AzNy757wtsP7iDWb0JtbsJ9S4T6xvAjvqVg6LFD8xUevidFr
+ JR1A9dhh5+M6wqKva10i9Q8QZrewVR5EbgEf4+t8Vv1kN1q9SOyDa1r4T0h7wcBs1dk=
+X-Gm-Gg: AY/fxX5YUJXHzRwX1TIHEId/VXnFRAtPL6+yADLWaI7fGSMeKTxt7qZbcqAGC4QCgnV
+ nnRYzBZQN+sW4UeFDL2lvEeDO3Kic/dFkZv9pVqKTa1iPkg3GLyqxgAmtmp9UsAuzC0AVpYUT/D
+ NxhU0b/w0zuQQp5daTT+IuX8IT3zbJXW6oOT0rTRUflWr5xiBnhlS8ckAZzvio4WFmNVPNdAPJg
+ 9DArIddiBkh8OoYgROQNa24WkNurkq1/+V1ShXsbtYvGb9tVCeu+XgqfNqNoRwkLPTugIkC1L+o
+ HMGoi3kGqqh3dqDBYr+3eL+AXiE0YMzdNVuLR8tknIdaoKLN8p2ZClCso6ZMRct0757B1KO9F3r
+ ihhIMEK1nPmuLsk15MGVG0shW5vgPSa4Pzcbk1Zs3ZxDyjPOklDk6fuyKkrPa7cnuxMg7b7UXFF
+ TKbAY7OpUekUHDN/o=
+X-Google-Smtp-Source: AGHT+IFdvFb3/BS/sruNkNF0yFwQNLb4JkndRQrylIZVG7zxAPb01WgbjU6yv/xRYHMpdKwShcjdLA==
+X-Received: by 2002:a05:6871:338c:b0:374:bdaa:47f9 with SMTP id
+ 586e51a60fabf-3ffc0af6b20mr214857fac.34.1767737441053; 
+ Tue, 06 Jan 2026 14:10:41 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7f98:2205:4ba4:3e65])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a5e183916sm1575124b6e.5.2026.01.06.14.05.57
+ 586e51a60fabf-3ffa507220csm2042560fac.11.2026.01.06.14.10.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 14:05:57 -0800 (PST)
+ Tue, 06 Jan 2026 14:10:40 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 06 Jan 2026 16:05:21 -0600
-Subject: [PATCH 3/3] configs: mt8365_evk: enable pinctrl
+Date: Tue, 06 Jan 2026 16:10:31 -0600
+Subject: [PATCH] cmd/Kconfig: fix type in CMD_PINMUX description
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260106-pinctl-mtk-mt8365-v1-3-0ca3eb382468@baylibre.com>
-References: <20260106-pinctl-mtk-mt8365-v1-0-0ca3eb382468@baylibre.com>
-In-Reply-To: <20260106-pinctl-mtk-mt8365-v1-0-0ca3eb382468@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>
+Message-Id: <20260106-fix-typo-in-cmd-pinmux-desc-v1-1-1798f6690589@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBswIamuEi1Ep5qFJlphSHdPW
+ j74/AKJIlOCqSkQ6ebEh6/o2gbMrv1GyLYapJBKdELhyhnPJxzIHo2zGNi7K6OlZLCXpJWS60C
+ jhnoIkWr+3+flfT/+UzMfbQAAAA==
+X-Change-ID: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
+To: Tom Rini <trini@konsulko.com>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=660; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=856; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=vRQkT1zUTe7+aLY4VnCBm5YJccz9+LXYtdo3tNHm1oE=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXYc6UAMFEc9CuOKvWo5Zef1Rnwp6Qt3w7ceA3
- //ZD+iljlyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV2HOhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ApmYIAIrfkULlyqis6XE7dIke0oNwJ8HfyNSNmauunG0
- roDVknX9cjP2OkBF99tBDCpLLbg96zzPFax30790y01P+RMPlCxB6TrDSLgrH705UpN7Y+HnSYH
- GOgMV0kOxb61yEM8yC6A2wuuObc9RBq90/ktRwI+qeBoQELb0N21SypwB9t49gGqyYDc5FWjzOv
- bH9f6jJO+IbjmJCqqTMdJbRVS8YwKRsZY5zSAQ9V1w0i8/KF56Hve4PmV26hVCpdvfDDrhkJSox
- NFYhyoYdJONJNcsoWwisQdXcKR90avDs1CfLgmW1AxJ9PORBAoXwenDFG7rwPUoHlBn4J7efJVz
- ETIE=
+ bh=l2xcezIEiNaDYjrOZgi0pMsjGT587BMXNJ0g2QDkhM8=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXYhYCseGylnkbN5QBbFZCeqpscr7zW/ivklzf
+ yvifD3XdCiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV2IWBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AewwH/3TIMwmbk1GXhPUTtuP/jO4vhGdTPz0BirCWy/X
+ lpRude/gHUjEDzwa9VDwoF6bIFS7H4WDt33LeEmZF55qZwCnea89FSEQRaJsOU3256vZHWv4U/C
+ bRP76uEY+1i9agJOLP8W/EC9ttjvAOR4UAH3TENkDYi1RvkEid/qWozYuZWsAsp5bni7HnXnvBt
+ raKFm53nXl/l+bFUby9y8QAQU/F/VSyDwROM2fWbbLPJBZ3qQjZT190jVTl4w3C3m2Nj5Wh8Cvt
+ /ugI791AQOD2C9Jd67yOSSdlODPT7gqoGV8D9PfS+aZu886waCW2f5VXJmekZxlMUpgxvn2S3S/
+ jX2Y=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Tue, 06 Jan 2026 23:57:11 +0100
@@ -120,29 +118,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable PINCTRL, PINCONF and the SoC-specific driver for MediaTek MT8365
-EVK.
+Fix typo with correct spelling of "purposes".
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- configs/mt8365_evk_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ cmd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/mt8365_evk_defconfig b/configs/mt8365_evk_defconfig
-index 7b411453e00..c87fff669db 100644
---- a/configs/mt8365_evk_defconfig
-+++ b/configs/mt8365_evk_defconfig
-@@ -14,6 +14,9 @@ CONFIG_DEFAULT_FDT_FILE="mt8365-evk"
- CONFIG_OF_UPSTREAM=y
- CONFIG_CLK=y
- CONFIG_MMC_MTK=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_MT8365=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b71ac554c0b..94f3e75ca6a 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1679,7 +1679,7 @@ config CMD_PINMUX
+ 	default y if PINCTRL
+ 	help
+ 	  Parse all available pin-controllers and show pins muxing. This
+-	  is useful for debug purpoer to check the pin muxing and to know if
++	  is useful for debug purposes to check the pin muxing and to know if
+ 	  a pin is configured as a GPIO or as an alternate function.
+ 
+ config CMD_POWEROFF
 
+---
+base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
+change-id: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
+
+Best regards,
 -- 
-2.43.0
+David Lechner <dlechner@baylibre.com>
 
