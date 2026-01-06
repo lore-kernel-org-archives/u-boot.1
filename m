@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA01CEFD0C
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:22:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F02CEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:32:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADB4F83C62;
-	Wed,  7 Jan 2026 00:22:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B2D4A83C4B;
+	Wed,  7 Jan 2026 00:32:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UTh1SYpI";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="D60xePgD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 173D383FF9; Wed,  7 Jan 2026 00:22:12 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id ED55383C62; Wed,  7 Jan 2026 00:32:14 +0100 (CET)
+Received: from out-187.mta1.migadu.com (out-187.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::bb])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 767DE83C08
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:22:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7F4583C08
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:32:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0cbd=7M=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1767741727;
- bh=vW/O1UPNRrVK9BcAfdeoifaKBA1DrXyTs/AVhbm6eqA=;
- b=UTh1SYpIv0Hb1JnEx4ksAdRda7E3luqjR1LV+E2/hNmvbQLVEcg3bqpOs06c2X3h4IkBmvohb
- 5FkXrNIwfjsVFOjuBMKIvX5ImVe8Q1UIb1o2bROGSQKmjC2IPIqZTBddz858X7vgkRUevloSTEw
- hu4ZS5YnTIFYH5sA9BihbPeuwWMM2X/ipECFOZU3hBsuduthhOCd5eF5dUaHS+68OH9Qhx6bTsA
- Ac553VxOWBJPxBddCC2QP7PHfqV6B2GBto3T5ioRDihqzKYNWEUPXSLGVmCAFLJnOcyHFSFBfHe
- ftW1xuJSbEx6Tf/xJSJI2BEb6wVvAzsbzTGa4h3/xipQ==
-X-Forward-Email-ID: 695d991a4c4fab46c299b2e5
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.2.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH v4] rockchip: sdram: Add fallback that fixup DRAM gaps on
- RK3588
-Date: Tue,  6 Jan 2026 23:21:51 +0000
-Message-ID: <20260106232154.3178240-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.52.0
+ dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sean.anderson@linux.dev
+Message-ID: <70d036ee-e61b-44bb-9160-697e4d3f75e1@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1767742332;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1U6OQ+AAbOyjABZne3cS1osLVZAZpL1GGgRniSva4b0=;
+ b=D60xePgDHAvmiymQqXTA3gE1wpXanElHFUVCj8UEa7+nFwbJiXGFIHH1E2Fe7kt2pFan+W
+ SvR0pAS6brmX18XmXRvvTWoOPXYa934eKoQ0P0MfR49A+Lbo/sKKthPNP/b31R7dPRrCan
+ hRnL1eHy15jOeKzq62z+7Vkn/2NrOao=
+Date: Tue, 6 Jan 2026 18:32:06 -0500
 MIME-Version: 1.0
+Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
+To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260106223409.748335-1-sean.anderson@linux.dev>
+ <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sean Anderson <sean.anderson@linux.dev>
+In-Reply-To: <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,96 +69,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RK3588 has two known memory gaps when using 16+ GiB DRAM,
-[0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
+On 1/6/26 18:14, Marek Vasut wrote:
+> On 1/6/26 11:34 PM, Sean Anderson wrote:
+>> Extend the PCI bridge driver to enable resources associated with PCI
+>> slots like clocks, power rails, and resets. This is modeled off of the
+>> PCI power control subsystem in Linux. The traditional compatible for PCI
+>> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+>> pciclass,0604 so add that as an option.
+> 
+> Oh, nice :)
+> 
+>> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
+>> +{
+>> +    struct clk clk;
+>> +    struct gpio_desc perst;
+>> +
+>> +    if (!clk_get_by_index(dev, 0, &clk)) {
+>> +        int ret = clk_enable(&clk);
+>> +
+>> +        if (ret)
+>> +            return log_msg_ret("clk", ret);
+> 
+> Should we use dev_err() instead ?
 
-The vendor TPL blob encodes this information in the DDR_MEM tag data
-passed to later boot phases. U-Boot proper will normally use this
-information to configure the DRAM banks.
+I thought we weren't supposed to log by default in device drivers to reduce text size?
 
-When a DDR_MEM tag cannot be found the fallback is to use the entire
-range above 4 GiB. Something that will cause issues when OS try to use
-memory from the two known memory gaps.
+>> +        /* Delay for T_PERST-CLK (100 us for all slot types) */
+>> +        udelay(100);
+>> +    }
+>> +
+>> +    if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
+> 
+> Invert conditional, reduce indent.
 
-Add a weak dram init banksize fixup function and implement it for RK3588
-to fix issues observed when trying to RAM boot RK3588 boards with 16+
-GiB DRAM into Linux.
+OK
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
----
-v4: Collect r-b tag
-    Drop already applied patches
-v3: No change
-v2: New patch to fix booting into OS on RK3588 boards with 16+ GiB DRAM
----
- arch/arm/mach-rockchip/rk3588/rk3588.c | 27 ++++++++++++++++++++++++++
- arch/arm/mach-rockchip/sdram.c         |  7 ++++++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
+>> +        unsigned long delay = 0;
+>> +        int ret;
+>> +
+>> +        /*
+>> +         * If PERST is inactive, the following call to dm_gpio_clrset_flags
+>> +         * will be the first time we assert it and we will need to
+>> +         * delay for T_PERST.
+>> +         */
+>> +        if (dm_gpio_get_value(&perst) != 1)
+>> +            delay = 100;
+>> +
+>> +        ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
+>> +                       GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+>> +        if (ret)
+>> +            return log_msg_ret("set", ret);
+>> +        mdelay(delay);
+> 
+> Maybe set a flag and avoid calling mdelay() altogether ?
 
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index 55d2caab4fec..6324c6f12867 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -211,6 +211,33 @@ int arch_cpu_init(void)
- }
- #endif
- 
-+/*
-+ * RK3588 has two known memory gaps when using 16+ GiB DRAM,
-+ * [0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
-+ *
-+ * Remove the [0x3fc000000, 0x400000000) range to ensure OS does not
-+ * use memory from these gaps when a DDR_MEM tag cannot be found.
-+ */
-+
-+#define DRAM_GAP_START		0x3FC000000
-+#define DRAM_GAP_END		0x400000000
-+
-+int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-+{
-+	size_t ram_top = bd->bi_dram[1].start + bd->bi_dram[1].size;
-+
-+	if (ram_top > DRAM_GAP_START) {
-+		bd->bi_dram[1].size = DRAM_GAP_START - bd->bi_dram[1].start;
-+
-+		if (ram_top > DRAM_GAP_END && CONFIG_NR_DRAM_BANKS > 2) {
-+			bd->bi_dram[2].start = DRAM_GAP_END;
-+			bd->bi_dram[2].size = ram_top - bd->bi_dram[2].start;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- #define RK3588_OTP_CPU_CODE_OFFSET		0x02
- #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
- 
-diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-index d560f90e873d..ea0e3621af72 100644
---- a/arch/arm/mach-rockchip/sdram.c
-+++ b/arch/arm/mach-rockchip/sdram.c
-@@ -289,6 +289,11 @@ static int rockchip_dram_init_banksize(void)
- }
- #endif
- 
-+__weak int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-+{
-+	return 0;
-+}
-+
- int dram_init_banksize(void)
- {
- 	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
-@@ -342,7 +347,7 @@ int dram_init_banksize(void)
- #endif
- #endif
- 
--	return 0;
-+	return rockchip_dram_init_banksize_fixup(gd->bd);
- }
- 
- u8 rockchip_sdram_type(phys_addr_t reg)
--- 
-2.52.0
+OK
+
+--Sean
+
+>> +        ret = dm_gpio_set_value(&perst, 0);
+>> +        if (ret)
+>> +            return log_msg_ret("clr", ret);
+>> +
+>> +        /*
+>> +         * PCIe section 6.6.1:
+>> +         * > ... software must wait a minimum of 100 ms before sending a
+>> +         * > Configuration Request to the device immediately below that
+>> +         * > Port.
+>> +         */
+>> +        mdelay(100);
+>> +    }
+>> +
+>> +    return 0;
+>> +}
+>> +
+>>   U_BOOT_DRIVER(pci_bridge_drv) = {
+>>       .name        = "pci_bridge_drv",
+>>       .id        = UCLASS_PCI,
+>>       .of_match    = pci_bridge_ids,
+>> +#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
+>> +    .probe        = pci_bridge_probe,
+> 
+> .probe = CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT, pci_bridge_probe, NULL),
+> 
+> Thanks !
 
