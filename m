@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 627D5CEFD18
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C49C8CEFD19
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D547483BC4;
-	Tue,  6 Jan 2026 23:34:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E765D83C4B;
+	Tue,  6 Jan 2026 23:42:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="MejId5DS";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="c27pK1em";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EA9D83C08; Tue,  6 Jan 2026 23:34:18 +0100 (CET)
-Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com
- [95.215.58.189])
+ id C1E0883C62; Tue,  6 Jan 2026 23:42:48 +0100 (CET)
+Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com
+ [95.215.58.179])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A6DA83B9B
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:34:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D42283BC4
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:42:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,22 +29,23 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1767738855;
+ t=1767739364;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Txp5E3rzytkn9b2sCu38ZaUYjWzhfL4YX1SJ8I+mpWo=;
- b=MejId5DSnZCNms7k1one9q8/e+EirI42iIhATqQTPo7UQZ0t7hXogwdnFn53b4CIqRvebH
- Vlpi3lOl8M8d5ADcRmK3CJrATTB7e0FU/hbwrPMtS/XWiBiscTBrCHVI6kiICtgCLjSjXl
- bFBUnBzuJ4CSTYhgnj4tNfu47KQBU7U=
+ bh=mz3f5Zl5uXoy6pG+2NSszzTCOIU7u9XCvqyln9AldQM=;
+ b=c27pK1emkKyXdhPPFrT5yEUScMsQg+QNrWzK4I/7/tcKPzqOnoBxVWMgdJTc4i3rN41eKp
+ 9J6nFujLUN2YcLbPkHVk4La03XKrfqARt7yAZXwTeM861ve9T9yNM6vNPcb5ZJ2LjZcn2A
+ sQM5GP9i8iIngcYvm8ArRbVZtgJugNk=
 From: Sean Anderson <sean.anderson@linux.dev>
-To: Tom Rini <trini@konsulko.com>,
+To: Michal Simek <michal.simek@amd.com>,
 	u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
  Sean Anderson <sean.anderson@linux.dev>
-Subject: [PATCH] PCI: Add power sequencing driver for PCI slots
-Date: Tue,  6 Jan 2026 17:34:09 -0500
-Message-Id: <20260106223409.748335-1-sean.anderson@linux.dev>
+Subject: [PATCH] pinctrl: zynqmp: Add SPL support
+Date: Tue,  6 Jan 2026 17:42:02 -0500
+Message-Id: <20260106224202.754923-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
@@ -64,127 +65,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the PCI bridge driver to enable resources associated with PCI
-slots like clocks, power rails, and resets. This is modeled off of the
-PCI power control subsystem in Linux. The traditional compatible for PCI
-slots in U-Boot is pci-bridge, but Linux uses the more-systematic
-pciclass,0604 so add that as an option.
+Although the pinctrl pm requests are implemented in the PMU firmware,
+PM_QUERY_DATA is actually implemented in ATF. In SPL (or when running in
+EL3), ATF is not yet running, so we need to implement this API
+ourselves. Do the bare minimum, allowing SPL to enumerate functions, but
+don't bother with groups. Groups take up a lot of space, and can be
+emulated with pins. For example, a node like
+
+	display-port {
+		mux {
+			groups = "dpaux0_1";
+			function = "dpaux0";
+		};
+	};
+
+can be replaced by
+
+	display-port {
+		mux {
+			pins = "MIO34", "MIO35", "MIO36", "MIO37";
+			function = "dpaux0";
+		};
+	};
+
+While this isn't backwards-compatible with existing devicetrees, it's
+more than enough for SPL where we may only need to mux one or two pins.
 
 Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
 ---
 
- drivers/pci/Kconfig      |  8 ++++++
- drivers/pci/pci-uclass.c | 55 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 63 insertions(+)
+ drivers/firmware/firmware-zynqmp.c | 100 +++++++++++++++++++++++++++++
+ 1 file changed, 100 insertions(+)
 
-diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index ea9868425d0..efac18b33f6 100644
---- a/drivers/pci/Kconfig
-+++ b/drivers/pci/Kconfig
-@@ -100,6 +100,14 @@ config PCI_ENHANCED_ALLOCATION
- 	  Enable support for Enhanced Allocation which can be used by supported
- 	  devices in place of traditional BARS for allocation of resources.
- 
-+config PCI_PWRCTRL_SLOT
-+	bool "PCI slot power control"
-+	help
-+	  This is a generic driver that controls the power state of different
-+	  PCI slots. The clocks and resets for the PCI slots are expected to be
-+	  defined in the devicetree node of the PCI bridge. Say N if your PCI
-+	  busses don't have software-controlled clocks or power rails.
-+
- config PCI_ARID
-         bool "Enable Alternate Routing-ID support for PCI"
-         help
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index c370f8c6400..c5b1ddec45a 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
-@@ -6,6 +6,7 @@
- 
- #define LOG_CATEGORY UCLASS_PCI
- 
-+#include <clk.h>
- #include <dm.h>
- #include <errno.h>
- #include <init.h>
-@@ -14,6 +15,7 @@
- #include <pci.h>
- #include <spl.h>
- #include <asm/global_data.h>
-+#include <asm/gpio.h>
- #include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-@@ -1893,13 +1895,66 @@ static const struct dm_pci_ops pci_bridge_ops = {
- 
- static const struct udevice_id pci_bridge_ids[] = {
- 	{ .compatible = "pci-bridge" },
-+	{ .compatible = "pciclass,0604" },
- 	{ }
+diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+index f8a9945c1da..77911757177 100644
+--- a/drivers/firmware/firmware-zynqmp.c
++++ b/drivers/firmware/firmware-zynqmp.c
+@@ -427,6 +427,102 @@ U_BOOT_DRIVER(zynqmp_power) = {
  };
+ #endif
  
-+static int __maybe_unused pci_bridge_probe(struct udevice *dev)
++static const char *const pinctrl_functions[] = {
++	"can0",
++	"can1",
++	"ethernet0",
++	"ethernet1",
++	"ethernet2",
++	"ethernet3",
++	"gemtsu0",
++	"gpio0",
++	"i2c0",
++	"i2c1",
++	"mdio0",
++	"mdio1",
++	"mdio2",
++	"mdio3",
++	"qspi0",
++	"qspi_fbclk",
++	"qspi_ss",
++	"spi0",
++	"spi1",
++	"spi0_ss",
++	"spi1_ss",
++	"sdio0",
++	"sdio0_pc",
++	"sdio0_cd",
++	"sdio0_wp",
++	"sdio1",
++	"sdio1_pc",
++	"sdio1_cd",
++	"sdio1_wp",
++	"nand0",
++	"nand0_ce",
++	"nand0_rb",
++	"nand0_dqs",
++	"ttc0_clk",
++	"ttc0_wav",
++	"ttc1_clk",
++	"ttc1_wav",
++	"ttc2_clk",
++	"ttc2_wav",
++	"ttc3_clk",
++	"ttc3_wav",
++	"uart0",
++	"uart1",
++	"usb0",
++	"usb1",
++	"swdt0_clk",
++	"swdt0_rst",
++	"swdt1_clk",
++	"swdt1_rst",
++	"pmu0",
++	"pcie0",
++	"csu0",
++	"dpaux0",
++	"pjtag0",
++	"trace0",
++	"trace0_clk",
++	"testscan0",
++};
++
++/*
++ * PM_QUERY_DATA is implemented by ATF and not the PMU firmware, so we have to
++ * emulate it in SPL. Just implement functions/pins since the groups take up a
++ * lot of rodata and are mostly superfluous.
++ */
++static int zynqmp_pm_query_data(enum pm_query_id qid, u32 arg1, u32 arg2,
++				u32 *ret_payload)
 +{
-+	struct clk clk;
-+	struct gpio_desc perst;
-+
-+	if (!clk_get_by_index(dev, 0, &clk)) {
-+		int ret = clk_enable(&clk);
-+
-+		if (ret)
-+			return log_msg_ret("clk", ret);
-+
-+		/* Delay for T_PERST-CLK (100 us for all slot types) */
-+		udelay(100);
++	switch (qid) {
++	case PM_QID_PINCTRL_GET_NUM_PINS:
++		ret_payload[1] = 78;
++		ret_payload[0] = 0;
++		return 0;
++	case PM_QID_PINCTRL_GET_NUM_FUNCTIONS:
++		ret_payload[1] = ARRAY_SIZE(pinctrl_functions);
++		ret_payload[0] = 0;
++		return 0;
++	case PM_QID_PINCTRL_GET_NUM_FUNCTION_GROUPS:
++		ret_payload[1] = 0;
++		ret_payload[0] = 0;
++		return 0;
++	case PM_QID_PINCTRL_GET_FUNCTION_NAME:
++		memset(ret_payload, 0, 16);
++		strcpy((char *)ret_payload, pinctrl_functions[arg1]);
++		return 0;
++	case PM_QID_PINCTRL_GET_FUNCTION_GROUPS:
++	case PM_QID_PINCTRL_GET_PIN_GROUPS:
++		memset(ret_payload + 1, 0xff, 12);
++		ret_payload[0] = 0;
++		return 0;
++	default:
++		ret_payload[0] = 1;
++		return 1;
 +	}
-+
-+	if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
-+		unsigned long delay = 0;
-+		int ret;
-+
-+		/*
-+		 * If PERST is inactive, the following call to dm_gpio_clrset_flags
-+		 * will be the first time we assert it and we will need to
-+		 * delay for T_PERST.
-+		 */
-+		if (dm_gpio_get_value(&perst) != 1)
-+			delay = 100;
-+
-+		ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
-+					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-+		if (ret)
-+			return log_msg_ret("set", ret);
-+		mdelay(delay);
-+
-+		ret = dm_gpio_set_value(&perst, 0);
-+		if (ret)
-+			return log_msg_ret("clr", ret);
-+
-+		/*
-+		 * PCIe section 6.6.1:
-+		 * > ... software must wait a minimum of 100 ms before sending a
-+		 * > Configuration Request to the device immediately below that
-+		 * > Port.
-+		 */
-+		mdelay(100);
-+	}
-+
-+	return 0;
 +}
 +
- U_BOOT_DRIVER(pci_bridge_drv) = {
- 	.name		= "pci_bridge_drv",
- 	.id		= UCLASS_PCI,
- 	.of_match	= pci_bridge_ids,
-+#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
-+	.probe		= pci_bridge_probe,
-+#endif
- 	.ops		= &pci_bridge_ops,
- };
+ smc_call_handler_t __data smc_call_handler;
  
+ static int smc_call_legacy(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
+@@ -493,6 +589,10 @@ int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
+ 	      __func__, current_el(), api_id, arg0, arg1, arg2, arg3, arg4, arg5);
+ 
+ 	if (IS_ENABLED(CONFIG_XPL_BUILD) || current_el() == 3) {
++		if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) &&
++		    IS_ENABLED(CONFIG_PINCTRL_ZYNQMP) &&
++		    api_id == PM_QUERY_DATA)
++			return zynqmp_pm_query_data(arg0, arg1, arg2, ret_payload);
+ #if defined(CONFIG_ZYNQMP_IPI)
+ 		/*
+ 		 * Use fixed payload and arg size as the EL2 call. The firmware
 -- 
 2.35.1.1320.gc452695387.dirty
 
 base-commit: 38ace442b630c5ddf049af83e8db229c012ed355
-branch: pci_pwrseq
+branch: pinctrl_zynqmp_spl
