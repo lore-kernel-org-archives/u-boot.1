@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CDCC47BCF
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 09:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74A5C47BDF
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 10:02:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B2ED83F37;
-	Tue,  6 Jan 2026 10:37:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1966083D9F;
+	Tue,  6 Jan 2026 11:02:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kz4OnlVU";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GH1yiC1C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BD8883A57; Tue,  6 Jan 2026 10:37:55 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 74D1483F20; Tue,  6 Jan 2026 11:02:54 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ACAA83A57
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 10:37:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D782344326;
- Tue,  6 Jan 2026 09:37:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B0F0C116C6;
- Tue,  6 Jan 2026 09:37:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767692270;
- bh=HXGZpzn6VanFxbYsrVUWhYaxN40Sz3GRkivS7hIQd0U=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=kz4OnlVU214bmLOfbmzdAc0+88xsVJUXplXOEYUHXHR0tEFHpLPGAU08gYvrBUuw4
- RzM4AyEPADFjSMRgCPLtYZOmwHuc/OeEzwdCWK8tJ1d/XoXIUJKQ6cCsXAZIOLmOmB
- cHtY0wFA2iRqG/X3/G/8cTIWtdqwhETpw2WHWEWUwhw71czfM66z577/JpgN7+Snk4
- Db4Ii9f8SgBDuoaaLZKMvCz8nTwj7ZzIMlDU8HLJxZMYFAM9B+ZrUxQq4pbrEwXQci
- 7A2cM05G1lMdnON4tj1kIBmbEOr81I7MkmMqZWZrrPaVIOaNJRizSvY1K8ghyCmIrq
- 03yVoJwJB7q8g==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Dmitrii Merkurev <dimorinny@google.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-In-Reply-To: <20260105235813.GB3416603@bill-the-cat>
-References: <20260105235813.GB3416603@bill-the-cat>
-Date: Tue, 06 Jan 2026 10:37:48 +0100
-Message-ID: <87tswzf5eb.fsf@kernel.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 3FDCD83A57
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 11:02:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 33D7510BECA; Tue,  6 Jan 2026 11:02:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1767693771;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=KtoWMgsH8J8PJMB3uvIams7LOWx4VUn6RRXEKFw+pPg=;
+ b=GH1yiC1CE36gsa5i+2f/rFVrlurieF9LmqvNd2QhhFTkHBTCAC4Nh04DrpL9fSC9znk2MV
+ mfYfwPv31yw4sF/W13nrjnnfxMxrQPs3XiesNuSqWRUFFLWb0f07a6z8bdpAh3Z/fV0QWg
+ g26/PbnxQRAGZHRGPLAXuSw0dpiMNStRPkZMSJwFoLAKz1GSbqt4YIx5ZtSGe3IlF8VpE6
+ yRHpk97tVwmzl6vA13GfGuMGGrT5KA9pZLHDlKSP9+8Y+qNfjE6b+jG5rrmnd6eJS3R9ud
+ NzyR4fbaLwJW4N5GQogV7fou6A1JyPnNp6GNGxpe5MoRMLiJmxJVeszwgXCadA==
+Message-ID: <58008116-adb2-1974-db5a-09b02979ea27@nabladev.com>
+Date: Tue, 6 Jan 2026 11:03:05 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Dmitrii Merkurev <dimorinny@google.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20260105235813.GB3416603@bill-the-cat>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20260105235813.GB3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,158 +71,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello Tom,
 
-On Mon, Jan 05, 2026 at 17:58, Tom Rini <trini@konsulko.com> wrote:
+On 06.01.26 00:58, Tom Rini wrote:
+> ** CID 449815:       Memory - illegal accesses  (OVERRUN)
+> /lib/sm3.c: 252           in sm3_final()
+> 
+> 
+> _____________________________________________________________________________________________
+> *** CID 449815:         Memory - illegal accesses  (OVERRUN)
+> /lib/sm3.c: 252             in sm3_final()
+> 246     	unsigned int partial = sctx->count % SM3_BLOCK_SIZE;
+> 247     	u32 W[16];
+> 248     	int i;
+> 249
+> 250     	sctx->buffer[partial++] = 0x80;
+> 251     	if (partial > bit_offset) {
+>>>>      CID 449815:         Memory - illegal accesses  (OVERRUN)
+>>>>      Overrunning array of 64 bytes at byte offset 64 by dereferencing pointer "sctx->buffer + partial". [Note: The source code implementation of the function has been overridden by a builtin model.]
+> 252     		memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial);
+> 253     		partial = 0;
+> 254
+> 255     		sm3_block(sctx, sctx->buffer, 1, W);
+> 256     	}
+> 257
+> 
+> ** CID 432237:       Null pointer dereferences  (NULL_RETURNS)
 
-> Hey all,
->
-> Here's the latest report, now that next has been merged to master. A few
-> of these are oddly showing up now, despite being in older code that
-> hasn't been touched and was being built before.
+Good catch, as this part is completly from linux [1]
+(nowaydays this code is gone at HEAD)
 
-For fastboot, some code has been moved from mmc only support to
-fb_block.c, which might explain the new errors.
+prepared patch, azure run started for it:
 
-See: https://lore.kernel.org/all/20251121-topic-fastboot-blk-v7-0-9589d902f=
-c91@linaro.org/
+https://dev.azure.com/hs0298/hs/_build/results?buildId=197&view=results
 
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Jan 5, 2026 at 3:24=E2=80=AFPM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
->
->    - *New Defects Found:* 15
->    - 23 defect(s), reported by Coverity Scan earlier, were marked fixed in
->    the recent build analyzed by Coverity Scan.
->    - *Defects Shown:* Showing 15 of 15 defect(s)
->
-> Defect Details
->
-> ** CID 640423:       Control flow issues  (DEADCODE)
-> /drivers/fastboot/fb_common.c: 112           in fastboot_set_reboot_flag()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 640423:         Control flow issues  (DEADCODE)
-> /drivers/fastboot/fb_common.c: 112             in fastboot_set_reboot_fla=
-g()
-> 106     	}
-> 107     	const char *bcb_iface =3D config_opt_enabled(CONFIG_FASTBOOT_FLA=
-SH_BLOCK,
-> 108     						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
-> 109     						   "mmc");
-> 110
-> 111     	if (device =3D=3D -1)
->>>>     CID 640423:         Control flow issues  (DEADCODE)
->>>>     Execution cannot reach this statement: "return -22;".
+if no problems found, I send it.
 
-I believe coverity is wrong here.
-we call config_opt_enabled() which by default returns -1 so it's
-possible to have device =3D=3D -1
+bye,
+Heiko
 
-This can happen when both CONFIG_FASTBOOT_FLASH_BLOCK and
-CONFIG_FASTBOOT_FLASH_MMC are unset.
-(for example when we use CONFIG_FASTBOOT_FLASH_SPI)
-
-> 112     		return -EINVAL;
-> 113
-> 114     	if (reason >=3D FASTBOOT_REBOOT_REASONS_COUNT)
-> 115     		return -EINVAL;
-> 116
-> 117     	ret =3D bcb_find_partition_and_load(bcb_iface, device, "misc");
->
-
-[...]
-
->
-> ** CID 640421:       Possible Control flow issues  (DEADCODE)
-> /drivers/fastboot/fb_block.c: 138           in fastboot_block_get_part_in=
-fo()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 640421:         Possible Control flow issues  (DEADCODE)
-> /drivers/fastboot/fb_block.c: 138             in fastboot_block_get_part_=
-info()
-> 132     					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
-> 133
-> 134     	if (!part_name || !strcmp(part_name, "")) {
-> 135     		fastboot_fail("partition not given", response);
-> 136     		return -ENOENT;
-> 137     	}
->>>>     CID 640421:         Possible Control flow issues  (DEADCODE)
->>>>     Execution cannot reach the expression "strcmp(interface, "")" insi=
-de this statement: "if (!interface || !strcmp(i...".
-> 138     	if (!interface || !strcmp(interface, "")) {
-> 139     		fastboot_fail("block interface isn't provided", response);
-> 140     		return -EINVAL;
-
-I believe coverity is wrong here as well.
-we call config_opt_enabled() which by default returns NULL for interface.
-
-And when we enable CONFIG_FASTBOOT_FLASH_BLOCK,
-CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME will be set to "" by default:
-
-$ rg 'FASTBOOT_FLASH_BLOCK_INTERFACE_NAME' .config
-1097:CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME=3D""
-
-
-> 141     	}
-> 142
-> 143     	*dev_desc =3D blk_get_dev(interface, device);
->
-
-[...]
-
->
-> ** CID 640419:       Null pointer dereferences  (REVERSE_INULL)
-> /drivers/fastboot/fb_block.c: 144           in fastboot_block_get_part_in=
-fo()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 640419:         Null pointer dereferences  (REVERSE_INULL)
-> /drivers/fastboot/fb_block.c: 144             in fastboot_block_get_part_=
-info()
-> 138     	if (!interface || !strcmp(interface, "")) {
-> 139     		fastboot_fail("block interface isn't provided", response);
-> 140     		return -EINVAL;
-> 141     	}
-> 142
-> 143     	*dev_desc =3D blk_get_dev(interface, device);
->>>>     CID 640419:         Null pointer dereferences  (REVERSE_INULL)
->>>>     Null-checking "dev_desc" suggests that it may be null, but it has =
-already been dereferenced on all paths leading to the check.
-> 144     	if (!dev_desc) {
-> 145     		fastboot_fail("no such device", response);
-> 146     		return -ENODEV;
-> 147     	}
-
-Fair enough for this one. We can check that dev_desc is not NULL to make
-sure that the caller cannot call fastboot_block_get_part_info() with
-NULL as second argument.
-
-I'll submit a patch for this once I've cleared out my review queue.
-
-> 148
-> 149     	ret =3D part_get_info_by_name(*dev_desc, part_name, part_info);
->
->
-
-[...]
-
-For the first 2, do you want me to update the coverity database online
-with these explanations?
-It has been a while but I think I can do that myself.
+[1] https://elixir.bootlin.com/linux/v6.14/source/include/crypto/sm3_base.h#L86
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
