@@ -4,104 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C784FCEFD0C
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69888CEFD1D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65BA584016;
-	Tue,  6 Jan 2026 23:57:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A9FA83C62;
+	Wed,  7 Jan 2026 00:14:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hmMfwj7R";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dlGaxzFB";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PHnaJuzx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BCBB83B9D; Tue,  6 Jan 2026 23:10:44 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C8BC383FC0; Wed,  7 Jan 2026 00:14:43 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CBA383936
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:10:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8B8A83A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:14:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3f551ad50d1so572699fac.0
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 14:10:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767737441; x=1768342241;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PLZYYLT2oxqrQ0fNwujg933sQjY2TkZVV106QV/BPfw=;
- b=hmMfwj7RcPNpeICXNpgA+yhfeZBg9TZHeP8HH07DgQm/MGil0MXkTkgtSqV7+5qLI3
- 0MG9p3A5Fjvxv9/kZnELn6GAodxq7vElusIxliEYwwMNTkRg9J2r3ceeaOhhYRu2VN1g
- klys3OTX0mKTi6M/V/5TgxmjN1aOAe9USPz0RAIsFqc/nqC/UQck1NIReuGBiq37PKdh
- cF1XYNey510N67J0NJedZeBprP0/U8M34LN5+JNEFQDLPnKi/rwSG9cdLnvEHFYJNUZs
- pV42lcS6BM7WdpsE8fjI7R18v/Jve/gTY6KOIbiEzs/pnIPn09/p341GgwC29mA2eOWC
- Y9kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767737441; x=1768342241;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PLZYYLT2oxqrQ0fNwujg933sQjY2TkZVV106QV/BPfw=;
- b=OP7HzBwamT+8VezrxRUv5hwX9nSDHhWW3v+qufw+Szy6j1mNNS+sYYM8FJ7sQkeJdi
- ezQ9xLIl4NPfYSCPztpS3wNecIXcYnSn8KW0gK6FjYFCva12Ei8PhTseFUiKzDAhOFLm
- +t3eC5W+ExqZHp5B40jlQdvj5o4bf1XiPCNSTByarXf2YJ6nZ9amT3AKYqGMA6YmvpVY
- 5vsfwmHNSGNbqcp386m5ASQdEws47mmfhpmDBQ1WnptjNwcja+fU3GMso0DlQ8fcEeKg
- SK+rCusyOCxxBK9uI789DW1a12mzzevaVRFswK7tLMMYwewjCO0ya0SUFNoovZrnweG9
- M2xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7N9R/xYAzHQ0ALDz8mg+7DLwfIWw3Fvv8EOyp9he4L+L859SE9XIcEY3uekSmd7QOZdFRXxU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8AzNy757wtsP7iDWb0JtbsJ9S4T6xvAjvqVg6LFD8xUevidFr
- JR1A9dhh5+M6wqKva10i9Q8QZrewVR5EbgEf4+t8Vv1kN1q9SOyDa1r4T0h7wcBs1dk=
-X-Gm-Gg: AY/fxX5YUJXHzRwX1TIHEId/VXnFRAtPL6+yADLWaI7fGSMeKTxt7qZbcqAGC4QCgnV
- nnRYzBZQN+sW4UeFDL2lvEeDO3Kic/dFkZv9pVqKTa1iPkg3GLyqxgAmtmp9UsAuzC0AVpYUT/D
- NxhU0b/w0zuQQp5daTT+IuX8IT3zbJXW6oOT0rTRUflWr5xiBnhlS8ckAZzvio4WFmNVPNdAPJg
- 9DArIddiBkh8OoYgROQNa24WkNurkq1/+V1ShXsbtYvGb9tVCeu+XgqfNqNoRwkLPTugIkC1L+o
- HMGoi3kGqqh3dqDBYr+3eL+AXiE0YMzdNVuLR8tknIdaoKLN8p2ZClCso6ZMRct0757B1KO9F3r
- ihhIMEK1nPmuLsk15MGVG0shW5vgPSa4Pzcbk1Zs3ZxDyjPOklDk6fuyKkrPa7cnuxMg7b7UXFF
- TKbAY7OpUekUHDN/o=
-X-Google-Smtp-Source: AGHT+IFdvFb3/BS/sruNkNF0yFwQNLb4JkndRQrylIZVG7zxAPb01WgbjU6yv/xRYHMpdKwShcjdLA==
-X-Received: by 2002:a05:6871:338c:b0:374:bdaa:47f9 with SMTP id
- 586e51a60fabf-3ffc0af6b20mr214857fac.34.1767737441053; 
- Tue, 06 Jan 2026 14:10:41 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7f98:2205:4ba4:3e65])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa507220csm2042560fac.11.2026.01.06.14.10.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 14:10:40 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 06 Jan 2026 16:10:31 -0600
-Subject: [PATCH] cmd/Kconfig: fix type in CMD_PINMUX description
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dm6Sd43DCz9sXk;
+ Wed,  7 Jan 2026 00:14:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767741281;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=16N5bFwhffkhaUI7XsK9wxEMiW0rV4WbE0RLUQCObH0=;
+ b=dlGaxzFBiv8FbRJ99P/KBjoSXxeHZ5two+DpqDzXKu5cN62RdWaadI6ONBWXgQxOQrtk8B
+ n5ZMeKBBktaM3v00bB19365HncaoFlTVTT6nRFb7kQ0Fxwt83N8HVSDKrAl9qF1RlpcFQ4
+ b8kdNOv6bVP4757Iy4OaFJi2QCqWO6NsVTidTx/OtU+ht7KOPXwL+tDKTGjFyKIs5RBEhx
+ /BQELOyIZ4o3eVoTTqlkaLMRuH2KkkU15P1q1YZ2rYAUYTDMv5CKEcy+xk55inly7whXIa
+ 1NLlwtCe+erazpISr43xWATFD5/B7lqpGVMRLkbZHIcPNRwQla6FEd+Kb24vCw==
+Message-ID: <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767741279;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=16N5bFwhffkhaUI7XsK9wxEMiW0rV4WbE0RLUQCObH0=;
+ b=PHnaJuzxR/ucNSOjTw17p1zVwKWqBOrnXxSRyE3xXh0H8jAUXXW2Rd18eJKoyNgXkOnfdF
+ zb4yn17a1+GWzfIIlj8JfqSW420GLmzw1a9fRybNjZPTdajH3PfM5joO0S1r4FEZfzd3tu
+ lR3ut/YHEaLUdWAskqVTqho7rrHlAxCU2bnjqCVBmh/aNk/2FDjS/sLYDygAw3NfD3wCcm
+ nSl+L9XCEbn/NCrTdTx2ABuSuZY5iLIZGzDXKfjiUGbDL7LRiWasyID27+U32WcWIvQmlJ
+ uWq0xs+/6tp8eTHkEsHOdGjKEnhesCZB2A7t6+ezEnwLIctwDZ2IckHNBBSiFw==
+Date: Wed, 7 Jan 2026 00:14:38 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
+To: Sean Anderson <sean.anderson@linux.dev>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260106223409.748335-1-sean.anderson@linux.dev>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260106223409.748335-1-sean.anderson@linux.dev>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260106-fix-typo-in-cmd-pinmux-desc-v1-1-1798f6690589@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBswIamuEi1Ep5qFJlphSHdPW
- j74/AKJIlOCqSkQ6ebEh6/o2gbMrv1GyLYapJBKdELhyhnPJxzIHo2zGNi7K6OlZLCXpJWS60C
- jhnoIkWr+3+flfT/+UzMfbQAAAA==
-X-Change-ID: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
-To: Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=856; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=l2xcezIEiNaDYjrOZgi0pMsjGT587BMXNJ0g2QDkhM8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXYhYCseGylnkbN5QBbFZCeqpscr7zW/ivklzf
- yvifD3XdCiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV2IWBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AewwH/3TIMwmbk1GXhPUTtuP/jO4vhGdTPz0BirCWy/X
- lpRude/gHUjEDzwa9VDwoF6bIFS7H4WDt33LeEmZF55qZwCnea89FSEQRaJsOU3256vZHWv4U/C
- bRP76uEY+1i9agJOLP8W/EC9ttjvAOR4UAH3TENkDYi1RvkEid/qWozYuZWsAsp5bni7HnXnvBt
- raKFm53nXl/l+bFUby9y8QAQU/F/VSyDwROM2fWbbLPJBZ3qQjZT190jVTl4w3C3m2Nj5Wh8Cvt
- /ugI791AQOD2C9Jd67yOSSdlODPT7gqoGV8D9PfS+aZu886waCW2f5VXJmekZxlMUpgxvn2S3S/
- jX2Y=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Tue, 06 Jan 2026 23:57:11 +0100
+X-MBO-RS-META: baoo6u9ok1e6fox9t4pn6m9ujp59jm8q
+X-MBO-RS-ID: 3733fe802d1b0153521
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,32 +88,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix typo with correct spelling of "purposes".
+On 1/6/26 11:34 PM, Sean Anderson wrote:
+> Extend the PCI bridge driver to enable resources associated with PCI
+> slots like clocks, power rails, and resets. This is modeled off of the
+> PCI power control subsystem in Linux. The traditional compatible for PCI
+> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+> pciclass,0604 so add that as an option.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Oh, nice :)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b71ac554c0b..94f3e75ca6a 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1679,7 +1679,7 @@ config CMD_PINMUX
- 	default y if PINCTRL
- 	help
- 	  Parse all available pin-controllers and show pins muxing. This
--	  is useful for debug purpoer to check the pin muxing and to know if
-+	  is useful for debug purposes to check the pin muxing and to know if
- 	  a pin is configured as a GPIO or as an alternate function.
- 
- config CMD_POWEROFF
+> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
+> +{
+> +	struct clk clk;
+> +	struct gpio_desc perst;
+> +
+> +	if (!clk_get_by_index(dev, 0, &clk)) {
+> +		int ret = clk_enable(&clk);
+> +
+> +		if (ret)
+> +			return log_msg_ret("clk", ret);
 
----
-base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-change-id: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
+Should we use dev_err() instead ?
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+> +		/* Delay for T_PERST-CLK (100 us for all slot types) */
+> +		udelay(100);
+> +	}
+> +
+> +	if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
 
+Invert conditional, reduce indent.
+
+> +		unsigned long delay = 0;
+> +		int ret;
+> +
+> +		/*
+> +		 * If PERST is inactive, the following call to dm_gpio_clrset_flags
+> +		 * will be the first time we assert it and we will need to
+> +		 * delay for T_PERST.
+> +		 */
+> +		if (dm_gpio_get_value(&perst) != 1)
+> +			delay = 100;
+> +
+> +		ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
+> +					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+> +		if (ret)
+> +			return log_msg_ret("set", ret);
+> +		mdelay(delay);
+
+Maybe set a flag and avoid calling mdelay() altogether ?
+
+> +		ret = dm_gpio_set_value(&perst, 0);
+> +		if (ret)
+> +			return log_msg_ret("clr", ret);
+> +
+> +		/*
+> +		 * PCIe section 6.6.1:
+> +		 * > ... software must wait a minimum of 100 ms before sending a
+> +		 * > Configuration Request to the device immediately below that
+> +		 * > Port.
+> +		 */
+> +		mdelay(100);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   U_BOOT_DRIVER(pci_bridge_drv) = {
+>   	.name		= "pci_bridge_drv",
+>   	.id		= UCLASS_PCI,
+>   	.of_match	= pci_bridge_ids,
+> +#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
+> +	.probe		= pci_bridge_probe,
+
+.probe = CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT, pci_bridge_probe, NULL),
+
+Thanks !
