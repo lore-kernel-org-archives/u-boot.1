@@ -4,85 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195A7CD0423
-	for <u-boot@archiver.kernel.org>; Mon,  5 Jan 2026 23:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B629CD0427
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 00:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 881B383A7A;
-	Tue,  6 Jan 2026 00:58:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9361B83D9F;
+	Tue,  6 Jan 2026 01:33:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mUbK4npM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c3MuFvnK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55A2383D9F; Tue,  6 Jan 2026 00:58:20 +0100 (CET)
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
+ id 1220083E21; Tue,  6 Jan 2026 01:33:54 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 698CF83A57
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 00:58:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E56C83A7A
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 01:33:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x242.google.com with SMTP id
- 5614622812f47-45392215f74so286170b6e.3
- for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 15:58:17 -0800 (PST)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4510974a8cdso297062b6e.0
+ for <u-boot@lists.denx.de>; Mon, 05 Jan 2026 16:33:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767657496; x=1768262296; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/tsen6nBbZiXbZdFykSrP66+QV0KSVYxT8hnagu+iPM=;
- b=mUbK4npM9EOo0tSr0IsGuZJs5Y2djftlRjuqx3EE9UgqXzVVPZVv0Bh1UI8FpWHW20
- FhYSar/ct0SwTJqzBvA1IwlVNLwi1BAgF3pusqxvZ+hkly96GXkBMn4J8dhw3JgQNBqD
- AjBjcKxVbJDuAu19LW63Bd5/851BhlWMm3IJc=
+ d=konsulko.com; s=google; t=1767659630; x=1768264430; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=o6AqG3VInewt4CW3df07X+Wl7qS6J/Kpm7/xtBP86u8=;
+ b=c3MuFvnKy3E//kpEej2xZszbBnl/1mcCjbjOoi+1ND6/yuLNbYh+TvJ9RuemRY2MDr
+ gFA//5QiuTLeHbbp/cUKUgRCeNrhq3ILsCUdQ6fItOFq3Quw75O4P1KKK0iP+F4KeSPQ
+ zoHMGzdA9wryIYsgIYpUXnC1USpPvN98B8tWY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767657496; x=1768262296;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/tsen6nBbZiXbZdFykSrP66+QV0KSVYxT8hnagu+iPM=;
- b=dqJfrHEvrVBuWQZwQ7/YgrjZQmFxN9jvmzZ811HE2LT4z2qPCTrJpUDICzs+udl3JN
- FFjw1eOLGhtc+w7KZgk7UMLStvNLizP2mX82PZgiDNwj+t2FRnM1DnnQTRXHqEmMO1iO
- EdVptFlmd+/mXPgYYuvca5oaBEI6x6gBTYKqCWS8Pu04Jc5yHghEOZVNrm4L6dDj21C2
- +egJdyVRiH8NW0NOyh7UPhQ4OyAz4Wd6tFrYfJqdL4q7qQAjkeToPd5TytPBZUkLQ6Of
- si57L1Mctls760Jax9dSMQ9lw+gXbjaa5wvUWeZjxo1YcqxvXdMvw6JN7fBeWgZSEVZG
- webw==
-X-Gm-Message-State: AOJu0YxnyGpTFKWNg3rRrQR7FKNt7nGjPUS8TVmRkIBJTQ6SO8XlAKFo
- YFEKZac49wMSxBlUyVTiVseIQIlAbs+dJGt4Rmnz3O3NTUuPPZS87O/3MDFFIWc+ivMWD7npjWW
- VlD8dxmM=
-X-Gm-Gg: AY/fxX55+366xdrWRMXY8jgSIAKR2JcwdmsYHCzguDzeslb6cAHOXtTvYY8i1r8Nyje
- aNBY2cifs5rC1XGQJRLQTS71ot1TIbziiDjHj+qsGDcF8s5Ec6sG2P+37GDfJcjZcPa7JPKBQqS
- JTe1PXdW28/f/fVep9a8tU3ZxEzmpqI3+Y4F8XlJPQbM7f7zYJTptRyPNzeuwQIPGFmiP8fV1KG
- 1gKuDqZcNK7bGsjKwzPoUDWtzZqD0JM82gScBiIIUPZM08PaS1QISV7UpIAo7w4UiUvBeRCU+Uu
- qTixcb98UXswuac83b3VhjGrPedD7BSyxZ/IJGRu9Cb0TxyC+WAyB2Bbcmi8YWriOFzhhdZICk/
- UFFM5BBuUotnZdZEGaoNJxqUIXCyzmke1dY5S9cOZjzrswQ47Zn/HVHgvzAKt6XDt/UFJf2qiJG
- ZMh7tggNzPE6RLKYhjGfy6iZSz1sTULdkJ6DVJIc3ll8u+6ElEUVo4PPp2KylIOchiSmUUTvZga
- OcAlz6bt3wGTgDBkxJs1OKJHM43ozJ7eBhiT7AT15AR2vE0dQ==
-X-Google-Smtp-Source: AGHT+IH8QWA+I/D0Qgo6s0clmTiLz5Bg5+H7Yj5sKCu8V/sX41kl2rTWEiG87CPbUOdRG7cylc2leg==
-X-Received: by 2002:a05:6808:124d:b0:455:db31:a680 with SMTP id
- 5614622812f47-45a5b1a4936mr768572b6e.63.1767657496016; 
- Mon, 05 Jan 2026 15:58:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767659630; x=1768264430;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o6AqG3VInewt4CW3df07X+Wl7qS6J/Kpm7/xtBP86u8=;
+ b=FYidWXaSPMiJp9T9z+m/Qb/cWBU6efOUQguNObI5AUgm/UUgEvjHtDj/UBa+X3NPmg
+ bYlqosGye4fYTMUHEOXXO4CYvC8hoDjfBigMos2fx9dulb0czhZ5ghHEzrQCPhvY3fKq
+ 51HyHIDgc/xiGbFe5hlSkvNbHQnA/rLt2glSx0jguXpb4VQRPgD0DTcWM4aWII7HaAjQ
+ 4ZiZW7aJmyzekrOw4ksVNTrNFx+Z8h2zoOozLutQ+vl7RkzAcolEsLzLAqg12oFdfOE8
+ rgvH+/ayhDN9IcGoAl4SUYwHo6akowcaM5yvl9BjMaCR0OoUiikXxt/BAotEypB3ec1B
+ 18YQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVH64uaAEJ504zfWbPfzrKsGRQehiTUJqyWRb8d4Zld1yz9dze3dSQVd1uRh4qf78Wz0OKEg/o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzj5vtJ7nzHDeHY39jgNGJ8q4hug92BQ7HgRXCTxiB+ZiBotlpD
+ I3cuY0egEjk6HA1g75IftykDFSR5afkuArXNyD8GylWY368FbQG9T57++SBpeoSha0Q=
+X-Gm-Gg: AY/fxX7PPCI8i2ZonAl9JQ3OAEnN1J9w7cl6fxY3I0hwHbaWnWCR/yrNgaS/u8zlRYC
+ 5ypP+Mw3kutKEAnAqdKQU7/aDhBimcwst7sj5fEAdsmSW+8Qrl1aS/oSAPvoAlcpHm0SQDrFLae
+ Vi85X9WDj7F1L/f3Q3yItpan0SZEKY8hvPbE57SpnFbxBcb4oqywsZVA2+PwOIuD7cRaSDu5DGP
+ jUMHxTiK+bsWzA5CdxYerbX1ba6nSJ7eBxMJymqo89O1AH1DssMHMUGKeW34H9lXE8yyEtBoka8
+ 6MjmD7lAqViTsu8QFbW1pogCryXrTKcMaPcQgR5dwRFqyd1h4hjwMl4FTJ+3c19sxLFAaWAHDvF
+ qDyQY/YAtyejiBpXWicT3NvLMmNxgTn5jnSjmDSSfNGnrF/wPQkdEKxbPeoJRUt7nBOMw7XZt2b
+ t/rHutIHFjoGb1xoESGf3EaW5wlvexqcnwL4/YLPWpnr1mjWvnuIAtaFFd/ykogZssj+w3fKFV9
+ +8s/tvAHlEHjrCgtzSw1w0GOTzf5InWpWFek8I=
+X-Google-Smtp-Source: AGHT+IGT0+auM23D9DWL8EIUS6AsrC42wRa40ZlqQh5r6PB33C19JdYK9kVhOvRVlAh3Pp05EJXTGA==
+X-Received: by 2002:a05:6808:2013:b0:450:b9b0:11bc with SMTP id
+ 5614622812f47-45a5b124936mr776768b6e.32.1767659630152; 
+ Mon, 05 Jan 2026 16:33:50 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a5e288bc7sm221375b6e.12.2026.01.05.15.58.14
+ 5614622812f47-45a5e2e903dsm238632b6e.20.2026.01.05.16.33.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jan 2026 15:58:15 -0800 (PST)
-Date: Mon, 5 Jan 2026 17:58:13 -0600
+ Mon, 05 Jan 2026 16:33:49 -0800 (PST)
+Date: Mon, 5 Jan 2026 18:33:47 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Dmitrii Merkurev <dimorinny@google.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260105235813.GB3416603@bill-the-cat>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, mark.kettenis@xs4all.nl
+Cc: Eddie Kovsky <ekovsky@redhat.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ a.fatoum@pengutronix.de, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] Add support for OpenSSL Provider API
+Message-ID: <20260106003347.GC3416603@bill-the-cat>
+References: <20251027195834.71109-1-ekovsky@redhat.com>
+ <c2b48b27-9d4e-4be8-b94a-4aac7ef922a8@cherry.de>
+ <aSCsgniomRMN0u1m@daedalus> <87fr9h5swg.fsf@kernel.org>
+ <aUmB_fvpK1macga7@daedalus> <87zf6sflkr.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Kzhc1dwb7uTDXDs2"
+ protocol="application/pgp-signature"; boundary="/U2DyuRRVzPigdF0"
 Content-Disposition: inline
+In-Reply-To: <87zf6sflkr.fsf@kernel.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,452 +108,100 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Kzhc1dwb7uTDXDs2
-Content-Type: text/plain; charset=utf-8
+--/U2DyuRRVzPigdF0
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On Mon, Jan 05, 2026 at 10:36:04AM +0100, Mattijs Korpershoek wrote:
+> On Mon, Dec 22, 2025 at 10:38, Eddie Kovsky <ekovsky@redhat.com> wrote:
+>=20
+> > On 12/11/25, Mattijs Korpershoek wrote:
+> >> Hi Eddie,
+> >>=20
+> >> Thank you for working on this. It would be really nice if we could bui=
+ld
+> >> U-Boot on more recent Linux distros without bridge packages such as
+> >> openssl-devel-engine.
+> >>=20
+> >>=20
+> >> I also don't linke this double negative.
+> >> As you already shared, Linux solved this via:
+> >>=20
+> >> #if OPENSSL_VERSION_MAJOR >=3D 3
+> >>=20
+> >> Why can't we have something similar?
+> >> See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.gi=
+t/commit/?id=3D558bdc45dfb2669e1741384a0c80be9c82fa052c
+> >>=20
+> >
+> > Hi Mattijs
+> >
+> > Yes, we could also implement it this way with the extra USE_PKCS11_XXX
+> > symbol. Jan's original patch I based my work on does something similar,
+> > and I perhaps oversimplified it.
+>=20
+> In my experience, when porting things from the Linux kernel into U-Boot,
+> we try to keep the code as similar as possible. This helps reducing
+> maintainance burden.
+>=20
+> Sometimes, we can't do that. In that case, we should explain why.
+>=20
+> Do we have a strong reason for *not* reusing OPENSSL_VERSION_MAJOR with
+> USE_PKCS11_XXX ?
+>=20
+> [...]
+>=20
+> >> >>=20
+> >> >
+> >> > It's not the prettiest code. But I'm trying to be very conservative
+> >> > in making these changes so that no one's workflow is disrupted.
+> >> > Developers should be able to build U-Boot with the latest OpenSSL
+> >> > without impacting developers who are in environments utilizing the
+> >> > Engine API. The goal here is to preserve feature parity between the =
+two
+> >> > APIs. Adding support for custom Providers is outside the scope of th=
+is
+> >> > change, but could certainly be added later.
+> >>=20
+> >> I'd be in favor to drop CONFIG_OPENSSL_NO_DEPRECATED all together and
+> >> just use "#if OPENSSL_VERSION_MAJOR >=3D 3".
+> >>=20
+> >> Tom, or anyone else, is there a particular` reason for gating this in a
+> >> Kconfig ?
+> >>=20
+> >> The oldest Ubuntu version that seems supported (22.04) already has
+> >> OpenSSL version 3:
+> >>=20
+> >> $ podman run -it /bin/bash ubuntu:22.04
+> >> root@6dc347676b8a:~# apt update && apt install -y openssl
+> >> root@6dc347676b8a:~# openssl version
+> >> OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
+> >>=20
+> >
+> > I assumed that we would want this to be an explicit config option, but
+> > logically there is no reason that it has to be. I'd be happy to spin up
+> > a v3 if there's agreement that the Kconfig isn't needed.
+>=20
+> Tom, do you have an opinion on this? It seems you are listed as
+> maintainer for this (THE REST).
 
-Here's the latest report, now that next has been merged to master. A few
-of these are oddly showing up now, despite being in older code that
-hasn't been touched and was being built before.
-
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Jan 5, 2026 at 3:24=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
-
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 15
-   - 23 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 15 of 15 defect(s)
-
-Defect Details
-
-** CID 640423:       Control flow issues  (DEADCODE)
-/drivers/fastboot/fb_common.c: 112           in fastboot_set_reboot_flag()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640423:         Control flow issues  (DEADCODE)
-/drivers/fastboot/fb_common.c: 112             in fastboot_set_reboot_flag()
-106     	}
-107     	const char *bcb_iface =3D config_opt_enabled(CONFIG_FASTBOOT_FLASH=
-_BLOCK,
-108     						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
-109     						   "mmc");
-110
-111     	if (device =3D=3D -1)
->>>     CID 640423:         Control flow issues  (DEADCODE)
->>>     Execution cannot reach this statement: "return -22;".
-112     		return -EINVAL;
-113
-114     	if (reason >=3D FASTBOOT_REBOOT_REASONS_COUNT)
-115     		return -EINVAL;
-116
-117     	ret =3D bcb_find_partition_and_load(bcb_iface, device, "misc");
-
-** CID 640422:       Error handling issues  (CHECKED_RETURN)
-/boot/fdt_region.c: 330           in fdt_include_supernodes()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640422:         Error handling issues  (CHECKED_RETURN)
-/boot/fdt_region.c: 330             in fdt_include_supernodes()
-324     	 */
-325     	for (i =3D 0; i <=3D depth; i++) {
-326     		if (!info->stack[i].included) {
-327     			start =3D info->stack[i].offset;
-328
-329     			/* Add the FDT_BEGIN_NODE tag of this supernode */
->>>     CID 640422:         Error handling issues  (CHECKED_RETURN)
->>>     Calling "fdt_next_tag" without checking return value (as is done el=
-sewhere 12 out of 15 times).
-330     			fdt_next_tag(info->fdt, start, &stop_at);
-331     			if (fdt_add_region(info, base + start, stop_at - start))
-332     				return -1;
-333
-334     			/* Remember that this supernode is now included */
-335     			info->stack[i].included =3D 1;
-
-** CID 640421:       Possible Control flow issues  (DEADCODE)
-/drivers/fastboot/fb_block.c: 138           in fastboot_block_get_part_info=
-()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640421:         Possible Control flow issues  (DEADCODE)
-/drivers/fastboot/fb_block.c: 138             in fastboot_block_get_part_in=
-fo()
-132     					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
-133
-134     	if (!part_name || !strcmp(part_name, "")) {
-135     		fastboot_fail("partition not given", response);
-136     		return -ENOENT;
-137     	}
->>>     CID 640421:         Possible Control flow issues  (DEADCODE)
->>>     Execution cannot reach the expression "strcmp(interface, "")" insid=
-e this statement: "if (!interface || !strcmp(i...".
-138     	if (!interface || !strcmp(interface, "")) {
-139     		fastboot_fail("block interface isn't provided", response);
-140     		return -EINVAL;
-141     	}
-142
-143     	*dev_desc =3D blk_get_dev(interface, device);
-
-** CID 640420:       Incorrect expression  (CONSTANT_EXPRESSION_RESULT)
-/env/fat.c: 49           in env_fat_get_dev_part()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640420:         Incorrect expression  (CONSTANT_EXPRESSION_RESULT)
-/env/fat.c: 49             in env_fat_get_dev_part()
-43     __weak char *env_fat_get_dev_part(void)
-44     {
-45     #ifdef CONFIG_MMC
-46     	/* reserve one more char for the manipulation below */
-47     	static char part_str[] =3D CONFIG_ENV_FAT_DEVICE_AND_PART "\0";
-48
->>>     CID 640420:         Incorrect expression  (CONSTANT_EXPRESSION_RESU=
-LT)
->>>     "strcmp("mmc", "mmc")" is always 0 because ""mmc"" is compared agai=
-nst itself.
-49     	if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "mmc") && part_str[0] =3D=3D =
-':') {
-50     		part_str[0] =3D '0' + mmc_get_env_dev();
-51     		strcpy(&part_str[1], CONFIG_ENV_FAT_DEVICE_AND_PART);
-52     	}
-53
-54     	return part_str;
-
-** CID 640419:       Null pointer dereferences  (REVERSE_INULL)
-/drivers/fastboot/fb_block.c: 144           in fastboot_block_get_part_info=
-()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640419:         Null pointer dereferences  (REVERSE_INULL)
-/drivers/fastboot/fb_block.c: 144             in fastboot_block_get_part_in=
-fo()
-138     	if (!interface || !strcmp(interface, "")) {
-139     		fastboot_fail("block interface isn't provided", response);
-140     		return -EINVAL;
-141     	}
-142
-143     	*dev_desc =3D blk_get_dev(interface, device);
->>>     CID 640419:         Null pointer dereferences  (REVERSE_INULL)
->>>     Null-checking "dev_desc" suggests that it may be null, but it has a=
-lready been dereferenced on all paths leading to the check.
-144     	if (!dev_desc) {
-145     		fastboot_fail("no such device", response);
-146     		return -ENODEV;
-147     	}
-148
-149     	ret =3D part_get_info_by_name(*dev_desc, part_name, part_info);
-
-** CID 640418:       Insecure data handling  (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640418:         Insecure data handling  (TAINTED_SCALAR)
-/drivers/core/ofnode.c: 2098             in ofnode_copy_props()
-2092
-2093     		val =3D ofprop_get_property(&prop, &name, &len);
-2094     		if (!val) {
-2095     			log_debug("Cannot read prop (err=3D%d)\n", len);
-2096     			return log_msg_ret("get", -EINVAL);
-2097     		}
->>>     CID 640418:         Insecure data handling  (TAINTED_SCALAR)
->>>     Passing tainted expression "len" to "ofnode_write_prop", which uses=
- it as an offset.
-2098     		ret =3D ofnode_write_prop(dst, name, val, len, true);
-2099     		if (ret) {
-2100     			log_debug("Cannot write prop (err=3D%d)\n", ret);
-2101     			return log_msg_ret("wr", -EINVAL);
-2102     		}
-2103     	}
-
-** CID 640417:       Insecure data handling  (TAINTED_SCALAR)
-/scripts/dtc/libfdt/fdt_ro.c: 546           in fdt_get_alias_namelen()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640417:         Insecure data handling  (TAINTED_SCALAR)
-/scripts/dtc/libfdt/fdt_ro.c: 546             in fdt_get_alias_namelen()
-540     {
-541     	int len;
-542     	const char *alias;
-543
-544     	alias =3D fdt_path_getprop_namelen(fdt, "/aliases", name, namelen,=
- &len);
-545
->>>     CID 640417:         Insecure data handling  (TAINTED_SCALAR)
->>>     Using tainted variable "len - 1" as an index to pointer "alias".
-546     	if (!can_assume(VALID_DTB) &&
-547     	    !(alias && len > 0 && alias[len - 1] =3D=3D '\0' && *alias =3D=
-=3D '/'))
-548     		return NULL;
-549
-550     	return alias;
-551     }
-
-** CID 640416:       Insecure data handling  (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640416:         Insecure data handling  (TAINTED_SCALAR)
-/scripts/dtc/libfdt/fdt_overlay.c: 739             in
-overlay_prevent_phandle_overwrite()
-733     			 * will be overwritten.
-734     			 */
-735     			continue;
-736     		else if (target < 0)
-737     			return target;
-738
->>>     CID 640416:         Insecure data handling  (TAINTED_SCALAR)
->>>     Passing tainted expression "target" to "overlay_prevent_phandle_ove=
-rwrite_node", which uses it as a loop boundary.
-739     		ret =3D overlay_prevent_phandle_overwrite_node(fdt, target,
-740     							     fdto, overlay);
-741     		if (ret)
-742     			return ret;
-743     	}
-744
-
-** CID 640415:       Control flow issues  (DEADCODE)
-/scripts/dtc/pylibfdt/libfdt_wrap.c: 6728           in
-_wrap_fdt_get_property_by_offset_w()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640415:         Control flow issues  (DEADCODE)
-/scripts/dtc/pylibfdt/libfdt_wrap.c: 6728             in
-_wrap_fdt_get_property_by_offset_w()
-6722           resultobj =3D SWIG_Python_AppendOutput(resultobj, buff);
-6723         }
-6724       }
-6725       if (SWIG_IsTmpObj(res3)) {
-6726         resultobj =3D SWIG_Python_AppendOutput(resultobj,
-SWIG_From_int((*arg3)));
-6727       } else {
->>>     CID 640415:         Control flow issues  (DEADCODE)
->>>     Execution cannot reach the expression "new_flags" inside this state=
-ment: "new_flags =3D ((res3 >=3D 0 && ...".
-6728         int new_flags =3D SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |
- 0 ) :  0 ;
-6729         resultobj =3D SWIG_Python_AppendOutput(resultobj,
-SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_int, new_flags));
-6730       }
-6731       return resultobj;
-6732     fail:
-6733       return NULL;
-
-** CID 640414:       Resource leaks  (RESOURCE_LEAK)
-/drivers/interconnect/interconnect-uclass.c: 320           in icc_path_init=
-()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 640414:         Resource leaks  (RESOURCE_LEAK)
-/drivers/interconnect/interconnect-uclass.c: 320             in icc_path_in=
-it()
-314     		path->reqs[i].node =3D node;
-315     		path->reqs[i].enabled =3D true;
-316
-317     		/* Probe this node since used in an active path */
-318     		ret =3D uclass_get_device_tail(node->dev, 0, &node_dev);
-319     		if (ret)
->>>     CID 640414:         Resource leaks  (RESOURCE_LEAK)
->>>     Variable "path" going out of scope leaks the storage it points to.
-320     			return ERR_PTR(ret);
-321
-322     		node->users++;
-323
-324     		/* reference to previous node was saved during path traversal */
-325     		node =3D node->reverse;
-
-** CID 536550:       Resource leaks  (RESOURCE_LEAK)
-/scripts/dtc/fstree.c: 57           in read_fstree()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 536550:         Resource leaks  (RESOURCE_LEAK)
-/scripts/dtc/fstree.c: 57             in read_fstree()
-51     				fclose(pfile);
-52     			}
-53     		} else if (S_ISDIR(st.st_mode)) {
-54     			struct node *newchild;
-55
-56     			newchild =3D read_fstree(tmpname);
->>>     CID 536550:         Resource leaks  (RESOURCE_LEAK)
->>>     Failing to save or free storage allocated by "xstrdup(de->d_name)" =
-leaks it.
-57     			newchild =3D name_node(newchild, xstrdup(de->d_name));
-58     			add_child(tree, newchild);
-59     		}
-60
-61     		free(tmpname);
-62     	}
-
-** CID 536369:       Resource leaks  (RESOURCE_LEAK)
-/scripts/dtc/flattree.c: 681           in flat_read_property()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 536369:         Resource leaks  (RESOURCE_LEAK)
-/scripts/dtc/flattree.c: 681             in flat_read_property()
-675
-676     	if ((flags & FTF_VARALIGN) && (proplen >=3D 8))
-677     		flat_realign(dtbuf, 8);
-678
-679     	val =3D flat_read_data(dtbuf, proplen);
-680
->>>     CID 536369:         Resource leaks  (RESOURCE_LEAK)
->>>     Variable "name" going out of scope leaks the storage it points to.
-681     	return build_property(name, val, NULL);
-682     }
-683
-684     static struct reserve_info *flat_read_mem_reserve(struct inbuf *inb)
-685     {
-686     	struct reserve_info *reservelist =3D NULL;
-
-** CID 449815:       Memory - illegal accesses  (OVERRUN)
-/lib/sm3.c: 252           in sm3_final()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 449815:         Memory - illegal accesses  (OVERRUN)
-/lib/sm3.c: 252             in sm3_final()
-246     	unsigned int partial =3D sctx->count % SM3_BLOCK_SIZE;
-247     	u32 W[16];
-248     	int i;
-249
-250     	sctx->buffer[partial++] =3D 0x80;
-251     	if (partial > bit_offset) {
->>>     CID 449815:         Memory - illegal accesses  (OVERRUN)
->>>     Overrunning array of 64 bytes at byte offset 64 by dereferencing po=
-inter "sctx->buffer + partial". [Note: The source code implementation of th=
-e function has been overridden by a builtin model.]
-252     		memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial);
-253     		partial =3D 0;
-254
-255     		sm3_block(sctx, sctx->buffer, 1, W);
-256     	}
-257
-
-** CID 432237:       Null pointer dereferences  (NULL_RETURNS)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 432237:         Null pointer dereferences  (NULL_RETURNS)
-/scripts/dtc/checks.c: 1618             in check_interrupt_map()
-1612     	if (node->addr_cells < 0) {
-1613     		FAIL(c, dti, node,
-1614     		     "Missing '#address-cells' in interrupt-map provider");
-1615     		return;
-1616     	}
-1617     	cellsize =3D node_addr_cells(node);
->>>     CID 432237:         Null pointer dereferences  (NULL_RETURNS)
->>>     Dereferencing a pointer that might be "NULL" "get_property(node, "#=
-interrupt-cells")" when calling "propval_cell".
-1618     	cellsize +=3D propval_cell(get_property(node, "#interrupt-cells")=
-);
-1619
-1620     	prop =3D get_property(node, "interrupt-map-mask");
-1621     	if (prop && (prop->val.len !=3D (cellsize * sizeof(cell_t))))
-1622     		FAIL_PROP(c, dti, node, prop,
-1623     			  "property size (%d) is invalid, expected %zu",
-
-** CID 328724:         (TAINTED_SCALAR)
-/scripts/dtc/fdtoverlay.c: 55           in apply_one()
-/scripts/dtc/fdtoverlay.c: 69           in apply_one()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 328724:           (TAINTED_SCALAR)
-/scripts/dtc/fdtoverlay.c: 55             in apply_one()
-49     	bool has_symbols;
-50
-51     	/*
-52     	 * We take copies first, because a failed apply can trash
-53     	 * both the base blob and the overlay
-54     	 */
->>>     CID 328724:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdt32_ld(&((struct fdt_header const *)o=
-verlay)->totalsize)" to "xmalloc", which uses it as an allocation size. [No=
-te: The source code implementation of the function has been overridden by a=
- builtin model.]
-55     	tmpo =3D xmalloc(fdt_totalsize(overlay));
-56
-57     	do {
-58     		tmp =3D xrealloc(tmp, *buf_len);
-59     		ret =3D fdt_open_into(base, tmp, *buf_len);
-60     		if (ret) {
-/scripts/dtc/fdtoverlay.c: 69             in apply_one()
-63     				fdt_strerror(ret));
-64     			goto fail;
-65     		}
-66     		ret =3D fdt_path_offset(tmp, "/__symbols__");
-67     		has_symbols =3D ret >=3D 0;
-68
->>>     CID 328724:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdt32_ld(&((struct fdt_header const *)o=
-verlay)->totalsize)" to "memcpy", which uses it as an offset. [Note: The so=
-urce code implementation of the function has been overridden by a builtin m=
-odel.]
-69     		memcpy(tmpo, overlay, fdt_totalsize(overlay));
-70
-71     		ret =3D fdt_overlay_apply(tmp, tmpo);
-72     		if (ret =3D=3D -FDT_ERR_NOSPACE) {
-73     			*buf_len +=3D BUF_INCREMENT;
-74     		}
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
+Yes, sorry, I think part of the question here is how it plays out with
+LibreSSL and other alternatives to openssl, which ends up being a Mark
+question.
 
 --=20
 Tom
 
---Kzhc1dwb7uTDXDs2
+--/U2DyuRRVzPigdF0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVxQEQAKCRAr4qD1Cr/k
-CpGQAQDSZVO+9G4cnasF/x7+8aYDMkDRGgknHlqXBukI3+rUgAD/UZ2HABTheat0
-XMxGGb18KBiRfuFxozkPGWSIZXRQWAk=
-=M0cq
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaVxYZgAKCRAr4qD1Cr/k
+Cq+TAP0TmEjq81tjtyik3alsF4QYI3c/ugoJbeK8Bm2kqD+aYgD9HBEKPl3tg+Lw
+l7PK3uCqP0ee/33wBuFNcbNut/x8yg0=
+=mFx5
 -----END PGP SIGNATURE-----
 
---Kzhc1dwb7uTDXDs2--
+--/U2DyuRRVzPigdF0--
