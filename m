@@ -4,136 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47FA4CDC18E
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 12:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D832CDC188
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 12:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A59C83F7F;
-	Tue,  6 Jan 2026 13:22:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id AAD9E83F5D;
+	Tue,  6 Jan 2026 13:37:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZjNnvJ/M";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CsIkD6xL";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tbdqDNBG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E634683F6C; Tue,  6 Jan 2026 13:22:34 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 547FF83F63; Tue,  6 Jan 2026 13:37:47 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B502783F5D
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 13:22:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 923FB83F5C
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 13:37:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 606BVccj2253955
- for <u-boot@lists.denx.de>; Tue, 6 Jan 2026 12:22:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=zlgQ3u4e4kZ
- lVfrCz52XjOHh07j+W5tRBa3suIGx4Zo=; b=ZjNnvJ/M5ghNnBZJoobwz2vMAVe
- oO3B74sjQ1Y2023q99tQvH0DlpTnYGpN8DHthMFo8c+YQcHVQ9c2U994raEqPUoR
- UWkkbu1Jh54uIdXeaHY+3IMUw6xBDsBC/HwF3hGZCjG6Galg82LZILfHTMIY0TYK
- P2llIezBMOGlvKQSiI8RL8cLXluC5lj6onESktlXShj2AiIYvH2KUdKQqZYCDNGe
- o32fL0kNFXIF6twkzDBAZ4cgf0fzDETx0YR2NG5QkVSpYsLig0SjfauaOB68LZzd
- t97Yc4whTcvfMIaRn4zafpdN1ddPo6ssgFIK2vnVldSpnlrQGySAGuN3YyQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bgu421av5-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 12:22:15 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-34c6e05af6fso1208539a91.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 04:22:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767702134; x=1768306934; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zlgQ3u4e4kZlVfrCz52XjOHh07j+W5tRBa3suIGx4Zo=;
- b=CsIkD6xLKDV3AiIBfe7bianRO4iYt4OcysQl/3kdaEU29qOReJu+wUMz+S0M2mYC/J
- XzkiS9rmee8JomaOkj/b4wVZS9vfWypg47TLt+QNeyZyj7cogubaUqFtU4HBjzpG6ar4
- DmsgdHJ/Y6TbL1zcRajHEr5OIpB78zyYENTcEZ/mKeEuRn0AfxvRqnDw6ff1/lviDQ5e
- OtgxICunk91OArJunrzfx8AI/F7nsSzPvShpYVzsEgB/KQYKuOpixAwGRD1zWfn3v+Dx
- iJ9MVC4XT4MJzQyeyVZn5ef8K5Xzh09aDNugauCkWAWIMdX2ShDpGMEeBAgQcrqKqLrp
- rtow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767702134; x=1768306934;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=zlgQ3u4e4kZlVfrCz52XjOHh07j+W5tRBa3suIGx4Zo=;
- b=mqCpIqSzVci3S4hZmirktnAqQYoZpQjmHiBB9H1zFcSCkuHs9/PpVFEkn/I9qOXQNI
- aWa67Y1qFtkUiFGuiGkNzLvx94qY3hJ/MROUQfuWNdPkZc1w9/Tl2soVd6esadm2jFJI
- Qnk5X2r9jmZusI4A/JJK2m5TMpqWJxskUwJu2XSd3jVzLWJg6CnP6KAZaq8pgpnj9y98
- w6zPUELE+AfqYm+FXpHCV61pqgnNuKhNdPLaq89heENJLeD3991j6Zl8JKkbd3T4VTwG
- nXZKjinJImBg4hworUPTRnxnN1+qgcN4nZ/OkBmNfddPyf1g+2QTpt0Ay66DVmiBVGzq
- 8LvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXjsmX7/f7IRU/tDd06OH7rsA9dfo9XsJqvk3IRSbJUYVwffEcJ4PPahzsHlgB85xH0CwCxRfw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzeeecmk4/lcAI8t/y5Qduo8Gf/eXI8kAbfbs1eNFG6fB+P5oVz
- /SPPFYGsRIGlzjAfiL47Tj7gSsXrBT5mvq15IzJbP2KhgROqMSBUmFr/lPG88NVKygOxPhBDjVl
- dY57W/scV1GdkXBFbjRSOPen/2xKI6JI4Kit8eHl0WyhwFV8F44K7S9zx
-X-Gm-Gg: AY/fxX7xB/t4XHpAG9I7xYZKtcx8j3xtVZ8xottFNMbbnlZ+7SBS2qqD0YBdhfVzFUR
- K2BLW/sZod21UAIqaJ8oFXAtnY55vtkRMBd+bYNrYDDAA1FehdwEPGl87OC1tCqTdBUCQ41uj/4
- FNkwgWpPnsFHAWoAogI0r1DzSqqs6OqEwCahcTX8sNpfxxoEvQic3YJZnxXlxFANzsqv+pjpPjS
- /va2bRGblgy3RY17lRfqSx/yXEec9/KZ4khsGUm+AYMBDgohp7cUtlIWxidpGLK137/vlYacUx/
- lHO+SihlRUhNgh6wOhbrYL5ShnvPbjRfPCRTLH1K2D4QyQsEw/OzuGZZwbiFgBBee9VuqsAVJDb
- gfMfRSN0UPb9QrXBJxq26ycU4fx5zmL6dR7rVFE/zyBQLmGXwjSfjMVbK2J4ijx/u1Ix6oI7zoX
- UriOeYlbzJCrq0mJKy3I4EFE3L3p3t
-X-Received: by 2002:a17:90b:544c:b0:341:8491:472a with SMTP id
- 98e67ed59e1d1-34f5f26c758mr2297061a91.4.1767702134052; 
- Tue, 06 Jan 2026 04:22:14 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE+YrwDs4iDF0eD2jRAb7U4jeIjIVWW4Fw78da2WMP8+qa5Q1IRr4z18zu+fX7GD42wq7sEAg==
-X-Received: by 2002:a17:90b:544c:b0:341:8491:472a with SMTP id
- 98e67ed59e1d1-34f5f26c758mr2297034a91.4.1767702133555; 
- Tue, 06 Jan 2026 04:22:13 -0800 (PST)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34f5f88efb5sm2231509a91.10.2026.01.06.04.22.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 04:22:13 -0800 (PST)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- varadarajan.narayanan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com,
- adrianox@gmail.com, paul.liu@linaro.org, sjg@chromium.org,
- wolfgang.wallner@at.abb.com, javier.tia@linaro.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1 2/3] soc: qcom: smem: Added socinfo header file
-Date: Tue,  6 Jan 2026 17:51:33 +0530
-Message-Id: <20260106122134.2047864-3-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260106122134.2047864-1-aswin.murugan@oss.qualcomm.com>
-References: <20260106122134.2047864-1-aswin.murugan@oss.qualcomm.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=neal.frager@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gqer0foEU4OP7sOdnH6LwRgJwVp7l/FRtuaiIC54YvFABuyXS0JECYjMNadG/tCR2nql7/M15mN1kH1EfsfUcyvwYoJWnUEnaG3NSkmIg0oyltjGBhSm9c9S+2FFoPUACi74q7M2PAGA7O5JNvFZDFwhVQt5GR+BpqKhP1kM6i76e1xvIoFkt25CiYkXCtwP+G3tFvO0ZezbRFm+sA4z2kwo3NDNwNGSbw7m5LavLYwyBeSCv6Lr3FcTgUwqopvdBTuJqJ0uUuimNfJc3JWyyD5ZpAvO2WwOtk4x/PwtGBoON4nPobyhPAcdgfY95cH1lTMuDU8R4niHqjl50yXsPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1hwjJDKFWfe9IKnd8Fykd8lQlG2mPiw354H0ashQq4Q=;
+ b=W2ULyIuQ8Vi+ZhXbP+cHYpfglNPDiOp5gMJBzi/LZ/V2kCe+y09OhOpMvu/0L38yaT8LC4X03h5JM+liK7yebrkcXQs15Du72NK5unfOj8IEsvFzj+3NcsFESG2fi8o6inZvBNWA2+OJADDToJ4pbSeXA/jI95lecGEre9U7TFR2N+Zynq7tT6X5HbYiXFEkznp535dvxvwtRIDHI0ANIBY6fc3iNlTKclKJebVcEydLdCCg8svj2tcpgoRlPtNDGVPf+3/Qk4wKUys5gP2Y4L90l+s1sOUVj7DvNoof2QxH/e05122uj8WWu+P3bLZg7G3B0+46wjYer+CZZe6W0Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1hwjJDKFWfe9IKnd8Fykd8lQlG2mPiw354H0ashQq4Q=;
+ b=tbdqDNBGkKdH8WGnAqLhdWSRdJPTf2Al+VFu3OPM8UWjLS8F/aPXk1u2bBRhzwUEFfHJ/5Qorgrzqh9o9C2IN36cIk6x6L4PvWVJrWrJ4UmVecYUKHcFElMjyKNSIy6UpijVZq3sOoprGXBh9iN1UtC6DSgggz0WxZISDcwUtvQ=
+Received: from DS7PR05CA0043.namprd05.prod.outlook.com (2603:10b6:8:2f::22) by
+ DS7PR12MB5960.namprd12.prod.outlook.com (2603:10b6:8:7f::14) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9499.2; Tue, 6 Jan 2026 12:37:34 +0000
+Received: from SJ1PEPF000026C6.namprd04.prod.outlook.com
+ (2603:10b6:8:2f:cafe::c8) by DS7PR05CA0043.outlook.office365.com
+ (2603:10b6:8:2f::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.1 via Frontend Transport; Tue, 6
+ Jan 2026 12:37:34 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF000026C6.mail.protection.outlook.com (10.167.244.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9499.1 via Frontend Transport; Tue, 6 Jan 2026 12:37:34 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 6 Jan
+ 2026 06:37:33 -0600
+Received: from xirengwts09.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Tue, 6 Jan 2026 06:37:33 -0600
+From: Neal Frager <neal.frager@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <ricardo@foundries.io>, Neal Frager
+ <neal.frager@amd.com>
+Subject: [PATCH v1 1/1] board: zynqmp: allow env in fat/ext when booting out
+ of qspi
+Date: Tue, 6 Jan 2026 12:37:29 +0000
+Message-ID: <20260106123729.1483656-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=dYuNHHXe c=1 sm=1 tr=0 ts=695cfe77 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aA-AARzxIrW8pTn3BOsA:9
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: ach-EbdqtIx7N6vk65vz8BzKDoGi8rvM
-X-Proofpoint-ORIG-GUID: ach-EbdqtIx7N6vk65vz8BzKDoGi8rvM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA2MDEwNyBTYWx0ZWRfX1T98M0hXuHQt
- 27fZDZQhUi1FtEsqbldHNAhAWO1bkeCTYTxkDGW7OmEGQPA+w25KVrWA+Zl1SKrnDKhZ7L7nHOL
- qVX1OeYB7EURMGZTJUbDQmJl8Ft7OW3qXhmd4Ys76joeHyGaOpZ/3FaKjAjK9Mbh3rtWi+ISSlo
- EEckm6PnTiQoiMuyJcXGnih+Nle95NsPI8Jl1yjP33zgdI2/ytfmRAJ1XdnGqaEzfkMeSj9bvjZ
- 5hQpK3jqbOlPqg6EHwq5dU+RKsh4CJvzA568/tqGBSTtdzzHA3/pZRcfIlrN2PkdYEpq3y1lXSd
- FJMEoxXXuzJLoi7bYPUET+tPLLkf7sPFLxhm9O7dZMQFMHNC+2z6t51+sjOaiG2mxdEOodDjdWA
- L87cewYkbKjzeMOVyFsinLbU1XH543ODBsifsgjBSKoQmGLfw4L6BU+Bj8PbzBnG6yfCpx4Q9+5
- FzNXEsjSDO2HsP1Jvdw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-06_01,2026-01-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 malwarescore=0 impostorscore=0 phishscore=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601060107
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C6:EE_|DS7PR12MB5960:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2a35d0c1-688f-450b-6324-08de4d205dee
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ITW1hRAqGjK4IG+A4qy6eqYeu6sAOmmt3yNKG0m8qLG14yrSNYgIvwCxvtIr?=
+ =?us-ascii?Q?RoXxtszTPa/ZbKvOwxxOiDlp5EOe6XN3oAAXOkL7KjzIxjVPCOC+iNDvWJkT?=
+ =?us-ascii?Q?+//nhiXf5zNDpyjLBBPDcIbuFOEwogVItrhavHv8KSFf72eSVJtJU2mKjfC2?=
+ =?us-ascii?Q?MZZCqAj/7b1MK6myf9keluOK3+wD53H6r/4oODPwGI0AZnUoV3bft9wj2ISu?=
+ =?us-ascii?Q?AD//SN9esioxx3kNMEdw+JLRwEmQuPH3bpSEtPnhAit8/L9aBTSZ4H9BQZkJ?=
+ =?us-ascii?Q?CXPmLfK7kl0YR4VnVBk9mp89eipwQfU+uSBgfrxkp77HPF5yzlWT5UfkScnV?=
+ =?us-ascii?Q?JXvlxwo6cwW6sCjRREd20nRNpV7QIXn7TI607WV3bgnm0dBpCQb2GoDmsjHd?=
+ =?us-ascii?Q?ibTdCE9ZQBus5H3yfaJtDlOhPdmgt43gxUjCexiOa2WUwiwtL1eV8xJS2IvU?=
+ =?us-ascii?Q?iic4+6C+5BderX1dQ8GaKO+nXmtIUjqoIwx1WPpLnbXJhv9BT0xGooh+Pw8s?=
+ =?us-ascii?Q?6N+2Ol0O3ql2/SY+kJsHtgeJtE9OQYRCp9QqjEVE8hd9gCzPG6Mzw4NSVb3R?=
+ =?us-ascii?Q?+EtEM8Txs2dDT9YGjLJKJU1RRJBIDPEhk8e5pAODWRlljsYR+l34X0zR2u2J?=
+ =?us-ascii?Q?Ftb+8c6W8MWUCp+gF1BdM6fJy5LzuOtXYxaT+/MF0UiibQFjPxqb0KyjkDRI?=
+ =?us-ascii?Q?pBFlp7vW1nywevqT6x06qMMhAIRWXYx07+pTeS3F/jWLHbdqXzOher6GFBv8?=
+ =?us-ascii?Q?CxjIsm5CBxPhAb4E4HJKqJlkUcg3jjyH4QLeU9cxkvgQgpAqU5e6PPk1JjHh?=
+ =?us-ascii?Q?WwiDx3bPYZWFkObNePp8rQD+uczMXNq1CqWNL8Aaq2glUyqVYXExgVGoU6p8?=
+ =?us-ascii?Q?phE9TCd/mpSnD1S4w1efduE9exFhXioPwrhooo9HxCd94peq215NJQ3Wej+/?=
+ =?us-ascii?Q?jUxjN/zj1cLg1QDNE3pt6ABNoG28vqFw8l3/QkIkxaUL/3YUbAh/NXW0lJuL?=
+ =?us-ascii?Q?6/s+ORDmUpX+tllHUj7MG3n2Kme3FPtzmqY1TSclVrk8z4oD30bYGy8gTIxR?=
+ =?us-ascii?Q?rYHGyw+rmgc5tjgfoUh+WsreMS8KVk6gK0FtrmiPTRXtAIed0xT3nYR8nJ9l?=
+ =?us-ascii?Q?fj8R9HiO6YbZWt6O9bT1A/4YRYpGqq4Bp4op0wVHNc1awtiDqV/tv3bnqlcJ?=
+ =?us-ascii?Q?7+17gCNVHg/YqRsna3l6x3+hZTT9O9bwkolLJ4ERvHHz72ywyk+J3OPOTXNg?=
+ =?us-ascii?Q?+GMZyqNq2d0zNm5ItKhooikHWRSJI9MDjBSbxVrnx+YqVSkI5LavLMsZyk4S?=
+ =?us-ascii?Q?9+KMJd3cRxMVkaqiDGf9n8yDL6d9rU5jGO4zbhG2Uz4KEcPlb3trJZZHJRM7?=
+ =?us-ascii?Q?Nx1HbXiz/y6FLY/zD8AVX7M+dMwht63k4milfn92CPIE01MhsGY9Eb17pAAu?=
+ =?us-ascii?Q?XwGXEHBycqYhTjuG2/So7gMWkZtrHGLGqvQiqnEAvpxKZ+3o566L0EKgoTv1?=
+ =?us-ascii?Q?A+7q5wtDJ5yct3GXlDI5YtNL+H7wtCPQyvaNnUYJmkJuPTnWC8Fdqay+4P9E?=
+ =?us-ascii?Q?zZXqyw16L5sFCzDd9Yg=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 12:37:34.2539 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2a35d0c1-688f-450b-6324-08de4d205dee
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C6.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5960
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,142 +146,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Allow saving the environment in fat and in ext4 when bootmode is qspi.
 
-Added socinfo header file from linux [1]. This header
-defines SoC ID constants, version macros, and helper APIs for querying
-SoC details such as ID, revision, and features at runtime. It enables
-platform-specific initialization and feature gating based on SoC info.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/soc/qcom/socinfo.h?id=7dcc1dfaa3d1cd3aafed2beb7086ed34fdb22303
-
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Signed-off-by: Neal Frager <neal.frager@amd.com>
 ---
- include/soc/qcom/socinfo.h | 114 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 114 insertions(+)
- create mode 100644 include/soc/qcom/socinfo.h
+ board/xilinx/zynqmp/zynqmp.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/soc/qcom/socinfo.h b/include/soc/qcom/socinfo.h
-new file mode 100644
-index 00000000000..1bb6e200e1f
---- /dev/null
-+++ b/include/soc/qcom/socinfo.h
-@@ -0,0 +1,114 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#ifndef __QCOM_SOCINFO_H__
-+#define __QCOM_SOCINFO_H__
-+
-+#include <linux/types.h>
-+
-+/*
-+ * SMEM item id, used to acquire handles to respective
-+ * SMEM region.
-+ */
-+#define SMEM_HW_SW_BUILD_ID		137
-+
-+#define SMEM_SOCINFO_BUILD_ID_LENGTH	32
-+#define SMEM_SOCINFO_CHIP_ID_LENGTH	32
-+
-+/*
-+ * SoC version type with major number in the upper 16 bits and minor
-+ * number in the lower 16 bits.
-+ */
-+#define SOCINFO_MAJOR(ver) (((ver) >> 16) & 0xffff)
-+#define SOCINFO_MINOR(ver) ((ver) & 0xffff)
-+#define SOCINFO_VERSION(maj, min)  ((((maj) & 0xffff) << 16) | ((min) & 0xffff))
-+
-+/* Socinfo SMEM item structure */
-+struct socinfo {
-+	__le32 fmt;
-+	__le32 id;
-+	__le32 ver;
-+	char build_id[SMEM_SOCINFO_BUILD_ID_LENGTH];
-+	/* Version 2 */
-+	__le32 raw_id;
-+	__le32 raw_ver;
-+	/* Version 3 */
-+	__le32 hw_plat;
-+	/* Version 4 */
-+	__le32 plat_ver;
-+	/* Version 5 */
-+	__le32 accessory_chip;
-+	/* Version 6 */
-+	__le32 hw_plat_subtype;
-+	/* Version 7 */
-+	__le32 pmic_model;
-+	__le32 pmic_die_rev;
-+	/* Version 8 */
-+	__le32 pmic_model_1;
-+	__le32 pmic_die_rev_1;
-+	__le32 pmic_model_2;
-+	__le32 pmic_die_rev_2;
-+	/* Version 9 */
-+	__le32 foundry_id;
-+	/* Version 10 */
-+	__le32 serial_num;
-+	/* Version 11 */
-+	__le32 num_pmics;
-+	__le32 pmic_array_offset;
-+	/* Version 12 */
-+	__le32 chip_family;
-+	__le32 raw_device_family;
-+	__le32 raw_device_num;
-+	/* Version 13 */
-+	__le32 nproduct_id;
-+	char chip_id[SMEM_SOCINFO_CHIP_ID_LENGTH];
-+	/* Version 14 */
-+	__le32 num_clusters;
-+	__le32 ncluster_array_offset;
-+	__le32 num_subset_parts;
-+	__le32 nsubset_parts_array_offset;
-+	/* Version 15 */
-+	__le32 nmodem_supported;
-+	/* Version 16 */
-+	__le32  feature_code;
-+	__le32  pcode;
-+	__le32  npartnamemap_offset;
-+	__le32  nnum_partname_mapping;
-+	/* Version 17 */
-+	__le32 oem_variant;
-+	/* Version 18 */
-+	__le32 num_kvps;
-+	__le32 kvps_offset;
-+	/* Version 19 */
-+	__le32 num_func_clusters;
-+	__le32 boot_cluster;
-+	__le32 boot_core;
-+};
-+
-+/* Internal feature codes */
-+enum qcom_socinfo_feature_code {
-+	/* External feature codes */
-+	SOCINFO_FC_UNKNOWN = 0x0,
-+	SOCINFO_FC_AA,
-+	SOCINFO_FC_AB,
-+	SOCINFO_FC_AC,
-+	SOCINFO_FC_AD,
-+	SOCINFO_FC_AE,
-+	SOCINFO_FC_AF,
-+	SOCINFO_FC_AG,
-+	SOCINFO_FC_AH,
-+};
-+
-+/* Internal feature codes */
-+/* Valid values: 0 <= n <= 0xf */
-+#define SOCINFO_FC_Yn(n)		(0xf1 + (n))
-+#define SOCINFO_FC_INT_MAX		SOCINFO_FC_Yn(0xf)
-+
-+/* Product codes */
-+#define SOCINFO_PC_UNKNOWN		0
-+#define SOCINFO_PCn(n)			((n) + 1)
-+#define SOCINFO_PC_RESERVE		(BIT(31) - 1)
-+
-+#endif
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index 3b28ba62374..769e52bcfb5 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -628,6 +628,10 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 	case QSPI_MODE_32BIT:
+ 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
+ 			return ENVL_SPI_FLASH;
++		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
++			return ENVL_FAT;
++		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
++			return ENVL_EXT4;
+ 		return ENVL_NOWHERE;
+ 	case JTAG_MODE:
+ 	default:
 -- 
-2.34.1
+2.25.1
 
