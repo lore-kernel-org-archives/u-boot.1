@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9955CEFCE2
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 17:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B9DCEFCE1
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 17:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BBD583B9D;
-	Tue,  6 Jan 2026 18:15:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B063883B86;
+	Tue,  6 Jan 2026 18:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RPfT6fMq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hRpTSAzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8967C83BC4; Tue,  6 Jan 2026 18:15:22 +0100 (CET)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
+ id 3062583B9D; Tue,  6 Jan 2026 18:16:44 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E16C583B86
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 18:15:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 084DE838E6
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 18:16:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7c75a5cb752so817279a34.2
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 09:15:19 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7cdae63171aso823461a34.1
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 09:16:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767719718; x=1768324518; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767719796; x=1768324596; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0E6JctbCniyZawrXsrgEphYuPdMtspITLhnLsG02sCE=;
- b=RPfT6fMquNTks/vnrYIzCViLY8VcsKZSg8YEPGk356gfgmNXJNrVaqlVUKIA+j/z4/
- m51YxT9K286G7Mm7K5J7XimfMgB1MT+OubswjMeJ3VvC+PhB0LlzLs3dDJjJopFpbCzI
- gNShoP+8qam0z5mxQG668lTNBjmdLE3echMrQ=
+ bh=4kyYNVzNIwojnCgAmyq+GEJPPf3uD5aSrCAbDsPbKEA=;
+ b=hRpTSAznF681Ondsnv1T7oD1GGGGK/WqVWz0yMBJMX4X7AVX10lesZ6iLHtFCCnMCu
+ Pt85EfMElLRW3irJF5hIovyEpnUVzmfQ5c8XBuoK+9RZc2MbczduIeTVR+qD0IzDVQEw
+ u2OO0sX1wwo/5GaJEgrqG8JH5JA3sGLw4eHmw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767719718; x=1768324518;
+ d=1e100.net; s=20230601; t=1767719796; x=1768324596;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0E6JctbCniyZawrXsrgEphYuPdMtspITLhnLsG02sCE=;
- b=A3a0qSfwrnw0WEM1g2usnbtuxFV1BlJqCUc1keD18vwoduB3wVEzqRpSUCjmE1Oewr
- rtzMCZ8WW+5g1/VcJ5Jl72oH713zpAEJ45XNghUOfSipjZ31D234rp82YTO3k7qQUDCi
- gZD6XSgoljY738lZNZlm3HtsXmznQgPnbFD5O9UzO5XA5IPAomgA+dd3Tj+iG4iO5rcq
- kggxVEI2/5oO4swA9OHX+dATlHTYtyTDuqatd1SbQv+yVfKFvcipuFZbbG25DLfcEW2p
- EimZ5rxtEqa1xqXdrMOC9438QEgnbzkqbBSC919topJ77pcVhxxXFFKuOW4ywVbXDwOq
- w9iQ==
-X-Gm-Message-State: AOJu0YxtcnU4TC6WrCNmYa4ksoEVpZHAAzji+lcFCGuChqnt1y96u7IY
- EOdLMw1RSNOU/QF54+tGAFVSLk6ddZPsYoyMecImna9TnN6bczT9kVHDmoer/RSbR0A=
-X-Gm-Gg: AY/fxX5eNYgF6lVPkXWgJIGr1De1LUvGP86PWgI4VCvLT63NO7SfvY6MilXPNUFD1Wv
- yczDh0s1/g59NiEPs/y95hBxxvehZuOdqslh14ArnmeS2dPdF/KbCoSm0oliETpEgKLCEl1kJbi
- OZJZ4Sm4FzTTNdnEzQHhOpajP98KBRJUUsuGZQGxZerj+LCh/y5AZsxpj4Ho/hlMddd7flU2REJ
- oyQN7fcwlWEGUk485IqNRFFOEvLR0iJwKVA0rcaEkh97pl1uGD+TSD3V8tdh/UFvi6ExdJ+Gcr/
- Vk0tDSCdpAlx6AeF9C7y9bP+2SuyH2blG7AJWDbuCF8wmeNNEEAqzrKSX2yp2FyqeLvYidKc9XE
- bMDtKhsEhvZQp+lgXSsipaWXk6AqcmctQ2OS5wubhWZ1afD64FZFk0UHMxCz1kjdvr0cxG+il31
- 8o0M0iZKIoTSXQ49Cf5GR1yRhY/aiwY6uYIuR6YSHLGa+WW2bCX3gr8ZbooosxPJKsPE8x8TPZP
- GlPrJr0q8RyoGdhyN0kSGTk4+CFWxEPYzH5/cc=
-X-Google-Smtp-Source: AGHT+IFgFf0+7V1GnGnrmbIYvqRy6AOJHVJwrnz4oM54SX+/TJ4NuoPZKwizcPlWZrJD11d0tDf2yg==
-X-Received: by 2002:a05:6830:268c:b0:748:8b42:77ab with SMTP id
- 46e09a7af769-7ce46550da9mr2107071a34.0.1767719718532; 
- Tue, 06 Jan 2026 09:15:18 -0800 (PST)
+ bh=4kyYNVzNIwojnCgAmyq+GEJPPf3uD5aSrCAbDsPbKEA=;
+ b=B3xyTh7T0HsDgbN4kdUGwt6mLB3M/y+KdjdzfhZfLd3J7FoeyxX7hhQFH9rrYhdzPh
+ XCM3ksYuRWKdDsjrCrvEEAZHGQyqoZmZpsovi9dMiLPjDLjodRuLK0tlx2S0qMY/wAwT
+ qn+IOutkdof+b3ThO0F0GjJ+fRokYcGYzVSHZ2D5vqvWNWFDzYvHrDd2wOVWmQYcFcPk
+ YJsUcsycm0bMCKTYAjHlCtmpnwAklQ2BVx4MFGyhzeDHKnzbeiloCEw1Wpo94to51lAR
+ SgtH3OYeJ4NiiMZnthg0re406qi53qzMB7zVHhNKtJvqV3VOZ+d6bKgULpLPr9pNfU42
+ NdBg==
+X-Gm-Message-State: AOJu0YzBMwWutskOS9YMkjR067SGbjGPubWwSUTkEcMTvavW9pkPTwLx
+ mCtno1vbiiVXLgHgHO+IO4RgaJRSg37507M0dWiuw772I/d6VIuM1T9wo7LAMIFO+ME=
+X-Gm-Gg: AY/fxX53/MGf/UI2FfN4fFnKzUr1yjaIpNkDCLaKjfRkq0EE6471HQM7I0QW8O42l2g
+ UP3T46vqwgmogftaX7YMU7rlIIrcmArfy75tWeEt8S0M6FCfwXPrzQZCefatY85c4YuUhBSuYBf
+ gpH0LEtbLyzrTCXYPviGxkuEhEaEHVuJZP7tsGbKk57Oh7rLPvkQ5RlJXQFZmha5VDj1cw2H6N4
+ FzdsJ51gGc4W9HGDxUNBg2TJMxZtTnn/jDxVIx2E9ZBD0l+emZv6A3W7SAlVT5G2bEbAFB7d7SS
+ KGuHlQJinxIRqMtGQKlOHBbRv0pNxICQQ9sRaxtq2KRrwtiLvg8HobO3pGrlzXe2sRQBZ+E+WXi
+ kq5myIUT/7XsZe9r4Qv00vPROPyQM5bHY9rm+gblMptdVAvax1Rt3SW3EfjbXy7kVz8EylyUzAP
+ CXvUgxmsP7KDwThZ5S0H7UYOCkOQaXQlZ7Qk/vMlZNphisqpTBSIiOVVj0SqRzDh5UH3+Ga4SHg
+ sxaww878NqBSk1M0XB2pHdc/NKRV8G3/gJrQ9U=
+X-Google-Smtp-Source: AGHT+IH+VSHwZVllR9Ga85g/EUkzwI+cWgdBZbAHfFnISwhl/T5Yuyxibi1UE/FfolC2MwiQj8dXBg==
+X-Received: by 2002:a05:6830:83a2:b0:7c7:827f:2b6b with SMTP id
+ 46e09a7af769-7ce467429bdmr2314179a34.38.1767719795735; 
+ Tue, 06 Jan 2026 09:16:35 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce47801d58sm1805356a34.2.2026.01.06.09.15.17
+ 46e09a7af769-7ce478d9f6dsm1788870a34.24.2026.01.06.09.16.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 09:15:17 -0800 (PST)
-Date: Tue, 6 Jan 2026 11:15:15 -0600
+ Tue, 06 Jan 2026 09:16:35 -0800 (PST)
+Date: Tue, 6 Jan 2026 11:16:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Dmitrii Merkurev <dimorinny@google.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260106171515.GH3416603@bill-the-cat>
-References: <20260105235813.GB3416603@bill-the-cat> <87tswzf5eb.fsf@kernel.org>
+To: Chris Morgan <macroalpha82@gmail.com>
+Cc: u-boot@lists.denx.de, macromorgan@hotmail.com,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, sjg@chromium.org,
+ jmasson@baylibre.com, nbelin@baylibre.com, bisson.gary@gmail.com
+Subject: Re: [PATCH] bootstd: android: Fix write outside of memory
+Message-ID: <20260106171633.GI3416603@bill-the-cat>
+References: <20251223234456.1983614-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vCZgY7POVMdcZLLd"
+ protocol="application/pgp-signature"; boundary="zd0ISL7NCHfb6gLu"
 Content-Disposition: inline
-In-Reply-To: <87tswzf5eb.fsf@kernel.org>
+In-Reply-To: <20251223234456.1983614-1-macroalpha82@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,187 +100,109 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---vCZgY7POVMdcZLLd
-Content-Type: text/plain; charset=utf-8
+--zd0ISL7NCHfb6gLu
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 06, 2026 at 10:37:48AM +0100, Mattijs Korpershoek wrote:
-> Hi Tom,
->=20
-> On Mon, Jan 05, 2026 at 17:58, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > Hey all,
-> >
-> > Here's the latest report, now that next has been merged to master. A few
-> > of these are oddly showing up now, despite being in older code that
-> > hasn't been touched and was being built before.
->=20
-> For fastboot, some code has been moved from mmc only support to
-> fb_block.c, which might explain the new errors.
->=20
-> See: https://lore.kernel.org/all/20251121-topic-fastboot-blk-v7-0-9589d90=
-2fc91@linaro.org/
->=20
-> >
-> > ---------- Forwarded message ---------
-> > From: <scan-admin@coverity.com>
-> > Date: Mon, Jan 5, 2026 at 3:24=E2=80=AFPM
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > To: <tom.rini@gmail.com>
-> >
-> >
-> > Hi,
-> >
-> > Please find the latest report on new defect(s) introduced to *Das U-Boo=
-t*
-> > found with Coverity Scan.
-> >
-> >    - *New Defects Found:* 15
-> >    - 23 defect(s), reported by Coverity Scan earlier, were marked fixed=
- in
-> >    the recent build analyzed by Coverity Scan.
-> >    - *Defects Shown:* Showing 15 of 15 defect(s)
-> >
-> > Defect Details
-> >
-> > ** CID 640423:       Control flow issues  (DEADCODE)
-> > /drivers/fastboot/fb_common.c: 112           in fastboot_set_reboot_fla=
-g()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 640423:         Control flow issues  (DEADCODE)
-> > /drivers/fastboot/fb_common.c: 112             in fastboot_set_reboot_f=
-lag()
-> > 106     	}
-> > 107     	const char *bcb_iface =3D config_opt_enabled(CONFIG_FASTBOOT_F=
-LASH_BLOCK,
-> > 108     						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
-> > 109     						   "mmc");
-> > 110
-> > 111     	if (device =3D=3D -1)
-> >>>>     CID 640423:         Control flow issues  (DEADCODE)
-> >>>>     Execution cannot reach this statement: "return -22;".
->=20
-> I believe coverity is wrong here.
-> we call config_opt_enabled() which by default returns -1 so it's
-> possible to have device =3D=3D -1
->=20
-> This can happen when both CONFIG_FASTBOOT_FLASH_BLOCK and
-> CONFIG_FASTBOOT_FLASH_MMC are unset.
-> (for example when we use CONFIG_FASTBOOT_FLASH_SPI)
->=20
-> > 112     		return -EINVAL;
-> > 113
-> > 114     	if (reason >=3D FASTBOOT_REBOOT_REASONS_COUNT)
-> > 115     		return -EINVAL;
-> > 116
-> > 117     	ret =3D bcb_find_partition_and_load(bcb_iface, device, "misc");
-> >
->=20
-> [...]
->=20
-> >
-> > ** CID 640421:       Possible Control flow issues  (DEADCODE)
-> > /drivers/fastboot/fb_block.c: 138           in fastboot_block_get_part_=
-info()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 640421:         Possible Control flow issues  (DEADCODE)
-> > /drivers/fastboot/fb_block.c: 138             in fastboot_block_get_par=
-t_info()
-> > 132     					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
-> > 133
-> > 134     	if (!part_name || !strcmp(part_name, "")) {
-> > 135     		fastboot_fail("partition not given", response);
-> > 136     		return -ENOENT;
-> > 137     	}
-> >>>>     CID 640421:         Possible Control flow issues  (DEADCODE)
-> >>>>     Execution cannot reach the expression "strcmp(interface, "")" in=
-side this statement: "if (!interface || !strcmp(i...".
-> > 138     	if (!interface || !strcmp(interface, "")) {
-> > 139     		fastboot_fail("block interface isn't provided", response);
-> > 140     		return -EINVAL;
->=20
-> I believe coverity is wrong here as well.
-> we call config_opt_enabled() which by default returns NULL for interface.
->=20
-> And when we enable CONFIG_FASTBOOT_FLASH_BLOCK,
-> CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME will be set to "" by default:
->=20
-> $ rg 'FASTBOOT_FLASH_BLOCK_INTERFACE_NAME' .config
-> 1097:CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME=3D""
->=20
->=20
-> > 141     	}
-> > 142
-> > 143     	*dev_desc =3D blk_get_dev(interface, device);
-> >
->=20
-> [...]
->=20
-> >
-> > ** CID 640419:       Null pointer dereferences  (REVERSE_INULL)
-> > /drivers/fastboot/fb_block.c: 144           in fastboot_block_get_part_=
-info()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 640419:         Null pointer dereferences  (REVERSE_INULL)
-> > /drivers/fastboot/fb_block.c: 144             in fastboot_block_get_par=
-t_info()
-> > 138     	if (!interface || !strcmp(interface, "")) {
-> > 139     		fastboot_fail("block interface isn't provided", response);
-> > 140     		return -EINVAL;
-> > 141     	}
-> > 142
-> > 143     	*dev_desc =3D blk_get_dev(interface, device);
-> >>>>     CID 640419:         Null pointer dereferences  (REVERSE_INULL)
-> >>>>     Null-checking "dev_desc" suggests that it may be null, but it ha=
-s already been dereferenced on all paths leading to the check.
-> > 144     	if (!dev_desc) {
-> > 145     		fastboot_fail("no such device", response);
-> > 146     		return -ENODEV;
-> > 147     	}
->=20
-> Fair enough for this one. We can check that dev_desc is not NULL to make
-> sure that the caller cannot call fastboot_block_get_part_info() with
-> NULL as second argument.
->=20
-> I'll submit a patch for this once I've cleared out my review queue.
->=20
-> > 148
-> > 149     	ret =3D part_get_info_by_name(*dev_desc, part_name, part_info);
-> >
-> >
->=20
-> [...]
->=20
-> For the first 2, do you want me to update the coverity database online
-> with these explanations?
-> It has been a while but I think I can do that myself.
+On Tue, Dec 23, 2025 at 05:44:56PM -0600, Chris Morgan wrote:
 
-Thanks for looking in to all of these. I've gone ahead and updated
-Coverity, but in the future if you'd like to go in and do that while
-composing the emails, please feel free.
+> From: Chris Morgan <macromorgan@hotmail.com>
+>=20
+> It looks like under certain circumstances when reading the vendor_boot
+> partition it causes my device to write outside the range of memory
+> available. Near as I can tell this occurs because
+> scan_vendor_boot_part() calls android_image_get_vendor_bootimg_size()
+> which calls android_vendor_boot_image_v3_v4_parse_hdr() which calls
+> add_trailer() which attempts to copy information to a buffer allocated
+> with malloc in the scan_vendor_boot_part() function. On my board the
+> memory set aside for malloc is at the top of the system RAM, and given
+> a large enough vendor boot image size this causes the write from
+> add_trailer() to occur outside of the system RAM (nevermind outside
+> of what was allocated with the malloc().
+>=20
+> While I don't know the absolute best way to handle this, I would assume
+> that if we simply map the memory we want to use to where we will
+> eventually load the vendor_boot image that would be the most logical.
+>=20
+> Fixes: abadcda24b10 ("bootstd: android: don't read whole partition sizes")
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> ---
+>  boot/bootmeth_android.c | 20 ++++++--------------
+>  1 file changed, 6 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 1374551dbeb..c2c25d53ef3 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -118,9 +118,10 @@ static int scan_vendor_boot_part(struct udevice *blk=
+, struct android_priv *priv)
+>  	struct blk_desc *desc =3D dev_get_uclass_plat(blk);
+>  	struct disk_partition partition;
+>  	char partname[PART_NAME_LEN];
+> -	ulong num_blks, bufsz;
+> +	ulong num_blks;
+>  	char *buf;
+>  	int ret;
+> +	ulong vloadaddr =3D env_get_hex("vendor_boot_comp_addr_r", 0);
+> =20
+>  	if (priv->slot)
+>  		sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+> @@ -132,28 +133,19 @@ static int scan_vendor_boot_part(struct udevice *bl=
+k, struct android_priv *priv)
+>  		return log_msg_ret("part info", ret);
+> =20
+>  	num_blks =3D DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), desc->b=
+lksz);
+> -	bufsz =3D num_blks * desc->blksz;
+> -	buf =3D malloc(bufsz);
+> +	buf =3D map_sysmem(vloadaddr, 0);
+>  	if (!buf)
+>  		return log_msg_ret("buf", -ENOMEM);
+> =20
+>  	ret =3D blk_read(blk, partition.start, num_blks, buf);
+> -	if (ret !=3D num_blks) {
+> -		free(buf);
+> +	if (ret !=3D num_blks)
+>  		return log_msg_ret("part read", -EIO);
+> -	}
+> =20
+> -	if (!is_android_vendor_boot_image_header(buf)) {
+> -		free(buf);
+> +	if (!is_android_vendor_boot_image_header(buf))
+>  		return log_msg_ret("header", -ENOENT);
+> -	}
+> =20
+> -	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_=
+size)) {
+> -		free(buf);
+> +	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_=
+size))
+>  		return log_msg_ret("get vendor bootimg size", -EINVAL);
+> -	}
+> -
+> -	free(buf);
+> =20
+>  	return 0;
+>  }
+
+I haven't forgotten about this, but I'm hoping there's some other way to
+solve this, I'm not super keen on adding another environment variable
+(that would need to be documented in a v2 if we can't fix this some
+other way). Mattijs, do you have any ideas?
 
 --=20
 Tom
 
---vCZgY7POVMdcZLLd
+--zd0ISL7NCHfb6gLu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV1DFwAKCRAr4qD1Cr/k
-CvfPAQDioAiGtZEQhoi5SrEQ4Pw2UgPlIMI7j0fdnDJEatPPWgEAusGBU88FtS2M
-Hp800e0XS+DZhmSYnJqdiCVVLUQ7Lw8=
-=nDJv
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV1DcAAKCRAr4qD1Cr/k
+CrQRAP9yEWKhW9yhWhCX415E1lTDUaDV5zbDdOSzL9U87g0IrAD/af/4d5hr/ACc
+7lvH3ZIULi+r/dLeQqmeXDZcMfUFsQY=
+=MOt+
 -----END PGP SIGNATURE-----
 
---vCZgY7POVMdcZLLd--
+--zd0ISL7NCHfb6gLu--
