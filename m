@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69888CEFD1D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:14:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B134CEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A9FA83C62;
-	Wed,  7 Jan 2026 00:14:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B05B83C62;
+	Wed,  7 Jan 2026 00:17:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dlGaxzFB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PHnaJuzx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jc2lM1z8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8BC383FC0; Wed,  7 Jan 2026 00:14:43 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F313784005; Wed,  7 Jan 2026 00:17:24 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B8A83A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:14:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C77DF83B03
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:17:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dm6Sd43DCz9sXk;
- Wed,  7 Jan 2026 00:14:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767741281;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=16N5bFwhffkhaUI7XsK9wxEMiW0rV4WbE0RLUQCObH0=;
- b=dlGaxzFBiv8FbRJ99P/KBjoSXxeHZ5two+DpqDzXKu5cN62RdWaadI6ONBWXgQxOQrtk8B
- n5ZMeKBBktaM3v00bB19365HncaoFlTVTT6nRFb7kQ0Fxwt83N8HVSDKrAl9qF1RlpcFQ4
- b8kdNOv6bVP4757Iy4OaFJi2QCqWO6NsVTidTx/OtU+ht7KOPXwL+tDKTGjFyKIs5RBEhx
- /BQELOyIZ4o3eVoTTqlkaLMRuH2KkkU15P1q1YZ2rYAUYTDMv5CKEcy+xk55inly7whXIa
- 1NLlwtCe+erazpISr43xWATFD5/B7lqpGVMRLkbZHIcPNRwQla6FEd+Kb24vCw==
-Message-ID: <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767741279;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=16N5bFwhffkhaUI7XsK9wxEMiW0rV4WbE0RLUQCObH0=;
- b=PHnaJuzxR/ucNSOjTw17p1zVwKWqBOrnXxSRyE3xXh0H8jAUXXW2Rd18eJKoyNgXkOnfdF
- zb4yn17a1+GWzfIIlj8JfqSW420GLmzw1a9fRybNjZPTdajH3PfM5joO0S1r4FEZfzd3tu
- lR3ut/YHEaLUdWAskqVTqho7rrHlAxCU2bnjqCVBmh/aNk/2FDjS/sLYDygAw3NfD3wCcm
- nSl+L9XCEbn/NCrTdTx2ABuSuZY5iLIZGzDXKfjiUGbDL7LRiWasyID27+U32WcWIvQmlJ
- uWq0xs+/6tp8eTHkEsHOdGjKEnhesCZB2A7t6+ezEnwLIctwDZ2IckHNBBSiFw==
-Date: Wed, 7 Jan 2026 00:14:38 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3ed15120e55so1030454fac.2
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 15:17:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767741441; x=1768346241; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=utHM551UmGZaWY7icYtkMpl/oMpJatuGk1MgVO+2lyA=;
+ b=jc2lM1z8VJR5R/fxERdCPm0/xn7+6miU9w55EPLPn6HvaryVKsgmdjmarUYIiXts/c
+ o/Iz1cVbIdkf82HMusOwcp+heqRkdiV7UI9hNIE4anSoXM+QPuuIzb5vfyJHa3wzVAZH
+ lSSanN4X3GL0khA56MK4veQxd1Jm5MRHywNQ8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767741441; x=1768346241;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=utHM551UmGZaWY7icYtkMpl/oMpJatuGk1MgVO+2lyA=;
+ b=qe64HVyddYU/AjwUZrsdgRHeoKU2PIKM4SbYNCae7wtMjmqrt4a0fKwfniTQa2ElAt
+ 08amOQhA/10OujPW+QPgP0+nyxXFFN7z0se9RdWhKAbroonwaXwUEzon1wDhGGJHTaGw
+ fCVlOmYo9k6HWynfW3whntA6THEkM0ObKQ9E1KiKpNK4lNbuctG7rnsvIjmKl9+ZSASc
+ NsMsDRXGsgniOu3tW/KlIT7469GfGYl2lw5XH1iB9d3a6ol9QkC5nS1TMWUsf7Uwifwr
+ uxcqIIrFKa1fXVKO0kpuYApdlJ6etR8RcBBijfNuPY3idveG3hAl0Pvuqr90rzZhThpn
+ r5aA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2+eFkz4T34CCRqgQ8GVzNCIv8zDxsc8TB/vcIwlhMDywBu1/bzQ0ktDLUF2jfuTzGqmLYI/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyaFmVDOV2lNBTqnbzt9mqArHoNltDL8sfoeaRUniy9NVUXTLcK
+ poDDopizdo2WiUdYMurj3M5qkDnvEYceXBoX0sR4unR3AjB+wvFyZ01C4Xz3dX0lzQ8=
+X-Gm-Gg: AY/fxX6Jbe9D9LszNnRVl8b0FTIg/mxz6nhlza9wrYH0ZZmpo2Pv8hoCUuiJ2yHzyaN
+ xyhQF230hVUFg18qCCOnZdUPHAZpjiG7bjkutvbLM7uJ/MQSlUVwn1fQMy9WX1yKGr82LLq9kgw
+ tIfUsYYkfRDAfuqWyaisUhashUK34DzfdlDd0uPq62bONoRXi8jRY/VcZyPiBA5URzGa73V2UGZ
+ M3vFLZOGzaGRYzJwDwsDyV+Cc/G619TRqJj8hajL9TIG5zVX/SpX6+iPw4g/IpTM4NJ6OeI5WAP
+ bEcTzYUpMkIha9WgLOD8fVwvPSugmOV5WagmcB+9DWJjV/6ichiB+jGjIzlXLqqdn7E8PSW/snf
+ IBiuOm6+/f+WsvEPfByRQg8LXqPqI5VoEtOisJSpDFasXSRY8yirWXdNnPuJSIgG4OupINtaYQL
+ hsVxHdZ46a84hJNE/ORrAuQIljQ5/yhzXp8NmtQnSlc5tRRuOmRy4QWGjEPt8xdgXL3YrupP6LY
+ aqcGJc73I0gSFwAH0WQ6q2H+idLThjf9T8r9g==
+X-Google-Smtp-Source: AGHT+IGbiML59SZjIjMiOQ/3XEyV3u5n43sJmVBEtxcLXCo4EO4tHG5YYPAthWY0GTmqWz++5WoM8A==
+X-Received: by 2002:a05:6870:1b05:b0:3d9:2fe2:f5c8 with SMTP id
+ 586e51a60fabf-3ffc0b68c5fmr350875fac.32.1767741441420; 
+ Tue, 06 Jan 2026 15:17:21 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa4de40bfsm2059380fac.5.2026.01.06.15.17.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jan 2026 15:17:20 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260105-mtk-fix-build-after-kconfig-change-v1-1-7185a081f7c0@baylibre.com>
+References: <20260105-mtk-fix-build-after-kconfig-change-v1-1-7185a081f7c0@baylibre.com>
+Subject: Re: [PATCH] scripts/Makefile.autoconf: use abs_srctree for
+ out-of-tree symlink
+Message-Id: <176774144044.3783364.16500800828711827756.b4-ty@konsulko.com>
+Date: Tue, 06 Jan 2026 17:17:20 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
-To: Sean Anderson <sean.anderson@linux.dev>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260106223409.748335-1-sean.anderson@linux.dev>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260106223409.748335-1-sean.anderson@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: baoo6u9ok1e6fox9t4pn6m9ujp59jm8q
-X-MBO-RS-ID: 3733fe802d1b0153521
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,78 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/6/26 11:34 PM, Sean Anderson wrote:
-> Extend the PCI bridge driver to enable resources associated with PCI
-> slots like clocks, power rails, and resets. This is modeled off of the
-> PCI power control subsystem in Linux. The traditional compatible for PCI
-> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
-> pciclass,0604 so add that as an option.
+On Mon, 05 Jan 2026 14:35:04 -0600, David Lechner wrote:
 
-Oh, nice :)
+> Replace usage of $(srctree) with $(abs_srctree) when creating a symlink
+> to include/asm/arch in out of tree builds.
+> 
+> When building_out_of_srctree is true, $(srctree) is just "..", so the
+> created symlink was broken, for example:
+> 
+>     build-mt8365_evk/include/asm/arch -> ../arch/arm/include/asm/arch-mediatek
+> 
+> [...]
 
-> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
-> +{
-> +	struct clk clk;
-> +	struct gpio_desc perst;
-> +
-> +	if (!clk_get_by_index(dev, 0, &clk)) {
-> +		int ret = clk_enable(&clk);
-> +
-> +		if (ret)
-> +			return log_msg_ret("clk", ret);
+Applied to u-boot/master, thanks!
 
-Should we use dev_err() instead ?
+[1/1] scripts/Makefile.autoconf: use abs_srctree for out-of-tree symlink
+      commit: 726d11289f2776098b6fcd99b413b590782a556d
+-- 
+Tom
 
-> +		/* Delay for T_PERST-CLK (100 us for all slot types) */
-> +		udelay(100);
-> +	}
-> +
-> +	if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
 
-Invert conditional, reduce indent.
-
-> +		unsigned long delay = 0;
-> +		int ret;
-> +
-> +		/*
-> +		 * If PERST is inactive, the following call to dm_gpio_clrset_flags
-> +		 * will be the first time we assert it and we will need to
-> +		 * delay for T_PERST.
-> +		 */
-> +		if (dm_gpio_get_value(&perst) != 1)
-> +			delay = 100;
-> +
-> +		ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
-> +					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +		if (ret)
-> +			return log_msg_ret("set", ret);
-> +		mdelay(delay);
-
-Maybe set a flag and avoid calling mdelay() altogether ?
-
-> +		ret = dm_gpio_set_value(&perst, 0);
-> +		if (ret)
-> +			return log_msg_ret("clr", ret);
-> +
-> +		/*
-> +		 * PCIe section 6.6.1:
-> +		 * > ... software must wait a minimum of 100 ms before sending a
-> +		 * > Configuration Request to the device immediately below that
-> +		 * > Port.
-> +		 */
-> +		mdelay(100);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   U_BOOT_DRIVER(pci_bridge_drv) = {
->   	.name		= "pci_bridge_drv",
->   	.id		= UCLASS_PCI,
->   	.of_match	= pci_bridge_ids,
-> +#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
-> +	.probe		= pci_bridge_probe,
-
-.probe = CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT, pci_bridge_probe, NULL),
-
-Thanks !
