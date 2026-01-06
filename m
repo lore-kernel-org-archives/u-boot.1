@@ -4,90 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 209C4CEFD03
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 20:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA07CEFD01
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 20:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A5BC83F01;
-	Tue,  6 Jan 2026 21:16:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A527F83F01;
+	Tue,  6 Jan 2026 21:34:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mU70TnAl";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UssGgiK9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 580FA83D9F; Tue,  6 Jan 2026 21:16:36 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4801083FBE; Tue,  6 Jan 2026 21:34:49 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D39583FD3
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 21:16:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA93083D9F
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 21:34:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c7545310b8so702188a34.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 12:16:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767730580; x=1768335380; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y3FbcV/l4mlxULHnFQcesV61MNRluKMLGFaN/8MCsbM=;
- b=mU70TnAlOzfNuSsE79GscRH+dvmmjET0pYokIxL+3T76xFonm8pAKopNIWFR0Lz39t
- IDGXRU+YClCG1cf2h3H/F65xjIElgmJtvtdCJCw2kDnFtwmOMAS0KAKd348DK6ZCwQDk
- fv2AyQDu+kO4aDRfIeY95GVc886nWfrAPjDuo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767730580; x=1768335380;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Y3FbcV/l4mlxULHnFQcesV61MNRluKMLGFaN/8MCsbM=;
- b=qMA951fAUJ1f8qfrnrxKZwoQ0QxiKQbL2OocNxQxdn/EsYkRvExdJlJk8elBhTV8WS
- YQEmw9LPY1VDeWGSEzOvsZyAysPsREDW5H9Eeh2HVRaWm8xy0ASvH4WvNwpkOuVkVraP
- ndFx8Lb0HkSE86hG47YuoMYRx4M5AlZVAuJMkNvBBQb50YSJOpPP6OsKB92koS/A28EY
- a+vSNWuDFVZWJ5dz5CjzK+25biwWaCMztPYO5LPJNilTFIlG5swQk7P7w3ddP2Qpx0t6
- B/ucczokLDWuXJ9GJDH6UZV+UZdmrCElMsTjCVzL9mHgYRkqd51xGtbioYOQpqlUdiZ3
- 46bw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXduFi1hv5dOHbsy7PjOWERrLz/tPaqxJYvPptnSASnsKVPzQ2IZomD3lqS7UEwBavseLWtA+Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfRq9dxMfePAal2DAIWAsCNK/UMH2rfXLfoTjrS4HkShZSCeqW
- dZz40bwVkB0axTncq9CkKcxNSqEPkawPuw1h5IFilJNl8+qmcMaudObgEvuYRKgFvSE=
-X-Gm-Gg: AY/fxX6IsxLJQ4yZCsi07ZNbFZpsrWuVVplnYZ3YjzL9U1XjJtcSqSL+95jIHQIw7T6
- jFw7yBrHEqrbIkaFi8q5WlFZkOj4FmHbeiu7oFyar1rWaJnk6gTfOuJ+OhJLDNzhcRF6fEb7Q/z
- dzM8hu8N+vOGRjVaYOCYF6YrqpgNDRlMqwr1gkRM1Z7SMBRelsAKxDaTD+2Q8RVNB+01pLr1lw5
- qyafTY2ILxAgt9uCcqmuAU9mIyGmxcKJfCi5qIKIbqcBhKN4DqDFhLvCyt7B9o6CA++uxz5E0sy
- /2+eK0vkbLWBWTj914vhJE5sHIpEHjcG6Cs423fcCb4QTiPb2imC0yN9tefhmhHj0kMf15bMStO
- pyDtdGy+uKeuT9qUBPmnPkpfPIStMcncb/6BMejD0iMjzyDRf/KmDGRmxBy0uPvkpBLkA34b1Ck
- ac+wZl0M4rtyPkWkEOAKEfYN/Ludult7guaSEZUgiBSaEpsBBM5xOTso7zODDB7ZPyozfqIKvbr
- xiBae3x2pq1YY54WzKGJU7aPdRb8TE8aVxHRQ==
-X-Google-Smtp-Source: AGHT+IFJpnpJQE+QLU/pSDPdCtkMuJ4Vuv35sxz1wr6fG60l6ThFG4+qKEjY4CiBGMcWfpGpsokXGw==
-X-Received: by 2002:a05:6830:448b:b0:7c7:4bb:dc06 with SMTP id
- 46e09a7af769-7ce5084e2e0mr241196a34.0.1767730580297; 
- Tue, 06 Jan 2026 12:16:20 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478af63bsm1962355a34.16.2026.01.06.12.16.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 12:16:19 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Yegor Yefremov <yegorslists@googlemail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Javier Tia <javier.tia@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20251229161045.177883-1-heinrich.schuchardt@canonical.com>
-References: <20251229161045.177883-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] .gitignore: add vpl/
-Message-Id: <176773057940.3765597.7253669634107876428.b4-ty@konsulko.com>
-Date: Tue, 06 Jan 2026 14:16:19 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=0cbd=7M=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1767731684;
+ bh=skQkvfC91h2RtKeDUTsD9PC2zNJT31n4DHtu5Ccg98I=;
+ b=UssGgiK9LU5R0lksxnzFv96vD7FyeHyZeYamqRSVt4L44W1sbQ2rgT0mCtxH2SQ/1y2xbv76k
+ WkOCEe1Js9LdxiXaOGUWHUAIp5A31HgOxCzbvg14buJSsi0p9dxxEqT3yg4M+MK8pZTMKqmduRx
+ jq3h5l7cyLCqrNSlSQHZ0zGDQjLpDhpOsUkiMqVI2N78IFdGiRFLwJ9mDB9AX5JC8GbJLY8lbkn
+ eJQ3JSZxGDH/aO8awBZPbPvI+NLChlzUT5fiRtwNJJA7bxeSiJOHo/mOfH3gzufWj1qfjZBCqYv
+ 2QepcAycmVtwG9JYTdBxUkzAlKyx2Brwiy4WNJK6rNZg==
+X-Forward-Email-ID: 695d71df4c4fab46c2994ff3
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.2.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jerome Forissier <jerome@forissier.org>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH] net: lwip: add TFTPSERVERIP Kconfig option
+Date: Tue,  6 Jan 2026 20:34:30 +0000
+Message-ID: <20260106203433.3133926-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,17 +70,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Dec 2025 17:10:45 +0100, Heinrich Schuchardt wrote:
+With the legacy networking stack, it is possible to use USE_SERVERIP,
+SERVERIP and BOOTP_PREFER_SERVERIP Kconfg options to force use of a
+specific TFTP server ip.
 
-> Directory vpl/ only contains generated files. Git should ignore it.
-> 
-> 
+Using the lwIP networking stack use of the 'tftpserverip' environment
+variable provide the closest equivalent functionality.
 
-Applied to u-boot/master, thanks!
+Add USE_TFTPSERVERIP and TFTPSERVERIP Kconfig options that can be used
+to add the 'tftpserverip' environment variable to force use of a
+specific TFTP server ip.
 
-[1/1] .gitignore: add vpl/
-      commit: 75a5404a588938d2803e07acb9977e3dfe29693e
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ include/env_default.h |  3 +++
+ net/lwip/Kconfig      | 12 ++++++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/include/env_default.h b/include/env_default.h
+index 7f8dc1c35a74..014873e304d8 100644
+--- a/include/env_default.h
++++ b/include/env_default.h
+@@ -58,6 +58,9 @@ const char default_environment[] = {
+ #ifdef	CONFIG_USE_SERVERIP
+ 	"serverip="	CONFIG_SERVERIP			"\0"
+ #endif
++#ifdef	CONFIG_USE_TFTPSERVERIP
++	"tftpserverip="	CONFIG_TFTPSERVERIP		"\0"
++#endif
+ #ifdef	CONFIG_SYS_DISABLE_AUTOLOAD
+ 	"autoload=0\0"
+ #endif
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index 5789766fe624..0cfd3eb2684f 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -72,4 +72,16 @@ config LWIP_TCP_WND
+ 	  but QEMU with "-net user" needs no more than a few KB or the
+ 	  transfer will stall and eventually time out.
+ 
++config USE_TFTPSERVERIP
++	bool "Set a default 'tftpserverip' value in the environment"
++	depends on CMD_TFTPBOOT
++	help
++	  Defines a default value for the IP address of a TFTP server to
++	  contact when using the "tftpboot" command.  (Environment variable
++	  "tftpserverip")
++
++config TFTPSERVERIP
++	string "Value of the default 'tftpserverip' value in the environment"
++	depends on USE_TFTPSERVERIP
++
+ endif # NET_LWIP
 -- 
-Tom
-
+2.52.0
 
