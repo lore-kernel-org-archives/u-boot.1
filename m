@@ -4,56 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF17ECEFD01
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 20:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C6BCEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 21:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1458983F01;
-	Tue,  6 Jan 2026 21:39:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2D9383966;
+	Tue,  6 Jan 2026 22:55:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="gg0UVwNm";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="FnU/b6lC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B53783FEE; Tue,  6 Jan 2026 21:39:55 +0100 (CET)
-Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com
- [91.218.175.179])
+ id E41B983C4B; Tue,  6 Jan 2026 22:55:14 +0100 (CET)
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
+ [91.218.175.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62AB883D9F
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 21:39:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 872EF83759
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 22:55:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sean.anderson@linux.dev
-Message-ID: <0d0bd91a-506d-4bc9-ae84-364cb98b2b71@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1767731992;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UwHTBKks4XdNImd8oy5itddfEyZA+dIviiWx1xiGJXQ=;
- b=gg0UVwNmS1c/uJmT/+5lc5DUQ8OIPos57ACZpct8E0ddruo+N9FyzWFMVR57JsHvrbI71o
- /pmyW/4VXEq/UO2s71LHFFT8XLMhI9nKaRwlTC/dpuUOUMBc8zU967xAEju7eJG2TwzqrK
- 8g8Jy0j1OX85DEX1eYvQgf9cMmybOSc=
-Date: Tue, 6 Jan 2026 15:39:48 -0500
-MIME-Version: 1.0
-Subject: Re: [PATCH] scripts/Makefile.autoconf: use abs_srctree for
- out-of-tree symlink
-To: David Lechner <dlechner@baylibre.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-References: <20260105-mtk-fix-build-after-kconfig-change-v1-1-7185a081f7c0@baylibre.com>
-Content-Language: en-US
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1767736510;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=3NtZWrCDjxyvXkd8pGLCaKjBpx/rANuSWl+HZl0x8/8=;
+ b=FnU/b6lCax6cxpBriS7DggJ9QDDN+BKigPuh6TF9JRSMbN8SIV1Yod27sRe/HC1/AsmbVk
+ vvpCqNC5B9OhatiDyCFc0YVxCcou34BocsoQ4EooS/yNS7RHmAnxT8KLY73zwQ3RCMgTIY
+ bjIk3hN8T1qrm1Z/wlSRTCznNDfUNrs=
 From: Sean Anderson <sean.anderson@linux.dev>
-In-Reply-To: <20260105-mtk-fix-build-after-kconfig-change-v1-1-7185a081f7c0@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Michal Simek <michal.simek@amd.com>,
+	u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Frantisek Bohacek <rutherther@ditigal.xyz>,
+ Sean Anderson <sean.anderson@linux.dev>
+Subject: [PATCH 0/4] phy: zynqmp: Port several patches from Linux
+Date: Tue,  6 Jan 2026 16:54:57 -0500
+Message-Id: <20260106215501.727524-1-sean.anderson@linux.dev>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,46 +64,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/5/26 15:35, David Lechner wrote:
-> Replace usage of $(srctree) with $(abs_srctree) when creating a symlink
-> to include/asm/arch in out of tree builds.
-> 
-> When building_out_of_srctree is true, $(srctree) is just "..", so the
-> created symlink was broken, for example:
-> 
->     build-mt8365_evk/include/asm/arch -> ../arch/arm/include/asm/arch-mediatek
-> 
-> Which would resolve to a non-existent path:
-> 
->     build-mt8365_evk/include/asm/arch/arm/include/asm/arch-mediatek
-> 
-> To fix, we need to use the absolute path to the source tree since we
-> don't know where the build tree is located relative to the source tree.
-> 
-> Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  scripts/Makefile.autoconf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-> index e3c88badb52..47c49a018bf 100644
-> --- a/scripts/Makefile.autoconf
-> +++ b/scripts/Makefile.autoconf
-> @@ -138,7 +138,7 @@ ifdef building_out_of_srctree
->  	else									\
->  		dest=arch/$(ARCH)/include/asm/arch-$(if $(SOC),$(SOC),$(CPU));	\
->  	fi;									\
-> -	ln -fsn $(srctree)/$$dest include/asm/arch
-> +	ln -fsn $(abs_srctree)/$$dest include/asm/arch
->  else
->  	$(Q)if [ -d arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
->  		dest=../../mach-$(SOC)/include/mach;			\
-> 
-> ---
-> base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-> change-id: 20260105-mtk-fix-build-after-kconfig-change-922538479a96
-> 
-> Best regards,
+This series ports several patches/fixes from the Linux driver. In
+general, I have left the commit message as-is, only added . The
+exception is patch 2, where I have removed the original fixes tag and
+added one appropriate to U-Boot.
 
-Tested-by: Sean Anderson <sean.anderson@linux.dev>
+
+Sean Anderson (4):
+  phy: zynqmp: Allow variation in refclk rate
+  phy: zynqmp: Enable reference clock correctly
+  phy: zynqmp: Store instance instead of type
+  phy: zynqmp: Only wait for PLL lock "primary" instances
+
+ drivers/phy/phy-zynqmp.c | 178 ++++++++++++++-------------------------
+ 1 file changed, 65 insertions(+), 113 deletions(-)
+
+-- 
+2.35.1.1320.gc452695387.dirty
+
+base-commit: beab3fe49e1e9209dd32fe2791e7ac706038460f
+branch: phy_zynqmp_backport
