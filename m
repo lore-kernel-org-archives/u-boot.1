@@ -4,147 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F52C47BE6
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 11:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58792C47BE6
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 11:11:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED63983F5C;
-	Tue,  6 Jan 2026 12:11:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C18E83F64;
+	Tue,  6 Jan 2026 12:11:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="FVdpf6pj";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="DVPr6Rx0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC0E183952; Tue,  6 Jan 2026 12:11:14 +0100 (CET)
+ id 9268083952; Tue,  6 Jan 2026 12:11:16 +0100 (CET)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF6FF839A5
+ by phobos.denx.de (Postfix) with ESMTPS id C830F83F5B
  for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 12:11:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RaazYQnH3cMbRMSGxwyHjgKsjGTwHHCFQ9m8Qfnf0/9uUrZzoW7xImDG3WRkLlSf0twIdGCqKvdHWJJYsOLnsGHTOlcaLUNr0vwSVg4CZoRvJyINQIHOqHZK4Rkt7L/sZoeAtfMsJZm3obPuxpAAZBI+FTdbgaMXQ5mVnLXTLUIP5XLHTcMrYl1YfEyGJnCzW364xnWpT77snMMM4IxsNAjfH9YSzBi+xgwxEfCA8J7ZDW6qYSUHum7NnHJ+Wfyxz4GxYZDLEhHNJYeEqAGiQNyGJU9Npk6OXTlr1PzyH7ubgF2J93DbszUyBIB39icPAQLI7n52H/n91SGINqljiQ==
+ b=ePVmbtZa3J2xzMMzwMcgsAmtfPz/pf3HeVVW+6tdOaUVOtqdhVpFqieGlTbjvU5yoonfUA6BUxhtKJw87fBOeCRJFbCuHcxFmDBNtTEQMezNNUbdeQ+Sk6XHUeWiLCQDwDIm2kxNzEGns3JQ+iobcyClvU3olApe0YgR78/vB8JnEe5IgjBjhF8yR1s6pP1fB4xL0Gc/6ivKKX8D2fGekfaicDJBR56Yf5drMHzQKCmfE4DMmTmlwo047yMOJYoYM6krXv2DLo/o17HDaDOl6P/ZIx83lK2FpC025KpwNZ2zYei1qNleqlkDkAHszu4nZG+cFt5qUMhbFOqz+6qa4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D/gUDvV9VyUgBRzNv3Ae+BAF/m1pAeba2w4vc/H8QkE=;
- b=zREhONsmr1F3Pyy2V5zij/JkKh/3YrCdqjsCbtJFhhWZFIzY/biP2o/ACkjRiwbVaoQdcH8L6KnOEXOpuX6maji7M6o9AiCE7o5fvLjrL609DEq2dJcG6M2KYQ2FCwdxyojMQW978iPxwCVopZE4Y77VCKMNdWXsCix5YLS+mqDAUxZBI+Im+z7nDbTA0yV5zjd+vOgKFC08VQyCUs5Om6whCjk4IHM43TBn//2rG7FC90MzBvfKRGwLvNgaznIyX7zfYZsKn5tkkuK1QC4RZ3A9R8pxVfpM3x82Me5MA4KB6qkewSCenMi3hMh6K/ZhTKdhp9xSNxPUKBX9RIwTWA==
+ bh=JTECza4TDyey6WRpo3rQfFhBKAZZ62PnaTAYDNqv8FA=;
+ b=RqaTKKm8eXcaVuGmr7dTxELtI3aVnf10yhmBhHu2EgfOLr7fKxiaCUVpKUYXPECV4FVFs3XQ3eF2gRmJOnz63q9V7Ta0XqUUrorRbtyvvx2U7we3AouZwZMrqvqFnjJ5KFZwuSSQnzduBA9P/DlbTGc70seaGXORpVB8m6U5HB51Jvey11CblnIr9R0wD5c4gXT/vL2Llq4g+d87QCPljLLF+fzrIWjbZtYFeJ91C+ji8zZPQikEiy56M9TmrUBOP9skpRQJYT8u5+5g2DSWNKQ+XaGRq75z2PhBwyh+B2bxr/ypMPhe2siyGj+TOAkl9EW4K9T8eobS8w992VAoZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
  header.d=mt.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D/gUDvV9VyUgBRzNv3Ae+BAF/m1pAeba2w4vc/H8QkE=;
- b=FVdpf6pjht/0bwEUkJpLBblxFrcaGnf8Aj7uMBqUPFq/K8+18TYE4lUGGmYKSgtliY0pGpkMfUhydSmVwRO9r7sm5vW34pSrHiEMx345GQgjlfPymgNVWWZ8XP2N5mOLrwlAxIokpClz73sOzx/FBOzMdHaijKUVdTuOY5vq6UCnrhr0jnMXC4CVij9yJIopjwhpwUqRAjlqS3glYO2ecB6Vdnfc4P1TetiwnLty5OFkYSPWX2OEENvUkGUEZKT+H7HWJM2tIgLBOAqoQwwlDr4Tq6SJCQvTw1p4ULcd9ZWikvQk/LtWVf/oGZ3LkTbaeUpMhoeDtkfqkqkPdUM/DQ==
+ bh=JTECza4TDyey6WRpo3rQfFhBKAZZ62PnaTAYDNqv8FA=;
+ b=DVPr6Rx0iKRYdi51H9FaQ/NMiOw5MBLRdQPnpvI0/d8BhIAHEXcRVvvYKz1NdmeMD9GcHtPdinNM0XtP91ZGgC/E8DsjH7GrC2PSpgWYAZVAxLLHTD2z9b9zqrmrk+iVBHKwqDudaDHW71p3miFvl5oyYYhiu4HV3K2qM7YjCXXOz32Vjf6Y2m3E29yFgaPf//sQ+ZKM3WVzemdwhHFO89NAf2ZvD8wxR+k79f+dDfatrLiwmuXGuxh7fQX0OJ7Hwl2/RMyYnD3nnRjqh7goMBNWSFaXqkzBpj/3ASLn2MDqsbggQLFt/Ud9Ve2Hx6QHl9o4cn1OCDTtY9ch7bhdcg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=mt.com;
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
  by AS8PR03MB7302.eurprd03.prod.outlook.com (2603:10a6:20b:2ec::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Tue, 6 Jan
- 2026 11:11:06 +0000
+ 2026 11:11:07 +0000
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::2e7d:3185:676e:2466]) by DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::2e7d:3185:676e:2466%2]) with mapi id 15.20.9499.001; Tue, 6 Jan 2026
- 11:11:06 +0000
+ 11:11:07 +0000
 From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
 	trini@konsulko.com
-Subject: [PATCH v2 1/3] tools: mkeficapsule: Add support for pkcs11
-Date: Tue,  6 Jan 2026 12:09:57 +0100
-Message-ID: <20260106111034.889964-2-Wojciech.Dubowik@mt.com>
+Subject: [PATCH v2 2/3] binman: Accept pkcs11 URI tokens for capsule updates
+Date: Tue,  6 Jan 2026 12:09:58 +0100
+Message-ID: <20260106111034.889964-3-Wojciech.Dubowik@mt.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260106111034.889964-1-Wojciech.Dubowik@mt.com>
 References: <20260106111034.889964-1-Wojciech.Dubowik@mt.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: ZR2P278CA0046.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:53::19) To DB9PR03MB7180.eurprd03.prod.outlook.com
+X-ClientProxiedBy: ZRAP278CA0012.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:10::22) To DB9PR03MB7180.eurprd03.prod.outlook.com
  (2603:10a6:10:22d::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|AS8PR03MB7302:EE_
-X-MS-Office365-Filtering-Correlation-Id: bfe8fc73-dbcf-46bf-bd2f-08de4d144995
+X-MS-Office365-Filtering-Correlation-Id: d0ee90e8-d4d7-41a5-1b0f-08de4d144a36
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|366016|1800799024|19092799006|7142099003|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wa9c2uCSMqxA9PQVaRS448iGBqik/C5xMmWJDZ9lCUQPf9pXlyjCcv4bifXj?=
- =?us-ascii?Q?05an2zuwXlUj/c5p/xHIoLShSBi3W5nQUdfkwkmc8xZBblMsxHcuFxCOLhdT?=
- =?us-ascii?Q?1zMRM8rvOqL+Hv+j12xsPbb76BCn46tHWMFCVnszwFuyCK+qJxe/Tw3gwJ8b?=
- =?us-ascii?Q?XJrfQoij6w8MWXI0Rm1ClQtbPrT45z0eVWAKCoE/hJuS6WbiTU5CnN4Nc7bd?=
- =?us-ascii?Q?cnw61X3U6ynd8MBDrrEHcNMZHflbgBoK7e+eeXMCjCz1QK5BMfK4LwqrUMAZ?=
- =?us-ascii?Q?I4x5+yxgvPsrNfq37kICMrLKI/e0DDYR+X7T2DUifAYMnlDS7gaMnI5HWjgN?=
- =?us-ascii?Q?ghelYcSSGyLwJyxffgu0Z6O8IVP75YZ+hhEbm8KfkWOebv610ymsp8ctjjP/?=
- =?us-ascii?Q?HDMqKalE/MV3KwM9DwPVhElibQ57fql8TBb8p+3mI2vxe7b37rUwUI2ybUEL?=
- =?us-ascii?Q?waciKD1PW9rM0903fXkO+hxspn4oeykCY3vLr1aZXAlCYaSfWqxy+8sv0ZzP?=
- =?us-ascii?Q?fAg9LIMcrdI1mSg29S2TyzvxK0AVODArHXCr8181JDGF2EwDUgEsCJs2qa+b?=
- =?us-ascii?Q?7hLrTJlit51YsV8WrACHNBv7iND8OJvWc2lvroqHoChAIpFIp94dtMpYA0xP?=
- =?us-ascii?Q?lU0m8VBfOPz5oXSZakLnpDNsEHkDmpqmK7SabHplrmKB+R7rx5//xST9q/bc?=
- =?us-ascii?Q?V+oN/FhYIBRQanzO0eP4aP9ku4ArMHT2eNbvymdig7Ks3tus6jK0upxe/F6G?=
- =?us-ascii?Q?/W5NCSswMOqIC7DD/o80FYULRmtO5Z1Ig4rUWAkFsAG9oPuUUW+cKSZaq8+g?=
- =?us-ascii?Q?ow94MXvmikxkQrr7fW+2o+SC4lguU7Rk+vORd0UcVW7nQo4cFZYCVczbkC9v?=
- =?us-ascii?Q?+NckH9udYN+aFS+zqSs0vMgKA9jXMZzgRpbwShLuW6Xh4hu6WSB1hsu+r2Ae?=
- =?us-ascii?Q?Ri+UT88L3pqGyK4zdb0Fua7TrWIQuFxDfpBAqukQ9V9bX3KS0XOqRMCECqqp?=
- =?us-ascii?Q?T61Naky30kmEVUmYDJSTKR08Qg7jvg33ekpYmU53TCjab2h4iU3xIjqhC4Qa?=
- =?us-ascii?Q?afgz6m0Fnb2Ey/ZuiwUqhKE4ROzTiYPMOcvhf7PbwtTnvd+kKWuju/5YT9TS?=
- =?us-ascii?Q?cMvEO+RTQ2VW4wOF1BGSrf0Mhn+uE23L9FSsFMpnZecERtb8i8N0CqWHe1Lg?=
- =?us-ascii?Q?tumNIprP2Iz4tUaD+cVaMODsPYvE7odonT3a7b7W8otkA9SlDgwIG9PwVyYZ?=
- =?us-ascii?Q?3aydgCu3L+zWKxRYlp6jYWuqeKeUGJtoiV94lHms7TWy3WptWAqlb+Cxh2wN?=
- =?us-ascii?Q?6SQ06Rlydr9dn+JDPEIIbfDZCFFjMTTpEFEikUUE9bHb1CfrQtxT+CCIDrn8?=
- =?us-ascii?Q?/y6u5BFOkSYW81dOVk1AYjMEKQCMrZHdhRuiSdz17R4ZZdfiQmUGvonYb1xj?=
- =?us-ascii?Q?xtqmOe/7VGZ5XmYwuC2d77eP3aP07AY+YAvq2zAUFtrwaRKoEZqGsyriWw2C?=
- =?us-ascii?Q?2xVGE0mojVSLZ9sL3+qeqYRNYMxhfAE+foKl?=
+ ARA:13230040|52116014|376014|366016|1800799024|19092799006|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?OOICz4uXt9ineSc68XvSic21Og6H+XRtTyZv0OnZrTJj0hY4CG1ddrPeHZWx?=
+ =?us-ascii?Q?LMgSKUtxn1j2AFxB2t8GyrGXHh5IAvuebGgHV2pYYzwPk5z8d9dvWAp1qRcb?=
+ =?us-ascii?Q?M42StP8lcdtUX/iU0hpEGLJqZN1Obzy/Cnn+/9BpFGPP/5reanGiDL9YCxEr?=
+ =?us-ascii?Q?+HgQ8d5IwIX/6gg4vFmbuYqGBX+rC8NfZQLYpBOiHHidngWRtalFHOgX4zHB?=
+ =?us-ascii?Q?eU3dWu3UGtHkXlj1XmfmjdGTSLJwZIdqDOByRX6xU+lYMjdNlqer1LK90ekX?=
+ =?us-ascii?Q?V6HLPIuj+qa4urzhTTLqRUyeaAyFHwIgaEzJRu4tp591hmlpjPCMRX9jvabr?=
+ =?us-ascii?Q?yjqPo0gGoN+HVSh66HPJayAfboZEpVNgPJ/oB8v8d+u8EMhtTFgoXAYdHl0y?=
+ =?us-ascii?Q?rsZwlq5NOPZOOFNGVGqa9ayd4TumuapVRhlrPdFVO2HZAnv8EMGV0MQYMP76?=
+ =?us-ascii?Q?lTrpWdeqNjg2t1QFPHg6nTqHGFtyZY1iqd+LDFQAVvpHE2l3hfniWFI+gPbS?=
+ =?us-ascii?Q?a9+FzyI2PueYh2nVfihxmBGw7bBt0QakGJLvpIkIPABLYwpyMM2epdhQ19Pc?=
+ =?us-ascii?Q?oBx26dH09esL/XgtxC/GimJtlPJl8qJyESm1nSJA/aWdEikyV2HPmhusIeSD?=
+ =?us-ascii?Q?IH3NCk34LZ0/AFsdx68EQ7A5OrvUzbmIFx+v+3+y/OQljACZxtV8sr3Y8qC5?=
+ =?us-ascii?Q?SlivzeKuveq1avFq//CmyNOvvLV8NI285AVIMlSDvpszBjzG+MNZqVzkfL75?=
+ =?us-ascii?Q?dbx9Ix5aSPpGmC0wMMkV4qlzoLMvwH553ymhRe3UIJZWFitLqTIcASmmYYhz?=
+ =?us-ascii?Q?n8Kja9ZeTLIO25LjBx9g6hta+EioOPGJn0JA2l3wTXqESHFpxxSxs1XDuVuS?=
+ =?us-ascii?Q?5BgUv+wqwnpgvTH3n5FQa99EMLz9z32QVw+rC1wISxq3PyvO8JzYOGMXy/yx?=
+ =?us-ascii?Q?nHP4z+GRzw+2kyCj53G2xRadwB8netBhwsnzDfOg442uA9TxECsQHrLpESLC?=
+ =?us-ascii?Q?Qkjiw2uPIPe28ifZE6Xt1x/vEbThLuMHlUwLcwwIKfWvTMMPf5FAyR6rExRq?=
+ =?us-ascii?Q?TCtEMnMmvQC8I7MEMP5U6I4MA6wKL7byDxhha/wD31GiFiG2ZApliVEJptC0?=
+ =?us-ascii?Q?bEvXQS+UNa1d/Pe5E/9tzE4Gp7SNTFLQyd1QeXxkuz+9UIeDLmpsZ2J+q0lM?=
+ =?us-ascii?Q?op39QwgGPsFWLFCXF7NnJ4xnZhQup8me/FIPB/ReYwnbc8eEFQAFNzkaRAT4?=
+ =?us-ascii?Q?lRjKDzWSnGafvk0QsKXVr/Eup44Vw0FJYVVKwVLP5qDhIb5lemUl61kWqogR?=
+ =?us-ascii?Q?gIRZFA+HlmoQ9tzTIbWyO7ld0YPt9JpUNe0M+H4k9/Lrvl2390I0J2sq9WRc?=
+ =?us-ascii?Q?ibILy9HN9VNp2SRjwkp7sxsQJuBWBsZ4HWOv/qWmfYqwLnp2VFO7muT9CKJo?=
+ =?us-ascii?Q?/+cNOFi/UikWAF2uicJbji60qF5IXXYQsA+Ay+FRIna7MYWOgqFAbLOt/xNp?=
+ =?us-ascii?Q?1gHEqkfXSjDSZQ8+1AGAJPBDivnRyb7dE8pl?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(366016)(1800799024)(19092799006)(7142099003)(38350700014);
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(19092799006)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Gi5jZB2TitS6uKij5GTh2DpGZxsCOF07UIRHJaoGdvHrDvDtA8ofVF8d0MCf?=
- =?us-ascii?Q?z7ANSrdH5RoQYHTW++u6SDTJ3fX/fAp9UNZgdl402iIL3+oipY6wFcjqOmPc?=
- =?us-ascii?Q?3U15KAmIy+LISFez8+1IWepLIgrcszNgS6WOfcLyc4sPuGwQRxALNQEnLTpY?=
- =?us-ascii?Q?w9kSD36/nklGUD1sl3eTarzSPKG5g2yEOGeqOXTgXZ7lyJTlmGHBBnrz9G37?=
- =?us-ascii?Q?5ZdAe3pk6g4wpp3/X2X3GuJcMsks9Ix/jzAwHmCi+9AHydGqJx6mTT1fbH71?=
- =?us-ascii?Q?DL2MR95Yb9504+ZEdU3hiV6aPGbr1fVe7XIfwp8aYlxEuB2u/3i0OGknAYhU?=
- =?us-ascii?Q?YXgF0JdGXbK8kDO1c217EmT4XybXHsvYaPgUzKkJ9OSUL289LJaDk8gGc8+B?=
- =?us-ascii?Q?HyJzeZQPxhtkzZjVBBn+yvT3ARG6vOft2stJxtRuow5IulS4X7FSsy0axQby?=
- =?us-ascii?Q?nGGmt9/llJh5/6UPF2eAosyP+Bf6u9xUi8zHo8SmGlguJ3jgRf8IyH7rtBoI?=
- =?us-ascii?Q?3ndCZ1S1vcF1bOpcE//vmDC24UrnQrgJLIlV5Pq8d1nb0wj7z/uGdLKCZR7o?=
- =?us-ascii?Q?rGjFTrlucdy8BGn7XzQUktplzlJcLaV5oizYXCbM1Mc2ppXcHpA5gAzRHzjN?=
- =?us-ascii?Q?6sMCl/S4GutCyaITS1pXc06MF8++1NJFv6Vd5XRiE+l066GLQbEF2yPCs8Lw?=
- =?us-ascii?Q?KdgOheG1HxTu+DEWgkN9XXJLh0JiTGjcM4jVFcTci5uWbs6nn/lyLJODuw/7?=
- =?us-ascii?Q?FfEkPnRIOFNVwWJCfAXY3ZRy59iRNltiWNu0jjEWpC5uNX+ASkug6eoBN1p2?=
- =?us-ascii?Q?SYPw4+gESD0bw7NOarzlxsjICdPJx9zpY64L8HZ7OhhN8A6OU9obCn7NqjAb?=
- =?us-ascii?Q?jkv9jLYf3G5ue37+Puu+YoD+h7ZCVUAgU1SS69iyHX9p5VmFBS8fWu3DRg2X?=
- =?us-ascii?Q?1Peo67C2YghYRXW9JzoY9oqgnXOw1UwybhhIMQ62qyLBrEhlbswRD0zk7IXY?=
- =?us-ascii?Q?1hm1YLsEJEzoT1vZ+kwm4GEzPQlabZm47riAA+5stLht+4irNinqapbK67zH?=
- =?us-ascii?Q?vV8geezDcxLZncx6hJ19cfLsUgFWJ4uhYTPZX3Pj+Wvoywk9gEJYmNcbPBzD?=
- =?us-ascii?Q?2EH53lZiiaaS3ODuMngnFTcvsO+fEl1MU/pByh4CUZ7pQGi5lU/TwCWNqakU?=
- =?us-ascii?Q?J1lxlN0Q/EQ7c+1Lwhj58Cn5qP9tN6zinekkme0EdNhTEyGRiqsDqYccBZuf?=
- =?us-ascii?Q?HcbMjpuyiTOdpyu2kj9GFaN0XqiuqlljFvsBTk1w1U/aVx1xG4EZzqT6laZR?=
- =?us-ascii?Q?pc0hXV9WcJelpMo/572WXyI33a+qUeP1/GSakex4vRY9rZZVgi9Y0/UBFWVe?=
- =?us-ascii?Q?5UEu1G6m1UkriETD54eaKi0RfItw6/kJrlqVA0GTqvTVsm2loqd9KzE7y4wu?=
- =?us-ascii?Q?8twB1Gx/woTLwPAaXQXJ/SQRJDHLlyXODKu2/UF7BQUVnGHezcOFYaRcqrdI?=
- =?us-ascii?Q?gGeuGBMvWg184asHw2D3AH8PzHV/UfjUwzW7/mzQ3hp7kocBHKR3NArbjrO6?=
- =?us-ascii?Q?fgexlIXQe6NYyX+cvsBglNz0ZnURKe+6MwIHGtTKATs7IlZpSyTE6yEEEEVk?=
- =?us-ascii?Q?eXF31v5gStiHKMSB2snClCReJ5OOzKKC2AFtOoP/ovL5fm7JeO1HfbMu2IsY?=
- =?us-ascii?Q?NZeyFWLIY9TLL8tjpU4/pdge1X5OyPSYp1Bo+4bqdoVjLz9AYLhSLUrfV8IQ?=
- =?us-ascii?Q?X3v4kuGQ0w=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eYN6JhL2YhFAQDZ0yZGe94VRKyaoIsVMLzHL/pRhJH7Y1pJb4JV7pSr7Z15+?=
+ =?us-ascii?Q?1mubgsexfJUK3gcCsRjyorgkAxgcUWE/vKhJb2ZAmBl1/Ff6FGskU29TNWTc?=
+ =?us-ascii?Q?uu8ZV0rYqyt3HSGNt7stCPQhnm5zXis9PkkTK0jtZ/lYxxOm8r9zBQc5vpIN?=
+ =?us-ascii?Q?LuiL4JTY5v7pz32kjM0pN2sstcU3xATnSvN4uXMj3MsnGsLwnIlUfDPVUP3h?=
+ =?us-ascii?Q?hA3V7RaH1XP0uf457j5PAoXVgO/xy5kDtLvG1Sh5I1O/mnXUtHfmwyCT69J5?=
+ =?us-ascii?Q?jIgnum5yde8qVSeQGkaeUoG8BpvG9m7a4QNIVGCOy2ha55WKNHL6i2ctKsQ5?=
+ =?us-ascii?Q?9QDyMri2oEa9cPfHU1oSZYw1R8DiHutSCB+HD3B0jo8gL35fKp6lj3GNgxSt?=
+ =?us-ascii?Q?DGOewUgPgLZoTWlilUgLnChsaM7ESG/scSzXTQNRDChyVFFp0oogcMHTO6QF?=
+ =?us-ascii?Q?MNMSzn7itDY/SqxNBwF2S2frnaDPOChFd+kAs/PNR3CduQik+ylSno4FD46j?=
+ =?us-ascii?Q?eVl+cqdftMLWOqJN4fYO83LNK5a6kiYWF0e66+r+9WUCdJFh+/L+NCPM2rfC?=
+ =?us-ascii?Q?vqcXMY7tUzOcsQSGHd+JEw3hMVFh5+dBOTvgWgsov9Jc14nVfuOojm02DRr+?=
+ =?us-ascii?Q?12zShM3xUVUo1AT/4Idv6Az10qrZR+kIXIeoRxNqFKJdDL8YlkwJDbX+PaLA?=
+ =?us-ascii?Q?vbfOIBSNP73U05zzcUROySqxrGkHTIE23pscwuuiEaCDsstMI99aEPk5YUVY?=
+ =?us-ascii?Q?fKeH8jiB9XyLaou0u4bKCLK5MhGuBTwxMVrCZ7Ie0UHnkAUXlhWuPT77280o?=
+ =?us-ascii?Q?cslHGAvJ3TZOeRzD4pSsoddEd+lpWO8uq6j8EoWfWs26926+p6qZkgWLrmHb?=
+ =?us-ascii?Q?fZ5nWOELGkAi+q/uId3CRD62p8hghO2UgSXFjgehHAWevblC3CfPUuTiWW4X?=
+ =?us-ascii?Q?T/jYVce2Z8vS8XlCI5pNG4+g6QlGy3d8Er929lX2tL1dqXFx2O/oT03XlIaI?=
+ =?us-ascii?Q?Xqwa/0svYEp+RnIENd2sT9Pg36GyqBR8tD2emwaa2kx4lbqT4Vnnpq2gQI7Z?=
+ =?us-ascii?Q?A6XEI4l4ydzLFLGT84VznV4VtL2qARNRrHb2zKdXS4MyTxkZjw1H2yzLuyrK?=
+ =?us-ascii?Q?eemXDsHIF2GL4OnWheb0vLcaITXxpy0DZ/WnwBMct9FSOOD3h3lYLah26T9v?=
+ =?us-ascii?Q?FwC+uWfcNLPl0TKJPtqrLhtmkMbuBU+PufsrI5MyX4zDxPaq9sEFzo8BbF+w?=
+ =?us-ascii?Q?0+QJpeF4Q3EEcxul6C+eKPoxHYt9lpTvwuERQQD931H5nMmJ1b3WGRYfXpP5?=
+ =?us-ascii?Q?utMNpjJOnwZqBUGCv969/ik2K/qw7sCKtfFrtF2UkCthOX3JXJExsl3R/wLZ?=
+ =?us-ascii?Q?2ZqI6zMr8DSYSxrcDCSpRGm+VcGBglEgWt/aPlg19f/cZD71WN64PYCsr89q?=
+ =?us-ascii?Q?nwr9SPl8+b3HgKylecAmvy0QWHdZISNRCt9XiQQAEX3w37QDTVMH1MDTFjmL?=
+ =?us-ascii?Q?1burtQHboFDAUy/3w8z5jr9GeGyJprMxeLKh1iFhbOdQgJOgvUgHbxGCCUqi?=
+ =?us-ascii?Q?9Mi5zOHSSnziWICh+wyg2NLV4g7fD8wmMHQv+IQOQ0qFORAKEIEPht/aWRzo?=
+ =?us-ascii?Q?KEATGcDFqLE+wt4mDU9u8Sil0+o/ux8wN2t5z6nUUDzYber3xRHsyfePldUP?=
+ =?us-ascii?Q?vqeIYg9G22oUfxIipaCi8eptpIrBIcyAX3naI/yeaQFLmpLSSwoGF4prORkV?=
+ =?us-ascii?Q?xAS+a8mvpA=3D=3D?=
 X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bfe8fc73-dbcf-46bf-bd2f-08de4d144995
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0ee90e8-d4d7-41a5-1b0f-08de4d144a36
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 11:11:06.3301 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 11:11:07.4024 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: K2xwrseH+jeGIWQy2YhqpYiTw8AlpBMHf/Qqg5RqUGrWwx0NiFnsKN/QOrOryEpukQqLLhMMb0Z8AZOkKxirRg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: eBZ/fjJYvWruMKLsTfYM3rmzrWBC7YLtLK4OaHwQ2NIBMV3i9ypVgBo4TlKJgozGB6YBbg3PJN1tSZkaYoANuA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7302
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,169 +162,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With pkcs11 support it's now possible to specify keys
-with URI format. To use this feature the filename must
-begin "pkcs11:.." and have valid URI pointing to certificate
-and private key in HSM.
-
-The environment variable PKCS11_MODULE_PATH must point to the
-right pkcs11 provider i.e. with softhsm:
-export PKCS11_MODULE_PATH=<path>/libsofthsm2.so
-
-Example command line:
-tools/mkeficapsule --monotonic-count 1 \
- --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
- --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
- --index 1 \
- --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
- "capsule-payload" \
- "capsule.cap"
+With pkcs11 support in mkeficapsule we can now accept URI
+tokens and not only files.
 
 Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 ---
- tools/mkeficapsule.c | 110 +++++++++++++++++++++++++++++++++----------
- 1 file changed, 84 insertions(+), 26 deletions(-)
+ tools/binman/etype/efi_capsule.py | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index 0f41cdb64f54..a61557b73bef 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -228,21 +228,54 @@ static int create_auth_data(struct auth_context *ctx)
- 	gnutls_pkcs7_t pkcs7;
- 	gnutls_datum_t data;
- 	gnutls_datum_t signature;
-+	gnutls_pkcs11_obj_t *obj_list;
-+	unsigned int obj_list_size = 0;
-+	const char *lib;
- 	int ret;
-+	bool pkcs11_cert = false;
-+	bool pkcs11_key = false;
- 
--	ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
--	if (ret < 0)
--		return -1;
--	if (file_size > UINT_MAX)
--		return -1;
--	cert.size = file_size;
-+	if (!strncmp(ctx->cert_file, "pkcs11:", 7))
-+		pkcs11_cert = true;
- 
--	ret = read_bin_file(ctx->key_file, &key.data, &file_size);
--	if (ret < 0)
--		return -1;
--	if (file_size > UINT_MAX)
--		return -1;
--	key.size = file_size;
-+	if (!strncmp(ctx->key_file, "pkcs11:", 7))
-+		pkcs11_key = true;
-+
-+	if (pkcs11_cert || pkcs11_key) {
-+		lib = getenv("PKCS11_MODULE_PATH");
-+		if (!lib) {
-+			fprintf(stdout,
-+				"PKCS11_MODULE_PATH not set in the environment\n");
-+			return -1;
-+		}
-+
-+		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
-+		gnutls_global_init();
-+
-+		ret = gnutls_pkcs11_add_provider(lib, "trusted");
-+		if (ret < 0) {
-+			fprintf(stdout, "Failed to add pkcs11 provider\n");
-+			return -1;
-+		}
-+	}
-+
-+	if (!pkcs11_cert) {
-+		ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
-+		if (ret < 0)
-+			return -1;
-+		if (file_size > UINT_MAX)
-+			return -1;
-+		cert.size = file_size;
-+	}
-+
-+	if (!pkcs11_key) {
-+		ret = read_bin_file(ctx->key_file, &key.data, &file_size);
-+		if (ret < 0)
-+			return -1;
-+		if (file_size > UINT_MAX)
-+			return -1;
-+		key.size = file_size;
-+	}
- 
- 	/*
- 	 * For debugging,
-@@ -265,22 +298,42 @@ static int create_auth_data(struct auth_context *ctx)
- 		return -1;
- 	}
- 
--	/* load a private key */
--	ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
--					     0, 0);
--	if (ret < 0) {
--		fprintf(stderr,
--			"error in gnutls_privkey_import_x509_raw(): %s\n",
--			gnutls_strerror(ret));
--		return -1;
-+	/* load x509 certificate */
-+	if (pkcs11_cert) {
-+		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
-+							 ctx->cert_file, 0);
-+		if (ret < 0 || obj_list_size == 0) {
-+			fprintf(stdout, "Failed to import crt_file URI objects\n");
-+			return -1;
-+		}
-+
-+		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
-+	} else {
-+		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
-+		if (ret < 0) {
-+			fprintf(stderr, "error in gnutls_x509_crt_import(): %s\n",
-+				gnutls_strerror(ret));
-+			return -1;
-+		}
- 	}
- 
--	/* load x509 certificate */
--	ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
--	if (ret < 0) {
--		fprintf(stderr, "error in gnutls_x509_crt_import(): %s\n",
--			gnutls_strerror(ret));
--		return -1;
-+	/* load a private key */
-+	if (pkcs11_key) {
-+		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
-+		if (ret < 0) {
-+			fprintf(stderr, "error in %d: %s\n", __LINE__,
-+				gnutls_strerror(ret));
-+			return -1;
-+		}
-+	} else {
-+		ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
-+						     0, 0);
-+		if (ret < 0) {
-+			fprintf(stderr,
-+				"error in gnutls_privkey_import_x509_raw(): %s\n",
-+				gnutls_strerror(ret));
-+			return -1;
-+		}
- 	}
- 
- 	/* generate a PKCS #7 structure */
-@@ -349,6 +402,11 @@ static int create_auth_data(struct auth_context *ctx)
- 	 *   gnutls_free(signature.data);
- 	 */
- 
-+	if (pkcs11_cert || pkcs11_key) {
-+		gnutls_global_deinit();
-+		gnutls_pkcs11_deinit();
-+	}
-+
- 	return 0;
- }
- 
+diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
+index 9f06cc88e6e5..3b30c12ea514 100644
+--- a/tools/binman/etype/efi_capsule.py
++++ b/tools/binman/etype/efi_capsule.py
+@@ -125,10 +125,14 @@ class Entry_efi_capsule(Entry_section):
+         private_key = ''
+         public_key_cert = ''
+         if self.auth:
+-            if not os.path.isabs(self.private_key):
++            if not os.path.isabs(self.private_key) and not 'pkcs11:' in self.private_key:
+                 private_key =  tools.get_input_filename(self.private_key)
+-            if not os.path.isabs(self.public_key_cert):
++            if not os.path.isabs(self.public_key_cert) and not 'pkcs11:' in self.public_key_cert:
+                 public_key_cert = tools.get_input_filename(self.public_key_cert)
++            if 'pkcs11:' in self.private_key:
++                private_key = self.private_key
++            if 'pkcs11:' in self.public_key_cert:
++                public_key_cert = self.public_key_cert
+         data, payload, uniq = self.collect_contents_to_file(
+             self._entries.values(), 'capsule_in')
+         outfile = self._filename if self._filename else 'capsule.%s' % uniq
 -- 
 2.47.3
 
