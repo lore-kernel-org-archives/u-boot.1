@@ -4,155 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B8DDC47BE8
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 10:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C05C47BE6
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 11:11:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 972E783981;
-	Tue,  6 Jan 2026 11:52:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ABEE783B64;
+	Tue,  6 Jan 2026 12:11:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QpAVUzsQ";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="ZLgD/guG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41043839A5; Tue,  6 Jan 2026 11:52:40 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 9AEDF83F63; Tue,  6 Jan 2026 12:11:14 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8014183936
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 11:52:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ACC883952
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 12:11:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+ dmarc=pass (p=reject dis=none) header.from=mt.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p65TA6KDupTXfhRHSRXXDfQbrIhYFTE+P3MpARhszl9EF9NR4n45kG8tV2UbphVfJ2ZbZu37EjjkULV+rxTJLteputxnGZ+WY4Hhj1HPWl4AV+jCCbQyAjdJnkHKwAt/RGyWy43wB9h+ZlJQows8zeVXjOkmUpoGSmy+HbIm2yD4VD0U2L6pwq20+bFzSmEechLwwVQdLqfbd2OZXNOOUrFTC6KnMtP5oNTzhF/VwO/43ZJzdjwqZFh2VWWJX6ZAK9Am6JZHUnFooRmx2YnUOuTuff832EO1FgEashdmg7obpskCnJR4lyu4IrJ/cN7QY5eMFljjY42MDABPZBzOgg==
+ b=XhYJ/gHHn6iD+QYiiOuNOIk/OBNcz1QkMdZgygPfm9KyAOijZVVfjb/REpINp/8dcikTCBS8WVY4KCwLFqhEP0M23zk9y4ygXkvia4+g/WgBK1iE/lirOQ9aJbrCN5uT8wASyyX2+GtmGmiFSEsHd+Fmsa7H0kfJ0mWVdvIDDmAbXrQ8DfMfZgUvmo0ZsE2pGsWZiUz+ubkX9Xbri7uI/bPAfgan1rUA49ZU2yRYHab50E/yxA0CAOQhVCiPA929IEKervJaTx/X/lAY5tzkhwTtfwQUmSLBUxsC9HE6ISpGSdQaAR8WErwXbuxCL/iFGHzeNsqpLZU/3qLIbehcbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JIjuxzuaUUhHQdLbDdrWYuB0UoE+IOimuWYVlOShZiA=;
- b=mHdwr00ggM5PUeIkqbEsVpuoiNQRprYbMy9jYMBzydWcNbk4dVtOnpHFsmKDsoW88CINsxqLBnQV/e3gHaLN6rG9oDwq/YJIMt8d86FA9hvAj/6tqFqhd9oJgnazWMmMatmsTjNlEC6tG1Esb+HdObPU16PmquN+m12V+xMasEbtG78ZHEs+u/Fh1v/XYv+Tb9JnUj2wuwXa1ETy34NL3YWQNBi2JESvKm0443JhaCE4SuUynuFcceOT2vDKhqVHv3vxYkqNHHxauCZrKRMmXDkYqGo81sBICyxuaKorB4yeCggkABKlXndA1mGwIEmaogrxvQnlNCwXe6QF4LYdXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=gXwscwtqOL8x0sFBpRGrwIkO60gIPgL2p0a21JpOrfE=;
+ b=gEJgBdhFFpl3fBSIUcsHJBRlbVWXtIkj1SDLIp4rgndSzfUg3aRakqIyREcuTEq2PKZ2jHaVpuhsTAz5Pv84F152Tr01A30zqvwSDfIZuoWp4PPrXYdfu8RTBbCSy6WJ+cZqdf5Vnt7QcNGcty64a57LsxxOQ9iZst7YqWydAu9kSqFotYb7XkoPUKalrFLxE7VFZd02jzO4TVvsjnqH4DUnAtJZ1SNmIJGrhSIlvBiu4Rc0qezPwfstr8J8e9hm0V5w5g2aknnFK94/hskWObpM9Q3bZ9YtEr0HvlaXNmzMJIGW1gfEqcMhcwaZQhGXv5wZhYxfv42gzzYdzUzTaQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JIjuxzuaUUhHQdLbDdrWYuB0UoE+IOimuWYVlOShZiA=;
- b=QpAVUzsQsFx2VtoJ6xx3S25Ba4xyAmvL2F3QMBpryMu+uaLOI43xuNvjSM+YiWOs+9WYthoNSkh1tB4URTWz/WLRJDd6TqdL4f0Dft577FRI++74otHycGx0YogG5lNSLzki2QLTR52G9lfmOLLj4wnoHcqUoS2aR4AZ3tvXT88=
-Received: from SJ0PR03CA0028.namprd03.prod.outlook.com (2603:10b6:a03:33a::33)
- by SA1PR10MB6661.namprd10.prod.outlook.com (2603:10b6:806:2b8::22)
+ bh=gXwscwtqOL8x0sFBpRGrwIkO60gIPgL2p0a21JpOrfE=;
+ b=ZLgD/guGQblUK0RyLpWkraeKdBP7qMkaOSQ+/nYK2RIFB1x3KKSTjGjMVb4sC1GmZQiHuknH+iRPCG+gJVBqKLRdlD7NT4kcWyo/7tdhbxralFBTzD0/b8bUuoPe9UGprqImphZEDSnsju9BZyRbQ6ZkKZhtZ6SIVOMO0uy8BoQ36IHn5GqQeYndmQvtt+Gleb9lNBqM06T25mijbZOXeXOUgQwF+JvNzFSSL+PjO5WnOX4HeDYFxvo8+3z0vl58e96x/jSCdKUnFLecBov0AZecylEHH9ENFBiwIUpjeuthycch0fJ2s5iCQ8ePJcUh0AlvMQGrrc1fJFKnjH5iMw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by AS8PR03MB7302.eurprd03.prod.outlook.com (2603:10a6:20b:2ec::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Tue, 6 Jan
- 2026 10:52:34 +0000
-Received: from SJ5PEPF00000207.namprd05.prod.outlook.com
- (2603:10b6:a03:33a:cafe::20) by SJ0PR03CA0028.outlook.office365.com
- (2603:10b6:a03:33a::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Tue, 6
- Jan 2026 10:52:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF00000207.mail.protection.outlook.com (10.167.244.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.1 via Frontend Transport; Tue, 6 Jan 2026 10:52:33 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 6 Jan
- 2026 04:52:28 -0600
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 6 Jan
- 2026 04:52:28 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 6 Jan 2026 04:52:28 -0600
-Received: from [172.24.234.212] (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 606AqPGv2894779;
- Tue, 6 Jan 2026 04:52:25 -0600
-Message-ID: <eb2f3762-13b5-421e-b7e7-7f1fef6419a7@ti.com>
-Date: Tue, 6 Jan 2026 16:22:24 +0530
+ 2026 11:11:05 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::2e7d:3185:676e:2466]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::2e7d:3185:676e:2466%2]) with mapi id 15.20.9499.001; Tue, 6 Jan 2026
+ 11:11:05 +0000
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+	trini@konsulko.com
+Subject: [PATCH v2 0/3] UEFI Capsule - PKCS11 Support
+Date: Tue,  6 Jan 2026 12:09:56 +0100
+Message-ID: <20260106111034.889964-1-Wojciech.Dubowik@mt.com>
+X-Mailer: git-send-email 2.47.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: ZR0P278CA0004.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:16::14) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/11] binman: openssl: Add boot and load extensions to
- x509 cert
-To: Simon Glass <sjg@chromium.org>
-CC: <trini@konsulko.com>, <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>,
- <hnagalla@ti.com>, <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
- <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20251231173621.1069988-1-b-padhi@ti.com>
- <20251231173621.1069988-8-b-padhi@ti.com>
- <CAFLszTi73RSFM4d2fzvndyw9mOq4D-gqQ2Gp-YGcYdp5gu-s1g@mail.gmail.com>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <CAFLszTi73RSFM4d2fzvndyw9mOq4D-gqQ2Gp-YGcYdp5gu-s1g@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000207:EE_|SA1PR10MB6661:EE_
-X-MS-Office365-Filtering-Correlation-Id: 839b9aa3-a06e-4049-f70f-08de4d11b21e
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|AS8PR03MB7302:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0da2114c-d672-445f-c1b1-08de4d1448f1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a21QVUoyaDJzQzhxUjFhUHg5Sk9YQkxGYzdrMFIzUzVuNFQ5bzVWcEJvQ3Q2?=
- =?utf-8?B?UnlZS3dodXdteTROU1MySERtSThLYWdmUXFrSkZtSElQSnhqcGo0eFlrQlJZ?=
- =?utf-8?B?Q2VZNFIyZFMzQ1YwRnBKVWx1NEFKUW1WY21Icks5QXdRQWVGMmIvNDU4eGVm?=
- =?utf-8?B?czBFWnZ5dC9EZkRYbElsSDg3bFFkci9KL1Fkd2sxRXFRUWVQczdGOW9NdjNy?=
- =?utf-8?B?QnY1U3ZPQ3QzdGFmMm5lOUs1bURTamJtWGtTTDZUdVdybWh2eWJlYlNZLzM0?=
- =?utf-8?B?UUZWc2thNmlNQ3c5cHRVWFhsNmdJQnVHYkZueGdxNTJJTmg4K0k1OFFmYWRj?=
- =?utf-8?B?K0plL3J5MFZnVW9Sa2dvYmtMeWZBTFNFZE1OYTZwWDlpSGx6cU1zQ1k0WCtM?=
- =?utf-8?B?Yjl0dWsrSllQWWVkYVVpMDcvZnlvbmpBNmpYUHBGb2c2S3VGamxRaVl2NkRD?=
- =?utf-8?B?TkxydUFwQk5CZCsyY1lKT3NCN3kwMnpMemRmdEhtMlFkaURCaTF5NmhQd3Jh?=
- =?utf-8?B?cDFzeFVuNmZzRGNqUVlZbzh5NGZUVlJGaXFoT1dHbmRIRmUvZ2MxMkQrWm4y?=
- =?utf-8?B?YlJHaU5EM1U3clRXTU4xOEV3bDBXL3ZueHVydnZyZk0zTmRtcDA0bDljM01N?=
- =?utf-8?B?bnBNYlhjcHZleVRqVjZ3V0RLYW4yd2F2WFV0MHhkWlBsN1ZlWmhlZEYxeEV0?=
- =?utf-8?B?emdWdmhVdXkyVExpTE1mL1JoSnBIMFZoUlZ3UEpHTTRmY08zZVZubGtpdFd5?=
- =?utf-8?B?VHl3OXYxU0NpMGFaS1JseS9CSUF2NzhtYTdsQ3ZjOVVNZUNaWXJtdXVwdkFF?=
- =?utf-8?B?L243SVcrbTZ3RWsrWUpMaTdoQ0tuYkg1cmhXU25TUkw1cjJvc2x1NE00TnM1?=
- =?utf-8?B?YXF1OFpISWlXck8vL0x4VUFFMGt0a3FVcmZJL0prS2RTeEUzL0FTYUQzU1dR?=
- =?utf-8?B?QUxub0dVTkMrc29HOGFTRUV6WFhRTUx1VSs1eXhVL1RKWE9qZjFzUTFUV2Fy?=
- =?utf-8?B?N210VFlIS25MdHhrc2k4QUV5MkpmMEpCQW4wNEVjdVVIZ285M1k0QUxxUGNk?=
- =?utf-8?B?bndZUUpwMkd6dkF1cVRvYlZ1dWpaUkdCbS8ybi9rNDAydlQzeG8weks0ZTBW?=
- =?utf-8?B?b0EyYVBBMmFDKzRwRDU0Q2FqZGdoTStEaGg1Uzk2cFVkN1dPWW4ranpxNnRX?=
- =?utf-8?B?OWZWQzM5Z0pja0JXcTlHL28zZUR0KzR1cjBZVXdGcXFlbHY4K1hOSE1KQ21E?=
- =?utf-8?B?M2R3ZC95RFFhSVU3MjJKQVpsMzNpZUFZVStHY1RzcmVaR1kvbHN1NlJNcmRo?=
- =?utf-8?B?eHVTM3A5VitRVlZNN0JrMUp4emdkVjJDbXp2MzdWMnZhb0grT0t4VFN1VkVw?=
- =?utf-8?B?UGJwYjFSd2hXbDVQMFltWVljQkhXYTBodFpXc3o2MFQxOVBpUkJSbTd2bWxE?=
- =?utf-8?B?ck1hZmJCWlJLR2lNNlVTTWNLNi9DdzhKbUVkWS85NUlxblRGeUtvaDhFZFZJ?=
- =?utf-8?B?QnNtNCtKbnZWZXUxZnl4RXg1NW16c244bGttVks4ckVBaWNRRVcrTUhoUm4z?=
- =?utf-8?B?eVh5QTh5bHhmWTZpcTZiUGI3Z2R4bDAzWEliU3ZqaUlMb1M5WFdsbWJxUHBD?=
- =?utf-8?B?TiszaGt4Y1ZCeUpoa0dpWjZEOWwyU1VndWtmM1B3RkoyZjVjN09PYnFmN2ls?=
- =?utf-8?B?R3Q2RDQzTi9tMUE0NjNTMXZkQ2ZJazE3M0VPcGJSKzRyN3pOR3pyZmhNMTVF?=
- =?utf-8?B?bnhXVTdZaVRiRFQ1Z2M0SFpneW8wRHRuSVhTT2k5ZzBLemhLTnYraDUyQ2lr?=
- =?utf-8?B?M2w4QkZoMVR6eVhJT0dHeDVVTFFBVEt5UVMrZFBNem5NZ2dMRlRGUTdFUnpT?=
- =?utf-8?B?Qk4rN1VaWEJ4RG1iL0JsZ1V1YXovc0dFRnlpQ3JiamlWUGljSnZGREtpakM5?=
- =?utf-8?B?VnVPM0FQeldRbTYxQlQvaUtQQUlNOTNjZUppdHdEN2N0TTNpRkE3TkdlOFg1?=
- =?utf-8?B?Q1VWOHdreG1IdUhLQmxsTEh2QVgvVzZVbGE5Q1gwRzlLV1JmMUM5VERJYkts?=
- =?utf-8?B?dWY5bUx3ZzFwRmNUZmZCOXZHWSt1bnhtZEFwdEdaRU0vSlZMeUJVY0dvcndp?=
- =?utf-8?Q?pJPA=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 10:52:33.0332 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 839b9aa3-a06e-4049-f70f-08de4d11b21e
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000207.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB6661
+ ARA:13230040|52116014|376014|366016|1800799024|19092799006|7142099003|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?djmSrpBQqd5nedQ7UYkj5xUMLufEqJ2OE3LXd6OAvr1EkwOPDaDhMVkHjTb2?=
+ =?us-ascii?Q?fydl3Bb+cfukyVc5+TvISVH9wWPwiQLgEyFOFRW6rDTW4hGn9/0uiYIKxORr?=
+ =?us-ascii?Q?vkqrhq5DdkIapGHT68nphMgU2hxFZt5FdxrZM/jsZMCQDAmN96RfLWQRRW7y?=
+ =?us-ascii?Q?8X615xQqWm0bNrp1e0Ll8GbLC7refHilAT/WepsWeX39XCjHw+/anj7o2VjA?=
+ =?us-ascii?Q?RKNfioFxAkbNINYWsColR7OnqYzsXUoOGYcTXKDx8Y8bp3k/6wHQ9pd6ykLk?=
+ =?us-ascii?Q?jYVo7hFk7e+v9ilumlGvnOSeGfehaZ8UIkgEDdaRblKsDw0qxiH0ctCv7ITw?=
+ =?us-ascii?Q?mk6E0scA/Yxsset9bRl1gFIIvQNifsIJ8nr9n9IwZH1NPXdKEudmRaNjpuJA?=
+ =?us-ascii?Q?5Z3qF0ybEdna6G6viTM7VRRoDz9QZHRkCIPculNyuJ86LZhsMkn8oyXchhkl?=
+ =?us-ascii?Q?NgoCXJVmVlgs4kioDOZuNQjNVJJ/dEjkg++JE9xr2lQWlYZYEqRd5cE7Uj59?=
+ =?us-ascii?Q?HNmoWvFLsZBexVyslxnxdM8csHaqdmnottVm0Yzwk32J7BHyR2loiWwQbt43?=
+ =?us-ascii?Q?+hjrNEfP84sbZhEMsajRNhAmxFuYJcernUhBckLSirHl+W/1uHd2m37IZuhQ?=
+ =?us-ascii?Q?CEO3OJXYfQjET+ZuY4waOvBaoqH7QMnnlplQGLLBJi4OvHHyFtbq8o01UdCr?=
+ =?us-ascii?Q?oLgrVIAf2qNxf5GrhxrnLR42bnH5oqzbzuu9lZUguJbMMYUsfm/A7VeQMZdo?=
+ =?us-ascii?Q?gvubItTZZ5heHRJnUtW9/oIbsTIaZxFuTiVwYpQmeUjwm/oTH01KTSS1iKUq?=
+ =?us-ascii?Q?Jvc+3O2+HvEABuAWcZSRa/INlmWzzVetCt91f8519ovnKzeE+xFSUSTVp3DQ?=
+ =?us-ascii?Q?wiFweZceQakS6oA5TRcdHFhWF8Yig9hrD/OhpFCIjk9QlQ1OHstg1t3f8RRX?=
+ =?us-ascii?Q?HRJRreraiumOtiKpSd/UvOnF+8QJQtGHeKCRzAA6hZeCWrtj09gGsHIeJmSV?=
+ =?us-ascii?Q?06PGzV+U7I3pOoqamlosHgGyYRuP+SaN5/iFXPGG52JE+kncH5gvHZ+uFaAb?=
+ =?us-ascii?Q?PA9izdNanDlyyry1lAYvKtj46auJ+Nsj3DvbOhFlFRc2Shzn22XZIHL0htEU?=
+ =?us-ascii?Q?zLe4ufY9yHdUAkjFBb9rhPOo/x/PWQr1kwZGYYb639y6g43onZUaXTMF5MP7?=
+ =?us-ascii?Q?1Z4jdtoddKBPq/luMT/D4afhGd53VYUpLjC120vAsrTM7Va1vEd71IBes+WX?=
+ =?us-ascii?Q?+VWQhgPBJgisQSMGk+PnXqQKH9OObbXLdaqtWWFLBc9BdjJ2P4ux9+oIwM24?=
+ =?us-ascii?Q?v+CHZg/mqJnMjHOP5qo7OoGGoVvgxd/M5Ga+QJ2CNA7VhdjjLwvTYZ/wcrh/?=
+ =?us-ascii?Q?ix2rC6XBsFGYf097TkuZ9T5kb1nIf2FsLYMMmujw5q5YqbAFoC3+6L2hbKFa?=
+ =?us-ascii?Q?UBG+VF/ooGDGYGB2PVp1H90sqftB5PEQerDUw1mHBVbIuFrFlH+je8FJcbBu?=
+ =?us-ascii?Q?9GK2g0VoXIH1yamWuMV7z2ALU2lAjriox8bY?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(19092799006)(7142099003)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pS9xu6QPeERGd4Msml81JGnTVVL4OEus3GKcLa/gOwheINFHapzsJlzNHks2?=
+ =?us-ascii?Q?2pjTXXTG/+J/IWsjlUkC5mYWjgW0It3pYAJW0Oh9u+A7FFeSFKDiJFHaSICw?=
+ =?us-ascii?Q?Ux5sXaC6RY2uK7WBTzLECo4ZR2xWXNorBacqtItVkuhyo5djvEV3M6fOBcyg?=
+ =?us-ascii?Q?40yAIlQ2PmrkynO2dzArHB9dKjTCgJ5eGC4+HPhpt7DbXw+HyWFuNVidY9H9?=
+ =?us-ascii?Q?SJplkyCg10A509l/EdY0Dz5xqdBWTO4D4CWWf79ha/cP3vz/tChA+QmA9guE?=
+ =?us-ascii?Q?LaHCGGqOksE1pU+19f03PGDEomCuvVTmW2r2OYjC2JGh0hig+nYcWTZf4rna?=
+ =?us-ascii?Q?1v0GWji7E5ec+xBioKm0lbin6/FojC8xPqO1j3AKtj5cgSo4H1OvNFsnf9Kj?=
+ =?us-ascii?Q?2o5Vi0+DP5AED3lzPEeo+BUw0GMRVhCaSJ0gGlBM2EXNoqz8Fr9k4jI8FBre?=
+ =?us-ascii?Q?6KW8KFDoCSGpNtYLNHQlttg2Gv6KAS8Qxkgl+rXJw5Lj/NZcOxI+EP/mh5W6?=
+ =?us-ascii?Q?+pG4tQmlM93EeTAvhP7JoYlS9WeYvyQO39ikAYW89P5XgoOy/0uIOAX2b7ko?=
+ =?us-ascii?Q?XlB9HtnnSWM8xeHBVIAbMyHVH8adUrO2pMS34HmM4MACny4eIZlDaVRGSO/H?=
+ =?us-ascii?Q?fXggHk3dZb40E+bf9VpkezUURbGvlx64ar2HrqVSi8xwb0XZER2tnu9o4ZwJ?=
+ =?us-ascii?Q?TgbbMLbu+fTdemGKOJgHwyeAV5tbngefClN+bAOZEXOqR/q+VjMDjyLI6XdC?=
+ =?us-ascii?Q?bCQuSnbQuyQtS6lThfQrlVWqtGROZ08v1KHUqu8xhuGEG9ISgXVa0x3aEBBI?=
+ =?us-ascii?Q?VK2yxkI/PKRwm3mOhzqi5rj6aNr7867ne9vGJHh1K2IPjXyn7yzQEYX8Q8ld?=
+ =?us-ascii?Q?q2Ffr+Z+hW5tABs8MXPHJtpwTGIJmsTpISs1V9HBmRy9CVqFD0xAtmcY5rs2?=
+ =?us-ascii?Q?ff/pLlZa94YmZy8XicVnoUDOe2AkrjkeL1KdJqYozYgSBXlO+T46uC0yFb8z?=
+ =?us-ascii?Q?EaI5BmFYib0nLe4IJ66IweaB49xG7moqCPE5XWTv8kBt45e60QrJ760RCEue?=
+ =?us-ascii?Q?yL0bXqagNEG1zTnWdp29I74IxgrXT/ADbUdl8Amn+o2GO+5bnV7by66yotTa?=
+ =?us-ascii?Q?ErsSPQMt1AmH9hxEgykwrKb01y9tL1wABVUWzeMUk/pVSNHqVjZ6IDtewNA+?=
+ =?us-ascii?Q?4yYo8x/LhHxRKugfGRGpIJfLghOIQstxxefIxQMqFmuN5LjO8TyKce5m6Ixc?=
+ =?us-ascii?Q?rC7pXxT2gd+FXmcPxUNqF9E7UV6anVetcysXgW+32H11H/KaBHzIkydrrcBs?=
+ =?us-ascii?Q?UMDaC0SEFVC7DLY7x9xd+wwBqCU3m1s8aXt+M733EEbV7t9XTuXHnpkNfC9m?=
+ =?us-ascii?Q?3uvYWrJG2rKZjLPfkzz4/c8ULLvGUzwkWX0vEKYP3OMNqj5mhVyN9EU52Y8k?=
+ =?us-ascii?Q?G7wI6yWQtY//hcniaPKPddJdnqzBN4tejgfOH2hX3kQK51FYqpXJ8sFhT5/K?=
+ =?us-ascii?Q?SvPKD5XbEn4LtxZzSOsSr1rhAXbeQmTs8+B4gZQRBaDUwKn7kbrCwNFqfOUj?=
+ =?us-ascii?Q?vzLOAJIGQbs41hPrRtLjtKSHwMgsYVO4LTRYZr1ndcg256mnrHQlYK+CTHXD?=
+ =?us-ascii?Q?UC2U8Yv0E5CfCx9zgmQfZVDHP3DjlVvQGc27SNEqRxHixsxiwRxu+ddwg3UG?=
+ =?us-ascii?Q?H1jdU2qu8RGnwAReQlztrXt9LfOCgz00Bkct0TYDJSEUgTFxmXzuNEQhuAkq?=
+ =?us-ascii?Q?dA653J0lvA=3D=3D?=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0da2114c-d672-445f-c1b1-08de4d1448f1
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 11:11:05.3158 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kQJygtL4ztKWm++9Ht+zQpj7FkHOOuxCKt4SyUWh1Z/pkIrjDfzpMufc+/NCG5sPYQ+U4pqq52Dxh6CHJvfiVg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7302
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,175 +160,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Add support for pkcs11 URI's when generating UEFI capsules and
+accept URI's for certificate in dts capsule nodes.
+Example:
+export PKCS11_MODULE_PATH=<pkcs11 provider path>/libsofthsm2.so
+tools/mkeficapsule --monotonic-count 1 \
+ --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
+ --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
+ --index 1 \
+ --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
+ "capsule-payload" \
+ "capsule.cap
+Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+---
+Changes in v2:
+* allow mixed file/pkcs11 URI as key specification in mkeficapsule
+* fix logic for accepting pkcs11 URI in binman device tree sections
+* add binman test for UEFI capsule signature where private key comes
+  from softHSM
+---
+Wojciech Dubowik (3):
+  tools: mkeficapsule: Add support for pkcs11
+  binman: Accept pkcs11 URI tokens for capsule updates
+  test: binman: Add test for pkcs11 signed capsule
 
-On 06/01/26 05:00, Simon Glass wrote:
-> Hi Beleswar,
->
-> On Wed, 31 Dec 2025 at 10:37, Beleswar Padhi <b-padhi@ti.com> wrote:
->> The boot and load extensions in the x509 certificate are required for
->> requesting the secure entity (TIFS) to boot a core. These fields are
->> defined in the binman node for each core that must be booted by TIFS
->> and must be included when generating the signed certificate.
->>
->> Add support to parse the boot and load extension properties from the
->> binman node and populate them into the certificate. If any of the
->> mandatory properties for an extension are missing, that respective
->> extension section is NOT added to the certificate.
->>
->> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->> ---
->> v3: Changelog:
->> 1. New patch. Add support to sign HSM firmware here in U-Boot.
->>
->>  tools/binman/btool/openssl.py   | 49 ++++++++++++++++++++++++++++++---
->>  tools/binman/etype/ti_secure.py | 18 ++++++++++++
->>  tools/binman/etype/x509_cert.py |  4 ++-
->>  3 files changed, 66 insertions(+), 5 deletions(-)
->>
->> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
->> index b26f087c447..35898aa488b 100644
->> --- a/tools/binman/btool/openssl.py
->> +++ b/tools/binman/btool/openssl.py
->> @@ -82,7 +82,8 @@ imageSize              = INTEGER:{len(indata)}
->>          return self.run_cmd(*args)
->>
->>      def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
->> -                  config_fname, req_dist_name_dict, firewall_cert_data):
->> +                  config_fname, req_dist_name_dict, firewall_cert_data,
->> +                  boot_ext_data, load_ext_data):
->>          """Create a certificate to be booted by system firmware
->>
->>          Args:
->> @@ -101,12 +102,52 @@ imageSize              = INTEGER:{len(indata)}
->>                  extended certificate
->>                - certificate (str): Extended firewall certificate with
->>                  the information for the firewall configurations.
->> +            boot_ext_data (dict):
->> +              - proc_id (int): The processor ID of core being booted
->> +              - flags_set (int): The config flags to set for core being booted
->> +              - flags_clr (int): The config flags to clear for core being booted
->> +              - reset_vector (int): The location of reset vector for core being
->> +                booted
->> +            load_ext_data (dict):
->> +              - dest_addr (int): The address to which image has to be copied
->> +              - auth_type (int): Contains the host ID for core being booted and
->> +                how the image is to be copied
->>
->>          Returns:
->>              str: Tool output
->>          """
->>          indata = tools.read_file(input_fname)
->>          hashval = hashlib.sha512(indata).hexdigest()
->> +
->> +        if boot_ext_data is not None:
->> +            boot_ext = f'''
->> +[ sysfw_boot_seq ]
->> +bootCore = INTEGER:{boot_ext_data['proc_id']}
->> +bootCoreOpts_set = INTEGER:{boot_ext_data['flags_set']}
->> +bootCoreOpts_clr = INTEGER:{boot_ext_data['flags_clr']}
->> +resetVec = FORMAT:HEX,OCT:{boot_ext_data['reset_vector']:08x}
->> +# Reserved for future use
->> +flagsValid = FORMAT:HEX,OCT:00000000
->> +rsvd1 = INTEGER:0x00
->> +rsdv2 = INTEGER:0x00
->> +rsdv3 = INTEGER:0x00
->> +'''
->> +        else:
->> +            boot_ext = ""
->> +
->> +        if load_ext_data is not None:
->> +            load_ext = f'''
->> +[ sysfw_image_load ]
->> +destAddr = FORMAT:HEX,OCT:{load_ext_data['dest_addr']:08x}
->> +authInPlace = INTEGER:{load_ext_data['auth_type']}
->> +'''
->> +        else:
->> +            load_ext = f'''
->> +[ sysfw_image_load ]
->> +destAddr = FORMAT:HEX,OCT:00000000
->> +authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
->> +'''
->> +
->>          with open(config_fname, 'w', encoding='utf-8') as outf:
->>              print(f'''[ req ]
->>  distinguished_name     = req_distinguished_name
->> @@ -138,9 +179,9 @@ shaType                = OID:2.16.840.1.101.3.4.2.3
->>  shaValue               = FORMAT:HEX,OCT:{hashval}
->>  imageSize              = INTEGER:{len(indata)}
->>
->> -[ sysfw_image_load ]
->> -destAddr = FORMAT:HEX,OCT:00000000
->> -authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
->> +{boot_ext}
->> +
->> +{load_ext}
->>
->>  [ firewall ]
->>  numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
->> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
->> index f6caa0286d9..bc44b684892 100644
->> --- a/tools/binman/etype/ti_secure.py
->> +++ b/tools/binman/etype/ti_secure.py
->> @@ -116,6 +116,7 @@ class Entry_ti_secure(Entry_x509_cert):
->>          if auth_in_place:
->>              self.firewall_cert_data['auth_in_place'] = auth_in_place
->>              self.ReadFirewallNode()
->> +        self.ReadLoadableCoreNode()
->>          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
->>          self.req_dist_name = {'C': 'US',
->>                  'ST': 'TX',
->> @@ -126,6 +127,23 @@ class Entry_ti_secure(Entry_x509_cert):
->>                  'emailAddress': 'support@ti.com'}
->>          self.debug = fdt_util.GetBool(self._node, 'debug', False)
->>
->> +    def ReadLoadableCoreNode(self):
->> +        boot_ext_props = ['proc_id', 'flags_set', 'flags_clr', 'reset_vector']
->> +        load_ext_props = ['dest_addr', 'auth_type']
->> +
->> +        self.boot_ext = self.ReadDictFromList(boot_ext_props)
->> +        self.load_ext = self.ReadDictFromList(load_ext_props)
->> +
->> +    def ReadDictFromList(self, props):
->> +        props_dict = dict.fromkeys(props)
->> +        for prop in props:
->> +            val = fdt_util.GetInt(self._node, prop)
->> +            if val is None:
->> +                return None
->> +            else:
->> +                props_dict[prop] = val
->> +        return props_dict
->> +
-> It looks like you are adding new code but without a test. Please can
-> you run 'binman test -T' and ensure you cover all lines.
+ tools/binman/etype/efi_capsule.py             |   8 +-
+ tools/binman/ftest.py                         |  46 ++++++++
+ .../binman/test/351_capsule_signed_pkcs11.dts |  20 ++++
+ tools/mkeficapsule.c                          | 110 +++++++++++++-----
+ 4 files changed, 156 insertions(+), 28 deletions(-)
+ create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
 
+-- 
+2.47.3
 
-Thanks for pointing out. I will add a test for the same in v4.
-
-Thanks,
-Beleswar
-
->
->>      def ReadFirewallNode(self):
->>          self.firewall_cert_data['certificate'] = ""
->>          self.firewall_cert_data['num_firewalls'] = 0
->> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
->> index b6e8b0b4fb0..b6028f6be84 100644
->> --- a/tools/binman/etype/x509_cert.py
->> +++ b/tools/binman/etype/x509_cert.py
->> @@ -102,7 +102,9 @@ class Entry_x509_cert(Entry_collection):
->>                  config_fname=config_fname,
->>                  sw_rev=self.sw_rev,
->>                  req_dist_name_dict=self.req_dist_name,
->> -                firewall_cert_data=self.firewall_cert_data)
->> +                firewall_cert_data=self.firewall_cert_data,
->> +                boot_ext_data=self.boot_ext,
->> +                load_ext_data=self.load_ext)
->>          elif type == 'rom':
->>              stdout = self.openssl.x509_cert_rom(
->>                  cert_fname=output_fname,
->> --
->> 2.34.1
->>
-> Regards,
-> Simon
