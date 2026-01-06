@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6990CEFD15
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243DDCEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 22:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0FE683936;
-	Tue,  6 Jan 2026 23:09:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 942E683B32;
+	Tue,  6 Jan 2026 23:17:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="i3ZBxEoT";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="GXE7Mgcg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82AB783942; Tue,  6 Jan 2026 23:09:04 +0100 (CET)
-Received: from out-177.mta1.migadu.com (out-177.mta1.migadu.com
- [95.215.58.177])
+ id 1FE4D83B64; Tue,  6 Jan 2026 23:17:40 +0100 (CET)
+Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com
+ [91.218.175.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADDDA83935
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:09:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A92683942
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 23:17:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,23 +29,22 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1767737340;
+ t=1767737857;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=hVMYDf838TEaJcxU55z27Qc5c65JOnuPvKj9szXM7zA=;
- b=i3ZBxEoTf9Fr5wpWQ0msm9a9yBtlFkK+sjzSp0oCqXBPZqrudJaLC2nfph1zt5up4yZyxM
- XGkt1mV0NeDaQb77vGPK3YlcQafbPKo4/VUi6yTt9GNC/krg23qAy1agt8UztO8+d+BkQg
- g7IClctHkXCr58aqUmDlF85M2Yl0gS8=
+ bh=QypTrw6Ba2uekUxGqIcz3bMva9+vzHchkZvYZXAokMs=;
+ b=GXE7MgcgrN06kQpQElqv1yGrj0rMjQQ1MVNNpN6x1Ikhhd6YuBzOPKtw7XEm9GrwWWHRyi
+ bVURxVK7/QqbCbtNx9P7c72wc9LJGeOwSg4ye6q42psCKjxZf9bzd6kJH1AAmlPOpMnkKu
+ znduRMewCh+peAH+1soeFAFMXe8O8Gg=
 From: Sean Anderson <sean.anderson@linux.dev>
-To: Stefan Roese <stefan.roese@mailbox.org>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Sean Anderson <sean.anderson@linux.dev>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] PCI: xilinx-nwl: Avoid crashing if configuring when the link
- is down
-Date: Tue,  6 Jan 2026 17:08:53 -0500
-Message-Id: <20260106220853.731358-1-sean.anderson@linux.dev>
+To: Marek Vasut <marex@denx.de>,
+	u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>,
+ Sean Anderson <sean.anderson@linux.dev>
+Subject: [PATCH] usb: dwc3: Initialize Xilinx glue registers
+Date: Tue,  6 Jan 2026 17:17:28 -0500
+Message-Id: <20260106221728.738219-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
@@ -65,61 +64,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ECAM will return a slave error if we access non-root devices while
-the link is down. Add a check for this like Linux does so we don't
-crash.
+These registers may have been initialized by SPL/FSBL, but program them
+in case they have not. If they are left at their default values, the
+controller will never exit reset.
 
-Fixes: 2f5ad77cfea ("PCI: zynqmp: Add ZynqMP NWL PCIe root port driver")
 Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+
 ---
 
- drivers/pci/pcie-xilinx-nwl.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ drivers/usb/dwc3/dwc3-generic.c | 32 ++++++++++++++++++++++++++------
+ drivers/usb/dwc3/dwc3-generic.h |  2 ++
+ 2 files changed, 28 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/pci/pcie-xilinx-nwl.c b/drivers/pci/pcie-xilinx-nwl.c
-index e03ab3be912..ab597c83e47 100644
---- a/drivers/pci/pcie-xilinx-nwl.c
-+++ b/drivers/pci/pcie-xilinx-nwl.c
-@@ -135,6 +135,13 @@ struct nwl_pcie {
- 	u32 ecam_value;
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index c09014aec60..ce896db9532 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -501,6 +501,27 @@ struct dwc3_glue_ops rk_ops = {
+ 	.glue_get_ctrl_dev = dwc3_rk_glue_get_ctrl_dev,
  };
  
-+static bool nwl_pcie_link_up(struct nwl_pcie *pcie)
++void dwc3_xlnx_glue_configure(struct udevice *dev, int index,
++			      enum usb_dr_mode mode)
 +{
-+	if (readl(pcie->pcireg_base + PS_LINKUP_OFFSET) & PCIE_PHY_LINKUP_BIT)
-+		return true;
-+	return false;
++/* USB glue registers */
++#define USB3_FPD_PIPE_CLK	0x7c
++#define USB3_FPD_POWER_PRSNT	0x80
++	struct dwc3_glue_data *glue = dev_get_plat(dev);
++	void *base = map_physmem(glue->regs, 0x10000, MAP_NOCACHE);
++
++	if (generic_phy_valid(&glue->phy)) {
++		writel(0, base + USB3_FPD_PIPE_CLK);
++		writel(1, base + USB3_FPD_POWER_PRSNT);
++	} else {
++		writel(1, base + USB3_FPD_PIPE_CLK);
++	}
 +}
 +
- static int nwl_pcie_config_address(const struct udevice *bus,
- 				   pci_dev_t bdf, uint offset,
- 				   void **paddress)
-@@ -142,6 +149,9 @@ static int nwl_pcie_config_address(const struct udevice *bus,
- 	struct nwl_pcie *pcie = dev_get_priv(bus);
- 	void *addr;
- 
-+	if (PCI_BUS(bdf) != dev_seq(bus) && !nwl_pcie_link_up(pcie))
-+		return -EIO;
++struct dwc3_glue_ops xlnx_ops = {
++	.glue_configure = dwc3_xlnx_glue_configure,
++};
 +
- 	addr = pcie->ecam_base;
- 	addr += PCIE_ECAM_OFFSET(PCI_BUS(bdf) - dev_seq(bus),
- 				 PCI_DEV(bdf), PCI_FUNC(bdf), offset);
-@@ -181,13 +191,6 @@ static inline void nwl_bridge_writel(struct nwl_pcie *pcie, u32 val, u32 off)
- 	writel(val, pcie->breg_base + off);
+ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
+ {
+ 	const char *name = ofnode_get_name(node);
+@@ -621,11 +642,10 @@ int dwc3_glue_probe(struct udevice *dev)
+ 	struct udevice *child = NULL;
+ 	int index = 0;
+ 	int ret;
+-	struct phy phy;
+ 
+-	ret = generic_phy_get_by_name(dev, "usb3-phy", &phy);
++	ret = generic_phy_get_by_name(dev, "usb3-phy", &glue->phy);
+ 	if (!ret) {
+-		ret = generic_phy_init(&phy);
++		ret = generic_phy_init(&glue->phy);
+ 		if (ret)
+ 			return ret;
+ 	} else if (ret != -ENOENT && ret != -ENODATA) {
+@@ -643,8 +663,8 @@ int dwc3_glue_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (generic_phy_valid(&phy)) {
+-		ret = generic_phy_power_on(&phy);
++	if (generic_phy_valid(&glue->phy)) {
++		ret = generic_phy_power_on(&glue->phy);
+ 		if (ret)
+ 			return ret;
+ 	}
+@@ -690,7 +710,7 @@ int dwc3_glue_remove(struct udevice *dev)
  }
  
--static bool nwl_pcie_link_up(struct nwl_pcie *pcie)
--{
--	if (readl(pcie->pcireg_base + PS_LINKUP_OFFSET) & PCIE_PHY_LINKUP_BIT)
--		return true;
--	return false;
--}
--
- static bool nwl_phy_link_up(struct nwl_pcie *pcie)
- {
- 	if (readl(pcie->pcireg_base + PS_LINKUP_OFFSET) & PHY_RDY_LINKUP_BIT)
+ static const struct udevice_id dwc3_glue_ids[] = {
+-	{ .compatible = "xlnx,zynqmp-dwc3" },
++	{ .compatible = "xlnx,zynqmp-dwc3", .data = (ulong)&xlnx_ops },
+ 	{ .compatible = "xlnx,versal-dwc3" },
+ 	{ .compatible = "ti,keystone-dwc3"},
+ 	{ .compatible = "ti,dwc3", .data = (ulong)&ti_ops },
+diff --git a/drivers/usb/dwc3/dwc3-generic.h b/drivers/usb/dwc3/dwc3-generic.h
+index 40902c8923f..13f6391cae8 100644
+--- a/drivers/usb/dwc3/dwc3-generic.h
++++ b/drivers/usb/dwc3/dwc3-generic.h
+@@ -10,12 +10,14 @@
+ #define __DRIVERS_USB_DWC3_GENERIC_H
+ 
+ #include <clk.h>
++#include <generic-phy.h>
+ #include <reset.h>
+ #include <dwc3-uboot.h>
+ 
+ struct dwc3_glue_data {
+ 	struct clk_bulk		clks;
+ 	struct reset_ctl_bulk	resets;
++	struct phy phy;
+ 	fdt_addr_t regs;
+ 	fdt_size_t size;
+ };
 -- 
 2.35.1.1320.gc452695387.dirty
 
 base-commit: beab3fe49e1e9209dd32fe2791e7ac706038460f
-branch: pcie_nwl_ecam
+branch: dwc3_xlnx_glue
