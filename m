@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C609CEFD01
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 19:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA28BCEFD01
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 19:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 567F083D9F;
+	by phobos.denx.de (Postfix) with ESMTP id 9134083FCF;
 	Tue,  6 Jan 2026 20:53:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="RXc0zAvX";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="qsgs/bL4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1BA283FBE; Tue,  6 Jan 2026 20:53:31 +0100 (CET)
-Received: from out-181.mta0.migadu.com (out-181.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b5])
+ id A6C5583B64; Tue,  6 Jan 2026 20:53:32 +0100 (CET)
+Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com
+ [91.218.175.179])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D331B83B64
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 20:53:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C052183F01
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 20:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,23 +29,23 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1767729209;
+ t=1767729210;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=C0ebhCHoGp4J+nzZfJXsDsc0DVdhrDAVeZBjnKrLXPQ=;
- b=RXc0zAvXMeUQRtwX1qNQhmVk83Oyq6bP0tNwY/Z2aLs7QT/W5NYJa8tuTlgmSq54/j36ST
- lXqfZVNPW8BUJqGKWJfqPm7IPqX+TtExl2vczUbQrWAN+NN3848LFarjK33wDyiR7AuRPv
- yIdatzDih9Y/6F9HSO582xChfYvM1bI=
+ bh=rrOJU99ojXB5J1kHJvQyx7g9OPT08vjzJsTDyNd2tM0=;
+ b=qsgs/bL4DpNvObvs9uMWAF9wsDHcZ4uBgUeCo7Wf3WprbTJRp+LEBrjmNsA8Z3oJWgyaTr
+ fuC04awzILwtevwWeCCSiXvDTteUXTul3G1Gik3LLTuMZ5TSmnNUFVHACtW3VcgToYjD7A
+ YyeiKSN4GvyxIiI5gheKk6PWSIdhoA8=
 From: Sean Anderson <sean.anderson@linux.dev>
 To: Tom Rini <trini@konsulko.com>, Adam Ford <aford173@gmail.com>,
  u-boot@lists.denx.de
 Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <sean.anderson@linux.dev>
-Subject: [PATCH 1/2] clk: versaclock: Fix clk_get_rate
-Date: Tue,  6 Jan 2026 14:53:21 -0500
-Message-Id: <20260106195322.657150-2-sean.anderson@linux.dev>
+Subject: [PATCH 2/2] clk: versaclock: Fix internal crystal clock
+Date: Tue,  6 Jan 2026 14:53:22 -0500
+Message-Id: <20260106195322.657150-3-sean.anderson@linux.dev>
 In-Reply-To: <20260106195322.657150-1-sean.anderson@linux.dev>
 References: <20260106195322.657150-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
@@ -67,39 +67,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Devicetree clock references point at the main versaclock device. We
-must determine the parent clock manually, as it depends on the clock id.
-The device parent of the versaclock will generally be an I2C bus and not
-another clock.
+When pin_xin does not exist and the chip supports an internal crystal,
+we must create it. Do so, and don't try to enable an error pointer.
 
 Fixes: dcf2cee77f2 ("clk: clk_versaclock: Add support for versaclock driver")
 Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
 ---
 
- drivers/clk/clk_versaclock.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ drivers/clk/clk_versaclock.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/clk/clk_versaclock.c b/drivers/clk/clk_versaclock.c
-index 19a787eaf0c..7a1052a1be7 100644
+index 7a1052a1be7..be01f34ceec 100644
 --- a/drivers/clk/clk_versaclock.c
 +++ b/drivers/clk/clk_versaclock.c
-@@ -633,7 +633,15 @@ static unsigned long vc5_clk_out_set_rate(struct clk *hw, unsigned long rate)
+@@ -889,23 +889,22 @@ int versaclock_probe(struct udevice *dev)
  
- static unsigned long vc5_clk_out_get_rate(struct clk *hw)
- {
--	return clk_get_parent_rate(hw);
-+	struct udevice *dev;
-+	struct vc5_driver_data *vc;
-+	struct clk *parent;
-+
-+	uclass_get_device_by_name(UCLASS_CLK, clk_hw_get_name(hw), &dev);
-+	vc = dev_get_priv(dev);
-+	parent = clk_get_parent(&vc->clk_out[hw->id].hw);
-+
-+	return clk_get_rate(parent);
- }
+ 	vc5->chip_info = chip;
+ 	vc5->pin_xin = devm_clk_get(dev, "xin");
+-
+-	if (IS_ERR(vc5->pin_xin))
+-		dev_dbg(dev, "failed to get xin clock\n");
+-
+-	ret = clk_enable(vc5->pin_xin);
+-	if (ret)
+-		dev_dbg(dev, "failed to enable XIN clock\n");
+-
+ 	vc5->pin_clkin = devm_clk_get(dev, "clkin");
  
- static const struct clk_ops vc5_clk_out_ops = {
+ 	/* Register clock input mux */
+ 	if (!IS_ERR(vc5->pin_xin)) {
++		ret = clk_enable(vc5->pin_xin);
++		if (ret)
++			dev_dbg(dev, "failed to enable XIN clock\n");
+ 		vc5->clk_mux_ins |= VC5_MUX_IN_XIN;
+ 	} else if (vc5->chip_info->flags & VC5_HAS_INTERNAL_XTAL) {
++		vc5->pin_xin = clk_register_fixed_rate(NULL, "internal-xtal",
++						       25000000);
+ 		if (IS_ERR(vc5->pin_xin))
+ 			return PTR_ERR(vc5->pin_xin);
+ 		vc5->clk_mux_ins |= VC5_MUX_IN_XIN;
++	} else {
++		return PTR_ERR(vc5->pin_xin);
+ 	}
+ 
+ 	mux_name = versaclock_get_name(dev->name, "mux", -1);
 -- 
 2.35.1.1320.gc452695387.dirty
 
