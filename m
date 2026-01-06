@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420C8CEFCF2
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 19:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7B5CEFCF8
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 19:28:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8468B83D9F;
-	Tue,  6 Jan 2026 20:00:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DEEF183F01;
+	Tue,  6 Jan 2026 20:28:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ONJu40tQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hbwvRKnG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B64F83F01; Tue,  6 Jan 2026 19:59:59 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id C666483F98; Tue,  6 Jan 2026 20:22:31 +0100 (CET)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F45383C62
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 19:59:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA02783D9F
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 20:22:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-65d0952e596so97259eaf.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 10:59:57 -0800 (PST)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-7f0db5700b2so989816b3a.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 11:22:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767725996; x=1768330796; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767727347; x=1768332147; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FrLkRRaHFBBYo+JCGLtWtuoo4B8l6Gunh+J1ajBoLRE=;
- b=ONJu40tQtd37Nk61fMKrR6jWz0ASKxKhqN5SZhTAhx7EntklfxSvIFf5e8z1me/KYk
- lFdL80CoGrFM09NmcNugXsYj9dLo93uofRj+xpDfh1BbVtr8Sgw6AU5LlyrmKptRVJmI
- zaeMPBPfVCLGuYtnjw4Ji6seOuDYLcz7qB0fw=
+ bh=bgYAwm7a6XBaVQx9NJi0zf/TvtgDs1QHVeOrB8DfRh0=;
+ b=hbwvRKnGgoxIZLevv5sW/OP7gtb1q+D4r3+FM59qUWnrpZ7HNMEzGKBiduNJBwcmXu
+ WkQrp8suwUvJLWem5m1JXKdgrL1nhpDm9R6GUfRrHvVY0EDEAuZpxnYsOa5EblpANjpB
+ J7NNV+rBhTsrbdpAGqmjz+vkgpEco4tbio/OUD8iGg3Yfi1JxVFGvG7KCF5EsNstYGUy
+ IQ8NzrA10epV8jVebty+5Nw+FLsYLMHMSzxdCwOY+7asTBF49CQF+WGUR3b37MPkbr/K
+ r9NKE6u9mOwPmPoOeoQH2rVBlCKTWgmMxMB4GjN62Ero5T7F/UbssuGCGCeNlCvwDJc3
+ 79rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767725996; x=1768330796;
+ d=1e100.net; s=20230601; t=1767727347; x=1768332147;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FrLkRRaHFBBYo+JCGLtWtuoo4B8l6Gunh+J1ajBoLRE=;
- b=mj8HrLJqVMmL1LoRIjDKozUjnbvXtdFzPFAbUgpG0tchVPMdm5dFy5X9bbRHSUMOfP
- e5+G4rO57rxCcuHDUJfd3XEBkT6IVdtywAzn6wCPGYJLc6O5cXwA1wK+HHN01rvvT52m
- E2JRM4pOVDRAnIb6Q3ZYU1RPqE8vlNNG0we9em1LF+JHm77Jeg0jrZImnFm0ZvSTVlYz
- Sx0QfgwdExXSCjqK5dYXFHLM4SQ3R1lzsgZsSsHNNmXYgsl5BRd1mwqmTRH393EKTnOR
- ITETr1sDnaxwtYf1X08NdNmZSbUhJoVve2YAZfdMFle3ZL3WXeB8P8deaJ354MDVU45D
- BVVA==
+ bh=bgYAwm7a6XBaVQx9NJi0zf/TvtgDs1QHVeOrB8DfRh0=;
+ b=WHgTDj8lW/TmzgDDl/g5NLdZZRHSWMa5kQtTNl+vRTsd334YEkP1sq5JIOMDyEE82g
+ lMqzpm94MsnBoL/hdqrYmDIwjlUb6yIL3boHbsaaphvdSNaFA0ahBBbZr6sioxD7L+re
+ WMmYjY1mQiF5zHKe7srLJt1/+x7I+JIDfHoXJX9kUzsPUas6nwUkISrCNiFPrbsU5OWx
+ Jkjjtphf17XTbn1pkvpuLm50adUhYhXvx9c4KRfKtGJNIl9yNnMYjos9Dpe3JR8uKPzN
+ nNtSh/1FEQphZ/tHLOJdKbR3fyc+m9Xc3CaxugwlmOXqcBaxmFkPgLUfUq7exkM+tIqI
+ j8og==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX4mU3ffs+5h4wtoTz6O/BcQxng/DKKMp5RT7Ud9A0vPriceZs69R8C3GWJm4NMo9h7xMo6uPc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMAUuD9PFDI76ibMlzJjL7+BMyqRypHtskFqN5lm1te5fF8Qyw
- 2ZlkRO2cnJjdAhZzrhqFJoP8a52eRKW6WtXbgpO/ciUbEoLrgC+9nEeDKmmGz1cOoDBtnbazIks
- 23wzGkyI=
-X-Gm-Gg: AY/fxX72YA8ERBVhz8vPN0sdSLMEXDnTXnYzCVSYEP6a3ogX5AB7gh2FYUzArKh8EQ6
- xAQWqOItNYB3Gr1GsrAg+PjfTZWLBm4ebbp0586ajwVH/R9JpryZOpDorWxkHKsP1pHyDzes7tf
- 0s2c4wBEiZrhSY4Ku/8eoky4v5rXK3NfhMPSjKWeKxtRC5+CHR8ecAifnQ+SWEUBlXU/Wi+gpKZ
- 1+u7Tuk3qgioxHN2Yd8uqHP/7ccYUAImiVJ5d77l2w1KPhBl41qU5Vbjz5x5vGXOiD35XEGB2Li
- 9EIp7OMzrm7JT7Gl+EhvIzt9CpuBQAKgQD4R+jwbEMxnE7WlY72GAx9wYqrqXaaSTbkIZoq9XRj
- Kz2TIzpCY/zGJYW0aEE4i26D5v/fwg2c7axTsLpxOzwknMXD1BF8ZJa713oRBSYuDANrT5pcn4h
- 6qRDHZtgrtDRIulZu7Tt1/wct2Q3bCpGhH2LwQjhjPVH7hpRHFrRp4sg5tpn48dNxIG4wKKq/lf
- WLV9PAUM3D3TkVk9LRjvFOpEBDV6MWb9Y9PM9Q=
-X-Google-Smtp-Source: AGHT+IGHkUk/IArKd7wc04Pb5A6Cw7d16oxU4F4UfXxQxLaShvKco2renF+WWHPoPxrzADNNMGuoQA==
-X-Received: by 2002:a05:6820:601:b0:65e:dd95:396a with SMTP id
- 006d021491bc7-65f545b2cd3mr74571eaf.7.1767725995996; 
- Tue, 06 Jan 2026 10:59:55 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48cb03d4sm1305419eaf.12.2026.01.06.10.59.54
+ AJvYcCXNrmEriOlT1Xdx6UJAmZhAVIrdSGuivxOL7jbFXTuiimRmv6o0Mcs4xIXsnPcC62msAyfRpyM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywma6WYNsqwko56/HoH4pCb2zdPdd37V3Om+b4UA54r+dH25HVo
+ Q83IhT0xxzSqXVcprUJbZC1F8ScIyIgEoAK23UkThJNGtz7tuOWeHyxq6o3B/Q==
+X-Gm-Gg: AY/fxX5CBy0Yy3wdeDCsNAWOYabqe60EzPfffYhFk0UlFFJbA/1L5gV0dv00UcqKg7b
+ j29bfnnL8uBvJNDNAafcyQG/BDPUueXmDornarf64o+M38SVI4Bh5eBkflHfqU3pDCD4nBacpwB
+ QCw0ZUDR5OV+IsYncErArV/tBNxdl9DUO95HswnV7cdP3B4lInkfKdnbD3FtPYY1pzR/ttAY0Yi
+ kFzB8f1Z56o6RzS9DivQwHt5iDbzDqUwS2pHMVnLhk4egPfKvkVqIZ7cEvwgbW/OeuWhlfdavkK
+ sOGkc8wyruLKPLKysl/vzuSXc/YBhZ2QK7H8TLoHC1rFJQbyuFhUe9riM25Il3C/oyPM/d0ohoj
+ S2tUPSLQYkOg0lOK1dZUvmulsNqqkmb2VNiUPMebeaDrjVen3nSOcM2+aMWo6XC0Wk8S7w4KHWt
+ LdpyL9FmwBeu7TYSqYeu0q0XWB
+X-Google-Smtp-Source: AGHT+IGqA5XsnAfTqPoNZWp5uTNCATzeKerDeaOk70P25QUrK6ShyEWLHvN5zIuyAeMbc3PKEd9PEg==
+X-Received: by 2002:a05:6a21:398:b0:371:5a31:e486 with SMTP id
+ adf61e73a8af0-389822aa59fmr3104451637.6.1767727347009; 
+ Tue, 06 Jan 2026 11:22:27 -0800 (PST)
+Received: from google.com ([2402:7500:577:2fcc:2b1c:b727:de22:5862])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c4cbfc2f475sm3014442a12.8.2026.01.06.11.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 10:59:55 -0800 (PST)
-Date: Tue, 6 Jan 2026 12:59:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/8] clk: mediatek: implement of_xlate and dump
-Message-ID: <20260106185952.GJ3416603@bill-the-cat>
-References: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
+ Tue, 06 Jan 2026 11:22:26 -0800 (PST)
+Date: Wed, 7 Jan 2026 03:22:22 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com,
+ me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com,
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 5/7] board: Add QEMU m68k virt board support
+Message-ID: <aV1g7s1Fkrjkjeuj@google.com>
+References: <20260105165221.1816070-1-visitorckw@gmail.com>
+ <20260105165221.1816070-6-visitorckw@gmail.com>
+ <CAFLszTi2sO9fXavKWqzUQaosJfkc8SXyF3uX7=Cw9r_w=FLyKA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fCSJBSk/tHrwlbtM"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251218-clk-mtk-improvements-v1-0-72db131ba148@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFLszTi2sO9fXavKWqzUQaosJfkc8SXyF3uX7=Cw9r_w=FLyKA@mail.gmail.com>
+X-Mailman-Approved-At: Tue, 06 Jan 2026 20:28:28 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,52 +104,407 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---fCSJBSk/tHrwlbtM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jan 05, 2026 at 04:30:31PM -0700, Simon Glass wrote:
+> Hi Kuan-Wei,
+> 
+> On Mon, 5 Jan 2026 at 11:21, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> >
+> > Add support for the QEMU 'virt' machine on the m68k architecture. This
+> > board emulates a generic machine based on the Motorola 68040 CPU
+> > equipped with Goldfish virtual peripherals.
+> >
+> > Introduce the necessary board configuration and initialization
+> > infrastructure. The implementation includes logic to parse the QEMU
+> > bootinfo interface, enabling dynamic detection of system RAM size to
+> > adapt to the virtual machine's configuration.
+> >
+> > Enable the Goldfish TTY driver for serial console output. Additionally,
+> > enable Goldfish RTC and timer drivers to support real-time clock
+> > functionality and nanosecond-resolution delays. Include comprehensive
+> > documentation covering build instructions and usage examples.
+> >
+> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > Tested-by: Daniel Palmer <daniel@0x0f.com>
+> > ---
+> > Changes in v5:
+> > - Rebase on u-boot/next branch.
+> > - Add 'imply CMD_DM' to TARGET_QEMU_M68K.
+> >
+> >  arch/m68k/Kconfig                     |   9 ++
+> >  board/emulation/qemu-m68k/Kconfig     |  12 +++
+> >  board/emulation/qemu-m68k/MAINTAINERS |   8 ++
+> >  board/emulation/qemu-m68k/Makefile    |   5 ++
+> >  board/emulation/qemu-m68k/qemu-m68k.c | 115 ++++++++++++++++++++++++++
+> >  configs/qemu-m68k_defconfig           |  16 ++++
+> >  doc/board/emulation/index.rst         |   1 +
+> >  doc/board/emulation/qemu-m68k.rst     |  39 +++++++++
+> >  include/configs/qemu-m68k.h           |  18 ++++
+> >  9 files changed, 223 insertions(+)
+> >  create mode 100644 board/emulation/qemu-m68k/Kconfig
+> >  create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+> >  create mode 100644 board/emulation/qemu-m68k/Makefile
+> >  create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+> >  create mode 100644 configs/qemu-m68k_defconfig
+> >  create mode 100644 doc/board/emulation/qemu-m68k.rst
+> >  create mode 100644 include/configs/qemu-m68k.h
+> >
+> 
+> Very nice patch.
 
-On Thu, Dec 18, 2025 at 11:16:58AM -0600, David Lechner wrote:
+Thanks. :)
 
-> I started looking into fixing some bugs in the mt8365 clock driver and
-> realized that there was no way to inspect or debug the clock trees.
->=20
-> I set out to implement the dump function to help with this. The driver
-> architecture didn't make this easy since there was no way to know the
-> number of elements in each of the clock arrays. The first few patches
-> in this series are adding fields to the data structures to hold this
-> information.
-[snip]
-> ---
-> base-commit: 930eff5416ea98ebd09cec73f5d06a7033b4d52e
-> change-id: 20251215-clk-mtk-improvements-db0b9d1d3113
-> prerequisite-message-id: <20251211-clk-mtk-fix-dup-parent-doc-v1-1-41816d=
-98f857@baylibre.com>
-> prerequisite-patch-id: 2ae6231f7dcfd6fb770d0633c3feb5ee2a3dab1a
-> prerequisite-message-id: <20251210-arm-dts-mediatek-switch-mt8365-to-of_u=
-pstream-v1-1-71317e50d414@baylibre.com>
-> prerequisite-patch-id: 3520ac6a30d21a4efac14c4d2cae0d72912f9f13
+> 
+> > diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+> > index de7c673c376..0cf632729da 100644
+> > --- a/arch/m68k/Kconfig
+> > +++ b/arch/m68k/Kconfig
+> > @@ -183,6 +183,14 @@ config TARGET_STMARK2
+> >          select CF_DSPI
+> >          select M54418
+> >
+> > +config TARGET_QEMU_M68K
+> > +    bool "Support QEMU m68k virt"
+> > +    select M68040
+> > +    imply CMD_DM
+> > +    help
+> > +      This target supports the QEMU m68k virtual machine (-M virt).
+> > +      It simulates a Motorola 68040 CPU with Goldfish peripherals.
+> > +
+> >  endchoice
+> >
+> >  config SYS_CPU
+> > @@ -208,6 +216,7 @@ source "board/freescale/m5329evb/Kconfig"
+> >  source "board/freescale/m5373evb/Kconfig"
+> >  source "board/sysam/amcore/Kconfig"
+> >  source "board/sysam/stmark2/Kconfig"
+> > +source "board/emulation/qemu-m68k/Kconfig"
+> >
+> >  config M68K_QEMU
+> >         bool "Build with workarounds for incomplete QEMU emulation"
+> > diff --git a/board/emulation/qemu-m68k/Kconfig b/board/emulation/qemu-m68k/Kconfig
+> > new file mode 100644
+> > index 00000000000..aae6dfe400f
+> > --- /dev/null
+> > +++ b/board/emulation/qemu-m68k/Kconfig
+> > @@ -0,0 +1,12 @@
+> > +if TARGET_QEMU_M68K
+> > +
+> > +config SYS_BOARD
+> > +       default "qemu-m68k"
+> > +
+> > +config SYS_VENDOR
+> > +       default "emulation"
+> > +
+> > +config SYS_CONFIG_NAME
+> > +       default "qemu-m68k"
+> > +
+> > +endif
+> > diff --git a/board/emulation/qemu-m68k/MAINTAINERS b/board/emulation/qemu-m68k/MAINTAINERS
+> > new file mode 100644
+> > index 00000000000..90414c58465
+> > --- /dev/null
+> > +++ b/board/emulation/qemu-m68k/MAINTAINERS
+> > @@ -0,0 +1,8 @@
+> > +QEMU M68K VIRT BOARD
+> > +M:     Kuan-Wei Chiu <visitorckw@gmail.com>
+> > +S:     Maintained
+> > +F:     board/emulation/qemu-m68k/
+> > +F:     board/emulation/common/
+> > +F:     include/configs/qemu-m68k.h
+> > +F:     configs/qemu-m68k_defconfig
+> > +F:     doc/board/emulation/qemu-m68k.rst
+> > diff --git a/board/emulation/qemu-m68k/Makefile b/board/emulation/qemu-m68k/Makefile
+> > new file mode 100644
+> > index 00000000000..5cb2886ff5a
+> > --- /dev/null
+> > +++ b/board/emulation/qemu-m68k/Makefile
+> > @@ -0,0 +1,5 @@
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +#
+> > +# Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> > +
+> > +obj-y += qemu-m68k.o
+> > diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> > new file mode 100644
+> > index 00000000000..3b911b95343
+> > --- /dev/null
+> > +++ b/board/emulation/qemu-m68k/qemu-m68k.c
+> > @@ -0,0 +1,115 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +/*
+> > + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> > + */
+> > +
+> > +#include <asm-generic/sections.h>
+> > +#include <asm/bootinfo.h>
+> > +#include <asm/global_data.h>
+> > +#include <asm/io.h>
+> > +#include <config.h>
+> > +#include <dm/platdata.h>
+> > +#include <goldfish_rtc.h>
+> > +#include <goldfish_timer.h>
+> > +#include <goldfish_tty.h>
+> > +#include <init.h>
+> > +#include <linux/errno.h>
+> > +#include <serial.h>
+> 
+> Check header order:
+> 
+> https://docs.u-boot.org/en/v2024.01/develop/codingstyle.html#include-files
 
-So, unfortunately this prerequisite feature in b4 doesn't work well for
-us, or I'm doing something wrong. Both of these are applied to master,
-now, but b4 wants to re-apply them, and then falls down.
+I will sort root headers and directory headers separately in v6.
 
-This also, now, fails to apply cleanly to current master so can you
-please rebase and resend? Thanks.
+> 
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +/* QEMU Virt Machine Hardware Map */
+> > +#define VIRT_GF_RTC_MMIO_BASE  0xff007000
+> > +#define VIRT_GF_TTY_MMIO_BASE  0xff008000
+> > +#define VIRT_CTRL_MMIO_BASE    0xff009000
+> > +#define VIRT_CTRL_RESET        0x01
+> > +
+> 
+> Could these move to devicetree? Or perhaps have an overall base + offsets?
 
---=20
-Tom
+I will remove these macros. I plan to extract the bootinfo parsing
+logic into a helper and call it in board_early_init_f to get addresses
+dynamically.
 
---fCSJBSk/tHrwlbtM
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> > +/*
+> > + * Theoretical limit derivation:
+> > + * Max Bootinfo Size (Standard Page) = 4096 bytes
+> > + * Min Record Size (Tag + Size)      = 4 bytes
+> > + * Max Records = 4096 / 4 = 1024
+> > + */
+> > +#define MAX_BOOTINFO_RECORDS  1024
+> > +
+> > +int board_early_init_f(void)
+> 
+> If you don't need this function, you could disable BOARD_EARLY_INIT_F
 
------BEGIN PGP SIGNATURE-----
+Ack.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV1boAAKCRAr4qD1Cr/k
-CtP0AQC6zI40IwpjJ1TynaputavBm+dEbMsCKXBuo3RsM37D6AEAn8w5DPCPqVNn
-VeaMEnFJiSFyWqRpB59tYifyJKVMtwQ=
-=PIJ/
------END PGP SIGNATURE-----
+> 
+> > +{
+> > +       return 0;
+> > +}
+> > +
+> > +int checkboard(void)
+> > +{
+> > +       puts("Board: QEMU m68k virt\n");
+> 
+> blank line here (and below)
 
---fCSJBSk/tHrwlbtM--
+Ack.
+
+> 
+> > +       return 0;
+> > +}
+> > +
+> > +int dram_init(void)
+> > +{
+> > +       struct bi_record *record;
+> > +       ulong addr;
+> > +       int loops = 0;
+> > +
+> > +       /* Default: 16MB */
+> > +       gd->ram_size = 0x01000000;
+> 
+> or SZ_16M
+
+Ack.
+
+> 
+> > +
+> > +       /* QEMU places bootinfo after _end, aligned to 2 bytes */
+> > +       addr = (ulong)&_end;
+> > +       addr = ALIGN(addr, 2);
+> > +
+> > +       record = (struct bi_record *)addr;
+> > +
+> > +       if (record->tag != BI_MACHTYPE)
+> > +               return 0;
+> > +
+> > +       while (record->tag != BI_LAST) {
+> > +               if (++loops > MAX_BOOTINFO_RECORDS)
+> > +                       panic("Bootinfo loop exceeded");
+> > +               if (record->tag == BI_MEMCHUNK) {
+> > +                       gd->ram_size = record->data[1];
+> > +                       break;
+> > +               }
+> > +               record = (struct bi_record *)((ulong)record + record->size);
+> > +       }
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +void reset_cpu(unsigned long addr)
+> > +{
+> > +       writel(VIRT_CTRL_RESET, VIRT_CTRL_MMIO_BASE);
+> > +       while (1)
+> > +               ;
+> 
+> hang()? But if it prints a few characters of the message, you won't want it.
+> 
+> BTW this should really be a sysreset driver.
+
+I will add a sysreset driver for this in v6.
+
+> 
+> > +}
+> > +
+> > +int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> > +{
+> > +       reset_cpu(0);
+> > +       return 0;
+> > +}
+> > +
+> > +static const struct goldfish_rtc_plat rtc_plat = {
+> > +       .base = (void __iomem *)VIRT_GF_RTC_MMIO_BASE,
+> > +};
+> > +
+> > +U_BOOT_DRVINFO(goldfish_rtc) = {
+> > +       .name = "rtc_goldfish",
+> > +       .plat = &rtc_plat,
+> > +};
+> > +
+> > +static const struct goldfish_timer_plat timer_plat = {
+> > +       .base = (void __iomem *)VIRT_GF_RTC_MMIO_BASE,
+> > +};
+> > +
+> > +U_BOOT_DRVINFO(goldfish_timer) = {
+> > +       .name = "goldfish_timer",
+> > +       .plat = &timer_plat,
+> > +};
+> > +
+> > +static const struct goldfish_tty_plat serial_plat = {
+> > +       .base = (void __iomem *)VIRT_GF_TTY_MMIO_BASE,
+> > +};
+> > +
+> > +U_BOOT_DRVINFO(goldfish_serial) = {
+> > +       .name = "serial_goldfish",
+> > +       .plat = &serial_plat,
+> > +};
+> 
+> This is what device tree is for. It would be trivial to set one up.
+
+Based on the discussion in patch #3, I plan to stick with the current
+approach.
+
+Regards,
+Kuan-Wei
+
+> 
+> > diff --git a/configs/qemu-m68k_defconfig b/configs/qemu-m68k_defconfig
+> > new file mode 100644
+> > index 00000000000..f9294218429
+> > --- /dev/null
+> > +++ b/configs/qemu-m68k_defconfig
+> > @@ -0,0 +1,16 @@
+> > +CONFIG_M68K=y
+> > +CONFIG_TEXT_BASE=0x00000000
+> > +CONFIG_SYS_MALLOC_LEN=0x20000
+> > +CONFIG_SYS_MALLOC_F_LEN=0x2000
+> > +CONFIG_SYS_MONITOR_LEN=262144
+> > +CONFIG_SYS_BOOTM_LEN=0x1000000
+> > +CONFIG_SYS_LOAD_ADDR=0x00000000
+> > +CONFIG_TARGET_QEMU_M68K=y
+> > +# CONFIG_DISPLAY_BOARDINFO is not set
+> > +CONFIG_BOARD_EARLY_INIT_F=y
+> > +CONFIG_DM_RTC=y
+> > +CONFIG_RTC_GOLDFISH=y
+> > +CONFIG_DM_SERIAL=y
+> > +CONFIG_SERIAL_GOLDFISH=y
+> > +CONFIG_TIMER=y
+> > +CONFIG_GOLDFISH_TIMER=y
+> > diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> > index f8908166276..4f7c812d493 100644
+> > --- a/doc/board/emulation/index.rst
+> > +++ b/doc/board/emulation/index.rst
+> > @@ -15,6 +15,7 @@ Emulation
+> >     qemu-sbsa
+> >     qemu-x86
+> >     qemu-xtensa
+> > +   qemu-m68k
+> >
+> >  Also see
+> >
+> > diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
+> > new file mode 100644
+> > index 00000000000..6c4de54cf6a
+> > --- /dev/null
+> > +++ b/doc/board/emulation/qemu-m68k.rst
+> > @@ -0,0 +1,39 @@
+> > +.. SPDX-License-Identifier: GPL-2.0-or-later
+> > +.. Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> > +
+> > +QEMU m68k
+> > +=========
+> > +
+> > +QEMU for m68k supports a special 'virt' machine designed for emulation and
+> > +virtualization purposes. This document describes how to run U-Boot under it.
+> > +
+> > +The QEMU virt machine models a generic m68k virtual machine with Goldfish
+> > +interfaces. It supports the Motorola 68040 CPU architecture.
+> > +
+> > +Building U-Boot
+> > +---------------
+> > +Set the CROSS_COMPILE environment variable to your m68k toolchain, and run:
+> > +
+> > +.. code-block:: bash
+> > +
+> > +    export CROSS_COMPILE=m68k-linux-gnu-
+> > +    make qemu-m68k_defconfig
+> > +    make
+> > +
+> > +Running U-Boot
+> > +--------------
+> > +The minimal QEMU command line to get U-Boot up and running is:
+> > +
+> > +.. code-block:: bash
+> > +
+> > +    qemu-system-m68k -M virt -cpu m68040 -nographic -kernel u-boot
+> > +
+> > +Note that the `-nographic` option is used to redirect the console to stdio,
+> > +which connects to the emulated Goldfish TTY device.
+> > +
+> > +Hardware Support
+> > +----------------
+> > +The following QEMU virt peripherals are supported in U-Boot:
+> > +
+> > +* Goldfish TTY (Serial Console)
+> > +* Goldfish RTC (Real Time Clock)
+> > diff --git a/include/configs/qemu-m68k.h b/include/configs/qemu-m68k.h
+> > new file mode 100644
+> > index 00000000000..1d8aa92fe80
+> > --- /dev/null
+> > +++ b/include/configs/qemu-m68k.h
+> > @@ -0,0 +1,18 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> > +/*
+> > + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> > + */
+> > +
+> > +#ifndef __QEMU_M68K_H
+> > +#define __QEMU_M68K_H
+> > +
+> > +/* Memory Configuration */
+> > +#define CFG_SYS_SDRAM_BASE       0x00000000
+> > +
+> > +/*
+> > + * Initial Stack Pointer:
+> > + * Place the stack at 4MB offset to avoid overwriting U-Boot code/data.
+> > + */
+> > +#define CFG_SYS_INIT_SP_ADDR     (CFG_SYS_SDRAM_BASE + 0x400000)
+> > +
+> > +#endif /* __QEMU_M68K_H */
+> > --
+> > 2.52.0.358.g0dd7633a29-goog
+> >
+> 
+> Regards,
+> Simon
