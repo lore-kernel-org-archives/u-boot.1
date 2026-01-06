@@ -4,85 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1127CEFD0C
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA01CEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E21C583FFF;
-	Wed,  7 Jan 2026 00:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ADB4F83C62;
+	Wed,  7 Jan 2026 00:22:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I8UuTKY9";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UTh1SYpI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E93368400F; Wed,  7 Jan 2026 00:17:25 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 173D383FF9; Wed,  7 Jan 2026 00:22:12 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4DF883FF9
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:17:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 767DE83C08
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3f9e592af58so876324fac.2
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 15:17:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767741442; x=1768346242; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1pEAoneFDEtOr6S6WdOPbPj9ug7R2P/c+TD2hmIkEQ4=;
- b=I8UuTKY9Ztr8xrW8ZK5rHFRXi9321v3nrP+5n6rkDpFSoHpkB91vNasHgzX02uraE8
- Z7yXEHpw/CnCif6qciuCY0xqgUEHg81ZvIyFoNeqgX04YxD7BL4RG1aj8NN7n1W9N4je
- QDwb1tUJY+mFwSnjrtSzwhuA5lzvib5Mq/Vv0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767741442; x=1768346242;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1pEAoneFDEtOr6S6WdOPbPj9ug7R2P/c+TD2hmIkEQ4=;
- b=dYXdMWhE0VOUGmJVi/3hEvHTWcWrE/MbshRwluKNt0799cNwvGHY/nTEp1VminQ1Dq
- 398uMiTSB/8CPHmms7aDQDGzZ+WCyZ70rG+E38RmZmpksh+2Cf05k3gRaiWQRrniJNDR
- DVGxee0L2o9Wtj7zbJ8Mk0Ftg0vAP8UbNgFUnzG4rNCPOCczbjvlOnltQNYyE8zNRU5P
- ZYSIbbYZ9ESNnCR+oQpqEvZdaBuv4Db++5Jv9Yyj9bHaCXwcwHYBUKgAz8d3A0fQRhf5
- 4aCqzs4aAvACkWhyYt7ZKjN16sPKFhcDeIEZ4y0/6hqgtuRSBMTa8/cVEaxXXmtK529a
- d4yA==
-X-Gm-Message-State: AOJu0YzqP7RkdnpPFz37Yy0lja+c3J73pBIoa0yWaMgLViOR++c0h0rc
- Dey3DT3+U9OkNLdhjNv0P95E7cfi7IVW2/AFIPWk58mi3raQ/ylLdOD+uXXzOIhjpOY=
-X-Gm-Gg: AY/fxX6ajsx69djnZZzS85GI2Ka3/K80oNLJcsQrGM+GstdZRVn72hiqxn3GCGpCBaH
- 8eVGOheg9Qurn5f4VX8wyoyQAlWz+yxkyYJVq+MXVJ1wyZnz1ATrWqOJ4IYSgBdLtIw5i4hmbM2
- XlMzCrwlJOjjR78H/48JHvljFAZYDABS9wNJTF3Nq0Xd1wqTYhkgu6j/zL1XuIiphUP+GDiVNc/
- S1QAk/qyqXQaKOflMzVxCZkMyK6EzTiBQZdAkfufIqUedM4aeBDvsADZwMP9SvfZh7iXG8Qh/8a
- WCXMMQ5oiFGx9vu+DB/SH/sMS0a+oXSiKisV7NciY8y+1BBHxLUnOO99Z0HskAAmxGOQwN4TDsL
- RjcPlLbvQHjXIFuokRPv9tJFwH0aiN2ae03IDUMNy//3/L5AcDsD6JApjFEP1lPVi6rW7M90axN
- ocrjMjyg7tk3Uv9B8AlVUGKPGPzUYz1CLGvQSdlP1ChwWnqec06dZuxxsqMeZ8URqYG8DZzy/XQ
- Hr3mJZKks3CwZYNBvFUSxl48qMgHbxLfrT3RA==
-X-Google-Smtp-Source: AGHT+IEMyu28ClzYpkGf7EgFIHb8SXzJt/cvPYVvyX1MB0RlYcqBxuHjIFsdbTBXkP0UII1N93VASQ==
-X-Received: by 2002:a05:6870:6b97:b0:3e7:f174:ae1d with SMTP id
- 586e51a60fabf-3ffc091879cmr294767fac.5.1767741442448; 
- Tue, 06 Jan 2026 15:17:22 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa4de40bfsm2059380fac.5.2026.01.06.15.17.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 15:17:21 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Darek <x64x6a@gmail.com>, Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20251218233654.3938385-2-trini@konsulko.com>
-References: <20251218232255.3934258-1-trini@konsulko.com>
- <20251218233654.3938385-1-trini@konsulko.com>
- <20251218233654.3938385-2-trini@konsulko.com>
-Subject: Re: [PATCHv1 1/3] lzma: Add Kconfig options to optimize for size
-Message-Id: <176774144160.3783364.9518655819393448998.b4-ty@konsulko.com>
-Date: Tue, 06 Jan 2026 17:17:21 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=0cbd=7M=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1767741727;
+ bh=vW/O1UPNRrVK9BcAfdeoifaKBA1DrXyTs/AVhbm6eqA=;
+ b=UTh1SYpIv0Hb1JnEx4ksAdRda7E3luqjR1LV+E2/hNmvbQLVEcg3bqpOs06c2X3h4IkBmvohb
+ 5FkXrNIwfjsVFOjuBMKIvX5ImVe8Q1UIb1o2bROGSQKmjC2IPIqZTBddz858X7vgkRUevloSTEw
+ hu4ZS5YnTIFYH5sA9BihbPeuwWMM2X/ipECFOZU3hBsuduthhOCd5eF5dUaHS+68OH9Qhx6bTsA
+ Ac553VxOWBJPxBddCC2QP7PHfqV6B2GBto3T5ioRDihqzKYNWEUPXSLGVmCAFLJnOcyHFSFBfHe
+ ftW1xuJSbEx6Tf/xJSJI2BEb6wVvAzsbzTGa4h3/xipQ==
+X-Forward-Email-ID: 695d991a4c4fab46c299b2e5
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.2.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH v4] rockchip: sdram: Add fallback that fixup DRAM gaps on
+ RK3588
+Date: Tue,  6 Jan 2026 23:21:51 +0000
+Message-ID: <20260106232154.3178240-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,26 +70,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Dec 2025 17:30:56 -0600, Tom Rini wrote:
+RK3588 has two known memory gaps when using 16+ GiB DRAM,
+[0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
 
-> Currently, our LZMA library has an option for optimizing for size,
-> rather than speed. It is a minimal savings today, and has not been worth
-> enabling. As this will change in the near future, add options now to
-> allow disabling it in full U-Boot or in SPL, and enable these on
-> gardena-smart-gateway-mt7688 which is very close to the size limit
-> today.
-> 
-> [...]
+The vendor TPL blob encodes this information in the DDR_MEM tag data
+passed to later boot phases. U-Boot proper will normally use this
+information to configure the DRAM banks.
 
-Applied to u-boot/master, thanks!
+When a DDR_MEM tag cannot be found the fallback is to use the entire
+range above 4 GiB. Something that will cause issues when OS try to use
+memory from the two known memory gaps.
 
-[1/3] lzma: Add Kconfig options to optimize for size
-      commit: e7797f450ad26bca32c12ae55e3d43438b74f910
-[2/3] lzma: Update LZMA SDK code from 9.20 to 25.01
-      commit: 33c9db62d49306805bf7ccfb7e6c6e53238ad0c0
-[3/3] lzma: Add SPDX-License-Identifier lines
-      commit: 45c5bc2ca515684dedce4cea3d66a109fba5144d
+Add a weak dram init banksize fixup function and implement it for RK3588
+to fix issues observed when trying to RAM boot RK3588 boards with 16+
+GiB DRAM into Linux.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+v4: Collect r-b tag
+    Drop already applied patches
+v3: No change
+v2: New patch to fix booting into OS on RK3588 boards with 16+ GiB DRAM
+---
+ arch/arm/mach-rockchip/rk3588/rk3588.c | 27 ++++++++++++++++++++++++++
+ arch/arm/mach-rockchip/sdram.c         |  7 ++++++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+index 55d2caab4fec..6324c6f12867 100644
+--- a/arch/arm/mach-rockchip/rk3588/rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+@@ -211,6 +211,33 @@ int arch_cpu_init(void)
+ }
+ #endif
+ 
++/*
++ * RK3588 has two known memory gaps when using 16+ GiB DRAM,
++ * [0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
++ *
++ * Remove the [0x3fc000000, 0x400000000) range to ensure OS does not
++ * use memory from these gaps when a DDR_MEM tag cannot be found.
++ */
++
++#define DRAM_GAP_START		0x3FC000000
++#define DRAM_GAP_END		0x400000000
++
++int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
++{
++	size_t ram_top = bd->bi_dram[1].start + bd->bi_dram[1].size;
++
++	if (ram_top > DRAM_GAP_START) {
++		bd->bi_dram[1].size = DRAM_GAP_START - bd->bi_dram[1].start;
++
++		if (ram_top > DRAM_GAP_END && CONFIG_NR_DRAM_BANKS > 2) {
++			bd->bi_dram[2].start = DRAM_GAP_END;
++			bd->bi_dram[2].size = ram_top - bd->bi_dram[2].start;
++		}
++	}
++
++	return 0;
++}
++
+ #define RK3588_OTP_CPU_CODE_OFFSET		0x02
+ #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
+ 
+diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+index d560f90e873d..ea0e3621af72 100644
+--- a/arch/arm/mach-rockchip/sdram.c
++++ b/arch/arm/mach-rockchip/sdram.c
+@@ -289,6 +289,11 @@ static int rockchip_dram_init_banksize(void)
+ }
+ #endif
+ 
++__weak int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
++{
++	return 0;
++}
++
+ int dram_init_banksize(void)
+ {
+ 	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
+@@ -342,7 +347,7 @@ int dram_init_banksize(void)
+ #endif
+ #endif
+ 
+-	return 0;
++	return rockchip_dram_init_banksize_fixup(gd->bd);
+ }
+ 
+ u8 rockchip_sdram_type(phys_addr_t reg)
 -- 
-Tom
-
+2.52.0
 
