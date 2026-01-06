@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C6BCEFD0C
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 21:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AE7DCEFD0C
+	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 21:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D9383966;
-	Tue,  6 Jan 2026 22:55:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09BAC83D9F;
+	Tue,  6 Jan 2026 22:55:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="FnU/b6lC";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="XQKxmtto";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E41B983C4B; Tue,  6 Jan 2026 22:55:14 +0100 (CET)
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
- [91.218.175.180])
+ id 3478D83C4B; Tue,  6 Jan 2026 22:55:15 +0100 (CET)
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
+ [91.218.175.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 872EF83759
- for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 22:55:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1F2083885
+ for <u-boot@lists.denx.de>; Tue,  6 Jan 2026 22:55:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,22 +29,26 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1767736510;
+ t=1767736511;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3NtZWrCDjxyvXkd8pGLCaKjBpx/rANuSWl+HZl0x8/8=;
- b=FnU/b6lCax6cxpBriS7DggJ9QDDN+BKigPuh6TF9JRSMbN8SIV1Yod27sRe/HC1/AsmbVk
- vvpCqNC5B9OhatiDyCFc0YVxCcou34BocsoQ4EooS/yNS7RHmAnxT8KLY73zwQ3RCMgTIY
- bjIk3hN8T1qrm1Z/wlSRTCznNDfUNrs=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=M+/z/up3Q0ySdmqIK8IW9H0QLR60Z75GAjnLeHy06hM=;
+ b=XQKxmtto6bAp1XgZLrDJy0FODHwR9hPRd94iJ6SpXRUBThQLYzQvyytnSzSxnQ6ThBkR7r
+ rlM2n3QoX+DJz+S3lxC7RHgcBk9xy2197MKU6NgP3g0QKBpPJEtZ580+mTnVeeQh0IoJIz
+ blmLg7ImqN1nbfc21EQWkO9jzZ3d22Y=
 From: Sean Anderson <sean.anderson@linux.dev>
 To: Michal Simek <michal.simek@amd.com>,
 	u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Frantisek Bohacek <rutherther@ditigal.xyz>,
+ Sean Anderson <sean.anderson@seco.com>, Vinod Koul <vkoul@kernel.org>,
  Sean Anderson <sean.anderson@linux.dev>
-Subject: [PATCH 0/4] phy: zynqmp: Port several patches from Linux
-Date: Tue,  6 Jan 2026 16:54:57 -0500
-Message-Id: <20260106215501.727524-1-sean.anderson@linux.dev>
+Subject: [PATCH 1/4] phy: zynqmp: Allow variation in refclk rate
+Date: Tue,  6 Jan 2026 16:54:58 -0500
+Message-Id: <20260106215501.727524-2-sean.anderson@linux.dev>
+In-Reply-To: <20260106215501.727524-1-sean.anderson@linux.dev>
+References: <20260106215501.727524-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
@@ -64,23 +68,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series ports several patches/fixes from the Linux driver. In
-general, I have left the commit message as-is, only added . The
-exception is patch 2, where I have removed the original fixes tag and
-added one appropriate to U-Boot.
+From: Sean Anderson <sean.anderson@seco.com>
 
+Due to limited available frequency ratios, the reference clock rate may
+not be exactly the same as the required rate. Allow a small (100 ppm)
+deviation.
 
-Sean Anderson (4):
-  phy: zynqmp: Allow variation in refclk rate
-  phy: zynqmp: Enable reference clock correctly
-  phy: zynqmp: Store instance instead of type
-  phy: zynqmp: Only wait for PLL lock "primary" instances
+Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+Link: https://lore.kernel.org/r/20230711194542.898230-1-sean.anderson@seco.com
+Signed-off-by: Vinod Koul <vkoul@kernel.org>
+[ Linux commit 76009ee76e05e30e29aade02e788aebe9ce9ffd2 ]
+Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+---
 
- drivers/phy/phy-zynqmp.c | 178 ++++++++++++++-------------------------
- 1 file changed, 65 insertions(+), 113 deletions(-)
+ drivers/phy/phy-zynqmp.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/phy/phy-zynqmp.c b/drivers/phy/phy-zynqmp.c
+index 9649e660220..7151402666b 100644
+--- a/drivers/phy/phy-zynqmp.c
++++ b/drivers/phy/phy-zynqmp.c
+@@ -725,7 +725,10 @@ static int xpsgtr_get_ref_clocks(struct udevice *dev)
+ 		}
+ 
+ 		for (i = 0 ; i < ARRAY_SIZE(ssc_lookup); i++) {
+-			if (rate == ssc_lookup[i].refclk_rate) {
++			/* Allow an error of 100 ppm */
++			unsigned long error = ssc_lookup[i].refclk_rate / 10000;
++
++			if (abs(rate - ssc_lookup[i].refclk_rate) < error) {
+ 				gtr_dev->refclk_sscs[refclk] = &ssc_lookup[i];
+ 				dev_dbg(dev, "Found rate %d\n", i);
+ 				break;
 -- 
 2.35.1.1320.gc452695387.dirty
 
-base-commit: beab3fe49e1e9209dd32fe2791e7ac706038460f
-branch: phy_zynqmp_backport
