@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F93D0D172
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B7CD0D171
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DF1A83A2D;
+	by phobos.denx.de (Postfix) with ESMTP id 7B3FB840B0;
 	Wed,  7 Jan 2026 21:28:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qp57833v";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xjlz27M2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72CC3840A9; Wed,  7 Jan 2026 21:28:21 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id B983483A26; Wed,  7 Jan 2026 21:28:21 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3050D83A26
+ by phobos.denx.de (Postfix) with ESMTPS id 3FBAF83A2D
  for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 21:28:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+david.ixit.cz@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id BF765600AD;
+ by tor.source.kernel.org (Postfix) with ESMTP id BB380600AA;
  Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8870FC2BC87;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6BBC1C4CEF1;
  Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1767817697;
- bh=bmmZzua/duFCTuBjCY1gFaXOCBC198ejRbdmlKcmZKQ=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Qp57833v42EwV7NZOt5UHGwyxo46v2mEheyLc9pzVyhLCzPPLhW5s8N1L9D+YmZlr
- kvL/BUm3wMmjqHefTBFvK6qt2bbTKo5JCUur8lRLHuVm4RQ2fkxB4iisXZIRJdRMS7
- IRWouw8RNQLDe0dB/4P7z+ikie69wvhW8GO+HTJLMoaAItUWSKQPHTxqvydjx9Bqew
- t21OM2u/N2vjDzAcTAknTj+/sFUMLnq/sVwmbo3mt0l98c+gLfhZJ5dxPlyPLoiIAP
- 1CNvxBwymtCAYXkf8UeRXJ20IyaXySdqRA7k39IbrD9LDIinusQ8R/6U4AY7uzhV/v
- INLfJy+wTYliw==
+ bh=3SzK7zFNN2411j+CdvliX/rSTfJSXnP/60IXCawXpqg=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=Xjlz27M2sNwrqqHbXu9UA88HjuuUQSGCOOu9xgi9x6/nyU92AT9goSU9SqG8/30sz
+ vlXciONEg0wEsieA4Sxv6XrvNi/pms0dAu32iUTeQyzq7ahW8RdguEzCZq/yn4T/43
+ Bklwz0KM3GESSZxeMg5OkSSADTuVmokD9AXmYB5r97QLp/GrJxrxDY5EaHp/DOCwaO
+ wX97eJjaF7o+wMncyJHvaXj7xL44btVTKuM1AtCCrCHklwu3PhHh2NCv63JEHpH3hr
+ U/iX2Zjvv6Joj2WeAkXCR5ZguyCkaByNsy8MlTJlqGBrp7oWzsHZwsu9RBmhlZDq1G
+ sX+P7WsVca7SQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 817E7D0D173;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 63DCFD0D172;
  Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
 From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Wed, 07 Jan 2026 21:28:16 +0100
-Subject: [PATCH v3 2/2] configs: Add google-pixel fragment config for Pixel
- 3, 3 XL, 5
+Subject: [PATCH v3 0/2] Introduce Pixel config fragment for chainloading u-boot
+Date: Wed, 07 Jan 2026 21:28:14 +0100
+Message-Id: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260107-pixel-config-v3-2-02a25e3fdcfa@ixit.cz>
-References: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
-In-Reply-To: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIAN7BXmkC/12MQQ6CMBBFr2K6tmRmoAKuvIdxAWWASQyQljQo4
+ e62bkxcvv/z3q48O2GvrqddOQ7iZZ4i5OeTsmMzDayli6wI6AIIpV5k46e289TLoIsWTMXWFoy
+ tisriuI9/yt0fkUfx6+xe33rAtKaQgZJqhLw2kCGaAgrQpLsmSHeTTdbMvlWyA/2MCggAc1Nnh
+ ERR1vhvHMfxARwKWCXPAAAA
+X-Change-ID: 20260107-pixel-config-4b058ecc4e1b
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, Petr Vorel <petr.vorel@gmail.com>
 Cc: Casey Connolly <casey.connolly@linaro.org>, 
@@ -64,21 +65,21 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Matthew Croughan <matt@croughan.sh>, phone-devel@vger.kernel.org, 
  David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=914; i=david@ixit.cz;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1527; i=david@ixit.cz;
  h=from:subject:message-id;
- bh=h+Nc04IrcZG+c2wA/6MKW+Am3zzHGmDuKQCDq3RHC7o=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBpXsHgAKzTizvWemARKtvkORLcddhSm0O/drIFU
- vG+EdEi3OOJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaV7B4AAKCRBgAj/E00kg
- coNtD/9FawEBToqkb+y+9El/UCdcE6VxYQM+2Xd9RRC9SnduuhSSlaJbOr7fOuyhcpTpJ9m61ju
- b0GU1siqHDNfZCE7Smcq2Tyr4I0ZTiEb+DM/oniyHjNI/Rg9ZqgCNENuNvgjSz0MKuDnfyRfYdq
- BaPcmp+ZnbXogqaTqBcnhEUkC7DJ4xj/LjPeMoZABMdj/PV9cytgrxsAeD8SBgO8Yszs35DfFSX
- 6iEK5z/3Iw7kp6xxW5pmF9r/UwrLv6DGSiR6TSyI8zVW/ybD4V9ohb54Y8P1e2cbKrLHr5682mE
- Kn7heA4FqtJ1RQdkuAgDe+IJnuRHXA7KTBDi5IR2fOQL+s16ap5HwYNCV8LoaQW21X+ehvj9S6P
- +bWr9qV/absE605KLAX5LLhcT6SIBnc6wsLc5nKP9wp9CrReT7uzZk2CtSgJxxD0vf/rzaoDwWz
- 91gbrezK3W4/IWPsyxkcf+iQwJIFg3Z55sNo6Wrk7AIJV1qh63rRGvQHqwoQdDI/NN2aLtsp0rs
- Z/80ovoxxKUcWP4KU4ZII0zGtHl2DT1m7K5Ln/C55tpYLJ49GAid9loKNcb4mdcnq/3OGWUMw5L
- b/vhzovFLJzcQ/d8d/R8dwVRXfEzA22T4/CMrlqhb8hGa6lKS8U/GhgssJIJnsqCL/MaZ8KgGZr
- CMeGTRhMG7LLBew==
+ bh=3SzK7zFNN2411j+CdvliX/rSTfJSXnP/60IXCawXpqg=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBpXsHgu96s46mCrxnpGsffw4TgllkxFfuWTq5+3
+ iwbEQc5CqCJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaV7B4AAKCRBgAj/E00kg
+ cpSqEADSu2qQuMc1MVOasA0CHhgfMV/kLoPVKLLZilp35ax//QRKLWCxPW+IgvXKfaKIsttQcMw
+ o2OV+MFld7FZqyFgH91vpxnCCDqYqyAfGaHTbiSh3OYiczaZgvzaL12ltRYmjoozBiRrqVYbJOV
+ EDE8XzbMWPRGy24rt+dGROHQj1eO3iBkx+ZLmd5fxgvA1pfIhvvZlTcJzxa//mgGyBBIhBLDY8r
+ Anwv8mxcM+3v18lCPrcIUhK7haLVQhrc+LPim9Nqxg6/9rgqCYfeU/pvxoV508v1BnOhlNmnPxb
+ +CQvSq2k28AWQTNGwo6jichmbID8WRQUlPabluUoGW5FRWokx89BdJixzyjjrmFWb2WdDbG6WpC
+ M9qqdpEvqSlO7vjxKDF2bSoVMwlpecdkAzgfWdO/uBOh4b94zPApi5s3QJnw5OjKDxJYosWobHw
+ vukify/BZa/llOL2Ew4mE/xOzqKonWVcxFqORjGOS5iHp7/UhlKCud0uFpVFEskjeWP3u+sq9hI
+ kP3FhqcxkGwz3mFQ18/EutW+8N6URCKbfRcSohj4KX7TlT1cJq9+cIftAKaGUu2uiQ/DsccWPme
+ oTWcqogBMNU6nQFQFGIy18KXaDGv1wmvdfnq9QFtCj7bP54q1dErhcG8M5kxznm61SPiCZ+UDJO
+ /Cp4Hp3s/1f9UpQ==
 X-Developer-Key: i=david@ixit.cz; a=openpgp;
  fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
 X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
@@ -100,33 +101,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: David Heidelberg <david@ixit.cz>
+Snapdragon Google Pixel bootloaders require the TEXT_OFFSET to be
+exactly 0x80000. Without this, U-Boot or kernels will fail to load.
 
-Introduce a fragment config for the Pixel 3, Pixel 3 XL, Pixel 5.
+This patchset documents Pixel 3 and Pixel 3 XL and adds the necessary
+config fragment along with usage instructions.
 
-On these devices, U-Boot is chainloaded via fastboot. However, due to
-additional requirements added by google, the image header must have
-a specific value for the text offset.
-This is solved by setting CONFIG_TEXT_OFFSET to 0x80000 in U-Boot.
+It has been tested on Pixel 3, 3 XL (by me), and Pixel 5 (by Petr Vorel).
+
+The corresponding DTS files (sdm845-google-blueline and crosshatch) have
+already been merged into the Linux -next, so mainline U-Boot will receive
+these devices support soon.
 
 Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- board/qualcomm/google-pixel.config | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes in v3:
+- Renamed google-pixel3.config to google-pixel.config as it's not
+  limited to Pixel 3 / 3 XL, but also 5 and possibly others.
+- Reworked the documentation. (Casey)
+- Reworded commit message. (Casey)
+- Link to v2: https://lore.kernel.org/u-boot/20250802001359.2122103-1-david@ixit.cz/
 
-diff --git a/board/qualcomm/google-pixel.config b/board/qualcomm/google-pixel.config
-new file mode 100644
-index 00000000000..999d4e45268
---- /dev/null
-+++ b/board/qualcomm/google-pixel.config
-@@ -0,0 +1,5 @@
-+# Enables chainloading of U-Boot on Google Pixel phones using
-+# newer bootloaders (Android Q/R)
-+# Use for following devices: Pixel 3 (blueline), Pixel 3 XL (crosshatch),
-+# Pixel 5 (redfin)...
-+CONFIG_TEXT_BASE=0x80080000
+Changes in v2:
+- Added documentation of Pixel 3 / 3 XL into doc/board/qualcomm. (Casey)
+- Link to v1: https://lore.kernel.org/u-boot/20250729103950.1154040-2-david@ixit.cz/
 
+---
+David Heidelberg (2):
+      doc: board: qualcomm: document Pixel 3 / 3 XL support
+      configs: Add google-pixel fragment config for Pixel 3, 3 XL, 5
+
+ board/qualcomm/google-pixel.config |  5 +++++
+ doc/board/qualcomm/board.rst       | 20 ++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+---
+base-commit: 53c0d5b387956bb4070a943b61991898373a20e2
+change-id: 20260107-pixel-config-4b058ecc4e1b
+
+Best regards,
 -- 
-2.51.0
+David Heidelberg <david@ixit.cz>
 
 
