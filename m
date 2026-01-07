@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDACDD0D16D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F93D0D172
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:28:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C969840F6;
-	Wed,  7 Jan 2026 21:19:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DF1A83A2D;
+	Wed,  7 Jan 2026 21:28:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V9D8s1rE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qp57833v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97193840B0; Wed,  7 Jan 2026 21:19:37 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 72CC3840A9; Wed,  7 Jan 2026 21:28:21 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DC4084082
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 21:19:34 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-34c1d98ba11so2028565a91.3
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 12:19:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767817173; x=1768421973; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=imZwrqM/7rQGdRRXMgICblIcq84Xp7iu7VZrZIyLX44=;
- b=V9D8s1rEj5VovM3NaNOSP8YLFeTzbizKUfBeJvXZ+NuayhQRTcHEhRtlXZrz+YPy+G
- WvQfDIa/b7gRlExrgOvs5unaebR3Le8bwLzcwwCoUIidHFwARFymSncpjZ97CT8Nrm/1
- 94t6OtHPySzqTpoPdeivJeKzLCQT8p3hpE/FmFpo2KDPrVdyF3i75vyMsTEXMT0Y8hx+
- OAM6p14rXaqBuUoRqGGioht7yasD9H8ksSVFG2gA9ARkdtEs8bdrwMktUCvmJ60SZJU9
- euwc0l/kim5ZUgWNbyNTYnkbIYn5YGxJguGZCv76ahxRb1UWWqT+w4ej0ZUvQTLtOZ1P
- qgPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767817173; x=1768421973;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=imZwrqM/7rQGdRRXMgICblIcq84Xp7iu7VZrZIyLX44=;
- b=d/Q3UafSQNma6xoEOYsweA3UTNv36gkj4OxhfLCDjXlFMHOHGlfTvp/F/YpHteWTt0
- j8ueXNQnqSFVnmlShX+YHQIlRYzb3lij/mtWWQzk4twwbfRp4QIYb2ocN8UIuZr1brAF
- 05RR4zJP2ysIG1Z46vEO3Oz48EudimfbiSLwWfzN5AkiWGzgMvCxA65Jib6oqIgnDviJ
- SoIeKJCFkCtjIh3yd3t/IzRzzgNYhswG8vEUtYKg+Qo2bYar3+ny24QuLhH+isnBeqd6
- zjgmtUHlooQaUH0onyNa3hiyr7f99OKWFNKiLysFlThGsML9/ECSLm5w3uTB9+axJJOS
- UgUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWebhv7R1v9gJIIaBJmd+SM1FYQDblx4kVXlJwkhZiyrUI24kTBSInhBOdqL1lsnF67NyQQxic=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzxt6Squ+ZC0I70EwNIdjpvbQaOHBbNrsz5g2HoDeI4zXnDN8DT
- S1hGwXv5MNIteCp5jSD0l7/xef8jpczHbGcHhZCocPirmdZqY/8rZEeA
-X-Gm-Gg: AY/fxX7bGGFc9v9XDfknBnE+SBay32YxIsrAIBEYYMkKg+pkzGxZK3hL94sQC90OpWV
- MaCAEQKKazvaS7QMlTIFgBgG28xTi+m7pp1H4yAty/bQShsf5gqjNQnpiHsNEjBvZ2cQg0TeMyM
- RNQi3+sdglzONaTUlLHqRbtPBJF7oKoMIlRBLZ8k87JM/5geIp4Z2zxeUSEqmmxK03TOleRarUu
- Acw+/PoWBx2DxQg/IBxudRfle6PjW909l+/qAJIf33GQHfjpqRvG0BbkIsK2lgvfmcvCJGd0qzZ
- Roz89lH6gfyKOIz7yxvFEnPuuZKIwghycJlI3Yk5xeo099nTjnsmifMm7iMsDsZfoWwzolNGTi2
- fnbc7clmypj9Zqennw2GKiJNlWicqH6pH2KG+DR3hX2sbbd4xuXCgMR9xmfk4M4k32d3lRUk+s8
- 0SmAFZFTmHZrNh7g9I7ZyeSpHDhpRxLA6VA/T+hUCVmz3da1Bs2TSN/jCFqwHxaORV1/9Hy+mfz
- q23NqtKHLMYdLEYp07KIedniV1nWVD4
-X-Google-Smtp-Source: AGHT+IEJf+R1i9SadZeUNZdEtj+pkgaKUxxhxHL5sGHtZ/LywGnNAI4R9ikw04aS2YVBFKXt7IJDhQ==
-X-Received: by 2002:a17:90b:4b0b:b0:330:6d5e:f174 with SMTP id
- 98e67ed59e1d1-34f68d0bc5fmr3348169a91.20.1767817172847; 
- Wed, 07 Jan 2026 12:19:32 -0800 (PST)
-Received: from visitorckw-work01.c.googlers.com.com
- (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34f5fa947ecsm5766077a91.6.2026.01.07.12.19.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 12:19:32 -0800 (PST)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: alison.wang@nxp.com,
-	angelo@kernel-space.org,
-	trini@konsulko.com
-Cc: me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com,
- sjg@chromium.org, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
- u-boot@lists.denx.de, Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v6 8/8] MAINTAINERS: Update m68k entry
-Date: Wed,  7 Jan 2026 20:18:37 +0000
-Message-ID: <20260107201838.3448806-9-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.52.0.457.g6b5491de43-goog
-In-Reply-To: <20260107201838.3448806-1-visitorckw@gmail.com>
-References: <20260107201838.3448806-1-visitorckw@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 3050D83A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 21:28:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+david.ixit.cz@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id BF765600AD;
+ Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8870FC2BC87;
+ Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1767817697;
+ bh=bmmZzua/duFCTuBjCY1gFaXOCBC198ejRbdmlKcmZKQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=Qp57833v42EwV7NZOt5UHGwyxo46v2mEheyLc9pzVyhLCzPPLhW5s8N1L9D+YmZlr
+ kvL/BUm3wMmjqHefTBFvK6qt2bbTKo5JCUur8lRLHuVm4RQ2fkxB4iisXZIRJdRMS7
+ IRWouw8RNQLDe0dB/4P7z+ikie69wvhW8GO+HTJLMoaAItUWSKQPHTxqvydjx9Bqew
+ t21OM2u/N2vjDzAcTAknTj+/sFUMLnq/sVwmbo3mt0l98c+gLfhZJ5dxPlyPLoiIAP
+ 1CNvxBwymtCAYXkf8UeRXJ20IyaXySdqRA7k39IbrD9LDIinusQ8R/6U4AY7uzhV/v
+ INLfJy+wTYliw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 817E7D0D173;
+ Wed,  7 Jan 2026 20:28:17 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 07 Jan 2026 21:28:16 +0100
+Subject: [PATCH v3 2/2] configs: Add google-pixel fragment config for Pixel
+ 3, 3 XL, 5
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 07 Jan 2026 21:19:48 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260107-pixel-config-v3-2-02a25e3fdcfa@ixit.cz>
+References: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
+In-Reply-To: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Petr Vorel <petr.vorel@gmail.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, Simon Glass <sjg@chromium.org>, 
+ Petr Hodina <petr.hodina@protonmail.com>, 
+ Matthew Croughan <matt@croughan.sh>, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=914; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=h+Nc04IrcZG+c2wA/6MKW+Am3zzHGmDuKQCDq3RHC7o=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBpXsHgAKzTizvWemARKtvkORLcddhSm0O/drIFU
+ vG+EdEi3OOJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaV7B4AAKCRBgAj/E00kg
+ coNtD/9FawEBToqkb+y+9El/UCdcE6VxYQM+2Xd9RRC9SnduuhSSlaJbOr7fOuyhcpTpJ9m61ju
+ b0GU1siqHDNfZCE7Smcq2Tyr4I0ZTiEb+DM/oniyHjNI/Rg9ZqgCNENuNvgjSz0MKuDnfyRfYdq
+ BaPcmp+ZnbXogqaTqBcnhEUkC7DJ4xj/LjPeMoZABMdj/PV9cytgrxsAeD8SBgO8Yszs35DfFSX
+ 6iEK5z/3Iw7kp6xxW5pmF9r/UwrLv6DGSiR6TSyI8zVW/ybD4V9ohb54Y8P1e2cbKrLHr5682mE
+ Kn7heA4FqtJ1RQdkuAgDe+IJnuRHXA7KTBDi5IR2fOQL+s16ap5HwYNCV8LoaQW21X+ehvj9S6P
+ +bWr9qV/absE605KLAX5LLhcT6SIBnc6wsLc5nKP9wp9CrReT7uzZk2CtSgJxxD0vf/rzaoDwWz
+ 91gbrezK3W4/IWPsyxkcf+iQwJIFg3Z55sNo6Wrk7AIJV1qh63rRGvQHqwoQdDI/NN2aLtsp0rs
+ Z/80ovoxxKUcWP4KU4ZII0zGtHl2DT1m7K5Ln/C55tpYLJ49GAid9loKNcb4mdcnq/3OGWUMw5L
+ b/vhzovFLJzcQ/d8d/R8dwVRXfEzA22T4/CMrlqhb8hGa6lKS8U/GhgssJIJnsqCL/MaZ8KgGZr
+ CMeGTRhMG7LLBew==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,46 +94,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: david@ixit.cz
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename the "COLDFIRE" entry to "M68K" to reflect that the architecture
-support now encompasses traditional m680x0 CPUs (e.g., M68040) in
-addition to ColdFire platforms.
+From: David Heidelberg <david@ixit.cz>
 
-Remove Huan Wang from the maintainers list as she is no longer active,
-as suggested by Angelo Dureghello.
+Introduce a fragment config for the Pixel 3, Pixel 3 XL, Pixel 5.
 
-Add myself as a co-maintainer to assist with reviewing and testing
-m68k-related patches.
+On these devices, U-Boot is chainloaded via fastboot. However, due to
+additional requirements added by google, the image header must have
+a specific value for the text offset.
+This is solved by setting CONFIG_TEXT_OFFSET to 0x80000 in U-Boot.
 
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
-Changes in v6:
-- Remove Huan Wang from MAINTAINERS as suggested by Angelo Dureghello.
+ board/qualcomm/google-pixel.config | 5 +++++
+ 1 file changed, 5 insertions(+)
 
- MAINTAINERS | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/board/qualcomm/google-pixel.config b/board/qualcomm/google-pixel.config
+new file mode 100644
+index 00000000000..999d4e45268
+--- /dev/null
++++ b/board/qualcomm/google-pixel.config
+@@ -0,0 +1,5 @@
++# Enables chainloading of U-Boot on Google Pixel phones using
++# newer bootloaders (Android Q/R)
++# Use for following devices: Pixel 3 (blueline), Pixel 3 XL (crosshatch),
++# Pixel 5 (redfin)...
++CONFIG_TEXT_BASE=0x80080000
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9fff8989684..d6e03c21f20 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1045,9 +1045,9 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-clk.git
- F:	drivers/clk/
- F:	drivers/clk/imx/
- 
--COLDFIRE
--M:	Huan Wang <alison.wang@nxp.com>
-+M68K
- M:	Angelo Dureghello <angelo@kernel-space.org>
-+M:	Kuan-Wei Chiu <visitorckw@gmail.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-coldfire.git
- F:	arch/m68k/
 -- 
-2.52.0.457.g6b5491de43-goog
+2.51.0
+
 
