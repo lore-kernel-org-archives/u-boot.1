@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D66F1D0D167
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 19:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AFEAD0D167
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 19:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B74884082;
-	Wed,  7 Jan 2026 20:02:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1F178405C;
+	Wed,  7 Jan 2026 20:02:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RJiUcY/8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lcvv8wZR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F7C783A26; Wed,  7 Jan 2026 20:02:51 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 548008405C; Wed,  7 Jan 2026 20:02:54 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5870484082
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:02:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EDA283A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:02:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-64dfb22c7e4so2012039a12.1
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:02:44 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b7277324204so384522866b.0
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:02:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767812564; x=1768417364; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767812572; x=1768417372; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hnC3lYIl0djgEWlfa1G7Tm0Gu9SoVM5QVPn7fw2XiJk=;
- b=RJiUcY/8+GECeY0MLsQGDr8046VjrKAtkYq3SOKivh0cjl3gauizNcp39pOr4BHDJh
- HJzjvTOyQNvlr0An88NP8xunDEEymFsxKKyrmlhT618wjRdEW+68DTKocgx0uB3h7pQN
- CCeRh4yHfY2FAjQXtJlFWuf0uX8W4s1JGuWHA=
+ bh=wCG0xthFYOTPl0A2fbsiaxiaHzW/DW31ioMSy2g+DXk=;
+ b=Lcvv8wZRpw5f5arSCVxWAloabOcPkmX6pKmL3avH5FNlbpVYgMXa/JZpoXunZRY3xG
+ Ok7YOINF+0WmmUyrMowksLiJl7b4GWhcpiZEEHllOXaL5y+EZIcM/+IissqQYiPstB3E
+ Gd+MRjAD3ESFrzn/u6uxNtiq2e16ZA5ZYiTzc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767812564; x=1768417364;
+ d=1e100.net; s=20230601; t=1767812572; x=1768417372;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hnC3lYIl0djgEWlfa1G7Tm0Gu9SoVM5QVPn7fw2XiJk=;
- b=aKfu/wCIP4xBdCxXPxo0fWh4lfdhFrLbuXOzqaiel4voP8AzE6ic+hmySxNk8A3Loz
- EmH/CWXLJFfpalyXD53G6uHgbuMkGwAYTbmouoO9zwdnlwOm2l1bDw+Vmz7X1Q6xKxRP
- tvdVFsJ5Qepz8AVXuft75pN+2QSz5QV20lzzlbrITpy4iDXSNliKWc4J4lBQBK/0Yvzz
- bEX5K7XFJ/hh2DLlE3INHkbaoNyNYInUBHB0ifzVW3Ge86fq09I2lyfj8VxyBpJaECZe
- UNV3n4HTtgxfC/zjLWBD60HDBTRXK1etePVZkPRByVYFvPzyytnSnCXn+mKwUBPt4ZYF
- cfhw==
-X-Gm-Message-State: AOJu0Yz7tA6DAQnOX/xr0HDLxi9Gz4fR7RZUEejMbD0/kKKVdKHVoi7n
- kqx1j0M7SAZ2q1fAz3on+3jzk0yYZYUaYterU/neMRR2gopa56Cs2A7fdHuz9X909yaWVub9kct
- Tp7Gr2EXNLPPVlsxBKNI8acACSclSoeLF+VceBdtE
-X-Gm-Gg: AY/fxX7cJXaRxpxI6gQSXjBH+p2k8jAUJshMtHFCQrGtyI09xFaI66n5ihRBRhhwlYL
- E8qQj9R8vBJMxMvnjQ2uT645UIE2Fr/Tz/hUe+nZ/RweAndEMgMiw8LXBSYTO6VLPq/3hcmnsWf
- dAaq5bXiKChCi0Rf2pIzAGp8+aAkIORVhHIYDlQJRwgM4ngdJQug5GQ60CFfX38rtlXmBe5E53r
- eYHJxxQrBxXqjA7N57R4t8AgEyWrOUCWz1amTyj0GhU2TGdVO6L0j/y9rhzuMd4r0r1Ig==
-X-Google-Smtp-Source: AGHT+IHwuRJ39/y1SuGFZSWzKx4Wdpd7/20nbLchb6ZV+ZlEzT1NEa9fRfN80noG61hbTjfHYAJzc5ZZM3c7ua9uq7w=
-X-Received: by 2002:a17:906:ef0c:b0:b71:ea7c:e501 with SMTP id
- a640c23a62f3a-b8444c593c2mr431817766b.4.1767812563612; Wed, 07 Jan 2026
- 11:02:43 -0800 (PST)
+ bh=wCG0xthFYOTPl0A2fbsiaxiaHzW/DW31ioMSy2g+DXk=;
+ b=WO3WryjOV/G0QgO2OEigqocxcv86Vqzoajx97hs1HU1U0Ji9lsG/0Ed74LmpDwtsWc
+ od/VqZnQPBKD/T++k/SaFXd+gvPw0p7ep+3co85LCPo+6Plz5FxWEXHh7HN4QuDaZ1QP
+ QxDpa8nPCl+7R4paGF/tW338s/912rXXamT/u9/ajCS0keA8dfGIdIMNnN5VH7rFOf8B
+ 9hRA4q9l4hbS1fVOHFGkgtSpgg+FtPJNzMBftYQ0oDiaP/iCXgQObuGd2aERMFTER0+A
+ piwup76CaV2QPpWBrjYSvchVyxFr6D1qXrR7NKUDU08q8LssY/P/cjBvCNMeza6uRYx0
+ 1ZaQ==
+X-Gm-Message-State: AOJu0Yw1rWEQU9wh028jTgnPydjg4YWiSU6MSA0nuLMBfGnAhGI9obXW
+ K9CpFJnMcsZzBq9BCeevozScibrABhKEetbKcTU3lCrvynIIXt2LNG8pEK4+sRCetdb+KYIaHgz
+ qdc2nF2N0gX09zM/12qe6h+Ku7AWVp2Xyr9PjP0RX
+X-Gm-Gg: AY/fxX7lnyS3vFrynWcw1AlR3AAS3OxmRSsbwoF4QVs2GwEW/k1jTb7sXvtN5emqIAz
+ 8WIQ44Zott4RZsYwLrYkqLxm9gwGJfQ/FPCjpyUA0mFllhUJEAuphgdV2WpOfml08V5dDqQFXHS
+ vGeNw6vixJ8LUJReaf/kZsUR+k9m2c8U/CXeg8W4IW/6QuASl62Q49bbLfGVfAVWprksgD/RCDe
+ eow0bG7XieHoXabQAeJHMHVot5QwrXa269PwSfMK72Ypb2zqP/0LEfjpLl2jfC+jp9q+g==
+X-Google-Smtp-Source: AGHT+IE3fU+A0sLrsH+7xL3XfeMc39nF22dIsp3N8OIrdIjkPclK7yyrXBQGi8Kb1+OmKin7Ut5e+0fBMq1wJOsigZw=
+X-Received: by 2002:a17:907:2d0e:b0:b80:b7f:aa14 with SMTP id
+ a640c23a62f3a-b84453a1272mr350251266b.32.1767812571634; Wed, 07 Jan 2026
+ 11:02:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20260107003131.3064800-1-simon.glass@canonical.com>
- <20260107003131.3064800-10-simon.glass@canonical.com>
- <57EAA792-D01D-4D72-BA46-259C8E0A7D32@gmx.de>
-In-Reply-To: <57EAA792-D01D-4D72-BA46-259C8E0A7D32@gmx.de>
+ <20260107003131.3064800-6-simon.glass@canonical.com>
+ <B1959B8B-8D25-499B-B1E8-02178F67A191@gmx.de>
+In-Reply-To: <B1959B8B-8D25-499B-B1E8-02178F67A191@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 7 Jan 2026 12:02:31 -0700
-X-Gm-Features: AQt7F2rIzERir1dVJ_JksL4MZyR1KdBNSNfkdWvK-iSJyH8KPVtpxcFKTTCOXok
-Message-ID: <CAFLszTjw848wUp3wMnewneS6Mss2dDr2xKcB2192FBhpT5GLtQ@mail.gmail.com>
-Subject: Re: [PATCH 09/10] efi: Drop EFI_GRUB_ARM32_WORKAROUND
+Date: Wed, 7 Jan 2026 12:02:39 -0700
+X-Gm-Features: AQt7F2qTgEdT_rYI42Nl_Z635spb4xobZoAsy-oFmXPWDM0w_v0HuWlHQpBxQt8
+Message-ID: <CAFLszTi-gRmj2YtHfG2F3u0feNMcC1+h5hwAvNTYJ+xC1JQnJA@mail.gmail.com>
+Subject: Re: [PATCH 05/10] bootm: Do bootstage processing in bootm_final()
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <simon.glass@canonical.com>, Adriano Cordova <adrianox@gmail.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>,
+ Simon Glass <simon.glass@canonical.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Yao Zi <me@ziyao.cc>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,46 +92,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 6 Jan 2026 at 20:46, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+Hi Heinrich,
+
+On Tue, 6 Jan 2026 at 20:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Am 7. Januar 2026 01:31:26 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> Am 7. Januar 2026 01:31:22 MEZ schrieb Simon Glass <sjg@chromium.org>:
 > >From: Simon Glass <sjg@chromium.org>
 > >
-> >This work-around dates from 2019 and grub 2.04 which is quite old. New
-> >builds of grub don't have the problem and old boards presumably use an
-> >older U-Boot, so don't need this.
+> >Mark kernel start before booting. If enabled, show a bootstage report.
+> >
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> >---
+> >
+> > boot/bootm_final.c   | 6 ++++++
+> > test/boot/bootflow.c | 2 +-
+> > 2 files changed, 7 insertions(+), 1 deletion(-)
+> >
+> >diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+> >index 71661334e11..dd7cac55f1e 100644
+> >--- a/boot/bootm_final.c
+> >+++ b/boot/bootm_final.c
+> >@@ -6,11 +6,17 @@
+> >  */
+> >
+> > #include <bootm.h>
+> >+#include <bootstage.h>
+> > #include <dm/root.h>
+> >
+> > void bootm_final(enum bootm_final_t flags)
+> > {
+> >       printf("\nStarting kernel ...\n\n");
 >
-> Where do you disable caches that are not managed by CP15?
+> This noisy message makes no sense for EFI booting. The kernel in not started in ExitBootServices().
 
-I suppose it would be SoC-specific. See for example the code in this
-arch/arm/mach-tegra/cache.c - I'm not sure if this is using a standard
-ARM thing but I suspect it is tegra-specific:
+Can you explain that a bit more? I believe that's exactly when the
+kernel starts.
 
-/*
-* Systems with an architectural L2 cache must not use the PL310.
-* Config L2CTLR here for a data RAM latency of 3 cycles.
-*/
-asm("mrc p15, 1, %0, c9, c0, 2" : : "r" (reg));
-reg &= ~7;
-reg |= 2;
-asm("mcr p15, 1, %0, c9, c0, 2" : : "r" (reg));
-}
+>
+> Operating systems like Ubuntu tend to boot the kernel with argument "quiet" for aesthetic reasons. We should not disrupt this.
 
-I also found this Nuvoton code that might qualify,
+When I boot (with this patch) I see these messages on the serial console:
+>>>
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  E  Name                      Filename
+---  -----------  ------  --------  ----  -  ------------------------
+----------------
+Scanning global bootmeth 'efi_mgr':
+  0  efi_mgr      ready   (none)       0     <NULL>
+** Booting bootflow '<NULL>' with efi_mgr
+      try_load_entry() Booting: Label: Ubuntu Device path:
+/HD(1,GPT,eccaac1c-b634-441b-a788-ab0f959111af,0x800,0x165800)/\EFI\ubuntu\shimx64.efi
 
-void set_pl310_ctrl(u32 enable)
-{
-struct pl310_regs *const pl310 = (struct pl310_regs *)CFG_SYS_PL310_BASE;
+Starting kernel ...
+<<<
 
-writel(enable, &pl310->pl310_ctrl);
-}
+So it is not silent today. The last line is the new one. Every other
+boot method writes this line.
 
+However, the video display is silent once grub has finished and I just
+noticed that this patch draws some pixels on the display, as if the
+EFI display is set to a different mode from what U-Boot expects. I
+suppose this is understandable, as grub has run by then and has
+probably changed the mode.
+
+So I wonder what would be best here. We don't support dynamic video
+sizing right now and I don't feel the urge to implement it just for
+this. Perhaps with EFI we could disable the vidconsole when
+exit-boot-services is called, on the basis that we cannot deal with
+whatever has happened to the display in the interim?
+
+Regards,
+Simon
 
 >
 > Best regards
 >
 > Heinrich
+>
+> >
+> >+      bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+> >+
+> >+      if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
+> >+              bootstage_report();
+> >+
+> >       dm_remove_devices_active();
+> > }
+> >diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> >index a56435d053f..80adc074070 100644
+> >--- a/test/boot/bootflow.c
+> >+++ b/test/boot/bootflow.c
+> >@@ -1381,7 +1381,7 @@ static int bootflow_efi(struct unit_test_state *uts)
+> >
+> >       /* TODO: Why the \r ? */
+> >       ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+> >-      ut_assert_nextline("Exiting test app");
+> >+      ut_assert_skip_to_line("Exiting test app");
+> >       ut_assert_nextline("Boot failed (err=-14)");
+> >
+> >       ut_assert_console_end();
+>
 
 Regards,
 Simon
-[..]
