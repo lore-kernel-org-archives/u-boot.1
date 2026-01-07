@@ -4,88 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0488C47BEB
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB15CF6BE0
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0294B83C08;
-	Wed,  7 Jan 2026 01:14:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 33D1D83C4B;
+	Wed,  7 Jan 2026 01:32:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O62pd9su";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q0rNptyd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F92583C4B; Wed,  7 Jan 2026 01:14:58 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id D62F983C4B; Wed,  7 Jan 2026 01:32:28 +0100 (CET)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE022839DE
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:14:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA36E83A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3ec5df386acso1096096fac.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:14:55 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-3ff4acb6eebso990724fac.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767744894; x=1768349694; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Eb+/J+RrZmmoLOkWmI6BxER9NDdGwzDNg6pdqXkVv4I=;
- b=O62pd9suhUUxO4/tWTuBUU83Hl405qaNK3SQDQ1mCh+TZnbV5OI3Io9Im8Y+WJK9yi
- 9Wtjz+oWtEp10h6+lIAhcMkFR/j60QMZovHkYhw0R/qqFRgzATkbB2ycGRxGICEdPzZa
- j74YD9cr4Z8iYOxuzaBx/HG1xDclJyTJZIIJU=
+ d=chromium.org; s=google; t=1767745945; x=1768350745; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n4fxMcBguZaediD/yk5mxYC7Py9Vend02aEKVYMiHT0=;
+ b=Q0rNptydV2FKVd1H9ILrpxn90PmyRYLVVhTlKgSY0qqXlmi3W+u4jnE1QtOgwCZg90
+ TpVm6F606YdHkvDGWA+9Dh4Fbh4KTN0s2rgDoNwwqPo6bRSKYJwz0NyEYi4eR2iAKK6B
+ I3EKlwkfqZPOFRwq8ca/RetKpu0E8S0yRheuk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767744894; x=1768349694;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Eb+/J+RrZmmoLOkWmI6BxER9NDdGwzDNg6pdqXkVv4I=;
- b=puIikuw9CQmlZqEDxDETdZ7hY8z80DXt60nHNCWrQKlvXhLEqK6BYA4kRuBgeMKR/k
- bk2hKJPlkrppSsLusUucg+S+VSOpV4zlmv8S5IXOa5ORFBKAGXQgiYZKNAgqIOdfnsAy
- p5tdjz8zMubLdU011yMgcZ6SYNbVFYNixdJDJONX34OvznLmR//1QFaITwc1udhq8O4M
- xzYQCEtbL/IH3GwEncTDqdIADGUcAD2rETQkwCzbjs7HKEOgQP416pXt5tUYno2U6RhG
- 1OsTrk5LMjZg0CeCphJl3d/CnwbH5lHph9LHeb7XtNXqKq+R+VA8f8lL/OZdvSQUWicB
- syhg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9hxPIalAUHd/IwMkQYOTYOJZ2FRyR2eKxeFh2Kt1q26vBWnuQpCfI1VU94es85Fz1HOFxyug=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOuN4f/DFYAebP9Ui5herxm/tXEsCUNbqRIZuNTyypnXZyHrCg
- dg+7W8lopbPnckpa4m/8FeVRE61UGrS4KO8atia8CKHRXn99RGwcRKYACMr6qKRaZIA=
-X-Gm-Gg: AY/fxX7I3Qq6lbKPKPqDSU4JVANCmVchBw5bdMYdp0NytesnbGPhU9qmZsKD+mO3Pqm
- VyM5phRNiEYZLlD2BerFYdPx8IS1dKOAJb2TK+wfQVGQC3ktPVWkbzBib1RKa/DrOPGPTYVjsA4
- OzL8LFNh/0TfcGhsjIWHc/iSCnDkZOgZ/1dSHJgO8MdeNMR2QzF5fHbBDF7sjyDTbjofnXy9jxL
- jxyRPHDM8QkjKOSmbI66Sk/13SEkmf5Gh/HxNWdZZYM6cLZZYl0HQ2dZOofb1BRcghkvgPEzlBW
- auDd1L5fK3Txkk+Yj+duofo+31y7x7a1Le6Bmk3KmOMro00nmO8k7EzSGZvGE0nEMN4E6jPO30O
- KPaTZFgDEVln1cJE6d1T+pXWKtPKx6Wb/ytQ/WrSyhZ94saFlAPxmnawnWZ2RcvXRW4mngiGBuQ
- 9DkFktbd0AdzgVemxL2njkL0OQWhjbvcBrYMRFB7h2Ibrhl+opgHkxk+QIN3UsXcCqR0IVgzHzu
- wbL087mScNX6DiaS6PDcY4RgGx4JAF4bU69IdM0YexezcJmkA==
-X-Google-Smtp-Source: AGHT+IHsJSEmdeyZcmkD7Rws/I1+Y8tTyjMeT5pySzZIhCwNUqo1w4U1ld2JHoh8Oo0f7UE4ahRNUw==
-X-Received: by 2002:a05:6870:1989:b0:2e9:93c6:6e4a with SMTP id
- 586e51a60fabf-3ffc0b652demr351083fac.38.1767744894547; 
- Tue, 06 Jan 2026 16:14:54 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa4de55ffsm2235270fac.2.2026.01.06.16.14.53
+ d=1e100.net; s=20230601; t=1767745945; x=1768350745;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=n4fxMcBguZaediD/yk5mxYC7Py9Vend02aEKVYMiHT0=;
+ b=ajup16tezAw0+onQErCyeILSGfHZnj6BYBSl94qbg9BfkcQbicOyUCalYmIApwD1or
+ mj8+s1KJ13xMZuj7ZS4aN4WA1hMoikJRJYqTSCHtIm2LbQ/HHvpCdnUj/RLUieURRDoM
+ bDHucBIG0mAHYwC79ZuOp74fOIvyaDjjUSysiiSHfEr2WaPHiSQxYUiTQT/FUrQB5e2s
+ fen6K6fYHzbqwwtmGvR6GWVfWMH+HOp/HGXXGSve9MwhG85SY3knQCvZEcySSBKWXt7V
+ o4HuH0Rujp41JHuoSfG9o8yVUQvLy3f0tu5S9/kaDEmAZVnRp5PbJUklQnY6fy1KjAdV
+ fd+Q==
+X-Gm-Message-State: AOJu0YwHMC5xNy5I2tW/TSvPB0IuUR2otiNp7UcD6i3FzebJJDOfYLwJ
+ 2nhky00JGG6vQpQw3gh0sTw5f+XV79oxcr1LT/lqDtFLK9w17d+I283gG589mPjdWrdByWKt9Um
+ EGP0=
+X-Gm-Gg: AY/fxX5Lq2uL+QzD/fol88dim6kasRabeCpyvGWfRYi8PhCrpjMqiRvBtUkG6Yhw7+D
+ RTFmEuhW1W1BAADW7mDfaazuFHoIZsDiBHeNhsJazAMGugJryr9iWLGnRxpgEMAJ/+9gfQ1Jlfr
+ x3SqoswiYpZqByjKRnXWaircG24PzLJEQCzEmRVrzqI5xNAzZuQGhPgbKQelm8rZ+CYH/qlxcaC
+ FNawbNaVGjwut+jiRbRXQ9Cp62FtdJV/iPOx7x8SRCpiEY284PcbTERIuDj8k76BadGJb9icVWr
+ DPfV+Nhjyxc3ObhUCmM8WXfU6Da7Q10AhFa/8lzvPKmUqDTQWCGpYwa03qSBQ4M4xMdi/69F84c
+ d4x8Y4dQ5IUQWnUNg9zw5aSEqETUkr1JZ1sVvTzm4uIyvZhF/nJHFMAiAiJv72DlpyHZpabmqHb
+ /8AISwimr7bl8mjCGi
+X-Google-Smtp-Source: AGHT+IEWIslz068y4NNxrTyQTrkWO3KsDvHhjuO8/UwlQFDzxtnytFbVTtjxgJjYCaIESmtFK69I6A==
+X-Received: by 2002:a05:6820:162b:b0:65f:54c7:3c76 with SMTP id
+ 006d021491bc7-65f54ec6c0fmr345065eaf.5.1767745944787; 
+ Tue, 06 Jan 2026 16:32:24 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 16:14:53 -0800 (PST)
-Date: Tue, 6 Jan 2026 18:14:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Sean Anderson <sean.anderson@linux.dev>, u-boot@lists.denx.de
-Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
-Message-ID: <20260107001451.GL3416603@bill-the-cat>
-References: <20260106223409.748335-1-sean.anderson@linux.dev>
- <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
- <70d036ee-e61b-44bb-9160-697e4d3f75e1@linux.dev>
- <702afe1c-ef45-4628-a4b6-fb52440e996c@mailbox.org>
+ Tue, 06 Jan 2026 16:32:23 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Simon Glass <simon.glass@canonical.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: [PATCH 01/10] boot: Create a function for final pre-boot steps
+Date: Tue,  6 Jan 2026 17:31:18 -0700
+Message-ID: <20260107003131.3064800-2-simon.glass@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260107003131.3064800-1-simon.glass@canonical.com>
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7S0tTcmnX6I92msr"
-Content-Disposition: inline
-In-Reply-To: <702afe1c-ef45-4628-a4b6-fb52440e996c@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,61 +111,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Simon Glass <sjg@chromium.org>
 
---7S0tTcmnX6I92msr
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There are various functions which announce that booting is imminent and
+do related preparation. Most of these are arch-specific.
 
-On Wed, Jan 07, 2026 at 01:03:04AM +0100, Marek Vasut wrote:
-> On 1/7/26 12:32 AM, Sean Anderson wrote:
-> > On 1/6/26 18:14, Marek Vasut wrote:
-> > > On 1/6/26 11:34 PM, Sean Anderson wrote:
-> > > > Extend the PCI bridge driver to enable resources associated with PCI
-> > > > slots like clocks, power rails, and resets. This is modeled off of =
-the
-> > > > PCI power control subsystem in Linux. The traditional compatible fo=
-r PCI
-> > > > slots in U-Boot is pci-bridge, but Linux uses the more-systematic
-> > > > pciclass,0604 so add that as an option.
-> > >=20
-> > > Oh, nice :)
-> > >=20
-> > > > +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
-> > > > +{
-> > > > +=A0=A0=A0 struct clk clk;
-> > > > +=A0=A0=A0 struct gpio_desc perst;
-> > > > +
-> > > > +=A0=A0=A0 if (!clk_get_by_index(dev, 0, &clk)) {
-> > > > +=A0=A0=A0=A0=A0=A0=A0 int ret =3D clk_enable(&clk);
-> > > > +
-> > > > +=A0=A0=A0=A0=A0=A0=A0 if (ret)
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return log_msg_ret("clk", ret);
-> > >=20
-> > > Should we use dev_err() instead ?
-> >=20
-> > I thought we weren't supposed to log by default in device drivers to re=
-duce text size?
-> Tom had a different take on it, lets wait for him. Me personally, I like =
-the
-> dev_* functions as they are compatible with Linux ones, which is nice and
-> non-confusing.
+In practice, most archs do the a similar thing. It would be better to
+have a common function, with perhaps some events for things that are
+really arch- and board-specific.
 
-I think consistency within a file is the first thing to worry about, and
-so log_msg_ret(...) to match the rest of the file makes the most sense.
+Create a new function for this. For now, nothing uses it. Be careful to
+avoid using BIT() macros which are not available with host tools.
 
---=20
-Tom
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+---
 
---7S0tTcmnX6I92msr
-Content-Type: application/pgp-signature; name="signature.asc"
+ MAINTAINERS        |  1 +
+ boot/Makefile      |  2 +-
+ boot/bootm_final.c | 12 ++++++++++++
+ include/bootm.h    | 17 +++++++++++++++++
+ 4 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 boot/bootm_final.c
 
------BEGIN PGP SIGNATURE-----
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 27ce73d83f4..f0bd2562f77 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -981,6 +981,7 @@ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	boot/bootdev*.c
+ F:	boot/bootflow.c
++F:	boot/bootm_final.c
+ F:	boot/bootmeth*.c
+ F:	boot/bootstd.c
+ F:	cmd/bootdev.c
+diff --git a/boot/Makefile b/boot/Makefile
+index 7fb56e7ef37..12477fabe28 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -15,7 +15,7 @@ obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
+ 
+ endif
+ 
+-obj-y += image.o image-board.o
++obj-y += image.o image-board.o bootm_final.o
+ 
+ obj-$(CONFIG_ANDROID_AB) += android_ab.o
+ obj-$(CONFIG_ANDROID_BOOT_IMAGE) += image-android.o image-android-dt.o
+diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+new file mode 100644
+index 00000000000..15ddbbe5e74
+--- /dev/null
++++ b/boot/bootm_final.c
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Cleanup before handing off to the OS
++ *
++ * Copyright 2025 Simon Glass <sjg@chromium.org>
++ */
++
++#include <bootm.h>
++
++void bootm_final(enum bootm_final_t flags)
++{
++}
+diff --git a/include/bootm.h b/include/bootm.h
+index 4060cec7fc0..32711eabb2e 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -16,6 +16,16 @@ struct cmd_tbl;
+ #define BOOTM_ERR_OVERLAP		(-2)
+ #define BOOTM_ERR_UNIMPLEMENTED	(-3)
+ 
++/**
++ * enum bootm_final_t - flags to control bootm_final()
++ *
++ * @BOOTM_FINAL_FAKE: true to do everything except actually boot; it then
++ *	returns to the caller
++ */
++enum bootm_final_t {
++	BOOTM_FINAL_FAKE	= 1 << 0,
++};
++
+ /**
+  * struct bootm_info() - information used when processing images to boot
+  *
+@@ -321,4 +331,11 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline);
+  */
+ int bootm_boot_start(ulong addr, const char *cmdline);
+ 
++/**
++ * bootm_final() - Announce and do cleanup before boot
++ *
++ * @flags: Flags to control what this function does
++ */
++void bootm_final(enum bootm_final_t flags);
++
+ #endif
+-- 
+2.43.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV2leAAKCRAr4qD1Cr/k
-Chg+AQCkCJUjbybni5UylM2RFpXRD7pQu18v+WzPSyqnC0PFLgD/UqxNfqGbGdUR
-BBVJ04EnT7IgSn3wjnzUQEGq6hLVxQA=
-=Jly8
------END PGP SIGNATURE-----
-
---7S0tTcmnX6I92msr--
