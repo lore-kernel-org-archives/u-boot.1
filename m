@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2695ED0D167
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 19:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D555D0D16A
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 19:02:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAC5D8405C;
-	Wed,  7 Jan 2026 20:02:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F23AC83A91;
+	Wed,  7 Jan 2026 20:02:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Iqt93lj+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q9N9EmqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 602F48406D; Wed,  7 Jan 2026 20:02:24 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 647AE8405F; Wed,  7 Jan 2026 20:02:39 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EBFF83A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:02:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BF3283A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:02:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-64fabaf9133so4258987a12.3
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:02:22 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9cb94ff5so3355664a12.2
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:02:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767812542; x=1768417342; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767812557; x=1768417357; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ctjkogSk9gJ2h2ipy6NdWIgZ5c0IYZmEsp6OVIfum2c=;
- b=Iqt93lj+j6m1gXV/GegJpV20BiuZlYilE+IhElLncy2au4FUT8H3hhmi45poh4WjHl
- CI4wfSMnE+uf/d5rMTtm4hoeuWaClZGpkK1+CE2nnvMUGlgnfeiPq+ho7Ec34LkkFB62
- qc37y3wY/nHtpqSi8vfM1/9NZVeyww+qdSqf8=
+ bh=VGE8PlVw1rFXj2vwqh10EKIAS6bvy6fB+dct7OA8l7E=;
+ b=Q9N9EmqUarcgs8biMyqu5jLfirjCU+l/WUSc+EmtAVStn3Qz/NSP5lK39tmgiFP1KB
+ FcFtlsbb5vQSJtYUJOes8vDjtnwIY+eUyVDtMfq0jh/SkJN3FAFB9ah8UoXsDqbM2Gg1
+ VUjZUh7nI4FFdwRrRLIUL4SkmvMEPfPL/X3Mw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767812542; x=1768417342;
+ d=1e100.net; s=20230601; t=1767812557; x=1768417357;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ctjkogSk9gJ2h2ipy6NdWIgZ5c0IYZmEsp6OVIfum2c=;
- b=LWq+QL3yidYKPBCU8cK0hN9xJy6Ncrym8jRhnTMlvejuuqDsbz2CkmE+iOQK4Ngf/9
- OYALTzL9BtO4kK10PXah6crv+NtWzdCUBZDN+biXH5adhZNvCU3K7S7m69DsirlwePaE
- 5j4cTXfnhJhhVVifFOG7c0DLTv2ZIW616bKgzJnt9yLPgaDpPpQY95HGBbSBRMLw3EBH
- kMD7xEWeJX/MiWEMn0oX19TRDF5qye0hwFuIhCkrPkKyJBj7Eq6yoFhRD0bbO3D0saNP
- 6anpjc4wIp4hv3488SBTVdZFgPkR51hbnGZMjxgLJf8PBEaXuDLOvzGEXFYwyp4xn16l
- J+Iw==
-X-Gm-Message-State: AOJu0YxREgeEaAwqd9n30PT6SWaVDFwPnTlvvsW+4OVkHPS304Q1f6FX
- 3P12/KdmCwDaBSgHxCapF9iY60p7r1sHKJkyOctCH282wXAc+XW8J+5MS3e/CuvWXyvr9NM9S0K
- Ifw+FII4q9uHVWVptptSwTns4FDiUA4IQOgok2kGug3az2zwTft4=
-X-Gm-Gg: AY/fxX6dbd52mxG9Eq5eO8du2DPEyqSODL/wbWUsKS0jfzO/MLl4CwCorCQUMUtlpIg
- wZDUlOnqKSbzIYUdWy4f8w3kYxx1VoxhWUFWh5zLHl43kLIOqzRLpcRCOWpDwmz+93PLdfmkPcY
- KvEcxv+Dw1QTC6N6vwK5dhZNNNAnhN8NCx3lSnruoeL1GRWn+gLgElPFIThQcxkWc/5K8asH2ym
- nYuasS2lVGusHgMjg+9GG/eFrofx8zBwiIBWIFAE9n5/IpEFIs1PXmzcv5aOFlkHFv3Ww==
-X-Google-Smtp-Source: AGHT+IEEQe5N6MXWZQI2fc/aif+/HUd04tJLg+6RrZ4aozQNFVKxSRvGUvh8t8JBdxn4xMhvk0o1EVxNMrxSTMiCnCw=
-X-Received: by 2002:a17:907:3e85:b0:b83:f538:c2a6 with SMTP id
- a640c23a62f3a-b8444c4d0d5mr329914266b.6.1767812541891; Wed, 07 Jan 2026
- 11:02:21 -0800 (PST)
+ bh=VGE8PlVw1rFXj2vwqh10EKIAS6bvy6fB+dct7OA8l7E=;
+ b=uYo8+VTvcr4oMFzFv+2vG+0Batx/hwXd7PGZN4Geb0/xWyqY2Bx/hcdihMBurbsc/l
+ KTF8QwQWJXjtubSbvDVjcP9tusIc4B93s5y92Z0yDc9eoNgbb3Ey0FkobmO6GqDPQYEo
+ KVeLWRGaIztwAVesZrRNB+oNyj2mV3bOkvYGQ4xE10I3/JKr8gcHqiRPt4AcCyoiQ8DA
+ 0KtjXEwpKYcRj1dRxjPtHajzuJu5LS8HhlER2DTK5Jcft88sA69WTTuUecF2Kh1Cuc6g
+ EjeXE4B4fE44oqfvWP61wMq0QvC8MYxn7inOsKxDtPrl0x8eM/psG8jXqJ3gxbgf7eIl
+ vuGw==
+X-Gm-Message-State: AOJu0YxN9T7FzGVFXnVRUBlOYZ04V4uNg5QkyAq8u7GOW556Dz+cQxrU
+ BUv60y2v2gLiEAMRN7n6N2SwEpryg3d2Ncmb2eTgy28OvrIk06QDSQX6ixIqaQU0yal3FWtZ/Eq
+ OLQK8iK/O9RWUIMOYTU+MFbT0G5pk2bkITwDbDxu+
+X-Gm-Gg: AY/fxX6LUyzygjqQrDl735pSbhcNXGFJmq5hYMri1ruqIzsO+xsoMN6ibPLjidIFlqi
+ MW+JY3QW4qto3taWLzqFqt4Td+wlcau9de6UvkKN9kxvx3CvcBYeA6ORxdC/xp7dJxALc01yHx3
+ t4KRMEBaXsRs3ahnhzqwVUejC7kfDpNcvohgAGiz3lXJ28YD+fSQOUS1WMNWQxjH8ONmFzehqct
+ dewb6XJErW0me2zaqMchxg+BJaauxH+9w9nKJV5nMvfGtVR1BA1D/NhVAwyKMftR0hk00UgaWSA
+ 8bn4
+X-Google-Smtp-Source: AGHT+IGKsh/WWjs+0UWYIAgFbjkUz0PBfgfBm44gQ/bUBc9SNw2u+BewF4+P6kqvGsXCi/tG/A9GC4nc+pZCG9o6mY0=
+X-Received: by 2002:a17:907:3f9b:b0:b73:54d8:7bc8 with SMTP id
+ a640c23a62f3a-b84454481e0mr339206266b.59.1767812556726; Wed, 07 Jan 2026
+ 11:02:36 -0800 (PST)
 MIME-Version: 1.0
 References: <20260107003131.3064800-1-simon.glass@canonical.com>
- <20260107003131.3064800-11-simon.glass@canonical.com>
- <CALeDE9OzMUm4PjymcOs_iAWWwoN+BSi+gDHXq4JvmCsB_YM5vA@mail.gmail.com>
-In-Reply-To: <CALeDE9OzMUm4PjymcOs_iAWWwoN+BSi+gDHXq4JvmCsB_YM5vA@mail.gmail.com>
+ <20260107003131.3064800-10-simon.glass@canonical.com>
+ <CALeDE9OvOKBqHJDBZhzvwFRm-=kq5ZYOcAxaGoesZokPZ09sdg@mail.gmail.com>
+In-Reply-To: <CALeDE9OvOKBqHJDBZhzvwFRm-=kq5ZYOcAxaGoesZokPZ09sdg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 7 Jan 2026 12:02:09 -0700
-X-Gm-Features: AQt7F2rQTSVVLG_qK78k0m7uheK_IID8ujUPqJ_-mKoe69e01b49X0-FQeH9FP8
-Message-ID: <CAFLszTgPoJOvryUEdx5FSkgejy4p1nYrXd5cNXU_FUaWqeNwCw@mail.gmail.com>
-Subject: Re: [PATCH 10/10] x86: Add cleanup_before_linux()
+Date: Wed, 7 Jan 2026 12:02:23 -0700
+X-Gm-Features: AQt7F2rN7027ox1z4wWP236u1uyRYCDmpm41nkto4yzuYHcvfYaIllrKiBRNhvU
+Message-ID: <CAFLszTir2RHqkz+8iBpTrOvK4yBmOv7Vn_D=EjWy_tGefZDLvQ@mail.gmail.com>
+Subject: Re: [PATCH 09/10] efi: Drop EFI_GRUB_ARM32_WORKAROUND
 To: Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <simon.glass@canonical.com>, Bin Meng <bmeng.cn@gmail.com>
+ Simon Glass <simon.glass@canonical.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jan Kiszka <jan.kiszka@siemens.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Yao Zi <me@ziyao.cc>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,62 +98,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 6 Jan 2026 at 19:37, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Tue, 6 Jan 2026 at 19:35, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> On Wed, 7 Jan 2026 at 00:40, Simon Glass <sjg@chromium.org> wrote:
+> As stated in the cover letter, this should be sent separately so it
+> can be assessed on it's own merit.
+
+See my response there.
+
+>
+> On Wed, 7 Jan 2026 at 00:33, Simon Glass <sjg@chromium.org> wrote:
 > >
 > > From: Simon Glass <sjg@chromium.org>
 > >
-> > This function is not present on x86, but there is an x86-specific
-> > version which is never called. Add the former, making it call the
-> > latter.
+> > This work-around dates from 2019 and grub 2.04 which is quite old. New
+> > builds of grub don't have the problem and old boards presumably use an
+> > older U-Boot, so don't need this.
 >
-> If the later is never called up until now why is it actually needed,
-> if it's not been missed until now why not just drop it? Please
-> describe why in the commit.
+> Just because something is quite old doesn't mean it's not still
+> needed, please describe the what the work around achieves, why it's
+> not needed any longer, the benefits of dropping the workaround, eg
+> does it slow boot process down?
 
-I'll add it to the commit message for v2. The code is:
+How about this:
 
-int __weak x86_cleanup_before_linux(void)
-{
-    int ret;
-
-    ret = mp_park_aps();
-    if (ret)
-        return log_msg_ret("park", ret);
-    bootstage_stash_default();
-
-    return 0;
-}
-
-It seems important to park the APs before booting. I think it was just
-an oversight.
+what the work around achieves - allows booting with grub earlier 2.04
+with 32-bit ARM
+why it's not needed any longer - dates from 2019 and grub 2.04 which
+is quite old. New builds of grub don't have the problem and old boards
+presumably use an older U-Boot, so don't need this
+benefits of dropping the workaround - just a code clean-up. I haven't
+noticed a slow-down recently but I have certainly seen boards in the
+last few years that draw the grub menu at an excruciatingly slow pace
 
 
 >
+> > Drop it.
+> >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
 > > ---
 > >
-> >  arch/x86/cpu/cpu.c | 5 +++++
-> >  1 file changed, 5 insertions(+)
+> >  configs/mt7623n_bpir2_defconfig |  1 -
+> >  lib/efi_loader/Kconfig          | 10 ----------
+> >  lib/efi_loader/efi_boottime.c   | 26 --------------------------
+> >  3 files changed, 37 deletions(-)
 > >
-> > diff --git a/arch/x86/cpu/cpu.c b/arch/x86/cpu/cpu.c
-> > index c373b14df30..f756a9ebf09 100644
-> > --- a/arch/x86/cpu/cpu.c
-> > +++ b/arch/x86/cpu/cpu.c
-> > @@ -80,6 +80,11 @@ int __weak x86_cleanup_before_linux(void)
-> >         return 0;
+> > diff --git a/configs/mt7623n_bpir2_defconfig b/configs/mt7623n_bpir2_defconfig
+> > index 404380558f2..d75168a72ed 100644
+> > --- a/configs/mt7623n_bpir2_defconfig
+> > +++ b/configs/mt7623n_bpir2_defconfig
+> > @@ -13,7 +13,6 @@ CONFIG_DEFAULT_DEVICE_TREE="mt7623n-bananapi-bpi-r2"
+> >  CONFIG_TARGET_MT7623=y
+> >  CONFIG_SYS_BOOTM_LEN=0x4000000
+> >  CONFIG_SYS_LOAD_ADDR=0x84000000
+> > -# CONFIG_EFI_GRUB_ARM32_WORKAROUND is not set
+> >  CONFIG_FIT=y
+> >  CONFIG_FIT_VERBOSE=y
+> >  CONFIG_DISTRO_DEFAULTS=y
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 13e44be1d06..5585c841c27 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -505,16 +505,6 @@ config EFI_LOADER_BOUNCE_BUFFER
+> >           hardware we can create a bounce buffer so that payloads don't have to
+> >           worry about platform details.
+> >
+> > -config EFI_GRUB_ARM32_WORKAROUND
+> > -       bool "Workaround for GRUB on 32bit ARM"
+> > -       default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
+> > -       default y
+> > -       depends on ARM && !ARM64
+> > -       help
+> > -         GRUB prior to version 2.04 requires U-Boot to disable caches. This
+> > -         workaround currently is also needed on systems with caches that
+> > -         cannot be managed via CP15.
+> > -
+> >  config EFI_ESRT
+> >         bool "Enable the UEFI ESRT generation"
+> >         depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT
+> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> > index 0bc66ee61a8..c31ee53cde6 100644
+> > --- a/lib/efi_loader/efi_boottime.c
+> > +++ b/lib/efi_loader/efi_boottime.c
+> > @@ -2139,29 +2139,6 @@ error:
+> >         return EFI_EXIT(ret);
 > >  }
 > >
-> > +int cleanup_before_linux(void)
-> > +{
-> > +       return x86_cleanup_before_linux();
-> > +}
-> > +
-> >  int x86_init_cache(void)
-> >  {
-> >         enable_caches();
+> > -/**
+> > - * efi_exit_caches() - fix up caches for EFI payloads if necessary
+> > - */
+> > -static void efi_exit_caches(void)
+> > -{
+> > -#if defined(CONFIG_EFI_GRUB_ARM32_WORKAROUND)
+> > -       /*
+> > -        * Boooting Linux via GRUB prior to version 2.04 fails on 32bit ARM if
+> > -        * caches are enabled.
+> > -        *
+> > -        * TODO:
+> > -        * According to the UEFI spec caches that can be managed via CP15
+> > -        * operations should be enabled. Caches requiring platform information
+> > -        * to manage should be disabled. This should not happen in
+> > -        * ExitBootServices() but before invoking any UEFI binary is invoked.
+> > -        *
+> > -        * We want to keep the current workaround while GRUB prior to version
+> > -        * 2.04 is still in use.
+> > -        */
+> > -       cleanup_before_linux();
+> > -#endif
+> > -}
+> > -
+> >  /**
+> >   * efi_exit_boot_services() - stop all boot services
+> >   * @image_handle: handle of the loaded image
+> > @@ -2245,9 +2222,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+> >         /* Patch out unsupported runtime function */
+> >         efi_runtime_detach();
+> >
+> > -       /* Fix up caches for EFI payloads if necessary */
+> > -       efi_exit_caches();
+> > -
+> >         /* Disable boot time services */
+> >         systab.con_in_handle = NULL;
+> >         systab.con_in = NULL;
 > > --
 > > 2.43.0
 > >
