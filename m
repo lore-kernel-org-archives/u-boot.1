@@ -4,107 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E40D0D16C
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE4AD0D16D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C6484088;
+	by phobos.denx.de (Postfix) with ESMTP id 73DCE840A9;
 	Wed,  7 Jan 2026 21:19:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="C8F4yQ+V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L/xAqSc5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD57C84047; Wed,  7 Jan 2026 20:59:17 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 1E2BC83A2D; Wed,  7 Jan 2026 21:19:01 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 876F8839A5
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:59:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24562839A5
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 21:18:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7ce0ef9d4eeso1042653a34.1
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:59:15 -0800 (PST)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-34c718c5481so1622087a91.3
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 12:18:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767815954; x=1768420754;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YAHuBlpE54f0b+0n8NtqmyZBeclNPKtvarohXVbiWT0=;
- b=C8F4yQ+VJ7QCKarXxNF5IlDaSx6J0ZZe/3EU9KpIb+7LbtEnXAnCyU622kiNf4nqY1
- F1tsc343sPSuryBYCxcEH2K15HCGPU+p71rzg39TmAk5voaWsPz5g9FG5WmlqPUFKUdT
- m6fK898FrS9bdx07V+sVzKAJCO5yLOdVNVamkzP/CW211GJKdxytX7zuFC6foH2ViGvy
- grSqN2mHxDCRjPvM6/KwYvZRUMHJsf6AvJzh4Qmewv2k7OmlAtCNdu3wHuNh4kBYce6x
- AmAZ3EQ3h38CeKWN/wDoK7OMRm2uLJKwkAL2fJZsl+Ore05uMQcI7ZaZ07l1ZZsk2eWm
- f4iw==
+ d=gmail.com; s=20230601; t=1767817136; x=1768421936; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mw4BjUUVFSi/yy92Zm5EiIpZazNLorrHFCPLDqDPG2k=;
+ b=L/xAqSc5Y25yxh/c3vf9Y1rWlgER11eYDaLNvkNpUG5z/HiTYzEVjRTyVm/fECpx/2
+ wB7D8kKLyk+PTZuvXPXJpoZExVG5h1qdUnhK+6SRt71u/oDPYVdUj3IlCioP2DgkZzUb
+ N9fuFhfsgWPBeA3M2jKpCNf3Qrmy6C2yr4SqOoZ3CzqoSKe7WTiwW9GDiw0/z00r/nj1
+ 7ih6FlqTRNbiQa4FlnbrbELbdj69ve4tJ7cAc+9PwNecZ6RB30OEi9gemqUbx7kXQ7B7
+ JLRdk7km7ktp+bA2QfO9Al0A/fKY1W58EArGx/wUuzDyWMD5jGypp57d7C3LrnpSjZib
+ dYdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767815954; x=1768420754;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1767817136; x=1768421936;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YAHuBlpE54f0b+0n8NtqmyZBeclNPKtvarohXVbiWT0=;
- b=k4Yo3LzuySm8K9jnlrJL8gd8cISfQSrgE6XHMNoqjEiMBIPXEB5d6SbXMs9cH6gKiW
- cScnycWzOKWVZsjPONOJ4tN5r0ZM5kd6YuClR9pfLRqx0J+Y3pXAsH+152QxT/JOG+7L
- IxkBFzNfVHBoWPtTHUrJxapfPJrZjxshWG+m5kgaecfP64/aNFddd5tq5XriWYO7uQw1
- jZvOiu6UfLzqIXj02BDXFMq4/DHzyRtyma0ltRjjwJrRw0h17+6EDUrjbbDl24B/rv4z
- 1dfOyMyIwiGxjicv92WgtRL8dzeWnJr3MPvISOYGfQa6ZL+byT5esrADeoS/ZxzCBkFa
- eVCg==
+ bh=mw4BjUUVFSi/yy92Zm5EiIpZazNLorrHFCPLDqDPG2k=;
+ b=ibuKknsNza7l9SD076FXFCmeQdm9Ny9Wgd8K+eZCI3RdYUsgnt/Hyhd6v/RahzU+pI
+ eBuC22o2bhkE57zJnMwt9nFYnH7ma61xidcckJHrtEYolVpsyHUoYl2+4QTIwZwviboj
+ NH7iTMUif8ztdOxO9kVzrqsJ14sKHydYBYubEGOeJF05VwUhjlFD3kgBVvzK5w0yUZ06
+ WkPlxtWe1u7X1jabtUO6IPs4WLX80+7kV/CLDQGp8AcwdiAp/nPnZqTY0rvkjsCuaDWY
+ 0/9wLmrxrG3lSaGbBwaCyDmKZ5M69Bh1PB7ScN55jWbAgAFCBy6oULSVR+LyQV5IY5Nk
+ y4Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMjwrRdZzlfaLmwWAFVVmc7Rr9I6sfV6OLg/45hZgSXLicAqLDAiiqpLL9EYXv1POtS/lp1ok=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzIaRP0e3FCsTEenUk+r2c8xbTgUCrZyR0LgK3Xg3qQSCV2Z47
- 42T8z+g6CXSoeA7f7lbnVAWcFZzJ9iaMCrGinxdRrK85kO6ufxmWeBrntiMNe3Q/jh4=
-X-Gm-Gg: AY/fxX6L2PkrVa4/wxpmDljzPREHX6muGcSgeLytOHpA/QeOIr03NspJcEW/pOjv72F
- 9pekO0x9CH2ROKrOtIWashTv911Nyenb4ChtkceYU7TPjOUxb0mspjkEagMI91OCgkK+ZjORvay
- Q05hrmqPpvvJlgiaqIZWShp44/0MecRpnjYzbQiBPp0BRurUGaIn3ee3SGBdLwtMPeMCrgchg8X
- SbWkd5KAFKDGhnescV9OnQI6w7Z7Z3Y3V07IM0DfhaWdPkQSp/Prkz7O6cI/lNo3LfYx8AwUDdt
- N5EIlZJt1kpn+LZH61dijYLN4UVGXs64SWvcyT4pK387aXv9xl2uW2p6X1VQpUTNRBTPc6Wtohp
- kujqUD79f3j3WGqvga9o6z9wuNuX2p94FsT5Mp+18q6jmuJjepoFNuzjhzCNnm2FkFhPxPhOiRv
- I6uTQpqFkoLc7l42A=
-X-Google-Smtp-Source: AGHT+IEYn1yqDw6mG5Q0Y0HCDZQAGh6QnfoYjdXL6tsxfabGD3+QPkCQnGtm7MqGFZh0W1M7eMZt6Q==
-X-Received: by 2002:a05:6830:45aa:b0:7c7:63b6:89d3 with SMTP id
- 46e09a7af769-7ce50bcb16cmr1349227a34.19.1767815954217; 
- Wed, 07 Jan 2026 11:59:14 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:f278:961a:494a:41af])
+ AJvYcCXawlK4n8WjyfYgedBam+NPkiVPSITRBPZZhYbzBy7pgGSoDQLeoYYQQpXkZSgSfQXXc8G+MEY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwF6fCy14IcE3FgSpR6d3x6S4IqWO9Rk+tO89eCpvlfy3O193VG
+ Gq7NoZ3UyfwHVhF/T4JzFAIaK05aLYIQGAxca7VamPVp08lGMbTjjrUO
+X-Gm-Gg: AY/fxX7yAJfPTDbDrV31DkhYK/dxlRHs+Fr0N9TllU/T5OzD5y1b5RdhRcvAY7OMRKY
+ fh3i5QQJ2nFBU4VxT1UGNRrcYUXc8CasVVSzaqR526Tg4v2GqnKos8QEXXzKBHlTkV57mkzKa3z
+ 5/+hhOoGXqM5R8lmButnBnIHlFLABqYeT2CSNdS+X0H8/K8pln80ZEjkUiVk3L+mBI2y8rNMesR
+ VujijupCbkn2VWFmDlwbOF5TnA7sFv7vZ7+Fk63kdH02G1RpaYq/GRC4nfwlHQ+JxcwiZbim745
+ oNq7bKvDCQRlJcqfRaLg/zxywzGBuNpO/DOHP3Hc5RTTyPBeUChBrGpvkMhjUP7ci1Lb4rwqxwZ
+ v0n1xcGwM3Hyv8k4sEn9mIew+Uup4Jv652EgqkrrT3eOmfa4mu0QMLzHDMb3S8rz2kJu2L+Bnwv
+ cxMPuTo0TYEsBJy69IVOv21UHXHB8HpsryRJbv2wD97sO4pQ9Tmx9hfF7ycClNIAFEvaAypI//V
+ Z8Ejqr2YS9imBhh3Wjvtg==
+X-Google-Smtp-Source: AGHT+IHLPalyUg0KzVV4s34dEExn1UYpeHkjktCNLeDCmaWwpAbwsT2lg2x5psAG9rL/w99syhM72Q==
+X-Received: by 2002:a17:90b:57f0:b0:349:3fe8:e7de with SMTP id
+ 98e67ed59e1d1-34f68c27620mr2922786a91.28.1767817136464; 
+ Wed, 07 Jan 2026 12:18:56 -0800 (PST)
+Received: from visitorckw-work01.c.googlers.com.com
+ (25.118.81.34.bc.googleusercontent.com. [34.81.118.25])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478ede38sm3900797a34.26.2026.01.07.11.59.12
+ 98e67ed59e1d1-34f5fa947ecsm5766077a91.6.2026.01.07.12.18.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 11:59:13 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 07 Jan 2026 13:58:58 -0600
-Subject: [PATCH] configs: mt8365: remove empty header file
+ Wed, 07 Jan 2026 12:18:56 -0800 (PST)
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: alison.wang@nxp.com,
+	angelo@kernel-space.org,
+	trini@konsulko.com
+Cc: me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com,
+ sjg@chromium.org, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de, Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH v6 0/8] m68k: Add support for QEMU virt machine
+Date: Wed,  7 Jan 2026 20:18:29 +0000
+Message-ID: <20260107201838.3448806-1-visitorckw@gmail.com>
+X-Mailer: git-send-email 2.52.0.457.g6b5491de43-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260107-mtk-mt8365-remove-empty-config-header-v1-1-f1c25b637fdc@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2NwQqDMBAFf0X23IXE0lj7K6UHSV50KUlkI9Ii/
- ntDD3OYy8xBFSqo9OgOUuxSpeQm9tKRX6Y8gyU0p970zlgzcNrejfvV3ViRyg5GWrcv+5KjzLx
- gClC2Y/A+RhcHM1JrrYoon//n+TrPHzpT4KF3AAAA
-X-Change-ID: 20260107-mtk-mt8365-remove-empty-config-header-19dccff6f709
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1446; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=kUD3Oik6HcZ9bxEJCxpoYB9J61FWMubj1gJGQylvERo=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXrsJ95EVSasss+ZBfwFuxSG/w/HIIXmaUYXie
- vTw0MkBjb+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV67CRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABUkH+wVkBIrSZihsKi2GumLEHHi9ibGTumBcQP6kIiu
- TvzVVsodlw3csWStbWxXsHkYFt+EX7Dp+ERL7vrGJKlStygIPtxyQ990vQBn0BPpo10Wjizvtml
- YsKbJkSQG6tgbDzhglddY66R0kosYqhhM+WljFkjSOn45SYNANLamRYIGybRGhgySWUO7WsOHhc
- fXaC40bdb6maQa/X7aDvAx2KzlpldRH7uSgre4LhK4b8I8roIkf9fo8eS69UoeY/CnQEgCtTI1x
- lXJ9w2WxzxxDmoDg/KdPjsR4xjj6Yw+6xwWDePmsEJ7tFAZFe5D+7c43J0IO1kD7NF6xTucT+yF
- uP0M=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 07 Jan 2026 21:19:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,51 +104,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the empty include/configs/mt8365.h header file as it is not
-needed. The Kconfig entry that referenced it is also removed.
+Add support for the QEMU 'virt' machine on the m68k architecture. The
+QEMU virt machine models a generic system utilizing Goldfish virtual
+peripherals and is capable of emulating various classic 68k CPUs.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Currently, U-Boot's m68k architecture support focuses on ColdFire
+variants. This series expands support to include the classic M680x0
+architecture, implementing the necessary exception vectors, startup
+code, and a bootinfo parser compatible with the QEMU interface.
+
+Drivers for Goldfish peripherals (TTY, Timer, RTC) and the QEMU
+Virtual System Controller (sysreset) are also added to enable serial
+console, timekeeping, and system reset functionality.
+
+The implementation has been verified on QEMU targeting the M68040 CPU,
+confirming successful hardware initialization and boot to the U-Boot
+command shell. Additionally, the CI configuration was verified locally
+using gitlab-ci-local "qemu_m68k_virt test.py", resulting in
+PASS qemu_m68k_virt test.py.
 ---
- arch/arm/mach-mediatek/Kconfig |  1 -
- include/configs/mt8365.h       | 12 ------------
- 2 files changed, 13 deletions(-)
+Changes in v6:
+- Refactor Goldfish drivers (TTY, Timer, RTC) to strictly separate
+  of_to_plat (parsing) and probe (mapping), supporting both device tree
+  and explicit platform data.
+- Introduce a new sysreset driver for the QEMU virtual system controller,
+  replacing the previous board-file implementation.
+- Refactor m68k Kconfig/Makefile to use a hidden CONFIG_ARCH_COLDFIRE
+  symbol for cleaner file grouping.
+- Improve board initialization: move bootinfo parsing to board_early_init_f
+  and remove all hardcoded MMIO addresses.
+- Update MAINTAINERS to reflect the removal of inactive maintainers.
 
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index f7ef17e0203..d1d2605b2cc 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -158,7 +158,6 @@ config SYS_CONFIG_NAME
- 	default "mt7987" if TARGET_MT7987
- 	default "mt7988" if TARGET_MT7988
- 	default "mt8183" if TARGET_MT8183
--	default "mt8365" if TARGET_MT8365
- 	default "mt8512" if TARGET_MT8512
- 	default "mt8516" if TARGET_MT8516
- 	default "mt8518" if TARGET_MT8518
-diff --git a/include/configs/mt8365.h b/include/configs/mt8365.h
-deleted file mode 100644
-index e8aacf8c5df..00000000000
---- a/include/configs/mt8365.h
-+++ /dev/null
-@@ -1,12 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Configuration for MT8365 based boards
-- *
-- * Copyright (C) 2023 BayLibre, SAS
-- * Author: Julien Masson <jmasson@baylibre.com>
-- */
--
--#ifndef __MT8365_H
--#define __MT8365_H
--
--#endif
+Changes in v5:
+- Rebase on u-boot/next branch.
+- Add 'imply CMD_DM' to TARGET_QEMU_M68K in Kconfig.
+- Add a new patch to update the M68K entry in MAINTAINERS and add myself
+  as a co-maintainer.
 
----
-base-commit: 53c0d5b387956bb4070a943b61991898373a20e2
-change-id: 20260107-mtk-mt8365-remove-empty-config-header-19dccff6f709
+Changes in v4:
+- Support DT probing with platform data as a fallback. (serial & timer)
+- Fix sandbox build warnings by removing incorrect type casting.
+- Add comment explaining read latching behavior in the timer driver.
+- Sort headers alphabetically in the timer driver.
 
-Best regards,
+Changes in v3:
+- Add Goldfish timer driver.
+- Update Goldfish RTC driver to support non-DT probing.
+- Enable Goldfish RTC and Timer support in board configuration.
+- Add safety loop limit to bootinfo parsing in dram_init.
+- Remove dummy timer functions from architecture code.
+- Remove unnecessary type casts in Goldfish TTY driver.
+- Remove TEST_PY_ID from CI job definitions.
+- Update documentation to include new RTC support.
+
+Changes in v2:
+- Refactor Goldfish TTY driver to use priv data for the RX buffer and
+  ensure single-byte reads.
+- Rename arch/m68k/cpu/m68040 to arch/m68k/cpu/m680x0 to separate the
+  architecture family from the specific CPU model.
+- Introduce M680x0 Kconfig symbol and separate MAINTAINERS entries for
+  the architecture and the board.
+- Regenerate qemu-m68k_defconfig using make savedefconfig and add the
+  board to the documentation index.
+- Add a new patch to enable CI testing on GitLab and Azure Pipelines.
+- Update SPDX identifiers to GPL-2.0-or-later.
+- Sort headers alphabetically.
+- Fix tabs vs spaces.
+
+v5: https://lore.kernel.org/u-boot/20260105165221.1816070-1-visitorckw@gmail.com/
+v4: https://lore.kernel.org/u-boot/20260101175420.4118024-1-visitorckw@gmail.com/
+v3: https://lore.kernel.org/u-boot/20251230160112.3045527-1-visitorckw@gmail.com/
+v2: https://lore.kernel.org/u-boot/20251226175400.1154417-1-visitorckw@gmail.com/
+v1: https://lore.kernel.org/u-boot/20251218185252.957388-1-visitorckw@gmail.com/
+
+Kuan-Wei Chiu (8):
+  serial: Add Goldfish TTY driver
+  timer: Add Goldfish timer driver
+  rtc: goldfish: Support platform data for non-DT probing
+  sysreset: Add QEMU virtual system controller driver
+  m68k: Add support for M68040 CPU
+  board: Add QEMU m68k virt board support
+  CI: Add test jobs for QEMU m68k virt machine
+  MAINTAINERS: Update m68k entry
+
+ .azure-pipelines.yml                       |   3 +
+ .gitlab-ci.yml                             |   6 ++
+ MAINTAINERS                                |  28 ++++-
+ arch/m68k/Kconfig                          |  39 +++++++
+ arch/m68k/Makefile                         |   1 +
+ arch/m68k/config.mk                        |  10 +-
+ arch/m68k/cpu/m680x0/Makefile              |   6 ++
+ arch/m68k/cpu/m680x0/cpu.c                 |  73 +++++++++++++
+ arch/m68k/cpu/m680x0/start.S               |  73 +++++++++++++
+ arch/m68k/cpu/m680x0/u-boot.lds            |  47 +++++++++
+ arch/m68k/include/asm/bootinfo.h           |  39 +++++++
+ arch/m68k/lib/Makefile                     |   7 +-
+ board/emulation/qemu-m68k/Kconfig          |  12 +++
+ board/emulation/qemu-m68k/MAINTAINERS      |   8 ++
+ board/emulation/qemu-m68k/Makefile         |   5 +
+ board/emulation/qemu-m68k/qemu-m68k.c      | 117 +++++++++++++++++++++
+ configs/qemu-m68k_defconfig                |  20 ++++
+ doc/board/emulation/index.rst              |   1 +
+ doc/board/emulation/qemu-m68k.rst          |  39 +++++++
+ drivers/rtc/goldfish_rtc.c                 |  23 +++-
+ drivers/serial/Kconfig                     |   8 ++
+ drivers/serial/Makefile                    |   1 +
+ drivers/serial/serial_goldfish.c           | 117 +++++++++++++++++++++
+ drivers/sysreset/Kconfig                   |   8 ++
+ drivers/sysreset/Makefile                  |   1 +
+ drivers/sysreset/sysreset_qemu_virt_ctrl.c |  55 ++++++++++
+ drivers/timer/Kconfig                      |   8 ++
+ drivers/timer/Makefile                     |   1 +
+ drivers/timer/goldfish_timer.c             |  89 ++++++++++++++++
+ include/configs/qemu-m68k.h                |  18 ++++
+ include/goldfish_rtc.h                     |  15 +++
+ include/goldfish_timer.h                   |  13 +++
+ include/goldfish_tty.h                     |  18 ++++
+ include/qemu_virt_ctrl.h                   |  13 +++
+ 34 files changed, 908 insertions(+), 14 deletions(-)
+ create mode 100644 arch/m68k/cpu/m680x0/Makefile
+ create mode 100644 arch/m68k/cpu/m680x0/cpu.c
+ create mode 100644 arch/m68k/cpu/m680x0/start.S
+ create mode 100644 arch/m68k/cpu/m680x0/u-boot.lds
+ create mode 100644 arch/m68k/include/asm/bootinfo.h
+ create mode 100644 board/emulation/qemu-m68k/Kconfig
+ create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+ create mode 100644 board/emulation/qemu-m68k/Makefile
+ create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+ create mode 100644 configs/qemu-m68k_defconfig
+ create mode 100644 doc/board/emulation/qemu-m68k.rst
+ create mode 100644 drivers/serial/serial_goldfish.c
+ create mode 100644 drivers/sysreset/sysreset_qemu_virt_ctrl.c
+ create mode 100644 drivers/timer/goldfish_timer.c
+ create mode 100644 include/configs/qemu-m68k.h
+ create mode 100644 include/goldfish_rtc.h
+ create mode 100644 include/goldfish_timer.h
+ create mode 100644 include/goldfish_tty.h
+ create mode 100644 include/qemu_virt_ctrl.h
+
 -- 
-David Lechner <dlechner@baylibre.com>
+2.52.0.457.g6b5491de43-goog
 
