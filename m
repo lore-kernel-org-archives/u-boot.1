@@ -4,55 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3320DCD5827
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 09:53:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D48BCD583B
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 10:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DFE683B03;
-	Wed,  7 Jan 2026 10:53:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1585E83A26;
+	Wed,  7 Jan 2026 11:58:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nSGuZEIA";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="VEIJTze5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46B7683B4B; Wed,  7 Jan 2026 10:53:01 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 4B94A83A57; Wed,  7 Jan 2026 11:58:04 +0100 (CET)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1ABE83AC5
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 10:52:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id DCD8D839B1
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 11:58:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 62FF260141;
- Wed,  7 Jan 2026 09:52:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3ED6C16AAE;
- Wed,  7 Jan 2026 09:52:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767779577;
- bh=D/duCqzA+7zCOHG/snky2/L3nM3P+vLhRw4sBtwRk6Y=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=nSGuZEIA+Jf3pPe18TXBnBy3ZTj8JTJAqnXCSCNR/uaQGWosZ+/AEt1AnqGllEwOW
- D1Dr4ymiAyoUNx4KRvT7d5I4Tue8Y9ZtuYhoCPD2Dh03OONQeMKoef58tdFCuPfhoC
- n1ADyfFvkJUI1weVcZw3vkYExEIzcZKcBtiLn2cE0hPoXZ30aH3WggmLq/YHMYzUqb
- 2Wg8RVjyFe6gApkq4yzZlibkdy12HxsxDvLgjvjAQcF/eNwZrWA3eEZYP2DiJg0VUD
- 2mMfBJOnhDNurX3ice/jP/ElhoW1NZTH2so/cosBGqtaOATvb4uaYUGFdEq73UTRlY
- IQdWtuHF6MpGA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, Chris Morgan <macroalpha82@gmail.com>
-Cc: u-boot@lists.denx.de, macromorgan@hotmail.com, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, sjg@chromium.org, jmasson@baylibre.com,
- nbelin@baylibre.com, bisson.gary@gmail.com
-Subject: Re: [PATCH] bootstd: android: Fix write outside of memory
-In-Reply-To: <20260106171633.GI3416603@bill-the-cat>
-References: <20251223234456.1983614-1-macroalpha82@gmail.com>
- <20260106171633.GI3416603@bill-the-cat>
-Date: Wed, 07 Jan 2026 10:52:54 +0100
-Message-ID: <87ldi9g361.fsf@kernel.org>
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1767783479;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iR5k+PTRXAk9c4kk0UdrrpTfWR48c027JgKJkalP7NM=;
+ b=VEIJTze53dbowxZqdecg239t+GcB8TqN9czYw6ZYCQpSsUeWLGwS+UHaG/Be414w/XxKls
+ g9kdBJwl+CJXTgvier5Wip7+KrxUZSCRz8kgrR22nBeVkVRxlSNEwccKzl3gSk1j5znlWW
+ pB7vnt6bVnQzgmmGWdvqrqyZwAm3jKM=
+X-Spam: yes
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id a110d440
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Wed, 7 Jan 2026 10:57:59 +0000 (UTC)
+Message-ID: <3e7f4385-15f4-4ea6-9641-c8e04d043c0b@kernel-space.org>
+Date: Wed, 7 Jan 2026 11:59:38 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/7] serial: Add Goldfish TTY driver
+To: Kuan-Wei Chiu <visitorckw@gmail.com>, alison.wang@nxp.com,
+ trini@konsulko.com
+Cc: me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com,
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
+References: <20260105165221.1816070-1-visitorckw@gmail.com>
+ <20260105165221.1816070-2-visitorckw@gmail.com>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260105165221.1816070-2-visitorckw@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,93 +74,215 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 06, 2026 at 11:16, Tom Rini <trini@konsulko.com> wrote:
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-> On Tue, Dec 23, 2025 at 05:44:56PM -0600, Chris Morgan wrote:
->
->> From: Chris Morgan <macromorgan@hotmail.com>
->> 
->> It looks like under certain circumstances when reading the vendor_boot
->> partition it causes my device to write outside the range of memory
->> available. Near as I can tell this occurs because
->> scan_vendor_boot_part() calls android_image_get_vendor_bootimg_size()
->> which calls android_vendor_boot_image_v3_v4_parse_hdr() which calls
->> add_trailer() which attempts to copy information to a buffer allocated
->> with malloc in the scan_vendor_boot_part() function. On my board the
->> memory set aside for malloc is at the top of the system RAM, and given
->> a large enough vendor boot image size this causes the write from
->> add_trailer() to occur outside of the system RAM (nevermind outside
->> of what was allocated with the malloc().
->> 
->> While I don't know the absolute best way to handle this, I would assume
->> that if we simply map the memory we want to use to where we will
->> eventually load the vendor_boot image that would be the most logical.
->> 
->> Fixes: abadcda24b10 ("bootstd: android: don't read whole partition sizes")
->> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
->> ---
->>  boot/bootmeth_android.c | 20 ++++++--------------
->>  1 file changed, 6 insertions(+), 14 deletions(-)
->> 
->> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
->> index 1374551dbeb..c2c25d53ef3 100644
->> --- a/boot/bootmeth_android.c
->> +++ b/boot/bootmeth_android.c
->> @@ -118,9 +118,10 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
->>  	struct blk_desc *desc = dev_get_uclass_plat(blk);
->>  	struct disk_partition partition;
->>  	char partname[PART_NAME_LEN];
->> -	ulong num_blks, bufsz;
->> +	ulong num_blks;
->>  	char *buf;
->>  	int ret;
->> +	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
->>  
->>  	if (priv->slot)
->>  		sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
->> @@ -132,28 +133,19 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
->>  		return log_msg_ret("part info", ret);
->>  
->>  	num_blks = DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), desc->blksz);
->> -	bufsz = num_blks * desc->blksz;
->> -	buf = malloc(bufsz);
->> +	buf = map_sysmem(vloadaddr, 0);
->>  	if (!buf)
->>  		return log_msg_ret("buf", -ENOMEM);
->>  
->>  	ret = blk_read(blk, partition.start, num_blks, buf);
->> -	if (ret != num_blks) {
->> -		free(buf);
->> +	if (ret != num_blks)
->>  		return log_msg_ret("part read", -EIO);
->> -	}
->>  
->> -	if (!is_android_vendor_boot_image_header(buf)) {
->> -		free(buf);
->> +	if (!is_android_vendor_boot_image_header(buf))
->>  		return log_msg_ret("header", -ENOENT);
->> -	}
->>  
->> -	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size)) {
->> -		free(buf);
->> +	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size))
->>  		return log_msg_ret("get vendor bootimg size", -EINVAL);
->> -	}
->> -
->> -	free(buf);
->>  
->>  	return 0;
->>  }
->
-> I haven't forgotten about this, but I'm hoping there's some other way to
-> solve this, I'm not super keen on adding another environment variable
-> (that would need to be documented in a v2 if we can't fix this some
-> other way). Mattijs, do you have any ideas?
+On 1/5/26 17:52, Kuan-Wei Chiu wrote:
+> Add support for the Google Goldfish TTY serial device. This virtual
+> device is commonly used in QEMU virtual machines (such as the m68k
+> virt machine) and Android emulators.
+> 
+> The driver implements basic console output and input polling using the
+> Goldfish MMIO interface.
+> 
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Reviewed-by: Yao Zi <me@ziyao.cc>
+> Tested-by: Daniel Palmer <daniel@0x0f.com>
+> Acked-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> Changes in v5:
+> - Rebase on u-boot/next branch.
+> 
+>  MAINTAINERS                      |   6 ++
+>  drivers/serial/Kconfig           |   8 +++
+>  drivers/serial/Makefile          |   1 +
+>  drivers/serial/serial_goldfish.c | 109 +++++++++++++++++++++++++++++++
+>  include/goldfish_tty.h           |  18 +++++
+>  5 files changed, 142 insertions(+)
+>  create mode 100644 drivers/serial/serial_goldfish.c
+>  create mode 100644 include/goldfish_tty.h
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 27ce73d83f4..8f884ff495a 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1260,6 +1260,12 @@ S:	Maintained
+>  F:	drivers/misc/gsc.c
+>  F:	include/gsc.h
+>  
+> +GOLDFISH SERIAL DRIVER
+> +M:	Kuan-Wei Chiu <visitorckw@gmail.com>
+> +S:	Maintained
+> +F:	drivers/serial/serial_goldfish.c
+> +F:	include/goldfish_tty.h
+> +
+>  INTERCONNECT:
+>  M:	Neil Armstrong <neil.armstrong@linaro.org>
+>  S:	Maintained
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 371d7aa5bba..b84cb9ec781 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -1193,4 +1193,12 @@ config SYS_SDMR
+>  	depends on MPC8XX_CONS
+>  	default 0x0
+>  
+> +config SERIAL_GOLDFISH
+> +	bool "Goldfish TTY support"
+> +	depends on DM_SERIAL
+> +	help
+> +	  Select this to enable support for the Goldfish TTY serial port.
+> +	  This virtual device is commonly used by QEMU virtual machines
+> +	  (e.g. m68k virt) for console output.
+> +
+>  endif
+> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+> index 8eaae62b0fc..fe8d23be512 100644
+> --- a/drivers/serial/Makefile
+> +++ b/drivers/serial/Makefile
+> @@ -63,3 +63,4 @@ obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
+>  obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
+>  
+>  obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
+> +obj-$(CONFIG_SERIAL_GOLDFISH) += serial_goldfish.o
+> diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
+> new file mode 100644
+> index 00000000000..278d0cf3e0d
+> --- /dev/null
+> +++ b/drivers/serial/serial_goldfish.c
+> @@ -0,0 +1,109 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + * Goldfish TTY driver for U-Boot
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <dm.h>
+> +#include <goldfish_tty.h>
+> +#include <linux/types.h>
+> +#include <mapmem.h>
+> +#include <serial.h>
+> +
+> +/* Goldfish TTY Register Offsets */
+> +#define GOLDFISH_TTY_PUT_CHAR       0x00
+> +#define GOLDFISH_TTY_BYTES_READY    0x04
+> +#define GOLDFISH_TTY_CMD            0x08
+> +#define GOLDFISH_TTY_DATA_PTR       0x10
+> +#define GOLDFISH_TTY_DATA_LEN       0x14
+> +#define GOLDFISH_TTY_DATA_PTR_HIGH  0x18
+> +#define GOLDFISH_TTY_VERSION        0x20
+> +
+> +/* Commands */
+> +#define CMD_WRITE_BUFFER   2
+> +#define CMD_READ_BUFFER    3
+> +
+> +struct goldfish_tty_priv {
+> +	void __iomem *base;
+> +	u8 rx_buf;
+> +};
+> +
+> +static int goldfish_serial_getc(struct udevice *dev)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +	unsigned long paddr;
+> +	u32 count;
+> +
+> +	count = __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
+> +	if (count == 0)
+> +		return -EAGAIN;
+> +
+> +	paddr = virt_to_phys((void *)&priv->rx_buf);
+> +
+> +	__raw_writel(0, priv->base + GOLDFISH_TTY_DATA_PTR_HIGH);
+> +	__raw_writel(paddr, priv->base + GOLDFISH_TTY_DATA_PTR);
+> +	__raw_writel(1, priv->base + GOLDFISH_TTY_DATA_LEN);
+> +	__raw_writel(CMD_READ_BUFFER, priv->base + GOLDFISH_TTY_CMD);
+> +
+> +	return priv->rx_buf;
+> +}
+> +
+> +static int goldfish_serial_putc(struct udevice *dev, const char ch)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +
+> +	__raw_writel(ch, priv->base + GOLDFISH_TTY_PUT_CHAR);
+> +
+> +	return 0;
+> +}
+> +
+> +static int goldfish_serial_pending(struct udevice *dev, bool input)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +
+> +	if (input)
+> +		return __raw_readl(priv->base + GOLDFISH_TTY_BYTES_READY);
+> +
+> +	return 0;
+> +}
+> +
+> +static int goldfish_serial_probe(struct udevice *dev)
+> +{
+> +	struct goldfish_tty_priv *priv = dev_get_priv(dev);
+> +	struct goldfish_tty_plat *plat = dev_get_plat(dev);
+> +	fdt_addr_t addr;
+> +
+> +	addr = dev_read_addr(dev);
+> +	if (addr != FDT_ADDR_T_NONE) {
+> +		priv->base = map_sysmem(addr, 0x1000);
+> +	} else {
+> +		plat = dev_get_plat(dev);
+> +		if (!plat)
+> +			return -EINVAL;
+> +		priv->base = plat->base;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dm_serial_ops goldfish_serial_ops = {
+> +	.putc = goldfish_serial_putc,
+> +	.pending = goldfish_serial_pending,
+> +	.getc = goldfish_serial_getc,
+> +};
+> +
+> +static const struct udevice_id goldfish_serial_ids[] = {
+> +	{ .compatible = "google,goldfish-tty" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(serial_goldfish) = {
+> +	.name	= "serial_goldfish",
+> +	.id	= UCLASS_SERIAL,
+> +	.of_match = goldfish_serial_ids,
+> +	.probe	= goldfish_serial_probe,
+> +	.ops	= &goldfish_serial_ops,
+> +	.priv_auto = sizeof(struct goldfish_tty_priv),
+> +	.flags	= DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/include/goldfish_tty.h b/include/goldfish_tty.h
+> new file mode 100644
+> index 00000000000..8777da4942d
+> --- /dev/null
+> +++ b/include/goldfish_tty.h
+> @@ -0,0 +1,18 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2025, Kuan-Wei Chiu <visitorckw@gmail.com>
+> + */
+> +
+> +#ifndef _GOLDFISH_TTY_H_
+> +#define _GOLDFISH_TTY_H_
+> +
+> +#include <linux/types.h>
+> +
+> +/* Platform data for the Goldfish TTY driver
+> + * Used to pass hardware base address from Board to Driver
+> + */
+> +struct goldfish_tty_plat {
+> +	void __iomem *base;
+> +};
+> +
+> +#endif /* _GOLDFISH_TTY_H_ */
 
-Sorry for the delay. I'm trying to catch up on my review queue after the
-holiday break.
-I hope to follow up here in the coming days.
+-- Angelo
 
->
-> -- 
-> Tom
