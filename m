@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EEECFD636
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 13:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E4CCCFD62D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 13:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B281F839F1;
-	Wed,  7 Jan 2026 14:44:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE63D839F1;
+	Wed,  7 Jan 2026 14:48:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aizqCraj";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iBzpmdUB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C301883C4B; Wed,  7 Jan 2026 14:44:42 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 7F91F83A57; Wed,  7 Jan 2026 14:48:45 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C307D839D7
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 14:44:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86695839D7
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 14:48:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 20BEB43F1F;
- Wed,  7 Jan 2026 13:44:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81E1FC4CEF7;
- Wed,  7 Jan 2026 13:44:38 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 2FDFF60007;
+ Wed,  7 Jan 2026 13:48:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39A27C19421;
+ Wed,  7 Jan 2026 13:48:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767793479;
- bh=D10pdr4FMnxntZxSBxS1DoXtD10Hv9EHF5FgmMF4jvI=;
+ s=k20201202; t=1767793721;
+ bh=mZQLcRSH30J41EBL+22OmlJ73k6K5/fDXEsy7Lk49i8=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=aizqCrajpR7fzXYK7s3l9otqAF14enUHu2kdD9/qnPsz8wnj3ZjVOJZmqi3rFIvId
- XW7g5XuzMDBOnP+bokwwgPfMbFn1L77iVx+sITo+sOYknZd+dL56vn6drDn5uZnLxb
- xHUvERSHSh0xwmkadbApPeWTOevgm4GvikMXyLzB/kiHJ4eAPjwHdRY90HKRTOw3N+
- 48j0VSHMfzyAI+2yva5pYN0PGrmdgoIGFQhOYyYf+xycK0Sgy4g4I6ZLsuQqtfvzMR
- ULkS8Aj687ERhzcxINvjhWyA39hTeh5O+Xz48hHFGBVTWLVdj0RoC1FYLlJ/zXu0wz
- r2d9hGQe3ORlg==
+ b=iBzpmdUBdbCuW3tf0OZKPD0m10iKYFHhVFDYDkevYQPI2+hFMEB8uz8+w86UG/L0i
+ +1JW2qJtlrNwZQNBc3Ay54Uc4BosFJeRruEPyJsXS1i7Ue4Mh3Zc3V1p54v/5nr3vu
+ Qa2ZIqmSw4S1TdrJl/fCjr78d/6/OGwrX0kGPHzCszQux+BMtYB6o39l3OZGlfmN9Z
+ A86t9z9JgXi/IPPylk0bkzwXKc0be4A9f+jT1VaIqyufvnqtfzsK+wRI7eH3l3jx3Y
+ XqOn2LY6RHlSGs++x0y1e/QXroU2XgIs4U3vPWhMY9RJDoVCx3cP80eZL4Q3l1ai8X
+ ngYSk+BaHzlCA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
  u-boot@lists.denx.de
@@ -50,12 +50,12 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Marek
  Christian Marangi <ansuelsmth@gmail.com>, Dinesh Maniyam
  <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>, "Markus
  Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Subject: Re: [PATCH 3/4] usb: musb-new: Relative ctrl_mod address parsing
-In-Reply-To: <20251126-topic-musb-probing-v2026-01-v1-3-ff8d8c487130@baylibre.com>
+Subject: Re: [PATCH 4/4] usb: musb-new: Add compatibles for ti,musb-am33xx
+In-Reply-To: <20251126-topic-musb-probing-v2026-01-v1-4-ff8d8c487130@baylibre.com>
 References: <20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com>
- <20251126-topic-musb-probing-v2026-01-v1-3-ff8d8c487130@baylibre.com>
-Date: Wed, 07 Jan 2026 14:44:36 +0100
-Message-ID: <87v7hdzge3.fsf@kernel.org>
+ <20251126-topic-musb-probing-v2026-01-v1-4-ff8d8c487130@baylibre.com>
+Date: Wed, 07 Jan 2026 14:48:38 +0100
+Message-ID: <87sechzg7d.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -80,11 +80,19 @@ Thank you for the patch.
 
 On Wed, Nov 26, 2025 at 21:31, "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
-> For the upstream DT the ctrl_mod node is using a relative register
-> address which is not translated by the current code.
+> The upstream devicetree am33xx.dtsi does not have a "ti,am33xx-usb"
+> compatible, it uses "ti,sysc-omap4" for the same node. The
+> implementation of ti-musb uses a wrapper driver that binds to
+> ti,am33xx-usb and creates new devices ti-musb-host and
+> ti-musb-peripheral depending on the dr_mode property.
 >
-> Make address parsing understand relative addresses.
+> To avoid this wrapper driver with the upstream devicetree, add
+> compatibles for "ti,musb-am33xx" to both ti-musb-host and
+> ti-musb-peripheral. Add a bind function that checks for the correct
+> dr_mode value and rejects binding if it is not the correct driver.
 >
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+> ---
