@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C325CF6BE0
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:32:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63B8CF6BE0
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:32:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E43D8400F;
-	Wed,  7 Jan 2026 01:32:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BCDCD8401F;
+	Wed,  7 Jan 2026 01:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b63UlI0n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kE1CsZrI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18C6E84019; Wed,  7 Jan 2026 01:32:32 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 80F578402E; Wed,  7 Jan 2026 01:32:35 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB5BD83A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A07318401F
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-656d9230cf2so752871eaf.1
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:29 -0800 (PST)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3fe3cc80bc3so893531fac.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767745947; x=1768350747; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767745951; x=1768350751; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xy3OUZnE/27It0fmqOuxCdAjpZ/GKimA5TZndbZ6ft4=;
- b=b63UlI0nzTX+EN7qyGnj3OuKKBY5bZRnx17sBNWjanFo6xSMzIYDSkt8NqFeS8w8MI
- 1t+QamZoYfaflVl6QQJqhaQeIVKib2jgv5AS93rXhcCrKBCHS6OdYaWdgsLMZ3+d0xtc
- XaL3/Kumobic4wtWrZBiD0YBQFDgCtAHDnIrc=
+ bh=uZrIjN3iaiHqW+SzivqkoIMCK2CJj5G5faxBUiEdetI=;
+ b=kE1CsZrINGRTl8XzuR+wN273L0s0Hmiol28wT7k0tlitDkKRDm4XAsBdYMRCELvV07
+ FM+ngmatTDcmRn5NmoVgfyZUBBxhHe9NeJXLnBCswwg0CPktFUTeqvfUxHqGvzgWq8/O
+ DelQoIYhb6oUPmiLCnlpnqZD5XY2VhB3kLw9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767745947; x=1768350747;
+ d=1e100.net; s=20230601; t=1767745951; x=1768350751;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xy3OUZnE/27It0fmqOuxCdAjpZ/GKimA5TZndbZ6ft4=;
- b=ZvzARrPMkdJPpYL6zxMN576teZ9uhQHR/QPxwMw/RSX/wFRvC82CfhosteAHXi27v/
- zvdQuHThIbsC3fLHhMcokWSJswT9pElexqr5KTq/nRCCslV3gwYOqIlr2Zbe6KPCMpC8
- Vny1cKklWSjEEiouTk83VFLjTAgOMGkdcXWKL0j03c9cxYs9lQWxaJDuzhQv+FfRkWVY
- PcX4iNtfkSNdelmkar1WyNyDUzd+55JM/W3fCPouASKg6nHwRbFCix8FYF8B9Yk+vy4y
- o2k8TVLzwfl+GXsgLSvrfl/10BCgoXGPPFnNtaxWjMQV3H4s87pIvB+sSidVcbqM02f0
- VxoA==
-X-Gm-Message-State: AOJu0YyUNfdcpEQa9PLYKwTVSBfgGVRg0IpfVekwVlA3TIdGYUgyhjPI
- yFYV5VeLC0V1E6IEvld5qR38y9Xxm0hfOs+IcLsNTlXF6/BRGlhm2/o6PvMvTKEeCebPGbcZZuw
- JsT0=
-X-Gm-Gg: AY/fxX5uSXflm3QIhzyHLKjJosQnltRwrzvCk5wiY6bulTCQxaXrWamyYHbJcZHBMuG
- +T2Oj/gCBTklf6p4Buo/UtMLo3w24W4pZJvT0YGLbjxJgsSNMpgwa0rch8SzxGzwXfoWn1sXT6W
- nsmgzV3lYkvLfZvcH/lNEAxU6Szp61dvdZ9q06gb/ItKHr9npUUmQLUtNGS1gV53SE7win2x5uA
- P2h2FACuRKw9CzH/FiH3yTGFh1/QGKUM6ki8alVCPSqI8vFeLIXspZGVZDSWDwePeLNuSUGqV2l
- CqVd4forteTbzeZQZRlUqYKWeAgBL4j+G7ebrEBqVM+OAsmn0Y/bNzZ4cNMw+Z6hFYj6LhaXUm7
- uM3Q6vepdVcyU90e5XMxy+xCrBB/nNZsHxj9U7vc78g9tWbReHZcqTm6q+yF8Q8btonIKPi1UIg
- 0uQq1Hq3inQ31RzO6R
-X-Google-Smtp-Source: AGHT+IF9cAW0dgMP1XUD/sG4qsrBzeWgbRgr0L8pze9vdxHJudG1e5GMNE4DsdJ1VlLpPgZY/jnooA==
-X-Received: by 2002:a05:6820:2207:b0:659:9a49:8fce with SMTP id
- 006d021491bc7-65f550960f7mr328040eaf.71.1767745947152; 
- Tue, 06 Jan 2026 16:32:27 -0800 (PST)
+ bh=uZrIjN3iaiHqW+SzivqkoIMCK2CJj5G5faxBUiEdetI=;
+ b=UBcf+CGYCMd3DSVAyHDFWjyZXCngAVgmSx0TYRocK1NLr81QinrRDlnmhmxBgJ0VCL
+ WtgQTkuFerxm2SqBhbbaICSlgw46rLYXSSwZrhD5HP296rN4gt0UTENU+tinkopnKX2o
+ 7IqOKigv1DVWBWEjk0r+0WxLOJRqIs6dCEfBma1M7wJXnkCQxWQcsoMwTOTejY1PDdVh
+ Gke5AQUGGruYzNhoxtUKke5SLC6XJCBeE759dRwyO99YH1ip2x7WZoje8eNqy9fNpyVo
+ Bm8JrHZO4QdGcz251VWkQziXk5l8J3uV8BMZFF4OILqw9DXZ8wtCNWqgF+AplIsTYOy0
+ hoOg==
+X-Gm-Message-State: AOJu0YwMRqZQI/FBNQqZxeSTgkcOPM/eoyuC7fR/JLf05bT2SH2rOXhs
+ CzzHUrTBXB1xuCTN/r3l7PNU/9y4QmI9xt/fkPpUu0GhIj/9GNphRdMuAPqW08/v3bzF0OM4Lei
+ hgdM=
+X-Gm-Gg: AY/fxX7OP6BbANbboaNQ55b74hUf2/OAM12R4CSJ9SboWrgFMKHdeJRZ8iQKWNNi5AC
+ zcAGZLC9Z2q1BhLoN8nUNciJtqR8flC0nd6DvpxGZcDyvbhKeHWIxolLLCg5rsdn9pmqkMETNvP
+ 3rpGj7T4jt6LfVMyIJANqnx9sn5V9I520EhSFXPgVdvB1HVk5SMNssgHnzOxxN+JqTwc4VkpUId
+ NuWYvf9ilcAjuSZhJlPsP9aCTNSi5q9G29S6M79K5tKd9Y6jbO5McbVe4CqHm+F4mG2T/t1nTut
+ pafSBaTXI4mIgL2gAZscmtpM6mFkG9b7bDo2E1GgHUfM0gUqsVuZBzozlSVtLXWyupavDiLznFo
+ JMffAIXQtpA0wO0IJ5ADPYpqrhoGfeiY/7KiC+Vxj5Gap9alDVbq7sMgxFd9q3RCOjabdH+KPGf
+ 2LFExYtDmChDQvAGgj
+X-Google-Smtp-Source: AGHT+IE0+fydYw4JMwR6F14EBR3mgRl7wyBBtszds1LEi3e30AeL5FwTU/LdYz4tuZ2I274CGJ/VSA==
+X-Received: by 2002:a05:6820:c214:b0:65d:88b:c012 with SMTP id
+ 006d021491bc7-65f55089d1fmr211833eaf.72.1767745950695; 
+ Tue, 06 Jan 2026 16:32:30 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.25
+ 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 16:32:25 -0800 (PST)
+ Tue, 06 Jan 2026 16:32:28 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Simon Glass <simon.glass@canonical.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Yao Zi <me@ziyao.cc>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Subject: [PATCH 02/10] efi: Make use of bootm_final()
-Date: Tue,  6 Jan 2026 17:31:19 -0700
-Message-ID: <20260107003131.3064800-3-simon.glass@canonical.com>
+ Simon Glass <simon.glass@canonical.com>
+Subject: [PATCH 03/10] bootm: Add a message when booting
+Date: Tue,  6 Jan 2026 17:31:20 -0700
+Message-ID: <20260107003131.3064800-4-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260107003131.3064800-1-simon.glass@canonical.com>
 References: <20260107003131.3064800-1-simon.glass@canonical.com>
@@ -103,44 +98,28 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Call this function from the EFI code. Add the required call to
-dm_remove_devices_active() there.
+Add a message about starting the kernel. For EFI this will be printed
+when boot-services are exited.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- boot/bootm_final.c            | 2 ++
- lib/efi_loader/efi_boottime.c | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ boot/bootm_final.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/boot/bootm_final.c b/boot/bootm_final.c
-index 15ddbbe5e74..263cd95dcb3 100644
+index 263cd95dcb3..71661334e11 100644
 --- a/boot/bootm_final.c
 +++ b/boot/bootm_final.c
-@@ -6,7 +6,9 @@
-  */
- 
- #include <bootm.h>
-+#include <dm/root.h>
+@@ -10,5 +10,7 @@
  
  void bootm_final(enum bootm_final_t flags)
  {
-+	dm_remove_devices_active();
++	printf("\nStarting kernel ...\n\n");
++
+ 	dm_remove_devices_active();
  }
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index ddc935d2240..13d0d4dbe88 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -2241,7 +2241,7 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
- 		if (IS_ENABLED(CONFIG_DM_ETH))
- 			eth_halt();
- 		board_quiesce_devices();
--		dm_remove_devices_active();
-+		bootm_final(0);
- 	}
- 
- 	/* Patch out unsupported runtime function */
 -- 
 2.43.0
 
