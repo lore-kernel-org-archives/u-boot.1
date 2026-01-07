@@ -4,132 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9E6CFD64E
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 15:35:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E758CFD647
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 15:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F66C800AB;
-	Wed,  7 Jan 2026 16:35:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B29B8398C;
+	Wed,  7 Jan 2026 16:48:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QG0UFyDt";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iP3Xwili";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="p10SzH7f";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G1QX+Yy7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1095483A26; Wed,  7 Jan 2026 16:35:26 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 2E0E5839B1; Wed,  7 Jan 2026 16:48:45 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3E09800AB
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 16:35:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4163838E6
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 16:48:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 607CLq0L1643113
- for <u-boot@lists.denx.de>; Wed, 7 Jan 2026 15:35:21 GMT
+ 6079dvvB2593341
+ for <u-boot@lists.denx.de>; Wed, 7 Jan 2026 15:48:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=s3NevaM09V69fe6Ac2u1cM2IZPxkEcFLxNQ
- MWdYIQnY=; b=QG0UFyDteuVF038C1GWg15K0fEEIlMe91qiguzIEwtyrhh+A3jn
- vQAGr7FzBX/aYcSS9Zme3AC/D9kD93GTcAaLrclcqYQJG9v7MeiMMW+r3AZdEJj7
- U5cMHdkSw5oKe7GXehwk95DtSvSxPqXtdJ8yJB9oHEcU8dmeNF95AgducLco+RwM
- aGKq0Zdfh6fizw6jdFPasrt9gYC4CLxSo88KHQtIfOYqD/L/hA7LV5hN3tZC72px
- SKMRxH5mH1JEQunf5b2CelB4aeeLW91mLswu5l+3LOr1NuR98COmc1z3re8bU/zb
- DILIILr/DtrjHNZvafwxduU1Pr5oJlNM+Nw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhgsfhxpr-1
+ :subject:to; s=qcppdkim1; bh=VoiPeHjE5NA6S8RXpkM/75ua5zatDVspGYs
+ NZ7Y1+Tc=; b=p10SzH7f6p6PWB+w9kbTZ0cLRiOnnlSzSJeoorF7O1u3w+A5tNW
+ UARshKIkmpi2Nn277wJ4rMTlZZbnkgEVpjue+h7ZL+lfFt1zCh31K46iceD2moS8
+ AOlehYakylllE47hA8I68mdpwD5rH/BfO+AuicwouI8yEdMQFV6cqzR/0kZ18/WF
+ QS5xWZl5bysoK89FvjionZ/2k94wzJhh5AaWmMBZg9QF7CQ4yTSI9F3rPX2XoOH7
+ s/1yENqYXXhprwHnogLfDZV+wm9ypP8lZQAPd1jXEa9rXEnjWK3/beg8vTDM75QX
+ fgf+OzV+XHOqoIR6KpF93yZjRSG1KlF1RzQ==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhn2913pq-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 15:35:21 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-81c43a20b32so237902b3a.0
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 07:35:21 -0800 (PST)
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 15:48:40 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-29f27176aa7so36386395ad.2
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 07:48:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767800121; x=1768404921; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1767800920; x=1768405720; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=s3NevaM09V69fe6Ac2u1cM2IZPxkEcFLxNQMWdYIQnY=;
- b=iP3XwilitM01TBuZueIM+s4LAOL1IVppcGdv8QQzRvqqN4KZgOLqvF+RslyPzlpqsq
- +7aMH4HkoxLhFMES1d5i/ZLSf0NjRoTHu1VsNZTsUzhIZ25X4BWC3qulexw3+/UtQqgG
- FjEJcxZGPiI2ZvpW/87/luRErQu7yNPOG9XaK0jnwncRgxgVTWP6K3Z0J5vRR5XUX4cK
- O6bj2XS25wb6gGQtE5XOSVtAUSCEEVaTp6v2+mpoB0JfdANq4tcitgoCYBbxqKIN9erJ
- mSiro6UPjR8aDu//Qzxij/cvqS+deGCyTgfVWYxmW2ozsDAr/q9LkJkQOHun5s5kbb6i
- F+Aw==
+ bh=VoiPeHjE5NA6S8RXpkM/75ua5zatDVspGYsNZ7Y1+Tc=;
+ b=G1QX+Yy7opZ/TKfwKLp0rfhtgrTu9r2rdeSHryL7sxkIiNaTt4AqueC88fVQNuCJVk
+ TLO/4OjciMP1gxrkpkVVjagXgOLp0SBBH7zEVQ3idTjsu12G8gmygOBKuv+s67ZJNX3R
+ Pas4Jw62853DkWpDiUcU8Jtq5fiTuFmsn4rSk7WIKy6J+rytcJ3f9TSqzFyrIN5ruOu/
+ 48JfiQhMGs/kS7LTLS9fB1hTaLUhKPROhNZIUDIb8yPwdMDvyFZHwiKwf0x/hu/yAKHg
+ eQ1mx0dDiHVx/k0vlC9yd5XQ4yy7QZ2rWC1gf1TxNT20pQXnRzFvdGRjcrWIO2CBeaeJ
+ ENgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767800121; x=1768404921;
+ d=1e100.net; s=20230601; t=1767800920; x=1768405720;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s3NevaM09V69fe6Ac2u1cM2IZPxkEcFLxNQMWdYIQnY=;
- b=t5YrYNCBkdNwbKZMiRQ84PABI7BYi6gqfSBJJ2D6BTnXvLX0RKG4cQkjngQi5qdut8
- 262bM77siMIEJHfuQI57VUgGerFTJ+SkK1MfLzWfI5V0XqOJ9C0CY1Y5cFSzFqTpev6Q
- eqQ3jTug4Elni9QYgPwFML858OWUT0VdyWhJMEEdXMpye2Jp3MjOOcXbcC7++ZhdxLt5
- lS3mvVsBA19/z7PEtGMkumCeAoQah+kZQb7yCW07AWizoHz5SdTM/pjq2xyu77GHslfZ
- T4sV1MtrGSdsdD7aN848hhWCy3nIYeOueolMouDOvibV/whdX6ilcOkyno+ZcEcfsDil
- DMUQ==
+ bh=VoiPeHjE5NA6S8RXpkM/75ua5zatDVspGYsNZ7Y1+Tc=;
+ b=nus3JB9lDM/pT4cqB8D0gWnSLA/JrkpQ9Y30CW5Xc/k7ADAvOCglhjlTmAyoDsnvvX
+ iqWpVPhzKpoye/yf5hM6wP7+x194miFMY6Sij6yKb/fCJyQvB2SGxnU4NdDsTOc7qjer
+ 1G+It00WHBTOC1CDq7c9Sn6iA+jOwMC/X+/DAIgrIV46Fml1YNlZrQBwLEQj4bqiVu/y
+ aLy8ZHbPvzRMODpn4kJx+4yTKprImBKeg4DPGPagR21BUlepHjYotMhbSqkQJGS7dbu+
+ aQJKA1M7d7zLarDpuwzmEwnDovKbEL0txSd55/pbL5+Ut0kIsNv7ljUQJqHfE7gGWn0E
+ Ivug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFAcM634VRFu2icWu7EBksx/NcFGvKttpawDRKb9+zOo9d1W+K0nwRDsuUWyuBKdT6UFjR5S8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2cnQ9Yz0cSRAXgNUHTKjN7iCGVRImEC2323CN2/v9xH44Sd0Y
- FEWWJ6RTJrceSRFZZZlPddzyLb/252t/jCMGldeMjHYzOxUWZVofiBRjhlHvlEc2Wu26tqmNo70
- nnhk0UQzyU8k52LIkcwLvcOn6fh74f7lfJASDkbOp0op2CDsmPc83v40U
-X-Gm-Gg: AY/fxX5eVqkr9BcXh9ZCmuMtqmFhfuUHccrglsjhAeYE95aXn+Df2hS+o3qrdW9ixk+
- kGeCogVyaECSPfj5OKCFm4pB3QrLAEeslZeiktVFXduFPKxVBGNntjVb8THQz1bRQibUmH4+nPJ
- qpxFoWwGIewimB43f5v2CxfyFtcGGf7jqE5yFbbQvoGipRTys24YDN1s4uH+TPnlAiY9dqou2Uy
- H2aMitxJ4wnHdyTbSTLzR4sS6z77yVjBv6F1Yh8YlYIPMks2t4OLGqvjt8RHT9cWIVtGIq2qywJ
- 6AD5ABRZ71eqZ8NvVP9GWK+pu9Ixr77uPW83+nIx2ByNr6x+kisSVCU6z7newYeS5+G/2CHszUE
- f/jU+0hnRLnG5tEEUVJJ/WtmNJb7iI2WZiGraM4D6/UKhz02dyMXoLGKgYNZ1WzVExTm2yr8beL
- /PgcGT51u+Kq2ddSH5idPXKEDb92Et
-X-Received: by 2002:a05:6a00:3318:b0:7f0:8031:70b8 with SMTP id
- d2e1a72fcca58-81b7fbcbb86mr2913080b3a.51.1767800120598; 
- Wed, 07 Jan 2026 07:35:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEXAaLLxqoBVlzm4AnyjhCovhKKoGXsMkuOKARqaZSk/9vpzr7IqP9V8L8AFIJJN+JrZtMAQg==
-X-Received: by 2002:a05:6a00:3318:b0:7f0:8031:70b8 with SMTP id
- d2e1a72fcca58-81b7fbcbb86mr2913051b3a.51.1767800120044; 
- Wed, 07 Jan 2026 07:35:20 -0800 (PST)
+ AJvYcCWuBtEx/tWF21OnfGvXty4jtIuDPUfaUwOmxQJyIpGy4IE0ylsqqSsYwNLJ1sppFP7NLK0Z14U=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsA3qowXWLwxdgfH1zMmqjM4k/2AuOAEvpmaQM8BTR4fPUVKTa
+ rIJCbJY/UvCMEgx/NDSVLjedqwwK+qxE22kgG4wA6BQcgmPv8/9xitrqnpCj/AyJYJDeSOWrnXJ
+ 1smLXbzdQPbSu2ygx1RtCmhe1+3bPheNY/kLZjDQGe75NOoaI908X8UGe
+X-Gm-Gg: AY/fxX6j7fUd4zOHYBFfbWjiYhPrixy14sznIwh1YFhFcmsEQ2TadikG3Bd5RCt76Gu
+ f9zNPlV8IydraCwcmzGPFw1En+ti3xW8CwtSH4x2iyec+ynFsVZUrN5f40gGK+gpFp6SIkZC+49
+ qsi1RBJiez5yms7Oj+ZLWWom+CjIleYtHW6B253nKL9QqwUlhPjQ09cDhRyz6yzAL/DjUlp0Jhm
+ bANt9ppLDc2rm4Nqw6P/1xniLkJWSsI/vNqX1nDgiC9PdYqOtmGe+B8bHouh5B9ujlIcAfuX4Wq
+ pmM5wpJ3gi9nYn0QoQGDfrgCZGdibrbqc09g8CAae0ED/uildrm8WIY+mAZ0PbovVdpX4CG5jVC
+ MnwD+A4ZFNwuAQ8iVRXSyLlCH8qyale8KbL/o1I+M0UmLwG/yJ8U1dolSiz2fn7k259BPM+9teO
+ 1DAL4skgm1ptsmRvq9XnyQHomY7z5/
+X-Received: by 2002:a17:902:c407:b0:2a1:14dd:573 with SMTP id
+ d9443c01a7336-2a3ee429d3amr29296545ad.23.1767800919925; 
+ Wed, 07 Jan 2026 07:48:39 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEdYN5o3ZOXx6GthcUW9m2hOufhwiJ4gnNLE5nnXccagu0UFP2hAUbWGG8l/osnoZomRKnc8g==
+X-Received: by 2002:a17:902:c407:b0:2a1:14dd:573 with SMTP id
+ d9443c01a7336-2a3ee429d3amr29296245ad.23.1767800919456; 
+ Wed, 07 Jan 2026 07:48:39 -0800 (PST)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-819c59e9d42sm5264188b3a.51.2026.01.07.07.35.17
+ d9443c01a7336-2a3e3c47221sm54219005ad.23.2026.01.07.07.48.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 07:35:19 -0800 (PST)
+ Wed, 07 Jan 2026 07:48:39 -0800 (PST)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, mateusz.kulikowski@gmail.com,
- trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1] spmi: msm: refine handling of multiple APID mappings
-Date: Wed,  7 Jan 2026 21:05:04 +0530
-Message-Id: <20260107153504.550450-1-aswin.murugan@oss.qualcomm.com>
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ christopher.obbard@linaro.org, quic_varada@quicinc.com,
+ marek.vasut+renesas@mailbox.org, alexeymin@minlexx.ru,
+ danila@jiaxyga.com, david.wronek@mainlining.org, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: [PATCH v2 0/2] pinctrl: qcom: Make pinctrl drivers default y
+Date: Wed,  7 Jan 2026 21:17:43 +0530
+Message-Id: <20260107154745.571319-1-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA3MDEyMSBTYWx0ZWRfXyosBIapmEsFF
- NYnN/JA9kCEhQS5zgm5Lx+e02d7Iq/6DLW8nGVb9VNkOJxljBDwailSbmIb1XTbOexnSbaTzZg3
- XXE6mtLSSkwnvVkSibWhZt12SKVgv4iTnvzRlISRxL/UC0ZNj796zhVpE9a+ISWK0fi8/00FbRr
- /JH/C/GuyKweS6fKtj00a8/vLFR7Gypej+xfkxh3klB38mZKcFxignfQ0++3vNkzH071b+ywVx0
- 2N0RO6oc5BtqTgHj5uz0C6EJm7YPVl73v+Rz79I0lN9FooFHDePLzNzRmG9ey9gAkiX95R2/2Eu
- EfpNcjjBOrHb2TM7tq5wLYEjNW42zk7QYCu1et7TNe07gQAfYx71h+3dtmujNfzKLcxZ5Kl0Kjt
- fKfe7x085VG/bEXenHTggGyzDR0zk/uRvj6QA84DgLrpdRSvSiSaJKJLoUfBDhmDlmCdoMe8T63
- cA+YuYGb6x8uhgH4pfg==
-X-Proofpoint-GUID: by9j-T90RuwYWltnlL6YVqjFOHc_jeeZ
-X-Proofpoint-ORIG-GUID: by9j-T90RuwYWltnlL6YVqjFOHc_jeeZ
-X-Authority-Analysis: v=2.4 cv=Abi83nXG c=1 sm=1 tr=0 ts=695e7d39 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: -KXzgbXm5Lzc7oC33yYAWYCgAgJpbVoc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA3MDEyMyBTYWx0ZWRfX/pZ/HSqH/2/j
+ lvKfzq5BcSOcumpXsRQCK+lJgEICOilzvr1KjwWDxNPeMP7VBUcwoN9EP9gslvSHDDVtaYlM62U
+ rNmW7XA0WT/YGeBJGVsxtYRANt0tTbHdffrQSjAsCj0rbolxuyuTYINNPQKWlnDLCBFfBWFrfRM
+ YaqdNLqsQZs2bIQ98y9LPIr5HVAxLY6VfMybU/hZRK6G852eFv6TtnO8vS+HOdQkZ3WBhDfBDaY
+ sYIWL3CKmzfIMplanfMVCzJFtYgYcXu8ZFrPSxyD8UkBmMJJBUnZrWTflX3KF9xPDamq+f20/Vd
+ n9roNH89LNjvhXdL1hQRg5L6AZuAc4VCAVdclirzdOhw9rSwbk2hbpMhrvp+fVNwdNGFyI4kITn
+ ouV2nQhmh9cWI+J2+8FrKgeD9UFGxFE7QnUE+IuGxkwk2eY6oRCRrG3LKtGjw3sSxCkneAGA4hz
+ W9dxdMAosnrLxb6GXpQ==
+X-Authority-Analysis: v=2.4 cv=P7k3RyAu c=1 sm=1 tr=0 ts=695e8058 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=wz9XmjxeAwFrORu178sA:9 a=2VI0MkxyNR6bbpdq8BZq:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=hFpiHMTvZr1_hkbVHtYA:9
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: -KXzgbXm5Lzc7oC33yYAWYCgAgJpbVoc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2026-01-07_02,2026-01-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 phishscore=0 impostorscore=0 adultscore=0
- malwarescore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
- definitions=main-2601070121
+ suspectscore=0 spamscore=0 phishscore=0 clxscore=1015 malwarescore=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
+ definitions=main-2601070123
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,52 +150,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PMIC Arbiter may expose multiple owned and non-owned APIDs per SID/PID.
-- Keep current mapping if it is OWNED and a NON-OWNED appears.
-- Always update when a NEW OWNED APID appears (make writable).
-- If current is NON-OWNED and a new NON-OWNED appears, update to it
-  (remain read-only).
+This is a follow-up patch series to address review feedback on the
+QCS615 pinctrl driver addition:
+https://lore.kernel.org/u-boot/20251112164758.1560041-1-aswin.murugan@oss.qualcomm.com/
 
-This avoids write-access violations when not using the newly discovered
-owned channels.
+During review, it was suggested that all Qualcomm pinctrl
+drivers should be enabled by default based on a condition,
+rather than requiring manual enablement in defconfig files.
+
+This series implements that suggestion by:
+1. Adding 'default y if PINCTRL_QCOM_GENERIC' to all qualcomm pinctrl
+   drivers in the Kconfig
+2. Removing the now-redundant explicit pinctrl driver selections
+   from qcom_defconfig & enabling PINCTRL_QCOM_GENERIC config
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- drivers/spmi/spmi-msm.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+Changes in v2:
+- As per review comments made default y for pinctrl drivers
+  based on PINCTRL_QCOM_GENERIC config 'default y if PINCTRL_QCOM_GENERIC'
+- Link to v1: https://lore.kernel.org/u-boot/20251222115144.2146964-1-aswin.murugan@oss.qualcomm.com/
+---
 
-diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-index faae54e9fef..f3cd98c3db8 100644
---- a/drivers/spmi/spmi-msm.c
-+++ b/drivers/spmi/spmi-msm.c
-@@ -274,10 +274,25 @@ static void msm_spmi_channel_map_v5(struct msm_spmi_priv *priv, unsigned int i,
- 		priv->channel_map[slave_id][pid] = i | SPMI_CHANNEL_VALID;
- 		if (owner != priv->owner)
- 			priv->channel_map[slave_id][pid] |= SPMI_CHANNEL_READ_ONLY;
--	} else if ((owner == priv->owner) && prev_read_only) {
--		/* Read only and we found one we own, switch */
-+
-+	} else if (owner == priv->owner) {
-+		/*
-+		 * Found a channel owned by our EE - ALWAYS switch to it!
-+		 * even if we already have a mapping, we must prefer the one
-+		 * owned by our EE to avoid hardware access violations.
-+		 */
- 		priv->channel_map[slave_id][pid] = i | SPMI_CHANNEL_VALID;
-+		/* Clear READ_ONLY flag since we own this channel */
-+
-+	} else if (prev_read_only) {
-+		/*
-+		 * Previous mapping was read-only and this one is also not ours.
-+		 * Update to this channel.
-+		 */
-+		priv->channel_map[slave_id][pid] = i | SPMI_CHANNEL_VALID | SPMI_CHANNEL_READ_ONLY;
-+
- 	}
-+	/* else: Previous was writable and owned by us, this one isn't - keep previous */
- }
- 
- static int msm_spmi_probe(struct udevice *dev)
+Aswin Murugan (2):
+  pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable all drivers by
+    default
+  qcom_defconfig: Remove redundant pinctrl driver selections
+
+ configs/qcom_defconfig       | 19 +------------------
+ drivers/pinctrl/qcom/Kconfig | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 30 insertions(+), 18 deletions(-)
+
 -- 
 2.34.1
 
