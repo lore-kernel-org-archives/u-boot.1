@@ -4,56 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E13C47BE1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Jan 2026 23:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB854CEFD0C
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:03:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B76483C4B;
-	Wed,  7 Jan 2026 00:37:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0953A83C08;
+	Wed,  7 Jan 2026 01:03:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dB82aOUy";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qF4lGv2V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EABE083FDE; Wed,  7 Jan 2026 00:37:01 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id ADB3983C4B; Wed,  7 Jan 2026 01:03:09 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0632383C08
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 00:36:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0D51839DE
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:03:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0cbd=7M=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1767742617;
- bh=9thYRDrtn/09FCFst4zpchL8wQ+jjjT8WONFd4hLvnk=;
- b=dB82aOUyJFfJ/W+SEVf6dokhHoHo7s8ttMqATmbBsvZYyH05j5U6clFjxsar1Sk7OkQfE+M4E
- 6XW7REQQHEiMHPC+hNE+KypDLqUyFTtk1c1WffODcmsvxTTkRCrOG8f4W8TwVGhkDAoVoixV+0V
- nt0ZyOadt0DrPPwu5rDMdOHsdGinrpeGDf3z65LM/hSlh+q5DouxdfIH+xZVTJg3zB7zqmtHeHv
- S/Jl6HC7VuX5tcMhtTL9T3urLyXJ0J4rdRdo0UjKkoS5hDbS7g7YEBdL0yz2rQdi0d7/EQQxVm8
- bcx2nJs+DPdIExYdvO833ysXk0G7+8ggqlcF3E2loHoA==
-X-Forward-Email-ID: 695d9c936a205f61d11314be
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.2.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2] phy: rockchip: naneng-combphy: Enable U3 port for USB3OTG
- on RK3568
-Date: Tue,  6 Jan 2026 23:36:43 +0000
-Message-ID: <20260106233646.3184154-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.52.0
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dm7XT4n7Zz9sVv;
+ Wed,  7 Jan 2026 01:03:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767744185;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mVpJjB9aW6vLNtrMy2CIIx+/apTGxrOP8+Jz6TLrzdE=;
+ b=qF4lGv2V6qpmSBFkBzhEr2hOnBzv9sg/oxWJ+jAZRUc0eziHHvJHoCULe/BdYrVJIPjaus
+ FTUtMGvyvATZf1kRNCfmrSNJCFHWdAmK35lYoa+3c92qQP3uu16fnf29ysJYiXQFTZ8p/f
+ 2wLGOkKkYUaDvhTm0Wd3cShuJmX7TzTKbVesT6Wqi8Y4eV/jpjH+Q4Lghn0RTvdybGWqcH
+ I1J5WO5R9C3q+onEZLp2mw+lJj+5xQrWrgnNWR3EaZpj6DbYnQpPpkWK0pQeBEkcTqBucG
+ PNemr6Fj8vj6YrwdDMAIVRqsbIFwCF2mVu9s5RgVW1on2liLaulhPypVhY0IQg==
+Message-ID: <702afe1c-ef45-4628-a4b6-fb52440e996c@mailbox.org>
+Date: Wed, 7 Jan 2026 01:03:04 +0100
 MIME-Version: 1.0
+Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
+To: Sean Anderson <sean.anderson@linux.dev>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260106223409.748335-1-sean.anderson@linux.dev>
+ <bafc0b79-9126-4cdc-92d1-dd6fe2f884ac@mailbox.org>
+ <70d036ee-e61b-44bb-9160-697e4d3f75e1@linux.dev>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <70d036ee-e61b-44bb-9160-697e4d3f75e1@linux.dev>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: j4bh5mjbemmewto5oupre73c4sn4sz9e
+X-MBO-RS-ID: 4cbb7ca15041050df96
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,38 +75,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB OTG U3 port may have been disabled early, add support to the
-COMBPHY driver to re-enable the U3 port.
-
-This matches changes made in the Linux commit 7bb14b61b7d0 ("phy:
-rockchip: naneng-combphy: Enable U3 OTG port for RK3568").
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v2: No change, drop second patch
----
- drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-index d602f965d6aa..82353ae7678c 100644
---- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-+++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-@@ -399,6 +399,14 @@ static int rk3568_combphy_cfg(struct rockchip_combphy_priv *priv)
- 		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
- 		param_write(priv->phy_grf, &cfg->pipe_txelec_sel, false);
- 		param_write(priv->phy_grf, &cfg->usb_mode_set, true);
-+		switch (priv->id) {
-+		case 0:
-+			param_write(priv->pipe_grf, &cfg->u3otg0_port_en, true);
-+			break;
-+		case 1:
-+			param_write(priv->pipe_grf, &cfg->u3otg1_port_en, true);
-+			break;
-+		}
- 		break;
- 	case PHY_TYPE_SATA:
- 		writel(0x41, priv->mmio + 0x38);
--- 
-2.52.0
-
+On 1/7/26 12:32 AM, Sean Anderson wrote:
+> On 1/6/26 18:14, Marek Vasut wrote:
+>> On 1/6/26 11:34 PM, Sean Anderson wrote:
+>>> Extend the PCI bridge driver to enable resources associated with PCI
+>>> slots like clocks, power rails, and resets. This is modeled off of the
+>>> PCI power control subsystem in Linux. The traditional compatible for PCI
+>>> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+>>> pciclass,0604 so add that as an option.
+>>
+>> Oh, nice :)
+>>
+>>> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
+>>> +{
+>>> +    struct clk clk;
+>>> +    struct gpio_desc perst;
+>>> +
+>>> +    if (!clk_get_by_index(dev, 0, &clk)) {
+>>> +        int ret = clk_enable(&clk);
+>>> +
+>>> +        if (ret)
+>>> +            return log_msg_ret("clk", ret);
+>>
+>> Should we use dev_err() instead ?
+> 
+> I thought we weren't supposed to log by default in device drivers to reduce text size?
+Tom had a different take on it, lets wait for him. Me personally, I like 
+the dev_* functions as they are compatible with Linux ones, which is 
+nice and non-confusing.
