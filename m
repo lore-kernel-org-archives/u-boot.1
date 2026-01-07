@@ -4,98 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6196D0D16D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:19:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E40D0D16C
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 20:19:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E532983A2D;
-	Wed,  7 Jan 2026 21:19:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 36C6484088;
+	Wed,  7 Jan 2026 21:19:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ogGeP6aO";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="C8F4yQ+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83D2C8405F; Wed,  7 Jan 2026 20:02:17 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id CD57C84047; Wed,  7 Jan 2026 20:59:17 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F3F983A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:02:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 876F8839A5
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 20:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b736d883ac4so450437566b.2
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:02:15 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7ce0ef9d4eeso1042653a34.1
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 11:59:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767812535; x=1768417335; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2q+YEM8omsK2pnvbn1ZF+KPrgRIx47d/vgOdLYsb3bQ=;
- b=ogGeP6aOSfY8vUkwyHMbhLJwebDSSZND0d/N//Id/NunfvVoQj0h7bSASuzlXz7sCp
- yUjwBlKe1d6MPfXDAOj85uKQdgZljN+H0xD8ktCrSnMW6E1Nzb6VLnFHVPpDvIABEMaw
- f5gapb/pYp/B2U1NejQdgJ+WAfrPNSEo9UEEw=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767815954; x=1768420754;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YAHuBlpE54f0b+0n8NtqmyZBeclNPKtvarohXVbiWT0=;
+ b=C8F4yQ+VJ7QCKarXxNF5IlDaSx6J0ZZe/3EU9KpIb+7LbtEnXAnCyU622kiNf4nqY1
+ F1tsc343sPSuryBYCxcEH2K15HCGPU+p71rzg39TmAk5voaWsPz5g9FG5WmlqPUFKUdT
+ m6fK898FrS9bdx07V+sVzKAJCO5yLOdVNVamkzP/CW211GJKdxytX7zuFC6foH2ViGvy
+ grSqN2mHxDCRjPvM6/KwYvZRUMHJsf6AvJzh4Qmewv2k7OmlAtCNdu3wHuNh4kBYce6x
+ AmAZ3EQ3h38CeKWN/wDoK7OMRm2uLJKwkAL2fJZsl+Ore05uMQcI7ZaZ07l1ZZsk2eWm
+ f4iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767812535; x=1768417335;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1767815954; x=1768420754;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2q+YEM8omsK2pnvbn1ZF+KPrgRIx47d/vgOdLYsb3bQ=;
- b=dDVb0uIbee5iQRHytID2mDpUN+je6iZ7INYWEZxVgktrX14pMisPkNKM9VgpcGPUbH
- Av+GQsKcbXB71XllADB+G/GJGHwWwtzWMgiovMp0PGfHckzWvFfPNizdoQLE73Ow4Ih4
- lZE+XZgktuXQ9wzHbc8h9TQedrQoLRpSLEnoe8qI4Wodqj1TOJdLqpG5QyK4mI5IS77M
- C33xxcOT7M9lLtJGIN6hhoO6KwBZ5wqe1lGbECGG3OvfnxQYyvomd/SVEeBWn8MtOD/R
- 0V9wdZ+0nznsKsHegrqTrS1ySo1y+MDZcA9v0DpOEUcWew5j8q/Jj1Wtsdcj/NJDZDcE
- eh9g==
-X-Gm-Message-State: AOJu0Yxqzdtj5ri/NxW8RtoqQlWjSukCLT8noDiKEZDYDMMWsBiIVJjz
- ODiXFIzT13h7uw5/1A96UtL/xSbEG2XAX81BNQ7INT/gp71EAB2+TJa3M8GbqgPNZrkhxm8XVqM
- +LLSryLNsCn9nohfx4VjzPgD3sVQLBdpCp4UF94xB
-X-Gm-Gg: AY/fxX5aRk0NCqLUwTlLCoI31pJzZu+J15kCHCoF+eLxa2IDRqZWlOKKF6QgIMLqqg/
- /lphrVZwu7Sxa2JlOt80sp+jJ45DXrlH+0MivZjCZQG6HTGWPQ4vvWFJnMYpfQMWF5ESKVIhWfP
- AJXBFUBjiVkMdV80AUAy+xyuUxjNGphT49cUkfQi1KTrd4sxv03Dn0FRCcyZSSmmcrZeLkRMwTc
- at7Bgdd981vrQK/BIn1/py1H3dhouVgR7mjNbAuhdGioT/9e15w4KToDrpGvITbwsotvg==
-X-Google-Smtp-Source: AGHT+IFYl8JkIfE20N2RA2QuSAlvVlnQG2EBfKSJEqxlY6Yv+b9mkLnvTYiF1OHZ/mj9Bnn18YkfeYYansxAuJVATGA=
-X-Received: by 2002:a17:907:a49:b0:b7c:e4e9:b13f with SMTP id
- a640c23a62f3a-b8444f4e435mr382702666b.39.1767812534897; Wed, 07 Jan 2026
- 11:02:14 -0800 (PST)
+ bh=YAHuBlpE54f0b+0n8NtqmyZBeclNPKtvarohXVbiWT0=;
+ b=k4Yo3LzuySm8K9jnlrJL8gd8cISfQSrgE6XHMNoqjEiMBIPXEB5d6SbXMs9cH6gKiW
+ cScnycWzOKWVZsjPONOJ4tN5r0ZM5kd6YuClR9pfLRqx0J+Y3pXAsH+152QxT/JOG+7L
+ IxkBFzNfVHBoWPtTHUrJxapfPJrZjxshWG+m5kgaecfP64/aNFddd5tq5XriWYO7uQw1
+ jZvOiu6UfLzqIXj02BDXFMq4/DHzyRtyma0ltRjjwJrRw0h17+6EDUrjbbDl24B/rv4z
+ 1dfOyMyIwiGxjicv92WgtRL8dzeWnJr3MPvISOYGfQa6ZL+byT5esrADeoS/ZxzCBkFa
+ eVCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMjwrRdZzlfaLmwWAFVVmc7Rr9I6sfV6OLg/45hZgSXLicAqLDAiiqpLL9EYXv1POtS/lp1ok=@lists.denx.de
+X-Gm-Message-State: AOJu0YyzIaRP0e3FCsTEenUk+r2c8xbTgUCrZyR0LgK3Xg3qQSCV2Z47
+ 42T8z+g6CXSoeA7f7lbnVAWcFZzJ9iaMCrGinxdRrK85kO6ufxmWeBrntiMNe3Q/jh4=
+X-Gm-Gg: AY/fxX6L2PkrVa4/wxpmDljzPREHX6muGcSgeLytOHpA/QeOIr03NspJcEW/pOjv72F
+ 9pekO0x9CH2ROKrOtIWashTv911Nyenb4ChtkceYU7TPjOUxb0mspjkEagMI91OCgkK+ZjORvay
+ Q05hrmqPpvvJlgiaqIZWShp44/0MecRpnjYzbQiBPp0BRurUGaIn3ee3SGBdLwtMPeMCrgchg8X
+ SbWkd5KAFKDGhnescV9OnQI6w7Z7Z3Y3V07IM0DfhaWdPkQSp/Prkz7O6cI/lNo3LfYx8AwUDdt
+ N5EIlZJt1kpn+LZH61dijYLN4UVGXs64SWvcyT4pK387aXv9xl2uW2p6X1VQpUTNRBTPc6Wtohp
+ kujqUD79f3j3WGqvga9o6z9wuNuX2p94FsT5Mp+18q6jmuJjepoFNuzjhzCNnm2FkFhPxPhOiRv
+ I6uTQpqFkoLc7l42A=
+X-Google-Smtp-Source: AGHT+IEYn1yqDw6mG5Q0Y0HCDZQAGh6QnfoYjdXL6tsxfabGD3+QPkCQnGtm7MqGFZh0W1M7eMZt6Q==
+X-Received: by 2002:a05:6830:45aa:b0:7c7:63b6:89d3 with SMTP id
+ 46e09a7af769-7ce50bcb16cmr1349227a34.19.1767815954217; 
+ Wed, 07 Jan 2026 11:59:14 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:f278:961a:494a:41af])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478ede38sm3900797a34.26.2026.01.07.11.59.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Jan 2026 11:59:13 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Date: Wed, 07 Jan 2026 13:58:58 -0600
+Subject: [PATCH] configs: mt8365: remove empty header file
 MIME-Version: 1.0
-References: <20260107003131.3064800-1-simon.glass@canonical.com>
- <CALeDE9OP8qZAtWykrBDu95qx=Sp0jP7BK2BE0H1d1pfz6_YJNw@mail.gmail.com>
-In-Reply-To: <CALeDE9OP8qZAtWykrBDu95qx=Sp0jP7BK2BE0H1d1pfz6_YJNw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 7 Jan 2026 12:01:59 -0700
-X-Gm-Features: AQt7F2pch1G-gvD0mXayX9vSn2YXZlA6C4rj8EV-ahOhZcgixNvryw0ulKCpOVw
-Message-ID: <CAFLszTjQB1NBAKzTxsXKW-0d-V11BbzaLHswxSDAdbZ=3zbsTg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] bootm: Clean up arch-specific, pre-OS clean-up
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <simon.glass@canonical.com>, Adriano Cordova <adrianox@gmail.com>, 
- Aristo Chen <jj251510319013@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ian Roberts <ian.roberts@timesys.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>,
- Rick Chen <rick@andestech.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <stefan.roese@mailbox.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260107-mtk-mt8365-remove-empty-config-header-v1-1-f1c25b637fdc@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2NwQqDMBAFf0X23IXE0lj7K6UHSV50KUlkI9Ii/
+ ntDD3OYy8xBFSqo9OgOUuxSpeQm9tKRX6Y8gyU0p970zlgzcNrejfvV3ViRyg5GWrcv+5KjzLx
+ gClC2Y/A+RhcHM1JrrYoon//n+TrPHzpT4KF3AAAA
+X-Change-ID: 20260107-mtk-mt8365-remove-empty-config-header-19dccff6f709
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1446; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=kUD3Oik6HcZ9bxEJCxpoYB9J61FWMubj1gJGQylvERo=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXrsJ95EVSasss+ZBfwFuxSG/w/HIIXmaUYXie
+ vTw0MkBjb+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV67CRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABUkH+wVkBIrSZihsKi2GumLEHHi9ibGTumBcQP6kIiu
+ TvzVVsodlw3csWStbWxXsHkYFt+EX7Dp+ERL7vrGJKlStygIPtxyQ990vQBn0BPpo10Wjizvtml
+ YsKbJkSQG6tgbDzhglddY66R0kosYqhhM+WljFkjSOn45SYNANLamRYIGybRGhgySWUO7WsOHhc
+ fXaC40bdb6maQa/X7aDvAx2KzlpldRH7uSgre4LhK4b8I8roIkf9fo8eS69UoeY/CnQEgCtTI1x
+ lXJ9w2WxzxxDmoDg/KdPjsR4xjj6Yw+6xwWDePmsEJ7tFAZFe5D+7c43J0IO1kD7NF6xTucT+yF
+ uP0M=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Wed, 07 Jan 2026 21:19:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,102 +122,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Remove the empty include/configs/mt8365.h header file as it is not
+needed. The Kconfig entry that referenced it is also removed.
 
-On Tue, 6 Jan 2026 at 19:29, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hi Simon,
->
-> > Each arch does something slightly different before booting the OS. Some
-> > archs even do different things depending on the CPU type.
-> >
-> > EFT_LOADER has its own special code, regardless of which arch is being
-> > booted.
-> >
-> > It is quite hard to know what actually happens in the final milliseconds
-> > before the OS boot.
-> >
-> > This series attempts to clean up U-Boot in this area.
-> >
-> > The basic approach is to create a new bootm_final() function which is
-> > called by all archs. It provides some flags for a couple of necessary
-> > variations but otherwise it is generic.
-> >
-> > RISC-V, x86 and ARM are converted over to use this new function. For
-> > consistency, EFI loader is converted as well.
-> >
-> > A noteable change is that EFI_LOADER now does bootstage processing
-> > before boot, if enabled, thus producing a report.
->
-> Why is the change needed, I don't see it explained in the patches or
-> here and what the implications might be.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ arch/arm/mach-mediatek/Kconfig |  1 -
+ include/configs/mt8365.h       | 12 ------------
+ 2 files changed, 13 deletions(-)
 
-At present EFI_LOADER ignores bootstage and so there is no timing
-report produced even if enabled. It was probably an oversight.
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index f7ef17e0203..d1d2605b2cc 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -158,7 +158,6 @@ config SYS_CONFIG_NAME
+ 	default "mt7987" if TARGET_MT7987
+ 	default "mt7988" if TARGET_MT7988
+ 	default "mt8183" if TARGET_MT8183
+-	default "mt8365" if TARGET_MT8365
+ 	default "mt8512" if TARGET_MT8512
+ 	default "mt8516" if TARGET_MT8516
+ 	default "mt8518" if TARGET_MT8518
+diff --git a/include/configs/mt8365.h b/include/configs/mt8365.h
+deleted file mode 100644
+index e8aacf8c5df..00000000000
+--- a/include/configs/mt8365.h
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Configuration for MT8365 based boards
+- *
+- * Copyright (C) 2023 BayLibre, SAS
+- * Author: Julien Masson <jmasson@baylibre.com>
+- */
+-
+-#ifndef __MT8365_H
+-#define __MT8365_H
+-
+-#endif
 
->
-> > There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
-> > recently on the mailing list.
->
-> That appears to be unrelated to this series, it should be a separate
-> standalone patch else it needs to be described here why it's a
-> dependency, and even then likely still posted separately as a
-> dependency of this series.
+---
+base-commit: 53c0d5b387956bb4070a943b61991898373a20e2
+change-id: 20260107-mtk-mt8365-remove-empty-config-header-19dccff6f709
 
-In what way is it unrelated? In my view this is related as it is a
-pre-OS cleanup. What do you mean by dependency here?
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
->
-> > Future work could take this a little further:
-> > - Drop board_quiesce_devices() and rely on driver model for that
-> > - Similarly with udc_disconnect(),
-> > - cleanup_before_linux() could use more details as to what it is
-> > supposed to do, to reduce the number of arch-specific variations
->
-> What do you mean by that statement.
-
-Well, the function does different things on differents archs and is
-mostly uncommented (apart from an ARM-specific note in a README).
-Ideally it would be commented with exactly what it should do, ideally
-at a high level so it is not just arch-specific.
-
-
->
-> > Note: This is the first 10 patches for an 18-part series from the
-> > Concept tree, as requested. The patches after that complete the cleanup
-> > on ARM and RISC-V.
-> >
-> >
-> > Simon Glass (10):
-> >   boot: Create a function for final pre-boot steps
-> >   efi: Make use of bootm_final()
-> >   bootm: Add a message when booting
-> >   bootstage: Add some missing dummy functions
-> >   bootm: Do bootstage processing in bootm_final()
-> >   x86: Call bootm_final()
-> >   riscv: Drop board_quiesce_devices()
-> >   riscv: Call bootm_final()
-> >   efi: Drop EFI_GRUB_ARM32_WORKAROUND
-> >   x86: Add cleanup_before_linux()
-> >
-> >  MAINTAINERS                           |  1 +
-> >  arch/riscv/include/asm/u-boot-riscv.h |  1 -
-> >  arch/riscv/lib/bootm.c                | 24 +------------------
-> >  arch/x86/cpu/cpu.c                    |  5 ++++
-> >  arch/x86/lib/bootm.c                  | 14 +----------
-> >  boot/Makefile                         |  2 +-
-> >  boot/bootm_final.c                    | 34 +++++++++++++++++++++++++++
-> >  configs/mt7623n_bpir2_defconfig       |  1 -
-> >  include/bootm.h                       | 17 ++++++++++++++
-> >  include/bootstage.h                   |  8 +++++++
-> >  lib/efi_loader/Kconfig                | 10 --------
-> >  lib/efi_loader/efi_boottime.c         | 30 +----------------------
-> >  test/boot/bootflow.c                  |  2 +-
-> >  13 files changed, 70 insertions(+), 79 deletions(-)
-> >  create mode 100644 boot/bootm_final.c
-> >
-> > --
-> > 2.43.0
-> >
-> > base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-> > branch: bootma-us
