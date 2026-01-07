@@ -4,73 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AACCFD624
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 13:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB27CFD627
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 13:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00D4483AAC;
-	Wed,  7 Jan 2026 14:00:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74645839D7;
+	Wed,  7 Jan 2026 14:17:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YiaA66UE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="L6fErV4r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70A4283B86; Wed,  7 Jan 2026 14:00:18 +0100 (CET)
-Received: from mail-dl1-x1233.google.com (mail-dl1-x1233.google.com
- [IPv6:2607:f8b0:4864:20::1233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A1CE83AAC; Wed,  7 Jan 2026 14:17:06 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD80E839D7
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 14:00:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 280FD83979
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 14:17:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-dl1-x1233.google.com with SMTP id
- a92af1059eb24-11f42e971d6so2340795c88.0
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 05:00:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767790813; x=1768395613; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=lOvy51uoIF1sJkEXpyINcAqk5YtOj9RA7WqvkIAuUOk=;
- b=YiaA66UEH65WTDtp5OJCw2OTi1/o9i5ULNwtiV3ijeNlMW49g84HhS5kxbuKdDVPdA
- HL08sFyXrphTh+DQPUKAr1KV08KCyT8G8tXn3OCJ9pZ75t+CMaPmCYd6E9AUY3a+eDLq
- 9vmEatI56S4RSJwdMA13GLi4uQET41uB1eUvY9PfdVZ+MaSscHueEG4vPr5t5QJgkMUj
- D92BGA77pNd2o0bnOCgeGe6AKFR5fdTsCJqUvm3bVL2oRrQem1Mdb46kRhRVKj51Nyua
- 6Puuv9egYV2DlTdIBEAs+Y0bujpH6DBO/jcCGXe8T2GkcCQITzLGI2SOW4pBMAxjXS3E
- gfwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767790813; x=1768395613;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lOvy51uoIF1sJkEXpyINcAqk5YtOj9RA7WqvkIAuUOk=;
- b=SXk5fwLiGLx5m1t4G9ZU7cFu1jbviMMfBdqjXqorH2enh35A0gUvyhhhsXxZxKBQ3j
- jjYoPGtfcG6qa716U02Q0CFtZWhRDzB6DqmfvlXtb5iDyFBhliYChRrjdwijwaaFN5tN
- K59euG534YP7UUoZyHP7Vf0iJRpWeKQduXJcbcz6Ucc4rRHYYj8Nwi3l1RAWvO6XiDwb
- p4T+1owdbvyc36VLwVlqQrbDIt0w+iulGIAeexvphSb+T+7Qguvxb25ht0NlGsY/cFEF
- D1Qn+34XjsrGz9t09HlmZljZNZfV12JVh02eM+rrNQpZlHItamlxAPwQ+qN66yZPtc1/
- MzEg==
-X-Gm-Message-State: AOJu0YzflP6x3ZrxWG5gKooAgdMELIr7r67sLtIspcrRlqS8uPIwDbUP
- q4WBxtQ/7SozVc32OcPQZ2iNH1kygI6NSAOvYYHj0KQRHUvda0BzDr/nFch3ykzCv8KXPhY5DF0
- YRz7kiN+OCWy+PR830gGDf09yvLgc89MH0jlK1io=
-X-Gm-Gg: AY/fxX67IlePIoPzT/Yioytuy5NngolIPFc89BmrwAczcxteXKpvCpr0I/vWDWYruzr
- n/C7zxxW/xwI0JuGMb8Pgqebo6h+WAW/Erpm9GC8nn8D5CZr+5nEcyuQjCeGlZ3JJZ0+/tI3Qgg
- EbWyzmGQ2S+MotnxZfoNPzDIZF6UNCRDNpo32czvbVOThigsXTQASPtDBQQvg4eV++rBcpqh9ai
- B7ja/0Lcu0LaCqYpcQHkYByXnfK1Uv69iCnSnw8NUyQhSycu++gTmnaqY7lk1pvxAtE
-X-Google-Smtp-Source: AGHT+IEmT57DF9NkNC44OpKGzm3yNZ0McxAVtUqGCyNmEtolWFRIQaoE0+Nq5xjVyLzJ4Nm5p+wEdfUUyaHzGa58Snk=
-X-Received: by 2002:a05:7022:a84:b0:11b:c2ea:daed with SMTP id
- a92af1059eb24-121f8b40da3mr2290137c88.32.1767790811739; Wed, 07 Jan 2026
- 05:00:11 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id F0C1D60018;
+ Wed,  7 Jan 2026 13:17:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FC75C4CEF7;
+ Wed,  7 Jan 2026 13:17:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1767791822;
+ bh=YmVArRqU6IKjp7Z6Kkzp5SvL2Jo638z6pqOmPrc4XPw=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=L6fErV4rHc0c2M0zgXdxzOFi0XAGFzPP1oeJjHEXYKYFxlcc4Ipac20+M+d3qZP2t
+ FrYZPQGujeOh5aupUzcxDPfOAtkjmqzQ/1DZoU7/mvaECIFSC6wcRyRxArCtH6hgjW
+ pDFF29Fugkc18D0wcC+Hwx8UVFi0avWxpS4RWet6VR2wol39xYYbok9ImNoXNoFQQi
+ Y3sktp78R7DzQNIyv41ZMXPmiZhqFhr+MgPyc4tWUySVMNbdjLWPkQnZFV4Q2xBHak
+ yCxS+JBKV+Yzdf/ycK8yNEGcoJdDkSD9b1Eey4ngtPC6MeEhjs1deom0E9/qxrTZh8
+ H8kjBP0CZ2mUQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Marek
+ Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Kory Maincent
+ <kory.maincent@bootlin.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Dinesh Maniyam
+ <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>, "Markus
+ Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Subject: Re: [PATCH 1/4] dm: core: Support multiple drivers with same
+ compatibles
+In-Reply-To: <20251126-topic-musb-probing-v2026-01-v1-1-ff8d8c487130@baylibre.com>
+References: <20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com>
+ <20251126-topic-musb-probing-v2026-01-v1-1-ff8d8c487130@baylibre.com>
+Date: Wed, 07 Jan 2026 14:16:59 +0100
+Message-ID: <871pk11s1g.fsf@kernel.org>
 MIME-Version: 1.0
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Wed, 7 Jan 2026 16:00:00 +0300
-X-Gm-Features: AQt7F2qTjg6XDpewQE56MhlDceSwFufzhK2oCaXvMOWGMdB31NVFez9S_YrKMFw
-Message-ID: <CAJs94EbyBnv=q6Gxp0WAhTRakxKm9xXgnriCVXQiycSem5qpCQ@mail.gmail.com>
-Subject: FDT overlay: lost in the documentation
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,22 +76,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello
+Hi Markus,
 
-I have a board with SPI where U-Boot image is located along with
-environment settings. The image is supplied with correct FDT, so no
-additional dtb files are required to boot Linux from MMC. I.e. fdtcontrol
-variable is set up by U-Boot. Then EFI is used to execute Grub2 which
-handles the rest.
+Thank you for the patch.
 
-I've read
-https://docs.u-boot.org/en/latest/usage/fdt_overlays.html#manually-loading-and-applying-overlays
-but it describes mostly how to do the overlay loading manually. What I want
-to achieve is to automatically apply FDT overlay from a specific dtbo file
-located on MMC at each boot. What is the recommended way to do that? Will
-rewriting the bootcmd env with pretended commands work for me?
+On Wed, Nov 26, 2025 at 21:31, "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
+> Currently once a driver matched the compatible string of a device, other
+> drivers are ignored. If the first matching driver returns -ENODEV, no
+> other possibly matching drivers are iterated with that compatible of the
+> device. Instead the next compatible in the list of compatibles is
+> selected, assuming only one driver matches one compatible at a time.
+>
+> To be able to use the bind function to return -ENODEV and continue
+> matching other drivers with the same compatible, move the for loop a bit
+> to continue the for loop after -ENODEV was returned.
+>
+> This is required for ti-musb-host and ti-musb-peripheral which both
+> match on the same device but differ based on the dr_mode DT property.
+> Depending on this property, the driver is either UCLASS_USB or
+> UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
+> function and returning -ENODEV the other driver can probe instead.
+>
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-With best regards,
-Matwey V. Kornilov
+> ---
+>  drivers/core/lists.c | 62 +++++++++++++++++++++++++++-------------------------
+>  1 file changed, 32 insertions(+), 30 deletions(-)
+>
