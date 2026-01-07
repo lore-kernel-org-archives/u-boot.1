@@ -4,45 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A2B5CF6BE0
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD235CF6BE3
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 366CE84033;
-	Wed,  7 Jan 2026 01:35:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
+	by phobos.denx.de (Postfix) with ESMTP id 22B208401F;
+	Wed,  7 Jan 2026 01:58:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YoZ6nks0";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DC2F84042; Wed,  7 Jan 2026 01:35:36 +0100 (CET)
-Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
- by phobos.denx.de (Postfix) with ESMTP id E8EBB83C4B
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:35:33 +0100 (CET)
+ id 76EC483C4B; Wed,  7 Jan 2026 01:32:23 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DE46483A26
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=socionext.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
-Received: from unknown (HELO kinkan3-ex.css.socionext.com) ([172.31.9.52])
- by mx.socionext.com with ESMTP; 07 Jan 2026 09:35:30 +0900
-Received: from mail.mfilter.local (mail-arc01.css.socionext.com [10.213.46.36])
- by kinkan3-ex.css.socionext.com (Postfix) with ESMTP id 4843E20695EB;
- Wed,  7 Jan 2026 09:35:30 +0900 (JST)
-Received: from iyokan3.css.socionext.com ([172.31.9.53]) by m-FILTER with
- ESMTP; Wed, 7 Jan 2026 09:35:29 +0900
-Received: from ubuntu-MonarchGE.e01.socionext.com (unknown [10.213.112.110])
- by iyokan3.css.socionext.com (Postfix) with ESMTP id 5510B10A003;
- Wed,  7 Jan 2026 09:35:29 +0900 (JST)
-From: Masahisa Kojima <kojima.masahisa@socionext.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3fa11ba9ed5so1070845fac.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1767745939; x=1768350739; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=r+VsbOiQRF6E3mMmV+QEhtVpBh0W0wG50WdIkdpc0H0=;
+ b=YoZ6nks0AC1LdPS3bdXRYZinLXgKOSV7SDu/pvLx9IIY03qpEUhUjUK6xBrHoww79D
+ d4O6web6Wo5OWaMnCyPuhkWgjmXNBUBEyFnHFrB/Bow5lL38HBxhTbjBwWJw3/AS24jR
+ 2X8O4UPwR4H93AVsDMe/WFRZdyC3ytUWjANLI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767745939; x=1768350739;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r+VsbOiQRF6E3mMmV+QEhtVpBh0W0wG50WdIkdpc0H0=;
+ b=RcxcaWZ2CSpVMfrQ5vWC0cEtqx+G6alNWMCPjOXvEqY808khim1zSnBStyQginExqI
+ hYPGZEvRA0pRbI904ZOVCJa6eL1cl1xRkx41uh36VnVkkU72P6OPnVrPm2Kd2UCq77JM
+ oZrftWdEv3MPSfnTBBpM68ZoQTezPSdXTtSheo+xyXfAWD2eJiKDS83caScIIXuOIIMs
+ vP5/NvyjYJCMbhQ1XqDdx+/w0dmz1I7u0CB4XQiTVs/Bv67uMxRT2sEm3ayxV5fDZRNH
+ V9WBo1qmC0xx1MnwUA1jbIubyKlQzWtOSCVRedGcXi3uc7G9+cOpmmEivF8nZ5xEKSuP
+ +CZg==
+X-Gm-Message-State: AOJu0YyS+QeFjPCbDsNcuUqhnf50YMGijMznEHeap6EwaUnL+J+hncsA
+ DypuE5ZPpTyCPK8tOvCw2p+60kfcaH591vxixVuqNCVtw+1rl8HfdxSethTFNDznknUGFq46mT3
+ b8eU=
+X-Gm-Gg: AY/fxX4zij0IjQ+cPPx6Q2u9M0kVK9IFqHlNzDLnayJA7TQGuy8WGQDRnq/PEoaPHUz
+ xgyqUObs6glNhjb5Bw/AvZX9VTd+HAi5PTMSIHz5wSLUUwmnxcSo489iu5g7ta+9qRrq8PA3XK0
+ HaG/KmzxbyowlM9o9JBlxJHRdEb0Eu85PFh5+ukCjjMypbMXm3r3p4hjYzu3Of9r4NJNeQu4OoO
+ IZ9qsqLyfHChl+pcuq9lHBS/2tJVufuy2ZXtMtXDBaKb+8UBJvppLURD5TuUKO4xsREyYwqOLCC
+ qGCjWYJ3+h+lvi7tn1FlzL80y18jRMHrZGIXNG602rSHkd/0KpZ+QuTZPmVrXD048MBJ6Xs1ct8
+ 7FoclSLvQgd4a6w+iarwfohu5vh/OQ8uWDyIdzLCp8rS4HB2c/3NNA9viWUaVvCrO6uZ4v/9x93
+ oULFE0TwYZeM3VSt3C
+X-Google-Smtp-Source: AGHT+IGTTN4ADQuLcPMQAC9GNMqzVjiyTc8NLVgF4OMVsjuwKwo3mwcTzdqHA0CMIWBF+OhdqE1ktA==
+X-Received: by 2002:a4a:ce90:0:b0:659:9a49:8f70 with SMTP id
+ 006d021491bc7-65f54f6fffbmr243211eaf.53.1767745938809; 
+ Tue, 06 Jan 2026 16:32:18 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jan 2026 16:32:17 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Masashi Morimoto <morimoto.masashi@socionext.com>
-Subject: [PATCH v2] bootm: fix boot failure from compressed image for IH_OS_EFI
-Date: Wed,  7 Jan 2026 09:35:31 +0900
-Message-ID: <20260107003531.485071-1-kojima.masahisa@socionext.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>,
+ Rick Chen <rick@andestech.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH 00/10] bootm: Clean up arch-specific, pre-OS clean-up
+Date: Tue,  6 Jan 2026 17:31:17 -0700
+Message-ID: <20260107003131.3064800-1-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 07 Jan 2026 01:58:34 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,55 +118,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootm command can handle the compressed image, but current
-code fails to boot from it.
+Each arch does something slightly different before booting the OS. Some
+archs even do different things depending on the CPU type.
 
-    ## Loading kernel (any) from FIT Image at a8000000 ...
-    <snip>
-         Compression:  gzip compressed
-         Data Start:   0xa80000d4
-         Data Size:    10114520 Bytes = 9.6 MiB
-         Architecture: AArch64
-         OS:           EFI Firmware
-         Load Address: 0x90000000
+EFT_LOADER has its own special code, regardless of which arch is being
+booted.
 
-    <snip>
-       Uncompressing Kernel Image to 90000000
-    ## Transferring control to EFI (at address a80000d4) ...
-    Booting <NULL>
-    Not a PE-COFF file
-    Loading image failed
+It is quite hard to know what actually happens in the final milliseconds
+before the OS boot.
 
-To take care of the compressed image, the load address needs
-to be passed instead of the original compressed image address.
+This series attempts to clean up U-Boot in this area.
 
-Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
-Tested-by: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
----
-v2: Changelog:
-- No code update, only add "Tested-by" tag and resend
+The basic approach is to create a new bootm_final() function which is
+called by all archs. It provides some flags for a couple of necessary
+variations but otherwise it is generic.
 
- boot/bootm_os.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+RISC-V, x86 and ARM are converted over to use this new function. For
+consistency, EFI loader is converted as well.
 
-diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-index 88f7c183867..ae20b555f5c 100644
---- a/boot/bootm_os.c
-+++ b/boot/bootm_os.c
-@@ -509,11 +509,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
- 	/* We expect to return */
- 	images->os.type = IH_TYPE_STANDALONE;
- 
--	image_buf = map_sysmem(images->os.image_start, images->os.image_len);
-+	image_buf = map_sysmem(images->os.load, images->os.image_len);
- 
- 	/* Run EFI image */
- 	printf("## Transferring control to EFI (at address %08lx) ...\n",
--	       images->os.image_start);
-+	       images->os.load);
- 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
- 
- 	ret = efi_binary_run(image_buf, images->os.image_len,
+A noteable change is that EFI_LOADER now does bootstage processing
+before boot, if enabled, thus producing a report.
+
+There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
+recently on the mailing list.
+
+Future work could take this a little further:
+- Drop board_quiesce_devices() and rely on driver model for that
+- Similarly with udc_disconnect()
+- cleanup_before_linux() could use more details as to what it is
+supposed to do, to reduce the number of arch-specific variations
+
+Note: This is the first 10 patches for an 18-part series from the
+Concept tree, as requested. The patches after that complete the cleanup
+on ARM and RISC-V.
+
+
+Simon Glass (10):
+  boot: Create a function for final pre-boot steps
+  efi: Make use of bootm_final()
+  bootm: Add a message when booting
+  bootstage: Add some missing dummy functions
+  bootm: Do bootstage processing in bootm_final()
+  x86: Call bootm_final()
+  riscv: Drop board_quiesce_devices()
+  riscv: Call bootm_final()
+  efi: Drop EFI_GRUB_ARM32_WORKAROUND
+  x86: Add cleanup_before_linux()
+
+ MAINTAINERS                           |  1 +
+ arch/riscv/include/asm/u-boot-riscv.h |  1 -
+ arch/riscv/lib/bootm.c                | 24 +------------------
+ arch/x86/cpu/cpu.c                    |  5 ++++
+ arch/x86/lib/bootm.c                  | 14 +----------
+ boot/Makefile                         |  2 +-
+ boot/bootm_final.c                    | 34 +++++++++++++++++++++++++++
+ configs/mt7623n_bpir2_defconfig       |  1 -
+ include/bootm.h                       | 17 ++++++++++++++
+ include/bootstage.h                   |  8 +++++++
+ lib/efi_loader/Kconfig                | 10 --------
+ lib/efi_loader/efi_boottime.c         | 30 +----------------------
+ test/boot/bootflow.c                  |  2 +-
+ 13 files changed, 70 insertions(+), 79 deletions(-)
+ create mode 100644 boot/bootm_final.c
+
 -- 
 2.43.0
 
+base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
+branch: bootma-us
