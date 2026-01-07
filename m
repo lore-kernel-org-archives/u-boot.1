@@ -4,104 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD235CF6BE3
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0DDCF6BE2
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 02:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22B208401F;
-	Wed,  7 Jan 2026 01:58:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DB55583C6E;
+	Wed,  7 Jan 2026 03:33:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YoZ6nks0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JkPTBoHh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76EC483C4B; Wed,  7 Jan 2026 01:32:23 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id B867883CDC; Wed,  7 Jan 2026 03:33:03 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE46483A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4325183C4B
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 03:33:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-3fa11ba9ed5so1070845fac.0
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b804646c718so236144266b.2
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 18:33:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767745939; x=1768350739; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=r+VsbOiQRF6E3mMmV+QEhtVpBh0W0wG50WdIkdpc0H0=;
- b=YoZ6nks0AC1LdPS3bdXRYZinLXgKOSV7SDu/pvLx9IIY03qpEUhUjUK6xBrHoww79D
- d4O6web6Wo5OWaMnCyPuhkWgjmXNBUBEyFnHFrB/Bow5lL38HBxhTbjBwWJw3/AS24jR
- 2X8O4UPwR4H93AVsDMe/WFRZdyC3ytUWjANLI=
+ d=gmail.com; s=20230601; t=1767753181; x=1768357981; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=W2e6dqFQenCSAZq3Qfurc14QV8akf2FXzqJ1zOS9McU=;
+ b=JkPTBoHh6h1eR0N+zIFG8VSKlrp/PfodpA39avS+ilTfB0n5vddgtK2MbkjhnWp0CR
+ 9NdX6pRSSvbHS2RGinVPSqYrxoYgWjP3rwC+HjPIjYVwG/zoT10wDAHOALweS9uaZGEI
+ 4anY323HZwCndyimokRz/7nuomzbdlFxKE2mP2fntE7u79YW5IdP3Sy9xsne0veuu+Ac
+ yOCq8T98K2eQ1f+8Q7Z2DLZ3ra7LmtpkfmZOhZvkTckwwwFN9yVezTIvUA/kdm0w+cDg
+ SajgXZifPYOijbmwhCWEQP8g0hSSUy6CQ6IkC2AriMtqGZFV+Wn7v8wLJ7e0cRopGLIV
+ Z/8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767745939; x=1768350739;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1767753181; x=1768357981;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r+VsbOiQRF6E3mMmV+QEhtVpBh0W0wG50WdIkdpc0H0=;
- b=RcxcaWZ2CSpVMfrQ5vWC0cEtqx+G6alNWMCPjOXvEqY808khim1zSnBStyQginExqI
- hYPGZEvRA0pRbI904ZOVCJa6eL1cl1xRkx41uh36VnVkkU72P6OPnVrPm2Kd2UCq77JM
- oZrftWdEv3MPSfnTBBpM68ZoQTezPSdXTtSheo+xyXfAWD2eJiKDS83caScIIXuOIIMs
- vP5/NvyjYJCMbhQ1XqDdx+/w0dmz1I7u0CB4XQiTVs/Bv67uMxRT2sEm3ayxV5fDZRNH
- V9WBo1qmC0xx1MnwUA1jbIubyKlQzWtOSCVRedGcXi3uc7G9+cOpmmEivF8nZ5xEKSuP
- +CZg==
-X-Gm-Message-State: AOJu0YyS+QeFjPCbDsNcuUqhnf50YMGijMznEHeap6EwaUnL+J+hncsA
- DypuE5ZPpTyCPK8tOvCw2p+60kfcaH591vxixVuqNCVtw+1rl8HfdxSethTFNDznknUGFq46mT3
- b8eU=
-X-Gm-Gg: AY/fxX4zij0IjQ+cPPx6Q2u9M0kVK9IFqHlNzDLnayJA7TQGuy8WGQDRnq/PEoaPHUz
- xgyqUObs6glNhjb5Bw/AvZX9VTd+HAi5PTMSIHz5wSLUUwmnxcSo489iu5g7ta+9qRrq8PA3XK0
- HaG/KmzxbyowlM9o9JBlxJHRdEb0Eu85PFh5+ukCjjMypbMXm3r3p4hjYzu3Of9r4NJNeQu4OoO
- IZ9qsqLyfHChl+pcuq9lHBS/2tJVufuy2ZXtMtXDBaKb+8UBJvppLURD5TuUKO4xsREyYwqOLCC
- qGCjWYJ3+h+lvi7tn1FlzL80y18jRMHrZGIXNG602rSHkd/0KpZ+QuTZPmVrXD048MBJ6Xs1ct8
- 7FoclSLvQgd4a6w+iarwfohu5vh/OQ8uWDyIdzLCp8rS4HB2c/3NNA9viWUaVvCrO6uZ4v/9x93
- oULFE0TwYZeM3VSt3C
-X-Google-Smtp-Source: AGHT+IGTTN4ADQuLcPMQAC9GNMqzVjiyTc8NLVgF4OMVsjuwKwo3mwcTzdqHA0CMIWBF+OhdqE1ktA==
-X-Received: by 2002:a4a:ce90:0:b0:659:9a49:8f70 with SMTP id
- 006d021491bc7-65f54f6fffbmr243211eaf.53.1767745938809; 
- Tue, 06 Jan 2026 16:32:18 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 16:32:17 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Roberts <ian.roberts@timesys.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>,
- Rick Chen <rick@andestech.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Subject: [PATCH 00/10] bootm: Clean up arch-specific, pre-OS clean-up
-Date: Tue,  6 Jan 2026 17:31:17 -0700
-Message-ID: <20260107003131.3064800-1-simon.glass@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ bh=W2e6dqFQenCSAZq3Qfurc14QV8akf2FXzqJ1zOS9McU=;
+ b=MTBcY1apTtfRfcgsdo2pDIJF2574qKDbOCtHQR44/jrCPtrs5RJ+iZAzCO4EYa2ChD
+ Otagv6YZC8KkdvGHwPP6oqSqX7n8jnMq/1yXynI+y2CSng0+GyvBfOx1U2M1aAi8du+E
+ 5U9wFbvuqegNhaga5pcuKDfzlSg1/gyj++GtpnyN2RD7FQCWnZ4gWXN9uP0K4oll8fCr
+ 90uBq6ofpZU034cMJmWn1qH6KGWkvSNAgiy8wwmUn+IJUUEbx7JwnBetHqDwximybgLM
+ 5OP1X/uydM9xL8+tCW7JOiXv3Kb30tGUiYUs6+Ic7vOhS6j3CpQeH14ihNotdcMS2s3d
+ CZ9g==
+X-Gm-Message-State: AOJu0YwqT0mk0FKTt+85Gs9HnpucUW+NBr3j0nHTTTtoQKCJ1xAvi3pB
+ 8AgaixSpn0P36R1R8DNrhUZZ1hFXSo3VLPGw9kji6ADYXZ0UwOI5w5nuWB7OXAe+x0qZN7BXGRh
+ YPz46uooe48Pd0pUwgOshLpqAYfqxCmw=
+X-Gm-Gg: AY/fxX7ceoGwEe/33ebGpSxbbHISfhcXITj4AEoRr3upNuYacw5ZLWQ44W22SQIznxg
+ KhrIUuZpe7Nvm4LJus/ri0GRraqAHLP8sNWJtl/3fvyxPbLy6CT42bZv9lVUk9ehanN8o8IlYEP
+ jjrRgpTnQ512iQqKImtp2RrgQGLnH6zpNEmYWaySt2aE9jOSSN4gd7bUAero3d36l8PR/4+yYt+
+ pvQ2/oLdMQ9xfJXRfigLNyyaTfk6doFrFXjd4jsnRQUIxLkNpLWi0kXScFO3kn2MUyhn8znKX2g
+ yQprNir2XMo7fq4sTW92DSOSBCbxmThhegkhR71sEb6lqUw73n94mLlJiMuauMT+VK0miXIFK6h
+ eWAV33JX872MaCf3cVEoffsMSkJ5tT1IKTgso
+X-Google-Smtp-Source: AGHT+IFN4guWl0Ppo1DJGFKR+LNDzuGYRyZYyKFJVJTnD12/JZxJar/sXkXTcSaBq7Gd1al+yITP+0ndNLmEg8teAfc=
+X-Received: by 2002:a17:907:3e20:b0:b76:5393:758d with SMTP id
+ a640c23a62f3a-b8445345c45mr84077966b.34.1767753180350; Tue, 06 Jan 2026
+ 18:33:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 07 Jan 2026 01:58:34 +0100
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-9-simon.glass@canonical.com>
+In-Reply-To: <20260107003131.3064800-9-simon.glass@canonical.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 7 Jan 2026 02:32:49 +0000
+X-Gm-Features: AQt7F2pexBJzv0rawgtJKRCZOPy3ViuIixZVSHcnv2LO4NTj3cZVVd_pTIHz7Bc
+Message-ID: <CALeDE9OuqwihBTNHaVa7yOMUT7y2i0iqLMg4Zc=OKDpDE_foBw@mail.gmail.com>
+Subject: Re: [PATCH 08/10] riscv: Call bootm_final()
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <simon.glass@canonical.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Leo <ycliang@andestech.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Rick Chen <rick@andestech.com>, Yao Zi <me@ziyao.cc>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,71 +100,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each arch does something slightly different before booting the OS. Some
-archs even do different things depending on the CPU type.
+On Wed, 7 Jan 2026 at 00:40, Simon Glass <sjg@chromium.org> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Make use of this function, adding some pieces needed by RISC-V
+>
+> Drop the udc_disconnect() from EFI_LOADER since it is now done in
+> bootm_final()
 
-EFT_LOADER has its own special code, regardless of which arch is being
-booted.
+This is two different changes, please split the patch.
 
-It is quite hard to know what actually happens in the final milliseconds
-before the OS boot.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
 
-This series attempts to clean up U-Boot in this area.
+Do you have a clone? Choose one email for a signoff please.
 
-The basic approach is to create a new bootm_final() function which is
-called by all archs. It provides some flags for a couple of necessary
-variations but otherwise it is generic.
-
-RISC-V, x86 and ARM are converted over to use this new function. For
-consistency, EFI loader is converted as well.
-
-A noteable change is that EFI_LOADER now does bootstage processing
-before boot, if enabled, thus producing a report.
-
-There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
-recently on the mailing list.
-
-Future work could take this a little further:
-- Drop board_quiesce_devices() and rely on driver model for that
-- Similarly with udc_disconnect()
-- cleanup_before_linux() could use more details as to what it is
-supposed to do, to reduce the number of arch-specific variations
-
-Note: This is the first 10 patches for an 18-part series from the
-Concept tree, as requested. The patches after that complete the cleanup
-on ARM and RISC-V.
-
-
-Simon Glass (10):
-  boot: Create a function for final pre-boot steps
-  efi: Make use of bootm_final()
-  bootm: Add a message when booting
-  bootstage: Add some missing dummy functions
-  bootm: Do bootstage processing in bootm_final()
-  x86: Call bootm_final()
-  riscv: Drop board_quiesce_devices()
-  riscv: Call bootm_final()
-  efi: Drop EFI_GRUB_ARM32_WORKAROUND
-  x86: Add cleanup_before_linux()
-
- MAINTAINERS                           |  1 +
- arch/riscv/include/asm/u-boot-riscv.h |  1 -
- arch/riscv/lib/bootm.c                | 24 +------------------
- arch/x86/cpu/cpu.c                    |  5 ++++
- arch/x86/lib/bootm.c                  | 14 +----------
- boot/Makefile                         |  2 +-
- boot/bootm_final.c                    | 34 +++++++++++++++++++++++++++
- configs/mt7623n_bpir2_defconfig       |  1 -
- include/bootm.h                       | 17 ++++++++++++++
- include/bootstage.h                   |  8 +++++++
- lib/efi_loader/Kconfig                | 10 --------
- lib/efi_loader/efi_boottime.c         | 30 +----------------------
- test/boot/bootflow.c                  |  2 +-
- 13 files changed, 70 insertions(+), 79 deletions(-)
- create mode 100644 boot/bootm_final.c
-
--- 
-2.43.0
-
-base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-branch: bootma-us
+> ---
+>
+>  arch/riscv/lib/bootm.c        | 22 +---------------------
+>  boot/bootm_final.c            |  9 ++++++++-
+>  lib/efi_loader/efi_boottime.c |  2 --
+>  3 files changed, 9 insertions(+), 24 deletions(-)
+>
+> diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
+> index 35403e03ab0..bd47275b52e 100644
+> --- a/arch/riscv/lib/bootm.c
+> +++ b/arch/riscv/lib/bootm.c
+> @@ -32,27 +32,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>   */
+>  static void announce_and_cleanup(int fake)
+>  {
+> -       printf("\nStarting kernel ...%s\n\n", fake ?
+> -               "(fake run for tracing)" : "");
+> -       bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+> -#ifdef CONFIG_BOOTSTAGE_FDT
+> -       bootstage_fdt_add_report();
+> -#endif
+> -#if CONFIG_IS_ENABLED(BOOTSTAGE_REPORT)
+> -       bootstage_report();
+> -#endif
+> -
+> -#ifdef CONFIG_USB_DEVICE
+> -       udc_disconnect();
+> -#endif
+> -
+> -       /*
+> -        * Call remove function of all devices with a removal flag set.
+> -        * This may be useful for last-stage operations, like cancelling
+> -        * of DMA operation or releasing device internal buffers.
+> -        */
+> -       dm_remove_devices_active();
+> -
+> +       bootm_final(fake);
+>         cleanup_before_linux();
+>  }
+>
+> diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+> index 7077702d8c7..7f069877d06 100644
+> --- a/boot/bootm_final.c
+> +++ b/boot/bootm_final.c
+> @@ -7,17 +7,24 @@
+>
+>  #include <bootm.h>
+>  #include <bootstage.h>
+> +#include <usb.h>
+>  #include <dm/root.h>
+>
+>  void bootm_final(enum bootm_final_t flags)
+>  {
+> -       printf("\nStarting kernel ...\n\n");
+> +       printf("\nStarting kernel ...%s\n\n", flags & BOOTM_FINAL_FAKE ?
+> +               "(fake run for tracing)" : "");
+>
+>         bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+>
+> +       if (IS_ENABLED(CONFIG_BOOTSTAGE_FDT) && IS_ENABLED(CONFIG_CMD_FDT))
+> +               bootstage_fdt_add_report();
+>         if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
+>                 bootstage_report();
+>
+> +       if (IS_ENABLED(CONFIG_USB_DEVICE))
+> +               udc_disconnect();
+> +
+>         /*
+>          * Call remove function of all devices with a removal flag set.
+>          * This may be useful for last-stage operations, like cancelling
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> index 13d0d4dbe88..0bc66ee61a8 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -2238,8 +2238,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+>
+>         if (!efi_st_keep_devices) {
+>                 bootm_disable_interrupts();
+> -               if (IS_ENABLED(CONFIG_DM_ETH))
+> -                       eth_halt();
+>                 board_quiesce_devices();
+>                 bootm_final(0);
+>         }
+> --
+> 2.43.0
+>
