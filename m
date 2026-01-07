@@ -4,99 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CFC8D0D170
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 21:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088D0D0D171
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 21:26:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED33D8405C;
-	Wed,  7 Jan 2026 22:09:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 74FD28405C;
+	Wed,  7 Jan 2026 22:26:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qrulm0c4";
+	dkim=pass (1024-bit key; secure) header.d=ixit.cz header.i=@ixit.cz header.b="v6i3y0qS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89615840A9; Wed,  7 Jan 2026 22:09:25 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id BEE5A8407F; Wed,  7 Jan 2026 22:26:21 +0100 (CET)
+Received: from ixit.cz (ixit.cz [185.100.197.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73F9683A2D
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 22:09:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E1883A2D
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 22:26:19 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=david@ixit.cz
+Received: from [10.0.0.200] (unknown [10.88.125.21])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 17CA841968
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 21:09:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1767820162;
- bh=YPUHget73xCVxejyip0HkiyxXh/2Y8oqGvSQ4Vo/5u4=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=qrulm0c403/2UR2GmrzrTO3kjRTw0TDIfcoLAi/90eKrFz9qDRh7Vn/8Ra5uqU6rF
- UB7hOvW/JO0oxBUNiYdM/GsWirRNslXIC3YlBqTl33rtfhDbP5fIAOnAVNV4jZoUM+
- Fs3KyUJ7UMebmozeb6k8k2RCy58q/+6utscgRgWkFgexfaMYVnSuyI1VfptfWylzgt
- v3zDcs4V0O8B9jUhpl3slI/WZhg862S/31RhTzFzi0mPI7SazxGlRFFxAabHOfSao+
- wt9U8NVGwytus2fAwAs3z/x2P5Kx5WGNL6U8bb+03VTzUBvhYx58WVt4W4XzYNSB2q
- zBBzH0Qd/wQx3Eondvadh1igyL1Gx7tdmWvGbQq4VDHCMOaMfvEf6Jh5jxuQhCSfmq
- vdlam0ZMgL0LhBDwdGpBhwJdlUWW2luY//ManeQ7GA5vdCrmFnXQnFa4D7d2TCGCuS
- G22R4A4Nf9vFV23ukt9Y2LrQ6qMvho3kJY6ahq/94pEl9ZEWxRaOBomfNroZkeqsc4
- FV7qQ+Z2qmDj7NTJH0V8LaDFFDsD+/wfr6qh+WXL914/g7662AN3v59Tc/Fb0zaYFs
- Bc1CjTmuRFD/TY70v74IlLZelxnflD7PogwSu1TSr9CSksgf+eFR/xz6tEzPduKYGE
- 2LjdOB4uKgFe5ILta5DAi1KI=
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-430fdc1fff8so1588468f8f.3
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 13:09:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767820161; x=1768424961;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YPUHget73xCVxejyip0HkiyxXh/2Y8oqGvSQ4Vo/5u4=;
- b=Yl3uAy3cQHvLWqQPCU+j9fAWuF9SjnBzvg9tcF+xUckDSy3vsUcZJ9trO5V0c3HcQk
- PS+bRTXgEXLsUPgHNtIgNr8sOfOqO+iCG+c79cyXYrrhwTCDQQllUJgnEPkFF+oJGW54
- 4xvwnBNVEqNPX5XJYypB2s0aAcALyDNSq0z3eDCOJD36MWT8VESLk5TNJ5GifI7QQFhu
- 0+hN8zTWE9Wa1fbwQdOft/ZXXeZbDhtyypKo5EPAtZ2DmYhrKPJ63V2yufpG+02xPGRI
- 2XGEPVjqy3O1dmCfBx8MPbgWXI/+nRtaSuL7u3KtcXSgBmaX9McfKYhza+VwGNwVbFfT
- lkUQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUA0k2KRShgXdswMf+U/su9dMzhbiL/bT7JCqyxHsOE+VEu3YzeRoggBQsakZr5ZYTW9O6LIrM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHuJau2GkGiVfVbWQa5qJa+TqMRBOzlui9wWfGosl4fsiOPRQD
- JseLacVo4l0pa37OFliwjqDxAGBc3X2OnOtwMXRFkfPCimrirlXMiwy9eZAP0bn5uyt2pOYoHLq
- cnFybJClKJ8znIm4YZqk+yw+ABqyJ3yJ0o0obsNPzXtZUAUravAk3MQr4nLScfTQRBVCoWhU=
-X-Gm-Gg: AY/fxX5fSiUeSisDb0xdeSlAosAXxvBknDR235n7TlMRgomIedQqzj2xjpdHNn7bCcL
- rcwCdTk6SlMzcpmhQELbQn36QkdCBlwtPLknZoGqGGO+wyi/YeWi5WD8qd0FefAJU8XQkfQ3z5o
- OaR6GQlX3dfRCDWUWYZmG0pLKyXi6nAOONNQGDghG+vYvteNhr8PT2IFJF1r3JFGiXJOj9/bdbh
- TzSX603co3O+BWibV0eSgvJ1kEGSNSp6/eg6lgwiSzvIIAR86rYIaa69LrwXqloN032tTuKwiyd
- ivBvBrk8kvKLdRdzwddqPJXQ7AxhFROLMqiqn+I3X4atGjarYvLZrU5a8CakjN64Y+t/G2n0yar
- yUA2i3X81i071zyxPjo2INr+X0vIXZIFLJcrscK2q7wviwi18jrc3siCBdN5nJKQsgQ==
-X-Received: by 2002:a05:6000:25c1:b0:430:f742:fbc3 with SMTP id
- ffacd0b85a97d-432c376155bmr5042567f8f.48.1767820161650; 
- Wed, 07 Jan 2026 13:09:21 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG6/QQ84s4NCohE05G2lAu2LhRRsGdWUAW31GpqsV1awN3uQsuXe8WJ6/heoQxue7s2hyPeng==
-X-Received: by 2002:a05:6000:25c1:b0:430:f742:fbc3 with SMTP id
- ffacd0b85a97d-432c376155bmr5042535f8f.48.1767820161274; 
- Wed, 07 Jan 2026 13:09:21 -0800 (PST)
-Received: from [192.168.103.126]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd5df9c5sm12768366f8f.22.2026.01.07.13.09.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Jan 2026 13:09:20 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <d878f88e-9349-42e5-a7e6-d363c01743a3@gmx.de>
-Date: Wed, 7 Jan 2026 22:09:19 +0100
+ by ixit.cz (Postfix) with ESMTPSA id 402215340CF8;
+ Wed, 07 Jan 2026 22:26:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+ t=1767821175;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=ompJdg23KAp6jAm3gfGiwFWOfg9ZZQkAn6dn1w9WzvI=;
+ b=v6i3y0qSx+4bgr0p9Fgs4IFwKcctB1ZVmo4+yL0qIvrVDmp1gLDuqjUoo8lfMMBrRlro2A
+ 52jbkRzSaCnzA/YJ39d6l1/SWQQuzw9/S5v9hdsVUr+CF/5gbXI2s0EuTZjz8hY6cdKs8Z
+ CCT03NfyyIiSvipah9W1f6s6xC5JBNA=
+Message-ID: <33a85240-0ca0-495d-8ddf-32ab4e904e1a@ixit.cz>
+Date: Wed, 7 Jan 2026 22:26:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 1/2] doc: board: qualcomm: document Pixel 3 / 3 XL
  support
-To: david@ixit.cz
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  Luca Weiss <luca.weiss@fairphone.com>, Simon Glass <sjg@chromium.org>,
@@ -106,10 +56,55 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>
 References: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
  <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
+ <d878f88e-9349-42e5-a7e6-d363c01743a3@gmx.de>
 Content-Language: en-US
-In-Reply-To: <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <d878f88e-9349-42e5-a7e6-d363c01743a3@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,59 +121,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/7/26 21:28, David Heidelberg via B4 Relay wrote:
-> From: David Heidelberg <david@ixit.cz>
+On 07/01/2026 22:09, Heinrich Schuchardt wrote:
+> On 1/7/26 21:28, David Heidelberg via B4 Relay wrote:
+>> From: David Heidelberg <david@ixit.cz>
+>>
+>> U-Boot does work on Qualcomm 845-based Pixel 3 and 3 XL.
+>>
+>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>> ---
+>>   doc/board/qualcomm/board.rst | 20 ++++++++++++++++++++
+>>   1 file changed, 20 insertions(+)
+>>
+>> diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
+>> index 642c5095261..e5dbc9816b9 100644
+>> --- a/doc/board/qualcomm/board.rst
+>> +++ b/doc/board/qualcomm/board.rst
+>> @@ -38,6 +38,25 @@ with appended dtb, so let's mimic linux to satisfy 
+>> stock bootloader.
+>>   Boards
+>>   ------
+>> +Pixel 3 (blueline) and Pixel 3 XL (crosshatch)
+>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 > 
-> U-Boot does work on Qualcomm 845-based Pixel 3 and 3 XL.
+> How about the Pixel 5 (redfin) mentioned in patch 2/2?
+
+There will be likely more of SDM Pixels needing this quirk.
+Pixel 5 has for now no mainline Linux support (missing device-tree).
+
+So far I can only support Pixel 3 / 3 XL (both tested).
+
+I mentioned Pixel 5 mostly to justify the rename from
+google-pixel3.config to google-pixel.config as it's clear that there is 
+more Google devices needing this quirk not limited to Pixel 3 (with 
+recent bootloader).
+
+David
+
 > 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
->   doc/board/qualcomm/board.rst | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
+> Best regards
 > 
-> diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
-> index 642c5095261..e5dbc9816b9 100644
-> --- a/doc/board/qualcomm/board.rst
-> +++ b/doc/board/qualcomm/board.rst
-> @@ -38,6 +38,25 @@ with appended dtb, so let's mimic linux to satisfy stock bootloader.
->   Boards
->   ------
->   
-> +Pixel 3 (blueline) and Pixel 3 XL (crosshatch)
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-How about the Pixel 5 (redfin) mentioned in patch 2/2?
-
-Best regards
-
-Heinrich
-
-> +blueline refers to the Google Pixel 3, and crosshatch to the Pixel 3 XL, both
-> +powered by the Qualcomm SDM845 SoC.
-> +
-> +These devices use the common qcom_defconfig with the google-pixel.config
-> +fragment for configuration.
-> +
-> +Use the following commands::
-> +
-> +	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig google-pixel.config qcom-phone.config
-> +
-> +The DTB is called:
-> +
-> + - "sdm845-google-blueline.dtb" (Pixel 3)
-> + - "sdm845-google-crosshatch.dtb" (Pixel 3 XL)
-> +
-> +More information can be found on the `Google Pixel 3 page`_.
-> +
->   starqlte
->   ^^^^^^^^
->   
-> @@ -131,5 +150,6 @@ Other devices with boot image version 2 can be built like this example::
->   	fastboot flash boot boot.img
->   	fastboot erase dtbo
->   
-> +.. _Google Pixel 3 page: https://en.wikipedia.org/wiki/Pixel_3
->   .. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
->   .. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
+> Heinrich
 > 
-
+[...]
