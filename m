@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9627CFD65A
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 16:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A903CFD65D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 16:24:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37BF1840BE;
+	by phobos.denx.de (Postfix) with ESMTP id 7544E840CC;
 	Wed,  7 Jan 2026 17:23:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="F5wRPLX2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="P6BUVWs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2616483A26; Wed,  7 Jan 2026 17:22:38 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id EE52A83A2D; Wed,  7 Jan 2026 17:22:38 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E75608398C
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 17:22:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C497E83AB0
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 17:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c7533dbd87so1622304a34.2
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 08:22:35 -0800 (PST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-4503ee5c160so1422355b6e.1
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 08:22:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767802954; x=1768407754;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767802955; x=1768407755;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=VNnsYUzluZah7JCthe9zOSPNJoqqZGPX0lsyTM7RmkI=;
- b=F5wRPLX2OrI7wj63Xzi8b21twpNLqBB9YoK1NlsrIIvWchWvClhy8eDam2Qkrv+4wG
- FvT3ViEz5Hp/SoLc/dw4aKZSINDMZWfxQcYlXRC/zny+9ucxppflasOuNWcgPj5Txw29
- kd3XgAGyWIufFk+Tvv/wgJA7yfUbrQ5TqcmNsUwu33qJAB78GX1GDd8mfGC4BBqY3Q5W
- V9oCO0ZYCF6eadCo/r6eWcGjS+lOr0+Yq+swKR7lc3iTPkl3LioE5hZ/3ysy/P0UtQPP
- cbCAmBcBv6FjvSqji8pL4xGnZs3AIUIPCQvBtBPmJEn6XB8UOoyrrQZc8ZuDIsrYpnVv
- /XEg==
+ :reply-to; bh=FYMNgVIOAr8aG7k6mxqnrjxI4rA2NYq6oiu648NtnMw=;
+ b=P6BUVWs0E8l8pbLkEsqLtyHOKOu1SxKcUhdY2+PzpKxzjT6wOjqVJSO9Ftvk6E230a
+ oANMAmEXI3Lm0Pz4Cu5Gxo6G+9M59BqYqm8nEqNw3B5vzxjtNIaTllVIPl51A1cWVJ6A
+ A6X3etbVJhwiyd72CMslE1lRfljdbmrjSEF9rujcp3nM90CQRtVpqVEgbdmDXYvVUyHh
+ ij7qIgi/MY2OC/8v/UQRIGd9c8W1CCDVY2KQ6UTcv5jJAdu4nz+MORrDgFW2LPbbk9LL
+ AOX7wgZdw+D0EZo27VMXSGyOqEWETPlbou0SUySuzN4+UDp1qsYorZlFh73veANJ4lWk
+ mCwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767802954; x=1768407754;
+ d=1e100.net; s=20230601; t=1767802955; x=1768407755;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=VNnsYUzluZah7JCthe9zOSPNJoqqZGPX0lsyTM7RmkI=;
- b=EpDavqD4WhWNOPak/LWi7WfBnVbMse8gu9ZNdoAPppkgQ+wTbiCpwnDuEox3qKVGka
- CFLdi1dBs1B3UWBh1aMLlnbyW7AcH7T5sr4+PSDL0p31duUQNBBpI/On0YyyXgGYFwGO
- cSRR2zu3pQWIrcltzfoXGVVho+9Z9AmkKF/pvYvA4BVCF89q+EuhoWuFqbbBNRz+YIRI
- 8YZ/bQg8155KilwGz4p+JNE21aICauDdit+vJufXn26RiRmbyGgNmVuewjSMSfC4iwF1
- fL1pjMouHVPSW66/lAVQo7IEq690WLe/Uzr8sbq9CZgaCjpoPNJ9G+vFHWWGLXDrtTrq
- BXKw==
+ bh=FYMNgVIOAr8aG7k6mxqnrjxI4rA2NYq6oiu648NtnMw=;
+ b=RK/ifSjGrBMWeuuqIv7WXExSqdwYfe1p3kJANPyumEmIncQHlYgKevscIdGvI8ArKE
+ HTH8ELP3loslxuDrATBSEAQ9MxQ2/Xx6ewKoK+LBMIyyqE0ZQpuyQfgNgh4h32pyfJHP
+ UYMi/vg6a8+4aJLwCzTtRtC7MKvuA0XlKQmdDMqmRqTEVROcx6mQxbdyY/srzUB6bUWe
+ all2UzyuVmgJZtvEMv17JFnW/naSDl8JK5v440bpgwKpKNn6A3vB1G/1OIIQqPE498Fp
+ nVFsfMYFNcUm05Pgi8D9pFJIG+y9yh5YanZMFT5LsEaG5T8TmxLHJyQZ+OKejSC+LMBu
+ ZUCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPgn5wp+O5hbLKpOTWIKUUxZ7dQLLLAZA/wlM5DNs9AXAvKpeh/XeKsgH9oaiBW6oP3JQ7DT8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPvzn+NU73eyHptqgY1DerCDXN1+pVaoOwgXK0Jw/yFOyw4jXU
- Q7m+JDqVksCyTT4kp5ZFyaDOgCKXkxNjdVNAqPaxvYbPGGxTyFigNLq3knw1E7FoxKg=
-X-Gm-Gg: AY/fxX5pgUK3FcZsbAcsEaeWz1iGFevScvr1bHBpGsh6FrRhubp7NzMQjETdlOgXIQK
- GsWIEtgEeOiJrXHKMqrMc0hSeqGHB0jx7kDYoXSXVgTBVmh+uxrK6FQh5irw4LXzNaWdZUTv2xJ
- /FgOIh6Lf/qH/VWLrhTrpMiv5b2v3hJYj7HERiThhYuQbjk7ZkNyd7hiD0gmhli7qxl8iBEW2uR
- gRXlfWf0WZG1P2u6bZtdWH59oIGtRXwicH/kWII7OInIxCI3EPRCpNI11Yb3IVWHKwL1y4gUsBU
- Mn2it3T7PALxXK8XmE6BgMtzmeh2BXrTZ0jr+//3VNQXcsFvKxv5kvsDD/MnM1W//eu76xAT8kn
- nMm6WEWIq3gtyOVbqb15vbON7000rmXPl9QACmrkcoZLFu7CuD2T9575da1FCZoHStILjl/XjYV
- T+i4PyJg81hwpeFOo=
-X-Google-Smtp-Source: AGHT+IE5IBlFWDjNS5NCHGIISvfO+zEfmm3tzmSLAJFS0Ei4CMxGmxgqpGAfKmTP/LnkBeOMI+j65Q==
-X-Received: by 2002:a05:6830:3103:b0:7c7:6479:38ce with SMTP id
- 46e09a7af769-7ce50b8ce7fmr1784320a34.18.1767802954585; 
- Wed, 07 Jan 2026 08:22:34 -0800 (PST)
+ AJvYcCW8P3RLpDbgHFdyTaZPq6Mg+JqtWfsSdAXPYMWtBisuE5Inme/kOOf7z+SUsuO1KilcCkRKah0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2XqF8rX2kxBg+ntz3dm8/ZXDBkcU+Z1tME0//zNSD5Ph6ZFOB
+ o7p1PHhVOIzDWkSJ5LK/9nNbOM8Ga0ls0Ce54gDSg406udCzzDbCKet8qPmT5mrMXdw=
+X-Gm-Gg: AY/fxX6xk0UcBePYBxHnOy2/undZhkX71aMhjlrXwekHAmWbXaWKgiIZsHwgzMW4f/m
+ Rhr+7M7sYOEaZJ9joJpfY/b8sSQ5EfWvlKg32ltZD7mYKxwinvrsyDW2lIxBZsUrtNVHuhPVPVX
+ nknoG4oQUm5dpM8J1iZkkMCxnFhLMDbM4Pa41DIo/KWieAGJm8HcckAa3qwz1U4RluyHweg2iNK
+ K5rumNqbR9qXQvfn1A3UIPc8/f0VesjKywzc8vWUS+byOpPdHjjBUbuNQg8zA2GLf32iPTn+e50
+ bNIoAkjlQjipR3DS1rLQdNKQ079vLR6/MCMwF0DhHWQ14ffnkLUjIeB0WUmYHcDQYFriWdEjPbD
+ Jj0UJUltJtEz3IkJ/X+CICUwKSqaDm21t6bbqPVz+bJI3m1+AURlj90aAq0b1Z5oEvSD8oNSQVW
+ qqUQGSXKBUX3E5yRQ=
+X-Google-Smtp-Source: AGHT+IF41gs3RuJt0yZMwPZcyFrtf3vHHIlSxrv9d1Es1Y5MsrNQYKymzNwvmKANNpLW2JiP8azh0g==
+X-Received: by 2002:a05:6808:f0f:b0:43f:5c19:cabe with SMTP id
+ 5614622812f47-45a6bd3a1cbmr1248259b6e.24.1767802955459; 
+ Wed, 07 Jan 2026 08:22:35 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:f278:961a:494a:41af])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce4762eefbsm3958245a34.0.2026.01.07.08.22.32
+ 46e09a7af769-7ce4762eefbsm3958245a34.0.2026.01.07.08.22.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 08:22:34 -0800 (PST)
+ Wed, 07 Jan 2026 08:22:35 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 07 Jan 2026 10:21:13 -0600
-Subject: [PATCH v2 7/9] clk: mediatek: allow gates in topckgen drivers
+Date: Wed, 07 Jan 2026 10:21:14 -0600
+Subject: [PATCH v2 8/9] clk: mediatek: mt8365: remove separate topckgen-cg
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260107-clk-mtk-mt8365-fixes-v2-7-3294a5d2f239@baylibre.com>
+Message-Id: <20260107-clk-mtk-mt8365-fixes-v2-8-3294a5d2f239@baylibre.com>
 References: <20260107-clk-mtk-mt8365-fixes-v2-0-3294a5d2f239@baylibre.com>
 In-Reply-To: <20260107-clk-mtk-mt8365-fixes-v2-0-3294a5d2f239@baylibre.com>
 To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
@@ -91,17 +92,17 @@ To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4310; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3326; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=VTQb0wPygvFq7lX9ZsvswsYreIjNQQ8htn6irAWc6W8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXogwALbfDBFkcwMILhx1CAMpPPFFe2TY2Ncdk
- MQIcSHSq2eJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV6IMBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ao6IH/AheqHVJyMwGK41WhxPsTVKFSzyKFZbopNYXHu3
- J75QOiB0r99Qf18vxsce5yTHCAzw//NqCoVZa/73q/wQvRIVcT4wCdEtNpIBPPUNgpe6shZNVCZ
- QMXCsdbZsAGbKPLiDvDraz+4rEDQlIJdGv4Jp2BSltcnMJzRrY0IFz09b4yxkgYCLbtXFEA69V2
- lVCdKOXMKZ3e2G5gcIGgwr3OAhTOTRh2+if6lyaPAyH1A9a6cydCmf7ykfcb39YtnaS6AfzTKf7
- UsHF0PZBDZB/LYjihyDu0yv7Fn3X6PGi3RGMb11xABeg5AYgvC4qHBfecdiEi7Pp12N3nNrI+I6
- wc4Y=
+ bh=IE6nOUmJFckdMnAVgGL/Y1mwp3YR+wbmpxjJNXsYiZs=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpXog2DoeI4QPaB2ADRG5tAdEG9qHXn165AttZ2
+ QlXjUKrRT+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV6INhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Al8kH/1eD3YvmiVVN8a4ce5Sj5dsMuVhDBGpxPEOHQex
+ ALTucYRdENorXQ2AlxELqt/oH+rdf6PoRu0MellDI6bXUyS0GFSJI+rqlzL/Wcq0s6jABGmnH+9
+ KpAYskPjwLlqq9xZ4UP7fSd5YvPVehheexZTB2qsVOGz7QZYw4OequOvsGdi0Hh9UKnTNsYLyxl
+ 82xUiSnPzkjztHn6+J1rRlzw+An3l2gVlzgRQ0TKgt7uE2MJlfgHxIiHgWs5DNIliV8POPXNaiX
+ NEsi4vZgSkS/aS2EXe8MvNFrocPmTmbW4l2NpFChAEdl8d7PV2qpKuwg1pgQWxHLrw7DpHUQZwp
+ oeQo=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Wed, 07 Jan 2026 17:23:20 +0100
@@ -121,135 +122,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add handling for gates in the topckgen clk drivers. This avoids the need
-to have separate topckgen-cg drivers and devicetree nodes for the same
-address space and clock ID range.
+Remove the separate topckgen-cg driver for handling clock gates in the
+topckgen address space. The devicetree bindings for this were not
+acceptable upstream because it was creating a separate clock controller
+using the same address space as the main topckgen clock controller. The
+gates are moved to the topckgen tree instead.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mtk.c | 61 +++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 57 insertions(+), 4 deletions(-)
+ drivers/clk/mediatek/clk-mt8365.c | 49 ++++++++++++---------------------------
+ 1 file changed, 15 insertions(+), 34 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index e370d304c03..82306ae285c 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -582,7 +582,7 @@ static const int mtk_topckgen_of_xlate(struct clk *clk,
- 	if (ret)
- 		return ret;
+diff --git a/drivers/clk/mediatek/clk-mt8365.c b/drivers/clk/mediatek/clk-mt8365.c
+index eaa5c2cf0dc..a28547a0cf8 100644
+--- a/drivers/clk/mediatek/clk-mt8365.c
++++ b/drivers/clk/mediatek/clk-mt8365.c
+@@ -500,18 +500,6 @@ static const struct mtk_composite top_muxes[] = {
+ 	MUX_GATE(CLK_TOP_APU_IF_SEL, apu_parents, 0x0e0, 24, 3, 31),
+ };
  
--	/* topckgen only uses fclks, fdivs and muxes. */
-+	/* topckgen only uses fclks, fdivs, muxes and gates. */
+-static const struct mtk_clk_tree mt8365_topckgen_tree = {
+-	.xtal_rate = 26 * MHZ,
+-	.fdivs_offs = CLK_TOP_MFGPLL,
+-	.muxes_offs = CLK_TOP_AXI_SEL,
+-	.fclks = top_fixed_clks,
+-	.fdivs = top_divs,
+-	.muxes = top_muxes,
+-	.num_fclks = ARRAY_SIZE(top_fixed_clks),
+-	.num_fdivs = ARRAY_SIZE(top_divs),
+-	.num_muxes = ARRAY_SIZE(top_muxes),
+-};
+-
+ /* topckgen cg */
+ static const struct mtk_gate_regs top0_cg_regs = {
+ 	.set_ofs = 0,
+@@ -577,6 +565,21 @@ static const struct mtk_gate top_clk_gates[] = {
+ 	GATE_TOP0(CLK_TOP_DSP_26M, CLK_TOP_CLK26M, 17),
+ };
  
- 	if (tree->fclks && clk->id < tree->num_fclks)
- 		return 0;
-@@ -595,6 +595,10 @@ static const int mtk_topckgen_of_xlate(struct clk *clk,
- 	    clk->id < tree->muxes_offs + tree->num_muxes)
- 		return 0;
- 
-+	if (tree->gates && clk->id >= tree->gates_offs &&
-+	    clk->id < tree->gates_offs + tree->num_gates)
-+		return 0;
++static const struct mtk_clk_tree mt8365_topckgen_tree = {
++	.xtal_rate = 26 * MHZ,
++	.fdivs_offs = CLK_TOP_MFGPLL,
++	.muxes_offs = CLK_TOP_AXI_SEL,
++	.gates_offs = CLK_TOP_AUD_I2S0_M,
++	.fclks = top_fixed_clks,
++	.fdivs = top_divs,
++	.muxes = top_muxes,
++	.gates = top_clk_gates,
++	.num_fclks = ARRAY_SIZE(top_fixed_clks),
++	.num_fdivs = ARRAY_SIZE(top_divs),
++	.num_muxes = ARRAY_SIZE(top_muxes),
++	.num_gates = ARRAY_SIZE(top_clk_gates),
++};
 +
- 	return -ENOENT;
+ /* infracfg */
+ static const struct mtk_gate_regs ifr2_cg_regs = {
+ 	.set_ofs = 0x80,
+@@ -725,13 +728,6 @@ static int mt8365_topckgen_probe(struct udevice *dev)
+ 	return mtk_common_clk_init(dev, &mt8365_topckgen_tree);
  }
  
-@@ -696,6 +700,14 @@ static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
- static ulong mtk_topckgen_get_rate(struct clk *clk)
+-static int mt8365_topckgen_cg_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_gate_init(dev, &mt8365_topckgen_tree, top_clk_gates,
+-					ARRAY_SIZE(top_clk_gates),
+-					CLK_TOP_AUD_I2S0_M);
+-}
+-
+ static int mt8365_infracfg_probe(struct udevice *dev)
  {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+
-+	if (tree->gates && clk->id >= tree->gates_offs &&
-+	    clk->id < tree->gates_offs + tree->num_gates) {
-+		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
-+
-+		return mtk_clk_find_parent_rate(clk, gate->parent, NULL);
-+	}
+ 	return mtk_common_clk_gate_init(dev, &mt8365_infracfg_tree, ifr_clks,
+@@ -748,11 +744,6 @@ static const struct udevice_id mt8365_topckgen_compat[] = {
+ 	{ }
+ };
  
- 	if (clk->id < priv->tree->fdivs_offs)
- 		return priv->tree->fclks[clk->id].rate;
-@@ -740,6 +752,21 @@ static int mtk_clk_mux_enable(struct clk *clk)
- 	return 0;
- }
+-static const struct udevice_id mt8365_topckgen_cg_compat[] = {
+-	{ .compatible = "mediatek,mt8365-topckgen-cg", },
+-	{ }
+-};
+-
+ static const struct udevice_id mt8365_infracfg_compat[] = {
+ 	{ .compatible = "mediatek,mt8365-infracfg", },
+ 	{ }
+@@ -778,16 +769,6 @@ U_BOOT_DRIVER(mtk_clk_topckgen) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
  
-+static int mtk_topckgen_enable(struct clk *clk)
-+{
-+	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+
-+	if (tree->gates && clk->id >= tree->gates_offs &&
-+	    clk->id < tree->gates_offs + tree->num_gates) {
-+		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
-+
-+		return mtk_gate_enable(priv->base, gate);
-+	}
-+
-+	return mtk_clk_mux_enable(clk);
-+}
-+
- static int mtk_clk_mux_disable(struct clk *clk)
- {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -766,13 +793,29 @@ static int mtk_clk_mux_disable(struct clk *clk)
- 	return 0;
- }
- 
-+static int mtk_topckgen_disable(struct clk *clk)
-+{
-+	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct mtk_clk_tree *tree = priv->tree;
-+
-+	if (tree->gates && clk->id >= tree->gates_offs &&
-+	    clk->id < tree->gates_offs + tree->num_gates) {
-+		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
-+
-+		return mtk_gate_disable(priv->base, gate);
-+	}
-+
-+	return mtk_clk_mux_disable(clk);
-+}
-+
- static int mtk_common_clk_set_parent(struct clk *clk, struct clk *parent)
- {
- 	struct mtk_clk_priv *parent_priv = dev_get_priv(parent->dev);
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
- 	u32 parent_type;
- 
--	if (clk->id < priv->tree->muxes_offs)
-+	if (!priv->tree->muxes || clk->id < priv->tree->muxes_offs ||
-+	    clk->id >= priv->tree->muxes_offs + priv->tree->num_muxes)
- 		return 0;
- 
- 	if (!parent_priv)
-@@ -821,6 +864,16 @@ static void mtk_topckgen_dump(struct udevice *dev)
- 		mtk_clk_print_mux_parents(priv, mux);
- 		printf("\n");
- 	}
-+
-+	for (i = 0; i < tree->num_gates; i++) {
-+		const struct mtk_gate *gate = &tree->gates[i];
-+
-+		printf("[GATE%u] DT: %u", i, gate->id);
-+		mtk_clk_print_mapped_id(gate->id, i + tree->gates_offs, tree->id_offs_map);
-+		mtk_clk_print_rate(dev, i + tree->gates_offs);
-+		mtk_clk_print_single_parent(gate->parent, gate->flags);
-+		printf("\n");
-+	}
- }
- #endif
- 
-@@ -1124,8 +1177,8 @@ const struct clk_ops mtk_clk_fixed_pll_ops = {
- 
- const struct clk_ops mtk_clk_topckgen_ops = {
- 	.of_xlate = mtk_topckgen_of_xlate,
--	.enable = mtk_clk_mux_enable,
--	.disable = mtk_clk_mux_disable,
-+	.enable = mtk_topckgen_enable,
-+	.disable = mtk_topckgen_disable,
- 	.get_rate = mtk_topckgen_get_rate,
- 	.set_parent = mtk_common_clk_set_parent,
- #if CONFIG_IS_ENABLED(CMD_CLK)
+-U_BOOT_DRIVER(mtk_clk_topckgen_cg) = {
+-	.name = "mt8365-topckgen-cg",
+-	.id = UCLASS_CLK,
+-	.of_match = mt8365_topckgen_cg_compat,
+-	.probe = mt8365_topckgen_cg_probe,
+-	.priv_auto = sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
+-	.flags = DM_FLAG_PRE_RELOC,
+-};
+-
+ U_BOOT_DRIVER(mtk_clk_infracfg) = {
+ 	.name = "mt8365-infracfg",
+ 	.id = UCLASS_CLK,
 
 -- 
 2.43.0
