@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60ADCCF6BE1
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DFECF6BE1
+	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 00:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7385F84042;
-	Wed,  7 Jan 2026 01:32:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C529F84033;
+	Wed,  7 Jan 2026 01:32:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BCCyfLJD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZI2LutN+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5485384035; Wed,  7 Jan 2026 01:32:41 +0100 (CET)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id BCC1E8404A; Wed,  7 Jan 2026 01:32:43 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E9E83A26
- for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75BC784033
+ for <u-boot@lists.denx.de>; Wed,  7 Jan 2026 01:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-65e94e128beso221227eaf.0
- for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:38 -0800 (PST)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-65e94e128beso221258eaf.0
+ for <u-boot@lists.denx.de>; Tue, 06 Jan 2026 16:32:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767745956; x=1768350756; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767745958; x=1768350758; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=93lfvt31+bMUtXK2txhANCrj9v9Zo+gqSnDtOo6/3vE=;
- b=BCCyfLJDjCpFMA1H/M9tUp2ISax2hpFJsqf38423huJXjnnbkbA7kPYTbMBM902Z/j
- 10zO0lHBsy8GOdvcC9bKHu3BMurKc4hoXYnE1eI7N6aFuLn0CfoSMr+MGB7pbg30BOI9
- uIK6vK0ouRMSvGcRTTVNY0AeS0d666ISgFKH4=
+ bh=tz+g/mAa7kyC269hE9cSKE9PYirKyiKm6PgEoQlIkbc=;
+ b=ZI2LutN+0cnjt/4/4WmBpMy/rktxWC8GkpRDGGD+8LnKsxr5Vr8fOXHnibwneZKB8L
+ 2E+u78R5kXFXof3NggT5msqUHRggm/abQhMFIde18faEx3gx2H56l6rh3UsJbzTT7DFl
+ Zw0J/BcdBDnkvadF7Blg3d1wxqJQCbQUqd1rs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767745956; x=1768350756;
+ d=1e100.net; s=20230601; t=1767745958; x=1768350758;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=93lfvt31+bMUtXK2txhANCrj9v9Zo+gqSnDtOo6/3vE=;
- b=TLJsGAHUEALvT7+BARy1YLlf0iFn6tLFsXma0KZ2LyAB/N3yT2e6EMbqGG26glW4i7
- vUIqQ32uNMcYca9TkLbDhuCxBYP9hO2owXotKflnp1ZOki4rPnlM5/600mF05h5WQ16V
- IG+sDROkcvUIyo6NCnyFzoW6KVhYeOnwfES+r3HQOWrwYdf2NAsro5pPNCWEZonGn5Me
- W99VIQwGjzrr04JVwe/HJCBoiAPA9OUfsDnw8ez9i0yEXi/FZJQway0i0JTFDI44/jg1
- hcees5h2ug35bf2lforD5gB0u03ZCfVvjTSD5A8RtlkpgwcL1vjNJZVslFIiv7V3efzn
- 9tUA==
-X-Gm-Message-State: AOJu0Yw/Ct6C8lOvgfOOVnHj1iUz2rrq5LuFStExKs8kPx/I3o+Q5rqN
- 3zL/c1kRnllA1uRgqIDiZz05wdP58zGAF+egHJ1/1LZSc0Hta2zaQ9l5OSbyRLEqdBwV/MZbHKF
- Z2C8=
-X-Gm-Gg: AY/fxX6hgRqAdim15ATbSHnbG1famV0HZP2M5mS47CFusjRp1eg8msZz3OKv+J2ojdG
- aIedFkckjat6NWfShckxCHCYPZ0+RAllka7iENAcQ608KPx8ChSfOonsgPURztpXY46G7nn91Cc
- AHInoUmngAuiBDU3557sHoHA6Dtwpv7dNh/DL8lC7Kep51E6LGkW8fPujKRo0qOtsd5X121FdfG
- nAmin94Zi2+lmhzvvoUDr3gQik4JhhswffjuiNR1Fjy3M4373A8L+16/CljMvVxYw/seg7wjgXj
- aRvFo77d5jzvr9gpegRjbnA3cvhjiPveFj0GspE5SGaE25xYs5rPZmzDdbYpq3M3zQN+m+4YkrP
- SdZ8u1JsPHuRyeoNMx/DeWzzS7Nhvx2++hca0vTJakFflWKsGNj93hc/QmmMudE/v7A0MZq8UMt
- jr+UNdnOedVRnVcpwD
-X-Google-Smtp-Source: AGHT+IHjDW5u63d5Epw2vgOhN/COkTVsKmaAgvfEBbH4Df3yvD7rnUsy5/WQ+IPYFP54kP8ato3kbw==
-X-Received: by 2002:a05:6820:4903:b0:65d:38e:40f2 with SMTP id
- 006d021491bc7-65f545b30dfmr380929eaf.2.1767745956130; 
- Tue, 06 Jan 2026 16:32:36 -0800 (PST)
+ bh=tz+g/mAa7kyC269hE9cSKE9PYirKyiKm6PgEoQlIkbc=;
+ b=L/Lwfg5HVt1U5JttrUmVApr2OmJiC+4JawaKK05QQxoRun3sZTZ8pPu3v9ixkApIWq
+ FmS+X4Z6oE7x/cjewyX0t9Ytv0B6rxbFDFATMFZO3xuDNKhOl7k4+k7vZQNcTxr2nc6p
+ YyZp8wJBQ01+yn4GS93MwqAJ36CGVcgp/5AuJqL4EWvU3yx7nSFAwo08N4UfgzfzP4Jt
+ Vmv4UYT2Gw2ZBfWEPjUv3U7/hmHIGCCPlLQ3LZGJmz8zId5CoBeyvwGexLbw3GlqXSix
+ wq96rqST39TjB5P0y49wk7kEga/7LF15Q6Zi1/yPx+Q2afTQZrcC0nUygBlvNJZpDWQP
+ cjGg==
+X-Gm-Message-State: AOJu0YyQwGTaZim67zoSKWbm1x2U23yJsmHIruw6qzkP9aGXc3lmAlre
+ W1CrfFyz95GjdD4VZ8pijsM0nk+VYLZcxafVRyU/4bPZiOHSzaxA/waHlypJ1px+NsUkxCvZfn2
+ Z3Co=
+X-Gm-Gg: AY/fxX5nM/w/BQIvjFQzk3k7UusR0M1g9GcsI3o0E8YB9CUQlSujxFDlMJ7d1my8/pb
+ 2gYIDXSzt8khkv6EuNyGRzQRNWpaErbkWTYOtT1MwXdGlWz5ShEb/go1tBX0JDE/GHrdZwOqxH+
+ znJk+qX0DXXYEOeWKIFal1T5k5gaHnj+AYmA1xHxaW2sY1RH0cA4ENHolP5nzm2GdwSZLLo6YBA
+ bvIFErNzSYsPzqkqfwec2GvfSe6Jhv6aG+Wt/SvM7LDasnVPV3UR/2qKnyKE0K781NHmev67gku
+ gPewYKkjLDYtT1OprGpKQuvAzHnIHftc4+9g8teh1Vi7WsF7ctadsGZTaLzsPyoUDMJHW5mqA+H
+ LToKlZEuvz5JsjfbFPiHHANHmat04u4Cg5zw+xB7fT94NUZLtiRnEJf4gGIHyWarHSUhNb8VsqA
+ j25VNMmmYu4OD5rdS8
+X-Google-Smtp-Source: AGHT+IH9Kwdouo/nezXqWHEsP99Id+58ZM5rY7zDedN31106IpTc1rxZn4ZLIv3GGmi9S7H/kA3FYA==
+X-Received: by 2002:a05:6820:2281:b0:65c:f583:d3e4 with SMTP id
+ 006d021491bc7-65f54691c47mr487753eaf.28.1767745958468; 
+ Tue, 06 Jan 2026 16:32:38 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.33
+ 006d021491bc7-65f48ab2d00sm1631458eaf.0.2026.01.06.16.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jan 2026 16:32:34 -0800 (PST)
+ Tue, 06 Jan 2026 16:32:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Simon Glass <simon.glass@canonical.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH 05/10] bootm: Do bootstage processing in bootm_final()
-Date: Tue,  6 Jan 2026 17:31:22 -0700
-Message-ID: <20260107003131.3064800-6-simon.glass@canonical.com>
+ Simon Glass <simon.glass@canonical.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 06/10] x86: Call bootm_final()
+Date: Tue,  6 Jan 2026 17:31:23 -0700
+Message-ID: <20260107003131.3064800-7-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260107003131.3064800-1-simon.glass@canonical.com>
 References: <20260107003131.3064800-1-simon.glass@canonical.com>
@@ -102,51 +99,61 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Mark kernel start before booting. If enabled, show a bootstage report.
+The x86 code in bootm_announce_and_cleanup() is very similar to the new
+bootm_final() function, so just use the latter. Move over a useful
+comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- boot/bootm_final.c   | 6 ++++++
- test/boot/bootflow.c | 2 +-
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ arch/x86/lib/bootm.c | 14 +-------------
+ boot/bootm_final.c   |  5 +++++
+ 2 files changed, 6 insertions(+), 13 deletions(-)
 
+diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+index 0827a884b1d..8e54fdb5178 100644
+--- a/arch/x86/lib/bootm.c
++++ b/arch/x86/lib/bootm.c
+@@ -34,22 +34,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ void bootm_announce_and_cleanup(void)
+ {
+-	printf("\nStarting kernel ...\n\n");
+-
+ #ifdef CONFIG_SYS_COREBOOT
+ 	timestamp_add_now(TS_START_KERNEL);
+ #endif
+-	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+-#if IS_ENABLED(CONFIG_BOOTSTAGE_REPORT)
+-	bootstage_report();
+-#endif
+-
+-	/*
+-	 * Call remove function of all devices with a removal flag set.
+-	 * This may be useful for last-stage operations, like cancelling
+-	 * of DMA operation or releasing device internal buffers.
+-	 */
+-	dm_remove_devices_active();
++	bootm_final(0);
+ }
+ 
+ #if defined(CONFIG_OF_LIBFDT) && !defined(CONFIG_OF_NO_KERNEL)
 diff --git a/boot/bootm_final.c b/boot/bootm_final.c
-index 71661334e11..dd7cac55f1e 100644
+index dd7cac55f1e..7077702d8c7 100644
 --- a/boot/bootm_final.c
 +++ b/boot/bootm_final.c
-@@ -6,11 +6,17 @@
-  */
+@@ -18,5 +18,10 @@ void bootm_final(enum bootm_final_t flags)
+ 	if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
+ 		bootstage_report();
  
- #include <bootm.h>
-+#include <bootstage.h>
- #include <dm/root.h>
- 
- void bootm_final(enum bootm_final_t flags)
- {
- 	printf("\nStarting kernel ...\n\n");
- 
-+	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
-+
-+	if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
-+		bootstage_report();
-+
++	/*
++	 * Call remove function of all devices with a removal flag set.
++	 * This may be useful for last-stage operations, like cancelling
++	 * of DMA operation or releasing device internal buffers.
++	 */
  	dm_remove_devices_active();
  }
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index a56435d053f..80adc074070 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1381,7 +1381,7 @@ static int bootflow_efi(struct unit_test_state *uts)
- 
- 	/* TODO: Why the \r ? */
- 	ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
--	ut_assert_nextline("Exiting test app");
-+	ut_assert_skip_to_line("Exiting test app");
- 	ut_assert_nextline("Boot failed (err=-14)");
- 
- 	ut_assert_console_end();
 -- 
 2.43.0
 
