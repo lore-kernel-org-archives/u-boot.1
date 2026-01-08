@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51B5D1D493
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:29:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D124BD1D493
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9651384301;
-	Thu,  8 Jan 2026 21:29:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6187842DB;
+	Thu,  8 Jan 2026 21:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PeHCWPr7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M/gFeW2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DA138415D; Thu,  8 Jan 2026 21:29:03 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 6522A84310; Thu,  8 Jan 2026 21:29:05 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D8D842DB
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:29:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6851C8415D
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:29:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b7ffa5d1b80so545021966b.0
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:29:01 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b725ead5800so493750466b.1
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:29:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767904140; x=1768508940; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767904143; x=1768508943; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Qb/d9LuEQQNL2voB8hOz81ZOClPHogCH/S3LKlhzyGE=;
- b=PeHCWPr7RAl2IveXeeO8nxYRgbNBbaVPAZ+/RGPsGW58MsF70df7h5CFsOt0+AOABk
- y36wJCFjroGh5Ts63oVA+fVAIfWWKYS1+ZIINiM+gYBBFND83Q1A8OtHXJ49Yad3mBv9
- vYiftDkt+b2FWwKO6IwRWvm6Mc7DVuBDGLtKMLlr5axc0s3fcPxWGwChX+5lQFmoqRVD
- WXfJlQB6waTLXbfERqCueCMSfEy1zgDrQngAi3Mf/cWAOoqnIONkOCuXvCmYLLqw4gLB
- Bjq9U1zdHUnuQRGncyMMNd5iBzXSxoU19FCJpzJ/LieMXn12O2hnrbdfjZnD8Ks7vp3/
- 7GXQ==
+ :reply-to; bh=ACx5jt1Vn3WNfNGxe1mGxg6MS5wUoaufG0LgO8Y9Abo=;
+ b=M/gFeW2X4MrVSo0SDesUSPFzr3CZwzw3s3enhg7MnFamXKcWBIYjWsF+zrMx8en27Q
+ mGHBaKcfQ9iJSn1/EW56+pvzdknIk9YwS+9r1cJNTT0hchmkj2Uc5Lrfcrksl5HfB4pn
+ p8F3jOVFQqQ7C6b7n82B0Z70smYrD6d00PD/4ExY1kY9BOEhAtFPBGfD7PoDilOaVipk
+ Z7x3gaO278XJSFMYRL4HmPUwEGY6jmoXMHtQo5iErv9epdf9UHhCktKBhcEiuzV8Mrh9
+ hGyuXHDi1zihwPUeSOucmILgs4LOLEsfyQnnQmmDJqgnAi4OJzdrbdw1s3LrOXapSWAr
+ aWUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767904140; x=1768508940;
+ d=1e100.net; s=20230601; t=1767904143; x=1768508943;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Qb/d9LuEQQNL2voB8hOz81ZOClPHogCH/S3LKlhzyGE=;
- b=Qr8eYs7vGZV3yhNTfEb0Z7x95y9DhmhcUO2+yG6ckMzStds0EkHgyBsw9aragTGm+E
- GmwyLQinVvvY0EQteri9i5TkAQTUYNKQL3BHGc/DqcWsc/AXHYGkUcGIRvWt4vt0+De1
- 4ivAcvINrjmwRRF/KxUzBOdnGVgiM5GxWioq9Q6qrSDK/v0YdqabETL7+Md+2tkeNra7
- +gzMsZ7Wpvr1oUIQflidUKK+3uFj6bwtji/36AEKMdhPRJqaYdVbLyeWW95jZzIUt2GI
- GysboXBnvISCokdhw0oDPrUUynJx/KqbXW4eibul3PrUDmOZSsdAIq/602mPNEd0gJoq
- DGDA==
+ bh=ACx5jt1Vn3WNfNGxe1mGxg6MS5wUoaufG0LgO8Y9Abo=;
+ b=rcEFX/stqwxzJFF3UM/CuwDG5XmqeHyFaAPv9G1CFle4N0sfj5nhWDszpfzfrEofPd
+ LpH/ugRtWSbWdxRX7ni21dcRWmUdl6gXsVJ3fCnmbqnkE7eKnyZoVrNM0J1WzAsrgMrv
+ pOcvQZ+skMdjmisjof1waWs5+i5bdIjNXLvJTpdmafqdNGir/E4oEJ4LxN7KfP2HIUGQ
+ pAY5oCp7VUDyFM3QvSm7xfh2zFkaZQrCZdOBgjOf2zXepggSHhB9hKfCWRbrP2ycdeC+
+ c3IsQ9qrUtY9ueQPM0kYjLlAUuTj38uKGcR8h5lymxu4pwBQHRCs+bba8MgG7wpPA3S3
+ wSHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6vgeryZZ4xRFtbxXks7hwqxyGbmahgdqHg4XkK0BsNmWIoeX4augLvgHgx+tTV373bZYh098=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNP+jrKJvwU2pxuN5HYoDlD9zZakjKBh4BjxY/kd6gp25EhyEZ
- Axx2Bl4Ah+6kAyUbDfRaJPBtTDqQ63OaNWlrWUrwGlZ3i0i2GeIPmX/W63YjK9E2SLg=
-X-Gm-Gg: AY/fxX5bxASeG+NkkVNt28EdAMtJFe40mdvMBlYlLmzVNMftwUTjW+/gReifeU0qK9C
- ZvjWRkKIRS3jPDlwMrrwtUOSRwCekKhYeQKgwURZ66Q9DawYzSt+9m6Ewy5WIXyM2vNI7NP0B0U
- 9Uus4GXQYQSP/jUrectZC2ukmbiGwn3+MV1C6mFZJoSvVanfQQXkuUpN94rwoO+rJurbq63fJ8y
- cFic8zuGhayfd6yiz3i4GAR26TGjINTXVB/wmbDPU5HvuUxx3lRIpkRj01WDSKh8RRkYA/3Bxpn
- FKhRRQ/W2+YcmnydCwJ4NgNid+YGcU2iqPm45I+WtvbLq/bzU85e5eyzl3VPBNtjaXoEipKO9se
- slKmuNpb7H2yXns6m80w3N30d+vYDpwtoGqNP9bcKMvHt78SvsWyv0MwUzyWCKWZ1CWjLFjkGbJ
- Oe9pT99vicMTRCqJ70aF0xFyh/Ii/v7AkZJWdyYu+VOnd0Tp84uSMATw==
-X-Google-Smtp-Source: AGHT+IE8SSIDruS05eGm/A/061NanqVXxjP6G1lCAmV1HrRkg/BaLB2iC60l9TiRzqWS9tjvvaAMig==
-X-Received: by 2002:a17:907:9701:b0:b80:3fff:32ea with SMTP id
- a640c23a62f3a-b8445034cd3mr738987566b.57.1767904140257; 
- Thu, 08 Jan 2026 12:29:00 -0800 (PST)
+ AJvYcCWB+6jMljmi3PShJJirtaaS1vfxg3R+2wjI34sqSt40r+K0ogk/hqCdCVw6zJXlHDAVUJypBh8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJWY4SBDxrg1GOZaLTKop2uewnnNF2SQBThj93DYQEvncBi1cm
+ k1ySm7ynzgTQAyfzzAUOfvhQ0Oj0w9SC28MNS+vTUtZE6b0mrqfPxiB6lToOpaYfsio=
+X-Gm-Gg: AY/fxX4VeQq5miymfHX/sdnIAeJS6PE09us0cGyCeR9Ri2Ta1IJyX6x59BQrUo6PNx1
+ QoB6BZUdlCLdJA7MTIWonPWWPrUv7TBMvhkEFcAZtC+WMYtvn3mcyAjk5q1h9vsoB883m8j+eRZ
+ J+F0JHuKrLVwrOuzl1STj4ytOqNraHrD47XolKbOiCP8SRXXnj27qNvuffuGmcvIj9mm11WZEtj
+ GZBtROEfBZoFGiqD0Q84NvMKoyQgnSbZOj/ntKTxlSZXpa678SI1dlTtFFrkbzq1CW7l1ddt0VU
+ KA9F5ocVJt8U1o7BswA3kpFExZ4YMU3cjx6mUUIktiBZqGbXBl9sSvd7PaLdHGYeT7wm7CVlQ6p
+ W3+ASDscFek/ToRB1VSBG2MqdCEKtalAu3KE7u/nRv22U5gjUGt7CTHj/bMpD4IRKU2mFE3mt2q
+ Kx+R2VFD93Z8xB7nDa5IRvfCzt7+oc8U+4rAcoy6AWfFNH6ifIyS+lRQ==
+X-Google-Smtp-Source: AGHT+IHapEqEOs/GmqeWHlh1iLJPPnDTkyPk/Py5FdZJPchR059FdEFN/B6W33xuoFZs/xYR7m9O+Q==
+X-Received: by 2002:a17:907:1b02:b0:b76:f57f:a2c3 with SMTP id
+ a640c23a62f3a-b84451ef354mr744200366b.12.1767904142772; 
+ Thu, 08 Jan 2026 12:29:02 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a564e05sm930264366b.65.2026.01.08.12.28.59
+ a640c23a62f3a-b842a564e05sm930264366b.65.2026.01.08.12.29.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 12:28:59 -0800 (PST)
+ Thu, 08 Jan 2026 12:29:02 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 08 Jan 2026 21:28:45 +0100
-Subject: [PATCH 3/6] soc/qcom: rpmh: correctly wait for TCS flush
+Date: Thu, 08 Jan 2026 21:28:47 +0100
+Subject: [PATCH 5/6] power: regulator: qcom-rpmh: read votes from rpmh
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-rpmh-regulator-fixes-v1-3-d1b5b300b665@linaro.org>
+Message-Id: <20260108-rpmh-regulator-fixes-v1-5-d1b5b300b665@linaro.org>
 References: <20260108-rpmh-regulator-fixes-v1-0-d1b5b300b665@linaro.org>
 In-Reply-To: <20260108-rpmh-regulator-fixes-v1-0-d1b5b300b665@linaro.org>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -91,13 +91,13 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15-dev-52d38
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5161;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4440;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=lFOKsgKAHEdMUlrUxiPKGE1Lyb9mw7DtyZNf66+JLv0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhswE4XapDQXmOnbaQgGafU/KmSWOqTuJ8T+/sbX7fdrap
- a/Kcsw7SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESsBBkZWm5OfG76R0BTnU9z
- /pv/Vq38JU/47VZc2q/+NiD8CttlPYbfbIlui3ltpp39mvryq9S/zdrzXi0PDCydPeNK7sOHTBs
- UAgA=
+ bh=cPtTykY/oHS4Ap/grXRp6rIGGkAwv+X57X6zZG5TwvM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhswE4Xbm39mNWlfXNOq0hpc/Sni9ks2tTO8t96/r5vqNa
+ /n5pK53lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIn8DGX4H3vva/3MQymHmd0m
+ ewS/9r1Rnl53hy33ZdP1b5dfvLb6f5Hhf9LKoGOT7WevTzsQanFJx8Sww994htWa4jwb+auf2M1
+ 4KwE=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,138 +116,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several bugs were discovered in the rpmh-rsc driver which collectively
-meant we were never actually waiting for the TCS to flush, these were
-likely missed because U-Boot runs single threaded and the RPMh had
-typically processed the single command we sent by the time we went
-to send the next one. However a future patch will implement rpmh read
-support which requires us to properly wait for the RPMh command response
-so we can return the value.
-
-Fix these issues so we correctly ensure the TCS is done before
-returning.
+Make use of the new RPMh read support to fetch regulator values that may
+have been voted on by a previous bootloader stage. This allows commands
+like "regulator status" to report the actual votes programmed into
+hardware (though not necessarily the actual states of the regulators
+once the votes have been aggregated).
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/soc/qcom/rpmh-rsc.c | 44 +++++++++++++++++++++++---------------------
- drivers/soc/qcom/rpmh.c     |  1 +
- 2 files changed, 24 insertions(+), 21 deletions(-)
+ drivers/power/regulator/qcom-rpmh-regulator.c | 76 ++++++++++++++++++++++++++-
+ 1 file changed, 75 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index f51ef0b4af9c..05fff174f832 100644
---- a/drivers/soc/qcom/rpmh-rsc.c
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -283,31 +283,37 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
- {
- 	u32 msgid;
- 	u32 cmd_msgid = CMD_MSGID_LEN | CMD_MSGID_WRITE;
- 	u32 cmd_enable = 0;
-+	u32 cmd_complete = 0;
- 	struct tcs_cmd *cmd;
- 	int i, j;
+diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
+index b16cbccbfc45..cabdf089819d 100644
+--- a/drivers/power/regulator/qcom-rpmh-regulator.c
++++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+@@ -36,10 +36,13 @@ enum rpmh_regulator_mode {
+ 	REGULATOR_MODE_HPM,
+ };
  
-+	if (msg->wait_for_compl)
-+		cmd_msgid |= CMD_MSGID_RESP_REQ;
-+
-+	cmd_complete = read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_WAIT_FOR_CMPL], tcs_id);
-+
- 	for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
- 		cmd = &msg->cmds[i];
- 		cmd_enable |= BIT(j);
-+		/* U-Boot: always wait for completion */
-+		cmd_complete |= (!!msg->wait_for_compl) << j;
- 		msgid = cmd_msgid;
--		/*
--		 * Additionally, if the cmd->wait is set, make the command
--		 * response reqd even if the overall request was fire-n-forget.
--		 */
--		msgid |= cmd->wait ? CMD_MSGID_RESP_REQ : 0;
+ #define RPMH_REGULATOR_REG_VRM_VOLTAGE		0x0
++#define RPMH_REGULATOR_VOLTAGE_MASK		0x1FFF
+ #define RPMH_REGULATOR_REG_ENABLE		0x4
++#define RPMH_REGULATOR_ENABLE_MASK		0x1
+ #define RPMH_REGULATOR_REG_VRM_MODE		0x8
++#define RPMH_REGULATOR_MODE_MASK		0x7
  
- 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
- 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
- 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
--		debug("tcs(m): %d [%s] cmd(n): %d msgid: %#x addr: %#x data: %#x complete: %d\n",
-+		debug("tcs(%d): [%s] cmd_id: %d: msgid: %#x addr: %#x data: %#x complete: %#x\n",
- 		      tcs_id, msg->state == RPMH_ACTIVE_ONLY_STATE ? "active" : "?", j, msgid,
--		      cmd->addr, cmd->data, cmd->wait);
-+		      cmd->addr, cmd->data, cmd_complete);
- 	}
+ #define PMIC4_LDO_MODE_RETENTION		4
+ #define PMIC4_LDO_MODE_LPM			5
+ #define PMIC4_LDO_MODE_HPM			7
+@@ -204,8 +207,40 @@ static int rpmh_regulator_send_request(struct rpmh_vreg *vreg,
  
- 	cmd_enable |= read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
- 	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
-+	/* U-Boot: Tell the DRV to wait for completion (?) so we can poll on DRV_STATUS */
-+	/* This register applies to the entire TCS group not per command */
-+	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_WAIT_FOR_CMPL], tcs_id, cmd_complete);
+ 	return ret;
  }
  
- /**
-  * __tcs_set_trigger() - Start xfer on a TCS or unset trigger on a borrowed TCS
-@@ -375,28 +381,24 @@ static void __tcs_set_trigger(struct rsc_drv *drv, int tcs_id, bool trigger)
-  */
- int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
++static int rpmh_regulator_read_data(struct rpmh_vreg *vreg, struct tcs_cmd *cmd)
++{
++	return rpmh_read(vreg->dev->parent, RPMH_ACTIVE_ONLY_STATE, cmd);
++}
++
++static int rpmh_regulator_vrm_get_voltage(struct udevice *rdev, int *uV)
++{
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	struct tcs_cmd cmd = {
++		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_VOLTAGE,
++	};
++	const struct linear_range *uv_range = &vreg->hw_data->voltage_range;
++	int min_uV = uv_range->min;
++	int max_uV = uv_range->min + uv_range->max_sel * uv_range->step;
++
++	int ret, _uV = 0;
++
++	ret = rpmh_regulator_read_data(vreg, &cmd);
++	if (!ret)
++		_uV = (cmd.data & RPMH_REGULATOR_VOLTAGE_MASK) * 1000;
++	else
++		dev_err(vreg->dev, "failed to read VOLTAGE ret = %d\n", ret);
++
++	if (!_uV || (_uV >= min_uV && _uV <= max_uV))
++		*uV = _uV;
++	else
++		dev_info(vreg->dev, "read voltage %d is out-of-range[%d:%d]\n",
++			 _uV, min_uV, max_uV);
++
++	return ret;
++}
++
+ static int _rpmh_regulator_vrm_set_value(struct udevice *rdev,
+ 					 int uv, bool wait_for_ack)
  {
- 	struct tcs_group *tcs;
--	int tcs_id, i;
--	u32 addr;
-+	int tcs_id, i = 0;
-+	u32 val;
+ 	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+@@ -248,20 +283,39 @@ static int rpmh_regulator_vrm_set_value(struct udevice *rdev,
  
- 	tcs = get_tcs_for_msg(drv, msg);
- 	if (IS_ERR(tcs))
- 		return PTR_ERR(tcs);
+ static int rpmh_regulator_vrm_get_value(struct udevice *rdev)
+ {
+ 	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	int ret, uV;
  
--	/* u-boot is single-threaded, always use the first TCS as we'll never conflict */
-+	/* U-Boot is single-threaded, always use the first TCS as we'll never conflict */
- 	tcs_id = tcs->offset;
-+	if (!read_tcs_reg(drv, drv->regs[RSC_DRV_STATUS], tcs_id)) {
-+		pr_err("%s: TCS %d is busy!\n", __func__, tcs_id);
-+		return -EBUSY;
+-	debug("%s: get_value %d\n", rdev->name, vreg->uv);
++	if (vreg->uv < 0) {
++		ret = rpmh_regulator_vrm_get_voltage(rdev, &uV);
++		if (!ret && uV != 0)
++			vreg->uv = uV;
 +	}
  
- 	tcs->req[tcs_id - tcs->offset] = msg;
- 	generic_set_bit(tcs_id, drv->tcs_in_use);
--	if (msg->state == RPMH_ACTIVE_ONLY_STATE && tcs->type != ACTIVE_TCS) {
--		/*
--		 * Clear previously programmed WAKE commands in selected
--		 * repurposed TCS to avoid triggering them. tcs->slots will be
--		 * cleaned from rpmh_flush() by invoking rpmh_rsc_invalidate()
--		 */
--		write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
--	}
+ 	return vreg->uv;
+ }
  
- 	/*
- 	 * These two can be done after the lock is released because:
- 	 * - We marked "tcs_in_use" under lock.
-@@ -407,12 +409,12 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
- 	 */
- 	__tcs_buffer_write(drv, tcs_id, 0, msg);
- 	__tcs_set_trigger(drv, tcs_id, true);
+ static int rpmh_regulator_is_enabled(struct udevice *rdev)
+ {
+ 	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	int ret;
  
--	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done */
-+	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done. */
- 	for (i = 0; i < USEC_PER_SEC; i++) {
--		addr = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], i, 0);
--		if (addr != msg->cmds[0].addr)
-+		val = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_STATUS], tcs_id, 0);
-+		if (val & CMD_STATUS_COMPL)
- 			break;
- 		udelay(1);
- 	}
+ 	debug("%s: is_enabled %d\n", rdev->name, vreg->enabled);
  
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index 96f14a9afdf2..91b90626af36 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -21,8 +21,9 @@
- 		.msg = {				\
- 			.state = s,			\
- 			.cmds = name.cmd,		\
- 			.num_cmds = 0,			\
-+			.wait_for_compl = true		\
- 		},					\
- 		.cmd = { { 0 } },			\
- 		.dev = device,				\
- 		.needs_free = false,			\
++	if (vreg->enabled < 0) {
++		struct tcs_cmd cmd = {
++			.addr = vreg->addr + RPMH_REGULATOR_REG_ENABLE,
++		};
++		ret = rpmh_regulator_read_data(vreg, &cmd);
++		/*
++		 * Don't override if disabled since we will also vote the right voltage
++		 * while enabling
++		 */
++		if (!ret && cmd.data)
++			vreg->enabled = cmd.data & RPMH_REGULATOR_ENABLE_MASK;
++	}
++
+ 	return vreg->enabled > 0;
+ }
+ 
+ static int rpmh_regulator_set_enable_state(struct udevice *rdev,
+@@ -339,14 +393,34 @@ static int rpmh_regulator_vrm_set_mode(struct udevice *rdev,
+ 
+ 	return ret;
+ }
+ 
++static int rpmh_regulator_vrm_get_pmic_mode(struct rpmh_vreg *vreg, int *pmic_mode)
++{
++	struct tcs_cmd cmd = {
++		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_MODE,
++	};
++	int ret;
++
++	ret = rpmh_regulator_read_data(vreg, &cmd);
++	if (!ret)
++		*pmic_mode = cmd.data & RPMH_REGULATOR_MODE_MASK;
++	else
++		return -EINVAL;
++
++	return 0;
++}
++
+ static int rpmh_regulator_vrm_get_mode(struct udevice *rdev)
+ {
+ 	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	int mode;
+ 
+ 	debug("%s: get_mode %d\n", rdev->name, vreg->mode);
+ 
++	if (!rpmh_regulator_vrm_get_pmic_mode(vreg, &mode))
++		vreg->mode = mode;
++
+ 	return vreg->mode;
+ }
+ static const struct dm_regulator_ops rpmh_regulator_vrm_drms_ops = {
+ 	.get_value = rpmh_regulator_vrm_get_value,
 
 -- 
 2.51.0
