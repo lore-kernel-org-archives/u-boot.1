@@ -4,59 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD09D185E8
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 12:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE4FD185EC
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 12:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB8E383B87;
-	Thu,  8 Jan 2026 13:10:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 84C2383B8A;
+	Thu,  8 Jan 2026 13:28:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o/ZnpyGd";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5026383B8A; Thu,  8 Jan 2026 13:10:48 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 2918A84119; Thu,  8 Jan 2026 13:28:46 +0100 (CET)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [45.157.188.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8C43839F1
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 13:10:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id C8CCF839F1
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 13:28:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D634860130;
- Thu,  8 Jan 2026 12:10:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 320CDC19421;
- Thu,  8 Jan 2026 12:10:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767874243;
- bh=HdWBwWUXLiCzxd3C3/VprUqGOPB19pVM3wCKuftM7AU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=o/ZnpyGdxzlY2uNlF6mirMFoCk0dUwlCAkSS0EvUe+k43sa/kr/wrJrVntrLIAK29
- sIhQD9AhhHPeleUr9sOiRSGvisb70Vy6tuqayLp525M4oZS+aeckjEAim9MYwE6/Vy
- CMQi5D7K6tjAUGo2EOqeiZdSPR9K+iE1nNO/kDfeqx8HI8C98/RZi46T7waWaFiHh4
- qTS1uqOJhVsYM69aEyEssV7vrzDpQrLnnOr6Lek8RiQyDpW0cf33UTf2L7E2k8qjMB
- z79dC/M/PWK3QkjiKj+S1/ePmvH7GDzJ00deNFREr5ANELw2FMlq7cJuG0WKvQ4R8A
- oj48UBY7AO0hg==
-Date: Thu, 8 Jan 2026 17:40:34 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, varadarajan.narayanan@oss.qualcomm.com,
- adrianox@gmail.com, paul.liu@linaro.org, sjg@chromium.org,
- wolfgang.wallner@at.abb.com, javier.tia@linaro.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [RFC PATCH v1 0/3] efi_loader: Introduce platform hook for FDT
- selection
-Message-ID: <aV-eumhHFeCxceZg@sumit-xelite>
-References: <20260106122134.2047864-1-aswin.murugan@oss.qualcomm.com>
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dn42M37GBz6h8;
+ Thu,  8 Jan 2026 13:28:43 +0100 (CET)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dn42L2BYcz8Mw; Thu,  8 Jan 2026 13:28:42 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Thu, 08 Jan 2026 13:28:36 +0100
+Subject: [PATCH v2] spl: fix incorrect dependency for SPL_NET
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260106122134.2047864-1-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260108-spl_net-deps-v2-1-e412128520f2@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WMywqDMBBFf0Vm3RTzsBpX/Y8iRcykCZQYMhIqk
+ n9v6r7Lcy/nHECYPBKMzQEJsye/hgri0sDi5vBC5k1lEK3ouOADo/h+BtyYwUjsJtpe2HooOUN
+ VYkLrP2fuMVV2nrY17Wc989/6J5Q54wy1klYOWne9ui8OU9qvBmEqpXwBsbKdsqgAAAA=
+X-Change-ID: 20251218-spl_net-deps-62072f51243a
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Jerome Forissier <jerome@forissier.org>, 
+ Jerome Forissier <jerome@forissier.org>
+Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
+ Peng Fan <peng.fan@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,65 +67,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ashwin,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Tue, Jan 06, 2026 at 05:51:31PM +0530, Aswin Murugan wrote:
-> This RFC patch series introduces a weak function hook to allow platforms to
-> provide custom device tree selection logic while keeping common EFI
-> loader code generic.
-> 
-> Background:
-> Currently, EFI loader supports loading a single DTB file.
+When SPL_NET is included, scripts/Makefile.xpl includes net/. However,
+in this directory, the Makefile only compiles things if CONFIG_NET or
+CONFIG_NET_LWIP is defined (it doesn't use $(PHASE_)). Therefore, at
+least one networking stack needs to be enabled for SPL_NET=y to do
+anything meaningful.
 
-As pointed to by folks in the other thread, U-Boot allows to select a
-DTB from all the DTBs bundled by the OS in EFI system partition. You can
-see the Debian example here for DTBs packaging [1].
+In certain cases (e.g. am62px_evm_r5_ethboot_defconfig + NO_NET=y via
+menuconfig), it is possible to fail the build with undefined references
+(since include/net-common.h does check with CONFIG_IS_ENABLED(NET) which
+would be true for SPL_NET, but the implementation wouldn't be compiled).
 
-> Qualcomm platforms require special multi-DTB selection logic that:
-> - Reads hardware information from SMEM (Shared Memory)
-> - Selects the appropriate device tree from a combined DTB file based on:
->   * Platform ID (SoC variant)
->   * Board variant and subtype
->   * PMIC configuration
->   * SoC revision.
+Fix this oversight by making sure a network stack (and the legacy one)
+is available when selecting SPL_NET.
 
-I think here you are presenting an incomplete picture to the U-Boot
-community. You need to show firstly how the multi-DTB FIT image is
-prepared first which is described here [2].
+Fixes: 8cb330355bd5 ("net: introduce alternative implementation as net/lwip/")
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+I'm wondering if this is the proper fix... Maybe we should migrate
+net/Makefile to use $(PHASE_) there instead? This would allow SPL_NET
+(haven't checked the whole codebase, maybe we still have CONFIG_NET
+checks instead of IS_ENABLED(NET) where we shouldn't) to build without
+any network stack in proper (meaning that SPL_NET is selecting the
+legacy networking stack for SPL only), and maybe even that would allow
+us to have legacy stack in SPL and lwip stack in proper? This seems like
+a much bigger task than this simple patch here.
+---
+Changes in v2:
+- Added Rb from Jerome,
+- Reworded commit log,
+- Added question on whether this is the proper fix now that I spent a
+  bit more time looking at it,
+- Rebased on top of master,
+- Link to v1: https://patch.msgid.link/20251218-spl_net-deps-v1-1-e943f3899574@cherry.de
+---
+ common/spl/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-From U-Boot point of view, I think this DTB selection logic is useful
-which can be used to configure: $fdtfile, see API: configure_env() in
-arch/arm/mach-snapdragon/board.c.
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 4f4119f5806..c7db88345b4 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1153,7 +1153,7 @@ config SPL_DM_SPI_FLASH
+ 
+ config SPL_NET
+ 	bool "Support networking"
+-	depends on !NET_LWIP
++	depends on NET
+ 	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
+ 	help
+ 	  Enable support for network devices (such as Ethernet) in SPL.
 
-However, does this solution also cover OEMs based boards alongside Qcom
-reference boards?
+---
+base-commit: 141be72e2a9d43aa4e3d1a6a6e0ab8f9eb8784c6
+change-id: 20251218-spl_net-deps-62072f51243a
 
-> 
-> Solution:
-> Introduce `efi_load_platform_fdt()` as a weak function:
-> - Weak implementation in lib/efi_loader/efi_fdt.c (defaults to no-op)
-> - Called from efi_bootmgr_run() after efi_load_distro_fdt()
-> - Qualcomm override in arch/arm/mach-snapdragon/efi_fdt_qcom.c
-> 
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
-[1] https://packages.debian.org/sid/u-boot-efi-dtb
-[2] https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/Documentation.md
-
--Sumit
-
-> Aswin Murugan (3):
->   efi_loader: Add platform hook for FDT loading
->   soc: qcom: smem: Added socinfo header file
->   mach-snapdragon: Implement Qualcomm multi-DTB selection
-> 
->  arch/arm/mach-snapdragon/Makefile       |   1 +
->  arch/arm/mach-snapdragon/efi_fdt_qcom.c | 339 ++++++++++++++++++++++++
->  include/soc/qcom/socinfo.h              | 114 ++++++++
->  lib/efi_loader/efi_fdt.c                |  34 +++
->  4 files changed, 488 insertions(+)
->  create mode 100644 arch/arm/mach-snapdragon/efi_fdt_qcom.c
->  create mode 100644 include/soc/qcom/socinfo.h
-> 
-> -- 
-> 2.34.1
-> 
