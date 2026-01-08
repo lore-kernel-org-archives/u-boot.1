@@ -4,135 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CAE7D148BE
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 08:00:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EB0DCF6BE5
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 08:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC58383B0D;
-	Thu,  8 Jan 2026 09:00:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id B50AC83B8A;
+	Thu,  8 Jan 2026 09:08:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="m2TXruQU";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UBh07Nr1";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Fjw38VUF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9051683B87; Thu,  8 Jan 2026 08:59:58 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id A7DC183BE1; Thu,  8 Jan 2026 09:08:12 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36B71839DE
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 08:59:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6087Q6PN1258448
- for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 07:59:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=EbPPhp29zliopHcUq8rLzr1s
- S4za2OraB7V4XcyfAs4=; b=m2TXruQUbssdyk5eHZ+m5kfmWMKTZVpDUedCNS4o
- mS+Ek5wzbIbaGHaW7iWiGPVUeQkOGQOUn7LTLIQcN+nI8cSXOPdgdAOFRzkUBO4G
- v2ooK00kUG34chsPET3QCdeKKh1XZ4vPKqGCgXS/FulZlWIppnRkeV8Ftw7MdvLJ
- /LFA0LpjuX8iJPYPmQ2j/FKQrQaqCBlvEhtiERv8rTEqgx5VOEKcXtl6zDO7e4qz
- 4hb47aFzmvXbRIPDKGlfEgpoHwcRfp41RMjMtfMZKTK9qXGUqY9UbT5E6EWk7fIy
- gew40nNIgDA4EvvAZDEaUzqahRwBH7eOeGD8O1cA2bxP5w==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bj86gr2vq-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 07:59:54 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-b6097ca315bso4747823a12.3
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 23:59:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767859194; x=1768463994; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EbPPhp29zliopHcUq8rLzr1sS4za2OraB7V4XcyfAs4=;
- b=UBh07Nr10aKQ5wvL1/Z8yzpWxjUXvqq+FNcq5irOr5j9+u/iWZikPrYL0Z320nzKn5
- U3v8kSYFgevEFk6Aj67xzgblj5fkea1/BlGOcjoNuBkmeGLyDP5c44tbUwUPCC+wHpZ7
- BJoNxW+RjR/dwpuB+XO2SB2iYQq+KE3rDJCino0cDJ12za31tYJMN8cH7/IVEQm//1ND
- 5v1G1C59R4dUQXiWyYIwViNI2RCkqaUbs181s3ky7xSAWKNLZaN/P+cG2xnzBVhNr7LT
- 2rQafgb72TVo0fiSPwWTHAUh1rkjy70liRvqdHn4eICu37zJb93ubAYki2dnc5snHP56
- opRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767859194; x=1768463994;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EbPPhp29zliopHcUq8rLzr1sS4za2OraB7V4XcyfAs4=;
- b=khg0xNuKtmlFltrlnEpwe1dqLEVJQePWmgqHKNWkAWK49bO2sGZb43h9AGZ2i9r08X
- VuBcz24W5iCqt6SzYzq513s2EYxzEJi7DPVzCxIoGPm6KXhf6SlrYS3NRNfOA5/l1Lky
- ACD8X7gZJ7KvM3opxGL44k0Mc9tmBdopis1lOtol3y2x41Jz7WuWdtuMBVygYRzH4dL/
- rUQ+SuVoKTdsxUZ1s3RjUfMtqU36ZVertX06nQz70eYJPnvIcikSfDFlZrdEviMIgf63
- zFgNiUNH9baeE4futP3rSXfpyYHZp+Eg1pRZ+6YdS6VUzZFKbkgUdTwkyTOUBmqfqIFM
- I+cQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZ+/2MyL67hC3RyGvGrY13rC862xRYq03i37CilvjaSfyjZH9lV5CnCYFY1sxjYLdvU+dmUmk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1fq+G9k5wsBAXfyP7DEIbF9gYgiD2maJxSpSkEUNqEFlbf6ut
- SPrNseDC2f5HYFw/AGTmlmDW3vjTspxx99Yw7DHgeX0biLPt2vYJ2a4PGQuaGN7V+tI1l1iZN/Q
- Zieh+dhrfPw7t52m9GEGuJLeJDGaMemHUiXKyAYUDUEcP1nMcUDHZ061g
-X-Gm-Gg: AY/fxX6j7D5r3+d5gxoP439cNMTwGT+o1b/Q1ziHMHSkxbDfeACNHYiIABFZNs2xaNR
- Px5DbFfX1w+3/wuIs9BWsckS6wcEIoO0v8nq+8SYUu+hFODC5LCYsDFqjUkFKI+XzdRCw/YDluZ
- ybHXfQEjdFtgM1F2Vqh5JrBA6q5ufy7efEb9PbqJoBVJhbFGMuFkA8TwkvZfcyZTudnZPiYPbDq
- +keQ4LGtQfDIoAC4B98havc6JzCGsVPBQzONpdgOk1g90xmAbw/RE4CRSv+axsAEWTD8N+tXPJ6
- C0YM6Br6DBsnAv7HKEjobusUbc7188BFTsbVWp/MVECTt8EfKg4Kpi4s2rroGUsPej+r/V80hYU
- 02ofIOud8uleuV57AXIF2BFn9eaEuF5B/+jwpLOjJVtsFTTcOQ+JZ5atvqMrT1vAxsRXKJfse+E
- eLMcNLzVSlxy9hSpx3x5IafyTqyAKZfTfosLgQPvA=
-X-Received: by 2002:a05:6a00:4c13:b0:77c:6621:6168 with SMTP id
- d2e1a72fcca58-81b7e53eb41mr4708290b3a.30.1767859193578; 
- Wed, 07 Jan 2026 23:59:53 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEDhvIuI8eKLilH8BgLeMHf29cXavmn1XsY/rhBvXPW0pyrwbEQSnKNTJwCBFlFWoKg2BGcWA==
-X-Received: by 2002:a05:6a00:4c13:b0:77c:6621:6168 with SMTP id
- d2e1a72fcca58-81b7e53eb41mr4708270b3a.30.1767859193071; 
- Wed, 07 Jan 2026 23:59:53 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-819baa1969dsm6913440b3a.5.2026.01.07.23.59.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 23:59:52 -0800 (PST)
-Date: Thu, 8 Jan 2026 13:29:47 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, me@samcday.com, sughosh.ganu@linaro.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] mach-snapdragon:: Add support for fastboot reboot
- reason detection
-Message-ID: <aV9j82/JfzFMn2X3@hu-varada-blr.qualcomm.com>
-References: <20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 223D483B0D
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 09:08:10 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X1gpw5iXbwiIH5XFyTYSNqbv0zlcq45w30gJ6f5ih5k7NNPPYARrXYLSr+C/m+EcrDQ/1o9IP0ToeWiNMXAZpayEGCvQMxs+buG3j0Sf8egzyKTkfIxIOnAmwae0i8QIkYdFd3b7A/fz0bRac2LC9V/YseVDTZ51/vNPX9ETyH16wHzRN8D++gpm2Z/VscOpC+TJgEBfGI0gSYAn2TH94EHB1QHhADYZe2pNJ0lMuObnxf6yQU9kj09sr8U7nlcmzAGScbmRF4I55+G2eBRK18eKyvZh+JUKXaPyDZUt7kbX5fO39Fr7cLvK0vF+/XriPlK1QlZQKUgQGxMD1hGeHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Yza8y4CWkIIEM1DE61Vx0y4hzzBRMbE5aZKc8JLiwyQ=;
+ b=pwwyTnWTPWD96TiPagoqdAE/IoLt3fVBJdrtd0rM6HvW5AHr5sXmMlPwT2AqjzrS80xt7N2N2YvroQ2GHzlw1y4qqx+rXVNjW94wjYeXKCVlcmdDo4CxttAN+x3+v7XjTy9TZdA30hUhszEhRN/XflbXHR1a6R46vsn0iU2ystDlpIGStAZh/GAzVR3zZsdJhQeR1+fkbeNMnAOHxVMUxsDk14iAPC117eneouJhj5Q4Bi5mBRh9pHZSfkyU1m8hwqCCqjVZ8Kcqu5KkOss2aKMQ8sWjJixuBowWXb2SNBA3bRB58eUyp5ipr7rLa6fJOMMx9QiVI2ZfrTnzXLQ6Qw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Yza8y4CWkIIEM1DE61Vx0y4hzzBRMbE5aZKc8JLiwyQ=;
+ b=Fjw38VUFtzvd7cHBD0M9fn0fzNbpoWttvQcefVRP6aAyW61ARdb3AlcZvc7m1rbY3k0OPdit7n8sCPI5HqdOaGXkI4QvCLHxTBPM5RkI1y52dyfVMR5OtqUBG5MZEHHUEYmujh61xqu8ig2rkbyp2tspNQK+/WB8ewplpbj/9A5qeRrvZuomRrhvP9PVJPSpFIJlkxMT9N2l39cc2vnvBvnsw/NJePf8/d7Cc00EDM6fAVxwWrFOfmMZEI/BTGvm03gpIlvrIC82tH6jZqRb4l7eMyHB/tI6/QBXMrgzwiXChpQD9fdxs/0QmqECASnNpgAIh36xBB3FeCfAP1WvFw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SA6PR03MB7878.namprd03.prod.outlook.com (2603:10b6:806:42e::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
+ 2026 08:08:06 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9499.003; Thu, 8 Jan 2026
+ 08:08:06 +0000
+Message-ID: <6e24770b-ea18-4678-90ef-6338bd40b147@altera.com>
+Date: Thu, 8 Jan 2026 13:37:57 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [REGRESSION] mmc: "unable to select a mode: -5" on i.MX8M/AM62
+ platforms
+To: Max Merchel <max.merchel@ew.tq-group.com>, Vitor Soares
+ <ivitro@gmail.com>, u-boot@lists.denx.de
+Cc: vitor.soares@toradex.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ trini@konsulko.com, marex@denx.de, tien.fong.chee@altera.com,
+ balsundar.ponnusamy@altera.com
+References: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
+ <d9978b24-65d5-4f8f-8ef9-e551c5baf9b9@ew.tq-group.com>
+Content-Language: en-US
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+In-Reply-To: <d9978b24-65d5-4f8f-8ef9-e551c5baf9b9@ew.tq-group.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA5PR01CA0156.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1ac::6) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=ZNjaWH7b c=1 sm=1 tr=0 ts=695f63fa cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=ELy4k7POSWYNcTnjWosA:9
- a=CjuIK1q_8ugA:10 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: jQsSCFspWg9iT_ZPOHYE_BHHOMOkACgj
-X-Proofpoint-GUID: jQsSCFspWg9iT_ZPOHYE_BHHOMOkACgj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDA1MyBTYWx0ZWRfX3Pfvq/p2tyhq
- Z+zXhOn3GXR9XVVJ65+Oqj/1s7+/63ozcw0b27fM5cyXzLVAqwEiq02AXCayfZDpc1O8lupIPMc
- QUukq09jpPaGxfrKf2fHND/+0EaTfODEu/EJbbZDvh1jpKsKfnm2moGLi7zpCgXsaslAiRhmDvQ
- Cg4Q7ij4HtROhAx1xNP4V6fck4R6M//wHMjMRFbwlBO2u/Auf16UGRyZ6FIP8zPFH9LJDymXmo6
- B3C7uNHAvoh4rwMe9zGERBe5bvVWnuRWIAEccwXmk7zhjN0+IwL9e2B0GR84Ol20LfbDSfZ8y6w
- jIAahIks94xbST5DLioyy0qHY2gxWphucBuHk0uvdwMnPPFoAxVNdM0MadHlXKl3MunG80mxi8l
- uCIKes3xX8i29TXWyCfyVktpCwKr+1znkci7+YmqOHVP7Gj4ZWD1Q54pg+2pTlw7wy4mn6GkkH9
- OTkIO/qYBGc4DlkHK4w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-08_01,2026-01-07_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
- adultscore=0 clxscore=1015 phishscore=0 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080053
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SA6PR03MB7878:EE_
+X-MS-Office365-Filtering-Correlation-Id: f18d1328-fd89-40ba-83e6-08de4e8d0db8
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?S2dKUmc0YTV5ZmhDVGhDNkpMdzRVVkY0K3ZiSURMVjFSN3VTRFZSWW1BU0NC?=
+ =?utf-8?B?aDMwZ2xzSHc2VkVGRHhSN3J1ZVRWdGF5dGRkcWJxZEFHRHVwcWY2d1FGdmlI?=
+ =?utf-8?B?N2dRdG1mbkc1d05FVzR2VFpEOFVBWWtodmU3Wld6NVFNUytYUVJhY21LUjlD?=
+ =?utf-8?B?ZW9tV28yZjJWQklMNlh0VDd2ZDdNRkhLR1Q0ME4rMlNKNS9KczlSMGJqTUdK?=
+ =?utf-8?B?RU50WjFCdXNMNGJlMzdVWGxFY3ZZZ2VpQTF6YmNWem1VdU5CbCtUVFZrMElK?=
+ =?utf-8?B?NlFsR1V5V3VWL2Y3M2NCL1A5YWE2TlJ6WFMzWjFVVnRIKzVkNjBrbmQvQmxi?=
+ =?utf-8?B?OUtPK2VsWEg5UlRSOEl0MDdVNDRIMnBFVTVFL3MvdjNhRzBPU0RQSnVqTXNM?=
+ =?utf-8?B?ZFZLYktWclJFRnZFeHQrcHdhM2RPcWlVaEswcUFXdk0yQ1NWWGpjTlBIY0NY?=
+ =?utf-8?B?Rk50d2RRdHNIM29MZHI2RXZ4c3FqYkR4cHhibXRzUVB1cFkxR3BQWmhyT1dW?=
+ =?utf-8?B?SnFWaU9RNzgvbnM2WVVwSm1FaWttVklodjlWcmxIZi9mZVhzbEptVzNncVhK?=
+ =?utf-8?B?M2JKNFVseGpGRkx5dDdEdUNxaHdLbHNBYytHZ3BtZVExUjFiWlVkVmwzMHhN?=
+ =?utf-8?B?eVptZmpCbmQvZGFKT0VpdXR1SGZndUYwWU5uKzU1elZKQUczY0tPK01GcXRn?=
+ =?utf-8?B?RGNkZlVFV2JGcGRQUVRaejZxN3MweThCcDRxeFl0b0JMVzRRbHVWcTI5enln?=
+ =?utf-8?B?alJGL2g5Skc0THNxam84SmM0cGFpY0NISjBBdWY3SXlpZzBYcElPeDNZc2FN?=
+ =?utf-8?B?ZGRWR2xVUzNRbkRLSC9wTHVCdzNWaHdzaGtXeFdtUVM0b1JqeElLdmN1UnFU?=
+ =?utf-8?B?OTVhM3VsUVdpSk80TlZUMTFibjRYTXloYVc3VHZDQjdEaUxla0xOTXFYMlE1?=
+ =?utf-8?B?U2pXLzRVN0ZBa3dTVkZEdnhpOUNQTDNrQzdlbVBEVVBPUnNJOWRnclFqRExr?=
+ =?utf-8?B?VlpNWnI5Y1RXNEZlc1hoQ1FzNDcrcVBaUzIwWlM2NEZpaUNPVVB2MzdZcTEv?=
+ =?utf-8?B?K0dXK2x6NzZ5eS8vUk5laDMyYkcrb0tkRy9NV0phTnNqdTE1b1FQcnZFekVr?=
+ =?utf-8?B?Mjltd0UwZG5vUDcySFl4V0Z5YVBRRTBsMTRnMnVIeTR3am03VlgxektrVlQy?=
+ =?utf-8?B?ZVJCcEVEVWpkdGlON1p6dGRGYVJJVWExd3FmSEJzRUwrWkxDVENoK056OXQr?=
+ =?utf-8?B?NEhVaktiWlFoOGxCWnJQTURUbGpncXk1RDVsU29nZit6Nk1UN1hWU3M2d0tw?=
+ =?utf-8?B?QUZFOU5LcEFRcTFjRkk1UUs5eE9jWjBIVitGTG1lYU03U1BGVk1nK1pnL214?=
+ =?utf-8?B?OWl6dEdYeUZJMHE3UHIzUmpacUxMWG5qdXlsUzgyd3FWQWcwK2Z6M3UrTWV3?=
+ =?utf-8?B?NytzenV0ZDcrY1J5WUtSQUxvckxpa29Gd2hIa1M4TmIyRnhDdWFhOUo0TWtV?=
+ =?utf-8?B?QUpQUGtpOW4wNEtHUE9uZXhiT2pZQ2loVWt6aGpJK0R2OE9BY3krK1RCbkFa?=
+ =?utf-8?B?VDVvaHJVcEViQTdoSTRLUG5SdThlbW1qM09ZSC9paHdyUmU2aHBQcXlDdDZl?=
+ =?utf-8?B?NFNZMEVUQjZESmRIOFBZNGlzV29zZU1OQmw3eFhhLzMydG5USEtRcVZWUWxj?=
+ =?utf-8?B?MlBkNTlGQnBUYUdKL0Q5L2VvQzVsWWNROTBGY3ZndWlUZCtxdythcjZLUVR6?=
+ =?utf-8?B?MUtLbmhGbHB1c1lIYnllLzZucC84RWNJUVFYTlMxcVpzNDk1QjZMWlFIVHVn?=
+ =?utf-8?B?T1RsZmgrendxM1ZiY2ZRM2dPR3dmeXdoZFpqcUdRa25SNTZlREIwRGpyd25X?=
+ =?utf-8?B?dFllM3lONzZYSlRYeTdKY05KTTMxYkVrTXY1Vm9jWXJONldlUjAxVHJqdTlZ?=
+ =?utf-8?Q?a4a4VtuECoi4F8elIUPE8zyhbxYsyeHh?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M0ZkSDE4amN4QTUyS2s2WUhnVDVSQ0ptNUxQK1kvUEZ4UXVob3FVbHFvalRH?=
+ =?utf-8?B?RmpId2dHclR0QktpN2ZYWXU0ZnRQTUlvWVA0dVZ2ZlNEbmdOa2l6VUtUWklG?=
+ =?utf-8?B?d1RBVUVFOE5KYkZYK29HUk9yM1VONldLdlBQc1ZTc1haNXZDVFhvZXhsN0p1?=
+ =?utf-8?B?NURrZkd1Y05QaTlGaHBvRER4MGFOZXc4cnlPaDZKVHZiRXp4Mzl0a25nRytH?=
+ =?utf-8?B?bi9XZjBTVzNNV05iSDdHTy9zbEVFMDBRcW5iZTBESlVSK1JjSDBiRWo0d01H?=
+ =?utf-8?B?c1ZoM0ZLVjJldWtObFBpUVd3YVJ4ajFSd3BNUjZ6MmJFWVdoK1loM0dDOGhM?=
+ =?utf-8?B?dWVrY2J0bHFrZDc1M0NhRFZkaTh4VWNId0xuckpBaitoS1BrN2t6VlkzNks3?=
+ =?utf-8?B?YnN5RWpSSklhMEpESUdFRHdNcnl0SzJXMHp0WVpxY3ByUGRsZVJXMVhZdkRH?=
+ =?utf-8?B?OTBEMWpVcUFWRFFLNjJVeXZCak15VEhPbDAvVDd5K1BoN0xaMm5YSmxJN0hK?=
+ =?utf-8?B?T09VNVUzbG0zcm5JNWF1Vm1JNitMSGFNa1duR0xhMWl4YTV4TERRNXMzZ3dy?=
+ =?utf-8?B?M0JqOVQxUjBoNFk5d2c5WXp6NlcyNkdlcEJKRjlTSWRTTEh5b0xqTjRnQ1N2?=
+ =?utf-8?B?MHFHRUM5UVhlZ3AvdFI0QWV0aUJRQnBSU0VJNU0yNUJveWIvR2FicTl0b24x?=
+ =?utf-8?B?WmwvZC8xdE1HeU9ZWFJyY0Jrc2txTFFJRitzb3FsNGlwcHVWTjB2K2FsTUo3?=
+ =?utf-8?B?d1NuNHFUUmYwTk1WSk43UFpPU0YzSi82RXcwUFFyNThGVE53Y1JzemkrSEQ2?=
+ =?utf-8?B?TWVKTE9NcFFPZTJhSk1VeVdyckdDWU5VdlZTeGhnQnlpanZmY0E2UTNEUzZU?=
+ =?utf-8?B?M0t5ZHh6RDA1ZTZ0djdMM01hV3I2T29yTERrU2V6ZVRSZTczVEVSTTI0anZ4?=
+ =?utf-8?B?dUVYYzJsRjFTQWNnQllqalhlTkNZNFRtU1d2NXV4Z3FPTytzbnAxZFN3Wktw?=
+ =?utf-8?B?Qmk0NmxPTldvZzN0NnV5V0RLQ29OYU1IU2RidngrM2xuWHAyYW03TllpbEtp?=
+ =?utf-8?B?RlpSUDM0UDJPUWRDTnIvcHBaUmFBS1laU0c3bFNsekU2Y0praDlhWUpvYU9i?=
+ =?utf-8?B?Z3lPSDd2akNZbHBGc1dxcEJlcG8zUWFwMWxnOVdjMGQyekhqaUtDZlpDdit1?=
+ =?utf-8?B?T2tMZkQyQ2daL3E5Rlg3cWI3UlJvaXRYWnF3ZjFOeVBqQ1BodWVSdy9DVGxh?=
+ =?utf-8?B?RWVkeG1JUUtVUzlKaElJd3pHaDZ5WUpJbU5JQ2VLRjJjUVR1bWI1cXFCWTZu?=
+ =?utf-8?B?VEk4aEE1NWZvQy96cFFWNlVQbkNqM2kza0RxM0RTcEpCa3JIblU2YkIwckRN?=
+ =?utf-8?B?VUt5eFV4aDRINThHeUhXM0xHeFJ1bEZtUnFyWTlSL3FlYXdHcHNRaVA5Y2VN?=
+ =?utf-8?B?YW5WTjJBNGlLbzVhYkVJdDlZMzhUOEo5Z0pnUjN5eGNrMUJtWEV4bSt3YUsr?=
+ =?utf-8?B?ZWcwVTRkZGozSVZXKzhON01BbHlDU1c0VEI1MmZGQU54RWZPWVRkVmpXenhB?=
+ =?utf-8?B?SWNHOXk3bkI0NDFOMEFNeG5zWjk1YkRrWjFDdWgxSE82NEljRE9ZYVhqdSta?=
+ =?utf-8?B?MGRvUlBOUDAvVjNnZnIxeWY2QUp6VlJKL21vZ25iVDE5SkZ5VGFCaCtad2I4?=
+ =?utf-8?B?SWFNYUtETEtuaU1TT08zSWUzTmNBbG9HZU9IckJ3aE5YaWplRk5sTzBqaXVX?=
+ =?utf-8?B?aURoancxcjZhaUFRTjNydzYvQ2lxUzJ6TENrVGVJa1ZzamNlWW5BRndDVXo4?=
+ =?utf-8?B?RFNqM216R1Q3bjhQWE8rYzRtRGZOdHhlSEU3Y21XTldyYi9QZ3FBeDNQZHYw?=
+ =?utf-8?B?MGJ5OVRVNkJwKzFlZTFhcHNyV0MxR3hQUjFTUWJJOXhyL01PYVZ1VTh4cUZj?=
+ =?utf-8?B?bVd1SUpWOHNIQitpN1EwWDR1RUVGdE9VK3drZ2o4Mk9WcW9rclBtaXFDRENs?=
+ =?utf-8?B?UFJaNUY1ZFJ3ei9YcWZaaE1VRzlRWlVvNEF6b01aTzNoQ0NPcVZSckltc3p2?=
+ =?utf-8?B?MzRCbUEzbGZYVnVkY2l5VmlZczZJZEgrUldIMG1aTGVUVllUODhGdnRMQ1ll?=
+ =?utf-8?B?KzIzUzFaVEd2d1lYK3pENCtqUG5xdEZOWlhqcG9ZM2ZQRXhoQnF5ak1BRWM3?=
+ =?utf-8?B?a3ovMFJSSktreDN2UFJFUEhqaklOb0FYeklBR2xlZmZuaEZqN1ZaNUw1aTc5?=
+ =?utf-8?B?cVpLVmNkQWZpQ3ltay9JS2N0RU9KSWZoSks4ZktLejZXK2hUb0pCRWF0OXNU?=
+ =?utf-8?B?d1dXbW9wVFZLcWhCQWlncnNncHE2Q0hOVi92bFFXclpTcG5qQVlKWWlyaUxy?=
+ =?utf-8?Q?Mg54UqTv6+PADbtw=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f18d1328-fd89-40ba-83e6-08de4e8d0db8
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 08:08:06.5063 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cXFIQvSqzu/AMrDh2K4RX+y5+L8Nqw5itposIK2cK6859e1VE7ciXF87jo5qJR9rtIEfWeTvpdbpYBGjbuiPlym52MJHS45paC/q7y3+9Zg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR03MB7878
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,219 +184,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 08, 2026 at 12:25:33PM +0530, Aswin Murugan wrote:
-> Add functionality to detect and handle reboot-to-bootloader requests
-> by reading PMIC PON (Power On) registers. When the device is rebooted
-> with the bootloader flag set, U-Boot will automatically enter fastboot
-> mode.
->
-> This implementation supports multiple PMIC generations:
-> - Gen 4 PMICs: Uses PON_SOFT_RB_SPARE register (0x88F)
-> - Newer PMICs: Uses SDAM-based PON_REBOOT_REASON register (0x7148)
->
-> The PMIC model is automatically detected via revision ID registers to
-> determine the correct register addresses. After detecting a fastboot
-> reboot reason, the register is cleared and fastboot mode is entered
-> via the "run fastboot" command.
->
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
->  arch/arm/mach-snapdragon/board.c | 146 +++++++++++++++++++++++++++++++
->  1 file changed, 146 insertions(+)
->
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 5fb3240acc5..02b84297e05 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -19,6 +19,7 @@
->  #include <dm/uclass-internal.h>
->  #include <dm/read.h>
->  #include <power/regulator.h>
-> +#include <power/pmic.h>
->  #include <env.h>
->  #include <fdt_support.h>
->  #include <init.h>
-> @@ -32,9 +33,32 @@
->  #include <usb.h>
->  #include <sort.h>
->  #include <time.h>
-> +#include <command.h>
->
->  #include "qcom-priv.h"
->
-> +/* Reboot mode definitions */
-> +#define QCOM_REBOOT_MODE_FASTBOOT	0x2
-> +#define QCOM_REBOOT_MODE_MASK		0xFE
-> +
-> +/* PON (Power On) register addresses - Gen 4 PMICs */
-> +#define QCOM_PON_BASE_ADDR		0x800
-> +#define QCOM_PON_PERPH_SUBTYPE		(QCOM_PON_BASE_ADDR + 0x5)
-> +#define QCOM_PON_SOFT_RB_SPARE		(QCOM_PON_BASE_ADDR + 0x8F)
-> +
-> +/* PON register addresses - Newer PMICs (SDAM-based) */
-> +#define QCOM_PON_REBOOT_REASON_SDAM	0x7148
-> +
-> +/* PMIC Revision ID registers */
-> +#define QCOM_PMIC_REVID_BASE		0x0100
-> +#define QCOM_PMIC_METAL_REV		(QCOM_PMIC_REVID_BASE + 0x02)
-> +
-> +/* PMIC identification values */
-> +#define QCOM_PMIC_TYPE_QC		0x51
-> +#define QCOM_PMIC_SUBTYPE_GEN4		0x4
-> +#define QCOM_PMIC_MODEL_PM855		30
-> +#define QCOM_PMIC_MODEL_INVALID		0x00
-> +
->  DECLARE_GLOBAL_DATA_PTR;
->
->  enum qcom_boot_source qcom_boot_source __section(".data") = 0;
-> @@ -489,6 +513,125 @@ static void configure_env(void)
->  	qcom_set_serialno();
->  }
->
-> +/**
-> + * detect_pmic_model() - Detect PMIC model from revision ID registers
-> + * @dev: PMIC device
-> + *
-> + * Reads the PMIC revision ID registers to identify the PMIC model.
-> + * This is used to determine which register addresses to use for
-> + * reading the reboot reason.
-> + *
-> + * Return: PMIC model number or QCOM_PMIC_MODEL_INVALID on error
-> + */
-> +static int detect_pmic_model(struct udevice *dev)
 
-return type u8?
 
-> +{
-> +	u8 rev_id[4] = {0};
-> +	int ret, i;
-> +	u8 pmic_model;
-> +
-> +	/* Read 4 bytes from PMIC REVID registers */
-> +	for (i = 0; i < 4; i++) {
-> +		ret = pmic_reg_read(dev, QCOM_PMIC_METAL_REV + i);
-> +		if (ret < 0) {
-> +			log_debug("Failed to read PMIC REVID reg 0x%X: %d\n",
-> +				  QCOM_PMIC_METAL_REV + i, ret);
-> +			return QCOM_PMIC_MODEL_INVALID;
-> +		}
-> +		rev_id[i] = (u8)ret;
-> +	}
-> +
-> +	/* Verify this is a Qualcomm PMIC device */
-> +	if (rev_id[2] != QCOM_PMIC_TYPE_QC) {
-> +		log_debug("Not a Qualcomm PMIC (type=0x%02X)\n",
-> +			  rev_id[2]);
-> +		return QCOM_PMIC_MODEL_INVALID;
-> +	}
-> +
-> +	pmic_model = rev_id[3];
-> +	log_debug("PMIC Model: 0x%02X (Metal=0x%02X, Layer=0x%02X)\n",
-> +		  pmic_model, rev_id[0], rev_id[1]);
-> +
-> +	return pmic_model;
-> +}
-> +
-> +/**
-> + * check_fastboot_mode() - Check if device should enter fastboot mode
-> + *
-> + * Reads the PMIC PON (Power On) register to check if the reboot reason
-> + * indicates that fastboot mode should be entered. The register address
-> + * varies depending on the PMIC generation.
-> + *
-> + * For Gen 4 PMICs: Uses PON_SOFT_RB_SPARE register
-> + * For newer PMICs: Uses SDAM-based PON_REBOOT_REASON register
-> + *
-> + * If fastboot mode is detected, clears the reboot reason and enters
-> + * fastboot mode via the "run fastboot" command.
-> + *
-> + * Return: 0 on success, negative error code on failure
-> + */
-> +static int check_fastboot_mode(void)
-> +{
-> +	struct udevice *dev;
-> +	int ret, reboot_reason, reg_val;
-> +	u32 pon_reset_addr;
-> +	u8 peripheral_subtype;
-> +	int pmic_model;
+On 1/8/2026 12:32 PM, Max Merchel wrote:
+> 
+> 
+> Am 08.01.26 um 00:15 schrieb Vitor Soares:
+>> Hi,
+>>
+>> U-Boot 2026.01 fails to initialize MMC devices on multiple platforms
+>> with "unable to select a mode: -5" during mmc_select_mode().
+>>
+>> Affected platforms:
+>> - Verdin iMX8M Mini (SPL boot failure - cannot boot at all)
+>> - Verdin iMX8M Plus (MMC init fails in U-Boot proper - cannot boot)
+>> - SMARC iMX8M Plus (MMC init fails in U-Boot proper)
+>> - Verdin AM62 (boot failure, no output)
+>>
+>> All platforms use eMMC and worked correctly prior to this regression.
+>>
+>> Bisect results:
+>> - Last known good commit: 228810d0bac3
+>> - Known bad commit: 36aeeb591b0d
+>>
+>> Between these commits, several MMC-related changes were merged. These
+>> seem particularly relevant:
+>> commit aebb523a2381 ("mmc: mmc-uclass: Use max-frequency from device 
+>> tree with
+>> default handling")
+>> commit 1e40e419aeb2 ("mmc: sdhci-cadence: Use max-frequency property 
+>> from device
+>> tree")
+>> commit fa7e82127fad ("mmc: sdhci-cadence: Set controller and PHY speed 
+>> modes for
+>> SD and eMMC cards")
+>>
+>> Could someone familiar with these recent changes help identify what 
+>> might have
+>> changed in the mode selection logic?
+>>
+>> === Example logs ===
+>>
+>> Verdin iMX8M Mini (SPL failure):
+>>
+>> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 
+>> 20:44:27 +0000)
+>> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s 
+>> timeout)
+>> SEC0:  RNG instantiated
+>> Trying to boot from MMC1
+>> unable to select a mode: -5
+>> spl: mmc init failed with error: -524
+>> Error: -524
+>> SPL: Unsupported Boot Device!
+>> SPL: failed to boot from all boot devices
+>> ### ERROR ### Please RESET the board ###
+>>
+>> ---
+>>
+>> Verdin iMX8M Plus (U-Boot proper failure):
+>>
+>> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 
+>> 20:44:27 +0000)
+>> DDR configured as dual rank
+>> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s 
+>> timeout)
+>> SEC0:  RNG instantiated
+>> Normal Boot
+>> Trying to boot from BOOTROM
+>> Boot Stage: Primary boot
+>> Find img info 0x?, size 1208151552
+>> Need continue download 1024
+>> load_simple_fit: Skip load 'tee': image size is 0!
+>> NOTICE:  Do not release JR0 to NS as it can be used by HAB
+>> NOTICE:  BL31: v2.12.0(release):lf-6.12.20-2.0.0-dirty
+>> NOTICE:  BL31: Built : 08:15:07, May  9 2025
+>>
+>> U-Boot 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 
+>> +0000)
+>>
+>> CPU:   NXP i.MX8MP[8] Rev1.1 A53 at 1200 MHz
+>> CPU:   Industrial temperature grade (-40C to 105C) at 23C
+>> DRAM:  8 GiB
+>> Core:  309 devices, 31 uclasses, devicetree: separate
+>> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s 
+>> timeout)
+>> MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+>> Loading Environment from MMC... unable to select a mode: -5
+>>
+>> Verdin iMX8MP # saveenv
+>> Saving Environment to MMC... unable to select a mode: -5
+>> No block device
+>> Failed (1)
+>>
+>> ---
+>>
+>> SMARC iMX8M Plus:
+>>
+>> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 
+>> 20:44:27 +0000)
+>> Training FAILED
+>> DDR configured as single rank
+>> SEC0:  RNG instantiated
+>> Normal Boot
+>> Trying to boot from BOOTROM
+>> Boot Stage: Primary boot
+>> Find img info 0x?, size 1208152064
+>> Need continue download 1024
+>> load_simple_fit: Skip load 'tee': image size is 0!
+>> NOTICE:  Do not release JR0 to NS as it can be used by HAB
+>> NOTICE:  BL31: v2.12.0(release):lf-6.12.20-2.0.0-dirty
+>> NOTICE:  BL31: Built : 08:15:07, May  9 2025
+>>
+>> U-Boot 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 
+>> +0000)
+>>
+>> CPU:   NXP i.MX8MP[8] Rev1.1 A53 at 1200 MHz
+>> CPU:   Industrial temperature grade (-40C to 105C) at 23C
+>> DRAM:  4 GiB
+>> Core:  317 devices, 32 uclasses, devicetree: separate
+>> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s 
+>> timeout)
+>> MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+>> Loading Environment from MMC... unable to select a mode: -5
+>> *** Warning - No block device, using default environment
+>> unable to select a mode: -5
+>> MMC init failed
+>> ---
+>>
+>> I'm available to test patches or provide additional debug output if 
+>> needed.
+>>
+>> Best regards,
+>> Vitor Soares
+> 
+> Hi Victor,
+> 
+> what frequencies are output when you enable DEBUG output in mmc.c?
+> 
+> I'm currently trying to find a solution for why the SD card and MMC in 
+> U-Boot (they work fine in SPL) are only running at a minimum frequency 
+> on the TQMa6 (iMX6) and TQMa6UL (iMX6UL).
+> 
+> My problem comes from commit aebb523a2381 ("mmc: mmc-uclass: Use max- 
+> frequency from device tree with.
+> 
+> 
+> === Example logs ===
+> 
+> U-Boot SPL 2026.01+g6955caf8885+p13111 (Jan 07 2026 - 15:26:17 +0100)
+> SD
+> Trying to boot from MMC2
+> clock is disabled (0Hz)
+> clock is enabled (400000Hz)
+> clock is enabled (50000000Hz)
+> Device tree: imx6q-mba6a
+> 
+> 
+> U-Boot 2026.01+g6955caf8885+p13111 (Jan 07 2026 - 15:26:17 +0100)
+> 
+> CPU:   Freescale i.MX6D rev1.3 at 792MHz
+> CPU:   Industrial temperature grade (-40C to 105C) at 20C
+> Reset cause: POR
+> Model: TQ TQMa6Q on MBa6x
+> Board: TQMa6D on a MBa6x
+> Enet workaround: Unknown
+> DRAM:  1 GiB
+> Core:  104 devices, 27 uclasses, devicetree: separate
+> WDT:   Started watchdog@20bc000 with servicing every 1000ms (128s timeout)
+> MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+> Loading Environment from MMC... clock is disabled (0Hz)
+> clock is enabled (400000Hz)
+> clock is enabled (400000Hz)
+> Reading from redundant MMC(1)... OK
+> In:    serial@21e8000
+> Out:   serial@21e8000
+> Err:   serial@21e8000
+> clock is disabled (0Hz)
+> clock is enabled (400000Hz)
+> clock is enabled (400000Hz)
+> switch to partitions #0, OK
+> mmc1 is current device
+> 
 
-u8?
+Hi Vitor,
 
-> +
-> +	if (!IS_ENABLED(CONFIG_DM_PMIC))
-> +		return 0;
-> +
-> +	ret = pmic_get("pmic@0", &dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Detect PMIC model for address resolution */
-> +	pmic_model = detect_pmic_model(dev);
-> +	if (pmic_model == QCOM_PMIC_MODEL_INVALID)
-> +		return -1;
-> +
-> +	peripheral_subtype = pmic_reg_read(dev, QCOM_PON_PERPH_SUBTYPE);
-> +
-> +	/* Select register address based on PMIC generation */
-> +	if (peripheral_subtype == QCOM_PMIC_SUBTYPE_GEN4)
-> +		pon_reset_addr = QCOM_PON_SOFT_RB_SPARE;
-> +	else
-> +		pon_reset_addr = QCOM_PON_REBOOT_REASON_SDAM;
-> +
-> +	log_debug("PON reg: 0x%X (subtype=0x%X, model=0x%X)\n",
-> +		  pon_reset_addr, peripheral_subtype, pmic_model);
-> +
-> +	/* Read reboot reason */
-> +	reg_val = pmic_reg_read(dev, pon_reset_addr);
-> +	if (reg_val < 0) {
-> +		log_debug("Failed to read reboot reason: %d\n", reg_val);
-> +		return reg_val;
-> +	}
-> +
-> +	reboot_reason = (reg_val & QCOM_REBOOT_MODE_MASK) >> 1;
-> +	log_debug("Reboot reason: 0x%02X (raw=0x%02X)\n",
-> +		  reboot_reason, reg_val);
-> +
-> +	if (reboot_reason == QCOM_REBOOT_MODE_FASTBOOT) {
-> +		log_info("Fastboot mode detected, entering fastboot...\n");
-> +
-> +		/* Clear reboot reason */
-> +		reg_val &= (~QCOM_REBOOT_MODE_MASK);
-> +
-> +		if (pmic_model == QCOM_PMIC_MODEL_PM855)
-> +			pon_reset_addr = QCOM_PON_SOFT_RB_SPARE;
+Thanks for the detailed report and bisect results. I've looked into the 
+issue, and it appears the regression is introduced by commit 
+aebb523a2381 ("mmc: mmc-uclass: Use max-frequency from device tree with 
+default handling").
+The problem stems from the probe function in the FSL eSDHC driver 
+(fsl_esdhc_probe). Here's a breakdown:
 
-Why the pon_reset_addr identified in the 'if (peripheral_subtype ==
-QCOM_PMIC_SUBTYPE_GEN4)' check can't be used here? Is there a
-possibility of reading from one register and clearing another register?
+First, fsl_esdhc_init is called, which sets cfg->f_max to the minimum of 
+the controller's sdhc_clk and a hardcoded 200 MHz limit:
+cfg->f_max = min(priv->sdhc_clk, (u32)200000000);
+Subsequently, mmc_of_parse is invoked, where in the commit if the 
+"max-frequency" property is not specified in the device tree node for 
+the MMC controller, this function overrides cfg->f_max to 0.
 
--Varada
+This results in f_max being set to 0, which prevents proper mode 
+selection during MMC initialization and leads to the "unable to select a 
+mode: -5" error you're seeing across those platforms.
 
-> +		ret = pmic_reg_write(dev, pon_reset_addr, reg_val);
-> +		if (ret != 0)
-> +			log_warning("Failed to clear reboot reason (%d)\n",
-> +				    ret);
-> +
-> +		/* Enter fastboot mode */
-> +		ret = run_command("run fastboot", 0);
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->  void qcom_show_boot_source(void)
->  {
->  	const char *name = "UNKNOWN";
-> @@ -573,6 +716,9 @@ int board_late_init(void)
->  	/* Configure the dfu_string for capsule updates */
->  	qcom_configure_capsule_updates();
->
-> +	/* Check reboot reason for fastboot */
-> +	check_fastboot_mode();
-> +
->  	return 0;
->  }
->
-> --
-> 2.34.1
->
+A potential fix could involve either:
+
+Adding the "max-frequency" property to the relevant device tree nodes 
+(e.g., setting it to 200000000 or the appropriate value based on the 
+hardware).
+Or Revert the commit aebb523a2381, since platform data from 
+dev_get_plat() is calloc-allocated (zeroed), so prior behavior left 
+f_max at 0 until the driver set it—restoring the hardcoded limit.
+
+Let me know if this aligns with what you're observing.
+
+Regards,
+Tanmay
+
