@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96429D1D48A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB3A8D1D492
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 21:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25AB6842DB;
-	Thu,  8 Jan 2026 21:44:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 08EFD8415E;
+	Thu,  8 Jan 2026 22:02:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d/Pj8YTF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cvr0FvoJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F8A3842F2; Thu,  8 Jan 2026 21:44:08 +0100 (CET)
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
+ id 40A83841DA; Thu,  8 Jan 2026 22:02:10 +0100 (CET)
+Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
+ [IPv6:2607:f8b0:4864:20::243])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D111841DA
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:44:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3A078415D
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 22:02:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x643.google.com with SMTP id
- a640c23a62f3a-b7a72874af1so672300466b.3
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:44:06 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x243.google.com with SMTP id
+ 5614622812f47-4557f0e5e60so2333273b6e.3
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 13:02:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767905046; x=1768509846; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8kr7SaGzlD8N+b61d29xO0qW9mUD0AYgMWF2CBd6QfY=;
- b=d/Pj8YTFTHUmb7rn97w0gP9UKYR/GzdBgNdtz46NBStvEyiZbVX9MGJRWpl2WHs2Gs
- V8ufjHJpdi93GI4uCKYYY6ZY4Rty5ykxF7dFkbeqFwAxFCrfimsIrL5i76ewtGzIP6su
- sqAIhXBXzPMd45tWjhUgjXeIGTli+eAjceneggb4ugcAIoomqWI3JKmYwcFWmnBYC+pE
- 9+d94e6RcGGmwm3tfcsnfQkqcPzR/Ko0UBOOIiYCv+frCS5Rpf4tzt1a//CUxYdIH0MN
- KKAt0+uP4/WQGQE3BiTqLWOVRstpDDn/P4HPqQkC0ctOIIj8ue9NTTyI9tdQMsqtKNTE
- JNPg==
+ d=konsulko.com; s=google; t=1767906126; x=1768510926; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jS+b1qzw6+GV3sNCnksQGYkZ6lZdf4iWkm9+sO+XGQw=;
+ b=Cvr0FvoJ/XQ3TaeeSogvZ5OugHE8stN9eY/bEgsrAfPdMv/bFoz/ghGKlNuoJQLQ4N
+ rW8jrFKwI/Yma+mVhrvGNVE95/+ZEdjcPmBvCBWmklH0upuC5CKzO2gPXfS1Y/IbK74x
+ Kl+lEDWHhsjmoHtlr/Jp/O10qIpLDc5EPjjBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767905046; x=1768509846;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8kr7SaGzlD8N+b61d29xO0qW9mUD0AYgMWF2CBd6QfY=;
- b=cJw26JARzmrCzs+XyPwpnkM6DmZncTRKZCbjWXlAibo5DiE7LuYoWi2yYLIx0VUYge
- dj8cBybZ46cn39uJvTP4YDEHJB/D+XpqvwAZQQrMG9gdkUQET+S0h4D1BGhbQdJYlfjH
- KUjgJakzFJSP3SsL9TzAyhADs/BzOSyJYfKehhddGHYanznkA5NbW7ywauQkyj4dHEH2
- tmUuqZZJWGP8ffzMEdspzfwFXKmLiT+w3z3ub4ukg0Cgx1C28zkZPnC9DntKcD2kq19m
- BzzvWPvGZkRw6gVCqPEPKJk2Z2HO48Dz/PG8f5dbEnCTYFA8nqVdaST3PJDvNbsN+zk7
- w8vw==
-X-Gm-Message-State: AOJu0YyFIALLQCzN4kco6X4BCeRDYICgfiEcd0UF06O3iH7vhG/b14sc
- wqX222VMsU5Z/F1LVkUrDLprcM6tjgRcuz/D6D4Jdk9PnUYBd03V4wCkJnmRAxBdYCQ=
-X-Gm-Gg: AY/fxX7LPlV3/9NNgZiY4ytKfXVbpwsZNWQU7LY9V9v+pLRCpODbzqFl/YpIX4Il7l+
- d2DK3U+LsLSVUAUtNsK6fgYSFpGetU4pqRm3wqWuLh0Umm97FFLTCXTKaJRHu+6mDAtBY0pN5yM
- YpnWfn4goqDh7RyLC3KixtxHw5/Mcd+7Mten1/3mjorXy3+BOYZ3WKXuJf4jD5yS+QuElOCywmX
- HfyTb6lQE8lKgtH8gIS3gWIGZVcvTdNpMS2cGB6lZRoAUgkrMUmOmKCwMPwz1Fkk9aWrL1rK8S+
- pPoNAHdQgD63FekSumGy0M3rveABnh3nRLkji6IC/VG6Vl1vz5qjI5u4JortItH4/hQL7gf3T7C
- TAnXN/vCE+K5rHCe090te5OL3CmFI4AGshgIfsjeilIjBSIAgZpldqit7W1wCWhfcIrKNTsCrAB
- /8WzXkQq/GqhEnrWs2T+m3tatD/WLk282kFoB8wgoYeXQLM9K9Umk=
-X-Google-Smtp-Source: AGHT+IE3OoKIQfKC3EafdzvPUjBDb5i0z8X94YSX+FQ7GoWbUBgFFt8Z4edMDGQYZGuSh37QadCcHA==
-X-Received: by 2002:a17:907:72cf:b0:b73:9368:ad5e with SMTP id
- a640c23a62f3a-b8444f7084emr704064166b.34.1767905045867; 
- Thu, 08 Jan 2026 12:44:05 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a27c760sm932835966b.24.2026.01.08.12.44.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Jan 2026 12:44:05 -0800 (PST)
-Message-ID: <23321b6c-535a-4b75-b218-f49185de91ff@linaro.org>
-Date: Thu, 8 Jan 2026 21:44:04 +0100
+ d=1e100.net; s=20230601; t=1767906126; x=1768510926;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jS+b1qzw6+GV3sNCnksQGYkZ6lZdf4iWkm9+sO+XGQw=;
+ b=bUH9oulEDlVaun8IDDhY3jvrVFeV6zgbWO1cfn2A7SF4wWtbWNB/AXvKEYKqWSHOQn
+ 5YNDZzSRheYngTg3prMEwhfYCg+phfXCLKSHzT2M1MtzABQ8swBiOYo0vMYU1bmiH1i4
+ QYI+yBzKiFScjz4ec9xnL0xmjZKiMgadj+XD8I7dxLol4fd0scA2GlrvrnbeeTHgvpKV
+ mtXF2Ii85/dUj/FBCLBomms7OodzFXoNyMn5nlM39XbS0YfbpZqYlVqlDNXkk0SALRLd
+ mAWd9EOad6vtpJzlpvfpL/z1eIGKdK5KFy9AZtD8qQH2rcR9TI0c4gB9C9KcQEjwaL/i
+ 6GKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVken/4mYyG002YQfMAbidMNAE6ODOjtAsqhNVhqP08SUUDu8B3hq9085mQdnS6W0insCLTg3I=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUolo8WXXZTXDMRpiLyCLuv9isY8EPrWlGDdFS4ytfEx0Pb6ey
+ Fqll6V9e7GKipqj1lSYAifSaqB5OsiR+hVwimiHk4EcXy8/tbZNErE1GPr8xKioUJVc=
+X-Gm-Gg: AY/fxX7O2lPCJEdNEXiwiUr+k8x3pcGVzEemSrnTkleJojzJeft525Ayg/KU7Zs7fuD
+ xjOHXpe/RQxbRB/dM3M9ei4lbNii0Ux4FdpbmY8tt/1xq/cm7YO1CamH6nvfMRIBLwjc5mGfpPI
+ Or9u44SPG2lRq/BesjoJ0VOCZRSXoRxG0rSJvPVlL0rmJGOTgCzRk6tH4rlxee0atm4l+TioMII
+ 2C9JKCyNYNcWZFref+2HI1U9yRgVwCnr6JfCBuLqqmS6pqBtEG34h5SEoe1Q9W6gubLaxkd06q4
+ yCEtUNdaHWvZg9PJ76ahkkjMTI/YgyJ7Rn4+WZMMw66H5kmiI69WWqn3V+XaR9aXy12dtFHGrSF
+ YIPd7dzA9a584UsXV7kqgUXcl7wHvoMvYziepluTi/t0KHsI5QrjSNWwlUklDpaC2owkbPA9PMa
+ i/tN0INXmT1gSIdmora4V+iEDuol0Ogbcjwa+DK5bvmiJhY+ATBDbui3w2/y39VZ2/U8kcRDz6s
+ ZQ/E2d17uz1SpQAJ2ymQX8cFNAwr9n9BBkXWW314dxgcG5GmA==
+X-Google-Smtp-Source: AGHT+IGtz3x3KgBQnNLTGuhP83s0o3O1k52z/gI+IUK7g6vtD17IPsqtTcj243JZSUCXTi1fKp6yYA==
+X-Received: by 2002:a05:6808:4f60:b0:45a:552f:bb9b with SMTP id
+ 5614622812f47-45a6be3f775mr3026028b6e.31.1767906126294; 
+ Thu, 08 Jan 2026 13:02:06 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa5072427sm5471209fac.12.2026.01.08.13.02.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jan 2026 13:02:05 -0800 (PST)
+Date: Thu, 8 Jan 2026 15:02:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, E Shattow <e@freeshell.de>
+Subject: Re: Pull request efi-next-20251225 (for next branch)
+Message-ID: <20260108210203.GW3416603@bill-the-cat>
+References: <1faefbf2-e8b0-4c94-85f5-025355915e0d@gmx.de>
+ <8608a798-183a-4f07-bfbc-1f45ae59a6ee@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ufs: uclass: fix potential unitialised use
-Content-Language: en-US
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260108191626.3119582-1-casey.connolly@linaro.org>
- <4780165d-9e32-4628-b457-299972a21fa8@mailbox.org>
- <27fd1b95-798f-497b-98f3-2697ad0a6cda@linaro.org>
- <f0eed6c7-54fb-45aa-be22-c1d84c0ebb75@mailbox.org>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <f0eed6c7-54fb-45aa-be22-c1d84c0ebb75@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tNElJLiUvyi2e/3J"
+Content-Disposition: inline
+In-Reply-To: <8608a798-183a-4f07-bfbc-1f45ae59a6ee@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,66 +103,140 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--tNElJLiUvyi2e/3J
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 08/01/2026 21:34, Marek Vasut wrote:
-> On 1/8/26 9:09 PM, Casey Connolly wrote:
->>
->>
->> On 08/01/2026 20:55, Marek Vasut wrote:
->>> On 1/8/26 8:16 PM, Casey Connolly wrote:
->>>> When host_ref_clk_freq is 0, err will be returned before being set.
->>>> Assign a default value to fix the warning.
->>>
->>> Indeed, nice find.
->>>
->>>> +++ b/drivers/ufs/ufs-uclass.c
->>>> @@ -1854,9 +1854,9 @@ enum ufs_ref_clk_freq
->>>> ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct
->>>>    }
->>>>      static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
->>>>    {
->>>> -    int err;
->>>> +    int err = 0;
->>>>        struct clk *ref_clk;
->>>>        u32 host_ref_clk_freq;
->>>>        u32 dev_ref_clk_freq;
->>> There is another weird piece in this function, look at this:
->>>
->>> ""
->>> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
->>> index 3c8e4299259..da46b3ebdfd 100644
->>> --- a/drivers/ufs/ufs-uclass.c
->>> +++ b/drivers/ufs/ufs-uclass.c
->>> @@ -1868,12 +1868,11 @@ static int ufshcd_set_dev_ref_clk(struct ufs_hba
->>> *hba)
->>>          }
->>>
->>>          host_ref_clk_freq = ufshcd_parse_dev_ref_clk_freq(hba,
->>> ref_clk);
->>> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
->>> +       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL) {
->>>                  dev_err(hba->dev,
->>>                          "invalid ref_clk setting = %ld\n",
->>> clk_get_rate(ref_clk));
->>> -
->>> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
->>> -               goto out;
->>> +               return -EINVAL; // I think we want to bail with error ?
->>
->> I don't think we need to error out here, Qualcomm platforms don't have
->> this ref clk wired up properly yet but somehow things are working ok.>
->> +       }
-> This will print a warning. If on qualcomm platforms the UFS is working
-> and these clock are not needed, then this should be fixed, likely by
-> making the clock optional, or using fixed-clock in DT ?
+On Thu, Jan 08, 2026 at 05:20:52PM +0100, Quentin Schulz wrote:
+> Hi Heinrich,
+>=20
+> On 12/25/25 11:13 AM, Heinrich Schuchardt wrote:
+> > Dear Tom,
+> >=20
+> > The following changes since commit
+> > baf076aeb32dcdd2b022405088c3288ffc160fcf:
+> >=20
+> >  =A0 Merge branch 'staging' of https://
+> > eur02.safelinks.protection.outlook.com/?
+> > url=3Dhttps%3A%2F%2Fsource.denx.de%2Fu-boot%2Fcustodians%2Fu-boot- tegr=
+a&data=3D05%7C02%7Cquentin.schulz%40cherry.de%7Cf87dd0f90d6b45f7ce7508de439=
+e34da%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639022543931009936%7CUnk=
+nown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4z=
+MiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=3DUrWok7nyXyLT97iLd=
+1o%2FxUIuYtwkRz7DcO8D8ogdH7Y%3D&reserved=3D0
+> > into next (2025-12-23 08:11:36 -0600)
+> >=20
+> > are available in the Git repository at:
+> >=20
+> >  =A0 https://eur02.safelinks.protection.outlook.com/?
+> > url=3Dhttps%3A%2F%2Fsource.denx.de%2Fu-boot%2Fcustodians%2Fu-boot- efi.=
+git&data=3D05%7C02%7Cquentin.schulz%40cherry.de%7Cf87dd0f90d6b45f7ce7508de4=
+39e34da%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639022543931023452%7CU=
+nknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW=
+4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=3DnoF%2B4QWCdd9ud=
+s%2FLv5wxiCynT7PNTHKQFnDHXYn2%2BqQ%3D&reserved=3D0
+> > tags/efi-next-20251225
+> >=20
+> > for you to fetch changes up to 4c105d2ae7b0f847668ff1ef6b410f63ab4290b7:
+> >=20
+> >  =A0 doc: board: starfive: update jh7110 common description (2025-12-24
+> > 09:41:57 +0100)
+> >=20
+> > ----------------------------------------------------------------
+> > Pull request efi-next-20251225
+> >=20
+> > Documentation:
+> >=20
+> > * Update StarFive Jh7110 common description.
+> > * Describe command line options of the bdinfo command.
+> > * Describe configuration dependencies of the bdinfo command.
+> >=20
+> > UEFI:
+> >=20
+> > * Trigger capsule updates with automatically generated boot options.
+> > * In the LoadImage unit test add a check that device-paths are correctly
+> >  =A0 used.
+> > * In the variables at runtime test remove an unnecessary
+> >  =A0 __efi_runtime_data attribute.
+> >=20
+> > Others:
+> >=20
+> > * Let the bdinfo command output device-tree information even if LMB is
+> >  =A0 no used.
+> > * Add long help texts for all options of the bdinfo command.
+> >=20
+> > ----------------------------------------------------------------
+> > E Shattow (1):
+> >  =A0=A0=A0=A0=A0 doc: board: starfive: update jh7110 common description
+> >=20
+> > Heinrich Schuchardt (4):
+> >  =A0=A0=A0=A0=A0 efi_selftest: Enhance LoadImage test
+> >  =A0=A0=A0=A0=A0 efi_selftest: remove unnecessary __efi_runtime_data at=
+tribute
+> >  =A0=A0=A0=A0=A0 test: dm: clk_ccf: clean up assert statements
+> >  =A0=A0=A0=A0=A0 cmd/bdinfo: LMB and device-tree are not related
+> >=20
+> > Ilias Apalodimas (1):
+> >  =A0=A0=A0=A0=A0 efi_loader: Trigger capsule updates with automatically=
+ generated
+> > boot options
+> >=20
+> > Quentin Schulz (3):
+> >  =A0=A0=A0=A0=A0 cmd: bdinfo: provide long help with all options
+> >  =A0=A0=A0=A0=A0 doc: cmd: bdinfo: specify required dependency for some=
+ info
+>=20
+> In the future, can you please consider editing the commit log when you're
+> doing modifications to patches when merging them?
+>=20
+> Something like
+>=20
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> [added symbol dependency to lmb_dump_all]
+> [removed CONFIG_LMB as symbol dependency of devicetree]
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>=20
+> ? So that there's some info about what was changed from the patch that was
+> sent to the ML and by whom?
+>=20
+> (Maybe ask for permission before doing this as well, or maybe we should h=
+ave
+> documentation on what can be expected from maintainers to that regard? I
+> know Buildroot does this a lot (and often silently), Yocto sometimes, but
+> the kernel not too often, and it's the first time (that I know of) it
+> happens to me in U-Boot :) )
+>=20
+> I'm generally not a fan of my patches being silently modified before
+> merging, though here it ended up fine so thanks for sparing me the rebase=
++v3
+> respin I was thinking about starting to do :)
+=20
+I have, over the years, sometimes added [trini: foo] and a SoB tag, and
+more recently made us of b4 making merge commits of a series trivial
+(which is great and this is yet another reminder to anyone reading that
+cover letters on series are important because they become the merge
+commit message) and dealing with both merge issues and trivially correct
+changes such as spelling or spacing fixes in the merge commit itself.
 
-I think the warning is what we want, it will be fixed properly once we
-get a driver for rpmhcc which is what provides the ref clk. As for why
-UFS works despite this I have no idea but I'd rather assume it's a lucky
-accident.
+What this does speak to however is that we need to document the
+expectations here as it's clear implicit expectations have been
+violated, and that's on me in the end to make sure are clear and
+explicit. I'll write up something for doc/develop/process.rst in the
+next few days.
 
-Kind regards,
+--=20
+Tom
 
--- 
-// Casey (she/her)
+--tNElJLiUvyi2e/3J
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWAbRwAKCRAr4qD1Cr/k
+Cq93AP9TVwf6asK5a7OtR4l1tekJGNFxihk2/HN1VAD9Vh/i0wD/RUF4Ecz3SCfZ
+DN+kZ1vYjwt5Seg2NKoBObjfYhsnUQ4=
+=Ms/x
+-----END PGP SIGNATURE-----
+
+--tNElJLiUvyi2e/3J--
