@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB65D1D484
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D33D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6801484285;
-	Thu,  8 Jan 2026 18:42:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D7C37841F2;
+	Thu,  8 Jan 2026 18:43:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aheyWV9L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O9QEurFn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 170B484285; Thu,  8 Jan 2026 18:42:53 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 11A9A8425F; Thu,  8 Jan 2026 18:43:07 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C614184198
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F36C184158
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:43:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2a0f3f74587so29583375ad.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:50 -0800 (PST)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7b89c1ce9easo2439737b3a.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:43:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767894169; x=1768498969; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767894182; x=1768498982; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O0zt5qZOssXZ25MrTw186w968CpmoZDMZXhCYBzm99A=;
- b=aheyWV9LFZRGLbqOSxBs/Q+j2nADCCu81/1MMXCG1VwPcKIjbcHAfDw6CS359Eztxi
- +bd+r8muhM5sJ2lKrpl4YIRmFDD5nsFk2B9vHOp7lvF9DgHBNqEHYRKylEC1D5j8I7mR
- xpHTVJeEoxLO/EJfeTQ29OQ1yKyozHrQo5+Dw=
+ bh=vwVzuU39fQfSTIJLEVR7n1ncU3U/Wi0WAFQ12M3jE1Q=;
+ b=O9QEurFnYk+BJ5b2xGg4pmJzWqQASBY+KPcDsZiezRRW20QHnnEMSBTHBuqx2yG/Pj
+ lUzJaiEETAJxDnmMmOpZrSe+0kk+M6uoXmEezPAg41ojeh7pNYKM+uGJp9PvCQPXJSem
+ Qua4v/Tw4Y0LzrR3tn4zYeM7U6DEmUkwT7ki0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767894169; x=1768498969;
+ d=1e100.net; s=20230601; t=1767894182; x=1768498982;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O0zt5qZOssXZ25MrTw186w968CpmoZDMZXhCYBzm99A=;
- b=pxgGZnMQuxG1rCJR99+9D8lr/g+RKoHJiOIhqZkuibbSy6UfM23/RemrRMVlsLouxZ
- yogyCDYheSN3xyuqmQvL4zLMoP3qkFIS1YP+lgpn3YBd++2OlJUALtKckd1nb+RoWU4O
- K2f99L6IHGkiFUZdhfK2HbDEMzr9veOu+A4JhUqH+Tk25UDpBbOhRrC87kXax0tHfpq0
- Apx/QK7OczzHZd7f8kmJ/p2U7ez4ZEctfzbfAKanZ42Z8pCaG3A+rMN0nF+E0DHGKnAR
- zlEI8HTiDz1+hNwZeZQBGXB6gCXSMOIMPYi+Caed81rm2LVWyWAuWim/XqgBqP0uOQio
- y88Q==
+ bh=vwVzuU39fQfSTIJLEVR7n1ncU3U/Wi0WAFQ12M3jE1Q=;
+ b=igSZHXdXKR0QFDmV+rZlIRUOywkbLYYWqBRvZkU9lkEVzOcQ5WtHDqGnyp/OiqFLzL
+ ztkd0txhVQc2EBg67C7jr6J0kA+vNzdgFUUIyRJMXbQp0rEROlZwBDY297NUfZO6gdkz
+ GCl9bAePv4CiDezX9ldGMLiuZjJpNYfkF32VnvQ1bApqWiVb6XGSnFdU6UsFA5VuXvcg
+ +YZa9ahikqzlSMhKmsgDySebMQpSvLUsQEosfXe0IVDIhYJLqOUyOHnq75m9sF7w21oE
+ I43o3lXdYHGVoo1sM83figUReYAuGqnhW+YUltVahS2FY4LyLLWWi2HrfQFNx66lv7bt
+ pNng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWE9Oc57qjNiXTx4ph7okS+vVKFa7YdmVGbHUg2TlRFBz9ShM1Rmy+tMq011PSk81bDZbol39Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz17Gh8THtZp4A7mOVL2uZje4x7d9OleulzcalD57/jo45h3W32
- 23KRM2ufPnofnRx+Ng4oP5r2W6MGL6Z7vWnd+iRzQPR6C7kLsXhGTL3lo/KHb3/FCQcIa3SZx98
- OWSHWssHDLLvoQkqxVcsw8KER4oNorcm2rJQm4WCX
-X-Gm-Gg: AY/fxX4MWuWupMv+tOnOGaObtcHCCrkvIfNEzW/C/Lg6eycmd27OVbhn24QzgHspgv3
- 4Zb0XAcaRxTNqLPj2yqCETuGoobP61hzhkZ2yoLNCAT48EMKWXWDtbBioYKVjBIOePfz8R9Iop3
- 6bkNnUxEbk1FpgMFU/rgNHtGLgoE7c9u178QI2jzy4Wy7s2txh/8GIgNjrue0ZSr4EiFTW2TwKt
- ue7clvOkA0P5foJGeEIH5An0DVXDVVNPcE+Our3ccDuYdQiQCjIlAL2mb+m48l9jqTTmA==
-X-Google-Smtp-Source: AGHT+IGaYCVH/h+OPwQbDauZ2OmonTAAmFS9rEvPN4uKOyGY3lzYE/6Lo5Xl44WQT9EpZyyUf56ZVVt4w8wtuRRw5Pg=
-X-Received: by 2002:a17:903:3c2d:b0:29d:73cc:c9e8 with SMTP id
- d9443c01a7336-2a3ee43896bmr66528645ad.2.1767894169282; Thu, 08 Jan 2026
- 09:42:49 -0800 (PST)
+ AJvYcCW8BsGveTXJXfx5YagH159GYJEWJ9OVFvevha4XSHfij5k8pz1WoSRI3loiqKnWqX8taCxZgds=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb+VVWOP2YI2HXS4EHmhZGUQfUWlDTtUgBAaq8vHbVnrGzCuIj
+ uOEw6kdceIzH4Y227+k6n6Fsz7iA8f/o6nLQC6jUEWwfbu94knT56svDjaNfA/nGwqAli9WJ6hc
+ bmAo7boYfRINsTUkNN0QtrSQKF9SsjEgNLAHm2RHQ
+X-Gm-Gg: AY/fxX4pgoh5r+H60HtpzJ/GLQRCwixehRV1Hzf+rl71SNGItCSifJCFgX7u5k6B4yS
+ 4jP+ic/m4nvSNWOCUHBHIcQsHkWK/aGyxU9VI/AEHj9Tg5fCcoG18Yh54n8RR7tPcu6LkeZV/c1
+ yC1gM80/bW/D+tXTMwk2naQCFFc7DvHKTqvlwUlXxRtN0wIeOTJFh3ys8fr03tZjXpnABtpfJ2d
+ lFsTwgH/McsxcxpqtF51S0GPzLXiBdh+UCionvRIDTZKh51LiEcAfOdawTwuTd+7TDWyw==
+X-Google-Smtp-Source: AGHT+IEsSVOJNTnpL74gY4MHX7pCXOQf4i+DHsn2gJ8WtQKmJMR1v0lGI6C3IqtKMn2oRPCA5PiglfajmA8hS3svH+o=
+X-Received: by 2002:a17:90b:568d:b0:34c:4c6e:beb3 with SMTP id
+ 98e67ed59e1d1-34f68c00199mr6859043a91.18.1767894182439; Thu, 08 Jan 2026
+ 09:43:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
+ <20260108064947.3237361-3-balaji.selvanathan@oss.qualcomm.com>
+ <aV967ZD8Hdjed/ss@hu-varada-blr.qualcomm.com>
+In-Reply-To: <aV967ZD8Hdjed/ss@hu-varada-blr.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 10:42:06 -0700
-X-Gm-Features: AQt7F2pW3xue4jLLIhbwNHedwiCixKD-U0dM3jOdt77spXaZ3d3lo-fg11RHVIo
-Message-ID: <CAFLszTg6X8PeD4ZyY08WsTSs+qnRb_-jJjyupzSmi-jDzEhWUQ@mail.gmail.com>
-Subject: Re: [PATCH v1 3/4] env: scsi: Add support for partition type GUID
- based environment
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, trini@konsulko.com, aswin.murugan@oss.qualcomm.com, 
- joe.hershberger@ni.com, ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, 
- ravi@prevas.dk, javier.tia@linaro.org, quic_varada@quicinc.com, 
+Date: Thu, 8 Jan 2026 10:41:56 -0700
+X-Gm-Features: AQt7F2rKhN_dBuEeBGk4Kaqrc2LVwU3x4_PFxnecOkyK1aIkVVcPXHSlVpNfz94
+Message-ID: <CAFLszTj3xb1e4D70mNk-88F64-_Opk9-vxR13m2+GBZ4udTXbw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/4] scsi: Add partition lookup by type GUID for SCSI
+ devices
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ casey.connolly@linaro.org, 
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
+ aswin.murugan@oss.qualcomm.com, joe.hershberger@ni.com, 
+ ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, ravi@prevas.dk, 
+ javier.tia@linaro.org, quic_varada@quicinc.com, 
  marek.vasut+renesas@mailbox.org, michal.simek@amd.com, ansuelsmth@gmail.com, 
  mwalle@kernel.org, anshuld@ti.com, jan.kiszka@siemens.com, javierm@redhat.com, 
  u-boot-qcom@groups.io, u-boot@lists.denx.de
@@ -96,97 +99,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+On Thu, 8 Jan 2026 at 02:38, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
+>
+> On Thu, Jan 08, 2026 at 12:19:45PM +0530, Balaji Selvanathan wrote:
+> > Introduce scsi_get_blk_by_type_guid() function to enable SCSI
+> > partition discovery using partition type GUID. This function scans
+> > all available SCSI devices and searches for a partition matching the
+> > specified type GUID.
+> >
+> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> > ---
+> >  drivers/scsi/scsi-uclass.c | 28 ++++++++++++++++++++++++++++
+> >  include/scsi.h             | 11 +++++++++++
+> >  2 files changed, 39 insertions(+)
+> >
+> > diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
+> > index 3eb6069649f..42a6b5233c2 100644
+> > --- a/drivers/scsi/scsi-uclass.c
+> > +++ b/drivers/scsi/scsi-uclass.c
+> > @@ -53,6 +53,34 @@ int scsi_get_blk_by_uuid(const char *uuid,
+> >       return -1;
+> >  }
+> >
+> > +int scsi_get_blk_by_type_guid(const char *type_guid,
+> > +                           struct blk_desc **blk_desc_ptr,
+> > +                           struct disk_partition *part_info_ptr)
+> > +{
+> > +     static int is_scsi_scanned;
+> > +     struct blk_desc *blk;
+> > +     int i, ret;
+> > +
+> > +     if (!is_scsi_scanned) {
+> > +             scsi_scan(false /* no verbose */);
+> > +             is_scsi_scanned = 1;
+> > +     }
+> > +
+> > +     for (i = 0; i < blk_find_max_devnum(UCLASS_SCSI) + 1; i++) {
+>
+>         max = blk_find_max_devnum(UCLASS_SCSI) + 1;
+>         for (i = 0; i < max; i++) {
+>
+> Else, i believe blk_find_max_devnum() will get invoked multiple times.
+>
+> -Varada
+>
+> > +             ret = blk_get_desc(UCLASS_SCSI, i, &blk);
+> > +             if (ret)
+> > +                     continue;
+> > +
+> > +             ret = part_get_info_by_type_guid(blk, type_guid, part_info_ptr);
+> > +             if (ret > 0) {
+> > +                     *blk_desc_ptr = blk;
+> > +                     return 0;
+> > +             }
+> > +     }
+> > +
+> > +     return -1;
+> > +}
+> > +
+> >  int scsi_bus_reset(struct udevice *dev)
+> >  {
+> >       struct scsi_ops *ops = scsi_get_ops(dev);
+> > diff --git a/include/scsi.h b/include/scsi.h
+> > index 8d6c5116419..e0b2f869057 100644
+> > --- a/include/scsi.h
+> > +++ b/include/scsi.h
+> > @@ -361,6 +361,17 @@ int scsi_scan_dev(struct udevice *dev, bool verbose);
+> >  int scsi_get_blk_by_uuid(const char *uuid, struct blk_desc **blk_desc_ptr,
+> >                        struct disk_partition *part_info_ptr);
+> >
+> > +
+> > +/**
+> > + * scsi_get_blk_by_type_guid() - Provides SCSI partition information by type GUID.
+> > + *
+> > + * @type_guid:               Type GUID of the partition for fetching its info
+> > + * @blk_desc_ptr:    Provides the blk descriptor
+> > + * @part_info_ptr:   Provides partition info
+> > + */
+> > +int scsi_get_blk_by_type_guid(const char *type_guid, struct blk_desc **blk_desc_ptr,
+> > +                           struct disk_partition *part_info_ptr);
+> > +
+> >  #define SCSI_IDENTIFY                                        0xC0  /* not used */
+> >
+> >  /* Hardware errors  */
+> > --
+> > 2.34.1
+> >
 
-On Wed, 7 Jan 2026 at 23:50, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
->
-> Add support for locating SCSI environment partition using GPT type
-> GUID instead of unique UUID. This enables the saveenv command to
-> work with partitions identified by their type rather than unique
-> identifiers, providing flexibility for systems where partition
-> UUIDs may vary across devices but types remain constant.
->
-> Introduce CONFIG_SCSI_ENV_PART_TYPE_GUID configuration option that
-> allows specifying a partition type GUID for environment storage.
-> When enabled, the environment subsystem uses the new type GUID
-> based lookup method via scsi_get_blk_by_type_guid() to find the
-> first matching partition.
->
-> This change maintains backward compatibility with the existing
-> UUID-based approach.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  env/Kconfig |  7 +++++++
->  env/scsi.c  | 13 +++++++++++++
->  2 files changed, 20 insertions(+)
->
-> diff --git a/env/Kconfig b/env/Kconfig
-> index b312f9b5324..97cb3d05daf 100644
-> --- a/env/Kconfig
-> +++ b/env/Kconfig
-> @@ -768,6 +768,13 @@ config SCSI_ENV_PART_UUID
->         help
->           UUID of the SCSI partition that you want to store the environment in.
->
-> +config SCSI_ENV_PART_TYPE_GUID
-> +       string "SCSI partition type GUID for saving environment"
-> +       depends on ENV_IS_IN_SCSI
-> +       help
-> +         Type GUID of the SCSI partition to store the environment in.
-> +         Uses the first partition matching this type GUID.
-> +
->  config ENV_USE_DEFAULT_ENV_TEXT_FILE
->         bool "Create default environment from file"
->         depends on !COMPILE_TEST
-> diff --git a/env/scsi.c b/env/scsi.c
-> index 207717e17b1..6182ae26679 100644
-> --- a/env/scsi.c
-> +++ b/env/scsi.c
-> @@ -35,8 +35,13 @@ static inline struct env_scsi_info *env_scsi_get_part(void)
->  {
->         struct env_scsi_info *ep = &env_part;
->
-> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
-> +       if (scsi_get_blk_by_type_guid(CONFIG_SCSI_ENV_PART_TYPE_GUID, &ep->blk, &ep->part))
+With the above fixed:
 
-Can you use if IS_ENABLED(CONFIG_SCSI_ENV_PART_TYPE_GUID)
-
-(we try to avoid #ifdef)
-
-> +               return NULL;
-> +#else
->         if (scsi_get_blk_by_uuid(CONFIG_SCSI_ENV_PART_UUID, &ep->blk, &ep->part))
->                 return NULL;
-> +#endif
->
->         ep->count = CONFIG_ENV_SIZE / ep->part.blksz;
->
-> @@ -83,12 +88,20 @@ static int env_scsi_load(void)
->         int ret;
->
->         if (!ep) {
-> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
-> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition not found", 0);
-> +#else
->                 env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition not found", 0);
-> +#endif
->                 return -ENOENT;
->         }
->
->         if (blk_dread(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count) {
-> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
-> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition read failed", 0);
-> +#else
->                 env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition read failed", 0);
-> +#endif
->                 return -EIO;
->         }
->
-> --
-> 2.34.1
->
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 Regards,
 Simon
