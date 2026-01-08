@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 252A1D1D47D
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 15:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCEFD1D47D
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 15:58:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86FFE841E7;
-	Thu,  8 Jan 2026 16:58:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id DE92884158;
+	Thu,  8 Jan 2026 16:58:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="ntACOryc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LY2/nedQ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Ckquu+O5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80A3683885; Thu,  8 Jan 2026 16:00:42 +0100 (CET)
-Received: from mail-244122.protonmail.ch (mail-244122.protonmail.ch
- [109.224.244.122])
+ id 5972D83A26; Thu,  8 Jan 2026 16:11:31 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DCEF80077
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 16:00:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 016E2839D7
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 16:11:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=t.preissl@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=alqnks3fkfhcbpzask4oxz3okm.protonmail; t=1767884439; x=1768143639;
- bh=eLGpNwSjX4KYGlukxsbYCKCytygqd26+EOUM+vgf4Wk=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=ntACOryc+jN1/ChGyVBJIcjXmKhmctLhcWQrEYaCyVPYmnsONmbiSRvnl21qiOLKM
- aYQmDmNet242v0D9e54JwaTVaUqy6bq6uFBggNSS6Avk8gK1AiFYid1HpM1KODEGP6
- w2JH6p8TNBr7TdGLi7kIuxxygx3I9VxGbVLOFRDYhEr1KzezTlz/hXTM/pShWOP8ZS
- EZ/1wwcjfbKLiLMtgmc1JyKnmCUQ1JzpNaIv4+T1tTFISbsgiuBm0YO8ZMdmu8wB1L
- krMlyoU2oBf38UMPchz8aCGUf5uffCsxbkqfeOqtIy3A1snZVGBQNsXQsPOxM4/OUG
- Ze6AfSLhf3ZHg==
-Date: Thu, 08 Jan 2026 15:00:32 +0000
-To: u-boot@lists.denx.de
-From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Subject: Re: [PATCH v2 0/4] fix integer overflows in filesystem code
-Message-ID: <20260108150025.50206-1-t.preissl@proton.me>
-In-Reply-To: <20251231015450.GW710860@bill-the-cat>
-References: <20251228164500.313817-1-t.preissl@proton.me>
- <20251229144813.GP710860@bill-the-cat>
- <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
- <20251231015450.GW710860@bill-the-cat>
-Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: ee05e16cd8345eb2e14cbe1958e5c2e84604fc10
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dn7f857dCz9tYG;
+ Thu,  8 Jan 2026 16:11:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767885088;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WzRbI9fVdwAIVpvIHT9C1+CXA4g7MTRGF9eeOCSS39k=;
+ b=LY2/nedQqhNMF0oMkg7kQqYsnoROvYAeFgTcLilDFLMb6GUdeF8MIYRfhGsGDd565tfGpN
+ FZIzh1hSca0qcTa2KhYVk3cxYxxeFdHU+UgrkhJZRt1pd4DDFywpgeuTEPIvV/JE9z7OvF
+ 1LYhiP6CRR1GXIvqfI3gpqKre+fc/xoIn2+QU8je1USQbfYjLeVNivjBKbPpuuJTs3t48f
+ Ggvd3Awg9/s8vy0fb4xSy0x7LSyc2yOUBes9YXuGNN9JCzJK6/4AlWhOdf/wH3iNI7TUZc
+ MGytF8hwkXiq7fZZUa9JC+XrtSmTuY/eDbCfwVrmkEjqXtbv1KAeqhFEOLJQLQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Ckquu+O5;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+usb@mailbox.org
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1767885086;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WzRbI9fVdwAIVpvIHT9C1+CXA4g7MTRGF9eeOCSS39k=;
+ b=Ckquu+O53DC2oozwpX16mo1X116dZO7oSnCgPhEtIv56RxsKKLKhGnlg0ghve8YB21Sb5q
+ sAaFZYvmH6B55/H4NCsCIu2+B/j1eHh1efx0jCrI+nCiXKJQQR3hzXhjL+p0KOG/oxtxBA
+ c+cIvf91bKPO13OheI87of7Vg7CmAfVslFMSRImTTLDdV+74Q17zB4lCGqhQeXWXrqW2Sb
+ Vq1IhPste2wneMVtGescqHjsfuTADQJ9/3EXg4p485gOpuRwuy9q0r0ASWgOb2zywU2SK1
+ tYp+am5BC1Yd4XRVjDpqhyKptnqb6GWHhdGmTNNu9nvte4AmEIWe3eNeigHHwQ==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+Subject: [PULL] u-boot-usb/master
+Date: Thu,  8 Jan 2026 16:11:01 +0100
+Message-ID: <20260108151111.11593-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 4465b23e440f5e7aa8a
+X-MBO-RS-META: 3rtau41wupj1gmqmo4bnnagdy1ir7ngw
+X-Rspamd-Queue-Id: 4dn7f857dCz9tYG
 X-Mailman-Approved-At: Thu, 08 Jan 2026 16:58:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,13 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The following changes since commit 141be72e2a9d43aa4e3d1a6a6e0ab8f9eb8784c6:
 
-this is a gentle reminder for the v2 patch series fixing integer
-overflows in filesystem code, sent on Dec 31.
+  Merge patch series "test: env: Add test for environment storage in SPI NOR" (2026-01-07 12:31:56 -0600)
 
-Any feedback would be appreciated.
+are available in the Git repository at:
 
-Thanks,
-Timo
+  git://source.denx.de/u-boot-usb.git master
 
+for you to fetch changes up to 14d9e84fc54b008ab1ad667bef73578b443dda73:
+
+  usb: dwc3-generic: add support for exynos7870 (2026-01-08 15:13:19 +0100)
+
+----------------------------------------------------------------
+Heinrich Schuchardt (1):
+      usb: xhci: avoid noisy 'Starting the controller' message.
+
+Kaustabh Chakraborty (2):
+      usb: dwc3-generic: allow fallback of dr_mode property to "otg"
+      usb: dwc3-generic: add support for exynos7870
+
+ drivers/usb/dwc3/dwc3-generic.c | 10 ++++++++--
+ drivers/usb/host/xhci.c         |  2 +-
+ test/py/tests/test_usb.py       |  4 ++--
+ 3 files changed, 11 insertions(+), 5 deletions(-)
