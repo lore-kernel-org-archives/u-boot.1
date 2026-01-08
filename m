@@ -4,93 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED91D148AE
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 07:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D243BD148A3
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 07:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A47983B95;
-	Thu,  8 Jan 2026 08:04:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 22A94839DE;
+	Thu,  8 Jan 2026 08:39:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Cad/h+Rw";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Sq+QqNPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD4F183BE1; Thu,  8 Jan 2026 08:04:16 +0100 (CET)
-Received: from mx-relay130-hz1.antispameurope.com
- (mx-relay130-hz1.antispameurope.com [94.100.133.178])
+ id 3E1D183A26; Thu,  8 Jan 2026 08:39:52 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D2C83B8A
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 08:04:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=04619a1675=max.merchel@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate130-hz1.hornetsecurity.com 1;
- spf=pass reason=mailfrom (ip=94.100.132.6, headerfrom=ew.tq-group.com)
- smtp.mailfrom=ew.tq-group.com
- smtp.helo=hmail-p-smtp01-out03-hz1.hornetsecurity.com; dmarc=pass
- header.from=ew.tq-group.com orig.disposition=pass
-ARC-Message-Signature: a=rsa-sha256;
- bh=rS9bhDUi1x5TLExpJ9M/thIj5MJrOo4Z/t54C3cqJlY=; c=relaxed/relaxed;
- d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1767855852;
- b=emUDqGFfArWoAid9TcNlY6/r1Knno9zmBnWlhtwWmKIMD5Kc+pVrYJFNucnAOneBRlowWtkg
- krvdtJbwkHAFlibs/EaDAHbT1LA5cq3akA8Yzema01YARM67EvKN632Oss6VBCh4fV8vdjDPvdh
- gKj54hIJ/WqIHZ90pEz1XsNGUXnKoPYfC8Bm5LZ9Pj5dBjlCgg9p7na7a3QmaqWlhOcaJocHT1M
- pf0Z41f1y6Olk7C+csDsm+PKhsTsEMx9Z+gc4punyK1PvoFXEUdvwmJ948gsoJ2Ybtd+wl4lmpH
- CpusbiGeQso0YCpdOBifAEbP9jxba8UZr0tyTPP2BM+gw==
-ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1767855852;
- b=jh4jr9QabKezAoy8InjswnwFfNe6KpW1Pj/unSLSpG1NbKPm4DW0PRULvMhfD//JEKdrmKqx
- v4cz52j6NqIv2IHYx7DtuMmEudBmnN6lKCdZPdg3STvrwwJNKsRvp6MlklToPHNzhLa3TulIFC1
- tO5x6VxZOq00LUDfvPYsnQ+H/SK5c5JmnFMBgtMK+7s92tG4zNUaX508xvSqvZzqy0BZ89SqpsP
- 2AlBQ7ab4glrgqgL/ZafgNap7xvG694BdZNJ3PFyWqpJZGnk1Vr/mEU+IUmGva4PtriConkw3Hp
- Pan54m3t4QP73dCI6P/vlWjy6EvI1dXJTH6S/4PY1B3Gg==
-Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay130-hz1.antispameurope.com; Thu, 08 Jan 2026 08:04:12 +0100
-Received: from [10.123.75.134] (host-82-135-125-110.customer.m-online.net
- [82.135.125.110]) (Authenticated sender: max.merchel@ew.tq-group.com)
- by hmail-p-smtp01-out03-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
- 15464CC0CC9; Thu,  8 Jan 2026 08:03:56 +0100 (CET)
-Message-ID: <d9978b24-65d5-4f8f-8ef9-e551c5baf9b9@ew.tq-group.com>
-Date: Thu, 8 Jan 2026 08:02:13 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 9D63B839B7
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 08:39:49 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=neal.frager@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kqN4dPFNbAGWVR70mm4/Q9vsSrAdMoV4e7h0HPS/3g7wJbRdSY8oU2XReQKKKxg4cpmYgZeWWhXzNjeFKTG2AOoBP3PXajyvxTbLwhu2bRyVaDyoYEt+Cea+Q3WdTy33mkoJwmzqy8Jn6qzQ+GKP/8gxkRqrdk1+UW+mMDUu8hGIXv7IKjet4ryleznREO+z0i6IMRXx47pihAyipufbGIKA7SVIot8Hohf5QfjFnCbSc+2BmR5HIf5qIQcG05arxPMb+lWGyXuK5FI9CqW5AaGPLiLk8toCmCPY38v1Lf0at+TrLtPzvaCE+mz9zaSa2DT5qWuMxBj0oDyrl9142w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tYyhug0UMljROAdKHm8xWyWJEJH0OjXLIb28tSMQ8ls=;
+ b=dAFzHYLSiavjf6uXrMaaN4N9zYVQ20v9y0yGBzjFL8h8Chx6ixZGfjbAaZ3kok7DUWI5kRLicXn8iRgr5yi6tIY4gA9hScyeR/krba/3AGUjBrCslBCXzKh+PRc/KxxEiPBLG9Y/Uf3BKSGdd9YuzAvblcEXJ0b4FQOLr2VpEaMoKxJDSDhpwRZ9M+BMLyMDtrOIQO2cNtNPAWCvEn5E8B+v+D3gCUxPFUJeTfDijykSLvbJhRRm87HFvEwJu2HIDyAhP5KQ96Fkq7hdIjzsgkGuyhT4puuz9x/+Z9Wua5Vz2N53Pu5ZkadaAEngFissT0zQn8XsuhqUJLiiCdgTDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tYyhug0UMljROAdKHm8xWyWJEJH0OjXLIb28tSMQ8ls=;
+ b=Sq+QqNPelLZhrN4WJSDb9LDVo9blqHk66GppztRDs7owYvOt7RP8QB7+/HuOl3XJunJ6i3NVKXDDqX6vexYmgOND17622EeU9VkVTAMSaFshNd8op5a6sqnsbAJyceWK26Zj9POpmvjzSsjVt1uPgZDO53CggDBzXC+GXm58yUc=
+Received: from BL1PR13CA0140.namprd13.prod.outlook.com (2603:10b6:208:2bb::25)
+ by BN5PR12MB9464.namprd12.prod.outlook.com (2603:10b6:408:2ab::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Thu, 8 Jan
+ 2026 07:39:40 +0000
+Received: from BL6PEPF00020E63.namprd04.prod.outlook.com
+ (2603:10b6:208:2bb:cafe::c4) by BL1PR13CA0140.outlook.office365.com
+ (2603:10b6:208:2bb::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.0 via Frontend Transport; Thu, 8
+ Jan 2026 07:39:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BL6PEPF00020E63.mail.protection.outlook.com (10.167.249.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9499.1 via Frontend Transport; Thu, 8 Jan 2026 07:39:40 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 8 Jan
+ 2026 01:39:40 -0600
+Received: from xirengwts09.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 7 Jan 2026 23:39:39 -0800
+From: Neal Frager <neal.frager@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <igor.opaniuk@foundries.io>,
+ <tomas.melin@vaisala.com>, Neal Frager <neal.frager@amd.com>
+Subject: [PATCH v4 1/1] board: zynqmp: add cmd for getting boot auth state
+Date: Thu, 8 Jan 2026 07:39:37 +0000
+Message-ID: <20260108073937.490046-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] mmc: "unable to select a mode: -5" on i.MX8M/AM62
- platforms
-To: Vitor Soares <ivitro@gmail.com>, u-boot@lists.denx.de
-Cc: vitor.soares@toradex.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- trini@konsulko.com, tanmay.kathpalia@altera.com, marex@denx.de,
- tien.fong.chee@altera.com, balsundar.ponnusamy@altera.com
-References: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
-Content-Language: en-US
-From: Max Merchel <max.merchel@ew.tq-group.com>
-In-Reply-To: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-cloud-security-sender: max.merchel@ew.tq-group.com
-X-cloud-security-recipient: u-boot@lists.denx.de
-X-cloud-security-crypt: load encryption module
-X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
-X-cloud-security-Mailarchivtype: outbound
-X-cloud-security-Virusscan: CLEAN
-X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay130-hz1.antispameurope.com with 4dmwqc61f0z29vH0
-X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
- IP=94.100.132.6
-X-cloud-security-Digest: cf16d12689146fdcb9fb68f3b3651328
-X-cloud-security: scantime:2.207
-DKIM-Signature: a=rsa-sha256;
- bh=rS9bhDUi1x5TLExpJ9M/thIj5MJrOo4Z/t54C3cqJlY=; c=relaxed/relaxed;
- d=ew.tq-group.com;
- h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1767855851; v=1;
- b=Cad/h+RwdLw6E/O+JneFviYg5He4+ucnr5/Cg1wTOqx4UbT1+46M7TRZySCE6InmzorqX/tf
- pRH0ObMCB9cpu03FsJ4t6uupJphdPyen37T1+TiyE1bsi+gMyWUaOzUeYBjXsD+oH96nvecQRuy
- JgTwZy3TyexWeA7TEdLfESHh3h1CXQECi42+KeDBBR7fjPapWkEJViIqQ4bhaXA+9kdVz8A5cBr
- BH3g0KQOm5HeB6EScGZbJnf4sTcVmiH7mGTOu7emBRUSIgRmcXON0JPuG/hYTytuh0maLbkcJh9
- 7HL7XxL+WPu9C9wico7tRUDTn2Z3QvMmoCDWIiI+Y9oig==
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF00020E63:EE_|BN5PR12MB9464:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f317bea-7a58-4240-8985-08de4e89153a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9Qnq9exFrInwCPEzg94BY7g/l14BNBFLJWaicbRs9tSzOGlMK/hVTGDzd7LA?=
+ =?us-ascii?Q?d/6oieq/CpWE/SdVACTjfT92eNZebQ3sKHQ2JuRYEQ4YqHfUQmTu/ejkPZ7q?=
+ =?us-ascii?Q?RMmDnfQpjv7ffMDG7JgCtLQoAuVxYlq/GWO+SsAfI7Kh9DSpTwcXpIrSFGM/?=
+ =?us-ascii?Q?Yuds2gSBTZOmZ22BJ7Pa+EPVURukoUtzOXZInQsrL6VCNyf309HT0H8lg5DS?=
+ =?us-ascii?Q?854pYVnY22x40/HslrCdUevGnCKGrcwKJtXCcqfxg8U6iRfhXf8uWkB1AgcK?=
+ =?us-ascii?Q?LvkBmrfRUqOc4IIymobwsTYpxUy+7f7JBaCZ9NU9bY19iFOVBwjkWzyvSmwb?=
+ =?us-ascii?Q?oVQD6dBI9d4Mnq/k+C3UYoFQIpMuFfl2kkyKMqgVypLWGyYmBsvtRFRKNXoq?=
+ =?us-ascii?Q?A0DFsPyl3BdYbp/7M1PPCpY/y5aCASLZw0ZJhpUSp6OPln72KrreX45O4lZK?=
+ =?us-ascii?Q?B4vpiYCQqfhuy6m8PhJiGQdJYV2pnWfKsDG/5VRuHe2tWHwSS12nyOIdMYbe?=
+ =?us-ascii?Q?2b9f6uobrllyLjVIVx0D1zMrf7/ayMI5q9VHf1o6AZzMVyJdbK+R8Owyu7ee?=
+ =?us-ascii?Q?sQ58eU8oOLtL+0HxubbXzpem/2yJryibbPA6oTlDXQKDvzYxAC4SCQw9MEdw?=
+ =?us-ascii?Q?V+ryAof3eat71CiADBeJzpo1ryyd4QcLv3+uQfqluuqqVgy212mboKgCgILw?=
+ =?us-ascii?Q?7WKnoRPulxDON4LIT2QdPznKCiBJMxLlUGDfV+dVZIY51LOsBosz1toQuTiu?=
+ =?us-ascii?Q?J7kYr24lWMfxb4A8Vh2eWwjQehJ0JdX51eU7Kli9mhfEqkORhNGYTfKRlgUc?=
+ =?us-ascii?Q?pN/drN8ygZWQbMPnX2AqOBvDLa+vD89BLaoiK0LNFNff6pH8ZiYrlR253NBg?=
+ =?us-ascii?Q?RR9qsyIPfnSW3PEzqGQCPUD+nsbwz4zsmEnUjFUX5veOTrPGVElEbW6pObQp?=
+ =?us-ascii?Q?sdAGqHYQzAl8LwPsu8IM+Ci/9qOALBNb04AOGfEz6d6LFh2cr61FPt7KefCZ?=
+ =?us-ascii?Q?9tr0tLFuBQllJCHpuBmFeNzMP5tLKUyv0XsQ0mD0Ia1OIbz0OzkbbPL9ofV+?=
+ =?us-ascii?Q?F+pD3MY3Gp/GX0rrKMEwBOFVB+S6BYtRESp3mIdhFOo+I2kIwBcQScbyVhZZ?=
+ =?us-ascii?Q?QUO+fMlUFzHc+5OSU+KGpxFgxLgi5s8n8bmFH2EIHK7SRAnc+TeY1yom1Mul?=
+ =?us-ascii?Q?DSHP19GIbeswi2V/pz8Ww2SwSVN5Ax02D0SKn0GWSf0RcaMQzdS+8lvk5Wqz?=
+ =?us-ascii?Q?8vCjszjkRcvn8lMya3Mtg3jzM8qMCab3K6vqKVduhmgVUNsOVTqyIwQh8qZ/?=
+ =?us-ascii?Q?1S3jOSwWYjyxKRTpV8nCD3XI6L64K4Rg3rqJUH5t/oBz3uleNMvw+qYUA+GR?=
+ =?us-ascii?Q?zlo6h56Kb/M4sBE3bB8NOhN0s/y0TGznzD9hVnI6QYJKaeX4jyHJNNyuRMH2?=
+ =?us-ascii?Q?str1Wz5OWsb08l39r6qgkhq55QU2zotTi3o28Kg5Q3GutL45W/C/PFv78D1U?=
+ =?us-ascii?Q?7veB4d3vHrgXysqoMHOiDrn2C2tA+oOgwE858aeFI+H4/TR0cJ0ZseREgAo7?=
+ =?us-ascii?Q?+UfbWsY3Wp/ZxBI2EgY=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(7142099003);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 07:39:40.6396 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f317bea-7a58-4240-8985-08de4e89153a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00020E63.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9464
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,177 +145,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add command for checking if boot was authenticated.
 
+Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+Signed-off-by: Neal Frager <neal.frager@amd.com>
+---
+V1->V2:
+- extended zynqmp command with verify_auth sub-command
+- changed return value, so it can be used with scripts
+V2->V3:
+- separated status and ret values
+- replaced BIT(0) with ZYNQMP_CSU_STATUS_AUTHENTICATED
+- changed env variable name to "boot_auth"
+V3->V4:
+- removed unnecessary zynqmp_verify_auth function
+---
+ arch/arm/mach-zynqmp/zynqmp.c | 35 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 34 insertions(+), 1 deletion(-)
 
-Am 08.01.26 um 00:15 schrieb Vitor Soares:
-> Hi,
-> 
-> U-Boot 2026.01 fails to initialize MMC devices on multiple platforms
-> with "unable to select a mode: -5" during mmc_select_mode().
-> 
-> Affected platforms:
-> - Verdin iMX8M Mini (SPL boot failure - cannot boot at all)
-> - Verdin iMX8M Plus (MMC init fails in U-Boot proper - cannot boot)
-> - SMARC iMX8M Plus (MMC init fails in U-Boot proper)
-> - Verdin AM62 (boot failure, no output)
-> 
-> All platforms use eMMC and worked correctly prior to this regression.
-> 
-> Bisect results:
-> - Last known good commit: 228810d0bac3
-> - Known bad commit: 36aeeb591b0d
-> 
-> Between these commits, several MMC-related changes were merged. These
-> seem particularly relevant:
-> commit aebb523a2381 ("mmc: mmc-uclass: Use max-frequency from device tree with
-> default handling")
-> commit 1e40e419aeb2 ("mmc: sdhci-cadence: Use max-frequency property from device
-> tree")
-> commit fa7e82127fad ("mmc: sdhci-cadence: Set controller and PHY speed modes for
-> SD and eMMC cards")
-> 
-> Could someone familiar with these recent changes help identify what might have
-> changed in the mode selection logic?
-> 
-> === Example logs ===
-> 
-> Verdin iMX8M Mini (SPL failure):
-> 
-> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +0000)
-> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-> SEC0:  RNG instantiated
-> Trying to boot from MMC1
-> unable to select a mode: -5
-> spl: mmc init failed with error: -524
-> Error: -524
-> SPL: Unsupported Boot Device!
-> SPL: failed to boot from all boot devices
-> ### ERROR ### Please RESET the board ###
-> 
-> ---
-> 
-> Verdin iMX8M Plus (U-Boot proper failure):
-> 
-> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +0000)
-> DDR configured as dual rank
-> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-> SEC0:  RNG instantiated
-> Normal Boot
-> Trying to boot from BOOTROM
-> Boot Stage: Primary boot
-> Find img info 0x?, size 1208151552
-> Need continue download 1024
-> load_simple_fit: Skip load 'tee': image size is 0!
-> NOTICE:  Do not release JR0 to NS as it can be used by HAB
-> NOTICE:  BL31: v2.12.0(release):lf-6.12.20-2.0.0-dirty
-> NOTICE:  BL31: Built : 08:15:07, May  9 2025
-> 
-> U-Boot 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +0000)
-> 
-> CPU:   NXP i.MX8MP[8] Rev1.1 A53 at 1200 MHz
-> CPU:   Industrial temperature grade (-40C to 105C) at 23C
-> DRAM:  8 GiB
-> Core:  309 devices, 31 uclasses, devicetree: separate
-> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-> MMC:   FSL_SDHC: 1, FSL_SDHC: 2
-> Loading Environment from MMC... unable to select a mode: -5
-> 
-> Verdin iMX8MP # saveenv
-> Saving Environment to MMC... unable to select a mode: -5
-> No block device
-> Failed (1)
-> 
-> ---
-> 
-> SMARC iMX8M Plus:
-> 
-> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +0000)
-> Training FAILED
-> DDR configured as single rank
-> SEC0:  RNG instantiated
-> Normal Boot
-> Trying to boot from BOOTROM
-> Boot Stage: Primary boot
-> Find img info 0x?, size 1208152064
-> Need continue download 1024
-> load_simple_fit: Skip load 'tee': image size is 0!
-> NOTICE:  Do not release JR0 to NS as it can be used by HAB
-> NOTICE:  BL31: v2.12.0(release):lf-6.12.20-2.0.0-dirty
-> NOTICE:  BL31: Built : 08:15:07, May  9 2025
-> 
-> U-Boot 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +0000)
-> 
-> CPU:   NXP i.MX8MP[8] Rev1.1 A53 at 1200 MHz
-> CPU:   Industrial temperature grade (-40C to 105C) at 23C
-> DRAM:  4 GiB
-> Core:  317 devices, 32 uclasses, devicetree: separate
-> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-> MMC:   FSL_SDHC: 1, FSL_SDHC: 0
-> Loading Environment from MMC... unable to select a mode: -5
-> *** Warning - No block device, using default environment
-> unable to select a mode: -5
-> MMC init failed
-> ---
-> 
-> I'm available to test patches or provide additional debug output if needed.
-> 
-> Best regards,
-> Vitor Soares
-
-Hi Victor,
-
-what frequencies are output when you enable DEBUG output in mmc.c?
-
-I'm currently trying to find a solution for why the SD card and MMC in 
-U-Boot (they work fine in SPL) are only running at a minimum frequency 
-on the TQMa6 (iMX6) and TQMa6UL (iMX6UL).
-
-My problem comes from commit aebb523a2381 ("mmc: mmc-uclass: Use 
-max-frequency from device tree with.
-
-
-=== Example logs ===
-
-U-Boot SPL 2026.01+g6955caf8885+p13111 (Jan 07 2026 - 15:26:17 +0100)
-SD
-Trying to boot from MMC2
-clock is disabled (0Hz)
-clock is enabled (400000Hz)
-clock is enabled (50000000Hz)
-Device tree: imx6q-mba6a
-
-
-U-Boot 2026.01+g6955caf8885+p13111 (Jan 07 2026 - 15:26:17 +0100)
-
-CPU:   Freescale i.MX6D rev1.3 at 792MHz
-CPU:   Industrial temperature grade (-40C to 105C) at 20C
-Reset cause: POR
-Model: TQ TQMa6Q on MBa6x
-Board: TQMa6D on a MBa6x
-Enet workaround: Unknown
-DRAM:  1 GiB
-Core:  104 devices, 27 uclasses, devicetree: separate
-WDT:   Started watchdog@20bc000 with servicing every 1000ms (128s timeout)
-MMC:   FSL_SDHC: 1, FSL_SDHC: 0
-Loading Environment from MMC... clock is disabled (0Hz)
-clock is enabled (400000Hz)
-clock is enabled (400000Hz)
-Reading from redundant MMC(1)... OK
-In:    serial@21e8000
-Out:   serial@21e8000
-Err:   serial@21e8000
-clock is disabled (0Hz)
-clock is enabled (400000Hz)
-clock is enabled (400000Hz)
-switch to partitions #0, OK
-mmc1 is current device
-
+diff --git a/arch/arm/mach-zynqmp/zynqmp.c b/arch/arm/mach-zynqmp/zynqmp.c
+index c0398a466ff..71f9751083f 100644
+--- a/arch/arm/mach-zynqmp/zynqmp.c
++++ b/arch/arm/mach-zynqmp/zynqmp.c
+@@ -362,6 +362,36 @@ static int do_zynqmp_reboot(struct cmd_tbl *cmdtp, int flag,
+ 	return CMD_RET_SUCCESS;
+ }
+ 
++static int do_zynqmp_verify_auth(struct cmd_tbl *cmdtp, int flag,
++				 int argc, char * const argv[])
++{
++	u32 status;
++	int ret;
++
++	ret = zynqmp_mmio_read((ulong)&csu_base->status, &status);
++	if (ret) {
++		printf("Can't obtain boot auth state");
++		return CMD_RET_FAILURE;
++	}
++
++	status &= ZYNQMP_CSU_STATUS_AUTHENTICATED;
++	if (status) {
++		printf("Boot is authenticated\n");
++
++		ret = env_set("boot_auth", "1");
++		if (ret)
++			return CMD_RET_FAILURE;
++	} else {
++		printf("Boot is not authenticated\n");
++
++		ret = env_set("boot_auth", "0");
++		if (ret)
++			return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
+ static struct cmd_tbl cmd_zynqmp_sub[] = {
+ 	U_BOOT_CMD_MKENT(secure, 5, 0, do_zynqmp_verify_secure, "", ""),
+ 	U_BOOT_CMD_MKENT(pmufw, 4, 0, do_zynqmp_pmufw, "", ""),
+@@ -371,6 +401,7 @@ static struct cmd_tbl cmd_zynqmp_sub[] = {
+ 	U_BOOT_CMD_MKENT(rsa, 7, 0, do_zynqmp_rsa, "", ""),
+ 	U_BOOT_CMD_MKENT(sha3, 5, 0, do_zynqmp_sha3, "", ""),
+ 	U_BOOT_CMD_MKENT(reboot, 3, 0, do_zynqmp_reboot, "", ""),
++	U_BOOT_CMD_MKENT(verify_auth, 2, 0, do_zynqmp_verify_auth, "", ""),
+ #ifdef CONFIG_DEFINE_TCM_OCM_MMAP
+ 	U_BOOT_CMD_MKENT(tcminit, 3, 0, do_zynqmp_tcm_init, "", ""),
+ #endif
+@@ -446,10 +477,12 @@ U_BOOT_LONGHELP(zynqmp,
+ 	"	48 bytes hash value into srcaddr\n"
+ 	"	Optional key_addr can be specified for saving sha3 hash value\n"
+ 	"	Note: srcaddr/srclen should not be 0\n"
++	"zynqmp verify_auth - verifies if boot.bin was authenticated\n"
++	"	Returns boot_auth : 0 not authenticated, 1 authenticated\n"
+ 	);
+ 
+ U_BOOT_CMD(
+-	zynqmp, 9, 1, do_zynqmp,
++	zynqmp, 10, 1, do_zynqmp,
+ 	"ZynqMP sub-system",
+ 	zynqmp_help_text
+ );
 -- 
-Best regards,
-Max
-
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
+2.25.1
 
