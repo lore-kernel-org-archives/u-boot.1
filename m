@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7413ED185F1
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 13:34:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57187D185F8
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 13:34:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 659D684172;
+	by phobos.denx.de (Postfix) with ESMTP id AACD784180;
 	Thu,  8 Jan 2026 14:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mlkJDxVQ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="VWMiTe2H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6C4683B87; Thu,  8 Jan 2026 12:17:28 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 626868412A; Thu,  8 Jan 2026 12:17:30 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CCC283B87
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 12:17:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6E3B84127
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 12:17:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b728a43e410so526801366b.1
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 03:17:25 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b8427c74ef3so473042566b.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 03:17:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767871045; x=1768475845;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767871047; x=1768475847;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MgO6/5APo5bY9U9GByEI17ZkqlRZWGM8MQmHGkZSNXg=;
- b=mlkJDxVQDCcobDzoCbiLPdtFXsPQUvQrj11tAi7USfIsDVQ4yNmcdTfWn0mVmB3P4n
- r25XpUZGJl/qILmmaIU5sON3ibXUKUVROyYPN2G4kPFa7qFV34GJ5vVx75DK6wzVuI1H
- WwcHOShHxoxpXWOmt7uBv0VvArsH8TjSgb6DH71xIvfZDu1gy9CbZIJA+SrF9xwttl6m
- yInCI077LyAu8iRPQGg2pN2lrqAqe8yvFtCbChlu3yBOPDtkkmnRRu5heuA2ZkSJUBRY
- 9xJRkI8zPoRDyhIh90gTKiR5hh5vRF6T75MZqIuv+WPfUYgXqXxmM8XMlKgGJSEUtX4A
- iIQw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=1FOVZ46I4+js7BgM0blW5m9M2wEPmOqbx5CxfuMuSN4=;
+ b=VWMiTe2H4bfM4JmUtlKSo1I225XF6yCmgq/2kih0t2hxED80KybjL4mxuWXkyaLoul
+ PVucKLzsjrcqDJP/TD7o1nzl7LPm/+CX9hcifgUb5w7ZAnUAbP7XLRZAGSfeb0UxIhTA
+ UTT7xRwAIK69Jt+JSIF4UxfqVjw31AN16qeiPmd5sPLkZztByKx17bkboOtFOKiIjYA/
+ yyBLUceFdzrtZ1hTJJJ6KZWEbkKOkrsoofBHSMXAQwMPhnNtiZDrWyqFKqMQMpwvyuJD
+ HDfsDeBXpOLWBbWz5fiBYSNSqD3F6YVN/fKqHDvCd1PwuYueq5g5Y5p5O5XzcA4KtKQ8
+ 9QiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767871045; x=1768475845;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MgO6/5APo5bY9U9GByEI17ZkqlRZWGM8MQmHGkZSNXg=;
- b=e7Rop4/XQY5v6ZNDmv6H8ZUzizjzhlvWkFyrrFi6qY0mJBJ5vt7NMAOj5Gvpq2IjlS
- akkqRnp2IBvRo+wRloXQCk7p7AF3gqHuqM+t35hoSZWqCtxSXtOzLcnEhO5DpL6j157p
- zimXYb3EN4MSep+5sl0JAI39howXiWu+JPC3kEECN/i9X4qf2wgbi2vZi01QOnV4xijw
- VeqzQ1xLjBL5aFs9SCD+SRnqmtXfae1XelJMV9yTYVnuwL0XjzqH17iWRxpYc/HQRiCW
- gAm8nOwqHsxw+lr169R8LBiqM5xMxzwYNsp18ekb7DEVxZs3Dk3MqCB1LLkRyehYsugo
- d/hA==
-X-Gm-Message-State: AOJu0YzPsl919ayQ+bZaU7UDp1f+89t6FAfWJp3cbbZ2EbapJWZTORBk
- XgfmPugmbG2Djm4y+MxcRiRRaJKs+E1tfvQuBoXVpQBA4g9Zicdz8LkI12bqzUFuf1A=
-X-Gm-Gg: AY/fxX6c6G3oJHfNw6tcwiVnPz/Jfos5Kzqug8rUfGf7QrMCKhY1N4ef5kdqOnMn3/3
- src/6SIB8Ti87pqdYiIWu44pCxdI93DVKc0U/84cFM3LGAzyGN00buMjc4Jk6jonVKcufOLaNN6
- 55Sk7IrYSPQ9FV7mDKp8CQiOlVdlwXaU7oP9/Qpc89CIlA7sXRvVMabUCr6bUS4hudj7p42SNfv
- /V8nuaqQcHfLaWBGpCp4Y2HGRWNANgAsLY86mdvkJsK95mT5z1/RdfKgnU3Er3x62GoEeW8TKMC
- T47UDSygHY/1shGfkLqQLLioGtb6FYDDSLojNUGYqJGnB+HjBtdi+OSHHRiDb6ZmaV0cdSmQAx2
- 9ZjYtxWDjgJItouIcGjaWJCdfq4zMuF7i5NG3Wtewp7hR0wAhgMMibd27WTNjBjPiW14hP24Efu
- /9NBrBf2ttIU35MmXgZuU=
-X-Google-Smtp-Source: AGHT+IFjraasfcRe8LweosJ9WYbDub695HPZsk0LPJMwEY8yLcdaYfSydbiWRG/jQo8BX5PHVz1k5Q==
-X-Received: by 2002:a17:907:7285:b0:b72:588:2976 with SMTP id
- a640c23a62f3a-b8445407314mr500370466b.60.1767871044953; 
- Thu, 08 Jan 2026 03:17:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767871047; x=1768475847;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=1FOVZ46I4+js7BgM0blW5m9M2wEPmOqbx5CxfuMuSN4=;
+ b=KvAzqRe26ZQ0rjBISAKuJLQGM86aiCz7CSJovP+FNIfvzNVvQU7QjZhGRzruMOi44Y
+ jfKAxJ2pxW1x7jsUJ8VgOaLtjNzIzdssNlpgqHrkoWJjVDpqxhclkXl3jnCCYDyhvcmY
+ mh6PVDI8oyfbgsVqxYPTyWt7rTeE+KUGGSwGItlIUoTvHVtUBam93FG2H7Cv4LdIz/JO
+ kikaR4ZuIabUGCx8j76w/xFR18YoUVuct/ciIWH/Mz0yz334jWyKacTcubej6whqygeM
+ PsqjEfmMt1hF/9Ae16nogaDz5g/w6warv11bFK/SblRmXxnXV3FAWf6wYNLS/xyEsG9m
+ 4d6A==
+X-Gm-Message-State: AOJu0Yw/dT93QUM7owb/IwKyE9U5bJrVlXkB06KynpOMct97wHzqg6FP
+ 2S8dXaS+MOYaXn1r4wG6QPhBVJGsPYqNVYLQR+GP6XnQ6lRKFKlB8v/mFB5uhqWXIUo=
+X-Gm-Gg: AY/fxX6H4pCMfpnwfcwCiRxoKWVfIdDcrYyVW2TxY4imaRqsRyEam2Sf0vdbEhZn9PR
+ F7+OXGvwOLFJhvMGwZUlfJ2lRLja/7kJMqdn8wFEJpIBfjqaoFtrDjyc5xyOpLcwX/Mus/bWHCX
+ f3L2E8b64DmxpLZ26TsWyIZ1QciHz2jcCDL7BIUxYSa+wpbzAzDAwiwyNsX8bZ5hhNCipt6EHTS
+ GV/Gmb6D5Xy3szwwdn6Pl7DGd2dnfE1x4StuUdIzcEwzmyDkwLHA37AsxSD42HJQC5HvPo9MBCw
+ UJLozj5H7YWQ0KtvKGpA4eC4X8pb7MvEqhxH5e5CwoRza2XX2xgRZUSESp8BMMMQyaH+S+s6HVm
+ JxMofFee7hhaDYJRFZtmmzHilQa8aduuGZ2NHs2BZSyetJZI2VzU2ITAxidkvIMZ7U3XYjjwHNv
+ BI5O+TE1C1
+X-Google-Smtp-Source: AGHT+IHO35E6RRxC8oj745/6Rc11VOCFyvgam42C8wKWECxkAIWkm0Fc6cRw2FrVKDK7BIaWkpAOZg==
+X-Received: by 2002:a17:907:7b99:b0:b7c:e3ad:cd17 with SMTP id
+ a640c23a62f3a-b844532ae68mr536337366b.32.1767871046955; 
+ Thu, 08 Jan 2026 03:17:26 -0800 (PST)
 Received: from localhost ([2001:4090:a244:872b:a354:65f3:92a0:8de7])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a563f73sm816451266b.61.2026.01.08.03.17.23
+ 4fb4d7f45d1cf-6507b8c446esm7404235a12.6.2026.01.08.03.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 03:17:23 -0800 (PST)
+ Thu, 08 Jan 2026 03:17:26 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Subject: [PATCH v2 0/6] dm: core: Support same compatible in host/gadget
- musb drivers
-Date: Thu, 08 Jan 2026 12:16:26 +0100
-Message-Id: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
+Date: Thu, 08 Jan 2026 12:16:28 +0100
+Subject: [PATCH v2 2/6] dm: core: lists_bind_fdt: Replace found variable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAuSX2kC/33NTQqDMBCG4avIrDslE3/pqvcoLkxMdKAaSWyoi
- HdvKnTb5fsNPLNDMJ5NgFu2gzeRA7s5hbxkoMduHgxynxqkkCWRLHF1C2ucXkHh4p3iecCYjhU
- KQsqL3FrbUF0pSMLijeX3qT/a1COH1fntfBbpu/7c6q8bCQUmt2900dSUi7vqticrb67aTdAex
- /EBedEptskAAAA=
-X-Change-ID: 20251125-topic-musb-probing-v2026-01-1343fff8176b
+Message-Id: <20260108-topic-musb-probing-v2026-01-v2-2-2a47c6e0e73a@baylibre.com>
+References: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
+In-Reply-To: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
 To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Marek Vasut <marex@denx.de>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
@@ -93,12 +89,12 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@nabladev.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1948; i=msp@baylibre.com;
- h=from:subject:message-id; bh=wBWAemlGrp3KmswIr0vmJlxa2CwDzzzGXD6WF1moa+Y=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz4SYKF9qdEJBh/XV3LLCmnfs6zeH55oujbnv1Wr69bb
- 5u/QZWno5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACaiqMrIcOGt44TL01hkt0xY
- FLe09WSFUdCbL/J72xd9NZvOJ1f0cTkjw7xVl94ZrV/BsjNY8gyvnViilrzS/SrPo4JS7HPFd5x
- vYgcA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1238; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=nVp0FqTWZZDY0ukve1WG/zztU4MLlZGwF2evT+9Q0Lw=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz4SbITJMyWTeFZWBuW+GZKbWz3uoZK1X+uhRNv5n79v
+ ZZF9tu+jlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZjIjZMM/xNZW/7qfOd0E5//
+ xqHAtq1A3l92Yexvti8JEhlXjHX4rjL8FT1Xc+W44MX4O7pbfzE8nnzTW7K1QPlGgdGRQ9phnNv
+ 0uAE=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 08 Jan 2026 14:33:16 +0100
@@ -118,53 +114,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-musb currently uses a wrapper driver that binds on the parent device of
-the actual musb devices to manage the differentiation between gadget and
-host modes. However in the upstream devicetree this parent devicetree
-node can not be used to match the wrapper driver.
-
-To be able to probe the musb devices in host/gadget mode directly, this
-series introduces support for returning -ENODEV in bind functions
-resulting in iterating the remaining drivers potentially binding to
-other drivers that match the compatible.
-
-It also changes the address parsing of musb-ctrl to be able to parse
-relative addresses.
-
-Best
-Markus
+'found' is only used at the end of the function to print a debug
+message. No need to maintain a variable if we can just return 0
+immediately when a driver was bound successfully.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
-Changes in v2:
-- Added a few patches to remove nearly unused variables
-- Changed the inner loop in lists_bind_fdt to support set drv and not
-  set entry->of_match.
-- Cleanup the loop a bit more
-- Link to v1: https://lore.kernel.org/r/20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com
+ drivers/core/lists.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
----
-Markus Schneider-Pargmann (TI.com) (6):
-      dm: core: lists_bind_fdt: Remove unused variable
-      dm: core: lists_bind_fdt: Replace found variable
-      dm: core: Support multiple drivers with same compatibles
-      test: dm: Add compatible multimatch test
-      usb: musb-new: Relative ctrl_mod address parsing
-      usb: musb-new: Add compatibles for ti,musb-am33xx
+diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+index 52ba6c7bfa007b660b854de62c97ad3c1761f1a5..9d1ca38212ee7f53b8894f964f096611c8ec20a5 100644
+--- a/drivers/core/lists.c
++++ b/drivers/core/lists.c
+@@ -204,7 +204,6 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+ 	const struct udevice_id *id;
+ 	struct driver *entry;
+ 	struct udevice *dev;
+-	bool found = false;
+ 	const char *name, *compat_list, *compat;
+ 	int compat_length, i;
+ 	int ret = 0;
+@@ -275,14 +274,14 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+ 				ret);
+ 			return log_msg_ret("bind", ret);
+ 		} else {
+-			found = true;
+ 			if (devp)
+ 				*devp = dev;
++			return 0;
+ 		}
+ 		break;
+ 	}
+ 
+-	if (!found && ret != -ENODEV)
++	if (ret != -ENODEV)
+ 		log_debug("No match for node '%s'\n", name);
+ 
+ 	return 0;
 
- arch/sandbox/dts/test.dts      |  4 +++
- drivers/core/lists.c           | 73 +++++++++++++++++++++---------------------
- drivers/usb/musb-new/ti-musb.c | 36 ++++++++++++++++++++-
- test/dm/core.c                 | 15 +++++++++
- test/dm/test-driver.c          | 25 +++++++++++++++
- 5 files changed, 115 insertions(+), 38 deletions(-)
----
-base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
-change-id: 20251125-topic-musb-probing-v2026-01-1343fff8176b
-
-Best regards,
 -- 
-Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+2.51.0
 
