@@ -4,101 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971F4D1D494
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B3BD1D493
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:24:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F7E6842E0;
+	by phobos.denx.de (Postfix) with ESMTP id 5AD6B842F2;
 	Thu,  8 Jan 2026 21:24:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hBSiDOMa";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lqf3D7/+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73EC684286; Thu,  8 Jan 2026 19:06:26 +0100 (CET)
-Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
- [IPv6:2001:4860:4864:20::42])
+ id 743308415E; Thu,  8 Jan 2026 20:25:25 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D3628427F
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 19:06:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B460683B49
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:25:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x42.google.com with SMTP id
- 586e51a60fabf-3e37ad3d95aso2365742fac.3
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 10:06:23 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-64fabaf9133so6242596a12.3
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767895582; x=1768500382;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1767900322; x=1768505122;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CTtQ7CWpQOnu2GmCfGdU6i9qkoc3nTMjfs5z6leQZSQ=;
- b=hBSiDOMatroCJw7bA+oVlDtrm/O/BFOwyyM3HJFYTDBL1wnO8Kzgv4EkNX0esc1J1n
- yjUkrZYyTG1Ah7wFy1oAveJiFwyV/hFT7D/x0dHJrp5jx0JETWrvgEB8twB8XCBpKSwU
- oPUpSf/6sYE+nv7rDANG2c8A3kLUJr3QI42doJH0m/u75Qz3qGAU7AiHpV36jj4ivtUp
- SRDSj/tFL9wF5ZzvMHmSAVu74zRm/4GPrMCl0uskY0DXMntWD98GzUf33cdV1Ifm1A2B
- MqXGK0lAUDBaxiT4nQi5Iw4zZG2EaRjeW/n6D6QmDMCnguBk5PlUTcKBstDNz/WrM8vU
- mCCw==
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NIEtibt/qtj3uwK8DiYy26ijtYa7m/uboyTk7CiNVL0=;
+ b=lqf3D7/+lLtWQSLd61fXWTkisqumntHc4NwYdsZtRYZomIJdcf2MyrQa6+ly8WeYb1
+ HMYXHfheS/RVFELNRVAsjyhlb3Rd58QFZCFqq0yBjymCNg6vScF4Or6fiNsTnICGW/f+
+ lw4UL8NjmigEIxJ+ZLWR5jo6DHR82ulEuick3OBz3skB7Zq5N+Wst8E78KunFI5nXRLZ
+ LfOr4fhzMGgGyY3xjkGXNOLNKJ/eUqhhid12fxyYuEt/yffuSEwURj8VklyReACTk4jH
+ VOiMLDgVszwEvm4yz5tzttgwG7Z2bZvXYs4yJaZ3WDXaNZMy260FdeNw5cbZMahRDxxM
+ 5LlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767895582; x=1768500382;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=CTtQ7CWpQOnu2GmCfGdU6i9qkoc3nTMjfs5z6leQZSQ=;
- b=fWvfl43XE6i3xxVzVS5Z2IW3rravfg7vFrWbTjo0YouTk8kk3pcVv08aP1SgBZKFgm
- 9VBFM7x2LxUlWSuMwRM0JP0neb3L4kckFLruyF4QklzRNaxL1NYwcbV1ZCFcBm/Xmb6F
- pC0AdPPU/j/uSTOIddz3d+nanjSciI8GGeE8Hqga79ZW2IPfgCn95bQWJ9kYs8bSf2HU
- MpicIo3IRM/Zi/5O2knUTDNvmCLS0YNOloezc2WVoa/cj1oeXhzniMaewYKOsA1UO9yw
- EZaPg9L7OjXxH38HNBRhQOLRKE1YpixIjLDBs3BMQVSlPYLEBHc0iELQrksXRK4fDEJZ
- g5rQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9b8UsDpoZkp/jC4a6FDQXNKl4uxFm8Qh8bN2HINPiyOmtMAkx8Puhg4V+0HDtcgSEsXRs9xY=@lists.denx.de
-X-Gm-Message-State: AOJu0YziWAtWU2Yl2Qqwkn6tz4d4GslTal1xxSACX8+0lyyWYqKvFBpw
- 71vAVLuBlfO1eQf1EzivK+b70ZGxKifo+TyhC0t74iiA4A9XmvapM9CprETDawvtr58=
-X-Gm-Gg: AY/fxX6G2QbYqQ7atCHXFuEv9pmMbtJz5Pq14871R5CDRcsicVpmZ8ssppA+WfhXdin
- 84LzeerytDsRljJ8dVOvK9y0fM4woDDFMuNiEN67ktO1svcqW3gVInDstK80gwBnt4QohxWELTk
- znaSE3cf5G15idX85VMgKteFsY6gJCdYJt2T5YAMicZsPzg1hT8vpsKfp1wIswzq7+lyNb5CELj
- zlXaaPvOkbwjMWX4XoBn9KzE8k5t4KmSe9/Ps9nJTM1kKtzNTp+HyPpS9NCpQK+yzEwdC0v/iGF
- /QUqSGlEKiwMzuRjaRA3joDWXGP/P6D2yQBtVU5NItblJZLY3a9qgAE66DQOsaQpPxy7rMJpoj+
- muEhNYm1M4wjOWBO329R/BT7d6vPDcvC1FwsNkzHsf2t4iqEWrMYEsSoiU0pu1GVyn7CcESA92g
- sjXwaol83ObpQdh1g=
-X-Google-Smtp-Source: AGHT+IFdSFG3JV5+SOg1o0kjP5pP9wpu6tl3Is4zKOw6A8/0fHLh5Q2GuJvw1tx2gkJx7B0GCK7vZw==
-X-Received: by 2002:a05:6870:8322:b0:36e:8381:db00 with SMTP id
- 586e51a60fabf-3ffc0959dd6mr3391581fac.9.1767895580856; 
- Thu, 08 Jan 2026 10:06:20 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:c69c:7b5c:ce9b:24be])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa4a9099csm5391100fac.0.2026.01.08.10.06.19
+ d=1e100.net; s=20230601; t=1767900322; x=1768505122;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NIEtibt/qtj3uwK8DiYy26ijtYa7m/uboyTk7CiNVL0=;
+ b=EJZhR64I+j7yLHJA4MVVoGwHjgA0cn0JMWE9b7abOvyiTgE37I85x7Y3IIHMQN2ipc
+ 7HiRyPYgHZ4WxRCI3/b2ld/IR/F3c49BjZxSntXmX1TMyozj1sNfmv2En9tJxEuzzsE6
+ QECDgHSD8a+sDc3+AlVJYscvead4Evg42/oila81D0ijsdjSB5fNo2Xkz36YvfERgbx1
+ ESS+NQapS6rDYLTk+Bx3UIGWv1qLLyr8rMxOC3vGmA7CYRu+MRogPCcfyEc9sYJLPDvW
+ c2xV/usjxeHH6jzphQ6ZmjGL0dADCNT8aQhk8RbraguH/F0DqwrDHur+FSHwyQQo+6SV
+ LTuA==
+X-Gm-Message-State: AOJu0YyxLAD0cBrQRCWUEs5xuNIjFa+aWpq5s1hLYAFDDhxZ1ex/4xfa
+ 3qvuOiGMiHRRK1rkQv5KrQq++ZnpVimJaOsITWcjv4e3ztPbSobt/Unu74/gS31m6jA=
+X-Gm-Gg: AY/fxX6Q4+bsU3tRNZDBRKruC5u/qAHg8r06c5Lb0ASKZZ3M3d7n6/FXlBOwkbdU+/5
+ l3atWOqs3q0Ztx1z933SCkUBRiZCKEOq4U+oGgDYVkXOeHxKCTffQ1zWXlowtvr1WgZQ/CrZSTX
+ gJshllQFSBrPb5U+KxEeQ1tLtL9fhMX+6y62/PN1DzOq260YjEfhNPBGslO1AlMBVIsajZPBo2a
+ ynM6r9f/ruYUGFKfIV1SceLX4H/rgzuiW3Tn7eDONK6kkEZamJo/Hnh3YduekSdfnZ3eEBL8LJ5
+ o6cfWaC7eQvEQ1kgmVhfOc/eiPmEVKXx3FbN3nJzzrofjmf3tRGspVMHlGYtYW3tVhLsWONY/qI
+ PIeVx2mhWw9u9+MKOovHfJbZd7jHcKBrc4/zEZzK7UzL0WfvJeqFsHvp6gQjIQzvPnuWHEo5iTa
+ K9SeCDGeD4rDjYSw==
+X-Google-Smtp-Source: AGHT+IH905Vm3AJMNR1uTWS1yZjLYxWe33wAywprlWGWqPUMTnPePcnXaqbc8M0qxdURIBq9iWmkZw==
+X-Received: by 2002:a05:6402:278c:b0:64b:7ab2:9f83 with SMTP id
+ 4fb4d7f45d1cf-65097e6b614mr5709914a12.31.1767900322038; 
+ Thu, 08 Jan 2026 11:25:22 -0800 (PST)
+Received: from localhost ([195.52.31.202]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6507b8c3f89sm8598859a12.5.2026.01.08.11.25.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 10:06:19 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 08 Jan 2026 12:05:54 -0600
-Subject: [PATCH 1/2] clk: clk-uclass: fix format specifier for ofnode name
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-clk-uclass-better-debug-v1-1-265900a42fe5@baylibre.com>
-References: <20260108-clk-uclass-better-debug-v1-0-265900a42fe5@baylibre.com>
-In-Reply-To: <20260108-clk-uclass-better-debug-v1-0-265900a42fe5@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=758; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=PxhH9dWZ4nHfqDdR6m3HAIARrnOx0n3XAN4mBO/2B5w=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpX/IMKYGIloRyyQAAykSYOeJCjDJJeETCkbmPa
- ObI8I25zgmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaV/yDBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZG8H/2OA+2YDc6P8JoTFsOOI4/4lLSIw8dEhkAZUmQZ
- IMWW//MLm+WTMLWavf1VO92EE7rF6wtV5BVG0QjzsnW9lFlub9X34k0ehKVsnaJUYzJCpo+HtUK
- Pp+l1084w0m3DmQhRktd2qsIdyIxxYAvJV04+A5pWN3OXx3RypFW56ueUrvLBWyCiFgoyjxEYw6
- rstqk1WqQ8KeewIEnVWW/JhNa06gXENr8m90v+nMHgVZ90csu7uWeyBGNnd0mPz3HDfho4Mj5+G
- EHKh5xQF6LnF1ldZF7jDSaYiQYpzLW93eda4sciYBza9NnnOUMtPqvz+YuaUni4oJoEL4tL9AD0
- NfkY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+ Thu, 08 Jan 2026 11:25:21 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=58c1af36409290b5e6240909e1526ff7a873396c0789114fb3f168b24bb3;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Thu, 08 Jan 2026 20:25:15 +0100
+Message-Id: <DFJGCWVN1KXA.1RO24AUIJQ1VM@baylibre.com>
+Cc: <u-boot@lists.denx.de>, "Simon Glass" <sjg@chromium.org>, "Tom Rini"
+ <trini@konsulko.com>, "Marek Vasut" <marex@denx.de>, "Andrew Goodbody"
+ <andrew.goodbody@linaro.org>, "Kory Maincent" <kory.maincent@bootlin.com>,
+ "Svyatoslav Ryhel" <clamor95@gmail.com>, "Christian Marangi"
+ <ansuelsmth@gmail.com>, "Dinesh Maniyam" <dinesh.maniyam@altera.com>,
+ "Heiko Schocher" <hs@nabladev.com>
+Subject: Re: [PATCH 0/4] dm: core: Support same compatible in host/gadget
+ musb drivers
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Markus
+ Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com>
+ <176779448475.214869.16026456579050958123.b4-ty@kernel.org>
+ <87pl7lzc5t.fsf@kernel.org> <87ms2oyyxs.fsf@kernel.org>
+In-Reply-To: <87ms2oyyxs.fsf@kernel.org>
 X-Mailman-Approved-At: Thu, 08 Jan 2026 21:24:28 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,28 +108,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the format specifier from %p to %s when printing the ofnode name
-so that the actual name is printed instead of the pointer address.
+--58c1af36409290b5e6240909e1526ff7a873396c0789114fb3f168b24bb3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/clk/clk-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi,
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 0584429bed6..0e56d207b0e 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -410,7 +410,7 @@ int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
- {
- 	int index = 0;
- 
--	debug("%s(node=%p, name=%s, clk=%p)\n", __func__,
-+	debug("%s(node=%s, name=%s, clk=%p)\n", __func__,
- 		ofnode_get_name(node), name, clk);
- 	clk->dev = NULL;
- 
+On Thu Jan 8, 2026 at 3:13 PM CET, Mattijs Korpershoek wrote:
+> On Wed, Jan 07, 2026 at 16:15, Mattijs Korpershoek <mkorpershoek@kernel.o=
+rg> wrote:
+>
+>> Hi Markus,
+>>
+>> On Wed, Jan 07, 2026 at 15:01, Mattijs Korpershoek <mkorpershoek@kernel.=
+org> wrote:
+>>
+>>> Hi,
+>>>
+>>> On Wed, 26 Nov 2025 21:31:06 +0100, Markus Schneider-Pargmann (TI.com) =
+wrote:
+>>>> musb currently uses a wrapper driver that binds on the parent device o=
+f
+>>>> the actual musb devices to manage the differentiation between gadget a=
+nd
+>>>> host modes. However in the upstream devicetree this parent devicetree
+>>>> node can not be used to match the wrapper driver.
+>>>>=20
+>>>> To be able to probe the musb devices in host/gadget mode directly, thi=
+s
+>>>> series introduces support for returning -ENODEV in bind functions
+>>>> resulting in iterating the remaining drivers potentially binding to
+>>>> other drivers that match the compatible.
+>>>>=20
+>>>> [...]
+>>>
+>>> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu =
+(u-boot-dfu)
+>>
+>> It seems this series broke the CI when testing sandbox:
+>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/1349214
+>>
+>> Can you have a look please?
+>>
+>> This can be reproduced locally using:
+>>
+>> $ ./test/py/test.py --bd sandbox --build -k test_bind
+>> [...]
+>> FAILED test/py/tests/test_bind.py::test_bind_unbind_with_node - Assertio=
+nError: assert 'Unable to bind. err:0' =3D=3D ''
+>> FAILED test/py/tests/test_bind.py::test_bind_unbind_with_uclass - Assert=
+ionError: assert 2 =3D=3D 1
+>
+> We have discussed this on IRC (privately) and Markus has posted a v2
+> that should address the CI failures here:
+>
+> https://lore.kernel.org/all/20260108-topic-musb-probing-v2026-01-v2-0-2a4=
+7c6e0e73a@baylibre.com/
 
--- 
-2.43.0
+Yes, thank you Mattijs, sorry for not posting here.
 
+I missed the possible path of the drv argument being set and the driver
+not having an of_match being set. I fixed that in v2 and also added a
+few cleanups for the function.
+
+Best
+Markus
+
+--58c1af36409290b5e6240909e1526ff7a873396c0789114fb3f168b24bb3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaWAEmxsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlOt
+RQEAnX2QcKOPmPchpEB+hZpW6KbcMS/R9uI1f0MZo2TvUwQBAJE+6ON0EF6doJgA
+gI4Jr+cRbkTMiLt3O0mHCmBKYEIH
+=6994
+-----END PGP SIGNATURE-----
+
+--58c1af36409290b5e6240909e1526ff7a873396c0789114fb3f168b24bb3--
