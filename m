@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 676FDD1D493
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:29:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51B5D1D493
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DC1E842F2;
-	Thu,  8 Jan 2026 21:29:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9651384301;
+	Thu,  8 Jan 2026 21:29:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NBedrbkV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PeHCWPr7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B3048415D; Thu,  8 Jan 2026 21:29:00 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 4DA138415D; Thu,  8 Jan 2026 21:29:03 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 829FE8415E
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:28:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06D8D842DB
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b736ffc531fso689339666b.1
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:28:58 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b7ffa5d1b80so545021966b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:29:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767904138; x=1768508938; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767904140; x=1768508940; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9AWM9yHkkvHoxvhpFMt1WFWjb4X4H636+0Zawgv7vtg=;
- b=NBedrbkVEQnsmC4jtcHWfhVWxMQ00hdu5HcYGQyhS/yAZKGU55RL56wWVE0ysZF/3n
- jcP8PS/k38wtMaOdDJWSokW9fd0p00AT7NCfnrpyKXspTnh6fr1wgOHxQsEkggkSlxOi
- LoHZVKZgoCBLs1+9RyzK4l+FxbI7HFD6+WmdgzwGRObhg7wUsJcLZgN10k9uDjku+lGz
- RmobDpcNJzgWRRt+hHooFkBA1Azi0w3xQKM3Dyp1AMkgpJB10DJqtgHX5551agRjh8Bz
- HN4d/LMqL+43wHijuFCjOeErR1to0z6x7/b3O4I4eARxc2kmo0Ycsx8ryTJ7NFmnepny
- t/DQ==
+ :reply-to; bh=Qb/d9LuEQQNL2voB8hOz81ZOClPHogCH/S3LKlhzyGE=;
+ b=PeHCWPr7RAl2IveXeeO8nxYRgbNBbaVPAZ+/RGPsGW58MsF70df7h5CFsOt0+AOABk
+ y36wJCFjroGh5Ts63oVA+fVAIfWWKYS1+ZIINiM+gYBBFND83Q1A8OtHXJ49Yad3mBv9
+ vYiftDkt+b2FWwKO6IwRWvm6Mc7DVuBDGLtKMLlr5axc0s3fcPxWGwChX+5lQFmoqRVD
+ WXfJlQB6waTLXbfERqCueCMSfEy1zgDrQngAi3Mf/cWAOoqnIONkOCuXvCmYLLqw4gLB
+ Bjq9U1zdHUnuQRGncyMMNd5iBzXSxoU19FCJpzJ/LieMXn12O2hnrbdfjZnD8Ks7vp3/
+ 7GXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767904138; x=1768508938;
+ d=1e100.net; s=20230601; t=1767904140; x=1768508940;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=9AWM9yHkkvHoxvhpFMt1WFWjb4X4H636+0Zawgv7vtg=;
- b=Ijm18KZ4NKSvJZlcuSAZAccygqFHYPRSNGfbOun0RHVrN+He36UtOZR6+qxDHUcbUs
- JTulu2C8dYhOnwdxY+21IshykWMHrmqL8WIwLOl+jwmvCpuuNtcNNZ4sl3iSX0Q+Orav
- YzQebvlMiuncRNAG6C6XugxrxQarmdJ4Jl9GUe6wYX/0q/gc4nCePd2GnsfiP8PR8q56
- enBFKWJMBkXMgaZWT6uOCTfSdCP+5ivvyfPmqmzzlU1chzz4+KYmMi0X3bIpngHJkT/g
- S4OhW+DdYZVR7C2Rj3XXx7ZuDMt02LU7Vf9W3MtZL1ewcbcs1aZFFO0gUPK+Wc0Qx6bW
- FUhg==
+ bh=Qb/d9LuEQQNL2voB8hOz81ZOClPHogCH/S3LKlhzyGE=;
+ b=Qr8eYs7vGZV3yhNTfEb0Z7x95y9DhmhcUO2+yG6ckMzStds0EkHgyBsw9aragTGm+E
+ GmwyLQinVvvY0EQteri9i5TkAQTUYNKQL3BHGc/DqcWsc/AXHYGkUcGIRvWt4vt0+De1
+ 4ivAcvINrjmwRRF/KxUzBOdnGVgiM5GxWioq9Q6qrSDK/v0YdqabETL7+Md+2tkeNra7
+ +gzMsZ7Wpvr1oUIQflidUKK+3uFj6bwtji/36AEKMdhPRJqaYdVbLyeWW95jZzIUt2GI
+ GysboXBnvISCokdhw0oDPrUUynJx/KqbXW4eibul3PrUDmOZSsdAIq/602mPNEd0gJoq
+ DGDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgnagfLtKkpYHGFILoISUcRGwn6mVdqMFh5C+UVnBn5dbWJxh+I0E8HubqbVoEAL3yu6v5DiQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzj+ZyGB5D4nK7/IHEZS4GIaoy9SHFNS08YNE72dpYvPUqomnMF
- 2o95VrEBha1YyOck5hvmCpSadQTNZja5lARas3Hep/dCKjerzyVgsiuKJ5Brd0DSamQ=
-X-Gm-Gg: AY/fxX4xMFaeHL40SvACHo+1dzrptEAgRc0ISoSwRHS3vCTdxkOV10TCzcecEtJPMpF
- z1+kG+1/seAC23avIklURzwWiiV8kzmZPpWcWKHu6gQN94WqO1j57pleIDbfF20+TpOU9cyN6Mz
- bzbiMBQMi8LzMdHhdMGxacILur9skC/BNDXLL+neBERK7exBC0MCWHBO/7P6Xa3W9u0wGK29y/q
- MNx45zAMPAAI+CFq6Pu9iBdVmAIBRXRHSQxeo3NiPGtJG0KPdaXwV05w/uIv8DPPbx3k3Nh4rMF
- 0H+3BITUK7qrl2H+hKuPw1QjoSvvOzsm3s2pywlSd/yH/ntmvPggZ/yR+yvCLFQ/MpdCvgqNuFI
- zvv2/h4Puo3ChI0akZuXzdoLbGqy9rrsgV6Ss/g+jZNCdLCYBS/fPZSIM/AZhhtVG/d0MBltxUU
- 9myzBuHBCBGrFVLpYhnpA+fsuxoQztyGANdXNeCVtPlcyBUQnnVsJFMA==
-X-Google-Smtp-Source: AGHT+IEEc9upCmNHOPM99EE8bxvOibo2dWwTrGWwGpC70U9hE/QE16dP8WQxh5G/lgvmY8zW8Ec3fw==
-X-Received: by 2002:a17:906:ee82:b0:b80:117d:46e5 with SMTP id
- a640c23a62f3a-b84452066edmr679062066b.29.1767904137942; 
- Thu, 08 Jan 2026 12:28:57 -0800 (PST)
+ AJvYcCW6vgeryZZ4xRFtbxXks7hwqxyGbmahgdqHg4XkK0BsNmWIoeX4augLvgHgx+tTV373bZYh098=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNP+jrKJvwU2pxuN5HYoDlD9zZakjKBh4BjxY/kd6gp25EhyEZ
+ Axx2Bl4Ah+6kAyUbDfRaJPBtTDqQ63OaNWlrWUrwGlZ3i0i2GeIPmX/W63YjK9E2SLg=
+X-Gm-Gg: AY/fxX5bxASeG+NkkVNt28EdAMtJFe40mdvMBlYlLmzVNMftwUTjW+/gReifeU0qK9C
+ ZvjWRkKIRS3jPDlwMrrwtUOSRwCekKhYeQKgwURZ66Q9DawYzSt+9m6Ewy5WIXyM2vNI7NP0B0U
+ 9Uus4GXQYQSP/jUrectZC2ukmbiGwn3+MV1C6mFZJoSvVanfQQXkuUpN94rwoO+rJurbq63fJ8y
+ cFic8zuGhayfd6yiz3i4GAR26TGjINTXVB/wmbDPU5HvuUxx3lRIpkRj01WDSKh8RRkYA/3Bxpn
+ FKhRRQ/W2+YcmnydCwJ4NgNid+YGcU2iqPm45I+WtvbLq/bzU85e5eyzl3VPBNtjaXoEipKO9se
+ slKmuNpb7H2yXns6m80w3N30d+vYDpwtoGqNP9bcKMvHt78SvsWyv0MwUzyWCKWZ1CWjLFjkGbJ
+ Oe9pT99vicMTRCqJ70aF0xFyh/Ii/v7AkZJWdyYu+VOnd0Tp84uSMATw==
+X-Google-Smtp-Source: AGHT+IE8SSIDruS05eGm/A/061NanqVXxjP6G1lCAmV1HrRkg/BaLB2iC60l9TiRzqWS9tjvvaAMig==
+X-Received: by 2002:a17:907:9701:b0:b80:3fff:32ea with SMTP id
+ a640c23a62f3a-b8445034cd3mr738987566b.57.1767904140257; 
+ Thu, 08 Jan 2026 12:29:00 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a564e05sm930264366b.65.2026.01.08.12.28.56
+ a640c23a62f3a-b842a564e05sm930264366b.65.2026.01.08.12.28.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 12:28:57 -0800 (PST)
+ Thu, 08 Jan 2026 12:28:59 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 08 Jan 2026 21:28:43 +0100
-Subject: [PATCH 1/6] soc: qcom: rpmh-rsc: reclaim the TCS to avoid spurious
- irq in Linux
+Date: Thu, 08 Jan 2026 21:28:45 +0100
+Subject: [PATCH 3/6] soc/qcom: rpmh: correctly wait for TCS flush
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-rpmh-regulator-fixes-v1-1-d1b5b300b665@linaro.org>
+Message-Id: <20260108-rpmh-regulator-fixes-v1-3-d1b5b300b665@linaro.org>
 References: <20260108-rpmh-regulator-fixes-v1-0-d1b5b300b665@linaro.org>
 In-Reply-To: <20260108-rpmh-regulator-fixes-v1-0-d1b5b300b665@linaro.org>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -92,13 +91,13 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15-dev-52d38
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1348;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5161;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=iZqMeQ2FWWaCrc7z4i7RafjSDFuqF2auNuNa8cJ6G98=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhswE4XZ/6bCdO9LWJh5V/uLyef7smVsfZqxz9QybeodL2
- 7e6+R5rRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIZAaG3yyLO6eKLa1w5/9x
- R+6fgi13oErvl8C1zrv/1OubMJx4y8/IsOoao2nE2UVq19+6Fzj+FvtWfk03Sqf71clFHUfzP0z
- +GA4A
+ bh=lFOKsgKAHEdMUlrUxiPKGE1Lyb9mw7DtyZNf66+JLv0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhswE4XapDQXmOnbaQgGafU/KmSWOqTuJ8T+/sbX7fdrap
+ a/Kcsw7SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESsBBkZWm5OfG76R0BTnU9z
+ /pv/Vq38JU/47VZc2q/+NiD8CttlPYbfbIlui3ltpp39mvryq9S/zdrzXi0PDCydPeNK7sOHTBs
+ UAgA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -117,47 +116,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neil Armstrong <neil.armstrong@linaro.org>
+Several bugs were discovered in the rpmh-rsc driver which collectively
+meant we were never actually waiting for the TCS to flush, these were
+likely missed because U-Boot runs single threaded and the RPMh had
+typically processed the single command we sent by the time we went
+to send the next one. However a future patch will implement rpmh read
+support which requires us to properly wait for the RPMh command response
+so we can return the value.
 
-If we don't reclaim and clear the IRQ bits, we might get a spurious
-interrupt from this TCS in Linux:
-WARNING: CPU: 0 PID: 0 at drivers/soc/qcom/rpmh-rsc.c:451 tcs_tx_done+0x98/0x270
-...
- Call trace:
-  tcs_tx_done+0x98/0x270 (P)
-  __handle_irq_event_percpu+0x60/0x220
-  handle_irq_event+0x54/0xc0
-  handle_fasteoi_irq+0xa8/0x1c0
-  handle_irq_desc+0x3c/0x68
-  generic_handle_domain_irq+0x24/0x40
-  gic_handle_irq+0x5c/0xd0
-  ...
+Fix these issues so we correctly ensure the TCS is done before
+returning.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/soc/qcom/rpmh-rsc.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/soc/qcom/rpmh-rsc.c | 44 +++++++++++++++++++++++---------------------
+ drivers/soc/qcom/rpmh.c     |  1 +
+ 2 files changed, 24 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index aee9e55194ed..bc0c3dd005ac 100644
+index f51ef0b4af9c..05fff174f832 100644
 --- a/drivers/soc/qcom/rpmh-rsc.c
 +++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -399,8 +399,15 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+@@ -283,31 +283,37 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+ {
+ 	u32 msgid;
+ 	u32 cmd_msgid = CMD_MSGID_LEN | CMD_MSGID_WRITE;
+ 	u32 cmd_enable = 0;
++	u32 cmd_complete = 0;
+ 	struct tcs_cmd *cmd;
+ 	int i, j;
+ 
++	if (msg->wait_for_compl)
++		cmd_msgid |= CMD_MSGID_RESP_REQ;
++
++	cmd_complete = read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_WAIT_FOR_CMPL], tcs_id);
++
+ 	for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
+ 		cmd = &msg->cmds[i];
+ 		cmd_enable |= BIT(j);
++		/* U-Boot: always wait for completion */
++		cmd_complete |= (!!msg->wait_for_compl) << j;
+ 		msgid = cmd_msgid;
+-		/*
+-		 * Additionally, if the cmd->wait is set, make the command
+-		 * response reqd even if the overall request was fire-n-forget.
+-		 */
+-		msgid |= cmd->wait ? CMD_MSGID_RESP_REQ : 0;
+ 
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
+-		debug("tcs(m): %d [%s] cmd(n): %d msgid: %#x addr: %#x data: %#x complete: %d\n",
++		debug("tcs(%d): [%s] cmd_id: %d: msgid: %#x addr: %#x data: %#x complete: %#x\n",
+ 		      tcs_id, msg->state == RPMH_ACTIVE_ONLY_STATE ? "active" : "?", j, msgid,
+-		      cmd->addr, cmd->data, cmd->wait);
++		      cmd->addr, cmd->data, cmd_complete);
+ 	}
+ 
+ 	cmd_enable |= read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
+ 	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
++	/* U-Boot: Tell the DRV to wait for completion (?) so we can poll on DRV_STATUS */
++	/* This register applies to the entire TCS group not per command */
++	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_WAIT_FOR_CMPL], tcs_id, cmd_complete);
+ }
+ 
+ /**
+  * __tcs_set_trigger() - Start xfer on a TCS or unset trigger on a borrowed TCS
+@@ -375,28 +381,24 @@ static void __tcs_set_trigger(struct rsc_drv *drv, int tcs_id, bool trigger)
+  */
+ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+ {
+ 	struct tcs_group *tcs;
+-	int tcs_id, i;
+-	u32 addr;
++	int tcs_id, i = 0;
++	u32 val;
+ 
+ 	tcs = get_tcs_for_msg(drv, msg);
+ 	if (IS_ERR(tcs))
+ 		return PTR_ERR(tcs);
+ 
+-	/* u-boot is single-threaded, always use the first TCS as we'll never conflict */
++	/* U-Boot is single-threaded, always use the first TCS as we'll never conflict */
+ 	tcs_id = tcs->offset;
++	if (!read_tcs_reg(drv, drv->regs[RSC_DRV_STATUS], tcs_id)) {
++		pr_err("%s: TCS %d is busy!\n", __func__, tcs_id);
++		return -EBUSY;
++	}
+ 
+ 	tcs->req[tcs_id - tcs->offset] = msg;
+ 	generic_set_bit(tcs_id, drv->tcs_in_use);
+-	if (msg->state == RPMH_ACTIVE_ONLY_STATE && tcs->type != ACTIVE_TCS) {
+-		/*
+-		 * Clear previously programmed WAKE commands in selected
+-		 * repurposed TCS to avoid triggering them. tcs->slots will be
+-		 * cleaned from rpmh_flush() by invoking rpmh_rsc_invalidate()
+-		 */
+-		write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
+-	}
+ 
+ 	/*
+ 	 * These two can be done after the lock is released because:
+ 	 * - We marked "tcs_in_use" under lock.
+@@ -407,12 +409,12 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+ 	 */
+ 	__tcs_buffer_write(drv, tcs_id, 0, msg);
+ 	__tcs_set_trigger(drv, tcs_id, true);
+ 
+-	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done */
++	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done. */
+ 	for (i = 0; i < USEC_PER_SEC; i++) {
+-		addr = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], i, 0);
+-		if (addr != msg->cmds[0].addr)
++		val = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_STATUS], tcs_id, 0);
++		if (val & CMD_STATUS_COMPL)
  			break;
  		udelay(1);
  	}
  
-+	__tcs_set_trigger(drv, tcs_id, false);
-+
-+	/* Reclaim the TCS */
-+	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
-+	writel_relaxed(BIT(tcs_id), drv->tcs_base + drv->regs[RSC_DRV_IRQ_CLEAR]);
-+	generic_clear_bit(tcs_id, drv->tcs_in_use);
-+
- 	if (i == USEC_PER_SEC) {
- 		log_err("%s: error writing %#x to %d:%#x\n", drv->name,
- 			msg->cmds[0].addr, tcs_id, drv->regs[RSC_DRV_CMD_ADDR]);
- 		return -EINVAL;
+diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
+index 96f14a9afdf2..91b90626af36 100644
+--- a/drivers/soc/qcom/rpmh.c
++++ b/drivers/soc/qcom/rpmh.c
+@@ -21,8 +21,9 @@
+ 		.msg = {				\
+ 			.state = s,			\
+ 			.cmds = name.cmd,		\
+ 			.num_cmds = 0,			\
++			.wait_for_compl = true		\
+ 		},					\
+ 		.cmd = { { 0 } },			\
+ 		.dev = device,				\
+ 		.needs_free = false,			\
 
 -- 
 2.51.0
