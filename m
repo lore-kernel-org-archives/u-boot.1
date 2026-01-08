@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19EFD1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435F7D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F30842E0;
-	Thu,  8 Jan 2026 20:59:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B262C842CE;
+	Thu,  8 Jan 2026 20:59:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vsn4ypXP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nRTNiz5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4B8E842CD; Thu,  8 Jan 2026 20:59:36 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 60D0A842CD; Thu,  8 Jan 2026 20:59:45 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B92842C7
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:59:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79AB6842C7
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:59:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-64d0d41404cso5337622a12.0
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:59:34 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-64daeb28c56so5486711a12.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:59:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767902374; x=1768507174; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767902383; x=1768507183; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ps109TMXD3Xl2MipTR4vkPOsUDmDtYm3G4kLXnSQrHI=;
- b=Vsn4ypXPPyxQTnLKbG3uuiMcuztBERwqt5BF/2JyZPMHs7XeDcyGNATXTbG7mXVNTb
- V5yrDG/T5cACf2Q32IpXcyg3sXs32tM+0yrj7+W0NtXtRRe3rQpcApqkzFu6h+21riqF
- QaoXgavfUTFV2JSwxGic2NkvkDY8FSu2CSRzk=
+ bh=2RFcjUL6AQN46cFSNlXRRS6afkG0aURY+KEu7Ba/ruA=;
+ b=nRTNiz5RP9gZnbAhe6vMMn/Pfut16YZ6fr3Wgm/Ybmtw81bxSclaKKFVU+zw1Iej6N
+ sOLnpH6UVYEQEPbZ2DJszfbtp/otCE//PfmUtpH50kbXGQXNJh0LfzMY9mpXKYVt3E4m
+ V627QW3NX5YJx2XVl6kf6lhIwJ77leVEFWXo4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767902374; x=1768507174;
+ d=1e100.net; s=20230601; t=1767902383; x=1768507183;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ps109TMXD3Xl2MipTR4vkPOsUDmDtYm3G4kLXnSQrHI=;
- b=m8Kl6M9eaPRZpp3dwIw/xaySZs7RaVjtuD/3Aqj3eDfC5ZaEFR4Xa0UyloF1BhlXRw
- h3r0gxwCGwj6Y22XBbOkYvDm7c6yY6FVJwgA7sDtYA5HRtCWxIZj4E7JSMHzA7AXKea9
- orszlI1g9pZTCTKhMEeLN8GKVLpzGKzFNw1CdHBeaHdlcAW2wW1KXu3UTc2Mjl6re+Tt
- 44EYmaJe/xBNTim6ysx9s80ZYVZhF0Jkx9bWxrezI9h5yWz4rx//LKA09INI9k8NufKw
- HkxNdP3Hzjl93vuc9MjkPupzb/XPXJqjwVRlC1j633ywPWAMfS6GtTQfB3LRyrc77Mxu
- 8NNw==
-X-Gm-Message-State: AOJu0YyPprPXH5JPabdHn0Pm0W2q+qmETQmCz9l6rSj/LAHHEEKIb8ve
- z4p15z5k0YNGRfjnKCCNRxYAzRShakrwc2UJWxwteHMqc55X1Z+86if4E53qUwOGQ6oWJaeR/xF
- 9J4XzpEvwVw3+fUBDH1PDDWiq4OjJRyCgRAIFPxK2
-X-Gm-Gg: AY/fxX6h5pQStmJqVF47zcXaDWAFmlakSG0SiikxpNlNeYYbpqF6Pbc1p/z8wEPvuMP
- GKgjS/LxbFmqdcZrjnYsZVpHd7751KNptb7w1LfMd9BQ6Q0STRRyV0Urhl7uXIOPc/1NUsH08f1
- XvkfN+ghzMTIUgYqPmoQw1Zl8pAZokubFgxv3NyUWyXAl1JsdN3DA25m8F/68qAqqzxkMVBLae4
- eCej18f1CAUTZMyx3p813KM58zQic8nRoQK8ap+2Uh/XoZTwGtE7LidKxTuTN5yvYIYNA==
-X-Google-Smtp-Source: AGHT+IGzrnFUBBBwVMDndGiCocqFUeNiZnwjpPz54ZZLB7Ntn+fqmPmGCwALbIiqUWYg9MYZKM5THNSbWJVwEL4Pbt0=
-X-Received: by 2002:a17:907:2689:b0:b83:972a:6af6 with SMTP id
- a640c23a62f3a-b8444fa0b03mr668175466b.44.1767902374312; Thu, 08 Jan 2026
- 11:59:34 -0800 (PST)
+ bh=2RFcjUL6AQN46cFSNlXRRS6afkG0aURY+KEu7Ba/ruA=;
+ b=GZC+Uk3fg1h8ra3INLg08/o0orvP1qBXUkbWxrY70Jz6nyZDDwLzekiX3WAPlZZP8S
+ xJcsGcCv6cktBw+exY4pMUqF94E52eJPTP4nhm/TKWaW8BDlMgRvs07+DYu8yJc7akaG
+ neI257nHQUtCYTo1XVQRTuZrUMXd2c7li5mmM/747W29V7HZyx0lXao9CS/EUxQ6HXtT
+ 7eY81JlMaf5o1XLsvIGGoiUzhAoqE+SWXXloPT8vb1/pnM+ZzEx3Rd8+e0zgHa9no8zT
+ Rx0VPDy5eBMF5yq2LIJvh8xE/RHJHoIbrl2okHerhUpucvBXJ9S9cW2u2vmlWLqKkr2+
+ UUzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWM/YWr9q7FszWnPldMw/zqUYXbowFQXjrH70AyxgBXWoYEBMD5PTGnRsw/kEYEj8MvYt05OY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxjlf8oXTkleuWdaP3E4pnOIY+K2+U7F+nD7qWmelpVW1eWsJi4
+ pVLvITUrXh4erXpUTTpP3KJISDzLR/lzho3wefAArGO7skacb6VGFR5Hp2ec1Fl+G58hNVS+NwN
+ dm1jXISfNCAXRXbxGFlcQj4P4xk6EkjkyBCTOMDCz
+X-Gm-Gg: AY/fxX6ESK7ODFNBg7wf/pecOetuPwlGBi/XXa7mwKO37k8oBrW6iff95ZuLK/IdYkR
+ bXjCm4jeY04fduWHjKSGIOzXLPVS9DHnp8GVhtH3pXCMiVGUuVfNx2XLoJvnxvL6qwY3K57ezfH
+ YXMpnkJRjL3DLPhJY9yvnymcKAI7bFeHCohCjxFAVeTJSp5y8SZI/jnSCi3pyoZvDOK/Riz4j56
+ hq74yB9h1sLp/G4qTR+o0n7OWiOtm/AGygsxVpPRVm0/w9zEeElvRf4ozJuKBBDGJP9wA==
+X-Google-Smtp-Source: AGHT+IFZ6yyY/vfTpdSHEO3t+pXVNKijv1jUHHB23XElEcblM4slA6S43/DhSJTLbmpKWtnAG0mS4ELxs6x3WmAHE5k=
+X-Received: by 2002:a17:907:6d20:b0:b73:5a2f:2f0e with SMTP id
+ a640c23a62f3a-b8445179e76mr651450366b.3.1767902382847; Thu, 08 Jan 2026
+ 11:59:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20251231100831.119142-1-t.preissl@proton.me>
- <20251231100831.119142-5-t.preissl@proton.me>
-In-Reply-To: <20251231100831.119142-5-t.preissl@proton.me>
+References: <20251228164500.313817-1-t.preissl@proton.me>
+ <20251229144813.GP710860@bill-the-cat>
+ <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
+ <20251231015450.GW710860@bill-the-cat>
+ <20260108150025.50206-1-t.preissl@proton.me>
+ <CAOf5uwnmzGeKjm0LqiRTokQWDxnXUGp71OK131kn+O9hmamV=g@mail.gmail.com>
+In-Reply-To: <CAOf5uwnmzGeKjm0LqiRTokQWDxnXUGp71OK131kn+O9hmamV=g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 12:59:16 -0700
-X-Gm-Features: AQt7F2qkvz1PSho6aWTjFuqU0F4yZHou22Id6_133PRc6kMUcF4-kRfOFoaHrEw
-Message-ID: <CAFLszTg8M_pUFdFTB4pptHsv92yvQ0GCaXjn55iFDYczzV=81A@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] fs: prevent integer overflow in ext4fs_get_bgdtable
-To: =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Cc: u-boot@lists.denx.de, trini@konsulko.com
+Date: Thu, 8 Jan 2026 12:59:19 -0700
+X-Gm-Features: AQt7F2r-nzvxLUBrwU-VtfSZie2qT3v1xhpIr0e0sOaQ7wbu_RSSBjFU3rY0zHU
+Message-ID: <CAFLszTjxr6Wx9m8oD5skysJGh5UfrgEgwBZEqsNFqFD3LkQhBg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] fix integer overflows in filesystem code
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
+ u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,48 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Timo,
+Hi Michael,
 
-On Wed, 31 Dec 2025 at 06:19, Timo tp Prei=C3=9Fl <t.preissl@proton.me> wro=
-te:
+On Thu, 8 Jan 2026 at 11:27, Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
 >
-> An integer overflow in gdsize_total calculation could lead
-> to under-allocation and heap buffer overflow.
+> Hi Simon
 >
-> Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
-> ---
->  fs/ext4/ext4_write.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+> On Thu, Jan 8, 2026 at 4:58=E2=80=AFPM Timo tp Prei=C3=9Fl <t.preissl@pro=
+ton.me> wrote:
+> >
+> > Hi,
+> >
+> > this is a gentle reminder for the v2 patch series fixing integer
+> > overflows in filesystem code, sent on Dec 31.
+> >
+> > Any feedback would be appreciated.
+> >
 >
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> index 5b290f0d80d..b826a8807c5 100644
-> --- a/fs/ext4/ext4_write.c
-> +++ b/fs/ext4/ext4_write.c
-> @@ -108,7 +108,12 @@ int ext4fs_get_bgdtable(void)
->  {
->         int status;
->         struct ext_filesystem *fs =3D get_fs();
-> -       int gdsize_total =3D ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz)=
-;
-> +       size_t alloc;
-> +
-> +       if (__builtin_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc))
-> +               return -1;
-> +
-> +       size_t gdsize_total =3D ROUND(alloc, fs->blksz);
+> Because you made a similar contribution , do you have time to review
+> them, and maybe rebase your series on top of this one?
 
-We normally put declarations at the top of the block / function. Apart
-from that:
-
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-
->         fs->no_blk_pergdt =3D gdsize_total / fs->blksz;
->
->         /* allocate memory for gdtable */
-> --
-> 2.43.0
->
->
+Yes, OK I took a look. These things are not easy to review!
 
 Regards,
 Simon
+
+
+
+>
+> Michael
+>
+> > Thanks,
+> > Timo
+> >
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
