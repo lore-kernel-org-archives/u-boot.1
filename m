@@ -4,166 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB91D148BF
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 07:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CAE7D148BE
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 08:00:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAB9183BE1;
-	Thu,  8 Jan 2026 08:55:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
+	by phobos.denx.de (Postfix) with ESMTP id EC58383B0D;
+	Thu,  8 Jan 2026 09:00:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="K2f1va2Z";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="m2TXruQU";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UBh07Nr1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7E548405C; Thu,  8 Jan 2026 08:55:54 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 9051683B87; Thu,  8 Jan 2026 08:59:58 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9990839DE
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 08:55:51 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=vaisala.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tomas.melin@vaisala.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o3i4WwKrU5zPSzw6WcLisMxKESltG4SlU/LLhbEpchIYwIGhqGdeyizQl/rf3SaWVn5IO9cftrFCHckb7czaN2Z7j4104Vp9jQT6W0ynABnuGw7Wlwjiellx+5e/XMKj81GR5t1zD8GEWlGnneWV9sjCxyGGZXt+gx9GAMs+BdLA1f5QHeEhIWTOpVc52GNPFsBL3oHkYTvNG8+0mHcmURan/td+MIILD/mK8Err0fWTyNGwuG7ji4MHr2YwvYSuPC5pweuytSYJkhbHn4BWJ1nrlJXGhruo25qwMpI+FSIc0qxLri/NUFV9FJGESioPIQ6/rALM7e0iIgowoVoWiQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wMpIsX4CVCDSq+vkbERudPxLeDxnCnDDazLgbTuBwyk=;
- b=nLp/LHvZG/g9SQXMg3XDrMhpYxxfVb8ZdXuoRnUaYjjMl2fL+pdE0rFAUY3hpu64MDRck+mLR9iXdB1JI7Vvoq7D2NeVDuxCLEGVSIKjdkbfh5Gxb/Z3v/IFS5ldHks7+s1VFJFG/z5fpWEXY7oIhEmwFcV4Gvw4ZcAX2NS9SqorunlKJ4Rl9DkRwNOMfsw7xGmWYVi9/NrLYJ6rDxIUQo4wYM8/Fu8uOzUTYu99ktMJOs+ZEB6woR0qguSVmMnqBaEOYpQWm6JSBH0IzjIgYBdBTIZTd6eTSFPKlEmkNX8hx9ea/gMsNtof6JRYmHGHmNJ4txCyJAwr4WkU8hkYsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wMpIsX4CVCDSq+vkbERudPxLeDxnCnDDazLgbTuBwyk=;
- b=K2f1va2ZYHzEA0KpUY7bnQoqgSCjzBJH5zNVC3Pfrps2Lux06AdiQLPfhwIGbEMXqA3X5zzY6F82LFP54C3jVuM1QWGcs6T/qyR53m+U8b6F4RTFaDIW2WKg/TSy46gh2VZAjGiT8bEAQk9UBKrS3hsDnBbGRsRcemCiVc5ExSXWCZdxdmYzDkpdkVuMG1mDTQP5uJHT+zP4or32kMeNZcS2Y1o177OnKoI3gV2pwkYdmGmc717lMx32XjDfgwFlmoIMrysGCghzxwxNbHiVlnPUGd3LQESjkmXO2o0F2cnEtyd0vkYcik9HW77u1b/fxlIMN9No522GOrsns9INYw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AMBPR06MB10365.eurprd06.prod.outlook.com (2603:10a6:20b:6f0::7)
- by GV1PR06MB9194.eurprd06.prod.outlook.com (2603:10a6:150:1a2::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Thu, 8 Jan
- 2026 07:55:47 +0000
-Received: from AMBPR06MB10365.eurprd06.prod.outlook.com
- ([fe80::4606:8e25:96e6:bede]) by AMBPR06MB10365.eurprd06.prod.outlook.com
- ([fe80::4606:8e25:96e6:bede%5]) with mapi id 15.20.9499.003; Thu, 8 Jan 2026
- 07:55:47 +0000
-Message-ID: <2683445d-4eeb-4b97-a3fe-32468c831bd6@vaisala.com>
-Date: Thu, 8 Jan 2026 09:55:45 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/1] board: zynqmp: add cmd for getting boot auth state
-To: Neal Frager <neal.frager@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, igor.opaniuk@foundries.io
-References: <20260108074601.491837-1-neal.frager@amd.com>
-Content-Language: en-US
-From: Tomas Melin <tomas.melin@vaisala.com>
-In-Reply-To: <20260108074601.491837-1-neal.frager@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: GVYP280CA0023.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:fa::26) To AMBPR06MB10365.eurprd06.prod.outlook.com
- (2603:10a6:20b:6f0::7)
+ by phobos.denx.de (Postfix) with ESMTPS id 36B71839DE
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 08:59:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6087Q6PN1258448
+ for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 07:59:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=EbPPhp29zliopHcUq8rLzr1s
+ S4za2OraB7V4XcyfAs4=; b=m2TXruQUbssdyk5eHZ+m5kfmWMKTZVpDUedCNS4o
+ mS+Ek5wzbIbaGHaW7iWiGPVUeQkOGQOUn7LTLIQcN+nI8cSXOPdgdAOFRzkUBO4G
+ v2ooK00kUG34chsPET3QCdeKKh1XZ4vPKqGCgXS/FulZlWIppnRkeV8Ftw7MdvLJ
+ /LFA0LpjuX8iJPYPmQ2j/FKQrQaqCBlvEhtiERv8rTEqgx5VOEKcXtl6zDO7e4qz
+ 4hb47aFzmvXbRIPDKGlfEgpoHwcRfp41RMjMtfMZKTK9qXGUqY9UbT5E6EWk7fIy
+ gew40nNIgDA4EvvAZDEaUzqahRwBH7eOeGD8O1cA2bxP5w==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bj86gr2vq-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 07:59:54 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-b6097ca315bso4747823a12.3
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 23:59:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1767859194; x=1768463994; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EbPPhp29zliopHcUq8rLzr1sS4za2OraB7V4XcyfAs4=;
+ b=UBh07Nr10aKQ5wvL1/Z8yzpWxjUXvqq+FNcq5irOr5j9+u/iWZikPrYL0Z320nzKn5
+ U3v8kSYFgevEFk6Aj67xzgblj5fkea1/BlGOcjoNuBkmeGLyDP5c44tbUwUPCC+wHpZ7
+ BJoNxW+RjR/dwpuB+XO2SB2iYQq+KE3rDJCino0cDJ12za31tYJMN8cH7/IVEQm//1ND
+ 5v1G1C59R4dUQXiWyYIwViNI2RCkqaUbs181s3ky7xSAWKNLZaN/P+cG2xnzBVhNr7LT
+ 2rQafgb72TVo0fiSPwWTHAUh1rkjy70liRvqdHn4eICu37zJb93ubAYki2dnc5snHP56
+ opRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767859194; x=1768463994;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EbPPhp29zliopHcUq8rLzr1sS4za2OraB7V4XcyfAs4=;
+ b=khg0xNuKtmlFltrlnEpwe1dqLEVJQePWmgqHKNWkAWK49bO2sGZb43h9AGZ2i9r08X
+ VuBcz24W5iCqt6SzYzq513s2EYxzEJi7DPVzCxIoGPm6KXhf6SlrYS3NRNfOA5/l1Lky
+ ACD8X7gZJ7KvM3opxGL44k0Mc9tmBdopis1lOtol3y2x41Jz7WuWdtuMBVygYRzH4dL/
+ rUQ+SuVoKTdsxUZ1s3RjUfMtqU36ZVertX06nQz70eYJPnvIcikSfDFlZrdEviMIgf63
+ zFgNiUNH9baeE4futP3rSXfpyYHZp+Eg1pRZ+6YdS6VUzZFKbkgUdTwkyTOUBmqfqIFM
+ I+cQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZ+/2MyL67hC3RyGvGrY13rC862xRYq03i37CilvjaSfyjZH9lV5CnCYFY1sxjYLdvU+dmUmk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1fq+G9k5wsBAXfyP7DEIbF9gYgiD2maJxSpSkEUNqEFlbf6ut
+ SPrNseDC2f5HYFw/AGTmlmDW3vjTspxx99Yw7DHgeX0biLPt2vYJ2a4PGQuaGN7V+tI1l1iZN/Q
+ Zieh+dhrfPw7t52m9GEGuJLeJDGaMemHUiXKyAYUDUEcP1nMcUDHZ061g
+X-Gm-Gg: AY/fxX6j7D5r3+d5gxoP439cNMTwGT+o1b/Q1ziHMHSkxbDfeACNHYiIABFZNs2xaNR
+ Px5DbFfX1w+3/wuIs9BWsckS6wcEIoO0v8nq+8SYUu+hFODC5LCYsDFqjUkFKI+XzdRCw/YDluZ
+ ybHXfQEjdFtgM1F2Vqh5JrBA6q5ufy7efEb9PbqJoBVJhbFGMuFkA8TwkvZfcyZTudnZPiYPbDq
+ +keQ4LGtQfDIoAC4B98havc6JzCGsVPBQzONpdgOk1g90xmAbw/RE4CRSv+axsAEWTD8N+tXPJ6
+ C0YM6Br6DBsnAv7HKEjobusUbc7188BFTsbVWp/MVECTt8EfKg4Kpi4s2rroGUsPej+r/V80hYU
+ 02ofIOud8uleuV57AXIF2BFn9eaEuF5B/+jwpLOjJVtsFTTcOQ+JZ5atvqMrT1vAxsRXKJfse+E
+ eLMcNLzVSlxy9hSpx3x5IafyTqyAKZfTfosLgQPvA=
+X-Received: by 2002:a05:6a00:4c13:b0:77c:6621:6168 with SMTP id
+ d2e1a72fcca58-81b7e53eb41mr4708290b3a.30.1767859193578; 
+ Wed, 07 Jan 2026 23:59:53 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEDhvIuI8eKLilH8BgLeMHf29cXavmn1XsY/rhBvXPW0pyrwbEQSnKNTJwCBFlFWoKg2BGcWA==
+X-Received: by 2002:a05:6a00:4c13:b0:77c:6621:6168 with SMTP id
+ d2e1a72fcca58-81b7e53eb41mr4708270b3a.30.1767859193071; 
+ Wed, 07 Jan 2026 23:59:53 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-819baa1969dsm6913440b3a.5.2026.01.07.23.59.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Jan 2026 23:59:52 -0800 (PST)
+Date: Thu, 8 Jan 2026 13:29:47 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, me@samcday.com, sughosh.ganu@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] mach-snapdragon:: Add support for fastboot reboot
+ reason detection
+Message-ID: <aV9j82/JfzFMn2X3@hu-varada-blr.qualcomm.com>
+References: <20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMBPR06MB10365:EE_|GV1PR06MB9194:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2d41d88-968e-479f-ce8b-08de4e8b5564
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7142099003|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TjUzZzR5UDFyL0NOWW5YZ0FKVnJtV3VWbWRGeHlzbG1uL1djbVg4SDF3OFR4?=
- =?utf-8?B?d3AzaEVja0U2a3YzVGJacmU4NTVkdEJvYjVYVHlzWnZrRFJXMVpNSG5JRS91?=
- =?utf-8?B?SjZrZXhTRHlkenUyUzJRTUg2dlRUb2pINDFxMjNOUS92TXBhU1ZMcVZzTWUz?=
- =?utf-8?B?NTRXd2FOMUl0M3IxYnZFR2ZFR0lpU21PelVwOHZCaHJ5TU13ampZZFZZbXNk?=
- =?utf-8?B?dzU2SGdqNnlBRkptTG5MM3VkL2R0TEkxejlWYllJMUczdWpqZ0R2RDE4SnVj?=
- =?utf-8?B?Sy9reUZxUGllTFNNK1EvYTlnR2R4RU9LWkg5by9qUFdzMW1TQXM5dGo5Tkw1?=
- =?utf-8?B?L2VZOVpqREVMS1RvNGlWQTlIWWNZTjRLZDJQb3hiSnR1SElDN1pOa1JlTUow?=
- =?utf-8?B?SURkejBXaEI0OEsweS80SU1ORkJXcERrZjIxYkdBMDI2MGlscEl1LzRPL080?=
- =?utf-8?B?cTdZdUFVa01NamZuVSs5MVF5c09HTG9hOEYxd1ZrVHRRd2cxaVVtNHFpSHBw?=
- =?utf-8?B?V2hYMDZ3OXh1ZWxNZlNmTTB2b2tyNTRPU3FuNDFmTGZ0a2lpbGlGY2lSNHR3?=
- =?utf-8?B?UVU1aG91YUVKVlpTT01XVnJOYzZ6Ylg0TEJNUk5jOGhVSmx3NWtwbmd3bnJX?=
- =?utf-8?B?T1N5T0p2V0QvaDVLNDZGV2JpZXhnQUgxTjlBYWoxNmRlck5EUjZpTGpZT0hZ?=
- =?utf-8?B?Y2Q5ck1tOG5DbVVsZnhyRFBKZDFQRGM2bnJka0RFVjJtYUxjTFVuazlucFBB?=
- =?utf-8?B?aVhGaDQ3ZEE0akk4VGVnUDZVcVhJNjlQYURWK1k5Zy9ENXpwbVMzUFlBZTVy?=
- =?utf-8?B?cmg2TUtjdyszaklabGtGRWhzQVR6V3lBK1RwcDloSGxtaXNTanlOMmtIV0Rk?=
- =?utf-8?B?QkVEOXRMaEZaRHd1L1ZFVzdjTEQvTFpWc3hSOGw0d0I5TTNRUFExdFBpVkhP?=
- =?utf-8?B?N3RSTklKNWtrWDdtdm1rdDRHSTR3cDJUSm94SVZqRVB0RDUwZ3RxWmtTVnJm?=
- =?utf-8?B?eHcwYTFqZmJEQmxzQVdIWGhiSkxaWVA3azU0bHdjRERBcHRVb0YzNitTdFk3?=
- =?utf-8?B?VDhMRnQ3M1RxTkNWUmdxK1BMLytKWC9TZktFTERhNHB1SFNWczNybURZMGpn?=
- =?utf-8?B?dUZrQXJSRmFadWdtZ3hsaWljcERKRnVuY1lYOUhkWjVZVVJpeHo4N3Z4MllQ?=
- =?utf-8?B?SFpTTjhCRTZVdGQzakhMQTkxYWZJaDFVTEY1MFRRalQwK054OEVQbnFQZEZ6?=
- =?utf-8?B?bmgrbEVId0RyVm8rUVRMNzJaUW12eFJ0Zlc2Ukd1S2hSWlFzUVVab2U5ZUY5?=
- =?utf-8?B?ZnNHek5udTVjZzZVT3c3blVrSGgvNTZ6bVVKM04yZDN6OHY1Y3dDa3RVQWtH?=
- =?utf-8?B?UVk4UzVhekt4ZytseWxFSElMdmFQWkg2KzZnY01vNzg5c1pCTXVrNkpvTHYy?=
- =?utf-8?B?NnZFNzMxR3FvUnVyNTdFWmZNb05mWGdPVGZuWVc5dFpkTVFiMUJsNENzUjVr?=
- =?utf-8?B?Vk9qbzRTdU5rWFBZQUVkbGVLcTk0L3hjSkVTNm0vYXowRDBBT3VmNXdGNmYw?=
- =?utf-8?B?NmJXQWVzV0NCL0Z0bU1zdmhMMVMwdk1ZSFJjQW5XaUE3RFkvc05mQ1ZzVjRI?=
- =?utf-8?B?YnVLdXdwb0hrM2FOUWFkUmZxcFlicW9lS2pBQ2ZTK3BFcHJucEdyUXViUjJP?=
- =?utf-8?B?TDVmYzVidGdqUitRYlpvSXJIZnM1ekVuRnZrY0c2UkFITFlnY01xcjBZNWE4?=
- =?utf-8?B?Smw3MHNMd24ycHhqY00wQzRKOWxoSlJIaWlFekNYMVI5cFFYM2ZOSDNXemVB?=
- =?utf-8?B?aWZMZEZkdXhjTTdNVy9BQ1ptcG1VUEN6eTVIQkxLc1lpdmM0Z1o5UVZhT005?=
- =?utf-8?B?c1pwenh0ei9zUi9TYUhJbGRmczZhUll3THd0ZzFTNzg1V3hjdlhXeXRtOGYw?=
- =?utf-8?Q?VCo3q4i0rjmmZJh4hcmc405gqCfI8xt2?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AMBPR06MB10365.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7142099003)(7053199007); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S3NXQTRaS1JwdkN2QWI4YlRuQk12Q3lKeGdkcFVzTDJpYkg3aVNzL0psMDdB?=
- =?utf-8?B?S0dESE1lSWhSZndObGppNzBGdlh0WVU5Q1ppdVZFc05icTNmMjF6ZEV5N3pG?=
- =?utf-8?B?Y0h3UVhDZGg3QkhGb1lkRDZFcVBvWnpIQzU5Z1RIdUo4dFNYQzFKTDFRbXN6?=
- =?utf-8?B?OXZSOW1hMnhIV3EyUmgvWDBzSnJBR214UFVxWkM3NUVPQmhqc1QweUU1aTdH?=
- =?utf-8?B?S2FBVWZnRDhIUi9oa21jQUZQaTl0cHZiWWIyUUhGV2hsWE5YK011dmRTOGNZ?=
- =?utf-8?B?bERLSmVvNHpkTHhSaFowUHJ3SThxWkpKK3VKaXZ5ajNpQ0gvdm92OVoyL1kv?=
- =?utf-8?B?Ky9vRS9xMDJRL21sNTZYQzd5VHJVTnF5a0VHMjEyYUNzcGZ0Mkl2ZnY0OTkw?=
- =?utf-8?B?cFZLYjlSeTF1ME54UmViQ3hpL0hlSXNkUk9KMS9Dakc0RlNLMlcxd3FRL1VC?=
- =?utf-8?B?NkxpdzUwWWRTWWRxMWpzMy96TEJ5UlNFaUYvTndJTTIvclRKb3hiUVhCSFdl?=
- =?utf-8?B?ME1aNm9aVlc2dzkzOTBEOE5rOGJaQmNidjM1ejYyc2FZQWNQU042RW9JalNS?=
- =?utf-8?B?Rk5mM0c4ZFd3eTRiZU8xTTFIMDlSSWt1bHVpNlJpVnUzRVNXb1h4dHNqVjI4?=
- =?utf-8?B?eml1S0l3MWlML1d5bDdPaitER1piYkFEckE3K0ZtTmg2a1JPbS9WMGhTandz?=
- =?utf-8?B?MDRjMFVjQjhFL1hockV5dHY0SWw0SjFkK1UrQTkvZmp0ekdQeGFmR1V6MDB3?=
- =?utf-8?B?TGRmYWZhUklFWmdydE5maFc2QkhNdTlNVlJVZDJmVzRxQkQrNUtlNGRub3BM?=
- =?utf-8?B?cFFFdTF5Sy9OdlFrVEhCN3VmMU9hOWQ0OGNsSDNOYTJ3MWlKRFRnNmhpZ0Jj?=
- =?utf-8?B?Y2lzd1gvcUtzYzNyMGd2TXBGU256WktwbHc2VVRLdWVQMWR1T1dMaURHZkwv?=
- =?utf-8?B?MEt1TmhpbzR3OE5ZTm9zdW5FU2pRZmxWNUhCRkhQUTV5LzIzcHczUDFHK3gv?=
- =?utf-8?B?NDdFcG1nWEVHZndaOEd5d3Q2bzRSR3dWNlFUTXMxKzRnZ1R3aVhLV1NWY2pB?=
- =?utf-8?B?YklrbVVSMGZNeWRHbjZkbTN0S1VpYnZ0dHVTS0RaUVhjOGZKaWxJMlVpRngz?=
- =?utf-8?B?K2RhSzI0VUtPM2Q5TXB3eHMyQnVkZFJDUzBJSTNlbldaRjd0QXVRbmFoNTVq?=
- =?utf-8?B?Tm91bjg2bEs2emYvMjhxMHV2dUNYT09CMFVJMDErWWh5SE5DNUkzQ0VZTXNo?=
- =?utf-8?B?Und4bmRjM203aTJEMGpMTHFyMzJZakpmYkx3dHNnd1JtclVKcTJ3SGF5cUdL?=
- =?utf-8?B?T0ZicU16ekc4YTdMQXk0R3RhQ0VLU2pxN1dBMDlPcUNrbUo0UUpFdEsvNFlH?=
- =?utf-8?B?WmNaazhhK0gvMDJwRERzVmNaeHI5RTJTTVlJaWN5bjVFTUUyWFVSaUxVUEdy?=
- =?utf-8?B?aTAxZnlHdW5MTnJHT1ZSTjFhaC90YlRRVlBpL2dVZnl0SGVwV3ZaQkxxZFdH?=
- =?utf-8?B?enBFTFFCMmx3RXlMbm9iaUY3N2E4L1lGZGdVSWNuYXFoRTl0SUNwbGJ3SURx?=
- =?utf-8?B?QmloZnZXd1RKQmUwNEpuME9CcmNnejFsdDk4RjdRSld1eDJRdWxNWUVMOEZY?=
- =?utf-8?B?Mzc1emFodWlnbGJuNzNSNk5JV2RCWEtZbC9sZWlDdUlEMWo1aWJUbXZhVXpD?=
- =?utf-8?B?bGtwM2oxYXdPb0hTSy85Um9SN1Zmb1VGQUNYV2VFZ2VnR2FoZ3NTQk9YWDJp?=
- =?utf-8?B?ZnhsbHhzbk1obk55bTBZUWRhdGxjNVM1aGNudlFJQ3BIVU9FMG9scFlSNy8z?=
- =?utf-8?B?YWgxQVl1NzN0WFVwaW5iWVNNQnpHYlcrNUF3S1VIZ2FCMTJ6Z1lKRXRiU3B2?=
- =?utf-8?B?M0hxK2piZnY3QnpHSGFuaEhlTlIwZFlwVXltaTJ5RXJVaDl4Tjg2Q0pyZG4r?=
- =?utf-8?B?OVV3c2FrRW1nNFIwZDN3YkNOT3ZFY2xqWGhXQUc5UkFtTExQbmlhVGtsdHlj?=
- =?utf-8?B?UEJXSkVWanpuUVQva2JnMmljZXU2TUIyMHRkWXpOZG9EYTYzcWd6ZTdycVdj?=
- =?utf-8?B?ejRoa2dnR05ueElVVEFHUHN0VVhVWXNudnRxSENQV3NNTW1WUXllTzU0UU9Q?=
- =?utf-8?B?VEk4U3g3ZkE4aHIyamVsKzkrRUFLYW9VVjFhWVYrWG94czYrNjhwejh0bytE?=
- =?utf-8?B?Z1RVdDM0TGtGK2J3eHNtZDFjd3B2WDAzWXVSQ2tLRmZ3Mzk3Z1hDM2hmQVgr?=
- =?utf-8?B?b0JUQ284QWdFdnV0NHg0R3VEdVpyUlpIYUFVcS9tbjZTSG42L0todjVRRlo3?=
- =?utf-8?B?V2diVXE2WHNaZS9yTDEydUMvR29zMTA5TXdDV1A2bTFvK25STnViQjExeHBP?=
- =?utf-8?Q?uf74nz96XdWszpgw=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2d41d88-968e-479f-ce8b-08de4e8b5564
-X-MS-Exchange-CrossTenant-AuthSource: AMBPR06MB10365.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 07:55:47.4707 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gN8aXWHhTjAIrrw3P5ObMW4hSALGoJfxZPG3hzmZXY6Eu+8RRpmKAOe8JifBOq0+iaOj7MtlEJHZ2Pse9P1hRw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR06MB9194
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=ZNjaWH7b c=1 sm=1 tr=0 ts=695f63fa cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=ELy4k7POSWYNcTnjWosA:9
+ a=CjuIK1q_8ugA:10 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: jQsSCFspWg9iT_ZPOHYE_BHHOMOkACgj
+X-Proofpoint-GUID: jQsSCFspWg9iT_ZPOHYE_BHHOMOkACgj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDA1MyBTYWx0ZWRfX3Pfvq/p2tyhq
+ Z+zXhOn3GXR9XVVJ65+Oqj/1s7+/63ozcw0b27fM5cyXzLVAqwEiq02AXCayfZDpc1O8lupIPMc
+ QUukq09jpPaGxfrKf2fHND/+0EaTfODEu/EJbbZDvh1jpKsKfnm2moGLi7zpCgXsaslAiRhmDvQ
+ Cg4Q7ij4HtROhAx1xNP4V6fck4R6M//wHMjMRFbwlBO2u/Auf16UGRyZ6FIP8zPFH9LJDymXmo6
+ B3C7uNHAvoh4rwMe9zGERBe5bvVWnuRWIAEccwXmk7zhjN0+IwL9e2B0GR84Ol20LfbDSfZ8y6w
+ jIAahIks94xbST5DLioyy0qHY2gxWphucBuHk0uvdwMnPPFoAxVNdM0MadHlXKl3MunG80mxi8l
+ uCIKes3xX8i29TXWyCfyVktpCwKr+1znkci7+YmqOHVP7Gj4ZWD1Q54pg+2pTlw7wy4mn6GkkH9
+ OTkIO/qYBGc4DlkHK4w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-08_01,2026-01-07_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ adultscore=0 clxscore=1015 phishscore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,105 +149,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neal,
-
-Few comments below for consideration, apart from that:
-
-Reviewed-by: Tomas Melin <tomas.melin@vaisala.com>
-
-On 08/01/2026 09:46, Neal Frager wrote:
-> Add command for checking if boot was authenticated.
-> 
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-> Signed-off-by: Neal Frager <neal.frager@amd.com>
+On Thu, Jan 08, 2026 at 12:25:33PM +0530, Aswin Murugan wrote:
+> Add functionality to detect and handle reboot-to-bootloader requests
+> by reading PMIC PON (Power On) registers. When the device is rebooted
+> with the bootloader flag set, U-Boot will automatically enter fastboot
+> mode.
+>
+> This implementation supports multiple PMIC generations:
+> - Gen 4 PMICs: Uses PON_SOFT_RB_SPARE register (0x88F)
+> - Newer PMICs: Uses SDAM-based PON_REBOOT_REASON register (0x7148)
+>
+> The PMIC model is automatically detected via revision ID registers to
+> determine the correct register addresses. After detecting a fastboot
+> reboot reason, the register is cleared and fastboot mode is entered
+> via the "run fastboot" command.
+>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
-> V1->V2:
-> - extended zynqmp command with verify_auth sub-command
-> - changed return value, so it can be used with scripts
-> V2->V3:
-> - separated status and ret values
-> - replaced BIT(0) with ZYNQMP_CSU_STATUS_AUTHENTICATED
-> - changed env variable name to "boot_auth"
-> V3->V4:
-> - removed unnecessary zynqmp_verify_auth function
-> V4->V5:
-> - added newline to zynqmp_mmio_read error msg
-> ---
->  arch/arm/mach-zynqmp/zynqmp.c | 35 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 34 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-zynqmp/zynqmp.c b/arch/arm/mach-zynqmp/zynqmp.c
-> index c0398a466ff..bcfbe229148 100644
-> --- a/arch/arm/mach-zynqmp/zynqmp.c
-> +++ b/arch/arm/mach-zynqmp/zynqmp.c
-> @@ -362,6 +362,36 @@ static int do_zynqmp_reboot(struct cmd_tbl *cmdtp, int flag,
->  	return CMD_RET_SUCCESS;
+>  arch/arm/mach-snapdragon/board.c | 146 +++++++++++++++++++++++++++++++
+>  1 file changed, 146 insertions(+)
+>
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 5fb3240acc5..02b84297e05 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -19,6 +19,7 @@
+>  #include <dm/uclass-internal.h>
+>  #include <dm/read.h>
+>  #include <power/regulator.h>
+> +#include <power/pmic.h>
+>  #include <env.h>
+>  #include <fdt_support.h>
+>  #include <init.h>
+> @@ -32,9 +33,32 @@
+>  #include <usb.h>
+>  #include <sort.h>
+>  #include <time.h>
+> +#include <command.h>
+>
+>  #include "qcom-priv.h"
+>
+> +/* Reboot mode definitions */
+> +#define QCOM_REBOOT_MODE_FASTBOOT	0x2
+> +#define QCOM_REBOOT_MODE_MASK		0xFE
+> +
+> +/* PON (Power On) register addresses - Gen 4 PMICs */
+> +#define QCOM_PON_BASE_ADDR		0x800
+> +#define QCOM_PON_PERPH_SUBTYPE		(QCOM_PON_BASE_ADDR + 0x5)
+> +#define QCOM_PON_SOFT_RB_SPARE		(QCOM_PON_BASE_ADDR + 0x8F)
+> +
+> +/* PON register addresses - Newer PMICs (SDAM-based) */
+> +#define QCOM_PON_REBOOT_REASON_SDAM	0x7148
+> +
+> +/* PMIC Revision ID registers */
+> +#define QCOM_PMIC_REVID_BASE		0x0100
+> +#define QCOM_PMIC_METAL_REV		(QCOM_PMIC_REVID_BASE + 0x02)
+> +
+> +/* PMIC identification values */
+> +#define QCOM_PMIC_TYPE_QC		0x51
+> +#define QCOM_PMIC_SUBTYPE_GEN4		0x4
+> +#define QCOM_PMIC_MODEL_PM855		30
+> +#define QCOM_PMIC_MODEL_INVALID		0x00
+> +
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+>  enum qcom_boot_source qcom_boot_source __section(".data") = 0;
+> @@ -489,6 +513,125 @@ static void configure_env(void)
+>  	qcom_set_serialno();
 >  }
->  
-> +static int do_zynqmp_verify_auth(struct cmd_tbl *cmdtp, int flag,
-> +				 int argc, char * const argv[])
+>
+> +/**
+> + * detect_pmic_model() - Detect PMIC model from revision ID registers
+> + * @dev: PMIC device
+> + *
+> + * Reads the PMIC revision ID registers to identify the PMIC model.
+> + * This is used to determine which register addresses to use for
+> + * reading the reboot reason.
+> + *
+> + * Return: PMIC model number or QCOM_PMIC_MODEL_INVALID on error
+> + */
+> +static int detect_pmic_model(struct udevice *dev)
+
+return type u8?
+
 > +{
-> +	u32 status;
-> +	int ret;
+> +	u8 rev_id[4] = {0};
+> +	int ret, i;
+> +	u8 pmic_model;
 > +
-> +	ret = zynqmp_mmio_read((ulong)&csu_base->status, &status);
-> +	if (ret) {
-> +		printf("Can't obtain boot auth state\n");
-> +		return CMD_RET_FAILURE;
+> +	/* Read 4 bytes from PMIC REVID registers */
+> +	for (i = 0; i < 4; i++) {
+> +		ret = pmic_reg_read(dev, QCOM_PMIC_METAL_REV + i);
+> +		if (ret < 0) {
+> +			log_debug("Failed to read PMIC REVID reg 0x%X: %d\n",
+> +				  QCOM_PMIC_METAL_REV + i, ret);
+> +			return QCOM_PMIC_MODEL_INVALID;
+> +		}
+> +		rev_id[i] = (u8)ret;
 > +	}
 > +
-> +	status &= ZYNQMP_CSU_STATUS_AUTHENTICATED;
-> +	if (status) {
-Even cleaner could simply be
-        if (status & ZYNQMP_CSU_STATUS_AUTHENTICATED) {
-
-
-> +		printf("Boot is authenticated\n");
-These prints (is/is not) seem redundant to me as the env is populated
-with the required boot_auth value. Perhaps change to debug statements or
-remove?
-
-Thanks,
-Tomas
-
-> +
-> +		ret = env_set("boot_auth", "1");
-> +		if (ret)
-> +			return CMD_RET_FAILURE;
-> +	} else {
-> +		printf("Boot is not authenticated\n");
-> +
-> +		ret = env_set("boot_auth", "0");
-> +		if (ret)
-> +			return CMD_RET_FAILURE;
+> +	/* Verify this is a Qualcomm PMIC device */
+> +	if (rev_id[2] != QCOM_PMIC_TYPE_QC) {
+> +		log_debug("Not a Qualcomm PMIC (type=0x%02X)\n",
+> +			  rev_id[2]);
+> +		return QCOM_PMIC_MODEL_INVALID;
 > +	}
 > +
-> +	return CMD_RET_SUCCESS;
+> +	pmic_model = rev_id[3];
+> +	log_debug("PMIC Model: 0x%02X (Metal=0x%02X, Layer=0x%02X)\n",
+> +		  pmic_model, rev_id[0], rev_id[1]);
+> +
+> +	return pmic_model;
 > +}
 > +
->  static struct cmd_tbl cmd_zynqmp_sub[] = {
->  	U_BOOT_CMD_MKENT(secure, 5, 0, do_zynqmp_verify_secure, "", ""),
->  	U_BOOT_CMD_MKENT(pmufw, 4, 0, do_zynqmp_pmufw, "", ""),
-> @@ -371,6 +401,7 @@ static struct cmd_tbl cmd_zynqmp_sub[] = {
->  	U_BOOT_CMD_MKENT(rsa, 7, 0, do_zynqmp_rsa, "", ""),
->  	U_BOOT_CMD_MKENT(sha3, 5, 0, do_zynqmp_sha3, "", ""),
->  	U_BOOT_CMD_MKENT(reboot, 3, 0, do_zynqmp_reboot, "", ""),
-> +	U_BOOT_CMD_MKENT(verify_auth, 2, 0, do_zynqmp_verify_auth, "", ""),
->  #ifdef CONFIG_DEFINE_TCM_OCM_MMAP
->  	U_BOOT_CMD_MKENT(tcminit, 3, 0, do_zynqmp_tcm_init, "", ""),
->  #endif
-> @@ -446,10 +477,12 @@ U_BOOT_LONGHELP(zynqmp,
->  	"	48 bytes hash value into srcaddr\n"
->  	"	Optional key_addr can be specified for saving sha3 hash value\n"
->  	"	Note: srcaddr/srclen should not be 0\n"
-> +	"zynqmp verify_auth - verifies if boot.bin was authenticated\n"
-> +	"	Returns boot_auth : 0 not authenticated, 1 authenticated\n"
->  	);
->  
->  U_BOOT_CMD(
-> -	zynqmp, 9, 1, do_zynqmp,
-> +	zynqmp, 10, 1, do_zynqmp,
->  	"ZynqMP sub-system",
->  	zynqmp_help_text
->  );
+> +/**
+> + * check_fastboot_mode() - Check if device should enter fastboot mode
+> + *
+> + * Reads the PMIC PON (Power On) register to check if the reboot reason
+> + * indicates that fastboot mode should be entered. The register address
+> + * varies depending on the PMIC generation.
+> + *
+> + * For Gen 4 PMICs: Uses PON_SOFT_RB_SPARE register
+> + * For newer PMICs: Uses SDAM-based PON_REBOOT_REASON register
+> + *
+> + * If fastboot mode is detected, clears the reboot reason and enters
+> + * fastboot mode via the "run fastboot" command.
+> + *
+> + * Return: 0 on success, negative error code on failure
+> + */
+> +static int check_fastboot_mode(void)
+> +{
+> +	struct udevice *dev;
+> +	int ret, reboot_reason, reg_val;
+> +	u32 pon_reset_addr;
+> +	u8 peripheral_subtype;
+> +	int pmic_model;
 
+u8?
+
+> +
+> +	if (!IS_ENABLED(CONFIG_DM_PMIC))
+> +		return 0;
+> +
+> +	ret = pmic_get("pmic@0", &dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Detect PMIC model for address resolution */
+> +	pmic_model = detect_pmic_model(dev);
+> +	if (pmic_model == QCOM_PMIC_MODEL_INVALID)
+> +		return -1;
+> +
+> +	peripheral_subtype = pmic_reg_read(dev, QCOM_PON_PERPH_SUBTYPE);
+> +
+> +	/* Select register address based on PMIC generation */
+> +	if (peripheral_subtype == QCOM_PMIC_SUBTYPE_GEN4)
+> +		pon_reset_addr = QCOM_PON_SOFT_RB_SPARE;
+> +	else
+> +		pon_reset_addr = QCOM_PON_REBOOT_REASON_SDAM;
+> +
+> +	log_debug("PON reg: 0x%X (subtype=0x%X, model=0x%X)\n",
+> +		  pon_reset_addr, peripheral_subtype, pmic_model);
+> +
+> +	/* Read reboot reason */
+> +	reg_val = pmic_reg_read(dev, pon_reset_addr);
+> +	if (reg_val < 0) {
+> +		log_debug("Failed to read reboot reason: %d\n", reg_val);
+> +		return reg_val;
+> +	}
+> +
+> +	reboot_reason = (reg_val & QCOM_REBOOT_MODE_MASK) >> 1;
+> +	log_debug("Reboot reason: 0x%02X (raw=0x%02X)\n",
+> +		  reboot_reason, reg_val);
+> +
+> +	if (reboot_reason == QCOM_REBOOT_MODE_FASTBOOT) {
+> +		log_info("Fastboot mode detected, entering fastboot...\n");
+> +
+> +		/* Clear reboot reason */
+> +		reg_val &= (~QCOM_REBOOT_MODE_MASK);
+> +
+> +		if (pmic_model == QCOM_PMIC_MODEL_PM855)
+> +			pon_reset_addr = QCOM_PON_SOFT_RB_SPARE;
+
+Why the pon_reset_addr identified in the 'if (peripheral_subtype ==
+QCOM_PMIC_SUBTYPE_GEN4)' check can't be used here? Is there a
+possibility of reading from one register and clearing another register?
+
+-Varada
+
+> +		ret = pmic_reg_write(dev, pon_reset_addr, reg_val);
+> +		if (ret != 0)
+> +			log_warning("Failed to clear reboot reason (%d)\n",
+> +				    ret);
+> +
+> +		/* Enter fastboot mode */
+> +		ret = run_command("run fastboot", 0);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>  void qcom_show_boot_source(void)
+>  {
+>  	const char *name = "UNKNOWN";
+> @@ -573,6 +716,9 @@ int board_late_init(void)
+>  	/* Configure the dfu_string for capsule updates */
+>  	qcom_configure_capsule_updates();
+>
+> +	/* Check reboot reason for fastboot */
+> +	check_fastboot_mode();
+> +
+>  	return 0;
+>  }
+>
+> --
+> 2.34.1
+>
