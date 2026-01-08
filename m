@@ -4,163 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165BDD1D47D
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 15:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00DDD1D47D
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 16:15:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8F56841B1;
-	Thu,  8 Jan 2026 16:59:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 5EC3484158;
+	Thu,  8 Jan 2026 17:15:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bs9f28FS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eHqQVPjF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D955C841CD; Thu,  8 Jan 2026 16:59:08 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6347884158; Thu,  8 Jan 2026 17:15:14 +0100 (CET)
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81D5C84158
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 16:59:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id B0A7884150
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 17:15:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s8J0JI9zhDLwW+vsRh3lJh7Usm/A5z5ja/AivpzoCcNLgzKo7Iy4yq2hjqInzOxVGsQE+aQvH3k/Bd5oDmxy76FLIIgysOnicaGFbncbCFK811GVApw0ePXLk9cGSPtjnMecVlFbco1J7+AElRm7CLv0/Mn22OIYC96/p5Rx9An7qZdQhpiBWqj2fiYJg4jkWJR5HNWyWqitvHE4TvmAUez62QIn8OyGblw0Ar9KriKuuMhVFGdQBbAoa0MMQD9uaxwt70L1TRI49/Juh3V1y2adUnpmGQLgzFi8+ZkWxVgV0UZyjkkrcQpT1hcZI3i+p76pQaagjEtl1WyVMbh2CA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Vq+RSJ//jrAnGmLJLkVcJb7EeQyxbCI8m4vwY3t8ITs=;
- b=kfGa822hzjk2FOQsqEYRMxBNcSahuL8rl/LsmJwm496rKLU2Qz1N27Rej8qZDs+KAgTdYEjDiDYl7tnlIk4RcVmKotR2XT5eFKx0YdnzD61RLi0gu6Sxg6UcrhWq3ScRqrvnXhSNKKLZxpZxv1uaOld3H716ltLx8OeE0K7LI/F7eNsTAjq62g4fgmc02waIVqeT6OV9CWDaq+0MK7hdPiy5++vo7BCcV8OL0XZz12wcnBXNy5mQqckGv3CZe36NEI40mbqIhGJXVPvywidWv7wiKt7qXz6N0J0Kefh84a3bPnBMK/c8W+ul8zT17JgEtspUQTKfDd7XgicF26EnkQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Vq+RSJ//jrAnGmLJLkVcJb7EeQyxbCI8m4vwY3t8ITs=;
- b=bs9f28FSiirujoPYR6q+W0g35/JC07qoYTHTvhYI0MMBYsl5oUav+8w8sbWcpmOOFeUCp1VoijmAYPd8IKyJjjGJ3ceOBfxSr2+MPau+opS+0LbK1wqksIGknUX1oGp8PW8zdjzawBiAU+Grxm5UzXCjVHe+aeI+R+KbMbDjXJw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by AM9PR04MB8209.eurprd04.prod.outlook.com (2603:10a6:20b:3e4::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
- 2026 15:59:03 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9499.003; Thu, 8 Jan 2026
- 15:59:03 +0000
-Message-ID: <a1a22e85-8812-4064-8b9a-d779884edbbd@cherry.de>
-Date: Thu, 8 Jan 2026 16:59:02 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: unclear license identifiers
-From: Quentin Schulz <quentin.schulz@cherry.de>
-To: oliver Fendt <ofendt@googlemail.com>, u-boot@lists.denx.de
-Cc: Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>
-References: <CAFoF8fC4foffYJgYm9CkViET83gDu05noVRxLxgs+KWXN_-LBQ@mail.gmail.com>
- <f22fe5c8-d98c-4b20-a9b2-a8a5af1542b9@cherry.de>
-Content-Language: en-US
-In-Reply-To: <f22fe5c8-d98c-4b20-a9b2-a8a5af1542b9@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0170.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b7::11) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x642.google.com with SMTP id
+ a640c23a62f3a-b802d5e9f06so481855866b.1
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 08:15:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1767888911; x=1768493711; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IiQ2M263m7QTXKwLN4tDC8aWCnEeeTKjVpkEGAomMY8=;
+ b=eHqQVPjFYtnoXxFqfMA3sReVeSsdYZK+ZYoI2rx7INBLFXnVWY6XZYAJOVWXMemAYV
+ B0Yq0qOohG51IYG/5HFTCFz+r/QlGHHID1FyiVieM3HidXM3DpTJtwBpSJ9puhd+Xyxc
+ k4NTtyb8tFvtLKB8U2EXWhqU6YFFKlSYZ/bdXJKNGe2gDX0F9uvOgBBF+M+dU8Fe6WBy
+ LmjbRIkoFi0F1ZNZgBE+b/181rhggBZFaFDtt8cm22JCc+BYH6tC2Pu7ZG/jVBRzblbE
+ Qda1XI0t4gIwltxiPZSg8+rMP8ILyvg5hWu2ZcigiMXhVRrcNAco8GBW1aKVtF5fIDjr
+ ycpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767888911; x=1768493711;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IiQ2M263m7QTXKwLN4tDC8aWCnEeeTKjVpkEGAomMY8=;
+ b=Rvt0RDrvZXxllEeHDtOkFyeqWfl+mIUr/e4+VndH1P6LwwOgOsuQSEi2btaSFYrfoA
+ 8o13oE7VBzSlQgnHInyEyFCykZy+n2yGINghjEiOIUi8g1l8M9m+vNwj2pBzWUtK4Bow
+ nLBKn9m13LLZLctclTuqQCmOzMhHfk5K5C3ZMTiiHg2C+D2BNbk6tGRUJfLp9ittQZvp
+ n5BTaAS3UoONBAW2NWUdt+OO1iEi2j5do92ub38YAhC122XUNE7MnmGY8cFApRi14ZvY
+ o25uLfq4nMbOjxzwM1BAaAE+TZU/a1ZB/zIEfNBBIhnVYzR/ljjmrl//Tzaibo+Qz8Zf
+ 7SFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0Eek2iS+yCdch+pDL3qWic2aVHEYmSHv53i6KcbXMTmHKVNCBWFdcDklZd1rITQCHP1PRmh8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxR4nz0ns9qlEKJ0XHOc6BTnGzbcxKQ7IFIi7flpjAtV+88sNO1
+ 04LLVVfilLzSoVd+0T20YhYz3VtUkqS3Yc3c6icdN3cVTwmjQv1h0s8BF18O2nSALa0=
+X-Gm-Gg: AY/fxX4pXDB64pMTqWNaFYlSv4dntbXJtTc9PIcBvtM49FyrVZRehXe1n+SFFcTWG2n
+ FdEbljkta0K4KWLHK7zmAuOw+G0GOSgzcg2tNEK7aIlCHCcVX5Sf99KUYcglW8gRCmTHNZf6V+M
+ RtlHbWZoIqljNuyngQysI2vK6Z0OGhjKB3WCIXPii5GX+3WZKqsg8JBhKsGQfqigAeTFI7RhJDN
+ VBtorG1GiPa0wjCy4zaTMYcOFaEKI9Jn4++/sJUHQ6ym2ZvoG/5ThGElnHsh3ZHupjn43L7QXF5
+ hOh8KCXYWkFJmRUUvfAsjJOw0eq/h8pgX2I+PTxH2ai35sZPU4dYeZpoFek33705iQpo4k/3ZqU
+ UP/ky3JqZZr240bPIHV06F9uJ/ktd0yKtrKZ3lTmQwSK8+YGk6CLcAEdapEMNebgRhPHhqry/Wu
+ X4qsQ9o5R6QNtyPlFmWzCVk4+LaeVSEUlPNiOyvkbeVQt+poVA8mU=
+X-Google-Smtp-Source: AGHT+IGr8gtZPpqzuM+ssayJZ4ogdjVB7iKZX7c1OP3fHg8b3u0L+y9v0plDphOgMi5NRBEGal340A==
+X-Received: by 2002:a17:907:3e13:b0:b79:c460:39a4 with SMTP id
+ a640c23a62f3a-b84453acb55mr663991266b.56.1767888911090; 
+ Thu, 08 Jan 2026 08:15:11 -0800 (PST)
+Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b842a4d3229sm828256366b.37.2026.01.08.08.15.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Jan 2026 08:15:10 -0800 (PST)
+Message-ID: <51f32da3-e87d-4e8f-b221-0adb9af4bf93@linaro.org>
+Date: Thu, 8 Jan 2026 17:15:09 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM9PR04MB8209:EE_
-X-MS-Office365-Filtering-Correlation-Id: 88068432-2849-4a36-8001-08de4eced83e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QXFTUURlSXVTSStGZEFJUTZURmM0NldOTlFTb01UK0hjcFk3SndkOWdSZEpZ?=
- =?utf-8?B?Z0hHc29vUy9CaDFaVThsU0FOeVdNNW45MDRFdjBwZFc5WlI4OVJiUnh4cjhl?=
- =?utf-8?B?VTVpNGNZWWoxOURqckM0aUZ2QTd0RlVrOXBLb3FtSUdrdmt6bG9BclI0Ulhv?=
- =?utf-8?B?VDFNdGlJd3BIckNCV282NEE1UTVsUlE5bUd4SlM0bEM5anoxaEJ3elp2R1pP?=
- =?utf-8?B?ZUluY1NyU2VjNWtVemcvcGFwQkNpeDRCM3NqUVBCczU0eXJKVEdSUktadWpS?=
- =?utf-8?B?dlU4RmZLNDl4em93eS9Kc3BZK011NHFsT1BUTzZycGRabXU0eEx4bnZKOTk5?=
- =?utf-8?B?Q3hmUmVVT09PR1UrdmRVTGlJKzdaMFJqVld5SDFJVkl2VXorTnlMeHNvRUpH?=
- =?utf-8?B?WVNuMmp2eXlLZjMrc3ZDUEp6T1VUcDJvbmtrcTVDTStOYm1CekgweFY1cDhO?=
- =?utf-8?B?TDlLYXdRakRDMS96V0tsTCtESGE1MHdvRlM5V2RhUjBMVlcydkpOVHVJNXZE?=
- =?utf-8?B?R21xVXVRSng3MlFZTHYrY0ZZVFBYTEg4ZHBIRm0rMFRBOHpvTXBSVzZnMlNU?=
- =?utf-8?B?aHc0ZW9LdEJZVWVDaWZ5cjNKT1JQZmxtQ2lKZ2lDQ0pCUDdMV05nRDRGaWVi?=
- =?utf-8?B?cmZwd3hQcFlJTFdwV2RPM1ZEa2tSTEl1enpOMTVmdkw0Mk5iUTVyYUxtMXpI?=
- =?utf-8?B?OHdEaUd6aWFMZTFBM1drUGo1Q2tSNW9Lckt0Zjd3Ujl4UTRnUC9McDRiM3Q3?=
- =?utf-8?B?VTY2WmtLdHhHUlE1ZUJtTFBrT1ltRzd4aEtLTXk1MDIzNFdYaE1YYVBvaG14?=
- =?utf-8?B?azJtbnluMG1YS3o3WmJxaGUvL3NTZzR3L3dLOHJ0b25ybDlodmk1d0NrVzV6?=
- =?utf-8?B?YzBHM3JscTBOYUU5M21jZVp1K3VIRjM4bTBCWXVxalhuN3RhaFUwSWppUlgw?=
- =?utf-8?B?UWlyei9vQ0NzNENzbzErTmpGWlRvQWp3L3JjcmZFWlNFdkNkYkl1aVNiZUgw?=
- =?utf-8?B?dElSTHhWQlU1Y0VpUE8rUFd2Y3NvdTdqOEFqZC95cS9rZHV1UXFNQitGYXFC?=
- =?utf-8?B?clpzNmwzSVZvdUEvNTVOMmdiVHY3WERqL1NpVzFVZjkzL1hYdE82ZU55Smw3?=
- =?utf-8?B?OEpvWDA3YXREWjU1WFU5UFlVZVc0eVh1RTB6cFpPbUxjR1ZCOXFlRTI2MlQ3?=
- =?utf-8?B?YVdUMitSWFpwZnRqVDBVWXFLbWtVb1doZ29lMzQzUXZvMElaemFsQ0ZWaS9o?=
- =?utf-8?B?bktYb2UrU0U0bjd3bFZGb0xMM0VJV0JkM2VHcXIvcW9IVnBpSFJ0dzFiQlJr?=
- =?utf-8?B?MVYxczJMWFN2c1BaaHUzZy95WEZ0ZWZ2QWtkUEFvTG00RktMclRuRzhKK3Jt?=
- =?utf-8?B?dUhLR1o4WjFCNjJzNW9PVFRIYk5yb0lXMDZDR2c1azB3WnE3a0lVQ0ZFR3M1?=
- =?utf-8?B?eHVWVjFja1Y4M2lRejJ1UlhsMlNHOTVXNWdXUlhMUnYvbnBMeVVTZWlwM1Q5?=
- =?utf-8?B?Ui9oejd3djhpaXhTdXhiS3ovbC83MkFMaDVEWlppeGwrZEJ5dTdtbm1oalA3?=
- =?utf-8?B?QTJIRVNtRE1mUzhFTWVPNEphd3hjbjBrRks2cGpLWVJUUGdrcTlkTCtDUUlu?=
- =?utf-8?B?T1k2YnhpVzc1azlyRE45amV4a2EzYUZaQXZNNkhUZHJFSFV0L2FyUWh6MUZ2?=
- =?utf-8?B?SWduUEYwZXpXYllzam5Ta2ZlZmhjYVk1TzJQK0M0M21DZ0FMWVEyekVlSjZL?=
- =?utf-8?B?b2FFMnZMU3QrZVJwUUdDdDdDbUx4US8yZ1FZNUxxV1d2SEJUMzNZVGYvbzJq?=
- =?utf-8?B?bWhkN2Z1S3MvOEtJbWFZb0U0ZjlyeURMSFVaNDBNcGhsajlPZlJUQXhaTVd2?=
- =?utf-8?B?QnN1N0lvK2QveDBBVEZpNW1uaVJsWXJiNytsNHV3MGxoRXc9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YUR2YWxNRzlPZlF2bHhtU2JuNDhveEZ1czVoTmdNSHRmTlBMdVpHRkZOZGFK?=
- =?utf-8?B?MVVCVDh3Z2lGdXlHVkV6clJHNVVBTUFWQkhUWEpxSFNYcGh5OFQzQjZuQitP?=
- =?utf-8?B?N2dEbWlYR2FmanpUVUZqVTRnaFdpUXlPb0dlYlVING43ck9VZy8wL3BwQTVV?=
- =?utf-8?B?a2M1REUvS1lvV2ZWcW12QnVwZ1g1dzh0V0NLNmZmZFpVc0RnVFNpMlFqZ0Fw?=
- =?utf-8?B?T2hTcEJnZHMxUEFLOGpnOG5VTXJUelcvZG9WMmxsUlN6R3l3RlcrNUVJTytY?=
- =?utf-8?B?dHpudE45WklOTnFQUGV2Wk9zUXAxcm9iNitsUUlFRDVWekpKOGpZTFg0NFNM?=
- =?utf-8?B?cGo2OGUyL3FZN1RMTEFpQUtqTHVYREYrR3N2bjBhYys0ZjBkZnZzVnBiWnJM?=
- =?utf-8?B?dHBmN3NEL0ljYzRlaVZNS2Q0czhvT2xSWkN1MUZ3MXdMU0FVS0xEVjNDMlBq?=
- =?utf-8?B?SWtYcW9iTWVOTzFCQWVLZVpVcW11ZFd3T0crenkwaDF0NXc4cENJaW44Wm5R?=
- =?utf-8?B?ZjlYanVIeFVUUDJmNmZiK3hOaFZzK2ErSkVMZHZZa3JPVlZTT3ZzRG93VmxD?=
- =?utf-8?B?dUtPdWtXY1l0d0RFY0ozRHFuRXBCcC84L09icmhOMUxWdmdXQjR3b3YwTkRa?=
- =?utf-8?B?d1ZZeXhsMHc1cEx2WUpndDM1ZmU0aW0yQXY2a21IdVZOWTRzQUtzWnZHMDVm?=
- =?utf-8?B?S1lpblFLcU94NVBQYnlvUzVjSFFNOWcrNjNmNDVVdlBpODJ6RnRKVE9JV01F?=
- =?utf-8?B?UURaL1hmNmtaamVxaVNQY25oTGRHejVMYWRPRnRSL3JycnZRNVhwZ1VQOHBR?=
- =?utf-8?B?UFZOUC85YkNrM1BZeFdIblFwLzRReE1DczJSWnYySHd2UDUyN3kvTEJ4dkVu?=
- =?utf-8?B?MzNUaDRnekpJWm5BNlh5VmVGak9ZSnpUa01TZThrSHdXa0Q1Mk80aTVWd255?=
- =?utf-8?B?TjkvK0lla0R4U2xLTGlubGZ6UkFXQmRVbW1IUVl0MU1YSFJLY1F2NjlSNlA5?=
- =?utf-8?B?Mm1qNDVSZDBsQXlBUzNodDhoeXR1OVBEL3ZoT1NYM1dCc3RRWndXTnV5SmdD?=
- =?utf-8?B?OTdwNWI1UDZudCtKSWloVm85cmdJUi9kZ3Z3R29Xb1pCSUNkejllYkdnb3do?=
- =?utf-8?B?RzFhOHR6SEhwdisrU2lNSGlwUXdXdU8zTEhCa2ROUzNwU1dzOE02T3dIZlNC?=
- =?utf-8?B?dVptd2hGQ3RpUy9Ea3ZWd2lyYldyRjAwbnhZV1RLR2tuOHZoa3dkbUlYSG9X?=
- =?utf-8?B?ZUxqVG1DNC9KUGdMZkZ2S2dQcDB3czNnRzY2dGxhZlJkNGszMmhWV0VVb2ta?=
- =?utf-8?B?Zm9Ia0xSdWhmZzM0SE4wYzRERjR1QVMzMHBBSHFMY2FmRmc2TGx6R1o5VWpZ?=
- =?utf-8?B?L0hnUHF6TWcxZVgvZWE2NkJBRUMvM2hqT0crbjNLc0VNdjAwZGRHdjk4cmx6?=
- =?utf-8?B?Sk41QXluWmovakMzVGNmNE5Zd2Z6YkNudkowNXMxaktDNmFwbTc1YTJLbklI?=
- =?utf-8?B?NXpGdi9xVEpRQytKbmY1SytyUkR2Znczek8rUmJQSkRRUDhWaXZFWjY1NW9k?=
- =?utf-8?B?amltZ0hkV1lVRUYyTnhVZ241Y3JzeGlCcGwxeXJtbUJ5Q1JvUGFwY3VjbG1O?=
- =?utf-8?B?c3lFNy8wZnk2WVQ2WWhLcTVvQTZFN25xUW1MZGs5YlZ6QzJQNnc0b0tBVE0r?=
- =?utf-8?B?YlhHd1kycE9ZZFhOWk05aEZNZ0JZUUpXa2ZMaWhSYUFld3A3MDRob1VXNGdZ?=
- =?utf-8?B?QnlhWXY0cGw3dFJ1QUhXQzJlb0V2Nk1aZWFVTncwZllEbTRKUDBCYU5hRU1D?=
- =?utf-8?B?NUllZ3ZUTS9IcHNXQkRJSE9UL2lUSC9DR1FPWFZYYVROZVY3Zm9LT0NBSGlT?=
- =?utf-8?B?OTR6Zm8wc25OcVc3a2I0RTR1NmtjRTRibnRPSlBTU2oreEhaSEIzSFZHNnhJ?=
- =?utf-8?B?YnpCbU1qMmg2N0hmTmdzLzdyVDFZeWY4amNnUWljMVU2bGoyWGUraWpFeDh4?=
- =?utf-8?B?Rk1zVnZCVDBsU2szL0Z5c01IOVpGVTdNajFqb0FPRTJqYlRSc3M1dDV0ZTlp?=
- =?utf-8?B?ZTBzdDBjVWVyRnMranFOaGlRSWNub2pET1hyQW1zRjMyNHlzbEN2UkZNeFJD?=
- =?utf-8?B?TXJwT291UlNNV0NQUWJrZzRUbEFsdXg4aVBJYW9LM2xkRHNVT29JWi8zd3cr?=
- =?utf-8?B?TDdQUU9mMjhnOFJoMHZVbWU1bmdMMmk1N2l6bTExbFQwQXNzM1Bad3dvcTlO?=
- =?utf-8?B?emxSSjh5ZFNVMHVFNGRwNWdEZ2dkY3J2MndqSUtHamlxL25SR2RBY2wyUThE?=
- =?utf-8?B?a1UxQXV2T3BmTFNMYk9mc2xMSmNNMlE5YTRlSzJpMFRacU1RSHlUQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88068432-2849-4a36-8001-08de4eced83e
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 15:59:03.2280 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: E9dDjZeolZf3wJsDLXwH6HpM9AG8CnEqQ5rxIPQhSeSYLorN66NDAIepkuKaEHMV0iFcQsUyop8IISIWDhRnIpnX3r/+uJYHcAlZy7PiPvI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8209
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] doc: board: qualcomm: document Pixel 3 / 3 XL
+ support
+To: david@ixit.cz, Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Petr Vorel <petr.vorel@gmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Luca Weiss <luca.weiss@fairphone.com>,
+ Simon Glass <sjg@chromium.org>, Petr Hodina <petr.hodina@protonmail.com>,
+ Matthew Croughan <matt@croughan.sh>, phone-devel@vger.kernel.org
+References: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
+ <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
+From: Casey Connolly <casey.connolly@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,38 +109,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/8/26 4:47 PM, Quentin Schulz wrote:
-> Hi Oliver,
+
+
+On 07/01/2026 21:28, David Heidelberg via B4 Relay wrote:
+> From: David Heidelberg <david@ixit.cz>
 > 
-> On 12/19/25 4:51 PM, oliver Fendt wrote:
->> [You don't often get email from ofendt@googlemail.com. Learn why this 
->> is important at https://aka.ms/LearnAboutSenderIdentification ]
->>
->> Hi all,
->>
->> I recently did a license analysis of u-boot an I came across some
->> unclear license information in files. I do not know whether this is
->> the right place to put my points, nevertheless I want to share my
->> findings.
->> 1. the file https://eur02.safelinks.protection.outlook.com/? 
->> url=https%3A%2F%2Fgithub.com%2Fu-boot%2Fu- 
->> boot%2Fblob%2Fmaster%2Fdrivers%2Fmmc%2Fsdhci- 
->> cadence6.c&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cc65d5ed72ac94f3ad7b908de4ecd611c%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639034841193276491%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=qKgOGalLMURaimcVrCtxVnwN0EEldwTGB1I15M7RdsU%3D&reserved=0
->> contains the following information SPDX-License-Identifier:
->> GPL-2.0-or-platform_driver which is not a valid license identifier, I
->> think GPL-2.0-or-later is meant here.
->>
+> U-Boot does work on Qualcomm 845-based Pixel 3 and 3 XL.
 > 
-> +Cc @Kuan Lim Lee, @Alex Soo, @Wei Liang Lim who contributed the driver, 
-> they should be able to answer what the intended license was (I assume 
-> the same as you).
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+> ---
+>  doc/board/qualcomm/board.rst | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+> 
+> diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
+> index 642c5095261..e5dbc9816b9 100644
+> --- a/doc/board/qualcomm/board.rst
+> +++ b/doc/board/qualcomm/board.rst
+> @@ -38,6 +38,25 @@ with appended dtb, so let's mimic linux to satisfy stock bootloader.
+>  Boards
+>  ------
+>  
+> +Pixel 3 (blueline) and Pixel 3 XL (crosshatch)
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +blueline refers to the Google Pixel 3, and crosshatch to the Pixel 3 XL, both
+> +powered by the Qualcomm SDM845 SoC.
+> +
+> +These devices use the common qcom_defconfig with the google-pixel.config
+> +fragment for configuration.
+> +
+> +Use the following commands::
+> +
+> +	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig google-pixel.config qcom-phone.config
+> +
+> +The DTB is called:
+> +
+> + - "sdm845-google-blueline.dtb" (Pixel 3)
+> + - "sdm845-google-crosshatch.dtb" (Pixel 3 XL)
+> +
+> +More information can be found on the `Google Pixel 3 page`_.
+> +
+>  starqlte
+>  ^^^^^^^^
+>  
+> @@ -131,5 +150,6 @@ Other devices with boot image version 2 can be built like this example::
+>  	fastboot flash boot boot.img
+>  	fastboot erase dtbo
+>  
+> +.. _Google Pixel 3 page: https://en.wikipedia.org/wiki/Pixel_3
+>  .. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
+>  .. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
 > 
 
-Mails are bouncing.
+-- 
+// Casey (she/her)
 
-+Cc @Hal Feng, @Minda Chen from the same company.
-
-[...]
-
-Cheers,
-Quentin
