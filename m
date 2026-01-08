@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7436ED1D484
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C34CD1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE5CD8425F;
-	Thu,  8 Jan 2026 18:42:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25C56841F2;
+	Thu,  8 Jan 2026 18:42:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JjWL1fAF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XYKg6jZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B0B38421C; Thu,  8 Jan 2026 18:42:38 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 79D7B8426E; Thu,  8 Jan 2026 18:42:46 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17A968426C
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AF0A84198
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-29efd139227so26707755ad.1
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:35 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2a0c09bb78cso17835235ad.0
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767894153; x=1768498953; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767894163; x=1768498963; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QjgYcOd/45PFfaTGAVSHrTZBsfeBnApzFqOlNl6Rx9Q=;
- b=JjWL1fAFUq2uM8qsoeUvtZArUlTDqZ1nS02ZfF/hUuuNa4ml/ONHrwraYYOUYyn/2F
- rPJRSJw1ValYQ+mdWZYNFmISZK0bdBQUVCmRVuLXbykeTwkE/n6cJaynXYUsDUSOIUZT
- AE0NW/G6x5KzMo5Fu+IJM3jSeXZNHvWk+Qjak=
+ bh=0YXxN5DpJrj6kXtYkHQYjdChm8TR6oaxGcA4sIPujIM=;
+ b=XYKg6jZlwrEtV0xu1/20+FHEQjmOAiaj6cMFnoZhc0f4s9oUuVIAYWyw+Mv7t2pyl0
+ hvxk1ojd2n3vHF0DCBTTAav9a91qH/Wt3WmmzC9L+BSa0jcCr5dNIDZPDixbEa/Ngc9e
+ osttZonAsle3XSlWsWoDGbj2wAVzfBhShTy1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767894153; x=1768498953;
+ d=1e100.net; s=20230601; t=1767894163; x=1768498963;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QjgYcOd/45PFfaTGAVSHrTZBsfeBnApzFqOlNl6Rx9Q=;
- b=uz/eROF07lVsX9jozebQnFyL72pkAnTl9MD0iLifjNrYCGjjTo0FzZ1MHZlmIN9aKW
- undv5XqtTpJWhrZokVLt2dOyvfa2QfHxMDIbX0aCkxBZ3LGGJqv4zEtA0WGf9ekkM1OX
- pO0VeXDt3Yx+At0mgvz5XFtl7PN5yJI9mJNeWL+1mkll+R1yMxM+UCARThR/M+wBzm8H
- CYmk11TXHIlEZMkf9/lqeVro6sjgMyVTEz7u4gIzLmeCDgxhpQeKOPoXDx3Y1+KH8N4A
- 5Uj6OUj4L6+pZwX4oYYXdy6qdryOJO0eSDviXjIzJ7Ix31+7MLBYqFfabqwLrQZoR5rK
- y8Wg==
+ bh=0YXxN5DpJrj6kXtYkHQYjdChm8TR6oaxGcA4sIPujIM=;
+ b=rpPfrexafmCyW7rAa5bwMZmjnBwB72bqxXKiwIkkjINFxzyz8wPfoUx7CrGXXyGeT5
+ d/OyMoCgudxii2exdL6l4xXPv3U2o8jp2x3o0tL/jz0AmX8icbme0e4f8snvhoKdjyUv
+ f56rU5S87NDhfcGD+nIez5jmLqerixYQlXUZ/bVDGnc+BQI0XSjSpg16aYkfAJm1IoFJ
+ EsuCWoV4fgl1gAopCvFfAKgGlfWfzyA1nYFtJaMQOXo6nmb3O3B7w6+N+4aRUbdOG8XA
+ njS08AXQ39GsUOfzSvmKnhz1RhEqu6jRq1VQFuLzI9n0YAKwyuM9CnHBptAcUozNpsNL
+ E58Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP5flD+rWzyeMnTUqOeTVyEReWgepKZnQV8ifXzBd72/165FqkJffKfSiUgIDwDQ5NvufAoaw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzROXdDEoXvhjU+WZ/z3shsACgBXyNlx+gONgkNfX3dlunccbK2
- w2Mi5FXrW6RRWyX7MZTlZ/pdSpm12IMSErixD/gNBmV0RHA9HQdpcIq/GE/cilQWAw0Ww7eXtAW
- gDe5lCpbrjtN/bWkmQxbPE2CkSkeUKp8ky4C+Q37x
-X-Gm-Gg: AY/fxX4kgAoIut/KDIdYOA3uWNLjKLfMGdRoHm4/0z8X2gQ5M8oML/DoQ3o8VNLD8VY
- uAGrYZXSBrCZCY/jdAt2CR3rIdZPJw9/FYdwuv3ktD/QTB1b+/QwADyAMPn1kWL3eNZmnpyQstv
- uSpNBs4D3O5+wMZ1p96+UP+HMPNTju8pNh3AWGnyMA9JravcU5RVrjLkZN92CP3gWgnLJMnf2B1
- DP58zgbsDUGRhZxMMGCpHhaP4FX4KlDMDqu00R9nI2wft2euPpeH0MEcfIRYOnSR0Ky36HGgP4C
- z7fv
-X-Google-Smtp-Source: AGHT+IFuonYo0h4+FM++HaaBLTs4tCRLgp1Hd/nPpWsIbDzLSMhRQIMCH0naqHQCbtjO37OmX2pyli+TL8QlovNRPXk=
-X-Received: by 2002:a17:903:13ce:b0:295:560a:e499 with SMTP id
- d9443c01a7336-2a3ee43316amr63748935ad.5.1767894153543; Thu, 08 Jan 2026
- 09:42:33 -0800 (PST)
+ AJvYcCW0Muc93zDTQX7Kpb6rIEstx07skPeMCUnKNDDYCvi6e+fE1pdZqFi43qem3ULGE/iPN1OkazQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyaf8Cv2cu3n0OpYeRo043H5S3Vcnl6FQcND7Ym3UGxYCMNrJk9
+ lxRUoYJK4Igprr5mWGyfl7CNhPoy2sqrnFkrKulPZtyUduR5p5ofrooYPjhBCQj+01QeQOKwLRS
+ be0iWx5aPLoyigdrhROewXVzkNe+cJfUw6IPVRll3
+X-Gm-Gg: AY/fxX6u79xHAYVi67dWEJPTlek678LICZwg3PN6b7+Erd+/B62Zbi9ofvcwhe4Tya8
+ wVpisOp68lcSGsVOKvVw7dflebdkwrZi8PUIa7ts50v0Ts1vhoaP9EcOOKSlI1jVRPsL/IYa8Sb
+ L4Mhk74pQELpm4U8W5J+okd9iBwnsXfn2jN8kWjN2djNPMnyb202xS63q/7+iiRZ7YiiZ/6dZLN
+ ReJQQ8D/ToG5HfsjKT5PbfzbXwCUSRH5VBHUxuQN36T8NPYyp867RkDYhlTLsUaPQriZQ==
+X-Google-Smtp-Source: AGHT+IEqie/BiXdm16oqvHJoVQ4im5brxMeUZOBi9dePcJoQqVGH9U80CPOv2cPE+kTI/Hp8ZjmCkWh722vHr7AdUOo=
+X-Received: by 2002:a17:903:3508:b0:2a0:a33d:1385 with SMTP id
+ d9443c01a7336-2a3e39d7c25mr103357065ad.17.1767894162632; Thu, 08 Jan 2026
+ 09:42:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20260108101721.3411854-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108101721.3411854-2-balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260108101721.3411854-2-balaji.selvanathan@oss.qualcomm.com>
+References: <20260108144753.1082965-1-sean.anderson@linux.dev>
+In-Reply-To: <20260108144753.1082965-1-sean.anderson@linux.dev>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 10:42:01 -0700
-X-Gm-Features: AQt7F2rJy0JATTTaSrnb7KK7OQYHCCp6nnPOZh7tGdVG1TGlvYBj8fCQbDSZqvk
-Message-ID: <CAFLszThHG=mwX4gpC5b-2c+jagLb1NmXKCP-U-dPMoROk3+93g@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] soc: qcom: rpmh-rsc: Clear TCS state before kernel
- boot
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, me@samcday.com, sughosh.ganu@linaro.org, 
- gchan9527@gmail.com, aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
+Date: Thu, 8 Jan 2026 10:42:25 -0700
+X-Gm-Features: AQt7F2o06_qe-GYVm2hIFTTrG-3p_g-X68DleEw2SBSKdDntZhM4x7pR7NM8bmM
+Message-ID: <CAFLszTjeEmpQBiVtQa7_1B=Bzbgqyr7tRR4Z2AOxfmq57necHw@mail.gmail.com>
+Subject: Re: [PATCH v2] PCI: Add power sequencing driver for PCI slots
+To: Sean Anderson <sean.anderson@linux.dev>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,173 +89,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi Sean,
 
-On Thu, 8 Jan 2026 at 03:17, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
+On Thu, 8 Jan 2026 at 07:48, Sean Anderson <sean.anderson@linux.dev> wrote:
 >
-> Add cleanup mechanism to clear RPMH TCS hardware state before
-> booting the kernel. Without this cleanup, leftover U-Boot TCS
-> configurations cause timeout errors during kernel RPMH driver
-> initialization.
+> Extend the PCI bridge driver to enable resources associated with PCI
+> slots like clocks, power rails, and resets. This is modeled off of the
+> PCI power control subsystem in Linux. The traditional compatible for PCI
+> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+> pciclass,0604 so add that as an option.
 >
-> The cleanup clears CMD_STATUS, CMD_WAIT_FOR_CMPL, CMD_ENABLE,
-> CONTROL, and IRQ_STATUS registers for all TCS.
->
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
 > ---
->  drivers/soc/qcom/rpmh-rsc.c | 101 ++++++++++++++++++++++++++++++++++++
->  include/soc/qcom/rpmh.h     |   9 ++++
->  2 files changed, 110 insertions(+)
 >
-> diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-> index aee9e55194e..772be401f0d 100644
-> --- a/drivers/soc/qcom/rpmh-rsc.c
-> +++ b/drivers/soc/qcom/rpmh-rsc.c
-> @@ -471,6 +471,106 @@ static int rpmh_probe_tcs_config(struct udevice *dev, struct rsc_drv *drv)
->         return 0;
->  }
+> Changes in v2:
+> - Return early if there's not PERST GPIO
+> - Only mdelay if we need to
+> - Use CONFIG_IS_ENABLED to set .probe directly
 >
-> +/**
-> + * rpmh_rsc_clear_tcs() - Clear TCS state before kernel handoff
-> + * @drv: The RSC controller
-> + *
-> + * Clears all TCS hardware state to ensure kernel starts with clean state.
-> + * This prevents timeout errors during kernel RPMH initialization by clearing:
-> + * - CMD_STATUS: Leftover ISSUED/COMPLETED flags
-> + * - CMD_WAIT_FOR_CMPL: Completion wait configuration
-> + * - CMD_ENABLE: Command slot enables
-> + * - CONTROL: AMC mode bits
-> + * - IRQ_STATUS: Pending interrupts
-> + */
-> +static void rpmh_rsc_clear_tcs(struct rsc_drv *drv)
-> +{
-> +       int i, j, ncpt, pending_cmds = 0;
-> +       u32 status, irq_status;
-> +
-> +       ncpt = drv->tcs[ACTIVE_TCS].ncpt;
-> +
-> +       for (i = 0; i < drv->num_tcs; i++) {
-> +               for (j = 0; j < ncpt; j++) {
-> +                       status = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_STATUS], i, j);
-> +                       if (status)
-> +                               pending_cmds++;
-> +               }
-> +
-> +               /* Clear completion wait, command enable, and control registers */
-> +               write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_WAIT_FOR_CMPL], i, 0);
-> +               write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], i, 0);
-> +               write_tcs_reg(drv, drv->regs[RSC_DRV_CONTROL], i, 0);
-> +       }
-> +
-> +       /* Clear any pending IRQ status */
-> +       irq_status = readl(drv->tcs_base + drv->regs[RSC_DRV_IRQ_STATUS]);
-> +       if (irq_status)
-> +               writel(irq_status, drv->tcs_base + drv->regs[RSC_DRV_IRQ_CLEAR]);
-> +
-> +       log_debug("RPMH: Cleared %d TCS for %s (pending: %d cmds, IRQ: 0x%x)\n",
-> +                 drv->num_tcs, drv->name, pending_cmds, irq_status);
-> +}
-> +
-> +/**
-> + * rpmh_rsc_cleanup_all() - Public function to cleanup all RPMH controllers
-> + *
-> + * This function should be called before booting the kernel to ensure all
-> + * RPMH controllers have clean TCS state. Can be called from board_quiesce_devices()
-> + * or directly before kernel boot.
-> + */
-> +void rpmh_rsc_cleanup_all(void)
-> +{
-> +       struct udevice *dev;
-> +       struct uclass *uc;
-> +       int ret, count = 0;
-> +
-> +       ret = uclass_get(UCLASS_MISC, &uc);
-> +       if (ret) {
-> +               log_err("RPMH: Failed to get MISC uclass: %d\n", ret);
-> +               return;
-> +       }
-> +
-> +       uclass_foreach_dev(dev, uc) {
-> +               if (device_is_compatible(dev, "qcom,rpmh-rsc")) {
-> +                       struct rsc_drv *drv = dev_get_priv(dev);
-> +
-> +                       if (drv && drv->num_tcs > 0) {
-> +                               rpmh_rsc_clear_tcs(drv);
-> +                               count++;
-> +                       }
-> +               }
-> +       }
-> +
-> +       if (count > 0)
-> +               log_debug("RPMH: Cleaned up %d controller(s)\n", count);
-> +       else
-> +               log_warning("RPMH: No controllers found to clean up\n");
-> +}
-> +
-> +/**
-> + * rpmh_rsc_remove() - Cleanup before handing off to kernel
-> + * @dev: The device
-> + *
-> + * Called before booting kernel to ensure clean TCS state. This prevents
-> + * kernel RPMH driver from encountering busy/configured TCS that could
-> + * cause timeout errors during initialization.
-> + *
-> + * Return: 0 on success
-> + */
-> +static int rpmh_rsc_remove(struct udevice *dev)
-> +{
-> +       struct rsc_drv *drv = dev_get_priv(dev);
-> +
-> +       if (!drv)
-> +               return 0;
-> +
-> +       /* Clear all TCS configurations to provide clean state for kernel */
-> +       rpmh_rsc_clear_tcs(drv);
-> +
-> +       return 0;
-> +}
-> +
->  static int rpmh_rsc_probe(struct udevice *dev)
->  {
->         ofnode dn = dev_ofnode(dev);
-> @@ -539,6 +639,7 @@ U_BOOT_DRIVER(qcom_rpmh_rsc) = {
->         .id             = UCLASS_MISC,
->         .priv_auto      = sizeof(struct rsc_drv),
->         .probe          = rpmh_rsc_probe,
-> +       .remove         = rpmh_rsc_remove,
->         .of_match       = qcom_rpmh_ids,
->         /* rpmh is under CLUSTER_PD which we don't support, so skip trying to enable PDs */
->         .flags          = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>  drivers/pci/Kconfig      |  8 ++++++
+>  drivers/pci/pci-uclass.c | 55 ++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 63 insertions(+)
 
-add DM_REMOVE_OS_PREPARE in there too so it will cleanup
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
-> diff --git a/include/soc/qcom/rpmh.h b/include/soc/qcom/rpmh.h
-> index 3421fbf1ee3..da3b1517392 100644
-> --- a/include/soc/qcom/rpmh.h
-> +++ b/include/soc/qcom/rpmh.h
-> @@ -25,4 +25,13 @@ static inline int rpmh_write(const struct device *dev, enum rpmh_state state,
->  /* u-boot: no multithreading */
->  #define rpmh_write_async(dev, state, cmd, n) rpmh_write(dev, state, cmd, n)
->
-> +/**
-> + * rpmh_rsc_cleanup_all() - Cleanup all RPMH controllers before kernel boot
-> + *
-> + * This function clears TCS (Trigger Command Set) hardware state for all
-> + * RPMH controllers to ensure the kernel starts with clean state. Should
-> + * be called from board_quiesce_devices() before booting the kernel.
-> + */
-> +void rpmh_rsc_cleanup_all(void);
-
-I'm not sure who calls this, but each device will be removed before
-booting if you use the DM_REMOVE_OS_PREPARE flag
-
-> +
->  #endif /* __SOC_QCOM_RPMH_H__ */
-> --
-> 2.34.1
->
+You should be able to add a test for this.
 
 Regards,
 Simon
