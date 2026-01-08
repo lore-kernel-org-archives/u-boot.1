@@ -4,132 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C425D1D483
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85F4D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 18:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF8D1842C7;
-	Thu,  8 Jan 2026 18:51:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E5468421C;
+	Thu,  8 Jan 2026 19:05:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MPju2Z+o";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JXBEaB0m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D194E841F2; Thu,  8 Jan 2026 18:51:08 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F38D28422D; Thu,  8 Jan 2026 19:05:11 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC4CA83B4E
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:51:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5444184198
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 19:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-382fea4a160so19996121fa.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:51:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767894666; x=1768499466; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Nd1s9fcMl/9cGf6pkoUT5hrtuYBzmXpcW0XMTgxjijg=;
- b=MPju2Z+ojCGSH663XpHIUC6qfitGy48lZe7BdyDMja5rT6eRxtXxB329ESe2p3HDJk
- EYnL7P2Ma3dUkyJLZo32jtRC+y8gnC2GD66cRjFrYecxNEi1IsvbMBYOBkGe8tqDL3S/
- NS8lBmLHoMxHrYA7Q9B3b3A27+cR5Bh/MaaEN30GUsU1wREN40BKZTY/IRo314T3yCv2
- w9lIm7vXnLsgbMyDY4erJ5Sx9oaRY4henzBDpQ+/RE6er3lzeoVpel2Ndb7NLYrg/5xS
- 5nll3JIGdSD8hmjsmaLtwV7rQ+Jiij0HPYt3fFqn10qBzkEmbfD25ukEHASnno0ox2uf
- ozAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767894666; x=1768499466;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Nd1s9fcMl/9cGf6pkoUT5hrtuYBzmXpcW0XMTgxjijg=;
- b=aLOsiEFwjV+rUOnAP6tzg/9qmdbO022qQ8QbmIv1Ff+6IaMT+8KZ9ZIazA4JfKilC4
- OJkHQy2JhDHBlThs4lwPRdtW5kNJUgwIWOISLRtQlfj5oTCNvm8vvk/imkLHm6ZJbR+y
- Y5DNS0FPRtEr6bYlpGhTpIUtU4dxBmKz0ob2ej4FFlEhcDFBeSiRwkiPZBWblqPZYpof
- efPFTFW2McJdV8saV6jnrIDWyK2Kgw0sfdxjFYzARfkjUNSShbEYoRQeOudiUqVwEpOh
- sDNLs+PdYeqYwZ+k1ZBHmt6+3XhNSPGO3mcw3HbhnidoEj6GABoWIdGInb9ARhL8xsOx
- Bdjg==
-X-Gm-Message-State: AOJu0Yx79lu+Mf3IDBvdmChxVfhT7txKSTs/3PIdrlaisynJCsEeGK54
- d0s0HyouCKloh53/2uD9rgPAWwxSE06mjyFtsymC9nYP55eWK2aV386b
-X-Gm-Gg: AY/fxX6NoGP8+W07c6a5WA9JD/YicdxkxpF+LBfiMhPtIpWrwjjKiuSQEbI2AWYvWLk
- ZcmVNEhOHP+IvZwVmEQ201JRMWPNhxc2K9N2DTCgthtbCypUTsvVr6Z1KIWrB4ENVVfKoLkGFS7
- cLd8IZgwNrqfebBysktt6XVkqjegueYssbrnsjzVzgv7unvNe0nF95QlDcXfzN18SQFgoLsN/y5
- 3frBqfEznQdrlZAFxJlZZ3fKl9+B5wDhLvuJd1BJ9ZQ+QpE1bCZn+LiaXhJZUGv6nmUi08HlnVQ
- FoZ6+MXE+dinGu+wnV5EEnvgTZxMydI8hUGKYDOBYhoeYEIFufpnTSATJLiCLYE80XO7FYvN6ar
- RY1eVE4qnYZynilx/l72W4/ou3ZLCrdKzOjPlKHV3Bky076GYTFrjEC04I0SQfp1UEcG7yt+pWr
- pGixBNLzpkfb2RWBaNNrhCAQqMOqoJFqXd9PBe0aecI+HaCkd+LzX9raKY1pA6xY5ueA==
-X-Google-Smtp-Source: AGHT+IE/t9p+mSboldbMt9jSkX7C7JIv21FOi/d5uJ0OAMzshAJQ76W3DjB6AliEkpu41PkeKizLWw==
-X-Received: by 2002:a05:651c:a07:b0:383:15d:8e2b with SMTP id
- 38308e7fff4ca-383015d8fb7mr20501571fa.40.1767894665572; 
- Thu, 08 Jan 2026 09:51:05 -0800 (PST)
-Received: from alchark-surface.localdomain
- (bba-83-110-133-122.alshamil.net.ae. [83.110.133.122])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-382eb8f478dsm17988701fa.37.2026.01.08.09.50.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 09:51:04 -0800 (PST)
-From: Alexey Charkov <alchark@gmail.com>
-Date: Thu, 08 Jan 2026 21:50:00 +0400
-Subject: [PATCH v4 3/3] rockchip: spl: Add support for booting from UFS
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1767895502; x=1768500302; i=xypron.glpk@gmx.de;
+ bh=pcgS1z5BZfhCrHo1EGlhoZeDX7s58D0adUmz/PiZnnU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=JXBEaB0muVDFTOryM+ISOfN2qCKWbqZncYLWCcl4ZueFU3I98mODWY4cuaOrDaKw
+ EDYn88XMcu1vTXdkR3hdEzI65DsJ3puutAaGGW4zLqwyM88eZgOHQDrWWt5e7bEV8
+ eyu9vpnIhF9zmbfb9+Ywyyi2AOoE+I0zOFMTMCFgl8l4bKPNt2ApKU2pQF2SPEpTt
+ tM/l+8QUpvPT9dKzTtlYdbI3Hga8YXMKhHUf2Xq0DcV9UkaJJ5QAt/us1Gk8dwBbE
+ iyna33senUzGqhDkPjVPS+EXCzWk5PzIeinCJLaCamR1q0nVL2puxSEoN3Lc/983s
+ 6cakTqIc/xstpURRag==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.126] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mqb1c-1wHJgE1Fxo-00k9kt; Thu, 08
+ Jan 2026 19:05:02 +0100
+Message-ID: <589c8faf-bcdc-45bc-9d29-cf85409c7680@gmx.de>
+Date: Thu, 8 Jan 2026 19:04:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-rk3576-ufs-v4-3-e8e67649f3f8@gmail.com>
-References: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
-In-Reply-To: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
-To: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Peng Fan <peng.fan@nxp.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>, Alexey Charkov <alchark@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5674; i=alchark@gmail.com;
- h=from:subject:message-id; bh=ce4cse6obQHFK5q42DizlGxIUtVnElQUTj4rFTBUr84=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTGv4u/Hia2ZvPL5i0H2Pzk33nxPYq3Ef53ZuPDed1ec
- Verzs5/3zGRhUGMi8FSTJFl7rcltlON+Gbt8vD4CjOHlQlkiLRIAwMQsDDw5SbmlRrpGOmZahvq
- GRrqGOsYMXBxCsBUX77MyPBKVPetz6RYGcejh78yK2lE/dVTUrOMVGjuLuWvi5Boe8Xw302GY+H
- UGRYl1o85tCQ4Zk7Oa56wQPEU61IW3hsiM+ercgMA
-X-Developer-Key: i=alchark@gmail.com; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
-X-Mailman-Approved-At: Thu, 08 Jan 2026 18:51:53 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/10] bootm: Do bootstage processing in bootm_final()
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Simon Glass <simon.glass@canonical.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-6-simon.glass@canonical.com>
+ <B1959B8B-8D25-499B-B1E8-02178F67A191@gmx.de>
+ <CAFLszTi-gRmj2YtHfG2F3u0feNMcC1+h5hwAvNTYJ+xC1JQnJA@mail.gmail.com>
+ <7E049032-1F4E-464A-801C-468C8A9AC67B@gmx.de>
+ <CAFLszThUvfSqP3oMP6HPB4zyWch7WfGVtZag7EuhFMA2ZpNXdQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszThUvfSqP3oMP6HPB4zyWch7WfGVtZag7EuhFMA2ZpNXdQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Atfe7289hG9LsVOKv8jYDE76qq0+MpOqVcSzs7aJnl5poroVyZi
+ FPZ0T0kkhfPdGYqGR9oytbd8To2uOBe6HApfrX/bhUENK3qpbQYt4nyOPAPRCLq01ENmbjx
+ A3WRUaozAG5FQyB62ShOWTrf9gVM82SxcNUsP7DqFKJ/aCnjp5hIa8YLp2Gn82KZyUFfz56
+ 7l5rGAWNxxBQrEi92/Y5A==
+UI-OutboundReport: notjunk:1;M01:P0:3QiC3M6d1qc=;vELDU1fojDYHkkiP9vRJDmA/HHx
+ imyulKmgPWLVj2FSYfn5U4Tqui2f0lK0jmfRpdN1ovAp54BHfK0zDeaYMXSoDFJGY3Z8ZgOyO
+ Enm5P+MV8KnD4+4oKYqdZEREqWQR0TNW4sYOzz2el5ohz8sKu9HoAj1xH+pr4CoNn98Qc7tj1
+ msyUYAQh8IAmLFGgNGPWulcp71+6i/mhfpEmbqol4ZoxMnilq0WMw6dOj9zhmLh4sdwIGo+jn
+ qjSUDH5hARboXRnTxU9FovaH9QPJ/QtOsCfOhi4pmokSbTFONqteDjtoQOLH1BiVgARxJZZzM
+ qY6HlH2vBua3teF5qmWMQwgaqDdQ/6q6/i4DSYIItqqrhsCLj43ekOhbMS8t0rVy0Ke/kGIX7
+ cvwPf72NVIqjl5mPGPLqGSiIWOlmg1336HWTsRlrEPQlX8vDnW/fBml/cNCG9PMTLf8+T1qq8
+ fAmYBUfoUJeP12AirURhX16KpUcqzNj6SSyqihvGBTHAarnkrjNTFfMBeP4e3KpHefYjvwuRP
+ ZKdvlYGMdP3yNuhbvE2IgbyhQG2a95nwAvTAIsbQ86wagC8IjLjdKkdiQCTJET0UYyUk6O9LH
+ vSs0l6Np+MRQ7W53iqH8eQ3j8GdKg0BaSyv76SRdaGMvflhpf1BUpG1oKxOQkUB3DpeZQ6/+5
+ YzULsUxzrIKotCDgu5H3evILZRSsiHakSRVboamQotDBff4TlxV5SlZ5l5x8HY3oLz9v5VZrs
+ j7zxt+UbOfcq/thHrqrSAwaZ43eIVbQJGBLgdCYBl0gZyxot198iDYpwgiyOH4Q6nhd6OHEyI
+ xqPt57aPsxvP1rTbqPnLF0SxaoNMDHLLi4LgLnJqcVYso768nvjY6B78IqvSzN3/shFJaI5Yd
+ 6FxOBFA2xUBsSrH5aJd/1qZRJykew4MJlEh1EllHX37kleg0DhWifIvbBfscjHVWozSj4R+kJ
+ NLH6j8qtAppA5mTjbiYgEhvVzcVumbNzmvAoC3nzGVJCVgD9xweJCXRdrvfj/vOFCLzrD5iy4
+ BB3hUABY86skGidxHuqbmFB37ez/ljYH2M/mFLkzdKpyjX9jg1mmBYWHklTOXvUOM95LK+Dvj
+ 2AubFYDwMlTwzl37Idx2TeVDpEV7sIbGq4/bnRn5l2CQ0P2RArNWmesXabhdpzuVM60TeNMpx
+ Dp6QwADyQ81ZADeg21gY1saTTErrLBgR6qmJS21j7O03yberxkScltRK9+lhXDObgZXIV+K6w
+ tBxk2giPC4+e6wVPLBWoDA4ZWjdpVgQL/5DlbX4tF1uWrSm2P1gU1ia5pGyxuUuMWk8vvml2K
+ ENjUOKLCF/KkQT0H1zNL76EcC9HSiLC5pKX+P4Q7lkkTBx/p2tZ3GiAdIXCtOEFRTdwcgGdub
+ kXheiZbvB+2Oa66I1vLWVCOUNSAKAStxwK92gNUOHr7Ed9XoogoGNFaBDd5FZLJd/RsuBeXoW
+ uxBBoy67JlAGGMD82vW5GZVObxtogVTuE01bxsZYF178a0rrHzVJsQpAadoisaKDgTymcXNGx
+ 374gUNI0S2VDM3hrSIxLyyZX6KtQcdlkpWTJUt4zzctmEjngXGgsl3O/iE4v+pjh2h2+LfEsL
+ BUW2b0FaRFXdEX42ex0AWIziwgDd7hq+FveJc5yfcFRCOFRcKV+9kAPUh3AdaZASj+yOKeeDC
+ 92jzz3gzhmY8fwoY+P5Ao2DfzeysENPB+mFfXh7U18cEgFM6sgpE0PigusJbGdwz/j8n9pbXR
+ 99ori3z9xszkyqASiwMO0+gDMfGXAg8A0xQH7Pj5v0+JxYdBXnpyqpcseM2zaKkH6txU2znuP
+ GbTBrWQ57mMdS5mHOmgAdcz9O1Kb2QIQ622VZop+kztxO4vvOIwGzEl+lne9ZuxYrZ3PrkbG2
+ 4gZpUXF08sHUl3y+ICN/OuQtB3UDcEfdXu8cXfRFndMEIRcUehPK1mEozst1Zelgflyf0M1Am
+ ngMJL9fefZ77Y1Xsdcm2+mnrNdh99HdiVQH3YFIMtSc3AGpmGYSIlUsXEyngEXHRdaJj6PUed
+ Ru1plpulL//Emk4RV5hUtB0SEUx9I9P+3rTzJ3pecfwrLenLPJv8EV4DgTTGGCsT6UEK7DtIs
+ wGH4XR3EYu3/lc93t9WJHCR+AaHwLYBM81nO5vsb8CclMgVy/X7dhLmeEaXKNiSG1NZ44KMfm
+ T8SKudHJWxw7SvwVL/wEskokQRT7DSikNCikiTMA2N7m9d/HmbasJuu2Q9/eFdcgtle2hxbDH
+ gIfXLhpmFgtsUsp/srtgEnFugLTR8NrQFOEVBa2jdNnflOBvLdR0qvxGRS86oGiTVuiGiCA7C
+ sISPZ5LKACwOuH7GYZwSZsjitX/iXtVsnyi9xZ+q3pqk6INo6XQjquXgUmIzA2O6wawbv1zqB
+ 6kayfak7wEUQl8IPePK+lUqdZwn36KUvQ4EDPtdJwsQxg5cj6JTDBpDkBq8ryuirVFLy9W/yP
+ SakmOTUSnwrp1sHXQY7HYSvoNorrN/pYkuwz5PHtXR5H1WLVbvsZQ8LoiMJR1crY4P5aCuCuz
+ YR7Ctx8wS0q2fz0fWm+0RuPPIRwnLB76KfDBUuGHkpDyPJy2RUA9RdMuCAY7N5e74lF2y1iqV
+ 1tEvBXyOpS0Uu/gL8pqdyVvMhgmIqO6+m++y4eW61MgrzUqNMUlIdpf9nJqo/qXQ1WJmmsN+k
+ K4yV7MZh9tjROwlYTLZXXXJRIvg2AJFybVGYbYlrCNW1FchRQv0rDB5Qw2znEFqndxqcgw3b9
+ LgMvYFRx+R07D/kk9nWxhCyDEEwk6qiZOGyAd7W3aGQRTTjxaJaaqtd5TcvAk3XhSda30Q0lh
+ 1t0oAAzl8D6TbxIuIsK5oKtbuZ8+p3yek4kX4CIbonWJD3/Nw3ilE8CSeeayWDQlTGTweALuK
+ VRqGfQK573Ik8XAh0sZsdIc2WCGp3FB46p4oCupZvskWsbGpk4pqf5Qjuh7sUbUc6kp73ylj3
+ cx63O5aGtD2RgbnyrO6QJjRSBx2NvUECscZDa2tV9qA3BG/rCSJL49q+GHAOM/mzveG647XlZ
+ zucyT+HbPxftP4u+Z863sKAQQn73Uadha2qZRwDVnJmBUViFQ/O7u6Aqq2KIXNZIrOeoEye+S
+ f5RamvCmSZA1wBJqfHe4TepbvjKvLiU2vNLF6iAQRRHt5RyhOr0RYkqPKOjL9xDQkxmXtVKep
+ PBMccGqD4sNAQQYaNuK73zWECnFTozsjrCsU5dhi/ADD0032Gy2AavdyF40q1lsVsZGnby5vd
+ jjzId4YNvt3TgcK8E6l20XFUzyqxjdCIC3+PpHRej7JYG74DEfrnjBDWyVq6Ql4qArba80XIf
+ yJof9kt8YJGDzOT8g6MDKQLQqSqsMbF1NozzIK99lnnrQuDXwi6KeutF0Oj6QyhQufKsfDexa
+ OMmg0e+/YpfnX4QVrkRgi0CCrd3GMwBVScWx4pf2D9BbqokLkAVeOYD9JInosbfgDx5k9q98M
+ QTkY89vJ63tlRVfFrr32Z2eBgnQagrRCXDc9gdoqZFTwfPOH4OfOFFkKytc/Ef2RC/uhJ2Gt1
+ Mr1eBpXib7/Z5W0V04BxOXI1ASXCwYz2RHe9a6QXQvJzRGDe48Og0JWk/vsZ5Zw2H33UtFbr9
+ 5UyH8MUaTOrvIsE3EwesrlIIsRv9kMREaxxim/WI1E7AM1pkiUG1QMT8LBE7YgxNaWoe8i9Iu
+ g5rigqAnEiErawfldXzpAHZRJhhHjyUtpHMRM7IHe4Pofy0LSdS/R95IpwyFIsyBCRwlXrkB/
+ rYRun+3p8/q7PWWWMOu/lwk/lVzx/KFQ2xPe/csITV4b0dNZR08nDnrZLGOFPcYnbO2fAK7y9
+ hWN5rCh0ChGwgLgx9ZJNNXIiCZlxjC1p7FNYPyOHfZhHROrBCV29yjFCCqQxRV7QjUxcz/P1f
+ cqRL8QpEa0ipkwG+TY/2P74jBPYzC2/IqG7BBukNAEkoTeCQ4PB2gVSFE0/UeDr5lHcN7AmMk
+ hEFiQz+6UgpTGRLMFCRLe9gg+xIN5dKJlZcnVnGT7r2Z12sFF65+xvIHZ/6r48rEZe0cWGhtb
+ L1+Kg6vH8yj/jbZdD2Mm0LPR8DAxscYCcRjinC79IwMXJg/UK/ZqqbZk/KtOdl3z+yLjF1/nt
+ rKOfZzhuWH/wgP7/P/UBYbK/BoTCLdFFwBAXyh4tlWcwlqdavD3Co16+o+krE0KCApxUqY+bP
+ fvR9/Yzy5RG9g5rflwcfCXZdGxWnbjqxIMyHYEU/1Jr5re/5dQzj0b355jvGRSkWgJ9HZZb3N
+ s8lGns192ybi+q2VlcuUO3/z6c+a2zffWmtF6DFURTA7ViyfrM+6r+J0EbZrEMTkh8I9Hzaor
+ SaDbR7qSeWbOS7y5ynOh929fod0PvhqTGO7itQ4CwcN+C87X5OOTxz3cSFmZjjw1/UFG3P1El
+ 8Y3fq2kUIpMRqChPBaUaREEO0lYi/ibovZ40+iwSW9GIKGPNxe23gl2CYpPNV4FFVOFr9Bs0R
+ Wke9K/lJ9pmVMAQvxr4YiXm7pu8DZuvNLJ3LHmK4wvlM7RC1QHlX9YUHKkg/hXbC0B4//p65d
+ Qmdw9ppucT6bA85cRpp0naMhV+LtT4nQY7IofVVCbiELQo3it1bSNj+5kqRCcI96jtQrWwx5B
+ WOg1qOgg8PRZPG/YSoDgwJfnp7dlWn2hNNPWIO6gpUiHen36kT4+r+nvTBoRIKOXGhxUNws7K
+ tNR8PzBiM5xq2yiEHx2bpPmRL0njv+fQKOF8L44Uuvm4MFhLoUayw5MY7DpR83Q1LCY0c8W5a
+ GdxM8HWRhTX4nvJ7fkCyE5V2fo6yoLIOrHk5bcgyxXKWQ+doe95fNqL95Rb2cepbCzgFWnLCr
+ vJmrX2FIqlHZTJXay1nKAK6K3zWbkKkJforFaBbmIDo7YoOQnIwZVD//oD5JEQ1DxWrpSlLmE
+ aMaWE1Lbw0cmaWuEWIs5vO9YUVkBPQ50OJZB29bWsXhjnnWsEyAigWzYCFTx8B4UYHkTYRxOI
+ 6ZSY1gdlvIHwTWIu9EA91oUYoHA2Ah53gQdyV6n48+PJEPll4Gh/syT3267dEZBorpus7dt6J
+ IwuanjMorup94OYinLW3Yp20OQyqZdo/nlm4+cC0BxbCEkB8gRNy8XYkBBmzVNcdBZoWyA/r+
+ e1HxGNZRkBB1jzXJQqcCMnHroZq4QBuAy4jtXh3Y7xBGl6WNtVrK0jkSBc4EWZpIhCLWCN7VH
+ Wf6jT+3iXfRESFYT0c8sxjt69WlzbzG0ecIxsi8ucrl/vtV2oIQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,166 +159,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the required architecture-specific lookups to enable U-boot SPL to
-load images from UFS storage devices on Rockchip RK3576, which has a
-boot ROM capable of loading the SPL image from UFS.
+On 1/8/26 18:41, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Wed, 7 Jan 2026 at 12:14, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+>>
+>> Am 7. Januar 2026 20:02:39 MEZ schrieb Simon Glass <sjg@chromium.org>:
+>>> Hi Heinrich,
+>>>
+>>> On Tue, 6 Jan 2026 at 20:58, Heinrich Schuchardt <xypron.glpk@gmx.de> =
+wrote:
+>>>>
+>>>> Am 7. Januar 2026 01:31:22 MEZ schrieb Simon Glass <sjg@chromium.org>=
+:
+>>>>> From: Simon Glass <sjg@chromium.org>
+>>>>>
+>>>>> Mark kernel start before booting. If enabled, show a bootstage repor=
+t.
+>>>>>
+>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+>>>>> ---
+>>>>>
+>>>>> boot/bootm_final.c   | 6 ++++++
+>>>>> test/boot/bootflow.c | 2 +-
+>>>>> 2 files changed, 7 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+>>>>> index 71661334e11..dd7cac55f1e 100644
+>>>>> --- a/boot/bootm_final.c
+>>>>> +++ b/boot/bootm_final.c
+>>>>> @@ -6,11 +6,17 @@
+>>>>>   */
+>>>>>
+>>>>> #include <bootm.h>
+>>>>> +#include <bootstage.h>
+>>>>> #include <dm/root.h>
+>>>>>
+>>>>> void bootm_final(enum bootm_final_t flags)
+>>>>> {
+>>>>>        printf("\nStarting kernel ...\n\n");
+>>>>
+>>>> This noisy message makes no sense for EFI booting. The kernel in not =
+started in ExitBootServices().
+>>>
+>>> Can you explain that a bit more? I believe that's exactly when the
+>>> kernel starts.
+>>>
+>>>>
+>>>> Operating systems like Ubuntu tend to boot the kernel with argument "=
+quiet" for aesthetic reasons. We should not disrupt this.
+>>>
+>>> When I boot (with this patch) I see these messages on the serial conso=
+le:
+>>>>>>
+>>> Scanning for bootflows in all bootdevs
+>>> Seq  Method       State   Uclass    Part  E  Name                     =
+ Filename
+>>> ---  -----------  ------  --------  ----  -  ------------------------
+>>> ----------------
+>>> Scanning global bootmeth 'efi_mgr':
+>>>   0  efi_mgr      ready   (none)       0     <NULL>
+>>> ** Booting bootflow '<NULL>' with efi_mgr
+>>>       try_load_entry() Booting: Label: Ubuntu Device path:
+>>> /HD(1,GPT,eccaac1c-b634-441b-a788-ab0f959111af,0x800,0x165800)/\EFI\ub=
+untu\shimx64.efi
+>>
+>> Here GRUB is running. If you don't see output, then because purposefull=
+y it has been quieted.
+>=20
+> OK, so there is no problem, right?
 
-This also requires the DM_RESET framework to be available in SPL, as
-the UFS driver uses it.
+To make it clear:
 
-Signed-off-by: Alexey Charkov <alchark@gmail.com>
----
- arch/arm/dts/rk3576-u-boot.dtsi              | 13 ++++++++++++-
- arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
- arch/arm/mach-rockchip/Kconfig               |  3 +++
- arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
- arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++++++++
- drivers/reset/Kconfig                        |  9 +++++++++
- drivers/reset/Makefile                       |  2 +-
- 7 files changed, 41 insertions(+), 2 deletions(-)
+Once the EFI application is started firmware like U-Boot or EDK II=20
+should not write any message to the video buffer or to the serial console.
 
-diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
-index dc3771b556a3..84d9f39fd407 100644
---- a/arch/arm/dts/rk3576-u-boot.dtsi
-+++ b/arch/arm/dts/rk3576-u-boot.dtsi
-@@ -12,7 +12,7 @@
- 	};
- 
- 	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-+		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci, &ufshc;
- 	};
- 
- 	dmc {
-@@ -81,6 +81,12 @@
- 	bootph-some-ram;
- };
- 
-+&gpio4 {
-+	/* Used for resetting the UFS device during initialization */
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &ioc_grf {
- 	bootph-all;
- };
-@@ -176,6 +182,11 @@
- 	bootph-pre-ram;
- };
- 
-+&ufshc {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &xin24m {
- 	bootph-all;
- };
-diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-index b15938c021d6..f9ecb6858f04 100644
---- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-+++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-@@ -51,6 +51,7 @@ enum {
- 	BROM_BOOTSOURCE_SPINOR = 3,
- 	BROM_BOOTSOURCE_SPINAND = 4,
- 	BROM_BOOTSOURCE_SD = 5,
-+	BROM_BOOTSOURCE_UFS = 7,
- 	BROM_BOOTSOURCE_I2C = 8,
- 	BROM_BOOTSOURCE_SPI = 9,
- 	BROM_BOOTSOURCE_USB = 10,
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 92bb4aa62f11..483a2f7c4ab2 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -436,6 +436,9 @@ config ROCKCHIP_RK3576
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
- 	imply SPL_CLK
- 	imply SPL_DM_SEQ_ALIAS
-+	imply SPL_DM_GPIO if UFS_ROCKCHIP && SPL_UFS_SUPPORT
-+	imply SPL_DM_RESET if UFS_ROCKCHIP && SPL_UFS_SUPPORT
-+	imply SPL_GPIO if UFS_ROCKCHIP && SPL_UFS_SUPPORT
- 	imply SPL_FIT_SIGNATURE
- 	imply SPL_LOAD_FIT
- 	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-index a1e8a7572fa4..46cf60dc77c7 100644
---- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-+++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-@@ -46,6 +46,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_FSPI0] = "/soc/spi@2a340000/flash@0",
- 	[BROM_BOOTSOURCE_FSPI1_M1] = "/soc/spi@2a300000/flash@0",
- 	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
-+	[BROM_BOOTSOURCE_UFS] = "/soc/ufshc@2a2d0000",
- };
- 
- static struct mm_region rk3576_mem_map[] = {
-diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index 6572dde29f65..d2dd5e10935f 100644
---- a/arch/arm/mach-rockchip/spl-boot-order.c
-+++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -76,6 +76,9 @@ static int spl_node_to_boot_device(int node)
- 	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
- 		return BOOT_DEVICE_SPI;
- 
-+	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
-+		return BOOT_DEVICE_UFS;
-+
- 	return -1;
- }
- 
-@@ -231,6 +234,17 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
- 		return -ENODEV;
- 	}
- 
-+	if (boot_device == BOOT_DEVICE_UFS) {
-+		ret = uclass_find_device(UCLASS_UFS, 0, &dev);
-+		if (ret) {
-+			debug("%s: could not find device for UFS: %d\n",
-+			      __func__, ret);
-+			return ret;
-+		}
-+
-+		return ofnode_get_path(dev_ofnode(dev), buf, buflen);
-+	}
-+
- #if CONFIG_IS_ENABLED(BLK)
- 	dev_num = (boot_device == BOOT_DEVICE_MMC1) ? 0 : 1;
- 
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 74c267dfc4e5..d35f3904e404 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -99,6 +99,15 @@ config RESET_ROCKCHIP
- 	  though is that some reset signals, like I2C or MISC reset multiple
- 	  devices.
- 
-+config SPL_RESET_ROCKCHIP
-+	bool "SPL reset controller driver for Rockchip SoCs"
-+	depends on SPL_DM_RESET && ARCH_ROCKCHIP && CLK
-+	default y
-+	help
-+	  Support for the reset controller on Rockchip SoCs in SPL. Select this
-+	  if you observe any reset-related warnings or errors when booting SPL,
-+	  such as when using UFS storage
-+
- config RESET_HSDK
- 	bool "Synopsys HSDK Reset Driver"
- 	depends on DM_RESET && TARGET_HSDK
-diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index ee5b009d1341..dc7d3b610e6e 100644
---- a/drivers/reset/Makefile
-+++ b/drivers/reset/Makefile
-@@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
- obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
- obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
- obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
--obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
-+obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
- obj-$(CONFIG_RESET_MESON) += reset-meson.o
- obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
- obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+Best regards
 
--- 
-2.51.2
+Heinrich
+
+>=20
+>>
+>>>
+>>> Starting kernel ...
+>>
+>> ExitBootServices is called in the middle of the Linux kernel EFI stub a=
+nd not when entering the kernel.
+>=20
+> Oh I see. To my mind the kernel EFI stub is a bit like a bootloader
+> tacked onto the front of Linux. Linux doesn't properly start until it
+> has control of the machine and actually starts its init.
+>=20
+> So we definitely want to get bootstage output (for example) covering
+> that period, otherwise there is a significant uncounted time between
+> the EFI app starting and Linux starting.
+>=20
+> Regards,
+> Simon
+>=20
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>> <<<
+>>>
+>>> So it is not silent today. The last line is the new one. Every other
+>>> boot method writes this line.
+>>>
+>>> However, the video display is silent once grub has finished and I just
+>>> noticed that this patch draws some pixels on the display, as if the
+>>> EFI display is set to a different mode from what U-Boot expects. I
+>>> suppose this is understandable, as grub has run by then and has
+>>> probably changed the mode.
+>>>
+>>> So I wonder what would be best here. We don't support dynamic video
+>>> sizing right now and I don't feel the urge to implement it just for
+>>> this. Perhaps with EFI we could disable the vidconsole when
+>>> exit-boot-services is called, on the basis that we cannot deal with
+>>> whatever has happened to the display in the interim?
+>>>
+>>> Regards,
+>>> Simon
+>>>
+>>>>
+>>>> Best regards
+>>>>
+>>>> Heinrich
+>>>>
+>>>>>
+>>>>> +      bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel=
+");
+>>>>> +
+>>>>> +      if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
+>>>>> +              bootstage_report();
+>>>>> +
+>>>>>        dm_remove_devices_active();
+>>>>> }
+>>>>> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+>>>>> index a56435d053f..80adc074070 100644
+>>>>> --- a/test/boot/bootflow.c
+>>>>> +++ b/test/boot/bootflow.c
+>>>>> @@ -1381,7 +1381,7 @@ static int bootflow_efi(struct unit_test_state=
+ *uts)
+>>>>>
+>>>>>        /* TODO: Why the \r ? */
+>>>>>        ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+>>>>> -      ut_assert_nextline("Exiting test app");
+>>>>> +      ut_assert_skip_to_line("Exiting test app");
+>>>>>        ut_assert_nextline("Boot failed (err=3D-14)");
+>>>>>
+>>>>>        ut_assert_console_end();
+>>>>
+>>>
+>>> Regards,
+>>> Simon
+>>
 
