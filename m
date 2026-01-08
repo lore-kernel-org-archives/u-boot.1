@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08151D1D486
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:09:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27BFD1D483
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4409083B49;
-	Thu,  8 Jan 2026 20:09:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5DA7284285;
+	Thu,  8 Jan 2026 20:16:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bxFJ2MDl";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AKmo9His";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eQMO0Ad9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE1718415E; Thu,  8 Jan 2026 20:09:38 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87F7A8422D; Thu,  8 Jan 2026 20:16:33 +0100 (CET)
+Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
+ [IPv6:2a00:1450:4864:20::643])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9EF0838A5
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:09:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AEE6284285
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:16:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dnDww3LnJz9srM;
- Thu,  8 Jan 2026 20:09:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767899376;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3/3n+wu1bOSSdpy+E24JJ7ADRMxP/jO9WBoLDy6UIY4=;
- b=bxFJ2MDlJkVtfTo0zjDArzLL+6PR+N/r/NSJBCuaeSwc0WKBA8s1P4aApbWcbBHTuEOyJh
- TNj2rr0DP/GJswahqLtOlk3DbGbGK/IoZdMSgHxPsxDCuaFnOU+4qBsRagiwSzYw0Da+gF
- 3XVlFvuGvjPnaSF9EqUXvr3Y9X1/fLwx/LcLGwghbHKRXRSSGHbuRt3tFWN07nOs4tG6FB
- e65JgxCMG4TVzQe6Tr3VqhtdHrj3WFQyUmKT/lC6B8SEyKlRo6FMMoG+yUPd8z7PcpOcUi
- BOpXMaP5lzIFckzzsCW0lyuydzuFsLzJ73NdtKtGbU1y32ltBB02HzH5pQkjxA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=AKmo9His;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767899374;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3/3n+wu1bOSSdpy+E24JJ7ADRMxP/jO9WBoLDy6UIY4=;
- b=AKmo9HismghRRcfphOhBS7wcuqBlayhqDk/jrL5hibgjIIj4ZYxDQwAd1Cy0GY66F5XHvI
- HLzkHfVYixj28zeVs9/oeYvRqNdZMAlThvRJQzYnH5bceKN9jUs1hdjvTYVMplq6LVYk68
- +FtV1kvN2+0Kiqi2bxO/ryHMFnatWmFlDzTU9C9V6gzZs93wPA7IF05BdTW9IZF7/ygT57
- f9C24xryKUiclQ2ETcv7DFIto3NpCLEkIz7x5e5+Yd2ipODCIEF0IwNUZhvz9rCCstiEz7
- 5L/Lw/OrV/eJA66edAkDMfRrUGi6onuTjlrfCnktouM4KovtkT0QOMSQ2C3xWQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: dts: renesas: r8a779g3: Reinstate basic PCIe clock
- description for Sparrow Hawk
-Date: Thu,  8 Jan 2026 20:09:21 +0100
-Message-ID: <20260108190932.36964-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x643.google.com with SMTP id
+ a640c23a62f3a-b8010b8f078so566540166b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:16:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1767899790; x=1768504590; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xAYHI9+ILIhYyNmCSRMcUCdVDOq+hC6B1cRrxAF2ceQ=;
+ b=eQMO0Ad9XUsyGW9Q2y/DlEiyQMymctsyN9XXUV0wxTsPfmtWpQtMCNSyjONrxXk2JQ
+ BxTTfozQ8lx3SY/cEb9C5rn6QCCDw7AyOI6zzhkSZweMBGf2iytIDuaP3zEhn7l07L9O
+ /uWF8ecSQbleSBkQUqivCqinvDEcFfxSvXuGs8l2Yqut2/OMm392fl7uyunTpqYdBhdi
+ ocbxXZmPy7NTyysVrgsZfZobVo9WtkajZR9EIU8KfUtKDHsiJ8+hKzfodBhWM/xOIYM6
+ 9ObbTYNMDeTvh6bX4Yx7Ts/rBLF6sEiIXZN2aD1D4j6zjOh5TocL32ybAeW4k2nbfukD
+ 4oLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767899790; x=1768504590;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xAYHI9+ILIhYyNmCSRMcUCdVDOq+hC6B1cRrxAF2ceQ=;
+ b=YlrcBHNGd+h0ha1V9ubeiith7cHTyw/xG5O0xvS44weu1oX0NQgLcPvRtj5yxLYur/
+ H4LWNohJ2OCFogdOB4MAlsJEEeT6L6GEwnqHZN9lgZUiqkO+p751BX261ChxYBGKnQ48
+ yUD0Y+0d81oMUL2n/rBxv0ytaMSQOgAI52iXSd9CO4gQFvvJo4zFdjGJAcImCzP2nc+S
+ sajrNWjNa4fsoLg2YjPgjXx7aritV23xITBMg9p97+Wms5dGNvxUpLEyBXXHH+RyeAfn
+ 4krZ5omN1jLDVZHRmvV08ZD8XoFg82Y4UIys18439+hIfJbR6SoBwV1CbRtBJg3icTrz
+ d2fg==
+X-Gm-Message-State: AOJu0YxtyXLsMLR6Dr+bokFcSZ//QFZYHC/2Ae3YXhpgjqELRWCqOsQK
+ 7QOGwinLgZsrCLoDqqG3z79mrLU51CF9C0ZnqrrdzRkmK0VhSQKt3rWogLBtcdTz3tyNVNU1ZmN
+ tB5T4jqY=
+X-Gm-Gg: AY/fxX7ELgR5L3b7YX+N4YpGHnT3m68VzEmElXZx3iqFUZYC2bFjmyBz3gZZq7WhHOH
+ VCvHEOJLapEJjZMc55jXSsfdA6hZrkbO1Vg6hxbqZQcDpSmec5QVf/y+IfRZTWETZ/4nKesmzDN
+ 7fjRdGRYddbK5wY0iIFy7ZveW5Lq3xYMqkAe/lGjECpHWnU5M7AQErnEtUaR+WupuWqemrsHTVe
+ NpM+nUz5VBEu0hIe4jPVfEG8Urdn39N3xIwETBcojYYleUFVfUaNkSRrEGQPdbpLLEcOj7oZNno
+ BmaEkWc1UNnSYDg0UQDsCW23yAJqLISrSzuW5MKUpyhELVgsEbGTskKRFBpKKB3vocRY4Tm46Jw
+ 7zTRSu7cnClTjPnKcAp8yJW+ZuhtknSxhcQPPNnXZlqH3BGIgzsLgc13SBQoV6cT711BIp4VJjr
+ 9ja3qLUp3I3NLPKcYGLcVzSX+XMnZzE9aKUx0fWxVRu0QZSX3lTiG7zxLWatF+Tg==
+X-Google-Smtp-Source: AGHT+IFPlPDRxEi276vqVWpm6m97sW6YtWoWdxOPxiWh4RZsiqVMlt744SoAZdzP29dVnduOjIdQzQ==
+X-Received: by 2002:a17:907:9483:b0:b80:3101:cd13 with SMTP id
+ a640c23a62f3a-b8444d4eb13mr833660266b.10.1767899790133; 
+ Thu, 08 Jan 2026 11:16:30 -0800 (PST)
+Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
+ [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b842a563f73sm922240266b.61.2026.01.08.11.16.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jan 2026 11:16:29 -0800 (PST)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] ufs: uclass: fix potential unitialised use
+Date: Thu,  8 Jan 2026 20:16:17 +0100
+Message-ID: <20260108191626.3119582-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: ehp8mmkbwu9o5sjr91x59w4s5zwefpst
-X-MBO-RS-ID: 9d197149bd0646f44ff
-X-Rspamd-Queue-Id: 4dnDww3LnJz9srM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,53 +100,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 9FGV0441 PCIe clock generator can operate in autonomous mode, which
-is the default mode. U-Boot currently does not have a driver for this
-PCIe clock generator, but Linux 6.17 DT does describe the clock generator
-in Sparrow Hawk board DT and this DT is included in U-Boot since commit
-eea470fd7f6a ("Subtree merge tag 'v6.17-dts' of dts repo [1] into dts/upstream").
+When host_ref_clk_freq is 0, err will be returned before being set.
+Assign a default value to fix the warning.
 
-Reinstate basic PCIe clock description which matches the behavior of
-Linux DT before Linux 6.17.y release in in U-Boot DT extras to allow
-PCIe to be used on Sparrow Hawk board in U-Boot until the 9FGV0441
-driver gets implemented or ported from Linux.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
-Cc: Tom Rini <trini@konsulko.com>
----
- arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ drivers/ufs/ufs-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-index dff0355150d..968cf6684c5 100644
---- a/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-@@ -49,6 +49,24 @@
- 	status = "okay";
- };
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 3c8e4299259c..8dfba2140b68 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -1854,9 +1854,9 @@ enum ufs_ref_clk_freq ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct
+ }
  
-+&pcie0_clkref {
-+	clock-frequency = <100000000>;
-+	status = "okay";
-+};
-+
-+&pciec0 {
-+	clocks = <&cpg CPG_MOD 624>, <&pcie0_clkref>;
-+};
-+
-+&pcie1_clkref {
-+	clock-frequency = <100000000>;
-+	status = "okay";
-+};
-+
-+&pciec1 {
-+	clocks = <&cpg CPG_MOD 625>, <&pcie1_clkref>;
-+};
-+
- &rpc {
- 	flash@0 {
- 		/*
+ static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
+ {
+-	int err;
++	int err = 0;
+ 	struct clk *ref_clk;
+ 	u32 host_ref_clk_freq;
+ 	u32 dev_ref_clk_freq;
+ 
 -- 
 2.51.0
 
