@@ -4,103 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F62D185C2
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 10:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8B1D185C9
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 10:52:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16C8883B8A;
-	Thu,  8 Jan 2026 11:49:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 80B4B83B8A;
+	Thu,  8 Jan 2026 11:52:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="fnxWt1B8";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="eFg32/wU";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G0BpMfcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 130FF8410B; Thu,  8 Jan 2026 11:49:46 +0100 (CET)
-Received: from mx-relay48-hz3.antispameurope.com
- (mx-relay48-hz3.antispameurope.com [94.100.134.237])
+ id 9F77F84113; Thu,  8 Jan 2026 11:52:06 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84DCC83B87
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 11:49:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=04619a1675=max.merchel@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate48-hz3.hornetsecurity.com 1; spf=pass
- reason=mailfrom (ip=94.100.132.6,
- headerfrom=ew.tq-group.com)
- smtp.mailfrom=ew.tq-group.com
- smtp.helo=hmail-p-smtp01-out03-hz1.hornetsecurity.com; dmarc=pass
- header.from=ew.tq-group.com orig.disposition=pass
-ARC-Message-Signature: a=rsa-sha256;
- bh=jXfo09dz2DdhiIQX7KODKd1ZE5ku9uvrCWDut7MEKUU=; c=relaxed/relaxed;
- d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1767869381;
- b=CzIJN4q1p09VsKp2p1779WpXTSFFRZgonTSZvCLOZHGZSiHcpKekrmbpV8EwqjWwbNkOcvHu
- pF+F08TwxhEgVycXgN51XV/OO6rBU3tRmu4IyvLsnKHuSKP+DpBQ+jDkTJGzj4GLAGDHf8LZpq8
- jd3l9I9HhMSntO+EM49YzC5aU98kXzrt83IoItcrkIZXlA5bLpO8tXpAOB/kjTQ1lkZn58K6ioU
- yXekfbfYKd3CoMc5rFbf9ADnkauvH0Svaqcr5s/+Hgo9zf+dAJ3eMuRoO+3a/hAw7Kvl2iHLjbl
- 2WB0dSeMCA0J0vykXnLi6uWmIFoAuLg6d4GOw6u4z4zOw==
-ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1767869381;
- b=on0ntrrDQC9Z9BGXTP20YUNRSl+oGGFrQQhnkCITEWFaGMtJdY1Yo+a0h3pVSd+ckYlwKKMq
- yp+27kZbmTXnWbngaCLoI8WEVflxpNCkmV2KZbzfBNbtrg3Nrz2CkavyjIX94tDhZomCYQdcAJY
- 1GAcxeibbaL1RwieZxpImZYeh6RT4z70Au6HNPpikVkDwdfd/AxeQ/zTFsZjEi1g6tslCcZJCiZ
- I8SZ+N18RXx0U+LRd+1GCNTVbrey4AkoTQ9lDCdSkmSINGeUgVHakptScJ0LHMmlrFQcQmCerCZ
- WmXegwWIS7UpwYLsc9fiArJLUeS4K0czOXMq5ZjmuR3kw==
-Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay48-hz3.antispameurope.com; Thu, 08 Jan 2026 11:49:41 +0100
-Received: from [10.123.75.134] (host-82-135-125-110.customer.m-online.net
- [82.135.125.110]) (Authenticated sender: max.merchel@ew.tq-group.com)
- by hmail-p-smtp01-out03-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
- 26EC5CC0E8B; Thu,  8 Jan 2026 11:49:21 +0100 (CET)
-Message-ID: <71c47575-6a2e-4210-95c2-01cf36e55481@ew.tq-group.com>
-Date: Thu, 8 Jan 2026 11:47:38 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 48FDF83B87
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 11:52:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6085DIcv3890526
+ for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 10:52:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=E3AWy6avvb0gCg3VQv1lG9
+ trDRbn4odqmH6mcho0/Ow=; b=eFg32/wUFfagJHH3h0jRfaYeaaKgBc1OXioqZa
+ N59zJ80tZBSZGeLjwc9v/NZLLoF7eCB0ynH8+tpeVv00IkzdhO63OxDinu+I6et7
+ A30x82lIV8pqlDc9qoipiReHpUVDePYeeF8ZSgRSZznPgadsgZot6UpneBCNa7Oz
+ rZVt28Ffy1SuiNoJiC5hMz7ktzEmIsTxv6iz3NhQj8TcTQwJ7LYVIK7x5vGIPeo2
+ 3PG+VbR+nXaN42C+lfL7hhtU2DDHWwG4cUrDwd196iTa9o0KxKwVT+etSiPuJWnR
+ YmuzcNdW/a356ofhIZw0VlqBz6/akr7TeReX4OKOX6sZSxNA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhuy72sr8-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 10:52:02 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2a377e15716so67105795ad.3
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 02:52:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1767869521; x=1768474321; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=E3AWy6avvb0gCg3VQv1lG9trDRbn4odqmH6mcho0/Ow=;
+ b=G0BpMfcbvo7iFpK3r+uuWme3T2I/Y3tbHs7Qi0koKZbdIR3mNt2liCf5FGoc1Zjcg0
+ yN9LAaz5m09sMQ4O7ZBnMM+mRtrABZL8JElhuSsCGlkNjcMaDE30gOBCmJb9GCqf57Ix
+ ePghuQN3YRdO9yNXrhZhe33cFIBlabdi9nhOXAN2IWBs8C58p18pkOxtXWnc3U4cXSom
+ 8BQjO0TiDxDYz6wMjwrzB/KNOxYZNqfu2kVZvSw1aTq3urUnqR8B+cZRmJgOkxt63Wwl
+ j+IYFmeyGgb+eomAwOQrFvWYnzGXfntG6mlfaR3PmpuTKdygnh8VzxNcbyu30GVhW7u4
+ hEjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767869521; x=1768474321;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E3AWy6avvb0gCg3VQv1lG9trDRbn4odqmH6mcho0/Ow=;
+ b=CXaKIoQqtYG9tBTKZ9iwFiQj9Jekg0zxdW9vxWKpODJbHscok0FNHGOToG6eHB7hDi
+ d8H2Ah8HmtfreKNTJm95m/Al1iKxa2wGgzHO+gOVGhoKvbK4ZqPG6xD9sOQvalXJFbrh
+ GcUnXFOYyQOjlUCyPvGtmsvWTQLF4ju1Ar6kaMO5MSi+0ijO1Wv3JBErqWAn4XITwQZp
+ XOMj/ItHNftJeOAzfDB6Wf0svtiUd5Bbb5rA70gBIik6VGEzhxzaLJ7ZYb373npR3Nxo
+ lA5vdRnrZFf/SN/ykkIsAoJfjr4dlOF/nb48tFpassQC1G7d4HdySV12GPM2heUl3KjP
+ WuSQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkA3+leAx7KiYyN5dPCWOLB2kx+YK3OzboxXkRZlFwW34cMjhVlexkC0Hc8EHMhil4AJthKHE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4IEK5LzgwjtWJEW7HkFwVW1NhNR9tHHXsJPTkkm3BFTml8fGb
+ ELyqPYQapS6f/aZKV3PnlYP16ubVnu79WROvwj+z+wuzGtLnHKdDDfy43uY/r/W4rTiLZeDQm0M
+ lYSWCMorw80q/O4zvmaEyvzsQ+OUCpWxAN7ZF4HzRSLtDWaxkMXsfvZs0L3d77qWY
+X-Gm-Gg: AY/fxX40m3pbObg8Ck2HIQIIPKCgWc3bE9ak4lxF7uENP084mii/I4ZebvWH8xPRBjb
+ Wg2kniomUjendLeHtZlOj2YVzH+XtOWZlhUd9dC3RqfCOcOlH6jPlkvMmrQCOUIlngSPZQ2oJus
+ jmmS/0A6Q45mTRO2rRpRoLZgx+4yBrec0pomM56qb1UYJzTD1veeDwvagb74496ytQQT7t3thgP
+ YDQHzzKilV3oCtGlEVuBXOkYO7syXHXO3HKWJu6MpWY+FuZIUoa82lOxSD/M/fB985KpG27RpH5
+ LS6msJsh2mHk0cFLUo7FPk21olS2s1TmL3O77ZWV8V6xuuLtzyEutFzEhAWHbmxILC2ayF7EkkM
+ ZAixiruGt5zDAYP+q/+Q7jKbOW5lsawlnOuJhvxGauvBhDOb+T4iG9aBcjn0eiS0nHJJwpi69SZ
+ 9CzZj8dhxgRFoFmLjDShv4t7LwQlq2
+X-Received: by 2002:a17:903:b48:b0:2a0:98a2:3ccf with SMTP id
+ d9443c01a7336-2a3ee4b237cmr61251285ad.40.1767869521043; 
+ Thu, 08 Jan 2026 02:52:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEjcO3vp/lDdjXRJWpCtTMa/cxNBNFdAW93blEy77VWQKKCaw1r/LqNqUSgZ+Gp/lDF+cEFmw==
+X-Received: by 2002:a17:903:b48:b0:2a0:98a2:3ccf with SMTP id
+ d9443c01a7336-2a3ee4b237cmr61250985ad.40.1767869520532; 
+ Thu, 08 Jan 2026 02:52:00 -0800 (PST)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a3e3cc7856sm77032085ad.68.2026.01.08.02.51.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jan 2026 02:52:00 -0800 (PST)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ aswin.murugan@oss.qualcomm.com, sjg@chromium.org, michal.simek@amd.com,
+ j-humphreys@ti.com, raymondmaoca@gmail.com, paul.liu@linaro.org,
+ u-boot@lists.denx.de
+Subject: [PATCH v1] firmware: psci: Refactor EFI runtime PSCI reset handling
+Date: Thu,  8 Jan 2026 16:21:46 +0530
+Message-Id: <20260108105146.1285450-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] mmc: "unable to select a mode: -5" on i.MX8M/AM62
- platforms
-To: Peng Fan <peng.fan@nxp.com>, Francesco Dolcini <francesco@dolcini.it>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Vitor Soares <ivitro@gmail.com>, Fabio Estevam <festevam@gmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "vitor.soares@toradex.com" <vitor.soares@toradex.com>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "marex@denx.de" <marex@denx.de>,
- "tien.fong.chee@altera.com" <tien.fong.chee@altera.com>,
- "balsundar.ponnusamy@altera.com" <balsundar.ponnusamy@altera.com>
-References: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
- <d9978b24-65d5-4f8f-8ef9-e551c5baf9b9@ew.tq-group.com>
- <6e24770b-ea18-4678-90ef-6338bd40b147@altera.com>
- <20260108090428.GA5224@francesco-nb>
- <DB9PR04MB84613047013E58521989D84B8885A@DB9PR04MB8461.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Max Merchel <max.merchel@ew.tq-group.com>
-In-Reply-To: <DB9PR04MB84613047013E58521989D84B8885A@DB9PR04MB8461.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-cloud-security-sender: max.merchel@ew.tq-group.com
-X-cloud-security-recipient: u-boot@lists.denx.de
-X-cloud-security-crypt: load encryption module
-X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
-X-cloud-security-Mailarchivtype: outbound
-X-cloud-security-Virusscan: CLEAN
-X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay48-hz3.antispameurope.com with 4dn1qj5ZGXz1kNh4m
-X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
- IP=94.100.132.6
-X-cloud-security-Digest: 079d297bd67beac9316eb8fb364e2b8e
-X-cloud-security: scantime:2.141
-DKIM-Signature: a=rsa-sha256;
- bh=jXfo09dz2DdhiIQX7KODKd1ZE5ku9uvrCWDut7MEKUU=; c=relaxed/relaxed;
- d=ew.tq-group.com;
- h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1767869380; v=1;
- b=fnxWt1B8X9SD6+R1S67PRLhcxzTzICte7gRMeaLfNwijEtn+L4JwpV0L0wDRFmWs/uvs+RY7
- wvhGVJ8TJxORzo7w+rFU5WnozBOjfoWiFZQURw8ZG3Hw6MOZPy8Hn8Cmyv/HmbjztlAPDYMX9cx
- sbv/0V5wOPNDrs7O/PfCLEe6Gu+grFmPXU1gvvqj/iDu37I/DcsfGE+DCzCtbGy3xhuCu9VCY+e
- w3YPAac2G3cT0VU2DbFERI8pAYIzgBoSlOqemhKXsoTaIjrmzhhG4RMziqkiWRgrN52UpZS6UK6
- wejSIc8e7Qw0hfC0FTExdKuJnz8LIGVBuDc4JfMX8mtpg==
+X-Proofpoint-ORIG-GUID: xCHhRFsoQ3aUS5ZE_IS9KjDxLXetvVM2
+X-Proofpoint-GUID: xCHhRFsoQ3aUS5ZE_IS9KjDxLXetvVM2
+X-Authority-Analysis: v=2.4 cv=DZEaa/tW c=1 sm=1 tr=0 ts=695f8c52 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=ICsd6TV6tRGNqm-va00A:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDA3MyBTYWx0ZWRfX+PSqTP+jzvaY
+ EE3OEV2nB4I1jcIZZAlq4fdbEUrUTruYoJKHS2SbHc/pZ68fVP/DeCXFf9eaY1n4qmvgunkanM3
+ Vj6PsClyWdo2P61pX7lN+CYFfLyz1cIudUWnTaBX4u/gVhcesIwh5a47ddf+1sGaXLtwlcf4cYK
+ cjG1MwnVPL4UTj5cagitcxjQkIP7JUbamosNUjtAjiGPvH8FZrD2bSEJ1kGZOxyGhWlZkyJkg8U
+ juIHma4aVxrGVL6Oy+WJhJBFFmUicmRP5kXS5oyrOnbif9IaXsvXzcgd07R8W/TXeHfIeiVe4mk
+ fBHKhPvvt6k/GK/+gvUeSn2aVkiqarR3EX7TF+QzhIXT2G56dW0gbUg7t/3RfGYxq23T+zZH09c
+ CAEAFyicQhuGMYxQLmFlPDJdNQn+kK0kTI9Lpx8dNj3+ESCCfaTXI7E9T8TSidN92oDmj7OVHDn
+ PoY66wT3DS1YV5joJTw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-08_02,2026-01-07_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
+ spamscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080073
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,112 +147,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Previously, U-Boot’s PSCI-based implementation of `efi_reset_system()`
+was always enabled when `CONFIG_PSCI_RESET` was set, but it did not
+handle additional arguments required for specialized reset modes. This
+caused issues where special reboot requests (e.g., bootloader, EDL)
+were ignored, resulting in a normal reboot.
 
+This change introduces a new configuration option,
+`CONFIG_EFI_PSCI_RESET_RUNTIME`, to explicitly control whether the
+runtime PSCI-specific EFI reset implementation is enabled. By default,
+the PSCI EFI reset is disabled unless this config is selected, allowing
+the kernel to handle the reset logic and pass the necessary arguments
+for the intended reset mode correctly.
 
-Am 08.01.26 um 11:33 schrieb Peng Fan:
-> Hi All,
-> 
->> Subject: Re: [REGRESSION] mmc: "unable to select a mode: -5" on
->> i.MX8M/AM62 platforms
->>
->> On Thu, Jan 08, 2026 at 01:37:57PM +0530, Tanmay Kathpalia wrote:
->>> On 1/8/2026 12:32 PM, Max Merchel wrote:
->>>> Am 08.01.26 um 00:15 schrieb Vitor Soares:
->>>>> U-Boot 2026.01 fails to initialize MMC devices on multiple
->>>>> platforms with "unable to select a mode: -5" during
->> mmc_select_mode().
->>>>>
->>>>> Affected platforms:
->>>>> - Verdin iMX8M Mini (SPL boot failure - cannot boot at all)
->>>>> - Verdin iMX8M Plus (MMC init fails in U-Boot proper - cannot
->>>>> boot)
->>>>> - SMARC iMX8M Plus (MMC init fails in U-Boot proper)
->>>>> - Verdin AM62 (boot failure, no output)
->>>>>
->>>>> All platforms use eMMC and worked correctly prior to this
->> regression.
->>>>>
->>>>> Bisect results:
->>>>> - Last known good commit: 228810d0bac3
->>>>> - Known bad commit: 36aeeb591b0d
->>>>>
->>>>> Between these commits, several MMC-related changes were
->> merged.
->>>>> These seem particularly relevant:
->>>>> commit aebb523a2381 ("mmc: mmc-uclass: Use max-frequency
->> from
->>>>> device tree with default handling") commit 1e40e419aeb2 ("mmc:
->>>>> sdhci-cadence: Use max-frequency property from device
->>>>> tree")
->>>>> commit fa7e82127fad ("mmc: sdhci-cadence: Set controller and
->> PHY
->>>>> speed modes for SD and eMMC cards")
->>
->> ...
->>
->>> Thanks for the detailed report and bisect results. I've looked into
->>> the issue, and it appears the regression is introduced by commit
->>> aebb523a2381
->>> ("mmc: mmc-uclass: Use max-frequency from device tree with
->> default
->>> handling").
->>> The problem stems from the probe function in the FSL eSDHC driver
->>> (fsl_esdhc_probe). Here's a breakdown:
->>>
->>> First, fsl_esdhc_init is called, which sets cfg->f_max to the minimum
->>> of the controller's sdhc_clk and a hardcoded 200 MHz limit:
->>> cfg->f_max = min(priv->sdhc_clk, (u32)200000000);
->>> Subsequently, mmc_of_parse is invoked, where in the commit if the
->>> "max-frequency" property is not specified in the device tree node for
->>> the MMC controller, this function overrides cfg->f_max to 0.
->>>
->>> This results in f_max being set to 0, which prevents proper mode
->>> selection during MMC initialization and leads to the "unable to select
->> a mode: -5"
->>> error you're seeing across those platforms.
->>>
->>> A potential fix could involve either:
->>>
->>> Adding the "max-frequency" property to the relevant device tree
->> nodes
->>> (e.g., setting it to 200000000 or the appropriate value based on the
->> hardware).
->>
->> In general solving a regression in code, adjusting the DT is not ok in
->> Linux, not sure if the same reasoning would apply in the U-Boot use
->> case (considering that both U-Boot and DT are firmware).
-> 
-> Please see whether below changes could work on your platforms or not.
-> It works on i.MX93.
-> 
-> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index bf0bea93853..a32cd25ba85 100644
-> --- a/drivers/mmc/mmc-uclass.c
-> +++ b/drivers/mmc/mmc-uclass.c
-> @@ -249,7 +249,8 @@ int mmc_of_parse(struct udevice *dev, struct mmc_config *cfg)
->           * will set the MMC configuration maximum frequency to the host controller's
->           * maximum base clock frequency from capabilities register.
->           */
-> -       cfg->f_max = dev_read_u32_default(dev, "max-frequency", 0);
-> +       if (!cfg->f_max)
-> +               cfg->f_max = dev_read_u32_default(dev, "max-frequency", 0);
->   
->          if (dev_read_bool(dev, "cap-sd-highspeed"))
->                  cfg->host_caps |= MMC_CAP(SD_HS);
-> 
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+ drivers/firmware/psci.c |  4 ++--
+ lib/efi_loader/Kconfig  | 10 ++++++++++
+ 2 files changed, 12 insertions(+), 2 deletions(-)
 
-Hi Pan,
-
-the change prevents the function from being carried out on the iMX6.
-Settings of max-frequency in dt are ignored because cfg->f_max has 
-already been set initially.
-
+diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+index 2e3223e1c32..009c6153d0c 100644
+--- a/drivers/firmware/psci.c
++++ b/drivers/firmware/psci.c
+@@ -244,7 +244,7 @@ static void __maybe_unused do_psci_probe(void)
+ 	uclass_get_device_by_name(UCLASS_FIRMWARE, DRIVER_NAME, &dev);
+ }
+ 
+-#if IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET)
++#if IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME)
+ efi_status_t efi_reset_system_init(void)
+ {
+ 	do_psci_probe();
+@@ -266,7 +266,7 @@ void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
+ 	while (1)
+ 		;
+ }
+-#endif /* IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET) */
++#endif /* IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME) */
+ 
+ #ifdef CONFIG_PSCI_RESET
+ void reset_misc(void)
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 13e44be1d06..23c9e5cd1ea 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -106,6 +106,16 @@ config EFI_HAVE_RUNTIME_RESET
+ 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
+ 		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
+ 
++config EFI_PSCI_RESET_RUNTIME
++	bool "EFI Runtime PSCI Reset Support"
++	depends on ARM_PSCI_FW
++	help
++	  Enable PSCI-based reset implementation for EFI runtime services.
++	  This allows the EFI runtime to perform system resets and power-off
++	  operations using the ARM Power State Coordination Interface (PSCI)
++	  firmware interface, providing a standardized method for system
++	  power management across different ARM platforms.
++
+ endmenu
+ 
+ menu "UEFI Variables"
 -- 
-Best regards,
-Max
-
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
+2.34.1
 
