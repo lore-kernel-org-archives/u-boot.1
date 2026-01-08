@@ -4,85 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24887D232C1
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 22:13:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C04D232C2
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 22:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90541842FC;
-	Thu,  8 Jan 2026 23:13:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CE4938415E;
+	Thu,  8 Jan 2026 23:18:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=iro.umontreal.ca
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tYsIWxFT";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 249AD841C8; Thu,  8 Jan 2026 23:13:10 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 53BEF841C8; Thu,  8 Jan 2026 23:14:23 +0100 (CET)
+Received: from ciao.gmane.io (ciao.gmane.io [116.202.254.214])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB6FB84198
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 23:13:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 116DB8415D
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 23:14:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=iro.umontreal.ca
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+david.ixit.cz@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0EC8044450;
- Thu,  8 Jan 2026 22:13:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DCDC2C19422;
- Thu,  8 Jan 2026 22:13:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767910382;
- bh=FCVSJT3Uuehp3IFiF6oce1OA+4DXnQYWiI2P3hdWVro=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=tYsIWxFT7IooTxDN3K8YZ4De+Ay4wRQoyCRkDdUD8jAFWwV2RLba41j2nUGN4LKTO
- nPimjhggXK5qoo4jlN0GX23dIVHQDqgSjnQUZCuk33SCssqUrn9zYYL6amiIY0N/V7
- SrBAy6J4cYhkvC/Ga+kftcUZ4AKNbMiCc6vyyJTDPo57m/BKlil6PUzj/Zq2ZW/cTK
- anoDYQKmBHfeDw4bzEINKtXM+srBwGu7dCFcheyLmQu11tPhEl8VypEbnErOukO2sP
- 74aJwHodFvRj+mszIOLJ9taiMnFLhUJK8YY8PbMz/sZciZoURxIdT9Iq4p47qDRdXr
- 6fRkdyiMF5AfQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D507AD232C1;
- Thu,  8 Jan 2026 22:13:02 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Thu, 08 Jan 2026 23:13:02 +0100
-Subject: [PATCH v4 2/2] configs: Add google-pixel fragment config for Pixel
- 3, 3 XL, 5
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-pixel-config-v4-2-76a2212b69a5@ixit.cz>
-References: <20260108-pixel-config-v4-0-76a2212b69a5@ixit.cz>
-In-Reply-To: <20260108-pixel-config-v4-0-76a2212b69a5@ixit.cz>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, Petr Vorel <petr.vorel@gmail.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Luca Weiss <luca.weiss@fairphone.com>, Simon Glass <sjg@chromium.org>, 
- Petr Hodina <petr.hodina@protonmail.com>, 
- Matthew Croughan <matt@croughan.sh>, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>, Simon Glass <simon.glass@canonical.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=969; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=qCGWssl7AevuFwYko+wSdsMSFJKTaUJcKdPCvF9nMuA=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBpYCvtkv22Eohm2V3JBTpdP/7UB3Xxji5Zi0nqz
- iLmElFyZsSJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaWAr7QAKCRBgAj/E00kg
- ciOGD/9HqvrEANPQGbo27mqQqdson7R77BTJp2kLN6vO9Bfyu+OgJYgd+UHQ/fJG9XBhnp6/ciE
- KHGW1lUqFeg2OJrlk/lU3yH040t6tHMfWoPX2QBtO7xKq7qOCnYQaJpxiaM5OeYvw32oXTQWM7I
- 9Arc9jmivRCUt+B+IqwdtB7v1009o76voXozElYucjhz+rM0zHQ4EJ4wR+oyZG/BDpVWIIOl881
- ofdnYvEEap9u2u3UJwbWIxNdVYNsN4JB5nINW0vI9QgXBd4dsf2J+X6wAzLGyjJIYd/WKpsoI8z
- K5vp6MnP36nDCe3rF3XgtBvB8mq4KK4PymjdOmuhuJ0JW+S8b21lvQJoN2nJLMHYQIIZF2jdbvP
- N12K42cr+BqoiVkxNc3OmXKzx+kZwd17MnabYSYIzUGYWQ3uYSREgLg3cUA6a/mnwd6l5FznC1q
- AKA0FSdAQCVMcxPHV8E/WvZzFsNjXiyNuF/uoToGq5jScLfWJCZiDrD6smitPybMTkuHSvvpt1l
- gY1/T9MhJAORu0DeDyKF/GW4afL0WiyUKRD7hkKBlwdTCcLub28Ghdb/6dNwOizoxa6xFWxK/QG
- hSCiDfDjEDkZMM5j+XwJ6vVuE/NR+MbovwJejWKF0evty8+jzDea1b2qSSSzkB+nSB3SbsdRj+d
- 66Vowtd1R9g33Mw==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
+ smtp.mailfrom=gcbu-u-boot-users@m.gmane-mx.org
+Received: from list by ciao.gmane.io with local (Exim 4.92)
+ (envelope-from <gcbu-u-boot-users@m.gmane-mx.org>)
+ id 1vdyGo-000ADb-Fb
+ for u-boot@lists.denx.de; Thu, 08 Jan 2026 23:14:18 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: u-boot@lists.denx.de
+From: Stefan Monnier <monnier@iro.umontreal.ca>
+Subject: Re: [PATCH v6 00/12] Rockchip VOP2 support
+Date: Thu, 08 Jan 2026 17:14:13 -0500
+Message-ID: <jwvwm1rep4n.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
+Mime-Version: 1.0
+Content-Type: text/plain
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Cancel-Lock: sha1:06gx4vYv3UJo2R3Mpz8tg387BMo=
+X-Mailman-Approved-At: Thu, 08 Jan 2026 23:18:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,40 +49,66 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: david@ixit.cz
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: David Heidelberg <david@ixit.cz>
+Dang Huynh via B4 Relay [2025-11-08 12:37:56] wrote:
+> This series adds VOP2 support to U-Boot and enable it for PineTab2.
+> HDMI should work flawlessly but there's still some timings issue with
+> DW MIPI DSI, perhaps that's something to look into later.
 
-Introduce a fragment config for the Pixel 3, Pixel 3 XL, Pixel 5.
+I'm trying to use this patch on my NanoPi R5S and the result is not
+quite what I expect.  I suspect I'm doing something wrong.
 
-On these devices, U-Boot is chainloaded via fastboot. However, due to
-additional requirements added by Google, the image header must have
-a specific value for the text offset.
-This is solved by setting CONFIG_TEXT_BASE to 0x80080000 in U-Boot.
+I applied the above patch to the tip of the current u-boot (there was
+a trivial conflict in a Makefile, but nothing of significance).
+Then I applied the following patch:
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- board/qualcomm/google-pixel.config | 5 +++++
- 1 file changed, 5 insertions(+)
+    diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
+    index 1653ab8b44f..d707dd5bc29 100644
+    --- a/configs/nanopi-r5s-rk3568_defconfig
+    +++ b/configs/nanopi-r5s-rk3568_defconfig
+    @@ -56,6 +56,7 @@ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+     CONFIG_RTL8169=y
+     CONFIG_NVME_PCI=y
+     CONFIG_PCIE_DW_ROCKCHIP=y
+    +CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
+     CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+     CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+     CONFIG_SPL_PINCTRL=y
+    @@ -80,4 +81,12 @@ CONFIG_SPL_USB_DWC3_GENERIC=y
+     CONFIG_USB_GADGET=y
+     CONFIG_USB_GADGET_DOWNLOAD=y
+     CONFIG_USB_FUNCTION_ROCKUSB=y
+    +CONFIG_USB_KEYBOARD=y
+    +CONFIG_VIDEO=y
+    +CONFIG_DISPLAY=y
+    +CONFIG_VIDEO_ROCKCHIP=y
+    +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+    +CONFIG_VIDEO_DT_SIMPLEFB=y
+    +CONFIG_VIDEO_BRIDGE=y
+    +CONFIG_VIDEO_REMOVE=y
+     CONFIG_ERRNO_STR=y
 
-diff --git a/board/qualcomm/google-pixel.config b/board/qualcomm/google-pixel.config
-new file mode 100644
-index 00000000000..999d4e45268
---- /dev/null
-+++ b/board/qualcomm/google-pixel.config
-@@ -0,0 +1,5 @@
-+# Enables chainloading of U-Boot on Google Pixel phones using
-+# newer bootloaders (Android Q/R)
-+# Use for following devices: Pixel 3 (blueline), Pixel 3 XL (crosshatch),
-+# Pixel 5 (redfin)...
-+CONFIG_TEXT_BASE=0x80080000
+I also changed the U-Boot config to extend the autoboot timeout to 30s,
+so I have plenty of time to hit a key on the keyboard.
 
--- 
-2.51.0
+and the result is as follows:
 
+- A U-Boot logo greets me at the top-right corner of the screen.
+  I'm really happy to see this logo, shows something is right with the
+  HDMI code&config.
+- The rest is all black, no text.
+- Hitting a key on the USB-connected keyboard seems to have no effect:
+  the screen stays desperately all black except for the U-Boot logo.
+- After the 30s timeout, the system boots as usual.
+
+I tried to disconnect&reconnect the keyboard as well as tried both USB
+ports on the device.  Same difference.  Why do I get to see the U-Boot
+logo but not the usual bootup text?
+
+
+        Stefan
 
