@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D33D1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A88D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C37841F2;
-	Thu,  8 Jan 2026 18:43:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3820C84284;
+	Thu,  8 Jan 2026 18:43:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O9QEurFn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VtQMQiTb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11A9A8425F; Thu,  8 Jan 2026 18:43:07 +0100 (CET)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id A6CE684158; Thu,  8 Jan 2026 18:43:10 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F36C184158
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:43:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A327D84284
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:43:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-7b89c1ce9easo2439737b3a.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:43:03 -0800 (PST)
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-bc29d64b39dso1396102a12.3
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:43:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767894182; x=1768498982; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767894184; x=1768498984; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vwVzuU39fQfSTIJLEVR7n1ncU3U/Wi0WAFQ12M3jE1Q=;
- b=O9QEurFnYk+BJ5b2xGg4pmJzWqQASBY+KPcDsZiezRRW20QHnnEMSBTHBuqx2yG/Pj
- lUzJaiEETAJxDnmMmOpZrSe+0kk+M6uoXmEezPAg41ojeh7pNYKM+uGJp9PvCQPXJSem
- Qua4v/Tw4Y0LzrR3tn4zYeM7U6DEmUkwT7ki0=
+ bh=ub9GicRW5zf1Fn16vHImmfJM7EEnlmvXQmNKh5d5sE8=;
+ b=VtQMQiTbiifyI48VdaZM/RDzNyZ0fU/zKAPBStoSa38+6lE1v6M3Kd0TS3jgV3vQjv
+ KT9DUG15R53pe44R/fmDWQl9DgH/NdS0S6KYUp7hnqfcqgWtIlIUtATBE9jrubp2GJuC
+ vzeRcxRG6oDIGQI6scgODCzallm/8lW35i140=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767894182; x=1768498982;
+ d=1e100.net; s=20230601; t=1767894184; x=1768498984;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vwVzuU39fQfSTIJLEVR7n1ncU3U/Wi0WAFQ12M3jE1Q=;
- b=igSZHXdXKR0QFDmV+rZlIRUOywkbLYYWqBRvZkU9lkEVzOcQ5WtHDqGnyp/OiqFLzL
- ztkd0txhVQc2EBg67C7jr6J0kA+vNzdgFUUIyRJMXbQp0rEROlZwBDY297NUfZO6gdkz
- GCl9bAePv4CiDezX9ldGMLiuZjJpNYfkF32VnvQ1bApqWiVb6XGSnFdU6UsFA5VuXvcg
- +YZa9ahikqzlSMhKmsgDySebMQpSvLUsQEosfXe0IVDIhYJLqOUyOHnq75m9sF7w21oE
- I43o3lXdYHGVoo1sM83figUReYAuGqnhW+YUltVahS2FY4LyLLWWi2HrfQFNx66lv7bt
- pNng==
+ bh=ub9GicRW5zf1Fn16vHImmfJM7EEnlmvXQmNKh5d5sE8=;
+ b=nIie6jCHx+cOgiutX7YcsHSva8mYf0J6xGIVQyhoTRv+tkY4HwhjbghUSXZlrAi9o1
+ ZAEE7sr7WNQLaTHibCch0axuZnFI4QZSDq+dw+5hagE4spYdFPunRFn57jg0xcB2D9kS
+ I6TSlndGAlzem362HyacngMG9EqG2IHd9TV0NP90gW7OS3aaisGHdEyhXv0X8yaEXDcl
+ PhSsRNu7FeeMKeQtUgK2Xx3qSxak6K1UY2IXstKgp+pUpXEJszqSSFjAxur/Bvp2PCGF
+ BwmCNXik71ifOfvT8HQJMgxyDe+mWSLK6j+r+/S7JJ6neZHBqqlYFgN2PAqSUOrlFbeV
+ nZlw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW8BsGveTXJXfx5YagH159GYJEWJ9OVFvevha4XSHfij5k8pz1WoSRI3loiqKnWqX8taCxZgds=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyb+VVWOP2YI2HXS4EHmhZGUQfUWlDTtUgBAaq8vHbVnrGzCuIj
- uOEw6kdceIzH4Y227+k6n6Fsz7iA8f/o6nLQC6jUEWwfbu94knT56svDjaNfA/nGwqAli9WJ6hc
- bmAo7boYfRINsTUkNN0QtrSQKF9SsjEgNLAHm2RHQ
-X-Gm-Gg: AY/fxX4pgoh5r+H60HtpzJ/GLQRCwixehRV1Hzf+rl71SNGItCSifJCFgX7u5k6B4yS
- 4jP+ic/m4nvSNWOCUHBHIcQsHkWK/aGyxU9VI/AEHj9Tg5fCcoG18Yh54n8RR7tPcu6LkeZV/c1
- yC1gM80/bW/D+tXTMwk2naQCFFc7DvHKTqvlwUlXxRtN0wIeOTJFh3ys8fr03tZjXpnABtpfJ2d
- lFsTwgH/McsxcxpqtF51S0GPzLXiBdh+UCionvRIDTZKh51LiEcAfOdawTwuTd+7TDWyw==
-X-Google-Smtp-Source: AGHT+IEsSVOJNTnpL74gY4MHX7pCXOQf4i+DHsn2gJ8WtQKmJMR1v0lGI6C3IqtKMn2oRPCA5PiglfajmA8hS3svH+o=
-X-Received: by 2002:a17:90b:568d:b0:34c:4c6e:beb3 with SMTP id
- 98e67ed59e1d1-34f68c00199mr6859043a91.18.1767894182439; Thu, 08 Jan 2026
- 09:43:02 -0800 (PST)
+ AJvYcCUw5u9P2+g5VK51ObKQ0S/ShE1B3rF9PH+67YSzbJnmBE8ohhX3OR/y+BRyBh5MAEBv2OAoi+Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw+r13AJqy4SgcaNwuUO+lcfApcf9Fh62FjxfibQ4hDV99Cz3IX
+ Qizk876rWE6/zkCYilR58TDEj5MUvLq5DJBEC1oY6fgPZqZ3wYzw7WmRnwFdp6Z9iYJ4LF6M7k0
+ COirukVESXm3BTuRu8kCzGdvVj35gt2ituj4KGdIk
+X-Gm-Gg: AY/fxX7chiZnBY7VgMThtioyKQiAPWlvfBPKhKy8Wfz1AMBfaBS1LgR+rGJg6Y2NC4t
+ J7/AMD5u881sUuACFMXsrVdDNTAVdCbqRElwqIZIMdrNOGvZAVupLs/73N/sRKw5KCytiDCSjAU
+ HhFh+Y9tTf6hzo0aHvdESW18lZDH9/E9u/L+vw6bQzCK1NcgFpLiCHhlsrJ9IaBNI+WYxn1LWt1
+ KsPDu9ZtjFWr2IYWLwLWnGm4Io11vEpV1Ee9cJb8gk5+CIPU0WI0TlCnLQu4BfzJIu6/A==
+X-Google-Smtp-Source: AGHT+IFnflDpD9DOSJb767uDhY03EWGY2CQbTIwUTr8XvEYxOb6cEf6psQqByf0NHGdQJtdCwx+3qVqvPgTa6Q86JFg=
+X-Received: by 2002:a17:90b:1c07:b0:32e:1b1c:f8b8 with SMTP id
+ 98e67ed59e1d1-34f68cdda94mr7303139a91.26.1767894183921; Thu, 08 Jan 2026
+ 09:43:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108064947.3237361-3-balaji.selvanathan@oss.qualcomm.com>
- <aV967ZD8Hdjed/ss@hu-varada-blr.qualcomm.com>
-In-Reply-To: <aV967ZD8Hdjed/ss@hu-varada-blr.qualcomm.com>
+References: <20260107-pixel-config-v3-0-02a25e3fdcfa@ixit.cz>
+ <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
+In-Reply-To: <20260107-pixel-config-v3-1-02a25e3fdcfa@ixit.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 10:41:56 -0700
-X-Gm-Features: AQt7F2rKhN_dBuEeBGk4Kaqrc2LVwU3x4_PFxnecOkyK1aIkVVcPXHSlVpNfz94
-Message-ID: <CAFLszTj3xb1e4D70mNk-88F64-_Opk9-vxR13m2+GBZ4udTXbw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] scsi: Add partition lookup by type GUID for SCSI
- devices
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- casey.connolly@linaro.org, 
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
- aswin.murugan@oss.qualcomm.com, joe.hershberger@ni.com, 
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, ravi@prevas.dk, 
- javier.tia@linaro.org, quic_varada@quicinc.com, 
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com, ansuelsmth@gmail.com, 
- mwalle@kernel.org, anshuld@ti.com, jan.kiszka@siemens.com, javierm@redhat.com, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de
+Date: Thu, 8 Jan 2026 10:42:16 -0700
+X-Gm-Features: AQt7F2ovEmzD0uC85jxDhHARbdqf6WsxbvEbD7S7MNPCQg88M6yWKIzUPWtNJAY
+Message-ID: <CAFLszThwHMEb6A+=Rp4S5RNxh3-iUgkznSufKv1H2ne1E53ThQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] doc: board: qualcomm: document Pixel 3 / 3 XL
+ support
+To: david@ixit.cz
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, 
+ Petr Vorel <petr.vorel@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, Petr Hodina <petr.hodina@protonmail.com>,
+ Matthew Croughan <matt@croughan.sh>, phone-devel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,97 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 8 Jan 2026 at 02:38, Varadarajan Narayanan
-<varadarajan.narayanan@oss.qualcomm.com> wrote:
+On Wed, 7 Jan 2026 at 13:28, David Heidelberg via B4 Relay
+<devnull+david.ixit.cz@kernel.org> wrote:
 >
-> On Thu, Jan 08, 2026 at 12:19:45PM +0530, Balaji Selvanathan wrote:
-> > Introduce scsi_get_blk_by_type_guid() function to enable SCSI
-> > partition discovery using partition type GUID. This function scans
-> > all available SCSI devices and searches for a partition matching the
-> > specified type GUID.
-> >
-> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > ---
-> >  drivers/scsi/scsi-uclass.c | 28 ++++++++++++++++++++++++++++
-> >  include/scsi.h             | 11 +++++++++++
-> >  2 files changed, 39 insertions(+)
-> >
-> > diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
-> > index 3eb6069649f..42a6b5233c2 100644
-> > --- a/drivers/scsi/scsi-uclass.c
-> > +++ b/drivers/scsi/scsi-uclass.c
-> > @@ -53,6 +53,34 @@ int scsi_get_blk_by_uuid(const char *uuid,
-> >       return -1;
-> >  }
-> >
-> > +int scsi_get_blk_by_type_guid(const char *type_guid,
-> > +                           struct blk_desc **blk_desc_ptr,
-> > +                           struct disk_partition *part_info_ptr)
-> > +{
-> > +     static int is_scsi_scanned;
-> > +     struct blk_desc *blk;
-> > +     int i, ret;
-> > +
-> > +     if (!is_scsi_scanned) {
-> > +             scsi_scan(false /* no verbose */);
-> > +             is_scsi_scanned = 1;
-> > +     }
-> > +
-> > +     for (i = 0; i < blk_find_max_devnum(UCLASS_SCSI) + 1; i++) {
+> From: David Heidelberg <david@ixit.cz>
 >
->         max = blk_find_max_devnum(UCLASS_SCSI) + 1;
->         for (i = 0; i < max; i++) {
+> U-Boot does work on Qualcomm 845-based Pixel 3 and 3 XL.
 >
-> Else, i believe blk_find_max_devnum() will get invoked multiple times.
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+>  doc/board/qualcomm/board.rst | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
 >
-> -Varada
->
-> > +             ret = blk_get_desc(UCLASS_SCSI, i, &blk);
-> > +             if (ret)
-> > +                     continue;
-> > +
-> > +             ret = part_get_info_by_type_guid(blk, type_guid, part_info_ptr);
-> > +             if (ret > 0) {
-> > +                     *blk_desc_ptr = blk;
-> > +                     return 0;
-> > +             }
-> > +     }
-> > +
-> > +     return -1;
-> > +}
-> > +
-> >  int scsi_bus_reset(struct udevice *dev)
-> >  {
-> >       struct scsi_ops *ops = scsi_get_ops(dev);
-> > diff --git a/include/scsi.h b/include/scsi.h
-> > index 8d6c5116419..e0b2f869057 100644
-> > --- a/include/scsi.h
-> > +++ b/include/scsi.h
-> > @@ -361,6 +361,17 @@ int scsi_scan_dev(struct udevice *dev, bool verbose);
-> >  int scsi_get_blk_by_uuid(const char *uuid, struct blk_desc **blk_desc_ptr,
-> >                        struct disk_partition *part_info_ptr);
-> >
-> > +
-> > +/**
-> > + * scsi_get_blk_by_type_guid() - Provides SCSI partition information by type GUID.
-> > + *
-> > + * @type_guid:               Type GUID of the partition for fetching its info
-> > + * @blk_desc_ptr:    Provides the blk descriptor
-> > + * @part_info_ptr:   Provides partition info
-> > + */
-> > +int scsi_get_blk_by_type_guid(const char *type_guid, struct blk_desc **blk_desc_ptr,
-> > +                           struct disk_partition *part_info_ptr);
-> > +
-> >  #define SCSI_IDENTIFY                                        0xC0  /* not used */
-> >
-> >  /* Hardware errors  */
-> > --
-> > 2.34.1
-> >
-
-With the above fixed:
 
 Reviewed-by: Simon Glass <simon.glass@canonical.com>
-
-Regards,
-Simon
