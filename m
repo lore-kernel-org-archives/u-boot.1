@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC21D1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 18:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF16FD1D483
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 18:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18D2A8415E;
-	Thu,  8 Jan 2026 19:39:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 356DD8415E;
+	Thu,  8 Jan 2026 19:41:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DbsNDpO4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jLTalEMC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 424C58415E; Thu,  8 Jan 2026 19:39:05 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 055688422D; Thu,  8 Jan 2026 19:41:01 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35AB78415D
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 19:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A0718415D
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 19:41:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-459a258561cso1468569b6e.0
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 10:39:00 -0800 (PST)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b73161849e1so657710666b.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 10:41:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767897539; x=1768502339; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hTJEeg8uxcPSltosC/g6v0QNQXD475EVHhoC9N97E68=;
- b=DbsNDpO4AdmFNuctA6+jl7TKotexMDsYacL9uSfkOXU/s0hMAi6ld8qr1KM9Sxu7vf
- PAvHRwRn+weOOFLnhJVNNHzInJvdauABeuUWqC0LQGb1RF2OkRfLvdsLtbGK7jRWU5tc
- zDTAYx7B3gTldyLugRf3tch3rezDq9KUp8sSw=
+ d=linaro.org; s=google; t=1767897659; x=1768502459; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DKmpJumNBylNqc2pZgl46uZ42qFU+8cUA5KqZKeGZBU=;
+ b=jLTalEMC//CXQt0qdKLSE+XmPgpF8wnGX+DYkLznK69VHFwIAYMZC3OlB5fzbZ+bdN
+ yZgdKrhkQ+Q3tImniEFfcAf3qTYt3N790NnYs4vETHL8KccUU01ewnvOJ+ZVOOh2c2bC
+ w6qzjjKM8yXBj6fUPXmNpUoFt+4iwn9n60zX1E0FrpR36hV89a1tqX103rMGCVkwHOMA
+ 8P55zxcmvtJDTaKdBBv1KI2T79Q/jEf1fiPbaEslfJlTs7Bw+DaTutolQo1Wti3dLP8U
+ tXyVghshJyrw4adqe7Btj4NCbnhXPQkJ4KRP2PQAn14ImmAtkZrKGsKOqjqGHpQCwR8e
+ hvTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767897539; x=1768502339;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hTJEeg8uxcPSltosC/g6v0QNQXD475EVHhoC9N97E68=;
- b=b0U+6Dtf/8UbiOZ0mlTfH2pUmugmQvhh5nnaPUGizkEMB+DQGkgNW9autXagSfrrmm
- G5wWprCeZbAn/Xkx2GYbw7FONgVOHGZ66qnKAEb4a4O6kPasykoPvRjbw8tzI+3Sr3mH
- Wr8/OFf0BduLi6o7xmqa4QlSD3JX0uHBKSZh75Bo+honWMlnwUEX07Uf98Rze61bIkMi
- 1OTXtcQNFplVtRgIMe/7vGJjFjqisXP0vmIhNHzKxqN9RDY6qqBvDnK0ndDF66CYL5G1
- 6FuEptJMgh17EelHowYG1IC+4LGOkWL1hA4WEbR+2mfs/x5v4ReRPOH4FBnfOewI2lTE
- sNVA==
-X-Gm-Message-State: AOJu0Yx+yABtiWJ+1pP5mhEnWirku9Y9trm8H+DKeYWNU+S8xzc3VmK0
- R2Yhq/9CNUo/lxWNyRBAW17jB4LufiRRq4Rok4/ApoVHW9I6tGJE8j9rN9qutsynnlc=
-X-Gm-Gg: AY/fxX4wuSAWWsH+gKXTNmeL8Pm2Q3u1CoHLHDD5qHmWVDUaQWIkYkBHtm6Z7mLZiKq
- EfWPHPg1NQJvZpgje7wAevvkYpiaVp1gdObBchB5f/7LjbX96MHa/az/cIwsTt9FkUI0PBf/Wbw
- EQ+Gx9WW1Qs1yJ3EZ8zyN2cde4+Tf6XJKpE/TztKuyp3etyRwhRjIR9DReP7RCVtzeUlhkRkT3Q
- sMSajrndDMTnEPPiwOaE36fY/u8cgMyWcEYn/V5SI67BKloDAdhzKYEDH/O3k8MZbVtk5iP3mSy
- snPP4p44crxqDIrJSvm/hBPVW0cuBCw6vKkdOXfhNJLVqj7is4qFWtNbrnZjiRhN25X6RwnG9dR
- wDHtcsBbqju0YY9ca6TqyKYX3FJMYp5Ch0uO+/nwNiK+OSx4UXlkazNDCBnWUbcPlaTprEv5ZwP
- LeFnE3E2AUUYgAAxRGCOh50bfA7Jqb6B9p17/p5AfKf3maP7KOgQTbHTRFjjLpaJ1MjRDZuiRK0
- tVuT7nrEXB2Bfpf2UZITw/63SUNHU3ZvsiOEfo=
-X-Google-Smtp-Source: AGHT+IEpq162fqgvLyWB0lmnHBXYDesYIRg2+/V/WNNBvvDfGYSZq32DNKxC4OOGCt9fl7ZofY3CrA==
-X-Received: by 2002:a05:6808:1692:b0:44f:ef44:9cc4 with SMTP id
- 5614622812f47-45a5cafa65emr5825150b6e.32.1767897538880; 
- Thu, 08 Jan 2026 10:38:58 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478d9c17sm5906546a34.22.2026.01.08.10.38.57
+ d=1e100.net; s=20230601; t=1767897659; x=1768502459;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DKmpJumNBylNqc2pZgl46uZ42qFU+8cUA5KqZKeGZBU=;
+ b=VtsKRconG1VDGrPoqJFPoKR4GF4FX8DBexAX+L8BWOUPZrqZleDG/VE9C2LOP5NxXS
+ hX6JSvKdKWuR2ITHPUGr8CUjJJfyGz26DZe2HRAWfTjPxAUTBW/uU+ZsV6RXb+M8xais
+ N/+ko6L4nGSkdU0TkcoXmPy+aGFAzK/w/zymLjIajL1fHJIloFGqSNDcnWWZvsnGx30J
+ kquULghJxe5wTKgQz/myPjLCL7it1n39jIuEHERzXbEEolkCIci7svlnbjNcmROUBUY9
+ ll88W1qe41zSN7G8BNbRWd00YwGTZ/QozP/v2ibWz0D0zctIARPIiHZTqEQhtjSMvqb2
+ bwqw==
+X-Gm-Message-State: AOJu0YxM2JN4iQqaNtJq54S1zpO3DNT1ZyuVmZvbITwIYzT6e2Y5L6Oc
+ EzdFKNSjXAmj7TeTeOWL/ZnGCjm/gyIIDuABMe0aEvAiHrhH9xou8oApHGwJQYSiZqU=
+X-Gm-Gg: AY/fxX41GoXiLh6MUvAnjWDGRa/HARe9Zu8/KeW2RPzbOmHh6RATwnkJjh6r5V8vhNW
+ 1EKG+fSdr4t3aKX3fKSDNN8B0AHEKcaVrGrs2OLgIgiJT3p3OYbQDI8vJbnH2eFbpAR5ELdbC7Z
+ mACwqo571uvbyY5RVqJ+upk9oPP6/YMG4K+OHR2fYUwngfKkgKmqPVb/Pa8tVl9A6BsRds5iNSU
+ 2FjJFxw1/rC3SMSf1aFmxFgC4MUPOItGnxh8Ohm4NKdEX/VBoU7wFz20PDwOknT5zsfe9uRRRtZ
+ GpwLTMq9wfQMbPYg4oKZTyzgGXjhSABHjnfHo+J/9drD4BeDLneP24W95m0T02++nXKLR4rhkr8
+ jwMx3MOr/j29gahu4XofPAo2kkqcRDt0fVyzda3wC29ClQcC/m09wrmwrG04bIkjjIjNDiJbgxl
+ vLmLM+warn7yZSKCajatIKvD3epQVD1QbdTAElA+WvOauxB1ddHaZGBfr5GXsKZ+j/NHyi3VcR
+X-Google-Smtp-Source: AGHT+IGOPkn2e3wNnOX2BTPXYzKcVBQA/yUCaO0G2jM5JWMunrcAerK8DJgVrTr4uZwC9Tyd0XE+7g==
+X-Received: by 2002:a17:906:6a17:b0:b7a:9cc5:457a with SMTP id
+ a640c23a62f3a-b84451bf366mr714955766b.14.1767897659443; 
+ Thu, 08 Jan 2026 10:40:59 -0800 (PST)
+Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
+ [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b842a233fdfsm898021066b.7.2026.01.08.10.40.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 10:38:57 -0800 (PST)
-Date: Thu, 8 Jan 2026 12:38:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>
+ Thu, 08 Jan 2026 10:40:58 -0800 (PST)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/4] fix integer overflows in filesystem code
-Message-ID: <20260108183855.GU3416603@bill-the-cat>
-References: <20251228164500.313817-1-t.preissl@proton.me>
- <20251229144813.GP710860@bill-the-cat>
- <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
- <20251231015450.GW710860@bill-the-cat>
- <20260108150025.50206-1-t.preissl@proton.me>
+Subject: [PATCH] kbuild: fix out-of-tree build missing gpio.h
+Date: Thu,  8 Jan 2026 19:40:27 +0100
+Message-ID: <20260108184032.3084584-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="B8XljysJaRz6JhSo"
-Content-Disposition: inline
-In-Reply-To: <20260108150025.50206-1-t.preissl@proton.me>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,35 +97,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When building out-of-tree $(srctree) is typically a relative path, the
+kbuild 6.1 sync uses it in more places where KBUILD_SRC was used leading
+to issues like this where we create broken symlinks.
 
---B8XljysJaRz6JhSo
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fix this by creating the symlink with an absolute path like the old
+behaviour.
 
-On Thu, Jan 08, 2026 at 03:00:32PM +0000, Timo tp Prei=DFl wrote:
+Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ scripts/Makefile.autoconf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Hi,
->=20
-> this is a gentle reminder for the v2 patch series fixing integer
-> overflows in filesystem code, sent on Dec 31.
->=20
-> Any feedback would be appreciated.
+diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+index e3c88badb529..522389e04e8c 100644
+--- a/scripts/Makefile.autoconf
++++ b/scripts/Makefile.autoconf
+@@ -137,9 +137,9 @@ ifdef building_out_of_srctree
+ 		dest=arch/$(ARCH)/mach-$(SOC)/include/mach;			\
+ 	else									\
+ 		dest=arch/$(ARCH)/include/asm/arch-$(if $(SOC),$(SOC),$(CPU));	\
+ 	fi;									\
+-	ln -fsn $(srctree)/$$dest include/asm/arch
++	ln -fsn $$(realpath $(srctree)/$$dest) include/asm/arch
+ else
+ 	$(Q)if [ -d arch/$(ARCH)/mach-$(SOC)/include/mach ]; then	\
+ 		dest=../../mach-$(SOC)/include/mach;			\
+ 	else								\
+-- 
+2.51.0
 
-They're in my queue to apply soon, thanks.
-
---=20
-Tom
-
---B8XljysJaRz6JhSo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV/5vAAKCRAr4qD1Cr/k
-Ci3qAP9Lb/hLffCv4QA/sQUlQyTIAEriWC1meAXePMDbwZjK5gEA3jsqSCLCyzU5
-YX2QVW+IeWfITleKkubgQ3j2aik7DQM=
-=lhmx
------END PGP SIGNATURE-----
-
---B8XljysJaRz6JhSo--
