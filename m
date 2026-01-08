@@ -4,176 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D344D1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 15:58:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165BDD1D47D
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 15:59:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10D2984261;
-	Thu,  8 Jan 2026 16:58:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A8F56841B1;
+	Thu,  8 Jan 2026 16:59:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lrsfBPga";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bs9f28FS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9299C84144; Thu,  8 Jan 2026 16:51:44 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazhn150130000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d911::])
+ id D955C841CD; Thu,  8 Jan 2026 16:59:08 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1967884121
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 16:51:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81D5C84158
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 16:59:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rv5r0yrps0vTuwk2LB5cvxL4evFtUYF4AoNLA3gpQUm3FPxuK0ZgViP76xnJ2B2KCbJeZKTOBs+K6B4b2eGfyT8O/1Qjrx7aKIE/zpMGgUdU++H2sZDD4k3SAm3AP5m8UYBJVEqymoG8AuBEtte5UtnLXfIFn+GhGia5nTMPm2jged0j1DlJfLn82T0CRNSTnloaBVw0voR7sJvehX29gzsV+XRH3Z1WFSKPbVKy+EtClhM2xJ/bcYJLYiyonoKfXccSVd4l+J8lNOg8+Jhy4VpHJxUKEUH+QkpfmU/soTfx8rUv9ePcorAcJhHjmQykz0RC3GD3FkWrHWHX0KACBw==
+ b=s8J0JI9zhDLwW+vsRh3lJh7Usm/A5z5ja/AivpzoCcNLgzKo7Iy4yq2hjqInzOxVGsQE+aQvH3k/Bd5oDmxy76FLIIgysOnicaGFbncbCFK811GVApw0ePXLk9cGSPtjnMecVlFbco1J7+AElRm7CLv0/Mn22OIYC96/p5Rx9An7qZdQhpiBWqj2fiYJg4jkWJR5HNWyWqitvHE4TvmAUez62QIn8OyGblw0Ar9KriKuuMhVFGdQBbAoa0MMQD9uaxwt70L1TRI49/Juh3V1y2adUnpmGQLgzFi8+ZkWxVgV0UZyjkkrcQpT1hcZI3i+p76pQaagjEtl1WyVMbh2CA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2NCOFPd0hdctxl23J2dY34maWOg7q1vXKWKj9mI8UrM=;
- b=Urp8C2gTT5n58lDiGWfrULG0LedFW4yjOjg6zyFHEAxlJIPk7Vx6/CPiPNbwMLm8tJMY2t7cFY4PtXP2VQ1x+FXCDQfd/F9SSo9PD1wo+5yUhLiIfg1BvJUXjyCuIlw9BoSIFEjFMZXonsS7j4F3OrAEceYeBYOlLatOxtk3QWjfuwOlZnSXuZOAWjH/sJLhwwhy3OQK9JhaL4Z4dgjFMUMmtfiqnCzfqSkzDRTaj4nSV0vKmF+vk6YL5tXsqO7fcjFhHQzyrSzNH1CWh/ktkB6RnywebpmvTI+qo9QsHqbYJL+r22NkNncWb6KmuzpJdNNKFecz5wjtRz4J1CgbZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=Vq+RSJ//jrAnGmLJLkVcJb7EeQyxbCI8m4vwY3t8ITs=;
+ b=kfGa822hzjk2FOQsqEYRMxBNcSahuL8rl/LsmJwm496rKLU2Qz1N27Rej8qZDs+KAgTdYEjDiDYl7tnlIk4RcVmKotR2XT5eFKx0YdnzD61RLi0gu6Sxg6UcrhWq3ScRqrvnXhSNKKLZxpZxv1uaOld3H716ltLx8OeE0K7LI/F7eNsTAjq62g4fgmc02waIVqeT6OV9CWDaq+0MK7hdPiy5++vo7BCcV8OL0XZz12wcnBXNy5mQqckGv3CZe36NEI40mbqIhGJXVPvywidWv7wiKt7qXz6N0J0Kefh84a3bPnBMK/c8W+ul8zT17JgEtspUQTKfDd7XgicF26EnkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2NCOFPd0hdctxl23J2dY34maWOg7q1vXKWKj9mI8UrM=;
- b=lrsfBPga7FUW1LpWz9mGSdNDT6eVpc3x4zZFcO3Gug2yMGLUmPKEV1RcjWlzDJEz37WhlL78eHzor7TmTxzh+ECyvoxWcDg0bpPYCt4keEPhmjX/3b6aObNG6lRyPMpmn+rsd8UySjrSBINpwHXhkQSXK/D9h1dZtOQUwuNVcVw=
-Received: from BN9PR03CA0246.namprd03.prod.outlook.com (2603:10b6:408:ff::11)
- by SA2PR10MB4443.namprd10.prod.outlook.com (2603:10b6:806:11b::5)
+ bh=Vq+RSJ//jrAnGmLJLkVcJb7EeQyxbCI8m4vwY3t8ITs=;
+ b=bs9f28FSiirujoPYR6q+W0g35/JC07qoYTHTvhYI0MMBYsl5oUav+8w8sbWcpmOOFeUCp1VoijmAYPd8IKyJjjGJ3ceOBfxSr2+MPau+opS+0LbK1wqksIGknUX1oGp8PW8zdjzawBiAU+Grxm5UzXCjVHe+aeI+R+KbMbDjXJw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AM9PR04MB8209.eurprd04.prod.outlook.com (2603:10a6:20b:3e4::23)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.4; Thu, 8 Jan
- 2026 15:51:37 +0000
-Received: from BN1PEPF00004682.namprd03.prod.outlook.com
- (2603:10b6:408:ff:cafe::cb) by BN9PR03CA0246.outlook.office365.com
- (2603:10b6:408:ff::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.3 via Frontend Transport; Thu, 8
- Jan 2026 15:51:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN1PEPF00004682.mail.protection.outlook.com (10.167.243.88) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Thu, 8 Jan 2026 15:51:37 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 8 Jan
- 2026 09:51:34 -0600
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 8 Jan
- 2026 09:51:32 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 8 Jan 2026 09:51:32 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 608FpWSE2723914;
- Thu, 8 Jan 2026 09:51:32 -0600
-Date: Thu, 8 Jan 2026 09:51:32 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Akashdeep Kaur <a-kaur@ti.com>
-CC: Andrew Davis <afd@ti.com>, "Markus Schneider-Pargmann (TI.com)"
- <msp@baylibre.com>, Tom Rini <trini@konsulko.com>, Sumit Garg
- <sumit.garg@kernel.org>, Nishanth Menon <nm@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, "Vishal
- Mahaveer" <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>, Dhruva Gole
- <d-gole@ti.com>, Sebin Francis <sebin.francis@ti.com>, Kendall Willis
- <k-willis@ti.com>, <u-boot@lists.denx.de>, Anshul Dalal <anshuld@ti.com>,
- Moteen Shah <m-shah@ti.com>, Santhosh Kumar K <s-k6@ti.com>, Nathan Morrisson
- <nmorrisson@phytec.com>, Garrett Giordano <ggiordano@phytec.com>, "Judith
- Mendez" <jm@ti.com>, Aparna Patra <a-patra@ti.com>, Jayesh Choudhary
- <j-choudhary@ti.com>, Chintan Vankar <c-vankar@ti.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Neha Malcom Francis <n-francis@ti.com>,
- Prasanth Babu Mantena <p-mantena@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
- "Udit Kumar" <u-kumar1@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- "E Shattow" <e@freeshell.de>, Devarsh Thakkar <devarsht@ti.com>, Peng Fan
- <peng.fan@nxp.com>, Jerome Forissier <jerome.forissier@linaro.org>, "Sam
- Protsenko" <semen.protsenko@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
- =?utf-8?B?VGjDqW8=?= Lebrun <theo.lebrun@bootlin.com>
-Subject: Re: [PATCH v9 07/13] arm: mach-k3: am62xx-lpm-common: Helper for LPM
- meta data address from DT
-Message-ID: <20260108155132.x6fcqc5zahftvcba@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com>
- <20260105-topic-am62-ioddr-v2025-04-rc1-v9-7-7e33f2c77dbf@baylibre.com>
- <a5fbd8b4-03a0-49c4-b071-742364880081@ti.com>
- <1a9f0176-9ad8-4a7e-8010-11940b968ffb@ti.com>
- <20260108143944.c3opoz57n6tyje7b@bryanbrattlof.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
+ 2026 15:59:03 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9499.003; Thu, 8 Jan 2026
+ 15:59:03 +0000
+Message-ID: <a1a22e85-8812-4064-8b9a-d779884edbbd@cherry.de>
+Date: Thu, 8 Jan 2026 16:59:02 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: unclear license identifiers
+From: Quentin Schulz <quentin.schulz@cherry.de>
+To: oliver Fendt <ofendt@googlemail.com>, u-boot@lists.denx.de
+Cc: Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>
+References: <CAFoF8fC4foffYJgYm9CkViET83gDu05noVRxLxgs+KWXN_-LBQ@mail.gmail.com>
+ <f22fe5c8-d98c-4b20-a9b2-a8a5af1542b9@cherry.de>
+Content-Language: en-US
+In-Reply-To: <f22fe5c8-d98c-4b20-a9b2-a8a5af1542b9@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0170.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b7::11) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260108143944.c3opoz57n6tyje7b@bryanbrattlof.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004682:EE_|SA2PR10MB4443:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a764db6-2945-4fb7-f8e8-08de4ecdce77
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM9PR04MB8209:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88068432-2849-4a36-8001-08de4eced83e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|34020700016|82310400026|36860700013|34070700014|1800799024|12100799066;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q24zelcwcndLbnh1ZHUvNUhFaHh5WVMwTkNOT3ZPaGxRV0YyZ1F5TGdoaWps?=
- =?utf-8?B?c1Y5QnU0aThad2ZDYkN2dmduV1h2NWhYdUJaSCtYK3A3N0NCSGhNbldiYTZu?=
- =?utf-8?B?TTd5L3dJY2lEU3p6dlVSMGpuTlFsOVJuSHRwQllGOFhRSG5uWkljR2NEd0dh?=
- =?utf-8?B?M1FOMzhpdElIcE1tSGtjNUpoanpQWDlBMlgzTElpbXpVNDRjek52ZSsvZVZl?=
- =?utf-8?B?T3p6WGltZ0Z5MVY0bVdJREY5ZDN1NkhtY1F2L0xZbVY1a0ZsZGovM3Z6R1Q5?=
- =?utf-8?B?bmpTZjdmcnV3aUdOdjg1M0N5Tm4vL054UGppbk1jVjA0dlU5aHF5dTJEZHhz?=
- =?utf-8?B?eWYxRGo2WDAvak1ON3g2eFNjTUZoMXNWaDN1YWxRWTdlNCttTXFhVlZ6ODZo?=
- =?utf-8?B?NVYraWtPWW9xV2JTTlV1RmxqakJ4QmI0MDl0WUtMaVc1eW9GTmg2RzJoMjZT?=
- =?utf-8?B?TkZ3OHR6SjRHTU9Ha3dkYy84R0RaaGlRNzFWS29vNWxpOGMvQW5icTFrS3lJ?=
- =?utf-8?B?Zll3TXd6WmdFZDhJU1RYNTZIcFZCeEdSNWxPLzNYTllvdzhmNk4yMzBmQzQ1?=
- =?utf-8?B?bWlUOEtSUFloLy9oR2xBQ0I1OXdUNnFiai9CdFlHNzlyN3lFSjNrOHpYTlh1?=
- =?utf-8?B?NzZrMXQxOFRvQmFGcEppVjVqaHZoVGZGZHJEYmhkTjBRN3NPaUQxWTczS3BG?=
- =?utf-8?B?azhkMnN1VURQcUp0R3J1Um9GZkpOQnRJOUtGNkhGNmpPWndIUXFVZVB4UkJy?=
- =?utf-8?B?QkxPQlR5QzN4ZmtLcng5UGJtNm02czRIenVqc2JKZTlCQjZ1TDlkNlpuZUQx?=
- =?utf-8?B?a1loM2UyN1JEWHh6dHp6S3FPaE5Nc1FvZXVuQWRJNXFONFpSbXpWdWkyc0o1?=
- =?utf-8?B?S3p1enlIWUhTdWwxdnE4QnpOQWM2c1NJVlVKdDBxaUlnOFMvaU1RS0ZaTHVZ?=
- =?utf-8?B?WE1SQW51aVdEaHZ3UU83U09RaE1XQjZKQ0l1QlR1elFKckMxQTlKNnh0SWJR?=
- =?utf-8?B?K2w2UmNsbi9vRjNyTmx5Zm83SFJEYzROR1VMOU80K3BkcVhXSGJmZjZFU2oy?=
- =?utf-8?B?Sk5vd3dRY01VL3JOclFHRHBmbElkbTZRa25nQ0crZlhGWTZTaUFSMVp1b2xY?=
- =?utf-8?B?NWsxN1huZEtsUFJMVFNNdTJlUUNOKzZOTm91TXhYTU5yVXlNT2pOdWNoU2xn?=
- =?utf-8?B?N09mZGUzTTd3L0tFR3hXUjMwYjN6blp3bUxUeHp6WkhwVEZXQS8zOFhKSGNR?=
- =?utf-8?B?ejBFUjhoL3NNQ3BDajlvanhETjN1bkdnYyswTkZ3WWZRWmt0cTNuZnRvWHdN?=
- =?utf-8?B?MVVsUVJpUXhRSDBRS3dIMzZ1SmIwV3BtWlozMGYrNmM3eFBBcXE4RVo4c0Rk?=
- =?utf-8?B?ekpLZEYyMThzakJVR29WNEpEUmJBY1M4NnE2QktPc2ljajczMzJtMVV0dlhL?=
- =?utf-8?B?aU9mbVBhdlowTjkxY3l6OWN1dGtMdzJXOU5zQStxVzlKSWtyMk1qd3ZlWUd5?=
- =?utf-8?B?N2NFUGFKN0tlZ3krQmRXTkFNcWtHTi9ORWEwWEdVLzZ3TElxR0F0RGZSOURT?=
- =?utf-8?B?LzI0NjNST1ZFVkhGbDBseVRSL0hMQzhTVGZBeXdzaTBGQXFnaGRGazZ2dVU2?=
- =?utf-8?B?bTljM3hqNk1YUWNiTXJCSHNWS2g4RjdrVHFJeklrWU9VbE8zUm9CUDVlWUVV?=
- =?utf-8?B?TmNzY0tsUXVYWkpVR2NQN1dabCtBeTJObWdhVzdkaXF4UjREd0F5UlhTYkJM?=
- =?utf-8?B?c1B4Q1JnaUJZdk5MZnlDWTRtSW9ZTXMxbG5URjk3TlFBMnNsZGJ1RktjMHFa?=
- =?utf-8?B?RVFtTUZJakpsVk9hSWRUMXBvK0JEQStWRkpsLzJzOWVldWhETGtMQ29ybmxq?=
- =?utf-8?B?RnczTjN6VjdHQldqUVFqQUhlRC9USWdJMGcvQUxxOEhGbVpiUFdJMUhWYVl0?=
- =?utf-8?B?SkZlVE5pYTJXVjZ2NHZUeDErL3pHQTEvVjAyaVNOVDJSYmttRU0yQ3ZnRG1X?=
- =?utf-8?B?RnMwR3BvYVRacTlyWVBEWWNUUjVZQUZTbjVpUWxJckk4WjRCWTBJL3NoaUtv?=
- =?utf-8?B?S3lqNCtUcWFtN0lmMXNjS0hOMURaR0UrTWVkQ21kMWdMMTZMWkJJUHZqY1J5?=
- =?utf-8?Q?mMxGSRmUA5pthGMVh9d5P8Dcd?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(7416014)(376014)(34020700016)(82310400026)(36860700013)(34070700014)(1800799024)(12100799066);
- DIR:OUT; SFP:1501; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 15:51:37.1168 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a764db6-2945-4fb7-f8e8-08de4ecdce77
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004682.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4443
-X-Mailman-Approved-At: Thu, 08 Jan 2026 16:58:06 +0100
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QXFTUURlSXVTSStGZEFJUTZURmM0NldOTlFTb01UK0hjcFk3SndkOWdSZEpZ?=
+ =?utf-8?B?Z0hHc29vUy9CaDFaVThsU0FOeVdNNW45MDRFdjBwZFc5WlI4OVJiUnh4cjhl?=
+ =?utf-8?B?VTVpNGNZWWoxOURqckM0aUZ2QTd0RlVrOXBLb3FtSUdrdmt6bG9BclI0Ulhv?=
+ =?utf-8?B?VDFNdGlJd3BIckNCV282NEE1UTVsUlE5bUd4SlM0bEM5anoxaEJ3elp2R1pP?=
+ =?utf-8?B?ZUluY1NyU2VjNWtVemcvcGFwQkNpeDRCM3NqUVBCczU0eXJKVEdSUktadWpS?=
+ =?utf-8?B?dlU4RmZLNDl4em93eS9Kc3BZK011NHFsT1BUTzZycGRabXU0eEx4bnZKOTk5?=
+ =?utf-8?B?Q3hmUmVVT09PR1UrdmRVTGlJKzdaMFJqVld5SDFJVkl2VXorTnlMeHNvRUpH?=
+ =?utf-8?B?WVNuMmp2eXlLZjMrc3ZDUEp6T1VUcDJvbmtrcTVDTStOYm1CekgweFY1cDhO?=
+ =?utf-8?B?TDlLYXdRakRDMS96V0tsTCtESGE1MHdvRlM5V2RhUjBMVlcydkpOVHVJNXZE?=
+ =?utf-8?B?R21xVXVRSng3MlFZTHYrY0ZZVFBYTEg4ZHBIRm0rMFRBOHpvTXBSVzZnMlNU?=
+ =?utf-8?B?aHc0ZW9LdEJZVWVDaWZ5cjNKT1JQZmxtQ2lKZ2lDQ0pCUDdMV05nRDRGaWVi?=
+ =?utf-8?B?cmZwd3hQcFlJTFdwV2RPM1ZEa2tSTEl1enpOMTVmdkw0Mk5iUTVyYUxtMXpI?=
+ =?utf-8?B?OHdEaUd6aWFMZTFBM1drUGo1Q2tSNW9Lckt0Zjd3Ujl4UTRnUC9McDRiM3Q3?=
+ =?utf-8?B?VTY2WmtLdHhHUlE1ZUJtTFBrT1ltRzd4aEtLTXk1MDIzNFdYaE1YYVBvaG14?=
+ =?utf-8?B?azJtbnluMG1YS3o3WmJxaGUvL3NTZzR3L3dLOHJ0b25ybDlodmk1d0NrVzV6?=
+ =?utf-8?B?YzBHM3JscTBOYUU5M21jZVp1K3VIRjM4bTBCWXVxalhuN3RhaFUwSWppUlgw?=
+ =?utf-8?B?UWlyei9vQ0NzNENzbzErTmpGWlRvQWp3L3JjcmZFWlNFdkNkYkl1aVNiZUgw?=
+ =?utf-8?B?dElSTHhWQlU1Y0VpUE8rUFd2Y3NvdTdqOEFqZC95cS9rZHV1UXFNQitGYXFC?=
+ =?utf-8?B?clpzNmwzSVZvdUEvNTVOMmdiVHY3WERqL1NpVzFVZjkzL1hYdE82ZU55Smw3?=
+ =?utf-8?B?OEpvWDA3YXREWjU1WFU5UFlVZVc0eVh1RTB6cFpPbUxjR1ZCOXFlRTI2MlQ3?=
+ =?utf-8?B?YVdUMitSWFpwZnRqVDBVWXFLbWtVb1doZ29lMzQzUXZvMElaemFsQ0ZWaS9o?=
+ =?utf-8?B?bktYb2UrU0U0bjd3bFZGb0xMM0VJV0JkM2VHcXIvcW9IVnBpSFJ0dzFiQlJr?=
+ =?utf-8?B?MVYxczJMWFN2c1BaaHUzZy95WEZ0ZWZ2QWtkUEFvTG00RktMclRuRzhKK3Jt?=
+ =?utf-8?B?dUhLR1o4WjFCNjJzNW9PVFRIYk5yb0lXMDZDR2c1azB3WnE3a0lVQ0ZFR3M1?=
+ =?utf-8?B?eHVWVjFja1Y4M2lRejJ1UlhsMlNHOTVXNWdXUlhMUnYvbnBMeVVTZWlwM1Q5?=
+ =?utf-8?B?Ui9oejd3djhpaXhTdXhiS3ovbC83MkFMaDVEWlppeGwrZEJ5dTdtbm1oalA3?=
+ =?utf-8?B?QTJIRVNtRE1mUzhFTWVPNEphd3hjbjBrRks2cGpLWVJUUGdrcTlkTCtDUUlu?=
+ =?utf-8?B?T1k2YnhpVzc1azlyRE45amV4a2EzYUZaQXZNNkhUZHJFSFV0L2FyUWh6MUZ2?=
+ =?utf-8?B?SWduUEYwZXpXYllzam5Ta2ZlZmhjYVk1TzJQK0M0M21DZ0FMWVEyekVlSjZL?=
+ =?utf-8?B?b2FFMnZMU3QrZVJwUUdDdDdDbUx4US8yZ1FZNUxxV1d2SEJUMzNZVGYvbzJq?=
+ =?utf-8?B?bWhkN2Z1S3MvOEtJbWFZb0U0ZjlyeURMSFVaNDBNcGhsajlPZlJUQXhaTVd2?=
+ =?utf-8?B?QnN1N0lvK2QveDBBVEZpNW1uaVJsWXJiNytsNHV3MGxoRXc9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YUR2YWxNRzlPZlF2bHhtU2JuNDhveEZ1czVoTmdNSHRmTlBMdVpHRkZOZGFK?=
+ =?utf-8?B?MVVCVDh3Z2lGdXlHVkV6clJHNVVBTUFWQkhUWEpxSFNYcGh5OFQzQjZuQitP?=
+ =?utf-8?B?N2dEbWlYR2FmanpUVUZqVTRnaFdpUXlPb0dlYlVING43ck9VZy8wL3BwQTVV?=
+ =?utf-8?B?a2M1REUvS1lvV2ZWcW12QnVwZ1g1dzh0V0NLNmZmZFpVc0RnVFNpMlFqZ0Fw?=
+ =?utf-8?B?T2hTcEJnZHMxUEFLOGpnOG5VTXJUelcvZG9WMmxsUlN6R3l3RlcrNUVJTytY?=
+ =?utf-8?B?dHpudE45WklOTnFQUGV2Wk9zUXAxcm9iNitsUUlFRDVWekpKOGpZTFg0NFNM?=
+ =?utf-8?B?cGo2OGUyL3FZN1RMTEFpQUtqTHVYREYrR3N2bjBhYys0ZjBkZnZzVnBiWnJM?=
+ =?utf-8?B?dHBmN3NEL0ljYzRlaVZNS2Q0czhvT2xSWkN1MUZ3MXdMU0FVS0xEVjNDMlBq?=
+ =?utf-8?B?SWtYcW9iTWVOTzFCQWVLZVpVcW11ZFd3T0crenkwaDF0NXc4cENJaW44Wm5R?=
+ =?utf-8?B?ZjlYanVIeFVUUDJmNmZiK3hOaFZzK2ErSkVMZHZZa3JPVlZTT3ZzRG93VmxD?=
+ =?utf-8?B?dUtPdWtXY1l0d0RFY0ozRHFuRXBCcC84L09icmhOMUxWdmdXQjR3b3YwTkRa?=
+ =?utf-8?B?d1ZZeXhsMHc1cEx2WUpndDM1ZmU0aW0yQXY2a21IdVZOWTRzQUtzWnZHMDVm?=
+ =?utf-8?B?S1lpblFLcU94NVBQYnlvUzVjSFFNOWcrNjNmNDVVdlBpODJ6RnRKVE9JV01F?=
+ =?utf-8?B?UURaL1hmNmtaamVxaVNQY25oTGRHejVMYWRPRnRSL3JycnZRNVhwZ1VQOHBR?=
+ =?utf-8?B?UFZOUC85YkNrM1BZeFdIblFwLzRReE1DczJSWnYySHd2UDUyN3kvTEJ4dkVu?=
+ =?utf-8?B?MzNUaDRnekpJWm5BNlh5VmVGak9ZSnpUa01TZThrSHdXa0Q1Mk80aTVWd255?=
+ =?utf-8?B?TjkvK0lla0R4U2xLTGlubGZ6UkFXQmRVbW1IUVl0MU1YSFJLY1F2NjlSNlA5?=
+ =?utf-8?B?Mm1qNDVSZDBsQXlBUzNodDhoeXR1OVBEL3ZoT1NYM1dCc3RRWndXTnV5SmdD?=
+ =?utf-8?B?OTdwNWI1UDZudCtKSWloVm85cmdJUi9kZ3Z3R29Xb1pCSUNkejllYkdnb3do?=
+ =?utf-8?B?RzFhOHR6SEhwdisrU2lNSGlwUXdXdU8zTEhCa2ROUzNwU1dzOE02T3dIZlNC?=
+ =?utf-8?B?dVptd2hGQ3RpUy9Ea3ZWd2lyYldyRjAwbnhZV1RLR2tuOHZoa3dkbUlYSG9X?=
+ =?utf-8?B?ZUxqVG1DNC9KUGdMZkZ2S2dQcDB3czNnRzY2dGxhZlJkNGszMmhWV0VVb2ta?=
+ =?utf-8?B?Zm9Ia0xSdWhmZzM0SE4wYzRERjR1QVMzMHBBSHFMY2FmRmc2TGx6R1o5VWpZ?=
+ =?utf-8?B?L0hnUHF6TWcxZVgvZWE2NkJBRUMvM2hqT0crbjNLc0VNdjAwZGRHdjk4cmx6?=
+ =?utf-8?B?Sk41QXluWmovakMzVGNmNE5Zd2Z6YkNudkowNXMxaktDNmFwbTc1YTJLbklI?=
+ =?utf-8?B?NXpGdi9xVEpRQytKbmY1SytyUkR2Znczek8rUmJQSkRRUDhWaXZFWjY1NW9k?=
+ =?utf-8?B?amltZ0hkV1lVRUYyTnhVZ241Y3JzeGlCcGwxeXJtbUJ5Q1JvUGFwY3VjbG1O?=
+ =?utf-8?B?c3lFNy8wZnk2WVQ2WWhLcTVvQTZFN25xUW1MZGs5YlZ6QzJQNnc0b0tBVE0r?=
+ =?utf-8?B?YlhHd1kycE9ZZFhOWk05aEZNZ0JZUUpXa2ZMaWhSYUFld3A3MDRob1VXNGdZ?=
+ =?utf-8?B?QnlhWXY0cGw3dFJ1QUhXQzJlb0V2Nk1aZWFVTncwZllEbTRKUDBCYU5hRU1D?=
+ =?utf-8?B?NUllZ3ZUTS9IcHNXQkRJSE9UL2lUSC9DR1FPWFZYYVROZVY3Zm9LT0NBSGlT?=
+ =?utf-8?B?OTR6Zm8wc25OcVc3a2I0RTR1NmtjRTRibnRPSlBTU2oreEhaSEIzSFZHNnhJ?=
+ =?utf-8?B?YnpCbU1qMmg2N0hmTmdzLzdyVDFZeWY4amNnUWljMVU2bGoyWGUraWpFeDh4?=
+ =?utf-8?B?Rk1zVnZCVDBsU2szL0Z5c01IOVpGVTdNajFqb0FPRTJqYlRSc3M1dDV0ZTlp?=
+ =?utf-8?B?ZTBzdDBjVWVyRnMranFOaGlRSWNub2pET1hyQW1zRjMyNHlzbEN2UkZNeFJD?=
+ =?utf-8?B?TXJwT291UlNNV0NQUWJrZzRUbEFsdXg4aVBJYW9LM2xkRHNVT29JWi8zd3cr?=
+ =?utf-8?B?TDdQUU9mMjhnOFJoMHZVbWU1bmdMMmk1N2l6bTExbFQwQXNzM1Bad3dvcTlO?=
+ =?utf-8?B?emxSSjh5ZFNVMHVFNGRwNWdEZ2dkY3J2MndqSUtHamlxL25SR2RBY2wyUThE?=
+ =?utf-8?B?a1UxQXV2T3BmTFNMYk9mc2xMSmNNMlE5YTRlSzJpMFRacU1RSHlUQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88068432-2849-4a36-8001-08de4eced83e
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 15:59:03.2280 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: E9dDjZeolZf3wJsDLXwH6HpM9AG8CnEqQ5rxIPQhSeSYLorN66NDAIepkuKaEHMV0iFcQsUyop8IISIWDhRnIpnX3r/+uJYHcAlZy7PiPvI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8209
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -190,96 +177,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On January  8, 2026 thus sayeth Bryan Brattlof:
-> On January  8, 2026 thus sayeth Akashdeep Kaur:
-> > Hi Andrew,
-> > 
-> > On 06/01/26 22:53, Andrew Davis wrote:
-> > > On 1/5/26 10:38 AM, Markus Schneider-Pargmann (TI.com) wrote:
-> > > > Add a small helper that uses memory regions referenced by the R5
-> > > > devicetree node to calculate the LPM meta data address.
-> > > > 
-> > > > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> > > > ---
-> > > >   arch/arm/mach-k3/am62xx-lpm-common.c | 45
-> > > > ++++++++++++++++++++++++++ ++++++++++
-> > > >   arch/arm/mach-k3/am62xx-lpm-common.h |  1 +
-> > > >   2 files changed, 46 insertions(+)
-> > > > 
-> > > > diff --git a/arch/arm/mach-k3/am62xx-lpm-common.c
-> > > > b/arch/arm/mach-k3/ am62xx-lpm-common.c
-> > > > index fa068c60ce9ccf9cec89aeae1d224b07091a3298..6870395aec838949b5c25a32262a6c30e6c88d2e
-> > > > 100644
-> > > > --- a/arch/arm/mach-k3/am62xx-lpm-common.c
-> > > > +++ b/arch/arm/mach-k3/am62xx-lpm-common.c
-> > > > @@ -9,6 +9,8 @@
-> > > >   #include <config.h>
-> > > >   #include <asm/arch/hardware.h>
-> > > >   #include <asm/io.h>
-> > > > +#include <dm/of_access.h>
-> > > > +#include <dm/ofnode.h>
-> > > >   #include <linux/soc/ti/ti_sci_protocol.h>
-> > > >   #include <vsprintf.h>
-> > > >   #include <wait_bit.h>
-> > > > @@ -48,6 +50,8 @@
-> > > >   #define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT        0x18318
-> > > >   #define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW        0x555555
-> > > > +#define K3_R5_MEMREGION_LPM_METADATA_OFFSET    0x108000
-> > > > +
-> > > 
-> > > Could this offset into the R5's second reserved memory area change based
-> > > on the firmware used? Actually this whole thing feels hacky. Why not
-> > > just add the location to DT explicitly instead of trying to derive it.
-> > 
-> > The offset value of LPM Metadata in linker file will always be relative to
-> > the position of DM's reserved memory region in DDR.
-> > 
-> > Reference: https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62ax-sk/r5fss0-0_freertos/ti-arm-clang/linker.cmd#L169
-> > 
+On 1/8/26 4:47 PM, Quentin Schulz wrote:
+> Hi Oliver,
 > 
-> Does this work currently? Linux today doesn't have these properties in 
-> the Wakup R5 node and from these linker files[0][2] they look hard coded 
-> to addresses we do not have a carveout[1][3] for.
+> On 12/19/25 4:51 PM, oliver Fendt wrote:
+>> [You don't often get email from ofendt@googlemail.com. Learn why this 
+>> is important at https://aka.ms/LearnAboutSenderIdentification ]
+>>
+>> Hi all,
+>>
+>> I recently did a license analysis of u-boot an I came across some
+>> unclear license information in files. I do not know whether this is
+>> the right place to put my points, nevertheless I want to share my
+>> findings.
+>> 1. the file https://eur02.safelinks.protection.outlook.com/? 
+>> url=https%3A%2F%2Fgithub.com%2Fu-boot%2Fu- 
+>> boot%2Fblob%2Fmaster%2Fdrivers%2Fmmc%2Fsdhci- 
+>> cadence6.c&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cc65d5ed72ac94f3ad7b908de4ecd611c%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639034841193276491%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=qKgOGalLMURaimcVrCtxVnwN0EEldwTGB1I15M7RdsU%3D&reserved=0
+>> contains the following information SPDX-License-Identifier:
+>> GPL-2.0-or-platform_driver which is not a valid license identifier, I
+>> think GPL-2.0-or-later is meant here.
+>>
+> 
+> +Cc @Kuan Lim Lee, @Alex Soo, @Wei Liang Lim who contributed the driver, 
+> they should be able to answer what the intended license was (I assume 
+> the same as you).
 > 
 
-I'm sorry I hit send a little to quickly. This is starting to make sense 
-to me now. 
+Mails are bouncing.
 
-DDR and DDR_LPM_DATA is covered by wkup_r5fss0_core0_memory_region{}
++Cc @Hal Feng, @Minda Chen from the same company.
 
-and DDR_IPC_VRING_LINUX, DDR_IPC_RESOURCE_TABLE_LINUX, 
-DDR_IPC_TRACE_LINUX is covered by wkup_r5fss0_core0_dma_memory_region{}
+[...]
 
-Can we use those nodes?
-
-> If we haven't started on the Linux side it appears an easier path is 
-> to put the carveout directly in the reserved-memory{} nodes or to put 
-> the information into the board files and let U-Boot reserve the memory 
-> during bootup.
-> 
-> Or at least some way to make this more flexible than this. This feels 
-> very brittle.
-> 
-> [0] https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62px-sk/wkup-r5fss0-0_freertos/ti-arm-clang/linker.cmd#L173
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/ti/k3-am62p5-sk.dts#n47
-> [2] https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62ax-sk/r5fss0-0_freertos/ti-arm-clang/linker.cmd#L172
-> [3] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/ti/k3-am62a-wakeup.dtsi
-> 
-> > > 
-> > > Actually, don't we pick this address as part of the
-> > > TISCI_MSG_PREPARE_SLEEP?
-> > 
-> > This is not done as a part of PREPARE SLEEP message. As DM is the one
-> > reserving static memory for LPM, it is already aware of the address where
-> > context needs to be saved.
-> 
-> > 
-> > > Or does DM do it now, either way there must be some better way to
-> > > coordinate
-> > > between DM and R5 SPL than hardcoded offsets..
-> 
-> +1 with the number of carveouts for DSP, VPAC, MCU firmware we have on 
-> these SoCs juggling all the careouts for the different use cases and DDR 
-> densities is going to become a problem.
-> 
-> ~Bryan
+Cheers,
+Quentin
