@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C34CD1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB65D1D484
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C56841F2;
-	Thu,  8 Jan 2026 18:42:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6801484285;
+	Thu,  8 Jan 2026 18:42:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XYKg6jZl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aheyWV9L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79D7B8426E; Thu,  8 Jan 2026 18:42:46 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 170B484285; Thu,  8 Jan 2026 18:42:53 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AF0A84198
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C614184198
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2a0c09bb78cso17835235ad.0
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:44 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2a0f3f74587so29583375ad.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767894163; x=1768498963; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767894169; x=1768498969; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0YXxN5DpJrj6kXtYkHQYjdChm8TR6oaxGcA4sIPujIM=;
- b=XYKg6jZlwrEtV0xu1/20+FHEQjmOAiaj6cMFnoZhc0f4s9oUuVIAYWyw+Mv7t2pyl0
- hvxk1ojd2n3vHF0DCBTTAav9a91qH/Wt3WmmzC9L+BSa0jcCr5dNIDZPDixbEa/Ngc9e
- osttZonAsle3XSlWsWoDGbj2wAVzfBhShTy1k=
+ bh=O0zt5qZOssXZ25MrTw186w968CpmoZDMZXhCYBzm99A=;
+ b=aheyWV9LFZRGLbqOSxBs/Q+j2nADCCu81/1MMXCG1VwPcKIjbcHAfDw6CS359Eztxi
+ +bd+r8muhM5sJ2lKrpl4YIRmFDD5nsFk2B9vHOp7lvF9DgHBNqEHYRKylEC1D5j8I7mR
+ xpHTVJeEoxLO/EJfeTQ29OQ1yKyozHrQo5+Dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767894163; x=1768498963;
+ d=1e100.net; s=20230601; t=1767894169; x=1768498969;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0YXxN5DpJrj6kXtYkHQYjdChm8TR6oaxGcA4sIPujIM=;
- b=rpPfrexafmCyW7rAa5bwMZmjnBwB72bqxXKiwIkkjINFxzyz8wPfoUx7CrGXXyGeT5
- d/OyMoCgudxii2exdL6l4xXPv3U2o8jp2x3o0tL/jz0AmX8icbme0e4f8snvhoKdjyUv
- f56rU5S87NDhfcGD+nIez5jmLqerixYQlXUZ/bVDGnc+BQI0XSjSpg16aYkfAJm1IoFJ
- EsuCWoV4fgl1gAopCvFfAKgGlfWfzyA1nYFtJaMQOXo6nmb3O3B7w6+N+4aRUbdOG8XA
- njS08AXQ39GsUOfzSvmKnhz1RhEqu6jRq1VQFuLzI9n0YAKwyuM9CnHBptAcUozNpsNL
- E58Q==
+ bh=O0zt5qZOssXZ25MrTw186w968CpmoZDMZXhCYBzm99A=;
+ b=pxgGZnMQuxG1rCJR99+9D8lr/g+RKoHJiOIhqZkuibbSy6UfM23/RemrRMVlsLouxZ
+ yogyCDYheSN3xyuqmQvL4zLMoP3qkFIS1YP+lgpn3YBd++2OlJUALtKckd1nb+RoWU4O
+ K2f99L6IHGkiFUZdhfK2HbDEMzr9veOu+A4JhUqH+Tk25UDpBbOhRrC87kXax0tHfpq0
+ Apx/QK7OczzHZd7f8kmJ/p2U7ez4ZEctfzbfAKanZ42Z8pCaG3A+rMN0nF+E0DHGKnAR
+ zlEI8HTiDz1+hNwZeZQBGXB6gCXSMOIMPYi+Caed81rm2LVWyWAuWim/XqgBqP0uOQio
+ y88Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0Muc93zDTQX7Kpb6rIEstx07skPeMCUnKNDDYCvi6e+fE1pdZqFi43qem3ULGE/iPN1OkazQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyaf8Cv2cu3n0OpYeRo043H5S3Vcnl6FQcND7Ym3UGxYCMNrJk9
- lxRUoYJK4Igprr5mWGyfl7CNhPoy2sqrnFkrKulPZtyUduR5p5ofrooYPjhBCQj+01QeQOKwLRS
- be0iWx5aPLoyigdrhROewXVzkNe+cJfUw6IPVRll3
-X-Gm-Gg: AY/fxX6u79xHAYVi67dWEJPTlek678LICZwg3PN6b7+Erd+/B62Zbi9ofvcwhe4Tya8
- wVpisOp68lcSGsVOKvVw7dflebdkwrZi8PUIa7ts50v0Ts1vhoaP9EcOOKSlI1jVRPsL/IYa8Sb
- L4Mhk74pQELpm4U8W5J+okd9iBwnsXfn2jN8kWjN2djNPMnyb202xS63q/7+iiRZ7YiiZ/6dZLN
- ReJQQ8D/ToG5HfsjKT5PbfzbXwCUSRH5VBHUxuQN36T8NPYyp867RkDYhlTLsUaPQriZQ==
-X-Google-Smtp-Source: AGHT+IEqie/BiXdm16oqvHJoVQ4im5brxMeUZOBi9dePcJoQqVGH9U80CPOv2cPE+kTI/Hp8ZjmCkWh722vHr7AdUOo=
-X-Received: by 2002:a17:903:3508:b0:2a0:a33d:1385 with SMTP id
- d9443c01a7336-2a3e39d7c25mr103357065ad.17.1767894162632; Thu, 08 Jan 2026
- 09:42:42 -0800 (PST)
+ AJvYcCWE9Oc57qjNiXTx4ph7okS+vVKFa7YdmVGbHUg2TlRFBz9ShM1Rmy+tMq011PSk81bDZbol39Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz17Gh8THtZp4A7mOVL2uZje4x7d9OleulzcalD57/jo45h3W32
+ 23KRM2ufPnofnRx+Ng4oP5r2W6MGL6Z7vWnd+iRzQPR6C7kLsXhGTL3lo/KHb3/FCQcIa3SZx98
+ OWSHWssHDLLvoQkqxVcsw8KER4oNorcm2rJQm4WCX
+X-Gm-Gg: AY/fxX4MWuWupMv+tOnOGaObtcHCCrkvIfNEzW/C/Lg6eycmd27OVbhn24QzgHspgv3
+ 4Zb0XAcaRxTNqLPj2yqCETuGoobP61hzhkZ2yoLNCAT48EMKWXWDtbBioYKVjBIOePfz8R9Iop3
+ 6bkNnUxEbk1FpgMFU/rgNHtGLgoE7c9u178QI2jzy4Wy7s2txh/8GIgNjrue0ZSr4EiFTW2TwKt
+ ue7clvOkA0P5foJGeEIH5An0DVXDVVNPcE+Our3ccDuYdQiQCjIlAL2mb+m48l9jqTTmA==
+X-Google-Smtp-Source: AGHT+IGaYCVH/h+OPwQbDauZ2OmonTAAmFS9rEvPN4uKOyGY3lzYE/6Lo5Xl44WQT9EpZyyUf56ZVVt4w8wtuRRw5Pg=
+X-Received: by 2002:a17:903:3c2d:b0:29d:73cc:c9e8 with SMTP id
+ d9443c01a7336-2a3ee43896bmr66528645ad.2.1767894169282; Thu, 08 Jan 2026
+ 09:42:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20260108144753.1082965-1-sean.anderson@linux.dev>
-In-Reply-To: <20260108144753.1082965-1-sean.anderson@linux.dev>
+References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
+ <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 10:42:25 -0700
-X-Gm-Features: AQt7F2o06_qe-GYVm2hIFTTrG-3p_g-X68DleEw2SBSKdDntZhM4x7pR7NM8bmM
-Message-ID: <CAFLszTjeEmpQBiVtQa7_1B=Bzbgqyr7tRR4Z2AOxfmq57necHw@mail.gmail.com>
-Subject: Re: [PATCH v2] PCI: Add power sequencing driver for PCI slots
-To: Sean Anderson <sean.anderson@linux.dev>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Thu, 8 Jan 2026 10:42:06 -0700
+X-Gm-Features: AQt7F2pW3xue4jLLIhbwNHedwiCixKD-U0dM3jOdt77spXaZ3d3lo-fg11RHVIo
+Message-ID: <CAFLszTg6X8PeD4ZyY08WsTSs+qnRb_-jJjyupzSmi-jDzEhWUQ@mail.gmail.com>
+Subject: Re: [PATCH v1 3/4] env: scsi: Add support for partition type GUID
+ based environment
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, trini@konsulko.com, aswin.murugan@oss.qualcomm.com, 
+ joe.hershberger@ni.com, ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, 
+ ravi@prevas.dk, javier.tia@linaro.org, quic_varada@quicinc.com, 
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com, ansuelsmth@gmail.com, 
+ mwalle@kernel.org, anshuld@ti.com, jan.kiszka@siemens.com, javierm@redhat.com, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,31 +96,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Balaji,
 
-On Thu, 8 Jan 2026 at 07:48, Sean Anderson <sean.anderson@linux.dev> wrote:
+On Wed, 7 Jan 2026 at 23:50, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
 >
-> Extend the PCI bridge driver to enable resources associated with PCI
-> slots like clocks, power rails, and resets. This is modeled off of the
-> PCI power control subsystem in Linux. The traditional compatible for PCI
-> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
-> pciclass,0604 so add that as an option.
+> Add support for locating SCSI environment partition using GPT type
+> GUID instead of unique UUID. This enables the saveenv command to
+> work with partitions identified by their type rather than unique
+> identifiers, providing flexibility for systems where partition
+> UUIDs may vary across devices but types remain constant.
 >
-> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+> Introduce CONFIG_SCSI_ENV_PART_TYPE_GUID configuration option that
+> allows specifying a partition type GUID for environment storage.
+> When enabled, the environment subsystem uses the new type GUID
+> based lookup method via scsi_get_blk_by_type_guid() to find the
+> first matching partition.
+>
+> This change maintains backward compatibility with the existing
+> UUID-based approach.
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
+>  env/Kconfig |  7 +++++++
+>  env/scsi.c  | 13 +++++++++++++
+>  2 files changed, 20 insertions(+)
 >
-> Changes in v2:
-> - Return early if there's not PERST GPIO
-> - Only mdelay if we need to
-> - Use CONFIG_IS_ENABLED to set .probe directly
+> diff --git a/env/Kconfig b/env/Kconfig
+> index b312f9b5324..97cb3d05daf 100644
+> --- a/env/Kconfig
+> +++ b/env/Kconfig
+> @@ -768,6 +768,13 @@ config SCSI_ENV_PART_UUID
+>         help
+>           UUID of the SCSI partition that you want to store the environment in.
 >
->  drivers/pci/Kconfig      |  8 ++++++
->  drivers/pci/pci-uclass.c | 55 ++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 63 insertions(+)
+> +config SCSI_ENV_PART_TYPE_GUID
+> +       string "SCSI partition type GUID for saving environment"
+> +       depends on ENV_IS_IN_SCSI
+> +       help
+> +         Type GUID of the SCSI partition to store the environment in.
+> +         Uses the first partition matching this type GUID.
+> +
+>  config ENV_USE_DEFAULT_ENV_TEXT_FILE
+>         bool "Create default environment from file"
+>         depends on !COMPILE_TEST
+> diff --git a/env/scsi.c b/env/scsi.c
+> index 207717e17b1..6182ae26679 100644
+> --- a/env/scsi.c
+> +++ b/env/scsi.c
+> @@ -35,8 +35,13 @@ static inline struct env_scsi_info *env_scsi_get_part(void)
+>  {
+>         struct env_scsi_info *ep = &env_part;
+>
+> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
+> +       if (scsi_get_blk_by_type_guid(CONFIG_SCSI_ENV_PART_TYPE_GUID, &ep->blk, &ep->part))
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Can you use if IS_ENABLED(CONFIG_SCSI_ENV_PART_TYPE_GUID)
 
-You should be able to add a test for this.
+(we try to avoid #ifdef)
+
+> +               return NULL;
+> +#else
+>         if (scsi_get_blk_by_uuid(CONFIG_SCSI_ENV_PART_UUID, &ep->blk, &ep->part))
+>                 return NULL;
+> +#endif
+>
+>         ep->count = CONFIG_ENV_SIZE / ep->part.blksz;
+>
+> @@ -83,12 +88,20 @@ static int env_scsi_load(void)
+>         int ret;
+>
+>         if (!ep) {
+> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
+> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition not found", 0);
+> +#else
+>                 env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition not found", 0);
+> +#endif
+>                 return -ENOENT;
+>         }
+>
+>         if (blk_dread(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count) {
+> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
+> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition read failed", 0);
+> +#else
+>                 env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition read failed", 0);
+> +#endif
+>                 return -EIO;
+>         }
+>
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
