@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF10DD1D48C
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:09:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AEBED1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B80E83B05;
-	Thu,  8 Jan 2026 21:09:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24BE08415D;
+	Thu,  8 Jan 2026 21:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B0jpdvcB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G1quM4Ax";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DA2D8415E; Thu,  8 Jan 2026 21:09:22 +0100 (CET)
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
+ id 9C4CC841DA; Thu,  8 Jan 2026 21:15:33 +0100 (CET)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D817839F1
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:09:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D82084158
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:15:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x642.google.com with SMTP id
- a640c23a62f3a-b8427c74ef3so548610966b.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:09:20 -0800 (PST)
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9230f564so5166464a12.1
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:15:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767902960; x=1768507760; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=88gUpbAub+bW2Foj2dLaLeM3mSkFObq4HNI9q4up0g0=;
- b=B0jpdvcBJMQv6gRDu1s/9AiuRtTPZ6A5YZ4DJb1m0ZExEAQSUZ+gqH+IsAR6YlCYKA
- yIb14Um6E5cE9tfe8MiB/Qdg4+11TPV9hFMjVHriZkcTQtgsuR3bIx5sQH9yHPQ/JW3T
- NJk48/COqPExmsa2Dq/kZEscOKVESQtDPmIn43jGq1zeKlsW/bVGfCFg/gtqyxnuwEW/
- hnnM86S8hxLYFEJa8G1CGPzf+ux1IxJAN5qOQN+NKHkdyHdXB3C+SXWZIozBzha5Lm3B
- 19Nkp+BfrLKoVmwu4eGb+uEUrcMPQFfUL+MYOYMwHfjgyS/uP1rHISnIDSGtFK8ZpYOe
- 6Zdw==
+ d=linaro.org; s=google; t=1767903331; x=1768508131; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B5povxlq2z17f9INO7Ck08KqGleuNjRuRPeYwJ38ppw=;
+ b=G1quM4AxlUbTa5jxE1Zu/itqJKRMEMISCHVE5slsw2lUFgWKA3h+dg8kd+X2T7VxOU
+ t6HbrHAaYGd86ehOzNARyEGeWHyPK6WzEeCN6Ju0a22C8TvTnF0AFJCTuMdn38ATJCk5
+ eMFzTaCGuI0e1Al1udprrVVUOPdn9Yz7EFhymOTYxlLe09sNkqB2nCjxuvvIelwZRyqS
+ cXAD5WleCDiS1J/AS3AFAYb1cLKsm8HZAjweey/D04BQqjpeVg2yLzacexCjJKlupzIx
+ HFKQSn6EEr+iwLSqPKGPnhrC0ebYTCylohVDHlfXWI5RtVu1xd6PTqHHOzvpKlX4SZOo
+ W2Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767902960; x=1768507760;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=88gUpbAub+bW2Foj2dLaLeM3mSkFObq4HNI9q4up0g0=;
- b=QcNq8NPMbLxpJwBm39vnfngII6KFmYv5zklCLo+5J1KBJ2bnXbBNU8CkOU+2L0tt4U
- RTG7kWkfIZDga9XGSZCk12JUY/x7XL6ew9v1MXsIWVzSPgNaXGMnE9SyR5SarTyG+I83
- E0wgLBNRlxNkfo2XEnGgRL1Ms10hHD0Ig34Oq/gs82+vSpxhOiII3dYb6TBm2v+EaWDD
- 8ohTadyDhJmXKnYLJvqucSosXYY0LwgV1Gz3WkTmfK21bQ1lgAP8YgVvwYMpolvmuUB/
- 9dzgnF80H/kf4FnA3YBmq63OWWqODQZ3V0hA6U4KGEJgrQj0ESk3WMdOBqXbOrx4TfcD
- EQ6Q==
-X-Gm-Message-State: AOJu0YwsIep8CWg8dBsY+J8Km/DtZc5QGHnDnJakfw2VGkMhrut65siO
- 7k1FY8IYt9bHsZRXy/5Wkza8kXdai8InexGtfjDqZ2usGgmWbexjWoZoPWD3j6KJbpk=
-X-Gm-Gg: AY/fxX4/DzqhmlGdA37VWppOZGIIR7IoDRgftJVkjOhkStxdoOBlsZhIVZ9nl423Hbr
- 8xGrqDHXassWyZnemkxxBuEt3C8Q1jgML20pHbKuVMb5rhhK0ZEWKiq/Gyj39f9vSMwwoezJ1sB
- +hCpH/tBTwqFjgchQwzS+lyjiedxCm65QpaiCQLqbA5sqIE9Z4CsaHPrZu/IiiYpX5QzLIgSJ17
- r3ceVti3/X5ycmnliHEZfTmesVcObVHEFbKI+MjkzSQsX65pLKTTDBVsMYph2O/TPIBQzh/SITc
- UOMFXy4+U0nGVRLwCJ9ks+xgr9ij/Slq7T94CoomxasLgaPCvPC4MB0Vs9fgvCqSq01bn9uiipc
- UzXzxxZJTA54ol35dOl6hTWgQlP85QszCNqyzEaYoZEG95BR1TcxmwvSC2SFw2X9ahxG7x+8egk
- oPG2tlNP7XIqmJe6GgEHojCDqpAcXibUz4LZQIy+QhVkt/3hChlDs6ivGHNzNu7A==
-X-Google-Smtp-Source: AGHT+IGn4yAVitW2BIoiT73S/2JW2U9coRG4J5/EOAPfXgFYtQGdOyaHACX3zI2nSJfkq4myAmP2aw==
-X-Received: by 2002:a17:907:2689:b0:b7f:f862:df26 with SMTP id
- a640c23a62f3a-b8445194555mr680161666b.14.1767902959838; 
- Thu, 08 Jan 2026 12:09:19 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b844e46ee63sm490914666b.15.2026.01.08.12.09.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Jan 2026 12:09:19 -0800 (PST)
-Message-ID: <27fd1b95-798f-497b-98f3-2697ad0a6cda@linaro.org>
-Date: Thu, 8 Jan 2026 21:09:18 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ufs: uclass: fix potential unitialised use
-Content-Language: en-US
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ d=1e100.net; s=20230601; t=1767903331; x=1768508131;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B5povxlq2z17f9INO7Ck08KqGleuNjRuRPeYwJ38ppw=;
+ b=WuFAy7VcYWEhdgVeOBmBLundTlmc/d+yqcbkAAnEX2j2yZbdwBlsUSDU8GBzB2fYVS
+ VuOSlQk5PwfjhCN0FDpBKyroyUVVcYF9SF5p3UB21tl0PUXZFyVvXekI7gLL/l0MnCH9
+ 3MRCCzod209tZMYadXAKjU8pooOuyF4j+9nvXQgbDZju1aU0//JQEbjmqQ8o4f/BjQwX
+ 5t1Zf3kp4xx0IahAMVJOwqQGaTAT6f1PN7IRXN2WdLnDDEVaJ1usySd/yXMgSyaspvD7
+ xiPrGvclTqenhBWpaMD2HK946HDQUsBrWeYitCaa1OjxsbvW/A6xLYALHLLqiKsVWB/S
+ U78Q==
+X-Gm-Message-State: AOJu0YzL1jmFT5QafroSjy3SFbMYQn8hlYywcUSHEcBagRMMRaiEex60
+ MgwKqtVDDiX1EnfGmujKiSir+5O73IaYg5g55gbg14HT24qWQ8QjcvG3V83EvIR4tRQ=
+X-Gm-Gg: AY/fxX7LX6gfQrvEOU0g6NK5eapkRpLjsI1fB90i6sS+DmumTn0GcwV9gMfDMTo3d3L
+ ZiAT8RMmp9sUKSviouC59sFi+22xpgMNxLnXQapuprSpjHo8yGkeg8Coa+AqmOnxO1Zn+JkAnp1
+ ogyjK1YnuxgFqysviExpbotpTu+kl/5d12zBd3UypSiJiEkyvMkdjjdVy+pQ9toEr7C3w/sFojJ
+ r816ynlFxNNN7UOgNfiJOFYwU0kd5QUj6eClIqyan8dDXdBsbIwdp462jHISiPkTnXqg4gEdett
+ qqQYuAARtwi/5Sczd0g2YVzhQ/m8GGOm3gugirya65oe2BIQElO8TqbTMN4DBOTovtwYUtmX31E
+ FSq7gZ3qn3VoBznT21jMnHfHdqOf1HiWLkuGMYeslufdVR1AiwvGsQw7OjjVnEt45GuWnz0hgm5
+ w99aWUBgIob0EtzRjDzI/n2lm/+NlDwcbjn2eSrapgvK6+7PlSPXotuQnzOhz8+w==
+X-Google-Smtp-Source: AGHT+IGjjt8sS40D5sCGyk2iZomjRlDp1koGLeEITduWd9a72zHzrg7lSQJflyWiU4obny9I2abvyw==
+X-Received: by 2002:a05:6402:430c:b0:640:ef6e:e069 with SMTP id
+ 4fb4d7f45d1cf-65097dd11a3mr5853691a12.1.1767903330610; 
+ Thu, 08 Jan 2026 12:15:30 -0800 (PST)
+Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
+ [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6507bf6d5e0sm8350442a12.31.2026.01.08.12.15.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jan 2026 12:15:30 -0800 (PST)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Neha Malcom Francis <n-francis@ti.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20260108191626.3119582-1-casey.connolly@linaro.org>
- <4780165d-9e32-4628-b457-299972a21fa8@mailbox.org>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <4780165d-9e32-4628-b457-299972a21fa8@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
+Subject: [PATCH v2] ufs: uclass: fix potential unitialised use
+Date: Thu,  8 Jan 2026 21:14:01 +0100
+Message-ID: <20260108201452.3171709-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,65 +99,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+There's a few weird codepaths here including some that return err before
+it gets set. Clean things up and drop the unnecessary label.
 
+Also make a note about returning 0 when ref clk frequency is 0.
 
-On 08/01/2026 20:55, Marek Vasut wrote:
-> On 1/8/26 8:16 PM, Casey Connolly wrote:
->> When host_ref_clk_freq is 0, err will be returned before being set.
->> Assign a default value to fix the warning.
-> 
-> Indeed, nice find.
-> 
->> +++ b/drivers/ufs/ufs-uclass.c
->> @@ -1854,9 +1854,9 @@ enum ufs_ref_clk_freq
->> ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct
->>   }
->>     static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
->>   {
->> -    int err;
->> +    int err = 0;
->>       struct clk *ref_clk;
->>       u32 host_ref_clk_freq;
->>       u32 dev_ref_clk_freq;
-> There is another weird piece in this function, look at this:
-> 
-> ""
-> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-> index 3c8e4299259..da46b3ebdfd 100644
-> --- a/drivers/ufs/ufs-uclass.c
-> +++ b/drivers/ufs/ufs-uclass.c
-> @@ -1868,12 +1868,11 @@ static int ufshcd_set_dev_ref_clk(struct ufs_hba
-> *hba)
->         }
-> 
->         host_ref_clk_freq = ufshcd_parse_dev_ref_clk_freq(hba, ref_clk);
-> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
-> +       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL) {
->                 dev_err(hba->dev,
->                         "invalid ref_clk setting = %ld\n",
-> clk_get_rate(ref_clk));
-> -
-> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
-> -               goto out;
-> +               return -EINVAL; // I think we want to bail with error ?
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ drivers/ufs/ufs-uclass.c | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
 
-I don't think we need to error out here, Qualcomm platforms don't have
-this ref clk wired up properly yet but somehow things are working ok.>
-+       }
-> 
->         err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
->                                       QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0,
-> &dev_ref_clk_freq);
-> ""
-> 
-> How about we simply get rid of the whole trivial fail path and directly
-> return a return value instead of the 'goto' statements ? That should
-> cover all the weird corner cases too.
-
-I was worried you'd say that :P sure I'll give it a whirl.
-
-Kind regards,
-
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 3c8e4299259c..c6ef93dd101c 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -1862,45 +1862,43 @@ static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
+ 
+ 	/* get ref_clk */
+ 	ref_clk = devm_clk_get(hba->dev, "ref_clk");
+ 	if (IS_ERR((const void *)ref_clk)) {
+-		err = PTR_ERR(ref_clk);
+-		goto out;
++		return PTR_ERR(ref_clk);
+ 	}
+ 
+ 	host_ref_clk_freq = ufshcd_parse_dev_ref_clk_freq(hba, ref_clk);
+-	if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
++	if (host_ref_clk_freq == REF_CLK_FREQ_INVAL) {
+ 		dev_err(hba->dev,
+ 			"invalid ref_clk setting = %ld\n", clk_get_rate(ref_clk));
+-
+-	if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
+-		goto out;
++		/* FIXME: qcom platforms don't have this wired up yet but seem to work anyway */
++		return 0;
++	}
+ 
+ 	err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
+ 				      QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0, &dev_ref_clk_freq);
+ 
+ 	if (err) {
+ 		dev_err(hba->dev, "failed reading bRefClkFreq. err = %d\n", err);
+-		goto out;
++		return err;
+ 	}
+ 
+ 	if (dev_ref_clk_freq == host_ref_clk_freq)
+-		goto out; /* nothing to update */
++		return 0; /* nothing to update */
+ 
+ 	err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
+ 				      QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0, &host_ref_clk_freq);
+ 
+ 	if (err) {
+ 		dev_err(hba->dev, "bRefClkFreq setting to %lu Hz failed\n",
+ 			ufs_ref_clk_freqs[host_ref_clk_freq].freq_hz);
+-		goto out;
++		return err;
+ 	}
+ 
+ 	dev_dbg(hba->dev, "bRefClkFreq setting to %lu Hz succeeded\n",
+ 		ufs_ref_clk_freqs[host_ref_clk_freq].freq_hz);
+ 
+-out:
+-	return err;
++	return 0;
+ }
+ 
+ /**
+  * ufshcd_get_max_pwr_mode - reads the max power mode negotiated with device
 -- 
-// Casey (she/her)
+2.51.0
 
