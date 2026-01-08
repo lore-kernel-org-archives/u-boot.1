@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27BFD1D483
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B95D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:37:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA7284285;
-	Thu,  8 Jan 2026 20:16:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 873C984150;
+	Thu,  8 Jan 2026 20:36:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eQMO0Ad9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kg8oQ9fd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87F7A8422D; Thu,  8 Jan 2026 20:16:33 +0100 (CET)
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
+ id EF57F8422D; Thu,  8 Jan 2026 20:36:56 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEE6284285
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:16:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EABC84132
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x643.google.com with SMTP id
- a640c23a62f3a-b8010b8f078so566540166b.0
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:16:30 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7cdd651c884so1720410a34.1
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:36:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767899790; x=1768504590; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xAYHI9+ILIhYyNmCSRMcUCdVDOq+hC6B1cRrxAF2ceQ=;
- b=eQMO0Ad9XUsyGW9Q2y/DlEiyQMymctsyN9XXUV0wxTsPfmtWpQtMCNSyjONrxXk2JQ
- BxTTfozQ8lx3SY/cEb9C5rn6QCCDw7AyOI6zzhkSZweMBGf2iytIDuaP3zEhn7l07L9O
- /uWF8ecSQbleSBkQUqivCqinvDEcFfxSvXuGs8l2Yqut2/OMm392fl7uyunTpqYdBhdi
- ocbxXZmPy7NTyysVrgsZfZobVo9WtkajZR9EIU8KfUtKDHsiJ8+hKzfodBhWM/xOIYM6
- 9ObbTYNMDeTvh6bX4Yx7Ts/rBLF6sEiIXZN2aD1D4j6zjOh5TocL32ybAeW4k2nbfukD
- 4oLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767899790; x=1768504590;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1767901013; x=1768505813; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xAYHI9+ILIhYyNmCSRMcUCdVDOq+hC6B1cRrxAF2ceQ=;
- b=YlrcBHNGd+h0ha1V9ubeiith7cHTyw/xG5O0xvS44weu1oX0NQgLcPvRtj5yxLYur/
- H4LWNohJ2OCFogdOB4MAlsJEEeT6L6GEwnqHZN9lgZUiqkO+p751BX261ChxYBGKnQ48
- yUD0Y+0d81oMUL2n/rBxv0ytaMSQOgAI52iXSd9CO4gQFvvJo4zFdjGJAcImCzP2nc+S
- sajrNWjNa4fsoLg2YjPgjXx7aritV23xITBMg9p97+Wms5dGNvxUpLEyBXXHH+RyeAfn
- 4krZ5omN1jLDVZHRmvV08ZD8XoFg82Y4UIys18439+hIfJbR6SoBwV1CbRtBJg3icTrz
- d2fg==
-X-Gm-Message-State: AOJu0YxtyXLsMLR6Dr+bokFcSZ//QFZYHC/2Ae3YXhpgjqELRWCqOsQK
- 7QOGwinLgZsrCLoDqqG3z79mrLU51CF9C0ZnqrrdzRkmK0VhSQKt3rWogLBtcdTz3tyNVNU1ZmN
- tB5T4jqY=
-X-Gm-Gg: AY/fxX7ELgR5L3b7YX+N4YpGHnT3m68VzEmElXZx3iqFUZYC2bFjmyBz3gZZq7WhHOH
- VCvHEOJLapEJjZMc55jXSsfdA6hZrkbO1Vg6hxbqZQcDpSmec5QVf/y+IfRZTWETZ/4nKesmzDN
- 7fjRdGRYddbK5wY0iIFy7ZveW5Lq3xYMqkAe/lGjECpHWnU5M7AQErnEtUaR+WupuWqemrsHTVe
- NpM+nUz5VBEu0hIe4jPVfEG8Urdn39N3xIwETBcojYYleUFVfUaNkSRrEGQPdbpLLEcOj7oZNno
- BmaEkWc1UNnSYDg0UQDsCW23yAJqLISrSzuW5MKUpyhELVgsEbGTskKRFBpKKB3vocRY4Tm46Jw
- 7zTRSu7cnClTjPnKcAp8yJW+ZuhtknSxhcQPPNnXZlqH3BGIgzsLgc13SBQoV6cT711BIp4VJjr
- 9ja3qLUp3I3NLPKcYGLcVzSX+XMnZzE9aKUx0fWxVRu0QZSX3lTiG7zxLWatF+Tg==
-X-Google-Smtp-Source: AGHT+IFPlPDRxEi276vqVWpm6m97sW6YtWoWdxOPxiWh4RZsiqVMlt744SoAZdzP29dVnduOjIdQzQ==
-X-Received: by 2002:a17:907:9483:b0:b80:3101:cd13 with SMTP id
- a640c23a62f3a-b8444d4eb13mr833660266b.10.1767899790133; 
- Thu, 08 Jan 2026 11:16:30 -0800 (PST)
-Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
- [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a563f73sm922240266b.61.2026.01.08.11.16.29
+ bh=Go6GnVci/gqLwCMKDxYSOI8QZnehiNuThBaIXtkESzo=;
+ b=Kg8oQ9fdj9O7rkaDUM/loX4yZr/XwzLPv9NXS0HR+Jgs0yEkcCdzcsNujOZNbQ18o6
+ 0FH+pA0MZXxnIIOR5kBpxL3xhjoBDwBES+ZesaAiCo0lvrcj62HAzu71S2LcQA3rUe6n
+ WD2qDLSGyMRMDhg2hHwh2n+RZAt7lQLHOJ1R4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767901013; x=1768505813;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Go6GnVci/gqLwCMKDxYSOI8QZnehiNuThBaIXtkESzo=;
+ b=GG0mPur/jtKgb6qoLkypdkqIfT3IHnE1SBAgRMIZYuz7QJpO83SobMjUFvn2CbF1t2
+ rcEkXiyNqBfFBD2mXdzlsTbIii1n9WvRHnLJKmitMqg8koG9eNGfPW/NUwtXlEvSRrSL
+ 2ljenlS53j4lfYjpoW6lmVpUXRnhDHWzk7cbAjBrBklv3k8ef61bawJI3YI9IWpAoqHm
+ k8/23O3BGE7ceWDOqB1fZ3TR5h5ezbn5pDNvI65Y1qVSBNnoywlq6xOuxra9z5/koKKn
+ wtoE8ujJSvYrUSoMWAVQDUPLbSwYg3E21Q7ExU7b71RkmvlgcMIJuZ8ynBKSUBZYTruu
+ YSSQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuEmQ8ttQbFtwBIwV0FszGYxJZ7ISBU4inaN/B27+m3uJOa5kRU+sN/wIn2dxZOMv+KQlXhgo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlakRXsPvp2wrQBZzfaY4Kxxz4J5UqaN4MMTKLozlZ8qNZbarU
+ Mf9jUfZofcIj8CFPJO8ei/HVtkMf8wJz4L6tzsb3TIZiI2QhS1HPmACjzsA9Vu+JXfg=
+X-Gm-Gg: AY/fxX4kLJhiE8XwGSvcIXzuiWCuaMrkDcuPlnBnhhtukvATCBzjAdbHQe1EWYpm8cG
+ uEoxHFKHD4GzQhusClcWjgOWlOGJDT2qvidgqqWrvxxX7MPiW+Kf9BQ+y8N0z1AZ72H29VihPsR
+ fSBlQzMxKjhaO8ZB6T33RxlapGlJHqumr2vBhXShkKCBzfGqkrVvUWafWg1o0YvMKSHLfpWsXzO
+ BmF9R3OX9CyxbHzRZ0bQsZ5tum8LSt9Rwq9j20P+mvXttK3wKyPDclJV9Hp3MBIHtLYIq1/iAwY
+ AXWpybouw/7keXkZAVLQtLeSyWxTpRfQO3jOV7QCN8H6Uoug/50bG9eH6Ay8LilEKTK0aMlszsb
+ Hrsf3bxK7hG80F+FTZ7P3LIztNu/KGdvoAXJfz1RjcX4qHi50aKRqiUTy7QML0pOsa0nPzTLTnQ
+ zx3n1kEMT/OrwmUXAZdipoXRYxe4EkwcC9B/DPFbTTU7LSVP7zrG9p2GekAiZCrSIr2LU866b1n
+ QQ5NB2pq2PVyqqnsa5FBcD5CfV1gL2bjxEuVw==
+X-Google-Smtp-Source: AGHT+IFBmW2Q5Prg1vann+Ugd8t2YSPelAMF6ZX16hug78BcdWHdNmdpxh8SHuwQYnoyzrjDguP2xA==
+X-Received: by 2002:a05:6830:34a4:b0:7ce:519d:1089 with SMTP id
+ 46e09a7af769-7ce519d146cmr3828885a34.9.1767901013338; 
+ Thu, 08 Jan 2026 11:36:53 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce4781c447sm5950108a34.9.2026.01.08.11.36.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 11:16:29 -0800 (PST)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] ufs: uclass: fix potential unitialised use
-Date: Thu,  8 Jan 2026 20:16:17 +0100
-Message-ID: <20260108191626.3119582-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ Thu, 08 Jan 2026 11:36:52 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: c.stoidner@phytec.de, daniel@thingy.jp, tanmay.kathpalia@altera.com, 
+ u-boot@lists.denx.de
+In-Reply-To: <aV_DEzC0qGOr1fjX@nxa18884-linux.ap.freescale.net>
+References: <aV_DEzC0qGOr1fjX@nxa18884-linux.ap.freescale.net>
+Subject: Re: [GIT PULL] Please pull mmc-for-2026.04-rc1
+Message-Id: <176790101251.1229465.1836975522612031300.b4-ty@konsulko.com>
+Date: Thu, 08 Jan 2026 13:36:52 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,29 +100,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When host_ref_clk_freq is 0, err will be returned before being set.
-Assign a default value to fix the warning.
+On Thu, 08 Jan 2026 22:45:39 +0800, Peng Fan wrote:
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- drivers/ufs/ufs-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Please pull mmc-for-2026.04-rc1
+> 
+> -----------------------------------------------------------------
+> Revert "Use max-frequency from device tree with default handling"
+> Select CRC16 MMC_SPI_CRC_ON
+> Add 1ms delay with 1ms margin after mmc power on to follow spec
+> -----------------------------------------------------------------
+> 
+> [...]
 
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 3c8e4299259c..8dfba2140b68 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -1854,9 +1854,9 @@ enum ufs_ref_clk_freq ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct
- }
- 
- static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
- {
--	int err;
-+	int err = 0;
- 	struct clk *ref_clk;
- 	u32 host_ref_clk_freq;
- 	u32 dev_ref_clk_freq;
- 
+Merged into u-boot/master, thanks!
+
 -- 
-2.51.0
+Tom
+
 
