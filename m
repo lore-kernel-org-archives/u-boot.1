@@ -4,105 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD6FD14885
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 01:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D88ED1488A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 01:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1A083A26;
-	Thu,  8 Jan 2026 02:32:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7933183A26;
+	Thu,  8 Jan 2026 02:51:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BQsHineF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LdT3YdDT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B5E683A26; Thu,  8 Jan 2026 02:32:14 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 9510283A2D; Thu,  8 Jan 2026 02:51:24 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3086839F1
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 02:32:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7247B839F1
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 02:51:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-78d6a3c3b77so15616847b3.0
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 17:32:11 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3e8819eda8bso1004992fac.3
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 17:51:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767835930; x=1768440730; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MOC+5f2zTA9OGS9ncObF3JNVYRLFkMT7a5wKqEP895g=;
- b=BQsHineFC6o8tKj33skAxQ/cVexZ3In+ETBpcDfXwznrPhJVR323Wud7uCNTeIn720
- C+yF67Vpt5RTQ3vbbypOIOcEXyDrAx2l38SEToZSkxGQ1BcHwVLcoaJQHvsJqxJt9zf9
- nOIrnMGd4kCaJsALC6mx7OB/2aJnZIzV4RbDS54UnNYPBfaHrkcaWFFgQCxjMizLkv+C
- H2yINfEIJ6wQ8k7LcdCGvKoadje+AkH5Ln5aLk4yveTD6KPVF/yPKufFNHJu6FbKUFHy
- oqQlhDFSug7f126XAIJJCjVAOkTpjGt3kgbdxfesewB9ithhqu3HJ+gH5i74R864Id+x
- Eb1w==
+ d=konsulko.com; s=google; t=1767837081; x=1768441881; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xl83A0AghRn0grhXtgVNTxfUS5ogSYDmsayrctQiL0o=;
+ b=LdT3YdDT7DHueTMm39iM4mo6XKabezo+S1eUSmFsXL1c+G+vWio/tknwjiVgEO11Hf
+ wWDEfyjTvcUsBoqr4MYXEt+caS+aMHxZ2kCPcyftb4jE/g3OrhsyVr/FX/KrQD9cmv9j
+ O3XU+gUKvWl2sX932CKzo6Aqa5cQoQqdasZeA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767835930; x=1768440730;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MOC+5f2zTA9OGS9ncObF3JNVYRLFkMT7a5wKqEP895g=;
- b=c+hN2W0p5SQnyKPIMr/IVq3gsmENFWkghi5tkk0cRBsOgF3y+dYj/Fy1vtY+DMCWqi
- v4G4xvou0xe05y1cm4415YUOMeBEWW9QZxSk0vjYIjU0IEj1jJ4CFrjn6cF45e83vBco
- c82rnKyw6nK3JEqKqbe+rjf7Hnj22y7xRrDBphu75RP8EetlDUlPBalu34Uf1NY7oO2h
- di1Qy9tgNpBjHO7LHGjpoP2okfv/Vi04gM/ren8CgUZtS2g+FYft12yRcZugT/xEWq4P
- 5KDQlmNM8ZUj3jWET+UL+niwzmdlc1kfa9pfKWV4NC0YQQjhiNS6KIKvXmNaZXiGaY3S
- /5Bg==
+ d=1e100.net; s=20230601; t=1767837081; x=1768441881;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xl83A0AghRn0grhXtgVNTxfUS5ogSYDmsayrctQiL0o=;
+ b=e3YivZdFl/mcwtu/MSFR8VvscN2niKRG4eAx3VD8QtCn04hSw2/PL6z6dUE0XpbIHS
+ wX3bYnl2SD+TCxi26OT4y5KSqEC4qaZiwZm2cMOk4B/X+kHiyhYHQePui3B8o9sHxqnP
+ yUSmKtCSzdhzUTDU3oyIa0RU1JRuQZvzjs6UfHwg1eYPJFbrYUTMXMjtR7k6UdTQ+u5D
+ xYdp55ZBwUGr+5X6UrQMyY/VgqDqzpcodGNmfVoSR2XDrk0zB14PRqsJKcoUIxe9g7ok
+ 8QYl8QgI/nfTMYxOA/wrfYxO0RQ89LbnxTnd08lA3581S94cNgbGLRIjq8Ng6bEyDxIv
+ t/7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOFKl6XPvLKno/5KBKsdTv/54sC4GmUywX5DkDH52nCb/khDzvfWy3md+4FCe7pI9AsI6yt0w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPZuEDQJ6Gj8LgfIW2Q8b88YhIZs7fpmQgVATXo3H2wLDY6szp
- 4iWdaJ6lqo624yPuP5Jjm8+fi15OGIF+5AmaN8/9qeR2RVI/p+kOdDJkzwA6ll4gE0dtz1JAQQG
- aXxRfsxE2Fdw3eRyLyTUpsLh9bGoEeuY=
-X-Gm-Gg: AY/fxX42ytKP8ZGdJSTWI+BOeJINEmuNFntEAHm0mWDkF74xFsWBoBMgym5WWT5WiM2
- jPrjruGX3wZFi8g1kVZJvUj24yGMGBYs/cixnyevmqhHxwZJ69eKcxSwxQ/MVDkehCA1qUaOvOm
- km0OHLe/WxqPFN2g/leVrrM1Fv2xGyPXsmHJqU5OyX1xXziRaCT1sogMPzSX+MciORZwlr37NAZ
- fpthgKISHGkjYqN1UPLGb1EfWG+4O+6tDN1FK/DEFyUjjhgwHB3uihGl5rhg/pBDy2/lOe8hRIr
- GN/fgkN3OLE1kLSU6+D0hhoQNMY=
-X-Google-Smtp-Source: AGHT+IEdOPfS0TedhexF41T49QAd9J5QJ8EHKCfDDXnc5xG1TgSlEfUNUQcGjSzm4ZS1nWcPubvbYg8BPk54PEHzPv0=
-X-Received: by 2002:a05:690e:1445:b0:646:69a2:d400 with SMTP id
- 956f58d0204a3-6470d2437edmr6445730d50.10.1767835930201; Wed, 07 Jan 2026
- 17:32:10 -0800 (PST)
-MIME-Version: 1.0
+ AJvYcCX4mgyK0NPOxO2lJlniR8GmGSq31lFTNjBJGBkO8fMPRPdXpseIHSr0Ge5O4PhEgGVX1+hYIM4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1e55OleMSWfOfVxhlPzrT7HlDiav5Tr2EOWXYAcdxt+whqObW
+ 8Yx2mSxRICFIazAY/ZbDjWsCMUbBcQTm17dwUdocDRhSsNHPjO7k7hON6T642JDbhgI=
+X-Gm-Gg: AY/fxX5136W08hYpXzMQO319YwlcjgriGVSjlTvI0nguYPLT3NDfjn9f6a96Bj1TDxT
+ vmn+ACPn5VxM0Pz3YvPqQ1Qh67TXvtpOHK8NjZsHYFoThWURrNW/ew/fAhcLmvpeaIocRHnhnzl
+ xKuT9rBnS/qDTZl80YXc7rI2T5q8lOia3VJw/wL2n6eoVrjfU/W/TFepC4bqz1pHZWlR405pLr9
+ COWspKXoELkc0xPmz4YxPL15o1TsWLqdX2OsVA+DQLM6Hs9ozBMgG3b1HLX0tuOBlfYZKW5H1M6
+ +UWlsAVHAUIAjkBB4AIc/VTtRRMsdQpjn91Vt9RzGsXi67S3rAnoDQFr7uOQ/BefhD/LTdhci+A
+ sT0b0Hf/FnJ3ZrqZNNG9yl4U6h1uUkNQ2dLoFrHYxgEhe3OpGRPZp1M4OL90J2So4UE7RibN9Es
+ hGt+OWHr7d1ElHTUDiiL39QefwfFhNQRQbyUAHvKxB7QmO3Zigy3SRUquUthwbqVI/xeQD1iQRJ
+ 3ZBwS7xNDvJ+ET6Y4p5Ms2yiv+VSUwaTKgkFes=
+X-Google-Smtp-Source: AGHT+IGHH1YN/pvFGFw1ppH12jet+WZFc7rwUt+A63EH1ccGhPR+jJKglUo+rtqFwPw2IUrgn9Cy9g==
+X-Received: by 2002:a05:6871:e00c:b0:3e8:8e56:671e with SMTP id
+ 586e51a60fabf-3ffc0badc45mr2048170fac.54.1767837080928; 
+ Wed, 07 Jan 2026 17:51:20 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa50721a6sm4305248fac.10.2026.01.07.17.51.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Jan 2026 17:51:19 -0800 (PST)
+Date: Wed, 7 Jan 2026 19:51:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Stefano Babic <sbabic@nabladev.com>, Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Heiko Schocher <hs@nabladev.com>, Alexander Dahl <ada@thorsis.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
+Subject: Re: [PATCH v2 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
+ controller
+Message-ID: <20260108015114.GP3416603@bill-the-cat>
 References: <20251226-xspi-v1-0-4bb116750dba@nxp.com>
  <20251226-xspi-v1-1-4bb116750dba@nxp.com>
  <20251226145748.GD710860@bill-the-cat>
-In-Reply-To: <20251226145748.GD710860@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 7 Jan 2026 22:31:56 -0300
-X-Gm-Features: AQt7F2qwmmM7RVJDJ3J427OeB1eTp9IgdIB5jv9GlXPdADHGni8_GUleJrLV75c
-Message-ID: <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
- controller
-To: Tom Rini <trini@konsulko.com>
-Cc: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, 
- Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@nabladev.com>, 
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sumit Garg <sumit.garg@kernel.org>, 
- Heiko Schocher <hs@nabladev.com>, Alexander Dahl <ada@thorsis.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UvBS3Sx9qW87tZq9"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,23 +125,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
 
-On Fri, Dec 26, 2025 at 11:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
+--UvBS3Sx9qW87tZq9
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > +config NXP_XSPI
-> > +     bool "NXP XSPI driver"
-> > +     depends on SPI_MEM
-> > +     help
-> > +       Enable the NXP External SPI (XSPI) driver. This driver can be u=
-sed to
-> > +       access the SPI NOR/NAND flash on platforms embedding this NXP I=
-P core.
->
-> Does this driver build on sandbox? If yes, great, if not, this needs
-> more specific "depends on" logic.
+On Wed, Jan 07, 2026 at 10:31:56PM -0300, Fabio Estevam wrote:
+> Hi Alice,
+>=20
+> On Fri, Dec 26, 2025 at 11:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+ote:
+>=20
+> > > +config NXP_XSPI
+> > > +     bool "NXP XSPI driver"
+> > > +     depends on SPI_MEM
+> > > +     help
+> > > +       Enable the NXP External SPI (XSPI) driver. This driver can be=
+ used to
+> > > +       access the SPI NOR/NAND flash on platforms embedding this NXP=
+ IP core.
+> >
+> > Does this driver build on sandbox? If yes, great, if not, this needs
+> > more specific "depends on" logic.
+>=20
+> Please address Tom's question so we can move forward with this series.
 
-Please address Tom's question so we can move forward with this series.
+Especially now that CI runs "allyesconfig".
 
-Thanks
+--=20
+Tom
+
+--UvBS3Sx9qW87tZq9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV8NjwAKCRAr4qD1Cr/k
+Cj+gAP0VWNpdsG9PI4Uns4Pdha5MVt5Rs7/19MtoXHHWjMIR0AD/e7TuV+MEWzBO
+P4xQscZpI56Y0/JeH48RQEhfHBjnoAU=
+=kk4G
+-----END PGP SIGNATURE-----
+
+--UvBS3Sx9qW87tZq9--
