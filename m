@@ -4,111 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D88ED1488A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 01:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FCEDD14893
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 03:58:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7933183A26;
-	Thu,  8 Jan 2026 02:51:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BB3B83A1E;
+	Thu,  8 Jan 2026 04:58:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LdT3YdDT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IXdHGML2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9510283A2D; Thu,  8 Jan 2026 02:51:24 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id A9C8483A26; Thu,  8 Jan 2026 04:58:46 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7247B839F1
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 02:51:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD1FF839DE
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 04:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3e8819eda8bso1004992fac.3
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 17:51:22 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9d01e473so4250329a12.2
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 19:58:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767837081; x=1768441881; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xl83A0AghRn0grhXtgVNTxfUS5ogSYDmsayrctQiL0o=;
- b=LdT3YdDT7DHueTMm39iM4mo6XKabezo+S1eUSmFsXL1c+G+vWio/tknwjiVgEO11Hf
- wWDEfyjTvcUsBoqr4MYXEt+caS+aMHxZ2kCPcyftb4jE/g3OrhsyVr/FX/KrQD9cmv9j
- O3XU+gUKvWl2sX932CKzo6Aqa5cQoQqdasZeA=
+ d=gmail.com; s=20230601; t=1767844724; x=1768449524; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=a02I5NpBoVcWqDpbDAzTVWJ5nKF27/6jiIt7hMe8aiQ=;
+ b=IXdHGML22CS9N964XFHy30WuyK26QYc8HSY6XzRdioKlSgrmDoflBcBuNuHs1EO7oT
+ kgR3eIQgh0Yn4y15xWuKWHA28bYQp7+T6u89w8tiUnzExrJyg8NDxE6bF4X+oYgiHz58
+ EDhZ1SLMk5QfOGHfx+8aTJhcKUOlJLn5TNI3qi3G2JHZXh9Np0JvTd02+GZWvbFHgUfv
+ TpJ1vp0YCU5ZpPa9wvO+/acMLcxuFzm2ihbkTKAM0QW9/SzvQ3swOygOHtSADkgkBADz
+ QD+6p4I2QKTX5H00GQVJhGbQ8Gu4tF4fVv0FkS8k5MgVBsScM8LWtL6OTABtJKH2d7BP
+ K+Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767837081; x=1768441881;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xl83A0AghRn0grhXtgVNTxfUS5ogSYDmsayrctQiL0o=;
- b=e3YivZdFl/mcwtu/MSFR8VvscN2niKRG4eAx3VD8QtCn04hSw2/PL6z6dUE0XpbIHS
- wX3bYnl2SD+TCxi26OT4y5KSqEC4qaZiwZm2cMOk4B/X+kHiyhYHQePui3B8o9sHxqnP
- yUSmKtCSzdhzUTDU3oyIa0RU1JRuQZvzjs6UfHwg1eYPJFbrYUTMXMjtR7k6UdTQ+u5D
- xYdp55ZBwUGr+5X6UrQMyY/VgqDqzpcodGNmfVoSR2XDrk0zB14PRqsJKcoUIxe9g7ok
- 8QYl8QgI/nfTMYxOA/wrfYxO0RQ89LbnxTnd08lA3581S94cNgbGLRIjq8Ng6bEyDxIv
- t/7w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4mgyK0NPOxO2lJlniR8GmGSq31lFTNjBJGBkO8fMPRPdXpseIHSr0Ge5O4PhEgGVX1+hYIM4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1e55OleMSWfOfVxhlPzrT7HlDiav5Tr2EOWXYAcdxt+whqObW
- 8Yx2mSxRICFIazAY/ZbDjWsCMUbBcQTm17dwUdocDRhSsNHPjO7k7hON6T642JDbhgI=
-X-Gm-Gg: AY/fxX5136W08hYpXzMQO319YwlcjgriGVSjlTvI0nguYPLT3NDfjn9f6a96Bj1TDxT
- vmn+ACPn5VxM0Pz3YvPqQ1Qh67TXvtpOHK8NjZsHYFoThWURrNW/ew/fAhcLmvpeaIocRHnhnzl
- xKuT9rBnS/qDTZl80YXc7rI2T5q8lOia3VJw/wL2n6eoVrjfU/W/TFepC4bqz1pHZWlR405pLr9
- COWspKXoELkc0xPmz4YxPL15o1TsWLqdX2OsVA+DQLM6Hs9ozBMgG3b1HLX0tuOBlfYZKW5H1M6
- +UWlsAVHAUIAjkBB4AIc/VTtRRMsdQpjn91Vt9RzGsXi67S3rAnoDQFr7uOQ/BefhD/LTdhci+A
- sT0b0Hf/FnJ3ZrqZNNG9yl4U6h1uUkNQ2dLoFrHYxgEhe3OpGRPZp1M4OL90J2So4UE7RibN9Es
- hGt+OWHr7d1ElHTUDiiL39QefwfFhNQRQbyUAHvKxB7QmO3Zigy3SRUquUthwbqVI/xeQD1iQRJ
- 3ZBwS7xNDvJ+ET6Y4p5Ms2yiv+VSUwaTKgkFes=
-X-Google-Smtp-Source: AGHT+IGHH1YN/pvFGFw1ppH12jet+WZFc7rwUt+A63EH1ccGhPR+jJKglUo+rtqFwPw2IUrgn9Cy9g==
-X-Received: by 2002:a05:6871:e00c:b0:3e8:8e56:671e with SMTP id
- 586e51a60fabf-3ffc0badc45mr2048170fac.54.1767837080928; 
- Wed, 07 Jan 2026 17:51:20 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa50721a6sm4305248fac.10.2026.01.07.17.51.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 17:51:19 -0800 (PST)
-Date: Wed, 7 Jan 2026 19:51:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Stefano Babic <sbabic@nabladev.com>, Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Heiko Schocher <hs@nabladev.com>, Alexander Dahl <ada@thorsis.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v2 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
- controller
-Message-ID: <20260108015114.GP3416603@bill-the-cat>
-References: <20251226-xspi-v1-0-4bb116750dba@nxp.com>
- <20251226-xspi-v1-1-4bb116750dba@nxp.com>
- <20251226145748.GD710860@bill-the-cat>
- <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1767844724; x=1768449524;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a02I5NpBoVcWqDpbDAzTVWJ5nKF27/6jiIt7hMe8aiQ=;
+ b=Z6XVu2YkbUR2KpIsHvwRXqnagykUr4r74VCYX9r1665T6idiaZH1kp8dYe2zPeVBqy
+ fD9xiosGmxwtlmCE/IYCs87QIrDL0Si0YBp+DSpOL5/4r0qXMPTRHqBdDU7dmg/CIgZP
+ ll3qJPfzJAMU0kbwMc6iLbHUg2Kw0aqXV/CXlwI6sdlbDmateWh3T/Eip+XM7vWiTRmJ
+ 1FnGKCzM78hPClaDNrx+qbghUu4Jd6QG1kOvwaUnAe28sCfuVURQbwDAiJRc45sXZALK
+ wKubP25JtNg2vlobTzqnoyaNvcVKZJozNjvkr9SOXVib2GNAk+Q6+0dDmbjnXKCJIIx+
+ zg1Q==
+X-Gm-Message-State: AOJu0YyK4Ja5WttMJ83+x7EqUiFdIXx9Q8FIP1hGcYo1Ak8g5V8oeCxK
+ 1/4lndeBmZHSZkTTDz9buqYkO25UvT9knhoSU0qSpv0jYTXZ4JL7E1cR7h074KYyYNCKkn6XfVe
+ rTiMxWhIlSjqJbKvDpakJtSSmf99oXpc=
+X-Gm-Gg: AY/fxX4WR1b0PrU/2digoYX86aitAPgymLByAU5uHBBuX+rzgfTNtySx2tKHfCcM+8P
+ TRuxj8zIxJrKpXEfofXUpS9gGYGvVt9hMfBjKwgPNdbIPbHCkyjbRz9Ni+cwqm01sh9RsocUM4g
+ 7tYXid14t3UgOIoiC3MP+55EfO5aVLvUJohwGDwAHnlMAylePunSYaTKz9Vr+CDfTIHK9owoun7
+ 1lb3wiHeP9uMd3IsmUsTuYBJcdfo635FYSESEV9hBWz+BltxZ42opxDbEmCdsPr3G7Tgpb9UwKi
+ umFkBQHYunictmgzh96Q+YJQdHLJLMOXASyJxP6G8NM0N+9OfVAUxrQpZ906Rgv2qmOuGUsZB8A
+ LytTnhyws3HGgUElsTh5OQX0YMlXE/aK97dTH
+X-Google-Smtp-Source: AGHT+IFFR99bPa4K/xGtVX/haFAM300OW/nt8zt6ohx6U+IswqtbTiMvY1cRt7sECzN2iLFXL45UcWiVBTN2absKRI4=
+X-Received: by 2002:a05:6402:34c2:b0:63c:eb6:65e8 with SMTP id
+ 4fb4d7f45d1cf-65097e6a85dmr4374656a12.30.1767844724020; Wed, 07 Jan 2026
+ 19:58:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UvBS3Sx9qW87tZq9"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-11-simon.glass@canonical.com>
+ <CALeDE9OzMUm4PjymcOs_iAWWwoN+BSi+gDHXq4JvmCsB_YM5vA@mail.gmail.com>
+ <CAFLszTgPoJOvryUEdx5FSkgejy4p1nYrXd5cNXU_FUaWqeNwCw@mail.gmail.com>
+In-Reply-To: <CAFLszTgPoJOvryUEdx5FSkgejy4p1nYrXd5cNXU_FUaWqeNwCw@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 8 Jan 2026 03:58:32 +0000
+X-Gm-Features: AQt7F2pe9I6LYRtG0BPLx5Y6tYvpnYFY7cr9mjbs9XhTzhjU05V8zhf-dPnWBSg
+Message-ID: <CALeDE9P06_73XyVS00cfMXX=08QPRd-4yaxjehqRi99LW7_D0w@mail.gmail.com>
+Subject: Re: [PATCH 10/10] x86: Add cleanup_before_linux()
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <simon.glass@canonical.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,46 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---UvBS3Sx9qW87tZq9
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jan 07, 2026 at 10:31:56PM -0300, Fabio Estevam wrote:
-> Hi Alice,
->=20
-> On Fri, Dec 26, 2025 at 11:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
->=20
-> > > +config NXP_XSPI
-> > > +     bool "NXP XSPI driver"
-> > > +     depends on SPI_MEM
-> > > +     help
-> > > +       Enable the NXP External SPI (XSPI) driver. This driver can be=
- used to
-> > > +       access the SPI NOR/NAND flash on platforms embedding this NXP=
- IP core.
+On Wed, 7 Jan 2026 at 19:02, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Tue, 6 Jan 2026 at 19:37, Peter Robinson <pbrobinson@gmail.com> wrote:
 > >
-> > Does this driver build on sandbox? If yes, great, if not, this needs
-> > more specific "depends on" logic.
->=20
-> Please address Tom's question so we can move forward with this series.
+> > On Wed, 7 Jan 2026 at 00:40, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > From: Simon Glass <sjg@chromium.org>
+> > >
+> > > This function is not present on x86, but there is an x86-specific
+> > > version which is never called. Add the former, making it call the
+> > > latter.
+> >
+> > If the later is never called up until now why is it actually needed,
+> > if it's not been missed until now why not just drop it? Please
+> > describe why in the commit.
+>
+> I'll add it to the commit message for v2. The code is:
+>
+> int __weak x86_cleanup_before_linux(void)
+> {
+>     int ret;
+>
+>     ret = mp_park_aps();
+>     if (ret)
+>         return log_msg_ret("park", ret);
+>     bootstage_stash_default();
+>
+>     return 0;
+> }
+>
+> It seems important to park the APs before booting. I think it was just
+> an oversight.
 
-Especially now that CI runs "allyesconfig".
+You think? Above you said it''s never been called before so it can't
+have been *that* important!
 
---=20
-Tom
-
---UvBS3Sx9qW87tZq9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV8NjwAKCRAr4qD1Cr/k
-Cj+gAP0VWNpdsG9PI4Uns4Pdha5MVt5Rs7/19MtoXHHWjMIR0AD/e7TuV+MEWzBO
-P4xQscZpI56Y0/JeH48RQEhfHBjnoAU=
-=kk4G
------END PGP SIGNATURE-----
-
---UvBS3Sx9qW87tZq9--
+>
+> >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> > > ---
+> > >
+> > >  arch/x86/cpu/cpu.c | 5 +++++
+> > >  1 file changed, 5 insertions(+)
+> > >
+> > > diff --git a/arch/x86/cpu/cpu.c b/arch/x86/cpu/cpu.c
+> > > index c373b14df30..f756a9ebf09 100644
+> > > --- a/arch/x86/cpu/cpu.c
+> > > +++ b/arch/x86/cpu/cpu.c
+> > > @@ -80,6 +80,11 @@ int __weak x86_cleanup_before_linux(void)
+> > >         return 0;
+> > >  }
+> > >
+> > > +int cleanup_before_linux(void)
+> > > +{
+> > > +       return x86_cleanup_before_linux();
+> > > +}
+> > > +
+> > >  int x86_init_cache(void)
+> > >  {
+> > >         enable_caches();
+> > > --
+> > > 2.43.0
+> > >
