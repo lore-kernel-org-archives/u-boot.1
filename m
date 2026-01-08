@@ -4,92 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9479FD185F9
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 14:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2517CD1488B
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 14:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1D9984194;
-	Thu,  8 Jan 2026 15:15:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B1E18416C;
+	Thu,  8 Jan 2026 15:29:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZHEihQXL";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="uryrE72T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD3AB841B8; Thu,  8 Jan 2026 15:15:17 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B2D9884175; Thu,  8 Jan 2026 15:29:35 +0100 (CET)
+Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com
+ [91.218.175.174])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E9CE83B72
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 15:15:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9ADB8412C
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 15:29:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45358572a11so1955212b6e.3
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 06:15:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767881714; x=1768486514; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K2CML9GUNRT8u2/121PWjRABCNp+0yIuQcaKb5+Hu8E=;
- b=ZHEihQXLhrF62pVXe1wHb9badEuMgoXTc54KoqOMps6f3MSOHlmHk/LBJ4ljNFDrWN
- tmsAVqPOjj4r2WeZPTKw6JoB+byjBwnUyMrcw0W1+Mqv+6BYKLDrtXxiazEO3Vh7UCPY
- Zvhz27UmncAAPNqgcxA0TUrXXaZZx8YCtcd4w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767881714; x=1768486514;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K2CML9GUNRT8u2/121PWjRABCNp+0yIuQcaKb5+Hu8E=;
- b=E/cJmPQiYtKA9UXWcBVLRcYmiKWflQQe39HK635BCZNT6PsI1lt/2+bQveHqA3wvtf
- ipSGQY2dKXxatenlKdecNo7dK/Y1+A43fmnaU7vDnsHSAoeXXznHI8eqS6ROfcLeblrO
- BbghijgwT6U8qLrnw+3BnFKXHZzCkM0G9+7iUYK1I3Zb2l2PyRnZSOadT9d8Yfld0EEe
- Ef8k+6256En8oZuLdN4ECgKk7VYHwGb2CWYahs01FvwWbN/sOJUkamCt2IeZUW4paTGG
- lCWD/GuHy7SI1IGKcu1MFjZcd0HSqsNPoAlUHaFyYziqdZsLQKbHn+SvFARB6POsK2eh
- 1v4Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXm3ujMc/EyXIhEYREsmDXGkm+ZrXBHCGQIQtrFTIsrCP7UA5ntmecEDOMf3yCRVWmoqsh6lNQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyhLCEKU/fd6PH7bQtuvWmzQmvNIfmBbPl0Q/zrZslC993sCw+/
- UxVUw2U7ezgarRemxio6f12rpvIHnu7gQpv9uLIOTSu9zbHKH3BJXi5ijzob+JfBpq4=
-X-Gm-Gg: AY/fxX7vOo89PR5nWU+PuG9OmtUXAnfyDl+9jSO9BdKu3H4/cVbR2xX3DEG/y6EGf6Y
- g8Yxsk80z7BzOXlibvm5sL6eVv0+pM5HC7UTngOXNgUBiRz4f7Bz4YcDre975BtS5CPQr/CYc8T
- x8hFRD59b/d2rpoNJUUIAkOuKSYq4dwfHFyemkWNKOMuSYUw7rGyxbSOA0i3EKxQ1FCcbxNS3pi
- CZ2PZSHWsO7+kdZGnw8CHwAGSqCqHSopH6b11pxrP6qZcTEyjBudk+nZ44HX2nMlwdrl+ig0ZyF
- 7J8wlaTb15hGgamp05DWnaH3+YS+AGwEtPgcPRtlt8uZdimpGpHJhvBzxc93QR0Dsxa8xdczZcn
- nlcFLm+3eSSBb6hBu5G//1T7L5xOX1NljjNckbD8t/DJP2o/8nH4EtPHDswioaY1wN8mLwBfWTX
- zY2MHKtXQDQMd+UTcJlSsfeS9iMGL0PdWI9GnVt/PYhpBDwLQqRyiMayphqkas8xSmeqKxkCO90
- fSOj+oCpZeJgB/qAqnDZJmSjSR/W3JqwlNChzQ=
-X-Google-Smtp-Source: AGHT+IGP+1MNLPrlzgpvE7JFCyLmvWZg+y2/TEd/LSwzT+I1eHHuuS/0Gl1YhgwLwpf/VhKKpyXpfA==
-X-Received: by 2002:a05:6808:c292:b0:450:b215:8f22 with SMTP id
- 5614622812f47-45a6bedfafcmr3252624b6e.55.1767881712669; 
- Thu, 08 Jan 2026 06:15:12 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a5e2b2b20sm3654693b6e.18.2026.01.08.06.15.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jan 2026 06:15:11 -0800 (PST)
-Date: Thu, 8 Jan 2026 08:15:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Jerome Forissier <jerome@forissier.org>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2] spl: fix incorrect dependency for SPL_NET
-Message-ID: <20260108141509.GR3416603@bill-the-cat>
-References: <20260108-spl_net-deps-v2-1-e412128520f2@cherry.de>
+ spf=pass smtp.mailfrom=sean.anderson@linux.dev
+Message-ID: <dce30059-f738-4cab-ae88-195b5f0887fb@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1767882571;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dPJ5JGNFdDAwZrxbn+7qFg10bQlNUeuAf6lBZKDwVVw=;
+ b=uryrE72TYYgDuasxgwIEGPGiHADmwA+zheTkh8bR2gegw2IkEqDGEK+EXCGw0xz36B5BGZ
+ xmg1+u79KVYLO8XmVdm4kZjzN65WdPixr81F8nLNiejoTJj32YORt1r9roslfTDe25RzY7
+ ouVsazV3DeTVKr/dZEEkDlxaNk1t1+A=
+Date: Thu, 8 Jan 2026 09:29:28 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1/tKPPZ+TMQ+i67g"
-Content-Disposition: inline
-In-Reply-To: <20260108-spl_net-deps-v2-1-e412128520f2@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260106223409.748335-1-sean.anderson@linux.dev>
+ <CALeDE9NR8TZw1Vpgn4c0if2z1geXhB1dU_VLi8dOckiZDZZNoA@mail.gmail.com>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sean Anderson <sean.anderson@linux.dev>
+In-Reply-To: <CALeDE9NR8TZw1Vpgn4c0if2z1geXhB1dU_VLi8dOckiZDZZNoA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,73 +69,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/7/26 23:07, Peter Robinson wrote:
+> Hi Sean,
+> 
+>> Extend the PCI bridge driver to enable resources associated with PCI
+>> slots like clocks, power rails, and resets. This is modeled off of the
+>> PCI power control subsystem in Linux. The traditional compatible for PCI
+>> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+>> pciclass,0604 so add that as an option.
+> 
+> Not sure if you're aware but upstream is doing a big rework of the
+> pwctrl stuff[1], I'm not sure if this would need to be adjusted to
+> take any of those changes into account but might be worth considering
+> reviewing the issues being addressed by that rework too.
 
---1/tKPPZ+TMQ+i67g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, I saw that (and commented on v2 [1]). But the devicetree stuff is
+the same, and we can use a much simpler model in U-Boot because device
+probing is synchronous. That series is also not merged yet.
 
-On Thu, Jan 08, 2026 at 01:28:36PM +0100, Quentin Schulz wrote:
+--Sean
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
-> When SPL_NET is included, scripts/Makefile.xpl includes net/. However,
-> in this directory, the Makefile only compiles things if CONFIG_NET or
-> CONFIG_NET_LWIP is defined (it doesn't use $(PHASE_)). Therefore, at
-> least one networking stack needs to be enabled for SPL_NET=3Dy to do
-> anything meaningful.
->=20
-> In certain cases (e.g. am62px_evm_r5_ethboot_defconfig + NO_NET=3Dy via
-> menuconfig), it is possible to fail the build with undefined references
-> (since include/net-common.h does check with CONFIG_IS_ENABLED(NET) which
-> would be true for SPL_NET, but the implementation wouldn't be compiled).
->=20
-> Fix this oversight by making sure a network stack (and the legacy one)
-> is available when selecting SPL_NET.
->=20
-> Fixes: 8cb330355bd5 ("net: introduce alternative implementation as net/lw=
-ip/")
-> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> I'm wondering if this is the proper fix... Maybe we should migrate
-> net/Makefile to use $(PHASE_) there instead? This would allow SPL_NET
-> (haven't checked the whole codebase, maybe we still have CONFIG_NET
-> checks instead of IS_ENABLED(NET) where we shouldn't) to build without
-> any network stack in proper (meaning that SPL_NET is selecting the
-> legacy networking stack for SPL only), and maybe even that would allow
-> us to have legacy stack in SPL and lwip stack in proper? This seems like
-> a much bigger task than this simple patch here.
+[1] https://lore.kernel.org/linux-pci/39e025bd-50f4-407d-8fd4-e254dbed46b2@linux.dev/
 
-The $(PHASE_) way is probably the right way, I had noticed there's a few
-other things that get compiled (but, discarded) too because of this. At
-least:
-diff --git a/lib/Makefile b/lib/Makefile
-index 70667f3728c2..a247aa0331b9 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -133,7 +133,7 @@ obj-y +=3D string.o
- obj-y +=3D tables_csum.o
- obj-y +=3D time.o
- obj-y +=3D hexdump.o
--obj-$(CONFIG_GETOPT) +=3D getopt.o
-+obj-$(CONFIG_$(PHASE_)GETOPT) +=3D getopt.o
- obj-$(CONFIG_TRACE) +=3D trace.o
- obj-$(CONFIG_LIB_UUID) +=3D uuid.o
- obj-$(CONFIG_LIB_RAND) +=3D rand.o
-
---=20
-Tom
-
---1/tKPPZ+TMQ+i67g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaV+77QAKCRAr4qD1Cr/k
-Cm8kAQDF7tH//2BzwotIUk9d54MgKgishJXYJQmzN9mATuEF5AEA2WpoxZDeyrpt
-GHYaFx1yjlUKnwggGJykS9/6y5gN/wU=
-=26sF
------END PGP SIGNATURE-----
-
---1/tKPPZ+TMQ+i67g--
+> 
+> [1] https://lore.kernel.org/linux-pci/20260105-pci-pwrctrl-rework-v4-0-6d41a7a49789@oss.qualcomm.com/T/#t
+> 
+>> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+>> ---
+>>
+>>  drivers/pci/Kconfig      |  8 ++++++
+>>  drivers/pci/pci-uclass.c | 55 ++++++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 63 insertions(+)
+>>
+>> diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+>> index ea9868425d0..efac18b33f6 100644
+>> --- a/drivers/pci/Kconfig
+>> +++ b/drivers/pci/Kconfig
+>> @@ -100,6 +100,14 @@ config PCI_ENHANCED_ALLOCATION
+>>           Enable support for Enhanced Allocation which can be used by supported
+>>           devices in place of traditional BARS for allocation of resources.
+>>
+>> +config PCI_PWRCTRL_SLOT
+>> +       bool "PCI slot power control"
+>> +       help
+>> +         This is a generic driver that controls the power state of different
+>> +         PCI slots. The clocks and resets for the PCI slots are expected to be
+>> +         defined in the devicetree node of the PCI bridge. Say N if your PCI
+>> +         busses don't have software-controlled clocks or power rails.
+>> +
+>>  config PCI_ARID
+>>          bool "Enable Alternate Routing-ID support for PCI"
+>>          help
+>> diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+>> index c370f8c6400..c5b1ddec45a 100644
+>> --- a/drivers/pci/pci-uclass.c
+>> +++ b/drivers/pci/pci-uclass.c
+>> @@ -6,6 +6,7 @@
+>>
+>>  #define LOG_CATEGORY UCLASS_PCI
+>>
+>> +#include <clk.h>
+>>  #include <dm.h>
+>>  #include <errno.h>
+>>  #include <init.h>
+>> @@ -14,6 +15,7 @@
+>>  #include <pci.h>
+>>  #include <spl.h>
+>>  #include <asm/global_data.h>
+>> +#include <asm/gpio.h>
+>>  #include <asm/io.h>
+>>  #include <dm/device-internal.h>
+>>  #include <dm/lists.h>
+>> @@ -1893,13 +1895,66 @@ static const struct dm_pci_ops pci_bridge_ops = {
+>>
+>>  static const struct udevice_id pci_bridge_ids[] = {
+>>         { .compatible = "pci-bridge" },
+>> +       { .compatible = "pciclass,0604" },
+>>         { }
+>>  };
+>>
+>> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
+>> +{
+>> +       struct clk clk;
+>> +       struct gpio_desc perst;
+>> +
+>> +       if (!clk_get_by_index(dev, 0, &clk)) {
+>> +               int ret = clk_enable(&clk);
+>> +
+>> +               if (ret)
+>> +                       return log_msg_ret("clk", ret);
+>> +
+>> +               /* Delay for T_PERST-CLK (100 us for all slot types) */
+>> +               udelay(100);
+>> +       }
+>> +
+>> +       if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
+>> +               unsigned long delay = 0;
+>> +               int ret;
+>> +
+>> +               /*
+>> +                * If PERST is inactive, the following call to dm_gpio_clrset_flags
+>> +                * will be the first time we assert it and we will need to
+>> +                * delay for T_PERST.
+>> +                */
+>> +               if (dm_gpio_get_value(&perst) != 1)
+>> +                       delay = 100;
+>> +
+>> +               ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
+>> +                                          GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+>> +               if (ret)
+>> +                       return log_msg_ret("set", ret);
+>> +               mdelay(delay);
+>> +
+>> +               ret = dm_gpio_set_value(&perst, 0);
+>> +               if (ret)
+>> +                       return log_msg_ret("clr", ret);
+>> +
+>> +               /*
+>> +                * PCIe section 6.6.1:
+>> +                * > ... software must wait a minimum of 100 ms before sending a
+>> +                * > Configuration Request to the device immediately below that
+>> +                * > Port.
+>> +                */
+>> +               mdelay(100);
+>> +       }
+>> +
+>> +       return 0;
+>> +}
+>> +
+>>  U_BOOT_DRIVER(pci_bridge_drv) = {
+>>         .name           = "pci_bridge_drv",
+>>         .id             = UCLASS_PCI,
+>>         .of_match       = pci_bridge_ids,
+>> +#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
+>> +       .probe          = pci_bridge_probe,
+>> +#endif
+>>         .ops            = &pci_bridge_ops,
+>>  };
+>>
+>> --
+>> 2.35.1.1320.gc452695387.dirty
+>>
+>> base-commit: 38ace442b630c5ddf049af83e8db229c012ed355
+>> branch: pci_pwrseq
