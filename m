@@ -4,142 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E6FD1D460
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 14:37:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB45AD1D462
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 14:37:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CB37841E7;
-	Thu,  8 Jan 2026 15:37:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 53A8184221;
+	Thu,  8 Jan 2026 15:37:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IjVgj8lF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B/PD1pTg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AD0084214; Thu,  8 Jan 2026 15:37:21 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id BEA388416C; Thu,  8 Jan 2026 15:37:21 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA30E8416C
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 15:37:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 903BC841CD
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 15:37:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nmahMNTboTE9PLy1y1lGExhy9KL24Y316c5wnvt4O9HHWMDf/DvWsJUFaZu6CK4vg2oH+U0UC9cm3l14O8UMJTjEEiN63b1OFhaWlJwiG9VZV9g/BNXlhkUEsX6ssMsXPpcJaNEiE552d104ste5LXhHD7xpvLvvUIegR+/atMgKj8nL876rHC9UNGuELhgs0cL1NYoLVDk0tOLLncTJ434vE0z+itqEhA/gcn2az/CK1gwUeccDc3ERkA4DcdVyXUCWlpjr6WTB4DIR26pKQY9czab54oG4oyQY4Tv9oagpwwUdwnCE82o7eZXMCOFcQyyll8PPaNdSezCKOIa8Rg==
+ b=dzAuIqPdY26LGpZAJ3RE6VHu2A/rbhFepihPUlcbmUlQzGzF+x6jrnSH6kK5ZUXpxzAoPESCQM3o3dCsD+vUkRCEEjemBtqljfFnsmKY7QsRC6zqiLJXYaFUMHhSb/xbuzmrpKVD07jotLTO8ZQEBsZBe2LLiYMFaofx43VtjtqbxafOQyvha4sv+LaOIDRL1BLxkBUBnXVLVxiUyXzbtInSm7fgKVacftGX2iVdwxcKDPNB2JFsdLzgkh9/BO8YgZ33Cw5yVaIoNrlMLiqoGuf+o9WAVedD/AHkB2+lb1f/8WbzK1a0vcaNq271f8FRFenHGIG5LjwEAzHD5BP8Rw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=haSGUSMmts0xIrHfrPAD+e/rrJeRorX6x3OmY/HzPHw=;
- b=saznzFMczuccUFS4VhWY90ZoS0sfHUpOiZunUhIrh+d2rzxcgT6xbgH9nYyH3NILVfgUzjtlGI+FOZcQshmsXS7kH6uLj84lvd148Dw3Ew0AOLgqVA/myxLdZMr4GqFWhg01nrM5yyg69GeukGdHSwV94b1/R1lc38Dmcxortp9u/jdFllOP2Gjz96PwcC8+5o7msVkj+QQUEQkPMY8I4wtvro7IvFzMVqs67Mg1ENHfWFAUyQ169jKb5y60odeRKlbPSaJZmUydnNz5X1b1iuCDWrA7lfAD9yHl/J/ZHvmqPNJj/SB1/kQejHZk5shTyDuPnjQIBs/71AyA8mnSAw==
+ bh=ZDXhRvFzFlhJpzAppw+qOVuR5ZsCDLq3YoeyWjA42AQ=;
+ b=mnAVqgXtZ7u4PBzjULEWxe4CtLwtfW53jUVhtX8CXxRRZF+tatV1rBHaEc121Wp6p5dvH8Lkc3NR8rQLNb3XHCbsKeB85fGzx1nJa4uQXlVHt8Nxwj6pideY56nRAOC0oW17+D/sTxvTAlBxPqDI7DZAOPRxfbWJFSH/kxmfoGmq4RmnIXNSAMHRGfOQN8N9WzmYDOt4C4xJMgxYnARM7Vd3/I5CUHsCcsDpl4T7oKNProuUMFCWVIRrf5m8KJM1l7rkOo0Hf4afggMv3CdxYfxzM0sa5nfWjtWAfMPEYTWMPs++KgEq73fGZBHGDMkD8QbrrPC2ztunhnYJv1cgSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=haSGUSMmts0xIrHfrPAD+e/rrJeRorX6x3OmY/HzPHw=;
- b=IjVgj8lFuW8sZjbbjEazJusEFPRjWWfFgY0ugt2RfBDdBsyzcGztPP17wgNMBWmCcaMzzNc3j5BslochiizBPKtl9wU298amS6KWf7NzBoVHvzUYJpy/skWKyhtU5OANhzDM7Ihd0/RQzvPxQsrWQqjw3ZrXyik+qcncqyl9fno=
-Received: from SN6PR05CA0016.namprd05.prod.outlook.com (2603:10b6:805:de::29)
- by SJ0PR10MB4624.namprd10.prod.outlook.com (2603:10b6:a03:2de::12)
+ bh=ZDXhRvFzFlhJpzAppw+qOVuR5ZsCDLq3YoeyWjA42AQ=;
+ b=B/PD1pTgTzUGFKGpAMZeejAHp1rAXzNnOxRzoyVN4xjssZrPBmGO42wD7ukT68rTMnuQeiLDGlGzhboFA2Rc3t+1da9TyASmheRQGTiKXmWN4yjNOAruaNMoOr8TZfA/pVt94lpI4eIxEjXhKzwAtnbu6WNQB6CMC9WG4i19GyU=
+Received: from BY3PR10CA0017.namprd10.prod.outlook.com (2603:10b6:a03:255::22)
+ by SJ1PR10MB5979.namprd10.prod.outlook.com (2603:10b6:a03:45e::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
- 2026 14:37:15 +0000
-Received: from SN1PEPF000397B2.namprd05.prod.outlook.com
- (2603:10b6:805:de:cafe::f5) by SN6PR05CA0016.outlook.office365.com
- (2603:10b6:805:de::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.0 via Frontend Transport; Thu, 8
- Jan 2026 14:37:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 2026 14:37:16 +0000
+Received: from SJ5PEPF000001D4.namprd05.prod.outlook.com
+ (2603:10b6:a03:255:cafe::5d) by BY3PR10CA0017.outlook.office365.com
+ (2603:10b6:a03:255::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.4 via Frontend Transport; Thu, 8
+ Jan 2026 14:37:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SN1PEPF000397B2.mail.protection.outlook.com (10.167.248.56) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SJ5PEPF000001D4.mail.protection.outlook.com (10.167.242.56) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9520.1 via Frontend Transport; Thu, 8 Jan 2026 14:37:15 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 8 Jan
  2026 08:37:14 -0600
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 8 Jan
  2026 08:37:14 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Thu, 8 Jan 2026 08:37:14 -0600
 Received: from uda0271468c.dhcp.ti.com (uda0271468c.dhcp.ti.com
  [128.247.75.68])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 608EbEVg2521105;
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 608EbEVf2521105;
  Thu, 8 Jan 2026 08:37:14 -0600
 From: Vishal Mahaveer <vishalm@ti.com>
 To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Bryan Brattlof
  <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: [PATCH v2 1/4] board: ti: common: Add function for initialization of
- 32k crystal
-Date: Thu, 8 Jan 2026 08:37:10 -0600
-Message-ID: <20260108143713.1130054-2-vishalm@ti.com>
+Subject: [PATCH v2 0/4] board: ti: Add 32k crystal initialization
+Date: Thu, 8 Jan 2026 08:37:09 -0600
+Message-ID: <20260108143713.1130054-1-vishalm@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260108143713.1130054-1-vishalm@ti.com>
-References: <20260108143713.1130054-1-vishalm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B2:EE_|SJ0PR10MB4624:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8654e450-b547-46ee-f11f-08de4ec36af9
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D4:EE_|SJ1PR10MB5979:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea14cb2c-7b4d-4bb7-34a2-08de4ec36af5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|34020700016|34070700014|36860700013|82310400026|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?85MamCNgV0Pa2h9pTQk9s3I4chEqIuoqCDdL3Hf3J/BanoE0kEyNpg+ATZi7?=
- =?us-ascii?Q?J2s9zViU8f9C6Qc+LgKjimkHr0z0Du5MHrLC/EHVRU6P30IuHUnHo9XimRIV?=
- =?us-ascii?Q?ka47EuOAAn0oaxdK3sJo4DH5L4sZRB/jF+0ifUIxQE3bSEkKmiMASKCrlBWd?=
- =?us-ascii?Q?sjOlT5Ptl+yOV9BUHwsUSWtU60nzbcmoQmVhXzPperkpr8nOXP4OF4S2CYoq?=
- =?us-ascii?Q?pcsfannkTT44mH1VQTIPSazOJXr5yeE4Le+X3+4ciJsLIBYLAJWauq83+K6H?=
- =?us-ascii?Q?59lMLuYT7AvQrZrAuWnfWKmUAMpdeTjbxB0VvLWF+OwMMgKRmVJfiqyA+Owo?=
- =?us-ascii?Q?oNMWhGUjXYWjmnwJhPT9HrDrLLMSjUNDUM3P8FQHyPiHAepMXKNbikJVe4qe?=
- =?us-ascii?Q?L+/kdjM9+GQccea6ORv34bXgMrjP22gE3an1/DCO3dNfuaUnSTZ7XxHMmXsk?=
- =?us-ascii?Q?+vn1zuviJL6bisD9FcefjfRDUuJThjN1hzt53gkfU1U+ly6gfctX1EDs37pr?=
- =?us-ascii?Q?YA4cpkEMfDwIMrpx+k+lcrbWYXlE3cqh+kTMdkh0XBzgcZAuC85kkQoyo+HG?=
- =?us-ascii?Q?m20VVsXmIkQ2NZBi2vMpogZI+zXUH+W4VZZGJhgBGkGqkV1zCgWZA5LtnIyk?=
- =?us-ascii?Q?Q9Vz0oxrwJRYiyF4IJIPZSJGVwc2/+OjrG0m5v4i0Qcz6dNlC396Matj2Lzv?=
- =?us-ascii?Q?2FsbRCi5mZKx+Jlfc+jneoSjfTrJuYQxFqcNvxlT0aU/7wJJmUReFgK82fSB?=
- =?us-ascii?Q?uSHtmtIRTkYAbON3J6zZh3b9OvKcLWXYt1g8JjaxcPSXma8at7fYxPLm82n5?=
- =?us-ascii?Q?7Oseve6zdK+LnwnxlExGliHF6FPOR4IzPeL4mCTE1B2byKB49NymNz3S1FBr?=
- =?us-ascii?Q?OI0IfYw7p6iInkOtsXZrlGbd9q2DD0NaaVNnzt1meyCN8GaCHbILXjy46rR6?=
- =?us-ascii?Q?Mc3Wn7bQbqmAH8Z4Om8S+i5KubRImUNl/5aZtgkHZT8prRfCISmu/GHuAgGq?=
- =?us-ascii?Q?6SsRXBewPrwQMQuKRaaQ4MSwBWjd+32kBIAwKLiHx1IUgeDsfQJgc4o1XD4V?=
- =?us-ascii?Q?ar8BoqIEUM6Px81z9HVy6Il2UMCohFsOz+wZCVW2ywvZ3l1N2IfMVgt70xl8?=
- =?us-ascii?Q?QluP0Dp2l41T9qicRh7FK2uWf9tEAJ78DJ9sR+OH6+w7731mJY1z614srSHn?=
- =?us-ascii?Q?tfDc7RGwqmE5ECHQGrRXcXgblq0fPxs+tZHpxMF59aXuux7AvI7/Xk23sN35?=
- =?us-ascii?Q?BmLV4WlfT23jBk6f/RtbkTVJrA+xmXAzEjP/0a40aejn3D8r/1G8How4zksM?=
- =?us-ascii?Q?QTJXy0U6Cb+pfFvnVBh9Iv2OX/iLw83thHMniRuocwKe3/k0T6c1gimuXycr?=
- =?us-ascii?Q?uE8GzdEJ31p7KJp22/1VMBk8+tCPyCfkMSVvjPvew5s5N2V/3FkcWkh7BooU?=
- =?us-ascii?Q?GjF7oaxa2UbXfNprTAFXodQ8RSO0mX5drRlvddcL+qsAXBg4VVoG2Ot/R9N/?=
- =?us-ascii?Q?aDe/hsNuPeNDi08=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(34020700016)(34070700014)(36860700013)(82310400026)(13003099007);
+ ARA:13230040|376014|36860700013|82310400026|34020700016|34070700014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0UFrdHwnMwlF20rAw/RzCwzURDXAdw21FxCB6FLVP0RzYcoDKTpAHaFcAeUH?=
+ =?us-ascii?Q?jgEYOW2DLEZ5YRh9J0Ww+ndZvp6Dnroqjx6Wj6w/KfnusX8Ot3/1tRpK7+y0?=
+ =?us-ascii?Q?/2UC/+lsBdcSAoPUwhJc8+Z53Q7HnrkmS8MGK4xcYOcCX6Is1x0JZmQaG+bh?=
+ =?us-ascii?Q?hyiP6jD94RWe65Z2iD+Gf+Hb61gOW+JUbUW8we5tuFgu1BsDnyJbhXab+gjB?=
+ =?us-ascii?Q?ioGxvJFWkcoYRYJtAEHVPgWNps02HnaRidRN6OkTHhfIDUqPOpjlFl4Vv/CB?=
+ =?us-ascii?Q?Ea+Ph+6ucfi/Pwfe5obRjGmLyqDjxaSMjpS6lBRAEZT7Gz4pEnQt96NEmLRA?=
+ =?us-ascii?Q?tvUjravtylSm5bnc0H7boVU5+AGh4Y3R9pxs+tAUuG7rYwVsl8cL+ZIO2/0g?=
+ =?us-ascii?Q?k2s65UnvVLNxDma+fv9/B5MrusYVXFV37E7Mk1XX46K3JcLHi/PCsuBSwTVC?=
+ =?us-ascii?Q?cP9w70zmoIMSu+vqpjjIYhVqifepEw3sUUWbD7JDKEpkxU9ZV5W+HyeAAzCi?=
+ =?us-ascii?Q?whKc6E2Jf20Ut17VogGulfc7eu5VxwgLNHv2lls106y9U6T17mE0ScOWvSTj?=
+ =?us-ascii?Q?TaV/EJTKJcra8H7G/wjnxuj84MN5zKyPOu3upf9qY47gqE9qPpNo3roRMHRh?=
+ =?us-ascii?Q?nqt1Yg5FVRdcdG9bTFiNVmJ95cMH/tsmKDCwSklHQDLBnO8hp8SqDnYBL7Fd?=
+ =?us-ascii?Q?L/jxwPqwTln4ZZ1HCpe6I5/2U7bLiYTlBYQlYm1viR4gwyIkNSGNLmmhwVm8?=
+ =?us-ascii?Q?EY1KRoyBM+MMCZS/NU6Rf1IVgQzsT3vmNifSkBTOjwEf8YVHLp3+2hR8CTYX?=
+ =?us-ascii?Q?tp3WkGEp7aBpF8Xc7tvlV+briVopxWf0x7Y90OyM+ZFz3T6Ix2ojC0chhR3l?=
+ =?us-ascii?Q?eLdMzREyazOJf0FxAl2NuPztmBZn3g22Fa9fq7hJzai9XMdK64cLHc/DihC9?=
+ =?us-ascii?Q?bL0DbGnOh6p8Vsv+2Eqy/38Mh6dZP7YhfQXSEuQK+23R6ilqrGkYJluNEGSS?=
+ =?us-ascii?Q?G4HVLhEdWmSPn/7VA/AVU3oPBGnQgzStTciJivvCT2OEWRnV9mbEffANKFv8?=
+ =?us-ascii?Q?IyWlIvwzK7xp37w7o7JR7jzU05exgNl7YfiK8Mpe83EvleS0OuRq5vZTS/dD?=
+ =?us-ascii?Q?g05qXBDEWGMGuwlrOxmzP37UwAs2EGRvhsOH2UXA7GLnRIPzc3bumFZK3Krs?=
+ =?us-ascii?Q?ETv5oBRfTaQyTmcV/tpLoxNvZpkAn8s8mTK1NnsjlOBiT3CkrTYVGcG4cMah?=
+ =?us-ascii?Q?S8qXUxUxfZ4orQnnGwY0g6dlTCv8p8mWIzgYa+0fbPFtJhyE8hVUtrA9xWGi?=
+ =?us-ascii?Q?2skQVZf1QD+p+xbNMr2TvnZfM5z5z9248u1hXie/qJ3HoqAJXGduIX7fX2Ef?=
+ =?us-ascii?Q?KG0ki5rppsSy2U8iE9ldztuz9Azc3vueVggy6s9uQc5rUxZXEVYIA7FFLKSL?=
+ =?us-ascii?Q?oH+hkFuDCEOjtYLrpza/dkQrC4bWUkRA/rHEzVOIxD2v9DaXjivH2UG9mS1d?=
+ =?us-ascii?Q?6DdZcoKvnfpPyCk/OiT7gGCT3xOgPJtkzPxpoY5ojCs2LUIAGxzsPcEeH1v6?=
+ =?us-ascii?Q?GSiH9b0QOntKdQK2o74=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(34020700016)(34070700014)(1800799024);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 14:37:15.3300 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8654e450-b547-46ee-f11f-08de4ec36af9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 14:37:15.2083 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea14cb2c-7b4d-4bb7-34a2-08de4ec36af5
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B2.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D4.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4624
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB5979
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,93 +153,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a common helper function for doing the basic configuration
-required for enabling the 32k crystal on some of the TI boards.
+Add 32k crystal initialization support for am62x, am62ax and am62px TI boards.
 
-Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
----
- board/ti/common/Kconfig        |  5 +++++
- board/ti/common/Makefile       |  1 +
- board/ti/common/k3_32k_lfosc.c | 22 ++++++++++++++++++++++
- board/ti/common/k3_32k_lfosc.h | 15 +++++++++++++++
- 4 files changed, 43 insertions(+)
+Changes for v2:
+- Created a common API which can be called from individual board files
+- Squashed defconfig and board file changes into single commits
+
+Vishal Mahaveer (4):
+  board: ti: common: Add function for initialization of 32k crystal
+  board: ti: am62x: Enable 32k crystal on the board
+  board: ti: am62ax: Enable 32k crystal on the board
+  board: ti: am62px: Enable 32k crystal on the board
+
+ board/ti/am62ax/evm.c           |  7 +++++++
+ board/ti/am62px/evm.c           |  4 ++++
+ board/ti/am62x/evm.c            |  4 ++++
+ board/ti/common/Kconfig         |  5 +++++
+ board/ti/common/Makefile        |  1 +
+ board/ti/common/k3_32k_lfosc.c  | 22 ++++++++++++++++++++++
+ board/ti/common/k3_32k_lfosc.h  | 15 +++++++++++++++
+ configs/am62ax_evm_r5_defconfig |  2 ++
+ configs/am62px_evm_r5_defconfig |  2 ++
+ configs/am62x_evm_r5_defconfig  |  2 ++
+ 10 files changed, 64 insertions(+)
  create mode 100644 board/ti/common/k3_32k_lfosc.c
  create mode 100644 board/ti/common/k3_32k_lfosc.h
 
-diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-index 3dd2852e6b0..409454813f3 100644
---- a/board/ti/common/Kconfig
-+++ b/board/ti/common/Kconfig
-@@ -22,6 +22,11 @@ config CAPE_EEPROM_BUS_NUM
- 	default 2
- 	depends on SUPPORT_EXTENSION_SCAN
- 
-+config TI_K3_BOARD_LFOSC
-+	bool "Initialize 32k LFOSC"
-+	help
-+	  Enable the 32k LFOSC on the device
-+
- config TI_COMMON_CMD_OPTIONS
- 	bool "Enable cmd options on TI platforms"
- 	imply CMD_ASKENV
-diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index f58935b4103..b40c93cf312 100644
---- a/board/ti/common/Makefile
-+++ b/board/ti/common/Makefile
-@@ -5,3 +5,4 @@ obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
- obj-${CONFIG_$(PHASE_)SUPPORT_EXTENSION_SCAN} += cape_detect.o
- obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
- obj-${CONFIG_ARCH_K3} += k3-ddr.o
-+obj-${CONFIG_TI_K3_BOARD_LFOSC} += k3_32k_lfosc.o
-diff --git a/board/ti/common/k3_32k_lfosc.c b/board/ti/common/k3_32k_lfosc.c
-new file mode 100644
-index 00000000000..24c5bad76b9
---- /dev/null
-+++ b/board/ti/common/k3_32k_lfosc.c
-@@ -0,0 +1,22 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Library to support LFOSC operations common to some of the K3 devices
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <asm/arch/hardware.h>
-+
-+void enable_32k_lfosc(void)
-+{
-+	u32 val;
-+
-+	/* We have 32k crystal, so lets enable it */
-+	val = readl(MCU_CTRL_LFXOSC_CTRL);
-+	val &= ~(MCU_CTRL_LFXOSC_32K_DISABLE_VAL);
-+	writel(val, MCU_CTRL_LFXOSC_CTRL);
-+	/* Add any TRIM needed for the crystal here.. */
-+	/* Make sure to mux up to take the SoC 32k from the crystal */
-+	writel(MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL,
-+	       MCU_CTRL_DEVICE_CLKOUT_32K_CTRL);
-+}
-diff --git a/board/ti/common/k3_32k_lfosc.h b/board/ti/common/k3_32k_lfosc.h
-new file mode 100644
-index 00000000000..08752033f2e
---- /dev/null
-+++ b/board/ti/common/k3_32k_lfosc.h
-@@ -0,0 +1,15 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Library to support LFOSC operations common to some of the K3 devices
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+#ifndef __32K_LFOSC_OPS_H
-+#define __32K_LFOSC_OPS_H
-+
-+/**
-+ * enable_32k_lfosc - Do basic initialization of the 32k crystal
-+ */
-+void enable_32k_lfosc(void);
-+
-+#endif /* __32K_LFOSC_OPS_H */
 -- 
 2.34.1
 
