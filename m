@@ -4,81 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C254D1489A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 04:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2CFD1489F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 05:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D5983A26;
-	Thu,  8 Jan 2026 05:07:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2784D83A26;
+	Thu,  8 Jan 2026 06:42:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P0E4VkpP";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ENjSst+O";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W97eSrCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D8F683B21; Thu,  8 Jan 2026 05:07:41 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E566383B21; Thu,  8 Jan 2026 06:42:51 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D121D83A1E
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 05:07:38 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-6503b561daeso4113559a12.1
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 20:07:38 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id A220E83A1E
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 06:42:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 607LrZHi2239468
+ for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 05:42:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=yAXx05eITjL7oubPrb4EZRnc
+ 7LaAiNca4IKtNbYBoOc=; b=ENjSst+OiVsUA5bakMA9hHtdXkVQC99jSMxf5I9o
+ +OIuXf1YwF4a/Ax8w8JrZhoyz/lW5SyGsx2MFHG2F7VbGoW7MZDWm4uAH55vGdmQ
+ 6zogrsrn6KduwcE2YNadUicgcnt7tcRfUKWFQD+ElPdKHS4I7AaFs9jM0rwJ0K6h
+ LjGJRwmfO0QO5ZZ/wRhxZEdtLTuspzGTwaZCKXFrkUIFQMFYLJQd7EFyDg02JHeP
+ e9zYQCer6waikV88BfKaJ0hxfTSrCBmOhW328KMXX3REFjBlJ0out/0H1LkgRci/
+ LqiRcSXicvGWRNJcEB0VOyCc86ZRqnKc1ajlQ8yAkjiXWA==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhqwg2ru6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 05:42:47 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-c1290abb178so2722761a12.2
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 21:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767845258; x=1768450058; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H81lh8wRXY6GYG8LlvQUbOgRfeyiotEtfLZGXWoMFvE=;
- b=P0E4VkpPGECSokv49HY3UEObt7mP4ixsWWxYzYdrhY9d/WYQ4q7z+1RASjlRCRaZjH
- hgxSnikXjQXsWlwH7hvweKjsf857WtV0M8ca0CpJKC0FHKjON16YbwIqMws/oZ4CZiEn
- 2ForXPpSXIpGkglUeeaehH9XA8fnvydLUAzjBxI2uLfBBgmEZXqw+F/4CX+CEFifhZzV
- k1PxCc5Rf1KHJUtAjr97NeRHh4GgzrPrhRxzEor06a6/d4uLyjRhIHc3u6uHEGidZjtz
- 09kKuPDi2vtAYSusfsjaiWPveH+ty5BVNZdoeE1DXpG4kKQ0vJz0lI3l16Mf+RNyzNVj
- VL6w==
+ d=oss.qualcomm.com; s=google; t=1767850967; x=1768455767; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yAXx05eITjL7oubPrb4EZRnc7LaAiNca4IKtNbYBoOc=;
+ b=W97eSrCiBswJ/6F7PyuP7cub5jQSuocwnVn7m/9nUG2x9WossdDe+bIso1xBzZdF9P
+ Vzz5yPzSXAt5MMTNMJLD9UecGGik9CJvdCafuKhXza5YAr14hpPG/38v4xmqXUj6Gc/9
+ 89YZefM2tJ6qqBWaoDQHTl6jlz9LHIzQwA6q0UxKOALrMr97Yw8loOvBw4cw9GNq4ejv
+ EvPGxpGLZH65EISYodKvF6dw9qtXJsLsceeO3DjYC7dbRu99Wv8340g/EO4DtV6gBUja
+ 90AKo8YeXZ9w4zgm10yoqfB/4s7cFIoqZAQ4SOMlu6avE5Uu8xHJf2FFMd8pe0WJ1mS4
+ ywCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767845258; x=1768450058;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H81lh8wRXY6GYG8LlvQUbOgRfeyiotEtfLZGXWoMFvE=;
- b=MvEbPn0ICD41uCV3GEw+kwXQovRV7+KBbo9Vaw4/Qcvy8/7LQgwMqNNMXXMH9prLbH
- XsSKPoZA2XJp+dqsOv9/z9dbXXHIDAULkAaL78X7vSCxmM/SaUZ/+gCxXeUt/K3Njft1
- N52vWIUogmIGgKvQWK+6ZGNgP0c0vgP03DthK88h/L+NfZ5QEzPlp/OK+hS77kqxBOmr
- hSocU0ioSwACPduNlVwtTNL4EFW5ttqs7rNg4KGINuGJLKBZPTawuD0T8ORGCCUZfIhQ
- 155+5KPDaHsjpkZF+q7a8tmDiHp7Z0VUBAZR8Yn4qULi8enx4lUv9Bz3Ckpl4E1ZyH/q
- 0hZg==
+ d=1e100.net; s=20230601; t=1767850967; x=1768455767;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yAXx05eITjL7oubPrb4EZRnc7LaAiNca4IKtNbYBoOc=;
+ b=IEbFXIXuDQBCggrceVluzddcpkh1A/xjldoC7RFdO8kWat+P8aqqZibsDuVJ0LRMLe
+ 2HVVNgDWPc496mUsznAvEGGh8Ars9MK4QTfsU5n2XoPwDE1nojToi1UhEvEQ/X+LpXTm
+ kHLHR/yPYrHDj99zuKsIuRUWSIrJPVfWfCVz+/Cfjw8sG0jFE+N6OxH6JxDP0DogHQea
+ z3r9U6hgo7JRbWi5iOLEZOUsO/JEKnL1lQEOce4VLyu7OceQq+aIoCDEUa5fGg4j0s6Z
+ tfIyHCIJ21b0VRwBrncNltfzpghc2ydLewxkUKiPq/dFKpYIaikNR2TVPu7+obGPP0hs
+ LZdg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8LuRswnsvR3rd8FlRgK3+ntR5PlCzT1XKvemM91fjTad6zVUmJEhPcACB2LaOFqFNdFDiO0c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLDjTbHMEggWgtpSWVXFpKuKPBGrnU5jowbLCHokTFsoLeG7YC
- HWOCHirTw6xylhJcuuOOBy0lg8R+NFaEyW1YQjjXCxMYwLS243X7YxpI9CH3ftOGswRxmzDwN8Z
- rTJaxURwaY7nVXGzLPAUoixSZ44cOVKnaZycPWg0XbitN
-X-Gm-Gg: AY/fxX6tV/NvTasdg2buEr7kIUaCg9RlknkSfJI1TwtV1ImwdeRjpCV3xC7Zoy3A0RT
- SCgtiFiungDT2E1Cal2jxaetoOSe+khtBno+9qtOkLFdjzDz5zCnqc/lycmHGBfczXpzyJJFvTT
- WiBAfU+gfo8QPR9/9A8Qv0SySaqwfrIftCAkF5h7ZwLwFURb90WeKoRsCN33pWcq3yPppvgfvPO
- f1Ayn8M9xZL2p0DTI8OYhuCoO9j2p4Od/e9hl7LCO/m3gNeqKt4exLT0DVVUOOm+HrYXY3RuODP
- ZGrdHwTlmKiLhPPum53cXVI2Nv/FhRPBfcMT5Our6dDXxU/fAa8tCBFiCfAhq42fKDrowIjw9Hx
- BCD5Wqm3ih0yItD+OA8lKRyMdO37mJIhVlpMf
-X-Google-Smtp-Source: AGHT+IF3Qj5gCdw/p4Jimqv6A8SkYT4AubjzYXFDde7hDN5csbBJ2nIuTwdAd+ZabYT/18XR5iMfE2gUFYUtuf2TX5U=
-X-Received: by 2002:a05:6402:1e90:b0:64b:bb79:96bb with SMTP id
- 4fb4d7f45d1cf-65097e6c1c6mr3874407a12.24.1767845258015; Wed, 07 Jan 2026
- 20:07:38 -0800 (PST)
+ AJvYcCXZ4qEUDbMi4gWDf/guUFxQvk7MTY05BLbMBBU9hIDYbMOkzLEUIsHWGSaitCvxAAavtb+kTSQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiMJbaKc23F7f0CEDryMaMgyOb4U1JBYucgnwAQZPvFNgOwsFk
+ 3dE+DO4jaQ2PT6Pn2EFZmxl+sb8qotdcWu0NnghcR/dGmpxXT39Kv+sQTzu4sBov3rE0qsntn9Y
+ gbpvK4rwcFc3jiSL8AOmExnNIgY2+Dw1xlOI++uD/oNb9pK7HrBpZQeUU
+X-Gm-Gg: AY/fxX7zPsiKgtHfvIPwm2Mc9GSVzs5Ku5yhroU9ZYbVriw4MkNKN0GldkuPyLkV4PB
+ rAWBYxZyM5J9XYPJsrNPYvVfsQCoq4g9HwSYfPxnydnfEmmCn0S4KWg8LMT7PaZlomfXxM2rKyD
+ +YDrxkrBFAiy33ESWrDsptaAv3aLzXnt8zmmJNgEOHzstFbabnzQXnIDDiOGodxrGJWIbDbELq8
+ eHptFrHDVkhuVABTXNcI4RcdYjosvYah7ef2yc3+3RFz5Du3eVmsopRj90N/T+rtAvyPqAhycO9
+ YLXfPuqtidvdlYxB7fTY26ptUEz08gdNf+UZWZBU2PgUyUnWWv/BhIbu4Ovh5y+yVqxM9ctaIbI
+ nLEPBM7eYCrljeFiFckpxMfW4pvUZ8eWwqx6KY2zpMg37R3+Wm7gqmdg4yLjjRQx8amGnQPjWuV
+ arklwpAuUR0/w/m6tB+cMdYvaLxYgqC3xX8mzg+Rk=
+X-Received: by 2002:a05:6a20:7d9d:b0:350:b8e:f9a9 with SMTP id
+ adf61e73a8af0-3898f9b9aecmr4461638637.42.1767850966711; 
+ Wed, 07 Jan 2026 21:42:46 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE6W4ecFL6lqy6ADsE+ZQW9eKzVDzok64hlS6ApS+FEzCqZ4arLL8NnHrwzxvrGRKwECciirA==
+X-Received: by 2002:a05:6a20:7d9d:b0:350:b8e:f9a9 with SMTP id
+ adf61e73a8af0-3898f9b9aecmr4461611637.42.1767850966231; 
+ Wed, 07 Jan 2026 21:42:46 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c4cc95d5dbfsm6608546a12.27.2026.01.07.21.42.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Jan 2026 21:42:45 -0800 (PST)
+Date: Thu, 8 Jan 2026 11:12:40 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] configs: Fix fastboot buffer address for QCS615 and
+ QCM6490 boards
+Message-ID: <aV9D0OooxeEw6msn@hu-varada-blr.qualcomm.com>
+References: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260106223409.748335-1-sean.anderson@linux.dev>
-In-Reply-To: <20260106223409.748335-1-sean.anderson@linux.dev>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 8 Jan 2026 04:07:25 +0000
-X-Gm-Features: AQt7F2ruDPJ9o5hZW3uPq3af383VBsQchai50ge4zpVC3alCmcKBZsooQbHBoxo
-Message-ID: <CALeDE9NR8TZw1Vpgn4c0if2z1geXhB1dU_VLi8dOckiZDZZNoA@mail.gmail.com>
-Subject: Re: [PATCH] PCI: Add power sequencing driver for PCI slots
-To: Sean Anderson <sean.anderson@linux.dev>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+X-Proofpoint-GUID: JksJYWuKLl2L-h-MsCtE1bn7tcCCPJfV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDAzNCBTYWx0ZWRfX/j5b2+lLvVGt
+ 4p18S9ogPqLS6GrdPBIdq/xEW0TMpgKtHJrrIgVZIvPkp4Hi47AxeMAc5PRi6inkA/Y7pOcvu2H
+ DG3ckVeT5vzdbScOp0WEM/qwvjue41W87CjqXv9YYyO1TbhVmwNWrYpX8cPmlkDF/4/K6h85ZVa
+ /GaE8Bq1At87+S9IRMw6unV6aiD/7aWxgaqpihG0tcsCbi5Bn+6K98Mt3skJLOF/L02Q1mS9pmX
+ xVsM0npbLQN3dKI5Zes/L/AjY4gwMiRoiSdMiUBrYRrjuoOlhot4zPwgU+E0CtP9Wi33pUELgmE
+ KrnSRWIbPwtJZT/G/VSIz4WBbyn6yBT8cajeEiFrhh4P9eocg1/0PlNheMhelr5FtVlzrpcVWNv
+ KFLBWIYWRu6QWvQCHbXK9z+iiTmeCOJg9Zj/SeWJsL50jVeMAhMpE891Bqp5Gy/UIgBszkJM+Ai
+ m6NM/liywlfTkW0VphA==
+X-Authority-Analysis: v=2.4 cv=Pa7yRyhd c=1 sm=1 tr=0 ts=695f43d7 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=8ZUhOTMT-iWY_zsi3uYA:9
+ a=CjuIK1q_8ugA:10 a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: JksJYWuKLl2L-h-MsCtE1bn7tcCCPJfV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-07_05,2026-01-07_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 spamscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080034
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,138 +150,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
-
-> Extend the PCI bridge driver to enable resources associated with PCI
-> slots like clocks, power rails, and resets. This is modeled off of the
-> PCI power control subsystem in Linux. The traditional compatible for PCI
-> slots in U-Boot is pci-bridge, but Linux uses the more-systematic
-> pciclass,0604 so add that as an option.
-
-Not sure if you're aware but upstream is doing a big rework of the
-pwctrl stuff[1], I'm not sure if this would need to be adjusted to
-take any of those changes into account but might be worth considering
-reviewing the issues being addressed by that rework too.
-
-Peter
-
-[1] https://lore.kernel.org/linux-pci/20260105-pci-pwrctrl-rework-v4-0-6d41a7a49789@oss.qualcomm.com/T/#t
-
-> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+On Wed, Jan 07, 2026 at 03:20:38PM +0530, Balaji Selvanathan wrote:
+> The default value of CONFIG_FASTBOOT_BUF_ADDR is 0, which causes
+> NULL pointer dereference during fastboot commands when users dont
+> provide "-l" option in fastboot usb command.
+>
+> Set it to safe and sufficiently large region in RAM
+> of the QCS615 and QCM6490 boards, to prevent crashes.
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
+>  configs/qcm6490_defconfig     | 2 ++
+>  configs/qcom_qcs615_defconfig | 2 ++
+>  2 files changed, 4 insertions(+)
 >
->  drivers/pci/Kconfig      |  8 ++++++
->  drivers/pci/pci-uclass.c | 55 ++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 63 insertions(+)
+> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+> index 54eb5dedaec..618098c8860 100644
+> --- a/configs/qcm6490_defconfig
+> +++ b/configs/qcm6490_defconfig
+> @@ -13,3 +13,5 @@ CONFIG_TEXT_BASE=0x9fc00000
+>  CONFIG_REMAKE_ELF=y
 >
-> diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-> index ea9868425d0..efac18b33f6 100644
-> --- a/drivers/pci/Kconfig
-> +++ b/drivers/pci/Kconfig
-> @@ -100,6 +100,14 @@ config PCI_ENHANCED_ALLOCATION
->           Enable support for Enhanced Allocation which can be used by supported
->           devices in place of traditional BARS for allocation of resources.
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+> +
+> +CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
+> diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
+> index 2468267b955..14043b4f23d 100644
+> --- a/configs/qcom_qcs615_defconfig
+> +++ b/configs/qcom_qcs615_defconfig
+> @@ -20,3 +20,5 @@ CONFIG_REMAKE_ELF=y
 >
-> +config PCI_PWRCTRL_SLOT
-> +       bool "PCI slot power control"
-> +       help
-> +         This is a generic driver that controls the power state of different
-> +         PCI slots. The clocks and resets for the PCI slots are expected to be
-> +         defined in the devicetree node of the PCI bridge. Say N if your PCI
-> +         busses don't have software-controlled clocks or power rails.
+>  # Address where U-Boot will be loaded
+>  CONFIG_TEXT_BASE=0x9fc00000
 > +
->  config PCI_ARID
->          bool "Enable Alternate Routing-ID support for PCI"
->          help
-> diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-> index c370f8c6400..c5b1ddec45a 100644
-> --- a/drivers/pci/pci-uclass.c
-> +++ b/drivers/pci/pci-uclass.c
-> @@ -6,6 +6,7 @@
->
->  #define LOG_CATEGORY UCLASS_PCI
->
-> +#include <clk.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <init.h>
-> @@ -14,6 +15,7 @@
->  #include <pci.h>
->  #include <spl.h>
->  #include <asm/global_data.h>
-> +#include <asm/gpio.h>
->  #include <asm/io.h>
->  #include <dm/device-internal.h>
->  #include <dm/lists.h>
-> @@ -1893,13 +1895,66 @@ static const struct dm_pci_ops pci_bridge_ops = {
->
->  static const struct udevice_id pci_bridge_ids[] = {
->         { .compatible = "pci-bridge" },
-> +       { .compatible = "pciclass,0604" },
->         { }
->  };
->
-> +static int __maybe_unused pci_bridge_probe(struct udevice *dev)
-> +{
-> +       struct clk clk;
-> +       struct gpio_desc perst;
-> +
-> +       if (!clk_get_by_index(dev, 0, &clk)) {
-> +               int ret = clk_enable(&clk);
-> +
-> +               if (ret)
-> +                       return log_msg_ret("clk", ret);
-> +
-> +               /* Delay for T_PERST-CLK (100 us for all slot types) */
-> +               udelay(100);
-> +       }
-> +
-> +       if (!gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0)) {
-> +               unsigned long delay = 0;
-> +               int ret;
-> +
-> +               /*
-> +                * If PERST is inactive, the following call to dm_gpio_clrset_flags
-> +                * will be the first time we assert it and we will need to
-> +                * delay for T_PERST.
-> +                */
-> +               if (dm_gpio_get_value(&perst) != 1)
-> +                       delay = 100;
-> +
-> +               ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
-> +                                          GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +               if (ret)
-> +                       return log_msg_ret("set", ret);
-> +               mdelay(delay);
-> +
-> +               ret = dm_gpio_set_value(&perst, 0);
-> +               if (ret)
-> +                       return log_msg_ret("clr", ret);
-> +
-> +               /*
-> +                * PCIe section 6.6.1:
-> +                * > ... software must wait a minimum of 100 ms before sending a
-> +                * > Configuration Request to the device immediately below that
-> +                * > Port.
-> +                */
-> +               mdelay(100);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  U_BOOT_DRIVER(pci_bridge_drv) = {
->         .name           = "pci_bridge_drv",
->         .id             = UCLASS_PCI,
->         .of_match       = pci_bridge_ids,
-> +#if CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT)
-> +       .probe          = pci_bridge_probe,
-> +#endif
->         .ops            = &pci_bridge_ops,
->  };
->
+> +CONFIG_FASTBOOT_BUF_ADDR=0xa1600000
 > --
-> 2.35.1.1320.gc452695387.dirty
+> 2.34.1
 >
-> base-commit: 38ace442b630c5ddf049af83e8db229c012ed355
-> branch: pci_pwrseq
+
+Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
