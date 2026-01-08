@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435F7D1D478
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 19:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF10DD1D48C
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 20:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B262C842CE;
-	Thu,  8 Jan 2026 20:59:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B80E83B05;
+	Thu,  8 Jan 2026 21:09:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nRTNiz5R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B0jpdvcB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60D0A842CD; Thu,  8 Jan 2026 20:59:45 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 7DA2D8415E; Thu,  8 Jan 2026 21:09:22 +0100 (CET)
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79AB6842C7
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 20:59:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D817839F1
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 21:09:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-64daeb28c56so5486711a12.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 11:59:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x642.google.com with SMTP id
+ a640c23a62f3a-b8427c74ef3so548610966b.2
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 12:09:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767902383; x=1768507183; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2RFcjUL6AQN46cFSNlXRRS6afkG0aURY+KEu7Ba/ruA=;
- b=nRTNiz5RP9gZnbAhe6vMMn/Pfut16YZ6fr3Wgm/Ybmtw81bxSclaKKFVU+zw1Iej6N
- sOLnpH6UVYEQEPbZ2DJszfbtp/otCE//PfmUtpH50kbXGQXNJh0LfzMY9mpXKYVt3E4m
- V627QW3NX5YJx2XVl6kf6lhIwJ77leVEFWXo4=
+ d=linaro.org; s=google; t=1767902960; x=1768507760; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=88gUpbAub+bW2Foj2dLaLeM3mSkFObq4HNI9q4up0g0=;
+ b=B0jpdvcBJMQv6gRDu1s/9AiuRtTPZ6A5YZ4DJb1m0ZExEAQSUZ+gqH+IsAR6YlCYKA
+ yIb14Um6E5cE9tfe8MiB/Qdg4+11TPV9hFMjVHriZkcTQtgsuR3bIx5sQH9yHPQ/JW3T
+ NJk48/COqPExmsa2Dq/kZEscOKVESQtDPmIn43jGq1zeKlsW/bVGfCFg/gtqyxnuwEW/
+ hnnM86S8hxLYFEJa8G1CGPzf+ux1IxJAN5qOQN+NKHkdyHdXB3C+SXWZIozBzha5Lm3B
+ 19Nkp+BfrLKoVmwu4eGb+uEUrcMPQFfUL+MYOYMwHfjgyS/uP1rHISnIDSGtFK8ZpYOe
+ 6Zdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767902383; x=1768507183;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2RFcjUL6AQN46cFSNlXRRS6afkG0aURY+KEu7Ba/ruA=;
- b=GZC+Uk3fg1h8ra3INLg08/o0orvP1qBXUkbWxrY70Jz6nyZDDwLzekiX3WAPlZZP8S
- xJcsGcCv6cktBw+exY4pMUqF94E52eJPTP4nhm/TKWaW8BDlMgRvs07+DYu8yJc7akaG
- neI257nHQUtCYTo1XVQRTuZrUMXd2c7li5mmM/747W29V7HZyx0lXao9CS/EUxQ6HXtT
- 7eY81JlMaf5o1XLsvIGGoiUzhAoqE+SWXXloPT8vb1/pnM+ZzEx3Rd8+e0zgHa9no8zT
- Rx0VPDy5eBMF5yq2LIJvh8xE/RHJHoIbrl2okHerhUpucvBXJ9S9cW2u2vmlWLqKkr2+
- UUzQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWM/YWr9q7FszWnPldMw/zqUYXbowFQXjrH70AyxgBXWoYEBMD5PTGnRsw/kEYEj8MvYt05OY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxjlf8oXTkleuWdaP3E4pnOIY+K2+U7F+nD7qWmelpVW1eWsJi4
- pVLvITUrXh4erXpUTTpP3KJISDzLR/lzho3wefAArGO7skacb6VGFR5Hp2ec1Fl+G58hNVS+NwN
- dm1jXISfNCAXRXbxGFlcQj4P4xk6EkjkyBCTOMDCz
-X-Gm-Gg: AY/fxX6ESK7ODFNBg7wf/pecOetuPwlGBi/XXa7mwKO37k8oBrW6iff95ZuLK/IdYkR
- bXjCm4jeY04fduWHjKSGIOzXLPVS9DHnp8GVhtH3pXCMiVGUuVfNx2XLoJvnxvL6qwY3K57ezfH
- YXMpnkJRjL3DLPhJY9yvnymcKAI7bFeHCohCjxFAVeTJSp5y8SZI/jnSCi3pyoZvDOK/Riz4j56
- hq74yB9h1sLp/G4qTR+o0n7OWiOtm/AGygsxVpPRVm0/w9zEeElvRf4ozJuKBBDGJP9wA==
-X-Google-Smtp-Source: AGHT+IFZ6yyY/vfTpdSHEO3t+pXVNKijv1jUHHB23XElEcblM4slA6S43/DhSJTLbmpKWtnAG0mS4ELxs6x3WmAHE5k=
-X-Received: by 2002:a17:907:6d20:b0:b73:5a2f:2f0e with SMTP id
- a640c23a62f3a-b8445179e76mr651450366b.3.1767902382847; Thu, 08 Jan 2026
- 11:59:42 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767902960; x=1768507760;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=88gUpbAub+bW2Foj2dLaLeM3mSkFObq4HNI9q4up0g0=;
+ b=QcNq8NPMbLxpJwBm39vnfngII6KFmYv5zklCLo+5J1KBJ2bnXbBNU8CkOU+2L0tt4U
+ RTG7kWkfIZDga9XGSZCk12JUY/x7XL6ew9v1MXsIWVzSPgNaXGMnE9SyR5SarTyG+I83
+ E0wgLBNRlxNkfo2XEnGgRL1Ms10hHD0Ig34Oq/gs82+vSpxhOiII3dYb6TBm2v+EaWDD
+ 8ohTadyDhJmXKnYLJvqucSosXYY0LwgV1Gz3WkTmfK21bQ1lgAP8YgVvwYMpolvmuUB/
+ 9dzgnF80H/kf4FnA3YBmq63OWWqODQZ3V0hA6U4KGEJgrQj0ESk3WMdOBqXbOrx4TfcD
+ EQ6Q==
+X-Gm-Message-State: AOJu0YwsIep8CWg8dBsY+J8Km/DtZc5QGHnDnJakfw2VGkMhrut65siO
+ 7k1FY8IYt9bHsZRXy/5Wkza8kXdai8InexGtfjDqZ2usGgmWbexjWoZoPWD3j6KJbpk=
+X-Gm-Gg: AY/fxX4/DzqhmlGdA37VWppOZGIIR7IoDRgftJVkjOhkStxdoOBlsZhIVZ9nl423Hbr
+ 8xGrqDHXassWyZnemkxxBuEt3C8Q1jgML20pHbKuVMb5rhhK0ZEWKiq/Gyj39f9vSMwwoezJ1sB
+ +hCpH/tBTwqFjgchQwzS+lyjiedxCm65QpaiCQLqbA5sqIE9Z4CsaHPrZu/IiiYpX5QzLIgSJ17
+ r3ceVti3/X5ycmnliHEZfTmesVcObVHEFbKI+MjkzSQsX65pLKTTDBVsMYph2O/TPIBQzh/SITc
+ UOMFXy4+U0nGVRLwCJ9ks+xgr9ij/Slq7T94CoomxasLgaPCvPC4MB0Vs9fgvCqSq01bn9uiipc
+ UzXzxxZJTA54ol35dOl6hTWgQlP85QszCNqyzEaYoZEG95BR1TcxmwvSC2SFw2X9ahxG7x+8egk
+ oPG2tlNP7XIqmJe6GgEHojCDqpAcXibUz4LZQIy+QhVkt/3hChlDs6ivGHNzNu7A==
+X-Google-Smtp-Source: AGHT+IGn4yAVitW2BIoiT73S/2JW2U9coRG4J5/EOAPfXgFYtQGdOyaHACX3zI2nSJfkq4myAmP2aw==
+X-Received: by 2002:a17:907:2689:b0:b7f:f862:df26 with SMTP id
+ a640c23a62f3a-b8445194555mr680161666b.14.1767902959838; 
+ Thu, 08 Jan 2026 12:09:19 -0800 (PST)
+Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b844e46ee63sm490914666b.15.2026.01.08.12.09.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Jan 2026 12:09:19 -0800 (PST)
+Message-ID: <27fd1b95-798f-497b-98f3-2697ad0a6cda@linaro.org>
+Date: Thu, 8 Jan 2026 21:09:18 +0100
 MIME-Version: 1.0
-References: <20251228164500.313817-1-t.preissl@proton.me>
- <20251229144813.GP710860@bill-the-cat>
- <CAFLszTjFP4N1v-=Uob+DRpG_Fc3szkt+yziG+cbLQ7nxaM5mvQ@mail.gmail.com>
- <20251231015450.GW710860@bill-the-cat>
- <20260108150025.50206-1-t.preissl@proton.me>
- <CAOf5uwnmzGeKjm0LqiRTokQWDxnXUGp71OK131kn+O9hmamV=g@mail.gmail.com>
-In-Reply-To: <CAOf5uwnmzGeKjm0LqiRTokQWDxnXUGp71OK131kn+O9hmamV=g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 8 Jan 2026 12:59:19 -0700
-X-Gm-Features: AQt7F2r-nzvxLUBrwU-VtfSZie2qT3v1xhpIr0e0sOaQ7wbu_RSSBjFU3rY0zHU
-Message-ID: <CAFLszTjxr6Wx9m8oD5skysJGh5UfrgEgwBZEqsNFqFD3LkQhBg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] fix integer overflows in filesystem code
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
- u-boot@lists.denx.de, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ufs: uclass: fix potential unitialised use
+Content-Language: en-US
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20260108191626.3119582-1-casey.connolly@linaro.org>
+ <4780165d-9e32-4628-b457-299972a21fa8@mailbox.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <4780165d-9e32-4628-b457-299972a21fa8@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,51 +105,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-
-On Thu, 8 Jan 2026 at 11:27, Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi Simon
->
-> On Thu, Jan 8, 2026 at 4:58=E2=80=AFPM Timo tp Prei=C3=9Fl <t.preissl@pro=
-ton.me> wrote:
-> >
-> > Hi,
-> >
-> > this is a gentle reminder for the v2 patch series fixing integer
-> > overflows in filesystem code, sent on Dec 31.
-> >
-> > Any feedback would be appreciated.
-> >
->
-> Because you made a similar contribution , do you have time to review
-> them, and maybe rebase your series on top of this one?
-
-Yes, OK I took a look. These things are not easy to review!
-
-Regards,
-Simon
 
 
+On 08/01/2026 20:55, Marek Vasut wrote:
+> On 1/8/26 8:16 PM, Casey Connolly wrote:
+>> When host_ref_clk_freq is 0, err will be returned before being set.
+>> Assign a default value to fix the warning.
+> 
+> Indeed, nice find.
+> 
+>> +++ b/drivers/ufs/ufs-uclass.c
+>> @@ -1854,9 +1854,9 @@ enum ufs_ref_clk_freq
+>> ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct
+>>   }
+>>     static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
+>>   {
+>> -    int err;
+>> +    int err = 0;
+>>       struct clk *ref_clk;
+>>       u32 host_ref_clk_freq;
+>>       u32 dev_ref_clk_freq;
+> There is another weird piece in this function, look at this:
+> 
+> ""
+> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+> index 3c8e4299259..da46b3ebdfd 100644
+> --- a/drivers/ufs/ufs-uclass.c
+> +++ b/drivers/ufs/ufs-uclass.c
+> @@ -1868,12 +1868,11 @@ static int ufshcd_set_dev_ref_clk(struct ufs_hba
+> *hba)
+>         }
+> 
+>         host_ref_clk_freq = ufshcd_parse_dev_ref_clk_freq(hba, ref_clk);
+> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
+> +       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL) {
+>                 dev_err(hba->dev,
+>                         "invalid ref_clk setting = %ld\n",
+> clk_get_rate(ref_clk));
+> -
+> -       if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
+> -               goto out;
+> +               return -EINVAL; // I think we want to bail with error ?
 
->
-> Michael
->
-> > Thanks,
-> > Timo
-> >
->
->
-> --
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
->
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
+I don't think we need to error out here, Qualcomm platforms don't have
+this ref clk wired up properly yet but somehow things are working ok.>
++       }
+> 
+>         err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
+>                                       QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0,
+> &dev_ref_clk_freq);
+> ""
+> 
+> How about we simply get rid of the whole trivial fail path and directly
+> return a return value instead of the 'goto' statements ? That should
+> cover all the weird corner cases too.
+
+I was worried you'd say that :P sure I'll give it a whirl.
+
+Kind regards,
+
+-- 
+// Casey (she/her)
+
