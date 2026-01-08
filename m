@@ -4,80 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2471FD0D146
-	for <u-boot@archiver.kernel.org>; Wed,  7 Jan 2026 23:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD6FD14885
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 01:32:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8521983A2D;
-	Thu,  8 Jan 2026 00:52:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C1A083A26;
+	Thu,  8 Jan 2026 02:32:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AJkZ7mR/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BQsHineF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A8983A91; Thu,  8 Jan 2026 00:52:53 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 2B5E683A26; Thu,  8 Jan 2026 02:32:14 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70A0E83A2D
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 00:52:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3086839F1
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 02:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-59b6c905a46so1507320e87.1
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 15:52:51 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-78d6a3c3b77so15616847b3.0
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 17:32:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767829971; x=1768434771; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1767835930; x=1768440730; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mt9oosdy3BaPnia7DFqvfxI2Bb0vy6lp0mQhI+q2jRI=;
- b=AJkZ7mR/JnvSTEI7KwGrXleICmk815nMMs1Hc7c9UUBrE2xWiO72MWj1+oNCTqscez
- 7mXgcFk4ugRlbc64LdMD+sZJWYRvQxUUEzC+yP3zsHinM0P/AS73aoAPB4sNZd9zTRJE
- jFTOuUn7zBtRq4Od7xFm9i1+/45Rq2mWO/ieroy/05MUTefYqnc244MFeM4EsynoBRw3
- dTt5akxdI6RWL++HL1gH1BJvK5hfzihEPArlPtnt4bW3tXh88yareDPDDRrmx/sczeqQ
- lsTLVXBRO/0X4U4Dw4suwIRlH6FbIjE6jcGO826wtwBzlmlgC9d2IcWR/oQb851AXs8T
- KWdQ==
+ bh=MOC+5f2zTA9OGS9ncObF3JNVYRLFkMT7a5wKqEP895g=;
+ b=BQsHineFC6o8tKj33skAxQ/cVexZ3In+ETBpcDfXwznrPhJVR323Wud7uCNTeIn720
+ C+yF67Vpt5RTQ3vbbypOIOcEXyDrAx2l38SEToZSkxGQ1BcHwVLcoaJQHvsJqxJt9zf9
+ nOIrnMGd4kCaJsALC6mx7OB/2aJnZIzV4RbDS54UnNYPBfaHrkcaWFFgQCxjMizLkv+C
+ H2yINfEIJ6wQ8k7LcdCGvKoadje+AkH5Ln5aLk4yveTD6KPVF/yPKufFNHJu6FbKUFHy
+ oqQlhDFSug7f126XAIJJCjVAOkTpjGt3kgbdxfesewB9ithhqu3HJ+gH5i74R864Id+x
+ Eb1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767829971; x=1768434771;
+ d=1e100.net; s=20230601; t=1767835930; x=1768440730;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Mt9oosdy3BaPnia7DFqvfxI2Bb0vy6lp0mQhI+q2jRI=;
- b=E1difmC1+PyLqzBCOsthGtUeYsNi88Nx0l3hFsaFXgRIq7l18tJpzzuuwqLd+Esdv7
- Y96IadNpNmHNllpSRRfFJq+8qSuFpITejf8nzHNPUDMo6t77zON7vxFFFqxQYF3acsQp
- IU195P7gd49rUYd3G/RMNKv2IZ3yf/MGaHE4WSTslYsgqjDDJ5g68lsybOSYCA/pi4+D
- p47zbmvmD4Pm5fqj9KTxHmtytKn8beP/umDJu7my2TL/8BYm/MDWP5MWl9wyTEGiMRsW
- ml8iRtdKu5mA33u7AOQERjm074T+3Jj9dbNlgxspmnb7HGVCf01GDCPCyquwcBgQTAxa
- VZUA==
-X-Gm-Message-State: AOJu0Ywg3mpYUyaYOZNNcLg6WQ+oUlDdAzbOKs10ec3prM+P0qQ3cW/e
- GK22pL00MeIcF5Bx6Qrjk8EXQh8Gy8icWqQIPLsXd3shK7CJ50Tesh/A2rxvGoQI+XkUSvK/BGU
- BuQSTI/AY2x0BtnvwK4VEz7H/W/gOPII=
-X-Gm-Gg: AY/fxX5sY02V3WXYmMn6Jzypgrlx+jxbS9faF8c1WBGFJE2USO+6WwRzMMnBJ+yeVnz
- wc6+cwKNNveAW37kZkFtCx2MA2TD7un7EBBzDifJjMSZUYtaq0FOjogSOVsVwQzo4KE2b7wyXmg
- RflyNEicWMiWlqmPaDh/6+uBWzesMiF4ynAFZiZpi4JywN39R6+9yGuVDFmKLi54dGxmkPLOxap
- 8G9TANrgiUSKg+1cLGYmVlllLOZQipz5nIVAEocFUdT+pxZpWm/+Cz6T5mmagnmlROcQVvdOphk
- 9JWaqLBS/+dhv6jgxB4tUSwQgoakV5c9cR09zA==
-X-Google-Smtp-Source: AGHT+IFprGj5HrJAkyELiYhn82zmIic4/UTBAAoQ6+RqDR72uab5+fWe+K3JK0AI2oVzn9hr/kJ85qesPK7s5IReGAQ=
-X-Received: by 2002:a05:6512:b95:b0:594:5545:b743 with SMTP id
- 2adb3069b0e04-59b6f036b60mr1558578e87.27.1767829970351; Wed, 07 Jan 2026
- 15:52:50 -0800 (PST)
+ bh=MOC+5f2zTA9OGS9ncObF3JNVYRLFkMT7a5wKqEP895g=;
+ b=c+hN2W0p5SQnyKPIMr/IVq3gsmENFWkghi5tkk0cRBsOgF3y+dYj/Fy1vtY+DMCWqi
+ v4G4xvou0xe05y1cm4415YUOMeBEWW9QZxSk0vjYIjU0IEj1jJ4CFrjn6cF45e83vBco
+ c82rnKyw6nK3JEqKqbe+rjf7Hnj22y7xRrDBphu75RP8EetlDUlPBalu34Uf1NY7oO2h
+ di1Qy9tgNpBjHO7LHGjpoP2okfv/Vi04gM/ren8CgUZtS2g+FYft12yRcZugT/xEWq4P
+ 5KDQlmNM8ZUj3jWET+UL+niwzmdlc1kfa9pfKWV4NC0YQQjhiNS6KIKvXmNaZXiGaY3S
+ /5Bg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXOFKl6XPvLKno/5KBKsdTv/54sC4GmUywX5DkDH52nCb/khDzvfWy3md+4FCe7pI9AsI6yt0w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPZuEDQJ6Gj8LgfIW2Q8b88YhIZs7fpmQgVATXo3H2wLDY6szp
+ 4iWdaJ6lqo624yPuP5Jjm8+fi15OGIF+5AmaN8/9qeR2RVI/p+kOdDJkzwA6ll4gE0dtz1JAQQG
+ aXxRfsxE2Fdw3eRyLyTUpsLh9bGoEeuY=
+X-Gm-Gg: AY/fxX42ytKP8ZGdJSTWI+BOeJINEmuNFntEAHm0mWDkF74xFsWBoBMgym5WWT5WiM2
+ jPrjruGX3wZFi8g1kVZJvUj24yGMGBYs/cixnyevmqhHxwZJ69eKcxSwxQ/MVDkehCA1qUaOvOm
+ km0OHLe/WxqPFN2g/leVrrM1Fv2xGyPXsmHJqU5OyX1xXziRaCT1sogMPzSX+MciORZwlr37NAZ
+ fpthgKISHGkjYqN1UPLGb1EfWG+4O+6tDN1FK/DEFyUjjhgwHB3uihGl5rhg/pBDy2/lOe8hRIr
+ GN/fgkN3OLE1kLSU6+D0hhoQNMY=
+X-Google-Smtp-Source: AGHT+IEdOPfS0TedhexF41T49QAd9J5QJ8EHKCfDDXnc5xG1TgSlEfUNUQcGjSzm4ZS1nWcPubvbYg8BPk54PEHzPv0=
+X-Received: by 2002:a05:690e:1445:b0:646:69a2:d400 with SMTP id
+ 956f58d0204a3-6470d2437edmr6445730d50.10.1767835930201; Wed, 07 Jan 2026
+ 17:32:10 -0800 (PST)
 MIME-Version: 1.0
-References: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
-In-Reply-To: <95beb49733a28c7695dd0bf026b4ffe8c3fc73e3.camel@gmail.com>
+References: <20251226-xspi-v1-0-4bb116750dba@nxp.com>
+ <20251226-xspi-v1-1-4bb116750dba@nxp.com>
+ <20251226145748.GD710860@bill-the-cat>
+In-Reply-To: <20251226145748.GD710860@bill-the-cat>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 7 Jan 2026 20:52:39 -0300
-X-Gm-Features: AQt7F2pvHL7Svcgd5gs6aWMJzdtH1BNTn7FTHbaYcfv7rKi95vDNoxmKn-dCGA0
-Message-ID: <CAOMZO5CCRpeE4y2uc+13wKnnQ3BZjEzreNtzs8kQyRcKrvyNEw@mail.gmail.com>
-Subject: Re: [REGRESSION] mmc: "unable to select a mode: -5" on i.MX8M/AM62
- platforms
-To: Vitor Soares <ivitro@gmail.com>
-Cc: u-boot@lists.denx.de, vitor.soares@toradex.com, peng.fan@nxp.com, 
- jh80.chung@samsung.com, trini@konsulko.com, tanmay.kathpalia@altera.com, 
- marex@denx.de, tien.fong.chee@altera.com, balsundar.ponnusamy@altera.com
+Date: Wed, 7 Jan 2026 22:31:56 -0300
+X-Gm-Features: AQt7F2qwmmM7RVJDJ3J427OeB1eTp9IgdIB5jv9GlXPdADHGni8_GUleJrLV75c
+Message-ID: <CAOMZO5DxdMTcFjrNi10dCQ2Fwjj7VRipFE3Ns2LRKNRor5Vi-w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
+ controller
+To: Tom Rini <trini@konsulko.com>
+Cc: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de, 
+ Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@nabladev.com>, 
+ Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Heiko Schocher <hs@nabladev.com>, Alexander Dahl <ada@thorsis.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, Ye Li <ye.li@nxp.com>, 
+ Jacky Bai <ping.bai@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,22 +119,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 7, 2026 at 8:45=E2=80=AFPM Vitor Soares <ivitro@gmail.com> wrot=
+Hi Alice,
+
+On Fri, Dec 26, 2025 at 11:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
 e:
 
-> Verdin iMX8M Mini (SPL failure):
+> > +config NXP_XSPI
+> > +     bool "NXP XSPI driver"
+> > +     depends on SPI_MEM
+> > +     help
+> > +       Enable the NXP External SPI (XSPI) driver. This driver can be u=
+sed to
+> > +       access the SPI NOR/NAND flash on platforms embedding this NXP I=
+P core.
 >
-> U-Boot SPL 2026.01-0.0.0-devel+git.53c0d5b38795 (Jan 06 2026 - 20:44:27 +=
-0000)
-> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout=
-)
-> SEC0:  RNG instantiated
-> Trying to boot from MMC1
-> unable to select a mode: -5
-> spl: mmc init failed with error: -524
-> Error: -524
-> SPL: Unsupported Boot Device!
-> SPL: failed to boot from all boot devices
-> ### ERROR ### Please RESET the board ###
+> Does this driver build on sandbox? If yes, great, if not, this needs
+> more specific "depends on" logic.
 
-Please run 'git bisect' to identify the guilty commit.
+Please address Tom's question so we can move forward with this series.
+
+Thanks
