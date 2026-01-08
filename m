@@ -4,136 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2CFD1489F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 05:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBB1D148AF
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 06:50:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2784D83A26;
-	Thu,  8 Jan 2026 06:42:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5629783B7F;
+	Thu,  8 Jan 2026 07:50:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ENjSst+O";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W97eSrCi";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ESoB7lwi";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Tpcu+1Y9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E566383B21; Thu,  8 Jan 2026 06:42:51 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id C0EE483B95; Thu,  8 Jan 2026 07:50:00 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A220E83A1E
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 06:42:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71B3083A1E
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 07:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 607LrZHi2239468
- for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 05:42:48 GMT
+ 608469dG2779133
+ for <u-boot@lists.denx.de>; Thu, 8 Jan 2026 06:49:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=yAXx05eITjL7oubPrb4EZRnc
- 7LaAiNca4IKtNbYBoOc=; b=ENjSst+OiVsUA5bakMA9hHtdXkVQC99jSMxf5I9o
- +OIuXf1YwF4a/Ax8w8JrZhoyz/lW5SyGsx2MFHG2F7VbGoW7MZDWm4uAH55vGdmQ
- 6zogrsrn6KduwcE2YNadUicgcnt7tcRfUKWFQD+ElPdKHS4I7AaFs9jM0rwJ0K6h
- LjGJRwmfO0QO5ZZ/wRhxZEdtLTuspzGTwaZCKXFrkUIFQMFYLJQd7EFyDg02JHeP
- e9zYQCer6waikV88BfKaJ0hxfTSrCBmOhW328KMXX3REFjBlJ0out/0H1LkgRci/
- LqiRcSXicvGWRNJcEB0VOyCc86ZRqnKc1ajlQ8yAkjiXWA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhqwg2ru6-1
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=9/li8kH+6627Sfeu11lHb66kI9s0cFoYO2q
+ 4Zkq8yso=; b=ESoB7lwiDMRmpUZZKdQWV+jwahDCoZDNWkrfSJFHygZEWARMHgQ
+ rQo1TkZCZxm2k8OrXdJjGKXp+gv64I+SRXgkzX0rKYClxVZhDHBtlNvKcng4Tdyi
+ ALl1cAfulBsZCyJWbu6GSpUq5qNLxuxCzj2Y1rhymelI3jW0XLu1Lqz/aE1gM904
+ vX/KM+Z/MJK7H4KJMAlV2B3gjGk3u3kSWDbq3h5BivCBP1/wqdHr+lsR24oRPgjg
+ sTv4SdGgkMcWVaWQze/e6hUJDuoUSsS2UlEzPLOxnicWG6EwFygy0cckNtH3RpHO
+ QzV7JFhVDJszIvoucW6KFHhHiATO4etxz6g==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bj58uge9m-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 05:42:47 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c1290abb178so2722761a12.2
- for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 21:42:47 -0800 (PST)
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 06:49:56 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-b630753cc38so4700641a12.1
+ for <u-boot@lists.denx.de>; Wed, 07 Jan 2026 22:49:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767850967; x=1768455767; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yAXx05eITjL7oubPrb4EZRnc7LaAiNca4IKtNbYBoOc=;
- b=W97eSrCiBswJ/6F7PyuP7cub5jQSuocwnVn7m/9nUG2x9WossdDe+bIso1xBzZdF9P
- Vzz5yPzSXAt5MMTNMJLD9UecGGik9CJvdCafuKhXza5YAr14hpPG/38v4xmqXUj6Gc/9
- 89YZefM2tJ6qqBWaoDQHTl6jlz9LHIzQwA6q0UxKOALrMr97Yw8loOvBw4cw9GNq4ejv
- EvPGxpGLZH65EISYodKvF6dw9qtXJsLsceeO3DjYC7dbRu99Wv8340g/EO4DtV6gBUja
- 90AKo8YeXZ9w4zgm10yoqfB/4s7cFIoqZAQ4SOMlu6avE5Uu8xHJf2FFMd8pe0WJ1mS4
- ywCg==
+ d=oss.qualcomm.com; s=google; t=1767854996; x=1768459796; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9/li8kH+6627Sfeu11lHb66kI9s0cFoYO2q4Zkq8yso=;
+ b=Tpcu+1Y9F0C2oBNtIZFg60MR/+Pcd26JG+peC0VmWYeIFBTNyJSDIo9zDGuFoGIjWP
+ ZA6jKxIICNQ+MUX4O52cRgdrfXQNFG5fT46ov7DcOWrK252xfVPh2jAQS9bX2iCiFnLQ
+ sjf9AqXDWzQ0fiSmrTRop6x/UH20Hj+GFcx7Dgr637/GSLHof2GsxbviTsXDL0HRi4q5
+ LNScYiP0NUx8jNC+vRpZj9xt77h4yoMTBfvPAkYGHipa7fsVjNDmZ7+cOVUFHf6dDCvn
+ JRFLk/kR9tqcOibm1hUaQKRcTW3Y9NzKFlpY2bwbbOGjLw79gKhHcDQ78UTU0+lA7ayK
+ eEjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767850967; x=1768455767;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yAXx05eITjL7oubPrb4EZRnc7LaAiNca4IKtNbYBoOc=;
- b=IEbFXIXuDQBCggrceVluzddcpkh1A/xjldoC7RFdO8kWat+P8aqqZibsDuVJ0LRMLe
- 2HVVNgDWPc496mUsznAvEGGh8Ars9MK4QTfsU5n2XoPwDE1nojToi1UhEvEQ/X+LpXTm
- kHLHR/yPYrHDj99zuKsIuRUWSIrJPVfWfCVz+/Cfjw8sG0jFE+N6OxH6JxDP0DogHQea
- z3r9U6hgo7JRbWi5iOLEZOUsO/JEKnL1lQEOce4VLyu7OceQq+aIoCDEUa5fGg4j0s6Z
- tfIyHCIJ21b0VRwBrncNltfzpghc2ydLewxkUKiPq/dFKpYIaikNR2TVPu7+obGPP0hs
- LZdg==
+ d=1e100.net; s=20230601; t=1767854996; x=1768459796;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9/li8kH+6627Sfeu11lHb66kI9s0cFoYO2q4Zkq8yso=;
+ b=Q+st6H3CNFEGSIAkemoe2BpVyCywW+7sH2dHkEexTvWyb+uwePn34uV1E8duUherI2
+ aZMcEQKGlvCXFkhJ+VmhQ3jx3anOO0UvdytZc5n6OlmaFESQN2JHt8tZNFvrUrED8GwT
+ PFYT1oalY5mpSYu2biXEivpJSUOvZ4ysoJ2eh+vOPmUDEgn2b8rgn+sRBnO60kLXX/fU
+ uZMZey73ifCKkHHoWoRn4wWi/4G/k7W5XOKPDop4rhahdVhUGcAFth9SG4ozsnurKN0T
+ D3P+DFpP81oUHsvNB1OgcIyJcOJ7V/uy33Nh0kXA8jI5/kituzJHrO2O8kFGLX7bHj8K
+ w3VA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZ4qEUDbMi4gWDf/guUFxQvk7MTY05BLbMBBU9hIDYbMOkzLEUIsHWGSaitCvxAAavtb+kTSQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxiMJbaKc23F7f0CEDryMaMgyOb4U1JBYucgnwAQZPvFNgOwsFk
- 3dE+DO4jaQ2PT6Pn2EFZmxl+sb8qotdcWu0NnghcR/dGmpxXT39Kv+sQTzu4sBov3rE0qsntn9Y
- gbpvK4rwcFc3jiSL8AOmExnNIgY2+Dw1xlOI++uD/oNb9pK7HrBpZQeUU
-X-Gm-Gg: AY/fxX7zPsiKgtHfvIPwm2Mc9GSVzs5Ku5yhroU9ZYbVriw4MkNKN0GldkuPyLkV4PB
- rAWBYxZyM5J9XYPJsrNPYvVfsQCoq4g9HwSYfPxnydnfEmmCn0S4KWg8LMT7PaZlomfXxM2rKyD
- +YDrxkrBFAiy33ESWrDsptaAv3aLzXnt8zmmJNgEOHzstFbabnzQXnIDDiOGodxrGJWIbDbELq8
- eHptFrHDVkhuVABTXNcI4RcdYjosvYah7ef2yc3+3RFz5Du3eVmsopRj90N/T+rtAvyPqAhycO9
- YLXfPuqtidvdlYxB7fTY26ptUEz08gdNf+UZWZBU2PgUyUnWWv/BhIbu4Ovh5y+yVqxM9ctaIbI
- nLEPBM7eYCrljeFiFckpxMfW4pvUZ8eWwqx6KY2zpMg37R3+Wm7gqmdg4yLjjRQx8amGnQPjWuV
- arklwpAuUR0/w/m6tB+cMdYvaLxYgqC3xX8mzg+Rk=
-X-Received: by 2002:a05:6a20:7d9d:b0:350:b8e:f9a9 with SMTP id
- adf61e73a8af0-3898f9b9aecmr4461638637.42.1767850966711; 
- Wed, 07 Jan 2026 21:42:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE6W4ecFL6lqy6ADsE+ZQW9eKzVDzok64hlS6ApS+FEzCqZ4arLL8NnHrwzxvrGRKwECciirA==
-X-Received: by 2002:a05:6a20:7d9d:b0:350:b8e:f9a9 with SMTP id
- adf61e73a8af0-3898f9b9aecmr4461611637.42.1767850966231; 
- Wed, 07 Jan 2026 21:42:46 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com
+ AJvYcCW2bkrs3+xfeDKU2z5nf/sMAqqyYtAv7r3XxdkaBkr58lKOggsyc3OwH9XWW7oM5zTMC54Pghg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5Sajue5tvHWHGIofzh8cjLEtW0c21QFUg3hKyEK3H/t5vC3rm
+ NRJm/5BUisSJhKZGDBTNbF0l5lNjw7NhUqF9gtrOeOkt78xwiS6EpV/vZgYA+7tjxiJO/NJIv+X
+ TtLSsPrzUH4pXCtqgjfOBhi6KcxTFBSBh1NEr0W9BrqdNBAwUAmqbyTyQ
+X-Gm-Gg: AY/fxX5ueBaggTksnu0h8R2LfJytppXxYm9g3FcJp0+xDvTr+9h0klfvCHqDoxbyraZ
+ qqziOLC91QtcUejrcdaRrDzGxfMfFI4jqc9eJ9Q16EJuNd8DcmhgSnCjJySyrMlJLiFfZQq91Vz
+ 5i/cz6t66kaKez+O2/GShtNwkC7E/o/qd3fgTMHzZ+Zld7XeAtyUpKXZ7JGzV/c0reGIwdPaisV
+ ogn1K7g3EhRE0PzWFbJd1MVZ2mnDnbueyzDn4KZZybc97xyAqMi07wxLzZUn41GLVp8rvNDIvnJ
+ zkPiylBmg54hYnka1GLORW4F5oSg7X20VlkaVEhUg1RMvAYGuPNkGfUEF0L163gTH3IwWk0y6DW
+ CLIBbKDV+YWdTaCqDk8xb+50cCLqCQJPmEJRz976LJKu5+RWqVeDnxg0Yu5oaITXfEjb3zXCBlT
+ IG3vlq35ZdqmBm9TP+BH8wRFSPzucxQIgzjkMOpA==
+X-Received: by 2002:a05:6a20:6a21:b0:35e:824a:dc57 with SMTP id
+ adf61e73a8af0-3898f9915b4mr5209636637.37.1767854995841; 
+ Wed, 07 Jan 2026 22:49:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGemecuGm1p0CNWcJRzLfDbsrnnS3HwJlDSebOeNFWEJtf372MCQK1VYJwVteEwDJRRPmZqTA==
+X-Received: by 2002:a05:6a20:6a21:b0:35e:824a:dc57 with SMTP id
+ adf61e73a8af0-3898f9915b4mr5209601637.37.1767854995353; 
+ Wed, 07 Jan 2026 22:49:55 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c4cc95d5dbfsm6608546a12.27.2026.01.07.21.42.43
+ 41be03b00d2f7-c4cbf28faa9sm6918641a12.2.2026.01.07.22.49.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jan 2026 21:42:45 -0800 (PST)
-Date: Thu, 8 Jan 2026 11:12:40 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ Wed, 07 Jan 2026 22:49:55 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@kernel.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ aswin.murugan@oss.qualcomm.com, joe.hershberger@ni.com,
+ balaji.selvanathan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ quentin.schulz@cherry.de, ravi@prevas.dk, javier.tia@linaro.org,
+ quic_varada@quicinc.com, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, ansuelsmth@gmail.com, mwalle@kernel.org,
+ anshuld@ti.com, jan.kiszka@siemens.com, javierm@redhat.com,
  u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] configs: Fix fastboot buffer address for QCS615 and
- QCM6490 boards
-Message-ID: <aV9D0OooxeEw6msn@hu-varada-blr.qualcomm.com>
-References: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v1 0/4] Add partition type GUID support for environment
+Date: Thu,  8 Jan 2026 12:19:43 +0530
+Message-Id: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
-X-Proofpoint-GUID: JksJYWuKLl2L-h-MsCtE1bn7tcCCPJfV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDAzNCBTYWx0ZWRfX/j5b2+lLvVGt
- 4p18S9ogPqLS6GrdPBIdq/xEW0TMpgKtHJrrIgVZIvPkp4Hi47AxeMAc5PRi6inkA/Y7pOcvu2H
- DG3ckVeT5vzdbScOp0WEM/qwvjue41W87CjqXv9YYyO1TbhVmwNWrYpX8cPmlkDF/4/K6h85ZVa
- /GaE8Bq1At87+S9IRMw6unV6aiD/7aWxgaqpihG0tcsCbi5Bn+6K98Mt3skJLOF/L02Q1mS9pmX
- xVsM0npbLQN3dKI5Zes/L/AjY4gwMiRoiSdMiUBrYRrjuoOlhot4zPwgU+E0CtP9Wi33pUELgmE
- KrnSRWIbPwtJZT/G/VSIz4WBbyn6yBT8cajeEiFrhh4P9eocg1/0PlNheMhelr5FtVlzrpcVWNv
- KFLBWIYWRu6QWvQCHbXK9z+iiTmeCOJg9Zj/SeWJsL50jVeMAhMpE891Bqp5Gy/UIgBszkJM+Ai
- m6NM/liywlfTkW0VphA==
-X-Authority-Analysis: v=2.4 cv=Pa7yRyhd c=1 sm=1 tr=0 ts=695f43d7 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=8ZUhOTMT-iWY_zsi3uYA:9
- a=CjuIK1q_8ugA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-ORIG-GUID: JksJYWuKLl2L-h-MsCtE1bn7tcCCPJfV
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDA0MyBTYWx0ZWRfX9n3TAWL9lktg
+ zdqrxMGw0M/uuVVYQlKod/Ubrw1SGbta9s5sUfpexXSziDUSJi5qw2WCgn1bxJEZFc5rR8WVqwF
+ UBMTwxTQvaN7/YOWYR8wHwyslbA2W1NctyY3p/jmvDxRCx63MDA5W0XY8PGrz1MbfR0rEnjXfcD
+ pG/1ZZRlaG+oQ+wFgAK534d5s7z8G/NDSi/AR65ybhCQuDoWjYDXmd3qTf+5pyrfg9E6+leuotj
+ EPt2QLsLa8dj9y4fxelgB3ufl4rErXYjL2StJ9gVOEq6WNBxhpOsJhCfqdBEL0R3r6pqqrqxCXY
+ 7gKJcJjONhirQLdsL0J7+P0TRKdAGlKNE49BTJbkbWwdW2LLtWJycBvSA2LDfWfS6rBKxjNS/7Q
+ qOIaHVJoaoTMf5w9TiP3d6DGJDKKaH4rpvqm/X7VcHas82pO6OBkllN7RlSJJWOLcHvsKI+dXP/
+ oxUlO3sIY+9/uoMrS2Q==
+X-Proofpoint-GUID: MKu_IzZtUlbFORPbYNGAvw6Yko0UO7ea
+X-Proofpoint-ORIG-GUID: MKu_IzZtUlbFORPbYNGAvw6Yko0UO7ea
+X-Authority-Analysis: v=2.4 cv=CMgnnBrD c=1 sm=1 tr=0 ts=695f5394 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=uxajwLBANOCmf5AMRP4A:9 a=bFCP_H2QrGi7Okbo017w:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-07_05,2026-01-07_03,2025-10-01_01
+ definitions=2026-01-08_01,2026-01-07_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- impostorscore=0 spamscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 malwarescore=0 phishscore=0
+ adultscore=0 suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080034
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601080043
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,42 +150,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 07, 2026 at 03:20:38PM +0530, Balaji Selvanathan wrote:
-> The default value of CONFIG_FASTBOOT_BUF_ADDR is 0, which causes
-> NULL pointer dereference during fastboot commands when users dont
-> provide "-l" option in fastboot usb command.
->
-> Set it to safe and sufficiently large region in RAM
-> of the QCS615 and QCM6490 boards, to prevent crashes.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  configs/qcm6490_defconfig     | 2 ++
->  configs/qcom_qcs615_defconfig | 2 ++
->  2 files changed, 4 insertions(+)
->
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> index 54eb5dedaec..618098c8860 100644
-> --- a/configs/qcm6490_defconfig
-> +++ b/configs/qcm6490_defconfig
-> @@ -13,3 +13,5 @@ CONFIG_TEXT_BASE=0x9fc00000
->  CONFIG_REMAKE_ELF=y
->
->  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
-> +
-> +CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
-> diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
-> index 2468267b955..14043b4f23d 100644
-> --- a/configs/qcom_qcs615_defconfig
-> +++ b/configs/qcom_qcs615_defconfig
-> @@ -20,3 +20,5 @@ CONFIG_REMAKE_ELF=y
->
->  # Address where U-Boot will be loaded
->  CONFIG_TEXT_BASE=0x9fc00000
-> +
-> +CONFIG_FASTBOOT_BUF_ADDR=0xa1600000
-> --
-> 2.34.1
->
+This series adds support for locating partitions using GPT partition
+type GUID instead of unique partition UUID. This enables the saveenv
+command to work with partitions identified by their type rather than
+unique identifiers, providing flexibility for systems where partition
+UUIDs may vary across devices but types remain constant.
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Balaji Selvanathan (4):
+  disk: Add partition lookup by type GUID functionality
+  scsi: Add partition lookup by type GUID for SCSI devices
+  env: scsi: Add support for partition type GUID based environment
+  configs: Enable partition type GUID for QCM6490 and QCS615 boards
+
+ configs/qcm6490_defconfig     |  4 ++++
+ configs/qcom_qcs615_defconfig |  4 ++++
+ disk/part.c                   | 39 +++++++++++++++++++++++++++++++++++
+ drivers/scsi/scsi-uclass.c    | 28 +++++++++++++++++++++++++
+ env/Kconfig                   |  7 +++++++
+ env/scsi.c                    | 13 ++++++++++++
+ include/part.h                | 21 +++++++++++++++++++
+ include/scsi.h                | 11 ++++++++++
+ 8 files changed, 127 insertions(+)
+
+-- 
+2.34.1
