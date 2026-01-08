@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FEBD1D482
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:22:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C21D1D478
+	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 17:42:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D1E784150;
-	Thu,  8 Jan 2026 18:22:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99D9D841E3;
+	Thu,  8 Jan 2026 18:42:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RQL/Qq48";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BDJMl2Yy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A44188415D; Thu,  8 Jan 2026 18:22:38 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 0673984261; Thu,  8 Jan 2026 18:42:04 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F8A284144
- for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:22:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBBD683B4E
+ for <u-boot@lists.denx.de>; Thu,  8 Jan 2026 18:42:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4ee1879e6d9so37574491cf.1
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:22:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9230f564so4972502a12.1
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 09:42:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767892955; x=1768497755; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LvePl5g6ffb7HjB5k2c6LC0PvTiYJQUEcADTlytYky0=;
- b=RQL/Qq48dG5iUZnT0IjC9Y4Qk+Do86SYwadbsG9L24Jr4onehw9vZA4/h+0CgwsL5T
- 2dpfCNLa1XgbzUIlSlLOJyCMN4qe63ke2FXrtD/Uz+d7+9YKIERIKACu5yZNnkc7XQ5M
- YDTY/FcVJrhwwKHmnYgTd7JlTBLuinw4q1WioYuVqbQwI5/68oTQoHE+vMYfPu/7feGw
- SD/YkR6oEd98X/kfYEDcDGAyg+dhWGLX6bsvi3VToZEbk2Rr7OvqtuuvEyD8AeBnCxxW
- mALneSUxNasn3QDkkbWAPfmwVHg2FhoFXa3/lMZD0p/3OgEfQpHdAllsCgxQJUas1vGD
- m9zA==
+ d=chromium.org; s=google; t=1767894120; x=1768498920; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=X2V+JoY4dFUfLGzSjhE4onXGxPNY27ErHcHGt4GU3uk=;
+ b=BDJMl2YyzPyxLjX0erIninJZrRnpnE51m7VRZoobf4tzhMv995GJN6D5T2DscsjKrA
+ F0JBwa1OFI+ZwdGskbbm5I5lkc/4iUU0zjIpExUQLozyYqVRezGNqXYGyb3zl+NHmNnK
+ //rot6UdBsOu8HkRsbCFu3Xy3GL/IsM3zKhrk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767892955; x=1768497755;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LvePl5g6ffb7HjB5k2c6LC0PvTiYJQUEcADTlytYky0=;
- b=sWcpx1EkuuHveqXlmE3lO8FfLrBRlaOnF7zFRY88D0lDUf6j0BHd7x7X853uN7YC3A
- 6J92GiKHaM9uf/Tpq7yWkimH3YKiVbrDT7FxZZ4NFxKGpcpfTJWiKBtUnZIeli0LWz9R
- VcS6RtXr66/AKSiU4wy3eYlSjo4tRP5aKYzNcC4C/0/E/dq5anFqUK9CNIsCXDUQLVgH
- un2eymKUk/yntgzJlBCsmVlwzvZqHs5hlvHgcZMX8EsEibasD4CSSxele535tfaZ7TCR
- Qw3d2zu5dP/etWdYEmYiLgJXmUZF8stCHG815g2rD+FqP2T2RQtrnjd81vyJtF/1hl9Z
- yABA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQgKKEXgiZWS5T7w1vZ9v+tIbPwXXZC06VIQYdCDKouwVx/8qK0JXnU9vEQhs3NoNhMt5RRzQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWRTBO0vOK5yitqKgn2RpwNUiJe57Sk/97S5dDyeV3Eu8gQHAe
- Cv2QJj2c7G0in1aLOqVk2k0+JJiAW8Z7fTtlhvLYMgOdJcRxFUZ8kxrsCNGK7qO8J2V9VVaGwD4
- 6RhHQXGdSr75KUSdJfunOKNNo2v6AUGMmf22+Kh0=
-X-Gm-Gg: AY/fxX4qxW4NMGSm4T1Pz84D9gBjW/CLplF5WvIBsJcKGLY8ez5renhOAvMecvUHW4M
- XTp5J+AdkLm94pU3T2LbUrIdeGrwL12ke46bMxKf2phGa9/kzegPR0ylHGrDwO0OE/DTAMigCZO
- 6p70P9NOYVtRFeQ5ukiEbVopPJFalg4fJjZ19+iDoWJVXT8aA43xBP6wJjp8Ja9YFrV/ke9+uOM
- DBS/lqRPW5DmLNhVvwFnf7thNI5cYWOePLss2MzwXxniK8pw+mxc7scviCrkc9CbBgDn/9bnPmT
- fVNsMlSzp4LzfgLqVq+1+hVu3Ocw
-X-Google-Smtp-Source: AGHT+IGbCxlk+/xMimXaRBWQw+ko+v25Yvlb7ngvQomfL0OKi8uH+mKxAjg7pXGXtaOllIJQRnrmHDLBDP1gzVTDxTs=
-X-Received: by 2002:a05:622a:40ce:b0:4ee:4214:31ff with SMTP id
- d75a77b69052e-4ffb484b02fmr94769721cf.13.1767892954572; Thu, 08 Jan 2026
- 09:22:34 -0800 (PST)
+ d=1e100.net; s=20230601; t=1767894120; x=1768498920;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X2V+JoY4dFUfLGzSjhE4onXGxPNY27ErHcHGt4GU3uk=;
+ b=MnDQH6bursmY1vl3fhVL+KyfP8KHanvnxpnWqsWthRu8NCPzT0zpSo2C8+DHBh3K7L
+ 88jLx1zRWHLV/4G0Qw8T0hmp0ZrFDfjVt62Sjyvs0zpA8HHxb44A1JUl9VoHJAuKjjVN
+ AJxHVYq5eBxDFDnpUW/yVxqIMcPZyGYjfCxu6eAvroD3vJZQNijlsFCZWOSBZ6K/hQGv
+ VdJ9lNRVNrL0EPhxyTwifXJwin5bOBInlxHkxlKyOLmfWiFFd0w4d0Zvy+skCPpM5P0p
+ otX7tWwbajmpHkap28qrXnwu3XRmzilLVpCJe8tJBYqHriwfDBqDXpewP3qhJFJig5Se
+ Qz7g==
+X-Gm-Message-State: AOJu0YzxD7mw4auXlQ+yw1f9UiiTbLQVlMiJ6oiML1GJhaCS7GNk2UcG
+ spVh+R2MXgZP2dpqhG4u04RZURZAYmVIACcn8ZeQ1LA14TNn7DOXNgycZJFKW+IdGcA6+Z8eQ3m
+ TbKJ7EdX5NfilP7dE9owKYCh9dpUWcp/v+96wWWNE
+X-Gm-Gg: AY/fxX7FWAQ7fC7Ccvjm+3gITUt0N/yp5fUAs1514L940Yf0A+zAb9NQuZhTnE5oyEW
+ JgiVLPnHdfirDKbnfT37EbR22IXqrU5/axowed4KKvXKH1yQtE3JE7+c9qcNjb/HIUvLXdpaK2p
+ XKws56y9SO8pztqn4a3o1G8NdDs9LNrs5Cr1uegVPg5Ojv14khJA3fMpYyHItUlvtqk1L5uT5NE
+ uDBqK6COiZpLOVfnJEV67SC/SDcmjTNQc15x0IZxdiJ0KL5cmwyxZWR+x9DHd75NLNYIg==
+X-Google-Smtp-Source: AGHT+IE0pV0gP+t/d6KXUuceowGhMTesC1twC87KL6Gz0bJnEWsXKWZpOnC1blkDpLOuCRpM17UIx7Adz8e47ulBppU=
+X-Received: by 2002:a17:906:fd83:b0:b83:95ca:23e7 with SMTP id
+ a640c23a62f3a-b8444c5a96emr627008166b.4.1767894120254; Thu, 08 Jan 2026
+ 09:42:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20260106-rk3576-ufs-v3-0-bfe259fd6d17@gmail.com>
- <20260106-rk3576-ufs-v3-3-bfe259fd6d17@gmail.com>
- <67576082-d8b0-419e-8365-0f6294fe0ffc@linaro.org>
- <CABjd4YwyVKDRDz16u+rbiorFmPSJtEi7VgKZABr7A+_p2qDA=w@mail.gmail.com>
- <f6cab27f-e115-49e4-8a3f-a01ceb8500f3@kwiboo.se>
-In-Reply-To: <f6cab27f-e115-49e4-8a3f-a01ceb8500f3@kwiboo.se>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Thu, 8 Jan 2026 21:22:23 +0400
-X-Gm-Features: AQt7F2q-zT_P5JTvQjxtpPtKRaNOW6gZCLyZvcJe0qAfwf5v-bJSmTEJC9jicKI
-Message-ID: <CABjd4Yz0wx17xEbMbu-dmMb2_qOBRuarLrYCQx8CJLiOAk+aSA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] ufs: rockchip: Enable SDRAM-only DMA quirk
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-6-simon.glass@canonical.com>
+ <B1959B8B-8D25-499B-B1E8-02178F67A191@gmx.de>
+ <CAFLszTi-gRmj2YtHfG2F3u0feNMcC1+h5hwAvNTYJ+xC1JQnJA@mail.gmail.com>
+ <7E049032-1F4E-464A-801C-468C8A9AC67B@gmx.de>
+In-Reply-To: <7E049032-1F4E-464A-801C-468C8A9AC67B@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 8 Jan 2026 10:41:46 -0700
+X-Gm-Features: AQt7F2rTsoR4ffQYwzfZqJi3dU8DGzxKGfOkMrAtPTZuzwyWcyzKUeUVL9Poe24
+Message-ID: <CAFLszThUvfSqP3oMP6HPB4zyWch7WfGVtZag7EuhFMA2ZpNXdQ@mail.gmail.com>
+Subject: Re: [PATCH 05/10] bootm: Do bootstage processing in bootm_final()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <simon.glass@canonical.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,91 +94,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Heinrich,
 
-On Thu, Jan 8, 2026 at 5:41=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wrot=
-e:
+On Wed, 7 Jan 2026 at 12:14, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hi Alexey,
->
-> On 1/6/2026 7:26 PM, Alexey Charkov wrote:
-> > On Tue, Jan 6, 2026 at 6:09=E2=80=AFPM Neil Armstrong <neil.armstrong@l=
-inaro.org> wrote:
+> Am 7. Januar 2026 20:02:39 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Heinrich,
+> >
+> >On Tue, 6 Jan 2026 at 20:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > >>
-> >> On 1/6/26 14:57, Alexey Charkov wrote:
-> >>> Rockchip RK3576 can boot fully from UFS, but as part of the boot
-> >>> process the SPL needs to place part of the ATF code into PMU SRAM,
-> >>> which is outside the SDRAM range that the UFSHC can access.
-> >>>
-> >>> Enable a quirk to force bounce operation for this case.
-> >>>
-> >>> Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> >>> ---
-> >>>   drivers/ufs/Kconfig        | 1 +
-> >>>   drivers/ufs/ufs-rockchip.c | 1 +
-> >>>   2 files changed, 2 insertions(+)
-> >>>
-> >>> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> >>> index 6c75bb2a0790..2543b5d47c04 100644
-> >>> --- a/drivers/ufs/Kconfig
-> >>> +++ b/drivers/ufs/Kconfig
-> >>> @@ -76,6 +76,7 @@ config UFS_RENESAS_GEN5
-> >>>   config UFS_ROCKCHIP
-> >>>       bool "Rockchip specific hooks to UFS controller platform driver=
-"
-> >>>       depends on UFS
-> >>> +     select BOUNCE_BUFFER
-> >>>       help
-> >>>         This selects the Rockchip specific additions to UFSHCD platfo=
-rm driver.
-> >>>
-> >>> diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-> >>> index 0384244387da..699460fc4d15 100644
-> >>> --- a/drivers/ufs/ufs-rockchip.c
-> >>> +++ b/drivers/ufs/ufs-rockchip.c
-> >>> @@ -153,6 +153,7 @@ static int ufs_rockchip_common_init(struct ufs_hb=
-a *hba)
-> >>>               return err;
-> >>>       }
-> >>>
-> >>> +     hba->quirks |=3D UFSHCD_QUIRK_DMA_SDRAM_ONLY;
+> >> Am 7. Januar 2026 01:31:22 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >> >From: Simon Glass <sjg@chromium.org>
+> >> >
+> >> >Mark kernel start before booting. If enabled, show a bootstage report.
+> >> >
+> >> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >> >Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> >> >---
+> >> >
+> >> > boot/bootm_final.c   | 6 ++++++
+> >> > test/boot/bootflow.c | 2 +-
+> >> > 2 files changed, 7 insertions(+), 1 deletion(-)
+> >> >
+> >> >diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+> >> >index 71661334e11..dd7cac55f1e 100644
+> >> >--- a/boot/bootm_final.c
+> >> >+++ b/boot/bootm_final.c
+> >> >@@ -6,11 +6,17 @@
+> >> >  */
+> >> >
+> >> > #include <bootm.h>
+> >> >+#include <bootstage.h>
+> >> > #include <dm/root.h>
+> >> >
+> >> > void bootm_final(enum bootm_final_t flags)
+> >> > {
+> >> >       printf("\nStarting kernel ...\n\n");
 > >>
-> >> So you really want to enable this quirk for non-SPL builds aswell ?
+> >> This noisy message makes no sense for EFI booting. The kernel in not started in ExitBootServices().
 > >
-> > Well I haven't run into any similar issues with the main U-boot, so I
-> > don't have a strong opinion about keeping it in place there.
+> >Can you explain that a bit more? I believe that's exactly when the
+> >kernel starts.
 > >
-> > However:
-> > 1. Having the quirk enabled doesn't cause all transfers to go via the
-> > bounce buffer. Only those for which the provided destination buffer
-> > happens to be outside SDRAM (which must be extremely rare if at all
-> > possible under U-boot, given that it hasn't caused issues for anyone)
-> > 2. If it turns out that there are indeed cases when the UFSHC needs to
-> > read or write something outside SDRAM while operating under U-boot (I
-> > can't think of a reason now, but then I couldn't think about that ATF
-> > to PMU SRAM thing either, until I ran into it and spent more than half
-> > a day debugging) then I'd rather spend a couple of CPU cycles on a
-> > memmove than end up with a hard lock up, a cryptic error message and a
-> > dump of UFSHC status registers
-> > 3. It's one line less code this way :)
+> >>
+> >> Operating systems like Ubuntu tend to boot the kernel with argument "quiet" for aesthetic reasons. We should not disrupt this.
 > >
-> > Happy to add something like "if (xpl_phase() =3D=3D PHASE_SPL)" though,=
- if
-> > that sounds better to everyone.
+> >When I boot (with this patch) I see these messages on the serial console:
+> >>>>
+> >Scanning for bootflows in all bootdevs
+> >Seq  Method       State   Uclass    Part  E  Name                      Filename
+> >---  -----------  ------  --------  ----  -  ------------------------
+> >----------------
+> >Scanning global bootmeth 'efi_mgr':
+> >  0  efi_mgr      ready   (none)       0     <NULL>
+> >** Booting bootflow '<NULL>' with efi_mgr
+> >      try_load_entry() Booting: Label: Ubuntu Device path:
+> >/HD(1,GPT,eccaac1c-b634-441b-a788-ab0f959111af,0x800,0x165800)/\EFI\ubuntu\shimx64.efi
 >
-> You should most likely be able to drop this quirk workaround with the
-> "rockchip: rk3576: Fix DMA transfer of TF-A to PMU_SRAM" series [1][2]
-> that I just sent out.
->
-> Please try if that also solves the DMA transfer from UFS to PMU SRAM
-> issue, it did for eMMC, SD-card and SPI flash.
->
-> [1] https://patchwork.ozlabs.org/cover/2181298/
-> [2] https://lore.kernel.org/r/20260108133234.4001390-1-jonas@kwiboo.se/
+> Here GRUB is running. If you don't see output, then because purposefully it has been quieted.
 
-This is brilliant - works like a charm on UFS without any quirks!
-Thanks a lot, I'll re-roll my patch series without the quirks portion
-and mark a dependency on your series in b4 metadata.
+OK, so there is no problem, right?
 
-Best regards,
-Alexey
+>
+> >
+> >Starting kernel ...
+>
+> ExitBootServices is called in the middle of the Linux kernel EFI stub and not when entering the kernel.
+
+Oh I see. To my mind the kernel EFI stub is a bit like a bootloader
+tacked onto the front of Linux. Linux doesn't properly start until it
+has control of the machine and actually starts its init.
+
+So we definitely want to get bootstage output (for example) covering
+that period, otherwise there is a significant uncounted time between
+the EFI app starting and Linux starting.
+
+Regards,
+Simon
+
+>
+> Best regards
+>
+> Heinrich
+>
+> ><<<
+> >
+> >So it is not silent today. The last line is the new one. Every other
+> >boot method writes this line.
+> >
+> >However, the video display is silent once grub has finished and I just
+> >noticed that this patch draws some pixels on the display, as if the
+> >EFI display is set to a different mode from what U-Boot expects. I
+> >suppose this is understandable, as grub has run by then and has
+> >probably changed the mode.
+> >
+> >So I wonder what would be best here. We don't support dynamic video
+> >sizing right now and I don't feel the urge to implement it just for
+> >this. Perhaps with EFI we could disable the vidconsole when
+> >exit-boot-services is called, on the basis that we cannot deal with
+> >whatever has happened to the display in the interim?
+> >
+> >Regards,
+> >Simon
+> >
+> >>
+> >> Best regards
+> >>
+> >> Heinrich
+> >>
+> >> >
+> >> >+      bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+> >> >+
+> >> >+      if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
+> >> >+              bootstage_report();
+> >> >+
+> >> >       dm_remove_devices_active();
+> >> > }
+> >> >diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> >> >index a56435d053f..80adc074070 100644
+> >> >--- a/test/boot/bootflow.c
+> >> >+++ b/test/boot/bootflow.c
+> >> >@@ -1381,7 +1381,7 @@ static int bootflow_efi(struct unit_test_state *uts)
+> >> >
+> >> >       /* TODO: Why the \r ? */
+> >> >       ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+> >> >-      ut_assert_nextline("Exiting test app");
+> >> >+      ut_assert_skip_to_line("Exiting test app");
+> >> >       ut_assert_nextline("Boot failed (err=-14)");
+> >> >
+> >> >       ut_assert_console_end();
+> >>
+> >
+> >Regards,
+> >Simon
+>
