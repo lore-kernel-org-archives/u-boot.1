@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BE6D26D67
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 15:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1192BD26D7A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 17:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F2EA84206;
-	Fri,  9 Jan 2026 16:57:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1C86784248;
+	Fri,  9 Jan 2026 18:10:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MtRbm0q0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kUvOUKb9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C21F9841FF; Fri,  9 Jan 2026 16:57:03 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id BAC3284248; Fri,  9 Jan 2026 18:10:04 +0100 (CET)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E937784206
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 16:56:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 233F484206
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 18:10:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-430f5ecaa08so2139231f8f.3
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 07:56:57 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso3579838a34.0
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 09:10:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767974217; x=1768579017; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kRHcDJhjtYV0qP+YOlGCZ7puH6pSnVebJDXhFc5pybo=;
- b=MtRbm0q0GnJl+aAxY3Hu10VXrWB16hTu2AhMo3itzwgcEPbJJosRH57mqP1gzi04oo
- ZWsMRKBqYpQDmQL42BzOrH8x+KxAAbxpTYidFYM1wVs6kGrJ7Y5RXb9br0ozdIA2oeCs
- HbpwWE12xZ2oT0/Fq1/v6XWcNPIEH8VPjjNmHNywmmj77ElM/+K9w6KZPuS22fjp/zfu
- jKrWuW2BF4ksABahlq+iRr41cmHIAEEpZITCRvnVdFPW33Kvz3whs0AANYvmClLTOiA0
- w84bJRzpwXwp1nlSADZlUwsas9y8BtFQAUg3pideScQGOx6Uowf/I1uoIx0lxcTsjoXH
- N3cQ==
+ d=konsulko.com; s=google; t=1767978601; x=1768583401; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ovlQJ5DjNZKPHOs08lMR1o09vWD3qC2GUH+fiaU3Tjs=;
+ b=kUvOUKb9+doYO3cv7kjPZhU0kBQV1/8+3G3TSqhNIrXbQPOmPO77B0PmDuXi0X+kcz
+ 1qyL+nKqPM89seS7Clp4Sr32lZ80z67QoV8ka2mWhTBjnRiHlGlstB2bXUfQQQnGILfE
+ xzy7ozulTw2t7Bj0hQnALzQjNHUu8O9qqS31k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767974217; x=1768579017;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kRHcDJhjtYV0qP+YOlGCZ7puH6pSnVebJDXhFc5pybo=;
- b=eDbVqcrGN+IGpjDk/+CmcdfVYBDfRDy+AYkmMtR2JyAZJGjpDQJ9QmRnWWwNSvA/z2
- inUodpN6tlDvoEcTFpjPaj4fYMGGeI2DKQvc1FBHxU4dzov19Jq/UZNrWP5vqT3NjNDS
- MTzzbiHXsYn/WiqPpKpfiy9oOtGE6fWUb2dDX3gYyFvGMDRw17zmmBhYEkV+HZ6XfH1n
- Z6vlNkA7ETlonVFOFhbn+jVhjtLdPGJU45G8inW7QgAHH2uCX4BDYKWfWnjkK6qjXhun
- CQ+K+M1G2J4HJi9JMXT2tS8XGnEHHH/Lzcd+7/Bpb3TMzvpRtRVRbK6Ytl9CucCbrIBs
- DwnQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5wFTlBEzOWlrBe+X7gGQGo6POFMk3ac6/DyP8cyn59kwAi6Kv3puzeJZDfS9zB2XBZZUlnbM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyW/sIhaRygZoUxHVCAeOXMbB5W1ZMulvhcDjXktPMjm2WyqdnS
- eyssZbXPCojxq1WKsd26rwYxbJmaGqiObqq/gvg+KtPDzSrqw1ULbZ65m60vneZGhVM=
-X-Gm-Gg: AY/fxX7cHd0mLhIjzsf1wzXs+Ab73/ldGs7yrhdkvjcH/aADP8g+smX2zJFBZAGrPRO
- Tf1EZm3pz9xJo5rBZ6i6c435fx8Ebhji6nq8d0oPge3j/r9oWOQBDkmrQtpQR7LXpU6J+1b3vwq
- aOpnDGk3bnhKANIsLEw4W0l2XTyimku5umXRGzKyY+NfZIh33YtxZF4bXTHAKExmz0e2A6Dqdix
- BMuhXqi63S/erZCndfDa1TSVIzDJWaZicht186ATPJWA66XniTFOfjP85E6PZja1DrCHfUwi/ls
- QtY2pCcuhzdd6hx9iY8bN+w9ecqEVGXxQjlNxZB3XfVRsUfg7Y03YBcTYQOA9jm0r0M1JSVQTw9
- YBp7CfZ2odO0fsFjCX1+Ftkc/ySBCiaObgKBPxT9FRM6szVlpTM9UI5iZA0visdlmxeUdj5OsmW
- n3tn8q2BYfJgW5M+nUELc6lbPx9pu+g5pbc92JtA==
-X-Google-Smtp-Source: AGHT+IHKQ8WrWQVIRP10BOEP2xNTifUCQp/PDjkEmM/IHwpvN5ZmPWmH2bFYSiIVIdQ0xJgaweQwAg==
-X-Received: by 2002:a05:6000:1862:b0:430:f58d:40da with SMTP id
- ffacd0b85a97d-432c3628038mr11548249f8f.10.1767974217331; 
- Fri, 09 Jan 2026 07:56:57 -0800 (PST)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:3801:fde:f3d6:453b:5d2d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd5df9c5sm23948635f8f.22.2026.01.09.07.56.56
+ d=1e100.net; s=20230601; t=1767978601; x=1768583401;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ovlQJ5DjNZKPHOs08lMR1o09vWD3qC2GUH+fiaU3Tjs=;
+ b=QH5sEVJBL6eNh2yEfC0Cu0xIR1i5HsnLUes2FkJBULViP8qbZsP5qd1CXuf0ETx7Ri
+ GJnjwdr8qF9xp54RO0S0Mm5o8+bkPnQFuTP7Kj//g0ggySbPG79P4+VF+uyVQDBnD3R3
+ rcprpWJh3XuFfWQwzlQ9ralxNJ9BZElQ2NJzUZnz4G36br7CQCxVleZqFppFrw+AQqRQ
+ HR5xsqpPtu8H+/2zhvdB96D5KRIsid+DsAETd+Ys7Ouf5eexVe+Gv+94LjrHNY6laSLd
+ eQ5Pmdk9AZBeD2dSlOlvGyJdN9vGk/AhmzYBmYgr+8DfhJcOmoay0h0+GmoYY+HsRXMb
+ 99pg==
+X-Gm-Message-State: AOJu0Yzfa8IZnOyrBJrxoD8WdUrxdO1flUJHWy3AEaW2JeKwUrP/GMxq
+ a1zqNY2I+EXone4zlqDISOVvAc6WFImo45T7R9U6AFoJax0o9zs0wUGgWL4zRFU9SBCDy8mW3/T
+ KMcictOk=
+X-Gm-Gg: AY/fxX4X4HNC4jWv3FrKtQcnlCzm7ZfoFeOSTByv6yJPmGYTrRMLO29AljWrVnyFZwd
+ wSFHFBjzud1pdpawG3xYeHkB5K/dP9GNPzy5lzr5/p9MB8laxJlFA/qoqbm3soOh/3EANymdVyA
+ VOpdlQBcGwzZyj9km2eGoh68fJ0A8Q/dztO1Z/amLrGXNfga6PBPjiTGr0qImWchGeuLrHDzEEP
+ Tz8vZ/9TbWcbK1m2J5EoxCvgV+Fm1PQyTpZLS37X9t1R0M/gJ/gvUZaSqyf+ZO5TStMm5brzw4z
+ snfeplpEVUCnqNZNPewZxhCmnJ521YzHKerIhzjZwiQwPj4Fs+EMVqEV4OT6gRiqs7qzZRpqmfk
+ oH5W9IvHWzKOItG2qNYr5h9nsqx0dMjrSXfdlHS3uqlI1WiW+JGjvEg0O6jjv5kbMADWGKgizDM
+ lwTpTU9ksITx6EmzC76uzbS0XJ51f+AySE/4QjRh7RIvK5hdHLEAvTnSGQMLahuatm+ff6RCfs9
+ b5qT+vGq3rhrOt57nbdM0+aSHCSZENq3LSmFzc=
+X-Google-Smtp-Source: AGHT+IHkTgBGGcl6I3dxejxzrOg7tSLOZbGPwCaEseRqnI29lLe1Uxr8lshEzRIXBGuBFBK2osf/Vw==
+X-Received: by 2002:a05:6830:90f:b0:7c7:2cdb:ff4b with SMTP id
+ 46e09a7af769-7ce50c0006bmr7262828a34.20.1767978600542; 
+ Fri, 09 Jan 2026 09:10:00 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478ee668sm8063822a34.29.2026.01.09.09.09.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 07:56:56 -0800 (PST)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 09 Jan 2026 15:56:55 +0000
-Subject: [PATCH] net: lwip: tftp: Do not write past buffer end
+ Fri, 09 Jan 2026 09:10:00 -0800 (PST)
+Date: Fri, 9 Jan 2026 11:09:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yuri Honegger <yuri.honegger@icloud.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Placement of FDT in memory
+Message-ID: <20260109170958.GE3416603@bill-the-cat>
+References: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260109-tftp_fix-v1-1-64bd50abc72b@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAEYlYWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDQwNL3ZK0koL4tMwKXePEJMukFDOzRLPEFCWg8oKiVKAw2Kjo2NpaALX
- yO35aAAAA
-X-Change-ID: 20260109-tftp_fix-3ab9bd66a6ad
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome@forissier.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Michal Simek <michal.simek@amd.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PCJ0SFlWZlzgVOj5"
+Content-Disposition: inline
+In-Reply-To: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,37 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sprintf will add a trailing \0 so manually adding a trailing \0 will
-result in an extra unaccounted for character being written. This
-overwrote the first byte of the following allocation block resulting in
-unexpected behaviour.
 
-Fixes: 27d7ccda94fa ("net: lwip: tftp: add support of blksize option to client")
+--PCJ0SFlWZlzgVOj5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- lib/lwip/lwip/src/apps/tftp/tftp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Dec 18, 2025 at 11:04:59PM +0100, Yuri Honegger wrote:
 
-diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-index ecb6c55ae1100779187e7b138d098a0ef1e48ca1..25da952e92566cbca1c64bc89c89102e74d0a42c 100644
---- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-+++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-@@ -191,7 +191,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
-   MEMCPY(payload+2,              fname, fname_length);
-   MEMCPY(payload+2+fname_length, mode,  mode_length);
-   if (tftp_state.blksize)
--    sprintf(payload+2+fname_length+mode_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
-+    sprintf(payload+2+fname_length+mode_length, "blksize%c%d", 0, tftp_state.blksize);
- 
-   tftp_state.wait_oack = true;
-   ret = udp_sendto(tftp_state.upcb, p, addr, port);
+> Hello,
+> Recently I've been playing around with the imx23-olinuxino=20
+> (mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During that, =
+I've=20
+> noticed that NetBSD panics because u-boot places the device tree in the B=
+SS
+> section of NetBSD. NetBSD clears the BSS section and then complains=20
+> that the device tree is corrupt.
+>=20
+> Reading the logs, it appears that FDT and kernel get loaded at non-overla=
+pping
+> ranges, but then u-boot relocates the device tree right after the kernel =
+into
+> the BSS section.
+>=20
+> ## Booting kernel from Legacy Image at 42000000 ...
+> Image Name: NetBSD/earmv5 11.99.4
+> Image Type: ARM Linux Kernel Image (no loading done) (uncompressed)
+> Data Size: 11950164 Bytes =3D 11.4 MiB
+> Load Address: 00000000
+> Entry Point: 00000000
+> Verifying Checksum ... OK
+> ## Flattened Device Tree blob at 41000000
+> Booting using the fdt blob at 0x41000000
+> Working FDT set to 41000000
+> XIP Kernel Image (no loading done) to 42000040
+> Loading Device Tree to 42b93000, end 42b99a0a ... OK
+> Working FDT set to 42b93000
+> Starting kernel ...
+>=20
+> The bootm command seems to insist on having to relocate the device tree.
+>=20
+> Is this something the OS is expected to deal with?
+>=20
+> In the meantime, I've managed to work around this by running
+> env set fdt_high 0x41000000;
+> before bootm. Is there a better solution than this to force the placement
+> of the device tree?
 
----
-base-commit: c05dba22f1f2b0b2655ee3971644acf1936cd07a
-change-id: 20260109-tftp_fix-3ab9bd66a6ad
+So, interesting setup. It's not a FIT image, it's a legacy image, so
+there's a few details missing that might be helpful here. But, why are
+you loading the image so high in memory? And we're calling it a Linux
+kernel, not a NetBSD image, so we should likely be updating our docs for
+booting modern NetBSD releases.
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+The big problem is that for a legacy image, we don't (and can't in
+many/most cases) know where the OS ends it's BSS and so have to hope
+that we're relocating to the correct spot (in other cases we can see
+this overlap and avoid it). At
+https://docs.u-boot.org/en/latest/usage/environment.html#list-of-environmen=
+t-variables
+we document all of the environment variables and bootm_low / bootm_size
+/ bootm_mapsize are relevant to this case, along with perhaps just
+loading the kernel image lower in memory to start with?
 
+--=20
+Tom
+
+--PCJ0SFlWZlzgVOj5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWE2YgAKCRAr4qD1Cr/k
+CuBdAQD23G6lRHi/7f4eKXbMnPke/CzefpSyzX2ORWY0j7TGsAD9FWWjJfTNKNIK
+Wwv0rJD502NYYdKG93y4JhKgGYtIEQo=
+=bsXl
+-----END PGP SIGNATURE-----
+
+--PCJ0SFlWZlzgVOj5--
