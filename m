@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87478D1A61A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 13:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67195D1A61A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 13:08:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D64684371;
+	by phobos.denx.de (Postfix) with ESMTP id 6C50E84377;
 	Fri,  9 Jan 2026 14:08:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="L8Z21j/F";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="CUadY0XI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F10D184166; Fri,  9 Jan 2026 12:24:58 +0100 (CET)
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
+ id 4C8408416E; Fri,  9 Jan 2026 12:25:08 +0100 (CET)
+Received: from mail-244116.protonmail.ch (mail-244116.protonmail.ch
+ [109.224.244.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17A3283CB1
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:24:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C64B84132
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:25:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=t.preissl@proton.me
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1767957896; x=1768217096;
- bh=oWNxAyBGqOPIDb9QmbBvoU49Rza+CLerLegGJKBtLa0=;
+ s=protonmail; t=1767957904; x=1768217104;
+ bh=8lewA1zss+wYedhCscnJz05XIHo0wQu0nWlE5Dm+OYY=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=L8Z21j/Fuq74t4lARH+xTCZ8zmtl601e37MDVN1hDURwRSLEi95Zg5dtaLtDcjUCf
- hQTv0GjEs5jdFxovQvkB4GtDtKOIxVq7a4AODhPThaBLt+JLNTZAc30XNDBvXyURxN
- pTYQabvxOPb621jjx+cj5JFjpBbrofBjN2aKgMZl+jFZZKp1XBYOMd+TaJo/Zf6nB9
- LoEgCApZx1pq2rT8CsSzFGp4Q75SJGGvOTnZAtPawdX6bQKstFxseeElIr7eolezk2
- zf+H6H6pykN5mYHWqY4hy0WUFAe2qj1rWXJWJvlwt0eXo4W+0Yny1mDFNxGRBG5cA0
- ik03uyY5uXHsw==
-Date: Fri, 09 Jan 2026 11:24:51 +0000
+ b=CUadY0XICii+vaAA5LxwCnyGmDWAaKvnrSZUgOgfTtaMC270Fgo49uXorLi6Ks9dN
+ K4k4VvdMyCwwDmHHXwP6AlIX+TUWlSkBLGJz5bOsL6LkSjj2L727DSKqHpQd7dRn4y
+ 2ZNsmqMEYN34nFweyyDO1Frhrbn9CKDiC5rP2jSYj8fiWeXneZ1bbs5ntPIciUhzxt
+ E55YuenSyoI5EdGyABOH0zZI5k4J1sdLKZeFf23dpbYV6NaBfoksE/SaIsjWHxWYBC
+ bKILElC6LXTPIBKFD+D+k2UldVpfVVLtAFKgaHrXLCkV766Qrz4lY511m/gN3eFlRr
+ 7iQrmDDJOViuw==
+Date: Fri, 09 Jan 2026 11:24:59 +0000
 To: u-boot@lists.denx.de
 From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
 Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Subject: [PATCH v3 2/4] fs: prevent integer overflow in zfs_nvlist_lookup
-Message-ID: <20260109112428.262793-3-t.preissl@proton.me>
+Subject: [PATCH v3 3/4] fs: prevent integer overflow in sqfs_concat
+Message-ID: <20260109112428.262793-4-t.preissl@proton.me>
 In-Reply-To: <20260109112428.262793-1-t.preissl@proton.me>
 References: <20260109112428.262793-1-t.preissl@proton.me>
 Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: 0d110c9ddf43a100a14d490fd2b4ecffaf51305f
+X-Pm-Message-ID: ea8775d6c401aee2c8957f75e473cbb82d8b1e8c
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -67,38 +68,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An integer overflow in nvlist size calculation could lead
-to under-allocation and heap buffer overflow.
+An integer overflow in length calculation could lead to
+under-allocation and buffer overcopy.
 
 Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
 ---
- fs/zfs/zfs.c | 6 +++++-
+ fs/squashfs/sqfs.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
-index 410a61aa611..c7502c344ff 100644
---- a/fs/zfs/zfs.c
-+++ b/fs/zfs/zfs.c
-@@ -1617,6 +1617,7 @@ zfs_nvlist_lookup_nvlist(char *nvlist, char *name)
- =09char *ret;
- =09size_t size;
- =09int found;
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 4d3d83b7587..f668c26472e 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -255,10 +255,14 @@ static char *sqfs_concat_tokens(char **token_list, in=
+t token_count)
+ {
+ =09char *result;
+ =09int i, length =3D 0, offset =3D 0;
 +=09size_t alloc;
 =20
- =09found =3D nvlist_find_value(nvlist, name, DATA_TYPE_NVLIST, &nvpair,
- =09=09=09=09=09=09=09  &size, 0);
-@@ -1627,7 +1628,10 @@ zfs_nvlist_lookup_nvlist(char *nvlist, char *name)
- =09 * nvlist to hold the encoding method, and two zero uint32's after the
- =09 * nvlist as the NULL terminator.
- =09 */
--=09ret =3D calloc(1, size + 3 * sizeof(uint32_t));
-+=09if (__builtin_add_overflow(size, 3 * sizeof(uint32_t), &alloc))
+ =09length =3D sqfs_get_tokens_length(token_list, token_count);
+=20
+-=09result =3D malloc(length + 1);
++=09if (__builtin_add_overflow(length, 1, &alloc))
 +=09=09return 0;
 +
-+=09ret =3D calloc(1, alloc);
- =09if (!ret)
- =09=09return 0;
- =09memcpy(ret, nvlist, sizeof(uint32_t));
++=09result =3D malloc(alloc);
+ =09if (!result)
+ =09=09return NULL;
+=20
 --=20
 2.43.0
 
