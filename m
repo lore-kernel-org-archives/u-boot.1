@@ -4,84 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1192BD26D7A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 17:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C27DD26D7A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 17:20:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C86784248;
-	Fri,  9 Jan 2026 18:10:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E26AF84206;
+	Fri,  9 Jan 2026 18:20:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kUvOUKb9";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="j1hxaGBj";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="zL9IbEjU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAC3284248; Fri,  9 Jan 2026 18:10:04 +0100 (CET)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0BE1084248; Fri,  9 Jan 2026 18:20:39 +0100 (CET)
+Received: from fhigh-a1-smtp.messagingengine.com
+ (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 233F484206
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 18:10:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3C7683C72
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 18:20:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7c6e815310aso3579838a34.0
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 09:10:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767978601; x=1768583401; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ovlQJ5DjNZKPHOs08lMR1o09vWD3qC2GUH+fiaU3Tjs=;
- b=kUvOUKb9+doYO3cv7kjPZhU0kBQV1/8+3G3TSqhNIrXbQPOmPO77B0PmDuXi0X+kcz
- 1qyL+nKqPM89seS7Clp4Sr32lZ80z67QoV8ka2mWhTBjnRiHlGlstB2bXUfQQQnGILfE
- xzy7ozulTw2t7Bj0hQnALzQjNHUu8O9qqS31k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767978601; x=1768583401;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ovlQJ5DjNZKPHOs08lMR1o09vWD3qC2GUH+fiaU3Tjs=;
- b=QH5sEVJBL6eNh2yEfC0Cu0xIR1i5HsnLUes2FkJBULViP8qbZsP5qd1CXuf0ETx7Ri
- GJnjwdr8qF9xp54RO0S0Mm5o8+bkPnQFuTP7Kj//g0ggySbPG79P4+VF+uyVQDBnD3R3
- rcprpWJh3XuFfWQwzlQ9ralxNJ9BZElQ2NJzUZnz4G36br7CQCxVleZqFppFrw+AQqRQ
- HR5xsqpPtu8H+/2zhvdB96D5KRIsid+DsAETd+Ys7Ouf5eexVe+Gv+94LjrHNY6laSLd
- eQ5Pmdk9AZBeD2dSlOlvGyJdN9vGk/AhmzYBmYgr+8DfhJcOmoay0h0+GmoYY+HsRXMb
- 99pg==
-X-Gm-Message-State: AOJu0Yzfa8IZnOyrBJrxoD8WdUrxdO1flUJHWy3AEaW2JeKwUrP/GMxq
- a1zqNY2I+EXone4zlqDISOVvAc6WFImo45T7R9U6AFoJax0o9zs0wUGgWL4zRFU9SBCDy8mW3/T
- KMcictOk=
-X-Gm-Gg: AY/fxX4X4HNC4jWv3FrKtQcnlCzm7ZfoFeOSTByv6yJPmGYTrRMLO29AljWrVnyFZwd
- wSFHFBjzud1pdpawG3xYeHkB5K/dP9GNPzy5lzr5/p9MB8laxJlFA/qoqbm3soOh/3EANymdVyA
- VOpdlQBcGwzZyj9km2eGoh68fJ0A8Q/dztO1Z/amLrGXNfga6PBPjiTGr0qImWchGeuLrHDzEEP
- Tz8vZ/9TbWcbK1m2J5EoxCvgV+Fm1PQyTpZLS37X9t1R0M/gJ/gvUZaSqyf+ZO5TStMm5brzw4z
- snfeplpEVUCnqNZNPewZxhCmnJ521YzHKerIhzjZwiQwPj4Fs+EMVqEV4OT6gRiqs7qzZRpqmfk
- oH5W9IvHWzKOItG2qNYr5h9nsqx0dMjrSXfdlHS3uqlI1WiW+JGjvEg0O6jjv5kbMADWGKgizDM
- lwTpTU9ksITx6EmzC76uzbS0XJ51f+AySE/4QjRh7RIvK5hdHLEAvTnSGQMLahuatm+ff6RCfs9
- b5qT+vGq3rhrOt57nbdM0+aSHCSZENq3LSmFzc=
-X-Google-Smtp-Source: AGHT+IHkTgBGGcl6I3dxejxzrOg7tSLOZbGPwCaEseRqnI29lLe1Uxr8lshEzRIXBGuBFBK2osf/Vw==
-X-Received: by 2002:a05:6830:90f:b0:7c7:2cdb:ff4b with SMTP id
- 46e09a7af769-7ce50c0006bmr7262828a34.20.1767978600542; 
- Fri, 09 Jan 2026 09:10:00 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478ee668sm8063822a34.29.2026.01.09.09.09.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 09:10:00 -0800 (PST)
-Date: Fri, 9 Jan 2026 11:09:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yuri Honegger <yuri.honegger@icloud.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Placement of FDT in memory
-Message-ID: <20260109170958.GE3416603@bill-the-cat>
-References: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-12.internal (phl-compute-12.internal [10.202.2.52])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 6C7771400153;
+ Fri,  9 Jan 2026 12:20:34 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-12.internal (MEProxy); Fri, 09 Jan 2026 12:20:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1767979234; x=1768065634; bh=AV
+ ugb64ELLFxDJEs3KstbvdNXX80JkrQFafAxUlJSCU=; b=j1hxaGBjnxSdBQAVxY
+ K9izHnpCdmXDimi1wKczod4UdTc/wGAHO9DkHfHImWApiYyOpkvLqexBcUqsFHsx
+ +PIBiKfXcBxP/zSw+CvmZW8atcgSKheOFPVeby/RSFdPJuB5jsV6aFHAqABgcrUR
+ hD3gKs40eWAbd9rmj+sh7ELrV6r6UM5ub8CZYzf7839cKNAHfv3w5IIfk7/gf1E9
+ 6oVMSoIzn+tW5kyCrPkUu1UqYYsFm4nLjFunaMywWzWVFeshFEmE3gl+nGrj95Ms
+ s0z1i4rvh3hf+t+SXhBV8yPaieqlNQhkmbfV2nHsUlARN3/RLHWR7DpF6psRQ0bC
+ 1HgA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1767979234; x=1768065634; bh=AVugb64ELLFxDJEs3KstbvdNXX80
+ JkrQFafAxUlJSCU=; b=zL9IbEjUMml7vmXQY4qSlRkWIl2nrQy0sAF3SLhS20kl
+ TfWfF/F1Qc/OGTCsP1Hn831VVxA8SZfWSkInepOuRJncm1Ltv2auHqsJUQ/W5aqQ
+ TuZSO3PaXZGkMAWDrY6iF4prtrDoJEn3uz6WE9o080jsqMDnI5CxdkhGv928+5PK
+ fAAg5oo1b5hYGxHb7Ml4SHZ6QYJIplrlDB0yrJW2F6W2D4/X9QYKrQY0L9nJic8W
+ tXSkY8hpzVFA7Y6oWz6/OpnBMalkeQQaWqyPZfyn9byF0mvs+//kLD4Ww+pmdm0M
+ FcvY68T/5dqD6ziDpUU+YW5+ZU8JaVMzEaGObKjnTQ==
+X-ME-Sender: <xms:4jhhaT81b2LomLrRCvuqbWbBzcxjL7ToDA8EycURqeSOmiGxz5utDw>
+ <xme:4jhhaRNw5RBAKGT8KwLNXo8a5Dbjlc1VNJ2NMhMyofM2FK10sx2B3H42vvYnCKLER
+ 4tu9GQoeuxb6Ihb7YN2N5ov4eic60wLGWNE7yo5ZEN52VomDFRUw5U>
+X-ME-Received: <xmr:4jhhaRGH-1TxzVbXMdRxSOMGJlQBdZwO8x_S-fBQLGPyl5JzkQA1PC8bzqSRFKxRuQ_hmPFxQQurs8NaK9e1Mewejnj3QicCb8hsKQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddutdelfeelucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
+ rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepfeehle
+ dtheefteejfedvheetuedttdetleegudeuteejveetieefuedvfeffvdeinecuffhomhgr
+ ihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+ epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohephedp
+ mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgssh
+ gurdhorhhgpdhrtghpthhtoheprghsrghhiheslhhishhtshdrlhhinhhugidruggvvhdp
+ rhgtphhtthhopehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehuqdgsohhotheslh
+ hishhtshdruggvnhigrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdr
+ tghomh
+X-ME-Proxy: <xmx:4jhhafQhGnC90qaqBjWf59QbvlSiaKSdH0dMFYrLEu7BCPtJ7cRZ5A>
+ <xmx:4jhhaev0ynC6ZW2BmB7I8wuENOeXXUCLfvQhWQchvfsP2d2SIh5EBg>
+ <xmx:4jhhaXKriuiLCZdjTF1ZcL5i7UVA1pG0EZOL-Sslu8oy8iQsYlqY8A>
+ <xmx:4jhhaTnG7soseUV9GS3SesGaHWlW3TLUsGdvH-sYCawmSF98rBLknA>
+ <xmx:4jhhaQeINhU5DSgF_bSDKLSgHO20wnDiuN5JF5XWDdtN2g5LxVoJOShj>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 9 Jan 2026 12:20:33 -0500 (EST)
+From: Janne Grunau <j@jannau.net>
+Date: Fri, 09 Jan 2026 18:20:30 +0100
+Subject: [PATCH] configs: apple: Enable SMBIOS / sysinfo
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PCJ0SFlWZlzgVOj5"
-Content-Disposition: inline
-In-Reply-To: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260109-apple-defconfig-smbios-v1-1-16477009c034@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAN04YWkC/x2MQQqDMBAAvyJ7diFJbat+RXqIycYuaBKyIAXJ3
+ w09DszMBUKFSWDuLih0snCKDXTfgfvauBGybwxGmZfSakKb807oKbgUA28ox8pJ0D7eo2qSHp4
+ GWpwLBf79x8un1hthFoz+aAAAAA==
+X-Change-ID: 20260109-apple-defconfig-smbios-a37802021452
+To: u-boot@lists.denx.de
+Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
+ asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1771; i=j@jannau.net;
+ s=yk2025; h=from:subject:message-id;
+ bh=kxn2hk+EJhSnbBbMmTcTBtKEj6KmDfgiSItOfKs1D0I=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhsxEiwffZE/l73cweyH3akbR7Z2pVw5dWfm51PdjoljxF
+ pGlK9t1OkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAExkWykjw5PjK1pb2qolhNVY
+ GieVaT5TW+WVv/RVlGfM/ZpHchr8ixn+Z6TkGj9q9F5vF560yre8JNZvlnzk0efqtk94S3yu75z
+ ADQA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,81 +119,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable verbose SMBIOS table generation so that user space applications
+can use the SMBIOS table to provide details about the system. The
+desired information is chassis-type to determine whether the system is
+laptop.
+Adding the chassis-type property is proposed for the upstream device
+trees in the Linux kernel in [1].
 
---PCJ0SFlWZlzgVOj5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Link: https://lore.kernel.org/asahi/20260109-apple-dt-usb-c-atc-dwc3-v1-0-ce0e92c1a016@jannau.net/ [1]
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+I do not plan to update u-boot's in-tree device trees. The Linux device
+trees have almost reached feature parity. The main missing features are
+the USB Type-C ports (on track for next merge window) and the laptop
+keyboards. I think it makes more sense to close the feature gap and
+switch to upstream device trees instead of adding to the in-tree device
+trees.
+---
+ configs/apple_m1_defconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-On Thu, Dec 18, 2025 at 11:04:59PM +0100, Yuri Honegger wrote:
+diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+index 2d685da8c9eee2084b0144050e12c03c77e5184e..52672f59566dc0ebbb1c829cff6c7d8f798e7c50 100644
+--- a/configs/apple_m1_defconfig
++++ b/configs/apple_m1_defconfig
+@@ -16,6 +16,8 @@ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_APPLE_SPI_KEYB=y
+ # CONFIG_MMC is not set
+ CONFIG_NVME_APPLE=y
++CONFIG_SYSINFO=y
++CONFIG_SYSINFO_SMBIOS=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_XHCI_PCI=y
+@@ -25,4 +27,4 @@ CONFIG_VIDEO_FONT_16X32=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+-# CONFIG_SMBIOS is not set
++CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
 
-> Hello,
-> Recently I've been playing around with the imx23-olinuxino=20
-> (mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During that, =
-I've=20
-> noticed that NetBSD panics because u-boot places the device tree in the B=
-SS
-> section of NetBSD. NetBSD clears the BSS section and then complains=20
-> that the device tree is corrupt.
->=20
-> Reading the logs, it appears that FDT and kernel get loaded at non-overla=
-pping
-> ranges, but then u-boot relocates the device tree right after the kernel =
-into
-> the BSS section.
->=20
-> ## Booting kernel from Legacy Image at 42000000 ...
-> Image Name: NetBSD/earmv5 11.99.4
-> Image Type: ARM Linux Kernel Image (no loading done) (uncompressed)
-> Data Size: 11950164 Bytes =3D 11.4 MiB
-> Load Address: 00000000
-> Entry Point: 00000000
-> Verifying Checksum ... OK
-> ## Flattened Device Tree blob at 41000000
-> Booting using the fdt blob at 0x41000000
-> Working FDT set to 41000000
-> XIP Kernel Image (no loading done) to 42000040
-> Loading Device Tree to 42b93000, end 42b99a0a ... OK
-> Working FDT set to 42b93000
-> Starting kernel ...
->=20
-> The bootm command seems to insist on having to relocate the device tree.
->=20
-> Is this something the OS is expected to deal with?
->=20
-> In the meantime, I've managed to work around this by running
-> env set fdt_high 0x41000000;
-> before bootm. Is there a better solution than this to force the placement
-> of the device tree?
+---
+base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
+change-id: 20260109-apple-defconfig-smbios-a37802021452
 
-So, interesting setup. It's not a FIT image, it's a legacy image, so
-there's a few details missing that might be helpful here. But, why are
-you loading the image so high in memory? And we're calling it a Linux
-kernel, not a NetBSD image, so we should likely be updating our docs for
-booting modern NetBSD releases.
+Best regards,
+-- 
+Janne Grunau <j@jannau.net>
 
-The big problem is that for a legacy image, we don't (and can't in
-many/most cases) know where the OS ends it's BSS and so have to hope
-that we're relocating to the correct spot (in other cases we can see
-this overlap and avoid it). At
-https://docs.u-boot.org/en/latest/usage/environment.html#list-of-environmen=
-t-variables
-we document all of the environment variables and bootm_low / bootm_size
-/ bootm_mapsize are relevant to this case, along with perhaps just
-loading the kernel image lower in memory to start with?
-
---=20
-Tom
-
---PCJ0SFlWZlzgVOj5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWE2YgAKCRAr4qD1Cr/k
-CuBdAQD23G6lRHi/7f4eKXbMnPke/CzefpSyzX2ORWY0j7TGsAD9FWWjJfTNKNIK
-Wwv0rJD502NYYdKG93y4JhKgGYtIEQo=
-=bsXl
------END PGP SIGNATURE-----
-
---PCJ0SFlWZlzgVOj5--
