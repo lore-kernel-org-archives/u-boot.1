@@ -4,57 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793C9D167FC
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 10:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED49D16802
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 10:34:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E309A84132;
-	Fri,  9 Jan 2026 11:24:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 8750084132;
+	Fri,  9 Jan 2026 11:34:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Mmgr20UO";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F07168414B; Fri,  9 Jan 2026 11:24:10 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B49F8415D; Fri,  9 Jan 2026 11:33:58 +0100 (CET)
+Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAF1583CDF
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 11:24:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id A8BA683CDF
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 11:33:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 60E8E416B3;
- Fri,  9 Jan 2026 10:24:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B841C4CEF1;
- Fri,  9 Jan 2026 10:24:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767954247;
- bh=w8q44n/TfhRHmLw3aCPPZE9QA5sxYYyobUSCVSQ1s90=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Mmgr20UOuMnrFujuV4VtCE8aj/vyYrJE8XcLT8N4O9TkS2RCigzKjB57mNJw3NUS7
- LA75IzC9v4ok1S9guZs2BXkSKLN1KCn/Eef+XRUsvJAZQlRPuSyVlv/kkbLNE8wyse
- M2XUy+OOHha1Vc6y/W/j1dtI1qdjUfQ3dYvOhIV+L9/b3N2RlFfuuKxbGgAd2pABxY
- dAsJbH1dUmWr0ynVXEsdnm0w5slkVs9nQ6FFCKduLo0NHVKp6DKMEmKkXOk/Zzh+J/
- uAMgTzjG0nupUqcl/duFcCdF8VwGdsCbDGr5r77vYXjT9sAV30Ci1okGyMiRQUI6er
- XqQ+F/tQNaaeA==
-Date: Fri, 9 Jan 2026 15:54:00 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
- casey.connolly@linaro.org, jorge.ramirez@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: Re: [PATCH 1/2] mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
-Message-ID: <aWDXQFXQcaoeV7ka@sumit-xelite>
-References: <20251229114312.668068-1-sumit.garg@kernel.org>
- <b60d5ee7-fa27-4dc1-8a09-964912ec5654@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: zesmtpsz2t1767954784td501971a
+X-QQ-Originating-IP: Nc77tWWQsF/9fkF6x/K400mWyb7tV6AOyQxuF6q/fSM=
+Received: from [192.168.254.128] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 09 Jan 2026 18:33:01 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 5280802252630799740
+Message-ID: <673C2836ACBEBAF3+909bd932-f7a3-44f6-82cf-7c24185cd2a2@radxa.com>
+Date: Fri, 9 Jan 2026 19:33:01 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b60d5ee7-fa27-4dc1-8a09-964912ec5654@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/3] rockchip: Add initial RK3582 support
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20260107230747.3552391-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20260107230747.3552391-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz4b-0
+X-QQ-XMAILINFO: MIqnum/quLXPgZI0kI9R9/UGRy0CaBbcAxbzslg56nj3JgXHd+LMSfLB
+ kNZKJ/vZOdobVY41k6FoIEPY65oG1i2mi3rYzIDk4rlebWRgm1z4+Zr6V4ueSaIz9F5cszr
+ gJNhJZv/wGfJVkaEf6dYLfww4XTyFFLMBh+r+R9y9UbOoygesNfEPJo4KkgwoTy2vNAw+q1
+ WGCERXcf87P4/q67Pz8CcEk+oMd0gnkNK0HFbhKFJGSvMns0ZS4zgALviT7y19odsHOaUch
+ 2ZMsQE34+w7Wl7sfLbGDyGnCgp21o9yFFJVtHmbEME+MDThxKKC16lr2kNKWiWeRAud16Ea
+ 2hhzkE/SDoSt9otGPp53gOxApRUH56A1VFn7yucDgiGR92YYK5KZjW/moADeQxY30QZ3AMd
+ yS6DhRX39pdhA20BZXjcG0Bv/RSVlKOrsqGi9S9mZRYWDxZmhRxx6gLNEVKbiZ4ugr8muWi
+ FDUu/Nu4EZg0vYgqi379lzILHsiZJ0zI6sJPqhfznqHaCp8OQmGID3Ji1JRRI2BA085zKi9
+ 3UKKzBdzj1zAEyG6dLyhewJABPXOIdFli8VqamNqSWNn12QxpO6eSjOu+fHbETF7ED9TQHk
+ GoXCypDJAGiecSMGGIQiY9KLrOTL1O6vtcLyZ4k4ueakp74mhnjAYFK2BIIEu/yNQRYmNyi
+ daSXDRj5IPC35ii0ydr22CXGZ0TmbkwO67/LG7qJeclWbHdtB3v89YO7TCKEALdJ4tWODZC
+ J7uMTYV3auYRZ/qmq8eMsIXhryBOZohjItfEJzWz8vsvFGYQzoyqqaytFNS4s4hqCY1b7xK
+ w5UTg4LeL6d7Hh0nXIru+0dj3RgcwRCHWInklUN7NmLzDqCsjPciunpbb98ph9WrFDyMRKS
+ 56AzdWI4NzKkaG9sDhOFMUodt28UNMj1/yDzS3IVivGEhF7LJ5iufKOYHvjcH3usPO5Tg5A
+ VGtO+vl1j1Mr2vX4nhnx7Z5v0/Y9tqIwfLTBPmGqr63K/uTUcCXGH8yFX
+X-QQ-XMRINFO: Mp0Kj//9VHAxzExpfF+O8yhSrljjwrznVg==
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,80 +79,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 08, 2026 at 05:19:32PM +0100, neil.armstrong@linaro.org wrote:
-> On 12/29/25 12:43, Sumit Garg wrote:
-> > From: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> > 
-> > Add support for OP-TEE live tree DT fixup support which enables U-Boot
-> > OP-TEE driver to be probed. As well as the EFI DT fixup protocol allows
-> > the live tree fixup to be carried over to the OS for the OP-TEE driver
-> > in the OS to probe as well.
-> > 
-> > Note that this fixup only gets applied if CONFIG_OPTEE gets enabled.
-> 
-> Can't the presence of OP-TEE be detected dynamically via scm calls ?
+Hi Jonas,
 
-SCM calls aren't present in case of TF-A/OP-TEE flow.
+Thank you very much for your work!
 
--Sumit
+On 1/8/26 08:07, Jonas Karlman wrote:
+> This series add initial support for RK3582 support. The RK3582 is a
+> variant of the RK3588S with a few ip blocks disabled. What blocks are
+> disabled/non-working is indicated by the ip-state in OTP.
+> 
+> Compared to the vendor U-Boot variant, this mark cpu, the gpu and
+> vdec/venc with status=fail instead of removing nodes during DT fixup.
+> Linux skip cpu cores marked as failed staring from v5.17-rc1, however
+> the GIC driver will generate a harmless WARN_ON that safely can be
+> ignored. A patch for Linux will be sent to skip the WARN_ON for
+> failed/disabled cpu cores once this lands.
+> 
+> It is recommended to use rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
+> as DRAM init blob RK3582, listed in latest RKBOOT/RK3582MINIALL.ini.
+> 
+> Changes in v4:
+> - Update policy to always fail gpu for RK3582
+> - Drop code and comment related to RK3583
+> - Update rkvdec node name to match latest mainline Linux DT patches
+> - Update commit message to reflect updated policy
+> 
+> Changes in v3:
+> - Apply same policy for RK3582/RK3583 to match vendor U-Boot
+>    linux-6.1-stan-rkr6 tag, allow use of the GPU and one vdec core.
+> - Update rkvdec node name to match latest mainline Linux DT patches.
+> - Update commit message to reflect updated policy
+> 
+> Changes in v2:
+> - Refactor code to first apply policy to ip-state and then fail cores
+>    based on the updated ip-state
+> - Add support for failing rkvdec and rkvenc cores
+> - Append soc compatible to board model
+> - Add patch to add support for ROCK 5C Lite variant
+> 
+> Jonas Karlman (3):
+>    rockchip: Add initial RK3582 support
+>    rockchip: rk3588-generic: Enable support for RK3582
+>    rockchip: rk3588s-rock-5c: Add support for ROCK 5C Lite variant
+> 
+>   arch/arm/dts/rk3588-generic.dts        |   4 +-
+>   arch/arm/mach-rockchip/rk3588/Kconfig  |   9 +-
+>   arch/arm/mach-rockchip/rk3588/rk3588.c | 215 +++++++++++++++++++++++++
+>   configs/generic-rk3588_defconfig       |   1 +
+>   configs/rock-5c-rk3588s_defconfig      |   1 +
+>   doc/board/rockchip/rockchip.rst        |   4 +-
+>   6 files changed, 226 insertions(+), 8 deletions(-)
 
-> 
-> Thanks,
-> Neil
-> 
-> > 
-> > Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> > ---
-> >   arch/arm/mach-snapdragon/of_fixup.c | 34 +++++++++++++++++++++++++++++
-> >   1 file changed, 34 insertions(+)
-> > 
-> > diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> > index eec2c0c757e..29a99f73cf3 100644
-> > --- a/arch/arm/mach-snapdragon/of_fixup.c
-> > +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> > @@ -146,6 +146,37 @@ static void fixup_power_domains(struct device_node *root)
-> >   	}
-> >   }
-> > +static void add_optee_node(struct device_node *root)
-> > +{
-> > +	struct device_node *fw = NULL, *optee = NULL;
-> > +	int ret;
-> > +
-> > +	fw = of_find_node_by_path("/firmware");
-> > +	if (!fw) {
-> > +		log_err("Failed to find /firmware node\n");
-> > +		return;
-> > +	}
-> > +
-> > +	ret = of_add_subnode(fw, "optee", strlen("optee") + 1, &optee);
-> > +	if (ret) {
-> > +		log_err("Failed to add 'maximum-speed' property: %d\n", ret);
-> > +		return;
-> > +	}
-> > +
-> > +	ret = of_write_prop(optee, "compatible", strlen("linaro,optee-tz") + 1,
-> > +			    "linaro,optee-tz");
-> > +	if (ret) {
-> > +		log_err("Failed to optee 'compatible' property: %d\n", ret);
-> > +		return;
-> > +	}
-> > +
-> > +	ret = of_write_prop(optee, "method", strlen("smc") + 1, "smc");
-> > +	if (ret) {
-> > +		log_err("Failed to optee 'method' property: %d\n", ret);
-> > +		return;
-> > +	}
-> > +}
-> > +
-> >   #define time_call(func, ...) \
-> >   	do { \
-> >   		u64 start = timer_get_us(); \
-> > @@ -160,6 +191,9 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
-> >   	time_call(fixup_usb_nodes, root);
-> >   	time_call(fixup_power_domains, root);
-> > +	if (IS_ENABLED(CONFIG_OPTEE))
-> > +		time_call(add_optee_node, root);
-> > +
-> >   	return 0;
-> >   }
-> 
+Tested on Radxa E52C:
+
+cpu-code: 35 82
+ip-state: 00 04 00 (otp)
+ip-state: c0 9e 04 (policy)
+remove cpu-map cluster2
+fail gpu
+fail rkvdec1
+fail rkvenc1
+fail cpu cpu@600
+fail cpu cpu@700
+
+and on Radxa ROCK 5C Lite:
+
+cpu-code: 35 82
+ip-state: 10 00 00 (otp)
+ip-state: 30 9e 04 (policy)
+remove cpu-map cluster1
+rename cpu-map cluster2
+fail gpu
+fail rkvdec1
+fail rkvenc1
+fail cpu cpu@400
+fail cpu cpu@500
+
+
+For the whole series,
+
+Tested-by: FUKAUMI Naoki <naoki@radxa.com>
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
