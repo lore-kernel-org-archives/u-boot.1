@@ -4,50 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49469D16812
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:18:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F10D16810
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E83483CB1;
-	Fri,  9 Jan 2026 12:18:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 7257583F56;
+	Fri,  9 Jan 2026 12:32:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ELeBhDoW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66D3583CDF; Fri,  9 Jan 2026 12:18:00 +0100 (CET)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [45.157.188.11])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 86D5D84132; Fri,  9 Jan 2026 12:32:04 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D7A683C51
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:17:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B55B83CB1
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:32:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dnfQG0DDHzcWB;
- Fri,  9 Jan 2026 12:17:58 +0100 (CET)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dnfQF1k8dzxXX; Fri,  9 Jan 2026 12:17:57 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 09 Jan 2026 12:17:48 +0100
-Subject: [PATCH] rockchip: tiger-rk3588: disable HS400
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b79ea617f55so824882166b.3
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:32:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1767958322; x=1768563122; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mDosEqCjMfY4yIYFYCIZzYFR3No5U1emlWYwQTGdIzk=;
+ b=ELeBhDoWC4l/QBe78FzZUEsWIQr6Ge9RH9fwu3kfXzzoba6IdW7+aUiSb5RHYPn0Pq
+ CaZr98rJLSvU5ZqvucMWB9s4pFmwG6CL+vIe+1z1YV50KDJmZOAmQMPjrJKrUTdsH4CH
+ PvvLvoCie0p3GFjFWvKkKgQhOt5dV8iHQpcIk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767958322; x=1768563122;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mDosEqCjMfY4yIYFYCIZzYFR3No5U1emlWYwQTGdIzk=;
+ b=r3bb7jKGwWxxAmy63VbpP64XlSNSS72MHlnr1PtNp4WYe8dKHnDSthvQ7ieXBd9WF3
+ XCLTjLbt99IDLt6WuttdF6AnjTxA1pF66raq1PugUFZceyy7aNVkF0Z25ZJdk54kTlyA
+ gMaTZOJ9zTcrMmuFi1NCEqPL2p4uiTfCTgVAH+yu6Q9Q0Os59V8Nt8YbYkcWAtpkLxKa
+ tdaRu9KJjc9pn3kMK3hGDIDuAGzF8l1HfL1ayaNyRgKPJ3RSeX6ZY1T0V61SWoptuZXA
+ joz4rkYwW34kpuBq1odHvR8CePo6bJ+h7AzbgsCwovLB7Ct2fXrdpjKFmiqMRujOmnlX
+ 3n4g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXY78GJoCSWC1J+1qbeqAqldd1yvXYxNvnecYiJ4DvluvHMzminloMJCy8yPtVPEyzP9XnQUDw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzD2f4c/0ZSxYwejOvFdGPye9s5W9k8T8VLwciEbUc2JcbPXvlr
+ Gjq5j9AfJXDILuokTYSgeNtnBC5kXz6AriUF8Y0jy6T4/yMlIQuyG/q+60p+g25FttOprAUMpuc
+ pCM2GfgLTkPAkzFiBIlhUcJUSuGaxK5yo7xuJl4sw
+X-Gm-Gg: AY/fxX52oeA/pVQgEITCtxCnUxwhqsPtpH6oPDgCaoK4ZoBLCByLSyjEj0cZ8B1wp1j
+ iiLWcakvlhJHUhuYmLnRGM4J9rcYr1EfME+yHKpfLMVlFPcRFrwGII0l3bG62FKYncYg20+GTPV
+ pcgpTMUMv+7vnZ9QDCQKeL7154hflkGGm3TaCdnMoB6BG1Kdlzit1tf4PYK2f7UhJuKGh6ut3b1
+ NXucupa77seWYulujF5CXGiVV9YWilXYk0cnfOOzgtEGhcF9NhJX+kWai93M9+ixBEjSg==
+X-Google-Smtp-Source: AGHT+IErwbWvrd2vp/57C7vNTJYIIu6BPG/BErpji78HE6+BLUE9ru+NeS0X4A8K/791ut81QLBtVrveb+heB/WSGvA=
+X-Received: by 2002:a17:907:94c3:b0:b76:74b6:dbf8 with SMTP id
+ a640c23a62f3a-b8444dc4880mr981292366b.14.1767958321603; Fri, 09 Jan 2026
+ 03:32:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260109-tiger-no-hs400-v1-1-94c0c17076d5@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avIrBuYxKS6SrSQHGs2FhoRiHdPW
- r7F/wUyJ+EMsyqQ+JEsZ2zoOwXb4eLOKL4ZNGlLPY14y84J44lHNkRozODDZJx11kOLrsRB3n+
- 4rLV+Nu8roGAAAAA=
-X-Change-ID: 20260108-tiger-no-hs400-445df94a6a6d
-To: u-boot@lists.denx.de
-Cc: Klaus Goger <klaus.goger@cherry.de>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+References: <20260107201838.3448806-1-visitorckw@gmail.com>
+ <20260107201838.3448806-5-visitorckw@gmail.com>
+In-Reply-To: <20260107201838.3448806-5-visitorckw@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 9 Jan 2026 04:31:49 -0700
+X-Gm-Features: AZwV_Qh0v3T7OPGDtT2Jcdw2Jbklm3nUhXHXqa1H-y3O1QbdW0o40qcmXPDEaE0
+Message-ID: <CAFLszTiibRObaaC3yx=MtX_tkO_n-qQ-uon1QX5eL13H8PdBVA@mail.gmail.com>
+Subject: Re: [PATCH v6 4/8] sysreset: Add QEMU virtual system controller driver
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
+ me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com, 
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,46 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+On Wed, 7 Jan 2026 at 13:19, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+>
+> Introduce a new sysreset driver for the QEMU Virtual System Controller.
+> This device is found on QEMU "virt" machines (such as the m68k virt
+> target) and provides a mechanism to trigger system reset and power-off
+> events.
+>
+> The driver maps U-Boot sysreset types to the corresponding controller
+> commands:
+> - SYSRESET_WARM / SYSRESET_COLD -> VIRT_CTRL_CMD_RESET
+> - SYSRESET_POWER_OFF -> VIRT_CTRL_CMD_HALT
+>
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> ---
+> Changes in v6:
+> - Introduce new driver to replace board-file reset implementation.
+>
+>  MAINTAINERS                                |  6 +++
+>  drivers/sysreset/Kconfig                   |  8 ++++
+>  drivers/sysreset/Makefile                  |  1 +
+>  drivers/sysreset/sysreset_qemu_virt_ctrl.c | 55 ++++++++++++++++++++++
+>  include/qemu_virt_ctrl.h                   | 13 +++++
+>  5 files changed, 83 insertions(+)
+>  create mode 100644 drivers/sysreset/sysreset_qemu_virt_ctrl.c
+>  create mode 100644 include/qemu_virt_ctrl.h
+>
 
-Tiger suffers from eMMC signal integrity issues which means we can only
-run it at HS200 max.
-
-The Device Tree has these properties removed since v6.18 (commit
-baa18d577cd4 ("arm64: dts: rockchip: disable HS400 on RK3588 Tiger")),
-which has now merged in U-Boot.
-
-Since the controller side doesn't support HS400 anymore, let's not
-confuse users as to why HS400 is enabled in the config but not working
-as we know it cannot work (and won't be used anyway since the controller
-doesn't advertise support for it in the Device Tree).
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- configs/tiger-rk3588_defconfig | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/configs/tiger-rk3588_defconfig b/configs/tiger-rk3588_defconfig
-index 50a3b553a11..a545ec714b5 100644
---- a/configs/tiger-rk3588_defconfig
-+++ b/configs/tiger-rk3588_defconfig
-@@ -76,10 +76,6 @@ CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_SPL_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
- CONFIG_SPL_MMC_UHS_SUPPORT=y
--CONFIG_MMC_HS400_ES_SUPPORT=y
--CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
--CONFIG_MMC_HS400_SUPPORT=y
--CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-
----
-base-commit: 141be72e2a9d43aa4e3d1a6a6e0ab8f9eb8784c6
-change-id: 20260108-tiger-no-hs400-445df94a6a6d
-
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@cherry.de>
-
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
