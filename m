@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C9C5D16817
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2ACD16817
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ADA38430F;
-	Fri,  9 Jan 2026 12:36:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B10DF8435C;
+	Fri,  9 Jan 2026 12:37:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GOlClgtG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="FV1t0pNs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0EC08432E; Fri,  9 Jan 2026 12:36:35 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD55284332; Fri,  9 Jan 2026 12:37:34 +0100 (CET)
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFDF084166
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:36:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77FEC8435C
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:37:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b72b495aa81so802097066b.2
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:36:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767958588; x=1768563388; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ghTrF59mudYcfxd45qHkykF5Ery/WewN0zRNi+onqTo=;
- b=GOlClgtGhzP1FqYoyk6TEkMHW6woOWbDR1UIEKY1lmDtxQhzHr68CYXUtZYwD/9TkU
- yNMDEgDUv4CbMKlTdoTPF1ibuvDIi3SJz+7hJIUz6vT8DAm3XHw828EpNgnS4dYPvKcz
- FX8KzTAkJjFxe3Db8qbYRxuKrzJPj9omVdxoY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767958588; x=1768563388;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ghTrF59mudYcfxd45qHkykF5Ery/WewN0zRNi+onqTo=;
- b=S5L/mBqEl5KZevI6eOvOwEYtW6ttS4xadSGwigdXYTFqJtSg6r17tJD7UPTCoPjrYT
- Q4wmkamc+ouFYh0ICFE5YfRtcXIPHkCvoO+AMRPgMO+bEbz6oyKC/dyModtYmvMDZnJb
- nhuvFmbNaHw34neEtIvp1WSjiCC8eqHZoqe6Xfy1CQ8qCrY7aruSb2aAiP4+htrL3K6x
- kTUMjCjkqHaSF/76Y4F2wAU/98IuD0W7bnx/DPcdbrtP7V315J+vVIIXiU8Yd9agMg9O
- xYeUx36DNlDcgOQ+dJE6MejY3QAZ7VtEyfstazUFfv97p2oMp2nDL4AIHsHxaa6gcdOF
- X5GQ==
-X-Gm-Message-State: AOJu0Yx3OtZrjYRqzsxbLef/RDCipN6Tv8Yiz8Ewxl0uGFAMBDRwcenW
- xXLlgSBiCLvWHXxHEGL9XvaLnVFwNVhKS6mWsI/Zs8Hvou9xS44KAr42FZed680nSvvVFrR9CSz
- mjwqYVBg60i3IhMQsQXBTZZxKPvUbG35qmOmp2cIB
-X-Gm-Gg: AY/fxX6DO/x7p76FVJi7o1ZdoJqWovYAi95im9R0gQp28u+zZYmSaIdmHWk739AHZEN
- W8ghzjfGwFkOP0UAjx1kZ/V0SuzvZnHBjSBsMH9kU4rxoRtIH+SgsnoOBRdmLJ7oorpk+2TSXaO
- zLnREHPAghFGyW/OgnZ5SGbSaYcxG9A1twIRP6XUl/K7J/fH5YXfHpq1YeTkaE+4s90k6QIvETN
- BfNoQNnc0qSYK3e+XQLRcY5NbqetnwNjJfzP50S0vqbORtNnX5/ddinVcBKMuPjNLjPNA==
-X-Google-Smtp-Source: AGHT+IHvicBBPy5z86V1IeuSv0tQqc/NLvD9B+dyJV91c1BFkORMqW1n0BMcD2V6z8UNvtll8yW0fbUrxGqP3/R/DK8=
-X-Received: by 2002:a17:906:4fcf:b0:b7a:259:2a32 with SMTP id
- a640c23a62f3a-b84451edd69mr938131166b.2.1767958588153; Fri, 09 Jan 2026
- 03:36:28 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=E40+MEcWNmPMTvycSrpzydhpZTJwdRXZPehuOpd0+iA=; b=FV1t0pNs6rnvNA+vBnhqgBE0li
+ 6UwgTqg9agbDuJ2w1koY60GZLFgpvKmbV43CT/4MWeAgnyS/5qpMHGy88+jRGRM9rBbjTRxSrPHOg
+ nqb9DifPzs98x92aSiuIaHmS0r/Prv5Wl4eSFxvcC/1jfWIGLox6YFDqKdSmNoALG1jkZ8O8u4YT6
+ aUAolvEhF0FDZXSXo0rLLGKYDJRAdU7C2Wcj8ijyiFLqmEUidRtpRNF0DSu/KciUACU7KRtqrfymH
+ 2IB8n2Hrtnh3EF1xBIQUeR1uTL++9TRVJq8zZLGMVjyLQrLWXndRuHZOjlnLx4dQ22nqtC25H+q2p
+ snbmMB3Q==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:44380
+ helo=[192.168.69.116])
+ by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+ (Exim 4.99.1) (envelope-from <primoz.fiser@norik.com>)
+ id 1veAo9-0000000CrZj-0EdF; Fri, 09 Jan 2026 12:37:32 +0100
+Message-ID: <efb435fe-3d6e-49de-a903-678051c0f9a6@norik.com>
+Date: Fri, 9 Jan 2026 12:37:31 +0100
 MIME-Version: 1.0
-References: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
- <20260108-topic-musb-probing-v2026-01-v2-3-2a47c6e0e73a@baylibre.com>
-In-Reply-To: <20260108-topic-musb-probing-v2026-01-v2-3-2a47c6e0e73a@baylibre.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Jan 2026 04:36:16 -0700
-X-Gm-Features: AZwV_Qgrl4x7Eu9KvXMUu7P3JGcRXg7jjKFCO1K2cSu-lSUpykdHYA5Lk3IsZ-I
-Message-ID: <CAFLszTgEbo8c7_wm4DRZ-R36Pj_R6YsYx+4Ug_-SGv9zUSz0_w@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] dm: core: Support multiple drivers with same
- compatibles
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 11/13] misc: ele_api: Add Voltage change start and finish
+ APIs
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260108-imx-update-v1-0-0d5921c575bb@nxp.com>
+ <20260108-imx-update-v1-11-0d5921c575bb@nxp.com>
+Content-Language: en-US
+From: Primoz Fiser <primoz.fiser@norik.com>
+Autocrypt: addr=primoz.fiser@norik.com; keydata=
+ xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
+ JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
+ ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
+ gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
+ jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
+ 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
+ TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
+ AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
+Organization: Norik systems d.o.o.
+In-Reply-To: <20260108-imx-update-v1-11-0d5921c575bb@nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,133 +99,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+Hi Peng,
 
-On Thu, 8 Jan 2026 at 04:17, Markus Schneider-Pargmann (TI.com)
-<msp@baylibre.com> wrote:
->
-> Currently once a driver matched the compatible string of a device, other
-> drivers are ignored. If the first matching driver returns -ENODEV, no
-> other possibly matching drivers are iterated with that compatible of the
-> device. Instead the next compatible in the list of compatibles is
-> selected, assuming only one driver matches one compatible at a time.
->
-> To be able to use the bind function to return -ENODEV and continue
-> matching other drivers with the same compatible, move the for loop a bit
-> to continue the for loop after -ENODEV was returned. The loop had to be
-> adjusted a bit to still support the 'drv' argument properly. Some
-> simplifications where done as well.
->
-> This is required for ti-musb-host and ti-musb-peripheral which both
-> match on the same device but differ based on the dr_mode DT property.
-> Depending on this property, the driver is either UCLASS_USB or
-> UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
-> function and returning -ENODEV the other driver can probe instead.
->
-> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+On 8. 01. 26 12:06, Peng Fan (OSS) wrote:
+> From: Ye Li <ye.li@nxp.com>
+> 
+> On GDET enabled part, need to call voltage change start and finish
+
+Just a question, is this some special part or a regular i.MX93?
+
+How or where do you enable Glitch detection?
+
+Thanks,
+BR,
+Primoz
+
+
+> APIs when adjust the voltage more than 100mv. Otherwise GDET will be
+> triggered and system is reset
+> 
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
->  drivers/core/lists.c | 65 ++++++++++++++++++++++++++--------------------------
->  1 file changed, 33 insertions(+), 32 deletions(-)
->
-
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-
-I would like to see some discussion about performance here. It seems
-that all you are doing here is not exiting the loop early, so the
-impact should be small?
-
-> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
-> index 9d1ca38212ee7f53b8894f964f096611c8ec20a5..3d9f9bc93954efdd624dddb1833f3a855c3c28de 100644
-> --- a/drivers/core/lists.c
-> +++ b/drivers/core/lists.c
-> @@ -235,50 +235,51 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
->                 log_debug("   - attempt to match compatible string '%s'\n",
->                           compat);
->
-> -               id = NULL;
->                 for (entry = driver; entry != driver + n_ents; entry++) {
-> +                       /* Search for drivers with matching drv or existing of_match */
->                         if (drv) {
->                                 if (drv != entry)
->                                         continue;
-> -                               if (!entry->of_match)
-> -                                       break;
-> +                       } else if (!entry->of_match) {
-> +                               continue;
->                         }
-> -                       ret = driver_check_compatible(entry->of_match, &id,
-> -                                                     compat);
-> -                       if (!ret)
-> -                               break;
-> -               }
-> -               if (entry == driver + n_ents)
-> -                       continue;
->
-> -               if (pre_reloc_only) {
-> -                       if (!ofnode_pre_reloc(node) &&
-> -                           !(entry->flags & DM_FLAG_PRE_RELOC)) {
-> -                               log_debug("Skipping device pre-relocation\n");
-> -                               return 0;
-> +                       id = NULL;
-> +                       if (entry->of_match) {
-> +                               ret = driver_check_compatible(entry->of_match, &id,
-> +                                                             compat);
-> +                               if (ret)
-> +                                       continue;
-> +                               log_debug("   - found match at driver '%s' for '%s'\n",
-> +                                         entry->name, id->compatible);
-> +                       }
+>  arch/arm/include/asm/mach-imx/ele_api.h |  4 +++
+>  drivers/misc/imx_ele/ele_api.c          | 50 +++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
+> 
+> diff --git a/arch/arm/include/asm/mach-imx/ele_api.h b/arch/arm/include/asm/mach-imx/ele_api.h
+> index 64b243dcaaa..4e1afc42bd8 100644
+> --- a/arch/arm/include/asm/mach-imx/ele_api.h
+> +++ b/arch/arm/include/asm/mach-imx/ele_api.h
+> @@ -14,6 +14,8 @@
+>  #define ELE_PING_REQ (0x01)
+>  #define ELE_FW_AUTH_REQ (0x02)
+>  #define ELE_RESTART_RST_TIMER_REQ (0x04)
+> +#define ELE_VOLT_CHANGE_START_REQ (0x12)
+> +#define ELE_VOLT_CHANGE_FINISH_REQ (0x13)
+>  #define ELE_DUMP_DEBUG_BUFFER_REQ (0x21)
+>  #define ELE_OEM_CNTN_AUTH_REQ (0x87)
+>  #define ELE_VERIFY_IMAGE_REQ (0x88)
+> @@ -160,4 +162,6 @@ int ele_return_lifecycle_update(ulong signed_msg_blk, u32 *response);
+>  int ele_start_rng(void);
+>  int ele_write_shadow_fuse(u32 fuse_id, u32 fuse_val, u32 *response);
+>  int ele_read_shadow_fuse(u32 fuse_id, u32 *fuse_val, u32 *response);
+> +int ele_volt_change_start_req(void);
+> +int ele_volt_change_finish_req(void);
+>  #endif
+> diff --git a/drivers/misc/imx_ele/ele_api.c b/drivers/misc/imx_ele/ele_api.c
+> index 661f70cf870..e7aee0fcef1 100644
+> --- a/drivers/misc/imx_ele/ele_api.c
+> +++ b/drivers/misc/imx_ele/ele_api.c
+> @@ -794,3 +794,53 @@ int ele_generate_dek_blob(u32 key_id, u32 src_paddr, u32 dst_paddr, u32 max_outp
+>  
+>  	return ret;
+>  }
 > +
-> +                       if (pre_reloc_only) {
-> +                               if (!ofnode_pre_reloc(node) &&
-> +                                   !(entry->flags & DM_FLAG_PRE_RELOC)) {
-> +                                       log_debug("   - Skipping device pre-relocation\n");
-> +                                       return 0;
-> +                               }
-> +                       }
+> +int ele_volt_change_start_req(void)
+> +{
+> +	struct udevice *dev = gd->arch.ele_dev;
+> +	int size = sizeof(struct ele_msg);
+> +	struct ele_msg msg = {};
+> +	int ret;
 > +
-> +                       ret = device_bind_with_driver_data(parent, entry, name,
-> +                                                          id ? id->data : 0, node,
-> +                                                          &dev);
-> +                       if (!drv && ret == -ENODEV) {
-> +                               log_debug("   - Driver '%s' refuses to bind\n", entry->name);
-> +                               continue;
-> +                       }
-> +                       if (ret) {
-> +                               dm_warn("Error binding driver '%s': %d\n", entry->name,
-> +                                       ret);
-> +                               return log_msg_ret("bind", ret);
->                         }
-> -               }
->
-> -               if (entry->of_match)
-> -                       log_debug("   - found match at driver '%s' for '%s'\n",
-> -                                 entry->name, id->compatible);
-> -               ret = device_bind_with_driver_data(parent, entry, name,
-> -                                                  id ? id->data : 0, node,
-> -                                                  &dev);
-> -               if (ret == -ENODEV) {
-> -                       log_debug("Driver '%s' refuses to bind\n", entry->name);
-> -                       continue;
-> -               }
-> -               if (ret) {
-> -                       dm_warn("Error binding driver '%s': %d\n", entry->name,
-> -                               ret);
-> -                       return log_msg_ret("bind", ret);
-> -               } else {
->                         if (devp)
->                                 *devp = dev;
+> +	if (!dev) {
+> +		printf("ele dev is not initialized\n");
+> +		return -ENODEV;
+> +	}
 > +
->                         return 0;
->                 }
-> -               break;
->         }
->
->         if (ret != -ENODEV)
->
-> --
-> 2.51.0
->
+> +	msg.version = ELE_VERSION;
+> +	msg.tag = ELE_CMD_TAG;
+> +	msg.size = 1;
+> +	msg.command = ELE_VOLT_CHANGE_START_REQ;
+> +
+> +	ret = misc_call(dev, false, &msg, size, &msg, size);
+> +	if (ret)
+> +		printf("Error: %s: ret %d, response 0x%x\n",
+> +		       __func__, ret, msg.data[0]);
+> +
+> +	return ret;
+> +}
+> +
+> +int ele_volt_change_finish_req(void)
+> +{
+> +	struct udevice *dev = gd->arch.ele_dev;
+> +	int size = sizeof(struct ele_msg);
+> +	struct ele_msg msg = {};
+> +	int ret;
+> +
+> +	if (!dev) {
+> +		printf("ele dev is not initialized\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	msg.version = ELE_VERSION;
+> +	msg.tag = ELE_CMD_TAG;
+> +	msg.size = 1;
+> +	msg.command = ELE_VOLT_CHANGE_FINISH_REQ;
+> +
+> +	ret = misc_call(dev, false, &msg, size, &msg, size);
+> +	if (ret)
+> +		printf("Error: %s: ret %d, response 0x%x\n",
+> +		       __func__, ret, msg.data[0]);
+> +
+> +	return ret;
+> +}
+> 
 
-Regards,
-Simon
+-- 
+Primoz Fiser
+phone: +386-41-390-545
+email: primoz.fiser@norik.com
+--
+Norik systems d.o.o.
+Your embedded software partner
+Slovenia, EU
+phone: +386-41-540-545
+email: info@norik.com
+
