@@ -4,85 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2ACD16817
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:37:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9609ED16818
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:39:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B10DF8435C;
-	Fri,  9 Jan 2026 12:37:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 278E98433B;
+	Fri,  9 Jan 2026 12:39:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="FV1t0pNs";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="KY3ga8Wm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD55284332; Fri,  9 Jan 2026 12:37:34 +0100 (CET)
-Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+ id B537284332; Fri,  9 Jan 2026 12:39:06 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77FEC8435C
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:37:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79B4384248
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:39:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E40+MEcWNmPMTvycSrpzydhpZTJwdRXZPehuOpd0+iA=; b=FV1t0pNs6rnvNA+vBnhqgBE0li
- 6UwgTqg9agbDuJ2w1koY60GZLFgpvKmbV43CT/4MWeAgnyS/5qpMHGy88+jRGRM9rBbjTRxSrPHOg
- nqb9DifPzs98x92aSiuIaHmS0r/Prv5Wl4eSFxvcC/1jfWIGLox6YFDqKdSmNoALG1jkZ8O8u4YT6
- aUAolvEhF0FDZXSXo0rLLGKYDJRAdU7C2Wcj8ijyiFLqmEUidRtpRNF0DSu/KciUACU7KRtqrfymH
- 2IB8n2Hrtnh3EF1xBIQUeR1uTL++9TRVJq8zZLGMVjyLQrLWXndRuHZOjlnLx4dQ22nqtC25H+q2p
- snbmMB3Q==;
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:44380
- helo=[192.168.69.116])
- by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
- (Exim 4.99.1) (envelope-from <primoz.fiser@norik.com>)
- id 1veAo9-0000000CrZj-0EdF; Fri, 09 Jan 2026 12:37:32 +0100
-Message-ID: <efb435fe-3d6e-49de-a903-678051c0f9a6@norik.com>
-Date: Fri, 9 Jan 2026 12:37:31 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wuhlwQQ2IXNRd7g3n9VEx1TpDRGoizTwUDDMAIaUBaRgm0n9iu1VmDpve1YumaQA/IkMxoiSAC+yioLa/ydX3MsiVxWbkKojwTHM1mUtelu+S8WKcRP/Tmp+BpwbK+xZnT7AOP0AZMiak8/4qBi351BlNavIC5gkaF13yrI00dq9mmcoK8+aFilwj7K04kxja2flcu3iuZra868HfSBiOtCbztTKu608rP0OkWAqi7ORok9XwvVMD1roKVyd26Ya9dh+y33Il8+wpdHxIE/ryrtVscDtDwKPQztkybERrGgMpUzT1IRBRXiCdeNeUpJbNfk1hQLX+DGQWv0xTuQGSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Swfyue8U2pt/hSNCE/XiZ/IWQlSOhB8ubxU/sMH1yY0=;
+ b=fFWJTfJ3ccV8xtTm4J48/jUcrZ8uJ/DVro+nVbwbhNOu6OFLJHnhlqujWcBlByyfc7q7CqzClPrCfscP3uw9+14IVoHh0XVmOPKIH3ys4OH/RoQ40P+VFNQxLU+fjojcQJpLHTVrugAQgOvBOBDWIKSr01mOXFOUtJoV/2hDH0+EltYr/TdkTJh2zCt7hUXGMtumhCnNLaEqPZ3HqoihVK9GWW6yix2BK6+tE5gYb6GwEc8G6oYjGhxJYYMf8/doZbplmOphwxzIFwZNjIRWqwmkEL0kzVLuXWK5rLv67s8M6UlYCbXxKrjBi9ISP99iV53C/AU1bpCKvD5QTqWfxg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Swfyue8U2pt/hSNCE/XiZ/IWQlSOhB8ubxU/sMH1yY0=;
+ b=KY3ga8WmTo71MLCZRmwKn17bCIx3o0VQSBpIG366Uw+CKKm2pCI5zp49+AKMv2kkuKj3npYENthghI5Uvu0ftWCICXrUw4a4wR0hBNLcUkspYBTt1R7YvkYf1LDJ7dkTsAGlj0SjoV9JMDThXBw4N1KnNePs7vUbz4z/EPxQBI4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by DB8PR04MB6841.eurprd04.prod.outlook.com (2603:10a6:10:116::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.4; Fri, 9 Jan
+ 2026 11:39:02 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9499.004; Fri, 9 Jan 2026
+ 11:39:02 +0000
+Message-ID: <cc2e746e-9864-4fbe-aec3-2419667dab38@cherry.de>
+Date: Fri, 9 Jan 2026 12:37:56 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/13] misc: ele_api: Add Voltage change start and finish
- APIs
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260108-imx-update-v1-0-0d5921c575bb@nxp.com>
- <20260108-imx-update-v1-11-0d5921c575bb@nxp.com>
+Subject: Re: [PATCH next v2 4/4] boot/fit: print all configuration node
+ compatibles
+To: Simon Glass <sjg@chromium.org>, Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Anton Moryakov <ant.v.moryakov@gmail.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>
+References: <20251203-fit-compat-v2-0-0fea56f23809@cherry.de>
+ <20251203-fit-compat-v2-4-0fea56f23809@cherry.de>
+ <CAFLszTjqZhQVP0m8QUUKsJbJLZo4VZmH3+3sdVYn267EthAKzg@mail.gmail.com>
 Content-Language: en-US
-From: Primoz Fiser <primoz.fiser@norik.com>
-Autocrypt: addr=primoz.fiser@norik.com; keydata=
- xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
- JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
- ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
- gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
- jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
- 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
- TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
- AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
-Organization: Norik systems d.o.o.
-In-Reply-To: <20260108-imx-update-v1-11-0d5921c575bb@nxp.com>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAFLszTjqZhQVP0m8QUUKsJbJLZo4VZmH3+3sdVYn267EthAKzg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cp2.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
-X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+X-ClientProxiedBy: VI1PR10CA0110.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:803:28::39) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DB8PR04MB6841:EE_
+X-MS-Office365-Filtering-Correlation-Id: 91cdffe7-ee22-48e1-ec51-08de4f73afa8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VTdDSTdyQnozWm1IN09oOElPZFlpZnNEZTFGcUNwSTJxN2hCQkVNaEJ4YjFp?=
+ =?utf-8?B?NldRSURDLzU4UXErMTdPMmp4SmRvM1lqaTdJN0pRb0dNOU5tQy8zNHZXb3ZO?=
+ =?utf-8?B?d0J1NWg2ZlErZklPUUpUbkpnZmREd29Kc040WDVHM1laMnJKZFkzQ1MyN2Q0?=
+ =?utf-8?B?RG4wWXpKQW9QRDI4d05wWTlXWStzSDJPSldXTUh4K0sxNGZjU3hLc3JPMHk0?=
+ =?utf-8?B?SmxiMStTQzhYVCtzbmNsNDA3VnJDQmZNYmU0WXNTREtoaUFnU1pYOUhNZGFj?=
+ =?utf-8?B?MUpMSmNxQnJrVTJqaStNS2sxdyt5K09aRS9Ja2FMOXRha2JZN3VLU3ZjclVp?=
+ =?utf-8?B?eXhJaCtuNE5HZWE1Y1ZrVVV4S2V0ZTJ6STRva21CYkNFYkt4QVZ6R25sQmts?=
+ =?utf-8?B?anhuMDdUaExDR3dJZWtXbStjL0lDVFN3MFVRWkEyb2c4T1E3UTB2ZWx5amM1?=
+ =?utf-8?B?QVRJUUt3c1N3TzhlbjA5c2tnZ1NkOTdhcjkzekt3ekRIQW9ZYlZVNHpoc0lR?=
+ =?utf-8?B?OWxpaVk3bldNT2xNUFF0a09vTENuVTFvU1paTkNUQ3JQTml0RzRMakxxU09T?=
+ =?utf-8?B?OU4yc3huVkJwZitMOWM0cjZ1TjJNejFwR1RITWZjc3NHTVprbG80UzkvUy9l?=
+ =?utf-8?B?VTM0Y0c5dWZvYTZMWGxlVTVWdldWZjVjR3ZPZ2UvaExIUk9sbUduZGV3VURI?=
+ =?utf-8?B?cTg1S0NEaXVuVVRSS1h5a2hRcFFlZFFhNnIxL3Rlb3dmRmFsSTVBMU5YTFZS?=
+ =?utf-8?B?QUhtTUZNTzBENjYzbGVBc1pQRWl4Wm94RFFraVp2dHJEVUhHaCswcDFEeWhp?=
+ =?utf-8?B?L1U0ck1YN2V1M1VmVDFvMHgzUXBOazB1Tmplc1VBYXp2SnRwb3M4UHk1WTFl?=
+ =?utf-8?B?cnhyaGRFbGZxM01IYlV0U05GRkEwUk5RQ2dPUkE5YWJqYTl6Z2hjSXpKR29o?=
+ =?utf-8?B?UkdDSUVGYjUyY1RYS1NNeTdLVnNjb1N5cjJ4VXNsMW1zSThBQkhtbTFPNzFn?=
+ =?utf-8?B?UmdQTzlwRFNJSlFTYWJmOG9kN0syUWprUEtTR3hmdDJ6SUQ2MGNYUXZGZEla?=
+ =?utf-8?B?SndjTDVDV2Z1cU0wOUgrTmtBK2pqOVFVNTkyWUNCb0h2b1UyUDhoWDc0NGN1?=
+ =?utf-8?B?THdkN2Q5MjdYU0gzUXNZTTFwTmhmZEdXSDFIbktyckhXOXVrMVhOWHd3Tzdm?=
+ =?utf-8?B?Z05QYitQTi9iNW5rMGZPaW1UOFozVURjZnVMTHdQTjdjSkhMZHJZRExQQXdp?=
+ =?utf-8?B?cWtUV2tJSGNSWEt1WTM5bHNuTzh3ajlCYWdscWczRVR5Rzg4ZFJNM3FNWXBZ?=
+ =?utf-8?B?azg5R1JlYTJHRHNMQWxINTIrbjZNZFpJWldiNGU4aEZNTm9DT2o1b1hjZkU0?=
+ =?utf-8?B?a2ZKczBqdHFsc081bnZpY3l2UWUydHpqVFpKR2VpYkhkeXMvZ0FQTjFFZDFw?=
+ =?utf-8?B?OWRNMCtoeExBUnZsaXhXUXVld1pYd1lUbCtGVFFHcnVsSTNjVmZ6cTZDOVVp?=
+ =?utf-8?B?Wk1mUVlxNTZRZWw4UWZXV0htVWhhK0NUMXh5MEpobDZTaVRvTHhndGVrRUhO?=
+ =?utf-8?B?OFpBNm54Zk11WnJINEV0Z1FsT3NUdE9oVFlvWStjRENjUEp5TnZCQml4QVJE?=
+ =?utf-8?B?dGVhVGZnRS9SVFdCZ2JpUlI4QVVjb0pUNjNNTFUvV0dUK3I2NnEzYVh2Vnh3?=
+ =?utf-8?B?K1U3d3VPRXlOYW16ZHhkaXpaY2hHelNnZnZjMTk1V1NnU3poOUhVMitkNXVS?=
+ =?utf-8?B?dEw1ak5DMzhkSDQySkxpRHpmNnZBTmlpcVBGWmROVDd4SnVVR09kWjRqU3hv?=
+ =?utf-8?B?VXArckRJQXVpb1FUcG5PMXFXN2xEV2ZsL2ZBbzFMeVRJaEZkaUdlZEg4d2VS?=
+ =?utf-8?B?N2lyYzNqVFFyd01qL1htN1JWc1cyZVdvVTkvMG1ZU1FQVkFMTWl5M1lnem5j?=
+ =?utf-8?Q?hubuKapUVfdokhSE5oJHUc256zjX8HEP?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V0gyODNHRm5mTFdqTGU2T2xGRHM2NU1NWEt6ZlJLZ1NUNGpGVDhmK0Qxam94?=
+ =?utf-8?B?NjRVSXY0R0RxTGdnend0TERWWi9FKzEwUkZ0eUhJZWhhZ3BSaUpoU1Q1YVF2?=
+ =?utf-8?B?Vi80U3Z6dThWS0tVTW1TR0FtUVYwMzFhbVBmeG1RYlVKL3ZIZkM5YjNJVUsw?=
+ =?utf-8?B?SjhEWnZtcHRHSlZZR1JQdFFNbzNQMk1RYXRwOG1QWnFOVWtvNlk0RC92MkJN?=
+ =?utf-8?B?cUtvSkU0bk1PMGl5bk1SMUVMZnN0dzdOb20waXBtQzhpbks3bVN4SkZoZCtY?=
+ =?utf-8?B?Zi9IakpnUEVFNUNyWktCNFFuMUxoemFBb28vcGE4cXdudnpkZkRzb05IdGdR?=
+ =?utf-8?B?elBNZHNWQUpzZTR5NnVrQVdvbmFqTXgvVFVBT0xFQ2ZUMEsrbWoxQWFiWVRo?=
+ =?utf-8?B?amdRVnJMTnY5bzJkV0x3UVc2bWRLR3VDcFUwRSs4U2xGWVdEQWxmTmV2Njd4?=
+ =?utf-8?B?SVE2UldZZThoWjV6VXNyeE83MjFMc3hrN2x0NXhNQmlaTkkyQzc0MFo0eXZj?=
+ =?utf-8?B?RzRvZFhOTlhBNW9tejJaNkVTZXg2RXlVQmlscXFudFhsQ0h4dlBQdTJ1YkNs?=
+ =?utf-8?B?SmwxbmFlL3NQS0xBYlFHeStHREd3Z3ZKQ1VGWUl0MEJWemZsNVFxNFNPeTl1?=
+ =?utf-8?B?elVocWY5MklleExkdGVJYkJ5dkR2TldYUVFtSmZUNWdzVEkrc2JsenVVMGpw?=
+ =?utf-8?B?NjVLNkp5S0h6MnN1VUdCaEtFYzBhcGlrWjhnMGdtZmVWS0ZjeFQ0WUNtOUI1?=
+ =?utf-8?B?b1Z6UHY1WWNhOVhFdWtaYzBXU3A5ZXB2RC80N1BZSjZVK0x0bUttcmFnd3Nk?=
+ =?utf-8?B?QUROcUp6UWZsY3ZQeVZ2WFNBNXRSVVhOTW9QZU9EZmhaclJiY0JIY2p2NENZ?=
+ =?utf-8?B?MDF6a3dTQmhuN0hSeUd5Ui9IcGNIbytRVG0wKy9LazlrRVp3NTNuU2ZuS1FO?=
+ =?utf-8?B?QXFGc3g2S1ZYcXh3UUQyS2xkYjZ5Z3I4d0J0cXNLZGxxcnp1SGtJNHVQNVhx?=
+ =?utf-8?B?eVRtNXM2cjkwRUx1MSt5UE9jcll4Q09ZM3NROFhrYkxBV1FHb0hqSzk0Q2Uy?=
+ =?utf-8?B?am1zYkMzZ2Jpa1lCMlgzamVUMzI2MTVBVzZlTW5jeGFWYnhmQmwxY3QxQVEr?=
+ =?utf-8?B?MTdDRW42U1IxSUUwVEdCZXd1aFVTUjF2MDBiOW5rVmJnNm5FMTNVM3ZSbVlH?=
+ =?utf-8?B?elNsWTlhT2tzbFhZbFpqVTlEQ1JReG1LUTVCZ0FETTBWMDJzOEZUTGw5ckdr?=
+ =?utf-8?B?Mklaay9XakFabjYvOE92Y0RZMVc1RlNHU3hZalc4SjRVZUpVNHROK0p1Qyt5?=
+ =?utf-8?B?TzdKVEFIV2JGZmR6cGpjb1AxOS9aUFNtRmdiSCtiQmtJeFRjZE91OWp3dVpU?=
+ =?utf-8?B?dXIyaW9IZ2VlekFvOWNXUzk2cWJIZUlwYnJsRkRjb2xmOFlMWTNkVjBXUnZz?=
+ =?utf-8?B?TGhhTityK2c3dmFTNG85eUhySWMxaUdtQ3FsNkxuOThWVHhmVXFiSFh1SzBL?=
+ =?utf-8?B?VUkzelE1OWFpcEhYa0hNRDNTOXczekxVQWJ3SXY4SE5tS3JFa1NjcjZ5TFFN?=
+ =?utf-8?B?N3BwRHQ4TXhBSE9DUDMvaXhHTGhDTHQ4WWc0aHFKY3VPVm5oQVdNVmR2Rmt1?=
+ =?utf-8?B?aVFVYTllNXlOZEt3U3lHcVFCenhHSVBtWlVsbG81UFBqbTBNaUFjTFpjWUhq?=
+ =?utf-8?B?RHBHQWlrOEhxTDJ4YUFxOWtkdGlwR29URWNwU0pMbldOemZOR0taT1lYckhI?=
+ =?utf-8?B?U04rVk5ScGI0aGlmVWxEdlRrTFlLR3NpY0hhVjRGaG5jUFg1UllOWjU0YUlN?=
+ =?utf-8?B?K0tVYkhlNlB6czl3ME55ZXVrSEFHY25tVFJYb3NXeDJ1VEplcmg4ZVVEcWZl?=
+ =?utf-8?B?UlF4TEJ5em9Ec0RHQTBMdFJEY01yL2VJSzYzTTUycXB2NWsydU53djkyQlVT?=
+ =?utf-8?B?ZWtIb0oxU3VSUkxQWDd1Y1ZLZWNwWHU0WkwweUlwU1h1UXloZkR0WmtzSUlS?=
+ =?utf-8?B?Z2x6c2ZtQ2RkaHJJT3ZzaUE3aXFNWUwxbldPZWhXVGlsSDQ2TDB1WnZQZkEx?=
+ =?utf-8?B?aFRRQ2ZRQ3FTSlpRUzZDSlpoZUN5b3JFS3QxbWFscmVQNkluWHd6Vm5sQVhO?=
+ =?utf-8?B?QVZ5cVVhWUVCR0ZTTTAvK2pqYzl3R1lGc0tSTlpBaGhnVWN0c1phdXBxQW5G?=
+ =?utf-8?B?RHNHTURmS1BYRUZLSFZXVm14RkRpUStWNXduQUVocmVRSnp4blBvZUc5ZlFw?=
+ =?utf-8?B?ajMvY3FHdlJpNnFQWFp3ZXNOMmhsMjZoNnVXK2QwcHE5MkVCQTQwVk11WEdp?=
+ =?utf-8?B?aGQvdkd4NFRBdFF2MW16YnMvZTBFRzBoWk51bEtGSlJKWG1sTEo2a3RXOW50?=
+ =?utf-8?Q?LyYwU8+Pm+yoRAPg=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91cdffe7-ee22-48e1-ec51-08de4f73afa8
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2026 11:39:02.3916 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eIDHzquU2v+lUz8M121kexjaiTtXfBQ6Noq4kPvT1UMADZi9vNhlOmx/al0b+LhfqTodFgI7UVUL7orLHpdxFVbm33kGdt2W2My4hpQwZHw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6841
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,121 +187,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Simon,
 
-On 8. 01. 26 12:06, Peng Fan (OSS) wrote:
-> From: Ye Li <ye.li@nxp.com>
+On 1/9/26 12:35 PM, Simon Glass wrote:
+> On Wed, 3 Dec 2025 at 09:19, Quentin Schulz <foss+uboot@0leil.net> wrote:
+[...]
 > 
-> On GDET enabled part, need to call voltage change start and finish
-
-Just a question, is this some special part or a regular i.MX93?
-
-How or where do you enable Glitch detection?
-
-Thanks,
-BR,
-Primoz
-
-
-> APIs when adjust the voltage more than 100mv. Otherwise GDET will be
-> triggered and system is reset
-> 
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  arch/arm/include/asm/mach-imx/ele_api.h |  4 +++
->  drivers/misc/imx_ele/ele_api.c          | 50 +++++++++++++++++++++++++++++++++
->  2 files changed, 54 insertions(+)
-> 
-> diff --git a/arch/arm/include/asm/mach-imx/ele_api.h b/arch/arm/include/asm/mach-imx/ele_api.h
-> index 64b243dcaaa..4e1afc42bd8 100644
-> --- a/arch/arm/include/asm/mach-imx/ele_api.h
-> +++ b/arch/arm/include/asm/mach-imx/ele_api.h
-> @@ -14,6 +14,8 @@
->  #define ELE_PING_REQ (0x01)
->  #define ELE_FW_AUTH_REQ (0x02)
->  #define ELE_RESTART_RST_TIMER_REQ (0x04)
-> +#define ELE_VOLT_CHANGE_START_REQ (0x12)
-> +#define ELE_VOLT_CHANGE_FINISH_REQ (0x13)
->  #define ELE_DUMP_DEBUG_BUFFER_REQ (0x21)
->  #define ELE_OEM_CNTN_AUTH_REQ (0x87)
->  #define ELE_VERIFY_IMAGE_REQ (0x88)
-> @@ -160,4 +162,6 @@ int ele_return_lifecycle_update(ulong signed_msg_blk, u32 *response);
->  int ele_start_rng(void);
->  int ele_write_shadow_fuse(u32 fuse_id, u32 fuse_val, u32 *response);
->  int ele_read_shadow_fuse(u32 fuse_id, u32 *fuse_val, u32 *response);
-> +int ele_volt_change_start_req(void);
-> +int ele_volt_change_finish_req(void);
->  #endif
-> diff --git a/drivers/misc/imx_ele/ele_api.c b/drivers/misc/imx_ele/ele_api.c
-> index 661f70cf870..e7aee0fcef1 100644
-> --- a/drivers/misc/imx_ele/ele_api.c
-> +++ b/drivers/misc/imx_ele/ele_api.c
-> @@ -794,3 +794,53 @@ int ele_generate_dek_blob(u32 key_id, u32 src_paddr, u32 dst_paddr, u32 max_outp
->  
->  	return ret;
->  }
-> +
-> +int ele_volt_change_start_req(void)
-> +{
-> +	struct udevice *dev = gd->arch.ele_dev;
-> +	int size = sizeof(struct ele_msg);
-> +	struct ele_msg msg = {};
-> +	int ret;
-> +
-> +	if (!dev) {
-> +		printf("ele dev is not initialized\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	msg.version = ELE_VERSION;
-> +	msg.tag = ELE_CMD_TAG;
-> +	msg.size = 1;
-> +	msg.command = ELE_VOLT_CHANGE_START_REQ;
-> +
-> +	ret = misc_call(dev, false, &msg, size, &msg, size);
-> +	if (ret)
-> +		printf("Error: %s: ret %d, response 0x%x\n",
-> +		       __func__, ret, msg.data[0]);
-> +
-> +	return ret;
-> +}
-> +
-> +int ele_volt_change_finish_req(void)
-> +{
-> +	struct udevice *dev = gd->arch.ele_dev;
-> +	int size = sizeof(struct ele_msg);
-> +	struct ele_msg msg = {};
-> +	int ret;
-> +
-> +	if (!dev) {
-> +		printf("ele dev is not initialized\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	msg.version = ELE_VERSION;
-> +	msg.tag = ELE_CMD_TAG;
-> +	msg.size = 1;
-> +	msg.command = ELE_VOLT_CHANGE_FINISH_REQ;
-> +
-> +	ret = misc_call(dev, false, &msg, size, &msg, size);
-> +	if (ret)
-> +		printf("Error: %s: ret %d, response 0x%x\n",
-> +		       __func__, ret, msg.data[0]);
-> +
-> +	return ret;
-> +}
+> Reviewed-by: Simon Glass <simon.glass@canonical.com>
 > 
 
--- 
-Primoz Fiser
-phone: +386-41-390-545
-email: primoz.fiser@norik.com
---
-Norik systems d.o.o.
-Your embedded software partner
-Slovenia, EU
-phone: +386-41-540-545
-email: info@norik.com
+Thanks!
 
+> Concept has:
+> 
+> 40fd6b04b9f boot: Show compatible strings with FIT information
+
+? I don't understand what you mean?
+
+Cheers,
+Quentin
