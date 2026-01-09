@@ -4,105 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C27DD26D7A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 17:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF86BD26D7A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 17:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E26AF84206;
-	Fri,  9 Jan 2026 18:20:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id 664B584379;
+	Fri,  9 Jan 2026 18:29:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="j1hxaGBj";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="zL9IbEjU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KdY08Xbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BE1084248; Fri,  9 Jan 2026 18:20:39 +0100 (CET)
-Received: from fhigh-a1-smtp.messagingengine.com
- (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 83D4684379; Fri,  9 Jan 2026 18:29:11 +0100 (CET)
+Received: from mail-oo1-xc41.google.com (mail-oo1-xc41.google.com
+ [IPv6:2607:f8b0:4864:20::c41])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3C7683C72
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 18:20:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D60B484377
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 18:29:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-12.internal (phl-compute-12.internal [10.202.2.52])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 6C7771400153;
- Fri,  9 Jan 2026 12:20:34 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-12.internal (MEProxy); Fri, 09 Jan 2026 12:20:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1767979234; x=1768065634; bh=AV
- ugb64ELLFxDJEs3KstbvdNXX80JkrQFafAxUlJSCU=; b=j1hxaGBjnxSdBQAVxY
- K9izHnpCdmXDimi1wKczod4UdTc/wGAHO9DkHfHImWApiYyOpkvLqexBcUqsFHsx
- +PIBiKfXcBxP/zSw+CvmZW8atcgSKheOFPVeby/RSFdPJuB5jsV6aFHAqABgcrUR
- hD3gKs40eWAbd9rmj+sh7ELrV6r6UM5ub8CZYzf7839cKNAHfv3w5IIfk7/gf1E9
- 6oVMSoIzn+tW5kyCrPkUu1UqYYsFm4nLjFunaMywWzWVFeshFEmE3gl+nGrj95Ms
- s0z1i4rvh3hf+t+SXhBV8yPaieqlNQhkmbfV2nHsUlARN3/RLHWR7DpF6psRQ0bC
- 1HgA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1767979234; x=1768065634; bh=AVugb64ELLFxDJEs3KstbvdNXX80
- JkrQFafAxUlJSCU=; b=zL9IbEjUMml7vmXQY4qSlRkWIl2nrQy0sAF3SLhS20kl
- TfWfF/F1Qc/OGTCsP1Hn831VVxA8SZfWSkInepOuRJncm1Ltv2auHqsJUQ/W5aqQ
- TuZSO3PaXZGkMAWDrY6iF4prtrDoJEn3uz6WE9o080jsqMDnI5CxdkhGv928+5PK
- fAAg5oo1b5hYGxHb7Ml4SHZ6QYJIplrlDB0yrJW2F6W2D4/X9QYKrQY0L9nJic8W
- tXSkY8hpzVFA7Y6oWz6/OpnBMalkeQQaWqyPZfyn9byF0mvs+//kLD4Ww+pmdm0M
- FcvY68T/5dqD6ziDpUU+YW5+ZU8JaVMzEaGObKjnTQ==
-X-ME-Sender: <xms:4jhhaT81b2LomLrRCvuqbWbBzcxjL7ToDA8EycURqeSOmiGxz5utDw>
- <xme:4jhhaRNw5RBAKGT8KwLNXo8a5Dbjlc1VNJ2NMhMyofM2FK10sx2B3H42vvYnCKLER
- 4tu9GQoeuxb6Ihb7YN2N5ov4eic60wLGWNE7yo5ZEN52VomDFRUw5U>
-X-ME-Received: <xmr:4jhhaRGH-1TxzVbXMdRxSOMGJlQBdZwO8x_S-fBQLGPyl5JzkQA1PC8bzqSRFKxRuQ_hmPFxQQurs8NaK9e1Mewejnj3QicCb8hsKQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddutdelfeelucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
- rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepfeehle
- dtheefteejfedvheetuedttdetleegudeuteejveetieefuedvfeffvdeinecuffhomhgr
- ihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
- epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohephedp
- mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgssh
- gurdhorhhgpdhrtghpthhtoheprghsrghhiheslhhishhtshdrlhhinhhugidruggvvhdp
- rhgtphhtthhopehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehuqdgsohhotheslh
- hishhtshdruggvnhigrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdr
- tghomh
-X-ME-Proxy: <xmx:4jhhafQhGnC90qaqBjWf59QbvlSiaKSdH0dMFYrLEu7BCPtJ7cRZ5A>
- <xmx:4jhhaev0ynC6ZW2BmB7I8wuENOeXXUCLfvQhWQchvfsP2d2SIh5EBg>
- <xmx:4jhhaXKriuiLCZdjTF1ZcL5i7UVA1pG0EZOL-Sslu8oy8iQsYlqY8A>
- <xmx:4jhhaTnG7soseUV9GS3SesGaHWlW3TLUsGdvH-sYCawmSF98rBLknA>
- <xmx:4jhhaQeINhU5DSgF_bSDKLSgHO20wnDiuN5JF5XWDdtN2g5LxVoJOShj>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 9 Jan 2026 12:20:33 -0500 (EST)
-From: Janne Grunau <j@jannau.net>
-Date: Fri, 09 Jan 2026 18:20:30 +0100
-Subject: [PATCH] configs: apple: Enable SMBIOS / sysinfo
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260109-apple-defconfig-smbios-v1-1-16477009c034@jannau.net>
-X-B4-Tracking: v=1; b=H4sIAN04YWkC/x2MQQqDMBAAvyJ7diFJbat+RXqIycYuaBKyIAXJ3
- w09DszMBUKFSWDuLih0snCKDXTfgfvauBGybwxGmZfSakKb807oKbgUA28ox8pJ0D7eo2qSHp4
- GWpwLBf79x8un1hthFoz+aAAAAA==
-X-Change-ID: 20260109-apple-defconfig-smbios-a37802021452
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc41.google.com with SMTP id
+ 006d021491bc7-659848c994bso2339854eaf.3
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 09:29:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767979747; x=1768584547; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mqykWzuZiwE1ks/IzyeJb/3txTeB1JtLAZZjtyaLBkA=;
+ b=KdY08XbnJz2JFol5QuE9oJ+Sp5+jMWsSbchSgyeHxgvU4HfI4E+XTLICma6nQxMfkS
+ Q+T7QC2ZAO1ldXg/VTBEHoZEjHPZwJqn/gKf9PxAW27rLI80kT0xTzldhpiN7r+K1dhZ
+ hBonub6cOE0MzxObQkV+XIzz/0LFjgnEx33OY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767979747; x=1768584547;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mqykWzuZiwE1ks/IzyeJb/3txTeB1JtLAZZjtyaLBkA=;
+ b=oYau8QUiDVTswu/ZZ02DWwTofGlr0M5aiY7G7CTUnpajuMbh4LZxWAyMGN4zfi5Ehz
+ GRCojC/v1db10UXcEDcLNG00n98X+GNJgT7emZjLlLeDpsjNsTlqdJN6ksjv6IOdJL/H
+ q9DMVH5lsTK2vLg7jFbMUQ77xPFmxrfUdecqXTGJxWjTqvFafDNoDKwBqFik/1/t/k7G
+ jPtShGFBHzv/fAvYg2H2BsX7tGO+KZe6YGpdhxhGxSIQqfyXyZqtFH2b8fTyJHDEEwEB
+ OOEPj06erywKS654GA8CQSXso8IGXsQO0jPhlPyDKbtaIPJl8hVYAsrJtmtKJ1hqKso/
+ 3icw==
+X-Gm-Message-State: AOJu0YyAI0Wewt34mZRDe/YyABJgGL6rQL1rVu82pkZzF495nbLoXcLr
+ JXBzx/voUwq82HbAkdcOLVNrm/VVcR3XGX4Q8RnTdrAve4NN+RDZX7NgKQhDZccWT8piIFwvkDx
+ PGCP7DEs=
+X-Gm-Gg: AY/fxX7oDIRi2KUJ/iWIAk49V7yvyL1RgIZjLYD83Jnkw1ROQ5whkrmU9e2iSahRbfW
+ nBywc91u+Q50bU/S9YAjs1k4l5Xl2PZLbmnfB1DNh9Qmrj8nfH6AlR7lCKYNUIUQKaExUYHrbgJ
+ ZubKWv34eHFw9IKoA8MNfeOnxrcA5Ju1CH7GkdySr7qku+XZBUXojMJeNkVL4SiD8inX5quuYYf
+ QFQVn5fMrfMIk3cs2nySLPC70UwXqI2NIRx7QvOgsPbc3xNY0WIEBbNakG3/rAa/p+Jt4iNUfW7
+ hITVxkcITWmJQqIimgpnG0SIk5YFp5jSWiu2c3clvQB92jhjFiL2Gr0evEbx72jR9kn0tcnDe9T
+ FSl7qu1uz9OBdAHNZAY0NL1wNAOMjnTLDhj/FErEDxeTQU1NyYsdeFTJJ3lN1SxDwUpj8BIQ4eD
+ SKwwMvX5uOS2WMpnKVgq1CBKtniFKAZjtq0H/6VYljIit5Z8IE+4vg0qAHb6+OTvqwUTUEtVCrn
+ I2SCpVoVCE+SGSz9kLglovsmlZqn3y9qeNXFXcNLA==
+X-Google-Smtp-Source: AGHT+IGVJ214c4UtswobutFplSEiQQBBGloSogO/lnhWPX1G6BSjBZiA1h5qr2LwcQyNNVXIfIC86w==
+X-Received: by 2002:a05:6820:814:b0:65c:f17f:d740 with SMTP id
+ 006d021491bc7-65f54ed4041mr5036634eaf.13.1767979747601; 
+ Fri, 09 Jan 2026 09:29:07 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65f48bbb3f1sm4471669eaf.4.2026.01.09.09.29.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Jan 2026 09:29:06 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
- asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1771; i=j@jannau.net;
- s=yk2025; h=from:subject:message-id;
- bh=kxn2hk+EJhSnbBbMmTcTBtKEj6KmDfgiSItOfKs1D0I=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhsxEiwffZE/l73cweyH3akbR7Z2pVw5dWfm51PdjoljxF
- pGlK9t1OkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAExkWykjw5PjK1pb2qolhNVY
- GieVaT5TW+WVv/RVlGfM/ZpHchr8ixn+Z6TkGj9q9F5vF560yre8JNZvlnzk0efqtk94S3yu75z
- ADQA=
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+Cc: E Shattow <e@freeshell.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH] doc/develop/process.rst: Expand on the Custodian workflow
+Date: Fri,  9 Jan 2026 11:29:05 -0600
+Message-ID: <20260109172905.1446923-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,51 +95,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable verbose SMBIOS table generation so that user space applications
-can use the SMBIOS table to provide details about the system. The
-desired information is chassis-type to determine whether the system is
-laptop.
-Adding the chassis-type property is proposed for the upstream device
-trees in the Linux kernel in [1].
+As seen with a recent pull request, there have been implicit assumptions
+about how much custodians can change patches before applying and merging
+them. This has lead to an unfortunate situation with a contributor being
+understandably upset about the changes.
 
-Link: https://lore.kernel.org/asahi/20260109-apple-dt-usb-c-atc-dwc3-v1-0-ce0e92c1a016@jannau.net/ [1]
-Signed-off-by: Janne Grunau <j@jannau.net>
+To avoid this in the future, document a few things:
+- Non-trivial changes to make something apply need to have at least
+  [name: what] in the commit message.
+- Only trivial and obviously correct changes can be made by the
+  custodian, and ideally this is done in a merge commit and not the
+  patch itself.
+- It is the responsibility of the custodian to gather relevant tags that
+  have been provided by the community.
+
+Link: https://lore.kernel.org/u-boot/1faefbf2-e8b0-4c94-85f5-025355915e0d@gmx.de/
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-I do not plan to update u-boot's in-tree device trees. The Linux device
-trees have almost reached feature parity. The main missing features are
-the USB Type-C ports (on track for next merge window) and the laptop
-keyboards. I think it makes more sense to close the feature gap and
-switch to upstream device trees instead of adding to the in-tree device
-trees.
+With this, Heinrich, per E Shattow's comment on IRC, can you please
+revert the commit in question, then apply his patch as-is, and then your
+changes as a new patch in order to show correct history?
+
+And I realize at this point the subsection of this document is a bit
+wordy. Maybe a follow-up of restructuring this part of the document
+would be helpful? I'm not sure what would flow better however.
+
+Cc: E Shattow <e@freeshell.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/apple_m1_defconfig | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ doc/develop/process.rst | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-index 2d685da8c9eee2084b0144050e12c03c77e5184e..52672f59566dc0ebbb1c829cff6c7d8f798e7c50 100644
---- a/configs/apple_m1_defconfig
-+++ b/configs/apple_m1_defconfig
-@@ -16,6 +16,8 @@ CONFIG_SYS_64BIT_LBA=y
- CONFIG_APPLE_SPI_KEYB=y
- # CONFIG_MMC is not set
- CONFIG_NVME_APPLE=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_XHCI_PCI=y
-@@ -25,4 +27,4 @@ CONFIG_VIDEO_FONT_16X32=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
--# CONFIG_SMBIOS is not set
-+CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
-
----
-base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
-change-id: 20260109-apple-defconfig-smbios-a37802021452
-
-Best regards,
+diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+index 4bfbf0eb9c63..84ab09132a0b 100644
+--- a/doc/develop/process.rst
++++ b/doc/develop/process.rst
+@@ -244,7 +244,12 @@ like this:
+       custodian can also accept patches against older code.  It can be
+       difficult to find the correct balance between putting too much work on
+       the custodian or too much work on an individual submitting a patch when
+-      something does not apply cleanly.
++      something does not apply cleanly. If non-trivial changes need to be made
++      for it to apply the custodian is expected to annotate the commit message
++      with ``[name: note about changes made]``. Furthermore, only trivial and
++      obviously correct changes can be made, no other changes should be made to
++      the patch itself. Ideally all of these changes will be in a merge commit,
++      and not the commit itself, but that is not always possible.
+ 
+    #. Passes :doc:`ci_testing` as this checks for new warnings and other issues.
+ 
+@@ -255,6 +260,8 @@ like this:
+ 
+ #. Commits must show original author in the ``author`` field and include all of
+    the ``Signed-off-by``, ``Reviewed-by``, etc, tags that have been submitted.
++   It is the responsibility of the custodian to gather these additional tags as
++   most tooling makes this easy.
+ 
+ #. The final decision to accept or reject a patch comes down to the custodian
+    in question.
 -- 
-Janne Grunau <j@jannau.net>
+2.43.0
 
