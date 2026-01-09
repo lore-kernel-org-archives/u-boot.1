@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C8AD26D9B
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 20:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644F6D26D9B
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 20:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16375843D4;
-	Fri,  9 Jan 2026 21:23:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E4C79843D4;
+	Fri,  9 Jan 2026 21:26:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BpGGmnVP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C3Ys1RMc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3034B843D6; Fri,  9 Jan 2026 21:23:51 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id 85BC9843D8; Fri,  9 Jan 2026 21:26:12 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07A3E843AD
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 21:23:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C270843AD
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 21:26:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=aargri@gmail.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-65d132240acso2806458eaf.1
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 12:23:48 -0800 (PST)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=d3dx12.xx@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-430f57cd471so2421833f8f.0
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 12:26:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1767990228; x=1768595028; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IVzg3pKxekIPwuRCGbATNbAbcZFayAaxU8jvi9Dlfu0=;
- b=BpGGmnVPVmQY2W9RxN4jfuzOBI/3iMlFCQ8uQdkSxGO8UaB3j9ywhI8xBoqppoZhB8
- TCxjgHx+Uji0DB7l8lmA5spdIRgTQa97XKzf/83DywRSPyZ9c9fXNHTQ1YmNMU59em1s
- dlL6eXxE3MMpYB7wiAdE1dTABykGpEk3Wxv8BtbTSgrLUFiej/oUToIN8CtWZrmio4Rc
- NzR8bLm9uoP0NED3ugANRnJnx+3yR1d96yll35bWSEh8ljvJrD8L+jVR25s19e/Mstvh
- RWkIm2dzOk6fpWZmLNdxxc3B/1jxoiD4RK/X8MfFX6CaMiZsAvYk2HF8nMi/s/28eMwD
- Q9qg==
+ d=gmail.com; s=20230601; t=1767990370; x=1768595170; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DSzJEJ3cfd0+VhS3o68nTw+73E4SLe0zCbAhIOPr1a8=;
+ b=C3Ys1RMcsWpBoVg/E3L7qzXA3s3TsXHlPahr1MfrfOiNN1zDJq3P1XB5Tf7D/hNa7k
+ k9/SXYYmnrFlsgOxZyo8ZaeklCcBu4145R6ulI8dlerl07GvH6+P0uRfoy/uzA5p5nkb
+ gZkfPjnlMnDI7nCEGp6xjIKasjU07LUo9hQyaN8y4rkHN8EegddZlOnLuzaGkVwDcb6+
+ VGFQpco/Kvrij6tCOUzSBtFkABYldJ4b42TPnRJGvSedeynr0ZtpBtF2+AL7KNVTk9T0
+ EnA/abRFHsNNPDs4VdnFmsdlh9bhXNpl5qK7DjMFMB2VLE2CYrmLHaI0csMciG8isY3e
+ HAOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767990228; x=1768595028;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IVzg3pKxekIPwuRCGbATNbAbcZFayAaxU8jvi9Dlfu0=;
- b=HkbctkDy6MCyMIXsrmS+EkqLf3IzasqEwPTnpK/IE377Hi0pPRpHiXpI7tMpj5LNUQ
- HYG8SS51yHX7WiXJHFcT/2S2njgxwqd15s6uMR6WVWtnmcpl7z4OHIxOhiovfSP9loZU
- PWIi2w0uADBZ0BGBwG4fQfIta/HvR50eLqo8aqDhpw2GlgGD8B4wm9OuOj7IWzYoD1Ys
- SsQPm8rcCqQqddp386oQhY7H1IYllWzvPalyC9KorT/yDWaBACmn+C2+5FAD6QHbEG8M
- 6Nl55234fIbg7DoIe9XuwnLiobO94W+dfaZa4jvfjy75a7pzcfkux/hCHvEltmeklx5M
- lzDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKtFbe0DOMsBusXpv3q7Le5EIipyETDlpSUvJS/L/bVDsJIrn3FX+upQYOYfx/55ItJkovaaM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvsR9F+md2O5LqvsHe1oVN5U3dYwo5YL39W/5FDSdu5fUKaHEZ
- n0KFZrB3RaXzY7D89PgTYwoP9TqtaqG1XWG15kuuwSMedyZw9AU+o6A4
-X-Gm-Gg: AY/fxX62WzWDT3oA//d3poUHskxPdOUYmwNq2dSQbCeAYZto0SLbNKXPGgXEvRka54d
- RDUnG1IeKuVaQhrUERdbHHrR5HchT2vgz9X8KU/HBVXRWxyGnmPrR9AsP8W4tniDh1OPvxVYa/o
- JATvHPF/LcVpxn1MZblXMxyY/SJP5nXjxhzDxuNq9Sa59m43rUiwCusR402y8g1mQ4kE6z07voU
- EpqdVM8uqr78pGp6EvfpUdoaOswrQFcxCQqU3Mgjll2uba4LKNGP1C/E6cZf5ndLWvZBXkaRvwn
- Wqb2NeHQCAaLkOaST0vl1oJ+5hYWYHCX8dNAIsHzKeSlMwkyV8PoWrJjGdjaLRmZIsqb/7TEzq2
- ReU6juA95YWXpIAMVEDnnXm3iIryOyVCapsCRHm5tEHw9sLNi7xRoXMNVGfYAKBiaxbltnRb9CZ
- 9ZEFHOASjXrdSlCNzPsuyu2bwVX/+h0cqBSeAOCT6zSIYMbkc=
-X-Google-Smtp-Source: AGHT+IGBFTUj8Lf4s7LqXnXmBT800UrtRRo6FlhzqYwlKmzKBpO32460+D4ICOKAuuhVU26DPicpXg==
-X-Received: by 2002:a05:6820:16a0:b0:65f:7009:d71b with SMTP id
- 006d021491bc7-65f7009dda8mr331587eaf.10.1767990227700; 
- Fri, 09 Jan 2026 12:23:47 -0800 (PST)
-Received: from nara (172-2-191-226.lightspeed.clmboh.sbcglobal.net.
- [172.2.191.226]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ccff66sm4360203eaf.16.2026.01.09.12.23.46
+ d=1e100.net; s=20230601; t=1767990370; x=1768595170;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DSzJEJ3cfd0+VhS3o68nTw+73E4SLe0zCbAhIOPr1a8=;
+ b=FkQfcdpTgs0Us1qc1Y1UsNRUDF5vL3s7bXztFdnmbDmGGFsX0ZCQlDTpPiyt4N1a1X
+ fkECSVeHB8X31KahCoqM/+uaTyWTMdJeRRuAjz+Llsj1GKcHau3w2Pvapz9vNSmV0Equ
+ thy6hKcMpleyOX0/RbwJtb+lIdYbxPIlJlPcYvh6zxb+eEpz7Bf7VTr7b2CoQuEJcJ63
+ brEDszBhvidhxXc0k7shC75zrC9Blk4c2mD4hXjN0mZtF4qA+NtqU2YTwDx43Cbv7y17
+ JtkdTm7SvtS2L9Y2SEcclzIMjfw7Ucft8adR3DuxcpClrcqsjGqi0WiawWZ4oVWurfE5
+ tPwA==
+X-Gm-Message-State: AOJu0YxA20Y6gIDf6uQWzdfarocY59gDfcTmpt/W412z0IHhs6ly0cOA
+ KEL0/OzLchGhHVd+S9JxvbsYqXA0VQSmHllHjoiQbjTdlZgDSqyT1P+G
+X-Gm-Gg: AY/fxX6WEFZg+gHCGy1KG7/ZjFAvc0tuEoVis8GbCBr0N+nBYCInI532d9TrDgwzV+b
+ XC4osAKcTPaYe+5ApZP/mR4K3BCFiaLcmoCA1VGoQnvcDXh8yde2/mlKl8bX1em6KLbYrc6h6Vp
+ bfsrH2OcEqyzVXgr1isVTu7QCVurwaKpB0Jyr7jHbGrJn0PrARCkl+9181c+bBJBPNGPVxhTyvx
+ IRiEH5TVimMfaSuPDqSkJo1/ZTlZSbijLZaySSTag9TBeDeXTdwNmBgDKFkf1BQ0U8ihmXSjYQl
+ hBthBSoxH+CLLyhcggQx/lMK0nZLNNkpcUJLXAOq8tPy/AYrDcnBwW29FgiXoYnITF1v/ZeGHxM
+ YPLTuD6SARpbcavMC43LyvmDpELjjnINw14RS50jWr0FH2jeVwwgXLUyKGmBB4PZX2PRjHfjr6a
+ 1EO0s/NXWesaqLa0wZfkg+GRSy8xEtWF2YNck1z1JSKD4C9L7YEdOmgtVwOftcaxWd
+X-Google-Smtp-Source: AGHT+IFdMe9AFo3m2sr3uzHKoRGRwJ2NkkW4bAQZ9pLWGfrZZh/X4/h/+dJapwWsFmf0ucqmsEvfug==
+X-Received: by 2002:a05:6000:2209:b0:431:266:d134 with SMTP id
+ ffacd0b85a97d-432c37617f6mr14287746f8f.53.1767990369864; 
+ Fri, 09 Jan 2026 12:26:09 -0800 (PST)
+Received: from hyperion.tail59961f.ts.net
+ ([2001:4bc9:901:a004:3351:3c64:f0a:552d])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-432bd5ee24esm24160730f8f.33.2026.01.09.12.26.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 12:23:47 -0800 (PST)
-Date: Fri, 9 Jan 2026 15:23:41 -0500
-From: Aaron Griffith <aargri@gmail.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 00/10] rockchip: Add initial support for RK3506
-Message-ID: <aWFjzQfEwfCK8RKJ@nara>
-References: <20260109005008.101506-1-jonas@kwiboo.se>
+ Fri, 09 Jan 2026 12:26:09 -0800 (PST)
+From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Date: Fri, 09 Jan 2026 21:26:04 +0100
+Subject: [PATCH] elf: error out if pyelftools could not be found
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260109005008.101506-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260109-pyelftools-warning-v1-1-1a4965609b55@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAFtkYWkC/x3MSwqAIBRA0a3EGydoYL+tRAOrpz0QFY0+SHtPG
+ p7BvRkSRsIEY5Uh4kmJvCsQdQXrrpxBRlsxNLxpueADCw9afXhvE7tUdOQMazcttexWJZceShg
+ iarr/6TS/7weASsRdZAAAAA==
+X-Change-ID: 20260109-pyelftools-warning-6df5f57ca5b8
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +104,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
+It is not possible to validate an ELF file without pyelftools, make the
+error more clear and informative to the user:
 
-On Fri, Jan 09, 2026 at 12:49:41AM +0000, Jonas Karlman wrote:
-> This series add initial support for the Rockchip RK3506 SoC.
->
-> [..]
-#
-> With this series, board DTs and defconfigs it should be possible to boot
-> into U-Boot proper (without OP-TEE) and still have support for MMC,
-> Ethernet, OTP, RNG, LEDs, buttons and USB gadget/host.
+> binman: Python: No module named 'elftools'
 
-I have a Luckfox Lyra Pi W board (with RK3506B) and a Luckfox Lyra
-(with RK3506G). I've been using the earlier version of this patchset
-for about two weeks to successfully boot Linux on both of these
-boards. I'm excited to see this support heading upstream.
+rather than:
 
-Using these patches specifically, I can verify that the RNG and LEDs
-work, that it is able to read data from the MMC and USB storage, and
-that it successfully loads and runs a Linux kernel.
+> binman: name 'ELFError' is not defined
 
-I was not able to get the Ethernet port to work on my Lyra Pi board,
-but that uses your device tree information that is not part of these
-patches (and may be incomplete). The specific failure U-boot reports is:
+Signed-off-by: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+---
+Make the error more informative and indicative of environment issue and
+not a code one
+---
+ tools/binman/elf.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-    ethernet@ff4d0000 Waiting for PHY auto negotiation to complete.........
-    TIMEOUT !
+diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+index 6ac960e0419..899c84ad36d 100644
+--- a/tools/binman/elf.py
++++ b/tools/binman/elf.py
+@@ -570,6 +570,8 @@ def is_valid(data):
+     Returns:
+         bool: True if a valid Elf file, False if not
+     """
++    if not ELF_TOOLS:
++        raise ValueError("Python: No module named 'elftools'")
+     try:
+         DecodeElf(data, 0)
+         return True
 
-So, for what it's worth,
+---
+base-commit: 1bcb2fe324180d0a8cfbdb0511737eba1d5b8550
+change-id: 20260109-pyelftools-warning-6df5f57ca5b8
 
-Tested-by: Aaron Griffith <aargri@gmail.com>
+Best regards,
+-- 
+Dmitrii Sharshakov <d3dx12.xx@gmail.com>
 
-Thanks,
- -Aaron
