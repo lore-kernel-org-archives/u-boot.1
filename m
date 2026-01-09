@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F12DFD1D48A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 21:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36CE4D1D48A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 21:54:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98706843F5;
+	by phobos.denx.de (Postfix) with ESMTP id DC6CF843FF;
 	Fri,  9 Jan 2026 22:54:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icloud.com header.i=@icloud.com header.b="aCcpJS8c";
+	dkim=pass (2048-bit key; unprotected) header.d=icloud.com header.i=@icloud.com header.b="dEhBMxh5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30A24843D4; Fri,  9 Jan 2026 22:13:36 +0100 (CET)
+ id E3837843D4; Fri,  9 Jan 2026 22:24:33 +0100 (CET)
 Received: from outbound.pv.icloud.com
- (p-west1-cluster2-host1-snip4-2.eps.apple.com [57.103.64.173])
+ (p-west1-cluster3-host4-snip4-10.eps.apple.com [57.103.66.83])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8F7A843AD
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 22:13:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8C0C843AD
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 22:24:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=icloud.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=yuri.honegger@icloud.com
 Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-3 (Postfix) with ESMTPS id
- 3676318000B5; Fri,  9 Jan 2026 21:13:28 +0000 (UTC)
+ by p00-icloudmta-asmtp-us-west-1a-100-percent-13 (Postfix) with ESMTPS id
+ 1CA4918002E5; Fri,  9 Jan 2026 21:24:28 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
- bh=Vy4LZpRCoeLfb+PrND5ff3PM4Bb1EJCSBCjKhfalrwE=;
+ bh=2mLAHsVyLx4Huy94PEdWM2dQAb+KyeWZx8el38Qm2d0=;
  h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=aCcpJS8cFNShsx+MIwE931vbqvRRgoNLBfwIb2FO/6DiGSZxAuUpewVNlanPEg3/+UvI56CIByHDFaY6keegPpycwUC7sQ9BRSB3wJwtU0qpyBrfq3T3TthyVJkx1LOMupkKbCysHnVoORZX2FuTtKsfYqYlBfThyR9C8dfF6PQ1halmmaNPnVYQXTJsfFOCX9iua3nnq20bxJgBUwu8b8Wtra8qburP9jRS/HskSyCwq7vlpXE5A1e2XO3ehmRFCHzfpU5Ly/cazD3NwdpyoU5Lq+hROrTGRJ7wWGCf7nEFSzAodPew6mN7unibYQrf2Ngy/Y/gZG7DRPm40E39fw==
+ b=dEhBMxh5Mp+7bXbEm0aWEIbFVytMNBlULd1XozmP0TWY6wqdL3MsiXVXVWGYMxACLTnUqdRtp/kFwZHV6tkWSyw1XcNgECmEw6Ron/OXF7jhk7vuksZDmDmFEIk9SK3XzSCxbCrUeI8G4XCxmEzwcq7QHI/3i9IHa1JXRuX0lK9XhfZZLQTZXsMmLCCRFJ45jVdgvwLEHmZGcWDbRVdQ1lujNl4DsNj5oQDCZ2XvjX/JdGR9i5PAwrSflr9F+W3zd45bUQqfUW3lYvV2oanyY2eKkaCCbnzxclVGmkBF/iSj3gHppQwVAgjSaTB823b/haBd8/gcdDlrWtWGZ7RvdA==
 Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-3 (Postfix) with ESMTPSA id
- D26401800998; Fri,  9 Jan 2026 21:13:27 +0000 (UTC)
+ by p00-icloudmta-asmtp-us-west-1a-100-percent-13 (Postfix) with ESMTPSA id
+ 202E418002D5; Fri,  9 Jan 2026 21:24:27 +0000 (UTC)
 Content-Type: text/plain;
 	charset=utf-8
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
 Subject: Re: Placement of FDT in memory
 From: Yuri Honegger <yuri.honegger@icloud.com>
-In-Reply-To: <20260109170958.GE3416603@bill-the-cat>
-Date: Fri, 9 Jan 2026 22:13:25 +0100
+In-Reply-To: <CAFLszTjwSCwS8Nu0Xzg=movSN3B26fifjA2+b23ORx14joM4vg@mail.gmail.com>
+Date: Fri, 9 Jan 2026 22:24:25 +0100
 Cc: u-boot@lists.denx.de
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <89B99CA3-BA46-4755-BAFE-95C1944AAAAF@icloud.com>
+Message-Id: <B748B2DA-7A8E-4794-8DC9-CA094D65589B@icloud.com>
 References: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
- <20260109170958.GE3416603@bill-the-cat>
-To: Tom Rini <trini@konsulko.com>
+ <CAFLszTjwSCwS8Nu0Xzg=movSN3B26fifjA2+b23ORx14joM4vg@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
 X-Mailer: Apple Mail (2.3826.600.51.1.1)
-X-Proofpoint-GUID: vPg8nkjyv3YC0AMIrED5dILNhn476s0K
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDE2NiBTYWx0ZWRfXz9gjcvIrMB+f
- 0DhzuDX/pNffn0CdTZHOqqPJU6ihBPc6U81zLpnFURQePbYdEAVVeQ76EVzQzFPTV4Qj1+pf7dV
- N8e5u4bVI0Ii/LJQexsqRhQZHLYnuafPZU5TGJSVQ3KxjEmo0vezscAN8pKw3X5xI1QLgBT29cY
- b0Tq1ZAE8pfe0d2kbOGjKerAtPrnSPJfonY7hGNv8SWUFN3N6fHy9A/kbKhuU8BPScZlGK6Rd5c
- NGTWaVqZS0QMQDgOg4iYUYcqn6QdBTsRvaCBos6CuOZdxMC80/utH4/Qc4/W9nJJcy8f68bQLgz
- gPBOtXSooICAQHGEpR6
-X-Authority-Info: v=2.4 cv=b/G/I9Gx c=1 sm=1 tr=0 ts=69616f79
+X-Authority-Info: v=2.4 cv=Pv+ergM3 c=1 sm=1 tr=0 ts=6961720d
  cx=c_apl:c_apl_out:c_pps a=azHRBMxVc17uSn+fyuI/eg==:117
  a=azHRBMxVc17uSn+fyuI/eg==:17 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
  a=x7bEGLp0ZPQA:10 a=MquUGpQHRscA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=XpE1AkgCAAAA:8 a=k-42gJp3AAAA:8 a=zLIg5tn8IvlcWDOysXsA:9 a=QEXdDO2ut3YA:10
- a=nBVXOfS-3XAA:10 a=dpZMgbseYPk84XhQl7oQ:22 a=uCSXFHLys93vLW5PjgO_:22
-X-Proofpoint-ORIG-GUID: vPg8nkjyv3YC0AMIrED5dILNhn476s0K
+ a=cm27Pg_UAAAA:8 a=v3ZZPjhaAAAA:8 a=3dV358RhpV4O6KFCrWoA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDE2OCBTYWx0ZWRfX+0Yg+f8GTa3I
+ Zv65ttKqebLxK16fY5wbF3Djc8khsAcUyQ5FPUyBRg0O4p+nrFF8AXcEoet4xkguHdVGf52WRCO
+ ea9oijx/XIz/UAuY2PSR+yMv6R5DTkOqBn9P35K94AO2dDTEP4V8cxqT7rM8yeR82Q+pqS5m/Jq
+ Pb33D+uXD/vMyOJ5/4J/CdjOW/tTIe7pUnggL0ZWtCmL9uoOb7JtiVN4DdV7zyY6HpXNyX7edi/
+ phjoGwNEfzeei5mSyDNWcyEaEd/95X/2pcBCP0sN6MWucUE1mkW0kuUwzXXJ5Tl6zTrJC5hlNOs
+ esZPZmT2twNcwmWityk
+X-Proofpoint-GUID: LcEjazrKJrLUU_SxsaMTuXiqbrlAV27I
+X-Proofpoint-ORIG-GUID: LcEjazrKJrLUU_SxsaMTuXiqbrlAV27I
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2026-01-09_06,2026-01-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- phishscore=0 clxscore=1011 spamscore=0 mlxscore=0
- suspectscore=0 bulkscore=0
- malwarescore=0 adultscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.22.0-2510240001 definitions=main-2601090166
-X-JNJ: AAAAAAABCAIreUtaOk2lRi+jl4c0i+Q1ucJp23iMQX95Ulq7fZnBnzfYftLL4P3Ps84hh30QAyZYoheTtrcFvSRf7l+agqoJHle8hxdAasgI8zPzlcPvqnlgr3D+EIoFpK0o8LdpMHY2aw/VSulxykeltNewUMXOlfva4bMt7CudK2kTSX5Av7np8fLDhKP+VPNylVWNZcrpzbNdjER1W3FoIUaUg4jcNsW27IGgNsEJ56Dz/EvOPFHvbvmAJXWu74w0Y/3vgBBTj3yj9QDW4wFMU8gQ/5HkXnedn2c6kQnTWdqiiLGKqOz+bhwlpNudzT3OECdqHP3F5mBzdY9XLLjT1lV57UVpIku+P4EgH//6lyzQH888tXxLfV4HgEQBc6Xu1kIgLVJwSXPtS+IIf9mOr5Y+FBrJjYBXHmSE24/QoCd4NHcVZXerdcEti8nI6g1xvoTk933FkYgb/3PmyW16p74BEB94rnlTI8or7ZZOopYsh6HxEf9+G95F4bAXH+dLBHje3lfepQQlfLTpUcPKw4m/HuVZe6h8NiN5/i6t8y+T0+Pr3OqpCqM9LgtOLl0+lWMyCzYV0H0YKYs2SRTsi9XboWTDjLSOeQaJW6ZNoWthF/Jg5M0uG1bW6Q==
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ clxscore=1011 bulkscore=0 malwarescore=0
+ phishscore=0 spamscore=0
+ mlxlogscore=999 adultscore=0 mlxscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2601090168
+X-JNJ: AAAAAAABbYmHwU7fp4ltWbPepFjrlz0lFkGqfN1KI7PokLgZO+cEgS55vzSSFkMqaSR49fbltmyFxYe6DUGRR6ANpusFVAGeOZnyZPuyqv7L1W9GQAFtBhk0CjeQAMomyRqSvX76dK6/cDjS4ziop/lnmwmY8erMG4yyy7HYOMMf/V2+CakH9iB3YCk/h0U/VfU8JOGRKj1Z5U1v0G+LraGZGShAWY10M18Uez+I5wKK69EdeAG+xGOWcegehRfu7P57j9i2m29bQQZSc0KEG4JyxUXqSEGdZMOG1N5LbRivEzR7eFK+g9gxKsBj5CU7K8oSSEBmV5W80qhp+QRpqJxA90m7VUb0PEMulZ2ujdozPjVz8XRhwd94EkKpUjX2kESB0wNua96KlQVDWMSM3RCI1wU8X1f8E5Ry1B78x5kumEFvh+M46ix5sbOI9lJKug+QG4A30hIrsds3IcQrm6hvHSWU7iwzXU5WtX2LYVCni1rssHUEnt1jiw17kjBu07VvqrQgnJaM5MNoz6pXp0iHj0PFN59V0aOOXFLn6Nqr84sralZ1QzWYIu3igE0s2q6DWmf5Y6hF4xwsb/mH6DSvS6DTaPV0VMparqKk5DFVAqZ0FH9g
 X-Mailman-Approved-At: Fri, 09 Jan 2026 22:54:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,18 +91,20 @@ X-Virus-Status: Clean
 
 
 
-> Am 09.01.2026 um 18:09 schrieb Tom Rini <trini@konsulko.com>:
+> Am 09.01.2026 um 12:34 schrieb Simon Glass <sjg@chromium.org>:
 >=20
-> On Thu, Dec 18, 2025 at 11:04:59PM +0100, Yuri Honegger wrote:
+> Hi Yuri,
 >=20
+> On Thu, 18 Dec 2025 at 16:30, Yuri Honegger <yuri.honegger@icloud.com> =
+wrote:
+>>=20
 >> Hello,
->> Recently I've been playing around with the imx23-olinuxino=20
+>> Recently I've been playing around with the imx23-olinuxino
 >> (mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During =
-that, I've=20
+that, I've
 >> noticed that NetBSD panics because u-boot places the device tree in =
 the BSS
->> section of NetBSD. NetBSD clears the BSS section and then complains=20=
-
+>> section of NetBSD. NetBSD clears the BSS section and then complains
 >> that the device tree is corrupt.
 >>=20
 >> Reading the logs, it appears that FDT and kernel get loaded at =
@@ -138,57 +139,26 @@ tree.
 placement
 >> of the device tree?
 >=20
-> So, interesting setup. It's not a FIT image, it's a legacy image, so
-> there's a few details missing that might be helpful here. But, why are
-> you loading the image so high in memory? And we're calling it a Linux
-> kernel, not a NetBSD image, so we should likely be updating our docs =
-for
-> booting modern NetBSD releases.
+> Do you have a value for fdt_high before you set it to that?
+>=20
+> See boot_relocate_fdt() for the logic.
 
-Yes, NetBSD only generates legacy images when compiling the kernel. I =
-suspect there could be licensing issues with FIT stuffing everything in =
-a single file depending on how it is distributed. Most device trees are =
-GPL. I haven=E2=80=99t looked into it all that much to be honest.
+No, fdt_high doesn=E2=80=99t have a default. I found fdt_high by =
+backtracking the code in question to find a way to get it off the path =
+where it automatically chooses a memory location just behind the kernel =
+image.
 
-The memory location for the kernel are the defaults from u-boot for the =
-imx23-olinuxino (see mx23_olinuxino.h and mx23_olinuxino_defconfig) and =
-memory ranges from 0x40000000 to 0x44000000. Is there an issue with how =
-they have been chosen?
-
-As for u-boot calling the netbsd kernel a linux kernel: That is NetBSDs =
-fault, for some reason it produces images with =E2=80=94os linux, =
-although I don=E2=80=99t know the backstory.
+I=E2=80=99m mainly wondering about why we have the relocation logic =
+active in this scenario. We already have the fdt in memory from when it =
+is loaded from disk. We have to provide a manual address for this, so we =
+can choose it so that it doesn=E2=80=99t overlap. As soon as we bootm, =
+u-boot relocates it to an address that conflicts, while the original =
+address would have been fine, so I=E2=80=99m wondering about the reasons =
+for the relocation.
 
 >=20
-> The big problem is that for a legacy image, we don't (and can't in
-> many/most cases) know where the OS ends it's BSS and so have to hope
-> that we're relocating to the correct spot (in other cases we can see
-> this overlap and avoid it).
-
-I agree, we can=E2=80=99t expect u-boot to know where the BSS is. =
-Perhaps I should have explained my question better. Why does u-boot =
-relocate the device tree before jumping to the kernel? If we have to =
-provide manual addresses anyways during the loading step, we already =
-have to take care of ensuring they don=E2=80=99t overlap and so on. =46rom=
- NetBSD=E2=80=99s point of view, they already were in a perfectly =
-acceptable place before the the relocation.=20
-
-> At
-> =
-https://docs.u-boot.org/en/latest/usage/environment.html#list-of-environme=
-nt-variables
-> we document all of the environment variables and bootm_low / =
-bootm_size
-> / bootm_mapsize are relevant to this case, along with perhaps just
-> loading the kernel image lower in memory to start with?
-
-Thank you for pointing them out, I=E2=80=99ll play around some more and =
-see if I can find a setup that doesn=E2=80=99t require too much =
-fiddling.
-
->=20
-> --=20
-> Tom
+> Regards,
+> Simon
 
 Thank you,
 Yuri
