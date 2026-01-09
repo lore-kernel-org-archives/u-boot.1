@@ -4,55 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEEB3D1A61B
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 13:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC36D1A610
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 13:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACABB8437E;
-	Fri,  9 Jan 2026 14:08:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id DA1C584332;
+	Fri,  9 Jan 2026 14:15:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="LAn2t1Ao";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uHk475xT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9640584166; Fri,  9 Jan 2026 12:25:16 +0100 (CET)
-Received: from mail-43101.protonmail.ch (mail-43101.protonmail.ch
- [185.70.43.101])
+ id E28EA84337; Fri,  9 Jan 2026 14:15:18 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0A7C83CB1
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:25:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id D56F48432F
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 14:15:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=t.preissl@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1767957912; x=1768217112;
- bh=XihP2wkvG0XlPHH8YZXz4xsGxsvO2xUlgVWKBa2DDdc=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=LAn2t1Aoa51zA0AvmS9kfS49a3C1OB8FEuqZad3Q8I7sJ4cLxqnRjqeZlpriUpXFy
- V8syc/3gYcXMZ2mwsJxOuHm2+4MOWjuG6Yiz7IKB3uzlEHTRlfF20bpDrY4K9F6Nts
- d95UvskxaQgSzYL3zOcmPzC8pvSLjrZ2RC0RGQr/MXB4Ux8/4gf43f82P7Op6gPzGH
- aTBjCRMIJ/fNR8NMHSGybznYd0gz+MDlcq4SbHHfli+HD44y7A3W1ZwNLYoFITyUgy
- xN83c5Mo1nEbX2Dlbs8plphZpGGrLy0yfBeEKBfs0wH4VlT8/9bLrXBEGH9hXWjN2L
- nXi2Ph7aopp5A==
-Date: Fri, 09 Jan 2026 11:25:07 +0000
-To: u-boot@lists.denx.de
-From: =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-Cc: trini@konsulko.com, =?utf-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
- Simon Glass <simon.glass@canonical.com>
-Subject: [PATCH v3 4/4] fs: prevent integer overflow in ext4fs_get_bgdtable
-Message-ID: <20260109112428.262793-5-t.preissl@proton.me>
-In-Reply-To: <20260109112428.262793-1-t.preissl@proton.me>
-References: <20260109112428.262793-1-t.preissl@proton.me>
-Feedback-ID: 156112983:user:proton
-X-Pm-Message-ID: 5f8bc89ec270a9e319d507b4cea51fb3a295617d
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=joaomarcos.costa@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 773D31A26D9;
+ Fri,  9 Jan 2026 13:15:06 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 42EF3606C6;
+ Fri,  9 Jan 2026 13:15:06 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 51C6A103C88DE; Fri,  9 Jan 2026 14:15:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1767964505; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=1o1fdpjkXzkDneFiDJRB+SavKD9VrnOO+ui/Ci1z3o0=;
+ b=uHk475xTYPQ0vj6urwIY0u6eDA6NsIKQRx2qCERAaqcxQA0HMBM87NGw3TYwRkuJvZIFwK
+ aXSV4zr9H4gIm7JfiOkpDEmDauQsbl5dHL10VXvSj38oVKiLi65ONPLnn+62AHl91g50wa
+ vynedfPjiHf1nuquN7T+LtUP8Bouy2HiIQW+PPeb3rs/c4p0PS4hzOE3KVqbvdLl5CbMCa
+ aMPdtxN/dGMfG1yqOO1fajkzexHl60Wg71BU9gua/WJSQnFqZYkXW2o1ZWCwp+EC7zyiuF
+ cr6YQcFYKxXItRYSLRLBMUKURpcjCQi1p7WGzn1Uhc2qBZBqGuLDSzjcT78JYA==
+Message-ID: <a4d590e4-90c0-429a-b8d2-566c1ad1afe0@bootlin.com>
+Date: Fri, 9 Jan 2026 14:15:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 09 Jan 2026 14:07:59 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] fs: prevent integer overflow in sqfs_concat
+To: =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, u-boot@lists.denx.de
+Cc: trini@konsulko.com
+References: <20260109112428.262793-1-t.preissl@proton.me>
+ <20260109112428.262793-4-t.preissl@proton.me>
+Content-Language: en-US, fr
+From: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20260109112428.262793-4-t.preissl@proton.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,35 +74,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An integer overflow in gdsize_total calculation could lead
-to under-allocation and heap buffer overflow.
+Hello,
 
-Signed-off-by: Timo tp Prei=C3=9Fl <t.preissl@proton.me>
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
----
- fs/ext4/ext4_write.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+On 1/9/26 12:24, Timo tp Preißl wrote:
+> An integer overflow in length calculation could lead to
+> under-allocation and buffer overcopy.
+> 
+> Signed-off-by: Timo tp Preißl <t.preissl@proton.me>
+> ---
+>   fs/squashfs/sqfs.c | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+> index 4d3d83b7587..f668c26472e 100644
+> --- a/fs/squashfs/sqfs.c
+> +++ b/fs/squashfs/sqfs.c
+> @@ -255,10 +255,14 @@ static char *sqfs_concat_tokens(char **token_list, int token_count)
+>   {
+>   	char *result;
+>   	int i, length = 0, offset = 0;
+> +	size_t alloc;
+>   
+>   	length = sqfs_get_tokens_length(token_list, token_count);
+>   
+> -	result = malloc(length + 1);
+> +	if (__builtin_add_overflow(length, 1, &alloc))
+> +		return 0;
+> +
+> +	result = malloc(alloc);
+>   	if (!result)
+>   		return NULL;
+>   
 
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 5b290f0d80d..1483e9955c0 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -108,7 +108,13 @@ int ext4fs_get_bgdtable(void)
- {
- =09int status;
- =09struct ext_filesystem *fs =3D get_fs();
--=09int gdsize_total =3D ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz);
-+=09size_t alloc;
-+=09size_t gdsize_total;
-+
-+=09if (__builtin_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc))
-+=09=09return -1;
-+
-+=09gdsize_total =3D ROUND(alloc, fs->blksz);
- =09fs->no_blk_pergdt =3D gdsize_total / fs->blksz;
-=20
- =09/* allocate memory for gdtable */
---=20
-2.43.0
+Reviewed-by: João Marcos Costa <joaomarcos.costa@bootlin.com>
 
-
+Thanks for the fix!
+-- 
+Best regards,
+João Marcos Costa
