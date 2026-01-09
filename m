@@ -4,148 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBB2D232E9
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 07:16:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08403D232EB
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14BEA84158;
-	Fri,  9 Jan 2026 08:16:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 46BDC84121;
+	Fri,  9 Jan 2026 09:06:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bCQQCE/4";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LRgbEhlJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VhSjagQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7D5984314; Fri,  9 Jan 2026 08:16:29 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F367984158; Fri,  9 Jan 2026 09:06:35 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26CAE8414B
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 08:16:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 60950TVh409337
- for <u-boot@lists.denx.de>; Fri, 9 Jan 2026 07:16:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- mcf5qCNBd8qi8SPv9sA7iK7j4//bgtTNAKzM1Sl5Gzg=; b=bCQQCE/4Wqy+4jgH
- kRYAJvvfygyIz2LoIMP0butI4tQDQVQ/XqrPWRbgXDQ+cnJ7l7k0qifeoxrmfuxk
- 0yXE2ZwExqRS16nF6HLpXeeERgHVlY9JxWilkHI7Er1ZMfRLKqvC4ry/NRKachvV
- +9H/M55e/GBbAhyhkr733UuQm6iDIpbJ5RGJ/tDLh9qNpcmsqFNNTs1ttbyojDeF
- YRKI8B4M+JtHyhI+K/k51w1IJWVceMulsKSfS8I2qmww98OV3ReQcjuBAjIfDC8y
- F/wa7L65eUWI36BSzku7N4O9W6b6iE1wCu5aMgF6hxBIjYO3zRpIU21YEZV2KUx+
- LmREFA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bjb39ua7t-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 07:16:25 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-34c21341f56so8353621a91.2
- for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 23:16:25 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBC0084113
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:06:33 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-42fb0fc5aa4so2923500f8f.1
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 00:06:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767942984; x=1768547784; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mcf5qCNBd8qi8SPv9sA7iK7j4//bgtTNAKzM1Sl5Gzg=;
- b=LRgbEhlJ1Qs4c6aB4X8Lu/ggc59Jhv6Iyt94KLQIkJ7n/6tP7kyEnXJ5UVIYfMRmd+
- VABlKjYLb7ACEMO6HM6fHk/ekxUI7lYhDt3URfV9SUTveQIKm11LWchr5GtLNkxDKP21
- R6ebBhkrMGoXcTUfFar19oJTuCYCVBKqAdpzfGxhYwlI8002nL2Yy9hrBbdlltdyzAAO
- JQlbaPebkGPDaxiLDTZEpojdw52CJ25jTtVK+htvN34cMVsVBqQfGmb7X1AErO3IJPyF
- 2xiIt0/XvxrnuCu/8iur4BGvugoaB7E7YmRcs+TwoXaglOp/xDj1bgceLMRzTYX13Da6
- Ccjw==
+ d=linaro.org; s=google; t=1767945993; x=1768550793; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=iZG04fU9A7l3TEffS4WplzZRWWYJxa+xnP32KxuPRZs=;
+ b=VhSjagQjmuCHtXig0NTXcJdJqG26WewBDUP/DcJLEbphT4QPKTk09hyCzjdkV6LRnG
+ 09s/9neSSlAOIP6iohXG5TYV7xSFap7CkSplxgrJhgkneUcZAaA5w+WB1q/ScEMk6uGq
+ mrlLGzHBn3E6W1ZhRsFYH7xHtVV3OV2FPMKaBCDCx0lmfqQUhUrg9ZcxI7bvEh4H34Qd
+ ExR11d/mY7NslnxEa7hYMBP/pWRnlLHAehUJiEDLisOms/PDpFOSGuwru+pxLC3V9DKL
+ ynAX46GWRsB62ffk+vHIaM3UfbPXFfomldabh0t+OF+Gsuo/vUn14X8Dw9mJ8x8DwMC3
+ pA8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767942984; x=1768547784;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mcf5qCNBd8qi8SPv9sA7iK7j4//bgtTNAKzM1Sl5Gzg=;
- b=NC5bue0E+x67wVWEcaG0854HlpBtBehcBzwi+VoZYtM4cminKwsqu0LA0grO1i9hqq
- cNO9AwNLx7OFV7rgTT9KUXYhsMCSkh5NbSJneadwUbmX5JEGndovpkp79BslncHlGhev
- TTUYBl8yJanXFGCOfAr6nZBXYGaiT9kWNcz01FAU2S0ZtiyTv3/0BFAscGcYyE+SW6v8
- r6VFEKat8EpIyyjfR8tAEdznU0TgFAly9zDF5ZhcoBeswRUG7gMagTNGUN/+g87XK2Uj
- knmyvXjxgRgqU3HoJFL2NmFkVWft1X5nZsNofKgLb/xGZwe2QDEuquxkN9EpXHXokV5y
- qI+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVVZKyqkfCoaE+sT42kKYtmLGUAhw++xzp75tARTmyjBjfS/OlEXk6figzmsqIMwQbzqP2RZrc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyw+Xv7NqXADp0YwgtymMYAIjwTz8ZbJFg5xGswGPo7HsPbSa9m
- KtG5a+hd8gfXIhGEqUqSTwVpwmRYWS19z1Goycci5sRvnItsN4o12wbhIbztcqU02pWHFsT9cGN
- lLyowvEh/wGEBz6ZhenU9WK7Mtfx43sVkSyfNQBIY99mHg5Lt5CpQgFeX
-X-Gm-Gg: AY/fxX42uW76u0caVGvGEGDypLe7TJ2luPIIZXVUWAVe/Y3dYlF695HhmJG3fvRNK96
- XKYEmixfUgqDClqWdFs+QNwwlg9FRd7hpZ/wo6+c8bvmWnKqWvPf0IHhjWvQ6RNmgTRQaRtko8R
- NmEByltr8K7FfCuTrYuPY/rAJLbe/XmiHxchDWsVTWyFgv0Q0z1T4ExFbM5ITUZr9bdTvbGFQ8W
- ug6Y2X6Mw4T8Nn243YlHv7CcM4pSUe0YvEAm7s/fydbWIjkHouSX57OMKI2+7I8D2SWzP31DtYA
- VdxAAI35kr+ZZuEwiNV6lkehVFYZnBALodw3D+U78AeAOWfx1ilaXpKN5BUo2Hazb/qFZmmQkts
- vf5B4QE4rVmgAHkeJS4pZtmLuUxWuoTmMbbzBiKBx7NpjHbc=
-X-Received: by 2002:a17:902:d4cd:b0:2a1:5d2:2e45 with SMTP id
- d9443c01a7336-2a3ee4c42b6mr92820555ad.59.1767942984504; 
- Thu, 08 Jan 2026 23:16:24 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGqXWc5WDrQn7GD3Pf1MRT30naeL3yfzaV797iMBGxEz14cK1LD4oSuOfgoFUpvCJqaK/Thow==
-X-Received: by 2002:a17:902:d4cd:b0:2a1:5d2:2e45 with SMTP id
- d9443c01a7336-2a3ee4c42b6mr92820375ad.59.1767942983966; 
- Thu, 08 Jan 2026 23:16:23 -0800 (PST)
-Received: from [10.151.41.119] ([202.46.23.19])
+ d=1e100.net; s=20230601; t=1767945993; x=1768550793;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iZG04fU9A7l3TEffS4WplzZRWWYJxa+xnP32KxuPRZs=;
+ b=AQ+YXw5B8Gt0LH4GFgp1gVt5NcwVp/kEsnxOoW2cR8r1zWeVl4yGAzoWPkBnD9urWk
+ h0IOWlcQS9HxeWGMwtxS31P9mSVnZQMuzigqHce1C4Uen+trt16uPUdFuum4zCU/TSlR
+ d+MohOK9YIjCcKgzcxQl2qHyUbXK4bLymOaxVPn0GIOO+xit/fI3exgjIDvB1+NT3O0r
+ ifFWq7l2zsCJXIrXVdV5moFqFWrc1xdi0D4zVknjA0hb1SESvcmZUEbs+47ty0qoWRqM
+ 9Vy9/PanS3oeTPI3wnfbTFCpYuTI3vpvP/Wp+EGVohV+SVu6w+Z6C0xzmYqwhIsSakud
+ 0yVg==
+X-Gm-Message-State: AOJu0YxSrp/aoy6wcV3JDLUaO7jtFTBRPk6d/b+vRVcpXW+syWY4LNqc
+ ihyKuDPR9HUa4xbu7N/1nvLvjf6BVpumj8gP8q6WyYo6fOXIAORKzqgBl9yo8D7HDEndPYc3BYR
+ ozP/6
+X-Gm-Gg: AY/fxX7EKIo7Q2HFDYXJjhSbvlsijGFMkOMSD/bzQcaU+52cvtES+Ke8rvecDTbO+C/
+ jhgapwB0BAXIEvuW1TeD2Sx+gmvSltyG+gWvHe0hm5/RISEjQtr8Pykef8OTOWtIEvj/EIx4yXm
+ 7rJptT5zYo3fSqz+9NbtEomiVf3oO+Ph+9UgUt7oXoxT/xjs2sHoUjjoUZzTapXtE49RBqLQKNr
+ 2B6MeVrp+unRBq90znsBU9GSrv35G5ktTZXwrudfua0XpLoyxQEOI8zy062Dq4GXTi70ZES4sn/
+ AMCkhgQxQosX5ci7lt3VCYUb1fRKIwkVrd8Bv+TUUwrF5Mv324+kB9eekFr3lnlrTlLBopc0wfd
+ 6nW3dBnNQ1ZkZnQz/iPBokWHhCY199TXifBnRtrKfFnOFYhAyAcFgT2ITlZn5NShY8zROHICm3Q
+ PqZIyc7XQXkkRIEOssal319ol9WYpO0xT5wcZwKJ7UTEJllzC4CNHxVlkYJTfTPFvKrzqMmqB/u
+ A==
+X-Google-Smtp-Source: AGHT+IEyekN6TRz/BC8W4YcxZI5RFmB8JbAKfuRR4CH6tKXv/fwqCC2vcW5N12D1ND4HKb9Y1ifB+Q==
+X-Received: by 2002:a05:6000:25c6:b0:42b:4267:83e3 with SMTP id
+ ffacd0b85a97d-432c374f5femr11392779f8f.5.1767945993093; 
+ Fri, 09 Jan 2026 00:06:33 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
+ ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a3e3cc8ddfsm96402425ad.74.2026.01.08.23.16.18
+ ffacd0b85a97d-432bd0e6784sm21023450f8f.19.2026.01.09.00.06.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Jan 2026 23:16:23 -0800 (PST)
-Message-ID: <00bb6161-4665-47b2-b7d5-78e4590c82a0@oss.qualcomm.com>
-Date: Fri, 9 Jan 2026 12:46:16 +0530
+ Fri, 09 Jan 2026 00:06:32 -0800 (PST)
+Message-ID: <ee1128f4-ab9b-44f9-a1c6-a607e45364d4@linaro.org>
+Date: Fri, 9 Jan 2026 09:06:31 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/4] env: scsi: Add support for partition type GUID
- based environment
-To: Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, aswin.murugan@oss.qualcomm.com,
- joe.hershberger@ni.com, ilias.apalodimas@linaro.org,
- quentin.schulz@cherry.de, ravi@prevas.dk, javier.tia@linaro.org,
- quic_varada@quicinc.com, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, ansuelsmth@gmail.com, mwalle@kernel.org,
- anshuld@ti.com, jan.kiszka@siemens.com, javierm@redhat.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
- <aV970YfT3dkXmfxK@hu-varada-blr.qualcomm.com>
- <20260108143252.GS3416603@bill-the-cat>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260108143252.GS3416603@bill-the-cat>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] i2c: geni: bail when clocks can't be enabled
+To: u-boot-qcom@groups.io, Casey Connolly <casey.connolly@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20260108195301.3159260-1-casey.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260108195301.3159260-1-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: anqoHeUJRZ8VK6zGa_VipumuSaw8RqVm
-X-Authority-Analysis: v=2.4 cv=X7Jf6WTe c=1 sm=1 tr=0 ts=6960ab49 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=pDgTZgDHYo9fn6xZCxMA:9 a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDA0OSBTYWx0ZWRfXzumIF/J5fgya
- t2EuWHLulBeCffnfxbYjuPuFSCtCeyOHgV1O/0G1tWRMi35bEiXD1XHFEGr0v6Oe2wulpaezWJb
- FsgoNEmktbtZNjARqeqVYj3MZTvhAgGkN46YJtVQW6aRMawmSfhJLHuLYUbE+y8bILlP4W4FEu9
- DvADxp2kTkaOXzy/v0XxCyJ6b6HIG7DvMpxCiusnkvpi1xfIIO25f/L3JMhBby6ALqM5Torn5+j
- YYufFaCuNufVHT/RBJ8erQKfdbRr+hdxSvqIB0AegmfoO7OLs6Nt8xP3BtwxCQN0c7G2K9GVx7u
- 3RK38t1LAeHowThFVAvmQY3MVaYNQ6YNPb9FqtdKiSD6/w76qDAJ4z1W8H2OfEjEEHH5dXz03Rr
- W5hXZ9cylcDDYFpsbB8D+v+tk5Y1g9Yqj0+DnLWJ1NaXi7SAcW3UqDrYOe5+Ei4X5Lk5BIanDLL
- VkIy8cIYnKh5u0RfqwQ==
-X-Proofpoint-ORIG-GUID: anqoHeUJRZ8VK6zGa_VipumuSaw8RqVm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-09_02,2026-01-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 bulkscore=0 suspectscore=0 phishscore=0
- adultscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
- definitions=main-2601090049
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,63 +125,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 1/8/26 20:52, Casey Connolly via groups.io wrote:
+> Failing to enable clocks will lead to bus hangs and the board crashing
+> in some cases, let's actually deal with this error and fail probe rather than hoping the clocks are already enabled.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>   drivers/i2c/geni_i2c.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+> index d29e00fdf41d..fbe5ab0ad0c6 100644
+> --- a/drivers/i2c/geni_i2c.c
+> +++ b/drivers/i2c/geni_i2c.c
+> @@ -493,9 +493,11 @@ static int geni_i2c_probe(struct udevice *dev)
+>   		dev_err(dev, "clk_get_by_name(se) failed: %d\n", ret);
+>   		return ret;
+>   	}
+>   
+> -	geni_i2c_enable_clocks(dev, geni);
+> +	ret = geni_i2c_enable_clocks(dev, geni);
+> +	if (ret)
+> +		return ret;
+>   
+>   	proto = readl(geni->base + GENI_FW_REVISION_RO);
+>   	proto &= FW_REV_PROTOCOL_MSK;
+>   	proto >>= FW_REV_PROTOCOL_SHFT;
 
-On 1/8/2026 8:02 PM, Tom Rini wrote:
-> On Thu, Jan 08, 2026 at 03:11:37PM +0530, Varadarajan Narayanan wrote:
->> On Thu, Jan 08, 2026 at 12:19:46PM +0530, Balaji Selvanathan wrote:
->>> Add support for locating SCSI environment partition using GPT type
->>> GUID instead of unique UUID. This enables the saveenv command to
->>> work with partitions identified by their type rather than unique
->>> identifiers, providing flexibility for systems where partition
->>> UUIDs may vary across devices but types remain constant.
->>>
->>> Introduce CONFIG_SCSI_ENV_PART_TYPE_GUID configuration option that
->>> allows specifying a partition type GUID for environment storage.
->>> When enabled, the environment subsystem uses the new type GUID
->>> based lookup method via scsi_get_blk_by_type_guid() to find the
->>> first matching partition.
->>>
->>> This change maintains backward compatibility with the existing
->>> UUID-based approach.
->>>
->>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->>> ---
->>>   env/Kconfig |  7 +++++++
->>>   env/scsi.c  | 13 +++++++++++++
->>>   2 files changed, 20 insertions(+)
->>>
->>> diff --git a/env/Kconfig b/env/Kconfig
->>> index b312f9b5324..97cb3d05daf 100644
->>> --- a/env/Kconfig
->>> +++ b/env/Kconfig
->>> @@ -768,6 +768,13 @@ config SCSI_ENV_PART_UUID
->>>   	help
->>>   	  UUID of the SCSI partition that you want to store the environment in.
->>>
->>> +config SCSI_ENV_PART_TYPE_GUID
->>> +	string "SCSI partition type GUID for saving environment"
->>> +	depends on ENV_IS_IN_SCSI
->> Should we add
->>
->> 	depends on ENV_IS_IN_SCSI && !SCSI_ENV_PART_UUID
->>
->> and similarly vice versa in SCSI_ENV_PART_UUID since the code seems to
->> handle them as mutually exclusive...
-> If they're mutually exclusive it needs to be handled in a choice
-> statement.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Thanks for the feedback. Introduced a choice config as suggested in this 
-respin: 
-https://lore.kernel.org/u-boot/20260109070912.4106466-4-balaji.selvanathan@oss.qualcomm.com/.
-
-Regards,
-
-Balaji
-
->
+Thanks,
+Neil
