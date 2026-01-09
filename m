@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334A8D26D81
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 18:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29CC5D26D87
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 18:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 979758436C;
-	Fri,  9 Jan 2026 19:13:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BFC784390;
+	Fri,  9 Jan 2026 19:24:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SyAH6Obi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C/iqabtG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF2758438A; Fri,  9 Jan 2026 19:13:20 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id AE180843AD; Fri,  9 Jan 2026 19:24:25 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A76C084206
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 19:13:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10A1F8436C
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 19:24:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-65d096dd0ceso1105743eaf.3
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 10:13:18 -0800 (PST)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-6598413b604so2825601eaf.0
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 10:24:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767982397; x=1768587197; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767983062; x=1768587862; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5FTVD7vL3dx0FyrIu0Vq+EJvgOH/xBqXB77nCCIi8KA=;
- b=SyAH6Obi1rrGZhYYqRV4D62/kQ2dg0wKVP7625+SiKQVh2dlZ+7f5sgJp+wCHfByFV
- enRDk5jaZees4NLbGS0NOTO+H5OZWF1tOjOkff2L23rzOiQTlEuyJ9DYK+mtBgO3q6dT
- ns/0u7jp6Y4gjV+R+RlDChyD9qntC9sozhB2o=
+ bh=E2BopUkb/PoiKjla3kBG/NI++4pIL6RweUqFAIfmvAY=;
+ b=C/iqabtG3j/7EG2Zc6NdWuTVhtD5oAQ7aeqW+cqrn5bAtjzfHpp6tkQLPqm7tjlIdv
+ y2TchOC7hX5Ry+14jrS/wGu3miFpWIF9UlHkhpfJ/3C4lzVEkhvIjcqpRpyft41fbpeR
+ BtqwAA/d9Jjke5YIlTjCjYlIFrCbyuXiN5Aq8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767982397; x=1768587197;
+ d=1e100.net; s=20230601; t=1767983062; x=1768587862;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5FTVD7vL3dx0FyrIu0Vq+EJvgOH/xBqXB77nCCIi8KA=;
- b=vM8svDbsJas0zGrfEGQ3HAeSfyi5TLJvyKuKQdQR502G+6V4BwO6g9CPLbhI9G2TIl
- qp+AiZA5DbUoD/19HD30vldiU+5v56qqxOmn8j6Y2RSSV2j9igvFgUhpXvc1tSd9GKUd
- bGicdgOGcubeBPYH2sYhdPYx6mRHRv45/p/4gFHas3W3tr0G+wXUc8U+o63Ng3ZN4GHx
- Bb7S2M11rOWf5KlUi5amm/l6eojNSkQAF3PaFUSLUeUlA8qYcWHTlcQmSuOVk4ijS70D
- 6ZzlZLp2E+ASEiFIE9YIB6mEzWO/LtR4d1p/UIoBSaozjAfPU//UfXypoo2/GJepVasF
- YGrg==
+ bh=E2BopUkb/PoiKjla3kBG/NI++4pIL6RweUqFAIfmvAY=;
+ b=vnPHqijtt5FqNbUn7xVrw/usmq5NMGLLOTsVq0AiVHCXzrwh0cNXJb9ZrzlIQ0a4xR
+ ZdIDLPTKlOt8wOfu/jPPzLUWMPlcx5QXfrwaBLjf+/kFE1pj6VoQI0NQPAI6SN5buxSg
+ C5yBBkP/k/xP58+oYBzqJL75AhEGzQv3QZYWntAZHvOuql6Tx5JAl5Geug0AaPPSKqvb
+ DDSI+CeoX8cbJvKGpzYDNl4zVoIfPXZyIQBUCne98kNTNwXYwQl0c9LUmkBgt/G0glis
+ HzcqeKc19C5kWJhyv0qytvH+lfWcUJuizeOoPGxw7EACO0NzfEeDdwJs1GU433FS/PU5
+ J6UQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAHOeVQHNQY4pp9dRGFrxXIqBDm4EKf8hwzHgLWqzMwNl579XgDEHtYhFlyg3DtGpazgVyMwQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAO4yRvw7xBOQWRw/u3wIKaoonyMsXZuo1fTFVzkftM1r0yCSn
- LDJgqSZkp4nKaPmQzAwrSeNYug0wplJkZh/h5Tu/8t8z1XFeUE1I29yMpjT+3XagOdQ=
-X-Gm-Gg: AY/fxX7NLGBTcBVI2VzQZ8CLRGc4r0JjbX+QiTn2IGE7Lv+c7Zr/tTtRwdl1IAPMLjk
- EwdWLTSkiqrRzIu5CpIGW7Bf/YTs26jltkL1lNiEnVH5vWAWtUQirrLr2uVOESh2B4Av/uioUg4
- z2dmWJyejkm77C5ZDWtUNfG3BkFzXhy79RsGah0ZG87Y1TYDCkuOvB2KfCJ63+pS8lOiDDMW5ly
- W5wZDtLt1UTT6StXMztU4PNNKMYYb8tUVOOekFm5tfz1T4cE76uhbfrdsVJfWCFdmAe5KKqlV7e
- uFFQoADzU6THQh5VpHMv78DkUq/fdKvtGLaNPhzQ6n+VfsiXMZYDesllv1G71XRIUTgpCUoCbOJ
- S/7qAxScpJna26RDWAT6wmwDR7KF6sO/iqIRD910rSRLM15M0FjhOaBlyn5jI5aV4hWQ3uTrthk
- 5NlKOqBJlYt3qsaKSNw+L1rUnHm66chQamEJODRcgWqhHIXpRVMWfHuxS6MDvL6VqmRsKux1qpE
- EwreJfXXqWbiMqmKDChSu7HcyeZeL/0TBtFfw==
-X-Google-Smtp-Source: AGHT+IFXfKGGyBNO33XWAbuMrovzc+3z7iEDs+65bFSmtcvF9nEVTJ6oegS6XZ37HP83zi08RkKEHQ==
-X-Received: by 2002:a05:6820:620b:b0:65b:250c:70f0 with SMTP id
- 006d021491bc7-65f54f5fbf1mr3899146eaf.47.1767982397356; 
- Fri, 09 Jan 2026 10:13:17 -0800 (PST)
+ AJvYcCWbeEMrOI2nPUS4MzfOEHvOvpUKykDjr17N5PJ3YFrtx1xTfDD5LdfOtQf/hc89i4TgVi/w12g=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYOk9n9ZZN4dSmshRCcsIGrGmAS9aZ9dAsyIcPMSA0CHCKQKtQ
+ WTs9SKMaMPvfj0vz1V2dNB/4yVvVhftclcQumYhiE4Cz1nOMTkE+6J9rqLF6DjuK+R8=
+X-Gm-Gg: AY/fxX661Hd0zGqyqilz4AFtdwNRvoKGHeYAXR4/MDoT2E4ofSctYhXUe/pNpbB9mrp
+ m+WF3L2CSp7X4CGcny9D4Lze6pCC0B10iUc8zO5xSvK1leT5achgxiyvZPsLQ7pBfG4F1ax7cHp
+ lOqLhZYIuvDGWYsc2AFYjhMJoVdzBx/vnP9MPj/q9/AGbAdin0reFZCOtoPle9VinvoGARiWf1O
+ YMiUbTURYmXgJFc22ykfw5I8Budsjh+jH6070+UX7PDi8Z821+EAqOA/O9Nhrva6tAoLvGg9eLc
+ IIHQEls7BUYIOEcBA+cpQdzUMdlq0MNKQu1fbGVkPTUQzt+26XbrdgEF/4tbhqdmEt+fMury3Ra
+ bN8CqhBf9tnPjY0BPoiSeS12I26C2D+jbIfiHBbuj2WVRnljNk6b+mIhz3UYD90fOjE7vFhFccU
+ yfnCthnS1jCga6GkJoW4hJHR+sqlKKeXcqhonb8XB/vXSmP12wfAbY+TSohc7eq2b7OY/h1ggEs
+ hvwcWNGrfelsuqVWLqQajfG1EN7HfFsrBEOK7OBuTpL7oWE
+X-Google-Smtp-Source: AGHT+IH0pyUhJ0YJjENuSUrqaJtCv3ZwRpqzWcxkH40x2Sy4BzUAEerUT7UVnJGwp2X0s5JbOBSNqQ==
+X-Received: by 2002:a05:6820:1ca7:b0:65d:1ec0:3002 with SMTP id
+ 006d021491bc7-65f54ef80cdmr5317449eaf.37.1767983061724; 
+ Fri, 09 Jan 2026 10:24:21 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48cb1444sm4386871eaf.11.2026.01.09.10.13.16
+ 586e51a60fabf-3ffa507235fsm7687647fac.13.2026.01.09.10.24.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 10:13:16 -0800 (PST)
+ Fri, 09 Jan 2026 10:24:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: alison.wang@nxp.com, angelo@kernel-space.org, 
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: me@ziyao.cc, daniel@0x0f.com, jserv@ccns.ncku.edu.tw, 
- eleanor15x@gmail.com, u-boot@lists.denx.de
-In-Reply-To: <20251230160651.3049301-1-visitorckw@gmail.com>
-References: <20251230160651.3049301-1-visitorckw@gmail.com>
-Subject: Re: [u-boot-test-hooks][PATCH v2] travis-ci: Add config for QEMU
- m68k virt machine
-Message-Id: <176798239604.1451963.15375169330601431658.b4-ty@konsulko.com>
-Date: Fri, 09 Jan 2026 12:13:16 -0600
+To: Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de, 
+ Bryan Brattlof <bb@ti.com>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>, Judith Mendez <jm@ti.com>, 
+ Santhosh Kumar K <s-k6@ti.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Andrew Davis <afd@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20251226-emmc-boot-fix-v1-1-417959ba4e9a@ti.com>
+References: <20251226-emmc-boot-fix-v1-1-417959ba4e9a@ti.com>
+Subject: Re: [PATCH] configs: am62[ap]x_evm_r5: enable SUPPORT_EMMC_BOOT
+Message-Id: <176798306043.1453020.12217116876680117806.b4-ty@konsulko.com>
+Date: Fri, 09 Jan 2026 12:24:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,18 +103,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Dec 2025 16:06:51 +0000, Kuan-Wei Chiu wrote:
+On Fri, 26 Dec 2025 17:03:26 -0600, Bryan Brattlof wrote:
 
-> Add the configuration file required to run tests for the QEMU m68k
-> 'virt' board. This setup uses 'qemu-system-m68k' with the '-M virt'
-> machine type and '-cpu m68040'.
+> When unifying the SD/eMMC boot behavior between the different AM62*
+> reference boards we missed enabling SUPPORT_EMMC_BOOT. This causes the
+> SPL in tiboot3.bin to look for the tispl.bin in the UDA partition in the
+> eMMC and fail.
 > 
+> Enable SUPPORT_EMMC_BOOT at the tiboot3 stage to load the next boot
+> binary from the active boot partition when in RAW MMC boot modes.
 > 
+> [...]
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
+Applied to u-boot/master, thanks!
 
-[1/1] travis-ci: Add config for QEMU m68k virt machine
-      commit: 6cc3d2d90f12610f57d974b3d3295968c907e066
+[1/1] configs: am62[ap]x_evm_r5: enable SUPPORT_EMMC_BOOT
+      commit: ce19a4af0ad175f94a1d3dca56f10e1e0f37ee73
 -- 
 Tom
 
