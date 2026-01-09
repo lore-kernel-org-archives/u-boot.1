@@ -4,75 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36CE4D1D48A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 21:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBAB6D1A63D
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 22:03:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC6CF843FF;
-	Fri,  9 Jan 2026 22:54:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
+	by phobos.denx.de (Postfix) with ESMTP id 7138C843E3;
+	Fri,  9 Jan 2026 23:03:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icloud.com header.i=@icloud.com header.b="dEhBMxh5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PBocViCN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3837843D4; Fri,  9 Jan 2026 22:24:33 +0100 (CET)
-Received: from outbound.pv.icloud.com
- (p-west1-cluster3-host4-snip4-10.eps.apple.com [57.103.66.83])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BB78A843EA; Fri,  9 Jan 2026 23:03:39 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8C0C843AD
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 22:24:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=icloud.com
+ by phobos.denx.de (Postfix) with ESMTPS id 96A91843E2
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 23:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yuri.honegger@icloud.com
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-100-percent-13 (Postfix) with ESMTPS id
- 1CA4918002E5; Fri,  9 Jan 2026 21:24:28 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai;
- bh=2mLAHsVyLx4Huy94PEdWM2dQAb+KyeWZx8el38Qm2d0=;
- h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=dEhBMxh5Mp+7bXbEm0aWEIbFVytMNBlULd1XozmP0TWY6wqdL3MsiXVXVWGYMxACLTnUqdRtp/kFwZHV6tkWSyw1XcNgECmEw6Ron/OXF7jhk7vuksZDmDmFEIk9SK3XzSCxbCrUeI8G4XCxmEzwcq7QHI/3i9IHa1JXRuX0lK9XhfZZLQTZXsMmLCCRFJ45jVdgvwLEHmZGcWDbRVdQ1lujNl4DsNj5oQDCZ2XvjX/JdGR9i5PAwrSflr9F+W3zd45bUQqfUW3lYvV2oanyY2eKkaCCbnzxclVGmkBF/iSj3gHppQwVAgjSaTB823b/haBd8/gcdDlrWtWGZ7RvdA==
-Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-100-percent-13 (Postfix) with ESMTPSA id
- 202E418002D5; Fri,  9 Jan 2026 21:24:27 +0000 (UTC)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
-Subject: Re: Placement of FDT in memory
-From: Yuri Honegger <yuri.honegger@icloud.com>
-In-Reply-To: <CAFLszTjwSCwS8Nu0Xzg=movSN3B26fifjA2+b23ORx14joM4vg@mail.gmail.com>
-Date: Fri, 9 Jan 2026 22:24:25 +0100
-Cc: u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <B748B2DA-7A8E-4794-8DC9-CA094D65589B@icloud.com>
-References: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
- <CAFLszTjwSCwS8Nu0Xzg=movSN3B26fifjA2+b23ORx14joM4vg@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-X-Mailer: Apple Mail (2.3826.600.51.1.1)
-X-Authority-Info: v=2.4 cv=Pv+ergM3 c=1 sm=1 tr=0 ts=6961720d
- cx=c_apl:c_apl_out:c_pps a=azHRBMxVc17uSn+fyuI/eg==:117
- a=azHRBMxVc17uSn+fyuI/eg==:17 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
- a=x7bEGLp0ZPQA:10 a=MquUGpQHRscA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=cm27Pg_UAAAA:8 a=v3ZZPjhaAAAA:8 a=3dV358RhpV4O6KFCrWoA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDE2OCBTYWx0ZWRfX+0Yg+f8GTa3I
- Zv65ttKqebLxK16fY5wbF3Djc8khsAcUyQ5FPUyBRg0O4p+nrFF8AXcEoet4xkguHdVGf52WRCO
- ea9oijx/XIz/UAuY2PSR+yMv6R5DTkOqBn9P35K94AO2dDTEP4V8cxqT7rM8yeR82Q+pqS5m/Jq
- Pb33D+uXD/vMyOJ5/4J/CdjOW/tTIe7pUnggL0ZWtCmL9uoOb7JtiVN4DdV7zyY6HpXNyX7edi/
- phjoGwNEfzeei5mSyDNWcyEaEd/95X/2pcBCP0sN6MWucUE1mkW0kuUwzXXJ5Tl6zTrJC5hlNOs
- esZPZmT2twNcwmWityk
-X-Proofpoint-GUID: LcEjazrKJrLUU_SxsaMTuXiqbrlAV27I
-X-Proofpoint-ORIG-GUID: LcEjazrKJrLUU_SxsaMTuXiqbrlAV27I
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-09_06,2026-01-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- clxscore=1011 bulkscore=0 malwarescore=0
- phishscore=0 spamscore=0
- mlxlogscore=999 adultscore=0 mlxscore=0 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2601090168
-X-JNJ: AAAAAAABbYmHwU7fp4ltWbPepFjrlz0lFkGqfN1KI7PokLgZO+cEgS55vzSSFkMqaSR49fbltmyFxYe6DUGRR6ANpusFVAGeOZnyZPuyqv7L1W9GQAFtBhk0CjeQAMomyRqSvX76dK6/cDjS4ziop/lnmwmY8erMG4yyy7HYOMMf/V2+CakH9iB3YCk/h0U/VfU8JOGRKj1Z5U1v0G+LraGZGShAWY10M18Uez+I5wKK69EdeAG+xGOWcegehRfu7P57j9i2m29bQQZSc0KEG4JyxUXqSEGdZMOG1N5LbRivEzR7eFK+g9gxKsBj5CU7K8oSSEBmV5W80qhp+QRpqJxA90m7VUb0PEMulZ2ujdozPjVz8XRhwd94EkKpUjX2kESB0wNua96KlQVDWMSM3RCI1wU8X1f8E5Ry1B78x5kumEFvh+M46ix5sbOI9lJKug+QG4A30hIrsds3IcQrm6hvHSWU7iwzXU5WtX2LYVCni1rssHUEnt1jiw17kjBu07VvqrQgnJaM5MNoz6pXp0iHj0PFN59V0aOOXFLn6Nqr84sralZ1QzWYIu3igE0s2q6DWmf5Y6hF4xwsb/mH6DSvS6DTaPV0VMparqKk5DFVAqZ0FH9g
-X-Mailman-Approved-At: Fri, 09 Jan 2026 22:54:20 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=d3dx12.xx@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9230f564so6729994a12.1
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 14:03:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1767996217; x=1768601017; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/N9NTI/QdgwF6W2NyTiRCbI9ssrENmC+vRibncvRwVA=;
+ b=PBocViCN+UpS8n1ggiHynKNupe0S81YIQ1cPID11a+V3jBKFdK4XcR1ECD2q7084cL
+ dzTDtUUGGyTu4CU/Dqxn2z7V1JByQWQoOpijSCFAUkTADRXF8w/vP4VaDjC1hvx9eI9M
+ CETBJe436IlBEAAXw6HHCxkl+A2PJErwz6cPrn6rqoeQPh1+Tre9Sg8kwuRbb8aIXjyg
+ dPvjnY81YS3GcpY936ETXom6+k9x9jAyaNZmcTlx8RTc+Zu+sg8vZTTuORmD1GjrpY7Z
+ CvCnvgPNRtSWEUugWPVQ8X919hIBrdWdr7rwfAEUw+2tep5bIMHySZ/h2Xec5F0yifYT
+ f5Dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767996217; x=1768601017;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/N9NTI/QdgwF6W2NyTiRCbI9ssrENmC+vRibncvRwVA=;
+ b=W7PMG7yxMTvaXsETdAw0eGe/nZcMoBPZzOvtfsI8Jfc6yPmp9oFWX8FGJX2+L1zc64
+ MsBO+wI5sXd9na0Hlj/E9oId991dN8bm7/IFP615jY2oulS0VTvOE+2sXF8GRJ07pElz
+ v9aS7wj+l/KXlTLKdElsmn8Ud6nmx17wDs8Z+DBfjjO2HZSD/x2NFjslaF9oMgN4FBb7
+ cBk1sRZzN6BO8zoWoHzkCicBgTlhtA0ylpUPuj0q/zs6wRxvwe9RfjkDNKp7r8dnD2b/
+ LjhkilWo1i9Orlf72DpjASEiMeAC8cdFfWedtCx3HIMAmTlunFyXoLBGzT8NnKLa6voC
+ WX2g==
+X-Gm-Message-State: AOJu0Yxo7uDSMKoEcuPgvBZLmUZYrlDTN4nNOUl3xA7ob7wd8fHPJL3A
+ Rx5gsmRipfL5uSPHl1ac5DcymSDHLyw5HRL+8CVh01cAb4ctSOESYb6R
+X-Gm-Gg: AY/fxX56IPWA0MUZcbDL6i48R+odCOTENnIKem8xNP63PDrYSR7GY4DpcU2/EL9P7Sz
+ 8rhKaLF/5eLEXD5EIjDhNTCHISFRiHLJDiCdi1JrbwJv7MPLbJM0EvYwE89iGUanldcxv+Vc9XB
+ w0bvHEct2viMFYJgkJ3R5noi8GWdflg+q7qOAbxpIFPgxRvHRlWj5kwNC6Ek3M9bMFwI1GG+TPq
+ qT7SuPMbq32sRirX7NZDtVTRUA0phESJSbsp5Q3omy7oxAhBEzLoSl1uDV29b3LakyL8zpb9etx
+ wbcED0Zu1wZqUL86Ak3PrGNr9kpBZhXHatHRz/t5wFIK7teL6iswIsXx6mEb8fg82PebusRabbO
+ NQAPiTQr0QtBr7GSl3FZ/roI61/l5LbLgROeh0xLigaBStWLcWKQHo7akM04Q3kTq1N1tocZpye
+ yUOHm0lgSX5PVCrymLTP3yIeR0+2aaA+gOUGgZi7uNwBjLwWELoYJW7Q7/0hBZ8GHu
+X-Google-Smtp-Source: AGHT+IE1g2PjwJI6+0wJFglwHQW6azWbI1TgGErygDuu1XF/VTlN2N3FEHwVNLbaptNoHUbNanIVjg==
+X-Received: by 2002:a05:6402:270c:b0:64d:65d:230b with SMTP id
+ 4fb4d7f45d1cf-65097decd6fmr9924953a12.12.1767996216772; 
+ Fri, 09 Jan 2026 14:03:36 -0800 (PST)
+Received: from hyperion.tail59961f.ts.net
+ ([2001:4bc9:901:a004:3351:3c64:f0a:552d])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6507b8c4484sm11461305a12.7.2026.01.09.14.03.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Jan 2026 14:03:35 -0800 (PST)
+From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Date: Fri, 09 Jan 2026 23:03:28 +0100
+Subject: [PATCH v2] binman: elf: Check for ELF_TOOLS availability in is_valid
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260109-pyelftools-warning-v2-1-e27784f14c56@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAC97YWkC/32NQQ6DIBREr2L+ujRI+mntyns0LhBBf6JgwNAaw
+ 91LPUAzqzfJvDkgmkAmwrM6IJhEkbwrIC4V6Em50TAaCoPgQvKaN2zdzWw37+fI3io4ciOTg0W
+ Ld62wf0AZrsFY+pzSV1d4orj5sJ8fqf61f3WpZiXq1kiUvOkR23FRNF+1X6DLOX8BN/gdF7QAA
+ AA=
+X-Change-ID: 20260109-pyelftools-warning-6df5f57ca5b8
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,77 +105,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Check if elftools package is available before running DecodeElf().
 
+This clarifies the error message.
 
-> Am 09.01.2026 um 12:34 schrieb Simon Glass <sjg@chromium.org>:
->=20
-> Hi Yuri,
->=20
-> On Thu, 18 Dec 2025 at 16:30, Yuri Honegger <yuri.honegger@icloud.com> =
-wrote:
->>=20
->> Hello,
->> Recently I've been playing around with the imx23-olinuxino
->> (mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During =
-that, I've
->> noticed that NetBSD panics because u-boot places the device tree in =
-the BSS
->> section of NetBSD. NetBSD clears the BSS section and then complains
->> that the device tree is corrupt.
->>=20
->> Reading the logs, it appears that FDT and kernel get loaded at =
-non-overlapping
->> ranges, but then u-boot relocates the device tree right after the =
-kernel into
->> the BSS section.
->>=20
->> ## Booting kernel from Legacy Image at 42000000 ...
->> Image Name: NetBSD/earmv5 11.99.4
->> Image Type: ARM Linux Kernel Image (no loading done) (uncompressed)
->> Data Size: 11950164 Bytes =3D 11.4 MiB
->> Load Address: 00000000
->> Entry Point: 00000000
->> Verifying Checksum ... OK
->> ## Flattened Device Tree blob at 41000000
->> Booting using the fdt blob at 0x41000000
->> Working FDT set to 41000000
->> XIP Kernel Image (no loading done) to 42000040
->> Loading Device Tree to 42b93000, end 42b99a0a ... OK
->> Working FDT set to 42b93000
->> Starting kernel ...
->>=20
->> The bootm command seems to insist on having to relocate the device =
-tree.
->>=20
->> Is this something the OS is expected to deal with?
->>=20
->> In the meantime, I've managed to work around this by running
->> env set fdt_high 0x41000000;
->> before bootm. Is there a better solution than this to force the =
-placement
->> of the device tree?
->=20
-> Do you have a value for fdt_high before you set it to that?
->=20
-> See boot_relocate_fdt() for the logic.
+Signed-off-by: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+---
+Make the error more informative and indicative of environment issue and
+not a code one
+---
+Changes in v2:
+- Reword the commit message as suggested by reviewers
+- Link to v1: https://lore.kernel.org/r/20260109-pyelftools-warning-v1-1-1a4965609b55@gmail.com
+---
+ tools/binman/elf.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-No, fdt_high doesn=E2=80=99t have a default. I found fdt_high by =
-backtracking the code in question to find a way to get it off the path =
-where it automatically chooses a memory location just behind the kernel =
-image.
+diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+index 6ac960e0419..899c84ad36d 100644
+--- a/tools/binman/elf.py
++++ b/tools/binman/elf.py
+@@ -570,6 +570,8 @@ def is_valid(data):
+     Returns:
+         bool: True if a valid Elf file, False if not
+     """
++    if not ELF_TOOLS:
++        raise ValueError("Python: No module named 'elftools'")
+     try:
+         DecodeElf(data, 0)
+         return True
 
-I=E2=80=99m mainly wondering about why we have the relocation logic =
-active in this scenario. We already have the fdt in memory from when it =
-is loaded from disk. We have to provide a manual address for this, so we =
-can choose it so that it doesn=E2=80=99t overlap. As soon as we bootm, =
-u-boot relocates it to an address that conflicts, while the original =
-address would have been fine, so I=E2=80=99m wondering about the reasons =
-for the relocation.
+---
+base-commit: 1bcb2fe324180d0a8cfbdb0511737eba1d5b8550
+change-id: 20260109-pyelftools-warning-6df5f57ca5b8
 
->=20
-> Regards,
-> Simon
-
-Thank you,
-Yuri
+Best regards,
+-- 
+Dmitrii Sharshakov <d3dx12.xx@gmail.com>
 
