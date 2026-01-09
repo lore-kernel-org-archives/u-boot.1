@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF225D16810
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 333FED16816
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:35:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE9284166;
-	Fri,  9 Jan 2026 12:34:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C812C84166;
+	Fri,  9 Jan 2026 12:34:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f88x08p/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IQHq3yq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 608A0842F2; Fri,  9 Jan 2026 12:34:33 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id AC67A84166; Fri,  9 Jan 2026 12:34:58 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B1E183F56
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:34:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E72BF83F56
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:34:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-bc2abdcfc6fso1680743a12.2
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:34:31 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-34c9edf63a7so3416409a91.1
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:34:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767958470; x=1768563270; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767958493; x=1768563293; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F2cxIscv49UMS1kDPrnphSSj3Odv/ZoA7UlUQSB6xxQ=;
- b=f88x08p/Oxxn77oF8KOfCX0Mgn2VHXkzVqjRd5gwOQGyOz8VXV/7Vj7ZWiJcBR30GY
- PsFPbxf28r1uVgft9y6Zaupr9AuUCoCsJaF9R423WBrkXWPN3xd2TC/Ginwo5r125uWM
- G+WPvhZZB10NttUE350e9056X7tuMP9Iaxgss=
+ bh=6734qONbgDDyA4ddYgF5maT50A6Dp8oXHLB7a0stEn0=;
+ b=IQHq3yq2ikSypbkULwBc704pdxrOrxvruza8PNF7D8+q7wli+dMmnafKbPr+CYF4l1
+ fmO6UmyVCNyHEC2TIC9EOcCj+rIlvFqE+TbzEy94T/84w5Q3mDyO6ma2OgskMLM5mBGm
+ E2psuOpyX6VuB5H5xX+fuwuaRM9nzIp3mpioI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767958470; x=1768563270;
+ d=1e100.net; s=20230601; t=1767958493; x=1768563293;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F2cxIscv49UMS1kDPrnphSSj3Odv/ZoA7UlUQSB6xxQ=;
- b=JvuOMyDsysM3eIYhxYHG7tmJqVfOS/stCHqkgti8Xduw0Q/z5FvCA+X0tb0UP7q2Im
- i2IFx0sOW/8AtGekAYBtk7XSOjlKmp/ZRq5eCV4Z/RugLpziiobSczwbXnGYzCKi5LQe
- 46uB8IivdNLJ2pkF6ARmaEfkw7ic6EoHGM0Pwp13YgTl1zrbRm45EWREJJ5Yh/WjhaDq
- 7NuxqXs5lPb8t518DO/w8VMenEU/JQgJbsf2hc8PQ7ED19XCHbNYhEiXsX47MDItf+ah
- 8QhUwoC8ZZBriB5ZquhKzLgSwQGjQ6TGVFar7nwtJpSpmyJ2eSFOqXAvvap4kj3zNXB9
- iKGA==
-X-Gm-Message-State: AOJu0YybgjPew6Na8GJzNANQD7aKqcW7XyeAXvnJMG/AXwkiF5rS3fxK
- /gdBhwlSZhO3p6LLTuf9EIfNzmKWzA/Sa82EPKa8H1sC8PbF+NNnkYPZ3+prGAqCckRu+hMru8R
- dY/JGAwtl3y8Vq1u2h8KD2ChyfR02dUowss4+OwBI
-X-Gm-Gg: AY/fxX5Pixm6OvKC8H9uwyOC1L1XctsTNRYgAGi8rp3rY/nXH25sTJkjtC0UKkHN6x3
- zgpmEtsfOQbBTa3oU6ilx5G2qawYz7h0ADnAXn1nHhaJaiL+rt9IF8mOgwq5xQ0aNoMVyEjvRSP
- RCfvSniUw1KDv9T/fkO8H9nJWVQpH3NXa8m4v3wJHNPsxvErefq8n5WmrxmJaLTy5najN/kvdqc
- UArzAglnXfgaIVp7HVVcY65FkMMD/QZ5uEbWlsPIHnWYyPNGTTSAyv69JULgnh/NS+kDA==
-X-Google-Smtp-Source: AGHT+IHUOk+G/EMfqhHZsNcpfXNXtM+7wZ6NQBzfnvDLq8WlEwffRPvriilCveZNiocX1tGQZCIyV94hs3m8moDW8Ko=
-X-Received: by 2002:a17:90b:1e0a:b0:34c:e5fc:faec with SMTP id
- 98e67ed59e1d1-34f68c3367fmr8425012a91.2.1767958469636; Fri, 09 Jan 2026
- 03:34:29 -0800 (PST)
+ bh=6734qONbgDDyA4ddYgF5maT50A6Dp8oXHLB7a0stEn0=;
+ b=B0+sP0JJ5RntXnLbDeR72x1r363226CUtHCs6q1U/171FrlKnETMpLDcV9nL56MNVF
+ PnwnLeNpj8AeqJnH1E/t6/2JBP14YGngbJLUmX9H2EUNcmV1j5Bzox3J/1fBaGd3K9XK
+ tgoGkfYe0F5fBWcabZBiDszy4if4gPOg7EGxTC+TtfkVl2c0Lx5qyp7hSw1QacpKb9fO
+ zqHz7iptfCTvKfozLMYt3D9cg26HLronzrRXoA4gjuyiL7sJ+6US1G9e9zRKpcXyrV9X
+ Dyih8/yYvDbfQqKySHW2BPYEtlc6m9Dsf0oAv7ITZbtQQL+8pS8ucYLjVASokN6YG4S3
+ 050w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRuA5M1AQJLmKioFfK64exkLlKLY3q8vYqJWp1+amhUiqnvHa9+1PVuMuCKQdAOd5sWMFcam0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXb0dvmuj2bQFLByo63j5t3V9h2TVKc0t6ls685+QT2ruZ+Pyg
+ dyKfpeA8iG8rEidZeQpMMs/VrqOTTf+XUHUnSdbC4JZg8Ssgydp8XtRx617l+ckp6E7xL/aOZal
+ RpLMROanZ78MIt5UQVqVc/ylzgnUZXXGNB8XGyh94
+X-Gm-Gg: AY/fxX4qCWOjq6U1visJKQuPgJYD2QWxnMREIEqBWR4GwDhzZgDOQgUSjjgKWwxGkFA
+ klnnhJeDfCldXCHadwX/SVqJDQLl3gYz3ip7hUn/LrHaqF0ffsTkO4IShDR7WxopVZFu1zMIUvD
+ N6yB7WWClQ+82mAVwngxx4ujy2YpE/qmyRhIRk6MAjL6CJmmYv0xETAhqu9XGw8sghe0fYoz2SP
+ jsO8mqe7AKxnl95YkQk6JjMEsqsxagkRdtK6sK3L8eia+Uu7ty6d48SUv17epLIfGyQNA==
+X-Google-Smtp-Source: AGHT+IGEPQj/0x35L73N7loEownPT7LPow4IEeTKdl00pZH5uWmUE8wngxocLJj4E2Xt7ZNJv922qD78Q+v8NeZCqqk=
+X-Received: by 2002:a17:90b:4f44:b0:349:5b1b:78be with SMTP id
+ 98e67ed59e1d1-34f68d0bc39mr10093526a91.17.1767958493412; Fri, 09 Jan 2026
+ 03:34:53 -0800 (PST)
 MIME-Version: 1.0
-References: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
-In-Reply-To: <B157C9A8-9D26-4C06-B2F5-BABDFD7A8BFC@icloud.com>
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-10-simon.glass@canonical.com>
+ <CALeDE9O-jkytOaioLBKr_vui0Q7TSAZGmTkNY6ssJ4EkZD_OtA@mail.gmail.com>
+ <CAFLszTgtgYm67w2KmEo5nSZKuohD7sRNQKSrA0=mBxr9vd2gLQ@mail.gmail.com>
+ <87jyxt9ps4.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87jyxt9ps4.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Jan 2026 04:34:06 -0700
-X-Gm-Features: AQt7F2ovNGXXwDTwLCGcKAYGWZ3Ao8KvjjtVMXPYWUEYN8WhiQUa0gsezPc94Ig
-Message-ID: <CAFLszTjwSCwS8Nu0Xzg=movSN3B26fifjA2+b23ORx14joM4vg@mail.gmail.com>
-Subject: Re: Placement of FDT in memory
-To: Yuri Honegger <yuri.honegger@icloud.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 9 Jan 2026 04:34:38 -0700
+X-Gm-Features: AQt7F2orF1IR8IS08NhKfmATX97rV0m1phwhVz3qRIy5fUNdCXW1r83i4NwHK9c
+Message-ID: <CAFLszTgUw=TdheWVUzKLO+2+YECQv=19cJk3tdkFfsUhtRfyAQ@mail.gmail.com>
+Subject: Re: [PATCH 09/10] efi: Drop EFI_GRUB_ARM32_WORKAROUND
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: pbrobinson@gmail.com, u-boot@lists.denx.de, trini@konsulko.com, 
+ simon.glass@canonical.com, adrianox@gmail.com, xypron.glpk@gmx.de, 
+ jan.kiszka@siemens.com, jerome.forissier@linaro.org, 
+ marek.vasut+renesas@mailbox.org, mkorpershoek@kernel.org, 
+ michal.simek@amd.com, ravi@prevas.dk, raymondmaoca@gmail.com, 
+ ryder.lee@mediatek.com, weijie.gao@mediatek.com, me@ziyao.cc, 
+ paul.liu@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,48 +98,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yuri,
+Hi Mark,
 
-On Thu, 18 Dec 2025 at 16:30, Yuri Honegger <yuri.honegger@icloud.com> wrote:
+On Wed, 7 Jan 2026 at 12:38, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> Hello,
-> Recently I've been playing around with the imx23-olinuxino
-> (mx23_olinuxino_defconfig) and booting NetBSD using u-boot. During that, I've
-> noticed that NetBSD panics because u-boot places the device tree in the BSS
-> section of NetBSD. NetBSD clears the BSS section and then complains
-> that the device tree is corrupt.
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Wed, 7 Jan 2026 12:02:27 -0700
+> >
+> > On Tue, 6 Jan 2026 at 19:42, Peter Robinson <pbrobinson@gmail.com> wrote:
+> > >
+> > > On Wed, 7 Jan 2026 at 00:33, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > From: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > This work-around dates from 2019 and grub 2.04 which is quite old. New
+> > > > builds of grub don't have the problem and old boards presumably use an
+> > > > older U-Boot, so don't need this.
+> > > >
+> > > > Drop it.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> > > > ---
+> > > >
+> > > >  configs/mt7623n_bpir2_defconfig |  1 -
+> > > >  lib/efi_loader/Kconfig          | 10 ----------
+> > > >  lib/efi_loader/efi_boottime.c   | 26 --------------------------
+> > > >  3 files changed, 37 deletions(-)
+> > > >
+> > > > diff --git a/configs/mt7623n_bpir2_defconfig b/configs/mt7623n_bpir2_defconfig
+> > > > index 404380558f2..d75168a72ed 100644
+> > > > --- a/configs/mt7623n_bpir2_defconfig
+> > > > +++ b/configs/mt7623n_bpir2_defconfig
+> > > > @@ -13,7 +13,6 @@ CONFIG_DEFAULT_DEVICE_TREE="mt7623n-bananapi-bpi-r2"
+> > > >  CONFIG_TARGET_MT7623=y
+> > > >  CONFIG_SYS_BOOTM_LEN=0x4000000
+> > > >  CONFIG_SYS_LOAD_ADDR=0x84000000
+> > > > -# CONFIG_EFI_GRUB_ARM32_WORKAROUND is not set
+> > > >  CONFIG_FIT=y
+> > > >  CONFIG_FIT_VERBOSE=y
+> > > >  CONFIG_DISTRO_DEFAULTS=y
+> > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > index 13e44be1d06..5585c841c27 100644
+> > > > --- a/lib/efi_loader/Kconfig
+> > > > +++ b/lib/efi_loader/Kconfig
+> > > > @@ -505,16 +505,6 @@ config EFI_LOADER_BOUNCE_BUFFER
+> > > >           hardware we can create a bounce buffer so that payloads don't have to
+> > > >           worry about platform details.
+> > > >
+> > > > -config EFI_GRUB_ARM32_WORKAROUND
+> > > > -       bool "Workaround for GRUB on 32bit ARM"
+> > > > -       default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
+> > > > -       default y
+> > > > -       depends on ARM && !ARM64
+> > > > -       help
+> > > > -         GRUB prior to version 2.04 requires U-Boot to disable caches. This
+> > > > -         workaround currently is also needed on systems with caches that
+> > > > -         cannot be managed via CP15.
+> > >
+> > > This also states that it's needed for systems that can't be managed by
+> > > CP15, what systems are they, how are those platforms addressed?
+> >
+> > I'm guessing that some systems have level2 caches with their own
+> > software interface. I certainly have seen this with Tegra2/3, for
+> > example.
 >
-> Reading the logs, it appears that FDT and kernel get loaded at non-overlapping
-> ranges, but then u-boot relocates the device tree right after the kernel into
-> the BSS section.
+> This is already being discussed in another thread on the mailing list
+> started by Jan Kiszka:
 >
-> ## Booting kernel from Legacy Image at 42000000 ...
-> Image Name: NetBSD/earmv5 11.99.4
-> Image Type: ARM Linux Kernel Image (no loading done) (uncompressed)
-> Data Size: 11950164 Bytes = 11.4 MiB
-> Load Address: 00000000
-> Entry Point: 00000000
-> Verifying Checksum ... OK
-> ## Flattened Device Tree blob at 41000000
-> Booting using the fdt blob at 0x41000000
-> Working FDT set to 41000000
-> XIP Kernel Image (no loading done) to 42000040
-> Loading Device Tree to 42b93000, end 42b99a0a ... OK
-> Working FDT set to 42b93000
-> Starting kernel ...
+>   https://lists.denx.de/pipermail/u-boot/2026-January/606817.html
 >
-> The bootm command seems to insist on having to relocate the device tree.
->
-> Is this something the OS is expected to deal with?
->
-> In the meantime, I've managed to work around this by running
-> env set fdt_high 0x41000000;
-> before bootm. Is there a better solution than this to force the placement
-> of the device tree?
+> My suggestion would be to drop this patch from your set and let that
+> thread run its course.
 
-Do you have a value for fdt_high before you set it to that?
+Yes I did see that and I was pleased to see that someone else was
+interested in this topic.
 
-See boot_relocate_fdt() for the logic.
+Still, that thread does not actually include a patch. So let's see how
+it pans out.
+
+>
+> > >
+> > > >  config EFI_ESRT
+> > > >         bool "Enable the UEFI ESRT generation"
+> > > >         depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT
+> > > > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> > > > index 0bc66ee61a8..c31ee53cde6 100644
+> > > > --- a/lib/efi_loader/efi_boottime.c
+> > > > +++ b/lib/efi_loader/efi_boottime.c
+> > > > @@ -2139,29 +2139,6 @@ error:
+> > > >         return EFI_EXIT(ret);
+> > > >  }
+> > > >
+> > > > -/**
+> > > > - * efi_exit_caches() - fix up caches for EFI payloads if necessary
+> > > > - */
+> > > > -static void efi_exit_caches(void)
+> > > > -{
+> > > > -#if defined(CONFIG_EFI_GRUB_ARM32_WORKAROUND)
+> > > > -       /*
+> > > > -        * Boooting Linux via GRUB prior to version 2.04 fails on 32bit ARM if
+> > > > -        * caches are enabled.
+> > > > -        *
+> > > > -        * TODO:
+> > > > -        * According to the UEFI spec caches that can be managed via CP15
+> > > > -        * operations should be enabled. Caches requiring platform information
+> > > > -        * to manage should be disabled. This should not happen in
+> > > > -        * ExitBootServices() but before invoking any UEFI binary is invoked.
+> > > > -        *
+> > > > -        * We want to keep the current workaround while GRUB prior to version
+> > > > -        * 2.04 is still in use.
+> > > > -        */
+> > > > -       cleanup_before_linux();
+> > > > -#endif
+> > > > -}
+> > > > -
+> > > >  /**
+> > > >   * efi_exit_boot_services() - stop all boot services
+> > > >   * @image_handle: handle of the loaded image
+> > > > @@ -2245,9 +2222,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+> > > >         /* Patch out unsupported runtime function */
+> > > >         efi_runtime_detach();
+> > > >
+> > > > -       /* Fix up caches for EFI payloads if necessary */
+> > > > -       efi_exit_caches();
+> > > > -
+> > > >         /* Disable boot time services */
+> > > >         systab.con_in_handle = NULL;
+> > > >         systab.con_in = NULL;
+> > > > --
+> > > > 2.43.0
+> > > >
+> >
 
 Regards,
 Simon
