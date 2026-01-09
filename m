@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4AD5D16810
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:32:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEB5D16816
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 293D983F56;
-	Fri,  9 Jan 2026 12:32:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E06384166;
+	Fri,  9 Jan 2026 12:32:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A+1/P36v";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QI6M2vup";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B85A08423D; Fri,  9 Jan 2026 12:32:28 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 3AB71842DB; Fri,  9 Jan 2026 12:32:51 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F89083CB1
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:32:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4EF983CB1
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:32:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-34cf1e31f85so2692852a91.1
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:32:26 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-34c3cb504efso3324582a91.2
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 03:32:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767958345; x=1768563145; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1767958367; x=1768563167; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CczFiZuwK9BoqtX3vKvC/4Rk4mv1f+VxPmnM+H6SpPk=;
- b=A+1/P36vuCQyYJM0CZ2mSkdBzPtPF/KI7xeYJg9zsKDXWeAv2r8yC3uSD+jsn1Bc40
- eYwmCFFU/0g256OpSKfzR5lPGN2H/IJ2v3JFn8MFtMIjZaPEOwF66s06Vcj9gi/M8H0+
- ngdVke9PAVlePMCveBnceC5Yw2tltFHHJiXS4=
+ bh=UHXiR/Sni6BykKngxvWGqT/uMwh9NZW2XigiJsgTPuo=;
+ b=QI6M2vupO26RJLvlVtlvIkfJg9FDEscycmRhANFXhZSsCgysWpyddhjrV/iMoFdScQ
+ 4cP9nL+YmVanRzFSIPEzHTtn1ZlZwHw85kl9yKtIZ8Mc+kpuqEktuCOm/UWZ9S25hmmB
+ l5pDoVA5nvdWSCNjs3lTIbiTIIGKJmIhDxZlE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767958345; x=1768563145;
+ d=1e100.net; s=20230601; t=1767958367; x=1768563167;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CczFiZuwK9BoqtX3vKvC/4Rk4mv1f+VxPmnM+H6SpPk=;
- b=OzKqD7CCqRbaxZ6edGsm+iBaBbTH3r9HzE+tGthO2aiFAlh1cFQ5pCLlqfcUA6haXz
- 1hBjJ9pFn9JwEj8yrRIjRyKYIJh5mk3by9PcUbpdPxfEgslK64TrLCaO55cUOUG1Ju26
- bumQkp5Qbte10tEZbJGiUtIGN2Sh0jrRHQclIzu9CzVmQbDZ2WALRf9P/I3AdVRmBFrq
- xbM4YkUSBM9//Tp8a56c3BWqMRLKQzCGGM+0M/5dgcbdtbNNrM53YVDHN5OJsWXVNQ/C
- lEoSvDxw2rmrsHMUDam0deV3g8VARHpX9HzdfpJf19nYVONX1cqQNQbQzrdLAGK1DA0E
- Freg==
+ bh=UHXiR/Sni6BykKngxvWGqT/uMwh9NZW2XigiJsgTPuo=;
+ b=J1WGwRG0rH0zMPu5h2L4UmbzQKjW0DMnzZ38dWuelQ2PyCIuFVH4nXusRWZ+tQIma8
+ imc2BSsLBGO2d2VDclPEmEwbrdQvCTvZxY5eaRocGEaJ3ieJSGn/vDHVWZeH175vHHcq
+ +O2tMBdRBds6IbYFb2TVVbUdFWCmrEV3JFAU187Gh+StDizhJPDvZ5qv7/N5XZ0We7WL
+ K8Dflkw4gfSpgKpXYTBmtfv8xerMsbDLQgvq3VOi9GXE8V3bm5lowOa4z4cCUv36+hZL
+ luCCdJKi9bgBHfl84Y3DJgEwzopxtduUtJZi+SSHLlgkYPq3U5/AoV1R5aNxz4PHtbfr
+ sRNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFQg3RfKyFfJQCUc/rHJH+WPDaC2pC089kwBBj5/n6e2eZhdAbPIleqobrELk5rOX3mT93nVc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzC0MhtIakbzZ8Swc2F10e/0TO+uXFzZcZ3EYOReJ3ZSsq0yfHT
- c3MScL4YmJ2IzNYbQUBNEaLrFp2hke2D1cLL9UaaAALeEjdyKrMY4nJWZYsw19E+k+FUnqELDhw
- Bg24Nmq81KzJNLyygZxLdX55kwChlWek5iGmGixaS
-X-Gm-Gg: AY/fxX4tvmMgZwc9seSLrKPtjLYpfQZ0NubiFmHgTTUdVSXXvddTOEqMK0gDo3GjtcN
- +lHElG1Vkwm3RNnJoENsn0yydXxOcQQec3HQhB7D2X/mIxneNB+AXbKBEm7StmhC4rB36AqhD9J
- JUclbQbJ/y/I1YuSR7whzoNwe0mohS4RFFmBPuJ0Xk2ITWb+z4HO6CbKkYLa10QR7+n3m4F5CMH
- rOTZny0TeoAITdQMxnusXZk4RaoQDx4+eFitLIa3np1v7/KswfMf8Y1rcPdFCFvzQnXFA==
-X-Google-Smtp-Source: AGHT+IGHErRKgv242zNHqo7+We7wwqzz9yvIxc5qMb/0NXyJ0AgbfTvM9V5uX7IsRHLRlzyriHxnKGUKlUy/ZNvRssw=
-X-Received: by 2002:a17:90b:4acb:b0:349:7f0a:381b with SMTP id
- 98e67ed59e1d1-34f68b4c603mr9457958a91.8.1767958344726; Fri, 09 Jan 2026
- 03:32:24 -0800 (PST)
+ AJvYcCUSTgp2dO3c/swIRKFjGTx4KkHr4Qk9ldRjqcl+mVPnEX2ovT1n0z3KbuhP+fJINkYidPjghOQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+wpkYHfIbnyZ+SIpLe6nxl5E4N7/CXQ23pm9cMU2i1ep1RKrn
+ rSLj+EdRUS1/N03tHNxG0kmbOBTkd/5XI3F8yOOo2OfqtDdqCB28DOIafbewHqWkaaXsECTaYCk
+ Ltyk9MuBnEnDhAmjsJv+yQDGvFm1AmmpjJzxM/m6l
+X-Gm-Gg: AY/fxX7o7/KqFmiA+Nzb/lWyBKoo8sYiK17VSy0x5PrmTFxR+W/Ro5/MKkIjGkYvPXm
+ Aig7l2l9Bf5SgSXMKazGk79xTEg+5z3FtTe7rAWcY8nySoQOu+vaGeJsc39u/BtRYubIeslm0fq
+ N0xurp2y9ghXp7OC1YGwkbhpietzXdH6b6Hot/4W6LXAw10DseEKmH5TrhXul5efXkzaVx39NtQ
+ W8o9wZn/zbXxbG0UW6Z4qX7+Rt62cgdx8cE4NgtEo0eECEecRxFngI/vQMr/vOVk0zXiw==
+X-Google-Smtp-Source: AGHT+IE7hJJk3ZioIbtmcShQlDAZdY1mjq/hsQ7qOP203z0fjaUh2NtfLhq+0VfRhaVAIG495aTOix5It0CMXhuph5k=
+X-Received: by 2002:a17:90b:6c7:b0:335:2eef:4ca8 with SMTP id
+ 98e67ed59e1d1-34f68d3b4a4mr8634750a91.33.1767958367066; Fri, 09 Jan 2026
+ 03:32:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20260107201838.3448806-1-visitorckw@gmail.com>
- <20260107201838.3448806-6-visitorckw@gmail.com>
-In-Reply-To: <20260107201838.3448806-6-visitorckw@gmail.com>
+ <20260107201838.3448806-7-visitorckw@gmail.com>
+In-Reply-To: <20260107201838.3448806-7-visitorckw@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Jan 2026 04:31:52 -0700
-X-Gm-Features: AQt7F2qEncCoh3eE25k-fRIuPJyBo4pLz01N0aZkB4LH00AJ6yPiOm4eOpL3Nvo
-Message-ID: <CAFLszTgys6Y=JNu-=aFoQ071Ac63qMKB99OVj-NtJ5-Arcw-RA@mail.gmail.com>
-Subject: Re: [PATCH v6 5/8] m68k: Add support for M68040 CPU
+Date: Fri, 9 Jan 2026 04:31:54 -0700
+X-Gm-Features: AQt7F2oldZuMsAI_QVn8-ZMiteM2BuzQYEvqNs9Wwx-0pVZO9Jqt34dsTGU24Zs
+Message-ID: <CAFLszTjBdYw9Jz4UQkdk5DrtUK+sEQbxTT_Y9dyGW7Ly=bmXhw@mail.gmail.com>
+Subject: Re: [PATCH v6 6/8] board: Add QEMU m68k virt board support
 To: Kuan-Wei Chiu <visitorckw@gmail.com>
 Cc: alison.wang@nxp.com, angelo@kernel-space.org, trini@konsulko.com, 
  me@ziyao.cc, daniel@0x0f.com, heinrich.schuchardt@canonical.com, 
@@ -93,47 +93,50 @@ X-Virus-Status: Clean
 
 On Wed, 7 Jan 2026 at 13:19, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 >
-> Add support for the Motorola 68040 architecture. Currently, m68k
-> support in U-Boot is primarily focused on ColdFire variants. Introduce
-> the necessary infrastructure to support the classic M680x0 series,
-> specifically targeting the M68040 as emulated by QEMU.
+> Add support for the QEMU 'virt' machine on the m68k architecture. This
+> board emulates a generic machine based on the Motorola 68040 CPU
+> equipped with Goldfish virtual peripherals.
 >
-> The implementation includes exception vectors, early startup code, and
-> minimal CPU initialization and relocation stubs. It also defines the
-> standard m68k boot information structure used for passing hardware
-> information to the operating system. To ensure compatibility, ColdFire-
-> specific library objects such as cache and interrupt handling are
-> excluded from the build when M68040 is selected.
+> Introduce the necessary board configuration and initialization
+> infrastructure. The implementation includes logic to parse the QEMU
+> bootinfo interface, enabling dynamic detection of system RAM size to
+> adapt to the virtual machine's configuration.
 >
-> Additionally, apply a specific workaround during the early memory
-> reservation stage. Use a manual loop to clear global data instead of
-> the standard memset() function, as utilizing memset() at this point was
-> observed to cause a hang on the QEMU platform.
+> Enable the Goldfish TTY driver for serial console output. Additionally,
+> enable Goldfish RTC and timer drivers to support real-time clock
+> functionality and nanosecond-resolution delays. Include comprehensive
+> documentation covering build instructions and usage examples.
 >
 > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Tested-by: Daniel Palmer <daniel@0x0f.com>
 > ---
 > Changes in v6:
-> - Introduce hidden Kconfig symbol CONFIG_ARCH_COLDFIRE to group
->   ColdFire-specific files in Makefile, removing the need for
->   'ifndef CONFIG_M680x0'.
-> - Add help text for CONFIG_M680x0.
+> - Move bootinfo parsing logic to a helper function called in
+>   board_early_init_f.
+> - Remove hardcoded MMIO address macros; use values parsed from
+>   bootinfo.
+> - Use the new sysreset driver via U_BOOT_DRVINFO.
+> - Use SZ_16M macro for default RAM size.
+> - Update header include order to match coding style.
+> - Fix blank line formatting in checkboard().
 >
->  MAINTAINERS                      |  6 +++
->  arch/m68k/Kconfig                | 30 +++++++++++++
->  arch/m68k/Makefile               |  1 +
->  arch/m68k/config.mk              | 10 ++++-
->  arch/m68k/cpu/m680x0/Makefile    |  6 +++
->  arch/m68k/cpu/m680x0/cpu.c       | 73 ++++++++++++++++++++++++++++++++
->  arch/m68k/cpu/m680x0/start.S     | 73 ++++++++++++++++++++++++++++++++
->  arch/m68k/cpu/m680x0/u-boot.lds  | 47 ++++++++++++++++++++
->  arch/m68k/include/asm/bootinfo.h | 39 +++++++++++++++++
->  arch/m68k/lib/Makefile           |  7 +--
->  10 files changed, 284 insertions(+), 8 deletions(-)
->  create mode 100644 arch/m68k/cpu/m680x0/Makefile
->  create mode 100644 arch/m68k/cpu/m680x0/cpu.c
->  create mode 100644 arch/m68k/cpu/m680x0/start.S
->  create mode 100644 arch/m68k/cpu/m680x0/u-boot.lds
->  create mode 100644 arch/m68k/include/asm/bootinfo.h
+>  arch/m68k/Kconfig                     |   9 ++
+>  board/emulation/qemu-m68k/Kconfig     |  12 +++
+>  board/emulation/qemu-m68k/MAINTAINERS |   8 ++
+>  board/emulation/qemu-m68k/Makefile    |   5 ++
+>  board/emulation/qemu-m68k/qemu-m68k.c | 117 ++++++++++++++++++++++++++
+>  configs/qemu-m68k_defconfig           |  20 +++++
+>  doc/board/emulation/index.rst         |   1 +
+>  doc/board/emulation/qemu-m68k.rst     |  39 +++++++++
+>  include/configs/qemu-m68k.h           |  18 ++++
+>  9 files changed, 229 insertions(+)
+>  create mode 100644 board/emulation/qemu-m68k/Kconfig
+>  create mode 100644 board/emulation/qemu-m68k/MAINTAINERS
+>  create mode 100644 board/emulation/qemu-m68k/Makefile
+>  create mode 100644 board/emulation/qemu-m68k/qemu-m68k.c
+>  create mode 100644 configs/qemu-m68k_defconfig
+>  create mode 100644 doc/board/emulation/qemu-m68k.rst
+>  create mode 100644 include/configs/qemu-m68k.h
 >
 
 Reviewed-by: Simon Glass <simon.glass@canonical.com>
