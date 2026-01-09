@@ -4,147 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE5DD232F7
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:51:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A308D232F6
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 09:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53A6684121;
-	Fri,  9 Jan 2026 09:51:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 88CD484119;
+	Fri,  9 Jan 2026 10:07:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="YI7tluuB";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ceUD5ja6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YC9l8klG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A09CD84144; Fri,  9 Jan 2026 09:51:45 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 4E04884121; Fri,  9 Jan 2026 10:07:14 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAFB584119
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:51:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6098XR1S822867
- for <u-boot@lists.denx.de>; Fri, 9 Jan 2026 08:51:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- e7wVnuaYZ3JRbGegQI/s91bb7fNZY9Lg4ISEpABbB50=; b=YI7tluuBVZBkqVo5
- x0P2byXpqulR+h5O1SNFpZYUZYKpGeQKFwgHVwPWp8+vy+JhDzABML8UhR0WS54B
- pw0dFf4lrccWlAN3pusKbckKgLkON3zdrXBZ5oAqJfOqFpjVfzyGT+4d6AqDjeTE
- XNy0qjl/vLhGgb/LxhldnggZdLeBOaGNHvAM4riDIdp9Ors+hGUppzXYxaiBfxxd
- PP4uopVTygDXe2r6CgtAHZyVvN+ROj1avYEr8EIceYVbakmHuZPy5yIAk0apTL33
- mrefSQYqPRDr2950T/adGs2oHXbBvQsJjBTQubnwKkUy4C0OOCPUz+/MH2j5ODMt
- EptkVA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bjx94g215-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 08:51:37 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2a08cbeb87eso49483305ad.3
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 00:51:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1767948697; x=1768553497; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=e7wVnuaYZ3JRbGegQI/s91bb7fNZY9Lg4ISEpABbB50=;
- b=ceUD5ja64rpFyPs4WvWEo17e99+E1rLLcBLQu9ADChJdtXkizblfguKhWx/astvvpw
- SFZjvHeDiG94Uvx8W539Rd9ruUDoWMxbkHRUMwmq5RDua5fTYM4Q+6CBIJtqbxexPAYw
- zJPpU/5RHn9tj2B6BJx7v7sIQhd/HCc9rZHjWTp8+eTGypt20Q0tdw3L9ZCbix9Wqn/u
- jY3mxmuxrHxoX1rSaF7bKx3mNoqtIo7lLbdW88j0quJ+mlZ6YvBbdsYH6hRGp5NY454/
- qrgddcgijXO07qlVNGb3qhdSEmFJy23lqBy1VJZW412dqAsFK2suAKGI2pxlPFipnYNd
- dUhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767948697; x=1768553497;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e7wVnuaYZ3JRbGegQI/s91bb7fNZY9Lg4ISEpABbB50=;
- b=hL6NZONWPMvWPp2DRtXUVzRB9iCjpPi7rgWfjTLQO+6sSSaccOmLtnSIpM+CzhmEio
- CnUMyH2pUbaoDU8uv5MpI9kIYHkbEKuCFIY8wbaM8xTRYf7eiJ/7pQ9D5GlxZ9SO+mqa
- u7x3qjHc33OedauP2/+LsasKFgayyXXyoeAwsarCP7mmIW6FRr9BxNwKa3Jj1TNXSWHy
- 1LSXLdZ1PtAwcx7x7QrZdD/H/6gDmuRc7dPDyC+il4ZqWW/7vskNWr9TY41mp8lfUz6v
- 7CMTTRRUOXXGGKGjOgU2SNYAtol/gjd/vTlfDysbQetX1BzstuSMdgT407eiE5JspUx2
- vQbw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdnKwXT00Dcq1zphyMbBsQkCNB9AQToakG2yQWC4/oFYSr4fHMdrNH9yr1eFsNznrExE4i37M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1+lTiK/A1HqkBxK9L752BE6koxeRdwyjuf4vIQCxTP74pQj5u
- uSBYf7dAee54NPNWomzBKWToDLd7vVCzh2EroqeWZBPHJsp4J7EFpDN7tbfIuxAywNuQ4bYEuT+
- lQpP6RCwUFn9YR6vW0TyDBkmDZ1VKlKCkW0+tb9VaKraUBIUhlQ6bOtD0
-X-Gm-Gg: AY/fxX4p1KHasCF3e4N3C28cNwfWdfP2ikfby9KxGAiJy0yn735lE7e47w3b3tip6R1
- lu1odtF+bQ+7Un5UuKPbSr7gX3rev69o31g7vC1e6n7ZIZV7WRKq2mNWaz2Nnf2Zeqr9vU7JDW5
- 9SMfGanhETH9w17M84WEhl/Hca0lzVR4sDWUByKE0mEXzJp8/LHstq90E5EMU2aBx65ZDKbhPeJ
- 4LEzvXtrikN5KiLisdGIBxCiPKPFms7gVjsnCd1MfpZqgMTmYKmtzDvIU57JS2X2ghXA4AgGrys
- Lz7QanH2JZHXI90TjHqQpygPOUTMoV3WDa8aKG+V6DNTo+cSDMECskHjyyo5FzmJZQy7wnlfETF
- TBCSNmq3aVfX4K3BswSJzQ/zMUGB+YEqn9e8CxGP6PRZENng=
-X-Received: by 2002:a17:903:1a6b:b0:295:6c26:933b with SMTP id
- d9443c01a7336-2a3ee41d19cmr85345235ad.1.1767948697109; 
- Fri, 09 Jan 2026 00:51:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFZGdqCBJhmiS3rre5ybdQ/6TVFZdWvBcbvvPr49Fxi8ROg4ivlyCwLduoMTB/BLvh3dC52lg==
-X-Received: by 2002:a17:903:1a6b:b0:295:6c26:933b with SMTP id
- d9443c01a7336-2a3ee41d19cmr85344705ad.1.1767948696397; 
- Fri, 09 Jan 2026 00:51:36 -0800 (PST)
-Received: from [10.151.41.119] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a3e3c5cefbsm97449515ad.43.2026.01.09.00.51.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Jan 2026 00:51:36 -0800 (PST)
-Message-ID: <bb66d91b-667a-4c28-8acc-b64fa84fb7f6@oss.qualcomm.com>
-Date: Fri, 9 Jan 2026 14:21:28 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id 7126383CB1
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 10:07:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id D120041AE9;
+ Fri,  9 Jan 2026 09:07:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27428C4CEF1;
+ Fri,  9 Jan 2026 09:07:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1767949624;
+ bh=csYwiHDMs7TW7sYZRQpJAmIGbVGzt4pdBF/f6VIkEvA=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=YC9l8klGs6jShBl+eL9GbEUluAXN8jg39b4wfCjj8QJV0o6CNEnJBRMQL8clc++ZE
+ 45Jl9IXC0UVfJyFRZ5HDO41DcNHsusENg+ab3Ms8FqEz+kvngIB7RdZVfS6uDduj0X
+ COi+gMp1n/WvWi4KASvz3rDxgP6tPbZv8hzQjqugwSXaDxbCpb7n0A92iaBTz5zWGu
+ f1ZdRr+JCkih3LAoDaA6iLOWVnKBnH0vtWjywKDiNofcyzeoaLBuQfQ7Ipzur8viBY
+ z611aytwl8SzbBq/Gy/wmlcVG/PE2sz6K3LxHYx2HQfYZwlVSf5F8RA2pQRBGghTF3
+ uFG7TU2uf8ceA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Maxime Fournier <mfournier@baylibre.com>, Eddie Kovsky
+ <ekovsky@redhat.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>
+Subject: Re: [PATCH v4 5/5] test: abootimg: Add test for bootconfig handling
+In-Reply-To: <20251218-bootconfig-v4-5-5bbbdb0be1dc@baylibre.com>
+References: <20251218-bootconfig-v4-0-5bbbdb0be1dc@baylibre.com>
+ <20251218-bootconfig-v4-5-5bbbdb0be1dc@baylibre.com>
+Date: Fri, 09 Jan 2026 10:07:01 +0100
+Message-ID: <87ecnzyx1m.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/4] env: scsi: Add support for partition type GUID
- based environment
-To: Simon Glass <sjg@chromium.org>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, joe.hershberger@ni.com,
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, ravi@prevas.dk,
- javier.tia@linaro.org, quic_varada@quicinc.com,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- ansuelsmth@gmail.com, mwalle@kernel.org, anshuld@ti.com,
- jan.kiszka@siemens.com, javierm@redhat.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
- <CAFLszTg6X8PeD4ZyY08WsTSs+qnRb_-jJjyupzSmi-jDzEhWUQ@mail.gmail.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <CAFLszTg6X8PeD4ZyY08WsTSs+qnRb_-jJjyupzSmi-jDzEhWUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=RN2+3oi+ c=1 sm=1 tr=0 ts=6960c199 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=VqIB2j27SjXQJw6CrHMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: bjMSUeS6ZvNy_wTTFwHtnEe0o6lOSfE1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDA2MiBTYWx0ZWRfXxyCatWYZbBpB
- 46l0tEVAReYkCNAsMRHM0ss5/L9rKyCgzqwgv7+xl5IpCL5kI0YPk1Y5qK03d5whyn2c98CQJ2G
- v+64Qdnfd35CypUW8LXQUHAgSxYqH9eBBXFuPQK+BxZI146wGyjyHi/cryISOq9ajWDFUvTAXZt
- W+g6hrQbdv8BU/IutZjcCVsNuSPqdSRRJStmAxs9ssYRlVAlI9IMbVM9f+B6jjauS2Q0EkgMWEU
- jmBozo/Wn19Q77bRwPq5xbtPfb52+3G2XPfuanZFL9+ooevquy3DCZH84C4bncrrAdvrmxVFUGt
- SrqYwMUdtkaRm4JoSGIw8q/8RP3euNbghyiwcEz5CdWn/4mtO2vUqi+8wc8rRJhhwtUSqe0Yrko
- +dT7mHzdAFqyj5nHTeIFkjeq/YbJR3dIZ1BafSpzVH47GPPdRljV0+LqN8K7sfivwW0ASzYfjH/
- 543cQNy8o4rPQkzcJvA==
-X-Proofpoint-ORIG-GUID: bjMSUeS6ZvNy_wTTFwHtnEe0o6lOSfE1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-09_02,2026-01-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
- malwarescore=0 impostorscore=0 adultscore=0 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601090062
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,131 +77,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Guillaume,
 
-On 1/8/2026 11:12 PM, Simon Glass wrote:
-> Hi Balaji,
+Thank you for the patch.
+
+On Thu, Dec 18, 2025 at 12:17, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
+
+> Add test to verify that androidboot.* parameters are correctly extracted
+> from bootargs and appended to the bootconfig section when using
+> 'abootimg get ramdisk' with boot image v4 and vendor_boot image.
 >
-> On Wed, 7 Jan 2026 at 23:50, Balaji Selvanathan
-> <balaji.selvanathan@oss.qualcomm.com> wrote:
->> Add support for locating SCSI environment partition using GPT type
->> GUID instead of unique UUID. This enables the saveenv command to
->> work with partitions identified by their type rather than unique
->> identifiers, providing flexibility for systems where partition
->> UUIDs may vary across devices but types remain constant.
->>
->> Introduce CONFIG_SCSI_ENV_PART_TYPE_GUID configuration option that
->> allows specifying a partition type GUID for environment storage.
->> When enabled, the environment subsystem uses the new type GUID
->> based lookup method via scsi_get_blk_by_type_guid() to find the
->> first matching partition.
->>
->> This change maintains backward compatibility with the existing
->> UUID-based approach.
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   env/Kconfig |  7 +++++++
->>   env/scsi.c  | 13 +++++++++++++
->>   2 files changed, 20 insertions(+)
->>
->> diff --git a/env/Kconfig b/env/Kconfig
->> index b312f9b5324..97cb3d05daf 100644
->> --- a/env/Kconfig
->> +++ b/env/Kconfig
->> @@ -768,6 +768,13 @@ config SCSI_ENV_PART_UUID
->>          help
->>            UUID of the SCSI partition that you want to store the environment in.
->>
->> +config SCSI_ENV_PART_TYPE_GUID
->> +       string "SCSI partition type GUID for saving environment"
->> +       depends on ENV_IS_IN_SCSI
->> +       help
->> +         Type GUID of the SCSI partition to store the environment in.
->> +         Uses the first partition matching this type GUID.
->> +
->>   config ENV_USE_DEFAULT_ENV_TEXT_FILE
->>          bool "Create default environment from file"
->>          depends on !COMPILE_TEST
->> diff --git a/env/scsi.c b/env/scsi.c
->> index 207717e17b1..6182ae26679 100644
->> --- a/env/scsi.c
->> +++ b/env/scsi.c
->> @@ -35,8 +35,13 @@ static inline struct env_scsi_info *env_scsi_get_part(void)
->>   {
->>          struct env_scsi_info *ep = &env_part;
->>
->> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
->> +       if (scsi_get_blk_by_type_guid(CONFIG_SCSI_ENV_PART_TYPE_GUID, &ep->blk, &ep->part))
-> Can you use if IS_ENABLED(CONFIG_SCSI_ENV_PART_TYPE_GUID)
+> The test verifies:
+> - androidboot.* parameters are removed from bootargs
+> - They are appended to the bootconfig section in the ramdisk
+> - Non-androidboot parameters remain in bootargs
+> - The bootconfig trailer is properly updated
 >
-> (we try to avoid #ifdef)
-Thanks for the feedback.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
-In this respin 
-https://lore.kernel.org/u-boot/20260109070912.4106466-4-balaji.selvanathan@oss.qualcomm.com/, 
-I've introduced a choice statement in env/Kconfig to ensure mutual 
-exclusivity between CONFIG_SCSI_ENV_PART_UUID and 
-CONFIG_SCSI_ENV_PART_TYPE_GUID.
+I've tested this on top of master
+commit c05dba22f1f2 ("Merge branch 'master' of git://source.denx.de/u-boot-usb")
 
-Due to this choice-based configuration, only one of these string configs 
-is defined at compile time. When I attempted to use `if 
-(IS_ENABLED(...))` for the string concatenation cases, I encountered 
-compilation errors because the compiler tries to evaluate both branches, 
-but the undefined config macro causes an "undeclared identifier" error.
+with:
+$ ./test/py/test.py --bd sandbox --build -k ut
+$ ./test/py/test.py --bd sandbox --build -k android
 
-For example:
+And I see:
+FAILED test/py/tests/test_android/test_abootimg.py::test_abootimg - ValueError: U-Boot exited with signal 6 (SIGABRT)
+FAILED test/py/tests/test_android/test_abootimg.py::test_abootimgv4 - ValueError: U-Boot exited with signal 6 (SIGABRT)
 
-if (IS_ENABLED(CONFIG_SCSI_ENV_PART_USE_TYPE_GUID))
-     env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition not 
-found", 0);
-else
-     env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition not found", 
-0);  // Error: CONFIG_SCSI_ENV_PART_UUID undeclared
+Also, see below for some review comments
 
-Given this constraint with mutually exclusive string configs, I've kept 
-the #ifdef approach for these specific cases. I understand the 
-preference for IS_ENABLED() for its compile-time checking benefits, but 
-in this scenario with string concatenation, the preprocessor conditional 
-appears to be necessary.
-
-Would this approach be acceptable, or would you prefer an alternative 
-solution?
-
-Best regards,
-Balaji
+> ---
+>  test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
+>  1 file changed, 99 insertions(+), 9 deletions(-)
 >
->> +               return NULL;
->> +#else
->>          if (scsi_get_blk_by_uuid(CONFIG_SCSI_ENV_PART_UUID, &ep->blk, &ep->part))
->>                  return NULL;
->> +#endif
->>
->>          ep->count = CONFIG_ENV_SIZE / ep->part.blksz;
->>
->> @@ -83,12 +88,20 @@ static int env_scsi_load(void)
->>          int ret;
->>
->>          if (!ep) {
->> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
->> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition not found", 0);
->> +#else
->>                  env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition not found", 0);
->> +#endif
->>                  return -ENOENT;
->>          }
->>
->>          if (blk_dread(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count) {
->> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
->> +               env_set_default(CONFIG_SCSI_ENV_PART_TYPE_GUID " partition read failed", 0);
->> +#else
->>                  env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition read failed", 0);
->> +#endif
->>                  return -EIO;
->>          }
->>
->> --
->> 2.34.1
->>
-> Regards,
-> Simon
+> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+> index 2aadb692b30..bd5fb992a7d 100644
+> --- a/test/py/tests/test_android/test_abootimg.py
+> +++ b/test/py/tests/test_android/test_abootimg.py
+> @@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
+>  c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
+>  d43a000000000000000060c53e7544995700400000"""
+>  
+> -# vendor boot image v4 hex dump
+> -vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
+> -222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
+> -d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
+> -d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
+> -f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
+> -db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
+> -1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
+> -309ffea7010000000040f1dc004129855400400000"""
+> +# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
+> +vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
+> +915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
+> +9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
+> +c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
+> +155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
+> +da4f7f5e02000000a0377e0040ab5ba000500000"""
+> +
+> +# bootable boot image v4 hex dump (contains actual bootable kernel)
+> +boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
+> +00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
+> +4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
+> +2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
+> +1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
+> +a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
+> +dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
+> +a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
+> +e67c0a0000000000ffcc27ba944c7e00300000"""
+> +
+> +# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
+> +vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
+> +5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
+> +282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
+> +f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
+> +e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
+> +b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
+> +00200000"""
+
+Can we use boot_bootable and vendor_boot_bootable images for the other tests
+as well? (for example for testing bootmeth_android)
+
+This would reduce the amount of images we need.
+
+>  
+>  # Expected response for "abootimg dtb_dump" command
+>  dtb_dump_resp="""## DTB area contents (concat format):
+> @@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
+>          gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
+>      return gtdi3
+>  
+> +gtdi4 = None
+> +@pytest.fixture(scope='function')
+> +def abootimgv4_bootable_disk_image_boot(ubman):
+> +    """pytest fixture to provide bootable boot image v4."""
+> +    global gtdi4
+> +    if not gtdi4:
+> +        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
+> +    return gtdi4
+> +
+> +gtdi5 = None
+> +@pytest.fixture(scope='function')
+> +def abootimgv4_bootable_disk_image_vboot(ubman):
+> +    """pytest fixture to provide bootable vendor boot image v4."""
+> +    global gtdi5
+> +    if not gtdi5:
+> +        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
+> +    return gtdi5
+> +
+>  @pytest.mark.boardspec('sandbox')
+>  @pytest.mark.buildconfigspec('android_boot_image')
+>  @pytest.mark.buildconfigspec('cmd_abootimg')
+> @@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
+>      ubman.run_command('fdt get value v / model')
+>      response = ubman.run_command('env print v')
+>      assert response == 'v=x2'
+> +
+> +@pytest.mark.boardspec('sandbox')
+> +@pytest.mark.buildconfigspec('android_boot_image')
+> +@pytest.mark.buildconfigspec('cmd_abootimg')
+> +@pytest.mark.requiredtool('xxd')
+> +@pytest.mark.requiredtool('gunzip')
+> +def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
+> +                              abootimgv4_disk_image_boot,
+> +                              ubman):
+> +    """Test bootconfig handling with boot image v4.
+> +
+> +    Verifies that androidboot.* parameters from bootargs are appended to the
+> +    bootconfig section in vendor_boot image in memory, and that non-androidboot
+> +    parameters remain in bootargs.
+> +    """
+> +
+> +    # Setup addresses
+> +    ram_base = utils.find_ram_base(ubman)
+> +    ramdisk_addr_r = ram_base + 0x4000000
+> +    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
+> +    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
+> +    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
+> +
+> +    # Set bootargs with androidboot.* parameters
+> +    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
+> +
+> +    # Load images
+> +    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
+> +        abootimgv4_disk_image_vboot.path))
+> +    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
+> +        abootimgv4_disk_image_boot.path))
+> +    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
+> +
+> +    # Extract ramdisk (triggers bootconfig append)
+> +    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
+> +
+> +    # Get ramdisk address
+> +    response = ubman.run_command('env print ramdisk_addr')
+> +    ramdisk_start = int(response.split('=')[1], 16)
+> +
+> +    # Verify androidboot.* parameters were removed from bootargs
+> +    response = ubman.run_command('env print bootargs')
+> +    assert 'androidboot.' not in response
+> +    assert 'console=ttyS0' in response
+> +
+> +    # Get ramdisk size and verify BOOTCONFIG magic at the end
+> +    response = ubman.run_command('env print ramdisk_size')
+> +    ramdisk_size = int(response.split('=')[1], 16)
+> +
+> +    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
+> +    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
+> +
+> +    # Verify BOOTCONFIG magic is present
+> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+
+Why verifying both BOOTCONFIG and BOOTCON ?
+According to [1], the magic is BOOTCONFIG. So this makes checking for
+BOOTCON irrelevant.
+
+[1] https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig#bootloader-changes
+
+>
+> -- 
+> 2.34.1
