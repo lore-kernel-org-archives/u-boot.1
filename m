@@ -4,99 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4BFD26D92
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 18:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ED6D26D94
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 19:00:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A57D843BF;
-	Fri,  9 Jan 2026 19:36:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E0268843B6;
+	Fri,  9 Jan 2026 20:00:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jJ/Dry2E";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FfBYotlo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17D1284382; Fri,  9 Jan 2026 19:01:02 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B384E843AD; Fri,  9 Jan 2026 20:00:45 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazhn150120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F326484206
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 19:00:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78AB884371
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 20:00:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-64d30dc4ed7so8676858a12.0
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 10:00:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1767981654; x=1768586454; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R1K2lKg5x8DxufrQ0pCSlg7rHjVgCk5NTeRhyYMPKY4=;
- b=jJ/Dry2Es0KlGdaWYpB5rs3aHSpTfhBsmUZ1t4orjCpS8rZRCaxBDyy4a8NeSv+6Xf
- oLZ9drC41VHloxW3WXVQ2MVWmWd9Oe6MGix3O+/RLDlSll9gIeU3OdKr0dVB6N3higCL
- 7xprzOanuJIM6Bf2TvNJq6mp2+FA+HGOVoBYI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767981654; x=1768586454;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R1K2lKg5x8DxufrQ0pCSlg7rHjVgCk5NTeRhyYMPKY4=;
- b=cLkrMszXv/HSoYCjEZMcldTf2oNbDtEibhIWXhKzjHTKyPCJlE121SIiBq+vSx/Zlh
- T+u9mr//RM87aFwPrk/SlDEJcboMazH6zq59VB0BXG70hHAN/NRFPyHsWlbIzLH1S2yb
- rJj65OrKcFDjauWapN03Q2XI+xkFGMbeqdd76foWlbTDKBuEoHutjf0t+Y0WG4LM1ngj
- F+QSLAaRIzYHL1efAqys5G+yunrR07B4tOcVaRX8DW8nKxmSH3FLOnRTWLENYpzm/ftv
- uJ4+mfUHy4lC3LpwB7WMu6UI8ZzTIZ9Lzo+rTqXexYtwFqf8osz4Vd9sLXoIS7fzm/9X
- s4SA==
-X-Gm-Message-State: AOJu0Yx3sfYQh45pljPrKDfW95T9GG1IzKxeGFGzthM+c3Z+3U5l4YXA
- 1s1/dlr0cx20/HmnUA+MEWD947yKMc89ayry/yt2Wq5ez4YjRfkkHB5BG1/lx3Mv1M+9L05N6e7
- AONvpzHqlr4evDlyZ0o9oQDUaSmZELqedowwdqQpV
-X-Gm-Gg: AY/fxX6XGNQUUx3mLXLU5LolIvrJG7AM0MoZtmq6Hx5rhtHiAOdd9Et2nps60q/BjQt
- mIVVkr/lezDW2eolqil+lXShip2NjcDkxa4H6ryMUTBoJoxk0B9PKTreOvgjr2sG70Sjg6uO8y4
- lUdVx+Nn02EyIqE0dgmKPDIWswKenN3bDyK/LvQhwiKMy+CqwhiCfw/Hb5Ng8nEnvrHjkJ9zjg4
- H+8DWs6sBCx78gqr5R95Hu7gFqshzy4764t6BSQIZecqrDSGW+MnEJjL++/G5e7T1ehhg==
-X-Google-Smtp-Source: AGHT+IF9vJFZ/l+8Fg+tLrAET8ehv7icFaHev/Uq8YSZisTgJZHsUosIIjaN0jIAtbumfjm7pxs7j2vIidXRd0HN/M4=
-X-Received: by 2002:a17:906:9f85:b0:b84:40e1:c1aa with SMTP id
- a640c23a62f3a-b8444f4ab8cmr1185633166b.39.1767981654367; Fri, 09 Jan 2026
- 10:00:54 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gY9Dbt7/Tx4v2YDEQKsSOxqwkAonwSi1anu3eG4pupthUpVKRkwZJ7j779XbJssmad6SK+K/2kwWiOtdnqgER9+ZDHX7Dy7Lzuo8XNckhY/UYnPwuzc1l8pJjuvk2YFg3vlz7Zxy44EBOf081eUDwjChMqNpONERHqrL6sOV9l8VIK4UuV/2I1uCf5HhyCxflpXMa6D2Hqj0KyB/jdZB1SJeU80prUfyIi4yMLQVA6xD1NJRPJHTOAk3X91ih3Q1SUHWwxCNTplv64FBKLmmUViWQcu4yozk+RUb27aH87mjxSyn9pLXgTd1s2GZVaB6/rqRCP0aeXRol9e4gSpYHg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lOaJ20lBxFqMbnOf+/kih3XQ/5SXCiopotLVAYnzyko=;
+ b=cnJxSjGtfhLQQO7qnH0rEqGvb4E1GaNF5wlcgiFhepSI7ZvgVhREJVqSkaUbzlGvtOUFDIFAUXd1IyAS9XiszvllD/dw8fyRsfnVbaDsecSWHSQ913R0lWfVrEchbitFgWYj1iwOgtF9b3D9jxHZNh820Zetg0AdDOhmHTLxUHfI/cC3KYZ52CGVMcHTYv2pruYwUkNcLAGCakRiXuBAYywV4/xW8e+na0/CwuWeBWJF84Rsybev4ghVkTNE6v6b1NX6WlayrPNdzSshZLw/WeNFOdZXkU47DL44FZKBTKieKtJGnTS2JyENNW/3EhSFsUNSNtTkyPbPv8SdwC2mSg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lOaJ20lBxFqMbnOf+/kih3XQ/5SXCiopotLVAYnzyko=;
+ b=FfBYotlo5mVcPvCy31lIkqdm0EjcxScNvQhp59Ct0hOm5jmEZ9bfnPTew6IsgD7D+I7cRa+i45fEHm0w1Jx2NTzgifs+cpMUykTrgzLx7qZt5EPLMt+X6cTT3+rhuUBf+1zkLMPlhCfw6NwPUlgApxdoycg/+8aOMNGr4vBRru0=
+Received: from SJ0PR05CA0001.namprd05.prod.outlook.com (2603:10b6:a03:33b::6)
+ by SJ5PPF2BB505D96.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::796) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.4; Fri, 9 Jan
+ 2026 19:00:33 +0000
+Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
+ (2603:10b6:a03:33b:cafe::37) by SJ0PR05CA0001.outlook.office365.com
+ (2603:10b6:a03:33b::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.0 via Frontend Transport; Fri, 9
+ Jan 2026 19:00:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.1 via Frontend Transport; Fri, 9 Jan 2026 19:00:33 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 9 Jan
+ 2026 13:00:32 -0600
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 9 Jan
+ 2026 13:00:31 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 9 Jan 2026 13:00:31 -0600
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 609J0QpB518987;
+ Fri, 9 Jan 2026 13:00:27 -0600
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <ilias.apalodimas@linaro.org>, <malysagreg@gmail.com>,
+ <sughosh.ganu@linaro.org>, <philip.molloy@analog.com>,
+ <marek.vasut+renesas@mailbox.org>, <james.hilliard1@gmail.com>,
+ <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <n-francis@ti.com>, <u-kumar1@ti.com>, <b-padhi@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 0/2] Fix TI DTB alignment issues with recent libfdt update
+Date: Sat, 10 Jan 2026 00:30:24 +0530
+Message-ID: <20260109190026.58464-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260107003131.3064800-1-simon.glass@canonical.com>
- <20260107010416.GM3416603@bill-the-cat>
- <20260109165700.GD3416603@bill-the-cat>
-In-Reply-To: <20260109165700.GD3416603@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Jan 2026 11:00:41 -0700
-X-Gm-Features: AQt7F2rNE-h5-27nFPThHcUO2cjBWKDZHxEYOkmJsOtPf1r-lP20NK0CiVPkL_E
-Message-ID: <CAFLszTibc577gopg_biatH45h-iPsesjB+fa-2xZ9=cMzRS9ig@mail.gmail.com>
-Subject: Re: [PATCH 00/10] bootm: Clean up arch-specific, pre-OS clean-up
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Adriano Cordova <adrianox@gmail.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, Bin Meng <bmeng.cn@gmail.com>,
- Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ian Roberts <ian.roberts@timesys.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymondmaoca@gmail.com>,
- Rick Chen <rick@andestech.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <stefan.roese@mailbox.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Weijie Gao <weijie.gao@mediatek.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 09 Jan 2026 19:36:35 +0100
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|SJ5PPF2BB505D96:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3fbc5a51-8a88-4b44-3ef1-08de4fb15de3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|34020700016|82310400026|1800799024|12100799066;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8E4UEniyset57p3cf+HaLNJgn/U2nh9BjmgvwbP9/5wb8X+WmA9AVPrULZ1n?=
+ =?us-ascii?Q?6PbKT87RlM87Twy8NverLjI0h37hUswxDKcCe+y9Xg44qNzPj5WqJlSA+ERL?=
+ =?us-ascii?Q?dQytClaF85lisYlQXxKIqGi6P47BYO8iHAi4mSHbuhzgWS9Z8Ri6wMkrA3qx?=
+ =?us-ascii?Q?9sm280K8ltTA3dA1nIOJD9+4ByqDiDa+zkgxkFbRvMvMbtckRW/X/Lc1WBjs?=
+ =?us-ascii?Q?JjyOcLV4bzgesL403x9HTflQUbBmV5VLDtB4urmnkCEM12A58O1/8f5ZQeuZ?=
+ =?us-ascii?Q?V/cJWh4WKqsi5PnhD3ZhCh1j0h3ohtf3NLBCBBEG+k7iFVvYYoop0tTvFfyU?=
+ =?us-ascii?Q?9I0o1SJvNgObyIwAgBoNnqFnMWbm/fHxSCCHjUbr+8h630BVBeFSSla7v7PN?=
+ =?us-ascii?Q?ge67rNNHKx3hD9KFIWZRNateJgX+kxbiGw4wqNLZ5jGi5WQc0xI3tlwaIFko?=
+ =?us-ascii?Q?yHtPPUopxo/B08A1YMgREJUU0Px8VxVcCM7fL7R4ENUG7MD32a3R2VZ4pglX?=
+ =?us-ascii?Q?QAPB7jvpdqIy8WSst8x2NgVETANwy6DmoB2y7EUUOoScuY3Z9min8DLIEfX4?=
+ =?us-ascii?Q?ZkgmsuOoUbm92OrEsTOGYyzSxFIkIJcHkkT0t2aBMGUC7y+4N4l2vXcfRfQE?=
+ =?us-ascii?Q?hMzTleG/W5A4zIEXoVt2ECZM5oOrcGV+dZV2Wj4ycOLv6yqSkw1ZSLSTS81o?=
+ =?us-ascii?Q?Kt+SiEXV3CmJ/cypajCQ0H65BCd0eEA4waJN8wY5uccoV3lGUGA4LMnzE6K+?=
+ =?us-ascii?Q?a4/Jn+VJtKJWWUpmcb0Rway/GHVdkMN72Dj0jA8HazY3TZPncgqal8jgGlGT?=
+ =?us-ascii?Q?O7z133zS//N1DFQaKvc4W8jGUIC2P4CR0iwebiPLHyBtKAn6KB+tJLv9LawN?=
+ =?us-ascii?Q?u1iXes1QifPoWTUDGusMRgI0rfMejsPwK4kzp2oQTrWIhjHBI4pt3p46wJAi?=
+ =?us-ascii?Q?Z4C38i+s/g811/7JKbl6rPCiVT890If7nbGVvqZ8YGuVG5Pbz9a5wHcOoRzi?=
+ =?us-ascii?Q?lYqKhcE4+wGvwh8CwyWNrWIBaItN9OQYgjXlQZAv+Ccx9n/uxHd1Idk/46PS?=
+ =?us-ascii?Q?kJk0r0FZxpEg1Pf0T5D0jbq4JuOdDF5An0X60lPMKGJN/VVvl/7eN8AM9RKh?=
+ =?us-ascii?Q?aV+D6oBXQXICQ4NL31tKAJ8aPhhDy/P8AT+WrH9sLbf/M1xcyQVxIMtv7jUj?=
+ =?us-ascii?Q?0+ha7j+s8DbyxAfqkaidV8BQutBRH40Zm6nCIJ42vSrAUgsYSsQsEX3SbNMy?=
+ =?us-ascii?Q?ECiqC6kt4ZbIp9eayU4L3ke/Q1rMlVf9U2lSJ5fJjlJ1Q7RLSKrYGUWYy++v?=
+ =?us-ascii?Q?DulPTx2essFeFzu6dDCWEz7jrMgVw/40YdQ6GuBpXZtTChPZ83PfJGgZY24/?=
+ =?us-ascii?Q?SiwA3uHJrHgMJ6BJzs8nz0v6UZN5bjPLsUbePFgoohxGBtssnyPGFhyXnbwK?=
+ =?us-ascii?Q?H1GHnM2rV1Be6MspMQ9KFlc/t4KbxmYb6tnKLoD/fuWtiO/GAP54gfPKwP8v?=
+ =?us-ascii?Q?F6DlQV8X3YBTtAmvkU3JNmzObo6pMO9pAq7nn+XYrCbCfSAgsXmAsQDCFi4j?=
+ =?us-ascii?Q?OQ/WwdxbeTU+Y1sOgyc=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(34020700016)(82310400026)(1800799024)(12100799066);
+ DIR:OUT; SFP:1501; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2026 19:00:33.4812 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3fbc5a51-8a88-4b44-3ef1-08de4fb15de3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C9.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF2BB505D96
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,25 +158,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Recent libfdt updates (commit 0535e46d55d7 "scripts/dtc: Update to
+upstream version v1.7.2-35-g52f07dcca47c") enforce strict 8-byte
+alignment for device tree blobs, as required by the device tree
+specification. This causes failures on platforms using
+CONFIG_SPL_MULTI_DTB_FIT, where DTBs were not properly aligned.
 
-On Fri, 9 Jan 2026 at 09:57, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Jan 06, 2026 at 07:04:16PM -0600, Tom Rini wrote:
-> > On Tue, Jan 06, 2026 at 05:31:17PM -0700, Simon Glass wrote:
-> >
-> > > Each arch does something slightly different before booting the OS. Some
-> > > archs even do different things depending on the CPU type.
-> >
-> > Not that you should v2 anything right now, but, all of your patches are
-> > doubly signed off, which is wrong. And, since you're no longer at
-> > Google, for stats purposes, where should your contributions go (and
-> > would you like any previous pages re-generated) ? Thanks.
->
-> Following up on this part, as I need to at least update gitdm, thanks.
+The alignment issue occurs at two levels:
 
-From now on you can do Canonical but there is no need to regenerate
-anything, but thank you for asking.
+1. DTBs embedded within the multidtb.fit FIT image may not be 8-byte
+   aligned, even though the FIT image itself starts at an aligned
+   address. This causes -FDT_ERR_ALIGNMENT failures when
+   setup_multi_dtb_fit() tries to locate and use these DTBs.
 
-Regards,
-Simon
+2. The FIT image is concatenated to u-boot-spl-nodtb.bin at a boundary
+   determined by the OMAP2 linker script. Currently, the linker only
+   advances the location counter for alignment without padding the
+   binary, causing the FIT image to be appended an unaligned offset.
+
+This series addresses both issues:
+
+Patch 1 adds the -B 0x8 flag to mkimage, ensuring all DTB entries
+within the FIT image are 8-byte aligned.
+
+Patch 2 fixes the linker script to include padding in the binary
+by placing an alignment directive inside the __u_boot_list section,
+ensuring the FIT image is appended at an 8-byte aligned boundary.
+
+Testing done:
+1. Boot tested on all TI K3 platforms.
+
+Beleswar Padhi (2):
+  scripts/Makefile.xpl: Align filtered DTB to 8-byte within multidtb.fit
+  ARM: OMAP2+: Pad SPL binary to 8-byte alignment before DTB
+
+ arch/arm/mach-omap2/u-boot-spl.lds | 3 ++-
+ scripts/Makefile.xpl               | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+-- 
+2.34.1
+
