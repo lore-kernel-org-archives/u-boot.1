@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03938D1A639
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 15:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D9B7D1A63C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 15:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20D8884371;
-	Fri,  9 Jan 2026 16:03:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 624B28432F;
+	Fri,  9 Jan 2026 16:03:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o85gqrPS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EEXUuJc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B02D84371; Fri,  9 Jan 2026 16:03:43 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 4FEDE8432F; Fri,  9 Jan 2026 16:03:55 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1020884248
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 16:03:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 765AF84248
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 16:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c75178c05fso1718599a34.0
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 07:03:41 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7ce229972f1so3801889a34.3
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 07:03:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767971020; x=1768575820; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767971028; x=1768575828; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Bwpso2+WVjKkWF0g0WShDd+PgV60+N6KiGqGKqgilIY=;
- b=o85gqrPS2Jii4B3fwDEOkJoMNDEmq/qRImDpwqI1aulTNbeX59MjheiLGVMRW1iLjC
- t6SecenM3/9UckX0J5R9x6prY/dpqmCtYN+ngV8ijm9Si01gE98FgZ2Dn+epefsQ+BC/
- Lae6mFwzJStK2+GG59z8dp2kIb0EUXfS4xAjU=
+ bh=k7tPoaLB4waaVdzQ68ZYeJHDzOemb3zHjZkv8XxqN7Q=;
+ b=EEXUuJc19rajhIGlO2A9FVko6TaCzZofJMc3N/bSAqJB9Z+UIIGhRPkdVE3s12NeuP
+ LdR5GIOqIrCtXlXmVjbvMqJFdYGA4N7irZzly/+sY55quAlCurA8G3YLYo2uPMSqLKoW
+ v9Sz/H2O5oGxutkLDCka15DBlPhD2MPxVZRz8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767971020; x=1768575820;
+ d=1e100.net; s=20230601; t=1767971028; x=1768575828;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bwpso2+WVjKkWF0g0WShDd+PgV60+N6KiGqGKqgilIY=;
- b=vrsbbtiYXlY6CZ7fEfcqZQCmlvA+vkFjXx/x6GoQD8OJHsl+IiKfrhodI92xVYoYdQ
- reXAJxUjE4zqt5FPvX/dGdDKoRx1cqQ3LDLqmpPfkqyJmmX+Oc7GrzxRCrAHeexD4xWf
- eb5Sozp5KMLAN/89qigKjYNYbmryma5eXYTa/TZaqbn+o5Y7W0f5BvR5DXtLLcniUIjm
- jmyattzkwYQaRd2IIkbrjuxfTidOA/KZLBSRJTviZGtCjtT7MKohSH1aQXsmxdYl34CF
- o3WZUnolI8ZGBpRAxHRm+Ge/gg+4bMPVRJL3SKQm1aqVtSTAs+q/OF0/Q7oV82MpH3HK
- YQHA==
-X-Gm-Message-State: AOJu0Yxhl8EwrS1YFr8UvjMCNRTi8G25/Kdcv8xG7NOncuuKDyVoq+PK
- rHrUlbwwhKHbJEYwIgD+zpSOjaeJvwZ2OQ3M2aTSaXGACrtrBI4ZsSWvRCZ0yUhfisCK/zpHRz3
- g3ZjrvQc=
-X-Gm-Gg: AY/fxX6L9AIyAAPsoD+dxN4ZeBoRpAcmii9iPtAw9l0fVZ0wJbdj+r4AaGUMaCcCOut
- JIBsqJCwFvEr2MLOY5F+DH3eGR2Edjd090tkm1pzalt7T3xx7Wr28z4QOe4YdDQHvivzuP4c9Hz
- UUhfuo7LYo+Pi9nYGTVyB4L2Uxv7xiby04ZAIoQVFnGplGod0lZDP8faA2q4+IidWhiGWtOBfQb
- Ycz6YQ7cC1VLUNEQoR3l7X67DvjYJTRKuDBVXoFqYnyByrZiXf/dNqYoQUYTq063XH6c3CbmTSf
- B6G1CD2jibKxtbDG/g3YuIgolhDQTIc1Wq/8lUtH27yJMyBkV1jSJYpOIEyt92bNu+hgijWPW7K
- GoORzNG48FnwkrP3EtU2pgOB7pPEcic0NArsykcx2p9v2EwQTkpyu0528WEUz+gSYwsOaBZvIlq
- pOC5A72BSP03HBY8f7BScNYZKbNYR2rreUHDE7BF08YY342AFltq4o4pDOpYE8fghZJA9zHOJbj
- PvBeBmXCzA/RpvHlQGhb+r53KVUMxHYWFPUOUQ=
-X-Google-Smtp-Source: AGHT+IHin932PJeUyJdmQugNp0G0c4BQzxXitx8Z+BC+v85tUo+ppz8ZbwdIXimOvBT9pM5myXRoGQ==
-X-Received: by 2002:a05:6830:2684:b0:7ca:c803:f539 with SMTP id
- 46e09a7af769-7ce50a923fbmr5912747a34.5.1767971019610; 
- Fri, 09 Jan 2026 07:03:39 -0800 (PST)
+ bh=k7tPoaLB4waaVdzQ68ZYeJHDzOemb3zHjZkv8XxqN7Q=;
+ b=Z625guI4XN1mE5roAcWz1lLAAUu3osm+HhFW85J2oA93YC4MS3RBVbkoERk3ossZxp
+ 1pcy+2TEsD+72H6BPgG7HdoephbMogRor4E9PxuhAHe2IF1xkNOyUQtziq4zlRZLItnX
+ vxmMyl7k3LjyaFIrDGPZt4WPu7m8pSjQtJVIz+yN/akYnmFFgrpO3l/Vq8KlUTl0yAGi
+ SyzGsQx2anAL3rEsPpsPy9R3sM67YPZFRKUPf7ZRm7BLP3U6B74c3Sc3pRcB5uUouaTf
+ oXy6JP9pqR2bisazmuKvnKJLG/0XsEjG7ngnsonXX6F6uYUfukpIN91W3hZZiDGrZJih
+ 3NYA==
+X-Gm-Message-State: AOJu0YxS6OI0UuWA8XwhpC3NIoEdWgoj0R9Pqz2cI+4zJ5N8gvUIKaxd
+ 2m0RHVxJmp8NUF3fjLZjbQ3g0ZAIA3383Rg//NmD1g1yySsUEJRu8UQdyDK1zkwK6uo=
+X-Gm-Gg: AY/fxX6n2vEThgI+5AO9zF3D4D5qPJlVybA9Eh/z57SIrlMxKKEgEjlJ093Ppg/5A9l
+ r0XD0QgOsY8mYuXX5K/cWf+3WypnMotChe2Zc90cN/cFacBbF7jW+ToaGQsbRvV6ywGfCWgAaOH
+ cKzFMAisUCxhA3N+nuUknVMd5N6mwetmm3ZuC6pozz2bt5Ph6xiS2RoA2QXXtXDmJIKJanH5/20
+ 5b0iWjdPbc4/FyqtCShgllAdJLbNX2eerMckCW6LUlcieoK56itL8sKO1c3cBiqKMukWWTEzGIy
+ sHj1z1/mQtHBIzw73K5IZ0LQTVkHiwS7XpwlY+9589e/8t5uKYKfABC4CMvDQ0b+VJ8Jx1ZAwfS
+ ybleCfjpOEzkyJcppnFZxtfwBTUm4cnM9joTtAsUbdr3GIlyNwqZQg5Wf1rtzEzPrDrrz77HDsB
+ g/Z/H89poBGPBhXpv5NCt9CqymeP+DLK3owSkksjQLUdaaK29MCRKs3jGjjHgrPV8QH4TBPdiT4
+ x25FeX4w5r53XNgQEg9rHk2kDx9z3l4ZZTp1SE=
+X-Google-Smtp-Source: AGHT+IFl1YkkeQxvkigqsT7yjqgvxbRLkFUFnU4/PGxGfeCIGmaXHF5hvJhjVgbni+uXcGE68UrMgQ==
+X-Received: by 2002:a05:6820:403:b0:65f:1038:130a with SMTP id
+ 006d021491bc7-65f5507ea0emr4130193eaf.69.1767971028135; 
+ Fri, 09 Jan 2026 07:03:48 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478d9c17sm7493857a34.22.2026.01.09.07.03.38
+ 586e51a60fabf-3ffa5161468sm7147627fac.22.2026.01.09.07.03.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 07:03:39 -0800 (PST)
-Date: Fri, 9 Jan 2026 09:03:36 -0600
+ Fri, 09 Jan 2026 07:03:47 -0800 (PST)
+Date: Fri, 9 Jan 2026 09:03:44 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v3 3/4] fs: prevent integer overflow in sqfs_concat
-Message-ID: <20260109150336.GB3416603@bill-the-cat>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>
+Subject: Re: [PATCH v3 4/4] fs: prevent integer overflow in ext4fs_get_bgdtable
+Message-ID: <20260109150344.GC3416603@bill-the-cat>
 References: <20260109112428.262793-1-t.preissl@proton.me>
- <20260109112428.262793-4-t.preissl@proton.me>
+ <20260109112428.262793-5-t.preissl@proton.me>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lq2a5EHLQi5SLwZT"
+ protocol="application/pgp-signature"; boundary="NtwI0R2Cjz+qex6f"
 Content-Disposition: inline
-In-Reply-To: <20260109112428.262793-4-t.preissl@proton.me>
+In-Reply-To: <20260109112428.262793-5-t.preissl@proton.me>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,32 +99,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lq2a5EHLQi5SLwZT
+--NtwI0R2Cjz+qex6f
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 09, 2026 at 11:24:59AM +0000, Timo tp Prei=DFl wrote:
+On Fri, Jan 09, 2026 at 11:25:07AM +0000, Timo tp Prei=DFl wrote:
 
-> An integer overflow in length calculation could lead to
-> under-allocation and buffer overcopy.
+> An integer overflow in gdsize_total calculation could lead
+> to under-allocation and heap buffer overflow.
 >=20
 > Signed-off-by: Timo tp Prei=DFl <t.preissl@proton.me>
+> Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---lq2a5EHLQi5SLwZT
+--NtwI0R2Cjz+qex6f
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWEYyAAKCRAr4qD1Cr/k
-CgBvAQC2hCwMASJCH+YIndoZHOeNbNn/+x72EywuN+3qoDaz4AD+JiCifz+/sWhY
-Z1HfYBj4eGaAuy6FqUjULAdrnOucfQ0=
-=xoOO
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWEY0AAKCRAr4qD1Cr/k
+Cv1RAQCep7so7kNsqzknepVwW6bJ1gbCy1/+7SPrKEEC8RyqTwEAyWP9jd4TZKIs
+4m3eyTnQUJURhGRW+NuKK7hZa5Y+UQs=
+=4B7a
 -----END PGP SIGNATURE-----
 
---lq2a5EHLQi5SLwZT--
+--NtwI0R2Cjz+qex6f--
