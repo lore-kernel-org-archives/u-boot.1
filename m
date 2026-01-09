@@ -4,61 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908A4D232EE
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E4F2D232EE
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:25:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDCA7841FA;
-	Fri,  9 Jan 2026 09:25:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 16F0F8414B;
+	Fri,  9 Jan 2026 09:25:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jDo4t8Ol";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BW62j4AA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1676B8419D; Fri,  9 Jan 2026 09:25:45 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id C8E2E84326; Fri,  9 Jan 2026 09:25:47 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A74484121
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:25:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7838484121
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:25:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C55ED60136;
- Fri,  9 Jan 2026 08:25:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23013C4CEF1;
- Fri,  9 Jan 2026 08:25:39 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B080240672;
+ Fri,  9 Jan 2026 08:25:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BE49C4CEF1;
+ Fri,  9 Jan 2026 08:25:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767947140;
- bh=nhaLgT3wYWPQj6HN0QiZ/ieEYg4M6gyCtvaY71IdMZw=;
+ s=k20201202; t=1767947143;
+ bh=4RClstSHDBLMka29vt3wV7Vgdt4+c74y4sJd4gphLPI=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=jDo4t8OlohtTIX7jUnnwOsthfGkAdMZ5X2c9hekIYIVMIgCxC9RTNJhzeoP2X3IId
- Jnf+xd0BdJFaYD92n39XllK44dEoENv27GsJlQjwEZygnnYwuCdf9gUdRsOZvgfx4e
- 8aREurWbwhwV1UaHEpFw/3x/2BulzYN/H+CTWY1TRFd2Hlyf+mExflFAAAnPthI/Zw
- seOvlAVJCoQkM+Kg6NocNBhNCLyAcThnhnxKNzn/A4J9XbT23sppOFRst3ppSE5H8H
- 4RNCtOYLONb4A8YEv3Vaa78eVL9gWpRTxGn/K3K9kLkNt0Yb4uwsLQnNhPVz9ywHnt
- A0raGgPJU0nWw==
+ b=BW62j4AALWrVKvVQkAHdG2rQLVjy6aIqqDEG/cyWpLpNQ0RPtCpvYpt89z7m7vWgF
+ BeR3/A7J1B4cqNP4tTEc9lSmvWzCJiYAlGRUSRkYnJCKXZI3izZrwh6g3oXuu+8ePM
+ xV4oNWsTsKaM2G0LY+9Iepk2R5UtPfgMXN60sWA5XAOPe8kcfQ3oQsrRVUZpOo+IVU
+ JWzWA5ngjPiHvM7SwTh+YIMy6Ut0MRR7BMI6xdKPukDa/1AIxBXN3zzZJMbtmGhNJn
+ j1znKo8RTCrQvaYjtPECnxv080tv3NQWkuQWGRbPn011zzesETh0rTjG6X9PszzFxB
+ cNnxQxh4wLthg==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Julien Masson <jmasson@baylibre.com>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
-Cc: Tom Rini <trini@konsulko.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
-References: <20251218-bootmeth_android-deps-v1-1-0113c804f951@cherry.de>
-Subject: Re: [PATCH] boot: fix missing dependency for BOOTMETH_ANDROID
-Message-Id: <176794713799.404000.17569976937052113144.b4-ty@kernel.org>
-Date: Fri, 09 Jan 2026 09:25:37 +0100
+To: trini@konsulko.com, marex@denx.de, 
+ =?utf-8?q?Petr_Bene=C5=A1?= <petr.benes@ysoft.com>
+Cc: lukma@denx.de, u-boot@lists.denx.de
+In-Reply-To: <20251218142737.3169753-1-petr.benes@ysoft.com>
+References: <20251218142737.3169753-1-petr.benes@ysoft.com>
+Subject: Re: [PATCH v2 1/2] usb: ci_udc: Check ci_ep->desc before use
+Message-Id: <176794714088.404000.8705478218122937720.b4-ty@kernel.org>
+Date: Fri, 09 Jan 2026 09:25:40 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,24 +71,23 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Thu, 18 Dec 2025 13:19:07 +0100, Quentin Schulz wrote:
-> The code depends on set_avendor_bootimg_addr and set_abootimg_addr
-> functions which are only defined in cmd/abootimg.c, only built when
-> CMD_ABOOTIMG=y so let's add a dependency.
+On Thu, 18 Dec 2025 15:27:35 +0100, Petr Beneš wrote:
+> There are two places where ci_ep->desc could be accessed despite it is
+> not valid at that moment. Either the endpoint has not been enabled yet
+> or it has been disabled meanwhile (The ethernet gadged behaves this way
+> at least.). That results in dereferencing a null pointer.
 > 
-> It should be "depends on" to be properly implemented, but we get a
-> circular dependency otherwise:
-> boot/Kconfig:566:error: recursive dependency detected!
-> boot/Kconfig:566:	symbol BOOTMETH_ANDROID depends on CMD_ABOOTIMG
-> cmd/Kconfig:504:	symbol CMD_ABOOTIMG depends on ANDROID_BOOT_IMAGE
-> boot/Kconfig:7:	symbol ANDROID_BOOT_IMAGE is selected by BOOTMETH_ANDROID
+> Moreover, the patch gets rid of possible outstanding requests if the
+> endpoint's state changes to disabled.
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/1] boot: fix missing dependency for BOOTMETH_ANDROID
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/1cd0a441066d3003c63fc90d936f6c4e1b47c896
+[1/2] usb: ci_udc: Check ci_ep->desc before use
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/6a92e9827650797b6b5290621c1831fe32d6ea4b
+[2/2] usb: ci_udc: cosmetics: EP and requests debug info
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/8ea70d8132df30c37c9592952c6267c2e9b4e562
 
 --
 Mattijs
