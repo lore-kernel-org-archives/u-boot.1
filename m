@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3A5D232C7
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 00:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB51ED232C7
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 00:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A2F68415D;
-	Fri,  9 Jan 2026 01:50:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B653F842FC;
+	Fri,  9 Jan 2026 01:50:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vSwR9abq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yqZJWd7H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D2A5842FE; Fri,  9 Jan 2026 01:50:23 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 34A0C8430C; Fri,  9 Jan 2026 01:50:25 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD7984144
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 01:50:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 627D0842F2
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 01:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1767919819; bh=mwt4/tvsXNai/J30c+loQQhHmxJPqIeFkDwxEgf87LI=;
- b=vSwR9abqTWuv/5wrRosWtWpy9D/KpDp3LsdnAtRcqdEelIN1mYkaCpQvnMehL/1xgxc+fgvtk
- D13+xOyX6SgoOdh2L456cdtYLzWKi71jfxzNAs1lJa7dvdJBFbJizW9DkC6XR8+ptgidpHqL2TU
- 7+rTOEiMTF+U5/xgxjEWe1DPZ8SPgJn7+LfJLjbI8P2WRZSQvdmb7d13WEQVxxAQ7bm8PK9W6Vm
- VvXkYoxlIqO0JIQqDB7GHf/FpTfhHO1v/SZ5Wei32c+nq2Rq96qO+EWHmXaXC/o2Cp146nNn02p
- 326RLavp7TAcxe3s0x6r9besnyaB9PfweETpj6on/qgg==
-X-Forward-Email-ID: 696050cbabab7b035309fa83
+ t=1767919820; bh=H2G+1bpf/b14pMT2Nw1O/f4coSaO/l7dpeTxELtjmSg=;
+ b=yqZJWd7H7OZf0i16+QmooKMLLLLaor42kAVWFMDYPdPjwP6iKA7BcrhydM2Rfa+1ShPT4kHFa
+ xuMkJFFKGytvR0g40+chvrO9b07KWJOc16TBmh4NR6qXdc4uwfCJMmkN+AobbNz58Wgh0l9td12
+ ECSjx6PgAQQvG1P3LO91N+1xm5KA1zCXuaz5ULGjnA+0Ex1dhUe6Z0aDS7DpBl2bGjDexuBPgXF
+ tiu1TboHM99zeXBwO/GziVzbQ5qN0eXopiQd6ltPjb5dtRZhtsWNQEpzEN3vUUdNaiMvNwuKgk9
+ j+Wlr9LpIjx8+gX/WdKUEuzBfua8Er/zlr2IBCICFbZw==
+X-Forward-Email-ID: 696050c8abab7b035309fa62
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 2.2.4
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -46,10 +46,10 @@ From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 02/10] ram: rockchip: Add basic support for RK3506
-Date: Fri,  9 Jan 2026 00:49:43 +0000
-Message-ID: <20260109005008.101506-3-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>
+Subject: [PATCH 01/10] rockchip: mkimage: Add support for RK3506
+Date: Fri,  9 Jan 2026 00:49:42 +0000
+Message-ID: <20260109005008.101506-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260109005008.101506-1-jonas@kwiboo.se>
 References: <20260109005008.101506-1-jonas@kwiboo.se>
@@ -71,66 +71,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for reading DRAM size information from PMUGRF os_reg2 reg.
+From: Xuhui Lin <xuhui.lin@rock-chips.com>
 
+Add support for generating Rockchip Boot Image for RK3506.
+
+The RK3506 has 48 KiB SRAM and 4 KiB is reserved for BootROM.
+
+Signed-off-by: Xuhui Lin <xuhui.lin@rock-chips.com>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/ram/rockchip/Makefile       |  1 +
- drivers/ram/rockchip/sdram_rk3506.c | 33 +++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
- create mode 100644 drivers/ram/rockchip/sdram_rk3506.c
+ tools/rkcommon.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/ram/rockchip/Makefile b/drivers/ram/rockchip/Makefile
-index fd94aad0cd49..27921ae4921a 100644
---- a/drivers/ram/rockchip/Makefile
-+++ b/drivers/ram/rockchip/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_ROCKCHIP_RK3288) = sdram_rk3288.o
- obj-$(CONFIG_ROCKCHIP_RK3308) = sdram_rk3308.o
- obj-$(CONFIG_ROCKCHIP_RK3328) = sdram_rk3328.o sdram_pctl_px30.o sdram_phy_px30.o
- obj-$(CONFIG_ROCKCHIP_RK3399) += sdram_rk3399.o
-+obj-$(CONFIG_ROCKCHIP_RK3506) += sdram_rk3506.o
- obj-$(CONFIG_ROCKCHIP_RK3528) += sdram_rk3528.o
- obj-$(CONFIG_ROCKCHIP_RK3568) += sdram_rk3568.o
- obj-$(CONFIG_ROCKCHIP_RK3576) += sdram_rk3576.o
-diff --git a/drivers/ram/rockchip/sdram_rk3506.c b/drivers/ram/rockchip/sdram_rk3506.c
-new file mode 100644
-index 000000000000..a8396ea88883
---- /dev/null
-+++ b/drivers/ram/rockchip/sdram_rk3506.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+// Copyright Contributors to the U-Boot project.
-+
-+#include <dm.h>
-+#include <ram.h>
-+#include <asm/arch-rockchip/sdram.h>
-+
-+#define PMUGRF_BASE			0xff910000
-+#define OS_REG2_REG			0x208
-+
-+static int rk3506_dmc_get_info(struct udevice *dev, struct ram_info *info)
-+{
-+	info->base = CFG_SYS_SDRAM_BASE;
-+	info->size = rockchip_sdram_size(PMUGRF_BASE + OS_REG2_REG);
-+
-+	return 0;
-+}
-+
-+static struct ram_ops rk3506_dmc_ops = {
-+	.get_info = rk3506_dmc_get_info,
-+};
-+
-+static const struct udevice_id rk3506_dmc_ids[] = {
-+	{ .compatible = "rockchip,rk3506-dmc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rockchip_rk3506_dmc) = {
-+	.name = "rockchip_rk3506_dmc",
-+	.id = UCLASS_RAM,
-+	.of_match = rk3506_dmc_ids,
-+	.ops = &rk3506_dmc_ops,
-+};
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index e7e78ef7e5b7..784e542ea27c 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -150,6 +150,7 @@ static struct spl_info spl_infos[] = {
+ 	{ "rk3399", "RK33", 0x30000 - 0x2000, false, RK_HEADER_V1 },
+ 	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+ 	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
++	{ "rk3506", "RK35", 0xC000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
 -- 
 2.52.0
 
