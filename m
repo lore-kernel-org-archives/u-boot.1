@@ -4,62 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FCFD232C1
-	for <u-boot@archiver.kernel.org>; Thu,  8 Jan 2026 23:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8336FD232C6
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 00:15:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 934E384206;
-	Fri,  9 Jan 2026 00:21:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 82F358415D;
+	Fri,  9 Jan 2026 01:15:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OvKFDhwB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YYhYVnPy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC946842DB; Fri,  9 Jan 2026 00:21:14 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C0F328415D; Fri,  9 Jan 2026 01:15:05 +0100 (CET)
+Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
+ [IPv6:2001:4860:4864:20::43])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB72841C8
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 00:21:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1092583C91
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 01:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dnLWB4yPwz9v7T;
- Fri,  9 Jan 2026 00:21:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1767914470;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8QpqVqfblI1XtK4Pt9pnqAjrQXFz0yIiFgwBgINIATs=;
- b=OvKFDhwBNqPOmTM4+f5AYkr6igTGAfLCR0E9A6dGP1CxTK7nQOvWG/Pvyp4PKTcAC5Oeu9
- Jrw4pYUmlNz4KzheiJhoaDtasHqdWzcWqcJwAE0lf6CQuJprCJIyH9FqzQJNoCMM/b3rQL
- 1dJTnEi+AyPChjWnwwcwEfUoNzpWZ2snkULosm1P4tg3b/UBnVNgr3dpicB+b051PUM14O
- 3YjUqgARFezWJP9WkaS+feQWtETrinmiN3AMisGQJMzJJKLSu6sU70rtajIcrjoV09ZsLT
- bBFR6w8v/FdufuZqOVwZqwOqRdFS+kPHyI+EsbClozzUKLnwll8QhBLBaKJxtQ==
-Message-ID: <f6ebd731-cc2c-47b1-98d4-961abd40ef85@mailbox.org>
-Date: Fri, 9 Jan 2026 00:21:07 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x43.google.com with SMTP id
+ 586e51a60fabf-3f0cbfae787so2792931fac.3
+ for <u-boot@lists.denx.de>; Thu, 08 Jan 2026 16:15:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1767917700; x=1768522500; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fMS3vPIDys0gzo7vPCTEODd14dSaDYyzgOrEzGYkYsY=;
+ b=YYhYVnPyNBTY8vPtGEpbi14/d883VlLlVDXag2OXqKXdBVcILELuLaQornoUQewqel
+ dHLUDVA0hwfbGWaaR/76/pSixXEjZRbpvuUGcbNJm7zpmRnivq54Ep4Aq8K6jTLVcuFZ
+ zsOxcZc5fou50R9TzXcf3yUqWidsrFYy+UcTM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767917700; x=1768522500;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fMS3vPIDys0gzo7vPCTEODd14dSaDYyzgOrEzGYkYsY=;
+ b=tqzH/S4N07paODo8Qo2CSbR2AxdvcR+UquoHDQT1CXtUG8WH51bwTHHARibA/Z0F2k
+ LZ6mruNMaTeF3mmKbfyhI4g9cbxWvJ4zAPNXng22dM5uGc4e6+cUAkJKoMtxAeX0rIvu
+ P89e3FXFYqwGiQR/T9dNenMiPePYWHJW7eaqzOXl/7qswNN1uPTSo/ijpS6ss+/tOb3+
+ wRYsdyRSf7hq3SFs2gQTh2tb4HChyhvBfVaUBNwhE3TWFUcboZ8gpf8igVv3JPzlPL8c
+ w76L5YYQvfyI6PA39U9cp9V59PFXzqk8w6wfhR6W2ASkyfozP0e/gNINsb7+Px7+QBKr
+ BV7g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEiftfukUnxpYXeFRkUvQzsEDYS5lhACS2joTRZVZnfeY20Xol4Kj5c35hkm68eC5LImEWoEc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxh9JKlrTE0ltIySxX+xAVdFSv1zLswRak1kAkE5ne07AlLDgmz
+ MTtFBDCTJC7WSE5tj6hXBE7qxSF/EEqfrb3V3N42jR9fnHyp5TOrLtfWBXPRdbS6S2M=
+X-Gm-Gg: AY/fxX6DmXM31pBY6U/0JRg24PvLK/mcpz/8vUWIgNlphKe8YetKruph3zv4Dtu0Acf
+ yV4ltZa0a0kE3ZIkf7SXT5IuazGnKEUX1DRJkujLkEFDAtRqCIeKMIVaGEXsjdAGF6kfzust9QS
+ 4+J5MMA3Qb30tQbSw8JG0Z6L+ai4gFvk6/kAylu3+XGzFng9WAOYiHRB1W/alMpbbPAhi1OR4tk
+ P4J5dsSOS8oQgT/rHiP8MnZhCaGyzM8fMrZ79uMtr3pt3iLGa6ZRPrUmQy05C60Bmjssy60Msqx
+ lv6FAITo5PkNLvjqkGMSVSXFmL+X95FbhBe3fCy0DrXn80aoppgYIwEN1E/RZPEkAGoS4WMMCEP
+ 8Ot2U8VWY7G/62C1pwOhXEg+O40JVGHyJH4Te4m3Ps5U0nhl6/bEOym3ZbRCX4JvyslVz1Ym+az
+ lNSPVcl/jb95Bb8XZV+xYY0Is9Koa2NdZGOL/AMYWbUfyH75kovBQfJ6ax9zcYO/80zbrUNNpxi
+ odARTLpt++YKW1o2R8vhG5qZqRVIYdUgq4jfI8=
+X-Google-Smtp-Source: AGHT+IFyvPh+qZqSn+ETZc2Dzhd9t6Or48wBn8w+rthh9YHTbe11ynQ5M/0ar7RqjVIYlsM4OCnEIQ==
+X-Received: by 2002:a05:6870:a54e:b0:3e8:8e56:674b with SMTP id
+ 586e51a60fabf-3ffc0c3ad69mr4309579fac.53.1767917699611; 
+ Thu, 08 Jan 2026 16:14:59 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa50722e9sm5852031fac.14.2026.01.08.16.14.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jan 2026 16:14:59 -0800 (PST)
+Date: Thu, 8 Jan 2026 18:14:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Maksim Kiselev <bigunclemax@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [PATCH] clk: Do not return signed value from clk_get_rate()
+Message-ID: <20260109001456.GX3416603@bill-the-cat>
+References: <cb4ee3c0a81dda3cbad24ca4b6f69f8a20b29f53.1765971445.git.michal.simek@amd.com>
+ <24133fec-ca54-4d83-b243-6923c1999260@baylibre.com>
 MIME-Version: 1.0
-From: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH v1] Revert "mmc: mmc-uclass: Use max-frequency from device
- tree with default handling"
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot@lists.denx.de
-Cc: peng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com,
- marex@denx.de, tien.fong.chee@altera.com, festevam@gmail.com,
- ivitro@gmail.com, max.merchel@ew.tq-group.com
-References: <20260108114002.1612-1-tanmay.kathpalia@altera.com>
-Content-Language: en-US
-In-Reply-To: <20260108114002.1612-1-tanmay.kathpalia@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 6c710d8147ede677ebc
-X-MBO-RS-META: ogxghwx9n8y5sua71x5g4tsjxtfz1saq
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aL/0ei+mYYREmalw"
+Content-Disposition: inline
+In-Reply-To: <24133fec-ca54-4d83-b243-6923c1999260@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,46 +109,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/8/26 12:40 PM, Tanmay Kathpalia wrote:
-> This reverts commit aebb523a23818a8ee4199c9532b51e3d4020696f.
-> 
-> The change to use dev_read_u32_default() with a default value of 0
-> causes regression for host controller drivers that hardcode f_max
-> before calling mmc_of_parse().
-> 
-> When the "max-frequency" property is not specified in the device tree,
-> dev_read_u32_default() returns 0, which overwrites the previously
-> configured f_max value set by the driver. This effectively resets
-> the maximum frequency to 0, breaking MMC functionality for those
-> controllers.
-> 
-> Revert to the original dev_read_u32() behavior which only updates
-> cfg->f_max when the "max-frequency" property is explicitly present
-> in the device tree, preserving driver-configured values otherwise.
-> 
-> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-> ---
->   drivers/mmc/mmc-uclass.c | 9 ++-------
->   1 file changed, 2 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index bf0bea93853..2f4dc5bd887 100644
-> --- a/drivers/mmc/mmc-uclass.c
-> +++ b/drivers/mmc/mmc-uclass.c
-> @@ -243,13 +243,8 @@ int mmc_of_parse(struct udevice *dev, struct mmc_config *cfg)
->   		return -EINVAL;
->   	}
->   
-> -	/*
-> -	 * Maximum frequency is obtained from the optional "max-frequency" property.
-> -	 * If not specified in device tree, defaults to 0 and sdhci_setup_cfg()
-> -	 * will set the MMC configuration maximum frequency to the host controller's
-> -	 * maximum base clock frequency from capabilities register.
-> -	 */
-> -	cfg->f_max = dev_read_u32_default(dev, "max-frequency", 0);
-> +	/* f_max is obtained from the optional "max-frequency" property */
-> +	dev_read_u32(dev, "max-frequency", &cfg->f_max);
 
-Why not do this then ?
+--aL/0ei+mYYREmalw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-cfg->f_max = dev_read_u32_default(dev, "max-frequency", cfg->f_max);
+On Thu, Jan 08, 2026 at 05:58:42PM -0600, David Lechner wrote:
+> On 12/17/25 5:37 AM, Michal Simek wrote:
+> > As it is visible clk_get_rate() is returning ulong:
+> > ulong clk_get_rate(struct clk *clk);
+> >=20
+> > Also struct clk_ops is defining it as
+> > ulong (*get_rate)(struct clk *clk);
+> >=20
+> > That's why return 0 rate when ops->get_rate is not implemented which is
+> > the same value as is return when clock is not valid.
+> >=20
+> > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > ---
+> >=20
+> > Another alternative is obviously also return only long and fix all
+> > get_rate calls.
+>=20
+> I noticed this oddness too recently while working on some clock
+> drivers. I suspect most people don't realize that clk get rate
+> functions can return an error because the type is unsigned and
+> they don't read the documentation. The driver I was working on
+> had a number of bugs due to this.
+>=20
+> Changing the type to signed seems sensible. But I do wonder if there
+> are some GHz clock rates > INT_MAX on 32-bit platforms. Changing the
+> type could be problematic in that case.
+>=20
+> If that is the case, the next best thing could be something
+> similar to IS_ERR() and PTR_ERR() for checking the return value
+> of clk rate functions, e.g RATE_IS_ERR() and RATE_ERR().
+>=20
+> > ---
+> >  drivers/clk/clk-uclass.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> > index 4420651f765c..bca818530d4c 100644
+> > --- a/drivers/clk/clk-uclass.c
+> > +++ b/drivers/clk/clk-uclass.c
+> > @@ -490,7 +490,7 @@ ulong clk_get_rate(struct clk *clk)
+> >  	ops =3D clk_dev_ops(clk->dev);
+> > =20
+> >  	if (!ops->get_rate)
+> > -		return -ENOSYS;
+>=20
+> There are a number of places checking rates for this return value
+> so I think changing it could unintentionally break things.
+
+Yeah, so there's a few threads over the past few months that need to be
+read here, before we decide if there's anything we can do. At least some
+of it all is covered in:
+https://lore.kernel.org/u-boot/aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.=
+se/
+(and the rest of the thread), and I think there's others as well if you
+search around for clk and Andrew.
+
+--=20
+Tom
+
+--aL/0ei+mYYREmalw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWBIfAAKCRAr4qD1Cr/k
+CmBJAQCTzpp6oxIwgPa5jGW8gx3t/nBkViKcrJB/meoznfSBDAD7BQqgae6u19zP
+kBL8RJeoywFQvz0vJIouXz0rVp6TRgo=
+=2/Sf
+-----END PGP SIGNATURE-----
+
+--aL/0ei+mYYREmalw--
