@@ -4,87 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08403D232EB
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28A4D232E8
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 08:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46BDC84121;
-	Fri,  9 Jan 2026 09:06:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F48E84121;
+	Fri,  9 Jan 2026 09:07:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VhSjagQj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EQI+YzCg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F367984158; Fri,  9 Jan 2026 09:06:35 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id C2ED9841A2; Fri,  9 Jan 2026 09:07:34 +0100 (CET)
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
+ [IPv6:2a00:1450:4864:20::444])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBC0084113
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:06:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A479E84113
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 09:07:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-42fb0fc5aa4so2923500f8f.1
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 00:06:33 -0800 (PST)
+Received: by mail-wr1-x444.google.com with SMTP id
+ ffacd0b85a97d-42fbbc3df8fso1983356f8f.2
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 00:07:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1767945993; x=1768550793; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1767946052; x=1768550852; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=iZG04fU9A7l3TEffS4WplzZRWWYJxa+xnP32KxuPRZs=;
- b=VhSjagQjmuCHtXig0NTXcJdJqG26WewBDUP/DcJLEbphT4QPKTk09hyCzjdkV6LRnG
- 09s/9neSSlAOIP6iohXG5TYV7xSFap7CkSplxgrJhgkneUcZAaA5w+WB1q/ScEMk6uGq
- mrlLGzHBn3E6W1ZhRsFYH7xHtVV3OV2FPMKaBCDCx0lmfqQUhUrg9ZcxI7bvEh4H34Qd
- ExR11d/mY7NslnxEa7hYMBP/pWRnlLHAehUJiEDLisOms/PDpFOSGuwru+pxLC3V9DKL
- ynAX46GWRsB62ffk+vHIaM3UfbPXFfomldabh0t+OF+Gsuo/vUn14X8Dw9mJ8x8DwMC3
- pA8A==
+ :reply-to; bh=f7xAQfi1HWvWctA+pERvvYqjXEgACNoqdMqQWP63Upc=;
+ b=EQI+YzCg6Rb+hjy2ssQkd/5p2sA71Z4uulwsc9QT3atl6p1+dDuE+fhKoCCJJFevdQ
+ ppSt5LUb+sykZW2KqWgIxC3R2ASYeaRKHF95jgvdJsXOZ+q/X08+g/9WHTzzLAvLMoTe
+ MxbttiTz26ClO5PKJtCz00sUQ0UZlJq2uk3i2sj6EEVdsFcN83lFW1k92T6l2XpSzCHA
+ fvpFw0VKFnPOnfn5ZI7SYIdUo9CyTjpVbj+vINIV1S9gvfRBrS9MRt7FmKvUpUooIlWE
+ IiPyskWnbmP8JW570TauiujMttZNmdIefI1Z17S35Sw83xOCMDOYH6NsPuNar1chXqqN
+ MVyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767945993; x=1768550793;
+ d=1e100.net; s=20230601; t=1767946052; x=1768550852;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iZG04fU9A7l3TEffS4WplzZRWWYJxa+xnP32KxuPRZs=;
- b=AQ+YXw5B8Gt0LH4GFgp1gVt5NcwVp/kEsnxOoW2cR8r1zWeVl4yGAzoWPkBnD9urWk
- h0IOWlcQS9HxeWGMwtxS31P9mSVnZQMuzigqHce1C4Uen+trt16uPUdFuum4zCU/TSlR
- d+MohOK9YIjCcKgzcxQl2qHyUbXK4bLymOaxVPn0GIOO+xit/fI3exgjIDvB1+NT3O0r
- ifFWq7l2zsCJXIrXVdV5moFqFWrc1xdi0D4zVknjA0hb1SESvcmZUEbs+47ty0qoWRqM
- 9Vy9/PanS3oeTPI3wnfbTFCpYuTI3vpvP/Wp+EGVohV+SVu6w+Z6C0xzmYqwhIsSakud
- 0yVg==
-X-Gm-Message-State: AOJu0YxSrp/aoy6wcV3JDLUaO7jtFTBRPk6d/b+vRVcpXW+syWY4LNqc
- ihyKuDPR9HUa4xbu7N/1nvLvjf6BVpumj8gP8q6WyYo6fOXIAORKzqgBl9yo8D7HDEndPYc3BYR
- ozP/6
-X-Gm-Gg: AY/fxX7EKIo7Q2HFDYXJjhSbvlsijGFMkOMSD/bzQcaU+52cvtES+Ke8rvecDTbO+C/
- jhgapwB0BAXIEvuW1TeD2Sx+gmvSltyG+gWvHe0hm5/RISEjQtr8Pykef8OTOWtIEvj/EIx4yXm
- 7rJptT5zYo3fSqz+9NbtEomiVf3oO+Ph+9UgUt7oXoxT/xjs2sHoUjjoUZzTapXtE49RBqLQKNr
- 2B6MeVrp+unRBq90znsBU9GSrv35G5ktTZXwrudfua0XpLoyxQEOI8zy062Dq4GXTi70ZES4sn/
- AMCkhgQxQosX5ci7lt3VCYUb1fRKIwkVrd8Bv+TUUwrF5Mv324+kB9eekFr3lnlrTlLBopc0wfd
- 6nW3dBnNQ1ZkZnQz/iPBokWHhCY199TXifBnRtrKfFnOFYhAyAcFgT2ITlZn5NShY8zROHICm3Q
- PqZIyc7XQXkkRIEOssal319ol9WYpO0xT5wcZwKJ7UTEJllzC4CNHxVlkYJTfTPFvKrzqMmqB/u
- A==
-X-Google-Smtp-Source: AGHT+IEyekN6TRz/BC8W4YcxZI5RFmB8JbAKfuRR4CH6tKXv/fwqCC2vcW5N12D1ND4HKb9Y1ifB+Q==
-X-Received: by 2002:a05:6000:25c6:b0:42b:4267:83e3 with SMTP id
- ffacd0b85a97d-432c374f5femr11392779f8f.5.1767945993093; 
- Fri, 09 Jan 2026 00:06:33 -0800 (PST)
+ bh=f7xAQfi1HWvWctA+pERvvYqjXEgACNoqdMqQWP63Upc=;
+ b=S5QQwRqzCYuwi4KO+uicxTR8Ely1Nnkj5qgRYGvCEpQ3lEdR7JV02a1ATAWFh9OkG5
+ zxBKtt3E4EYwOAxLNFJvyk6HpXwS6yi1cOvsej+aBlEgypkHEpopFH7LMEWIT3M/O7d/
+ 1FjxrqfuEzi4sYID7kzDL/kaDnQ3+yLHr41cxFm/WrqN9VkkVDlw0yzHfiCjr3Q2U6HY
+ eSPktkjTiz3YCHw6aD7yHKRePPfZxE42vr0+P1IhR1b/sh9xjdOfU+xxKxdYc5pnOQJm
+ 75zWHHdpkfk2IcfNbe5/1wMWoPIRBFiNAoeSvNhJjjcd6lXBC71HzRrP5eamTB/rI0rE
+ qM0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWC5OaQnbToYp922IPpqPii2CFVfG7qlXUXZNsL2SmfKiLeWQPnDUMOe2c2gR2CFg2zjd3ZzSc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdF58gR+NVMUP3S3ryG/S8MGkEqyZ6NwKGsBp5zs+PQaknHMgT
+ xfJGGMgp4FNlT57z4DG9PMsEd1zUKQn5JNui1TNsfjj+gygmLeVqEVYlSdJuLbymtXc=
+X-Gm-Gg: AY/fxX6Tal3/dKDMtNOIzHuUvy8Ro16qXX+3rajghbBAoav7OSLqPkbcYskC3w7e3d2
+ WGfr5A+pU65/wnv+wFi5VCtVzRBjAkvRPU2xnbEN4afWgZ5EgnOjQtYVz98hmw0RkraSoTrexsS
+ 9gcYggdcAYh7TOc4EcKztAkh0vmo1JwbpB9poKF3NRaoYPFuAfGEgFViz0xUH3ioaBeisuhBMyX
+ mfk+ANz8NY024qEiJCEorR8bUFbCJdGXmbBBQRqFPAHKwVwOF7DddNvOTAeNH+3W+De7dQPoYix
+ aue5xQUbsYjgCrH8Pr5HQlKomUTSHOYG633aVzgpHBeT/jQgg5ZmeWH1+nGzRExxgMAyWfo+QN8
+ 0jFbABbrmFFg9qFn3V/nmkGBwEts1siwvrRZ/obmi8dV4usViI57jYbm/4++g8fzVnZ7XZ5oqdG
+ bAHaxy2LMTfznB2Uz9ZAmH4OJnsKOZrJmC7ULn21aMiOoEICLZ574OaH/5QBXSygc=
+X-Google-Smtp-Source: AGHT+IH+LFO6y/JXPmkTSWrht7QaNmnRDblOr1F24Hql/Dfr9WHOeKXliVfbN4p+30lN7/QbQJ2HWA==
+X-Received: by 2002:a5d:55c2:0:b0:431:8f8:7f1e with SMTP id
+ ffacd0b85a97d-432c37a6bcdmr8780620f8f.48.1767946051890; 
+ Fri, 09 Jan 2026 00:07:31 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
  ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd0e6784sm21023450f8f.19.2026.01.09.00.06.32
+ ffacd0b85a97d-432dd78f5a8sm752204f8f.27.2026.01.09.00.07.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Jan 2026 00:06:32 -0800 (PST)
-Message-ID: <ee1128f4-ab9b-44f9-a1c6-a607e45364d4@linaro.org>
-Date: Fri, 9 Jan 2026 09:06:31 +0100
+ Fri, 09 Jan 2026 00:07:31 -0800 (PST)
+Message-ID: <06dead17-123b-471b-96d5-6bbd786f14a1@linaro.org>
+Date: Fri, 9 Jan 2026 09:07:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] i2c: geni: bail when clocks can't be enabled
-To: u-boot-qcom@groups.io, Casey Connolly <casey.connolly@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260108195301.3159260-1-casey.connolly@linaro.org>
+Subject: Re: [PATCH 2/6] soc/qcom: rpmh: document rsc registers
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>
+References: <20260108-rpmh-regulator-fixes-v1-0-d1b5b300b665@linaro.org>
+ <20260108-rpmh-regulator-fixes-v1-2-d1b5b300b665@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,7 +117,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260108195301.3159260-1-casey.connolly@linaro.org>
+In-Reply-To: <20260108-rpmh-regulator-fixes-v1-2-d1b5b300b665@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -131,32 +137,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/8/26 20:52, Casey Connolly via groups.io wrote:
-> Failing to enable clocks will lead to bus hangs and the board crashing
-> in some cases, let's actually deal with this error and fail probe rather than hoping the clocks are already enabled.
+On 1/8/26 21:28, Casey Connolly wrote:
+> Add some comments explaining a few of the RSC registers
 > 
 > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   drivers/i2c/geni_i2c.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
+>   drivers/soc/qcom/rpmh-rsc.c | 24 ++++++++++++++++++++----
+>   1 file changed, 20 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-> index d29e00fdf41d..fbe5ab0ad0c6 100644
-> --- a/drivers/i2c/geni_i2c.c
-> +++ b/drivers/i2c/geni_i2c.c
-> @@ -493,9 +493,11 @@ static int geni_i2c_probe(struct udevice *dev)
->   		dev_err(dev, "clk_get_by_name(se) failed: %d\n", ret);
->   		return ret;
->   	}
+> diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
+> index bc0c3dd005ac..f51ef0b4af9c 100644
+> --- a/drivers/soc/qcom/rpmh-rsc.c
+> +++ b/drivers/soc/qcom/rpmh-rsc.c
+> @@ -35,17 +35,33 @@
 >   
-> -	geni_i2c_enable_clocks(dev, geni);
-> +	ret = geni_i2c_enable_clocks(dev, geni);
-> +	if (ret)
-> +		return ret;
->   
->   	proto = readl(geni->base + GENI_FW_REVISION_RO);
->   	proto &= FW_REV_PROTOCOL_MSK;
->   	proto >>= FW_REV_PROTOCOL_SHFT;
+>   enum {
+>   	RSC_DRV_TCS_OFFSET,
+>   	RSC_DRV_CMD_OFFSET,
+> +/* DRV HW Solver Configuration Information Register */
+>   	DRV_SOLVER_CONFIG,
+> +/* DRV TCS Configuration Information Register */
+>   	DRV_PRNT_CHLD_CONFIG,
+> +/* Offsets for common TCS Registers, one bit per TCS */
+>   	RSC_DRV_IRQ_ENABLE,
+>   	RSC_DRV_IRQ_STATUS,
+> -	RSC_DRV_IRQ_CLEAR,
+> -	RSC_DRV_CMD_WAIT_FOR_CMPL,
+> +	RSC_DRV_IRQ_CLEAR,	/* w/o; write 1 to clear */
+> +/*
+> + * Offsets for per TCS Registers.
+> + *
+> + * TCSes start at 0x10 from tcs_base and are stored one after another.
+> + * Multiply tcs_id by RSC_DRV_TCS_OFFSET to find a given TCS and add one
+> + * of the below to find a register.
+> + */
+> +	RSC_DRV_CMD_WAIT_FOR_CMPL,	/* 1 bit per command */
+>   	RSC_DRV_CONTROL,
+> -	RSC_DRV_STATUS,
+> -	RSC_DRV_CMD_ENABLE,
+> +	RSC_DRV_STATUS,	/* zero if tcs is busy */
+> +	RSC_DRV_CMD_ENABLE,	/* 1 bit per command */
+> +/*
+> + * Offsets for per command in a TCS.
+> + *
+> + * Commands (up to 16) start at 0x30 in a TCS; multiply command index
+> + * by RSC_DRV_CMD_OFFSET and add one of the below to find a register.
+> + */
+>   	RSC_DRV_CMD_MSGID,
+>   	RSC_DRV_CMD_ADDR,
+>   	RSC_DRV_CMD_DATA,
+>   	RSC_DRV_CMD_STATUS,
+> 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
