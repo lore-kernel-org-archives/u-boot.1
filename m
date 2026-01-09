@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B53B5D26D81
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 18:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04EA3D26D81
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 18:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 348BD84390;
-	Fri,  9 Jan 2026 19:08:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AC888436C;
+	Fri,  9 Jan 2026 19:08:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fYrRW4Ft";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dmalfSm+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 309A18438A; Fri,  9 Jan 2026 19:08:34 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id D6A3D8439C; Fri,  9 Jan 2026 19:08:37 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0D3184206
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 19:08:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEAF884206
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 19:08:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-455ddb90934so1495226b6e.0
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 10:08:31 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-459a516592eso2973474b6e.1
+ for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 10:08:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767982110; x=1768586910; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1767982109; x=1768586909; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5DU31cFiyMkTtQgGL8jHUzVOPBstnIKS+C+TfoiemHw=;
- b=fYrRW4Ftjsrlx2gMd3wJ7RWRvIfxtfU13oYsRm3RCa3TmQLm/MIdRCYV/yclnCm5a3
- sD3009rYsoLovAUoJZ0fa+jsOHQd69saBIq0U2jVxR2bdG2JWnzTSPUUuxlUG0skFgAX
- c0CRQk2eiT3b6ir+9u6oS2+UsMjb+Ex0mXzIw=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i9rYyEwIXpxK0HvUWaFAv0ndc+Jmpt6FJ4POwwVmgyc=;
+ b=dmalfSm+GdX38JQAKGOxkedPkuZZCATA2xkhHgutMExELpKduHeSvUU0oN7Ci61OWF
+ efaWz455fiQ/RCBI+9sgPuig2t98u0nb4sAruDmgDg0A1I/bHGYFyPccO15moUOKrsMj
+ I8i+qLKKKL9g8TaJLxZUfA45BKb763GJwDbhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767982110; x=1768586910;
+ d=1e100.net; s=20230601; t=1767982109; x=1768586909;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=5DU31cFiyMkTtQgGL8jHUzVOPBstnIKS+C+TfoiemHw=;
- b=JR/mC9/bfpuLqVlbrZEsr9Df0m4iHEJ8HeCYh2TDWZpw0oI7x8TH80e6W+0Coj7bT5
- DHuuAxbwCHaspf2V31+VC2c/2IlumYujUucyeGjm2fErEG9AvtHGcFAhK2kwpJwMbKga
- FDSc3YZXm9imo2dKBHTDMulJtmxQF5gWPZkCMBmue+Wa3jp4xUNrYwwzCs3H+JHhBcY3
- 4bzJxqmP9qCKop9kUxpPmGQvXPRrba9GeTZxcsUxxNLG7n6e4oV7opanbgkcb5teomld
- F8BV6BUKWrWc2EICYpua8mqSH6msFUvXbe7NjhIkP2NOibt0ZsDnP8RNqt0Xy3Xryh0U
- AoEg==
-X-Gm-Message-State: AOJu0Yym+C4XSjRV1vC0JLTVO+4diwtdfRVyKloZbFaKYpaYqJtvjRoe
- UmhJiyO6r52k4QFjbl06jcyFci5l99JS+2NizDw/RrX6QPLYzfWNvJLJ375gXO6oKT+THl8RwKD
- KT83APPM=
-X-Gm-Gg: AY/fxX7bAM6aHtmG246EfEzQzGiGBUOQtmNVpUbBhbWpcoF2IqpsNhyuRZn1lUh96eN
- +mVdBkNGroKumCxekvGPo4mCHXQtHFQxMZvoiMG04C7bmkhrrtZ8wn65PVkxWcYSt5v4rsV+dYk
- 70MLFpqvly9mktK8eAHj0Txe4bnV9y1MruQt6Cizx+TgA4H1SSaMLM6OVZp5NBjqJh9RoMVVCI/
- 0Ff73yrT7MMTAkZN0Bud55ybxRbxs3HKmr5F5QiHgGivgmp+I/GICLnuMqGLg9FEKuO9ZdHhseh
- AIddJFZL+5R6Q7WEZDw7oxERJoqaEHickGCC8xOSqPbWajxctxT/fXAZwlBd7zuKy8zuLCIaM86
- U35E5s4TDdn30Uvpy/3+M59+LdNZc/Ctjyeuh768+amZFTI183O4UxsJyWwPJMEO7coGhflr8Dr
- De3hzKvcS2uCyY8ZuiYS8u+R8pXZilyFcMRpdstMVsjrfYGTwmABV+Q5HyrRRaw2R2Z86KjMDJ6
- 0e7ogoVCzYhnYFZvPaMyzwRTUxEbn+fu+G1Mg==
-X-Google-Smtp-Source: AGHT+IGO2EtfxEvhdNsE+0Fhsv3Xouu4PyrtFoOFNzY5EI3N9Q3zQsKnW4rcWENIqAA1JfSjBAZ4jA==
-X-Received: by 2002:a05:6808:19a0:b0:43f:5c61:448c with SMTP id
- 5614622812f47-45a6bebc4cdmr7364249b6e.39.1767982110598; 
- Fri, 09 Jan 2026 10:08:30 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=i9rYyEwIXpxK0HvUWaFAv0ndc+Jmpt6FJ4POwwVmgyc=;
+ b=Vz/5plnNMqaYRa9i5Vq4swYQR8FYmBERhbtBY/Kd4NFl0Y65CNSwEfVkU+q6hjqGLD
+ 4I18zZM4VlGZyhwcFFsfdN9MJnu+/r75o0uyglEWdlr/yoz9f7GJgfAtxQtPL/U0Bb9r
+ cbBqqDoz5Qwaxxk0IRb5GzVyC1OY75YUiuEC6WVTGkkJUxUp8fw2zMIdVeryun2D/rEs
+ dPtuCqMHO8ZX7yQ7upQHYhKJy60TaCHmMocoBRcTt4V/8aY/BROj+xtc9qZmO04VsK+d
+ s0iMxVlMmMy11yUtQjz/Suo509DHM0ES4H3um3woz6yPxcA1cbAlhzpHy01mQxiFDVXK
+ 6fAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMrDeixqpSh4hlNv+K3PiBDrnTr5zazgCIv0fgNvo2ThvITZria7E7c4yWu6hneHff1l0kRO0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWJMDqNJh3rmOrGPoCmcEz78MO9od3Y3aUV3gNGd2hcO4QVz6X
+ 2n3vPzVnlLXd89zEN0EAWHhAPBMtMTF7FauNfD1IeOmarEKLW91so9tCpQe4Lz+1TZ1THboGg36
+ xwPoY75A=
+X-Gm-Gg: AY/fxX6uku3/BZjO9ajQtG0o8GZmpm61ctAiIeXnMr2a7b0kTUPAV/Cr+6QuyfUJ0iK
+ eC7VK+oG6gBuVxhAz53s5Y3DgEdL+yFnrzfSHJiRwGcduafgRTJoe11nheWiZS1a43QqEa44Qna
+ NW2/hdtjpxVSYPasczV3MNb8Q+7nlUs8lwpDqTP6nL/ESrixfKNwnQ9PYeVk/FVhipnbzitznli
+ RMj3fDv9t2RS3p/YsQRKNW2YvFVkT3pTOU67CS3FP7nBKTgODQvu2Pu3fniRIDOjqvF3RLB68kY
+ dXGdwKGK/lY9ddGEZmF/jMhuEuvKw/Jbz16kWksxhe6f5H5PHDoO1xnPRwXASZU1IF64U1wEwsM
+ sFRGCbsS10d6qXf8wujRNRjBvWAYn13pT8maMMLA/3Ul7UBWlyb2Aa2FDwAhoxSkF6a+I2Vj4do
+ TTXYueIscHD+b9BiAdD1pLyTTekxr8NcvZ5dEmUWvvBTy9yVLDQrDQj3eQ3msNVVxg64sZxJWb4
+ 1z44fFW44RQQ0mPQd9+3Bwo+lqRpJ98cm0JOQ==
+X-Google-Smtp-Source: AGHT+IEDU2qc4K1EhK5jbuG4bN4rTe/oNRGXq8+OJSL2phXilA56NvAYj6mi1Ky/ec0qILKJF8EmYw==
+X-Received: by 2002:a05:6808:50a7:b0:450:af35:8b1c with SMTP id
+ 5614622812f47-45a6bdfc0d1mr5264162b6e.38.1767982109316; 
+ Fri, 09 Jan 2026 10:08:29 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a5e2b74a3sm5056992b6e.19.2026.01.09.10.08.29
+ 5614622812f47-45a5e2b74a3sm5056992b6e.19.2026.01.09.10.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 10:08:29 -0800 (PST)
+ Fri, 09 Jan 2026 10:08:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251225161436.1224502-1-trini@konsulko.com>
-References: <20251225161436.1224502-1-trini@konsulko.com>
-Subject: Re: [u-boot-test-hooks][PATCH] labgrid: sage: Add BeagleBone Black
-Message-Id: <176798210944.1451314.10670711117625785326.b4-ty@konsulko.com>
-Date: Fri, 09 Jan 2026 12:08:29 -0600
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Stephen Warren <swarren@nvidia.com>, u-boot@lists.denx.de
+In-Reply-To: <20251224080314.17188-1-heinrich.schuchardt@canonical.com>
+References: <20251224080314.17188-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [U-Boot testhooks][PATCH v2 1/1] py/travis-ci: add
+ u_boot_boardenv_qemu_riscv64_smode_(acpi_)na.py
+Message-Id: <176798210837.1451314.4007621740567760511.b4-ty@konsulko.com>
+Date: Fri, 09 Jan 2026 12:08:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +101,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Dec 2025 10:14:36 -0600, Tom Rini wrote:
+On Wed, 24 Dec 2025 09:03:14 +0100, Heinrich Schuchardt wrote:
 
-> This adds support for a BeagleBone Black board, which is supported under the
-> am335x_evm configuration.
+> Add missing boardenv files for
 > 
+> * qemu-riscv64_smode_defconfig
+> * qemu-riscv64_smode_acpi_defconfig
 > 
+> to enable network testing.
+> 
+> [...]
 
 Applied to u-boot/u-boot-test-hooks.git/master, thanks!
 
-[1/1] labgrid: sage: Add BeagleBone Black
-      commit: 63d55a02127bb2886597fa28312b1b29b1dba61e
+[1/1] py/travis-ci: add u_boot_boardenv_qemu_riscv64_smode_(acpi_)na.py
+      commit: 822a599deb1ad28a1a348fc4d02e6f351c27352f
 -- 
 Tom
 
