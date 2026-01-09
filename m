@@ -4,159 +4,220 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFCFD1681C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 11:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C74D1A613
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 12:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97AC083F56;
-	Fri,  9 Jan 2026 12:56:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 4609D8430F;
+	Fri,  9 Jan 2026 13:50:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="iF5tBtfr";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="RvhVAhIf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E19842FC; Fri,  9 Jan 2026 12:56:04 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 0CC0784329; Fri,  9 Jan 2026 13:50:52 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7B9283CB1
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 12:56:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 550E0842FE
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 13:50:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X+5nvg8CAjNJxbstgb0h5AYynMmUwDwGr8ohlhbwjdHx+cljpHe5otpHMXIFnZRjYjdzPiTiwXKHGg7SrW9E+2oyiJh6g3nrIL/iT3pFtXZcxvYUSi7EVFOwRGGmQbDzPkIbXmmRdH3l2UY5jjrQvUrtTfBTbIhDN519QqOh7+FkLHWY55tMiQqCCha1ARP0WecwTlJQ2S7uIwCWcnqdJgQZbp8X2Snazc+cDV4Us27Rdn0le3c/b52Q2zjhFnC64Bh95bt0Vv4ikKHmmyitqkfJf9yGAJpV8Ud3MyWfYa/8noJqfiDAs1PTuo19MQHztC6wTC3RuRv02OTTGNLdWw==
+ b=y0Wy1XkcMfSslB4q3P7TwNWdsWiHJpy4pN6+8ZOBbYvrZpFPYN4bLlt3ejEeN9QsrMM07Cgv4m7NzwaKmiV7JvUeB97DOS0U28ULwi00BVbc+86kfj8poMRsSb5K33iPL+QE4lcHD75hxaYkNXrI/SIYwuY0lJ4jxp+H/SyFwjFtVd8wYG1uF6Unn4/a/SpXQyOicvIGD3osJ/syDfPsBEESahBP1eQ8TjVSCIMkR7mj1MwGcH9Ph2GyL+qxtqJipdEj94goXQFiXRlBT/xfszJDYsphrDhtXmxYxhgF2Ls+pDl4ngRKV64SnHkcHBNo7gobM4WAU2GredFMMX/h+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1MInLjNboXh+tGEl5iMuG3MEdX+fIUfj6fz3ip5hsWg=;
- b=ZsNDZhDegUJTNYGWPnJA7MgPD1sW2v1k16AcTLlj6a56kmJU/MwSB7bMFk8eePOi5D+t+0cGUffA2KZWOZtgOBvhynOTMa2D9xGrvdVvXyvPJOzlT3EjiuOz3YSQrGCW1oQCsIPkeDrzDiEyhOqOffpJ54LjCdEn2uLzMBExdKIguGHQsqAehCVRQyV9gelcJkteJwxO86ktLqH0D9DHQkon8d2wUhyzIsXtxdNBQp6jRdZDN0Fu6nTrEnMU5K8IOZy0PDnFfQZn8XtWSAklFyy9Igcpb6qvufABulmucPaILoelUH8omVixc/uGwOxgIWzeUNuNArYGUFxzf9w54w==
+ bh=1YXlqk7A4L+/inFjux7P9ga4o6lqvwsbtRlv7YSvZIs=;
+ b=fqwg2JHFu96GkJyx79Qm3jmW6IrGVqeRcDbDIu+YSszSWK7grX8yNLlO2WXalPly5h0KkAuk+lMSqrt0PJoxHvhgagtxT7z7uFZ9ItEDceDUWN1Sz+CLsBFSR+N1M4qCQtOPhr0ZhQCx3hOQSI9Q9dodEX+MT/zTyBoi7BVMO+T5o3abP5nJtAg8dFohHLPc3ux5klpHInl8+o4nsLZUNE8ggDlUafutmMZ3uTqLYUx5dTOxJh9GYd1xmjtVgJBz/HLDKSEctkk18apCt9ZNgUVwlr2ZO93GHui89ox00hvnO3mhQMfjXP7dQvKxkP8dlDQre+UQ+QZ4T7XsjBb1Dg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1MInLjNboXh+tGEl5iMuG3MEdX+fIUfj6fz3ip5hsWg=;
- b=iF5tBtfrbq1aoYrvclhq/ZFjZ5WCZKqm/Lr0z3oNFhdTjXQckFifm8RGx2fUlpRkO1sNhTc09KuF6AAsesGB4ndmI6qqfGLHAHeF4leeiqphkYOJI0JT/75aUO29b9f3PaaSPjyQQZAaa43b30izHwxoe9x8FA56QtgutWDlLxY=
+ bh=1YXlqk7A4L+/inFjux7P9ga4o6lqvwsbtRlv7YSvZIs=;
+ b=RvhVAhIfQwBGwtBUptr5IN1uFVJzdhloliSPw0h9e+290lsoFivQRP0lEl3PB2obt5GcwbEjQRQ2thUBvPQLolLZ4aDv3CeVHyUew3keeGLFWcar4TnODpDUjuZrtFD7sf0GzKoqOdbNngTpc8qKwmPcL+puG/F6uRKwq0xP+ODaGkAEo6+CKoFpgLz3DA1rCQYD/FoV4EDxnPggqH6KFFx6hAbAoymSb+12jMRXtXqAUQbzYSXmleQ+QLuwnkTuUpNsZWMvYzI21N1H6aqPkLQZHUs71fdheSuha9j2OC7WoNY4bCU/syD91AyEBpVX5AL/TCvt5CMHCZqI+eM1GA==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AS8PR10MB7586.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:53c::17)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by GV1PR10MB6609.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:81::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.4; Fri, 9 Jan
- 2026 11:55:58 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9499.003; Fri, 9 Jan 2026
- 11:55:58 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Simon Glass <sjg@chromium.org>,  casey.connolly@linaro.org,
- neil.armstrong@linaro.org,  sumit.garg@kernel.org,  trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com,  joe.hershberger@ni.com,
- ilias.apalodimas@linaro.org,  quentin.schulz@cherry.de,
- javier.tia@linaro.org,  quic_varada@quicinc.com,
- marek.vasut+renesas@mailbox.org,  michal.simek@amd.com,
- ansuelsmth@gmail.com,  mwalle@kernel.org,  anshuld@ti.com,
- jan.kiszka@siemens.com,  javierm@redhat.com,  u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1 3/4] env: scsi: Add support for partition type GUID
- based environment
-In-Reply-To: <bb66d91b-667a-4c28-8acc-b64fa84fb7f6@oss.qualcomm.com> (Balaji
- Selvanathan's message of "Fri, 9 Jan 2026 14:21:28 +0530")
-References: <20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com>
- <20260108064947.3237361-4-balaji.selvanathan@oss.qualcomm.com>
- <CAFLszTg6X8PeD4ZyY08WsTSs+qnRb_-jJjyupzSmi-jDzEhWUQ@mail.gmail.com>
- <bb66d91b-667a-4c28-8acc-b64fa84fb7f6@oss.qualcomm.com>
-Date: Fri, 09 Jan 2026 12:55:56 +0100
-Message-ID: <874iovrodv.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0013.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:a::19) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ 2026 12:50:45 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::be9f:e8ca:ee9:83e1]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::be9f:e8ca:ee9:83e1%6]) with mapi id 15.20.9499.003; Fri, 9 Jan 2026
+ 12:50:45 +0000
+Message-ID: <e462d29b-fabd-43e8-8bae-7f28a9b1d7ed@siemens.com>
+Date: Fri, 9 Jan 2026 13:50:43 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/10] efi: Drop EFI_GRUB_ARM32_WORKAROUND
+From: Jan Kiszka <jan.kiszka@siemens.com>
+To: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: pbrobinson@gmail.com, u-boot@lists.denx.de, trini@konsulko.com,
+ simon.glass@canonical.com, adrianox@gmail.com, xypron.glpk@gmx.de,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ mkorpershoek@kernel.org, michal.simek@amd.com, ravi@prevas.dk,
+ raymondmaoca@gmail.com, ryder.lee@mediatek.com, weijie.gao@mediatek.com,
+ me@ziyao.cc, paul.liu@linaro.org
+References: <20260107003131.3064800-1-simon.glass@canonical.com>
+ <20260107003131.3064800-10-simon.glass@canonical.com>
+ <CALeDE9O-jkytOaioLBKr_vui0Q7TSAZGmTkNY6ssJ4EkZD_OtA@mail.gmail.com>
+ <CAFLszTgtgYm67w2KmEo5nSZKuohD7sRNQKSrA0=mBxr9vd2gLQ@mail.gmail.com>
+ <87jyxt9ps4.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszTgUw=TdheWVUzKLO+2+YECQv=19cJk3tdkFfsUhtRfyAQ@mail.gmail.com>
+ <73b5f060-5405-4857-b8fd-1160c09cfd41@siemens.com>
+Content-Language: en-US
+Autocrypt: addr=jan.kiszka@siemens.com; keydata=
+ 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
+In-Reply-To: <73b5f060-5405-4857-b8fd-1160c09cfd41@siemens.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0234.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e9::18) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS8PR10MB7586:EE_
-X-MS-Office365-Filtering-Correlation-Id: 42e29169-d767-4495-3938-08de4f760d75
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB6609:EE_
+X-MS-Office365-Filtering-Correlation-Id: 863a59d7-d895-4637-8136-08de4f7db4a9
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|52116014|366016|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?z8OxG+rhCQGKBd+O3kUD9CXWde4xW4Yo9g6uhn0V4FZSH/zg1IYpsXNKvFwk?=
- =?us-ascii?Q?Xy3JFHL0dGUhLq5F2Lthsjc+rOGtD/1fzCE9LmmhPj1zNX93MxfspMf/PT/j?=
- =?us-ascii?Q?LoZCFeEXl3vQEhJeZHOo7FWclXGToChVZdNeam4+abUu2nLDTO6TOlpln6WG?=
- =?us-ascii?Q?qffCrEgmpYpGQPiTghB3QfGaPD1ZaMBjc578vTtt9UbdBugNjjodamjWJD0j?=
- =?us-ascii?Q?ASCSQkT4VcCpGWiB8SxLe4KyQEm/IqIKaR0HLZeMTI2Uqz7m5zDHmoMXEQVW?=
- =?us-ascii?Q?/PX2lDLvDpBPVjwFzhL6Srpg7pytv6wcdJ1YHR0gC4V+iai21qRA8ne6dKqg?=
- =?us-ascii?Q?x+XK7XmTIMu+yT61Rihzh0pnLfiinVdeG0Rh5E1lk+FlTPjTZDabpPkQVyRo?=
- =?us-ascii?Q?6as0CMtBTRrwrfS6tMZk3C0wbq2QtdjBJGSqMzu7O1iKEFAyKUIHZjSiPtjE?=
- =?us-ascii?Q?KFi7PT5a5IB9uglAcP+1M4ZF8Af3dGzqpbYExfw5pGS8f0wKO9TMbGECmSZO?=
- =?us-ascii?Q?ixG1d5DF5hHeL1yWygEjjufIWWuklMXPRXHUw5CZm1X+ewrXIEiQhjTkxWvh?=
- =?us-ascii?Q?k2l8iV5fraf7LeScBJji8vR6db4vS5oCUBUNURHx2Sbf840QBvaFVMNFyAZ8?=
- =?us-ascii?Q?t/cD9CaO/cL5wu+wpHWaklqUIFp/FkPHMKVPU7eabSHV0EhVNQgMYAI/jXRK?=
- =?us-ascii?Q?M+/QxhpLyWAuVNwHLwC5lpWimL46ZZiY3+gBJo5C8K9N221pzUCGmASS6MPB?=
- =?us-ascii?Q?Wyy0xEPydPcJKcLtCtxVz2wE/y2ltHhUk4mwvSf7Jdvj50KDdfXxOsScnHcl?=
- =?us-ascii?Q?vXfL6TqSiHtTyyj5FSS5QtH4m+dDuILXnDA608ez/UHC6iqBgrhJzI31APVx?=
- =?us-ascii?Q?ujmn7HR5/XlAm6evYTAp1XWoqvcGEQkEcCektUEPL5QwmAe53lFkTYrt7Sax?=
- =?us-ascii?Q?IHHW7TEtS3//YiHnlxPs9KO9ERODvZRy8DWQDVf7x5b/MszOUFGamb1iTvdd?=
- =?us-ascii?Q?VSEfXq7/RtfH+0lUV6c2Ownnha2i2n9j9HlazyAznJMAHvrVhvcoHGM7DNlT?=
- =?us-ascii?Q?k95D4lAmTeGWgkuoZzH2qS07l1ndufpc8GgK+C1e2PrhexzNLHoDu1aU/2iD?=
- =?us-ascii?Q?jSD9ld8hxw302cY/a5PoF1UivmUcfhYWTNKylT5zcskhNMU3vXWv9/u8hAUL?=
- =?us-ascii?Q?5tgg4ckgfzJdkw0rV2Xsn48RNIvJE8OCLjR/eIovM5P+yFg3FBzteV9XUi9d?=
- =?us-ascii?Q?q155InPClfFL0x5NSkkwSu+kfSs+QGa8lPsqr3jaE5JrJMov40/HnnfGwgxE?=
- =?us-ascii?Q?JhiUUi6rNAostnkH2snY1TRAjI9h+hZsGumEsCy9XcaI2KUJbykzAByNI/s8?=
- =?us-ascii?Q?A/7T7tz4rW4X/LPwCPNS59wqatVcsvGZFeIf+TvXgXWp/p6oLoPl5GfYowjI?=
- =?us-ascii?Q?LxDL1bdA8ubOgAtvIs3dC2UftuVi/PpGHfg0BafaTyWJ2FGQbwRWnGtBQ1M0?=
- =?us-ascii?Q?kWGM1V5ZlYFpISlPscu/g6gFcXNMteW7o4tp?=
+ ARA:13230040|376014|7416014|1800799024|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFc2bXZEcXdUZEh4VWJMRml1d0VxU3RZd1lKWEZWOTd2eTZYTWpRbnJHbFlT?=
+ =?utf-8?B?a3RJT3JhVHA5RktQZzFNcUtmaFRuNWJHamMzVWhab3FIem9taDJVZ1JFano2?=
+ =?utf-8?B?NkZzaUxVZmJ4TUJPZmdHV0tDSkpnTzJSRHVVV3Fra1JENWhOK1h3ek12RExo?=
+ =?utf-8?B?R0M1Q08wWTlOcEd2YWRMOFN1RVgrb3pQdWxPYThuUC9MelVKUWhOclVnQkEz?=
+ =?utf-8?B?ODIrQkYycE5JSFNtSXU3UXZJU0xnYlhVamFRZk42M1dubWIzcVc2SE9JWFpC?=
+ =?utf-8?B?MWEyakpDay8xRzBzOU9tNXlRL1lwYVlMR3ZuZy91Z2NwZVluaWRocnR3K2RL?=
+ =?utf-8?B?OHdrVWRVSGVkWGRWandlQ2ZhNDVJRG5WMFhBRmtzN1ZkbTBpdlFST2RIVk0z?=
+ =?utf-8?B?YXE0Z3ZDN0QxS1kxZkVUZW9jQmlMakU3MnFBZGkvRXJMelg2clF2c21qb2lt?=
+ =?utf-8?B?YTg3MzB4VWJJK2hxeXBiWHdNWjRZZGFmbC8rRGRJTWI2SFJNNEtFeFo5bHVy?=
+ =?utf-8?B?RDNocVhMRGpGOStvVjR2VjREbHluLzNIMUhzSDExRitQZEw0YVBoY2VTTTJH?=
+ =?utf-8?B?U1g2TU91VEdDNVYrVzgwa1Q2WjZrSU1UZzdQdHhzdWFVRDR1RTk1QWpqUC9m?=
+ =?utf-8?B?dUdIcUJmTjllL1owYmxQOTNjZWt6cWRyWnNQRGJTWGNMQ0NadXBXc3dQeWhw?=
+ =?utf-8?B?RjlWekFVLytVVUhLZlBBUmt2WlJtR3Z0ZGwyMCtSdW91RDhFcDlDbnNPL002?=
+ =?utf-8?B?eXUyOGE4OVN4N3dDc1dqMU1UQm9CNitiYUVwU0E2Rk9kQWRqWnVOM0JwV2ZY?=
+ =?utf-8?B?WFM4TjdOUzRqc2VpenVpeXRvckVIaHArWmk5aVVtbmpaTExiamsveVNoSmM2?=
+ =?utf-8?B?QitMMDBsWkVuM012SWF1ck9JOW5xZVRTUmUyUm1FcWpxZEQ0bVN0U2djLzMx?=
+ =?utf-8?B?NE5TRnAxTnZ3Yy8yRGNoQ29memVaWllDS1RPNDVWWU9uRlo1ek1LUnNTU3pP?=
+ =?utf-8?B?WFlYcDFpWlZPN2dxUHVJNWtZcWttekNrdWRSYmVCM1hKZUtXREEwUEVEbS82?=
+ =?utf-8?B?SzRQOGtsZzZlNGhTVVdpbXRDZ04rNGI1bThhR25HTk9UdUJKYzNSeERWYmNQ?=
+ =?utf-8?B?TkwvVHA3ZnIrNmVDZXk3QlpLRjZKQ0NZaWpPTEZDVkZSVnB1ZEVDRk5vdUdT?=
+ =?utf-8?B?ZEQ1WkhZODFUdERGUnYwd3Y0b1g2ZVowVXZYVlI3YzhaYUFJRnBUL0JUYjhq?=
+ =?utf-8?B?NDJDVUdGQTBhRnlncVNjdWROMmVmZzc5c0NlKzlZY3o2UDFtd2VYbHFtL0Vp?=
+ =?utf-8?B?RGt2N2NZM251SVdIU0xzWERCdDRGVUp5SXYzVHMxZHRTNE83Mm8zcXE1bVht?=
+ =?utf-8?B?c3luUFlnUkZTeFlaRDhjd0pyN1ZmVnlSeWRabFVnbXNiSGF0Nk1GV3p1Vk85?=
+ =?utf-8?B?RGM1NElPRUhBa0NHVHFHV0xIYWdJUCtmbE1PaWVub1UxaW8xZUhDYXpQZms3?=
+ =?utf-8?B?UG9uMHlJRlZ4eUg3eHFZZG4zZjcrVjJWM3NLWE13VzRkYzhFM2lqZEZOdFA4?=
+ =?utf-8?B?ZzJjZi9NTTBaQ3VCamp4TldxcWpobkJWbmUzaFp0ZGVXZmpCa3NVdWYveWEw?=
+ =?utf-8?B?Nnc1ektoRkZhNkIwcUFtWk00a05tb1J6c1lVRVMxemhRdmh3cE94ZkxSUzNz?=
+ =?utf-8?B?UDBUMmFueStqVkNLN1l3QnRqWWlLWk54bmVCUnJJZ05PM1RzZVM0VXJNYWJU?=
+ =?utf-8?B?cjdTWStQYm1pamFGcVAzaEpJUnVaT3hzRmlSb25Feks3RnN2OFBGdlhMMlEv?=
+ =?utf-8?B?QWs0KzRCMHpsS3NJdzdrWEtSNk4yeXBXdjZqLzJ1aEJsZWJJcllFNU5rTHZK?=
+ =?utf-8?B?SUNnNmxBOURyK3FVTTdWaVFIckV2TUcyb2xEaEhYZm5ZMTdZS0ZnRTFMNCsw?=
+ =?utf-8?Q?0fhWN4z/FxbNqGd746QH9DLTBfNUq9/9?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(52116014)(366016)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?a0Xoux6mHeUuBjqmIJvNkAmSqcQqNcofxNrMOpzfOG2g/Dr4ezVOTuG0M9DJ?=
- =?us-ascii?Q?3zcYG4PgljzTdsH6HH8OfMGUh3vaeSuBk7Wxi9kMJwFE++p2xMLuaN8z26CA?=
- =?us-ascii?Q?MeLXggFRiUnDAT2v/cN2TKUaeWzFnJA2r8qSMPdGwg3xroNc8YM8RnnuAsPM?=
- =?us-ascii?Q?aX994BCaWQccjgsmzizmeeKKLvAIC+kQvn0ELOGGUROxkN9Y4u5Bf0tHToQ2?=
- =?us-ascii?Q?VrLTlSYcXDgFBd14MOA6+JdYGTdL5+zoBky2clEDt2onyJxeUCUbYnlrKlIC?=
- =?us-ascii?Q?IMPgMZK5ezE3U564pZnNBrygcORGgjWKc2VKrEr7m6TzJMuuDIeZdnR93LBM?=
- =?us-ascii?Q?qHNm5n+S6ZSm/2i+U25Nc1jimpHLjI32p1tjBqB+GOwVOzVLuaYoJL5Iv9km?=
- =?us-ascii?Q?Kk9mT+Qh0fzJlryvCPzdVFPl4gveyuF+r/6Gyddgdeb2+YDBqaYyQcnAOYrE?=
- =?us-ascii?Q?g6xve3+Iba6bpGXMIKTO+vRyMCfh0qK3t4DHfKhgMqr+zlSPMRwH9cWkyskO?=
- =?us-ascii?Q?sNuP7X398zdAE9pPxV+Hpyqo0qe0Hxwg/f/jt+WuLnrjHHs0oyL59BlytcJE?=
- =?us-ascii?Q?vInoxYOX7BVHkkA9Vq19cGJ4Kuvrkdo96XdeagjIKwG5ublfFgYiAXNXUn7w?=
- =?us-ascii?Q?Y894M1qE5/pgx0UpjBrKqWxJ2H2qAhaw+z8Jw34K7kzX8iu0lnEQ/orn8Z4z?=
- =?us-ascii?Q?rT2OX4ea3/GBMPkPkYVlum4/DRDWNDNPGYqqesCmC6Rxmv7bjaBqXcHDo7Dj?=
- =?us-ascii?Q?S9htlVZGHjR4j7TsqFpYY/V2CnAoO/e+06CkjWhZWeegsKKtK6eu3lAKNP/d?=
- =?us-ascii?Q?iWufFL0rHJKhKZ+nxhpnWEwTtlIRuRMqs/XjeqV0/QvqTszoD3o0q26L2LXC?=
- =?us-ascii?Q?3Hnuy0hQYMJD8d7UqDTAajebRiESztxBZq2n/P/pn/T6zpHDvgvq1mMsgGk6?=
- =?us-ascii?Q?mMJYCa9NZYLOf1jJf6zYHaQd84MFyDvqj3Stt4R20gU+GiCRJ3fbbXQQwE2C?=
- =?us-ascii?Q?w/no7cCzO4ZmLB+68265QHHfEvGr8y9+10I6POt971SD0nk+o+2A8p23Mhy7?=
- =?us-ascii?Q?54lb81xa+9HbTJKaYCLb5U+5UGISUBdWFW17pbvHdS3K9JkW0sZMGOVAHGiM?=
- =?us-ascii?Q?oMvNJ/s56uRH6ZWB3WTvJp6/NTlBqsCq88KTbJbTbmGr9qmhNObi2Gyz7OPq?=
- =?us-ascii?Q?Q+Uc5NPEMYqRefV1EspI35u+Wm1/jD8D+2mCkEH08F+CYN1Skhj6nhim/B0E?=
- =?us-ascii?Q?R+FcfnP9EEEba4r8br2BmV3ZTjs6xfGn5XU2Bwpe2RezxfYmHYO/K7dmmpGs?=
- =?us-ascii?Q?RBVcJKpaKDIrzEC6iDXisJwV48rupUM+Jw7LoEX4SWe5kgts1lew5oBjT5y+?=
- =?us-ascii?Q?lB88IHbdD1/KjFAjQePRJUSrCR5xq/cL+fc1/yF/Ax1d2Sw0cHmbfXSe87wd?=
- =?us-ascii?Q?Yh0rmrKnBOAAhzrNIN6uVMvbVYi1N97d7P1J6RyD9oJErBVE/XbMQ4d0yt4w?=
- =?us-ascii?Q?qrzq5ukStzdLbwrY6gthU0dKVUlkI+mTMfSeK/qvw/FRbpnBKMWm/x3BGGY0?=
- =?us-ascii?Q?fDaAQpPLrv+8PZi1t6aVZ5/8pulcnvptZiJjsDLeD4Ea7qWRE/nYMHkyDaGk?=
- =?us-ascii?Q?mGAkSoIJDbdQRp3uZDNuGHUBx1UV/EmaIwaJ61nGjl31CcMQWpVBNvIkAp/+?=
- =?us-ascii?Q?x8XVc8neBwl11aui0I4zsF8HFC9xw4iIZVL9MG3jgs8bb2ROqY51rWm5v+YV?=
- =?us-ascii?Q?WUXgmC2BXDI78wyIqjBVKnJh0zLZvxk=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 42e29169-d767-4495-3938-08de4f760d75
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlZKMWxpYkpYdjJUZ2xhNk9LVTNwOEZoUzkwZnB3ajRIUFduZERnUXhWN1Uy?=
+ =?utf-8?B?aS9qOEpybG84UXhNQWJCUE1HTUtYWk8zZ00vaTlMODNZdjBrdjNDL0w3QVhY?=
+ =?utf-8?B?MitxdC8xYnJHWWJIV2FMa1g2Vzc4V2JaMUFFckVQeDlHbjQ4cWZIMGNlODNq?=
+ =?utf-8?B?cW05Wk84RjhqQ2JlczZiSFBwUm92WGdmNnh4RCt0Wk42RXh3NXBuMjEzcWFr?=
+ =?utf-8?B?Q2RDM0NoUzFDalI5eGR3UmJoeU5QN3c0OEZsc09ESlRUQWRZRy8yaWZDbWEy?=
+ =?utf-8?B?Q0ZsMEdEWDNyTHdYS05uK3VmdCtvNGlwN2FIV2I5MXBGUlNFSTdvem5oZ3Zx?=
+ =?utf-8?B?Sng5WUVXUldad0EydjVFanQrS0NyeG1XVWxDVWpvbEh4RE9BSXNlVTdraTRt?=
+ =?utf-8?B?QTVwN1ZIL3N5R3p4S1ZiaFIrTzBTWDZ5c1RJeFJQZUUySUpUZlovUDZZMSt4?=
+ =?utf-8?B?UjNYc3piSE9WL3c2MXcvbktLeHY1TW9DVUprdFNRUlYrK1BXc2NvNS9NOHZK?=
+ =?utf-8?B?YWd6THBnNmVXNk00UlZ3bDAxU1RNczFzTFZlTWZldzVoQzBzdkNLd3pFbWc1?=
+ =?utf-8?B?cXAxQklnSmVBV05HdGpCT2xSa0JxQVQyVmhFeHdzdVpRQkZ3djhZcDFTblFr?=
+ =?utf-8?B?bHlxVytDMDI0c3AzYXNaSElkR3h2cDNSV2FuZlRPcjY0Qk1saTdab1J3dzZM?=
+ =?utf-8?B?aCs4QjYvVDF6cHJIMjlBaXRlbTc1R1NUbXlhdXQ2TERrNFIyTjd6N2oxYXhV?=
+ =?utf-8?B?MXpvMU8vVG9uMDRXTDNWd3VUcndHeGtUYnpnNUtWS0wxRUZsQ21mZm43QnF4?=
+ =?utf-8?B?dXB1Tk1Da0llaGV3emRQemE1dEMwdXJ1NWxsRkZqTmRJbjFCeDFKQW5TV2dH?=
+ =?utf-8?B?djBjR05ud0RHak9wYW1CdVBNcytCWHhaQzV4WEQ4Q0JVdU8wZlNtS2M1NGc2?=
+ =?utf-8?B?NjU0V1hqRjk2eUdkSno1czcrVWJtOWVIOXBjUTFPQ1VrWHFrRWxCbGlrN05n?=
+ =?utf-8?B?aDBMSitLMWRkOTZFdG1TSis5V3hLSHZpS2srUHFqMzI4dkZmNGR2Z2VaYzdG?=
+ =?utf-8?B?UjNKdWFST2lxTUJjdlJES291NWdsNUllRFVCQlNOMTNRM2ZTTm1HZHBuOHVs?=
+ =?utf-8?B?d05MdVN2bHVSVi8yNkk0YXAreWtrbnRnVFBEWUhWV1RsQUV3NUNraW5FazV5?=
+ =?utf-8?B?YnFJVTdKZ1ZLbU9IOHpjN2gxVHZqZnFaSk5URm9sZUh3MXhzQ0dXVDhnRHpw?=
+ =?utf-8?B?bk1aZWo2dWxXRldvN0xwalhBRUxZV3lDYnpMa2dWOWVIUXFGMjlGWUUxaWJH?=
+ =?utf-8?B?UjJSSzJnblQwazVtamp0L1U2cXBxYTVQdDR2enloU1lPejArclBzdnluOWcx?=
+ =?utf-8?B?VFUzdEZlb1Z6NGF5bUxOSmdCdkJMejNkbWV5N3ZmNEZzWW5QOFJJdFkwNUkx?=
+ =?utf-8?B?aGpYOEx0SFBoNkRjd0tBbkRkdVhLVytMMlYrWXllR050ejl3RU1UbjZLeTdi?=
+ =?utf-8?B?QjdRMTViUnQveTAxcURBaFJ3UURnRFBnL0tlSnprMWtPYzlrYjE4K2FxYUl3?=
+ =?utf-8?B?RHRGZmpvZDJGZXB1OXp5aGFST2NSekM1S0tQNFZiWHp0MlBkSzBqamNMMGZU?=
+ =?utf-8?B?MXpKb1BudDRZeTJSRU9PZjY0M3N4NUNvbmg2MWlIZWcybXA0NzJ5bGZFR0o5?=
+ =?utf-8?B?blVwZnFTQS9mK0VYajdkTjN1MjhDS2pTMEVWK3E0TDgwMnNMSnNUcy9iU3BF?=
+ =?utf-8?B?ak9PelpUelhEZmcyQjRqcW80RnpaVDIvU2twamllS0trUDJ0TS80OFNBUjFQ?=
+ =?utf-8?B?V2JFcXRQVXJaSU1BZk9HQ216VXc5NnlKRy84TEthQ2F6VGdTUzRJWnZ6Y2Qx?=
+ =?utf-8?B?U3RHdEpsWmpIc2FyQUp6WEkzMUJtWGFBWGN2VllrMm9FQzQwaFJsclhOcmlj?=
+ =?utf-8?B?ZnNweWpGWHNiVVpBM3dZbGNaT3dlZ2JUOWpERE5oZElOWTRSODkyNjkxNVVu?=
+ =?utf-8?B?ZG5GY3VjNDQyenlLb1NtZnRlUCt1N1NhMGV0dlJ3VWFySW45M2xLVklFTVdM?=
+ =?utf-8?B?QTg1clQyY29NKzlkbENGZXduVXdFY2hramh3WnBlcGUyM21jMGJBaUFaVjhI?=
+ =?utf-8?B?L1dMYjVmYjA5YWxvdE9YYzR1dXNqdG5oYm5sSnNKQzRHUVN6cHNNNzdOM1Nl?=
+ =?utf-8?B?SFpkOHRxMHJCM0cxck5zdWpHU1cyTytxR3FuWkpDZEJTRmhEMzJHdlNDZUxr?=
+ =?utf-8?B?WkNiMjlzdVY2Wkg4dEY0d2l2QjlWVzRxQ0lnVGJpeEF5SW1FOGVTQ0hkN0Vh?=
+ =?utf-8?B?RENRL25ocGk0Rm1wR1ViZUlXd1ZNMUpPZTF1VDVXcHB0aWw0REtvUT09?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 863a59d7-d895-4637-8136-08de4f7db4a9
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2026 11:55:58.4963 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2026 12:50:45.4623 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XwjzizgytZmLAfhht6wVMPxKoFTcuse3HB1It2uMoc4LIUBHHs8AIQ6yfkyUHr7FZXV3HDWEMwJsbNo/yx4CDcSAyWw0c/FTlL5qxQyd8+k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7586
+X-MS-Exchange-CrossTenant-UserPrincipalName: c4lXNnK+uS273h7k4IPtwrKZXMGhl0WJ5Ota/9DvxejLa63mdyiPDTVBY889tWLjlT+txOy8GWLQkEqesbN/hg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6609
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,110 +234,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 09 2026, Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com> wrote:
-
-> Hi Simon,
->
-> On 1/8/2026 11:12 PM, Simon Glass wrote:
->> Hi Balaji,
+On 09.01.26 12:45, Jan Kiszka wrote:
+> On 09.01.26 12:34, Simon Glass wrote:
+>> Hi Mark,
 >>
->> On Wed, 7 Jan 2026 at 23:50, Balaji Selvanathan
->> <balaji.selvanathan@oss.qualcomm.com> wrote:
->>> Add support for locating SCSI environment partition using GPT type
->>> GUID instead of unique UUID. This enables the saveenv command to
->>> work with partitions identified by their type rather than unique
->>> identifiers, providing flexibility for systems where partition
->>> UUIDs may vary across devices but types remain constant.
+>> On Wed, 7 Jan 2026 at 12:38, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >>>
->>> Introduce CONFIG_SCSI_ENV_PART_TYPE_GUID configuration option that
->>> allows specifying a partition type GUID for environment storage.
->>> When enabled, the environment subsystem uses the new type GUID
->>> based lookup method via scsi_get_blk_by_type_guid() to find the
->>> first matching partition.
+>>>> From: Simon Glass <sjg@chromium.org>
+>>>> Date: Wed, 7 Jan 2026 12:02:27 -0700
+>>>>
+>>>> On Tue, 6 Jan 2026 at 19:42, Peter Robinson <pbrobinson@gmail.com> wrote:
+>>>>>
+>>>>> On Wed, 7 Jan 2026 at 00:33, Simon Glass <sjg@chromium.org> wrote:
+>>>>>>
+>>>>>> From: Simon Glass <sjg@chromium.org>
+>>>>>>
+>>>>>> This work-around dates from 2019 and grub 2.04 which is quite old. New
+>>>>>> builds of grub don't have the problem and old boards presumably use an
+>>>>>> older U-Boot, so don't need this.
+>>>>>>
+>>>>>> Drop it.
+>>>>>>
+>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>>> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+>>>>>> ---
+>>>>>>
+>>>>>>  configs/mt7623n_bpir2_defconfig |  1 -
+>>>>>>  lib/efi_loader/Kconfig          | 10 ----------
+>>>>>>  lib/efi_loader/efi_boottime.c   | 26 --------------------------
+>>>>>>  3 files changed, 37 deletions(-)
+>>>>>>
+>>>>>> diff --git a/configs/mt7623n_bpir2_defconfig b/configs/mt7623n_bpir2_defconfig
+>>>>>> index 404380558f2..d75168a72ed 100644
+>>>>>> --- a/configs/mt7623n_bpir2_defconfig
+>>>>>> +++ b/configs/mt7623n_bpir2_defconfig
+>>>>>> @@ -13,7 +13,6 @@ CONFIG_DEFAULT_DEVICE_TREE="mt7623n-bananapi-bpi-r2"
+>>>>>>  CONFIG_TARGET_MT7623=y
+>>>>>>  CONFIG_SYS_BOOTM_LEN=0x4000000
+>>>>>>  CONFIG_SYS_LOAD_ADDR=0x84000000
+>>>>>> -# CONFIG_EFI_GRUB_ARM32_WORKAROUND is not set
+>>>>>>  CONFIG_FIT=y
+>>>>>>  CONFIG_FIT_VERBOSE=y
+>>>>>>  CONFIG_DISTRO_DEFAULTS=y
+>>>>>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>>>>>> index 13e44be1d06..5585c841c27 100644
+>>>>>> --- a/lib/efi_loader/Kconfig
+>>>>>> +++ b/lib/efi_loader/Kconfig
+>>>>>> @@ -505,16 +505,6 @@ config EFI_LOADER_BOUNCE_BUFFER
+>>>>>>           hardware we can create a bounce buffer so that payloads don't have to
+>>>>>>           worry about platform details.
+>>>>>>
+>>>>>> -config EFI_GRUB_ARM32_WORKAROUND
+>>>>>> -       bool "Workaround for GRUB on 32bit ARM"
+>>>>>> -       default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
+>>>>>> -       default y
+>>>>>> -       depends on ARM && !ARM64
+>>>>>> -       help
+>>>>>> -         GRUB prior to version 2.04 requires U-Boot to disable caches. This
+>>>>>> -         workaround currently is also needed on systems with caches that
+>>>>>> -         cannot be managed via CP15.
+>>>>>
+>>>>> This also states that it's needed for systems that can't be managed by
+>>>>> CP15, what systems are they, how are those platforms addressed?
+>>>>
+>>>> I'm guessing that some systems have level2 caches with their own
+>>>> software interface. I certainly have seen this with Tegra2/3, for
+>>>> example.
 >>>
->>> This change maintains backward compatibility with the existing
->>> UUID-based approach.
+>>> This is already being discussed in another thread on the mailing list
+>>> started by Jan Kiszka:
 >>>
->>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->>> ---
->>>   env/Kconfig |  7 +++++++
->>>   env/scsi.c  | 13 +++++++++++++
->>>   2 files changed, 20 insertions(+)
+>>>   https://lists.denx.de/pipermail/u-boot/2026-January/606817.html
 >>>
->>> diff --git a/env/Kconfig b/env/Kconfig
->>> index b312f9b5324..97cb3d05daf 100644
->>> --- a/env/Kconfig
->>> +++ b/env/Kconfig
->>> @@ -768,6 +768,13 @@ config SCSI_ENV_PART_UUID
->>>          help
->>>            UUID of the SCSI partition that you want to store the environment in.
->>>
->>> +config SCSI_ENV_PART_TYPE_GUID
->>> +       string "SCSI partition type GUID for saving environment"
->>> +       depends on ENV_IS_IN_SCSI
->>> +       help
->>> +         Type GUID of the SCSI partition to store the environment in.
->>> +         Uses the first partition matching this type GUID.
->>> +
->>>   config ENV_USE_DEFAULT_ENV_TEXT_FILE
->>>          bool "Create default environment from file"
->>>          depends on !COMPILE_TEST
->>> diff --git a/env/scsi.c b/env/scsi.c
->>> index 207717e17b1..6182ae26679 100644
->>> --- a/env/scsi.c
->>> +++ b/env/scsi.c
->>> @@ -35,8 +35,13 @@ static inline struct env_scsi_info *env_scsi_get_part(void)
->>>   {
->>>          struct env_scsi_info *ep = &env_part;
->>>
->>> +#ifdef CONFIG_SCSI_ENV_PART_TYPE_GUID
->>> +       if (scsi_get_blk_by_type_guid(CONFIG_SCSI_ENV_PART_TYPE_GUID, &ep->blk, &ep->part))
->> Can you use if IS_ENABLED(CONFIG_SCSI_ENV_PART_TYPE_GUID)
+>>> My suggestion would be to drop this patch from your set and let that
+>>> thread run its course.
 >>
->> (we try to avoid #ifdef)
-> Thanks for the feedback.
->
-> In this respin
-> https://lore.kernel.org/u-boot/20260109070912.4106466-4-balaji.selvanathan@oss.qualcomm.com/,
-> I've introduced a choice statement in env/Kconfig to ensure mutual
-> exclusivity between CONFIG_SCSI_ENV_PART_UUID and
-> CONFIG_SCSI_ENV_PART_TYPE_GUID.
->
-> Due to this choice-based configuration, only one of these string
-> configs is defined at compile time. When I attempted to use `if
-> (IS_ENABLED(...))` for the string concatenation cases, I encountered
-> compilation errors because the compiler tries to evaluate both
-> branches, but the undefined config macro causes an "undeclared
-> identifier" error.
->
+>> Yes I did see that and I was pleased to see that someone else was
+>> interested in this topic.
+>>
+>> Still, that thread does not actually include a patch. So let's see how
+>> it pans out.
+>>
+> 
+> I'm played with turning off the workaround on a socfpga target, and that
+> apparently causes troubles:
+> https://lore.kernel.org/cip-dev/ba08992d-17f5-4689-b05c-93af612e4539@siemens.com/
+> 
+> I'm inclined now to keep cache disabling by default, only enable caches
+> on known-good boards. If someone has a hint how to reliable identify
+> targets that have architected CR15 cache control, I would use that as
+> input. Otherwise, we need to maintain a positive list in Kconfig.
+> 
+> Along that, the control may need renaming because the original reason -
+> broken bootloaders - is really history.
+> 
 
-I think you could do
+ * TODO:
+ * According to the UEFI spec caches that can be managed via CP15
+ * operations should be enabled. Caches requiring platform information
+ * to manage should be disabled. This should not happen in
+ * ExitBootServices() but before invoking any UEFI binary is invoked.
 
-config SCSI_ENV_PART_TYPE_GUID
-	string "SCSI partition type GUID for saving environment" if SCSI_ENV_PART_USE_TYPE_GUID
-	help
-	  Type GUID of the SCSI partition to store the environment in.
-	  Uses the first partition matching this type GUID.
+So, that last sentence points out another issue for targets with
+non-architected caches: The current logic seems to disable them too
+late, right? Should the cache disabling move to do_bootefi_exec?
 
-instead of
+Jan
 
-config SCSI_ENV_PART_TYPE_GUID
-	string "SCSI partition type GUID for saving environment"
-	depends on SCSI_ENV_PART_USE_TYPE_GUID
-	help
-	  Type GUID of the SCSI partition to store the environment in.
-	  Uses the first partition matching this type GUID.
-
-
-Then the config symbol always exists, but is only visible/changable when
-relevant.
-
-Also, I suggest adding
-
-  default "3de21764-95bd-54bd-a5c3-4abe786f38a8"
-
-There's really no reason everybody should come up with their own, and we
-already have exactly that type guid defined to mean "partition
-containing a u-boot environment".
-
-Rasmus
+-- 
+Siemens AG, Foundational Technologies
+Linux Expert Center
