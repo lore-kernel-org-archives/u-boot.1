@@ -4,93 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12612D26D8F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 19:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 778A5D26D99
+	for <u-boot@archiver.kernel.org>; Fri,  9 Jan 2026 19:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8159D843AD;
-	Fri,  9 Jan 2026 20:33:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E27A0843AD;
+	Fri,  9 Jan 2026 20:41:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L0TkMXKC";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="mCihlSse";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lpAl6qdu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CC95843D0; Fri,  9 Jan 2026 20:33:28 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B447B843C7; Fri,  9 Jan 2026 20:41:44 +0100 (CET)
+Received: from fhigh-a2-smtp.messagingengine.com
+ (fhigh-a2-smtp.messagingengine.com [103.168.172.153])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD03984390
- for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 20:33:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D672784390
+ for <u-boot@lists.denx.de>; Fri,  9 Jan 2026 20:41:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-455a461ab6eso1932883b6e.2
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 11:33:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1767987204; x=1768592004; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iEkQByCUcPHCUzV1JmefgGURSoaLNrIKZ8mmwLSJjRg=;
- b=L0TkMXKCd1wCWsI7Q4g8c08YUVJ3qnbAZDtLsxuCXp/72ow5P+5KmAaBrEAyqhVU74
- r0AMZlzzNI4+7+NmDJWJSSdenMgVkSYY8fTlphC6hReWgxwCK+h8MmZbSHFGa3oDK7Lx
- xeQY6+qytcph94TYE1y8nyeEI0L22lHwCiqDo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1767987204; x=1768592004;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iEkQByCUcPHCUzV1JmefgGURSoaLNrIKZ8mmwLSJjRg=;
- b=NH71OCj3iXP/oHuzQYizArdKZDCFUToIOZiD3rhLpHgkMLQgtIvWAbq5mJcUPxgHGw
- ih1g1Qhqpi6fbmW6tKx8PLAw08nc7pJromH3txPnhFO663t8JZ12JA3PTq74q41kF6Az
- 9ZocKmBAJ71LFBHA7SRIIeH9AQfcMXesNDOqxcwqcVnILN/g1qW4H7ap+N8HVOcc3lJF
- thoXq2GHRD6WjUk3wEZc0EoK6QuuKh98vNWXOYuZO+ihEl7wqkW/x3l+kdO0rXo96p0Y
- wqX4YJKKmsYKsO23SLzhdxGX6VJ2XPW5WGIuPPl9z8T28fcXOgqs0JfY6y9V0JC9TV1F
- il/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlTj2pttuHR5TL27OIuKxwr/8Olantjg8/SR/8sxPEOOMbuNxOShyxue01CeXAdHlyH2uVt08=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiGTq/Lz9ooOKqx0PX1QKEZ4AKuxgQIYbWVMgD4TLwdZs4TT3r
- 5NQvRgSvJB78/kURuWID64gKFSeG53rnfkzi/OeoeSl9/Vsz9bI8yNYJIJiH8EyRgu4=
-X-Gm-Gg: AY/fxX6z8QxQLH+VAUizMZE8G4D0rSVYrYJGBiDv4PlNv/5DTBEHIT+QkDgp/eRKuO6
- KOORQfIAd1QVpuIeXDA5fl0elx8gqDI3KW5X6ZNoz0XU8B8A2uvJ0mtqPkRcJnN/e6fEIZn4H6I
- lyiHpmSMKhWAz3YF+Pj1lBo6GB8EuMxUcFZ29X+B7zpnX4y2Ai159HiYBxTVNwrbSo42zNK3p79
- UOfaLVQUn26AhmN+ulnnxk2PTRQk0M0GRfksk+2MDiQYgobh6yJZEZSYXXRxdzKYGheccGpLbiU
- h4IHuBwyd46DJuILT0xwzXpQo3DX34OAZjMcprcoVbugpldraVdHxkxNlmz5+ZYBUTl2PFv7Xg0
- 6UhN8AigY+DX+ZbcAmeD0CuSOuz+/K+hnHdr5g87U/gAeEDzRztFQAIqzgEzZG0u7lRKxu5KCk6
- 1pDWMMTdhpYExcpxTJ27UmG7z4RXBtV4hCy/7DUbhAQk0ZQtfewgQBd2GIo4KvnouXt3t32DdnR
- FGaX1tlxprc3lCSlLABV8XDjUnbbRoqH7vnAVssm4EWFSH/nA==
-X-Google-Smtp-Source: AGHT+IHNlwZ3U7z/P10Q32tE0SObKbwet6hBrwnj3DDlENW8QTYRkPQInrbZws05FEdq0hGGlw5mbg==
-X-Received: by 2002:a05:6808:19a0:b0:43f:5c61:448c with SMTP id
- 5614622812f47-45a6bebc4cdmr7530925b6e.39.1767987204468; 
- Fri, 09 Jan 2026 11:33:24 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa50ecb58sm7377776fac.18.2026.01.09.11.33.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 11:33:23 -0800 (PST)
-Date: Fri, 9 Jan 2026 13:33:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Padhi, Beleswar" <b-padhi@ti.com>
-Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
- sughosh.ganu@linaro.org, philip.molloy@analog.com,
- marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com,
- anshuld@ti.com, afd@ti.com, nm@ti.com, vigneshr@ti.com,
- n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
- before DTB
-Message-ID: <20260109193321.GK3416603@bill-the-cat>
-References: <20260109190026.58464-1-b-padhi@ti.com>
- <20260109190026.58464-3-b-padhi@ti.com>
- <20260109191054.GJ3416603@bill-the-cat>
- <48022594-212f-4f43-ba9b-0802711e88e5@ti.com>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id B89A914000B6;
+ Fri,  9 Jan 2026 14:41:40 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-03.internal (MEProxy); Fri, 09 Jan 2026 14:41:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1767987700; x=1768074100; bh=OR
+ EaD/86edDfuAsGZ40EvIcSkl4P/sExClwGjj/E0L8=; b=mCihlSsesBkkCVpehB
+ liOwm45LYA89mvJSSKFcX6QBx/cBkXhQOQERvPOB1zVJIETqhBJcn7OO8BNKOLM2
+ kSw9JjHZ5GYpuyqw7PKSZDqGgmhw/kb81CHYECciynBEu7wfPtXs5vltfvIyAauu
+ 9eOggNIhXo98CkqsY7wm3LWveEbc159pNX8Q8zpB2L8wVW8xgC28EAXdtEOa+Ruf
+ v2SVn+p6vSXUlHQB851IPphq6A7CVNb5Ryodu/1ceAB1g17A75ONeEH8yJY2+V0M
+ zk98vkujuJUIARekqbzGl3UQlvEHt/5M8q9zymswc5ZgaCOU1L6GqblPyjzg3c7K
+ PWFw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1767987700; x=1768074100; bh=OREaD/86edDfuAsGZ40EvIcSkl4P
+ /sExClwGjj/E0L8=; b=lpAl6qduDZmLpQkOZR7stdPsQvTnSy0dybU7vuxt2FAI
+ cXnaSLArrWVTiNhm8JC3vOwg6CeZz7NvjYGsE04CQbQ4XKiWDQhz6aUDaHh48DqE
+ nNpfj14+OO6ZOwUU+E43Rlx5MqfQepzJyoD28tPyZeZ+WQVwe2FMI5P9x+1w1d4K
+ d9oSah+Xe+9zT25XSIoPN1TZD60xLMhVslDDpsL73aRfRCeC+0aw+Vr3OfNVYh+j
+ vdIEtAQ6+g29sPWinKK+5UjIETwbNmUxU8z/4rVdIgxmC2Ca9gzWR5O77125Fdlr
+ mp5MegbVPblkxuxx5UeYjtRS1N90syjVrTFH3KA9dg==
+X-ME-Sender: <xms:9FlhaZunQs24UlwfBtFhK_FLc_eOyTazoT7iCB3epmDnb1rML17ZbA>
+ <xme:9FlhaTINisMi5yZ_NOG_xKsdUncwV6_RjItwX6z5YHVLeKL6IpPf_ye27txJG3ndS
+ Bd93lDlB6ciJ5PNPL0PSpMor6xZ_vwl3fnKQC5Qdow3b4AWu30sGyqP>
+X-ME-Received: <xmr:9Flhaa9ebxeH-WnYLK4cgQWPHkLKMn20HdN6KWMYdHYxpfi2BnpHe9K-2zmrbM8_lRHjCl8vPh7tTBl17l_EuiNgan8N5hxoB6TSTg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddutdelieekucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
+ rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepfeehle
+ dtheefteejfedvheetuedttdetleegudeuteejveetieefuedvfeffvdeinecuffhomhgr
+ ihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+ epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepjedp
+ mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvg
+ hngidruggvpdhrtghpthhtohepmhgrrhhkrdhkvghtthgvnhhishesgihsgegrlhhlrdhn
+ lhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhope
+ gsmhgvnhhgrdgtnhesghhmrghilhdrtghomhdprhgtphhtthhopehmrghrvgigseguvghn
+ gidruggvpdhrtghpthhtoheprghsrghhiheslhhishhtshdrlhhinhhugidruggvvhdprh
+ gtphhtthhopehjsehjrghnnhgruhdrnhgvth
+X-ME-Proxy: <xmx:9FlhaUzqHWf7KTSkj73ACpih6Zce8PdpRMuQ-OrjATnbyHd01Nj2cQ>
+ <xmx:9Flhaf5lJyI22bbOawx8weJtc9xPe9JyyZ93nqhgQCNP6MIkbqDMVQ>
+ <xmx:9FlhaT-c-chs7uXd5kbK4ER2a2lUXXorad53RqHNHAiRP_iXf0gmRA>
+ <xmx:9FlhacreSBRqgdfh-abzVplgggximmA2i5f_bZ1N4riFip53sZEU3g>
+ <xmx:9FlhaY03NolbP9edPxUGdJOh4jBPUglQ0v63EVyCxpMuFC9NvUKY6c_t>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 9 Jan 2026 14:41:39 -0500 (EST)
+From: Janne Grunau <j@jannau.net>
+Date: Fri, 09 Jan 2026 20:41:36 +0100
+Subject: [PATCH] usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ycTTsZ4OGUmlUFsu"
-Content-Disposition: inline
-In-Reply-To: <48022594-212f-4f43-ba9b-0802711e88e5@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAO9ZYWkC/x3MTQqDMBAG0KvIrDuQRFu1V5EuYvxaBzSGpP6Ae
+ PeGLt/mnZQQBYmexUkRmyRZfIa+FeRG6z9gGbLJKPNQWrW8pp6H3ZVsQ5jAbpmD/fIkfj24MRq
+ o7z1c1VAeQsRbjv/eva7rB9b0/odtAAAA
+X-Change-ID: 20260109-usb-dwc3-apple-compat-linux-821ee75bec48
+To: u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1447; i=j@jannau.net;
+ s=yk2025; h=from:subject:message-id;
+ bh=1xZR13ZWgaLmj5Z6bVbcFZEJdTlPhond4y8NuvDtGos=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszEyA//bwZtqi1ovKvEutI4bdUmk9/H/k0RWbrok94GP
+ k8fPf7kjlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABOZMpGR4VAzY0HPCY7uxfsm
+ qGsm1W+wqpHb8WzF9hn5LBZP9newXWT4n/7uycsHC72kvefeOrXN4XA0y/2bX37blnqbZM3VVJ5
+ xgx8A
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,93 +121,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The Linux support for dwc3 on Apple silicon SoCs switched to using a
+apple specific glue driver [1] that uses it own compatible string. The
+glue driver handles platform specific requirements on the interaction
+between dwc3 and the USB2/USB3 PHY and reset-controller for USB role
+switches and plug events.
+To keep USB working as before when the nodes still carried "snps,dwc3"
+as compatible add "apple,t8103-dwc3" to the of match table. Eventually
+it is probably advisable to add a dwc3-apple glue driver and write code
+for the currently empty Apple Type-C PHY driver in phy-apple-atc.c.
 
---ycTTsZ4OGUmlUFsu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Link: https://lore.kernel.org/asahi/20251015-b4-aplpe-dwc3-v2-0-cbd65a2d511a@kernel.org/ [1]
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ drivers/usb/host/xhci-dwc3.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Sat, Jan 10, 2026 at 12:51:39AM +0530, Padhi, Beleswar wrote:
-> Hi Tom,
->=20
-> On 1/10/2026 12:40 AM, Tom Rini wrote:
-> > On Sat, Jan 10, 2026 at 12:30:26AM +0530, Beleswar Padhi wrote:
-> >=20
-> > > The OMAP2 SPL linker script (also used for K3 platforms) currently us=
-es
-> > > 4-byte alignment after the __u_boot_list section. Change this to 8-by=
-te
-> > > alignment to meet the device tree specification requirement for DTB
-> > > alignment.
-> > >=20
-> > > However, this alignment directive only advances the location counter
-> > > without padding the actual binary output. When objcopy extracts
-> > > u-boot-spl-nodtb.bin, it includes only actual data, stopping at the l=
-ast
-> > > byte of __u_boot_list (e.g., 0x41c359fc), not the aligned address (e.=
-g.,
-> > > 0x41c35a00). When the FIT image containing device trees is concatenat=
-ed
-> > > to the above SPL binary, it gets appended at the unaligned file size,
-> > > causing libfdt validation failure.
-> > >=20
-> > > To fix this, add an alignment directive inside the __u_boot_list sect=
-ion
-> > > itself. This forces the linker to include padding as part of the sect=
-ion
-> > > data, ensuring objcopy includes the padding bytes in the binary and t=
-he
-> > > appended FIT image starts at an 8-byte aligned boundary.
-> > >=20
-> > > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> > > ---
-> > >   arch/arm/mach-omap2/u-boot-spl.lds | 3 ++-
-> > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2=
-/u-boot-spl.lds
-> > > index 3bb759d8a1c..081323e6599 100644
-> > > --- a/arch/arm/mach-omap2/u-boot-spl.lds
-> > > +++ b/arch/arm/mach-omap2/u-boot-spl.lds
-> > > @@ -35,9 +35,10 @@ SECTIONS
-> > >   	. =3D ALIGN(4);
-> > >   	__u_boot_list : {
-> > >   		KEEP(*(SORT(__u_boot_list*)));
-> > > +		. =3D ALIGN(8);
-> > >   	} >.sram
-> > > -	. =3D ALIGN(4);
-> > > +	. =3D ALIGN(8);
-> > >   	__image_copy_end =3D .;
-> > >   	_end =3D .;
-> > >   	_image_binary_end =3D .;
-> > Do we need both of these? Shouldn't we just need the one inside the sram
-> > section with a comment that this ensures the end of the SRAM portion is
-> > 8-byte aligned?
->=20
->=20
-> Yes, we need only the first directive. But second one is just defensive
-> programming, if someday someone changes the memory layout, this just hints
-> that __image_copy_end should always be 8-byte aligned... Doesn't hurt to
-> have
-> it? Let me know what you think!
+diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+index e3e0ceff43e6abdb8643f265819eff28c2c802f4..ba42c3247654b7d9272c42ea9c4cf0bd9082915e 100644
+--- a/drivers/usb/host/xhci-dwc3.c
++++ b/drivers/usb/host/xhci-dwc3.c
+@@ -238,6 +238,7 @@ static int xhci_dwc3_remove(struct udevice *dev)
+ 
+ static const struct udevice_id xhci_dwc3_ids[] = {
+ 	{ .compatible = "snps,dwc3" },
++	{ .compatible = "apple,t8103-dwc3" },
+ 	{ }
+ };
+ 
 
-I think a comment is better defensive programming than extra ALIGN
-statements. And with this discovery, we should also I think audit the
-rest of the linker scripts with a ". =3D ALIGN(4)" to see if they're
-likely in similar spots.
+---
+base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
+change-id: 20260109-usb-dwc3-apple-compat-linux-821ee75bec48
 
---=20
-Tom
+Best regards,
+-- 
+Janne Grunau <j@jannau.net>
 
---ycTTsZ4OGUmlUFsu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWFX/QAKCRAr4qD1Cr/k
-Ct9FAQC4M0ba1Rm4cLwl0oYDRKQHr2kYyvJe4XgvAbJ1v62GYQD7Bp6g9OL86tdz
-9ol05oTMs35MO7u1I7yvlpiyrtHP7A4=
-=ZHm9
------END PGP SIGNATURE-----
-
---ycTTsZ4OGUmlUFsu--
