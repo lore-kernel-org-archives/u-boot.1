@@ -4,91 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A70CD277C9
-	for <u-boot@archiver.kernel.org>; Sat, 10 Jan 2026 03:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCF2D277CD
+	for <u-boot@archiver.kernel.org>; Sat, 10 Jan 2026 03:25:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B09EE8436C;
-	Sat, 10 Jan 2026 04:20:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B52584409;
+	Sat, 10 Jan 2026 04:25:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rJEPcUWt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ybm3Gicq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6674684371; Sat, 10 Jan 2026 04:20:43 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CF3068440A; Sat, 10 Jan 2026 04:25:34 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 875E5841FF
- for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 04:20:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B5208436C
+ for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 04:25:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christopher.obbard@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-477ba2c1ca2so52824725e9.2
- for <u-boot@lists.denx.de>; Fri, 09 Jan 2026 19:20:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768015240; x=1768620040; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=S+2gXt3a+sF0Jfzdi35vkAvFNe6R+weKAWJiyBPZyZg=;
- b=rJEPcUWt9r0AIBHgxJr3x2eE5A5Dj959HGx4w1Gw55r/VWawi5vRwWUTSnb91Sribo
- j0xF39r+MkhYo5sGGjgFmbsYO41qPmNDlQ4e5JzGr+U7JORV9ykIntFDeObrrHCmljVN
- rNR9u1Z7bui9CM1ZVMkADNtb5uI4quUWi8/tW2VAUSVsug6PdJB/zvpz80q5jT4GfUu/
- QcARTD0L1OXZ9vlFMIIl+dlq97SBJO91gB3NfcKm9S936DfsAy2vD8h1zFJCB5Qd9wdd
- XOgmaU7fXL5MdUE4nyq91KhR0CqBIN702xA7QQsYRVgKmurVh51Hut4vAfHVgv78iGUd
- wPbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768015240; x=1768620040;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S+2gXt3a+sF0Jfzdi35vkAvFNe6R+weKAWJiyBPZyZg=;
- b=Ltlp/rg10hL481LY7qN9byKmlJeiV4oQr5d4yvz1O3fNLZ5HdT5F5KZXKmWjaSG1Ho
- AI1AyC/R/y39Qdb5Yg+snpzQK6yzE+eNyZ1F80HpD1ArkOBI+1q0S39S4ik6C+0DjxxM
- DlU6ghy2G2lNOl6B34ZD2PIF/Tg/q0AB8WjV34j/CR/JZuzhSLizwSRjgoR4Pqk+8cCu
- XcSsy1u73b1rupy0p7XSRD8LA6Kbb62HHYENsouJgDaNn8WrdjkQDFej/i9Fhay9LXAC
- 4lyFIc7zAcNCfSlmd/NzX+g9Ddeq/GEdrvedU9k1EmS3JEmSIdGHtFD4gsyfyumCUyMf
- vklA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUgplDy/XMQxFDLXr9Sk/uiJAYkpSopMzVJNiueMu8k0rJxxcYFstJI8PZI1iiacpmIxD0VEEQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyhqXhSx54ayko4l1EiTL8ywPlmxTNoXOFelh8MV2/q8HbLOSt
- ZeyWDQ2lc5koEyjKdcjKntskwOHzYFNNA4QoPKYp8+Wp00w3VojCtuiK0rK5cyeP5OI=
-X-Gm-Gg: AY/fxX55Irk0prKZXJKb+Oj7g0hlEXtiBm3C3uAxGDzgx/gfGSiRxty1Db2o2jSZe5o
- WmiSs5+5O6rtL57iobPtEvqgbplnDQjQlzlE/A6Yb5zrV0WqNVlEjZxfeh/IykXIoaoVfIRfcWn
- mwW+rODnHj9GxdhdLqGqQeA/8nLpz9oa4+/1L+UEYxx3ckTJmQefOUWS0o/k3tGQC1zG7f5ONcV
- 7ruHiUweyVOv+/DTUCj3EqKP+VfuCOOgs2ObJ/9dnAzY2u3zWDKPDTtmMveHHt3Ak6vKMtR6EGD
- Wy+4yhmIhf+ZNa0K59hqy4ULGbQ/C3SDfNZLrl/crvrO+WhP2E2s3DRNoF+Uc11ab2rs7L72xxQ
- p8Uk+xV7RgE7w9e7Sylbejsd4cGOsFZcro+8XCraeOPA/Sw9RxgmxzoYqAF8/s03cPCtQuJ3F5m
- +AhnsQu0kAkH2sjRt15Tjq8/d1ZmSwah9WawGwEqW6ATa/keeuoQ0msXD16XbigUUfWK2+FcoZW
- Fkgqs8XXFO41A==
-X-Google-Smtp-Source: AGHT+IFI2kQG/DUqgSAY4fMDzWOHyfl27EcsaraDgZzEUHkjp+APVcJ1AVXOtM4AU9LFmv1w8xPFvw==
-X-Received: by 2002:a05:600c:4e49:b0:476:4efc:8ed4 with SMTP id
- 5b1f17b1804b1-47d84b172bcmr133993565e9.11.1768015239850; 
- Fri, 09 Jan 2026 19:20:39 -0800 (PST)
-Received: from [192.168.16.154]
- (host109-150-127-3.range109-150.btcentralplus.com. [109.150.127.3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d8715b5f7sm79699285e9.4.2026.01.09.19.20.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jan 2026 19:20:39 -0800 (PST)
-Message-ID: <879112a0bf19df9d79bee3dc33557bf382e0d839.camel@linaro.org>
-Subject: Re: RV1103B: Attempt to upstream
-From: Christopher Obbard <christopher.obbard@linaro.org>
-To: Fabio Estevam <festevam@gmail.com>, Kever Yang <kever.yang@rock-chips.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman
- <jonas@kwiboo.se>,  U-Boot-Denx <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, xuhui.lin@rock-chips.com
-Date: Sat, 10 Jan 2026 03:20:39 +0000
-In-Reply-To: <CAOMZO5B0HmoyCtHHuOFjTq8n1HRoHxZ0-c-mJ_2e6JoT2heSBA@mail.gmail.com>
-References: <CAOMZO5B0HmoyCtHHuOFjTq8n1HRoHxZ0-c-mJ_2e6JoT2heSBA@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-8 
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dp3tc319Nz9tKY;
+ Sat, 10 Jan 2026 04:25:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768015528;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=g5O/MYxRlpIUbzmq4/wFA8doL3V40//2Cl8RI+G3ul4=;
+ b=ybm3GicqH3ng/hN3qh3W5hYdgFp9fHS4qGFmncYYoK3p4OA6KkfCayHfA6zC6/nnYGwYfH
+ 0ThXRztr99PhVc8hkHxhcIJi95HSpyize2iUulkAr8z5SM2YTEnS/DYszF7prsEH+OfjI+
+ Vf3T3B00vENDwlQnBuk4JPjV/B5hIC7AD0zsLmhayotKTAu5U0nwOY1toRpFHuRUKfJ9gB
+ 94VcgVv5SbUtvKZFbK9UAiUR2l7HxlWGOdSH7Lw0KYJUlIgJemzyg05xwWLxXjBhgI0n3Q
+ qDubIa4mDCaRkwdeb99ef3xk+02KZ9yq5TAVIy93HDdZKrJVa5mBWyz5fcy3eQ==
+Message-ID: <8063e878-2fc9-4d97-b4e5-fb70fe3b8cc1@mailbox.org>
+Date: Sat, 10 Jan 2026 03:06:53 +0100
 MIME-Version: 1.0
+Subject: Re: [PATCH] usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible
+To: Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ asahi@lists.linux.dev
+References: <20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: e0bd039d18c55cfe032
+X-MBO-RS-META: uo6nwymi1tikrncdfimeg4opthewanw5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,62 +76,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
-
-On Thu, 2025-12-18 at 23:45 -0300, Fabio Estevam wrote:
-> Hi,
->=20
-> I have a custom board based on the Rockchip evb-rv1103 (RV1103B silicon),
-> booting from SPI-NAND.
->=20
-> I can successfully boot the vendor Rockchip U-Boot v2017.09 on this board=
-,
-> from SPI-NAND
->=20
-> I am currently working on upstreaming U-Boot support for the RV1103B SoC.
-> My first RFC attempt is available here:
->=20
->   https://github.com/fabioestevam/u-boot/commits/rv1103/
->=20
-> Build steps:
->=20
->   make evb-rv1103_defconfig
->   make
->=20
-> However, I am not yet able to boot U-Boot on the board. At the moment,
-> the board does not boot and only prints "RKUART".
->=20
-> My initial plan was to avoid SPL, similar to the evb-rv1108 approach
-> (described in board/rockchip/evb_rv1108/README).
->=20
-> Before going further, I would like to ask:
->=20
-> Is the evb-rv1108 =E2=80=9Cno SPL=E2=80=9D boot flow a valid reference fo=
-r RV1103B?
->=20
-
-Great to see the RV1103 being upstreamed!
+On 1/9/26 8:41 PM, Janne Grunau wrote:
+> The Linux support for dwc3 on Apple silicon SoCs switched to using a
+> apple specific glue driver [1] that uses it own compatible string. The
+> glue driver handles platform specific requirements on the interaction
+> between dwc3 and the USB2/USB3 PHY and reset-controller for USB role
+> switches and plug events.
+> To keep USB working as before when the nodes still carried "snps,dwc3"
+> as compatible add "apple,t8103-dwc3" to the of match table. Eventually
+> it is probably advisable to add a dwc3-apple glue driver and write code
+> for the currently empty Apple Type-C PHY driver in phy-apple-atc.c.
+> 
+> Link: https://lore.kernel.org/asahi/20251015-b4-aplpe-dwc3-v2-0-cbd65a2d511a@kernel.org/ [1]
+> Signed-off-by: Janne Grunau <j@jannau.net>
+> ---
+>   drivers/usb/host/xhci-dwc3.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+> index e3e0ceff43e6abdb8643f265819eff28c2c802f4..ba42c3247654b7d9272c42ea9c4cf0bd9082915e 100644
+> --- a/drivers/usb/host/xhci-dwc3.c
+> +++ b/drivers/usb/host/xhci-dwc3.c
+> @@ -238,6 +238,7 @@ static int xhci_dwc3_remove(struct udevice *dev)
+>   
+>   static const struct udevice_id xhci_dwc3_ids[] = {
+>   	{ .compatible = "snps,dwc3" },
+> +	{ .compatible = "apple,t8103-dwc3" },
 
 
-I have a Rockchip RV1106 based board, the CoolPi 1B=C2=A0https://www.cool-p=
-i.com/product-category/gateway/cp1b/ which I'd also like to get in upstream=
- linux/u-boot.
+Please keep the list sorted.
 
-The downstream kernel/devicetree is at https://github.com/coolpi-george/coo=
-lpi-kernel/blob/linux-5.10-gen-rkr8/arch/arm/boot/dts/rv1106-cp1b.dts with =
-defconfig
-https://github.com/coolpi-george/coolpi-kernel/blob/linux-5.10-gen-rkr8/arc=
-h/arm/configs/rv1106_cp1b_defconfig
+With that fixed:
 
-The downstream u-boot is https://github.com/coolpi-george/coolpi-loader/blo=
-b/develop/configs/rv1106_coolpicp1b_defconfig
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
 
-I wonder how similar the RV1106 SoC is to the RV1103 you're working on ?
-
-I only ask since the RV1106 SoC has a similar prefix to the RV1103. I don't=
- have any other information about the SoC.
-
-
-Cheers!
-
-Chris
+Thank you !
