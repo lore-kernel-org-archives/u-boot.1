@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7C9D25020
-	for <u-boot@archiver.kernel.org>; Sat, 10 Jan 2026 20:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25DDD25020
+	for <u-boot@archiver.kernel.org>; Sat, 10 Jan 2026 20:53:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 602348392C;
-	Sat, 10 Jan 2026 21:39:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B1F7839DF;
+	Sat, 10 Jan 2026 21:53:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="V4Yke2Kv";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ZMloEDl3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A8F483C0C; Sat, 10 Jan 2026 21:39:14 +0100 (CET)
+ id DD877839E8; Sat, 10 Jan 2026 21:53:51 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17FFD838E6
- for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 21:39:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74C78839DD
+ for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 21:53:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=6292=7Q=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1768077545;
- bh=BIvBwmRZqvf9h/pTWuLvMqleHnzIyD0XniP91CeInSY=;
- b=V4Yke2Kvgv/53y2aK9TQpDcr+dztnWUS/XJOg5xXKTAC6TI5FmBDh5FEaXCCIGI0hziTGa+BS
- T0ryror39ZkW0UTGFRLnF2qksi6cg11nQ8FduF841y1X1uasWRuEiKKexXZ8ST8bk96bl0e1X4e
- 89mSTimPgHl5I4V6FiHtKxemVEgQPnf496gf31EZFlZfInTtIcq6G11trtxyHGSqddP/kzCkJU6
- T+R79LGVvWFhexfBskeOLPBzAeMecALEy9VnEh/u3Izzon5qmoNh1i7qQPz9cUoaJXHz7NYQX9z
- cAkGs5zulrn09oW8Ic8NBqW2VqUjFHoQHjaicvp0BjYQ==
-X-Forward-Email-ID: 6962b8e5729b84f3047b8eec
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1768078427;
+ bh=ITmslPqWgCDwzOefSd3sieoSgDAUMIJLFgbQg3N9r4M=;
+ b=ZMloEDl3pTIjmJsDrLPqrFPRN2pjT8lzbsU7tTlCYr+8mv6iDmR4LuVIuepEbmOB29LjdMlm0
+ ZjCV0YG9UC/ZmNKlibuPg64yEFwZHCQHBvsdNoxMI9kSCHcq6TiHZ7P3UGaYYiR1oRKyRfef8zF
+ CMV1g39pInVU5ZxaTc9qFxR0dGIHq25RZkjQjwGE5fMEA/dnBka0tlg213hjEmes32hBQBKMeDB
+ 0uckgiBN/odRT4KdqNmCXYOIbzJNIpVqMlA/wkLKuatHdkYNC6UBg+LGzrVyIQT+E7K7ZRDpvT8
+ 4Nsy8VQDenPReaLMePP2FDpM45VTEtbbadlD+vKUemcg==
+X-Forward-Email-ID: 6962bc55729b84f3047b9800
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.2.4
@@ -43,25 +42,18 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <6828b868-e9e9-4675-8c9a-a9e54e229d49@kwiboo.se>
-Date: Sat, 10 Jan 2026 21:38:58 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] rockchip: Switch rk3288-veyron boards to upstream
- devicetree
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: "sjg@chromium.org" <sjg@chromium.org>,
- "philipp.tomsich@vrull.eu" <philipp.tomsich@vrull.eu>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "sumit.garg@kernel.org" <sumit.garg@kernel.org>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <63ff76d9-3429-48cb-80ad-0c0d45702e6b@gmail.com>
-Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <63ff76d9-3429-48cb-80ad-0c0d45702e6b@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
+Cc: Yao Zi <ziyao@disroot.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH] board: rockchip: Add FriendlyElec NanoPi Zero2
+Date: Sat, 10 Jan 2026 20:53:33 +0000
+Message-ID: <20260110205337.1242457-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,44 +70,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+The NanoPi Zero2 is a small single board computer developed by
+FriendlyElec, based on the Rockchip RK3528A SoC.
 
-On 1/10/2026 1:00 AM, Johan Jonker wrote:
-> Switch rk3288-veyron boards to upstream devicetree.
-> 
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
->  arch/arm/dts/cros-ec-sbs.dtsi                 |  52 --
->  arch/arm/dts/rk3288-veyron-chromebook.dtsi    | 205 -----
->  arch/arm/dts/rk3288-veyron-jerry.dts          | 208 -----
->  arch/arm/dts/rk3288-veyron-mickey.dts         | 266 ------
->  arch/arm/dts/rk3288-veyron-minnie.dts         | 302 -------
->  arch/arm/dts/rk3288-veyron-speedy.dts         | 143 ----
->  arch/arm/dts/rk3288-veyron.dtsi               | 795 ------------------
->  board/google/veyron/MAINTAINERS               |  13 -
->  configs/chromebit_mickey_defconfig            |   5 +-
->  configs/chromebook_jerry_defconfig            |   5 +-
->  configs/chromebook_minnie_defconfig           |   5 +-
->  configs/chromebook_speedy_defconfig           |   5 +-
->  .../src/arm/rockchip/rk3288-veyron.dtsi       |   2 +-
->  dts/upstream/src/arm/rockchip/rk3288.dtsi     |   9 +-
+Add support for the FriendlyElec NanoPi Zero2 board.
 
-Please do not modify files in dts/upstream, instead pick upstream
-commits from devicetree-rebasing or add missing parts to -u-boot.dtsi
-files, e.g.:
+Features tested on a FriendlyElec NanoPi Zero2 2407:
+- SD-card boot
+- eMMC boot
+- Ethernet
+- USB host
 
-  tools/update-subtree.sh pick dts <commit-id>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi | 11 ++++
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS    |  6 ++
+ configs/nanopi-zero2-rk3528_defconfig        | 64 ++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst              |  1 +
+ 4 files changed, 82 insertions(+)
+ create mode 100644 arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+ create mode 100644 configs/nanopi-zero2-rk3528_defconfig
 
-Regards,
-Jonas
+diff --git a/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi b/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+new file mode 100644
+index 000000000000..3e2fbd81da17
+--- /dev/null
++++ b/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3528-u-boot.dtsi"
++
++&vdd_arm {
++	regulator-init-microvolt = <953000>;
++};
++
++&vdd_logic {
++	regulator-init-microvolt = <900000>;
++};
+diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
+index ee840396e8b0..111fe0270dfd 100644
+--- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
++++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
+@@ -4,6 +4,12 @@ S:	Maintained
+ F:	arch/arm/dts/rk3528-generic*
+ F:	configs/generic-rk3528_defconfig
+ 
++NANOPI-ZERO2-RK3528
++M:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	arch/arm/dts/rk3528-nanopi-zero2*
++F:	configs/nanopi-zero2-rk3528_defconfig
++
+ RADXA-E20C
+ M:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+diff --git a/configs/nanopi-zero2-rk3528_defconfig b/configs/nanopi-zero2-rk3528_defconfig
+new file mode 100644
+index 000000000000..2e54c0ff20a2
+--- /dev/null
++++ b/configs/nanopi-zero2-rk3528_defconfig
+@@ -0,0 +1,64 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-nanopi-zero2"
++CONFIG_ROCKCHIP_RK3528=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFF9F0000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_DEBUG_UART=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-nanopi-zero2.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_BOARD_RNG_SEED=y
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++CONFIG_CMD_ADC=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MISC=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_RNG=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_BUTTON=y
++CONFIG_BUTTON_ADC=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_MDIO=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_REGULATOR_PWM=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index c1683bfe4212..01659ecc3cbe 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
+ 
+ * rk3528
+      - ArmSoM Sige1 (sige1-rk3528)
++     - FriendlyElec NanoPi Zero2 (nanopi-zero2-rk3528)
+      - Generic RK3528 (generic-rk3528)
+      - Radxa E20C (radxa-e20c-rk3528)
+      - Radxa ROCK 2A/2F (rock-2-rk3528)
+-- 
+2.52.0
 
->  14 files changed, 15 insertions(+), 2000 deletions(-)
->  delete mode 100644 arch/arm/dts/cros-ec-sbs.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-veyron-chromebook.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-veyron-jerry.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-mickey.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-minnie.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-speedy.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron.dtsi
-
-[snip]
