@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4583DD2502E
-	for <u-boot@archiver.kernel.org>; Sun, 11 Jan 2026 16:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C88D2502D
+	for <u-boot@archiver.kernel.org>; Sun, 11 Jan 2026 16:32:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE0FD83B85;
-	Sun, 11 Jan 2026 17:31:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C3C983B85;
+	Sun, 11 Jan 2026 17:32:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zf1wlWbW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HVLjctkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA00A83CEA; Sun, 11 Jan 2026 17:31:57 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id C6AFA83C5E; Sun, 11 Jan 2026 17:32:34 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B438A83B85
- for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 17:31:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 959BB83A79
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 17:32:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-64b5eb14e88so1146494a12.2
- for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 08:31:55 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-64b5eb14e88so1146574a12.2
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 08:32:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768149115; x=1768753915; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768149152; x=1768753952; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=zMxSHBc3tsNLNzJxRW6TuIvr4ljhRianOsUR4asfdLE=;
- b=Zf1wlWbWjS+wj3CTM4/UoqQGD7d9CMgMmyiCLsEudEC9u/K9A782n4VgHXoy8odtkN
- jE3XFPkoe/AtgEVDRS/8pxPVFh8hlL/0LJJdklT1XHSbSgMsu+foE6rB9hCfnAJrUALs
- KUMidjGtpl3AVMVCPjDa8srtUCkGtkbKVu+9hHZ/DdOrUDBdPS+16t717GgU4BZMM4fh
- pcYw96J64tx7UOjCpZUvax1IgL0oKizuy6CdhLeVRIy3C5DPHQAlJu+nC/aQek18KjQS
- ukuLdQJLOVU/Cd1K18I6+RNLGEMECiGfHrd4mHVyLArhGVOOyFzPbpnpU2ByoALwrUcu
- g3Dg==
+ bh=LaRvfPD2Dsc8g8OPspV6udqL1/D0a3W3iQw2c7lVpvQ=;
+ b=HVLjctkrKerImPTy/rj87a8glvfrQYmuNSDOZdauok/mYOd6nw2iVURmPHwLl8SVc7
+ WuR25PH/XN6RZWrMqqpC7lDZjLPZ0wbWwuaixJaSV6YKuA22Ff80GloCRF/wuY7a26Xh
+ bDnVmDctSXKyQU/UMvyEfcBEzOKT681XiMlr2vynquDw/aHTLLSq93Yrta34S5bPvh95
+ GArrNjlnSXNe+JbeDPX9L18JGxf1jkEWrsIbN8wIhB43Nmi0Ty6fnbIhgSGj+AaRS57/
+ hJ3KaXvyGMUyeJ+UD/D2aP2zv1EcdDECxY3ILUD1LQZlONmFpu/d2GzVnIeGeSJkZbLc
+ CniA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768149115; x=1768753915;
+ d=1e100.net; s=20230601; t=1768149152; x=1768753952;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zMxSHBc3tsNLNzJxRW6TuIvr4ljhRianOsUR4asfdLE=;
- b=AgaZnrpm4JnsQOhucGgmQ9Tkn9cDdXCNtJC9UKuzmrDCQf6O2sjPBUr2SoMTGrdBVa
- qfCh2udCks+KWjAXO0XZ1ClFSgkQqfZzR5oHgRNOQ6WRILMV0rHTcoKoqDktFSkFUIGF
- nh2kVQwnnT0Eh1GZ/gg1yCdaYcJKJnCVzUZtfajSuC/VELqL9CDx0ebXEG05DazNSzEN
- 57JuQw8vV5dMnOETc8+pvIP4gxYgExITVhplNRqbHMKTVdc+MpbNVh1W0mTHDAqenk2k
- fy+VYNrp8cT48vtoeT3tFg7tzjiLL9NvC6ZJU+EiGLfyjDVQ+3GChOYcVcugWGQVj+pQ
- qzgg==
+ bh=LaRvfPD2Dsc8g8OPspV6udqL1/D0a3W3iQw2c7lVpvQ=;
+ b=lmy7TgvDVEx2ta83tOIKGLGe5NpPv9ENgqrR3NIXKlnztOklwQymrqMTyvygoW7e8q
+ gEJIiGmVzhG9ef9y0iaHd3106dFpoSSCsB27+xPXOyaPBCcaBg9ap0Jgod/zBGkUhDqP
+ s1IBTmhgyIocLdWy85m+nGC0eQdZnbn911/X2HhgS4ep3refZWOf5IWZ3zhKTlAy20MH
+ YvKMehqdS87FO3u7OySV6Zy2OHQVdajKS9RJ62lm+E1hehH+CiKRgAt087mT/IjPVA0c
+ 8f+QtOMHIZHwzYjCJfH8OO+Q/X0LOZ/LzerCdzI5oHZ9jia/ApAUXJeP0GL51IgEFEBk
+ cXew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXILBpBajid0qAga4jB2f9wH8tV5Fs8PGQRs/0w8lldbcyZoSbtTvdYqBEntlrpvcbg9aBz4Mg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXFAH8FvAn1d/BauacNZGfPzUJXo2nhOIftBARsiV2vtwYmGq9
- tj5+YvURSFvyNlDy+4NmZ7tk7ci1GQKMzEk1j5KrahKd4oWgmGtx5sjAQ9wSBw==
-X-Gm-Gg: AY/fxX6qMUmcr/ShBECgsXY9z+C7QDFnNDweknsW5nQvlKu0dpIZC+a5ftzTPrcKM3T
- i5sbElTQrY1QlNz1AKf2Rrn6NpHM+gUOLDTdu0zcbWCg1QKv/1C2kfcP5khRA5BCTphvKQWeIpj
- 2PExQcOeXMmVSAWQWLpJU02gl6PCL+l/RVZvk9gHz+wvMBBibdF05Fyh6c/uoJIWCiUH3OhCT8q
- Gi0iBSn0BkizHaWSUkKgExIOhsU83thCQo0qZd15miCUzh6ow60hQNPYnjqti6WdBF4Lg151e/t
- Zl1S3gnjpHEvClO65vm1Pl70sdtZSjCO4cpEjVba/s6lpCmmYuWghqrLqVpDAmNCOYiktx2LDSp
- eEXiuaKE8SlNSml9OY3PKJxZpjZ/HaGQGfxEXORRkyGIyJy+70K5v/mHKCG1t1xucxCtyxN5YKi
- dz2F7c2oNKOhfSr+z0FwYV7IoyhgbiBl9OxyzO9Hrq4HFPjv9+WQ==
-X-Google-Smtp-Source: AGHT+IHPF9JIv/zgnRfvIxO6+JDyT6N9BUry/Px8zrmtY43xyJUK5YNahXu1TND8/AuIIejObmBB4Q==
-X-Received: by 2002:a05:6402:51d2:b0:64b:4e7a:bbc8 with SMTP id
- 4fb4d7f45d1cf-65097ec3077mr8044992a12.5.1768149115083; 
- Sun, 11 Jan 2026 08:31:55 -0800 (PST)
+ AJvYcCXAPvNSlSl55n15SfV/D9qzDHDp4HZqM7xetMXYcueEmjbq4H3yvtdVrh/76O5gR2e57ScsU1k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvnsPkkh1MRhIsMVcNz7KvUmiH/nl8PR1Gf0ti7ieHdhzm8w6U
+ FJCgKXQJ2wBohTupW2qCt7g/2SuMoUURaB+/vaci2dBTAQH3qqQRPv1O
+X-Gm-Gg: AY/fxX4i4zC8ymObiwHloPLjmQfs64RQV0B5e6Xm60lBnHvnZxloYN5qAcrPJl34+WK
+ owA5dKN8ub/Ngb4acbqOzbDDeQmDrW2qFxfKMeJGzZFn+9yJyV6pTYtsDm2ENrdrQs5Sz57lxNm
+ KxjQqdrHSWuAa2/hpBWALMp+TK4ftmAxTvQX5hOdIH9mb91tX+XFN2MO18sd3Et4ek18kcKVYTz
+ QyJYAx6fgdpSTlUntsWadpXLAFW9XctvSij6ZivdCCVB4dioG0tdjnZcynjxlTbFwLsk7qG1tl4
+ uQNwrG8jWyJNQ+/ge9ZVJfHR8pE2nc4+tH9zD/6/bVZQWJYrei4B4rI86N+yS6yc7Mzd5vBSyho
+ Kak95+caCHrLTaL12Jt/XxvsWuPaWEFt8txJ1JyAiVfZUWlZeeSNCKQxDxQC4Uw/DoUUUUCsgv5
+ ndpJotLd71PIVLhEz+s6NrsY/AgAuSWCBg/576/jSApB9zGJQBHA==
+X-Google-Smtp-Source: AGHT+IE8c60okTLYCkYWqA6KKJHGl3HBKo6MQ0yJanwFrL5GDMiqT10guzPMsBvmzSf1vcqmQaPgsw==
+X-Received: by 2002:a17:907:1c18:b0:b87:1eaf:3762 with SMTP id
+ a640c23a62f3a-b871eaf3f94mr7204066b.7.1768149151931; 
+ Sun, 11 Jan 2026 08:32:31 -0800 (PST)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8717a10ae1sm109409866b.32.2026.01.11.08.31.54
+ a640c23a62f3a-b870b0dba4esm234061866b.17.2026.01.11.08.32.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 11 Jan 2026 08:31:54 -0800 (PST)
-Message-ID: <7bfdca4d-356d-4488-a67b-d358205db632@gmail.com>
-Date: Sun, 11 Jan 2026 17:31:54 +0100
+ Sun, 11 Jan 2026 08:32:31 -0800 (PST)
+Message-ID: <663b01e8-112d-49ae-ac60-2db75dd0ea7f@gmail.com>
+Date: Sun, 11 Jan 2026 17:32:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v2 6/6] rockchip: imply OF_UPSTREAM for rk3288 boards
+Subject: [PATCH v2 1/6] ARM: dts: rockchip: Remove mshc aliases from RK3288
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@kernel.org,
  trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
  jagan@amarulasolutions.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
  jonas@kwiboo.se, michael@amarulasolutions.com
-References: <deeedc19-e992-44d4-ad77-2b9b2d891675@gmail.com>
+References: <>
 Content-Language: en-US
-In-Reply-To: <deeedc19-e992-44d4-ad77-2b9b2d891675@gmail.com>
+In-Reply-To: <>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,207 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Imply OF_UPSTREAM for rk3288 boards.
+The use of mshc aliases is deprecated for some while,
+so remove them from the rk3288.dtsi file.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
- arch/arm/mach-rockchip/Kconfig      | 1 +
- configs/chromebit_mickey_defconfig  | 1 -
- configs/chromebook_jerry_defconfig  | 1 -
- configs/chromebook_minnie_defconfig | 1 -
- configs/chromebook_speedy_defconfig | 1 -
- configs/evb-rk3288-rk808_defconfig  | 1 -
- configs/firefly-rk3288_defconfig    | 1 -
- configs/miqi-rk3288_defconfig       | 1 -
- configs/phycore-rk3288_defconfig    | 1 -
- configs/popmetal-rk3288_defconfig   | 1 -
- configs/rock-pi-n8-rk3288_defconfig | 1 -
- configs/rock2_defconfig             | 1 -
- configs/tinker-rk3288_defconfig     | 1 -
- configs/tinker-s-rk3288_defconfig   | 1 -
- configs/vyasa-rk3288_defconfig      | 1 -
- 15 files changed, 1 insertion(+), 14 deletions(-)
+Link: https://patch.msgid.link/3e461bce-e8e6-48f1-a296-34040447ff25@gmail.com
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 92bb4aa62f11..5eac0cb7d94e 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -132,6 +132,7 @@ config ROCKCHIP_RK3288
- 	select SPL
- 	select SUPPORT_TPL
- 	select FDT_64BIT
-+	imply OF_UPSTREAM
- 	imply PRE_CONSOLE_BUFFER
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply SPL_ROCKCHIP_COMMON_BOARD
-diff --git a/configs/chromebit_mickey_defconfig b/configs/chromebit_mickey_defconfig
-index 1ae596b4f4f6..60ceae8f1531 100644
---- a/configs/chromebit_mickey_defconfig
-+++ b/configs/chromebit_mickey_defconfig
-@@ -56,7 +56,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/chromebook_jerry_defconfig b/configs/chromebook_jerry_defconfig
-index 5151af8838e4..5e89311affe3 100644
---- a/configs/chromebook_jerry_defconfig
-+++ b/configs/chromebook_jerry_defconfig
-@@ -56,7 +56,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/chromebook_minnie_defconfig b/configs/chromebook_minnie_defconfig
-index 3ab1e90746f5..6e0158fd4a9e 100644
---- a/configs/chromebook_minnie_defconfig
-+++ b/configs/chromebook_minnie_defconfig
-@@ -57,7 +57,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/chromebook_speedy_defconfig b/configs/chromebook_speedy_defconfig
-index 796d29604242..86f1399c0e3c 100644
---- a/configs/chromebook_speedy_defconfig
-+++ b/configs/chromebook_speedy_defconfig
-@@ -57,7 +57,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/evb-rk3288-rk808_defconfig b/configs/evb-rk3288-rk808_defconfig
-index 8e140d6e41cd..2112e475ad31 100644
---- a/configs/evb-rk3288-rk808_defconfig
-+++ b/configs/evb-rk3288-rk808_defconfig
-@@ -52,7 +52,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index d7b01e67db9b..54e3c41f3ccf 100644
---- a/configs/firefly-rk3288_defconfig
-+++ b/configs/firefly-rk3288_defconfig
-@@ -42,7 +42,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/miqi-rk3288_defconfig b/configs/miqi-rk3288_defconfig
-index a4d24c11fe81..4cbd4b97172a 100644
---- a/configs/miqi-rk3288_defconfig
-+++ b/configs/miqi-rk3288_defconfig
-@@ -41,7 +41,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/phycore-rk3288_defconfig b/configs/phycore-rk3288_defconfig
-index 461fa5d432a8..a374f90982e0 100644
---- a/configs/phycore-rk3288_defconfig
-+++ b/configs/phycore-rk3288_defconfig
-@@ -48,7 +48,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/popmetal-rk3288_defconfig b/configs/popmetal-rk3288_defconfig
-index 4489c0393501..52d38f4108c3 100644
---- a/configs/popmetal-rk3288_defconfig
-+++ b/configs/popmetal-rk3288_defconfig
-@@ -47,7 +47,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/rock-pi-n8-rk3288_defconfig b/configs/rock-pi-n8-rk3288_defconfig
-index ae2f9e9bb17f..242aa89bcce0 100644
---- a/configs/rock-pi-n8-rk3288_defconfig
-+++ b/configs/rock-pi-n8-rk3288_defconfig
-@@ -45,7 +45,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/rock2_defconfig b/configs/rock2_defconfig
-index dd296efaf1ad..025b55e2171b 100644
---- a/configs/rock2_defconfig
-+++ b/configs/rock2_defconfig
-@@ -47,7 +47,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-index afbb394228f7..2e701a5ff722 100644
---- a/configs/tinker-rk3288_defconfig
-+++ b/configs/tinker-rk3288_defconfig
-@@ -42,7 +42,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-index 876086573d31..816903c8430e 100644
---- a/configs/tinker-s-rk3288_defconfig
-+++ b/configs/tinker-s-rk3288_defconfig
-@@ -42,7 +42,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
-index 8ac1c9620c65..1d7e22653608 100644
---- a/configs/vyasa-rk3288_defconfig
-+++ b/configs/vyasa-rk3288_defconfig
-@@ -53,7 +53,6 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+[ upstream commit: cafaf99e4a790f8492a034a3470f878779c8c535 ]
+
+(cherry picked from commit faefae4ca217961a0d96a54c9618e56aa8fd37b3)
+---
+ dts/upstream/src/arm/rockchip/rk3288.dtsi | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/dts/upstream/src/arm/rockchip/rk3288.dtsi b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+index 42d705b544ec..7e284b4fecdc 100644
+--- a/dts/upstream/src/arm/rockchip/rk3288.dtsi
++++ b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+@@ -34,10 +34,6 @@
+ 		i2c3 = &i2c3;
+ 		i2c4 = &i2c4;
+ 		i2c5 = &i2c5;
+-		mshc0 = &emmc;
+-		mshc1 = &sdmmc;
+-		mshc2 = &sdio0;
+-		mshc3 = &sdio1;
+ 		serial0 = &uart0;
+ 		serial1 = &uart1;
+ 		serial2 = &uart2;
 --
 2.39.5
 
