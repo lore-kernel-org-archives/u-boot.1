@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10568D2502E
-	for <u-boot@archiver.kernel.org>; Sun, 11 Jan 2026 16:36:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 520AED25031
+	for <u-boot@archiver.kernel.org>; Sun, 11 Jan 2026 23:29:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F2C383A41;
-	Sun, 11 Jan 2026 17:36:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BAAB839E2;
+	Mon, 12 Jan 2026 00:29:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fxfSO8ET";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA0CE83A79; Sun, 11 Jan 2026 17:36:46 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 792A883A41; Sun, 11 Jan 2026 20:34:32 +0100 (CET)
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
+ [209.85.210.42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB67083A3D
- for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 17:36:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BD1383A3B
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 20:34:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b871619e7e0so6144366b.1
- for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 08:36:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768149404; x=1768754204; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=bSkPodM2S0KR1ix5j+VUINS0KSeR0oc4GUiSN34UEt0=;
- b=fxfSO8ETm8O/YxKGkVVbCDera5bL4OgL7uaTg+MTpf99WGFnJHBWWOa4Xw9ZmzDA0n
- 7x8xN4ZY7Vnb9C08ZsizJ/IZblCVpkLz9QqoALaUP5iOOsHaHQVqJnUtkn4qzUwAY+E0
- brQ8i4ikerendkFdSGa/bpKv411+9cdGV7gI1bo6oiiGajPpyoLf6cJfUqvsecCSB9Sv
- 2FxAAtQY11JW9za9iiYc/wZlbuHa36MTNGOfhiamHexkVTrMsIP8KiZ3qyCvngEIxWJR
- tO0FZBL7Mb8lGWXNlPH51dhqGLP7fsiYIu4BhfEr0jsFZl6Ro4v8GShROwtc2ZbKgiVV
- BeGw==
+ spf=pass smtp.mailfrom=ngompa13@gmail.com
+Received: by mail-ot1-f42.google.com with SMTP id
+ 46e09a7af769-7caf5314847so4007657a34.0
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 11:34:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768149404; x=1768754204;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bSkPodM2S0KR1ix5j+VUINS0KSeR0oc4GUiSN34UEt0=;
- b=Au9TvbhSGIvxa3DBcQfxj2IqQn1z/QAxHTVTrIaiJrcVcR7SxSIANJHLjhqOXS7L6z
- rqzVxAYSBAJkJND5z0spC6+A6cT+sWI2vhzapGhNLjl00KVQ9fkt+qj9yJEtnciJJ68T
- 7QsCd8XB8dogXbLnsm26N2ClylLandU17QashaZGZSbJLl2kRbSCKvUTORF88gXthGyF
- k2kqvbiNNbn5F56ohoxuMkil1E4dXFpTCApXMz56xeVelvUXug0V0xTbMXhwqMk2Bgvg
- licpky1yyow8TFr47oaY+6nfw6pG6hNJTilE2gQt1Y/jSboSnhT7t0z7rlwcHd67yJoi
- Hieg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCOfBdB42OtMWXRMshHJW3sLvZ9menid8FHyCnzQh40ylu5xpZe1iFnuzuLeGGkMMVFwbKbn8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx/lY0cVnxEh+MvzI3+wisTHJ5CHrCyTuS+nVQgiYdZ7Z85rgXm
- N2PobJf5mmWqvp4oCowdYn8qX4UUpK3SdoJF06d4NImmwLDF/F4ZvPfD
-X-Gm-Gg: AY/fxX7zBy2MgXLyagOhoMn3iMtbyFxGVA0Izo+yOIcA9+mnPfrzxqGKArPENb9yzyr
- 8uat21+cOJUwAxpQXZb6VQsY//LxDKOb8i1WCXHp+NI5Jmyuu/WyYVUWco5X/o0vahjCr1H/Txf
- /7JD0NnTnEl5aprnhcXgxfi+i26u7ETXQV69cYLvLpkqkyocwyu+GiYKxM5Gf3Fd0GAjW6Bdhu+
- FBVQR5H9GjRRtz23j/xbTV8m8QF7B38I0xs1n030CLQ1eHy8A8wnGIAWGH/ApTdW4Ib1abdoVgR
- nB4cBmk4pV8xMUR2+xdSdva8mRAwc3uNoDAABRavGJNagK/BNQNRjkkGKd7p/NIhtQ4rIV+X9GJ
- CLmuwHdhs51HO97FSR0CDtvIr3pe+zbZVSun2HR0v/p9YjsHUiQtYAA9hPZb2+JbMOJIUBF92K2
- AsWA04kMH/wn8DcmcKOKWhjF+Znrh2D88gCXaF1mMtJ2rltxAWng==
-X-Google-Smtp-Source: AGHT+IHNQ5A2fV8GK0IVz7zy9ICF7FszKSwRz+pFyauxa+cl+AqquDu0jwM10cCQ5RVmMbUNakgpQw==
-X-Received: by 2002:a17:907:728c:b0:b76:6025:4332 with SMTP id
- a640c23a62f3a-b8445377d61mr838916466b.8.1768149403902; 
- Sun, 11 Jan 2026 08:36:43 -0800 (PST)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a4cfe6bsm1672322466b.34.2026.01.11.08.36.43
+ d=1e100.net; s=20230601; t=1768160068; x=1768764868;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GkYn852Tu9q0tPkoFGT8vCSdPljgd8X3NYVvGE1Eo3g=;
+ b=QNfTBj2sCzfGNT16WRUZP4ATxbPCOh5YYShuDvHk29QdxKKKcqsTl10PA92FNThHmw
+ eXNyDheMdOvSZP+xn7J4KfYavJdnmMxtZECXfSfh1zVrZmSADeudJQI1yu0PbutQqAx3
+ xAeSgxmu00QTS4bO0ww0I8mg/L/wdvfg/+DZdCzFgKy+hIvWXP6WSG9mMtvvDJZM3eTp
+ qKgKHiVKn14zXxdrUje1QNeLdLXyeGGvyjhUea5toce/nDJLwniH/zFbSX4vNNtAvPql
+ F8okOE0ga3XcHGMUzWrJroEgQcO8Xws3YghdX3+yK9Y5O3OJwuoQYVaugRN7YrNOaZ70
+ mSnQ==
+X-Gm-Message-State: AOJu0YyAbf582cDwqQl2SPVpCVBoQU/1Z16fC0u8i+i033ctII+sPdgi
+ 1AV0TkRYUmcsmE3xMc+TyCKCciQK1kFhDDAuYuOhNiRVD5SBAIO+ech+XZslXA==
+X-Gm-Gg: AY/fxX6UpvS1TzvDFH3KxKE8dtEDi3nUaX4UsK1+zTG0QRPa+NFyfwG4oaVB3T9j7ap
+ SAa1LBKoFRuZ4Pd0IfmokGkX2WLUXmGtrXNO4Z/jvPkBdZyCKzUiR4ZDshnUEWUPYifIh3f+fyo
+ 7l2S3K2QSHloX+DqMNeAInmPHymVHTv/HTzb5KvqXo2mabQkaH6r4aRX+Ze7h0/GnBkOWEXjtqE
+ 8+KZ5R3BPpiJhnJY8hj8bGLwlfWK9LtOrDwbxy2ECaFjUFx+oYNJTMZhlLcaBBH4LsjHTEFgE88
+ uIIdOYXghGygO2KdGct+P/4VYTJsbTanXf7zcWu1k4tMZyftV/RM6b/FB7txm11gGdwo77fu+3f
+ TRHRgQE3i+e1UTYyinY0opDOp3kxEas7x1VT1F172th3R1d3Dft5IUPLI5HwgM1/zCPx2T6wl50
+ wesVHqMsgh0s5EE6UBaoTqx24QZ9Om85PVRUYqenHq9Vwp2biNk+SOazAh/KndYTtyvfrimHV/F
+ P7K+SBnlbY=
+X-Google-Smtp-Source: AGHT+IHcOO+4xmg2W+3KLfXZzXKL3vhfZCl7z2auoL44TJ304d3GNjF8R+bh8ll3DDTg/8RTBRpZBQ==
+X-Received: by 2002:a05:6820:16a5:b0:65f:1038:1317 with SMTP id
+ 006d021491bc7-65f54f76ed2mr8721391eaf.70.1768160068149; 
+ Sun, 11 Jan 2026 11:34:28 -0800 (PST)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com.
+ [209.85.210.49]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65f48cb1444sm6617673eaf.11.2026.01.11.11.34.27
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 11 Jan 2026 08:36:43 -0800 (PST)
-Message-ID: <158c249e-b1e1-4ce6-b818-bd0bea3e902d@gmail.com>
-Date: Sun, 11 Jan 2026 17:36:42 +0100
+ Sun, 11 Jan 2026 11:34:27 -0800 (PST)
+Received: by mail-ot1-f49.google.com with SMTP id
+ 46e09a7af769-7cac8243bcdso4023139a34.3
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 11:34:27 -0800 (PST)
+X-Received: by 2002:a05:6830:4995:b0:7c7:827f:2b6b with SMTP id
+ 46e09a7af769-7ce50bfdec9mr10107663a34.38.1768160067563; Sun, 11 Jan 2026
+ 11:34:27 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] ARM: dts: rockchip: Remove mshc aliases from RK3288
-From: Johan Jonker <jbx6244@gmail.com>
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@kernel.org,
- trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
- jagan@amarulasolutions.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
- jonas@kwiboo.se, michael@amarulasolutions.com
-References: <> <663b01e8-112d-49ae-ac60-2db75dd0ea7f@gmail.com>
-Content-Language: en-US
-In-Reply-To: <663b01e8-112d-49ae-ac60-2db75dd0ea7f@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net>
+In-Reply-To: <20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net>
+From: Neal Gompa <neal@gompa.dev>
+Date: Sun, 11 Jan 2026 14:33:51 -0500
+X-Gmail-Original-Message-ID: <CAEg-Je8EMWmwyMMXM-82PbXvLKdxUz9Jxus33dxEAZ8eRRxz3g@mail.gmail.com>
+X-Gm-Features: AZwV_QiswhMQh-OfNIc-ljra59Z6BdVFFswTCuHhAUK8Tp-IsA-zsBu1qCLV9X4
+Message-ID: <CAEg-Je8EMWmwyMMXM-82PbXvLKdxUz9Jxus33dxEAZ8eRRxz3g@mail.gmail.com>
+Subject: Re: [PATCH] usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible
+To: Janne Grunau <j@jannau.net>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ asahi@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 12 Jan 2026 00:29:36 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,42 +97,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 1/11/26 17:32, Johan Jonker wrote:
-> The use of mshc aliases is deprecated for some while,
-> so remove them from the rk3288.dtsi file.
-> 
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> Link: https://patch.msgid.link/3e461bce-e8e6-48f1-a296-34040447ff25@gmail.com
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> 
-> [ upstream commit: cafaf99e4a790f8492a034a3470f878779c8c535 ]
-> 
-> (cherry picked from commit faefae4ca217961a0d96a54c9618e56aa8fd37b3)
+On Fri, Jan 9, 2026 at 2:41=E2=80=AFPM Janne Grunau <j@jannau.net> wrote:
+>
+> The Linux support for dwc3 on Apple silicon SoCs switched to using a
+> apple specific glue driver [1] that uses it own compatible string. The
+> glue driver handles platform specific requirements on the interaction
+> between dwc3 and the USB2/USB3 PHY and reset-controller for USB role
+> switches and plug events.
+> To keep USB working as before when the nodes still carried "snps,dwc3"
+> as compatible add "apple,t8103-dwc3" to the of match table. Eventually
+> it is probably advisable to add a dwc3-apple glue driver and write code
+> for the currently empty Apple Type-C PHY driver in phy-apple-atc.c.
+>
+> Link: https://lore.kernel.org/asahi/20251015-b4-aplpe-dwc3-v2-0-cbd65a2d5=
+11a@kernel.org/ [1]
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
+>  drivers/usb/host/xhci-dwc3.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+> index e3e0ceff43e6abdb8643f265819eff28c2c802f4..ba42c3247654b7d9272c42ea9=
+c4cf0bd9082915e 100644
+> --- a/drivers/usb/host/xhci-dwc3.c
+> +++ b/drivers/usb/host/xhci-dwc3.c
+> @@ -238,6 +238,7 @@ static int xhci_dwc3_remove(struct udevice *dev)
+>
+>  static const struct udevice_id xhci_dwc3_ids[] =3D {
+>         { .compatible =3D "snps,dwc3" },
+> +       { .compatible =3D "apple,t8103-dwc3" },
+>         { }
+>  };
+>
+>
+> ---
+> base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
+> change-id: 20260109-usb-dwc3-apple-compat-linux-821ee75bec48
+>
 
-Please trash
+Reviewed-by: Neal Gompa <neal@gompa.dev>
 
->  dts/upstream/src/arm/rockchip/rk3288.dtsi | 4 ----
->  1 file changed, 4 deletions(-)
-> 
-> diff --git a/dts/upstream/src/arm/rockchip/rk3288.dtsi b/dts/upstream/src/arm/rockchip/rk3288.dtsi
-> index 42d705b544ec..7e284b4fecdc 100644
-> --- a/dts/upstream/src/arm/rockchip/rk3288.dtsi
-> +++ b/dts/upstream/src/arm/rockchip/rk3288.dtsi
-> @@ -34,10 +34,6 @@
->  		i2c3 = &i2c3;
->  		i2c4 = &i2c4;
->  		i2c5 = &i2c5;
-> -		mshc0 = &emmc;
-> -		mshc1 = &sdmmc;
-> -		mshc2 = &sdio0;
-> -		mshc3 = &sdio1;
->  		serial0 = &uart0;
->  		serial1 = &uart1;
->  		serial2 = &uart2;
-> --
-> 2.39.5
-> 
 
+--=20
+=E7=9C=9F=E5=AE=9F=E3=81=AF=E3=81=84=E3=81=A4=E3=82=82=E4=B8=80=E3=81=A4=EF=
+=BC=81/ Always, there's only one truth!
