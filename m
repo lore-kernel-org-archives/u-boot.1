@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE95D25023
-	for <u-boot@archiver.kernel.org>; Sat, 10 Jan 2026 22:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E062BD2502A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Jan 2026 00:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D76883A5A;
-	Sat, 10 Jan 2026 23:13:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9FC9083AA4;
+	Sun, 11 Jan 2026 01:03:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lkVIfl9w";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="bHY827VJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E30A983B0D; Sat, 10 Jan 2026 23:13:39 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 8AF0383AAB; Sun, 11 Jan 2026 01:02:59 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC5DE839DF
- for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 23:13:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C25783A9F
+ for <u-boot@lists.denx.de>; Sun, 11 Jan 2026 01:02:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christopher.obbard@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4775ae77516so59146755e9.1
- for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 14:13:37 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b8052725de4so748804866b.0
+ for <u-boot@lists.denx.de>; Sat, 10 Jan 2026 16:02:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768083217; x=1768688017; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=DGsHTu2nqFZ1vQM0WFQYRahz1UWwbT+uJrYbVDVnkFE=;
- b=lkVIfl9wAZoC58IIpgz2o5L5s4dK1MxCd+1xJ8V6Bx+WoVLkpebrUn9aby9NGfjY5V
- Nd1PnUANdSDt69Z5LnYZvIXwBD16fGzGM/5iF2nL5tdjcY5LC5U68jjVaQmmV5HsinTH
- EGbWb8CoPTBWpvn2aPqpJIekWZql2wc8iONoOvRlQbAf4kBEp0EOqWt+0kl5hK3nqXqe
- QZr206RL6HzshkYuD4N1CvdOzc8d6CdNIQgyu1ExMLR5Cd0Pvkc6nRZHWmR7q4Xg/caD
- WQNV9jXFSCKpi46OKbRyJxOc0Ski+EzGNT0U8CLXk8WsSip9zSCrVWT1eeTNI47/WDCK
- P/og==
+ d=amarulasolutions.com; s=google; t=1768089777; x=1768694577;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ALPdHb6l+fCEXl0BiIzFM6fj0JQhr2src3cYmSvmzL0=;
+ b=bHY827VJhz7ol39iOhxoHQHUPVP19ZbzXVG4oG/ISAlxxZJAyxkqY9ZFI7fdYm1TyV
+ qmxF0SlsuNV0/sJELgyVKxw4ahYAa0MegezmITZvEBm/PMJV/tLhV3ggaTcm8K7Gq/9Z
+ U3b2Tv3rKjA9w4uTUvCAJqUQuNnpcb+NemuhA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768083217; x=1768688017;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DGsHTu2nqFZ1vQM0WFQYRahz1UWwbT+uJrYbVDVnkFE=;
- b=GVwjfmByr+vFLS+XV8xO+kXEf9d2jKy5V8cvog/Jl/XuCQv7gznwTwybJuFAIwOj/K
- ZxZj4RDXiErDxCGcOQ5J28NZPdu5Mi2pltBIoTtjdutvmPENjquu7e6t7oy1LyzI7MV0
- zi47p1sREROUqBatMzTuDKXeKjlLTaAJNj1iD8LAf2F1D8XBrCgExuQNiAkyirSsqtju
- FMIzUoAsdoQGLl9zkKIxS1A28FdokJmEMdr0xq8w5IzsUlbOY3QeMGwlZzY6o/xFhZRB
- EfsIRO7vUnRI0LZdxf6XHxuxv3PXCryX6Me8XFreGIpx+uGN82P/GdJpX9bD3LzGuxd5
- Up6A==
+ d=1e100.net; s=20230601; t=1768089777; x=1768694577;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ALPdHb6l+fCEXl0BiIzFM6fj0JQhr2src3cYmSvmzL0=;
+ b=HPM2UwlFW594s4ZJJNnHrpZia9keI8MmmOgBr29PnL2sBCc6O/iXIMcRCJ+6SpkDDB
+ b50UIe7tQdEHHyVcs0fv/fH3kLyNllUcVF3/3VaLm3MN7/nuJREqOOlhUshQazcrKD6a
+ CHBRfDIVDRijPpfhibfN0AZb25DLR3r4EQGzo0pG0hmojyaUbD+UgOBeaoE1CuaoSoo+
+ AFVnF5vnkQa8e4YN/sCvi2svnMTLScCbSHhEa67SFBVW3JHsT9EEKsjnCLLVxLw16wx4
+ m6RKCZYdimDGuDOpDLyuDUNwwdIBfmemKw+mSbFWkE/dBNCelT3qoVKepcPJQcD4Y8zX
+ Qcrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlF8LGDZqcnzv6oFKvK+Y2adL/NlW/pyS2DhRKyjEwOB38LYDv1CEXkWLU6RAs/CLanCFEquM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDIeAXCsw24TBBpjXhE/sxBLJ2N1fiKteJ5EvA55ZsT1lhZz4D
- CsiuCtKsajUmLvSUwoHl6bZp2kTaQWyPUGClCoP3eAfVuwI9XC2xOZppmz933NxvdAU=
-X-Gm-Gg: AY/fxX40DQ9TS7KJk/ZHtHVP8ZkDUS0cNavXKtFzYyegtFV9Tjk9ICGOqs2EYzlfISM
- oYvvOnEh64KNALAs1qH9CByVTy9JvfoUZ7OjGL+y37LTrOlVU9dCk14H5cwpNFcvXBwn2iU489d
- IIhI+SoZUaB9YvcYmnKq6u7O6D7voLXFm2kQ/jKMG0YgDj1wIqSD2HfNmHAUpuiJ7Vv3SZ40ulq
- quOi00jtcX/QSBUhdNIHh8HXsZCmbNp1hsUWECxLBnJ5c7umgWBG1zFzrypSYlZ9Ao2apJqNCwu
- 3E7zcTVGxaTqpH8ScqnyfrzB/P34cZNddsP35VfwHblzsiJUnexqRr5dRcVkE2RcBRZ1yOceC9x
- IATE4UxMEM5O/qkmaAL45ZDOTFapBvbHKwcEPu/L82JJdmnwQCMwUO54X38moLpFK2A4Q0OBtP3
- gb26mcJ/0PIROA5Fp3oH7HWXhGujgW5vjOJnqj34gmCEIjqAqjxBkpBZE7t0V3GPBdyrS2/Jyt3
- kQ5wUzLWz3IFA==
-X-Google-Smtp-Source: AGHT+IEvFlnvQMCxI+hgkCyoSIT0qZpHz+R0epssXeL3Drwirh25ziM0RlOuN2JIg5NW8tKALcsNqw==
-X-Received: by 2002:a05:600c:1394:b0:47d:3ffa:5f03 with SMTP id
- 5b1f17b1804b1-47d84b3467emr163672275e9.21.1768083217261; 
- Sat, 10 Jan 2026 14:13:37 -0800 (PST)
-Received: from [192.168.16.154]
- (host109-150-127-3.range109-150.btcentralplus.com. [109.150.127.3])
+ AJvYcCXdmVykfFYewoPvNaHESoF6Gis6HDnk/q51Q/yGCohc+oW2rdHzCEInqEEl1WBPOkJ1+5kyagI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6oVEMd7VS2aZhbAlvIMSom4OXU/fA+mv0lHPtUJfOEPSZ1+pA
+ HiqfWx75Llr2hnMQd/6axLjfxsrSjqSQknbIHlBHyaFCDxx1M71cxOlpcWD58avMyPM=
+X-Gm-Gg: AY/fxX5qmA3stsMZZjrAbCISK8YMEzbSk57b514fa7E1vEC9ME23NeP/jAn6VL/8bkH
+ tqYWIVGWzgj6LMvJPUld6lb0O64s3SEy9ITjy4b2gO1K3e3z2gngNAwefC/LJxj7aZHhnCLOsW6
+ RSB50REAqA4c1SmUnoazZvhMaYp4hafIiWiafddFNcYBF7uU0YfVqgemQJNozjClZFxeYEhMU1F
+ 9zjxl0ekIKnykYOtK87kH5h+OJCTYTi8f+33pYkuY23PAS/RRKv7RDAKsyupejJw6tk1hu2/Q5S
+ j0fNQ0hXqOMxGsOvk/40kUdgTBJdgyRSWLuVPISXslgULE5Uuphmvhce/VIYIUncnOpQi2/NUg6
+ 6zpWn9mssxAOLcDndqR/NfYBsh9GoGFYkjYgrdXrD0yUJpVhEX75IfF50pNSVtGwzmrIWH2kAgr
+ sV5eVKXJJcLvIvAf49zKcPw1LmhW3SkM7nGNzlswzq8Wc4fMm8hLSCVSSgpGzY8UTO66TxuMSMu
+ qHmt+pienLCifytCivrEbmxyFJubJlryaUbrMuNG+vYe/mWAt38jXk5QA==
+X-Google-Smtp-Source: AGHT+IF1emTSgdjSugDDHGD9LXOHcKxNJ7/zZ0vA6VVAlLGXy7+WvBVj3nYUAAQaQ6k3P/SSeic+Pg==
+X-Received: by 2002:a17:907:1c1a:b0:b87:fad:4423 with SMTP id
+ a640c23a62f3a-b870fad498fmr17870866b.10.1768089776451; 
+ Sat, 10 Jan 2026 16:02:56 -0800 (PST)
+Received: from panicking.homenet.telecomitalia.it
+ (host-87-5-117-220.retail.telecomitalia.it. [87.5.117.220])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d871a1e11sm90647245e9.19.2026.01.10.14.13.36
+ a640c23a62f3a-b842a23433asm1519246566b.3.2026.01.10.16.02.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Jan 2026 14:13:36 -0800 (PST)
-Message-ID: <509f3d6ff686edcf8e93799f36fe63db89035f65.camel@linaro.org>
-Subject: Re: [PATCH] board: rockchip: Add FriendlyElec NanoPi Zero2
-From: Christopher Obbard <christopher.obbard@linaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Yao Zi <ziyao@disroot.org>, u-boot@lists.denx.de
-Date: Sat, 10 Jan 2026 22:13:36 +0000
-In-Reply-To: <20260110205337.1242457-1-jonas@kwiboo.se>
-References: <20260110205337.1242457-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-8 
+ Sat, 10 Jan 2026 16:02:55 -0800 (PST)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: Peng Fan <peng.fan@nxp.com>,
+	Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ linux-amarula@amarulasolutions.com,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [RFC PATCH] power: regulator: pfuze100: support high voltage range bit
+Date: Sun, 11 Jan 2026 01:02:51 +0100
+Message-ID: <20260111000251.1278257-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,151 +101,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+The PFUZE100/200/3000 family of PMICs allow switching regulators (specifically
+SW2, SW3A/B, SW4 on PFUZE100/200 and SW2 on PFUZE3000) to operate in a
+"high" voltage range mode. This mode is indicated by a specific bit in the
+voltage selection register (bit 3 for PFUZE3000, bit 6 for others).
 
-On Sat, 2026-01-10 at 20:53 +0000, Jonas Karlman wrote:
-> The NanoPi Zero2 is a small single board computer developed by
-> FriendlyElec, based on the Rockchip RK3528A SoC.
->=20
-> Add support for the FriendlyElec NanoPi Zero2 board.
->=20
-> Features tested on a FriendlyElec NanoPi Zero2 2407:
-> - SD-card boot
-> - eMMC boot
-> - Ethernet
-> - USB host
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+When this bit is set:
+- PFUZE100/200 switches from a 25mV step to a 50mV step, with a different
+  minimum voltage (800mV).
+- PFUZE3000 SW2 switches to a completely different non-linear voltage table.
 
-Reviewed-by: Christopher Obbard <christopher.obbard@linaro.org>
+Currently, the driver uses static descriptors that assume the low/default
+range. This results in incorrect voltage readings and settings if the
+PMIC is configured for the high range.
 
-> ---
->  arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi | 11 ++++
->  arch/arm/mach-rockchip/rk3528/MAINTAINERS    |  6 ++
->  configs/nanopi-zero2-rk3528_defconfig        | 64 ++++++++++++++++++++
->  doc/board/rockchip/rockchip.rst              |  1 +
->  4 files changed, 82 insertions(+)
->  create mode 100644 arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
->  create mode 100644 configs/nanopi-zero2-rk3528_defconfig
->=20
-> diff --git a/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi b/arch/arm/dts/=
-rk3528-nanopi-zero2-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..3e2fbd81da17
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3528-u-boot.dtsi"
-> +
-> +&vdd_arm {
-> +	regulator-init-microvolt =3D <953000>;
-> +};
-> +
-> +&vdd_logic {
-> +	regulator-init-microvolt =3D <900000>;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-ro=
-ckchip/rk3528/MAINTAINERS
-> index ee840396e8b0..111fe0270dfd 100644
-> --- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-> +++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-> @@ -4,6 +4,12 @@ S:	Maintained
->  F:	arch/arm/dts/rk3528-generic*
->  F:	configs/generic-rk3528_defconfig
-> =20
-> +NANOPI-ZERO2-RK3528
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3528-nanopi-zero2*
-> +F:	configs/nanopi-zero2-rk3528_defconfig
-> +
->  RADXA-E20C
->  M:	Jonas Karlman <jonas@kwiboo.se>
->  S:	Maintained
-> diff --git a/configs/nanopi-zero2-rk3528_defconfig b/configs/nanopi-zero2=
--rk3528_defconfig
-> new file mode 100644
-> index 000000000000..2e54c0ff20a2
-> --- /dev/null
-> +++ b/configs/nanopi-zero2-rk3528_defconfig
-> @@ -0,0 +1,64 @@
-> +CONFIG_ARM=3Dy
-> +CONFIG_SKIP_LOWLEVEL_INIT=3Dy
-> +CONFIG_COUNTER_FREQUENCY=3D24000000
-> +CONFIG_ARCH_ROCKCHIP=3Dy
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3528-nanopi-zero2"
-> +CONFIG_ROCKCHIP_RK3528=3Dy
-> +CONFIG_SYS_LOAD_ADDR=3D0xc00800
-> +CONFIG_DEBUG_UART_BASE=3D0xFF9F0000
-> +CONFIG_DEBUG_UART_CLOCK=3D24000000
-> +CONFIG_DEBUG_UART=3Dy
-> +CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3528-nanopi-zero2.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_BOARD_RNG_SEED=3Dy
-> +CONFIG_SPL_MAX_SIZE=3D0x40000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_CMD_MEMINFO=3Dy
-> +CONFIG_CMD_MEMINFO_MAP=3Dy
-> +CONFIG_CMD_ADC=3Dy
-> +CONFIG_CMD_GPIO=3Dy
-> +CONFIG_CMD_GPT=3Dy
-> +CONFIG_CMD_MISC=3Dy
-> +CONFIG_CMD_MMC=3Dy
-> +CONFIG_CMD_USB=3Dy
-> +CONFIG_CMD_ROCKUSB=3Dy
-> +CONFIG_CMD_USB_MASS_STORAGE=3Dy
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_RNG=3Dy
-> +CONFIG_CMD_REGULATOR=3Dy
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cloc=
-ks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_BUTTON=3Dy
-> +CONFIG_BUTTON_ADC=3Dy
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=3Dy
-> +CONFIG_LED=3Dy
-> +CONFIG_LED_GPIO=3Dy
-> +CONFIG_SUPPORT_EMMC_RPMB=3Dy
-> +CONFIG_MMC_DW=3Dy
-> +CONFIG_MMC_DW_ROCKCHIP=3Dy
-> +CONFIG_MMC_SDHCI=3Dy
-> +CONFIG_MMC_SDHCI_SDMA=3Dy
-> +CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> +CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_MDIO=3Dy
-> +CONFIG_DWC_ETH_QOS=3Dy
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=3Dy
-> +CONFIG_REGULATOR_PWM=3Dy
-> +CONFIG_DM_REGULATOR_GPIO=3Dy
-> +CONFIG_PWM_ROCKCHIP=3Dy
-> +CONFIG_BAUDRATE=3D1500000
-> +CONFIG_DEBUG_UART_SHIFT=3D2
-> +CONFIG_SYS_NS16550_MEM32=3Dy
-> +CONFIG_USB=3Dy
-> +CONFIG_USB_XHCI_HCD=3Dy
-> +CONFIG_USB_EHCI_HCD=3Dy
-> +CONFIG_USB_EHCI_GENERIC=3Dy
-> +CONFIG_USB_DWC3=3Dy
-> +CONFIG_USB_DWC3_GENERIC=3Dy
-> +CONFIG_USB_GADGET=3Dy
-> +CONFIG_USB_GADGET_DOWNLOAD=3Dy
-> +CONFIG_USB_FUNCTION_ROCKUSB=3Dy
-> +CONFIG_ERRNO_STR=3Dy
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchi=
-p.rst
-> index c1683bfe4212..01659ecc3cbe 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
-> =20
->  * rk3528
->       - ArmSoM Sige1 (sige1-rk3528)
-> +     - FriendlyElec NanoPi Zero2 (nanopi-zero2-rk3528)
->       - Generic RK3528 (generic-rk3528)
->       - Radxa E20C (radxa-e20c-rk3528)
->       - Radxa ROCK 2A/2F (rock-2-rk3528)
+This patch updates the driver to:
+1. Identify regulators with high-bit support via a new `hi_bit` flag.
+2. Read the register during probe to detect the current range configuration.
+3. Dynamically update the regulator descriptor (step, mask, min_uV, or table)
+   to match the active range.
+
+This aligns the U-Boot driver behavior with the Linux kernel implementation.
+
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
+
+Note I need to retest it on the board but it's just a propose change
+
+---
+ drivers/power/regulator/pfuze100.c | 66 ++++++++++++++++++++++--------
+ 1 file changed, 48 insertions(+), 18 deletions(-)
+
+diff --git a/drivers/power/regulator/pfuze100.c b/drivers/power/regulator/pfuze100.c
+index f864b1d8834..63d39c21bb8 100644
+--- a/drivers/power/regulator/pfuze100.c
++++ b/drivers/power/regulator/pfuze100.c
+@@ -18,6 +18,7 @@
+  *
+  * @name: Identify name for the regulator.
+  * @type: Indicates the regulator type.
++ * @hi_bit: Indicate if support hi voltage range.
+  * @uV_step: Voltage increase for each selector.
+  * @vsel_reg: Register for adjust regulator voltage for normal.
+  * @vsel_mask: Mask bit for setting regulator voltage for normal.
+@@ -29,6 +30,7 @@
+ struct pfuze100_regulator_desc {
+ 	char *name;
+ 	enum regulator_type type;
++	bool hi_bit;
+ 	unsigned int uV_step;
+ 	unsigned int vsel_reg;
+ 	unsigned int vsel_mask;
+@@ -54,10 +56,11 @@ struct pfuze100_regulator_plat {
+ 		.voltage	=	(vol),				\
+ 	}
+ 
+-#define PFUZE100_SW_REG(_name, base, step)				\
++#define PFUZE100_SW_REG(_name, base, step, hbit)			\
+ 	{								\
+ 		.name		=	#_name,				\
+ 		.type		=	REGULATOR_TYPE_BUCK,		\
++		.hi_bit		=	(hbit),				\
+ 		.uV_step	=	(step),				\
+ 		.vsel_reg	=	(base) + PFUZE100_VOL_OFFSET,	\
+ 		.vsel_mask	=	0x3F,				\
+@@ -65,10 +68,11 @@ struct pfuze100_regulator_plat {
+ 		.stby_mask	=	0x3F,				\
+ 	}
+ 
+-#define PFUZE100_SWB_REG(_name, base, mask, step, voltages)		\
++#define PFUZE100_SWB_REG(_name, base, mask, step, voltages, hbit)	\
+ 	{								\
+ 		.name		=	#_name,				\
+ 		.type		=	REGULATOR_TYPE_BUCK,		\
++		.hi_bit		=	(hbit),				\
+ 		.uV_step	=	(step),				\
+ 		.vsel_reg	=	(base),				\
+ 		.vsel_mask	=	(mask),				\
+@@ -155,15 +159,19 @@ static unsigned int pfuze3000_sw2lo[] = {
+ 	1500000, 1550000, 1600000, 1650000, 1700000, 1750000, 1800000, 1850000
+ };
+ 
++static unsigned int pfuze3000_sw2hi[] = {
++	2500000, 2800000, 2850000, 3000000, 3100000, 3150000, 3200000, 3300000,
++};
++
+ /* PFUZE100 */
+ static struct pfuze100_regulator_desc pfuze100_regulators[] = {
+-	PFUZE100_SW_REG(sw1ab, PFUZE100_SW1ABVOL, 25000),
+-	PFUZE100_SW_REG(sw1c, PFUZE100_SW1CVOL, 25000),
+-	PFUZE100_SW_REG(sw2, PFUZE100_SW2VOL, 25000),
+-	PFUZE100_SW_REG(sw3a, PFUZE100_SW3AVOL, 25000),
+-	PFUZE100_SW_REG(sw3b, PFUZE100_SW3BVOL, 25000),
+-	PFUZE100_SW_REG(sw4, PFUZE100_SW4VOL, 25000),
+-	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst),
++	PFUZE100_SW_REG(sw1ab, PFUZE100_SW1ABVOL, 25000, false),
++	PFUZE100_SW_REG(sw1c, PFUZE100_SW1CVOL, 25000, false),
++	PFUZE100_SW_REG(sw2, PFUZE100_SW2VOL, 25000, true),
++	PFUZE100_SW_REG(sw3a, PFUZE100_SW3AVOL, 25000, true),
++	PFUZE100_SW_REG(sw3b, PFUZE100_SW3BVOL, 25000, true),
++	PFUZE100_SW_REG(sw4, PFUZE100_SW4VOL, 25000, true),
++	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst, false),
+ 	PFUZE100_SNVS_REG(vsnvs, PFUZE100_VSNVSVOL, 0x7, pfuze100_vsnvs),
+ 	PFUZE100_FIXED_REG(vrefddr, PFUZE100_VREFDDRCON, 750000),
+ 	PFUZE100_VGEN_REG(vgen1, PFUZE100_VGEN1VOL, 50000),
+@@ -176,11 +184,11 @@ static struct pfuze100_regulator_desc pfuze100_regulators[] = {
+ 
+ /* PFUZE200 */
+ static struct pfuze100_regulator_desc pfuze200_regulators[] = {
+-	PFUZE100_SW_REG(sw1ab, PFUZE100_SW1ABVOL, 25000),
+-	PFUZE100_SW_REG(sw2, PFUZE100_SW2VOL, 25000),
+-	PFUZE100_SW_REG(sw3a, PFUZE100_SW3AVOL, 25000),
+-	PFUZE100_SW_REG(sw3b, PFUZE100_SW3BVOL, 25000),
+-	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst),
++	PFUZE100_SW_REG(sw1ab, PFUZE100_SW1ABVOL, 25000, false),
++	PFUZE100_SW_REG(sw2, PFUZE100_SW2VOL, 25000, true),
++	PFUZE100_SW_REG(sw3a, PFUZE100_SW3AVOL, 25000, true),
++	PFUZE100_SW_REG(sw3b, PFUZE100_SW3BVOL, 25000, true),
++	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst, false),
+ 	PFUZE100_SNVS_REG(vsnvs, PFUZE100_VSNVSVOL, 0x7, pfuze100_vsnvs),
+ 	PFUZE100_FIXED_REG(vrefddr, PFUZE100_VREFDDRCON, 750000),
+ 	PFUZE100_VGEN_REG(vgen1, PFUZE100_VGEN1VOL, 50000),
+@@ -195,9 +203,9 @@ static struct pfuze100_regulator_desc pfuze200_regulators[] = {
+ static struct pfuze100_regulator_desc pfuze3000_regulators[] = {
+ 	PFUZE3000_SW1_REG(sw1a, PFUZE100_SW1ABVOL, 25000),
+ 	PFUZE3000_SW1_REG(sw1b, PFUZE100_SW1CVOL, 25000),
+-	PFUZE100_SWB_REG(sw2, PFUZE100_SW2VOL, 0x7, 50000, pfuze3000_sw2lo),
++	PFUZE100_SWB_REG(sw2, PFUZE100_SW2VOL, 0x7, 50000, pfuze3000_sw2lo, true),
+ 	PFUZE3000_SW3_REG(sw3, PFUZE100_SW3AVOL, 50000),
+-	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst),
++	PFUZE100_SWB_REG(swbst, PFUZE100_SWBSTCON1, 0x3, 50000, pfuze100_swbst, false),
+ 	PFUZE100_SNVS_REG(vsnvs, PFUZE100_VSNVSVOL, 0x7, pfuze3000_vsnvs),
+ 	PFUZE100_FIXED_REG(vrefddr, PFUZE100_VREFDDRCON, 750000),
+ 	PFUZE100_VGEN_REG(vldo1, PFUZE100_VGEN1VOL, 100000),
+@@ -246,9 +254,10 @@ static int pfuze100_regulator_probe(struct udevice *dev)
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 	struct pfuze100_regulator_plat *plat = dev_get_plat(dev);
+ 	struct pfuze100_regulator_desc *desc;
+-	int i, size;
++	int i, size, val, sw_hi = 0x40;
++	int version = dev_get_driver_data(dev_get_parent(dev));
+ 
+-	switch (dev_get_driver_data(dev_get_parent(dev))) {
++	switch (version) {
+ 	case PFUZE100:
+ 		desc = pfuze100_regulators;
+ 		size = ARRAY_SIZE(pfuze100_regulators);
+@@ -260,6 +269,7 @@ static int pfuze100_regulator_probe(struct udevice *dev)
+ 	case PFUZE3000:
+ 		desc = pfuze3000_regulators;
+ 		size = ARRAY_SIZE(pfuze3000_regulators);
++		sw_hi = 1 << 3;
+ 		break;
+ 	default:
+ 		debug("Unsupported PFUZE\n");
+@@ -281,6 +291,26 @@ static int pfuze100_regulator_probe(struct udevice *dev)
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 
+ 	uc_pdata->type = desc[i].type;
++
++	/* SW2~SW4 high bit check and modify the voltage value table */
++	if (desc[i].hi_bit) {
++		val = pmic_reg_read(dev->parent, desc[i].vsel_reg);
++		if (val < 0) {
++			printf("Fails to read from the register.\n");
++			return -EIO;
++		}
++
++		if (val & sw_hi) {
++			if (version == PFUZE3000) {
++				desc[i].volt_table = pfuze3000_sw2hi;
++			} else {
++				desc[i].uV_step = 50000;
++				desc[i].vsel_mask = 0x7;
++				uc_pdata->min_uV = 800000;
++			}
++		}
++	}
++
+ 	if (uc_pdata->type == REGULATOR_TYPE_BUCK) {
+ 		if (!strcmp(dev->name, "swbst")) {
+ 			uc_pdata->mode = pfuze_swbst_modes;
+-- 
+2.51.0
+
