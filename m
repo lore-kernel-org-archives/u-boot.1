@@ -4,88 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A51C9EC94
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:49:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7E3C9EC94
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E56483935;
-	Mon, 12 Jan 2026 15:49:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B9FFD838A5;
+	Mon, 12 Jan 2026 15:56:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SDXM5KXB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RsZpT3Gk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAD1983936; Mon, 12 Jan 2026 15:49:39 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id BC5E48391B; Mon, 12 Jan 2026 15:56:05 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33B8B838A5
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:49:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56F5C8388D
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:56:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64b608ffca7so10095384a12.3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:49:37 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b87108066c3so176939466b.2
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:56:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768229377; x=1768834177; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/R2/gS9LmL0+dZ5hPCm5ZBf+ZvEJfZCyx7mHWh7WFKo=;
- b=SDXM5KXBQfoBiGZpxk9UZSF53XXyT2jxeKaEWCWiU8bckc+HWPlN4tLt7aIgQSKmfV
- Ptwz9cdHEd23yVlMB6vjqKzEEUZpEQw/F3eHWwYcj9Igl/NZ9KIfApooM927RY6/zdFZ
- UguEIsUb612sznu2IjJuuAi+8TL/n15sV9nLv/wl8iLHy/UMSsQ29pSf2K2dRWBqu4zI
- pRXfff8v0oeaFaYzPDA5Ko0CNxpUkka2vjm/Xx69z9SycuNVBiTwEvFTx/9bw8q6yqT0
- ARdyuvrdh3UGiI7kV/2s+zUTME0qzzdEM532rAGpUWcQAmywSM82oIZVSMjc3KuruX7P
- M1Ug==
+ d=linaro.org; s=google; t=1768229763; x=1768834563; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+ho3JWd1qBDxwZqqi09OA06jZCfVGdrCUniSS/pVfdQ=;
+ b=RsZpT3GkgYtRxDBSrb3ocJK8gedfHlRg+sqH23PSe2a5Zjn6ZHjV0W0YK08JdYeQgk
+ 0F+wl6HvTJAyKHcgDS6M99KNNRG7nHJr5C0u2zzJGNJe373IvYtpyVIIfHdX43MgE843
+ LHNxLT5Yy4fyA0qUKBoufOx2wBJE4JLP/8JDCcIOQG0zFHvjwanJiAy4XuT5l1dX8XHE
+ WOUF84X1WLtY1FSn9vEHT3U/YrVSq9K27FF0hgHapL/9zm8zmqXmRSXnIOipKuJXJBxX
+ SacJjkRyX6SoI4RkLFo17zNnhLdH7ZNnDwOkseAH/mxYuyXcZJeYqdbCqlaEJ6Lt27mh
+ 70Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768229377; x=1768834177;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/R2/gS9LmL0+dZ5hPCm5ZBf+ZvEJfZCyx7mHWh7WFKo=;
- b=K10R6sfSUPAC1aDK17I3xLMK9p3B/Ji0eRPI0frEjV17OoSUzcf/jmT7a/YSA0Xb3l
- n8g7SUacHe0We2SGifjnlELmFH8s5Civj3IwkeRFVLJ0IkXeqf3Uj0q7KlhKsUyVQ6Te
- hh1pP7niKUp2jP+V87/GLcW35y4Kztw1+syBQ4ZyS7sY7h5We0Cco2hVwZalDvE2RJlO
- ccEPn2M4b7YGSbkBPwDAXjRZkoRrBG47/+Ni1YZJCHwyRny0kt+1GfxumwKq61PlcJ+P
- CIr6EK2VVnbZ9fpmGEwdvo91MiFYUdQVfUhXSoL6WegboL6dt2Uvq6dZnV1U9MDQokqF
- 1m2A==
+ d=1e100.net; s=20230601; t=1768229763; x=1768834563;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+ho3JWd1qBDxwZqqi09OA06jZCfVGdrCUniSS/pVfdQ=;
+ b=RVEmiqY6En4eeFtxdVgbxz4W5R71k4EdrfuP9UBTX1aJNKEQgCwItqypR1ch63geN0
+ Wy2ze/7o+skS5RED1DVViinPszDWDcoqO21cnxTv2jNFtfvmoITRCGqz4DNWh54rTBV2
+ EbnGGKrDa3K8BLmRP9hrl06ELTWwWQYH9xOQpaLc2pDP1GLO2bsLVG7EBW0F81as95cA
+ +R8i3wddE97uHhzcl4LmyNGeOGvr7u/nUWjr7AmAJ6ZpG8P7tiQiirXfC2uZL2uu4SSJ
+ g3fMZBZq2rJewADUqQzKa6jxYZBP3FeHNa8Z1Iqs3cx8rMiXnkzHiklj2GqjsiTU9WHS
+ gTYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVW0WjXyptwv1moWyD2QA26ubF5ZhQFRWwRitPQiKoX6oSD2MyXcZbVwmIk/bMn7a7U8UsTltk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyo9KQ68V58muZCs/4tkfyjgbZ/r/tAcTIIDmlPacdN0gBxA61/
- 8YuVPz16k3ymShytOwdBx3xjEOxswOBif/RaFS0UArjKgcbCebKbfVcO+QNsv7vbTdY=
-X-Gm-Gg: AY/fxX4qo1Fj9Ycp96U3KZkQu+OyniwNBQlFDlXDfSuotsBuzC5NZ26bZxvughCetdP
- P57dqrXlfZah8VW4dX+76rhArpfkepjdDBXgD9oSNlS43EQnRP9ZdS6wI/Ww4Jus7SVVjUutkk6
- evBgXJ9cSxyY1uRf5Pxs/iQAC30OQ7K5VzzIPPKJwQC+FPPlWNQ90gfkXacpE6O41ILsI+OkLhJ
- +mnFjpGmdBLrnFqxo+JWxR5pl8UhZeyj+P4C5cXV2KeMnzcHkE9M3dr1vHtekdwAIAly/aIkgM0
- 3GzYD4nrg8Tgo5WcvwULfGg43RprOuKYI2age6mmKOweCTl/0B1CcdTsDAUhpcBwDne48I3bgru
- kXRo8xHc7CVyaUJkG3dwpeqjWRxT/qz3VsOUYqfq7UnIw0h2EkgXhBEgwpdu+JcrDLgVuICtpGq
- K1SebAmk6iMfOQkZ3nQF+84fG1z3Suf0SsuvK0u4pjgoVjzVHbwu9yTTaxDY5b+Q==
-X-Google-Smtp-Source: AGHT+IEnquXirvBalpBhEPYbdg/zdX0mXg0rAiQB9nvqvpc8ExAnfrHbLtj5vmMUaUT7R6I0LvQE8g==
-X-Received: by 2002:aa7:dd47:0:b0:64d:1a1:9dee with SMTP id
- 4fb4d7f45d1cf-65097e49cf1mr16575771a12.16.1768229376637; 
- Mon, 12 Jan 2026 06:49:36 -0800 (PST)
-Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
- [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6507bf65c07sm17786640a12.23.2026.01.12.06.49.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 06:49:35 -0800 (PST)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>,
- George Chan <gchan9527@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, Marek Vasut <marek.vasut@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH] usb: gadget: fix vendor/product id for qcom
-Date: Mon, 12 Jan 2026 15:49:30 +0100
-Message-ID: <20260112144933.3992369-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ AJvYcCVAp1FB5YT6Z/Pk5uAkIssDrcVu9bubrVzUT2gGSs4HitiaUyMevNlOy9l1BnVhObz/r7IX540=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEbfwnwZjVmFgKX8+RulzWHB/3Z1U7AqnaWkS6Jp79Ohvn9qej
+ 7NRuWswSgvVLrpGKU/GenTNg9L2nQtuwselD96WnzUU4Sk4Y9k2VZwXBDZ5FiDqYOKE=
+X-Gm-Gg: AY/fxX5kFdeNgz068xVTsok2mB1H6L4IOI0HwFB90BkgI+jMYXIz4VhVU+3aAQ/QzxN
+ jwkXtSXjiQfGBs88/uvA2K5TLKVkghg5lk0WLE9qZ7X+can4z3jfvd1FhLDI7sfKX8gFAXBTPwu
+ xH0oDlQSrsxu6EqWq9ay7ZteLioEslXYMrO3Oku6tvvMNLcXbssizLWfE358SvWAmLGNPHKtyzH
+ qXsxhd/IG0eyjuA+yGJHtv22XLI0GACin2RZcvNR5jAhcPuIjSJaSO5ahV7kk3J0tiuVDtIHvXk
+ JA9Xk0zUT2a16x5oY4318nX7VzBEBVOQLIFsqmI3rTZ3lHNxuQE3v94awjOgtNO8ZQ+TRzl9n/K
+ TNIOz30P+fC567kC126+e9nqIKOq8UwhI3asJ+D+LXziaYopXRbXflurbTxOCJR0l+bp0ZZ0W2A
+ kmkhRI3+x5rN8WlZiokn9/RgQnvnloX2lhRE/uPdVLmuXq9jezjC4=
+X-Google-Smtp-Source: AGHT+IG0M1wxjkmIzAirfu/aSAX/WWAa0KXYbc6wxJYer8dxtuIrxGgH57tQvPfbK/MJClcfZap2sw==
+X-Received: by 2002:a17:906:9fca:b0:b87:2c3d:ef08 with SMTP id
+ a640c23a62f3a-b872c3e04e0mr167627266b.33.1768229762687; 
+ Mon, 12 Jan 2026 06:56:02 -0800 (PST)
+Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b842a27cc6bsm1967918566b.23.2026.01.12.06.56.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Jan 2026 06:56:02 -0800 (PST)
+Message-ID: <80f0a67d-689a-4865-a792-9f7967ab740f@linaro.org>
+Date: Mon, 12 Jan 2026 15:56:01 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND v2 4/6] configs: ipq9574: Enable fastboot support
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@kernel.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, lukma@denx.de, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, alexeymin@postmarketos.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20251218061557.1999367-5-varadarajan.narayanan@oss.qualcomm.com>
+ <aUVhRIWmfRHPnhRV@sumit-xelite>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <aUVhRIWmfRHPnhRV@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,42 +109,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Due to a typo the defaults for Qualcomm were never actually
-set, this got missed in the original patch (maybe time to rename
-ARCH_SNAPDRAGON...).
 
-Fixes: 934647d49c61 ("usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM")
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- drivers/usb/gadget/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 7e08aeab9043..ebb306852a65 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -60,9 +60,9 @@ config USB_GADGET_VENDOR_NUM
- 	hex "Vendor ID of the USB device"
- 	default 0x0955 if ARCH_TEGRA
- 	default 0x1f3a if ARCH_SUNXI
- 	default 0x2207 if ARCH_ROCKCHIP
--	default 0x18d1 if ARCH_QCOM
-+	default 0x18d1 if ARCH_SNAPDRAGON
- 	default 0x0
- 	help
- 	  Vendor ID of the USB device emulated, reported to the host device.
- 	  This is usually the board or SoC vendor's, unless you've registered
-@@ -88,9 +88,9 @@ config USB_GADGET_PRODUCT_NUM
- 	default 0x350a if ROCKCHIP_RK3568
- 	default 0x350b if ROCKCHIP_RK3588
- 	default 0x350c if ROCKCHIP_RK3528
- 	default 0x350e if ROCKCHIP_RK3576
--	default 0x4ee0 if ARCH_QCOM
-+	default 0x4ee0 if ARCH_SNAPDRAGON
- 	default 0x0
- 	help
- 	  Product ID of the USB device emulated, reported to the host device.
- 
+On 19/12/2025 15:29, Sumit Garg wrote:
+> On Thu, Dec 18, 2025 at 11:45:55AM +0530, Varadarajan Narayanan wrote:
+>> Enable relevant configs like USB PHY, gadget, fastboot,
+>> fastboot MMC support etc. to enable fastboot flashing
+>> of IPQ9574 based boards.
+>>
+>> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+>> ---
+>>  configs/qcom_ipq9574_mmc_defconfig | 22 +++++++++++++++++++++-
+>>  1 file changed, 21 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
+>> index 6592d9de39d..ac534738994 100644
+>> --- a/configs/qcom_ipq9574_mmc_defconfig
+>> +++ b/configs/qcom_ipq9574_mmc_defconfig
+>> @@ -45,7 +45,7 @@ CONFIG_DWC_ETH_QOS=y
+>>  CONFIG_DWC_ETH_QOS_QCOM=y
+>>  CONFIG_RGMII=y
+>>  CONFIG_PHY=y
+>> -CONFIG_PHY_QCOM_QMP_UFS=y
+> 
+> Any reason to drop this?
+> 
+>> +CONFIG_PHY_QCOM_QMP_USB=y
+>>  CONFIG_PHY_QCOM_QUSB2=y
+>>  CONFIG_PINCTRL=y
+>>  CONFIG_PINCONF=y
+>> @@ -54,3 +54,23 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
+>>  CONFIG_MSM_SERIAL=y
+>>  CONFIG_MSM_GENI_SERIAL=y
+>>  CONFIG_SOC_QCOM=y
+>> +CONFIG_USB=y
+>> +CONFIG_USB_GADGET=y
+>> +CONFIG_DM_USB_GADGET=y
+>> +CONFIG_CMD_USB=y
+>> +CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GADGET=y
+>> +CONFIG_MISC=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_USB_FUNCTION_FASTBOOT=y
+>> +CONFIG_FASTBOOT=y
+>> +CONFIG_CMD_FASTBOOT=y
+>> +CONFIG_FASTBOOT_BUF_ADDR=y
+>> +CONFIG_FASTBOOT_BUF_SIZE=y
+>> +CONFIG_FASTBOOT_FLASH=y
+>> +CONFIG_FASTBOOT_FLASH_MMC=y
+>> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> 
+>> +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
+>> +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
+> 
+> You should rather try to update following for fastboot:
+> 
+> $ git grep -nr ARCH_QCOM drivers/usb/gadget/Kconfig
+> drivers/usb/gadget/Kconfig:64:  default 0x18d1 if ARCH_QCOM
+> drivers/usb/gadget/Kconfig:92:  default 0x4ee0 if ARCH_QCOM
+
+This should be fixed by
+https://lore.kernel.org/u-boot/20260112144933.3992369-1-casey.connolly@linaro.org/>
+
+>> +CONFIG_FASTBOOT_BUF_ADDR=0x50000000
+>> +CONFIG_FASTBOOT_BUF_SIZE=0x4000000
+> 
+> -Sumit
+> 
+>> -- 
+>> 2.34.1
+>>
+
 -- 
-2.51.0
+// Casey (she/her)
 
