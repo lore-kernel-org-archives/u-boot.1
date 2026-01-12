@@ -4,154 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D0CD2502F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 05:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0144D2502F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 06:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 352F1839AC;
-	Mon, 12 Jan 2026 06:57:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C4F2B839AC;
+	Mon, 12 Jan 2026 07:00:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VlOLzsqL";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFF2183A9A; Mon, 12 Jan 2026 06:57:21 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azhn15010054.outbound.protection.outlook.com [52.102.136.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A2D7183AAE; Mon, 12 Jan 2026 07:00:06 +0100 (CET)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on2070a.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::70a])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E723839A8
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:57:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1047839A8
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 07:00:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RHoeAPt7p4xEVqJK6X5HcpobD9/VRxkSTtl7nJsXLmwj5TkeWUn67vLBdfp224RShg5NU0ptEgRML7+zqeRKFnTdR6m85JbURmQmq5gdi178w1DehOXjGbVUqamet23WaDfBLPQuXsZRo0bj9UrtWE8jg+gg61h3RlIFG9ViWqCFBcWZU8IxoX2Lc2rAb/JfCLCRToiPjcbtEVgTuMjng8rw68WVKhNzm/qfIdtF+Vm1hoatnHphwg7WezGOm2VfAzKVZtDFV2k0NSaMI/cZae/PUEdtdxtsxAmrJ6MiaONYHCqnZom+P63Gpwcw/1ajnOtwIAUyP2ugMt9AieWChQ==
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=V/wrrLeDZGUk3psN3YEi/N5q2gXA6pSmkru8W1MEjj6F3NSaPDTNe1ErHdw7gEVM5g7mnbCbSOx15mVPz3GlEG1y40D1tpd6oXtVnntKakutetTfsbwR4WeoLVl6mwdOcMTI5LOJSEnv0rYyjAu9/m6F0+kpBYYJz5I2C6njVB64Jdxnu7iY+kIo+YPViW3TRoHoFbu59YV/fgW9HV51/C4JJnEBZO6dy7tlZkREjLl1HL+gp6dUZFd0w3Kw+84BWT+iIOUNdkB9J+AJv3qqdEfIlGjnRVtNObvkC+uTy/0F1JeDaEzRtQ/44+TtL28c+c5N+7NjdugxH09V1n5oGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
+ s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vA3hJc4ucKDmus1mRJZCa9iaKWhUBvGvNSmCGQRd7vw=;
- b=HryyGSWdvcXDHHC0qpfYs9xkstpqf7HCUaDtw+Z1NI8rtbI/qSUxibQlspaUjlMk+hkmjdqsGUh6eDRduS4USFUt7sQ7SXAx7XfHH0o3H+grs+m3NQ66Fj6bEGvrvrTaw74uPIyh4iMnLs8EEoifhBDdZ8VT3xnNKNUqmov1LWgK1qy+DB6NqBSt/H9OPONlssAdWcPCL1WlB/9i1Flq0T74KyBzv+mNmUX59JrzcGYjxVWGbXTeNsWKegU5dnEEHecdaEAKp6tKLJ/CgEsELpI4ZlTJ+Xi39h4CVv6iBCXj7hN32QFF5ZKp0PXYxhW4KLrWDERVxue5PebHVRSeNw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vA3hJc4ucKDmus1mRJZCa9iaKWhUBvGvNSmCGQRd7vw=;
- b=VlOLzsqL77ayWPgj4uxpANe6J7+XFpfk63dOW5OjwFQYZbIyfvhgwmsOg04y3m6L1iZXQIO9C3nr1T30isi250ASVuSWW4usIeqXyQxhm5pA9SqwrS+QZIfi6YcImW84OMukP/VRDeXzc0Rz7GsLYV2ndXy3Ws50yFFVemM4U6s=
-Received: from BY5PR03CA0023.namprd03.prod.outlook.com (2603:10b6:a03:1e0::33)
- by DM3PR10MB7925.namprd10.prod.outlook.com (2603:10b6:0:46::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Mon, 12 Jan
- 2026 05:57:15 +0000
-Received: from SJ5PEPF000001C8.namprd05.prod.outlook.com
- (2603:10b6:a03:1e0:cafe::4d) by BY5PR03CA0023.outlook.office365.com
- (2603:10b6:a03:1e0::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Mon,
- 12 Jan 2026 05:56:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001C8.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Mon, 12 Jan 2026 05:57:14 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 11 Jan
- 2026 23:56:45 -0600
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 11 Jan
- 2026 23:56:45 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 11 Jan 2026 23:56:45 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60C5uiXZ4165162;
- Sun, 11 Jan 2026 23:56:44 -0600
+ bh=cdDUohxmAznecGRiBOLW/dL72msAocIZUdk1jyf8OgY=;
+ b=IPZ1Woi+Cnu6s9LpsXQbXJ6gcGbrINXZ6WWSV/5dATAiFdzTD6LOmfY70xJh9+QdeufohebjxWppL39woSCUAw7nRho17ubYcnh3iYdZhLTEwBRdojg6+o9+RJ9ajk6wDx5hBw98H9poJpXytOmo/ScjV9unE2H1rZObsDlI/y3Lpl99DB4mtSmXmkXo65wYJtXp6rZvbKg3cw9KSHwnBJAu+MmzoThwswYK0dbYRNXYYHIPtD+QhYdy7kGAqbH4Zn7NyluRHiqZpiPi+O9TrYbkuBxr6GmuWVvGaQAgsVdS0UR2t/Zf+oF/8aX7Zdcjz3OjDQrCks0DxY0nE1bAtg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1274.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:10::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.20; Mon, 12 Jan
+ 2026 05:59:55 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%5]) with mapi id 15.20.9456.017; Mon, 12 Jan 2026
+ 05:59:55 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, oliver Fendt
+ <ofendt@googlemail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: RE: unclear license identifiers
+Thread-Topic: unclear license identifiers
+Thread-Index: AQHcgLe9NpQpVY9qwECE5sZEjl+K47VJVzMwgACdUgCABBXlUA==
+Date: Mon, 12 Jan 2026 05:59:55 +0000
+Message-ID: <ZQ2PR01MB130777A4A9A492656EF6F907E6812@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+References: <CAFoF8fC4foffYJgYm9CkViET83gDu05noVRxLxgs+KWXN_-LBQ@mail.gmail.com>
+ <f22fe5c8-d98c-4b20-a9b2-a8a5af1542b9@cherry.de>
+ <a1a22e85-8812-4064-8b9a-d779884edbbd@cherry.de>
+ <ZQ2PR01MB13072ABFAC3D77E8D781C19AE6822@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+ <81044800-b1b4-4f37-911b-f94ea3c8a761@cherry.de>
+In-Reply-To: <81044800-b1b4-4f37-911b-f94ea3c8a761@cherry.de>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1274:EE_
+x-ms-office365-filtering-correlation-id: b126994f-aa03-4675-11b2-08de519fcf51
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|41320700013|1800799024|366016|38070700021; 
+x-microsoft-antispam-message-info: 5ciYEcdm9hxhOjXz3eGaqPs/FTN25zcFSPN/GE6WkI5Q0UHCPn5HjLl4YBaoJbkrqUK0jgQ8lEx65UbsTt9VnNqudgkbHMASjbP+OCgSo7VQISvL+ZvXKWBsDBjwlrj9X52NMxPybA8FVoD0Q9sMK9EvXZM3QyjaKbYubFRxcp+z8nT3+JlLjTX5Iv2MEsBLCjGOPFa4u7Vw0cNGFwDd6bGSZM78/WzZBdLqSeoJMCvl65MsrAsQhwdxVRFxmviSOvaXuWe49Bgi8onwkR5tjTTjQFj1q0YKcGI/KRhPN1fo7P9E1IKZoilEXSJnh6A/4EyDm7tdW51e5WvaunYWrh2VMrFkUC9de6204zzZcwJNmfadtRk2iHoz59vO8Hg2+SXnQHz0b+7R5IdyACQaLk/asSryQVSYZ+QpcuiZQQmNkCCX92JDTW4dOthlBxCmrOlZyvRiXCSDRcZ1HeCtxrgV5rHidIXPv0XBznU9ydo0SVbCFPfPi0VKoesUk0ZoEcrE1t/W+zB/Y/nrBpCmsbPpqm3Ov9eJh0WmV9hN495A8AltfUm4LKdkG0gOT595megSvb2ljNMnN/sx3s1nuiC7QAhraYdwthOBDKNH174=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230040)(41320700013)(1800799024)(366016)(38070700021);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?L2kvOXZnclQ4V0d1WGpZMjJvQTBYN2NDMzZlbzRsa3dQUzhiUVpDajdiYkJj?=
+ =?utf-8?B?MHI0WUlwYXFQK0hJaTlmS1ZBSVh6QkdIMEZvSGNvWW5NcElrK3NDeFd3UjdZ?=
+ =?utf-8?B?am8zeVd2Tk54Q0lVRjNKeFNFWWVkemw3c2tvSXJ2QkFrVjhseDYzQ282OExh?=
+ =?utf-8?B?OVVYcWRaRnRYZWEvZFVQNTAzMEFZZjE4TGRlTDZsSk9hYUQxYmMzdkRPYmZQ?=
+ =?utf-8?B?U09lN3duMzFVRDBWS1pHWUUybUZsNDhXclYvQjhEMVpuSUQ0am9TaHVUck1n?=
+ =?utf-8?B?RGNYN2pUcUpmQ3g0Ump2MjAxSG9RTjd0dlYyd1FobUZkY2hXY3pkNE1xc0RR?=
+ =?utf-8?B?Qi9tVUZRVk5idWUvZVlFWlJTWG9xZmRMYUNvUnpPQWZaOHpDczFEYW1YTExl?=
+ =?utf-8?B?a2t0Mlc1TWh3dkFNa2JoSXBIaEJFSWZOWTZNMUc0b0xqS2E1cU4xQWVzUGk3?=
+ =?utf-8?B?RFJvN2tMdlJ1Mkhwdlloc2ZONmlwL0l3dUdLdXhhVzRCSlBpTzQxNld2UnBo?=
+ =?utf-8?B?WVhsOTArcTNvZ3BEZ1NlZ2RYOXNHS0dSYk9tcDEzc0dxelpHSVliOVdyWTNV?=
+ =?utf-8?B?b1ErTFp6Rzh5TUwxMitqelp1eWNsZ1EvcWVMYW9OMXlBREU4bWQ4bTFBVERv?=
+ =?utf-8?B?dm8vV0pWUVo1TUtCaStkNGRYT0xTZWgvN2hGMVg4TEJrbWJOTHlkUG1QdEJW?=
+ =?utf-8?B?NktHTkdadEU3SFQyT2dicE1pTGZnRk5rSFBubFU5dzJpdEkwY2hQazdEUEhX?=
+ =?utf-8?B?UGRoMk5nUXJIS3psNFM4RHlKRlFhUGtsM1AxOXBLdXFkNDhmbURtekRQdEU4?=
+ =?utf-8?B?Wm03aDB1T0VXZ2tERlZPSllSK0U1TVRmRVRqNHVENGlXbVJkbUt4QUptWGp0?=
+ =?utf-8?B?QTcyMFozN1JWZFArRmtPQkwrREJvWm94MzdqUlZ1MHkvS0NkOHc2Q0V2QitK?=
+ =?utf-8?B?UUVwQm1PZTV3VG10czFaL25ML2ptWVlDQlBPYS9lUW94Zk1QR29tYnF5UVNE?=
+ =?utf-8?B?SHRCNGNuSFhxaXp0QUxvZWFTaGl2eEVkR2NUNVRORWFVU3JCNjFNRUl3MitT?=
+ =?utf-8?B?ZGpCc2FkWDIyOVhsdnN4NDRYZkZwN0d6NXViWXRaTzJVRU1EdkVjMVBvYllH?=
+ =?utf-8?B?Qk9DcW9CNWhFSk02VXJ0aG5YZFJhWDlxc3dsMjVPQlVjTnBybktPbytYdGtD?=
+ =?utf-8?B?Mkw5aXZtY0Z5d1NJM3BLSUFaVTdpVVFCK2N5SURsUDd0TFJtTFlHWklkbFN1?=
+ =?utf-8?B?S1o1cFJwTHl0SDMyTFl6ZEdVQWJSU3MzblhBS3dCdUxLNlN2UkZpWXc5U3ds?=
+ =?utf-8?B?OVh4U1k3c3Y5NDM4Z2FjZ2E1T09FWENOWVVaUHIrRnZvT2ZYT0wyTmxMSEdD?=
+ =?utf-8?B?N1F1QnhHK0luL2c1TUN6OE82UHlkbmdFSkh5ejdmalBycldRaGdSMVdzSUF6?=
+ =?utf-8?B?SDBOb3h1NjFpbENDTUNlWUdhY1hwZGdTZHMxeFpEcFgwZ2RTamRxMXVaYWNX?=
+ =?utf-8?B?MDFIYmcvRTVxQnk2U2pLSDc0VmhmYTk3bWNtbCtobVhXWDFOMFpSV0c1bDVF?=
+ =?utf-8?B?Q09wcm5KVzdCaGo1TFBjTzd1R3VzcndNSTNQYWYycjRuc1pBaW1OZm93VFU5?=
+ =?utf-8?B?dUJPVzJoYnBuNjJiSWxWNDdOM1FyK0MxOEJxU09JWjlwRWZwVHFjekQwZU1K?=
+ =?utf-8?B?VmxkVldZT2RSK1Nwc2tKakgvdCtoTW9jWEk5cEh6ci83MGNQaFJiMUNTQXFi?=
+ =?utf-8?B?R3B6R201Z3ZvdXc1eWh4WmlCZ25KT0toSVo5T0Q4cTFDeUhrUVlNajcyUTRq?=
+ =?utf-8?B?OFU2cjQ1eU9qWlBKNU9RQnNEVU9XaTZMOERRN3RQaUlvS1ZFajMxZXhvaitR?=
+ =?utf-8?B?WjRkR05WeXdMQXpXMDRrUm9sZzZJQjYvUFJ0aUZhQUdPMmFCN0czbWZPZjlj?=
+ =?utf-8?B?YXdCeDFNSXlicGdNM0pVaUVvaTE5VFVHUTdCT2ozMjhRcDJnajJVUnpDaThu?=
+ =?utf-8?B?aFUwUWloSktBVm5YVWlXN1Q5Z2dXRVIvYk9CaHhWeEVMaUhOZ1FvQWNWSzdB?=
+ =?utf-8?B?V2FKQjNwVVdFNjBQUWJ5UmlCbXVodGNubzkySG0rQmZhYStTalkvd0VCcUlS?=
+ =?utf-8?Q?iY/BDTT+nxtqyvzFPvaq0zgvd?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 12 Jan 2026 11:26:43 +0530
-Message-ID: <DFMDO1DJJU1J.76LMCBNAY7I8@ti.com>
-CC: <ilias.apalodimas@linaro.org>, <malysagreg@gmail.com>,
- <sughosh.ganu@linaro.org>, <philip.molloy@analog.com>,
- <marek.vasut+renesas@mailbox.org>, <james.hilliard1@gmail.com>,
- <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] scripts/Makefile.xpl: Align filtered DTB to 8-byte
- within multidtb.fit
-From: Anshul Dalal <anshuld@ti.com>
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260109190026.58464-1-b-padhi@ti.com>
- <20260109190026.58464-2-b-padhi@ti.com>
-In-Reply-To: <20260109190026.58464-2-b-padhi@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C8:EE_|DM3PR10MB7925:EE_
-X-MS-Office365-Filtering-Correlation-Id: e49b89ae-be34-4599-d282-08de519f6fa2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013|34020700016|12100799066;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NGxCeEd0ZE9jMyt4YmlOYlpvNzR1ZjBWSWRDMGU4OElCSHhwRDN2MHJzZGFr?=
- =?utf-8?B?cjlsNXpZeURiWFJIMG5XZTdaUWY5UlpOOVpSY2ZwS3hTSVNybFZxd0Z0QUp5?=
- =?utf-8?B?ZkRhVGozOFl6VU5nTldNdmlKcXcvWUFGMWFHbGVLVFMxanloM2xoaEIremJU?=
- =?utf-8?B?c1VGNUtVRGFRRmY3M3ZYeE1JZWJGRmMwNE1Tc0JkRExpZ3VWNVhNaVUrb1JP?=
- =?utf-8?B?Vmx2ZWptT1pDUmF5M2FYR2hjR2p0QWlQcWYrRWYxZ0N3QU1LckFpc0VJdjc4?=
- =?utf-8?B?Q2hzOGt2aFRvMVJWendTcjRSOGZjRGVrMVdzdVUwdi85c0htSjFCcXc1RGRC?=
- =?utf-8?B?aHFac1NqbHBUTGNIcjkrMEFDRnZBUGlDOEo0aE5FY3p1K1UyNFlhMGV5ZUZq?=
- =?utf-8?B?aXlqanlZSFJBVVpZbGR1WS85VWJMUEZTUjhiemVrK2tTdzFxNStMS2VMaldC?=
- =?utf-8?B?TkhLeE1FWVUxMzN5WDExWjM2UXNQT2dvcHNxdzFrU3RoOWpQU3RBcUoxVE0v?=
- =?utf-8?B?ZjBKaVdodGJXV3lqaHh2aElsZE1La3c5d0E0WjZoUlpqSEVzeEQ0bEdoNk5z?=
- =?utf-8?B?NGd1UG95UzJ1TnM2Nmt2OUdXOXZTdG43VUQ3RnhHWS9RZzl2VmFrK0hxWlpo?=
- =?utf-8?B?NlIycXd4YzhjNDRXZFMwcHVIUlFpYkZiYkpoUzZnaEJFUWlhVU0wMUMwV0oy?=
- =?utf-8?B?MmpQS0Y5c09sYXRJdUl0b0JsNnIxdjN3MG01MXZqdlBFRXQzem4rUEd4NGNw?=
- =?utf-8?B?SWNpVVRzV3dIQnp5U2RNUG9qbFFDNVp5ZTZzSnhBYjNlMDd0YWJQSy92bUJG?=
- =?utf-8?B?Tk1QM0lGWUdpN2sraFhuRHZSZHJ4MUZUU0ZBbFI4UTh6YTEzOUtwd1pqZHNl?=
- =?utf-8?B?RVBEQnVWcWdqZ2lTeVoyamNDNWUyVm1uK2ZmcHg1S1dnSk0yaXdZV2V4ZjJy?=
- =?utf-8?B?ZDJrQzZvMVd5bnAyUDVvMnA0V3pkZTN0bkVBUThBaUVTb25yVmZDK2ZOeWJ3?=
- =?utf-8?B?bEFsbFVrUmMvQjQwYjlZakcxL2ZGRmdYOG1mSXFNa21ZSkdQSk9NcDVtcVR3?=
- =?utf-8?B?RDZxdDZiK3FaRW9rL3NjOG12L20yemdHMEg1WjVjcGtzeFZDQ2dtdmNMYTNa?=
- =?utf-8?B?WmV5Y0xibGd1Tko1TWdDeFhLUWxQcFE3eDdaS2NMeC9YRERSUXlRczN2Ykhl?=
- =?utf-8?B?bXh1bUhsVXNIVk82bTZST1NaNTlRSWFocXMzZXFzRGVuV21HMG45Skl2Y3B1?=
- =?utf-8?B?SXVzOG1acVR2MSs5eisxc2xJTmpHenE0TldVZzB5NU9TYzQrUmdOZE5pMmtw?=
- =?utf-8?B?NlY1NjhYSkR6THg2amU0K2VhZ0xLcUJEc3NMVWE2ejhTSDZ6TGhiTGR6eGJq?=
- =?utf-8?B?VitHdFZWb05MTXZHUjBCRUlFY2hVZGxnQXV4MWdmTWJocm1yaDBLZHprejFz?=
- =?utf-8?B?WlcwTW5TWGxxOHlGL2puTFQ5S1BvTjRIUnJRTjF1dEhHbnY2Z2NIcGc0UXVj?=
- =?utf-8?B?WE9IYmdKTFBIT0pGK2xCSVpEWUVjQ1RZQkJ2dTdnM0ZZTFhPcjRUby95MkJL?=
- =?utf-8?B?R2lpMTBiZmlPcGp0bE1tWEhUUUF4UzJwaExIcFVUeVMwemt1bmVDUGEyb1Jt?=
- =?utf-8?B?N2xMZGdJVmpMMXRucUFBUkF2SjZwQ3MzbjFsUjlaTG1GcEw5eHRFM092bUY4?=
- =?utf-8?B?VmxDQ0k5QlVPSUgwWjV5VGsrdTFVaVI5dHg2Qng2dkJ0Uk1QeFRESmhFdFJi?=
- =?utf-8?B?Q1dickQxNG00aXNFNWwwT1diYkxqSGVWQ2hGRFhDV3NlM2RRVWx1MUI4TmxE?=
- =?utf-8?B?aFZQMnd6c2JyUFhiOTNqM0RWNUgzTW93dmlER05zVXo1M1ovVFFGUzVRZy9Y?=
- =?utf-8?B?VnphNnBJSHdSTVgwWVNVc1lIQUNXMDBJeHpMK3NLVG9iWEtiS3NPS0xDZ0pv?=
- =?utf-8?B?VWh6a0dRczFEV3dCS3VsNGFmYlZEaVJ5dTlmcUNqMDJlS21SdERISTBzUjFh?=
- =?utf-8?B?dDI0a2YvNlNuWmQ3SXRGb3R0WjNtZWQ4cE82dG1iQ2NtMGVoYTJ6WEdQaFdo?=
- =?utf-8?B?WXpxVUY1SzllRFJYdlhuYW1aaG0vMHdaRExHTTg1MUhZVkwrNVJJcG90a2F3?=
- =?utf-8?Q?snIk=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(34020700016)(12100799066);
- DIR:OUT; SFP:1501; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 05:57:14.6425 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e49b89ae-be34-4599-d282-08de519f6fa2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C8.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR10MB7925
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: b126994f-aa03-4675-11b2-08de519fcf51
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jan 2026 05:59:55.2680 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Lp/nKcjdUHgmdBfdv5bdj9KS6uHyfzmZ6wL2dTwQxHI5QgiAY8MkjYYFOm/46ZXD97Y+Rd9GJkP2VFrdUukvY8wvKhTlsqCgXqv6ZJiGVTI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1274
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,53 +140,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat Jan 10, 2026 at 12:30 AM IST, Beleswar Padhi wrote:
-> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
-> packed inside the multidtb.fit FIT image. While the individual DTBs
-> and the FIT image start address are 8-byte aligned, the DTBs embedded
-> within the FIT image are not guaranteed to maintain 8-byte alignment.
->
-> This misalignment causes -FDT_ERR_ALIGNMENT failure in
-> setup_multi_dtb_fit() when locating the next available DTB within the
-> FIT blob and setting gd->fdt_blob, because of the recent libfdt
-> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
-> version v1.7.2-35-g52f07dcca47c")
-
-Is a fixes tag justified in this case? Technically the commit
-0535e46d55d7 did cause the regression[1].
-
-[1]: https://lore.kernel.org/u-boot/DFJ9947VLHEL.PCDIJCRU24BS@ti.com/
-
->
-> Add the -B 0x8 flag to mkimage to enforce 8-byte alignment for all DTB
-> entries within the multidtb FIT image.
->
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
->  scripts/Makefile.xpl | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-> index 5e65d7b2498..1183f5180ba 100644
-> --- a/scripts/Makefile.xpl
-> +++ b/scripts/Makefile.xpl
-> @@ -602,7 +602,7 @@ $(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, $(dt_di=
-r)/%, $$@) $(dir $(SHRUNK_A
->  targets +=3D $(SPL_OF_LIST_TARGETS)
-> =20
->  MKIMAGEFLAGS_$(SPL_BIN).multidtb.fit =3D -f auto -A $(ARCH) -T firmware =
--C none -O u-boot \
-> -	-n "Multi DTB fit image for $(SPL_BIN)" -E \
-> +	-n "Multi DTB fit image for $(SPL_BIN)" -B 0x8 -E \
-
-The patch looks alright to me though I wonder if as a next step we
-should put the logic to ensure device-tree alignment directly into
-mkimage since it already knows which blob is the device-tree (the one
-passed with -b option)?
-
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
-
->  	$(patsubst %,-b %,$(SHRUNK_ARCH_DTB))
-> =20
->  $(obj)/$(SPL_BIN).multidtb.fit: /dev/null $(SHRUNK_ARCH_DTB) FORCE
-
+PiBPbiAwOS4wMS4yNiAyMzoxNywgUXVlbnRpbiBTY2h1bHogd3JvdGU6IA0KPiBIaSBIYWwsDQo+
+IA0KPiBZb3VyIG1haWwgZGlkbid0IG1ha2UgaXQgdG8gdGhlIG1haWxpbmcgbGlzdC4gSXQgZG9l
+c24ndCBhcHBlYXIgb24gdGhlIGFyY2hpdmUgYXQNCj4gaHR0cHM6Ly9saXN0cy5kZW54LmRlL3Bp
+cGVybWFpbC91LWJvb3QvMjAyNi1KYW51YXJ5L3RocmVhZC5odG1sIGFuZCB0aGUNCj4gbW9kZXJh
+dG9ycyBvZiB0aGUgbWFpbGluZyBsaXN0IGNhbm5vdCBmaW5kIHlvdXIgbWFpbCBhbnl3aGVyZSBp
+biB0aGUgc3lzdGVtDQo+IChpbiBzcGFtcyBvciBmaWx0ZXJlZCBtYWlscykuDQo+IA0KPiBDYW4g
+eW91IGNvbnNpZGVyIHN1YnNjcmliaW5nIHRvIHRoZSBsaXN0IChoZXJlIGh0dHBzOi8vbGlzdHMu
+ZGVueC5kZS9saXN0aW5mby91LQ0KPiBib290LCBTdWJzY3JpYmluZyB0byBVLUJvb3QpLiBZb3Ug
+Y2FuIGRpc2FibGUgcmVjZWl2aW5nIGFsbCBtYWlscyBpbiB0aGUgT3B0aW9ucw0KPiAoTWFpbCBk
+ZWxpdmVyeTogRGlzYWJsZWQpIGlmIHlvdSBkb24ndCB3YW50IHRvIHJlY2VpdmUgYWxsIG1haWxz
+ICh3aGljaCBJDQo+IHVuZGVyc3RhbmQgOikgKS4NCj4gDQo+IENhbiB5b3UgcGxlYXNlIHJlc2Vu
+ZCB5b3VyIG1haWwgb25jZSB0aGF0IGlzIGRvbmUgc28gaXQgbWFrZXMgaXQgdG8gdGhlIG1haWxp
+bmcNCj4gbGlzdCBhcmNoaXZlIGFuZCBJIGNhbiBwb2ludCBhdCB0aGlzIGluIHRoZSBjb21taXQg
+bG9nIGZvciB0aGUgcGF0Y2ggZml4aW5nIHRoZQ0KPiBsaWNlbnNlPyBBbHRlcm5hdGl2ZWx5LCB5
+b3UgY2FuIGp1c3Qgc2VuZCB0aGUgcGF0Y2ggZml4aW5nIHRoZSBsaWNlbnNlIHlvdXJzZWxmDQo+
+IChidXQgYWdhaW4sIGl0J2xsIG5lZWQgdG8gbWFrZSBpdCB0byB0aGUgbWFpbGluZyBsaXN0IDop
+ICkuDQoNCkkgc3Vic2NyaWJlZCB0byB0aGUgbGlzdCBhbmQgc2VudCBhIHBhdGNoIFsxXSB0byBm
+aXggaXQuIFRoYW5rIHlvdSBmb3IgcmVwb3J0aW5nIHRoaXMgaXNzdWUuDQoNClsxXSBodHRwczov
+L2xvcmUua2VybmVsLm9yZy9hbGwvMjAyNjAxMTIwMjM5NDguNDYwMDgtMS1oYWwuZmVuZ0BzdGFy
+Zml2ZXRlY2guY29tLw0KDQpCZXN0IHJlZ2FyZHMsDQpIYWwNCg0KPiANCj4gT24gMS85LzI2IDc6
+MTEgQU0sIEhhbCBGZW5nIHdyb3RlOg0KPiA+PiBPbiAwOC4wMS4yNiAyMzo1OSwgUXVlbnRpbiBT
+Y2h1bHogd3JvdGU6DQo+ID4+IE9uIDEvOC8yNiA0OjQ3IFBNLCBRdWVudGluIFNjaHVseiB3cm90
+ZToNCj4gPj4+IEhpIE9saXZlciwNCj4gPj4+DQo+ID4+PiBPbiAxMi8xOS8yNSA0OjUxIFBNLCBv
+bGl2ZXIgRmVuZHQgd3JvdGU6DQo+ID4+Pj4gW1lvdSBkb24ndCBvZnRlbiBnZXQgZW1haWwgZnJv
+bSBvZmVuZHRAZ29vZ2xlbWFpbC5jb20uIExlYXJuIHdoeQ0KPiA+Pj4+IHRoaXMgaXMgaW1wb3J0
+YW50IGF0IGh0dHBzOi8vYWthLm1zL0xlYXJuQWJvdXRTZW5kZXJJZGVudGlmaWNhdGlvbg0KPiA+
+Pj4+IF0NCj4gPj4+Pg0KPiA+Pj4+IEhpIGFsbCwNCj4gPj4+Pg0KPiA+Pj4+IEkgcmVjZW50bHkg
+ZGlkIGEgbGljZW5zZSBhbmFseXNpcyBvZiB1LWJvb3QgYW4gSSBjYW1lIGFjcm9zcyBzb21lDQo+
+ID4+Pj4gdW5jbGVhciBsaWNlbnNlIGluZm9ybWF0aW9uIGluIGZpbGVzLiBJIGRvIG5vdCBrbm93
+IHdoZXRoZXIgdGhpcyBpcw0KPiA+Pj4+IHRoZSByaWdodCBwbGFjZSB0byBwdXQgbXkgcG9pbnRz
+LCBuZXZlcnRoZWxlc3MgSSB3YW50IHRvIHNoYXJlIG15DQo+ID4+Pj4gZmluZGluZ3MuDQo+ID4+
+Pj4gMS4gdGhlIGZpbGUgaHR0cHM6Ly9ldXIwMi5zYWZlbGlua3MucHJvdGVjdGlvbi5vdXRsb29r
+LmNvbS8/DQo+ID4+Pj4gdXJsPWh0dHBzJTNBJTJGJTJGZ2l0aHViLmNvbSUyRnUtYm9vdCUyRnUt
+DQo+ID4+Pj4gYm9vdCUyRmJsb2IlMkZtYXN0ZXIlMkZkcml2ZXJzJTJGbW1jJTJGc2RoY2ktDQo+
+ID4+Pj4NCj4gPj4NCj4gY2FkZW5jZTYuYyZkYXRhPTA1JTdDMDIlN0NxdWVudGluLnNjaHVseiU0
+MGNoZXJyeS5kZSU3Q2M2NWQ1ZWQ3Mg0KPiA+PiBhYzk0Zg0KPiA+Pj4+DQo+ID4+DQo+IDNhZDdi
+OTA4ZGU0ZWNkNjExYyU3QzVlMGUxYjUyMjFiNTRlN2I4M2JiNTE0ZWM0NjA2NzdlJTdDMCU3DQo+
+ID4+IEMwJTdDNjM5MDMNCj4gPj4+Pg0KPiA+Pg0KPiA0ODQxMTkzMjc2NDkxJTdDVW5rbm93biU3
+Q1RXRnBiR1pzYjNkOGV5SkZiWEIwZVUxaGNHa2lPblJ5DQo+ID4+IGRXVXNJbFlpT2lJDQo+ID4+
+Pj4NCj4gPj4NCj4gd0xqQXVNREF3TUNJc0lsQWlPaUpYYVc0ek1pSXNJa0ZPSWpvaVRXRnBiQ0lz
+SWxkVUlqb3lmUSUzRCUzRCU3Qw0KPiA+PiAwJTdDJQ0KPiA+Pj4+DQo+ID4+DQo+IDdDJTdDJnNk
+YXRhPXFLZ09HYWxMTVVSYWltY1ZyQ3R4Vm53TjBFRWxkd1RHQjFJMTVNN1Jkc1UlM0QmDQo+ID4+
+IHJlc2VydmVkPTANCj4gPj4+PiBjb250YWlucyB0aGUgZm9sbG93aW5nIGluZm9ybWF0aW9uIFNQ
+RFgtTGljZW5zZS1JZGVudGlmaWVyOg0KPiA+Pj4+IEdQTC0yLjAtb3ItcGxhdGZvcm1fZHJpdmVy
+IHdoaWNoIGlzIG5vdCBhIHZhbGlkIGxpY2Vuc2UgaWRlbnRpZmllciwNCj4gPj4+PiBJIHRoaW5r
+IEdQTC0yLjAtb3ItbGF0ZXIgaXMgbWVhbnQgaGVyZS4NCj4gPj4+Pg0KPiA+Pj4NCj4gPj4+ICtD
+YyBAS3VhbiBMaW0gTGVlLCBAQWxleCBTb28sIEBXZWkgTGlhbmcgTGltIHdobyBjb250cmlidXRl
+ZCB0aGUNCj4gPj4+ICtkcml2ZXIsDQo+ID4+PiB0aGV5IHNob3VsZCBiZSBhYmxlIHRvIGFuc3dl
+ciB3aGF0IHRoZSBpbnRlbmRlZCBsaWNlbnNlIHdhcyAoSQ0KPiA+Pj4gYXNzdW1lIHRoZSBzYW1l
+IGFzIHlvdSkuDQo+ID4+Pg0KPiA+Pg0KPiA+PiBNYWlscyBhcmUgYm91bmNpbmcuDQo+ID4+DQo+
+ID4+ICtDYyBASGFsIEZlbmcsIEBNaW5kYSBDaGVuIGZyb20gdGhlIHNhbWUgY29tcGFueS4NCj4g
+Pg0KPiA+IEl0J3MgT0sgdG8gY2hhbmdlIHRoZSBsaWNlbnNlIHRvDQo+ID4NCj4gPiBTUERYLUxp
+Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCsNCj4gPg0KPiA+IEtlZXAgdGhlIHNhbWUgbGljZW5z
+ZSBhcyBkcml2ZXJzL21tYy9zZGhjaS1jYWRlbmNlLmggd2hpY2ggd2FzIGFkZGVkDQo+ID4gaW4g
+dGhlIHNhbWUgY29tbWl0IGZlMTFhYTBiOGNhMy4NCj4gPg0KPiA+IEJlc3QgcmVnYXJkcywNCj4g
+PiBIYWwNCg0K
