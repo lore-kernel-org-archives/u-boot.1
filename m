@@ -4,95 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7E3C9EC94
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:56:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85140C9EC8D
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:56:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9FFD838A5;
-	Mon, 12 Jan 2026 15:56:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 065EA8393F;
+	Mon, 12 Jan 2026 15:56:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RsZpT3Gk";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="X0ModQVJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC5E48391B; Mon, 12 Jan 2026 15:56:05 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5943D83936; Mon, 12 Jan 2026 15:56:24 +0100 (CET)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56F5C8388D
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:56:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 163208388D
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:56:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b87108066c3so176939466b.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:56:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768229763; x=1768834563; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+ho3JWd1qBDxwZqqi09OA06jZCfVGdrCUniSS/pVfdQ=;
- b=RsZpT3GkgYtRxDBSrb3ocJK8gedfHlRg+sqH23PSe2a5Zjn6ZHjV0W0YK08JdYeQgk
- 0F+wl6HvTJAyKHcgDS6M99KNNRG7nHJr5C0u2zzJGNJe373IvYtpyVIIfHdX43MgE843
- LHNxLT5Yy4fyA0qUKBoufOx2wBJE4JLP/8JDCcIOQG0zFHvjwanJiAy4XuT5l1dX8XHE
- WOUF84X1WLtY1FSn9vEHT3U/YrVSq9K27FF0hgHapL/9zm8zmqXmRSXnIOipKuJXJBxX
- SacJjkRyX6SoI4RkLFo17zNnhLdH7ZNnDwOkseAH/mxYuyXcZJeYqdbCqlaEJ6Lt27mh
- 70Tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768229763; x=1768834563;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+ho3JWd1qBDxwZqqi09OA06jZCfVGdrCUniSS/pVfdQ=;
- b=RVEmiqY6En4eeFtxdVgbxz4W5R71k4EdrfuP9UBTX1aJNKEQgCwItqypR1ch63geN0
- Wy2ze/7o+skS5RED1DVViinPszDWDcoqO21cnxTv2jNFtfvmoITRCGqz4DNWh54rTBV2
- EbnGGKrDa3K8BLmRP9hrl06ELTWwWQYH9xOQpaLc2pDP1GLO2bsLVG7EBW0F81as95cA
- +R8i3wddE97uHhzcl4LmyNGeOGvr7u/nUWjr7AmAJ6ZpG8P7tiQiirXfC2uZL2uu4SSJ
- g3fMZBZq2rJewADUqQzKa6jxYZBP3FeHNa8Z1Iqs3cx8rMiXnkzHiklj2GqjsiTU9WHS
- gTYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAp1FB5YT6Z/Pk5uAkIssDrcVu9bubrVzUT2gGSs4HitiaUyMevNlOy9l1BnVhObz/r7IX540=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEbfwnwZjVmFgKX8+RulzWHB/3Z1U7AqnaWkS6Jp79Ohvn9qej
- 7NRuWswSgvVLrpGKU/GenTNg9L2nQtuwselD96WnzUU4Sk4Y9k2VZwXBDZ5FiDqYOKE=
-X-Gm-Gg: AY/fxX5kFdeNgz068xVTsok2mB1H6L4IOI0HwFB90BkgI+jMYXIz4VhVU+3aAQ/QzxN
- jwkXtSXjiQfGBs88/uvA2K5TLKVkghg5lk0WLE9qZ7X+can4z3jfvd1FhLDI7sfKX8gFAXBTPwu
- xH0oDlQSrsxu6EqWq9ay7ZteLioEslXYMrO3Oku6tvvMNLcXbssizLWfE358SvWAmLGNPHKtyzH
- qXsxhd/IG0eyjuA+yGJHtv22XLI0GACin2RZcvNR5jAhcPuIjSJaSO5ahV7kk3J0tiuVDtIHvXk
- JA9Xk0zUT2a16x5oY4318nX7VzBEBVOQLIFsqmI3rTZ3lHNxuQE3v94awjOgtNO8ZQ+TRzl9n/K
- TNIOz30P+fC567kC126+e9nqIKOq8UwhI3asJ+D+LXziaYopXRbXflurbTxOCJR0l+bp0ZZ0W2A
- kmkhRI3+x5rN8WlZiokn9/RgQnvnloX2lhRE/uPdVLmuXq9jezjC4=
-X-Google-Smtp-Source: AGHT+IG0M1wxjkmIzAirfu/aSAX/WWAa0KXYbc6wxJYer8dxtuIrxGgH57tQvPfbK/MJClcfZap2sw==
-X-Received: by 2002:a17:906:9fca:b0:b87:2c3d:ef08 with SMTP id
- a640c23a62f3a-b872c3e04e0mr167627266b.33.1768229762687; 
- Mon, 12 Jan 2026 06:56:02 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a27cc6bsm1967918566b.23.2026.01.12.06.56.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Jan 2026 06:56:02 -0800 (PST)
-Message-ID: <80f0a67d-689a-4865-a792-9f7967ab740f@linaro.org>
-Date: Mon, 12 Jan 2026 15:56:01 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=r2pX/0I9e/Z5rJnll6rHYDYSBi5ys02Fow8Jc5DrcAcNDfuwlS4s+6wSWTpQYuFNrzAqc7pQpoPzge1o8VSattNrPm7157J2QUdpzDAYX1n67Svk4ziE9P3vp2j95MRbhH73NVROJwSn0molWBCyXhiZXzKe9ekCSsCLCgW16+3abtgIHRwRoAWToCHMN5Jt/1Y2gzAUnNPabLc8jA82s9bt10uDhUvtLuHul+BgdVEMu37jUnOVL9rvap1uUetxs4feQ6Sbfj+DNlKGqfyqda1bXbFQaELvUhaMLZvtvPvEhVirZmlHghnafbnrDBv4u6M2bR/rXziP9l4qApXZgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GGFWDnyqGjc309GExZ18IkfajpVK2t8tz3vqBMJG8vg=;
+ b=NKO9gaakxF1hrgL+EnkPfNzfOg79FucOBwwgC5yAgz5lmdNL8XjVdKSOZL6o73M2K1o579HcOZqXGAWPYqqwTdFPGN1Iz5duPmrodS9hrhNcM2zgILWtrYzKQc3BCvyHWDaeL7D2vQ3YGjAipV4kDqArkbU8MuHGvpsqBXEIR1wuIlh2U+kLq6twIc7H7cJbEciYkuGn+XgxeUFqaYxRZdg7E8EZwu/tL5E70AUtWcId+xmd8IVBFtu9Lc4jM/MnfdhPqzQ6E2kpzZJP922w+ak2rrAhU3ukfejPBq23VTcECUubzKeaxOuDaorIwvhrndUSQ/YQ7oiV+ejHMHHrtw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GGFWDnyqGjc309GExZ18IkfajpVK2t8tz3vqBMJG8vg=;
+ b=X0ModQVJE5K3Wd7kC/Iw7HSsE64WmBbQfku4uohy8X7to6S0om5W1eZDShGgzrkOcrHNZK1TewY8uq+kBx3I6KyzJnSMTrymBZ8mUNCK93S7BXQZ24qJbn7IykEpDhGJDbwMGvEmBzDUeL0caQJAr0IQWeaeO5DW85Dtxb/l/4o=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by VI2PR04MB10834.eurprd04.prod.outlook.com (2603:10a6:800:275::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.6; Mon, 12 Jan
+ 2026 14:56:18 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9499.005; Mon, 12 Jan 2026
+ 14:56:18 +0000
+Message-ID: <70c77be6-4284-45f7-a1d2-6b74b741847e@cherry.de>
+Date: Mon, 12 Jan 2026 15:56:08 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND v2 4/6] configs: ipq9574: Enable fastboot support
+Subject: Re: [PATCH] usb: gadget: fix vendor/product id for qcom
+To: Casey Connolly <casey.connolly@linaro.org>,
+ George Chan <gchan9527@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, Marek Vasut <marek.vasut@mailbox.org>,
+ u-boot@lists.denx.de
+References: <20260112144933.3992369-1-casey.connolly@linaro.org>
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@kernel.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: trini@konsulko.com, neil.armstrong@linaro.org, peng.fan@nxp.com,
- jh80.chung@samsung.com, lukma@denx.de, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, alexeymin@postmarketos.org, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
- <20251218061557.1999367-5-varadarajan.narayanan@oss.qualcomm.com>
- <aUVhRIWmfRHPnhRV@sumit-xelite>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aUVhRIWmfRHPnhRV@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260112144933.3992369-1-casey.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0390.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f7::15) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|VI2PR04MB10834:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0be5ec73-4327-4ee9-7336-08de51eabe04
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SDVaQkFsTjVidWJsaXNqaGx5MW14MjFJWjNvSU1CZnZkNHFCRlZLS2pLRzNV?=
+ =?utf-8?B?Ri91S1BnQldOUUEwakpURzl6cVVNT0JCRCtpckt6emNQem14MWVzZk5oMnB1?=
+ =?utf-8?B?VmJ5akdDRDA1TlZCNkRXN2lHS1lrMjE1dWNxUitGanM3dUUrTTVqbmN0aVdM?=
+ =?utf-8?B?U1pMUHNUakIwRVlXQkwwUll4Zmc4Vk9YQi8zaXlYbFBvR2FMT1pjM1YxeE5C?=
+ =?utf-8?B?TmpyRXZEV2VIS0NTLytRVTc3azlobERJN3dEQ1dZaU1GZC9FaGpnWUJMM0Ru?=
+ =?utf-8?B?ajdiUnVMcGsyVXR1MGxXR3k4aUIrNXhuaTY4N0p2Q1luSThQdVloMHFzK3Ni?=
+ =?utf-8?B?MVFycm1UcTcxazdiQjU1aXlLRDMyMDRYbjNrTWdzRkhHMk5kWEh6R1ZmNUFi?=
+ =?utf-8?B?ZjkzSGpRVGtPakFIWE5aY25EanRjRWd2LzVhczVsZjRCY1kzMGFqVWJ3dy9w?=
+ =?utf-8?B?Z3lrNlJaYlVhbFZoMEJMN0lrbzlaa3hVQnREcVBuVEcrRUpWa2pSNE0ycnJK?=
+ =?utf-8?B?TFN4VENXQWRld0pOaWJaa3prUTY0Q0IwLzd2S3BsRkV4T0wrZHFwTGNST29t?=
+ =?utf-8?B?VEVpckl2YjhqMG0vUWJvSEZNcVVMQ3FBT3RxU2VTRXNmeHY4aWN3S29iWDdj?=
+ =?utf-8?B?QmFnaDdIZlBaeWxYakFhQTZhSTNVemNaNkprS2ZKN1B4SkdPWloyVi8vVTJV?=
+ =?utf-8?B?SGFyeVlFeTA0b2phNXZaVDhHSGIyVFVnTHArTkFhNWJWVFlxUk1vZFZqRWNX?=
+ =?utf-8?B?OEVMVUt6dlM5bm1DbUFkZ2hTeXAwdmVINUhXWXNUSlZHUzhNK2NGNnBlNk5o?=
+ =?utf-8?B?S3hYQlRHNHlOSXhWUFZrSmxnaURxVVFYd3NjWENmUTRrYmZpY2JHaFNEK3Jm?=
+ =?utf-8?B?NjBOY3VvVGtTWUMzeFFiMDR5SEFNT1plKyt0dGdYbEJnemZjd2JaaWZPSm9P?=
+ =?utf-8?B?S28xeVNwUVROQmF3N1EwYW5ZSjJVVVZDQUZFK0lITFVQbW9lTDlMbkNtbXpt?=
+ =?utf-8?B?VElpRXp3M05nWlBoNnlnRS9XUUQ0cGRaUTE4NWNmcHdwMVhpQ29wR09paUlq?=
+ =?utf-8?B?UzRVU25lSm9pYUc5UGNLemEybk1iM0s4V3VGVlNYdzB3VTYwci81ZUJPcTBH?=
+ =?utf-8?B?TzJiSkNPa2lIUTZCblhHSWZPeWVUVkdWTitXZlNydlVtemQ2SDMzVVk5Mmpr?=
+ =?utf-8?B?dThqUEJGSXVrcE8vUldyZGdhWUVQQkRYdzdrdzkza0NwNWhGaWhOdnArL3F1?=
+ =?utf-8?B?MW5Fc2xxc3ptRVQrb2IvMzhCZHBZeVBlclJWekRKODJPYzRDZ3ExRFd6bUZk?=
+ =?utf-8?B?NUVFRnFrditvVzNXYitNSThHd0MwKzg1cUpoY3JXTDFUR3VqQmw0Rk54OElk?=
+ =?utf-8?B?N0RJTjJxTzFuaEczTE90dEdDeFRXSm5EeXNEVWZVeFUvdDBVZURrS3R0dDFn?=
+ =?utf-8?B?TFZFTStIZmlOdy90eHZORmdwVFdWTE90MnZTV3NCcXo4N1dRSDZ3TkdSVllM?=
+ =?utf-8?B?bTFTTlk3ekY0MFhVdXkwSjRxdlltS1ZLS2Z4ck5KcGZxSWs3bEpFVTUzbmN1?=
+ =?utf-8?B?Q3lOVTNoM0IvOFIrd3YrdGM5OStWS29zODM1MEsyZk9HVEQ4RXNLSzljLzcr?=
+ =?utf-8?B?WGFDSFJYVnpCSExISjJoQ0Y0ekxxL3paclkyRHFVVEVDZ2hlbVZDekRQVVlC?=
+ =?utf-8?B?dHRUbEdtRk1OemlHSEcyV3lvSFNzS3dHVTgrcEhXVjlZYkdyTHJURSswSXgy?=
+ =?utf-8?B?cEcxN1hPZkcvdWNCb1pxRnBIOUVXcVFMRkVJNzNDcWpnZWpEYzlkVDkyTzJO?=
+ =?utf-8?B?U0hTQmZCNlpQZGtOKzdEeExETU5sbjRVRnNPRjZNdzJaUVE0UWUyUFZOTmEr?=
+ =?utf-8?B?aG9yZmZCY0V3dlp3eXQwYkZsdjFteFZUdWhlQ0sxaHZwVVpuSlNtK0hsalpQ?=
+ =?utf-8?Q?jmSAxnwbbaaO+iLZb1prAFXZLgNDjakJ?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d01FSm9ndTdPUlBXaDRkdlo2VklEc1BOTjRpZC9PM2ZGZzRYNTBJODVka0hZ?=
+ =?utf-8?B?WnY3MG9tcEZRRTE1UmEzdE1lODYxS3NnazRKcGZkanI2VmdjOXo2RzQrVmFU?=
+ =?utf-8?B?OFRzZmdQdDVGK3JpYUJ2cjRHdnpuTXRnclpaK3o5UktkZzVycDVpdWYwK3NX?=
+ =?utf-8?B?Yy9KSFpLVytDWWtUdG4xYTdRZmFtL0h3NDVtRmpRMzFJQkxNbVRGL1JVWVdl?=
+ =?utf-8?B?Q3pxakVpTmovL0VUN2luZzYzakN6SW1PZ1E3b25JckphUE9SZlF3QnZRSEZt?=
+ =?utf-8?B?NGhpTC9YTzNGTm4xZWxmSzhLcCt1K2h6cm5nbTFlYU91dVgxT3F4MVU2bnpG?=
+ =?utf-8?B?MW5sWEh1aUh1bUJEYTJuN2w5aENiLzg3dnNNdUkyZW5CMHFZeG5OZFFlUlB3?=
+ =?utf-8?B?SUpJMzVITnlNT09JWVRYODFoU3NyQWN4aXU0L0ticHQ1NnhhTHVMaGErSWYw?=
+ =?utf-8?B?dGRlcks5aGlnY0hoVXBHdkF1d3lIa1dVZ211S1NuaDV6NnJ5WnlnWkdPUmFT?=
+ =?utf-8?B?WGVFblNIZUVodGJpK3d0cU9WTDdZTG0yUHBWczRZeUM1cDRMWlA5L3pDT1Fk?=
+ =?utf-8?B?YTY5SG1NcnFiTjhiRGVSWEZsS0I4SXF2ampIOFVKOHN2MDlWZ2RucUttZ1Ft?=
+ =?utf-8?B?TzJtbHd6UEcxNTJCRG9ubXd4eUduSFJOdGhHTG9pL3pOOUo2NlppVTVON1NC?=
+ =?utf-8?B?YnRQSUVmdmFZc24zWE44UmJSTDZQQThXQzF0K09LWk55K2M2Z0VVM3VFaHIv?=
+ =?utf-8?B?OEY4cGZucTlmaktDNWlkYUphMGZMelhoaWNkM0xzT2pxNHRwdnlyclJLK1Fr?=
+ =?utf-8?B?cG5PT3BEckw3V3YzazQ1ODJnU3ZvTWg0cnJEemxoVGVDeldnRzhJZ3VJR0I5?=
+ =?utf-8?B?Y0FDYjFOYWQ3NWxTc1FwZjBzYUpiZkUxTklxcGoyT2pPcXlvWGtMTU5BVDc5?=
+ =?utf-8?B?d1Ivd2xobUhxWlpkTjZac250QlBHRGRVVk5zUE5OWk81cDRHMEZnL2R3RFh1?=
+ =?utf-8?B?Yjl4emFLd0lKTDd4d1ZSOVJSZU9XbEdoaTBYbGhxUWJZa0EyM3REUXpSQWVS?=
+ =?utf-8?B?aVhobHpFR2xUYUR4U0FnaXJQbHM3Nk5qUUxsdUxBZjVLU0o5eDBuR0M1OUc3?=
+ =?utf-8?B?L2kzL3V4UldMZDFUcHkwZVNMdy9MWnh2Ry9FSHhqYUtQbFRESHdlNlRaZ2p6?=
+ =?utf-8?B?bVE4akV3NjRXV3ZrQTkzNCs4UXY0cU55aFRhU1orQjM2VlJxSGdJZGdaTE1p?=
+ =?utf-8?B?a1RpNnpJQ2hrZjlBYW5vQ2lCWWgyZ3JpdHhXYTBQOGtHSE5PM05CMmtiam1Z?=
+ =?utf-8?B?RmhEMEJvVUhpYkNOVFl1NlpvQUpsOHBsUUJlY29aMXloTHZmTnJBRGNVcWQ0?=
+ =?utf-8?B?OEhzZnBDeWJXZXdqcXlNaElUZVdXMTFtZnhNeTVCOFBuNnhJRml4Q1owaFR0?=
+ =?utf-8?B?amJkSWxrdFY2dmxuSDZVajRDQ2JZaGJyMGQ0L0pibnV2WjZMYzNKa1RlenpX?=
+ =?utf-8?B?YUxYeXhoVmNBUzMwWlhlRzJjOUYwVzU4ZVhmREhSdytEM2plYWxwREdxdnlM?=
+ =?utf-8?B?cFVWemZHNWV5Z3pQWHVvQlJ6UFB4V1gxclhTSXFydHlqZ3liSTdjRmE5bUdp?=
+ =?utf-8?B?bG9zajFpdXRYeWV3Mms2WTlCUGRlZElaeXRCd2FjZ0JqMWgyQ1JuelpoYnZ3?=
+ =?utf-8?B?bmhWQUtXaEVvaExGYk1OMkNLQ0hFaXRwMEI3czRHVlArT1YzalpsV2g0VVFP?=
+ =?utf-8?B?SzY1UWJwRVk5ZWQ2MFhEcmRNK2VRUVM1T0sxMnRGY2hJeWVYTHE0TG5YZXhp?=
+ =?utf-8?B?S3doS2U3QVU0VytSbjNvVjZIaDBNMS9DUEdoRkhxaytsaEFQWjlpRENaZjd5?=
+ =?utf-8?B?ZFJsazVxRGpZY044VllHL09IL2t3U0pjZzJvSkNJYXRnR1p4WWRvTXlOclNm?=
+ =?utf-8?B?UDNzSitHdkRzTHNzQ2tkT2h4eDJZMVJsekI3a2FGWkR3UUlDN2RDSFdkcTRY?=
+ =?utf-8?B?U3hnYSt6SytVVDlJS3lJYVJCYUxueUFuckFQTXpCa0JwWU9rdCttV3Z6QW9j?=
+ =?utf-8?B?M0NUSnlBQU1oQ2tLU0Z2REpqeFVVdHE5dDhmRGg1VzQxVktHYVZmSGJyc3Uw?=
+ =?utf-8?B?NEx4RkJpVzFvdEhwSk1YNVpJWURvalVsdHNoL0RQRGhiNm9GRjdIaU5JRVYv?=
+ =?utf-8?B?RDdPdXZ1Y2tWNi9sYWJrOUR3akNucmJxVGlGVy9wcmVKT2VXTU4vbDhqRUVF?=
+ =?utf-8?B?SSt2VTZ6aUNvUVg5YWJNOFU4WUVkb3FNVGJCc1ZsbnRpTk91WGJHQUJpOVN2?=
+ =?utf-8?B?MC9mSXJiRDBzeXhqNW8ya21WZnpqckEwbHFSSTdIOUw1cnZlUFQ2UT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0be5ec73-4327-4ee9-7336-08de51eabe04
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 14:56:18.6285 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wEA1OJ7PGSDu14XSW233er/AZFpJPbgdD8i4TLbydIYQCKyDoL0r1nodTmGnXYG+qzdTLTuQwpNU4QsxkqaCz/AEaAMLQ+/Ka0fQEUAr70w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10834
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,77 +181,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Casey,
 
+On 1/12/26 3:49 PM, Casey Connolly wrote:
+> Due to a typo the defaults for Qualcomm were never actually
+> set, this got missed in the original patch (maybe time to rename
+> ARCH_SNAPDRAGON...).
+> 
+> Fixes: 934647d49c61 ("usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM")
 
-On 19/12/2025 15:29, Sumit Garg wrote:
-> On Thu, Dec 18, 2025 at 11:45:55AM +0530, Varadarajan Narayanan wrote:
->> Enable relevant configs like USB PHY, gadget, fastboot,
->> fastboot MMC support etc. to enable fastboot flashing
->> of IPQ9574 based boards.
->>
->> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
->> ---
->>  configs/qcom_ipq9574_mmc_defconfig | 22 +++++++++++++++++++++-
->>  1 file changed, 21 insertions(+), 1 deletion(-)
->>
->> diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
->> index 6592d9de39d..ac534738994 100644
->> --- a/configs/qcom_ipq9574_mmc_defconfig
->> +++ b/configs/qcom_ipq9574_mmc_defconfig
->> @@ -45,7 +45,7 @@ CONFIG_DWC_ETH_QOS=y
->>  CONFIG_DWC_ETH_QOS_QCOM=y
->>  CONFIG_RGMII=y
->>  CONFIG_PHY=y
->> -CONFIG_PHY_QCOM_QMP_UFS=y
-> 
-> Any reason to drop this?
-> 
->> +CONFIG_PHY_QCOM_QMP_USB=y
->>  CONFIG_PHY_QCOM_QUSB2=y
->>  CONFIG_PINCTRL=y
->>  CONFIG_PINCONF=y
->> @@ -54,3 +54,23 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
->>  CONFIG_MSM_SERIAL=y
->>  CONFIG_MSM_GENI_SERIAL=y
->>  CONFIG_SOC_QCOM=y
->> +CONFIG_USB=y
->> +CONFIG_USB_GADGET=y
->> +CONFIG_DM_USB_GADGET=y
->> +CONFIG_CMD_USB=y
->> +CONFIG_USB_DWC3=y
->> +CONFIG_USB_DWC3_GADGET=y
->> +CONFIG_MISC=y
->> +CONFIG_USB_DWC3_GENERIC=y
->> +CONFIG_USB_FUNCTION_FASTBOOT=y
->> +CONFIG_FASTBOOT=y
->> +CONFIG_CMD_FASTBOOT=y
->> +CONFIG_FASTBOOT_BUF_ADDR=y
->> +CONFIG_FASTBOOT_BUF_SIZE=y
->> +CONFIG_FASTBOOT_FLASH=y
->> +CONFIG_FASTBOOT_FLASH_MMC=y
->> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-> 
->> +CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
->> +CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
-> 
-> You should rather try to update following for fastboot:
-> 
-> $ git grep -nr ARCH_QCOM drivers/usb/gadget/Kconfig
-> drivers/usb/gadget/Kconfig:64:  default 0x18d1 if ARCH_QCOM
-> drivers/usb/gadget/Kconfig:92:  default 0x4ee0 if ARCH_QCOM
+A patch already has been sent (and is assigned to you on patchwork 
+apparently), see https://lore.kernel.org/u-boot/87wm1wflcr.fsf@kernel.org/
 
-This should be fixed by
-https://lore.kernel.org/u-boot/20260112144933.3992369-1-casey.connolly@linaro.org/>
-
->> +CONFIG_FASTBOOT_BUF_ADDR=0x50000000
->> +CONFIG_FASTBOOT_BUF_SIZE=0x4000000
-> 
-> -Sumit
-> 
->> -- 
->> 2.34.1
->>
-
--- 
-// Casey (she/her)
-
+Cheers,
+Quentin
