@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98B6DC9EC8B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:09:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1395BC9EC88
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:10:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 779018391B;
+	by phobos.denx.de (Postfix) with ESMTP id B9F648393F;
 	Mon, 12 Jan 2026 14:09:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=streamunlimited.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=streamunlimited.com header.i=@streamunlimited.com header.b="gXs7XXaz";
+	dkim=pass (1024-bit key; unprotected) header.d=streamunlimited.com header.i=@streamunlimited.com header.b="07GYMWe2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B679683CB9; Mon, 12 Jan 2026 09:39:08 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id C110483CF5; Mon, 12 Jan 2026 10:09:53 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 702BA83C14
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 09:39:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90E8883B7E
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:09:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=streamunlimited.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peter.suti@streamunlimited.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-42fb5810d39so3125178f8f.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 00:39:05 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-47a95efd2ceso54177055e9.2
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:09:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=streamunlimited.com; s=google; t=1768207145; x=1768811945; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aGaOr0vQuS+oz/mLv1dbEORvswycSFN9TX0OX+KFO5Y=;
- b=gXs7XXazvk/e+uNAE/eTX7TVzcQnfebIOz7c15gNAUzzqb0RuC/ZBzvQpRze3WTQ5O
- lzd9up6DZ8gw85gI0o8xnvJXyuuYS0qZ12dHq+p7nLdLcZHX0+jtQ0Acyvht+duRe3E6
- Od+D+T92g5RbOTlZiISRdauL05mMEgyj1VdEM=
+ d=streamunlimited.com; s=google; t=1768208991; x=1768813791; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9E+aei2byu7vyJaQe1I+/t09I89Wa7qdwsP8ryKXWOU=;
+ b=07GYMWe2oUWcanNympAPbZWsbrgjGdyX8VxKFaVs1hrnJ/s5xreSfogMLMZlfXB9v6
+ FIJ72W0quls+JA4zVhz8OtRwFd+FwIz/WYPZ8eTSQHMShzpWLSKBWavg4jfbq8NEybOz
+ wvIuvwkXrG7I7SrwErR0igFuumYIpzpD6fvmA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768207145; x=1768811945;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aGaOr0vQuS+oz/mLv1dbEORvswycSFN9TX0OX+KFO5Y=;
- b=AXjhul+5UTGJTSWwcSczZw7L+Zft9hWidClezupKNAPZgoWSmfwUKEhj/saRIy+S2p
- uB9W10yRvwDwN+icuumIe2om+KJh2OZO/CvDPVk1KRvFQh0AdxStnQXg6qYMycq5gMEa
- K2dywJ5nwt9DeCHracjAq1X2wdrQsGKl/Za4kn2j2+6bNV7RfPnsRzZQm9sOcoWN2xiB
- 69FcN74Qetnux+CYMkOoccev9tgrQ6jWRFR5S3Chr5jguNT7O2eG9fetru33ZEaRkx4l
- OgSbCitevz9qc1N30Zr7Xx6LGCZqwt7etaVkngmfbOliFBFSQMrjkj71PoET/scFRVAo
- nMeg==
-X-Gm-Message-State: AOJu0YzhUM2cHkYR010jV6oN+W3vlAz6S0QEx6XBCw9fCiKfXGSiQsKe
- UbVcUejNgY5SusfAPTKM2bqO3nbiXWH492AAn3HLUujxYM013etyBIRI7bnpIM0rD80=
-X-Gm-Gg: AY/fxX6scfz4JOTbh9YxYvM9n4RXJknnM8OBs6094mGoaJEAMtYx3bp6TvBckzd0mFD
- 1sgVACEcdKnWMAYEbzBMNUmRee2moF6xzrrcfFEZuLlLH27EGjfe06gNn7uC75MtrcNMOCy/RRX
- PtIPfjLoP9dJLPRX3eu7+fY6JEOvUpwzhaohyLWHzdgJ3XMrXdvCAcVPNqTGbja3Pu2Dt3mUoUo
- DGIR33ZwHGtELoESfhDHCf6rVAQfPstQsMzyMm4IP+k2ewaLJhTklQ8VieV1+vh/LGDAdck/M64
- k7ax/DHrB0dtYSvmqX2glUB7Fl3H5rw8fJRucIj9bnMDiNy3lY03i0ReiJrDIZdBuP0uaV8qSRn
- 9jsXZHMdNdohURVyZNCpDFBWwrR/HMN5mSpitd5N/iOLma8fiyMuf5CwC4hIe8CbnH0aXrj00LN
- 7RTlvzcoFv2hZyA8y/ZdQXxKMDB+1W1mVSnd/a+iVWrGaTTt4=
-X-Google-Smtp-Source: AGHT+IFcYYlvzT8KRy4+XNSxAKhYJROJBLtd7LJc/ajxhFBd5RLaMWePiBZfFJhlpJwEIyHkB6sD/w==
-X-Received: by 2002:a05:6000:188e:b0:430:f2ee:b220 with SMTP id
- ffacd0b85a97d-432c3632beemr22331456f8f.19.1768207144831; 
- Mon, 12 Jan 2026 00:39:04 -0800 (PST)
-Received: from [10.1.14.153] (vpn.streamunlimited.com. [91.114.0.140])
+ d=1e100.net; s=20230601; t=1768208991; x=1768813791;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9E+aei2byu7vyJaQe1I+/t09I89Wa7qdwsP8ryKXWOU=;
+ b=qOY14tAipVC1uEpyFrLKx/Pn++5aGX7J5RDEEu1On8g2J/gfADjKXRixBAA7xCxWem
+ K4kuE7McAwW1SEUoHZLuJp3cJr+TDylkgPO9RK8n0PAqxDvHVXA/GH1Wme0T46Df6hgQ
+ 1QQAhyE34hmgz2pW/ZUS8S105Y0eIJJoJ1qedqVfEipdOdpmkk0GGrUdiwkyBeoQdUrt
+ rx1lnccpQnfMxmC8t8ul937/4HCm5UT/OeTT1OQx0LwYfMQ8f/7U7F7odiVyFIfxRMvy
+ stU8TzWlGTxJcTp7mwbIBm5AVAB5vdL653FCuj8dvUrFIxwrsAUNoUrrOYW9HCL+TvfL
+ Vyng==
+X-Gm-Message-State: AOJu0YyovfpE7GemlFXhslnkb18gSyoWOQcnXuojqD17cej3912dRr4i
+ zB7xVwHtrAWZFRubf766U4iVjPrpTIuuWcDSqS6JDkRd81OoS/tU+V2KnlZJchuxXYtj/ktlIy6
+ yHIRj8qO+FA==
+X-Gm-Gg: AY/fxX6+0yoysq5np6QZrWhBSEod5kFY9vKIK5UCjaKNneDSLR95fqb39P1DwARKd0E
+ wAfBK+qGTsmVO21s0VLiosHcglErtc79chB/H81oODtbict3zmXh5G1F2Lg/hDiRa8hW61BNAzr
+ jD/mJq+B6+X1OiUpVm6t5d3X6BRF4/+ZZmZKMRG7CrLVxmwrdWxBSmQ+vNQFx/R3d/IT1DsiSWe
+ 0pPi3pQZ5O6h9IsPszbt+r2yCeC5oB0QuhKIcxpgdhQuLUC1/TQ2GUxwXVA3fQCnpBoaweVRiAL
+ lcB4CQA+KJhqbAlEoRzixHLGdZ8mr/+JqHqHGjewcAi0xzsqSEceMynlOjQUBI6XS9WAig09Hxj
+ dsktpFYHhk7//xHFFBG5fvt0tax1o/AH8MdfgyobCUrPQOBJ0Dxh0uegWZGZ1E0mv4rtSA0W1+1
+ XEiQPekZXj6BbV1LrWnV12Vm2S9a7pCsMQsKgXDw+jnOG+TmtqkX1mynNdGQ==
+X-Google-Smtp-Source: AGHT+IGdzjhZl0TdYnNk7WeGvAOt3cChvEOM6HA9PQsOl/gI2Mtcc6EuDdLkLpy8ItEu+/7XGiUrig==
+X-Received: by 2002:a05:600c:c08b:b0:47d:6856:9bd9 with SMTP id
+ 5b1f17b1804b1-47d84b33bccmr160402425e9.23.1768208990613; 
+ Mon, 12 Jan 2026 01:09:50 -0800 (PST)
+Received: from localhost.localdomain (vpn.streamunlimited.com. [91.114.0.140])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd0e16f4sm38261129f8f.11.2026.01.12.00.39.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Jan 2026 00:39:04 -0800 (PST)
-Message-ID: <904e3bc9-815a-45d6-b05b-df297e2f4940@streamunlimited.com>
-Date: Mon, 12 Jan 2026 09:39:03 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] cmd: mtd: fix default length calculation when offset
- is specified
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, =?UTF-8?Q?Radek_Dost=C3=A1l?=
- <radek.dostal@streamunlimited.com>, Tom Rini <trini@konsulko.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-References: <cover.1765892031.git.peter.suti@streamunlimited.com>
- <d34e03afc6c5bba074bae1684ca1f74159735210.1765892031.git.peter.suti@streamunlimited.com>
- <CAOf5uwmZEeQv5uLGOsdFbaJacA-SJV+696VgF7354=-+y=CA0g@mail.gmail.com>
-Content-Language: en-US
+ 5b1f17b1804b1-47d7f69e13bsm346390335e9.7.2026.01.12.01.09.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Jan 2026 01:09:50 -0800 (PST)
 From: Peter Suti <peter.suti@streamunlimited.com>
-In-Reply-To: <CAOf5uwmZEeQv5uLGOsdFbaJacA-SJV+696VgF7354=-+y=CA0g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: u-boot@lists.denx.de
+Cc: Peter Suti <peter.suti@streamunlimited.com>
+Subject: [PATCH 0/3] cmd: mtd: fix default read behavior and boundary checks
+Date: Mon, 12 Jan 2026 10:09:25 +0100
+Message-ID: <cover.1768208271.git.peter.suti@streamunlimited.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 12 Jan 2026 14:09:41 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -107,36 +95,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+This series addresses two issues in the 'mtd read' command regarding how
+default read lengths are calculated and handled when no size argument is
+provided.
 
-On 12/20/25 09:42, Michael Nazzareno Trimarchi wrote:
-> On Tue, Dec 16, 2025 at 2:41 PM Peter Suti
-> <peter.suti@streamunlimited.com> wrote:
->> ---
->>   cmd/mtd.c | 10 +++++++++-
->>   1 file changed, 9 insertions(+), 1 deletion(-)
->>
->> diff --git a/cmd/mtd.c b/cmd/mtd.c
->> index 1d1845bce44..9f6e3226c15 100644
->> --- a/cmd/mtd.c
->> +++ b/cmd/mtd.c
->> @@ -519,7 +519,15 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
->>                  goto out_put_mtd;
->>          }
->>
->> -       default_len = dump ? mtd->writesize : mtd->size;
->> +       if (dump) {
->> +               default_len = mtd->writesize;
->> +       } else {
->> +               if (start_off < mtd->size)
->> +                       default_len = mtd->size - start_off;
->> +               else
->> +                       default_len = 0;
-> Should it fail if the requested offset is bigger than mtd->size
->
-> Michael
+The first patch fixes a failure when reading a full NAND partition that
+contains bad blocks. Currently, skipping bad blocks increments the physical
+offset without adjusting the remaining byte count, causing the read to
+attempt accessing past the end of the partition. The fix ensures that
+default full-partition reads are truncated gracefully at the physical
+boundary rather than returning an error.
+This behaviour is similar to the raw `nand` command which adjusts the size
+of the read with adjust_size_for_badblocks().
 
-I think that would make more sense, yes. I'll send V2 with that fix.
+The second patch fixes the default length calculation when a starting
+offset is specified. Previously, the command defaulted to reading the
+entire partition size ('mtd->size') starting from the offset, which
+inevitably exceeds the partition bounds. The fix adjusts the default length
+to 'mtd->size - offset'.
 
-Best Regards, Peter
+Changes in v2:
+ - Separate commit for additional debug logs for bad blocks.
+ - Return error when start_off >= mtd->size.
+ - Resent to fix threading issues from v1.
+
+Link to V1: https://lore.kernel.org/u-boot/cover.1765891388.git.peter.suti@streamunlimited.com/T/#u
+
+Peter Suti (3):
+  cmd: mtd: add logs when bad blocks are encountered
+  cmd: mtd: fix read failure on default full partition read with bad
+    blocks
+  cmd: mtd: fix default length calculation when offset is specified
+
+ cmd/mtd.c | 39 +++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 37 insertions(+), 2 deletions(-)
+
+-- 
+2.43.0
 
