@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3AFCCF45AE
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 17:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C78CF45AF
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 17:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3238F83759;
-	Mon, 12 Jan 2026 18:05:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EB4F83693;
+	Mon, 12 Jan 2026 18:09:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UuwPjNEl";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="edLVkcnt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB0508382A; Mon, 12 Jan 2026 18:05:20 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B86C183759; Mon, 12 Jan 2026 18:09:28 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9D0483693
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 18:05:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5484C835B3
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 18:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-45391956bfcso4903433b6e.3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 09:05:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768237513; x=1768842313; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=VqnLse+JUAkdNRfgYVNPFltZFXpAwp3soN6j14idYHU=;
- b=UuwPjNElkDOgnywYlJ1KDbesUinSfj+PK19MDWwuIac0J/bDXbTAp1tT7GWzs40Dnc
- tfSWUID4NmrTTeqgbKFxZa8vCn0trlU8PnHp9zIlsrMsVZmZgUUEfOik2gOQTQp6r/uj
- yuUVnp5TgfK9yhDItDkQzANa/l6lbPagd+n4c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768237513; x=1768842313;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VqnLse+JUAkdNRfgYVNPFltZFXpAwp3soN6j14idYHU=;
- b=RgQx3yqgUiKnSVvLLBl9VQqJaYUWNVUyEKaAXIn6s1Lj//egZmvK3Vygp4Tt+hLVU2
- wp0ip77wLwVH1nKD3mCSEbRLNOWrLME4iH9wxSseMT6izaMWd7BmtRymalG7a3K4wh+R
- 0RlDNfP3nHrgSrYGnNGQoOK3Ae+xjLT1acHs2jn45RZsNgb1eWt5NXl2shNLJfZHpZMW
- t0cLGzuMkBZkMkvJoPghVKMBeFFogcS/88ztYECYNLSeTrA1x7dXtfvSxyMJzFRzmiGs
- zp3ZpC5QS6VrpexRjW+deXu+JZd/omTNwQ8Z5+H22KEq3QJLY88ZyII9Be7LrSNj8a/L
- 974Q==
-X-Gm-Message-State: AOJu0YxONcl4tryQp1diN+Q8Veds9vy/KECqEKj+70tL7rzGjTe5J7Wr
- +Mypdd/lX+Ih9JaOQrZzXd5P8PIpXFhKkrHvOmgTVnKfafLs9B7Bc9JKRrLV7zAiQB/KVB6tBv3
- 1Ej3V00M=
-X-Gm-Gg: AY/fxX7Ivo5Lvyj+uHyrsgYKryEroxHoXoWe7v7HObT751Gj5pUZAbdjDC3PhqFpTYa
- ClAsZWzWdXThpTKRSdLiGV6SpzsgOVd0wGEwrnKquainynJdZPYgTRnZIhdHLP9QVvKC8Y4b2iX
- 0uVH1qbLs/9184lOGRxqxSN5TSOKtEZ6nY//m0ZT2YxYOdKgqo0jGA06RUnOQ1RBpTlYU0oIweU
- Pe+KVELSNYVlyeupy6hxll8jwGmjXxR9oNDQQFWHMlgE+Yc2OOEjRsVw+KD4NlDoQJCtBkj+SQP
- C/uunDPYcxvXiYpjdZ7SyBIdjC4fXA303qks/4TuejHITKcIRvGiz7YZvFk3UxigQY2WRZMFNBC
- Pr1Qw12JS+8On8suMhTo3GdlzO3u1RyqDo9CjF8SIcWyUI9eBcInvkzx20XsE0K54AcRek+2XmP
- RooM+gYB/vgdW7e79OpyJZ3CT1yfsXwx9LNVU0TqP0wi5uUrZwMOVP/82S1WWEjES7PA/+4TxHy
- RrlCAQGvlpST28Uc9bAXqhGetrKTCj0l1lC6a7StQ==
-X-Google-Smtp-Source: AGHT+IHAXnFlH3QGF/sdK9yZt+kHl6NGKs2oTTEpIBFRTDIEZjNoRvUm+wj007z++j8OCjgDBoOkMQ==
-X-Received: by 2002:a05:6808:6786:b0:450:c776:876f with SMTP id
- 5614622812f47-45a6becc112mr7857061b6e.54.1768237513398; 
- Mon, 12 Jan 2026 09:05:13 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478ee883sm13994685a34.28.2026.01.12.09.05.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 09:05:12 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Martin Husemann <martin@netbsd.org>
-Subject: [PATCH] bootm: Remove BOOTM_NETBSD from defaults
-Date: Mon, 12 Jan 2026 11:05:11 -0600
-Message-ID: <20260112170511.1856525-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 55495C20868;
+ Mon, 12 Jan 2026 17:08:59 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id BB13B606FA;
+ Mon, 12 Jan 2026 17:09:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 96544103C9299; Mon, 12 Jan 2026 18:09:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1768237764; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=VbCRdiGUX7m9u4MCNQdNbErEvTv5zldYAbmWBj7VJOY=;
+ b=edLVkcnt+CiG5eNhUM3l5j9JJFm0zh6+QRm6jNFeADzS0hYLRDr9WzocX2/eiBax8Da7+i
+ Op7v8X0WUXy0Y7bf0Iq2j57qfx+4VREXTQcfsCYmzkIF58asDNyZ+cQMSYIsQXWeujC0w3
+ acCBkguwDq41IjDfpb9/f3nkFn5xx6WJzUCjQdGFpY9CnyAhifvBbMqOX4R/32y+mBHPD3
+ 6x+9prR1YW6LLaZrEyWNHUwxeLAXcHqAqtiGgHh6v7Pr5suOELL31WD1D0/J6iilB/uZHU
+ lI9dClFbDET/8g61Zlu2efE74Z1gBGGWvmj6Hny1usdWtkF7kV0FaZg2LYTrHg==
+Message-ID: <5b7e3e38-325f-424b-ab95-8775924333e4@bootlin.com>
+Date: Mon, 12 Jan 2026 18:09:18 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
+ support
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20251028091256.600992-1-richard.genoud@bootlin.com>
+ <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +88,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After talking with someone from the NetBSD project, platforms that do
-not boot with a device tree (and so would be using our BOOTM_NETBSD
-support) a very few in number. So we can remove this option from being
-enabled by default and save a little space in most places with platforms
-that need it still being able to re-enable it, if needed. Ideally, in a
-few years we can instead just remove the code entirely.
+Hi Michael,
+Le 31/10/2025 à 07:43, Michael Nazzareno Trimarchi a écrit :
+> Hi Richard
+> 
+> On Tue, Oct 28, 2025 at 10:13 AM Richard Genoud
+> <richard.genoud@bootlin.com> wrote:
+>>
+>> Hi everyone,
+>>
+>> This patch series introduce H6/H616 NAND controller support (but not yet
+>> the DMA/MDMA part).
+>>
+>> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
+>> chip.
+>> ECC is supported, as well as scrambling.
+>>
+>> Support for booting from NAND is not part of this series, but it's almost
+>> ready. (It needs quite some modifications in sunxi-spl-image-builder.c
+>> and sunxi_toc0.c)
+>>
+>> H6 SoC has not been tested, but it shares all registers with H616, plus
+>> some registers dedicated to Embedded Crypto Engine that H616 lacks.
+>>
+>> This IP has quite some register fields modified from the A10/A23, but in
+>> the end, it works more or less the same.
+>> Main differences with A10/A23 are:
+>> - The need for 2 more clocks (for ECC and MBUS)
+>> - The use of a new USER_DATA_LEN register
+>> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+>> - MDMA based on chained buffers
+>> - some registers layouts have changed (mainly due do the stronger ECC)
+>>
+>> Patches 1 and 2 are small fixes
+>>
+>> Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
+>> and ultimately merge those definitions in an include file, without
+>> functional change, removing the usage of sunxi_ccm_reg on the way.
+>>
+>> Patches 7-19 are paving the way to the introduction of H6/H616 NAND
+>> controller by adding per SoC capabilities for both drivers. They are
+>> small for an easier review, without functional change.
+>>
+>> Patches 20-21 are adding missing NAND related clocks definitions for
+>> H6/H616
+>>
+>> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+>>
+>> Patch 23 adds the support for H6/H616 NAND controller in SPL.
+>>
+>> Patch 24 fixes warnings in sunxi_nand_spl.c
+>>
+>> A similar series for this NAND controller support in Linux has been sent
+>> and being reviewed.
+>>
+>> Changes from v1:
+>> - pick-up reviewed-by
+>> - use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
+>>    by Andre
+>> - remove cosmetic in patches that are beyond cosmetic changes
+>> - remove usage of struct sunxi_ccm_reg, suggested by Andre
+>> - indent @caps member description in comment
+>> - give more informations on PAT_FOUND registers in commit message
+>> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
+>>    same bit NFC_ECC_BLOCK_512
+>> - add missing MACH_SUN50I_H6 in Kconfig
+>>
+>> Richard Genoud (24):
+>>    mtd: rawnand: sunxi: cosmetic: remove needless comment
+>>    mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+>>    mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
+>>    mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+>>      linux/mtd/rawnand.h
+>>    mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+>>    mtd: rawnand: sunxi: merge register definitions for
+>>      sunxi_nand{,_spl}.c
+>>    mtd: rawnand: sunxi: add per SoC capabilities
+>>    mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
+>>    mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+>>    mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+>>    mtd: rawnand: sunxi: add has_ecc_block_512 capability
+>>    mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+>>    mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+>>    mtd: rawnand: sunxi_spl: add per SoC capabilities
+>>    mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
+>>    mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+>>    mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
+>>    mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+>>    mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
+>>    sunxi: clock: H6: add NAND controller clock registers
+>>    clk: sunxi: Add MBUS Master Clock Gating Register
+>>    mtd: rawnand: sunxi: add support for H6/H616 nand controller
+>>    mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+>>    mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
+>>
+>>   arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
+>>   .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+>>   arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
+>>   .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+>>   arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
+>>   board/sunxi/board.c                           |  19 +-
+>>   drivers/clk/sunxi/clk_h6.c                    |   2 +
+>>   drivers/clk/sunxi/clk_h616.c                  |   2 +
+>>   drivers/mtd/nand/raw/Kconfig                  |   3 +-
+>>   drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++--------
+>>   drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
+>>   drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-------
+>>   12 files changed, 629 insertions(+), 284 deletions(-)
+>>   create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+>>
+> 
+> I will pick the series over the weekend, check CI, and check better
+> all the patches that already
+> get reviewed anyway
 
-Link: https://lore.kernel.org/r/aWKQOW_ajq0DsbYA@big-apple.aprisoft.de/
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- cmd/Kconfig | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Any news?
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b71ac554c0bf..e227ad2c532f 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -399,11 +399,11 @@ config BOOTM_LINUX
- 	  or booti or bootz.
- 
- config BOOTM_NETBSD
--	bool "Support booting NetBSD (non-EFI) loader images"
-+	bool "Support booting NetBSD (legacy, non-EFI) loader images"
- 	depends on CMD_BOOTM
--	default y
- 	help
--	  Support booting NetBSD via the bootm command.
-+	  Support booting NetBSD via the bootm command. This is for NetBSD
-+	  images that are neither EFI nor using a device tree.
- 
- config BOOTM_OPENRTOS
- 	bool "Support booting OPENRTOS / FreeRTOS images"
+
+Regards,
+Richard
+
+
+> 
+> MIchael
+> 
+>>
+>> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+>> --
+>> 2.47.3
+>>
+
+
 -- 
-2.43.0
-
+Richard Genoud, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
