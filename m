@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85075C9EC94
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:56:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E00DD25041
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 16:35:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC83A8398C;
-	Mon, 12 Jan 2026 15:56:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A9B683693;
+	Mon, 12 Jan 2026 17:35:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NYXoPg4j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ViLRc4Gx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A52CA8399B; Mon, 12 Jan 2026 15:56:35 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id E3E8183759; Mon, 12 Jan 2026 17:35:47 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABAD78388D
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:56:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76B9B835FD
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 17:35:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b871b6e0c70so161151666b.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:56:33 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-64d02c01865so11317543a12.1
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 08:35:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768229793; x=1768834593; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=linaro.org; s=google; t=1768235745; x=1768840545; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=9mcpTDURgoYCBfdoRrcGxo35bQVvI59tx8XzWRBFaVc=;
- b=NYXoPg4j257eERLS2FPPl225URrG5iwFijwZHpFcPW1OM9p1etBRjpeLN7j/GOVZqc
- 70qQ5pI7a8A+5PcV5hB3mbknCvUpvqTkHTd4EQmU0EH3SkXRAxAGgXflS/t20IpLmbqw
- IY47sSgdM35jUPBOybk8T7XCoi2sCrRxv5aQU+qlaJKorYyehffYmdwvOgfk/iR5D5zU
- D722nbPgg8Ch2UlOAt1og6bQY4A7pwYxNT0NjM47HQamza/9svzllhCiVcgfj68jzvOV
- XBqVXb294lo77iCCzVYwoRgeoJbGjIEgjzhb512azcqmL2TTNiXltjz6WayDZkzR57jV
- J7Iw==
+ bh=Tprqadmj00IGm62dT8sU/lJ9eDDiNoimqorNI09EpG0=;
+ b=ViLRc4Gxb0law1qOx0IccvYedWAvVo3VxEM+2rZ2/K3rYnDvnJ8TXW63KD20wVln+/
+ fb4x7H+fssEcxunCGDMXMG4H0tzlwIX1ql81GYJ6x9d/dd7+8JrR90MbLuI48rn9lvmk
+ X/IttqqkQL7paptNhsXAwIwjqsHha/mrV2sWhJiZEyHNsYTxcyjruwL2nNHmrA8yOD3O
+ +FQfBDWuvEt/q/C0trahZNYVy+byBmPrp9Cw8c7j+iwqLOzIGBWDDLf5cyGlKjefRaos
+ apui2Tim5TxajZwRFOG5EDjDij0Lhe8r2wYAhLV4mPYgLAy38v6SCnmsRC54fe13wrqc
+ tWUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768229793; x=1768834593;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=1e100.net; s=20230601; t=1768235745; x=1768840545;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9mcpTDURgoYCBfdoRrcGxo35bQVvI59tx8XzWRBFaVc=;
- b=HcELAX2ytMfI4u+3FbAGXotR13y1Ai7tfc+hHrXrRxBxr/tcePhKqMunrl8SZV80Fz
- 0zhTSRKFuUOZW8uzFoI7E+xg32juapWh8t3mfUpHYQXPJLt8epyIWXIZ1l9jNBqvvRfO
- wr9iErbSW3jWQaLY7Z81ZiZdek+Xg1ovwFzPPEsASyUi38a9JCEQAjQnpGeBw4iyxlWM
- p6+tEBb1mbODfCx+xPdsd/WJLQ+n7ZNQX1GNLj2NRPRYXkrzk7KI3l9gxkNA+iHhnvDZ
- a0eJ5o9N01j56JsSsKL/clFF4wWkUUQ5c5n6FQ2MkX93QzU9G/TMQjUU4F59oyT0evb7
- 0zXw==
+ bh=Tprqadmj00IGm62dT8sU/lJ9eDDiNoimqorNI09EpG0=;
+ b=E0w8pzlgd7DCNuRWnc3Vx3of6wJWfb/UzTp34kPrjlGwwgL0OhkewsmsEA6ejwT9PC
+ ZKp290inPRzDSVQ9I487aoHULmWoOpsHTrj9Xz8bsM9XBmC5mtTT8goPmVK+6rT3nHqr
+ WfP5sBGYYVliyFbgmyEz5ouwP9AJFOrmOeIWJQXEh+CMiRpyPEPIHFLFgyTAiTyydQvb
+ wsc4xE1A2XXPSXOxqghEg763fHLGaZa9AmUsCyOTQ1JHASIGWJ8TxNHSvrxFyLRUj5JZ
+ GR+DKyRp77hVggqeRYp1BqDp8rjnhunM919IM+roZWf4n/rqAihU6ualH7cp0ixFPg2i
+ fP0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkPYjV36qva4cjG/EVRuc+46RKeI6EXxFmHyl9pifbhGbG0Qt/yaaLl/P3/azUd/jKfrJZoak=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYm7s4bqX5wMprFxj+p+ozoe9glByRZ3N2Ka2Ua7GGsr3Xa5rF
- RznIyIkhmCSUSrOB48m4Ymx/GhjptrTT4lwnG0pWscQ3S5zZA0kh7XTQAi1g53x7tI0=
-X-Gm-Gg: AY/fxX5Uk6Hsu7b37HoaS0GLp/AIdAA0kCzOJtcK8kP4KhF6XgSUibDQ765SmDZTiXX
- Zspi/REnMWMMl3hkOhHYvkq4xd7WURoWdZ14F9rnELiZ5HJ4Rq7ypPweKiTtRMoMZdXcL4LEHLC
- TBVMlcx7J5yx26FcSukehFIwRtgqKRogrJOGqoDruovuoSUqlK5ZypTkWM4FyZZ5IkN1zNDj0hQ
- cVLt9B9KlAtGuY2dLa46AHJb5CViuJTedtvmTANwWzYDrDXYmK3tRtl6jUzSFSt0vW7ntDmh4fK
- iq3pwxDzX1iW8KkQKg06ocVJwQShZqcwTELj4xEimeo2Ns7tMqT+qili1jgfLzAs4iF25AVdE+B
- 96qOvDQ0vI9CjhhMx3oCpgiJaOLwAjQNQTBM9xyG3fti/0zvlq1nZlrY7vTMchiMAjgb2pCDVxn
- 1FVmb2iWn12WTyxu2BNtL9Krf2cbkjtWIFCmBN7G40rRRI+65nX6Y=
-X-Google-Smtp-Source: AGHT+IFs/zd5ZgTuzhdVOLzwBOL0QljiHiOAiKvoqnmil+P5QS8p7+anX45fSoI4b8pXOcNZ1WuP3w==
-X-Received: by 2002:a17:906:4fc9:b0:b79:ecb0:db74 with SMTP id
- a640c23a62f3a-b844540607dmr1831092466b.59.1768229793012; 
- Mon, 12 Jan 2026 06:56:33 -0800 (PST)
+ AJvYcCX9/LJlAkiUjvzj2fcZoQQdFsZJ0RwpIot7wUSs/Mpx6t6rRaZlEPYUGrqaEd3rdEtx4K0foy8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5T7O/ADSczD/Nezs1OKEQGgrpov5uya+FUJEuU+XuEWd9/Tpp
+ Im9KDaxDcluotMLTVRYik4Ltvz3PSYZJmR9/hobJF1iF3FM4lV5bAHN5Fr5hX0smQ+U=
+X-Gm-Gg: AY/fxX6r8nx3TGOw/h1jpypa3InWzNX+DhQbBdrM/MlBdMD1du+Q6jfZz/DVeiS/Hsl
+ 8j3LP+BAKmPz+jJLhBU6WSACd0mffUX31av0oW/XE1wthKLOoB219SAW8lOLaBbtQqwnCZV58aF
+ EUHUh35h8I719+3HJDX5BAVUZlF74iT9X2cdtRBCvgh1Hvd/BDH2rW1kjWYSmc6GxwezQ6YHTgT
+ cHPcdsz8iG8sgQHj0n9t5MPA+aFiZ5bspDs4970lnvj4UTXrMccSU/bW8+hk467/NqSa0iW61Ud
+ ns/WU7FWOVJYo93itMO6nWpyJzsJg2CYMQdvh/lkzruI93kYUVZEETJuOVz1oTsi7xuROHQkN4q
+ /FFf/c5LWdGv5qEPW0nPyZO2zwgG54nH3pLAlYB4v7q7YjJYsX559oJtZ3sVRzGvOz38Q5+GGCw
+ KuUDoXLsS+Pc9PTjlCwMlGgYasRu9MzDKbrN24ZoliPXOd/4u8IfOqvpV1SHebeQ==
+X-Google-Smtp-Source: AGHT+IFJAH9ITg0ztlHTAhC6fzXGbWy7zBPRPo8LTnyMDnDRoc3NRhuyyWsZjqSuMnKdQF3FmWZBXA==
+X-Received: by 2002:a17:907:1b05:b0:b80:fa9:674 with SMTP id
+ a640c23a62f3a-b84451f39c6mr2074731566b.54.1768235744800; 
+ Mon, 12 Jan 2026 08:35:44 -0800 (PST)
 Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6507b9d4c0asm17942854a12.9.2026.01.12.06.56.31
+ a640c23a62f3a-b842a56c552sm1978139666b.68.2026.01.12.08.35.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Jan 2026 06:56:32 -0800 (PST)
-Message-ID: <2626ff6c-a0a6-469c-89a6-7e0b49ed3f85@linaro.org>
-Date: Mon, 12 Jan 2026 15:56:31 +0100
+ Mon, 12 Jan 2026 08:35:44 -0800 (PST)
+Message-ID: <8c36d979-a793-422d-ae29-427f2377d708@linaro.org>
+Date: Mon, 12 Jan 2026 17:35:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND v2 2/6] phy: Add IPQ9574 support to Qualcomm QUSB2 phy
+Subject: Re: [PATCH v1] smem: msm: Fix memory-region lookup, direct <reg>
+ mapping and update SMEM host count
 Content-Language: en-US
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- alexeymin@postmarketos.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20251218061557.1999367-1-varadarajan.narayanan@oss.qualcomm.com>
- <20251218061557.1999367-3-varadarajan.narayanan@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251218061557.1999367-3-varadarajan.narayanan@oss.qualcomm.com>
+To: Sumit Garg <sumit.garg@kernel.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
+ <aU5onLOBb3f62VVB@sumit-xelite>
+ <55ebb69a-b9a9-4140-bf28-eb3788f7ac9c@linaro.org>
+In-Reply-To: <55ebb69a-b9a9-4140-bf28-eb3788f7ac9c@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,91 +110,165 @@ X-Virus-Status: Clean
 
 
 
-On 18/12/2025 07:15, Varadarajan Narayanan wrote:
-> Imported from Linux driver.
+On 08/01/2026 21:41, Casey Connolly wrote:
 > 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> ---
->  drivers/phy/qcom/phy-qcom-qusb2.c | 42 +++++++++++++++++++++++++++++++
->  1 file changed, 42 insertions(+)
 > 
-> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
-> index d98f6108e69..df82f2a99da 100644
-> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
-> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-> @@ -152,6 +152,22 @@ enum qusb2phy_reg_layout {
->  		.offset = o, .val = v, .in_layout = 1, \
->  	}
->  
-> +static const struct qusb2_phy_init_tbl ipq6018_init_tbl[] = {
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL, 0x14),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xF8),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xB3),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x83),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0xC0),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE5, 0x00),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
-> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TEST, 0x80),
-> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9F),
-> +};
-> +
->  static const struct qusb2_phy_init_tbl sm6115_init_tbl[] = {
->  	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
->  	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0x53),
-> @@ -168,6 +184,19 @@ static const struct qusb2_phy_init_tbl sm6115_init_tbl[] = {
->  	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
->  };
->  
-> +static const unsigned int ipq6018_regs_layout[] = {
-> +	[QUSB2PHY_PLL_STATUS]		= 0x38,
-> +	[QUSB2PHY_PORT_TUNE1]		= 0x80,
-> +	[QUSB2PHY_PORT_TUNE2]		= 0x84,
-> +	[QUSB2PHY_PORT_TUNE3]		= 0x88,
-> +	[QUSB2PHY_PORT_TUNE4]		= 0x8C,
-> +	[QUSB2PHY_PORT_TUNE5]		= 0x90,
-> +	[QUSB2PHY_PORT_TEST1]		= 0x98,
-> +	[QUSB2PHY_PORT_TEST2]		= 0x9C,
-> +	[QUSB2PHY_PORT_POWERDOWN]	= 0xB4,
-> +	[QUSB2PHY_INTR_CTRL]		= 0xBC,
-> +};
-> +
->  static const unsigned int sm6115_regs_layout[] = {
->  	[QUSB2PHY_PLL_STATUS] = 0x38,	  [QUSB2PHY_PORT_TUNE1] = 0x80,
->  	[QUSB2PHY_PORT_TUNE2] = 0x84,	  [QUSB2PHY_PORT_TUNE3] = 0x88,
-> @@ -224,6 +253,17 @@ static const unsigned int qusb2_v2_regs_layout[] = {
->  	[QUSB2PHY_INTR_CTRL] = 0x230,
->  };
->  
-> +static const struct qusb2_phy_cfg ipq6018_phy_cfg = {
-> +	.tbl            = ipq6018_init_tbl,
-> +	.tbl_num        = ARRAY_SIZE(ipq6018_init_tbl),
-> +	.regs           = ipq6018_regs_layout,
-> +
-> +	.disable_ctrl   = POWER_DOWN,
-> +	.mask_core_ready = PLL_LOCKED,
-> +	/* autoresume not used */
-> +	.autoresume_en   = BIT(0),
-> +};
-> +
->  static const struct qusb2_phy_cfg sm6115_phy_cfg = {
->  	.tbl = sm6115_init_tbl,
->  	.tbl_num = ARRAY_SIZE(sm6115_init_tbl),
-> @@ -455,6 +495,8 @@ static const struct udevice_id qusb2phy_ids[] = {
->  	  .data = (ulong)&sm6115_phy_cfg },
->  	{ .compatible = "qcom,sdm660-qusb2-phy",
->  	  .data = (ulong)&sdm660_phy_cfg },
-> +	{ .compatible = "qcom,ipq9574-qusb2-phy",
-> +	  .data = (ulong)&ipq6018_phy_cfg },
->  	{ .compatible = "qcom,sm6115-qusb2-phy",
->  	  .data = (ulong)&sm6115_phy_cfg },
->  	{ .compatible = "qcom,qusb2-v2-phy", .data = (ulong)&qusb2_v2_phy_cfg },
+> On 26/12/2025 11:51, Sumit Garg wrote:
+>> On Wed, Nov 12, 2025 at 10:28:51PM +0530, Aswin Murugan wrote:
+>>> The SMEM driver was failing to resolve memory regions on some boards
+>>> because `dev_of_offset()` + `fdtdec_lookup_phandle()` did not yield a
+>>> valid DT node. Modernize the code to use driver-model/ofnode accessors
+>>> and make the probe robust for both DT styles (direct `reg` vs
+>>> `memory-region` phandle).
+>>>
+>>> - qcom_smem_map_memory():
+>>>   * Drop fdtdec path; use dev_read_phandle_with_args() +
+>>>     ofnode_read_resource().
+>>>   * Use dev_read_phandle_with_args() +
+>>>     fnode_read_resource().
+>>>
+>>> - qcom_smem_probe():
+>>>   * Try dev_read_addr_size() first (map via <reg>), else fall back to
+>>>     qcom_smem_map_memory() with "memory-region".
+>>>   * Check "qcom,rpm-msg-ram" presence to add second region.
+>>>
+>>> - Additionally, SMEM_HOST_COUNT is increased to support newer SMEM
+>>>   versions that include more remote processors. This avoids failures
+>>>   during processor ID checks.
+>>>
+>>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>>> ---
+>>>  drivers/smem/msm_smem.c | 56 +++++++++++++++++++++++++++++------------
+>>>  1 file changed, 40 insertions(+), 16 deletions(-)
+>>
+>> There was an earlier effort from Casey to import SMEM driver here [1]
+>> from Linux kernel. But unfortunately that patch-set didn't got reworked
+>> to make into U-Boot mainline.
+
+I'll pick this fix up for now, but hopefully we can drop this old crummy
+driver soon :D
+
+Thanks,
+
+>>
+>> Casey, do you have any plans to respin the patch-set? Or it's fine for
+>> others to take over that patch-set?
+> 
+> If any of you guys would be willing to take it over that would be a huge
+> help! I'm not sure when I'd get around to it myself. I'm very much
+> looking forward to getting the memory map from smem at long last :D
+> 
+> I'd appreciate it if you could fixup the authorship/sob on my old
+> patches if you do resend them.
+> 
+> Thanks and kind regards,
+>>
+>> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=433987&state=*
+>>
+>> -Sumit
+>>
+>>>
+>>> diff --git a/drivers/smem/msm_smem.c b/drivers/smem/msm_smem.c
+>>> index ccd145f9afb..b6b92d3530d 100644
+>>> --- a/drivers/smem/msm_smem.c
+>>> +++ b/drivers/smem/msm_smem.c
+>>> @@ -88,7 +88,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>>>  #define SMEM_GLOBAL_HOST	0xfffe
+>>>  
+>>>  /* Max number of processors/hosts in a system */
+>>> -#define SMEM_HOST_COUNT		10
+>>> +#define SMEM_HOST_COUNT		25
+>>>  
+>>>  /**
+>>>   * struct smem_proc_comm - proc_comm communication struct (legacy)
+>>> @@ -821,23 +821,34 @@ static int qcom_smem_enumerate_partitions(struct qcom_smem *smem,
+>>>  static int qcom_smem_map_memory(struct qcom_smem *smem, struct udevice *dev,
+>>>  				const char *name, int i)
+>>>  {
+>>> -	struct fdt_resource r;
+>>>  	int ret;
+>>> -	int node = dev_of_offset(dev);
+>>> +	struct ofnode_phandle_args args;
+>>> +	struct resource r;
+>>>  
+>>> -	ret = fdtdec_lookup_phandle(gd->fdt_blob, node, name);
+>>> -	if (ret < 0) {
+>>> -		dev_err(dev, "No %s specified\n", name);
+>>> +	if (!dev_read_prop(dev, name, NULL)) {
+>>> +		dev_err(dev, "%s prop not found\n", name);
+>>>  		return -EINVAL;
+>>>  	}
+>>>  
+>>> -	ret = fdt_get_resource(gd->fdt_blob, ret, "reg", 0, &r);
+>>> -	if (ret)
+>>> -		return ret;
+>>> +	ret = dev_read_phandle_with_args(dev, name, NULL, 0, 0, &args);
+>>> +	if (ret) {
+>>> +		dev_err(dev, "%s phandle read failed\n", name);
+>>> +		return -EINVAL;
+>>> +	}
+>>>  
+>>> +	if (!ofnode_valid(args.node)) {
+>>> +		dev_err(dev, "Invalid node from phandle args\n");
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	ret = ofnode_read_resource(args.node, 0, &r);
+>>> +	if (ret) {
+>>> +		dev_err(dev, "Can't get mmap base address(%d)\n", ret);
+>>> +		return ret;
+>>> +	}
+>>>  	smem->regions[i].aux_base = (u32)r.start;
+>>> -	smem->regions[i].size = fdt_resource_size(&r);
+>>> -	smem->regions[i].virt_base = devm_ioremap(dev, r.start, fdt_resource_size(&r));
+>>> +	smem->regions[i].size = resource_size(&r);
+>>> +	smem->regions[i].virt_base = devm_ioremap(dev, r.start, resource_size(&r));
+>>>  	if (!smem->regions[i].virt_base)
+>>>  		return -ENOMEM;
+>>>  
+>>> @@ -852,10 +863,14 @@ static int qcom_smem_probe(struct udevice *dev)
+>>>  	int num_regions;
+>>>  	u32 version;
+>>>  	int ret;
+>>> -	int node = dev_of_offset(dev);
+>>> +	fdt_addr_t addr;
+>>> +	fdt_size_t size;
+>>> +
+>>> +	if (__smem)
+>>> +		return 0;
+>>>  
+>>>  	num_regions = 1;
+>>> -	if (fdtdec_lookup_phandle(gd->fdt_blob, node, "qcomrpm-msg-ram") >= 0)
+>>> +	if (dev_read_prop(dev, "qcom,rpm-msg-ram", NULL))
+>>>  		num_regions++;
+>>>  
+>>>  	array_size = num_regions * sizeof(struct smem_region);
+>>> @@ -866,9 +881,18 @@ static int qcom_smem_probe(struct udevice *dev)
+>>>  	smem->dev = dev;
+>>>  	smem->num_regions = num_regions;
+>>>  
+>>> -	ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
+>>> -	if (ret)
+>>> -		return ret;
+>>> +	addr = dev_read_addr_size(dev, &size);
+>>> +	if (addr == FDT_ADDR_T_NONE) {
+>>> +		ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
+>>> +		if (ret)
+>>> +			return ret;
+>>> +	} else {
+>>> +		smem->regions[0].aux_base = (u32)addr;
+>>> +		smem->regions[0].size = size;
+>>> +		smem->regions[0].virt_base = devm_ioremap(dev, addr, size);
+>>> +		if (!smem->regions[0].virt_base)
+>>> +			return -ENOMEM;
+>>> +	}
+>>>  
+>>>  	if (num_regions > 1) {
+>>>  		ret = qcom_smem_map_memory(smem, dev,
+>>> -- 
+>>> 2.34.1
+>>>
+> 
 
 -- 
 // Casey (she/her)
