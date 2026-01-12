@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006AAC9EC88
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12355C9EC8B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA862839E2;
-	Mon, 12 Jan 2026 14:09:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=streamunlimited.com
+	by phobos.denx.de (Postfix) with ESMTP id 1436D83A79;
+	Mon, 12 Jan 2026 14:09:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=streamunlimited.com header.i=@streamunlimited.com header.b="MgtrUlvc";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qSB0ekAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47B1A83CBD; Mon, 12 Jan 2026 10:10:09 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D57AC83D0B; Mon, 12 Jan 2026 10:31:15 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C8E883B7E
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:10:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=streamunlimited.com
+ by phobos.denx.de (Postfix) with ESMTPS id C5AA283CB9
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:31:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peter.suti@streamunlimited.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-477a2ab455fso56003045e9.3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:10:07 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b87108066c3so125228466b.2
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:31:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=streamunlimited.com; s=google; t=1768209006; x=1768813806; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J8ai0vDKWdwD/aNZRknYfyGycIfDw4HX7Q03N5B543A=;
- b=MgtrUlvcHrCAF9pIzqykZQVQ5KR8tWmEYAltG/U1Pi48fOBDlFcSBj0AO4uqCgo9oN
- VxdQcjFsioVu4J1zCkis8g2yl7BWsUhnl5+ZTDZnaTK0V40Rp6OY5lbXHowGxAW3lA/V
- qBXWNvFW1z6yzuQKGDUBcDxMHobEEsL05vBsU=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768210273; x=1768815073;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z7/sFnTplQwHu758oZ11YPALPskwGSL3ZXtjVlUOmSk=;
+ b=qSB0ekAXYFG3wuCcvl9Mo2fLaeBwN1euwWunPTOBKgS9lmebSy74GDb3LyWK0EGIB0
+ +vNR5fYp7JkWHWfmEKTpxZzw0IHulkTqG733yDgSFawYjkoPc5n8+JziuiN1snHB8prd
+ KGwFwsKjIYUDMgB3/+lH2yVh7ov047YQjkqCwnzAMTd+c61VwFpEYErN6zKvSjHCTj1h
+ tUMPzm/jZFKeBjJSf2uevNcwlx7MyxULsis2qaPXGcnC+wwVeV3LRTYt+Z2NP7ZC1pbn
+ ELmmNZCyxjD7RStO3gcSVkDXwsvsnzZATGLHqbj4z9/jpWu5ljfI67z7vqdF/AbgFXPp
+ k6KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768209006; x=1768813806;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=J8ai0vDKWdwD/aNZRknYfyGycIfDw4HX7Q03N5B543A=;
- b=V90FeoVv0tJSnHZJV66iXQZijWKrO8AWjeKiNBhvQzydED633iwQFym9GZj/ossRu8
- 1mp4SkT+JE4dZczy1MjkBGbEll51FqX7/xNzUtox1HkCpckQGRXfjgdyCiUfm1Q3p8/9
- PggsM2H+0Ns2QYaza+vmv46H+oL04PAE5tin5OneWCli2LiKo+oGuKhHHVKAA3XMqDvv
- bLN1qFG5I6jo9sLZDvlbjLtNceXJMIzxNsSy9ULibPVkabYpb75pmgycjA9OvlRxc4MV
- iRBbse55mXnkzH5YKTrifUwrUTJj+k2C3bk2VDXeQt766K/LkUaH5VD0v1qDfYjG1plk
- G20Q==
-X-Gm-Message-State: AOJu0YzTw8pwePsuhWTL2uwaXWpdIthmy9e97jtkr7w1kQ0GjYBEbCqt
- XEgJRxwJ5iRr9sNGM4K/9uwOYJDZIjSKkjz9LgL4SnQz62QeIVqvRAauVVALa9Qn6SLrzDnQIRx
- aFsyXoWMVJQ==
-X-Gm-Gg: AY/fxX7MdwIwjz7NmWzRCXS9KU3Sfayg0A0qtJk8S67BYsRsWPacN8mpx+lVThCjkqJ
- vB3CQXwfhmbMCWvlU2gmEblijW6+WRwcvmO0vqHZPirqriPsnL63LEEEtSP5IEiX9rN6uig0YKb
- bJqq4ghKvyOCA6zOvbuQzPWewILV1gH92Z6lxkaVj8Vk+p5wThPVUf1O27GykZyOzKY2VSpEN3I
- tuZdFS9EPBMtqUn2u6LmKe7qBL7mWe2Qr9aTZSGIkcuQ2aoTxttKnJrcKcNqgvaJoHO2oOlcZ9O
- ZuVgJxteTj806fVzdk2XrlIl02HZUjDcbmK4e4ya1nWs1g7GcwrWzClvdQUinlx1XuUawWE+bN0
- i/jbDsLDWFMgbDC19SVG2pQJ5500MSPsFoE9UnkSGowDnnW1OknTa0qi8PR3GMcABlwMTiPNSTa
- gCDp7LlDGXd7b1FX3ovRQH8ZKOKRfWonOBzECWCT202PfmfCiOgoM+XrqYmw==
-X-Google-Smtp-Source: AGHT+IGu/UYABrybOApDM30Z8vSLe3v+hwScStobGXtUYfZ+/Je09d7RgxD8j3G3nLNnPIja3hjfrQ==
-X-Received: by 2002:a05:600c:630f:b0:46e:1abc:1811 with SMTP id
- 5b1f17b1804b1-47d84b3b75amr164768515e9.27.1768209006534; 
- Mon, 12 Jan 2026 01:10:06 -0800 (PST)
-Received: from localhost.localdomain (vpn.streamunlimited.com. [91.114.0.140])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d7f69e13bsm346390335e9.7.2026.01.12.01.10.05
+ d=1e100.net; s=20230601; t=1768210273; x=1768815073;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z7/sFnTplQwHu758oZ11YPALPskwGSL3ZXtjVlUOmSk=;
+ b=PJCpmnL+t9knnpl7ZEZLvvM0uSV4XK5Vmnr4YK5uKfU8A7rtn/nTJqmmKEu1gLLrx2
+ 504W7xepb7AN7Q61o1oZd80H7g8xUdr45/qZxUmjjOSOf0eHZSRCiZrJ6/D33l/3ElYO
+ NPv2kJSS7SbJDTcRqtS5N6UKD9GaqKuiGxr8oWTMwOzbHr/dgOcKAjPavuMVFUi85GG6
+ pxncJ24ON7+ALAfFK9t7T5gg1gF4AkSBLGIvqSX22qo17Vkst64MW5y3ngR7lH0EFFtp
+ 201c6wDNAgTKLvRsV06ItIl/2Tc0JcvnrKv/jIK/RpibOcrWshj1WJAeBvha3KbVLSuw
+ Kbsw==
+X-Gm-Message-State: AOJu0Ywba+lNzBeTE0lq/N+W1VNfeRzT0VmpQAezEh7zlze04I1vJWRU
+ /JUb2YGob92UWcxGXqoNB9SRmv32Ebn7AJSdMIuOnTW41CVuEL/CR1PARtmwiooCQg8=
+X-Gm-Gg: AY/fxX77zr/MUhRis39fKpy9/N2smD1YmpZLw91ElAIxkDAYaqn9/8MJH563SYTpDP2
+ EeqaxyQBxk033ruOASOJGeAuL7x5tyVxaEVcnNKdCoD4FkZmreUD1P1ewUmkulKBgaI7QuEYPyX
+ AH5dPzzF+Ci3VJM1nX87XnmG8DmHY/eFaOa6D6GryWiCNKsvrLEzMv5BDZQPdZ9O82pf6gI8NSE
+ pURks+moiDxCX/3ynTeKGENpQWWAHJB6V0Vf1J8/5RlvaXBe1okfZk/37x3LSXIy3Trpt4NfTYX
+ +fORj7RlmzsRQM77gTqwEp3UuqUeXdDhaOAVM3qud1SSp1uQU4+ba2JaUaBY7VqBcs3DpQfdYbJ
+ ZB7j9G0dtytbvDlCwy9GppnjRaIgycBKP7JUDGv2sW5tf1h5E3w3fnQwUmb92nF3OvR08HKkgu7
+ AL/AY=
+X-Google-Smtp-Source: AGHT+IG70bOKMuTtPLB2KIGB/XkEQJe9KuryJaxS/HXEoyKHGx1y0cEssU3mQihfhqXamPcTgeibOA==
+X-Received: by 2002:a17:907:1b21:b0:b73:6f8c:6127 with SMTP id
+ a640c23a62f3a-b8445031bf9mr1800461166b.12.1768210273151; 
+ Mon, 12 Jan 2026 01:31:13 -0800 (PST)
+Received: from localhost ([195.52.31.202]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6507b8c446esm17344143a12.6.2026.01.12.01.31.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 01:10:06 -0800 (PST)
-From: Peter Suti <peter.suti@streamunlimited.com>
-To: u-boot@lists.denx.de
-Cc: Peter Suti <peter.suti@streamunlimited.com>, Tom Rini <trini@konsulko.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH v2 3/3] cmd: mtd: fix default length calculation when offset
- is specified
-Date: Mon, 12 Jan 2026 10:09:29 +0100
-Message-ID: <55b0df6f4fb731bbb4a4c728849a48e53377fe85.1768208815.git.peter.suti@streamunlimited.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1768208815.git.peter.suti@streamunlimited.com>
-References: <cover.1768208815.git.peter.suti@streamunlimited.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ Mon, 12 Jan 2026 01:31:12 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Mon, 12 Jan 2026 10:31:03 +0100
+Message-Id: <DFMI8576QX69.WDXJM34H19Q6@baylibre.com>
+Cc: <u-boot@lists.denx.de>, "Mattijs Korpershoek" <mkorpershoek@kernel.org>,
+ "Tom Rini" <trini@konsulko.com>, "Marek Vasut" <marex@denx.de>, "Andrew
+ Goodbody" <andrew.goodbody@linaro.org>, "Kory Maincent"
+ <kory.maincent@bootlin.com>, "Svyatoslav Ryhel" <clamor95@gmail.com>,
+ "Christian Marangi" <ansuelsmth@gmail.com>, "Dinesh Maniyam"
+ <dinesh.maniyam@altera.com>, "Heiko Schocher" <hs@nabladev.com>
+Subject: Re: [PATCH v2 2/6] dm: core: lists_bind_fdt: Replace found variable
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Simon Glass" <sjg@chromium.org>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
+ <20260108-topic-musb-probing-v2026-01-v2-2-2a47c6e0e73a@baylibre.com>
+ <CAFLszTiNU=2cJTkB2c8d4NrFZ7K0KR7LQnPYO0TWzX_BuBrUFw@mail.gmail.com>
+In-Reply-To: <CAFLszTiNU=2cJTkB2c8d4NrFZ7K0KR7LQnPYO0TWzX_BuBrUFw@mail.gmail.com>
 X-Mailman-Approved-At: Mon, 12 Jan 2026 14:09:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,46 +107,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the 'mtd read' command is issued with an offset but no size (argc=1),
-the length defaults to the full partition size ('mtd->size').
+--bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-This calculation is incorrect because reading 'mtd->size' bytes starting
-from a non-zero offset results in a read request that extends past the
-end of the partition. This causes the MTD layer to return error -22
-(EINVAL).
+Hi Simon,
 
-Fix the default length calculation to be 'mtd->size - offset' so that
-reads starting from an offset effectively read "to the end of the
-partition" rather than attempting to read out of bounds.
+On Fri Jan 9, 2026 at 12:32 PM CET, Simon Glass wrote:
+> Hi Markus,
+>
+> On Thu, 8 Jan 2026 at 04:17, Markus Schneider-Pargmann (TI.com)
+> <msp@baylibre.com> wrote:
+>>
+>> 'found' is only used at the end of the function to print a debug
+>> message. No need to maintain a variable if we can just return 0
+>> immediately when a driver was bound successfully.
+>>
+>> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+>> ---
+>>  drivers/core/lists.c | 5 ++---
+>>  1 file changed, 2 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+>> index 52ba6c7bfa007b660b854de62c97ad3c1761f1a5..9d1ca38212ee7f53b8894f96=
+4f096611c8ec20a5 100644
+>> --- a/drivers/core/lists.c
+>> +++ b/drivers/core/lists.c
+>> @@ -204,7 +204,6 @@ int lists_bind_fdt(struct udevice *parent, ofnode no=
+de, struct udevice **devp,
+>>         const struct udevice_id *id;
+>>         struct driver *entry;
+>>         struct udevice *dev;
+>> -       bool found =3D false;
+>>         const char *name, *compat_list, *compat;
+>>         int compat_length, i;
+>>         int ret =3D 0;
+>> @@ -275,14 +274,14 @@ int lists_bind_fdt(struct udevice *parent, ofnode =
+node, struct udevice **devp,
+>>                                 ret);
+>>                         return log_msg_ret("bind", ret);
+>>                 } else {
+>> -                       found =3D true;
+>>                         if (devp)
+>>                                 *devp =3D dev;
+>> +                       return 0;
+>>                 }
+>>                 break;
+>>         }
+>>
+>> -       if (!found && ret !=3D -ENODEV)
+>> +       if (ret !=3D -ENODEV)
+>>                 log_debug("No match for node '%s'\n", name);
+>>
+>>         return 0;
+>>
+>> --
+>> 2.51.0
+>>
+>
+> I like to have a single successful return at the end of each function
+> so that it is easier to follow what is going on. But since you wrote
+> this patch:
+>
+> Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
-Signed-off-by: Peter Suti <peter.suti@streamunlimited.com>
----
- cmd/mtd.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+Thanks for reviewing. If you prefer I can redesign this as well. But
+also note that the function already has two early return 0. One if the
+device does not have a compatible list and the other for pre_reloc_only
+if pre-relocation is skipped.
 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 1d1845bce44..29189925b24 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -519,7 +519,17 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 		goto out_put_mtd;
- 	}
- 
--	default_len = dump ? mtd->writesize : mtd->size;
-+	if (dump) {
-+		default_len = mtd->writesize;
-+	} else {
-+		if (start_off >= mtd->size) {
-+			printf("Start offset 0x%llx is greater or equal to mtd size 0x%llx\n", start_off, mtd->size);
-+			ret = CMD_RET_FAILURE;
-+			goto out_put_mtd;
-+		}
-+		default_len = mtd->size - start_off;
-+	}
-+
- 	len = argc > 1 ? hextoul(argv[1], NULL) : default_len;
- 	if (!mtd_is_aligned_with_min_io_size(mtd, len)) {
- 		len = round_up(len, mtd->writesize);
--- 
-2.43.0
+Best
+Markus
 
+
+--bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaWS/WBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlNU
+1gEA/03fpu7AjzzvmxAwyCfC6hVk+ttbwCsnB+4QTS+dXtoA/jbaZyB70QPDZ466
+1Tguq8YqsaouNLygXjKp2siJe/MH
+=mnOr
+-----END PGP SIGNATURE-----
+
+--bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587--
