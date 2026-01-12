@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1395BC9EC88
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F48C9EC88
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:10:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9F648393F;
-	Mon, 12 Jan 2026 14:09:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 048AE83979;
+	Mon, 12 Jan 2026 14:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=streamunlimited.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=streamunlimited.com header.i=@streamunlimited.com header.b="07GYMWe2";
+	dkim=pass (1024-bit key; unprotected) header.d=streamunlimited.com header.i=@streamunlimited.com header.b="n5957xF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C110483CF5; Mon, 12 Jan 2026 10:09:53 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 1D6A483CBD; Mon, 12 Jan 2026 10:10:00 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90E8883B7E
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:09:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1E2A83B7E
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=streamunlimited.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peter.suti@streamunlimited.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-47a95efd2ceso54177055e9.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:09:51 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-47775fb6c56so58155755e9.1
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:09:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=streamunlimited.com; s=google; t=1768208991; x=1768813791; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9E+aei2byu7vyJaQe1I+/t09I89Wa7qdwsP8ryKXWOU=;
- b=07GYMWe2oUWcanNympAPbZWsbrgjGdyX8VxKFaVs1hrnJ/s5xreSfogMLMZlfXB9v6
- FIJ72W0quls+JA4zVhz8OtRwFd+FwIz/WYPZ8eTSQHMShzpWLSKBWavg4jfbq8NEybOz
- wvIuvwkXrG7I7SrwErR0igFuumYIpzpD6fvmA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768208991; x=1768813791;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=streamunlimited.com; s=google; t=1768208997; x=1768813797; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9E+aei2byu7vyJaQe1I+/t09I89Wa7qdwsP8ryKXWOU=;
- b=qOY14tAipVC1uEpyFrLKx/Pn++5aGX7J5RDEEu1On8g2J/gfADjKXRixBAA7xCxWem
- K4kuE7McAwW1SEUoHZLuJp3cJr+TDylkgPO9RK8n0PAqxDvHVXA/GH1Wme0T46Df6hgQ
- 1QQAhyE34hmgz2pW/ZUS8S105Y0eIJJoJ1qedqVfEipdOdpmkk0GGrUdiwkyBeoQdUrt
- rx1lnccpQnfMxmC8t8ul937/4HCm5UT/OeTT1OQx0LwYfMQ8f/7U7F7odiVyFIfxRMvy
- stU8TzWlGTxJcTp7mwbIBm5AVAB5vdL653FCuj8dvUrFIxwrsAUNoUrrOYW9HCL+TvfL
- Vyng==
-X-Gm-Message-State: AOJu0YyovfpE7GemlFXhslnkb18gSyoWOQcnXuojqD17cej3912dRr4i
- zB7xVwHtrAWZFRubf766U4iVjPrpTIuuWcDSqS6JDkRd81OoS/tU+V2KnlZJchuxXYtj/ktlIy6
- yHIRj8qO+FA==
-X-Gm-Gg: AY/fxX6+0yoysq5np6QZrWhBSEod5kFY9vKIK5UCjaKNneDSLR95fqb39P1DwARKd0E
- wAfBK+qGTsmVO21s0VLiosHcglErtc79chB/H81oODtbict3zmXh5G1F2Lg/hDiRa8hW61BNAzr
- jD/mJq+B6+X1OiUpVm6t5d3X6BRF4/+ZZmZKMRG7CrLVxmwrdWxBSmQ+vNQFx/R3d/IT1DsiSWe
- 0pPi3pQZ5O6h9IsPszbt+r2yCeC5oB0QuhKIcxpgdhQuLUC1/TQ2GUxwXVA3fQCnpBoaweVRiAL
- lcB4CQA+KJhqbAlEoRzixHLGdZ8mr/+JqHqHGjewcAi0xzsqSEceMynlOjQUBI6XS9WAig09Hxj
- dsktpFYHhk7//xHFFBG5fvt0tax1o/AH8MdfgyobCUrPQOBJ0Dxh0uegWZGZ1E0mv4rtSA0W1+1
- XEiQPekZXj6BbV1LrWnV12Vm2S9a7pCsMQsKgXDw+jnOG+TmtqkX1mynNdGQ==
-X-Google-Smtp-Source: AGHT+IGdzjhZl0TdYnNk7WeGvAOt3cChvEOM6HA9PQsOl/gI2Mtcc6EuDdLkLpy8ItEu+/7XGiUrig==
-X-Received: by 2002:a05:600c:c08b:b0:47d:6856:9bd9 with SMTP id
- 5b1f17b1804b1-47d84b33bccmr160402425e9.23.1768208990613; 
- Mon, 12 Jan 2026 01:09:50 -0800 (PST)
+ bh=itNd+T83patQ5F9J+EzjZKuT4DglCVai+OvHSQukrKk=;
+ b=n5957xF/KcKpKcML3Gf2BsPu7j5GBfrz/GcYvtuTgDPqanzTREmTbeAWRgV1NISiWl
+ E0X111c6h5rRJ/ZyFyqxijGSBRDpMmthP7AzPGzjXXEl5Y+Gmy2/AFoZq6Lrs9rn1bV3
+ 0QdcIEAjp7CsSeLh4Lw+24HzgyTlCSo2maf+o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768208997; x=1768813797;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=itNd+T83patQ5F9J+EzjZKuT4DglCVai+OvHSQukrKk=;
+ b=IBCm6GaWO5joWle16kR3zUlK9LymBGLlmRpOfIL3gfWjQGSDLfXhnwaYDVJkvCCkZK
+ zowJMpb8JvKe8QTZcjpsa4IPYaJjVud2j57eIJdVUURmlfEHwV5J+/S7KKvbT+Tx1mhZ
+ kQXGzGqeVjT+/iDweaZ5UELZVNPRxIU0Tqdeum4mw3EOS158ysSTFSimo2WZ1INNzirS
+ CkCvqoIPe41vFj7jYiqa+fCHaaZ6MKJzNTxavYFooYJXY2pR7mf3PwwbeO3iIVW+gOyE
+ e6lrqhX58bFx8ByOGrIX8RW/jqLVtopfBWoa2VYSteY4HD3+dAaqnIchcSAnZSt0gpWU
+ vubQ==
+X-Gm-Message-State: AOJu0Yz8Td2QD4KKB1cYmwzgVaLfsJyZKv3B17fkINBm/ORr5I47o28O
+ enqIYdbkShLpNwCqC17ieBacNRXk63rLRwVNCzRQ1xZO33iQ/JyR5SrvroQKTZfPBHRMFhB4u4U
+ hGFCySbD6LA==
+X-Gm-Gg: AY/fxX4D+ML0vkoXIgSybnmJoGORxP/EtbQlXu83NHgUzXr8ndGLrXuLwVEAcPxGHNH
+ idf0GHN/e30eEY/zBcpXDXcXVgGWSGIluBuUMw1xVJZEJfZy2V8ECLieiUn7t67HcAC/c3CxZxz
+ gzvmuUHC8X9HkUlhLP//Wu5Ei8yYOPZTAJTik1nmk3BOxkz8Rl+X2rcUUi6YJ2BVXrg+1tRWY1K
+ +oHTnhmVArUkXXONsUeWrCXzQz6o7TfbrpzbgHqoSqsPriw1dGIxRLYu5qy7YloqTEMRFwfvUdh
+ iNEVtufY2sXpfvYsXkC+5orMEee/Jr6ZdLn1zrZ42B2AO7WXHAmTsaOyNsydoxy4eS2SWYNjzzw
+ zLpMA+02DWi/q+kjgn2rD10jBMXB5GHZhuVA1JH7o5tU5Z2R5a5ZhpNrbx/9uUltuZBxKBxHOYi
+ 9EIpATg+03i1jSld9OfeiC/+Laj9UEWdDMePVYUDyTyiPZE3Rn2MEBoESCWg==
+X-Google-Smtp-Source: AGHT+IH1A/pXRnw0WjilKUN/IhPnolIBeukOBq5kW65QVN8kkjOVFA00P6ZKFQzMezCZlqFRKLQbYA==
+X-Received: by 2002:a05:600c:500d:b0:477:b642:9dc1 with SMTP id
+ 5b1f17b1804b1-47d84b3baa1mr140448395e9.20.1768208996860; 
+ Mon, 12 Jan 2026 01:09:56 -0800 (PST)
 Received: from localhost.localdomain (vpn.streamunlimited.com. [91.114.0.140])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d7f69e13bsm346390335e9.7.2026.01.12.01.09.49
+ 5b1f17b1804b1-47d7f69e13bsm346390335e9.7.2026.01.12.01.09.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 01:09:50 -0800 (PST)
+ Mon, 12 Jan 2026 01:09:56 -0800 (PST)
 From: Peter Suti <peter.suti@streamunlimited.com>
 To: u-boot@lists.denx.de
 Cc: Peter Suti <peter.suti@streamunlimited.com>
-Subject: [PATCH 0/3] cmd: mtd: fix default read behavior and boundary checks
-Date: Mon, 12 Jan 2026 10:09:25 +0100
-Message-ID: <cover.1768208271.git.peter.suti@streamunlimited.com>
+Subject: [PATCH v2 0/3] cmd: mtd: fix default read behavior and boundary checks
+Date: Mon, 12 Jan 2026 10:09:26 +0100
+Message-ID: <cover.1768208815.git.peter.suti@streamunlimited.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1768208271.git.peter.suti@streamunlimited.com>
+References: <cover.1768208271.git.peter.suti@streamunlimited.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -119,7 +122,7 @@ Changes in v2:
  - Return error when start_off >= mtd->size.
  - Resent to fix threading issues from v1.
 
-Link to V1: https://lore.kernel.org/u-boot/cover.1765891388.git.peter.suti@streamunlimited.com/T/#u
+Link to v1: https://lore.kernel.org/u-boot/cover.1765891388.git.peter.suti@streamunlimited.com/T/#u
 
 Peter Suti (3):
   cmd: mtd: add logs when bad blocks are encountered
