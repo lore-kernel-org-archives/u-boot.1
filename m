@@ -4,65 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8755C9EC8D
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A51C9EC94
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:49:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A315838A5;
-	Mon, 12 Jan 2026 15:41:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E56483935;
+	Mon, 12 Jan 2026 15:49:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bx5jYVpp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SDXM5KXB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ED9283923; Mon, 12 Jan 2026 15:41:06 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BAD1983936; Mon, 12 Jan 2026 15:49:39 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12EA983885
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:41:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33B8B838A5
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:49:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dqZn95YF3z9spP;
- Mon, 12 Jan 2026 15:41:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768228861;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NbbGfSueASLDGMSlhQ214Tbdjuv8gXSR1eJ8D5lCFHw=;
- b=bx5jYVppAWQTGNuU8D6NwjVNwdmOkCF3VYI99d6kU6MqXH4erRO4IzxhdVE18V70AcNnaP
- xsXjwktuD2hpb8HnhgXLaQBfB6gnwr5/OaODIzmw9whdEsTPYtj3VTO/9WNOumD4O9S+ta
- L0+P0qmTDG16IThVmH6UNze16y4IPmpvftiBq40TkbMJkg6irjF9f8c59/2a+Sgk/DN35x
- 8l8D2In4s4YdfiSk3R6k6zWwDInb5sT9ualeQmU70EFv4sRTkFbYdK4jMOfVJ0Mf9SLeEV
- 9AWY7xHutegGWF8+tPXyqYx6Ryg4OZTnDCyPQpRrpWo+SelAhFYjTiV/mh/hUw==
-Message-ID: <f7562e91-03cb-4bb9-aabe-e7c0b6ea1b6b@mailbox.org>
-Date: Mon, 12 Jan 2026 15:40:57 +0100
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-64b608ffca7so10095384a12.3
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 06:49:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768229377; x=1768834177; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/R2/gS9LmL0+dZ5hPCm5ZBf+ZvEJfZCyx7mHWh7WFKo=;
+ b=SDXM5KXBQfoBiGZpxk9UZSF53XXyT2jxeKaEWCWiU8bckc+HWPlN4tLt7aIgQSKmfV
+ Ptwz9cdHEd23yVlMB6vjqKzEEUZpEQw/F3eHWwYcj9Igl/NZ9KIfApooM927RY6/zdFZ
+ UguEIsUb612sznu2IjJuuAi+8TL/n15sV9nLv/wl8iLHy/UMSsQ29pSf2K2dRWBqu4zI
+ pRXfff8v0oeaFaYzPDA5Ko0CNxpUkka2vjm/Xx69z9SycuNVBiTwEvFTx/9bw8q6yqT0
+ ARdyuvrdh3UGiI7kV/2s+zUTME0qzzdEM532rAGpUWcQAmywSM82oIZVSMjc3KuruX7P
+ M1Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768229377; x=1768834177;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/R2/gS9LmL0+dZ5hPCm5ZBf+ZvEJfZCyx7mHWh7WFKo=;
+ b=K10R6sfSUPAC1aDK17I3xLMK9p3B/Ji0eRPI0frEjV17OoSUzcf/jmT7a/YSA0Xb3l
+ n8g7SUacHe0We2SGifjnlELmFH8s5Civj3IwkeRFVLJ0IkXeqf3Uj0q7KlhKsUyVQ6Te
+ hh1pP7niKUp2jP+V87/GLcW35y4Kztw1+syBQ4ZyS7sY7h5We0Cco2hVwZalDvE2RJlO
+ ccEPn2M4b7YGSbkBPwDAXjRZkoRrBG47/+Ni1YZJCHwyRny0kt+1GfxumwKq61PlcJ+P
+ CIr6EK2VVnbZ9fpmGEwdvo91MiFYUdQVfUhXSoL6WegboL6dt2Uvq6dZnV1U9MDQokqF
+ 1m2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVW0WjXyptwv1moWyD2QA26ubF5ZhQFRWwRitPQiKoX6oSD2MyXcZbVwmIk/bMn7a7U8UsTltk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyo9KQ68V58muZCs/4tkfyjgbZ/r/tAcTIIDmlPacdN0gBxA61/
+ 8YuVPz16k3ymShytOwdBx3xjEOxswOBif/RaFS0UArjKgcbCebKbfVcO+QNsv7vbTdY=
+X-Gm-Gg: AY/fxX4qo1Fj9Ycp96U3KZkQu+OyniwNBQlFDlXDfSuotsBuzC5NZ26bZxvughCetdP
+ P57dqrXlfZah8VW4dX+76rhArpfkepjdDBXgD9oSNlS43EQnRP9ZdS6wI/Ww4Jus7SVVjUutkk6
+ evBgXJ9cSxyY1uRf5Pxs/iQAC30OQ7K5VzzIPPKJwQC+FPPlWNQ90gfkXacpE6O41ILsI+OkLhJ
+ +mnFjpGmdBLrnFqxo+JWxR5pl8UhZeyj+P4C5cXV2KeMnzcHkE9M3dr1vHtekdwAIAly/aIkgM0
+ 3GzYD4nrg8Tgo5WcvwULfGg43RprOuKYI2age6mmKOweCTl/0B1CcdTsDAUhpcBwDne48I3bgru
+ kXRo8xHc7CVyaUJkG3dwpeqjWRxT/qz3VsOUYqfq7UnIw0h2EkgXhBEgwpdu+JcrDLgVuICtpGq
+ K1SebAmk6iMfOQkZ3nQF+84fG1z3Suf0SsuvK0u4pjgoVjzVHbwu9yTTaxDY5b+Q==
+X-Google-Smtp-Source: AGHT+IEnquXirvBalpBhEPYbdg/zdX0mXg0rAiQB9nvqvpc8ExAnfrHbLtj5vmMUaUT7R6I0LvQE8g==
+X-Received: by 2002:aa7:dd47:0:b0:64d:1a1:9dee with SMTP id
+ 4fb4d7f45d1cf-65097e49cf1mr16575771a12.16.1768229376637; 
+ Mon, 12 Jan 2026 06:49:36 -0800 (PST)
+Received: from lion.tail248178.ts.net (p5b29e30b.dip0.t-ipconnect.de.
+ [91.41.227.11]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6507bf65c07sm17786640a12.23.2026.01.12.06.49.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Jan 2026 06:49:35 -0800 (PST)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>,
+ George Chan <gchan9527@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, Marek Vasut <marek.vasut@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: [PATCH] usb: gadget: fix vendor/product id for qcom
+Date: Mon, 12 Jan 2026 15:49:30 +0100
+Message-ID: <20260112144933.3992369-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
- before DTB
-To: Beleswar Padhi <b-padhi@ti.com>, trini@konsulko.com
-Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
- sughosh.ganu@linaro.org, philip.molloy@analog.com,
- james.hilliard1@gmail.com, anshuld@ti.com, afd@ti.com, nm@ti.com,
- vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
-References: <20260112101102.1417970-1-b-padhi@ti.com>
- <20260112101102.1417970-3-b-padhi@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260112101102.1417970-3-b-padhi@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: b23ef23f7d06fc7d3bf
-X-MBO-RS-META: eainu6qkkp55paz5kc8pm3xk4te66uy3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,54 +102,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/12/26 11:11 AM, Beleswar Padhi wrote:
-> The OMAP2 SPL linker script (also used for K3 platforms) currently uses
-> a 4-byte alignment directive after the __u_boot_list section. This
-> alignment directive only advances the location counter without padding
-> the actual binary output.
-> 
-> When objcopy extracts u-boot-spl-nodtb.bin, it includes only actual
-> data, stopping at the last byte of __u_boot_list (e.g., 0x41c359fc),
-> not an aligned address (e.g., 0x41c35a00). So, when the FIT image
-> containing device trees is concatenated to the SPL binary, it gets
-> appended at this unaligned file size, causing libfdt validation failure.
-> 
-> To fix this, move the alignment directive into the __u_boot_list section
-> itself and make it 8-byte aligned as per DT spec. This forces the linker
-> to include padding as part of the section data, ensuring objcopy
-> includes the padding bytes in the binary and the appended FIT image
-> starts at an 8-byte aligned boundary.
-> 
-> Reported-by: Anshul Dalal <anshuld@ti.com>
-> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
-> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
-> v2: Changelog:
-> 1. Get rid of extra ALIGN() directive, replace it with a comment
-> 2. Carry Reported-by, Closes and Fixes tag.
-> 
-> Link to v1:
-> https://lore.kernel.org/all/20260109190026.58464-3-b-padhi@ti.com/
-> 
->   arch/arm/mach-omap2/u-boot-spl.lds | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u-boot-spl.lds
-> index 3bb759d8a1c..5ad169a37b7 100644
-> --- a/arch/arm/mach-omap2/u-boot-spl.lds
-> +++ b/arch/arm/mach-omap2/u-boot-spl.lds
-> @@ -35,9 +35,13 @@ SECTIONS
->   	. = ALIGN(4);
->   	__u_boot_list : {
->   		KEEP(*(SORT(__u_boot_list*)));
-> +		/*
-> +		 * Ensure 8-byte alignment at the end of the last section before
-> +		 * DTB is appended, to satisfy DT spec alignment requirements
-> +		 */
-> +		. = ALIGN(8);
->   	} >.sram
-Does this work even if the __u_boot_list section is empty ?
+Due to a typo the defaults for Qualcomm were never actually
+set, this got missed in the original patch (maybe time to rename
+ARCH_SNAPDRAGON...).
 
-I think what you need is unconditional alignment of the end of the 
-binary, that has to be 8 bytes aligned.
+Fixes: 934647d49c61 ("usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM")
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+ drivers/usb/gadget/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 7e08aeab9043..ebb306852a65 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -60,9 +60,9 @@ config USB_GADGET_VENDOR_NUM
+ 	hex "Vendor ID of the USB device"
+ 	default 0x0955 if ARCH_TEGRA
+ 	default 0x1f3a if ARCH_SUNXI
+ 	default 0x2207 if ARCH_ROCKCHIP
+-	default 0x18d1 if ARCH_QCOM
++	default 0x18d1 if ARCH_SNAPDRAGON
+ 	default 0x0
+ 	help
+ 	  Vendor ID of the USB device emulated, reported to the host device.
+ 	  This is usually the board or SoC vendor's, unless you've registered
+@@ -88,9 +88,9 @@ config USB_GADGET_PRODUCT_NUM
+ 	default 0x350a if ROCKCHIP_RK3568
+ 	default 0x350b if ROCKCHIP_RK3588
+ 	default 0x350c if ROCKCHIP_RK3528
+ 	default 0x350e if ROCKCHIP_RK3576
+-	default 0x4ee0 if ARCH_QCOM
++	default 0x4ee0 if ARCH_SNAPDRAGON
+ 	default 0x0
+ 	help
+ 	  Product ID of the USB device emulated, reported to the host device.
+ 
+-- 
+2.51.0
+
