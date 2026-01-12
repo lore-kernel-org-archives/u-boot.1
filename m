@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FF7C9EC8B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C73C9EC88
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:12:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 455E283B85;
+	by phobos.denx.de (Postfix) with ESMTP id AF1078399B;
 	Mon, 12 Jan 2026 14:09:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OyX0w3ei";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J81EMusZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54E9C83D77; Mon, 12 Jan 2026 10:48:20 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id C8B1083CBD; Mon, 12 Jan 2026 11:09:23 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A30E83CB9
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:48:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B402083869
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 11:09:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64daeb28c56so10096913a12.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:48:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chaosesprit@gmail.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-79045634f45so67143197b3.1
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 02:09:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768211298; x=1768816098;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1+3cdNS7vfJruzEN2GuaICwpMhvXW9FFyAsle4sFr00=;
- b=OyX0w3eifya9kIP4kcIckofwDV5pXXmRL7K2AkwvIPDld61wKYQkvG/Ju3R90e6h0a
- h1uAT1TLDiOLSZty7zZzjB4NWCnN+R8JQowa44slWafAn19zDODO8kNEkExlFYK2PYAG
- B5OEeVSgr50Yd/pwuBbw0Vu/A0ujul7OCrGIFsc+5Gim/LzVDMrErKLS0G9HAMhHFhcu
- ji2VnSNQmB1J8HoOJ8PMKjByf4Wgy7Tkk4CDSSFYgSyLiKHDTIORpoG4qa+V2xYHns1h
- UkeE27yeiRVSfZ7VglV4mRVfSzJfqrYFePWfczWTSOSv1Bg0C1+ftDxThHNL8rPD9Rjc
- NTRQ==
+ d=gmail.com; s=20230601; t=1768212560; x=1768817360; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qg9wRX5589LJ78wB0G7Or7KpUgjaYmGrYmeExB5N1/w=;
+ b=J81EMusZ6tu0E9U14Coe2tqDC6cbnT0a7MhNZ2nqzniVyyroy8X99J88yIs0g6YaN5
+ fSAU++XqMHhB1zapApd0IEmVq4Z3C5pPvBgaHy8SUNCc5irLuSbOuQhxQGmy9rSqNuve
+ aSRmG243VMaOToPD/AenGQSqJhN6Wa+6hY75uTGS0j8wy0+cAzbcn7B6xHOmfuSJkS7k
+ bM8CNj6ZaIET4RYbC2/TqS6XJMdFLg8l1Z67P+KrYIilJf3Wf/QlkNw1a+GQI0Wc4Iq3
+ j1PQADt4jqyQx6GxrrV89ELkZYXnKolOcIMKGf8Rz9cYVsZAcC8RxerGk4FBBhcvY21M
+ StZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768211298; x=1768816098;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1768212560; x=1768817360;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1+3cdNS7vfJruzEN2GuaICwpMhvXW9FFyAsle4sFr00=;
- b=tHaieyUtcS9b95AaXdLtpQ3TyIdPMF6J8siyO58+TdisVnx1rC7rfgEkE8D0AVptr+
- otJk5vuYeNPF2/GsyH90Pn0FILn8lmjUWJY35JqqtJEuvcHONKOqw08bX30pQNyhJA1r
- e2dyshjW8Y2YewlXDl9OXMlUlGayouz70kP3Wxprle4Et3CSNbJFPpBQZC5qdFUHgpAJ
- ctg9M3Kzg5HMO3Aay2jnNWK5hzr3tn8GGgfquFgEOiuz1yYNZFyly+1ciRQAayUrrN6Z
- nHnco0sKKqOGQ3rEwBEAYmMqh283DIrmVV2pr2RuQDB1OmLZQc++hWu4+zTumooSp0Wz
- IKCQ==
-X-Gm-Message-State: AOJu0YzyjmzJp6sBCiIjAYBoWglZYImhRJjLq6RNEGUZjYXbJgHQtlCv
- nf2fTqu0bbOdcAlIc7AX6Se2yESpiakfsC3cMWhoiD6XYi9Kl0kUfuBMoAu7hQRc6ag=
-X-Gm-Gg: AY/fxX7MszgZtlJX3aY7vcwDmbvPynzBlss4UnkV4ZVltjn81w9Rb6Dp7e5vtEwFgy5
- 4USC7WntQkWccGTlRk9b9ZdQWg2T+BtHwwo7BXDjh8EQYtb9L7Fy6dn9zHr1C7qLNFUqb3cFWb4
- 7UmulAtpvIzjHM1piLVLXzud3V45WxUUNqtbGd40/Ccrje88gZjJcXbtfGz/PCOrzCQKnZKlvg8
- 6R31ROJFM8cjPSOwYMFTBgDLkwByJdySf2UQM/2X/VhOV+OcJ96CXpUiGQqxM63vOZrt3iSZZ9P
- MMdLorf7nrrsEGRZ7d4VpMWc920b18ksZ8/OS/UoCIZ6+P+aMTlHLepm9rb+EswizS4rUSTtA0f
- kbPenknfTrjEW1KuLrow8YExJOC+AGbJmXE42jKjwGPlsUklV8UI1Zc4suWzYviN0z8amf8Td50
- r3Ztc=
-X-Google-Smtp-Source: AGHT+IGze8JZPZhema+2EknrsGO3Gw4pLw1R52NLTPyC5ZSqoU0FmF0ErlpLwpDe2zxkGBCNL0QjDg==
-X-Received: by 2002:a17:907:3c8a:b0:b87:173f:61b with SMTP id
- a640c23a62f3a-b87173f2ad8mr313794366b.9.1768211297703; 
- Mon, 12 Jan 2026 01:48:17 -0800 (PST)
-Received: from localhost ([195.52.31.202]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b86f88f90a4sm613122866b.37.2026.01.12.01.48.16
+ bh=qg9wRX5589LJ78wB0G7Or7KpUgjaYmGrYmeExB5N1/w=;
+ b=EtQGIBD+lyPIdnnZkji/t3aoOjkM9HrwRgjFZ5M1eKa/3W2ZUhSq46B2X4N/wtOBIN
+ Cz7sl+3+XbHrqvytd2ModAf5w4WEPF6RjUiAFJAWQtEP9ghEBZdpoD7nCR+Do2mNi7gi
+ mPRW/avukZAaAbKHtnTRow7goBTUXYx/p5r4sG7yrtkbdQs1F80dqzEVPb49TshD5IdQ
+ QaPrwnw497DR0ekMGkAJ4A83l144MI0Xi94vClz8ar7vTSNc26OtZXTsMPgzstP1qT8W
+ 8JrdvEDRVCzJEWYOmIW7GvESFSvGvZJMQ7aYLX66NalvmlS7Ri/VXlGcgPGf6N8JXU+a
+ Geiw==
+X-Gm-Message-State: AOJu0YxEJUzxAoHhfHcOjAXUHrYlyS2tJsyjpudwAa2+27vT25OwvHMh
+ 37x/EG1UGR3Fm15PMqYqoGE8E2vZhrdnVYmnK/h1snmlOFpk+kiMPVY5CK828xUr+tiND5FRGas
+ =
+X-Gm-Gg: AY/fxX44nJ4ECQ/pBRB+HuGAmg8nF5efAYfq6s5PJ4BGitN0J8ipokNpbiN2/JhddKp
+ Q3axYMBtjNNdrL0SAGwvMxVKTnutRq6tc4B4HMoTIEZNtyrbXFQktjPjzNV2tb2wWBAZtnAmfGI
+ maEesEMU4VnpIDieIteAmYOJPHS/xuKeQ21HYGFp/k8vxPvKosl0dN76t+XFa1FZThurFIxnyHR
+ Iz9MjA1HzH6upiBph7bvfTJk28LiahRBYu76yAenyyRX+on0szZzOMrz6sRYLyhXxbpxMwfHdVP
+ IDqMbrogUgbehpOYAxLwBVvAXv6nRkckjnmTlOVhKD9+3lChBRS2MLKLE+srTJrDhMY1hLMP2Nw
+ T1SJ+JvX/L7a+imKJ47EyaMOthqQvqSQn/bgsE8WBTPBwWuwy3PcGbd7iyLG9ZL3Us40zxfbEAX
+ ef0rmkt12FnOzQCwZA5gijAanRX0l9nEJP/ikJZI27xsG6NjOSW5QosM4=
+X-Google-Smtp-Source: AGHT+IHq7tORhQdiDP/jYV4tNX+HAdFhjJzsNN7nrctfkq6EWhl6SoBTsCNHxHcuSmDb9PA7dnlSxg==
+X-Received: by 2002:a53:ac90:0:b0:645:591a:cb5e with SMTP id
+ 956f58d0204a3-64716b39f44mr14154164d50.5.1768212560149; 
+ Mon, 12 Jan 2026 02:09:20 -0800 (PST)
+Received: from omen.cambridgeig.com (199.168.137.240.16clouds.com.
+ [199.168.137.240]) by smtp.gmail.com with ESMTPSA id
+ 956f58d0204a3-6470d8c500esm7829456d50.23.2026.01.12.02.09.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 01:48:17 -0800 (PST)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=7b9d336b1a6363b1b4dec1c42678508d957a6fe3cfa9bfe0bc92baa5d945;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Mon, 12 Jan 2026 10:48:11 +0100
-Message-Id: <DFMIL9EHIYOP.V8NWH55NYJTA@baylibre.com>
-Cc: <u-boot@lists.denx.de>, "Mattijs Korpershoek" <mkorpershoek@kernel.org>,
- "Tom Rini" <trini@konsulko.com>, "Marek Vasut" <marex@denx.de>, "Andrew
- Goodbody" <andrew.goodbody@linaro.org>, "Kory Maincent"
- <kory.maincent@bootlin.com>, "Svyatoslav Ryhel" <clamor95@gmail.com>,
- "Christian Marangi" <ansuelsmth@gmail.com>, "Dinesh Maniyam"
- <dinesh.maniyam@altera.com>, "Heiko Schocher" <hs@nabladev.com>
-Subject: Re: [PATCH v2 4/6] test: dm: Add compatible multimatch test
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Simon Glass" <sjg@chromium.org>, "Markus Schneider-Pargmann (TI.com)"
- <msp@baylibre.com>
-X-Mailer: aerc 0.21.0
-References: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
- <20260108-topic-musb-probing-v2026-01-v2-4-2a47c6e0e73a@baylibre.com>
- <CAFLszTjav_oJwQom-J7m_hoJ4HU-U0DDodpSF08R+Fwfi9Bchg@mail.gmail.com>
-In-Reply-To: <CAFLszTjav_oJwQom-J7m_hoJ4HU-U0DDodpSF08R+Fwfi9Bchg@mail.gmail.com>
+ Mon, 12 Jan 2026 02:09:19 -0800 (PST)
+From: Echo Hou <chaosesprit@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Echo Hou <chaosesprit@gmail.com>
+Subject: [PATCH] mtd: nand: Fix bad block marking for blocks with specific
+ offsets in BBT
+Date: Mon, 12 Jan 2026 18:09:14 +0800
+Message-ID: <20260112100914.3800261-1-chaosesprit@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 12 Jan 2026 14:09:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,135 +98,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---7b9d336b1a6363b1b4dec1c42678508d957a6fe3cfa9bfe0bc92baa5d945
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+When BITS_PER_LONG is 32 and offs is in the range [29, 31], the GENMASK
+macro produces a negative shift count. This undefined behavior causes
+the bad block marking process to fail.
 
-On Fri Jan 9, 2026 at 12:32 PM CET, Simon Glass wrote:
-> Hi Markus,
->
-> On Thu, 8 Jan 2026 at 04:17, Markus Schneider-Pargmann (TI.com)
-> <msp@baylibre.com> wrote:
->>
->> Add a test for binding of multiple drivers with the same compatible. If
->> one of the drivers returns -ENODEV the other one needs to be bound.
->>
->> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
->> ---
->>  arch/sandbox/dts/test.dts |  4 ++++
->>  test/dm/core.c            | 15 +++++++++++++++
->>  test/dm/test-driver.c     | 25 +++++++++++++++++++++++++
->>  3 files changed, 44 insertions(+)
->>
->
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
->
-> nit below
+Signed-off-by: Echo Hou <chaosesprit@gmail.com>
+---
+ drivers/mtd/nand/bbt.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Done, and thanks for your reviews!
+diff --git a/drivers/mtd/nand/bbt.c b/drivers/mtd/nand/bbt.c
+index 4ff0999f62a..0a434a70d5f 100644
+--- a/drivers/mtd/nand/bbt.c
++++ b/drivers/mtd/nand/bbt.c
+@@ -115,12 +115,16 @@ int nanddev_bbt_set_block_status(struct nand_device *nand, unsigned int entry,
+ 	unsigned long *pos = nand->bbt.cache +
+ 			     ((entry * bits_per_block) / BITS_PER_LONG);
+ 	unsigned int offs = (entry * bits_per_block) % BITS_PER_LONG;
++	unsigned int offs_h = offs + bits_per_block - 1;
+ 	unsigned long val = status & GENMASK(bits_per_block - 1, 0);
+ 
+ 	if (entry >= nanddev_neraseblocks(nand))
+ 		return -ERANGE;
+ 
+-	pos[0] &= ~GENMASK(offs + bits_per_block - 1, offs);
++	if (offs_h > BITS_PER_LONG - 1)
++		offs_h = BITS_PER_LONG - 1;
++
++	pos[0] &= ~GENMASK(offs_h, offs);
+ 	pos[0] |= val << offs;
+ 
+ 	if (bits_per_block + offs > BITS_PER_LONG) {
+-- 
+2.43.0
 
-Best
-Markus
-
->
->> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
->> index a2c739a2044c728a96b5f4acbf439a42d7e12fb5..9cc854ffe80e994e34010e29=
-9029a7f1756697e0 100644
->> --- a/arch/sandbox/dts/test.dts
->> +++ b/arch/sandbox/dts/test.dts
->> @@ -457,6 +457,10 @@
->>                 mux-control-names =3D "mux0";
->>         };
->>
->> +       multimatch-test {
->> +               compatible =3D "sandbox,multimatch-test";
->> +       };
->> +
->>         phy_provider0: gen_phy@0 {
->>                 compatible =3D "sandbox,phy";
->>                 #phy-cells =3D <1>;
->> diff --git a/test/dm/core.c b/test/dm/core.c
->> index 53693f4f7ed7c7265218e4154ebf81a044a3a431..78ee14af228ab20a6639bb07=
-6260296adaea2c92 100644
->> --- a/test/dm/core.c
->> +++ b/test/dm/core.c
->> @@ -1410,3 +1410,18 @@ static int dm_test_try_first_device(struct unit_t=
-est_state *uts)
->>         return 0;
->>  }
->>  DM_TEST(dm_test_try_first_device, 0);
->> +
->> +/* Test that all drivers are iterated when bind returns -ENODEV */
->> +static int dm_test_multimatch(struct unit_test_state *uts)
->> +{
->> +       struct udevice *dev;
->> +
->> +       ut_assertok(uclass_find_device_by_name(UCLASS_TEST, "multimatch-=
-test",
->> +                                              &dev));
->> +       ut_assertnonnull(dev);
->> +       ut_asserteq_str("test_multimatch_second", dev->driver->name);
->> +       ut_asserteq(2, dm_testdrv_op_count[DM_TEST_OP_BIND]);
->> +
->> +       return 0;
->> +}
->> +DM_TEST(dm_test_multimatch, UTF_SCAN_FDT);
->> diff --git a/test/dm/test-driver.c b/test/dm/test-driver.c
->> index 759de3a5f77f4b64ea577a293586a737e4623f60..bf953d7814df6a0e6efd6c2a=
-3960a925a3fbe5a7 100644
->> --- a/test/dm/test-driver.c
->> +++ b/test/dm/test-driver.c
->> @@ -197,3 +197,28 @@ U_BOOT_DRIVER(test_act_dma_vital_clk_drv) =3D {
->>         .unbind =3D test_manual_unbind,
->>         .flags  =3D DM_FLAG_VITAL | DM_FLAG_ACTIVE_DMA,
->>  };
->> +
->> +static int test_multimatch_first_bind(struct udevice *dev)
->> +{
->> +       dm_testdrv_op_count[DM_TEST_OP_BIND]++;
->
-> <blank line here>
->
->> +       return -ENODEV;
->> +}
->> +
->> +static const struct udevice_id test_multimatch_ids[] =3D {
->> +       { .compatible =3D "sandbox,multimatch-test" },
->> +       { }
->> +};
->> +
->> +U_BOOT_DRIVER(test_multimatch_first) =3D {
->> +       .name   =3D "test_multimatch_first",
->> +       .id     =3D UCLASS_TEST,
->> +       .of_match =3D test_multimatch_ids,
->> +       .bind   =3D test_multimatch_first_bind,
->> +};
->> +
->> +U_BOOT_DRIVER(test_multimatch_second) =3D {
->> +       .name   =3D "test_multimatch_second",
->> +       .id     =3D UCLASS_TEST,
->> +       .of_match =3D test_multimatch_ids,
->> +       .bind   =3D test_manual_bind,
->> +};
->>
->> --
->> 2.51.0
->>
->
-> Regards,
-> Simon
-
-
---7b9d336b1a6363b1b4dec1c42678508d957a6fe3cfa9bfe0bc92baa5d945
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaWTDWxsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPk
-4AEA2t8LMu0R7DACk4VkpKEl7PBJ0rUJ++J8ZddhRd4CZowBAIcUocD8Cx90jX56
-ohDbYfK10eMqBO91lC+1SXij6KcG
-=e/Q1
------END PGP SIGNATURE-----
-
---7b9d336b1a6363b1b4dec1c42678508d957a6fe3cfa9bfe0bc92baa5d945--
