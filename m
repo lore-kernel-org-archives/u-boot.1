@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C73C9EC88
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74AEAC9EC88
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:13:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF1078399B;
-	Mon, 12 Jan 2026 14:09:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0184C8393F;
+	Mon, 12 Jan 2026 14:13:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J81EMusZ";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="MicEwrd9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8B1083CBD; Mon, 12 Jan 2026 11:09:23 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id AC52C839A8; Mon, 12 Jan 2026 14:13:08 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B402083869
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 11:09:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 989E5803F5
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 14:13:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chaosesprit@gmail.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-79045634f45so67143197b3.1
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 02:09:21 -0800 (PST)
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-42fbc305914so4529812f8f.0
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 05:13:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768212560; x=1768817360; darn=lists.denx.de;
+ d=sartura.hr; s=sartura; t=1768223586; x=1768828386; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qg9wRX5589LJ78wB0G7Or7KpUgjaYmGrYmeExB5N1/w=;
- b=J81EMusZ6tu0E9U14Coe2tqDC6cbnT0a7MhNZ2nqzniVyyroy8X99J88yIs0g6YaN5
- fSAU++XqMHhB1zapApd0IEmVq4Z3C5pPvBgaHy8SUNCc5irLuSbOuQhxQGmy9rSqNuve
- aSRmG243VMaOToPD/AenGQSqJhN6Wa+6hY75uTGS0j8wy0+cAzbcn7B6xHOmfuSJkS7k
- bM8CNj6ZaIET4RYbC2/TqS6XJMdFLg8l1Z67P+KrYIilJf3Wf/QlkNw1a+GQI0Wc4Iq3
- j1PQADt4jqyQx6GxrrV89ELkZYXnKolOcIMKGf8Rz9cYVsZAcC8RxerGk4FBBhcvY21M
- StZg==
+ bh=Qzq8r2RNhzZsTWJm/7iFXQgjY0csUe4Qr/j26iRa7Tg=;
+ b=MicEwrd9kNIzsKaDKwMBbZejjyMk+lrTjqsajMoZkKsks+d9dVKGg9BlFMCbSz4PYk
+ ChK0r4Uth3hoWfiw+DHVataEspFQVnJ7/ke25JAooLAfOeYmG1iNL4cgn+Gh/sa4RBLB
+ OAPLyvbMQavBrS8+QL73OSpK3C3QbknNrgHf1fWI7ZmnLN2GQcU2SIrPZqR4vZsvcy8e
+ 5vhLdS+SP/JWHNAfC2qFhD0pspm0SoAe6lZrznAqJQS6LuA5iuJmjGN76jtqXljyPoAW
+ iiU6fawbUrrA3sEu7Mdd8c+mePVq9bKsmuYg33f/Q0QyzETDInbdEL3zwcJ1mav7kJlZ
+ pFwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768212560; x=1768817360;
+ d=1e100.net; s=20230601; t=1768223586; x=1768828386;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qg9wRX5589LJ78wB0G7Or7KpUgjaYmGrYmeExB5N1/w=;
- b=EtQGIBD+lyPIdnnZkji/t3aoOjkM9HrwRgjFZ5M1eKa/3W2ZUhSq46B2X4N/wtOBIN
- Cz7sl+3+XbHrqvytd2ModAf5w4WEPF6RjUiAFJAWQtEP9ghEBZdpoD7nCR+Do2mNi7gi
- mPRW/avukZAaAbKHtnTRow7goBTUXYx/p5r4sG7yrtkbdQs1F80dqzEVPb49TshD5IdQ
- QaPrwnw497DR0ekMGkAJ4A83l144MI0Xi94vClz8ar7vTSNc26OtZXTsMPgzstP1qT8W
- 8JrdvEDRVCzJEWYOmIW7GvESFSvGvZJMQ7aYLX66NalvmlS7Ri/VXlGcgPGf6N8JXU+a
- Geiw==
-X-Gm-Message-State: AOJu0YxEJUzxAoHhfHcOjAXUHrYlyS2tJsyjpudwAa2+27vT25OwvHMh
- 37x/EG1UGR3Fm15PMqYqoGE8E2vZhrdnVYmnK/h1snmlOFpk+kiMPVY5CK828xUr+tiND5FRGas
- =
-X-Gm-Gg: AY/fxX44nJ4ECQ/pBRB+HuGAmg8nF5efAYfq6s5PJ4BGitN0J8ipokNpbiN2/JhddKp
- Q3axYMBtjNNdrL0SAGwvMxVKTnutRq6tc4B4HMoTIEZNtyrbXFQktjPjzNV2tb2wWBAZtnAmfGI
- maEesEMU4VnpIDieIteAmYOJPHS/xuKeQ21HYGFp/k8vxPvKosl0dN76t+XFa1FZThurFIxnyHR
- Iz9MjA1HzH6upiBph7bvfTJk28LiahRBYu76yAenyyRX+on0szZzOMrz6sRYLyhXxbpxMwfHdVP
- IDqMbrogUgbehpOYAxLwBVvAXv6nRkckjnmTlOVhKD9+3lChBRS2MLKLE+srTJrDhMY1hLMP2Nw
- T1SJ+JvX/L7a+imKJ47EyaMOthqQvqSQn/bgsE8WBTPBwWuwy3PcGbd7iyLG9ZL3Us40zxfbEAX
- ef0rmkt12FnOzQCwZA5gijAanRX0l9nEJP/ikJZI27xsG6NjOSW5QosM4=
-X-Google-Smtp-Source: AGHT+IHq7tORhQdiDP/jYV4tNX+HAdFhjJzsNN7nrctfkq6EWhl6SoBTsCNHxHcuSmDb9PA7dnlSxg==
-X-Received: by 2002:a53:ac90:0:b0:645:591a:cb5e with SMTP id
- 956f58d0204a3-64716b39f44mr14154164d50.5.1768212560149; 
- Mon, 12 Jan 2026 02:09:20 -0800 (PST)
-Received: from omen.cambridgeig.com (199.168.137.240.16clouds.com.
- [199.168.137.240]) by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6470d8c500esm7829456d50.23.2026.01.12.02.09.18
+ bh=Qzq8r2RNhzZsTWJm/7iFXQgjY0csUe4Qr/j26iRa7Tg=;
+ b=PhNTJYuV0gBPutr1yZfpeZZ3iGD1h7TSXdJf4u2HtPkyIB6m0o1Mojv+txKjKHTrEG
+ 13NiFJLkAfsKKkHMo6tOM5ufrMKM9/8LfoLEpXo+avjz9oaDupu7vyQ/1AYdKYbw/Gd5
+ wxXZ1+y4eGZHakpQgVXBG0+ZlQyz9F3vzD33cQPvPA4Oa/Sm9FrdJRmUVIZ4P6sFWXir
+ dkaqyhEvpbhc8mt1U9mPx6Z26LL0Ceemjh2YYN79xU7LWdLD7bua3F35obaNI6kt5qEP
+ RumNG3OiLAS/rALqJYsEzgdmA9xuPQlwDAMTz0MiXDIAALD2g04MmpeiKPFHCFzUBGA8
+ p64w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUI1q+JYUQr9+WiBvLIjKDTcpd6RvIKbK+LX+qID0LCJHnkNgSwA53AQWtEwu3uCOlowVp2auQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDICfTVmIZlrbFNvfHTglaHG6i2FlUZybLboojdRRtk7XZYHkH
+ rub9XIcWsFx4wLRyTQ+Yb0+OmeVXQipP0dIfWdZpQ2oUC7b2EE3dnhNqni1aIEc9K5s=
+X-Gm-Gg: AY/fxX79zdlt5QQdjSTQjdCQPHn+wtIuBgOPC3gwDt9YmPgfgInsYIjtmA/2fUP8lWV
+ 8SaZxZM0/11e4Fnma6fwPJqU+DNFEq221rNe6cLulgXhCPFjcPSpB5gal1T0Xwc8GcVzohoZ1EV
+ y3fhu5rQSNByPnQhkuLju/nsU7iofxwb+ZrXFIsViJ7e1mPTEwc3/wPuZPYxcU70CO7JBcNKNNQ
+ lbHXRX3295VloceTjhW/ZC5Ql4I6/gDt+fjPE5dF8ZQBV4l56AFO9NFTnGdiVUnXs9iYYY2TOan
+ WjCskCaLHeisVVgTCa8EmzMusyK3S4ggCtKq6N3HO1+vNndiSkpsfiNJ0NnGBLqactY9+YjWA2L
+ /JfKiULugM8y8ZwJdyjqBN94U5PPFMkrBN2ASjRE3qE3Hlb8x7Dl2TaHTtd02W/3RXCgf5eraip
+ H/5BmyEnbqHHrtriynzcDz4BOAgnFtPN1tTPOJA65tJx6/udfZmLaUh4MhtAMmJ/6eT4S8dose9
+ zZuLM4F
+X-Google-Smtp-Source: AGHT+IFjdw0xobiHtW5DKAX0N4S59F9ch0JanJ7fNjUw6XYPeS6MjhBitW5SiJZdfwy+FgdXn1qVhA==
+X-Received: by 2002:a05:6000:2689:b0:432:5b81:483 with SMTP id
+ ffacd0b85a97d-432c3775a7cmr20200064f8f.24.1768223585755; 
+ Mon, 12 Jan 2026 05:13:05 -0800 (PST)
+Received: from fedora (dh207-14-52.xnet.hr. [88.207.14.52])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-432bd5df9c5sm39635162f8f.22.2026.01.12.05.13.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 02:09:19 -0800 (PST)
-From: Echo Hou <chaosesprit@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Echo Hou <chaosesprit@gmail.com>
-Subject: [PATCH] mtd: nand: Fix bad block marking for blocks with specific
- offsets in BBT
-Date: Mon, 12 Jan 2026 18:09:14 +0800
-Message-ID: <20260112100914.3800261-1-chaosesprit@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ Mon, 12 Jan 2026 05:13:05 -0800 (PST)
+From: Robert Marko <robert.marko@sartura.hr>
+To: eugen.hristev@linaro.org, trini@konsulko.com, sjg@chromium.org,
+ hs@nabladev.com, u-boot@lists.denx.de
+Cc: luka.perkov@sartura.hr,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH v2 1/4] arm: at91: move atmel_serial.h to
+ include/dm/platform_data
+Date: Mon, 12 Jan 2026 14:12:39 +0100
+Message-ID: <20260112131258.182173-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 12 Jan 2026 14:09:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,37 +101,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When BITS_PER_LONG is 32 and offs is in the range [29, 31], the GENMASK
-macro produces a negative shift count. This undefined behavior causes
-the bad block marking process to fail.
+Move the arch specific atmel_serial.h header from AT91 to the generic
+include/dm/platform_data.
 
-Signed-off-by: Echo Hou <chaosesprit@gmail.com>
+This will be used for support on Microchip LAN969x.
+
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- drivers/mtd/nand/bbt.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ board/bluewater/gurnard/gurnard.c                               | 2 +-
+ board/siemens/corvus/board.c                                    | 2 +-
+ board/siemens/smartweb/smartweb.c                               | 2 +-
+ board/siemens/taurus/taurus.c                                   | 2 +-
+ drivers/serial/atmel_usart.c                                    | 2 +-
+ .../include/mach => include/dm/platform_data}/atmel_serial.h    | 0
+ 6 files changed, 5 insertions(+), 5 deletions(-)
+ rename {arch/arm/mach-at91/include/mach => include/dm/platform_data}/atmel_serial.h (100%)
 
-diff --git a/drivers/mtd/nand/bbt.c b/drivers/mtd/nand/bbt.c
-index 4ff0999f62a..0a434a70d5f 100644
---- a/drivers/mtd/nand/bbt.c
-+++ b/drivers/mtd/nand/bbt.c
-@@ -115,12 +115,16 @@ int nanddev_bbt_set_block_status(struct nand_device *nand, unsigned int entry,
- 	unsigned long *pos = nand->bbt.cache +
- 			     ((entry * bits_per_block) / BITS_PER_LONG);
- 	unsigned int offs = (entry * bits_per_block) % BITS_PER_LONG;
-+	unsigned int offs_h = offs + bits_per_block - 1;
- 	unsigned long val = status & GENMASK(bits_per_block - 1, 0);
+diff --git a/board/bluewater/gurnard/gurnard.c b/board/bluewater/gurnard/gurnard.c
+index 3275803226a..71db6409721 100644
+--- a/board/bluewater/gurnard/gurnard.c
++++ b/board/bluewater/gurnard/gurnard.c
+@@ -29,7 +29,7 @@
+ #include <asm/arch/at91_rstc.h>
+ #include <asm/arch/at91_rtc.h>
+ #include <asm/arch/at91_sck.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/clk.h>
+ #include <asm/arch/gpio.h>
+ #include <dm/uclass-internal.h>
+diff --git a/board/siemens/corvus/board.c b/board/siemens/corvus/board.c
+index 4c83774fceb..c0a94ac904f 100644
+--- a/board/siemens/corvus/board.c
++++ b/board/siemens/corvus/board.c
+@@ -20,7 +20,7 @@
+ #include <asm/arch/at91sam9_smc.h>
+ #include <asm/arch/at91_common.h>
+ #include <asm/arch/at91_rstc.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/gpio.h>
+ #include <asm/arch/clk.h>
+diff --git a/board/siemens/smartweb/smartweb.c b/board/siemens/smartweb/smartweb.c
+index 6fa3ca573ae..ce16aad3b98 100644
+--- a/board/siemens/smartweb/smartweb.c
++++ b/board/siemens/smartweb/smartweb.c
+@@ -25,7 +25,7 @@
+ #include <asm/arch/at91sam9260_matrix.h>
+ #include <asm/arch/at91sam9_smc.h>
+ #include <asm/arch/at91_common.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/at91_spi.h>
+ #include <spi.h>
+ #include <asm/arch/clk.h>
+diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
+index 252b0787124..690c00046fa 100644
+--- a/board/siemens/taurus/taurus.c
++++ b/board/siemens/taurus/taurus.c
+@@ -24,7 +24,7 @@
+ #include <asm/arch/at91_rstc.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/arch/at91sam9_sdramc.h>
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #include <asm/arch/clk.h>
+ #include <asm/gpio.h>
+ #include <linux/mtd/rawnand.h>
+diff --git a/drivers/serial/atmel_usart.c b/drivers/serial/atmel_usart.c
+index 0b35582aaa4..d6c3d4cbcc8 100644
+--- a/drivers/serial/atmel_usart.c
++++ b/drivers/serial/atmel_usart.c
+@@ -18,7 +18,7 @@
  
- 	if (entry >= nanddev_neraseblocks(nand))
- 		return -ERANGE;
- 
--	pos[0] &= ~GENMASK(offs + bits_per_block - 1, offs);
-+	if (offs_h > BITS_PER_LONG - 1)
-+		offs_h = BITS_PER_LONG - 1;
-+
-+	pos[0] &= ~GENMASK(offs_h, offs);
- 	pos[0] |= val << offs;
- 
- 	if (bits_per_block + offs > BITS_PER_LONG) {
+ #include <asm/io.h>
+ #if CONFIG_IS_ENABLED(DM_SERIAL)
+-#include <asm/arch/atmel_serial.h>
++#include <dm/platform_data/atmel_serial.h>
+ #endif
+ #include <asm/arch/clk.h>
+ #include <asm/arch/hardware.h>
+diff --git a/arch/arm/mach-at91/include/mach/atmel_serial.h b/include/dm/platform_data/atmel_serial.h
+similarity index 100%
+rename from arch/arm/mach-at91/include/mach/atmel_serial.h
+rename to include/dm/platform_data/atmel_serial.h
 -- 
-2.43.0
+2.52.0
 
