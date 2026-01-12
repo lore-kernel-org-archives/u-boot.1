@@ -4,90 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CDEC9EC8B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C43AC9EC8B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 648EA83A1E;
-	Mon, 12 Jan 2026 14:13:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC1F0803F5;
+	Mon, 12 Jan 2026 14:13:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="IyYVKrvO";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="veMbVszN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C4B0839A8; Mon, 12 Jan 2026 14:13:09 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 8C88783979; Mon, 12 Jan 2026 14:13:10 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28A2E83935
+ by phobos.denx.de (Postfix) with ESMTPS id 011D183979
  for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 14:13:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-432d2670932so2678494f8f.2
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-43284ed32a0so3214936f8f.3
  for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 05:13:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1768223586; x=1768828386; darn=lists.denx.de;
+ d=sartura.hr; s=sartura; t=1768223587; x=1768828387; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4ICpEspmn/5kZhxyZsi8gRDuxpUAQvFZqgkWR59/jng=;
- b=IyYVKrvOnsMwnJeuOMiA7tqA8TIHR5k60JZJ/s0ytQcXIOpqy9uJS7bCuvp4ERGe3s
- y7A9sYb+RMtaCBV1Y2EQ4ed+pdvcrwd3QXBju4DIkLSDKXuT3yTXjbcNKSWspQDcSWjc
- kW6FaR9xXf6HEa7+HH6mugmkQCDrO8ATyPNoYOagNKtuzjT+MRqnvT/yyBe4hERwP9IF
- QI4hhi0M9nA6v2HQscDG8Pg7Bnezqo4qaQmz95bTJhgXWKojVOixebvDBLPkl0bmeZ7w
- pnWbDpf3270DSpF3CHVyDoJwq8Jz4QBn1aAZP5HT9Ob6zh4kKlqu7eq6o0bIWb62ufX9
- Fggw==
+ bh=MHmGeDhtgSsWQjF2tY03NReG/8knoMidNuPnyly6Zcw=;
+ b=veMbVszNWgv+AC9B1bbDeT2JHPq562KNoAIoL8dpFTxyjbJQ6CD36HsxjmwMCO4gUP
+ zxw372FW8IQOMkep8R2Lgoe632oy14LeC+tE9lPOowp6HPesSboTFjVPR2A2+J39U9rs
+ mo8Ld8F/6u4ND1VjBDgLmUCnALTpzs20C/mwgS5AJ+e7lobEGLc+8Y36KJCo0nHXdaNa
+ Co06lGDmmiu+LRkCHrKsDX0STixqM9gQ2ROYockLZQImSgU60ozwin46daAoLLZhdeAn
+ zTZVSUujkzD7EPTR3KlJMh5obBhoE5DLm4rhZCJQTXxHp8DjWHTGVb74J+7n7J48woJV
+ /g3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768223586; x=1768828386;
+ d=1e100.net; s=20230601; t=1768223587; x=1768828387;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4ICpEspmn/5kZhxyZsi8gRDuxpUAQvFZqgkWR59/jng=;
- b=qM0gRCjNIbm0FzodAvUzvyVBcfNL8QoTZvYdpukrGt6v2MNglHy/OFr7LzHltd6o/N
- 10V/UhOZFp+OyZwXrnt4PcKyGyy1fd+hVC9Tt3s4t2HPUyem9zzlQFE9VDuuyxRu5lts
- zAYFv8fBB4biL13R6xGU1BKIXPmV929ikQzJZETY0zF6G/I1abTg8pClhIZeQBxSb98s
- 5z3Lsbg0G5nthqrgwxrofEVs0f1lWZWBRDi0DXYtZDyGw6K/BujIKUABNOH0sSYHTVMt
- Z0FWvgki7nOrFI4vbeLeEnVWmtgR+PcO29p1FHybCr6xvaxO/2NhLtSTBJpMxShhE3Ub
- FNwA==
+ bh=MHmGeDhtgSsWQjF2tY03NReG/8knoMidNuPnyly6Zcw=;
+ b=w+Q7rWqBX1yVE6Z5T+g8IpUfCFqQOR+P99M96AoIZZZM+1cEyl2O7gFbjQq9YFWDtd
+ KedGYFyPZaLuBHrb+4i+Ks8rgywLsUaK8h0dc0CBU+ur/JFJm+64G3wi41AaRFUc7Zjl
+ 4E23VsnBDesCqmt9EwPk2SmSZ7FVMLaPMJ6QPu92+4QklufTL8x8MN79veabQEPJXbKg
+ iIokmwHwwMrTwPv832tDvoIIhwizg1aiowjMq6tRJiA8oDW3MgwKhxkr3hTdfvZWJcSc
+ idD8YwUxStxyP3kznXj/eU86GUg7lnufnQ0OiI3aujuVpN9TJcsPS/ExN3XJP4GV3Xel
+ zy8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUV1usffIrng8Soz8PkDeyKk+k7fnTrMCuAiFvqJkWccjirogqjtujEJlZEBIp1WIo3mFVXOpA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCnSMKpR10Vi3tKN6xjezPCiabhPSTxQ9O3REPNFTa68/qeTOj
- kQmCvqauX4zQGo9PINNE6JkPHAaiY1Abc/mNX6g+QstVgdHt1q9ZKwCGee4KiCrFrGo=
-X-Gm-Gg: AY/fxX7Th7hQpITY7fYl15ZP2VKVgl90ypNW/uUsucLyfxjGsT2kzwkEmb83WAdVICU
- NCin2Kjc6J3Y51lfty0gzTPs0JzE4kWL3jLWIHdU20JwI2cweCwrQfcSNzf/c6pIlsC3nsMTed5
- nUyXKP1IIuFr9kvAUxqKYnwjprvRqCh3zrJeASztKPramcqlPmi856La35OOjHLbqekSoFciKGP
- 0nwvyWSPVlkhUY00G8mG9HGuPEbDN/DK3CUxB43ycxKySkhixaLWkv5KQFqAY6WnF5iTcY9LXXT
- B4GeNkhNSmR/UGEdykdCdrizC57RqT1Vk86AYr1+8BNbWcjYavgedSdncxhA7cfnG+rGSh7Hw2Q
- kRHMkLpFiskYA4IvAo6XdG7QB0UW8Vv5g0Txv9WmdmH/xp8sCTCWKgHvOm8YtGzd6woosBI6m7I
- TbmGBVTjaLpCleEGH9aWziCSZOkhv6iKj8VmRbB/qzDX8upFKzXS2/L6eluINyIpgob51myZv2f
- X2hfaJy
-X-Google-Smtp-Source: AGHT+IGF0FqVswQ4ZbBSxEZB0PCVQ+1akEx7OGLeiSEDRD6kMimC7DI67XKgvoKQneLJLj8qU+4EhA==
-X-Received: by 2002:a05:6000:2007:b0:42b:396e:2817 with SMTP id
- ffacd0b85a97d-432c37c86c2mr23543910f8f.40.1768223586520; 
- Mon, 12 Jan 2026 05:13:06 -0800 (PST)
+ AJvYcCUOqFPPTFHr7V6tq4YNbjZNWQhgJdWrQpMRyYWtYHutK9zKvc33Dm0UfC3s3OEcO9nC/NyWEs4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNPuICMQ7kjeKbyk4eZ+0rcZfvVocmdYyZTQUa+iVMiN5cson6
+ V85FqiFTdGhrGKHbkjXAVfS3DSq/YgtzDLbe7mqvRbjDPWBIxHwnReWjq5FpcaRyQfU=
+X-Gm-Gg: AY/fxX5di3LWWf8C7p1cfluE4iMW2XPkkpwAxEds4+AWXptlGn46XdgqY7KOjuWjaqa
+ dts1Fa4eEt0Xo4nwAz0CetPSFyCrF1RHl4YkenWndbIFiJDUmV5hpbZnc80v72ncLbwZvsNPX0f
+ sIBJGAxmlwl1HsAHPOrcj+tJ9jWKkikGmvBCRhLn3I5/LIRFGTwFB+z9DM2WCSuLgywb+hRXqsU
+ wlEHHzQQ703NzLdSUD+J8hd7dYkA7P0EOzX7+Rg03zCwiTSL+lUHSZ/dd53jBSQ3P7P2rVtP1Uk
+ 2wzaK8RoR6kgRFrswRG/EjYoOdzEe75jh2Dx6n3RxUerNsRe0ZIzmJvHS7ZggcQl9a6a08ViAiS
+ rFGZTNWO2QG/dMz0IPXVW9xGMKhQE/zYbmDp6H4wRE9UbIHsfiekubH9BLl/SvUzIUMfpTyqxVr
+ rKw9f1KSjBWy/ZEgJh8gfoYJiXaZjuHNeJUuwUbnr7gPWxIE7K0BXkh4esHSUCNOl1YMMz8tF9G
+ ahHHc4A
+X-Google-Smtp-Source: AGHT+IGgzY9CHjxtqoodD+CQtCj+3dEYZ41ABaDZRtcrPNZEoGSXxrpeX+SER3OkgOSuQGV5JY9YUw==
+X-Received: by 2002:a5d:588e:0:b0:431:b1e:7ff9 with SMTP id
+ ffacd0b85a97d-432c37742d0mr18664063f8f.59.1768223587410; 
+ Mon, 12 Jan 2026 05:13:07 -0800 (PST)
 Received: from fedora (dh207-14-52.xnet.hr. [88.207.14.52])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-432bd5df9c5sm39635162f8f.22.2026.01.12.05.13.05
+ ffacd0b85a97d-432bd5df9c5sm39635162f8f.22.2026.01.12.05.13.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 05:13:06 -0800 (PST)
+ Mon, 12 Jan 2026 05:13:07 -0800 (PST)
 From: Robert Marko <robert.marko@sartura.hr>
 To: eugen.hristev@linaro.org, trini@konsulko.com, sjg@chromium.org,
  hs@nabladev.com, u-boot@lists.denx.de
 Cc: luka.perkov@sartura.hr,
 	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v2 2/4] dm: platform_data: atmel_serial: fix build warning on
- 64-bit platforms
-Date: Mon, 12 Jan 2026 14:12:40 +0100
-Message-ID: <20260112131258.182173-2-robert.marko@sartura.hr>
+Subject: [PATCH v2 3/4] serial: atmel-usart: include arch specific headers
+ only for AT91
+Date: Mon, 12 Jan 2026 14:12:41 +0100
+Message-ID: <20260112131258.182173-3-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112131258.182173-1-robert.marko@sartura.hr>
 References: <20260112131258.182173-1-robert.marko@sartura.hr>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,32 +104,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pointer size cannot be assumed to be 32-bit, so use uintptr_t instead of
-uint32_t.
-
-Fixes the below build warning on 64-bit builds:
-drivers/serial/atmel_usart.c: In function ‘atmel_serial_probe’:
-drivers/serial/atmel_usart.c:275:23: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-  275 |         priv->usart = (atmel_usart3_t *)plat->base_addr;
+Microchip LAN969x will not include any arch specific clk.h nor hardware.h,
+so in order to support it only include <asm/arch/clk.h> and
+<asm/arch/hardware.h> when AT91 is selected.
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- include/dm/platform_data/atmel_serial.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+* Use IS_ENABLED instead of CONFIG_IS_ENABLED when checking for
+CONFIG_ARCH_AT91 as there is no SPL equivelant and CONFIG_IS_ENABLED
+evaluates as CONFIG_ARCH_AT91 is not set thus not including the required
+platform specific clock header.
 
-diff --git a/include/dm/platform_data/atmel_serial.h b/include/dm/platform_data/atmel_serial.h
-index 5d142693640..96da6f50287 100644
---- a/include/dm/platform_data/atmel_serial.h
-+++ b/include/dm/platform_data/atmel_serial.h
-@@ -8,7 +8,7 @@
- 
- /* Information about a serial port */
- struct atmel_serial_plat {
--	uint32_t base_addr;
-+	uintptr_t base_addr;
- };
- 
+ drivers/serial/atmel_usart.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/serial/atmel_usart.c b/drivers/serial/atmel_usart.c
+index d6c3d4cbcc8..fb1c76fea8d 100644
+--- a/drivers/serial/atmel_usart.c
++++ b/drivers/serial/atmel_usart.c
+@@ -20,8 +20,10 @@
+ #if CONFIG_IS_ENABLED(DM_SERIAL)
+ #include <dm/platform_data/atmel_serial.h>
  #endif
++#if IS_ENABLED(CONFIG_ARCH_AT91)
+ #include <asm/arch/clk.h>
+ #include <asm/arch/hardware.h>
++#endif
+ 
+ #include "atmel_usart.h"
+ 
 -- 
 2.52.0
 
