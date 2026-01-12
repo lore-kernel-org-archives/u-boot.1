@@ -4,74 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C78CF45AF
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 17:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E398CF45B2
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 17:26:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EB4F83693;
-	Mon, 12 Jan 2026 18:09:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C467483759;
+	Mon, 12 Jan 2026 18:26:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="edLVkcnt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mEfi5lVU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B86C183759; Mon, 12 Jan 2026 18:09:28 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 489EB8382A; Mon, 12 Jan 2026 18:26:14 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazhn150120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5484C835B3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 18:09:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 214E383700
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 18:26:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 55495C20868;
- Mon, 12 Jan 2026 17:08:59 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id BB13B606FA;
- Mon, 12 Jan 2026 17:09:25 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 96544103C9299; Mon, 12 Jan 2026 18:09:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1768237764; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=VbCRdiGUX7m9u4MCNQdNbErEvTv5zldYAbmWBj7VJOY=;
- b=edLVkcnt+CiG5eNhUM3l5j9JJFm0zh6+QRm6jNFeADzS0hYLRDr9WzocX2/eiBax8Da7+i
- Op7v8X0WUXy0Y7bf0Iq2j57qfx+4VREXTQcfsCYmzkIF58asDNyZ+cQMSYIsQXWeujC0w3
- acCBkguwDq41IjDfpb9/f3nkFn5xx6WJzUCjQdGFpY9CnyAhifvBbMqOX4R/32y+mBHPD3
- 6x+9prR1YW6LLaZrEyWNHUwxeLAXcHqAqtiGgHh6v7Pr5suOELL31WD1D0/J6iilB/uZHU
- lI9dClFbDET/8g61Zlu2efE74Z1gBGGWvmj6Hny1usdWtkF7kV0FaZg2LYTrHg==
-Message-ID: <5b7e3e38-325f-424b-ab95-8775924333e4@bootlin.com>
-Date: Mon, 12 Jan 2026 18:09:18 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hc8dCdjW5U4JK431uXbPL9hUz7Kv4JDAGtgStpVbJaZ/Of/i5Ul5PNKV4VDZs2uOmPPCM/WW5AczvwgNdQhrAKaBV8dTKsljO5UjvKV0+pG3EeYioYbWjWqISCMKcp1ttSrvS4MhWMpkEum9DbzOFILC2ETuCCBrqBOwXAG6tgrKyedR3uCn4P125ZvhCZMuvCgiEbgVNZow8PC6eceMWQaoUBXyPU4exUeN8Jg8FSd7wYhvWYLOfMCi6HgC7OSlMYM3czlVr9yBZ0QPGpBEvWv/3n7rbwQhhfuS8iCPvc4EpQ6nip7kIJL1px063B7j7b0BF54GE4KHTubVEaefgA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=taskZnzwx0bE7SOSJ23sDm1MNdjenrvDLaZSsac5zVg=;
+ b=r3GytpUYl/eRjaxMm9Fs8AAWOrCx7ALOwv2tX/fFaXD4yQLwJ+NWMNqp4YUgXjrR+vqhMRZcw9g8zgYjTAYYrGDAE5xrrinJb8eXeopf4BSXd3Tq0hRBQG8mMKSHQvGX9C16X0VtXJt7CDpQNHcT/dzKJ4lHoLApy/laTNroHZgRumPTTnwPQLN8nH3xaB7tC9ACfA2iijvr2SBoVzvPhD8eU3J5JgJiluftbuIlLmJOep0vxaGBaXRIoU1hFbTA76IVAxf2u6FDXCV4U0BTU3kJm5eWXa+94JSC7TverFLxyUSoP4fnq0osQ/JJ8Osu3pIQOoWF94F+bjEbejXnEw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=taskZnzwx0bE7SOSJ23sDm1MNdjenrvDLaZSsac5zVg=;
+ b=mEfi5lVUoXzKnL1nmE0SkYHU5WmLZVP169O2ZQfSTdN+ZXviapPkV2E6KBmg1xD+XYQbTSadTuLkLMlYl7UX1na8to2LLxgQNvS8/mfrKrWZ1Q76qqyGTjHHNk1edAWtCZOxEl0q39yEC8yAsBZw5WMnwByCt/Unl4l+7dXeQWo=
+Received: from SJ0PR05CA0164.namprd05.prod.outlook.com (2603:10b6:a03:339::19)
+ by MW4PR10MB6606.namprd10.prod.outlook.com (2603:10b6:303:228::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Mon, 12 Jan
+ 2026 17:26:05 +0000
+Received: from MWH0EPF000989EA.namprd02.prod.outlook.com
+ (2603:10b6:a03:339:cafe::41) by SJ0PR05CA0164.outlook.office365.com
+ (2603:10b6:a03:339::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.3 via Frontend Transport; Mon,
+ 12 Jan 2026 17:26:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MWH0EPF000989EA.mail.protection.outlook.com (10.167.241.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.1 via Frontend Transport; Mon, 12 Jan 2026 17:26:05 +0000
+Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
+ 2026 11:26:04 -0600
+Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
+ 2026 11:26:04 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 12 Jan 2026 11:26:04 -0600
+Received: from [10.249.130.12] ([10.249.130.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60CHPxAi865871;
+ Mon, 12 Jan 2026 11:25:59 -0600
+Message-ID: <2854b18c-324f-4052-a6e5-538df6a0bcab@ti.com>
+Date: Mon, 12 Jan 2026 22:55:58 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
- support
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dinesh Maniyam <dinesh.maniyam@intel.com>,
- Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20251028091256.600992-1-richard.genoud@bootlin.com>
- <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Subject: Re: [PATCH v2 1/2] scripts/Makefile.xpl: Align filtered DTB to 8-byte
+ within multidtb.fit
+To: Marek Vasut <marek.vasut@mailbox.org>, <trini@konsulko.com>
+CC: <ilias.apalodimas@linaro.org>, <malysagreg@gmail.com>,
+ <sughosh.ganu@linaro.org>, <philip.molloy@analog.com>,
+ <james.hilliard1@gmail.com>, <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>,
+ <vigneshr@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20260112101102.1417970-1-b-padhi@ti.com>
+ <20260112101102.1417970-2-b-padhi@ti.com>
+ <9257e248-512f-4c42-999b-0f8c4f0f92b7@mailbox.org>
+Content-Language: en-US
+From: "Padhi, Beleswar" <b-padhi@ti.com>
+In-Reply-To: <9257e248-512f-4c42-999b-0f8c4f0f92b7@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EA:EE_|MW4PR10MB6606:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34e29d9f-203f-4ead-98c1-08de51ffaaa5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|34020700016|1800799024|12100799066;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eTRKVnFpbjFnc0FnV3pkNHBHYXlCUUNKZW5tRzlRbGhvNjk2QjBUMnczdEg3?=
+ =?utf-8?B?b0tDcDh1QjFaSFppWGFnWWsycjV1RUV5Z2MzSkNFS0RoSTVqbElpUnBoMUVW?=
+ =?utf-8?B?ZmZFSDRnODg3T2U4TmUvQ2VyZmFLdkxrY0JrKzFQNWwrR09UTnhSMFlBRGUy?=
+ =?utf-8?B?bWlONTM5cDdTbEN2Um54VDNSRTFHcFVSVUIxV3F1cW9jVGlrOGNjWDlDM3BT?=
+ =?utf-8?B?eEZ0b0UrSnpaVUNxdExCbEFyeHFHa3l6dTB1WDNnbmszZUVzZ1ptZ1BZVmNU?=
+ =?utf-8?B?eDh1RWd5NVNqSHhLZS83Ym9BSTk3bGVEMXNpWkppVWJYZ1JKWXdSK0JkRXZ6?=
+ =?utf-8?B?TGRRc1E0YVIrbThDZzg3NlBtRVIrUTIvOGxwZnU3VzYyeEtrTExLMlNlaEJH?=
+ =?utf-8?B?emk0enk2UlFmQ3ZNK0owek5JWmd0VVFEZWlROVRWTHMrRXZBR1dpejZXWERB?=
+ =?utf-8?B?UHhBanBXdUpMSk41dnI2R1c4Tzd5WjB4Vjl6aWlpdmJjVnc2TTA2WmQyRzQ5?=
+ =?utf-8?B?OWF5MDhQSHZmdy9MaFVWWFA3MjBtZERlaDlFSGloZmM3cENWTUpLd2Y3Q215?=
+ =?utf-8?B?ZTBydGxkeURib1FnbDk5cHFkbWhubGpQYU00QUZnd005U0VxTDdGUlhpTUdG?=
+ =?utf-8?B?dHdvUlJwSHhNQ3kxeU9HUHJhK2swMG1rb2ZRQmE1M2NLa1YrOVR0UUEzQXYv?=
+ =?utf-8?B?NmNWbkVXU2x0NEc0VTQzREthenVPa0FqSWsxcDdRUkN2NDN1WjB2UlZXVFVE?=
+ =?utf-8?B?VlQ5SGNxbDQwdU5QZDBELzYvTTJkK1dhWVB0T1ovbXFxY093Z2dNM1NINHBr?=
+ =?utf-8?B?RXQvOWdIRURoNjdiK2hwMU83eGt3Z3M0WHVDYmM2RXo2ZDMwc1QyRWNMMGo4?=
+ =?utf-8?B?aitPZEdRSHhNdTdNVUxoZ295bzdxcDJjODlaS1ZEcXEwNkxIVVh0MXoyYitE?=
+ =?utf-8?B?UVVzR2dpcDdBUDdFZUZROHJrZG1lOTByZUw5c2pKaGtTeHdCSEt3cys2WVVM?=
+ =?utf-8?B?dkx2MVpWWWd5RUtnSW4vYlBFbVhmVWg2R3pWVTNHUlQ5NExCaDJvUzBOOHE0?=
+ =?utf-8?B?aVpPcDZnb2NhVFlXUWtUeTY5ZlM1MUVka3dMTUN6NlltWFBubHJ2T1ZqUmZC?=
+ =?utf-8?B?OTZrUEI2blZJS0JEWjF4ZDgzRUU2ZXoyQm9oZzJibmVRbk96U1ptTld4anB1?=
+ =?utf-8?B?VEtaMXpDbEVxYW9OTXg2cmRlamJrZWdDNm1pQmtHbmY0NTR0OG1HTEU1YTB2?=
+ =?utf-8?B?TnlsQVA5clEyZ1hUMUFLeHVoVCs2ZHU3OS9mSHRIT0o4clFBSVdYMGRBVXR3?=
+ =?utf-8?B?WFNTZ2Y3dWRqYlU3NWNaWVFIOXRBeVZZaDlrTmtlQWQ4V21pdHVaTzMwU1dm?=
+ =?utf-8?B?ekFTNmhJUzdidk5STzE5U01SOG9BODFJOHk4MWZzTzlpMGtNa0ZjUjNDd0RX?=
+ =?utf-8?B?cEFVWlRlbDdjdUYxNDV2YmZsRm0rdlBEOU12Zm5YZE9kdlRHVyswM3ZPNVhu?=
+ =?utf-8?B?RkxZSlloVTZ4MHdLOHpPZnE5OWtEeHRMbm1tdXpqNGFOaHA4RDRpSTZQQWJQ?=
+ =?utf-8?B?NXg5WG5IVnVuTzlmQzUra3Z2cUJYTTgvMGI5TlU5V3llRFJWQUZML3FtWGc3?=
+ =?utf-8?B?bGU4WTMwVDM2MTM1bDRqYUhEdkxaSjZhRCt6ZGczUTQ4cjBoNkdKS1ZKeHRz?=
+ =?utf-8?B?QzhvMEluQ0JuaGkvQU12Vm1vL1V3d0RBMEhSK3VLR20xQjYzMXYrS1g3Z3Rj?=
+ =?utf-8?B?aTFLaXNyeitLZm1yYTJhTVNRd2RuclVMWExvSEoxYkNodys5VEdGMFRSUUcx?=
+ =?utf-8?B?QkNhTCtKbnk3ZjlEeVBYTzJaVklldmo1M2x0cWpuQkN1V2V4ZmtqTS9kQnJC?=
+ =?utf-8?B?WU5SYU9NSWZsRXBpMDBmNlNUcXd2WVBOUHJRRlpGdkdLamRnKzR3Ty9qbksw?=
+ =?utf-8?B?K0hqZlNVTXgzSjJUdGxPMlFDamdNR085Ymw3SjBodmpkN2Q2TXFjQXlMNTRO?=
+ =?utf-8?B?VnVLSnZvb0dLdnBENmE1MllUdmYwekRsZnJrSzhjSTZGcVRsSXVobS84MGk3?=
+ =?utf-8?B?L0ZZRHFWMWZmeDRRNUNVYkNtb1IrTzNaUFYyUUVjamQ4QThKaGtkKzBiM3Zx?=
+ =?utf-8?Q?6LEs=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(34020700016)(1800799024)(12100799066);
+ DIR:OUT; SFP:1501; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 17:26:05.3368 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34e29d9f-203f-4ead-98c1-08de51ffaaa5
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989EA.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6606
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,138 +172,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-Le 31/10/2025 à 07:43, Michael Nazzareno Trimarchi a écrit :
-> Hi Richard
-> 
-> On Tue, Oct 28, 2025 at 10:13 AM Richard Genoud
-> <richard.genoud@bootlin.com> wrote:
->>
->> Hi everyone,
->>
->> This patch series introduce H6/H616 NAND controller support (but not yet
->> the DMA/MDMA part).
->>
->> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
->> chip.
->> ECC is supported, as well as scrambling.
->>
->> Support for booting from NAND is not part of this series, but it's almost
->> ready. (It needs quite some modifications in sunxi-spl-image-builder.c
->> and sunxi_toc0.c)
->>
->> H6 SoC has not been tested, but it shares all registers with H616, plus
->> some registers dedicated to Embedded Crypto Engine that H616 lacks.
->>
->> This IP has quite some register fields modified from the A10/A23, but in
->> the end, it works more or less the same.
->> Main differences with A10/A23 are:
->> - The need for 2 more clocks (for ECC and MBUS)
->> - The use of a new USER_DATA_LEN register
->> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
->> - MDMA based on chained buffers
->> - some registers layouts have changed (mainly due do the stronger ECC)
->>
->> Patches 1 and 2 are small fixes
->>
->> Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
->> and ultimately merge those definitions in an include file, without
->> functional change, removing the usage of sunxi_ccm_reg on the way.
->>
->> Patches 7-19 are paving the way to the introduction of H6/H616 NAND
->> controller by adding per SoC capabilities for both drivers. They are
->> small for an easier review, without functional change.
->>
->> Patches 20-21 are adding missing NAND related clocks definitions for
->> H6/H616
->>
->> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
->>
->> Patch 23 adds the support for H6/H616 NAND controller in SPL.
->>
->> Patch 24 fixes warnings in sunxi_nand_spl.c
->>
->> A similar series for this NAND controller support in Linux has been sent
->> and being reviewed.
->>
->> Changes from v1:
->> - pick-up reviewed-by
->> - use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
->>    by Andre
->> - remove cosmetic in patches that are beyond cosmetic changes
->> - remove usage of struct sunxi_ccm_reg, suggested by Andre
->> - indent @caps member description in comment
->> - give more informations on PAT_FOUND registers in commit message
->> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
->>    same bit NFC_ECC_BLOCK_512
->> - add missing MACH_SUN50I_H6 in Kconfig
->>
->> Richard Genoud (24):
->>    mtd: rawnand: sunxi: cosmetic: remove needless comment
->>    mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
->>    mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
->>    mtd: rawnand: sunxi_spl: cosmetic: use definitions from
->>      linux/mtd/rawnand.h
->>    mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
->>    mtd: rawnand: sunxi: merge register definitions for
->>      sunxi_nand{,_spl}.c
->>    mtd: rawnand: sunxi: add per SoC capabilities
->>    mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
->>    mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
->>    mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
->>    mtd: rawnand: sunxi: add has_ecc_block_512 capability
->>    mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
->>    mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
->>    mtd: rawnand: sunxi_spl: add per SoC capabilities
->>    mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
->>    mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
->>    mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
->>    mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
->>    mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
->>    sunxi: clock: H6: add NAND controller clock registers
->>    clk: sunxi: Add MBUS Master Clock Gating Register
->>    mtd: rawnand: sunxi: add support for H6/H616 nand controller
->>    mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
->>    mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
->>
->>   arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
->>   .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
->>   arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
->>   .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
->>   arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
->>   board/sunxi/board.c                           |  19 +-
->>   drivers/clk/sunxi/clk_h6.c                    |   2 +
->>   drivers/clk/sunxi/clk_h616.c                  |   2 +
->>   drivers/mtd/nand/raw/Kconfig                  |   3 +-
->>   drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++--------
->>   drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
->>   drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-------
->>   12 files changed, 629 insertions(+), 284 deletions(-)
->>   create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
->>
-> 
-> I will pick the series over the weekend, check CI, and check better
-> all the patches that already
-> get reviewed anyway
 
-Any news?
+On 1/12/2026 8:09 PM, Marek Vasut wrote:
+> On 1/12/26 11:11 AM, Beleswar Padhi wrote:
+>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
+>> packed inside the multidtb.fit FIT image. While the individual DTBs
+>> and the FIT image start address are 8-byte aligned, the DTBs embedded
+>> within the FIT image are not guaranteed to maintain 8-byte alignment.
+>
+> Because DT properties are 4-byte aligned, and fitImage is a DT with 
+> long binary strings encoded in them. But that is not the case here, 
+> because the invocation does use mkimage -E .
+>
+> Therefore I see two issues:
+> - Should the code which handles LEGACY fitImages with 4-byte alignment 
+> be fixed to relocate the blobs ? I think yes.
 
 
-Regards,
-Richard
+This we can fix in the Makefile via the dd command as suggested by Tom.
+
+> - Should mkimage -E align blobs to 8 bytes by default ? I think yes, 
+> and frankly, I thought it does so already, but apparently not.
 
 
-> 
-> MIchael
-> 
->>
->> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
->> --
->> 2.47.3
->>
+This can be done, but should it be? Not all FITs demand an 8-byte
+alignment right? It is only the FDT which requires this.
 
-
--- 
-Richard Genoud, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
