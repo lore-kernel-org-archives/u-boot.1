@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E00DD25041
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 16:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9733CCF45A0
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 16:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A9B683693;
-	Mon, 12 Jan 2026 17:35:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DC3D383693;
+	Mon, 12 Jan 2026 17:45:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ViLRc4Gx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L5DqTRO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E8183759; Mon, 12 Jan 2026 17:35:47 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 4EDCA83869; Mon, 12 Jan 2026 17:45:18 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76B9B835FD
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 17:35:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD612835FD
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 17:45:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-64d02c01865so11317543a12.1
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 08:35:45 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso5474702a34.0
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 08:45:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768235745; x=1768840545; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Tprqadmj00IGm62dT8sU/lJ9eDDiNoimqorNI09EpG0=;
- b=ViLRc4Gxb0law1qOx0IccvYedWAvVo3VxEM+2rZ2/K3rYnDvnJ8TXW63KD20wVln+/
- fb4x7H+fssEcxunCGDMXMG4H0tzlwIX1ql81GYJ6x9d/dd7+8JrR90MbLuI48rn9lvmk
- X/IttqqkQL7paptNhsXAwIwjqsHha/mrV2sWhJiZEyHNsYTxcyjruwL2nNHmrA8yOD3O
- +FQfBDWuvEt/q/C0trahZNYVy+byBmPrp9Cw8c7j+iwqLOzIGBWDDLf5cyGlKjefRaos
- apui2Tim5TxajZwRFOG5EDjDij0Lhe8r2wYAhLV4mPYgLAy38v6SCnmsRC54fe13wrqc
- tWUw==
+ d=konsulko.com; s=google; t=1768236314; x=1768841114; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UnCH7WlIH0Dvvo95troMQ1olkwT11F0BDvAL/XAlFAU=;
+ b=L5DqTRO6agi4qySkEAOiNiZj8HGI6/vol1ACnc/mW/oTUbeQ2pVbUGo/Jw2khnf6nt
+ WPY/VVHNhgiiuvdpHaAUHG7V7aRmCXZOAGbuDGb0Cs81++PjfIfqWLq85haNB6mVWZb5
+ altDzgQnDXhvphRzJeL9RizQ6r0cLtEgnmgQk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768235745; x=1768840545;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Tprqadmj00IGm62dT8sU/lJ9eDDiNoimqorNI09EpG0=;
- b=E0w8pzlgd7DCNuRWnc3Vx3of6wJWfb/UzTp34kPrjlGwwgL0OhkewsmsEA6ejwT9PC
- ZKp290inPRzDSVQ9I487aoHULmWoOpsHTrj9Xz8bsM9XBmC5mtTT8goPmVK+6rT3nHqr
- WfP5sBGYYVliyFbgmyEz5ouwP9AJFOrmOeIWJQXEh+CMiRpyPEPIHFLFgyTAiTyydQvb
- wsc4xE1A2XXPSXOxqghEg763fHLGaZa9AmUsCyOTQ1JHASIGWJ8TxNHSvrxFyLRUj5JZ
- GR+DKyRp77hVggqeRYp1BqDp8rjnhunM919IM+roZWf4n/rqAihU6ualH7cp0ixFPg2i
- fP0g==
+ d=1e100.net; s=20230601; t=1768236314; x=1768841114;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UnCH7WlIH0Dvvo95troMQ1olkwT11F0BDvAL/XAlFAU=;
+ b=YHWn13eK4gqoX+7CNGfrrldxDKZlG4UZIZwTo5RFMRKLIVyjmM2s7VOgki3snu+gJV
+ cFy721aos8Cl4/4j9TnTh4FmiFlYtKHfrpTsKl322ajtD1YPUq7RAthLA6FSsYIl4L5T
+ O33+7ZxsmvqIl1/yb7FZwH3DyDynmr4VQcMyfzk2KsnMfs1O2PwqS7S93Yt79/7/71m5
+ 7Fjn6IwMqXNM4R6jbZvAMzF+BmkR/sshHDo2RAUV/JjLvuVn0DAc+7+ZuXEeEhwNUh/F
+ 3+1Ijb0qORajKhzyJIUYKQH9HJfH2aW0eKUxQB642EcBISgWYiWSbAlv154+fY/mdn2o
+ VaPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9/LJlAkiUjvzj2fcZoQQdFsZJ0RwpIot7wUSs/Mpx6t6rRaZlEPYUGrqaEd3rdEtx4K0foy8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5T7O/ADSczD/Nezs1OKEQGgrpov5uya+FUJEuU+XuEWd9/Tpp
- Im9KDaxDcluotMLTVRYik4Ltvz3PSYZJmR9/hobJF1iF3FM4lV5bAHN5Fr5hX0smQ+U=
-X-Gm-Gg: AY/fxX6r8nx3TGOw/h1jpypa3InWzNX+DhQbBdrM/MlBdMD1du+Q6jfZz/DVeiS/Hsl
- 8j3LP+BAKmPz+jJLhBU6WSACd0mffUX31av0oW/XE1wthKLOoB219SAW8lOLaBbtQqwnCZV58aF
- EUHUh35h8I719+3HJDX5BAVUZlF74iT9X2cdtRBCvgh1Hvd/BDH2rW1kjWYSmc6GxwezQ6YHTgT
- cHPcdsz8iG8sgQHj0n9t5MPA+aFiZ5bspDs4970lnvj4UTXrMccSU/bW8+hk467/NqSa0iW61Ud
- ns/WU7FWOVJYo93itMO6nWpyJzsJg2CYMQdvh/lkzruI93kYUVZEETJuOVz1oTsi7xuROHQkN4q
- /FFf/c5LWdGv5qEPW0nPyZO2zwgG54nH3pLAlYB4v7q7YjJYsX559oJtZ3sVRzGvOz38Q5+GGCw
- KuUDoXLsS+Pc9PTjlCwMlGgYasRu9MzDKbrN24ZoliPXOd/4u8IfOqvpV1SHebeQ==
-X-Google-Smtp-Source: AGHT+IFJAH9ITg0ztlHTAhC6fzXGbWy7zBPRPo8LTnyMDnDRoc3NRhuyyWsZjqSuMnKdQF3FmWZBXA==
-X-Received: by 2002:a17:907:1b05:b0:b80:fa9:674 with SMTP id
- a640c23a62f3a-b84451f39c6mr2074731566b.54.1768235744800; 
- Mon, 12 Jan 2026 08:35:44 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a56c552sm1978139666b.68.2026.01.12.08.35.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Jan 2026 08:35:44 -0800 (PST)
-Message-ID: <8c36d979-a793-422d-ae29-427f2377d708@linaro.org>
-Date: Mon, 12 Jan 2026 17:35:43 +0100
+ AJvYcCXI1WZPjqfhzEtREO2rpcKDi+gQQWqh4eYE5pN3KeLSXO+WyfM2vjosIHrv2m/e4w1ZsAd7ou8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDCcZD+H+n9jUiAgZ6/Oz/OnC9BNcDYXxd0fvbOVM0BYB5U4C4
+ p0w5lE5v4fsZOEz74XFR4jd4BhReRwmZv6u6SM5LCwv0s+F2ZXIyGjUabJLDInDRZCo=
+X-Gm-Gg: AY/fxX7mu6Axi0PgnQdE/NVL1KVp7EEmBzi/FD2v/lyGWh6FDZW27VTmeJQYmENWqhq
+ SCbYn2AiHdEQubMxx6j8TTFs9otX2xkhzxL6vNMGPpl9rAncTHDMSTrbGCxXOu3fc4KLa4oaqiU
+ ziURsuaIrMig/euvFrX1eBRE/9aqGvbmxRnTqmN1nnHhOdkqsQS2gz8dmrxRLz7XIdfHE97bc1t
+ HGcSFxTCEG6PkjD9QLZn6Zti3MYQH5S+nefMnM6tn7sQ/H+POgOq/Q7SzI3vVF2FuuXwyVbWl+8
+ /VSX8lyuW8agtZbrG3siUjH+wXJPtQYm/TIoYwdZqi0SiKEUh5cHqFtBDwL30uYzaw3xlHpww90
+ N/cv3gsS36jPnBnYHvlJN9aXqY9558mW/MjlUy+pn1fLDu8Q+YlO6R7CIkJT0E5Z35hRwoV6FEu
+ mfHPNJ5bcxnhU1zj6TabTWhwv7ZS01aoZBrcvScn+o8Um4ddvGCv27k2GVt5heyQv7lh+LCsQ8A
+ x7TbTjghDUOGHWSKtNgQj1ZLWQXq+QGISl2rnI=
+X-Google-Smtp-Source: AGHT+IFTMtEGqt5qMHIPAsW/WOCES61RUyhHKL1xTOm/Pc1REbH3bSonVKfZ+c0scn00TQY0MLlaiw==
+X-Received: by 2002:a05:6830:2e05:b0:7c7:da3:ed27 with SMTP id
+ 46e09a7af769-7ce50c3d832mr8925689a34.35.1768236312965; 
+ Mon, 12 Jan 2026 08:45:12 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478af6efsm13267061a34.18.2026.01.12.08.45.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Jan 2026 08:45:12 -0800 (PST)
+Date: Mon, 12 Jan 2026 10:45:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Beleswar Padhi <b-padhi@ti.com>, ilias.apalodimas@linaro.org,
+ malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, james.hilliard1@gmail.com, anshuld@ti.com,
+ afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com,
+ u-kumar1@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
+ before DTB
+Message-ID: <20260112164509.GP3416603@bill-the-cat>
+References: <20260112101102.1417970-1-b-padhi@ti.com>
+ <20260112101102.1417970-3-b-padhi@ti.com>
+ <f7562e91-03cb-4bb9-aabe-e7c0b6ea1b6b@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] smem: msm: Fix memory-region lookup, direct <reg>
- mapping and update SMEM host count
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
- <aU5onLOBb3f62VVB@sumit-xelite>
- <55ebb69a-b9a9-4140-bf28-eb3788f7ac9c@linaro.org>
-In-Reply-To: <55ebb69a-b9a9-4140-bf28-eb3788f7ac9c@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IyPXhiO4UMGn8WJd"
+Content-Disposition: inline
+In-Reply-To: <f7562e91-03cb-4bb9-aabe-e7c0b6ea1b6b@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,167 +107,83 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--IyPXhiO4UMGn8WJd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 08/01/2026 21:41, Casey Connolly wrote:
-> 
-> 
-> On 26/12/2025 11:51, Sumit Garg wrote:
->> On Wed, Nov 12, 2025 at 10:28:51PM +0530, Aswin Murugan wrote:
->>> The SMEM driver was failing to resolve memory regions on some boards
->>> because `dev_of_offset()` + `fdtdec_lookup_phandle()` did not yield a
->>> valid DT node. Modernize the code to use driver-model/ofnode accessors
->>> and make the probe robust for both DT styles (direct `reg` vs
->>> `memory-region` phandle).
->>>
->>> - qcom_smem_map_memory():
->>>   * Drop fdtdec path; use dev_read_phandle_with_args() +
->>>     ofnode_read_resource().
->>>   * Use dev_read_phandle_with_args() +
->>>     fnode_read_resource().
->>>
->>> - qcom_smem_probe():
->>>   * Try dev_read_addr_size() first (map via <reg>), else fall back to
->>>     qcom_smem_map_memory() with "memory-region".
->>>   * Check "qcom,rpm-msg-ram" presence to add second region.
->>>
->>> - Additionally, SMEM_HOST_COUNT is increased to support newer SMEM
->>>   versions that include more remote processors. This avoids failures
->>>   during processor ID checks.
->>>
->>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
->>> ---
->>>  drivers/smem/msm_smem.c | 56 +++++++++++++++++++++++++++++------------
->>>  1 file changed, 40 insertions(+), 16 deletions(-)
->>
->> There was an earlier effort from Casey to import SMEM driver here [1]
->> from Linux kernel. But unfortunately that patch-set didn't got reworked
->> to make into U-Boot mainline.
+On Mon, Jan 12, 2026 at 03:40:57PM +0100, Marek Vasut wrote:
+> On 1/12/26 11:11 AM, Beleswar Padhi wrote:
+> > The OMAP2 SPL linker script (also used for K3 platforms) currently uses
+> > a 4-byte alignment directive after the __u_boot_list section. This
+> > alignment directive only advances the location counter without padding
+> > the actual binary output.
+> >=20
+> > When objcopy extracts u-boot-spl-nodtb.bin, it includes only actual
+> > data, stopping at the last byte of __u_boot_list (e.g., 0x41c359fc),
+> > not an aligned address (e.g., 0x41c35a00). So, when the FIT image
+> > containing device trees is concatenated to the SPL binary, it gets
+> > appended at this unaligned file size, causing libfdt validation failure.
+> >=20
+> > To fix this, move the alignment directive into the __u_boot_list section
+> > itself and make it 8-byte aligned as per DT spec. This forces the linker
+> > to include padding as part of the section data, ensuring objcopy
+> > includes the padding bytes in the binary and the appended FIT image
+> > starts at an 8-byte aligned boundary.
+> >=20
+> > Reported-by: Anshul Dalal <anshuld@ti.com>
+> > Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+> > Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35=
+-g52f07dcca47c")
+> > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> > ---
+> > v2: Changelog:
+> > 1. Get rid of extra ALIGN() directive, replace it with a comment
+> > 2. Carry Reported-by, Closes and Fixes tag.
+> >=20
+> > Link to v1:
+> > https://lore.kernel.org/all/20260109190026.58464-3-b-padhi@ti.com/
+> >=20
+> >   arch/arm/mach-omap2/u-boot-spl.lds | 6 +++++-
+> >   1 file changed, 5 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u=
+-boot-spl.lds
+> > index 3bb759d8a1c..5ad169a37b7 100644
+> > --- a/arch/arm/mach-omap2/u-boot-spl.lds
+> > +++ b/arch/arm/mach-omap2/u-boot-spl.lds
+> > @@ -35,9 +35,13 @@ SECTIONS
+> >   	. =3D ALIGN(4);
+> >   	__u_boot_list : {
+> >   		KEEP(*(SORT(__u_boot_list*)));
+> > +		/*
+> > +		 * Ensure 8-byte alignment at the end of the last section before
+> > +		 * DTB is appended, to satisfy DT spec alignment requirements
+> > +		 */
+> > +		. =3D ALIGN(8);
+> >   	} >.sram
+> Does this work even if the __u_boot_list section is empty ?
 
-I'll pick this fix up for now, but hopefully we can drop this old crummy
-driver soon :D
+I'm not sure it can be empty, but it should still work.
 
-Thanks,
+> I think what you need is unconditional alignment of the end of the binary,
+> that has to be 8 bytes aligned.
 
->>
->> Casey, do you have any plans to respin the patch-set? Or it's fine for
->> others to take over that patch-set?
-> 
-> If any of you guys would be willing to take it over that would be a huge
-> help! I'm not sure when I'd get around to it myself. I'm very much
-> looking forward to getting the memory map from smem at long last :D
-> 
-> I'd appreciate it if you could fixup the authorship/sob on my old
-> patches if you do resend them.
-> 
-> Thanks and kind regards,
->>
->> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=433987&state=*
->>
->> -Sumit
->>
->>>
->>> diff --git a/drivers/smem/msm_smem.c b/drivers/smem/msm_smem.c
->>> index ccd145f9afb..b6b92d3530d 100644
->>> --- a/drivers/smem/msm_smem.c
->>> +++ b/drivers/smem/msm_smem.c
->>> @@ -88,7 +88,7 @@ DECLARE_GLOBAL_DATA_PTR;
->>>  #define SMEM_GLOBAL_HOST	0xfffe
->>>  
->>>  /* Max number of processors/hosts in a system */
->>> -#define SMEM_HOST_COUNT		10
->>> +#define SMEM_HOST_COUNT		25
->>>  
->>>  /**
->>>   * struct smem_proc_comm - proc_comm communication struct (legacy)
->>> @@ -821,23 +821,34 @@ static int qcom_smem_enumerate_partitions(struct qcom_smem *smem,
->>>  static int qcom_smem_map_memory(struct qcom_smem *smem, struct udevice *dev,
->>>  				const char *name, int i)
->>>  {
->>> -	struct fdt_resource r;
->>>  	int ret;
->>> -	int node = dev_of_offset(dev);
->>> +	struct ofnode_phandle_args args;
->>> +	struct resource r;
->>>  
->>> -	ret = fdtdec_lookup_phandle(gd->fdt_blob, node, name);
->>> -	if (ret < 0) {
->>> -		dev_err(dev, "No %s specified\n", name);
->>> +	if (!dev_read_prop(dev, name, NULL)) {
->>> +		dev_err(dev, "%s prop not found\n", name);
->>>  		return -EINVAL;
->>>  	}
->>>  
->>> -	ret = fdt_get_resource(gd->fdt_blob, ret, "reg", 0, &r);
->>> -	if (ret)
->>> -		return ret;
->>> +	ret = dev_read_phandle_with_args(dev, name, NULL, 0, 0, &args);
->>> +	if (ret) {
->>> +		dev_err(dev, "%s phandle read failed\n", name);
->>> +		return -EINVAL;
->>> +	}
->>>  
->>> +	if (!ofnode_valid(args.node)) {
->>> +		dev_err(dev, "Invalid node from phandle args\n");
->>> +		return -EINVAL;
->>> +	}
->>> +
->>> +	ret = ofnode_read_resource(args.node, 0, &r);
->>> +	if (ret) {
->>> +		dev_err(dev, "Can't get mmap base address(%d)\n", ret);
->>> +		return ret;
->>> +	}
->>>  	smem->regions[i].aux_base = (u32)r.start;
->>> -	smem->regions[i].size = fdt_resource_size(&r);
->>> -	smem->regions[i].virt_base = devm_ioremap(dev, r.start, fdt_resource_size(&r));
->>> +	smem->regions[i].size = resource_size(&r);
->>> +	smem->regions[i].virt_base = devm_ioremap(dev, r.start, resource_size(&r));
->>>  	if (!smem->regions[i].virt_base)
->>>  		return -ENOMEM;
->>>  
->>> @@ -852,10 +863,14 @@ static int qcom_smem_probe(struct udevice *dev)
->>>  	int num_regions;
->>>  	u32 version;
->>>  	int ret;
->>> -	int node = dev_of_offset(dev);
->>> +	fdt_addr_t addr;
->>> +	fdt_size_t size;
->>> +
->>> +	if (__smem)
->>> +		return 0;
->>>  
->>>  	num_regions = 1;
->>> -	if (fdtdec_lookup_phandle(gd->fdt_blob, node, "qcomrpm-msg-ram") >= 0)
->>> +	if (dev_read_prop(dev, "qcom,rpm-msg-ram", NULL))
->>>  		num_regions++;
->>>  
->>>  	array_size = num_regions * sizeof(struct smem_region);
->>> @@ -866,9 +881,18 @@ static int qcom_smem_probe(struct udevice *dev)
->>>  	smem->dev = dev;
->>>  	smem->num_regions = num_regions;
->>>  
->>> -	ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
->>> -	if (ret)
->>> -		return ret;
->>> +	addr = dev_read_addr_size(dev, &size);
->>> +	if (addr == FDT_ADDR_T_NONE) {
->>> +		ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
->>> +		if (ret)
->>> +			return ret;
->>> +	} else {
->>> +		smem->regions[0].aux_base = (u32)addr;
->>> +		smem->regions[0].size = size;
->>> +		smem->regions[0].virt_base = devm_ioremap(dev, addr, size);
->>> +		if (!smem->regions[0].virt_base)
->>> +			return -ENOMEM;
->>> +	}
->>>  
->>>  	if (num_regions > 1) {
->>>  		ret = qcom_smem_map_memory(smem, dev,
->>> -- 
->>> 2.34.1
->>>
-> 
+We might need to look harder at what Anshul was suggesting in his reply,
+yeah. I'll chime in over there next.
 
--- 
-// Casey (she/her)
+--=20
+Tom
 
+--IyPXhiO4UMGn8WJd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWUlEgAKCRAr4qD1Cr/k
+CkQFAP4xLq9/XFXMiz9ipdpNOh3BhYDpAeP0jjUm84IWw5U1FgEAs1vn0ZS/2DVc
+2WbtTmj20hHrIZlqSmc+5Vy1bWEMRwc=
+=FNrA
+-----END PGP SIGNATURE-----
+
+--IyPXhiO4UMGn8WJd--
