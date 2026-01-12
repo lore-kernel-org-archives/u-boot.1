@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4609CF45CF
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 21:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D2DCF45CD
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 21:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F085838A0;
-	Mon, 12 Jan 2026 22:09:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 97CC1836AC;
+	Mon, 12 Jan 2026 22:56:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ojbgzqql";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Todrc4kP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="e/jhukCm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 334D383759; Mon, 12 Jan 2026 22:09:30 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C97283700; Mon, 12 Jan 2026 22:56:14 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F5E1836A3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 22:09:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2B31836A3
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 22:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-455dc1cf59aso4160628b6e.0
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 13:09:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768252160; x=1768856960; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8/pw7GZlzU0gZfUwLlWe391SmummDdXXsORivpFzFPQ=;
- b=ojbgzqqldDz3ap476f/SUtnNWu3VPipGPQBU5fKgo2ALzs5BIyn6o2fmQ2b/E0E1ld
- vZvgrpnshPlG6UtZQYTfAveMC8MGS5WKz89PCIs3KNLaLNjUXRw9OTZcG+Qnvmb3YYsI
- Rin4MzkCxpwKstioTxbCpEHS2Zp3H+xbxHtyo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768252160; x=1768856960;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8/pw7GZlzU0gZfUwLlWe391SmummDdXXsORivpFzFPQ=;
- b=UzMvKmAvmMErElVH9htx4e+NcQviA7pstrPTWwPl16G4t8THdmwtHp53hlLI/qgjNe
- fYrt6Minxe7ZYBBLkMjmUizyEpUqtYAp0zWIEoL3tyLxMhQ7HBGbxk4prvUA+SFH3ojv
- QjNwwqfbur82A86rvvGG/BCoSEIFDbGClaQ4mQJSUP3BBNJftWoXdEHN/80dA9bHUCvy
- C8WqtEWYIFdeQUvUDFXm0ohD5LELiiL7j8dympxLrfZQ5eEH+W9aSThymyxbIItjVcyO
- 1CYf3BiW1mx5G8hmWQlA3DmDJ+slbGEyEkkiec2R4cBJm7wN0So9lT1Wf2WjlXdXGuGv
- nEdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXz9PriifqBhQ+VIlIOokPOft+jjV2RsmT9XjyUCPFtfXz/6nt4hYCvKmFcyOjq9Aki5fC/WkI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEUFZlr8N6kEf7LeYizm3D+CLelM1WX9CQyH8Q/PgkbPYZwIUV
- PETrmO/5fCQYr3XFNfwcTenh6hmq2FcCMXtdRlVRv1c+zSZte7tCWr1o+w34rwKqScA=
-X-Gm-Gg: AY/fxX7JvzgX7fYtCbJFKBeYEBm4mlCujQmCfslT489nOKkTuUYJFx6vzAK4f3HfG/k
- zgfYqCOCWshLUop3tcakysyzVWJBe0PYTTnB6Lh+HZEiKjniQKCAb76NyJi2kcb+rv1SAHRObl5
- YXks/CYRnNbdB7S47WujMKkSV0Fd2rjAYBgwUm/VB5ALccBVsWpplMEpuwVgQjlzS8JIg4+7YEq
- gE0sI9/lqHLSXCA3HdaiXGIXVMU5VlAbNRId6PnbU+na498FmAlEavFI1I8GW9D3yUWSOqGngst
- zoZgoMnUyVwk0IG3bwZWyX5+ePx+9L/ofHSYDXDDzSVYudaXAcnkXAcWRNeUg1KMeOLW2sXUP6F
- QLLIke9wjSVIUODuMLVAEpZLlCqR08OpiCXBGkKsZ7nbl+WBGMCfstq4i50D64hhH7z28BoiERz
- Sn58N/b6fZbj1GgeRdQYAqSMRrfxxqfibFC1xkh2UQxEM5SP5B0Bhg2mf/wjKtl70Sa6P/cMLUL
- UaRjU5zTZOxeSkqClwS3fp3bNTv1xhD/WE21g==
-X-Google-Smtp-Source: AGHT+IGzzbTOEaljW+bnDmRYoZAmvOglFsogi1MKYzom9G8HsaFnfAdSvCB1EpeVesxuU752MvXmHw==
-X-Received: by 2002:a05:6808:4fe4:b0:44d:a570:bc24 with SMTP id
- 5614622812f47-45a6bcc9b08mr9573851b6e.9.1768252160060; 
- Mon, 12 Jan 2026 13:09:20 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a5e17cd0esm8800789b6e.3.2026.01.12.13.09.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 13:09:19 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260107-clk-mtk-improvements-v2-0-7d4338e520a1@baylibre.com>
-References: <20260107-clk-mtk-improvements-v2-0-7d4338e520a1@baylibre.com>
-Subject: Re: [PATCH v2 0/8] clk: mediatek: implement of_xlate and dump
-Message-Id: <176825215864.1883046.3486262205594859871.b4-ty@konsulko.com>
-Date: Mon, 12 Jan 2026 15:09:18 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dqmRG3qDRz9tYL;
+ Mon, 12 Jan 2026 22:56:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768254970;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fucxztaZ5+oin3WN2RLkoSumuKkk4UdE8q/8jwPgRuQ=;
+ b=Todrc4kPnUsJ3xODu3rGJraz1jUmnBuzYbG4FE5fpPAB0ZAyBEnbM71wxa78Yb+kFhjL21
+ k7F3FcntN9VIP/56Sj9wHUpFc8UgOb0K7r8ECL2s2Ts2U5nKjTxhP/a2IB/vk+whp8gBHc
+ eDm7OikQ5u/7/Rvemsa+JN8SbFfO6gef5DaN9IeDBY6LQfQOmahWpUyvLP6FG2MVbuyank
+ w7la3pvvwGkGkAMFnfNj9ifOLm9rVZw5zX0D3mVlknTxKtHh/PXJGZA445f2Yrty8zYcDW
+ W23VmL12XHe28DLPpT/rAiKQpvAyNm+MvPGFY+U5jzJqRbNRya3ZR00WAKHPUw==
+Message-ID: <8eb4eeea-a755-4032-ab95-2b293f2d2289@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768254968;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fucxztaZ5+oin3WN2RLkoSumuKkk4UdE8q/8jwPgRuQ=;
+ b=e/jhukCmcPiJZadxzSckMrP5n0ZxAEeZYpD7vPbjRoTPe+E9ka5tCNQ6JWWM1WyP0JjoMZ
+ TpmOnf2HOi7t1dKl/nQEZikvuorgCUBVZioidmAEIPvv7WqELyLLjrlVU5OWHqBTv9CUwB
+ Phjm9HJsZ/vVuHE0YN9XGIfCDC6P07LA9tkmMo4WiWFVmaGiZFCLrNJF+cHTykHUijxmBZ
+ PbRB0MU+nC0XBQpp+uSOdKXVFLHyvcHkoRfOKaAs1lQHppJrCQAHVEMwN3M8iQrz3wDibc
+ agfvgqpRUuWReh7MqAZHomhfKshWVf4ZjAMqSKVQzalbgbhnis5dj82sCAIZCg==
+Date: Mon, 12 Jan 2026 22:56:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
+ before DTB
+To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
+Cc: Beleswar Padhi <b-padhi@ti.com>, ilias.apalodimas@linaro.org,
+ malysagreg@gmail.com, sughosh.ganu@linaro.org, philip.molloy@analog.com,
+ marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, afd@ti.com,
+ nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ u-boot@lists.denx.de
+References: <20260112101102.1417970-1-b-padhi@ti.com>
+ <20260112101102.1417970-3-b-padhi@ti.com> <DFMMUHPP8BW8.3M5VVTPEB9IZL@ti.com>
+ <20260112164854.GQ3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260112164854.GQ3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MBO-RS-META: eecakod375yfero1y51wn5357oih7bis
+X-MBO-RS-ID: b760f6ff0a9e6dd5c96
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,38 +93,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 07 Jan 2026 09:50:10 -0600, David Lechner wrote:
-
-> I started looking into fixing some bugs in the mt8365 clock driver and
-> realized that there was no way to inspect or debug the clock trees.
+On 1/12/26 5:48 PM, Tom Rini wrote:
+> On Mon, Jan 12, 2026 at 06:38:19PM +0530, Anshul Dalal wrote:
+>> On Mon Jan 12, 2026 at 3:41 PM IST, Beleswar Padhi wrote:
+>>> The OMAP2 SPL linker script (also used for K3 platforms) currently uses
+>>> a 4-byte alignment directive after the __u_boot_list section. This
+>>> alignment directive only advances the location counter without padding
+>>> the actual binary output.
+>>>
+>>> When objcopy extracts u-boot-spl-nodtb.bin, it includes only actual
+>>> data, stopping at the last byte of __u_boot_list (e.g., 0x41c359fc),
+>>> not an aligned address (e.g., 0x41c35a00). So, when the FIT image
+>>> containing device trees is concatenated to the SPL binary, it gets
+>>> appended at this unaligned file size, causing libfdt validation failure.
+>>>
+>>> To fix this, move the alignment directive into the __u_boot_list section
+>>> itself and make it 8-byte aligned as per DT spec. This forces the linker
+>>> to include padding as part of the section data, ensuring objcopy
+>>> includes the padding bytes in the binary and the appended FIT image
+>>> starts at an 8-byte aligned boundary.
+>>>
+>>> Reported-by: Anshul Dalal <anshuld@ti.com>
+>>> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+>>> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
+>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>>> ---
+>>> v2: Changelog:
+>>> 1. Get rid of extra ALIGN() directive, replace it with a comment
+>>> 2. Carry Reported-by, Closes and Fixes tag.
+>>>
+>>> Link to v1:
+>>> https://lore.kernel.org/all/20260109190026.58464-3-b-padhi@ti.com/
+>>>
+>>>   arch/arm/mach-omap2/u-boot-spl.lds | 6 +++++-
+>>>   1 file changed, 5 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u-boot-spl.lds
+>>> index 3bb759d8a1c..5ad169a37b7 100644
+>>> --- a/arch/arm/mach-omap2/u-boot-spl.lds
+>>> +++ b/arch/arm/mach-omap2/u-boot-spl.lds
+>>> @@ -35,9 +35,13 @@ SECTIONS
+>>>   	. = ALIGN(4);
+>>>   	__u_boot_list : {
+>>>   		KEEP(*(SORT(__u_boot_list*)));
+>>> +		/*
+>>> +		 * Ensure 8-byte alignment at the end of the last section before
+>>> +		 * DTB is appended, to satisfy DT spec alignment requirements
+>>> +		 */
+>>> +		. = ALIGN(8);
+>>
+>> I wonder if there could be a better way to handle this constraint,
+>> currently we have two major problems with this approach:
+>>
+>> 1. All platforms facing similar alignment issues would have to modify
+>> their linker scripts.
 > 
-> I set out to implement the dump function to help with this. The driver
-> architecture didn't make this easy since there was no way to know the
-> number of elements in each of the clock arrays. The first few patches
-> in this series are adding fields to the data structures to hold this
-> information.
+> Yes, agreed.
 > 
-> [...]
-
-Applied to u-boot/master, thanks!
-
-[1/8] clk: mediatek: add array size fields to clk trees
-      commit: 3d54f47ae50b737e4f577ab2d41df51f67e975ed
-[2/8] clk: mediatek: add array size fields to cg gates
-      commit: 538f72f4038652be5bbb907f23fbc74dad682a19
-[3/8] clk: mediatek: add array size field for id_offs_map
-      commit: 6094f0a040765932dd7820941fd77e25c6dd4e34
-[4/8] clk: mediatek: organize infrasys functions
-      commit: 159825bdd5ec63cd443c855adeceb3adf29e4655
-[5/8] clk: mediatek: add of_xlate ops
-      commit: b1358915728b9c38c0d8c4ef11a3a6f5ab5687bb
-[6/8] clk: mediatek: clarify mapped vs. unmapped ID
-      commit: cc1a458a3d315bd94ed2b5faf7e74baf8f667d9b
-[7/8] clk: mediatek: mt7623: set unmapped IDs to -1
-      commit: eb2bf2bc832d34440204ad90795ca7475ede4402
-[8/8] clk: mediatek: implement dump callbacks
-      commit: c8ebe42b3f5f753f2c84266e289a31e85e257110
--- 
-Tom
-
-
+>> 2. The FDT only gets appended directly to SPL binary in cases of
+>> CONFIG_SPL_SEPARATE_BSS. Otherwise we do (SPL binary + BSS + FDT) as per
+>> the $(obj)/$(SPL_BIN)-dtb.bin make target. Which means BSS would have to
+>> be 8-byte aligned as well as the SPL binary.
+>>
+>> I wonder if we could have a new make target for say
+>> u-boot-spl-nodtb-aligned.bin which is just (SPL binary + optionally BSS
+>> + padding for alignment) and at runtime we modify the fdt addr in gd to
+>> point to the correctly aligned address?
+> 
+> Looking back at
+> https://lore.kernel.org/all/87h65ihumb.fsf@bloch.sibelius.xs4all.nl/ we
+> can use dd as a portable way to ensure that a file ends with 8-byte
+> alignmnent by doing:
+> dd if=testfile bs=8 conv=sync of=testfile_pad
+> and we get a zero-padded 8-byte aligned output file, and at the end of
+> that we can concatenate our dtb.
+You still need to make sure there is a symbol generated by the linker 
+that points at the END of the u-boot binary . dd happens too late, so 
+you cannot do that. The alignment has to be done by the linker, in the 
+linker script I think.
