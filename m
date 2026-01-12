@@ -4,92 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12355C9EC8B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A58CEC9EC88
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 13:11:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1436D83A79;
+	by phobos.denx.de (Postfix) with ESMTP id 5068883A8F;
 	Mon, 12 Jan 2026 14:09:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qSB0ekAX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="orliZAhM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D57AC83D0B; Mon, 12 Jan 2026 10:31:15 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 24E1983D52; Mon, 12 Jan 2026 10:38:11 +0100 (CET)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5AA283CB9
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:31:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE03583CB9
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:38:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b87108066c3so125228466b.2
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 01:31:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768210273; x=1768815073;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z7/sFnTplQwHu758oZ11YPALPskwGSL3ZXtjVlUOmSk=;
- b=qSB0ekAXYFG3wuCcvl9Mo2fLaeBwN1euwWunPTOBKgS9lmebSy74GDb3LyWK0EGIB0
- +vNR5fYp7JkWHWfmEKTpxZzw0IHulkTqG733yDgSFawYjkoPc5n8+JziuiN1snHB8prd
- KGwFwsKjIYUDMgB3/+lH2yVh7ov047YQjkqCwnzAMTd+c61VwFpEYErN6zKvSjHCTj1h
- tUMPzm/jZFKeBjJSf2uevNcwlx7MyxULsis2qaPXGcnC+wwVeV3LRTYt+Z2NP7ZC1pbn
- ELmmNZCyxjD7RStO3gcSVkDXwsvsnzZATGLHqbj4z9/jpWu5ljfI67z7vqdF/AbgFXPp
- k6KQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768210273; x=1768815073;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z7/sFnTplQwHu758oZ11YPALPskwGSL3ZXtjVlUOmSk=;
- b=PJCpmnL+t9knnpl7ZEZLvvM0uSV4XK5Vmnr4YK5uKfU8A7rtn/nTJqmmKEu1gLLrx2
- 504W7xepb7AN7Q61o1oZd80H7g8xUdr45/qZxUmjjOSOf0eHZSRCiZrJ6/D33l/3ElYO
- NPv2kJSS7SbJDTcRqtS5N6UKD9GaqKuiGxr8oWTMwOzbHr/dgOcKAjPavuMVFUi85GG6
- pxncJ24ON7+ALAfFK9t7T5gg1gF4AkSBLGIvqSX22qo17Vkst64MW5y3ngR7lH0EFFtp
- 201c6wDNAgTKLvRsV06ItIl/2Tc0JcvnrKv/jIK/RpibOcrWshj1WJAeBvha3KbVLSuw
- Kbsw==
-X-Gm-Message-State: AOJu0Ywba+lNzBeTE0lq/N+W1VNfeRzT0VmpQAezEh7zlze04I1vJWRU
- /JUb2YGob92UWcxGXqoNB9SRmv32Ebn7AJSdMIuOnTW41CVuEL/CR1PARtmwiooCQg8=
-X-Gm-Gg: AY/fxX77zr/MUhRis39fKpy9/N2smD1YmpZLw91ElAIxkDAYaqn9/8MJH563SYTpDP2
- EeqaxyQBxk033ruOASOJGeAuL7x5tyVxaEVcnNKdCoD4FkZmreUD1P1ewUmkulKBgaI7QuEYPyX
- AH5dPzzF+Ci3VJM1nX87XnmG8DmHY/eFaOa6D6GryWiCNKsvrLEzMv5BDZQPdZ9O82pf6gI8NSE
- pURks+moiDxCX/3ynTeKGENpQWWAHJB6V0Vf1J8/5RlvaXBe1okfZk/37x3LSXIy3Trpt4NfTYX
- +fORj7RlmzsRQM77gTqwEp3UuqUeXdDhaOAVM3qud1SSp1uQU4+ba2JaUaBY7VqBcs3DpQfdYbJ
- ZB7j9G0dtytbvDlCwy9GppnjRaIgycBKP7JUDGv2sW5tf1h5E3w3fnQwUmb92nF3OvR08HKkgu7
- AL/AY=
-X-Google-Smtp-Source: AGHT+IG70bOKMuTtPLB2KIGB/XkEQJe9KuryJaxS/HXEoyKHGx1y0cEssU3mQihfhqXamPcTgeibOA==
-X-Received: by 2002:a17:907:1b21:b0:b73:6f8c:6127 with SMTP id
- a640c23a62f3a-b8445031bf9mr1800461166b.12.1768210273151; 
- Mon, 12 Jan 2026 01:31:13 -0800 (PST)
-Received: from localhost ([195.52.31.202]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6507b8c446esm17344143a12.6.2026.01.12.01.31.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 01:31:12 -0800 (PST)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Mon, 12 Jan 2026 10:31:03 +0100
-Message-Id: <DFMI8576QX69.WDXJM34H19Q6@baylibre.com>
-Cc: <u-boot@lists.denx.de>, "Mattijs Korpershoek" <mkorpershoek@kernel.org>,
- "Tom Rini" <trini@konsulko.com>, "Marek Vasut" <marex@denx.de>, "Andrew
- Goodbody" <andrew.goodbody@linaro.org>, "Kory Maincent"
- <kory.maincent@bootlin.com>, "Svyatoslav Ryhel" <clamor95@gmail.com>,
- "Christian Marangi" <ansuelsmth@gmail.com>, "Dinesh Maniyam"
- <dinesh.maniyam@altera.com>, "Heiko Schocher" <hs@nabladev.com>
-Subject: Re: [PATCH v2 2/6] dm: core: lists_bind_fdt: Replace found variable
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Simon Glass" <sjg@chromium.org>, "Markus Schneider-Pargmann (TI.com)"
- <msp@baylibre.com>
-X-Mailer: aerc 0.21.0
-References: <20260108-topic-musb-probing-v2026-01-v2-0-2a47c6e0e73a@baylibre.com>
- <20260108-topic-musb-probing-v2026-01-v2-2-2a47c6e0e73a@baylibre.com>
- <CAFLszTiNU=2cJTkB2c8d4NrFZ7K0KR7LQnPYO0TWzX_BuBrUFw@mail.gmail.com>
-In-Reply-To: <CAFLszTiNU=2cJTkB2c8d4NrFZ7K0KR7LQnPYO0TWzX_BuBrUFw@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-joshi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Fdn9Ct84Qnz44gSCvUT55xdFHlZ23NWrmgAK90o+Xl6xKOY7TS5SM+UWz1V3/oPG0GDDPk7+0ZCgiufXENjVuk/ITqj+TVgoU+HptDqX+3gmQiNznzqUVUmlxd+f73Np54C4sg+MzFHCBxwjAU8iDXVqXwwZq7GBmPYatn09GH4kArOEAXtUNTLgHBUxxpsTDk29acmK9nhIwzS/fPHUTY407C7IZbEx/IQTsrpmqe/nlLXQE1o49S4L0JZNc4k8lDVYKJx41JoL7LpltFrKrMWbyomi0IbxaIm1lgBx6w/g1SFdokxAaHxlUQTkoV/NbWPuDwjrtrwWSJvd3i8TLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fSTUhkAe96WDi7HnGnscqHxB0h0UN/ug+bFpE4wzhuM=;
+ b=INJQsbXoY3VaiXmUGJlpYH3YW6VRApozavCg7bzPtr7+v0M9rsuDvq6ak8oXM94Y4k7yWgp67qYey0hGBBAO54cPiM5/3rXxCrM8DLflusiCEKPljWFPiKFSXuF2fORkQ7q0CfiOhmLGAGeeBU7y9F7XYOkLVNXrDOhE70DPWt/QNKj5TrvWBgyAAYrVFAv0cxsACDp25rX/YnBmbGW3IiQbZ+QGqfAqLV6JNp5fbAwTzU8SL6oJ3PJsUhDfkiqhUy/L9/tuYVqZCuMJfbKVXVxQdRf0MswBMhrXPhlSwzGeiFNH7qfMfd4C1yMbmovexaiPpaOhrjjTtjyYR9MefA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fSTUhkAe96WDi7HnGnscqHxB0h0UN/ug+bFpE4wzhuM=;
+ b=orliZAhMf7GJKRsGlWLP9GOYltLd1yBKM/bZmNBxcJVrCkETfkWkGxlAY0jEP7B0DYkdITv2GMHzY43jbyKIg8/QvMBrMxZTLk+agi/Ad+FLHinHQM1hWXauantEih69IVJ/k2uucTvQgiWFEYPgaeYUlRzO2w+hql2umpbntko=
+Received: from SN7PR04CA0230.namprd04.prod.outlook.com (2603:10b6:806:127::25)
+ by BLAPR10MB4899.namprd10.prod.outlook.com (2603:10b6:208:323::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Mon, 12 Jan
+ 2026 09:38:06 +0000
+Received: from SA2PEPF00003F68.namprd04.prod.outlook.com
+ (2603:10b6:806:127:cafe::a9) by SN7PR04CA0230.outlook.office365.com
+ (2603:10b6:806:127::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Mon,
+ 12 Jan 2026 09:38:06 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SA2PEPF00003F68.mail.protection.outlook.com (10.167.248.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.1 via Frontend Transport; Mon, 12 Jan 2026 09:38:04 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
+ 2026 03:38:01 -0600
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
+ 2026 03:38:01 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 12 Jan 2026 03:38:01 -0600
+Received: from localhost (ula0507357.dhcp.ti.com [172.24.233.202])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60C9bxUs155710;
+ Mon, 12 Jan 2026 03:38:00 -0600
+From: Suhaas Joshi <s-joshi@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <n-francis@ti.com>,
+ <s-tripathi1@ti.com>, <k-malarvizhi@ti.com>, <kamlesh@ti.com>,
+ <vishalm@ti.com>
+Subject: [PATCH 0/5] Firewall ATF and OP-TEE memory regions in Sitara
+Date: Mon, 12 Jan 2026 15:06:38 +0530
+Message-ID: <20260112093643.885903-1-s-joshi@ti.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F68:EE_|BLAPR10MB4899:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1a829978-01aa-4dbf-3fe1-08de51be4967
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013|34020700016; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WfrBGZob3iYDYHmTUY/ShH5rhhzPbcSiH1kHDpAIs3Gea2twwqb9QDXNUuFf?=
+ =?us-ascii?Q?pqqqDFGGoGc/08TFPFgQ4VGdxxvmtkCtjruYcW/D2mB16OPt+Ms/PScnRbSO?=
+ =?us-ascii?Q?/EmE0MYJM3JKrco310j9kvVOfa96j/cTSw96ycxXZF2rxGNYTvrNBOjdW5Lg?=
+ =?us-ascii?Q?Riq5CzYnz7mhFnhxNILy4c9thmrt1WDbH3CmsRBDNTyeZPIFtX5kTXxPxlKs?=
+ =?us-ascii?Q?asLgq5FmpWscV45P3ASWvDNHuA7q2wjKdl8speqApFhEgYLnV+JiQ9vipaBa?=
+ =?us-ascii?Q?K5gshC2F66dlXvlSZq73TXFVk8te22V9x/iMLA/cG1xNbGcm+Uh5mZ1OZaXs?=
+ =?us-ascii?Q?2EQ7g4qLlwqV4VfjvRlOpZpuNi4UyZeR9PcfxUXFlA9cl7O46ZnfXvbicNgx?=
+ =?us-ascii?Q?2OR4LacZ/UG9KTFRKeDCdkoCQLCbo0SO8ilf19eIVjiXPVwN6EsltIvYR6x8?=
+ =?us-ascii?Q?PeZ4Rw58i2Uh3Nz+S5+X3VRZ2ZTQ0xjYQ9XC1ay8bcsIznLZUn9hlGtGew8P?=
+ =?us-ascii?Q?sKbKMly4iowJa56CnfHNTCqF/KyThI/2jmCKwRP4gQIgdsxnoBhWK1fRXiCx?=
+ =?us-ascii?Q?QUqtdadSGyCBrgO0oomCJGhXq6PeQ3OmhG1bj1LGdecxzSmBFP9FjuMMEF2o?=
+ =?us-ascii?Q?mvP9lZ6hs1O1YLaEk2a+AfpT2qS7Dgv7llZCkKD0jGZYIYMxC/BN/PKntaf9?=
+ =?us-ascii?Q?dQksJVHKqxsrZKCpplLCS8I+fuJzsHOp9Jo99Gu5rzZh7Idr88m7K81Ma//l?=
+ =?us-ascii?Q?wQUIheZ0R4nIPmpJjStKuhvysMkmHidE2k5MTBrncreq8wQBKlZDIQVWcpKn?=
+ =?us-ascii?Q?qXSkF2X695Ladxe7Sw4skwspG8GwNDvHzTjPOpZdpVPdbfWxBIOECtVbkO2q?=
+ =?us-ascii?Q?tvizoC+SdJt4M7gbW+QAl2SJe3JuwtCHPxOHvdBwumPnvkJ0vFe/m5rhsZxa?=
+ =?us-ascii?Q?I5DHf3PmfvBUycFfVGHHCBM4l2lqG5ms4M26xP2E8Y4ar+aoFHvjV8DbrrhS?=
+ =?us-ascii?Q?WWnHyJzkN64ygbVQ+OWM/iMyoNvsXYo+kNADNuHstgD6I57Y+1aDicoGovR2?=
+ =?us-ascii?Q?Y2hz4ioBDHt2Kudyw2xivAlrPx/l+VG3EJMCqEL3fgia+KL8eOcj8Q0Xk9o6?=
+ =?us-ascii?Q?EZIrSGsoj2Wy4QkyvC7lSUduMOSB9Vg9NxYhzPBZGQJOHkTrQqtrbBVBrl2F?=
+ =?us-ascii?Q?4FgH3QosxgKEbjvGj3AQO62+maLZxO49dMDhvnH6sfpLJOIg1Hs7e/6UD8TN?=
+ =?us-ascii?Q?X9Tg6T5zOLFuzwHGJoMJ+pvD/gdbDmey7jcTae83avUzOAVWjtcWiKUE0HCN?=
+ =?us-ascii?Q?4JZTqn0RcNv27v1fPH/X/065psNyDrtnB4lgcGfZN+0TX5hmjoECwLdEsG31?=
+ =?us-ascii?Q?xiT7bGYfdQgJDK776roE10KPtu5xThzU5GCu5EIILwiO2aQ7ce83G00/BlkH?=
+ =?us-ascii?Q?w0obSJry/qOdwghj4k+t2vhfuN4lv5lstG/mbgHNWhGGbMgjGYXBmqgBOu8D?=
+ =?us-ascii?Q?KBM+FWExFvqq+XxqNHkJdNpx6JXNL5BNOCTIfdudAZC44OTAemqe4yFz49CT?=
+ =?us-ascii?Q?Ie+4DuCgggetV+FDWd8=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(34020700016);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 09:38:04.9614 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a829978-01aa-4dbf-3fe1-08de51be4967
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F68.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB4899
 X-Mailman-Approved-At: Mon, 12 Jan 2026 14:09:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,89 +155,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+This series starts by replacing the hard-coded addresses in firewall templates that are defined in
+k3-binman.dtsi, by Kconfigs. Using Kconfigs would make it easier for someone to move ATF and OP-TEE
+to another location, since they wouldn't have to fiddle with the firewall configs in the dtsi files.
 
-Hi Simon,
+The rest of the commits in this series add firewall configs to each device's dtsi file.
 
-On Fri Jan 9, 2026 at 12:32 PM CET, Simon Glass wrote:
-> Hi Markus,
->
-> On Thu, 8 Jan 2026 at 04:17, Markus Schneider-Pargmann (TI.com)
-> <msp@baylibre.com> wrote:
->>
->> 'found' is only used at the end of the function to print a debug
->> message. No need to maintain a variable if we can just return 0
->> immediately when a driver was bound successfully.
->>
->> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
->> ---
->>  drivers/core/lists.c | 5 ++---
->>  1 file changed, 2 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
->> index 52ba6c7bfa007b660b854de62c97ad3c1761f1a5..9d1ca38212ee7f53b8894f96=
-4f096611c8ec20a5 100644
->> --- a/drivers/core/lists.c
->> +++ b/drivers/core/lists.c
->> @@ -204,7 +204,6 @@ int lists_bind_fdt(struct udevice *parent, ofnode no=
-de, struct udevice **devp,
->>         const struct udevice_id *id;
->>         struct driver *entry;
->>         struct udevice *dev;
->> -       bool found =3D false;
->>         const char *name, *compat_list, *compat;
->>         int compat_length, i;
->>         int ret =3D 0;
->> @@ -275,14 +274,14 @@ int lists_bind_fdt(struct udevice *parent, ofnode =
-node, struct udevice **devp,
->>                                 ret);
->>                         return log_msg_ret("bind", ret);
->>                 } else {
->> -                       found =3D true;
->>                         if (devp)
->>                                 *devp =3D dev;
->> +                       return 0;
->>                 }
->>                 break;
->>         }
->>
->> -       if (!found && ret !=3D -ENODEV)
->> +       if (ret !=3D -ENODEV)
->>                 log_debug("No match for node '%s'\n", name);
->>
->>         return 0;
->>
->> --
->> 2.51.0
->>
->
-> I like to have a single successful return at the end of each function
-> so that it is easier to follow what is going on. But since you wrote
-> this patch:
->
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
+To test this, I used `k3conf read|write <atf and optee address> <val>`. These operations were
+disallowed when the patches of this series were applied, expectedly.
 
-Thanks for reviewing. If you prefer I can redesign this as well. But
-also note that the function already has two early return 0. One if the
-device does not have a compatible list and the other for pre_reloc_only
-if pre-relocation is skipped.
+Suhaas Joshi (5):
+  arm: dts: k3-binman: Use configs for ATF/OPTEE addresses
+  arm: dts: k3-am625-binman: Configure firewall for ATF/OPTEE
+  arm: dts: k3-am62p-binman: Configure firewall for ATF/OPTEE
+  arm: dts: k3-am62a-binman: Configure firewall for ATF/OPTEE
+  arm: dts: k3-am64x-binman: Configure firewall for ATF/OPTEE
 
-Best
-Markus
+ arch/arm/dts/k3-am625-sk-binman.dtsi | 30 +++++++++++++++++++++++++
+ arch/arm/dts/k3-am62a-sk-binman.dtsi | 30 +++++++++++++++++++++++++
+ arch/arm/dts/k3-am62p-sk-binman.dtsi | 33 ++++++++++++++++++++++++++++
+ arch/arm/dts/k3-am64x-binman.dtsi    | 31 ++++++++++++++++++++++++++
+ arch/arm/dts/k3-binman.dtsi          |  8 +++----
+ 5 files changed, 128 insertions(+), 4 deletions(-)
 
+-- 
+2.34.1
 
---bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaWS/WBsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlNU
-1gEA/03fpu7AjzzvmxAwyCfC6hVk+ttbwCsnB+4QTS+dXtoA/jbaZyB70QPDZ466
-1Tguq8YqsaouNLygXjKp2siJe/MH
-=mnOr
------END PGP SIGNATURE-----
-
---bd4648c25e98f97b475da13f8dfdaa04a148275e35b2296aaeb2a79f2587--
