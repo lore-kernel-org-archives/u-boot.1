@@ -4,147 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED5CD277C9
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 10:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E36ED26D97
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 10:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 684D783D7A;
-	Mon, 12 Jan 2026 11:11:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BE6ED83D77;
+	Mon, 12 Jan 2026 11:13:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qoBT/YsC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xLWDkoyt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268A383D8B; Mon, 12 Jan 2026 11:11:24 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazhn150100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d902::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1AF783D7A; Mon, 12 Jan 2026 11:13:02 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C496A83D7A
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 11:11:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3EFE83B5E
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 11:13:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jJofI+OAlnaM1hXnKDlc4f4XHdUC5ISwQCwBf6P2nh5ChXcXDQBoC+RlAep4fnm2MWlohjFNymvq/1hBNAi2PdY8LHHnkeb8GgxgxMJj4LXoZGFXxcUQyCykL1hhZVelgTznPGoZNvFy7HYBMyInF9/uEOk8IygUQDRT1gwInb7sZjTNRq0YNIYxo2l19xTZ+p0DF3flPRozVb1LqCEktqC/fHp9Wo26SufcUs9kHMA1vE7ZCv+TALvpzRftQjVwCmVnWy5t3cJKseYJHW9LWaHRfl8Rs69b3bhM23tNFeWTlG+bnXYFatUSZl/N7vPlft+1PiBhzEkpvvjzyR3omQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AzisKC61Udp8OP5mlT0ngk2VSg4vjx4GXIo7/fNmE2g=;
- b=R995UCFdSpXN7g2QZYMbly394wcME/x1x4RrvmizeVuNcDEaU+bHhqzMb0/KWs36l/Y2VUP7kSudTCG1wpEkBWlbSwgzc6mXH6iAIFKb48QtcgI8LobYMxHFiLTyM1V4Nq4dnSrbfQmmE41T0oCKk4Y8VGjQq4d6OJvM+Hn8Bj3YoDEMNfSZBnFG2jiyB3mzqwFfgwzM1EG6ZjVYWCJbrA9BLK+a/ytwOM96VoK6ML028/nj7KQtiHG+7U3G5+JzjdXVH6c7CvXTOWhrP4FUDc2WBJQ8uQk5mVzT8u+BO/FAfj7Vm6KF8nb/FFCsgSQodO8gPaioYhZsYMito3YFoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AzisKC61Udp8OP5mlT0ngk2VSg4vjx4GXIo7/fNmE2g=;
- b=qoBT/YsCqpSMu58b0zUNQNkIyG6SF/G8qX4UEwmcAmFPe+U1b0KHuFmbKFuS9ZPvl48h+osa3ertOGdD0g/Npzix46vwGSKYFE+s5A61q7WYGC7IV7iOik1lrIT6Bb6rOI++UAr97InKxryoBcUKdn+gYzIvdcNwTTU0HNlQ6fo=
-Received: from PH7P222CA0001.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:33a::14)
- by CY5PR10MB6118.namprd10.prod.outlook.com (2603:10b6:930:36::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Mon, 12 Jan
- 2026 10:11:19 +0000
-Received: from CY4PEPF0000FCC2.namprd03.prod.outlook.com
- (2603:10b6:510:33a:cafe::a6) by PH7P222CA0001.outlook.office365.com
- (2603:10b6:510:33a::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Mon,
- 12 Jan 2026 10:11:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CY4PEPF0000FCC2.mail.protection.outlook.com (10.167.242.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Mon, 12 Jan 2026 10:11:18 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
- 2026 04:11:17 -0600
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 12 Jan
- 2026 04:11:17 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 12 Jan 2026 04:11:17 -0600
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60CAB2fv322683;
- Mon, 12 Jan 2026 04:11:13 -0600
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <ilias.apalodimas@linaro.org>, <malysagreg@gmail.com>,
- <sughosh.ganu@linaro.org>, <philip.molloy@analog.com>,
- <marek.vasut+renesas@mailbox.org>, <james.hilliard1@gmail.com>,
- <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <n-francis@ti.com>, <u-kumar1@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment before
- DTB
-Date: Mon, 12 Jan 2026 15:41:02 +0530
-Message-ID: <20260112101102.1417970-3-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260112101102.1417970-1-b-padhi@ti.com>
-References: <20260112101102.1417970-1-b-padhi@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-431048c4068so3032798f8f.1
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 02:13:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768212780; x=1768817580; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YG4+2fpQHynyZkB/e1WerRZoRlecl/hW7ZL5dyt2nTQ=;
+ b=xLWDkoytwxz1WACxEJC8zcEE2I12nw8/4fupBfKAD02uasrsOjh065tbNCWaPjbwkV
+ Gx7zbIMXs7+sV+jNSbcUdYvy5p5euSM/pAsa/CO5z0hgQ7rQHzdW6y5NIaAFgNOdogU9
+ e1am8EoXBBtrJ9nJv+IUeWjho+gS0PjRaPKMmJiRfMlxHW/TjVXNOB0yxVcL9Xgf4joS
+ qoUSBslVkRhM3xl3xpi0X8F8okDN3B0EA4Cjrq8oc5QLFA82I+l8J3v18/NRQw6J1BqS
+ CcuSi3meVoOqW6vy6XYgzcn8LDAnF5gt/5KU6ZLlYhn4UZfaPYAVj71yQV95zS6P5K09
+ 1SvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768212780; x=1768817580;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YG4+2fpQHynyZkB/e1WerRZoRlecl/hW7ZL5dyt2nTQ=;
+ b=C/LJ8ZPlvjAKLu4GDTeHvmsLM7lQnlev+V59fzYdDExIsegxj/436iD6o8j1pi5fHO
+ 83kQ9DSVuxDBRO0YrgSyGf36LAWNzZQfOTw21PDkYD5zj2uEeFiQouz9kIe3mBB9AbDA
+ vYoTQttFLHIR1X/awETbzz5TG6RJXw4jU1Pd0yIBIyPz7isY1/BzOAVHiN8NDLHFJsMy
+ xf/RPxCPUy5eo7EtZ2oHS++vR0j7yMYNJB7mUurC2932cHzxcH3M1ge12MpWH8LVAOBf
+ HbX5sJVQlhHt9TcW448bjyILXw4Kh6Hh041OfodN9C2RbNJzPPGWd9Dw9G/MjM5MCwKX
+ 1Slg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUFkvQ8TtxN5IsZ53dWu/ca8NJLqhjc6SpqcsxyNAZliMVg3MPSAYOmZhgBPD8mRsxlVz9faM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yws1zjkdbK1KaV/MSh21oyQx27IPyUCQGHfwOUaqE4OOyFn1QLN
+ NZ++oSHyG9TATLnI8/eOLZ8LuNNDEL/xo3ScO3U/DLTs+Q1V5Mu9rJyMkk5e615dO1o=
+X-Gm-Gg: AY/fxX4XyQyXsdSwmtBWlfYD3WZQwcaSvyvbc1uU8hQ9zXbQQrn7vFKhjoHiZJSvBX3
+ jWEYP+MYji24fwrltp3wIh/r1ZADesYbuuITzK8OGqdN7cskFWKcP3mFpilPjCShg6OJIBLGX+e
+ zecSOFAc9HP0hnxWPPwkKnraivgAoFj9vxbm7R9Gc9m55L6GN7e390P08rnMQ6EC5BpvlVNOL0n
+ 5n0SRRY4QvfpQdA5xscoT9JF1M5M/GdV0xGjiBV8dlej9TpAdynoZMK4/k5z6V8NQPQfd/KxnGW
+ LDQFBldOoTBGNN1lmh8lU7p7p//DeNwO3nn6FBhAQC8dGBgIvJzZ/PJj7BB/v9id4ADEBk/wCVe
+ seZ7+84EddJWIalaWxZc6/nwWeEcPcOg5AnxGoColLJDSVknOMAlQZBUaPt8tr+H7NotRLOl0Gj
+ AChHtMs+wVYQDbD1shHIqtZUJVkpy/mGkCKyuiLMApS2y6H4JHrFmnnbki1iiJsf+X
+X-Google-Smtp-Source: AGHT+IEPTEAyg2VTDj2bTeBqOGww5qFjen3FrmzjYOm+wONVxW85uaROvhJBXAfmBZ8bwQEGBUPCOg==
+X-Received: by 2002:a05:6000:61e:b0:42f:b835:e15c with SMTP id
+ ffacd0b85a97d-432bcfe4b6bmr25409912f8f.29.1768212780027; 
+ Mon, 12 Jan 2026 02:13:00 -0800 (PST)
+Received: from ?IPV6:2a00:f2a:e0df:cca0:1161:e931:8b2e:a414?
+ ([2a00:f2a:e0df:cca0:1161:e931:8b2e:a414])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-432bd5ee24esm37535615f8f.33.2026.01.12.02.12.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Jan 2026 02:12:59 -0800 (PST)
+Message-ID: <1a443069-2c90-43a6-9c9d-c00ae214386d@linaro.org>
+Date: Mon, 12 Jan 2026 12:12:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: at91: move atmel_serial.h to
+ include/dm/platform_data
+To: Robert Marko <robert.marko@sartura.hr>
+Cc: luka.perkov@sartura.hr, trini@konsulko.com, sjg@chromium.org,
+ hs@nabladev.com, u-boot@lists.denx.de
+References: <20251230210201.496403-1-robert.marko@sartura.hr>
+ <b95c93d6-7a50-4fb3-b94e-ffd72b825cfc@linaro.org>
+ <CA+HBbNEStuFC0zh4TAqREWrLEqRFEwSc0YP_bwf=T-95n1Roag@mail.gmail.com>
+From: Eugen Hristev <eugen.hristev@linaro.org>
+Content-Language: en-US
+In-Reply-To: <CA+HBbNEStuFC0zh4TAqREWrLEqRFEwSc0YP_bwf=T-95n1Roag@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC2:EE_|CY5PR10MB6118:EE_
-X-MS-Office365-Filtering-Correlation-Id: 133abf9b-65c6-4013-fdb2-08de51c2edb0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|34020700016|376014|12100799066;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nRSqcJf/avfyWGCdYTNou96fhBin+bqiYaVqwBy3dKbTCg28teGU2MWRVJ5Y?=
- =?us-ascii?Q?VlBuEpPvNbihT/0ZAPEW4oTDTte/HbEz3Ukp0jFYhom7lF3DNlibiRVg7G2J?=
- =?us-ascii?Q?/dBk9g0zEbofoETEAJHNKTbv8uB9Gm7INOYN8xA567UcW0/zsifj70vTR42K?=
- =?us-ascii?Q?l6W6iDDgYb8vzB6lXE1VjA9tfTGu6r9Gn49zO9+O7T80xjCfQ3mxIkSJS/XP?=
- =?us-ascii?Q?00/TDOoFyW6t4XT6J/RqWpsNLESxNSNaCL4t6nmN5dJ7vkbdwVTSChREY7+V?=
- =?us-ascii?Q?vHDTaIhkqapnQzWlPmIVJ9b5Wi753dCOgZLSC4Ti1n+CDsdt70VXSl2jveBu?=
- =?us-ascii?Q?DUDYVGDElt6yGUQHzEYLctUM7Fwwlko39GddBLeFL5kXlH9dJLnIeNrguuHb?=
- =?us-ascii?Q?33qm/9NflkQr9rXlJiQxdvYV/HEDoMnIItFXKYaD3nwWyd1U6PUnwjjuURL2?=
- =?us-ascii?Q?H6XnEwqMhwNGWrQiMvoqpERc0ITZzhykHEKcKaGmPLCk0PLZEDeoVX8EJJ95?=
- =?us-ascii?Q?/45DpFbsjrDSoHWF3wATa6ww+lDxTLn7akpkmNr2tC2JyLXubuepYHnzqx7d?=
- =?us-ascii?Q?+tOXU4MfiZ4g/Jxc5+TxNRauFFMuDr8yfCGwp8l70sZeR7T+AN5s+/4Ci6MH?=
- =?us-ascii?Q?iL/XEV8HzqMxiqNDnjDC6z8o2MDcXBkLVbLb4ajiXExZY0WHU4qb+byPzV23?=
- =?us-ascii?Q?DJIBajFn5tJDrjHMItRAO7HsxtHIyKSZk340SrrE1OhH/oporkcZ4nzGP1+8?=
- =?us-ascii?Q?JMVM+nczuPNy9nsqyJ/2BSbFCfxgejZlIMUbMJCe5zfXK9c5GCpXiBg98ntq?=
- =?us-ascii?Q?xqaG0heHEBVfD4LleCYR+lyK7rpu+ri5zZubZzLxvvJt98vQ2soJ+AZyT8Vr?=
- =?us-ascii?Q?gBM0SP1zudbqcfoWTW6BbK6+ugIrunzdad7t7hDbtVFT4SjItkkicE6gF598?=
- =?us-ascii?Q?lYAmQwkiZpeTstsiwd/jQp5HlApyAnAV5wCIYBZJ/WWhl9I2l6jz5YQ1R3z8?=
- =?us-ascii?Q?EXr0fCb5VYZyHg0e1ttY5ctaS406Eg3b0thR5Kk8ypGLPGogsAbM6SgeFLC4?=
- =?us-ascii?Q?GqkvqA7KcJ4+K4aLwI4NqAgSjqn/xPLPbB/TND0blNNlevxturBBRINjtqSp?=
- =?us-ascii?Q?6TSthgME4c8cfckL8LIdmWA8O7rRsrITL9m/XWtNMhEBSD5vKXuBaIoNYbzI?=
- =?us-ascii?Q?Z0qQGh4b8z2rOq458iBh0D2qmQZ8tCffRQqBv88P71z5xTX5i+2PML+LTgZH?=
- =?us-ascii?Q?ZpqY272qShFftqhqmwAzPlbTkwm9M73WC0l3rH35D7b0e+VxfLdp8n8vF3U6?=
- =?us-ascii?Q?EQ08QzIqbUW0wGdpBG0C1ty28FJFDC5QfwtWJ6om8LLwxvGOsfb301JTtCN1?=
- =?us-ascii?Q?byhIrHjbJ+v80eKXwGbk1FJK6gya9iH5mVO4DRxuuc2ozHlnLxs/U79jNhCg?=
- =?us-ascii?Q?WWBs9S7uJdpWUetwdZsimXKNiHSCdGnJi2lNAsWC1A0g1B5rO7xNIVfGgK/A?=
- =?us-ascii?Q?YLS22hkfYfcF5guTTEoksCpaBaEOJvtxlL/zuGpAe1NM306GzLsE53t1fHr6?=
- =?us-ascii?Q?LhuO5yZNIAHvp0tw7KVmGKAszfypkdNNH1RiPl6D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(34020700016)(376014)(12100799066);
- DIR:OUT; SFP:1501; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 10:11:18.5564 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 133abf9b-65c6-4013-fdb2-08de51c2edb0
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC2.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6118
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,57 +108,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The OMAP2 SPL linker script (also used for K3 platforms) currently uses
-a 4-byte alignment directive after the __u_boot_list section. This
-alignment directive only advances the location counter without padding
-the actual binary output.
 
-When objcopy extracts u-boot-spl-nodtb.bin, it includes only actual
-data, stopping at the last byte of __u_boot_list (e.g., 0x41c359fc),
-not an aligned address (e.g., 0x41c35a00). So, when the FIT image
-containing device trees is concatenated to the SPL binary, it gets
-appended at this unaligned file size, causing libfdt validation failure.
 
-To fix this, move the alignment directive into the __u_boot_list section
-itself and make it 8-byte aligned as per DT spec. This forces the linker
-to include padding as part of the section data, ensuring objcopy
-includes the padding bytes in the binary and the appended FIT image
-starts at an 8-byte aligned boundary.
+On 1/12/26 11:52, Robert Marko wrote:
+> On Mon, Jan 12, 2026 at 9:46 AM Eugen Hristev <eugen.hristev@linaro.org> wrote:
+>>
+>>
+>>
+>> On 12/30/25 23:01, Robert Marko wrote:
+>>> Move the arch specific atmel_serial.h header from AT91 to the generic
+>>> include/dm/platform_data.
+>>>
+>>> This will be used for support on Microchip LAN969x.
+>>>
+>>> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+>>> ---
+>>>  board/bluewater/gurnard/gurnard.c                               | 2 +-
+>>>  board/siemens/corvus/board.c                                    | 2 +-
+>>>  board/siemens/smartweb/smartweb.c                               | 2 +-
+>>>  board/siemens/taurus/taurus.c                                   | 2 +-
+>>>  drivers/serial/atmel_usart.c                                    | 2 +-
+>>>  .../include/mach => include/dm/platform_data}/atmel_serial.h    | 0
+>>>  6 files changed, 5 insertions(+), 5 deletions(-)
+>>>  rename {arch/arm/mach-at91/include/mach => include/dm/platform_data}/atmel_serial.h (100%)
+>>>
+>>> diff --git a/board/bluewater/gurnard/gurnard.c b/board/bluewater/gurnard/gurnard.c
+>>> index 3275803226a..71db6409721 100644
+>>> --- a/board/bluewater/gurnard/gurnard.c
+>>> +++ b/board/bluewater/gurnard/gurnard.c
+>>> @@ -29,7 +29,7 @@
+>>>  #include <asm/arch/at91_rstc.h>
+>>>  #include <asm/arch/at91_rtc.h>
+>>>  #include <asm/arch/at91_sck.h>
+>>> -#include <asm/arch/atmel_serial.h>
+>>> +#include <dm/platform_data/atmel_serial.h>
+>>>  #include <asm/arch/clk.h>
+>>>  #include <asm/arch/gpio.h>
+>>>  #include <dm/uclass-internal.h>
+>>> diff --git a/board/siemens/corvus/board.c b/board/siemens/corvus/board.c
+>>> index a8714e055d7..7a70a7dfc8b 100644
+>>> --- a/board/siemens/corvus/board.c
+>>> +++ b/board/siemens/corvus/board.c
+>>> @@ -20,7 +20,7 @@
+>>>  #include <asm/arch/at91sam9_smc.h>
+>>>  #include <asm/arch/at91_common.h>
+>>>  #include <asm/arch/at91_rstc.h>
+>>> -#include <asm/arch/atmel_serial.h>
+>>> +#include <dm/platform_data/atmel_serial.h>
+>>>  #include <asm/arch/gpio.h>
+>>>  #include <asm/gpio.h>
+>>>  #include <asm/arch/clk.h>
+>>> diff --git a/board/siemens/smartweb/smartweb.c b/board/siemens/smartweb/smartweb.c
+>>> index 6fa3ca573ae..ce16aad3b98 100644
+>>> --- a/board/siemens/smartweb/smartweb.c
+>>> +++ b/board/siemens/smartweb/smartweb.c
+>>> @@ -25,7 +25,7 @@
+>>>  #include <asm/arch/at91sam9260_matrix.h>
+>>>  #include <asm/arch/at91sam9_smc.h>
+>>>  #include <asm/arch/at91_common.h>
+>>> -#include <asm/arch/atmel_serial.h>
+>>> +#include <dm/platform_data/atmel_serial.h>
+>>>  #include <asm/arch/at91_spi.h>
+>>>  #include <spi.h>
+>>>  #include <asm/arch/clk.h>
+>>> diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
+>>> index 252b0787124..690c00046fa 100644
+>>> --- a/board/siemens/taurus/taurus.c
+>>> +++ b/board/siemens/taurus/taurus.c
+>>> @@ -24,7 +24,7 @@
+>>>  #include <asm/arch/at91_rstc.h>
+>>>  #include <asm/arch/gpio.h>
+>>>  #include <asm/arch/at91sam9_sdramc.h>
+>>> -#include <asm/arch/atmel_serial.h>
+>>> +#include <dm/platform_data/atmel_serial.h>
+>>>  #include <asm/arch/clk.h>
+>>>  #include <asm/gpio.h>
+>>>  #include <linux/mtd/rawnand.h>
+>>> diff --git a/drivers/serial/atmel_usart.c b/drivers/serial/atmel_usart.c
+>>> index 0b35582aaa4..d6c3d4cbcc8 100644
+>>> --- a/drivers/serial/atmel_usart.c
+>>> +++ b/drivers/serial/atmel_usart.c
+>>> @@ -18,7 +18,7 @@
+>>>
+>>>  #include <asm/io.h>
+>>>  #if CONFIG_IS_ENABLED(DM_SERIAL)
+>>> -#include <asm/arch/atmel_serial.h>
+>>> +#include <dm/platform_data/atmel_serial.h>
+>>>  #endif
+>>>  #include <asm/arch/clk.h>
+>>>  #include <asm/arch/hardware.h>
+>>> diff --git a/arch/arm/mach-at91/include/mach/atmel_serial.h b/include/dm/platform_data/atmel_serial.h
+>>> similarity index 100%
+>>> rename from arch/arm/mach-at91/include/mach/atmel_serial.h
+>>> rename to include/dm/platform_data/atmel_serial.h
+>>
+>> Hello Robert,
+>>
+>> These patches break the build for some boards. e.g. corvus_defconfig
+>>
+>>
+>> drivers/serial/atmel_usart.c: In function ‘atmel_serial_setbrg_internal’:
+>> drivers/serial/atmel_usart.c:44:20: error: implicit declaration of
+>> function ‘get_usart_clk_rate’ [-Werror=implicit-function-declaration]
+>>    44 |         usart_hz = get_usart_clk_rate(id);
+>>       |                    ^~~~~~~~~~~~~~~~~~
+>>   AR      spl/disk/built-in.a
+>>   CC      spl/fs/fs_internal.o
+>> cc1: some warnings being treated as errors
+> 
+> So, somehow during the SPL build, the following is not evaluated as true:
+> #if CONFIG_IS_ENABLED(ARCH_AT91)
+> 
+> Which is rather weird as u-boot.cfg in the spl dir has:
+> #define CONFIG_ARCH_AT91 1
+> 
+> So, this is some CONFIG_IS_ENABLED interaction with SPL that I am not
+> really familiar with as
+> #if IS_ENABLED(CONFIG_ARCH_AT91) works just fine and gets the header included.
 
-Reported-by: Anshul Dalal <anshuld@ti.com>
-Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
-Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
-v2: Changelog:
-1. Get rid of extra ALIGN() directive, replace it with a comment
-2. Carry Reported-by, Closes and Fixes tag.
+IIRC when the spl is being built, a dedicated config is being created
+from the proper defconfig by selecting CONFIG_SPL_***
 
-Link to v1:
-https://lore.kernel.org/all/20260109190026.58464-3-b-padhi@ti.com/
+You will have to check why the ARCH_AT91 is not selected for spl, which
+is strange indeed
 
- arch/arm/mach-omap2/u-boot-spl.lds | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u-boot-spl.lds
-index 3bb759d8a1c..5ad169a37b7 100644
---- a/arch/arm/mach-omap2/u-boot-spl.lds
-+++ b/arch/arm/mach-omap2/u-boot-spl.lds
-@@ -35,9 +35,13 @@ SECTIONS
- 	. = ALIGN(4);
- 	__u_boot_list : {
- 		KEEP(*(SORT(__u_boot_list*)));
-+		/*
-+		 * Ensure 8-byte alignment at the end of the last section before
-+		 * DTB is appended, to satisfy DT spec alignment requirements
-+		 */
-+		. = ALIGN(8);
- 	} >.sram
- 
--	. = ALIGN(4);
- 	__image_copy_end = .;
- 	_end = .;
- 	_image_binary_end = .;
--- 
-2.34.1
+> 
+> Regards,
+> Robert
+> 
+>>
+>>
+>> Please have a look,
+>> thanks,
+>> Eugen
+>>
+> 
+> 
 
