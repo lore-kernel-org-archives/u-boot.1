@@ -4,87 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2865BCF45C1
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 18:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F03B2CF45CD
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 20:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 645E58382A;
-	Mon, 12 Jan 2026 19:44:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 24C0F83759;
+	Mon, 12 Jan 2026 21:16:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qt/rHYoq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jakEIAN/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFF6983885; Mon, 12 Jan 2026 19:44:32 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 894BE8382A; Mon, 12 Jan 2026 21:16:31 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A62EA836D3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 19:44:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18D4C83700
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 21:16:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-455dc1cf59aso4081962b6e.0
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 10:44:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768243469; x=1768848269; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IFpXQlZMO6FD6Vt7iLyEssGpp+9uYvsWqQDuhw4NGM0=;
- b=qt/rHYoq90kYXCBybVm91hoR/6Q7YeU3UASqdE8o2xxEaVqeYLm2SuYxVeHo1OJeio
- miGEbzpvFqyXQ5wiTv3vRSO1kvbq8B0ywucOzX8JxsK79BbDtl+K5RZGA/rk5/GIPcn4
- 3BN9JiK/ptzjEoDWL5jXVVXhUPgIKGKl+6XUs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768243469; x=1768848269;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IFpXQlZMO6FD6Vt7iLyEssGpp+9uYvsWqQDuhw4NGM0=;
- b=kW5gqXshIS6lAIFFQ2TNxYnZcoZRV5EDRywxdd0fOU1phXfghyFxgfeIZs+K1en9wR
- B623SCEev4IAz2wv2Vyoz9aSD+uGJ6DPT40mIO/hfRWCq9RodcQKwFrA3x+E993TFxRT
- lEFlJ/lix41ANhL0mzM+99t3M56RDYsP5bs5rxz3VXcRGOoU8RoO9ckj6g8lIBZxp8bv
- AvGd2zczHV6kJgjOPrOWzW9OBhX97JoHhzs2UeTpjdWUNt+yJSyy1nlFjlX45sYNvwwy
- nHdDJy+imoiEJcDqOFPgSdb/eRxP5YUy/5ZEjXzWgDfo6/7Y/shyvt9izxoaau6Hkv6x
- fedQ==
-X-Gm-Message-State: AOJu0YwPBePU7IWIyvH0dZfvGRSKtH5kT0vknz4rH4/xxiteNfCgQ2gB
- 8+uUzaMZ1Nr8r34S0fNcDOhR7CPL/fFQSTQBkQM3wkxE1WXtwuC96XZ8K80NjCwAZrr7I/hNw8o
- 26lVfNEo=
-X-Gm-Gg: AY/fxX5S86zM/FP9GP9Nb4cbMQZxWq4HadMvvZE21jmyfhMhnxEPjYiiz0bDcNEshSI
- 6D5v4/24zrULj6DosyAhZj0yPEtin8CIE83KsH+mvAwB+RJo+QRi+EurGXFEi10qQZF0yN7ixpy
- jojPq+2n7arj6YBySl/8zUDlECd9jpk1kPg7Hcfkzlqbtpadnnn9f4WkDWS8B2IU9BNwiXDcYwG
- fR7Hd6qgF5Da05ok65OZeiZmyAgsvVMZ1QYB4qRrGmtaP4Nt4iJgDgQPRpmZgnLuXsB0qc5uc6i
- Cb6Ew6N3MfH7BWwsbGB4nIThk/bWPjqblcDQgexqFwfsIwfyvShiJzQA7qEjyJOaUFaOySU4NGh
- uvuwMAkxcT1khUcDhGvOfAZqPO450L1/0Eoxa7w9whLuD1SwNjBDzuR6Y4bDK1mmwOlZaT7dExj
- JY84Qlq13aDmvH5th+kyuelEyt2AuIMhlfhCNj5JxFcvsINJC4ihyQMeciTXE6H0P2PCgxrfrLc
- ZnLos984dEk4jtt5SxYL40yAoUX1R1vKMzNINY=
-X-Google-Smtp-Source: AGHT+IENc5OFyJDeTcpV+xK4NyXIpvjG7oBo1Ba7Nfwb+kLDkO6Ko2b7Vfg8Znh4AgHhsYS6WLZBLw==
-X-Received: by 2002:a05:6808:17a1:b0:453:746a:1adf with SMTP id
- 5614622812f47-45a6bd16fa9mr8141375b6e.19.1768243469184; 
- Mon, 12 Jan 2026 10:44:29 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45a8c6b3fdfsm4428416b6e.17.2026.01.12.10.44.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 10:44:28 -0800 (PST)
-Date: Mon, 12 Jan 2026 12:44:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Maks Mishin <maks.mishinfz@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v1] tools: fix format string in tools/imx8image.c
-Message-ID: <20260112184426.GS3416603@bill-the-cat>
-References: <20260112181304.2112-1-mps@arvanta.net>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f435=7S=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1768248987;
+ bh=DJQ14YAw4t/S0LNfIvgl9l5KuyqP8DerLobiOkkU4uI=;
+ b=jakEIAN/KUUI0VDnzU2rFHsT4eHXU2d+PYv4fMgvEqq9fd/xIk0V05zEwI+Fx2FhJ8+8sMTS9
+ omrLKvgmLjCL5pnTBMdp2mFHmck91jOcoQOK9D72PHolNZ6on6boHjZzzzZrTxTzAd2iGX2eliI
+ vYWRLQUTeQcdcJ70aWznj84cdLlEgCkzmV8mFsyWWTMyOTjx7cyVAK1sfZcdfv6cAsyZFyob3Z+
+ CUcnr9Arh/ZtJMnf297cwk8AG2vwydLUtkSdygh0PDM23Ux5Rdnj/kt5xcegM7BCge0RmvwuF63
+ NAkn1DrkPteMaE7X6oUCflsvm7ORCIUblFOagRGHCIxg==
+X-Forward-Email-ID: 69655698e6f5eea36679a038
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.2.5
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <e94df9a3-80d9-4148-aba0-0c5408990556@kwiboo.se>
+Date: Mon, 12 Jan 2026 21:16:21 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mKoN7C5Dbq9JiK8P"
-Content-Disposition: inline
-In-Reply-To: <20260112181304.2112-1-mps@arvanta.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] rockchip: Add initial support for RK3506
+To: Aaron Griffith <aargri@gmail.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260109005008.101506-1-jonas@kwiboo.se> <aWFjzQfEwfCK8RKJ@nara>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <aWFjzQfEwfCK8RKJ@nara>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,36 +74,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Aaron,
 
---mKoN7C5Dbq9JiK8P
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 1/9/2026 9:23 PM, Aaron Griffith wrote:
+> Hello Jonas,
+> 
+> On Fri, Jan 09, 2026 at 12:49:41AM +0000, Jonas Karlman wrote:
+>> This series add initial support for the Rockchip RK3506 SoC.
+>>
+>> [..]
+> #
+>> With this series, board DTs and defconfigs it should be possible to boot
+>> into U-Boot proper (without OP-TEE) and still have support for MMC,
+>> Ethernet, OTP, RNG, LEDs, buttons and USB gadget/host.
+> 
+> I have a Luckfox Lyra Pi W board (with RK3506B) and a Luckfox Lyra
+> (with RK3506G). I've been using the earlier version of this patchset
+> for about two weeks to successfully boot Linux on both of these
+> boards. I'm excited to see this support heading upstream.
+> 
+> Using these patches specifically, I can verify that the RNG and LEDs
+> work, that it is able to read data from the MMC and USB storage, and
+> that it successfully loads and runs a Linux kernel.
+> 
+> I was not able to get the Ethernet port to work on my Lyra Pi board,
+> but that uses your device tree information that is not part of these
+> patches (and may be incomplete). The specific failure U-boot reports is:
+> 
+>     ethernet@ff4d0000 Waiting for PHY auto negotiation to complete.........
+>     TIMEOUT !
 
-On Mon, Jan 12, 2026 at 07:12:37PM +0100, Milan P. Stani=C4=87 wrote:
+Thanks for testing these patches!
 
-> on 32bit systems with musl libc compiler emits
-> warning: format '%lx' expects argument of type 'long unsigned int', but a=
-rgument 3 has type 'size_t' {aka 'unsigned int'} [-Wformat=3D]
->=20
-> to fix this use format length modifier 'z' (size_t) instead of 'l'
->=20
-> Signed-off-by: Milan P. Stani=C4=87 <mps@arvanta.net>
+I did some testing on my Luckfox Lyra Pi W (eMMC) board and also found
+similar issues that you report.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+These issues mostly seem to be related to firewall for USB OTG1 and
+MAC1 (ff4d0000) or DT issues related to Ethernet clocks and pinctrl.
 
---=20
-Tom
+The firewall values before we update them in arch_cpu_init():
 
---mKoN7C5Dbq9JiK8P
-Content-Type: application/pgp-signature; name="signature.asc"
+  => md.l ff5f0020 5
+  ff5f0020: ffffffff ffffffff ffffffff ffffff00  ................
+  ff5f0030: ffffffff                             ....
 
------BEGIN PGP SIGNATURE-----
+The following firewall values seem to help fix MAC0/1 and USB OTG1:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWVBBgAKCRAr4qD1Cr/k
-Cpj6AP9PBzeQvxvgjX83Qi6ZRUorPi9844DIZTitd+Zc88+lWgD+PakBEC54ULlR
-QAJjBRUPGA5VoxrRt5lzQIp+CJ23vQc=
-=tdGd
------END PGP SIGNATURE-----
+  => md.l ff5f0020 5
+  ff5f0020: ffffffff f00000ff fffffff0 fff0ff00  ................
+  ff5f0030: ffffffff                             ....
 
---mKoN7C5Dbq9JiK8P--
+We could possible set all these to 0 to allow all masters to access
+memory, will send a v2 that configures the firewall like above.
+
+Adding something like following to the ethernet-phy nodes seem to solve
+the Ethernet issues in U-Boot on my Lyra Pi:
+
+  assigned-clocks = <&cru CLK_MAC_OUT>;
+  assigned-clock-rates = <50000000>;
+  clocks = <&cru CLK_MAC_OUT>;
+  pinctrl-names = "default";
+  pinctrl-0 = <&eth_clk0_25m_out>;
+    or
+  pinctrl-0 = <&eth_clk1_25m_out>;
+
+Vendor DT for Lyra Pi seem to set CLK_MAC_OUT to 25 MHz, but this does
+not seem to work in U-Boot and I can not see anything wrong in the clk
+driver, so maybe it is meant to be set to 50 MHz.
+
+Will update my rk3506 branch to include these changes and later also
+send out a v2 of this series including the firewall fix.
+
+Regards,
+Jonas
+
+> 
+> So, for what it's worth,
+> 
+> Tested-by: Aaron Griffith <aargri@gmail.com>
+> 
+> Thanks,
+>  -Aaron
+
