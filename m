@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB3CC9EC95
-	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8755C9EC8D
+	for <u-boot@archiver.kernel.org>; Mon, 12 Jan 2026 14:41:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3E4E838A5;
-	Mon, 12 Jan 2026 15:39:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A315838A5;
+	Mon, 12 Jan 2026 15:41:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gDu2okxX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bx5jYVpp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2021C83885; Mon, 12 Jan 2026 15:39:16 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 4ED9283923; Mon, 12 Jan 2026 15:41:06 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE12F8391B
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:39:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12EA983885
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 15:41:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dqZl34wkkz9str;
- Mon, 12 Jan 2026 15:39:11 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dqZn95YF3z9spP;
+ Mon, 12 Jan 2026 15:41:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768228751;
+ s=mail20150812; t=1768228861;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kvmmae60+A20OSVeAqkaGBV/HKjjRxV5broLo+N0Qps=;
- b=gDu2okxXv79rPHmdlpzxoBkmoIT0qoWwqZ0tjLoq1yn8swuUm9ypXPWjdcHJ+u2gHGo7E0
- 6vtXJc1owWzz9HhAHacSCpvfpUKYiwQDqcJmRZI1zFoVu/FV06lU37MSuv2bjWcghquqDi
- WDhPAZW53EcphiIFphUdbD/TZKy2QCp5uUOOmSMv2Rap80Sty58v0dJlBj28w1PFbe0v4C
- 6/10JrwQtsVciuQZTupELH/ElWYWNXLrjaljvBPUVd4U7AA4UzKd16p6+IpIFFIdEyT8l+
- hMfsfiPtXkBnZBjmxERTcXSNbkcPs72wQW+/obGt+7TXx2KdavED6NnDP+72AA==
-Message-ID: <9257e248-512f-4c42-999b-0f8c4f0f92b7@mailbox.org>
-Date: Mon, 12 Jan 2026 15:39:06 +0100
+ bh=NbbGfSueASLDGMSlhQ214Tbdjuv8gXSR1eJ8D5lCFHw=;
+ b=bx5jYVppAWQTGNuU8D6NwjVNwdmOkCF3VYI99d6kU6MqXH4erRO4IzxhdVE18V70AcNnaP
+ xsXjwktuD2hpb8HnhgXLaQBfB6gnwr5/OaODIzmw9whdEsTPYtj3VTO/9WNOumD4O9S+ta
+ L0+P0qmTDG16IThVmH6UNze16y4IPmpvftiBq40TkbMJkg6irjF9f8c59/2a+Sgk/DN35x
+ 8l8D2In4s4YdfiSk3R6k6zWwDInb5sT9ualeQmU70EFv4sRTkFbYdK4jMOfVJ0Mf9SLeEV
+ 9AWY7xHutegGWF8+tPXyqYx6Ryg4OZTnDCyPQpRrpWo+SelAhFYjTiV/mh/hUw==
+Message-ID: <f7562e91-03cb-4bb9-aabe-e7c0b6ea1b6b@mailbox.org>
+Date: Mon, 12 Jan 2026 15:40:57 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] scripts/Makefile.xpl: Align filtered DTB to 8-byte
- within multidtb.fit
+Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
+ before DTB
 To: Beleswar Padhi <b-padhi@ti.com>, trini@konsulko.com
 Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
  sughosh.ganu@linaro.org, philip.molloy@analog.com,
  james.hilliard1@gmail.com, anshuld@ti.com, afd@ti.com, nm@ti.com,
  vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
 References: <20260112101102.1417970-1-b-padhi@ti.com>
- <20260112101102.1417970-2-b-padhi@ti.com>
+ <20260112101102.1417970-3-b-padhi@ti.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260112101102.1417970-2-b-padhi@ti.com>
+In-Reply-To: <20260112101102.1417970-3-b-padhi@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: n6ymg6zkzywsg4b5xexf1ntuqyx5qyr7
-X-MBO-RS-ID: 4bcbbdc89c76d5537bc
+X-MBO-RS-ID: b23ef23f7d06fc7d3bf
+X-MBO-RS-META: eainu6qkkp55paz5kc8pm3xk4te66uy3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,17 +80,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/12/26 11:11 AM, Beleswar Padhi wrote:
-> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
-> packed inside the multidtb.fit FIT image. While the individual DTBs
-> and the FIT image start address are 8-byte aligned, the DTBs embedded
-> within the FIT image are not guaranteed to maintain 8-byte alignment.
+> The OMAP2 SPL linker script (also used for K3 platforms) currently uses
+> a 4-byte alignment directive after the __u_boot_list section. This
+> alignment directive only advances the location counter without padding
+> the actual binary output.
+> 
+> When objcopy extracts u-boot-spl-nodtb.bin, it includes only actual
+> data, stopping at the last byte of __u_boot_list (e.g., 0x41c359fc),
+> not an aligned address (e.g., 0x41c35a00). So, when the FIT image
+> containing device trees is concatenated to the SPL binary, it gets
+> appended at this unaligned file size, causing libfdt validation failure.
+> 
+> To fix this, move the alignment directive into the __u_boot_list section
+> itself and make it 8-byte aligned as per DT spec. This forces the linker
+> to include padding as part of the section data, ensuring objcopy
+> includes the padding bytes in the binary and the appended FIT image
+> starts at an 8-byte aligned boundary.
+> 
+> Reported-by: Anshul Dalal <anshuld@ti.com>
+> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+> v2: Changelog:
+> 1. Get rid of extra ALIGN() directive, replace it with a comment
+> 2. Carry Reported-by, Closes and Fixes tag.
+> 
+> Link to v1:
+> https://lore.kernel.org/all/20260109190026.58464-3-b-padhi@ti.com/
+> 
+>   arch/arm/mach-omap2/u-boot-spl.lds | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u-boot-spl.lds
+> index 3bb759d8a1c..5ad169a37b7 100644
+> --- a/arch/arm/mach-omap2/u-boot-spl.lds
+> +++ b/arch/arm/mach-omap2/u-boot-spl.lds
+> @@ -35,9 +35,13 @@ SECTIONS
+>   	. = ALIGN(4);
+>   	__u_boot_list : {
+>   		KEEP(*(SORT(__u_boot_list*)));
+> +		/*
+> +		 * Ensure 8-byte alignment at the end of the last section before
+> +		 * DTB is appended, to satisfy DT spec alignment requirements
+> +		 */
+> +		. = ALIGN(8);
+>   	} >.sram
+Does this work even if the __u_boot_list section is empty ?
 
-Because DT properties are 4-byte aligned, and fitImage is a DT with long 
-binary strings encoded in them. But that is not the case here, because 
-the invocation does use mkimage -E .
-
-Therefore I see two issues:
-- Should the code which handles LEGACY fitImages with 4-byte alignment 
-be fixed to relocate the blobs ? I think yes.
-- Should mkimage -E align blobs to 8 bytes by default ? I think yes, and 
-frankly, I thought it does so already, but apparently not.
+I think what you need is unconditional alignment of the end of the 
+binary, that has to be 8 bytes aligned.
