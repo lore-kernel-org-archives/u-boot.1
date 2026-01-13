@@ -4,160 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E5DD0C838
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 10:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9BD4D0C849
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 10:38:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA38683045;
-	Tue, 13 Jan 2026 11:25:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EBBFD82B20;
+	Tue, 13 Jan 2026 11:38:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g9UHBIC3";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="a8qnVAug";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TRuVXNNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 096498352B; Tue, 13 Jan 2026 11:25:54 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azhn15010053.outbound.protection.outlook.com [52.102.136.53])
+ id A07F383045; Tue, 13 Jan 2026 11:38:52 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8717082B20
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 11:25:51 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C0ANXyUaXY85qM+lcGVeMJKyqHetyoPilUJJa9HrFKmTjK8BVv4g3fYOznhaQesbC3ZgayDneHnTSjhTyk6nHq0DPIuw17tPqdxdsUX/L/RxS7wemQmKjET1kz3512lSedtoLG2nmQf55ZSN4kgrxJwPLdQ4NQQIlJZpBX4Cm7vQdBShDXUFbXbaRLUQ3vqDhLHjbGHwsQtU4LQU69pVFnwxzFYr6WhgVA7Nz0M5OsHFa0B3Q+jhcvU/redp1ySjT5GqLAHPjxt3a4dj4HqZN5GvoyIbuqLq10kOfneG87RWGCahUMuvB+x0VW+HDI5dWuiRe8O0dENawdLq10Y9QQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vSU1nQsPO5i5ahdhlQZ7LJFJap02JnIrry/AzK1ASH8=;
- b=LuEa78tgz9abr/W2Qi8fH4bhPsf0eJlSTRzsANk2kemX3jJo9jRMJAr7ZcZC07UvznZL6wA3B0fAX9ktC84qPvVQYs0RG7dPZLetbycr0xfBedEcuGzArcihFPaXjGRf72ISZOviZTbT9VYS9uPPpc2cie4/50eO6W8sS+IRjBOzpPptks4gTenwF/1+WdUcWgLz8+DWYiluL2vbXFB3FvWCLGoQsiwIH1eNSZjG1H0A22MweBTPz59aB+ovcLUJF63CAQ7vzyJlc3aus++J1Bgy0LmQ7W3DE9n3tC9AUzmOIXMNkAHpKzUKF2UP365eKXNgZPNhRHSraUC7BVq4QQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vSU1nQsPO5i5ahdhlQZ7LJFJap02JnIrry/AzK1ASH8=;
- b=g9UHBIC3VZ+LFtGWZKEVXaAMLK/DJ+TlzsVoEo8Thf2eeh660guGxMcb38AwO55EJCF0K9PT5aDMDuq2Hz16bcoEMDMGexWTkcv2RTM1Q2/Tzh/6A5Rjdh+iX67s/qYrEo3j9QMSBLrB1d2NQwFImCI/4PeRW3LhSPVwFtN0njo=
-Received: from BL0PR01CA0018.prod.exchangelabs.com (2603:10b6:208:71::31) by
- SJ5PPFC41A007A8.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::7ca) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
- 2026 10:25:48 +0000
-Received: from BL02EPF0001A105.namprd05.prod.outlook.com
- (2603:10b6:208:71:cafe::f7) by BL0PR01CA0018.outlook.office365.com
- (2603:10b6:208:71::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Tue,
- 13 Jan 2026 10:25:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BL02EPF0001A105.mail.protection.outlook.com (10.167.241.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 10:25:46 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 13 Jan
- 2026 04:25:30 -0600
-Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 13 Jan
- 2026 04:25:29 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 13 Jan 2026 04:25:29 -0600
-Received: from [172.24.234.212] (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60DAPO671994846;
- Tue, 13 Jan 2026 04:25:25 -0600
-Message-ID: <98d6a5d5-a09c-4dd0-a3c3-af5f9b58dc3b@ti.com>
-Date: Tue, 13 Jan 2026 15:55:24 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id 57E348004F
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 11:38:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 60D75Bt42604538
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:38:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=dJc7AiR+0WNhMLOealyWTU8Yw0lyEmYizrK
+ ob+zpC/M=; b=a8qnVAugZsj6L9N1k/cw5jK8/8RZeT5DNq9zC6CCe2gJ4/B0jhB
+ ovzCk9ljUZFS80Bkz7ya84mcLkSrraVV9YgZ4cM5GP019L/NyTTg1rZg6iI44nhz
+ b+8qep+FTNK63q8jZs7Lp158boYGwcKx9voMX3GFhBhs2gQuDSWzKKxLI1+GoUop
+ rJxA9NKIEvF1JTq9lYgNNwWpGt+i9elm25/OTZyafhVMM9lSHAkBiZ9hmY8aBtyQ
+ pPxCS3pXBF8e5JyO8HRlNWyJ3ry5S3FwrPkhS2/wR1kQF4lOAR2KsvIhVmDK/cSW
+ pHbFXot60QTcdkRzAUYtI19KRKdqyvezmgw==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bn7uytaqg-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:38:48 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2a58c1c74a3so7019595ad.2
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:38:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1768300728; x=1768905528; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dJc7AiR+0WNhMLOealyWTU8Yw0lyEmYizrKob+zpC/M=;
+ b=TRuVXNNtwvwcWYnqfS5C6omnNeA2unQM/pZZc6PFr+pwwI/sju/HRXFa05l4Xq4eWY
+ Mr46EzY2XU5Qw3JUs7f4lVMzPun0ig7cMMxU1WpnEWLCgkCIc8UJw+jk/xzuQaklj2Sx
+ JUUVqoSkT8gkXIZQodrtMxX/pWazwlSyn2qhIEzzY4Q6Y4VdbOPSTnxVWSdokTlDMirA
+ BtCvtjLniE6IJR33DtwwbP0ab8d6PMEDB2XBVv4LBSoE0h6SMDAc+NcIaCYus+j/Sd65
+ RgLgizmb2lxkGzvFMj1SvlqeSpsFGqsd+BSiw6lD+zQDK5wQl/X/eeQe6rKfOstvwZBG
+ 0tew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768300728; x=1768905528;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dJc7AiR+0WNhMLOealyWTU8Yw0lyEmYizrKob+zpC/M=;
+ b=arzabVvNpvu3QoJoDQRqunBmXI7PK97jHN2RaXDzIuhsGORgoEtjgT5pdxb6p4Mdga
+ WszlXQ2OqnNhNfuU4F6K4f1w0tzKeTR0wIUNSJISPM0lJjFJCYYTpwrwaqR4RoqgxtQG
+ Q0oJS1+Wkr5C7oBlQN+oPvFLE2XpZJRINYyJXYUj1Tmx4y8P1W7mhiOTVkI9ovG+4c8I
+ 6rqs+WrIB+Jc9FZ6btfRodZW/cQKzYxh5RJDyPpRIUdLF4ijrxevy2vjpXcuPgRDmuSo
+ Gr1PNmKJIb9dFlxCWJDEqw8Dca8JBtLpwCnGeXOyD7CQSwUm+G1z8B6tWVt6EO2nkj4y
+ 78ng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVLGIGjjbmSeGyHfYMBf7biyhQaL4d92cYCkxOErldTqbjfttd71KbtbyH53yEuvyOhdX2wPwo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQZPGugk4AgkVZeA5WjSvc8Ea26A/ht+Sjvpvgq+rACsg7ffW0
+ C4XW1BSB1D1hO8q5dbEZUpu6eGD4moOf6Ibdsh5u83R582aw4sYV1aH7Z0B4XX8ockl136mOioD
+ ajM2Wk6+GAaZnu325FeBUGSxRG3eI758Ch8NvZjJ6QKCNgsvOrqag6Irs
+X-Gm-Gg: AY/fxX6XqW2dx+bFW7RnS5vanljmdnmpXOyoPBe74kwIiUQm/Dbh/lRw3BUuTk3NO8s
+ nxmIr4Sg8FpAtQcrHEyNlvbTA7EIliAnOpgTKtfx/aofQGY2KYhUE8bEiz2ONG+RTuANnp9xERC
+ jXEhhPFRTb+8mvvEphmRP9hwJmzFXz9m/RjKKaYUU3KtFO+vHQjClDiSRw5KyUE+rVhj0PEtCas
+ oMejx06LCGU6z1xsbzGfKk+8vmOBfDVCtTyndDehgg1byShB7FwuMXl7ge09fx7B1dH1Yco9Gm/
+ 8rxX+l93ucUZCg4Yf/iKwsLIKPQuuy7YjeLVC7MG1JCZlsitoC6XLbcFepcRsEUujDLClXNNhGK
+ xR6g+zNyd968p4b4BPRtvLT6dJmomhSJHP5G3k6F19Yb+yn69Tod/APLhxNwSo0yAdwRUQHY1Av
+ 68Kt2fGaD5BhxrERYQ7FnhHbP+pxHlXFEZ6/VPcos=
+X-Received: by 2002:a17:903:1b06:b0:2a0:f469:1f56 with SMTP id
+ d9443c01a7336-2a3ee4b7520mr237040755ad.31.1768300727718; 
+ Tue, 13 Jan 2026 02:38:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG4k3PFxJbYL68bbrqEOU4wKCVidQUyMsUQpSGrqUZGcH0mwMwgB7vy5Rm3Xh9aOMm6GWJtIw==
+X-Received: by 2002:a17:903:1b06:b0:2a0:f469:1f56 with SMTP id
+ d9443c01a7336-2a3ee4b7520mr237040525ad.31.1768300727186; 
+ Tue, 13 Jan 2026 02:38:47 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a3e3cb2dd4sm195286965ad.47.2026.01.13.02.38.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Jan 2026 02:38:46 -0800 (PST)
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, varadarajan.narayanan@oss.qualcomm.com,
+ ilias.apalodimas@linaro.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, christopher.obbard@linaro.org,
+ me@samcday.com, michal.simek@amd.com, clamor95@gmail.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v5 0/5] Implement reset to EDL for qcs9100
+Date: Tue, 13 Jan 2026 16:08:35 +0530
+Message-Id: <20260113103840.1948029-1-varadarajan.narayanan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] scripts/Makefile.xpl: Align filtered DTB to 8-byte
- within multidtb.fit
-To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>
-CC: <ilias.apalodimas@linaro.org>, <malysagreg@gmail.com>,
- <sughosh.ganu@linaro.org>, <philip.molloy@analog.com>,
- <james.hilliard1@gmail.com>, <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>
-References: <20260112101102.1417970-1-b-padhi@ti.com>
- <20260112101102.1417970-2-b-padhi@ti.com>
- <9257e248-512f-4c42-999b-0f8c4f0f92b7@mailbox.org>
- <2854b18c-324f-4052-a6e5-538df6a0bcab@ti.com>
- <a799f9d0-e369-4ccf-8c64-60623143ca86@mailbox.org>
- <20260112220323.GT3416603@bill-the-cat>
- <e7d8161c-789c-4d44-af2b-19bf69f4eb12@mailbox.org>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <e7d8161c-789c-4d44-af2b-19bf69f4eb12@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A105:EE_|SJ5PPFC41A007A8:EE_
-X-MS-Office365-Filtering-Correlation-Id: c90a3a5c-2399-44cc-0fd8-08de528e1d77
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024|34020700016|12100799066;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b3ZrdnRvT2ltL3Qzb081MTJ2V1daaUwyWGxXbHptUXRZcnV4WGsvV1h3Tml0?=
- =?utf-8?B?bmVhWmp5WnFaT3poeFd0V3R3N04zdng3cTk2eHJ6dzk0VTYxaXJML0ErSjlt?=
- =?utf-8?B?eG1jQkNDc09pQ24xMEV2cklnQ0FOR0ZXR0VVOG5HUnFwWW43Y28xQ3d6NDh1?=
- =?utf-8?B?K0RBV2h1QnFYQXpNdmVnRG10Ujl4MGM3TnB3TXJCeGs4NlFTUStYQU1Zb2tu?=
- =?utf-8?B?a2MxQzNzbFJZeFVyM2ZJTWNGY1JQWHZ0U0V5VWh0UmdiRjdpcWs2YjV6Rmh2?=
- =?utf-8?B?UzZieWhuODcrWFNIZGM2ZG83a29KSTF4OEJrS1pQNDFGdWZhb3V3TmxZbjda?=
- =?utf-8?B?YUhHTGpXcXZLV3BtVm50SEVjUUpCbGdpdmFycFNqQWllNWphSW41MERDZGFC?=
- =?utf-8?B?bW51M01Iek53YlJmNGE5RjUvWmhGWE9WdGhINHBhYS92MG5YVU9lWWc1QkpZ?=
- =?utf-8?B?MktHeWkxVVIranphTlNZNmc2M0l1a2JlYkVzUjJ6bythZjVDa1Z5eFBOcmVp?=
- =?utf-8?B?YTQvRmJ0RW1qU1VJeElTZzlJODFPTEhOYXYrVmJJb3cxUktsN3pMS215N05L?=
- =?utf-8?B?UlZvTXN0SUVSUytHVDRHYVNrMDFTV0ovQ2I4Qm4yUm9VUGJ4MVBCb0JJNTAr?=
- =?utf-8?B?OTc4dmlYQVVjZk5WekVkQm5XeldTNkpaa0V2cmlHbDE0ZHZ0dEI0OFpxbHhx?=
- =?utf-8?B?STZaTGV6VVYyZ0RSbDhGeUVoNC8xTVZyLyttM3FiVS9nVUhkMSsybSs3NStN?=
- =?utf-8?B?YVVocFY3QjQ1cE04cnozNjQyUFJ3Vk9ielR0K2lQZXVEUU5zMHhjMm5ZQjdo?=
- =?utf-8?B?ZU9JL292SmN6U0JWam1BdGFabU9GdXpwNXNFQ1pmbjVSSmNzWEFvZGtVdita?=
- =?utf-8?B?c2g3QXJBSC9EM1d3R0gyM1k1cURQb1Q5V3k4bCswMy82TTd6ZkZUa21wMEFo?=
- =?utf-8?B?a1M3bHl5a0hWTm9kYUtQQ0xWTCtXbDhIVkhtbUc2d29vZ20zRWsrMjl3OFJK?=
- =?utf-8?B?N0NHUXk4ek1mYnNFSnhzY0EyNG55QXBxeW5yWFRDNmYydHdaeWhxNG4yQ2FO?=
- =?utf-8?B?aGQrTFI3M1NuM1cwblNma0J3Zmc2cjRuejFNb3lmelVHbytBSUZVOWlxenhQ?=
- =?utf-8?B?VngzQ21ocXROL1JCYWlZU0dhbVBVcC91bUtsd0g5eXh4alQwajJNeE1sWWpS?=
- =?utf-8?B?MHhMeWl5STAwSnFqRkdRdk9taFN5cFFqTDRtV1o4WGc5QUtJNUUwUUdXbnhi?=
- =?utf-8?B?VFo5cTZwT21iU29jcXppMGREekgrVDc3dENmajcwZE5OZ3diN0kzS2tDQ3JG?=
- =?utf-8?B?RmhoWUdVVXNQRmxPVkt2OHFNQ0xwQy9MNjFqbDFNWTMxTW9XWVh5MjZkaDY5?=
- =?utf-8?B?aExUcWUvTzVraVBnMkVYZVdQMEpIQUkxVGJXandEWENvRU5xa1QvS0lyc3ho?=
- =?utf-8?B?Ny9kenJHcjVncUgxTVJJVUdlMHZTc2tnVGo4M3VEb3pHOU5JWjFqNGtCZjBp?=
- =?utf-8?B?N0szTzlhSGVGcFRUbWZ0SHkvQXN5aWFRU3JUcXpJejlYTEVNS1k3WnhsbE1Y?=
- =?utf-8?B?RWZqeXMwTEtLdWcraFpzclhpajBKeWMwcVdNcHhOUStFaEkvQXhkdDVjTCts?=
- =?utf-8?B?YkpSdWNZZG1TUFlKK2ljb1NKTGtuQTBzSGhrMUJQSCtjK3BTaWUvYVU5UmF2?=
- =?utf-8?B?TkprdFRLeUd6SnpwbkZhalIzVWU5clFLcTY0UWh4blBXazBESDVDNDRiSzdI?=
- =?utf-8?B?N3hlZXhUSFBoZGVqOEEySi9xemRvYWdsKzk1QzVjZ3FCVG9MSEJnYTg1ZzBF?=
- =?utf-8?B?cyt0d21DaUQ5Yy9COU0vemFUejY2OUY2cVU0OXJxU3F2bWVkeStMMGRjUGpL?=
- =?utf-8?B?UEF4OWsvdE9kQkZXTHptbCtHaWc4WTdWODZKUkhXU0o4MFU5UkJ2NVpydnZY?=
- =?utf-8?B?UFY1U3FvOEl3SGVnV3A5SHJ2YldRVnRmMXZGRXE3bEZ4ZWJmSGZ1WUhaaVFH?=
- =?utf-8?B?MldLL3U0TGxoOVExaE9OazFkeklyZzNqZmZ2azMwcHlmYTZUN0FxeENnTVZX?=
- =?utf-8?B?bVlhaGtYbjJNWFZ2RXNNNGVqR0RmNFFCQVNFakRXM1RZaDhENStGRmViZlJM?=
- =?utf-8?Q?KQK0=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024)(34020700016)(12100799066);
- DIR:OUT; SFP:1501; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 10:25:46.5084 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c90a3a5c-2399-44cc-0fd8-08de528e1d77
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A105.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFC41A007A8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: eLuPadVnqeuJaW5B1BruWfS-2m-QnoNp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTEzMDA5MCBTYWx0ZWRfX0DObrviMbSwo
+ XzF7ZIbZ3y+IPz6TfIyoTjj9KwQWP6KZpBpglZX3tIy/oPCe8hvJDv6mqUoj9Me8upluLdOquuv
+ RuyEj+YpHdAvgCfnPCuzieg6ciZKtw1KyaF/0TzDCq5ZjcoY9vFVSPKxGBnt1GJzfmwopAyDi4N
+ NilOYEsmlSfIifY4IbObTgDwTPAU+u/iGUuPeP3Bt14qXtWHqD2riUky10WsxTOeHyXiHDpBtWB
+ SZzNyBBb5LFZa9KSppaj043WN7IxaFTsq7S708Cr0GIDztm5vxJnHvnqPkI1aCgKeEnshf8QWc0
+ m9C4HsT21m6/eePeZ2yVjynApIzV70biy6FdBAdBivigzNu5Np0KgliGsDQjg5/e2uVwRfl3ah6
+ jFfdWndUiVLTV3TsaheUs+4fllzLD5ftoMIDYIvdUVvx8Tn0TV+gre3cNkEgIzdPe/GPpbzVPaS
+ Y1elwte3H2D7on+XJ3Q==
+X-Authority-Analysis: v=2.4 cv=bpdBxUai c=1 sm=1 tr=0 ts=696620b8 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=wsBOlPFGP9gUABGrlvMA:9
+ a=1OuFwYUASf3TG4hYMiVC:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-GUID: eLuPadVnqeuJaW5B1BruWfS-2m-QnoNp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-13_02,2026-01-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
+ impostorscore=0 clxscore=1015 phishscore=0 spamscore=0 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
+ definitions=main-2601130090
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,53 +149,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Using the 'reboot edl' command in Linux, the platform can reboot to the
+Emergency Download mode. Implement the same for U-Boot.
 
-On 13/01/26 05:23, Marek Vasut wrote:
-> On 1/12/26 11:03 PM, Tom Rini wrote:
->
->>>> This we can fix in the Makefile via the dd command as suggested by Tom.
->>>
->>> My concern is about LEGACY fitImages (means already generated ones), not
->>> newly generated ones.
->>
->> Why is that a concern? If it's a legacy fitImage for the OS, we relocate
->> the device tree already normally to be aligned. If it's a legacy
->> fitImage of U-Boot, it's an old U-Boot?
->
-> Not necessarily, it could be new U-Boot using old fitImage, for whatever reason (falcon boot maybe ?). We should not break that.
->
->>>>> - Should mkimage -E align blobs to 8 bytes by default ? I think yes,
->>>>> and frankly, I thought it does so already, but apparently not.
->>>>
->>>>
->>>> This can be done, but should it be? Not all FITs demand an 8-byte
->>>> alignment right? It is only the FDT which requires this.
->>> Maybe if image type is flat_dt, it should be implicitly 8-byte aligned then
->>> ?
->>
->> Well, the device tree spec says 8-byte alignment.
->
-> 8 byte alignment of what, start of DT, right ?
+v5: * Update author and signed-off-by email id from quicinc.com to oss.qualcomm.com
+    * Add r-b tags
+    * Enable CONFIG_SYSRESET_QCOM_PSCI in qcom_defconfig instead of qcs9100_defconfig
 
+v4: * Update documentation about '-edl' option
+    * Add API to check for support of PSCI functions
+    * Check if RESET2 is supported before issuing the command
+    * Fix compiler warnings
 
-Yeah from start... In this case, the FDT for OS is aligned, but the sub DT
-from the FIT is not aligned by 8-bytes.
+v3: * Introduce a sysreset op that will pass down the 'reset' command
+      arguments to registered handlers
+    * Handle 'reset to edl' alone in qcom-psci driver
 
->
->> It's not "FDT for OS"
->> that's 8-byte, it's any device tree should start out 8 byte aligned, and
->> everything else should then be naturally aligned. If we're looking in a
->> device tree for another device tree to use in place and not relocate
->> then that second tree must be aligned.
->>
->> Or am I missing something?
-> The discussion is about mkimage -E which generates DTs for U-Boot SPL use. The DTs in those external data should likely be aligned to 8 bytes by default, i.e. implicitly set -B 8 (they don't seem to be right now).
+v2: * Rebased to recent sources
+    * Dropped the first patch as it is not applicable anymore
+    * Bind the new driver from psci driver
 
-Instead of -E, we can use '-b' which always takes DT and make sure that is 8-byte aligned by default:
+Varadarajan Narayanan (5):
+  arm: psci: Add API to check for support of specific PSCI function
+  drivers: sysreset: Add sysreset op that can take arguments
+  sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
+  cmd: boot: Add '-edl' option to reset command documentation
+  qcom_defconfig: enable psci based sysreset
 
-Usage: mkimage [-D dtc_options] [-f fit-image.its|-f auto|-f auto-conf|-F] [-b <dtb> [-b <dtb>]] [-E] [-B size] [-i <ramdisk.cpio.gz>] fit-image
--b => append the device tree binary to the FIT
+ arch/arm/cpu/armv8/fwcall.c           | 15 +++++++++
+ arch/arm/include/asm/system.h         |  1 +
+ cmd/boot.c                            |  3 ++
+ configs/qcom_defconfig                |  1 +
+ doc/usage/cmd/reset.rst               |  2 ++
+ drivers/firmware/psci.c               |  4 +++
+ drivers/sysreset/Kconfig              |  6 ++++
+ drivers/sysreset/Makefile             |  1 +
+ drivers/sysreset/sysreset-uclass.c    | 32 +++++++++++++++++++
+ drivers/sysreset/sysreset_qcom-psci.c | 45 +++++++++++++++++++++++++++
+ include/sysreset.h                    | 18 +++++++++++
+ 11 files changed, 128 insertions(+)
+ create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
 
-Thanks,
-Beleswar
+-- 
+2.34.1
 
