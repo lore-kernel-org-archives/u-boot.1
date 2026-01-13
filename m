@@ -4,87 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5407D2F326
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 16:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1828FD2F326
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 16:15:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04CAC836A3;
-	Tue, 13 Jan 2026 17:13:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A453D80433;
+	Tue, 13 Jan 2026 17:15:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WUKz3FkM";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="sox4/H00";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6948982C7F; Tue, 13 Jan 2026 17:13:27 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B267E808AF; Tue, 13 Jan 2026 17:15:37 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BA8E8352B
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 17:13:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AB2C80325
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 17:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-3e80c483a13so4660427fac.2
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 08:13:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768320804; x=1768925604; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AxoyoWyT4cj27gFlC97hYNNO9eTcfuVqQUC02DdQZVg=;
- b=WUKz3FkMP1MIw3UQzis+2sa69mmCGoILHq7j1Uz+CAmaHyvChrRtN5TDYFzsQlK78j
- O7t0/0t04KJuQkr1IJRfg/W2sDBpZp0RRi0tL8yhYOCQjS4rX2DqFYqma/cFtRfAS6SI
- LJjwokARySQlYKM8Iu1zj4WA3t1j5qRF7r3Vs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768320804; x=1768925604;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=AxoyoWyT4cj27gFlC97hYNNO9eTcfuVqQUC02DdQZVg=;
- b=Bo5SZymK+JQrt+2bHkjYwAuyIGk86pC2n7S7a8uPAYz52NdkGihOTRkJdn2+wGQnLJ
- RhJHPHKiawBX8Uopbl6rBC1m6BnY1CHmahdj62271LWAt16jKjztIqXmrQcojhQWNxKp
- NBSl+w8pk3x92ou+MamWc+/ioominqazFdNSlixHtAnlhHmudb4r7zhHri+tclwXgEwE
- 6hlssbQTsf2UX57Y+FRYwuvg5/B3guuLxEueT4SSqF3if+jfPBurk0kLqk9b8U3Ux9H6
- 3HOMVzj9G7CtMsmZA8fuLyiOU49jkmMT9btaNT+8GFGlm9xopuk0VyKl15aRcuoXxnS/
- E60g==
-X-Gm-Message-State: AOJu0YzIzdd4SmFDZYTgpIqaltwaDd/nZ/d/WBX8iRsq82RgFuEXVZkA
- kOvJslCAcmjEKV/okB2zziUJvP0KolFoAOzred91DmFBYHaSRLkHCEqFMoU4lNpI6RA=
-X-Gm-Gg: AY/fxX7qzeIlEXmrX9rPF/naI6XotNCACtSistmWMzr0/Ce7Lg7tBq6ABPXyuDSinXG
- 51bIGnHXFSiH0JdCYfsiPmZ+/3r/JwmlbneUWMygNMRjbm3754PuVf4q/D3b5pPNLpJ6ZKJpN9H
- fOtuMZa/eHE9qqULbEEy5FA+kRUBA7vzJzlrxEuzaG5oSc21X5fy+1GsFpNUosnAd+VHF4UKST6
- mN+Y4gjWsFdUbJsXqmECWr1ZZm159l8fdZ5bb7cuTil0xr4lMUCMDNmJrFNfbk3gbf6/65io1wh
- UOf6NfTaajwFDRZy/nTyRNfIVQ7RX7gTDZc5pl60ulCIxYu/nB6xiuiMj6QohJe+dgyNUg0tpbt
- 6VENQWrZPqzf/DeTNMOUpkqVXt35eyK67PKqmkT8axrsNdwwECa8Ltit3i7UrRz1sYTqaxIk1gS
- Q729S6UkQBycsm5P9rOm1AxWWOAUoDVkTWM2z5Am9b51alVocNsfmGx3RdbMUIwJvTLI3zVxzb9
- yhNOYkX1gs+U7RQ7KOpQjM5rCRqD9QOuwwYbw==
-X-Google-Smtp-Source: AGHT+IHOh6ZNbDnQzKR81/4f9PQRbJCdUd4iSsqXTttuzOEy4SU50pmEuBA8vDcoZd9W2GRbd1n7Mw==
-X-Received: by 2002:a05:6820:2221:b0:65d:4d4:e7b0 with SMTP id
- 006d021491bc7-65f54e36a56mr11375123eaf.0.1768320804026; 
- Tue, 13 Jan 2026 08:13:24 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ccff66sm8575162eaf.16.2026.01.13.08.13.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Jan 2026 08:13:23 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Shiji Yang <yangshiji66@outlook.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Sam Shih <sam.shih@mediatek.com>, Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <OS7PR01MB1383436D15128C22D7F9203D6BCB8A@OS7PR01MB13834.jpnprd01.prod.outlook.com>
-References: <OS7PR01MB1383436D15128C22D7F9203D6BCB8A@OS7PR01MB13834.jpnprd01.prod.outlook.com>
-Subject: Re: [PATCH] pinctrl: mediatek: MT7981: fix GPIO9 register map
-Message-Id: <176832080309.2039494.12160391039197607835.b4-ty@konsulko.com>
-Date: Tue, 13 Jan 2026 10:13:23 -0600
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
+ by mail11.truemail.it (Postfix) with ESMTPA id 1D2471FAE9;
+ Tue, 13 Jan 2026 17:15:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1768320934;
+ bh=nv5b29Wyo/QLd4Byv71W0j5xZZf3kdcP6WHW9j90K64=; h=From:To:Subject;
+ b=sox4/H00Q9OqMsTVEvIwF8gT/1LaQegqBZ1OQiubtK7E2jdZtNu6qGyT8UojAZ/HU
+ u62OUNlELs2TiT3hj0VYaot3RtbN/8XmzCuCifWrlYpVGimQSdQzqC+S04dCvwg2GZ
+ rsX+DKlgUhx3CYAVots3ePRl8eQR7ILqrPbBcmgi1bz6GIz/8/sm3mZzSc/CEYLwrt
+ P6sdiCyGQ1IjrO8xAYJYSv8zE6USB2Frlwc6ZG58e0QlRV91Q507sHB1DGsjYtjsOX
+ qDD/FqV23PRV1obLk1SqnVGxXqFM4P0uCFfySYidylU5L2XPzQdntf+fng35vA42Be
+ YcRDUc/xy3VvQ==
+Date: Tue, 13 Jan 2026 17:15:30 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: max.oss.09@gmail.com
+Cc: u-boot@lists.denx.de, Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] toradex: common: handle third MAC address for SMARC i.MX95
+Message-ID: <20260113161530.GA90860@francesco-nb>
+References: <20260113125853.3970525-1-max.oss.09@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260113125853.3970525-1-max.oss.09@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,18 +67,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 03 Jan 2026 16:42:39 +0800, Shiji Yang wrote:
-
-> Ported from the Mediatek SDK. The upstream Linux kernel also has the
-> same register map as the SDK.
+On Tue, Jan 13, 2026 at 01:58:23PM +0100, max.oss.09@gmail.com wrote:
+> From: Max Krummenacher <max.krummenacher@toradex.com>
 > 
+> The toradex_smarc_imx95 board exposes three Ethernet ports.
+> Set the third MAC address equal to the second MAC address.
 > 
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 
-Applied to u-boot/master, thanks!
-
-[1/1] pinctrl: mediatek: MT7981: fix GPIO9 register map
-      commit: a1d1fc8d8c8699d80e1b9ab3214752e5882d3740
--- 
-Tom
-
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
