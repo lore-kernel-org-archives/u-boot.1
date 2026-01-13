@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A3FD2D10F
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 14:35:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED34D2D111
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 14:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECA5982B20;
-	Tue, 13 Jan 2026 15:35:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A7CB2803F5;
+	Tue, 13 Jan 2026 15:42:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LCAvsfRF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GkTFBxYM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F303283015; Tue, 13 Jan 2026 15:26:25 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 23F4480433; Tue, 13 Jan 2026 15:42:51 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F9EA82B20
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 15:26:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A62A3800B6
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 15:42:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-59b679cff1fso6261390e87.0
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 06:26:24 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-65b73eacdfcso1725625eaf.2
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 06:42:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768314383; x=1768919183; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=INZ2dDQBzpnbIuuosYPGaQdZoKc5vhub1XniiEEonZ8=;
- b=LCAvsfRFy1eG970AbhYKav+vdcj43497LVd2D9DKwSSsg5yjBSBBiA8oR/c9FqpV9o
- U4YE8WoUFrOAxsFJ3BSrHhi4LvBQiF1uds8EdPjVtTYbBpvAGoGpd7EkpmtojvG8jmd1
- r0y0Ex+vRsbwsXQM7FkAdUpO7aHUz+LOBUbyLBpSqCXsWZm+E24FeaXjaTNSPmNjz8Oa
- Ma42EwB3dLwLxHs4t4IpyUj0xgfX7Q8881lv1xiKGHwlHQFlo7iahF4CzBrbEuIDhfKB
- TnxnBUBg8wT5w1pFlk+jOmOPNtnS9tAuh7b0/aZy6gE9dUGrEgiTcYXYFc5Px0FHwmm+
- e3LA==
+ d=konsulko.com; s=google; t=1768315367; x=1768920167; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5uR+Q/zI/IQKPfAf/aVMIUrTBd+NQ7Ht4hitwZfzF14=;
+ b=GkTFBxYMSMXCx5iqM4lQxUOugXfiBeLjUtVywRfxZXrPvgNMqJEErJfBjHLrwriWQi
+ 6c9XWgGZgGVPos5o+Y9CvaXEG2N8TMkqu1fWtSrpPo4oSznSJ3RSlWezqVNnDoYzaHVs
+ koACpA+S7j+J3s2oxtOPCM8/q6c05B5YlY3UI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768314383; x=1768919183;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=INZ2dDQBzpnbIuuosYPGaQdZoKc5vhub1XniiEEonZ8=;
- b=ZjSo82i5bI/7tLusFja1MRB7wM3NtfJJsVC/v1yEPWPkj/Qr+YSTmA+P7HONjxtrJ9
- NmDwaaoQrfAldW+JxecaTYKs83dC/P/ga/eLncb963zYZTVlMhWxyUQ3I96oe9uhiN0u
- nyISzCx/uG6rCKKdD6hkwNvAjxnz0ATiaRb8d/+D7ts0/mFfQTYv+APp4bJW+t5vNHV9
- IFQBJXsSrdgvkR2e/FHjMoWsHDZq1AyZ3TpRVuvDske96yxmzGU73tnAXVGPswnergW0
- CDXL2ehJJZN8+zz8RjBz1+a8UGRJzVEI24yNAa+I0YiFK3Xm+v7AlBJCA3FJ5ZFQA/Ab
- ZZWw==
+ d=1e100.net; s=20230601; t=1768315367; x=1768920167;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5uR+Q/zI/IQKPfAf/aVMIUrTBd+NQ7Ht4hitwZfzF14=;
+ b=TCOncOGH5+FgBHt2XTnpqBqd8GHvD1cdzCePke0Vl4VQ+/sl9skcgepSnUMo83OaRU
+ 4rQejP8MqB5ebF8KIqnrqcaqFzlfEHD1aZufRYcSDGLtx2luf1hcNa6liGo3a+M3hmFC
+ Z3nkaJyrbQ/w2gfS4XiBZUEqgfNkKVA5XCZLcG5ZxiVU/nJBKNvhQGbq3qgu2O1Gwh/G
+ 3gMoKU479amJTxVJMG1yXseknyzlv9CVxDPguAM/IDrWWulXceVjql3zP4qfZ1ynq2R5
+ rdllRC2NzOsbuTSBOxZvz/EFUAxP+dhAMQJtwHmm7Xej7Goqf9ftx6HTfcKZgEnlQp/z
+ ucnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUtEw4FB3WXWGFfsXME4aZB/6fpdUXhdOy9E8xJd5TFUxfJ+0RefqWSGwsic12OpImj0+yAyE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLycWXubGiO87R+3T8u/Mck5XUzGaVAqS8rxGEcixmy3lfsLi7
- haoreT1vQmkkYybpBweADhJNDHgyG8BkL73sHQwVmYqn0Nsz8456CGUFgQPzLjkTObMriSPPZ1f
- kLgrZ1tfb/awjD0eOqm1wUw7lyHeErxs=
-X-Gm-Gg: AY/fxX5irqwPXl8FJ2UkWYRuishLVoFFyPIEtYdv7KLqETLBJ4bu+meppQSZzDfKI2i
- 30JqRKZWG/l++ct/JKn/iIWQmA+beRt5455nWcpTGc1nBm3G4ScwZhWUKvdoMG/PluHeG3Gg5o6
- /QN0d33ZfgBQCSkWdxMgSlzDKniQcdS8YANY7XI6YPLd9ycUj6QqqaXAKPNKfW30L9ZCv70QOMR
- PjxF0bOIQl3fkfuoo5SRH62UCVqk018zbrUjK+Ut16uU5OyoVYJT5dKuEV3phw6/Rt9vFo=
-X-Google-Smtp-Source: AGHT+IFPCVtkQiAGRJ5aWpS4yveLtBUtM4Wb1NvjP8xg43NzJj3cGjQLGexatY+5qNAPlvW3ZfybgSqvs6BiKdgGeM4=
-X-Received: by 2002:a05:6512:10cf:b0:598:de74:7a66 with SMTP id
- 2adb3069b0e04-59b6f023bc8mr6625416e87.26.1768314382980; Tue, 13 Jan 2026
- 06:26:22 -0800 (PST)
+ AJvYcCV8388WkU7loKZ0sL6abMJTIfKJmUeMrfi2rl3fnJh5ism3HcjcF73gz9XmcmF3RGzjJjZFVUY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUyMPxPBanhcnWIzADPeXgOxF27dFlNXH39yJ8bu82K7zm0mW3
+ +tuElL659s+kMEPYilFkdyYh+EwdPVTlq3Zbl3d3yDN0GUnJ+f4iF/aUccNCVgzKWnk=
+X-Gm-Gg: AY/fxX7a+O9war+liPmKx9Z+sBSEKetBtslPPapi0ofGPvyP34hYfEd54T9IQ6S6FkC
+ oLpDLYBWyA0HDNhq7FEjd5/bWagmaQcWEYYpmCxcOdtoALYVutB3/GU84IVAabkr0OBtGOGwZ9h
+ m1spba302sy0gZ+A0uTjX5CHKroJ3gxazfvH+OZpCdx1Y2B58ZW0zkxhW+gslHxblRXAP4bSlJB
+ 6E7FvQHU0yKqL+K0zXRr1DDsHhBt35a0w+3YCmWDJirkedj0o1lbWve8+atOAFRNjMtFbIAVLgZ
+ LrtLzhQRW1H8/L5knyjSmFV4gkeoOKElREuiT4bgd+R5fLSocBAWPXZXktPl4NNhHH3aLkZfBM3
+ 09sVotS+mVJWE2h3iFd4sgMmcpgVWPZUa6gd3HUaB4sTdTCb1K+tx+oQ+4cgCIzMOCJrnMEnOmv
+ 471JE4MCJERMfILKUpkLROm5WlbgYeSVmrC5ej1SAm9oeSZft2dKKBcl7NaO6SQyc2AXesJbGAH
+ VhpS+1aIcqQBkUeY4iOuGSYT5OnybhDxFOm3N4=
+X-Google-Smtp-Source: AGHT+IGuzBZc/n5OqDh7B7WuQT3b6waiNl0g8Qu9fbrmJ2gbfso5ilVdZgAe9MOm7G39XAYwhEH7Lw==
+X-Received: by 2002:a05:6820:228b:b0:65b:2661:6440 with SMTP id
+ 006d021491bc7-65f54ef159fmr10333949eaf.23.1768315367362; 
+ Tue, 13 Jan 2026 06:42:47 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ffa50722e9sm14300777fac.14.2026.01.13.06.42.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Jan 2026 06:42:46 -0800 (PST)
+Date: Tue, 13 Jan 2026 08:42:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, ilias.apalodimas@linaro.org,
+ jerome@forissier.org, marek.vasut+renesas@mailbox.org,
+ christopher.obbard@linaro.org, me@samcday.com, michal.simek@amd.com,
+ clamor95@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v5 0/5] Implement reset to EDL for qcs9100
+Message-ID: <20260113144244.GV3416603@bill-the-cat>
+References: <20260113103840.1948029-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260103030728.334736-1-mateuslima.ti@gmail.com>
- <aWYPT7OH8oY0O0Mp@nxa18884-linux.ap.freescale.net>
-In-Reply-To: <aWYPT7OH8oY0O0Mp@nxa18884-linux.ap.freescale.net>
-From: Mateus Lima <mateuslima.ti@gmail.com>
-Date: Tue, 13 Jan 2026 11:26:11 -0300
-X-Gm-Features: AZwV_QgXkNIBz__Jk3O7GZVFhXBoBEdbf0rSc0iNb4wHp4iyyKEXpHQjkhGAsuU
-Message-ID: <CAP8WwTHEKYejx2KAj0nVkoo9ar12LTq5BvdU8tDhoUovgr9whQ@mail.gmail.com>
-Subject: Re: [PATCH] armv7: Add CPLD support via IFC to the ls1021a-iot board.
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: alison.wang@nxp.com, u-boot@lists.denx.de
-X-Mailman-Approved-At: Tue, 13 Jan 2026 15:35:20 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UbfioOaZYRq0PmO4"
+Content-Disposition: inline
+In-Reply-To: <20260113103840.1948029-1-varadarajan.narayanan@oss.qualcomm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,33 +103,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 13, 2026 at 5:10=E2=80=AFAM Peng Fan <peng.fan@oss.nxp.com> wro=
-te:
 
-> On Sat, Jan 03, 2026 at 12:07:21AM -0300, Mateus Lima Alves wrote:
-> >This patch adds CPLD support via IFC to the ls1021a-iot board.
-> >
-> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> >---
-> ...
-> >diff --git a/configs/ls1021aiot_sdcard_defconfig
-> b/configs/ls1021aiot_sdcard_defconfig
-> >index 6b32150e408..450b46a6f1d 100644
-> >--- a/configs/ls1021aiot_sdcard_defconfig
-> >+++ b/configs/ls1021aiot_sdcard_defconfig
-> >@@ -63,7 +63,6 @@ CONFIG_CMD_GPT=3Dy
-> > CONFIG_CMD_I2C=3Dy
-> > CONFIG_CMD_MMC=3Dy
-> > CONFIG_CMD_DHCP=3Dy
-> >-CONFIG_CMD_MII=3Dy
->
-> Why deselect CONFIG_CMD_MII?
->
-> Thanks,
-> Peng
->
+--UbfioOaZYRq0PmO4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your review! I will add this setting back in patch version 2.
+On Tue, Jan 13, 2026 at 04:08:35PM +0530, Varadarajan Narayanan wrote:
 
-BR,
-Mateus.
+> Using the 'reboot edl' command in Linux, the platform can reboot to the
+> Emergency Download mode. Implement the same for U-Boot.
+
+Have you used buildman's size checking options before? If not,
+https://source.denx.de/u-boot/u-boot-extras/-/blob/master/contrib/trini/u-b=
+oot-size-test.sh?ref_type=3Dheads
+may be helpful to you, as it can be a bit tricky at first (but IMHO is
+better than the linux kernel bloat-o-meter). I ask because, what is the
+size impact of these changes on things like say qemu_arm64 and qemu_arm?
+I saw the cmd/ portion is guarded by a new CONFIG option which is good,
+but I wonder about the more generic sysreset changes. Thanks!
+
+--=20
+Tom
+
+--UbfioOaZYRq0PmO4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWZZ4AAKCRAr4qD1Cr/k
+Csm6AQDM2JcAHlrjkMHqmR1b9Jeywk972v7dah7hCE+QCZuj4QEAuCcPRBaSprST
+TMs2cnzUiRLTJ1D12ddMT1tkQEmpBQs=
+=LsCA
+-----END PGP SIGNATURE-----
+
+--UbfioOaZYRq0PmO4--
