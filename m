@@ -4,129 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1A0D29DC9
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 05:36:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D37FD29DC9
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 06:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21539836A3;
-	Tue, 13 Jan 2026 06:35:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6FAC5836A3;
+	Tue, 13 Jan 2026 07:02:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ecTUdxTc";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xxJEx7Z5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CD0383935; Tue, 13 Jan 2026 06:35:48 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id E9E08836C8; Tue, 13 Jan 2026 07:02:08 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D9E583693
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 06:35:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 9F605800AB
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 07:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R+EG+mJg/Cz6cHwYq+l/4VEXmmM+yoFAVWV7FjR+H9+z1ydHKALgFdYQkZ7X5Jk8HNw2EvWYiNHNI3Tth/+tPa41JEg40AwC6wyz1jxwCPHW5uzajUMEQH/YXXJ1qg6IzXut0+rB38GXcOxXIY0IGA8keCyRaJAJwLjMfu2EEGIXlvNxwTy0VsWw6YlteoYCv/gDj2khIULptBPN0K+Zzv/3/XpD4jrv2wRdLJJ3K04vych1FiUC4hb9OpXNduPl3GKyb72YhOlt+Mh83gvhXVDNNQ6odUyEv2k9vmR/18Ya+k8vLpCbX1skciKUnYIbvx7ujsPy2YcPJmAbBBYFuw==
+ b=TySiPMsJ3p2sVeezFPiDW9V3l3gFD+4eGveCASHjsEutW3hqQ1oROBdKra0Z0wUd/CuCPIZLzOpOkno0kaAEEJugdJKEm/8EV4AR8OdkX7utplxuQ5ik2ojQi5OKPPTtIgpj1zu46pHjwY675vucKXuIF19uhVy1OhuKYyWE6a9oyAqmA+ElyBgbGyTaEfKNG/huyObqC6A5PRgNs+u+YVAt0jZZNxDVLVh+5J/INSnv9aojqN5lW8JtTKQjXD4LrKZuc9bZMuGlBQKcpUVaRLXOa4bCn+h67Pkgj+XvUVZjcyG9iHcEBm8ysRLZPcnLKq4V8AErvp+jEL57tlZ8Rg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jEaJKizChjrIBm7zpMls9QQXSouXtnyKjKSdFpFChIU=;
- b=cFDVXLBr8qYmp+ZDfN5CH4XW0rJr7sD8On7ONVfQwK+0DSBfHhJjHeGtgSHeqi2wjLkO953p7j1KM6ar8wCypSdwURsqlURe/CzUNiCiX/cUpA+2CXQrv/ZIDybQjCYoRO/R2NwvVUunHSzfzUptb0T968YGpVemAXNZLZdpgu/qEWCrpuzyfrqfDoS1LKYAq3skPnA/CJ1I54ecrlpL51E4mMokjfR2LwClB+ntZw52xGyd15ps7Eicd7QjNmmpwq4EXNRqIoahJW1PjGSkoJ8TauPoxzND4SR5Y3T+AbV9ZvLo5CEOJQSk7IqFKPgPJ3MQRYyzzUh+wQe5gA36VQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ bh=5n2bSKnxYRbGk9KdjZVQfpwDlBmZM0lL97zsfOYF7Js=;
+ b=qqdTJ6sas8FO0uWgP56O3D44qQah3V+OB3PhZE/EeHQ5WVFj9TPQGseanD/UKhWBYMgCLVmnVlQNwZMxsqq0UXFh02SV3Xaa2m1ewEy2KegoaYn9AbBynQ6gSQDMX0r4QCbzDYGW6okipBqTTVqt6CPEd7E9P8YbXEPwtc/d8D3cL+2TA3SnBvJN9sIB5RNjC7CIybMUE1RSFJsajQYLpVLhxv0u2GDCe/Ir5wIMoGwPjTj0095+OCGovOdeAcmRXxGzxwh1C7xYzy48MkBMmLG4+dR6Ov0lBgOefksrRHuC8QoDoz0RFQAF/fTfkQ6Y9POlDqOQd1BV5DUodwSlRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jEaJKizChjrIBm7zpMls9QQXSouXtnyKjKSdFpFChIU=;
- b=ecTUdxTc4HP/Fm+PNCTTpallagZuuNd1d4r/eTtQ1tm1hBEUBgVJqsWd/dRRxKtbJIYb5EWWLyBMsaOkSW0KPnpUfK3DhpBvl6IxG5x+5TN+P0RPVBp/CXprG/CX8tmkphHVldoG3cuzNr1lXcQ4OAMB+cxRKh6af2zSXQgpjfWErzJtq/ItHm2N2Kcg5JCxODaaoGkDhSUjTnZLo9/9J0d0GF4CBiH3xZek6vBgTvVuNw3NFehUtDgjPMij+dn/fgRsua1/hzmfma4Y0OoEBbE06FbhzHb3uq1QQ5AUGy0XthhZHqRKn0/RLZ6zACePXFq36pFtDtuKX5BUjMnUOQ==
-Received: from DB3PR08CA0008.eurprd08.prod.outlook.com (2603:10a6:8::21) by
- DBAP195MB1099.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:1ca::11) with Microsoft
+ bh=5n2bSKnxYRbGk9KdjZVQfpwDlBmZM0lL97zsfOYF7Js=;
+ b=xxJEx7Z5gRXvYach7pfhQGDmt1QROk6XG+/pF46T+QcFnQi3+T8MvwD5576asPvsFpkgvL9L0VbQVPDUR4FhliIXRWWUwUzOKQLiajVtVNlULcFpz7oUGQPREjN38goD2yGwoyUgftBusbbsRsvaPvelWTf95vrpsxPN8Dx2+wQ=
+Received: from DM6PR10CA0005.namprd10.prod.outlook.com (2603:10b6:5:60::18) by
+ DS0PR12MB9276.namprd12.prod.outlook.com (2603:10b6:8:1a0::5) with
+ Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9499.7; Tue, 13 Jan 2026 05:35:39 +0000
-Received: from DB1PEPF000509FB.eurprd03.prod.outlook.com
- (2603:10a6:8:0:cafe::18) by DB3PR08CA0008.outlook.office365.com
- (2603:10a6:8::21) with Microsoft SMTP Server (version=TLS1_3,
+ 15.20.9499.7; Tue, 13 Jan 2026 06:02:03 +0000
+Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
+ (2603:10b6:5:60:cafe::b4) by DM6PR10CA0005.outlook.office365.com
+ (2603:10b6:5:60::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Tue,
- 13 Jan 2026 05:35:43 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DB1PEPF000509FB.mail.protection.outlook.com (10.167.242.37) with Microsoft
+ 13 Jan 2026 06:02:03 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.15) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 05:35:39 +0000
-Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 13 Jan
- 2026 06:35:38 +0100
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <trini@konsulko.com>, <ggiordano@phytec.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 1/3] configs: phycore_am6xx_a53_defconfig: Enable CMD_DDR4
-Date: Tue, 13 Jan 2026 06:35:29 +0100
-Message-ID: <20260113053531.1204984-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.43.0
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 06:02:03 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 13 Jan
+ 2026 00:01:22 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Tue, 13 Jan 2026 00:01:21 -0600
+From: Pranav Tilak <pranav.vinaytilak@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, Pranav Tilak
+ <pranav.vinaytilak@amd.com>
+Subject: [PATCH] arm64: versal2: Fix emmc boot mode boot_target issue
+Date: Tue, 13 Jan 2026 11:31:07 +0530
+Message-ID: <20260113060107.1136297-1-pranav.vinaytilak@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FB:EE_|DBAP195MB1099:EE_
-X-MS-Office365-Filtering-Correlation-Id: dd5de920-c44a-476e-b736-08de526595d1
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|DS0PR12MB9276:EE_
+X-MS-Office365-Filtering-Correlation-Id: cf6d90a7-8ab6-4c3a-bfdb-08de52694607
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TwtVV0xyRfINkHkupoTFJNpBVwyouBx341YBGU7VXJ4JtqxqrdE0/HS2f6zn?=
- =?us-ascii?Q?eauThUryC4SiCtQ6mO6Vm2Q66Dhpdmygb7KFE8qU67tBmq8BdZMs/h6+6k0H?=
- =?us-ascii?Q?bE40yphoBEDLH3s2AeCBxNrHgxvU/7oYAZGWcYSdggl/T8ABi6/ngLMyP5Cn?=
- =?us-ascii?Q?ubqzjjPeNw2hHqfxnX5NWWBeJjfKCenumkEJNbpfhCOmSfHtBAsnyF0iIHhp?=
- =?us-ascii?Q?MbXzMEkILVh4Eo+x07+p1nMG19y6GXWXNl6kZ/9yokV64RDg0yQDuScSkuvJ?=
- =?us-ascii?Q?CO44MyMKkLjXhI0/csCcuWz51wN3auEsZfalETH2AzNdBMGM/c9twT0swW7h?=
- =?us-ascii?Q?JzrbzqoDZKDHeaJgQBwJWKu/S9d9zmyTzfZRavpYdg3iW55kDVDZXuSmeTpO?=
- =?us-ascii?Q?2fJ0Yw6FCqB1SM4EYp27KW8SKloP7xp2J8gxUwlvISTFeH9U7LeJxJ1OArix?=
- =?us-ascii?Q?Ui9o0xRnO1eJIN5xKf4QAXe62X59rmf76hJW357yZ8UhbUglNDUR6cYOjm1v?=
- =?us-ascii?Q?uyh1PMBemVUmOFB0dCm5u/6NqAWQoSrm1T3g6St8V+XQh0wppCNPGwKqWc5P?=
- =?us-ascii?Q?jgvHvT9lQ+UrvwhM47u259ZI9ihqwU2bHNbEAroNIAKrjkJvvYq93b62yBXm?=
- =?us-ascii?Q?X3Mu9HcJInn5vEmzUXnG/j10uqYZzBYqBXpZBKjvBVVGG1GI0o93cwW6zSYO?=
- =?us-ascii?Q?h23HGvbM5n3Vcn0zSZ3mRllP6nFt0AjHWugqab1Ia+Sxu3zTNsT40sdFEnv+?=
- =?us-ascii?Q?yQKMUuUJg/k4JBII7i6T/WXV5DWCYX296YQ3KsXQ6KYLrJXqKndaNjkVYzr2?=
- =?us-ascii?Q?BFGyVNFoBkJ96CO4bqDk4qjMLe0UCOEA1romSxrMAzRqoNH57KgmiJJXJ+4g?=
- =?us-ascii?Q?hxNdtRFp3pQ5Dd91/H0cMkFZWoPJcHVxDhLMaB9A9S+iVRw/F+9GFHlL/Do/?=
- =?us-ascii?Q?nyTb2tAnMQFgQLSiGxr0kFXx+R84TRzNvR+nfwLDycN+UVP9Zh/9uPYB7qjV?=
- =?us-ascii?Q?q8QL0FOGP9vLi7cOLbx5HtgvY/r+MoL3ypNbFHDmwcHGNCSigirz0J8iuYXu?=
- =?us-ascii?Q?/vD5NRNZ/K+NAmj5ka3i2/qaSXNqeYBz18E0pdd7qj+QUDJJyJ7D5oaLdGec?=
- =?us-ascii?Q?g3Xp4fROPLyskX7ZPO6yyLXmfx/COVvbSAL2JWT/LVVW/zL/Ku49feBsFzaB?=
- =?us-ascii?Q?BX5/VIM3no//w/jW1G+1x/IHuZOLqX3+PKD/NJSmRh6N+NNYF84WI1BXenA4?=
- =?us-ascii?Q?+VHSKkh7qyLkEyD+H40t5sGn1fi8baKqKfOlX6udNTmDNs6eif+WccwB4O6N?=
- =?us-ascii?Q?x4Zdnhn9+Kuf0AcCNW4dCnD3o4BWXsf308gjWCgt6KZPQpbNjry9Ryl81h8N?=
- =?us-ascii?Q?J1+q+LRPe2ecM2Fi2PRt/g7Ojmmp6LaRjgwrqBXTWc8ZWPo7j+jVRgK96AB5?=
- =?us-ascii?Q?OEBwwpoYuXB/dx8nBubGMhHcyFqzSHc7lW6qepasmSwmJh6wTklLJhGh+Dm6?=
- =?us-ascii?Q?DWVXWnTnW1ko6ucYYXyOMy3MUO1xzgM4qLs4AS/V+wWppNbqke3gIsyG+ZHw?=
- =?us-ascii?Q?ZOXgscAp+L/A6rkE/Y0=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 05:35:39.1170 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd5de920-c44a-476e-b736-08de526595d1
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FB.eurprd03.prod.outlook.com
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xC4HJxpACfbDXee9R33jKXO4nhwm705WrniV6KivnPRSiRwAAtAsJLmBpoxB?=
+ =?us-ascii?Q?LN7njtBht783PlgVKSicO0f04E8SOX96IeXDQF8HETGeLANqTTpBUfLjJF8r?=
+ =?us-ascii?Q?qarNZlxWk44EFZobWD2W8USXHsUrCSy0T3FiCTGyXPOW8h942wPnc6LJXWOB?=
+ =?us-ascii?Q?1WZz8IpUomy12oFdsM3Swnxp3fQ93IbV6vKhDpRRZvV9NY1UstEJ/FwgBwLS?=
+ =?us-ascii?Q?KyS9pmS86VyGajmfK6ss0lttQtDTAxyagoo2eX6m0KPTEK9c7L/MF7Tkula1?=
+ =?us-ascii?Q?3GxqWpFtrIg+pkD22Cs4Vmd59hzQQoElqwxIOlb6moGZf3bI1HnAaPc3Fhy0?=
+ =?us-ascii?Q?pb7AE3Wt4KDDabxL/SxP+Lg+I8svmQuJDq5A8alQ++X+Lb2kp0Av9Pek05Qm?=
+ =?us-ascii?Q?yK9juQjUTO0rzVaJLWkevcq/j+HRMlnMI2+yRT0uSWFHkLE8xTe/xVRNFiwg?=
+ =?us-ascii?Q?C8hlBJh3GXvanQAVTrifnHKe0ungp6LcBsfxH3QY111KuRumeUOOuX05a7yT?=
+ =?us-ascii?Q?8oG9MdMbk9I/yxKt20Xgk/NUFF19yPTvowghh3+pJHyDil7NIeoGgirmTcdy?=
+ =?us-ascii?Q?AUDoR7KcNBnYnPp/vbwuHbj2sqGiuRNgUhqi/2L621vOxDb3mi4Iopu3h8f2?=
+ =?us-ascii?Q?PSlS0WfpHp5K7FWSTgYIqKGv9TsEMu15Sy7Fws0l/6QRPS5/rMgp5GjhRXN5?=
+ =?us-ascii?Q?Eh/IuNPvKJ2a3ZIb5FphTgtEwODKGctC2bnpiF+/Y6TonNrFT8trWrFM7RWW?=
+ =?us-ascii?Q?1XQE9Z9n4uJqLLkln30zqP1gEJ0MR3BwpshG47NM32FWSmsbuQ+jAF2C+D5E?=
+ =?us-ascii?Q?440ZPw3aMmbRw5T7evY+LIo0FA2gGpj+dj/EV1JwISL6VODM0Vkg8+91uupU?=
+ =?us-ascii?Q?c2eknRxskdjijBDeR0j0tsHjdatSoB2uMzR2AWAdVjNQzxf8dUKQZk7s5fS1?=
+ =?us-ascii?Q?vy2PZiOI4h9KW4XgJvJpteioCqqsnbsB8l+/88/+QINZ/ZbqHvFDgfIK+pxk?=
+ =?us-ascii?Q?S6rebqV9WxXqlboaTv4sfWrXY65Cnk98ceDlQ5IXyZaMs65nSXG3eZlNOsmA?=
+ =?us-ascii?Q?lI1yoMBQJbSWu+9lRqyl6KGZtG8rur4USWepaQ6g27pPHy/J4I4CBgiyiBxD?=
+ =?us-ascii?Q?DBbdZ8tgsNrmGIWmzNCXmiAhGlZM6oXxl65vvKqcQN8l4MZP5ctyOtkVqGZm?=
+ =?us-ascii?Q?WLSVLVL8npsyWh71efMPs4Rq2NJyza01rtGTKdrzLyfdDok0+CvHLAe2vn8h?=
+ =?us-ascii?Q?E/IPMVTzxK+P9YZtOnH2mTRZD+PO3dbswrCeqWfuuzdzek7nwBD/0Tzmn9R4?=
+ =?us-ascii?Q?EOq6dkNIu39ee7wdUUtyYEGwAbngqUBf0Eb5siL908jalxUIQ2fSMBt3I7QS?=
+ =?us-ascii?Q?rYGEk0WD4NJqVvi8pT/ForOBBeD++vAZC9JS84lxvqfBSl406D2CH3SaYo+b?=
+ =?us-ascii?Q?TjcRWlRoUxJG0YssKoiWHfs4Vn6poDKDGTcz7dQNyQ2cpDAr5SVTxXSpdSwH?=
+ =?us-ascii?Q?nvhCnPTClHOZ/Llnl3n9AUCtkwPhejJbpVLxYcu/lzR5xl0HEH4luxhYIqWO?=
+ =?us-ascii?Q?cHWstmln/H6VN4jyxMA=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 06:02:03.2566 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf6d90a7-8ab6-4c3a-bfdb-08de52694607
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3D.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP195MB1099
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9276
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,51 +146,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable command for verifying DDRSS inline ECC features.
+The eMMC boot device controller on Versal2 requires device pointer
+initialization before accessing its sequence number. The EMMC_MODE case
+was using dev_seq(dev) on an uninitialized pointer, causing corrupted
+boot_targets entries (mmc7f7fbfbf instead of mmc0/mmc1).
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+Add uclass_get_device_by_name() call to properly initialize the device
+pointer before reading the sequence number. The dev sequence number is
+determined at runtime based on DT aliases.
+
+Fix boot_targets corruption in eMMC boot mode, allowing proper boot
+device selection instead of falling back to JTAG mode.
+
+Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
 ---
- configs/phycore_am62ax_a53_defconfig | 1 +
- configs/phycore_am62x_a53_defconfig  | 1 +
- configs/phycore_am64x_a53_defconfig  | 1 +
- 3 files changed, 3 insertions(+)
+ board/amd/versal2/board.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
-index ab50545d307..a0423b80721 100644
---- a/configs/phycore_am62ax_a53_defconfig
-+++ b/configs/phycore_am62ax_a53_defconfig
-@@ -78,6 +78,7 @@ CONFIG_CMD_WDT=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_RTC=y
-+CONFIG_CMD_DDR4=y
- CONFIG_CMD_SMC=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index fa5c4466791..afed0bfafc6 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -80,6 +80,7 @@ CONFIG_CMD_WDT=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_RTC=y
-+CONFIG_CMD_DDR4=y
- CONFIG_CMD_SMC=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
-diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index fcf61590c60..d0b33661cf6 100644
---- a/configs/phycore_am64x_a53_defconfig
-+++ b/configs/phycore_am64x_a53_defconfig
-@@ -80,6 +80,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_RTC=y
- CONFIG_CMD_TIME=y
-+CONFIG_CMD_DDR4=y
- CONFIG_CMD_SMC=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
+diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+index 1fd05a1157a..d8079c1cee0 100644
+--- a/board/amd/versal2/board.c
++++ b/board/amd/versal2/board.c
+@@ -253,6 +253,12 @@ static int boot_targets_setup(void)
+ 		break;
+ 	case EMMC_MODE:
+ 		puts("EMMC_MODE\n");
++		if (uclass_get_device_by_name(UCLASS_MMC,
++					      "mmc@f1050000", &dev)) {
++			debug("SD1 driver for SD1 device is not present\n");
++			break;
++		}
++		debug("mmc1 device found at %p, seq %d\n", dev, dev_seq(dev));
+ 		mode = "mmc";
+ 		bootseq = dev_seq(dev);
+ 		break;
 -- 
-2.48.1
+2.34.1
 
