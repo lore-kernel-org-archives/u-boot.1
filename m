@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1522DD29DC7
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 04:03:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DB4D29DC7
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 04:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AFF983952;
-	Tue, 13 Jan 2026 05:03:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBBF983942;
+	Tue, 13 Jan 2026 05:03:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C229283885; Tue, 13 Jan 2026 05:02:58 +0100 (CET)
-Received: from smtp.gentoo.org (smtp.gentoo.org
+ id C63AB83979; Tue, 13 Jan 2026 05:03:00 +0100 (CET)
+Received: from smtp.gentoo.org (mail.gentoo.org
  [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B544836AC
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 05:02:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFB358393F
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 05:02:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
@@ -26,15 +26,15 @@ Received: from ofovo.local (unknown [116.232.18.222])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 8FDB83415D9;
- Tue, 13 Jan 2026 04:02:50 +0000 (UTC)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id B82253415DA;
+ Tue, 13 Jan 2026 04:02:53 +0000 (UTC)
 From: Yixun Lan <dlan@gentoo.org>
-Date: Tue, 13 Jan 2026 12:01:58 +0800
-Subject: [PATCH v3 4/9] clock: a733: implement support for mmc/uart
+Date: Tue, 13 Jan 2026 12:01:59 +0800
+Subject: [PATCH v3 5/9] clock: reset: a733: add initial support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260113-01-a733-soc-support-v3-4-f19dcd098f60@gentoo.org>
+Message-Id: <20260113-01-a733-soc-support-v3-5-f19dcd098f60@gentoo.org>
 References: <20260113-01-a733-soc-support-v3-0-f19dcd098f60@gentoo.org>
 In-Reply-To: <20260113-01-a733-soc-support-v3-0-f19dcd098f60@gentoo.org>
 To: u-boot@lists.denx.de
@@ -44,22 +44,22 @@ Cc: linux-sunxi@lists.linux.dev, Andre Przywara <andre.przywara@arm.com>,
  Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
  Yixun Lan <dlan@gentoo.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6247; i=dlan@gentoo.org;
- h=from:subject:message-id; bh=E+rYW5NqWHTvKmcKiKgPfunERbFfzOyEBSP3NNR8A38=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBpZcPKUeKh/GqIWyDC5sBRTd8LpRTBq6Rr3vnSd
- xY256mGV6SJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaWXDyhsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=17895; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=MHXMjs09LHyJoRK4Qj19cinvfmhirkO5ZK4whHGth8o=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBpZcPNKnmq5uG7pvZhqYIHXrIM7jFDM1cX0cIhk
+ w33BBHP1ruJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaWXDzRsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMSwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+3AIw//eoRlps1q5rtq4ZNOYh/f4YVdc6CezfRpMkRXoVs3qi+54tTWTUXWW
- z6JMV/L5q5gcey/RloyPJqY4TMnTFtJRW8S1E/v+z9Hrs/wq145qjBVw1IXcZ2xqLN5ttNUDR3w
- mXYr/t5j7ZbRPw6l4DVqhsQ9JcrCFsvwS06RdCfmR7A3mUsu6ccThttqC5jOKdsmL+yxFbfEqjd
- fJWWR2Jwh8MUoqje11Aw/IapAfzZC6j2o9pz+wLS46p8ylLcqFc2cueOx8AS5EGsosZeD/3Athb
- fYpizQAfw5ZAoRtJwMpegOcUNhQVZrwwWMkBcjE4/HqMloDN/dS58qcpCQNhpogB077sqh5Vjj4
- K3ut8R+y8fVTQwKeeGxjz5/5QPR2yd+nlV0oGJfNO9WGLts6TYTx5QTl7n+EpQ1FjTjZTl0KR3K
- qX5OYApGVwqzD84W0Z9xhFYPxRWsMIi5J9LU6Qb/ngcd4lB0xTbrmXkatZi3qObVLG+f53RZTzt
- kLPxK/rFVKyNPTlpargNpZ+TLVznyOMfmnWLXS3k6wLi5qYsTBP2PBMxHo6RCu1aGf7pq/iVgF+
- QscpZayylbnhrmCzSg+Jyd90PSFbigB+m6munPDRrMTdlkRG0PAg7wjVDiObZpsPcrf4e4QyxwR
- t6H1H/ztks49zgvbktqz9y1eITQhgA=
+ QACgkQMarqR1lNu+3gIg//cGBsLYvFcY/9CVA6JjlkXhTKlViFWM8ALsU6t4srTBtUk011NW2dI
+ LRTlr8KO2MHiBPLvg+W10HpbQeXxhsiF6SnrIOHM3rbc94iAYK7zT19Z/8UendN1BSc2Nr+H/dF
+ oVB4JhQ++bH04jiJmGYnUE/lM+8/DDoaHYjgQucpAkVJE9o+w0+Scgy1B2iGSld/yYZs3kHTg1t
+ 7vqk/Z8vlShn27vOkzCExb/dyR5Q2ZGThbYhbGLlXjw/1dCHP1qcATbnNm5DNFaIcZldsdmwoxo
+ kcQN7PPkptbNr/rRjEWbbAs03hr4ZwirAxAEVSy974XJasrShqq4zNpfxAiBI3/wqVoZZSYCTEF
+ 0ccHwdt0yu3MJH2HpQZtVTdwkkIkP1o9Bm4b/xIRZEVMQP5IexgZIvysqGzOXvD7ejnINeGq+TZ
+ /P+IW1/FY/rYy1ZIUbGwuMqdXKPRYPujuD/YHDbVojtIgp7DxtjxbYewDQq3Ah2Go8yl5OJUJ7p
+ WIN2Mr6JKs1RDvTWN1OsbVxsI6r/WCjtGLlJuqvaFez0ba++Dq7DNs/12FjWz1hJ5huKm9spQ4E
+ NMLnNb0HKEyHKnGCBKILAOQFXVyKdzqOVae8Bjnc6xfaxeHzhrrvGIRIPnHURZQkDzek4MVNk0n
+ JH/fCnrJIV3t4ZYFR6UZdRHdziTgxc=
 X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
@@ -78,200 +78,559 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clock initialization support to set UART/I2C/MMC clock frequency.
+Add the clock and reset support to A733 SoC which cover
+devices of gmac, mmc, I2C, SPI, uart, usb.
 
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
 ---
- arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h | 31 +++++++++++++++++++
- arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h | 36 +++++++++++++++++++++++
- arch/arm/mach-sunxi/clock_sun50i_h6.c             | 14 ++++++---
- 3 files changed, 77 insertions(+), 4 deletions(-)
+ drivers/clk/sunxi/Kconfig                     |  14 ++
+ drivers/clk/sunxi/Makefile                    |   2 +
+ drivers/clk/sunxi/clk_a733.c                  |  75 ++++++++++
+ drivers/clk/sunxi/clk_a733_r.c                |  36 +++++
+ drivers/clk/sunxi/clk_sunxi.c                 |  10 ++
+ include/dt-bindings/clock/sun60i-a733-ccu.h   | 188 ++++++++++++++++++++++++++
+ include/dt-bindings/clock/sun60i-a733-r-ccu.h |  34 +++++
+ include/dt-bindings/reset/sun60i-a733-ccu.h   |  85 ++++++++++++
+ include/dt-bindings/reset/sun60i-a733-r-ccu.h |  22 +++
+ 9 files changed, 466 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-index 45fa4ab6e57..3783e5fc0e0 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-@@ -32,6 +32,25 @@
- #define CCU_H6_UART_GATE_RESET		0x90c
- #define CCU_H6_I2C_GATE_RESET		0x91c
+diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+index 1c1cc82719c..03133ba86df 100644
+--- a/drivers/clk/sunxi/Kconfig
++++ b/drivers/clk/sunxi/Kconfig
+@@ -143,4 +143,18 @@ config CLK_SUN55I_A523_R
+ 	  This enables common clock driver support for the PRCM
+ 	  in Allwinner A523/T527 SoCs.
  
-+/* A733 CCU register offsets */
-+#define CCU_A733_PLL6_CFG		0x0a0
-+#define CCU_A733_APB_UART_CLK_CFG	0x538
-+#define CCU_A733_UART_GATE_RESET	0xe00
++config CLK_SUN60I_A733
++	bool "Clock driver for Allwinner A733"
++	default MACH_SUN60I_A733
++	help
++	  This enables common clock driver support for platforms based
++	  on Allwinner A733 SoC.
 +
-+#ifdef CONFIG_MACH_SUN60I_A733				/* A733 */
++config CLK_SUN60I_A733_R
++	bool "Clock driver for Allwinner A733 generation PRCM"
++	default MACH_SUN60I_A733
++	help
++	  This enables common clock driver support for the PRCM
++	  in Allwinner A733 SoCs.
 +
-+#define CCU_PLL6_CFG			CCU_A733_PLL6_CFG
-+#define CCU_UART_CLK_CFG		CCU_A733_APB_UART_CLK_CFG
-+#define CCU_UART_GATE_RESET		CCU_A733_UART_GATE_RESET
+ endif # CLK_SUNXI
+diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
+index 93b542cebcd..943e47612ce 100644
+--- a/drivers/clk/sunxi/Makefile
++++ b/drivers/clk/sunxi/Makefile
+@@ -27,3 +27,5 @@ obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
+ obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
+ obj-$(CONFIG_CLK_SUN55I_A523) += clk_a523.o
+ obj-$(CONFIG_CLK_SUN55I_A523_R) += clk_a523_r.o
++obj-$(CONFIG_CLK_SUN60I_A733) += clk_a733.o
++obj-$(CONFIG_CLK_SUN60I_A733_R) += clk_a733_r.o
+diff --git a/drivers/clk/sunxi/clk_a733.c b/drivers/clk/sunxi/clk_a733.c
+new file mode 100644
+index 00000000000..e83f616628a
+--- /dev/null
++++ b/drivers/clk/sunxi/clk_a733.c
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
-+#else										/* H6 */
++#include <clk-uclass.h>
++#include <dm.h>
++#include <errno.h>
++#include <clk/sunxi.h>
++#include <linux/bitops.h>
 +
-+#define CCU_PLL6_CFG			CCU_H6_PLL6_CFG
-+#define CCU_UART_CLK_CFG		CCU_H6_APB2_CFG
-+#define CCU_UART_GATE_RESET		CCU_H6_UART_GATE_RESET
++#include <dt-bindings/clock/sun60i-a733-ccu.h>
++#include <dt-bindings/reset/sun60i-a733-ccu.h>
 +
-+#endif
++static struct ccu_clk_gate a733_gates[] = {
++	[CLK_PLL_PERIPH0_200M]	= GATE_DUMMY,
++	[CLK_APB1]			= GATE_DUMMY,
++	[CLK_MBUS_GMAC0]	= GATE(0x05e4, BIT(11)),
++	[CLK_BUS_MMC0]		= GATE(0x0d0c, BIT(0)),
++	[CLK_BUS_MMC1]		= GATE(0x0d1c, BIT(0)),
++	[CLK_BUS_MMC2]		= GATE(0x0d2c, BIT(0)),
++	[CLK_BUS_UART0]		= GATE(0x0e00, BIT(0)),
++	[CLK_BUS_UART1]		= GATE(0x0e04, BIT(0)),
++	[CLK_BUS_UART2]		= GATE(0x0e08, BIT(0)),
++	[CLK_BUS_UART3]		= GATE(0x0e0c, BIT(0)),
++	[CLK_BUS_UART4]		= GATE(0x0e10, BIT(0)),
++	[CLK_BUS_UART5]		= GATE(0x0e14, BIT(0)),
++	[CLK_BUS_I2C0]		= GATE(0x0e80, BIT(0)),
++	[CLK_BUS_I2C1]		= GATE(0x0e84, BIT(0)),
++	[CLK_BUS_I2C2]		= GATE(0x0e88, BIT(0)),
++	[CLK_BUS_I2C3]		= GATE(0x0e8c, BIT(0)),
++	[CLK_SPI0]			= GATE(0x0f00, BIT(31)),
++	[CLK_SPI1]			= GATE(0x0f08, BIT(31)),
++	[CLK_BUS_SPI0]		= GATE(0x0f04, BIT(0)),
++	[CLK_BUS_SPI1]		= GATE(0x0f0c, BIT(0)),
++	[CLK_GMAC0_PHY]		= GATE(0x1410, BIT(31)),
++	[CLK_BUS_GMAC0]		= GATE(0x141c, BIT(0)),
++	[CLK_USB_OHCI0]		= GATE(0x1300, BIT(31)),
++	[CLK_USB_OHCI1]		= GATE(0x1308, BIT(31)),
++	[CLK_BUS_OHCI0]		= GATE(0x1304, BIT(0)),
++	[CLK_BUS_OHCI1]		= GATE(0x130c, BIT(0)),
++	[CLK_BUS_EHCI0]		= GATE(0x1304, BIT(4)),
++	[CLK_BUS_EHCI1]		= GATE(0x130c, BIT(4)),
++	[CLK_USB_GATE0]		= GATE(0x1304, BIT(8)),
++	[CLK_USB_GATE1]		= GATE(0x130c, BIT(8)),
++};
 +
- /* A523 CPU PLL offsets */
- #define CPC_CPUA_PLL_CTRL		0x04
- #define CPC_DSU_PLL_CTRL		0x08
-@@ -65,7 +84,11 @@
- #define CCM_PLL5_CTRL_DIV2(div0)	((div0) << 1)
++static struct ccu_reset a733_resets[] = {
++	[RST_BUS_MMC0]		= RESET(0x0d0c, BIT(16)),
++	[RST_BUS_MMC1]		= RESET(0x0d1c, BIT(16)),
++	[RST_BUS_MMC2]		= RESET(0x0d2c, BIT(16)),
++	[RST_BUS_UART0]		= RESET(0x0e00, BIT(16)),
++	[RST_BUS_UART1]		= RESET(0x0e04, BIT(16)),
++	[RST_BUS_UART2]		= RESET(0x0e08, BIT(16)),
++	[RST_BUS_UART3]		= RESET(0x0e0c, BIT(16)),
++	[RST_BUS_UART4]		= RESET(0x0e10, BIT(16)),
++	[RST_BUS_UART5]		= RESET(0x0e14, BIT(16)),
++	[RST_BUS_I2C0]		= RESET(0x0e80, BIT(16)),
++	[RST_BUS_I2C1]		= RESET(0x0e84, BIT(16)),
++	[RST_BUS_I2C2]		= RESET(0x0e8c, BIT(16)),
++	[RST_BUS_I2C3]		= RESET(0x0e10, BIT(16)),
++	[RST_BUS_SPI0]		= RESET(0x0f04, BIT(16)),
++	[RST_BUS_SPI1]		= RESET(0x0f0c, BIT(16)),
++	[RST_BUS_GMAC0]		= RESET(0x141c, BIT(16) | BIT(17)),
++	[RST_USB_PHY0]		= RESET(0x1300, BIT(30)),
++	[RST_USB_PHY1]		= RESET(0x1308, BIT(30)),
++	[RST_BUS_OHCI0]		= RESET(0x1304, BIT(16)),
++	[RST_BUS_OHCI1]		= RESET(0x130c, BIT(16)),
++	[RST_BUS_EHCI0]		= RESET(0x1304, BIT(20)),
++	[RST_BUS_EHCI1]		= RESET(0x130c, BIT(20)),
++};
++
++const struct ccu_desc a733_ccu_desc = {
++	.gates	= a733_gates,
++	.resets	= a733_resets,
++	.num_gates = ARRAY_SIZE(a733_gates),
++	.num_resets = ARRAY_SIZE(a733_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_a733_r.c b/drivers/clk/sunxi/clk_a733_r.c
+new file mode 100644
+index 00000000000..a500cd2831d
+--- /dev/null
++++ b/drivers/clk/sunxi/clk_a733_r.c
+@@ -0,0 +1,36 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include <clk-uclass.h>
++#include <dm.h>
++#include <clk/sunxi.h>
++#include <dt-bindings/clock/sun60i-a733-r-ccu.h>
++#include <dt-bindings/reset/sun60i-a733-r-ccu.h>
++#include <linux/bitops.h>
++
++static struct ccu_clk_gate a733_r_gates[] = {
++	[CLK_R_AHB]             = GATE_DUMMY,
++	[CLK_R_APB0]            = GATE_DUMMY,
++	[CLK_R_APB1]            = GATE_DUMMY,
++	[CLK_BUS_R_TWD]         = GATE(0x12c, BIT(0)),
++	[CLK_BUS_R_UART0]       = GATE(0x18c, BIT(0)),
++	[CLK_BUS_R_I2C0]        = GATE(0x19c, BIT(0)),
++	[CLK_BUS_R_I2C1]        = GATE(0x19c, BIT(1)),
++	[CLK_BUS_R_I2C2]        = GATE(0x19c, BIT(2)),
++	[CLK_BUS_R_RTC]         = GATE(0x20c, BIT(0)),
++};
++
++static struct ccu_reset a733_r_resets[] = {
++	[RST_BUS_R_TWD]         = RESET(0x12c, BIT(16)),
++	[RST_BUS_R_UART0]       = RESET(0x18c, BIT(16)),
++	[RST_BUS_R_I2C0]        = RESET(0x19c, BIT(16)),
++	[RST_BUS_R_I2C1]        = RESET(0x19c, BIT(17)),
++	[RST_BUS_R_I2C2]        = RESET(0x19c, BIT(18)),
++	[RST_BUS_R_RTC]         = RESET(0x20c, BIT(16)),
++};
++
++const struct ccu_desc a733_r_ccu_desc = {
++	.gates = a733_r_gates,
++	.resets = a733_r_resets,
++	.num_gates = ARRAY_SIZE(a733_r_gates),
++	.num_resets = ARRAY_SIZE(a733_r_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
+index 842a0541bd6..ad90a3744a2 100644
+--- a/drivers/clk/sunxi/clk_sunxi.c
++++ b/drivers/clk/sunxi/clk_sunxi.c
+@@ -128,6 +128,8 @@ extern const struct ccu_desc r40_ccu_desc;
+ extern const struct ccu_desc v3s_ccu_desc;
+ extern const struct ccu_desc a523_ccu_desc;
+ extern const struct ccu_desc a523_r_ccu_desc;
++extern const struct ccu_desc a733_ccu_desc;
++extern const struct ccu_desc a733_r_ccu_desc;
  
- /* pll6 bit field */
-+#ifdef CONFIG_MACH_SUN60I_A733
-+#define CCM_PLL6_CTRL_P0_SHIFT		20
-+#else
- #define CCM_PLL6_CTRL_P0_SHIFT		16
+ static const struct udevice_id sunxi_clk_ids[] = {
+ #ifdef CONFIG_CLK_SUN4I_A10
+@@ -233,6 +235,14 @@ static const struct udevice_id sunxi_clk_ids[] = {
+ #ifdef CONFIG_CLK_SUN55I_A523_R
+ 	{ .compatible = "allwinner,sun55i-a523-r-ccu",
+ 	  .data = (ulong)&a523_r_ccu_desc },
 +#endif
- #define CCM_PLL6_CTRL_P0_MASK		(0x7 << CCM_PLL6_CTRL_P0_SHIFT)
- #define CCM_PLL6_CTRL_N_SHIFT		8
- #define CCM_PLL6_CTRL_N_MASK		(0xff << CCM_PLL6_CTRL_N_SHIFT)
-@@ -115,6 +138,14 @@
- #define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002	    /* 200 MHz */
- #define CCM_APB1_DEFAULT		0x03000005	    /* APB0 really */
- #define CCM_APB2_DEFAULT		0x03000005	    /* APB1 really */
-+
-+#elif CONFIG_MACH_SUN60I_A733				/* A733 */
-+
-+#define CCM_PLL6_DEFAULT		0xee126310	    /* 1200/800/480 MHz */
-+#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002	    /* 200 MHz */
-+#define CCM_APB1_DEFAULT		0x03000005	    /* APB0 really */
-+#define CCM_APB2_DEFAULT		0x03000005	    /* APB1 really */
-+
++#ifdef CONFIG_CLK_SUN60I_A733
++	{ .compatible = "allwinner,sun60i-a733-ccu",
++	  .data = (ulong)&a733_ccu_desc },
++#endif
++#ifdef CONFIG_CLK_SUN60I_A733_R
++	{ .compatible = "allwinner,sun60i-a733-r-ccu",
++	  .data = (ulong)&a733_r_ccu_desc },
  #endif
- 
- /* apb2 bit field */
-diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-index bcfdc0a41c5..e12a8c18c8f 100644
---- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-+++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-@@ -7,6 +7,18 @@
- #ifndef _SUNXI_CPU_SUNXI_NCAT2_H
- #define _SUNXI_CPU_SUNXI_NCAT2_H
- 
-+#ifdef CONFIG_MACH_SUN60I_A733
+ 	{ }
+ };
+diff --git a/include/dt-bindings/clock/sun60i-a733-ccu.h b/include/dt-bindings/clock/sun60i-a733-ccu.h
+new file mode 100644
+index 00000000000..113738ebd7e
+--- /dev/null
++++ b/include/dt-bindings/clock/sun60i-a733-ccu.h
+@@ -0,0 +1,188 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
 +
-+#define SUNXI_CCM_BASE			0x02002000
-+#define SUNXI_TIMER_BASE		0x02052000
++#ifndef _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_
++#define _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_
 +
-+#define SUNXI_TWI0_BASE			0x02510000
-+#define SUNXI_TWI1_BASE			0x02511000
-+#define SUNXI_TWI2_BASE			0x02512000
-+#define SUNXI_TWI3_BASE			0x02513000
++#define CLK_PLL_DDR0		0
++#define CLK_PLL_PERIPH0_4X	1
++#define CLK_PLL_PERIPH0_2X	2
++#define CLK_PLL_PERIPH0_800M	3
++#define CLK_PLL_PERIPH0_480M	4
++#define CLK_PLL_PERIPH0_600M	5
++#define CLK_PLL_PERIPH0_400M	6
++#define CLK_PLL_PERIPH0_300M	7
++#define CLK_PLL_PERIPH0_200M	8
++#define CLK_PLL_PERIPH0_160M	9
++#define CLK_PLL_PERIPH0_150M	10
++#define CLK_PLL_PERIPH1_4X	11
++#define CLK_PLL_PERIPH1_2X	12
++#define CLK_PLL_PERIPH1_800M	13
++#define CLK_PLL_PERIPH1_480M	14
++#define CLK_PLL_PERIPH1_600M	15
++#define CLK_PLL_PERIPH1_400M	16
++#define CLK_PLL_PERIPH1_300M	17
++#define CLK_PLL_PERIPH1_200M	18
++#define CLK_PLL_PERIPH1_160M	19
++#define CLK_PLL_PERIPH1_150M	20
++#define CLK_PLL_GPU		21
++#define CLK_PLL_VIDEO0_8X	22
++#define CLK_PLL_VIDEO0_4X	23
++#define CLK_PLL_VIDEO0_3X	24
++#define CLK_PLL_VIDEO1_8X	25
++#define CLK_PLL_VIDEO1_4X	26
++#define CLK_PLL_VIDEO1_3X	27
++#define CLK_PLL_VIDEO2_8X	28
++#define CLK_PLL_VIDEO2_4X	29
++#define CLK_PLL_VIDEO2_3X	30
++#define CLK_PLL_VIDEO3_8X	31
++#define CLK_PLL_VIDEO3_4X	32
++#define CLK_PLL_VIDEO3_3X	33
++#define CLK_PLL_VE		34
++#define CLK_PLL_AUDIO0_4X	35
++#define CLK_PLL_AUDIO0_2X	36
++#define CLK_PLL_AUDIO0		37
++#define CLK_PLL_NPU_4X		38
++#define CLK_PLL_NPU_2X		39
++#define CLK_PLL_NPU		40
++#define CLK_AHB			41
++#define CLK_APB0		42
++#define CLK_APB1		43
++#define CLK_MBUS		44
++#define CLK_DE			45
++#define CLK_BUS_DE		46
++#define CLK_DI			47
++#define CLK_BUS_DI		48
++#define CLK_G2D			49
++#define CLK_BUS_G2D		50
++#define CLK_GPU			51
++#define CLK_BUS_GPU		52
++#define CLK_CE			53
++#define CLK_BUS_CE		54
++#define CLK_BUS_CE_SYS		55
++#define CLK_VE			56
++#define CLK_BUS_VE		57
++#define CLK_BUS_DMA		58
++#define CLK_BUS_MSGBOX		59
++#define CLK_BUS_SPINLOCK	60
++#define CLK_HSTIMER0		61
++#define CLK_HSTIMER1		62
++#define CLK_HSTIMER2		63
++#define CLK_HSTIMER3		64
++#define CLK_HSTIMER4		65
++#define CLK_HSTIMER5		66
++#define CLK_BUS_HSTIMER		67
++#define CLK_BUS_DBG		68
++#define CLK_BUS_PWM0		69
++#define CLK_BUS_PWM1		70
++#define CLK_IOMMU		71
++#define CLK_BUS_IOMMU		72
++#define CLK_DRAM		73
++#define CLK_MBUS_DMA		74
++#define CLK_MBUS_VE		75
++#define CLK_MBUS_CE		76
++#define CLK_MBUS_CSI		77
++#define CLK_MBUS_ISP		78
++#define CLK_MBUS_GMAC0		79
++#define CLK_BUS_DRAM		80
++#define CLK_NAND0		81
++#define CLK_NAND1		82
++#define CLK_BUS_NAND		83
++#define CLK_MMC0		84
++#define CLK_MMC1		85
++#define CLK_MMC2		86
++#define CLK_BUS_SYSDAP		87
++#define CLK_BUS_MMC0		88
++#define CLK_BUS_MMC1		89
++#define CLK_BUS_MMC2		90
++#define CLK_BUS_UART0		91
++#define CLK_BUS_UART1		92
++#define CLK_BUS_UART2		93
++#define CLK_BUS_UART3		94
++#define CLK_BUS_UART4		95
++#define CLK_BUS_UART5		96
++#define CLK_BUS_UART6		97
++#define CLK_BUS_UART7		98
++#define CLK_BUS_I2C0		99
++#define CLK_BUS_I2C1		100
++#define CLK_BUS_I2C2		101
++#define CLK_BUS_I2C3		102
++#define CLK_BUS_I2C4		103
++#define CLK_BUS_I2C5		104
++#define CLK_BUS_CAN		105
++#define CLK_SPI0		106
++#define CLK_SPI1		107
++#define CLK_SPI2		108
++#define CLK_SPIFC		109
++#define CLK_BUS_SPI0		110
++#define CLK_BUS_SPI1		111
++#define CLK_BUS_SPI2		112
++#define CLK_BUS_SPIFC		113
++#define CLK_GMAC0_PHY		114
++#define CLK_EMAC1_25M		115
++#define CLK_BUS_GMAC0		116
++#define CLK_BUS_GMAC1		117
++#define CLK_IR_RX		118
++#define CLK_BUS_IR_RX		119
++#define CLK_IR_TX		120
++#define CLK_BUS_IR_TX		121
++#define CLK_GPADC0		122
++#define CLK_GPADC1		123
++#define CLK_BUS_GPADC0		124
++#define CLK_BUS_GPADC1		125
++#define CLK_BUS_THS		126
++#define CLK_USB_OHCI0		127
++#define CLK_USB_OHCI1		128
++#define CLK_BUS_OHCI0		129
++#define CLK_BUS_OHCI1		130
++#define CLK_BUS_EHCI0		131
++#define CLK_BUS_EHCI1		132
++#define CLK_BUS_OTG		133
++#define CLK_BUS_LRADC		134
++#define CLK_PCIE_AUX		135
++#define CLK_BUS_DISPLAY0_TOP	136
++#define CLK_BUS_DISPLAY1_TOP	137
++#define CLK_HDMI_24M		138
++#define CLK_HDMI_CEC_32K	139
++#define CLK_HDMI_CEC		140
++#define CLK_BUS_HDMI		141
++#define CLK_MIPI_DSI0		142
++#define CLK_MIPI_DSI1		143
++#define CLK_BUS_MIPI_DSI0	144
++#define CLK_BUS_MIPI_DSI1	145
++#define CLK_TCON_LCD0		146
++#define CLK_TCON_LCD1		147
++#define CLK_TCON_LCD2		148
++#define CLK_COMBOPHY_DSI0	149
++#define CLK_COMBOPHY_DSI1	150
++#define CLK_BUS_TCON_LCD0	151
++#define CLK_BUS_TCON_LCD1	152
++#define CLK_BUS_TCON_LCD2	153
++#define CLK_TCON_TV0		154
++#define CLK_TCON_TV1		155
++#define CLK_BUS_TCON_TV0	156
++#define CLK_BUS_TCON_TV1	157
++#define CLK_EDP			158
++#define CLK_BUS_EDP		159
++#define CLK_LEDC		160
++#define CLK_BUS_LEDC		161
++#define CLK_CSI_TOP		162
++#define CLK_CSI_MCLK0		163
++#define CLK_CSI_MCLK1		164
++#define CLK_CSI_MCLK2		165
++#define CLK_CSI_MCLK3		166
++#define CLK_BUS_CSI		167
++#define CLK_ISP			168
++#define CLK_DSP			169
++#define CLK_FANOUT_24M		170
++#define CLK_FANOUT_12M		171
++#define CLK_FANOUT_16M		172
++#define CLK_FANOUT_25M		173
++#define CLK_FANOUT_27M		174
++#define CLK_FANOUT_PCLK		175
++#define CLK_FANOUT0		176
++#define CLK_FANOUT1		177
++#define CLK_FANOUT2		178
++#define CLK_USB_GATE0		179
++#define CLK_USB_GATE1		180
 +
-+#else
++#endif /* _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_ */
+diff --git a/include/dt-bindings/clock/sun60i-a733-r-ccu.h b/include/dt-bindings/clock/sun60i-a733-r-ccu.h
+new file mode 100644
+index 00000000000..e16ee48968d
+--- /dev/null
++++ b/include/dt-bindings/clock/sun60i-a733-r-ccu.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
 +
- #define SUNXI_CCM_BASE			0x02001000
- #define SUNXI_TIMER_BASE		0x02050000
- 
-@@ -15,11 +27,15 @@
- #define SUNXI_TWI2_BASE			0x02502800
- #define SUNXI_TWI3_BASE			0x02502C00
- 
-+#endif
++#ifndef _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_
++#define _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_
 +
- #define SUNXI_SRAMC_BASE		0x03000000
- /* SID address space starts at 0x03006000, but e-fuse is at offset 0x200 */
- #define SUNXI_SIDC_BASE			0x03006000
- #define SUNXI_SID_BASE			0x03006200
-+#ifndef CONFIG_MACH_SUN60I_A733
- #define SUNXI_GIC400_BASE		0x03020000
-+#endif
- 
- #ifdef CONFIG_MACH_SUN55I_A523
- #define SUNXI_DRAM_COM_BASE		0x03120000
-@@ -27,10 +43,28 @@
- #define SUNXI_DRAM_PHY0_BASE		0x03140000
- #endif
- 
-+#ifdef CONFIG_MACH_SUN60I_A733
-+#define SUNXI_GIC600_BASE		0x03400000
-+#endif
++#define CLK_R_AHB		0
++#define CLK_R_APB0		1
++#define CLK_R_APB1		2
++#define CLK_R_TIMER0		3
++#define CLK_R_TIMER1		4
++#define CLK_R_TIMER2		5
++#define CLK_BUS_R_TIMER		6
++#define CLK_BUS_R_TWD		7
++#define CLK_R_PWMCTRL		8
++#define CLK_BUS_R_PWMCTRL	9
++#define CLK_R_SPI		10
++#define CLK_BUS_R_SPI		11
++#define CLK_BUS_R_SPINLOCK	12
++#define CLK_BUS_R_MSGBOX	13
++#define CLK_BUS_R_UART0		14
++#define CLK_BUS_R_UART1		15
++#define CLK_BUS_R_I2C0		16
++#define CLK_BUS_R_I2C1		17
++#define CLK_BUS_R_I2C2		18
++#define CLK_BUS_R_PPU0		19
++#define CLK_BUS_R_PPU1		20
++#define CLK_BUS_R_CPU_BIST	21
++#define CLK_R_IR_RX		22
++#define CLK_BUS_R_IR_RX		23
++#define CLK_BUS_R_DMA		24
++#define CLK_BUS_R_RTC		25
++#define CLK_BUS_R_CPUCFG	26
 +
- #define SUNXI_MMC0_BASE			0x04020000
- #define SUNXI_MMC1_BASE			0x04021000
- #define SUNXI_MMC2_BASE			0x04022000
- 
-+#ifdef CONFIG_MACH_SUN60I_A733
++#endif /* _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_ */
+diff --git a/include/dt-bindings/reset/sun60i-a733-ccu.h b/include/dt-bindings/reset/sun60i-a733-ccu.h
+new file mode 100644
+index 00000000000..ed81633c80b
+--- /dev/null
++++ b/include/dt-bindings/reset/sun60i-a733-ccu.h
+@@ -0,0 +1,85 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
 +
-+#define SUNXI_PRCM_BASE			0x07010000
-+#define SUNXI_R_WDOG_BASE		0x07021000
-+#define SUNXI_R_CPUCFG_BASE		0x07050000
-+#define SUNXI_R_TWI_BASE		0x07083000
-+#define SUNXI_RTC_BASE			0x07090000
++#ifndef _DT_BINDINGS_RST_SUN60I_A733_CCU_H_
++#define _DT_BINDINGS_RST_SUN60I_A733_CCU_H_
 +
-+#define SUNXI_CPUCFG_BASE		0x08860000
++#define RST_MBUS		0
++#define RST_BUS_NSI		1
++#define RST_BUS_DE		2
++#define RST_BUS_DI		3
++#define RST_BUS_G2D		4
++#define RST_BUS_SYS		5
++#define RST_BUS_GPU		6
++#define RST_BUS_CE		7
++#define RST_BUS_SYS_CE		8
++#define RST_BUS_VE		9
++#define RST_BUS_DMA		10
++#define RST_BUS_MSGBOX		11
++#define RST_BUS_SPINLOCK	12
++#define RST_BUS_CPUXTIMER	13
++#define RST_BUS_DBG		14
++#define RST_BUS_PWM0		15
++#define RST_BUS_PWM1		16
++#define RST_BUS_DRAM		17
++#define RST_BUS_NAND		18
++#define RST_BUS_MMC0		19
++#define RST_BUS_MMC1		20
++#define RST_BUS_MMC2		21
++#define RST_BUS_SYSDAP		22
++#define RST_BUS_UART0		23
++#define RST_BUS_UART1		24
++#define RST_BUS_UART2		25
++#define RST_BUS_UART3		26
++#define RST_BUS_UART4		27
++#define RST_BUS_UART5		28
++#define RST_BUS_UART6		29
++#define RST_BUS_UART7		30
++#define RST_BUS_I2C0		31
++#define RST_BUS_I2C1		32
++#define RST_BUS_I2C2		33
++#define RST_BUS_I2C3		34
++#define RST_BUS_I2C4		35
++#define RST_BUS_I2C5		36
++#define RST_BUS_CAN		37
++#define RST_BUS_SPI0		38
++#define RST_BUS_SPI1		39
++#define RST_BUS_SPI2		40
++#define RST_BUS_SPIFC		41
++#define RST_BUS_GMAC0		42
++#define RST_BUS_GMAC1		43
++#define RST_BUS_IR_RX		44
++#define RST_BUS_IR_TX		45
++#define RST_BUS_GPADC0		46
++#define RST_BUS_GPADC1		47
++#define RST_BUS_THS		48
++#define RST_USB_PHY0		49
++#define RST_USB_PHY1		50
++#define RST_BUS_OHCI0		51
++#define RST_BUS_OHCI1		52
++#define RST_BUS_EHCI0		53
++#define RST_BUS_EHCI1		54
++#define RST_BUS_OTG		55
++#define RST_BUS_3		56
++#define RST_BUS_LRADC		57
++#define RST_BUS_PCIE_USB3	58
++#define RST_BUS_DISPLAY0_TOP	59
++#define RST_BUS_DISPLAY1_TOP	60
++#define RST_BUS_HDMI_MAIN	61
++#define RST_BUS_HDMI_SUB	62
++#define RST_BUS_MIPI_DSI0	63
++#define RST_BUS_MIPI_DSI1	64
++#define RST_BUS_TCON_LCD0	65
++#define RST_BUS_TCON_LCD1	66
++#define RST_BUS_TCON_LCD2	67
++#define RST_BUS_TCON_TV0	68
++#define RST_BUS_TCON_TV1	69
++#define RST_BUS_LVDS0		70
++#define RST_BUS_LVDS1		71
++#define RST_BUS_EDP		72
++#define RST_BUS_VIDEO_OUT0	73
++#define RST_BUS_VIDEO_OUT1	74
++#define RST_BUS_LEDC		75
++#define RST_BUS_CSI		76
++#define RST_BUS_ISP		77
 +
-+#define SUNXI_CPU_PLL_CFG_BASE		0x08870000
++#endif /* _DT_BINDINGS_RST_SUN60I_A733_CCU_H_ */
+diff --git a/include/dt-bindings/reset/sun60i-a733-r-ccu.h b/include/dt-bindings/reset/sun60i-a733-r-ccu.h
+new file mode 100644
+index 00000000000..fbf48f883b7
+--- /dev/null
++++ b/include/dt-bindings/reset/sun60i-a733-r-ccu.h
+@@ -0,0 +1,22 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
 +
-+#else /* CONFIG_MACH_SUN60I_A733 */
++#ifndef _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_
++#define _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_
 +
- #ifndef CONFIG_MACH_SUN55I_A523
- #define SUNXI_R_CPUCFG_BASE		0x07000400
- #endif
-@@ -50,6 +84,8 @@
- 
- #define SUNXI_CPU_PLL_CFG_BASE		0x08817000
- 
-+#endif /* !CONFIG_MACH_SUN60I_A733 */
++#define RST_BUS_R_TIMER		0
++#define RST_BUS_R_TWD		1
++#define RST_BUS_R_PWMCTRL	2
++#define RST_BUS_R_SPI		3
++#define RST_BUS_R_SPINLOCK	4
++#define RST_BUS_R_MSGBOX	5
++#define RST_BUS_R_UART0		6
++#define RST_BUS_R_UART1		7
++#define RST_BUS_R_I2C0		8
++#define RST_BUS_R_I2C1		9
++#define RST_BUS_R_I2C2		10
++#define RST_BUS_R_PPU1		11
++#define RST_BUS_R_IR_RX		12
++#define RST_BUS_R_RTC		13
++#define RST_BUS_R_CPUCFG	14
 +
- #ifndef __ASSEMBLY__
- void sunxi_board_init(void);
- void sunxi_reset(void);
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index 80004f13a1e..5ea27fc56c5 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -16,6 +16,10 @@ void clock_init_safe(void)
- 	void *const ccm = (void *)SUNXI_CCM_BASE;
- 	void *const prcm = (void *)SUNXI_PRCM_BASE;
- 
-+	/* skip clock init for A733 for now */
-+	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-+		return;
-+
- 	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616))
- 		setbits_le32(prcm + CCU_PRCM_SYS_PWROFF_GATING, 0x10);
- 	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-@@ -82,14 +86,14 @@ void clock_init_uart(void)
- 	writel(APB2_CLK_SRC_OSC24M|
- 	       APB2_CLK_RATE_N_1|
- 	       APB2_CLK_RATE_M(1),
--	       ccm + CCU_H6_APB2_CFG);
-+	       ccm + CCU_UART_CLK_CFG);
- 
- 	/* open the clock for uart */
--	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
-+	setbits_le32(ccm + CCU_UART_GATE_RESET,
- 		     1 << (CONFIG_CONS_INDEX - 1));
- 
- 	/* deassert uart reset */
--	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
-+	setbits_le32(ccm + CCU_UART_GATE_RESET,
- 		     1 << (RESET_SHIFT + CONFIG_CONS_INDEX - 1));
- }
- 
-@@ -236,7 +240,7 @@ int clock_twi_onoff(int port, int state)
- unsigned int clock_get_pll6(void)
- {
- 	void *const ccm = (void *)SUNXI_CCM_BASE;
--	uint32_t rval = readl(ccm + CCU_H6_PLL6_CFG);
-+	u32 rval = readl(ccm + CCU_PLL6_CFG);
- 	int n = ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + 1;
- 	int div2 = ((rval & CCM_PLL6_CTRL_DIV2_MASK) >>
- 		    CCM_PLL6_CTRL_DIV2_SHIFT) + 1;
-@@ -257,6 +261,8 @@ unsigned int clock_get_pll6(void)
- 	 */
- 	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
- 		m = 4;
-+	else if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-+		m = 1;
- 	else
- 		m = 2;
- 
++#endif /* _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_ */
 
 -- 
 2.52.0
