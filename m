@@ -4,70 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66335D2D0FF
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 13:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA454D2D10F
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 14:31:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E033C83015;
-	Tue, 13 Jan 2026 14:27:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BB6DB800AB;
+	Tue, 13 Jan 2026 15:31:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G9B9D4A1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aNjtFdXP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFCE9830CA; Tue, 13 Jan 2026 14:27:46 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id D0419800B6; Tue, 13 Jan 2026 15:31:51 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA58C82C7F
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 14:27:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7183A80050
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 15:31:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dr9664yNfz9scl;
- Tue, 13 Jan 2026 14:27:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768310862;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DPSg1yaQ/rgqMHcVVCva+pGP6ZpN7BD/SOH1MBQpJyM=;
- b=G9B9D4A1mkjoZ1e/el4MrxqALVRvg6EgVLVH2H1xRXYkElzvN8t1ESqu5P2i62d6oElHwZ
- 6znncR/ngmH7aq31SQM0AS/FLiXL/7B4Vh2LColZS5HcZPVQh02hTlyAWzfBL1TqfwTs+n
- Dwm1Ud7t6Ugpz1P2g1LZ/8YfIqrnKxTXLVVaJPGS7pE0qoKVm0Y4O8TOY7/Il0V9E49dhs
- Qq4QrFegdnx8XUfMAhRUBRZK7B/K8Ps9Tf7A+AU2ClKnhn+qac3fqXz/QH6PmH9BhH0cKa
- qWERYIQKy+mq8GHtJwCfYkY3SCqHWQgumLCq6F03vD/lYS33bR08A94BTxbezg==
-Message-ID: <95292c17-f480-49f8-a0af-bdb2f71de2d1@mailbox.org>
-Date: Tue, 13 Jan 2026 14:27:38 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c169=7T=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1768314708;
+ bh=r+Pn+GgW7Su3CoarW3ZEa+lRhtCeu8tbcWhR3+sCZ4A=;
+ b=aNjtFdXP3uBfUCx0c+TDzd+KeALks3aPNXA5QviXpGa4hYSkNykeM5XASc+quXyPU28kFjthk
+ ACW/NjC8EmGT7StLZyZF08UEFkQCae1C6Z+qf/n647IDRauAb9bEQtKbcp3BzcZrvZ4SpYP8h6b
+ TxouOuGhX9GNelTWoUsNmoufG0HQPJOK5AApBrjMKB3Fe9kqfDXut4QwcJns27CLPfsY6Y1Npw8
+ mWM/mB9L0+dBp4jTx1/3FM6uLjBxonC+/oaZoQ7HoEBSd9K2LZVhZuSHNjFYP1SbwZbcT/cTMYY
+ TzDqKVDWKw8mgiklw8EM+iiPfY/jpZhlfLNY9TSMF/Zw==
+X-Forward-Email-ID: 69665750b51c02680f8a5ebe
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.2.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH] rockchip: Reduce size of ramboot usb472 payload
+Date: Tue, 13 Jan 2026 14:31:30 +0000
+Message-ID: <20260113143132.3401001-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] scripts/Makefile.xpl: Align filtered DTB to 8-byte
- within multidtb.fit
-To: Beleswar Prasad Padhi <b-padhi@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
- sughosh.ganu@linaro.org, philip.molloy@analog.com,
- james.hilliard1@gmail.com, anshuld@ti.com, afd@ti.com, nm@ti.com,
- vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
-References: <20260112101102.1417970-1-b-padhi@ti.com>
- <20260112101102.1417970-2-b-padhi@ti.com>
- <9257e248-512f-4c42-999b-0f8c4f0f92b7@mailbox.org>
- <2854b18c-324f-4052-a6e5-538df6a0bcab@ti.com>
- <a799f9d0-e369-4ccf-8c64-60623143ca86@mailbox.org>
- <20260112220323.GT3416603@bill-the-cat>
- <e7d8161c-789c-4d44-af2b-19bf69f4eb12@mailbox.org>
- <98d6a5d5-a09c-4dd0-a3c3-af5f9b58dc3b@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <98d6a5d5-a09c-4dd0-a3c3-af5f9b58dc3b@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: fd9efbb19a43e1f3390
-X-MBO-RS-META: k4rzztkkfjtq79hc7mo8yns7s5s35fz1
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,45 +69,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/13/26 11:25 AM, Beleswar Prasad Padhi wrote:
+Booting into SPL using ramboot can take several seconds on some SoCs due
+to the large size of the usb472 payload sent over USB to BootROM.
 
->>>>>> - Should mkimage -E align blobs to 8 bytes by default ? I think yes,
->>>>>> and frankly, I thought it does so already, but apparently not.
->>>>>
->>>>>
->>>>> This can be done, but should it be? Not all FITs demand an 8-byte
->>>>> alignment right? It is only the FDT which requires this.
->>>> Maybe if image type is flat_dt, it should be implicitly 8-byte aligned then
->>>> ?
->>>
->>> Well, the device tree spec says 8-byte alignment.
->>
->> 8 byte alignment of what, start of DT, right ?
-> 
-> 
-> Yeah from start... In this case, the FDT for OS is aligned, but the sub DT
-> from the FIT is not aligned by 8-bytes.
+A large chunk of the usb472 payload, around 1-2 MiB, is padding used to
+avoid overlapping when loading e.g. TF-A to 0x40000.
 
-For mkimage -E (fit with trailing external data) , enforcing that 
-alignment should be easily doable.
+BootROM is likely wasting unnecessary time crc16 validating the padding
+of the payload.
 
->>> It's not "FDT for OS"
->>> that's 8-byte, it's any device tree should start out 8 byte aligned, and
->>> everything else should then be naturally aligned. If we're looking in a
->>> device tree for another device tree to use in place and not relocate
->>> then that second tree must be aligned.
->>>
->>> Or am I missing something?
->> The discussion is about mkimage -E which generates DTs for U-Boot SPL use. The DTs in those external data should likely be aligned to 8 bytes by default, i.e. implicitly set -B 8 (they don't seem to be right now).
-> 
-> Instead of -E, we can use '-b' which always takes DT and make sure that is 8-byte aligned by default:
-> 
-> Usage: mkimage [-D dtc_options] [-f fit-image.its|-f auto|-f auto-conf|-F] [-b <dtb> [-b <dtb>]] [-E] [-B size] [-i <ramdisk.cpio.gz>] fit-image
-> -b => append the device tree binary to the FIT
+Place the FIT payload directly after SPL and memmove it to the expected
+memory location, SPL_LOAD_FIT_ADDRESS, to avoid excessive padding and
+help speed up ramboot.
 
-The type flat_dt should likely always be implicitly aligned at minimum 
-to 8 bytes , without -b or -B or -whatever flags.
+Binman symbols are used to get the position and size of the FIT payload
+that is initially loaded into DRAM by the BootROM.
 
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/dts/rockchip-u-boot.dtsi |  7 +++--
+ arch/arm/mach-rockchip/spl.c      | 51 +++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index 71d7623fe2ca..9fb1abd27fa0 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -244,18 +244,21 @@
+ 	simple-bin-usb472 {
+ 		filename = "u-boot-rockchip-usb472.bin";
+ 		pad-byte = <0x00>;
++		skip-at-start = <CFG_SYS_SDRAM_BASE>;
+ 
+ 		u-boot-spl {
+-			no-write-symbols;
+ 		};
+ 
++		payload {
++			type = "section";
++			align = <CONFIG_SYS_CACHELINE_SIZE>;
+ #ifdef HAS_FIT
+ 		fit {
+ 			insert-template = <&fit_template>;
+ #else
+ 		u-boot-img {
+ #endif
+-			offset = <(CONFIG_SPL_LOAD_FIT_ADDRESS - CFG_SYS_SDRAM_BASE)>;
++		};
+ 		};
+ 	};
+ #endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index 1ce3a3b05547..a9155dceedb4 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -3,6 +3,7 @@
+  * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+  */
+ 
++#include <binman_sym.h>
+ #include <cpu_func.h>
+ #include <debug_uart.h>
+ #include <dm.h>
+@@ -10,6 +11,7 @@
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
++#include <mapmem.h>
+ #include <ram.h>
+ #include <spl.h>
+ #include <asm/arch-rockchip/bootrom.h>
+@@ -140,3 +142,52 @@ void spl_board_prepare_for_boot(void)
+ 
+ 	cleanup_before_linux();
+ }
++
++#if CONFIG_IS_ENABLED(RAM_DEVICE) && IS_ENABLED(CONFIG_SPL_LOAD_FIT)
++binman_sym_declare_optional(ulong, payload, image_pos);
++binman_sym_declare_optional(ulong, payload, size);
++
++static ulong ramboot_load_read(struct spl_load_info *load, ulong sector,
++			       ulong count, void *buf)
++{
++	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				    CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++	memcpy(buf, map_sysmem(addr + sector, 0), count);
++	return count;
++}
++
++static int ramboot_load_image(struct spl_image_info *spl_image,
++			      struct spl_boot_device *bootdev)
++{
++	struct legacy_img_hdr *header;
++	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				    CONFIG_SPL_LOAD_FIT_ADDRESS);
++	ulong image_pos = binman_sym(ulong, payload, image_pos);
++	ulong size = binman_sym(ulong, payload, size);
++
++	if (addr == CFG_SYS_SDRAM_BASE || addr == CONFIG_SPL_TEXT_BASE)
++		return -ENODEV;
++
++	if (image_pos != BINMAN_SYM_MISSING && size != BINMAN_SYM_MISSING) {
++		header = map_sysmem(image_pos, 0);
++		if (image_get_magic(header) == FDT_MAGIC) {
++			memmove(map_sysmem(addr, 0), header, size);
++			memset(header, 0, sizeof(*header));
++		}
++	}
++
++	header = map_sysmem(addr, 0);
++	if (image_get_magic(header) == FDT_MAGIC) {
++		struct spl_load_info load;
++
++		spl_load_init(&load, ramboot_load_read, NULL, 1);
++		return spl_load_simple_fit(spl_image, &load, 0, header);
++	}
++
++	return -ENODEV;
++}
++
++/* Use priority and method name that sort before default spl_ram_load_image */
++SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, ramboot_load_image);
++#endif
 -- 
-Best regards,
-Marek Vasut
+2.52.0
+
