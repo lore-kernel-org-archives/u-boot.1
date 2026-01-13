@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6DBD0C84D
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 10:46:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B9FD0C852
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 11:08:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F24083045;
-	Tue, 13 Jan 2026 11:46:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DB3583015;
+	Tue, 13 Jan 2026 12:08:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rvaxnO5s";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="vmL7Vl18";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A5AA8352B; Tue, 13 Jan 2026 11:46:22 +0100 (CET)
-Received: from mail-dy1-x132d.google.com (mail-dy1-x132d.google.com
- [IPv6:2607:f8b0:4864:20::132d])
+ id 2A4E683045; Tue, 13 Jan 2026 12:08:22 +0100 (CET)
+Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
+ [IPv6:2607:f8b0:4864:20::1333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F8F48004F
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 11:46:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id E9D1C82C7F
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 12:08:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x132d.google.com with SMTP id
- 5a478bee46e88-2ad70765db9so12330501eec.1
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:46:20 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-dy1-x1333.google.com with SMTP id
+ 5a478bee46e88-2ac3d5ab81bso5233710eec.1
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 03:08:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1768301179; x=1768905979;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0RqQ+I7Uk9pKR7gZWYVGYWJXyu9WWhRHlTx2Xp2beEI=;
- b=rvaxnO5sshdGzP5v3Z8uPRBXC138CNhZWfGFd1DmTeRcLm4+VhUAIA5vhknfzPnNQI
- FnvXCozm+B7O49kLwthieElZpwEYN6cZx/5z0dZqVKr87B2VV6ovH/z09dZgzDKE3TyT
- REx8VTKuPxaeQE9k1iKwutSS4DIPtcHnZGEiU=
+ d=sartura.hr; s=sartura; t=1768302498; x=1768907298; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=d1+aJCPuXSARm5Mh5CL6rklHNlCFqVgOR2Vf2wAEcas=;
+ b=vmL7Vl18xDw10VUrxvgkCrAf/YNQ9Ky3dDWMJlM6h0vqdiZR/zLdWUJI+WWq86hHsB
+ CVadhTs/0I9oXCKRYzrvMpWsEBRodsNU/0lTm7ZEV1N9cZDWk8ycNDBnjZk2BJJY5Hvy
+ tZubPBQ+bW/idgfhfrsiIbkPUFrfojQ+yNDQO0e4xuvAoQWwtiC+6TqXscUmxSZuF1z8
+ G0Bvl12N63w9xRFksTFpUiSR2/1Frf3ZXSmSJQyPedno2dWvUs2Rgs03UsGNTx6ZT2pH
+ mvpqWjnfn92LkGHtExxA8ejm/vGt/mEDeyWoywyunSIjPNDDJr+jkaPXvqMMXK0sixTH
+ gHVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768301179; x=1768905979;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0RqQ+I7Uk9pKR7gZWYVGYWJXyu9WWhRHlTx2Xp2beEI=;
- b=ggYjI116n9kAi9dqJR7OKfg9kTSwwNgKuWi0TTMYCQ8z8SkpprwQg6zt6IQAsVovyN
- Cn7Up3MAr/6K9KaEA0oDSxOLFD2B2488eBGgMQCuxAEVcYniCIHE2Qo/J8UK4tAY71YM
- IGLsA2zydcurnCpueYwer6xsKvB/vKL2dGziSYjspecyHgnL4y3fuLIf770k48MjKFPg
- I7gK0k2yOMmtPUrKkHSPc+czX9FoOPWOU5YBVAKuDZysuY5xcMOzt2d+3ziYr2E6THAV
- ZOv1vgJq2hgPTqHwg5WFCQ500NY0kgNBsMPXsMDk/8IkS+2nXdC4DRW5l00g77MHzrmr
- brBg==
+ d=1e100.net; s=20230601; t=1768302498; x=1768907298;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d1+aJCPuXSARm5Mh5CL6rklHNlCFqVgOR2Vf2wAEcas=;
+ b=UHPLePQmJhrTq6i16xi8feiLuJgAyPPdE5N0fGN7Z775WJLSUPyF9faA3U2ujikxC9
+ wBvJPU5Sc7WD+kGhnNYqKAhnp/cCL2tdRmjfowGthKWebVlLjVUFvt3rvRKByhgzTLiK
+ MfsRMWrPXymKZ0/kQ2mxggufPS+NUgGJIWP5Mo4tIAHJwU2KcWf+WWlux5O0PCL8A62W
+ cqHnu1Dp0SdW3faVuEGpOVfG2CJL8SpzxmTnleE8vXzCET4hGSYnRL64/dCPcqjsTNzj
+ lxc+oSBtKzyRLwL6v1g5+I6gFMLxavQgpNAwl6akFEYbuFSBCHv1pMWKY5xyqtm8K6bI
+ KyPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlf+oPM5PNF8OArIL4D5hExz/mEQ0JEM20t+rRQ3V1lBDJQdKE8uPVDQ5fHPm5N+Gy2GhRRjA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxAXx3ogCGbT6uKn/iP76Taw/WiBlNnRLQR6GBsdwdcK76gSrh
- qfbvDUtyvV6oLLe6V/A0yIpIBUh3CO8EcRiaOkpEN+QaUbMgKxLxWdLxCcHIRWRuLiZjjGaM88x
- T6IQwpCiRiyb/CyowKZMe2CLdmoo3DHNO+++2Ik8HKm0lSv8hOilODIk=
-X-Gm-Gg: AY/fxX4lU04Mhz1MPkLdKUPoze0uoDdWePeb1f+PU3BTgIDr1Uli8yojpOcW+Kq13aB
- I2Z0tZ19lQUN3U16bBciBA5LhJR4j6VjxmEYEj8GKYQD9FZdrUgvGA6ufo5OEWIyOGaGHJwW+7B
- ZQzuyOoTL+3Q2JC6PJ+x1yKzVTFuNrpszJ1GnFYWesfqdazb/C0s5xwJtGDS/ri1GW3Nswlu60Q
- A8pFZl+0fsgBIP85Y6oQ/Z+l3CAym1vK6VG9+BWmgAZ/qX8H2nWfSDoovTe4FjXgu7tvPEosEjv
- 2c/VpKPL5DzsdB/lvQ4t6Cx4CA==
-X-Google-Smtp-Source: AGHT+IGfwDLbiG6/E7xqkvvGgbbupJ54mRzkXXs4bCQiJGB3uUGDaGauAbmshD8QbCqoYS3iHl7NPOJjTlkSA7Qrrv8=
-X-Received: by 2002:a05:7300:ccb0:b0:2ae:56dc:eb18 with SMTP id
- 5a478bee46e88-2b17d2eca58mr16744191eec.21.1768301178361; Tue, 13 Jan 2026
- 02:46:18 -0800 (PST)
+ AJvYcCWTZFnn4MpsjYskWRx19IS2csztuBVbcBFJ/EUGmXNuvnCNQqLt6MZTB/dgKDo1/vwZdD/MmKg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxECCuELRDIy81ez5lNubMDHlWohzMbcq2SAIoRZERcr0SeoU/q
+ /zwep6c9Cz0YrXPgNfoUctY7bz+oYbrdOAXt3fewvpZ7M5DRW93O22CZ8ImYnRqrB9o=
+X-Gm-Gg: AY/fxX7QsJVo9kDRcB+yc7n9EIdrGfn9z31qppJSJOj0PTWMJVm8FrZdkghNiJ6yd3g
+ 9bCsiA5CTP0MXLLOXCIoU0NfvfH8Xx4tLZd/VE9zgz0K26DPIhxxGMkHBznG5c7hPhTWjwNyc2q
+ iqvKjsEKNubjfB1Bur9rkT24fcDosz6TLOg3LflAiwIOKEpvWFB0qbvMotPyykW7G4nS022xnSY
+ p4+WS9GRV8NLdkt7UWXweZ/MoR6jx5F/Kzp3Xw9oxo/gMpyahamNEazVCcU/eBXTK7BvzW1hMPf
+ 9YX/OVyDkOIvI5HLR/UB52JqVGx/wm3jRawZ7EAxRRsY7aGcENBzNcsyZp/K2njyfJJyS0Goa81
+ +DgHxmuueb64YcjB7iNOmGyjAOJ78Y31g56B754iVCL2K26h/gGiAX7PnMoBfzKNSuzsWqhE09d
+ mzaSUV5asiJT7CIyvFutha7gvkRM1Z8e3Z8wGSpED5m2/M6i3ivbdf13bq2y2vNLlRcrl7DM6IJ
+ 3uMKAfN
+X-Google-Smtp-Source: AGHT+IHJz1hqs9cI25sRZLj+kvJC4uHAmA8Rz6cKLi3I0t1Wkr3+TQ4q6+DsvAHQeylTDrulhTZJWg==
+X-Received: by 2002:a05:7301:4301:b0:2ab:ca55:89ab with SMTP id
+ 5a478bee46e88-2b17d357488mr15099511eec.42.1768302498222; 
+ Tue, 13 Jan 2026 03:08:18 -0800 (PST)
+Received: from fedora (dh207-14-52.xnet.hr. [88.207.14.52])
+ by smtp.googlemail.com with ESMTPSA id
+ 5a478bee46e88-2b1706c503csm20934863eec.15.2026.01.13.03.08.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Jan 2026 03:08:17 -0800 (PST)
+From: Robert Marko <robert.marko@sartura.hr>
+To: neil.armstrong@linaro.org, trini@konsulko.com, jonas@kwiboo.se,
+ funderscore@postmarketos.org, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+Cc: luka.perkov@sartura.hr,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH] tools: amlimage: include <inttypes.h>
+Date: Tue, 13 Jan 2026 12:07:38 +0100
+Message-ID: <20260113110806.648534-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20260111082347.1302003-1-michael@amarulasolutions.com>
- <aWYJKl90YEvhVZMV@nxa18884-linux.ap.freescale.net>
-In-Reply-To: <aWYJKl90YEvhVZMV@nxa18884-linux.ap.freescale.net>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 13 Jan 2026 11:46:06 +0100
-X-Gm-Features: AZwV_Qiy4KKwzIq3-Jcprodrg2MfQrPAzRWth_rNWNxBXoUiK1I5XeMUxgxPypA
-Message-ID: <CAOf5uwmGjw5daQXRcqJzpTsH3xXTGODZRqf1qWhM7Xw2sEHQhQ@mail.gmail.com>
-Subject: Re: [PATCH V2 0/2] power: regulator: pfuze100: Fix voltage
- calculation and support high-range
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Joy Zou <joy.zou@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, 
- linux-amarula@amarulasolutions.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,74 +102,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng
+PRIuN, PRIxN, etc macros are defined in <inttypes.h>, without it being
+included errors like:
+tools/amlimage.c:124:38: error: expected ‘)’ before ‘PRIu8’
+tools/amlimage.c:126:31: error: expected ‘)’ before ‘PRIu32’
 
-On Tue, Jan 13, 2026 at 8:44=E2=80=AFAM Peng Fan <peng.fan@oss.nxp.com> wro=
-te:
->
-> On Sun, Jan 11, 2026 at 09:23:45AM +0100, Michael Trimarchi wrote:
-> >This series addresses two significant issues in the pfuze100 regulator d=
-river
-> >regarding voltage calculation accuracy.
-> >
-> >The first patch fixes the handling of the "high range" bit. PFUZE chips =
-support
-> >two voltage ranges (controlled by a register bit) with different step si=
-zes
-> >and base voltages. Previously, the driver assumed the low range, leading=
- to
-> >incorrect voltage settings on boards configured for the high range.
-> >
-> >The second patch corrects the interpretation of min_uV. The driver was
-> >incorrectly using the device tree's regulator-min-microvolt constraint a=
-s the
-> >mathematical base (zero-index) for voltage calculations. This caused off=
-set
-> >errors whenever the DTS constraint differed from the hardware's absolute=
- minimum.
-> >The patch introduces physical minimums in the driver descriptors to ensu=
-re
-> >calculations are based on the datasheet specifications, treating the DTS=
- value
-> >strictly as a safety constraint.
-> >
-> >Together, these changes align the U-Boot driver logic with the Linux ker=
-nel
-> >implementation and ensure correct voltage output.
-> >
-> >Michael Trimarchi (2):
-> >  power: regulator: pfuze100: support high voltage range bit
-> >  power: regulator: pfuze100: Decouple hardware base voltage from DTS
-> >    constraints
-> >
-> Please do not submit three version in one day. That only shows patches
-> are not developed in good shape.
->
-> The changes looks good to me, but I would like to see which platforms
-> are tested with the patchset before apply.
->
+Can be hit depending on the host compiler and HOSTCFLAGS.
 
-I have tested on a new imx6dl design but I can ask Dario to test on
-some other imx6 board,
-do I need to include it in the next release?
-I will send some other patches end of this week
+Fixes: 18c1654567dc ("tools: mkimage: Add Amlogic Boot Image type")
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+---
+ tools/amlimage.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Michael
+diff --git a/tools/amlimage.c b/tools/amlimage.c
+index ecb06bc535b..bc6e19b9c24 100644
+--- a/tools/amlimage.c
++++ b/tools/amlimage.c
+@@ -2,6 +2,7 @@
+ // Copyright Contributors to the U-Boot project.
+ 
+ #include "imagetool.h"
++#include <inttypes.h>
+ #include <u-boot/sha256.h>
+ 
+ /*
+-- 
+2.52.0
 
-> Thanks,
-> Peng
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
