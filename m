@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 523D2D30CC1
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 20:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025EED30CC0
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 20:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BCF882C7F;
-	Tue, 13 Jan 2026 21:03:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 98B20808AF;
+	Tue, 13 Jan 2026 21:03:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g4xuA7u5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V5jgMTpw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11608808AF; Tue, 13 Jan 2026 21:03:31 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 6C93880077; Tue, 13 Jan 2026 21:03:34 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 293AF808AF
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 21:03:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AD85830CA
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 21:03:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b87003e998bso30528866b.1
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 12:03:29 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b870732cce2so424304266b.3
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 12:03:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1768334608; x=1768939408; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1768334612; x=1768939412; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eO1DdRVVRQTqrejF7fRwvbxZfYfElJHV9WLFar3GI9k=;
- b=g4xuA7u5ndSjFS+dSMwd7s/VNcLSn9go9JLgKfa+NDhK4UqMqPBQ04ZPBELj7kSN/f
- iEvk7pYCit70mh0L3jkNaPnvCzmc/K1NjuvGOqHNsKnb8n4NbiXK+AkTwRtkafEdR5Pe
- BsFfxYsalKxcZ2iwVw09L8RIs7AaOBGvoyPjQ=
+ bh=G9RjuEFTDqGAEVV++9QrkyJ293hWk4KEZny14qTAfeM=;
+ b=V5jgMTpwzlw8xR1jf9Gp+QQ4uV1PRe78gfjD8vMicqU60pTE3G52+fZGBxznSSVs05
+ XbX0LzePAsa3LIY0a+5w4OMb0u+ab71j+14JfF8MdS1BaFJd44UcEOxxnx29m5IgFCfv
+ J/fPlby2Dmw/eDGL8MniF3OLeLzRBRO1etUA8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768334608; x=1768939408;
+ d=1e100.net; s=20230601; t=1768334612; x=1768939412;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eO1DdRVVRQTqrejF7fRwvbxZfYfElJHV9WLFar3GI9k=;
- b=tSjgEVs/isyF3eawCOvuwzZ0pJaUrraqLBJQR2BxYidMdeWIaJXq7XUtifoorf9hyi
- /7IDzEkT1I+sl+quayoKw0iphaw85Thl/Q1oRwRZJE0PZ3PBOi64JgAiaOiytLBQQ4Gn
- ytPsHmnLjB36mN91hMsO0EtduzbWyUKtcDrMzi6j0m+r+2hjkPbw/R+0kcGYqRkDKvaK
- fA7Y6dVIKgD3kjRuIeaAzxM3pgxkt2jnv1efR0HN58JM1bRhnOmR84W8CE+BjOzrtbK1
- 86daP0sZJ9Wkw+qcTDrXYA07AT/aLpbyfwkPzeZZOCvs8UIZq1+a3LO66LzfUdKsifl6
- x7ng==
+ bh=G9RjuEFTDqGAEVV++9QrkyJ293hWk4KEZny14qTAfeM=;
+ b=YhZYJPWuxlAYQb6fEiKm49wc6G0QzYi1ai5CciR7IU3+ZTrfl+kJv/NDzCI3wdKjzK
+ LKMYJF8G2E2AZiqu/WKjwRi1tJdHRWLMJh+UkDa7yCfqiZ7+VcxH0n3O+j/w209w/lCP
+ jntGaRuVOhde8hHV1h/248UvD2HTcgLxvX1Jqah12c8acBKo5Yd81JVPvBc7k5QWXxia
+ NHQYZDA408gZKjPY6ejRaoDgRvsXBMahGrGufcD0e8nznxZHLVw0ddeeK28xb+9sFyVw
+ 5OtzGfX8+Bh/11RVQ2dtnqe7KK/ZuJSzXw0J213hABSC57S8ZrLoyS4etKLWAF+/aCpT
+ XEOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYfD/+SVgS5CvGMaR2oHiJFKcvV7sQ35r2vdKcQJd0LYZgK5Me32I/VuDdjVkDeYgGh0KhQZ4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwReXXyXUJxxk2fs7d7IA6nga/tHnmAJ//8fDObQ8tz8ivndiPj
- Irmzc5Xpen7XnHIFt41q+NSAQEkTcgDJFyaOGRBAbW7pT036NBdA713vLqkRE2I9DqhEQ4H5Hgw
- 2oIieslfK9brfkgzVBuDur/7/eJtiwMKyJE6MZ3hz
-X-Gm-Gg: AY/fxX4s9gG6tphXjadPj2Ig8PbwavqIkstRzrlv2q57INdIr36RtuCZpE2OlFKzfok
- 6xsBmQheUmSLuxDMH4fza4PENsBOV6JYTws9hg1bOkkjxkUGLY3g8PuSAnwqkDtahhrjRrqDlv7
- zMu6wA27quusSGjJKJ6WapSn5KaibiyG6qtefLrNV6VwJVy4c7vCF3X4c6I9rIDwPRWoXgG2A8G
- BYXnwBnXdCYTs4VXpcp2t9H+FquzuMC3YBiEUxn1WmvxzaLzdT7lSVR8w13OnOel/gYsQ==
-X-Received: by 2002:a17:907:3d8f:b0:b80:1403:764c with SMTP id
- a640c23a62f3a-b87359a092amr341267866b.24.1768334608536; Tue, 13 Jan 2026
- 12:03:28 -0800 (PST)
+ AJvYcCVHjtyPSmtEkMNrbImb5UESyDYURd3gAyJneZIYa5Pc8Qv7yCejOmiulLpveisPrlFvAXS9ouw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxp8F/oJXbq/L+WlHVSsscui8DLPcpTPvpp14WGXQlf7MYTWLU6
+ GcFw0HL+ATrTvhLL3cQ4FvYeYug6CNukGC4aSPKvWc0158sBOYY9QmOsE4T4WstzELAoUBYvPMc
+ oQ7w279PQ8CC5VVCSearOYf8PK5i57JtTEj01LJIx
+X-Gm-Gg: AY/fxX48/VsC3w/g8Xp+tVZzgoVll79YkE7xBWJmFqsyJtfpYRM195kO+zQ2pdy4kbW
+ LXFGKdyiyFC7UFPfAotz96mlCHF+1v0svcmsC81SHskfZNhhH5s6g41p/KoLYVGE/MxWNHuTCpY
+ ORoPtrud/YvPGrUWAj7Xl6HYinMLaO/X5jN0UMpzjI7Je2kQ+nAb/0YnocI1TMRRaGQsqEND2Q7
+ m1sGZYxlf+l8oBwMMg6z1FCzQcLqwXUK82dwdpnuOqs1kerlEjXmG5zOWb/IiM63wux9A==
+X-Received: by 2002:a17:907:1c26:b0:b83:e7e:372b with SMTP id
+ a640c23a62f3a-b8761278c8bmr23993966b.44.1768334611796; Tue, 13 Jan 2026
+ 12:03:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20260113012037.2566942-1-sean.anderson@linux.dev>
- <20260113012037.2566942-3-sean.anderson@linux.dev>
-In-Reply-To: <20260113012037.2566942-3-sean.anderson@linux.dev>
+References: <20260109070912.4106466-1-balaji.selvanathan@oss.qualcomm.com>
+ <20260109070912.4106466-2-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20260109070912.4106466-2-balaji.selvanathan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Jan 2026 13:03:10 -0700
-X-Gm-Features: AZwV_QiQTfi_uRF1u-xuGabyImmqSB5aS93q1Tv0wk5jj2-9b-o3O2MIFQkDh-g
-Message-ID: <CAFLszTja168RmKqzya-J-vPOLSBs6CnYevEOR+kR_Bn7R3nCOA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] PCI: sandbox: Add PCI bridge emulation
-To: Sean Anderson <sean.anderson@linux.dev>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Peter Robinson <pbrobinson@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Tue, 13 Jan 2026 13:03:11 -0700
+X-Gm-Features: AZwV_Qg7YOQXDDsiSbfBrj1xgRzux0R8EgqNSrkZ8DsKXa_O11fXvWWTncBhMys
+Message-ID: <CAFLszThG18XOn40gQg4ZhHd4=htJbeBdUDXBhoUTZoLEHz7mZA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] disk: Add partition lookup by type GUID
+ functionality
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, trini@konsulko.com, aswin.murugan@oss.qualcomm.com, 
+ joe.hershberger@ni.com, ilias.apalodimas@linaro.org, ravi@prevas.dk, 
+ quic_varada@quicinc.com, quentin.schulz@cherry.de, javier.tia@linaro.org, 
+ simon.glass@canonical.com, marek.vasut+renesas@mailbox.org, 
+ ansuelsmth@gmail.com, michal.simek@amd.com, mwalle@kernel.org, 
+ jan.kiszka@siemens.com, javierm@redhat.com, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,28 +96,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 12 Jan 2026 at 18:21, Sean Anderson <sean.anderson@linux.dev> wrote:
->
-> Add a PCI bridge emulation device. Although real bridges need to be
-> configured in order to forward requests, this happens automatically for
-> now (see arch/sandbox/lib/pci_io.c). So just record the window registers
-> and check them in a test to make sure pci_auto is sane.
->
-> As each bridge consume at least 4k I/O registers, increase the root
-> port's I/O space so we have some left for other devices.
->
-> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
-> ---
->
-> Changes in v3:
-> - New
->
->  arch/sandbox/dts/test.dts        |  35 +++++-
->  arch/sandbox/include/asm/test.h  |   1 +
->  drivers/pci/Makefile             |   2 +-
->  drivers/pci/pci_sandbox_bridge.c | 192 +++++++++++++++++++++++++++++++
->  test/dm/pci.c                    | 142 +++++++++++++++++++++++
->  5 files changed, 370 insertions(+), 2 deletions(-)
->  create mode 100644 drivers/pci/pci_sandbox_bridge.c
+Hi Balaji,
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+On Fri, 9 Jan 2026 at 00:09, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
+>
+> Introduce part_get_info_by_type_guid() function to enable partition
+> lookup using partition type GUID. This complements the existing UUID
+> lookup functionality and provides more flexible partition discovery
+> mechanisms.
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - No changes
+>
+>  disk/part.c    | 39 +++++++++++++++++++++++++++++++++++++++
+>  include/part.h | 21 +++++++++++++++++++++
+>  2 files changed, 60 insertions(+)
+
+Do you feel able to write a test for this? There is a ChromeOS image
+(mmc5.img) which has a lot of GUIDs in it.
+
+root = oftree_root(oftree_default());
+node = ofnode_find_subnode(root, "mmc5");
+ut_assert(ofnode_valid(node));
+ut_assertok(lists_bind_fdt(gd->dm_root, node, &dev, NULL, false));
+
+Then something like:
+
+struct udevice *dev, blk;
+ut_assertok(uclass_get_device_by_seq(UCLASS_MMC, &dev))
+ut_assertok(blk_get_from_parent(dev, &blk));
+
+// it would be better if your function took a struct udevice *, but
+that conversion has not been completed for other functions yet, so up
+to you...
+
+struct blk_desc *desc = mmc_get_blk_desc(struct mmc *mmc)
+
+>
+> diff --git a/disk/part.c b/disk/part.c
+> index 49a0fca6b89..2bc21dd66cc 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -731,6 +731,45 @@ int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+>         return -ENOENT;
+>  }
+>
+> +int part_get_info_by_type_guid(struct blk_desc *desc, const char *type_guid,
+> +                              struct disk_partition *info)
+> +{
+> +       struct part_driver *part_drv;
+> +       int ret;
+> +       int i;
+> +
+> +       if (!IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))
+> +               return -ENOENT;
+> +
+> +       part_drv = part_driver_lookup_type(desc);
+> +       if (!part_drv)
+> +               return -1;
+
+-ENOENT ? We should not return -PERM in an open-coded way
+
+> +
+> +       if (!part_drv->get_info) {
+> +               log_debug("## Driver %s does not have the get_info() method\n",
+> +                         part_drv->name);
+> +               return -ENOSYS;
+> +       }
+> +
+> +       for (i = 1; i < part_drv->max_entries; i++) {
+> +               ret = part_drv->get_info(desc, i, info);
+> +               if (ret != 0) {
+
+if (ret)
+
+> +                       /*
+> +                        * Partition with this index can't be obtained, but
+> +                        * further partitions might be, so keep checking.
+> +                        */
+> +                       continue;
+> +               }
+> +
+> +               if (!strncasecmp(type_guid, disk_partition_type_guid(info), UUID_STR_LEN)) {
+
+long line?
+
+> +                       /* matched */
+> +                       return i;
+> +               }
+> +       }
+> +
+> +       return -ENOENT;
+> +}
+> +
+>  /**
+>   * Get partition info from device number and partition name.
+>   *
+> diff --git a/include/part.h b/include/part.h
+> index daebbbc2e68..85457618cdf 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -327,6 +327,20 @@ int part_get_info_by_name(struct blk_desc *desc, const char *name,
+>  int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+>                           struct disk_partition *info);
+>
+> +/**
+> + * part_get_info_by_type_guid() - Search for a partition by type GUID
+> + *                                among all available registered partitions
+> + *
+> + * @desc:      block device descriptor
+> + * @type_guid: the specified partition type GUID
+> + * @info:      the disk partition info
+> + *
+> + * Return: the partition number on match (starting on 1), -ENOENT on no match,
+> + * otherwise error
+> + */
+> +int part_get_info_by_type_guid(struct blk_desc *desc, const char *type_guid,
+> +                              struct disk_partition *info);
+> +
+>  /**
+>   * part_get_info_by_dev_and_name_or_num() - Get partition info from dev number
+>   *                                         and part name, or dev number and
+> @@ -404,6 +418,13 @@ static inline int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+>         return -ENOENT;
+>  }
+>
+> +static inline int part_get_info_by_type_guid(struct blk_desc *desc,
+> +                                            const char *type_guid,
+> +                                            struct disk_partition *info)
+> +{
+> +       return -ENOENT;
+> +}
+> +
+>  static inline int
+>  part_get_info_by_dev_and_name_or_num(const char *dev_iface,
+>                                      const char *dev_part_str,
+> --
+> 2.34.1
+>
+
+Regards,
+Simon
