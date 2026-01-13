@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4CC2D29DEF
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 09:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1D4D29DF3
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 09:35:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D22C8352B;
-	Tue, 13 Jan 2026 10:13:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D95E8352B;
+	Tue, 13 Jan 2026 10:35:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mKgeFsMc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PfN0uV+m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5394883642; Tue, 13 Jan 2026 10:13:09 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 9CC64835FD; Tue, 13 Jan 2026 10:35:49 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 334FD80077
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:13:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D8F3803F5
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:35:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-42fbbc3df8fso3838794f8f.2
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 01:13:06 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-477ba2c1ca2so80221585e9.2
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 01:35:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768295585; x=1768900385; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768296947; x=1768901747; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=I2Ccrw7jLtcFa8zVz9dESxfFa4PGtpHY3ZMKWE2z1mA=;
- b=mKgeFsMcu3JnagMGEbZxoKkyg3MmIgJx/k1C4tb+nuQOLyBk9U3hvprw6rbrD6qvGJ
- 9rkmzFN19xE8kr8vpzyX4JBNBTMQ9N/K4U6Hk/3UhUG7b9362qnEFTS5w8JKMqOsHtVd
- Go41+WC1MlpsuTWantHJorrmbzJkh6SRPkYIJQq6QSq/HBY89gnVi5Z12JCyUM5tNwN3
- XavAfyuXzJ6Pgdu/ivssTXU8jXn8d5q8lu4lQAJBUS3TEOxihC9WomLVHm6pdqnXIosV
- ZDL7iIv43B6vAz85SwjOi2+xvWyTbvmaQ6Br6tru8xAdllRJUJysNsKr/sWgqq9PEiwQ
- P0MQ==
+ :reply-to; bh=e8WWLX/SULFtiUvfe6J1exf+VT/jxEieTR3bSgISev4=;
+ b=PfN0uV+m1C9TKdWuW/Kdo4MBUTbB4ldiGGtbJge9wvd7f6qtk3+c716wOoheSTXoCf
+ qrXOXKEbIcnFgwrgDBj/W56bPNmgQFjE23yUFb2STiom3vZTlOZAE9yIUXOToPrXdH86
+ SI+Ca953+xSrpsvnKjuRhn71NBNh6zR355U3+WhA15HnjDvufsVflj9jFF/Z4Gl1gHzl
+ GmMqIhHc5l49suGb+YqUFW1R9QoN5EIC5l4GfNsIPcp2P4cEKDcI2A+SALoGNGwLvqYx
+ uaZ6cCbMYEaHqzk+IEPl8kgTqlp815BFkzQjRGAhZJS0Z0R61WgZJTg0dli/hn1vCMlG
+ PwCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768295585; x=1768900385;
+ d=1e100.net; s=20230601; t=1768296947; x=1768901747;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I2Ccrw7jLtcFa8zVz9dESxfFa4PGtpHY3ZMKWE2z1mA=;
- b=rXc7uq0jkXNlPpUqX4ULz+cIe6+/IUXssljoGcLy/d8Gll99d4B0nY+enpJTa/jnu7
- s1VoOzGy6NKYcvk9bsIfiXbXqjeQARiPXjmMWvoEhCt5VTZgOeXE6xM4mCZ+hZdeP+sn
- crprBSj69he7HmlgE0N1BIqimBqNbUFOozyo6bbnCVX5OQJIwWdeM1/je0z0kVvEQdGP
- B+KQxHPGUoMfIqR4+DcfWg5AKza+9+xtZQhlscVudFhG5kjHNdaLY30VV+biSqn8Bmco
- fEDUV/aqiE0V/yo9M8heOOHA08+IWPGAPrGMnHgBFbuASEGshjKjz8c1SGNY1prHLfgO
- 1lTQ==
+ bh=e8WWLX/SULFtiUvfe6J1exf+VT/jxEieTR3bSgISev4=;
+ b=mIxYdNfzWzYWgPQ0BUiUq/lGLdI5ETk7NCaQqtaprQgRDyfG4/8K/hy/hNIoGCJJC1
+ 3VmQCGyV7TLRh3CBiI03IT3y7ADa/hQoitasHEwBtv5iidtV1UrsD6aSxMWvdUDbSEpt
+ Gfx+EJmFDkInIO8hcrcOGI2vu7WvWqBiAwR9hSQ04Y4O4+r9j3LkfNdvdsWt1CPGQLOT
+ ZSxlfKMiB0RdpkxNVObijBOcxc8f6mqqT2ohtEO9eTmxhNaBbxogaRN9EdkH4LYcUXgG
+ lQCl7IVp1NAkaxKajmJWFiHTq9BPXYYTDKB+zS2sRVCWBwPWuOVW2GqoQpm2KO0ZLapX
+ B88g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCxnhyno6NmuccVvh2mJuktGO1TT5v1hM1xxH90YqD+2MfPSqFeyqDCLxjIuvuH2vt0RqYt7I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzO+lwWy4UFtdVb8pn/e0OtntXcP1OeoAeZvT2iwUio4r6GBaEF
- 6SySuUW6PFUCwrKi5QVAz+8GNnzAX5kYr+ni2USC+c3NQrB6YjFV/CEWbXEDjKN+m7c=
-X-Gm-Gg: AY/fxX5G+qZognpCS9zkn5CRgTyNZtSLxDa+Sfz1vD0iL/KtuCvRKPLh+yybkkVXfXy
- LLGM2w9IB+FhTEjatE5DAk+tp7bJSrNxbiSjSI/jz7yTz0HbrMIs3xasRImwvY73S1KM8OkD/0j
- lJLmBFa+ANZdb+PUYldNxCbXhb26q4o1+QTu2f3mS9deGZz0K87tYpuX23lcHCgMRkjwNX5FGfL
- TQGlRW8nFvoAFdRrMo77SOm04BjxWeWqnIhEqhmHESJ+M8gLt0od5KhP4OnDMBqEIVfjyyNUTra
- nnJvqhWBpsfYhU6+jf8CAGKOzKVeFaW8/3GHbP4QPxHds5Mcc1duSgClzIBOppqgMkWkdAYK8Sl
- LbnTbbbkVuNCZKX+U3L2uHpLRJ6/B4gdGiFz1iVUylM21T7QjTQ3GxJAL975v3G6gZvq+/neA/K
- 6UuVXtZKa+oynCC1ufoueYaV+O9IbIJGUiPzh3qp6CCniT6/lhCg==
-X-Google-Smtp-Source: AGHT+IEa2ns3exk0mKhgRv0OtE95qWdaflH7jeYxOGwT3TYVW6TqGpqLnTtUw92A7Qxo8PWWOWF8yg==
-X-Received: by 2002:a05:6000:4387:b0:432:84f9:9802 with SMTP id
- ffacd0b85a97d-432c37a509cmr23522069f8f.49.1768295585304; 
- Tue, 13 Jan 2026 01:13:05 -0800 (PST)
+ AJvYcCWH9T5GLQSzxx3nLEc+F8JM5cJmBX6KcHF1SndO9cxQzq9psgv3XVPAY5pgSs4kA68Ce9u4iEE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZLait6pVDfc6bdSnYCS2D5bzW4/ttcHAhSouU3jg9SpUMa/bx
+ M6i8SQmFADHH6potb0z3Wgcs9UPAzJyf/D6pp7PbZyyiof8wOqDFqkkOBUB+qqNcx7o=
+X-Gm-Gg: AY/fxX4M59vv0ngGetQWTQDW9T9TLC3nUUwdbAhYb22/cIl5/L9JD+66X5j5uP5idui
+ TrjQAbGHL2yWLsK/LvOJcOMbWmTNEkF7ftH6lwOHkD2h7Fiw3kkG8C148YvHM1yiAL8JnSSQRXx
+ fY73iqVzW9R2ay+pF9xEKsFOz/Vcw10deptUXr7uy8MsAdDNDWYjQQf4YlFUf5Egdur2Lc4nWfh
+ PRnnwysFM2r+S7RMXfiUzUVF2sUEft/hZt4sIoL6FzdDU8+3wx27n6irwBsYkVayxMJTTpvdTOj
+ K2BAyq7nHunUfZMsa+0pdYPuLj83K0Ll5xjk5uOMG+EI2nYcPI0tBHqof/erxmaaRmXKM6OW/gL
+ eMeman+gLC1x+3t1YJnYG1SI6n5OGXM3tcdlwznqRCTx5xDzi2LeTx0uXMyDZMaN+eIfpQD/569
+ ixvBX4+m18nFXEENygHcMM5pdurBp7+UkFdRbSQmU=
+X-Google-Smtp-Source: AGHT+IHT2qu/QuQFklET8hgS7j9SN4DWXSJA4FByCVxVre+GC19uBeVnr1t+pfsgGeTZXWZ8Bd7zTw==
+X-Received: by 2002:a05:600c:1392:b0:46e:4a30:2b0f with SMTP id
+ 5b1f17b1804b1-47d84b3863fmr237056135e9.29.1768296946610; 
+ Tue, 13 Jan 2026 01:35:46 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080::fa42:7768?
  ([2a01:e0a:3d9:2080::fa42:7768]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd5ee24esm42769797f8f.33.2026.01.13.01.13.04
+ 5b1f17b1804b1-47d7f68f69dsm393683665e9.1.2026.01.13.01.35.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jan 2026 01:13:05 -0800 (PST)
-Message-ID: <4c3e8adb-8270-43a7-8ed3-ce753b7ed088@linaro.org>
-Date: Tue, 13 Jan 2026 10:13:04 +0100
+ Tue, 13 Jan 2026 01:35:46 -0800 (PST)
+Message-ID: <65071031-daea-4913-aa0f-5c072aaf362d@linaro.org>
+Date: Tue, 13 Jan 2026 10:35:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2] arm: dts: qcom: Add reserved memory regions and EFI
- memory mapping
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
- casey.connolly@linaro.org, sumit.garg@kernel.org, me@samcday.com,
- sughosh.ganu@linaro.org, gchan9527@gmail.com, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20260113090621.3402096-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/3] power: regulator: common: remove unnecessary debug
+ trace
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Tanmay Kathpalia
+ <tanmay.kathpalia@altera.com>, Ye Li <ye.li@nxp.com>,
+ Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ David Lechner <dlechner@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+References: <20260108-power-regulator-fix-compilation-v2-0-b00cb3268059@baylibre.com>
+ <20260108-power-regulator-fix-compilation-v2-1-b00cb3268059@baylibre.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -113,7 +116,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260113090621.3402096-1-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20260108-power-regulator-fix-compilation-v2-1-b00cb3268059@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,214 +136,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On 1/13/26 10:06, Balaji Selvanathan wrote:
-> Add reserved-memory nodes to QCS615 and QCS6490 device trees to
-> define platform-specific memory regions that should not be used by
-> the operating system.
-
-So, please explain why those are not in the Linux upstream DT which is
-synced at every U-Boot release, and why the reserved-memory is totally
-different from the Linux upstream arch/arm64/boot/dts/qcom/talos.dtsi ?
-
+On 1/8/26 15:42, Julien Stephan wrote:
+> Drop the ftrace like debug() that checkpatch --strict complains about:
 > 
-> Implement efi_add_known_memory() function in board.c code to
-> parse reserved-memory nodes from device tree and register them with
-> the EFI memory map. This ensures proper memory protection during EFI
-> boot and prevents conflicts with firmware-reserved regions.
+>    WARNING: Unnecessary ftrace-like logging - prefer using ftrace
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
-> Changes in v2:
-> - Instead of adding reserved region info in a new
->    qcom_reserved_memory.c file, added the regions to reserved memory
->    node in override dts.
-> - Link to v1: https://lore.kernel.org/u-boot/20260107091406.2428132-1-balaji.selvanathan@oss.qualcomm.com/
-> ---
->   arch/arm/dts/qcs615-ride-u-boot.dtsi     | 56 +++++++++++++++++++++++
->   arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 26 +++++++++++
->   arch/arm/mach-snapdragon/board.c         | 58 ++++++++++++++++++++++++
->   3 files changed, 140 insertions(+)
+>   drivers/power/regulator/regulator_common.c | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> index 68fffc70fcb..ec607061ba0 100644
-> --- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> +++ b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> @@ -11,4 +11,60 @@
->   		      <0x0 0xc0000000 0x0 0xc0000000>,
->   		      <0x1 0x80000000 0x1 0x00000000>;
->   	};
-> +
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
-> +
-> +		hyp_mem: hyp@80000000 {
-> +			reg = <0x0 0x80000000 0x0 0x600000>;
-> +			no-map;
-> +		};
-> +
-> +		xbl_boot_mem: xbl-boot@85d00000 {
-> +			reg = <0x0 0x85d00000 0x0 0x200000>;
-> +			no-map;
-> +		};
-> +
-> +		aop_mem: aop@85f00000 {
-> +			reg = <0x0 0x85f00000 0x0 0x20000>;
-> +			no-map;
-> +		};
-> +
-> +		xbl_dt_mem: xbl-dt@85f40000 {
-> +			reg = <0x0 0x85f40000 0x0 0x30000>;
-> +			no-map;
-> +		};
-> +
-> +		tz_stat_mem: tz-stat@86200000 {
-> +			reg = <0x0 0x86200000 0x0 0x100000>;
-> +			no-map;
-> +		};
-> +
-> +		tags_mem: tags@86300000 {
-> +			reg = <0x0 0x86300000 0x0 0x1200000>;
-> +			no-map;
-> +		};
-> +
-> +		tz_mem: tz@87500000 {
-> +			reg = <0x0 0x87500000 0x0 0x500000>;
-> +			no-map;
-> +		};
-> +
-> +		tzapps_mem: tzapps@87a00000 {
-> +			reg = <0x0 0x87a00000 0x0 0x1c00000>;
-> +			no-map;
-> +		};
-> +
-> +		pil_mem: pil@8ab00000 {
-> +			reg = <0x0 0x8ab00000 0x0 0xcc17000>;
-> +			no-map;
-> +		};
-> +
-> +		secure_dsp_mem: secure-dsp@a0000000 {
-> +			reg = <0x0 0xa0000000 0x0 0x1600000>;
-> +			no-map;
-> +		};
-> +	};
->   };
-> diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> index 8d4871135fa..cf6de0036d5 100644
-> --- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> +++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> @@ -15,6 +15,32 @@
->   		      <0 0xC3400000 0 0x3CC00000>,
->   		      <1 0x00000000 1 0x00000000>;
->   	};
-> +
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
-> +
-> +		axon_dma_mem: axon-dma@80600000 {
-> +			reg = <0x0 0x80600000 0x0 0x100000>;
-> +			no-map;
-> +		};
-> +
-> +		xbl_dt_mem: xbl-dt@80894000 {
-> +			reg = <0x0 0x80894000 0x0 0x40000>;
-> +			no-map;
-> +		};
-> +
-> +		pil_reserved_mem: pil-reserved@84300000 {
-> +			reg = <0x0 0x84300000 0x0 0x16b00000>;
-> +			no-map;
-> +		};
-> +
-> +		display_mem: display@e1000000 {
-> +			reg = <0x0 0xe1000000 0x0 0x2400000>;
-> +			no-map;
-> +		};
-> +	};
->   };
+> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+> index 685d8735fa5c9a6f98cb6154cd13afcabaeab1ac..ce3d80670de045dde7e263c5301bccd744abd2f5 100644
+> --- a/drivers/power/regulator/regulator_common.c
+> +++ b/drivers/power/regulator/regulator_common.c
+> @@ -98,7 +98,6 @@ int regulator_common_set_enable(const struct udevice *dev,
 >   
->   &usb_1 {
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 5fb3240acc5..f32d29a9242 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -19,8 +19,10 @@
->   #include <dm/uclass-internal.h>
->   #include <dm/read.h>
->   #include <power/regulator.h>
-> +#include <efi_loader.h>
->   #include <env.h>
->   #include <fdt_support.h>
-> +#include <fdtdec.h>
->   #include <init.h>
->   #include <linux/arm-smccc.h>
->   #include <linux/bug.h>
-> @@ -709,6 +711,62 @@ static void carve_out_reserved_memory(void)
->   	}
->   }
+>   	if (enable && plat->startup_delay_us)
+>   		udelay(plat->startup_delay_us);
+> -	debug("%s: done\n", __func__);
 >   
-> +/**
-> + * efi_add_known_memory() - Add platform-specific reserved memory to EFI map
-> + *
-> + * This function is called by the EFI memory initialization code to allow
-> + * platforms to add their reserved memory regions to the EFI memory map.
-> + * For Qualcomm platforms, this parses the reserved-memory nodes from the
-> + * device tree and adds them to the EFI memory map.
-> + */
-> +void efi_add_known_memory(void)
-> +{
-> +	ofnode parent, node;
-> +	fdt_addr_t addr;
-> +	fdt_size_t size;
-> +	const char *name;
-> +
-> +	if (!IS_ENABLED(CONFIG_EFI_LOADER))
-> +		return;
-> +
-> +	/* Parse reserved-memory nodes from device tree */
-> +	parent = ofnode_path("/reserved-memory");
-> +	if (!ofnode_valid(parent)) {
-> +		log_debug("No reserved-memory node found in device tree\n");
-> +		return;
-> +	}
-> +
-> +	log_debug("Adding reserved-memory regions to EFI memory map\n");
-> +
-> +	ofnode_for_each_subnode(node, parent) {
-> +		if (!ofnode_is_enabled(node))
-> +			continue;
-> +
-> +		addr = ofnode_get_addr_size_index(node, 0, &size);
-> +		if (addr != FDT_ADDR_T_NONE) {
-> +			efi_status_t ret;
-> +
-> +			name = ofnode_get_name(node);
-> +			ret = efi_add_memory_map(addr, size,
-> +						 EFI_RESERVED_MEMORY_TYPE);
-> +
-> +			if (ret != EFI_SUCCESS) {
-> +				log_err("Failed to reserve %s (0x%llx-0x%llx): %lu\n",
-> +					name ? name : "unknown",
-> +					(unsigned long long)addr,
-> +					(unsigned long long)(addr + size),
-> +					ret & ~EFI_ERROR_MASK);
-> +			} else {
-> +				log_debug("Reserved %s: 0x%llx-0x%llx (%llu KB)\n",
-> +					  name ? name : "unknown",
-> +					  (unsigned long long)addr,
-> +					  (unsigned long long)(addr + size),
-> +					  (unsigned long long)(size / 1024));
-> +			}
-> +		}
-> +	}
-> +}
-> +
->   /* This function open-codes setup_all_pgtables() so that we can
->    * insert additional mappings *before* turning on the MMU.
->    */
+>   	if (!enable && plat->off_on_delay_us)
+>   		udelay(plat->off_on_delay_us);
+> 
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks,
+Neil
