@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC9FD2F33D
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 16:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F49D2F33D
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 16:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84F4C80B98;
-	Tue, 13 Jan 2026 17:13:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80D8D808AF;
+	Tue, 13 Jan 2026 17:13:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XW3t4wiL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cl+ZVBJ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7FFA803F5; Tue, 13 Jan 2026 17:13:25 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 4BB76808AF; Tue, 13 Jan 2026 17:13:27 +0100 (CET)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B984880433
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 17:13:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F87B80B98
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 17:13:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-65d132240acso4721680eaf.1
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 08:13:22 -0800 (PST)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-65b73eacdfcso1753852eaf.2
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 08:13:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768320801; x=1768925601; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768320802; x=1768925602; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rV+30G+m+QGZJiE8qL5xyzjpid/BZx09Db4YB8er4VI=;
- b=XW3t4wiL9bx1jhfS7kXeS9UBdpj5ZNlnNtGf9IagZGo0PRloQ5kPL81Iu571lERRck
- vhkw0KyyVGc/5cS/MPhCvdRkBhCU3eMlUIT6yPW7+PVVn+30dwA1SoGjrJplmJHFjbhb
- X7P0CAuIorQ8xzpmj7JMVX+2kuIznQ4JDlXfo=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2MjZGTMU+82Y3HjPlLF/7b1Hpv/CSdyZTHOcMZz7x4o=;
+ b=Cl+ZVBJ6O/jptCJOxmvdP755EIgN0poPgJHGtTM8TcI6qi/8oJSAxtiNaWqOb9kNzz
+ DnkK7AAZuXZ9pz0tVaxeUHp6nPWAYwy4cu3+3HV69L374uGtAazpFuu29Nk4k2YMr7QO
+ Q1Hup0XnQm6oLiZisDOQBcTgrXXho0uS13GEQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768320801; x=1768925601;
+ d=1e100.net; s=20230601; t=1768320802; x=1768925602;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=rV+30G+m+QGZJiE8qL5xyzjpid/BZx09Db4YB8er4VI=;
- b=fLGc2TGJy9yWniCuw7ovpAINuzxKx0xU21ML459Xt6hC6cPnHjsnPXnYdSKaZ5TMok
- tWm5uZw4xLdPNP8isAZECypw4AYmU+gPD1MnaNDb7rrU5KRC0DhlEPwgIqPynx5Mce5f
- 5neu2ka8JYrxhSf9sQyYKr4Atk2ULWpGt8zXsouHC/6yLkP4uXf4daZ9yo7jeZtMiQNf
- nui8hV1WPu1X6IfpeLFIhTIR2K5F+WWRp+eshiaQn8hDJPfiGN/1dEIqr3UCCvLiGXRS
- U6vA5ZIQDFUn7kPmfCYMxTIiOhP6VS8Lgb9RooVS7cJfMGIMASHkI/vQhbHFjCefqt7C
- JEzg==
-X-Gm-Message-State: AOJu0YxeFTbITS3wBzd1tXvNCPjoftYbUQ/xNfRVgtr+EvJrvHPGD2sH
- id6F4l8q4yxQUlNudfaAvZR/KHw8Aq1cphvGRsrZnZ74Nh/nL+OfN27r/5V2aDUzzoANo9abalq
- g0TC2Oas=
-X-Gm-Gg: AY/fxX5ZyKv2mXNMGlc/LzbErm9kK5uu2p3Dbf0HslyjGfXnX8JcyLCBc/jI83PRWD7
- y/ysSCmKGo3+X+UzekMrT7YmrVghDyFatiWcaDFlLViodI4x1SRsi/pZybO9zvoYRtzRJhaTStG
- PNR5mk5GO/FUIcfOlyBxFje1JfOKe9J79G055z+LeKs5pUnQ/1oVrwve0bgHYGZb491AsDoqa/w
- OD23UbFLPLLCz/WsuNe+vEv9TBsIEOG21BsV5JFey4D69yW71A9ALGmcK0xq9TZnHju7vHxJGle
- MFYpN0bNDFi6I4uL465fCSf//e+ijq9ZouxMbk0IA3xG0K3prFWgJiD0GVqwwTvrW8NfyhAbNou
- k1r/dWeWGj3/KbyHfF7bWEhSkQOWdhwgU05IP9Ei9r47JRBoX4UtQRanxFQsmaO7D6UIEFTsiMi
- IEJkZnN0mvGOdHqkrNFzekDsU8ayvFoHQbEKwKvW8ubX2sSnSIe6s+PqEOuQSf+zJay4ZDUiFxF
- k+b7V9V8wS2CSHqfZmdJe9JsyWaFo3UYc7i+w==
-X-Google-Smtp-Source: AGHT+IFktfAw7XZ4fKJR0iq/2DxGb+eLvCleRm1qzIfoS/EkC3C4aCJ9gBbtNmWjSbx/ynVC1yUyrw==
-X-Received: by 2002:a4a:c311:0:b0:65d:1e7:9527 with SMTP id
- 006d021491bc7-65f54f52631mr8528717eaf.51.1768320801365; 
- Tue, 13 Jan 2026 08:13:21 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2MjZGTMU+82Y3HjPlLF/7b1Hpv/CSdyZTHOcMZz7x4o=;
+ b=N7SX7hYvS9U3Dxxd1iZkmpjV4lJoq1ViKbbM/ei2aS85kOGEZvqdzj2h1gGRhGeC+3
+ iiGioLKCrnuCJg7xyOqBBm8Ne/8FSnvYKNUPAHCQmtAToGigmdAjZ8dCDQEvdAi692Gw
+ 6kqN1v95u65LE8/N5RH02ZA//gk60YrXSR5tqj6JKvqfmAQMgn4nGtHoyaOs0bPyRIlB
+ LNeR0vee3KhnEmde+7aPezXOcStsjgCzqXmkQvNbCEzbvtshVrFoLXFIF2gBbxARy3TR
+ u+3FjHK0JZnl7H5X9Hiq0T4xgsXeAKSAg2qK652AZ1CufXiCg1IZCBc2We5OLuH/qDtt
+ pF2g==
+X-Gm-Message-State: AOJu0YyuUgkQlKJ8HFiaqhRqJ79XOl6XunwRe0h2UuN+nxdvciK5szaP
+ 3taYDg6lHm67U9h7DFZ6mF/KmF4qPaOvyWZoKWQFHAWHGqRMd82JpZ+4r5OJ5ZBfGt0=
+X-Gm-Gg: AY/fxX7DeDMDeRSEwhnpq7mVqHPv3dCO6a9MuuaIwo2q1uE3T3lkAQIobNq60ynYYBO
+ x3V/GsfvYR7yfbCxfr9zgiFeDyZ/Es8jHTU0D56YPinsOHHNdnvwbqMftz/a9zMnHilNOdeGJtT
+ zL6FIdkmIy4nY5BFwR4DQc5aJg+rAM04uYGKcRPAaGHnAN9IAiyn34Yb2sZtOmlKtloUMHMXNiE
+ uWHIeiPOiu72pmslpD7IY3SmMQvb3EWsXOJDWRU94VNV5YUMASlIdxl4qStWVYeCH9ui+Bpkp0Z
+ d05eR62u5mHxVFENdLNJAulhBAN/oeoQnOMhFFvGkk+xFkBT7A7/iCPxrfvm7xfYmHzK6VMhyqW
+ JAq3KoP3A0MNrFVLPIiPHJvUWmjcsAVGigrVdA7ElcL6LAfDL+A8RBVbcKyrdBTRXh+LZlmXRhK
+ P4SRCmbKi/tble1pFWMncqrFI9BP5auumSHgJglH15p0xWnwhHy9K+JyUzZWXfH7g6vqfp+U77T
+ YGq2S7a/RY648kGZ0eqztVn3bEHqEFQTPSTRw==
+X-Google-Smtp-Source: AGHT+IFjOBFkB9wEbD6KSDoW0jHSH+6Cf2wIHeXmYv7+bHfkZzZI9/lNFeVkGPUGpy2OB+qHYAd+bw==
+X-Received: by 2002:a05:6820:4d5c:10b0:65f:5296:8558 with SMTP id
+ 006d021491bc7-65f54f79fe6mr8336092eaf.63.1768320802153; 
+ Tue, 13 Jan 2026 08:13:22 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65f48ccff66sm8575162eaf.16.2026.01.13.08.13.20
+ 006d021491bc7-65f48ccff66sm8575162eaf.16.2026.01.13.08.13.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Jan 2026 08:13:20 -0800 (PST)
+ Tue, 13 Jan 2026 08:13:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-In-Reply-To: <20260101-immap-size-v2-1-31f15acea735@posteo.net>
-References: <20260101-immap-size-v2-1-31f15acea735@posteo.net>
-Subject: Re: [PATCH v2] powerpc: mpc83xx: Check the size of peripheral structs
-Message-Id: <176832080050.2039494.16292650485288619048.b4-ty@konsulko.com>
-Date: Tue, 13 Jan 2026 10:13:20 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20260103001759.182898-1-marek.vasut+renesas@mailbox.org>
+References: <20260103001759.182898-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] misc: Add fixed-layout support
+Message-Id: <176832080148.2039494.423415495170852185.b4-ty@konsulko.com>
+Date: Tue, 13 Jan 2026 10:13:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,22 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 01 Jan 2026 17:41:55 +0100, J. Neuschäfer wrote:
+On Sat, 03 Jan 2026 01:17:31 +0100, Marek Vasut wrote:
 
-> Peripheral registers on MPC83xx-series chips are declared in
-> immap_83xx.h as a set of structs that ultimately fill the entire MMIO
-> space of 1 MiB. This patch introduces a compile-time check of the size
-> of each peripheral struct. The purpose of these checks is two-fold:
+> The "fixed-layout" nvmem controller subnode used to be optional wrapper
+> around nvmem controller cells subnodes. The "fixed-layout" node is now
+> mandatory in most cases, but in order to support both recent and legacy
+> DTs, both variants have to be supported.
 > 
-> 1. To quickly tell readers of the code the total size of each struct
-> 2. To verify that the size does not change when a struct is edited
+> Implement support for the "fixed-layout" node in the most trivial manner,
+> check whether the nvmem cell supernode is compatible with "fixed-layout"
+> and if it is, proceed one level above it to find the nvmem controller.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] powerpc: mpc83xx: Check the size of peripheral structs
-      commit: 0b97991fa0e706ca4d9ba274ba9d06f43e4ee9ad
+[1/1] misc: Add fixed-layout support
+      commit: 6014f87b03d2c54e34aa574dcec375804c030860
 -- 
 Tom
 
