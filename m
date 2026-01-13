@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88583D29DC2
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 04:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55942D29DC2
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 04:04:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A488839D7;
-	Tue, 13 Jan 2026 05:03:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 657EA839AC;
+	Tue, 13 Jan 2026 05:03:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95C5383981; Tue, 13 Jan 2026 05:03:06 +0100 (CET)
+ id 51169839B1; Tue, 13 Jan 2026 05:03:09 +0100 (CET)
 Received: from smtp.gentoo.org (mail.gentoo.org
  [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAAC683981
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 05:03:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F1EC83981
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 05:03:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
@@ -26,15 +26,15 @@ Received: from ofovo.local (unknown [116.232.18.222])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 23E51340F21;
- Tue, 13 Jan 2026 04:02:59 +0000 (UTC)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 492703415D9;
+ Tue, 13 Jan 2026 04:03:03 +0000 (UTC)
 From: Yixun Lan <dlan@gentoo.org>
-Date: Tue, 13 Jan 2026 12:02:01 +0800
-Subject: [PATCH v3 7/9] pinctrl: sunxi: a733: add initial support
+Date: Tue, 13 Jan 2026 12:02:02 +0800
+Subject: [PATCH v3 8/9] sunxi: mmc: enable support for A733
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260113-01-a733-soc-support-v3-7-f19dcd098f60@gentoo.org>
+Message-Id: <20260113-01-a733-soc-support-v3-8-f19dcd098f60@gentoo.org>
 References: <20260113-01-a733-soc-support-v3-0-f19dcd098f60@gentoo.org>
 In-Reply-To: <20260113-01-a733-soc-support-v3-0-f19dcd098f60@gentoo.org>
 To: u-boot@lists.denx.de
@@ -44,22 +44,22 @@ Cc: linux-sunxi@lists.linux.dev, Andre Przywara <andre.przywara@arm.com>,
  Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
  Yixun Lan <dlan@gentoo.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4191; i=dlan@gentoo.org;
- h=from:subject:message-id; bh=v4cmAUCWHJ7wl5gwYnVwiydN+jiMCqsmcg+HcBRgsc4=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBpZcPUv8QW/siW1nkt4CxgzgyilVsFGqpSwV6dm
- sGr7s1SeIWJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaWXD1BsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2304; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=aGAs16rTNFSV2vDDe3NjxY83UXrzKy1GteqtbgSSs78=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBpZcPXasiiNgOKZMdw06RcW5N1c7xXdE54rekzu
+ Tyjz2XBe5WJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaWXD1xsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMSwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+1tTg/9GtC9HdC+8lnI864cSnuanHbu5QEv+R6F1PmZbRcv6+BemTAkmXgtC
- PGX/ld9s/CG7E9cybIGBTJheyn/oplSZHZsMEwWi60Qo5khV3lMcA9cULDlzOTdeS+YrkzD/Jk6
- Z7ZIs0VFAGQ9BeV3fNPXc2tSpzRtppen8MDU2uNMAhoE6Ok5t90hMvLMsFZSG5XIlQ4PjdTs79A
- B6TOlfZ8KgkRS4cSmPDaFIBb3kQKAnR+hVZKcVSUK1qOXJWkVN1RESO/mqrd5gDEKuWkXu+7z8Q
- bRVyxlaDCEviwewZ7dg5YGcMHGB7vQRLaX+nBU0PCX5sRyWKqx5aBie3JQ1eU7RA8gNF2mmhF79
- DLcqZhNgOiUDWXKCzp6S0hoaFiTIO+8SHL6FaTeWhHbK7sUjBSYbT9ISUAOfRk8j8PDGUmJWUxj
- k3mS/e23v95H6MMTlx9DIcELX6n4fIgEMFlw3lPEZTJZai6I/bY0tj7grMa1OAjxOe7syHYtpgP
- 6maU03M1s4FXmbliBjye58N6TQZ6hwLfCT2ga0OT4WGWjoqGpyFJxXxPAapAjgJ7cuXEoZWjavi
- gnRuvyukB/jZrCWOcs0mMc9pj8C4jrhOXdragmhC6IBamHXQDHnoQdVTtSlhO9Tmjb/3qJkvPbi
- WFcD/E4FU8uPu+4V4Pr/9VjcuunBgw=
+ QACgkQMarqR1lNu+21VxAAhjwSex2Zq0236we9xLACuOEYYOXZ9yLWJ8eYHb4w+cFIjrgSqfg+F
+ elUf5+fCgfB7IJn1x/eiyreQMvbDIbvAVQQdVq+lQpQZtXuXI/5vczEUqgvPOBngcZqeVKsgE/Q
+ 2DleRynO3w3Ga8fSfEcJY3IfM02iGXIJpzhXgqVyImUHtY+lUsm23tGt1K0OVNmJb3QhfA1e7FD
+ Q4IshrzIwdQLZkay5KBZRANCDJBcPgoR3UCJfhCdVK6q9cjigABKKuMl6QsXsy+YUmV7MKAHjqf
+ 02jZGweVJACHgREcnCPPFyIKHo2siWrOxbVvUgEgl27tf483q8L6BwWFI9Nvdcm4ZNWuPUZbcKF
+ kUN2b6sBbAXgCceICb8PXUZm+QmP0Q3HFw/Rz8fT+EKq5CifJnshDLfQgifceU45ZQ2e7E8PLHa
+ M33xzbGjq5Ciw69OQI7xYUWjl7hzzrHgtP0VtAlEdiHgHaSQ0jeNObTBE4QJZstMUuvwmfZ74jD
+ Ts6nSgOlK8CixeOPmyWUrKErVo2fBF2GtINcbZ8XjPU3qsAs4ZewSYkohofGoz/2MWkwqr3XGaQ
+ tbNYA8Fi7498/JS8uC0/XNhrzXeRBcHa9vQQcvHmR2mxapm9lxtFMxD2rHlW+fafaBQ+G8mv6gX
+ 1g8p80thlPxMrfX0CXizjDwscdqv9k=
 X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
@@ -78,133 +78,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce pinctrl driver for A733 SoC, but only limited devices are
-supported which includes GMAC, MMC, SPI, UART.
-
-Setup an offset 0x80 for virtual PA port, as A733 changes the register
-layout, with this adjustment, all other ports can be found correctly.
+Minor clock adjustment for new A733 MMC controller, the SMHC0_CLK_REG
+start at offset 0x400, and with step size of 0x10.
 
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
 ---
- drivers/pinctrl/sunxi/Kconfig         | 10 ++++++
- drivers/pinctrl/sunxi/pinctrl-sunxi.c | 57 ++++++++++++++++++++++++++++++++++-
- 2 files changed, 66 insertions(+), 1 deletion(-)
+ drivers/mmc/sunxi_mmc.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
-index 54314992299..0e48a71e8b5 100644
---- a/drivers/pinctrl/sunxi/Kconfig
-+++ b/drivers/pinctrl/sunxi/Kconfig
-@@ -149,4 +149,14 @@ config PINCTRL_SUN55I_A523_R
- 	default MACH_SUN55I_A523
- 	select PINCTRL_SUNXI
- 
-+config PINCTRL_SUN60I_A733
-+	bool "Support for the Allwinner A733 PIO"
-+	default MACH_SUN60I_A733
-+	select PINCTRL_SUNXI
+diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+index e28c81afffe..d7dbe1c27ed 100644
+--- a/drivers/mmc/sunxi_mmc.c
++++ b/drivers/mmc/sunxi_mmc.c
+@@ -112,6 +112,9 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
+ 			if (priv->mmc_no == 2)
+ 				pll_hz *= 2;
+ 		}
 +
-+config PINCTRL_SUN60I_A733_R
-+	bool "Support for the Allwinner A733 R-PIO"
-+	default MACH_SUN60I_A733
-+	select PINCTRL_SUNXI
-+
- endif
-diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-index fd357ab0d4e..b6c901f14c1 100644
---- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-+++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-@@ -30,6 +30,7 @@ struct sunxi_pinctrl_function {
++		if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
++			pll_hz /= 3;
+ 	}
  
- struct sunxi_pinctrl_desc {
- 	const struct sunxi_pinctrl_function	*functions;
-+	u32					pio_offset;
- 	u8					num_functions;
- 	u8					first_bank;
- 	u8					num_banks;
-@@ -195,7 +196,7 @@ static int sunxi_pinctrl_bind(struct udevice *dev)
- 		return -EINVAL;
- 	dev_set_priv(dev, desc);
+ 	div = pll_hz / hz;
+@@ -167,7 +170,8 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
+ 	}
  
--	plat->base = dev_read_addr_ptr(dev);
-+	plat->base = dev_read_addr_ptr(dev) + desc->pio_offset;
+ 	/* The A523 has a second divider, not a shift. */
+-	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
++	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523) ||
++	    IS_ENABLED(CONFIG_MACH_SUN60I_A733))
+ 		n = (1U << n) - 1;
  
- 	ret = device_bind_driver_to_node(dev, "gpio_sunxi", dev->name,
- 					 dev_ofnode(dev), &gpio_dev);
-@@ -782,6 +783,32 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_pinctrl_desc =
- 	.num_banks	= 11,
+ 	writel(CCM_MMC_CTRL_ENABLE| pll | CCM_MMC_CTRL_N(n) |
+@@ -661,15 +665,25 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
+ 	.get_cd		= sunxi_mmc_getcd,
  };
  
-+static const struct sunxi_pinctrl_function sun60i_a733_pinctrl_functions[] = {
-+	{ "gpio_in",	0 },
-+	{ "gpio_out",	1 },
-+	{ "gmac0",	5 },	/* PH0-PH15 */
-+	{ "gmac1",	5 },	/* PJ0-PJ15 */
-+	{ "mmc0",	2 },	/* PF0-PF5 */
-+	{ "mmc1",	2 },	/* PG0-PG5 */
-+	{ "mmc2",	3 },	/* PC0, PC1, PC5, PC6, PC8-PC11, PC13-PC16 */
-+	{ "mmc3",	4 },	/* PC0, PC1, PC5, PC6, PC8-PC11, PC13-PC16 */
-+	{ "spi0",	5 },	/* PC2-PC4, PC7, PC12 */
-+#if IS_ENABLED(CONFIG_UART0_PORT_F)
-+	{ "uart0",	3 },	/* PF2, PF4 */
-+#else
-+	{ "uart0",	2 },	/* PB9, PB10 */
-+#endif
-+	{ "uart1",	2 },	/* PG6, PG7 */
-+};
+-static unsigned get_mclk_offset(void)
++static unsigned int get_mclk_offset(int mmc_no)
+ {
++	unsigned int size, offset;
 +
-+static const struct sunxi_pinctrl_desc __maybe_unused sun60i_a733_pinctrl_desc = {
-+	.functions	= sun60i_a733_pinctrl_functions,
-+	.pio_offset	= SUNXI_PIO_OFFSET,
-+	.num_functions	= ARRAY_SIZE(sun60i_a733_pinctrl_functions),
-+	.first_bank	= SUNXI_GPIO_A,
-+	.num_banks	= 11,
-+};
-+
- static const struct sunxi_pinctrl_function sun50i_h616_r_pinctrl_functions[] = {
- 	{ "gpio_in",	0 },
- 	{ "gpio_out",	1 },
-@@ -847,6 +874,21 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_r_pinctrl_desc
- 	.num_banks	= 2,
+ 	if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
+-		return 0x410;
++		offset = 0x410;
++	else if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
++		offset = 0xd00;
++	else if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
++		offset = 0x830;
++	else
++		offset = 0x88;
+ 
+-	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+-		return 0x830;
++	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
++		size = 0x10;
++	else
++		size = 0x4;
+ 
+-	return 0x88;
++	return offset + size * mmc_no;
  };
  
-+static const struct sunxi_pinctrl_function sun60i_a733_r_pinctrl_functions[] = {
-+	{ "gpio_in",	0 },
-+	{ "gpio_out",	1 },
-+	{ "r_i2c0",	2 },	/* PL0-PL1 */
-+	{ "r_uart0",	3 },	/* PL2-PL3 */
-+	{ "r_uart1",	2 },	/* PL2-PL3 */
-+};
-+
-+static const struct sunxi_pinctrl_desc __maybe_unused sun60i_a733_r_pinctrl_desc = {
-+	.functions	= sun60i_a733_r_pinctrl_functions,
-+	.num_functions	= ARRAY_SIZE(sun60i_a733_r_pinctrl_functions),
-+	.first_bank	= SUNXI_GPIO_L,
-+	.num_banks	= 2,
-+};
-+
- static const struct udevice_id sunxi_pinctrl_ids[] = {
- #ifdef CONFIG_PINCTRL_SUNIV_F1C100S
- 	{
-@@ -1034,6 +1076,19 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
- 		.data = (ulong)&sun55i_a523_r_pinctrl_desc,
- 	},
- #endif
-+
-+#ifdef CONFIG_PINCTRL_SUN60I_A733
-+	{
-+		.compatible = "allwinner,sun60i-a733-pinctrl",
-+		.data = (ulong)&sun60i_a733_pinctrl_desc,
-+	},
-+#endif
-+#ifdef CONFIG_PINCTRL_SUN60I_A733_R
-+	{
-+		.compatible = "allwinner,sun60i-a733-r-pinctrl",
-+		.data = (ulong)&sun60i_a733_r_pinctrl_desc,
-+	},
-+#endif
- 	{}
- };
+ static int sunxi_mmc_probe(struct udevice *dev)
+@@ -707,7 +721,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
+ 	ccu_reg = (u32 *)(uintptr_t)ofnode_get_addr(args.node);
  
+ 	priv->mmc_no = ((uintptr_t)priv->reg - SUNXI_MMC0_BASE) / 0x1000;
+-	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * 4;
++	priv->mclkreg = (void *)ccu_reg + get_mclk_offset(priv->mmc_no);
+ 
+ 	ret = clk_get_by_name(dev, "ahb", &gate_clk);
+ 	if (!ret)
 
 -- 
 2.52.0
