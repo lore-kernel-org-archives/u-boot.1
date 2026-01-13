@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE03CF45D4
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 01:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A753CF45C6
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 01:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F3B183700;
+	by phobos.denx.de (Postfix) with ESMTP id DF3A5838E6;
 	Tue, 13 Jan 2026 02:21:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="KsqpXtHe";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="v5fdZ34Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F5348388D; Tue, 13 Jan 2026 02:21:25 +0100 (CET)
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com
- [IPv6:2001:41d0:203:375::ab])
+ id C1E4B8389A; Tue, 13 Jan 2026 02:21:26 +0100 (CET)
+Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com
+ [95.215.58.181])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD79E8382A
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:21:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 986DA83700
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:21:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1768267282;
+ t=1768267284;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3IyEJfSRnQtccxKUWafkbkujLyB3+ENvMoTiolJ1ZaU=;
- b=KsqpXtHexedNra+CsMoofe1jv5AdF/UCwBeKCmcGYxHG75zmhNStudSq4rxIDZVQdgKigc
- XJR1a5D4v/vRj7UQH98ztpQ1AmsAB1ZGEKD1GiBO999vpj/d8wsx7Jgp5xkPkc+CkpvwYJ
- TZMo/g4c1eW52Vbt+asQQkhpMCsdMt0=
+ bh=fwc9xpgmZNUxpxE37/3TdpZxaUKzi+sUOHDA+fcesgQ=;
+ b=v5fdZ34QcqP6gTdYY6796aDBLz4hNbhQA/P/i+Avhttgxrg76Z97pooK+peC7JBdKhOHfu
+ rxRA6swcGEwqhq8QtYXZIeb6/OoJBPIU2Ga67y/oh3MRMIXwzo6BUTSk49weYRi8y4+vPu
+ SpG2qGXJ2uXU/BdKLKCf+M2OrER5cz8=
 From: Sean Anderson <sean.anderson@linux.dev>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <sean.anderson@linux.dev>
-Subject: [PATCH v3 2/3] PCI: sandbox: Add PCI bridge emulation
-Date: Mon, 12 Jan 2026 20:20:36 -0500
-Message-Id: <20260113012037.2566942-3-sean.anderson@linux.dev>
+Subject: [PATCH v3 3/3] PCI: Add power sequencing driver for PCI slots
+Date: Mon, 12 Jan 2026 20:20:37 -0500
+Message-Id: <20260113012037.2566942-4-sean.anderson@linux.dev>
 In-Reply-To: <20260113012037.2566942-1-sean.anderson@linux.dev>
 References: <20260113012037.2566942-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
@@ -68,468 +68,397 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a PCI bridge emulation device. Although real bridges need to be
-configured in order to forward requests, this happens automatically for
-now (see arch/sandbox/lib/pci_io.c). So just record the window registers
-and check them in a test to make sure pci_auto is sane.
+Extend the PCI bridge driver to enable resources associated with PCI
+slots like clocks, power rails, and resets. This is modeled off of the
+PCI power control subsystem in Linux. The traditional compatible for PCI
+slots in U-Boot is pci-bridge, but Linux uses the more-systematic
+pciclass,0604 so add that as an option.
 
-As each bridge consume at least 4k I/O registers, increase the root
-port's I/O space so we have some left for other devices.
+Add a test to make sure the clock/gpio get enabled and that we skip some
+of the delays when PERST is already asserted.
 
 Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
 ---
 
 Changes in v3:
-- New
+- Add a test
 
- arch/sandbox/dts/test.dts        |  35 +++++-
- arch/sandbox/include/asm/test.h  |   1 +
- drivers/pci/Makefile             |   2 +-
- drivers/pci/pci_sandbox_bridge.c | 192 +++++++++++++++++++++++++++++++
- test/dm/pci.c                    | 142 +++++++++++++++++++++++
- 5 files changed, 370 insertions(+), 2 deletions(-)
- create mode 100644 drivers/pci/pci_sandbox_bridge.c
+Changes in v2:
+- Return early if there's no PERST GPIO
+- Only mdelay if we need to
+- Use CONFIG_IS_ENABLED to set .probe directly
+
+ arch/sandbox/dts/test.dts   | 12 ++++++-
+ configs/sandbox64_defconfig |  2 ++
+ configs/sandbox_defconfig   |  2 ++
+ drivers/pci/Kconfig         |  8 +++++
+ drivers/pci/pci-uclass.c    | 65 +++++++++++++++++++++++++++++++++++++
+ test/dm/pci.c               | 57 ++++++++++++++++++++++++++++++++
+ 6 files changed, 145 insertions(+), 1 deletion(-)
 
 diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index e945a47fb01..962d364f9b2 100644
+index 962d364f9b2..913dea30fb0 100644
 --- a/arch/sandbox/dts/test.dts
 +++ b/arch/sandbox/dts/test.dts
-@@ -1279,7 +1279,7 @@
- 		#address-cells = <3>;
- 		#size-cells = <2>;
- 		ranges = <0x02000000 0 0x10000000 0x10000000 0 0x2000000
--				0x01000000 0 0x20000000 0x20000000 0 0x2000>;
-+			  0x01000000 0 0x20000000 0x20000000 0 0x20000>;
- 		iommu-map = <0x0010 &iommu 0 1>;
- 		iommu-map-mask = <0xfffffff8>;
- 		sandbox,emul = <&pci_emul0>;
-@@ -1301,6 +1301,15 @@
- 			};
+@@ -632,6 +632,13 @@
+ 			clocks = <&clk_fixed>;
  		};
  
-+		pci@4,0 {
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+			device_type = "pci";
-+			compatible = "pciclass,0604";
-+			reg = <0x00002000 0 0 0 0>;
-+			ranges;
++		pci_refclk: clk-gpio {
++			compatible = "gpio-gate-clock";
++			#clock-cells = <0>;
++			clocks = <&clk_fixed>;
++			enable-gpios = <&gpio_a 26>;
 +		};
 +
+ 		osc {
+ 			compatible = "fixed-clock";
+ 			#clock-cells = <0>;
+@@ -822,7 +829,7 @@
+ 			gpio-controller;
+ 			#gpio-cells = <1>;
+ 			gpio-bank-name = "a";
+-			sandbox,gpio-count = <25>;
++			sandbox,gpio-count = <27>;
+ 			gpio-line-names = "", "eth1-reset", "rtc-irq";
+ 			hog_input_active_low {
+ 				gpio-hog;
+@@ -1308,6 +1315,9 @@
+ 			compatible = "pciclass,0604";
+ 			reg = <0x00002000 0 0 0 0>;
+ 			ranges;
++
++			clocks = <&pci_refclk>;
++			reset-gpios = <&gpio_a 25>;
+ 		};
+ 
  		pci@1e,0 {
- 			compatible = "sandbox,pmc";
- 			reg = <0xf000 0 0 0 0>;
-@@ -1340,6 +1349,30 @@
- 			reg = <0x10>;
- 		};
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 440e5efa340..624a44eef59 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -139,6 +139,7 @@ CONFIG_BUTTON_ADC=y
+ CONFIG_BUTTON_GPIO=y
+ CONFIG_CLK=y
+ CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_GPIO=y
+ CONFIG_CLK_K210=y
+ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+@@ -201,6 +202,7 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_NVMXIP_QSPI=y
+ CONFIG_NVME_PCI=y
+ CONFIG_PCI_REGION_MULTI_ENTRY=y
++CONFIG_PCI_PWRCTRL_SLOT=y
+ CONFIG_PCI_SANDBOX=y
+ CONFIG_PHY=y
+ CONFIG_PHY_SANDBOX=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 92fb5f844b1..1403ca1d9d0 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -191,6 +191,7 @@ CONFIG_BUTTON_ADC=y
+ CONFIG_BUTTON_GPIO=y
+ CONFIG_CLK=y
+ CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_GPIO=y
+ CONFIG_CLK_K210=y
+ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+@@ -279,6 +280,7 @@ CONFIG_MULTIPLEXER=y
+ CONFIG_MUX_MMIO=y
+ CONFIG_NVME_PCI=y
+ CONFIG_PCI_REGION_MULTI_ENTRY=y
++CONFIG_PCI_PWRCTRL_SLOT=y
+ CONFIG_PCI_FTPCI100=y
+ CONFIG_PCI_SANDBOX=y
+ CONFIG_PHY=y
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index ea9868425d0..efac18b33f6 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -100,6 +100,14 @@ config PCI_ENHANCED_ALLOCATION
+ 	  Enable support for Enhanced Allocation which can be used by supported
+ 	  devices in place of traditional BARS for allocation of resources.
  
-+		emul@3,0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "sandbox,pci-bridge";
-+			reg = <0x18>;
++config PCI_PWRCTRL_SLOT
++	bool "PCI slot power control"
++	help
++	  This is a generic driver that controls the power state of different
++	  PCI slots. The clocks and resets for the PCI slots are expected to be
++	  defined in the devicetree node of the PCI bridge. Say N if your PCI
++	  busses don't have software-controlled clocks or power rails.
 +
-+			emul@0,0 {
-+				compatible = "sandbox,swap-case";
-+				reg = <0x00>;
-+			};
-+		};
-+
-+		emul@4,0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "sandbox,pci-bridge";
-+			reg = <0x20>;
-+
-+			emul@0,0 {
-+				compatible = "sandbox,swap-case";
-+				reg = <0x00>;
-+			};
-+		};
-+
- 		emul@1e,0 {
- 			compatible = "sandbox,pmc-emul";
- 			reg = <0xf0>;
-diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
-index 0e8d19ce232..86c7c833b6e 100644
---- a/arch/sandbox/include/asm/test.h
-+++ b/arch/sandbox/include/asm/test.h
-@@ -19,6 +19,7 @@ struct unit_test_state;
- #define SANDBOX_PCI_SWAP_CASE_EMUL_ID	0x5678
- #define SANDBOX_PCI_PMC_EMUL_ID		0x5677
- #define SANDBOX_PCI_P2SB_EMUL_ID	0x5676
-+#define SANDBOX_PCI_BRIDGE_EMUL_ID	0x5662
- #define SANDBOX_PCI_CLASS_CODE		(PCI_CLASS_COMMUNICATION_SERIAL >> 8)
- #define SANDBOX_PCI_CLASS_SUB_CODE	(PCI_CLASS_COMMUNICATION_SERIAL & 0xff)
+ config PCI_ARID
+         bool "Enable Alternate Routing-ID support for PCI"
+         help
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index c370f8c6400..6f0e6c2f8cc 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -6,6 +6,7 @@
  
-diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
-index 98f3c226f63..70a0dd3c1e3 100644
---- a/drivers/pci/Makefile
-+++ b/drivers/pci/Makefile
-@@ -7,7 +7,7 @@ obj-$(CONFIG_VIDEO) += pci_rom.o
- obj-$(CONFIG_PCI) += pci-uclass.o pci_auto.o
- obj-$(CONFIG_DM_PCI_COMPAT) += pci_compat.o
- obj-$(CONFIG_PCI_SANDBOX) += pci_sandbox.o
--obj-$(CONFIG_SANDBOX) += pci-emul-uclass.o
-+obj-$(CONFIG_SANDBOX) += pci-emul-uclass.o pci_sandbox_bridge.o
- obj-$(CONFIG_X86) += pci_x86.o pci_rom.o
- obj-$(CONFIG_PCI) += pci_auto_common.o pci_common.o
+ #define LOG_CATEGORY UCLASS_PCI
  
-diff --git a/drivers/pci/pci_sandbox_bridge.c b/drivers/pci/pci_sandbox_bridge.c
-new file mode 100644
-index 00000000000..81a4e993b47
---- /dev/null
-+++ b/drivers/pci/pci_sandbox_bridge.c
-@@ -0,0 +1,192 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * PCI emulation device which swaps the case of text
-+ *
-+ * Copyright (c) 2014 Google, Inc
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
++#include <clk.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <init.h>
+@@ -14,6 +15,7 @@
+ #include <pci.h>
+ #include <spl.h>
+ #include <asm/global_data.h>
++#include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+@@ -1893,13 +1895,76 @@ static const struct dm_pci_ops pci_bridge_ops = {
+ 
+ static const struct udevice_id pci_bridge_ids[] = {
+ 	{ .compatible = "pci-bridge" },
++	{ .compatible = "pciclass,0604" },
+ 	{ }
+ };
+ 
++#ifdef CONFIG_SANDBOX
++#include <asm/state.h>
++#endif
 +
-+#include <dm.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <pci.h>
-+#include <asm/test.h>
-+#include <linux/ctype.h>
-+
-+/**
-+ * struct bridge_priv - Sandbox PCI bridge emulation private data
-+ */
-+struct bridge_priv {
-+	u64 pref_base, pref_limit;
-+	u32 io_base, io_limit;
-+	u16 command, control;
-+	u16 mem_base, mem_limit;
-+	u8 primary, secondary, sub;
-+};
-+
-+#define mask(s) GENMASK_ULL((1 << ((s) + 3)) - 1, 0)
-+#define extract(v, o, s) (((v) >> ((o) * 8)) & mask(s))
-+#define deposit(v, o, s, f) ({ \
-+	uint _o = (o); \
-+	typeof(v) _v = v & ~((typeof(v))mask(s) << (_o * 8)); \
-+	_v | ((typeof(v))(f) << (_o * 8)); \
-+})
-+
-+static ulong _sandbox_bridge_read_config(const struct udevice *dev, uint off,
-+					 enum pci_size_t size)
++static int __maybe_unused pci_bridge_probe(struct udevice *dev)
 +{
-+	struct bridge_priv *priv = dev_get_priv(dev);
++	struct clk clk;
++	struct gpio_desc perst;
++	unsigned long delay = 0;
++	int ret;
 +
-+	switch (off) {
-+	case PCI_VENDOR_ID ... PCI_VENDOR_ID + 1:
-+		return extract(SANDBOX_PCI_VENDOR_ID, off & 1, size);
-+	case PCI_DEVICE_ID ... PCI_DEVICE_ID + 1:
-+		return extract(SANDBOX_PCI_BRIDGE_EMUL_ID, off & 1, size);
-+	case PCI_COMMAND ... PCI_COMMAND + 1:
-+		return extract(priv->command, off & 1, size);
-+	case PCI_REVISION_ID ... PCI_CLASS_CODE:
-+		return extract(PCI_CLASS_BRIDGE_PCI_NORMAL << 8, off & 3, size);
-+	case PCI_HEADER_TYPE:
-+		return PCI_HEADER_TYPE_BRIDGE;
-+	case PCI_PRIMARY_BUS:
-+		return priv->primary;
-+	case PCI_SECONDARY_BUS:
-+		return priv->secondary;
-+	case PCI_SUBORDINATE_BUS:
-+		return priv->sub;
-+	case PCI_IO_BASE:
-+		return priv->io_base;
-+	case PCI_IO_LIMIT:
-+		return priv->io_limit;
-+	case PCI_MEMORY_BASE ... PCI_MEMORY_BASE + 1:
-+		return extract(priv->mem_base, off & 1, size);
-+	case PCI_MEMORY_LIMIT ... PCI_MEMORY_LIMIT + 1:
-+		return extract(priv->mem_limit, off & 1, size);
-+	case PCI_PREF_MEMORY_BASE ... PCI_PREF_MEMORY_BASE + 1:
-+		return extract(priv->pref_base, off & 1, size);
-+	case PCI_PREF_MEMORY_LIMIT ... PCI_PREF_MEMORY_LIMIT + 1:
-+		return extract(priv->pref_limit, off & 1, size);
-+	case PCI_PREF_BASE_UPPER32 ... PCI_PREF_BASE_UPPER32 + 3:
-+		return extract(priv->pref_base >> 16, off & 3, size);
-+	case PCI_PREF_LIMIT_UPPER32 ... PCI_PREF_LIMIT_UPPER32 + 3:
-+		return extract(priv->pref_limit >> 16, off & 3, size);
-+	case PCI_IO_BASE_UPPER16 ... PCI_IO_BASE_UPPER16 + 1:
-+		return extract(priv->io_base >> 8, off & 1, size);
-+	case PCI_IO_LIMIT_UPPER16 ... PCI_IO_LIMIT_UPPER16 + 1:
-+		return extract(priv->io_limit >> 8, off & 1, size);
-+	case PCI_BRIDGE_CONTROL ... PCI_BRIDGE_CONTROL + 1:
-+		return extract(priv->control, off & 1, size);
++	if (!clk_get_by_index(dev, 0, &clk)) {
++		int ret = clk_enable(&clk);
++
++		if (ret)
++			return log_msg_ret("clk", ret);
++
++		/* Delay for T_PERST-CLK (100 us for all slot types) */
++		udelay(100);
 +	}
 +
++	if (gpio_request_by_name(dev, "reset-gpios", 0, &perst, 0))
++		return 0;
++
++	/*
++	 * If PERST is inactive, the following call to dm_gpio_clrset_flags
++	 * will be the first time we assert it and we will need to delay for
++	 * T_PERST.
++	 */
++	if (dm_gpio_get_value(&perst) != 1)
++		delay = 100;
++
++	ret = dm_gpio_clrset_flags(&perst, GPIOD_MASK_DIR,
++				   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++	if (ret)
++		return log_msg_ret("set", ret);
++
++#ifdef CONFIG_SANDBOX
++	if (!state_get_skip_delays())
++#endif
++		if (delay)
++			mdelay(delay);
++
++	ret = dm_gpio_set_value(&perst, 0);
++	if (ret)
++		return log_msg_ret("clr", ret);
++
++	/*
++	 * PCIe section 6.6.1:
++	 * > ... software must wait a minimum of 100 ms before sending a
++	 * > Configuration Request to the device immediately below that Port.
++	 */
++#ifdef CONFIG_SANDBOX
++	if (!state_get_skip_delays())
++#endif
++		mdelay(100);
++
 +	return 0;
 +}
 +
-+static int sandbox_bridge_read_config(const struct udevice *dev, uint off,
-+				      ulong *valp, enum pci_size_t size)
-+{
-+	*valp = _sandbox_bridge_read_config(dev, off, size);
-+	return 0;
-+}
-+
-+static void sandbox_bridge_fix_regs(struct bridge_priv *priv)
-+{
-+	priv->io_base &= PCI_IO_RANGE_MASK;
-+	priv->io_base |= PCI_IO_RANGE_TYPE_32;
-+	priv->io_limit &= PCI_IO_RANGE_MASK;
-+	priv->io_limit |= PCI_IO_RANGE_TYPE_32;
-+	priv->mem_base &= PCI_MEMORY_RANGE_MASK;
-+	priv->mem_limit &= PCI_MEMORY_RANGE_MASK;
-+	priv->pref_base &= PCI_PREF_RANGE_MASK;
-+	priv->pref_base |= PCI_PREF_RANGE_TYPE_64;
-+	priv->pref_limit &= PCI_PREF_RANGE_MASK;
-+	priv->pref_limit |= PCI_PREF_RANGE_TYPE_64;
-+}
-+
-+static int sandbox_bridge_write_config(struct udevice *dev, uint off, ulong val,
-+				       enum pci_size_t size)
-+{
-+	struct bridge_priv *priv = dev_get_priv(dev);
-+
-+	switch (off) {
-+	case PCI_COMMAND ... PCI_COMMAND + 1:
-+		priv->command = deposit(priv->command, off & 1, size, val);
-+		break;
-+	case PCI_PRIMARY_BUS:
-+		priv->primary = val;
-+		break;
-+	case PCI_SECONDARY_BUS:
-+		priv->secondary = val;
-+		break;
-+	case PCI_SUBORDINATE_BUS:
-+		priv->sub = val;
-+		break;
-+	case PCI_IO_BASE:
-+		priv->io_base = deposit(priv->io_base, 0, 0, val);
-+		break;
-+	case PCI_IO_LIMIT:
-+		priv->io_limit = deposit(priv->io_limit, 0, 0, val);
-+		break;
-+	case PCI_MEMORY_BASE ... PCI_MEMORY_BASE + 1:
-+		priv->mem_base = deposit(priv->mem_base, off & 1, size, val);
-+		break;
-+	case PCI_MEMORY_LIMIT ... PCI_MEMORY_LIMIT + 1:
-+		priv->mem_limit = deposit(priv->mem_limit, off & 1, size, val);
-+		break;
-+	case PCI_PREF_MEMORY_BASE ... PCI_PREF_MEMORY_BASE + 1:
-+		priv->pref_base = deposit(priv->pref_base, off & 1, size, val);
-+		break;
-+	case PCI_PREF_MEMORY_LIMIT ... PCI_PREF_MEMORY_LIMIT + 1:
-+		priv->pref_limit = deposit(priv->pref_limit, off & 1, size,
-+					   val);
-+		break;
-+	case PCI_PREF_BASE_UPPER32 ... PCI_PREF_BASE_UPPER32 + 3:
-+		priv->pref_base = deposit(priv->pref_base, (off & 3) + 2, size,
-+					  val);
-+		break;
-+	case PCI_PREF_LIMIT_UPPER32 ... PCI_PREF_LIMIT_UPPER32 + 3:
-+		priv->pref_limit = deposit(priv->pref_limit, (off & 3) + 2,
-+					   size, val);
-+		break;
-+	case PCI_IO_BASE_UPPER16 ... PCI_IO_BASE_UPPER16 + 1:
-+		priv->io_base = deposit(priv->io_base, (off & 1) + 1, size,
-+					val);
-+		break;
-+	case PCI_IO_LIMIT_UPPER16 ... PCI_IO_LIMIT_UPPER16 + 1:
-+		priv->io_limit = deposit(priv->io_limit, (off & 1) + 1, size,
-+					 val);
-+		break;
-+	case PCI_BRIDGE_CONTROL ... PCI_BRIDGE_CONTROL + 1:
-+		priv->control = deposit(priv->control, off & 1, size, val);
-+		break;
-+	}
-+
-+	sandbox_bridge_fix_regs(priv);
-+	return 0;
-+}
-+
-+static struct dm_pci_emul_ops sandbox_bridge_emul_ops = {
-+	.read_config = sandbox_bridge_read_config,
-+	.write_config = sandbox_bridge_write_config,
-+};
-+
-+static int sandbox_bridge_probe(struct udevice *dev)
-+{
-+	struct bridge_priv *priv = dev_get_priv(dev);
-+
-+	sandbox_bridge_fix_regs(priv);
-+	return 0;
-+}
-+
-+static const struct udevice_id sandbox_bridge_ids[] = {
-+	{ .compatible = "sandbox,pci-bridge" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(sandbox_bridge_emul) = {
-+	.name		= "sandbox_bridge_emul",
-+	.id		= UCLASS_PCI_EMUL,
-+	.of_match	= sandbox_bridge_ids,
-+	.probe		= sandbox_bridge_probe,
-+	.ops		= &sandbox_bridge_emul_ops,
-+	.priv_auto	= sizeof(struct bridge_priv),
-+};
+ U_BOOT_DRIVER(pci_bridge_drv) = {
+ 	.name		= "pci_bridge_drv",
+ 	.id		= UCLASS_PCI,
+ 	.of_match	= pci_bridge_ids,
++	.probe		= CONFIG_IS_ENABLED(PCI_PWRCTRL_SLOT,
++					    (pci_bridge_probe), NULL),
+ 	.ops		= &pci_bridge_ops,
+ };
+ 
 diff --git a/test/dm/pci.c b/test/dm/pci.c
-index 6eb19f6fea3..b6fee7b3bb3 100644
+index b6fee7b3bb3..f594783444b 100644
 --- a/test/dm/pci.c
 +++ b/test/dm/pci.c
-@@ -4,6 +4,7 @@
-  */
+@@ -5,6 +5,7 @@
  
  #include <dm.h>
-+#include <dm/device_compat.h>
+ #include <dm/device_compat.h>
++#include <asm/gpio.h>
  #include <asm/io.h>
  #include <asm/test.h>
  #include <dm/test.h>
-@@ -486,3 +487,144 @@ static int dm_test_pci_phys_to_bus(struct unit_test_state *uts)
+@@ -16,6 +17,7 @@ static int dm_test_pci_base(struct unit_test_state *uts)
+ {
+ 	struct udevice *bus;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(uclass_get_device(UCLASS_PCI, 0, &bus));
+ 
  	return 0;
+@@ -30,6 +32,7 @@ static int dm_test_pci_busdev(struct unit_test_state *uts)
+ 	u16 vendor, device;
+ 
+ 	/* Test bus#0 and its devices */
++	test_set_skip_delays(true);
+ 	ut_assertok(uclass_get_device_by_seq(UCLASS_PCI, 0, &bus));
+ 
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x00, 0), &swap));
+@@ -65,6 +68,7 @@ static int dm_test_pci_swapcase(struct unit_test_state *uts)
+ 	char *ptr;
+ 
+ 	/* Check that asking for the device 0 automatically fires up PCI */
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x00, 0), &swap));
+ 
+ 	/* First test I/O */
+@@ -116,6 +120,7 @@ static int dm_test_pci_drvdata(struct unit_test_state *uts)
+ 	struct udevice *bus, *swap;
+ 
+ 	/* Check that asking for the device automatically fires up PCI */
++	test_set_skip_delays(true);
+ 	ut_assertok(uclass_get_device_by_seq(UCLASS_PCI, 1, &bus));
+ 
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(1, 0x08, 0), &swap));
+@@ -141,6 +146,7 @@ static int dm_test_pci_mixed(struct unit_test_state *uts)
+ 	ulong io_addr, mem_addr;
+ 	char *ptr;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(uclass_get_device_by_seq(UCLASS_PCI, 2, &bus));
+ 
+ 	/* Test the dynamic device */
+@@ -201,6 +207,7 @@ static int dm_test_pci_cap(struct unit_test_state *uts)
+ 	struct udevice *bus, *swap;
+ 	int cap;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(uclass_get_device_by_seq(UCLASS_PCI, 0, &bus));
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap));
+ 
+@@ -258,6 +265,7 @@ static int dm_test_pci_ea(struct unit_test_state *uts)
+ 	 * use emulated device mapping function, we're not using real physical
+ 	 * addresses in this test
+ 	 */
++	test_set_skip_delays(true);
+ 	sandbox_set_enable_pci_map(true);
+ 
+ 	ut_assertok(uclass_get_device_by_seq(UCLASS_PCI, 0, &bus));
+@@ -303,6 +311,7 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
+ 	ulong io_addr, mem_addr;
+ 	fdt_addr_t size;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+ 	io_addr = dm_pci_read_bar32(swap1f, 0);
+ 	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
+@@ -334,6 +343,7 @@ static int dm_test_pci_addr_live(struct unit_test_state *uts)
+ 	struct udevice *swap1f, *swap1;
+ 	fdt_size_t size;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+ 	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &size));
+ 	ut_asserteq(0, size);
+@@ -351,6 +361,7 @@ static int dm_test_pci_on_bus(struct unit_test_state *uts)
+ {
+ 	struct udevice *dev;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &dev));
+ 	ut_asserteq(true, device_is_on_pci_bus(dev));
+ 	ut_asserteq(false, device_is_on_pci_bus(dev_get_parent(dev)));
+@@ -374,6 +385,7 @@ static int dm_test_pci_region_multi(struct unit_test_state *uts)
+ 	ulong mem_addr;
+ 
+ 	/* Test memory BAR1 on bus#1 */
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(1, 0x08, 0), &dev));
+ 	mem_addr = dm_pci_read_bar32(dev, 1);
+ 	ut_asserteq(mem_addr, 0x30000000);
+@@ -393,6 +405,7 @@ static int dm_test_pci_bus_to_phys(struct unit_test_state *uts)
+ 	struct udevice *dev;
+ 	phys_addr_t phys_addr;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(1, 0x08, 0), &dev));
+ 
+ 	/* Before any of the ranges. */
+@@ -446,6 +459,7 @@ static int dm_test_pci_phys_to_bus(struct unit_test_state *uts)
+ 	struct udevice *dev;
+ 	pci_addr_t pci_addr;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(1, 0x08, 0), &dev));
+ 
+ 	/* Before any of the ranges. */
+@@ -620,6 +634,7 @@ static int dm_test_pci_bridge_windows(struct unit_test_state *uts)
+ {
+ 	struct udevice *bus;
+ 
++	test_set_skip_delays(true);
+ 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x03, 0), &bus));
+ 	if (_dm_test_pci_bridge_windows(uts, bus))
+ 		return CMD_RET_FAILURE;
+@@ -628,3 +643,45 @@ static int dm_test_pci_bridge_windows(struct unit_test_state *uts)
+ 	return _dm_test_pci_bridge_windows(uts, bus);
  }
- DM_TEST(dm_test_pci_phys_to_bus, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ DM_TEST(dm_test_pci_bridge_windows, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 +
-+#define PCI_BAR(n) (PCI_BASE_ADDRESS_0 + (n) * 4)
-+static int read_bar(struct unit_test_state *uts, struct udevice *dev, int bar,
-+		    u32 *base, u32 *mask)
++#if IS_ENABLED(CONFIG_PCI_PWRCTRL_SLOT)
++/* GPIO 25 is PERST; GPIO 26 is REFCLK enable */
++static int dm_test_pci_pwrseq_cold(struct unit_test_state *uts)
 +{
-+	int addr = PCI_BASE_ADDRESS_0 + bar * 4;
++	struct udevice *bus, *gpio;
++	unsigned long start, end;
 +
-+	ut_assertok(dm_pci_read_config32(dev, addr, base));
-+	ut_assertok(dm_pci_write_config32(dev, addr, 0xffffffff));
-+	ut_assertok(dm_pci_read_config32(dev, addr, mask));
-+	ut_assertok(dm_pci_write_config32(dev, addr, *base));
-+	return 0;
-+}
++	ut_assertok(uclass_get_device(UCLASS_GPIO, 1, &gpio));
++	ut_assertok(sandbox_gpio_set_value(gpio, 25, 1));
 +
-+/*
-+ * Test that all BARs on devices under each bridge lie within the bridge's
-+ * forwarding windows.
-+ */
-+static int _dm_test_pci_bridge_windows(struct unit_test_state *uts,
-+				       struct udevice *bus)
-+{
-+	struct udevice *dev;
-+	u64 pref_lo, pref_hi;
-+	u32 val32, io_lo, io_hi, mem_lo, mem_hi;
-+	u16 val16;
-+	u8 val8;
-+
-+	ut_assertok(dm_pci_read_config8(bus, PCI_IO_BASE, &val8));
-+	ut_assertok(dm_pci_read_config16(bus, PCI_IO_BASE_UPPER16, &val16));
-+	io_lo = ((u32)(val8 & PCI_IO_RANGE_MASK) << 8) | ((u32)val16 << 16);
-+	ut_assertok(dm_pci_read_config8(bus, PCI_IO_LIMIT, &val8));
-+	ut_assertok(dm_pci_read_config16(bus, PCI_IO_LIMIT_UPPER16, &val16));
-+	io_hi = ((u32)(val8 & PCI_IO_RANGE_MASK) << 8) | ((u32)val16 << 16) |
-+		GENMASK(11, 0);
-+
-+	ut_assertok(dm_pci_read_config16(bus, PCI_MEMORY_BASE, &val16));
-+	mem_lo = (u32)val16 << 16;
-+	ut_assertok(dm_pci_read_config16(bus, PCI_MEMORY_LIMIT, &val16));
-+	mem_hi = ((u32)val16 << 16) | GENMASK(19, 0);
-+
-+	ut_assertok(dm_pci_read_config16(bus, PCI_PREF_MEMORY_BASE, &val16));
-+	ut_assertok(dm_pci_read_config32(bus, PCI_PREF_BASE_UPPER32, &val32));
-+	pref_lo = ((u64)(val16 & PCI_PREF_RANGE_MASK) << 16) |
-+		  ((u64)val32 << 32) | GENMASK(19, 0);
-+	ut_assertok(dm_pci_read_config16(bus, PCI_PREF_MEMORY_LIMIT, &val16));
-+	ut_assertok(dm_pci_read_config32(bus, PCI_PREF_LIMIT_UPPER32, &val32));
-+	pref_hi = ((u64)(val16 & PCI_PREF_RANGE_MASK) << 16) |
-+		  ((u64)val32 << 32) | GENMASK(19, 0);
-+
-+	dev_dbg(bus, "io   %08x %08x\n", io_lo, io_hi);
-+	dev_dbg(bus, "mem  %08x %08x\n", mem_lo, mem_hi);
-+	dev_dbg(bus, "pref %016llx %016llx\n", pref_lo, pref_hi);
-+	device_foreach_child(dev, bus) {
-+		unsigned int bar, max_bar;
-+
-+		ut_assertok(dm_pci_read_config8(dev, PCI_HEADER_TYPE, &val8));
-+		switch (val8) {
-+		case PCI_HEADER_TYPE_NORMAL:
-+			max_bar = 6;
-+			break;
-+		case PCI_HEADER_TYPE_BRIDGE:
-+			max_bar = 2;
-+			break;
-+		case PCI_HEADER_TYPE_CARDBUS:
-+			max_bar = 0;
-+			break;
-+		default:
-+			ut_reportf("Unknown header type %x!\n", val8);
-+		}
-+
-+		for (bar = 0; bar < max_bar; bar++) {
-+			u32 base32, mask32;
-+
-+			if (read_bar(uts, dev, bar, &base32, &mask32))
-+				return CMD_RET_FAILURE;
-+
-+			if (!mask32)
-+				continue;
-+
-+			if (base32 & PCI_BASE_ADDRESS_SPACE_IO) {
-+				mask32 &= PCI_BASE_ADDRESS_IO_MASK;
-+				dev_dbg(dev, "io   %08x %08x\n", base32,
-+					base32 + ~mask32);
-+
-+				ut_assert(base32 >= io_lo);
-+				ut_assert(base32 + ~mask32 <= io_hi);
-+			} else {
-+				u64 base64 = base32 & PCI_BASE_ADDRESS_MEM_MASK;
-+				u64 mask64 = mask32 & PCI_BASE_ADDRESS_MEM_MASK;
-+				u64 mem_type = base32 &
-+					       PCI_BASE_ADDRESS_MEM_TYPE_MASK;
-+				bool pref = base32 &
-+					    PCI_BASE_ADDRESS_MEM_PREFETCH;
-+
-+				if (mem_type == PCI_BASE_ADDRESS_MEM_TYPE_64) {
-+					ut_assert(++bar < max_bar);
-+					if (read_bar(uts, dev, bar, &base32,
-+						     &mask32))
-+						return CMD_RET_FAILURE;
-+
-+					base64 |= (u64)base32 << 32;
-+					mask64 |= (u64)mask32 << 32;
-+					mask64 = ~mask64;
-+				} else {
-+					ut_asserteq(PCI_BASE_ADDRESS_MEM_TYPE_32,
-+						    mem_type);
-+					mask64 |= GENMASK_ULL(63, 32);
-+				}
-+
-+				if (pref) {
-+					dev_dbg(dev, "pref %016llx %016llx\n",
-+						base64, base64 + ~mask64);
-+
-+					ut_assert(base64 >= pref_lo);
-+					ut_assert(base64 + ~mask64 <= pref_hi);
-+				} else {
-+					dev_dbg(dev, "mem  %08llx %08llx\n",
-+						base64, base64 + ~mask64);
-+
-+					ut_assert(base64 >= mem_lo);
-+					ut_assert(base64 + ~mask64 <= mem_hi);
-+				}
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int dm_test_pci_bridge_windows(struct unit_test_state *uts)
-+{
-+	struct udevice *bus;
-+
-+	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x03, 0), &bus));
-+	if (_dm_test_pci_bridge_windows(uts, bus))
-+		return CMD_RET_FAILURE;
-+
++	start = timer_get_us();
 +	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x04, 0), &bus));
-+	return _dm_test_pci_bridge_windows(uts, bus);
++	end = timer_get_us();
++	ut_assert(end - start > 100000);
++	ut_assert(end - start < 200000);
++
++	ut_asserteq(0, sandbox_gpio_get_value(gpio, 25));
++	ut_asserteq(1, sandbox_gpio_get_value(gpio, 26));
++
++	return 0;
 +}
-+DM_TEST(dm_test_pci_bridge_windows, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++DM_TEST(dm_test_pci_pwrseq_cold, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++static int dm_test_pci_pwrseq_warm(struct unit_test_state *uts)
++{
++	struct udevice *bus, *gpio;
++	unsigned long start;
++
++	ut_assertok(uclass_get_device(UCLASS_GPIO, 1, &gpio));
++
++	start = timer_get_us();
++	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x04, 0), &bus));
++	ut_assert(timer_get_us() - start > 200000);
++
++	ut_asserteq(0, sandbox_gpio_get_value(gpio, 25));
++	ut_asserteq(1, sandbox_gpio_get_value(gpio, 26));
++
++	return 0;
++}
++DM_TEST(dm_test_pci_pwrseq_warm, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++#endif
 -- 
 2.35.1.1320.gc452695387.dirty
 
