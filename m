@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5478CF45D4
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 01:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C46EECF45D4
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 01:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C5FD83700;
-	Tue, 13 Jan 2026 02:29:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 980828393F;
+	Tue, 13 Jan 2026 02:29:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QaY1XemJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fAP+oQS1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0812A83935; Tue, 13 Jan 2026 02:29:24 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 35A64838A5; Tue, 13 Jan 2026 02:29:25 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D755A836AC
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:29:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BCC2838A5
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 02:29:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45391956bfcso5226761b6e.3
- for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 17:29:21 -0800 (PST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-3ec3cdcda4eso5096344fac.1
+ for <u-boot@lists.denx.de>; Mon, 12 Jan 2026 17:29:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768267760; x=1768872560; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768267762; x=1768872562; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9LM0TD69yLTtwiAj53KgR24IDz6tEC12umiNwLf7Twc=;
- b=QaY1XemJGrrJmBHgBiB5EzV/r/W3Uo+P8tEJ4bdUuwfYWcmns8RQqTx013BMsQ7De6
- /zjCYxw45uv4tlcl5JUTc416nP7QLhqwhdWfrHn1fpQ8p5D+beSkf8/RxkeigsUsKKGo
- /I0H0NquUkxrNUDM/SpzqjmuC1L2wduSXH2oU=
+ bh=t5Yt4dpuV+iDQBvq3UsJ2kieTHVhcS4AW+t2sGtAxrk=;
+ b=fAP+oQS159dWFk7FUsA23oPqn42M0ihPLmuLjvx+5rA+dgjuxIg2MNXhVTWHlY3MKO
+ ysBr/bBHSh8cfGIzoEgiifIxtCScG2/yE3u1K0aftR6qU/oANVhK03bP4d/7HwPJUpAd
+ VGeUp0QjooAKxEs4+XfmhwMZ3GIbp26nuCc1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768267760; x=1768872560;
+ d=1e100.net; s=20230601; t=1768267762; x=1768872562;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=9LM0TD69yLTtwiAj53KgR24IDz6tEC12umiNwLf7Twc=;
- b=PjODW4R8MEoPRpGNJtch6ms/ohwUpHo+RqCxykXqEBIo4q5flJTXT+6qNWbtTTPdwL
- swyiEYOppWXuDhGvonWVU3QTcsag8vo/J87XNyZYnY1vH1NX/LvJ1x8wEYXhfQXDaR1u
- n7hfXIrKUsprCNgQhAR8dsknEAOnC9h2f59TrvUIktyWc3jJVmKM9MUWCU2SmSoYE0RI
- +izVs1dWG0QQro7wPmDRu7thDtaupFV3wD2mvBpkJ/CXAIooihm6rrhfzJyfFXYCW+/F
- FH0vb2uZcPW831ntJeYRv29cpigc6Y9oCb5Wam97cPTCNWRJ23bcl4DL7uzc6+NvY8Y8
- R+Ww==
+ bh=t5Yt4dpuV+iDQBvq3UsJ2kieTHVhcS4AW+t2sGtAxrk=;
+ b=L1RoyR8fDVonIlUbwcdGmizq/AcHUXOzxi/f292jhOt9KMUZUeeMy8NQ/bq1LrnLf0
+ P4oKRrtxC3wGE4PklRnOAYpkXgWu3nbdQUDczkKuDo0FDFZDhsJ+PYdtIGcQYIRbM+BX
+ Qpu4BR4P2txpddjHRi1ZvP3rrCljbJ0BXv62JdP7RAWS9yzdqa3UnKW/CLjoYsrHqGjo
+ 6PjqmHcW/NUiYzHGMJnQH7YT8ASFTV8ZZ6zQ/hYr26vLI8s4RFtUuODsGj6BWyY58+13
+ yfYSOJpB/NbbTCeFCTJA/6/c/h9kC8xFLuKM9b2Ls6qKbd6QB/MVa+qG7zhc0i1IEnEY
+ 9VSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWkhl5rDaig0nHw8OF1y9dIQ2UJSmnYTCgmBM9SkBBWapZDgoRF5p910dXcZiEnpW3Lv7rkwjs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzA7qFeKfuEV9kZYT8v+Y8RN21wR8Dad/WopxBk/Ad0qUmpbaf5
- etHl92HsM95JiA9T+fmeoLNozrClq8+evO8a0PE+nMhhqZHYdn5fV0V+44D573cNxhQ=
-X-Gm-Gg: AY/fxX5wcePTk/FG77RYVzXH5EHSLZ0468YUsHuSFgTL7U7AJ5aQsdZZhMxPEuDW8Dp
- oDXpxkGbJzqp8G7Gm8YYvvT61TZjUCuOw1LeOYXXdGP4uInqHMlp0VYYQhaotzU0mnz3A4+ffdw
- DO3YlIEtzjpzLJ3QaawvHTxDOQcUPE5T2QjtmMQKPqtONwFwAunbNQ+6xVhunxhs40D5drlSs3B
- fAuIbDmthY+Cg0QsgBjxTSVNRyDhiBwljO6AE1XmsUUOi6WXOh8Qc1cz6dLhfbXeTD3eI29sZ22
- RZenhRuWOgX1nCqf8UVXb04gD9AczmDi9wP6MUcsz2c3MaN1eV6LkUiA/CRcbwy5jt+txzks4Bl
- Z2IRoXd4CqnJIgJEFG545wSzrvjkVFNgSsWwgbo0M4DWT6bZGfi9w6YRDTeQgcqIYizc44KRmKx
- tlZpPoIIc39UhIFTdx3STE2sm9i8sXtbY1IJcongiCOQ8HinU4t8MFTqPsRlkqyJZRCYsAZEkBb
- GsmNgp/gY7waZtE7AwoJtaa2H7aMRVxImy47Q==
-X-Google-Smtp-Source: AGHT+IEozM53e2qQTgcDjDkkwC4Hkbv+7pStot8OrzP9wlxrOQRKO33v7Rway7bPIlZB0tJjSXy9Qw==
-X-Received: by 2002:a05:6808:2208:b0:459:bcff:a9ff with SMTP id
- 5614622812f47-45a6be8b053mr9618575b6e.34.1768267760456; 
- Mon, 12 Jan 2026 17:29:20 -0800 (PST)
+ AJvYcCVRFhsFpiyZmkvppZtk9t5Z/2Yzl79/ZDHVUat4UukaYSsou1wYf6q7iDivUNGfAD5Wu/L3XJw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVGUobKTvLXz/6kxapJay4+6WXYCjmcVA3vevnuTedgJm4DvS3
+ +Y2xKSG2PQm7ZNjLcmVnrAiA2HZBjsPnwOkEZmyC3LLtw8j6n/lh3BR3F/70tzKgfxc=
+X-Gm-Gg: AY/fxX517RTQVYGhDSCzu09eCOLfkZtZJk8hRaE9fOywTdmhVjFZ9p7F+furf5s5C0V
+ Om/jef5zh46BVf1YZl6kAscXVFUhlwKAKUFsNfB6VUI8jrGnp9l2Ph1m/hhEMEWk1RzKrYrludZ
+ /VY7uUNSoL45/bLplQ/QYlEiXo2hx2TWky0BcSvkwZ8j+qN0CPMSCOPcHWsuttPdqcWW6iUKfrL
+ b+cR+WzZ4SxbF2Bjspd+1sXHdsKWdx+fMPL6pN7Q6m6ULGVvLbq1dyw0d3FMmS72/H1DfUfXkNA
+ xQfAPiT1Hno/1aXCYaLbwtZ4CQA9YZS9ooX/pO8kKXmHZ1cD+iaMB0uD3pXyAtyQugy59FgnwGs
+ XyLg84gpjTHERxzeY9xYMvBYz9uEQ/ptM84i1SKOtGmKWQYimv1Q1TlJ+Eh7LfTi790UWt+3yL5
+ 9st2FPQVpMo34557uH6XkuJCIxLQgqf0stWFyW2mwqh3b44wxy6JrpPu+XY2cVFmTjSmuJgzceS
+ cF9hDHuMdFGutbFuolLFqmhIWBAzuG2CGkvvWLroPCVAhf2
+X-Google-Smtp-Source: AGHT+IHU7xIo29zfosMq/NAiiWfWXhN2jKyqzRGYLG8RKpURQWYeo1FdedWVuHy3DWQO1nTfaElb+w==
+X-Received: by 2002:a05:6871:6286:b0:315:b768:bd1d with SMTP id
+ 586e51a60fabf-3ffc0967ea5mr10313180fac.6.1768267761825; 
+ Mon, 12 Jan 2026 17:29:21 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffb279e939sm11992690fac.16.2026.01.12.17.29.18
+ 586e51a60fabf-3ffb279e939sm11992690fac.16.2026.01.12.17.29.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jan 2026 17:29:19 -0800 (PST)
+ Mon, 12 Jan 2026 17:29:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- Simon Glass <simon.glass@canonical.com>, 
- Jerome Forissier <jerome@forissier.org>
-In-Reply-To: <20260105-a-few-test-py-improvements-v3-0-fea38243ca5b@baylibre.com>
-References: <20260105-a-few-test-py-improvements-v3-0-fea38243ca5b@baylibre.com>
-Subject: Re: [PATCH v3 0/3] a few test.py improvements
-Message-Id: <176826775894.1946884.4714077261731142918.b4-ty@konsulko.com>
-Date: Mon, 12 Jan 2026 19:29:18 -0600
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, 
+ u-boot@lists.denx.de
+In-Reply-To: <20251229051113.2136908-1-b-padhi@ti.com>
+References: <20251229051113.2136908-1-b-padhi@ti.com>
+Subject: Re: [PATCH v3] configs: am57xx_hs_evm_defconfig: Reserve EMIF
+ memory used by PPA
+Message-Id: <176826776070.1946884.10917455984122516439.b4-ty@konsulko.com>
+Date: Mon, 12 Jan 2026 19:29:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,20 +101,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 05 Jan 2026 10:49:12 -0600, David Lechner wrote:
+On Mon, 29 Dec 2025 10:41:13 +0530, Beleswar Padhi wrote:
 
-> While trying to run the test suite for the first time, I encountered a
-> few minor issues. Here are a few patches to address them.
+> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+> top 37 MB is used by PPA and is firewalled. This results in an exception
+> and the boot fails. Set CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB
+> memory (aligned to 2MB as per page size for ARM32) to fix the boot.
 > 
+> Note: This limitation does not exist for other AM57x devices, but this
+> config is applied in the common defconfig since adding a separate
+> defconfig only for AM571x is not justified. Losing 38MB of memory at the
+> bootloader stage on other devices is acceptable.
+> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/3] test.py: check ubconfig exists before using it
-      commit: 637942ac8e093163742d7b74bf80836c3b950c4e
-[2/3] doc: pytest: mention additional requirements for venv
-      commit: c85d302bf2394a9c3fe95e100e014156a2e0faf5
-[3/3] pylibfdt: add requirements.txt for setuptools
-      commit: 487ab1c991d77b0236b30f55d7c2f89e3b948ec1
+[1/1] configs: am57xx_hs_evm_defconfig: Reserve EMIF memory used by PPA
+      commit: 711150fc6fe7a125cc1133841acc802570478007
 -- 
 Tom
 
