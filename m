@@ -4,121 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4445ED29DF5
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 09:36:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65112D29DF7
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 09:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98DC983678;
-	Tue, 13 Jan 2026 10:36:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D582983678;
+	Tue, 13 Jan 2026 10:39:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mOyq/3Sf";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ceI+n0D1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1A43836D3; Tue, 13 Jan 2026 10:36:04 +0100 (CET)
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5BA4983693; Tue, 13 Jan 2026 10:39:36 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B50E483678
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:36:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40DDF8352B
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 10:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x441.google.com with SMTP id
- ffacd0b85a97d-42fb6ce71c7so6195762f8f.1
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 01:36:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768296961; x=1768901761; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=1muLswv1Q6DOrUucLtQIlIAFQgYA5x5EXBkg9GN2Fg0=;
- b=mOyq/3Sf32yH4g/0qoOey85qws5gBnbqDuyv5yzfKvZuIpLJ9HnrrCePhXHozXpfyA
- exc5RcV4ks6zT5PlWlTxCUSsR9Zf1kWo2zA40u3KeBVISrYI5GvkhaJckHDFdSSZIyTk
- fkKWUeweQNa5h+MiDUZ3ievrvTf2MZEO/MdQGChDSUYbH6td4UaoOaVWkuMdsogAmhwg
- Sx73K68oQEPgOHNys5BfzARIkDbIn2uOkOcngU0ezj5HeREDSZhAyeELUM2Z0+X9ikAp
- e1gBAbfV/swFapfvTh3ho+SdlLHZuV6Osy3Y4jGcNkW/Vc/zpb+w/G1WvhO0/JZwub0g
- Qcqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768296961; x=1768901761;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1muLswv1Q6DOrUucLtQIlIAFQgYA5x5EXBkg9GN2Fg0=;
- b=cOBiWKS6I/EIzO6wyhymN9wej74pASTtj6aCkLKtLMy7M8ZLPI/3NMvZnvZYYEC8TY
- n4/Dt4HG7L17WQAz1OJZIdO6UqRqvaIS+bZhov31GsYRPFiAj3CmRfa6Gq9xccGI33PA
- 4Brvv755Lgd5edo0LoQHBa3JK7e7v56TsZ3IwUIewXFeO5yK+1G82P5R2M5VPlZCnQTm
- wvmTvvDpM0LlL+jSs8e36pO7vSgK2S3ZdYuxXNEaZHKYuibGY2jGtNGePvFS7Xy+7ntP
- hlWf9bVQTuJDCcyIVQehOAVD3uU79c+Kji2JMB0eqjT63i9d8CktY8eCYsFPv5ZfDijW
- 12Ew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEfbguy6BpLaLPhVSwUB9BCMhrWEPGwetJgD3LWWD0iA5NXtWW+arzLtpT4eaKgQpG1+Wzpxs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhBZoKjVsAypPNNw8o9U0bkC0Ysr2kDeZk+Js9mTNCYmnfxhm9
- RoNrvIZGFe2jKR5RhkQQb1+TwCjns6NdPXb8Oq5JHpfIp4Vcxt9RmZBbvuQkkxXo9no=
-X-Gm-Gg: AY/fxX6gDoIpuidkQoZ8auQmCU0V4I8My49kaOx3hFbzk+odrZ3jAcSsY1P/xgHlPyi
- v0Ih4CO00fwzYtkWT27APuTUIpXV1ydkt0PiH+UIVuputfg5rE5KedO55xJl6YcOzOxUT7UsmFb
- FxMcukWr+APBVD2ihcA69nj6DTT/FmGadx1XoPWlYmwUTGT8j6lp3iCFWfhZtE3foNNWaWjwg6Z
- sR6g2NTyZndRqREGyVUZdFdppnJ6Ql8DFNLIOUn1BQRz4csfmrIqvvvxWqppGXvjgfVpyPBHqX0
- R1LegEmknky7GmTe5XXw/dZ9NIRfvF6LF3WpxuJ8B3E8QV438rG5sdi6OXlU+uGq3pnLUUmYQ75
- qf0myuMvGrHf8u07H0vLf6xSfW+SDwAwr3fZAQFdK2uHpkHE0IqHPzrmxryUowEFAlZVIzXe+H7
- wrKDRUmaRFjEfe8tODp+s3RWlPxnB41jZjUUM6hKg=
-X-Google-Smtp-Source: AGHT+IElyD0JB12gRjrEhem25YSPIbLxwA/iR8LkMmoffP2+Lm7dufJTqe1VqCSc/iB2RJnob0yWLg==
-X-Received: by 2002:a05:6000:24c2:b0:431:c73:48a8 with SMTP id
- ffacd0b85a97d-432c37c8796mr25475153f8f.29.1768296960851; 
- Tue, 13 Jan 2026 01:36:00 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080::fa42:7768?
- ([2a01:e0a:3d9:2080::fa42:7768]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd0e17aasm43719599f8f.15.2026.01.13.01.36.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jan 2026 01:36:00 -0800 (PST)
-Message-ID: <7b910d61-cbcf-421b-ade8-904a7f3a06e7@linaro.org>
-Date: Tue, 13 Jan 2026 10:35:58 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yZV95OK4/hamo61D6VlU0gR2mYDz78RNZusZZPVbW2kOwwfm6hjdDBqa+PTcIZ2Aiwm5wvG7eUcYz5vZ6Ux33XZ/nB448hBukNJAywEP6mTyeQCsBjiW1TWNnyaN8tbXekR1j3lbKSzuJpuZJpZToYEEssQ1CLE2Vp6/KtQFPhuWWsbm/8v1w/LE617T4P60i5hTzh4vwyyCyaDqwsMzgOuZm/A8r8Q5O9l/3VkHFPVwg00NKlihVslcrWgblcZcLUj8T8PqXjGVlXmMW2cvCxABy+o1GbQJDsBzh5YgpWha2aTB9kcY/Sf3lHfd5ajjmXpBeJUbmqpdl3tPUAFiEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2ZraU6aPPexqAG6OtF1/TjE9QOyRBsg2b8VC3uTyalg=;
+ b=cgEfSupVT8cx6aW+YRrLOmfutlny5kN++wfzqL0BnmzvYQWw6qgXMYDjwcXAP/ya3JgJ9j6J4iN+g13du/vqZJkE2F7PbE4bamh36xj2QSC1xeJfLuY5u7QNnu5H2ITz64cCW5ZR/p9qieen7PRv/CllpDi8NBfY3/96tdpwrHqaCaaTgRcHQ15ofnyniNmtUJPczUAzRbtQF9+zbndBsMd/dThVlCAw7RJGlE8496ZVVeBDg2W4dIKO5WIyqX3mDT65OkO3BPkRVaApnX4E0Z7RHGcevtfYbTl7OCLv2ThsFtICYAA8/g1r6EswCx4krAwZuVT96wc0feDVtieJTw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2ZraU6aPPexqAG6OtF1/TjE9QOyRBsg2b8VC3uTyalg=;
+ b=ceI+n0D1OE5kfrJ/neiAew/NgAUmLaloBxTsmiIkQfAopvF15WkXf7ZLYJxS1ATUbetAIWasS6ffMPR1QnIIdzwVpo2jjGrHXuma8U7dmrcsO0kvXJ3unzO68a6QPwG5EeH89AsQ/k3rlis9QQJTQZ2eeVoDL2Fdxp3JjPLRNTfyyo6hkyjVRHqK3Lo9CoSiIi3tzJuZdgF266WrmS4PxIwsbUFvyA635gBbYy0/vnqip+iLYFoieCiHF8iizMZrJ1u8vx6DKgp5kgQLxfB/rQNOKf+9t6Goht1MN312WSl2KHbdAFBvvyEbgjkQA7RqXPaWM+LXCUXneuYQ3Sjcew==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SJ0PR03MB6469.namprd03.prod.outlook.com (2603:10b6:a03:398::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
+ 2026 09:39:31 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9499.005; Tue, 13 Jan 2026
+ 09:39:31 +0000
+Message-ID: <36b97116-4a92-425f-a1a2-c7daf651989f@altera.com>
+Date: Tue, 13 Jan 2026 15:09:21 +0530
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] power: regulator: common: use dm_gpio_is_valid
- helper
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] power: regulator: common: remove unnecessary debug
+ trace
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Tanmay Kathpalia
- <tanmay.kathpalia@altera.com>, Ye Li <ye.li@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
  Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
  David Lechner <dlechner@baylibre.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
 References: <20260108-power-regulator-fix-compilation-v2-0-b00cb3268059@baylibre.com>
- <20260108-power-regulator-fix-compilation-v2-2-b00cb3268059@baylibre.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260108-power-regulator-fix-compilation-v2-2-b00cb3268059@baylibre.com>
+ <20260108-power-regulator-fix-compilation-v2-1-b00cb3268059@baylibre.com>
+ <65071031-daea-4913-aa0f-5c072aaf362d@linaro.org>
+Content-Language: en-US
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+In-Reply-To: <65071031-daea-4913-aa0f-5c072aaf362d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA5PR01CA0235.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1f4::17) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SJ0PR03MB6469:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5d5ac11-0910-4aba-90bf-08de5287a6ff
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aVZnTTdMZ2J3bzBUdFZRVDRxUjlZakpVN3JSYUVXZWw2TUNqWk92VGNjOFZm?=
+ =?utf-8?B?OHFkTzR1V3RIbDJDUE1FZ0syYmx2b3EvbmVPL21UNEx3ZGpDeHJTTUYra29I?=
+ =?utf-8?B?M3JaT1BBb3h4L2owMk5Qd2N2eFFlTEVxcXExQUwxdnY3cVA0dnhLWWtpcTZw?=
+ =?utf-8?B?dTh4ZEwvMC9iMGRxSU1LUWhyc0hBKy9YTG9jb25YVjRQcEtXL292UlhPcFJk?=
+ =?utf-8?B?OUtYZytsekN0MHh3NEZzSnJnc1dnQm5OSW05ay9sbWpqY0xiYW5jYkdoWC9G?=
+ =?utf-8?B?OGZOWVhhaEdPVmhWWW1SbzNZRFVtNU1kWVJKd3lYSjYvYkRaVmRaTmVhMEtt?=
+ =?utf-8?B?Y3JPRmlxVy9VY3FiTGI4WXZkYWhVNHc2RjVuSnZVMTVRMHdmUzRhUW90SDR1?=
+ =?utf-8?B?NmxWS1ZGS2Z6blgzejdBTFM2cGd1NTZHd3c0L2RxNDdEWUM2dHVNTEFTZFVB?=
+ =?utf-8?B?RnA2SEptV0UrSXpuUGtteWd1UEtwa3k1dnJyemhwaWtnZDlUMCtsV0kwZmZE?=
+ =?utf-8?B?bHBCZnFxOFdrV21YRXhVbzRXQlRtSnFSbWVGVkRmZ2Rtemx4dURISmhxQ3Bt?=
+ =?utf-8?B?Nlk0Nkh2RkEyT2R0YW0zeFcrRVNzWWJtTzRiY0pSNmZXdngzaE11MFRWRzBi?=
+ =?utf-8?B?ald3RjRDNGJsaGpwVUVZbUwra2UwbXZzYTlySkZkNzI1Rm1TWmJhYzFGdVNW?=
+ =?utf-8?B?M20rdktNbVZYdGUwRWo4UGZzcklZTEVrUnU4WDlYRlM2NnFWZHJUbll0STRG?=
+ =?utf-8?B?UStWNlh5a0tFREpqR1hSaElOZDd4eHZ4TEp0ZC9aeGhVM0FaaklZNFF2MGUz?=
+ =?utf-8?B?eVZrZEs5WDYrS2laVzBVTjBQaktSSG84MUJHNE5kSmhPZW5pQ2ZEanQ0SEI3?=
+ =?utf-8?B?LzduRU50enpHRXh3cEVaWHV5dnozZTBSVWY0QWpNN0dDazE5aUJXVHhpTUVk?=
+ =?utf-8?B?eWJVSTNCSjFkRGVja1pidHNRMEZwTS9FdzRKVmpicStxR1cwNjdpTU9FMERv?=
+ =?utf-8?B?d2NyaWlXZnp4TEMvSjRBdzVzL0lVT3FmNzFOaFg5UHA4bU9yblpFSlIwQVBp?=
+ =?utf-8?B?dUJUVUxOcldrRFA5MWdiMWN6djI3RVF6YmFYaEdWMUcrYnVBT2tXZXNMc2xx?=
+ =?utf-8?B?UDJVWXJCSGttRExVeS96OVkySzIya3dFSmcwVk5uZVVLZm9jMTlXekJvQnJE?=
+ =?utf-8?B?dDJWOTQvSXRwVWhFVnZuTkFKOENnZ0g4UEIyeWExVjZsamRwNVV4YmdXZFFi?=
+ =?utf-8?B?dlVHbkRUWmFqbFpmZ09sY0ZXajFmSFhjRE5FM2dvMWYvLzBJeHp6TUFOSWFK?=
+ =?utf-8?B?NldyUS9RcVJJWEl6bzY1MmdoVUU4WXJnZE0yS1J5MTVLMDZvQnVJZ2NBc25N?=
+ =?utf-8?B?djFibDVFRkVNUlRNdnU3bkYzRzJyV3hiV0QwbU1WclFHc1pjZ2hZdDN3TW1P?=
+ =?utf-8?B?MHc5N2VDWTNDeDNVb2t4MWdZM0tmUHRRYWx0K3Z6VmpSWWphK1JDaUtYVkl1?=
+ =?utf-8?B?N0xkM0RiV1JlZFFzY3BtVUJHR3VEOXRSdTE0QXAzb0xaQmdlNkZGWVN5TFVV?=
+ =?utf-8?B?QkdpcVhycWx3bXdKR3JIMjVDMXJMN2pXeHNaTFI5WHVJNkFSWW53MWd4WjBn?=
+ =?utf-8?B?enNoVS9WMStHUGpKT280SmJmQlMyczYwQ0RVY0hiWDZoNjZGSEE1RFplNy91?=
+ =?utf-8?B?Z0FYb1E4emV0UzYyUnhObmtHMGN2NWRMTkNuWnRMR09UYjVjbDVROG9DaDBs?=
+ =?utf-8?B?R2ZkeUw1cWh3NFBRWXgxT0kzcU1nNVFKQnVHL0UzMWRlSWF6Z0YyVm8wWTVn?=
+ =?utf-8?B?QndDM2ZvTWprSXUveEE1UXk0U0NXNDZTSW1QUHAxa0kvNmxhT1dlZno5bmNR?=
+ =?utf-8?B?MnRnQWY5TVVzelVaTmZRQ2VpOGh1U3dmajZYU1hjZU1TQTRNU0ZYSjFTRmtK?=
+ =?utf-8?Q?t9peUgVM002zIA2KLoyZ121RrG5Q5XfO?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S2JxSDdyajZQUHBia0JnRXUzRDBjK2ZWUWlkWkNscC9sVGpIZStoK0RDbzhC?=
+ =?utf-8?B?akcyTEJxSGwzN0NFZncvOExPeENqRklSMW5tTmJ1WW5mZGNpbFB5ZVJYUFFi?=
+ =?utf-8?B?T1VRWU1ycWxyczJYWXQ5NkJBRDNTcXVOWS9MNGxyRmJDaUVpR2ZyZ3l2MHV3?=
+ =?utf-8?B?YUxHQUgya2tuZE9vNy8rcERON0Y2ZHdEN1ZmN2c5eEtIS3gxMngvMlZqM2tI?=
+ =?utf-8?B?cUlrUUlJbXZwdkZ0U2V5Nkk4bWxDSEUvRnBiQnRuUlFpM1FiY3pYdmdwT1Qr?=
+ =?utf-8?B?TUs5aUh5czdLZHhiQXVNT3BUNy9QSWIzSHZRVVliOEpMZkUvSGtGZC9vU1lr?=
+ =?utf-8?B?SWNXZnpJSHB5bHJpSUFmU29ZcFppMHE2OTVrMFpNVVpwMjdRTmVaVnNiRm1C?=
+ =?utf-8?B?NVlsL2NrV1FvaGRubEsxVlAyTmVManN1cUsyRCthc21pNUhLQktwK29iNDVl?=
+ =?utf-8?B?L2dKWHUrVlk2RWJOczRKa3I4a0E0TVdnblltaks0UzVFNDYzN2ZtSGxPaUln?=
+ =?utf-8?B?TnMyeU96WW55V2FDL1VGRDVRam95RGVGR0NJWGNpQ3pVTzdVTnh3bldOem4y?=
+ =?utf-8?B?THNkdzN4Z2FlTEVNMEJOd2VLZ1JpQmJ4SGhaV1dlZFBRMjREMXBIblAvTVds?=
+ =?utf-8?B?emcvTGVhcGNOenVOeG5pR1JXekNMT0F0UnBKemYxVENWZ0JleVhmM3h6MVNx?=
+ =?utf-8?B?YmNoK3JRWXd4aWMzZFVuWXh2YTkvS2xuNlo0ZldsRFgxdVRWUWU3WjZXaWpV?=
+ =?utf-8?B?amlQZ0ZoNy9vemhOSmdqUlYxUkVhTjhjUWdQQmdXTG9lU1EwNVhJQUFIVEN2?=
+ =?utf-8?B?VUFmOXhQQ3pTSEZCaUhjQXJiWUsvR1l4a3pkTlhpbkRPY1hQV2NWWVhVSzI5?=
+ =?utf-8?B?eFVybHprS0VmNE5FVGdwL3k0NmZqUFQrS3hCanNnNGRnd284YlV4cmhvUmk5?=
+ =?utf-8?B?TGNIY2JMQWR1bGQ4aHJEVHBsTk9LemxmU0d3K2ZKdTZvelgydDB5Rjdwc1Na?=
+ =?utf-8?B?a1JGdys0aVkyUXIreDVTbyt5aXU1Ti9XVTQxUk12SHhOWVplbkJXNUlMeUhB?=
+ =?utf-8?B?aUFFTjh0c09rSUw0a0VENlY2MnVZdlVJYlBpLzg5RFZXengvRWpMaFJGK1p1?=
+ =?utf-8?B?NU5aME5NeloyOWNiazIxSlNYUmlLMU1rcEVwdVU1bWR1SVZkWVhvVWhaUFV4?=
+ =?utf-8?B?bVY1WHlrY2dIdE9aNDBoYzFGUGZpRFdvYk5nTUZNV29DZ1JLY1QvZkpseGtU?=
+ =?utf-8?B?NXIyTnpPVFhwZFpnYU8xL1pDVmdSc2RRL2pmdTZQbkRrWFF1b1JWZm0yU3lH?=
+ =?utf-8?B?aytUc3Y5QnkyYTd5anErQ0dpMm1pMzExOCt4MUUrdUVId095c1pNQUtxeGNG?=
+ =?utf-8?B?dFFpSVJZNW1KQkdMVzhRVm1Ta3N2eXhZOHdCQS84VmNCeVN3SmtCNTdxNVFr?=
+ =?utf-8?B?Zmt2ZnV2Y1ZUYnpmQmg1aENUTDBjSVhSQW9CRWh6eGtTc25IclVZRkNUTFBk?=
+ =?utf-8?B?MXFKejdVNzJsQU5MQXpKRjNnRjZURldVSk8rQkovMS80MG9JS2IrU2l6L29E?=
+ =?utf-8?B?dnhtTnJreFYyb21MWWJRdzAyRTBtSStyaDQ5ZEwyUmxtSkJrL2ZBUEo4T0Fw?=
+ =?utf-8?B?TUZONE1iUGFlU0kxalVNaUpwWHFVUVlidDEzb0IvWnZ0WURrSjJBeUcrUWVJ?=
+ =?utf-8?B?SGRHQU9SaEtyWUF4ajRZeGhzeFF3c3dwMTJuVSs1dithS3VQbnFMVHZBNjc5?=
+ =?utf-8?B?OEh5Z1diK0FBTzlMRkRKaldCWjVGSUswOGlWclRURXBhdGRCWm5lR1FUeEJq?=
+ =?utf-8?B?ZjZJekxrVUx6RkFyTUpMdmNyNkZKT0l3UTByeXI4a0ZacDYzQjA5Q0pzc0g0?=
+ =?utf-8?B?VERWeVptVVVvUXNza3duUVYxRU9ncTdtVTNnM0hGNGwvaEUxeWcvSkNibmds?=
+ =?utf-8?B?dDlWWnJRTzdWWVRxWjArQlVlbGVLZmNRS3BqR2hvOGhuYXNIK2pUZ01GWHdu?=
+ =?utf-8?B?MG9WNDFWVStDSU04dDA0WnNLeGJJejNZOURmR1dwaEdpYmgrMEZsTEZYQmpS?=
+ =?utf-8?B?alhYUkNaZW1ROXBWZXdGKzgvNTI1czVlYi9EWHhiaVJRNHhKWTlHODErcnhS?=
+ =?utf-8?B?aXI5aWZUWTJyZTBPZmlnRkF1SVVNZ0lUaytnSVEzNjRkWFVCLzA0YjdLdHBn?=
+ =?utf-8?B?SmlYQm85U0FiK3FkMGRjQTRrRmo2UFN2M3pqL2pBSWQ3YTluKzBRblRsWWRY?=
+ =?utf-8?B?NjFtb3pEeHljLzhIaWZ3aWc3d3VsK1BFWWhGVFB1VEdpZTY3OFB4ckpUNkJC?=
+ =?utf-8?B?aERaWUgwM09WdlJQcGhzeWYrSDY2VzBkTjFhQVAvUFRrbi9mVy9iQ1BoTGpr?=
+ =?utf-8?Q?4TSWD+Bm/Ks0kX6g=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5d5ac11-0910-4aba-90bf-08de5287a6ff
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 09:39:31.2401 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7IbrcPC5KMu84pp9OF4oK0P3oJz+y5oRmjQ7z7cpX0jnJgLS8hTuJC7Tdahh2ISWI65SQOIUVJFxuN7U1cXAnQJaslLBXC7eqow/BR9gN9c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6469
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,38 +184,46 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/8/26 15:42, Julien Stephan wrote:
-> Use dm_gpio_is_valid() helper function instead of manually checking the
-> gpio.
+Hi,
+
+
+On 1/13/2026 3:05 PM, Neil Armstrong wrote:
+> On 1/8/26 15:42, Julien Stephan wrote:
+>> Drop the ftrace like debug() that checkpatch --strict complains about:
+>>
+>>    WARNING: Unnecessary ftrace-like logging - prefer using ftrace
+>>
+>> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>> ---
+>>   drivers/power/regulator/regulator_common.c | 1 -
+>>   1 file changed, 1 deletion(-)
+>>
+>> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/ 
+>> power/regulator/regulator_common.c
+>> index 
+>> 685d8735fa5c9a6f98cb6154cd13afcabaeab1ac..ce3d80670de045dde7e263c5301bccd744abd2f5 100644
+>> --- a/drivers/power/regulator/regulator_common.c
+>> +++ b/drivers/power/regulator/regulator_common.c
+>> @@ -98,7 +98,6 @@ int regulator_common_set_enable(const struct udevice 
+>> *dev,
+>>       if (enable && plat->startup_delay_us)
+>>           udelay(plat->startup_delay_us);
+>> -    debug("%s: done\n", __func__);
+>>       if (!enable && plat->off_on_delay_us)
+>>           udelay(plat->off_on_delay_us);
+>>
 > 
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->   drivers/power/regulator/regulator_common.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-> index ce3d80670de045dde7e263c5301bccd744abd2f5..cf98998579aa8a3cb7f09dccd2124207a58d8b00 100644
-> --- a/drivers/power/regulator/regulator_common.c
-> +++ b/drivers/power/regulator/regulator_common.c
-> @@ -51,7 +51,7 @@ int regulator_common_get_enable(const struct udevice *dev,
->   	struct regulator_common_plat *plat)
->   {
->   	/* Enable GPIO is optional */
-> -	if (!plat->gpio.dev)
-> +	if (!dm_gpio_is_valid(&plat->gpio))
->   		return true;
->   
->   	return dm_gpio_get_value(&plat->gpio);
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 
-Thanks,
-Neil
+Regards,
+Tanmay
+
