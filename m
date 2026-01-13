@@ -4,55 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA454D2D10F
-	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 14:31:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48AD3D2D10A
+	for <u-boot@archiver.kernel.org>; Tue, 13 Jan 2026 14:35:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB6DB800AB;
-	Tue, 13 Jan 2026 15:31:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 902D1800AB;
+	Tue, 13 Jan 2026 15:35:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aNjtFdXP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U7UYarFA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0419800B6; Tue, 13 Jan 2026 15:31:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BCBB183015; Tue, 13 Jan 2026 15:23:25 +0100 (CET)
+Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
+ [IPv6:2607:f8b0:4864:20::a30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7183A80050
- for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 15:31:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D2B482B20
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 15:23:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c169=7T=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1768314708;
- bh=r+Pn+GgW7Su3CoarW3ZEa+lRhtCeu8tbcWhR3+sCZ4A=;
- b=aNjtFdXP3uBfUCx0c+TDzd+KeALks3aPNXA5QviXpGa4hYSkNykeM5XASc+quXyPU28kFjthk
- ACW/NjC8EmGT7StLZyZF08UEFkQCae1C6Z+qf/n647IDRauAb9bEQtKbcp3BzcZrvZ4SpYP8h6b
- TxouOuGhX9GNelTWoUsNmoufG0HQPJOK5AApBrjMKB3Fe9kqfDXut4QwcJns27CLPfsY6Y1Npw8
- mWM/mB9L0+dBp4jTx1/3FM6uLjBxonC+/oaZoQ7HoEBSd9K2LZVhZuSHNjFYP1SbwZbcT/cTMYY
- TzDqKVDWKw8mgiklw8EM+iiPfY/jpZhlfLNY9TSMF/Zw==
-X-Forward-Email-ID: 69665750b51c02680f8a5ebe
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.2.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-56373f07265so2922028e0c.0
+ for <u-boot@lists.denx.de>; Tue, 13 Jan 2026 06:23:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1768314202; x=1768919002; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=M7Gp4GqfoAgQizVtHxJGbpjKoqiS85j4/7xjKmedIEw=;
+ b=U7UYarFAM0pPV77P3WLTeQ0xNX6QsYyIzhxTEsM+5OaCLY8KkSykn/wkKJkZZtKjjN
+ NYCw9xZrSRQbpEOTRe6+NWeiGYcghziyidetcaW7ZAJcWyiGbApfaroknE6+1LavEN8Y
+ 5MmuL6MGcG6uy2Zc4TELoTbbxwOzn5UDof9B9IvchsokR7qwQxbuKbb7KPT6VYGXiPLa
+ 1IhxnO7xs6u81Vfb0KBpKhNoeOf4bWsjYSTiamC9koX7AX82JO2IpdagCwonMzzTZ9LW
+ SfR2y6eRiFXazAwe8sHoU1cYbKQr1XqzQ9KCo4YWebIwS8k8UlnQvy5MPc7dI+AjlRCh
+ N6BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768314202; x=1768919002;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M7Gp4GqfoAgQizVtHxJGbpjKoqiS85j4/7xjKmedIEw=;
+ b=HFQ+hJAelMPpHRk8C/oMmXFIQ7nBSScsbvQU5kYFvM1tGKlgWAJ2VxkTx/dPYjM2G5
+ wza3eBrx3Afs0liHwRqj2vvzyuY4k52oayTRH/Ci0uOlIn+8KWvECSo5RErpoRbIKNmR
+ c82YEoGvnGjmHPao2JTHL1Di7CyDjMOTva4+OzELIMQ5rAhLxxjgW+P5tcJOn4FEYfAi
+ ZozWVTHht4lJAbnYFpMvp2NlAilsw8x9s/hrNpv6hgWXmLGinrI4themYpSNsuGOS2yv
+ oYw8xgY9gW6qpT2Rs7kqb8VMIi+T8FtPts4WX6Ky3YmgI1YviJ5pVljKqr8pbDL+HOx7
+ 5ycA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXjZ1I8G2C42i+o5j7nqV4VK4GeEZfUh9vuTvMlhDbk83DvqT90r9XD/gdMfyI2rA854M8sKWE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXOxfOdsOEv5SJCNhyA752E0dkoC99+WDcOBZLn3iCDhmC3sWP
+ VEQZ7JgzlKUgs6mVslCuFk6jYi+q2pkq+TTTjrF6jEatymBN2OAIGh9H
+X-Gm-Gg: AY/fxX6F2Gc0+NlFnOhdby0FF5SpKmCb4QJmvhhWrZlC+HMKirJjIjXGsRHhMkBjXw8
+ hpYsUMMKHkRL27flpH0MIixiVSYkEZtrpNveHTxYmIXvKSd9OLzhUq9Ng23cW8Cm6+c/EORDxRZ
+ D2CkCDJz4IHOJhCfiAGLW7x0+3yRajyD+T7vsMk7R0F241D7cauFlT1qIxdZkxbDyepWxFxDtej
+ ZE4hORNod1v03qJ2G4pShsOHF8o7VBDaT5ZWKCQ0Y5iJDhF22Q5spGm/pxF2hBQ8WLhPrXByQLi
+ FGQZxJ7qwfP1stQQxJKkLhSx+IAPcM9MZ+9nf6Hu5Ya0tZdgPMT2z7wHLcMKag8kZsgrx41uefq
+ rks81PvSFSBhpJq+7JxO4ApflAOQEYqkrzTQzoaZ91ibljk6x3V+ynJ+jl3EzDR/OSTm9P3Rk67
+ IM1FASKes/8G0eqnCPgRV+UKc9ggeyqfnrtLdgt1UfMlJMlA==
+X-Google-Smtp-Source: AGHT+IFNGfxIKtZvrZP8i9P9wBDHj4aJ08arxNw2dPFNnZAuqUrN3U4R5GP7fhGr7+5CacjO2Hf+4w==
+X-Received: by 2002:a05:6122:208a:b0:55a:be72:7588 with SMTP id
+ 71dfb90a1353d-56347fc9897mr7928335e0c.11.1768314202304; 
+ Tue, 13 Jan 2026 06:23:22 -0800 (PST)
+Received: from ped-6489-Latitude-3550.mobit.com.br ([177.22.36.222])
+ by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-5637f6ce00esm7677112e0c.0.2026.01.13.06.23.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Jan 2026 06:23:21 -0800 (PST)
+From: Mateus Lima Alves <mateuslima.ti@gmail.com>
+To: peng.fan@oss.nxp.com,
+	alison.wang@nxp.com
+Cc: Mateus Lima Alves <mateuslima.ti@gmail.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH] rockchip: Reduce size of ramboot usb472 payload
-Date: Tue, 13 Jan 2026 14:31:30 +0000
-Message-ID: <20260113143132.3401001-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.52.0
+Subject: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot board.
+Date: Tue, 13 Jan 2026 11:23:01 -0300
+Message-ID: <20260113142303.441190-1-mateuslima.ti@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 13 Jan 2026 15:35:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,129 +100,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Booting into SPL using ramboot can take several seconds on some SoCs due
-to the large size of the usb472 payload sent over USB to BootROM.
+This patch adds CPLD support via IFC to the ls1021a-iot board.
 
-A large chunk of the usb472 payload, around 1-2 MiB, is padding used to
-avoid overlapping when loading e.g. TF-A to 0x40000.
-
-BootROM is likely wasting unnecessary time crc16 validating the padding
-of the payload.
-
-Place the FIT payload directly after SPL and memmove it to the expected
-memory location, SPL_LOAD_FIT_ADDRESS, to avoid excessive padding and
-help speed up ramboot.
-
-Binman symbols are used to get the position and size of the FIT payload
-that is initially loaded into DRAM by the BootROM.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
 ---
- arch/arm/dts/rockchip-u-boot.dtsi |  7 +++--
- arch/arm/mach-rockchip/spl.c      | 51 +++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+), 2 deletions(-)
+Changes since v1:
+Reselected CONFIG_CMD_MII in file configs/ls1021aiot_sdcard_defconfig.
+---
+ board/freescale/ls1021aiot/ls1021aiot.c |  5 ++++
+ configs/ls1021aiot_sdcard_defconfig     |  1 +
+ drivers/misc/Kconfig                    |  6 ++++-
+ include/configs/ls1021aiot.h            | 34 +++++++++++++++++++++++++
+ 4 files changed, 45 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 71d7623fe2ca..9fb1abd27fa0 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -244,18 +244,21 @@
- 	simple-bin-usb472 {
- 		filename = "u-boot-rockchip-usb472.bin";
- 		pad-byte = <0x00>;
-+		skip-at-start = <CFG_SYS_SDRAM_BASE>;
+diff --git a/board/freescale/ls1021aiot/ls1021aiot.c b/board/freescale/ls1021aiot/ls1021aiot.c
+index 4eff0a3fee0..52a3c3abdb4 100644
+--- a/board/freescale/ls1021aiot/ls1021aiot.c
++++ b/board/freescale/ls1021aiot/ls1021aiot.c
+@@ -21,6 +21,7 @@
+ #include <asm/sections.h>
+ #include <fsl_csu.h>
+ #include <fsl_immap.h>
++#include <fsl_ifc.h>
+ #include <netdev.h>
+ #include <fsl_mdio.h>
+ #include <tsec.h>
+@@ -120,6 +121,10 @@ int board_early_init_f(void)
  
- 		u-boot-spl {
--			no-write-symbols;
- 		};
- 
-+		payload {
-+			type = "section";
-+			align = <CONFIG_SYS_CACHELINE_SIZE>;
- #ifdef HAS_FIT
- 		fit {
- 			insert-template = <&fit_template>;
- #else
- 		u-boot-img {
  #endif
--			offset = <(CONFIG_SPL_LOAD_FIT_ADDRESS - CFG_SYS_SDRAM_BASE)>;
-+		};
- 		};
- 	};
- #endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index 1ce3a3b05547..a9155dceedb4 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -3,6 +3,7 @@
-  * (C) Copyright 2019 Rockchip Electronics Co., Ltd
-  */
  
-+#include <binman_sym.h>
- #include <cpu_func.h>
- #include <debug_uart.h>
- #include <dm.h>
-@@ -10,6 +11,7 @@
- #include <image.h>
- #include <init.h>
- #include <log.h>
-+#include <mapmem.h>
- #include <ram.h>
- #include <spl.h>
- #include <asm/arch-rockchip/bootrom.h>
-@@ -140,3 +142,52 @@ void spl_board_prepare_for_boot(void)
- 
- 	cleanup_before_linux();
- }
-+
-+#if CONFIG_IS_ENABLED(RAM_DEVICE) && IS_ENABLED(CONFIG_SPL_LOAD_FIT)
-+binman_sym_declare_optional(ulong, payload, image_pos);
-+binman_sym_declare_optional(ulong, payload, size);
-+
-+static ulong ramboot_load_read(struct spl_load_info *load, ulong sector,
-+			       ulong count, void *buf)
-+{
-+	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				    CONFIG_SPL_LOAD_FIT_ADDRESS);
-+
-+	memcpy(buf, map_sysmem(addr + sector, 0), count);
-+	return count;
-+}
-+
-+static int ramboot_load_image(struct spl_image_info *spl_image,
-+			      struct spl_boot_device *bootdev)
-+{
-+	struct legacy_img_hdr *header;
-+	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				    CONFIG_SPL_LOAD_FIT_ADDRESS);
-+	ulong image_pos = binman_sym(ulong, payload, image_pos);
-+	ulong size = binman_sym(ulong, payload, size);
-+
-+	if (addr == CFG_SYS_SDRAM_BASE || addr == CONFIG_SPL_TEXT_BASE)
-+		return -ENODEV;
-+
-+	if (image_pos != BINMAN_SYM_MISSING && size != BINMAN_SYM_MISSING) {
-+		header = map_sysmem(image_pos, 0);
-+		if (image_get_magic(header) == FDT_MAGIC) {
-+			memmove(map_sysmem(addr, 0), header, size);
-+			memset(header, 0, sizeof(*header));
-+		}
-+	}
-+
-+	header = map_sysmem(addr, 0);
-+	if (image_get_magic(header) == FDT_MAGIC) {
-+		struct spl_load_info load;
-+
-+		spl_load_init(&load, ramboot_load_read, NULL, 1);
-+		return spl_load_simple_fit(spl_image, &load, 0, header);
-+	}
-+
-+	return -ENODEV;
-+}
-+
-+/* Use priority and method name that sort before default spl_ram_load_image */
-+SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, ramboot_load_image);
++#ifdef CONFIG_FSL_IFC
++	init_early_memctl_regs();
 +#endif
++
+ 	arch_soc_init();
+ 
+ 	return 0;
+diff --git a/configs/ls1021aiot_sdcard_defconfig b/configs/ls1021aiot_sdcard_defconfig
+index 6b32150e408..78b81c1895e 100644
+--- a/configs/ls1021aiot_sdcard_defconfig
++++ b/configs/ls1021aiot_sdcard_defconfig
+@@ -106,3 +106,4 @@ CONFIG_FSL_QSPI=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
++CONFIG_FSL_IFC=y
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index dde773ab6b1..229a50f266f 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -694,7 +694,11 @@ config ESM_PMIC
+ 	  typically to reboot the board in error condition.
+ 
+ config FSL_IFC
+-	bool
++	bool "Freescale Integrated Flash Controller"
++	help
++	  This driver is for the Integrated Flash Controller(IFC) module
++	  available in Freescale SoCs. This controller allows to handle
++	  devices such as NOR, NAND, FPGA and ASIC etc.
+ 
+ config SL28CPLD
+ 	bool "Enable Kontron sl28cpld multi-function driver"
+diff --git a/include/configs/ls1021aiot.h b/include/configs/ls1021aiot.h
+index 971a393817a..59acf00b8e5 100644
+--- a/include/configs/ls1021aiot.h
++++ b/include/configs/ls1021aiot.h
+@@ -44,6 +44,40 @@
+ #define CFG_SYS_DDR_SDRAM_BASE	0x80000000UL
+ #define CFG_SYS_SDRAM_BASE		CFG_SYS_DDR_SDRAM_BASE
+ 
++/* CPLD */
++
++#define CFG_SYS_CPLD_BASE              0x7fb00000
++#define CPLD_BASE_PHYS                 CFG_SYS_CPLD_BASE
++
++#define CFG_SYS_FPGA_CSPR_EXT          (0x0)
++#define CFG_SYS_FPGA_CSPR              (CSPR_PHYS_ADDR(CPLD_BASE_PHYS) | \
++                                        CSPR_PORT_SIZE_8 | \
++                                        CSPR_MSEL_GPCM | \
++                                        CSPR_V)
++#define CFG_SYS_FPGA_AMASK             IFC_AMASK(64 * 1024)
++#define CFG_SYS_FPGA_CSOR              (CSOR_NOR_ADM_SHIFT(4) | \
++                                        CSOR_NOR_NOR_MODE_AVD_NOR | \
++                                        CSOR_NOR_TRHZ_80)
++
++/* CPLD Timing parameters for IFC GPCM */
++#define CFG_SYS_FPGA_FTIM0             (FTIM0_GPCM_TACSE(0xf) | \
++                                        FTIM0_GPCM_TEADC(0xf) | \
++                                        FTIM0_GPCM_TEAHC(0xf))
++#define CFG_SYS_FPGA_FTIM1             (FTIM1_GPCM_TACO(0xff) | \
++                                        FTIM1_GPCM_TRAD(0x3f))
++#define CFG_SYS_FPGA_FTIM2             (FTIM2_GPCM_TCS(0xf) | \
++                                        FTIM2_GPCM_TCH(0xf) | \
++                                        FTIM2_GPCM_TWP(0xff))
++#define CFG_SYS_FPGA_FTIM3             0x0
++#define CFG_SYS_CSPR0_EXT              CFG_SYS_FPGA_CSPR_EXT
++#define CFG_SYS_CSPR0                  CFG_SYS_FPGA_CSPR
++#define CFG_SYS_AMASK0                 CFG_SYS_FPGA_AMASK
++#define CFG_SYS_CSOR0                  CFG_SYS_FPGA_CSOR
++#define CFG_SYS_CS0_FTIM0              CFG_SYS_FPGA_FTIM0
++#define CFG_SYS_CS0_FTIM1              CFG_SYS_FPGA_FTIM1
++#define CFG_SYS_CS0_FTIM2              CFG_SYS_FPGA_FTIM2
++#define CFG_SYS_CS0_FTIM3              CFG_SYS_FPGA_FTIM3
++
+ /*
+  * Serial Port
+  */
 -- 
-2.52.0
+2.43.0
 
