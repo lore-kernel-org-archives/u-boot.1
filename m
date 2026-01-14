@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B32CD31A2E
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 09:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0579ED31A2A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 09:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8662F8394E;
+	by phobos.denx.de (Postfix) with ESMTP id C59A88398C;
 	Wed, 14 Jan 2026 10:17:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="XAo1ff3X";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Dr+FzVD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68AA2835B3; Wed, 14 Jan 2026 09:34:41 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 58E138388D; Wed, 14 Jan 2026 09:34:44 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71C64830A0
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 09:34:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 765B7830A0
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 09:34:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b8710c9cddbso478065366b.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 00:34:39 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-65378ba2ff7so1943337a12.2
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 00:34:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768379679; x=1768984479;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768379682; x=1768984482;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=q1VrYFbRaThT956fhVuaUfI+5oLtLZNQo5/6UrLn7E4=;
- b=XAo1ff3XREdyldhSRWsuWTgWTnnJMQAoXrI5TxdT38lCe6nt0GBXugX9vf6vCqRVIr
- lNyX96xo7V4TqOKnMbCHB0+n7dMAHgc0li9RZv/ZHu++cgqAbh1BVdi1NCOZIW70obaT
- fkvw8brHSaoNnUm1hlbqcjslDJTvc2jMZi25bhxvUeI2e4S4esIaNgHUQaKHb3aWQX8+
- mxDsGd27YAixyNFURmIq9E5LHeb1ZCn7Us0HS3T50oIUc3JnXCfv/83tjmgk27ov7Vyh
- 5o6xDLR+th9wuddUDXrGXg1PNoMgOUYAxFk0llpNgHozifhp9m4QfQtc4UP3XhejeIBv
- 2NMg==
+ :reply-to; bh=NQdKySszMWxZzfLpdSZ/3XPypDh6AjD3noEf0JGmBtA=;
+ b=Dr+FzVD1IHPxHhVC9XdtfKWJ1EYGihDWQ9nvVjF3Pau15w2UmQAmVoV3xR9xjumUNh
+ 6tevkoyDzSXZZFu3PXYh49pnxuDTU12MBiiVyYfVSBjFNcL40mYnN0033BivL4OP9cX3
+ 93YiLGrkS+YLPUpKjqXrNtxBS5Kml2oxKQHIHzrfguPwEGHqsV1j+NzlwacAmPVFYm8q
+ hY/yqBw1kGtLw2G6ztKXpoS0Aq9lcYwQSUvgrx6L+JiYRF/a+dApdHZQrjW2qLKODbK4
+ h1TFerxGN0Bh/AkNcZyN6tW20WO7rkZ4ufJuDVB+9xu9598mfamztN7Y8EosP9NEGc12
+ BvrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768379679; x=1768984479;
+ d=1e100.net; s=20230601; t=1768379682; x=1768984482;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=q1VrYFbRaThT956fhVuaUfI+5oLtLZNQo5/6UrLn7E4=;
- b=t5ISMwgLFAlcwrV4Z4PkfmD1CM1bgPgXMtDaHnLNfjXpYBTwXyFfaYjcVakPpH2CFk
- se2HeJMuFPu/nwK0UZveNLcAbN+hyhJXRMY4nfDqmQng/4aVTbtJZBhyd8817rcydIVl
- XqU7A961WU1on2XA5HrmxZQ7TtcRptfamzIOviBPemYfSs6iqMla/zpBgPX1vmiTDmoW
- JfAuQsnZmxdRdNkZ3cB7D7jhOnOE3QhU0Pf8ugAl9cBseZCkKvAI1BGn1bOaPF8hzUjS
- qPrFRGGFXh18+Zwv6wDHYiONM1RtEwhHhiM/ho+YI2LCtITDvPwDPecz3oIzerpowhAo
- vmwA==
-X-Gm-Message-State: AOJu0YxmYfs9nUm7s/xMFxRcp8E+A18+KelteR1DZ6XP38HpsCp0r36Z
- suhmgB6k1rwxPgvs9LPIbhfwv4AizppUJVt78wJGD1kd6mVhJrwTwNWWfUmO3RP85yQ=
-X-Gm-Gg: AY/fxX6uk31bK5prXEvWPR0zJiTs10h24P22JWWNwuFwkusUlQ+1roBjVP1gs7S1s2I
- P3mVwQqTezOa7oK9iIo6Ep7DfcHrsnMg/q8u5GagvauabY8+WQG2+ZAvegmmIL6yVQBsGg2gVek
- bfHQS5sL5iqCNfEs9dfn3hW65VRVmKO7kMxQbofQIJfjxceomZN/OkFV23XN+/EBIUhs4yeopaD
- fOZliElsNAwSmzjUVYvrW1WJe48UjNTC2uDjfrmz6f5FTPYRTT9OlsW+E45LDtccklRXBzit8Xa
- GVAOUZRROCs7k8x2VBmZg6oisp3UP0nXO4vg1RgvUKReBB7Xr6P/A+/ZomT6M3gOAykN/j8/U6O
- C2ifGKKYgDIZlTopXuBvWJ3nMhWy89z1nK4pbQ1nB1e/UQRJl2gG7JK4uD5/a4tQ1LmU2aNamL5
- I9z+uGa5uc
-X-Received: by 2002:a17:906:f58a:b0:b86:ef31:b16a with SMTP id
- a640c23a62f3a-b87611399f9mr152241266b.39.1768379678874; 
- Wed, 14 Jan 2026 00:34:38 -0800 (PST)
+ bh=NQdKySszMWxZzfLpdSZ/3XPypDh6AjD3noEf0JGmBtA=;
+ b=THtVO2dKwar0tjotcuPcuCgMroc6M/k3VJhOxj9mifZ9Jbu07Dmh+cVrSfAPNXwPw9
+ FFosTZfvEUYZfKze8/Jms/91yFVrB8cbpjW29cK3JL2krZQT410qutLRCUr4rnIem9+k
+ zYy3Ax+greJfXg5cA9UXSro+luOpRvjDazCd1PpuzFtjPue1V8QthG08RKdhdkJl9L/J
+ o6pKmua7qd53h+HDm0hfmHtIAQpU5sqwgf9epI4ZbCB/YK0gYNCzf5BLtYbKTJ3k9YEL
+ 0jGvyafhNBw/wYKcRYG17FK7qejA0ONxIcHaQ17Zk/Jx8wTHfMvJzjvom8RCWtRMz6PU
+ oSWA==
+X-Gm-Message-State: AOJu0YxuFGuVTgrKERJPtMdV2ChO2WHUiVSXQqkOtd/+ubYJSlNuFjrh
+ 5rVwHOoJC+tAXVRFAvTYN/oPVYOW9Gjk2tLWsYzzgGpIpNEViwJB2mUaknCRMqHOFP4=
+X-Gm-Gg: AY/fxX4yH2TBaLVQtPnL1OUd/J+J/zEBCFZs8iN6W1IWPE+Q5BbR02lsF59Pylbid9P
+ PSqKNpVJTOYsz2raWY063qdz6ShmC5gII99oIgOIJuImw3/QHdzmlIBELyKkHvVVVSGJwEtsa4k
+ SiOatAWSc53uWVUw71nZvHKSvAFawWZpB5/jDq9/1e8+XqcGK5dde1kC23alrF00ohtKnCV2eGO
+ G6ReY8UNh6GG1FiQwqQkhlGlj8BAI65QBbCho2PfbLekFCqRgkHrTbAs+/P9d2QsrthiI2GMfBQ
+ ZsXiWn1CjlZBndHRImptLu0CDb5QCgAWBFRkwB5DUmygq5zdEuUURYOIm9vQ2JQPMJ9oRClMhAA
+ iGBCVjyEZCtBjM/4YiEp1Ihtb9lHX1/+jrfm+t0NU63e+ys14ZmXo6lO+symmCxi63S6KbQlvdt
+ 1G5d69Uy5F
+X-Received: by 2002:a05:6402:3547:b0:64c:69e6:ad3e with SMTP id
+ 4fb4d7f45d1cf-653ec46debemr1501413a12.33.1768379681921; 
+ Wed, 14 Jan 2026 00:34:41 -0800 (PST)
 Received: from localhost ([2001:4090:a244:872b:a354:65f3:92a0:8de7])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b870813a9efsm986908866b.38.2026.01.14.00.34.38
+ 4fb4d7f45d1cf-6507bf6d5absm22207664a12.33.2026.01.14.00.34.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jan 2026 00:34:38 -0800 (PST)
+ Wed, 14 Jan 2026 00:34:39 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Wed, 14 Jan 2026 09:33:51 +0100
-Subject: [PATCH v3 4/6] test: dm: Add compatible multimatch test
+Date: Wed, 14 Jan 2026 09:33:52 +0100
+Subject: [PATCH v3 5/6] usb: musb-new: Relative ctrl_mod address parsing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260114-topic-musb-probing-v2026-01-v3-4-ebb8d990b9df@baylibre.com>
+Message-Id: <20260114-topic-musb-probing-v2026-01-v3-5-ebb8d990b9df@baylibre.com>
 References: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
 In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
 To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
@@ -86,15 +86,14 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>, 
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Heiko Schocher <hs@nabladev.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, 
- Simon Glass <simon.glass@canonical.com>
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2719; i=msp@baylibre.com;
- h=from:subject:message-id; bh=cn1qKbgg7GTvUKXzxERVt+pG8Z/2SXh+D6C8P9Di3ug=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz0UK5npUYBLsFZXzq1JlaI/plj8J7dUmvFph/vVjZMn
- KOlHGnQUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABOp5mL4K8Wix3hzbWrS0qvL
- bJbY6136mdjc/GTJKrbr52J9dM1TXzIyPJTSXZMd0WNw1Tzi/JmzbUc3Nu2SaXlqa5azZnlshUw
- bHwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1027; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=dDvD/x/4LymVEL1XBsIubCAquDLmvaK7eVpCHnTgwZ8=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz0UH6lz+KvzXqzFLa9vHEnPnjfi53eDx5OZegPe6b+V
+ 2Vb6eZTHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCRxniGv8If1qSlPK1pu3JM
+ y/qE22P30EvTXSJvVFhO47j3JMXF4hQjwwWRR8cPeXP32baK6H77mW3Vuvliqv2rALbT2zRXxl9
+ 8zQcA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Wed, 14 Jan 2026 10:17:21 +0100
@@ -114,89 +113,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for binding of multiple drivers with the same compatible. If
-one of the drivers returns -ENODEV the other one needs to be bound.
+For the upstream DT the ctrl_mod node is using a relative register
+address which is not translated by the current code.
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Make address parsing understand relative addresses.
+
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- arch/sandbox/dts/test.dts |  4 ++++
- test/dm/core.c            | 15 +++++++++++++++
- test/dm/test-driver.c     | 26 ++++++++++++++++++++++++++
- 3 files changed, 45 insertions(+)
+ drivers/usb/musb-new/ti-musb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index a2c739a2044c728a96b5f4acbf439a42d7e12fb5..9cc854ffe80e994e34010e299029a7f1756697e0 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -457,6 +457,10 @@
- 		mux-control-names = "mux0";
- 	};
+diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-musb.c
+index bcd31adba522fc55190fc43fd2dbd2dec93a2731..d3c3d3057c1df2a5cc62df3c57d8b071bb0f12b8 100644
+--- a/drivers/usb/musb-new/ti-musb.c
++++ b/drivers/usb/musb-new/ti-musb.c
+@@ -93,7 +93,7 @@ static int ti_musb_of_to_plat(struct udevice *dev)
  
-+	multimatch-test {
-+		compatible = "sandbox,multimatch-test";
-+	};
-+
- 	phy_provider0: gen_phy@0 {
- 		compatible = "sandbox,phy";
- 		#phy-cells = <1>;
-diff --git a/test/dm/core.c b/test/dm/core.c
-index 53693f4f7ed7c7265218e4154ebf81a044a3a431..78ee14af228ab20a6639bb076260296adaea2c92 100644
---- a/test/dm/core.c
-+++ b/test/dm/core.c
-@@ -1410,3 +1410,18 @@ static int dm_test_try_first_device(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_try_first_device, 0);
-+
-+/* Test that all drivers are iterated when bind returns -ENODEV */
-+static int dm_test_multimatch(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+
-+	ut_assertok(uclass_find_device_by_name(UCLASS_TEST, "multimatch-test",
-+					       &dev));
-+	ut_assertnonnull(dev);
-+	ut_asserteq_str("test_multimatch_second", dev->driver->name);
-+	ut_asserteq(2, dm_testdrv_op_count[DM_TEST_OP_BIND]);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_multimatch, UTF_SCAN_FDT);
-diff --git a/test/dm/test-driver.c b/test/dm/test-driver.c
-index 759de3a5f77f4b64ea577a293586a737e4623f60..d628a6d766fc24f221ffcec3a5dbc6cc060e07bd 100644
---- a/test/dm/test-driver.c
-+++ b/test/dm/test-driver.c
-@@ -197,3 +197,29 @@ U_BOOT_DRIVER(test_act_dma_vital_clk_drv) = {
- 	.unbind	= test_manual_unbind,
- 	.flags	= DM_FLAG_VITAL | DM_FLAG_ACTIVE_DMA,
- };
-+
-+static int test_multimatch_first_bind(struct udevice *dev)
-+{
-+	dm_testdrv_op_count[DM_TEST_OP_BIND]++;
-+
-+	return -ENODEV;
-+}
-+
-+static const struct udevice_id test_multimatch_ids[] = {
-+	{ .compatible = "sandbox,multimatch-test" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(test_multimatch_first) = {
-+	.name	= "test_multimatch_first",
-+	.id	= UCLASS_TEST,
-+	.of_match = test_multimatch_ids,
-+	.bind	= test_multimatch_first_bind,
-+};
-+
-+U_BOOT_DRIVER(test_multimatch_second) = {
-+	.name	= "test_multimatch_second",
-+	.id	= UCLASS_TEST,
-+	.of_match = test_multimatch_ids,
-+	.bind	= test_manual_bind,
-+};
+ 	phys = fdtdec_lookup_phandle(fdt, node, "phys");
+ 	ctrl_mod = fdtdec_lookup_phandle(fdt, phys, "ti,ctrl_mod");
+-	plat->ctrl_mod_base = (void *)fdtdec_get_addr(fdt, ctrl_mod, "reg");
++	plat->ctrl_mod_base = (void *)ofnode_get_addr(offset_to_ofnode(ctrl_mod));
+ 	usb_index = ti_musb_get_usb_index(node);
+ 	switch (usb_index) {
+ 	case 1:
 
 -- 
 2.51.0
