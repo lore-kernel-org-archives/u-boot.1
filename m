@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C30ED31A28
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 08:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3DC9D31A28
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 08:29:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97F37838BB;
+	by phobos.denx.de (Postfix) with ESMTP id D58C683942;
 	Wed, 14 Jan 2026 09:28:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="dblcwcBF";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="O84n9Qh3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECECF838BB; Wed, 14 Jan 2026 09:28:34 +0100 (CET)
+ id F33F483655; Wed, 14 Jan 2026 09:28:34 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C033A83655
+ by phobos.denx.de (Postfix) with ESMTPS id 67B7E83623
  for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 09:28:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
@@ -28,27 +28,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  s=gloria202408;
  h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type;
- bh=b24oqV4YQABXLyTm3Z5B9YO3FPLqs4k4pjWpq/TV9So=; b=dblcwcBFDsraWwCNEYdR3tkCOO
- LUdl6d7XinBdaY/siU8g0KTwmFsxhyFuImWDbv/pjpHOtIvSJIMs1XNbIEAUeqt6Guc7EmSVWBFSY
- +lUuTqvrp3cSPA2o6+iLMCkLvTUiR/SsPQJd/Q1QZDBr9hM/BoGwJi5F4IUBu5SvQ3nvvpxUzX/Fo
- pSYzVFq2PKZRLHl1u9at0foNVvCuQtJ1yidlPt+3SV6grxM+7wArrFeZexQU00I8Ft4mFqV5Ngk6T
- W9vxwWP/SjkEIifZ7w+NOgW54lrvQiPiN1qNxXlBjuUcMe331JEGQLujDxJgZqZpAruU5Z8S1NfwL
- zpoz8RgQ==;
+ bh=LmSYLYg2ZgeCWoo1uwqPusypNTIu5dJA/6SqEcKE4RU=; b=O84n9Qh35xQqa1sL3YMJ3I1Oth
+ X2doQtrV6qgmS8FJunhI+S1lxfw40wB2a1FAMk60QdZiS/7j1djtfnKf7Mgo77J0+uMaIhLY/1sD1
+ JxU2dDoGBEb5t4IsIXDYlA6e/EX/LjKMA/Yf01/noTwo6RygZqKDXw84mDduzA8u3/q+5YALjcj6r
+ fZoOTrr+bQgH1+CAgy7DpH0sHjfsERkx+3F0yYM/Ynl/05ZFa55/BBM2qoh2JChTrNoPoX9JnffR9
+ 3haiUi2m2j8F49SdzcdPnRpyEEJEexu06sNiJ3sRDmJWnCAxkO/BxjchOdh2crNHpUXoCbZeBgIJV
+ KoQssbgQ==;
 Received: from i53875b96.versanet.de ([83.135.91.150] helo=phil..)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1vfwEv-002G0M-QJ; Wed, 14 Jan 2026 09:28:30 +0100
+ id 1vfwEv-002G0M-FV; Wed, 14 Jan 2026 09:28:30 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
 	kever.yang@rock-chips.com
-Cc: heiko@sntech.de, trini@konsulko.com, u-boot@lists.denx.de,
- Daniel Bast <2790401+dbast@users.noreply.github.com>
-Subject: [PATCH v2 04/12] rockchip: board: qnap-ts433: Update documentation to
- recent tool versions
-Date: Wed, 14 Jan 2026 09:28:14 +0100
-Message-ID: <20260114082822.4007128-5-heiko@sntech.de>
+Cc: heiko@sntech.de,
+	trini@konsulko.com,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 03/12] rockchip: board: qnap-ts433: Fix dir naming to allow
+ build-system to find it
+Date: Wed, 14 Jan 2026 09:28:13 +0100
+Message-ID: <20260114082822.4007128-4-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20260114082822.4007128-1-heiko@sntech.de>
 References: <20260114082822.4007128-1-heiko@sntech.de>
@@ -70,46 +71,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ddr_tool was migrated from a binary to a python implementation ddr_tool.py
-The ddr-init binaries were also upgraded to new versions.
+Right now the board directory for the TS433 only contains its Kconfig
+which is linked to directly from the main RK3568 Kconfig.
 
-Suggested-by: Daniel Bast <2790401+dbast@users.noreply.github.com>
+But as the namings are currently set, the build system will never find
+the board directory to check if it contains something to build.
+
+So adapt the board naming to a pattern similar to all the other boards
+(boardname_rkSoC).
+
+Fixes: d3cacb79e706 ("board: rockchip: add support for Qnap TS433 devices")
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 ---
- doc/board/qnap/ts433.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ arch/arm/mach-rockchip/rk3568/Kconfig            | 2 +-
+ board/qnap/{ts433 => ts433_rk3568}/Kconfig       | 4 ++--
+ board/qnap/{ts433 => ts433_rk3568}/MAINTAINERS   | 2 +-
+ include/configs/{qnap_ts433.h => ts433_rk3568.h} | 0
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+ rename board/qnap/{ts433 => ts433_rk3568}/Kconfig (70%)
+ rename board/qnap/{ts433 => ts433_rk3568}/MAINTAINERS (87%)
+ rename include/configs/{qnap_ts433.h => ts433_rk3568.h} (100%)
 
-diff --git a/doc/board/qnap/ts433.rst b/doc/board/qnap/ts433.rst
-index 5e5f0394ada..2cd7cf13d67 100644
---- a/doc/board/qnap/ts433.rst
-+++ b/doc/board/qnap/ts433.rst
-@@ -36,7 +36,7 @@ modification and also a new maskrom downloader can be build:
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index 2730220a18e..16e14ee4fa7 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -76,7 +76,7 @@ source "board/hardkernel/odroid_m1/Kconfig"
+ source "board/hardkernel/odroid_m1s/Kconfig"
+ source "board/pine64/quartz64_rk3566/Kconfig"
+ source "board/powkiddy/x55/Kconfig"
+-source "board/qnap/ts433/Kconfig"
++source "board/qnap/ts433_rk3568/Kconfig"
+ source "board/radxa/zero3-rk3566/Kconfig"
+ source "board/xunlong/orangepi-3b-rk3566/Kconfig"
  
- .. code-block:: bash
+diff --git a/board/qnap/ts433/Kconfig b/board/qnap/ts433_rk3568/Kconfig
+similarity index 70%
+rename from board/qnap/ts433/Kconfig
+rename to board/qnap/ts433_rk3568/Kconfig
+index b00e1f9f2ef..c5f9db849f2 100644
+--- a/board/qnap/ts433/Kconfig
++++ b/board/qnap/ts433_rk3568/Kconfig
+@@ -1,12 +1,12 @@
+ if TARGET_QNAP_TS433_RK3568
  
--    $ tools/ddrbin_tool rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
-+    $ tools/ddrbin_tool.py rk3568 tools/ddrbin_param.txt bin/rk35/rk3568_ddr_1560MHz_v1.23.bin
-     $ tools/boot_merger RKBOOT/RK3568MINIALL.ini
+ config SYS_BOARD
+-	default "qnap_ts433"
++	default "ts433_rk3568"
  
- Building U-Boot
-@@ -45,8 +45,8 @@ Building U-Boot
- .. code-block:: bash
+ config SYS_VENDOR
+ 	default "qnap"
  
-     $ export CROSS_COMPILE=aarch64-linux-gnu-
--    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.34.elf
--    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1560MHz_v1.21.bin
-+    $ export BL31=../rkbin/bin/rk35/rk3568_bl31_v1.45.elf
-+    $ export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3568_ddr_1560MHz_v1.23.bin
-     $ make qnap-ts433-rk3568_defconfig
-     $ make
+ config SYS_CONFIG_NAME
+-	default "qnap_ts433"
++	default "ts433_rk3568"
  
-@@ -87,5 +87,5 @@ example as package of that name in Debian-based distributions:
- 
- .. code-block:: bash
- 
--    $ rkdeveloptool db rk356x_spl_loader_v1.21.113.bin
-+    $ rkdeveloptool db rk356x_spl_loader_v1.23.114.bin
-     $ rkdeveloptool wl 64 u-boot-rockchip.bin
+ endif
+diff --git a/board/qnap/ts433/MAINTAINERS b/board/qnap/ts433_rk3568/MAINTAINERS
+similarity index 87%
+rename from board/qnap/ts433/MAINTAINERS
+rename to board/qnap/ts433_rk3568/MAINTAINERS
+index c2b31ad9794..02ce7ff383c 100644
+--- a/board/qnap/ts433/MAINTAINERS
++++ b/board/qnap/ts433_rk3568/MAINTAINERS
+@@ -1,7 +1,7 @@
+ QNAP-TS433
+ M:	Heiko Stuebner <heiko@sntech.de>
+ S:	Maintained
+-F:	board/qnap/ts433/
++F:	board/qnap/ts433_rk3568/
+ F:	doc/board/qnap/
+ F:	include/configs/qnap_ts433.h
+ F:	configs/qnap-ts433-rk3568_defconfig
+diff --git a/include/configs/qnap_ts433.h b/include/configs/ts433_rk3568.h
+similarity index 100%
+rename from include/configs/qnap_ts433.h
+rename to include/configs/ts433_rk3568.h
 -- 
 2.47.2
 
