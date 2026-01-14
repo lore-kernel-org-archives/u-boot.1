@@ -4,148 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9C0D31A2E
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 09:18:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2041BD31A29
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 09:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56EBA83655;
-	Wed, 14 Jan 2026 10:17:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+	by phobos.denx.de (Postfix) with ESMTP id 7174A80C93;
+	Wed, 14 Jan 2026 10:44:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="IPvrNcu+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oFpeiajM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AF42830E4; Wed, 14 Jan 2026 10:15:02 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazolkn190130003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d20a::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E617483015; Wed, 14 Jan 2026 10:44:36 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50CD980081
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 10:15:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6383F808AF
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 10:44:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dGWWYdGVAaZLubLKgU6xJIWZkBo6lK23P3XkTxOZqroIbJnY3Lpu5ScuV/9DIqMMe04NTeG9UPTESWUu5fb23iDAACfeBYZJN7q3WfmVUIYdI0U4sD1Ks0Baodv6KWBCpTyhDzImuqMNHW8bE/x4QHt8cQrbSPoLC9o/NGZkuaBSOMyaiZzVo9K/QOsR3CQYrrgFVJRcuBfVmzvFJ67Td/K+65AJp9VEQyjeNx00te8P1C66mB4zkPJPtux7rguP312y6Qjy59nFlTvgbNSKKiBLZvLvVGfxlMyvdfQ+PMhk5gzyEezPHwyvf7R0vCsVCkiY5v5c2UlIYfY8EOJObw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3kTcnmltLNRPdCmq3DMH0lzossRRLDnBCIw9tLfAcTQ=;
- b=a6Hz7nYXfphp/HCqD4xITDzBdIMb+kL+2qF7p5SypEBw/rZlozdIHktYrk+YxT3uTgqFPW8orkGxRZfc15Cr3oOkNPWW5bhFoPlGZeKdljNSYiFgfOpDOYITNgnK6q5921a5IwnZJbVA5l0fuK6dv4E/KSKol2q37ztCHgJlXgcRdk+edYf5xvxfRh62ZoCfuywMepwDC/1wyXmvZCb7CkHu9ttzBwXm0lqTsSEgAB69ahG2TEPq54+Er89tRPddEKlRseGtsJuODYZ0gREWgR16Yt1GPuwWjzrJLeaxqPNkI4HhqSXvnVhsTe7oImS9nP4BFHkOJyR4Rv58BYRykQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3kTcnmltLNRPdCmq3DMH0lzossRRLDnBCIw9tLfAcTQ=;
- b=IPvrNcu+mldEfp7m5iB6cgmPP08qKnNAWUPvSaN7Ov9FMuW6HW/6Z7MPh7qkxTBmBfM1iwX95zscsteAjK906lGP55K7ECwUVbp+8shaNPGuyE0s9vZp0WMUTLYCWExNYtkUlTavvD6FlEp9QJRMMIm+J3hS+xiWDzepH/4yJrpQB5smNg+CWfUxQHN/ZZZYEpAb/ZhzR8I8DsEPgt66JLwgPX1ckw2gteuMteKdl1IkHzMhQb6t+Fbeg5foUlLcgm2rAME1hNdnNk13ZXsmZOWhwicX6UtaKA4W0+F2MeTYQp355h89SKTdygBIa5bYbkibOas3hRCnYMOF6XuRrA==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- DB8P194MB0791.EURP194.PROD.OUTLOOK.COM (2603:10a6:10:160::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.5; Wed, 14 Jan 2026 09:14:59 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9499.002; Wed, 14 Jan 2026
- 09:14:58 +0000
-Message-ID: <BESP194MB28052734FD0361EA602F6360DA8FA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Wed, 14 Jan 2026 10:14:55 +0100
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-477a219dbcaso67173875e9.3
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 01:44:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768383874; x=1768988674; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vZ2257E3743K0iNjIaVEgMNYCMLPBcwsKylHjrqVuDs=;
+ b=oFpeiajMG2tBQh/zbcoIvUbbUgkAu5OGl6mI00fduewFQmZQLU7dqWquNw8B7AV4dO
+ EYl3X7vx36v3iVgjpO/bxGy5QEmVvKZoxF1VDGRH0o7b8KWp747OK4VUu2HfLIUTnhyc
+ tre/Lr2QFKpTT3T2reQ6m8ut/0tdca/242HWI9O5PwKb1sWeHPj1rsrEH02YOobSJ2cD
+ rGizeihcigyKA8rzQk+GE5DrvnZrXiAB5MHEzPg72zhJi2K71p6TNR/4ltjDLnM2IlXm
+ KqkNdS5a6LxhCpQhGU7GdWVZDM2fSu/PLvu5okylXUmVV9I3CtXfc2nHvmrWO12OyYhg
+ mPgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768383874; x=1768988674;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vZ2257E3743K0iNjIaVEgMNYCMLPBcwsKylHjrqVuDs=;
+ b=Wq2NHy6uzSB8XuX7UXdrdIzgfOAT0J266DFZYuMJRipoYGypw2tN5bAiTGWPHOi85d
+ ZHmTQwPkdm4v0BvPOvUVEuySlwSXcprlb5tpCNu6OLwNR6z+keJnyiYI+FpOlT5A1yhi
+ 2fzDUk/WE9sFLMe6vtQCFFz1YK0kmGrFl7hDct403x607DsGRhgBmXgXiDmwLKFb4fOi
+ z699v0mp37xW5lfgDpVu0DGT8JrrBvSqpbVKG2MaERtGQB9M+aYCWxyFaKJMdAoEsQ6p
+ A+nmbp28QMk84wJ+6ke9Wojwvp7YzmBRcqzokHxzZ6w3SYTtciUJ6ZPIqhmW4epM87so
+ kInA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXXlPUEc3DohPPOOcr1G/Kf7GhyLE6Gnp8UwU2ZBLRp+9ABN2Uv9mC7WFIQ5BdwvWcH02em280=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUcF3nahAjF28fK+qS0iM3Qu6yJ2jso+eIQpH7QglFmQwt390A
+ TpyIMoqVveHxlDPIVc7lwb46bpqSKmD3fsLAem5GMsDTrljINrs5oMn+w2oTZ4eNxVU=
+X-Gm-Gg: AY/fxX6zyQ9Vmg5kTayIvQZAh+9BRd5sJ37wQFjCvnYOZE1SGqjkeqsI/+hsbCXPSc5
+ PtDmPJIaiYrqBj31f6xde0hZOkJDPbQks4MqhDjb9Oi8m2rCHcM+jm+0iWH4FKqb0AfkHalf9El
+ epkjnHuDl/cDSX3vTXYvr7jNk8YK71oHft2+fmoX5GDAj1M8yXbal0FcAtwkiF8jLN54I3gU9Rq
+ jPHkNeyarb/hY7YhNDVyk/TO318877VJrcmy/rck+M1bilInebZZ+aMDE3lec7YJWgNLC9Ttbek
+ cn9mpVy1B0CFVIcCMiw4NWKzRLrhKD+iv4QCGNs9u33TF/nzforEi3OSP4wFlq4OXsJNeq1aqeF
+ FF9k9aAAST8TVmZj7bNotQA0ywGyb8+1cWmbr630tTFAjEc74iVjCI81ymyEMaIUJ/avDPp5y0J
+ TGZqMhfUPc6ThMEtnF63B5lkT6kRV47FmOTcUYkEGXI28S6I4F4YU=
+X-Received: by 2002:a05:600c:4f0b:b0:477:c71:1fc1 with SMTP id
+ 5b1f17b1804b1-47ee4819f30mr14526185e9.19.1768383873667; 
+ Wed, 14 Jan 2026 01:44:33 -0800 (PST)
+Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47ee55d4279sm19664155e9.8.2026.01.14.01.44.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Jan 2026 01:44:32 -0800 (PST)
+Message-ID: <a2ffcb48-3993-42ec-be1a-3f0b3c0df942@linaro.org>
+Date: Wed, 14 Jan 2026 10:44:31 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] mach-snapdragon: Add OF_LIVE device tree fixup
+ infrastructure
 Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] bootstd: android: Add missing free in android_read_bootflow
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, me@samcday.com,
+ sughosh.ganu@linaro.org, ilias.apalodimas@linaro.org, rui.silva@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260113115404.1448759-1-aswin.murugan@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260113115404.1448759-1-aswin.murugan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PA7P264CA0330.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:39a::24) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <717972db-8930-4fc3-a55a-1dbe4ceb1cdf@outlook.fr>
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|DB8P194MB0791:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b2964b2-3857-4599-540e-08de534d6380
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|21061999006|23021999003|41001999006|15080799012|461199028|5062599005|5072599009|51005399006|6090799003|8060799015|19110799012|3412199025|440099028|40105399003|11031999003|12091999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RG5hYXk5dm1OemFxZlVibkFRaDN0Y0ZUZlJDRnJTRzd0OGdXV0dXTGVYMEJO?=
- =?utf-8?B?b1NKYjYyS0FBTFFqL0x4ek1lVGs3ekIvaDF2STlNM3FnLzFReEtFY05KTmRK?=
- =?utf-8?B?TXJUNmF0eGNwM3BVVFYvcEtUd0owd1FxazVVcmpRMHExNzdlcytiQ1NSTHAv?=
- =?utf-8?B?YnpneGszZ0VpNnlzUGlidFBTMEVudXp0WXljRkZqMVJvZUhvSjZ0a3RaTDln?=
- =?utf-8?B?NXJDYW9QUFRhdzNFTzE4R2tzK0lWOHlzMHZNdmNvN2swVm1ETndBMXd3aklL?=
- =?utf-8?B?RUdPWmE1N1JSb255NWI5NDIydTMzR01YTkxlL1VsKzdrbUJPSGcyTGVGcmRI?=
- =?utf-8?B?SEo0bFNOVW9iMmdINXBqdGxKY2RveVd0c2tvZWFUaEdheDdZVXg5TDhVNjA3?=
- =?utf-8?B?NkpNOGJiNjJ2bWJuYjBJckhJdzFlcU9lRDQvSE5lZkltRDJ2VTJhbGZHczhl?=
- =?utf-8?B?MDlVYkZBVjRyQXRWdnpUbkg4VXZQSjEwMlRIRHMzbCs5bHF6VmRwUnRGNjhi?=
- =?utf-8?B?SDVkK0FINkFTa0R2c1lNc0tJOUNjY00wcFJmaUdhQ1RQRTIrZFRneVhNQlZD?=
- =?utf-8?B?UkwwWFJrczhXS2FOcFJ6VXdNOEgvTFdyN3lEMXJCL1o1OVEwd0ZqeHZnN1Na?=
- =?utf-8?B?OWRDaHVhMjhTbEFiT0ZwTlhWamY1bUVQVCt2d3A2cENmM2IyTFhrd2U1dDFs?=
- =?utf-8?B?VUlkdUNoN3hJTkNXZnVLb0x2YWdQWGRwR0RrQ3liZFowTmNFV2IwT1N6a21j?=
- =?utf-8?B?bVdPUDFSRWNaZWcxWnZRYmxkWDZ5c1loQ0dXQU5aOVJiaG9ueTlQNktTTys0?=
- =?utf-8?B?dGlJSVptTXI0bktZOStmMXlTWkNqdTliNG9vSXVBK3NvRXFMSklaYlg1VklF?=
- =?utf-8?B?aEN1N21RQ2QxVHVyR3NiNXYyR0lqOE9pTUM4b1E0bk50TnJQYkExMWpUYlph?=
- =?utf-8?B?dTJzODRpM1FnQjY2MytOa1FkRUtBd1J3anEvRWVZMHAvbllkRFdSTGdvR2sx?=
- =?utf-8?B?VTVjUzhnakhVQXJhVEJrS1I1Q0xacEM5L2RkVkNhamtPOE1HMkF3YVFzUjM0?=
- =?utf-8?B?QXNKdzFYN0lVTDI3VU8xYS9FUnVGcTk1UmxSYUExVGVKK0FNOGdyMFcxcUZG?=
- =?utf-8?B?Q2NyYTAxSnBNMTMraXgyUzRLbGFLNzl3Q085Rm9GYXhwRVRiSHJTMXZSMzNu?=
- =?utf-8?B?eUMrUmtKWmR2UFZZNkRjZGJDQkdkTVdMUWs4a2RLT2Y0ZXdZK2JHeVovdHp0?=
- =?utf-8?B?ZXJ4Ym93NWprQVk0bTR3MlAxUUh0YXdMWDFyN3JBVjRIWkRnYmQwem91QkQ3?=
- =?utf-8?B?M3FQb2hwVHc1ZXBkd08xL3duaE9zT0VkR0VCVlNRSXZTWTRuZ04rU1A3TnhK?=
- =?utf-8?B?aXpMVjdPVEErck9vd00xRjFmTnd2Vm1oZVlEb0VINFc0dFE0dklUVXpYMDBq?=
- =?utf-8?B?bU1XWEVFUStTMjA3QUI2L3h3RjBiako2SHc4VG5zZnllV0NPelRBVDNBcWR3?=
- =?utf-8?B?eEhKRVNPRG5ORXBXU2xYMWFTZWI3c0owSlgwUUZKZ3Vta1VYejJIN04xSEI5?=
- =?utf-8?B?UUwxSWsxenFlSzFLTjEyUjZrRmd5QVQzWVkwcjcyeWE1U1FzTFFyZUIyT3A3?=
- =?utf-8?B?QnlsaDZ4NCtPTUpDZU53U0toYTFEQkxIUTc4cDRLUkpPVHhOM2wyNytpQWJ1?=
- =?utf-8?B?N2t2VU5NM2lsTTBrTFNIOERkNXZSeUY3dDZGaERZS0JiOXpmR3J3dUxReERN?=
- =?utf-8?B?WjZmSXFlaG5xa1dOYWJ1Sy81WHFSWm1pT1lSZjRxQzVYVE1RSkNZWmhXdGhK?=
- =?utf-8?Q?MRzGC9+ZoPIIZwSyW5lyAPhUsZOljs0bxWMgI=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZnE4b251aWYwd0MxRzRqQXdCeWFKT3JOSFZjUUV6NmQrZlI4ODlUUlhKaHk2?=
- =?utf-8?B?czdUVEhSYXFhRVVrWjNvZHRkWDNyY2puUk5WdXUvMS9XazdINm1RTU5LclZx?=
- =?utf-8?B?ZklxcTZUcW9WM1pDSXdrd1dRc1k3QzVLMnFCRHNlZml4bFlEbnU5UloveU9w?=
- =?utf-8?B?c0JQV2pEOWN5bUU3bnQ5SDRGU3lBN0NoeC9xUk9LRndhL2kxNCs3bW1TSXRl?=
- =?utf-8?B?K3Y0eWxtVVdrUVQzZ2ZmRXRXaTRNZzFHSWpKZFFtN2l4b25ZWDdzbU1PeXV2?=
- =?utf-8?B?U2w1Ymk5VVRBUmQyU1lYWGJVVU1Ra3FRRm9Ob0ZhbC9mQ0VhYThrOVdlcHdW?=
- =?utf-8?B?QUlaSDByMCtrSUJvRFVyWU4vR1VKOHFuaDZnYjF1a3MxT2podTRKVnpPV0xG?=
- =?utf-8?B?SWlkYnNwTEw1T1BEQ2xocDZyMC9lVUlocWdWcFpMNXB6WHBVckpmUVJhUlVn?=
- =?utf-8?B?WFhwOFNEcjdsYlV3QzU5Y1hKcU9kNS9pdVZkbHVFUlpXK2Q0aUR4ekpEUnhl?=
- =?utf-8?B?NGtGNVNzbmNPU293MnBrMzZOcTBMQ2lCa0NiejdXSmZsUUZRdzRoZHRZa0hs?=
- =?utf-8?B?ZTZnY3JpNHh4QURRdGo5dTc4aHRMQ05SeW5abnRUeUZNdVkzRHMvaGhqTUhx?=
- =?utf-8?B?UWVQRzNFcGxxdVFOaFlSMlhUQ3g5TVJyZ1gvNWpEbWU4d2MwZE9PWTcxVUlj?=
- =?utf-8?B?RndQWE9HTlROWTVpN2VUNnVkZEtBTVU1ckZ6YnJFS3Q0QjM5OU42R04wNkdS?=
- =?utf-8?B?VTdEeDNKVWpuZU5oWmgrOFc3VDR2K1F0emlXeS9ybjJ0K3J5WlNzZGp1MDl4?=
- =?utf-8?B?MnVwUkNDZ1JUNk1YajllRWQ4UHc3dlNpTitoS1lla3M0WDhoZURRRUp1Ui9B?=
- =?utf-8?B?QjdlWlpuR3ZncEpySGFIMU90elZYcGRHUHFDbkJHZ2JZanU5bVFVQmtJbG5w?=
- =?utf-8?B?Y255MjkreEtWaE04ODlFNFFlUkFoWGErM3BvcTBXeTZMdDlXYmpFbzVGTVVT?=
- =?utf-8?B?WU42d0ticXI5TUNlc3ZBMFlEaTN2WWcrcysxZjhTczMxaEZvQTdLRjM4eGh4?=
- =?utf-8?B?aUFQQnNGL3ZjZFYwQ0tGcE5ZcmpEbW1ROSsyVmxBVm9jUHhlYXJ5bWNuWS95?=
- =?utf-8?B?b1htV3o0bEpJYUtPc1pWL2N0bnREWUN1aUVWdS9Na3dhbWY4ckVKZXNDdC9Z?=
- =?utf-8?B?L1B4SnNQQTNKYXU0SFlSeHExL2x1SGJsWGNWTDNwTFhYQzkvcnBaSVdGa2pM?=
- =?utf-8?B?L1V3RXNzVVl1TEdrQ1RPQjFSMUVjaC9iV256dW1uRTVmU2RUY1JvV1U1Z2Zr?=
- =?utf-8?B?ZHdSNDJjQi9pU2Z1UTZVa1Q5TGh6c0dGTngzQlZGTGhFTmYxWVVwOTRiSG9z?=
- =?utf-8?B?TUdpY2FBejJvNlV0WE5hM2t4ZHJOVEhQakl2YWlUazV4bkhraERUWGV0R3ph?=
- =?utf-8?B?UVBTOHovbGgwb3dKcGdnOGVqOWdBKytqY1dFS3RYR0pOU1BoZExyQm5yMVBU?=
- =?utf-8?B?YVd5Q20rSkxPeXVmMHErSFhSc05sUFJaaEFBQS9Uc3g4a2N3Y2RDSm1FYmFW?=
- =?utf-8?B?cjl2ays5eWdCSlBwSFByNUpoVWg4TlRqUHpSSzFobWxXNzNvVlpCbHVwbTdK?=
- =?utf-8?B?V04xejdjMEYxNHp0N3RaN1BCaGJBbmVVTGgra29NajFmZk1qcGQ2WlV0bzBh?=
- =?utf-8?B?OEhlOWt5TEdqeXk3bDR0eHZhRGlhOVNVNTlkRFlJNE1ubEdhb2hYL3BPMEU2?=
- =?utf-8?B?T3FyMU1UVU9RMGFPYk5aZEdERTNWQXBYM3RNVE0xSDRBU0I0cGlINVRsa2pM?=
- =?utf-8?B?am5BOXNNSHB2WXRzRFh4dFV6WVhHK1Btb3pZdEUrMlRLajczbjZyR09JOVJU?=
- =?utf-8?Q?IdaJ527/xcX0R?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-e7640.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b2964b2-3857-4599-540e-08de534d6380
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 09:14:58.5531 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P194MB0791
-X-Mailman-Approved-At: Wed, 14 Jan 2026 10:17:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,29 +105,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If strdup call fails, one needs to free priv variable.
+Hi Aswin,
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
----
- boot/bootmeth_android.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+On 13/01/2026 12:54, Aswin Murugan wrote:
+> This patch series introduces a comprehensive OF_LIVE device tree fixup
+> infrastructure for Qualcomm Snapdragon platforms. The implementation
+> provides runtime device tree modifications to pass platform-specific
+> information from SMEM to the operating system through device tree.
+> 
+> Qualcomm Snapdragon SoCs require runtime device tree modifications to
+> provide accurate platform information that cannot be statically defined
+> in device tree source files. This includes:
+> 
+> - Board-specific identification and variant information
+> - DDR memory configuration
+> - Hardware subset parts
+> - SoC-specific device node adjustments
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 1374551dbeb..1d70e8d5c05 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -252,8 +252,10 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 		priv->boot_mode = ANDROID_BOOT_MODE_NORMAL;
- 		bflow->os_name = strdup("Android");
- 	}
--	if (!bflow->os_name)
-+	if (!bflow->os_name) {
-+		free(priv);
- 		return log_msg_ret("os", -ENOMEM);
-+	}
- 
- 	if (priv->boot_mode == ANDROID_BOOT_MODE_BOOTLOADER) {
- 		/* Clear BCB */
+I have to be honest, this is a lot of words to not really explain
+anything. What motivated this series? What does it actually do? Why is
+it needed?
+
+This applies for the individual patches too, the commit message needs to
+contain the context that isn't in the patch itself.
+
+OF_LIVE refers to U-Boot building an internal representation of the
+devicetree (take a look at the git history for
+mach-snapdragon/of_fixup.c). I don't think this is a relevant to your
+series which is modifying the FDT before the OS boots...
+
+What are the DT nodes/properties being set, how does it look in the end?
+Are the bindings for these properties upstream?
+
+I think a need a better understanding of this before looking at the
+contents of these patches.
+
+> 
+> This patch series depends on the following patch [1], which adds the
+> socinfo header file.
+> 
+> [1] https://lore.kernel.org/all/20260106122134.2047864-3-aswin.murugan@oss.qualcomm.com/
+> 
+> Aswin Murugan (2):
+>   mach-snapdragon: Add OF_LIVE device tree fixup handlers
+>   arm: snapdragon: Integrate OF_LIVE fixup handlers in ft_board_setup()
+> 
+>  arch/arm/mach-snapdragon/Makefile             |   3 +
+>  arch/arm/mach-snapdragon/chipinfo_def.h       |  90 ++++++
+>  arch/arm/mach-snapdragon/of_fixup.c           | 114 +++++++
+>  .../mach-snapdragon/qcom_fixup_boardinfo.c    | 228 ++++++++++++++
+>  arch/arm/mach-snapdragon/qcom_fixup_ddrinfo.c | 214 +++++++++++++
+>  .../arm/mach-snapdragon/qcom_fixup_handlers.h |  70 +++++
+>  .../mach-snapdragon/qcom_fixup_subsetparts.c  | 291 ++++++++++++++++++
+>  arch/arm/mach-snapdragon/rampart.h            | 236 ++++++++++++++
+>  8 files changed, 1246 insertions(+)
+>  create mode 100644 arch/arm/mach-snapdragon/chipinfo_def.h
+>  create mode 100644 arch/arm/mach-snapdragon/qcom_fixup_boardinfo.c
+>  create mode 100644 arch/arm/mach-snapdragon/qcom_fixup_ddrinfo.c
+>  create mode 100644 arch/arm/mach-snapdragon/qcom_fixup_handlers.h
+>  create mode 100644 arch/arm/mach-snapdragon/qcom_fixup_subsetparts.c
+>  create mode 100644 arch/arm/mach-snapdragon/rampart.h
+> 
+
 -- 
-2.43.0
+// Casey (she/her)
 
