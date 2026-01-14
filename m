@@ -4,63 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79D3D38FFF
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 17:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668ADD38FF2
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 17:30:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 421F7803F5;
-	Wed, 14 Jan 2026 18:27:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A6EB6803F5;
+	Wed, 14 Jan 2026 18:30:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wdV5tUwX";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="a7jZ+DVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0997C80433; Wed, 14 Jan 2026 18:27:42 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id E01108063E; Wed, 14 Jan 2026 18:30:04 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9060980325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 18:27:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D525B80325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 18:30:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=eb2b=7U=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1768411656;
- bh=FUQefvee7qfFHbwVfUjbcSsfUXPKImX3LunnLpTNmwU=;
- b=wdV5tUwX2OjEGVHKdGklsottCKiUBBQtuVFPMxpnrPkj/U1cK0SA4ZgW1LAByu2qB+UFiSteh
- HnqEe8vuSPzXT0c0y5nTknV6/1AohfZEmInbVEU5NktyrKCQ7x7OELGjPDRPhyO+NHUbm0q/1aO
- TVStVPk0Q8eEodHxFW5QokfK2q09kzPFdlVP5evCfNsNRCb8ejhGA+JOZpu/3FZFoWMazovdVbD
- THYGwLFE2vUcIny7/LSaDBkniobUPO5e4shheXUzqmf09IqYH71/jcdgJLRTw7ZshukYzTf4BXQ
- az9QwJyt8W9IXeIC4+leStXoYDz08hVS+LU76SZob4yQ==
-X-Forward-Email-ID: 6967d1fff65b9ac90aad3e6b
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.2.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <353ab2a2-f866-4f52-a355-e6641588848b@kwiboo.se>
-Date: Wed, 14 Jan 2026 18:27:24 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pwMno6gPRbyN6n52QSbkMnt+BWPAhV6Dy/PO3Rk1ib64BET6d2UkAfp4lRyZOmyccx4+ZnKz1fyLBhd1LAp+C1T/5KhSlHDUiCS1MwsapdB5iZ+L1BKxFWCYq+I+yX68U/JEL1OuQfyLUkWmV2/imUEaVrEmXeIZojGC6ArpZM0+ulKSbflq663FdI0uvoFMeAfOUUjwZHCeDf85IASHaVUHuVXEDF2x6BVrOo/PnBSezRdQ3pHvlOxBXBEpsicLwjuZgOIhabMyEiaw9mgCXrJJM77lSJ3pHFzdYiGR4EhXxxkGKBYcIaoyT+ZN+XUacDUTHB4qNg15F3/xwpHWJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XdQwPdEWCR7o+I8O9OjBpDPnmEPKxTfNI2ONiUXP76k=;
+ b=KOtxew5er1Dt+fILe0m/nYP4SKYgokoX0VQRlDeYEdQSY2OiTiZ02jWhBlGQMLyquDB4vhHDGNmNSonl6rS4ghRE1kRM8YziDLKOeTgDffVWDEZb34EtpXd/2yYZlY0y8cxA32tpLcNfG52vVcqXEf+F9wMz0jIoB6rprWnzwt4Tig1IvFWNqSsHq7lyfBUdn2jX7D6GVS5ynRYvaB8caTHFwrybFJonnhRnF0yyWiU+onDbYUwsqrEmvdLzyB4ZoAoRGSeRhY9lwaFf6D+N1QRbQaSmlJt5CcqAyznGo/O68U8AFInS0+YMYof5rkrs1x8qEUy/L5rQ27GfB58alA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XdQwPdEWCR7o+I8O9OjBpDPnmEPKxTfNI2ONiUXP76k=;
+ b=a7jZ+DVvhiswmtsEhHr+xSxaYqtEHNcrf2lAt7YL09nvRV67qx4k9XuqjIgoFT7S0Sc0IdyTVGSfgDA6Cpuy5bcyhG0FGiKXN6/7ryzHh298gky8QT/BmCs7D03lCt9Rm+nMIJnmUQL67OUJpuvaE2OtutnNidAwyo27Fq2ly9g=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PA4PR04MB7663.eurprd04.prod.outlook.com (2603:10a6:102:e9::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Wed, 14 Jan
+ 2026 17:29:59 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.005; Wed, 14 Jan 2026
+ 17:29:59 +0000
+Message-ID: <6037846c-ca4d-4927-a6c0-f8f0cfb96f80@cherry.de>
+Date: Wed, 14 Jan 2026 18:29:55 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] rockchip: rk3576: Allow pmu sram access for
- non-secure masters
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alexey Charkov <alchark@gmail.com>, u-boot@lists.denx.de
-References: <20260108133234.4001390-1-jonas@kwiboo.se>
- <20260108133234.4001390-2-jonas@kwiboo.se>
- <fcb352fc-5fe1-4443-8c3a-153c182d6774@cherry.de>
+Subject: Re: [PATCH v2 1/2] pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable
+ all drivers by default
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ trini@konsulko.com, ilias.apalodimas@linaro.org,
+ christopher.obbard@linaro.org, quic_varada@quicinc.com,
+ marek.vasut+renesas@mailbox.org, alexeymin@minlexx.ru, danila@jiaxyga.com,
+ david.wronek@mainlining.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260107154745.571319-1-aswin.murugan@oss.qualcomm.com>
+ <20260107154745.571319-2-aswin.murugan@oss.qualcomm.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <fcb352fc-5fe1-4443-8c3a-153c182d6774@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260107154745.571319-2-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0106.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9c::18) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA4PR04MB7663:EE_
+X-MS-Office365-Filtering-Correlation-Id: d45e5f83-4cd0-4044-7c4e-08de53928ad3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7416014|7053199007|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVV2VXVwR05QcU05cGF3QS9ORlRWdnpuSks4N09FWUFFUzFqd3UvL2ZQRnRG?=
+ =?utf-8?B?dldJbjBoVmxmcnNhdElzalA3clNzSXNVbXkvNHoyNHpvbTdBT0F3bWpRR21y?=
+ =?utf-8?B?YWY3T0tFaHZGSFB6dzdOTzNaeDB4TUJuM2Rkblh4VG9HS2cweitBL2M1K29o?=
+ =?utf-8?B?QnY4V0tQNWhGT3pyd1VrdldzY3pNbHBZdjVvZ2orUGdSVERLQW9IdG5KZnBY?=
+ =?utf-8?B?QlN5Y1dlTU1qaGpCK1RWSjUzbmpZMGxIUUh1cVhhOXdVTUpNblI3emxxbFk0?=
+ =?utf-8?B?S1N2L0tsRG1pTFNPVzBTVFJSVG1acGRQTndTUmk2RWVvbmIya2Q0Q01hcWpu?=
+ =?utf-8?B?REtaUFUvZVhpY3h6VjhscldQVU1PVWYzKzZXUkRJU3oySTYybXFGTFRmMFl1?=
+ =?utf-8?B?bi9ab0xwYlA5NkxwS3p6bm9hWUhIbjY2YWNiYzlPbHU4VUd6Mit6YU9SWnRi?=
+ =?utf-8?B?Zjhzb3dvTCtoL3hvUk92MjBNWGRUOU1ManhLK3dOT2pxbU9EUUttemZDY3pY?=
+ =?utf-8?B?cnVtLzZ5Yk5TaURoVVBZYklmMzJ4cjFSeVNMcno1Uks3VmdqTmI0TFFraGtM?=
+ =?utf-8?B?Mm4vQzlXNzNNbUxKY2RpQm4wOVErWWs1KzFxc0tjTndyN3hLcm1uVDZkMllO?=
+ =?utf-8?B?cDJnVVB3N1lCTDZjYXhHVVZ0dldycWo2UWgwdmZpRnBkcysvSWZ1MXlGQys5?=
+ =?utf-8?B?NVN5WUNxSXhlNGZEMHliNXJFa29wR3BYN3d0MngzSnM0VnlJU25QeURuT1lX?=
+ =?utf-8?B?Mmw1ZFFvZ2FQSHFyYll5eUhOc056NnNWdUlnenNSV1QwSjVsc0xlVlBiMms1?=
+ =?utf-8?B?UlByWVppMjM0M1ZiRUQxOUpwcEpINVBLdXhSNTdjU3VaNFcybDBNN2g0RXNI?=
+ =?utf-8?B?cE5qcVhmNENhLzZaNUE5VnpEYm9Ed1FYQUIwTENEOUxxL1cxQ0czNVhkZ1Z3?=
+ =?utf-8?B?VHluQm9IZGtoY3haVXp6blZuWW1wVURVSzRTejE3TEhLeDlzQkFRYUN2Uzlu?=
+ =?utf-8?B?RHVzTXdPdE9lZXM0aXZlYm5mYnFTMFN5a0ljNFpsZk1qYnB3NW9NSXNpMnI2?=
+ =?utf-8?B?U1ErZTFJbHkxN0VBNnZISzFVMldTT09HUGRpemx0OVRYQk1VTmNRV3dmWmRI?=
+ =?utf-8?B?bmF4N09DNEh6bFBwQlR2WEVna2RUSEZSSjQ3d0RMZ2xUenlqd3p1TXdNMTMr?=
+ =?utf-8?B?WU5HQythU0kyVUZMblNUM0RxenhTWlBGQUZwc2NSNzNMWkFDb0Yzejh6WnJa?=
+ =?utf-8?B?SmU0UUNpZ3V2Q2g2dHc4cjVxeEdCbWhhdlNOYWZmRlRQbC84QzJzd1dTWXdQ?=
+ =?utf-8?B?cXRyK281THhWVnFNMDNCRE5xTWlBRndEaVJ6cGJvWjBTMVlnZDRteWlPeFhC?=
+ =?utf-8?B?OTRuRndjV2pzczBuM2NWRzVYRWRhR3BITVlSeWVVQUo2QXBaWWtTVkpaUjYr?=
+ =?utf-8?B?UncwV3MyRkF0MTR2U3hCWDh6Z2Nxa2FGZFJvaEhpUzdvQjJqQjNCRFdOaDdD?=
+ =?utf-8?B?T3hvK3VpNFpCK2xkZDdJQjVRKzVxUlBIMGJweFhyckRIUWpnMDludEJadnJw?=
+ =?utf-8?B?dm0yNldBZTRvNkFoYVpZSy9KMlErOHU1d3NUY3hPdzBYTUFMNkZSb1JqWFZG?=
+ =?utf-8?B?UnZkR0srSXZMNGswNWJUbkI3Uk5UWC94ZmkwZWJPcnRvQksvTnJWQm9HZ1Fo?=
+ =?utf-8?B?SFpSL3dXVlNSRWRVQzVVWkFBKzZBL3lMUlhwS29KOWtoSWRiZTgveXhxT0VS?=
+ =?utf-8?B?WGt4RS95RzE4SHRWdmszSC92cWdIZmZsMkVIKzhSdkE5SlBSUTlJbFMxN3Rn?=
+ =?utf-8?B?aE12Zm5TZWtDQnZuVE9PSU1RZzFKbVVnMUl1SEhJd0FpTW8vczhaZTkrekNM?=
+ =?utf-8?B?UXFyWndDellVUEVjdHJtNkZuNnJzdDk2dTVqM1c4Zkc1ZGpFS2xaZ2lvVkI4?=
+ =?utf-8?B?MzFObEd0MG9wWXcyenB0bFRlUFFPSW9nNWdMYlcyMGVMb2xXUVBZNlAySCt3?=
+ =?utf-8?B?SjlLYWtLbG8vSWk4ckh0QTczL1ptcHNFSFdLMTFsdkJtWlVQcmlwOUVjd1Jm?=
+ =?utf-8?B?MW4wSXVldnpnTFRXS2tZZ0NFanBQK2R5MnlIZ1lIMnVNVXpXZm9WSG1GYnVH?=
+ =?utf-8?B?NmVDNVp1SE02UkU3ekk4bWJTd1R2bHJibldUSGhjVmJqRGV4Q2czMHErNVNS?=
+ =?utf-8?B?eUE9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(7053199007)(921020);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OTlObHk2YXVUdlN2M2U3c1kyamtpT3BCNWduWDMzKzVPRUxwSExxTk5rWC9L?=
+ =?utf-8?B?aTZIUjliOHFjTHVLY1EwV2ZsTkdxN3AzbmFGdFlMSkN3L0l6aGpPQjVWMkpy?=
+ =?utf-8?B?VVgySlY2eWxFOWVoNmg0K1NPTnlnbENwNk1SaFY4NWZxbUtaMXdSdWdZUkZj?=
+ =?utf-8?B?K1hOQldYYlg4WTZ2M0NKMHFMUzZLMjZCSzA3VEs5TFlvdlRxWTQxaGh1Njh2?=
+ =?utf-8?B?OTJhc0pNZjBPdXl2bFRjUVFrWkxsdlRsNUJITUl4TFJCbkVWeHBEdVM4ZWtx?=
+ =?utf-8?B?c1JIUm5lRGp5TGM3S2tJMU9TQWJGVWk3OFV0MmFsdmVsOVJMMmMyRzhlaENB?=
+ =?utf-8?B?R0RWVGtLS2JYb3kyUUhkeGJmeTlTcFlTQVYxQm8vcjFFZG5lN0xlM2E5M0ty?=
+ =?utf-8?B?dDdSUlhDSmtXU1RTbHRNN215MVVQN1FlOHdvaG5pcG4rbnNxa2JCZFd0Y044?=
+ =?utf-8?B?RlhIV0w5MTk1VStLcnRSbDkvdzZ0blhyTVYvb1pkSjFBSER1aTcyWUZFZUg0?=
+ =?utf-8?B?Q0dnd0pPOElwWS91bDMxc0o3TkR2ZlQ2Vithb2VoYzI5K05uZEd5bk9hckpm?=
+ =?utf-8?B?ZU8zejNxYVBGYy91MHg3T1ZDZWFOc2NNWlZzcFJEZ3ZhaHNZZmt1WXYvZmR2?=
+ =?utf-8?B?UW83dGJ1Sy8zbUl6NW5QMlcrV25RRXRnOTRKSlhZWGFSSUhianVGL2xTL2hy?=
+ =?utf-8?B?aHM1UkJrVHA4QVhicWd2b3VYQ2szQlNHTlRYWTZRRXl6QjVXM3VwRDNLM1VH?=
+ =?utf-8?B?emVRUk4wdmxiSk5WK2NZSUxaRTJHaWFTZzRmWVRtRnZHNlZrWnVhcG1ZWUhu?=
+ =?utf-8?B?eEpuQnBCT3hpaHhXZFFSZWl5N0dKblZjQ2d1RDNiT3g5ZnlZa05HUmZWaGwy?=
+ =?utf-8?B?RDN1ZFZuaVhpSkZ0L3ViUVJJOFBBRFdVdHZVWW0vcWMvSzhUZHVEdXpFRlhq?=
+ =?utf-8?B?UVE5Q1FVcjBKU0FGUDRiZHNZVE5nM2VwVit4TFV1R3dyOHhhci9Tdko4Y3N3?=
+ =?utf-8?B?VXEwYUdoQlRwcTAzNm1NcmNEdHcxUE4yR0oxYUR2S1dJMm11WGxRZ2lRRXQz?=
+ =?utf-8?B?SHBZb1pKYWlIK2hSaVZyczZCZlBydk5yQkhFQWJIeU1xT2VUeHJ5TUMvbk9Q?=
+ =?utf-8?B?N2E4S0JZNXROblBSc2h2d2JVVTBIRWZpWTRtMG5VaXI0SkgyUkxtN0RJZkhE?=
+ =?utf-8?B?alNhL0NRTVNVakJKcTlrZ3NTTnBGOE8wL0wxNDVRWG44Y1AwUlNhdlMxVkNB?=
+ =?utf-8?B?N3JQeTFvYW5Gcnh5dHNsOVk0bHArYi9vWnRoMW9oNDdHb0xwVi9JME5HL1lF?=
+ =?utf-8?B?dmNOMDBzM3pPNUpwejV6Tmpac1AzVnhoM0JmdWVuSUFmTGVCWjFhZ3dUVDV6?=
+ =?utf-8?B?SllHL0xQenRVNFJtL2Fycm91RGFwaENQWnJ0KytBVGJlcUVOZm1CanV4WmxJ?=
+ =?utf-8?B?ekRVL0pXM2I3aU1JZFlWdUtObUZibjI5K3d0TWJTQVJFWWlYVUFvWmNyR3kw?=
+ =?utf-8?B?OWxtRlIrOStvd3g1RHU2SWJtbTZheE0yeTNHbHhlVDd4OVMyWFh5NlEzS3lr?=
+ =?utf-8?B?R1pTUWMwS0lBSkFxREVwZ0xlYVRJSW1vcWMxR1M5MFhsQ3dDMXhWdGRrZTh1?=
+ =?utf-8?B?UGdhYThVNDd1ZUY3a2lwTmxKSzBYZWVTK1cwaVcrNGFzV0Z2L3NpWkErbFBF?=
+ =?utf-8?B?MTNJUGFKdEdFT250QTJweFMxNXV2dVQ5ZnprT1dKTStLdEs0L3pZSDc0Mk9L?=
+ =?utf-8?B?bUxEajMyOGJKTDFaZzltRjgvMkZkZHJrZXJWQnZjeGw1ZFdHeHp5ZkJja0xo?=
+ =?utf-8?B?YVQ1ZFdobHBpcWNKdnYydmFoV1o0elUvQlA1dEVEdFI5eTlMYjRtMSs3aS9E?=
+ =?utf-8?B?NEFVRnNoZ29MS2V2M0Z2ZWcvalFjNWZMVWpaUTdkSFpvN0pDRFhadXZlVWl0?=
+ =?utf-8?B?emdybzVGZXg0cjdVTUhPNXFGUEFhb3dWQ1NsV0NBQStyNFlpSmJtdmxvbEY4?=
+ =?utf-8?B?UHlWL3dLR0xzbi9CNThMZk9BY1BQZjcrUHlId0xsR0N6c1hkYmp0bWRMdzhx?=
+ =?utf-8?B?bm81ekVocS9NT2ptTmJqcmNFMWxlZzhpdDBYcklrOWwvOHZmTE5kVXFGYmxI?=
+ =?utf-8?B?WFZidmx6YmdzdEFobXJTM0pOV1FmVVI5VzFsKy9RSUNKTkh5ZjEzSWJMVVdJ?=
+ =?utf-8?B?YmNVc28weEZtV2k4eitCOFpPVWduRUJrRmd1bEZxeXhhNWlTTkxzUHh3cTY2?=
+ =?utf-8?B?blVwRzduQVhmYUh6eWl0alRLbG45MzJpYVlPUllZNjFIVlA3NklWSHdaWE80?=
+ =?utf-8?B?Uk11STZoRGJRR2Y4TUVwNmFVcHJ0T3AxSjRmbzJEYkh3a09VM3JOdz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d45e5f83-4cd0-4044-7c4e-08de53928ad3
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 17:29:59.3492 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +WfSR9E8BPkQiBZajHG/MBGc7djPpu6uSlMlI+5r4rqxQki0JwPPMzlkCD68JpoOMucO5ZMSwUtkl++KlAVJt0fr/aVpTSvCZauzOmg3cIU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7663
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,141 +188,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Aswin,
 
-On 1/14/2026 5:27 PM, Quentin Schulz wrote:
-> Hi Jonas,
+On 1/7/26 4:47 PM, Aswin Murugan wrote:
+> Introduce a new Kconfig option PINCTRL_QCOM_GENERIC that, when selected,
+> enables all Qualcomm pinctrl drivers by default. This simplifies defconfigs
+> for platforms supporting multiple SoCs and avoids manual driver selection.
+> Individual drivers can still be disabled if required.
 > 
-> On 1/8/26 2:32 PM, Jonas Karlman wrote:
->> The firewall block access to pmu sram for non-secure masters by default
->> after reset (0xffffbfff).
->>
->> Change the pmu lookup configuration to match the default lookup config
->> for ddr and system sram (0xffff3fff) to allow loading TF-A using DMA.
->>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - As per review comments made default y for pinctrl drivers
+>    based on PINCTRL_QCOM_GENERIC config 'default y if PINCTRL_QCOM_GENERIC'
+> ---
+>   drivers/pinctrl/qcom/Kconfig | 29 +++++++++++++++++++++++++++++
+>   1 file changed, 29 insertions(+)
 > 
-> What is this "default" lookup config and where does it come from? You 
-> say it's 0xffffbfff after reset and it's set to something different 
-> after a TF-A has configured the firewall... Is it after a cold boot? 
-> That somehow is different than a warm reset maybe?
+> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+> index 725200d94c8..580308621b1 100644
+> --- a/drivers/pinctrl/qcom/Kconfig
+> +++ b/drivers/pinctrl/qcom/Kconfig
+> @@ -6,8 +6,17 @@ config PINCTRL_QCOM
+>   
+>   menu "Qualcomm pinctrl drivers"
+>   
+> +config PINCTRL_QCOM_GENERIC
+> +	bool "Enable all Qualcomm pinctrl drivers by default"
+> +	select PINCTRL_QCOM
+> +	help
+> +	  Say Y here to enable all Qualcomm pinctrl drivers by default.
+> +	  This is useful for generic Qualcomm defconfigs that support
+> +	  multiple SoCs. Individual drivers can still be disabled if needed.
+> +
+>   config PINCTRL_QCOM_APQ8016
+>   	bool "Qualcomm APQ8016 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the MSM8916 / APQ8016
+> @@ -15,6 +24,7 @@ config PINCTRL_QCOM_APQ8016
+>   
+>   config PINCTRL_QCOM_APQ8096
+>   	bool "Qualcomm APQ8096 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
+> @@ -22,6 +32,7 @@ config PINCTRL_QCOM_APQ8096
+>   
+>   config PINCTRL_QCOM_IPQ4019
+>   	bool "Qualcomm IPQ4019 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+> @@ -29,6 +40,7 @@ config PINCTRL_QCOM_IPQ4019
+>   
+>   config PINCTRL_QCOM_IPQ5424
+>   	bool "Qualcomm IPQ5424 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the IPQ5424 SoC,
+> @@ -36,6 +48,7 @@ config PINCTRL_QCOM_IPQ5424
+>   
+>   config PINCTRL_QCOM_IPQ9574
+>   	bool "Qualcomm IPQ9574 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
+> @@ -43,6 +56,7 @@ config PINCTRL_QCOM_IPQ9574
+>   
+>   config PINCTRL_QCOM_QCM2290
+>   	bool "Qualcomm QCM2290 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the Snapdragon QCM2290 SoC,
+> @@ -50,6 +64,7 @@ config PINCTRL_QCOM_QCM2290
+>   
+>   config PINCTRL_QCOM_QCS404
+>   	bool "Qualcomm QCS404 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+>   	select PINCTRL_QCOM
+>   	help
+>   	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+> @@ -57,6 +72,7 @@ config PINCTRL_QCOM_QCS404
+>   
+>   config PINCTRL_QCOM_QCS615
+>           bool "Qualcomm QCS615 Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
 
-0xffffbfff was the value the PMU_SGRF_SLV_LOOKUP0 reg had out of cold
-boot, when read out at top of arch_cpu_init() in SPL using ramboot.
+Indentation seems incorrect here?
 
-As implied by the cover letter any naming and technical details may be
-wrong and has only been deduced from firewall.c/h in TF-A source and
-printing out below content of a few FW regs.
+b4 doesn't want to pick up the patch from lore so cannot check if it's 
+an actual problem or not. See:
 
-  SGRF_MST_DOMAIN_CON0: 00000770
-  SGRF_MST_DOMAIN_CON1: 00007007
-  SGRF_MST_DOMAIN_CON2: 00000007
-  SGRF_MST_DOMAIN_CON3: 00000000
-  SGRF_MST_DOMAIN_CON4: 00000000
-  SGRF_MST_DOMAIN_CON5: 00000700
-  SGRF_MST_DOMAIN_CON6: 00007777
-  SGRF_MST_DOMAIN_CON7: 00000007
+$ b4 shazam --add-my-sob --add-link 
+https://lore.kernel.org/u-boot/67140dbd-1b93-43d1-b218-0b57a762ce1a@linaro.org/
+[...]
+Applying: pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable all drivers 
+by default
+Patch failed at 0001 pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable 
+all drivers by default
+error: sha1 information is lacking or useless 
+(drivers/pinctrl/qcom/Kconfig).
+error: could not build fake ancestor
+[...]
 
-  SGRF_DDR_RGN0: 84000000
-  SGRF_DDR_RGN1: 00000000
-  [...]
-  SGRF_DDR_RGN15: 00000000
-  SGRF_DDR_LOOKUP0: ffff3fff
-  SGRF_DDR_LOOKUP1: ffffffff
-  [...]
-  SGRF_DDR_LOOKUP7: ffffffff
-  SGRF_DDR_CON: 00010001
-
-  SGRF_SYSMEM_RGN0: 00007f00
-  SGRF_SYSMEM_RGN1: 00000000
-  SGRF_SYSMEM_RGN2: 00000000
-  SGRF_SYSMEM_RGN3: 00000000
-  SGRF_SYSMEM_LOOKUP0: ffff3fff
-  SGRF_SYSMEM_LOOKUP1: ffffffff
-  SGRF_SYSMEM_CON: 00000001
-
-  PMU_SGRF_SLV_LOOKUP0: ffffbfff
-  PMU_SGRF_SLV_LOOKUP1: ffffffff
-  PMU_SGRF_SLV_LOOKUP2: ffffffff
-  PMU_SGRF_SLV_LOOKUP3: ffffffff
-  PMU_SGRF_DOMAIN_CON: 00000000
-
-Looking at the above patterns and with some details from TF-A source I
-could deduce that PMU_SGRF_SLV_LOOKUP0 possible have something in common
-with SGRF_DDR_LOOKUP0 and SGRF_SYSMEM_LOOKUP0 regs, describing what
-domains can access DDR and SYSTEM SRAM regions, and after a quick test I
-could confirm that changing 'b' (10) to '3' (00) seemed to allow DMA
-write access from sdmmc, sdhci and fspi to PMU SRAM.
-
-  Access rights between domains and groups are as follows:
-
-  00: NS access,     S access
-  01: NS access,     S not access
-  10: NS not access, S access
-  11: NS not access, S not access
-
-My deduced guess is that PMU_SGRF_SLV_LOOKUP0[15:14] describe access to
-PMU SRAM for domain 7, similar to SGRF_DDR/SYSMEM_LOOKUP0[15:14], and
-changing it from only secure access (10) to both non-secure and secure
-access (00) allows us to use DMA from the masters re-assign to domain 7.
-
-> 
->> Mainline TF-A will re-configure the firewall to use an even less
->> restrictive lookup (0xbffe3ff0), so this change is not expected to have
-> 
-> [1][2]
-> 
->> any real security implication.
->>
-> 
-> [1] 
-> https://github.com/ARM-software/arm-trusted-firmware/blob/master/plat/rockchip/rk3576/drivers/secure/firewall.c#L522C36-L522C46
-> [2] 
-> https://github.com/ARM-software/arm-trusted-firmware/blob/master/plat/rockchip/rk3576/drivers/secure/firewall.c#L611-L613
-> 
-> For the proof :)
-> 
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   arch/arm/mach-rockchip/rk3576/rk3576.c | 6 ++++++
->>   1 file changed, 6 insertions(+)
->>
->> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
->> index a1e8a7572fa4..c17ba418ced5 100644
->> --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
->> +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
->> @@ -26,6 +26,9 @@
->>   #define SYS_SGRF_SOC_CON15	0x005C
->>   #define SYS_SGRF_SOC_CON20	0x0070
->>   
->> +#define FW_PMU1SGRF_BASE	0x26003000
->> +#define PMU1SGRF_SLV_LOOKUP0	0x80
->> +
-> 
-> How about using the same names as in TF-A?
-> 
-> PMU1SGRF_FW_BASE instead of FW_PMU1SGRF_BASE and
-> FW_PMU_SGRF_SLV_LOOKUP(x) instead of PMU1SGRF_SLV_LOOKUP0?
-
-I did this at first but that looked funky when a different naming
-pattern was already being used for existing FW related defines:
-
-  #define FW_SYS_SGRF_BASE	0x26005000
-  #define SGRF_DOMAIN_CON1	0x4
-
-and in TF-A:
-
-  SYS_SGRF_FW_BASE
-  FW_SGRF_MST_DOMAIN_CON(i)
-
-So I chose to adopt similar naming as the ones already defined in U-Boot
-for consistency.
-
-Regards,
-Jonas
-
-> 
-> I cannot test this as I don't have an RK3576 board but it looks ok to me.
-> 
-> Cheers,
-> Quentin
-
+Cheers,
+Quentin
