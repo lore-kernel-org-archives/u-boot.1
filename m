@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39C6D31A26
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 08:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3648CD31A25
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 08:52:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 530BE830A0;
-	Wed, 14 Jan 2026 09:51:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 945ED83623;
+	Wed, 14 Jan 2026 09:51:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="p6xsFJZO";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="ZNW6M/p+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29CFE830E4; Wed, 14 Jan 2026 09:51:48 +0100 (CET)
+ id 6481783655; Wed, 14 Jan 2026 09:51:54 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C7AA80081
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 09:51:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A97FA830E4
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 09:51:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -28,17 +28,17 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  s=gloria202408;
  h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type;
- bh=Ymq4D5nku+EjcW6m0DqqJkLgi8+Ngo3Zolhgocyw438=; b=p6xsFJZOp+/8e5SVJ+O7gZR++x
- CgNE6lU8vaKH9EX6BQdztTvVOt8WOX+E5RRpE0UEeGeWpE3apZfKsJtX7/RMMCCpsDtSTUfHMWUrt
- hsbiC1usUCyxykMKIEHaRHFT6VGqBokm4TE5L7eYIKlygVYUH6bf+6yVHEzNS8H3+R+MIQhTmUOAC
- oqVDITS7dLf9i2rb0IYY0pMh3CsXWkcAYfZC3zfDK307D5aBx6cB2SBn8Pi94AJHSdlFXdoG7ZaVb
- N1YuiQoLb/U7em5rUWLvDVrYuGCnfPsNZTRSONSekW8GsdJBaCSJLkEUjZMFye/5ixiLXyazuHg8Y
- 49FGOpCA==;
+ bh=KMZOdB6AbMmUl0BFlqUPfbjlsR8xHZ8AavHOTjMaFjs=; b=ZNW6M/p+1jhvNRrHXMiWGKvCwV
+ PBPH0ljjW9HwvohFq6X3avqFq6UVehlGTtc2zOq/UB2P11n32m5vAOGys/iTRboUJwl3Z129TuBCx
+ ykB0A+kS5T2tdHzQbNfn4mTelNjuZuYDYtgr5FpGyA4BFPM7hio4CfdPtO/qlal+SU3W6j/XvaWRC
+ jvFLVp2tAQy72r5GwSYfxHZyjPxJRaqydax50QQRbTsehHI/Jg2eExKKQqr75qUnMYRJPLPFuf0lG
+ JifYxSvHvhzmb/0sIxjqEGDpmeUfvglsvqQGRAX7Wt7WCjcTjSdo0NoaKtyRy+XH+oQRaJ6q8p4of
+ BC1RzHog==;
 Received: from i53875b96.versanet.de ([83.135.91.150] helo=phil..)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1vfwEx-002G0M-O2; Wed, 14 Jan 2026 09:28:32 +0100
+ id 1vfwEy-002G0M-1K; Wed, 14 Jan 2026 09:28:32 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -46,9 +46,10 @@ To: sjg@chromium.org,
 Cc: heiko@sntech.de,
 	trini@konsulko.com,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 10/12] arm64: dts: rockchip: add QNAP TS233 devicetree
-Date: Wed, 14 Jan 2026 09:28:20 +0100
-Message-ID: <20260114082822.4007128-11-heiko@sntech.de>
+Subject: [PATCH v2 11/12] rockchip: board: qnap-ts433: Rename the board code
+ to not be TS433 specific
+Date: Wed, 14 Jan 2026 09:28:21 +0100
+Message-ID: <20260114082822.4007128-12-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20260114082822.4007128-1-heiko@sntech.de>
 References: <20260114082822.4007128-1-heiko@sntech.de>
@@ -70,160 +71,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TS233 is a 2 bay NAS similar to the TS433. Architecture-wise it really
-seems to be the same minus the additional PCIe connected components the
-TS433 has.
-
-So it just uses two of the SoCs SATA ports and the SoC's gigabit ethernet.
+We can do support at least 2 devices now, so rename the code-side to a
+TSx33 form to not read as specific to the TS433 anymore.
 
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://patch.msgid.link/20251112214206.423244-6-heiko@sntech.de
-
-[ upstream commit: ce0b84e766ad7b2ec5d2ac7840675f223640f3e3 ]
-
-(cherry picked from commit be3ad0fe4738a324213dcf63efaccfd00fca9918)
 ---
- .../src/arm64/rockchip/rk3568-qnap-ts233.dts  | 131 ++++++++++++++++++
- 1 file changed, 131 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3568-qnap-ts233.dts
+ arch/arm/mach-rockchip/rk3568/Kconfig           | 17 +++++++++--------
+ .../qnap/{ts433_rk3568 => tsx33_rk356x}/Kconfig |  6 +++---
+ .../{ts433_rk3568 => tsx33_rk356x}/MAINTAINERS  |  6 +++---
+ .../{ts433_rk3568 => tsx33_rk356x}/Makefile     |  0
+ .../qnap/{ts433_rk3568 => tsx33_rk356x}/board.c |  0
+ configs/qnap-ts433-rk3568_defconfig             |  2 +-
+ .../configs/{ts433_rk3568.h => tsx33_rk356x.h}  |  0
+ 7 files changed, 16 insertions(+), 15 deletions(-)
+ rename board/qnap/{ts433_rk3568 => tsx33_rk356x}/Kconfig (52%)
+ rename board/qnap/{ts433_rk3568 => tsx33_rk356x}/MAINTAINERS (68%)
+ rename board/qnap/{ts433_rk3568 => tsx33_rk356x}/Makefile (100%)
+ rename board/qnap/{ts433_rk3568 => tsx33_rk356x}/board.c (100%)
+ rename include/configs/{ts433_rk3568.h => tsx33_rk356x.h} (100%)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts233.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts233.dts
-new file mode 100644
-index 00000000000..f16d1c62879
---- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts233.dts
-@@ -0,0 +1,131 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
-+ * Copyright (c) 2024 Heiko Stuebner <heiko@sntech.de>
-+ */
-+
-+/dts-v1/;
-+
-+#include "rk3568-qnap-tsx33.dtsi"
-+
-+/ {
-+	model = "Qnap TS-233-2G NAS System 2-Bay";
-+	compatible = "qnap,ts233", "rockchip,rk3568";
-+
-+	aliases {
-+		ethernet0 = &gmac0;
-+	};
-+};
-+
-+/* connected to sata2 */
-+&combphy2 {
-+	status = "okay";
-+};
-+
-+&gmac0 {
-+	assigned-clocks = <&cru SCLK_GMAC0_RX_TX>, <&cru SCLK_GMAC0>;
-+	assigned-clock-parents = <&cru SCLK_GMAC0_RGMII_SPEED>, <&cru CLK_MAC0_2TOP>;
-+	assigned-clock-rates = <0>, <125000000>;
-+	clock_in_out = "output";
-+	phy-handle = <&rgmii_phy0>;
-+	phy-mode = "rgmii-id";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&gmac0_miim
-+		     &gmac0_tx_bus2
-+		     &gmac0_rx_bus2
-+		     &gmac0_rgmii_clk
-+		     &gmac0_rgmii_bus>;
-+	status = "okay";
-+};
-+
-+&i2c1 {
-+	/* eeprom for vital-product-data on the backplane */
-+	eeprom@56 {
-+		compatible = "giantec,gt24c04a", "atmel,24c04";
-+		reg = <0x56>;
-+		label = "VPD_BP";
-+		num-addresses = <2>;
-+		pagesize = <16>;
-+		read-only;
-+	};
-+};
-+
-+&leds {
-+	led-1 {
-+		color = <LED_COLOR_ID_GREEN>;
-+		function = LED_FUNCTION_DISK;
-+		gpios = <&gpio1 RK_PD6 GPIO_ACTIVE_LOW>;
-+		label = "hdd2:green:disk";
-+		linux,default-trigger = "disk-activity";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hdd2_led_pin>;
-+	};
-+};
-+
-+&mcu {
-+	compatible = "qnap,ts233-mcu";
-+};
-+
-+&mdio0 {
-+	rgmii_phy0: ethernet-phy@3 {
-+		/* Motorcomm YT8521 phy */
-+		compatible = "ethernet-phy-ieee802.3-c22";
-+		reg = <0x3>;
-+		pinctrl-0 = <&eth_phy0_reset_pin>;
-+		pinctrl-names = "default";
-+		reset-assert-us = <10000>;
-+		reset-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&pinctrl {
-+	gmac0 {
-+		eth_phy0_reset_pin: eth-phy0-reset-pin {
-+			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	leds {
-+		hdd2_led_pin: hdd2-led-pin {
-+			rockchip,pins = <1 RK_PD6 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+};
-+
-+&sata2 {
-+	status = "okay";
-+};
-+
-+&usb2phy1 {
-+	status = "okay";
-+};
-+
-+/* connected to usb_host1_ehci/ohci */
-+&usb2phy1_host {
-+	phy-supply = <&vcc5v0_host>;
-+	status = "okay";
-+};
-+
-+/* connected to usb_host0_ehci/ohci */
-+&usb2phy1_otg {
-+	phy-supply = <&vcc5v0_host>;
-+	status = "okay";
-+};
-+
-+/* right port backside */
-+&usb_host0_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host0_ohci {
-+	status = "okay";
-+};
-+
-+/* left port backside */
-+&usb_host1_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host1_ohci {
-+	status = "okay";
-+};
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index 16e14ee4fa7..725c008795d 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -31,18 +31,19 @@ config TARGET_POWKIDDY_X55_RK3566
+ 	help
+ 	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
+ 
+-config TARGET_QNAP_TS433_RK3568
+-	bool "QNAP-TS433"
++config TARGET_QNAP_TSX33_RK356X
++	bool "QNAP-TSx33"
+ 	help
+-	  Qnap TS433 4-bay NAS with a RK3568 SoC.
++	  Qnap TSx33 1-to-4-bay NAS with a RK3566/RK3568 SoC.
+ 
+ 	  It provides the following featureset:
+-	   * 4GB LPDDR4
++	   * 2-4GB LPDDR4
+ 	   * 4GB eMMC
+-	   * 2 SATA ports connected to two RK3568's SATA controllers
+-	   * 2 SATA ports connected to a JMicron JMB58x AHCI SATA controller
++	   * 1-2 SATA ports connected to two RK3568's SATA controllers
++	   * On TS433 2 SATA ports connected to a JMicron JMB58x AHCI SATA
++	     controller
+ 	   * 1 1G network controller
+-	   * 1 2.5G Realtek RTL8125 network controller
++	   * On TS433 1 2.5G Realtek RTL8125 network controller
+ 
+ config TARGET_QUARTZ64_RK3566
+ 	bool "Pine64 Quartz64"
+@@ -76,7 +77,7 @@ source "board/hardkernel/odroid_m1/Kconfig"
+ source "board/hardkernel/odroid_m1s/Kconfig"
+ source "board/pine64/quartz64_rk3566/Kconfig"
+ source "board/powkiddy/x55/Kconfig"
+-source "board/qnap/ts433_rk3568/Kconfig"
++source "board/qnap/tsx33_rk356x/Kconfig"
+ source "board/radxa/zero3-rk3566/Kconfig"
+ source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+ 
+diff --git a/board/qnap/ts433_rk3568/Kconfig b/board/qnap/tsx33_rk356x/Kconfig
+similarity index 52%
+rename from board/qnap/ts433_rk3568/Kconfig
+rename to board/qnap/tsx33_rk356x/Kconfig
+index c5f9db849f2..2f64b9be062 100644
+--- a/board/qnap/ts433_rk3568/Kconfig
++++ b/board/qnap/tsx33_rk356x/Kconfig
+@@ -1,12 +1,12 @@
+-if TARGET_QNAP_TS433_RK3568
++if TARGET_QNAP_TSX33_RK356X
+ 
+ config SYS_BOARD
+-	default "ts433_rk3568"
++	default "tsx33_rk356x"
+ 
+ config SYS_VENDOR
+ 	default "qnap"
+ 
+ config SYS_CONFIG_NAME
+-	default "ts433_rk3568"
++	default "tsx33_rk356x"
+ 
+ endif
+diff --git a/board/qnap/ts433_rk3568/MAINTAINERS b/board/qnap/tsx33_rk356x/MAINTAINERS
+similarity index 68%
+rename from board/qnap/ts433_rk3568/MAINTAINERS
+rename to board/qnap/tsx33_rk356x/MAINTAINERS
+index 02ce7ff383c..b91274c7b43 100644
+--- a/board/qnap/ts433_rk3568/MAINTAINERS
++++ b/board/qnap/tsx33_rk356x/MAINTAINERS
+@@ -1,8 +1,8 @@
+-QNAP-TS433
++QNAP-TSX33
+ M:	Heiko Stuebner <heiko@sntech.de>
+ S:	Maintained
+-F:	board/qnap/ts433_rk3568/
++F:	board/qnap/tsx33_rk356x/
+ F:	doc/board/qnap/
+-F:	include/configs/qnap_ts433.h
++F:	include/configs/qnap_tsx33.h
+ F:	configs/qnap-ts433-rk3568_defconfig
+ F:	arch/arm/dts/rk3568-qnap-ts433-u-boot.dtsi
+diff --git a/board/qnap/ts433_rk3568/Makefile b/board/qnap/tsx33_rk356x/Makefile
+similarity index 100%
+rename from board/qnap/ts433_rk3568/Makefile
+rename to board/qnap/tsx33_rk356x/Makefile
+diff --git a/board/qnap/ts433_rk3568/board.c b/board/qnap/tsx33_rk356x/board.c
+similarity index 100%
+rename from board/qnap/ts433_rk3568/board.c
+rename to board/qnap/tsx33_rk356x/board.c
+diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
+index dfb240ed70f..475488534cd 100644
+--- a/configs/qnap-ts433-rk3568_defconfig
++++ b/configs/qnap-ts433-rk3568_defconfig
+@@ -6,7 +6,7 @@ CONFIG_ARCH_ROCKCHIP=y
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
+ CONFIG_ROCKCHIP_RK3568=y
+ CONFIG_SPL_SERIAL=y
+-CONFIG_TARGET_QNAP_TS433_RK3568=y
++CONFIG_TARGET_QNAP_TSX33_RK356X=y
+ CONFIG_SYS_LOAD_ADDR=0xc00800
+ CONFIG_DEBUG_UART_BASE=0xFE660000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+diff --git a/include/configs/ts433_rk3568.h b/include/configs/tsx33_rk356x.h
+similarity index 100%
+rename from include/configs/ts433_rk3568.h
+rename to include/configs/tsx33_rk356x.h
 -- 
 2.47.2
 
