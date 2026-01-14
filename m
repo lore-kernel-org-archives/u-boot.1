@@ -4,105 +4,213 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F57D39003
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 18:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FB9D39003
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 18:01:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CE0883015;
-	Wed, 14 Jan 2026 19:01:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B602383655;
+	Wed, 14 Jan 2026 19:01:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cSA2AYrh";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="D7tp6R//";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="D7tp6R//";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 372CF8063E; Wed, 14 Jan 2026 17:11:00 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4AAB382C7F; Wed, 14 Jan 2026 16:21:03 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C28480325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 17:10:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8970E80325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 16:20:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3ec46e3c65bso6763789fac.0
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 08:10:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768407056; x=1769011856;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=x23s7Nrg5O/+BJ5N3xsSkIYVJzjBSMc96fEuFJsQriw=;
- b=cSA2AYrhryChgM1jmR/0CSrb4goAsO83iYWWLRTk8MUPqxGgaITcagQa2aYDhm1ADd
- tViFYKvuBKBygJPZ37OZIznAJNAbv7CXe5VBVrkysM9dmoToGTkJNdMNU5/0xNINVjx8
- GoTvw0oGDWO8Gjo5p4cFevLo7/ojuyRkesnRFrr/uwvG4QZdeTE7NMsFbgyjTrO3Wwt/
- /AKer3uHdLwdZhWzGE4JTvW7udJMqKnCJ3aKVVqo9QgicmkXWJG0WSv6Mk55noSPvFcG
- IQ8VEW72LDPoPIfcStIYZvHrAWv5NKgPEK5gHmWdjiv6+zQvrp75gsTNiOJ1uz/9dLvb
- Yr5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768407056; x=1769011856;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x23s7Nrg5O/+BJ5N3xsSkIYVJzjBSMc96fEuFJsQriw=;
- b=dqc6FnhUJ2MSHG2kzGJolm1OBQ+uw76EOE2IB4NuDJhTbxbCzS1mWWeCqtvhqlbxIO
- LF5uV4LRcXaXlYLWJ1yk1oJCZ9+iOdLggqn6YFTwiOQjhFHmoCDkzPbtP91WWStVfMuF
- D3RQVE5xMhj8lkFfuuA9enTR16fAIiTi8pZZlFaoTDEnegG1GrOSbzJIxNdtDUWCQc8n
- imct++jqDduDIgQpsK2McJuxYwgVunOwPztT4SuqZrn8/OVGMoWEK+gYCOuUbxUfB2sT
- UqSOr7j9aCc9ofHw/BirKNQAJxvth1BnmajLgiHcy2dCPXNSVYMXCVufaSMX7S25GK5r
- Yprw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLgAxJZPlSfdoHzw8qckEwebBIQLp8gUCdqUtrfEtt11/KQw7L+d9x8iqOltCdaosA9Mdy+y4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6/4RFNVd/NlFF6CqYnad85tUlgSwa/eyiMmGjIuoogZ0ILNUo
- BiFWuEphxK2iOf9wYn5RLZWNalNq9UBWglqZSNZtqZ1kaEAlSCBKdecJr0t92v8oQsE=
-X-Gm-Gg: AY/fxX5LwcErrPyymVBq6QcrR9jXO7quS8xppLNaeZtye4Qp+UjUNd9RPU7+IfDjcHg
- EJnCTg85JAVvMoXXiLdHriPY0AFrLoLQZSIjoAZMSSoYluiwRBCj2iV1qQYZVZU4M6cZZ4zf6cC
- XF/ZZQ/n0jUs1D+RA2m/rTKQ8rOugphhsrIULFNZSz+gaGmZAywD7XgbMy+t8LI2sWsACQCGqA7
- yJgUoNvxmcFeG6Nbcqlmb3cJKh5MuhYTN2MicpEENc0TRK64X/U1GJw1n7sD6NkDyw/Ix3XoqtK
- iq2hzaPISyx6Cbe1c3R7NYDEsnUmHiAHz2VO63mq7ZcfLQYreBUH+bbronJkEgXQIc50gUK81YG
- 5c8tnoLkPxJ/qQZlj7nL8d33RbtxYDEFMO3gUhaICV9c77ikS0I6hEbXwk9h8R/73wFYL9ajNPC
- xwvVPBQk3KkZkg9YA=
-X-Received: by 2002:a05:6870:d6a4:b0:3fa:a96:e280 with SMTP id
- 586e51a60fabf-40406fb9e9fmr2393459fac.25.1768407056161; 
- Wed, 14 Jan 2026 08:10:56 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:3ff3:5a3e:f89a:1938])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ffa515f4dasm17026044fac.21.2026.01.14.08.10.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jan 2026 08:10:55 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 14 Jan 2026 10:10:46 -0600
-Subject: [PATCH v2] cmd/Kconfig: fix typo in CMD_PINMUX description
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=S1Efzbwf6CeOlK55D9OHibYgxzTNDytVj4vEIEMMQ11q30mXLuf0c9Mf18wPecDtX6gWvB0ARr3qoDQLhu1UZTrfNCwuicYuCxY5xupmvZyHTe7pkfUnzSvH+aHHwGfmOifdh0ihfRP2v6es8P/6chxBWOOtpXFM0sXbzNS5uOb0VcoIDzUQn7gyzQNG/aWbIM47i03KSDlI6Nvqa4MNSOJW/aK5WWiC7kZW1xmx64MjDJHp2CLpRDvJT+mDWUqn8Qb5KEMGyL2v6QWIr2yvgAWG3jwl/elQdMdj4v3scikEy3TRM/Xc9eT8QS2PE+AXvR0IE3lTMORiIZPcbchVZQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ua3qRUGw54MsUs7SKsyoeUUmr2K8MptFstVagdX+9zE=;
+ b=hXKgU7yU91/QSewlX6mE3+fhXxZchSPOzMkhJ8a0Z7PHly3QUTeVTm0GrRjEKCLLIJFzqoIDM3lu1qVokbhiVDt2ZbVVQuSXUzjlbkHNjMuP7W0eOUypBPv411s5yiPY869kShg5NvRJYWEa+elAHrQLJ64bx0tDnrINibyQv3JBWbEe/bg9VPrUFLN3peOj6b7QV/8x2LYNEm11VHqxEhOuQzEFQx1i2RddnLgZ/Zz9gx9uTwx9gcow+r/XCCX0C6CIBp5av/YSI8IHmg7SHA1fwz1ButGPKxbAZ4AZWZYY6bcezg4iwaRMEDaO6YnzKd+nYlE2D2RraMkxSf7bNQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ua3qRUGw54MsUs7SKsyoeUUmr2K8MptFstVagdX+9zE=;
+ b=D7tp6R//BbDXvcgSF5P30Ny4cKmveZTKRmX/fWal6sMf+VFS9EHFsEMXhulKRE99Wwvo2SzgcSE1RTuEokkYX4vCDE5S/bC4EVNf548GOj5CZoAjFzx6fpAjt5ulkxu4WIIOqoL6qLK3lAm5vMly/5hDKrKsWab4qn/oKpI70VY=
+Received: from AS9PR06CA0004.eurprd06.prod.outlook.com (2603:10a6:20b:462::20)
+ by PAXPR08MB7646.eurprd08.prod.outlook.com (2603:10a6:102:241::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Wed, 14 Jan
+ 2026 15:20:56 +0000
+Received: from AMS1EPF00000040.eurprd04.prod.outlook.com
+ (2603:10a6:20b:462:cafe::79) by AS9PR06CA0004.outlook.office365.com
+ (2603:10a6:20b:462::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Wed,
+ 14 Jan 2026 15:20:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS1EPF00000040.mail.protection.outlook.com (10.167.16.37) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.1
+ via Frontend Transport; Wed, 14 Jan 2026 15:20:56 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ABIFxHzblrUuV9SLBd02SbnBxRlAMvIko5xYRiZ4p8e6dCANxf/FrCTSeXZAFxf2nP3Jgbt8ruUsP+TGJytxwUvlKxefku+0nLWoZZK0/nyt+WQhgzTH5QmlJqo85I+Eu/ZH0O8JV5r7VyICT5+H5/UOp9BxvXD+M3uAF4GTEMYzON5TOXpnG3nMhNS+MUDxUFlqlr0myRRgA9W/nYQcaF/Wr/BUgT+HpPNkREhfr2UXyQ56jUEao7GsOMVvlsQIdPymjSFX+SooNJyfPSxV6lwpSZBg60baJuM6BeeVGHcPQFmhQFuhTApfjHoLzLMDEy1Y0NgOnRPb2oS7mV49OQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ua3qRUGw54MsUs7SKsyoeUUmr2K8MptFstVagdX+9zE=;
+ b=KOIX9WV0xDTAplXO5CP8zrwdrblwLZqWkkHNNNrTpsUtnuatD/nMOrBboC+p1MXCGPobuMotTy0qb6Jo1irL8ggTKpkV7uk1bvH4qOi8ehguRG0P2arw9b/ONo5zgmQ3JtEhEU+txclH56Jwy4PydUVspaFVWs9B4UD1+tItzgeHg88oh78XA/01EKD5hr44alTftHGUBQYBSiTgAjKrpbRnOyLo/ZrrIICVITRCOcRbpBIbVPsG6UwtBpiyKzRNkjzKOyXHfYmTgNeUG3AxhTtvqjFMclnvfLPPc6R5hRTVpgZK8p5NO9+G3gnSW+aROev0656DgG5h7vE30clv3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ua3qRUGw54MsUs7SKsyoeUUmr2K8MptFstVagdX+9zE=;
+ b=D7tp6R//BbDXvcgSF5P30Ny4cKmveZTKRmX/fWal6sMf+VFS9EHFsEMXhulKRE99Wwvo2SzgcSE1RTuEokkYX4vCDE5S/bC4EVNf548GOj5CZoAjFzx6fpAjt5ulkxu4WIIOqoL6qLK3lAm5vMly/5hDKrKsWab4qn/oKpI70VY=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by AM8PR08MB6449.eurprd08.prod.outlook.com
+ (2603:10a6:20b:364::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Wed, 14 Jan
+ 2026 15:19:49 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9520.005; Wed, 14 Jan 2026
+ 15:19:49 +0000
+Message-ID: <c3e65d1c-0f49-4bff-bc50-a6cb52640f55@arm.com>
+Date: Wed, 14 Jan 2026 16:18:35 +0100
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+From: Jerome Forissier <jerome.forissier@arm.com>
+Subject: [PATCH] MAINTAINERS: update my email address
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: LO4P123CA0398.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:189::7) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260114-fix-typo-in-cmd-pinmux-desc-v2-1-a378150e4ad3@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQqDMBBFryKz7pQYMDVd9R7FRUzGOlATSawok
- rs39QTlr97n8/4BiSJTgnt1QKSVEwdfQF4qsKPxL0J2hUEKqUQtFA684bLPAdmjnRzO7KfPho6
- SxUaSUUoOLWkDxTBHKvPT/uwKj5yWEPfzbK1/7X/etcaSm24HpbRoWv3ozf7mPtLVhgm6nPMXg
- E9KYMkAAAA=
-X-Change-ID: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
-To: Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1223; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=Nj2dbAMZ7V1zman6WeM3gZSGTntxw74j3k6e+TKsymA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpZ8AIDWMoWzk622vWT+1ScYixHdxmZJjfvEmQe
- 2OxAWe2HY2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaWfACBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AzNkH/jQGFq+2qSjaQj0hADCl+9mF7qD1z9E5nC7jmVz
- +aH/mhhxSfwPOtX+ADsJh93vBESfv0eHCh6sunNo/QpOJo0xGB0Xwsr3kT7bxkfjhQNJL8DCE+l
- KHW526WtzO5/bEam7+2FKxbK+d4PrIy6FPDMnO67vrwyNVy/tqXvjUmdY/GlqRS0Ni0GBGMOOAG
- PtvSO3pY5Q/6nZmD13B5gOV0KR70KbaZwNkc8DbAOOug50Ef++HKgUOjGUosDxUE+80V4xgh/9d
- 2nlqA+zahiPH4CTDzrVqA0FoNHko1Tm5rj14nNCWMJeQquR/eiZ0zefRpemLIdckvNDdL0nMGY/
- RoyE=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Wed, 14 Jan 2026 19:01:30 +0100
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AM8PR08MB6449:EE_|AMS1EPF00000040:EE_|PAXPR08MB7646:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb5ddbfb-d6f0-4cd8-7057-08de538083eb
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|1800799024|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?a25qVHpiTnpoelZXTzhyRmF2QnZUaldpMmRpbXlWS2hHdEc5WG9kTTllVGNN?=
+ =?utf-8?B?Z0ZnTlM1ZlZrc2lITzVoM2hkNWR4RXlTR0FwYUQyLzA5aHRZVkRjMXRWemNj?=
+ =?utf-8?B?bmNYU2h0TDZzeUczMzhyYTBtMW40RnB1RzJoUTdNWVAvZUV0STNNa004VUgr?=
+ =?utf-8?B?N1ZVelF4S3JraXFzaU03cHNkajlCT09aQzhUZFNveXRUdkFnWnQwMzRNc2xW?=
+ =?utf-8?B?dTMwWUE4Nkp4bWVMQW9VaFNGdm56VjlJT2d4NU9tWjZyVURQdURLcWt4VjRO?=
+ =?utf-8?B?djVMV0wrMFZtQ3UvcGdFSFRvTHBRSWx5L0tPUTc5SEgwYkw2MWN3SXpxV1RJ?=
+ =?utf-8?B?Ync5QW53MnV2STUxaTk4c2l5bU5KdVgvOG5wN0N3UjAxNXpXODhiR0htbDdL?=
+ =?utf-8?B?ZTNhSHZpU1c0OVF1bGRqbjZTOTl3MWJDOW5OMHRlQUo3UWdhZU1WTDJaczlt?=
+ =?utf-8?B?N1dXcExMZGIwdXd0aktDTmR6eUpJR0VGUGJmSjB2VVk3N0VCdVNieGs3aFNQ?=
+ =?utf-8?B?VnY5MUlFbmsxYUNQOFM2NjR5OHh3Wi9kTjhscE5VUG00N0ZHZThvenRwYkVN?=
+ =?utf-8?B?UkVaNCtlRm03bkhaNy9SYVRhT2Y4N3AyNXcwVHE3aWdkMHlkbklTcCt5RkYy?=
+ =?utf-8?B?RDM2bFAxSUFXUDQ3S2xMMXBLVFkrYVNTb0pqdnBQeDVybFU1OXY5RWJiUEov?=
+ =?utf-8?B?b0VWTUY1djlIejRyMmdrVDYwaG0raGRzQUQ0SGxvS0hZaUNoKzQ1TmY3eENu?=
+ =?utf-8?B?VGZpbTVwTklhZG1vSnlqb2F5a2o0U2h0QWUyUEF0RVRjVWFySXRUa013elFP?=
+ =?utf-8?B?dXZyQVA3dHhFSUJmUHBpZGVKTXpjV3ROMWxRc1hRQVZDcXBhUm8xRlQwWlZF?=
+ =?utf-8?B?ZVFhTGllOXpQeWNBMnRrMDNhNHI3eU5lMGlEb1hYbGNsYlVCZk5oVkFKd05D?=
+ =?utf-8?B?ODdqNVE4dGpNblhmUWJDRXFBVzZJWS90VC9YTjQ4OFdRQjllV3pNYi9zNy9B?=
+ =?utf-8?B?cXkzdGU0czVIQ1FNc20vUm02V0VFN2R6QmJ1MVNHUFVXZDMxWHByQVR0ODlJ?=
+ =?utf-8?B?SnBxZWNwZWJWUzM4aGhTTndDMnNDb0ppeEl4andnTndvd2NyZXViNTVVaTB1?=
+ =?utf-8?B?TG1nenBMa1pEaVE3MzYzUEZiUGoxZktpeWF2Y3FJTFJXZ3lLTXZFZ0UzcFkx?=
+ =?utf-8?B?UytRaFEyOTBzZTY5T0JQSEJYNXBUY3R3L2k5UzA5L0xCcCt2Z2EwM1NaTkVL?=
+ =?utf-8?B?RVJuVTk5ZC9tMmQ5NEUrcHpWWnBwUjY4Z2FDM1ZVNmxkZUR5YllZNU4vYzE0?=
+ =?utf-8?B?cldVYVkxeTdRUDdrc0tSbWY2NFJibXFPdXEvTzZmdWNPT0U3b1E2STVXNlk0?=
+ =?utf-8?B?bnZTRnBHVit0RjNsWlpaWEJGaVJSUlhJNHFNM3pnOVRkRVpKbGhrVXZsdmEw?=
+ =?utf-8?B?NWw3WVNGQ0VXZVBZNzZkbU44bG5DR2lrVnlmcVh4ZUk5b0FYTHpleU9CUnlm?=
+ =?utf-8?B?Qm9aeXhtWkRTTkptd0VzS29pS0d2MEhwSnlFdW1McjdUdmVPTXVKMGlSZEhu?=
+ =?utf-8?B?YUcvMjU5eU5PZWpodWN6Nkx4ZU94dnh2ZU0rcXFqNkl3TnU2K3YxUWxRcDF1?=
+ =?utf-8?B?ek55QS92SVpmT0ZVdCtrclpoVU9kSlhDalBORE5oWmR1RTVVM2dXYWN0Nkg1?=
+ =?utf-8?B?a0ZRU1ZDclZiVjFyQ0RpZWliUTNrVkJwL3BadnM5TWlMVVpOZmpYemZZSVFQ?=
+ =?utf-8?B?SVorS01MLzMvalF0UDhoUDBFVzV6d2pEUHJxQ1Vpb09NOGNxQVBpRjZpTWpp?=
+ =?utf-8?B?NXNwcTJIR0Yvd2k4TTVsTzVpV0tNU1ZBcThuN3RKN1FwZFc2bUIxSVZXVGYz?=
+ =?utf-8?B?WGM4Q0JvTWxMcHlHWXFaSkxTdFh3ZWFFQUZjMTlnYjJUUGZYV3R6TXIxU1Jn?=
+ =?utf-8?B?aXVpYTk4dHNPbFpCZ21FQWVKUmk2dHRiTERmZzhNcGI0WnlNczY2bTNrSU9W?=
+ =?utf-8?B?QlRQRmErOUdTYkl6OHNJczRCd0pDaDFVMHc3OHBxMFBtTlpndlZ3aXRoUWJQ?=
+ =?utf-8?Q?bhvk28?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE; SFS:(13230040)(366016)(1800799024)(376014)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6449
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF00000040.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 69f5dc4f-db4e-49de-7248-08de53805c02
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|14060799003|1800799024|36860700013|35042699022|82310400026|13003099007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NU1tSnNlemxXYzRmaW5ZWXVPdDVuYnVXRzRTdVBuVkFiTXhSTFZZZFIxMklU?=
+ =?utf-8?B?TjJNZjlNMmlnQUNORWpLWnNIUmR6aVNLay9iKzIxQnRMbWNKK2JQZWREYXV6?=
+ =?utf-8?B?U1R2dFpkZzBWSVhldEF6RUtncDhjbEU3Q3pPbnlKTXY1clBHeWtFSHkwcUlF?=
+ =?utf-8?B?dGZOWEhydDlsVjAxVUxsbzJsNEgyNmNwdll6QnlhNDB0VGpxTE8rdlhpV245?=
+ =?utf-8?B?MERzaDdHUGkrelp4MjVMbGJUL2V2bThEaUJITHJhNGl2WXBpb1hHd0dmOGdm?=
+ =?utf-8?B?cGhxYllTVWFpcEJ5a0htN0lIamVJTG1MOWZZZUovbGIra21LY0tqSkVKRnRN?=
+ =?utf-8?B?TGxuM1hwaytBR25JWHV6M0p0V2gzcjNPSW1VV1IxRnkrZ3ozcU5PZzFWbUVp?=
+ =?utf-8?B?RHlJZGJsZnY1aDNwK1Y4bjJ0aWkwZE1nQkt2Z1NmQWlqajNaR0prbHozclBZ?=
+ =?utf-8?B?aVkwT0hGTk9hTGpUSkRLWTlYYkxaUVE4cDFKV1dwRVljVWREOGdwN2JnaDRq?=
+ =?utf-8?B?d3lPc1ViVU1FR3llelQ5aVRSdFp2Q2ZPUU1VamxlKy9ZVENuUjFCQ2FwcnYw?=
+ =?utf-8?B?L3lMWHdxVkIxS2RHdmFxTjNEaFVKTldlNDJpTWhhSGU1NDlqOXZLVmY2WnAr?=
+ =?utf-8?B?NXF2T1h6TnQ1U1hRU2JhOE1pbmRxQkZjcnRMcllQMHhSR3k3K2tTY2JTMlB5?=
+ =?utf-8?B?dE9GOCtNdDBKVDJ1WlRLZ0NycHBBbVpNalJIMEtiQnFEYk5FcHJQZ3NuckVm?=
+ =?utf-8?B?MkFNRy9UdEc0V2Eya0tyN09YakY1MFVHR0J4dC83K0xYQWJtZTdBYzNjS3VJ?=
+ =?utf-8?B?aFFsUTNqcTFHZDA0cmpXcXF6UnM5dnc0RjE3dHdScVNIdzRTOEdISFYrUTd4?=
+ =?utf-8?B?SW1yU3lkT3ByYW5MNmtMRDg3bXBJb0VGRER2UkZvd3JhN3NuUXdOT2ZPQ3c0?=
+ =?utf-8?B?V3J0d2hrcHMvTWowZnpRV3BoRWxDVDd4ZjhJN3hFbVdFT0pWTXpiaTFNNzFX?=
+ =?utf-8?B?OWtzT1JZdlptQTVwckpmWG8vNm9ZWUhLWGJJRmlSbWppMzBkTHRvQVo4bHpw?=
+ =?utf-8?B?RUxIT0pVeVhZZmZZdFVKdnhTbU02aGN3L2NSMmlPYW5kVVB0azkvU1crUy85?=
+ =?utf-8?B?dlJNQjF4ZmJmQWNDSi9rZWg4UlZyVTU2V242UUhzbDhieTQrTklqRmNFZ09I?=
+ =?utf-8?B?M05GTGV3NjJxbEUxY25WOHM0L3BzYlBLZzZHY1FsL0NIQW9rZlVUYlhDT3Fy?=
+ =?utf-8?B?Q1RtN1luWEs2VmFmdDVieEUwWldPYVNKQUFDOW53YmhFYVBjQnVJNVpxWFNp?=
+ =?utf-8?B?VkJ3bTVpMEthbCtFNk1Cemw1WFY5OVczVnh6VS9xUC9IYysvVE1wRytld3lH?=
+ =?utf-8?B?YStoUS9lSlZGVWY0YWZTUGtLRUMxYlhCVHpmbjRMT0tqU3lHVjZLSzJNYjRq?=
+ =?utf-8?B?a2dCT1JWSVo0VnFwREFZRnRLL0pRUjdiSnFKWEVLdm9YVUZtZEhGcDBuc2V3?=
+ =?utf-8?B?TXQ4b3ZINlUvaGx4aUtCemllN1VOeW93WEpFUVlrV0NEWVVBT0ZxVlZiTDhY?=
+ =?utf-8?B?Ym1RYU1YUEV1dHZlMTFoZWFpVDhoSlJoVW9LZUo5dHpwN2RkVTRmQzZtYjV3?=
+ =?utf-8?B?aS9yMWpDVWtva0Y0ZFBudUJVQnExU0VEc25wL3pZK1I1eTY5bnI1NXMwZ0V3?=
+ =?utf-8?B?Y080c09yTXJMTFRxcGFiYS9pMUovMXkyVGpPK2QwV0N6WFljdW9uZEZ4b215?=
+ =?utf-8?B?eVExb0pPS1B3cVBkMkxmWTNwZ0hEeHZmT0JWUE1LL1F5dnpxTXVhdmlWSnBF?=
+ =?utf-8?B?d1FlZTJQaXJrbDMvL0s4N2F0UEFiY3BDSUI0UnpUTE03UFM5ZFpwZFNadHJS?=
+ =?utf-8?B?MWE3R2szVWk0ZUhTcUlFSW5hNlgrcDZLbU5GRi9HdDhwZ0cyY2RUMHZhcW10?=
+ =?utf-8?B?RnpidUpuWXhtWCtKcGRuQ04wMERsM05lbGI4YlpaNE5aOHVpb0ZWOHVLK3cx?=
+ =?utf-8?B?VUQ4QlIySDkwaEpEaTVYUHNvZ1E2ZFRiakJ6bklTcVNJSmVMc2NWWm1vejYx?=
+ =?utf-8?B?by9oaldIbmdjTFNBVi9UdW03RTVTeXdQZTF1dkJ2VmJCSk1adzZ2UjJ0ZGNF?=
+ =?utf-8?B?VEY5ZVUyeWFxbCtXOGVQMEFLMVRmWmRTczFPZnhsN0dlZzdLV09uME1waDlY?=
+ =?utf-8?B?K3c9PQ==?=
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(14060799003)(1800799024)(36860700013)(35042699022)(82310400026)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 15:20:56.6930 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb5ddbfb-d6f0-4cd8-7057-08de538083eb
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000040.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7646
+X-Mailman-Approved-At: Wed, 14 Jan 2026 19:01:40 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,41 +227,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix typo with correct spelling of "purposes".
+I will be using my Arm email address for all contributions. Update
+MAINTAINERS and .mailmap accordingly.
 
-Also change "debug" to "debugging" while touching this since that is
-the more common phrasing.
-
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Signed-off-by: Jerome Forissier <jerome.forissier@arm.com>
 ---
-Changes in v2:
-- Fix typo in subject line.
-- Change debug to debugging while we are at it.
-- Link to v1: https://lore.kernel.org/r/20260106-fix-typo-in-cmd-pinmux-desc-v1-1-1798f6690589@baylibre.com
----
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .mailmap    | 2 +-
+ MAINTAINERS | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b71ac554c0b..3138ffaa639 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1679,7 +1679,7 @@ config CMD_PINMUX
- 	default y if PINCTRL
- 	help
- 	  Parse all available pin-controllers and show pins muxing. This
--	  is useful for debug purpoer to check the pin muxing and to know if
-+	  is useful for debugging purposes to check the pin muxing and to know if
- 	  a pin is configured as a GPIO or as an alternate function.
- 
- config CMD_POWEROFF
+diff --git a/.mailmap b/.mailmap
+index 2fe12e76d0c8..0592350c37d1 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -69,7 +69,7 @@ Jagan Teki <jagannadha.sutradharudu-teki@xilinx.com>
+ Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de> <jakob.unterwurzache=
+r@theobroma-systems.com>
+ Jay Buddhabhatti <jay.buddhabhatti@amd.com> <jay.buddhabhatti@xilinx.com>
+ Jernej Skrabec <jernej.skrabec@gmail.com> <jernej.skrabec@siol.net>
+-Jerome Forissier <jerome@forissier.org> <jerome.forissier@linaro.org>
++Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org> <jerome=
+.forissier@linaro.org>
+ John Linn <john.linn@amd.com> <john.linn@xilinx.com>
+ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.c=
+om> <jyothee@xilinx.com>
+ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.c=
+om> <jyotheeswar.reddy.mutthareddyvari@xilinx.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 02310ec2c0bf..b09bde4bc3c8 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1444,7 +1444,7 @@ N:        mmc
+ NETWORK
+ M:     Joe Hershberger <joe.hershberger@ni.com>
+ M:     Ramon Fried <rfried.dev@gmail.com>
+-M:     Jerome Forissier <jerome@forissier.org>
++M:     Jerome Forissier <jerome@arm.com>
+ S:     Maintained
+ T:     git https://source.denx.de/u-boot/custodians/u-boot-net.git
+ F:     drivers/net/
+@@ -1452,7 +1452,7 @@ F:        include/net.h
+ F:     net/
 
----
-base-commit: d503633a36767d756c7de28305cf0de79440cbc0
-change-id: 20260106-fix-typo-in-cmd-pinmux-desc-52ea662f8e9a
+ NETWORK (LWIP)
+-M:     Jerome Forissier <jerome@forissier.org>
++M:     Jerome Forissier <jerome@arm.com>
+ S:     Maintained
+ T:     git https://source.denx.de/u-boot/custodians/u-boot-net.git
+ F:     cmd/lwip/
+@@ -1904,7 +1904,7 @@ F:        drivers/usb/host/xhci*
+ F:     include/usb/xhci.h
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+ UTHREAD
+-M:     Jerome Forissier <jerome@forissier.org>
++M:     Jerome Forissier <jerome@arm.com>
+ S:     Maintained
+ F:     cmd/spawn.c
+ F:     include/uthread.h
+--
+2.48.1
 
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
