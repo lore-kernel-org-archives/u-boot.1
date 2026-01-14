@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE74D37E37
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:11:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4271BD37E39
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4381F808AF;
-	Wed, 14 Jan 2026 15:11:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C153B808AF;
+	Wed, 14 Jan 2026 15:12:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="webth8/x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dewMclO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E0A080C93; Wed, 14 Jan 2026 15:11:02 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 576C182C7F; Wed, 14 Jan 2026 15:12:24 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4A7C8063E
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:10:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A1758063E
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:12:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-47796a837c7so59789185e9.0
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:10:59 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4775895d69cso43913455e9.0
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:12:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768399858; x=1769004658; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768399942; x=1769004742; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1Sx+Wp5oaaX0WNWEKY+I8oMKXic/KPEDviA98FYItsA=;
- b=webth8/xBEqC8AVT6ZW6GMZVsQJK3gp9pX5sKiulhDur+Sw0RXmsnSSz6QgyZNGADf
- OBJX0wKH+HU5HB3tOVjObMfqRgiLkIbRwKROQVnXYNnfEQ4T9g+6zNcfNVtPgsDTKpiU
- D8jOx9OrLN15hD6h0tYXhP0lEaNrMG/9isBRVWT4F50FxphosRHbrBqKipq7AfZfZIoL
- LIFVnQfuiV5vQWU6+aiAemzNfR7/G5q1VtYUbi6qwFH/iseEhfmpVcxgpbUNYOaKfjaR
- hwk2MiBBAYTxcQFHSf9mw8gfiwnHq7an4PTtrpPIikquEnFcRHRUy2YohkbCYkFrzfR0
- Nelw==
+ bh=9GT+Uf9k65pGrNREZnQEfw1RGdbRg3yiXsJS15bcPjw=;
+ b=dewMclO3i46dUyGKVyAuJAcsTWNpbc9ZZ9WhrS6X4J8QaCOL/COy/q9MI4B/0m6BZd
+ 33tRrbQrcOtoWyvWw5VR1k1lGkfbgx+PsJOMbXdGcvRSzGZ9lnpY/hev+fPKNL4QgOb9
+ IQPDqOfhvBfTYwLvY0A2cpfymVXZjto8jQAcoQgdvqKpHLtDJ/v5Ure+Y/Hl2g//lGGy
+ s5VQcjHNfm2wmQmRtbJZjCoW3J4tRzRZM3CySkeHacuxRLoqStGInhjDNHAeTbqzAFb5
+ Zr9LQdyZozAeXI9V3kvMcH9eH/Z0aUPs4Cw41cgGsj/yU7zDSWggIT9qTTSHecQaOT+s
+ qq+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768399858; x=1769004658;
+ d=1e100.net; s=20230601; t=1768399942; x=1769004742;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1Sx+Wp5oaaX0WNWEKY+I8oMKXic/KPEDviA98FYItsA=;
- b=qWSc4+xUa8m+mm/O2wqE+xvTb2of+iWJypAlqf/zGD7xDUXz1w3Qqs5q+Kvd6Cm9OJ
- XlL7nrJrhe7OTNXNyVRUu4ixLVm/c6o4jOsCWPFk+v3GTp1Z9izTKVoFY6qCEf57SJut
- vpSWtHP8ZgCY5P0SAGaDb9ig3uY5UFab7mDW98iynH+o/WOaUk4BLjdY6vU/O/A9wRUF
- +KbsdzEqGgu9l7jW3VcwN8GcXf2HnxGR3ZZ+01YeMCwJxzyHQEMwV4trWrB7+UWQK4zb
- //uJzwcD6xpclh3pOgHlOf3EZdSYIs1ui39B95pjMQCdJ5UTq4FL61+fdiHrg91NtNE+
- 6RIw==
+ bh=9GT+Uf9k65pGrNREZnQEfw1RGdbRg3yiXsJS15bcPjw=;
+ b=UVRBU/svhhwLtf+dD/rRrlIxLjL/+Lm13vf2RPmva7h5Wm114awiHTfQFaVbPhOzkP
+ iVUqGSnsJMcpz3Va9TNmG2LHVWUKmYE5eU2e3dKD00zwg+Pikqs4e5LGfMRo2sxUMncM
+ f0u2e/+TP9WpcMqQRKJ4iSVO+6YH0MmOWfEKmekprbhEH3TNzfeaPhBh1fSXPn2/3EaX
+ qwfRmzPG6JQyWXqOkN3JMoohjUrM2YKl/8f3Hir4RH1fe9380gSl8Y35Noj0ThIeZizn
+ /zsB28jqetIAhyfUE8EZiuBKd3xHme+REjuuNUSdWusH1jkzzmncsHONfRo3vihseP4H
+ MpDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+Qwr5iPi0hjXHvO5yBZmawN5D7wYYzG9zkKSANCItmRQJMcpu45H1n4vZJPaCyuHXb7WNzV0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPwIW+rE/C9KrRaCtbeVZGrTLxKBnxEIc39yIqa8sz54cOfFiU
- 7OWCBt8n4UrYvlpIiOJ8ur16kqAA3SEZOQd+JZZqzedIq6vn2s9RbkdykHVDvDHPmcg=
-X-Gm-Gg: AY/fxX7tGyAi5Die4gzQzQVhcjIgaPOr3afSUjanvMDn0Qqg+346wvt6J+pYEgKgUOw
- vJeaklywrWzeHfMtolJ2moP/49hThYXPmKrYoqwsZUw02fVVTA5+Dz0TW2PC0HofwgjAn3lhzJa
- psJ8ev7STOXl8wXOhyO/lWV3IFee/m9fIDCbAWKRGXj9uXVtOEEFYX5tXB34Zg8VvRmj/NjSJUk
- hu+BHWOKmDxjkrKz3HX/rvrSs5BIvL5PsELTkCcb8SVMlIS3wLBuOJbr64FvtFHsjQEQ2YrgpaO
- BW0qr7ZU/TjU4344McVKJ96BPHQFzI2mEw1vAJ7vlZiHCfkjX3MDOFMdBfVimz4jeffthPrMC0F
- rFkvnJkPDVaElHQQ8pvFFH6JAjB6/NmX1TSSFJTelBdiejQ7/dxeKY4iFc8r7fosSkroOnYjKwD
- qFVNA+kCwItGh50Jg9dfW3CwrCrB9LSyZHva/3XsNaYWAeN9GNAwY=
-X-Received: by 2002:a05:600c:8b22:b0:477:63dc:be00 with SMTP id
- 5b1f17b1804b1-47ee33a1294mr32001015e9.25.1768399858428; 
- Wed, 14 Jan 2026 06:10:58 -0800 (PST)
+ AJvYcCXYIdZ4zTWUgSMop8NZFsUJYIQKgW8XoxMM7Cvych2gnbtcaM+ZTDTygcOSWb2WwV3JdwtCWws=@lists.denx.de
+X-Gm-Message-State: AOJu0YznpbmJX/LByyVKNBHDs81Ou6cTFWLYif6DWKG7W8S+fxrZeh/q
+ r9xD/gjIaBm9IyTdI3P4IRf8LLb1EYy5jCWSh9OmvdzdGCmJY7I1KClDfnv/Dx2SUCM=
+X-Gm-Gg: AY/fxX6kvB11RYZc3mxLdHGMFPyOwdYicBz+jt3jESm3VsGb+cKRH6xo69YTO7cL22Q
+ mZj4/R6Okw/UYGY0OyrGPE2veF/+Goj7fSEq9hvnV/pu/Jsss6fYQTG/hkBHA6SExY+oApg0stK
+ TWTSbgljrRJMP8tK/l8ZFXKZvYHMVY1qwQtx/4d+NFPMr0+ROeK+WhB7g0XfurCT6GX4yQNVTo1
+ aRUc6BeQ/Ed1I1RHsM6wIP0SrH3QXJhPDoqytosEk9P5DDUk6c1osQ2VPpLg82AfA8OttUFcVda
+ xkYRblg3OOnDIOdgNXYS4Y4rStWxdraG1AL4b3UpQ0uiKU6fraDjxUZ7RtmPi7ah+NgSm+3S/gH
+ GGqQH4blFswk/pEXrBwTAPct9yEw+HqBri5d9CqE+tVmjQmDkTCnJv1VFOycb2ffKEwbvuM5r5p
+ 1CmJ9T2tVbufF0z21lMYMny46DXCjTFReW4Crm6DBYKdroExVgzAI=
+X-Received: by 2002:a05:600c:548c:b0:477:abea:9028 with SMTP id
+ 5b1f17b1804b1-47ee32e0c52mr30302865e9.6.1768399941630; 
+ Wed, 14 Jan 2026 06:12:21 -0800 (PST)
 Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47ee54b8c5asm30315295e9.1.2026.01.14.06.10.57
+ 5b1f17b1804b1-47ee97b2bebsm1217955e9.18.2026.01.14.06.12.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jan 2026 06:10:57 -0800 (PST)
-Message-ID: <c471c029-3623-400e-98d0-847ef891fe8e@linaro.org>
-Date: Wed, 14 Jan 2026 15:10:56 +0100
+ Wed, 14 Jan 2026 06:12:19 -0800 (PST)
+Message-ID: <299b5e24-ec98-4adc-aab0-495bb0cf144a@linaro.org>
+Date: Wed, 14 Jan 2026 15:12:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] firmware: psci: Refactor EFI runtime PSCI reset
- handling
+Subject: Re: [PATCH v2 2/2] qcom_defconfig: Disable
+ CONFIG_EFI_PSCI_RESET_RUNTIME
 Content-Language: en-US
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
@@ -88,11 +88,11 @@ To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  paul.liu@linaro.org, raymondmaoca@gmail.com, u-boot-qcom@groups.io,
  u-boot@lists.denx.de
 References: <20260114111624.2321852-1-aswin.murugan@oss.qualcomm.com>
- <20260114111624.2321852-2-aswin.murugan@oss.qualcomm.com>
+ <20260114111624.2321852-3-aswin.murugan@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260114111624.2321852-2-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260114111624.2321852-3-aswin.murugan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,84 +109,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin,
+
 
 On 14/01/2026 12:16, Aswin Murugan wrote:
-> Previously, U-Boot’s PSCI-based implementation of `efi_reset_system()`
-> was always enabled when `CONFIG_PSCI_RESET` was set, but it did not
-> handle additional arguments required for specialized reset modes. This
-> caused issues where special reboot requests (e.g., bootloader, EDL)
-> were ignored, resulting in a normal reboot.
-> 
-> This change introduces a new configuration option,
+> Disable CONFIG_EFI_PSCI_RESET_RUNTIME in qcom_defconfig to let the kernel
+> manage reset modes and handle specialized reboot requests correctly.
 
-Be imperative rather than descriptive: "Introduce a new configuration
-option". See
-https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
+Please disable this in kconfig instead. Could you validate that this
+doesn't cause issues on an older platform like sdm845?
 
-> `CONFIG_EFI_PSCI_RESET_RUNTIME`, to explicitly control whether the
-> runtime PSCI-specific EFI reset implementation is enabled. By default,
-> the PSCI EFI reset is enabled, it can be disabled at platform defconfig
-> allowing the kernel to handle the reset logic and pass the necessary
-> arguments for the intended reset mode correctly.
-> 
+Kind regards,>
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
-> Changes in v2:
-> - As per review comments made default y for EFI_PSCI_RESET_RUNTIME config
-> ---
->  drivers/firmware/psci.c |  4 ++--
->  lib/efi_loader/Kconfig  | 11 +++++++++++
->  2 files changed, 13 insertions(+), 2 deletions(-)
+>  configs/qcom_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-> index 2e3223e1c32..009c6153d0c 100644
-> --- a/drivers/firmware/psci.c
-> +++ b/drivers/firmware/psci.c
-> @@ -244,7 +244,7 @@ static void __maybe_unused do_psci_probe(void)
->  	uclass_get_device_by_name(UCLASS_FIRMWARE, DRIVER_NAME, &dev);
->  }
->  
-> -#if IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET)
-> +#if IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME)
->  efi_status_t efi_reset_system_init(void)
->  {
->  	do_psci_probe();
-> @@ -266,7 +266,7 @@ void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
->  	while (1)
->  		;
->  }
-> -#endif /* IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET) */
-> +#endif /* IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME) */
->  
->  #ifdef CONFIG_PSCI_RESET
->  void reset_misc(void)
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 13e44be1d06..712905a56eb 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -106,6 +106,17 @@ config EFI_HAVE_RUNTIME_RESET
->  	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
->  		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
->  
-> +config EFI_PSCI_RESET_RUNTIME
-> +	bool "EFI Runtime PSCI Reset Support"
-> +	default y if EFI_LOADER && PSCI_RESET
-> +	depends on ARM_PSCI_FW
-> +	help
-> +	  Enable PSCI-based reset implementation for EFI runtime services.
-> +	  This allows the EFI runtime to perform system resets and power-off
-> +	  operations using the ARM Power State Coordination Interface (PSCI)
-> +	  firmware interface, providing a standardized method for system
-> +	  power management across different ARM platforms.
-
-The last 4 lines could be simplified to something like "This allows the
-OS to reset the system through EFI runtime calls"
-
-Kind regards,> +
->  endmenu
->  
->  menu "UEFI Variables"
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index a210f4dc5e6..0bd87b1f5a1 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=y
+>  CONFIG_NR_DRAM_BANKS=24
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
+>  CONFIG_SYS_LOAD_ADDR=0xA0000000
+> +CONFIG_EFI_PSCI_RESET_RUNTIME=n
+>  CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 
 -- 
 // Casey (she/her)
