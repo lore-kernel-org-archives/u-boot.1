@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534C9D39005
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 18:25:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA4AD39007
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 18:29:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B94EB803F5;
-	Wed, 14 Jan 2026 19:25:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 65FBF803F5;
+	Wed, 14 Jan 2026 19:29:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="OpZ8pFZu";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="z4FM4NHf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E2218063E; Wed, 14 Jan 2026 19:25:07 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 18D69808AF; Wed, 14 Jan 2026 19:29:35 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE14C80325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:25:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1768415090;
- bh=Rs0m/+kj2zelkRIh2e+8eyoNs/zprNxge81Gs0LwPME=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OpZ8pFZuHm4t91BdQlHPXiH9vv/AHU4mVtTCVk2qGvHArahzVovinD1iFI6GQ1t5U
- nGKiuxRckNrPO0gcW1f8bvfFd7qrbLuBRiV0Itko8OLFC42iB9WsqF9kECDqNFWBFK
- WWVr8s3cbJY1BNHjDO4Xnd8RimiBkb+j3z1he5vAGO9jJsugvTvNX4iIYhzupB1ojl
- rD5c2LTqB9aUc0OTw0avyGWOAzj48ccTXEMbGUSEm+UjZEqHwrRU5VZ5K1ZKAEE19z
- QRYAPEMVD7uPPw9EqwTFBbEdIwMu4iJIpqSsy2sFYZGD5xUlaU6q+QXBf2d0Adabu3
- GZPAUMpWs8lIA==
-Received: from [IPV6:2605:59c0:2078:cf00:c0b6:e37b:5515:2b98] (unknown
- [IPv6:2605:59c0:2078:cf00:c0b6:e37b:5515:2b98])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 10CE4B2210A4;
- Wed, 14 Jan 2026 19:24:47 +0100 (CET)
-Message-ID: <6e18320e-d481-4871-87d2-1debd8a104af@freeshell.de>
-Date: Wed, 14 Jan 2026 10:24:44 -0800
+ by phobos.denx.de (Postfix) with ESMTPS id 19F5880325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:29:31 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=eb2b=7U=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1768415370;
+ bh=lrYObsoKF0iKe4ipFGOSo0XzHo6wZlPRdMig1mOTak4=;
+ b=z4FM4NHfEQUEffrYgd7u6tSR7X8hENzDdj8jpIelvZwsTGpFox71xsLEf3OOZeYlYTCDk+gsE
+ XypRpfDtDdsGHgxk0YjdlgUcHADl7ebE1Da5B3iwKPbCyuB/9P7LlS2HnhUwd9fmmu3qOISanJM
+ +521zhGcg31jVX3g1KPCSSAv0n4Y1/IZp7yCfyBKdPCTEZK57hGqpMdeeCO9k0UFq5AvfmObyMt
+ IAe2+6USFSFOljKHtO2OJG1Isf6OFK2IpTH2w6yPj6ABlYNCNM8ZK/C9fsVF+k6Qt3lKJzHaKIP
+ C6FQqtVGR95dIDXcTT5rVz3PWxRdvZjieKwRWhS+ju5Q==
+X-Forward-Email-ID: 6967e083f197f6797039bdb8
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.2.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <c9664240-002a-418d-9301-e8307e3e0aea@kwiboo.se>
+Date: Wed, 14 Jan 2026 19:29:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/3] efi_vars: Implement SPI Flash storage for EFI
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
-Cc: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao
- <raymondmaoca@gmail.com>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-References: <cover.1768403729.git.michal.simek@amd.com>
+Subject: Re: [PATCH] net: lwip: add TFTPSERVERIP Kconfig option
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jerome Forissier <jerome@forissier.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260106203433.3133926-1-jonas@kwiboo.se>
+ <7d2ac045-d364-4d37-b654-aa704cc07a7b@cherry.de>
+ <7f9d6ad3-afd2-4364-8d33-8510e183642c@kwiboo.se>
+ <a8a8dd8d-dfc2-4274-9203-a88d9bcb8a69@cherry.de>
 Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <cover.1768403729.git.michal.simek@amd.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <a8a8dd8d-dfc2-4274-9203-a88d9bcb8a69@cherry.de>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,113 +77,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal I have some user-facing questions about this concept.
+Hi Quentin,
 
-On 1/14/26 07:15, Michal Simek wrote:
+On 1/14/2026 6:08 PM, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> This is updated series based on v3 version sent here
-> https://lore.kernel.org/all/20231126220836.374956-1-i@shantur.com/
+> On 1/14/26 4:37 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 1/14/2026 4:01 PM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 1/6/26 9:34 PM, Jonas Karlman wrote:
+>>>> With the legacy networking stack, it is possible to use USE_SERVERIP,
+>>>> SERVERIP and BOOTP_PREFER_SERVERIP Kconfg options to force use of a
+>>>> specific TFTP server ip.
+>>>>
+>>>> Using the lwIP networking stack use of the 'tftpserverip' environment
+>>>> variable provide the closest equivalent functionality.
+>>>>
+>>>
+>>> It does read serverip environment variable if it's set, so this should
+>>> match the behavior with the legacy network stack no?
+>>
+>> This is what I first thought, however it seem that the lwip stack differ
+>> slightly from the legacy stack, in that the dhcp lookup always seem to
+>> reset the serverip env var.
+>>
+>>> As for BOOTP_PREFER_SERVERIP, this would need to be implemented in lwip
+>>> and isn't covered by this new variable is it?
+>>
+>> For the lwip stack it looks like the BOOTP_PREFER_SERVERIP Kconfig
+>> option possible was replaced with use of a 'tftpserverip' env var.
+>>
+>> For legacy stack I had something like following in a .config fragment:
+>>
+>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>    CONFIG_SERVERIP="192.168.2.50"
+>>    CONFIG_USE_SERVERIP=y
+>>
 > 
-> that's why I am continuing on v4 instead of starting from scratch.
+> And this meant the serverip would not be overwritten by the dhcp command 
+> for example (in the legacy stack)? When doing PXE/TFTP, I always do
 > 
-> Tested on kv260 with saving variables to location where User MTD partition
-> is.
-> CONFIG_EFI_VARIABLE_SF_STORE=y
-> CONFIG_EFI_RT_VOLATILE_STORE=y
-> CONFIG_EFI_VARIABLE_SF_OFFSET=0x22a0000
+> setenv autoload no; dhcp; setenv serverip X.Y.Z.A; pxe get; pxe boot
+
+I tried to keep it as simple as possible, as I have not used network
+boot before, and used something like following:
+
+  env set boot_targets pxe; bootflow scan -lbG
+
+and when I need to use a USB Ethernet dongle I use something like:
+
+  env delete -f ethaddr; env set boot_targets usb pxe; bootflow scan -lbG
+
+> When I control the DHCP server, I can actually set the TFTP server 
+> directly and can skip setting the serverip as it'll be set by the dhcp 
+> command correctly it seems?
+
+For my homelab I use UniFi and should be able to control DHCP options,
+however looking at U-Boot it looks like option 66 or 150 is just ignored,
+see [1].
+
+  case 66:	/* Ignore TFTP server name */
+
+[1] https://source.denx.de/u-boot/u-boot/-/blob/master/net/bootp.c?ref_type=heads#L952
+
+From my very limited testing it looks like I am forced to set serverip
+in env and cannot use a DHCP option to set the TFTP server to use.
+
+And when I then also tried lwIP, and that seem to result in new or
+different issues, e.g.:
+
+- lwIP seem to be configured to allow very few packet fragments, trying
+  to use a reasonoble tftp blocksize, e.g. TFTP_BLOCKSIZE=4096 or more
+  seem to cause drop of packets.
+
+- lwIP is very very slow to timeout compared to legacy when serverip
+  point to an invalid TFTP server and pxelinux.cfg files is looked up.
+
+- sometimes got hit with random SError issues when second file was
+  loaded from TFTP, this issue was thankfully fixed with [2].
+  
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20260114-tftp_fix-v2-1-8de8e6ecf4e8@linaro.org/
+
 > 
-> Thanks,
-> Michal
+>  From my notes, for an OpenWRT DHCP server:
 > 
-> Changes in v4:
-> - New patch based on review comments from v3
-> - use unify methods for reading/writing variable
+> Network → DHCP and DNS → PXE/TFTP tab → Add button
+>      Filename: default
 > 
-> Changes in v3:
-> - Fixed compiler warnings.
+>      Server name: fileserver
 > 
-> Changes in v2:
-> - Refactored efi_var_file to move common parts out as requested
-> - Changed ifdefs to use CONFIG_IS_DEFINED
-> - Fixed typos
+>      Server address: <TFTP server IP address>
 > 
-> Michal Simek (1):
->   efi_var: Unify read/write access helper function
+>      Force: checked (may not be necessary)
 > 
-> Shantur Rathore (2):
->   efi_var_file: refactor to move buffer functions
->   efi_vars: Implement SPI Flash store
+> Save & Apply button
 > 
->  include/efi_variable.h          | 18 +++----
->  lib/efi_loader/Kconfig          | 26 +++++++++-
->  lib/efi_loader/Makefile         |  3 +-
->  lib/efi_loader/efi_var_common.c | 44 ++++++++++++++++
->  lib/efi_loader/efi_var_file.c   | 65 ++---------------------
->  lib/efi_loader/efi_var_sf.c     | 91 +++++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_variable.c   | 16 ++++--
->  7 files changed, 187 insertions(+), 76 deletions(-)
->  create mode 100644 lib/efi_loader/efi_var_sf.c
+> I'm assuming you need this for your labgrid farm so hopefully you have a 
+> way to control the DHCP server :)
+
+Correct, I have been playing around with network boot in my labgrid farm
+and hit a few mines along the way :-)
+
+Should result in a few network related patches in next few days.
+
 > 
+>> Adding NET_LWIP=y made pxe booting stop working and 'serverip' always
+>> ended up as the dhpc server regardless if it was set to something else.
+>>
+> 
+> Interesting. With tiger-rk3588_defconfig (legacy stack), I get:
+> 
+> => setenv serverip 192.192.192.192
+> => setenv autoload no
+> => dhcp
+> ethernet@fe1b0000 Waiting for PHY auto negotiation to complete........ done
+> BOOTP broadcast 1
+> BOOTP broadcast 2
+> BOOTP broadcast 3
+> DHCP client bound to address 10.2.162.193 (1394 ms)
+> => printenv serverip
+> serverip=10.2.0.122
+> 
+>> Since lwip instead prioritize the 'tftpserverip' env over the 'serverip'
+>> env for tftp use, adding a similar env var Kconfig option was easy but
+>> may be wrong path?
+>>
+> 
+> I don't mind the addition but I'm wondering if it's not a band-aid patch 
+> for something else? Maybe lwip missing setting the BOOTP server from a 
+> DHCP lease for example?
 
-So far as I'm aware support for EFI variable storage is always integral
-to a filesystem as the EFI System Partition, even in the case of the
-specially-handled MMC boot partition facility. With presence of many
-possible ESP is there then only one active ESP, or do all ESP become
-part of a pool of available locations?  I'm not understanding this
-clearly what is the purpose of selecting an ESP if the variable storage
-is not integral to the ESP.
+Possible, setting tftp from dhcp also seem to be missing from legacy
+stack, if I am not mistaken. I do think the separation of tftpserverip
+and serverip for lwIP stack at least is a step in right direction, I am
+new to network booting from U-Boot so what do I know :-)
 
-Does having EFI variable storage in SPI Flash always take priority over
-other ESP presence that might have additional variable storage as a file?
+Regards,
+Jonas
 
-Can (or should?) there be a runtime configurable setting to decide two
-preferences; does one depend on the other or are these independent?:
+> 
+>>>
+>>> This patch is fine, I'm just challenging the justification in the commit
+>>> log.
+>>>
+>>>> Add USE_TFTPSERVERIP and TFTPSERVERIP Kconfig options that can be used
+>>>> to add the 'tftpserverip' environment variable to force use of a
+>>>> specific TFTP server ip.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>>    include/env_default.h |  3 +++
+>>>>    net/lwip/Kconfig      | 12 ++++++++++++
+>>>>    2 files changed, 15 insertions(+)
+>>>>
+>>>> diff --git a/include/env_default.h b/include/env_default.h
+>>>> index 7f8dc1c35a74..014873e304d8 100644
+>>>> --- a/include/env_default.h
+>>>> +++ b/include/env_default.h
+>>>> @@ -58,6 +58,9 @@ const char default_environment[] = {
+>>>>    #ifdef	CONFIG_USE_SERVERIP
+>>>>    	"serverip="	CONFIG_SERVERIP			"\0"
+>>>>    #endif
+>>>> +#ifdef	CONFIG_USE_TFTPSERVERIP
+>>>> +	"tftpserverip="	CONFIG_TFTPSERVERIP		"\0"
+>>>> +#endif
+>>>>    #ifdef	CONFIG_SYS_DISABLE_AUTOLOAD
+>>>>    	"autoload=0\0"
+>>>>    #endif
+>>>> diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+>>>> index 5789766fe624..0cfd3eb2684f 100644
+>>>> --- a/net/lwip/Kconfig
+>>>> +++ b/net/lwip/Kconfig
+>>>> @@ -72,4 +72,16 @@ config LWIP_TCP_WND
+>>>>    	  but QEMU with "-net user" needs no more than a few KB or the
+>>>>    	  transfer will stall and eventually time out.
+>>>>    
+>>>> +config USE_TFTPSERVERIP
+>>>> +	bool "Set a default 'tftpserverip' value in the environment"
+>>>> +	depends on CMD_TFTPBOOT
+>>>> +	help
+>>>> +	  Defines a default value for the IP address of a TFTP server to
+>>>> +	  contact when using the "tftpboot" command.  (Environment variable
+>>>> +	  "tftpserverip")
+>>>> +
+>>>
+>>> Does it support IPv4 *and*/or IPv6?
+>>
+>> Not sure, I have only tested IPv4, guess IPv6 probably should work, the
+>> 'tftpserverip' var should work with same formats that the 'serverip' var
+>> currently support.
+>>
+>> This help text is mostly just a c/p from the USE_SERVERIP Kconfig option,
+>> let me know if you think this should be changed.
+>>
+> 
+> If it only supports IPv4, I think it should be mentioned. I'm sure 
+> Jerome will have some input on that when they have time to review :)
+> 
+> Cheers,
+> Quentin
 
-1. Preferred ESP
-2. Preferred EFI variable storage strategy
-
-Consider not wanting to have a perceived ABI breakage as the SPI Flash
-layout is previously codified by user expectations of what the vendor
-initially shipped with the product and having been codified in upstream
-Linux kernel devicetree definition. For the example where this would be
-useful for boards where there is a well-known SPI Flash layout, I am
-thinking of StarFive VisionFive 2 where there is {U-Boot SPL, U-Boot env
-storage, U-Boot Main at 1MiB offset}; does your implementation of EFI
-variable storage in SPI Flash have a suggested co-existence with the
-"gap" in the area that is currently U-Boot env storage?
-
-The use situations I am thinking of:
-
-A. Installing a new OS or booting purpose-built image, where it is
-intended that having (for example) a USB mass storage class or SD Card
-of the all-in-one image depends on U-Boot in SPI Flash deciding both
-that the EFI System Partition on the removable media is a priority over
-other similar media (other different USB boot devices that may be
-present, existing eMMC storage module possibly with ESP in addition to
-the inserted removable SD Card).
-
-B. Preventing the ambiguous selection of any additional removable
-storage containing an EFI System Partition from breaking the desired
-boot strategy. In many situations a user wants assurance that the board
-will boot exactly the same every time regardless of what additional
-removable media containing EFI System Partition might be connected.
-
-C. Corrupt or unusable selected EFI System Partition prevents any
-recovery and there is no runtime mechanism to attempt an alternative
-
-Is there a possible mechanism for adding a runtime check (GPIO state,
-key press, network event) to make the decision between some immutable
-boot preference, or a user-configured boot preference?
-
-Overall I want to get an understanding of how it might be recommended to
-make use of this for StarFive VisionFive 2 board target(s). Many hours
-of troubleshooting headache have been the result of EFI System Partition
-confusion on board that have a wide variety of storage subsystems (MMC,
-USB, NVMe, ...) which result in some really strange outcomes with
-installers of GNU/Linux OS distros;  particularly as the devicetree dtb
-search path currently points to storage subsystems that are typically
-removable media, or the failure mode where an OS installer is using the
-selected EFI System Partition that "leads on a path to nowhere" and is
-not the intended installation target.
-
--E
