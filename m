@@ -4,91 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 070A6D37E3A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F6ED37E39
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 947B6830E4;
-	Wed, 14 Jan 2026 15:44:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 85FB982C7F;
+	Wed, 14 Jan 2026 15:45:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nFXtuRmm";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="kjZD9aJR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46295835B3; Wed, 14 Jan 2026 15:44:10 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 648CF830A0; Wed, 14 Jan 2026 15:45:44 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29E7B8063E
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:44:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16B108063E
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:45:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-42fb5810d39so4650623f8f.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:44:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768401847; x=1769006647; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7yrBn7IgO40nE8JCoobzDvWtnOiUgspJih2I8UGjtwc=;
- b=nFXtuRmmppVY3chvF9MhSHSX0Ko/pSNgUXb+8e6uLBavaGtYyerozLLCXt4Dpxsm3b
- dPoQyFRQQZrSp/5V1IqPI9qsYHPlyYUQWfDf77lu4XE2wdoGfmCJnvWMWSzlRfefi6nN
- IjQRqkRE03GHngR9PRZ92b7Zn+b3Q07BbftISEdWY97Kb5wxTtEjmtXxpz9TDWS0/tGs
- 5dZl1JJ2i3e1t20hmil5v2PuHJWnI0Hl0ad4mCKzqzD71HzvIlTevnE7e0p93kCf9ioD
- OuF95SJWpHLPsT4SDxNi3SXZC6WRlpjUZKFJg0rsMJxp2l0qzVjzcTuSfKy04SRtCqKT
- 9WYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768401847; x=1769006647;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7yrBn7IgO40nE8JCoobzDvWtnOiUgspJih2I8UGjtwc=;
- b=bNwhljIe6ZmP6p/ISBQD4bcjgAncPUsd8Mnt02AMBhQGMVDzA5uA5xeNkYbLqP88f3
- hGe/QLrs3x5L0I6T33dHiMRC4YNf2aXkKcioiG46MSnxH5zuN457FNAEpkFmoocjTQtl
- +Ci9dVMuaGN2NdqnGbnAvt1K2SY6FIAWZV90Mb9RNtl8OX3jQOIus0RfD2yPmoUFspff
- fbs27lItdF3jN1OJmer5WNUeqRTWzrLGGvsZna72oZn+v8R5EyjndXZyYlkDT2DDA8Rq
- gz6LLpnZEVLXKPK6Rtt5GfbO+nZwtu91/TGXC9UY1rVbuf16+41lGwcGE6MFum6WEagr
- rEyg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXoto7JWQyeHIibYaSytqfUxjw9fywsNQw2opThN6Hp8lIfdxd8+RtjHtynGGB3Isi8x539mk4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEx16CGsbmf28PYEEtnH8ToVuCvmMBV7bf5663b+xvfYzitpz7
- bktFnzgHOh7C6OCTY1P1IBTTgYcxb7gPqXVVv+L7eWyKTWGXwOojybxO/vJaVKouBPw=
-X-Gm-Gg: AY/fxX58LYCUpe4KBQZHW0wtM6EQpovsVwYGQFKudpc5QTIkuzGV75IO33bd9cXNwmC
- 1KpY+cnX9nmvpJv6+3kvCwOdicRkDV5sCBEil03aMQYIr+pRUFZnbJsBEoJb/CAKdXU3Yb2io4R
- qG9fQzlP4tkh1siML493C76vVRywwjQPBJVFC2otGXKYM6b2ANZktH1nA7vEKqA0rHWh3NMhUzI
- 68rhrNMe8rz8YbA8KCCzQtf2D6USvhY6K30G3IDalGn5BQX2XQo6g5o9m+Ja4xAF7N2kT+TUNs+
- 7ZM19w/lt1wlRiPJlDZQPrpV/anOADLl5P1tWOHCXG74FVh320EGkX5IMok+L8Y3AyxCpciacbr
- C7u0QpeYSKITtA5hO3AsP1sizYYuestKkLN3/NJ2mmq1Z7r9gXOlRS8dbR5pVn5ibQTaAvoE1dG
- qEUJKPXTw9ztpQOxvdJ/Oq04vtN0jYq4xSb43sT7gWdnjVQ5QatWs=
-X-Received: by 2002:a05:6000:230d:b0:42f:b581:c69d with SMTP id
- ffacd0b85a97d-4342c4ef093mr3340634f8f.3.1768401847487; 
- Wed, 14 Jan 2026 06:44:07 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd5ee24esm50489151f8f.33.2026.01.14.06.44.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jan 2026 06:44:06 -0800 (PST)
-Message-ID: <c142ad26-e242-4bbe-a908-842c2076b2f1@linaro.org>
-Date: Wed, 14 Jan 2026 15:44:05 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e6qAcqoRmThDnWIV1lb9WIVVtsM3oI/jNFNZUuhS2MVquVd1zvARKUngsNpBGtH81rAOha1QAlhtsSytC1V8bV8ltyvwakMBx1hM4LVXDNh1RQ+5d3qIxWPNBvPlYYs8sM2XeOwNBGNUkAmgXaJ4aZjHRrQ8Y0SXOE99GVC9YkeLZzPQLNUPE0RnwI9ERCm2nngOQ1gsiUICTc+z6DLHAqej1mdmcJ21wxu5oEnSY46yXphhitUOn4W9XPJJ+n2Dv+0zyKQKUCZr3gEUvP5J9kz2dOh9juDEHnHy6N6L2yCgy3HgBQl6TYeyLnXFL99DUFLWmYsBRKMH0wkux/WYJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HFThBi6huHtUusu3dXvt9nvS5Eb21XFypPutDlsiwCw=;
+ b=f+RdQ+e2A5tHfX0cS4gUTMnlIhdIaKUbBVJ8vLgt/pDTFeUHI5bQnYxl9UTZQgY1xk4KKEYlmQrxF034jnixBMOhL5z9kvOeQGbzoveXKsG/b1GfJY9m9ZaZVSmsDElPOYl/matSpVts5OeXuJuXpPfWbkQ0cbIiSt23RWVw2wSMsn43JwRaaNZvNHcbGwFdzN0VIjSiaR+zUrcm1FVSAyJeCztHPwr0XGmmGLqJgEFBKKrVhleXfS6ol2zEJTaAivtpCtyB1SK7U3QzslgbhI/3B00bDRXyckrOg1dIuCLi9I7NRvx3EgajONftEVjQzIGUv5g2rbrX3wgIKLXzug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HFThBi6huHtUusu3dXvt9nvS5Eb21XFypPutDlsiwCw=;
+ b=kjZD9aJR3TC9ZQUNSTIZHgYKQshtSv5ZMcBZ1uSFBjs9F2fCKe+Sv+QicK8dxQY7KI7OtzNaONGxmrwHoCNb7REjBI1g2r1ZEkD8K6ou3v7DAJDrmM2Pw8SR84gJUJz4dvPTVPZ3pTlwcMSdZUlVrmcFrvvXZfCSpcAQV3teIhQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DU4PR04MB12026.eurprd04.prod.outlook.com (2603:10a6:10:643::14)
+ by DBAPR04MB7335.eurprd04.prod.outlook.com (2603:10a6:10:1b1::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Wed, 14 Jan
+ 2026 14:45:37 +0000
+Received: from DU4PR04MB12026.eurprd04.prod.outlook.com
+ ([fe80::2c21:dc0b:a3c5:531b]) by DU4PR04MB12026.eurprd04.prod.outlook.com
+ ([fe80::2c21:dc0b:a3c5:531b%5]) with mapi id 15.20.9499.005; Wed, 14 Jan 2026
+ 14:45:37 +0000
+Message-ID: <4db65094-3055-4364-828b-8e7fe68f40b9@cherry.de>
+Date: Wed, 14 Jan 2026 15:45:28 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] arm: snapdragon: Add EFI reserved memory regions for
- QCS615/QCM6490
+Subject: Re: [PATCH v2 3/3] test: binman: Add test for pkcs11 signed capsule
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: trini@konsulko.com
+References: <20260106111034.889964-1-Wojciech.Dubowik@mt.com>
+ <20260106111034.889964-4-Wojciech.Dubowik@mt.com>
 Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- me@samcday.com, sughosh.ganu@linaro.org, ilias.apalodimas@linaro.org,
- gchan9527@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260107091406.2428132-1-balaji.selvanathan@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260107091406.2428132-1-balaji.selvanathan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260106111034.889964-4-Wojciech.Dubowik@mt.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0133.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::20) To DU4PR04MB12026.eurprd04.prod.outlook.com
+ (2603:10a6:10:643::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU4PR04MB12026:EE_|DBAPR04MB7335:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6aa8f2ef-0063-4d8c-6c9c-08de537b94de
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|7053199007|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Wm1aRDVEYjd6TzRzRHRBbzUyNWF5cG9vd1EvdWdwZVdOMi9waG12VnY0eVJ4?=
+ =?utf-8?B?U2FtZWlMRlpkRDl3Qkd1S2R2SUJDNVdENkZ6T00zRWdVR2JOZFFvWG0xY3Zi?=
+ =?utf-8?B?WGtDRFV0TjJJK3ZFRlNMMFFha0ExS1NTbDFmU0dxOE1IcnVhdFdzRHhBTlov?=
+ =?utf-8?B?b0F4VXJyTC9pYVpCbkV5UHRRTHdqdExqTmd6K3VseGNFVHFwck5PaHlaYnNR?=
+ =?utf-8?B?RUk4ZTg2SXlHd0NUT0FCZU5MOUNLck16R2NhR0tpaEgwMHVQS3N6OWF1b2Vx?=
+ =?utf-8?B?VXkrMmtPS1JZbWoxMjN1SEgydnc5a0lqMzJEMGtjUkxjYWdvTVk2YjBtMEVS?=
+ =?utf-8?B?d3RacjI2b3lDZmdhUDJEYkc0b3BuSlY5SW9WaDJ2eU5sQ3BON2VmaWhnMFlG?=
+ =?utf-8?B?aE13S29LNnZqTHFRWlhGT1p4V1RuSW1udWpoQ29uVlUzT2xyZUkzY2Y5NTZE?=
+ =?utf-8?B?cHp3UHdhaDIvcVFoSzA1c3lHbGUzOVhxbWNwamxBbGwxNk81NjdkZWlzQkor?=
+ =?utf-8?B?Qmw3eUFLR3RLVzlpSThabFJYZ05aaFp5N25QU0pydS8vK1IzMlVFOVo5cVYx?=
+ =?utf-8?B?RTlINnhINTkzcTMraWc2Q0JVZ0lLcHdKK0VJRlBTNWZ1eUVkR2wrUXUwcE5L?=
+ =?utf-8?B?ZUM5UUd4NndlN0lSMTNIM0w0blFrSFJ6L0J3ZlpUUEwrYStkZ1ArQzNXQzVM?=
+ =?utf-8?B?TnBwd2xMTXlySWdPcVFNbzA1ZzdsZ3N6THpYK0cvWC9xUzMrQkdjeTg5Rmht?=
+ =?utf-8?B?eTU1Q3cvd3lZRVh0cTBpZWFUZUttbUVSU0FURDVBRGNYbllFWG80N1ozS01E?=
+ =?utf-8?B?NTI0Rm85OGVyVEltK0hvUE05YzV3RFdrd3kxMGdrVkdaVU9pbU1xUkN0Vnkv?=
+ =?utf-8?B?QmMrZzM5SWgxNkNmWXg0dUtUWDV1YlN0OUl2R0xmK0wxS0VBRjJhb1VxbFp6?=
+ =?utf-8?B?ZkJNaGRTeFFPREduZjFuU0Q5YlBzaUQxOSt6UDRGV0RNS2IwYmxqWmJ5cmU1?=
+ =?utf-8?B?eE1oYnlFYWlRVHlxUXNHMHk1d2R4TG0vQWRHUlltNkNDR1hqWUZxckt2VTBi?=
+ =?utf-8?B?ak81MmlqMysyenhmRE5QaDcwZldjelZPQmt0NlhyVzRHZnFkSkIzcDJocGk1?=
+ =?utf-8?B?bDIzZFZOamJxSlVQSDRsVENXWUNlaTV0anprMm1ZdjRLZUw5S28wbGxKbm1w?=
+ =?utf-8?B?NUNybHBHVWMyeXhVZDhYK3VIMmM5REJ4NDBialRlN00rVXZYanJtWDV5UE04?=
+ =?utf-8?B?cCtyVFJ2b0tSeEtRNkYxc2lwUEpyK2VYdWdSRzg2U0F0TnhzcmVzL1Z4SjFq?=
+ =?utf-8?B?TGdZRVZsVTd5RXFYVUh6UXorb2V4dTFaR1FkbkdXR3VwbVB0clkwazM3RmFM?=
+ =?utf-8?B?M3Z2SDRFRktnY2l1TFdMZG9RUDlLMUo2QlhiaU5IZU8zVTlaWVhEdHdsbUp4?=
+ =?utf-8?B?TEVEU25hNnFHMFVyZzZWeTBYSWJockcvT0s0S3A0SWU4OUMvb2tPTVdVdFV1?=
+ =?utf-8?B?ZktiYUxmbmxrVU1jaG1xYXBCZ1ZBN3NqQ3dDNldMZXlTc2pQRk1ka25GbG44?=
+ =?utf-8?B?MHc4cEh6UTZUSy9jZVFxWmIwWUowRGNGMlBiQXBIWUs4RGxaelFJTFhOWXpF?=
+ =?utf-8?B?YUc3bTN2bG5DZ202NlZacjJBazBkLzFwejFYQTc4L09pVlA1dVV2VEY5REIx?=
+ =?utf-8?B?QXE4U28rbWZiYU0rUFZGRWJPa0VJQ1gzMEJ1R0lOS2Vnb21oblhidExoSXFB?=
+ =?utf-8?B?SWU2anlvbWdCSEFYT3oyMTIvOE5PazkyZFRSVW5LMFlJM1BjY0l4UUdPMHJO?=
+ =?utf-8?B?TlE4WExhdnZ0YXcrZnRlT0pvM1NUS2cwS1VkM0RHQ1ZGZWhiUXE1Q2JpcnRy?=
+ =?utf-8?B?S2F0a0JESU5jMUl0ZjV5MGU0dCtTdEM1ZzhJYTJVZGpxNk54K2V6bW8zMUJQ?=
+ =?utf-8?B?L3VlNnUzR2Jpc1VBNzBhV2tlb2w1NTZQcW9PVnRoazl5VGVENElyQWhRaEpv?=
+ =?utf-8?B?M1dqajRybDVEREJpdXpxZ3ZsRkFEb0kyY2J3ekI3Q2IrUTlHbWhxQUdzNWhV?=
+ =?utf-8?B?MEZuM0ZJRkdhQS9GbEJuZVU0cUc4NzRHOER5QlE4QTB2eXJNRHNqTk1waGQv?=
+ =?utf-8?Q?43QQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU4PR04MB12026.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007)(7142099003); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aTB6QXFud05RRlVRRDFyZjJCdjhuOUJaS0pvbldkQzl5NnUxY3hISVNSdDdj?=
+ =?utf-8?B?NCthZmV4UFhZK05EM3VhamgrRVg2VTZMZDIyUklKb0xjdkpaUVducTVvQWQv?=
+ =?utf-8?B?ZCt1RC81eUQxcW5yN0RBOXVkYkVHN2o1YjlaR3dlSFZGTEpKcFpxdGJrMlZj?=
+ =?utf-8?B?aGVhYTdQOGFCL3IyYUl2aVExb1cxMGdKcU9PWU1kSVJPc2gzQUszeXRjTTdx?=
+ =?utf-8?B?SVVpZzRvZmFWU1Y0Wk8yMVdYeHVOMSswZGU5VDBTT09LOWVaTGV6M1JxQlFw?=
+ =?utf-8?B?cDVuQ0xRR2hid3RwandscTRWTStpM3d3MWZUQ0xvOG5iMHNJVEt3SldDSDQy?=
+ =?utf-8?B?MWhoaWtJU1B0anlyVkNpbmdyWWlNNTEwMVhoNk4xMW4zdkZ3dlExdkVDMUlD?=
+ =?utf-8?B?NkF1dTUvR1ppRXBhN2tzbDViSTJzdTJma3V6VGltREZJL05qLzVLRUErdTlG?=
+ =?utf-8?B?M2hqejI4R2RaOWhVRlBJQTlqd0NkaHdVU3dsSCszN2FYRnN3OUJ1cmlhV3Fs?=
+ =?utf-8?B?aVhtRVhTYUgxS2gyak5HcFZYeFlxOWQvMFRCb0pvdGFOQktrU3g1UWlXN2Fm?=
+ =?utf-8?B?dWk1OWhPdmxEMGdBU1BHYlRHY3BrenIvNis4M0N0cXpHYzV3SmR3MjB6RHZW?=
+ =?utf-8?B?SEpkdVJjOVNId2pTQm0rdnJ4NkFKZER6aXFkL0JlM1RQTTU0SkxubzBuNU02?=
+ =?utf-8?B?TmxnRGx1NUJFV0JiZzhPSFIwM0xycUN4VU1FcVVPekxCUmhsOGVYNGVkNFhS?=
+ =?utf-8?B?bW8vK3J3djVDUmEwNHdVVHRnSXVLaU9RZUo4Mm1MQWtkUVovR2dMQlMvVU1M?=
+ =?utf-8?B?QU4xYmZxVFhYWjFray9ZcU9jaXJjbnAra2tHQ3dydTU1eUpjWkY5UktwUlBS?=
+ =?utf-8?B?QXNwTXFmelo0QTZteHdCb1FCWUgvNytEa0ZONHpmWHM0OHhPaXFoU1YzNHA1?=
+ =?utf-8?B?T1BscGxRZmxlQXZXdXhxa3hXRnM5RFhsaVFVbnFxSXkvSmdYN00yMU9COW9o?=
+ =?utf-8?B?L3QwMk9DaXlrakZMd0xkTloxT0hwNnozUElDd2Y3WGx1c0NkTzV0WXN5T2d3?=
+ =?utf-8?B?cVhZd2Rxc2g3U2hxVkxIcnhNTmtPK2RIdkxUWGxZLytWci8yMjV6TlpmWmRL?=
+ =?utf-8?B?Vm5wTU9XRC9QWkMybFUvZU9aaUpZNU8xQ0hhaEh3TTFxeURTaGYvOHZxcndB?=
+ =?utf-8?B?SFcyZUZDZWxla3NSSWJqcnF2SXNJWVIvd2NhZDU0d3BUcit6akIrSktVTS9T?=
+ =?utf-8?B?L0hQV3huaXpvYmk4QkRDOEhJcXJ4cFMvSGZ0Z1ZZaDFSM1RhaVllSDNrem9r?=
+ =?utf-8?B?d1VoTkgzVFpjbjdtVHJtdXBORnJ6R2FJaUZON1JWVHBQU3N5Z25iV0VYOHVu?=
+ =?utf-8?B?SUFJalZwR29NZ1YxOHpObS9NSWhIT0twdWo0VUJ1OEVaOUtkRjlwQWJsdk80?=
+ =?utf-8?B?UEtjWDZJQUxETm42aTlOMnpBZldZNGxDZjlVaEdKcTVyMnJaRGFvRmN6TFhD?=
+ =?utf-8?B?czIyQXhSQUZIRS8yVHVQa1R6cTBFQlJINlVxcE4wRDVBc2JSZ3l0TlNRYnc3?=
+ =?utf-8?B?V0I4ZWRKZXREdk12aEwxN25Xb010eWNwWnNhbmtSd20rM1JxYmRqMDJ2NFNL?=
+ =?utf-8?B?L3pCdXVJelFoS2tVbEwxTEdRRkhUNG5YQWFodHZGR2o5SGxTUnRtNDVOazFa?=
+ =?utf-8?B?aFQvcEM2S2M5eWVnZ3dnWFhleXZaenNtTmVkc3dqbHhvRThHVmVhQ0lpVnVp?=
+ =?utf-8?B?c1NRUmtSMEZ3LzlLUjV2RTJ5RDBieE02bVBKd0lxUW1nZFRHME01RVVISXpl?=
+ =?utf-8?B?aDZmVU1PN1VIMzQ1RXdBMUtXSk9YY1lTNUZQdjdxbHlIaFo3enBaVVRXODhp?=
+ =?utf-8?B?RmlveExDVkdtUHhPYnBJdTV1L3RtN3JvN1J2RzljQmJIbW1Bby96aHUybHND?=
+ =?utf-8?B?TzBETGFyL0RCdjFMZkpNWkVuN2hxanpGTmhvR1FEanFVSDQreUtGRVgzaThH?=
+ =?utf-8?B?Z0ZjQ21JNTBqdVg1NmxRb1poc0wxUDlPdzd5NDY1VjYrcUhJbXZLUHNDemYr?=
+ =?utf-8?B?VWEyMFM2MEN3bW5seGhDUnkrR09BT1ZJdVo2TXJWWnQ0ZU5tdUhRa2J4NU9m?=
+ =?utf-8?B?clZiblQ4NVJsbXlvd2RSUGkxKzMzRE5CNWs1ZitJdmlmTUp2N1p3UWNUcVRW?=
+ =?utf-8?B?RUg0U2J2ZGdEcDZBWGF4NzJrNTcvQWNNSzNKUnp4ZjFXMVBZNG5LQk1nUFdp?=
+ =?utf-8?B?Z2RXcUhiZnVmRStJRkJ4dW9wOVgxVWljMTFNbGFXbWJYRnpTSnlFbGlOaWxl?=
+ =?utf-8?B?bDZGcFRUVjQ0OTdVa05PUDJPTnNkc1ZDZHpLRHBiOFQ0WUFXRjVwZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6aa8f2ef-0063-4d8c-6c9c-08de537b94de
+X-MS-Exchange-CrossTenant-AuthSource: DU4PR04MB12026.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 14:45:37.7632 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wyAiilY74K4ESfcdYw8k1A6lqkflHoKa1yi7ji6WnIQd0sYIV7JB7o+vJkLJW5xKohWVJAoajNEGSxXAPo5au4UlUCALbA5qZbgDfqxqFGE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7335
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,214 +183,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi Wojciech,
 
-No, we aren't adding platform-specific hardcoded memory maps to U-Boot.
-Reserved memory should be specified in devicetree and added to the EFI
-memory map automatically (Ilias?).
-
-Kind regards,
-
-On 07/01/2026 10:14, Balaji Selvanathan wrote:
-> Implemented platform-specific reserved memory registration for EFI on
-> Qualcomm Snapdragon platforms. This adds SoC-specific memory regions
-> to the EFI memory map.
+On 1/6/26 12:09 PM, Wojciech Dubowik wrote:
+> Test pkcs11 URI support for UEFI capsule generation. For
+> simplicity only private key is defined in binman section
+> as softhsm tool doesn't support certificate import (yet).
 > 
-> Added qcom_reserved_memory.c with predefined memory regions for QCS615
-> and QCM6490/SC7280 SoCs. The implementation detects the SoC type
-> from device tree and registers appropriate memory regions
-> via efi_add_memory_map().
-> 
-> Implemented efi_add_known_memory() in board.c to hook into the EFI
-> memory initialization.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 > ---
->  arch/arm/mach-snapdragon/Makefile             |   1 +
->  arch/arm/mach-snapdragon/board.c              |  15 +++
->  arch/arm/mach-snapdragon/qcom-priv.h          |  10 ++
->  .../mach-snapdragon/qcom_reserved_memory.c    | 114 ++++++++++++++++++
->  4 files changed, 140 insertions(+)
->  create mode 100644 arch/arm/mach-snapdragon/qcom_reserved_memory.c
+>   tools/binman/ftest.py                         | 46 +++++++++++++++++++
+>   .../binman/test/351_capsule_signed_pkcs11.dts | 20 ++++++++
+>   2 files changed, 66 insertions(+)
+>   create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
 > 
-> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-> index 343e825c6fd..19820a075e8 100644
-> --- a/arch/arm/mach-snapdragon/Makefile
-> +++ b/arch/arm/mach-snapdragon/Makefile
-> @@ -4,4 +4,5 @@
->  
->  obj-y += board.o
->  obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
-> +obj-$(CONFIG_EFI_LOADER) += qcom_reserved_memory.o
->  obj-$(CONFIG_OF_LIVE) += of_fixup.o
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 5fb3240acc5..0259623d382 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -709,6 +709,21 @@ static void carve_out_reserved_memory(void)
->  	}
->  }
->  
-> +#ifdef CONFIG_EFI_LOADER
-> +/**
-> + * efi_add_known_memory() - Add platform-specific reserved memory to EFI map
-> + *
-> + * This function is called by the EFI memory initialization code to allow
-> + * platforms to add their reserved memory regions to the EFI memory map.
-> + * For Qualcomm platforms, this delegates to qcom_add_reserved_memory_to_efi()
-> + * which handles SoC-specific reserved memory regions.
-> + */
-> +void efi_add_known_memory(void)
-> +{
-> +	qcom_add_reserved_memory_to_efi();
-> +}
-> +#endif /* CONFIG_EFI_LOADER */
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index 21ec48d86fd1..cb5d69982772 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -7532,6 +7532,52 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>   
+>           self._CheckCapsule(data, signed_capsule=True)
+>   
+> +    def testPkcs11SignedCapsuleGen(self):
+> +        """Test generation of EFI capsule (with PKCS11)"""
+> +        data = tools.read_file(self.TestFile("key.key"))
+> +        private_key = self._MakeInputFile("key.key", data)
+> +        data = tools.read_file(self.TestFile("key.pem"))
+> +        self._MakeInputFile("key.crt", data)
 > +
->  /* This function open-codes setup_all_pgtables() so that we can
->   * insert additional mappings *before* turning on the MMU.
->   */
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index b8bf574e8bb..b488516cfdb 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -17,6 +17,16 @@ enum qcom_boot_source {
->  
->  extern enum qcom_boot_source qcom_boot_source;
->  
-> +#if IS_ENABLED(CONFIG_EFI_LOADER)
-> +/**
-> + * qcom_add_reserved_memory_to_efi() - Add Qualcomm SoC reserved memory to EFI
-> + *
-> + * This function detects the SoC type and adds the appropriate reserved
-> + * memory regions to the EFI memory map. Called from efi_add_known_memory().
-> + */
-> +void qcom_add_reserved_memory_to_efi(void);
-> +#endif /* CONFIG_EFI_LOADER */
+> +        softhsm2_util = bintool.Bintool.create('softhsm2_util')
+> +        self._CheckBintool(softhsm2_util)
 > +
->  #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
->  void qcom_configure_capsule_updates(void);
->  #else
-> diff --git a/arch/arm/mach-snapdragon/qcom_reserved_memory.c b/arch/arm/mach-snapdragon/qcom_reserved_memory.c
-> new file mode 100644
-> index 00000000000..e670f74bc1f
-> --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/qcom_reserved_memory.c
-> @@ -0,0 +1,114 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
+> +        prefix = "testPkcs11SignedCapsuleGen."
+> +        # Configure SoftHSMv2
+> +        data = tools.read_file(self.TestFile('340_softhsm2.conf'))
+> +        softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf', data)
+> +        softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
 > +
-> +#include <efi_loader.h>
-> +#include <fdt_support.h>
-> +#include <log.h>
-> +#include <linux/sizes.h>
-> +#include <asm/global_data.h>
-> +#include "qcom-priv.h"
+> +        softhsm_paths="/usr/local/lib/softhsm/libsofthsm2.so \
+> +                /usr/lib/softhsm/libsofthsm2.so \
+> +                /usr/lib64/pkcs11/libsofthsm2.so \
+> +                /usr/lib/i386-linux-gnu/softhsm/libsofthsm2.so \
+> +                /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so"> +
+> +        for softhsm2_lib_loc in softhsm_paths.split():
+> +                if os.path.exists(softhsm2_lib_loc):
+> +                        softhsm2_lib = softhsm2_lib_loc
 > +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +/**
-> + * struct reserved_mem_region - Reserved memory region descriptor
-> + * @start: Physical start address of the region
-> + * @size: Size of the region in bytes
-> + * @name: Human-readable name for logging
-> + */
-> +struct reserved_mem_region {
-> +	u64 start;
-> +	u64 size;
-> +	const char *name;
-> +};
-> +
-> +/* QCS615 reserved memory regions */
-> +static const struct reserved_mem_region qcs615_reserved[] = {
-> +	{ 0x80000000, 0x600000,    "hyp" },
-> +	{ 0x85D00000, 0x200000,    "boot" },
-> +	{ 0x85F00000, 0x20000,     "aop" },
-> +	{ 0x85F40000, 0x30000,     "xbl_dt" },
-> +	{ 0x86200000, 0x100000,    "tz_stat" },
-> +	{ 0x86300000, 0x1200000,   "tags" },
-> +	{ 0x87500000, 0x500000,    "tz" },
-> +	{ 0x87A00000, 0x1C00000,   "tzapps" },
-> +	{ 0x8AB00000, 0xCC17000,   "pil" },
-> +	{ 0xA0000000, 0x1600000,   "secure_dsp" },
-> +};
-> +
-> +/* SC7280/QCM6490 reserved memory regions */
-> +static const struct reserved_mem_region sc7280_reserved[] = {
-> +	{ 0x80600000, 0x100000,    "axon_dma" },
-> +	{ 0x80894000, 0x40000,     "xbl_dt" },
-> +	{ 0x84300000, 0x16B00000,  "pil_reserved" },
-> +	{ 0xE1000000, 0x2400000,   "display" },
-> +};
-> +
-> +/**
-> + * add_soc_reserved_memory() - Add SoC-specific reserved memory to EFI map
-> + * @regions: Array of reserved memory regions
-> + * @count: Number of regions in the array
-> + * @soc_name: SoC name for logging
-> + *
-> + * This function iterates through the provided reserved memory regions and
-> + * adds them to the EFI memory map with type EFI_RESERVED_MEMORY_TYPE.
-> + */
-> +static void add_soc_reserved_memory(const struct reserved_mem_region *regions,
-> +				    int count, const char *soc_name)
-> +{
-> +	int i;
-> +
-> +	log_debug("Adding %s reserved memory to EFI map (%d regions)\n",
-> +		  soc_name, count);
-> +
-> +	for (i = 0; i < count; i++) {
-> +		efi_status_t ret;
-> +
-> +		ret = efi_add_memory_map(regions[i].start,
-> +					 regions[i].size,
-> +					 EFI_RESERVED_MEMORY_TYPE);
-> +
-> +		if (ret != EFI_SUCCESS) {
-> +			log_err("%s: Failed to reserve %s (0x%llx-0x%llx): %lu\n",
-> +				soc_name, regions[i].name,
-> +				regions[i].start,
-> +				regions[i].start + regions[i].size,
-> +				ret & ~EFI_ERROR_MASK);
-> +		} else {
-> +			log_debug("%s: Reserved %s: 0x%llx-0x%llx (%llu KB)\n",
-> +				  soc_name, regions[i].name,
-> +				  regions[i].start,
-> +				  regions[i].start + regions[i].size,
-> +				  regions[i].size / 1024);
-> +		}
-> +	}
-> +}
-> +
-> +/**
-> + * qcom_add_reserved_memory_to_efi() - Add Qualcomm SoC reserved memory to EFI
-> + *
-> + * This function detects the SoC type from the device tree and adds the
-> + * appropriate reserved memory regions to the EFI memory map.
-> + *
-> + * Supported SoCs:
-> + * - QCS615 (Talos)
-> + * - QCM6490/SC7280 (Kodiak)
-> + */
-> +void qcom_add_reserved_memory_to_efi(void)
-> +{
-> +	/* Detect SoC and add appropriate reserved memory */
-> +	if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs615") == 0) {
-> +		add_soc_reserved_memory(qcs615_reserved,
-> +					ARRAY_SIZE(qcs615_reserved),
-> +					"QCS615");
-> +	} else if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcm6490") == 0 ||
-> +		   fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,sc7280") == 0) {
-> +		add_soc_reserved_memory(sc7280_reserved,
-> +					ARRAY_SIZE(sc7280_reserved),
-> +					"QCM6490/SC7280");
-> +	} else {
-> +		log_debug("No SoC-specific reserved memory to add\n");
-> +	}
-> +}
 
--- 
-// Casey (she/her)
+This seems brittle, isn't there a better mechanism than this that can be 
+offered by distros? For openssl, installing libengine-pkcs11-openssl 
+(and setting the provider in the OPENSSL_CONF env variable) was enough. 
+Is there something similar to that for gnutls?
 
+I don't think this will work on arm64 hosts, c.f. 
+https://debian.pkgs.org/13/debian-main-arm64/libsofthsm2_2.6.1-3_arm64.deb.html
+
+> +        with open(softhsm2_conf, 'a') as f:
+> +            f.write(f'directories.tokendir = {softhsm2_tokens_dir}\n')
+> +
+> +        with unittest.mock.patch.dict('os.environ',
+> +                                      {'SOFTHSM2_CONF': softhsm2_conf}):
+> +            tools.run('softhsm2-util', '--init-token', '--free', '--label',
+> +                      'U-Boot token', '--pin', '1111', '--so-pin',
+> +                      '222222')
+> +            tools.run('softhsm2-util', '--import', private_key, '--token',
+> +                      'U-Boot token', '--label', 'test_key', '--id', '999999',
+> +                      '--pin', '1111')
+> +
+> +        with unittest.mock.patch.dict('os.environ',
+> +                                      {'PKCS11_MODULE_PATH': softhsm2_lib,
+> +                                       'SOFTHSM2_CONF': softhsm2_conf}):
+> +                data = self._DoReadFile('351_capsule_signed_pkcs11.dts')
+> +
+> +
+> +        self._CheckCapsule(data, signed_capsule=True)
+> +
+
+Don't you want to validate it's properly signed?
+
+Cheers,
+Quentin
