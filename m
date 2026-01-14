@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9E8D37E3D
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0483CD37E39
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:58:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8ECD8063E;
-	Wed, 14 Jan 2026 15:56:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 57C908063E;
+	Wed, 14 Jan 2026 15:58:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="foSa0mby";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KKHnmul1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4EA7808AF; Wed, 14 Jan 2026 15:56:07 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 32FA8830A0; Wed, 14 Jan 2026 15:58:48 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BD1C80325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:56:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 055A980325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:58:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-47d1d8a49f5so55810115e9.3
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:56:05 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c76d855ddbso2915388a34.3
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:58:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768402564; x=1769007364; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/jTWV1cgTdNVRIeVGTtsUh6meTEr2PYs6eCBtLwcjnM=;
- b=foSa0mbyjgcBp40FD9NbYexqqkcT9SkP6ZixCX7D+Upd+99WqU8VkBGiDJ/0lFawGF
- ZnoRK6yczpsxxRXVc7gUpFqKvK+Nvzh2W6SZ+zFOK5N383NSmCBHsqi6TZ2VWDlux8a5
- 1MbJohSW2rCg0Lze/ZwHOZ1eFGNg0LxJaoWfP4OX9OFSie0Xt9Yn5PHHNuPq9Waw0XkB
- FAShR/Ygv4nJg3troahB7v0uoz2ms/XjFwOC5a2K/7u9g9b+bpIRnT64gwAQjYP2a++J
- M3W7EhJQW+5MKTclUhczcGoYdOhEZ/WEX3+tPeJbk6VD7I4le1MDDi2tiLjxB4czJhoT
- ho8A==
+ d=konsulko.com; s=google; t=1768402725; x=1769007525; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LM81MhAGJ18GTK5S84vxVLVgt6H1GEfq9cnmk6rXJNs=;
+ b=KKHnmul1dghjeen1qjX5OOx/R1MPXK3qzNuC7AMbBDKgcvmZ1Stlxe1eGs6M9Xfr+O
+ mDO8wI7KMIn82mXKDtpqOEvxNdtKCk5LBQwim2h7guMnYFZK2Ocy9OJhpCme53q5LZTY
+ ryyIjS95RrqpnkLOXeim/l6OJoyRFaJJ+TR0c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768402564; x=1769007364;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/jTWV1cgTdNVRIeVGTtsUh6meTEr2PYs6eCBtLwcjnM=;
- b=WI0RPiQVczfG4h3zFb9Un/9Qwf8iyD4EovFtc6Ly9pDsMlUyEqaPZ51j3iLPfYtMXZ
- V3DOCguU5Wiw7rl1m84YIYOA7mUEwSqhWDwglj8BcpOAzOsOIsdVY02knCeYTYdeWGQy
- 0NSXyzlMo5EbPrMEP8/lHkohKDh+OIL1AOcPrgkwo3uq4C/CBQi+AGRP1n1bAcAanSjW
- XKzcLzlKtH72GJvr8XZRAR0Hf9z21bv+EXjbRWK8xsjapYRDrDC1KZsD1jJ+um5juokr
- Xe0VxoWHicON8eWdx/DW6cpuoRa2SSWHtOVlvJRupQkTY0Uy1zersO9j6cOnMjT2ijmN
- IyTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUdCWJxMpGia7m/lw/QJXa7dbz3oQ7LVy9aypjL6jg3jPOwx9deNztCZQnyHTLEm4SDTFsiiA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKADT/PqKi1xMRDsVtkTJTgxigE+5rkQdqih01Mb43IlwCkCTK
- pO0KmL8QdbnKvz3VxKH7uL6WAd2Lta0E8IX9XU1u5353hsVhJATCFh6Doe1mtzA01Mg=
-X-Gm-Gg: AY/fxX7yAD9d++3Dpl0S7fjfK8DRE2VhOQDaDhRFwT8b9nDMtwnaqkJ4txEMZzgewC5
- pMWtnZEe0cvWkKGuhiGUf539xc182BTWSLvfoY4GYRsv8Qlp9OFBluoUCBoQyW28bECVjrPw/Dh
- UeEMfmxWUt42IU0H+iItBNDEITSLPjU6QZTQS3BoRMBsfu84rPUlZ0O3sxb4UCSaI+7u8mzs2ba
- fvqx5Y2E34WJEnxVdZ30+Dh5eMK1hVeJWXtOtXj1O6Tp0eSuqnOViYN9BTRAcgopC0PPEctMeS/
- VU+bnF44fmYJ0AwBtGjW413N98YE+bilOdGunLhngloe92DSn9OQv8eHJadr5IKkAvwFYq4DJH+
- zIJAEGpQu7pQiyvqd5Xw9rACBKAHaDyWwMQ1IjbMjVl0OdRwIFtTO6ZDK1SV0Lv8YitoYKqCIyc
- U3Yme4WR9DxN4Bxi2kLoeje0RbomIvMCWbfgYKM4ZyT7xD5eG4rSw=
-X-Received: by 2002:a05:600c:6090:b0:471:d2f:7987 with SMTP id
- 5b1f17b1804b1-47ee33757f4mr38385735e9.26.1768402564454; 
- Wed, 14 Jan 2026 06:56:04 -0800 (PST)
-Received: from [192.168.1.36] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47ee57a2613sm31156355e9.6.2026.01.14.06.56.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jan 2026 06:56:03 -0800 (PST)
-Message-ID: <c4cccc8f-639e-4806-992a-2e7c950c2c7b@linaro.org>
-Date: Wed, 14 Jan 2026 15:56:02 +0100
+ d=1e100.net; s=20230601; t=1768402725; x=1769007525;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LM81MhAGJ18GTK5S84vxVLVgt6H1GEfq9cnmk6rXJNs=;
+ b=bEhm10jLAUcMa5CVdl/ddxx2ROlSJKYEOHOwBY+a68OmsW/nKAebs3g0DDxinW+QuS
+ EGHzZpnlf5nFogB7VywNactdjfzhVoiBfrQJI1OOdWzaEZXYV2aIUQtxujYbma4Kkg6q
+ Ag/txknM47CPDoIy0F8DpI+giM9ygfFgN4vK1tO5Hsy7g0Xao7h5PUWhlEk+ApfI+v9k
+ +5Od27M+756Y8B7YBqVt5MmFEkjUpBLsUTG8iDgO+MywpVsyYG0Yibh8E1v3WAzlU1oV
+ +d/WQsvoH7G/e+F7wGMnz0lcMOf+++L0rJn09CbiKgCGWcNjMD2lR8PZcEx75+W8RdTK
+ utTw==
+X-Gm-Message-State: AOJu0YwfI1x0qqJQT2UEeMdHnKpQbpgwzQxPLjvLCdVsQOqxquPP+yqW
+ 4iaxJ27v0BvNGOTNBQg1WM1FSeRDddk3V5DIZo1jA5ND2MxMtFux21DyqRKJ/nSo2Ofc3WWbD9+
+ iGVlN580=
+X-Gm-Gg: AY/fxX4RcB3A1keDnrsx31aCPU0X/xbjx+3p2dutpwO7ai6iM3qQx1z1huopqMyO1Pq
+ FlgzOgGmHeVghyl3NaftRhp2h05lSHRTXF4gamAqNfkUAu1c8VniZtHCZ4eIFzGuFNlyc/2iu4L
+ ljGpq8y8t5WsaLU5iWyvUXK109f0rb61pbZPAikO4d32BQMtEGEoCSBqrNwvqulBbs3rx52OEGv
+ Rv5sZPapo35kRfmRa1k9JFzktU6wAsu/00aGoDBtAPt8aS0+AGdefqXlUPPHRBJY22cco7ZJFMw
+ LWn62rjeBYbiWHtbCjVxOPVKX3hHRJQViwnC8JcHcxytmt1ZX1YJCJU75KxS5PeOtN3OYGDFi1x
+ aUgCer72ELl30HOhBM7HhL0Kvv5U0kpogcL2QC+1iHERtOrj/3K6P1P75j8tlr6JOjoobNGRBBl
+ fdqMPHn+bWUfGV8tj3GPVWnPiZOxBrxj4a4sr1dmytty0/EnWgnCwgBUJx1Q6NJwrHvEFeI+TcL
+ z+2NuLEmjF4LkwAlc8UkBCgRjVL9b/EWBKJYZA=
+X-Received: by 2002:a05:6830:449f:b0:7c7:6217:5c66 with SMTP id
+ 46e09a7af769-7cfc8b2c870mr2670596a34.19.1768402724624; 
+ Wed, 14 Jan 2026 06:58:44 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ce478d9c17sm18453792a34.22.2026.01.14.06.58.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Jan 2026 06:58:44 -0800 (PST)
+Date: Wed, 14 Jan 2026 08:58:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jamie.Gibbons@microchip.com
+Cc: u-boot@lists.denx.de, andrew.goodbody@linaro.org,
+ michael@amarulasolutions.com, Conor.Dooley@microchip.com,
+ Valentina.FernandezAlanis@microchip.com, fberder@outlook.fr
+Subject: Re: [PATCH v2 2/2] dm: core: Default to using DEVRES outside of xPL
+Message-ID: <20260114145842.GD3416603@bill-the-cat>
+References: <20251219202121.4180810-1-trini@konsulko.com>
+ <20251227223833.3019311-1-trini@konsulko.com>
+ <20251227223833.3019311-3-trini@konsulko.com>
+ <ef5c3866fa673dd814264f1a26f73c5a9fb75b6b.camel@microchip.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] configs: Add generic qcom_tfa_optee_defconfig
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
- neil.armstrong@linaro.org, jorge.ramirez@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20251229114312.668068-1-sumit.garg@kernel.org>
- <20251229114312.668068-2-sumit.garg@kernel.org>
- <c0bc6cab-6eee-40c2-b6f7-ff14d91906c5@linaro.org>
- <aWDgNIR4jcNcUZ6W@sumit-xelite>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aWDgNIR4jcNcUZ6W@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1ABa+OCgwzWHqnK/"
+Content-Disposition: inline
+In-Reply-To: <ef5c3866fa673dd814264f1a26f73c5a9fb75b6b.camel@microchip.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,141 +103,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--1ABa+OCgwzWHqnK/
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 09/01/2026 12:02, Sumit Garg wrote:
-> On Thu, Jan 08, 2026 at 05:41:42PM +0100, Casey Connolly wrote:
->>
->>
->> On 29/12/2025 12:43, Sumit Garg wrote:
->>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>
->>> Recently upstream TF-A/OP-TEE has started gaining support for Qcom
->>> platforms. RB3Gen2 being the first one and more to come. U-Boot in
->>> corresponding boot flow is packaged as a position independent executable.
->>>
->>> So, lets add a generic U-Boot defconfig for Qcom platforms to support
->>> TF-A/OP-TEE based TrustZone stack. Build command:
->>>
->>> $ make qcom_tfa_optee_defconfig
->>> $ make -j`nproc` DEVICE_TREE=qcom/qcs6490-rb3gen2
->>
->> This would be better suited as a config fragment rather than a new
->> defconfig imo.
-> 
-> That's fine with me to add it as a config fragment.
-> 
->>
->> But more importantly, enabling OPTEE support in U-Boot doesn't imply
->> that it will be used, just that it's supported.
-> 
-> There are real use-cases of OP-TEE in U-Boot for Qcom platforms like
-> secure EFI variables based on OP-TEE secure storage. Have a look here [1].
-> 
-> And sure there will be more such use-cases like fTPM, KASLR etc. can be
-> supported based on OP-TEE.
+On Wed, Jan 14, 2026 at 02:33:04PM +0000, Jamie.Gibbons@microchip.com wrote:
+> Hi all,
+>=20
+> On Sat, 2025-12-27 at 16:37 -0600, Tom Rini wrote:
+> > The devm alloc functions that we have may follow the Linux kernel
+> > model
+> > where allocations are (almost always) automatically free()'d. However,
+> > quite often we don't enable, in full U-Boot, the tracking and
+> > free()'ing
+> > functionality. This in turn leads to memory leaks because the driver
+> > author expects that since the functions have the same name as in the
+> > Linux Kernel they have the same behavior. In turn we then get
+> > functionally correct commits such as commit 00e1fed93c8c ("firmware:
+> > ti_sci: Fix memory leaks in devm_ti_sci_get_of_resource") that
+> > manually
+> > add these calls. Rather than manually tracking allocations and
+> > implementing free()s, rework things so that we follow expectations by
+> > enabling the DEVRES functionality (outside of xPL phases).
+> >=20
+> > This turns DEVRES from a prompted symbol to a symbol that must be
+> > select'd, and we now remove our non-managed alloc/free functions from
+> > outside of xPL builds.
+> >=20
+> I=E2=80=99ve encountered a regression on the Microchip PolarFire SoC Icic=
+le Kit
+> with mainline U-Boot.
+>=20
+> After commit 217cf656e249 - the application of this patch (=E2=80=9Cdm: c=
+ore:
+> Default to using DEVRES outside of xPL=E2=80=9D), U-Boot fails to boot on=
+ this
+> board. After this patch was applied the Icicle kit no longer boots and
+> crashes immediately after OpenSBI. Between this patch and master HEAD
+> the following errors are found - please see attached logs for more
+> detail:
+>=20
+>     Failed to reserve memory for fdt at 0xbf386210
+>     Required FDT relocation for applying DTOs failed: 1
+>     Could not find a valid device tree
+>     Device tree not found or missing FDT support
+>     ### ERROR ### Please RESET the board ###
+>=20
+> Sometimes, I also see an =E2=80=9CUnhandled exception: Illegal instructio=
+n=E2=80=9D and
+> a reset.
+>=20
+> The last known good commit is before this commmit. I used `git bisect`
+> to confirm that 217cf656e249 (this patch) is the first bad commit.
+>=20
+> Steps to reproduce:
+> - Build U-Boot for MPFS Icicle Kit
+> - Boot using HSS payload as usual - I use our build system Buildroot for
+> this
+> - Observe the boot failure after the above commit
+>=20
+> Any advise on the problem?
 
-I was referring literally to the fact that CONFIG_OPTEE being enabled
-doesn't imply that OP-TEE is running, it's faulty logic to assume that's
-the case and add nodes to the DT.
+It's really strange that it bisects down to this commit, rather than
+something device tree related. Do you still have fdt_high=3D0xffffffff or
+so set in the environment? It was in at least one of the logs, but I
+can't see for sure if it's just that the other log is from before the
+commit that added the print warning about not doing that, or if it
+wasn't set.
 
-I just checked and there is an SMC call that tells you the UUID for the
-trusted OS, referred to as OPTEE_SMC_CALL_GET_OS_UUID in U-Boot and
-OPTEE_ABI_CALL_GET_OS_UUID in OP-TEE. Presumably this identifies OP-TEE
-specifically.
+--=20
+Tom
 
-My suggestion would be to make this SMC call if CONFIG_OPTEE is enabled
-in qcom_psci_fixup(), compare the UUID and add the node if it matches.
+--1ABa+OCgwzWHqnK/
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> 
-> [1] lib/efi_loader/efi_variable_tee.c
-> 
->>
->> So I think the more appropriate patch here would be to just enable
->> OP-TEE in qcom_defconfig (assuming the binary size isn't significantly
->> affected).
-> 
-> The OP-TEE driver in U-Boot itself is probed based on DT and it's not
-> only specific to Qcom platforms but every other platform using OP-TEE.
-> 
->>
->> Considering the other patch is based on this assumption that if OP-TEE
->> support is enabled then the board must be using it, a different approach
->> is definitely needed.
-> 
-> Yeah that's true even with TF-A boot flow, there is possibility to boot
-> without OP-TEE as well. However, TF-A generally doesn't provide a
-> generic option to detect whether OP-TEE is running or not.
-> 
->>
->> When I was looking into this last year I remember discussing this same
->> issue from the Linux side, there is a good argument to be made that
->> OP-TEE support in Linux shouldn't be based on the devicetree -
->> particularly in the Qualcomm case where whether or not OP-TEE is used is
->> a simple software change, nothing to do with hardware.
-> 
-> Sadly it's true for every other silicon vendor too. But OP-TEE support
-> based on DT has become an ABI unless migration for OP-TEE support based
-> on FF-A comes into picture.
-> 
->>
->> So in general I'm not particularly keen on this approach, I think it
->> /might/ be acceptable for U-Boot to have some fixup code to add the
->> OP-TEE node if OP-TEE is in use with the idea of phasing that out in
->> favour of runtime detection in the OS itself. I'd also expect that fixup
->> code to go in the generic U-Boot DT fixup code that runs before we jump
->> to the OS (like the EFI DT fixup function).
-> 
-> The EFI DT fixup code is already there based on U-Boot DT. Have a look
-> here:
-> 
-> boot/image-fdt.c:627:   fdt_ret = optee_copy_fdt_nodes(blob);
-> 
-> In general on Arm platforms there isn't any SMC bus to detect
-> dynamically if there is support for OP-TEE or not. That's why
-> platform bus was choosen for the U-Boot and Linux OP-TEE driver. It's
-> similar to how we have the SCM DT node for Qcom platforms.
-> 
-> FF-A bus tries to solve that problem to unify that approach for future
-> platform but U-Boot hasn't yet gained support for FF-A based OP-TEE
-> driver too.
-> 
-> Anyhow, this is the sanest way I can come up with to enable OP-TEE
-> support in a general way for all the Qcom platforms. This is aligned
-> with how OP-TEE support is detected for other silicon vendors too.
-> 
-> -Sumit
-> 
->>
->> Kind regards,
->>
->>>
->>> For more information refer here:
->>> https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
->>>
->>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>> ---
->>>  configs/qcom_tfa_optee_defconfig | 7 +++++++
->>>  1 file changed, 7 insertions(+)
->>>  create mode 100644 configs/qcom_tfa_optee_defconfig
->>>
->>> diff --git a/configs/qcom_tfa_optee_defconfig b/configs/qcom_tfa_optee_defconfig
->>> new file mode 100644
->>> index 00000000000..c398521770f
->>> --- /dev/null
->>> +++ b/configs/qcom_tfa_optee_defconfig
->>> @@ -0,0 +1,7 @@
->>> +# Configuration for building a generic U-Boot image
->>> +# with support for TF-A/OP-TEE based Arm TrustZone stack.
->>> +
->>> +#include "qcom_defconfig"
->>> +
->>> +CONFIG_TEE=y
->>> +CONFIG_OPTEE=y
->>
->> -- 
->> // Casey (she/her)
->>
+-----BEGIN PGP SIGNATURE-----
 
--- 
-// Casey (she/her)
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWevIQAKCRAr4qD1Cr/k
+ChlSAQD81/up1c9X6x+JE1kfkV0TyhUYkZPgDv0kAV+66zWXvAD/ZiFpCuOBKn7z
+pUIU1Lv23wg0A6+cW7m/5R3OCnCvAgw=
+=wvDz
+-----END PGP SIGNATURE-----
 
+--1ABa+OCgwzWHqnK/--
