@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B89D9D37E3B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05BF8D37E3B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 14:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D6028063E;
-	Wed, 14 Jan 2026 15:39:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 755CA83623;
+	Wed, 14 Jan 2026 15:40:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dNGCOaYX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="icTWYpYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 985C6830CA; Wed, 14 Jan 2026 15:39:36 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id B5B39835B3; Wed, 14 Jan 2026 15:39:58 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB69F80325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:39:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5DBA80325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 15:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-4308d81fdf6so4612705f8f.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:39:34 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4775e891b5eso40281265e9.2
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 06:39:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768401574; x=1769006374; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768401596; x=1769006396; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=wxzgAtu9Bal0Qh/rhyij8czQv5msMUaSChxt2CJD1vg=;
- b=dNGCOaYX22AOC8grRB9jTcLu0JwEY1/oE3M0boaf7Jnxkrc5BN7mNRDPO1YYdvx21J
- o2y0szw6Dy4wfCDW6LvVH1m9uWQ9b1UIGxSAzSMinpIz/7YhIPwQDbYDpxYF0zJw4Jgw
- tSgyz9yNOdbruRLRPy3ciJo2gPPyIuJI/D9sC//ZTP6CaEqK9xJ5O6YCaCob+zUcnO8L
- 0IlizWmVPK7J5kZI+xAeTug9N/JAYaiWSQmdQuse5jHUx7DM7wUjDE9CBIO+VEV0ti1l
- dxRgXhDpRM1BiGsIIPYDdUB9VivRz0vcz7uGeUEj3Om3I0kuPzh2W9rJE46ae5dIPk87
- p8ig==
+ :reply-to; bh=RDADzJv3EKdoU3yFZ39RzHNYUGiXmirOoZwTT778R9s=;
+ b=icTWYpYCuocirIkGMv5fpKsnD2X6+agia6dg2s7oD+aUyv4q2PV1rnH/aa5QEnwYtJ
+ WgU8MxiKhaotfrvrqedPPd3BRl9JkZZsmawA2TMc8pmAk7o/B8tO1l6GVozvhmJQpUNM
+ zNrItZAWLXg2auxRatY5X2Amjd4QBp9dGzuGvxzGsT239PUk3ftMBVAlNbeUa/+PkmeA
+ Be150ktAgf0hkAooV8gaHKcVfLURVHws/294cjMIzM/fo3wTsQOcZyqw21hQMsGII++R
+ 1SgL37T9twtBDfKmdkEl+bN7kv5kBq0Qbk6oNGxJvNe9vG00Lch59ww30dUywAvxR54L
+ gnng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768401574; x=1769006374;
+ d=1e100.net; s=20230601; t=1768401596; x=1769006396;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wxzgAtu9Bal0Qh/rhyij8czQv5msMUaSChxt2CJD1vg=;
- b=HQfwMXU45Olgvu3mnso3LEUQckCzn/10FieCldrzaFsqzl5NraJwi75YFAyGQPaRmt
- TXnKAknrl3G6dhtKVkQqgPtwIzKoU89YChnuy0VXAvIIeW5iAE1+6ezv0XuZdqokrbnS
- Y5Vcy3yT5CQc+nnfOfThwpcBClAMgwJ1v900Uj93wYL51YAuXNdAT2PTF+Rn2mEEbDJg
- 5JgMuySnnjuuCiFiSbc8c1Z08++O8inaf57JF8lrvBni43YVwfoAz3GRH4C+kEca7GHo
- KArrgZs6xF07DNYwyo4a5PFxHVI5TGkKLZ58B7nXiTc86vT24lrU+WM+9/plfDebFxmD
- 9saQ==
+ bh=RDADzJv3EKdoU3yFZ39RzHNYUGiXmirOoZwTT778R9s=;
+ b=aRB3+7kH6crIsifh1XIVuuWb/nC4rsm+EcxScDoo9pTjc0A8D6vEOcjD0NPnosJenb
+ PfQ94KqqsmmkzXBtVxF429Mredd5U978Z3rjCYbbUCVzP5Xi2JS4uK2cgWsU4qMGbWh1
+ EOoducaPniyDF/jTM7yO2osrcIzUBBRNmeVPO1kBEh0cZsJphqJFzayStL5+4bm1Nz78
+ bc2qThVIk8S/JCpx9oK372NCnTlOXarOCuryypuUmvfyaUh5rkZeJFJTPrkQnOjRJlKk
+ dz/rxfX0ixPESB1Dnd1mQYa7HUihbFwusslqxs528D/hvdqEEQvvlQMUMCW05t/S0bEC
+ TtXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZA5u3z0KefRySL1xTKJkXH8yae2xxr+89se3pRRXnNApXnavujF5WeGLI2DEiuNxysrhXf6M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9//48CBzZGppf7EfjetgXIrgvshMk1mWc1aFfgOfZ0lkt5nZ9
- u+y+otFGNLZYjF6HU5JPYWXrteNe/jrfEHL8L287Nidq/bfJ6IAcCpCe8eM2PNqUvEGAAaBhT46
- iXSJU
-X-Gm-Gg: AY/fxX5Sg/Lvx7/fFrLGHltEJhbhGCaQQFK3ticiQTrZafQlrkuzu1oOtrBgOe5RsSk
- UQJd8PtArI2AEcl34S6dthIP8XM/LYZskbbFuNax+iaEprL3pLHuQkOKmRrRtxxxGVNy36Czs7F
- dqMZpN+OXXrNb/cpesCjTqsmEscKpDVtc8b8L4WVfDH3yuTT7eH7hnpCFoK1U5ddn48N3Wu6BM2
- gCuoA8bipJh60zJggytb1oVCGfb2Wy1CrQsleCRLN+mISTBwRoUJWg6TRoDs1XVQyKFxx3ka/8e
- hjwHL65xf+MQyCAF19QLPFPJ8euy87y8XbaAScmxD6jWSAeZU2nlntWXcZK709xRgqj3Ha7DScQ
- Y33BYo3D/wmcTUIDWLcXT9aY6o4NraMOFGaCBjOATx1B3Jw5ls1UZCpMu6lDsiwryTWPYP7Gi+d
- Nd7gSpjxjEM4mbPEjICkNtm09di6aNMlgHNiyUB/Z4W3xXd+kOkjFNuhLx9CX/9Hg=
-X-Received: by 2002:a5d:588d:0:b0:431:3bd:3781 with SMTP id
- ffacd0b85a97d-4342c548abamr3323896f8f.37.1768401573985; 
- Wed, 14 Jan 2026 06:39:33 -0800 (PST)
+ AJvYcCU496JNjxJI4jfqPI6lvrPExthjaT68nYECCKIAwhVvS8iP4Em0R9LI5KxUnNVbAIp7EhlyhXY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzywvRCEE4mBO4gTtwB0ICbLSSEDU3lv+4PTXGMV8MC9xRNtGXY
+ Y4zvRWD7y4Y3QrfWjupKXqFW1rrK94qfCA4mXeW0Lte14+B+E/GKvQXSI8lxL56BkJ0=
+X-Gm-Gg: AY/fxX56O0+Hap4ijuzSpHv2t26Jjlw9T/U2vUtWZUMgLmBTHLdSlhGbHPRh7peJqMX
+ gR7579VP6Yx0HKcqGviK6S9tOEOf+vLYzwGBw7ky6ZkPaUXdo3NIiNePnml8FEyx2NWY7/0cQFf
+ RaS08GZStgnaKm0kQVhZ7MoWbfx6/zrMQcQWreSEe0L/l8Bbp+2uSyk3Rf8ClhX3nmxEIC4OOlh
+ MnNRnvyx55rXfRippE/0hNtD+U/DLZYbb79KpM1sO3athhRMwRbbz9M2OQED59goOOLmZ6fMePO
+ CL2+rGegleSP6AdEjNyVBe3rqUVLYM5rfj54Vw6cVRe57xhJqd6OuTHZc2CtnLru6l7D8Vvk9+N
+ +1wgx2gGleVNOBy6Ui1I7sPtPqkMGeuUTN9ngMuCQLD4pzk2lx1ly8CxWdb88U6jw3nYS5TDwr6
+ ClfVuGJ7kKlyW8h3eE7Orh/MYISsBQGnQKFUXP+kxvXGWw17L9BVxO3pQ+Bb9oKPg=
+X-Received: by 2002:a05:600c:8b2f:b0:479:3a86:dc1e with SMTP id
+ 5b1f17b1804b1-47ee4840941mr29048205e9.36.1768401595645; 
+ Wed, 14 Jan 2026 06:39:55 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
  ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432dfa6dc4esm28386147f8f.23.2026.01.14.06.39.30
+ 5b1f17b1804b1-47ee0b48921sm25418295e9.0.2026.01.14.06.39.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jan 2026 06:39:33 -0800 (PST)
-Message-ID: <328c1940-2557-4b5a-a089-d83c4fbee14c@linaro.org>
-Date: Wed, 14 Jan 2026 15:39:29 +0100
+ Wed, 14 Jan 2026 06:39:54 -0800 (PST)
+Message-ID: <d1fbf0fd-9181-46a6-82a5-f8ffa9844a5a@linaro.org>
+Date: Wed, 14 Jan 2026 15:39:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] usb: dwc3-generic: respect role-switch-default-mode
-To: Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jonas Karlman <jonas@kwiboo.se>, Sam Protsenko <semen.protsenko@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20260114-casey-usb-role-switch-v1-0-fb7a626466b9@linaro.org>
- <20260114-casey-usb-role-switch-v1-3-fb7a626466b9@linaro.org>
 From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] mach-snapdragon: of_fixup: support new flat dwc3 node
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Rui Miguel Silva <rui.silva@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ u-boot@lists.denx.de
+References: <20260114135739.1546815-1-casey.connolly@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260114-casey-usb-role-switch-v1-3-fb7a626466b9@linaro.org>
+In-Reply-To: <20260114135739.1546815-1-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -136,36 +132,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/14/26 15:13, Casey Connolly wrote:
-> Respect the default mode configured in DT if it is set and dr_mode is
-> OTG. This allows the board to prefer host mode even on a DRD capable
-> controller.
+On 1/14/26 14:57, Casey Connolly wrote:
+> Qualcomm DTs are being updated to use a new format where the dwc3 glue
+> node and controller are combined into a single DT node. Update the fixup
+> code to handle this case.
 > 
 > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   drivers/usb/dwc3/dwc3-generic.c | 5 +++++
->   1 file changed, 5 insertions(+)
+>   arch/arm/mach-snapdragon/of_fixup.c | 40 +++++++++++++++++++++--------
+>   1 file changed, 29 insertions(+), 11 deletions(-)
 > 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 7044696ced0c..1aa9fc933282 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -528,8 +528,13 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
->   	dr_mode = usb_get_dr_mode(dev_ofnode(parent));
->   	if (!dr_mode)
->   		dr_mode = usb_get_dr_mode(node);
+> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+> index eec2c0c757e0..5b6076ea8e57 100644
+> --- a/arch/arm/mach-snapdragon/of_fixup.c
+> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+> @@ -31,31 +31,37 @@
+>    * USB controllers. Rather than requiring source level DT changes, we fix up
+>    * DT here. This improves compatibility with upstream DT and simplifies the
+>    * porting process for new devices.
+>    */
+> -static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np)
+> +static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np, bool flat)
+>   {
+>   	struct device_node *dwc3;
+>   	int ret, len, hsphy_idx = 1;
+>   	const __be32 *phandles;
+>   	const char *second_phy_name;
 >   
-> +	/* check default role for DRD controllers */
-> +	if ((dr_mode == USB_DR_MODE_OTG || dr_mode == USB_DR_MODE_UNKNOWN) &&
-> +	    ofnode_read_bool(node, "usb-role-switch"))
-> +		dr_mode = usb_get_role_switch_default_mode(node);
+>   	debug("Fixing up %s\n", glue_np->name);
+>   
+> +	/* New DT flattens the glue and controller into a single node. */
+> +	if (flat) {
+> +		dwc3 = glue_np;
+> +		debug("%s uses flat DT\n", glue_np->name);
+> +	} else {
+> +		/* Find the DWC3 node itself */
+> +		dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
+> +		if (!dwc3) {
+> +			log_err("Failed to find dwc3 node\n");
+> +			return -ENOENT;
+> +		}
+> +	}
 > +
->   	/* usb mode must fallback to peripheral if not known */
->   	if (dr_mode == USB_DR_MODE_UNKNOWN)
->   		dr_mode = USB_DR_MODE_OTG;
+>   	/* Tell the glue driver to configure the wrapper for high-speed only operation */
+>   	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
+>   	if (ret) {
+>   		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
+>   		return ret;
+>   	}
 >   
-> 
+> -	/* Find the DWC3 node itself */
+> -	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
+> -	if (!dwc3) {
+> -		log_err("Failed to find dwc3 node\n");
+> -		return -ENOENT;
+> -	}
+> -
+>   	phandles = of_get_property(dwc3, "phys", &len);
+>   	len /= sizeof(*phandles);
+>   	if (len == 1) {
+>   		log_debug("Only one phy, not a superspeed controller\n");
+> @@ -103,15 +109,27 @@ static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np
+>   }
+>   
+>   static void fixup_usb_nodes(struct device_node *root)
+>   {
+> -	struct device_node *glue_np = root;
+> +	struct device_node *glue_np = root, *tmp;
+>   	int ret;
+> +	bool flat;
+> +
+> +	while (true) {
+> +		flat = false;
+> +		/* First check for the old DT format with glue node then the new flattened format */
+> +		tmp = of_find_compatible_node(glue_np, NULL, "qcom,dwc3");
+> +		if (!tmp) {
+> +			tmp = of_find_compatible_node(glue_np, NULL, "qcom,snps-dwc3");
+> +			flat = !!tmp;
+> +		}
+> +		if (!tmp)
+> +			break;
+> +		glue_np = tmp;
+>   
+> -	while ((glue_np = of_find_compatible_node(glue_np, NULL, "qcom,dwc3"))) {
+>   		if (!of_device_is_available(glue_np))
+>   			continue;
+> -		ret = fixup_qcom_dwc3(root, glue_np);
+> +		ret = fixup_qcom_dwc3(root, glue_np, flat);
+>   		if (ret)
+>   			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
+>   	}
+>   }
 
-So it means that,on phone platforms, the controller will default to host ?
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
+Thanks,
 Neil
