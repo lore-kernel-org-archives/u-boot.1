@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF513D37E3F
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 15:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C47D37E3F
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 15:12:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 735D48352B;
-	Wed, 14 Jan 2026 16:12:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B122383655;
+	Wed, 14 Jan 2026 16:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bj0V0skR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XpAVK8M2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D08DB80325; Wed, 14 Jan 2026 16:12:19 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id D1459835B3; Wed, 14 Jan 2026 16:12:20 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF67D82C7F
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 16:12:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADFE3830E4
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 16:12:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-43246af170aso627354f8f.0
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 07:12:17 -0800 (PST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-47775fb6c56so83922265e9.1
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 07:12:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768403537; x=1769008337; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768403538; x=1769008338; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ApFncLtJWsiaoiuu2Ck3TYxZADO8Hrv7IoGQ710cdRE=;
- b=bj0V0skR3uD4dxlh8nRNGbuuvlURZk/ao69z87UvcN0g9nbEFQOr11F8a/zEfx03rP
- mHPxoLiUCzCDanVTYSMFUKIee6sJBVTOadTw4LyUGBqp2DpWUeyhUdkNc+znS0Pm3WZS
- 7+D+mAXi/UcD5n2SWlryciAGdDIiHfAF0tfH/ev6oNfwmUkLWC8HQVcrkwXo0/zCbcEU
- +VRT0kdB9NU7NuI8/RlxnwhvVr8J6+4W9pwYmHb0xrPzyZoPaXmNm7/wCnnysbb69IeF
- knyTcFJ7BuXra9XV6qE0+gzzp3ZElF2xwBulb8pCS2Xa0eslFX+2NndPDEqH+ZXhTgjg
- b3Mw==
+ :reply-to; bh=ZT3Sa9ASlhk7HDjx1Bwk/ZOElZh8by+gNc+C5VlKT6A=;
+ b=XpAVK8M2NJaTaeen8eFzq6I+bOwdKAs6JYRZDl3ofyu4jfXYx843chcPJE9/Ey/ru5
+ A3HK4ehGAMkh5wtEC9gungGJgjIM3O/kz2rXO8d1ZZBN1SDFZcvlblUabHD5zM9fbaNc
+ azgbBCkoHef1uGNF4rzV1D0YOrNe6V9jVW9tmAlxnjzJ74aojdYAVIh+llLmmdYHGR+1
+ 19FdYN4knXIjV8NW0WI03adFVQrTpIwVaLSkBXHUpU/tBSbfbx7Crb+cpj2ANiH3Zx4X
+ NPNudzE16IR+WCR1t7yOCmjakWQrKCKkWytDag1lUHcXg6BLSeroxkbE+6wFujy+ejn4
+ JgSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768403537; x=1769008337;
+ d=1e100.net; s=20230601; t=1768403538; x=1769008338;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ApFncLtJWsiaoiuu2Ck3TYxZADO8Hrv7IoGQ710cdRE=;
- b=PXxPR+UE0q6siEm9k0ACW5Mem/7Xdb9UyYuW2ypQNR0nlXBbX1bFBdxeMfUE/nOsWN
- FnTfOlOVNpseAaMxXcxBabnZ7n/5P9IdIlAtFi7AqwvOKvdSm8FHEoz3fOBNfKjDOGxE
- yxzSWavulHNX97qTK/JNiQS3FXeqxLU6+TSGoquk+2R7tbblFfsMVxQvsdUuf8ns8FOj
- ChTEgnBtvNLlg1MIrojdHbeAUe/taAvZkMcxfnYnKEgokd0+4R7XJf2YydxFLi4Lv8xt
- Oudz3Z8418R3OTg7WUvahMwZ+1YrmYKs4smvGKjiXQ0VSERWPfU3CGqVTYK0RE4Fd9py
- hgJA==
+ bh=ZT3Sa9ASlhk7HDjx1Bwk/ZOElZh8by+gNc+C5VlKT6A=;
+ b=OzxNwj9BeKTEsQxxXViNNoaUqN3eU43EDkwESREpadK6EYthqIYQSSBOWqMxZcdJT8
+ zl+zQFLdlxN7t1HsHesdTFiLreHm1qstCaXs+pBC9uzZqaf4lBrnY9+ZDzSF44cL/wMA
+ 751M6LAwE3o5wyg340alJR0n8M5Qdt4rVDYQwHu3W+8gZEQG0hruJ1Eyh76Yu/F5h2Ft
+ 9BaSH8N0GOU06lgXNCy3xgBH1MPs4TlRGMQuapgH7f2KGESplhVrggGVF+6s8qFKtj1/
+ Kf/KiH+FTyIKC7xmM8zmhBS749fsVGhuBBDtpNNlh//o7iyuStUTi0anEek3bQdhOKqf
+ TJhA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFSbqEvTK9BjdDm1AKwkPqOLigtLJZmsrjCESfN4RTzzmUVMO74qIvZ+c72ciMCHyKuKtfV2w=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywvc+RwbtThVn/CeGWjMtvifRi/oxEF7GoYakjMeuEe1gP5Tbqm
- Q5GKVDSru89g0dk6C+R0/bke69jtBNxHCbv2ALlHnQxarHk+pdSY7A61u/wg6g/DgKs=
-X-Gm-Gg: AY/fxX5Oo59dyWYyxB/jFw6uCCq73N/M/99PIbtqJpims96U5GF2wObMesKfKfyfxL1
- u24sTeZgrTD7qHh5MVBmyNxGmRJ5hOzzX1PL8tGUnxbu3RwfKdcZY2wf/AEkym2HCCRTvxEsjxR
- HQ7zgSOTUHHjr+TpNvffPQe+ZWEXYnDGp+Lqt9t+Gl3Ew1wpYzQZhV253Je9m/lIDkLP2n+tql+
- AGxXqgfB4QrougQSNAv8u4I2K8C8UN1tDpvs5NGa/2XkxIUYgZwxhyB6uNGHsOQBaLwPMLgHp3o
- vvdhEXcNRxlFvMsliDE38mil/fh405/CORKCULezU1WhB1OrmJ6s1Bgyqbumk5HKDt7XRIomUpJ
- /MY+SfcOehzICvl3cHg9LS7CIzmP8df/9ThWGwwosohisOAkKb/P7fB3B/6mZJPR7WMkRE22GXl
- KRlCH1dtr9hUfQ1zEdsodwDRkTxK7Xn6ZRkIjOWwXWsFQScOkSRw==
-X-Received: by 2002:a05:6000:2dc9:b0:431:f5:c36f with SMTP id
- ffacd0b85a97d-43423ee5857mr8973950f8f.31.1768403537107; 
- Wed, 14 Jan 2026 07:12:17 -0800 (PST)
+ AJvYcCU59AR5aPIXnndW0afCQiuVt2MFVFwDRWrey74CAj8syYHxZUW1kiA719TuwrRslJ6OtTP7I+s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyyz2keYjYmaV53gh3sLXDJG8LB1Eo8uT54omEpyojgizaAIWQN
+ VfqZFcw4ZqBKM9Fz7tkpzDh/bozu1xY75FlvV8u04Gr4XWjQHsL+K77utADHR0fCbKY=
+X-Gm-Gg: AY/fxX7Rs65S8nTYOSv8JahuDfcfxBOZNtd3511OWHb2U1z55Q/Hx7x0giNFBEen0z+
+ OzAhFdW6L2HulQ0jd68iKWYcaB0YgwRtnBpsc6T5wEMItymefg/hv+9JlrCg4Rj+KtTknHFB5aI
+ uaiO4VDw4lf/RZFOrJ5EDmN7rzUpcfMAUZDhTQBS82G41mokI6xdq/Fd3Khi3jO4SK4c2Ave+OX
+ 1OoEd/IwlCav8FebQMEnzTrUdpBIxCNkmohXwDUDwOqlXCDgTNzGCrATbomjcU1cBUM7p1LRDOV
+ ZSytef4h0555E3LK8d/Ni682Af+Ryurvsv0hEff8x+Xp8vdNpAlPgW0yZqWtNtjilS+WGi2fjXN
+ 4XYFfPSo22TNDA0OhuloWlGbVpTyMP747IaNLcTpIlZiLSO56b7Vii1S3yZE+nHe/QQ2mErfDmM
+ EPbMPYBtRj+aFaKNfKKIHwZmo63OpubdhURtvfGnc=
+X-Received: by 2002:a05:600c:1f85:b0:477:9986:5e6b with SMTP id
+ 5b1f17b1804b1-47ee338a5e2mr33758425e9.28.1768403538048; 
+ Wed, 14 Jan 2026 07:12:18 -0800 (PST)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:3801:2d90:e4f1:d19d:4c32])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-432bd0dacc5sm50455212f8f.5.2026.01.14.07.12.16
+ ffacd0b85a97d-432bd0dacc5sm50455212f8f.5.2026.01.14.07.12.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jan 2026 07:12:16 -0800 (PST)
+ Wed, 14 Jan 2026 07:12:17 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 14 Jan 2026 15:12:09 +0000
-Subject: [PATCH v2 1/2] net: lwip: tftp: Do not write past buffer end
+Date: Wed, 14 Jan 2026 15:12:10 +0000
+Subject: [PATCH v2 2/2] net: lwip: dhcp: Do not write past end of buffer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260114-tftp_fix-v2-1-8de8e6ecf4e8@linaro.org>
+Message-Id: <20260114-tftp_fix-v2-2-8de8e6ecf4e8@linaro.org>
 References: <20260114-tftp_fix-v2-0-8de8e6ecf4e8@linaro.org>
 In-Reply-To: <20260114-tftp_fix-v2-0-8de8e6ecf4e8@linaro.org>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -107,38 +107,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sprintf will add a trailing \0 so manually adding a trailing \0 will
-result in an extra unaccounted for character being written. This
-overwrote the first byte of the following allocation block resulting in
-unexpected behavior.
+sprintf will write a trailing \0 at the end of the string so when
+writing into a buffer, that buffer must be sized to allow for that
+trailing zero. In the DHCP code when the index is a number needing two
+digits to express the index would use up the two \0 bytes in the buffer
+and the trailing \0 from sprintf would be beyond the end of the
+allocation. Fix this by adding a third \0 in the buffer.
 
-This was found by Running 'pxe get' with no available file resulting in
-multiple attempts, using the default algorithm, to attempt to find a file.
-Eventually there would be a failed assert when free() was called.
-Failing the assert would result in a system reset.
+This was found by code inspection when looking for an issue reported by
+Michal Simek, but I do not have the hardware to reproduce, so cannot
+confirm if this addresses that issue or not.
 
-Fixes: 27d7ccda94fa ("net: lwip: tftp: add support of blksize option to client")
-Reported-by: Michal Simek <michal.simek@amd.com>
-Tested-by: Michal Simek <michal.simek@amd.com>
-
+Fixes: 98ad145db61a ("net: lwip: add DHCP support and dhcp commmand")
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- lib/lwip/lwip/src/apps/tftp/tftp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ net/lwip/dhcp.c     | 6 +++---
+ net/lwip/net-lwip.c | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-index ecb6c55ae1100779187e7b138d098a0ef1e48ca1..25da952e92566cbca1c64bc89c89102e74d0a42c 100644
---- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-+++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-@@ -191,7 +191,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
-   MEMCPY(payload+2,              fname, fname_length);
-   MEMCPY(payload+2+fname_length, mode,  mode_length);
-   if (tftp_state.blksize)
--    sprintf(payload+2+fname_length+mode_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
-+    sprintf(payload+2+fname_length+mode_length, "blksize%c%d", 0, tftp_state.blksize);
+diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+index b798014ebcb97dee688e29ccb34da916296c6772..731b57de3ba4336a22fee5957b6e2163360d78a1 100644
+--- a/net/lwip/dhcp.c
++++ b/net/lwip/dhcp.c
+@@ -30,9 +30,9 @@ static void call_lwip_dhcp_fine_tmr(void *ctx)
  
-   tftp_state.wait_oack = true;
-   ret = udp_sendto(tftp_state.upcb, p, addr, port);
+ static int dhcp_loop(struct udevice *udev)
+ {
+-	char ipstr[] = "ipaddr\0\0";
+-	char maskstr[] = "netmask\0\0";
+-	char gwstr[] = "gatewayip\0\0";
++	char ipstr[] = "ipaddr\0\0\0";
++	char maskstr[] = "netmask\0\0\0";
++	char gwstr[] = "gatewayip\0\0\0";
+ 	const ip_addr_t *ntpserverip;
+ 	unsigned long start;
+ 	struct netif *netif;
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 8741f65fe12e23cc30068506453a762533f8a67f..0fa33730a636727d0718625215a69002242810d0 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -108,9 +108,9 @@ struct netif *net_lwip_get_netif(void)
+ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+ 			      ip4_addr_t *mask, ip4_addr_t *gw)
+ {
+-	char ipstr[] = "ipaddr\0\0";
+-	char maskstr[] = "netmask\0\0";
+-	char gwstr[] = "gatewayip\0\0";
++	char ipstr[] = "ipaddr\0\0\0";
++	char maskstr[] = "netmask\0\0\0";
++	char gwstr[] = "gatewayip\0\0\0";
+ 	int idx = dev_seq(dev);
+ 	char *env;
+ 
 
 -- 
 2.47.3
