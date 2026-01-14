@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8440D3900B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 19:34:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C61BD3900B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 19:34:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14518803F5;
+	by phobos.denx.de (Postfix) with ESMTP id 54817835B3;
 	Wed, 14 Jan 2026 20:34:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="RAs61oTV";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mnwhvptm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0B2080433; Wed, 14 Jan 2026 19:16:17 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 78C5D8063E; Wed, 14 Jan 2026 19:24:21 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC0680325
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:16:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE5C80325
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ol3LiGpIIroD29hFCt5ZmjolhtV/DMRj6kIb3mSIStp9fsS6Ns7UpAhJzayrMIkTkwNvlk88ki9AqV24Ldh/tspRkK9AEhLsNl6j4D7GgIXukpNWOiOBpF7i8bRrOx2L+PbXWovzxzDo7PSq3ceNAF4AgfUtYZJH3gHda24wSJxFUltNmiPGpdQZU7zyFOS/axJMfAePWtE91RULh+GdiLjOka4V3olJ/day00TsYkukYS8XocbBTPq1Ft27VM0ylVZSREYInHAkO5TFJjlreCmjuhHU16PyaMotKK/46l6YSBi5ezBed1tgyMdoEN8VIzwZfvTLor8kwMyEZGsmVA==
+ b=yJME2OuKrB4PTbDp+Q+1WrTD/olRzqOGu3kfUCBz9qqItlYozKa//NEihLATiXu0hKaeoz57sJwDXo5hxtviB+VnJ7FTkkz0VGGAiiZOYSU1AV2k2XX0jsn5azrQ3erKzmoqAgcFGC54Sg9iX/7dnhbfWtSsWG3RIlnpxkDHtssBidxgD/Ni3DgQaXjNI35C6q6B2E57hu/Enm/f89RRVbRXgW+D7Cr1Vl/b+IMVh7N+7gVH6vrBfNtQFyBL1DSlUeigdwHXgzAUU/Sw3pLLrEmUwzPDn9BqRr5kFEhP8FtE2BX5ypEzk+rduSYuIomwpc068/hqTJz8ILtxUJQeAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aROJNaRuSU/AzJLQIvTDj9VUVnapNH3Xp2O+k7FoUDk=;
- b=xUylcnog55K3ZayWncs4HT6BA1QMkvwxxpALmlqRBUxub18MVTm55SUGyLL2Fme7CWH93/j3cruq36BCw/YGiqLu9esE4KyoJ9cm3QyxvMNaR8sl3AdTBpeZdog2cOVS1qMmKh7UXuUyuZyROVw+k6T7JYoTbm+o24ZzGf1my19A2uY5AMAjkaO14zsdmF/33M4I8RcQbyi+cSVc0Wf8THL2D5z1wRydaPLGF+JrwMG05sZzjz98dwQ8x4DpEWTfJ77HgtHmmzTAPIoXKuk8TNSZECiT83JPKtCjyRWi1onXc83m7X9C75iROuSxz6E6rPqf7+BdvaTWzFU1oTWCvg==
+ bh=zxiVYXgr2jrmMC2LXfSyp3zFpS1WH8ttFMJmE8g8960=;
+ b=OVwT09y/kXUfyIY2ydtPbqgmGSNo224VhgFmQH8QdgdjDFOPnrVkvMEgi3ZX9LWfupv5ySZ5jnAk1eIIbndkj8Wd0eDy4QI9czMtRlGalL7m+Ko8T0yeRVvr0brXOaFIQmTo586awgNIfJcfohyDdacClIh+Nr+/Wz8KC5IuOmqHY8mZH0qy5LmW+JwWB5ZvOr/F0ttUGbXKfBstP0VncM+1wMcTmgQtpHDAEei6PvBzQ9o7igMHsHisaVwpjjaYPbsGSrs7UhoWR74b2OIWTIvOZ9XYJg7APgOPMI14iJ3IILixFxKBhFL90JQjw9ETxeUKud0e6xv96VX5ZKwjCA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aROJNaRuSU/AzJLQIvTDj9VUVnapNH3Xp2O+k7FoUDk=;
- b=RAs61oTVm16va9y8a7KXlonz+7FOw8PZqOJ0tJAnyC9/6R2bKNy7SlQqnHlGk3+t4op34yHC3MPgIKJF3tA6SWRxBdsIIaMGUGMQr2uMcTJy57R5TisZeAnbXIr/y7y1QHQWqJFHX6sQjpYgUaSPNHvArm9aaSGCL1unnhVBFpo=
+ bh=zxiVYXgr2jrmMC2LXfSyp3zFpS1WH8ttFMJmE8g8960=;
+ b=mnwhvptm+z7x1vXn67iaC3GG7sp5+BiV0m9o2ipvm0kCzJL6386s+JWc1ySWyw3PcGt+3tMJpT8Xd+bsElWxpx4WBbICXYUGdiUOCyUED9e3W90I62ScbEVPWyeiZAyNmF0ca/7xqlE5fZWatORm7t1cPtW/nCKwTtUZI3xCCP4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by AM9PR04MB8969.eurprd04.prod.outlook.com (2603:10a6:20b:408::19)
+ by AS4PR04MB9435.eurprd04.prod.outlook.com (2603:10a6:20b:4eb::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Wed, 14 Jan
- 2026 18:16:12 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Wed, 14 Jan
+ 2026 18:24:16 +0000
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.005; Wed, 14 Jan 2026
- 18:16:12 +0000
-Message-ID: <e28f332d-72a6-4bb0-82d7-103118410e2e@cherry.de>
-Date: Wed, 14 Jan 2026 19:16:05 +0100
+ 18:24:16 +0000
+Message-ID: <ad431bd8-7c0e-41d3-b079-14ab5c82b7a7@cherry.de>
+Date: Wed, 14 Jan 2026 19:23:46 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] spl: Make UFS available for SPL builds
+Subject: Re: [PATCH v4 2/3] ufs: rockchip: Add device reset support
 To: Alexey Charkov <alchark@gmail.com>, u-boot@lists.denx.de,
  Shawn Lin <shawn.lin@rock-chips.com>
 Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
@@ -96,113 +96,113 @@ Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Elaine Zhang <zhangqing@rock-chips.com>, Joseph Chen <chenjh@rock-chips.com>
 References: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
- <20260108-rk3576-ufs-v4-1-e8e67649f3f8@gmail.com>
+ <20260108-rk3576-ufs-v4-2-e8e67649f3f8@gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260108-rk3576-ufs-v4-1-e8e67649f3f8@gmail.com>
+In-Reply-To: <20260108-rk3576-ufs-v4-2-e8e67649f3f8@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0009.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:c8::11) To GVXPR04MB12038.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0013.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:c8::6) To GVXPR04MB12038.eurprd04.prod.outlook.com
  (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM9PR04MB8969:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65f34798-84c7-44b5-6296-08de5398ff70
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AS4PR04MB9435:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65126d3b-ac14-45e0-1f59-08de539a200b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SmRJSFplWVJCSGVucGJYNDhYZDFOdUhCbjd0RkdYRlBWOXhWc1RDc0wwbnlC?=
- =?utf-8?B?cEhDaWRteWVyL0JxYlBaYllkT1FnSmNUV0JLMGN1Ti9ibDhnb1hWN2lBK2tS?=
- =?utf-8?B?bGJ0WlZ6VmU4UFdidTdNczdnV2pvdG9FeDYyeVlLK2g4dllwNzZWMStock4x?=
- =?utf-8?B?QWJEMnl2aGhqMHZIMTBmMGIycm9sRWFIODR3QTVFNUxwS1k4QXlXV3RIdFEr?=
- =?utf-8?B?TUxYZVlFVUJlTVg5L0NUTVZnNTRRdERFUWN2bS9IR2VKSVNVazVsRXdjUkp0?=
- =?utf-8?B?cVJacWRKSDFLRjdXblhIRW8rN2lOYmltdm1weCsrWEltYThEZkZReFRQc0Y4?=
- =?utf-8?B?UW9YbEM1YUJSRTBVVXdHaWt3d3JYZkpVKzBjN0FudS9lNUJkZy8yRUxaclQw?=
- =?utf-8?B?NWZUai9GcnVVT2pOTUhDRmdUY1RLQnNyemZ0cUZZSmhmUWRocVNpMXZKVFps?=
- =?utf-8?B?a0FtVW5FU0MvK1RiMjZ4OEprSk5XK2FmM1o0eDQ2R2Q0NHpITHk3dExNMU1y?=
- =?utf-8?B?eGV1VDZxUThic2hvSTd1N1R3enRNeXZqY3hSUWFLN3Z5cWhyRmFiTUZjdDNu?=
- =?utf-8?B?TGE5aTN4dGlsc3RjSE9pWUQ5ZkQxcE10Ni9mdndYU1ROQWJ2dDczTjlEaVZy?=
- =?utf-8?B?cUxnWDhVdm9RZjFvLzBTakpJaDhaQmIyVG5YSWNtamZJaS9iYm9tUjJqbzVQ?=
- =?utf-8?B?SS9WNEdpWDQwZ0xZTGZUU2gyRU1hNDk0SHRiQjMwRGg1akFZR0Rja2VtQnpS?=
- =?utf-8?B?NkdQcDJrcWxoUTFRVjdyK2VhNnVRWCtnT0JQWld5S2x4NU9jWWRWS1Arc29w?=
- =?utf-8?B?Sm1mZDNiTHNmYm50K21DOXN3RENRRUp5Q1V4RGVYUlNOdUVBSmlRRkF3bEJD?=
- =?utf-8?B?b3BDS0N3UjBGcjFDeHJtbGczbzVVeFc2L2M0SGI2aktMV3FtSk5lRWR2MjIv?=
- =?utf-8?B?c3RJczdZZXFGWG1aSU1JMUZvSWE2YUplVmFSQzMwVmo5cDRGM0J0dXNWY3lM?=
- =?utf-8?B?NGJyS3ZQaDFtYmRrREVFV1hBa2x1TjBtZTZYWnMrNGw5YTBOMkV1UmlsWEFi?=
- =?utf-8?B?c2thU3YrRy9RZm5aNjhTSkhTdm1FWHZaUmJxL1FDZndFaFhvZ3VxS2xDZEto?=
- =?utf-8?B?T0JjZFdzaVBJQ3ZwblRlak41SHNva2ZsMnFWUmZ5d2V1Y3ZvWWdrVDN6bEJk?=
- =?utf-8?B?aE1uUTdhZ1hndG1qc3pPWWQ1V3BoUW1BdUhhTnM2OWliaTVsZkhiMjc0R3N4?=
- =?utf-8?B?NEdyUCtGaEV2TllUQi93SFhjdWk0ZGtYMGl3OFlLTFh3dG8xQ0h6Vk1taVZJ?=
- =?utf-8?B?UFVVclhGUUVtdEszaEczbThjOGNyTFZjclhVdTRwdlk0SC84SmFtbkFkUE1z?=
- =?utf-8?B?clJ0NkFPUlJueGM3eEI2aWdCQVR5SllVR1J4dkhReW8wVkFkcVNEdFpZVmpH?=
- =?utf-8?B?ZHdWeFY2dUN5VDB4cTNqbFhJUW14cFpNcmhybkxoY3QyaGVHSVByWkpXU1kv?=
- =?utf-8?B?VEMvaU1mdWdyRWM0clc4MUU5OVBtc0xBLzU5TDRqVyt1VmxzYnplbFB0SXpR?=
- =?utf-8?B?Q2Eyai9lRzd2d0hsWUYrZUlGWmJFQm5aMGw3ZXhrendyTzErQS9RS004ci9W?=
- =?utf-8?B?U3lBU2JlZkpBUW0rQlRIcFpMaHh6MjkrMllNcDd1c1V4emY1eGVGNjFUTWFl?=
- =?utf-8?B?bWlNL3BQcElKZG9WMFJIR0twZHN5QVlZd2tmRzRMYTlEOVlpWlUzdkZyZ2dM?=
- =?utf-8?B?VUt3cFROeVlwcjJLRlpOM0tqTzQwNEN4NFlrckVmYm5pbVJBOGw1b3ZuZVFo?=
- =?utf-8?B?bHluWnVtUlV5eVBhd1lqT09HN21ud1dIdUlKdEdRVGRueTZLNVBKbDcwbVVG?=
- =?utf-8?B?Uzl6TldLcTlSclFzSkdubERRT3JBRmlnaTM5dGF1NzdsNzNpL3VzbFhZb3Ez?=
- =?utf-8?B?R204YTVtNFVsMEhPQVkrWVJPUmlXanVkbDVqUTZEb3ZrcHlWeDNyK2xzZnpM?=
- =?utf-8?B?cEM0aFFDZ3JrUERrMmdkbytKZW0xMElkTkYyRnpIejUzVWUybGVFNEg2V0dk?=
- =?utf-8?B?d05LL2w3Q3RURWlUcmlTQVlzbFV1eEY1cFJhRlp2VXFGaE5MN2hac1NPOXdL?=
- =?utf-8?Q?AF9k=3D?=
+ ARA:13230040|376014|1800799024|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHBTZVVlVlVSdkJBWUd3VEJWUWZIbGpETlF2MERXa1pkUzgxVHJhRURjT1cz?=
+ =?utf-8?B?L0hSNWZEb2VLcThkREFnZmJIVjhJR1BWak80Y3NUQ3VJOGZzMzUvV2hoUjNx?=
+ =?utf-8?B?M2xjczdpdkJOYm9EYXlHbHRkc05TUUFhZ2t1KzZ1ZzRUQW5HOWV4VUlMVnkv?=
+ =?utf-8?B?TERmRm9ud2V2cUpaQloyMC9oYVNFTXdld0F5OFBRR2FmS0tyQjNxbWMrTGtw?=
+ =?utf-8?B?OGJvbzFxM0tGV1FvU1pqYXZQWHhQRG9YbkszMkNKKzhBc0dNQU1HWjNHYmhs?=
+ =?utf-8?B?eDl6WkFTVVQzK1hKSno3b2Jma1QyVlliVTlyS0VSazJPYWlSZFdlS3MrWTU0?=
+ =?utf-8?B?L3hXOUk5R293WlpYejJ4OHJqd2M0bkFSdTc2dld2RkNWMHVyK3lxQnZKcFRH?=
+ =?utf-8?B?M3QrUStJd1djNDRTNlR5VjNuR3haa3prYnYwbEVZU2RsVjMxMzJ6dmp0NDJr?=
+ =?utf-8?B?Ykt2YmwyelJkQTVodkxGNERxeVpuUytTWFVrVzEwMkpEWE55ZUhlSVRLSVRR?=
+ =?utf-8?B?akNHNDlXUSt3U0xYMlY1bVNjZ3RaVG9BVFRpWGxJWDlmaHFZZHZWYjFCYy9Y?=
+ =?utf-8?B?V0tLMVVwem5ueER1Y1poOXlIc1dWaGFJU1VLaGdyd0h0Ky96TEx6WmhpdUhH?=
+ =?utf-8?B?ZzRURVcrZyt4N01XRnBEOVdYM1ExTTRJVjR0bVZlQ3RmSHRUTVVKdnR5U01V?=
+ =?utf-8?B?WmlCVlQ3NmFIN2NOS3g5U0ozTFVpR1k0dUg5WWNyQXNIYU4yWWF2SGZTcEo4?=
+ =?utf-8?B?a1piMWlZZGVIbmVCankwVEhaS2VKSXR2R2cwKzR0UnA0QWxuakZCdDhNQXdO?=
+ =?utf-8?B?b2RBZ3FEbjZtYm5iZjRBLzBuVnE1L0RadUtaRm9tUEhmT0V2TGEvd0xMa1Jm?=
+ =?utf-8?B?enNUZUpkZlF0T2RqZDErNFV5OXc1M3JZeHlxV0ZCbEdoaTZHZmYvdVlTU05I?=
+ =?utf-8?B?eGxzYkczNk1ZUUJrRzZMVUFtSllpYi9HS3dxNWdQS0EvbWVNZkY3RFlPTW5V?=
+ =?utf-8?B?RHVxenh0ZnRmYWdLc2JLRG9OZkdQNjRTc2kxUXNQa2RRM3p5VDVrenRyRFJY?=
+ =?utf-8?B?M0MxNGZpbjVTdVNMdVR3T3hZNTg5QWhsaVFPTS9UTDNjaFZpek04UTN1OVhP?=
+ =?utf-8?B?ZFdTWms2cHJrWlZIaDJjY094MGRrY1dXa3k2ZlBpSWFQVjM3UmRSTVZoS3U2?=
+ =?utf-8?B?Q1JJQlF4TXhSbldVam1uR0dZZ0lhcHl0Q3IxZ1BqenJMYWsyOFlCUExURTl5?=
+ =?utf-8?B?SXJ2bURBQTRkRnlkb0hGVUFLRkxzUG05T21VUnN6d0hKQ0RGeXNsQTc3SE9L?=
+ =?utf-8?B?L09LYUp0cFpTNE5xN2hvQ0JEbFNxMnd1ME54aVMrOEJudXlHZ0djWUtaMjBr?=
+ =?utf-8?B?RWdOamJXbkl0Um1PUE1lY0ptbk9XdUhXSzJyUUVLTDRyb0ZFckJlM0JLblhk?=
+ =?utf-8?B?Y0xQaDhhZHpwMUMwSTdoT25hdUpxNmFlT2IvS0dOMGw2SGNEMXNXSm5VOXRW?=
+ =?utf-8?B?eUxtZ0FlNmRqdXR0ZFJ4YmJEeDkzM3hsTldiRWQzVHhNNTlaaW1ZQWJiQTBj?=
+ =?utf-8?B?WXhXbzgxK3poQ3U1MWhabHhCanpzUU9VeHdmTzNHUHl3cHVUTzFyQ01WeDhX?=
+ =?utf-8?B?cmxBcUdqTGdlS002a0xkN2FKdUNPTGNHRVhDbUdrUjEvanI3eGVjMTRsV2dQ?=
+ =?utf-8?B?WUptUkJ1OHZWNjUycmo1WjFzVkNZYTJHbHlsSzgwUW01UjRaZ2NQQUkwMEY3?=
+ =?utf-8?B?Ly91ZFpteVRNVzMvcGQyWkZQMUhHS1lzeEI5RVgzYmtQcjEzOGFadDcvaWhi?=
+ =?utf-8?B?Z2lrZFpobmF4RDhpN1YxS2IwUlFQVFdBd0Y0bjE1ek80RTFIN3BoMkI4dXBO?=
+ =?utf-8?B?cGxNWnAvcC81UUViNkxCQkxUaWJhQlA0NUZacGV0UXhGelcraFMvV3oxSWNu?=
+ =?utf-8?B?eFZTanp2RlRTd2lWbHFqZlIxVDBaczRPOU1FSDk0eVBnVmN4c25ibTVOaVdL?=
+ =?utf-8?B?VlpyZnFQSHIwK0V4SXFCQkdQb3RzbG9uQ1k2N0xUMVhhWkpCTUFmMVJ2aWpw?=
+ =?utf-8?B?OXRKL1U5UDRGK05pN0pnUmFlQ1hWQU0vS1M5clBHejhwWXJIS2YyMlRTUEdx?=
+ =?utf-8?Q?YRx4=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024)(7053199007); DIR:OUT;
+ SFS:(13230040)(376014)(1800799024)(7416014)(366016)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OUdydTNmUjMxaTRrSG1MUEVaNmFNdTJ5R2pNZFJKYXZpTzFkbVVQQzN3MEZQ?=
- =?utf-8?B?ejQ4SHIrQVVDT0xmVGxwVStWZzFYNzRUSW9rK0VJRDlBSllTdHlxWTBuME1o?=
- =?utf-8?B?V01SQ3BJdmU5cUZlTERIRzlnYnVycGlQYnhWS0pHYno3UnBjVWZzSVVrVXVD?=
- =?utf-8?B?NHNPR2E0c0pIYW9mRUptM2FOSkhSWFAvWVY3eWpoZVkraHNrNGdWcUIvanZt?=
- =?utf-8?B?NHJwVHdEWVB6RndIQWlkR3BxbklJcGRKUm9GQ2Q1NWpqRUFuVHRpK3BmaXJB?=
- =?utf-8?B?a0xUeUJYcXVOSXZiKzhxYi8rb3RzczhJQmpqMW50bUFvbURlQ1NBU2dwSi9Q?=
- =?utf-8?B?UldxYWtHWjExeWVFbjVqZWY2eGIzOXh6N2ZyOVhLcGp2VFFnY0RxR0o1R3pZ?=
- =?utf-8?B?WWNMK2tZVmpFdzRzUktFcEp6ZWoza3pKcFl5aGhYenNsaWl2eWRTdzFLVmJH?=
- =?utf-8?B?b05sUjk4V1BjemN5RzlCbmozclhFKzlKbUFYL2JOcExmUmJSUk1EeEgyeVdp?=
- =?utf-8?B?UjZQeTdUYlJqU2xTU0lDMDVRNklNbUNtMG1MajFKUGNxS2Roc2NTSVhBdk0r?=
- =?utf-8?B?SnZBem1GUXEwVW51N29RNXhtYWhTWWpmVkpEdHkrTzlkYzJadzFVR2FmWW5F?=
- =?utf-8?B?cnpjS3pDeHE4RFFEY3dRVTRmc3ZZL3RuOXlzcnkyTVRqdWthREVDc0xIL1BR?=
- =?utf-8?B?VnNHdXVUNlNBLzJ0MGJSWlBjajBpVWpjMU5ZTnVzazJESWFXa0F0QytSWExU?=
- =?utf-8?B?T0Y0c004RGVjdEF5VkdaamNMb01hK0Y1N3o3QUVSSE13KzlGeVYreTBibXQ1?=
- =?utf-8?B?OWNYY1ZnLzZJclYvZ0twSGlkNkNmQVhkNEZHTFBUdHREb0ZVRWh0TWJOa2Zi?=
- =?utf-8?B?bE5yc0krU2t4dVovVktvSWx6M3dFd0tPRTlqdkg2VUVDbkdrcGNtU2FjeXZH?=
- =?utf-8?B?ZHpWVDBBVVVtS0ZEbHFZWG5PalI4cTVkM0FkK2d5c21TbFozSCs0dUR6Q3V5?=
- =?utf-8?B?ZDN1WHJFZ09iTDNFVzdMaEZ1T3lBcitYRHQwZGtKNjhDcElFY0NJZVVVRWVo?=
- =?utf-8?B?OHdNUGxIaU00L0lGOVhlWEFzNEFzU1lBbW9xYmRka2dqYkt0Q1AvTnlWVW1F?=
- =?utf-8?B?Qy8wZ1BtN3lzOEtRNUF0MU5PQzZySHJienh3UXdrbjFXMG0zWkN0azNZanZm?=
- =?utf-8?B?RGF2VmZNVjBVc2tmVy9QTVY2T3IwSDVNOHBMS2tVUEtvNzRmK1g0ZnljQU5U?=
- =?utf-8?B?Y1NKZXhsSm9MekUyelI0U09UcGpZTUlQQWZQL3kvS0NKNVIzMUxGWGlzOVcx?=
- =?utf-8?B?Rlc3cW9Za1NXSXNlVDhaV09QZ3IwSDBjbGY3R3B6WmNvRUZ6aTFhM1ZkbTVt?=
- =?utf-8?B?eDdNdklPQnhyY2s2NDZXZGdYbmZIS1ZOcjlFa0w0NVJOSUtCMXRYSkJiT0l6?=
- =?utf-8?B?Nkw1YXhHNzQ2WEQvVlhqLzVwUzVnWUdhc1FRc2ErODdtR0ovQ0lmU2RBSHQw?=
- =?utf-8?B?d0M0aXFxUEdHaS9yV3pZZmNTc3VVNE5rRGhJSm5USk9mRlRaYW85TzZTeFJs?=
- =?utf-8?B?b3VORm8zWGlGZ0k5OFhSZUVCOGtjeis5cU1lRFBXVW91U1F2dlVjcS9YZ0Z3?=
- =?utf-8?B?bXVraDYwdVJjY2xVTUhsdHdiMThJVUloOGp0OVpMa3ZDU3F0U2FNMG1qa1Iy?=
- =?utf-8?B?RDB4SzNWY0l1bG5PU2doMmVEbmVLWkZjdnNZS3M1RjFTbDZnRUZ6QnJhTmVL?=
- =?utf-8?B?cTZ1Q1hZaWRVb3JNU0hIMjA4NUZ2TXNkRlZyNmQ1QUpQZVV1NU1TQVA4Si9o?=
- =?utf-8?B?ZERZTHJuRnJMcTVrcVFhZUFaczRrYTY3TWJtQXV4MmVYRm1ldm1oRkxLbFFl?=
- =?utf-8?B?ODYrWmFxSk5NQ3RJM0tLZDVYSmROeXhIVGQrTVRkbUtXdFplV2lsVHpiZG5Q?=
- =?utf-8?B?MVpzM1NOY0UzQS94b21PMGdKa2wwQTVtRHIzMXl4ZnV0Z0xFU0hrT04zMjJj?=
- =?utf-8?B?UzY1MnovT3ZMQUFkMmpDWTI3ODhOY0QwNTVIdnBrdDN4UkNKSGZ2VEJjK0NF?=
- =?utf-8?B?MGdCa2E5QXA5RUUwbUJTT2FFc1dvb3pQTWFleHdKMElORkV2VllMeTRqd1pa?=
- =?utf-8?B?WmIvRTJJaEJ4R0cvYzhsb2dsUUNqR3A3VGVNR1VzRUE1NWlLbkpETlFuWXJz?=
- =?utf-8?B?d2lzWVJRaDNXSVI3OHdMeEhxdENPZ0hzWThlU24wNlFqV3JCdSt3ekY5SDRM?=
- =?utf-8?B?T1BZaGd1bGMyNmVyWkRlb2k2Wlc0NkhVVjhiNmU0SzEvYUZTT1BHNTNackNt?=
- =?utf-8?B?a2lFeVdoWUN4cklsZFd5RGtjYXlHUnNGRzQ5Zkd6SUFtbHBWOVR5Zz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ajJQclpUdVdYZGltNmExT0Vqb2RrTnN0cnVwUWlWWGdhTXhTYk16cVNIbEJp?=
+ =?utf-8?B?SzR6Nm5ScElVWEdNYUFDcmZYa1dobXVPajdxQ3ZBME9KMXhqZlQrcVF4RUkr?=
+ =?utf-8?B?ekFwaEVOdjE2T1pTN0Q5eVNuajJ1ZW93U3V1Vk9TTWh6WXk1NTYzUHZ4Sko4?=
+ =?utf-8?B?d0ticm1meTVNNk5JbTFzN3A1c05vUnNoTG5FRkQwZFF2ZXd5TkZZVnp1dDVv?=
+ =?utf-8?B?UDBrc1FPZ3VDc3JUSDJUT0dSYXl5dm0yYjd3eWdBalRqa1EvYUIzVTl1dHFs?=
+ =?utf-8?B?N2VmV1pvR3MxaU8yWVRyRGFEL1BXTFVSRUVQdkczWXpnK1RMdUUvZUppdmR1?=
+ =?utf-8?B?VEJESFJWMGdHNjhuUGt6ckdXeGZwMTZOdlVOV2Y4cUF5bVJoV2IwakFrL3hn?=
+ =?utf-8?B?L0RWMGw0dGMvT2NDWWY4d0FNOTJjRnREcUd0MmppKy9xakFzM1o0VjJ2UGZE?=
+ =?utf-8?B?QUZyTzU2eVA4WCtBeDh2YkI5UHBXUy9FQ0xVeGZlRFlwMnpiU1ZIdWR5WFh3?=
+ =?utf-8?B?dDg3V1BmT1MweUlMTEdET1Mramg0Uk9qZG16eWJOcUdTZnR2aWVlNFduelVx?=
+ =?utf-8?B?bEphVjZQWWRSdHdIWGVpaEY4SDY0Tks4MmtxY3A5ZlpqbWFJSVBodXhsSHli?=
+ =?utf-8?B?ZHU0dGFLRUx4MHkyaHQwa3NsYVc2U0dXb2VONUt5OFY0UW5qVVE0S0NKczc0?=
+ =?utf-8?B?VHhUNmlKSStIRytEUm9VeHg4YzNPb1R3TEt4VmhRSTBaOFdVNzJLWm0xVy9Y?=
+ =?utf-8?B?UDhXemxVbjdXRit3MkxjVVN5UlUxY1lzdTJUN000WGdmcEdVelJWVDk2c3ls?=
+ =?utf-8?B?eHFkVDNIbmJ0UTgvbWZYVWZ2dWdOWmFBQkhKN1V2NUhyaFhHTGZtNi9FRFl4?=
+ =?utf-8?B?bU8yOHpGNG9FOXVMdlVodXF0RUhSemE2bWNCTnduY0g2TnpCZ1g3OVlFVmlh?=
+ =?utf-8?B?cmxncFlLUjUzTElIand4bHhQSkxtMUNiM1o0TlN1bmtrVGNId1JINUczbWRR?=
+ =?utf-8?B?N0Z6OUNqZGZnVCtZTFlnSFlNdXFydWxiREpLak9VclJZWWhVMTkvVnNMOUVI?=
+ =?utf-8?B?eE5iZFVyUnB5UVI2WEl4R0I4UEpYZWVVSk9kek9hN2ZJYmVlMTR6TVBzUjk5?=
+ =?utf-8?B?QldiU1NsQXdXVmdGam8xdEZKeGxnU25NUG43UEVnVG9vcStxMkExY09lay9o?=
+ =?utf-8?B?R3FseDdscjR1bWJ1bC9xcUhjZzUwVWoxd2FTZGpmUWxML08rRWNuNDVvUjRy?=
+ =?utf-8?B?NDloN2xXNGJWZVlDUWpOQjVCNTRYZUFRMjMyaGlCVE9zMGFwZTdqSzJjR3lV?=
+ =?utf-8?B?aTE5RXRyMjNEWXZGUCs0QTFtUWh2dEdBcTdpQzg5MUZTSTljVXJUclRUcndJ?=
+ =?utf-8?B?aUd1RkRxTmh5SzBBaUlzalJYbmN4SVdaT2U4aE1QMVNxK0RUTWxyWjIyUjU0?=
+ =?utf-8?B?MjdsS1Y5TTRGbUtiQll3ZC9wbzNHamQ2TVRyZEFYV0pzVG9tendqMnhyYUYz?=
+ =?utf-8?B?VFJHdGI1RXBTSGpvVXlaRm14TkhmdlJ0Y1RFYlVOTi9oSmVWQVNYNjRsSkRp?=
+ =?utf-8?B?WkpONFhRQ0JLN2xTOTBWRzdmb1VyYytnQlZOS05TUjV1Zm1iZmpJbEpwUnR6?=
+ =?utf-8?B?NXBxandoZzY4eWQ1MGlOS3EyMlFMbFdIdXlLQkxISUl1QTlMd2hWUHZ4SVoz?=
+ =?utf-8?B?R3RYbnJuR0tWZ0FNdmVkYm9sSS9ZSjJDa0dtWENOa1lwbzNITlpsejMzcUhh?=
+ =?utf-8?B?UEpwa3gxclAyQThqUko3dmRRNnBkQVJmb0RwNW44dHRjaDVoU2RWamNqWlQ0?=
+ =?utf-8?B?M3k0d3Ayanl4OGkrVE1QZk9OSlhXZDA0aXhQVy9RdUcvZXJPM0gxcGpYWlVZ?=
+ =?utf-8?B?ZzJEMWRwNGhEK1RkQmJIRHM4OURsaWp0UnZ3ZjlEUzd5ZHdUWlNBMnpIQ0tq?=
+ =?utf-8?B?Sy8vUWhwNTM4MDRySk53ZlRsaUhyMHdRWER1OE45NGMxT0FrNVd1TC9FQmpB?=
+ =?utf-8?B?TzNHTnY0d2dhS291ZXB0bTJNNG94SzBpaWduWTJJZ0YyQWlMZG9HY3BqS1RV?=
+ =?utf-8?B?VTRCcGwraUtLVCtKeGg5dm4rakxLdWl5SlNzR0hRcW5QRGd3cEQ2TXFJNFNQ?=
+ =?utf-8?B?UDdpRGhWd1EyODVyT1ZQaHBmMGZqeFRyOExqT3hpZXdHZnZaU3FZVnRMQjNP?=
+ =?utf-8?B?MEdZM3RkTHdlWWFMQ0YvV1JscmVuN3Q1MGhPYllPOG5DMHhHcnUyS2pNbnNo?=
+ =?utf-8?B?VHBYM1Y3UHcrV3ozUHNFUklCZWhzcmZBRjRFNGQ5dHlMZm5IQ3VkQkYyVnNP?=
+ =?utf-8?B?SDEwWjA4cFQ2NjhlWWtSRmdOUG9rQmlRb2t3R3VpMXV6RE1WU1VyQT09?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65f34798-84c7-44b5-6296-08de5398ff70
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65126d3b-ac14-45e0-1f59-08de539a200b
 X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 18:16:11.9621 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 18:24:16.1744 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YWe+J80dIGh+QGux7r/z27cbZm+la4tJPYereC6MfYilAn8dg24KKHB8ufwuC3pZurA2Th/dNJUYGuojindNcUATjGBN7lWXZIltnEy5HYE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8969
+X-MS-Exchange-CrossTenant-UserPrincipalName: t1d5J6ETUjQGwt0oi8dFicqUd0+1kdz11EZuTF8IWMVubtNQTVpDfXl6mTj+hgfyQwTaA03XcODmGTLecF0UeZ2abqr9Fr5Ti6SYJ0JUCPU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9435
 X-Mailman-Approved-At: Wed, 14 Jan 2026 20:34:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -223,168 +223,69 @@ X-Virus-Status: Clean
 Hi Alexey,
 
 On 1/8/26 6:49 PM, Alexey Charkov wrote:
-> Add minimal infrastructure to build SPL images with support for UFS
-> storage devices. This also pulls in SCSI support and charset functions,
-> which are dependencies of the UFS code.
+> Wire up the GPIO line which Rockchip RK3576 UFS controller uses to reset
+> the connected UFS device.
 > 
-> With this, only a fixed offset is supported for loading the next image,
-> which should be specified in CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR as the
-> number of 4096-byte sectors into the UFS block device.
+
+It'd be nice to say that reset-gpios is required as per the Device Tree 
+binding, c.f. 
+https://elixir.bootlin.com/linux/v6.18.5/source/Documentation/devicetree/bindings/ufs/rockchip,rk3576-ufshc.yaml#L70
+
+> This seems necessary at least for some UFS modules and fixes the following
+> error while enumerating UFS storage:
 > 
+> ufshcd-rockchip ufshc@2a2d0000: ufshcd_link_startup: Device not present
+> ufshcd-rockchip ufshc@2a2d0000: link startup failed -6
+> ufshcd-rockchip ufshc@2a2d0000: ufshcd_pltfrm_init() failed -6
+> 
+> Fixes: 76465ce21ee4 ("ufs: rockchip: Add initial support")
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Reviewed-by: Shawn Lin <shawn.lin@rock-chips.com>
 > Signed-off-by: Alexey Charkov <alchark@gmail.com>
 > ---
->   MAINTAINERS                |  1 +
->   arch/arm/include/asm/spl.h |  1 +
->   common/spl/Kconfig         | 29 +++++++++++++++++++++++++++
->   common/spl/Makefile        |  1 +
->   common/spl/spl_ufs.c       | 49 ++++++++++++++++++++++++++++++++++++++++++++++
->   drivers/Makefile           |  1 +
->   drivers/scsi/Makefile      |  3 +++
->   lib/Makefile               |  1 +
->   8 files changed, 86 insertions(+)
+>   drivers/ufs/Kconfig        |  1 +
+>   drivers/ufs/ufs-rockchip.c | 25 +++++++++++++++++++++++++
+>   drivers/ufs/ufs-rockchip.h |  1 +
+>   3 files changed, 27 insertions(+)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 27ce73d83f48..ca31e57f018a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1861,6 +1861,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
->   M:	Bhupesh Sharma <bhupesh.linux@gmail.com>
->   M:	Neha Malcom Francis <n-francis@ti.com>
->   S:	Maintained
-> +F:	common/spl/spl_ufs.c
->   F:	drivers/ufs/
+> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+> index 6c75bb2a0790..30b0c87798e1 100644
+> --- a/drivers/ufs/Kconfig
+> +++ b/drivers/ufs/Kconfig
+> @@ -76,6 +76,7 @@ config UFS_RENESAS_GEN5
+>   config UFS_ROCKCHIP
+>   	bool "Rockchip specific hooks to UFS controller platform driver"
+>   	depends on UFS
+> +	select DM_GPIO
+>   	help
+>   	  This selects the Rockchip specific additions to UFSHCD platform driver.
 >   
->   UPL
-> diff --git a/arch/arm/include/asm/spl.h b/arch/arm/include/asm/spl.h
-> index ee79a19c05c9..dd462ea6ad82 100644
-> --- a/arch/arm/include/asm/spl.h
-> +++ b/arch/arm/include/asm/spl.h
-> @@ -30,6 +30,7 @@ enum {
->   	BOOT_DEVICE_XIP,
->   	BOOT_DEVICE_BOOTROM,
->   	BOOT_DEVICE_SMH,
-> +	BOOT_DEVICE_UFS,
->   	BOOT_DEVICE_NONE
->   };
->   #endif
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 4f4119f5806c..6a82260dd010 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1612,6 +1612,35 @@ config SPL_THERMAL
->   	  automatic power-off when the temperature gets too high or low. Other
->   	  devices may be discrete but connected on a suitable bus.
+> diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+> index 0384244387da..48444705fb29 100644
+> --- a/drivers/ufs/ufs-rockchip.c
+> +++ b/drivers/ufs/ufs-rockchip.c
+> @@ -5,6 +5,7 @@
+>    * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
+>    */
 >   
-> +config SPL_UFS_SUPPORT
-> +	bool "Support loading from UFS"
-> +	select SPL_LOAD_BLOCK
-
-Doesn;t this depend on CONFIG_SCSI as well? Like it does nothing without 
-it (does it even compile?), see changes you made to drivers/scsi/Makefile.
-
-> +	help
-> +	  Enable support for UFS in SPL. This allows
-> +	  use of UFS devices such as hard drives and flash drivers for
-> +	  loading U-Boot.
-> +
-> +config SPL_UFS_RAW_U_BOOT_DEVNUM
-> +	int "SCSI device number of the UFS device to load U-Boot from"
-> +	depends on SPL_UFS_SUPPORT
-> +	default 0
-> +	help
-> +	  UFS devices are usually configured with multiple LUNs, which present
-> +	  themselves as sequentially numbered SCSI devices. Usually one would
-> +	  get a default LUN 0 taking up most of the space on the device, with
-> +	  a number of smaller LUNs following it. This option controls which of
-> +	  them the SPL will attempt to load U-Boot from. Note that this is the
-> +	  SCSI device number, which might differ from the UFS LUN if you have
-> +	  multiple SCSI devices attached and recognized by the SPL.
-> +
-
-I'm not verse in SCSI... Is the device number guaranteed to be stable 
-across reboots? Is it probe order dependent? If that's the case, this is 
-not a useful symbol and we should be trying to figure out a way to make 
-it stable (via aliases for example, or using another mechanism).
-
-> +config SPL_UFS_RAW_U_BOOT_SECTOR
-> +	hex "Address on the UFS to load U-Boot from"
-> +	depends on SPL_UFS_SUPPORT
-> +	default 0x800 if ARCH_ROCKCHIP
-> +	help
-> +	  Address on the block device to load U-Boot from,
-
-s/,/./
-
-> +	  Units: UFS sectors (1 sector = 4096 bytes).
-> +
->   config SPL_WATCHDOG
->   	bool "Support watchdog drivers"
->   	imply SPL_WDT if !HW_WATCHDOG
-> diff --git a/common/spl/Makefile b/common/spl/Makefile
-> index 4c9482bd3096..e18f3cf09484 100644
-> --- a/common/spl/Makefile
-> +++ b/common/spl/Makefile
-> @@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
->   obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
->   obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
->   obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
-> +obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
->   endif
+> +#include <asm/gpio.h>
+>   #include <asm/io.h>
+>   #include <clk.h>
+>   #include <dm.h>
+> @@ -153,11 +154,34 @@ static int ufs_rockchip_common_init(struct ufs_hba *hba)
+>   		return err;
+>   	}
 >   
->   obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> new file mode 100644
-> index 000000000000..6b035db13c41
-> --- /dev/null
-> +++ b/common/spl/spl_ufs.c
-> @@ -0,0 +1,49 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2025 Alexey Charkov <alchark@gmail.com>
-> + */
-> +
-> +#include <spl.h>
-> +#include <spl_load.h>
-> +#include <scsi.h>
-> +#include <errno.h>
-> +#include <image.h>
-> +#include <linux/compiler.h>
-> +#include <log.h>
-> +
-> +static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off, ulong size, void *buf)
-> +{
-> +	struct blk_desc *bd = load->priv;
-> +	lbaint_t sector = off >> bd->log2blksz;
-> +	lbaint_t count = size >> bd->log2blksz;
-> +
-> +	return blk_dread(bd, sector, count, buf) << bd->log2blksz;
-> +}
-> +
-> +static int spl_ufs_load_image(struct spl_image_info *spl_image,
-> +			      struct spl_boot_device *bootdev)
-> +{
-> +	int err = -ENOSYS;
-> +	struct blk_desc *bd;
-> +	struct spl_load_info load;
-> +	int devnum = CONFIG_SPL_UFS_RAW_U_BOOT_DEVNUM;
-> +	unsigned long sector = CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR;
-
-Reverse christmas tree here usually (so longest line at the top).
-
-> +
-> +	/* try to recognize storage devices immediately */
-> +	scsi_scan(false);
-> +	bd = blk_get_devnum_by_uclass_id(UCLASS_SCSI, devnum);
-> +	if (!bd)
-> +		return -ENODEV;
-> +
-> +	spl_load_init(&load, spl_ufs_load_read, bd, bd->blksz);
-> +	err = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
+> +	err = gpio_request_by_name(dev, "reset-gpios", 0, &host->device_reset,
+> +				   GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
 > +	if (err) {
-> +		puts("spl_ufs_load_image: ufs block read error\n");
-> +		log_debug("(error=%d)\n", err);
+> +		dev_err(dev, "Warning: cannot get reset GPIO\n");
 
-Why both a print and a log_debug?
+No need for "Warning: " as it is an actual error.
+
+> +	if (!dm_gpio_is_valid(&host->device_reset))
+
+How could it be invalid if we managed to request it in probe?
 
 Cheers,
 Quentin
