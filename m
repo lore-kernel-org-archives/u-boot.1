@@ -4,135 +4,171 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B748AD29FEC
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 11:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CD7D2A00F
+	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 12:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DC888063E;
-	Wed, 14 Jan 2026 12:25:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DEF5802C1;
+	Wed, 14 Jan 2026 13:59:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="EcVVSyQ9";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="fB4w9bnn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D9DE8063E; Wed, 14 Jan 2026 12:25:26 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 42E48808AF; Wed, 14 Jan 2026 13:59:09 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C99458003E
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 12:25:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44A0F8003E
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 13:59:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JKL1VduWB1yWFL9oZuTwsrW6ykoBaFOO9+t6l4XSx0BLYweRepmNGGAxwCo3QMc4wxqEAcDLCWnbmjR/Cffu2f85VZhAzQ44j45iFtnw1TSz5OFHj8G65fFCE5AuXx9Kgrjb052CRv1On6sqUveOb7TnZbR88R/qLQ9EaJsUwuV1CTqjEuUyAYylfCzzo07FsdkBgovx1nGB52RlZok1sncuIlU55pAFdO3/lq9PUxN2e32zPtN1WHcnkI4GsbXoweEwP7J6nNR9b4CHwiQ2efsIRhF835lTjRRMP1zkcESaKalFoqwgKVfbRFzhnmInxtvvfO9Gt0FoFoeyJIt4/A==
+ b=aXYngw3eevn4cFOzuoSNJHoVZmBY+11YJjhy86s7m/kzNsCDr4TG69wjaLFYekp2SsgvfRTLrxz/OkUvJGRi5KkA38x7HvqkjyhAgvchvIDpLHMBucHVe42BEoIGATIwBrLENO+3HurfPoZG0XU+f4pP0Cwq3KmigozBcB863RpSXlsO4T2F7SyIrthbTvoKST1MOzl/T6hK7PmAxcxfE8AKngXw0yY3uICJnEDnTPw4+Uw5UbJmyA4e0/JyBAwbfOcdmOFezugDtXLkzpFKdyU8cjhTTvY8zDLN/hAj5DoGYzcYtr1PoYZDsAS8iFfcvfPL/m+FNbtZBA3ktkJ5QA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zhT/W8R3ER2ao3nV30clYFX630vITxu8SabAvOFDkzI=;
- b=IJ7tiCfY1Lo3tawthTi+woGzDQ8A8OTS83EmlrYhrLeo2hsLfa2G/EachYDhq4q3JXt/T77QTwtpfa2B+qr8s5ZbffqZNvyirIEv2OndSUSh5qsKjQZP7o2yOuFr6PzOpiNym8rspCwVuMWbaiXGoeoz84iQMKLMEt7FFZ9XEpM+5u135frJ0TfB+6lJMa/HPBTTyISQVyjMAb/c1eBy2gJuj6zRJxT32eke7KhBgywmtaqw62/UmIxSfKpgPVTQgyeI35po9qVOi1vNLfwv9Gc+O3+h12SL7gPBIa6+ZqViBfdPaikrF9i5V1uwYqdBf4vJeumxAA3CT8uXrKWYaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=Fxf+XN3lGVwd5JKDhMtJdK/UyjIEH9ollgw2e2dnojE=;
+ b=dA+aJYtb0YH2ftIVN3R2MfXQxLYeG7VEN7cd4FKXsC4w3mcPUcltO5CPihtEcR4DQ+pYhd2qixi3+T4MRPB6ZOFqG1wkLFeDcdJbATXEp+S0amvfmpAx+voQOrGFKVTEiuk5w9kaGxYqyNIP8WM5nqpJPaE1G23jMBHqItTgt9c5AXfT0gcIIByt0iaXa3Np9/EU12v+xULWo2XLgGbcxAvUvzfS2CFhszqtJqAN8hHPwIpbhcnYZxHj/XJiQtUwIBkfRK4qYyeSWm9tOgthJJd4DmE37I3IAeR+QP9q6follJI+II/NpLEyZbK62cuLUsmhOrUgvWSCfldIVPNG0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zhT/W8R3ER2ao3nV30clYFX630vITxu8SabAvOFDkzI=;
- b=EcVVSyQ9fya2NvKRg7QbLys7coYhkw5JOzh2Df6Ct2piUKDTzPJ694Osna380uZVyJGoHHKv5nJl+aiX7TE9Q3ZWB0oDM9AJ9ub2QHht45koT13oQRhMfnsqMBzNK7wagLYj4xit2QsLIbBpod0VJ7z3bXshvKm4r2vH1RHg3Dg=
-Received: from SA9PR11CA0013.namprd11.prod.outlook.com (2603:10b6:806:6e::18)
- by SJ1PR12MB6242.namprd12.prod.outlook.com (2603:10b6:a03:457::6)
+ bh=Fxf+XN3lGVwd5JKDhMtJdK/UyjIEH9ollgw2e2dnojE=;
+ b=fB4w9bnnHiUw8MmnjLjE/zm8X6ZJeolpFLTuNPIK8BdfqZDWlvycGFHoAVR1yIKLtIxnIIEyqAz3lth+/7JNePIncmEKeuWcyjfRWsyi/vmc3qMKNDbmvUzvWyVYmb84AUQjMNWTQAXapaWsosubxYgQtwMHDZUX8j7Sll564pg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DU4PR04MB12026.eurprd04.prod.outlook.com (2603:10a6:10:643::14)
+ by PA1PR04MB10144.eurprd04.prod.outlook.com (2603:10a6:102:460::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Wed, 14 Jan
- 2026 11:25:18 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:806:6e:cafe::fd) by SA9PR11CA0013.outlook.office365.com
- (2603:10b6:806:6e::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Wed,
- 14 Jan 2026 11:25:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Wed, 14 Jan 2026 11:25:17 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 14 Jan
- 2026 05:25:16 -0600
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 14 Jan 2026 05:25:15 -0600
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <Padmarao.Begari@amd.com>, "Pranav
- Tilak" <pranav.vinaytilak@amd.com>
-Subject: [PATCH v2] rtc: zynqmp: Add clock framework support with calibration
- fallback
-Date: Wed, 14 Jan 2026 16:55:05 +0530
-Message-ID: <20260114112505.2851622-1-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.34.1
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Wed, 14 Jan
+ 2026 12:59:05 +0000
+Received: from DU4PR04MB12026.eurprd04.prod.outlook.com
+ ([fe80::2c21:dc0b:a3c5:531b]) by DU4PR04MB12026.eurprd04.prod.outlook.com
+ ([fe80::2c21:dc0b:a3c5:531b%5]) with mapi id 15.20.9499.005; Wed, 14 Jan 2026
+ 12:59:05 +0000
+Message-ID: <aa20052d-a870-46ce-a666-06d58e7584d6@cherry.de>
+Date: Wed, 14 Jan 2026 13:59:04 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mediatek: remove extra gpio header
+To: David Lechner <dlechner@baylibre.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+References: <20260105-mtk-remove-empty-gpio-header-v1-1-01dc6c70eccd@baylibre.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260105-mtk-remove-empty-gpio-header-v1-1-01dc6c70eccd@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0246.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:af::11) To DU4PR04MB12026.eurprd04.prod.outlook.com
+ (2603:10a6:10:643::14)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|SJ1PR12MB6242:EE_
-X-MS-Office365-Filtering-Correlation-Id: 26a1f154-607a-4be8-b95f-08de535f9891
+X-MS-TrafficTypeDiagnostic: DU4PR04MB12026:EE_|PA1PR04MB10144:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2df007f3-56c0-4283-0e90-08de536cb291
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?I7K8ujXZZ33VXTXVh5+kCN7O7v9VX1GoBZeIIehldViw660E/rZ0Uw37dnLc?=
- =?us-ascii?Q?VfYIA7Ow7divtzkX3/NMv0c9Lh0w1ZPZKNlh3eFe4aafrJE26rYPHygdpvsh?=
- =?us-ascii?Q?817Z8CdrVx7DAhIfTENkfZnKogeg0AnAvJdC2U6eir54NoVHPyjhcmgEblDS?=
- =?us-ascii?Q?qcANH1lsyeShiCQp8y4EBWoslYCNoOUkvxL1zibVoU4aOUeXXvxj5TAJlS0t?=
- =?us-ascii?Q?KTc3w+18LigvQk/nIP/jlJJ9eq+GJ2eRBKFwZyzWqwS5ev1PttQvR7d9AynQ?=
- =?us-ascii?Q?t25quEYsU0Y4bFcVx2apDxWloOZ/b1AcBEVHYhLQClOEFtgWGO+t650JshEp?=
- =?us-ascii?Q?wsyPfHbGZ4NsWHEtfTWwPHHk8/Jd6Tkxq129Qk90WLuSd84W92U566/l9ral?=
- =?us-ascii?Q?s6+B+h9icKEWnSrSdKf74sIwvck1VIoC2POmMKtFM+PBbpI05JyyaPNOjPzE?=
- =?us-ascii?Q?GmgXEAx/ezTofVLVM0198F30crWs9Yy7SGAhaT/xWLZX5vkpOT/WBFoQuZVC?=
- =?us-ascii?Q?KPDsFA57fBhQTTHJAul0dLFSuErlcEEinCK0HspxMXFIl+oiBgzT+xahF7GD?=
- =?us-ascii?Q?sFqn9S/2oKNKQikXZSQeifNZGUiKxBzOJ5MgWGDOOuWZxj9rKKtOuozJ5wXG?=
- =?us-ascii?Q?ks6zbWRg+kdSNcFfQkWF4bF/SAm3gWzawjNaYVwal/mFMYgXB2MuSOI5J1Lq?=
- =?us-ascii?Q?BY+vQ8Sx4dGS/CDkP2s+R6PHZxbpjunJtUhVxID3XKqHWzCknN266h88VkVT?=
- =?us-ascii?Q?LSLC1u9FdV3BlSqzR50RR/duHVWFMvt3zCwWAv8rg5fCIe6pOK8cHRe1QJwX?=
- =?us-ascii?Q?kPSlnX3eBn/MF+3CgBt1Elfy5SLFYiCjElbvyqQ2CcODADDHWgGOcux5oNCB?=
- =?us-ascii?Q?4yBBvqwQtvSVT2WQVQGXPpjdExLn56VbVOgpIEl2BQWbeeY8Man48uB/J8dx?=
- =?us-ascii?Q?mDCjrs3+OFYyYI1oi1NwKtiZXl4HO/27HHalm7ppE7Uz5Ps4o8MFdytuN6nB?=
- =?us-ascii?Q?jdnXz/2D05F+dILPM8oWNf6FotqJgDXWt47EU+aYpuRbkBYmvx1KGFwJp87f?=
- =?us-ascii?Q?KSNkEhhVzRhm16KQhPwqjymqNFAlhUgomKTQEW7jvDGt98GkTaTZ+f5d/dvQ?=
- =?us-ascii?Q?WeCd1C9cke0OmDslrfwTKGAWkXh2flJYlAcQlrpu3jYe7pdy6Kfb7ccbC/tj?=
- =?us-ascii?Q?nBsu915HewjYSK1juiDtXFsogwt01W4FH8pVO3ko+mb35lPEE3BSJP+6H/On?=
- =?us-ascii?Q?BZ4cmC83rxGNB0blN6SDrdlZKA6NHlZ72mTXN0VgE1rkQKbLhBaOGNAwBzj4?=
- =?us-ascii?Q?m+kBwMXou19GMirJ7g5yy/jrHLFiPr5f4H4AgQvOWBGEBvQobqrgev829WwN?=
- =?us-ascii?Q?tXmYc1EeSHrFmcrJghxQbiO5J4pH+xNFsPTAWEhLVUEAAp9UMmyqr84m5f4u?=
- =?us-ascii?Q?+gYhiGQY7SMlyn8cHguRwGNn1b60nra4f817BSIsA3c+MkobvXIiplzZqVrr?=
- =?us-ascii?Q?WYS1EVaQ8V9Gp21HfnSe9wtYVoL/g43xG+60yE+liQVt5b5WKS3N6fOG9EkG?=
- =?us-ascii?Q?qIcvKg4L8u+YgI24Y/h/SsZDlCYAMNqiVix6gXJd8/aaOH0/JAGS9iptC06S?=
- =?us-ascii?Q?g6vwg6bNuy5M02VQj+FeIXMm5LGIJxEw+3uYF/2u/B2KGe8NKBpBB/KU5+jK?=
- =?us-ascii?Q?fe+tJg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 11:25:17.9193 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26a1f154-607a-4be8-b95f-08de535f9891
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6242
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?czArSlJsZGc4RU4vVG1MQ3MxQllrVFFBdGZ0NHNEbDg3MXpNaDdzaFVNbmhH?=
+ =?utf-8?B?ZW5rSFdaUDRSOHpjWjdxNWxkUGhLMkZQd2xzdlVQZ2pVSDJXVlRVMVNTbXF6?=
+ =?utf-8?B?a3dGS25vQWRzSzROTkNFWGdpeVlGa3JWeENpSTVrRnJDaTMvZVBqM3AwMWJM?=
+ =?utf-8?B?clBidnB5YS9Pd21PL0lpNEdwcVhPY0ZuNWFOcllyQTg2NFQ4dDRqUkxCR2Ra?=
+ =?utf-8?B?L3VzR05ITm1rcksvNWV1TmN1Z0FiK0J5UWRlbkxBUlRhYkZ6alRJbFJuTC81?=
+ =?utf-8?B?RlJ2OUhQY2xIY29LSmsrUkh3WFo0Y29BSk5nQUwvalNsSlNWOGFjbmIwUXZU?=
+ =?utf-8?B?eG5nckU5SjhvWDlybkg2VEFOSzdRcTc1RkZsSDA5dzFwT2tGR3YzcUgxNFpa?=
+ =?utf-8?B?WHVzbEcyN2YvcldodldSUnkvRlQ1SzU4Tld2OW5sMk9JOUVRdVVoYklleTlo?=
+ =?utf-8?B?WmptMU83aHVVZ3pCUTlBRzBEcjZHL2c0VTlYQk1YOGtSd3h1NHp0VFkzSjJJ?=
+ =?utf-8?B?bVdnUzhIMVk0Zzl6Qnd4V3VJdjk0Ukp6dThkTkozaVBOQ3BoVFB0N0xtTFc3?=
+ =?utf-8?B?bDVXR3BrV1liTklXaG5FQ2dhNFVFdzU0eWJ2VDBvVXpDUWtvNzB6V1ppcXlN?=
+ =?utf-8?B?TW9KWEY4eWtpWEc1a3dMTFYwdnJERUM2emJ4RUNqZTJaY1JCeVFnakIvaFpq?=
+ =?utf-8?B?aDk0SjFxeitNYldPaUJLMEp4RFVkTXBjMlNPdzMzYUVieThWaGFpRVVLTnFR?=
+ =?utf-8?B?dFNsVVptTmJoak1QbCt5SWdWdHRPZ1E3UngvcWJjUm5qYnBMYmRUd280dWJC?=
+ =?utf-8?B?TEJ2YWZZWDRlMmVrNjVHT2VlWmxZSlU1WUtDZTYxWENnVkkydGNQWlE4RVU0?=
+ =?utf-8?B?OTAxTHdCRXRHdGNibHhrcTEzVEpuWHRaTitYbDBkZU1oSDh2UlpESDF4dFBQ?=
+ =?utf-8?B?VEZWSXdHcElVaDZvWGczY3hBNzI5em41UktialRrS0MyVEEzeW9WZWtndFA0?=
+ =?utf-8?B?TXVmQlFraS95Z2t6S2NqWnE4L3BaUmthcG0zMFUrTFozeE9SRjhvV2VvTVZS?=
+ =?utf-8?B?UE9KTzgvcHRHY094UnE1MzFQV0lmWkYxeVZxemxvNmJZeS9maU5VaCtqUEND?=
+ =?utf-8?B?Wm10Mm1JWHBBSTRxU2FCNm54aURJTDRBUVNaQnpzYUFxREhXbnhlQ0dlZEpm?=
+ =?utf-8?B?Y2dXNEZOQkd3Ylh3RHJ5VHNYM1J4bkFFeE1Xb0dubFordXM3d0pwTWU3TFFX?=
+ =?utf-8?B?Z3JSUWNsUzVzTkU0Rkd4dDJKOGF2aU8rUHdLU3RNOExCcDExT2l2UDFSekov?=
+ =?utf-8?B?cUs4MTNlZnFpMjRBaVRYanIwc0VJSWx3eXRKSk1Mck1mU0s3UTZGcnVKYTFZ?=
+ =?utf-8?B?OW4vZEZnZEdaRVVEOExoZFluSmE5ckRXWnhqWWI1K1oyMFlPUk5lWG1UejRM?=
+ =?utf-8?B?ZEtoRlgyL3ZmUVZQd1R0a0hkTDNlbWZUWlE3VUFkRkFoSUo3V1d2Sitia1JX?=
+ =?utf-8?B?U1VnSU9EbVQrU0hvN1ZOTUNodGIrbE9aOHNDRWt6Z3pIWTd0ZUNBdStZR0lI?=
+ =?utf-8?B?d0hKalArS3VTTG51THpWendWMzBCaXNCNDJHYlI2RTlxVHFtVUNWSVcxbHRn?=
+ =?utf-8?B?MTEwbUswZ3RjRC9QM1VaekNTQUU2d3h4SlloWjVqaExFOWZuNWxBNVhsYVRn?=
+ =?utf-8?B?R0djaXF3RzdUS05VNDhaTHpFdE9Gbng3UjdTS20xc1ZqZHBCcUtPN3JqTE9O?=
+ =?utf-8?B?Y28rbE9mZUdTdXF2ZkdrT1pBaDRtRllYY0EvZDhhYk95OUdXbmRSNVZ6S3dD?=
+ =?utf-8?B?RXhDTWJVcCtHRHJhemY4M0FyaUw1eUt5ZUZXMHBwVHVQZUdQMmhuQW9PRWlk?=
+ =?utf-8?B?YXkycXdTNmRHcVBwK1Z3bTREdVNmNUVTcHVEcFVacEN5SlhlKzlNNHlXbDFM?=
+ =?utf-8?B?aGI4U0p3cjgwajVnQzBvaFJsQ2NKdzhzTjB1clRZNlExSUZEcnNucHZvVDN4?=
+ =?utf-8?B?YVNOZEJBVE5hMDRuWExVellHeUl5bUEranNsclNFMGVHa0FBdms4QmhPUm9h?=
+ =?utf-8?B?RmJHZEJuRUZBZjBxUXJ2OEVkNXYwUW94VE9SK3RuTFBjb3M2aVBZazVaeEZs?=
+ =?utf-8?Q?VBsA=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU4PR04MB12026.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z0o3bkYrcGcwYW4xZEw5RnFINnBudFlDcGxFdFg4cEJ3OC95QU91MTFnQzdZ?=
+ =?utf-8?B?U2F5S01KYitFalFzWlJLY3ZheGxkMXJUVVcwYjRVR2sxeVpvTTcwVnljKytr?=
+ =?utf-8?B?NmhOMEtPN0tHOXZ3cHNlMGFjNDErTDAyV2g2aWEvWjNrM3hPN3R2dTBOYkh1?=
+ =?utf-8?B?Z0VCMWFPbUVWN2MvUnpLb2xtYVZVK2lJOXc1cjBGbTRmbVhHNlNmUmpXenRV?=
+ =?utf-8?B?Y01ULzVWeSswVU94bzVmUTVUVG1TSGp0ZHg4d2pNNGgxUmFBMlVFeG1ianBu?=
+ =?utf-8?B?RXVqQXdIZ1g3dnlKdjB5NjAzOFU0Ulgvek5wMm05VW5NeFFRVWJPMXZ2OHpH?=
+ =?utf-8?B?R2RXVEF3SkowTDFrbFF2dC8xM0FHNVcveDBsb0RELzNXZEdadXgycm1yNDNC?=
+ =?utf-8?B?aW8xb0JRMzRIeXZIWWFYY1dzSktLYXNTcnRWSEVMQ3E5emI5cGhFSmtHTUJM?=
+ =?utf-8?B?UkhWaWpQOGZ0MlE5Vm9zaGtPNVEzL1FVejFzWXFpRjZJTzA5S2tYS3JhNlVF?=
+ =?utf-8?B?eTJEOFZOQ2Z1bUxuTkpkY3E3RjIyanRTamdicHQzcklnMkV4RXFoT0R5c21N?=
+ =?utf-8?B?TFErT3lydGJoaWZJRmtKaDhPWFZDNDR4NjRxK2Rxd2JCTlRsM1Z5aDRRbTJ5?=
+ =?utf-8?B?dnBaaVpXRUpjNWYzVjJxc0N0YjgvaGpOVnZWL2dwTWdYSjFuUDBBaEhadEt5?=
+ =?utf-8?B?eDA4eGk2cWNiTU1RRU9mZVNPd0ozbE1SWVRXYkxrcnQyYy9DQlBBTmY0WjYz?=
+ =?utf-8?B?YXRCZVRNTGxMWjErZURHRDlTSW50dEQ1L3kwR2E0TGEvZGN1OXczL1hENkRI?=
+ =?utf-8?B?dDFsalIvV29zWGFoRW1DUmxlVlVYNWwxUGdWaVZxTk9ROWs0bFZjb2NqcmdE?=
+ =?utf-8?B?R1lxZFJyektaOWtySXhpTDZBRU5MbCtsa25YWk9VcDAzUGs5YU9VTW9ValNr?=
+ =?utf-8?B?c1hmKzAydFlPWGkva0R4QXNKWWpBS05sMk52bmowVFdOT1ZRb3poZ0VXUlh0?=
+ =?utf-8?B?UVlsZ0lxaHFydGEzZkp2THZUUHVzTWlLK3RrTHBqYjZaK3RVSjZ3cEFpdC9I?=
+ =?utf-8?B?M3dRbVRYSG9rY01zWDJzU1dDYlFTNVBRZUhESnFiSS9WSWZiYy9EeVdqc1ln?=
+ =?utf-8?B?SlovbHFLYUdmMTNsbEJ4K0EyVDNIWEcybExOTWR1QWlUOHlIdzdKQWEvY3c1?=
+ =?utf-8?B?MXpKRDV1akxJbVNhZHZycFluTDNmLzZESk9xd20vd0hQbTNHSEp3RDdFQU1C?=
+ =?utf-8?B?QnJlS3dISUdOOHRPd05PZVdnblhDR2ZCYU1NbmhyZEUzYVpFRUwwL3gxb2Rt?=
+ =?utf-8?B?dXloYnI2cFFySmJNQTZrdkJZcWlVNUFDeC8rcVVEWnBGaFVmVmdBWHZzVW5E?=
+ =?utf-8?B?NXhaK1ZlQnVjdlhsSE9TR0M5UmR0SDRkMGxXZUxvWkk2THFxUlJ3eTFKRjJq?=
+ =?utf-8?B?bDE0WWlTeHNtbC9rd3U1eHZJUnRVQ2RtWWxyMDZXY2FLUFF0RUpmVE9iRXJY?=
+ =?utf-8?B?bDIwaGtJbjQvRXIzcmFCZFgrL1Z4Z2Jjb2FjL0pRTHV3d05Zc2doVndOeWll?=
+ =?utf-8?B?NFU1amY4YkcrMm9GZFZjTmEwcXFqdUdKd051SUU0WlN3VXplQ2FKNXU2QUFH?=
+ =?utf-8?B?dUs4Tm01Z0RYRXo4R2Y0RDdGQnZTZW5pR3hvSk1EMVRIdGZhZnhOam9KL3dv?=
+ =?utf-8?B?UFlDTHk2SmFHMmJqeTBIbVB2Skl1dUQvamFlZVR5R2tJcDVSYmJTU2VvNWVI?=
+ =?utf-8?B?Q0p1cHp5MFFhMmxUcEkrTUh2Vm5Dd2VtVWp5cXRaaG9zZC9qdGVSV0FZTzJJ?=
+ =?utf-8?B?Y1lSa05RbEt5VUw1bDIrMU1sK0hEc0UwdCt1TjJYZkduc0hiMEFDZmo5N2FI?=
+ =?utf-8?B?UjB4SzcvYktrbXlHMVMrNTVCN2ppWExHQlpCUllVUlBzaFpqTlhndGpBUG5Y?=
+ =?utf-8?B?aVdNTnJiTXZLeUhYV0EzQlhsTVh0MlZhcG1oUTI3T1JNbjQyZ1UwbnZyR3BO?=
+ =?utf-8?B?blAza2pJK2JXN1NMZFlPbmRjWUd2Mk1QbzVnVVp2UTd1ckREa3pLekRXd1RG?=
+ =?utf-8?B?WFZkZlR6QlNDZDI5M0kxaFFncHNrOUVaZEZ4N3hzUUVyaGpwQlBDTnE3QTdw?=
+ =?utf-8?B?SDE2dEU0YmgzckwvaVlvS3d6UGJzUndjOElSa0htUWhKT1NBWTZCRW0xTnFX?=
+ =?utf-8?B?Q0dlZUtGM1hPaiswQkpsaW92YXpoaEtZazdoUGJDTVdWOGQ1UmJ2SHlQeTFp?=
+ =?utf-8?B?K3FNR29JV0czeXYzbE9XTXVVUGV3Z1JtSnQ1RlE0SG90d0tVTlNWS1V0eThZ?=
+ =?utf-8?B?emhsd2VMaDllZlg4NGpiYlI3L3FOS3I5SEVSc1JQWlNxWUpUellLUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2df007f3-56c0-4283-0e90-08de536cb291
+X-MS-Exchange-CrossTenant-AuthSource: DU4PR04MB12026.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 12:59:05.2108 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: iSjiFLlHqnCSMKKRLiR2r2H+X+qQtNHgay6nYGh2oKj6fakmSVsp0XexD1ced/8833a/0XqQqoEMJer28ElioHf6hZKM7gRBENaqALa5GvI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10144
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,136 +185,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for reading RTC clock from device tree using clock
-framework also update the default calibration value to 0x7FFF
-as per RTC specifications.
-Falls back to 'calibration' property if clock unavailable, and uses
-default calibration if neither is present. Only writes calibration when
-hardware register reads zero.
+Hi David,
 
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
----
-Changes in v2:
-- Rename variable from clk_freq to calibval
-- Handle case where clock node exists but has no clock-frequency
-  property
-- Treat invalid clock frequency as error instead of warning
-- Move calibration validation outside if-else to apply to all code paths
+On 1/5/26 9:47 PM, David Lechner wrote:
+> Remove empty gpio.h header file and CONFIG_GPIO_EXTRA_HEADER on
+> ARCH_MEDIATEK. There is no reason to have these since the header
+> doesn't contain anything.
+> 
 
- drivers/rtc/zynqmp_rtc.c | 64 +++++++++++++++++++++++++++-------------
- 1 file changed, 44 insertions(+), 20 deletions(-)
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-diff --git a/drivers/rtc/zynqmp_rtc.c b/drivers/rtc/zynqmp_rtc.c
-index 15122a04838..938da4c0569 100644
---- a/drivers/rtc/zynqmp_rtc.c
-+++ b/drivers/rtc/zynqmp_rtc.c
-@@ -8,23 +8,27 @@
- #include <dm.h>
- #include <rtc.h>
- #include <asm/io.h>
-+#include <clk.h>
-+#include <dm/device_compat.h>
- 
- /* RTC Registers */
- #define RTC_SET_TM_WR		0x00
- #define RTC_SET_TM_RD		0x04
- #define RTC_CALIB_WR		0x08
-+#define RTC_CALIB_RD		0x0C
- #define RTC_CUR_TM		0x10
- #define RTC_INT_STS		0x20
- #define RTC_CTRL		0x40
- 
- #define RTC_INT_SEC		BIT(0)
- #define RTC_BATT_EN		BIT(31)
--#define RTC_CALIB_DEF		0x198233
-+#define RTC_CALIB_DEF		0x7FFF
-+#define RTC_FREQ_MAX		0x10000
- #define RTC_CALIB_MASK		0x1FFFFF
- 
- struct zynqmp_rtc_priv {
- 	fdt_addr_t	base;
--	unsigned int	calibval;
-+	unsigned long	calibval;
- };
- 
- static int zynqmp_rtc_get(struct udevice *dev, struct rtc_time *tm)
-@@ -70,13 +74,6 @@ static int zynqmp_rtc_set(struct udevice *dev, const struct rtc_time *tm)
- 		 */
- 		new_time = rtc_mktime(tm) + 1;
- 
--	/*
--	 * Writing into calibration register will clear the Tick Counter and
--	 * force the next second to be signaled exactly in 1 second period
--	 */
--	priv->calibval &= RTC_CALIB_MASK;
--	writel(priv->calibval, (priv->base + RTC_CALIB_WR));
--
- 	writel(new_time, priv->base + RTC_SET_TM_WR);
- 
- 	/*
-@@ -107,15 +104,6 @@ static int zynqmp_rtc_init(struct udevice *dev)
- 	rtc_ctrl |= RTC_BATT_EN;
- 	writel(rtc_ctrl, priv->base + RTC_CTRL);
- 
--	/*
--	 * Based on crystal freq of 33.330 KHz
--	 * set the seconds counter and enable, set fractions counter
--	 * to default value suggested as per design spec
--	 * to correct RTC delay in frequency over period of time.
--	 */
--	priv->calibval &= RTC_CALIB_MASK;
--	writel(priv->calibval, (priv->base + RTC_CALIB_WR));
--
- 	return 0;
- }
- 
-@@ -128,8 +116,44 @@ static int zynqmp_rtc_probe(struct udevice *dev)
- 	if (priv->base == FDT_ADDR_T_NONE)
- 		return -EINVAL;
- 
--	priv->calibval = dev_read_u32_default(dev, "calibration",
--					      RTC_CALIB_DEF);
-+	ret = readl(priv->base + RTC_CALIB_RD);
-+	if (!ret) {
-+		struct clk rtc_clk;
-+		unsigned long clk_rate;
-+
-+		/* Get the RTC clock rate */
-+		ret = clk_get_by_name_optional(dev, "rtc", &rtc_clk);
-+		if (!ret) {
-+			clk_rate = clk_get_rate(&rtc_clk);
-+			/* Use clock frequency if valid, fallback to calibration value */
-+			if (clk_rate > 0 && clk_rate <= RTC_FREQ_MAX) {
-+				/* Valid clock frequency */
-+				priv->calibval = clk_rate - 1;
-+			} else if (clk_rate == 0) {
-+				priv->calibval = dev_read_u32_default(dev, "calibration",
-+								      RTC_CALIB_DEF);
-+			} else {
-+				dev_err(dev, "Invalid clock frequency 0x%lx\n",
-+					clk_rate);
-+				return -EINVAL;
-+			}
-+		} else {
-+			/* Clock framework unavailable, use DT calibration */
-+			priv->calibval = dev_read_u32_default(dev, "calibration",
-+							      RTC_CALIB_DEF);
-+		}
-+
-+		/* Validate final calibration value */
-+		if (priv->calibval > RTC_FREQ_MAX) {
-+			dev_err(dev, "Invalid calibration 0x%lx\n",
-+				priv->calibval);
-+			return -EINVAL;
-+		}
-+
-+		writel(priv->calibval, (priv->base + RTC_CALIB_WR));
-+	} else {
-+		priv->calibval = ret & RTC_CALIB_MASK;
-+	}
- 
- 	ret = zynqmp_rtc_init(dev);
- 
--- 
-2.34.1
-
+Thanks!
+Quentin
