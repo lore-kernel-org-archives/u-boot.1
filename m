@@ -4,85 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4874D29FFA
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 07:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F1BD3CC9F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 08:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF71383015;
-	Thu, 15 Jan 2026 08:56:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1229382C7F;
+	Thu, 15 Jan 2026 09:01:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HOlHrxwT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xiZuJ0Hg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 611A6835B3; Thu, 15 Jan 2026 08:56:16 +0100 (CET)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id 1D8EB83015; Thu, 15 Jan 2026 09:01:17 +0100 (CET)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB52C82C7F
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:56:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7546C82BF2
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 09:01:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-646b8d2431dso477930d50.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 23:56:13 -0800 (PST)
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-646b8d2431dso481023d50.2
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 00:01:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768463773; x=1769068573; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768464073; x=1769068873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8Dbq1ikjxQmDUykAM69q4PKw+JaBkbvFAwmNt421vvg=;
- b=HOlHrxwTEbKsQ6+xq5hKTnfCisptPxBYau1XhuwtyC9uczGiyX253H3us8Yc15SyWz
- DBG6X6gpWQ5WhP3K1Hp+Tqd4niw3sKxD892+JkSg6jSs4KxhYOcQxieQcAGr/lPllE+o
- CdoaOb0FQ8J54BCJy96PaNRwNC04r5MFbZQd5y10CHG2xh8CSgT//hnBIve8OWpH9U04
- ArSzdx0LO5O0L4lRyRkrg14qX7WAq7QwOnjPH7A202NOnkq/8S6OO2k9CjyaazO0eEBD
- am5xM5PgPWQvbZvTXqkqPONJSttVKfUnA0fKMd7IKt8gUMedIL6tIVJzrFz7bSOnj8o6
- cVGA==
+ bh=mZaA4ddvIBwmY6R0XxboSKL/5FZerjd3w5AirFWqbaA=;
+ b=xiZuJ0Hg64jQpiR0TEvjoxiY4llTLfRXHKJ7iGylByHiNXegTlQ6yi2NqZz3BHUJnN
+ +F8qb3lT2uz2Y2VHCjFt+xjiHDJzR7mwsbkKlnmJZBN/8NjLKwzdthNyVlREpuTNUH2d
+ HAOGGGVCo63XPtV6FtVyGKRhW/G6uVISqPCS8Bt/C80AotqJkcr0x5Uavt1QcEqXsIss
+ QjWQPytz3NV1IAobXr48ah8rxJrnyTvvUBwurUwn0ZuNjywJQk2apGMFFM19UsB7ME3V
+ z9JbPh5pbjMKskYf/J7/i+pBxt3eGIJ7Cys7nX7o5kzWVRPbMyJuDZrh3EyQFcjGActq
+ K1EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768463773; x=1769068573;
+ d=1e100.net; s=20230601; t=1768464073; x=1769068873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8Dbq1ikjxQmDUykAM69q4PKw+JaBkbvFAwmNt421vvg=;
- b=vIMAUWrzSKuTfJ3SS7JuXlBtdwNCYphYylpZl248vLAQCC7b7kl6D2/I4i0K0VjKpQ
- KMdciSutM8Hw7VDBoMKchn8Sxb41DR+kRzHK49aBjW2uzlr8RUaIiXCBFTL7hmVZODtv
- xLAPGUbgE7ol92mD+jNVlvh8czq/iCXBmjHyNMahRNYxzlUQJ2J5mURtZgD6l21F6wyf
- RzB0r9YmbwYdrptA1YZNl+vPtg9UaJuvmaYfxHBDfDB++EdJ16CCevwk5pVkZ5hTXaLJ
- fQwAl4WZyuKQdC9Mwe9mjwvhYFFpv9wr3MN57R5zV/f7UG6jwGOoCm0dvYeaAA8ZsKiw
- Zv4Q==
-X-Gm-Message-State: AOJu0YxRUDYWE3N3MVX17SQ3Tgde5Rfmt8rQIVrb9d2ikqqXftH/FmzC
- T1qou1AZJmfdR8uyu3M9CXUwf82TeBgdp/lLwOtW+zRziXixHEo1m/Oy/tg6Nt4SRTWzaVcy1W3
- LuUhWaBMvWCiq1T6FbflNd3DHkEOeOhIFN+EDAa+WAQ==
-X-Gm-Gg: AY/fxX5P97MxrjI2orQlJUi27KAXWzOHZ6Hxe0vAinpY9amavjoG1T1/ZQNZlX5GMjc
- F8tGHYIyxlnnSBIiopHNpdaCg98H6jAViqmdYFODDcFoSPJ45UG3mL+h7fFJASr6GgQFlyNtbSa
- rpJJCE8YUALOZhCAA8mccbPnkk5DToDvA6UMabFLUGvfB9eLbkNnzTT2a2PE/haC4tF4NGmXOa6
- 5zz1Q0JmNoTaS1WMYwM/Jpg+UJIIHnCzdWNYEMKEsMSbxCkb9LglD9vJIXrITe5h3k5Qw96S3z9
- T9K0ktxV8ZojWdDBUAufAGC7uUmSlRC91mdmaDvIeiTfc/R1e+FQwUWLe+d3Y36DWi56JwsuSsT
- 1HG2uQ3Pi9YJUK3dJ9caxfF0yUx4Q1TgfuTUWqiJo8Z0nkwRSd6C5cNhIcHJx1FtOA4wgIY+BSb
- 8YQzloMXD7ilD/YptxW+ijbaIaBJy/PDJXeLchEXJuHBXZAyljNTQdSa2SeQjNmJk6AfbQnZzlt
- G39yqNuCjFAQzuub7SjI5wl0l7vjn7POhnoiDVNaavynIKmzXR9OaYECmqmzm8FAno1gJTfrQUC
- cDvpWMH30Yf28hha8/9D/y4QIyVkT5WV
-X-Received: by 2002:a05:690e:4186:b0:649:3b9:9257 with SMTP id
- 956f58d0204a3-64903b99457mr3562554d50.1.1768463772695; Wed, 14 Jan 2026
- 23:56:12 -0800 (PST)
+ bh=mZaA4ddvIBwmY6R0XxboSKL/5FZerjd3w5AirFWqbaA=;
+ b=aLjnwPZI8oNFIrVOHCdUJNjyd1yCrJxs+Q6rHtQ470gY+oqenLVj38u17vWlEuRoGE
+ kfi/a5woGAdSZP9Bfah5ncqg0dc5d4Xs4FZQl8KIbYk1T8PvWg1tqYs/hi3ahRPM6ouQ
+ 2bw13t3jnZPgPM/ORLkLPVsOtyd3YGonK13n9+a4RsC3sfoz1vrB4pFGTp2A96/y9gUZ
+ CssOEM4R263iu/OW9OdMFWU/u4GsRWDeE0xgMUfNG6cXp2m4HqMPsEIihBk7XoHMy8j4
+ jt5kAa9w4dSPef6py+F0WrRuFlOzIU9/QjXWVy8TmCUz7kyDAYxNrSnWBEpAvSype8/3
+ MLPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqpFm7G7sAk5sS61V40n7tEcggUo0m624sZcadTcqBm22cvWyqHXCd7+1+bEBCNykweMKAL7U=@lists.denx.de
+X-Gm-Message-State: AOJu0YylDhEPT7fHPiRuQs8B6wcGPVNvFqCYnYAwIbs27KL8mv7rYAw2
+ NdzyyIuk7jSGuBOrjd7rJS58N0sUnNEbMsWjm7dnd6YvHR1Mps2vT5xlVxp9wJphjs+jgitJrHl
+ qdCJJy2FupEeOT9+EjCVqq6cmbTwfyhLPyxZWqBKJ/A==
+X-Gm-Gg: AY/fxX6SUB6MWYXc9P38k9yejhFT2NVuKhtAwswBgOt7Gv1GXAey5IA2WUOiC19hq5L
+ KTpn9EcvYqW86lEx/oDbW2PjqTUz0y/W9VAgTLYOmY95docY3DP0Fgm8KvPyDgPzRod5dBip6o/
+ AZ9c1lA2gLQ55fdP3V/YxcxI9pPHQADLSqsLEWYV3zshNArqhepmsPeTiXUEGaso0eoEP94ORSP
+ v2Zpx8vAVQ5B8J8p/MhXG5y9H5u1fTAWxhYQG0SnqLlkj6D4/9aCu9C+q1SYhxD5mB30C/cufK4
+ U/EaCpUqv3WtHY95qQoPeHP5+0dzwvfaXdvPWqrFZwU6D4cH63tFSr+xq2He/G/0xYrJHZUHsyd
+ fthxyR1VNawFKWV76sEh2yQaGIrpOSJo/AzAuI4GS27eW8BxPxjESaqsHIPJNvlJnOI/znccwPd
+ 49vW/qundtoarCsHoF65gZ3210zNvGmMcajWbQcyd3DwvkbrqIXVeJcznb/LWl0KHfXsx4MK4rb
+ 7s1jHiagjvcRrl6voGDvNuFFK3WD2igqVMcoCsPP2wBqowNLeXpE0kAdlxKd+S9rRhv4wWwjN75
+ O4lhIgYhdlS/1JgotldsV3Ei5b0eDOzmv7+zGP1ivJQ=
+X-Received: by 2002:a05:690e:11c4:b0:641:f5bc:694b with SMTP id
+ 956f58d0204a3-64901b11096mr3926343d50.79.1768464073114; Thu, 15 Jan 2026
+ 00:01:13 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1768403729.git.michal.simek@amd.com>
- <da6f7b65cfb5aa81b7ff13848f532cde1b009227.1768403729.git.michal.simek@amd.com>
-In-Reply-To: <da6f7b65cfb5aa81b7ff13848f532cde1b009227.1768403729.git.michal.simek@amd.com>
+References: <20260112101102.1417970-1-b-padhi@ti.com>
+ <20260112101102.1417970-3-b-padhi@ti.com>
+ <DFMMUHPP8BW8.3M5VVTPEB9IZL@ti.com> <20260112164854.GQ3416603@bill-the-cat>
+ <8eb4eeea-a755-4032-ab95-2b293f2d2289@mailbox.org>
+ <20260112220536.GU3416603@bill-the-cat>
+ <66ec9e5b-1488-4e35-9a56-91d4b70ff0fa@mailbox.org>
+ <20260113150024.GX3416603@bill-the-cat>
+ <bbbb72e7-a7f5-48b0-b3e2-fcc83d5b1658@mailbox.org>
+ <20260114141735.GA3416603@bill-the-cat>
+ <7f1f7601-23ec-4a36-8e2b-3b4b679da6aa@mailbox.org>
+In-Reply-To: <7f1f7601-23ec-4a36-8e2b-3b4b679da6aa@mailbox.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 15 Jan 2026 09:55:36 +0200
-X-Gm-Features: AZwV_QgFOub3kuAmzSeL__OMryQdbP_j913MJgIsif97hwH7khMNccnCAnKhAxo
-Message-ID: <CAC_iWj+_VfEAE3NRr9QxJHtR0oq3JdqrO3vj583TxBDetH6QkA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] efi_vars: Implement SPI Flash store
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, Shantur Rathore <i@shantur.com>, 
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Date: Thu, 15 Jan 2026 10:00:36 +0200
+X-Gm-Features: AZwV_QjiFU2FyrkWb7lSYV4He3u6EO8WIZBYspBlHj0VOo4LmoJBYwG_Mn0ygNs
+Message-ID: <CAC_iWj++nNLDMzJECV__VBQkNPwURGsRpnD5HUUt40+dA3w9Ow@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
+ before DTB
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Beleswar Padhi <b-padhi@ti.com>, 
+ malysagreg@gmail.com, sughosh.ganu@linaro.org, philip.molloy@analog.com, 
+ marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, afd@ti.com, 
+ nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,64 +111,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal
+Hi Marek,
 
-Thanks for taking the time.
 
-[...]
-
-> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> index be670a8e7c25..feab212b245b 100644
-> --- a/lib/efi_loader/efi_variable.c
-> +++ b/lib/efi_loader/efi_variable.c
-> @@ -397,11 +397,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
->                 ret = EFI_SUCCESS;
+On Thu, 15 Jan 2026 at 02:02, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
->         /*
-> -        * Write non-volatile EFI variables to file
-> +        * Write non-volatile EFI variables to file or SPI Flash
->          * TODO: check if a value change has occured to avoid superfluous writes
->          */
->         if (attributes & EFI_VARIABLE_NON_VOLATILE) {
-> -#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
-> +#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE) || CONFIG_IS_ENABLED(EFI_VARIABLE_SF_STORE)
->                 efi_var_write();
->  #else
->                 return EFI_NOT_READY;
-> @@ -599,7 +599,7 @@ efi_status_t efi_init_variables(void)
->         if (ret != EFI_SUCCESS)
->                 return ret;
+> On 1/14/26 3:17 PM, Tom Rini wrote:
 >
-> -#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
-> +#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE) || CONFIG_IS_ENABLED(EFI_VARIABLE_SF_STORE)
+> Hello Tom,
+>
+> >>> OK. And why can't we make that check at $sym rounded up, and ensure our
+> >>> build targets pad? Going back to the commit message here, it's easy to
+> >>> tell the linker to place $sym at the right spot, but it's hard to make
+> >>> sure the output is padded. So having typed all that, maybe we need to
+> >>> do:
+> >>> d) Update linker scripts to ALIGN(8) the above symbols and have the make
+> >>> targets use dd to ensure padding prior to concatenation
+> >>> ?
+> >> d) looks like what we should do, yes
+> >
+> > Poking at this harder, I'm not actually sure we need to use dd at all,
+> > but we do need to fix our linker scripts, and then going back to when
+> > Ilias reworked and cleaned up a bunch of them, get the changes reviewed
+> > by the toolchain experts he got ahold of :)
+>
+> I wonder if LD can always guarantee trailing alignment of the binary. If
+> it can, then yes, dd would only be obscuring alignment problems and
+> trailing DT look up failures which are hard to debug. It would be nice
+> to drop the dd part, but I am not sure if we are able to do it reliably.
 
-So I think this is might to come back and bite us in the future.
-The name of the file is a bit misleading, but efi_variable.c is
-supposed to handle the variables with a file backed storage and
-efi_variable_tee.c is handling the variables when the storage is
-isolated in the secure world.
-The problem is that each case defines the boottime and runtime
-services. The functions that are common across cases live in
-efi_var_common.c. That files defines the boottime and runtime calls,
-by calling the *_int() variants.
+LD won't pad align anything that doesn't have code afterwards. IOW
+inserting an . = ALIGN(8); just before the .end symbol won't guarantee
+alignement unless there's a section/code following.
+What you can do is add an ALIGN(8) inside the last section. That will
+guarantee that the last symbol is aligned. There's also the SUBALIGN
+command which messes around with the input section alignment -- that
+normally is automatically calculated, but Tom tested it yesterday
+without success.
 
-The file backed and SPI flash storage seem to have a lot in common.
-e.g they both use the memory backend to expose the vairables the the
-OS, query the available storage etc. But I am not they will end up
-being 100% identical. If they do this approach is ok. But ifthey don't
-it's better to expand the efi_var_sf.c you added and add code for
-efi_variables_boot_exit_notify(), and any *_int() functions that are
-different.
+I'll have a closer look to the linker script in case I can come up
+with something more elegant. Which defconfig should I use to reproduce
+the issue?
 
-Heinrich any opinions? I'll need to think through the SPI case
-inclduing runtime support before taking this in
-
-Thanks
+Cheers
 /Ilias
-
->         ret = efi_var_read();
->         if (ret != EFI_SUCCESS)
->                 return ret;
-> --
-> 2.43.0
->
