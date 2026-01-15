@@ -4,58 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7740ED44C76
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 16:14:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14703D44C78
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 16:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 813CD80325;
-	Thu, 15 Jan 2026 17:14:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 7D98683623;
+	Thu, 15 Jan 2026 17:17:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="X9ADEd7I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QqKZVUX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0350C82BF2; Thu, 15 Jan 2026 17:14:48 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 627528367F; Thu, 15 Jan 2026 17:17:36 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1DB880077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 17:14:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43ECE80325
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 17:17:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 8431D1FA85;
- Thu, 15 Jan 2026 17:14:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1768493684;
- bh=1BExtbnU1I/YtfCnCMPzph0lZbXavW44xwgyIExmbFE=; h=From:To:Subject;
- b=X9ADEd7Iy2upGg0NRx3uhmY2JfivFWj7ely2PuTjWPDFKLpPRZHWOlMCqO5Li41UT
- h1uBQCngcwfPAwZOztKgYNgJfS/UOTW4HjAa01gAINT+33QQXo151q2Qfl2u7dPZOE
- jMYKQ9gRTFIhApHPl69/XcgVYdtSIj9C3tz2MaDhHAqeZXXfXnMPsIGfSF+11NApKK
- jeiQAlKK1sMihS83RsiyP6DtBhAUKGKsqmmb+rYZCBZSxzoIlXQNT9zt37G8M68PUY
- cepGPp4MF7c32Tq86JyQITCK+hRRd/zthQyvRt31prg2q47qnyCAV6Z0Ugjs20rZv5
- ZNjlR0b+GOy9Q==
-Date: Thu, 15 Jan 2026 17:14:40 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- =?iso-8859-1?Q?Miqu=E8l?= Raynal <miquel.raynal@bootlin.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH v2 5/5] board: toradex: add splash screen to Toradex
- i.MX7D Colibri board
-Message-ID: <20260115161440.GA93500@francesco-nb>
-References: <20260115-repair_imx7_splash-v2-0-6595491341ba@bootlin.com>
- <20260115-repair_imx7_splash-v2-5-6595491341ba@bootlin.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-3ff4acb6eebso746445fac.0
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:17:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1768493853; x=1769098653; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mLnI3cVE4EhMtv1xUT6bc2tAj9OmY6aBAXqnFICphfQ=;
+ b=QqKZVUX/sIsV40xQvmioIYz8sKWTVYa8YZdh5vskUoHC6jx8a5KsAOicGPB6ztwJw6
+ Yi+BNlbcPW6dIfPKmicUAH4EZx5oQqNIiMvPKdxAxmcE9bub/6BP7fvftU26dhHgvDXN
+ XpmDtElM34sdYXY9Ay999sgyE5t2aN6WRQO1A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768493853; x=1769098653;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mLnI3cVE4EhMtv1xUT6bc2tAj9OmY6aBAXqnFICphfQ=;
+ b=Z4bjj1do4WHTwv2mAR1hjgoXk2+fMnx8QebAREhg9xgM/SagYnQEcEGIJ+nPnVcCIo
+ CdOKZXg3giu8xpK0XsA8Dw9IZPT6GJ8IDZHTE0QwT++kku74aRpT32HaBEXQQAUS7Qln
+ xGeVGynswkQXaP+ktkDliXPSlRm7CCMLYc552bUhEZmAAZ+oSRlKKCBMd3JPznMcMPH4
+ nBOmmTybzrAWpBJkWMbaIUR1icT9mIVjnGBhG4C6mYFViDZZUWlDI9AyvTMdypfsWPgP
+ 16lGUcWm+MO8Mx0J9vDMNV2I4l/ZUAZRwc9cF47Hi0qNXrlJ1p4C1jfCdy45wC2uFp0X
+ ziwA==
+X-Gm-Message-State: AOJu0YyYlocN9cy7igOvyfBdHL2xdFEfssPqcZ+8+i6BycrEkZUdwMMu
+ 8zrSyFmMPHfafDi5YUAJ4X52mpNr5K6O4Z9tEz03k4r9pHysFkNQhZ31RW8jooAyAMVb3HF/zqE
+ lqSvpahE=
+X-Gm-Gg: AY/fxX6WnY1xqH9FxtOE3VNLAgJ7kRm/DBt1mp9mfHKP3ZQfpIuswQ4EJc9wEt4zQqo
+ P6Wy5WP2z7FqyCY/EEGzHK3Z7xYdYfB0Nw8h1AirUMHbNFFGkMHDOq7kwgQcm62bJzlQgOzLRyy
+ EAQTOARZNYjQD+uU5PJ7lpp1ebldIVc+f49mgMmDYkLfEvtg2cqa4hUEn6B68NaVQejawHrtPU0
+ uBxDY0rA4ool2FFEdJVprjHyZiXVxn0GGjt5QwqpaVPUBKek7dUFnlmnGYfYKuw0kntw6anZqFz
+ j1mPZIgmQEylkUHRsXFMVXXqjiGVS0Dg2mTXeR9w6Ld+nwsQX/JZ0ONjLZ09mK4w/UQNuQDOyR1
+ TmyR/aPu5PQuZS8CdFZaYbOKVThWB7oUomaPqjNtkFYYKN+1jX6Cnv5KgFyS+aJzIuP4+91srYg
+ A/Vv8VUPHMZCK8fhlebRrILg6KJ0dyEelJIjuuqqtjwm7LG5l0GK9k3ltZHnGk8nOG2Upvd8kAH
+ aggNCiG3ZyihhBC1iCH1OOI+bSI/x+1dV5nnBoEFA==
+X-Received: by 2002:a05:6820:174a:b0:65d:1697:e6ce with SMTP id
+ 006d021491bc7-6611795a653mr107951eaf.23.1768493847994; 
+ Thu, 15 Jan 2026 08:17:27 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4044bd14883sm4807fac.12.2026.01.15.08.17.27
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Jan 2026 08:17:27 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] test/py, buildman: Update filelock package version
+Date: Thu, 15 Jan 2026 10:17:26 -0600
+Message-ID: <20260115161726.3881761-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260115-repair_imx7_splash-v2-5-6595491341ba@bootlin.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,94 +93,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+The GitHub dependabot tool has reported a "medium" priority bug
+CVE-2026-22701, with this package. Update to the patched version.
 
-On Thu, Jan 15, 2026 at 02:52:48PM +0100, Thomas Bonnefille wrote:
-> Fixes the PWM<A> that was previously used as a GPIO output instead of a
-> real PWM, it also reserve the framebuffer region to preserve the splash
-> screen while the OS is booting.
-> 
-> Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-> Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-> ---
->  board/toradex/colibri_imx7/colibri_imx7.c | 41 +++++++++++++++++++++++--------
->  1 file changed, 31 insertions(+), 10 deletions(-)
-> 
-> diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
-> index 69a8a18d3a7..55480213c67 100644
-> --- a/board/toradex/colibri_imx7/colibri_imx7.c
-> +++ b/board/toradex/colibri_imx7/colibri_imx7.c
-> @@ -18,6 +18,7 @@
->  #include <asm/io.h>
->  #include <dm.h>
->  #include <dm/platform_data/serial_mxc.h>
-> +#include <fdt_simplefb.h>
->  #include <fdt_support.h>
->  #include <fsl_esdhc_imx.h>
->  #include <jffs2/load_kernel.h>
-> @@ -29,8 +30,10 @@
->  #include <netdev.h>
->  #include <power/pmic.h>
->  #include <power/rn5t567_pmic.h>
-> +#include <pwm.h>
->  #include <usb.h>
->  #include <usb/ehci-ci.h>
-> +#include <video.h>
->  #include "../common/tdx-common.h"
->  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -114,7 +117,7 @@ static iomux_v3_cfg_t const backlight_pads[] = {
->  	/* Backlight On */
->  	MX7D_PAD_SD1_WP__GPIO5_IO1 | MUX_PAD_CTRL(NO_PAD_CTRL),
->  	/* Backlight PWM<A> (multiplexed pin) */
-> -	MX7D_PAD_GPIO1_IO08__GPIO1_IO8   | MUX_PAD_CTRL(NO_PAD_CTRL),
-> +	MX7D_PAD_GPIO1_IO08__PWM1_OUT   | MUX_PAD_CTRL(NO_PAD_CTRL),
->  	MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21 | MUX_PAD_CTRL(NO_PAD_CTRL),
->  };
->  
-> @@ -123,6 +126,8 @@ static iomux_v3_cfg_t const backlight_pads[] = {
->  
->  static int setup_lcd(void)
->  {
-> +	int ret = 0;
-> +
->  	imx_iomux_v3_setup_multiple_pads(backlight_pads, ARRAY_SIZE(backlight_pads));
->  
->  	/* Set BL_ON */
-> @@ -130,10 +135,15 @@ static int setup_lcd(void)
->  	gpio_direction_output(GPIO_BL_ON, 1);
->  
->  	/* Set PWM<A> to full brightness (assuming inversed polarity) */
-> -	gpio_request(GPIO_PWM_A, "PWM<A>");
-> -	gpio_direction_output(GPIO_PWM_A, 0);
-> -
-> -	return 0;
-> +	enable_pwm_clk(1, 0);
-> +	ret = pwm_init(0, 0, 0);
-> +	if (ret)
-> +		return ret;
-> +	ret = pwm_config(0, 0, 6666666);
-> +	if (ret)
-> +		return ret;
-> +	ret = pwm_enable(0);
-> +	return ret;
->  }
->  #endif
->  
-> @@ -142,12 +152,11 @@ static int setup_lcd(void)
->   */
->  void board_preboot_os(void)
->  {
-> -#ifdef CONFIG_VIDEO
-> -	gpio_direction_output(GPIO_PWM_A, 1);
-> -	gpio_direction_output(GPIO_BL_ON, 0);
-> -#endif
-> +	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_VIDEO_REMOVE)) {
-> +		gpio_direction_output(GPIO_PWM_A, 1);
-> +		gpio_direction_output(GPIO_BL_ON, 0);
-> +	}
+Reported-by: GitHub dependabot
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ test/py/requirements.txt        | 2 +-
+ tools/buildman/requirements.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Is this correct now that PWM_A is not used as GPIO anymore? See
-`backlight_pads`  ?
-
+diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+index e080d0f051c0..c3bf31d057a3 100644
+--- a/test/py/requirements.txt
++++ b/test/py/requirements.txt
+@@ -1,4 +1,4 @@
+-filelock==3.20.1
++filelock==3.20.3
+ pycryptodomex==3.21.0
+ pytest==8.4.2
+ pytest-xdist==2.5.0
+diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
+index d8f76e4e73d5..32c14fbac576 100644
+--- a/tools/buildman/requirements.txt
++++ b/tools/buildman/requirements.txt
+@@ -1,2 +1,2 @@
+-filelock==3.20.1
++filelock==3.20.3
+ importlib_resources==6.5.2
+-- 
+2.43.0
 
