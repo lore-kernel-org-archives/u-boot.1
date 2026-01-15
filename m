@@ -4,85 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C78D4660E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 18:42:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75ACBD46604
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 18:46:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 481E980325;
-	Thu, 15 Jan 2026 19:42:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C039680325;
+	Thu, 15 Jan 2026 19:46:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k2cMwUnP";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zcG3OICd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7373182BF2; Thu, 15 Jan 2026 19:32:29 +0100 (CET)
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
- [IPv6:2607:f8b0:4864:20::e2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15BAE830E4; Thu, 15 Jan 2026 19:46:54 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21D0880077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 19:32:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 558DE80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 19:46:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gchan9527@gmail.com
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-5eef115c781so535499137.2
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 10:32:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768501946; x=1769106746; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2UltuTJzK8ufCMiHnH6p1Mn3zr49iNN8pvCPHHqpu+M=;
- b=k2cMwUnPJv2JKlIti55EUnqYYcqHX2HBSgOkxZBbIMObgD/xV2z1ySxUrEo7S6Wuey
- U6Cf7/ySsSVRDfIsR8zUInq+FsG/gikUh1854aQF70FUfUCSZoG4vjwPtvIQyul4gyM6
- Q1RwHXKXz2ZRjzhHU/Z7lyL02ihHfa3QqIEs6zzmHj1xzYrffSo1Lpn8/0AOJkFwBLQE
- 6qcW5OYpGKipdInbGjd822ThazRbhBj6Tcw8s/r0gymXCMyKBcVNDMP0Gk+bB/uFWw/W
- cUzNNS6W8tdRmhpYuTTe4sVzCHI+RhQPmwcgSQnohR4J8syCa/23nK3h+uzJFuZAHIKN
- DxnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768501946; x=1769106746;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2UltuTJzK8ufCMiHnH6p1Mn3zr49iNN8pvCPHHqpu+M=;
- b=L7ReYmWqTbhpOouw/JqexFb3e2+Dodd+lFl+RDmlNz6Jlykwsss2bQ0Uxn/42ktCdU
- +4lWX3LDkzkwjyC3+kuNqn3FULAgOtytUD51LdKOKT452we0yL/Gpd6qTY+3ctYZgmax
- bYjCzrqb3wxYiGY91Kgj5i6aiAP2P2Uu/IO9noS5a3EcqilNjtxAMtyhJ1Kh3BgyjXnU
- DJLRLL1LCFK7Qxj/xke8KpyhGYSF3CiPINVoo4NzIRV9MpbDnkRMNRiCp1Zm7a2GiG9O
- xx19PKWxkywPnkH0vO/w5Ye5TQiTm8ddqdG0ge3HtfdK8Agjhk/+5sTtpA8QKl9zOTAm
- 4qMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU97gtilvKL3wTc1GI6HjpHSYwXoqwQXkmlKGtIw+q3HzAO12Kh/e+BWpO+6UmfNytJ8F/MgZc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4XTa+FFEWjV0Fcc2tfW7s4FjDws5SaeMKpMm/iCQWbI6f0G6b
- MJoYPTZuquRz+3QQRBnbitazVu2NhtdxdhWYQ0glWJB44nCBw7CevUtFIE7Xnpf0t+6PQlgticV
- +R5LJBd4x82G7dH9EN/q800X+xnohrAU=
-X-Gm-Gg: AY/fxX6sBcqEBvoAAo0lvi06UwfcQ8L+lx6FqzjKPspG0JpzOWCXjyIlyxXEJDMMGr1
- AQGRHbhxEFGg8bLedqCbhngKpiAz7IZKk3J1LO/ziXnLparmTqfbHxdqWQanfG+VAKyBXRw0g4W
- YvGphLTJW4Q2vtVhNdNnGe+FEuAOF0eX1+tp3PB+TXx1MdZehZXOu4BRkBXoFsKDiMCHUjsjQfI
- 3dIkypyfC3Z140c0bZfeBwiMvzYl/h0LhxRHBZJc6VTxnR5WdccYytBOfBgSJirvCWs+wav5g==
-X-Received: by 2002:a05:6102:441e:b0:5ef:ba3:25b6 with SMTP id
- ada2fe7eead31-5f1a4d72cd9mr266025137.3.1768501945679; Thu, 15 Jan 2026
- 10:32:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=6bf5=7V=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1768502810;
+ bh=s0PXJUSIWA0g+v8kKN6RMAWp94usVnswKkqtASbLQ08=;
+ b=zcG3OICddhHIIJ7gwf0LWPkU6NjnqtGw7LHHdT3Ah3WMJnXb1XF1Q+DBQPvgekOVuhIW9inzY
+ obBgVZpLGicD0vohrwFmaBY/iKMml5xzBzXgvFQtI1YbaaYDl4/H6k9MJf+PGbCVb5fIX3BrQOr
+ 8GjTH/vXdbfcYYvUjlTccI1H0T22utJxXNcuUyQhF5jOmg5ZnFOt/YIfgC7GfmSlIwXHGzIE/Y6
+ tpT0bPIb/+RO4qYyBgpxkeBh9mIUzlMbA7BdkBLSpKe5Y4qNSyEVxZlt9w2vHaTRzEybMhVpi1W
+ ql19O3SdoeJ1QIGivTyN2hZQ2PSGIRki/wedIPaQgh7w==
+X-Forward-Email-ID: 69693616e6e309b30d461fe4
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.2.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <64c4723c-c5af-4800-8886-b06c1fa8bb8e@kwiboo.se>
+Date: Thu, 15 Jan 2026 19:46:42 +0100
 MIME-Version: 1.0
-References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
- <20250630-sc7180-android-boot-v4-4-24cdb50e860f@gmail.com>
- <51543ec0-ee56-49cc-9434-f5f85adcab72@linaro.org>
-In-Reply-To: <51543ec0-ee56-49cc-9434-f5f85adcab72@linaro.org>
-From: george chan <gchan9527@gmail.com>
-Date: Fri, 16 Jan 2026 02:32:12 +0800
-X-Gm-Features: AZwV_QjZv8WZkklLewy2KB92z-o7khYAUdBSpg_q2DHb8ZlJ4pa9G4j8Ik6GM3I
-Message-ID: <CADgMGSs7QVF5cFKu7PivpKqEoxz+j_0J5jvQffCpME4cW65qGg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/6] boot: bootmeth_android: Conditionally dependent on
- abootimg
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-X-Mailman-Approved-At: Thu, 15 Jan 2026 19:42:50 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/3] rockchip: Add initial RK3582 support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+References: <20260107230747.3552391-1-jonas@kwiboo.se>
+ <cd629f5c-f69d-4b87-908b-aa323c78792e@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <cd629f5c-f69d-4b87-908b-aa323c78792e@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,14 +76,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+Hi Quentin,
 
-Thx for report. I am busy with other stuff recently. Sorry for that. Would
-you or somebody willing to follow that?
+On 1/15/2026 11:34 AM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 1/8/26 12:07 AM, Jonas Karlman wrote:
+>> This series add initial support for RK3582 support. The RK3582 is a
+>> variant of the RK3588S with a few ip blocks disabled. What blocks are
+>> disabled/non-working is indicated by the ip-state in OTP.
+>>
+>> Compared to the vendor U-Boot variant, this mark cpu, the gpu and
+>> vdec/venc with status=fail instead of removing nodes during DT fixup.
+>> Linux skip cpu cores marked as failed staring from v5.17-rc1, however
+>> the GIC driver will generate a harmless WARN_ON that safely can be
+>> ignored. A patch for Linux will be sent to skip the WARN_ON for
+>> failed/disabled cpu cores once this lands.
+>>
+>> It is recommended to use rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
+>> as DRAM init blob RK3582, listed in latest RKBOOT/RK3582MINIALL.ini.
+>>
+> 
+> As opposed to what?
 
-The first failing report is at:
+The release note for rk3588 rkbin blobs [1] list this DRAM init blob
+version with:
 
-https://lists.denx.de/pipermail/u-boot/2025-November/602397.html
+  New
+  - Add RK3582 support.
 
-Thanks,
-George
+So this remark was a hint that users should use a DRAM init blob that
+has proper support for RK3582 when testing this series.
+
+[1] https://github.com/rockchip-linux/rkbin/blob/master/doc/release/RK3588_EN.md
+
+> I see there are 2 DDR bin and 2 eyescan DDR bin in rkbin, but I'm 
+> assuming at some point there'll be a newer release so we need to know 
+> which to use.
+> 
+> I'm assuming what matters is to match what's inside 
+> RKBOOT/RK3582MINIALL.ini? Can you add this to 
+> doc/board/rockchip/rockchip.rst maybe?
+
+That is something that is true for all SoCs using BL31 or ROCKCHIP_TPL
+blobs from rkbin repo and a topic I think is better suited for a
+separate documentation improvement series.
+
+Something like following could possible be added.
+
+  When BL31 and ROCKCHIP_TPL blobs from rkbin is used it is recommended to select
+  the blob referenced in RKTRUST/<soc>TRUST.ini and RKBOOT/<soc>MINIALL.ini.
+
+  Something like following can be used to set the environment variables:
+
+  .. code-block:: bash
+
+        export BL31=../rkbin/$(confget -f ../rkbin/RKTRUST/<soc>TRUST.ini -s BL31_OPTION PATH)
+        export ROCKCHIP_TPL=../rkbin/$(confget -f ../rkbin/RKBOOT/<soc>MINIALL.ini -s LOADER_OPTION FlashData)
+
+That is similar to what I use in my build scripts :-)
+
+For this series I will however include something like below in a v5.
+
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 217694de0c92..022f8f2f20c0 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -329,13 +329,15 @@ To build rk3576 boards:
+         make roc-pc-rk3576_defconfig
+         make CROSS_COMPILE=aarch64-linux-gnu-
+
+-To build rk3588 boards:
++To build rk3588 (or rk3582) boards:
+
+ .. code-block:: bash
+
+-        export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.33.elf
+-        export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
+-        make evb-rk3588_defconfig
++        export BL31=../trusted-firmware-a/build/rk3588/release/bl31/bl31.elf
++        [or]export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.51.elf
++        export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.19.bin
++        [or]export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
++        make generic-rk3588_defconfig
+         make CROSS_COMPILE=aarch64-linux-gnu-
+
+ Flashing
+---
+
+Regards,
+Jonas
+
+> Cheers,
+> Quentin
+
