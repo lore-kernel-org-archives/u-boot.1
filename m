@@ -4,79 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14703D44C78
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 16:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37552D46601
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 17:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D98683623;
-	Thu, 15 Jan 2026 17:17:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 98AE580325;
+	Thu, 15 Jan 2026 18:01:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QqKZVUX/";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CGOyDMaX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 627528367F; Thu, 15 Jan 2026 17:17:36 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id AF26F82BF2; Thu, 15 Jan 2026 17:02:01 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43ECE80325
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 17:17:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E2A480077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 17:01:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-3ff4acb6eebso746445fac.0
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:17:34 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-65e943048afso387431eaf.0
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:01:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768493853; x=1769098653; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=mLnI3cVE4EhMtv1xUT6bc2tAj9OmY6aBAXqnFICphfQ=;
- b=QqKZVUX/sIsV40xQvmioIYz8sKWTVYa8YZdh5vskUoHC6jx8a5KsAOicGPB6ztwJw6
- Yi+BNlbcPW6dIfPKmicUAH4EZx5oQqNIiMvPKdxAxmcE9bub/6BP7fvftU26dhHgvDXN
- XpmDtElM34sdYXY9Ay999sgyE5t2aN6WRQO1A=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768492918; x=1769097718;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=K+LERpvqVH5vkRRJU30EBSFCSBFz9H1aTWsiD+YX05Y=;
+ b=CGOyDMaXmwHhriXhRyU9qvyTeXaA0dgknXBL1PnxLVxKX9vT4c7ks5VolXelnEnTD/
+ ihxanhZjk5ICnAz/qSnHJodUcrqIrnOIzdBAoBc3UxyC5HuHtNwUxS1rzWPnePkckiMe
+ hMWOS2VkPy22yS/+GdnDTNJh5D90s48hFhj4As+DeLggMyZi4ZA1PkIzn/J4e26xx/T/
+ CI0ARYM5JC7WLZbaCQZgwVina/b6yf9xK8HLDimKYVQlmzQnZw+0YMq3ZwUJLxHoRnk5
+ nKxR87jTPsS7rUnGuKZMDHDQuZohIdxcye59qXUiQ8QddAugG3t0uxOceRy1QSmBgV3C
+ +63w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768493853; x=1769098653;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1768492918; x=1769097718;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mLnI3cVE4EhMtv1xUT6bc2tAj9OmY6aBAXqnFICphfQ=;
- b=Z4bjj1do4WHTwv2mAR1hjgoXk2+fMnx8QebAREhg9xgM/SagYnQEcEGIJ+nPnVcCIo
- CdOKZXg3giu8xpK0XsA8Dw9IZPT6GJ8IDZHTE0QwT++kku74aRpT32HaBEXQQAUS7Qln
- xGeVGynswkQXaP+ktkDliXPSlRm7CCMLYc552bUhEZmAAZ+oSRlKKCBMd3JPznMcMPH4
- nBOmmTybzrAWpBJkWMbaIUR1icT9mIVjnGBhG4C6mYFViDZZUWlDI9AyvTMdypfsWPgP
- 16lGUcWm+MO8Mx0J9vDMNV2I4l/ZUAZRwc9cF47Hi0qNXrlJ1p4C1jfCdy45wC2uFp0X
- ziwA==
-X-Gm-Message-State: AOJu0YyYlocN9cy7igOvyfBdHL2xdFEfssPqcZ+8+i6BycrEkZUdwMMu
- 8zrSyFmMPHfafDi5YUAJ4X52mpNr5K6O4Z9tEz03k4r9pHysFkNQhZ31RW8jooAyAMVb3HF/zqE
- lqSvpahE=
-X-Gm-Gg: AY/fxX6WnY1xqH9FxtOE3VNLAgJ7kRm/DBt1mp9mfHKP3ZQfpIuswQ4EJc9wEt4zQqo
- P6Wy5WP2z7FqyCY/EEGzHK3Z7xYdYfB0Nw8h1AirUMHbNFFGkMHDOq7kwgQcm62bJzlQgOzLRyy
- EAQTOARZNYjQD+uU5PJ7lpp1ebldIVc+f49mgMmDYkLfEvtg2cqa4hUEn6B68NaVQejawHrtPU0
- uBxDY0rA4ool2FFEdJVprjHyZiXVxn0GGjt5QwqpaVPUBKek7dUFnlmnGYfYKuw0kntw6anZqFz
- j1mPZIgmQEylkUHRsXFMVXXqjiGVS0Dg2mTXeR9w6Ld+nwsQX/JZ0ONjLZ09mK4w/UQNuQDOyR1
- TmyR/aPu5PQuZS8CdFZaYbOKVThWB7oUomaPqjNtkFYYKN+1jX6Cnv5KgFyS+aJzIuP4+91srYg
- A/Vv8VUPHMZCK8fhlebRrILg6KJ0dyEelJIjuuqqtjwm7LG5l0GK9k3ltZHnGk8nOG2Upvd8kAH
- aggNCiG3ZyihhBC1iCH1OOI+bSI/x+1dV5nnBoEFA==
-X-Received: by 2002:a05:6820:174a:b0:65d:1697:e6ce with SMTP id
- 006d021491bc7-6611795a653mr107951eaf.23.1768493847994; 
- Thu, 15 Jan 2026 08:17:27 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044bd14883sm4807fac.12.2026.01.15.08.17.27
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jan 2026 08:17:27 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] test/py, buildman: Update filelock package version
-Date: Thu, 15 Jan 2026 10:17:26 -0600
-Message-ID: <20260115161726.3881761-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ bh=K+LERpvqVH5vkRRJU30EBSFCSBFz9H1aTWsiD+YX05Y=;
+ b=gw3tt0b/DuPDMA674ikl4eiLI2ZlyijDBauCHGy+gs1P4PZf3GJYc3gctDqvCOeo4r
+ sbHkIrREAsiDvKQT3WXR2mXBc3G2E8mkeSvF/FfRE5tiSgWb3vbOKb2+7WTYI86x7P36
+ MyNxEi9GKCFNR8dnP2wc21bg6eHQ2RkO0eH5EAc4flpLdm8y9unu2vYQGdTHeeVKIDzF
+ JxRN1X7YEiDPb1m2ZEf0fNgM5/r7VmBN1Sf0CH6PER+/0srRQ1Ha7w8Leuk4vWu6POfi
+ IY2eVycSEVCqOu5yKC9a/E3Nfk1RpUc6tXiGQEJKNLn0vPrcuHZSDE4uTkunKPRU/8Un
+ OovQ==
+X-Gm-Message-State: AOJu0YxNHMElpxkzsLMHgbG4rZZ4ufsyrWGrJMhaVlRq30/2bg3J1m3z
+ y2zjXRAmsCF6UT8XRA41RrY4CCI7z1RtauEy2PwDyt/spYuY5U+U7SysP+S0wWRERB4=
+X-Gm-Gg: AY/fxX6Vq+xXDzmgL70zIUQJgzwuwwnwVlOdL1IGebXfHvJMvubTacYyZ2W7ZKGlMfF
+ rPFP/AJLMur4gO7Q7JrbOxusfiGMD39NnzMvn/FB5H+kOc76q8NSjmh9QAg2sC79ZBfio7RYM/C
+ Oj0MXnz0bsTMWWndqtd6Uutko2RJG5rvyy2GseIVKGP7azTGGCGqcDHrIXryPzvDOpQt7WK6uIm
+ Y+pq9c+bz87aRAfrWYGcmyYUXEn2fNzaKsMD90D++RsFCTynHJ8kd2CMM8mR0BJuZ1f74ou7M4I
+ en1VNXWRO/EQp/kmRXA651wy6h8pDH8jceL/a3tdW40H0n0hrm10s++ZBEGqCod1O4zRHNRUE6e
+ u+NrvFvk/O/FW1P91RKyZepZBQmZQxRw5bcBboK/S8M8Livk4dPaCN+iAD5FP6WaNbeNR7ADcVK
+ SdFaEK4SXwF8GWo9r6iVjz2SlnK5sIFd0oEobCiWZr5GbEV/IK+Q26hnKKzcad
+X-Received: by 2002:a05:6820:16a1:b0:65d:2a0:4b47 with SMTP id
+ 006d021491bc7-6611795a63dmr95751eaf.31.1768492917357; 
+ Thu, 15 Jan 2026 08:01:57 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:5a03:4c75:91fc:a21d?
+ ([2600:8803:e7e4:500:5a03:4c75:91fc:a21d])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6611578c2d1sm352027eaf.0.2026.01.15.08.01.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Jan 2026 08:01:55 -0800 (PST)
+Message-ID: <82b05fd6-183c-4c9f-846e-c6378260ad08@baylibre.com>
+Date: Thu, 15 Jan 2026 10:01:54 -0600
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/9] clk: mediatek: mt8365: fix missing and out of order
+ clocks
+To: =?UTF-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
+ =?UTF-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
+ =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, "lukma@denx.de" <lukma@denx.de>,
+ "igor.belwon@mentallysanemainliners.org"
+ <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>, Ryder Lee <Ryder.Lee@mediatek.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
+ =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?= <Weijie.Gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ =?UTF-8?B?Q2hyaXMtcWogQ2hlbiAo6Zmz5aWH6YCyKQ==?= <Chris-qj.Chen@mediatek.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20251218-clk-mtk-mt8365-fixes-v1-0-4f8ff0de3268@baylibre.com>
+ <20251218-clk-mtk-mt8365-fixes-v1-2-4f8ff0de3268@baylibre.com>
+ <78dcd04a17910a2c3ee7fe32809413dca2293c68.camel@mediatek.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <78dcd04a17910a2c3ee7fe32809413dca2293c68.camel@mediatek.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 15 Jan 2026 18:01:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,34 +117,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GitHub dependabot tool has reported a "medium" priority bug
-CVE-2026-22701, with this package. Update to the patched version.
+On 1/15/26 1:05 AM, Macpaul Lin (林智斌) wrote:
+> On Thu, 2025-12-18 at 17:23 -0600, David Lechner wrote:
+>> Fix a few missing clocks and even more clocks in the incorrect order.
+>> Since the clocks are looked up by index, having them out of order or
+>> skipping an ID will lead to incorrect clocks being used.
+>>
+>> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>> ---
+>>  drivers/clk/mediatek/clk-mt8365.c | 32 +++++++++++++++++------------
+>> ---
+>>  1 file changed, 17 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/drivers/clk/mediatek/clk-mt8365.c
+>> b/drivers/clk/mediatek/clk-mt8365.c
+>> index c88545fc7cf..b6332b14aea 100644
+>> --- a/drivers/clk/mediatek/clk-mt8365.c
+>> +++ b/drivers/clk/mediatek/clk-mt8365.c
+>> @@ -80,7 +80,7 @@ static const struct mtk_fixed_clk top_fixed_clks[]
+>> = {
+>>         FACTOR(_id, _parent, _mult, _div, CLK_PARENT_APMIXED)
+>>
+>>  static const struct mtk_fixed_factor top_divs[] = {
+>> -       PLL_FACTOR(CLK_TOP_SYS_26M_D2, "sys_26m_d2", CLK_XTAL, 1, 2),
+>> +       PLL_FACTOR(CLK_TOP_MFGPLL, "mfgpll_ck", CLK_APMIXED_MFGPLL,
+>> 1, 1),
+>>         PLL_FACTOR(CLK_TOP_SYSPLL_D2, "syspll_d2",
+>> CLK_APMIXED_MAINPLL, 1, 2),
+>>         PLL_FACTOR(CLK_TOP_SYSPLL1_D2, "syspll1_d2",
+>> CLK_APMIXED_MAINPLL, 1, 4),
+>>         PLL_FACTOR(CLK_TOP_SYSPLL1_D4, "syspll1_d4",
+>> CLK_APMIXED_MAINPLL, 1, 8),
+>> @@ -110,7 +110,6 @@ static const struct mtk_fixed_factor top_divs[] =
+>> {
+>>         PLL_FACTOR(CLK_TOP_UNIVPLL3_D4, "univpll3_d4",
+>> CLK_APMIXED_UNIVPLL, 1, 20),
+>>         PLL_FACTOR(CLK_TOP_MMPLL, "mmpll_ck", CLK_APMIXED_MMPLL, 1,
+>> 1),
+>>         PLL_FACTOR(CLK_TOP_MMPLL_D2, "mmpll_d2", CLK_APMIXED_MMPLL,
+>> 1, 2),
+>> -       PLL_FACTOR(CLK_TOP_MFGPLL, "mfgpll_ck", CLK_APMIXED_MFGPLL,
+>> 1, 1),
+>>         PLL_FACTOR(CLK_TOP_LVDSPLL_D2, "lvdspll_d2",
+>> CLK_APMIXED_LVDSPLL, 1, 2),
+> 
+> I'm not familiar with clock driver, however, I've compare this
+> modification with kernel's clock order then found some differences.
+> 
+> For example,
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/clk/mediatek/clk-mt8365.c#n34
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/clk/mediatek/clk-mt8365.c#n64
+> 
+> The origin order of clock CLK_TOP_SYS_26M_D2, and CLK_TOP_MFGPLL are
+> the same as kernel upstream. Are the behaviors of these clocks
+> different from kernel upstream?
 
-Reported-by: GitHub dependabot
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- test/py/requirements.txt        | 2 +-
- tools/buildman/requirements.txt | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+In the Linux kernel, each clock is registered separately and clocks are
+looked up by name rather than array index. So in the Linux kernel, the
+order does ntt matter. In U-Boot, only the parent device is registered and
+individual clocks are looked up by array index so order does matter.
 
-diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index e080d0f051c0..c3bf31d057a3 100644
---- a/test/py/requirements.txt
-+++ b/test/py/requirements.txt
-@@ -1,4 +1,4 @@
--filelock==3.20.1
-+filelock==3.20.3
- pycryptodomex==3.21.0
- pytest==8.4.2
- pytest-xdist==2.5.0
-diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
-index d8f76e4e73d5..32c14fbac576 100644
---- a/tools/buildman/requirements.txt
-+++ b/tools/buildman/requirements.txt
-@@ -1,2 +1,2 @@
--filelock==3.20.1
-+filelock==3.20.3
- importlib_resources==6.5.2
--- 
-2.43.0
+> 
+> [snip]
+> 
+>>         PLL_FACTOR(CLK_TOP_LVDSPLL_D4, "lvdspll_d4",
+>> CLK_APMIXED_LVDSPLL, 1, 4),
+>>         PLL_FACTOR(CLK_TOP_LVDSPLL_D8, "lvdspll_d8",
+>> CLK_APMIXED_LVDSPLL, 1, 8),
+>> @@ -128,6 +127,7 @@ static const struct mtk_fixed_factor top_divs[] =
+>> {
+>>         PLL_FACTOR(CLK_TOP_APLL2_D2, "apll2_d2", CLK_APMIXED_APLL2,
+>> 1, 2),
+>>         PLL_FACTOR(CLK_TOP_APLL2_D4, "apll2_d4", CLK_APMIXED_APLL2,
+>> 1, 4),
+>>         PLL_FACTOR(CLK_TOP_APLL2_D8, "apll2_d8", CLK_APMIXED_APLL2,
+>> 1, 8),
+>> +       PLL_FACTOR(CLK_TOP_SYS_26M_D2, "sys_26m_d2", CLK_XTAL, 1, 2),
+> 
+> And so on for the other re-ordered clocks.
+> 
+> [snip]
+> 
+> 
+> Could you help to explain how to verify it?
+
+I verified the U-Boot driver by running the `clk dump` command. This will
+print `error!` if any clocks are out of order (which would break array index
+lookup) or if they are missing a parent clock.
+
+Once I fixed all of the errors, then I checked that the parent printed for
+each clock matched the documentation. There were a few mistakes, so I fixed
+those as well (in a separate patch).
+
+Now that we have the `clk dump` command for Mediatek clocks, I recommend doing
+this on the other boards in U-Boot as well. I expect we will find more bugs
+like this.
+
+> Did you dump clock tree and compare the orders between u-boot and Linux
+> kernel?
+
+Since the order doesn't matter in Linux, I did not do this.
+
+> Do we need to update kernel's clock driver for MT8365?
+
+I don't think so. All of the bugs I found in U-Boot had to do with the
+array lookup implementation which does not apply to Linux.
+
+> 
+> Thanks
+> Macpaul Lin
+> 
 
