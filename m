@@ -4,167 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CFC2D4115D
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 10:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC13D4116E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 10:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7898B80325;
-	Thu, 15 Jan 2026 11:34:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 1E3BE83015;
+	Thu, 15 Jan 2026 11:49:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="JQZBimY/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GR4xnAJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6C62803F5; Thu, 15 Jan 2026 11:34:23 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6D6C283623; Thu, 15 Jan 2026 11:49:55 +0100 (CET)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6003080077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 11:34:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7165C80325
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 11:49:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NeWqWbseRUGc/6G3IXFDIHzfVqJYrpAwxm0xrL4rSOAo32P1kFOpP6HI/uskl1q7VftX4AwijO676u5Jcb2/O8sW3nPVvBiL26vcWElHduWuB4v6WBTBv3AVTty477+K6IBPQaiI09kXeWhoDj1NTn8FVRyPJfmzUgAbc5JXmTtWOrZR6BQQviOSeLxINgFMaBJ1qDCiFAoWvA0SrVJdssQi6/VQFzaHmAs7sCFxitMu7gCMw5Bc2MiuliAWHqCSMi4EEqLVNsPKDHoYusTpokntPlI2WYb7Vb07HkN14u9+Jpd658E5YrwXYncbJfr+VbMIe96FHVyULjrjfWB+dA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=00Lc0tNLqyA8hoiCFNC6uR6xi3m7GUeTDjDriLiOiP8=;
- b=lQhGZh/erWWdbRRfU5j4Kd7181PTKyHHqwexy4D6obkN7k2JetIXLCVBuLLpSCgQwc0PETudeoW1tV278hHpBHnxheJsAiMPJMGvPk0DmzsuG/fx7uKLxQ9Z4A6ouGkKca4SZbNh50hWnBoV63NEI1/7cJkKgjNL7cJ9rlsu2LPWjRGZ488FsWpxVYLRk3m6MVgORBWgLUBWUIttPzslYoepJqmkc89qsEbuADYCoh3hLDXu6/AMSnaWH5okQoc5AugHSPlzs4r4Y7mCTvngTix9hQJHO8K0dnYcq79R8pm5Obtz1VumU+vUvncmsJeQ2rFqaMFwR+Fr08RRYVXzgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=00Lc0tNLqyA8hoiCFNC6uR6xi3m7GUeTDjDriLiOiP8=;
- b=JQZBimY/Zbz7a/xFFRzfVuWdI8DC4ggYWJyaf7Og7iHdrX2/tV2G6OEoWDKt1qjaYTkMXjdNxKsZWnlc7GlqevgxCg9DU0IwDCjGpjvR7KcSukyocKs3xsTUfOrMzvLKPqRXrugzAepR+VTPgRKbq44Jsfk+KSxgwser2nZ0AFU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by PAXPR04MB8591.eurprd04.prod.outlook.com (2603:10a6:102:21a::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Thu, 15 Jan
- 2026 10:34:15 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
- 10:34:15 +0000
-Message-ID: <cd629f5c-f69d-4b87-908b-aa323c78792e@cherry.de>
-Date: Thu, 15 Jan 2026 11:34:13 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-480142406b3so2539735e9.1
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 02:49:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768474192; x=1769078992; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=RbMdnO7a7MrkDFBUZvrByOzkXwcbtFHOFVSy8VpJTUM=;
+ b=GR4xnAJeh9hITpIwA5I9QjGGLQch2E8gOm3vyhJ5aJ0uyGoUxP/VO0CAq2uDA2f9Jj
+ yesSSouN+LYpz+KI7Ls0obM63VpPWCcyTcI23WPisARvi6Ci8GiEGbdTuG9Xy8hgjDK2
+ XYaMQ/MeCXiObdkwROAkbNpdEiiWOe8dthvRXglw2UZ6+g4jDx11ylZZ5ztUeiWeKsIg
+ I3JLFDZnRPyo+F/64jtj5rX7ebQ5ubE01FRmus5joC8FPXzcPVCVkjI/Z3KUwYbjxgNP
+ EH76JsWfL7ElRnrV7tsPuONKjuqzA3Qdt0sTF1kiGCPV2RImBMypwaZ+zFEIEIRKdbMs
+ 1IEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768474192; x=1769078992;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RbMdnO7a7MrkDFBUZvrByOzkXwcbtFHOFVSy8VpJTUM=;
+ b=TDYv8C94BO9R4q1a65TEXpEtQH42epdIXMSD6rSAHthIIXNXXRR7Uji8rtOH8KjliH
+ 4nHAjm87cJrd2BUXNdJqV5OU7P8uuTk4Be+1x7rpHLP7iO/ugIIhAYuKWZMjmxAZF0k/
+ MXl2Pa39yg7LGx4BvT8D9Oh0MIIPKt1vHh1wacHOVP4sq1TuJ+JNcj/2xDAN3QuBVwwr
+ 1BXtH8mN3NSbtammZ77dKQDapJ/j8IjFvSvhwIk/hjR2e+IvmNDtXrTiYTCJeOc6o1sY
+ Rx6Teua3q1C86WK2aps2x8Sxx8O4QB+3JLzD1/9hVstXEZUzDsEUV2WiZupibASyMNOF
+ eEqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWVjhcG48chyx+UjKxHPsMRSaHN+Ca06tzkt1miOI/ZgX7IebmSLQmxyXWhxjogHtoNAFa1QCM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEkngFEzhcKNBRKM/Qit5Vzhcep3nt7UkYX4XpU6OxeEWEclBu
+ 57c+Tlm2hQP15HzBQdd3q0r/wZ+RmVf5xgJ/OE+tOKLlWfyi6knjKDyRBr2/LvZ7tLw=
+X-Gm-Gg: AY/fxX4CPur0MhiK/4o6gnsu8tf5//8jKbaGmMrNvmAxp4bZOCDYEkEfiqvx5T2RrCq
+ up52BzIr91UYsP+vCSBiGGuBJFBZ/4jX0wIhOmUO8BTSXzH9F4CWluo60zo/NkkWyR7A4HhgfdS
+ BBxlIM7cVNQx98wgXRF4qxBsmKoUJAzmPig7/c9T8axC1TiX+92ZjE7iI2vyEW/cbSAFj4rJlRp
+ I1LF6DKoLTgqHILz1wSwv/QdLwb7UXKf+UlHugtpA6YKJaXaon/lXvOqZjslTbpDdHeEFIEPN8A
+ +vjcMdQVFUOyk1nWNL2j25jxngNP7ZjCcR+DO+Y2SJGXIWzimJHVzASluPtiAwmLATYajbUsIoA
+ 9Qu6pIl9UrTEoPghDeqy8qFfhMUpwTsaj0px3SjNDw8KhKwAp/GfXx0DYq7HlBdvFMXTtMwLW83
+ yGHT8xfF+X6cDNf4EI0mMS350oj22GRlWzEpEw6i/RmbzBAZgiTVFaoQBUsisl0r0=
+X-Received: by 2002:a05:600c:8b77:b0:477:afc5:fb02 with SMTP id
+ 5b1f17b1804b1-47ee4819d6emr64826785e9.21.1768474191707; 
+ Thu, 15 Jan 2026 02:49:51 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
+ ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47f3b7a5f94sm42508925e9.0.2026.01.15.02.49.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Jan 2026 02:49:51 -0800 (PST)
+Message-ID: <d2f7ed00-0c4f-4587-8dad-e1aaf1177204@linaro.org>
+Date: Thu, 15 Jan 2026 11:49:49 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/3] rockchip: Add initial RK3582 support
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20260107230747.3552391-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260107230747.3552391-1-jonas@kwiboo.se>
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 2/2] configs: Add generic qcom_tfa_optee_defconfig
+To: Sumit Garg <sumit.garg@kernel.org>,
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
+ jorge.ramirez@oss.qualcomm.com, varadarajan.narayanan@oss.qualcomm.com,
+ tonyh@qti.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20251229114312.668068-1-sumit.garg@kernel.org>
+ <20251229114312.668068-2-sumit.garg@kernel.org>
+ <c0bc6cab-6eee-40c2-b6f7-ff14d91906c5@linaro.org>
+ <aWDgNIR4jcNcUZ6W@sumit-xelite>
+ <c4cccc8f-639e-4806-992a-2e7c950c2c7b@linaro.org>
+ <aWiE4LygCijxYOS2@sumit-xelite>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <aWiE4LygCijxYOS2@sumit-xelite>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0196.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ad::18) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PAXPR04MB8591:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66069cae-e448-4dc1-227e-08de5421a13a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z2lzWXFWbHBJMlhkSjdZd0I5WWpBL0RaVGVDL1AzUE5HV3BMdUZUNWpaRnNW?=
- =?utf-8?B?L0crRE1LcFFUeVRkOFJEVWZzWEZYMXB3OWxsRllybUNFcitPOHEvNFRUY0Rt?=
- =?utf-8?B?bUlkVjhWT0FFNUwzZkptTURXQzJESjI5eUdndDJtYXM0ZXFEWklmWTVHNUVS?=
- =?utf-8?B?MElyblM4VTJvVXNucGQ2N25zeG1weXhhZll4bXNhbjNVTFlmVDV6akpWYTlN?=
- =?utf-8?B?eUpkT2RIUnI4S2MvRHJqZW5tWEhIUEY4ZHpaRzBhTmhmeEROVThFeEptaXlq?=
- =?utf-8?B?ZmJieU1nQUJIUlZqc2M1NFVXWm5WUC9pSTBRckZNcHVJU2o0WkRmVHJ6VmYx?=
- =?utf-8?B?MlNVMC9va3BJczBncTlkcG83T243NkcwSEFzU0xFdXl5RjN4RThkNmw1RWhD?=
- =?utf-8?B?UkZrKzg2SE5YK2trNlQxL3RHRVFaWUVDSnhPWjF2QXlrdVNGRVhqb3l2ajJz?=
- =?utf-8?B?WCtmZWNjaWJyNlQ1QXd3NzRqRXl4enlPU1liM2Jkc2hHTG5hQko3NWpTREdJ?=
- =?utf-8?B?QU1pTjRNbS9tZ1VzMjYyb2t6dVJBNnFGTjNpQ2p4M29ncmxuaERWZlhmcDc1?=
- =?utf-8?B?YzYvZGNDbzR6UHE0SEYyZXd6dTVjSTdWa1cxZzZNVlVtMkFWc29IaHVTNE40?=
- =?utf-8?B?S1hFV0FxV0ZzWDNXdGZhRjBTaHEwNTVEbzh5eklPVnVPK2d3UDlMeXEwOFhk?=
- =?utf-8?B?bzJCTERHTTMvV2FSR1JpaVVUaUdQZnJhSTlBc2pCN3JNVnpnTVhpcnNISEQr?=
- =?utf-8?B?eEJMTGdTWjJTL29kcXZUK05YS0ROK2xUSW5kNWhxaG1FM08yQ0s3ZHRVb0Zh?=
- =?utf-8?B?OEFaN0Y2NEpWM0oyRFgxLzh6aFZlejBWUmlOVU1jYWxWZldPOEVjcEM3aEta?=
- =?utf-8?B?Z3ptVzZNZnpyeDlqRm9SMndnUEY0ZUZmeUtXa1lkZ1NwMk96bDZVZTdSa0ZJ?=
- =?utf-8?B?ZFFEaXRpSU93VEVlZVhvSWFqd0lwaENIa2cwdEhSQ0tsSnJnWk9QM3N2TnpS?=
- =?utf-8?B?c2pXVm1IQjNYZHJvMkx5dVVKdTFMNXgzMVF0RmN0TVBtSmdUM1JlNERRL1Zr?=
- =?utf-8?B?MWJ4QndqLzU5UWVPZzRrc1JqYVNGYVBKeUlETXFxRFpVR2RVMVNad1BPSGc0?=
- =?utf-8?B?SnhWai82Rld3ZzFUUU5Ldm51b3Y3MnlKdENHR1YwZ1VNWVZldnNVN3UrZUdz?=
- =?utf-8?B?ZEV4NW5CcXFjUTdYalU0WDhsRG9BNEFvVlBsMUlzWnVSZC9aNVAySW1Ba3FT?=
- =?utf-8?B?a05TTmp6d0YyNSthZ2V6SlhkSWxNNUxaZlp0bHJ4Q0tXVUVOMzMwZzVBd0F4?=
- =?utf-8?B?RnRQNEJUT0sveXR5R3JhK2psSjFQa2syWFR4NkczZXRxRFdlcUxEeDlIQXFY?=
- =?utf-8?B?TmlzM1NrbWR1d3RHdzJoZHlLY3FvTkplaTdpdXZFZmFuTWkwYTlSOWdVeity?=
- =?utf-8?B?eDNlMEsvSGlwV0laVGRQdGFYOTYxeEo1SjdVdG9SWWFvc1ZwdFF0d3JzMkM1?=
- =?utf-8?B?OWtOTjhtRGhKZUcyWFlRbkw4akVwOEx4czRUTHNhL3pjRWlQTjk4T3lONXp4?=
- =?utf-8?B?UTdyckR4eUtEZUVyT0VEMFNHZ1FkMUhKb05iMmoxd2NJYXpveWczWlE2encx?=
- =?utf-8?B?eENYKy9iZTBDNnpueHd2eXlFZ3NiSkFLbmJ0Q0N3MDdEbmdpT2dEUTl0ZmF1?=
- =?utf-8?B?SmlEOEs5YXVoRzNnQ1NjeGE3WHV0VVI2Nldja3Z2QnM4ZlV3ZUxNN2NvQWlN?=
- =?utf-8?B?elFKSDB0WjJCZ1lsNEhsbUs1dC9NbDBENDUzQlNQdGZuU2haMUJMUm5OZEVv?=
- =?utf-8?B?QmlEM3hkdUpKZkJaOUpHRmhIQjZjVjg0SWhUWkluZy9RTHdENzg0TWtEbklq?=
- =?utf-8?B?MkZLbXFpYUZVcEJIVlZ6dE92dGpYS2VTNDU4TGoyMld1bjZBcnNja2l1Rktl?=
- =?utf-8?B?bkIweUQyaE1OYkZiRFdzUVlwbW5HU1lXSW5JT25NSHM2MmVveWtmU1dxd1JW?=
- =?utf-8?B?YVk3VHN1N1VmT2xtT21FTGIxbkYzRUtMc2FjRXpsdkVGQTB1dzhxUitCZ2pL?=
- =?utf-8?B?NklXMkI4NGIvZFJ1Nk9DZWIzY1p4OUpKSVkyZ0pSd0cwNTR0Yk5kK0JkK3hO?=
- =?utf-8?Q?w6xw=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c2puQmZoQWI5c1BrTEJqWFI0SExGREc2Rk1kbVZITDYrd216aHRCNlZBTnh4?=
- =?utf-8?B?cHZqR1d2RnQ0STg4dkpnY0MzZUtyRGthK1hDWXRYOFp6UVFzc2tzbG9ydCty?=
- =?utf-8?B?bmlQdVRaazJzanY0aWtoZ0ZsKzF4NWxHaHNXeHQwcTFXdytJYW1nSkNiN2tz?=
- =?utf-8?B?NDN4WHJmT3JsOERudEp1VC9vMzhXSVppNGJya1JDUjRQemhBc1ZuR0dZdFJG?=
- =?utf-8?B?cjhEREJZMEZUdmZUSnZGZXdmaFBoSzR3NnRmbVhIQllOZEVuSnpCVGRCKzll?=
- =?utf-8?B?NW9PVWhia0hzbEhpblZndGZGUkx2ZUdPL0JBSU5Td3gxVHV1M3BOUXVsOUhT?=
- =?utf-8?B?US9JQXk4a1psL1kwQjdlTko5bytiUzBUMlpSR1NOV3pRd2VYdURZbUNSeVFL?=
- =?utf-8?B?V2lnN2NYd1E5emlXYUszQldzUjBWRExTbnkyMHZicU1SL0x1Umd1RDhhS1dZ?=
- =?utf-8?B?bFZvTEtBTDZMRERGeE14S2VuV0pSa1h0bVhSVWkremFpSGF4bm9LQnpBa2NL?=
- =?utf-8?B?QlgrWEx3T0loWjMzcVliOUZXdXdDTDdlUzdrcURVK0dDZ2JNdVFWNVEvM3FO?=
- =?utf-8?B?aE94N2hhcnAybVlBSlpIZUxKRnp2K0h6U1kyZUhQV2c3R21vTUFzeEFSSi9o?=
- =?utf-8?B?eCs2MG9oblRrZUY2bmJFZlE5eUIxOUMyZVdOZWFqNFFLY0RvTzVWV0VkOEdp?=
- =?utf-8?B?UVFwVERsK0RxU1BFQjArckFxd1drUzF1a3htTnlRbEJmRjV6R2VQalRPQSs5?=
- =?utf-8?B?WmZldUl5c3FTb1QzOW1ISW82dnErTzBGak15bklrbDV0S05MRHdVaHNzbG1u?=
- =?utf-8?B?Z3JVUVNsRHJjWERqdURFNEViNDQ0MDNVdkw2MGs5KzBDNFNqRll1cUZKNEx5?=
- =?utf-8?B?dkY3Y2xoRDJIdElVa3l6Q01DZisvMW43Wmg5ait2Vzl3Zzl6UWZJLzJNUlVs?=
- =?utf-8?B?VkdtTVd1VGxOR1RkajZaMzAwcmhWSkxmSW1iL1Bmc0hJbmJFVTVyRERoMjkr?=
- =?utf-8?B?Nzltazh3TVVReExIU1g2VUJ0cTd2b2kyZGw5VU5ZUjJIV2FPYSswZzBzU3ZQ?=
- =?utf-8?B?cUplRDRXWjBhRnRLT0Q0UnlvcnBkS2FLWnpiTkdzVngwdmcvZTg0bWJMQWNH?=
- =?utf-8?B?bStFTHVjWm05UzQ1blc4UnBnS3EzUWhTUVNpOEJNSkxBWXZTYWVHMVZkQ0xj?=
- =?utf-8?B?Rk9TUGFENkpnWFovQnRzVm1VU3lTOEVPa1JyenFmVGQ3THNJU2V3NFozMldq?=
- =?utf-8?B?NHI3VFp1VTVNMWJCOXh0ejFROUxNQnp1THBHa2RMb2owTXlkbU9oa0V5MXNk?=
- =?utf-8?B?TEhUZzJIUjVRN1BSTU9GbEFEQnVyTzNpZVNZUDFHTVFxOTVJUXVXSjcxQ0JJ?=
- =?utf-8?B?ZUJCRU5GVmxmcVNNbmN2SUdiMUJNZWdRcmVQbDJoT3k4U2JoQ1RvVjBRbHlr?=
- =?utf-8?B?UDMzbFVZVm84VHVQbTNsOG4vT3I0VU1CV2dERnhOK3FhTitZNFdlLzFZeGNi?=
- =?utf-8?B?N0puS3NCSkMyNFR5ZFgzQ0k4dnRnU0FKMW9vM3VjcGswa2ZsZXJTcjNXakd5?=
- =?utf-8?B?QUU2RWtQZTVxL05NK3RCSUU0R2hRS1Jhb1lnSlBKWnZHc1J4djUwaXFqbTZh?=
- =?utf-8?B?QzFGbStUOGh2aVJXYWNabVJEdUlLMm8rWFYxajVXbVNrQWxUNnlQeEtITHh3?=
- =?utf-8?B?enBSb2RmaTZoVUc3K2VPZ2VMTmh3SjRENllMejM2N0FRbkp1Y3VUc1hnZUQ1?=
- =?utf-8?B?SFllQ0FWMi9PZ21tUFFjaFFtSnQ1RUdZQTJBZlAxalhrNTY1bGlaQ1BOMHhj?=
- =?utf-8?B?OWF1emZTQTFveU5TSTFpa3ZYcXlIM0RiWnlndXU5N1FoRm45OVVIajdNVmNI?=
- =?utf-8?B?U0tRbkFDaHNqNkN0NkVWMmx1Y1oyN05RQlpHMGtpKzFxb0VuVEdVRVFpcWlY?=
- =?utf-8?B?dkIyM1pCK1JGSXpvWHMxb2RoOG9LaFdqOW5SUU9VaUtheUJpWVcwZlFGNXp5?=
- =?utf-8?B?bVpzRUh4SS9YTFMzQlVLd2lNWGR0RXJURzlvSHI0ZDlEQjdVMmxFL0E3Zmx6?=
- =?utf-8?B?cnJNc3ZNbE8zZWRWb2U1TjhiUFRPVUlxWDlNd1l6OFN1Mit2bExyTHR5VWxZ?=
- =?utf-8?B?TUgvZkVNOGlFeE9WZm1Nei9mRW55Z2hqMG9XdHF2RkdLZ01OZHkyd1FZS0wz?=
- =?utf-8?B?RXZVZEdVYVdCOFpZTmVPTGlNekNkTkt5MmlKd3lNeFcyYTRUb0Z0ZllIem94?=
- =?utf-8?B?UU5WTlQrOXV3cjVKVjF6TS94aklVUUdiTlZDREV2RWVMSEJkUXNMU0xmNUhY?=
- =?utf-8?B?WUs2Vk41UzhkWnU2TlZrZS9BZC9YMUFjQ1dPeXQ2bEM0UU5jZVh5QT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66069cae-e448-4dc1-227e-08de5421a13a
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 10:34:14.9763 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: beUOcNpZsyzDSqNlQ5dspr/5FN6SgzjcqZEsKTYF9szyzqfrIAEfiRFFqS7IoPqtIWhwwyVZrS7Jgdgd6zTPhSoIbW1+SouiOutm2Q1ebXM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8591
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,38 +131,187 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
-
-On 1/8/26 12:07 AM, Jonas Karlman wrote:
-> This series add initial support for RK3582 support. The RK3582 is a
-> variant of the RK3588S with a few ip blocks disabled. What blocks are
-> disabled/non-working is indicated by the ip-state in OTP.
+On 1/15/26 07:10, Sumit Garg wrote:
+> On Wed, Jan 14, 2026 at 03:56:02PM +0100, Casey Connolly wrote:
+>>
+>>
+>> On 09/01/2026 12:02, Sumit Garg wrote:
+>>> On Thu, Jan 08, 2026 at 05:41:42PM +0100, Casey Connolly wrote:
+>>>>
+>>>>
+>>>> On 29/12/2025 12:43, Sumit Garg wrote:
+>>>>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+>>>>>
+>>>>> Recently upstream TF-A/OP-TEE has started gaining support for Qcom
+>>>>> platforms. RB3Gen2 being the first one and more to come. U-Boot in
+>>>>> corresponding boot flow is packaged as a position independent executable.
+>>>>>
+>>>>> So, lets add a generic U-Boot defconfig for Qcom platforms to support
+>>>>> TF-A/OP-TEE based TrustZone stack. Build command:
+>>>>>
+>>>>> $ make qcom_tfa_optee_defconfig
+>>>>> $ make -j`nproc` DEVICE_TREE=qcom/qcs6490-rb3gen2
+>>>>
+>>>> This would be better suited as a config fragment rather than a new
+>>>> defconfig imo.
+>>>
+>>> That's fine with me to add it as a config fragment.
+>>>
+>>>>
+>>>> But more importantly, enabling OPTEE support in U-Boot doesn't imply
+>>>> that it will be used, just that it's supported.
+>>>
+>>> There are real use-cases of OP-TEE in U-Boot for Qcom platforms like
+>>> secure EFI variables based on OP-TEE secure storage. Have a look here [1].
+>>>
+>>> And sure there will be more such use-cases like fTPM, KASLR etc. can be
+>>> supported based on OP-TEE.
+>>
+>> I was referring literally to the fact that CONFIG_OPTEE being enabled
+>> doesn't imply that OP-TEE is running, it's faulty logic to assume that's
+>> the case and add nodes to the DT.
 > 
-> Compared to the vendor U-Boot variant, this mark cpu, the gpu and
-> vdec/venc with status=fail instead of removing nodes during DT fixup.
-> Linux skip cpu cores marked as failed staring from v5.17-rc1, however
-> the GIC driver will generate a harmless WARN_ON that safely can be
-> ignored. A patch for Linux will be sent to skip the WARN_ON for
-> failed/disabled cpu cores once this lands.
+> I don't disagree here as having a runtime check is always a better
+> choice then a compile time config option. However, there isn't a common
+> info method from properietary firmware that says if QTEE is running
+> instead of OP-TEE.
 > 
-> It is recommended to use rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
-> as DRAM init blob RK3582, listed in latest RKBOOT/RK3582MINIALL.ini.
+>>
+>> I just checked and there is an SMC call that tells you the UUID for the
+>> trusted OS, referred to as OPTEE_SMC_CALL_GET_OS_UUID in U-Boot and
+>> OPTEE_ABI_CALL_GET_OS_UUID in OP-TEE. Presumably this identifies OP-TEE
+>> specifically.
 > 
+> Also, we don't know how the QTEE will react to this OP-TEE specific SMC
+> call given it's different variants running on legacy and the newer SoCs.
+> So I would suggest to better gate OP-TEE presence behind a compile time
+> check only.
 
-As opposed to what?
+So you say it's fine to add the optee node, and the driver will bail out if
+OPTEE is not present, but it's not good to call OPTEE_SMC_CALL_GET_OS_UUID
+in the fixup code to enable OPTEE only if present ?
 
-I see there are 2 DDR bin and 2 eyescan DDR bin in rkbin, but I'm 
-assuming at some point there'll be a newer release so we need to know 
-which to use.
+It's literally the same, my point in https://lore.kernel.org/all/b60d5ee7-fa27-4dc1-8a09-964912ec5654@linaro.org/
+was exactly that, just call OPTEE_SMC_CALL_GET_OS_UUID and add the OPTEE
+node only if present _AND_ if CONFIG_OPTEE is enabled.
 
-I'm assuming what matters is to match what's inside 
-RKBOOT/RK3582MINIALL.ini? Can you add this to 
-doc/board/rockchip/rockchip.rst maybe?
+Move the CONFIG_OPTEE enable in a fragment and we're done, you will only
+select OPTEE explicitly on desired platforms, and won't run the naughty
+OPTEE_SMC_CALL_GET_OS_UUID on old crappy platforms.
 
-Cheers,
-Quentin
+Neil
+
+> 
+>>
+>> My suggestion would be to make this SMC call if CONFIG_OPTEE is enabled
+>> in qcom_psci_fixup(), compare the UUID and add the node if it matches.
+> 
+> That's exactly the first SMC call that U-Boot and Linux OP-TEE driver
+> does to compare the UUID here [1] and bail out of the driver. I don't
+> see a value of a redundant invoke in the Qcom specific platform code.
+> 
+> [1] drivers/tee/optee/core.c:823:   if (!is_optee_api(pdata->invoke_fn))
+> 
+> -Sumit
+> 
+>>
+>>>
+>>> [1] lib/efi_loader/efi_variable_tee.c
+>>>
+>>>>
+>>>> So I think the more appropriate patch here would be to just enable
+>>>> OP-TEE in qcom_defconfig (assuming the binary size isn't significantly
+>>>> affected).
+>>>
+>>> The OP-TEE driver in U-Boot itself is probed based on DT and it's not
+>>> only specific to Qcom platforms but every other platform using OP-TEE.
+>>>
+>>>>
+>>>> Considering the other patch is based on this assumption that if OP-TEE
+>>>> support is enabled then the board must be using it, a different approach
+>>>> is definitely needed.
+>>>
+>>> Yeah that's true even with TF-A boot flow, there is possibility to boot
+>>> without OP-TEE as well. However, TF-A generally doesn't provide a
+>>> generic option to detect whether OP-TEE is running or not.
+>>>
+>>>>
+>>>> When I was looking into this last year I remember discussing this same
+>>>> issue from the Linux side, there is a good argument to be made that
+>>>> OP-TEE support in Linux shouldn't be based on the devicetree -
+>>>> particularly in the Qualcomm case where whether or not OP-TEE is used is
+>>>> a simple software change, nothing to do with hardware.
+>>>
+>>> Sadly it's true for every other silicon vendor too. But OP-TEE support
+>>> based on DT has become an ABI unless migration for OP-TEE support based
+>>> on FF-A comes into picture.
+>>>
+>>>>
+>>>> So in general I'm not particularly keen on this approach, I think it
+>>>> /might/ be acceptable for U-Boot to have some fixup code to add the
+>>>> OP-TEE node if OP-TEE is in use with the idea of phasing that out in
+>>>> favour of runtime detection in the OS itself. I'd also expect that fixup
+>>>> code to go in the generic U-Boot DT fixup code that runs before we jump
+>>>> to the OS (like the EFI DT fixup function).
+>>>
+>>> The EFI DT fixup code is already there based on U-Boot DT. Have a look
+>>> here:
+>>>
+>>> boot/image-fdt.c:627:   fdt_ret = optee_copy_fdt_nodes(blob);
+>>>
+>>> In general on Arm platforms there isn't any SMC bus to detect
+>>> dynamically if there is support for OP-TEE or not. That's why
+>>> platform bus was choosen for the U-Boot and Linux OP-TEE driver. It's
+>>> similar to how we have the SCM DT node for Qcom platforms.
+>>>
+>>> FF-A bus tries to solve that problem to unify that approach for future
+>>> platform but U-Boot hasn't yet gained support for FF-A based OP-TEE
+>>> driver too.
+>>>
+>>> Anyhow, this is the sanest way I can come up with to enable OP-TEE
+>>> support in a general way for all the Qcom platforms. This is aligned
+>>> with how OP-TEE support is detected for other silicon vendors too.
+>>>
+>>> -Sumit
+>>>
+>>>>
+>>>> Kind regards,
+>>>>
+>>>>>
+>>>>> For more information refer here:
+>>>>> https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
+>>>>>
+>>>>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+>>>>> ---
+>>>>>   configs/qcom_tfa_optee_defconfig | 7 +++++++
+>>>>>   1 file changed, 7 insertions(+)
+>>>>>   create mode 100644 configs/qcom_tfa_optee_defconfig
+>>>>>
+>>>>> diff --git a/configs/qcom_tfa_optee_defconfig b/configs/qcom_tfa_optee_defconfig
+>>>>> new file mode 100644
+>>>>> index 00000000000..c398521770f
+>>>>> --- /dev/null
+>>>>> +++ b/configs/qcom_tfa_optee_defconfig
+>>>>> @@ -0,0 +1,7 @@
+>>>>> +# Configuration for building a generic U-Boot image
+>>>>> +# with support for TF-A/OP-TEE based Arm TrustZone stack.
+>>>>> +
+>>>>> +#include "qcom_defconfig"
+>>>>> +
+>>>>> +CONFIG_TEE=y
+>>>>> +CONFIG_OPTEE=y
+>>>>
+>>>> -- 
+>>>> // Casey (she/her)
+>>>>
+>>
+>> -- 
+>> // Casey (she/her)
+>>
+
