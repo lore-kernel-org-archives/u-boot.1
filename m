@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BBED3CCA3
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 02:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44D9FD3CCAE
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 04:47:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 263BD80325;
-	Thu, 15 Jan 2026 03:41:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4CDB180325;
+	Thu, 15 Jan 2026 05:47:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bd0CLzQc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VyBYclpb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29991803F5; Thu, 15 Jan 2026 03:41:03 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 5438C803F5; Thu, 15 Jan 2026 04:12:48 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7EF980077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 03:41:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20C4B80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 04:12:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-653781de668so556761a12.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 18:41:00 -0800 (PST)
+ spf=pass smtp.mailfrom=chiffathefoxx@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9b0b4d5dso975125a12.1
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:12:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768444860; x=1769049660; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I0X7Bcfjbb7cjoMLgHgvS6Sf5y2xJEfFGeqt8IlLyQQ=;
- b=bd0CLzQcDS5ItuOWAQz98P75wMV881cqraohjx5HifCocIXaYyomEw9iCAMMCf6+K5
- LSDjggidGCFNT4Ceb9QkFZdBOdg0CTCHHKJpP3XmvpYABq6rBRUXahNxH71egyEIiuoA
- 8gnz5EfhzL/APiT6tXTX+B+BfP+A6OilZVUY/X/APfvWWVlqbQzmftjEysJ/lA9hS+rS
- mh5hoKI0693skF6EUllnhObLrTQ14whsgz03cii0EEG/yOKXACWyUxYyLEPAO8zzsCsX
- gT3cRiN0lvoD2Gy+pcsuC4KwJnQw3S8gGuUDaI1nBwQ4VdedBnFKj9Kefej2lPjjDXn2
- 0L9g==
+ d=gmail.com; s=20230601; t=1768446765; x=1769051565; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5YN3IvwG0slHF5rWZsgLCd56+wAXUCZO+4l7UK93eWk=;
+ b=VyBYclpbjcRERUYhkghUhVFlnpcqmDYvcesI3Q2o9x3dZVUqdDUhQL8s7OptY9pXCd
+ B9vMTd68mzZVLfLADp4LsfJCIEFb6gAtsH80DbRKbnwELgQh6fPFuoyUTI3twekIobd3
+ g7h0s4OD7A/gI8+UYCptNghXvTGMN47rl96ohJ3CESKUFiutn28WdqD0Bkv/lxf48Bbs
+ RIKVaLZciL139h1BTs4/Md/1Iuq3Rxu3/N6iVKpju1wYjij2G7X9Y+YRZPxcLtLCeURG
+ ZxhTfyFnX5fSY+l6bo1TJI7x2wxSLXf4ShYWRzUWAKbOJTI39UvVdYl4OnILwpst4jF7
+ UaIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768444860; x=1769049660;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1768446765; x=1769051565;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I0X7Bcfjbb7cjoMLgHgvS6Sf5y2xJEfFGeqt8IlLyQQ=;
- b=izWFlOKf7fnrXlqf1+oqjb9W42Jsy5QN2vN92BjLrLtBgY1Fv/MqdStZx7eKkas5ey
- dI4TMuKU2zU1bzB21kbqME6Y+rFrvte0cQlTApXLGRprix/NstqlQhEjkzWEqOJulI67
- QA7f3luPGyC0JMesZYuvTJHBFqwPD/U7LrxSy9qJKA+sAIoHPiHeCF7Y4uzhR5EQVw/d
- +pXCJsXGSNcTfHH5Dcrej26iNYcbEcYwOgmoYt493q6kLkTD1RN10ZbBppz/LMaOr27h
- BSvXVo4r/QYbtdSa0AVgJBDWmUd/dIM079jSGF7wk8YECiC7DeN2oT8eMBRvE2r2DnYW
- ugeA==
+ bh=5YN3IvwG0slHF5rWZsgLCd56+wAXUCZO+4l7UK93eWk=;
+ b=jkDR6mGd+MffUdiRBeXfSVc2ZbL0iRAja8Ozs+EDdn0bv1vzz0yFdb3UqtGgVAHxJ8
+ myioE47e20OR4ONDbU4jQEDStYJLwMc4dzVeDShUUleNCP6n8wVKRv249D944BU5wGSl
+ FLbewU26gDDhjlCn8GpYnK/7hmXX7UQguSl8DdVfWo0CpjH1S86QHvKccSNOX05BM6Jb
+ Yy+5soWB4HerR4wmCIQw/vqR8MQoJquVk4vwdVB61bswV3U8OWucEerMcQV76aLdDx7C
+ EJBpQtU4ATNjJI+MTQF7QjYQ7uesb02tn3gJGmQzw3kcO4abuxQD3Sr8nRwf7s5EEdWr
+ fpmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/v9vYln8zqzDpIYb120wrB2Q1kBigOueRrdXW60qvgIWAyCYjEbZLLlc2nQ7nTW8g6JKssK0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPdKH8R8/45nTW0hrUoLfDlIeCcJe699+aeByQFQQcrxxy72DY
- ailtXI4x50TCukjYbPJU0OZLXs4nPT3bvR23YPwabUB52o4Qf56pOZlcf1KkA5ItqK+VJlAOus7
- qZGtpytxQseSPRtKVWEj5aiKKHYV3Wts=
-X-Gm-Gg: AY/fxX6/AmNryqYyZUEuPaOXJJ1AqudMgfdhXnzEnuFKEAN0bi9H/aShxrZKcTK1c0/
- cw+4QrkpQMAGe+AeYKqlcop4BOxwD6vKvtV0bR8IHbUOOosQe+HppvHI4ZnMTpmLp6CTqMhVyzc
- 2WIfA46IhJMPBbtPXdvwcs4kTdapLAejaUpAPfFWPJPUGvopT0VsGiDCesEekGTX44exDCkpsih
- Mwc0Sq9SzPhaUQuT46DqttMZOP3j1wegDvFL1PbkNgBLioZd+aZroiKX4bC5sotFto+85aAGt99
- 1rn3zTKSZw4baMA+b8z+1WfwTx6mzOfymbgWEIcVIBC5TPpUr4lCf5oEdNCjBOSGeXu18TLZxKt
- 7aJi5ZSm90lyOh4PFeOIj30PVOkXIHIHBwJHqJg==
-X-Received: by 2002:a05:6402:268a:b0:64b:6e20:c92e with SMTP id
- 4fb4d7f45d1cf-653ee15f0ebmr3368240a12.10.1768444859905; Wed, 14 Jan 2026
- 18:40:59 -0800 (PST)
+ AJvYcCUB7rp6kj+zhjoklrm5p9rBNDhBWTOGA1OiBi956/TrbEzJV4CDBirq45+n+jix54P5WrtP3FY=@lists.denx.de
+X-Gm-Message-State: AOJu0YykXhUf4KMh0c2CueY0VSdquqivL3BlfH5PcfCM5NqfbCdoff4R
+ UI9YQAGgQYMaJCjF2gdGjM/pDBtOh5dhadcC2Pn/jWh1Jf5T98NBuCgW
+X-Gm-Gg: AY/fxX6EHVHPQ+zwltPSQ6JvcqMi5bqCm4WfrsCDRfTMMX7iXQUvm0njylZAkN2Qtgq
+ 579HMWQ640ty6p3/PUaBOB2IZjRXzNcdhKDQ+BcwN+d+vucS/e7sV+5M+YWCbtGx5Dmq1zqz3wG
+ Z0eK+MvQZLkqxEO5AT4mow81XVHbE3UvV5D77aOHIMcplrcZ+f5dh7u8kVg3Xc1KOJWNVG1Ch4A
+ aktSNi50jY2hg7RfenyqofeOEtDnDOxJTIysqEnbq4aOeFiAF3fxam7BWecE/W72K6h5OBI4mjk
+ WCcYtVZoA16Jl2jQ0qKesgQeF0zZtLa4EKkEvy7cvvuCRe6qt7SDgWmJ/VBIPCrZMWVX1FLqChJ
+ 0na53fUjKlXehsxG8i4CdWuyv2ICne3YNYnzaFt7Ib4qzIcezHnG+R9LHWO0qw9CNVM0cVgOVD7
+ Y=
+X-Received: by 2002:a17:907:6d07:b0:b87:1ffc:2fba with SMTP id
+ a640c23a62f3a-b876126d6f0mr455693166b.43.1768446765332; 
+ Wed, 14 Jan 2026 19:12:45 -0800 (PST)
+Received: from desktop.. ([176.100.0.19]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b86f9a9103bsm1341263266b.30.2026.01.14.19.12.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Jan 2026 19:12:44 -0800 (PST)
+From: chiffathefox <chiffathefoxx@gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: chiffathefox <chiffathefoxx@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Lukasz Majewski <lukma@denx.de>, Maksim Kiselev <bigunclemax@gmail.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/2] Improvements to the recent clock rework by marex.
+Date: Thu, 15 Jan 2026 05:11:12 +0200
+Message-Id: <20260115031114.220888-1-chiffathefoxx@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <cover.1768403729.git.michal.simek@amd.com>
- <6e18320e-d481-4871-87d2-1debd8a104af@freeshell.de>
-In-Reply-To: <6e18320e-d481-4871-87d2-1debd8a104af@freeshell.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 15 Jan 2026 02:40:48 +0000
-X-Gm-Features: AZwV_Qjr1GgLIhd3P1djUbK3RokJ4wsRsEveD0f_yk6eTiYogePnAzEOB3Ku3xY
-Message-ID: <CALeDE9MV36Oq7q_Lo=EW1jVrC2Foe68WHtvkLC+TjhkQgeXk5Q@mail.gmail.com>
-Subject: Re: [PATCH v4 0/3] efi_vars: Implement SPI Flash storage for EFI
-To: E Shattow <e@freeshell.de>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com, 
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 15 Jan 2026 05:47:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,139 +106,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 Jan 2026 at 18:35, E Shattow <e@freeshell.de> wrote:
->
-> Hi Michal I have some user-facing questions about this concept.
->
-> On 1/14/26 07:15, Michal Simek wrote:
-> >
-> > This is updated series based on v3 version sent here
-> > https://lore.kernel.org/all/20231126220836.374956-1-i@shantur.com/
-> >
-> > that's why I am continuing on v4 instead of starting from scratch.
-> >
-> > Tested on kv260 with saving variables to location where User MTD partition
-> > is.
-> > CONFIG_EFI_VARIABLE_SF_STORE=y
-> > CONFIG_EFI_RT_VOLATILE_STORE=y
-> > CONFIG_EFI_VARIABLE_SF_OFFSET=0x22a0000
-> >
-> > Thanks,
-> > Michal
-> >
-> > Changes in v4:
-> > - New patch based on review comments from v3
-> > - use unify methods for reading/writing variable
-> >
-> > Changes in v3:
-> > - Fixed compiler warnings.
-> >
-> > Changes in v2:
-> > - Refactored efi_var_file to move common parts out as requested
-> > - Changed ifdefs to use CONFIG_IS_DEFINED
-> > - Fixed typos
-> >
-> > Michal Simek (1):
-> >   efi_var: Unify read/write access helper function
-> >
-> > Shantur Rathore (2):
-> >   efi_var_file: refactor to move buffer functions
-> >   efi_vars: Implement SPI Flash store
-> >
-> >  include/efi_variable.h          | 18 +++----
-> >  lib/efi_loader/Kconfig          | 26 +++++++++-
-> >  lib/efi_loader/Makefile         |  3 +-
-> >  lib/efi_loader/efi_var_common.c | 44 ++++++++++++++++
-> >  lib/efi_loader/efi_var_file.c   | 65 ++---------------------
-> >  lib/efi_loader/efi_var_sf.c     | 91 +++++++++++++++++++++++++++++++++
-> >  lib/efi_loader/efi_variable.c   | 16 ++++--
-> >  7 files changed, 187 insertions(+), 76 deletions(-)
-> >  create mode 100644 lib/efi_loader/efi_var_sf.c
-> >
->
-> So far as I'm aware support for EFI variable storage is always integral
-> to a filesystem as the EFI System Partition, even in the case of the
-> specially-handled MMC boot partition facility. With presence of many
-> possible ESP is there then only one active ESP, or do all ESP become
-> part of a pool of available locations?  I'm not understanding this
-> clearly what is the purpose of selecting an ESP if the variable storage
-> is not integral to the ESP.
+Symptoms:
+I ran into an issue with the generic ccf_clk_divider clock driver. ccf_clk_divider assumes that the pointer passed to clk_divider_recalc_rate() (https://github.com/u-boot/u-boot/blob/master/drivers/clk/clk-divider.c#L80) is the same that was kzalloc()'d during clock registration. This assumption was breaking when calling clk_get_rate() on a clock retrieved via clk_get_by_index(), since clk_get_by_index() returns a copy of `struct clk` rather than the original pointer. For example, in https://github.com/u-boot/u-boot/blob/master/drivers/serial/serial_s5p.c#L131 the serial driver retrieves a clock using clk_get_by_index(), and then indirectly passes a pointer to stack-allocated `struct clk` to clk_divider_recalc_rate(), which breaks the ccf_clk_divider driver.
 
-EFI variables have nothing to do with ESP filesystems. Most
-implementations of EFI variables don't use ESP partitions to write
-variables, U-Boot did that basically as a work around. If you look at
-the average UEFI implementation on a Intel device the EFI vars are
-written to the flash storage where they can be signed and validated to
-ensure they're not changed without the firmware knowing.
+Description:
+The Clock API relies on the fact that you call it's functions with a pointer to the
+kzalloc()'d `struct clk`, and not a copy of it. To ensure this, existing
+clock drivers use ccf_clk_get_rate() and clk_get_by_id().
+The clock rework path missed this fact, and instead was returning names
+and pointers for the root device.
 
-> Does having EFI variable storage in SPI Flash always take priority over
-> other ESP presence that might have additional variable storage as a file?
+Testing:
+I tested this on Samsung S10 (exynos9820 SoC) with a custom clock driver
+and a device tree. Unfortunately, I don't own any other exynos devices
+supported by u-boot.
 
-That would presumably depend on the U-Boot build options.
 
-> Can (or should?) there be a runtime configurable setting to decide two
-> preferences; does one depend on the other or are these independent?:
+chiffathefox (2):
+  clk: clk_resolve_parent_clk(): resolve external clocks by id
+  clk: exynos: do not reparent requested clock
 
-No. It would be a device decision.
+ drivers/clk/clk-uclass.c | 7 ++++++-
+ drivers/clk/exynos/clk.c | 1 -
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-> 1. Preferred ESP
-> 2. Preferred EFI variable storage strategy
->
-> Consider not wanting to have a perceived ABI breakage as the SPI Flash
-> layout is previously codified by user expectations of what the vendor
-> initially shipped with the product and having been codified in upstream
-> Linux kernel devicetree definition. For the example where this would be
-> useful for boards where there is a well-known SPI Flash layout, I am
-> thinking of StarFive VisionFive 2 where there is {U-Boot SPL, U-Boot env
-> storage, U-Boot Main at 1MiB offset}; does your implementation of EFI
-> variable storage in SPI Flash have a suggested co-existence with the
-> "gap" in the area that is currently U-Boot env storage?
+-- 
+2.34.1
 
-The board maintainer would decide that, or the vendor, or if the user
-wants to building their own.
-
-> The use situations I am thinking of:
->
-> A. Installing a new OS or booting purpose-built image, where it is
-> intended that having (for example) a USB mass storage class or SD Card
-> of the all-in-one image depends on U-Boot in SPI Flash deciding both
-> that the EFI System Partition on the removable media is a priority over
-> other similar media (other different USB boot devices that may be
-> present, existing eMMC storage module possibly with ESP in addition to
-> the inserted removable SD Card).
-
-Well by storing the EFI vars on the SPI flash the user can erase one
-of the storage options without necessarily impacting the EFI vars
-without knowing.
-
-The storage of EFI vars on the flash of the firmware is what you get
-on x86 devices.
-
-> B. Preventing the ambiguous selection of any additional removable
-> storage containing an EFI System Partition from breaking the desired
-> boot strategy. In many situations a user wants assurance that the board
-> will boot exactly the same every time regardless of what additional
-> removable media containing EFI System Partition might be connected.
->
-> C. Corrupt or unusable selected EFI System Partition prevents any
-> recovery and there is no runtime mechanism to attempt an alternative
-
-No it doesn't there's EFI fall back options or you could erase the
-vars from the u-boot cmd line etc.
-
-> Is there a possible mechanism for adding a runtime check (GPIO state,
-> key press, network event) to make the decision between some immutable
-> boot preference, or a user-configured boot preference?
->
-> Overall I want to get an understanding of how it might be recommended to
-> make use of this for StarFive VisionFive 2 board target(s). Many hours
-> of troubleshooting headache have been the result of EFI System Partition
-> confusion on board that have a wide variety of storage subsystems (MMC,
-> USB, NVMe, ...) which result in some really strange outcomes with
-> installers of GNU/Linux OS distros;  particularly as the devicetree dtb
-> search path currently points to storage subsystems that are typically
-> removable media, or the failure mode where an OS installer is using the
-> selected EFI System Partition that "leads on a path to nowhere" and is
-> not the intended installation target.
->
-> -E
+base-commit: d503633a36767d756c7de28305cf0de79440cbc0
+branch: clk-rework-improvements
