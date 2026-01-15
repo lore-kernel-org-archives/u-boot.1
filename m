@@ -4,62 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75ACBD46604
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 18:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467BCD46604
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 18:50:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C039680325;
-	Thu, 15 Jan 2026 19:46:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A483280325;
+	Thu, 15 Jan 2026 19:50:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zcG3OICd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IWn+SfPq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15BAE830E4; Thu, 15 Jan 2026 19:46:54 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1B18782BF2; Thu, 15 Jan 2026 19:50:39 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 558DE80077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 19:46:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FF2C80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 19:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=6bf5=7V=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1768502810;
- bh=s0PXJUSIWA0g+v8kKN6RMAWp94usVnswKkqtASbLQ08=;
- b=zcG3OICddhHIIJ7gwf0LWPkU6NjnqtGw7LHHdT3Ah3WMJnXb1XF1Q+DBQPvgekOVuhIW9inzY
- obBgVZpLGicD0vohrwFmaBY/iKMml5xzBzXgvFQtI1YbaaYDl4/H6k9MJf+PGbCVb5fIX3BrQOr
- 8GjTH/vXdbfcYYvUjlTccI1H0T22utJxXNcuUyQhF5jOmg5ZnFOt/YIfgC7GfmSlIwXHGzIE/Y6
- tpT0bPIb/+RO4qYyBgpxkeBh9mIUzlMbA7BdkBLSpKe5Y4qNSyEVxZlt9w2vHaTRzEybMhVpi1W
- ql19O3SdoeJ1QIGivTyN2hZQ2PSGIRki/wedIPaQgh7w==
-X-Forward-Email-ID: 69693616e6e309b30d461fe4
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.2.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <64c4723c-c5af-4800-8886-b06c1fa8bb8e@kwiboo.se>
-Date: Thu, 15 Jan 2026 19:46:42 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7cfd48df0afso808295a34.1
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 10:50:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1768503035; x=1769107835; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LeueNxBBWnZn17nD0VxaE5K3b7uSgSI+cmQ7cw+87NA=;
+ b=IWn+SfPqBLGcUT6FSkKAcQ+99Y4WSAeXjuiDzKNwbezqE2HYfE+s1ljDIEzC19YAaf
+ Sq9kvKiaiS6hjf0Vq7RjOMCRZmv59junbfFTRjetZxAORftSgBZchGEs3cumHjbB7M+d
+ lr4WRiq7s6LxkLHLbBIxJGDA3mES0isFJxUC0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768503035; x=1769107835;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LeueNxBBWnZn17nD0VxaE5K3b7uSgSI+cmQ7cw+87NA=;
+ b=w8PirCjBNMjNmlAWr1rPTTSDszBuHo5xohPvpVqQuxO9pWe3nOSVb0mKWa/XkQ8F50
+ e0RmIsagvPt/1tsCts3ppGY8cswLLx+Zh/ESdRqhT1+i8+KzFZD+9JOsYFVSZm9XWZfE
+ NrW2OONu24D+Cd+0kmAR9r2Pnb8nVl9e9p8PCwRv5U365lTXfao6FxXBrQOvX6CgRfx/
+ xfj6blxqp+FmmmcIMPWWplmCk6HdNDM/aJ2cukiz2RZcZVFCUMwIJm3mhpW8Tlu0S5AS
+ pzMhDXBMqIkFeNQWLd7uU/qlwYxOEAobGIt56A2NVdC7SbYy/FT+/yusX8VdXdXfY08L
+ raYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKGWXGVhZZm2XFSUdfLXIr/zUC5zjmXXF53ujAV3z6NxPXZie1fZv6qizsQ7pMuYMNK1fNuak=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSdR3kjG8j66+PxH7Gcj7YlA8iX/m4ot8Y31NYCQdXTiKFfXEv
+ 1OvzcF4KfpJg/2wRClyuTz9E5dfY8U1JX3M5RNBqgw3b5lqJUzHd5f0nGqsYbikefuI=
+X-Gm-Gg: AY/fxX7GlerS7N914f/vr/sAbUVC4GPwa4UrMY8gEXytI13WpfzXaNXPl6Od+uGXxwE
+ +XavDop2QIsYzhrubWZX/NNsLD7E9SAvoRWGuPDBHGOQkFyVsMYQduyBKReO8Q8ADsgveWjJDdY
+ uCngkUT6UI7xC6CU95k/4QGViKfqv+zGlBbdKCl6hqc3NtfozdD8eaiRnGV0iQ/hmri+0G6o+QF
+ V6y2oqOpYWAZ4sQceBs95YXnUL0WV0yB4JWRfhzTRgodiXBoYN0tr6LbPdUxf8rL/vI/Sj3mgja
+ LKCAmPEWkArVMCvvtXfAC3x9nRhU5saER3BTFTxASqelVRyU0mZdWCEiZ3Bg+4LJiBDJp9APfIr
+ r28psRVaUg1TO9wL2swhP/ZE2Qim6jN0TEaCVF8Zz++zLQilDlGjp4v6E2B5DtQqwwHe0XGzJ4p
+ 7CUQE4SOx+Pb8Y2GrN+umhcYkLBAuDiGEoa2krxYsrLAcqunWWu3KC1acGeXr2m7SU4DNcFLi3w
+ QU8ogAtgch6yLCyj5MOBnjYZIAiPgd1xV3nouE=
+X-Received: by 2002:a05:6830:370e:b0:7c7:da3:ed27 with SMTP id
+ 46e09a7af769-7cfdeeaae86mr247938a34.35.1768503035069; 
+ Thu, 15 Jan 2026 10:50:35 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf2a696esm162600a34.21.2026.01.15.10.50.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Jan 2026 10:50:34 -0800 (PST)
+Date: Thu, 15 Jan 2026 12:50:30 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "alexander.feilke@ew.tq-group.com" <alexander.feilke@ew.tq-group.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, u-boot@ew.tq-group.com
+Subject: Re: [BUG] silent hangup when debugging lib/fdtdec.c
+Message-ID: <20260115185030.GH3416603@bill-the-cat>
+References: <302c38-69287300-35-2a0bce00@4807151>
+ <d6f95-69660800-e9-39c27bc0@93971335>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/3] rockchip: Add initial RK3582 support
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-References: <20260107230747.3552391-1-jonas@kwiboo.se>
- <cd629f5c-f69d-4b87-908b-aa323c78792e@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <cd629f5c-f69d-4b87-908b-aa323c78792e@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cP9tPGlatbGDATsl"
+Content-Disposition: inline
+In-Reply-To: <d6f95-69660800-e9-39c27bc0@93971335>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,97 +100,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 1/15/2026 11:34 AM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 1/8/26 12:07 AM, Jonas Karlman wrote:
->> This series add initial support for RK3582 support. The RK3582 is a
->> variant of the RK3588S with a few ip blocks disabled. What blocks are
->> disabled/non-working is indicated by the ip-state in OTP.
->>
->> Compared to the vendor U-Boot variant, this mark cpu, the gpu and
->> vdec/venc with status=fail instead of removing nodes during DT fixup.
->> Linux skip cpu cores marked as failed staring from v5.17-rc1, however
->> the GIC driver will generate a harmless WARN_ON that safely can be
->> ignored. A patch for Linux will be sent to skip the WARN_ON for
->> failed/disabled cpu cores once this lands.
->>
->> It is recommended to use rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
->> as DRAM init blob RK3582, listed in latest RKBOOT/RK3582MINIALL.ini.
->>
-> 
-> As opposed to what?
+--cP9tPGlatbGDATsl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The release note for rk3588 rkbin blobs [1] list this DRAM init blob
-version with:
+On Tue, Jan 13, 2026 at 09:52:35AM +0100, alexander.feilke@ew.tq-group.com =
+wrote:
+> > > Description: U-Boot hangs silently during boot when enabling DEBUG=20
+> > > in lib/fdtdec.c
+> > >=20
+> > > Not sure if its really a bug or rather a configuration issue on my si=
+de.
+> > >=20
+> > > Minimal steps to reproduce: <see patch>
+> > >=20
+> > > The hang is caused by `panic("FDT overlap");` later inside the if blo=
+ck.
+> > > (see `lib/fdtdec.c:1279` in `fdt_find_separate(void)`)
+> > >=20
+> > > Additionally, no boot log can be seen because serial is initialized a=
+fter
+> > > loading the devicetree in this boot stage (see `common/board_r.c:665`=
+ in
+> > > `initcall_run_r(void)`)
+> > >=20
+> > > Tested on i.MX6 with configs for tqma6d_mba6 and other tq boards that
+> > > aren't, mainlined yet (tqma6ulx_mba6ul and tqma7d_mba7).
+> > >=20
+> > > Any idea what to look for to fix this on our side?
+> > >
+> >=20
+> > I can boot and reproduce the hangup issue on mx7dsabresd:
+> >=20
+> > <debug_uart>
+> > FDT 8787da38 gd 0091de20
+> > top 87887538 sp 87800000
+> > sys_init_sp_addr 0091ff10
+> > gbl_data_size 000000f0
+> > FDT overlap
+> > resetting ...
+> > System reset not supported on this platform
+> > ### ERROR ### Please RESET the board ###
+>=20
+> Just want to revive this topic as the issue is still unresolved.
 
-  New
-  - Add RK3582 support.
+OK, so looking at this, it's a "feature" as the check doesn't take in to
+account that we might not have relocated gd out of initial memory (in
+this case, 0x009.....) and in to sdram (0x8.......) and so is a faulty
+check.
 
-So this remark was a hint that users should use a DRAM init blob that
-has proper support for RK3582 when testing this series.
+--=20
+Tom
 
-[1] https://github.com/rockchip-linux/rkbin/blob/master/doc/release/RK3588_EN.md
+--cP9tPGlatbGDATsl
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> I see there are 2 DDR bin and 2 eyescan DDR bin in rkbin, but I'm 
-> assuming at some point there'll be a newer release so we need to know 
-> which to use.
-> 
-> I'm assuming what matters is to match what's inside 
-> RKBOOT/RK3582MINIALL.ini? Can you add this to 
-> doc/board/rockchip/rockchip.rst maybe?
+-----BEGIN PGP SIGNATURE-----
 
-That is something that is true for all SoCs using BL31 or ROCKCHIP_TPL
-blobs from rkbin repo and a topic I think is better suited for a
-separate documentation improvement series.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWk28gAKCRAr4qD1Cr/k
+CvngAQCAh3+6Gs5boVB1SwXEIrn+CQW9ZeS97bvpzxIlPz3QJgEAw2Zk/lOXBP5M
+RtRHxUZYmCZVZk7JQ0cNKpLvdY1TSA8=
+=QZUL
+-----END PGP SIGNATURE-----
 
-Something like following could possible be added.
-
-  When BL31 and ROCKCHIP_TPL blobs from rkbin is used it is recommended to select
-  the blob referenced in RKTRUST/<soc>TRUST.ini and RKBOOT/<soc>MINIALL.ini.
-
-  Something like following can be used to set the environment variables:
-
-  .. code-block:: bash
-
-        export BL31=../rkbin/$(confget -f ../rkbin/RKTRUST/<soc>TRUST.ini -s BL31_OPTION PATH)
-        export ROCKCHIP_TPL=../rkbin/$(confget -f ../rkbin/RKBOOT/<soc>MINIALL.ini -s LOADER_OPTION FlashData)
-
-That is similar to what I use in my build scripts :-)
-
-For this series I will however include something like below in a v5.
-
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 217694de0c92..022f8f2f20c0 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -329,13 +329,15 @@ To build rk3576 boards:
-         make roc-pc-rk3576_defconfig
-         make CROSS_COMPILE=aarch64-linux-gnu-
-
--To build rk3588 boards:
-+To build rk3588 (or rk3582) boards:
-
- .. code-block:: bash
-
--        export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.33.elf
--        export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
--        make evb-rk3588_defconfig
-+        export BL31=../trusted-firmware-a/build/rk3588/release/bl31/bl31.elf
-+        [or]export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.51.elf
-+        export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.19.bin
-+        [or]export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_1848MHz_lp5_2112MHz_v1.19.bin
-+        make generic-rk3588_defconfig
-         make CROSS_COMPILE=aarch64-linux-gnu-
-
- Flashing
----
-
-Regards,
-Jonas
-
-> Cheers,
-> Quentin
-
+--cP9tPGlatbGDATsl--
