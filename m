@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E06D44C66
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 15:25:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7740ED44C76
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 16:14:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35B2480077;
-	Thu, 15 Jan 2026 16:25:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
+	by phobos.denx.de (Postfix) with ESMTP id 813CD80325;
+	Thu, 15 Jan 2026 17:14:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="lnFOJ3Ir";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="X9ADEd7I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8484080325; Thu, 15 Jan 2026 16:25:49 +0100 (CET)
-Received: from mxout1.routing.net (mxout1.routing.net [IPv6:2a03:2900:1:a::a])
+ id 0350C82BF2; Thu, 15 Jan 2026 17:14:48 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B34B38003E
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 16:25:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1DB880077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 17:14:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=fw-web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
-Received: from mxbox4.masterlogin.de (unknown [192.168.10.79])
- by mxout1.routing.net (Postfix) with ESMTP id 4101A3FE7D;
- Thu, 15 Jan 2026 15:25:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
- s=routing; t=1768490746;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xyuYJ/wr8qRfy2tcwsYViFFwFU4Z5YDcoK09sNgvizw=;
- b=lnFOJ3Ir2MUscwfuK4uYBDizst1vFHHgcjtdWScJF9/0nwBFMtAV3mXJ5ekoRdIcjpNdw1
- E8T/EtgnhjG9upKNp5UZzaBzoURnBFtcOw3sb6lujrxSe4qCF44XK2uT3lpV1MWXBWj8OQ
- syBEGsX5z/5YdrfqUdekfHodToZupUE=
-Received: from ehlo.thunderbird.net (unknown
- [IPv6:2a01:599:a23:b22:7695:9e1e:d500:2c06])
- by mxbox4.masterlogin.de (Postfix) with ESMTPSA id CF9BE802A2;
- Thu, 15 Jan 2026 15:25:45 +0000 (UTC)
-Date: Thu, 15 Jan 2026 16:25:46 +0100
-From: Frank Wunderlich <linux@fw-web.de>
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de
-CC: Frank Wunderlich <frank-w@public-files.de>
-Subject: Re: [PATCH] boot/fit: print name of config node not found
-User-Agent: K-9 Mail for Android
-In-Reply-To: <082479d3-3b0d-466d-8749-552e60101fd5@cherry.de>
-References: <20260111092338.16555-1-linux@fw-web.de>
- <082479d3-3b0d-466d-8749-552e60101fd5@cherry.de>
-Message-ID: <7E97808D-FB0D-49EA-8DB4-3458140C4345@fw-web.de>
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 8431D1FA85;
+ Thu, 15 Jan 2026 17:14:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1768493684;
+ bh=1BExtbnU1I/YtfCnCMPzph0lZbXavW44xwgyIExmbFE=; h=From:To:Subject;
+ b=X9ADEd7Iy2upGg0NRx3uhmY2JfivFWj7ely2PuTjWPDFKLpPRZHWOlMCqO5Li41UT
+ h1uBQCngcwfPAwZOztKgYNgJfS/UOTW4HjAa01gAINT+33QQXo151q2Qfl2u7dPZOE
+ jMYKQ9gRTFIhApHPl69/XcgVYdtSIj9C3tz2MaDhHAqeZXXfXnMPsIGfSF+11NApKK
+ jeiQAlKK1sMihS83RsiyP6DtBhAUKGKsqmmb+rYZCBZSxzoIlXQNT9zt37G8M68PUY
+ cepGPp4MF7c32Tq86JyQITCK+hRRd/zthQyvRt31prg2q47qnyCAV6Z0Ugjs20rZv5
+ ZNjlR0b+GOy9Q==
+Date: Thu, 15 Jan 2026 17:14:40 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ =?iso-8859-1?Q?Miqu=E8l?= Raynal <miquel.raynal@bootlin.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH v2 5/5] board: toradex: add splash screen to Toradex
+ i.MX7D Colibri board
+Message-ID: <20260115161440.GA93500@francesco-nb>
+References: <20260115-repair_imx7_splash-v2-0-6595491341ba@bootlin.com>
+ <20260115-repair_imx7_splash-v2-5-6595491341ba@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mail-ID: 42c59385-0ee6-478f-aef6-464cf58a9cc7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260115-repair_imx7_splash-v2-5-6595491341ba@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,62 +72,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hello,
 
-Am 15=2E Januar 2026 13:36:15 MEZ schrieb Quentin Schulz <quentin=2Eschulz=
-@cherry=2Ede>:
->Hi Frank,
->
->On 1/11/26 10:23 AM, Frank Wunderlich wrote:
->> From: Frank Wunderlich <frank-w@public-files=2Ede>
->>=20
->> Show name of configuration node which was not found=2E
->>=20
->> current state gives no hint if fit image is wrong or the requested name=
-=2E
->>=20
->> Could not find configuration node
->> load of <NULL> failed
->>=20
->> After this patch we see name like this:
->>=20
->> Could not find configuration node '#ov-test'
->> load of <NULL> failed
->>=20
->> Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
->> ---
->>   boot/image-fit=2Ec | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>=20
->> diff --git a/boot/image-fit=2Ec b/boot/image-fit=2Ec
->> index 2d040e38d97b=2E=2E92675e98f2eb 100644
->> --- a/boot/image-fit=2Ec
->> +++ b/boot/image-fit=2Ec
->> @@ -2125,7 +2125,7 @@ int fit_image_load(struct bootm_headers *images, =
-ulong addr,
->>   		if (ret < 0 && ret !=3D -EINVAL)
->>   			ret =3D fit_conf_get_node(fit, fit_uname_config);
->>   		if (ret < 0) {
->> -			puts("Could not find configuration node\n");
->> +			printf("Could not find configuration node '%s'\n", fit_uname_config=
-);
->
->It seems like fit_uname_config can be NULL (see outside of the patch cont=
-ext)=2E How does printf behave when this is the case? Should we do somethin=
-g like
->
->fit_uname_config ?: ''
->
->instead? That does seem like the message could be confusing also as now i=
-t says "Could not find configuration node ''"=2E
+On Thu, Jan 15, 2026 at 02:52:48PM +0100, Thomas Bonnefille wrote:
+> Fixes the PWM<A> that was previously used as a GPIO output instead of a
+> real PWM, it also reserve the framebuffer region to preserve the splash
+> screen while the OS is booting.
+> 
+> Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+> Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> ---
+>  board/toradex/colibri_imx7/colibri_imx7.c | 41 +++++++++++++++++++++++--------
+>  1 file changed, 31 insertions(+), 10 deletions(-)
+> 
+> diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
+> index 69a8a18d3a7..55480213c67 100644
+> --- a/board/toradex/colibri_imx7/colibri_imx7.c
+> +++ b/board/toradex/colibri_imx7/colibri_imx7.c
+> @@ -18,6 +18,7 @@
+>  #include <asm/io.h>
+>  #include <dm.h>
+>  #include <dm/platform_data/serial_mxc.h>
+> +#include <fdt_simplefb.h>
+>  #include <fdt_support.h>
+>  #include <fsl_esdhc_imx.h>
+>  #include <jffs2/load_kernel.h>
+> @@ -29,8 +30,10 @@
+>  #include <netdev.h>
+>  #include <power/pmic.h>
+>  #include <power/rn5t567_pmic.h>
+> +#include <pwm.h>
+>  #include <usb.h>
+>  #include <usb/ehci-ci.h>
+> +#include <video.h>
+>  #include "../common/tdx-common.h"
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+> @@ -114,7 +117,7 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+>  	/* Backlight On */
+>  	MX7D_PAD_SD1_WP__GPIO5_IO1 | MUX_PAD_CTRL(NO_PAD_CTRL),
+>  	/* Backlight PWM<A> (multiplexed pin) */
+> -	MX7D_PAD_GPIO1_IO08__GPIO1_IO8   | MUX_PAD_CTRL(NO_PAD_CTRL),
+> +	MX7D_PAD_GPIO1_IO08__PWM1_OUT   | MUX_PAD_CTRL(NO_PAD_CTRL),
+>  	MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21 | MUX_PAD_CTRL(NO_PAD_CTRL),
+>  };
+>  
+> @@ -123,6 +126,8 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+>  
+>  static int setup_lcd(void)
+>  {
+> +	int ret = 0;
+> +
+>  	imx_iomux_v3_setup_multiple_pads(backlight_pads, ARRAY_SIZE(backlight_pads));
+>  
+>  	/* Set BL_ON */
+> @@ -130,10 +135,15 @@ static int setup_lcd(void)
+>  	gpio_direction_output(GPIO_BL_ON, 1);
+>  
+>  	/* Set PWM<A> to full brightness (assuming inversed polarity) */
+> -	gpio_request(GPIO_PWM_A, "PWM<A>");
+> -	gpio_direction_output(GPIO_PWM_A, 0);
+> -
+> -	return 0;
+> +	enable_pwm_clk(1, 0);
+> +	ret = pwm_init(0, 0, 0);
+> +	if (ret)
+> +		return ret;
+> +	ret = pwm_config(0, 0, 6666666);
+> +	if (ret)
+> +		return ret;
+> +	ret = pwm_enable(0);
+> +	return ret;
+>  }
+>  #endif
+>  
+> @@ -142,12 +152,11 @@ static int setup_lcd(void)
+>   */
+>  void board_preboot_os(void)
+>  {
+> -#ifdef CONFIG_VIDEO
+> -	gpio_direction_output(GPIO_PWM_A, 1);
+> -	gpio_direction_output(GPIO_BL_ON, 0);
+> -#endif
+> +	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_VIDEO_REMOVE)) {
+> +		gpio_direction_output(GPIO_PWM_A, 1);
+> +		gpio_direction_output(GPIO_BL_ON, 0);
+> +	}
 
-Thank you for taking a look=2E
-In my current testcase it was an empty string, but yes I could do somethin=
-g like you suggested=2E=2E=2Emaybe call it "null" or "empty" instead of emp=
-ty string?
-
->Cheers,
->Quentin
+Is this correct now that PWM_A is not used as GPIO anymore? See
+`backlight_pads`  ?
 
 
-regards Frank
