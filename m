@@ -4,218 +4,171 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB71D44C56
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 14:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91A9D44C5C
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 14:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB47580325;
-	Thu, 15 Jan 2026 15:46:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B86A80325;
+	Thu, 15 Jan 2026 15:51:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Cum8R801";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Cum8R801";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="PDg9/NEB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DCB083623; Thu, 15 Jan 2026 15:46:00 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 7005980325; Thu, 15 Jan 2026 15:51:12 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EDEA80077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 15:45:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD7ED80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 15:51:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=V2SPkSgmOehK1+8X08HDxE4E55j8x1EHGR+hMmdhdvWPm2MCmeSqo+kqmu4P2A0nt14mz/z/0zT7C2QhNTjlWfag7e1gJClc9f74OrVMC5GgyETHPGxnMX9TslkLiv9exc0r/bt33DPTjwyaP9OL/7N2CfuY9F4w4Yx9wHSmjKZdZi+1N4A1uHGUICHp9Z3x61/DygxDW8M3gI6F8yCxn3gwev00mEGShOQveZ+kE49HXFB7FydBYVjp4UuFtqPiKE3s1iWLVeejev5Fb2aZlN8MjAVvYxtb0kdduGi53HPOLW8rmZetDHMBSdKqrpQKY31nUsNyR5ZBAHqRLCdp8A==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DG+cdOnpHQJ3CdAf9/No45lmj4F5fp+gL7oMDRljpzs=;
- b=a6nK9rWNptEu/5putVCQgyhFmdhTI+85pwvZag++adUOxh9p61ZD5y2pT+yUl8S0AfB4xcgPBTM+xrrqyJDfLpGSyWZcnBjPfSoFY9vp3/9njf5JynLSIh/9bpUoKD7ipsy/ug3H+5+s8agIcZCrYLychMRvVOqBkgfPbpERm8Z1Nlg6Wmg197WQLPbRewCGfFxlnU5r/jD02q+jWRTZNb+N7ALY0tBsvGYJiKt4QGv+9P1YAJmpm2/f5wQbX918rvOJ7DGKPUAKrIkgzOJSopYsmAL7HVPNByPcE22JvacJETnt3z7s1WrIGdsWALcNTV1Vct7yf7fm30jVY2RAGA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=forissier.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DG+cdOnpHQJ3CdAf9/No45lmj4F5fp+gL7oMDRljpzs=;
- b=Cum8R801MBBlwm5tq+zmffAhCnALbJSS9m/zZUirut9v+TPlbyhzi236cmAGrYNgejROWimwq3O0H1OiDQa6JFXwtkQoFcJivmhWKZQphZQ7gexDD3CJabnoZOAdfZDaqfM2ihzsQdUBCYp374Nn2HVYA+LZuoSxPVJY/vlSDvA=
-Received: from AM0P190CA0020.EURP190.PROD.OUTLOOK.COM (2603:10a6:208:190::30)
- by DB9PR08MB10379.eurprd08.prod.outlook.com (2603:10a6:10:3d9::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
- 2026 14:45:46 +0000
-Received: from AMS0EPF000001A2.eurprd05.prod.outlook.com
- (2603:10a6:208:190:cafe::52) by AM0P190CA0020.outlook.office365.com
- (2603:10a6:208:190::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Thu,
- 15 Jan 2026 14:45:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS0EPF000001A2.mail.protection.outlook.com (10.167.16.235) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.4
- via Frontend Transport; Thu, 15 Jan 2026 14:45:45 +0000
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rCvH7kidHtKjh2HQq7xJ89xBtgGBKBULE0gQC7VYuUHcXN9igChA1q6r9WHoBxGOi/CGAyCgiz/FZP9Rvmc+uTlkH2Sw2KY8M4qDvFSoMU5lyZUijdMmz14hscILC6Ogc4urNd1pRxrYHlzzgtpsAsTfUgxvhbEl40UJ3iL2hG9AwyDnqgt+XCV1YbGQWoRPIfCmhxl7FXsBhFftt1yqo81z2grR9cgdp8fWU/rASs5ucFCflOcyR/qzmftHAXQrxZrr1+LrgRlk+YV+jsaQifZdFGd/kzzyxrx1sMn468lSTVZuzZ0PgL4GJIo/UzsIKz1JFEWz9+Sg+30pojUrAw==
+ b=fDPF5J/cagTyvc5vvod0T4UydyDK5Or01HaCD/tjRl2y7B7gnPBMjC5jE0/uiMLc/1E9qh3Cem8d32RR2q4tkq8AKSj8Lzrt6u8fpN9izP+ozYsO0dh/SaBia9P1ccX0/ekd1tGo9Zfh3u8QzVswknC/ncBPFPI4+tvtP3c3LCdx+jl4TbrTpacBzeRPj6J9Qu/MkYBNxJLjFPhQpUkoiQ4eXxwjVyQAZ/fyjfZXOO98ijqidB7ZZ/cKSI1izXHpUqTtO/FX092HnVhiqiZXrnRRRXi0Uoxd9Gto4t3MVNSS8/G29yuGeHVVgd6mC/65AIpmf/S4hIgtmGPhk4Rrxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DG+cdOnpHQJ3CdAf9/No45lmj4F5fp+gL7oMDRljpzs=;
- b=qgqa7qBx4E4ksjub1/p5h9y58r19Uii2JpuEwhAJf4L64xEw2qw7mjnRfyQABvf0hDzeu5rZGdoFkj8pJ53i9DJRDPB9JeIHZyPCP78KSwxE/q3unLXbP9M+bys3icPFo4Guo9KGvrPJL2hkYamMVpxu1/SeCesTMblc2YlyljmXPMuOGGKCweZlE9pDBCrkR6LbVDuadsufM4pzwmvHIrkU4lh/gVQ3gQGOVhAlj3jOnoyG7FAmUnZLL5jdubU5B9X9eCH5WClX+C7uYcBogO3dMi6QrLmHFjs992i+4s02pEeYiNIjqJEjErOvaPgWSlhX6gTEynuShCOtQ+1vFg==
+ bh=F6CumCptARRyRyP+J7y/xG77uEuLda8kS2t5c4nfDDw=;
+ b=t3t6Z9SXqXzfZIsrOMtXgdlh1ihD4dDIwYqCRjxzZvtOkCIcYiA9XRnQB5cUscKkDysP+aq4DwY8xeldFS+M9yuUbY7NncZGdKpj51/86paIJT9mW3Wf+f5egOJgzA+eYDa5AGvwPPs2JlpabqDI7HQUPbtiVAyVSIjtqNRcOMu08BvgVyliNxbTN5JtWxCqJ3Fke9mEGyD/v1vWpoWZxjU3y1bepqJh0umKuZ2ouApwqYYmc5bGbO859QVWhlk2xTjcNwIvt3t8q25kB+Eog1V4iqKgtc6omcJkxxsjLHJxRyIp3xkMOJLGt3EgDpodKObAOB3NyVrmebhpvZHy+w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DG+cdOnpHQJ3CdAf9/No45lmj4F5fp+gL7oMDRljpzs=;
- b=Cum8R801MBBlwm5tq+zmffAhCnALbJSS9m/zZUirut9v+TPlbyhzi236cmAGrYNgejROWimwq3O0H1OiDQa6JFXwtkQoFcJivmhWKZQphZQ7gexDD3CJabnoZOAdfZDaqfM2ihzsQdUBCYp374Nn2HVYA+LZuoSxPVJY/vlSDvA=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by AS8PR08MB10313.eurprd08.prod.outlook.com
- (2603:10a6:20b:5c1::11) with Microsoft SMTP Server (version=TLS1_2,
+ bh=F6CumCptARRyRyP+J7y/xG77uEuLda8kS2t5c4nfDDw=;
+ b=PDg9/NEB0wQ87rI5KYMZ0WHKPKkg78GgWJhT5rW1EgiMmH/LTJ9an85O4TEZqHCtIxbngytaj2n97N79lVOSXzSUfHyI3+pPSBK5QQx8Z94Wphypz9ZuWm7QnFojXonDQFXDFXve9Ukynq2yDEsJbiJjN5OvwNPIHwyknFOOml4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by DU4PR04MB10624.eurprd04.prod.outlook.com (2603:10a6:10:592::6)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
- 2026 14:44:33 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
- 14:44:33 +0000
-Message-ID: <107fe414-35a8-419f-945f-07292284a57e@arm.com>
-Date: Thu, 15 Jan 2026 15:44:20 +0100
+ 2026 14:51:06 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
+ 14:51:06 +0000
+Message-ID: <8392ee33-8b40-437f-b7e5-74e4cf7fb31b@cherry.de>
+Date: Thu, 15 Jan 2026 15:50:58 +0100
 User-Agent: Mozilla Thunderbird
-From: Jerome Forissier <jerome.forissier@arm.com>
-Subject: Re: [PATCH] net: lwip: add TFTPSERVERIP Kconfig option
-To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jerome Forissier <jerome@forissier.org>,
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260106203433.3133926-1-jonas@kwiboo.se>
- <7d2ac045-d364-4d37-b654-aa704cc07a7b@cherry.de>
- <7f9d6ad3-afd2-4364-8d33-8510e183642c@kwiboo.se>
- <a8a8dd8d-dfc2-4274-9203-a88d9bcb8a69@cherry.de>
- <c9664240-002a-418d-9301-e8307e3e0aea@kwiboo.se>
+Subject: Re: [PATCH v4 3/3] rockchip: rk3588s-rock-5c: Add support for ROCK 5C
+ Lite variant
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20260107230747.3552391-1-jonas@kwiboo.se>
+ <20260107230747.3552391-4-jonas@kwiboo.se>
+ <e286ab86-2253-400a-9717-acc87b7523df@cherry.de>
+ <23d37542-3a80-4b4e-8720-3e62aa5f0a02@kwiboo.se>
 Content-Language: en-US
-In-Reply-To: <c9664240-002a-418d-9301-e8307e3e0aea@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: WA2P291CA0020.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::9) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <23d37542-3a80-4b4e-8720-3e62aa5f0a02@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0194.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ab::18) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AS8PR08MB10313:EE_|AMS0EPF000001A2:EE_|DB9PR08MB10379:EE_
-X-MS-Office365-Filtering-Correlation-Id: 595719dc-c833-4ef6-99a4-08de5444c403
-x-checkrecipientrouted: true
-NoDisclaimer: true
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DU4PR04MB10624:EE_
+X-MS-Office365-Filtering-Correlation-Id: 50df3765-68f5-498c-71bf-08de54458364
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?ZmZCYm1vSDNCODRvQyticmF3N0dhTTVLUWk1R1h1NEQyUzlPb0pTVGJsaWJV?=
- =?utf-8?B?a1JXbnU0NVh1SUUzTU02Q3VvMkxHNnJsVnhZUWZsTjlVT0ZvYXEzTFZKTlo4?=
- =?utf-8?B?aXFhTzV1ZVVDVXV4VGd3V2ZzZU1qUUlpcG9YbGRRTkkwTkFSQTF2aDFJR1lF?=
- =?utf-8?B?aHhmTitZZGtnRXpNbi9JaVQ0aStWNHkvQzRGUXZiQ1I3OGJYdGZ3dUtxdzRC?=
- =?utf-8?B?SHk2cFpRczhzUWQ0RVV3VXVrUVdSdGRPTkJsZEJvT05wd0w0eDVBMHd4U1I0?=
- =?utf-8?B?bkdSWkRzTUV5OTArT3UzamNqRTJDamRlYWlNRC9nczFUT2xFN1lRY1lBSC9v?=
- =?utf-8?B?TjZvY01zT3pMN3U0eHpIUVR2ZkwrU2tFOUF3eVpqbjEwVW1RSXNSbXA4MnJG?=
- =?utf-8?B?VVNTUkNDcmtZMk0rSjhnU2J0bU9idm9xT05OdUx2Nzg2a1U3bjd6QmZpRURv?=
- =?utf-8?B?MlhEYWJuVzNBWVhKZitnZjhyS3F3ODRLdk5QTnI4c1cwdnEwY29VU3NzNzlK?=
- =?utf-8?B?WUhrNUp0MDZMWWtPbVFvVmQ4VklOYTVrSjFPdGVSNEx1dDdoMFVQSzFBd1Q2?=
- =?utf-8?B?dmlYR3lRUTRZNEliWXBqTTBDd29zcTkwSEc0eXd6aGZXalNzQjhwMHlacFZH?=
- =?utf-8?B?b09zOEY3VSs1aTdRZE1MVCtLWjd0ZjdUME1QRWJucHpJT3pUVDdhOC9oNWl6?=
- =?utf-8?B?dm1UOW1lcSszSEtOMGEvN2J3RWRyNldjR0Z0RUI4ZGNTcjljU2NBakllaGs2?=
- =?utf-8?B?ZGJTaDVnL1hVeUhIVkpxWE5wVkNjL21qYXlvd0JVbFcvY1hqaDNybjZWNFMy?=
- =?utf-8?B?VnQyUVA1aTFWLy9VWmxIMjhYWnl1RnBQZUJRWlgyai9GVVI0clRRZVkyMEJ6?=
- =?utf-8?B?SW9QNUVzeXFhT0hUYTBnWG41R2g3aFZuZTUxeEpLRE1aT2hrUW1JV2tEWFNE?=
- =?utf-8?B?a1RSQlp0cHBpeVppdGdKOG5ZYjBESzBDWGczNU5URDBWZmdVbWxTbzlJVmNM?=
- =?utf-8?B?bmV1S0hlM1NnZlk0VHVGTFVsOGVkTjAzeWNBK2ZkbTMyd2I1TTRYY3dMZFlB?=
- =?utf-8?B?aUUzYVZMZ3dBTm1aT3dmMnJEbTI4Z2g5RHhNUDNkRjJIWStQYmExdFZYNzJR?=
- =?utf-8?B?dWFaeE1zYmlKM25HUWhPSEpJNG9yQ1VmNHlxRS9DdDF3Y1kyS0ZacGQ5Zzhu?=
- =?utf-8?B?eTFLQ1B3bUM4N0lpU3QvNUxOUHZqSUhsUit1VnJIR0J0K0pzUEdvb0tkRVNz?=
- =?utf-8?B?ZVBTblQ1VEZvVC9EaEpxTmM5dzdCYzZqaHlPMUZtTUFxU3pqNjNBSWt0dFV4?=
- =?utf-8?B?dDhzV2NUcGhNN1dvdkdGQ3ZsRk9JcmNZdmdFVHJVdnhyV0U4Rm9SLzkwSXUr?=
- =?utf-8?B?MmU3K2lFbmRPUG43MEhoSzFxaFdOc3JCOEg5YnZBNGpHK3VXelRQZjR3SkpM?=
- =?utf-8?B?Q3h6NDdibnlka0dENjhWc0E3MW82WWUyblpmbTB6MW9hZmtBamxHd0QyMnU1?=
- =?utf-8?B?bHJTUGc0dWY1enlkR3RIbWxrcGJnSjYyWHJUbW8vYmZOZEJKeVNYWkpMU1Fm?=
- =?utf-8?B?L3U1N2tvQTZmQndQRWNZbS82ZDJlamFzc2RKcERTeXR3VUZvbnFyUG8zd3Jr?=
- =?utf-8?B?RVFHLzlXQjd0cDJoeWhvS1ZmVzRQaGxJMWFKZUdjY3B4SFhDSndzRVU2UlB4?=
- =?utf-8?B?Z2JsZ2Y1Y1M5ckdDSUVqNnRrMjJneVNRR3pzNGdIcElzMHdETGNEd3k4MkRn?=
- =?utf-8?B?R0tDQWNkZ1J0SjFSQVdOd3VGeDJReGFSQTcwbXFuSndCU0c3dmsvT3JjNGFv?=
- =?utf-8?B?eHZQR2p4S3NGcGs2QTEvZ3EzSkg5QzNibW1vSHZpVzBXRFErMU01dTN4SHp3?=
- =?utf-8?B?cEdHY3BNMVI5ZFFvR29hRUdaZGs0NDhpcDRTWUhENnlRU2FvTDYxVHNpTXhx?=
- =?utf-8?B?cE9ZR3dHTFUySmUxRVVpRFA1Qzg0dmd2amd1Z2tGbER6VXFlNWREbmlWWC9S?=
- =?utf-8?B?OXJDRkEreWxST1RkRnliRWNqOThkdStQSll6bDJudVRQdE1Nbzc5M09zNEN6?=
- =?utf-8?Q?HzuQs1?=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB10313
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS0EPF000001A2.eurprd05.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: d7614386-9bea-4a2f-ea61-08de54449906
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|14060799003|82310400026|35042699022|36860700013|13003099007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NVZSTnA4THF3d3FXcmdFdm01ZEpnNDlNS1dKNG9hdFV4djVXYVR3aUozMWhq?=
- =?utf-8?B?eGJQQTVIbXl0ZXNvNW9aY2xDN3ZxdkN1Z2tnbkRhYjFFWWFUbjcxb2c3d3Bw?=
- =?utf-8?B?QUNvLzI2SDd4Y3hiZDBXNXlQUDEwd0ZvbmNPSGszWEthT3k1VmNKaVVlNlpu?=
- =?utf-8?B?dTRCbWZ3eUtUWS9sMk0rYUFFbWhqTWwxT0JmMWlrMFRiZkRmMzhLVWRIcTZw?=
- =?utf-8?B?QVFTSjRPWmEwSXJ2aFFSNStLZERkMVNsUlhsWnpZYmNrcnU2QUU1YUpXL056?=
- =?utf-8?B?bTdkdkUxeFZzWEV5TXVNajFpQjdCTU00RXNDNXp3NFkwOVZoRWQraU1ac2xX?=
- =?utf-8?B?enQvV2p4VWJUeGNueDJLVytxRjc3YytRdjhiNFBRamdiM3hETmw5M3pJT1V2?=
- =?utf-8?B?VHk0SUJ0bnNkbTlsYzdLTGRWaW82NVF6UmxkL1YzTGVONjFHSldkZEtKMFpn?=
- =?utf-8?B?anJXWU9TL3B1a3JVOGoxUTNUNDdoT3krVVFSb0NJMzAwbDhWUlN2Um9kUFN1?=
- =?utf-8?B?Z0pNbHJ2aHpVM3BhTEJFaWVYU05OdVVGOWxaR2Q1a09sakxJd2xmVjNHb0Nr?=
- =?utf-8?B?aFFZZGR3eE1rdU9ZbjJLS3JrU3VraEtGSzNHZE9QR2prQTFLSzc1bC9oM1pK?=
- =?utf-8?B?bHR2NEpHQ3BsZ0N6ZjdtZ1VJZW9wWG93N3Z1TnpBd2xhZ2JDV25tRGFYOVdY?=
- =?utf-8?B?Y24yeTlDL3FvZVo5am5uWkdpN1pwKytDRHBWcmJCUUt6YmI0ZFdSaU4rUWcw?=
- =?utf-8?B?aFNoTWZRbTJSMkJXT3ZMb0tvQ0RvTzBPaDM3cTRqZkIrRFE1Z2tNeTZNS3lI?=
- =?utf-8?B?Wk82S2Y2N05XZUcydUdueXhJM3pHN2ZQMmVJMkJRSHRxa2h0T2RGRFkrOGRW?=
- =?utf-8?B?Zlp3WDJuTUZ1c3FWdWFnTzZJb2c2NnR3U3d1MEUxcEhEYnRLS2ROc29YUXps?=
- =?utf-8?B?UHpENTNudWRkRTZjb2hZUGlkWXB6UEVpK0tLTzZKeEJvNGljR0F2dWVvOFpP?=
- =?utf-8?B?NHpZeDhaVHZMdVZSb3d5bDBpblg4d3NVSTNCN1hIT1VNOFczTHdzSlRRYkd4?=
- =?utf-8?B?akZ1aE5Sa3N0amlsUHprZ2Z3VjQ3MFcvT2Uza1VUemRLZFJpZzZtaEhXcEE5?=
- =?utf-8?B?SHZZZzdoYmZ2UFg5WjFJRzMvRjE2ZkUraU5zaDU5WjIyMWQxWG1USGJKRDcx?=
- =?utf-8?B?KzV0UEpzeitCTCtlNnRNeVRmTi9yNVVuNko5aUl1dXYyMS9pSVlPVUVSYkly?=
- =?utf-8?B?bWF3WE9NTFA5T1BtZ1A3aDE0Z1B4Q3c0MUQ3aFlrT0x2dGR1bDJMVWdpVHBp?=
- =?utf-8?B?Y1RGWlBVR1FKMnlXZ2pYSGxJS2RoMFV2d0tLdHdXSUZPdFBSOXg3c3V1b29B?=
- =?utf-8?B?QXgwajBGeU5GbXFEZ3JqUGExWjZtY2thRWJoRVZFZ2FBUU5VZDlpT0M3QlZk?=
- =?utf-8?B?ZWVCWFpvdFg4QVpXYzhmekNmaVpzUzhOeVZzOFN4RmRVUEVUbUtONE1ERSsr?=
- =?utf-8?B?QnZSeFlxUy92dURKbFZIdEtCc3U3ZUhFTU5lN3Mwd2NJQmdLbmt6RVcwTXJ3?=
- =?utf-8?B?OFh1UVRlT3JCMXZPY3V2a1l3d0RNa0ZxUUF3UkpnQWVSQVJpQTkzeS9WVWxU?=
- =?utf-8?B?Wk9YTjJJS2NGeTZ6TkZNMjRYc01mMGRkRm5mcHJYMTVLdk1KQkJrM0F5N09D?=
- =?utf-8?B?MDYwTXY3emZKOW9wLzV0dUJiMmxvNEEwVmh5M2NEWWVYNldrOG1icTUwYWwx?=
- =?utf-8?B?bnhiTGxrNm96V0VqOGZkSXJuOXV4czZSa2FMblYxTEt3NGhlNVZjNjI5eHEy?=
- =?utf-8?B?MHJRaDNwQ2tqN1VYQWlNMlZpUEluT1l1cjJYcWVCWnkvVkNGV2p0Vjh4amZj?=
- =?utf-8?B?VitPSGxLdjhLM01ZZlJyTXZuaHZPYzhLR0J0andiZkk5M1ZwR2VVU1hFOHJK?=
- =?utf-8?B?czhGTGd4VnlqeXRMaHA3U003Z2haeVUwY1JRbituUC9rYVVvZ3R5aDJEalNq?=
- =?utf-8?B?RU1UUTNSTG9DYnJRK3VZbHVReEJVUzFtTUZaTDhSckl1SENVd01qS0FFNVFQ?=
- =?utf-8?B?SmhvcUlRR3FEWnRxbVBiQUtRMVpScXlwMGNNc3dwanVnZTg2SXBqdXJkQWtR?=
- =?utf-8?B?dEJ0QW1qdnJyTkppWllnZDNzU2I3N0tyd09xd2p4ZVVhRTkxT1huTy9wNG1E?=
- =?utf-8?B?akE9PQ==?=
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(14060799003)(82310400026)(35042699022)(36860700013)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 14:45:45.5396 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 595719dc-c833-4ef6-99a4-08de5444c403
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A2.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB10379
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDBZSXUwMWpyQ2dseGJTR0c2cGZhRy9DeHJjY1RsYUpwTDNLcFpWNjVUa3V5?=
+ =?utf-8?B?dWlNT1RvcXl6aWF4ZmpDaHFLelhiNHp3eU9kVTJTcFZUcDlWVHNQbm5JV1pQ?=
+ =?utf-8?B?M3dGSHZyVW04TFIydHFSMTZad3VlREZoTG5QaHlYYUNPZzh1OVVHVXVqVGZF?=
+ =?utf-8?B?SWhxOVR1d1ZhMXA4QVZGcFh3Q3NIVlFpSW9wS0M0SE9vRkx3endxNXM5c2Y0?=
+ =?utf-8?B?N21jUFpuQWgzM3hLM1RwMGtrUVRmL2pmTmYzM1VRcUdGSHdCZVRhVjIvWmM1?=
+ =?utf-8?B?dkp4RHJqMFpUMXJ0dWRvMGdiankyMEJ1LzgwQXJNRE12TFo0RjR3NThuVTYy?=
+ =?utf-8?B?dGRZRWRheVNYb0o5dHJyZWVDU09QeXhxcEk2KzZqdU51RXhtYXExamcrK0U2?=
+ =?utf-8?B?cUVjNlJqTXBYcGlKOXY5bGU2ditEQXhNTmdqOXpvME50Zk9sMWdrSkV5SkJI?=
+ =?utf-8?B?SGd6TkxxM1VRcnFvWkRUQThCMk5CR0lZU3JVWTdWazl2cWxMMktNdTg0WlY1?=
+ =?utf-8?B?dUlvK3FySkZkbmJFL0FJSWk0RlR3NFN4NE5pT24zWGFKQjRCNEdWbEd1WDFI?=
+ =?utf-8?B?dnhUKzhIUnJvOG8zanpFeXpTRU5reFlWbU93VWp6UzZPV0tDWnFYRFhkd2Fq?=
+ =?utf-8?B?cGUraHd4ZWJOdWpHeGpmclNCTEx4REhEcGlCZEF2bzRGR3VZQUZIM05WRC9Q?=
+ =?utf-8?B?dnI1bXFuTE1tem9NVEJQOExBMWJCbjdXRDBOdWt1Y01LUVlFalp0T3QraHRt?=
+ =?utf-8?B?c2l5RzUvY21zRDczVnVUTGhla05PMFdxdmtQTXptWHBOUTB0a3lvdG5wR25T?=
+ =?utf-8?B?TDd1K2hJL1ltUENwSnVKcGhWNkhiMVdsWi90QXlFS3dhR1luSnZwem4wVktS?=
+ =?utf-8?B?eEhtdW5MS1Rib1VSeG5kSUdnQUJaT3pDdmdiMlQ3cnZqQk1heEVyaTJGV2Ra?=
+ =?utf-8?B?M3RrMzVNeDVwbG9oc0JjeTZ2dEdvcHY2YlRwL21vNVdzNEZGK2F5MG05K2g4?=
+ =?utf-8?B?Ymp5T1JqUHo4akNZODNIUFREM280WWdIVjI5anZNcDIrTi8wQkwvTFd1RjNn?=
+ =?utf-8?B?MUd0TUtvQTZENTNYQ0ZsWlNLT09wTUZ6T3JZdVhINW02UTNQY1VOVVdzNEtY?=
+ =?utf-8?B?YXM0NVpjQnRkMVBYRVJKSi90QjBEN0NyUWFqdzJ1dTZMcEttQzhCRVdOTnlu?=
+ =?utf-8?B?VHRTbWw1b1ZxKzRUaThtQXYzNEdBSHF0NnBFRnFveTlzQmt5OVZjTElBN1NB?=
+ =?utf-8?B?Q0dqZ2RqOVFtZVhrQi9BTTBSQmx5cFljODh0bFYrNy9raktmcWZWNFJiNkFK?=
+ =?utf-8?B?Mk9Ic1JEeldSZVRyV3RIb3VkNkZkOUxzNDJNVmdRdnpFdEVndnZlRXJzeTYy?=
+ =?utf-8?B?SFVENGZyTW1KeWFvTzhzNWIzZ2phSU9YQU5aK2IrWFg1VTBaajhPRzlZbWRE?=
+ =?utf-8?B?eVNabzZQYWFxYnJZc2tKbXNBMW9QaG9JQjhUVkZMQ0Z5QjFmL29zSXhrU3VZ?=
+ =?utf-8?B?YmFHZ0loQ2NBaGYweTltTzJjQzhQSzFFS0F0OSsvdTJ6VnNPVVBOU0ZEVmVU?=
+ =?utf-8?B?bGc4b2J1c1ZTNWlsenhReXJBbnQ0d0V5eVN4LzZ2bWJJY2d6Wkw4M3k5Vng3?=
+ =?utf-8?B?SkQ0VFBZMFFMYjcwMEVTcHR3QkdhZ1F6RUtIeVI3RkdmNjMva0U2S3JtR0ts?=
+ =?utf-8?B?OXBNaEZlRjNsOEtnREx2UGpiWGpNV0RjU0xBNTRCakIwWHFXRG1QMmlwMzVC?=
+ =?utf-8?B?QXVoZ0hRZGpCNUVzRVAxd2VEYVFneUNIN2JvT0FhY0xKbFVQQzl3L3ZiaWo4?=
+ =?utf-8?B?RnpIN1hqWXRxbEYvWGNkSzNVYkIxWmZTaldkQnhMT1J4ckdSUTh1dnFTaVlh?=
+ =?utf-8?B?L1ZCeHhNdzB6bFRISSt3UDFPU0l3ZnN1NFRwcHZkZHUvN3FYYjBsOGNCNk1r?=
+ =?utf-8?B?bnBCRjRNRkh1TWRvR0NxSVdzY2l5RlpVYmRiWmlFc2UvTHlaUWtaTHZvNlg3?=
+ =?utf-8?B?Qjg1MzRlL1VUT3MvQlVYVzJlMVJ5VlJNaFlPME1zdllKcFI5TlhNNTN5dWhn?=
+ =?utf-8?B?anVGNHMxYkxjM0lyQi9zQjdYYmJFb0dNSWhuV1VCeWxNOGl5bCtLYUJCYVZC?=
+ =?utf-8?Q?VXv8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UzZLcFBHM0VaU0cycHdtTWxJOXJRYS9yVFpPYVFqNWx5VVluL2lNbFVTSkcy?=
+ =?utf-8?B?MEJyeFZqY1hjNTRHek5TMkVDbVFWemk2ZVFTNC8zYUs2VHg2N2VJRnRyMHNY?=
+ =?utf-8?B?c1VxQ0pORWJta295R05tTmsyZ1d5Rm5hNDVNb1dObFpSSUs3dFdXdnVmTFZN?=
+ =?utf-8?B?QWx6MzZPWm9jM2NVZCtNYTZoanZTNzh4SGF3emdrbWJZMG4zdEo4YWpZazFo?=
+ =?utf-8?B?VTFjNnl4aFVRVUdoZHZVaDdjWmJTOFJQVnhNam9vZzhFa2J3Zk5XbUI3V25t?=
+ =?utf-8?B?S1IzTTAxVjYrUURPMDNaY0NaWEpHanVacnZRQ0dMTysrcTdHRTF3RUJzSWdI?=
+ =?utf-8?B?clFITDJFV1J0M0xKV3RSck0vamt4eWtKaGJtVWZmdmlTVGRJNnp0d2VXZmdt?=
+ =?utf-8?B?N2p0U3FrL3MvOVppM3VKUXNyTUFrRkcyMmRSMTFYMngxZzh1T0t6UVk3MWpt?=
+ =?utf-8?B?MGUvcFd3Q2NWNnFFY3BIbURtcXJyN1drdnRXcjBPWXZQK1pQa3dBbFV6WE1M?=
+ =?utf-8?B?b01RMzQvdWZWMVBHd0NCMUdzb3kzSXpTZW11bGE0ayt4aVplMTJuaVlKV05Y?=
+ =?utf-8?B?bWIwQWxkS3hvbDNnU25Nd2l3ZWpSdCt6VlpzT3RXWlY1YzRIRFpNTkxvV2JI?=
+ =?utf-8?B?THcvWUQ2eE1xVThoQXI2M2RXMTRvRFk5My9Oc0lzYkZjUHhkRzU5aEk5Nzkz?=
+ =?utf-8?B?MVR1a1ZoSWF5Vlk5dW8rRkJjLzMvQVZyQXA3bGJveFQ1U0k3RW9xdzliNTcr?=
+ =?utf-8?B?dFgwdFNyZXB6eHZ4YkJzRExkb1ZEMW5GZnNGcGNueXBiTERDRFhZWUEvZkhI?=
+ =?utf-8?B?cXRqK1JNV3VvSUdGbjVJV3ZqVFBET1A0YUFFbjE5OVc4WU8vL004Qlo4WHQ3?=
+ =?utf-8?B?ZXVTam5WZ0RreSt1SWpLQnlSeEdMclN5RlVvV2k5M1ZGYWQ5QlN0d3ZyMXdv?=
+ =?utf-8?B?b3NlT2RHcmxBWmFXRWxFWFQzZFVMUldxbWFZRisyckhJWW90SVBpUVpXMTgx?=
+ =?utf-8?B?UGpYblJVUHVwRldIbGJaSWZ5TWxlUStkb2xpWUI5V0ZhcjAvVmZMWkNOalFN?=
+ =?utf-8?B?Z0s1MUZ5eTVSY09SRzdKVFpZMTJZWFpROE8xcE5obEZJNld0eENkdGJIeWQy?=
+ =?utf-8?B?UnkrUzV3WGp4aHE0bG92RjBRcjhoVHhOVm1JSmtrOFpzVVh4VU1ETDZVWkwr?=
+ =?utf-8?B?eDc5N3NONzkrWGhZQkhtV28xakd5cVMvN0J5ZmEzOFNna3JDbG1iNy80NkZW?=
+ =?utf-8?B?NWVTSFVTd1FXZWNSYUpMUndhcVZqUVU4V2FrZUY5TXdZME5BR3hqN2tiYUlK?=
+ =?utf-8?B?aGpFQW9RaGk3em5RRFRHeUdjN25tdUM2ZHR6cW9rTkhUV0VJZzU1azFabnFk?=
+ =?utf-8?B?akd0aS9zWENadnpyUSt3MTdWS3NSV3cyVzM5dXNtUnA5OHZlbUM4ditka1Y3?=
+ =?utf-8?B?QklBTTFiOTNraFU2K1NFcDZzcFZFM1R5VE0vQmw2Y2NBU0FpVkZLWkhvYkhM?=
+ =?utf-8?B?ZGFjSWhWVGxKSWJxOFpBWmVJckkvQ3lKaytmVkZoRnloT3dOVWE0alhkcmI4?=
+ =?utf-8?B?bU9RV05WWTZzZWY1VzZ5WUI1NDJzZm41aVcyd3R4UTNkSzNxa1RLRUNZREk5?=
+ =?utf-8?B?Vk10U005QjVXVnYzZ0U1UkJYZ0dyUno1Vm8vcVFwT0JCV2RzQlk0NWhPclB6?=
+ =?utf-8?B?b2wvOTRvaURQSjBNWFVDV2xrb0piY1NjRTBmUkJZVkxLblI4ajNXQlVkM1lR?=
+ =?utf-8?B?Y2IzRk9vOUpJRSsxck5CM1M5TXlxR1BYVXc5L2NJeFJlaXVUL1FPS1ZpVmtW?=
+ =?utf-8?B?Tk51NThObVJ4YU5KVkMzOWx3V3ZxVnE4L0t1Vk81YmRTa2NhQXlEYis1dVd6?=
+ =?utf-8?B?dGhtZ2V1L1N5VUFEaHFzaTYvVTVaTWt0WDJ2ZWN6UytzSElheU5RWXlBZ0Vo?=
+ =?utf-8?B?YmZ6MW5pSUMwQ052NG93NTZ6OXh3QXNLTUtrNGw0cGg1REQ0ZThRSjl6N2pt?=
+ =?utf-8?B?WTRTQTNGZEVTdzg0ZmhqUzZRaDhvRWdCYUZnWC9kdkJCWW12dzNHaG1sYUJ5?=
+ =?utf-8?B?SGFKR1JkRm1vckZqQXplMVNkeXBkaEM1MUlmNmU1UzJhUFl2SzhDT2RUL3Nm?=
+ =?utf-8?B?YkxidjN1NkpRL0FmUTRudmRIbFpuM1ZmbXVqQjBTYko4UFpZV3lCbHNkV09z?=
+ =?utf-8?B?cDVLME9FS25mb0Z5UFZzSGp2NVJZMnMxTUpWS1lOSXV6SEUva0N4Ui8zcjRq?=
+ =?utf-8?B?aEtLZG96ZHl3YmhjNTBOaC9aOTlpYjJjcHBtWG5ZMmdpRy8wWHNMazZOajZU?=
+ =?utf-8?B?RjJKQ3hwcjVFcmovUTNTV1VXVytkbUFJRFZHOUlsSXB0SUFuUHQ0Zz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50df3765-68f5-498c-71bf-08de54458364
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 14:51:06.8456 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tC/p+WlGWxYwyE/Dil95s/4iuV1t8wc8xtOYpEIEN2NTNQVf6Fo5h714Cj4fmIvh45WevDxgTjVlt2UNr2msq7JKTcjrOxdASnmoscU+7sY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10624
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -232,247 +185,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin/Jonas,
 
-On 14/01/2026 19:29, Jonas Karlman wrote:
+
+On 1/15/26 2:44 PM, Jonas Karlman wrote:
 > Hi Quentin,
->
-> On 1/14/2026 6:08 PM, Quentin Schulz wrote:
+> 
+> On 1/15/2026 12:26 PM, Quentin Schulz wrote:
 >> Hi Jonas,
 >>
->> On 1/14/26 4:37 PM, Jonas Karlman wrote:
->>> Hi Quentin,
->>>
->>> On 1/14/2026 4:01 PM, Quentin Schulz wrote:
->>>> Hi Jonas,
->>>>
->>>> On 1/6/26 9:34 PM, Jonas Karlman wrote:
->>>>> With the legacy networking stack, it is possible to use USE_SERVERIP,
->>>>> SERVERIP and BOOTP_PREFER_SERVERIP Kconfg options to force use of a
->>>>> specific TFTP server ip.
->>>>>
->>>>> Using the lwIP networking stack use of the 'tftpserverip' environment
->>>>> variable provide the closest equivalent functionality.
->>>>>
->>>>
->>>> It does read serverip environment variable if it's set, so this should
->>>> match the behavior with the legacy network stack no?
->>>
->>> This is what I first thought, however it seem that the lwip stack diffe=
-r
->>> slightly from the legacy stack, in that the dhcp lookup always seem to
->>> reset the serverip env var.
->>>
->>>> As for BOOTP_PREFER_SERVERIP, this would need to be implemented in lwi=
-p
->>>> and isn't covered by this new variable is it?
->>>
->>> For the lwip stack it looks like the BOOTP_PREFER_SERVERIP Kconfig
->>> option possible was replaced with use of a 'tftpserverip' env var.
->>>
->>> For legacy stack I had something like following in a .config fragment:
->>>
->>>    CONFIG_BOOTP_PREFER_SERVERIP=3Dy
->>>    CONFIG_SERVERIP=3D"192.168.2.50"
->>>    CONFIG_USE_SERVERIP=3Dy
->>>
->>
->> And this meant the serverip would not be overwritten by the dhcp command
->> for example (in the legacy stack)? When doing PXE/TFTP, I always do
->>
->> setenv autoload no; dhcp; setenv serverip X.Y.Z.A; pxe get; pxe boot
->
-> I tried to keep it as simple as possible, as I have not used network
-> boot before, and used something like following:
->
->   env set boot_targets pxe; bootflow scan -lbG
->
-> and when I need to use a USB Ethernet dongle I use something like:
->
->   env delete -f ethaddr; env set boot_targets usb pxe; bootflow scan -lbG
->
->> When I control the DHCP server, I can actually set the TFTP server
->> directly and can skip setting the serverip as it'll be set by the dhcp
->> command correctly it seems?
->
-> For my homelab I use UniFi and should be able to control DHCP options,
-> however looking at U-Boot it looks like option 66 or 150 is just ignored,
-> see [1].
->
->   case 66:    /* Ignore TFTP server name */
->
-> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/net/bootp.c?ref_ty=
-pe=3Dheads#L952
->
-> From my very limited testing it looks like I am forced to set serverip
-> in env and cannot use a DHCP option to set the TFTP server to use.
->
-> And when I then also tried lwIP, and that seem to result in new or
-> different issues, e.g.:
->
-> - lwIP seem to be configured to allow very few packet fragments, trying
->   to use a reasonoble tftp blocksize, e.g. TFTP_BLOCKSIZE=3D4096 or more
->   seem to cause drop of packets.
->
-> - lwIP is very very slow to timeout compared to legacy when serverip
->   point to an invalid TFTP server and pxelinux.cfg files is looked up.
->
-> - sometimes got hit with random SError issues when second file was
->   loaded from TFTP, this issue was thankfully fixed with [2].
->
-> [2] https://patchwork.ozlabs.org/project/uboot/patch/20260114-tftp_fix-v2=
--1-8de8e6ecf4e8@linaro.org/
->
->>
->>  From my notes, for an OpenWRT DHCP server:
->>
->> Network =E2=86=92 DHCP and DNS =E2=86=92 PXE/TFTP tab =E2=86=92 Add butt=
-on
->>      Filename: default
->>
->>      Server name: fileserver
->>
->>      Server address: <TFTP server IP address>
->>
->>      Force: checked (may not be necessary)
->>
->> Save & Apply button
->>
->> I'm assuming you need this for your labgrid farm so hopefully you have a
->> way to control the DHCP server :)
->
-> Correct, I have been playing around with network boot in my labgrid farm
-> and hit a few mines along the way :-)
->
-> Should result in a few network related patches in next few days.
->
->>
->>> Adding NET_LWIP=3Dy made pxe booting stop working and 'serverip' always
->>> ended up as the dhpc server regardless if it was set to something else.
->>>
->>
->> Interesting. With tiger-rk3588_defconfig (legacy stack), I get:
->>
->> =3D> setenv serverip 192.192.192.192
->> =3D> setenv autoload no
->> =3D> dhcp
->> ethernet@fe1b0000 Waiting for PHY auto negotiation to complete........ d=
-one
->> BOOTP broadcast 1
->> BOOTP broadcast 2
->> BOOTP broadcast 3
->> DHCP client bound to address 10.2.162.193 (1394 ms)
->> =3D> printenv serverip
->> serverip=3D10.2.0.122
->>
->>> Since lwip instead prioritize the 'tftpserverip' env over the 'serverip=
-'
->>> env for tftp use, adding a similar env var Kconfig option was easy but
->>> may be wrong path?
->>>
->>
->> I don't mind the addition but I'm wondering if it's not a band-aid patch
->> for something else? Maybe lwip missing setting the BOOTP server from a
->> DHCP lease for example?
+>> On 1/8/26 12:07 AM, Jonas Karlman wrote:
 
-Quite possibly (I did not check TBH). I think it would be nice to have.
+[...]
 
->
-> Possible, setting tftp from dhcp also seem to be missing from legacy
-> stack, if I am not mistaken. I do think the separation of tftpserverip
-> and serverip for lwIP stack at least is a step in right direction, I am
-> new to network booting from U-Boot so what do I know :-)
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-I also find misleading the fact that the legacy net uses 'serverip' for
-multiple things, depending on the context. It prevents setting things
-globally and makes things a bit more obscure than necessary.
-
->
-> Regards,
-> Jonas
->
->>
->>>>
->>>> This patch is fine, I'm just challenging the justification in the comm=
-it
->>>> log.
-
-I am also fine with the patch.
-
-Acked-by: Jerome Forissier <jerome.forissier@arm.com>
-
->>>>> Add USE_TFTPSERVERIP and TFTPSERVERIP Kconfig options that can be use=
-d
->>>>> to add the 'tftpserverip' environment variable to force use of a
->>>>> specific TFTP server ip.
->>>>>
->>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>>> ---
->>>>>    include/env_default.h |  3 +++
->>>>>    net/lwip/Kconfig      | 12 ++++++++++++
->>>>>    2 files changed, 15 insertions(+)
->>>>>
->>>>> diff --git a/include/env_default.h b/include/env_default.h
->>>>> index 7f8dc1c35a74..014873e304d8 100644
->>>>> --- a/include/env_default.h
->>>>> +++ b/include/env_default.h
->>>>> @@ -58,6 +58,9 @@ const char default_environment[] =3D {
->>>>>    #ifdef CONFIG_USE_SERVERIP
->>>>>           "serverip=3D"     CONFIG_SERVERIP                 "\0"
->>>>>    #endif
->>>>> +#ifdef   CONFIG_USE_TFTPSERVERIP
->>>>> + "tftpserverip=3D" CONFIG_TFTPSERVERIP             "\0"
->>>>> +#endif
->>>>>    #ifdef CONFIG_SYS_DISABLE_AUTOLOAD
->>>>>           "autoload=3D0\0"
->>>>>    #endif
->>>>> diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
->>>>> index 5789766fe624..0cfd3eb2684f 100644
->>>>> --- a/net/lwip/Kconfig
->>>>> +++ b/net/lwip/Kconfig
->>>>> @@ -72,4 +72,16 @@ config LWIP_TCP_WND
->>>>>             but QEMU with "-net user" needs no more than a few KB or =
-the
->>>>>             transfer will stall and eventually time out.
->>>>>
->>>>> +config USE_TFTPSERVERIP
->>>>> + bool "Set a default 'tftpserverip' value in the environment"
->>>>> + depends on CMD_TFTPBOOT
->>>>> + help
->>>>> +   Defines a default value for the IP address of a TFTP server to
->>>>> +   contact when using the "tftpboot" command.  (Environment variable
->>>>> +   "tftpserverip")
->>>>> +
->>>>
->>>> Does it support IPv4 *and*/or IPv6?
->>>
->>> Not sure, I have only tested IPv4, guess IPv6 probably should work, the
->>> 'tftpserverip' var should work with same formats that the 'serverip' va=
-r
->>> currently support.
->>>
->>> This help text is mostly just a c/p from the USE_SERVERIP Kconfig optio=
-n,
->>> let me know if you think this should be changed.
->>>
->>
->> If it only supports IPv4, I think it should be mentioned. I'm sure
->> Jerome will have some input on that when they have time to review :)
-
-I haven't tested any IPv6 with lwIP, so at the moment it is considered
-unsupported. That said, the lwIP stack itself *does* support IPv6.
-
-Regards,
---
-Jerome
-
->>
->> Cheers,
->> Quentin
->
-
-IMPORTANT NOTICE: The contents of this email and any attachments are confid=
-ential and may also be privileged. If you are not the intended recipient, p=
-lease notify the sender immediately and do not disclose the contents to any=
- other person, use it for any purpose, or store or copy the information in =
-any medium. Thank you.
+Thanks!
+Quentin
