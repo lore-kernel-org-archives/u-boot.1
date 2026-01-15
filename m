@@ -4,108 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A153D3CC84
-	for <u-boot@archiver.kernel.org>; Wed, 14 Jan 2026 23:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB78D3CC88
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 00:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41EF7835B3;
-	Thu, 15 Jan 2026 00:23:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D9A5B80325;
+	Thu, 15 Jan 2026 01:02:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="M4hzOOH1";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FdsLlagx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TiSNQkyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E74E803F5; Wed, 14 Jan 2026 23:59:10 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0779F803F5; Thu, 15 Jan 2026 01:02:49 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F21D4803F5
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 23:59:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1064B80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 01:02:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7cfcbe7d176so227890a34.3
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 14:59:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768431547; x=1769036347;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EmYsoPoiI6UJq1l1bzI73l6ru94awrUkaZeBlZj4sjM=;
- b=M4hzOOH1ZplMYGWUOuT2VQOBMNN4B9ghgTzJoMZiCdNvTFkPZYg8P6yx35utDuCl45
- UVh3n3BupcGEh2MoFI56s6iU1+7UcTh0FB8REo5EBBaIrb7KI7wG8nQZoq+KDfGuXbxo
- 4wfnhsqmcKqUigJuMLx5BKTyyyPLPEnJH8tVVVgTcfAglDoV0JHL/tOe/+1DkeQParCr
- XDDRTOxAW8zxNRP/vfXU2G9tskuiypXLSk6/qcPA0i0isyXcdDfwKyaPuwSLVTtLFj6I
- Wgeliem9E+2ahc5WamygCQ9uFhqu+FMy4gxZPIaDlPKg34RFd012+L10lGGSQTMBhhZr
- J23g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768431547; x=1769036347;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EmYsoPoiI6UJq1l1bzI73l6ru94awrUkaZeBlZj4sjM=;
- b=s+bF/LqWYZGGdVja0ZBagaoEV4DhnI4SxecOapKujLaYUbYQgCQGaHFV7+raD9M71j
- V2HPs08/zGYfnpmHXOUQ8epEvzmrKnWtlCXvNyuPt30wQrPtcyj2uwEknS4PVOT2VhHe
- pXtY2IkSnzABQZ29FtEtIaq/ukVWIO1dh5aOH1LTuyv0h2+4FrxPFLSCQnl3pnnLE1XZ
- 7UIb5rk/sTORr9vQk46UoRYVPyA4GMH0yTmXuML+FC48UNuIXqGQ06woeWwXQronhLFK
- XiOmSRrMCx9qfnrOylvHRGBOCFEXxyPgirxkeNX8EoN9sUB7W+Sj3TWN98lrrqk1nqUX
- pNzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNiPwtN3e7BtCeygwsoDcgbWbrXo3SqDMIeK/fmcMxS5huDyD2n4Lr2uKltesfw1IVQa1G/WE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDzw5OtDc/08sj4MwqeR1QqQ9uzYbWK0FsSzVaaBcHxfmagH9q
- TkYR25179MliXBW5abl/zU1nXQPakYAJSBQas+PHIlQZTa6Y1G76MqHXk8R1E63MTf4=
-X-Gm-Gg: AY/fxX5TqmUHeUPu42BDRzV7OQqJGuleqlyIVnMKessNN/DbyALfQY5vCdrAdOyw+NU
- RYcbyaJS79BMzOWD+NgqutjHYMnqtBUMT+Y8H5xbNmyWT11J34ulwNR6OS2ay8Ac9puoPKR2Mdx
- aCM2qPtZgjgg42tlDbvnYWYXw8DEqOTh8uoyXEUt2YQc8Yxups8bmYZ2AQdIZRaV2g3aq0WbTUk
- knyCcqfBWBxSyvz1rgyiaXn2PfNhHeyVLKvlrQ90JqHHzzsdNLHNEBI1FbeYwkpHdshYdU5P76z
- Lu/MaOML6VszqsHKfjVpPMgbUxTB9QhgNCuTD72+LggybwJReBO/GQXR66BeKhbYh0d20MQzsVg
- uc8X+PHDXe7SwVjyzbTFCQSdSdXAgDRvGTK4coVVg7AdxxDYr9DQs7Q3mxgZIE/OZPjTchbvAWH
- u6/MWGfnFPnD6eXtIW7ibT/Q5LVA==
-X-Received: by 2002:a05:6830:4ac5:b0:7c7:6626:b586 with SMTP id
- 46e09a7af769-7cfc8b4fefcmr3178876a34.25.1768431546732; 
- Wed, 14 Jan 2026 14:59:06 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:3ff3:5a3e:f89a:1938])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ce478af63bsm18518497a34.16.2026.01.14.14.59.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jan 2026 14:59:06 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 14 Jan 2026 16:58:57 -0600
-Subject: [PATCH] clk: mtk: use IS_ERR_VALUE() to check rate return values
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ds38Q5kddz9tJ6;
+ Thu, 15 Jan 2026 01:02:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768435366;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J0mM//xGnQJkzE81izynnnRAt05LbL46KjKGdLIxdlc=;
+ b=FdsLlagxk+XNMrYv7mlxlyvJW0OyEw3SeRYSBhK8DOD8KbSfZS9URaCk/tQyLMBTZM2jiN
+ e5PbhGwKqTxcqiUqTAGnmoRMX6Jq0W1tgknsu0vnFjjWN75TiUtkNTmnQhsgtGWmId+BcS
+ ijE++2AkWYqxkytpNLsZbWpueITcaEpkcnc8nmV2K7tEaaIynWIffjKRj9YYWJXU92xYC1
+ Xb+JW5odIGCMUw0E88+CYZySJHji8suDvWyUInQKu7iM7wJF+/V1Hi03Ycxr04fyK8Kuth
+ 7od7Oy6KnzRr/Sdul+Xd7EiuvTA8zL/amQfd7CfsEPJATotzmKBAG1QJ638xTg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=TiSNQkyR;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <7f1f7601-23ec-4a36-8e2b-3b4b679da6aa@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768435365;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J0mM//xGnQJkzE81izynnnRAt05LbL46KjKGdLIxdlc=;
+ b=TiSNQkyR3gbDuVKQc+fNCIaPbldOjvlnGVBfyKMVLkbNKzuRlAW2uQcaoGKfu4RbHCjBUx
+ rPuyxojVq8nMcbAMraO81ILD9fwlzIDpG8YfoMDEDJ7oyNBytHM+bcUxtcUcGucE+V3nUL
+ e+tFcOhrlAEQyoqHzLSG/4wVC0da2Gh5fKoLGQys2rAvdneyJHSvBQbTSwI505hBAakHfP
+ 6B8fWgURpbLgCSpBfmOZjzwXzFIty9qsRtgqhbth2ibmkRN7Hp+Kvf7X7ZQO+qaLbfDEKQ
+ aWWZyDSeZRRVgvGhQQMaofJi0Ufwsxr5CpYnKS6jJyDxcFU1ygxa8GZcoLy8mg==
+Date: Thu, 15 Jan 2026 01:02:41 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v2 2/2] ARM: OMAP2+: Pad SPL binary to 8-byte alignment
+ before DTB
+To: Tom Rini <trini@konsulko.com>
+Cc: Anshul Dalal <anshuld@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+ ilias.apalodimas@linaro.org, malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, marek.vasut+renesas@mailbox.org,
+ james.hilliard1@gmail.com, afd@ti.com, nm@ti.com, vigneshr@ti.com,
+ n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
+References: <20260112101102.1417970-1-b-padhi@ti.com>
+ <20260112101102.1417970-3-b-padhi@ti.com> <DFMMUHPP8BW8.3M5VVTPEB9IZL@ti.com>
+ <20260112164854.GQ3416603@bill-the-cat>
+ <8eb4eeea-a755-4032-ab95-2b293f2d2289@mailbox.org>
+ <20260112220536.GU3416603@bill-the-cat>
+ <66ec9e5b-1488-4e35-9a56-91d4b70ff0fa@mailbox.org>
+ <20260113150024.GX3416603@bill-the-cat>
+ <bbbb72e7-a7f5-48b0-b3e2-fcc83d5b1658@mailbox.org>
+ <20260114141735.GA3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260114141735.GA3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260114-clk-mtk-use-is-err-value-v1-1-ab35f0f35118@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MSQqAMAwAvyI5G7CiRfyKeCht1OBKYkUQ/27xO
- AwzDygJk0KbPSB0sfK+JTB5Bn5y20jIITGURWkLYyr0y4zrOWPUpBRJBC+3REIXGmNt43wdAqT
- 8EBr4/tdd/74f15mBM2oAAAA=
-X-Change-ID: 20260114-clk-mtk-use-is-err-value-ad81668ac5dd
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1831; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=h4MCfYVkLQYIVdBYMs8dpssThXNf0R4GUGbzTcpfAV8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpaB+yuh5xD6/eBepAENN5JOEOy9zp2JYQqIawE
- Ch6ym/eW/SJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaWgfshYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AsS8H/2HS9bbgL3wXvmn61o3K6kktY8M7LZmhtPu3wlD
- lOa9Adq+k5nruKDOfEZjQEvhjGCP+UtxQ0LlRkdMfUuiI0DFDI8qRAUOhgz0/6rIgg8+m0zqY5V
- 1GJ09OXfUBm4KxBXC2yBz5msdNKQnNLqh2OvYVl8ChH1L40nXB2OLNfp53dwAr7ntg3+aIL42n2
- nI6r9oFhpRcsQp3MLpP46p48TGOAXhuGDrRk7QlVCysmZF3Zk4FVM8yPpXUdgGxOnQVE55R3tdM
- EjqE4DsDnUEoOIdGnU93GO66ixJDk/l/BSotKMV+WnapgbthXCwmrO7+6HKNrNyEJ8X7zJdYvZG
- Hdis=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Thu, 15 Jan 2026 00:23:23 +0100
+X-MBO-RS-META: bxwpdxzmzjk1bcxbcmdbanjgdkt5efpp
+X-MBO-RS-ID: dbfaa1e67c9a047c40d
+X-Rspamd-Queue-Id: 4ds38Q5kddz9tJ6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,65 +107,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace casting with long to IS_ERR_VALUE() macro to check for error
-return values from rate calculation functions. This is the recommended
-way to check the return value from clock rate functions.
+On 1/14/26 3:17 PM, Tom Rini wrote:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/clk/mediatek/clk-mtk.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+Hello Tom,
 
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 82306ae285c..a275b359227 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -12,6 +12,7 @@
- #include <asm/io.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
-+#include <linux/err.h>
- 
- #include "clk-mtk.h"
- 
-@@ -218,10 +219,10 @@ static void mtk_clk_print_rate(struct udevice *dev, int mapped_id)
- 		.dev = dev,
- 		.id = mapped_id,
- 	};
--	long rate = clk_get_rate(&clk);
-+	ulong rate = clk_get_rate(&clk);
- 
--	if (rate < 0)
--		printf(", error! clk_get_rate() failed: %ld", rate);
-+	if (IS_ERR_VALUE(rate))
-+		printf(", error! clk_get_rate() failed: %d", (int)rate);
- 	else
- 		printf(", Rate: %lu Hz", rate);
- }
-@@ -632,7 +633,7 @@ static ulong mtk_topckgen_get_factor_rate(struct clk *clk, u32 off)
- 		rate = priv->tree->xtal_rate;
- 	}
- 
--	if (((long)rate) < 0)
-+	if (IS_ERR_VALUE(rate))
- 		return rate;
- 
- 	return mtk_factor_recalc_rate(fdiv, rate);
-@@ -951,7 +952,7 @@ static ulong mtk_infrasys_get_factor_rate(struct clk *clk, u32 off)
- 		rate = mtk_clk_find_parent_rate(clk, fdiv->parent, NULL);
- 	}
- 
--	if (((long)rate) < 0)
-+	if (IS_ERR_VALUE(rate))
- 		return rate;
- 
- 	return mtk_factor_recalc_rate(fdiv, rate);
+>>> OK. And why can't we make that check at $sym rounded up, and ensure our
+>>> build targets pad? Going back to the commit message here, it's easy to
+>>> tell the linker to place $sym at the right spot, but it's hard to make
+>>> sure the output is padded. So having typed all that, maybe we need to
+>>> do:
+>>> d) Update linker scripts to ALIGN(8) the above symbols and have the make
+>>> targets use dd to ensure padding prior to concatenation
+>>> ?
+>> d) looks like what we should do, yes
+> 
+> Poking at this harder, I'm not actually sure we need to use dd at all,
+> but we do need to fix our linker scripts, and then going back to when
+> Ilias reworked and cleaned up a bunch of them, get the changes reviewed
+> by the toolchain experts he got ahold of :)
 
----
-base-commit: d503633a36767d756c7de28305cf0de79440cbc0
-change-id: 20260114-clk-mtk-use-is-err-value-ad81668ac5dd
-
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
-
+I wonder if LD can always guarantee trailing alignment of the binary. If 
+it can, then yes, dd would only be obscuring alignment problems and 
+trailing DT look up failures which are hard to debug. It would be nice 
+to drop the dd part, but I am not sure if we are able to do it reliably.
