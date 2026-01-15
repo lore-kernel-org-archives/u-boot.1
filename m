@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F67D3CCAE
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 04:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C46D3CCAF
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 04:47:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C17383623;
+	by phobos.denx.de (Postfix) with ESMTP id CB1B4836A3;
 	Thu, 15 Jan 2026 05:47:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jkdHYUM6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kn87PW7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54C73803F5; Thu, 15 Jan 2026 04:12:55 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 4896F80077; Thu, 15 Jan 2026 04:12:59 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F7FF80077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 04:12:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63B8E80325
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 04:12:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chiffathefoxx@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-64ba9a00b5aso591102a12.2
- for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:12:53 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b876bf5277dso193532166b.0
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 19:12:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768446773; x=1769051573; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768446777; x=1769051577; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OlSLpxW0qgY002hZetq90Tzq5xKi3B/YpfA6+fll6MM=;
- b=jkdHYUM6ket6QZt7IvwdTRCmG0946a3Z7Cd/gdY8j68+eRY9BFSszi7rbQ9gX76VrJ
- CNlt2shxmuOUI5JBRhWYF5cjf28HQintKRMUtuwWL4tN+/l6UJRVFBWjeZDOhxvnRf9O
- FylLZjuF28W04Q4xo5CQqO1zSeGGqLJHMpPDCEc3RjQ3/ioE4mv9FzcdpNM89Ushu8ou
- gq5kVILUWfhM6OoA0D+01znVkZEcIV7Tvb9ulXlfBIQ3FFVQoRLzuErMd8AWBg+Zit1c
- nHASo0Ovrm3tgRLvdC9xdN/dODYPpFW0GqYbGExIGFgLww3ps3LYKk4IEA0HyRhvpdRQ
- FMWg==
+ bh=LoD1DI2IcgZjWeM55Pb3ypCYvCG4gTxznxO4SYySojE=;
+ b=Kn87PW7uhMUve47b0UYoS2Nooq87u6v7PAY/Z/kKYVC4zO98Ymw8u49JcxnXHkTGWk
+ 0gFFu23RGq3oxxBP4ZgRVNEzN4dlprQ4/EEmKmwljolW4Vaxue3+92w4IW8UhBb56afl
+ 9COH3rqmpeBflSeobYA25y0H7sxbHdSJ8MmdamYvaFAHYEFQtzJepZbrkTOI1tQHkU0Z
+ 16BrQfQgxEDZUizRZM59PLh7V8GnTyTKkC/1ZRjSAvMmM5LMSxo2OrpcpI23yZ9yRwZ4
+ sw2A+/PkV9UJ60Hn1fanbTU06nKEn4X8wtvqqzwLd93wvuPNFUTih+VmK5gm9x8acRSk
+ eMQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768446773; x=1769051573;
+ d=1e100.net; s=20230601; t=1768446777; x=1769051577;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=OlSLpxW0qgY002hZetq90Tzq5xKi3B/YpfA6+fll6MM=;
- b=V8+A7qVAmDEtRqDoDruoYiVIMOJjTx1b705hTWR8BvoumxGd6gI3E5HmVuUf+rFN9T
- 0xXVAxRZbtc8O41D959GWMJnJRHTRA8q6nkUOn2mKrOWFejuP9/tR5JiBJJiWrkCl6fe
- lfCcGgUis5hCcGGSw4xim6cImaMQ7hlE2RCFhDuDz5AE9I4PkOZpcMmWIjSW5oGhzRw5
- KdBwKiJ/2v1psClPz/cZFAh3NUVt9bbc0y3YH5uDdftVEO+hCxPy8o2UfwiIqazX/vBa
- N+QZGJlgpBQKTOfdpWVXBkc4cRiHneGF0MY+/JJ9WBP5Mdi+UF39Qs5TOxwetZD/QYbp
- ACJQ==
+ bh=LoD1DI2IcgZjWeM55Pb3ypCYvCG4gTxznxO4SYySojE=;
+ b=Z2bZUIrlCIefZwIVYf0kMaGSRNZkZr2IZ0y6MAjqyGMd5gyXkcnUZu5E5GV0YdL7Vf
+ cgbI2STsDyGzWVLOTdUQzxLZbQANUD7kiKrNxAwUde2CxaWMbuS1FW6YH/EOlcLt6mxH
+ tHTy9j5uyCkIAC9jKPSoC832kGojXnizJeOCkOZJJfvKaZIBJ8JztZvUsOHvDYXJ2rP9
+ RyTebNTRZzsE5KUXauIb6bXUr2zasV5NnPaiDvY7rJvc39a2FrkqT9DwI27CJT5CClsx
+ EXz5iPqxaUnK/l1DTBxNTVomu83mDDvqFnEf2Eg9cWg1gIp+yufsQfs8hGLqamT4lU+u
+ +qAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/NuR2fzTTRHIQjhWy0MuQ5/m+7kdBeDfWLsjDEbGlWmantVAK5Pq7jlzGcWdN7tCyPfK9B/A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8ORm0YCsQlL7Wd8gbZBAWhCPR5Om6BlhGzFMsP5/scGPlKw1p
- if6qcVsnwwPnNtGlRzYWUvRweiiqiolPSEBZShkycVZzeV3adCBivj1N
-X-Gm-Gg: AY/fxX5SBXK45R5kDRwt+ep3BkAWxD24d0U0lmLqb3Kz7CGPg5nDq4POQ451B8ozLy0
- 9ddj+8TDmkBlDPgGxdckp2uNTWnTtx2rxhl2my9o+Bwx3wdEx7SbVgM6bpnjqM4OZjr39Ue+CCm
- hcVWe2al9aoxuvPlTmQpQAVkuhr0QWom4JyGkEDAz0WmW/GOBI9jFPjh0xPcwWDKyKrD1BtRKBf
- eNBjZPD79ecalt7chxGOBFPtk859ptaldx9UOlgqCHGX3o6WNyOOVgo2uN1h371A7nGLnm1r6q6
- ZnW3KOB40tKLtrRRn4T8KtoEnKF0XFZWvXuHibLKt5NOskxwf97ohnF5wxKU8ju7Z98j754xIWr
- ysduIxGrGUjJTh+wb/8BZa/DVEsG25Z4h2adIEOvGrzzcSu3fbbSf51EaMTFzWAWUFZDE59gNr4
- 1Pc7dy3oo1Sw==
-X-Received: by 2002:a17:907:94cb:b0:b80:751:ee62 with SMTP id
- a640c23a62f3a-b87610632dcmr382159666b.14.1768446772553; 
- Wed, 14 Jan 2026 19:12:52 -0800 (PST)
+ AJvYcCU+keo6ilUcRl5IFIhezEwB6i4DQ2AReBg10rnGFscVIO3HdVJPEMMDI82VACWBQVXFXqLY9EI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCYiN0HaBOb285FdVlWf6DUwl6oH2VEHGNS1E07kyQ8wrUJKyL
+ 7XQmimVoEFCUoepTprkYlr04/Yk0tDSI51lUE15dL2AYCClfAaPUrXrQ
+X-Gm-Gg: AY/fxX5cK33fEQIbJpDfnB+iyNKOCbXyf21d8/vu8HE2peVPl7AhyQyR+jkq6vgowck
+ Yqv1iSZov6bVkdgb4kjNUZHpWky1Uqg1f0Yz/1SUCPKJvRSKsn/bEgoGLvWl5sk767CDI1I8S0g
+ bvVSdrtNAqSIDNCd+OHLyYamd4F0ePEZlpNHZHLTu1wlaqg+SDEVHk40+aVAk+zUk1v43/JhILF
+ jhLLhS1JIoCL5YrTS+K5LtiH3AA9AlX+HFGxoKBPTBZIVwZzcZdJJmQAjCLLB1ssr9D4EteWKtl
+ bpyQXTGlbxLg+9Vp5QguGISRHsp7r2qfMCcKNNmQiB2cUpW+c3Dv8A/kPyz3qAM7BACyd/29EHv
+ 5KLqjeeX3UCleHhBtcWBoILwvsCy6RG9Uklf0Ls61Ja3Cj43Fh4D+vOWs/ci/vpSMnZI0HNPu5W
+ Q=
+X-Received: by 2002:a17:907:d15:b0:b80:48f6:9cc6 with SMTP id
+ a640c23a62f3a-b8777c8e6cemr133752366b.32.1768446776791; 
+ Wed, 14 Jan 2026 19:12:56 -0800 (PST)
 Received: from desktop.. ([176.100.0.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b86f9a9103bsm1341263266b.30.2026.01.14.19.12.51
+ a640c23a62f3a-b86f9a9103bsm1341263266b.30.2026.01.14.19.12.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jan 2026 19:12:51 -0800 (PST)
+ Wed, 14 Jan 2026 19:12:56 -0800 (PST)
 From: chiffathefox <chiffathefoxx@gmail.com>
 To: Marek Vasut <marex@denx.de>
 Cc: chiffathefox <chiffathefoxx@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
  Kaustabh Chakraborty <kauschluss@disroot.org>,
- Lukasz Majewski <lukma@denx.de>, Maksim Kiselev <bigunclemax@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/2] clk: clk_resolve_parent_clk(): resolve external clocks by
- id
-Date: Thu, 15 Jan 2026 05:11:13 +0200
-Message-Id: <20260115031114.220888-2-chiffathefoxx@gmail.com>
+ Lukasz Majewski <lukma@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH 2/2] clk: exynos: do not reparent requested clock
+Date: Thu, 15 Jan 2026 05:11:14 +0200
+Message-Id: <20260115031114.220888-3-chiffathefoxx@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260115031114.220888-1-chiffathefoxx@gmail.com>
 References: <20260115031114.220888-1-chiffathefoxx@gmail.com>
@@ -108,51 +103,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When referencing clocks in DTS registered by another driver,
-clk_resolve_parent_clk() is supposed to return the name
-of the child device that provides the requested clock.
-However, in reality, it returns the name of the parent DTB
-node (e.g. clock-controller@1a240000). Such devices, for
-instance the exynos7870-cmu-peri driver, do not store any
-clock information in their dev->uclass_priv_ because they
-expect you to call dev->ops->get_rate with the appropriate
-clk->id. So when you try to resolve a clock that depends on
-an externally referenced clock, the resolution fails on the
-parent clock because it doesn't have a  dev->uclass_priv_.
-With this change clk_resolve_parent_clk() will take an
-extra step to actually resolve the child device.
+It would appear the original developer of this driver
+reparented child clock devices to fix the issue described in
+`clk: clk_resolve_parent_clk(): resolve external clocks by id`.
+This hacky fix was the cause of invalid memory access when calling
+clk_get_rate() on a clock retrieved via clk_get_by_index().
+clk_get_by_index() returns a copy of the `struct clk` and
+when passed to clk_get_rate() it may be forwarded to
+clk_divider_recalc_rate(), which will cause the latter to
+run container_of() on a pointer from caller's stack instead
+of the pointer that was kzalloc()'d by the clk-divider driver.
 
 Signed-off-by: chiffathefox <chiffathefoxx@gmail.com>
 ---
 
- drivers/clk/clk-uclass.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/clk/exynos/clk.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 0584429bed6..bea45fc396f 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -430,6 +430,7 @@ clk_resolve_parent_clk(struct udevice *dev, const char *name)
- {
- 	struct udevice *parent;
- 	struct clk clk;
-+	struct clk *c;
- 	int ret;
+diff --git a/drivers/clk/exynos/clk.c b/drivers/clk/exynos/clk.c
+index a2c9f4851da..aa4d4112db7 100644
+--- a/drivers/clk/exynos/clk.c
++++ b/drivers/clk/exynos/clk.c
+@@ -19,7 +19,6 @@ int samsung_clk_request(struct clk *clk)
+ 	if (ret)
+ 		return ret;
  
- 	ret = uclass_get_device_by_name(UCLASS_CLK, name, &parent);
-@@ -440,7 +441,11 @@ clk_resolve_parent_clk(struct udevice *dev, const char *name)
- 	if (!clk.dev)
- 		return name;
- 
--	return clk.dev->name;
-+	ret = clk_get_by_id(clk.id, &c);
-+	if (ret)
-+		return name;
-+
-+	return c->dev->name;
+-	clk->dev = c->dev;
+ 	return 0;
  }
  
- int clk_release_all(struct clk *clk, unsigned int count)
 -- 
 2.34.1
 
