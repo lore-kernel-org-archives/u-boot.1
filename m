@@ -4,60 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39C2D3CCB2
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 06:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51E4D3CCAF
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 06:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 719A5803F5;
-	Thu, 15 Jan 2026 07:10:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D951803F5;
+	Thu, 15 Jan 2026 07:36:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aCnKKoox";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RJdGiYEV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EA2B82C7F; Thu, 15 Jan 2026 07:10:52 +0100 (CET)
+ id BED9D82C7F; Thu, 15 Jan 2026 07:36:22 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A73380077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 07:10:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F19A580325
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 07:36:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 92ABE40D72;
- Thu, 15 Jan 2026 06:10:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E909C116D0;
- Thu, 15 Jan 2026 06:10:42 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6FAEF440E4;
+ Thu, 15 Jan 2026 06:36:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E42AC19423;
+ Thu, 15 Jan 2026 06:36:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768457447;
- bh=N7TXPA+0MUKqPkAEdJUTsKjJB3JPBDf8ZH6pFjQy6Y8=;
+ s=k20201202; t=1768458978;
+ bh=7Te/l0L8L8mzInk9017wKPBDCkcW9oYC4kFk9ep6/8c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aCnKKooxz7GkfMGG0gqWRXcUftvgPI/ayJBjn57fpcEFWIYv3abbSUb52QlHBqEer
- z33lqP9zdgkk4pcNUOwje1HGDbDPDyvXaZvuIcrC/eGjNlpWrDn5C9VWM4I8+JiMh4
- bc5Fx+GtZWdb4P+RiD+ahkcBOHVHrPMEwfnDBViHbrVrUoSQjby0DlJ9Rmtd7OYIMx
- oAECvKB+l0kstrCb+gBdcOhHSeYIOUcCDeY8TuvjzmSrn7mJaHdAlEKoHeKnCgp9W0
- 5P6PsU1C1yGux5lXbvDUFucqMVH5PaRxLLJNiaDJTrjBJ+7kLDds1EuT2/aJcAzCVh
- hZ/H/ybC4z4Kg==
-Date: Thu, 15 Jan 2026 11:40:40 +0530
+ b=RJdGiYEVznTGrCfSjQ4htRoStqPZb3wiXpARTmb9K06tLzpQ5IhNkBZ8xRb2pW5rO
+ Unlz5XZ2CUC8qnHnmrvyFLcjkwBb9Xc7/N+cneEr8wwmwgH/Y5aTyhTy/RHdyq7r5w
+ 4QS6gR/XIKAaU1/xOJZM8lNnNhc7zDexjKqDt+H5ku6esmDwSU07+Gufm3x7xZnzo8
+ /YopKUNXyAxV5UsusKrB3Vmtpg5dW77PyUzgP8bKY7Yc766SAnsLCasdx6isHMzxsH
+ rQGsgHVOW4be/kAc8Rc86q5CKxcdiUDCtYYBLicizglZMeXhqxMNruMw1cfKkrDIuT
+ QJuWy1JVKnw6w==
+Date: Thu, 15 Jan 2026 12:06:11 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
- neil.armstrong@linaro.org, jorge.ramirez@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: Re: [PATCH 2/2] configs: Add generic qcom_tfa_optee_defconfig
-Message-ID: <aWiE4LygCijxYOS2@sumit-xelite>
-References: <20251229114312.668068-1-sumit.garg@kernel.org>
- <20251229114312.668068-2-sumit.garg@kernel.org>
- <c0bc6cab-6eee-40c2-b6f7-ff14d91906c5@linaro.org>
- <aWDgNIR4jcNcUZ6W@sumit-xelite>
- <c4cccc8f-639e-4806-992a-2e7c950c2c7b@linaro.org>
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ trini@konsulko.com, neil.armstrong@linaro.org, me@samcday.com,
+ sughosh.ganu@linaro.org, ilias.apalodimas@linaro.org,
+ gchan9527@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] arm: snapdragon: Add EFI reserved memory regions for
+ QCS615/QCM6490
+Message-ID: <aWiK29lyQFpy4YjC@sumit-xelite>
+References: <20260107091406.2428132-1-balaji.selvanathan@oss.qualcomm.com>
+ <c142ad26-e242-4bbe-a908-842c2076b2f1@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <c4cccc8f-639e-4806-992a-2e7c950c2c7b@linaro.org>
+In-Reply-To: <c142ad26-e242-4bbe-a908-842c2076b2f1@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,163 +72,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 14, 2026 at 03:56:02PM +0100, Casey Connolly wrote:
+On Wed, Jan 14, 2026 at 03:44:05PM +0100, Casey Connolly wrote:
+> Hi Balaji,
 > 
-> 
-> On 09/01/2026 12:02, Sumit Garg wrote:
-> > On Thu, Jan 08, 2026 at 05:41:42PM +0100, Casey Connolly wrote:
-> >>
-> >>
-> >> On 29/12/2025 12:43, Sumit Garg wrote:
-> >>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> >>>
-> >>> Recently upstream TF-A/OP-TEE has started gaining support for Qcom
-> >>> platforms. RB3Gen2 being the first one and more to come. U-Boot in
-> >>> corresponding boot flow is packaged as a position independent executable.
-> >>>
-> >>> So, lets add a generic U-Boot defconfig for Qcom platforms to support
-> >>> TF-A/OP-TEE based TrustZone stack. Build command:
-> >>>
-> >>> $ make qcom_tfa_optee_defconfig
-> >>> $ make -j`nproc` DEVICE_TREE=qcom/qcs6490-rb3gen2
-> >>
-> >> This would be better suited as a config fragment rather than a new
-> >> defconfig imo.
-> > 
-> > That's fine with me to add it as a config fragment.
-> > 
-> >>
-> >> But more importantly, enabling OPTEE support in U-Boot doesn't imply
-> >> that it will be used, just that it's supported.
-> > 
-> > There are real use-cases of OP-TEE in U-Boot for Qcom platforms like
-> > secure EFI variables based on OP-TEE secure storage. Have a look here [1].
-> > 
-> > And sure there will be more such use-cases like fTPM, KASLR etc. can be
-> > supported based on OP-TEE.
-> 
-> I was referring literally to the fact that CONFIG_OPTEE being enabled
-> doesn't imply that OP-TEE is running, it's faulty logic to assume that's
-> the case and add nodes to the DT.
+> No, we aren't adding platform-specific hardcoded memory maps to U-Boot.
+> Reserved memory should be specified in devicetree and added to the EFI
+> memory map automatically (Ilias?).
 
-I don't disagree here as having a runtime check is always a better
-choice then a compile time config option. However, there isn't a common
-info method from properietary firmware that says if QTEE is running
-instead of OP-TEE.
+Linux Qcom DT maintainers are trying to avoid reserved memory info being
+added to DT (see thread here [1]). I suppose the pain comes in when some
+firmware requirements change and the reserved memory layout needs
+update.
 
-> 
-> I just checked and there is an SMC call that tells you the UUID for the
-> trusted OS, referred to as OPTEE_SMC_CALL_GET_OS_UUID in U-Boot and
-> OPTEE_ABI_CALL_GET_OS_UUID in OP-TEE. Presumably this identifies OP-TEE
-> specifically.
+Generally it's better for the UEFI firmware to communicate that info to
+the OS via EFI memory map. However, you have a valid point that
+hardcoding the reserved memory ranges in U-Boot is like shifting that
+pain to U-Boot. IIUC, generally this memory reseversation on Qcom
+platforms happens during the XBL phase for HYP/QTEE/PIL etc.
 
-Also, we don't know how the QTEE will react to this OP-TEE specific SMC
-call given it's different variants running on legacy and the newer SoCs.
-So I would suggest to better gate OP-TEE presence behind a compile time
-check only.
+Balaji,
 
-> 
-> My suggestion would be to make this SMC call if CONFIG_OPTEE is enabled
-> in qcom_psci_fixup(), compare the UUID and add the node if it matches.
+Is there a way for this reserved memory information passed via SMEM from
+XBL for later stages to consume?
 
-That's exactly the first SMC call that U-Boot and Linux OP-TEE driver
-does to compare the UUID here [1] and bail out of the driver. I don't
-see a value of a redundant invoke in the Qcom specific platform code.
-
-[1] drivers/tee/optee/core.c:823:   if (!is_optee_api(pdata->invoke_fn))
+[1] https://lore.kernel.org/all/ahbbg3pffedrjzvksgz2jv7lwajwlcxc6nsmmtunwc4346eawa@xayff4ozvdbn/#t
 
 -Sumit
 
 > 
+> Kind regards,
+> 
+> On 07/01/2026 10:14, Balaji Selvanathan wrote:
+> > Implemented platform-specific reserved memory registration for EFI on
+> > Qualcomm Snapdragon platforms. This adds SoC-specific memory regions
+> > to the EFI memory map.
 > > 
-> > [1] lib/efi_loader/efi_variable_tee.c
+> > Added qcom_reserved_memory.c with predefined memory regions for QCS615
+> > and QCM6490/SC7280 SoCs. The implementation detects the SoC type
+> > from device tree and registers appropriate memory regions
+> > via efi_add_memory_map().
 > > 
-> >>
-> >> So I think the more appropriate patch here would be to just enable
-> >> OP-TEE in qcom_defconfig (assuming the binary size isn't significantly
-> >> affected).
+> > Implemented efi_add_known_memory() in board.c to hook into the EFI
+> > memory initialization.
 > > 
-> > The OP-TEE driver in U-Boot itself is probed based on DT and it's not
-> > only specific to Qcom platforms but every other platform using OP-TEE.
+> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> > ---
+> >  arch/arm/mach-snapdragon/Makefile             |   1 +
+> >  arch/arm/mach-snapdragon/board.c              |  15 +++
+> >  arch/arm/mach-snapdragon/qcom-priv.h          |  10 ++
+> >  .../mach-snapdragon/qcom_reserved_memory.c    | 114 ++++++++++++++++++
+> >  4 files changed, 140 insertions(+)
+> >  create mode 100644 arch/arm/mach-snapdragon/qcom_reserved_memory.c
 > > 
-> >>
-> >> Considering the other patch is based on this assumption that if OP-TEE
-> >> support is enabled then the board must be using it, a different approach
-> >> is definitely needed.
-> > 
-> > Yeah that's true even with TF-A boot flow, there is possibility to boot
-> > without OP-TEE as well. However, TF-A generally doesn't provide a
-> > generic option to detect whether OP-TEE is running or not.
-> > 
-> >>
-> >> When I was looking into this last year I remember discussing this same
-> >> issue from the Linux side, there is a good argument to be made that
-> >> OP-TEE support in Linux shouldn't be based on the devicetree -
-> >> particularly in the Qualcomm case where whether or not OP-TEE is used is
-> >> a simple software change, nothing to do with hardware.
-> > 
-> > Sadly it's true for every other silicon vendor too. But OP-TEE support
-> > based on DT has become an ABI unless migration for OP-TEE support based
-> > on FF-A comes into picture.
-> > 
-> >>
-> >> So in general I'm not particularly keen on this approach, I think it
-> >> /might/ be acceptable for U-Boot to have some fixup code to add the
-> >> OP-TEE node if OP-TEE is in use with the idea of phasing that out in
-> >> favour of runtime detection in the OS itself. I'd also expect that fixup
-> >> code to go in the generic U-Boot DT fixup code that runs before we jump
-> >> to the OS (like the EFI DT fixup function).
-> > 
-> > The EFI DT fixup code is already there based on U-Boot DT. Have a look
-> > here:
-> > 
-> > boot/image-fdt.c:627:   fdt_ret = optee_copy_fdt_nodes(blob);
-> > 
-> > In general on Arm platforms there isn't any SMC bus to detect
-> > dynamically if there is support for OP-TEE or not. That's why
-> > platform bus was choosen for the U-Boot and Linux OP-TEE driver. It's
-> > similar to how we have the SCM DT node for Qcom platforms.
-> > 
-> > FF-A bus tries to solve that problem to unify that approach for future
-> > platform but U-Boot hasn't yet gained support for FF-A based OP-TEE
-> > driver too.
-> > 
-> > Anyhow, this is the sanest way I can come up with to enable OP-TEE
-> > support in a general way for all the Qcom platforms. This is aligned
-> > with how OP-TEE support is detected for other silicon vendors too.
-> > 
-> > -Sumit
-> > 
-> >>
-> >> Kind regards,
-> >>
-> >>>
-> >>> For more information refer here:
-> >>> https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
-> >>>
-> >>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> >>> ---
-> >>>  configs/qcom_tfa_optee_defconfig | 7 +++++++
-> >>>  1 file changed, 7 insertions(+)
-> >>>  create mode 100644 configs/qcom_tfa_optee_defconfig
-> >>>
-> >>> diff --git a/configs/qcom_tfa_optee_defconfig b/configs/qcom_tfa_optee_defconfig
-> >>> new file mode 100644
-> >>> index 00000000000..c398521770f
-> >>> --- /dev/null
-> >>> +++ b/configs/qcom_tfa_optee_defconfig
-> >>> @@ -0,0 +1,7 @@
-> >>> +# Configuration for building a generic U-Boot image
-> >>> +# with support for TF-A/OP-TEE based Arm TrustZone stack.
-> >>> +
-> >>> +#include "qcom_defconfig"
-> >>> +
-> >>> +CONFIG_TEE=y
-> >>> +CONFIG_OPTEE=y
-> >>
-> >> -- 
-> >> // Casey (she/her)
-> >>
+> > diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+> > index 343e825c6fd..19820a075e8 100644
+> > --- a/arch/arm/mach-snapdragon/Makefile
+> > +++ b/arch/arm/mach-snapdragon/Makefile
+> > @@ -4,4 +4,5 @@
+> >  
+> >  obj-y += board.o
+> >  obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+> > +obj-$(CONFIG_EFI_LOADER) += qcom_reserved_memory.o
+> >  obj-$(CONFIG_OF_LIVE) += of_fixup.o
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> > index 5fb3240acc5..0259623d382 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -709,6 +709,21 @@ static void carve_out_reserved_memory(void)
+> >  	}
+> >  }
+> >  
+> > +#ifdef CONFIG_EFI_LOADER
+> > +/**
+> > + * efi_add_known_memory() - Add platform-specific reserved memory to EFI map
+> > + *
+> > + * This function is called by the EFI memory initialization code to allow
+> > + * platforms to add their reserved memory regions to the EFI memory map.
+> > + * For Qualcomm platforms, this delegates to qcom_add_reserved_memory_to_efi()
+> > + * which handles SoC-specific reserved memory regions.
+> > + */
+> > +void efi_add_known_memory(void)
+> > +{
+> > +	qcom_add_reserved_memory_to_efi();
+> > +}
+> > +#endif /* CONFIG_EFI_LOADER */
+> > +
+> >  /* This function open-codes setup_all_pgtables() so that we can
+> >   * insert additional mappings *before* turning on the MMU.
+> >   */
+> > diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+> > index b8bf574e8bb..b488516cfdb 100644
+> > --- a/arch/arm/mach-snapdragon/qcom-priv.h
+> > +++ b/arch/arm/mach-snapdragon/qcom-priv.h
+> > @@ -17,6 +17,16 @@ enum qcom_boot_source {
+> >  
+> >  extern enum qcom_boot_source qcom_boot_source;
+> >  
+> > +#if IS_ENABLED(CONFIG_EFI_LOADER)
+> > +/**
+> > + * qcom_add_reserved_memory_to_efi() - Add Qualcomm SoC reserved memory to EFI
+> > + *
+> > + * This function detects the SoC type and adds the appropriate reserved
+> > + * memory regions to the EFI memory map. Called from efi_add_known_memory().
+> > + */
+> > +void qcom_add_reserved_memory_to_efi(void);
+> > +#endif /* CONFIG_EFI_LOADER */
+> > +
+> >  #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> >  void qcom_configure_capsule_updates(void);
+> >  #else
+> > diff --git a/arch/arm/mach-snapdragon/qcom_reserved_memory.c b/arch/arm/mach-snapdragon/qcom_reserved_memory.c
+> > new file mode 100644
+> > index 00000000000..e670f74bc1f
+> > --- /dev/null
+> > +++ b/arch/arm/mach-snapdragon/qcom_reserved_memory.c
+> > @@ -0,0 +1,114 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > + */
+> > +
+> > +#include <efi_loader.h>
+> > +#include <fdt_support.h>
+> > +#include <log.h>
+> > +#include <linux/sizes.h>
+> > +#include <asm/global_data.h>
+> > +#include "qcom-priv.h"
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +/**
+> > + * struct reserved_mem_region - Reserved memory region descriptor
+> > + * @start: Physical start address of the region
+> > + * @size: Size of the region in bytes
+> > + * @name: Human-readable name for logging
+> > + */
+> > +struct reserved_mem_region {
+> > +	u64 start;
+> > +	u64 size;
+> > +	const char *name;
+> > +};
+> > +
+> > +/* QCS615 reserved memory regions */
+> > +static const struct reserved_mem_region qcs615_reserved[] = {
+> > +	{ 0x80000000, 0x600000,    "hyp" },
+> > +	{ 0x85D00000, 0x200000,    "boot" },
+> > +	{ 0x85F00000, 0x20000,     "aop" },
+> > +	{ 0x85F40000, 0x30000,     "xbl_dt" },
+> > +	{ 0x86200000, 0x100000,    "tz_stat" },
+> > +	{ 0x86300000, 0x1200000,   "tags" },
+> > +	{ 0x87500000, 0x500000,    "tz" },
+> > +	{ 0x87A00000, 0x1C00000,   "tzapps" },
+> > +	{ 0x8AB00000, 0xCC17000,   "pil" },
+> > +	{ 0xA0000000, 0x1600000,   "secure_dsp" },
+> > +};
+> > +
+> > +/* SC7280/QCM6490 reserved memory regions */
+> > +static const struct reserved_mem_region sc7280_reserved[] = {
+> > +	{ 0x80600000, 0x100000,    "axon_dma" },
+> > +	{ 0x80894000, 0x40000,     "xbl_dt" },
+> > +	{ 0x84300000, 0x16B00000,  "pil_reserved" },
+> > +	{ 0xE1000000, 0x2400000,   "display" },
+> > +};
+> > +
+> > +/**
+> > + * add_soc_reserved_memory() - Add SoC-specific reserved memory to EFI map
+> > + * @regions: Array of reserved memory regions
+> > + * @count: Number of regions in the array
+> > + * @soc_name: SoC name for logging
+> > + *
+> > + * This function iterates through the provided reserved memory regions and
+> > + * adds them to the EFI memory map with type EFI_RESERVED_MEMORY_TYPE.
+> > + */
+> > +static void add_soc_reserved_memory(const struct reserved_mem_region *regions,
+> > +				    int count, const char *soc_name)
+> > +{
+> > +	int i;
+> > +
+> > +	log_debug("Adding %s reserved memory to EFI map (%d regions)\n",
+> > +		  soc_name, count);
+> > +
+> > +	for (i = 0; i < count; i++) {
+> > +		efi_status_t ret;
+> > +
+> > +		ret = efi_add_memory_map(regions[i].start,
+> > +					 regions[i].size,
+> > +					 EFI_RESERVED_MEMORY_TYPE);
+> > +
+> > +		if (ret != EFI_SUCCESS) {
+> > +			log_err("%s: Failed to reserve %s (0x%llx-0x%llx): %lu\n",
+> > +				soc_name, regions[i].name,
+> > +				regions[i].start,
+> > +				regions[i].start + regions[i].size,
+> > +				ret & ~EFI_ERROR_MASK);
+> > +		} else {
+> > +			log_debug("%s: Reserved %s: 0x%llx-0x%llx (%llu KB)\n",
+> > +				  soc_name, regions[i].name,
+> > +				  regions[i].start,
+> > +				  regions[i].start + regions[i].size,
+> > +				  regions[i].size / 1024);
+> > +		}
+> > +	}
+> > +}
+> > +
+> > +/**
+> > + * qcom_add_reserved_memory_to_efi() - Add Qualcomm SoC reserved memory to EFI
+> > + *
+> > + * This function detects the SoC type from the device tree and adds the
+> > + * appropriate reserved memory regions to the EFI memory map.
+> > + *
+> > + * Supported SoCs:
+> > + * - QCS615 (Talos)
+> > + * - QCM6490/SC7280 (Kodiak)
+> > + */
+> > +void qcom_add_reserved_memory_to_efi(void)
+> > +{
+> > +	/* Detect SoC and add appropriate reserved memory */
+> > +	if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs615") == 0) {
+> > +		add_soc_reserved_memory(qcs615_reserved,
+> > +					ARRAY_SIZE(qcs615_reserved),
+> > +					"QCS615");
+> > +	} else if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcm6490") == 0 ||
+> > +		   fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,sc7280") == 0) {
+> > +		add_soc_reserved_memory(sc7280_reserved,
+> > +					ARRAY_SIZE(sc7280_reserved),
+> > +					"QCM6490/SC7280");
+> > +	} else {
+> > +		log_debug("No SoC-specific reserved memory to add\n");
+> > +	}
+> > +}
 > 
 > -- 
 > // Casey (she/her)
