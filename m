@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90C63D4662F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 22:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC2AD4662F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 22:29:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F09278399B;
-	Thu, 15 Jan 2026 23:28:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45F4680325;
+	Thu, 15 Jan 2026 23:28:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tTvSloFn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t79q8kGd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED0878398C; Thu, 15 Jan 2026 23:28:43 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 8A1FD830E4; Thu, 15 Jan 2026 23:28:44 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9CD480077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 23:28:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B2B682BF2
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 23:28:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7cfd20af161so501212a34.3
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 14:28:41 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7cfda2de4efso860658a34.3
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 14:28:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768516120; x=1769120920; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768516121; x=1769120921; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VmGUNa+PefQ8nCFUGcVf6FsD8RRmzZROA5ZEzzovOkA=;
- b=tTvSloFnWeyMUMG0FzZuLdafDwkERb6TWG1EUjbrqyHW08cQON+uk7Ope6n+w6BGQ4
- cazJTRtEazJRZx7/lPYLjpuPYp24Vb7sNBEJj9h/juR/qvhKEWwap8mJwALj7c0BawTU
- AR3Vj7xQe0+3+tgR6bDGCIeInDUrhSjIPLaOQ=
+ bh=MHz1fIVegkD6Xjxp7kKwyU7cuHq1s6FF64sA5y9J7lw=;
+ b=t79q8kGd8moZ0DRl+5MglLTrkgao1YSOjmR1pxG1/p/r6BCwnDt8z3s5nU5oClXR9r
+ GHGRIHlsj7I1EYtDEkw4DUOm616NzPJR+YclhVjwAFx324wed+zJeva3nBtypz3yTaDa
+ 5Ep+J/a9qr8ebT5SDax1zkJmIUaBb53dfw0Yo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768516120; x=1769120920;
+ d=1e100.net; s=20230601; t=1768516121; x=1769120921;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=VmGUNa+PefQ8nCFUGcVf6FsD8RRmzZROA5ZEzzovOkA=;
- b=BddvLIDwuBxtJpb/9D+8A3XpnADLqXz/A+FQZZvmUWxja9eJrD6e6shK+Ns1vkc9fK
- k5H91YY6pSDe8PnK+KUmUza6jXLTrCwymON5luYfs0X8sD7OE6k8Sxq0f6wyhHBVrvDr
- A6FSGnw9ECnw+btcNX84ft7bBoPhSJwyMcMWOjS4GEmd30v+bLno8FZ9UIstvw2yjny9
- dmkLZbnGfFDbDXM7Eeh/CAy+cu+IVsdzSTMzo9a9db+7Rhd1cA2Slj6AQNHBquCxch+4
- lVx3keCS5vkwj+NPC+3Nln4NXDhnSvxl53PJFOgThu7Nb46DMK/43RlCWUKWbDucRABO
- t/Rw==
-X-Gm-Message-State: AOJu0YymlT2k4rnN30bACJ4LoHJzeSg6biKWV/AbxnhkN9qRsh4KVW72
- owSL6IDWuk/706fH9sPQ5h5L3IMoj9viNaUdFjjH6Yh2v371J4qERVPZ+YuwcQTrIvs0o7C8Atg
- xEzrDtS4=
-X-Gm-Gg: AY/fxX7zWDoKZYRqoqpAesMAKt2U9AKdzqFhhMuEv2X4iutinjfk+NDewbWDuaTAnSg
- CWAno3TlA7huMWhBFQtxqKBaMZNhpXSEUyokRveuiW2shpyxpFcvsKI8KMHqxrhK+pUCI3RoHtv
- 8vHZ1PWR8jepUCWlblaMRl50n9RqHR0GH0QIgMIq13391jtK+hPrgtz8xOxJlwkNV5+dmsAqRkB
- TXNgLFszX0udLkMxcgD/QbifO6SZ39x5PZlSU4C9Rd0pdKXkCOeirIeF487LXZhI9U8Lr0Xccri
- QNvzS2kXnR2p+aCMoL0aFhyq76aMb+XFKVtuLiskNP27ZcE5ZL9qgs9b8C6/o7q4U0BjnSvdiD3
- 6I42bVjEkIxL3PFHPkLpJkU+gUp3wBXw1lu0iM+oArHcXoUnKn+dR3Tk9Ku1Ut7PpHyHmrvQYTr
- V9vTfXorAU8fK/Nyqi6GpQItSIhr6xSBkA0NAOk38wCtoTQrgw0utBuDXoTWb2T34tAPndg54Vt
- veHrqSkH8JpOiP0HmhVpl3mEiFCM7Zod2zgHZ6jrQ==
-X-Received: by 2002:a05:6830:6614:b0:7c7:6063:8e0f with SMTP id
- 46e09a7af769-7cfe0110c8fmr241305a34.15.1768516119721; 
- Thu, 15 Jan 2026 14:28:39 -0800 (PST)
+ bh=MHz1fIVegkD6Xjxp7kKwyU7cuHq1s6FF64sA5y9J7lw=;
+ b=OtYIvZ8v9halxMoIwVmDGw6VWKSmaYIDTQpbAKqh81K6+6D4Khx0LWRwP5pcgG7y6d
+ lA5ayoeOptcKP/6klcGO4WLC7XfSy4b6DziWE5jvncA9Sjx4cS6v0DvKKeu3YzXv8MJ8
+ iUzUW82zSIVNB2xldbvkGcTza3uW94TqtQ/9AV2CDSTfFMIJb62OVKvZdsxg8x2jBmaU
+ WiehnlxFm9TQ2CVfI4U6Je6K2l0wTgPFlBX2hbHL+wFHbVpMRa3LtoYtPYObq+CBFN6O
+ jBkDqRO1KdHqEKDrZIEOCBpH+jpleTQ5tQOZf27fVKBiiEPiG4vmxwcFpZ/fcncod/1E
+ hiVA==
+X-Gm-Message-State: AOJu0YzJrEl6ohIOtIEBwiM6cxcuTlSRFZXlIQAgbsUo2pMhgDfj/KgT
+ JjBkCQFPTBg2ObUM4Z5sVSicyi256UY+248VZf+Bvxufg19k08huhyYCTqCJEmx5nZ6Xz23tGCH
+ A+LtsXbI=
+X-Gm-Gg: AY/fxX7/UGyqQRwPEEx656rhqaIEQuJxZ3LsEc6ft+PuShP1FwmH/KOLWbVefvIMIcd
+ YHJewLgoccHiEP7AehLFNLQvtbsGYn5Kpa1Q0CDq8tXp2jyxgsheXvweMKUCfYA1LHwvhn6xLfO
+ IhENKk9dNyzU00a/EyNgjFRllXyei6ArXx9Q52s41zSLuNL2y1mdTYmxXy/zKMG/yREJg3sDG+h
+ 9Gz1U9i1+9KkWIbh3YyjLg74YCBmime5emxLD2JtBf3tX4wazHq91nvKIWIiDIxWrc/fAgHoe8y
+ GpFfRkm++P9dYaXcJsK1RUHzphMmD6cXHXByipzJ+vpcopljTp8q4TDR8pxrJIU6ACqYQGZA0il
+ ddheuUTn413XOB9Q5XjhNuCHj357HOBaCiU6XYsIXYA9XbBJVfqPgOsNDiGsGXasBBYRTH5wx8i
+ rYXuYsnH6/RBjORcwhYP8mWoS+2gM/ZqTUENy61w3ulPQXQVPXhQ9BU0XUz/CQxq/BhSENZYFeq
+ K520LhzH2UU4vXHvHXkus9X3lItxOxhFbmP+vHV9g==
+X-Received: by 2002:a05:6830:3bc3:b0:7cf:d96d:7882 with SMTP id
+ 46e09a7af769-7cfded33d6bmr621400a34.3.1768516120707; 
+ Thu, 15 Jan 2026 14:28:40 -0800 (PST)
 Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf2b5aaesm544074a34.31.2026.01.15.14.28.38
+ 46e09a7af769-7cfdf2b5aaesm544074a34.31.2026.01.15.14.28.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jan 2026 14:28:39 -0800 (PST)
+ Thu, 15 Jan 2026 14:28:40 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Beleswar Padhi <b-padhi@ti.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 05/10] mips: Update linker scripts to ensure appended device
+ Richard Henderson <richard.henderson@linaro.org>,
+ Thomas Chou <thomas@wytron.com.tw>
+Subject: [PATCH 06/10] nios2: Update linker scripts to ensure appended device
  tree is aligned
-Date: Thu, 15 Jan 2026 16:19:35 -0600
-Message-ID: <20260115222828.3931345-6-trini@konsulko.com>
+Date: Thu, 15 Jan 2026 16:19:36 -0600
+Message-ID: <20260115222828.3931345-7-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260115222828.3931345-1-trini@konsulko.com>
 References: <20260115222828.3931345-1-trini@konsulko.com>
@@ -108,74 +108,40 @@ Pad SPL binary to 8-byte alignment before DTB") Beleswar Padhi explains
 that we must have ALIGN(x) statements inside of a section to ensure that
 padding is included and not simply that the linker address counter is
 incremented. To that end, this patch:
-- Aligns the final section before _end (for U-Boot) or _image_binary_end
-  (for xPL phases) by 8-bytes by adding '. = ALIGN(8);' to the final
-  section before the symbol. For SPL we need this in two places to cover
-  all build configurations.
-- Remove now-spurious  '. = ALIGN(x);' statements that were intended to
+- Aligns the final section before _end 8-bytes by adding '. = ALIGN(8);'
+  to the final section before the symbol.
+- Remove a now-spurious  '. = ALIGN(x);' statement that was intended to
   provide the above alignments.
 - Ensure that we do have alignment by adding an ASSERT so that when not
   aligned we fail to link (and explain why).
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com> (maintainer:MIPS)
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Richard Henderson <richard.henderson@linaro.org>
+Cc: Thomas Chou <thomas@wytron.com.tw>
 ---
- arch/mips/cpu/u-boot-spl.lds | 6 +++++-
- arch/mips/cpu/u-boot.lds     | 4 +++-
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ arch/nios2/cpu/u-boot.lds | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/mips/cpu/u-boot-spl.lds b/arch/mips/cpu/u-boot-spl.lds
-index 310a5c5053b1..ea2deed34f15 100644
---- a/arch/mips/cpu/u-boot-spl.lds
-+++ b/arch/mips/cpu/u-boot-spl.lds
-@@ -27,16 +27,17 @@ SECTIONS
- 	.data : {
- 		*(SORT_BY_ALIGNMENT(.data*))
- 		*(SORT_BY_ALIGNMENT(.sdata*))
-+		. = ALIGN(8);
- 	} > .spl_mem
- 
- #if defined(CONFIG_SPL_DM) || defined(CONFIG_SPL_LOADER_SUPPORT)
- 	. = ALIGN(4);
- 	__u_boot_list : {
- 		KEEP(*(SORT(__u_boot_list*)));
-+		. = ALIGN(8);
- 	} > .spl_mem
- #endif
- 
+diff --git a/arch/nios2/cpu/u-boot.lds b/arch/nios2/cpu/u-boot.lds
+index 5b9e27d94062..fc366d44341d 100644
+--- a/arch/nios2/cpu/u-boot.lds
++++ b/arch/nios2/cpu/u-boot.lds
+@@ -60,8 +60,8 @@ SECTIONS
+ 	  *(.sdata)
+ 	  *(.sdata.*)
+ 	  *(.gnu.linkonce.s.*)
++	  . = ALIGN(8);
+ 	}
 -	. = ALIGN(4);
- 	__image_copy_end = .;
- 	__image_copy_len = __image_copy_end - __text_start;
  
-@@ -123,3 +124,6 @@ SECTIONS
- 		*(.eh_frame)
- 	}
- }
-+
-+ASSERT(_image_binary_end % 8 == 0, \
-+       "_image_binary_end must be 8-byte aligned for device tree");
-diff --git a/arch/mips/cpu/u-boot.lds b/arch/mips/cpu/u-boot.lds
-index 133ea05df3da..d59a48b7ef85 100644
---- a/arch/mips/cpu/u-boot.lds
-+++ b/arch/mips/cpu/u-boot.lds
-@@ -54,9 +54,9 @@ SECTIONS
- 		LONG(0xFFFFFFFF);
- 		FILL(0);
- 		. += CONFIG_MIPS_RELOCATION_TABLE_SIZE - 4;
-+		. = ALIGN(8);
- 	}
- 
--	. = ALIGN(8);
- 	_end = .;
- 
- 	.bss __rel_start (OVERLAY) : {
-@@ -140,3 +140,5 @@ SECTIONS
- 		*(.eh_frame)
- 	}
+ 	_edata = .;
+ 	PROVIDE (edata = .);
+@@ -124,3 +124,5 @@ SECTIONS
+ 	.debug_typenames 0 : { *(.debug_typenames) }
+ 	.debug_varnames	 0 : { *(.debug_varnames) }
  }
 +
 +ASSERT(_end % 8 == 0, "_end must be 8-byte aligned for device tree");
