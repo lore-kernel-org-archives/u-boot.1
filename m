@@ -4,139 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B39EDD46627
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 22:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81701D4662F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 22:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7A3A83623;
+	by phobos.denx.de (Postfix) with ESMTP id E768483A3B;
 	Thu, 15 Jan 2026 23:29:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="Ru3nGpaN";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="rNIB/wco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0530382BF2; Thu, 15 Jan 2026 23:05:43 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazolkn190120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d100::1])
+ id 8B60082BF2; Thu, 15 Jan 2026 23:16:59 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazolkn190110000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d100::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F58980077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 23:05:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5999080077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 23:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macromorgan@hotmail.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ns6CKII7E38iWlga9zHOQclxSPY6X8JxRBBoxbBmYn29BflX5aGbvz8Wqc2Oj1QuD5yJUQKoBL29BZUWPxn8+IQp4HYo8DrgCVJhqZ8QX0e5C8o8Fm4WCkZph64tshL7tidjoWpfarc4BAJvlhg8tQTpBz8HFdXAzDkOjatygU7mg276M2+tehTwCBGDwN2M1E3Sg5LAOYqHJ7+m+HcBNUV0iyNxXFNNSwAwERykgUJrUsZXp3COFNIsqMRM01ra1TnjRkSt07wo18N7xlyQPi6wqrO+GSNJjKAbT9kYbEFSyUz30M56i0GXnVUAWRV/sy8yR2lGbr1QocCWvAq5zw==
+ b=eIbKC2eIcQk/W8tZfy1EvcuE+c1s+OEejZtLAJCrH8FRTqKeV8wHP/p9Xw+DCgQ5uF56UsQOqLbT5Ie18j/JQ9BZKSsoaIy0ea2fReX4mdU/cFjapBBYvkwGor+9CycFg6uEaGq6uQjRBYcwBlrKl91tkIKKC0dsg72yHYR4rBZGgr4OxKUC4HPiUizejSv0PW5jJE3xh8BR0BajzIhQcaR8AvYd5ciqjSTwi4jOC/Go2aTxO9mag8q2fVShaJWHvwuYynmBG4gjF6pdR/QW9ILx6Da+DJ1F9BAv8rYDUblQNKKV8TECv34F1NbptToKeQWyMVDjvOYdu1YMbA9wHw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Yj7Eq1VkCYEPdi6Dh7ZAwoNtC0OlxzJaxPN8le1/iBg=;
- b=H+hOiEvwYIeIks6TN3aWvlIyHtkdlcOy4Y47hXU8Mqt32DJkaAwcvmQdBPD+MlngUsdG3NQKqmz76e0IifKSK9Eu12cbEDCJFjXXcizMU/r0iyeM8aNYHiG+rpj2tv6bNBb+l8WGRudWKN/ky1R0NNqRQySz2AS/3lcf23egAlG9rWCJU88nB3Eur0W0t3iMD7aTnwAPWwQ51geRYzStSO7LJPjDN9lkcXCtT2+Yu9buslElQKlrcJwmVqveKas7YGwtUobGOcHdwVQGlb4OCgpM+vf6QmPlmBc7pSu0wbzWQbM8J6b1ZjSAxe0g4is9ZIySPkEcIVnjsvP57cm70Q==
+ bh=kEr8VHLQ/9l19xGz4831eMDMdj6AlI90H++l2bciFw8=;
+ b=H1ZrsiVAkmBMwstOwD4BKPjYCZszsVH9K+ztKwoqk/fmhH7f+CHpYRdD+IRwti9rbiV+Gfr1wh/UgTQuxyKoKRfRtKqzRvRSWnd2zVza6iVCsgMkTZn1uQfRybsXHlabyRtiUDn//jlS3Pbx7GSvk49mUZHIvo9zovdLxuYJI9ty1fVcIsve0+eW1SsT/Dr3OOS9wA4EC+cICAlOc9Zx+p68FOASdkb3NjzNDSpN5wPunuVpqVZ+BMk6oXjikroZRUGWLzRzFoJsHP3+ZgO7B2XpDzO6iORa+2xlvbwQEn8T06U56zNHkJ9lSSpZMastd0eqMqd29jG6nEEWaX2A6Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Yj7Eq1VkCYEPdi6Dh7ZAwoNtC0OlxzJaxPN8le1/iBg=;
- b=Ru3nGpaNtuPHzp6rOTF5T16CzRGLrJawjkbu6uIfmTzbDFpsoRcwwOiRWF90ZyVnVCFxjxOEapnbkJFSaoSPIQACB9lG0z3mkmWnEawOlY1XH4FyjpFxWA6uhGSPORsfTBTDKUx3om6h9ZNRs9knpMrXwNYRZ0h+GX9nK2EAhHH+BCkV5Rqql/rduo7WW8N8rFsDZewT334Cw6WD828hjm0jzSaXLbTa+TjPOhozoCg35nRd/ymW5lB+WaxT5lLn7H8bPSuKl2NVdBojSb28908be+WM/TB5iLVtKfYt0GyiVjy8f+lh6hM95UoAgQPANnkzWxGnDaPM8g7jm8vSqg==
+ bh=kEr8VHLQ/9l19xGz4831eMDMdj6AlI90H++l2bciFw8=;
+ b=rNIB/wcoTgUMyrHOIwL0IO6LyNwsdi/aQMsE/ehdQQjoJSnaUarRKRr5McjJUJYmNQz8dRf5HOZULlFl7EJJ26KPfaRMG0g3mXXTu3ROLJ8YZDX7CS3Wz5WsKp4nP8ty7dL3nMgQmsU4OkNNk2ZkRAsj3WFUtcAJr23bjKliQI+p63BcMnxMZEBLO319bYLidsYtZpiRGnwCVM/oCby0W+jnr9jfe71CiUaXmtiPyUl9v1+PtxgkXZmatFbyRRgj9hMLm0bcYhODVuvIMnRNTPwvvk4zAUFeGTvF09QV1i+JCxRd2l1038m38QJrY2+4q0tCR+Tq4uAC8epEQu2W+g==
 Received: from SN6PR1901MB4654.namprd19.prod.outlook.com (2603:10b6:805:b::18)
- by DS4PR19MB9124.namprd19.prod.outlook.com (2603:10b6:8:2ac::5) with
+ by DM4PR19MB7215.namprd19.prod.outlook.com (2603:10b6:8:10d::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
- 2026 22:05:38 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.6; Thu, 15 Jan
+ 2026 22:16:55 +0000
 Received: from SN6PR1901MB4654.namprd19.prod.outlook.com
  ([fe80::57b1:b92:26fc:c937]) by SN6PR1901MB4654.namprd19.prod.outlook.com
  ([fe80::57b1:b92:26fc:c937%3]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
- 22:05:38 +0000
-Date: Thu, 15 Jan 2026 16:05:34 -0600
+ 22:16:54 +0000
+Date: Thu, 15 Jan 2026 16:16:48 -0600
 From: Chris Morgan <macromorgan@hotmail.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>
 Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- thinhn@synopsys.com, neil.armstrong@linaro.org,
- quic_varada@quicinc.com, felipe.balbi@linux.intel.com,
- lukma@denx.de, trini@konsulko.com, marex@denx.de,
- Mian Yousaf Kaukab <yousaf.kaukab@intel.com>
-Subject: Re: [PATCH 2/2] usb: dwc3: core: improve reset sequence
-Message-ID: <SN6PR1901MB46543DF8F519327079CD3306A58CA@SN6PR1901MB4654.namprd19.prod.outlook.com>
-References: <20251223231311.1983423-1-macroalpha82@gmail.com>
- <20251223231311.1983423-3-macroalpha82@gmail.com>
- <87h5sofnrn.fsf@kernel.org>
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, sjg@chromium.org,
+ jmasson@baylibre.com, nbelin@baylibre.com, bisson.gary@gmail.com
+Subject: Re: [PATCH] bootstd: android: Fix write outside of memory
+Message-ID: <SN6PR1901MB4654906FF49A45C5FEE9939EA58CA@SN6PR1901MB4654.namprd19.prod.outlook.com>
+References: <20251223234456.1983614-1-macroalpha82@gmail.com>
+ <20260106171633.GI3416603@bill-the-cat>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <87h5sofnrn.fsf@kernel.org>
-X-ClientProxiedBy: SN7PR04CA0112.namprd04.prod.outlook.com
- (2603:10b6:806:122::27) To SN6PR1901MB4654.namprd19.prod.outlook.com
+In-Reply-To: <20260106171633.GI3416603@bill-the-cat>
+X-ClientProxiedBy: SA1P222CA0007.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:806:22c::22) To SN6PR1901MB4654.namprd19.prod.outlook.com
  (2603:10b6:805:b::18)
-X-Microsoft-Original-Message-ID: <aWlkruv6Fkb02QUu@wintermute.localhost.fail>
+X-Microsoft-Original-Message-ID: <aWlnULY1ukLtuNOv@wintermute.localhost.fail>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR1901MB4654:EE_|DS4PR19MB9124:EE_
-X-MS-Office365-Filtering-Correlation-Id: ece25f62-c7b8-4182-2f1d-08de548236f4
-X-MS-Exchange-SLBlob-MailProps: znQPCv1HvwXZ5XHxNrJCjRnjimRBgM6SaygUxrMue+Y1dFum/ylTwJZ4YHV8Fg97O5WioCRqycvtOKzNXxGG1noi+pQ6GIW+XnQDoSeyPsk/p8axgG4G09RQBiYu4NpV0coOQ5MIHyQgqlsYz1iDqg3Udv4x1kK6FETq7GMBxlO+F5U/aQW5noSaTaTdLuCek3UxfXFDr1KxQeAI8HWlnjCi/ktaWkwuoq4bdKf7hsr938/MkDV1lLd5PWX4H66nCQymuk28obTYClMtTSBOVO9vNAgkfxUTDPS33LHLmElG0xMKTGL0N0fbjBksF/R0+0CnY34kXxp5XA6YqGAQX823kq3LRzjs1dnd3qcMXZqW1ZHS9lbe+Vr2fxL/9WoZiwRM/MjxS9CeJvlpDx9QSAtbz1vm0JjrBaYTJwyXRqoDkERfZNtc77rDeQ48EmcNITPH9mWESm7+7DnwyEjTHhko3EFl8UdZZ23LeSLgkCPZt/xkbvSocAIEgEKT85YBK/SrzKhtrdyk2k/Y3chazhDoowFX2gUhAvw14H9E8q9WLqTbOf4ZWjWRmK+RfUNcceBX7cs8jq7mlQf9r2s4nbLp8tsDQaUFbUFG7MXG0hVrde84Cl0Jvzkr/QmZYtFEQDmy2iy6i0n04rxw0nKHhwX2eBA9qSs/q7t7IXCnip03pYw3Xm+D1FN9yRfHtHTM+9u/jeg3E/ZOz5BniGU0N+FdM3Hi8R9supeixez2golXvI9lxYjrkdXKhWfW2UQkQHI7+/YQ2ng=
+X-MS-TrafficTypeDiagnostic: SN6PR1901MB4654:EE_|DM4PR19MB7215:EE_
+X-MS-Office365-Filtering-Correlation-Id: feeb045c-0b11-464f-4455-08de5483ca21
+X-MS-Exchange-SLBlob-MailProps: gMiuAN0LASIPtJFHWBzvUtRfhjUdI+tGrccZEiFuIbVeylSyNyZdZCYjIVFWyRj635DTwK9O2RvEqf6GcZFMfYitvlE7KCcM2R7HauDDrqH3kw/IwiR9EWFix6kdhNTtc67zmxPSpqronRrBr76SzcblyHzbytuLjKE20gZebQXXpXRt1IpqIneM/Y4bxhEYuPpdmpbqkqZ3l/1RaTTcwtyfeDHZo7ztKFPY16hmAdpWQ5hvGpTmT1ca82UrnhxtBCi7qMmn75eKF2sfIWJ2noS+FouGO4lWBWUcH4HMpPH9QcWZkPnbiOvhwuQGjt9aVEsFP6GuEfl0xTQeWkgEglLwKWfQbKq3ZdcxkV+YJvtIdhXWCbwUvqKsqh8NSme0Fx0Bhi4pHG+t0eY/tjHcQbHCKte0EzhFWoQCxuyYRu66oMcVV5NOfBKPTzB7gacG3F/VP1srNWX8V6cXUPhgNeIbANaTUMPW/2vAsIPkvnqX0AiJytJzCKmGFzegk+giuhdoRUPT9h5GieebalHqHbzwn7TClAdZaug7rRyOT7nLaoQhJXJC/PSCCU2SkuGRhM9QP59hMjK6IYZEgPAmR+MxbV8r65NkwgTa+0cmBe3HPgXwTe6jIzkQp/iIuZeuQ6B3tmt0zbzB76AsfymMFW2DBLFJi1Z921QyFG/gQNtVsDU2yVm5QuyXjzFizt6nkYTWR3tUY2mAjXchGBkXeQ==
 X-Microsoft-Antispam: BCL:0;
- ARA:14566002|19110799012|461199028|8060799015|12121999013|39105399006|23021999003|6090799003|5072599009|15080799012|13031999003|21061999006|41001999006|1602099012|4302099013|440099028|3412199025|40105399003|10035399007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9OVs5YEAFLcI8LycQ2JKtAoNDj2iEISOzmL1BwjKXfvuIE2qlR+0jiG6blLI?=
- =?us-ascii?Q?xiR4Drd/4rfqwL4BiOOvofBmGMTuvveZbrvkrVs72tOftuka4iMQq/HHMnoF?=
- =?us-ascii?Q?cfQK84trupzUSe2CY34/IOKbReZPr3LrYjC/TdfoCpYz+hBC6l5ltpby5FOy?=
- =?us-ascii?Q?XHc5ZxoJODDowUODFxUHPRJ00cqf2ODIdZY9qkBifeN8Iodh5lK65+strUdr?=
- =?us-ascii?Q?KNB5XTFb4JsvA990L/2kEBXRaqQeDDGRUAFsIbQ0N8VG8RoWifJtqlLgT+Vt?=
- =?us-ascii?Q?cNBl9pG8tBvF2eshfQAgI4z0/MqRWTiEhzBADku2y8sDdyBdBD1X5OsTVOrd?=
- =?us-ascii?Q?dTDHMqSLnMA/1GPw5P1uOLyUxL6W4ug+VwtT5jCYgdoRbY3esYbFXPFSfrMq?=
- =?us-ascii?Q?DJ3ELNSN4E0Tv9OEI/pQ7WjqnHHiXwZAUmBbLuIPWzmQi8HYRGKAGJ9FDkt/?=
- =?us-ascii?Q?it21ACvVTj690zU4JkOo3fzm4KxqN+rVV0qPTLtnf12Fa1H5IA2x+TTNhd+E?=
- =?us-ascii?Q?xgXWR3XZBqjl2k5ZFkTiHAnYrPWALdYrtQy6jW7lW3VpywYoKmEFZyuZ9z9R?=
- =?us-ascii?Q?Mtk1FFCBSI4kx3032JYz54x/IoAaX1+3FBQlCkH9Og+ZRW9yyWwfMEq5BvTI?=
- =?us-ascii?Q?F619Qicd58NcxJ2XD3FJ9TJkvjUBYxp6hLgg8QFvGIQkZUuZ4Eaay6ZA2y6Z?=
- =?us-ascii?Q?4QO1SLIVe3/naByF+jT7fNyacAVVE7CMyJCqgoOXnB6LvRUTq5qyk71c5aFn?=
- =?us-ascii?Q?giBzhc6Z4FkZA92Z3QspES5r5v4ZR2g5CH27vaavjO9Jppu4/Qnik0ZEvj2/?=
- =?us-ascii?Q?B5hviHQEK6UkV1CYH0fJWio5Hse9WtRSGW6276ckZT4W6IK2Qg2hXYCXDyAy?=
- =?us-ascii?Q?jL6qVe2VWP0wd1tbu7I8UTFtKcHJ+gsHiGca0VxbaHHI9dBZzq2Jl/AD+Dsv?=
- =?us-ascii?Q?mhfoPfVgdZlWlxMOQaFJFxom8ygXXm11xzB1UuGqpbTQAhRV+jicxDQZJuOI?=
- =?us-ascii?Q?ie2pm/y9V6l1I3AJlYBR3TdiGn74pGS1um2rQwo1KAiFrYpn+a8H5yKjhUbK?=
- =?us-ascii?Q?ZUUea2rxgBnWYSHEgHgB0VA0OR/NKO2M+ze9+He/OIRsXzIY+moIYdpX+DrJ?=
- =?us-ascii?Q?Q4TxsARaR4wcUqruZR6Fk3jvbRFOzEhrSlI07erB1BhZeV5clXI3GnoAzdB8?=
- =?us-ascii?Q?MzJEtyZ12Igsx30bXjvonWz7ULbJUFjrnpV4DhusqptxScfkTYHXlKpIXN0i?=
- =?us-ascii?Q?m6RovS0GFaotzNE3UT26wYzf0Yr89tPFoDDEirBLu/vPwqPVIKyNQBJBSE1h?=
- =?us-ascii?Q?6aJCMT6r6ssnF0R/iNibaONe7w/6RIVv7TUsEflGcLpIo8A/BcZi7uOFZ16N?=
- =?us-ascii?Q?lqoWNKn/CA1BnMyXYpAyZlVT8vG1dM0HSr4ps6lJbm/d/mgBbzFlQ8Wm/4g3?=
- =?us-ascii?Q?26f1ojq8X+H5L/FiPBhCvigyEsn3imBRGN0ioFVualQD7E86IGfahQ=3D=3D?=
+ ARA:14566002|23021999003|15080799012|8060799015|19110799012|41001999006|5072599009|6090799003|461199028|3412199025|52005399003|40105399003|440099028|12091999003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fy5+A8uRemW+UPasu5sNWu+PY1146kd/FeK0RWqkM/J1nXtk6g40joGWKD/y?=
+ =?us-ascii?Q?2auY0AGodRd+vkicQ+Uo2yHUZKbPwngJEq6Xo5Ep8ZyUdHKg+ujiGxbWGaP4?=
+ =?us-ascii?Q?IyaiZEbH+uQfni3jZqrW63eG5YIQKtfg7V4en5A4K106BzNxUr0V3+WQaot3?=
+ =?us-ascii?Q?5DM05Aui8T9m3rBkJ8rCDFO73q4fcN0n9Hab+AvK69m6Wk+oKpgBzFX8rENI?=
+ =?us-ascii?Q?J3O8+DdGRYtxTUDQpZssIcLfVJJOujkYcAgd6aK+fdFXBphj3CGLfv2xVg0D?=
+ =?us-ascii?Q?kQmIndOSbtFtCY3ixo4J20wa4SwMc9PfbDkl+OsgOtb72o3UaPbs2rbvgotB?=
+ =?us-ascii?Q?aWpbsIMl4J2kq3+EV8JErD10wjrH8Cgb2pwhz2A9olqWWUP3NZWcsjrgEOyF?=
+ =?us-ascii?Q?Uw77urOtrfTOGfogxPSXd0/HTHPVr/BuZyAJaKDaWvAs+Df7nxzQuIZb+Mhx?=
+ =?us-ascii?Q?ylf5RQACEGc6UCmYW2EFYIFgyQo5ktrjNFqbokIJSSl1IgKQ8bqIimCKUr6a?=
+ =?us-ascii?Q?OYPk9xi4iAMPlG3whmk/LMApECeZqPUCVbySX4a1+H08SlFtRfYKDg4uMjjF?=
+ =?us-ascii?Q?MVGhTnyCP96xBHysproCsbFDNTpil1zFlyVPW8puqkkhTT+IgUOCisbOXi/N?=
+ =?us-ascii?Q?wHGaOeZaODrDRAmSRFWwyyz5hDQ6k+HV+7ZsJbu87We8zqSmMfwMwBh34dUF?=
+ =?us-ascii?Q?MsdpkAn+7udYW7sPR5g0WD/Y0SmymomqT/gDuUhczTf1zqDT7shkij5m5Drw?=
+ =?us-ascii?Q?tkms9afcLCKwRaRAtbi9b+cbBC2+auXg3+ZLFtbKHqqgYHQ5XH3uOCCN0yGS?=
+ =?us-ascii?Q?Yvx1x5yknKZ+RZuItnQCG8rpNZC+WO2wpe4/7lvgUhHZFEmf6hXmLyjW8izQ?=
+ =?us-ascii?Q?ly1ya9/XvH2DFdr/nWkeUketE0LFKaKv7yM4qzmhDy2hVIljQDepxB3psbxi?=
+ =?us-ascii?Q?zE1G1QY9MxSskcFZ4VfpJqLUvlp4e4FJrgFTVRLFz990HivLlrLYkatGh0pE?=
+ =?us-ascii?Q?7s1pBz2wv2ZDdveg6XmlTRbj09CrldhdxJiNrTMOWuyQoc7BBNvVtcE8V0ED?=
+ =?us-ascii?Q?NRCXLtY4aFe+vCUvDRzDoCPZfjLecBPddy/ZkSPnu/8gLnmA/vQJD9SYfkWw?=
+ =?us-ascii?Q?I1nty/VFxyupcfgjXCtRVtMn2yDizshL6rNKEAO9r8xsbU8tcRX3aNDGzzVY?=
+ =?us-ascii?Q?AFXGttIZgEp38Xg7NziT2UdPdOV7H/al2yCm5x8C1jkmECKEqJZRaVEcVeGX?=
+ =?us-ascii?Q?KtttWjAL8Vn/XsSjJ+tsd4v4d0ni1mVs2gQrOQ9ldw=3D=3D?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6qP/UkvqHGtbTGqxipkndxl5gPkQ8K4fAt6pBpivIlstk9hfJSBpy2M4qVEn?=
- =?us-ascii?Q?GEmvBou1zFKPkri9XiAVUMfnXCAFjeiafzJa/j6ktD3aI6duRZyh7kha9Fdz?=
- =?us-ascii?Q?FCfcR2ozguL7lEo/K6osJ8siNRQoWa8gJFYhGkCf+7D8OCjQHeJlxeIa5RCT?=
- =?us-ascii?Q?+Y776S4AuJhWDIQRn7InrreDVSdz1J8sNR/MDcTcVvS9a4WZPm5GekL67Xls?=
- =?us-ascii?Q?4OPytGpGdezdZcMgJJioJnKIvQD6wQ3119xLnnPCMpWExoq6Gfg4XHYSJIUu?=
- =?us-ascii?Q?+uXLu1ncoKFht/nwXwAk1VvQSBvwM4ayQLBFdy4ZreN6VR1FssCE6tx7u2GO?=
- =?us-ascii?Q?lVuDBkXMhOxMVXiRBYedLI3LAwDW/G6w91vARBxaDunmaD8IW6tdoT1pUnh2?=
- =?us-ascii?Q?K2vRB3fZSbR4OOhZaOqOs8ao5bFdjEXcOoJXoUyuKRqbFKaiI1j1+W0q4FY1?=
- =?us-ascii?Q?5hL7aWF4uRi4f58seFvUzh54WZo4/qBEjMKyWpYFhJli28owbkPiKwDQF/hR?=
- =?us-ascii?Q?Pakxm3pW1rHSaKDtY5j+CJJAJGFOS1Tf4M/kkefllCyu5nuuemHb4NYUDS6c?=
- =?us-ascii?Q?zspqiXf58eVogWLIxoAyJY1sUJoyg/WopngXTlLjLnJlNeSoaU1PoDi/iCFA?=
- =?us-ascii?Q?NPFYyFWPtr+VSRagFzAwnOGYAYSggnwmpnxXuZCn/1fwDmcpop6RAcDV/fGq?=
- =?us-ascii?Q?4p+chNTW7Io15UAds9LVn7a+zq4eX86vWmcWyvamIfPh5R9FPFIPED0SdmE4?=
- =?us-ascii?Q?AHh2W24Bf6Ixtg1nTL+ejT7px1B2E6nXWITzzb6i2sDxM5sBjIonD00WYVGw?=
- =?us-ascii?Q?9LO/6wG4Crdm1LLvw6D2VkyO2AG79uOx01ClMHj5pWsI3M0iaqYqwg1ULsBh?=
- =?us-ascii?Q?7oTBJ9JFzTPpQg5nUTVKBNWZZvHdh4bevzyamMcHlP2wkMbLYqKAg19hdLIA?=
- =?us-ascii?Q?iqxtJr2i8iyEKf3qvVD598nxBKUzzv12eTCn0R2pBJHNnBsggt0nowCSLXY1?=
- =?us-ascii?Q?Ky0eXjd6riweEbSGRL0CccKjwSkBXOcwgPiTHNt8AyM5wCLWcE0hKsWHtKZY?=
- =?us-ascii?Q?8LRLCw/nvlRWbDspmxI3iITxh0rYhMK7dFkmAauYYeaNPcnvVlAQWLFBI11r?=
- =?us-ascii?Q?CnEgratB6Qv7l4wZSAikhQdfBq0wEV81vLnHCyu5hDCi60bAfJvmzww06Bjl?=
- =?us-ascii?Q?LmDlY8k5/OexxtejPakYrZH9+kQIRrAQdmxTt6fQbfztezIBPBthhPv78YPG?=
- =?us-ascii?Q?LL1WPtcTikA18VBJm4hZiW64/USim4j5qne4MnLh0AGFhdyy3D4EmFca0F68?=
- =?us-ascii?Q?I8cW4IXlPQ8xDPECYdRDKNqoiu8jD02YO1rEvlMEKB4hsJQOmy2s+qua1SnY?=
- =?us-ascii?Q?bu5wymBMvbl5eeLu9ol8r9ApyyDSZZa3UzvLm2Zzo5hrIaOPjA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZQz89haTzYMIhdYjesv8vg/Pj2LiV85V+6iykfsMwCtxh2URuj//Y0B6SuzO?=
+ =?us-ascii?Q?+/BQlQK9EnWSAufDiWij8JdeelbthN5mDvAre76TuDkevLYRNuSkV2xdtJls?=
+ =?us-ascii?Q?08BlgyCmxnjzYHWpIejm4iKSPMvG9nFo9xDmrZPUeAHCce+WS3t61QJBROnN?=
+ =?us-ascii?Q?r0cg/sjiA3hm8nJwHcJNI9eY/tDVCHlMgwxxJPjzEwjQ/UnBnnMzF7J71Zle?=
+ =?us-ascii?Q?LCJuxbR6m5AfsLFOU0Sty9KrzcXz4vJZ62IUgqNxJ8Pk/t5qAxpd0I+CWbRh?=
+ =?us-ascii?Q?iuDVkHwDiB/WKxRxVoC14GOdEiw1Di9zxqgUW8Cb2MWv1KA0jWWLQ5rHD0MK?=
+ =?us-ascii?Q?QPRGoWK5vRjNcGuch7cyY8luqaPq6YJ5RAP6okMtjeuc45ttRsXqNovjGF0l?=
+ =?us-ascii?Q?wwpx2nuoQw5EN2GihhQIquUwPMOq/ZcD8iuIKfUrxmRFFjYmYpiDrH+1s+Rh?=
+ =?us-ascii?Q?F3hIX8sHtq31ZnJ93K0SalZE6CaLGMs7/uzn+1XuxgexJRIyCCt7ducy8O3F?=
+ =?us-ascii?Q?mU7q2p+CvQ1W5lv8WTgNNXMII6lnUc2LnufSc3mfo1FmLUT7KIDWN+NB44yB?=
+ =?us-ascii?Q?NNF5VInUN+cU5+hAnECiEEKeXOvJSZZ4roE/ZAxu+RnyY8n0DX0u3c2ReGqt?=
+ =?us-ascii?Q?OBUj1sW2WFlTMam8auYGY7TUkqjbkvahzsfgDBY7BuBzsY+R64XQp13DPVYk?=
+ =?us-ascii?Q?8iSL55WJatebMxFvY/opp3pY9OHHUd9RLO7kIPxFiJJdMgjoUe5TKy/BRBa0?=
+ =?us-ascii?Q?hyOk5mqTszJvDENGexhJuKqmLC0hgqdmxqhLTWSHauVqVcoXP8N3AE/FAmSb?=
+ =?us-ascii?Q?vT9j78IbP419vstz6F8mNH8QA65GcssvWGa8DUfC+9Z8c7JH0gCJ4Bg+WByH?=
+ =?us-ascii?Q?FCW4hrwxOhQXFA09A4OoLKRAGNVYOeYFVySjrnlZuJWw+SJL9fDAuxigTEdt?=
+ =?us-ascii?Q?gkY96wYBpgCJzQMerxJmT1vESPq860EeYD6HV2ZBUfj6BeH+Q4v/Lf+MLnsu?=
+ =?us-ascii?Q?FtbOxgEn8iFRFhJd/rohvH2l0uWLdIRFJrQEahQM/JE8IsZJ5/s+ga6Pi5Cd?=
+ =?us-ascii?Q?mDKjha7dwlkeZHoZDdA1YUp3nTIbT0UtQD2PR15uUCMiuy+ARLNZ9vBsCSD4?=
+ =?us-ascii?Q?7QgfPyVZC8+MWn1cURHQiefBy0QLT506tKrgUOmriXMZdXHE0YUHM8EF1VoU?=
+ =?us-ascii?Q?RyrTUwJpcXojBqggiJ5Hv+N7u1ABIlPvg8Z5df+rZVgvyr6TQ1hG0pVwO+uj?=
+ =?us-ascii?Q?U+lbBjHizBp1J5abr4IXhyusw0Evv8msCmj004kGvZqeLr+Deu0RFnLMMgGp?=
+ =?us-ascii?Q?zKpxNJnxRGJeHGYPFWdKSMWsX96aBq2Dc1UMFN3pZvi0Xz9Hi/SvtBHGcPjV?=
+ =?us-ascii?Q?0Vd3PbdTjYslPC/yuwtfS1t1k8yCbDja3IvCKOmGzs0hOitAGA=3D=3D?=
 X-OriginatorOrg: sct-15-20-9412-3-msonline-outlook-6f20a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: ece25f62-c7b8-4182-2f1d-08de548236f4
+X-MS-Exchange-CrossTenant-Network-Message-Id: feeb045c-0b11-464f-4455-08de5483ca21
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR1901MB4654.namprd19.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 22:05:38.5135 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 22:16:54.6630 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR19MB9124
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR19MB7215
 X-Mailman-Approved-At: Thu, 15 Jan 2026 23:29:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -154,127 +148,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 14, 2026 at 12:15:56PM +0100, Mattijs Korpershoek wrote:
-> Hi Chris,
-> 
-> Thank you for the patch and sorry for the review delay.
-> 
-> On Tue, Dec 23, 2025 at 17:13, Chris Morgan <macroalpha82@gmail.com> wrote:
+On Tue, Jan 06, 2026 at 11:16:33AM -0600, Tom Rini wrote:
+> On Tue, Dec 23, 2025 at 05:44:56PM -0600, Chris Morgan wrote:
 > 
 > > From: Chris Morgan <macromorgan@hotmail.com>
-> >
-> > According to Synopsys Databook, we shouldn't be
-> > relying on GCTL.CORESOFTRESET bit as that's only for
-> > debugging purposes. Instead, let's use DCTL.CSFTRST
-> > if we're OTG or PERIPHERAL mode.
-> >
-> > Host side block will be reset by XHCI driver if
-> > necessary. Note that this reduces amount of time
-> > spent on dwc3_probe() by a long margin.
-> >
-> > We're still gonna wait for reset to finish for a
-> > long time (default to 1ms max), but tests show that
-> > the reset polling loop executed at most 19 times
-> > (modprobe dwc3 && modprobe -r dwc3 executed 1000
-> > times in a row).
-> >
-> > Note that this patch was submitted to Linux in 2016 [1], however I can
-> > confirm it is needed to support gadget mode in U-Boot on my device.
-> >
-> > [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/drivers/usb/dwc3?id=f59dcab176293b646e1358144c93c58c3cda2813
-> >
-> > Suggested-by: Mian Yousaf Kaukab <yousaf.kaukab@intel.com>
-> > Signed-off-by: Felipe Balbi <felipe.balbi@linux.intel.com>
+> > 
+> > It looks like under certain circumstances when reading the vendor_boot
+> > partition it causes my device to write outside the range of memory
+> > available. Near as I can tell this occurs because
+> > scan_vendor_boot_part() calls android_image_get_vendor_bootimg_size()
+> > which calls android_vendor_boot_image_v3_v4_parse_hdr() which calls
+> > add_trailer() which attempts to copy information to a buffer allocated
+> > with malloc in the scan_vendor_boot_part() function. On my board the
+> > memory set aside for malloc is at the top of the system RAM, and given
+> > a large enough vendor boot image size this causes the write from
+> > add_trailer() to occur outside of the system RAM (nevermind outside
+> > of what was allocated with the malloc().
+> > 
+> > While I don't know the absolute best way to handle this, I would assume
+> > that if we simply map the memory we want to use to where we will
+> > eventually load the vendor_boot image that would be the most logical.
+> > 
+> > Fixes: abadcda24b10 ("bootstd: android: don't read whole partition sizes")
 > > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 > > ---
-> >  drivers/usb/dwc3/core.c | 31 +++++++++++++++++++++----------
-> >  1 file changed, 21 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> > index 847fa1f82c3..b4de2e95a0d 100644
-> > --- a/drivers/usb/dwc3/core.c
-> > +++ b/drivers/usb/dwc3/core.c
-> > @@ -59,11 +59,20 @@ static void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
-> >  static int dwc3_core_soft_reset(struct dwc3 *dwc)
-> >  {
-> >  	u32		reg;
-> > +	int		retries = 1000;
+> >  boot/bootmeth_android.c | 20 ++++++--------------
+> >  1 file changed, 6 insertions(+), 14 deletions(-)
+> > 
+> > diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> > index 1374551dbeb..c2c25d53ef3 100644
+> > --- a/boot/bootmeth_android.c
+> > +++ b/boot/bootmeth_android.c
+> > @@ -118,9 +118,10 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
+> >  	struct blk_desc *desc = dev_get_uclass_plat(blk);
+> >  	struct disk_partition partition;
+> >  	char partname[PART_NAME_LEN];
+> > -	ulong num_blks, bufsz;
+> > +	ulong num_blks;
+> >  	char *buf;
+> >  	int ret;
+> > +	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
 > >  
-> > -	/* Before Resetting PHY, put Core in Reset */
-> > -	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
-> > -	reg |= DWC3_GCTL_CORESOFTRESET;
-> > -	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-> > +	/*
-> > +	 * We're resetting only the device side because, if we're in host mode,
-> > +	 * XHCI driver will reset the host block. If dwc3 was configured for
-> > +	 * host-only mode, then we can return early.
-> > +	 */
-> > +	if (dwc->dr_mode == USB_DR_MODE_HOST)
-> > +		return 0;
-> > +
-> > +	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-> > +	reg |= DWC3_DCTL_CSFTRST;
-> > +	reg &= ~DWC3_DCTL_RUN_STOP;
-> > +	dwc3_gadget_dctl_write_safe(dwc, reg);
+> >  	if (priv->slot)
+> >  		sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+> > @@ -132,28 +133,19 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
+> >  		return log_msg_ret("part info", ret);
 > >  
-> >  	/* Assert USB3 PHY reset */
-> >  	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
-> 
-> Looking more closely at [1], I can see that /* Assert USB3 PHY reset */
-> and  /* Assert USB2 PHY reset */  have also been removed in that patch
-> (in linux)
-> 
-> Can you please explain why it has not been removed in the U-Boot
-> version?
-> Please add details of that in the commit message.
-
-I don't remember honestly, I think I kept that there because I wasn't
-entirely sure if it was still necessary by other boards or not. For v2
-what I'm going to do instead is basically port the
-dwc3_core_soft_reset() function as it exists today in the mainline
-v6.19-rc5 branch and implement that here instead. So at least this
-function will be identical to Linux. I can confirm doing so does work
-on my board and continues to resolve the problems I had previously.
-
-> 
-> > @@ -87,12 +96,14 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
-> >  	reg &= ~DWC3_GUSB2PHYCFG_PHYSOFTRST;
-> >  	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
+> >  	num_blks = DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), desc->blksz);
+> > -	bufsz = num_blks * desc->blksz;
+> > -	buf = malloc(bufsz);
+> > +	buf = map_sysmem(vloadaddr, 0);
+> >  	if (!buf)
+> >  		return log_msg_ret("buf", -ENOMEM);
 > >  
-> > -	mdelay(100);
-> > +	do {
-> > +		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-> > +		if (!(reg & DWC3_DCTL_CSFTRST))
-> > +			return 0;
-> > +		udelay(1);
-> > +	} while (--retries);
+> >  	ret = blk_read(blk, partition.start, num_blks, buf);
+> > -	if (ret != num_blks) {
+> > -		free(buf);
+> > +	if (ret != num_blks)
+> >  		return log_msg_ret("part read", -EIO);
+> > -	}
 > >  
-> > -	/* After PHYs are stable we can take Core out of reset state */
-> > -	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
-> > -	reg &= ~DWC3_GCTL_CORESOFTRESET;
-> > -	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-> > +	return -ETIMEDOUT;
+> > -	if (!is_android_vendor_boot_image_header(buf)) {
+> > -		free(buf);
+> > +	if (!is_android_vendor_boot_image_header(buf))
+> >  		return log_msg_ret("header", -ENOENT);
+> > -	}
+> >  
+> > -	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size)) {
+> > -		free(buf);
+> > +	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size))
+> >  		return log_msg_ret("get vendor bootimg size", -EINVAL);
+> > -	}
+> > -
+> > -	free(buf);
 > >  
 > >  	return 0;
 > >  }
-> > @@ -137,7 +148,7 @@ static void dwc3_ref_clk_period(struct dwc3 *dwc)
-> >  
-> >  	if (dwc->ref_clk) {
-> >  		rate = clk_get_rate(dwc->ref_clk);
-> > -		if (!rate)
-> > +		if (!rate || (long)rate < 0)
 > 
-> Is this a spurious change? it does not appear in the linux version of
-> the patch and also seems unrelated to soft reset.
+> I haven't forgotten about this, but I'm hoping there's some other way to
+> solve this, I'm not super keen on adding another environment variable
+> (that would need to be documented in a v2 if we can't fix this some
+> other way). Mattijs, do you have any ideas?
 > 
 
-Spurious change, the device works fine without it as far as I can tell.
+Would using hdr->ramdisk_addr as the end address in
+android_vendor_boot_image_v3_v4_parse_hdr() work instead of (ulong)hdr?
 
-> >  			return;
-> >  		period = NSEC_PER_SEC / rate;
-> >  	} else {
-> > -- 
-> > 2.43.0
+That of course assumes the ram disk isn't manually loaded elsewhere.
 
 Thank you,
 Chris
+
+> -- 
+> Tom
+
+
