@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D8B9D44C54
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 14:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F357D44C54
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 14:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CDB980325;
-	Thu, 15 Jan 2026 15:30:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 846E383623;
+	Thu, 15 Jan 2026 15:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sy5db5WF";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dj7oBiEn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D43498388D; Thu, 15 Jan 2026 15:30:50 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 41B5D82BF2; Thu, 15 Jan 2026 15:30:51 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B5E082BF2
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 15:30:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5129280077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 15:30:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-47ee3a63300so9625475e9.2
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 06:30:48 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-47f5c2283b6so6217385e9.1
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 06:30:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768487448; x=1769092248;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768487449; x=1769092249;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=anRbz1EUlWTH/o32DNS53qBJtTDEEOJFXmKj3wwq6M8=;
- b=sy5db5WFDixqRH45bf/RLNd/xP6C7L0/Z3pE3t9H/3x+EJAFWXmeqULup4Twu/t39X
- pjQbGEwauqT5deXKp1BOSd5n+XieVWQbkRH/TpDdg0OoZv1014kBiV/bxBd1OR6tx5cS
- PxyPIppZrkLYKTqWyod0zVR5PuLhjQNhxMhlVldKtIoqoG5i1FvSLvjutcPlCmQeW/XB
- U8xu0AGS2ZljdZCML7SWvYIWl0Ugdr8+sD9YZCq9hqbQkl3w4LClSbMuU581te7LNfIu
- t2TAYNTjvRqbozXeeBAfhfxgMIDKsU3S2xa2mjSZBE73abXXFQqHlt3N/wI307HR1+AD
- xeBA==
+ :reply-to; bh=+OeN+z8QIrh2ZpcUmf9cLYjyBb0+RY6QhsgFo5DjHag=;
+ b=dj7oBiEn2+3AIncjXEZe7dREF2BkqzON/VxLyHgqXaV0bbzFXyd1ypE4XRzayXnRxu
+ 9Bq6gLDYSl+rm4oaL4G/Zu5xosakgbMoWDlLvLWVGVE5Nar6OngdrXKb9ZdWOxcIOWSl
+ sP1eZGyhZMS/3Pp4QCBZteSLPQdy5fyhzJUraDX3L9V53TYMcMLmCUROrdcDW5RU+Njb
+ EwWYAFPc/E8uw5M5YRxLd4GNFipjVVTlOPzfbhX+jGK6VVJoOJefGjnknCkVw4Mq29Ut
+ vIsbiyNkbdYQ+gPYau1CqsFwr1CIoX3BTW2XYwJTJt4nWJbvc9ESsP9Wy1p9esgDYq+2
+ ffNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768487448; x=1769092248;
+ d=1e100.net; s=20230601; t=1768487449; x=1769092249;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=anRbz1EUlWTH/o32DNS53qBJtTDEEOJFXmKj3wwq6M8=;
- b=lE5NWX5hLdvtB3OIy2jQQ0WkNzRSGAM9hnNzUyID0L+HkqOm68kcgckBAjJljFMn+D
- v68FaUo24xbz+Fh6Fokz25+/TcKqFHf8nc+V9RZFB0wMs2Mduc6puccv4qgAWHwphSNJ
- YA3qxAH9mpJ0d8p4pmpe9R9jbNb1Vsy1PLmjj1yS3Ni9OkaWnRouoq06LZQ6VqLaZxj4
- O/ypzVUXRLa3y/dmvsYVnYYXPz3tCPndUx8VCReTTLRAmYe/r0zrF6LHAJZf4h5TNEHO
- jg86aSF3E4UGwNJ6rzx4f7sIoS4J0COh1dyGyLqIQhxnRl7ZodJ0erb84iRVWOPK0AT2
- y6uQ==
-X-Gm-Message-State: AOJu0Yz3pmlMliU091C5TxdtH4QMU7L+DizTf6ip8UuOoVLgNSZfwChp
- oznKsMlkubKGwI/wdLuoUIMf4kFA91QlBkNiL1ths0upr77cSONtKGZIcsvVCNqw0Lo=
-X-Gm-Gg: AY/fxX5sxqBbILjwTe6dCdFv6zGY5WJTga3Wt6KdSnymVJuLleNVf8L5Of1SD7ZvhNp
- ATj6Ccct3d9YG9fd31KZfSH7RXCt0BqOla8Gs6EiJqTupbGTPwgklHu8orHpbnyY2HuaCh7Hqpy
- j6E0oG45m6JVGCFI6uceNLVhCFUgjhtsTlVxahnXel9z7WGRHFTHDI/Wfb+cB4h7bqvSKAUWobt
- KjtfdnlFWT/SchcD6oLoTwrNAi/Rs/GxQbJZNCc9RqKxon5DKkg5LJnat7kB/WbGbPBVq5N8UjK
- qJ/baFpFr8kAnxDSnul04qEuJZ2yZBWoI8EGeAZfKelQqcWUM5yp9fSlYsXlVLfSu25n5+jCZUI
- qyi3kCtRRw1KFcDpqJttreAbNhh8ZCGVBaWGkq4MDgskEN1dIJ/Ye3F8352JtBsJzYDkKyFegbR
- QvNzthAafQDtY362OVVz9z21AkazKbKzRp3112UZnDvjl/rVG79JaFZPhwWSAooQlOC03Qr/cTn
- 8CM9XkGeQ==
-X-Received: by 2002:a05:600c:8208:b0:477:76c2:49c9 with SMTP id
- 5b1f17b1804b1-47ee32e5ab7mr70214935e9.2.1768487447841; 
- Thu, 15 Jan 2026 06:30:47 -0800 (PST)
+ bh=+OeN+z8QIrh2ZpcUmf9cLYjyBb0+RY6QhsgFo5DjHag=;
+ b=YVNHbQiu5ruDqRqpiu2Sw6ZW3ML5SMackZQ4TXBmhgfpHAlRk5IQCK7Unnyd5jH7Df
+ xnHvLrAebA8986i2VneE6ZPDxDSicwWiTTzRGAcAft/+SUxgERla2QxR2dDYdCcP6BzU
+ trXZ3HJEfff5it2VpvVQ6Kq3j/0JU9LL5kxvkJjuNbOqjjIM++jw8qU5npMP2lykkza6
+ 3qhk/ngjqgkMZSbAUGOpCq9gfUUmtb5pqQHgCo4HMi3k9PsczmmUpx8zcI8FTZ/RV11M
+ e/wH5PnYYrviLGvSatx1ETk60bGDav/KvyRXv6oByrGiNYzcRc7X1Oe/8gtrb1sRCixl
+ tX+A==
+X-Gm-Message-State: AOJu0YzqzqN/8oCfz134o0/NZa0KFA96S+AQOVpf9V/p5btrAp5D2nos
+ CDapdOWL+cssewUA2sTj3i67BdUiCJX3mSWAzhCPHtMhafVIddhmIyh6dNm9WanTMn4=
+X-Gm-Gg: AY/fxX5Qn7/Qw3CjUmcGSmSgcGzKyifijgXeRtbKrhgU1TC7Wd2VhQ7MBeTj8CLUqhS
+ 3qA6z6GuGeaknvAxMMC8v30S53AulyBDpBPcs/95Iq980kygbOMyyOpE6TYkHRN0CEDZwPlbqkH
+ TJJMGxB9lG5w+rN1Z6AfSlU3iKLEu8DH1LU9JxecdG6XTF6oI7719UFcMTTIfT3UexVSliyKjHv
+ P+EfrBNv+kGKW1XuwohnYEXCLHneuA5sG67f68tzMUkR3+umbmeOF/eHwy6+AhU7tN+Q+l7+FGG
+ 45Z/rzPunfKpFS0xbzzmV9O4lDldHmN+wYrsS8ACHvSPEBPpHLOiQ7byOnFK8t6l6L71mw1Qwzi
+ fVVo8FzNS53bEQgnZnpf6dm6KA4ol7ozEpAst+lU+lfngS0sXzDZc1fNvp/A+441yqGmGFXls7R
+ TddXJfU/IuqpMTJrLdIMaNRZU6qmwEhS1ZuBDqEhVpCcnp75KCoY3hpBKO76EIkFxs84bvY1ddW
+ dQo0QbkKw==
+X-Received: by 2002:a05:600c:6218:b0:47d:18b0:bb9a with SMTP id
+ 5b1f17b1804b1-47ee33997fcmr80955255e9.33.1768487448720; 
+ Thu, 15 Jan 2026 06:30:48 -0800 (PST)
 Received: from [192.168.1.62]
  (2a02-8428-e55b-1101-a95a-db72-930a-81eb.rev.sfr.net.
  [2a02:8428:e55b:1101:a95a:db72:930a:81eb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47ee27ee45bsm47149925e9.7.2026.01.15.06.30.45
+ 5b1f17b1804b1-47ee27ee45bsm47149925e9.7.2026.01.15.06.30.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jan 2026 06:30:47 -0800 (PST)
+ Thu, 15 Jan 2026 06:30:48 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 15 Jan 2026 15:30:43 +0100
-Subject: [PATCH v3 1/3] power: regulator: common: remove unnecessary debug
- trace
+Date: Thu, 15 Jan 2026 15:30:44 +0100
+Subject: [PATCH v3 2/3] power: regulator: common: use dm_gpio_is_valid helper
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260115-power-regulator-fix-compilation-v3-1-08b329543e13@baylibre.com>
+Message-Id: <20260115-power-regulator-fix-compilation-v3-2-08b329543e13@baylibre.com>
 References: <20260115-power-regulator-fix-compilation-v3-0-08b329543e13@baylibre.com>
 In-Reply-To: <20260115-power-regulator-fix-compilation-v3-0-08b329543e13@baylibre.com>
 To: u-boot@lists.denx.de
@@ -109,30 +108,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop the ftrace like debug() that checkpatch --strict complains about:
-
-  WARNING: Unnecessary ftrace-like logging - prefer using ftrace
+Use dm_gpio_is_valid() helper function instead of manually checking the
+gpio.
 
 Reviewed-by: Peng Fan <peng.fan@nxp.com>
 Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/power/regulator/regulator_common.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/power/regulator/regulator_common.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-index 685d8735fa5..ce3d80670de 100644
+index ce3d80670de..cf98998579a 100644
 --- a/drivers/power/regulator/regulator_common.c
 +++ b/drivers/power/regulator/regulator_common.c
-@@ -98,7 +98,6 @@ int regulator_common_set_enable(const struct udevice *dev,
+@@ -51,7 +51,7 @@ int regulator_common_get_enable(const struct udevice *dev,
+ 	struct regulator_common_plat *plat)
+ {
+ 	/* Enable GPIO is optional */
+-	if (!plat->gpio.dev)
++	if (!dm_gpio_is_valid(&plat->gpio))
+ 		return true;
  
- 	if (enable && plat->startup_delay_us)
- 		udelay(plat->startup_delay_us);
--	debug("%s: done\n", __func__);
- 
- 	if (!enable && plat->off_on_delay_us)
- 		udelay(plat->off_on_delay_us);
+ 	return dm_gpio_get_value(&plat->gpio);
 
 -- 
 2.52.0
