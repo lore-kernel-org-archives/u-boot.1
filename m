@@ -4,134 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81701D4662F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 22:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44BAAD4662F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 23:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E768483A3B;
-	Thu, 15 Jan 2026 23:29:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7125A830E4;
+	Fri, 16 Jan 2026 00:04:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="rNIB/wco";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nrDaOwBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B60082BF2; Thu, 15 Jan 2026 23:16:59 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazolkn190110000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d100::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 057CD836A3; Fri, 16 Jan 2026 00:04:10 +0100 (CET)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5999080077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 23:16:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E6A980077
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 00:04:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=hotmail.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macromorgan@hotmail.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eIbKC2eIcQk/W8tZfy1EvcuE+c1s+OEejZtLAJCrH8FRTqKeV8wHP/p9Xw+DCgQ5uF56UsQOqLbT5Ie18j/JQ9BZKSsoaIy0ea2fReX4mdU/cFjapBBYvkwGor+9CycFg6uEaGq6uQjRBYcwBlrKl91tkIKKC0dsg72yHYR4rBZGgr4OxKUC4HPiUizejSv0PW5jJE3xh8BR0BajzIhQcaR8AvYd5ciqjSTwi4jOC/Go2aTxO9mag8q2fVShaJWHvwuYynmBG4gjF6pdR/QW9ILx6Da+DJ1F9BAv8rYDUblQNKKV8TECv34F1NbptToKeQWyMVDjvOYdu1YMbA9wHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kEr8VHLQ/9l19xGz4831eMDMdj6AlI90H++l2bciFw8=;
- b=H1ZrsiVAkmBMwstOwD4BKPjYCZszsVH9K+ztKwoqk/fmhH7f+CHpYRdD+IRwti9rbiV+Gfr1wh/UgTQuxyKoKRfRtKqzRvRSWnd2zVza6iVCsgMkTZn1uQfRybsXHlabyRtiUDn//jlS3Pbx7GSvk49mUZHIvo9zovdLxuYJI9ty1fVcIsve0+eW1SsT/Dr3OOS9wA4EC+cICAlOc9Zx+p68FOASdkb3NjzNDSpN5wPunuVpqVZ+BMk6oXjikroZRUGWLzRzFoJsHP3+ZgO7B2XpDzO6iORa+2xlvbwQEn8T06U56zNHkJ9lSSpZMastd0eqMqd29jG6nEEWaX2A6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kEr8VHLQ/9l19xGz4831eMDMdj6AlI90H++l2bciFw8=;
- b=rNIB/wcoTgUMyrHOIwL0IO6LyNwsdi/aQMsE/ehdQQjoJSnaUarRKRr5McjJUJYmNQz8dRf5HOZULlFl7EJJ26KPfaRMG0g3mXXTu3ROLJ8YZDX7CS3Wz5WsKp4nP8ty7dL3nMgQmsU4OkNNk2ZkRAsj3WFUtcAJr23bjKliQI+p63BcMnxMZEBLO319bYLidsYtZpiRGnwCVM/oCby0W+jnr9jfe71CiUaXmtiPyUl9v1+PtxgkXZmatFbyRRgj9hMLm0bcYhODVuvIMnRNTPwvvk4zAUFeGTvF09QV1i+JCxRd2l1038m38QJrY2+4q0tCR+Tq4uAC8epEQu2W+g==
-Received: from SN6PR1901MB4654.namprd19.prod.outlook.com (2603:10b6:805:b::18)
- by DM4PR19MB7215.namprd19.prod.outlook.com (2603:10b6:8:10d::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.6; Thu, 15 Jan
- 2026 22:16:55 +0000
-Received: from SN6PR1901MB4654.namprd19.prod.outlook.com
- ([fe80::57b1:b92:26fc:c937]) by SN6PR1901MB4654.namprd19.prod.outlook.com
- ([fe80::57b1:b92:26fc:c937%3]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
- 22:16:54 +0000
-Date: Thu, 15 Jan 2026 16:16:48 -0600
-From: Chris Morgan <macromorgan@hotmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, sjg@chromium.org,
- jmasson@baylibre.com, nbelin@baylibre.com, bisson.gary@gmail.com
-Subject: Re: [PATCH] bootstd: android: Fix write outside of memory
-Message-ID: <SN6PR1901MB4654906FF49A45C5FEE9939EA58CA@SN6PR1901MB4654.namprd19.prod.outlook.com>
-References: <20251223234456.1983614-1-macroalpha82@gmail.com>
- <20260106171633.GI3416603@bill-the-cat>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260106171633.GI3416603@bill-the-cat>
-X-ClientProxiedBy: SA1P222CA0007.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:806:22c::22) To SN6PR1901MB4654.namprd19.prod.outlook.com
- (2603:10b6:805:b::18)
-X-Microsoft-Original-Message-ID: <aWlnULY1ukLtuNOv@wintermute.localhost.fail>
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-40427db1300so874652fac.0
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 15:04:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1768518246; x=1769123046; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5xWo/jbYR9Hc83jbzqPa2moAtBTOt7Otg5Xvo6KS78g=;
+ b=nrDaOwBb2Q9MwZ+Gn7OqQUl3XEicEhTpIT36M6BU245ThKXtzc3097bLgGphrdwAWf
+ MGusb2b3j8DLVlv+QdoUPuAqw0aUOie1JLlT26hF8r0NBzWBmVWlXpTj/iYgyV0K5n/d
+ dEB6N6i0dOYuyHMp4wdmeQzkuPJUXEeNm5iEPP24ZklhhlyxRZK/J8DRui2xgHZ57Nqm
+ rvo0g0tdSxQ5gAhwjbartR/LD10VuYPk44OocnbH+uetsc63nKIDJ9a2LAsDu0sCkOzs
+ qspUFGynQTL3zRUNu+EiItvkefg4XRF1BnFDTTPCu78+6MC3JfGo3Hw8LfJGFAVnMoqX
+ OIaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768518246; x=1769123046;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5xWo/jbYR9Hc83jbzqPa2moAtBTOt7Otg5Xvo6KS78g=;
+ b=ebhTV/8FCH9xJEEaSf+fPlQUjk+s5RgkBjoScRV3197IwWw93/7E1gnmRpUP4qLd2i
+ hgzZAO96h0r6Oi9KAy+M0c1PUnfSRmN8LhJBIBk2peze95OqaKIz6FExO21XgRfukNZ7
+ FzSQhl42bWK5Py3YquE240CO/io9IvpF1A9m++VKwyvVA5HfvtJxfTUCIruGf0c/JxAp
+ 3uk4Zi/xZtFgN45ZwRTBhASMDxEa0HkWe73zSql6mgbJ5Sh3UV+95J7m3ewNqCxgUwcF
+ x+IHHe6PRwxK5JKefWElBJ43arcM9OS7Pw9vDGXXXuC2gfKA3+YRq/YL+afWfu/N/SRS
+ xrgw==
+X-Gm-Message-State: AOJu0Ywn14cCIX1auOWfXDZi5t2Ng7Xhc9KuIEc7eddPsEzy+pvg2TdM
+ Vbx4Xk83CiJFRp+jxWnVQ5d2MHVPkO9k0y80PGexdNJf5OnUdTxwogkFQkg8bA==
+X-Gm-Gg: AY/fxX7KfO3FQWg7og5Z2ZZO5WsYcy1rJNJ8vR3rY0bMdVFIKY7yzYBzQskYoEmHOZw
+ yUqOIQYhlB10k76Mgltwnkg8akNqHGGnDY5F630dN1imU+oE/qz3M6C+S9hd1uitP4yhIB6wrUP
+ VvwV4skYw92GfsWbELD9e+3zDUdRX/vXcS6hTPI3HnExqYujWrw5toeJIULsVzo26E50TWaxbyX
+ 0n847DIv85EP/Mz9g/YyOBzMmwIW7yF3NPZJ/cJKOWjh9/B3UFW7/XcFx2ZMA1yuyNI4O/uqeqA
+ GCpf1sw9hVjFBxdNQjWYf/XjJqcZlr4f/IFuAUM+BMCZ1QqXGzq1cZtiU5MYDrRIMe9kXLIwKhm
+ DfRgh0L6u/rICcSgpy7cA5rG9NYGyjzKTsRtpOtEg/zhwzLT+Y8+CqaD6Pa5e0XO5SN8dx6Tq8o
+ i+nE75WOoL
+X-Received: by 2002:a05:6820:450b:b0:659:9a49:9026 with SMTP id
+ 006d021491bc7-66117a16466mr418305eaf.83.1768518246030; 
+ Thu, 15 Jan 2026 15:04:06 -0800 (PST)
+Received: from localhost.localdomain ([2600:1700:fb0:1bc0::54])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-661187a0000sm394787eaf.14.2026.01.15.15.04.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Jan 2026 15:04:05 -0800 (PST)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: thinhn@synopsys.com, neil.armstrong@linaro.org, quic_varada@quicinc.com,
+ felipe.balbi@linux.intel.com, mkorpershoek@kernel.org, lukma@denx.de,
+ trini@konsulko.com, marex@denx.de, macromorgan@hotmail.com
+Subject: [PATCH V2 1/4] usb: dwc3: core: Add ip and version_type support from
+ Linux
+Date: Thu, 15 Jan 2026 17:01:32 -0600
+Message-ID: <20260115230135.183158-2-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260115230135.183158-1-macroalpha82@gmail.com>
+References: <20260115230135.183158-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR1901MB4654:EE_|DM4PR19MB7215:EE_
-X-MS-Office365-Filtering-Correlation-Id: feeb045c-0b11-464f-4455-08de5483ca21
-X-MS-Exchange-SLBlob-MailProps: gMiuAN0LASIPtJFHWBzvUtRfhjUdI+tGrccZEiFuIbVeylSyNyZdZCYjIVFWyRj635DTwK9O2RvEqf6GcZFMfYitvlE7KCcM2R7HauDDrqH3kw/IwiR9EWFix6kdhNTtc67zmxPSpqronRrBr76SzcblyHzbytuLjKE20gZebQXXpXRt1IpqIneM/Y4bxhEYuPpdmpbqkqZ3l/1RaTTcwtyfeDHZo7ztKFPY16hmAdpWQ5hvGpTmT1ca82UrnhxtBCi7qMmn75eKF2sfIWJ2noS+FouGO4lWBWUcH4HMpPH9QcWZkPnbiOvhwuQGjt9aVEsFP6GuEfl0xTQeWkgEglLwKWfQbKq3ZdcxkV+YJvtIdhXWCbwUvqKsqh8NSme0Fx0Bhi4pHG+t0eY/tjHcQbHCKte0EzhFWoQCxuyYRu66oMcVV5NOfBKPTzB7gacG3F/VP1srNWX8V6cXUPhgNeIbANaTUMPW/2vAsIPkvnqX0AiJytJzCKmGFzegk+giuhdoRUPT9h5GieebalHqHbzwn7TClAdZaug7rRyOT7nLaoQhJXJC/PSCCU2SkuGRhM9QP59hMjK6IYZEgPAmR+MxbV8r65NkwgTa+0cmBe3HPgXwTe6jIzkQp/iIuZeuQ6B3tmt0zbzB76AsfymMFW2DBLFJi1Z921QyFG/gQNtVsDU2yVm5QuyXjzFizt6nkYTWR3tUY2mAjXchGBkXeQ==
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|23021999003|15080799012|8060799015|19110799012|41001999006|5072599009|6090799003|461199028|3412199025|52005399003|40105399003|440099028|12091999003;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fy5+A8uRemW+UPasu5sNWu+PY1146kd/FeK0RWqkM/J1nXtk6g40joGWKD/y?=
- =?us-ascii?Q?2auY0AGodRd+vkicQ+Uo2yHUZKbPwngJEq6Xo5Ep8ZyUdHKg+ujiGxbWGaP4?=
- =?us-ascii?Q?IyaiZEbH+uQfni3jZqrW63eG5YIQKtfg7V4en5A4K106BzNxUr0V3+WQaot3?=
- =?us-ascii?Q?5DM05Aui8T9m3rBkJ8rCDFO73q4fcN0n9Hab+AvK69m6Wk+oKpgBzFX8rENI?=
- =?us-ascii?Q?J3O8+DdGRYtxTUDQpZssIcLfVJJOujkYcAgd6aK+fdFXBphj3CGLfv2xVg0D?=
- =?us-ascii?Q?kQmIndOSbtFtCY3ixo4J20wa4SwMc9PfbDkl+OsgOtb72o3UaPbs2rbvgotB?=
- =?us-ascii?Q?aWpbsIMl4J2kq3+EV8JErD10wjrH8Cgb2pwhz2A9olqWWUP3NZWcsjrgEOyF?=
- =?us-ascii?Q?Uw77urOtrfTOGfogxPSXd0/HTHPVr/BuZyAJaKDaWvAs+Df7nxzQuIZb+Mhx?=
- =?us-ascii?Q?ylf5RQACEGc6UCmYW2EFYIFgyQo5ktrjNFqbokIJSSl1IgKQ8bqIimCKUr6a?=
- =?us-ascii?Q?OYPk9xi4iAMPlG3whmk/LMApECeZqPUCVbySX4a1+H08SlFtRfYKDg4uMjjF?=
- =?us-ascii?Q?MVGhTnyCP96xBHysproCsbFDNTpil1zFlyVPW8puqkkhTT+IgUOCisbOXi/N?=
- =?us-ascii?Q?wHGaOeZaODrDRAmSRFWwyyz5hDQ6k+HV+7ZsJbu87We8zqSmMfwMwBh34dUF?=
- =?us-ascii?Q?MsdpkAn+7udYW7sPR5g0WD/Y0SmymomqT/gDuUhczTf1zqDT7shkij5m5Drw?=
- =?us-ascii?Q?tkms9afcLCKwRaRAtbi9b+cbBC2+auXg3+ZLFtbKHqqgYHQ5XH3uOCCN0yGS?=
- =?us-ascii?Q?Yvx1x5yknKZ+RZuItnQCG8rpNZC+WO2wpe4/7lvgUhHZFEmf6hXmLyjW8izQ?=
- =?us-ascii?Q?ly1ya9/XvH2DFdr/nWkeUketE0LFKaKv7yM4qzmhDy2hVIljQDepxB3psbxi?=
- =?us-ascii?Q?zE1G1QY9MxSskcFZ4VfpJqLUvlp4e4FJrgFTVRLFz990HivLlrLYkatGh0pE?=
- =?us-ascii?Q?7s1pBz2wv2ZDdveg6XmlTRbj09CrldhdxJiNrTMOWuyQoc7BBNvVtcE8V0ED?=
- =?us-ascii?Q?NRCXLtY4aFe+vCUvDRzDoCPZfjLecBPddy/ZkSPnu/8gLnmA/vQJD9SYfkWw?=
- =?us-ascii?Q?I1nty/VFxyupcfgjXCtRVtMn2yDizshL6rNKEAO9r8xsbU8tcRX3aNDGzzVY?=
- =?us-ascii?Q?AFXGttIZgEp38Xg7NziT2UdPdOV7H/al2yCm5x8C1jkmECKEqJZRaVEcVeGX?=
- =?us-ascii?Q?KtttWjAL8Vn/XsSjJ+tsd4v4d0ni1mVs2gQrOQ9ldw=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZQz89haTzYMIhdYjesv8vg/Pj2LiV85V+6iykfsMwCtxh2URuj//Y0B6SuzO?=
- =?us-ascii?Q?+/BQlQK9EnWSAufDiWij8JdeelbthN5mDvAre76TuDkevLYRNuSkV2xdtJls?=
- =?us-ascii?Q?08BlgyCmxnjzYHWpIejm4iKSPMvG9nFo9xDmrZPUeAHCce+WS3t61QJBROnN?=
- =?us-ascii?Q?r0cg/sjiA3hm8nJwHcJNI9eY/tDVCHlMgwxxJPjzEwjQ/UnBnnMzF7J71Zle?=
- =?us-ascii?Q?LCJuxbR6m5AfsLFOU0Sty9KrzcXz4vJZ62IUgqNxJ8Pk/t5qAxpd0I+CWbRh?=
- =?us-ascii?Q?iuDVkHwDiB/WKxRxVoC14GOdEiw1Di9zxqgUW8Cb2MWv1KA0jWWLQ5rHD0MK?=
- =?us-ascii?Q?QPRGoWK5vRjNcGuch7cyY8luqaPq6YJ5RAP6okMtjeuc45ttRsXqNovjGF0l?=
- =?us-ascii?Q?wwpx2nuoQw5EN2GihhQIquUwPMOq/ZcD8iuIKfUrxmRFFjYmYpiDrH+1s+Rh?=
- =?us-ascii?Q?F3hIX8sHtq31ZnJ93K0SalZE6CaLGMs7/uzn+1XuxgexJRIyCCt7ducy8O3F?=
- =?us-ascii?Q?mU7q2p+CvQ1W5lv8WTgNNXMII6lnUc2LnufSc3mfo1FmLUT7KIDWN+NB44yB?=
- =?us-ascii?Q?NNF5VInUN+cU5+hAnECiEEKeXOvJSZZ4roE/ZAxu+RnyY8n0DX0u3c2ReGqt?=
- =?us-ascii?Q?OBUj1sW2WFlTMam8auYGY7TUkqjbkvahzsfgDBY7BuBzsY+R64XQp13DPVYk?=
- =?us-ascii?Q?8iSL55WJatebMxFvY/opp3pY9OHHUd9RLO7kIPxFiJJdMgjoUe5TKy/BRBa0?=
- =?us-ascii?Q?hyOk5mqTszJvDENGexhJuKqmLC0hgqdmxqhLTWSHauVqVcoXP8N3AE/FAmSb?=
- =?us-ascii?Q?vT9j78IbP419vstz6F8mNH8QA65GcssvWGa8DUfC+9Z8c7JH0gCJ4Bg+WByH?=
- =?us-ascii?Q?FCW4hrwxOhQXFA09A4OoLKRAGNVYOeYFVySjrnlZuJWw+SJL9fDAuxigTEdt?=
- =?us-ascii?Q?gkY96wYBpgCJzQMerxJmT1vESPq860EeYD6HV2ZBUfj6BeH+Q4v/Lf+MLnsu?=
- =?us-ascii?Q?FtbOxgEn8iFRFhJd/rohvH2l0uWLdIRFJrQEahQM/JE8IsZJ5/s+ga6Pi5Cd?=
- =?us-ascii?Q?mDKjha7dwlkeZHoZDdA1YUp3nTIbT0UtQD2PR15uUCMiuy+ARLNZ9vBsCSD4?=
- =?us-ascii?Q?7QgfPyVZC8+MWn1cURHQiefBy0QLT506tKrgUOmriXMZdXHE0YUHM8EF1VoU?=
- =?us-ascii?Q?RyrTUwJpcXojBqggiJ5Hv+N7u1ABIlPvg8Z5df+rZVgvyr6TQ1hG0pVwO+uj?=
- =?us-ascii?Q?U+lbBjHizBp1J5abr4IXhyusw0Evv8msCmj004kGvZqeLr+Deu0RFnLMMgGp?=
- =?us-ascii?Q?zKpxNJnxRGJeHGYPFWdKSMWsX96aBq2Dc1UMFN3pZvi0Xz9Hi/SvtBHGcPjV?=
- =?us-ascii?Q?0Vd3PbdTjYslPC/yuwtfS1t1k8yCbDja3IvCKOmGzs0hOitAGA=3D=3D?=
-X-OriginatorOrg: sct-15-20-9412-3-msonline-outlook-6f20a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: feeb045c-0b11-464f-4455-08de5483ca21
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR1901MB4654.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 22:16:54.6630 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR19MB7215
-X-Mailman-Approved-At: Thu, 15 Jan 2026 23:29:05 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,98 +100,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 06, 2026 at 11:16:33AM -0600, Tom Rini wrote:
-> On Tue, Dec 23, 2025 at 05:44:56PM -0600, Chris Morgan wrote:
-> 
-> > From: Chris Morgan <macromorgan@hotmail.com>
-> > 
-> > It looks like under certain circumstances when reading the vendor_boot
-> > partition it causes my device to write outside the range of memory
-> > available. Near as I can tell this occurs because
-> > scan_vendor_boot_part() calls android_image_get_vendor_bootimg_size()
-> > which calls android_vendor_boot_image_v3_v4_parse_hdr() which calls
-> > add_trailer() which attempts to copy information to a buffer allocated
-> > with malloc in the scan_vendor_boot_part() function. On my board the
-> > memory set aside for malloc is at the top of the system RAM, and given
-> > a large enough vendor boot image size this causes the write from
-> > add_trailer() to occur outside of the system RAM (nevermind outside
-> > of what was allocated with the malloc().
-> > 
-> > While I don't know the absolute best way to handle this, I would assume
-> > that if we simply map the memory we want to use to where we will
-> > eventually load the vendor_boot image that would be the most logical.
-> > 
-> > Fixes: abadcda24b10 ("bootstd: android: don't read whole partition sizes")
-> > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> > ---
-> >  boot/bootmeth_android.c | 20 ++++++--------------
-> >  1 file changed, 6 insertions(+), 14 deletions(-)
-> > 
-> > diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> > index 1374551dbeb..c2c25d53ef3 100644
-> > --- a/boot/bootmeth_android.c
-> > +++ b/boot/bootmeth_android.c
-> > @@ -118,9 +118,10 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
-> >  	struct blk_desc *desc = dev_get_uclass_plat(blk);
-> >  	struct disk_partition partition;
-> >  	char partname[PART_NAME_LEN];
-> > -	ulong num_blks, bufsz;
-> > +	ulong num_blks;
-> >  	char *buf;
-> >  	int ret;
-> > +	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
-> >  
-> >  	if (priv->slot)
-> >  		sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
-> > @@ -132,28 +133,19 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
-> >  		return log_msg_ret("part info", ret);
-> >  
-> >  	num_blks = DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), desc->blksz);
-> > -	bufsz = num_blks * desc->blksz;
-> > -	buf = malloc(bufsz);
-> > +	buf = map_sysmem(vloadaddr, 0);
-> >  	if (!buf)
-> >  		return log_msg_ret("buf", -ENOMEM);
-> >  
-> >  	ret = blk_read(blk, partition.start, num_blks, buf);
-> > -	if (ret != num_blks) {
-> > -		free(buf);
-> > +	if (ret != num_blks)
-> >  		return log_msg_ret("part read", -EIO);
-> > -	}
-> >  
-> > -	if (!is_android_vendor_boot_image_header(buf)) {
-> > -		free(buf);
-> > +	if (!is_android_vendor_boot_image_header(buf))
-> >  		return log_msg_ret("header", -ENOENT);
-> > -	}
-> >  
-> > -	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size)) {
-> > -		free(buf);
-> > +	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size))
-> >  		return log_msg_ret("get vendor bootimg size", -EINVAL);
-> > -	}
-> > -
-> > -	free(buf);
-> >  
-> >  	return 0;
-> >  }
-> 
-> I haven't forgotten about this, but I'm hoping there's some other way to
-> solve this, I'm not super keen on adding another environment variable
-> (that would need to be documented in a v2 if we can't fix this some
-> other way). Mattijs, do you have any ideas?
-> 
+From: Chris Morgan <macromorgan@hotmail.com>
 
-Would using hdr->ramdisk_addr as the end address in
-android_vendor_boot_image_v3_v4_parse_hdr() work instead of (ulong)hdr?
+Add support for the ip and version_type fields from the Linux
+version of the dwc3 driver. Included in this is support for a
+few additional macros in the header from Linux as well.
 
-That of course assumes the ram disk isn't manually loaded elsewhere.
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+---
+ drivers/usb/dwc3/core.c | 26 ++++++++++++++----
+ drivers/usb/dwc3/core.h | 60 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 81 insertions(+), 5 deletions(-)
 
-Thank you,
-Chris
-
-> -- 
-> Tom
-
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index 847fa1f82c3..4827c83e96d 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -580,6 +580,26 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
+ 	dwc3_writel(dwc->regs, DWC3_GSBUSCFG0, cfg);
+ }
+ 
++static bool dwc3_core_is_valid(struct dwc3 *dwc)
++{
++	u32 reg;
++
++	reg = dwc3_readl(dwc->regs, DWC3_GSNPSID);
++	dwc->ip = DWC3_GSNPS_ID(reg);
++
++	/* This should read as U3 followed by revision number */
++	if (DWC3_IP_IS(DWC3)) {
++		dwc->revision = reg;
++	} else if (DWC3_IP_IS(DWC31) || DWC3_IP_IS(DWC32)) {
++		dwc->revision = dwc3_readl(dwc->regs, DWC3_VER_NUMBER);
++		dwc->version_type = dwc3_readl(dwc->regs, DWC3_VER_TYPE);
++	} else {
++		return false;
++	}
++
++	return true;
++}
++
+ /**
+  * dwc3_core_init - Low-level initialization of DWC3 Core
+  * @dwc: Pointer to our controller context structure
+@@ -592,15 +612,11 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 	u32			reg;
+ 	int			ret;
+ 
+-	reg = dwc3_readl(dwc->regs, DWC3_GSNPSID);
+-	/* This should read as U3 followed by revision number */
+-	if ((reg & DWC3_GSNPSID_MASK) != 0x55330000 &&
+-	    (reg & DWC3_GSNPSID_MASK) != 0x33310000) {
++	if (!dwc3_core_is_valid(dwc)) {
+ 		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
+ 		ret = -ENODEV;
+ 		goto err0;
+ 	}
+-	dwc->revision = reg;
+ 
+ 	/* Handle USB2.0-only core configuration */
+ 	if (DWC3_GHWPARAMS3_SSPHY_IFC(dwc->hwparams.hwparams3) ==
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index b572ea340c8..cdbfdce76bb 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -56,6 +56,7 @@
+ #define DWC3_GEVNTCOUNT_MASK	0xfffc
+ #define DWC3_GSNPSID_MASK	0xffff0000
+ #define DWC3_GSNPSREV_MASK	0xffff
++#define DWC3_GSNPS_ID(p)	(((p) & DWC3_GSNPSID_MASK) >> 16)
+ 
+ /* DWC3 registers memory space boundries */
+ #define DWC3_XHCI_REGS_START		0x0
+@@ -99,6 +100,9 @@
+ #define DWC3_GPRTBIMAP_FS0	0xc188
+ #define DWC3_GPRTBIMAP_FS1	0xc18c
+ 
++#define DWC3_VER_NUMBER		0xc1a0
++#define DWC3_VER_TYPE		0xc1a4
++
+ #define DWC3_GUSB2PHYCFG(n)	(0xc200 + (n * 0x04))
+ #define DWC3_GUSB2I2CCTL(n)	(0xc240 + (n * 0x04))
+ 
+@@ -686,7 +690,9 @@ struct dwc3_scratchpad_array {
+  * @num_event_buffers: calculated number of event buffers
+  * @u1u2: only used on revisions <1.83a for workaround
+  * @maximum_speed: maximum speed requested (mainly for testing purposes)
++ * @ip: controller's ID
+  * @revision: revision register contents
++ * @version_type: VERSIONTYPE register contents, a sub release of a revision
+  * @dr_mode: requested mode of operation
+  * @hsphy_mode: UTMI phy mode, one of following:
+  *		- USBPHY_INTERFACE_MODE_UTMI
+@@ -795,6 +801,13 @@ struct dwc3 {
+ 	u32			num_event_buffers;
+ 	u32			u1u2;
+ 	u32			maximum_speed;
++
++	u32			ip;
++
++#define DWC3_IP			0x5533
++#define DWC31_IP		0x3331
++#define DWC32_IP		0x3332
++
+ 	u32			revision;
+ 
+ #define DWC3_REVISION_173A	0x5533173a
+@@ -817,6 +830,32 @@ struct dwc3 {
+ #define DWC3_REVISION_270A	0x5533270a
+ #define DWC3_REVISION_280A	0x5533280a
+ #define DWC3_REVISION_290A	0x5533290a
++#define DWC3_REVISION_300A	0x5533300a
++#define DWC3_REVISION_310A	0x5533310a
++#define DWC3_REVISION_320A	0x5533320a
++#define DWC3_REVISION_330A	0x5533330a
++
++#define DWC31_REVISION_ANY	0x0
++#define DWC31_REVISION_110A	0x3131302a
++#define DWC31_REVISION_120A	0x3132302a
++#define DWC31_REVISION_160A	0x3136302a
++#define DWC31_REVISION_170A	0x3137302a
++#define DWC31_REVISION_180A	0x3138302a
++#define DWC31_REVISION_190A	0x3139302a
++#define DWC31_REVISION_200A	0x3230302a
++
++#define DWC32_REVISION_ANY	0x0
++#define DWC32_REVISION_100A	0x3130302a
++
++	u32			version_type;
++
++#define DWC31_VERSIONTYPE_ANY		0x0
++#define DWC31_VERSIONTYPE_EA01		0x65613031
++#define DWC31_VERSIONTYPE_EA02		0x65613032
++#define DWC31_VERSIONTYPE_EA03		0x65613033
++#define DWC31_VERSIONTYPE_EA04		0x65613034
++#define DWC31_VERSIONTYPE_EA05		0x65613035
++#define DWC31_VERSIONTYPE_EA06		0x65613036
+ 
+ 	enum dwc3_ep0_next	ep0_next_event;
+ 	enum dwc3_ep0_state	ep0state;
+@@ -1062,6 +1101,27 @@ void dwc3_of_parse(struct dwc3 *dwc);
+ int dwc3_init(struct dwc3 *dwc);
+ void dwc3_remove(struct dwc3 *dwc);
+ 
++#define DWC3_IP_IS(_ip)							\
++	(dwc->ip == _ip##_IP)
++
++#define DWC3_VER_IS(_ip, _ver)						\
++	(DWC3_IP_IS(_ip) && dwc->revision == _ip##_REVISION_##_ver)
++
++#define DWC3_VER_IS_PRIOR(_ip, _ver)					\
++	(DWC3_IP_IS(_ip) && dwc->revision < _ip##_REVISION_##_ver)
++
++#define DWC3_VER_IS_WITHIN(_ip, _from, _to)				\
++	(DWC3_IP_IS(_ip) &&						\
++	 dwc->revision >= _ip##_REVISION_##_from &&			\
++	 (!(_ip##_REVISION_##_to) ||					\
++	  dwc->revision <= _ip##_REVISION_##_to))
++
++#define DWC3_VER_TYPE_IS_WITHIN(_ip, _ver, _from, _to)			\
++	(DWC3_VER_IS(_ip, _ver) &&					\
++	 dwc->version_type >= _ip##_VERSIONTYPE_##_from &&		\
++	 (!(_ip##_VERSIONTYPE_##_to) ||					\
++	  dwc->version_type <= _ip##_VERSIONTYPE_##_to))
++
+ static inline int dwc3_host_init(struct dwc3 *dwc)
+ { return 0; }
+ static inline void dwc3_host_exit(struct dwc3 *dwc)
+-- 
+2.43.0
 
