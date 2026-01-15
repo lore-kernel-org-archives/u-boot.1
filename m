@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D39D44C46
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 13:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377DCD44C48
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 13:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54303838BB;
-	Thu, 15 Jan 2026 14:53:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92BD183966;
+	Thu, 15 Jan 2026 14:53:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PT4FHQwQ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YxWaCDHT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 985CA82BF2; Thu, 15 Jan 2026 14:53:28 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id CE8B380077; Thu, 15 Jan 2026 14:53:29 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBFEE80077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 14:53:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C827E838BB
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 14:53:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.bonnefille@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 765B81A2892;
- Thu, 15 Jan 2026 13:53:26 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id CCB3BC1F1EB;
+ Thu, 15 Jan 2026 13:53:00 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 4C404606B6;
- Thu, 15 Jan 2026 13:53:26 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 89D5B606B6;
+ Thu, 15 Jan 2026 13:53:27 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B5C7410B68602; Thu, 15 Jan 2026 14:53:24 +0100 (CET)
+ with ESMTPSA id 0519310B6851D; Thu, 15 Jan 2026 14:53:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1768485205; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1768485206; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=nXX+axz1cXhhxEdxsgsB3aATtq3231FrpsoWmzubn24=;
- b=PT4FHQwQpslwLv1Jy/yos/P4CDM49nxG/vh8Mra3hOx/HEXsrZikIiKhDWsIG6FklYtXnH
- JXGUCoCnGYG4mjNpivUSuYFwoDRtyOhr8/gau54ktW3sh88H5m0ndFiqM4spuiROCYoKWn
- eh0SvXx/StkqHMd8O8Gy1UPExhxaf82+0GY/3Exr05b4IAIBATVPzhvreztlGTYyx4PDpI
- HVSDsi++irn0URPbPBFCWI8TpU2YClya5RqNI6K2B93JxsJw9+Cxq9uG1f2obqLYLNu+Ga
- DiuMs4cHFUbaPsu2g6qUI+YE4+SiuX2U6/G0gPKSEstQIrFcKYlby/ue3XIFjw==
+ bh=dKpYVjWoQ+X39TwcP7X6rUXOTD/jYKUXm4jzrie6YRg=;
+ b=YxWaCDHTtcc2XJaoaqdY7WLQt3vJp0YhOi0derreMeWh8dAk7lwzl6j6IcWjtL/cpQd44t
+ OWjAQvQCscJeT6V3df8zGSHE3HwT0hKC31+PnIF5qchv4tBQoh3FTyhBgAnEQZXBSnhLpK
+ +2mMljPiywLixDQDbV7Ou4REPjoyR7srEvYArCB9biN9mjOSJiqjyGifgBVlYoUGAWbkS5
+ NuO1HAmYUCMhONC8qDpTZl2CWHi6r9BSWaNWLhb+TmeHgrORdRkZ3Whx3utAFll/tAXJuE
+ fdokXnHdpc8D84x45SAs1CS2Ept4K06PKatMmyp/HTVhPhTd5AXUQAt7WBkHuA==
 From: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Date: Thu, 15 Jan 2026 14:52:47 +0100
-Subject: [PATCH v2 4/5] pwm: imx: allow i.MX7 to use PWM3 and PWM4
+Date: Thu, 15 Jan 2026 14:52:48 +0100
+Subject: [PATCH v2 5/5] board: toradex: add splash screen to Toradex i.MX7D
+ Colibri board
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260115-repair_imx7_splash-v2-4-6595491341ba@bootlin.com>
+Message-Id: <20260115-repair_imx7_splash-v2-5-6595491341ba@bootlin.com>
 References: <20260115-repair_imx7_splash-v2-0-6595491341ba@bootlin.com>
 In-Reply-To: <20260115-repair_imx7_splash-v2-0-6595491341ba@bootlin.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -77,27 +78,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Creates a new condition in which i.MX7 SoCs will be able to use the
-third and fourth PWM controllers in the pwm-imx driver.
+Fixes the PWM<A> that was previously used as a GPIO output instead of a
+real PWM, it also reserve the framebuffer region to preserve the splash
+screen while the OS is booting.
 
 Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- drivers/pwm/pwm-imx.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/toradex/colibri_imx7/colibri_imx7.c | 41 +++++++++++++++++++++++--------
+ 1 file changed, 31 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/pwm/pwm-imx.c b/drivers/pwm/pwm-imx.c
-index 28187b4fcbb..8e655943eec 100644
---- a/drivers/pwm/pwm-imx.c
-+++ b/drivers/pwm/pwm-imx.c
-@@ -43,7 +43,7 @@ struct pwm_regs *pwm_id_to_reg(int pwm_id)
- 		return (struct pwm_regs *)PWM1_BASE_ADDR;
- 	case 1:
- 		return (struct pwm_regs *)PWM2_BASE_ADDR;
--#ifdef CONFIG_MX6
-+#if defined(CONFIG_MX6) || defined(CONFIG_MX7)
- 	case 2:
- 		return (struct pwm_regs *)PWM3_BASE_ADDR;
- 	case 3:
+diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
+index 69a8a18d3a7..55480213c67 100644
+--- a/board/toradex/colibri_imx7/colibri_imx7.c
++++ b/board/toradex/colibri_imx7/colibri_imx7.c
+@@ -18,6 +18,7 @@
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <dm/platform_data/serial_mxc.h>
++#include <fdt_simplefb.h>
+ #include <fdt_support.h>
+ #include <fsl_esdhc_imx.h>
+ #include <jffs2/load_kernel.h>
+@@ -29,8 +30,10 @@
+ #include <netdev.h>
+ #include <power/pmic.h>
+ #include <power/rn5t567_pmic.h>
++#include <pwm.h>
+ #include <usb.h>
+ #include <usb/ehci-ci.h>
++#include <video.h>
+ #include "../common/tdx-common.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -114,7 +117,7 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+ 	/* Backlight On */
+ 	MX7D_PAD_SD1_WP__GPIO5_IO1 | MUX_PAD_CTRL(NO_PAD_CTRL),
+ 	/* Backlight PWM<A> (multiplexed pin) */
+-	MX7D_PAD_GPIO1_IO08__GPIO1_IO8   | MUX_PAD_CTRL(NO_PAD_CTRL),
++	MX7D_PAD_GPIO1_IO08__PWM1_OUT   | MUX_PAD_CTRL(NO_PAD_CTRL),
+ 	MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21 | MUX_PAD_CTRL(NO_PAD_CTRL),
+ };
+ 
+@@ -123,6 +126,8 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+ 
+ static int setup_lcd(void)
+ {
++	int ret = 0;
++
+ 	imx_iomux_v3_setup_multiple_pads(backlight_pads, ARRAY_SIZE(backlight_pads));
+ 
+ 	/* Set BL_ON */
+@@ -130,10 +135,15 @@ static int setup_lcd(void)
+ 	gpio_direction_output(GPIO_BL_ON, 1);
+ 
+ 	/* Set PWM<A> to full brightness (assuming inversed polarity) */
+-	gpio_request(GPIO_PWM_A, "PWM<A>");
+-	gpio_direction_output(GPIO_PWM_A, 0);
+-
+-	return 0;
++	enable_pwm_clk(1, 0);
++	ret = pwm_init(0, 0, 0);
++	if (ret)
++		return ret;
++	ret = pwm_config(0, 0, 6666666);
++	if (ret)
++		return ret;
++	ret = pwm_enable(0);
++	return ret;
+ }
+ #endif
+ 
+@@ -142,12 +152,11 @@ static int setup_lcd(void)
+  */
+ void board_preboot_os(void)
+ {
+-#ifdef CONFIG_VIDEO
+-	gpio_direction_output(GPIO_PWM_A, 1);
+-	gpio_direction_output(GPIO_BL_ON, 0);
+-#endif
++	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_VIDEO_REMOVE)) {
++		gpio_direction_output(GPIO_PWM_A, 1);
++		gpio_direction_output(GPIO_BL_ON, 0);
++	}
+ }
+-
+ static void setup_iomux_uart(void)
+ {
+ 	imx_iomux_v3_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
+@@ -277,6 +286,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ #if defined(CONFIG_IMX_BOOTAUX) && defined(CONFIG_ARCH_FIXUP_FDT_MEMORY)
+ 	int up;
++	int ret = -1;
+ 
+ 	up = arch_auxiliary_core_check_up(0);
+ 	if (up) {
+@@ -313,6 +323,17 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	}
+ #endif
+ 
++	if (IS_ENABLED(CONFIG_FDT_SIMPLEFB))
++		ret = fdt_simplefb_enable_and_mem_rsv(blob);
++
++	/* If simplefb is not enabled and video is active, then at least reserve
++	 * the framebuffer region to preserve the splash screen while OS is booting
++	 */
++	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_OF_LIBFDT)) {
++		if (ret && video_is_active())
++			return fdt_add_fb_mem_rsv(blob);
++	}
++
+ 	return ft_common_board_setup(blob, bd);
+ }
+ #endif
 
 -- 
 2.52.0
