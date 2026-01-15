@@ -4,57 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E90DDD3CCB2
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 07:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA470D3CCB7
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 07:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40D8080325;
-	Thu, 15 Jan 2026 08:24:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 852CF80325;
+	Thu, 15 Jan 2026 08:25:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Cu66a9Hw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MttTa7sD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B120682BF2; Thu, 15 Jan 2026 08:24:17 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C1187835B3; Thu, 15 Jan 2026 08:25:09 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95A2B80077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:24:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 5B55380077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:25:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C498441A9B;
- Thu, 15 Jan 2026 07:24:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C0FAC116D0;
- Thu, 15 Jan 2026 07:24:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768461853;
- bh=XoKGTHJf2meSVIAo2QTn5Du/G4U3L+JV02z/3eu9z+U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Cu66a9HwzfDhYB40duj9oQ53qkylpudyPOHdMo7bO/ogH+FB5eZuiM64bXpCBWUgb
- O2jzS8rNCMGJU8fi+UXI3Zpk7M8i3oNyf7QdxjGW/PDoroREsZAVYmywdPR1/ihbwT
- lH/VopZGd5+IICY8H5hew8HtvKbuENHubDT0ZhUFxbcErUcweRn2zi+hYmMY3Jzpqm
- UEqRyF+a0UvQYjExIkQymCrUKlLQomOhBOOlT7dgp6t+nfjRB4M2tln8tKKgJNRXRR
- 8PIh64UnNqWwQMGloBZkghqWBHYqs3pzoTEybbygVuBFls/nA5yPf+kB97J3iDoKDG
- R0khBwUXfaUFw==
-Date: Thu, 15 Jan 2026 12:54:06 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
- ilias.apalodimas@linaro.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] configs: Fix fastboot buffer address for QCS615 and
- QCM6490 boards
-Message-ID: <aWiWFrdwvy7-IK63@sumit-xelite>
-References: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-79276cef7beso5145447b3.2
+ for <u-boot@lists.denx.de>; Wed, 14 Jan 2026 23:25:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768461906; x=1769066706; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AhzECc8Y/FpAiKkXvt8AkwouxAOkWRcMkV08bdOkLOU=;
+ b=MttTa7sDlnPKf9JwcnDlWq+D/D0VpXDTLpRGYhrh35Xc96So92Z60rZP4AmN/HUM4G
+ WJS4RRl2hVPlzZ3KA/8mS4bMzp0YVZmqqiVY5+ZVf5syOqbRe0R68j0nXQQJ7wNtv1/0
+ EEWC5PC8e3lxDlTV5qR/yGTCv7Ow7XP2RXTaf5nq1cxXer8MH41UK7OYLqEqxCA31iLw
+ EUZGElWpdLhpwfPKC1K1+CGZ/KW8H2DmKZQLdOpRYmfyWNdg7Q1SNNFf29hCI58rvLdK
+ 2q3H+8rEi/lCz9dwgKHPQswXgMu+LNA4MW8OcYGjnArOGfY89xQZRjYbnJxcRbS0VM9T
+ bR0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768461906; x=1769066706;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AhzECc8Y/FpAiKkXvt8AkwouxAOkWRcMkV08bdOkLOU=;
+ b=tNO/YiTB1R/BXIPgTcD3EFBKWgermBiKD3Tt3E7G2IKOWEsj2HXTqaX59ECgvgitRW
+ fs3pb4zxcdQQYMySoWyMpiTTofHJ+KJAfnMQA33BUHxlE2prPq+5tz9yMJdy7y4TB6Kn
+ hhOla2pIXL11MZ05WSYQcMnszzPtwpA+u1ciSiC7qMZ3PVKFt5OZyzq85RDvJPYf2Kzs
+ HJois9jk8RIMrCBXWavMmVy2THrzUs8phANjZNtHSeb8IrysZphOU53bADsaG3ztc4O9
+ y+TVwLJQjvffFT/eoHAXkIO5BXhjcygrqkXWUKL9XIpbRqVbyeK72t1ZJZEg8fBs3PdQ
+ h2og==
+X-Gm-Message-State: AOJu0YxNmP9NmsfgS2kc5OmcndOp1n0jC6Qc5dh1J0tFyUKb2oLLdp6/
+ QLiGGafcWO1imERW4t/NVjFkdiUTxPeSAWhNfiuGDgOdMgJRdOxif8wSNAZuVlg/oTOv4JMRLvl
+ GM+cm7pfgOXXIeDrocpeF7wB/aImnsaUsKC4/B0Uy8a5x4+g7az3ureA=
+X-Gm-Gg: AY/fxX7LLbILdvdLpr9Rx9qPsSX7xPs85a7HuGo/OcAIlvgXb5C1F4EAhmd71nv2DNF
+ YUMHwlbyfrQxd7qx9dtPpwj6oDpVflL2zfQcmFbzf2zNKSfhc23p6Y46+H1EBYN7hHDKshSzSOD
+ 2Wz/1OorKV2fND21oaDDSZ9At36dobKC3Zsta8CkwqnOokfUvBJaD+Gcq1R1eRQZs0AbL0Hbzux
+ A+57+Tu0C32i/Ykdmga9vXzhjvMMSvX1WjJFW9ng5jH897PJ7lkC6e48GgANBIqurymBrSf84W/
+ PqWCvChkHpYIysIR9m7PVWFKPFZZTJYvLArANIgBKL4M9B3bAXihhdB2cQdoX+44IIsK0j4D76l
+ IREBLwudW/OnsmT9ZGffO8ODHMMy+spbb0ckyTkXEQeoCl+Ftr/8C3pin2rVmyiUPfpQs6FUh5+
+ xKx8EipvqZjWcf6YQfPixdgrKh/c+du8E7uzcKe5SgZErB+i49NjdB2vtD9s2wAppKhjXJMIlrZ
+ 8P9slJ2nmbh/KhtlKRCIZ9pmR1dYdcrCI73fP9A3HPistfVypSmCbcwH8UD1Xefv6ZvBBjvdbOp
+ MoiTc1FwCgsxx4ZO2IgW1yenPMNftWBj
+X-Received: by 2002:a05:690e:1407:b0:63f:b444:da92 with SMTP id
+ 956f58d0204a3-64903b11c5amr3355548d50.31.1768461906009; Wed, 14 Jan 2026
+ 23:25:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20260106141405.82637-1-hs@nabladev.com>
+ <20260106141405.82637-2-hs@nabladev.com>
+In-Reply-To: <20260106141405.82637-2-hs@nabladev.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 15 Jan 2026 09:24:29 +0200
+X-Gm-Features: AZwV_QiBHBm_O61IhV3C8V5-1MBYF_RjXs_Ic2-YyzYI9TPdVITvYAkvMolyss0
+Message-ID: <CAC_iWjL74ayBaoxnka1KZMQOJfAFWeLghSCasz41i56-AA4C-A@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] lib: sm3: fix coverity error
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,54 +95,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
-
-On Wed, Jan 07, 2026 at 03:20:38PM +0530, Balaji Selvanathan wrote:
-> The default value of CONFIG_FASTBOOT_BUF_ADDR is 0, which causes
-> NULL pointer dereference during fastboot commands when users dont
-> provide "-l" option in fastboot usb command.
-
-On Qcom platforms, we usually rely on LMB allocations for fastboot
-address, see here [1]. So I would rather suggest you to adapt fastboot
-common code [2] to consume fastboot address from env (fastboot_addr_r)
-in case CONFIG_FASTBOOT_BUF_ADDR is 0. Then it will be a generic fix
-applicable for all the Qcom platforms.
-
-[1] arch/arm/mach-snapdragon/board.c:545 env_set_hex("fastboot_addr_r", addr)
-[2] drivers/fastboot/fb_common.c:235 fastboot_init()
-
--Sumit
-
-> 
-> Set it to safe and sufficiently large region in RAM
-> of the QCS615 and QCM6490 boards, to prevent crashes.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+On Tue, 6 Jan 2026 at 16:14, Heiko Schocher <hs@nabladev.com> wrote:
+>
+> Coverity scan reported:
+>
+> CID 449815:         Memory - illegal accesses  (OVERRUN)
+> Overrunning array of 64 bytes at byte offset 64 by dereferencing pointer
+> "sctx->buffer + partial". [Note: The source code implementation of the
+> function has been overridden by a builtin model.]
+>
+> In line: 252
+>    memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial);
+>
+> The respective line should be:
+>
+> memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial - 1);
+>
+> as partial gets incremented by one before.
+>
+> Signed-off-by: Heiko Schocher <hs@nabladev.com>
 > ---
->  configs/qcm6490_defconfig     | 2 ++
->  configs/qcom_qcs615_defconfig | 2 ++
->  2 files changed, 4 insertions(+)
-> 
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> index 54eb5dedaec..618098c8860 100644
-> --- a/configs/qcm6490_defconfig
-> +++ b/configs/qcm6490_defconfig
-> @@ -13,3 +13,5 @@ CONFIG_TEXT_BASE=0x9fc00000
->  CONFIG_REMAKE_ELF=y
->  
->  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
-> +
-> +CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
-> diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
-> index 2468267b955..14043b4f23d 100644
-> --- a/configs/qcom_qcs615_defconfig
-> +++ b/configs/qcom_qcs615_defconfig
-> @@ -20,3 +20,5 @@ CONFIG_REMAKE_ELF=y
->  
->  # Address where U-Boot will be loaded
->  CONFIG_TEXT_BASE=0x9fc00000
-> +
-> +CONFIG_FASTBOOT_BUF_ADDR=0xa1600000
-> -- 
-> 2.34.1
-> 
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>
+>  lib/sm3.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/sm3.c b/lib/sm3.c
+> index 2a4e825481d..05880099703 100644
+> --- a/lib/sm3.c
+> +++ b/lib/sm3.c
+> @@ -249,7 +249,7 @@ void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE])
+>
+>         sctx->buffer[partial++] = 0x80;
+>         if (partial > bit_offset) {
+> -               memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial);
+> +               memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial - 1);
+>                 partial = 0;
+>
+>                 sm3_block(sctx, sctx->buffer, 1, W);
+> --
+> 2.20.1
+>
