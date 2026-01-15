@@ -4,62 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A17D3CCB6
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 07:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E90DDD3CCB2
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 07:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3F6C82BF2;
-	Thu, 15 Jan 2026 08:10:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 40D8080325;
+	Thu, 15 Jan 2026 08:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="O9gQKj7U";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Cu66a9Hw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44C9682C7F; Thu, 15 Jan 2026 08:10:42 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id B120682BF2; Thu, 15 Jan 2026 08:24:17 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7F3080077
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:10:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95A2B80077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 08:24:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id CAB4D60157;
- Thu, 15 Jan 2026 07:10:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8121DC116D0;
- Thu, 15 Jan 2026 07:10:33 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C498441A9B;
+ Thu, 15 Jan 2026 07:24:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C0FAC116D0;
+ Thu, 15 Jan 2026 07:24:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768461038;
- bh=qJn4HN2N8Algp78fFSp4eCd8y3C4h0aZD/hcHBWG6wg=;
+ s=k20201202; t=1768461853;
+ bh=XoKGTHJf2meSVIAo2QTn5Du/G4U3L+JV02z/3eu9z+U=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=O9gQKj7Ujmtp+99zAjYyPR4ni97KacmsTr8BnqVG72LdRt97376WsrO/naRjCUIdm
- 46359UH3hMnjWe4/tc+OBRcmuDeX7LvTiNZQldAT0tLJ9By7yY6d8X0vzpDVZ8r4QB
- b3nZgAt9rb9HXdb+MYgmg7XYA2V4XLSkBisLvfyZzTGHN0cOhqBabjyZX+YqOW8ixq
- AmLBrs04CQAidB8Cg2T/G4Ev3D7sqc8fLB35CxrVmOkfPc3DIHymFJyrYPLWBx5j1c
- gfFbL8+wEdJiLazJvxryJ3++K/UnBQQgeCB7DgQss+CgvQvtS51yXSATXQaoDHiKfT
- 6I4LBBLd648RQ==
-Date: Thu, 15 Jan 2026 12:40:30 +0530
+ b=Cu66a9HwzfDhYB40duj9oQ53qkylpudyPOHdMo7bO/ogH+FB5eZuiM64bXpCBWUgb
+ O2jzS8rNCMGJU8fi+UXI3Zpk7M8i3oNyf7QdxjGW/PDoroREsZAVYmywdPR1/ihbwT
+ lH/VopZGd5+IICY8H5hew8HtvKbuENHubDT0ZhUFxbcErUcweRn2zi+hYmMY3Jzpqm
+ UEqRyF+a0UvQYjExIkQymCrUKlLQomOhBOOlT7dgp6t+nfjRB4M2tln8tKKgJNRXRR
+ 8PIh64UnNqWwQMGloBZkghqWBHYqs3pzoTEybbygVuBFls/nA5yPf+kB97J3iDoKDG
+ R0khBwUXfaUFw==
+Date: Thu, 15 Jan 2026 12:54:06 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- trini@konsulko.com, ilias.apalodimas@linaro.org,
- christopher.obbard@linaro.org, quic_varada@quicinc.com,
- marek.vasut+renesas@mailbox.org, alexeymin@minlexx.ru,
- danila@jiaxyga.com, david.wronek@mainlining.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable
- all drivers by default
-Message-ID: <aWiS5ixFCnbK3_sN@sumit-xelite>
-References: <20260107154745.571319-1-aswin.murugan@oss.qualcomm.com>
- <20260107154745.571319-2-aswin.murugan@oss.qualcomm.com>
- <6037846c-ca4d-4927-a6c0-f8f0cfb96f80@cherry.de>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
+ ilias.apalodimas@linaro.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] configs: Fix fastboot buffer address for QCS615 and
+ QCM6490 boards
+Message-ID: <aWiWFrdwvy7-IK63@sumit-xelite>
+References: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <6037846c-ca4d-4927-a6c0-f8f0cfb96f80@cherry.de>
+In-Reply-To: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,117 +71,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 14, 2026 at 06:29:55PM +0100, Quentin Schulz wrote:
-> Hi Aswin,
-> 
-> On 1/7/26 4:47 PM, Aswin Murugan wrote:
-> > Introduce a new Kconfig option PINCTRL_QCOM_GENERIC that, when selected,
-> > enables all Qualcomm pinctrl drivers by default. This simplifies defconfigs
-> > for platforms supporting multiple SoCs and avoids manual driver selection.
-> > Individual drivers can still be disabled if required.
-> > 
-> > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> > ---
-> > Changes in v2:
-> > - As per review comments made default y for pinctrl drivers
-> >    based on PINCTRL_QCOM_GENERIC config 'default y if PINCTRL_QCOM_GENERIC'
-> > ---
+Hi Balaji,
 
-"---" is redundant here and may be causing issues with the b4 patch
-pickup.
+On Wed, Jan 07, 2026 at 03:20:38PM +0530, Balaji Selvanathan wrote:
+> The default value of CONFIG_FASTBOOT_BUF_ADDR is 0, which causes
+> NULL pointer dereference during fastboot commands when users dont
+> provide "-l" option in fastboot usb command.
 
-> >   drivers/pinctrl/qcom/Kconfig | 29 +++++++++++++++++++++++++++++
-> >   1 file changed, 29 insertions(+)
-> > 
-> > diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> > index 725200d94c8..580308621b1 100644
-> > --- a/drivers/pinctrl/qcom/Kconfig
-> > +++ b/drivers/pinctrl/qcom/Kconfig
-> > @@ -6,8 +6,17 @@ config PINCTRL_QCOM
-> >   menu "Qualcomm pinctrl drivers"
-> > +config PINCTRL_QCOM_GENERIC
-> > +	bool "Enable all Qualcomm pinctrl drivers by default"
-> > +	select PINCTRL_QCOM
-> > +	help
-> > +	  Say Y here to enable all Qualcomm pinctrl drivers by default.
-> > +	  This is useful for generic Qualcomm defconfigs that support
-> > +	  multiple SoCs. Individual drivers can still be disabled if needed.
-> > +
-> >   config PINCTRL_QCOM_APQ8016
-> >   	bool "Qualcomm APQ8016 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the MSM8916 / APQ8016
-> > @@ -15,6 +24,7 @@ config PINCTRL_QCOM_APQ8016
-> >   config PINCTRL_QCOM_APQ8096
-> >   	bool "Qualcomm APQ8096 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
-> > @@ -22,6 +32,7 @@ config PINCTRL_QCOM_APQ8096
-> >   config PINCTRL_QCOM_IPQ4019
-> >   	bool "Qualcomm IPQ4019 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
-> > @@ -29,6 +40,7 @@ config PINCTRL_QCOM_IPQ4019
-> >   config PINCTRL_QCOM_IPQ5424
-> >   	bool "Qualcomm IPQ5424 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the IPQ5424 SoC,
-> > @@ -36,6 +48,7 @@ config PINCTRL_QCOM_IPQ5424
-> >   config PINCTRL_QCOM_IPQ9574
-> >   	bool "Qualcomm IPQ9574 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
-> > @@ -43,6 +56,7 @@ config PINCTRL_QCOM_IPQ9574
-> >   config PINCTRL_QCOM_QCM2290
-> >   	bool "Qualcomm QCM2290 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the Snapdragon QCM2290 SoC,
-> > @@ -50,6 +64,7 @@ config PINCTRL_QCOM_QCM2290
-> >   config PINCTRL_QCOM_QCS404
-> >   	bool "Qualcomm QCS404 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> >   	select PINCTRL_QCOM
-> >   	help
-> >   	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
-> > @@ -57,6 +72,7 @@ config PINCTRL_QCOM_QCS404
-> >   config PINCTRL_QCOM_QCS615
-> >           bool "Qualcomm QCS615 Pinctrl"
-> > +	default y if PINCTRL_QCOM_GENERIC
-> 
-> Indentation seems incorrect here?
+On Qcom platforms, we usually rely on LMB allocations for fastboot
+address, see here [1]. So I would rather suggest you to adapt fastboot
+common code [2] to consume fastboot address from env (fastboot_addr_r)
+in case CONFIG_FASTBOOT_BUF_ADDR is 0. Then it will be a generic fix
+applicable for all the Qcom platforms.
 
-With indentation fixed, feel free to add:
-
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+[1] arch/arm/mach-snapdragon/board.c:545 env_set_hex("fastboot_addr_r", addr)
+[2] drivers/fastboot/fb_common.c:235 fastboot_init()
 
 -Sumit
 
 > 
-> b4 doesn't want to pick up the patch from lore so cannot check if it's an
-> actual problem or not. See:
+> Set it to safe and sufficiently large region in RAM
+> of the QCS615 and QCM6490 boards, to prevent crashes.
 > 
-> $ b4 shazam --add-my-sob --add-link https://lore.kernel.org/u-boot/67140dbd-1b93-43d1-b218-0b57a762ce1a@linaro.org/
-> [...]
-> Applying: pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable all drivers by
-> default
-> Patch failed at 0001 pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable all
-> drivers by default
-> error: sha1 information is lacking or useless
-> (drivers/pinctrl/qcom/Kconfig).
-> error: could not build fake ancestor
-> [...]
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+>  configs/qcm6490_defconfig     | 2 ++
+>  configs/qcom_qcs615_defconfig | 2 ++
+>  2 files changed, 4 insertions(+)
 > 
-> Cheers,
-> Quentin
+> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+> index 54eb5dedaec..618098c8860 100644
+> --- a/configs/qcm6490_defconfig
+> +++ b/configs/qcm6490_defconfig
+> @@ -13,3 +13,5 @@ CONFIG_TEXT_BASE=0x9fc00000
+>  CONFIG_REMAKE_ELF=y
+>  
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+> +
+> +CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
+> diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
+> index 2468267b955..14043b4f23d 100644
+> --- a/configs/qcom_qcs615_defconfig
+> +++ b/configs/qcom_qcs615_defconfig
+> @@ -20,3 +20,5 @@ CONFIG_REMAKE_ELF=y
+>  
+>  # Address where U-Boot will be loaded
+>  CONFIG_TEXT_BASE=0x9fc00000
+> +
+> +CONFIG_FASTBOOT_BUF_ADDR=0xa1600000
+> -- 
+> 2.34.1
+> 
