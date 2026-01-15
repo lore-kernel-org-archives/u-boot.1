@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3340D3CC9F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 08:25:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE56D3CCA1
+	for <u-boot@archiver.kernel.org>; Thu, 15 Jan 2026 08:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 751C480077;
-	Thu, 15 Jan 2026 09:25:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CDAD683015;
+	Thu, 15 Jan 2026 09:26:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="n2Dpq1L6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Z09C/gXk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8372880325; Thu, 15 Jan 2026 09:25:50 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 6EDBC83623; Thu, 15 Jan 2026 09:26:46 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EF5C8003E
- for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 09:25:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34C0080077
+ for <u-boot@lists.denx.de>; Thu, 15 Jan 2026 09:26:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8F2154023D;
- Thu, 15 Jan 2026 08:25:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1E87C116D0;
- Thu, 15 Jan 2026 08:25:45 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id EFA0B60167;
+ Thu, 15 Jan 2026 08:26:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33134C19423;
+ Thu, 15 Jan 2026 08:26:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768465546;
- bh=kFJyNeouyMCtUgPyfqMT1BSWuBNjQKW/fl+pzy+ATNM=;
- h=From:To:In-Reply-To:References:Subject:Date:From;
- b=n2Dpq1L6uV6NwRjxH4+lDLkwglF1ByvTuSjaAiuUbUlv96/QeirsHk4ZNFpY/gTmL
- 9huIYMU2oBUULTink++HzOfyJx7BmnNXza8bSSSEJgmI3GoXer1bpli8n37iP7H5Wo
- 2Yy/9Xq39o7NPLlhNH/mGQl3vYgJgFIWU9KihFGzhnZaM5O8GErWmfTS13boSK2tUL
- iy1ZOgb1gVtRbMat5itzpllDG471MJP/BV5nCbyoUdqcLlI1mKrIpnyxpy1Td5+ev0
- pryFXKT6syG2gzrmGFfO5xBBSSFp2t1L7jgbLMKUjS1VkQxzPQf4yvr26/XZorRsni
- fARfRfzg/swAA==
+ s=k20201202; t=1768465602;
+ bh=h0ny604bCpWAH+UUMoyXV+QLtJ75hh1MxfLf3PiU/+I=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=Z09C/gXkXuCaX84eGq4m8/pk5f5G4jIPgeqU5AttOpqvjXe5jxaw7k4NIBc+nEpPx
+ 2V4yT91uEqD7NC1Gmjsf008xWdu5joOAyqU3upuaMxWHgtFe4bx84X+rS3wcNk8x64
+ ZkheJS5/MYfDAg5MvPO/a5GVUN7ef2bKGBvF7kojpwNUFhtZrFsgqxymAFaZ2tHUBb
+ jveDlViJ1uLJlymQBXkTn5e7+Iojnc3m7GHN98hrMWLL7nUsCw0HSbpkM/XmnBP2MJ
+ lqZdhnvd5eg7yFUSzKeSozT1/80q5CI7uX03KzNxkFiWgvQLC4XUprZ+tUjjUsgHDQ
+ aXKphDKsx83/Q==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de, 
- Sean Anderson <sean.anderson@linux.dev>
-In-Reply-To: <20260106222212.744823-1-sean.anderson@linux.dev>
-References: <20260106222212.744823-1-sean.anderson@linux.dev>
-Subject: Re: [PATCH] dfu: Report error codes
-Message-Id: <176846554375.658317.3352583589802910593.b4-ty@kernel.org>
-Date: Thu, 15 Jan 2026 09:25:43 +0100
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+In-Reply-To: <BESP194MB28052734FD0361EA602F6360DA8FA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB28052734FD0361EA602F6360DA8FA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] bootstd: android: Add missing free in
+ android_read_bootflow
+Message-Id: <176846560000.658634.6991500046277204518.b4-ty@kernel.org>
+Date: Thu, 15 Jan 2026 09:26:40 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -71,17 +71,15 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 06 Jan 2026 17:22:11 -0500, Sean Anderson wrote:
-> A lot of things can go wrong while parsing dfu_alt_info. Make sure to
-> pass the real error codes all the way up instead of replacing them with
-> an unhelpful -1.
+On Wed, 14 Jan 2026 10:14:55 +0100, Francois Berder wrote:
+> If strdup call fails, one needs to free priv variable.
 > 
 > 
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/1] dfu: Report error codes
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/3f9765672ce424300b6d9fb95d8b01313df9dff7
+[1/1] bootstd: android: Add missing free in android_read_bootflow
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/8fa0cf5f3d7ca15e2d102d0d46a132d246793486
 
 --
 Mattijs
