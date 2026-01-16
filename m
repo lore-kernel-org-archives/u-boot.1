@@ -4,88 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D33FC982D4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 15:57:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC85AC982D7
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 15:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70FA78309A;
-	Fri, 16 Jan 2026 16:57:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1830D8309A;
+	Fri, 16 Jan 2026 16:59:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZJ3BjYJv";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="kJlMZEJi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0945C833C6; Fri, 16 Jan 2026 16:57:42 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BB5BC83623; Fri, 16 Jan 2026 16:59:41 +0100 (CET)
+Received: from out-180.mta1.migadu.com (out-180.mta1.migadu.com
+ [95.215.58.180])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D490083015
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 16:57:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8550783015
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 16:59:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7cfda2de4efso1589572a34.3
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 07:57:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768579058; x=1769183858; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=b1ZgmBydx6Rwz9k+36JWFJC3rgTGx/nEDpN7TO5s/Qo=;
- b=ZJ3BjYJvCAraAUKizZxK3LvhlvML+faKxI5kw4nVoCcCy7ZgtTO/ZB0KVU87HKvIVO
- Xhyty8DdwBTd6+cTWwK4fo84hg4/UMY7e0/4mMa14snBaS4FmN41Fp5rlUVSFpf6zB8V
- Sqm7T8uvG0UeelAEvYLo1D8+yE0FPD6w5Iq4s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768579058; x=1769183858;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b1ZgmBydx6Rwz9k+36JWFJC3rgTGx/nEDpN7TO5s/Qo=;
- b=gw/FVty1PNJxwl8BBepISf/NBA+vwdhRj5GFv0RYxv4WO20sxIne4r0cqgvRviMBAj
- ljOdTTEkdlhOvxaPMhRnnzyeHuVUq38GX6t2+OsX01L0ecpvZxowCqyixtco+ehixtnB
- v3jfyzWi9zy/6pBM/cGxGwZcmXQgtB13g8u+5jlvfAG8/xtB+H+7d8qmQ5EN5YcjYBZY
- IT3wKqawLMo3vY3hsLrh+L8s0mTQJ3gVwpJ30+FgFnV1UPOVkL9VtZXWsLDmkPs3ziYj
- P1K9bNPQ9xg5Qivmt4BBU3Kwsp+zegZil0/o/sU1+JNxaEG99C7N6ohS00tqW6QrwbH+
- 24zA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJRHPnHgFrzJ3f9kb+BCtRWKBeqLZqRKJKYVf18GZ1hW9Q1QM1HpoZmB2f2UxbfUEDOVGrE3c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6NWmMfRzUWRm6SvONE5p4P0RZBpkGg0yDwy39sxwpp2GsZSFA
- OYjVPW5PoZ1bkpD1jvNELgrKvB4GqZLzkoZGC1p8PmW4K/UULJPHJR00n05Ai4MbmV8=
-X-Gm-Gg: AY/fxX6/jY+H046OOndIU89P40cUFn4Jm+Mp3fs3cUQXKSp76IU8Q1ESp/21rwVJo3K
- BEEINTypzftIcdG9o4JjJP5u6ZZisS9Yf5mXSs0eqnX1Z3C9uHitRWCiuWD4+EBe3T++bHi3BsV
- mTEjoJHI5jhMIrWqxo06oLeqaSlXPJ+npa1MWooWkN8YUAwjQaLNjDQthU1mpkcQ+9UM54CKdTm
- b8XMbXG4g8aSoUZ12g/Z+m9Ud5u5LPnZleYNBvGGPi0/77KhAcTvWoS/fUqGDcn84qVHLOHv8IR
- 6ijuZd9B6zyZbkm124vEHwcaCf55qd/FeDWHuCEtU3JlDbqF7sfet0Rmnei0dJISQ2V305dFGt/
- lgy7lEi2Wiz28HD5jllecIGhym6/h06MP38z1h3XMm1Ipq0Yq/UAeeU+T0yndQtzCN6v3kQYQfj
- jssrOPLPLCrM+c/66OlTZI8SiNxZEmNUrhvRIwFFIg+um+0UkoX60lPG0pgrPjNL9zWm918U87I
- CciMRMu5rTvECgbVoDzMokgwqkcS7NHTevlO8c=
-X-Received: by 2002:a05:6830:6507:b0:7cf:d0f6:135f with SMTP id
- 46e09a7af769-7cfded34512mr1664481a34.2.1768579058492; 
- Fri, 16 Jan 2026 07:57:38 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf2b57e2sm1882803a34.27.2026.01.16.07.57.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 07:57:37 -0800 (PST)
-Date: Fri, 16 Jan 2026 09:57:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: neil.armstrong@linaro.org, casey.connolly@linaro.org,
- quic_varada@quicinc.com, bmeng.cn@gmail.com,
- andrew.goodbody@linaro.org, u-boot@lists.denx.de,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v1] scsi: Enable FUA bit and remove per-write SYNC_CACHE
- operations
-Message-ID: <20260116155735.GA4063961@bill-the-cat>
-References: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
+ spf=pass smtp.mailfrom=sean.anderson@linux.dev
+Message-ID: <9377f5ad-4118-481b-adc8-49048691c9f6@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1768579179;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=isvnMqWAIK+Ui0KvQAg7rfB2oSFKFU31g8McwdSzy08=;
+ b=kJlMZEJiRPVt/xk9YMrgVPttT6bSUvYxiI03h5RRmbq1rTpv45iVdRRDWHypYwkgIvSuc/
+ 7uUzTjCZEizPK3vitVe5pembS3Sb5eBkzk5vbNb4O99YcDDJbV96HZMWkWPzpL7+SUNCmE
+ VbP3IxCgUmuoPIWzO4DBA0Hm4gZORGQ=
+Date: Fri, 16 Jan 2026 10:59:33 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aRtSFPo3K4VOfLrX"
-Content-Disposition: inline
-In-Reply-To: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] pinctrl: zynqmp: Add SPL support
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+References: <20260106224202.754923-1-sean.anderson@linux.dev>
+ <960bd4b8-3643-4e78-ae70-b29453ae083d@amd.com>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sean Anderson <sean.anderson@linux.dev>
+In-Reply-To: <960bd4b8-3643-4e78-ae70-b29453ae083d@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,42 +69,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/16/26 03:17, Michal Simek wrote:
+> 
+> 
+> On 1/6/26 23:42, Sean Anderson wrote:
+>> Although the pinctrl pm requests are implemented in the PMU firmware,
+>> PM_QUERY_DATA is actually implemented in ATF. In SPL (or when running in
+>> EL3), ATF is not yet running, so we need to implement this API
+>> ourselves. Do the bare minimum, allowing SPL to enumerate functions, but
+>> don't bother with groups. Groups take up a lot of space, and can be
+>> emulated with pins. For example, a node like
+>>
+>>     display-port {
+>>         mux {
+>>             groups = "dpaux0_1";
+>>             function = "dpaux0";
+>>         };
+>>     };
+>>
+>> can be replaced by
+>>
+>>     display-port {
+>>         mux {
+>>             pins = "MIO34", "MIO35", "MIO36", "MIO37";
+>>             function = "dpaux0";
+>>         };
+>>     };
+>>
+>> While this isn't backwards-compatible with existing devicetrees, it's
+>> more than enough for SPL where we may only need to mux one or two pins.
+>>
+>> Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+>> ---
+>>
+>>   drivers/firmware/firmware-zynqmp.c | 100 +++++++++++++++++++++++++++++
+>>   1 file changed, 100 insertions(+)
+>>
+>> diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+>> index f8a9945c1da..77911757177 100644
+>> --- a/drivers/firmware/firmware-zynqmp.c
+>> +++ b/drivers/firmware/firmware-zynqmp.c
+>> @@ -427,6 +427,102 @@ U_BOOT_DRIVER(zynqmp_power) = {
+>>   };
+>>   #endif
+>>   +static const char *const pinctrl_functions[] = {
+>> +    "can0",
+>> +    "can1",
+>> +    "ethernet0",
+>> +    "ethernet1",
+>> +    "ethernet2",
+>> +    "ethernet3",
+>> +    "gemtsu0",
+>> +    "gpio0",
+>> +    "i2c0",
+>> +    "i2c1",
+>> +    "mdio0",
+>> +    "mdio1",
+>> +    "mdio2",
+>> +    "mdio3",
+>> +    "qspi0",
+>> +    "qspi_fbclk",
+>> +    "qspi_ss",
+>> +    "spi0",
+>> +    "spi1",
+>> +    "spi0_ss",
+>> +    "spi1_ss",
+>> +    "sdio0",
+>> +    "sdio0_pc",
+>> +    "sdio0_cd",
+>> +    "sdio0_wp",
+>> +    "sdio1",
+>> +    "sdio1_pc",
+>> +    "sdio1_cd",
+>> +    "sdio1_wp",
+>> +    "nand0",
+>> +    "nand0_ce",
+>> +    "nand0_rb",
+>> +    "nand0_dqs",
+>> +    "ttc0_clk",
+>> +    "ttc0_wav",
+>> +    "ttc1_clk",
+>> +    "ttc1_wav",
+>> +    "ttc2_clk",
+>> +    "ttc2_wav",
+>> +    "ttc3_clk",
+>> +    "ttc3_wav",
+>> +    "uart0",
+>> +    "uart1",
+>> +    "usb0",
+>> +    "usb1",
+>> +    "swdt0_clk",
+>> +    "swdt0_rst",
+>> +    "swdt1_clk",
+>> +    "swdt1_rst",
+>> +    "pmu0",
+>> +    "pcie0",
+>> +    "csu0",
+>> +    "dpaux0",
+>> +    "pjtag0",
+>> +    "trace0",
+>> +    "trace0_clk",
+>> +    "testscan0",
+>> +};
+>> +
+>> +/*
+>> + * PM_QUERY_DATA is implemented by ATF and not the PMU firmware, so we have to
+>> + * emulate it in SPL. Just implement functions/pins since the groups take up a
+>> + * lot of rodata and are mostly superfluous.
+>> + */
+>> +static int zynqmp_pm_query_data(enum pm_query_id qid, u32 arg1, u32 arg2,
+>> +                u32 *ret_payload)
+>> +{
+>> +    switch (qid) {
+>> +    case PM_QID_PINCTRL_GET_NUM_PINS:
+>> +        ret_payload[1] = 78;
+> 
+> Macro for this value please.
 
---aRtSFPo3K4VOfLrX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Why? This value is used exactly once, and its semantics can be
+directly inferred from the previous line.
 
-On Mon, Jan 05, 2026 at 10:55:26AM +0530, Balaji Selvanathan wrote:
+>> +        ret_payload[0] = 0;
+>> +        return 0;
+>> +    case PM_QID_PINCTRL_GET_NUM_FUNCTIONS:
+>> +        ret_payload[1] = ARRAY_SIZE(pinctrl_functions);
+>> +        ret_payload[0] = 0;
+>> +        return 0;
+>> +    case PM_QID_PINCTRL_GET_NUM_FUNCTION_GROUPS:
+>> +        ret_payload[1] = 0;
+>> +        ret_payload[0] = 0;
+>> +        return 0;
+>> +    case PM_QID_PINCTRL_GET_FUNCTION_NAME:
+>> +        memset(ret_payload, 0, 16);
+> 
+> Where is this 16 coming from? I expect this is max number of chars of function.
 
-> Enable the Force Unit Access (FUA) bit in SCSI WRITE10 commands to
-> ensure writes bypass the device's volatile cache and go directly to
-> non-volatile storage. This provides write-through behavior without
-> requiring explicit cache flushes after each write operation.
->=20
-> Remove the SYNC_CACHE command that was being issued after every
-> scsi_write() call, as it is redundant when FUA is enabled and was
-> causing system hangs during large sparse image flashing operations.
->=20
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Yes. It comes from ATF. I can move MAX_FUNC_NAME_LEN to
+include/zynqmp_firmware.h so we can use it here.
 
-This introduces failure to build on xilinx_zynqmp_virt and others:
-drivers/scsi/scsi.c:85:13: error: 'scsi_setup_sync_cache' defined but not u=
-sed [-Werror=3Dunused-function]
+>> +        strcpy((char *)ret_payload, pinctrl_functions[arg1]);
+> 
+> you should check that arg1 is between 0 and array size not to read value behind.
 
---=20
-Tom
+This is guaranteed by the loop condition in zynqmp_pinctrl_probe. I can
+add an assert, but we have one internal user so we don't really need
+validation beyond what would be necessary for something like
 
---aRtSFPo3K4VOfLrX
-Content-Type: application/pgp-signature; name="signature.asc"
+	for (i = 0; i < ARRAY_SIZE(pinctrl_functions); i++)
+		pinctrl_functions[i];
 
------BEGIN PGP SIGNATURE-----
+>> +        return 0;
+>> +    case PM_QID_PINCTRL_GET_FUNCTION_GROUPS:
+>> +    case PM_QID_PINCTRL_GET_PIN_GROUPS:
+>> +        memset(ret_payload + 1, 0xff, 12);
+> 
+> Where is this 12 coming from? Macro for it.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWpf6wAKCRAr4qD1Cr/k
-CojtAP4r4ZBLbJ8OUPrjPEJ6iJvnwMyZg3UK7fCP3VnxOo2ELwD/Zx7QbQNdd5xo
-VwJTIRkv3hTFCttqaOh7NZqgra0zNQw=
-=X1m4
------END PGP SIGNATURE-----
+NUM_GROUPS_PER_RESP * sizeof(u16)
 
---aRtSFPo3K4VOfLrX--
+>> +        ret_payload[0] = 0;
+>> +        return 0;
+>> +    default:
+>> +        ret_payload[0] = 1;
+>> +        return 1;
+>> +    }
+>> +}
+>> +
+>>   smc_call_handler_t __data smc_call_handler;
+>>     static int smc_call_legacy(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
+>> @@ -493,6 +589,10 @@ int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
+>>             __func__, current_el(), api_id, arg0, arg1, arg2, arg3, arg4, arg5);
+>>         if (IS_ENABLED(CONFIG_XPL_BUILD) || current_el() == 3) {
+>> +        if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) &&
+>> +            IS_ENABLED(CONFIG_PINCTRL_ZYNQMP) &&
+> 
+> This logic have to change a little bit.
+> There is also CONFIG_SPL_PINCTRL symbol which likely needs to be enabled. But if it is not still this code ends in SPL and just extend binary.
+
+PINCTRL_ZYNQMP is not enabled in any defconfig for U-Boot proper, so it
+will not normally be enabled in SPL either.
+
+> Don't think you want to support running U-Boot out of EL3 but if yes that logic should be adjusted in connection to CONFIG_SPL_PINCTRL.
+
+I think it's reasonable to support this, which is why I left the
+condition as-is.
+
+--Sean
+
+>> +            api_id == PM_QUERY_DATA)
+>> +            return zynqmp_pm_query_data(arg0, arg1, arg2, ret_payload);
+>>   #if defined(CONFIG_ZYNQMP_IPI)
+>>           /*
+>>            * Use fixed payload and arg size as the EL2 call. The firmware
+> 
+> M
