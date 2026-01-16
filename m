@@ -4,106 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEEACD4899D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 13:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE9DD4899E
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 13:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D4A982BF2;
-	Fri, 16 Jan 2026 14:44:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id 10C7982BF2;
+	Fri, 16 Jan 2026 14:48:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="q5vZSBGX";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="ZCnf+8tR";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="QKZbh5bJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF1488309A; Fri, 16 Jan 2026 14:44:57 +0100 (CET)
-Received: from fhigh-b6-smtp.messagingengine.com
- (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
+ id DB1468309A; Fri, 16 Jan 2026 14:42:20 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96F6680077
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:44:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 752D580077
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:42:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 851BA7A0092;
- Fri, 16 Jan 2026 08:44:49 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Fri, 16 Jan 2026 08:44:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1768571089; x=1768657489; bh=wN
- +SGFEMd1FrOtrcOYCxtCDcgVelI5LkpAqE16uDGSA=; b=q5vZSBGXAnxckkS4sD
- kTpBm30H/1abqF9VP5PjutmSOQ8huwycOQAS9pjMJTOQu3GqTcal2yrOuZin7AQt
- R8lqArDypq1qgQmO1sEHA9iC5JmScYkwcpTnY9hBZEGL+ZPpQ7kV3JXPr/pN66Kb
- z2amkXZp5N/kPN4GKEU/lx0cnRzf21DHYnti7zZQFJzc5aK2m2S5ObVuQQDdZK19
- qvZgykg96n/4t65b52p4ZsJY3+uXfY7vf2P1Te3Dt40cfnezZmeKVkzzxGUmJnO0
- Phh5pNR2bMMhq3ZqTACShwCZtBUTu0Eue2HKvEpLmWru0e0+OtxNtWA+o7y7LVXM
- dCUQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1768571089; x=1768657489; bh=wN+SGFEMd1FrOtrcOYCxtCDcgVel
- I5LkpAqE16uDGSA=; b=ZCnf+8tRk9ZYKhioYxWOB6YKxw4uc637jxsRyc1EvgCZ
- 9+bWUrQnRKldDrgfC4wE6P8pR8DWvvQ1XuiAlMNIYulCF0+xs+nWMw9hj5E7aYe1
- TYzPAVZrxB2PyFpeerBpKHGSSqlkFJZ9Xawo8l/DyRWd0VTNxv/cluoZF93TCmvY
- d97NH7tz19Rto3yv9kLIQrrlBJRFkDjWmfaQjpPKyQxN/4rRmmRMvQpJAnOcK9SF
- xRwjAds0UV+a0vGtJnOvegHPVsHOCLtk1vWk3YNsLt5KLjTuTIHvWDvnXJbHI04L
- Dc1skI5pjDjGMBClfs2uES24ytIbYvWaMskO2edY9A==
-X-ME-Sender: <xms:0UBqaQAytvQm90kWnx16LOpjcx7wo6RI7EeaojlCggwGtJloBZKBcg>
- <xme:0UBqaUB0IIBulbMoHg-dswOrz52uPZnO4LkDnqswvX5FeZkTwlyNGl9AX75HOHvs7
- 9IRGcS_E3oN1r2Xz_Apq7H3QIFzmZs0Gx1R7JdGfczOrIi9IBhyz92g>
-X-ME-Received: <xmr:0UBqaTq8WJYzxUyihKevftES0-5Lm2i97i5DueBA7ug3lmZ_86TF8UUhi2aSqvEk-3xIXDTQibZjdNNvDP0LW3IptDIghft3vMulTw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeltdelucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
- rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepfeehle
- dtheefteejfedvheetuedttdetleegudeuteejveetieefuedvfeffvdeinecuffhomhgr
- ihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
- epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohephedp
- mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepjhesjhgrnhhnrghurdhnvghtpdhrtg
- hpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsgho
- ohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtoheprghsrghhiheslhhishhtsh
- drlhhinhhugidruggvvhdprhgtphhtthhopehkvghtthgvnhhishesohhpvghnsghsugdr
- ohhrgh
-X-ME-Proxy: <xmx:0UBqaWmaWJLXB3PxmsPgMGF5vtEHuyskcm_Zv67MB1Uzrd_rU_NSvQ>
- <xmx:0UBqabxceaeAnXfPjU95FurDtInhNrCXFrKq1K1BJUGz2-H8luVLTA>
- <xmx:0UBqaW-lvtQAfvx80phZ05yc9X9uPPFN5tA6a7hMYplA2MP-11L_EQ>
- <xmx:0UBqafKE5ep4wg9nNtT-rDCZiRjeNKX9Dt0bfQ1QjSap_X7cKYgbtw>
- <xmx:0UBqaXSmguCYUxveF9_8Ck2GRP5bxFgf7PqgaIOJmuxVj-1hOK3gmmSP>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 16 Jan 2026 08:44:48 -0500 (EST)
-From: Janne Grunau <j@jannau.net>
-Date: Fri, 16 Jan 2026 14:44:46 +0100
-Subject: [PATCH v2] configs: apple: Enable SMBIOS / sysinfo
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260116-apple-defconfig-smbios-v2-1-861d707b466a@jannau.net>
-X-B4-Tracking: v=1; b=H4sIAM1AamkC/4WNTQ6CMBCFr0Jmbc20VBBW3sOwqDCFMdqSFhsN4
- e5WLmDe6nt5PytECkwR2mKFQIkje5dBHQroJ+NGEjxkBoWqQomNMPP8IDGQ7b2zPIr4vLGPwpT
- 1GXNI6pOCXJ4DWX7vw9cu88Rx8eGz/yT5c/9OJimyKl3XiE2Ppb7cjXPmdXS0QLdt2xd03bs7v
- QAAAA==
-X-Change-ID: 20260109-apple-defconfig-smbios-a37802021452
-To: u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
- asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2305; i=j@jannau.net;
- s=yk2025; h=from:subject:message-id;
- bh=rtIW8f/tcipjLJdXvudP3ku6ex1TG+Kb3nZHdyrIjNU=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhswsh/MB2U4nJwusqmSVO9CxKbW6701Btb7/gh1HjF2z/
- EL+5N3vKGVhEONikBVTZEnSftnBsLpGMab2QRjMHFYmkCEMXJwCMJF7rowM39c9XysfsfXKk9LQ
- oH9TTVobom++/aGhevTTKkXFK7JpDYwMd4pXflTZMOORombCt7kvwtiDv753Nbea5PtnnueViRF
- VjAA=
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 2E87126277;
+ Fri, 16 Jan 2026 14:42:18 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GWh3MzTTxvpc; Fri, 16 Jan 2026 14:42:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1768570937; bh=f0fCdEPDH3GmWZUSRJDDUfPI3IT/FVbONz+UaueXGx4=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To;
+ b=QKZbh5bJwMeeQ5mwEn4vJWpQsRsaiXOPQpWb58BGQw0WWQzJNPJUSglaAMBRXt5YV
+ Yy4xPIXgmMrnrk1gkOR1E+/ut412qJqRs+Mvdg4QTFq6XhKOxwNWBpuG53vFDKnQbd
+ SqU4xN8DB3QU0pyMpl1izV/tLrGEwvxTYSBaZXQkXiT1FU5OsiQ1mwJWDroM0EtSNg
+ UK5lkKwW6Qy/mUkAhXFg6ncWCCZoTXdEenH7LavSpXXQsX1c9f3IuYzsfu93RVnL/i
+ MboaVsx7q+AqMeNcsbsNVWWA8SjG1E0/kspuvodl+/ItvLHXRJ2NL5XbfHIQdIMNq2
+ B3c/pnSBE8Z/w==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 16 Jan 2026 19:12:07 +0530
+Message-Id: <DFQ22JXT2KP3.2U4ZGBQM3RYRV@disroot.org>
+Subject: Re: [PATCH v3 1/2] usb: dwc3-generic: allow fallback of dr_mode
+ property to "otg"
+From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
+To: "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Kaustabh Chakraborty"
+ <kauschluss@disroot.org>, <u-boot@lists.denx.de>
+Cc: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, "Marek Vasut"
+ <marex@denx.de>, "Tom Rini" <trini@konsulko.com>, "Kever Yang"
+ <kever.yang@rock-chips.com>, "Jonas Karlman" <jonas@kwiboo.se>, "Patrice
+ Chotard" <patrice.chotard@foss.st.com>, "Sam Protsenko"
+ <semen.protsenko@linaro.org>, "Marek Vasut" <marek.vasut@mailbox.org>,
+ "Casey Connolly" <casey.connolly@linaro.org>
+References: <20260108-usb-dwc3-exynos7870-v3-0-343fa1e81e48@disroot.org>
+ <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
+ <874iolenzq.fsf@kernel.org>
+In-Reply-To: <874iolenzq.fsf@kernel.org>
+X-Mailman-Approved-At: Fri, 16 Jan 2026 14:48:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,66 +77,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable verbose SMBIOS table generation so that user space applications
-can use the SMBIOS table to provide details about the system. The
-desired information is chassis-type to determine whether the system is
-laptop.
-Adding the chassis-type property is proposed for the upstream device
-trees in the Linux kernel in [1].
-Enable CMD_SMBIOS as debugging aid as the platform can easily deal with
-large u-boot binaries.
+On 2026-01-16 13:33 +01:00, Mattijs Korpershoek wrote:
+> Hi Kaustabh,
+>
+> Thank you for the patch.
+>
+> On Thu, Jan 08, 2026 at 18:03, Kaustabh Chakraborty <kauschluss@disroot.o=
+rg> wrote:
+>
+>> Documentation [1] states that the default value of the dr_mode property
+>> is "otg". It also isn't marked a mandatory node, so it may or may not be
+>> set. So, accordingly if dr_mode is not mentioned in the devicetree node,
+>> OTG mode must be assumed.
+>>
+>> In this driver however, this case is not handled. If dr_mode is not
+>> mentioned, USB_DR_MODE_UNKNOWN is set. The logic implemented raises an
+>> error, instead of falling back to USB_DR_MODE_OTG. Correct this to
+>> conform to the specification.
+>>
+>> Link: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicet=
+ree-rebasing.git/tree/Bindings/usb/usb-drd.yaml?h=3Dv6.18-dts [1]
+>> Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-Link: https://lore.kernel.org/asahi/20260109-apple-dt-usb-c-atc-dwc3-v1-0-ce0e92c1a016@jannau.net/ [1]
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Janne Grunau <j@jannau.net>
----
-Changes in v2:
-- Added CMD_SMBIOS as suggested by Mark
-- Added Tom's Reviewed-by: trailer
-- Link to v1: https://lore.kernel.org/r/20260109-apple-defconfig-smbios-v1-1-16477009c034@jannau.net
----
-I do not plan to update u-boot's in-tree device trees. The Linux device
-trees have almost reached feature parity. The main missing features are
-the USB Type-C ports (on track for next merge window) and the laptop
-keyboards. I think it makes more sense to close the feature gap and
-switch to upstream device trees instead of adding to the in-tree device
-trees.
----
- configs/apple_m1_defconfig | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Thanks for your insight, but isn't this patch applied? This has been
+merged into u-boot/master already. But I don't see it in next.
+Confusing.
 
-diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-index 2d685da8c9eee2084b0144050e12c03c77e5184e..1ce69f2882a1baf8d3713c18f8fe6b3fe5e2ae57 100644
---- a/configs/apple_m1_defconfig
-+++ b/configs/apple_m1_defconfig
-@@ -10,12 +10,15 @@ CONFIG_SYS_PBSIZE=276
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_LATE_INIT=y
-+CONFIG_CMD_SMBIOS=y
- CONFIG_CMD_SELECT_FONT=y
- CONFIG_NO_NET=y
- CONFIG_SYS_64BIT_LBA=y
- CONFIG_APPLE_SPI_KEYB=y
- # CONFIG_MMC is not set
- CONFIG_NVME_APPLE=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_XHCI_PCI=y
-@@ -25,4 +28,4 @@ CONFIG_VIDEO_FONT_16X32=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
--# CONFIG_SMBIOS is not set
-+CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
+>
+> Note: there is a similar patch submitted by Casey here:
+> https://lore.kernel.org/all/20260114-casey-usb-role-switch-v1-1-fb7a62646=
+6b9@linaro.org/
+>
+> Can you have a look at that one please? You could review it or test it
+> to see if it works for you?
 
----
-base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
-change-id: 20260109-apple-defconfig-smbios-a37802021452
+This patch addresses a single point of failure, unlike mine.
 
-Best regards,
--- 
-Janne Grunau <j@jannau.net>
+>
+> Thanks!
+> Mattijs
+>
+>> ---
+>>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++++--
+>>  1 file changed, 7 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-gen=
+eric.c
+>> index c09014aec60..c15eda19e8f 100644
+>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>> @@ -10,6 +10,7 @@
+>>  #include <dm.h>
+>>  #include <reset.h>
+>>  #include <asm/gpio.h>
+>> +#include <dm/device_compat.h>
+>>  #include <dm/lists.h>
+>>  #include <linux/delay.h>
+>>  #include <linux/usb/gadget.h>
+>> @@ -173,8 +174,8 @@ static int dwc3_generic_of_to_plat(struct udevice *d=
+ev)
+>>  		node =3D dev_ofnode(dev->parent);
+>>  		plat->dr_mode =3D usb_get_dr_mode(node);
+>>  		if (plat->dr_mode =3D=3D USB_DR_MODE_UNKNOWN) {
+>> -			pr_err("Invalid usb mode setup\n");
+>> -			return -ENODEV;
+>> +			dev_info(dev, "No USB mode specified. Using 'otg'\n");
+>> +			plat->dr_mode =3D USB_DR_MODE_OTG;
+>>  		}
+>>  	}
+>> =20
+>> @@ -516,6 +517,10 @@ static int dwc3_glue_bind_common(struct udevice *pa=
+rent, ofnode node)
+>>  	if (!dr_mode)
+>>  		dr_mode =3D usb_get_dr_mode(node);
+>> =20
+>> +	/* usb mode must fallback to peripheral if not known */
+>> +	if (dr_mode =3D=3D USB_DR_MODE_UNKNOWN)
+>> +		dr_mode =3D USB_DR_MODE_OTG;
+>> +
+>>  	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
+>>  	    (dr_mode =3D=3D USB_DR_MODE_PERIPHERAL || dr_mode =3D=3D USB_DR_MO=
+DE_OTG)) {
+>>  		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
+>>
+>> --=20
+>> 2.52.0
 
