@@ -4,93 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E937C982FE
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 21:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DA2C982C3
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 22:10:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87CC783952;
-	Fri, 16 Jan 2026 22:04:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 49DB08367F;
+	Fri, 16 Jan 2026 23:10:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nX34eGnw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fPdNB0Iy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C2B83956; Fri, 16 Jan 2026 22:04:44 +0100 (CET)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
+ id E7B73836AC; Fri, 16 Jan 2026 23:10:00 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDE908394E
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 22:04:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9B838309A
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 23:09:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-3f9ebb269c3so1389965fac.3
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 13:04:41 -0800 (PST)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b87677a8a96so43582566b.2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:09:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768597480; x=1769202280; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uXG8s6omFoE8npmUuH2thq5EYJE6KzUZEQ79/r6QVwU=;
- b=nX34eGnwkjTKfHeRZmiI51b2XQwuEaNRiayC4EmgkS+g5GSxIrH5hSmy3MCgeKmwiU
- j3mtSgSKCOlSQ/W8aEbEzdUK40X0kAg8iYEA+sdSFz2DBgeOIyrm/mwbFf/tBj/7NJHj
- I8RBANs7A+uV98OFjChnJKYD1aPSFh94OFBlk=
+ d=gmail.com; s=20230601; t=1768601398; x=1769206198; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LxGajCYLCyHirHc6ptQymByCc3HXpQlDaJLTxrlHb+k=;
+ b=fPdNB0IyfHEtfgnkh8vqwem60GNzfhbjMcJG4C5Pe3tr8+Mtp9rCtqI56T5xW8sl3h
+ GAr5r+0c7+X5mKcvAs4ueVxb/Byn9FVjdpzT0W9vwJYdtcsEG68ky2wO6dtBaW9BeOGM
+ RRmf+wZY9hSKPHUnKsWIUkqGLl8z4QCFWtcZBrshiAmdxdQxYJpCN1/pgvoJHWbvytiR
+ mPnTIeCEoDuBqfZiqzJx6PClRlli2cc6SyltZsfWrtmiX4puO3u0fUcSFzdmZ2xKBDhK
+ n584f6dRB+bKWzWm0CGFUIsjnBXmD0z0oeTgm+oNuXb0hhHZGJdOF7g/AWCbZ8/CcYgg
+ HIRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768597480; x=1769202280;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uXG8s6omFoE8npmUuH2thq5EYJE6KzUZEQ79/r6QVwU=;
- b=tk9R5YoI225gLjgQIV1PQHXgRgc1qU8krF1MDOOC0MNyCzOhrmXJOBx4WuQ/hN3p81
- yNOyBNuSm79bbqhhlW2tiP0UoOCRufSHtIBCGwUr6M4j3ntvCrmTd808TQ/cSw2N3qYe
- SK3EpTSDeJVUQdNX0vs89fleadPD4YGJTRSMKvjF1OB7ea2TAMeWIQqq9a5OfA1jOcFH
- YD4guuBiVOd4gVw/urV9keJhVxh9W9/XLVidazF53y12jlwhKdCrI1RQ03qsQr+AinZW
- fsDDBIedKOwr3gQw5k9xehK4+9fAmJUZfH6GWsXxOGNXxK200dk/ioqcAjMS9s4QTT/a
- h54A==
+ d=1e100.net; s=20230601; t=1768601398; x=1769206198;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LxGajCYLCyHirHc6ptQymByCc3HXpQlDaJLTxrlHb+k=;
+ b=TN8O1kVfhZF31M9/2xaihEwTI9mxCeTFZsNiIRv8fY47C5smPOp22CDArE6ha7T5PM
+ LZSEWht/ULQbQTtvdqjobmj2dMwDV1aZpTgpF5N9xk0yGx+W6xqTFx/2Yt5gToEGbeda
+ Tqr6Yr5Y2OPo+DRvlPqZrwC3aM83ez2eww3O4UbnWkmbfZqrwlupwdhn8ljUPA9lQBP7
+ 2oCLh7CZl2MEuO+4s7GLZgmuIcNLXCBpb8NvoqUBaSwEpkZ+4zPf813z3x+h3oItphgi
+ /nMHgBCPZQUNXsOzRYG2tCP/U757+LSICvWLFnLEpPCzRSv3gf8s+KbWeKHfh0UO+Slh
+ wGHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7+xaAQDfUR+joZIR53BCPXAFj+bLzMkxWKujjU1UxXJA1XZeRTHVHWKvMsD7otXayz2UX04w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0P871XFSFPAzOGzIW3zuFf4OF0vLIgstb0Kn84eaDaZneiEx9
- zHVYsjM4ox0GFU3ZMBZ7rfBWr3pQo5ooVOGnWGU0N4uWgUDAcOSw6tw4QZauOroqipA=
-X-Gm-Gg: AY/fxX79flag3tqkHuwcPDbwYhH7ptkAm1d0v0pDin/UV/PTOBJ+PSGE5qhDIZbqF7s
- t5wo5Q9o2DBpQ7qzHyahFtORWGJru/XyM5gRe6UHfvp0Fx6rlC0bLedKrOMG9mHQChBq4hokwx+
- 0umm/bbtGNMxXFwRFPDa/JM/N2OeyAiTUoDTWLiZ95DZnhXKG6+0ivzI9uAQXjtkhU0+LpCCjff
- EPXvzbLWwEvH/vcNmjn5jQ24i9FOGj79CUXPCyFITpqmUcm/BuanULYtMLA1XBfB1kEt1Wh4NJR
- WfwRSrk+14AFeUD3UnWC6s6Q8VLADx2/nHfPz+nrUhgsFoxwPo6hzUyctH3UP0skJbIAcqH4axV
- D1zZUBvNRFN9c+36qjI29Cqck0iD8rZK5kaBUQsaMIqF0/MrTLQ5eqZbXjuHa28DTjW6ZzusGxW
- 1HFNmnFl8S28a/uJuy1cUqR09WwWH4rwLxDgIr8Q47+6QJrSNGJBvzVi0PEPNytA/JCBvvQVa0Z
- /orsKVAIpVKX9iXQqvOIIndoeadNy7FukbHGnE=
-X-Received: by 2002:a05:6870:9623:b0:3c9:7378:39a9 with SMTP id
- 586e51a60fabf-4044c16399fmr2281546fac.8.1768597480486; 
- Fri, 16 Jan 2026 13:04:40 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044bd1488esm2524340fac.11.2026.01.16.13.04.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 13:04:39 -0800 (PST)
-Date: Fri, 16 Jan 2026 15:04:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, mark.kettenis@xs4all.nl,
- Quentin Schulz <quentin.schulz@cherry.de>, Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] Add support for OpenSSL Provider API
-Message-ID: <20260116210437.GR3416603@bill-the-cat>
-References: <20251027195834.71109-1-ekovsky@redhat.com>
- <c2b48b27-9d4e-4be8-b94a-4aac7ef922a8@cherry.de>
- <aSCsgniomRMN0u1m@daedalus> <87fr9h5swg.fsf@kernel.org>
- <aUmB_fvpK1macga7@daedalus> <87zf6sflkr.fsf@kernel.org>
- <20260106003347.GC3416603@bill-the-cat> <aWqK4eo83-ybjlCQ@daedalus>
+ AJvYcCXNpuA1I+thmvQBfK72Sn31fsLRHTf5Ibz/1tmLz42xOJFYt/H13kfS7x0XTKX6A9ogodEjf5U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxo3mhPiaNPt22qc3eeqs1jKi1d1AG621b3r6FRtCGhGipn0p+m
+ s/nmRUOsz1r0KeJSSfcSrbdCtbeaf0jt+9HQdEKvTRQ4eqKXfnkwej0v
+X-Gm-Gg: AY/fxX5q9MxogOm+a3DOSsqvAAqvHJt+Bvub9GG2+iZotc3Ux0dvtFmPjkFwBiSOCtM
+ WPUUN3mN1xFs+7NOIbhEERSQ/s0BxLlro2SSxRLt5gPU998FshWgPv3W9GgeMoLDIRYacPTOTWE
+ ci9fG+XXbN2S17PD/H27Oe3OiPbSgk9A1STNb85ezf0uySUEcpmyqIAQP2pvAK4CLEIix9u7YO2
+ Gtu3IDHvAtf/JzefYn/TW1DDKKTJ/KZ0coxiEBpGYHOACa6LgU2haYCkxnXRbjRnQ+OWj5KwxCu
+ DY8tPm/r4Q3AIVfUM4HcI4tcn59zcUKwqqOF5Mlv9DkFUqelkpHViyP2S+08yL8qGLuMSSnH0p8
+ M7boDbsM6Rm/7FtMTF6Oaoy3x05KbSwR3kpr1ytspJUdtgIhU9hrHv9zwEXQTNp0X1I+Jm/ivsP
+ QmVSq8TBRDrsikHPXpglqvOnB+FcYCeypyqK2O6oFTNriQOBki6zoknH01jI4X
+X-Received: by 2002:a17:906:fd8a:b0:b87:6c1e:a008 with SMTP id
+ a640c23a62f3a-b8793275d45mr216513866b.7.1768601398158; 
+ Fri, 16 Jan 2026 14:09:58 -0800 (PST)
+Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b879513e9dcsm354692866b.6.2026.01.16.14.09.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Jan 2026 14:09:57 -0800 (PST)
+Message-ID: <a6eba53c-a2db-44fc-9785-d817dbb4ef11@gmail.com>
+Date: Fri, 16 Jan 2026 23:09:56 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3CNhsOS8SapyWUvZ"
-Content-Disposition: inline
-In-Reply-To: <aWqK4eo83-ybjlCQ@daedalus>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v3 0/6] rockchip: use OF_UPSTREAM for rk3288
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@kernel.org,
+ trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
+ jagan@amarulasolutions.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
+ jonas@kwiboo.se, michael@amarulasolutions.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,132 +103,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The device tree for rk3288 combined is now
+available in the /dts/upstream directory.
+Use imply OF_UPSTREAM to migrate all rk3288 boards.
+Clean up MAINTAINERS.
 
---3CNhsOS8SapyWUvZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-On Fri, Jan 16, 2026 at 12:00:49PM -0700, Eddie Kovsky wrote:
-> On 01/05/26, Tom Rini wrote:
-> > On Mon, Jan 05, 2026 at 10:36:04AM +0100, Mattijs Korpershoek wrote:
-> > > On Mon, Dec 22, 2025 at 10:38, Eddie Kovsky <ekovsky@redhat.com> wrot=
-e:
-> > >=20
-> > > > On 12/11/25, Mattijs Korpershoek wrote:
-> > > >> Hi Eddie,
-> > > >>=20
-> > > >> Thank you for working on this. It would be really nice if we could=
- build
-> > > >> U-Boot on more recent Linux distros without bridge packages such as
-> > > >> openssl-devel-engine.
-> > > >>=20
-> > > >>=20
-> > > >> I also don't linke this double negative.
-> > > >> As you already shared, Linux solved this via:
-> > > >>=20
-> > > >> #if OPENSSL_VERSION_MAJOR >=3D 3
-> > > >>=20
-> > > >> Why can't we have something similar?
-> > > >> See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linu=
-x.git/commit/?id=3D558bdc45dfb2669e1741384a0c80be9c82fa052c
-> > > >>=20
-> > > >
-> > > > Hi Mattijs
-> > > >
-> > > > Yes, we could also implement it this way with the extra USE_PKCS11_=
-XXX
-> > > > symbol. Jan's original patch I based my work on does something simi=
-lar,
-> > > > and I perhaps oversimplified it.
-> > >=20
-> > > In my experience, when porting things from the Linux kernel into U-Bo=
-ot,
-> > > we try to keep the code as similar as possible. This helps reducing
-> > > maintainance burden.
-> > >=20
-> > > Sometimes, we can't do that. In that case, we should explain why.
-> > >=20
-> > > Do we have a strong reason for *not* reusing OPENSSL_VERSION_MAJOR wi=
-th
-> > > USE_PKCS11_XXX ?
-> > >=20
-> > > [...]
-> > >=20
-> > > >> >>=20
-> > > >> >
-> > > >> > It's not the prettiest code. But I'm trying to be very conservat=
-ive
-> > > >> > in making these changes so that no one's workflow is disrupted.
-> > > >> > Developers should be able to build U-Boot with the latest OpenSSL
-> > > >> > without impacting developers who are in environments utilizing t=
-he
-> > > >> > Engine API. The goal here is to preserve feature parity between =
-the two
-> > > >> > APIs. Adding support for custom Providers is outside the scope o=
-f this
-> > > >> > change, but could certainly be added later.
-> > > >>=20
-> > > >> I'd be in favor to drop CONFIG_OPENSSL_NO_DEPRECATED all together =
-and
-> > > >> just use "#if OPENSSL_VERSION_MAJOR >=3D 3".
-> > > >>=20
-> > > >> Tom, or anyone else, is there a particular` reason for gating this=
- in a
-> > > >> Kconfig ?
-> > > >>=20
-> > > >> The oldest Ubuntu version that seems supported (22.04) already has
-> > > >> OpenSSL version 3:
-> > > >>=20
-> > > >> $ podman run -it /bin/bash ubuntu:22.04
-> > > >> root@6dc347676b8a:~# apt update && apt install -y openssl
-> > > >> root@6dc347676b8a:~# openssl version
-> > > >> OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
-> > > >>=20
-> > > >
-> > > > I assumed that we would want this to be an explicit config option, =
-but
-> > > > logically there is no reason that it has to be. I'd be happy to spi=
-n up
-> > > > a v3 if there's agreement that the Kconfig isn't needed.
-> > >=20
-> > > Tom, do you have an opinion on this? It seems you are listed as
-> > > maintainer for this (THE REST).
-> >=20
-> > Yes, sorry, I think part of the question here is how it plays out with
-> > LibreSSL and other alternatives to openssl, which ends up being a Mark
-> > question.
-> >=20
-> > --=20
-> > Tom
->=20
-> I am being careful not to break backwards compatibility here. I've
-> written the patch so that anyone who needs to continue using the Engine
-> API can do so.
->=20
-> The LibreSSL project implements the OpenSSL 1.1 API, but does not
-> support the OpenSSL 3 API, and to be the best of my knowledge does not
-> intend to support the Provider interface. During the V1 discussion I did
-> ask Mark to verify that my patch preserves backwards compatibility with
-> LibreSSL as intended.
->=20
-> Tom, regarding the other question, would you prefer that I implement
-> this using just #ifdefs without the Kconfig option?
+Changed V3:
+Makefile
+MAINTAINERS
 
-Yes, lets follow the kernel's example with just #ifdefs, thanks.
+Changed V2:
+Rebase
+Moved upstream changes to separate patches
+Split in smaller pieces
 
---=20
-Tom
+Johan Jonker (6):
+  ARM: dts: rockchip: Remove mshc aliases from RK3288
+  ARM: dts: rockchip: Add spi_flash label to rk3288-veyron
+  ARM: dts: rockchip: move edp assigned-clocks to edp node on rk3288
+  rockchip: Switch rk3288-veyron boards to upstream devicetree
+  rockchip: Switch remaining rk3288 boards to upstream devicetree
+  rockchip: imply OF_UPSTREAM for rk3288 boards
 
---3CNhsOS8SapyWUvZ
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/arm/dts/Makefile                         |  11 -
+ arch/arm/dts/cros-ec-sbs.dtsi                 |  52 --
+ ...boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} |   0
+ arch/arm/dts/rk3288-evb.dts                   |  20 -
+ arch/arm/dts/rk3288-evb.dtsi                  | 476 -----------
+ arch/arm/dts/rk3288-popmetal.dts              |  20 -
+ arch/arm/dts/rk3288-popmetal.dtsi             | 547 ------------
+ arch/arm/dts/rk3288-rock-pi-n8.dts            |  17 -
+ arch/arm/dts/rk3288-rock2-som.dtsi            | 278 ------
+ arch/arm/dts/rk3288-rock2-square.dts          | 181 ----
+ arch/arm/dts/rk3288-veyron-chromebook.dtsi    | 205 -----
+ arch/arm/dts/rk3288-veyron-jerry.dts          | 208 -----
+ arch/arm/dts/rk3288-veyron-mickey.dts         | 266 ------
+ arch/arm/dts/rk3288-veyron-minnie.dts         | 302 -------
+ arch/arm/dts/rk3288-veyron-speedy.dts         | 143 ----
+ arch/arm/dts/rk3288-veyron.dtsi               | 795 ------------------
+ arch/arm/dts/rk3288-vmarc-som.dtsi            | 361 --------
+ arch/arm/dts/rk3288-vyasa.dts                 | 473 -----------
+ .../dts/rockchip-radxa-dalang-carrier.dtsi    | 137 ---
+ arch/arm/mach-rockchip/Kconfig                |   1 +
+ board/amarula/vyasa-rk3288/MAINTAINERS        |   1 -
+ board/chipspark/popmetal_rk3288/MAINTAINERS   |   1 -
+ board/google/veyron/MAINTAINERS               |  10 +-
+ board/rockchip/evb_rk3288/MAINTAINERS         |   6 +-
+ configs/chromebit_mickey_defconfig            |   4 +-
+ configs/chromebook_jerry_defconfig            |   4 +-
+ configs/chromebook_minnie_defconfig           |   4 +-
+ configs/chromebook_speedy_defconfig           |   4 +-
+ ...8_defconfig => evb-rk3288-rk808_defconfig} |   4 +-
+ configs/firefly-rk3288_defconfig              |   1 -
+ configs/miqi-rk3288_defconfig                 |   1 -
+ configs/phycore-rk3288_defconfig              |   3 +-
+ configs/popmetal-rk3288_defconfig             |   4 +-
+ configs/rock-pi-n8-rk3288_defconfig           |   2 +-
+ configs/rock2_defconfig                       |   4 +-
+ configs/tinker-rk3288_defconfig               |   1 -
+ configs/tinker-s-rk3288_defconfig             |   1 -
+ configs/vyasa-rk3288_defconfig                |   4 +-
+ doc/board/rockchip/rockchip.rst               |   8 +-
+ .../src/arm/rockchip/rk3288-veyron.dtsi       |   2 +-
+ dts/upstream/src/arm/rockchip/rk3288.dtsi     |   9 +-
+ 41 files changed, 30 insertions(+), 4541 deletions(-)
+ delete mode 100644 arch/arm/dts/cros-ec-sbs.dtsi
+ rename arch/arm/dts/{rk3288-evb-u-boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} (100%)
+ delete mode 100644 arch/arm/dts/rk3288-evb.dts
+ delete mode 100644 arch/arm/dts/rk3288-evb.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-popmetal.dts
+ delete mode 100644 arch/arm/dts/rk3288-popmetal.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-rock-pi-n8.dts
+ delete mode 100644 arch/arm/dts/rk3288-rock2-som.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-rock2-square.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-chromebook.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-veyron-jerry.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-mickey.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-minnie.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-speedy.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-vmarc-som.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-vyasa.dts
+ delete mode 100644 arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
+ rename configs/{evb-rk3288_defconfig => evb-rk3288-rk808_defconfig} (95%)
 
------BEGIN PGP SIGNATURE-----
+--
+2.39.5
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWqn4gAKCRAr4qD1Cr/k
-CpcSAP9Igfc1Cs9qWR0+GHYUqdcPEaDtkFu2aIkN7TWqIkjtRQEA9Ad6vuBGX1dc
-l1UFSxuxxTQGXFXCFgCYFW9ndyXE7Ao=
-=krKG
------END PGP SIGNATURE-----
-
---3CNhsOS8SapyWUvZ--
