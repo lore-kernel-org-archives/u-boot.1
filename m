@@ -4,62 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E3B9D47CD6
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84094D47CDA
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:56:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C97A830E4;
-	Fri, 16 Jan 2026 11:50:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B25C83952;
+	Fri, 16 Jan 2026 11:56:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jfE0f5W5";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="cGqErGWX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EF6483623; Fri, 16 Jan 2026 11:50:46 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id D6A5283942; Fri, 16 Jan 2026 11:56:21 +0100 (CET)
+Received: from mx-relay12-hz1.antispameurope.com
+ (mx-relay12-hz1.antispameurope.com [94.100.132.212])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB79982BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:50:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2CCF141B09;
- Fri, 16 Jan 2026 10:50:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D899C116C6;
- Fri, 16 Jan 2026 10:50:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768560642;
- bh=1rUf5XomTb57746wrhhygO3nxjRX35VMsKwuhpdg+/o=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=jfE0f5W5rt57U01g668eN+Ru1fyYU38HOJHw4wkvOq72IKiO5eMrec+UXvoJ3u/Wx
- WMw7oVC0iis90K+ibhtffnB6sg8YWGURamLiCRPbz7A3cZN2GWiI10ovKJs8dwNLHN
- Cz832pfBS2u1nDlmqGWq7Q6IDZW8rIcn8rLmvHKU8WjG4xG8lZEZDTJDHJSATRQt+W
- kcS1+XYgQA+Z86ZFh9XQ0e+5ARdsUFUWFeEtY0sesNWizkKaP1AAG7GjYJzK/GF95+
- Gb5N7nRlDAz8AL+XYWVmojFKgw+MYnx2pdUREVzyBoeCjsjUPlJWgWkVhV7F5eiezF
- 18FWlMCM/OKuw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Marek
- Vasut <marex@denx.de>, Andrew Goodbody <andrew.goodbody@linaro.org>, Kory
- Maincent <kory.maincent@bootlin.com>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, Dinesh
- Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>,
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Simon Glass
- <simon.glass@canonical.com>
-Subject: Re: [PATCH v3 3/6] dm: core: Support multiple drivers with same
- compatibles
-In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-3-ebb8d990b9df@baylibre.com>
-References: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
- <20260114-topic-musb-probing-v2026-01-v3-3-ebb8d990b9df@baylibre.com>
-Date: Fri, 16 Jan 2026 11:50:39 +0100
-Message-ID: <87bjitesqo.fsf@kernel.org>
+ by phobos.denx.de (Postfix) with ESMTPS id A406D82BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:56:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0469552be2=max.merchel@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate12-hz1.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com
+ smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
+ header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=lgIsyvQcJYcwUSgcecohisKqtgNXJLmWFkJHjuDAXjs=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1768560978;
+ b=sTnifpjM6+wtCauVNMNG4Ar92P94+NdBVxR5pnFdqf5MhhAkjcVtkeFGjFGw/gpC0hsstirA
+ zgj+4aKC+zqVkHBs5/gkvrAlPOSm5PpvSAMj/8gbsxaA+0EpIq0EGefRiHOCVNSgMpDhvSuIop3
+ 7qeA1phyHK2igG9r6XqGdWjhgkyPYEYTNEIU2OUSH1L5MDkFhyDSqiCvFxE4I1Oz3UzmhnCQx/V
+ vz4Y4HnVC/T1FwlYBqMWCk5CTNvwBPmWGAJg3hGITn8FH07oM6qJIAK7VK7NXARafbvTENJJtG1
+ +aHmo2haAeBekhlQ+slzvOGansRAeb/VmJ00tFZi+t5PQ==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1768560978;
+ b=nTPTPi0pcDb3gosUk/bzCwzM8mHnxfncvb72RgfiFaKmgYwnqYtnfuaJ/XnLr+0sjNFhATmO
+ wfbe+u16XNs/fLjbF3AaRhkDTDbbQo8N5TwBXdbznDT5mTbsMtXKQKM8AH8kTKsZoj/AbkdqNgD
+ +4g8KZE/KBOq2tTZ9DPnFWGZM4tB8DyU7JPGlU64i1mr3cM6AOi8J/GFX35nterH47LmVm4wb4F
+ 3etRNw+JULKzd+MZgGjVVqHKgsqYOKB0r2b/YkSCLvfjyjwjI4v1gWZh4Np09TOaPlC3D7LpAPt
+ u13tfiNG/xtKHY8j5PCt9dzH5QfGxLdR48xLjcHiLw4ww==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay12-hz1.antispameurope.com; Fri, 16 Jan 2026 11:56:18 +0100
+Received: from merchelm-W2.tq-net.de
+ (host-82-135-125-110.customer.m-online.net [82.135.125.110])
+ (Authenticated sender: max.merchel@ew.tq-group.com)
+ by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
+ 1C7AE220D98; Fri, 16 Jan 2026 11:56:04 +0100 (CET)
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: [PATCH 0/5] board: TQMa6: improvements for config settings
+Date: Fri, 16 Jan 2026 11:53:34 +0100
+Message-ID: <20260116105351.2934665-1-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-cloud-security-sender: max.merchel@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay12-hz1.antispameurope.com with 4dsxbm3tPKzF25f
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: dc0bda6bb323f039896083e99d145c65
+X-cloud-security: scantime:2.008
+DKIM-Signature: a=rsa-sha256;
+ bh=lgIsyvQcJYcwUSgcecohisKqtgNXJLmWFkJHjuDAXjs=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1768560978; v=1;
+ b=cGqErGWXlzLviCUrgQpzWLSvgmRf6U2AJW2AA+36X1QxbxnyIWv1XTuNY1jMyAC+TdbbVM4n
+ sPZG593SPzGeRolAj+csb2KqD4o35AWglW4/fseHPaR/lg8JdYRxezsrH9BNO9MxmGBc/0OoHMT
+ hDRk/o1mABSdmXv7QMwm6aqWPjMavITMq7f0jpwUpRfp9ajkZtxlU42ZkDSb5ZuSZDnMN8BWb3c
+ QakJohoFSUAgTOGsMKkL4ZnfHv3pQVN1vgwSYM88DOOosFV0xnDFVQEip5EcjWDjzXq5qpEpi6a
+ n8w47+E82rwznhfA6b4QpPw1DcNK03t2LW7TH8KOVPXOA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,131 +105,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+This series includes adjustments to the TQMa6 configurations.
+The RAM timings are also updated.
 
-Thank you for the patch.
+Markus Niebel (1):
+  board: tqma6: update RAM timing to verified settings Rev.0300D
 
-On Wed, Jan 14, 2026 at 09:33, "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
+Max Merchel (3):
+  board: tqma6: Kconfig: select default SoM variant based on SoC
+  configs: tqma6: mba6: add and use defconfigs with general
+    configurations
+  configs: tqma6: activate CONFIG_CMD_NFS
 
-> Currently once a driver matched the compatible string of a device, other
-> drivers are ignored. If the first matching driver returns -ENODEV, no
-> other possibly matching drivers are iterated with that compatible of the
-> device. Instead the next compatible in the list of compatibles is
-> selected, assuming only one driver matches one compatible at a time.
->
-> To be able to use the bind function to return -ENODEV and continue
-> matching other drivers with the same compatible, move the for loop a bit
-> to continue the for loop after -ENODEV was returned. The loop had to be
-> adjusted a bit to still support the 'drv' argument properly. Some
-> simplifications where done as well.
+Paul Gerber (1):
+  board: tqma6: improve config settings for TQMa6x/MBa6x
 
-Nitpick: where -> were.
+ board/tq/tqma6/Kconfig              |  8 ++-
+ board/tq/tqma6/tqma6dl.cfg          |  8 +--
+ board/tq/tqma6/tqma6q.cfg           | 37 +++++++-------
+ board/tq/tqma6/tqma6s.cfg           | 25 ++++-----
+ configs/tqma6_mba6_common.defconfig | 79 +++++++++++++++++++++++++++++
+ configs/tqma6_mba6_mmc.defconfig    |  3 ++
+ configs/tqma6_mba6_spi.defconfig    |  6 +++
+ configs/tqma6dl_mba6_mmc_defconfig  | 74 ++-------------------------
+ configs/tqma6dl_mba6_spi_defconfig  | 77 ++--------------------------
+ configs/tqma6q_mba6_mmc_defconfig   | 73 ++------------------------
+ configs/tqma6q_mba6_spi_defconfig   | 77 ++--------------------------
+ configs/tqma6s_mba6_mmc_defconfig   | 73 ++------------------------
+ configs/tqma6s_mba6_spi_defconfig   | 77 ++--------------------------
+ 13 files changed, 149 insertions(+), 468 deletions(-)
+ create mode 100644 configs/tqma6_mba6_common.defconfig
+ create mode 100644 configs/tqma6_mba6_mmc.defconfig
+ create mode 100644 configs/tqma6_mba6_spi.defconfig
 
-Please don't do any refactor/tweaks in this patch. drivers/core is
-already difficult enough to review without formatting changes (to me at
-least)
-
-I see a couple below.
-
->
-> The modification will only add additional loop iterations if -ENODEV is
-> returned. Otherwise the exit and continue conditions for the loop stay
-> the same and do not cause any additional iterations and should not
-> impact performance.
->
-> This is required for ti-musb-host and ti-musb-peripheral which both
-> match on the same device but differ based on the dr_mode DT property.
-> Depending on this property, the driver is either UCLASS_USB or
-> UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
-
-Nitpick: UCLASS_USB_GADGET_GENERIC (not GENERIc)
-
-> function and returning -ENODEV the other driver can probe instead.
->
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
-> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> ---
->  drivers/core/lists.c | 65 ++++++++++++++++++++++++++--------------------------
->  1 file changed, 33 insertions(+), 32 deletions(-)
->
-> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
-> index 9d1ca38212ee7f53b8894f964f096611c8ec20a5..3d9f9bc93954efdd624dddb1833f3a855c3c28de 100644
-> --- a/drivers/core/lists.c
-> +++ b/drivers/core/lists.c
-> @@ -235,50 +235,51 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
->  		log_debug("   - attempt to match compatible string '%s'\n",
->  			  compat);
->  
-> -		id = NULL;
->  		for (entry = driver; entry != driver + n_ents; entry++) {
-> +			/* Search for drivers with matching drv or existing of_match */
->  			if (drv) {
->  				if (drv != entry)
->  					continue;
-> -				if (!entry->of_match)
-> -					break;
-> +			} else if (!entry->of_match) {
-> +				continue;
->  			}
-> -			ret = driver_check_compatible(entry->of_match, &id,
-> -						      compat);
-> -			if (!ret)
-> -				break;
-> -		}
-> -		if (entry == driver + n_ents)
-> -			continue;
->  
-> -		if (pre_reloc_only) {
-> -			if (!ofnode_pre_reloc(node) &&
-> -			    !(entry->flags & DM_FLAG_PRE_RELOC)) {
-> -				log_debug("Skipping device pre-relocation\n");
-> -				return 0;
-> +			id = NULL;
-> +			if (entry->of_match) {
-> +				ret = driver_check_compatible(entry->of_match, &id,
-> +							      compat);
-> +				if (ret)
-> +					continue;
-> +				log_debug("   - found match at driver '%s' for '%s'\n",
-> +					  entry->name, id->compatible);
-> +			}
-> +
-> +			if (pre_reloc_only) {
-> +				if (!ofnode_pre_reloc(node) &&
-> +				    !(entry->flags & DM_FLAG_PRE_RELOC)) {
-> +					log_debug("   - Skipping device pre-relocation\n");
-
-
-This was changed from :
-
-  log_debug("Skipping device pre-relocation\n");
-
-Please move log formatting to a separate, cosmetic patch. This way, this
-patch stays purely functional, and simpler.
-
-See: https://docs.u-boot.org/en/latest/develop/sending_patches.html#general-patch-submission-rules
-
-
-> +					return 0;
-> +				}
-> +			}
-> +
-> +			ret = device_bind_with_driver_data(parent, entry, name,
-> +							   id ? id->data : 0, node,
-> +							   &dev);
-> +			if (!drv && ret == -ENODEV) {
-> +				log_debug("   - Driver '%s' refuses to bind\n", entry->name);
-
-Same here. We added "   -" to the log, making the diff overly
-complicated.
-
-Locally, discarded these message formatting changes and the diff was
-much simpler.
-
-Can we please re-submit by moving the formatting changes in a separate
-patch?
-
-Thanks
-Mattijs
-
+-- 
+2.43.0
 
