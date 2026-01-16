@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE1FD4A619
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE41D4A619
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2AA2830E4;
-	Fri, 16 Jan 2026 11:01:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 133FC83923;
+	Fri, 16 Jan 2026 11:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EbCVeI1G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vOaj/wuG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 497D2830E4; Fri, 16 Jan 2026 11:01:15 +0100 (CET)
+ id BE94D83956; Fri, 16 Jan 2026 11:01:33 +0100 (CET)
 Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
  [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6F6C83623
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:01:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89D4F8309A
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:01:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-78e6dc6d6d7so19156497b3.3
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 02:01:12 -0800 (PST)
+ 00721157ae682-7904a401d5cso19694297b3.3
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 02:01:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768557671; x=1769162471; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768557690; x=1769162490; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MM6XeCq/YQdBoxFt9PsMgatWvlct1NV0JkCMX+PtOLc=;
- b=EbCVeI1GlS45L+lTxeQ09CnTEqmLl+l2yAFXI/+zanaTDPT6lD/c3ZJrE1hSoGImlg
- iO1KQzsdqOyvL/DSX9a8QLrFtSCcg/hNuTBSEY+sv5K2XHmHiTLuAbbbVLppgL6DWuhx
- xttXqoqymxE//al6laq8AK+OMRJ12kd+oVl2YVbcx5q57jdqFs7ajS+6fpKqoWWB4A/k
- 7vyjbQyTG6e9d+cw7oz8kEnLreJo+UVA6Oo12YhzSoCfGfD/pYvh3w+66ZTbTu/W/0m6
- pyTpGaQTMdktbZA5c80otuKfxOJIGH0HiE7XVjs5wHlQ2FNAq9N3d1kd7gP9HeNOZMsY
- h8Ww==
+ bh=4qu9B8khwtGq7Q26S032+z1PKICTq6vIsvwzmYb08Tk=;
+ b=vOaj/wuGbdEfS4LD+24Cix2gWzczeQtoInQ9Gdi0ndmfmY8yWQ18MSG8vXuNuOkVG5
+ TMJq3BIP9z9YtiClCK66GN+ni0ZOND/9PeO5QlBtIroLWS/1w4Hygk0mWKq5Qv0LSKSK
+ sAv/mACbaL0L5Ct+ggigsTYV1EwzpRTeJ30P3LqN2C4axm4ZZF7ZIDz0r1tPNQabSbv5
+ TJS64cI+2NqcIzhL4J+F1UU1HuzANdVfT4TZCbq8PcL4JX/uEukJLW4P/Yi5JUBChWkM
+ rNrLwMgnBX8cw9KpvjBMQ8Z7Q/NlXk62fzRqOAjGJHS/a6RKr1XiOIapi52O3Jwb4ekg
+ m3xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768557671; x=1769162471;
+ d=1e100.net; s=20230601; t=1768557690; x=1769162490;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MM6XeCq/YQdBoxFt9PsMgatWvlct1NV0JkCMX+PtOLc=;
- b=AvTM8h5U+7kRubi7GMaGpmin6uV6E76kdkbiYVDc6KAoRt2h0K3D6Ip9WKF+np12eT
- WjJFGT8HzhNzfYNbl5Qhy7yiEsP9SsPTWg/NAu2VcqMz5PAY41RQyFQXV6CUuLJLWPSA
- Bg8+w7tFLTvrRuU0QNb44zP0FIWBBPw8dYq07aaNsKVpdHtqCE0nhpq/pbPaFXIh0XTw
- KIYwDnfpTaw6fw5CEssk7XLRosnl1OpgdLgROntCZy16WlOEh9C9RjO+gYTNOuT+UAAW
- e6fqPI+FNe4zZq9LNybf1/0oSFBj62XfcLWXbRtmp3rN3xPCTkGW5ABxYBwiAMRA4ijj
- OOzA==
-X-Gm-Message-State: AOJu0YyXLLSC2YW1XSDJ8JnCUrskvEMSCtDQPqq47nLd/T6a1NLahBG3
- ZuSPQPym5AbkafZ/jfeqCqrrh5w73fB8igCv62qdK7jONxT0NuEhomsn+jSPWbnvZRvyPfbDvbo
- Lx5gjnBw4MF0d0P0lNd1kVaUfM+YnTl5zKPLBkT1RRg==
-X-Gm-Gg: AY/fxX7wvtLixkhQa/l2d0v1MdyB1iXB6434lv6bC7VTpGyz1GIiTSlzEqo87m4N1WQ
- k0Qg09mvBy6yQ5J/samxyAUonaTj8+iRDnaz57hlRydvLYZXHzg82cdkU6nU/yZkH1RBV7RIXnP
- VC4lQPeAxI3jvchSladKaNGOGzadAqj0fnxOEq8V5yy8gMAnthTmEv48iNpKasru4Z17zan2gf8
- S28UY7h4G46OJafEJZALb9Dx5cNQUx9LtqLZlyjkAdP+LEd8mQ7Y0EcuFMBZXpbxS5WV2vNDuS0
- WMHlLujdcwewUkYKN89xFL4bdE1Vs6lNV2EJIQrjh75CRA0F6Rcbwkn9u9JWD55IufXw7lvYJFE
- XcdiksmC+Ez9LmH5erBY2NaY8djeJGXtqvOOWdDSFXmg5Aya2HQPX6ve02PBI/b3jco9aMQ12z1
- JrC6b2WpvxZU0kYDWI7G8fplqVp7R2y9XySPxThZbhaETt8JNu/oXv4Qpc4Y7XZfeeMTRCS3PR9
- Aty9ddDAqQDnBEQol1Jpl9mqk73LvRjdgSVN4tPULydSVLIfaL2WCNLR1DJRaA6eOQOX7GQ+u68
- tZ3xA6JiIbccHJof/bJskxtr89ThmQDK6/i3ch7QV60=
-X-Received: by 2002:a05:690c:f96:b0:78f:aa6d:48de with SMTP id
- 00721157ae682-793c6426151mr18448367b3.0.1768557670724; Fri, 16 Jan 2026
- 02:01:10 -0800 (PST)
+ bh=4qu9B8khwtGq7Q26S032+z1PKICTq6vIsvwzmYb08Tk=;
+ b=Zudl5MuB8INdAz/e81a5wAeLv936Rx10igJio+/Dm389PMUze3mRCUFo3wLVCYV9wz
+ AvWNPtzOveBR7hc1R2Y6BjcGEm7xUPRbK1msw0nORtwob2fIycoEPqjoZt8Sjw0YqPDm
+ PJlTK0/wUy/NV0pnJhuuIkHpyQkp2WbAsOhCTxBovJRgxt7XmYWbCz/fsj/q51YBd75w
+ QjGwPeOGx1hMPg6S9BZ5cNvIh6+qqiCURDHEECbHWlngfCpX3ZMZRW8z6EUjqxLp3PAg
+ 4QvvTzHLQkxvYmvGf8f/eplU1V+i3lLXBEpUnQDGrDiu3OCszF04JxxIOWzNogoucu2s
+ pz9A==
+X-Gm-Message-State: AOJu0YznV1bVjFr4V1NKSwrKBoutEeCM+8z4EGmDAWfH5PbvrobmdEvG
+ XlFyb5AqoGXJlNmSqAP7RONZTA+sJjs3IWlFDInZzcpk682jgzKEeKs+7INZyg3cmeVnKh+m8IO
+ 5KB978QmdJyqJwItYoVuGVycwCdmOn9rLcr2XtFTHVA==
+X-Gm-Gg: AY/fxX7ippP9/iPOB7RjeGvlF5y/6o3xyBrw4VM40DeRWxL7oGlEC3FJR3ZvvurDR5B
+ ymDED4qVkfe/pq2QISdGhlf5FoDDEMGUDe9Y72fAV/O49d4d8YQ9XuMuHHSBOGicnn3PyeABJll
+ VxnDtSTBW6junECQv7aBv0lNFZ0cPg2hmKUrBEGaWqExoNSGUPluzTsp/QAlG774O+tcVGmTTed
+ C/KErSOOhyfqD+02lOZmwiX1wt6JwODTDGKm8d81k78wobSzQ1pechzq5EcPJuBPrx0JEGWLr+T
+ ZeSh5CV56aWRBwrlNN6tZ/GXBk396FFP9Z5upxiF/AytM5RD4o9p+jGV2sgYrBlZBramBjjncGJ
+ 3aFLZnzd0DPsbS4q8QN08ZSogC8jh46smag9zmHe2w6hpHS4BA7JpXxunuOHxDl3lbhMxNR/KSp
+ y0/ZrelXWdbSlKXYgmBrPIhwHjZuRiCeP7Yhgfu1hOXmq53w4M5G0iAipdUcb5aljWvL2bKCiBa
+ 8WBOGGE1LxUnCRSCyy1oQmKS9H3tOoMRkRyjD4VmTFVOvEG38pS2uAhPORGYocAsD/eVKsOBN95
+ 7aLQOXd4YRTRjfP1C/zqhyVV0upgs+uo
+X-Received: by 2002:a05:690c:9a11:b0:78c:6a2b:c6aa with SMTP id
+ 00721157ae682-793c53c6a92mr22292657b3.58.1768557690349; Fri, 16 Jan 2026
+ 02:01:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-5-trini@konsulko.com>
-In-Reply-To: <20260115222828.3931345-5-trini@konsulko.com>
+ <20260115222828.3931345-7-trini@konsulko.com>
+In-Reply-To: <20260115222828.3931345-7-trini@konsulko.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 16 Jan 2026 12:00:34 +0200
-X-Gm-Features: AZwV_QgavaAeUJe1yXKiLq153XtS75ywb8SdPcgwyDkNvtmO2OqNLGvJ11nh-AM
-Message-ID: <CAC_iWjJq-uQQRHjn+WPcUEobT0eAoKi161DjAtx2BLrBoHCB3g@mail.gmail.com>
-Subject: Re: [PATCH 04/10] microblaze: Update linker scripts to ensure
- appended device tree is aligned
+Date: Fri, 16 Jan 2026 12:00:54 +0200
+X-Gm-Features: AZwV_QiG7B_PuE0RJ9MT1HIcQOlgxzmYDutzAdVSCp443B9KyRy-bTyQYFqsds0
+Message-ID: <CAC_iWjKJdEsoNmgh67nE4Ng0-u=dvSomRjh89sp0HFaq=UjJNg@mail.gmail.com>
+Subject: Re: [PATCH 06/10] nios2: Update linker scripts to ensure appended
+ device tree is aligned
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Beleswar Padhi <b-padhi@ti.com>, Michal Simek <michal.simek@amd.com>, 
- Richard Henderson <richard.henderson@linaro.org>
+ Beleswar Padhi <b-padhi@ti.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Thomas Chou <thomas@wytron.com.tw>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,59 +108,43 @@ On Fri, 16 Jan 2026 at 00:28, Tom Rini <trini@konsulko.com> wrote:
 > that we must have ALIGN(x) statements inside of a section to ensure that
 > padding is included and not simply that the linker address counter is
 > incremented. To that end, this patch:
-> - Aligns the final section before _end (for U-Boot) or _image_binary_end
->   (for xPL phases) by 8-bytes by adjusting the ALIGN(4) statement to be
->   ALIGN(8) in the final section before the symbol.
+> - Aligns the final section before _end 8-bytes by adding '. = ALIGN(8);'
+>   to the final section before the symbol.
+> - Remove a now-spurious  '. = ALIGN(x);' statement that was intended to
+>   provide the above alignments.
 > - Ensure that we do have alignment by adding an ASSERT so that when not
 >   aligned we fail to link (and explain why).
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Michal Simek <michal.simek@amd.com>
 > Cc: Richard Henderson <richard.henderson@linaro.org>
+> Cc: Thomas Chou <thomas@wytron.com.tw>
 > ---
->  arch/microblaze/cpu/u-boot-spl.lds | 5 ++++-
->  arch/microblaze/cpu/u-boot.lds     | 4 +++-
->  2 files changed, 7 insertions(+), 2 deletions(-)
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  arch/nios2/cpu/u-boot.lds | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/microblaze/cpu/u-boot-spl.lds b/arch/microblaze/cpu/u-boot-spl.lds
-> index 09abbea84d06..620ef2c96dbd 100644
-> --- a/arch/microblaze/cpu/u-boot-spl.lds
-> +++ b/arch/microblaze/cpu/u-boot-spl.lds
-> @@ -50,7 +50,7 @@ SECTIONS
->                 *(.bss)
->                 *(.bss.*)
->                 *(COMMON)
-> -               . = ALIGN(4);
-> +               . = ALIGN(8);
->                 __bss_end = .;
+> diff --git a/arch/nios2/cpu/u-boot.lds b/arch/nios2/cpu/u-boot.lds
+> index 5b9e27d94062..fc366d44341d 100644
+> --- a/arch/nios2/cpu/u-boot.lds
+> +++ b/arch/nios2/cpu/u-boot.lds
+> @@ -60,8 +60,8 @@ SECTIONS
+>           *(.sdata)
+>           *(.sdata.*)
+>           *(.gnu.linkonce.s.*)
+> +         . = ALIGN(8);
 >         }
->         _end = . ;
-> @@ -61,3 +61,6 @@ SECTIONS
->  ASSERT(_end - _start <= (CONFIG_SPL_MAX_FOOTPRINT), \
->          "SPL image plus BSS too big");
->  #endif
-> +
-> +ASSERT(_image_binary_end % 8 == 0, \
-> +       "_image_binary_end must be 8-byte aligned for device tree");
-> diff --git a/arch/microblaze/cpu/u-boot.lds b/arch/microblaze/cpu/u-boot.lds
-> index a2c8fb2e21c0..70fa49c31712 100644
-> --- a/arch/microblaze/cpu/u-boot.lds
-> +++ b/arch/microblaze/cpu/u-boot.lds
-> @@ -67,8 +67,10 @@ SECTIONS
->                 *(.scommon)
->                 *(.bss*)
->                 *(COMMON)
-> -               . = ALIGN(4);
-> +               . = ALIGN(8);
->                 __bss_end = .;
->         }
->         _end = . ;
+> -       . = ALIGN(4);
+>
+>         _edata = .;
+>         PROVIDE (edata = .);
+> @@ -124,3 +124,5 @@ SECTIONS
+>         .debug_typenames 0 : { *(.debug_typenames) }
+>         .debug_varnames  0 : { *(.debug_varnames) }
 >  }
 > +
 > +ASSERT(_end % 8 == 0, "_end must be 8-byte aligned for device tree");
