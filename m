@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7150AC982DF
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FE4C982D1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42E39839AC;
+	by phobos.denx.de (Postfix) with ESMTP id 7E9D9839DD;
 	Fri, 16 Jan 2026 18:33:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mr66rcb0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GEM3nHd8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56B8C8399B; Fri, 16 Jan 2026 18:33:03 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 4E79F8389A; Fri, 16 Jan 2026 18:33:04 +0100 (CET)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A0B08389A
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:33:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 144FA8367F
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:33:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-66109b09b53so824260eaf.1
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-40423f8c5faso1546713fac.0
  for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:33:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768584780; x=1769189580; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768584781; x=1769189581; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y+PwtMTnOicppussyni6o98rQLi03keyUi3tKBQ4rUg=;
- b=Mr66rcb0ge03jvVaEP8lUvGhbdcezlJzv6iPq71iLYKS1hNhv9coRj4G1uVZEGViEE
- VKBR6VY9lDYeQX5HBbDY38cUAQXSiXL9yB5lw2n1zAMYGNoh8GC5ko7/17uRkgCtcBFk
- C5WCV3+aWSA5eAXJ8X86nnwVg3tJfqWGZf+Bo=
+ bh=7H+Pv2UKrxDe8hApuYHyc7kOx40lFWmASZ1Pc2yXOYQ=;
+ b=GEM3nHd8phYQAmtGJU3wmzPnBHhzpS2OWVm/4bu8RxXWXEKD/j2OcV47atdFrGPN6P
+ SvDrgUl3K1uFmar9RC4/aBp/pqLiQiygnCoASI87x48aYy9LgZq4XPfj/O/Xj8VUB3iW
+ 6rcx1XM5qPxpMUYtkVhPRs3cXd+BBLL39B3kg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768584780; x=1769189580;
+ d=1e100.net; s=20230601; t=1768584781; x=1769189581;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Y+PwtMTnOicppussyni6o98rQLi03keyUi3tKBQ4rUg=;
- b=BPvC8pZ09Qh1OAjca5bLKBYShOO8XSBvvWoLOjJ8snS9kAqp/mOTipLi87BcSFrrrk
- 0cVAQAufZwLXTrLcccBhMUEdOFd+OYdEAhcU4HnyJXrGW2+0ynhBq+Pdilm2VZhWk/r4
- fRZpvdrYyzIdKRzHDCLSvL/ThMPQO1QRHg+6K+oK/J4ObcAgv2eqL4Tkh04+d196JmAX
- W0xO0EsRsWBUwmlh+EVXc5aj+ZHxP8ouOXSuBasR1hESEudXDk7tqJTr0KQ/0WVpKM1q
- ijFCoqXaefhe3cDiqgW0nn7JfYVrSYk5BY14XdGuiwBRVbheaeRMbdqBahyLmjl/JP19
- B6SA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUgwc//yphecX7eo92JhVC1qlDULVZxUP1k7HtGOdnYNy4Db3M9o5qcUdQCX0Uly+guY2xoe0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxX9QgS69ADtqepkFXdlVHQPihN9swFV2NGo/eiXiins/q8hboi
- 7FmI5XgFBR39Z3qDP9sMBdyUUOhZ26eyvX85KMZv2Eo9MuBl8o3DVAKbRT9EhdCnkuY=
-X-Gm-Gg: AY/fxX5fNMTAVSeLCvuuRsPlIzkbrFvnzgsw/4TomccX2gvcznQp63VwYktX91AzZjJ
- Jm3/W9BRggL9lWMPjMafbSXlKos7MJePijAl9kxnyLfcZzW41tkBG2gqdV+3Wr/fRzJq/50eNhp
- r9lKmjiWZLoLbQr0/cZAC/eEGu71QjFk+QwqOiGWMePzlsoSIvrm7xrKHVE47h4+qedfcL+vonk
- jMdQm1HIRVokBGVRsphLA9e9nRxgvnN3PevPDrbdLXJLUnTetL77RozXX2h49eUHuOgb8AgIQa/
- a97W5g8IfZ/C7VjryzmbUyCiDmPPCLIlfS+nWNLPCr6XObkBoQZJDztTd8L0pw7EIEHP0wdU79K
- mIS8inycxd1V9mg37bBfgVouQsfvDWhM+/IXyIuruLyvN94sU4A2kB62RREJuW9Obd8E/XPcAM3
- C9VZW/reNGza3G2JlylZhPuo9YRXJmcLOheerKTabikEFAEcH9G9zzsztwczv2ZIM+423GNoBsQ
- FLt8++8fcRj+rD1H/HArGHXsj9oaxezFotmkA==
-X-Received: by 2002:a05:6820:160a:b0:65f:6b5b:b1ac with SMTP id
- 006d021491bc7-6611796a737mr1463397eaf.18.1768584779752; 
- Fri, 16 Jan 2026 09:32:59 -0800 (PST)
+ bh=7H+Pv2UKrxDe8hApuYHyc7kOx40lFWmASZ1Pc2yXOYQ=;
+ b=UdY0wbrsAiZNGbdpJUBdqxL3eGx7Cxv+qNnjunhEr8Z2Im8yvtUefNieVJ/751um+E
+ rBYmcR1rPrqMmP3nguMDJLnqhORDjzoZ4XGMP9/lBs9UAf1EqE+oghq81qhELOqYDgbk
+ GTZC7+/velkUuMTyLZj+q9WNaqX7+1bqF7kkb78J3K5BgDhNcEEsfwEvFwNpYPz31gTE
+ XZWzm6d1BlTa2fG7gNl3Pl6LBWxdlL8IgxJ9ea9CktYnHWiCdLIYpuubAwYe2q7iU4Ng
+ 9KaShkV1VcHC3Ku9wJQ3NcQSoKI42DmsUqn722sE4qsjA6dUA8HejpxKwTY9HDFCG5If
+ NMgQ==
+X-Gm-Message-State: AOJu0Yy41omUPSV+v6mL1HAnc0Wjzv0//YNTJr3RxmVqQscF0TTMgIlT
+ XKVPT0ZndM9Rqyb70tC6kj9I4oRxMUVQLdR6syJQFR80zFSj59UR7eSpNaQ+9C/UEsuOJUmMhXi
+ roC/i
+X-Gm-Gg: AY/fxX4jh5CmT+xPP/YWiztzytDVSQUFqbtN9SjX5676hv2hlT1j2DTw9r9Y0XalMql
+ JmQ7D7/Id2BzgDqQe3sfTwTo91zE4pxuaAzHC2/FAHUYBiGwf1nnHMepmCRUwi7ednjlERI/q85
+ /BHJcIvab+4yZgHsKqk3nNL8oz1CsUBL1nJao3mmheZLIzy+JZLihh7KrT19eVxFMTguQchaY37
+ W53F99oBuLUifswYM85GXRkZxCw5nJhupdUtmrurt6nieo7O774Am9DJLNzTWeL0p2yyGrDjhIw
+ bfZBAvVnoUWhixe9GHXFW3Kdo5bzVaaSi3LTWFu46QiiUJ6C7WP1N8u1Ea1rCZALPfXJFCOwWw0
+ JRKjFiy+gant94IDuXNMXYPWc5XAly2JwbBveljeER1C3Y1pmZg50Vk2nVOc4O1vBzbj6d3yxQc
+ rG1KQBLsYpbKZoxbpaveIW9KJp4dTfn3/CjX8JpgskVJfQN7yQKl+DA4nmUOuePEJ9oBzMUKRv+
+ pcyVh4N42qWbz5/MStt2SmHGkqIjbBWhzeK2g==
+X-Received: by 2002:a05:6820:6acf:b0:65f:6ac2:785c with SMTP id
+ 006d021491bc7-66117973657mr1649883eaf.34.1768584780768; 
+ Fri, 16 Jan 2026 09:33:00 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-661186ca7aasm1494068eaf.2.2026.01.16.09.32.58
+ 006d021491bc7-661186ca7aasm1494068eaf.2.2026.01.16.09.32.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 09:32:59 -0800 (PST)
+ Fri, 16 Jan 2026 09:33:00 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Jerome Forissier <jerome@forissier.org>, 
- Jerome Forissier <jerome@forissier.org>, 
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Francois Berder <fberder@outlook.fr>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Sean Anderson <sean.anderson@linux.dev>, 
+ =?utf-8?q?Petr_Bene=C5=A1?= <petr.benes@ysoft.com>, 
  Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260108-spl_net-deps-v2-1-e412128520f2@cherry.de>
-References: <20260108-spl_net-deps-v2-1-e412128520f2@cherry.de>
-Subject: Re: [PATCH v2] spl: fix incorrect dependency for SPL_NET
-Message-Id: <176858477863.4075554.4815770186199519667.b4-ty@konsulko.com>
-Date: Fri, 16 Jan 2026 11:32:58 -0600
+In-Reply-To: <87sec5d21q.fsf@kernel.org>
+References: <87sec5d21q.fsf@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20260116 into master
+Message-Id: <176858477997.4075554.12203380251943615160.b4-ty@konsulko.com>
+Date: Fri, 16 Jan 2026 11:32:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -106,25 +101,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 08 Jan 2026 13:28:36 +0100, Quentin Schulz wrote:
+On Fri, 16 Jan 2026 16:12:33 +0100, Mattijs Korpershoek wrote:
 
-> When SPL_NET is included, scripts/Makefile.xpl includes net/. However,
-> in this directory, the Makefile only compiles things if CONFIG_NET or
-> CONFIG_NET_LWIP is defined (it doesn't use $(PHASE_)). Therefore, at
-> least one networking stack needs to be enabled for SPL_NET=y to do
-> anything meaningful.
+> Here is a PR for master
 > 
-> In certain cases (e.g. am62px_evm_r5_ethboot_defconfig + NO_NET=y via
-> menuconfig), it is possible to fail the build with undefined references
-> (since include/net-common.h does check with CONFIG_IS_ENABLED(NET) which
-> would be true for SPL_NET, but the implementation wouldn't be compiled).
+> Android:
+> * Fix missing dependency for BOOTMETH_ANDROID
+> * Add bootconfig support
+> * Add 'get ramdisk' command to abootimg
+> 
+> DFU:
+> * Improve error handling in dfu_fill_entity()
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] spl: fix incorrect dependency for SPL_NET
-      commit: cb1d775d253c84a0eee0db94d8bf4145d9fd7bd3
 -- 
 Tom
 
