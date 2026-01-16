@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A48D4A60E
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A6ADD4A60E
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6FB483015;
-	Fri, 16 Jan 2026 09:35:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BF9383015;
+	Fri, 16 Jan 2026 09:41:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tnBN5Z5U";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fqDzqqll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FBC18309A; Fri, 16 Jan 2026 09:35:19 +0100 (CET)
+ id 07F62830E4; Fri, 16 Jan 2026 09:41:35 +0100 (CET)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66B4982BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:35:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B728182BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:41:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3AA006016B;
- Fri, 16 Jan 2026 08:35:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73182C116C6;
- Fri, 16 Jan 2026 08:35:15 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 7787F6016B;
+ Fri, 16 Jan 2026 08:41:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3413C116C6;
+ Fri, 16 Jan 2026 08:41:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768552515;
- bh=5D3wbBf0BHzRIUy7DnfGeTJT6DKCeReqBJUaiIQ203Y=;
+ s=k20201202; t=1768552891;
+ bh=8nuggKW2oWH77TIxwXooHNfTjX4M1kEqmFgPKwu2Ka8=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=tnBN5Z5UTJXQO1gyoDKb55AkHCoJ2SjndYupbGQAahTss5XuVu+1Ny+twDW78IBow
- ArxyKzfv5kNe6XIXv4VqX5Dj7hS7MabnRLVDXcBusHlkUEnxBl/O9QCI4NYvul5Fob
- 1QqewCpkLGmbWs18aoXCr3URL1UMGN5h3nQmMHHXYhlFInF1qDQa7ONz+mO3ENj8Qw
- qO0hixz2tu/c4TABvb66XvZOrWZbYiZyTzpoqvXYTnDfbwtMVjPIbaHyS4LB7NvIFb
- 2Q/Urpx1zxRmRpdvs2MoD9DJ7sdvemGxe66f15r5RrlyoR4nlGHCPN8cxcPN9JnGRQ
- fYU1HgDVj18JA==
+ b=fqDzqqllnMHxPSKVIDbA316V/Lysa7x3PNZPbpDs9n1cX2HW4Vkhj/eabi5cWRVzm
+ bwkrMcM6YSDpvCVe2znZfs33eQ81endZhLtP/dc9b1iOmazoqpi4Y0GXxfZa0gxjpL
+ +y+ngqXpICgO81GKqDVUXFd53Z2N7riAmX0hGWIesCG86i6yvQQWdV9VIIeQIi+xMi
+ rYHb6+dp7MjNNWZqaMCOpC240v98SLh7QWNebp8G2eHR6Be2RX9PXU88I048pIl5fQ
+ 4EUsOEdslfrVwlaxKpa40hdSz2r9/aYRopQTZKLrlu82u6Vade6y5K5SEEBeeDxh3U
+ riq277DLZCYvA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
  u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
@@ -48,14 +48,13 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Marek
  Maincent <kory.maincent@bootlin.com>, Svyatoslav Ryhel
  <clamor95@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, Dinesh
  Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>,
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Simon Glass
- <simon.glass@canonical.com>
-Subject: Re: [PATCH v3 4/6] test: dm: Add compatible multimatch test
-In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-4-ebb8d990b9df@baylibre.com>
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Subject: Re: [PATCH v3 5/6] usb: musb-new: Relative ctrl_mod address parsing
+In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-5-ebb8d990b9df@baylibre.com>
 References: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
- <20260114-topic-musb-probing-v2026-01-v3-4-ebb8d990b9df@baylibre.com>
-Date: Fri, 16 Jan 2026 09:35:13 +0100
-Message-ID: <87ldhydkfy.fsf@kernel.org>
+ <20260114-topic-musb-probing-v2026-01-v3-5-ebb8d990b9df@baylibre.com>
+Date: Fri, 16 Jan 2026 09:41:28 +0100
+Message-ID: <87ikd2dk5j.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -80,17 +79,24 @@ Thank you for the patch.
 
 On Wed, Jan 14, 2026 at 09:33, "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
-> Add a test for binding of multiple drivers with the same compatible. If
-> one of the drivers returns -ENODEV the other one needs to be bound.
+> For the upstream DT the ctrl_mod node is using a relative register
+> address which is not translated by the current code.
 >
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
+> Make address parsing understand relative addresses.
+>
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+
+I already reviewed this in v1 and the patch did not change in v3:
+https://lore.kernel.org/all/87v7hdzge3.fsf@kernel.org/#t
+
+Can you please explain why you have dropped my Reviewed-by?
+
+Anyways, putting it back so that b4 picks it up.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
+
 > ---
->  arch/sandbox/dts/test.dts |  4 ++++
->  test/dm/core.c            | 15 +++++++++++++++
->  test/dm/test-driver.c     | 26 ++++++++++++++++++++++++++
->  3 files changed, 45 insertions(+)
+>  drivers/usb/musb-new/ti-musb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
