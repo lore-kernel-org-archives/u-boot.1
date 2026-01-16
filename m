@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7189C982F0
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2978C982EE
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:24:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F75838A5;
+	by phobos.denx.de (Postfix) with ESMTP id 6F1958399B;
 	Fri, 16 Jan 2026 19:23:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mVBrPx0/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q9IdHnpF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0AF68397D; Fri, 16 Jan 2026 19:23:44 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 0A3278367F; Fri, 16 Jan 2026 19:23:45 +0100 (CET)
+Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
+ [IPv6:2001:4860:4864:20::43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A2508394E
+ by phobos.denx.de (Postfix) with ESMTPS id D681A8367F
  for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:23:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7cfd6e0173cso1204316a34.3
+Received: by mail-oa1-x43.google.com with SMTP id
+ 586e51a60fabf-3f9ebb269c3so1309914fac.3
  for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:23:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1768587821; x=1769192621; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/VwrrCcD8CGyOU2jbup2kD7o0JYi0mnkCisvpE1T/2w=;
- b=mVBrPx0/kU4DZKVvdVJJzi9xxy1441s4Khz8e2WUv/yhbmY7c7J3BJl44hHq1iAYwi
- BhEiH0kHtIRvpwRB+S6kn83eAaz6Imh71tpHNs0YlUybkOJk1StRCYdOycpYINZhYVeE
- cxNKIREAWPYiejbYbuCRZWuexR/p6nYMh8bi8=
+ bh=nt9wS3KStcnq+7Vl7NdPU6lP0DthLpbaeVYte7k6zf0=;
+ b=Q9IdHnpFlfxSIo3XV4WPGR/UraHDEUoVCRy6G34JBsEEGb/J5MLgNjYMdlWgJeR+6h
+ v5n2rsnVW+ATEXGyvdNTdr3XOJuzGRIHGuzLPYjrmppJYxf+FFrkZmBjCxaxR95Mtbx0
+ xg5fF/tpaaYFfPbNpi50pPiPHcprcxGKkAS0c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1768587821; x=1769192621;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/VwrrCcD8CGyOU2jbup2kD7o0JYi0mnkCisvpE1T/2w=;
- b=JG0hhiDRm95/QdIoqV0P/PZ1OfAZ4r/EX1oMxajwyYiqfj4uCboGuasybFV6e696tc
- ABChS6KLo+XMAQ/2Uan4a4qwlJwQZHjLnqKO1VMXddH+Cs0hfrXhNQqMow51c7bxmU/l
- vGarPzeou88TRsKScYA7epq5kvj4XUQqmaXVZGbtoXEN43l7FXBkCrasy96FBbuknjKE
- gtFZ6UhFIBhS2Hu/IF8odRpL+I4fKyczUvgHm3STpOqMaN0a381L76Jj8uslprZPIQ3+
- CJcO0k6u6IN/2w+chZ/9P2D4a8x08a1KIi7C8N0n0RtXi8ua6WgG76AhRCznfEA77z/e
- ZCCQ==
-X-Gm-Message-State: AOJu0Yy3WofzsIg1+3neUA6hUUEfxIn0bjlUmuM5TzNaKxTmV4uRX+6E
- 0LMDKrGv18C7fub6MERZyqmb5xClbOnm2DSAaTxl+YH2Y5VyyDHqaPsyqvtlBGskf9mIB5nhtv8
- 24Gqnb/0=
-X-Gm-Gg: AY/fxX6o+gOMv2DwzLQXHTJP/ubbnxEiSdSHVKHYGjzmwlU4IrzbnzAcubaL4arMjk0
- At8MWlSYqOI8/T1fDCy/faGCr+bCLas7CkeiClUSsB/D5T79iUhM9ymvegNzdg6Ol0XegNi6a/6
- qFDWYsmuy6EgNBzq/FzRu4Wj/DOypdccBIOnLTONbz2nYyX6NbxGs1kz9NtYYj+ELt7oTMNrsRT
- 9LX0V9D5eKGC4Y2TSYKgcviYgOY8QX5PZBvRHTXE+wz8WLYOEJKW21LvTS4lmvVguRg+A7QJnMn
- GqOdTpawsZ8u2hAcTnZYxrcKLE6wXRdP4HkRodBpM+lUHFNzgZYzdNlEXaIeKX/p//j7iyjylOf
- XK/Q2YvQIdNO08RPhktPaDVXJ31JrYoAebB5VfaX1hq0hmEUZoQsuiNLr9CDZQ0iZ79pJp4iesi
- 8Y5SN1F+aCD6bKUzgMOu4mjt2pPxLpJaBId4G9QSTg7ZJ+R43VCOddwM7uJPXeCkqsZS62/ClAF
- G0KC+Fl4BEnMkSirvd8R/5YvZ/y3McLhopYMOUvbDhsm2rlmww9
-X-Received: by 2002:a05:6830:3113:b0:7c5:3c7d:7e67 with SMTP id
- 46e09a7af769-7cfdee8f7bbmr1641344a34.29.1768587820856; 
- Fri, 16 Jan 2026 10:23:40 -0800 (PST)
+ bh=nt9wS3KStcnq+7Vl7NdPU6lP0DthLpbaeVYte7k6zf0=;
+ b=Xx4N5bolrg9zQeLCNeNmkGIhOfFPb/hC57bMEy1aliuc3vaEZEV8GHN8FYIEC4e4SA
+ azT+mn3Mz6IehV/YiVTAkmzVOcdQxSGhBl2ZH1lZoQ8hTpuEpRmWwPJdxZWDYM2xh/ph
+ DL+Cuz7jVEAO9K9y4UTsljTB9Ikm18BkO7eOreRPMGKzIW4seSCrA/CShiG4qIGPJiks
+ ae7KvbxyE7MjxZidb+Mz2CHy5v9e9M+0zHN5oLj8xycSPvYsJYVEvsfhC/ZuD1DNk+Ra
+ 3TIDYbK8OdKpRFmpsoD/KP+wzp48LlZULGV/yKxFMX4nXMBYMGnPCsT7UmMIfjKT42tN
+ fPjQ==
+X-Gm-Message-State: AOJu0Yw3AIDvW59s8GqwPsTy8HjrmJs99OGiqc8H5Cvy2Ltl3TtKz/PM
+ /K6QDDB/G01O5utLvrtEWCmN6nEfWwCFgU9CJvcwGgzA7CDvPpx/DrT7EpiATaONJFZbJagjGHt
+ roPHuwU4UMg==
+X-Gm-Gg: AY/fxX7cC0wfn6iSOWdnzSceDmAUBa7qg14lRtzlehaIvc0E7uVgYYlZ6Ria8Z5RqOm
+ Zqe4pY3nZyiWAJ23XniFK5HQ8vh0+e7NRs4zkuovRHv+lC31HmlXft3F2pv4UvmAPx6/tUVvQkM
+ L1b9kk5P7vczw+qIjdn5mF/89PK6pae3uoKzVPH2nMJ5gx1mBou1hNiaGrCdGYfdy5o4wjD9jw/
+ pZMGGkJyJrA4tBGl6HbKDn19QT5xETPFQpDhsYpM70zIiT+osqlDRik/nQ9oRmq/EToreRrpSnq
+ Ym2NlCtAivmJeow1t8yLfyCLxMgLzMJY2YstkRv3Zk40bs8kJLNB7qITlynqsXZUCgeh4xTV5EQ
+ HwIYAZqcuB2nsAM4/Vkmn9s9CkAXP1/soCKY/LBu54rGrGKgKHO/WvI87QehHbstrPj8btfOjPJ
+ +IuPMaifhXr65xXE0OWDaAIvW7BzPmyNasr81yHFWR5Plzdykk48EWyYh06Fy1iewnishYz/hUJ
+ YYJDMG6UtZwNhUABGQpx8BPL1N3B4gH+wo4LX0ILlEoZMiBwHSz
+X-Received: by 2002:a05:6830:6d2f:b0:7cf:dc2d:8508 with SMTP id
+ 46e09a7af769-7cfded3d668mr1920115a34.1.1768587821652; 
+ Fri, 16 Jan 2026 10:23:41 -0800 (PST)
 Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf28ef44sm2152994a34.18.2026.01.16.10.23.39
+ 46e09a7af769-7cfdf28ef44sm2152994a34.18.2026.01.16.10.23.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:23:40 -0800 (PST)
+ Fri, 16 Jan 2026 10:23:41 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, E Shattow <e@freeshell.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 2/3] doc: develop: process: Rework the custodian feedback
- section
-Date: Fri, 16 Jan 2026 12:16:49 -0600
-Message-ID: <20260116182335.4081828-3-trini@konsulko.com>
+Subject: [PATCH v2 3/3] doc: develop: process: Explain when/how Custodians may
+ edit patches
+Date: Fri, 16 Jan 2026 12:16:50 -0600
+Message-ID: <20260116182335.4081828-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260116182335.4081828-1-trini@konsulko.com>
 References: <20260116182335.4081828-1-trini@konsulko.com>
@@ -98,71 +98,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have two items here, rework this slightly to be using bullet
-points, and so easier to expand on.
+As seen with commit d503633a3676 ("Revert "doc: board: starfive: update
+jh7110 common description""), it has not always been clear what is and
+isn't allowed by custodians, and what the expectations are. To prevent
+further unintentional conflicts, document the limited cases where
+custodians are allowed to modify patches directly, and how to do that.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v2:
 - New patch.
 ---
- doc/develop/process.rst | 43 +++++++++++++++++++++--------------------
- 1 file changed, 22 insertions(+), 21 deletions(-)
+ doc/develop/process.rst | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-index 81e1aa7e34db..6f5bdd3db957 100644
+index 6f5bdd3db957..775a855fd7a0 100644
 --- a/doc/develop/process.rst
 +++ b/doc/develop/process.rst
-@@ -132,27 +132,28 @@ It is their responsibility to pick up patches from the mailing list
- that fall into their responsibility, and to process these.
+@@ -144,6 +144,12 @@ feedback to the submitter of a patch about what is going on:
+     feels it has been too long since posting their patch and not
+     received any feedback, it is OK to follow-up and ask.
  
- A very important responsibility of each custodian is to provide
--feedback to the submitter of a patch about what is going on: if the
--patch was accepted, or if it was rejected (which exact list of
--reasons), if it needs to be reworked (with respective review
--comments). Even a "I have no time now, will look into it later"
--message is better than nothing. Also, if there are remarks to a
--patch, these should leave no doubt if they were just comments and the
--patch will be accepted anyway, or if the patch should be
--reworked/resubmitted, or if it was rejected. However, if a submitter
--feels it has been too long since posting their patch and not received
--any feedback, it is OK to follow-up and ask.
--
--Another form of feedback is about applying the patch itself to the
--source tree.  The custodian is expected to put in a "best effort" if a
--patch does not apply cleanly, but can be made to apply still. It is up
--to the custodian to decide how recent of a commit the patch must be
--against. It is acceptable to request patches against the last officially
--released version of U-Boot or newer. Of course a custodian can also
--accept patches against older code. It can be difficult to find the
--correct balance between putting too much work on the custodian or too
--much work on an individual submitting a patch when something does not
--apply cleanly.
-+feedback to the submitter of a patch about what is going on:
++    * A custodian may make spelling corrections, spacing fixes and other
++      obviously correct trivial changes. They must also in turn amend
++      the commit message noting their change inside of ``[]`` and add
++      their own ``Signed-off-by`` tag. All other changes must be handled
++      by another iteration of the patch, or follow-up patch.
 +
-+  * If the patch was accepted, or if it was rejected (which exact list
-+    of reasons), if it needs to be reworked (with respective review
-+    comments). Even a "I have no time now, will look into it later"
-+    message is better than nothing. Also, if there are remarks to a
-+    patch, these should leave no doubt if they were just comments and
-+    the patch will be accepted anyway, or if the patch should be
-+    reworked/resubmitted, or if it was rejected. However, if a submitter
-+    feels it has been too long since posting their patch and not
-+    received any feedback, it is OK to follow-up and ask.
-+
-+  * If the patch itself can still be applied to the tree. The custodian
-+    is expected to put in a "best effort" if a patch does not apply
-+    cleanly, but can be made to apply still. It is up to the custodian
-+    to decide how recent of a commit the patch must be against. It is
-+    acceptable to request patches against the last officially released
-+    version of U-Boot or newer. Of course a custodian can also accept
-+    patches against older code. It can be difficult to find the correct
-+    balance between putting too much work on the custodian or too much
-+    work on an individual submitting a patch when something does not
-+    apply cleanly.
- 
- Review Process, Git Tags
- ------------------------
+   * If the patch itself can still be applied to the tree. The custodian
+     is expected to put in a "best effort" if a patch does not apply
+     cleanly, but can be made to apply still. It is up to the custodian
 -- 
 2.43.0
 
