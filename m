@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0473FD4A616
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 09:24:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25EFD4A617
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 09:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DFEB83015;
-	Fri, 16 Jan 2026 10:24:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5AD2C83015;
+	Fri, 16 Jan 2026 10:28:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gU0VX89g";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sa+3crE7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11FDB82BF2; Fri, 16 Jan 2026 10:24:34 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 948C28367F; Fri, 16 Jan 2026 10:28:34 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 518A382BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:24:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 95A2C82BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:28:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5C9D160160;
- Fri, 16 Jan 2026 09:24:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C284C116C6;
- Fri, 16 Jan 2026 09:24:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768555470;
- bh=cfOueI+L9hzCZOIvQ3XOM2g7bEoara7VRZt4ZLCBx1g=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gU0VX89glU+pX3LGW/EtwbaCmJQdEXsLDv8liocF7l4a53laAbQnLNBOp1VSECETW
- 4zYCtFPEps6xJU0k6wBghqcZg3d9mGaCVabixdRsTEF+2u4kv4jNuHr32AuLOoVxOB
- J1wOFH5RenTWI3hPA7O/cvrE18rEJeSC+VJp397utHc2Que6ivWfBrXEfq2G21KJo1
- QoPFuwUzhln5wujFoGCYeaglbP+y8O98bP8iFwLontPJYq1Cl9ThRi2OjMZbEfSeQp
- l4h6mgJrSOs5cJJIjGJ0X4fqpctq0amF7gBRN+9A5GoC7Ht06wkeRDbZKDINGYObmq
- AVpfbzq9RNTbA==
-Date: Fri, 16 Jan 2026 14:54:20 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, jh80.chung@samsung.com,
- rui.silva@linaro.org, ilias.apalodimas@linaro.org,
- quic_varada@quicinc.com, me@samcday.com,
- marek.vasut+renesas@mailbox.org, miquel.raynal@bootlin.com,
- alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
- w.egorov@phytec.de, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v7 1/4] power-domain: Add QCOM RPMH Power Domain Driver
- Support
-Message-ID: <aWoDxCKE3e4Lx2DE@sumit-xelite>
-References: <20251222114823.2146775-1-aswin.murugan@oss.qualcomm.com>
- <20251222114823.2146775-2-aswin.murugan@oss.qualcomm.com>
- <aU5Zi7yVPWOiv_B5@sumit-xelite>
- <3354f9f0-12ba-4e7b-9f9e-f638c3606dd4@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=6bf5=7V=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1768555709;
+ bh=s+ssgHlPi8vu3cMAxZeM529HtGh6xUgC25FArTo6Zl0=;
+ b=sa+3crE7NAa9WNFaKgAnEPsqJ09Sm3UvfTGUY4kkp5HtbsQFFAbv/OSOmH0SdJoiYxpnA9w3C
+ 3iDZi0VzQjFQyUdcmYlPbA5rsc382qL9aWT6g7bhsjOvntTt1FA0IjbHzV/Nj3ygYxNua1Ol0Se
+ u/EJRxSyjEzQq2TAit8boCwYi+XEoQlw6oUSpSa0IJJwht8+YlGhMNPlEM05NrIEPU5P5vx1gvd
+ gIn5c2RqSPnHNu8mZcKtNjXdrqPnBnJVZxNziIUh0XBrzEJyI9vHoy+wEvEEVS+R+FWHhkwkpzB
+ vr4asJgzdiJ3+tDMZIUaH3VxV++MLU/+H8CKVkrbgzTw==
+X-Forward-Email-ID: 696a04b8b4d26d848ca52535
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.2.8
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <77a9bf3d-6662-43fc-9ada-fedc5e611d23@kwiboo.se>
+Date: Fri, 16 Jan 2026 10:28:20 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3354f9f0-12ba-4e7b-9f9e-f638c3606dd4@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: lwip: add TFTPSERVERIP Kconfig option
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jerome Forissier <jerome@forissier.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260106203433.3133926-1-jonas@kwiboo.se>
+ <7d2ac045-d364-4d37-b654-aa704cc07a7b@cherry.de>
+ <7f9d6ad3-afd2-4364-8d33-8510e183642c@kwiboo.se>
+ <a8a8dd8d-dfc2-4274-9203-a88d9bcb8a69@cherry.de>
+ <c9664240-002a-418d-9301-e8307e3e0aea@kwiboo.se>
+ <36c506b5-228d-47ab-ac6f-fb6dd784ff46@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <36c506b5-228d-47ab-ac6f-fb6dd784ff46@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,395 +79,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 13, 2026 at 04:13:30PM +0530, Aswin Murugan wrote:
+Hi Quentin,
+
+On 1/15/2026 3:20 PM, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> On 12/26/2025 3:16 PM, Sumit Garg wrote:
-> > Hi Aswin,
-> > 
-> > Thanks for the driver port.
-> > 
-> > On Mon, Dec 22, 2025 at 05:18:20PM +0530, Aswin Murugan wrote:
-> > > Added support for Qualcomm RPMH power domain driver, responsible
-> > > for managing power domains on Qualcomm SoCs. This is a port of
-> > > the Linux RPMHPD driver [1] and sa8775p related changes.
-> > > The
-> > > power domain driver currently has support to power on and off
-> > > MMCX power domain of sa8775p;
-> > IIUC, the MMCX power domain relates to multimedia use-cases. Do you have
-> > any such use-case for that in U-Boot? IOW, I don't see a user of the
-> > RPMh functionality you are trying to add in this patch-set.
-> > 
-> > Yes, MMCX is tied to multimedia, and in our case, it is required for
-> > display initialization in U-Boot.
-> >
+> On 1/14/26 7:29 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 1/14/2026 6:08 PM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 1/14/26 4:37 PM, Jonas Karlman wrote:
+>>>> Hi Quentin,
+>>>>
+>>>> On 1/14/2026 4:01 PM, Quentin Schulz wrote:
+>>>>> Hi Jonas,
+>>>>>
+>>>>> On 1/6/26 9:34 PM, Jonas Karlman wrote:
+>>>>>> With the legacy networking stack, it is possible to use USE_SERVERIP,
+>>>>>> SERVERIP and BOOTP_PREFER_SERVERIP Kconfg options to force use of a
+>>>>>> specific TFTP server ip.
+>>>>>>
+>>>>>> Using the lwIP networking stack use of the 'tftpserverip' environment
+>>>>>> variable provide the closest equivalent functionality.
+>>>>>>
+>>>>>
+>>>>> It does read serverip environment variable if it's set, so this should
+>>>>> match the behavior with the legacy network stack no?
+>>>>
+>>>> This is what I first thought, however it seem that the lwip stack differ
+>>>> slightly from the legacy stack, in that the dhcp lookup always seem to
+>>>> reset the serverip env var.
+>>>>
+>>>>> As for BOOTP_PREFER_SERVERIP, this would need to be implemented in lwip
+>>>>> and isn't covered by this new variable is it?
+>>>>
+>>>> For the lwip stack it looks like the BOOTP_PREFER_SERVERIP Kconfig
+>>>> option possible was replaced with use of a 'tftpserverip' env var.
+>>>>
+>>>> For legacy stack I had something like following in a .config fragment:
+>>>>
+>>>>     CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>>     CONFIG_SERVERIP="192.168.2.50"
+>>>>     CONFIG_USE_SERVERIP=y
+>>>>
+>>>
+>>> And this meant the serverip would not be overwritten by the dhcp command
+>>> for example (in the legacy stack)? When doing PXE/TFTP, I always do
+>>>
+>>> setenv autoload no; dhcp; setenv serverip X.Y.Z.A; pxe get; pxe boot
+>>
+>> I tried to keep it as simple as possible, as I have not used network
+>> boot before, and used something like following:
+>>
+>>    env set boot_targets pxe; bootflow scan -lbG
+>>
+>> and when I need to use a USB Ethernet dongle I use something like:
+>>
+>>    env delete -f ethaddr; env set boot_targets usb pxe; bootflow scan -lbG
+>>
+>>> When I control the DHCP server, I can actually set the TFTP server
+>>> directly and can skip setting the serverip as it'll be set by the dhcp
+>>> command correctly it seems?
+>>
+>> For my homelab I use UniFi and should be able to control DHCP options,
+>> however looking at U-Boot it looks like option 66 or 150 is just ignored,
+>> see [1].
+>>
+>>    case 66:	/* Ignore TFTP server name */
+>>
+>> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/net/bootp.c?ref_type=heads#L952
+>>
+>>  From my very limited testing it looks like I am forced to set serverip
+>> in env and cannot use a DHCP option to set the TFTP server to use.
+>>
+> 
+> Still on my RK3588 Tiger (on a different network, legacy stack):
+> 
+> => env set boot_targets pxe; bootflow scan -lbG
+> Scanning for bootflows in all bootdevs
+> Seq  Method       State   Uclass    Part  Name                      Filename
+> ---  -----------  ------  --------  ----  ------------------------ 
+> ----------------
+> pcie_dw_rockchip pcie@fe150000: PCIe-0 Link Fail
+> Scanning bootdev 'ethernet@fe1b0000.bootdev':
+> ethernet@fe1b0000 Waiting for PHY auto negotiation to complete...... done
+> BOOTP broadcast 1
+> DHCP client bound to address 192.168.1.144 (5 ms)
+> missing environment variable: pxeuuid
+> Retrieving file: pxelinux.cfg/01-aa-38-40-51-be-af
+> Using ethernet@fe1b0000 device
+> TFTP from server 192.168.1.211; our IP address is 192.168.1.144
+> 
+> My DHCP server is on OpenWRT at 192.168.1.1, and my TFTP server is on 
+> 192.168.1.211, with the setup steps explained in my first answer. If I 
+> don't boot (remove -b), then I can see serverip is set to 192.168.1.211.
+> 
+> So *something* is working here.
 
-Okay, it would be interesting to see display support in U-Boot for Qcom
-platforms.
+I took a closer look at how the UniFi dnsmasq config was generated and
+noticed that I must configure the "Network Boot" option and not the
+"TFTP Server" option to have a generated config that make dnsmasq
+replace the DHCP siaddr field with the TFTP server ip :-S
 
--Sumit
+And legacy stack seem to work as expected and correctly uses the
+expected siaddr field to configure the internal net_server_ip var.
 
-> > 
-> > If it's just meant for now to not have live DT fixups then having just
-> > the stubbed power domains will be sufficient.
-> > 
-> > -Sumit
-> > 
-> > Yes, the purpose of introducing stubbed power domains is to eliminate the need for live Device Tree fixups related to power domains
-> > 
-> > -Aswin
-> > 
-> > 
-> > > support for other soc entries power
-> > > domains are stubbed, in future, the required soc support can be
-> > > added.
-> > > 
-> > > [1]:
-> > > https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pmdomain/qcom/rpmhpd.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b
-> > > 
-> > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> > > ---
-> > > v7:
-> > > - No changes to this patch in v7
-> > > 
-> > > v6:
-> > > - Initialized ret with 0 in rpmhpd_probe()
-> > > 
-> > > v5:
-> > > - Changed the first argument passed to rpmh_write as pd->dev
-> > > - Added (ulong) casting in rpmhpd_match_table to address the warning.
-> > > 
-> > > v4:
-> > > - Added all SoC entries from the Linux driver and stubbed it
-> > > - Removed "qcom_rpmhpd" driver
-> > > - Removed unused members in struct rpmhpd
-> > > 
-> > > v3:
-> > > - No changes to this patch in v3
-> > > 
-> > > v2:
-> > > - Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN Kconfig
-> > > - In qcom-rpmhpd driver, the un-supported power domains are handled with warning
-> > >    in rpmhpd_power_on() & rpmhpd_power_off()
-> > > ---
-> > >   drivers/power/domain/Kconfig       |   8 +
-> > >   drivers/power/domain/Makefile      |   1 +
-> > >   drivers/power/domain/qcom-rpmhpd.c | 278 +++++++++++++++++++++++++++++
-> > >   3 files changed, 287 insertions(+)
-> > >   create mode 100644 drivers/power/domain/qcom-rpmhpd.c
-> > > 
-> > > diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-> > > index 0ad885c9e8b..48e841c638e 100644
-> > > --- a/drivers/power/domain/Kconfig
-> > > +++ b/drivers/power/domain/Kconfig
-> > > @@ -90,6 +90,14 @@ config MESON_SECURE_POWER_DOMAIN
-> > >   	  Enable support for manipulating Amlogic Meson Secure power domains.
-> > >   	  Support for Amlogic A1 series.
-> > > +config QCOM_POWER_DOMAIN
-> > > +	bool "Enable the QCOM RPMH Power domain driver"
-> > > +	depends on POWER_DOMAIN && ARCH_SNAPDRAGON
-> > > +	help
-> > > +	  Generic RPMH power domain implementation for QCOM devices.
-> > > +	  The RPMH power domain driver is responsible for managing power
-> > > +	  domains on Qualcomm SoCs.
-> > > +
-> > >   config SANDBOX_POWER_DOMAIN
-> > >   	bool "Enable the sandbox power domain test driver"
-> > >   	depends on POWER_DOMAIN && SANDBOX
-> > > diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-> > > index 8e03f620437..1c2c64b0964 100644
-> > > --- a/drivers/power/domain/Makefile
-> > > +++ b/drivers/power/domain/Makefile
-> > > @@ -22,3 +22,4 @@ obj-$(CONFIG_TEGRA186_POWER_DOMAIN) += tegra186-power-domain.o
-> > >   obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
-> > >   obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
-> > >   obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
-> > > +obj-$(CONFIG_QCOM_POWER_DOMAIN) += qcom-rpmhpd.o
-> > > diff --git a/drivers/power/domain/qcom-rpmhpd.c b/drivers/power/domain/qcom-rpmhpd.c
-> > > new file mode 100644
-> > > index 00000000000..f51bc9a4bbb
-> > > --- /dev/null
-> > > +++ b/drivers/power/domain/qcom-rpmhpd.c
-> > > @@ -0,0 +1,278 @@
-> > > +// SPDX-License-Identifier: GPL-2.0
-> > > +// Copyright (c) 2018, The Linux Foundation. All rights reserved.
-> > > +// Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
-> > > +
-> > > +#include <dm.h>
-> > > +#include <dm/lists.h>
-> > > +#include <power-domain.h>
-> > > +#include <asm/io.h>
-> > > +#include <linux/errno.h>
-> > > +
-> > > +#include <power-domain-uclass.h>
-> > > +#include <soc/qcom/cmd-db.h>
-> > > +#include <soc/qcom/rpmh.h>
-> > > +#include <dt-bindings/power/qcom-rpmpd.h>
-> > > +#include <dm/device_compat.h>
-> > > +
-> > > +#define RPMH_ARC_MAX_LEVELS	16
-> > > +
-> > > +/**
-> > > + * struct rpmhpd - top level RPMh power domain resource data structure
-> > > + * @dev:                rpmh power domain controller device
-> > > + * @pd:                 generic_pm_domain corresponding to the power domain
-> > > + * @parent:             generic_pm_domain corresponding to the parent's power domain
-> > > + * @enable_corner:      lowest non-zero corner
-> > > + * @level:              An array of level (vlvl) to corner (hlvl) mappings
-> > > + *                      derived from cmd-db
-> > > + * @level_count:        Number of levels supported by the power domain. max
-> > > + *                      being 16 (0 - 15)
-> > > + * @enabled:            true if the power domain is enabled
-> > > + * @res_name:           Resource name used for cmd-db lookup
-> > > + * @addr:               Resource address as looped up using resource name from
-> > > + * @skip_retention_level: Indicate that retention level should not be used for the power domain
-> > > + */
-> > > +struct rpmhpd {
-> > > +	struct udevice	*dev;
-> > > +	struct power_domain pd;
-> > > +	struct power_domain *parent;
-> > > +	unsigned int	enable_corner;
-> > > +	u32		level[RPMH_ARC_MAX_LEVELS];
-> > > +	size_t		level_count;
-> > > +	bool		enabled;
-> > > +	const char	*res_name;
-> > > +	u32		addr;
-> > > +	bool		skip_retention_level;
-> > > +};
-> > > +
-> > > +struct rpmhpd_desc {
-> > > +	struct rpmhpd **rpmhpds;
-> > > +	size_t num_pds;
-> > > +};
-> > > +
-> > > +/* RPMH powerdomains */
-> > > +static struct rpmhpd mmcx_ao;
-> > > +static struct rpmhpd mmcx = {
-> > > +	.res_name = "mmcx.lvl",
-> > > +};
-> > > +
-> > > +static struct rpmhpd mmcx_ao = {
-> > > +	.res_name = "mmcx.lvl",
-> > > +};
-> > > +
-> > > +/* SA8775P RPMH power domains */
-> > > +static struct rpmhpd *sa8775p_rpmhpds[] = {
-> > > +	[SA8775P_MMCX] = &mmcx,
-> > > +	[SA8775P_MMCX_AO] = &mmcx_ao,
-> > > +};
-> > > +
-> > > +static const struct rpmhpd_desc sa8775p_desc = {
-> > > +	.rpmhpds = sa8775p_rpmhpds,
-> > > +	.num_pds = ARRAY_SIZE(sa8775p_rpmhpds),
-> > > +};
-> > > +
-> > > +/* stub RPMH power domains mapped for unsupported platforms */
-> > > +static struct rpmhpd *stub_rpmhpds[] = {};
-> > > +
-> > > +static const struct rpmhpd_desc stub_desc = {
-> > > +	.rpmhpds = stub_rpmhpds,
-> > > +	.num_pds = ARRAY_SIZE(stub_rpmhpds),
-> > > +};
-> > > +
-> > > +static const struct udevice_id rpmhpd_match_table[] = {
-> > > +	{ .compatible = "qcom,sa8775p-rpmhpd", .data = (ulong)&sa8775p_desc },
-> > > +	{ .compatible = "qcom,qcs615-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,qcs8300-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,qdu1000-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sa8155p-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sa8540p-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sar2130p-rpmhpd", .data = (ulong)&stub_desc},
-> > > +	{ .compatible = "qcom,sc7180-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sc7280-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sc8180x-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sc8280xp-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sdm670-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sdm845-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sdx55-rpmhpd", .data = (ulong)&stub_desc},
-> > > +	{ .compatible = "qcom,sdx65-rpmhpd", .data = (ulong)&stub_desc},
-> > > +	{ .compatible = "qcom,sdx75-rpmhpd", .data = (ulong)&stub_desc},
-> > > +	{ .compatible = "qcom,sm4450-rpmhpd", .data = (ulong)&stub_desc},
-> > > +	{ .compatible = "qcom,sm6350-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm7150-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8150-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8250-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8350-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8450-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8550-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8650-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,sm8750-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ .compatible = "qcom,x1e80100-rpmhpd", .data = (ulong)&stub_desc },
-> > > +	{ }
-> > > +};
-> > > +
-> > > +static int rpmhpd_send_corner(struct rpmhpd *pd, int state,
-> > > +			      unsigned int corner, bool sync)
-> > > +{
-> > > +	struct tcs_cmd cmd = {
-> > > +		.addr = pd->addr,
-> > > +		.data = corner,
-> > > +	};
-> > > +
-> > > +	return rpmh_write(pd->dev, state, &cmd, 1);
-> > > +}
-> > > +
-> > > +static int rpmhpd_power_on(struct power_domain *pd)
-> > > +{
-> > > +	int ret;
-> > > +	unsigned int corner;
-> > > +	struct rpmhpd **rpmhpds;
-> > > +	const struct rpmhpd_desc *desc;
-> > > +	struct rpmhpd *curr_rpmhpd;
-> > > +
-> > > +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
-> > > +	if (!desc)
-> > > +		return -EINVAL;
-> > > +
-> > > +	rpmhpds = desc->rpmhpds;
-> > > +	curr_rpmhpd = rpmhpds[pd->id];
-> > > +
-> > > +	/* Do nothing for undefined power domains */
-> > > +	if (!curr_rpmhpd) {
-> > > +		log_warning("Power domain id (%ld) not supported\n",
-> > > +			    pd->id);
-> > > +		return 0;
-> > > +	}
-> > > +
-> > > +	corner = curr_rpmhpd->enable_corner;
-> > > +
-> > > +	ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE, corner,
-> > > +				 false);
-> > > +	if (!ret)
-> > > +		curr_rpmhpd->enabled = true;
-> > > +
-> > > +	return ret;
-> > > +}
-> > > +
-> > > +static int rpmhpd_power_off(struct power_domain *pd)
-> > > +{
-> > > +	int ret;
-> > > +	unsigned int corner;
-> > > +	struct rpmhpd **rpmhpds;
-> > > +	const struct rpmhpd_desc *desc;
-> > > +	struct rpmhpd *curr_rpmhpd;
-> > > +
-> > > +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
-> > > +	if (!desc)
-> > > +		return -EINVAL;
-> > > +
-> > > +	rpmhpds = desc->rpmhpds;
-> > > +	curr_rpmhpd = rpmhpds[pd->id];
-> > > +
-> > > +	/* Do nothing for undefined power domains */
-> > > +	if (!curr_rpmhpd) {
-> > > +		log_warning("Power domain id (%ld) not supported\n",
-> > > +			    pd->id);
-> > > +		return 0;
-> > > +	}
-> > > +
-> > > +	corner = 0;
-> > > +
-> > > +	ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE, corner,
-> > > +				 false);
-> > > +	if (!ret)
-> > > +		curr_rpmhpd->enabled = false;
-> > > +
-> > > +	return ret;
-> > > +}
-> > > +
-> > > +static int rpmhpd_update_level_mapping(struct rpmhpd *rpmhpd)
-> > > +{
-> > > +	int i;
-> > > +	const u16 *buf;
-> > > +
-> > > +	buf = cmd_db_read_aux_data(rpmhpd->res_name, &rpmhpd->level_count);
-> > > +	if (IS_ERR(buf))
-> > > +		return PTR_ERR(buf);
-> > > +
-> > > +	/* 2 bytes used for each command DB aux data entry */
-> > > +	rpmhpd->level_count >>= 1;
-> > > +
-> > > +	if (rpmhpd->level_count > RPMH_ARC_MAX_LEVELS)
-> > > +		return -EINVAL;
-> > > +
-> > > +	for (i = 0; i < rpmhpd->level_count; i++) {
-> > > +		if (rpmhpd->skip_retention_level && buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
-> > > +			continue;
-> > > +
-> > > +		rpmhpd->level[i] = buf[i];
-> > > +
-> > > +		/* Remember the first corner with non-zero level */
-> > > +		if (!rpmhpd->level[rpmhpd->enable_corner] && rpmhpd->level[i])
-> > > +			rpmhpd->enable_corner = i;
-> > > +
-> > > +		/*
-> > > +		 * The AUX data may be zero padded. These 0 valued entries at
-> > > +		 * the end of the map must be ignored.
-> > > +		 */
-> > > +		if (i > 0 && rpmhpd->level[i] == 0) {
-> > > +			rpmhpd->level_count = i;
-> > > +			break;
-> > > +		}
-> > > +		debug("%s: ARC hlvl=%2d --> vlvl=%4u\n", rpmhpd->res_name, i,
-> > > +		      rpmhpd->level[i]);
-> > > +	}
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +
-> > > +static int rpmhpd_probe(struct udevice *dev)
-> > > +{
-> > > +	int i, ret = 0;
-> > > +	struct rpmhpd **rpmhpds;
-> > > +	struct rpmhpd *priv;
-> > > +	const struct rpmhpd_desc *desc;
-> > > +
-> > > +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(dev);
-> > > +	if (!desc)
-> > > +		return -EINVAL;
-> > > +
-> > > +	rpmhpds = desc->rpmhpds;
-> > > +
-> > > +	for (i = 0; i < desc->num_pds; i++) {
-> > > +		if (!rpmhpds[i])
-> > > +			continue;
-> > > +
-> > > +		priv = rpmhpds[i];
-> > > +		priv->dev = dev;
-> > > +		priv->addr = cmd_db_read_addr(priv->res_name);
-> > > +		if (!priv->addr) {
-> > > +			dev_err(dev, "Could not find RPMh address for resource %s\n",
-> > > +				priv->res_name);
-> > > +			return -ENODEV;
-> > > +		}
-> > > +
-> > > +		ret = cmd_db_read_slave_id(priv->res_name);
-> > > +		if (ret != CMD_DB_HW_ARC) {
-> > > +			dev_err(dev, "RPMh slave ID mismatch\n");
-> > > +			return -EINVAL;
-> > > +		}
-> > > +
-> > > +		ret = rpmhpd_update_level_mapping(priv);
-> > > +		if (ret)
-> > > +			return ret;
-> > > +	}
-> > > +
-> > > +	return ret;
-> > > +}
-> > > +
-> > > +static const struct power_domain_ops qcom_rpmhpd_power_ops = {
-> > > +	.on = rpmhpd_power_on,
-> > > +	.off = rpmhpd_power_off,
-> > > +};
-> > > +
-> > > +U_BOOT_DRIVER(qcom_rpmhpd_drv) = {
-> > > +	.name = "qcom_rpmhpd_drv",
-> > > +	.id = UCLASS_POWER_DOMAIN,
-> > > +	.of_match = rpmhpd_match_table,
-> > > +	.probe = rpmhpd_probe,
-> > > +	.ops = &qcom_rpmhpd_power_ops,
-> > > +};
-> > > -- 
-> > > 2.34.1
-> > > 
+Following diff seem to make lwIP also pick up the siaddr as the
+tftpserverip (in addition to serverip for the DHCP server):
+
+diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+index 731b57de3ba4..a3445a48b15d 100644
+--- a/net/lwip/dhcp.c
++++ b/net/lwip/dhcp.c
+@@ -99,8 +99,11 @@ static int dhcp_loop(struct udevice *udev)
+        env_set(ipstr, ip4addr_ntoa(&dhcp->offered_ip_addr));
+        env_set(maskstr, ip4addr_ntoa(&dhcp->offered_sn_mask));
+        env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
+-       if (dhcp->offered_gw_addr.addr != 0)
++       if (!ip4_addr_isany(&dhcp->offered_gw_addr))
+                env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr));
++       if (!ip4_addr_isany(&dhcp->offered_si_addr) &&
++           !ip4_addr_eq(&dhcp->offered_si_addr, &dhcp->server_ip_addr))
++               env_set("tftpserverip", ip4addr_ntoa(&dhcp->offered_si_addr));
+
+ #ifdef CONFIG_PROT_DNS_LWIP
+        env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
+
+With something like that I do not think I will have any further use of
+SERVERIP or TFTPSERVERIP Kconfig options for my labgrid farm, so can
+probably drop this series and will instead send above diff as a separate
+patch.
+
+>> And when I then also tried lwIP, and that seem to result in new or
+>> different issues, e.g.:
+>>
+>> - lwIP seem to be configured to allow very few packet fragments, trying
+>>    to use a reasonoble tftp blocksize, e.g. TFTP_BLOCKSIZE=4096 or more
+>>    seem to cause drop of packets.
+>>
+>> - lwIP is very very slow to timeout compared to legacy when serverip
+>>    point to an invalid TFTP server and pxelinux.cfg files is looked up.
+>>
+>> - sometimes got hit with random SError issues when second file was
+>>    loaded from TFTP, this issue was thankfully fixed with [2].
+>>    
+> 
+> Rough first experience with lwIP :)
+
+Hehe, and all while trying to figure out why dwc_eth_qos was not working
+on my Rockchip RK3506 board (firewall blocked DMA to DRAM) and my
+AX88179A/AX88772D USB Ethernet adapters also had driver issues :-D
+
+At least this experience has helped generate a few forthcoming cleanup
+patches for dwc_eth_qos and asix88179 drivers.
+
+> Are you planning on new Rockchip board/SoC support to use lwIP?
+
+Not sure, but at some point we probably should fully switch to use lwIP
+for the Rockchip platform. The LWIP_DEBUG and LWIP_DEBUG_RXTX Kconfig
+options can help a lot when debugging any issue with Ethernet drivers.
+
+Regards,
+Jonas
+
+>> [2] https://patchwork.ozlabs.org/project/uboot/patch/20260114-tftp_fix-v2-1-8de8e6ecf4e8@linaro.org/
+>>
+>>>
+>>>   From my notes, for an OpenWRT DHCP server:
+>>>
+>>> Network → DHCP and DNS → PXE/TFTP tab → Add button
+>>>       Filename: default
+>>>
+>>>       Server name: fileserver
+>>>
+>>>       Server address: <TFTP server IP address>
+>>>
+>>>       Force: checked (may not be necessary)
+>>>
+>>> Save & Apply button
+>>>
+>>> I'm assuming you need this for your labgrid farm so hopefully you have a
+>>> way to control the DHCP server :)
+>>
+>> Correct, I have been playing around with network boot in my labgrid farm
+>> and hit a few mines along the way :-)
+>>
+>> Should result in a few network related patches in next few days.
+>>
+>>>
+>>>> Adding NET_LWIP=y made pxe booting stop working and 'serverip' always
+>>>> ended up as the dhpc server regardless if it was set to something else.
+>>>>
+>>>
+>>> Interesting. With tiger-rk3588_defconfig (legacy stack), I get:
+>>>
+>>> => setenv serverip 192.192.192.192
+>>> => setenv autoload no
+>>> => dhcp
+>>> ethernet@fe1b0000 Waiting for PHY auto negotiation to complete........ done
+>>> BOOTP broadcast 1
+>>> BOOTP broadcast 2
+>>> BOOTP broadcast 3
+>>> DHCP client bound to address 10.2.162.193 (1394 ms)
+>>> => printenv serverip
+>>> serverip=10.2.0.122
+>>>
+>>>> Since lwip instead prioritize the 'tftpserverip' env over the 'serverip'
+>>>> env for tftp use, adding a similar env var Kconfig option was easy but
+>>>> may be wrong path?
+>>>>
+>>>
+>>> I don't mind the addition but I'm wondering if it's not a band-aid patch
+>>> for something else? Maybe lwip missing setting the BOOTP server from a
+>>> DHCP lease for example?
+>>
+>> Possible, setting tftp from dhcp also seem to be missing from legacy
+>> stack, if I am not mistaken. I do think the separation of tftpserverip
+>> and serverip for lwIP stack at least is a step in right direction, I am
+>> new to network booting from U-Boot so what do I know :-)
+>>
+> 
+> I'm not sure the point of lwip is to keep all the quirks from the legacy 
+> stack, but it doesn't hurt to bring this up :)
+> 
+> Cheers,
+> Quentin
+
