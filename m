@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CA2C982DB
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938F6C982D1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:31:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E74883942;
-	Fri, 16 Jan 2026 18:10:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0E6FA83015;
+	Fri, 16 Jan 2026 18:31:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sj2IXrGw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tiAbt2+B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10213838BB; Fri, 16 Jan 2026 18:09:59 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 939998309A; Fri, 16 Jan 2026 18:31:39 +0100 (CET)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01BF08389A
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:09:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDD9382BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:31:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b870cbd1e52so329430566b.3
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:09:56 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7cfd8ca8191so725634a34.3
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:31:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768583396; x=1769188196; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xdjMtA2dfai1uG5ulxPEWTmPB65dRusFujUmCzj5J/o=;
- b=Sj2IXrGwg0U1sMGvv65S0zqp57DGXiWP37KuKtDZAqvUSQ+b9cm+lzKde/Gk4aDXWP
- sN8JretuFuGDsrPi1vohhj9A0lYCkJSmX5W6mkMnCS2O7aypvd6AKQnBv5zHAmc5QUkg
- yqtk2x2rhWB3Nbk9y4Vu/cAE1O73bKZltdPKHoW80l0+yMSogrt6JhueR9mz4dK+ZgPZ
- 1uq1NbV20N7D1e0u1Xzf+pzBMqoc1qq1a0ULwKw1/YDgPu6lzHPrwgfqLb9byq8Aqk1I
- +dqV2+CgO9hHVIceZyLfV6dLFdYDBk7ix3lxRXTBby30w9hMHnXF0xY1lk1UUSM6CnJg
- gNbA==
+ d=konsulko.com; s=google; t=1768584695; x=1769189495; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mt0MUA5PWBRz+F1hiGde3AJsg9X/nK/86FhlmQL90LM=;
+ b=tiAbt2+BQywwYvm5y4/uSNHEECi+83UHHzr9I+x8oYe7szDZxI8WDY03VeLqUllf/s
+ vnngXGmj1dBGHpkJbL7RNKb/jCbDOsZO802qL79oc/IU6c2SNdzRvtL9VBhEfyC2BZsY
+ N6xVtHDrP+Zj9dQDbtMH8uXOp7j+NP2tGMKtc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768583396; x=1769188196;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=xdjMtA2dfai1uG5ulxPEWTmPB65dRusFujUmCzj5J/o=;
- b=GznjaH8X5+aOmq7BU7jl+Lnw/5b5ZbW6kVspvG3M4k5hEKTFfoAMp2s1ZBzxsXuRxy
- daDEPNAAiI49MfTKqGYYd+0C4wGez8tzYJ6WLExsLIWg3/IikDH8s3oF6p6789GiHJhs
- 7ko6OeQEJsDShtW9zHHuYpOoRbOD7PqeKoeLaStdEH7uXc4BOeAJWSvGEhMc9eX+KPBu
- m56k2dD0lQb71PxyOrItQVDMSdUvIQFzRDNm99DLuPBLgTvynpYlbx7KpClQ3BP1jSM1
- k/EOv0aSw9mINwtNFCQyEJ2ZECGMNZ3ktArve0HEuOQmh8T37Jx+mlmCwS+Z+cFVlUdx
- E5IA==
-X-Gm-Message-State: AOJu0Yx8SfpeTEYBX7lXRwaTdFdVO5Jpn0SKcEauIYkRIyiqQIHZAZ6e
- Uc6zi7wtqRpL1+HnbpNrCT4BmNkRfmu+3UdOcSYWZHnUeGBEHi66nsJD+ChI0w0WjpU=
-X-Gm-Gg: AY/fxX4c2TyPQIBpKqqFHaGTJUfR6Q/um/LMG5JT2/7HTXwrNFZt0dh7XtOp5kESFpO
- WzYLvfGgAJ8mejz//3VqlhimhP1aXdSBVm2awczw1sVin30DD8UMieHkzbaA5rAwBmkmkFSRMh+
- lFZW/52E47GTbcDVTXTYfeTzQ3OpHfb4DwvsLbQmgaHmB3QjVxdV6EUJ/nSkdRgE1QFo0HyvdSV
- HaX2dsTT+PQzTUBQZdnahc1xponh3nb6HxXJUtC7NHpOcYTv05zICNDMdR0ntMKPD57RnmJWVoD
- 4kBTKwTQF3Zd9W4cRVzNk81RjqzGF3AfcEc/5vYk/ONVBTSfvOpyfxiIdTy9pE2+thSNQ60PX3N
- WKti7F2BYyM0PJjZKrtXH+ch09m4CiOGGyI8Bxa9Bv9BbmcdwnqDVj9RiGGUTBU2yH6fNszG10s
- PnqMouotP27Ce/H3KHqwU7GIyMpLChCeIZSAO2JmwDymjVLvCQO8lbXQ==
-X-Received: by 2002:a17:907:9454:b0:b73:8b79:a31a with SMTP id
- a640c23a62f3a-b8792ddad96mr333557766b.16.1768583396441; 
- Fri, 16 Jan 2026 09:09:56 -0800 (PST)
-Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8795c38208sm294912666b.71.2026.01.16.09.09.55
+ d=1e100.net; s=20230601; t=1768584695; x=1769189495;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Mt0MUA5PWBRz+F1hiGde3AJsg9X/nK/86FhlmQL90LM=;
+ b=SOlc3wrIzobIut7W9TFh2N9fygOz/YBHvepYnCK3S2x1pXZqpQB//YL7zx2n18jzxa
+ 6EIGt8iiyDmvyDsICpgCEvU1Xgzayit3R2QCc8OsQzrVcy7NgHJJM8M9vvsojBrV0Xoq
+ 8OfDKpBqt7Wm3+YJ8hpBMcWTlGnIkCCnwQgQ6r/YZzFq3R66fz3qa9bKZpz8VfzQS+GD
+ /hytuXcljxeoYgOMWsT8JqBBPLvc4Pge2zWS+fIjTFGH/+cNpw/d8n8+Ki1cOdsZoy22
+ Y3VJEA/inLctMa+WVlma4Wi+tzbM7nFfmFmpy9a/swgRxlT0tvxDlQ8h5A0+t9pBE/AY
+ rx4g==
+X-Gm-Message-State: AOJu0YwMOJGXfRaipfJoTdPAhgMndKsSz0SjaJhsFwV29kc+5iX68KR0
+ 0WRoPJnL5zqgQ2EmiSzYtkdptxtx5DNdLcorWHkL2L/eI8Yov6dUPAJ+14BJYygrO7g=
+X-Gm-Gg: AY/fxX5nHiGCdlxxLYDZUBSAS5crVmzNBs3v96OKjIJn+htEgUHvvi3wkTSQQ2q1sYK
+ IxH4Ljz8Ju6idQnRw4a0NRLSFDr7tG4HrgUen34sxsyB9M5jwSlURIAKVpHn3+AWZ41OCpb0Bzt
+ gboz51vw5hW3J+LhKhajEaw3KB8Fz6CVCDvwrsGGcCtGoKUm3xRggFIbetgWDjac6nd+nWEOMZx
+ qLMTyeOi2hrAhOVeb0rXG2/nWLc2pPRKTBW1fptHrciJ2R1HDKz+sZxAM8OL9HJ4lHJZ9jLAZRw
+ 5Iet79ZGmmlplHRVwrhU2K/XARUkjFjYXAtTp6D60QOldQL1EE2lmEmOyi+B0NQXZteQPLTlPDc
+ C93j2p7IpB12N741udAoh8D894Nuof8U4FKg25OaH2ZcpN8FkWyz7zg0boDYGgS1O4asem/lDtL
+ J5pj2I9MdN5F18UtmCTlk0K04rDZnKeVPGf2hvsCkkRIHhP525JVbpe6b/lJ82IBJAiWgWWB+8N
+ skkYgeuJDvkn3GOJMGI0iB6CJG17N9alRO0A+Q=
+X-Received: by 2002:a05:6830:f85:b0:7cf:dcee:3db5 with SMTP id
+ 46e09a7af769-7cfe00d8da1mr1410969a34.1.1768584695469; 
+ Fri, 16 Jan 2026 09:31:35 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf0d8b28sm2059378a34.2.2026.01.16.09.31.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 09:09:55 -0800 (PST)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Fri, 16 Jan 2026 18:09:45 +0100
-Subject: [PATCH v2 2/2] usb: dwc3-generic: respect role-switch-default-mode
+ Fri, 16 Jan 2026 09:31:34 -0800 (PST)
+Date: Fri, 16 Jan 2026 11:31:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH] doc/develop/process.rst: Expand on the Custodian workflow
+Message-ID: <20260116173132.GM3416603@bill-the-cat>
+References: <20260109172905.1446923-1-trini@konsulko.com>
+ <35fe875d-0bcc-452b-bb66-a2158b96629e@cherry.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260116-casey-usb-role-switch-v2-2-83a1a6501a11@linaro.org>
-References: <20260116-casey-usb-role-switch-v2-0-83a1a6501a11@linaro.org>
-In-Reply-To: <20260116-casey-usb-role-switch-v2-0-83a1a6501a11@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1133;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=Yz5df7TViWZc7RO65bz6fgWIBuZpfnls60bdMn9Gq1Q=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsysgge7DV5+6ruq9jq7OzjwRNT/ZLYVl9i/mM5RefJer
- t3/e4xGRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjITWeGf5al6i90bpw2tGdg
- mHSpqfjD8lVJMxgufH1x/HLEKRaugqUM/6xmZJz+/fWcwuqvCpMXnT/5M91e+GH25X2VPV9u7GJ
- Z6RUIAA==
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KHRf8phLsStO7gJ+"
+Content-Disposition: inline
+In-Reply-To: <35fe875d-0bcc-452b-bb66-a2158b96629e@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,35 +98,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Respect the default mode configured in DT if it is set and dr_mode is
-OTG. This allows the board to prefer host mode even on a DRD capable
-controller.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- drivers/usb/dwc3/dwc3-generic.c | 5 +++++
- 1 file changed, 5 insertions(+)
+--KHRf8phLsStO7gJ+
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 22b9ef0b24e3..8893a33b9f6a 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -533,8 +533,13 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
- 	dr_mode = usb_get_dr_mode(dev_ofnode(parent));
- 	if (!dr_mode)
- 		dr_mode = usb_get_dr_mode(node);
- 
-+	/* check default role for DRD controllers */
-+	if ((dr_mode == USB_DR_MODE_OTG || dr_mode == USB_DR_MODE_UNKNOWN) &&
-+	    ofnode_read_bool(node, "usb-role-switch"))
-+		dr_mode = usb_get_role_switch_default_mode(node);
-+
- 	/* usb mode must fallback to peripheral if not known */
- 	if (dr_mode == USB_DR_MODE_UNKNOWN)
- 		dr_mode = USB_DR_MODE_OTG;
- 
+On Fri, Jan 09, 2026 at 07:08:40PM +0100, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 1/9/26 6:29 PM, Tom Rini wrote:
+> > As seen with a recent pull request, there have been implicit assumptions
+> > about how much custodians can change patches before applying and merging
+> > them. This has lead to an unfortunate situation with a contributor being
+> > understandably upset about the changes.
+> >=20
+> > To avoid this in the future, document a few things:
+> > - Non-trivial changes to make something apply need to have at least
+> >    [name: what] in the commit message.
+> > - Only trivial and obviously correct changes can be made by the
+> >    custodian, and ideally this is done in a merge commit and not the
+> >    patch itself.
+> > - It is the responsibility of the custodian to gather relevant tags that
+> >    have been provided by the community.
+> >=20
+> > Link: https://lore.kernel.org/u-boot/1faefbf2-e8b0-4c94-85f5-025355915e=
+0d@gmx.de/
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > With this, Heinrich, per E Shattow's comment on IRC, can you please
+> > revert the commit in question, then apply his patch as-is, and then your
+> > changes as a new patch in order to show correct history?
+> >=20
+> > And I realize at this point the subsection of this document is a bit
+> > wordy. Maybe a follow-up of restructuring this part of the document
+> > would be helpful? I'm not sure what would flow better however.
+> >=20
+> > Cc: E Shattow <e@freeshell.de>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> > ---
+> >   doc/develop/process.rst | 9 ++++++++-
+> >   1 file changed, 8 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+> > index 4bfbf0eb9c63..84ab09132a0b 100644
+> > --- a/doc/develop/process.rst
+> > +++ b/doc/develop/process.rst
+> > @@ -244,7 +244,12 @@ like this:
+> >         custodian can also accept patches against older code.  It can be
+> >         difficult to find the correct balance between putting too much =
+work on
+> >         the custodian or too much work on an individual submitting a pa=
+tch when
+> > -      something does not apply cleanly.
+> > +      something does not apply cleanly. If non-trivial changes need to=
+ be made
+> > +      for it to apply the custodian is expected to annotate the commit=
+ message
+> > +      with ``[name: note about changes made]``. Furthermore, only triv=
+ial and
 
--- 
-2.51.0
+As I'm actively working on v2 right now, a few more comments.
 
+> We should provide an example, I think.
+>=20
+> commit 66be03b7ee19444b23aae3990a434a7470fc1641
+> Author: J=E9r=E9mie Dautheribes <jeremie.dautheribes@bootlin.com>
+> Date:   Fri Nov 28 12:03:04 2025 +0100
+>=20
+>     binman: blob_dtb: improve error message when SPL is not found
+>=20
+>     When using binman with the '-a spl-dtb=3Dy' flag, if the SPL blob is =
+not
+>     found, binman throws a cryptic error message:
+>     binman: 'NoneType' object has no attribute 'startswith'
+>=20
+>     Let's improve the error message to explicitly state which SPL blob is
+>     missing.
+>     This is particularly useful when binman is used as a standalone tool
+>     outside the U-Boot source tree.
+>=20
+>     Signed-off-by: J=E9r=E9mie Dautheribes <jeremie.dautheribes@bootlin.c=
+om>
+>     [trini: Add '# pragma: no cover' because coverage doesn't seem to like
+>     the documentation about this error]
+>     Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> is a good one I think.
+
+As I said earlier, I think this is actually a bad example from me, and
+I'm rewording things to say not to do that.
+
+> You also added your SoB which isn't mentioned as a requirement here. I
+> believe it must, because whatever you added/changed, you must comply with
+> DCO to do it.
+>=20
+> I'm tempted to say we maybe should add a link to the original (unmerged)
+> commit so that people can actually do the diff themselves if they want to?
+>=20
+> For the above example, have
+>=20
+> Link: https://lore.kernel.org/u-boot/20251128110304.63138-1-jeremie.dauth=
+eribes@bootlin.com/
+>=20
+> Maybe? Not sure how much friction we want to put on custodians. There's
+> probably already a lot to do :)
+
+And part of why I'm writing "don't do that" is because it's a lot easier
+and clearer than trying to list all of the "do this" and "don't do
+this". It's also a more clear and fair practice I think to say that all
+"development" happens on the list in public and Custodians don't have a
+special place to make final tweaks.
+
+> I would really like also that custodians *tell* people that they have mer=
+ged
+> the commits with changes. https://docs.u-boot.org/en/latest/develop/proce=
+ss.html#work-flow-of-a-custodian
+> says it's only "ideally" they do for merged patches, but I really think we
+> should tell people when changes are made to their patches.
+>=20
+> > +      obviously correct changes can be made, no other changes should b=
+e made to
+> > +      the patch itself. Ideally all of these changes will be in a merg=
+e commit,
+> > +      and not the commit itself, but that is not always possible.
+>=20
+> I have never been a maintainer in public spaces, and in private spaces I
+> enforce a strict rebase policy so I don't have merge commits ever. I
+> wouldn't know what this means (but maybe custodians do, and that's the mo=
+st
+> important as this isn't something contributors need to know?). How are we
+> supposed to do that? Note also that not everybody know that git log -c (or
+> --cc? I use -c but it seems to be showing the diff of the whole merge and
+> not necessarily the conflicts?) needs to be used to see the content of a =
+git
+> merge commit (it won't show with git log -p).
+
+For both of these points, an update talking about b4 from the custodian
+perspective, to mirror how doc/develop/codingstyle.rst talks about it
+=66rom the submitter point of view, is needed. Sending out "applied your
+patch" emails without b4 was a pain, but "b4 ty -S -t 1" is easy.
+Similarly, a submitter writing a cover letter and custodian using a
+merge commit (like say commit 476c59be74c2eadcd32fc3032fb7ac362f02e441
+in master) is done with "b4 shazam -SM message-id" and both easy and
+provides more in-tree history.
+
+> Can we provide an example here of a good merge commit that highlights what
+> is expected from custodians?
+>=20
+> I cannot really comment on whether this will help custodians do the right
+> thing as I am no custodian.
+>=20
+> We need to set the expectations for contributors as well.
+>=20
+> """
+> Trivial fixes may be applied by custodians when merging your patches,
+> sometimes without public notice. The operated changes are explicitly list=
+ed
+> at the end of the commit log or in a merge commit by the custodian.
+> """
+>=20
+> or something like that? I'm wondering where we should put this though. ht=
+tps://docs.u-boot.org/en/latest/develop/process.html#review-process-git-tags
+> or https://docs.u-boot.org/en/latest/develop/sending_patches.html? I think
+> this kind of change should be in the same commit (or one that follows aft=
+er,
+> but is done now).
+>=20
+> We can have some words about proper etiquette too? Like avoiding big seri=
+es,
+> waiting a bit between versions, not silently ignoring previous reviews for
+> newer versions (you can disagree but you need to speak your mind publicly
+> and "resolve the conflict" before sending a newer version (or at the very
+> least say why something wasn't done in the cover-letter or under the ---
+> section in a patch), waiting at least a week (more?) to send a ping on yet
+> unreviewed patches, ... That's what's coming to mind right now, there's
+> probably more to add? This is a separate topic and I don't want this to b=
+e a
+> blocker for this here.
+
+This is also another long outstanding need, that's not been forgotten.
+
+--=20
+Tom
+
+--KHRf8phLsStO7gJ+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWp18QAKCRAr4qD1Cr/k
+ChscAPwNhvaMZKKeXdL2x/J40INQimu43Z0UAhCS8a74oqozIAD/RgelM2fZw61d
+1qDT6pZjGUBpS1+4zaR8msADyZKzyQI=
+=lIZW
+-----END PGP SIGNATURE-----
+
+--KHRf8phLsStO7gJ+--
