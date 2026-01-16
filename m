@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83AAD4899A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 12:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0033DD4899A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 12:33:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E3E3830E4;
-	Fri, 16 Jan 2026 13:33:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BC2A8389A;
+	Fri, 16 Jan 2026 13:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sAKvhcqB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JGwtlFh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA0E98367F; Fri, 16 Jan 2026 13:33:25 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 02C9B838A5; Fri, 16 Jan 2026 13:33:48 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3769F82BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 13:33:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2AC582BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 13:33:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EFD1E60167;
- Fri, 16 Jan 2026 12:33:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03BDDC116C6;
- Fri, 16 Jan 2026 12:33:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 5968D43CBB;
+ Fri, 16 Jan 2026 12:33:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B84A6C116C6;
+ Fri, 16 Jan 2026 12:33:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768566796;
- bh=1OQOrHXZPzx638RUnhXEL1jSyYHsch6wqlhMfusxQek=;
+ s=k20201202; t=1768566824;
+ bh=umGv1NAyh4hOsM48u3NB9whIRhS2Y/WWuoOUVQO1uFk=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=sAKvhcqBQw9w4cPSGXkWXtlCMNkZUvJ1Bppz9Oh0I3+NMU1Kg+jfb31I4/kQI+0qZ
- Vo9ASrh479cJF1Pr8AzsuDzbBIRulac+HumaDAVrbYaEZl/+pA7zA3fHVoRxUMVdAx
- 9okIeRRIKpjfgMR/yCYJZqDpNwjVKQusKZ7dNgLwjWo1QCLgYoTnoHFFOpDlLH2Fdf
- 0Q3zQ7obVCR/pFYbPtT77MJaU8Pqyr/6OWgKjjj0p7Z+nGNDW4NddlGC8eodEpU5u3
- BC7jK6HFfMkeTDxbboh2Uu4MiuAM2HYXzoj8gBI2uXYTMcQjtwENWf/Ab8bHn0LBZ0
- k3vWJkdz49f2Q==
+ b=JGwtlFh6uYSeLQ3Nhf1+8RKRooIa9cCZW5aKM0WidbXbN/LoGoqq0YT7bbsQoL7S6
+ d4c5mwaGg5e+CE9CMEZDxIg9hi0iXpwIdyrEvzoUB5XPJeUyukTLokv06fEPRFDNJI
+ vl5TGmykM7BU4G3RCLRNZDVSAW+ngdQfSHhACCC8+GRpt2Wzv4yQRdYjnfKA7UpAPk
+ M+CamHu4ALOCtwhUxlfucUKolSWhMMKncbj8OgOgCaA/4y2S0W0nYgNwbi+ZCKDayX
+ 9hJPObN4IClgBqwRObWUZEJ+C72dEBn+tX0TjY8avU0+m7LTj+9QhXikFWCwD4rAOy
+ y1xI/msdf+96g==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Kaustabh Chakraborty <kauschluss@disroot.org>, u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut
@@ -48,15 +48,13 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut
  <mkorpershoek@kernel.org>, Kever Yang <kever.yang@rock-chips.com>, Jonas
  Karlman <jonas@kwiboo.se>, Patrice Chotard <patrice.chotard@foss.st.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Kaustabh Chakraborty
- <kauschluss@disroot.org>, Marek Vasut <marek.vasut@mailbox.org>, Casey
- Connolly <casey.connolly@linaro.org>
-Subject: Re: [PATCH v3 1/2] usb: dwc3-generic: allow fallback of dr_mode
- property to "otg"
-In-Reply-To: <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
+ <kauschluss@disroot.org>, Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [PATCH v3 2/2] usb: dwc3-generic: add support for exynos7870
+In-Reply-To: <20260108-usb-dwc3-exynos7870-v3-2-343fa1e81e48@disroot.org>
 References: <20260108-usb-dwc3-exynos7870-v3-0-343fa1e81e48@disroot.org>
- <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
-Date: Fri, 16 Jan 2026 13:33:13 +0100
-Message-ID: <874iolenzq.fsf@kernel.org>
+ <20260108-usb-dwc3-exynos7870-v3-2-343fa1e81e48@disroot.org>
+Date: Fri, 16 Jan 2026 13:33:41 +0100
+Message-ID: <871pjpenyy.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -81,69 +79,16 @@ Thank you for the patch.
 
 On Thu, Jan 08, 2026 at 18:03, Kaustabh Chakraborty <kauschluss@disroot.org> wrote:
 
-> Documentation [1] states that the default value of the dr_mode property
-> is "otg". It also isn't marked a mandatory node, so it may or may not be
-> set. So, accordingly if dr_mode is not mentioned in the devicetree node,
-> OTG mode must be assumed.
+> Exynos7870's DWC3 glue layer is quite simple, consisting of a few
+> clocks, which is handled by this driver. Add the compatible string in
+> here.
 >
-> In this driver however, this case is not handled. If dr_mode is not
-> mentioned, USB_DR_MODE_UNKNOWN is set. The logic implemented raises an
-> error, instead of falling back to USB_DR_MODE_OTG. Correct this to
-> conform to the specification.
->
-> Link: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/tree/Bindings/usb/usb-drd.yaml?h=v6.18-dts [1]
 > Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
 > Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-Note: there is a similar patch submitted by Casey here:
-https://lore.kernel.org/all/20260114-casey-usb-role-switch-v1-1-fb7a626466b9@linaro.org/
-
-Can you have a look at that one please? You could review it or test it
-to see if it works for you?
-
-Thanks!
-Mattijs
-
 > ---
->  drivers/usb/dwc3/dwc3-generic.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+>  drivers/usb/dwc3/dwc3-generic.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index c09014aec60..c15eda19e8f 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -10,6 +10,7 @@
->  #include <dm.h>
->  #include <reset.h>
->  #include <asm/gpio.h>
-> +#include <dm/device_compat.h>
->  #include <dm/lists.h>
->  #include <linux/delay.h>
->  #include <linux/usb/gadget.h>
-> @@ -173,8 +174,8 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
->  		node = dev_ofnode(dev->parent);
->  		plat->dr_mode = usb_get_dr_mode(node);
->  		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
-> -			pr_err("Invalid usb mode setup\n");
-> -			return -ENODEV;
-> +			dev_info(dev, "No USB mode specified. Using 'otg'\n");
-> +			plat->dr_mode = USB_DR_MODE_OTG;
->  		}
->  	}
->  
-> @@ -516,6 +517,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
->  	if (!dr_mode)
->  		dr_mode = usb_get_dr_mode(node);
->  
-> +	/* usb mode must fallback to peripheral if not known */
-> +	if (dr_mode == USB_DR_MODE_UNKNOWN)
-> +		dr_mode = USB_DR_MODE_OTG;
-> +
->  	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
->  	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
->  		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
->
-> -- 
-> 2.52.0
