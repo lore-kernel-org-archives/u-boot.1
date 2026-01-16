@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF771C982E4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:03:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E072C982E4
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2610C8389A;
+	by phobos.denx.de (Postfix) with ESMTP id 6360F83952;
 	Fri, 16 Jan 2026 19:03:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CnONhSJC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sWPEU2aD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69A8783935; Fri, 16 Jan 2026 19:03:08 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 0AACA82BF2; Fri, 16 Jan 2026 19:03:09 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F7FE82BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 404F7833C6
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b8765b80a52so369176266b.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:04 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9230f564so3135832a12.1
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768586584; x=1769191384; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768586586; x=1769191386; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=S+v6aPYdoUNQvRlBSQIE1vle1jNijiUxOj7EqownQ0E=;
- b=CnONhSJCzhvzzXoYwvt9jmU5jSLOqb7vc/JMAtOSfAk4UpneS5vv3fMcD/P45+vcqy
- GFTdahXTx4LIl1PZU9qPqeZysElLBudE9Gt6IP/IutgdW6v1hPTq1Dk3PgkX5+3X2bqv
- 02I5rSnfPVg5Em4G4SXVyLYmrM08k/ztlgL9sVInSGu/MeoczMC3iJhiPtjtP2FBpdk2
- GoQEorjNlhCJc9JpUywjLz2pS0g7tuEg9pgj7C9fk3+5B2B5l+0bsoVss88TqSWVbkFQ
- VszZBxahWC+BZ+lCTbl05lWXXeKoL3bznoxle9ZUvTIcRoPlVWazpubCUYT9ODm6hgrV
- lZ+Q==
+ :reply-to; bh=0K07tYhAmjEJjE/t2YQ6ZnNDpNGs2H7F6EsM/PcDqdU=;
+ b=sWPEU2aDiWMMDLXpMnID+1o5auGXHusuHnGpag02jEGVVP1C2Uwk5McisUdSzwZvto
+ AojEG9J+oqFOfotJ1j4qMBH05k4TXO+MoSUOgX6DoQy9rjstJrqbeYJ3SHMiRD91hLzV
+ dBooVZh1uEh7KM/1jD0kZjfUEhL85Clx9YvaVWfw6QRaLEhT2hEmu11Q1XHbj87VKdSI
+ eCHuCrd0bjSnt1fsl+CcdNm+Nw4Yd1iA3gJoQ56/cUNuyluQ4hjVsmQetB16FZdCB9f6
+ tjGmu/nhdsrehUoYqoKH12azi7TfUuMJU6nZbcC6WRii1qXSlUXpabBiJ8V8VWkhId+e
+ uTBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768586584; x=1769191384;
+ d=1e100.net; s=20230601; t=1768586586; x=1769191386;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=S+v6aPYdoUNQvRlBSQIE1vle1jNijiUxOj7EqownQ0E=;
- b=ayy3LT5wc3Pyad6Dpt34PhqtwK9uXRtGo8lYnVBSKCQhIK2rECxeIQsL+faTctXfyP
- EGHT22fKU2phJ8SnpfjhF36w6MgF/R1HNO3Uzw35ekX8GRi/Zm+g/VJStnl8BWiG8EtV
- 8WuMo6O8G3rCu9omciILyjVLnCCY/h82w/guRr6e00bsNtwS1h+psvJbIDHzYYFghsfx
- EXi1dnGJ8Y1U6Zqhq/49HaO09a2QIa6b+RLTy/uRM/Uoj7+abLPf5lMRZqcslHm+3IPi
- 3VqWFkHImyDVoGVxr9EdC934YomKL8SEW/THYJLLqETQ6sQfvGGDuMbTTNqfuXzo1Dxa
- IxlA==
+ bh=0K07tYhAmjEJjE/t2YQ6ZnNDpNGs2H7F6EsM/PcDqdU=;
+ b=kRgoIQ3p2QIp+2chjVeT71pBOA8XkI4rgeIdy+/MaJhXNUpgjZpDq50WjyoPiEe7zy
+ jctb5BkjtdoFFM5B4G5UWCx1ZeQVntzQu6iiuTFSsTICIoYL8Ssoly4/OTGaLPg76VAR
+ 3AjLf2CTHfARf0rEFzQz+8rx4oq3w7t6EeFHvWjujTP7AD7dKd4zfjxq5JRPacwt4cEk
+ 4TM21DmodjoEZCF9GLwESd8GVNsYbwrKDNJeU5xbMbb1oHtg/jdUmraTbvsib5IN8z3J
+ 6qE1naFcQNnGfS2PHgqBxbwgeS4i3lYyaABQtg/uSWCZR2CvsR9xmRZqmMB2J2BN9ne4
+ e1Lw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVrsZS24keI8vjGmLFSW8qXVc4sX8FPTmmFwRccLFo2yc8FNv0echN88drygMdvWCXti8bMsyk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7np2T+xFqg8qd+EgrbPEDrCun5dagstxqiG2oiAPYhOvNAsQe
- VOTUvX9tiMldRrHaGent+rzGcRsML/FKwh16b6JioSsb+fitgLkcShv55yoTE/A/w40=
-X-Gm-Gg: AY/fxX4FK4AHQ0LwY1rdpTOY8tEtbJjLiIuFlO8upldmHIMAu8cjqMRpMrkJE3c9mdH
- cGvgnRrBM5hJhjs/WBIK35PCEuuDbyWKNbQUZmXPyS9ygadu4Ml+4/Pfly9mLBpDgJrwF32F5+g
- O4m29cT3zgZ4rHbbQvILbhNjnnS3QJbJcPPu0DrcuQerDCLg4zuGgeZ0fGVs5OViu8z22jqMaVy
- 6Gemtt7nAV2ydM/5/FNROY1hjJu+0HhmoqYSEQigIwcBz47xg3lQqouNdsdoZj7Tygzq9PUeNGA
- 5R/NHVmuR4K47XTz/UNnvqD7B5RYDEe79Bm0zFc+Lp3iL/fMcI80QPFc5FCWjSEcZN6Vs7kvjfx
- 9kUrOQ+2mIyyu+C5K2RXIlRpa7t2YmCQSoiKbIsJUcFcZn5xv2KnWd8tarGr2D6djry70VSSkzK
- yQL4FERdMjd/zSJ2mE3CF50R+9JJkkvJ1UXU7gCZZ08xcUN3hd91XfKQ==
-X-Received: by 2002:a17:907:1ca5:b0:b80:3fff:32ea with SMTP id
- a640c23a62f3a-b8792fede57mr355933866b.57.1768586583944; 
- Fri, 16 Jan 2026 10:03:03 -0800 (PST)
+ AJvYcCVyu7U87KBp1r3PciqWSXpjCEyxPeh9VrspSN4RWIaRI04Mo6oecW7czrRsoWtxpVtvXpqJnw4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSmS9vn2xrvUavRHlzn9OI5vM9mMUWfQvw8i31m6FMW8eKYKVr
+ cR58bB4utk31uDzCCqowHSZ0AN09PdW/nEybQ7UEwgwdRB3p2c10iiWwwvB+Al9HKow=
+X-Gm-Gg: AY/fxX7SRitCJ+9eOmGYqdI6nW1AFkUVAS36KSd4AWjlCwmQ+caIUCUx+S+Fg7YRzP+
+ bUIe/AYP5iZRaeN8y4kIbJ2XXZm2FjKeLdxtMeGrP0+2b60RjTAI5v1FyTrwmEU5YKoP6TTRIbr
+ rlHvQgHdZ4Ki84brzgmzDYuoE4kku/xHICT43lq3U2xUvF1Ja92CXnucDwJmfBZGm4erAQ4OLMD
+ PJn0G/6VEFl10qR3u7QlEUqDks8YxAZ9ZzQV+w4GxejfBldIiP4fi+YpQJS0S/JHFjhtSTUx8yZ
+ LLNSCweCPKlCX5cY8xU0jhH0EZJtuRcoHKrvb+SCipFb3FlOk1XcWsA28Bfjxuj6V7PotXwLNW3
+ HfwDSJXSs1zqzm0To3KpXfKIkMvzDtwu09FFYiXXEWpXpuk9XbSTJbreePPplrOq4WCjFfCgHCD
+ oXj4sqrBNuvL5xXRDraGpTGAW68NilRfwe1LxBumUCI3IUduQi4sO27CcyA03a3L0Q
+X-Received: by 2002:a05:6402:51d0:b0:647:a636:76c with SMTP id
+ 4fb4d7f45d1cf-65452cd7767mr2701576a12.31.1768586585618; 
+ Fri, 16 Jan 2026 10:03:05 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.02
+ 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:03:03 -0800 (PST)
+ Fri, 16 Jan 2026 10:03:04 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: sr@denx.de, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- trini@konsulko.com, hello@paulsajna.com, 
- balaji.selvanathan@oss.qualcomm.com, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, Gopinath Sekar <gopinath.sekar@oss.qualcomm.com>
-In-Reply-To: <20250625094607.1348494-1-gopinath.sekar@oss.qualcomm.com>
-References: <20250625094607.1348494-1-gopinath.sekar@oss.qualcomm.com>
-Subject: Re: [PATCH v2] watchdog: qcom: Add max timeout check to prevent
- overflow
-Message-Id: <176858658267.3399278.13079756794774770565.b4-ty@linaro.org>
-Date: Fri, 16 Jan 2026 19:03:02 +0100
+To: marex@denx.de, trini@konsulko.com, mkorpershoek@kernel.org, 
+ s-vadapalli@ti.com, patrice.chotard@foss.st.com, jan.kiszka@siemens.com, 
+ u-boot@lists.denx.de, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20250627045244.2225303-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20250627045244.2225303-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v2] usb: dwc3: qcom: Add delays in UTMI clock selection
+ for Qscratch
+Message-Id: <176858658411.3399278.17491928613536640303.b4-ty@linaro.org>
+Date: Fri, 16 Jan 2026 19:03:04 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,22 +103,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 25 Jun 2025 15:16:07 +0530, Gopinath Sekar wrote:
-> Added a check to ensure the requested timeout does not exceed the
-> hardware's maximum supported value. This prevents register overflow
-> and ensures watchdog reliability.
+On Fri, 27 Jun 2025 10:22:44 +0530, Balaji Selvanathan wrote:
+> Added delays before and after setting the PIPE_UTMI_CLK_SEL and
+> PIPE3_PHYSTATUS_SW bits in the Qscratch GENERAL_CFG register
+> during UTMI clock selection for DWC3 on Qualcomm platforms.
 > 
-> So, added a check in qcom_wdt_start() to ensure the requested timeout
-> does not exceed the hardware-supported maximum value. If the requested
-> value exceeds the maximum value, then the timeout is clamped
-> at maximum value.
+> These delays help ensure proper timing and stability of the UTMI
+> clock switching sequence, potentially avoiding race conditions or
+> unstable PHY behavior during initialization.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] watchdog: qcom: Add max timeout check to prevent overflow
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/b2446a231431
+[1/1] usb: dwc3: qcom: Add delays in UTMI clock selection for Qscratch
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/fba8fc4a9620
 
 Best regards,
 -- 
