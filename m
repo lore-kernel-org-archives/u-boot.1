@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 925E9D4A609
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDC1D4A609
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD08F83015;
-	Fri, 16 Jan 2026 09:17:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92E3783015;
+	Fri, 16 Jan 2026 09:19:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tWEVRSEn";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="dUB1RSvc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FAA1830E4; Fri, 16 Jan 2026 09:17:20 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id F042583623; Fri, 16 Jan 2026 09:19:14 +0100 (CET)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c005::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F050980077
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:17:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96A8B80077
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:19:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Oo+pdNDfkWcH/mRfGKH3+WERajPq+Nha3zs+XOua6W8xicq0MehuciUms589mTCCEbkIgxjCh9QWSpiLSjDNdXCzJQKNuXKzh7Gh4b/eB1CP3sxRqGibxENMzxO+L4zFkKr2W1M/omUNs6+En06k3zAs866TGCCpXEvF4k3GuFcviDlzQlIYiK22HAkw14s1suP/VvRfD3/DZO4OBuNc2quWLCqqVuk3uIQwXiqiSYd/Gb5XQrYkv7GQylyKlM4JAYGerZm3xcjfjTrRTLIbD0YuVdSwBtHf0Hz8sA/c7LDC03FYqjhdwJKQ4bIcb2x8AFmqovGydFSHeQypLGv5Sg==
+ b=tuY22xMZmOVkKeD542RHqcO84TX778hn3mn9K00zPkh8ifPD31d3U3OzFfo/V6+pmAkI23+9vjmtW2pGnPewVavB6M0IaTh9VFyMEE4gzvqj7GFNXawMewEgreSERLr6FxCyLtYlROaJLwhyGCtT5d3oDd+cafD2sEM+Is+Egdqx802S3WMzBhlW7TjgIf5TUZMiG7O415ZclzX2JUw3HVuwJz3KUN4ocbqFGFk6v4eq0tcqliyfTAVylXn20XGVgBfpBBzX8HlvdZfDlqsmZgRlJUP8BJ0twLPZ5lZwVwhGh70mYGj3KhaAUD8PKmcBDgppNMCs0crqeRftGEoLwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4OLU7akXRDXynCddzDOi1x32rRGBjIzRUWXPrTDWk4s=;
- b=GMPGhtHyqkv0SwO03Th68myv7BS1tUpUobxvs5G4O5tJYFPxeRlO6pKq2H4O4sce3v25TufqodvGmVHzpRblgnlBrQhd9isGRh0MkqJUj5nu7L3A0KdTeXensIAXZPzRKsWnZKnpTt3fYJKAV8rJaeLyRJNsP4JizV1I9NWI3nKiWcbh74FbpSPTMi5dDIGCObm5IFxLONmgSQ0+QeNonDup/kEW9i6dkBghcu2wqpPHbVMU9vd10ESSFwRo9yWUQ8sSLjZOzfXpRpS4qv1b7xO/kxhB5+RYeL/qh/QuTmmMxPhZPUfd4gSK4ELaN83XKsdTJ5tXT0v6872LsMhZNg==
+ bh=Q54wZm6hekhKU1gXeL3syz4H66ePh6L8EOJYVXVJyPo=;
+ b=ZNxMy7h7FLkAdAK2YYXkFTxQrCxWp4jXFN64YFVvgBdSDUogs057kg2w4XEOr+aHYuWEyMdYWUYgqCOJcJUGQWufftZBO/xP1uq2SWm21X3nhR3IDsH38XGxpBCQ6J79VqB9TOWuxPpI65N/XH7nrYA67ptRI2DQhWup4O/KGppgykL12glHoXvbcRyIrlKTbZMz7W4yDHLj+M/VfybrU6g31NtJVk9cBGWUqzQb9IZM1chmH+hR1j1llGp7uvKVwX5nI+YtCB/pnBss8GjsKp+LfGNU9lwNgGweXUuFjuyt/vHN0Jyv+H8iijvROB/2y5/pw2OjZbxsU9Lp28FTSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4OLU7akXRDXynCddzDOi1x32rRGBjIzRUWXPrTDWk4s=;
- b=tWEVRSEnzGrgZzELEGGqOf4GPAD/X+/bHqWMbRNiumDUw6I3KzV2WiCWpd4g9h5ZEIYD9Tpf87p3PvJrS3ETirE+3/NfoqzQ5jOfuxVisuO9QWYMCXcK7XVmR196DdOxsB3CLmfs48c27N5UmEPLdmHVrGmldQxoxP+cJXlXanM=
+ bh=Q54wZm6hekhKU1gXeL3syz4H66ePh6L8EOJYVXVJyPo=;
+ b=dUB1RSvcFpk1h6AbrwiixyaadZPdDYgf+yp4ErvTFOILqS1L1sJ6j7k5C6vK14x4cF1sSuF0fYCAOh1n8XL6tr6YY7hCGKoHGU4tFv1u9gOhZJMHskTCEzZJe5aVFe1DKdcPEevvg1pJZvq0cbNeUASBpiw7k92pRhS1Jylep2s=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by CH3PR12MB8658.namprd12.prod.outlook.com (2603:10b6:610:175::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Fri, 16 Jan
- 2026 08:17:14 +0000
+ 2026 08:19:09 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.9520.005; Fri, 16 Jan 2026
- 08:17:14 +0000
-Message-ID: <960bd4b8-3643-4e78-ae70-b29453ae083d@amd.com>
-Date: Fri, 16 Jan 2026 09:17:09 +0100
+ 08:19:09 +0000
+Message-ID: <8265ad50-83d1-40fa-943d-b6e64d9b7812@amd.com>
+Date: Fri, 16 Jan 2026 09:19:06 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: zynqmp: Add SPL support
-To: Sean Anderson <sean.anderson@linux.dev>, u-boot@lists.denx.de
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-References: <20260106224202.754923-1-sean.anderson@linux.dev>
+Subject: Re: [PATCH] usb: dwc3: Initialize Xilinx glue registers
+To: Sean Anderson <sean.anderson@linux.dev>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+References: <20260106221728.738219-1-sean.anderson@linux.dev>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -106,107 +105,107 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20260106224202.754923-1-sean.anderson@linux.dev>
+In-Reply-To: <20260106221728.738219-1-sean.anderson@linux.dev>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR05CA0019.namprd05.prod.outlook.com
- (2603:10b6:a03:c0::32) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: BYAPR05CA0005.namprd05.prod.outlook.com
+ (2603:10b6:a03:c0::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB8658:EE_
-X-MS-Office365-Filtering-Correlation-Id: cefcf496-fd16-4ab9-51f5-08de54d7a782
+X-MS-Office365-Filtering-Correlation-Id: 7754ef52-b431-4221-e9f7-08de54d7ec19
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YTRQUlNDZUNRRFg5ek9KZjB0Uyt5Q0prUjI5K1gzNFEyYnZiWlNaMlBBQ1Nx?=
- =?utf-8?B?YXp2TFNzOHMrZVVkWnFsdlJJMHVFb0tDa2xqdm1ybjBjdHdoUWpma1FZQVpT?=
- =?utf-8?B?YVFrYk45OG5vZHM3SjZVeWpkNTlaZ1JzaSs1djhHMHp3Tk45Zm5IK1FlTkI4?=
- =?utf-8?B?dG9RbE1FdzdRUEIzdnVyUEtxT3pOd3dObklBK011KzE2clQ4QzhxWFUvelNX?=
- =?utf-8?B?cmRybUlKbWZSQnVCQTBvUmhjdGo4cHRCNXVHbUtJSVN0N05UOVhHdGlodFkz?=
- =?utf-8?B?djZkNmNaM3cyVXRhRkk4T0VhTDJ2Z0RmbklMVW1SenRoZnozaHhta2hoTFlH?=
- =?utf-8?B?VzVGbkhxY3g4TmpvR2JWOS9La3oxb2pPdGluVXdtSzJNdHJkd3J5Vld6b1Jk?=
- =?utf-8?B?ZERPdk00dnkwd1YrWkpHRnpmTVdyZVhla3g2VmgxTzBaYkNSUytoU1pTZWk2?=
- =?utf-8?B?VlJPTWNnbXF1cmdndndHNXA0bnZucGVxNzBRK0lyNFlCRzlaUFgrZzc3ZW96?=
- =?utf-8?B?Y1EyRkY3Nndac05FUkZjN2xXQXBlYmE5cUJWa25DVnVXRVdVeWNRODhHR2U0?=
- =?utf-8?B?NHlkbWlhc21RcHlWeURiZEY4aGFqOXBWYnhDMmlCNTYrWitJVGlNSkdUdGpl?=
- =?utf-8?B?aUVFdk1sdjRmdjB6Zngwc25nTEFvYVVQdDJoK2hPMlpHREplOEs5MXNkRklY?=
- =?utf-8?B?OWVRdytrK0RGTUlYTDY0ZjcycitpalEzdEI2R3hVVGQ5L3Z5SnJUUXp4MU5h?=
- =?utf-8?B?WXFXNU5KNlM3OTV2bldkQ1BRSUNESmFETjRzLzJrTHZLUmdsNnM2bzk5TnZp?=
- =?utf-8?B?U29CQWJjZEh1TCtzcC9USEJhZFpkZ3Q3NmJmU1hqaStzalN3UFI5eVh2TXIx?=
- =?utf-8?B?S2Qzd1hNTUcrTDdiRUpTZjcySWpCR3hic1FYL2hCRE9ET0U3T3NtSERMTk4v?=
- =?utf-8?B?NDVwOExMQVpmT0FMV0hEYlBheHZNSi9oYmwzTGMrNXA0Nkc3cVhES016eTlQ?=
- =?utf-8?B?ckZlNmlZemZDUDR4eG5wVU0wNDNmZXJLTnBxM29ic0I4YitJUmhjK2VVRmZp?=
- =?utf-8?B?M2hnTDUrNndsaWgxUk5NN1c3cWFEN1JVUG1ydktodWRUeThRcGRQc2hmOUtn?=
- =?utf-8?B?V3duMkZIVktWZUJpQTN5cTkyaS9GZ09ETkVwUm9ZZlFDd2o4S0l5Y0E4dGFa?=
- =?utf-8?B?SHlmUTZEQmRjcXR5U3J1M0pqSzR1ZlBHZ2hOUEQ0YWcrTTh5cEJPYlkrMmxM?=
- =?utf-8?B?WmdMWk4vREdETXc3RlF1aHNjN1ZHeVJCZHBnRXdWRmQySm4vQmkyZU9XalVT?=
- =?utf-8?B?UHdzY01SNlNqSEl6aVNFanlCcGZjVisvV2RXUlNsT2luN05EaE84cVFma1ZZ?=
- =?utf-8?B?elhkb1lBODlsSXhUZ20xZUdzeGZMRXBQbjB2WnRWeksrR1lvMWFqU0pvdS9L?=
- =?utf-8?B?SGZjRkZmKzRobnh5cjJTdWlqaDJmblFEaThxQSt6MFNSamxoa2RaN21SVVpH?=
- =?utf-8?B?SlZheEJLL3VJaHFvcS9RU3RYVmdHRkUzWVpVZDdoYzBIelBCUm9FR1BDNGcx?=
- =?utf-8?B?K1RMR2hCV2kwNmRFdFRoZm9rcy9wZjdLeHA3ZDFEU3JoeEFEZ1dvSFdQam15?=
- =?utf-8?B?ekEwV3dESXhQQW5ra3ZIVUk5ZHR1b3hhcnArR0xTZzk1RDVRUnRZTWFIZ3ZN?=
- =?utf-8?B?Uy9ucmNMOXk2bEV5YXh6MVY1bHVZUWxUU25tQm8wZFRFNzVNN3lkOCtCOUdr?=
- =?utf-8?B?aXY0NmdLdWlFemxmMG41RVMxWWtPcXZmRGdsSzRKWDdaeWhBeTR6YnRLdC9z?=
- =?utf-8?B?ekl5Mk5xSkcvMTRsMUJUR201aXM1MGFQZDE3eGNFaC9SMkl6S3RqQ3pHSTRL?=
- =?utf-8?B?RjRKMFNmYzlRSHNEMDdwcDExRjd1VkdtOVBIUE1PM3BmRldrZTdWRXIyaDAx?=
- =?utf-8?B?VWpQdit6NE5VcEpIQ1VnT1Zsd1BKU1JnMjJSWmorKzkxT0U4anRMeGVISXQv?=
- =?utf-8?B?WERNbFdFdXJ5NC9MVG43TnVkRmJ4dVE5NEpDK3YyRXMway9xMmEzVHZCUWV6?=
- =?utf-8?B?Sm42VWM1aXpvWjB1K3FUV0xhNE9KNjNOakN2bUdwVnozSGlYSGtxZ1M1RSt2?=
- =?utf-8?Q?Wpgc=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bkNlZ1BybUFQQlBTeEp6dXBoSnc2UkRiS3ZsTlhoNnprZzgwZk5mdjE3QmIr?=
+ =?utf-8?B?cmRYR0xIci9WTWl4MVE3TlpWK0xvQlR3UEZ5WEJDR05KWXM1QUVEMFRkNGNJ?=
+ =?utf-8?B?blFlaVFOZFpES1FZOGhhTGVnamk5cCs3bytVaklVNTBQVGhSSituNitHUzRK?=
+ =?utf-8?B?Zi9MNTR3U2hYNHFncXlaTVlIL0lQMGlGK2M2RHErTXloYmJwVnhmZEZIYmYz?=
+ =?utf-8?B?WU5lNlJRSy9FNlZaSDcvMG9vL0pGc1prakw5SXl1YkIwanlpQ2tqdWR0STc0?=
+ =?utf-8?B?VjBNK1VsL2VEZ3owNE54TGJ2ZmhDSWZTUTdBR3ovRVlyOXNvNnJqNUsvR0R3?=
+ =?utf-8?B?ZS91ekx0Uk1MUVhHVzBscmpJSzhBNkI1RXFORTdWN3V5VHZpWUlLM1VkaVpx?=
+ =?utf-8?B?OGh1dXVwaUhyNEZsSDFhTHNtbHhUMnVqYUZKcjlnczZ5dWFqdmIzckZ6bHVT?=
+ =?utf-8?B?eGUrb0NSLzlVanFqNjAydDZGdXNzN2FOVkJqRHkyV3VmVXVWMS90UmVMRHQ1?=
+ =?utf-8?B?Z0FrTnBYdHd4TDR2YWJGYitEd2N2c1IyRnhEWGRCTzVPMysrbDZlL1hmZnND?=
+ =?utf-8?B?dGFCVVRFTjVIdXFYaEtRY3NsZWNNMklRQmZqNEtkVHJnMU50Q2hOUEZmOU4r?=
+ =?utf-8?B?NzREUmxycEhrWGFPREdwVnNsSDl3dTVrUklBWnJoWkpmTk5TK2ZkVURKZTBo?=
+ =?utf-8?B?TlFsdHdPejZIaXMwNUJURkMzc05BSnFYdUtlWDdLa292OHpBL3I4UDZyRVoy?=
+ =?utf-8?B?NTBoWTUrMlk4SjZtekptNUNWNCtDTWxiUkUxMEFRYU1EWlRERGJDVVpFNTVS?=
+ =?utf-8?B?WU1yUGpBVEFXL01NOEVlSXhiMk9NMmZIc1pkWEFUbGxqTHVoVlFYbGtVbVJD?=
+ =?utf-8?B?amVLSnQvRFY5TER1TmxONHpscUdqT3JHeDZzNnord0w1UUlSbVV5MGZGcDFp?=
+ =?utf-8?B?eGZwY1ZMNTJZeVFsb0s3a0lTZ1BOMHpLbHpsT0FnS29iMzR4YTMrWGpsS25Y?=
+ =?utf-8?B?NTRFRFMrSXMxSWV2bU5YQjM0Z2E1emxyQlhlMm5CU1pWMm5ranlBY1gzM1hj?=
+ =?utf-8?B?dVRGeDI1QmpueDIzYmdUZWlCU1B0aFVNL0dVUkpMT0JpY1VVV3NhT0pndWZY?=
+ =?utf-8?B?aXROVUhBeVNSNlBING5MaVEvKzlRR2lCQWsvVmptM1JoRGhXQnFkaXBGVFFK?=
+ =?utf-8?B?M1RCSGFidlo2SWlmVXV4UlhkMTJBRzNOT2ZwR0M0RkxndDVJakhkK2VqVGtR?=
+ =?utf-8?B?c21waFhsKzJ0R3VISnNsdkpJVWtudjFHU2NnaTBKTElORkFSdlN4emhZc09D?=
+ =?utf-8?B?T2dENU15K0NhWFdXamdQajd3ODZaZ3pEd1N6cjZPVkVINlJKdnR0TkNaTDZY?=
+ =?utf-8?B?UDR2cXIyNXpnNHR1dU8zS1pZUGhPQjg5dk1wbElQd2prWUFHMHdUc2w2TnZo?=
+ =?utf-8?B?M3BoVW9FUTdxd3ZhelJoc1gxdzhPRU10RUFqQ2lDdDZ4YkN5M3JDelBXWmFC?=
+ =?utf-8?B?RzFxSmhRUHpQZXllMzFhdndadDhOamFjL2JJblE3MEYwQnF5eU5EUEJodzRR?=
+ =?utf-8?B?aTIxQ0xORkFzczdlOGVYenBJZnM5cHVHdkFiSno4R3Q3OXprNWVuWTZqNW5N?=
+ =?utf-8?B?SnBUMW42MG4vbWFPWmNzRUtYbm9IejBvdXNmZjJiUm84R0NBeUxaUGJaM2VV?=
+ =?utf-8?B?ZFdvRGlwdXVtbFgxdHQ0Wk1uSFZVVFRLU3JSUGttUEw0YStMQkZCczZGR2pH?=
+ =?utf-8?B?ZFhlWHZIYUllWlJlejdJSndmNHViVUpSd1c2U2tmbnNPOGRxMXNjZi9xOGlI?=
+ =?utf-8?B?MG1sVkR4eHZNRFhrN2tzQS85K0VBRFV6WVlXYzNobCsrdlVsZW5Idkx1Z3hh?=
+ =?utf-8?B?cWUrMllham8yd0ZNQ1FYb3VuK1BMNXJrNDVQU0UrYitVMjZBVTdSaXRXMXJK?=
+ =?utf-8?B?SjRRSU5QNjFJQnBobnNzRDJEQ0FGaEJEbzdwR2szKzM3VFB0YUFKU3hvbEtn?=
+ =?utf-8?B?VDlJT1VWMjNQbGo1Q2tKRm5FUElYSkJCOVdjcVpTOXVSTHlTdy8wRDdBSWZm?=
+ =?utf-8?B?MlVLVHdIRGU3amdqbFdlcExkZUxBbDhkRG9UWC9HZHVra2NqdjU0ZHlSMnIv?=
+ =?utf-8?Q?sNrE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SUgyaEVYd041Y3Z4R01lelJuMHY4TThidElSaHRuU3c2d1BTM3ovM0doVnJT?=
- =?utf-8?B?RWQ1cW0zeHZVRnlFZTZwRjJDVG5pd3lKaWdSMmVkS0xOUXRZTmFUZDFxL2lj?=
- =?utf-8?B?UU9JUXB5TkhFeUpFS1UvUU5pWlpvNDg3WkIzd3Zyc0I4MEU4dEc0eU9HWGN6?=
- =?utf-8?B?SDd2YitMdUpHSFF2UWNzMExsQlBkb0hGVEo2SGxpcjdXOExiem16RFJINjgy?=
- =?utf-8?B?ekpwSDVXTktjMFc4cVlEYkRzTStjalBqRndYYmhIVFo1dktscmZ2NWhOVkZw?=
- =?utf-8?B?K0VrTGwzVzZsMUQxWFBBWlFDcDBsSjJSUkp2a0ovU29xV3dnNTJMaStCUHVD?=
- =?utf-8?B?OWUzNHhUUGRyUmYya3ljWFcxVkZzUU5rbzQ3SzVnblN6OVNKaTd2cFRrWmRo?=
- =?utf-8?B?SFkvbHFHbXVKZXZJS1p3cXBlNGVaSnJ5eXd4N0d5NlJyVEJFTkJ0Q2RkZHVP?=
- =?utf-8?B?QnM4QXorb3JiNEhvVDAyZ1lOMWdNckJnc2xHNGQrb1BnTGpIdXJ6U1pIV3BU?=
- =?utf-8?B?anBYblJQYTlFNWRqeTM1T0VKQ1IxVm9FOEpnRVhNcVpvRXJiYzR6SVF1U2Fn?=
- =?utf-8?B?ZTVob240Z1pVOWt3cW5HazhRbGhNKzFGVWtRaGdOMkJ6bkdEUWlCUUd1MVhn?=
- =?utf-8?B?bHBPZ0E5V3RuZWdOdkRlT1Z5THJIb05yYy80eS9SOG5wRU4wWGlPY0E4dnZk?=
- =?utf-8?B?L0xGNklOOHdBSUIxalNHaG5tTjBTaVNvSXNqdEVTK2RzL3VwMFhxWW9ydC9x?=
- =?utf-8?B?clB3eTYxMzZhdnR0YVdwVmw0NFgvN25TYWdoYlNpcmFhV1kwTkRRc09JK2Rp?=
- =?utf-8?B?UFlkQzNSZmJscHRZR3BBZGo4VFRDTm53Q3VGTGJGSWMra2djTFJ3RzcrTnov?=
- =?utf-8?B?SlVoa1YzU3lqM0puQXBaUzlMdW94QzNZUHE3VnA2cUx0WThuM1BuQThodUhK?=
- =?utf-8?B?Mk5TekpzNnFZOVRTZ1d5K3dwWDhPZkhGcVlETFlkbDhVRHZaQkpwcVVPcnUy?=
- =?utf-8?B?ZndJMVhlNFNlVG5OdEtqR0xBSG5uUzlRSFFjbllrZHlDQUZVVHpCU3NQc2Vn?=
- =?utf-8?B?d2RjWmZkV3Zodm5qNDRIblRDbUNvWlYxbzgvam1pOUpVU0VEVExLdkhnai9T?=
- =?utf-8?B?dHpHb2hNTW1LSDN0VzFySGFKRUlyNjIrQ0RHY1RsRDAveUZsaldqeldPaFZI?=
- =?utf-8?B?eFNKRms3UDlBWW14YkhkY08rMGRxVU13NjRIS1VrTXV1aFVQeStHbVFobSsv?=
- =?utf-8?B?YmlVMDhzNjVWU0xlb09iamtpc2x5dkZ3bXVXOGh3T2w0ZUcrczU1cjNZSndP?=
- =?utf-8?B?V2cxcmIybU1UYUZHWUd1bFJ5UTlQbkdmU05uY3dqWStjYnZNc2dJSGEwTTV4?=
- =?utf-8?B?Wk9xS252eUhuN3p1SEVCVm0rakpWN0ViOFRBNjJHR05NZ3dPNHZJc1hHMzJY?=
- =?utf-8?B?RmEwS1hMS01pTkxIOWpIWDE5R25sNTJ5TWRYakt5Y29Cbi9mZ0lVZnlRQ2ly?=
- =?utf-8?B?cjl2NE5XQ3p4cTNRRTNaRVkxK0xTK1FlMm92VVkyRFNjTlJIRTErM3kveVFT?=
- =?utf-8?B?ZzJORHBvWmhORzhhRk9jZkFreEo4UkhPV1F0Z0JweHRWeU9ncktiaUxJLzds?=
- =?utf-8?B?dG13cncxMnAwVDg2TnRBQmZXL2JxUnM0eFBBUnhRdkhYS1RiREp5OUR4M3Vz?=
- =?utf-8?B?ZjlHTEs3MDM1blIyWVdiVmh6cGVQeHBqS1gveVFZaXBlUExBNTl3b1UxdEtT?=
- =?utf-8?B?ZDFjWXUzbUE3elRxV29JNVNEeHVQeGEyS1ZBKzN3aGE0UXZURVI3V3pWWFgr?=
- =?utf-8?B?WURNeTJDUDdBOUZEMjBXQTVMditGQlRFMWFZai9yUXZraDF2Vnpld29BTjY0?=
- =?utf-8?B?ODhMeUsyemNGK1Z2Q2FMcGw4QU56R0dJYkFyQlJacFNNMVpsYkdJSlRZQk9q?=
- =?utf-8?B?ZDNRZENzeVF5TW1aS0Y2dDZwNmx5YWo3aXcwZ2FqQ2ZRT2pIUnVKdkpqMUVK?=
- =?utf-8?B?U3RKV3RnUjR3N0tOaWFSMlJMTUFzMzVQRkxQTTdrWU1IR0o0L3lDaTFHb25U?=
- =?utf-8?B?TjhTalp0TDBDbUdMUWw2QzdpbkdsaGhBbFlhQ3hjRng1elVGdWhJMXBOTFBa?=
- =?utf-8?B?YkN6VWpjZnlxSWZzWUY0MkVZMVBiU1VhWU91R1lFSDlVSWlUV2xSWTF6enFC?=
- =?utf-8?B?enhZNURDNmlwNUNmMjFLc1FhSEFXUmJwK1Y2NHdZSEpSWFAzeUE3c0cyaEdD?=
- =?utf-8?B?bEJ0RDFTSG5VVVNoWW1Xdmp5eFV0ZDhLd3RzandqQXJEZ0ZNTCtCMFdpbWFX?=
- =?utf-8?B?SFFQZEl0OE54MkQvNENJclcyODB4VkhBcnUveUNJUnJEc2dhdDRPUT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VHowcUR6OTRGeVZqcUJxQ1k4cERQMWNBRENnbHFERkVBbDQ3ZlBWVVJ2MUF6?=
+ =?utf-8?B?OVBHTXo3dkxJZFQvb3ZIZmZKVHlQZkFCaFVlU0FtYlZRWEJsMTJaQTBkSGxn?=
+ =?utf-8?B?RE1vMm1rbHBMTkQrd0pGM0s0MHFCUmJrdVRNOThRT1JITGZrdUZxenZIMXM1?=
+ =?utf-8?B?UkN6Z3BxYzBSSFFTY29VZ0k0TkQrRkQyOGg4NDNpK0FFZFpibXZRY3pqa1lF?=
+ =?utf-8?B?WjBGNG01c1JwenBUWWlmelVCcW1nT1YvaERqdnlBd3JzMWNUbW4rN0U0T2xZ?=
+ =?utf-8?B?dVdwNGdleEp3WEppRVdsK0ZKUlh3UEY1ZWtCbUFxNjd3cXVSRDRvNDVQZElC?=
+ =?utf-8?B?TG1oSDhmMFhGY0FDendKaVU2dWNwNFdQcmVqc001UHFVOXdIazNaT3psZ29B?=
+ =?utf-8?B?U3lzY09HVDlGS0lxaGpjRTI2TWJHc2Mydng2aVJjN21OQm1hN3pHVEI5UzBw?=
+ =?utf-8?B?MVBiWTRsaHBWWDBjMENGb1F6TndEb3M0NnVSYm5qMTVLbjBzd3U4MWlKdFF3?=
+ =?utf-8?B?eHdDdzVoaHZYWXhNRzlsRStjaWd6elFpcTMvSVpMZ3BkaUxoTXpGYkthUnBn?=
+ =?utf-8?B?RnpUSms4RWxVc0JqVzkzbUd0c1BTamFCR0NPcUZ1VXB2b2RCNHFIZTlNSTdG?=
+ =?utf-8?B?Z2NsbExqK1g1enZoVndvVkdjTlBqY2lWcUMvUjRvR2h2Um44Q0ZjeFJVRG5y?=
+ =?utf-8?B?OTNIUHRyV0Z1U240V1lUVWJOcklSSlpJZlBhYStTOFlEU3VNTE1uWFJNYllV?=
+ =?utf-8?B?cXMrRGxaTXh1SjNOTnRYN0YvcDdoUDBvWDAvbEhwMmE2WncrQW1IS3ZvN0hs?=
+ =?utf-8?B?RjE4NWxFOFVjNDY1OGVDbVFxQUFGNWpHRnMzTjZ1NDVPUGVVS3RleTdaQ25x?=
+ =?utf-8?B?VTZMelZMWE5KMjVVR1o5dVdRajBPOE96Mi9BZis0Q2dseHVCN2NGTGZLWDdv?=
+ =?utf-8?B?RE1rN3F3RmFFUGg3VWZNUC9CV2hSLzY2V1Vic3NxWk1QQjYxWDhoRjMvdHox?=
+ =?utf-8?B?aGVzRjZQRVhudVpWMUZiTEJINTZsV0VmQkp2L1BuS3pkNkdvYUw4MGRVKzI5?=
+ =?utf-8?B?NzMvMzNFb3crQ1pVR1BOL2xNL2tTKzl4c2FoQW1GYVJNM1RYT1FtNHFvMWxF?=
+ =?utf-8?B?RVpzNlFUT3V2Y3F5M3p4Y2d6bm1vaTgrNmRFSXVYd254bHF5Y1BYU0FGQUQ0?=
+ =?utf-8?B?emVBV2FLU2FyYTc1MHczTTNrU1dDNTl3VUdNaGtNSjQwWjAzVmRnWlEwMmVn?=
+ =?utf-8?B?MUVuRGVxaFdaQ014Z2FUTVdCQ2dWVVhMMHVXYUtkK2FBZGFiVGtQMnV6WjVy?=
+ =?utf-8?B?NzdmZnZkd0FjVFZtNWNnY29VKzZvWnJ4akgxdHliU2djMktYRlhjL0QrQURH?=
+ =?utf-8?B?ajE5VzlMMG9TVldqTUp0b3E4L1JnYVF0OXNFUTdlSHhiVDZ0dS9FZEIrRTBV?=
+ =?utf-8?B?Z1ZTcUlYMkNJQi9qWEtndjd2aytKbzRNZU5rTFo2RSt1U1NJUlRtWVJXYk40?=
+ =?utf-8?B?MUxsT3VVWTZhUXUwMk4vWjdVTE45VEtLSktMWERzTS9DR294TWZYcGgrZm9P?=
+ =?utf-8?B?bHgyVjJaTnNmcEppbWdNYmxXbytCd3J5RklxYmhtOFpTSzQ0TnJkeC94Kzh3?=
+ =?utf-8?B?TXBXRy9ZZ25Zd0g4bjRoTHI1d082bS9jSGw5aEZpU2FMUTY3RU45akMyMDIy?=
+ =?utf-8?B?OGtRVlFvZ210UUlpNDljYmtxNTUzR0RrTVVDY2NCZUovRjFzNXFobzMydzJG?=
+ =?utf-8?B?djBGZTBTT2tIN3lWRTJFbUQ2TUtoZCtVRTUxdDFoMGdWYWw3bnJZamI3bThn?=
+ =?utf-8?B?UG14bTNka0x4S1J3WXBBZE9VRXo2ZDJJaGQxRUd5MVF3RkM2UkZxejZoQ2Iz?=
+ =?utf-8?B?SHhSekVIWExpeWdZck41eUZDNnpWbm5FR0hiWUxDSWUzTUN4cXRHU0hwRDdD?=
+ =?utf-8?B?TU92bitHemRBNHpVcVcvT20wRlNDTXp5TDhtMkkrREI5UzA2bDNQQnp4V0tW?=
+ =?utf-8?B?STZxcG1ETWMwbHlsSDhNeWN3ZVRpcW5vUm9WYkRsQUNnR1dUMkk1TExMZUdi?=
+ =?utf-8?B?YmRPc1hvYVFJMUFzVGlVSmFUYkg4ai95cHc5cU1hRklUcnFDb29JbGpLcDdG?=
+ =?utf-8?B?aVBWT0xBV0x2RE5mMjdYTFh2TVhiL0pnS29FZldXME9Md0x4OXByZDZtQWhB?=
+ =?utf-8?B?ZExEV2hBbVFtcGFxbi9IdWhSTDVNY3NTSnBVQnRmMm13R1BYeVZldENqVzIv?=
+ =?utf-8?B?MU1HU3BSN2dJb1I1V25GeEgyejNSTVpwTERGUTEwS2VvNVVxeHU0Ky90QlVG?=
+ =?utf-8?B?SFlTT0Z1c0hGWWlVMWF6dHlsWis3ejNQUGNMZWtLZm1sMEJPTWtOZz09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cefcf496-fd16-4ab9-51f5-08de54d7a782
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7754ef52-b431-4221-e9f7-08de54d7ec19
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 08:17:13.9516 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 08:19:09.0266 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vwjoUxrqDv56sd3gBBtgWFWuJPL7EpDBoOhD69DPYno5Gi2FJak/Kz40O8n3Sw2m
+X-MS-Exchange-CrossTenant-UserPrincipalName: DD8KkjixiAZVXHDHUEae0uIGmL6avwLHsqA04Qps3TqEIvqL1Z1vxcbHSATOpGJJ
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8658
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -226,182 +225,107 @@ X-Virus-Status: Clean
 
 
 
-On 1/6/26 23:42, Sean Anderson wrote:
-> Although the pinctrl pm requests are implemented in the PMU firmware,
-> PM_QUERY_DATA is actually implemented in ATF. In SPL (or when running in
-> EL3), ATF is not yet running, so we need to implement this API
-> ourselves. Do the bare minimum, allowing SPL to enumerate functions, but
-> don't bother with groups. Groups take up a lot of space, and can be
-> emulated with pins. For example, a node like
-> 
-> 	display-port {
-> 		mux {
-> 			groups = "dpaux0_1";
-> 			function = "dpaux0";
-> 		};
-> 	};
-> 
-> can be replaced by
-> 
-> 	display-port {
-> 		mux {
-> 			pins = "MIO34", "MIO35", "MIO36", "MIO37";
-> 			function = "dpaux0";
-> 		};
-> 	};
-> 
-> While this isn't backwards-compatible with existing devicetrees, it's
-> more than enough for SPL where we may only need to mux one or two pins.
+On 1/6/26 23:17, Sean Anderson wrote:
+> These registers may have been initialized by SPL/FSBL, but program them
+> in case they have not. If they are left at their default values, the
+> controller will never exit reset.
 > 
 > Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+> 
 > ---
 > 
->   drivers/firmware/firmware-zynqmp.c | 100 +++++++++++++++++++++++++++++
->   1 file changed, 100 insertions(+)
+>   drivers/usb/dwc3/dwc3-generic.c | 32 ++++++++++++++++++++++++++------
+>   drivers/usb/dwc3/dwc3-generic.h |  2 ++
+>   2 files changed, 28 insertions(+), 6 deletions(-)
 > 
-> diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-> index f8a9945c1da..77911757177 100644
-> --- a/drivers/firmware/firmware-zynqmp.c
-> +++ b/drivers/firmware/firmware-zynqmp.c
-> @@ -427,6 +427,102 @@ U_BOOT_DRIVER(zynqmp_power) = {
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index c09014aec60..ce896db9532 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -501,6 +501,27 @@ struct dwc3_glue_ops rk_ops = {
+>   	.glue_get_ctrl_dev = dwc3_rk_glue_get_ctrl_dev,
 >   };
->   #endif
 >   
-> +static const char *const pinctrl_functions[] = {
-> +	"can0",
-> +	"can1",
-> +	"ethernet0",
-> +	"ethernet1",
-> +	"ethernet2",
-> +	"ethernet3",
-> +	"gemtsu0",
-> +	"gpio0",
-> +	"i2c0",
-> +	"i2c1",
-> +	"mdio0",
-> +	"mdio1",
-> +	"mdio2",
-> +	"mdio3",
-> +	"qspi0",
-> +	"qspi_fbclk",
-> +	"qspi_ss",
-> +	"spi0",
-> +	"spi1",
-> +	"spi0_ss",
-> +	"spi1_ss",
-> +	"sdio0",
-> +	"sdio0_pc",
-> +	"sdio0_cd",
-> +	"sdio0_wp",
-> +	"sdio1",
-> +	"sdio1_pc",
-> +	"sdio1_cd",
-> +	"sdio1_wp",
-> +	"nand0",
-> +	"nand0_ce",
-> +	"nand0_rb",
-> +	"nand0_dqs",
-> +	"ttc0_clk",
-> +	"ttc0_wav",
-> +	"ttc1_clk",
-> +	"ttc1_wav",
-> +	"ttc2_clk",
-> +	"ttc2_wav",
-> +	"ttc3_clk",
-> +	"ttc3_wav",
-> +	"uart0",
-> +	"uart1",
-> +	"usb0",
-> +	"usb1",
-> +	"swdt0_clk",
-> +	"swdt0_rst",
-> +	"swdt1_clk",
-> +	"swdt1_rst",
-> +	"pmu0",
-> +	"pcie0",
-> +	"csu0",
-> +	"dpaux0",
-> +	"pjtag0",
-> +	"trace0",
-> +	"trace0_clk",
-> +	"testscan0",
-> +};
-> +
-> +/*
-> + * PM_QUERY_DATA is implemented by ATF and not the PMU firmware, so we have to
-> + * emulate it in SPL. Just implement functions/pins since the groups take up a
-> + * lot of rodata and are mostly superfluous.
-> + */
-> +static int zynqmp_pm_query_data(enum pm_query_id qid, u32 arg1, u32 arg2,
-> +				u32 *ret_payload)
+> +void dwc3_xlnx_glue_configure(struct udevice *dev, int index,
+> +			      enum usb_dr_mode mode)
 > +{
-> +	switch (qid) {
-> +	case PM_QID_PINCTRL_GET_NUM_PINS:
-> +		ret_payload[1] = 78;
-
-Macro for this value please.
-
-> +		ret_payload[0] = 0;
-> +		return 0;
-> +	case PM_QID_PINCTRL_GET_NUM_FUNCTIONS:
-> +		ret_payload[1] = ARRAY_SIZE(pinctrl_functions);
-> +		ret_payload[0] = 0;
-> +		return 0;
-> +	case PM_QID_PINCTRL_GET_NUM_FUNCTION_GROUPS:
-> +		ret_payload[1] = 0;
-> +		ret_payload[0] = 0;
-> +		return 0;
-> +	case PM_QID_PINCTRL_GET_FUNCTION_NAME:
-> +		memset(ret_payload, 0, 16);
-
-Where is this 16 coming from? I expect this is max number of chars of function.
-
-
-> +		strcpy((char *)ret_payload, pinctrl_functions[arg1]);
-
-you should check that arg1 is between 0 and array size not to read value behind.
-
-
-> +		return 0;
-> +	case PM_QID_PINCTRL_GET_FUNCTION_GROUPS:
-> +	case PM_QID_PINCTRL_GET_PIN_GROUPS:
-> +		memset(ret_payload + 1, 0xff, 12);
-
-Where is this 12 coming from? Macro for it.
-
-
-> +		ret_payload[0] = 0;
-> +		return 0;
-> +	default:
-> +		ret_payload[0] = 1;
-> +		return 1;
+> +/* USB glue registers */
+> +#define USB3_FPD_PIPE_CLK	0x7c
+> +#define USB3_FPD_POWER_PRSNT	0x80
+> +	struct dwc3_glue_data *glue = dev_get_plat(dev);
+> +	void *base = map_physmem(glue->regs, 0x10000, MAP_NOCACHE);
+> +
+> +	if (generic_phy_valid(&glue->phy)) {
+> +		writel(0, base + USB3_FPD_PIPE_CLK);
+> +		writel(1, base + USB3_FPD_POWER_PRSNT);
+> +	} else {
+> +		writel(1, base + USB3_FPD_PIPE_CLK);
 > +	}
 > +}
 > +
->   smc_call_handler_t __data smc_call_handler;
+> +struct dwc3_glue_ops xlnx_ops = {
+> +	.glue_configure = dwc3_xlnx_glue_configure,
+> +};
+> +
+>   static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
+>   {
+>   	const char *name = ofnode_get_name(node);
+> @@ -621,11 +642,10 @@ int dwc3_glue_probe(struct udevice *dev)
+>   	struct udevice *child = NULL;
+>   	int index = 0;
+>   	int ret;
+> -	struct phy phy;
 >   
->   static int smc_call_legacy(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
-> @@ -493,6 +589,10 @@ int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
->   	      __func__, current_el(), api_id, arg0, arg1, arg2, arg3, arg4, arg5);
+> -	ret = generic_phy_get_by_name(dev, "usb3-phy", &phy);
+> +	ret = generic_phy_get_by_name(dev, "usb3-phy", &glue->phy);
+>   	if (!ret) {
+> -		ret = generic_phy_init(&phy);
+> +		ret = generic_phy_init(&glue->phy);
+>   		if (ret)
+>   			return ret;
+>   	} else if (ret != -ENOENT && ret != -ENODATA) {
+> @@ -643,8 +663,8 @@ int dwc3_glue_probe(struct udevice *dev)
+>   	if (ret)
+>   		return ret;
 >   
->   	if (IS_ENABLED(CONFIG_XPL_BUILD) || current_el() == 3) {
-> +		if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) &&
-> +		    IS_ENABLED(CONFIG_PINCTRL_ZYNQMP) &&
+> -	if (generic_phy_valid(&phy)) {
+> -		ret = generic_phy_power_on(&phy);
+> +	if (generic_phy_valid(&glue->phy)) {
+> +		ret = generic_phy_power_on(&glue->phy);
+>   		if (ret)
+>   			return ret;
+>   	}
+> @@ -690,7 +710,7 @@ int dwc3_glue_remove(struct udevice *dev)
+>   }
+>   
+>   static const struct udevice_id dwc3_glue_ids[] = {
+> -	{ .compatible = "xlnx,zynqmp-dwc3" },
+> +	{ .compatible = "xlnx,zynqmp-dwc3", .data = (ulong)&xlnx_ops },
+>   	{ .compatible = "xlnx,versal-dwc3" },
+>   	{ .compatible = "ti,keystone-dwc3"},
+>   	{ .compatible = "ti,dwc3", .data = (ulong)&ti_ops },
+> diff --git a/drivers/usb/dwc3/dwc3-generic.h b/drivers/usb/dwc3/dwc3-generic.h
+> index 40902c8923f..13f6391cae8 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.h
+> +++ b/drivers/usb/dwc3/dwc3-generic.h
+> @@ -10,12 +10,14 @@
+>   #define __DRIVERS_USB_DWC3_GENERIC_H
+>   
+>   #include <clk.h>
+> +#include <generic-phy.h>
+>   #include <reset.h>
+>   #include <dwc3-uboot.h>
+>   
+>   struct dwc3_glue_data {
+>   	struct clk_bulk		clks;
+>   	struct reset_ctl_bulk	resets;
+> +	struct phy phy;
+>   	fdt_addr_t regs;
+>   	fdt_size_t size;
+>   };
 
-This logic have to change a little bit.
-There is also CONFIG_SPL_PINCTRL symbol which likely needs to be enabled. But if 
-it is not still this code ends in SPL and just extend binary.
+I will let Marek to handle this. From my perspective we should take Jerome's 
+patchset to update usb stack and then add this on the top.
 
-Don't think you want to support running U-Boot out of EL3 but if yes that logic 
-should be adjusted in connection to CONFIG_SPL_PINCTRL.
-
-
-
-
-> +		    api_id == PM_QUERY_DATA)
-> +			return zynqmp_pm_query_data(arg0, arg1, arg2, ret_payload);
->   #if defined(CONFIG_ZYNQMP_IPI)
->   		/*
->   		 * Use fixed payload and arg size as the EL2 call. The firmware
-
-M
+Thanks,
+Michal
