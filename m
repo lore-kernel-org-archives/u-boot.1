@@ -4,223 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8504BD47CC3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:16:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9D9D47CC3
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBB8182BF2;
-	Fri, 16 Jan 2026 11:16:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CADA82BF2;
+	Fri, 16 Jan 2026 11:18:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Qiyv48IV";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Qiyv48IV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NG32psri";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A81D383623; Fri, 16 Jan 2026 11:16:26 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 49CC083966; Fri, 16 Jan 2026 11:08:29 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37D4880077
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:16:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84DC5839B1
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:08:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=onuUZQ5ZQFWIpOdDcfWxidO/pLtVPzkxdtGSszHCmuOxLAKiDIKGcUT3zq4ZHNUlbjO0hnQ+DiucBu32OLBQ1beMEiotuPqfjk6h+yYbVzmdW2fnAeqOVAzx2QJtDyfAz1tbGonhaDhOCL/ZpSIEmJSCpmoKOctKmAcbjI5c4r7ZS1cQcdLvfSTV/iNZKcdwVFrEAXefOJTz8wTrCImgUQhSHg8dIyqLUWHp60/m5fil6El0A3csvqTyYFP3jOQt9dF7MJnuvuVJF/gbG0LDUoY2XS43OFvdC4+Fa5zwY9axPrKmMRUVnPmR9SMcDYt4IvU5EPDrK6z/mtLxXub0ww==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bGOKvwKRWYXT0QvX70vzxk4RtEVXw40gBYBORlDVmbY=;
- b=k5S57OaQuE/d2aKBC3sg1Tv3g2RuioWPlTCFb1/GkPfbyiFPSUirzq0ShPBf3CknwQlIAU6avOhUBtEb/mrMiwvzo67/HHoCoMSzGUBif6tbU2G2IBiRroeyeo11bwdMUrbQNF3vwblbUPvk4PV/xBaAAXI47NQKI2BtR7JVNTXWNhQeo8C+esSjqUsQirqAfjLiqpTQLq0M1nYHPrLcg1evoEsbKNN2xrtBznKa0D0l/oqQEQuqDXvC95chFiKiTVcZgwQ/VU/rmCOlNuwPXNwRKrt5ICqLXcU3A4zt2F/CvoCNKEw76IBsO+0MeuFWFMnn/zWMLLd4o2cAa5Jyew==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=forissier.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bGOKvwKRWYXT0QvX70vzxk4RtEVXw40gBYBORlDVmbY=;
- b=Qiyv48IV2n+DlsTBpJuJ5emrk26NGGusGtSNlRckd9pEOTwhfnvlinSOrKu0SH4pdaB/x+IWNeiNJWwYqtjQ1GmDVQiOLJD2hh5PjSFiFc7GqeMS7lKK8jfYS6edixYr0Qv+bgyphYD0Bc+Xt/5rL9N3plgv2VWSn9Gq/7aNPWw=
-Received: from AS4P189CA0010.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5d7::14)
- by VE1PR08MB5853.eurprd08.prod.outlook.com (2603:10a6:800:1a5::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.6; Fri, 16 Jan
- 2026 10:16:21 +0000
-Received: from AMS0EPF00000191.eurprd05.prod.outlook.com
- (2603:10a6:20b:5d7:cafe::2d) by AS4P189CA0010.outlook.office365.com
- (2603:10a6:20b:5d7::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.8 via Frontend Transport; Fri,
- 16 Jan 2026 10:16:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS0EPF00000191.mail.protection.outlook.com (10.167.16.216) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.4
- via Frontend Transport; Fri, 16 Jan 2026 10:16:21 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qIUsNoYfTbEFa2HiMuJki4+0o0v7rEJCF56/PiSQiyvCQ58ivLQKswciHD77EaGPoSZqgd8qdswIJlfc4L25q0j7nEQV/uyhHIffr5o/viErFx6kwvY1cc+gB+LxF57IR7ZQg+LID7KRCgkl517NX+LNrSUzSQZggNVu1J8WE4Cqx32/Y8R0kfGcSJoToPGXwatxKv+Tk322qgygtu1STAcwSFtdq6tdfT7Uk3awZHXUn8bTim65G9skpOTmj+mAk9kACxe/RI+gXDZWFgIuwtiJHwfdWJ5jAiVFxkgLxTRRJT48h6ak6Lj55lTBlJSv/AVwMYKBfJR/dnDN8S2D3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bGOKvwKRWYXT0QvX70vzxk4RtEVXw40gBYBORlDVmbY=;
- b=vTQwxY1NeBG5jkxhV8oDmU9tdDbncbzmd1uR0SiEx9imsTBpfGyaWBOJnMHk7Vf44OJEblZuKe2q233lvkvSdyp3hLaIO2xCv1iAYJ8FgKvibUhhd2MSuRJxY+o+SA3OpzDvkRuWh554ym0NxPsGv4ZsuEz7YUts/U+khlqhxk7pO4Xj7QidtXSJOHk3oVLukaZkPU93NMp3uOZyz97xZhHt+qkjs+52ZyZZg9Glc4dXWY5aGH17VTHR9i8zJw8zirKoCAAC74aylvCe7FNaak7MGIPDGL668GkrizT+OLYy/q9MrtRaVK0jKSAHt0zrtPSpQYbNxJjGEvV45pWNGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bGOKvwKRWYXT0QvX70vzxk4RtEVXw40gBYBORlDVmbY=;
- b=Qiyv48IV2n+DlsTBpJuJ5emrk26NGGusGtSNlRckd9pEOTwhfnvlinSOrKu0SH4pdaB/x+IWNeiNJWwYqtjQ1GmDVQiOLJD2hh5PjSFiFc7GqeMS7lKK8jfYS6edixYr0Qv+bgyphYD0Bc+Xt/5rL9N3plgv2VWSn9Gq/7aNPWw=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by DU4PR08MB11271.eurprd08.prod.outlook.com
- (2603:10a6:10:61c::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Fri, 16 Jan
- 2026 10:15:29 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9520.005; Fri, 16 Jan 2026
- 10:15:29 +0000
-Message-ID: <3793afa0-5d2b-45b1-9153-d78d0c9cd70a@arm.com>
-Date: Fri, 16 Jan 2026 11:15:01 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: lwip: add TFTPSERVERIP Kconfig option
-To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jerome Forissier <jerome@forissier.org>,
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, nd@arm.com
-References: <20260106203433.3133926-1-jonas@kwiboo.se>
- <7d2ac045-d364-4d37-b654-aa704cc07a7b@cherry.de>
- <7f9d6ad3-afd2-4364-8d33-8510e183642c@kwiboo.se>
- <a8a8dd8d-dfc2-4274-9203-a88d9bcb8a69@cherry.de>
- <c9664240-002a-418d-9301-e8307e3e0aea@kwiboo.se>
- <36c506b5-228d-47ab-ac6f-fb6dd784ff46@cherry.de>
- <77a9bf3d-6662-43fc-9ada-fedc5e611d23@kwiboo.se>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <77a9bf3d-6662-43fc-9ada-fedc5e611d23@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0178.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:311::9) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+ spf=pass smtp.mailfrom=alchark@gmail.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-5014e1312c6so9500991cf.2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 02:08:25 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768558104; cv=none;
+ d=google.com; s=arc-20240605;
+ b=QMJe/AWQX+qc3on4AWlPkElGk/HwPU7AyHb4XHMEE+XbOQoCzgoVlhr+Np9oG1tI7e
+ 9DgJpB7lZPiHSqIisxatW89wrBXRj+BwYsIYWhVFxUZ6hRb4HtT94ooRYk4FmtjusTHn
+ jOF64wgLvq2L0Bj/deUexNNBLeF46n/RU+S+5raof9dN1jmWjXyXMzkllo2idXDwi9h/
+ Pnc/LDUu6uj+kKHBOsmfm7pTT1bDkiPEVK+f1KXfBCqzpTf+FNChSdNVodhWR3ZLlV5h
+ fCs76s1Z4/vJL4bDzpjREyEpbYZ+X9omOTaYJgxeGozPP4GyHEl5qh8E9IGtFAOh7A8G
+ gN2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=TOcjygW55UKU035rYqyUn245D7sEv3knJ72ZKZR5ees=;
+ fh=8VqwTZ7piYjPWQEFUarO0F8pZOq/0cPbU4RFz6Q+04g=;
+ b=PPYKcOimHR/yvZvuDYNo5pNYyLtOxwMWCC7GArAt+sl0udcNUGeUmBMsZcjZY08E5p
+ TS70jyghr8E5Ny0lBDIyotgHHbibi8/F2LHFZMuebH4EPQG3oLsO43M/Y0NVm/2Pk/WF
+ 9zSh4aNUqgIf2Q7yOul5hOBw9r/ACbnNYbhMsZnfkoitWkPLsas5i1Qs3wYbryxi1L5Z
+ +unfcLsMDhhWJ7P+pTvSdKiPn6LEPeLPlwuhbaV3mLpP9VT4N8JHWLsxmeSZtSHuJhwA
+ sj9KqBwu4kaJSVhUA8RAibzP8O+SfBggioxTYaVXOKBQsw5cVBnoPhJRI3Iy+idjrgZ7
+ +Gyw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1768558104; x=1769162904; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TOcjygW55UKU035rYqyUn245D7sEv3knJ72ZKZR5ees=;
+ b=NG32psriwC8QN21SXHKjHD+erljXF4u5SDtWDZioUMfYoUXez/yN9skTJdes4oNPtK
+ uBqHyHbWDZKkMiDzbIJJXngMfoW4ZSZdQg8eBMXLJK5zxymN34/HmLWHxECBSCxa2ASu
+ /iXTmPCH5r6bLcpk0CAjOCnV2WE7qX3t78TwAe06sKKnZoPvwgWS9glY8FJogcyfF6I1
+ +x8ZviLMDL/CB/0XSr5HSe3CRnBnDfjnBeHrEj5y+NgBFu5e7Hn5sbh3+CqfTZNm38Lh
+ hCAzyQeUO6UGxYZTpcHneLRH/mlH6aneQhIoJueF3LwyZAvjZHkhIsY5+ymixipDuMjO
+ zeLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768558104; x=1769162904;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=TOcjygW55UKU035rYqyUn245D7sEv3knJ72ZKZR5ees=;
+ b=v15X53wEyagqBDP+wF6SoP5JV0zT4mAFUU3ZQIu03shGT9459B7nbmQL7BH53oGmnX
+ Lfl4bYEevApIMAgFfAWHs0PSO7x5XYRM6C+GGhnGizn3sRSED6kp8GCGHvhP8MOkMm+a
+ ih+jhRYNqWbqxK/2jiMEqwT3r3sBvh5hpjLv7lw6aA71CGq/NBA6VQ+iLfBhAil47S/Q
+ 96vb2BTwvERV43DK8BuPffcVeVcwWKUvk4c1I8okbYDUIxRzsDAzL8ro1+Ae8HWVUeEc
+ xVgXiN47KVREIieTo1tOrhv45fG+nFRdD2cPMLoEd7zIoRXJN6f+agdez2Gw3vfFh/d9
+ E3QA==
+X-Gm-Message-State: AOJu0YwYG6tKC3VfwsV244SHFTgYO6Avmj7MZVuY4mNXmBVZK5Pzo2qJ
+ p7kjLlJ28a9QCi+W8P3wdq65ctuBznlQ7VshP8TBLpGGRsQbp1DLLJKfRTR8xNnzssVfd+TcWO5
+ pakG+5lZlhwCspPYRHH1FTNs0GBtgK7g=
+X-Gm-Gg: AY/fxX4cT/8zQoDHgUUIi8DDAa+hMLqhrg25J6TzsNlXKJaoNQj2a/KyVwgsdX015F3
+ j/RmaruWXTKsi+Ll6pwWZImzSNFltrAa4YpRADibJo3z562VJ9IbQHwHNWfXrEuQsOzF+z4Gd6P
+ P+9MohAfR07xuPhsxcjc/ItxYfnsUZzBERzrdDl6MR1uvx+8phUBOO5gMDD6wpzLOeMSu4JkLN0
+ 9rRtp4nJbJCLiwx7fFBoPRIWX2sBi4IDGMhTNc+hH63LEKleT2NM7+pNti7btnhnFAGJsy9tOoA
+ /3m4iwD2bXrO61E81u2r0Pu8aL/zmpgzCC157Gc=
+X-Received: by 2002:ac8:5702:0:b0:501:47d3:2176 with SMTP id
+ d75a77b69052e-502a168e4e3mr30877091cf.26.1768558104095; Fri, 16 Jan 2026
+ 02:08:24 -0800 (PST)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DU4PR08MB11271:EE_|AMS0EPF00000191:EE_|VE1PR08MB5853:EE_
-X-MS-Office365-Filtering-Correlation-Id: 02035740-0940-4eb1-de15-08de54e84b9c
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?WUgvYVR3MzJVZDRGTWx3a09kcXNCbDBiUHRuaHlGOXFTTHFZa1BucWFaZGg0?=
- =?utf-8?B?cXdIWGdKL2hCNzhBQXJXVlVkcTlWOExJTW9CR3ZaSGQ4WEdmVWMvazdKMEl6?=
- =?utf-8?B?cVlwdjUxZ2ltRmJLWDlOaExQajBTZTJNUzlIcWFCT0p3dFY0a3lTS2Q4bGJK?=
- =?utf-8?B?eVZNeWdIU0l5ajRSVHhWRXhySGVEelNTWFcxQ00zNVpWZTRUNVVzaWt5RmRs?=
- =?utf-8?B?OTBXaHFjMW16eFFFRy9idW00R2ljY1NGK0FVMnJHMUV4M045TnBHUFI2cmRI?=
- =?utf-8?B?UEdpSkVlUU9wNjk2ekVpUjJUR1UzTkhGQ2o0KzNNNUdhSXYrTHdlNjJ4WEdX?=
- =?utf-8?B?K1NIOG4zYysyVkpURmN2V0dRc3NKM25VMHRSTmhrbitJVUphV1Z0UHVvdnRV?=
- =?utf-8?B?ajVKZHRXdWV3UkFVbEQ4MWlINFZFcXp1RFNzL3RnamJhdXppek8yUlhsYmxP?=
- =?utf-8?B?emNBdEJFTWRGeFlJVHJFMzIxaUJkQlhUMDN2VUxpTmJETzBuK3VUZW9oUGla?=
- =?utf-8?B?QzdGdEM5a0xVR29BTDFJcEpURkpGZDB1TW5hYkNnNGlualRISk5ZeCtQbG5n?=
- =?utf-8?B?ODgyM1pYeERQQXZLRktCT2d6aGo3RVFjaFpYdkFZVXpWcGdGZ0hpcmg5L0FU?=
- =?utf-8?B?NlVWUHRINnFLQk42d1Jud2FFaTNXOEVzRU5ScUtvMmFReWtmbVh6S21zUWZO?=
- =?utf-8?B?dlRkSnFQNFcyK2NCM2RleEtzLzhsOXQ5K3QzTlJJUUhCMFYvaFZYNkN4MFQ1?=
- =?utf-8?B?aTgzakt6WnljNVphT1BKcFR4aTlGUVVwNUk0eUcwZzU4WFBmQnRKUzY1b1NP?=
- =?utf-8?B?WDNTVnFhUURtSWNySVp1SDF1dW9URWpFN2pwUzBoUUpObzJlMC9NbE9Na05i?=
- =?utf-8?B?RkxlYmR1cy8zZFlUS2ExdmhwNVAya1JtOXFOQkdyQUVteXltNDdjbHRkVm00?=
- =?utf-8?B?MStIclBaS3MxOVUxR3BOeXhGSllFbGh1VnBDaGFsNEt3RGx3NkxqeE9pemJ6?=
- =?utf-8?B?OUR5RGtpQmxHRFVQdE9GTW52V0VVRUNMaHNQSnkwQWtIN0poQVhxZHV3akdx?=
- =?utf-8?B?dXpkenAvWnl4WmZucngvUWUreWhBZzBrcUx5OXZERm11SmYrY1pJeHNkSUlS?=
- =?utf-8?B?TVZxalVOVjh2YkN1SWMrcmZ6NThsMEhYSUk5cDJ0ajZJbjYwczhJUDJVc1NK?=
- =?utf-8?B?RVhUbVFjVURsSlBvVlV4NE52a1BTTDdQY2RHc3Jqd215cStjN095SEpQN2Ir?=
- =?utf-8?B?WWxVaUp2aElCVEJ3Q2Q5dk1qdUlXakdoY1d2QkZxNlBtT2xKR2JldDRuQW5m?=
- =?utf-8?B?dExQQ1IyUkhXVnRSMUNMbFl3SjI4TGZ2WE1hOWw4NkZXQ2JUbkx3OTdLRVVF?=
- =?utf-8?B?UVVVck82Y0FSeWgwKzB3TzRFNVJ6cGNtK2FsV0xiMGFyd1FCZG9iYW1pY0hu?=
- =?utf-8?B?aThlTWJXZ2pzYTU0UEZJb0RaaHBxUURXdWlpL1dxb0JBUWhBTkhuM2h4MU9z?=
- =?utf-8?B?NkkzRndiRHh2TG5uenZkN01JRm9VK2t6OE1RUFJmL3AzZWpweTRDQjkrMDc2?=
- =?utf-8?B?T3RIUFZkc3NTL0pXQ01LVjRYdFhLeUt5Vk5ULzRqalIxNjdVWDNjODhYMUlo?=
- =?utf-8?B?OGFYeDJuMmQ4cVZWQmlwWTYrTzFSVGhPZGp0RGJ0WllZb1RaQkp4K2JtdWZQ?=
- =?utf-8?B?TmRoQUVUeEJaOEZVNUlxUzFQbUl6b3duUkZUWU41QjJIalRjaXNzMzZjSDgy?=
- =?utf-8?B?ZHl2Y2VrQ3ZkUWhlZytVWGM1KzBQeTBnSnk4QzJmWGR3MzJxNWpRNjZ1eHFn?=
- =?utf-8?B?Z0xPMk45bTNzeVJtRktFVmRQeE9BcDdOb01LdHppS2E0V3ZBajdyaWJZeHZB?=
- =?utf-8?B?SmlaeVVzUlNIL3NXajFBSW1rVFQ5ekFEclpRS3ZlK1N0cTE1cmRrZUgzVTNw?=
- =?utf-8?B?V05oV1R4VUN2VEtzWHF5aERLaGlhNFZXaWVEZWpFRE4xcHdsM1FJODRGUWp1?=
- =?utf-8?B?aDdTVDlGNXMxcWU0V2FRcE1sYW1oZ09rQUhLNFNXUmpUNzBleTZnU09uNXFC?=
- =?utf-8?B?VG4ySGpVOUJwSmpzUWhjTDFzVnVQdTFDalBwQXZrUS9mVzJtWHRhN2RuOW5j?=
- =?utf-8?Q?Jv6A=3D?=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR08MB11271
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS0EPF00000191.eurprd05.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: c001b058-e66c-43a7-95cc-08de54e82ca9
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|35042699022|14060799003|82310400026|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RExvTTJ4Vlg2Q0xndjZ2aStKTmtMeWJLYVRsdHgxc2JuWHhEem5wVlBUUjNv?=
- =?utf-8?B?Y3dYNHdrbmFPKzdqNVZGelVQdjBXYWRVV29uZHlTMFA1UXg5MGtNUWM4V1Ux?=
- =?utf-8?B?T2dIZnNYTTlKaFY1eCs4ekhveUVFMDk1ZnkvR2tyY1dCanBNN05XUE1Hdkpz?=
- =?utf-8?B?cUJ5d0NZOVQyVkJzQlFnQXhZbkxnSVRDVUsyUzlsNlhNVmdVQUpQbERoa2ZS?=
- =?utf-8?B?enpSUjVscGNsb3pPQ2xLc3B5ZzFrMXZlU1NYVG1jTk5UUGJWUmNFcW93UVlp?=
- =?utf-8?B?QWQ5UGlwM3RIbW1KWFdOL1JhYWMvTm5vMlN4OFFONUxoVkF6VzFMb0s5a3Qr?=
- =?utf-8?B?eWZkOFBDZEJ3SjI5blhEcTF2SEdERTNFOXN6dStmcWtSSFJMR3B3R3FqU29k?=
- =?utf-8?B?cXNNbDZENTJYUnp3bG9OSG13NTFSWjMxL1BkV1dOVUNMOUUycWhzNFUwWDF4?=
- =?utf-8?B?b0VVaVpJNmF3UHl4L0c0M2tlL0dieDNoSy9RaEdTTmN1SHI4QU1UbTZib3lo?=
- =?utf-8?B?dFR4NDZjdzVWRURhZkdhODJHVGlsUlpnVzVYV3VaZk4raDVjVFIxS2xXZmxq?=
- =?utf-8?B?SFR5cDBnZGgvQStGS01XaSt4VGNRMDZkekJkSHpDQmhMVERsWHNqbzNzZGty?=
- =?utf-8?B?cm5vV0Y5Rll5VGpHbXFzZGNQRXRSK2w0c1Z1emcvaUlTcFMzU0hadHM1ODlw?=
- =?utf-8?B?Zzk4bTBXaTV4dklYK0FZME1rZEFEUndIZTNJRGtwa1Y0c3AzNmNmVEV3aTA3?=
- =?utf-8?B?WjA4OWY2ZVRXSFNKd2tiN25mTjMyaXNtRmxRczVVTjZqN3JtYVR6UVowMlU3?=
- =?utf-8?B?U1BZT2lzVUtMV2RCSTg1TnRnOHFkUUcrNG5rcWJmWGtLTlhmT2pHdm9rdm1B?=
- =?utf-8?B?bkE2TzF2UUoyYXdHOXBIbGE3cnBzR1NXa2FRM3BaQ3Jxb2FNcnh5Vk9MbWVY?=
- =?utf-8?B?UlB5UFF0MkpYcHZxeU5PRFNUQjFXcGtWZllYYWhiTHFzcTVscGJOa1hqdmY2?=
- =?utf-8?B?YWJCUnZiZTdDTSthbmVnbnNoQWxZWk9URnFVOUFTQURtZ3N5OUlvVERTbUF5?=
- =?utf-8?B?a25rb3JXcjRZVjIyd0V3RlRCWmMveTQwdkY4S2pXVGVpZjg2VXZsdnBPVDNO?=
- =?utf-8?B?Z1VoR2ZJYzI2bW00c2s4Ym9QYjV6N3g3SzlnS0k3ZTluSkRtdDVOeW8yYlhm?=
- =?utf-8?B?eXdsTWtjUUNLdVgyVlV2NHErRlJoaTZ2c1E0RklnYlg5WXZEZ0xHNEpzMDZj?=
- =?utf-8?B?RC9oQjJkNjJKeE5nSVRRVG1BOFFjTS9uOGY5YzUreEZ6cnNCaFZDZ3BmeHdM?=
- =?utf-8?B?VnlBY0xtcTZpOWpIdllEdHEzcXBxOGdtMGZ1ZjFwa3I2akJWTS8wanVONlMv?=
- =?utf-8?B?Sy9RK2FOSm5YYzUxbnNMQlRDU09oeTlWTjA1WWZyNVlqUVIvdjNRSENRY0Vm?=
- =?utf-8?B?T2RuSVVXdDlkL1l0YUxOY2xySnRYSjk3ajk4Y2RRUDZzT3piRk8ybFRXUmJo?=
- =?utf-8?B?QUFqRFlwYS9PRzNRMy9pdTVqdUIrLzBtTnBGVnNoT0JsSlN5em1jelJTejNv?=
- =?utf-8?B?RHpHdHV6TVJCMWRWcDh1M2FZdlEzSlZ6NFEyWk9YYnQ3RW5sV0hncFZCbCtt?=
- =?utf-8?B?cy9seVZzZXhYMk5yZnAwbi94OTZZUnBrR3FTejF2UE1XSXJ2T0ZDKy9lUjgv?=
- =?utf-8?B?K1g1dHRJeXB1UEppWXBPbTRGanJDZ1ZBTS84azI4b094bG9QRi96SkRIekRn?=
- =?utf-8?B?d3RXVkpmb2UzUWpTOVBtNzQ4UnVzcXpkbFJjQUN4LzRuMFkvWWJQamd1TEdZ?=
- =?utf-8?B?QXk2ak9uVGgxSlNRUDNKM25ZaGVGbExrTExvdldUN2pIKzNIZFdDSDJyQXVZ?=
- =?utf-8?B?eko3Z2I5dWhPODlHa1JCc3JjTmlPRHFQMU5VTkFPWU14d3dzQXpYTTRDcjIz?=
- =?utf-8?B?bTB6cWYzUlA0Qm1oSlJSZ3JOTldWeVV1cWVRZ2Z4VVR1UXFMcFA0UVdTTWt6?=
- =?utf-8?B?R1BwQlZMS0ZyWktWUWRFdjZhT1pwMlhCME9BR2NLVUhwWFB0WHowaThCTzRR?=
- =?utf-8?B?K0h3UTMwWkM3RXl0UUFFaDlYekh1Q2ZsUGVMcm9MREE2dXR2SHhPR0FSOStq?=
- =?utf-8?B?WWRUajM4RDZOcTRVMCtEYzk2Z1YwS2RRckpzZDRTa3VoUmdLNjU5OG5mclFD?=
- =?utf-8?B?UUVjeC9MWmJwYzFjNUYrQmhzMk1VZjdKSWp0S0lwN29XV09ZR0FxK3RqcGNE?=
- =?utf-8?B?UVBSQUVBNG1oQVNKTWtDZVFnWGlBPT0=?=
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(35042699022)(14060799003)(82310400026)(1800799024);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 10:16:21.0104 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02035740-0940-4eb1-de15-08de54e84b9c
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000191.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5853
+References: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
+ <20260108-rk3576-ufs-v4-3-e8e67649f3f8@gmail.com>
+ <f6e97d23-4f92-43d1-a3b9-beeef3211145@cherry.de>
+In-Reply-To: <f6e97d23-4f92-43d1-a3b9-beeef3211145@cherry.de>
+From: Alexey Charkov <alchark@gmail.com>
+Date: Fri, 16 Jan 2026 14:08:08 +0400
+X-Gm-Features: AZwV_Qj1nwyrH23T8uaf7kJVI3HdKW3AFxEPBbqCyKbYJWDTVKtcQn6MD8ZuUA0
+Message-ID: <CABjd4Yzf-y05Qp3+5LVFrHeN_MMZu9TOXozrkjnXVU2MJU_WoQ@mail.gmail.com>
+Subject: Re: [PATCH v4 3/3] rockchip: spl: Add support for booting from UFS
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Johan Jonker <jbx6244@gmail.com>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
+ Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>, 
+ Joseph Chen <chenjh@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 16 Jan 2026 11:18:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -237,45 +154,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Quentin,
 
-On 16/01/2026 10:28, Jonas Karlman wrote:
-> I took a closer look at how the UniFi dnsmasq config was generated and
-> noticed that I must configure the "Network Boot" option and not the
-> "TFTP Server" option to have a generated config that make dnsmasq
-> replace the DHCP siaddr field with the TFTP server ip :-S
-> 
-> And legacy stack seem to work as expected and correctly uses the
-> expected siaddr field to configure the internal net_server_ip var.
-> 
-> Following diff seem to make lwIP also pick up the siaddr as the
-> tftpserverip (in addition to serverip for the DHCP server):
-> 
-> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> index 731b57de3ba4..a3445a48b15d 100644
-> --- a/net/lwip/dhcp.c
-> +++ b/net/lwip/dhcp.c
-> @@ -99,8 +99,11 @@ static int dhcp_loop(struct udevice *udev)
->         env_set(ipstr, ip4addr_ntoa(&dhcp->offered_ip_addr));
->         env_set(maskstr, ip4addr_ntoa(&dhcp->offered_sn_mask));
->         env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
-> -       if (dhcp->offered_gw_addr.addr != 0)
-> +       if (!ip4_addr_isany(&dhcp->offered_gw_addr))
->                 env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr));
-> +       if (!ip4_addr_isany(&dhcp->offered_si_addr) &&
-> +           !ip4_addr_eq(&dhcp->offered_si_addr, &dhcp->server_ip_addr))
-> +               env_set("tftpserverip", ip4addr_ntoa(&dhcp->offered_si_addr));
-> 
->  #ifdef CONFIG_PROT_DNS_LWIP
->         env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
-> 
-> With something like that I do not think I will have any further use of
-> SERVERIP or TFTPSERVERIP Kconfig options for my labgrid farm, so can
-> probably drop this series and will instead send above diff as a separate
-> patch.
+On Wed, Jan 14, 2026 at 10:05=E2=80=AFPM Quentin Schulz
+<quentin.schulz@cherry.de> wrote:
+>
+> Hi Alexey,
+>
+> On 1/8/26 6:50 PM, Alexey Charkov wrote:
+> > Add the required architecture-specific lookups to enable U-boot SPL to
+> > load images from UFS storage devices on Rockchip RK3576, which has a
+> > boot ROM capable of loading the SPL image from UFS.
+> >
+> > This also requires the DM_RESET framework to be available in SPL, as
+> > the UFS driver uses it.
+>
+> If it is a hard dependency, why is it not specified as such in the
+> symbol directly instead of relying on imply's at the ARCH level? This
+> will also be "painful" once a new Rockchip SoC has UFS support as we'll
+> need to forget not to add those imply.
 
-Sounds good to me.
+Fair enough, will convert it into a "select" under Rockchip UFS,
+thanks for pointing it out!
 
-Regards,
--- 
-Jerome
+> > Signed-off-by: Alexey Charkov <alchark@gmail.com>
+> > ---
+> >   arch/arm/dts/rk3576-u-boot.dtsi              | 13 ++++++++++++-
+> >   arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
+> >   arch/arm/mach-rockchip/Kconfig               |  3 +++
+> >   arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
+> >   arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++++++++
+> >   drivers/reset/Kconfig                        |  9 +++++++++
+> >   drivers/reset/Makefile                       |  2 +-
+> >   7 files changed, 41 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-bo=
+ot.dtsi
+> > index dc3771b556a3..84d9f39fd407 100644
+> > --- a/arch/arm/dts/rk3576-u-boot.dtsi
+> > +++ b/arch/arm/dts/rk3576-u-boot.dtsi
+> > @@ -12,7 +12,7 @@
+> >       };
+> >
+> >       chosen {
+> > -             u-boot,spl-boot-order =3D "same-as-spl", &sdmmc, &sdhci;
+> > +             u-boot,spl-boot-order =3D "same-as-spl", &sdmmc, &sdhci, =
+&ufshc;
+> >       };
+> >
+> >       dmc {
+> > @@ -81,6 +81,12 @@
+> >       bootph-some-ram;
+> >   };
+> >
+> > +&gpio4 {
+> > +     /* Used for resetting the UFS device during initialization */
+> > +     bootph-pre-ram;
+> > +     bootph-some-ram;
+> > +};
+> > +
+>
+> Is it always GPIO4 for the reset GPIO for UFS? Seems like something that
+> should probably be put in a board -u-boot.dtsi instead?
+
+It is in fact always GPIO4 pin D0. It's multiplexed to a
+somehow-hardware-controlled pin inconspicuously called UFS_RSTn within
+VCCIO7_IOC_GPIOD_IOMUX_SEL_L, but I couldn't find how it's supposed to
+operate in a hardware-controlled mode (it's not described in the TRM).
+Mainline Linux does the same thing as I do here (GPIO mode [1]), while
+Rockchip's own U-boot code switches the pin to the hardware-controlled
+mode [2] and never touches anything about device resets from then on -
+which feels like a potentially fragile black box to me. Hardware
+controlled mode would also deviate from the upstream DT binding, as it
+stipulates a GPIO for device resets [3].
+
+[1] https://github.com/torvalds/linux/blob/master/drivers/ufs/host/ufs-rock=
+chip.c#L220-L231
+[2] https://github.com/rockchip-linux/u-boot/blob/next-dev/drivers/ufs/ufs-=
+rockchip.c#L222
+[3] https://github.com/torvalds/linux/blob/master/Documentation/devicetree/=
+bindings/ufs/rockchip%2Crk3576-ufshc.yaml#L53-L58
+
+> >   &ioc_grf {
+> >       bootph-all;
+> >   };
+> > @@ -176,6 +182,11 @@
+> >       bootph-pre-ram;
+> >   };
+> >
+> > +&ufshc {
+> > +     bootph-pre-ram;
+> > +     bootph-some-ram;
+> > +};
+> > +
+> >   &xin24m {
+> >       bootph-all;
+> >   };
+> > diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/in=
+clude/asm/arch-rockchip/bootrom.h
+> > index b15938c021d6..f9ecb6858f04 100644
+> > --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
+> > +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
+> > @@ -51,6 +51,7 @@ enum {
+> >       BROM_BOOTSOURCE_SPINOR =3D 3,
+> >       BROM_BOOTSOURCE_SPINAND =3D 4,
+> >       BROM_BOOTSOURCE_SD =3D 5,
+> > +     BROM_BOOTSOURCE_UFS =3D 7,
+>
+> Hopefully this will be the same value for all upcoming SoCs with UFS
+> (and not used for something else :) ).
+
+Well it's hard to guarantee (otherwise Jonas wouldn't have had to add
+a translation function [4] for the IDs that changed in RK3576). Maybe
+at some point we'll have to switch to a lookup table per each SoC
+variant if these keep changing, but thankfully that point is not today
+:)
+
+[4] https://source.denx.de/u-boot/u-boot/-/commit/99a9b6ba6cf1c2f376e6f0ac3=
+e6a2ced6c6addd4
+
+> >       BROM_BOOTSOURCE_I2C =3D 8,
+> >       BROM_BOOTSOURCE_SPI =3D 9,
+> >       BROM_BOOTSOURCE_USB =3D 10,
+> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kc=
+onfig
+> > index 92bb4aa62f11..483a2f7c4ab2 100644
+> > --- a/arch/arm/mach-rockchip/Kconfig
+> > +++ b/arch/arm/mach-rockchip/Kconfig
+> > @@ -436,6 +436,9 @@ config ROCKCHIP_RK3576
+> >       imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
+> >       imply SPL_CLK
+> >       imply SPL_DM_SEQ_ALIAS
+> > +     imply SPL_DM_GPIO if UFS_ROCKCHIP && SPL_UFS_SUPPORT
+> > +     imply SPL_DM_RESET if UFS_ROCKCHIP && SPL_UFS_SUPPORT
+> > +     imply SPL_GPIO if UFS_ROCKCHIP && SPL_UFS_SUPPORT
+> >       imply SPL_FIT_SIGNATURE
+> >       imply SPL_LOAD_FIT
+> >       imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
+> > diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-roc=
+kchip/rk3576/rk3576.c
+> > index a1e8a7572fa4..46cf60dc77c7 100644
+> > --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
+> > +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+> > @@ -46,6 +46,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE =
++ 1] =3D {
+> >       [BROM_BOOTSOURCE_FSPI0] =3D "/soc/spi@2a340000/flash@0",
+> >       [BROM_BOOTSOURCE_FSPI1_M1] =3D "/soc/spi@2a300000/flash@0",
+> >       [BROM_BOOTSOURCE_SD] =3D "/soc/mmc@2a310000",
+> > +     [BROM_BOOTSOURCE_UFS] =3D "/soc/ufshc@2a2d0000",
+> >   };
+> >
+> >   static struct mm_region rk3576_mem_map[] =3D {
+> > diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-ro=
+ckchip/spl-boot-order.c
+> > index 6572dde29f65..d2dd5e10935f 100644
+> > --- a/arch/arm/mach-rockchip/spl-boot-order.c
+> > +++ b/arch/arm/mach-rockchip/spl-boot-order.c
+> > @@ -76,6 +76,9 @@ static int spl_node_to_boot_device(int node)
+> >       if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &par=
+ent))
+> >               return BOOT_DEVICE_SPI;
+> >
+> > +     if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
+> > +             return BOOT_DEVICE_UFS;
+> > +
+> >       return -1;
+> >   }
+> >
+> > @@ -231,6 +234,17 @@ int spl_decode_boot_device(u32 boot_device, char *=
+buf, size_t buflen)
+> >               return -ENODEV;
+> >       }
+> >
+> > +     if (boot_device =3D=3D BOOT_DEVICE_UFS) {
+> > +             ret =3D uclass_find_device(UCLASS_UFS, 0, &dev);
+> > +             if (ret) {
+> > +                     debug("%s: could not find device for UFS: %d\n",
+> > +                           __func__, ret);
+> > +                     return ret;
+> > +             }
+> > +
+> > +             return ofnode_get_path(dev_ofnode(dev), buf, buflen);
+> > +     }
+> > +
+> >   #if CONFIG_IS_ENABLED(BLK)
+> >       dev_num =3D (boot_device =3D=3D BOOT_DEVICE_MMC1) ? 0 : 1;
+> >
+> > diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+> > index 74c267dfc4e5..d35f3904e404 100644
+> > --- a/drivers/reset/Kconfig
+> > +++ b/drivers/reset/Kconfig
+> > @@ -99,6 +99,15 @@ config RESET_ROCKCHIP
+> >         though is that some reset signals, like I2C or MISC reset multi=
+ple
+> >         devices.
+> >
+> > +config SPL_RESET_ROCKCHIP
+> > +     bool "SPL reset controller driver for Rockchip SoCs"
+> > +     depends on SPL_DM_RESET && ARCH_ROCKCHIP && CLK
+> > +     default y
+> > +     help
+> > +       Support for the reset controller on Rockchip SoCs in SPL. Selec=
+t this
+> > +       if you observe any reset-related warnings or errors when bootin=
+g SPL,
+> > +       such as when using UFS storage
+> > +
+>
+> Separate patch for this please.
+
+Ack
+
+> >   config RESET_HSDK
+> >       bool "Synopsys HSDK Reset Driver"
+> >       depends on DM_RESET && TARGET_HSDK
+> > diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+> > index ee5b009d1341..dc7d3b610e6e 100644
+> > --- a/drivers/reset/Makefile
+> > +++ b/drivers/reset/Makefile
+> > @@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) +=3D reset-bcm6345.o
+> >   obj-$(CONFIG_RESET_UNIPHIER) +=3D reset-uniphier.o
+> >   obj-$(CONFIG_RESET_AST2500) +=3D reset-ast2500.o
+> >   obj-$(CONFIG_RESET_AST2600) +=3D reset-ast2600.o
+> > -obj-$(CONFIG_RESET_ROCKCHIP) +=3D reset-rockchip.o rst-rk3528.o rst-rk=
+3576.o rst-rk3588.o
+> > +obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) +=3D reset-rockchip.o rst-rk3528=
+.o rst-rk3576.o rst-rk3588.o
+>
+> Separate patch for this please.
+
+Ack
+
+Thanks a lot,
+Alexey
