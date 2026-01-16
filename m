@@ -4,140 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A86AED489A3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 13:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 137A5D489A3
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 13:35:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E949F83935;
-	Fri, 16 Jan 2026 14:32:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D90683623;
+	Fri, 16 Jan 2026 14:35:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WEQKgG0Y";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="O/5Z3fKy";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="uc0IR85Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB078367F; Fri, 16 Jan 2026 12:00:58 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F6858367F; Fri, 16 Jan 2026 14:35:27 +0100 (CET)
+Received: from fhigh-b6-smtp.messagingengine.com
+ (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD6C830E4
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 12:00:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FA2082BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:35:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-5029901389dso12054451cf.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 03:00:55 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768561255; cv=none;
- d=google.com; s=arc-20240605;
- b=jCazVOOt0kCt2O0725hfDF7OaK8rKpGsIoQ8RORXZ7FEvh0gJkUXvfRWPAaL6+R8+H
- uljn06Vz965kFu79flnv6YMiy01W1Dx7B5+qku+0MT6c626aMCgh4pKxRUq+ZB+INChU
- g+Vzazs1wgu5/a/NIB3vtIvxMKLbM0XHWNx6qbBDWNfAqEr16Jhq7JEF14xivrW9jDBn
- jshnsY2uiBt6R4uHyQpZMD8U+IOvDDbzeVPcpn8YQqLoDPvu1XYCGPdyH9nhdv3tA84v
- bS8dPviA7JBY6bqgzJoIjk79VKBFVaWRateM4aJFckiVBgJjEjhyn+nAY5Xz7vZ0u56g
- BIqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=IKTFXgHUmUZpUim/4nogAbgZNRYZryfNCdvu3PT7IgI=;
- fh=8VqwTZ7piYjPWQEFUarO0F8pZOq/0cPbU4RFz6Q+04g=;
- b=DhhH5PEtbKM2Zv7XaTqojqvBdc9pXajOT3MC9ROyqxXUkoK8ywBStYzqFHMNRm6b1v
- ArkN0DSYX2hCs2nNCk8MEH7m8PwpKdLm8FZ5Uk8Z/jZzUjiwnqK3nd/s+3o4lT++Ip/X
- 8Aj2yZxH5q6P24CJglwCqO7WFy9u1x1Px6KSkO2RCDEwEyXr8czn+guaqQfj9WgSol61
- i0UVTgpnj4uswfUa8WkhgzCX6R/u3x0C6uukFmJlecv4LTRLrDh73wVu9AqfVT9+mrGT
- XWBTi4edxfOgYfxaVrQO6CDXkjWaV35uaxZnKD0dmkmCGIY4chdOFPynEKWxanEsRpWi
- dRMA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768561255; x=1769166055; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IKTFXgHUmUZpUim/4nogAbgZNRYZryfNCdvu3PT7IgI=;
- b=WEQKgG0YheoJlp0ebyMoUIQThzjweakiQE6AM2lvOa2H+BjyimhNFTN1ZLFZB3ASlB
- XbLTrRfAPGpvrSkniCrKEn4iF2MIzFhZWtXZnGwH5HmbMcYfuG+rpacAf0yNVQwvHBsq
- rg10p4d8I4p7CPbJR8U4F5h03AZOE4nh8Kq8Y7s0UCeN1QITRe5MIyVgJ1wAxkqZTo/M
- VbRHoTcn0Yc4mUEhL/83R9smzoXcQhRWEP6mr8TMh2gKVoB5TwYs/xjReV+GLFx64PeQ
- ivaOnV+A/7L2zOu2Auo7uHafWYIUlqn1QujIQ3UDax5QVpsMQiJjJdHKO5TgK1nFAv2x
- TneQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768561255; x=1769166055;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=IKTFXgHUmUZpUim/4nogAbgZNRYZryfNCdvu3PT7IgI=;
- b=RjCGw9FyuA3bQ3qNSQiNS7gzWFW9YmcqYDAIooQtt5HBhMv6pQ4zQrBDr2amMfB0hQ
- l40NFZFkK1QRyEDVMEyBiElsyT3RIu2DXZ6gf/DFvocMdY/ZtY3HUrSB/XLGvqj53WIK
- x5OxplfSB9alGjWvpXbHoVCSgdMkVQXtBf4ZKg9cTQB0TpZrQFLy1lc2mrUNeJp2UKAI
- UUxYDow40+c7CnTxOZISGiWWckd5HEByw+6b2mkyx1Rfb93Mpu/S98lS/G5y2i/Ru/y6
- ute+6013mF8PWrioSEon0qRS+C7nV7WarrbNnm2n1BBurIQXYhaTlmqeHBHnEnys7eoV
- RhdA==
-X-Gm-Message-State: AOJu0Yw5PZYQWQaKmIxv9ZZ6Oxj/F625MjqIqcWwoAxLwBgPQPJkY85B
- wiDd3WbUVi7B8i6Z/n1NoJqRqrWIfaQgghHue2+uAF0QjaMO7ScQqcPwNdf52cBg9hYn6Mj+F9M
- XjnLBEwB/ECyRCGizejZQ2OAayLqgWPw=
-X-Gm-Gg: AY/fxX6yDCC6uBUDhhaIXyYMSPh7C1aUGNCBnKKD+IvzCQn0SBAw06dvepwlScLwBTV
- NwXA4Uqv81IcUwpK0BJu5l52GxiDKUjUu5ykVEk1gcbkD+M/a0nnsjwkALpxCk79VUkN3Jfuf2Z
- RQkj8HYe5K8ScIkZNgkkO7E4jYaosCXXx49vE/YWfuTwQkjtg3Ldrf4aP4TTEFxJeK77P+qv2E6
- T67nwo8Od0dC7lrhSrS0O4XJmks4k7CnIlRkL771b79wulebJBxtokL/V6V9oPmBfe4zdhrJnG9
- 703l2tbOkvEzVk7SOY4XbKZ4Ilcb
-X-Received: by 2002:a05:622a:1794:b0:4e7:2210:295f with SMTP id
- d75a77b69052e-502a15ec140mr37368121cf.13.1768561254549; Fri, 16 Jan 2026
- 03:00:54 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-10.internal (phl-compute-10.internal [10.202.2.50])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id D22B07A0148;
+ Fri, 16 Jan 2026 08:35:22 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-10.internal (MEProxy); Fri, 16 Jan 2026 08:35:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1768570522; x=1768656922; bh=qd
+ 2NSspqGHueGVy2NakxU92uR20g/epJLHkcNutb6fc=; b=O/5Z3fKymAt03DCJtF
+ XC4DwM9D2CJQYBvqeQMBAc8qNa4ewjQYWo2HnCLkIre5YcNHBXIGLZxGWTEFMwMq
+ PpoacZjv8qr0NnK1IVf0cWoejFRkmhtp3YBaWtIiOOLGDYJAJwBiRWEyi8g1H0R2
+ ++Cooh5oruYtNN/2v3dXXUWvjiR/2xlhVzjufVa13HtKdqFXvbE6+uMsoCKomFVA
+ eZ1LKyNonaswTCF8q6s3fJF+QJixbSbf9GB+1M/HYeB1XYEzE8G5nqKh7TzM5ZXl
+ nHPAfaTKzcICCfgitKMa+MI7ranhS/m9Acvfr0POPAVJHCMgPyRx1FiLsD9hWzUD
+ 31GA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1768570522; x=1768656922; bh=qd2NSspqGHueGVy2NakxU92uR20g
+ /epJLHkcNutb6fc=; b=uc0IR85YbsLkTcsQEvaVUvpd7p1lWQruFXUDrgISGwZJ
+ KhkSJYIg3/UTMvXsr6+iHGN27znxPaF+leqr/eAoWp4JefdFn5Fc7Bn+4qO4qV3Z
+ CsCF+JUY+Lyv8jFcQGKR9rcDH77qEt08QhomTE4J0n6/bI7hjEhhFcSskrOC+Xc2
+ WnO9zjKqGTO8+4SIcZaiL4DpIa4dX8N+hnxIHmX50BXBmM3yzXWv8OeWWSQm5QPq
+ Zl+H280W+jh1c8VGXpAFq+T+WPW8gR4Cpuus3IuKtkAtuWwfp2KW92bO3LXxEAuw
+ G1uqCksMx1q6AqxQ0vKsjMC99IGE07BoSsoekMRMtQ==
+X-ME-Sender: <xms:mT5qaaT3xqZlu6HwRJv1C2JK_DPVsH1-SMA8rd0PYA17lEW8qturaA>
+ <xme:mT5qaS3K2XiLSKcZoTHuiUV-o1HPvWUJ1YCvjVtFCG8QT4OU22CmEwJ5e62vWpTWY
+ TglpHXbWQ_Uiobj-Mtg3qS-6FI3rjuxyupl-u_1gdzSvjPc6YyBrHc>
+X-ME-Received: <xmr:mT5qaSdb-ePCI3ozSV1oitoB734xxb2umpxe8UBUnMB4a03IolrH-T-6wxVc2snmA8IRtuEvrDq-zL4oVR8j2mlRv35E6qIlZezySw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeltdejucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
+ rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepfeehle
+ dtheefteejfedvheetuedttdetleegudeuteejveetieefuedvfeffvdeinecuffhomhgr
+ ihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+ epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepuddt
+ pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehnvggrlhesghhomhhprgdruggvvh
+ dprhgtphhtthhopehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehmrghrvgigsegu
+ vghngidruggvpdhrtghpthhtohepmhgrrhhkrdhkvghtthgvnhhishesgihsgegrlhhlrd
+ hnlhdprhgtphhtthhopehmrghrvghkrdhvrghsuhhtsehmrghilhgsohigrdhorhhgpdhr
+ tghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohepth
+ hrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepkhgvthhtvghnihhsseho
+ phgvnhgsshgurdhorhhgpdhrtghpthhtoheprghsrghhiheslhhishhtshdrlhhinhhugi
+ druggvvh
+X-ME-Proxy: <xmx:mj5qaSNRB8wvEbrR02lBTKGyluxKo5cQEpDDIQdoehN4is7JVnT2BA>
+ <xmx:mj5qaeVmBywwu4T8eIxTXw-D1NL9F-CCaPKEMvydxjrG3mU46aX0rA>
+ <xmx:mj5qaSyeJpnsITgwhE6-SkM-Xlgg_pw0V1QKgvRJc8tjcPccAv_kqg>
+ <xmx:mj5qad-il2kUHu7SBPCwLJLhIxq1WNfnKp3HWG29WdaMcSL_zDjztg>
+ <xmx:mj5qaeolfg8NWAMIZd2AA-aKaEf-WWb6XYny0ObncXkIZ7brhzt9rNJh>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 16 Jan 2026 08:35:21 -0500 (EST)
+From: Janne Grunau <j@jannau.net>
+Date: Fri, 16 Jan 2026 14:35:06 +0100
+Subject: [PATCH v2] usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible
 MIME-Version: 1.0
-References: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
- <20260108-rk3576-ufs-v4-2-e8e67649f3f8@gmail.com>
- <ad431bd8-7c0e-41d3-b079-14ab5c82b7a7@cherry.de>
-In-Reply-To: <ad431bd8-7c0e-41d3-b079-14ab5c82b7a7@cherry.de>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Fri, 16 Jan 2026 15:00:40 +0400
-X-Gm-Features: AZwV_QgeMyXpLirHGil1Bxws_QHyFF_3RTp3oI8XmCb5JttLeIbK4KMxOeQg7tw
-Message-ID: <CABjd4YzwcqrB26AOA+7QUTiv84pq-=gp8VL0jSR+KBDFoMESEA@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] ufs: rockchip: Add device reset support
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Johan Jonker <jbx6244@gmail.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 16 Jan 2026 14:32:50 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260116-usb-dwc3-apple-compat-linux-v2-1-36ac33108d43@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAIk+amkC/43NQQ6CMBCF4auQWTuGVovIynsYFm0ZZAyWpgXEE
+ O5u5QQuv7f43wqRAlOEKlsh0MyRB5cgDxnYTrsHITfJIHNZ5CK/4hQNNm97Qu19T2iHl9cj9uy
+ mBUspiC7KkD2XkAo+UMvLXr/XyR3HcQif/WwWv/W/7ixQoClIKmUUKd3ento5PR0djVBv2/YFT
+ Ea7VscAAAA=
+X-Change-ID: 20260109-usb-dwc3-apple-compat-linux-821ee75bec48
+To: u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>, 
+ Mark Kettenis <kettenis@openbsd.org>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1809; i=j@jannau.net;
+ s=yk2025; h=from:subject:message-id;
+ bh=bap0HXtcufe/1Iu3vBFTopD3YZm/eVDQ9pb4KCiUABw=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhswsu2k/DWaFlP9k3S5q9lvcscnGYx3X/HXqLT5Xv39I4
+ vf+fqGwo5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwEReWDD8lbi/N+rAvifi+c/c
+ yme/qt45X7OhZ6vi3i2n1u++qFt0OYCRYTV/4Y0Mv94tcr3VwmH5U3MUi0Q7W7OPPjK5P6Pql60
+ dIwA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,87 +126,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 14, 2026 at 10:24=E2=80=AFPM Quentin Schulz
-<quentin.schulz@cherry.de> wrote:
->
-> Hi Alexey,
->
-> On 1/8/26 6:49 PM, Alexey Charkov wrote:
-> > Wire up the GPIO line which Rockchip RK3576 UFS controller uses to rese=
-t
-> > the connected UFS device.
-> >
->
-> It'd be nice to say that reset-gpios is required as per the Device Tree
-> binding, c.f.
-> https://elixir.bootlin.com/linux/v6.18.5/source/Documentation/devicetree/=
-bindings/ufs/rockchip,rk3576-ufshc.yaml#L70
+The Linux support for dwc3 on Apple silicon SoCs switched to using a
+apple specific glue driver [1] that uses it own compatible string. The
+glue driver handles platform specific requirements on the interaction
+between dwc3 and the USB2/USB3 PHY and reset-controller for USB role
+switches and plug events.
+To keep USB working as before when the nodes still carried "snps,dwc3"
+as compatible add "apple,t8103-dwc3" to the of match table. Eventually
+it is probably advisable to add a dwc3-apple glue driver and write code
+for the currently empty Apple Type-C PHY driver in phy-apple-atc.c.
 
-Will do, thanks!
+Link: https://lore.kernel.org/asahi/20251015-b4-aplpe-dwc3-v2-0-cbd65a2d511a@kernel.org/ [1]
+Reviewed-by: Neal Gompa <neal@gompa.dev>
+Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+Changes in v2:
+- sorted the entries in xhci_dwc3_ids alphabetically
+- imported Reviewed-by: trailers
+- Link to v1: https://lore.kernel.org/r/20260109-usb-dwc3-apple-compat-linux-v1-1-b6e255b5e5af@jannau.net
+---
+ drivers/usb/host/xhci-dwc3.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> > This seems necessary at least for some UFS modules and fixes the follow=
-ing
-> > error while enumerating UFS storage:
-> >
-> > ufshcd-rockchip ufshc@2a2d0000: ufshcd_link_startup: Device not present
-> > ufshcd-rockchip ufshc@2a2d0000: link startup failed -6
-> > ufshcd-rockchip ufshc@2a2d0000: ufshcd_pltfrm_init() failed -6
-> >
-> > Fixes: 76465ce21ee4 ("ufs: rockchip: Add initial support")
-> > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > Reviewed-by: Shawn Lin <shawn.lin@rock-chips.com>
-> > Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> > ---
-> >   drivers/ufs/Kconfig        |  1 +
-> >   drivers/ufs/ufs-rockchip.c | 25 +++++++++++++++++++++++++
-> >   drivers/ufs/ufs-rockchip.h |  1 +
-> >   3 files changed, 27 insertions(+)
-> >
-> > diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> > index 6c75bb2a0790..30b0c87798e1 100644
-> > --- a/drivers/ufs/Kconfig
-> > +++ b/drivers/ufs/Kconfig
-> > @@ -76,6 +76,7 @@ config UFS_RENESAS_GEN5
-> >   config UFS_ROCKCHIP
-> >       bool "Rockchip specific hooks to UFS controller platform driver"
-> >       depends on UFS
-> > +     select DM_GPIO
-> >       help
-> >         This selects the Rockchip specific additions to UFSHCD platform=
- driver.
-> >
-> > diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-> > index 0384244387da..48444705fb29 100644
-> > --- a/drivers/ufs/ufs-rockchip.c
-> > +++ b/drivers/ufs/ufs-rockchip.c
-> > @@ -5,6 +5,7 @@
-> >    * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
-> >    */
-> >
-> > +#include <asm/gpio.h>
-> >   #include <asm/io.h>
-> >   #include <clk.h>
-> >   #include <dm.h>
-> > @@ -153,11 +154,34 @@ static int ufs_rockchip_common_init(struct ufs_hb=
-a *hba)
-> >               return err;
-> >       }
-> >
-> > +     err =3D gpio_request_by_name(dev, "reset-gpios", 0, &host->device=
-_reset,
-> > +                                GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
-> > +     if (err) {
-> > +             dev_err(dev, "Warning: cannot get reset GPIO\n");
->
-> No need for "Warning: " as it is an actual error.
+diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+index e3e0ceff43e6abdb8643f265819eff28c2c802f4..8ad07a4b98c9574a5fa0cbfe83f5567e0f49f364 100644
+--- a/drivers/usb/host/xhci-dwc3.c
++++ b/drivers/usb/host/xhci-dwc3.c
+@@ -237,6 +237,7 @@ static int xhci_dwc3_remove(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id xhci_dwc3_ids[] = {
++	{ .compatible = "apple,t8103-dwc3" },
+ 	{ .compatible = "snps,dwc3" },
+ 	{ }
+ };
 
-Agree, will change.
+---
+base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
+change-id: 20260109-usb-dwc3-apple-compat-linux-821ee75bec48
 
-> > +     if (!dm_gpio_is_valid(&host->device_reset))
->
-> How could it be invalid if we managed to request it in probe?
+Best regards,
+-- 
+Janne Grunau <j@jannau.net>
 
-Probably can't, indeed. Will drop.
-
-Thanks a lot,
-Alexey
