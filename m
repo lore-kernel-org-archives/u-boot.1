@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F8ED4899A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 12:30:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83AAD4899A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 12:33:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75EDC82BF2;
-	Fri, 16 Jan 2026 13:30:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E3E3830E4;
+	Fri, 16 Jan 2026 13:33:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mr1NHNue";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sAKvhcqB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C46A8309A; Fri, 16 Jan 2026 13:30:34 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id AA0E98367F; Fri, 16 Jan 2026 13:33:25 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D76F80077
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 13:30:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3769F82BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 13:33:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EF99F60167;
- Fri, 16 Jan 2026 12:30:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D4A4C116C6;
- Fri, 16 Jan 2026 12:30:30 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id EFD1E60167;
+ Fri, 16 Jan 2026 12:33:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03BDDC116C6;
+ Fri, 16 Jan 2026 12:33:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768566630;
- bh=ceh1sCezJII42yh03X+ujM+6rZ8Mk3HQ1ORhdzKtlFA=;
+ s=k20201202; t=1768566796;
+ bh=1OQOrHXZPzx638RUnhXEL1jSyYHsch6wqlhMfusxQek=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=mr1NHNuewBt7M6GwEyAMe2aCAlNbmDJ9hG6IISf4MfSvT1dUnm0Rq4DBNfIUcl1Z5
- O/QWeRpRb8YsP/rGdRtTeFBCJEokLj6nm9gdWm9b9wp6VBTp5XRoUYXYUk0TB+mlml
- hzNnMesZ4L40fMsoLUD2+cn/o/s3qSr/iYLXONjcr4ZL5DyrG67JXdUOyehF+o74Da
- 1S39sE+xYwNaDX0Q6eF+xRy3sO2VeITcj7bHnYwAMSUolJgs9HEauiOG+GOexKSqAF
- QqBK/CNhGbp4nhqZqrFRsiLwlF/H/Dh+DwUE55ogzKF997OOl/DFrBA9p9V5CgdMyZ
- S4ZyjXBzR/LMA==
+ b=sAKvhcqBQw9w4cPSGXkWXtlCMNkZUvJ1Bppz9Oh0I3+NMU1Kg+jfb31I4/kQI+0qZ
+ Vo9ASrh479cJF1Pr8AzsuDzbBIRulac+HumaDAVrbYaEZl/+pA7zA3fHVoRxUMVdAx
+ 9okIeRRIKpjfgMR/yCYJZqDpNwjVKQusKZ7dNgLwjWo1QCLgYoTnoHFFOpDlLH2Fdf
+ 0Q3zQ7obVCR/pFYbPtT77MJaU8Pqyr/6OWgKjjj0p7Z+nGNDW4NddlGC8eodEpU5u3
+ BC7jK6HFfMkeTDxbboh2Uu4MiuAM2HYXzoj8gBI2uXYTMcQjtwENWf/Ab8bHn0LBZ0
+ k3vWJkdz49f2Q==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Casey Connolly
- <casey.connolly@linaro.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Casey Connolly
- <casey.connolly@linaro.org>, Kaustabh Chakraborty
- <kauschluss@disroot.org>, Jonas Karlman <jonas@kwiboo.se>, Sam Protsenko
- <semen.protsenko@linaro.org>, Balaji Selvanathan
- <balaji.selvanathan@oss.qualcomm.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH 1/3] usb: common: default dr_mode to OTG when not set
-In-Reply-To: <875x93fd54.fsf@kernel.org>
-References: <20260114-casey-usb-role-switch-v1-0-fb7a626466b9@linaro.org>
- <20260114-casey-usb-role-switch-v1-1-fb7a626466b9@linaro.org>
- <875x93fd54.fsf@kernel.org>
-Date: Fri, 16 Jan 2026 13:30:28 +0100
-Message-ID: <877btheo4b.fsf@kernel.org>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Kever Yang <kever.yang@rock-chips.com>, Jonas
+ Karlman <jonas@kwiboo.se>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Kaustabh Chakraborty
+ <kauschluss@disroot.org>, Marek Vasut <marek.vasut@mailbox.org>, Casey
+ Connolly <casey.connolly@linaro.org>
+Subject: Re: [PATCH v3 1/2] usb: dwc3-generic: allow fallback of dr_mode
+ property to "otg"
+In-Reply-To: <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
+References: <20260108-usb-dwc3-exynos7870-v3-0-343fa1e81e48@disroot.org>
+ <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
+Date: Fri, 16 Jan 2026 13:33:13 +0100
+Message-ID: <874iolenzq.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -75,58 +75,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 15, 2026 at 10:17, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+Hi Kaustabh,
 
-> Hi Casey,
->
-> Thank you for the patch.
->
-> On Wed, Jan 14, 2026 at 15:13, Casey Connolly <casey.connolly@linaro.org> wrote:
->
->> DT bindings dictate that dr_mode being unset on a DRD capable USB
->
-> For the curious, this is defined in https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/usb/usb-drd.yaml#n23
->
->> controller means we should default to OTG mode. Adjust usb_get_dr_mode()
->> to reflect this.
->>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>  drivers/usb/common/common.c | 3 ++-
->>  1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
->> index 13e9a61072a9..e3bd7339e68e 100644
->> --- a/drivers/usb/common/common.c
->> +++ b/drivers/usb/common/common.c
->> @@ -29,9 +29,10 @@ enum usb_dr_mode usb_get_dr_mode(ofnode node)
->>  
->>  	dr_mode = ofnode_read_string(node, "dr_mode");
->>  	if (!dr_mode) {
->>  		pr_debug("usb dr_mode not found\n");
->> -		return USB_DR_MODE_UNKNOWN;
->> +		/* Default to OTG mode as per DT bindings */
->
-> Nitpick: can we change the comment to:
-> /* Default to OTG mode as per devicetree/bindings/usb/usb-drd.yaml */
->
-> This tells the same but is more precise and is imho, a more helpful
-> comment.
->
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Thank you for the patch.
 
-Also, I just noticed, but there is another similar change here:
-https://lore.kernel.org/all/20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org/
+On Thu, Jan 08, 2026 at 18:03, Kaustabh Chakraborty <kauschluss@disroot.org> wrote:
 
-Casey, can you see if the above is useful to you?
+> Documentation [1] states that the default value of the dr_mode property
+> is "otg". It also isn't marked a mandatory node, so it may or may not be
+> set. So, accordingly if dr_mode is not mentioned in the devicetree node,
+> OTG mode must be assumed.
+>
+> In this driver however, this case is not handled. If dr_mode is not
+> mentioned, USB_DR_MODE_UNKNOWN is set. The logic implemented raises an
+> error, instead of falling back to USB_DR_MODE_OTG. Correct this to
+> conform to the specification.
+>
+> Link: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/tree/Bindings/usb/usb-drd.yaml?h=v6.18-dts [1]
+> Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+Note: there is a similar patch submitted by Casey here:
+https://lore.kernel.org/all/20260114-casey-usb-role-switch-v1-1-fb7a626466b9@linaro.org/
+
+Can you have a look at that one please? You could review it or test it
+to see if it works for you?
+
+Thanks!
+Mattijs
+
+> ---
+>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index c09014aec60..c15eda19e8f 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -10,6 +10,7 @@
+>  #include <dm.h>
+>  #include <reset.h>
+>  #include <asm/gpio.h>
+> +#include <dm/device_compat.h>
+>  #include <dm/lists.h>
+>  #include <linux/delay.h>
+>  #include <linux/usb/gadget.h>
+> @@ -173,8 +174,8 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+>  		node = dev_ofnode(dev->parent);
+>  		plat->dr_mode = usb_get_dr_mode(node);
+>  		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
+> -			pr_err("Invalid usb mode setup\n");
+> -			return -ENODEV;
+> +			dev_info(dev, "No USB mode specified. Using 'otg'\n");
+> +			plat->dr_mode = USB_DR_MODE_OTG;
+>  		}
+>  	}
+>  
+> @@ -516,6 +517,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
+>  	if (!dr_mode)
+>  		dr_mode = usb_get_dr_mode(node);
+>  
+> +	/* usb mode must fallback to peripheral if not known */
+> +	if (dr_mode == USB_DR_MODE_UNKNOWN)
+> +		dr_mode = USB_DR_MODE_OTG;
+> +
+>  	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
+>  	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
+>  		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
 >
->> +		return USB_DR_MODE_OTG;
->>  	}
->>  
->>  	for (i = 0; i < ARRAY_SIZE(usb_dr_modes); i++)
->>  		if (!strcmp(dr_mode, usb_dr_modes[i]))
->>
->> -- 
->> 2.51.0
+> -- 
+> 2.52.0
