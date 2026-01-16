@@ -4,57 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C50D2D47CC3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 806B4D47CCD
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 10:14:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44F148309A;
-	Fri, 16 Jan 2026 11:10:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 09BBE82BF2;
+	Fri, 16 Jan 2026 11:14:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Uoa+7feM";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PwlIMpB8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A77C830E4; Fri, 16 Jan 2026 11:10:11 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C302A80077; Fri, 16 Jan 2026 11:14:51 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15C382BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:10:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 745E582BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:14:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B7ED040779;
- Fri, 16 Jan 2026 10:10:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39C8EC116C6;
- Fri, 16 Jan 2026 10:10:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768558206;
- bh=s8pTgPsHbl+GKhMdOue+O55ryrIauU/kYQGshI4MmIQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Uoa+7feMy9H0rdBB5BwrDlTGgSQLxGC71YGx0F1257+WWJU2Jut0u5f0nKy/IIFky
- 9+/DpjZYr4WP5fCaW6nHYipZIk5lItspMFtw9fsCaY3Ls80wl1rvCGltFu2UZMsaY7
- U2Sq0itMAqNZY2JLb40KOt4g515lPzdJSEWrmWykM3LxMPW5JNw/gckbh0Fr7HWCiN
- jST1nRdLpQ4w7kK5+eueM1ENF5V5NCEYyVkBQv4CWxC/BxoojB2EEtR8g3fiR68TOa
- mS7AnJZGleYicrXIkMk28DIimbfL2vKtSW5hOAerGqCpK/G+7u5QpqOenLroU0DNwn
- SBRS2Hn9uh0JA==
-Date: Fri, 16 Jan 2026 15:39:58 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
- jagan@amarulasolutions.com, jernej.skrabec@gmail.com,
- w.egorov@phytec.de, jonas@kwiboo.se, michael@amarulasolutions.com
-Subject: Re: [PATCH v2 0/6] rockchip: use OF_UPSTREAM for rk3288
-Message-ID: <aWoOdgirPwHHMJwg@sumit-xelite>
-References: <deeedc19-e992-44d4-ad77-2b9b2d891675@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <deeedc19-e992-44d4-ad77-2b9b2d891675@gmail.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b79f8f7ea43so443487566b.2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 02:14:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1768558489; x=1769163289;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=38huhAlLx5azMD+Fr2Iplc0XTdlV1w9nwL9J9kkZgBY=;
+ b=PwlIMpB8khr+X58Zrg2SlQQTArhYZjdAo1Jz6a5S1YJ7QumzsDfL8Vl5I97Vfpvj89
+ M0cHxtkvNh0A1IrMllphVJlINBuFBudrpo535j3rBGrNAnSSmu0U9evjjsxAWTvyHoaq
+ ZBe61oL9ESxfp5q6jDrIx/qo+sXeR6vur0P2gRM/jAHRnuIcd2vchG6tlIyhaIWmZE9g
+ iCE0l0xyyISBI9B6wVUQuWvJYehwVF0oTavKCfiHYolGFNU+pr63I40HTBgGfPALInrV
+ 4SbMhziYD0deODEOG/L1ucRaflXcL4DipYy0CJK7LMvlwn9ygV8ukuDkNlWVmfGvzyB9
+ PUnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768558489; x=1769163289;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=38huhAlLx5azMD+Fr2Iplc0XTdlV1w9nwL9J9kkZgBY=;
+ b=gmNgFfR080hV6fattG+IvJOX268LMbsnT4l7xXlV+GssGKQg3mCtCIKxTNbcxaNrZW
+ xxM4E49HQ/lpBXBQhwj6lTVXb+luugqt1FaNT2ucCkml3du1V2CaotHL6FCH+EhmtjIz
+ UjHncxF8+OOW2mFoxLju5Bg18D+WLLAG/td60yoDl3weA201EIRJWqGJ9n4jDhyZctZN
+ of8iIaZHVXdGddfIj3gxzBwdJcPBM1z5edKSnd5JrSlru8+2l6LoR/qv0z24luIxnrxK
+ ht+2SCC41eqq7VpzPV8xHwIK3sAhIZflaC1eVZrvBARA0OVgGmZFJW6cfXtzisEgJvNk
+ 4LZw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLYUp+FQsEDFG2rivGC/F1aYE6HrTi5slXvOqvUfkIdNTa+h9UO3UA0YuCkDSxLokB0ZublJc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyl6riik2e8HHot/9YH5IZIbaDO7Ytxwf13bi4m82QwP133O1q1
+ w8oYOmX+f80FtvBiIOZDyMMK70meab3SvrxumOHpr2a5natIrtCUVtWJ0UohWSanliHb1iB2kHG
+ l5jhj
+X-Gm-Gg: AY/fxX7n41gko9/ZH5AS5jwBFy0gCP4e9HGVQMugi2i0iSkEHmwBP/I4ZWdQS4SOMcg
+ vToezCS1BQgw4bdDh3cT9z9Nv4X/A7PtNE/0bpbu7K66tvKiEYRe4IivLm+/Kwb14TY5Nnddd9B
+ 34IUndqDVzqn4iR2MQ39rWdRMHkK4IAPvEzJtVqtt6Wu0y2svEHfT8zoExuh8UG/qFFZw8BdI/m
+ SzBWmrJiZ/yQDZeRnjoR8h8ULpbV4QYjdOP9aBMuoRnJuQWWQdWd1h4eWhFQQJ4cP+BqMN4uDU+
+ dZs+Vlg+ymCoq9qAD0SBIRwN8V6Sap+RWulItWmk3+3/obZAnQOMq6+Q7G/2VJbRyhuJG7GMepF
+ +7pQqRIW6u0qX+WrNWLqxxbqoefzSu9uqeCEZ7aI5+V8jn8P9k6IYGFdcECBQ3pgBKGMiJRTVvN
+ LuiBU=
+X-Received: by 2002:a17:907:9814:b0:b76:7e0e:4246 with SMTP id
+ a640c23a62f3a-b8792d68449mr246733466b.12.1768558488835; 
+ Fri, 16 Jan 2026 02:14:48 -0800 (PST)
+Received: from localhost ([195.52.31.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b87959fc273sm190619466b.54.2026.01.16.02.14.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Jan 2026 02:14:48 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=dc70ad8088c8f78ce4d93b5d3e20feae9ba1a21b55ad6cbe2d2032224c5f;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Fri, 16 Jan 2026 11:14:39 +0100
+Message-Id: <DFPXNPI6OKK6.273FVAY2JPQBR@baylibre.com>
+Cc: "Simon Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>,
+ "Marek Vasut" <marex@denx.de>, "Andrew Goodbody"
+ <andrew.goodbody@linaro.org>, "Kory Maincent" <kory.maincent@bootlin.com>,
+ "Svyatoslav Ryhel" <clamor95@gmail.com>, "Christian Marangi"
+ <ansuelsmth@gmail.com>, "Dinesh Maniyam" <dinesh.maniyam@altera.com>,
+ "Heiko Schocher" <hs@nabladev.com>
+Subject: Re: [PATCH v3 5/6] usb: musb-new: Relative ctrl_mod address parsing
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Markus
+ Schneider-Pargmann (TI.com)" <msp@baylibre.com>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0
+References: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
+ <20260114-topic-musb-probing-v2026-01-v3-5-ebb8d990b9df@baylibre.com>
+ <87ikd2dk5j.fsf@kernel.org>
+In-Reply-To: <87ikd2dk5j.fsf@kernel.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,94 +108,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jan 11, 2026 at 05:27:03PM +0100, Johan Jonker wrote:
-> The device tree for rk3288 combined is now
-> available in the /dts/upstream directory.
-> Use imply OF_UPSTREAM to migrate all rk3288 boards.
-> Clean up MAINTAINERS.
-> 
-> Changed V2:
-> Rebase
-> Moved upstream changes to separate patches
-> Split in smaller pieces
-> 
-> Johan Jonker (6):
->   ARM: dts: rockchip: Remove mshc aliases from RK3288
->   ARM: dts: rockchip: Add spi_flash label to rk3288-veyron
->   ARM: dts: rockchip: move edp assigned-clocks to edp node on rk3288
->   rockchip: Switch rk3288-veyron boards to upstream devicetree
->   rockchip: Switch remaining rk3288 boards to upstream devicetree
->   rockchip: imply OF_UPSTREAM for rk3288 boards
+--dc70ad8088c8f78ce4d93b5d3e20feae9ba1a21b55ad6cbe2d2032224c5f
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Glad to see the diffstat, fwiw:
+Hi Mattijs,
 
-Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On Fri Jan 16, 2026 at 9:41 AM CET, Mattijs Korpershoek wrote:
+> Hi Markus,
+>
+> Thank you for the patch.
+>
+> On Wed, Jan 14, 2026 at 09:33, "Markus Schneider-Pargmann (TI.com)" <msp@=
+baylibre.com> wrote:
+>
+>> For the upstream DT the ctrl_mod node is using a relative register
+>> address which is not translated by the current code.
+>>
+>> Make address parsing understand relative addresses.
+>>
+>> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+>
+> I already reviewed this in v1 and the patch did not change in v3:
+> https://lore.kernel.org/all/87v7hdzge3.fsf@kernel.org/#t
+>
+> Can you please explain why you have dropped my Reviewed-by?
 
--Sumit
+Sorry, it wasn't intentional, it seems I missed adding your Reviewed-by
+on v2 and then it is missing on v3 as well.
 
-> 
->  arch/arm/dts/cros-ec-sbs.dtsi                 |  52 --
->  ...boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} |   0
->  arch/arm/dts/rk3288-evb.dts                   |  20 -
->  arch/arm/dts/rk3288-evb.dtsi                  | 476 -----------
->  arch/arm/dts/rk3288-popmetal.dts              |  20 -
->  arch/arm/dts/rk3288-popmetal.dtsi             | 547 ------------
->  arch/arm/dts/rk3288-rock-pi-n8.dts            |  17 -
->  arch/arm/dts/rk3288-rock2-som.dtsi            | 278 ------
->  arch/arm/dts/rk3288-rock2-square.dts          | 181 ----
->  arch/arm/dts/rk3288-veyron-chromebook.dtsi    | 205 -----
->  arch/arm/dts/rk3288-veyron-jerry.dts          | 208 -----
->  arch/arm/dts/rk3288-veyron-mickey.dts         | 266 ------
->  arch/arm/dts/rk3288-veyron-minnie.dts         | 302 -------
->  arch/arm/dts/rk3288-veyron-speedy.dts         | 143 ----
->  arch/arm/dts/rk3288-veyron.dtsi               | 795 ------------------
->  arch/arm/dts/rk3288-vmarc-som.dtsi            | 361 --------
->  arch/arm/dts/rk3288-vyasa.dts                 | 473 -----------
->  .../dts/rockchip-radxa-dalang-carrier.dtsi    | 137 ---
->  arch/arm/mach-rockchip/Kconfig                |   1 +
->  board/amarula/vyasa-rk3288/MAINTAINERS        |   1 -
->  board/chipspark/popmetal_rk3288/MAINTAINERS   |   1 -
->  board/google/veyron/MAINTAINERS               |  10 +-
->  board/radxa/rock2/MAINTAINERS                 |   1 -
->  board/rockchip/evb_rk3288/MAINTAINERS         |   6 +-
->  configs/chromebit_mickey_defconfig            |   4 +-
->  configs/chromebook_jerry_defconfig            |   4 +-
->  configs/chromebook_minnie_defconfig           |   4 +-
->  configs/chromebook_speedy_defconfig           |   4 +-
->  ...8_defconfig => evb-rk3288-rk808_defconfig} |   4 +-
->  configs/firefly-rk3288_defconfig              |   1 -
->  configs/miqi-rk3288_defconfig                 |   1 -
->  configs/phycore-rk3288_defconfig              |   3 +-
->  configs/popmetal-rk3288_defconfig             |   4 +-
->  configs/rock-pi-n8-rk3288_defconfig           |   2 +-
->  configs/rock2_defconfig                       |   4 +-
->  configs/tinker-rk3288_defconfig               |   1 -
->  configs/tinker-s-rk3288_defconfig             |   1 -
->  configs/vyasa-rk3288_defconfig                |   4 +-
->  doc/board/rockchip/rockchip.rst               |   8 +-
->  .../src/arm/rockchip/rk3288-veyron.dtsi       |   2 +-
->  dts/upstream/src/arm/rockchip/rk3288.dtsi     |   9 +-
->  41 files changed, 30 insertions(+), 4531 deletions(-)
->  delete mode 100644 arch/arm/dts/cros-ec-sbs.dtsi
->  rename arch/arm/dts/{rk3288-evb-u-boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} (100%)
->  delete mode 100644 arch/arm/dts/rk3288-evb.dts
->  delete mode 100644 arch/arm/dts/rk3288-evb.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-popmetal.dts
->  delete mode 100644 arch/arm/dts/rk3288-popmetal.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-rock-pi-n8.dts
->  delete mode 100644 arch/arm/dts/rk3288-rock2-som.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-rock2-square.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-chromebook.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-veyron-jerry.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-mickey.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-minnie.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron-speedy.dts
->  delete mode 100644 arch/arm/dts/rk3288-veyron.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-vmarc-som.dtsi
->  delete mode 100644 arch/arm/dts/rk3288-vyasa.dts
->  delete mode 100644 arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
->  rename configs/{evb-rk3288_defconfig => evb-rk3288-rk808_defconfig} (95%)
-> 
-> --
-> 2.39.5
-> 
+Thanks for your review!
+
+Best
+Markus
+
+--dc70ad8088c8f78ce4d93b5d3e20feae9ba1a21b55ad6cbe2d2032224c5f
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaWoPkBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMi
+kQEAsFzSmi5Ji50SwAPVLsZ/7vFiVb8k/LunFQTls0QqWVwBAJwqPv8Zjh4iBDjo
+1Jvu+TabVyKywgWFnYxjWC/7Nk4F
+=wwwy
+-----END PGP SIGNATURE-----
+
+--dc70ad8088c8f78ce4d93b5d3e20feae9ba1a21b55ad6cbe2d2032224c5f--
