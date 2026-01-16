@@ -4,63 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A18C982C7
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 15:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D33FC982D4
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 15:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D12FD82BF2;
-	Fri, 16 Jan 2026 16:16:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 70FA78309A;
+	Fri, 16 Jan 2026 16:57:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="adFSvk+d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZJ3BjYJv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AAC58003E; Fri, 16 Jan 2026 16:16:36 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0945C833C6; Fri, 16 Jan 2026 16:57:42 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94541838A5
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 16:16:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id D490083015
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 16:57:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 66A7560160;
- Fri, 16 Jan 2026 15:16:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DF0CC116C6;
- Fri, 16 Jan 2026 15:16:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768576592;
- bh=1qMtIDd3lxYbXNFy4keH2SWnZqaJd6wGvEbSV00O1mk=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=adFSvk+dfGimyYsE6ls9BNQtXT4WUPfvTOcFeITQSAjeGPmew3TGqanbYrozDG4x7
- euTkXR3mw+AOrgjq1agloFZkrilaAGPuoeA5HPwa2a77srH8UJxS4IN+E2I9hEPOpb
- /3Ow4rHDSWCQlPQwhVt6eyL+RULCnC7qUKOYb7QWGBzFS9Nbew6rWwbFVv2c3c5RrF
- rO/NIqVTrTWjIcPzuykmf5+Dk66aiGtYlS6IrW7RLHpAUQ2y9eo5KMmScdvGxflDhG
- uhBEY51h9E5kD3C5YHcLg3seAQQHxsCY2yiMXjLcqAIsLA0sgAWD3ElL1D8YbDRM8L
- Ibk2cOei3X5FQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Kaustabh Chakraborty <kauschluss@disroot.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Kaustabh Chakraborty <kauschluss@disroot.org>,
- u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut
- <marex@denx.de>, Tom Rini <trini@konsulko.com>, Kever Yang
- <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, Patrice
- Chotard <patrice.chotard@foss.st.com>, Sam Protsenko
- <semen.protsenko@linaro.org>, Marek Vasut <marek.vasut@mailbox.org>, Casey
- Connolly <casey.connolly@linaro.org>
-Subject: Re: [PATCH v3 1/2] usb: dwc3-generic: allow fallback of dr_mode
- property to "otg"
-In-Reply-To: <DFQ22JXT2KP3.2U4ZGBQM3RYRV@disroot.org>
-References: <20260108-usb-dwc3-exynos7870-v3-0-343fa1e81e48@disroot.org>
- <20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org>
- <874iolenzq.fsf@kernel.org> <DFQ22JXT2KP3.2U4ZGBQM3RYRV@disroot.org>
-Date: Fri, 16 Jan 2026 16:16:29 +0100
-Message-ID: <87pl79d1v6.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7cfda2de4efso1589572a34.3
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 07:57:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1768579058; x=1769183858; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b1ZgmBydx6Rwz9k+36JWFJC3rgTGx/nEDpN7TO5s/Qo=;
+ b=ZJ3BjYJvCAraAUKizZxK3LvhlvML+faKxI5kw4nVoCcCy7ZgtTO/ZB0KVU87HKvIVO
+ Xhyty8DdwBTd6+cTWwK4fo84hg4/UMY7e0/4mMa14snBaS4FmN41Fp5rlUVSFpf6zB8V
+ Sqm7T8uvG0UeelAEvYLo1D8+yE0FPD6w5Iq4s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768579058; x=1769183858;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b1ZgmBydx6Rwz9k+36JWFJC3rgTGx/nEDpN7TO5s/Qo=;
+ b=gw/FVty1PNJxwl8BBepISf/NBA+vwdhRj5GFv0RYxv4WO20sxIne4r0cqgvRviMBAj
+ ljOdTTEkdlhOvxaPMhRnnzyeHuVUq38GX6t2+OsX01L0ecpvZxowCqyixtco+ehixtnB
+ v3jfyzWi9zy/6pBM/cGxGwZcmXQgtB13g8u+5jlvfAG8/xtB+H+7d8qmQ5EN5YcjYBZY
+ IT3wKqawLMo3vY3hsLrh+L8s0mTQJ3gVwpJ30+FgFnV1UPOVkL9VtZXWsLDmkPs3ziYj
+ P1K9bNPQ9xg5Qivmt4BBU3Kwsp+zegZil0/o/sU1+JNxaEG99C7N6ohS00tqW6QrwbH+
+ 24zA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJRHPnHgFrzJ3f9kb+BCtRWKBeqLZqRKJKYVf18GZ1hW9Q1QM1HpoZmB2f2UxbfUEDOVGrE3c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6NWmMfRzUWRm6SvONE5p4P0RZBpkGg0yDwy39sxwpp2GsZSFA
+ OYjVPW5PoZ1bkpD1jvNELgrKvB4GqZLzkoZGC1p8PmW4K/UULJPHJR00n05Ai4MbmV8=
+X-Gm-Gg: AY/fxX6/jY+H046OOndIU89P40cUFn4Jm+Mp3fs3cUQXKSp76IU8Q1ESp/21rwVJo3K
+ BEEINTypzftIcdG9o4JjJP5u6ZZisS9Yf5mXSs0eqnX1Z3C9uHitRWCiuWD4+EBe3T++bHi3BsV
+ mTEjoJHI5jhMIrWqxo06oLeqaSlXPJ+npa1MWooWkN8YUAwjQaLNjDQthU1mpkcQ+9UM54CKdTm
+ b8XMbXG4g8aSoUZ12g/Z+m9Ud5u5LPnZleYNBvGGPi0/77KhAcTvWoS/fUqGDcn84qVHLOHv8IR
+ 6ijuZd9B6zyZbkm124vEHwcaCf55qd/FeDWHuCEtU3JlDbqF7sfet0Rmnei0dJISQ2V305dFGt/
+ lgy7lEi2Wiz28HD5jllecIGhym6/h06MP38z1h3XMm1Ipq0Yq/UAeeU+T0yndQtzCN6v3kQYQfj
+ jssrOPLPLCrM+c/66OlTZI8SiNxZEmNUrhvRIwFFIg+um+0UkoX60lPG0pgrPjNL9zWm918U87I
+ CciMRMu5rTvECgbVoDzMokgwqkcS7NHTevlO8c=
+X-Received: by 2002:a05:6830:6507:b0:7cf:d0f6:135f with SMTP id
+ 46e09a7af769-7cfded34512mr1664481a34.2.1768579058492; 
+ Fri, 16 Jan 2026 07:57:38 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf2b57e2sm1882803a34.27.2026.01.16.07.57.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Jan 2026 07:57:37 -0800 (PST)
+Date: Fri, 16 Jan 2026 09:57:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: neil.armstrong@linaro.org, casey.connolly@linaro.org,
+ quic_varada@quicinc.com, bmeng.cn@gmail.com,
+ andrew.goodbody@linaro.org, u-boot@lists.denx.de,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] scsi: Enable FUA bit and remove per-write SYNC_CACHE
+ operations
+Message-ID: <20260116155735.GA4063961@bill-the-cat>
+References: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aRtSFPo3K4VOfLrX"
+Content-Disposition: inline
+In-Reply-To: <20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,103 +102,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 16, 2026 at 19:12, "Kaustabh Chakraborty" <kauschluss@disroot.org> wrote:
 
-> On 2026-01-16 13:33 +01:00, Mattijs Korpershoek wrote:
->> Hi Kaustabh,
->>
->> Thank you for the patch.
->>
->> On Thu, Jan 08, 2026 at 18:03, Kaustabh Chakraborty <kauschluss@disroot.org> wrote:
->>
->>> Documentation [1] states that the default value of the dr_mode property
->>> is "otg". It also isn't marked a mandatory node, so it may or may not be
->>> set. So, accordingly if dr_mode is not mentioned in the devicetree node,
->>> OTG mode must be assumed.
->>>
->>> In this driver however, this case is not handled. If dr_mode is not
->>> mentioned, USB_DR_MODE_UNKNOWN is set. The logic implemented raises an
->>> error, instead of falling back to USB_DR_MODE_OTG. Correct this to
->>> conform to the specification.
->>>
->>> Link: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/tree/Bindings/usb/usb-drd.yaml?h=v6.18-dts [1]
->>> Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
->>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
->>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->
-> Thanks for your insight, but isn't this patch applied? This has been
-> merged into u-boot/master already. But I don't see it in next.
-> Confusing.
+--aRtSFPo3K4VOfLrX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You are right. This patch was already applied. I usually check for an
-email that states that the patch was applied but I forgot Marek usually
-does not send those.
-Sorry about that, I generated un-necessary noise.
+On Mon, Jan 05, 2026 at 10:55:26AM +0530, Balaji Selvanathan wrote:
 
-It's normal that your patch has only be applied into u-boot/master.
+> Enable the Force Unit Access (FUA) bit in SCSI WRITE10 commands to
+> ensure writes bypass the device's volatile cache and go directly to
+> non-volatile storage. This provides write-through behavior without
+> requiring explicit cache flushes after each write operation.
+>=20
+> Remove the SYNC_CACHE command that was being issued after every
+> scsi_write() call, as it is redundant when FUA is enabled and was
+> causing system hangs during large sparse image flashing operations.
+>=20
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-Right now, we are in the U-Boot merge window. During this time, the next
-branch is closed. All development and fixes go into master directly.
+This introduces failure to build on xilinx_zynqmp_virt and others:
+drivers/scsi/scsi.c:85:13: error: 'scsi_setup_sync_cache' defined but not u=
+sed [-Werror=3Dunused-function]
 
-See:
-https://docs.u-boot.org/en/latest/develop/release_cycle.html#current-status
-https://docs.u-boot.org/en/latest/develop/process.html#management-summary
+--=20
+Tom
 
-Hope that clears out the confusion.
+--aRtSFPo3K4VOfLrX
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
->>
->> Note: there is a similar patch submitted by Casey here:
->> https://lore.kernel.org/all/20260114-casey-usb-role-switch-v1-1-fb7a626466b9@linaro.org/
->>
->> Can you have a look at that one please? You could review it or test it
->> to see if it works for you?
->
-> This patch addresses a single point of failure, unlike mine.
->
->>
->> Thanks!
->> Mattijs
->>
->>> ---
->>>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++++--
->>>  1 file changed, 7 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
->>> index c09014aec60..c15eda19e8f 100644
->>> --- a/drivers/usb/dwc3/dwc3-generic.c
->>> +++ b/drivers/usb/dwc3/dwc3-generic.c
->>> @@ -10,6 +10,7 @@
->>>  #include <dm.h>
->>>  #include <reset.h>
->>>  #include <asm/gpio.h>
->>> +#include <dm/device_compat.h>
->>>  #include <dm/lists.h>
->>>  #include <linux/delay.h>
->>>  #include <linux/usb/gadget.h>
->>> @@ -173,8 +174,8 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
->>>  		node = dev_ofnode(dev->parent);
->>>  		plat->dr_mode = usb_get_dr_mode(node);
->>>  		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
->>> -			pr_err("Invalid usb mode setup\n");
->>> -			return -ENODEV;
->>> +			dev_info(dev, "No USB mode specified. Using 'otg'\n");
->>> +			plat->dr_mode = USB_DR_MODE_OTG;
->>>  		}
->>>  	}
->>>  
->>> @@ -516,6 +517,10 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
->>>  	if (!dr_mode)
->>>  		dr_mode = usb_get_dr_mode(node);
->>>  
->>> +	/* usb mode must fallback to peripheral if not known */
->>> +	if (dr_mode == USB_DR_MODE_UNKNOWN)
->>> +		dr_mode = USB_DR_MODE_OTG;
->>> +
->>>  	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
->>>  	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
->>>  		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
->>>
->>> -- 
->>> 2.52.0
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWpf6wAKCRAr4qD1Cr/k
+CojtAP4r4ZBLbJ8OUPrjPEJ6iJvnwMyZg3UK7fCP3VnxOo2ELwD/Zx7QbQNdd5xo
+VwJTIRkv3hTFCttqaOh7NZqgra0zNQw=
+=X1m4
+-----END PGP SIGNATURE-----
+
+--aRtSFPo3K4VOfLrX--
