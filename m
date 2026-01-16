@@ -4,143 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9949C982D4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 16:14:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA346C982D1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 16:14:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C636283942;
-	Fri, 16 Jan 2026 17:14:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FC8683966;
+	Fri, 16 Jan 2026 17:14:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gcc/2dfd";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="4HTLhmWX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 237F78309A; Fri, 16 Jan 2026 16:52:53 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 14C328367F; Fri, 16 Jan 2026 17:13:49 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85A8D8003E
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 16:52:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 704668309A
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 17:13:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-5014e8a42aeso22992751cf.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 07:52:50 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768578769; cv=none;
- d=google.com; s=arc-20240605;
- b=BgdVIMN0cyNG0yMaluq9v5KavA/QfiuNdZoAXkhS6idj9snlLTfnvZqznnHJvwJDr1
- Ediqv9v51u+2W2zDPrkVo743NnwhKqfWa6j2/MK0bExYIh95epyAh+uSbs57bO4UDJ4B
- iF+XfsmSMlStkvL59hsGyVv4HIXTavnmc0q14D4zbuvw1kBvIx+Jg7uinYNn8shHZNe7
- croPCTGV4G0rvfhIWLdAlg66xtJac2U6JeZ0BWQ4GqleTTAGFH73h54+p7phNI+Krvym
- 2vx8qzTbRuxLafBAknZnlyzLzO4UTS49bVfilryyIzWvzrkzVqseTm3g4oSzhgoEeFV4
- j+tA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=9qB6o9Xr+8Jr2vvr5nnf25T1BUf/2DvUmvl0ak1RGDY=;
- fh=8VqwTZ7piYjPWQEFUarO0F8pZOq/0cPbU4RFz6Q+04g=;
- b=Os/kuVaDME8aGFw1wXGHTeQA0yJKh046Fx6+rk9MUaCoQLjMget+4Eaw+qceBeQn4D
- pVY8+LHlx1Xlg0piJJutt7IlRp2EKK11HSgno86MLIoblhuHNgBIGMs1CtmAgl5k3vwt
- VVivfqHXxTk904xAsAzVStfY8BGhXYvhAMP+F9sKdJcJOxRkuDxRkNogQ8XZ6cLXiP6R
- MNHF5gY6ER3y65rxLU49LAuxiYuo+a8ngQLDq9+SBUrCXJ9Ceangq0QQYS/WO9OXehQT
- BVY3BE6wAd3NiPiLjGL/etG0AZwOWVjCqoWPRFiZHejuOnFeuP4zoW1PzwLoxW1lMGdZ
- Vw/A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768578769; x=1769183569; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9qB6o9Xr+8Jr2vvr5nnf25T1BUf/2DvUmvl0ak1RGDY=;
- b=gcc/2dfdmvu5XaMMmBpwoqYRliT3itE70kbOXKw+cA28/QsoKTwmdcBlVWeLygaPb1
- tPfKwppP9/A8p/WRtBMTDmxt/50EC6L81dzOk/faUD50mNr/GU2ugsXc86vxWz4BxTsA
- 3BMHhZv3UV6YW3uTAzpFjWh5JfmCZC+B2NVf7ia5/NybBOFqHv0395TV9eHwcS1L8zgJ
- FB7RDY+HOlOJnm4GqEqCc2U55OPG0eYuYHvfhUerEy+i08ZsoYpl9RY2H58n+dKX/95T
- 5fgAc+FEg3S+pkuyHi2zDMNry452OZfv1mqHv+R05IunavM3PWYdUvQfrBVefjzr86kV
- RuYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768578769; x=1769183569;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9qB6o9Xr+8Jr2vvr5nnf25T1BUf/2DvUmvl0ak1RGDY=;
- b=MMmeA+3ENxZnYLV411IwVUUc86wfuTkNaPlWBGAdu8urfWbHNDLdjYS+A1NsH2nOa4
- CY+Z9hG/C/62dku4a7l4o8NWJbSLf7n8FeYhLt8lCx5Z8fIOCy7tcqTuGAdGHDM9jz3N
- vrK/YIB8SGLRHMGb1LCzoxLHWI5UtcsHGMIkkFGbFBDuTiwiIMu++b1380q77QvmuChU
- DmFMqw06L1b3Dr8jlxsMrIMY16XJqXMBzXet1crixEeViUSS94ZiPtweZHBM9PZ6HNi4
- zovh2Fo72uf0HkkRSjGGa+2zrp+vKtcyxJKsOhoHqSB08kQGnXD0khkgP8uQXjbi1s67
- pSzw==
-X-Gm-Message-State: AOJu0YzdrvTjyBAxEYIRPaKZXtSI5ESMp8ILZtDSy5ZPR450kjTcSF/G
- 2yzrmk9yRYt1+XfnbC07/m30Xe+atp3w1M8hOZ/oVb/2wK0cQq6hJ7HLQ7WRlXHHStlEnvaHSkZ
- nWLjGCjQRzFA5BgJjb4tcvllz5hZftPs=
-X-Gm-Gg: AY/fxX7IedPKHp0pNyXXcaQtEdSANnukKz72m0iH5AUoYB3hVkcdmZd4C+GDiGtbTtx
- z+zJqWftv5uPUodPsX9VL00Id/3SGBFOAV91kG9qRThCpJzuPMlYPkHTYX4GPCmxZFTHTB7SWSV
- XEXfyyEyk9vPY2CPLe/R/nHpJlouu+LWLNeLpHxVqFVM9ytq9RF3qfsDMA43bmhrj8WDEAFB4VJ
- gb9IxMO6eY3nKwmy6LrYkaYzMPOOQ9fcfIupC9U0pnMWYCz8Gn1URLfVrOe25e4ERCf+hr4NeHT
- BIbaIiVZHTRVx6RokWtpu0P1Xy8=
-X-Received: by 2002:a05:622a:1794:b0:4f1:ba52:2529 with SMTP id
- d75a77b69052e-502a162a974mr43538711cf.2.1768578768995; Fri, 16 Jan 2026
- 07:52:48 -0800 (PST)
+ spf=pass smtp.mailfrom=Jamie.Gibbons@microchip.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DhPQb+DbSOK7lXA2l4NUfWwu1iy3QJ/p0rRKo8lFZ+WIaQBWxh7N2Gn386OdrZdjX2Gz6S83vuVUq3VoPrOU4f4oAPkbnCS9ChzKzIyTcMUByJ9DzJauFRw8fATrnxjNHAqN36/XZB0EcoOFnzD+CV492CAHNgIccyo9HwOZutC67fEAJft3+/7E0H88JwXk+btTPuCGUETulf0VQMJLOAcz5BeYEuqekGFrWhVL2kqMWITSgWxqJpM7V1ZKIxeF2aHa0wJdHTiqMXOPgS3geVn8xS6EigCKZgm0TIhGSKQ4ZhzJtUoKUPceoqEdbL/2lMyEOhC/SN5JCz6gOtTC8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cNJUj9Zy3d2G9pslaxCX/+y6qDHQzOPO07631PdjFX8=;
+ b=xHzeGVBIW1PyySzfPbuOgfQL5YjvEgGoqhAeJ/JLX0pWhWO8gdeUkPO/0uiAHwJ5050Wi6EChA6X1iSuTlF/cTwcSToASkh0ltFwbnWkxXV7wc+ejUQg7C6c5Y2sxuf4v7TQ/DoCJ8uDVTHVq9T/e/6WAQ2k/P2fQoexCzyBfpF+fwExtBxcR/6gflb41kE6YF8xctQlIyUWWwYyhLftX8suPHNZVWQrQ7AQT0tL1J1IipMXJ32J0LiugccL8rnE7iWj5z5BhVQtwQrfIGbq5/ImUwQ8ZmUxUQ7BR30mcVGwYSVTyoM/yXe1nYmmJT+E4WjPDkeIQK3x+JF2UiNI5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=microchip.com; dmarc=pass action=none
+ header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cNJUj9Zy3d2G9pslaxCX/+y6qDHQzOPO07631PdjFX8=;
+ b=4HTLhmWXnBq1x0NDZ1Y7xUk9ALczlBr4MDL8CntzgXC7YejtLsOxW+X0LIqcDPp9lqmU9Nd7hR/qVzdLCmn6sAWRtAPqO2v1sjRwJ97r0W7Abr9Xs3Vqbw7+/Q85g4ewITEYGYX9feym1gFtBk/0NrkFvEPGrn/oLsoEWBqyVVN62CI1+ZqK+oUhWyxjGf2MjqkIU0uBtDxZFcTcQ7kbQ+G/tqjgoq7oOGV+hty8dQ9SUY+VQoxJDmrK7oJ+U3ncYQ/sfRSw/fJqCDJ6wLAzN4vW8XdVw4ZLdJ5N2kkEJhHMSDEYG+cR6o69BiC4xt4umFCCVHAbIgaLf9jFWKFGXg==
+Received: from DM4PR11MB6335.namprd11.prod.outlook.com (2603:10b6:8:b7::10) by
+ IA1PR11MB6099.namprd11.prod.outlook.com (2603:10b6:208:3d5::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Fri, 16 Jan
+ 2026 16:13:41 +0000
+Received: from DM4PR11MB6335.namprd11.prod.outlook.com
+ ([fe80::3adb:8c97:94da:80]) by DM4PR11MB6335.namprd11.prod.outlook.com
+ ([fe80::3adb:8c97:94da:80%3]) with mapi id 15.20.9520.006; Fri, 16 Jan 2026
+ 16:13:41 +0000
+From: <Jamie.Gibbons@microchip.com>
+To: <trini@konsulko.com>
+CC: <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
+ <Conor.Dooley@microchip.com>, <Valentina.FernandezAlanis@microchip.com>
+Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
+ v1.7.2-35-g52f07dcca47c
+Thread-Topic: [PATCH v2] scripts/dtc: Update to upstream version
+ v1.7.2-35-g52f07dcca47c
+Thread-Index: AQHchwFkjqXL5NuND0+6jEwP8Ex5sLVU+B6A
+Date: Fri, 16 Jan 2026 16:13:41 +0000
+Message-ID: <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
+References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=microchip.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR11MB6335:EE_|IA1PR11MB6099:EE_
+x-ms-office365-filtering-correlation-id: 2875f0b6-798b-4db8-f093-08de551a3715
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|38070700021|4053099003; 
+x-microsoft-antispam-message-info: =?utf-8?B?V01YYXFaRGF4dEZCQVhCb1plU2hrZXFEb0tRNXdyS3VHUHlKekNRTWpMWGJS?=
+ =?utf-8?B?MTYra0tLczdXQ0pBMUQxalVoeEI5YlNrQllMYldTME1RaStrTGlXNkMxNnJP?=
+ =?utf-8?B?R3dxMloxZG9sZzR3ZzFYYndJcVFyV0IzWWptS0hCU0pNNXBuNC9XRDNoOEJj?=
+ =?utf-8?B?aElZUDh0UWRDcDZ3ZnBmbXZhWG1OT3A5RjJ1aHZ4N0FJdFFkZmZNZGc2M3kw?=
+ =?utf-8?B?T25uaktKY3ZRNlI4WFBiYjN1UnhWR2h0VW9zUlhldFRSUkpKbVFSZU92eVVj?=
+ =?utf-8?B?RnBDWmdqWWxtUk5raVRXVlZNRkdObEU2SWRoQ2x1M0N1VEJQZmtJY1FwZURo?=
+ =?utf-8?B?QmRHb3BsSE9namFuNFFBcVBFelVpZXJZbm5GYnk0TlVJOGRUaEkrTFM2c0hD?=
+ =?utf-8?B?dDV3NE9RSHNxTXZtaW9vZW1PbWxTZHl1WUZMdjZHajR5MExOR2hTd3pOU0Fk?=
+ =?utf-8?B?TUZlQVllZ0R6Yko3Q2RUTHZKQ3R6Mm1BT1R4akRmd3BrN3B0YnRxOFgrME03?=
+ =?utf-8?B?TmFYYlg2TW83NWo2QnZzMHZxQkV1eVVDLy9COGE1SjNvVzduT3F6Sm5XK3Y1?=
+ =?utf-8?B?eEJOaGtBa2hsY08remZmVCtTK0NFb3AvQkV6eTVHZUVqZVc0OXJsaGYrV1Vp?=
+ =?utf-8?B?MlJiajVmblFxYWVqZlJRZkFHNWlTaVN1VzlpS3hsMlhUN24wSlA2QzFPbkt1?=
+ =?utf-8?B?S1p4MnJSS1FKNzY5T0s2akk3OEhaU0xpRlU3a2Z5dlBzUDBTeGpjekVXWXNI?=
+ =?utf-8?B?c253T0MwVFVRUCs0dFFFSlhmOGErQ29waG9XVlc5WUI2OGhqNCtRWng3NzJI?=
+ =?utf-8?B?c2lhSTJmV3FKY0w2blBtZnR4SGk5UnRTK1RoaDhlV1JpVitLclFSTlNBUkZv?=
+ =?utf-8?B?SktsK1dMWW8vb2lVcnFvclV6Nkh2Tkk3NnpzYVd2TzVROERZQkN5QVgySmVy?=
+ =?utf-8?B?T2o1bWg3TlRIbXVURjBkY0VVOGlmaTNIQWdYd3FGZlZzSEUrdkZCTWVYaW9h?=
+ =?utf-8?B?aVF3SFZXd1NDQW0vMjNIanlORDByY0pBZHVBYWFyNmlQSnpTVnozb2lvdDRC?=
+ =?utf-8?B?VVBUbEVDUTEzZDB6Y08yM3ZNWjYyN2JvcmYxMjR5NGFJczgxZkwyc3VGYnhu?=
+ =?utf-8?B?YWJvWEZFdVJRemZWamhpQ3VmbGp2V0VDcXdZNnNnM3lsdjJkR21xbzZHaGtw?=
+ =?utf-8?B?UkV0czhrWlNKS1gvRVpHUHo2eXg1a2xzRGlmZDR3eG12ek9xVEl0TFd3TGlr?=
+ =?utf-8?B?ZFpaMmpITWRhTnJ4RWtsWVg3WE1PTlkwU0NpSDJGbUJuWkkzUmh3bzRoSmxX?=
+ =?utf-8?B?Yll0UlpjRVpveEV0d3A3Y3JCR2JxdGJkNDdGYnNBa1JKWmp5Sis3TUR6azRk?=
+ =?utf-8?B?Q1hwTXpoQUdJRjk2VEhCRktBWUMwalJzOC9JckVYSnZXREtqVGhFVXN0cTVV?=
+ =?utf-8?B?RHBUZzZlUkFBRktlOWYvYVNERFJleEVtN0ttemV4Z01yY2gwODRJd3crN3ZN?=
+ =?utf-8?B?VjlGaVU3QjE0ZHRTdEM0RVhWZVE2QWtRTjhwWGZJNC92bGhSOTZQYUZlUUVl?=
+ =?utf-8?B?eG53NmpjNFFUSFFvVmswNnFuczA0bjlGUEdQT3BKOVIzSzhJa2FGWmhCM2U0?=
+ =?utf-8?B?anljalRRSzRodStZcHZNYk8wOFlkUXFnS2JSNDR5REVuOEZZaXY1d0FBdXBL?=
+ =?utf-8?B?MTcwWm44UWRLWElsZEN5NEkrT0t0QStXUjdzMHRUWk1peU9ZUytPajJtRmVs?=
+ =?utf-8?B?WEhLM0xqZmVlcjN4QzViVjcvNzY1elQxSm0zeklZc09oWUNQNlArakhxM2dz?=
+ =?utf-8?B?WVZDQ0NSTGZ0UzZhUDNOdG5zNHhRTmNVUzJiSllwYW44a1pZK2FZaDN6ZW8r?=
+ =?utf-8?B?MTFPY2lEeTYxRG96RWJwdzJCSDBuN0ZkN3BVQzFUZGw5Y0Y5RFdqR2FJSThU?=
+ =?utf-8?B?TFBaMHpXUG5YcEdYTHNJbldtQmxEVVpGT21oVHMzREx6UmlUSDFjUDdoOUFN?=
+ =?utf-8?B?aTJWVGVZQVIrUHlBb3FSdURWYkFHTDdOdFdEN0hYTTdZRGpOQXRKYUE0eHR3?=
+ =?utf-8?B?ZmJCN203Y2MxTE91OGhuU1E5bVYxVERTRkFTZzJIbWl6eiszZWF0SDNlL3dU?=
+ =?utf-8?B?TnZ3Z2V0WWR6dEw0bnJMdWxCKzVzYWdJRkxQcEdudmlMZGZiVHB2RFdtbWhN?=
+ =?utf-8?Q?QxeoUqcFsCM+OYm4+3ZSTAo=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR11MB6335.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700021)(4053099003); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aE44N0dTK0JYZHVVYkhRNHQ1bGRKZmMzY1pCWTBLbU5iOENwSTY0ekVWcGNR?=
+ =?utf-8?B?czEvMVRpdGhqRGYrWnExVEFBaXFhSkM1cENxVVVWeERlR1FxaE1sNnJ2WGhZ?=
+ =?utf-8?B?dHQrVEVqSWJOanoxQllyajJCMldNZzlVZk8xRXVtdDJtR0RoMWtwZzg2ZjFN?=
+ =?utf-8?B?eU5rdnpXanlEUWpJeEpyWFhLajUwM3FjYkQ3MkpSZnlnYVpCeUJpanlLVWtu?=
+ =?utf-8?B?bEdGZmt6NVJOTkkrYnBtemNPdmJrZTAyRjZ6cmhRclhYM1RLSXBZNklGcWpn?=
+ =?utf-8?B?RUU1UElyTi9MUTU2SGxDSUZYZWtqTzBTMGp6eXEySnkxR2hKdTNzSkw1dUZn?=
+ =?utf-8?B?bVMyYkVxRDlYRGoyR3hGejM4aDNRcTAvcXgvVkxVVU1reklHSE96Y2VQdGxz?=
+ =?utf-8?B?enFId2FJU3pqWklIU0JFUmJxRmRsSEdxdXFIb1pMeUJ5RGFVaEtXQy9yQ1ZH?=
+ =?utf-8?B?L3BRVVpsanlheGU4eXhEYU5MQVB2L0xUZnFXaVdXZnNkWlB0RlpTaE9Zc3oy?=
+ =?utf-8?B?YWpNbG1zZU1OdVJDYTVHdlEzcWhSSTFiQTRjbjZxVjE1Vi9MRDgvWEJzMURS?=
+ =?utf-8?B?anFSTzhYREtla3BDOTdTeUd0dXhLRVgwWkFERTlobC9VMUUxRDI4ekN2S3Zl?=
+ =?utf-8?B?bFpXelVHTWhIb3lnZncwbS8vOHYrSC93TlpiZ3B0NkN3QnB0RGk0UnRiMk12?=
+ =?utf-8?B?bzN6VkYxUzVnOTYxMUJsKzBHVU1kVXlZOXd1NG5GbEcySmlVc1FYZ3M1REph?=
+ =?utf-8?B?cHA5LytGVDlKV1poSTJBaklIUUN3U2k1ckZ6MVhkRGt2UDJINkxDaUZSZG5t?=
+ =?utf-8?B?Zy9KR3FCN1JZT0ptRURYK09wTExBYXg2WTA4UFI3c1NVV1BzWUdIUmxoUXVr?=
+ =?utf-8?B?cHdUeEUrcGw2WXZsNkpyTVpqa0NJWnozdDJSTlFHRGErTGFCNmJabnR5VGdS?=
+ =?utf-8?B?RUhRNmJrS2hVSWJpcW5aUUJXQTN6ZjlKaExCajE2RzFWMVVCWXVMVnQweXdp?=
+ =?utf-8?B?NE9MN0pZYWJhVmx5VVdBUlJFdjdEOExDZjNGd0lncllHKzRlT00vSlhWUjNs?=
+ =?utf-8?B?MWdKTTRoUzkzcjJBNTRlUzJVMU9IdkcyUU9YVHIxUmoyN0luelBKemlrNVI2?=
+ =?utf-8?B?SjU3TkprUGdzdG9TN1ZSUlVtWGNROWs2RmZQb3pVRUM1VmJaR2hjbTdHWGh3?=
+ =?utf-8?B?RkcyVXNzUzNvV2U0Q0k2cW9oT3F4YnYrSTFpQTM5VGY4V3gvdGhRUEtFVmxE?=
+ =?utf-8?B?ZlRiYURLNnRwTjRxemdkeDRNSUFTSnloc0RSSTM0YlRuS1VJNmcvWTFLaUdQ?=
+ =?utf-8?B?ZXI4di9RQ3dDUmVOY3Fua3lWRm1TLzBEcVhZNDFQcEhOMkJBV2xWNDFBeHV0?=
+ =?utf-8?B?WktIVjdXS3lNdDR1aklpczJmdXFFdlY2dG40QTZoYWg4K2JpclE3bko4TFFF?=
+ =?utf-8?B?RGJRUURFWVZFYlFQWC8rOGE5NXhCZERWcmhWYlNwWFR6djAyTUl6emtLYlRI?=
+ =?utf-8?B?cXJJRFRvaWIydlpHWHBXSFAwdlVOMEdXMTRabWhRVlJsWlpoYXRpcWNqTE45?=
+ =?utf-8?B?WDkwVkk3T0xaTENaWWJBc2cxS29iSTA0bGxJZkxZQ1ZqZnN2aTQxTzNhOHZO?=
+ =?utf-8?B?VlVUSFFyR1FVTXY4K0Nwei9tSHFjVmpqT1dyNW9CY0RGelg2L1NOQ2tEaWor?=
+ =?utf-8?B?U2IrYzJaa1V0RkRIMmxjT1VHK2RXNlFFV2JrclEycmhEMjN2Mlg4eW53cVlm?=
+ =?utf-8?B?cEkwNmd3MVpPN1MrSmxSaG9FRVNSc3FERVBmandKNzNXeUl2aHJjVndYU1h3?=
+ =?utf-8?B?ZjZnZjBVUVdHQ2ZzblRVTjdoY3F1Wi81VzUzMjBkZkRvazhGZ3VqeHhhREhw?=
+ =?utf-8?B?L2YwSVppR29nZU82b0drOTcxL1hJSEV0YTJBSnZ2MnVia2RYdTJsbHFmanFS?=
+ =?utf-8?B?MWxGeml6eHdHbmZmdmZCVmhQRCtheFdMZXplODZod0syNTZqc3c0MVNPRlBi?=
+ =?utf-8?B?d3Erbks3WXI1L3lBQ1FDUWNYSjlpcnNNcEJhVHZsSXROUzVtKytDSVpzWHM3?=
+ =?utf-8?B?b0g4SUd2eFJyTEM3VmYxOCt1bTJnaEdRc1kxemhML3FhSzZCcVhHRjNybTlO?=
+ =?utf-8?B?NnJPWFlMSnBDUjNZOU5wNk5iM0Z2N2VteGVFSjFzTUtNaDcrUWNVbU5STjZE?=
+ =?utf-8?B?YmtTZzNmSGd2OUloV3U0SHBkeEgyYUVKRWpXUStqZ1dyT1BTdE5qekFWWDhW?=
+ =?utf-8?B?c3ZqcWYxU0FvQWFMSkNVMlZJTEkyRlVsaUI3cENreVNLOUNkLzhHeVdmM0JQ?=
+ =?utf-8?B?bEpyUTRNSWU0RXM1NVlmdXdpdFVKR21nTUNrZE4xSUNWZUNTVHR5RTNFWENM?=
+ =?utf-8?Q?UzDJkxwE8r52rMnY=3D?=
+Content-Type: multipart/mixed;
+ boundary="_002_d5d2320f54090420c32207c25b35c881ea1519b4camelmicrochipc_"
 MIME-Version: 1.0
-References: <20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com>
- <20260108-rk3576-ufs-v4-3-e8e67649f3f8@gmail.com>
- <f6e97d23-4f92-43d1-a3b9-beeef3211145@cherry.de>
- <CABjd4Yzf-y05Qp3+5LVFrHeN_MMZu9TOXozrkjnXVU2MJU_WoQ@mail.gmail.com>
- <3b1184ab-f995-4b86-a2f0-65a5163be9c1@cherry.de>
- <CABjd4YxGYd6TVJEE3Nh9Qd6DQ+aKN09BP2u5+OBPcc8tNwpTJA@mail.gmail.com>
- <259fc358-f72b-4a24-9a71-ad90f2081335@cherry.de>
-In-Reply-To: <259fc358-f72b-4a24-9a71-ad90f2081335@cherry.de>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Fri, 16 Jan 2026 19:52:37 +0400
-X-Gm-Features: AZwV_QhijrzvoTj3tkL86nAcACgxqXtIo7fjrkx3DtjLG3UqGbYkWnooHO9YvIA
-Message-ID: <CABjd4YzRv90qv3rU7Oyd_O0DeuYoatb5mCL-jtkRAfc8LZJSqA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] rockchip: spl: Add support for booting from UFS
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Johan Jonker <jbx6244@gmail.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: microchip.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB6335.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2875f0b6-798b-4db8-f093-08de551a3715
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jan 2026 16:13:41.4816 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: U7ywkZJtpj4bzP3PI7hxaxwplwREVA7z5JdGHdxM1Pn1PQGsFY4xZ5qaylauQDgR8zrnqZGzLbYztwOn03uw5DWop3LQn1RppC6TgKTovhQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB6099
 X-Mailman-Approved-At: Fri, 16 Jan 2026 17:14:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,217 +189,253 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 16, 2026 at 6:50=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
->
-> Hi Alexey,
->
-> On 1/16/26 3:29 PM, Alexey Charkov wrote:
-> > On Fri, Jan 16, 2026 at 2:50=E2=80=AFPM Quentin Schulz <quentin.schulz@=
-cherry.de> wrote:
-> >>
-> >> Hi Alexey,
-> >>
-> >> On 1/16/26 11:08 AM, Alexey Charkov wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On Wed, Jan 14, 2026 at 10:05=E2=80=AFPM Quentin Schulz
-> >>> <quentin.schulz@cherry.de> wrote:
-> >>>>
-> >>>> Hi Alexey,
-> >>>>
-> >>>> On 1/8/26 6:50 PM, Alexey Charkov wrote:
-> [...]
-> >>>>> +&gpio4 {
-> >>>>> +     /* Used for resetting the UFS device during initialization */
-> >>>>> +     bootph-pre-ram;
-> >>>>> +     bootph-some-ram;
-> >>>>> +};
-> >>>>> +
-> >>>>
-> >>>> Is it always GPIO4 for the reset GPIO for UFS? Seems like something =
-that
-> >>>> should probably be put in a board -u-boot.dtsi instead?
-> >>>
-> >>> It is in fact always GPIO4 pin D0. It's multiplexed to a
-> >>
-> >> This is probably the typical Rockchip BS :) It is the "same" for SD CD
-> >> or WP pins. They have a hardware-controlled mode for pin A which is
-> >> usually a black box for SW (nothing to do, it "works"). But nothing
-> >> prevents you from using another GPIO for that (just have to be careful
-> >> about the voltage level I guess, here it seems to be 1.2V for the
-> >> domain, which isn't that usual I guess.
-> >
-> > I bet that the boot ROM might get picky there, and only work with
-> > GPIO4_D0. But if the UFS chip is not meant to be used as the primary
-> > boot device - sure, can't see why not. On the other hand, there's not
-> > much direct gain for board designers from using a different pin, and
-> > people tend to just stick with Rockchip reference schematics unless
-> > something different is explicitly required for their design, so my
-> > money is on "it will be GPIO4 for all RK3576 boards".
-> >
-> > Extra consideration in the same stream: the pin itself is defined in
-> > rk3576.dtsi upstream, not in board-specific .dts files.
-> >
->
-> OK, I see that rk3576.dtsi specifies the reset-gpios here. I guess it
-> should be seen as a default value, like we have for pinmuxes. Also, this
-> is lacking a pinmux for the GPIO, so there's no guarantee the pin will
-> be muxed into the GPIO function before you control it.
+--_002_d5d2320f54090420c32207c25b35c881ea1519b4camelmicrochipc_
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6AD640BA151D7F498160AD84FF303561@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-Indeed. This must have been overlooked upon addition, given that GPIO
-function is supposed to be the power-on default for this pin. So in
-the end it's either reconfigured by the boot ROM to the
-hardware-controlled reset mode (then it leaves the UFS controller in a
-magically working state), or it's left at the power-on default GPIO
-state - end result is a working UFS controller in both cases, but
-possibly with traces of dark magic.
+SGkgVG9tLCBNYXJlaywNCk9uIFR1ZSwgMjAyNS0xMi0wMiBhdCAyMDozMiArMDEwMCwgTWFyZWsg
+VmFzdXQgd3JvdGU6DQo+IFN5bmNocm9uaXplIGxvY2FsIGNvcHkgb2YgRFRDIHdpdGggTGludXgg
+Ni4xNyAuIFRoaXMgaW5jbHVkZXMgdGhlDQo+IGZvbGxvd2luZyBwaWNrZWQgYW5kIHNxdWFzaGVk
+IGNvbW1pdHMgZnJvbSBMaW51eCBrZXJuZWwuIFRoZSBzcXVhc2gNCj4gd2FzIG5lY2Vzc2FyeSwg
+c2luY2UgdGhlIERUQyBoZXJlIGNvbnRhaW5zIGNoYW5nZXMgd2hpY2ggd2VyZSBhbHNvDQo+IHBh
+cnQgb2YgRFRDIGluIExpbnV4IGFscmFlZHksIGFuZCB0aGUgc3F1YXNoIGhlbHBlZCByZXNvbHZl
+IHRob3NlDQo+IHdpdGhvdXQgZ29pbmcgYmFjayBhbmQgZm9ydGggd2l0aCB0aGUgY2hhbmdlcy4N
+Cj4gDQo+IFRoZSBmb2xsb3dpbmcgY29tbWl0cyBmcm9tIExpbnV4IGFyZSBwaWNrZWQ6DQo+IA0K
+PiA4ZjMyNGNkNzEyZGY3ICMgc2NyaXB0cy9kdGM6IGNvbnNvbGlkYXRlIGluY2x1ZGUgcGF0aCBv
+cHRpb25zIGluDQo+IE1ha2VmaWxlDQo+IGI1YjNkOWI2M2IwZWUgIyBzY3JpcHRzL2R0YzogQWRk
+IHlhbWx0cmVlLmMgdG8gZHRjIHNvdXJjZXMNCj4gN2Q5N2E3NmYyMjZkNiAjIHNjcmlwdHMvZHRj
+OiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVyc2lvbiB2MS40LjctMTQtDQo+IGdjODZkYTg0ZDMwZTQN
+Cj4gZWE2ZjI0M2JlNzRlNSAjIHNjcmlwdHMvZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVyc2lv
+biB2MS40LjctNTctDQo+IGdmMjY3ZTY3NGQxNDUNCj4gMDJkNDM1ZDRlY2NkOCAjIHNjcmlwdHMv
+ZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVyc2lvbiB2MS41LjAtMjMtDQo+IGc4Nzk2M2VlMjA2
+OTMNCj4gNmUzMjFiNzYzNzM5NiAjIHNjcmlwdHMvZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVy
+c2lvbiB2MS41LjAtMzAtDQo+IGc3MDJjMWI2YzBlNzMNCj4gOWYxOWVjOTFhN2EzNSAjIHNjcmlw
+dHMvZHRjOiBkdHhfZGlmZiAtIGFkZCBjb2xvciBvdXRwdXQgc3VwcG9ydA0KPiA4Mjg3ZDY0MmYz
+OGQxICMgc2NyaXB0cy9kdGM6IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJzaW9uIHYxLjUuMS0yMi0N
+Cj4gZ2M0MGFlYjYwYjQ3YQ0KPiA0YzUyZGVlZjkyMjVkICMgc2NyaXB0cy9kdGM6IFJldmVydCAi
+eWFtbHRyZWU6IEVuc3VyZSBjb25zaXN0ZW50DQo+IGJyYWNrZXRpbmcgb2YgcHJvcGVydGllcyB3
+aXRoIHBoYW5kbGVzIg0KPiA1ZDM4MjdlMTQ1MmVkICMgc2NyaXB0cy9kdGM6IFJlbW92ZSB1bnVz
+ZWQgbWFrZWZpbGUgZnJhZ21lbnRzDQo+IDQwZGQyNjY4ODc2NTQgIyBzY3JpcHRzL2R0YzogVXBk
+YXRlIHRvIHVwc3RyZWFtIHZlcnNpb24gdjEuNi4wLTItDQo+IGc4N2E2NTZhZTVmZjkNCj4gOGQ0
+Y2Y2YjZhY2I1OSAjIHNjcmlwdHMvZHRjOiB1c2UgcGtnLWNvbmZpZyB0byBpbmNsdWRlIDx5YW1s
+Lmg+IGluDQo+IG5vbi1zdGFuZGFyZCBwYXRoDQo+IGI5YmY5YWNlNWFlOTAgIyBzY3JpcHRzL2R0
+YzogVXBkYXRlIHRvIHVwc3RyZWFtIHZlcnNpb24gdjEuNi4wLTExLQ0KPiBnOWQ3ODg4Y2JmMTlj
+DQo+IDY5YTg4M2I2ZjVhYzAgIyBzY3JpcHRzL2R0YzogZHR4X2RpZmYgLSBtYWtlIGhlbHAgdGV4
+dCBmb3JtYXR0aW5nDQo+IGNvbnNpc3RlbnQNCj4gOGY4MjkxMDhiOGFlZCAjIHNjcmlwdHMvZHRj
+OiBvbmx5IGFwcGVuZCB0byBIT1NUX0VYVFJBQ0ZMQUdTIGluc3RlYWQNCj4gb2Ygb3ZlcndyaXRp
+bmcNCj4gYjM5YjQzNDJhYzQ5NSAjIHNjcmlwdHMvZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVy
+c2lvbiB2MS42LjAtMzEtDQo+IGdjYmNhOTc3ZWExMjENCj4gOTNjNjQyNGM0ODZiMyAjIHNjcmlw
+dHM6IGR0YzogRmV0Y2ggZmR0b3ZlcmxheS5jIGZyb20gZXh0ZXJuYWwgRFRDDQo+IHByb2plY3QN
+Cj4gMGRkNTc0YTFkNzVjMyAjIHNjcmlwdHMvZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVyc2lv
+biB2MS42LjAtNTEtDQo+IGcxODNkZjllOWMyYjkNCj4gZWMzOGI1ZGY4YTIzMSAjIHNjcmlwdHM6
+IGR0YzogQnVpbGQgZmR0b3ZlcmxheSB0b29sDQo+IGEwYzhjNDMxNDExZjUgIyBzY3JpcHRzOiBk
+dGM6IFJlbW92ZSB0aGUgdW51c2VkIGZkdGR1bXAuYyBmaWxlDQo+IGU3ZGM2NTNkNGU4OTAgIyBz
+Y3JpcHRzL2R0YzogQWRkIG1pc3NpbmcgZmR0b3ZlcmxheSB0byBnaXRpZ25vcmUNCj4gZDJiZjVk
+MmUzZjA5YyAjIHNjcmlwdHMvZHRjOiBVcGRhdGUgdG8gdXBzdHJlYW0gdmVyc2lvbiB2MS42LjEt
+MTktDQo+IGcwYTNhOWQzNDQ5YzgNCj4gYTYwODc4ZjU1MzJkMCAjIHNjcmlwdHMvZHRjOiBkdHhf
+ZGlmZjogcmVtb3ZlIGJyb2tlbiBleGFtcGxlIGZyb20gaGVscA0KPiB0ZXh0DQo+IDhiNzM5ZDg2
+NThhOWIgIyBzY3JpcHRzL2R0YzogQ2FsbCBwa2ctY29uZmlnIFBPU0lYbHkgY29ycmVjdA0KPiBi
+NmVlYWZhNjdkZjAwICMgc2NyaXB0cy9kdGM6IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJzaW9uIHYx
+LjYuMS02My0NCj4gZzU1Nzc4YTAzZGY2MQ0KPiBmOTZjYzRjNzg3NTg4ICMgc2NyaXB0cy9kdGM6
+IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJzaW9uIHYxLjYuMS02Ni0NCj4gZ2FiYmQ1MjNiYWU2ZQ0K
+PiAwOWFiOWMwOTJlZjJiICMgc2NyaXB0cy9kdGM6IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJzaW9u
+IHYxLjcuMC05My0NCj4gZzFkZjdiMDQ3ZmU0Mw0KPiBkZWQ4YTVhNDk4ZjJkICMgc2NyaXB0cy9k
+dGM6IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJzaW9uIHYxLjcuMC05NS0NCj4gZ2JjZDAyYjUyMzQy
+OQ0KPiBlZTZmZjZmY2E3ZTcxICMgc2NyaXB0cy9kdGM6IFVwZGF0ZSB0byB1cHN0cmVhbSB2ZXJz
+aW9uIHYxLjcuMi0zNS0NCj4gZzUyZjA3ZGNjYTQ3Yw0KPiANCj4gVGhpcyBhbHNvIGluY2x1ZGVz
+IGZvcndhcmQgcG9ydCBvZiBVLUJvb3QgY29tbWl0DQo+IGU4YzJkMjU4NDVjNyAoImxpYmZkdDog
+UmV2ZXJ0IDZkY2I4YmE0IGZyb20gdXBzdHJlYW0gbGliZmR0IikNCj4gdG8gYXZvaWQgYmluYXJ5
+IHNpemUgZ3Jvd3RoLg0KPiANCg0KRHVyaW5nIHRlc3RpbmcgSSBkaXNjb3ZlcmVkIHRoZSBmb2xs
+b3dpbmcgZXJyb3Igb24gTWljcm9jaGlwJ3MgUG9sYXJGaXJlDQpTb0MgSWNpY2xlIGtpdC4gSSBm
+b3VuZCBpdCBkdXJpbmcgYSBiaXNlY3QgYmV0d2VlbiB0aGUgdjIwMjYuMDEgdGFnIGFuZA0KdGhl
+IG1hc3RlciBicmFuY2ggd2hpbGUgbG9va2luZyB0byBzb2x2ZSBhbm90aGVyIGlzc3VlLiBXaXRo
+IHRoZXNlIG90aGVyDQppc3N1ZXMgc29sdmVkIEkgYW0gbGVmdCB3aXRoIHRoaXMgb25lIHN0aWxs
+IG9uIG1hc3RlciBhbmQgSSBhbSBsb29raW5nDQpmb3Igc29tZSBoZWxwLg0KDQpUaGUgZXJyb3Ig
+aXM6IGZhaWxlZCBvbiBmZHRfb3Blbl9pbnRvIGZvciBEVE8sIGkuZS4gb3ZlcmxheSBhcHBsaWNh
+dGlvbg0KZmR0IGVycm9yLiBUaGlzIHdhcyBpbnRyb2R1Y2VkIGJ5IDA1MzVlNDZkNTVkIHNjcmlw
+dHMvZHRjOiBVcGRhdGUgdG8NCnVwc3RyZWFtIHZlcnNpb24gdjEuNy4yLTM1LWc1MmYwN2RjY2E0
+N2MsIGkuZS4gdGhpcyBwYXRjaC4gUGxlYXNlIHNlZQ0KdGhlIGF0dGFjaGVkIGxvZyB3aGljaCBp
+bmNsdWRlcyBhIGBwcmludGVudmAgYXR0YWNoZWQuDQoNClRoYW5rcyBpbiBhZHZhbmNlLA0KSmFt
+aWUuDQoNCj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0K3JlbmVzYXNA
+bWFpbGJveC5vcmc+DQo+IC0tLQ0KPiBDYzogQWRyaWFubyBDb3Jkb3ZhIDxhZHJpYW5veEBnbWFp
+bC5jb20+DQo+IENjOiBBbmRyZXcgR29vZGJvZHkgPGFuZHJldy5nb29kYm9keUBsaW5hcm8ub3Jn
+Pg0KPiBDYzogQ2hyaXN0aWFuIE1hcmFuZ2kgPGFuc3VlbHNtdGhAZ21haWwuY29tPg0KPiBDYzog
+SGVpbnJpY2ggU2NodWNoYXJkdCA8eHlwcm9uLmdscGtAZ214LmRlPg0KPiBDYzogSWxpYXMgQXBh
+bG9kaW1hcyA8aWxpYXMuYXBhbG9kaW1hc0BsaW5hcm8ub3JnPg0KPiBDYzogUGF0cmljZSBDaG90
+YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+DQo+IENjOiBTYW0gRWR3YXJkcyA8Y2Zz
+d29ya3NAZ21haWwuY29tPg0KPiBDYzogU2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+DQo+
+IENjOiBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPg0KPiBDYzogdS1ib290QGxpc3RzLmRl
+bnguZGUNCj4gLS0tDQo+IFYyOiAtIEZpeCBvZmYtYnktb25lIGluIGZkdF9yZW1vdmVfdW51c2Vk
+X3N0cmluZ3MoKQ0KPiDCoMKgwqAgLSBSZXN0b3JlIGU4YzJkMjU4NDVjNyAoImxpYmZkdDogUmV2
+ZXJ0IDZkY2I4YmE0IGZyb20gdXBzdHJlYW0NCj4gbGliZmR0IikNCj4gLS0tDQo+IMKgc2NyaXB0
+cy9NYWtlZmlsZS5saWLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICst
+DQo+IMKgc2NyaXB0cy9kdGMvLmdpdGlnbm9yZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+fMKgwqAgMSArDQo+IMKgc2NyaXB0cy9kdGMvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqAgMjMgKy0NCj4gwqBzY3JpcHRzL2R0Yy9NYWtlZmlsZS5kdGPCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgfMKgIDE4IC0NCj4gwqBzY3JpcHRzL2R0Yy9jaGVja3MuY8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgNjg2ICsrKysrKysrKysrKysrKysrKysrKy0t
+LS0tDQo+IC0NCj4gwqBzY3JpcHRzL2R0Yy9kYXRhLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgfMKgIDc0ICsrLQ0KPiDCoHNjcmlwdHMvZHRjL2R0Yy1sZXhlci5swqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDM4ICstDQo+IMKgc2NyaXB0cy9kdGMvZHRjLXBhcnNl
+ci55wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTA5ICsrKy0tDQo+IMKgc2NyaXB0cy9kdGMv
+ZHRjLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNTggKystDQo+
+IMKgc2NyaXB0cy9kdGMvZHRjLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8IDEzNyArKysrLS0NCj4gwqBzY3JpcHRzL2R0Yy9mZHRvdmVybGF5LmPCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgfCAyMTQgKysrKysrKysrDQo+IMKgc2NyaXB0cy9kdGMvZmxhdHRyZWUuY8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDcwICsrLQ0KPiDCoHNjcmlwdHMvZHRjL2Zz
+dHJlZS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDI2ICstDQo+IMKgc2Ny
+aXB0cy9kdGMvbGliZmR0L2ZkdC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA4NCArKy0t
+DQo+IMKgc2NyaXB0cy9kdGMvbGliZmR0L2ZkdC5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzC
+oMKgIDQgKy0NCj4gwqBzY3JpcHRzL2R0Yy9saWJmZHQvZmR0X2FkZHJlc3Nlcy5jwqDCoCB8wqDC
+oCAyICstDQo+IMKgc2NyaXB0cy9kdGMvbGliZmR0L2ZkdF9vdmVybGF5LmPCoMKgwqDCoCB8IDM4
+NiArKysrKysrKysrKy0tLS0NCj4gwqBzY3JpcHRzL2R0Yy9saWJmZHQvZmR0X3JvLmPCoMKgwqDC
+oMKgwqDCoMKgwqAgfCAxMDAgKystLQ0KPiDCoHNjcmlwdHMvZHRjL2xpYmZkdC9mZHRfcncuY8Kg
+wqDCoMKgwqDCoMKgwqDCoCB8IDEwMSArKy0tDQo+IMKgc2NyaXB0cy9kdGMvbGliZmR0L2ZkdF9z
+dHJlcnJvci5jwqDCoMKgIHzCoMKgIDEgKw0KPiDCoHNjcmlwdHMvZHRjL2xpYmZkdC9mZHRfc3cu
+Y8KgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMjYgKy0NCj4gwqBzY3JpcHRzL2R0Yy9saWJmZHQvbGli
+ZmR0LmjCoMKgwqDCoMKgwqDCoMKgwqAgfCA0MTQgKysrKysrKysrKysrKy0tLQ0KPiDCoHNjcmlw
+dHMvZHRjL2xpYmZkdC9saWJmZHRfaW50ZXJuYWwuaCB8IDE0MSArKysrLS0NCj4gwqBzY3JpcHRz
+L2R0Yy9saXZldHJlZS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDE1NiArKystLS0N
+Cj4gwqBzY3JpcHRzL2R0Yy9zcmNwb3MuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHwgMTkwICsrKysrKy0tDQo+IMKgc2NyaXB0cy9kdGMvc3JjcG9zLmjCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8wqAgMzEgKy0NCj4gwqBzY3JpcHRzL2R0Yy90cmVlc291cmNlLmPC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAzMTkgKysrKysrKystLS0tLQ0KPiDCoHNjcmlwdHMv
+ZHRjL3VwZGF0ZS1kdGMtc291cmNlLnNowqDCoMKgwqAgfMKgwqAgNyArLQ0KPiDCoHNjcmlwdHMv
+ZHRjL3V0aWwuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDEyMiArKy0t
+LQ0KPiDCoHNjcmlwdHMvZHRjL3V0aWwuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB8wqAgNjEgKy0tDQo+IMKgc2NyaXB0cy9kdGMvdmVyc2lvbl9nZW4uaMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgfMKgwqAgMiArLQ0KPiDCoHNjcmlwdHMvZHRjL3lhbWx0cmVlLmPCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMjM1ICsrKysrKysrKw0KPiDCoHRvb2xzL2xpYmZkdC9m
+ZHRfcncuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAyICstDQo+IMKgMzMg
+ZmlsZXMgY2hhbmdlZCwgMjgzMCBpbnNlcnRpb25zKCspLCAxMDEyIGRlbGV0aW9ucygtKQ0KPiDC
+oGRlbGV0ZSBtb2RlIDEwMDY0NCBzY3JpcHRzL2R0Yy9NYWtlZmlsZS5kdGMNCj4gwqBjcmVhdGUg
+bW9kZSAxMDA2NDQgc2NyaXB0cy9kdGMvZmR0b3ZlcmxheS5jDQo+IMKgY3JlYXRlIG1vZGUgMTAw
+NjQ0IHNjcmlwdHMvZHRjL3lhbWx0cmVlLmMNCj4gDQoNCg==
 
-Sounds like a patch to the upstream .dtsi is warranted - will do that.
+--_002_d5d2320f54090420c32207c25b35c881ea1519b4camelmicrochipc_
+Content-Type: text/x-log; name="u-boot-failed-on-fdt_open_into-for-dto.log"
+Content-Description: u-boot-failed-on-fdt_open_into-for-dto.log
+Content-Disposition: attachment;
+	filename="u-boot-failed-on-fdt_open_into-for-dto.log"; size=6490;
+	creation-date="Fri, 16 Jan 2026 16:13:41 GMT";
+	modification-date="Fri, 16 Jan 2026 16:13:41 GMT"
+Content-ID: <82840AA18355384BB7FE0C7FD3E6FAA6@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-> >>> controlled mode would also deviate from the upstream DT binding, as i=
-t
-> >>> stipulates a GPIO for device resets [3].
-> >>>
-> >>
-> >> Not asking for this, rather wondering if we should really have this at
-> >> the SoC level rather than the board level. If it can be any GPIO why
-> >> forcing all boards to have GPIO4 bank "enabled" in SPL + U-Boot proper
-> >> before reloc. It isn't the first SoC to have that (also see all SoC
-> >> u-boot.dtsi having the UART controller from the reference design
-> >> "enabled"), and I don't think it's planned for us to have a product on
-> >> it, so... not a blocker from my side :)
-> >
-> > I believe that the boards which don't use UFS for early boot will just
-> > compile it out, together with the respective GPIO code. Then the only
-> > downside for them is a marginally larger SPL DTB - but not on a scale
-> > that matters for RK3576. And those that use UFS for early boot will
-> > likely want it to be on the pin expected by the boot ROM, then having
-> > the prerequisites already defined makes life easier for them (and it's
-> > not much different from having e.g. FSPI0/1 and eMMC enabled by
-> > default even for boards that don't use them).
-> >
->
-> My hunch is the BootROM may not even attempt to reset the UFS chip and
-> rely on it having lost power (see different ways for the PMIC to reset
-> its regulators when it's itself reset in SW). But I have nothing to
-> prove this :)
+VS1Cb290IDIwMjYuMDEtcmM1LTAwNDg3LWcwNTM1ZTQ2ZDU1ZDctZGlydHkgKEphbiAxNiAyMDI2
+IC0gMTU6NTk6NTQgKzAwMDApDQoNCkNQVTogICBzaWZpdmUsdTU0LW1jDQpNb2RlbDogTWljcm9j
+aGlwIFBvbGFyRmlyZS1Tb0MgSWNpY2xlIEtpdA0KRFJBTTogIDEwMjAgTWlCICh0b3RhbCAyIEdp
+QikNCkNvcmU6ICA2NiBkZXZpY2VzLCAxNSB1Y2xhc3NlcywgZGV2aWNldHJlZTogZml0DQpNTUM6
+ICAgbW1jQDIwMDA4MDAwOiAwDQpMb2FkaW5nIEVudmlyb25tZW50IGZyb20gbm93aGVyZS4uLiBP
+Sw0KSW46ICAgIHNlcmlhbEAyMDEwMDAwMA0KT3V0OiAgIHNlcmlhbEAyMDEwMDAwMA0KRXJyOiAg
+IHNlcmlhbEAyMDEwMDAwMA0KTmV0OiAgIGV0aDE6IGV0aGVybmV0QDIwMTEwMDAwLCBldGgwOiBl
+dGhlcm5ldEAyMDExMjAwMA0KSGl0IGFueSBrZXkgdG8gc3RvcCBhdXRvYm9vdDogMA0KUklTQy1W
+ICMgcHJpbnRlbnYNCmFyY2g9cmlzY3YNCmJhdWRyYXRlPTExNTIwMA0KYm9hcmQ9bXBmc19nZW5l
+cmljDQpib2FyZF9uYW1lPW1wZnNfZ2VuZXJpYw0KYm9vdF9hX3NjcmlwdD1sb2FkICR7ZGV2dHlw
+ZX0gJHtkZXZudW19OiR7ZGlzdHJvX2Jvb3RwYXJ0fSAke3NjcmlwdGFkZHJ9ICR7cHJlZml4fSR7
+c2NyaXB0fTsgc291cmNlICR7c2NyaXB0YWRkcn0NCmJvb3RfZWZpX2JpbmFyeT1sb2FkICR7ZGV2
+dHlwZX0gJHtkZXZudW19OiR7ZGlzdHJvX2Jvb3RwYXJ0fSAke2tlcm5lbF9hZGRyX3J9IGVmaS9i
+b290L2Jvb3RyaXNjdjY0LmVmaTsgaWYgZmR0IGFkZHIgLXEgJHtmZHRfYWRkcl9yfTsgdGhlbiBi
+b290ZWZpICR7a2VybmVsX2FkZHJfcn0gJHtmZHRfYWRkcl9yfTtlbHNlIGJvb3RlZmkgJHtrZXJu
+ZWxfYWRkcl9yfSAke2ZkdGNvbnRyb2xhZGRyfTtmaQ0KYm9vdF9lZmlfYm9vdG1ncj1pZiBmZHQg
+YWRkciAtcSAke2ZkdF9hZGRyX3J9OyB0aGVuIGJvb3RlZmkgYm9vdG1nciAke2ZkdF9hZGRyX3J9
+O2Vsc2UgYm9vdGVmaSBib290bWdyO2ZpDQpib290X2V4dGxpbnV4PXN5c2Jvb3QgJHtkZXZ0eXBl
+fSAke2Rldm51bX06JHtkaXN0cm9fYm9vdHBhcnR9IGFueSAke3NjcmlwdGFkZHJ9ICR7cHJlZml4
+fSR7Ym9vdF9zeXNsaW51eF9jb25mfQ0KYm9vdF9wcmVmaXhlcz0vIC9ib290Lw0KYm9vdF9zY3Jp
+cHRfZGhjcD1ib290LnNjci51aW1nDQpib290X3NjcmlwdHM9Ym9vdC5zY3IudWltZyBib290LnNj
+cg0KYm9vdF9zeXNsaW51eF9jb25mPWV4dGxpbnV4L2V4dGxpbnV4LmNvbmYNCmJvb3RfdGFyZ2V0
+cz1tbWMwIGRoY3AgDQpib290Y21kPXJ1biBkaXN0cm9fYm9vdGNtZA0KYm9vdGNtZF9kaGNwPWRl
+dnR5cGU9ZGhjcDsgaWYgZGhjcCAke3NjcmlwdGFkZHJ9ICR7Ym9vdF9zY3JpcHRfZGhjcH07IHRo
+ZW4gc291cmNlICR7c2NyaXB0YWRkcn07IGZpO3NldGVudiBlZmlfZmR0ZmlsZSAke2ZkdGZpbGV9
+OyBzZXRlbnYgZWZpX29sZF92Y2kgJHtib290cF92Y2l9O3NldGVudiBlZmlfb2xkX2FyY2ggJHti
+b290cF9hcmNofTtzZXRlbnYgYm9vdHBfdmNpIFBYRUNsaWVudDpBcmNoOjAwMDI3OlVOREk6MDAz
+MDAwO3NldGVudiBib290cF9hcmNoIDB4MWI7aWYgZGhjcCAke2tlcm5lbF9hZGRyX3J9OyB0aGVu
+IHRmdHBib290ICR7ZmR0X2FkZHJfcn0gZHRiLyR7ZWZpX2ZkdGZpbGV9O2lmIGZkdCBhZGRyIC1x
+ICR7ZmR0X2FkZHJfcn07IHRoZW4gYm9vdGVmaSAke2tlcm5lbF9hZGRyX3J9ICR7ZmR0X2FkZHJf
+cn07IGVsc2UgYm9vdGVmaSAke2tlcm5lbF9hZGRyX3J9ICR7ZmR0Y29udHJvbGFkZHJ9O2ZpO2Zp
+O3NldGVudiBib290cF92Y2kgJHtlZmlfb2xkX3ZjaX07c2V0ZW52IGJvb3RwX2FyY2ggJHtlZmlf
+b2xkX2FyY2h9O3NldGVudiBlZmlfZmR0ZmlsZTtzZXRlbnYgZWZpX29sZF9hcmNoO3NldGVudiBl
+Zmlfb2xkX3ZjaTsNCmJvb3RjbWRfbW1jMD1kZXZudW09MDsgcnVuIG1tY19ib290DQpib290ZGVs
+YXk9Mg0KYm9vdG1fc2l6ZT0weDEwMDAwMDAwDQpjcHU9bXBmcw0KZGlzdHJvX2Jvb3RjbWQ9Zm9y
+IHRhcmdldCBpbiAke2Jvb3RfdGFyZ2V0c307IGRvIHJ1biBib290Y21kXyR7dGFyZ2V0fTsgZG9u
+ZQ0KZHRib19zaXplPTANCmVmaV9kdGJfcHJlZml4ZXM9LyAvZHRiLyAvZHRiL2N1cnJlbnQvDQpl
+dGgxYWRkcj0wMDowNDphMzo2Mjo4MDo0Yg0KZXRoYWRkcj0wMDowNDphMzo2Mjo4MDo0YQ0KZmR0
+X2FkZHJfcj0weDg4MDAwMDAwDQpmZHRjb250cm9sYWRkcj1iZjM0OTUwMA0KZmR0ZmlsZT1taWNy
+b2NoaXAvbXBmcy1pY2ljbGUta2l0LmR0Yg0Ka2VybmVsX2FkZHJfcj0weDg0MDAwMDAwDQpsb2Fk
+X2VmaV9kdGI9bG9hZCAke2RldnR5cGV9ICR7ZGV2bnVtfToke2Rpc3Ryb19ib290cGFydH0gJHtm
+ZHRfYWRkcl9yfSAke3ByZWZpeH0ke2VmaV9mZHRmaWxlfQ0KbG9hZGFkZHI9MHg4MDIwMDAwMA0K
+bW1jX2Jvb3Q9aWYgbW1jIGRldiAke2Rldm51bX07IHRoZW4gZGV2dHlwZT1tbWM7IHJ1biBzY2Fu
+X2Rldl9mb3JfYm9vdF9wYXJ0OyBmaQ0Kbm9fb2Zfb3ZlcmxheXM9MA0KcHhlZmlsZV9hZGRyX3I9
+MHg4ODIwMDAwMA0KcmFtZGlza19hZGRyX3I9MHg4ODMwMDAwMA0Kc2Nhbl9kZXZfZm9yX2Jvb3Q9
+ZWNobyBTY2FubmluZyAke2RldnR5cGV9ICR7ZGV2bnVtfToke2Rpc3Ryb19ib290cGFydH0uLi47
+IGZvciBwcmVmaXggaW4gJHtib290X3ByZWZpeGVzfTsgZG8gcnVuIHNjYW5fZGV2X2Zvcl9leHRs
+aW51eDsgcnVuIHNjYW5fZGV2X2Zvcl9zY3JpcHRzOyBkb25lO3J1biBzY2FuX2Rldl9mb3JfZWZp
+Ow0Kc2Nhbl9kZXZfZm9yX2Jvb3RfcGFydD1wYXJ0IGxpc3QgJHtkZXZ0eXBlfSAke2Rldm51bX0g
+LWJvb3RhYmxlIGRldnBsaXN0OyBlbnYgZXhpc3RzIGRldnBsaXN0IHx8IHNldGVudiBkZXZwbGlz
+dCAxOyBmb3IgZGlzdHJvX2Jvb3RwYXJ0IGluICR7ZGV2cGxpc3R9OyBkbyBpZiBmc3R5cGUgJHtk
+ZXZ0eXBlfSAke2Rldm51bX06JHtkaXN0cm9fYm9vdHBhcnR9IGJvb3Rmc3R5cGU7IHRoZW4gcGFy
+dCB1dWlkICR7ZGV2dHlwZX0gJHtkZXZudW19OiR7ZGlzdHJvX2Jvb3RwYXJ0fSBkaXN0cm9fYm9v
+dHBhcnRfdXVpZCA7IHJ1biBzY2FuX2Rldl9mb3JfYm9vdDsgZmk7IGRvbmU7IHNldGVudiBkZXZw
+bGlzdA0Kc2Nhbl9kZXZfZm9yX2VmaT1zZXRlbnYgZWZpX2ZkdGZpbGUgJHtmZHRmaWxlfTsgZm9y
+IHByZWZpeCBpbiAke2VmaV9kdGJfcHJlZml4ZXN9OyBkbyBpZiB0ZXN0IC1lICR7ZGV2dHlwZX0g
+JHtkZXZudW19OiR7ZGlzdHJvX2Jvb3RwYXJ0fSAke3ByZWZpeH0ke2VmaV9mZHRmaWxlfTsgdGhl
+biBydW4gbG9hZF9lZmlfZHRiOyBmaTtkb25lO3J1biBib290X2VmaV9ib290bWdyO2lmIHRlc3Qg
+LWUgJHtkZXZ0eXBlfSAke2Rldm51bX06JHtkaXN0cm9fYm9vdHBhcnR9IGVmaS9ib290L2Jvb3Ry
+aXNjdjY0LmVmaTsgdGhlbiBlY2hvIEZvdW5kIEVGSSByZW1vdmFibGUgbWVkaWEgYmluYXJ5IGVm
+aS9ib290L2Jvb3RyaXNjdjY0LmVmaTsgcnVuIGJvb3RfZWZpX2JpbmFyeTsgZWNobyBFRkkgTE9B
+RCBGQUlMRUQ6IGNvbnRpbnVpbmcuLi47IGZpOyBzZXRlbnYgZWZpX2ZkdGZpbGUNCnNjYW5fZGV2
+X2Zvcl9leHRsaW51eD1pZiB0ZXN0IC1lICR7ZGV2dHlwZX0gJHtkZXZudW19OiR7ZGlzdHJvX2Jv
+b3RwYXJ0fSAke3ByZWZpeH0ke2Jvb3Rfc3lzbGludXhfY29uZn07IHRoZW4gZWNobyBGb3VuZCAk
+e3ByZWZpeH0ke2Jvb3Rfc3lzbGludXhfY29uZn07IHJ1biBib290X2V4dGxpbnV4OyBlY2hvIEVY
+VExJTlVYIEZBSUxFRDogY29udGludWluZy4uLjsgZmkNCnNjYW5fZGV2X2Zvcl9zY3JpcHRzPWZv
+ciBzY3JpcHQgaW4gJHtib290X3NjcmlwdHN9OyBkbyBpZiB0ZXN0IC1lICR7ZGV2dHlwZX0gJHtk
+ZXZudW19OiR7ZGlzdHJvX2Jvb3RwYXJ0fSAke3ByZWZpeH0ke3NjcmlwdH07IHRoZW4gZWNobyBG
+b3VuZCBVLUJvb3Qgc2NyaXB0ICR7cHJlZml4fSR7c2NyaXB0fTsgcnVuIGJvb3RfYV9zY3JpcHQ7
+IGVjaG8gU0NSSVBUIEZBSUxFRDogY29udGludWluZy4uLjsgZmk7IGRvbmUNCnNjcmlwdGFkZHI9
+MHg4ODEwMDAwMA0Kc3RkZXJyPXNlcmlhbEAyMDEwMDAwMA0Kc3RkaW49c2VyaWFsQDIwMTAwMDAw
+DQpzdGRvdXQ9c2VyaWFsQDIwMTAwMDAwDQp2ZW5kb3I9bWljcm9jaGlwDQoNCkVudmlyb25tZW50
+IHNpemU6IDM1NzkvODE4OCBieXRlcw0KUklTQy1WICMgYm9vdA0Kc3dpdGNoIHRvIHBhcnRpdGlv
+bnMgIzAsIE9LDQptbWMwKHBhcnQgMCkgaXMgY3VycmVudCBkZXZpY2UNClNjYW5uaW5nIG1tYyAw
+OjIuLi4NCkZvdW5kIFUtQm9vdCBzY3JpcHQgL2Jvb3Quc2NyDQo2MjQgYnl0ZXMgcmVhZCBpbiA4
+IG1zICg3Ni4yIEtpQi9zKQ0KIyMgRXhlY3V0aW5nIHNjcmlwdCBhdCA4ODEwMDAwMA0KV29ya2lu
+ZyBGRFQgc2V0IHRvIGJmMzQ5NTAwDQo2NDIwMTkyIGJ5dGVzIHJlYWQgaW4gODUgbXMgKDcyIE1p
+Qi9zKQ0KIyMgTG9hZGluZyBrZXJuZWwgKGFueSkgZnJvbSBGSVQgSW1hZ2UgYXQgODgxMDAwMDAg
+Li4uDQogICBVc2luZyAnY29uZi1taWNyb2NoaXAsbXBmcy1pY2ljbGUta2l0JyBjb25maWd1cmF0
+aW9uDQogICBUcnlpbmcgJ2tlcm5lbCcga2VybmVsIHN1YmltYWdlDQogICAgIERlc2NyaXB0aW9u
+OiAgTGludXgga2VybmVsDQogICAgIFR5cGU6ICAgICAgICAgS2VybmVsIEltYWdlDQogICAgIENv
+bXByZXNzaW9uOiAgZ3ppcCBjb21wcmVzc2VkDQogICAgIERhdGEgU3RhcnQ6ICAgMHg4ODEwMDBj
+Yw0KICAgICBEYXRhIFNpemU6ICAgIDYzNjE2MjkgQnl0ZXMgPSA2LjEgTWlCDQogICAgIEFyY2hp
+dGVjdHVyZTogUklTQy1WDQogICAgIE9TOiAgICAgICAgICAgTGludXgNCiAgICAgTG9hZCBBZGRy
+ZXNzOiAweDgwMjAwMDAwDQogICAgIEVudHJ5IFBvaW50OiAgMHg4MDIwMDAwMA0KICAgICBIYXNo
+IGFsZ286ICAgIHNoYTI1Ng0KICAgICBIYXNoIHZhbHVlOiAgIGU5MmRjY2FkNTFiZjlmNjFmMmEw
+OGQyNmEzZGE5MDRlZDVhODY5NTBkYjc4ZDkzOWJkNjIxZWY5ZmU5Yjk1YWMNCiAgIFZlcmlmeWlu
+ZyBIYXNoIEludGVncml0eSAuLi4gc2hhMjU2KyBPSw0KIyMgTG9hZGluZyBmZHQgKGFueSkgZnJv
+bSBGSVQgSW1hZ2UgYXQgODgxMDAwMDAgLi4uDQogICBVc2luZyAnY29uZi1taWNyb2NoaXAsbXBm
+cy1pY2ljbGUta2l0JyBjb25maWd1cmF0aW9uDQogICBUcnlpbmcgJ2ZkdC1tcGZzLWljaWNsZS1r
+aXQuZHRiJyBmZHQgc3ViaW1hZ2UNCiAgICAgRGVzY3JpcHRpb246ICBGbGF0dGVuZWQgRGV2aWNl
+IFRyZWUgYmxvYg0KICAgICBUeXBlOiAgICAgICAgIEZsYXQgRGV2aWNlIFRyZWUNCiAgICAgQ29t
+cHJlc3Npb246ICB1bmNvbXByZXNzZWQNCiAgICAgRGF0YSBTdGFydDogICAweDg4NzExNDAwDQog
+ICAgIERhdGEgU2l6ZTogICAgMjQyNDIgQnl0ZXMgPSAyMy43IEtpQg0KICAgICBBcmNoaXRlY3R1
+cmU6IFJJU0MtVg0KICAgICBMb2FkIEFkZHJlc3M6IDB4OGEwMDAwMDANCiAgICAgSGFzaCBhbGdv
+OiAgICBzaGEyNTYNCiAgICAgSGFzaCB2YWx1ZTogICAyYTExMWY3ZWNiMjEwNTZlMmUzMTVmYWI2
+NzNmZWY0ZDU2NmQ3Y2RiMDI4NGRlM2RlYjM2NjNhNGZhMDdjNjFmDQogICBWZXJpZnlpbmcgSGFz
+aCBJbnRlZ3JpdHkgLi4uIHNoYTI1NisgT0sNCiAgIExvYWRpbmcgZmR0IGZyb20gMHg4ODcxMTQw
+MCB0byAweDhhMDAwMDAwDQogICBMb2FkaW5nIERldmljZSBUcmVlIHRvIDAwMDAwMDAwYmUzMzEw
+MDAsIGVuZCAwMDAwMDAwMGJlMzM5ZmZmIC4uLiBPSw0KV29ya2luZyBGRFQgc2V0IHRvIGJlMzMx
+MDAwDQojIyBMb2FkaW5nIGZkdCAoYW55KSBmcm9tIEZJVCBJbWFnZSBhdCA4ODEwMDAwMCAuLi4N
+CiAgIFVzaW5nICdjb25mLW1pY3JvY2hpcCxtcGZzLWljaWNsZS1jcHUtb3BwJyBjb25maWd1cmF0
+aW9uDQogICBUcnlpbmcgJ2ZkdC1tcGZzLWljaWNsZS1jcHUtb3BwLmR0Ym8nIGZkdCBzdWJpbWFn
+ZQ0KICAgICBEZXNjcmlwdGlvbjogIERldmljZSBUcmVlIGJsb2IgZm9yIENQVSBPcGVyYXRpbmcg
+UG9pbnRzDQogICAgIFR5cGU6ICAgICAgICAgRmxhdCBEZXZpY2UgVHJlZQ0KICAgICBDb21wcmVz
+c2lvbjogIHVuY29tcHJlc3NlZA0KICAgICBEYXRhIFN0YXJ0OiAgIDB4ODg3MWU4YTQNCiAgICAg
+RGF0YSBTaXplOiAgICAxMzkyIEJ5dGVzID0gMS40IEtpQg0KICAgICBBcmNoaXRlY3R1cmU6IFJJ
+U0MtVg0KICAgICBMb2FkIEFkZHJlc3M6IDB4OGEwYzAwMDANCiAgICAgSGFzaCBhbGdvOiAgICBz
+aGEyNTYNCiAgICAgSGFzaCB2YWx1ZTogICA5MzU1ZTNmZWFhNGNlNjYzY2I1YTIyM2VlNzNhMjZl
+ZjIyN2YwMjU4NjMyN2IzZjlkYjQ4YjVjMzVkZGNkYzc4DQogICBWZXJpZnlpbmcgSGFzaCBJbnRl
+Z3JpdHkgLi4uIHNoYTI1NisgT0sNCmZhaWxlZCBvbiBmZHRfb3Blbl9pbnRvIGZvciBEVE8NCkNv
+dWxkIG5vdCBmaW5kIGEgdmFsaWQgZGV2aWNlIHRyZWUNCiAgIFVuY29tcHJlc3NpbmcgS2VybmVs
+IEltYWdlIHRvIDgwMjAwMDAwDQpEZXZpY2UgdHJlZSBub3QgZm91bmQgb3IgbWlzc2luZyBGRFQg
+c3VwcG9ydA0KIyMjIEVSUk9SICMjIyBQbGVhc2UgUkVTRVQgdGhlIGJvYXJkICMjIw==
 
-I took my JTAG out. Boot ROM at its code address 0x6448 writes
-0xff0011 to 0x2604b398, where:
- - 0x2604b398 is VCCIO7_IOC_GPIOD4_IOMUX_SEL_L
- - 0xff << 16 is the write mask
- - 0x10 is GPIO4_D1 mux (=3DUFS_REFCLK, not GPIO mode)
- - 0x01 is GPIO4_D0 mux (=3DUFS_RSTn, not GPIO mode)
-
-Further down the line at its code address 0x6480 it writes 0x100010 to
-0x2604b400, where:
- - 0x2604b400 is VCCIO7_IOC_XIN_UFS_CON
- - 0x10 << 16 is the write mask
- - 0x10 is ufs_rstn_out a.k.a. UFS reset IO configuration (presumably
-enabling the hardware-controlled device reset mode)
-
-This only applies to when UFS is identified as the boot storage -
-otherwise the registers stay at their power-on reset defaults (i.e.
-zeros for these fields)
-
-> >>> [1] https://github.com/torvalds/linux/blob/master/drivers/ufs/host/uf=
-s-rockchip.c#L220-L231
-> >>> [2] https://github.com/rockchip-linux/u-boot/blob/next-dev/drivers/uf=
-s/ufs-rockchip.c#L222
-> >>> [3] https://github.com/torvalds/linux/blob/master/Documentation/devic=
-etree/bindings/ufs/rockchip%2Crk3576-ufshc.yaml#L53-L58
-> >>>
-> >>>>>     &ioc_grf {
-> >>>>>         bootph-all;
-> >>>>>     };
-> >>>>> @@ -176,6 +182,11 @@
-> >>>>>         bootph-pre-ram;
-> >>>>>     };
-> >>>>>
-> >>>>> +&ufshc {
-> >>>>> +     bootph-pre-ram;
-> >>>>> +     bootph-some-ram;
-> >>>>> +};
-> >>>>> +
-> >>>>>     &xin24m {
-> >>>>>         bootph-all;
-> >>>>>     };
-> >>>>> diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/ar=
-m/include/asm/arch-rockchip/bootrom.h
-> >>>>> index b15938c021d6..f9ecb6858f04 100644
-> >>>>> --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-> >>>>> +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> >>>>> @@ -51,6 +51,7 @@ enum {
-> >>>>>         BROM_BOOTSOURCE_SPINOR =3D 3,
-> >>>>>         BROM_BOOTSOURCE_SPINAND =3D 4,
-> >>>>>         BROM_BOOTSOURCE_SD =3D 5,
-> >>>>> +     BROM_BOOTSOURCE_UFS =3D 7,
-> >>>>
-> >>>> Hopefully this will be the same value for all upcoming SoCs with UFS
-> >>>> (and not used for something else :) ).
-> >>>
-> >>> Well it's hard to guarantee (otherwise Jonas wouldn't have had to add
-> >>> a translation function [4] for the IDs that changed in RK3576). Maybe
-> >>> at some point we'll have to switch to a lookup table per each SoC
-> >>> variant if these keep changing, but thankfully that point is not toda=
-y
-> >>> :)
-> >>>
-> >>
-> >> See
-> >> https://lore.kernel.org/devicetree-spec/ebc08400-c16d-4ed0-b487-9aabe1=
-3bbf0f@pengutronix.de/
-> >
-> > Ooooh that sounds like a discussion that can potentially stretch out
-> > for a long time. I'd much rather use a value that works for the only
->
-> Anything to be added to the dt spec is taking months if not year, even
-> when agreed upon.
->
-> > chip where it matters now (RK3576), then solve the problem whenever it
-> > arises (if it does). After all, bootrom.h is not ABI, and DT is, so it
-> > is much easier to fix up bootrom.h without stepping on too many toes.
-> >
->
-> I'm saying this will solve the problem, not that we have to rely on it
-> now :)
->
-> > Furthermore, I'm not even sure that /chosen/bootsource can address the
->
-> It's not /chosen/bootsource, this has merged already in the spec and
-> won't be usable for this mapping (lots to read but it's explained
-> somewhere in the thread).
->
-> > issue here, because boot ROM's won't magically start passing DT
-> > phandles to the bootloader, so there will still be an ID->node lookup
-> > table somewhere in early code (with potentially per-SoC overrides).
->
-> No, that's the point of the thread I linked. The idea is to provide in
-> DTS the mapping between the value in the register set by the BootROM to
-> a controller/flash node somehow (via phandle or something else) so that
-> we don't have to have this table in code at all. After all, this is
-> hardware description (albeit based on BootROM "API" but that cannot
-> change anyway, it's silicon (if it does, good luck all may the odds be
-> in your favor)) so there's no reason for all bootloaders to have to
-> reinvent their own sauce (see barebox doing something different than
-> U-Boot there).
->
-> I read the BootROM register value, I read the DT property with the
-> mapping, then I know which device it is. Bonus point, you don't need to
-> keep the DT node path in sync in your table, because the mapping is in
-> the same DT as what it refers to.
->
-> This is not for now (and I should probably revive the topic), just
-> wanted to tell you there's another way to do that and we should probably
-> aim at doing that in the mid/long term (and then all this in-code
-> mapping won't need to maintained anymore, and there won't be conflicts
-> between SoCs having the same value for different meanings, or differnet
-> values for the same meaning).
-
-Oh, I got it now. Yes, that sounds like a beautiful longer-term
-solution, separating data from code cleanly and avoiding if-then-else
-trees.
-
-Best regards,
-Alexey
+--_002_d5d2320f54090420c32207c25b35c881ea1519b4camelmicrochipc_--
