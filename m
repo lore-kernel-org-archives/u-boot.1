@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D1BC982F3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 19:28:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97EFFC982F3
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 19:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8F8C836AC;
-	Fri, 16 Jan 2026 20:28:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B08BB836AC;
+	Fri, 16 Jan 2026 20:29:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oqsYOCwN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A406838BB; Fri, 16 Jan 2026 20:28:45 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 93BE083956; Fri, 16 Jan 2026 19:50:10 +0100 (CET)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com
+ [209.85.210.41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10AE78367F
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 20:28:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18D1983015
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:50:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-45c9fdf2a06so678870b6e.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:28:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768591721; x=1769196521; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jEgvs/moihqaoOErxv3ruyIOqtTzZ8swcEEBj+kboIQ=;
- b=oqsYOCwNDSdSkauOA+Q1QVgktNwygBn5vHg22G8lKP11KfIiUPX9BPRfPHlfcFGzN9
- d1JqGo/kBOBQv9KSNg1kGYB1XceLQ1fyc0AcvHXPWtB5/wj9PhXgHCspNC5Yh0V3VYqk
- mCkDYYp4sxs1E+5uwbpqV++Bpuiv4pmNBkJUk=
+ spf=pass smtp.mailfrom=ngompa13@gmail.com
+Received: by mail-ot1-f41.google.com with SMTP id
+ 46e09a7af769-7cfd5d34817so1535441a34.1
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:50:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768591721; x=1769196521;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jEgvs/moihqaoOErxv3ruyIOqtTzZ8swcEEBj+kboIQ=;
- b=DR05WnTS8sVm6fTKduG2mTA2YXCUIAR7dsjuqSH10tJ4WJXLHuPLPNFepnIcqktcXZ
- KCZ+XgWfK7OjdKb63XqbzvKXEVoobDvSMLzxT+25m6qjZoutb/M1H8OPcyO1rO94/anM
- dC+RzOC5ViNi0B9F5OEkDYtfPVjqubgmDn1snoSJ/yUur5URy8NfbB4SVmm9/nqsIJZZ
- OL6jhPSt9eLK+/EDO4oYOPCATIEhFKBVyQufk6yWru7FX1tN37etTKqTJewuXu7lLa7I
- Bu0iQG9cLL+8W/Qc2GogJlm10ZX3m5JceF2fipgYOR+5pnjXGL9a5wY8UMeaWyHQMjGV
- og+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfDGcOgx3mG6QaIKc3un+d9ZSFj+ljBf/trUp2wTKY7hqloUD5be4kFLDCZ5aQMKSW4ZXIji4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywd+1fJ8uOPP6EKLyR2g6PAOP+Lz9hpSZeJvDbuzF0uhAyLBTI4
- xVRXmLfoFdYptdGlDtVWOD9ePzKJitHIc6pktQ63gVNMH62h1x10iimnWWKKiUSIlOQ=
-X-Gm-Gg: AY/fxX7WCsD/zlzHS6R75LWfTDTBi4Frs7F34v2AD+F/5OUgxNy613NTRewv+jEM9JP
- q8WZjUPuBnvDYcqwzuxYkPTr3tfvdoQKa0WVhQV0ES/q1yC6zD7pwjD0jsZPN3g7sw0CspcjdKx
- PDdJtF6O8AgFEngbhnKasMdUp2rGR5TLNIsrna7zGbjqsjf1EjFRsWkbVZU0s8bbszQZ22Ihlp5
- I2EAWOUvJqaFPqVe/OJ4HNH6RrFQ3VKYo1XZ8EMWNc2+H3/WaQNzXVAIGjbyPlXwOK+1mMoE+hn
- Q5o7/tOUZgYLexPLrhT7Nl9+4Wdy/A/xPnuvzQ0OLlB1+LYBWONidlVjpQSyXslo7r7odNTpV3z
- MX/6gppSbWPEdN70YQUrAi6UJ2OL7mMevJJX/ndY3XD48SwUR2mVJyxm98j5YuZPuRkcEkKHRhR
- HtbszUVoxoCcD0TRj+BuS4Y+zneeupff1sfGPofcfydK7TxvPkSn5qYUdwNNj2Eb2igHwkxx1Zw
- vBIAGu6wEWAoI1LUW5+kG+qrfosW/rylfrc9s4=
-X-Received: by 2002:a05:6808:150e:b0:450:3c7b:e7d0 with SMTP id
- 5614622812f47-45c9c0c23f5mr1633297b6e.48.1768591720729; 
- Fri, 16 Jan 2026 11:28:40 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9dff95a2sm1731483b6e.11.2026.01.16.11.28.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 11:28:40 -0800 (PST)
-Date: Fri, 16 Jan 2026 13:28:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] ARM: dts: stm32: Add bootph-all in ltdc node in
- stm32mp257f-ev1-u-boot
-Message-ID: <20260116192837.GO3416603@bill-the-cat>
-References: <20260116-add_bootph_all_for_ltdc-v1-1-de4dc0ae1115@foss.st.com>
+ d=1e100.net; s=20230601; t=1768589406; x=1769194206;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tdR/h3nDyWvP2R72hsHcMKi/rk0gO3WT3F+Gsv3V5+8=;
+ b=MeHOb9xrQSGh0cUo7FvWISQZSZJ+pLCpl/TpJ1c7a+SF5w7hwOPTFazADVe0uIWib8
+ dw6+t+ilLDzSRRVQ9UAOdls9eZKNWrqi9E8VUjDqIzCvmr981k/2FIskOwzTzLNP6pCU
+ o23mAN7Jb+aBc8V67ut+kiRcb/XgTuTg1lX+lWf3L7yBKr0eMz94tGIBnB84FRcG4kuD
+ 2yj6h8R2M1XS8buCTm2/GY7/1dUlYP/AaMJ8FGuwFYKihey7kdDeXvoL2FO5EoSjMPb/
+ ea5P4zRIo5QzeFShTDhSjwbUK+GdQUWd8Gq1YY3s2M2LefRRIoPd2HbHf/dykZWn+hat
+ vdJg==
+X-Gm-Message-State: AOJu0Yy5VwjozhG9JnHpKxeGVxB3yYN4bkZii5LYWcFZYLOck8yuMquY
+ 4VFoLkeGBF7lTlzXKGqvaIAY2I5m84AGxR2k8U5emLhn+8ePRUxgjNYM3qZxZg==
+X-Gm-Gg: AY/fxX4vUM11SAW+rKdrM5uKsOIrfpa/SeUI+AfnExlNSTQBtZwf4i2SSv0YnFdVy0j
+ nwuq/0ZWt6bADnKXbmh8qnLh4kf72GVGzsuD5kkmiJivmyEZxNy6/8GxH9e6vkSefRz+qjSaqQs
+ +K704X5X/bdN1hwg1FbaVsTJuh3eAU9VsumPaY/yFp5wVK1aq3ol6RKfjwcoDE9o7Irl6TsUW8f
+ HQJhSfWG7xAhbS8yc39R/NpLFZZJRrSLZt621hZ7DOvweBhgysuEHND62y5bNSJ/818gKPl1psi
+ ub/nhs/Vcfhfu9dRI66RmIMAt3Gl6J5uL2RLbH3HLzKCkm949bMAeWTktrXV1JHSkvkSEmNgvsq
+ j9gDohdyDoGItq4kzo7DrMBRiZNjc92Bbr2laXxUmZihTExdSDpe4Ti/U/M04m4aS3xH0RQ0OZ0
+ p4zXyBX4Tz4+us8uRwiqMwYYUDfbRUWGnFWX8/hpZSmc2B2mDrlwK5EE9OgmztRjbdoKasAGwd
+X-Received: by 2002:a05:6830:6612:b0:771:5ae2:fcde with SMTP id
+ 46e09a7af769-7cfdfe2272cmr1582034a34.2.1768589405893; 
+ Fri, 16 Jan 2026 10:50:05 -0800 (PST)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com.
+ [209.85.210.53]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf28efbasm2179036a34.17.2026.01.16.10.50.05
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Jan 2026 10:50:05 -0800 (PST)
+Received: by mail-ot1-f53.google.com with SMTP id
+ 46e09a7af769-7cfcb5b1e2fso1524522a34.3
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:50:05 -0800 (PST)
+X-Received: by 2002:a05:6830:6c11:b0:7c7:63b6:89d8 with SMTP id
+ 46e09a7af769-7cfdff80a6amr2215998a34.14.1768589405552; Fri, 16 Jan 2026
+ 10:50:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EsYNrY+v/FG556Bi"
-Content-Disposition: inline
-In-Reply-To: <20260116-add_bootph_all_for_ltdc-v1-1-de4dc0ae1115@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260116-apple-defconfig-smbios-v2-1-861d707b466a@jannau.net>
+In-Reply-To: <20260116-apple-defconfig-smbios-v2-1-861d707b466a@jannau.net>
+From: Neal Gompa <neal@gompa.dev>
+Date: Fri, 16 Jan 2026 13:49:29 -0500
+X-Gmail-Original-Message-ID: <CAEg-Je-UqeGMp+-vQLij=Zux0L9mKL4CZYMYHYbi=kvgjOuUYg@mail.gmail.com>
+X-Gm-Features: AZwV_Qih0RhiiYZ5DHz0i73_uJf4prcJ1SgxgrjN6STH7fWjrWSzaqlj2u9btyg
+Message-ID: <CAEg-Je-UqeGMp+-vQLij=Zux0L9mKL4CZYMYHYbi=kvgjOuUYg@mail.gmail.com>
+Subject: Re: [PATCH v2] configs: apple: Enable SMBIOS / sysinfo
+To: Janne Grunau <j@jannau.net>
+Cc: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>, 
+ Tom Rini <trini@konsulko.com>, asahi@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 16 Jan 2026 20:29:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,65 +93,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---EsYNrY+v/FG556Bi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jan 16, 2026 at 08:12:06PM +0100, Patrice Chotard wrote:
-
-> Add bootph-all property in ltdc node in stm32mp257f-ev1-u-boot.dtsi
-> to fix the following issue :
->=20
-> Video device 'display-controller@48010000' cannot allocate frame buffer
-> memory - ensure the device is set up beforen
-> stm32_rifsc bus@42080000: display-controller@48010000 failed to bind on
-> bus (-28)
-> stm32_rifsc bus@42080000: Some child failed to bind (-28)
-> initcall_run_r(): initcall initr_dm() failed
-> ERROR ### Please RESET the board ###
->=20
-> Fixes: 29ab19c2bead ("Subtree merge tag 'v6.18-dts' of dts repo [1] into =
-dts/upstream")
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+On Fri, Jan 16, 2026 at 8:50=E2=80=AFAM Janne Grunau <j@jannau.net> wrote:
+>
+> Enable verbose SMBIOS table generation so that user space applications
+> can use the SMBIOS table to provide details about the system. The
+> desired information is chassis-type to determine whether the system is
+> laptop.
+> Adding the chassis-type property is proposed for the upstream device
+> trees in the Linux kernel in [1].
+> Enable CMD_SMBIOS as debugging aid as the platform can easily deal with
+> large u-boot binaries.
+>
+> Link: https://lore.kernel.org/asahi/20260109-apple-dt-usb-c-atc-dwc3-v1-0=
+-ce0e92c1a016@jannau.net/ [1]
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm3=
-2mp257f-ev1-u-boot.dtsi
-> index b70cd8b52ce..c3c9c94f165 100644
-> --- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-> @@ -52,6 +52,10 @@
->  	};
->  };
-> =20
-> +&ltdc {
-> +	bootph-all;
-> +};
-> +
->  &usart2 {
->  	bootph-all;
->  };
->=20
+> Changes in v2:
+> - Added CMD_SMBIOS as suggested by Mark
+> - Added Tom's Reviewed-by: trailer
+> - Link to v1: https://lore.kernel.org/r/20260109-apple-defconfig-smbios-v=
+1-1-16477009c034@jannau.net
+> ---
+> I do not plan to update u-boot's in-tree device trees. The Linux device
+> trees have almost reached feature parity. The main missing features are
+> the USB Type-C ports (on track for next merge window) and the laptop
+> keyboards. I think it makes more sense to close the feature gap and
+> switch to upstream device trees instead of adding to the in-tree device
+> trees.
+> ---
+>  configs/apple_m1_defconfig | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
 
-Are you upstreaming these? Thanks.
+Reviewed-by: Neal Gompa <neal@gompa.dev>
+
 
 --=20
-Tom
-
---EsYNrY+v/FG556Bi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWqRYgAKCRAr4qD1Cr/k
-CvLwAP0V23ghorscORmR2MndF5n4juoLhCniHNJd2HHS3ECovgEA5FQfQqfyX0WA
-PeYCZ1k1G5oqLmSr+nu6w4FCPKtcWAY=
-=5awd
------END PGP SIGNATURE-----
-
---EsYNrY+v/FG556Bi--
+=E7=9C=9F=E5=AE=9F=E3=81=AF=E3=81=84=E3=81=A4=E3=82=82=E4=B8=80=E3=81=A4=EF=
+=BC=81/ Always, there's only one truth!
