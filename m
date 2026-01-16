@@ -4,155 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D83C982F0
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 19:12:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421D5C982F3
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 19:23:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33DB58367F;
-	Fri, 16 Jan 2026 20:12:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B3848836AC;
+	Fri, 16 Jan 2026 20:23:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KHV9h68I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bU2y1dVl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C92C836AC; Fri, 16 Jan 2026 20:12:14 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0FBE9838A5; Fri, 16 Jan 2026 20:23:01 +0100 (CET)
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3C5483015
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 20:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C5258367F
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 20:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hP7zXWDMbC0T9E0Re8d1JbkYRxjyW4BH55tm/yNxXDoZBkFEGWxQTtdmny1jtEP3fBRsqOByWVFd2ykoQrdKKwUkkiOFPZpxwSQay28tIfl2OM5AEK577PGKsGYvDGLnLA/9ILj45JtBctcUhCMo/NDOH0k/GdyBLrdfFgesIIK3+UnB36jAolJAMD7J9YEKGSnyfdRIxhQJgoz0qxkK1EJ6IjcExmVilWATUzaVIzaEEj7YHtXJ8lp0npILlyj9mE5chEZLjW+wj6ijYX5/KiDfrUxQBuPHFWN6U9RMUMhRYuyCR85NL1giLtD42Qx9qFr1OoAvvwqFh219WZZyog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JzOoiLmyD2LskaPmt5mCI0nXzDtwl17MiYrAckFPpg4=;
- b=siR1P/hwybQt7zyPAdWtirJ2rCyj+OOoZw2S8iuvJf/+INoRJ6DcS5X0nU2nh3GnDIeoQ1MfGkt5lTpDyqWQNI+lnqrCt37wMVYHcflrTFzI3VkMe5fCJqQl2lV+73K8TnZjVm6XkuZplN2nEpykMwnDb6clum2VPks+NFyOJxclMcErwVsAwzJIX6LhOhvp38DQaBfXCwnlL7NCoKUCOvbMwNzuiryYqWdT7TqpL6HRhaYMjIru6GEpiZam1fD56GfzKqnTs3uvE1Bi3wi3dQyJrBOth64Thi25CjRP36conLcmU5Vmh4qrh3UPRl6jRr7geUK48RkntB5TumUKEg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=cherry.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JzOoiLmyD2LskaPmt5mCI0nXzDtwl17MiYrAckFPpg4=;
- b=KHV9h68Ie2b70c12d7sc+DK72gFHpGCeRlehd4cSbyPmw/k0339zwwFX/y23fVwkqEBOOFOC3AsgYRCR7pA42RIBxTVpTPqOifKRNaYlRILH/nT4ho4bWs5oHWqPDqWCI8Y/hmJo2/qsPUsnfTGHQfSn2yXP5JTnBJzK+j067PNsa15iQtTNXV++wEVUXBpFzvT+dI2cwDpnXukTu0k4XAOz7h8m2Ezjuxg67JHY823hoUb7ANdBsdIxEiW/DNY1jKWFKE/QQ6dtfmW7e++RfvkkrlEAPA+sETxNEYo3d3gxbtNa2dLcb3EWEeRQ9u+WOvQZ3XkktAie/btXu/d9zg==
-Received: from DUZPR01CA0349.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b8::14) by GV1PR10MB8857.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:150:1d3::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.6; Fri, 16 Jan
- 2026 19:12:08 +0000
-Received: from DB1PEPF00039231.eurprd03.prod.outlook.com
- (2603:10a6:10:4b8:cafe::ef) by DUZPR01CA0349.outlook.office365.com
- (2603:10a6:10:4b8::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.8 via Frontend Transport; Fri,
- 16 Jan 2026 19:12:21 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB1PEPF00039231.mail.protection.outlook.com (10.167.8.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Fri, 16 Jan 2026 19:12:07 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 16 Jan
- 2026 20:13:33 +0100
-Received: from localhost (10.252.20.137) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 16 Jan
- 2026 20:12:06 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Fri, 16 Jan 2026 20:12:06 +0100
-Subject: [PATCH] ARM: dts: stm32: Add bootph-all in ltdc node in
- stm32mp257f-ev1-u-boot
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x642.google.com with SMTP id
+ a640c23a62f3a-b872b588774so362319266b.1
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 11:22:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768591378; x=1769196178; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:to:content-language
+ :references:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=vHGNSK+uuV3Y7Ap/QeWuAYKsSuaQw6Boygc9h569ciM=;
+ b=bU2y1dVlXHmsWG8X7kb2sVy5RM0YLiklxEttrExXmsmscEMlPwj+ClMWsDRqlyrIAq
+ vEgHFbYBwKldPhjgaQ7j4PeQlBNQSIxeIRzSFa2o9E4bxmmMuR5u+4uDncmTbcMayvNk
+ USnuEyTz8tyS9m9UkqxUf9/gmjnwFMQUwG1PwUcWE9z5jIq1K6ztVY25qMWUsO5MwpRa
+ yXz2FCNBG5vSLsQCKov1rxChN0BaqPoLOFuB/DPfqmtBwXlqOYTrT636wRqTLjxHzNPD
+ ildyv35aT3AJmsmjRiJr5ai9exiiioV5UMeecKRzyJkQa0s9o89Bea1xlXMB+y/EdZBc
+ gZTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768591378; x=1769196178;
+ h=content-transfer-encoding:in-reply-to:from:to:content-language
+ :references:subject:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vHGNSK+uuV3Y7Ap/QeWuAYKsSuaQw6Boygc9h569ciM=;
+ b=JAfCsPSilfKK1lzJR5rUErpaRjZXVwoJ/jnFcQWiZVX8bC3Qr7heUplT/ffJ9iqmyI
+ 0JOhO4+W8/qVEi4KHyq++gVAYjhdGfnJ/rVagN0Y8k6HP9+BvFqj+OBSmoycwscItYz7
+ x6pdYWRpJMbXo1PH2sD1DuI/pkRRVCKjrZoQrT1kiEsohY788bYzwXvqeJ6Cwv5Wc3eK
+ bfLyW/cSEXd4CtCk0t2B3zRyzYhn13E4rcLmvZAAxbLZAqEefxBaUIJOKoui3Zs6C7yb
+ nzxrnohBqReHO91yQmAinQlXwqcumgYKIgUbXWqEk7XgdXFvipUODKCJELNsjoF+PnAz
+ sFCg==
+X-Gm-Message-State: AOJu0YyZKv9Sr5KoJth+32RKRwWUW7ecZFKZpP85mvsLVXUqz2ExTjmg
+ OcbSEG2u1RcQGZfA1CBsUXLLTYNZX9j8bgPwsnXnjkMtCG0m3a1BnTRpxQxpU4BDKXbDApIwqCC
+ mmysEHT4=
+X-Gm-Gg: AY/fxX47LDSRX1sCqKUi42m99ycfAHckjW78AjV/KgszBVZ37hbC3DwTkqZmWe0zwSM
+ b0IwGMPduKOwkVOEwefRp9XVbkOKJ+FpvmfX5KdtBCR/zqDIMjIiiGfzYY9j87L5B/M/i1x+SSB
+ Qh21pGlYPzg+CWT6XkRPq+d4/mbESDXw14//r/RmsJL6P8NiYD6i0CNtEt0bs7yKYIkBhQfRXHj
+ uIxM9wynsJ2M6FsuAj64gspmck0eeQfxmrZJo58X0Fmcs4EpXwbqvc8J7KeaB0SqlYVdB9Fcg/R
+ aRpjUBOItjRotfAChbaZIokxuLvX0OAj0IsQBdw00XmVovBmKE6fV+6rWu8+j1p6ZSmxV82HE41
+ y0+vgd+Kr2GQKN4GhPerXa8oQpn7o6CFTNK21i+ybYFAu1hlR7Lh7SMNJeZInMRBApbM1J2rXcN
+ 1qtpN2/B8NQiSyms0GAqjAprbIcgiOufcX5E+/1BDbmWA9M9mvAoJoalrqNmUX3tk=
+X-Received: by 2002:a17:906:fe0b:b0:b83:246c:c514 with SMTP id
+ a640c23a62f3a-b8792feb225mr308294866b.51.1768591377344; 
+ Fri, 16 Jan 2026 11:22:57 -0800 (PST)
+Received: from [192.168.1.160] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8795168e6asm337647766b.22.2026.01.16.11.22.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Jan 2026 11:22:56 -0800 (PST)
+Message-ID: <95782989-6db8-4f83-b51a-3ca28fa97874@linaro.org>
+Date: Fri, 16 Jan 2026 20:22:55 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Fwd: [PULL] Please pull qcom-main
+References: <20260116192127.3444041-2-casey.connolly@linaro.org>
+Content-Language: en-US, en-GB
+To: U-Boot Mailing List <u-boot@lists.denx.de>, u-boot-qcom@groups.io
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260116192127.3444041-2-casey.connolly@linaro.org>
+X-Forwarded-Message-Id: <20260116192127.3444041-2-casey.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260116-add_bootph_all_for_ltdc-v1-1-de4dc0ae1115@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIAIWNamkC/x3MTQqAIBBA4avErBPSwKKrRIg/Yw1IhkYE4t2Tl
- t/ivQIZE2GGpSuQ8KFM8WzgfQf20OeOjFwziEHIgXPJtHPKxHhfh9IhKB+TCrezzE6jmP0sDZc
- CWn0l9PT+53Wr9QOieUncaQAAAA==
-X-Change-ID: 20260116-add_bootph_all_for_ltdc-c7328f86b162
-To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, "Patrice
- Chotard" <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.252.20.137]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF00039231:EE_|GV1PR10MB8857:EE_
-X-MS-Office365-Filtering-Correlation-Id: e60cc98b-1303-4bb4-ed78-08de55332446
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eWxRTzRwZTFpYXVVUmtwbmlTUDcvNXMyRkppbnoyME9WSjc2Uk1zUENOYU9Q?=
- =?utf-8?B?a0FpWVUrMWtaREQzMVdXNUE4eTNONW5DTVNGbDM2eWNpSmN4V2FOSjM2a29S?=
- =?utf-8?B?R0ZNVVBaZ2QvcFZtSkdRVkc3N1c2YkUzWi9QdDh0QVo2bWdPb1NxTW5GeVdv?=
- =?utf-8?B?bTVDdDc1SlZkL3lKbkg3Ry9PemdLdHpXNlRvUUJ6Y3l2RUpRV3hnUXVRajFR?=
- =?utf-8?B?TXhnQ1dQdm5UZEJOTVMveFZvbTV0bnkrRVlLbWYvWVB2UVM0aDJ6bDNjQUdW?=
- =?utf-8?B?aDRCT1BKSEFRRXVjNWhkbnFPVlBKTFQvaWxwajM4TXNXZGFCTlA1Q0FpWXM3?=
- =?utf-8?B?cksvTzBJbjU1ODVBNTd0a1luOUd6a3k2YjRQTDdmUHROOHVzT1o5SUZvVWJu?=
- =?utf-8?B?bTBHYW5uNmlSRG81MFNlRU9CYjErNktDZjNESTVrYzJQSmsrNUswNUpZcEl2?=
- =?utf-8?B?dHh1WUFYNzlCTzFqY0RuMXN1MCtBaDJjeGxmcjZ2UjBZcDRoSnpDRDN4UG1a?=
- =?utf-8?B?ZERpOHIwUUhoMkRLNmRWV2xiUUR6cXR0bUNjeEpzdVIxWnM5NEdLUlF6Wjhi?=
- =?utf-8?B?NmZveGVpTmpuZldrd3cyUnhMNzBuYVNSd0d3NUpyZDZJaWY4dU5HR1F4SFVC?=
- =?utf-8?B?SUVVS3QwV21Ic3NTamNaSXVLeDJWczJNNUZPRHhSTUhYYnZjZGxLRXRrU0Rr?=
- =?utf-8?B?TFR3RUdRTUFhWVpqV2dsQTlKT3VEMm03dnlwV1lIVS9zbVVJNVR5MW9XZHBI?=
- =?utf-8?B?bzVEVnU1RFFoY1JUOC9OZ2dmWFJ2dmM5ZE1STmx4RkVZck53T3BCeW1lT2gr?=
- =?utf-8?B?TWk4TjNDbEM4ZWNHcXJlS1lnZ0x1eVloNXczNXRMUFhNa1dTdGpFcjlmL29w?=
- =?utf-8?B?S1V1aWVpMG1CNnVFbm16ejZQeFhDMjJ6MlpKT1p6MnFEUTZCam9wK21QbGgx?=
- =?utf-8?B?MVdCckxpZVpheWYrQURWdys3NFk3ajFsZDhPWGNtYklxaUNFdHpWeTlwaWVw?=
- =?utf-8?B?dGl3VkF3UG1TbEVJWTU1ZzlZZ2JqQUNPaUs4Z3dkL2Q4SmNSR3NmR0o0dHVL?=
- =?utf-8?B?WXYzUXJ1aG1uT3ZXR1NyK2ZBdWJEM2FVMWJiZ1dnVjRwdWY3SjV4Zi96RDJV?=
- =?utf-8?B?OFoyVkZYaXNrR2I4Mmw4Uy9WUC9OT0dVZjYzWENYNWJURzR0dVFIcHBjMmtv?=
- =?utf-8?B?M0hwNDcwWFovNXl2YXBUUHB1STNkSEtGSnJsQkpmZ1l5VEZzcm9FelNyWVNL?=
- =?utf-8?B?UmFiYzI1azM3TVR0RStNTVN4Zm9wR2p6d2luMVdIVFptVy9mWjNVUGJrcVl2?=
- =?utf-8?B?K2ZDYnJ3aE9CWTJBKzF0cnVEZDRzZndTaE0yOE14cUl0TWU3ZWluSGFLSlZF?=
- =?utf-8?B?OHkrbEVoZ0N2UVdFVE5sZHprcDUweTFOc1p1TmFUdHVRQmtsRlhwWE1XTWxi?=
- =?utf-8?B?dGM1Qkg4OGxNUDVjUityeGdaZUJKOTBYSVRzcVpuTGZwVDVxdy9IUzFGQ0VB?=
- =?utf-8?B?aSs4VDdTS0tNUWt0RHlrRFdLUTRUY0VPVE05Um02RHg1RmpCeXFXNE9rN3hL?=
- =?utf-8?B?S0xIa2RtVGRXSzdiSTJiczJMWjZ2aXdxMlFKZzcwdlNBNkE2ODRQaXJHci9k?=
- =?utf-8?B?QnVpZDFNMWZyWEV2RER2Um4zZEJwOE44SHFMZm5YRXJBQUJSdTlSemEwM255?=
- =?utf-8?B?a0kydjJXSTczZUIyRURlL29rVC96R29FMFcySUc4ajRHYnZNcjBNY05HL1Zv?=
- =?utf-8?B?aTFQUFpEWkYxSHlhUVhEMHkxYWpzVkF3M0FlK0RyS3dRVGNhbUxMaEdhNUVm?=
- =?utf-8?B?bjF5eHRRMjZRa05Rc2ZsM2lPaVZnMmV6Z3lvajN2b2t6MzFTT3FLbFVlNGRs?=
- =?utf-8?B?ZWUyaDZJNjFWZldMZjRGQXY3dzUwU0dpazVFMkVqMnpXb09SejdtY3RYSXhF?=
- =?utf-8?B?aHBHVkJxWlhSNEVlWDF5OWZNWE9FRHVWOXhrKzIrRVJlQXh4Ym4yRDdxT011?=
- =?utf-8?B?MmcweWRodDlMR084QmcvYlBMMlkxcWJkYVlUTGhmdUlIaWFmQjlIUVV1MGVE?=
- =?utf-8?B?RmFxYUFNd1RzZE9iQm5VaTZvR2Ixc251MFFld0svQnhneGx6ZjdWS2hldFBj?=
- =?utf-8?B?b0NZUHJheFFDd041Z3RHQ3NPYU1zQ21NUFlObU9DOVVoM0JvejY3UnRFVnZi?=
- =?utf-8?B?SFE3WXloZEsyVDl1TERXQjdMN1VGZ282ektKalhSLzZlRlY5MzdDNkJyakJh?=
- =?utf-8?B?eUFkeVNpU3B6L2tUaXFoRlNnKy9nPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 69BZdp7RgPaPRxFF9dpeNySkKgZpEyTjATNwD60cHO2NlotBA8DpxBXXhf9He9GPuYzuwkWGHT3rXy1DVF/aEt2A/zw2jpP9LmHHL/ko07jfvG6xejcCb7t0nDiRFnoM5hBU3v3d+zhQAyVj8RSsL3UuZl01TEydag84niRd9bb1IHPbZ6bj3GL4j/6qie2CYsJ+kxjoUTmVq//UiFduTSh4Cak9FjECSsBUAkcu7fHZQ1RfZD6V0l1aiYxrpmVOQCUXYwnxYHPIoXw/c9FP3r8MfBCLyrNe96WpqKyCyi5pY6cYKn1Eqy+Q2X4BzAHO7lep6oC+1WHXawrrKlGdtwl46/6DzwJhtWRIvhkCVd4mqKlIGLfzME87V1J2L1R3KUNotaR08CPrx5YDRY/CvNgiwcb9gw2SfeaI3LAWE4xaDrPKzlqbOhO61DuHxTFp4nxb+qD76AQ5yvLXwVuvAPdpa22GHY+Ibxyh8ePP2/FX31VO8kRiapL+b+6tqVO4dNwa5GtRItakVGXkuK0A5/Rnw9hfq1sMnFhhPK0dSbPHMtytPHZmQ26+mQO/ip9RYuda0t5oBb0aIgZoswEqNl6v/+CR2qPy2DZPiPpY6YcLkXqrDkGejIJGtrmnO5hmgpNImPjwGZpZ3aFtbu54zbPpnW7HVYYUJpNkDCOd2s9UJQXlcfEGOCKoeO1jhO+A
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2026 19:12:07.2429 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e60cc98b-1303-4bb4-ed78-08de55332446
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF00039231.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8857
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,45 +100,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootph-all property in ltdc node in stm32mp257f-ev1-u-boot.dtsi
-to fix the following issue :
+Oops, forgot to Cc the list!
 
-Video device 'display-controller@48010000' cannot allocate frame buffer
-memory - ensure the device is set up beforen
-stm32_rifsc bus@42080000: display-controller@48010000 failed to bind on
-bus (-28)
-stm32_rifsc bus@42080000: Some child failed to bind (-28)
-initcall_run_r(): initcall initr_dm() failed
-ERROR ### Please RESET the board ###
 
-Fixes: 29ab19c2bead ("Subtree merge tag 'v6.18-dts' of dts repo [1] into dts/upstream")
+-------- Forwarded Message --------
+Subject: [PULL] Please pull qcom-main
+Date: Fri, 16 Jan 2026 20:21:03 +0100
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+CC: Alexey Minnekhanov <alexeymin@minlexx.ru>, Aswin Murugan 
+<aswin.murugan@oss.qualcomm.com>, Balaji Selvanathan 
+<balaji.selvanathan@oss.qualcomm.com>, Biswapriyo Nath 
+<nathbappai@gmail.com>, David Heidelberg <david@ixit.cz>, Gopinath Sekar 
+<gopinath.sekar@oss.qualcomm.com>, Loic Poulain 
+<loic.poulain@oss.qualcomm.com>, Neil Armstrong 
+<neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>, Casey Connolly 
+<casey.connolly@linaro.org>
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Hi Tom,
+
+Sorry for the friday PR!
+
+We have been getting a lot more patches from Qualcomm engineers, largely
+focusing on IoT, router, and automotive platforms (those with QCS, IPQ,
+and SA prefixes specifically).
+
+Quite a variety of changes here:
+- Watchdog overflow fix
+- Hardcoded fastboot buffer addresses for a few board (hoppefully
+   temporary until fastboot is updated to read $fastboot_addr_r)
+- Enable memory protection (MMU_MGPROT) for ARCH_SNAPDRAGON
+- pinctrl support for the QCS615 soc
+- various USB/phy fixes including phy config for msm8996/qcs615
+- mmc and i2c clock configuration fixes
+- significant fixes for rpmh and regulator drivers
+- added config fragment for pixel devices
+- sa8775p clock fixes
+- support for "flattened" dwc3 DT that recently landed upstream for
+   sc7280 (qcs6490) and a few other platforms
+
+Thanks,
+
 ---
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-index b70cd8b52ce..c3c9c94f165 100644
---- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-@@ -52,6 +52,10 @@
- 	};
- };
- 
-+&ltdc {
-+	bootph-all;
-+};
-+
- &usart2 {
- 	bootph-all;
- };
+The following changes since commit d503633a36767d756c7de28305cf0de79440cbc0:
 
----
-base-commit: 1da640cc46ad84efb57bb45e02dd6c40265b5488
-change-id: 20260116-add_bootph_all_for_ltdc-c7328f86b162
+   Revert "doc: board: starfive: update jh7110 common description" 
+(2026-01-13 14:18:05 -0600)
 
-Best regards,
--- 
-Patrice Chotard <patrice.chotard@foss.st.com>
+are available in the Git repository at:
 
+   https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git qcom-main
+
+for you to fetch changes up to cd8ee4fff82788546df06fae7bbe6d22a710737b:
+
+   usb: dwc3-generic: support Qualcomm flattened DT (2026-01-16 19:02:13 
++0100)
+
+----------------------------------------------------------------
+Alexey Minnekhanov (1):
+       mach-snapdragon: capsule_update: Fix eMMC detection for non-UFS 
+devices
+
+Aswin Murugan (6):
+       regulator: qcom-rpmh-regulator: add support for PM8150 PM8350 PM7325
+       pinctrl: qcom: add driver for QCS615 SoC
+       pinctrl: qcom: add PINCTRL_QCOM_GENERIC to enable all drivers by 
+default
+       qcom_defconfig: Remove redundant pinctrl driver selections
+       smem: msm: Fix memory-region lookup, direct <reg> mapping and 
+update SMEM host count
+       spmi: msm: refine handling of multiple APID mappings
+
+Balaji Selvanathan (7):
+       usb: dwc3: qcom: Add delays in UTMI clock selection for Qscratch
+       configs: Rename qcs9100_defconfig to qcom_qcs9100_defconfig
+       configs: qcom_qcs9100: Fix fastboot buffer address for QCS9100 board
+       usb: gadget: Kconfig: Correct Qualcomm config name used
+       configs: qcom_qcs615: Correct debug UART clock frequency
+       configs: Fix fastboot buffer address for QCS615 and QCM6490 boards
+       clk: qcom: sa8775p: Fix USB clock configuration and add resets
+
+Biswapriyo Nath (1):
+       phy: Add MSM8996 support to Qualcomm QUSB2 phy
+
+Casey Connolly (10):
+       phy: qcom: snps-femto-v2: assert reset in probe
+       mach-snapdragon: of_fixup: support new flat dwc3 node
+       clk/qcom: sc7280: add more QUP clocks
+       i2c: geni: bail when clocks can't be enabled
+       soc/qcom: rpmh: document rsc registers
+       soc/qcom: rpmh: correctly wait for TCS flush
+       soc/qcom: rpmh: add RPMh read
+       power: regulator: qcom-rpmh: read votes from rpmh
+       power: regulator: qcom-rpmh: correctly map pmic mode
+       usb: dwc3-generic: support Qualcomm flattened DT
+
+David Heidelberg (2):
+       doc: board: qualcomm: document Pixel 3 / 3 XL support
+       configs: Add google-pixel fragment config for Pixel 3, 3 XL, 5
+
+Gopinath Sekar (1):
+       watchdog: qcom: Add max timeout check to prevent overflow
+
+Loic Poulain (2):
+       mmc: msm_sdhci: Fix incorrect divider calculation for SDCLK
+       clk/qcom: qcm2290: Add SDCC1 apps clock frequency table
+
+Neil Armstrong (2):
+       mach-snapdragon: enable MMU_PGPROT by default
+       soc: qcom: rpmh-rsc: reclaim the TCS to avoid spurious irq in Linux
+
+Sumit Garg (1):
+       mmc: msm_sdhci: Add DLL control hook to disable DLL below 100 MHz
+
+Swathi Tamilselvan (1):
+       clk: qcom: sa8775p: Add QUP serial engine clock support
+
+Tom Rini (1):
+       dragonboard820c: Stop disabling device tree relocation
+
+  arch/arm/Kconfig                                   |   1 +
+  arch/arm/mach-snapdragon/capsule_update.c          |  28 +-
+  arch/arm/mach-snapdragon/of_fixup.c                |  40 +-
+  board/qualcomm/google-pixel.config                 |   5 +
+  configs/qcm6490_defconfig                          |   2 +
+  configs/qcom_defconfig                             |  18 +-
+  configs/qcom_qcs615_defconfig                      |   4 +-
+  .../{qcs9100_defconfig => qcom_qcs9100_defconfig}  |   1 +
+  doc/board/qualcomm/board.rst                       |  20 +
+  drivers/clk/qcom/clock-qcm2290.c                   |  29 +-
+  drivers/clk/qcom/clock-sa8775p.c                   |  82 +++-
+  drivers/clk/qcom/clock-sc7280.c                    |  12 +
+  drivers/i2c/geni_i2c.c                             |   4 +-
+  drivers/mmc/msm_sdhci.c                            |  40 ++
+  drivers/phy/qcom/phy-qcom-qusb2.c                  |  14 +
+  drivers/phy/qcom/phy-qcom-snps-femto-v2.c          |   2 +-
+  drivers/pinctrl/qcom/Kconfig                       |  36 ++
+  drivers/pinctrl/qcom/Makefile                      |   1 +
+  drivers/pinctrl/qcom/pinctrl-qcs615.c              | 473 
++++++++++++++++++++++
+  drivers/power/regulator/qcom-rpmh-regulator.c      | 220 +++++++++-
+  drivers/smem/msm_smem.c                            |  56 ++-
+  drivers/soc/qcom/rpmh-rsc.c                        |  89 ++--
+  drivers/soc/qcom/rpmh.c                            |  38 +-
+  drivers/spmi/spmi-msm.c                            |  19 +-
+  drivers/usb/dwc3/dwc3-generic.c                    |  32 +-
+  drivers/usb/gadget/Kconfig                         |   4 +-
+  drivers/watchdog/qcom-wdt.c                        |  23 +-
+  include/configs/dragonboard820c.h                  |   1 -
+  include/soc/qcom/rpmh.h                            |   4 +-
+  include/soc/qcom/tcs.h                             |   1 +
+  30 files changed, 1195 insertions(+), 104 deletions(-)
+  create mode 100644 board/qualcomm/google-pixel.config
+  rename configs/{qcs9100_defconfig => qcom_qcs9100_defconfig} (93%)
+  create mode 100644 drivers/pinctrl/qcom/pinctrl-qcs615.c
