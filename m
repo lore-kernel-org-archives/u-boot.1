@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 252B2C982E1
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DD9C982E1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 041F3839D7;
+	by phobos.denx.de (Postfix) with ESMTP id 419A383A1E;
 	Fri, 16 Jan 2026 19:03:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="utWV/XqZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PbxVeHQ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7811882BF2; Fri, 16 Jan 2026 19:03:15 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 774B3839DF; Fri, 16 Jan 2026 19:03:17 +0100 (CET)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 291AE838A5
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46C608397D
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b872cf905d3so387238666b.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:11 -0800 (PST)
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-65089cebdb4so3687661a12.0
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768586590; x=1769191390; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768586594; x=1769191394; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HLxnQDiHilYF61QzHfpgvZlND7JjNfqQ2ky8Hi79nsk=;
- b=utWV/XqZFtUJcMOB1+YJg+Xxf1vsPDKJscbHV0GygCmGEDM39zLWQub9U8fj0q1Nta
- +xjVQcVbOvZK+2RjQLlGuUI9/bOJvIz54jXi77b6wWtevjwAqLf90U9SPkRN+/ToK51T
- yn98DruBh/VAhxZQoD/NbMX5Rg+Q2AL6+IL69GXhhQGe8xMdflQm/68cKIon0+dVgUO4
- AMJaDPWEfiZuFKTfj02wo4uHfv90Oqm9+lgMMjKKIDtmRLRMGsmXYBKzMz7Wkn5fDmBJ
- Oh3DK9pO0DqdTkg/vKAb6VCV0/2ufoWOs8tKqYo7io4IBnPeD20Bm69FybqaF+AN08ne
- op+A==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ayEjRNPC1FcMQbai6nTvFTXYkFPRpkuhSpNeTs+MVgM=;
+ b=PbxVeHQ6n98btCGu4TmHsBJXBZYKzX0qocBtHaTYPEfI7yYNjid+1E7zpuB2BYkuMv
+ sMiiwNGeN+keJFdwBzPNvS1EvD1vb25wOg2Hb9YxD9K+kn6a/hhyivaYX1cI4GY3pTPb
+ KLXhiAHC88OQf1NOy18/r+a6/MajoWhXyNrEZSbm+zMrrxkRXZi6UilgttnBQYPNzl9t
+ 7rIujaZSkftcKhBFrXUu5W+X3WpdhU+Pjf2gic/2v3Pdohq/B94cRsm9HFjoFWBrhnjZ
+ 35uhEcbWQxbkTXZYsbSuMdTQ5jxNRQrJ99gkqUaSLgRAlnLB29AuZJDboY1FpEZXHm//
+ uypQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768586590; x=1769191390;
+ d=1e100.net; s=20230601; t=1768586594; x=1769191394;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HLxnQDiHilYF61QzHfpgvZlND7JjNfqQ2ky8Hi79nsk=;
- b=CsFZabNzOuW/EYXVu9HLRxjNAa26NBUmadsulopWdtI1Bal9icJZ/yohGkB41S6eKH
- Y+V6i9pkZauRdkshjkhzD9Sj7li9IS8BuCGz+Po0LMYoLIdNTzpoy/CR/2MwlO58QldW
- D2XIKuKoGt2+c6D3Se3DEpMCVzgO08kVqPu2PDZvqsdbDkAdDtPCPshC+jBucZMTnAOB
- JwBv7HXSMfENKIUXDmxexWQPKxy3uKxtyOuAUk8IFfHBtHQEFAwqKt0s/s6JSBNvef2O
- luGVqR+lS2XHU5+3Kdoj6J+b2MzcJVQxRSkBrqjfXyxy84K/6tpnLuBgDylqaTUYD/0V
- lE4A==
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=ayEjRNPC1FcMQbai6nTvFTXYkFPRpkuhSpNeTs+MVgM=;
+ b=c+/ryJwd0mqX7eIHxn7KNhQA4BAjR8DlJMIhHVkDa/DKqUDsXThixrK2+MOBiaYv92
+ KKtwJI/Gi1KV7U3MKrgVRX1+9JISW3TNhpcR81PJBAzhbwD32qO4x8rxtl29R0YFDA5R
+ l/B71To93g5fGaKlpaxpTd0V7pG4NuyH+vSAPXLjAvebpFrtWibB+Pwt53fIy/w3szTE
+ vxTWgKJGSRQheFAuCvXbSlo4xgCPE/HUKRKgnjgCu+vFa9rJP9igQMeVNmr8gSnORrlW
+ b3ga0HYRct737GJv0bXYwu5Jb6Aymqgp/oRREJvCMcsBXWGLYVfgaQ/pOH0yL95/kU6X
+ QA7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsDsxSbYFQGlP/ZfDEAoB9fNB7XWuhutVJChQriAhO5GQXjkBv39/L2WUu+yhQcXyq3ZNy7ME=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3S6QZc+5qxYGkZxag7UXx1NAPHrTHkOMK31RsTGmqgHMkvwJ6
- kcpwS2FRZfAQKj9dvkwRUfGqEEIfe350ctNHhGh2uwsajSGjs9DYL0NNvz6Vtn/XvF0=
-X-Gm-Gg: AY/fxX51sL2VMHHg+OCWOLmZQmxYDXcLjipwFp0lsvq1N5ANxEZ1/I7K/+4sYUeL80e
- oRuqWWNtSztTcWVn40Fa6Dn7j4vjz02lhYtkCDKmH7U9czNqqFKdkuYps5kTUX/fxB3rZr7EifW
- xhNI0nCMsFoEbaOjDHXhpgGFGs/ls3YZHOOQwEDEhHDIMxnb0AUixkqihhMcqWHl5QbYMXhaa81
- Ud+u92RXoO0cuAQpUxLYl+Cm71uwtWPUHVhmA1sj7W3dGh0UPuXn2AJ5VCK+CRgiNzVYMFga154
- 0lGD4zc33SUGM898hCQfH2bg7Y62YYWwMvz8SF1F7EIaMDDt1qfko7qD6sg5u+RJ5O2GjZXjYRr
- 4UbuiqhSsXfCEVDP9xswzoC4dCM+1D4dFSpxyBkkUd/inl4pIytfGW1ex0baCxf8k27g3zaY7h7
- iEtSA4Bq4hhDNFnQcKIE5UuVAjgNMjI5YN9JInIgXB3ZSp8NVk925APQ==
-X-Received: by 2002:a17:907:7288:b0:b87:794f:254f with SMTP id
- a640c23a62f3a-b8796aee903mr322512666b.33.1768586590333; 
- Fri, 16 Jan 2026 10:03:10 -0800 (PST)
+ AJvYcCXVUQ90BN1kLeHNbpzoqj2BL6AYzkOHmvahmEQZihOOvYKl6U+UOTcMa3a4+b/mnTN4eFWzir4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyC1jkdMC/BiXwCGevuIt44R8/jxBFhCLotWr6Ti+DbfQVITSd3
+ y5DoCIcESdrYyx7B9EnD+nx3twhUFOyMD3z4R56O77gqhLRa8uVpQT8eOhmVXE4O4aU=
+X-Gm-Gg: AY/fxX4LIIq58hOEOW70a3JwHhHFnw5Qgbk7BFe6nS7Zn2ttbGoce5oqkckuqPlLdCB
+ /cc3E0rNy83/ALRc6vqv6MXitFhGwLiGzCplQHr/VSV2/d0jWmRV1c9Mo04hvAnMQINQ0Xw9FlK
+ pZE59U6CSV+Jqshz8n/aOgVxMBd5pqw5+sWsAHmawtY5xWJZsgvLN5v95jYMnSAvyYN6fCl1ZYN
+ M5Xun6E9u+G3gzZZFr2/56QwWNZDDAIIxUphb3GBCKXZx4XNcO0ytChgWSwtbpy/nTGWvYAmuiq
+ xOatsMviSPM75tR/ItY61wW9UxjcdjI8+N5phs0o5lj1xTdnDgAhLoDFbaWZT7dlfBhIJT9aMgO
+ cIW9aV90I5TW2Wc3oulgvRZLcW+QvEXiFsE5bylFF9AFcO7Isd0hrtCOzff4r632o/eEY5PfgtI
+ cQxUM0dXTGHpnLPKO1ikBqf+yCYQZ9tr7Tz4ddVNH0xpBP6lTH7AdI5w==
+X-Received: by 2002:a17:907:dac:b0:b87:908:9ac6 with SMTP id
+ a640c23a62f3a-b87968f20e3mr318018466b.16.1768586593619; 
+ Fri, 16 Jan 2026 10:03:13 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.08
+ 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:03:09 -0800 (PST)
+ Fri, 16 Jan 2026 10:03:12 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Alexey Minnekhanov <alexeymin@minlexx.ru>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, ~postmarketos/upstreaming@lists.sr.ht
-In-Reply-To: <20251107232935.283843-1-alexeymin@minlexx.ru>
-References: <20251107232935.283843-1-alexeymin@minlexx.ru>
-Subject: Re: [PATCH] mach-snapdragon: capsule_update: Fix eMMC detection
- for non-UFS devices
-Message-Id: <176858658879.3399278.6661440468873387550.b4-ty@linaro.org>
-Date: Fri, 16 Jan 2026 19:03:08 +0100
+To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, sajattack@postmarketos.org, 
+ quic_varada@quicinc.com, me@samcday.com, marek.vasut+renesas@mailbox.org, 
+ michal.simek@amd.com, david.wronek@mainlining.org, adrian@mainlining.org, 
+ luca.weiss@fairphone.com, alexeymin@minlexx.ru, danila@jiaxyga.com, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20251112164758.1560041-2-aswin.murugan@oss.qualcomm.com>
+References: <20251112164758.1560041-2-aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] pinctrl: qcom: add driver for QCS615 SoC
+Message-Id: <176858659200.3399278.2661279047603607611.b4-ty@linaro.org>
+Date: Fri, 16 Jan 2026 19:03:12 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,25 +105,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Sat, 08 Nov 2025 02:29:35 +0300, Alexey Minnekhanov wrote:
-> Currently (since 2026.01-rc) on all SDM630/660 based devices this is
-> printed, after observing long boot delay (several seconds) before
-> executing preboot commands:
+On Wed, 12 Nov 2025 22:17:57 +0530, Aswin Murugan wrote:
+> Add pinctrl driver for QCS615. Driver code is based on the
+> similar U-Boot and Linux drivers.
 > 
->  QCOM-FMP: Failed to find boot partition
 > 
-> find_target_partition() function incorrectly assumes that eMMC is always
-> at number 0. In general you can't rely on device numbering to determine if
-> particular block device is eMMC or SD-card, because it depends on how
-> aliases are defined in device tree "chosen" node. Some SoCs have MMC
-> numbers starting at 1, not 0; so mmc1 is eMMC, mmc2 is SD-card.
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] mach-snapdragon: capsule_update: Fix eMMC detection for non-UFS devices
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/bf4045ede829
+[1/1] pinctrl: qcom: add driver for QCS615 SoC
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/46a66c02e9d5
 
 Best regards,
 -- 
