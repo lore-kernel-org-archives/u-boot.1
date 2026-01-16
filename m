@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C4AFC982E4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165C4C982E1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:04:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06A16839E4;
+	by phobos.denx.de (Postfix) with ESMTP id 4119E83A9A;
 	Fri, 16 Jan 2026 19:03:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BVaD61ct";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jjSM8ZrY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2361783A8D; Fri, 16 Jan 2026 19:03:22 +0100 (CET)
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
- [IPv6:2a00:1450:4864:20::543])
+ id 95308838BB; Fri, 16 Jan 2026 19:03:23 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E82FE836AC
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61CEA8397D
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x543.google.com with SMTP id
- 4fb4d7f45d1cf-64b791b5584so4190831a12.0
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:19 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-655af782859so1864891a12.2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768586599; x=1769191399; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768586601; x=1769191401; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YwPhugy2M94yoPzTSPXeOtRKacVr/MN+zcqMge3/ZU4=;
- b=BVaD61ctfFEpZCMrBncKZS8avkRhg/258iIYdp/I0GDEhaglqTJJKZtqrS6/XPTcUX
- PZ4ghVwy5Nr5i3JWQ/+lVgFT/kdf9YCDt0vZraZsK+BlFJyUwZMkINxBXBbTpdkcCT9M
- uUjuzej7zKXmlZE348nkN6NW4sc4HntFBnbscDA0WNuViEWi6rklnftub0lgNeGClSId
- 7HRO6Agza1J8dpFuGbvNUa3D4vIdzgffGngCj0Wt7qLVjOhhu4cghamJVKKHYnv56Nmv
- RbLfuuDBmivzmqbcul7kmhp8FYFwi7fH0e+TfvbWHPaAdPqfFc0pijf4oFHO8o8VTmHF
- Gxvg==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=1R0NggZ9Mc0OKfhsx7/sUeWKopAGXdaE2Efk7o1zL8Q=;
+ b=jjSM8ZrYnrTNqeUVHw3a02E9dcsrn7Vl2NvxBEOkJJ6dteLIhUc3wuqaLtIVigIrKd
+ TfK8F/Lm79dG6cBXj/0jSYAjQKVznMQHC7xe4Bd+XswhJyFpGE6mgq22qF63vyeqBNdy
+ MuVY3OGva/RjwQPdQLZuFjFex7E7k2nSXToRQca8qgUVGKWTJ63hryIJ9wmbfNUQN9OL
+ fXDo7kR8Bkq9IPQuyYKeoMSK0pKJPa0ike6dsvKb3CNpk0VX2EjJ6KXUFCCFwBhr6j0X
+ dex9YnHh3hsl7A7Mk/YVPu9y1BKhHVanr1S3zCqkZTG7cjd8LQ/fPn7K8wCUiDQe9er+
+ IMWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768586599; x=1769191399;
+ d=1e100.net; s=20230601; t=1768586601; x=1769191401;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=YwPhugy2M94yoPzTSPXeOtRKacVr/MN+zcqMge3/ZU4=;
- b=fuCRf8cBZ7sDaE4ECQ4jbYmYehxzJ3xikcFbAaUIcwcwire1vU2i8ZuxuezZoSbUHa
- xZZ8COUjpDgWo2eRqygbyKrRxWB3vATW/m3T4piRnOYDNa+YN3PsiLzsbwBhNCsOPedX
- lM9D7vZrv3lLrWPZhaKieQMPfwO1lqqGa0R/NXpxgN2jcOdYtofK+1UkWdj9udSiFQRG
- aNmP3GKxa2wYhQClfl6ApQNvUmE2uoNYuMIZ1PBlZXjlHjshbuG6cUUwNLkPRFXhh0ad
- qDhal6XGAdiUTm5A1ReS8jhIhTKcP+nytrlgtFKLq2351ctEpz5/aq+xVvIo0RIYXKx4
- qJ8g==
-X-Gm-Message-State: AOJu0YzzSTGcI0Su49lniQ8zwMqXy8ashjEsQJ3dtT7LZ6jJVSHKvhxl
- Xc3Zok76/ZRJhBRgwS4gw2xqyi/ONZANmqjjF5iGrA4ELdOoehO/tXOx+fbulKCXFYtfloBUCDd
- p+XkeFd5Icg==
-X-Gm-Gg: AY/fxX4y21i/KvbMSZia0e3PhOPeMDDA49iQnIzNnnz1XbqhPN+ZDDxYySTvPDm/fUB
- +fI62nwQKU5TxoXcvTZDSD4f/70OjZFhHYhMuQbZdSJvTC55HlTTD0m8s4vastGaUdwDNl3tKIf
- TqZdXSrYGmEOwgvpG0dCx+wSigQVowdUM1QSjL7RyQZEYG7WNqLSt8iOjb8F9dBEhoqONdiJiOB
- 9X3HGcaGUZLtYlTRby7E+/GbePPTS3x8fUjRMm8g3WQKrbw4KetsSIs9/BdH1fu59IJsqsQ3Gu6
- KpYCQnucjpvoespoS5MiHL1BY57nJ9TAk6IyTzObw7FxDT4JBsimQaWPBUu5JZAlqvY5Vng3CTX
- zkLZElt/g8K89FZTGMpb9P4Hpkfs2CvV5TgZJzCF0B667+20+tbM6q1ELM44mhcANZQHKKOakKk
- tvHzQlw2i6OJuLE8bTRNMzTBcGIQwRUMh9yP1CwNiyFs8jx/3uE8fO5A==
-X-Received: by 2002:a05:6402:5193:b0:641:78b7:d326 with SMTP id
- 4fb4d7f45d1cf-654bb61b16fmr2594742a12.28.1768586599278; 
- Fri, 16 Jan 2026 10:03:19 -0800 (PST)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=1R0NggZ9Mc0OKfhsx7/sUeWKopAGXdaE2Efk7o1zL8Q=;
+ b=OeJdrT7dXdd/cvIu5HAT7UCZsBp5BPgBRQ/BDFdJrziMC9TXG25m86ZMVTe1TBBZHH
+ FLA17rFrvAwqa6gQGH9aOBHfWdTVYEMRJFX6wngL/6mTWpG7ytCLBSFnQLgxSGwxGSKC
+ 8E9BsKgr4TqD2Xlv9HNYyzer+a83rv4Vn4ofKP6uhlCffT6+gVu4SGmrCbSmaGS27haL
+ jn6nOAqmo6cQ9wAI1Wl5BbcWfLjd1T7wW1YTg6g3K7vRLvPILzGtw5ABG27QTz74teD5
+ R7FkEiKrC0VruCa59j1skA7YtisuOHM/jfEB/vBBL58Fl/8KoUSUu2n6x541oixv4x4X
+ GjSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXRG8Y72QbsV7hia3TAHYuTAO8jDs/wddZmLchxMZRNwzfu5ucpnVN7w7qehV8yyqnWFhUG28A=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxyp+b/ynW4VeSvgCulbDM6uwiOrp9ljRl2T0Xq5rWnv+OStq8C
+ WLsLOYH/xiZNhlS1FQm5cAgOsj2qJEjsE8o/dULNFjLwpOLYDUVL5kVY4NaHR0MprdU=
+X-Gm-Gg: AY/fxX7m3aX0yMNwWYnSPr1trh5qsu+o/Gg/ncZjdUgTsMzeztnGqw6vUUhGVm6Lbe1
+ 5N1GAdhFhrctzdBwEClSoZUEG66poMu84izzPo8rRyddXDPwR635g5vFxR2AmExHl+Nfw4UbO6E
+ S5ti8u8m9muAmUK7VDv/4327nibay3EkPauuw4wHnXjKmJhNQS46ZMpEvZJwweg3bxxWFIXCGrb
+ M9YnTHWzaJzlpobhpot6wxemLURvrKsbX/LESlW5YZvh8/yfhPG75vxUCW3LId7mRHMGds9QTGw
+ IyOo7PuJrp1ZzBi2+CaCKH60/L8Yxh++CFc5XJEXl+JK8PpwzHR30crpStzt8+wEYvgJP56oDph
+ AyG8th4M6ArtHsau0N3vUJhXG1MEMf9imgjAq5FQRRpduFtMpfcuZsX2hXCBevIzr16Kt6DlZFK
+ D+JQtUIlWKMNAJHsX9IOxXSU01z2GgqDKNexKoa3ajOqzNBIObVXEmaQ==
+X-Received: by 2002:a05:6402:3644:b0:64d:56f9:47e7 with SMTP id
+ 4fb4d7f45d1cf-65452acb596mr1727074a12.21.1768586600800; 
+ Fri, 16 Jan 2026 10:03:20 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.17
+ 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:03:17 -0800 (PST)
+ Fri, 16 Jan 2026 10:03:19 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251114144722.173021-2-casey.connolly@linaro.org>
-References: <20251114144722.173021-2-casey.connolly@linaro.org>
-Subject: Re: [PATCH] phy: qcom: snps-femto-v2: assert reset in probe
-Message-Id: <176858659759.3399278.10153338374373746761.b4-ty@linaro.org>
-Date: Fri, 16 Jan 2026 19:03:17 +0100
+To: aswin.murugan@oss.qualcomm.com, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, trini@konsulko.com, ilias.apalodimas@linaro.org, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20251119152312.4175482-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20251119152312.4175482-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] configs: qcom_qcs615: Correct debug UART clock
+ frequency
+Message-Id: <176858659936.3399278.16616508515694409425.b4-ty@linaro.org>
+Date: Fri, 16 Jan 2026 19:03:19 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,20 +103,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 14 Nov 2025 15:47:21 +0100, Casey Connolly wrote:
-> The power on function for the phy only deasserts the reset, so the phy
-> might be in a weird state that we don't clean up properly.
+On Wed, 19 Nov 2025 20:53:12 +0530, Balaji Selvanathan wrote:
+> Adjust the debug UART clock frequency from 14745600 Hz to 7372800 Hz
+> for the QCS615 platform. This correction ensures proper UART
+> communication timing and resolves baud rate miscalculations
+> that affects early boot console output.
 > 
-> Assert the reset in probe() so that when we power on we will have the
-> phy in a clean state.
 > 
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] phy: qcom: snps-femto-v2: assert reset in probe
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c9c61c1f4e74
+[1/1] configs: qcom_qcs615: Correct debug UART clock frequency
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/7f1a1fa05107
 
 Best regards,
 -- 
