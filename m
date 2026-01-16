@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1431C982E8
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEC0C982E7
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAA6183B32;
-	Fri, 16 Jan 2026 19:03:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FE7983B55;
+	Fri, 16 Jan 2026 19:03:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DTGFCrl+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qd9JRlu3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3BCF83B4E; Fri, 16 Jan 2026 19:03:31 +0100 (CET)
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
- [IPv6:2a00:1450:4864:20::541])
+ id 397F583B49; Fri, 16 Jan 2026 19:03:33 +0100 (CET)
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
+ [IPv6:2a00:1450:4864:20::542])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB0A183B0D
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E81C83B2C
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x541.google.com with SMTP id
- 4fb4d7f45d1cf-64b9cb94ff5so3487669a12.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:28 -0800 (PST)
+Received: by mail-ed1-x542.google.com with SMTP id
+ 4fb4d7f45d1cf-64d1ef53cf3so3286743a12.0
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768586608; x=1769191408; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768586609; x=1769191409; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=i4P2Iy1geWo/xXP5F5BL/Ct324M1hwNELwwnlwNIZoc=;
- b=DTGFCrl+fKVb3Z3kGA7+hvIFrxQgKKPfpHjXeuEEqfrrMgacfyW0Ikmeen/lPi0cRJ
- NqMN7mLqrCrH4JmgcZWbVdhY0qxLrlfda6X6Pd6drsllFwCP7QJPDYkuURhXY96vQFqa
- wZn3SHGXMQriuQOSH+IVPkb/2moCmGdiep877fnJXNxqhSoGGK/PZz+jg32/UT7tAwrQ
- 4NkgzEHcPlwRe+vGm2UDrdcz0taCBmQNm4M0zGDETEIrSGJNjumPwdaNG0RuvEOLElMd
- tNTxhE8G/pqT8jNfFbO+CXj+eLyhmA1wgPIbivK9JglJtkX//5Rk1VBKlmRp2oMFiHFa
- 1qJg==
+ :reply-to; bh=X91804og3sQILXLvAgoFFIxDMU/Gf+vfo+CAdVC3Y1E=;
+ b=Qd9JRlu3+Ip0T/ZBgHJs0+j2bl5ZTtB5/ru0NOQfeBdRPwUDer801WMgwaFBwXjs82
+ ILsuLGpEey9TF4yPZ7zKkgOF8x9zy35Kge87raVpLuuqp2+1/QU+5UIRwvWQPWVkH91t
+ lYE2lWjzN8XLoE00RC/DJhU+aQMDpN3qo3tEelcSXZ6TZatY9IRj5Hw6hTvE/LWYSWYe
+ oxZlM2sm8uUSf/HqyqrUfMLhX5gP57kUMGgwh92Alr1d8h2+BypV7XIDuucNKnCa9LDk
+ 4tB/AcI9s1q5Q1qqv3v/k4TEoeJ1+F1Grcxl7ndDcfaDldjEy+CeMLyyVfiBpFDo4J6V
+ qfqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768586608; x=1769191408;
+ d=1e100.net; s=20230601; t=1768586609; x=1769191409;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=i4P2Iy1geWo/xXP5F5BL/Ct324M1hwNELwwnlwNIZoc=;
- b=BR3FuBg16iKvZGWq9WhIRKYHtAxjxx+m7KaugCrr6Vg44lIbB1JW8a5gXM7SXufj99
- DVy23RGlD+nvfbq3tSksGWwnWZaIiIvucBqmlt81vgrw9TVPgCEZlJyQxDaIJNrTTAL2
- DmeYE/Pa5FC5fBn3hJ2F/8yjsVDXh10C2G6rdRgg1GG2E9mLVMOgvk8El3bqt+7I/G01
- VPWBEj3L7xYiZTSZPqw+L+hFBYCnSpwqN7sOltU92sTGrhyh+9/1PKZaxzKbf9++u2CI
- 6Jh4qupD12wMsj4S3N8ySsb/FNHTC5zdEdfmTnVuMvOtK5Q5iAAw/X6bDH7oJVnNowof
- yA6g==
+ bh=X91804og3sQILXLvAgoFFIxDMU/Gf+vfo+CAdVC3Y1E=;
+ b=pODOeDHu1ftNq70JTynIdubXynWMQm4gHGv2MKyuUJWgwYtOQcQJRYSfPw3yaVcPfX
+ I4WHlVvqFs4VyVsZV2bItb/wpFuGl3RLptX8MRnjSM83pc9yBhsVzg88RCYinlPbXL0s
+ n7oZhwKUk3C4BdMDxWuwpT8F3aLRtyCU3mLxSI0P60ab+RPcN52lGLuISEHbeZguMMdl
+ DCD28vFBWtiIs9ga4pelLuOCcpS6UYnDGRB51qp2EGWTTyfNM6Dtd0hGJMSKYCbWrs5N
+ GCHmXQESypY3+Cg8mI3wEgtB4N8R5nOK2zg9Qg9AGlwtaU02AKPK381skGpQdbldCHXD
+ g2Fg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUncMwF088n8y516G1muFnwGcxolgmW8L3sb5lYkKU3NjRgl9rtK+g4vUg3q4J58Pu4F5vo/I8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxC+lHkR5eAuYSq/Rdn/YZL4n4MEE48HIh9/6chV/uRMGKlAmqC
- 2+LIrIg4Kd3qr6Jr+rWkvbV5X1U2wrjNe403JCpAOQeqGUJkCAdiR9j4RSXAcpxp8Dw=
-X-Gm-Gg: AY/fxX40/IKTnAIQg3ggwTgpXxqkSwnbnOe4BDEM367wGCRVHxoE3Mu9LIIS6XMVKnm
- PQcBQrfiZPAuxR6ae85iU1Z/dipMtkiG01EPOig4Q7+nwD0iCjRZiwpZmkqmfBUcLZKaPuagSCi
- A6DfgRehlGysHm8JwuJHfGZ5GfaxVxqkHrIlNX/lyNAiFGpqkk2utEWbPuDp1afDp0fGLzCUkFj
- /q3NH2AdeI1AxaTH8ojYBn4Ybs5HCJxgQiVCNyb5UCl/QIQk1hoX9k1aWxHdoFMoJHgjz1baPW8
- Jrs+kNHNc9RX/wu6XCBrCA8Uukqu2vWZNcflrAWbS9AznolDJOGUAVDUrgpxE4vAUrU/H3pOfro
- JX+Kun3BbEe32eHwrE3hR3DZU95pH/JMGKYZt35X3ikDcc0wxhBazZFqWm+9bdbkz09PW680X9v
- MfEVh3wi6vjZoMNT8cqGg/u8InxvbHWnvIDKAkXrnETtKt7RIjN6ui6g==
-X-Received: by 2002:a05:6402:144d:b0:64b:4212:9d4d with SMTP id
- 4fb4d7f45d1cf-65452ad09fbmr2368727a12.21.1768586608109; 
- Fri, 16 Jan 2026 10:03:28 -0800 (PST)
+ AJvYcCWu9CJ5dqFnzGoazbCZ799tvNnc64q60XpS1k/KOV6n33RAyHp5CGAMtN9SCQkL22P5AgbdIng=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxavg680d1G8GN1o2iT1NSDSZDt7VpQ73rDooxnbMQqXeJdO5/k
+ Hih+ezLwq/lNaQ1dYiDOeQFqlOGoXilcmjFB+WnOFIKlFk0JjzXkQBQN0co/a20qEiw=
+X-Gm-Gg: AY/fxX5zUnbCkNtEHnPd02cMTDQB1VtYuEuNE8genlpbTMkgyCw2oMDJuRRkTYKHiW1
+ mS/R84JhvKQQXefgR2U8VQqd/QNC3Sw4gOO8mUfDf65Ahyt2FMT51RzVZBk+Cr4rGCJxNl071jB
+ 0mk9OVUb5VCxcfudHgB/lyoY1QNZzY+OqXsrXiVtD5Fj7bVMKxWclXn057cnjs/PwdxDwikbQTO
+ 498uS7BDZ3aikfKTxsbdkQglrDR+VpIydM7gI8WoXuG+maCrXCiUA5D+UPP2cCcTMZ/+ZHHKMZV
+ CvOeptb/VD+0OEFeQeeO5r7Y1c8i+5qXNImcUaKwheRBkoVzayaKnLqyiqv36dkMHeZEkn2o8ba
+ 4rSAO1bibB/UtYtRCIhZN9YR84kcX7Ydtj1GNs1UPyIA9QZlDMjDbAGWNUnUNt7xnIck2iM2Vue
+ jcLNqvKfjqbQApXFH7uGPSSNp21NjAAImYWOLGFZsNQsxM2SKhkDIc9dGxZMHk2WAd
+X-Received: by 2002:a05:6402:2549:b0:653:7bdc:9561 with SMTP id
+ 4fb4d7f45d1cf-654526d2b36mr2991228a12.15.1768586609445; 
+ Fri, 16 Jan 2026 10:03:29 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.26
+ 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:03:26 -0800 (PST)
+ Fri, 16 Jan 2026 10:03:28 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- mateusz.kulikowski@gmail.com, trini@konsulko.com, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260107153504.550450-1-aswin.murugan@oss.qualcomm.com>
-References: <20260107153504.550450-1-aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v1] spmi: msm: refine handling of multiple APID
- mappings
-Message-Id: <176858660669.3399278.6943293185924150262.b4-ty@linaro.org>
-Date: Fri, 16 Jan 2026 19:03:26 +0100
+To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
+ aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20260107095038.2491697-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] configs: Fix fastboot buffer address for QCS615 and
+ QCM6490 boards
+Message-Id: <176858660823.3399278.17000677438725692285.b4-ty@linaro.org>
+Date: Fri, 16 Jan 2026 19:03:28 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,22 +103,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 07 Jan 2026 21:05:04 +0530, Aswin Murugan wrote:
-> PMIC Arbiter may expose multiple owned and non-owned APIDs per SID/PID.
-> - Keep current mapping if it is OWNED and a NON-OWNED appears.
-> - Always update when a NEW OWNED APID appears (make writable).
-> - If current is NON-OWNED and a new NON-OWNED appears, update to it
->   (remain read-only).
+On Wed, 07 Jan 2026 15:20:38 +0530, Balaji Selvanathan wrote:
+> The default value of CONFIG_FASTBOOT_BUF_ADDR is 0, which causes
+> NULL pointer dereference during fastboot commands when users dont
+> provide "-l" option in fastboot usb command.
 > 
-> This avoids write-access violations when not using the newly discovered
-> owned channels.
+> Set it to safe and sufficiently large region in RAM
+> of the QCS615 and QCM6490 boards, to prevent crashes.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] spmi: msm: refine handling of multiple APID mappings
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/7966d35b1fee
+[1/1] configs: Fix fastboot buffer address for QCS615 and QCM6490 boards
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/cb07205adb5b
 
 Best regards,
 -- 
