@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80827C982E4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5046C982E4
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:04:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F791839E8;
+	by phobos.denx.de (Postfix) with ESMTP id BCA2983A79;
 	Fri, 16 Jan 2026 19:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X/6ic52Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vQjEsCNY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C64682BF2; Fri, 16 Jan 2026 19:03:18 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 8A77E8397D; Fri, 16 Jan 2026 19:03:20 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56ED3836AC
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FD6D839E2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:03:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b872de50c91so362187166b.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:16 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-64d1ef53cf3so3286470a12.0
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:03:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768586596; x=1769191396; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768586597; x=1769191397; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WDHQTJd1Oc55JMnkSQtvBVBe6YpYNAWLiuI0PGs4MPw=;
- b=X/6ic52Y54shdgqtPImgTQrNNEyyO3qVICeOAGHU6vnQ+UIGlnZ/DX7GyC052ky1DT
- WKHNvqGOxV05Ms4Nn09FBmm5KpRy6jVGyXiO8tWrkLbgc95yfh1LB7lcC6TnaRBZ9tBU
- ayh7y0FMXLnclDvoOqqfs9vRYn0ZqHARm2RtjvC/m0dpPOCRxPfnDiVTAYv2xu8wJTTS
- yLYB6vL0nIGt1/Kiy2BPFftWuVi2ihjWaubj5tuv7WaCmbGHEYpgkBcZ62utvyzTbRPB
- mx+7cAUqB3ZvppBMs07PRDQUx62FEd3YdqlBdbe2wHqR0XJz0w6AJtDGdqFe4B3g1sjq
- edgw==
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rvDEBAC9Ph+LuwmyH/4ogoteKVXq5mNhnK9I4LBFMq0=;
+ b=vQjEsCNYNdxzmHTKKPVlRxPiDDSybOKp8FrZ681h05k30Bra/uxT2FYT9mvV64CG2V
+ l5L2gKcmzwg/8oebrukqXiFgrIWGElyhM7jxeiVDLe2gVLrf6qNrCdhe38pWSA0hkw+I
+ GnvtK/wJfNy7R7BVK4dOER62GI1+IsWXu08aporHUaXMX7WpHtJuDIUiAU82GKST6whu
+ iTBK6OnVQ+Zq9nDH01fcj9TdTPhu6hiaWZPRWRmOTNbMK3wMV0VKaL221FvEZfBSWS29
+ XKhcODdhwcmDNGwE4YjmfZ8TEpFA1mLx4AKPO3ySMtlsyuQZ5T40wMaVL7bIRxb0tglk
+ eQEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768586596; x=1769191396;
+ d=1e100.net; s=20230601; t=1768586597; x=1769191397;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=WDHQTJd1Oc55JMnkSQtvBVBe6YpYNAWLiuI0PGs4MPw=;
- b=vB1pMAQ9w2T3jyv0u72QQnH5ypVNw8iN/GDadmJQX6TqWmCAF4Yg+YyGtg37r9M3mb
- XqfupvQnOrhtnTDZCcS6rq68ghKikrcMX5fvpNX3P3lHIV2u+bcYtu43mZv4SdiOuayd
- apoM4RxbaioOBubOzaaDDlu5cuU9qmzsojjxYtmyKYvoLIzlXTWHcxHykpDDcqFvMBpu
- SLX57kWlwxnEzcgmNIrikHt5Kc9xTKGcHJa4IJd2yWeGxh4+zAwUfg/iobPOSCZ90G6u
- 0Od0/2DuhbexJ3rLceLDQUwVoSFYdEW4TI6YSJ1oeEmbPZgjNT2FNPLj5auvB1QxZr/H
- daRA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1ByFMJ/+9P1viEZvOVDyy25J8z8HjeyjG39QnAQZjGejSWLTWU/2uNQQRyUVNiKc6An+CiG4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRTVimP6Y6q+WxPCc+WRteQ+GG2xtPtH01FQYdLYV7GjJY6iKK
- FDuDUz1BPoufNTsggbDJv3M6UcxAx/ltEwnx0IR64LJJEBLCOYZZakJdV2DzDLdL3YRV8PwITg1
- kWR5vqI0=
-X-Gm-Gg: AY/fxX4P5NqQNh3XJ7kAKLx4QgXPIyD8Lzt76vsnmNsPIjlOe37vhHhH386hMjceOLr
- OkWe7JShPSHIHSya3fYgf0xPiywHL7iGxOeUc6xaJJXJzwHXegSiRr8A6/Q/Msda8wRHvWifLNX
- R3zr8p9VC7t7kvByxP3Wiu2GpJOEsOTy7hDbztWkO3V5pyPN51S5qKSe06xrTM2v3pyh1mlyVxb
- ewZHMfBlH3f+l5kKYV+wJN5rXaM6I1wYxxbsWDX+nd2+/uW458uevuxvb/0cZPHkmpRlFGpBEKp
- V7Fxut0GHDUwGHA67CeUEJto4XJQLPkrZuXdDwBDRdwDQvmJv09AGqEGmKuFHLq9AxP8HYURQRN
- lyLfyvsLs3QBCZONOLy7kwU4uWUP4uoI6wPZlpIdF0RVTiz0yO1vu3YAeq+CIDXlSogKRUO0tY4
- VXKYKAr47AoN1js8dSUCM4F0EQTGK28yQDPc7y85ZzxXEnpD8UrAhDcQ==
-X-Received: by 2002:a17:906:fe0b:b0:b87:2e8a:e270 with SMTP id
- a640c23a62f3a-b879324c893mr339208766b.57.1768586595713; 
- Fri, 16 Jan 2026 10:03:15 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=rvDEBAC9Ph+LuwmyH/4ogoteKVXq5mNhnK9I4LBFMq0=;
+ b=rx4A++Ra8uRnugCHHQF4VZ58bllj5D1kYI3Avp4TXEAwCD0b/h4vwC0PgVkI1PXk0Y
+ zteIP7ppqX33uwrVHCJpKDMQz34/LgHtL/U7RIm3cJiWrEybU9S/+/z8IScJUabZJ8Ui
+ G3+vtr7aO1f2cCA/gMnlRt9qk84+FBAc3bNiMt+bTQ6CRO17O4XaMd2NNjOtTEd7rmD4
+ 2ZBgHqi/4oxoUidzk/0voM6XY39ZzIsvNCCZbLaSAU/fykKU0Q4av+DLKtX+W1+NvRka
+ d4iNQ4+UJTbKEBOGOw9G8zr2nEGpQm2UzzovIF9Et0+QwT7Cd/ovZxRJ2GPL0TZXHPP/
+ VM+g==
+X-Gm-Message-State: AOJu0YwdMUrkHGVa6lC9RW5MqrancrfzXzluoyjS3s31KzY/ftSTviZf
+ f0HR0pNaI4wdd+iVbQzj4EZgxbi3A+Knl9f9sgU8ENhTYjWyNLUyMGNIpxgSh+CfseQ=
+X-Gm-Gg: AY/fxX6TyElLR+zMd8lLx/9stPNpnoI4G6ypSFe1xZmETdf/IYTlS2M1gu0q6SWbgsX
+ jlqiRfVQpARIH1ee/AWamgFJg0hTlFB86mLuMN1RBjWP3Xyrz/J2CrhEfsEBfmZPAGs3+xYPWaI
+ 3ecVs2y9ZrdL8YWv4479y8GeFDEx57tGOXPE38EjGKfWclcOgyHh/HMagkfKQ7tyiO+55MH9cx/
+ Xqt4zrUJJvyLFTYR91UBsy09uklygSqOXWYJwxu9ePG3uBOZSH/8e39TEuWCAZY/NCIhCTXdovh
+ aywQMewAjnwE5G+uNizyuIj5lymQ27YQBAP0U9FIfe9xSaCW7H1lAfzcG2vmPWn6MKOfQ33v/Me
+ 5P6cd2Lim4bAw4pctk1y0RufppUEuz1h7c8V8+msECKn0j9bDo8UkMPAiDzJ+/gk4Pa92uYd+v2
+ /xgUpr0DL49lArKsJesKR2eSrVrViRSs9HPc2eExOSCuIC4aNLRocOIpioata+eHUO
+X-Received: by 2002:a05:6402:278d:b0:64d:c54a:334e with SMTP id
+ 4fb4d7f45d1cf-65452ccace0mr2774279a12.29.1768586597523; 
+ Fri, 16 Jan 2026 10:03:17 -0800 (PST)
 Received: from lion.localdomain (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.13
+ 4fb4d7f45d1cf-654533cc5e1sm2932712a12.19.2026.01.16.10.03.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:03:14 -0800 (PST)
+ Fri, 16 Jan 2026 10:03:16 -0800 (PST)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
-References: <20251112165851.1561418-1-aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v1] smem: msm: Fix memory-region lookup, direct <reg>
- mapping and update SMEM host count
-Message-Id: <176858659378.3399278.13947581821934509683.b4-ty@linaro.org>
-Date: Fri, 16 Jan 2026 19:03:13 +0100
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+In-Reply-To: <20251119145523.843230-1-trini@konsulko.com>
+References: <20251119145523.843230-1-trini@konsulko.com>
+Subject: Re: [PATCH] dragonboard820c: Stop disabling device tree relocation
+Message-Id: <176858659585.3399278.14778241299501533532.b4-ty@linaro.org>
+Date: Fri, 16 Jan 2026 19:03:15 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,25 +99,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 12 Nov 2025 22:28:51 +0530, Aswin Murugan wrote:
-> The SMEM driver was failing to resolve memory regions on some boards
-> because `dev_of_offset()` + `fdtdec_lookup_phandle()` did not yield a
-> valid DT node. Modernize the code to use driver-model/ofnode accessors
-> and make the probe robust for both DT styles (direct `reg` vs
-> `memory-region` phandle).
+On Wed, 19 Nov 2025 08:55:23 -0600, Tom Rini wrote:
+> Remove setting of fdt_high to ~0, which disables device tree relocation,
+> from the default environment. Doing so prevents U-Boot from correcting
+> problems such as having an unaligned device tree and leads to various
+> failure modes in the OS.
 > 
-> - qcom_smem_map_memory():
->   * Drop fdtdec path; use dev_read_phandle_with_args() +
->     ofnode_read_resource().
->   * Use dev_read_phandle_with_args() +
->     fnode_read_resource().
 > 
-> [...]
 
 Applied, thanks!
 
-[1/1] smem: msm: Fix memory-region lookup, direct <reg> mapping and update SMEM host count
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/984ebe2d553b
+[1/1] dragonboard820c: Stop disabling device tree relocation
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/57a5305948f3
 
 Best regards,
 -- 
