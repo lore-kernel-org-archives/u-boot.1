@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12741D4A609
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392A0D4A60E
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 08:24:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FCA183015;
-	Fri, 16 Jan 2026 09:22:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5E3B83015;
+	Fri, 16 Jan 2026 09:23:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IiVemqJ+";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RpZpaATJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C1CD8309A; Fri, 16 Jan 2026 09:22:22 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 134B48367F; Fri, 16 Jan 2026 09:23:58 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AEC280077
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:22:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CE7F80077
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:23:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 8446C60160;
- Fri, 16 Jan 2026 08:22:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C916C116C6;
- Fri, 16 Jan 2026 08:22:18 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 603C940797;
+ Fri, 16 Jan 2026 08:23:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBB7EC19423;
+ Fri, 16 Jan 2026 08:23:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768551739;
- bh=5A9w48F9hE5ljLurZu3/qRcL/MGVEEJI2gJveKD+q1Q=;
+ s=k20201202; t=1768551834;
+ bh=YfftrLIGOtTFYTL4IySlcPQR0iXfUbkf9lU/LU1ex/g=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=IiVemqJ+7+akXuw76g5zn2n6D36H2pY7PyF9woVsUUQsftcMnUy88i0Ovr1/3ExbD
- Y62F0BVKddFLouxoUpu0kfgCTe0zQ68F6SL7UuuiBgig7PLoLZXduKtRgtfQ32FUip
- YajxkF9adfa3GWY2hkmDSu/0gpg9pBxMNXc4KtDpMHPvQYyAFbcIqZfk6FN8qo6h7Y
- w2NbV7FnlUsyeRmDlo1OtIDZHfEZNsoIkox7KxdHUFx15XHMzIBgchhrak9H/bGtif
- WEHA+UxjaLBgYg1/Dx272weHFFK7eAwNiHBrS/tlH2NNDRFko0zEkzP0LTKNYvu8WB
- 1XK7X9mDWQXXg==
+ b=RpZpaATJYDQBVDe49FJ+VI7aEftGipFSJpUUhhUuak+kGCYKT4pFoxwIvBFLg3A93
+ nhAPDlsQSYEkGP4sz2l2jKpntJrWQMqsgPJk9lsZoOwuRyWhWcelk6V1KqVL9jy4ZY
+ PnZRQhhySnLfHUTzlAjxnlR10YPmJT2ijQqITZoY61DWejGY09fwd1ulnF8nxIa2lf
+ 7svu2WONSoZcNhLMXj6CWMA+lqefb/kKqrGRCmsZe9yO8iIzfKFoBfyOXo9ALgFVM7
+ Ma4N3K/SdFlcy6kY4LWBksoNsgP0iijzWtlc5AdVLvyJY7NQD2Vg8VGuW8UdzsSpIR
+ 7nQjJ6/DiDljA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
  u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
@@ -50,12 +51,12 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Marek
  Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>,
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Simon Glass
  <simon.glass@canonical.com>
-Subject: Re: [PATCH v3 1/6] dm: core: lists_bind_fdt: Remove unused variable
-In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-1-ebb8d990b9df@baylibre.com>
+Subject: Re: [PATCH v3 2/6] dm: core: lists_bind_fdt: Replace found variable
+In-Reply-To: <20260114-topic-musb-probing-v2026-01-v3-2-ebb8d990b9df@baylibre.com>
 References: <20260114-topic-musb-probing-v2026-01-v3-0-ebb8d990b9df@baylibre.com>
- <20260114-topic-musb-probing-v2026-01-v3-1-ebb8d990b9df@baylibre.com>
-Date: Fri, 16 Jan 2026 09:22:16 +0100
-Message-ID: <87qzrqdl1j.fsf@kernel.org>
+ <20260114-topic-musb-probing-v2026-01-v3-2-ebb8d990b9df@baylibre.com>
+Date: Fri, 16 Jan 2026 09:23:52 +0100
+Message-ID: <87o6mudkyv.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -80,7 +81,9 @@ Thank you for the patch.
 
 On Wed, Jan 14, 2026 at 09:33, "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
-> 'result' is unused in this function, remove it.
+> 'found' is only used at the end of the function to print a debug
+> message. No need to maintain a variable if we can just return 0
+> immediately when a driver was bound successfully.
 >
 > Reviewed-by: Simon Glass <simon.glass@canonical.com>
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
@@ -88,6 +91,3 @@ On Wed, Jan 14, 2026 at 09:33, "Markus Schneider-Pargmann (TI.com)" <msp@baylibr
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  drivers/core/lists.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->
