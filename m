@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D458C98302
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 22:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61E26C98302
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 22:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D1F8394E;
-	Fri, 16 Jan 2026 23:12:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF1EE83966;
+	Fri, 16 Jan 2026 23:12:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dC7m/caI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GSRbcVSS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDEA2838BB; Fri, 16 Jan 2026 23:12:13 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 5521B8309A; Fri, 16 Jan 2026 23:12:25 +0100 (CET)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6498E8394E
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 23:12:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15C3D8397D
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 23:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b8718e54398so41454266b.0
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:12:10 -0800 (PST)
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-64d00702990so415070a12.3
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:12:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768601530; x=1769206330; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768601542; x=1769206342; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Rd7WqqwGr073ZiDHVFHQd9ohL85TA5lkN+fhprlXnNc=;
- b=dC7m/caINQahXIrUjwQTct7mz+P663bbGNKpHPGxOhIkb/ljhPDkPbTcW+6LnYZBt+
- spvCu16QVN40pgGkrPd2I3t+8G8hAUM1d9rueI2oRMpea74H5YUBZOC3SY/gt85jFIFc
- nQSS4L0GBhs8IBHMKONAtyvQ6rNftXwg5BR2z22eJl88fyJUbBBEO6EYRvKlkNmyiqei
- +wWgPlZIEKbdhsAmjIM52NKyEPoPCrh/xroqKDLw/VTk5ZK3xFDlN/vDF5HjdCuuWUba
- aZNaWbuRc8PZJuSRx2/tG6bPVJ7rxqbaiGtcONKFi7tPjVVPQETBa8pbTrXWElFEvoS9
- qQmg==
+ bh=R3kGISHdJS1cL36L4ZKDtU5qFE+feWqGQU+6IfReT/0=;
+ b=GSRbcVSSVhQ8jvFNqFQU3IvljKbExClRyoZI5CcIKwhuLqCP5foMyFrUbGQtW6pF/N
+ M4VJRS0G7UnBW7pEtpgBvJVa1F38tmporHHHRUkOZt0K8+vSqNaJpI/irevELDwaD/Ie
+ iYbs3SWS9TfU3Um/cCsHNZi49W2qxCToIwxypY1pc3hjj5k5msP1VqPZ7+Ay0YdTInqF
+ csEdgc3FRWAEFtxEhRQEXD8dHN6Taka15CjIUCnJIhIYPEx1m3z4tfrLfUnUOesRyUUL
+ peN/hgU64YdpxKY4Tma6mX7ngqsHnRpAAmbSr3QrAjHR6ma+E//XqpsEmPGXfg4n4+6+
+ 8ThQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768601530; x=1769206330;
+ d=1e100.net; s=20230601; t=1768601542; x=1769206342;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Rd7WqqwGr073ZiDHVFHQd9ohL85TA5lkN+fhprlXnNc=;
- b=YDDpvRQfXpbJv1j819EkwqDhU7Z4XCaJ7j4HA3iNATsAh2xdfgMOiiYa8K29wHoZnT
- x74n1dBnudB2Okb3QzZqOZS0jR30Og4YDXp6K9c9r058zYxsf+J92ixLG+kf8mQKHn8b
- aIBElXuv1kig6rQx5MRbKHmpqo0FOG4lLbgYD+To0OWoWrn8TH6qvG960ZlYpR8scAjX
- 4Xl/E2L4f4VCBD39AsAqDPu7K4yZCDxtwA3CwCmYrTDEjj189JW5mZxZU0vx8hDu/PsO
- dUaz+SHYigT/NB+IQIqxkhMWNucGb1f90CuL6sCGTv6DN7m+jhjNaH4knAjmw8XR5cuu
- TCkw==
+ bh=R3kGISHdJS1cL36L4ZKDtU5qFE+feWqGQU+6IfReT/0=;
+ b=EQY2C2/NXUT0brxzyxm5CxzDYgKpaa+QV5zxPlnr7kqINDR+FCHtb5QaABePnlLMnr
+ R4HYWW9zz0j6dpjd0kYKCrNW8B/KMt/c+DKpFBbuP17a1wd/jxtoY8FRrr7E1GKvZfP4
+ lH/sVKsxThf0LwiFFeV2Kns5bTbrxuKDD5eD870kq6hEEyL7S8JQfY8zmO8QC0Ahq2Gb
+ PabpLsplj9OnugdZ6gXtvdoU3sHreVn3Lnx0P+dr3rWDfgd3u7mTYiE4d4oKaTiMmBJp
+ 5LxpK/MNKBX0tJkzGewDFV04EmUpFURbnDi0FAvYAbDI/TdLhZA/mXbCr35V9LwD5cyO
+ D3Pw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLffmtr7DzUw7pjbo0fO4yJwTEv00pYOJ9dtgPBiU24ZUWZ21qeXwpa3FVrx3im+n8z2T6xpg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUJcmWjo6/rV/8usRj7uTU2R0J15Z+T0+a7+Qu5fstppOygXFk
- srDks9oVubhxWabFE1QVto71SBeNw/bNIPe5kapqtTtxjsgKBNx7cRv4
-X-Gm-Gg: AY/fxX7HcaZYPFx/H6q2NWMpBRg2o3W4QMccnpow0DZjk3ZHenSYRUoZVjHirjX/48C
- Wzn7w71V6iYCr0oV35DZEhFNqWfwqYaMIDp4k1QGyAIpyDUqo/ZuJcC92Jm2boTGRXCC8rYQMYX
- V2yyycHkk197zPROkvXffdecQsiocJ05uTaJeWfY95HjVgVHThFkFEe5B5u0WtNnxJBeeAUEsz8
- 9TTOjfhzEYnRc9KZ2wyTF7H+/PYCHD/ozkmlqeCc2jyYjjFX/LAfkmVPgo2DCfYDkhoon/mpuPc
- unFjMO6vktvoqD7vNL/Q26xh9fNQRSoaWulQhvRP5PSNXOUgzTUYS2XJ0OTccmrSqzwiVNgSSQo
- ySoUk/iqq+Q4dkBAZo3dqgVNYkk/EStRV3qvbGl89ik87A2vzHC/Xa83gTZW4rG/PCDdXs0R9ol
- U3BhRYQerAANo7eEmnq/WcgLpurOjWaOb/hMJWvd5kJGTI0C/JLQ==
-X-Received: by 2002:a17:907:970d:b0:b87:763b:3d9f with SMTP id
- a640c23a62f3a-b8792bed528mr198725666b.0.1768601529637; 
- Fri, 16 Jan 2026 14:12:09 -0800 (PST)
+ AJvYcCVA+4PtbGLOd0SxHDb6sD1c0nECUN9Ny8a+esQj1QQm0yjBlMtu1YaWP/smRJKVoSCCE67Ce4Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzd1OpBK2CdT4WGpPRiEHz13KmSSCfyn1dkKjwUFYS965mkD75Z
+ VQf6ch81tE+3+UjGnnOY6xPOKG64HVC+88K/jv/VqzBn+4mYxRrNlmHWHIPHHmgk
+X-Gm-Gg: AY/fxX48qWdxDQaTakPntqQ7Rrb50leSpvvl2vMSxhsnZ21wgBU9KMT0rfbwf8Ey+6C
+ P37RzTn0QQIbLU8WMpChvlIaswx9ACmZnFOfv9XrPOFjo+MH18MzYKAhKTGn6AZZxClusC0hRPh
+ SSLomBOWDVWZTzVTqBH2hb2AOX0YsYXtiNclA4U6GTDnki9btAIimzZfsJGpAWFjdr7k/0/gcnX
+ vScXDyXpegocc3R3umq0oLD3LwtV9Q9aCmKyw8su+yjOI2+0x3oNk07EPmfbAZErXSN/+VrbATY
+ Xjj4htTED8Mcj3aEzrhhKtALqH9OZghxK/2Cnq4jjdPku8gWEtrwwVSyy2plWj1Xu1oKk6mWtM5
+ 1vUIJ5F8969RqEbPq8KT4dr7VJOL2jEZbYjCrL8b2nbEkV8VRvwdPUVWtJQuq3QmVzVkrizHm8n
+ Mwmvk4VrSAU7xRxG3PR29+XQG6gTjsRX1sc2XaSwot5Ft+/3rTRQ==
+X-Received: by 2002:a05:6402:350d:b0:64b:aac8:4b9b with SMTP id
+ 4fb4d7f45d1cf-654529d21f9mr1977883a12.4.1768601542454; 
+ Fri, 16 Jan 2026 14:12:22 -0800 (PST)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8795a2f1a3sm351900066b.62.2026.01.16.14.12.08
+ 4fb4d7f45d1cf-654533cc543sm3361813a12.20.2026.01.16.14.12.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Jan 2026 14:12:09 -0800 (PST)
-Message-ID: <12e44bc6-4e45-43e4-9c61-0816b90ce75f@gmail.com>
-Date: Fri, 16 Jan 2026 23:12:08 +0100
+ Fri, 16 Jan 2026 14:12:21 -0800 (PST)
+Message-ID: <31a98155-90cd-4896-9dad-002e6a53b4fa@gmail.com>
+Date: Fri, 16 Jan 2026 23:12:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 2/6] ARM: dts: rockchip: Add spi_flash label to
- rk3288-veyron
+Subject: [PATCH v3 3/6] ARM: dts: rockchip: move edp assigned-clocks to edp
+ node on rk3288
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@kernel.org,
  trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
@@ -106,34 +106,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The u-boot,spl-boot-order property requires a label at a boot
-device node. In order to migrate to OF_UPSTREAM more easier
-add a spi_flash label to the rk3288-veyron.dtsi file.
+The rk3288 power-controller node contains an assigned-clocks property
+that conflicts with the bindings. From the git history it shows that they
+wanted to assign the rk3288 EDP_24M clock input centrally before an edp
+node was available. Move the edp assigned-clocks property to the edp node
+to reduce dtbs_check output.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-Link: https://patch.msgid.link/8a423a6f-bfdc-4947-aef9-35ee7c4f6ca2@gmail.com
+Link: https://patch.msgid.link/7d6fa223-ab90-4c44-9180-54df78467ea5@gmail.com
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: ac7116a626e00d3024adedb43b74bdf2ce45efc2 ]
+[ upstream commit: 10712ce694a67304a99dbba20f8cb146ca5f4fd6 ]
 
-(cherry picked from commit 38e6f7cd300f66cc9f657cd0e8881a01acc664d0)
+(cherry picked from commit e1b4137b6bbc9998b13cde2eba0655cfdd358c69)
 ---
- dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ dts/upstream/src/arm/rockchip/rk3288.dtsi | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi b/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-index 260d6c92cfd1..2d6cf08d00f9 100644
---- a/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-+++ b/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-@@ -388,7 +388,7 @@
+diff --git a/dts/upstream/src/arm/rockchip/rk3288.dtsi b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+index 7e284b4fecdc..7477fc5da3ec 100644
+--- a/dts/upstream/src/arm/rockchip/rk3288.dtsi
++++ b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+@@ -741,9 +741,6 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
 
- 	rx-sample-delay-ns = <12>;
-
--	flash@0 {
-+	spi_flash: flash@0 {
- 		compatible = "jedec,spi-nor";
- 		spi-max-frequency = <50000000>;
- 		reg = <0>;
+-			assigned-clocks = <&cru SCLK_EDP_24M>;
+-			assigned-clock-parents = <&xin24m>;
+-
+ 			/*
+ 			 * Note: Although SCLK_* are the working clocks
+ 			 * of device without including on the NOC, needed for
+@@ -1193,6 +1190,8 @@
+ 		compatible = "rockchip,rk3288-dp";
+ 		reg = <0x0 0xff970000 0x0 0x4000>;
+ 		interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
++		assigned-clocks = <&cru SCLK_EDP_24M>;
++		assigned-clock-parents = <&xin24m>;
+ 		clocks = <&cru SCLK_EDP>, <&cru PCLK_EDP_CTRL>;
+ 		clock-names = "dp", "pclk";
+ 		phys = <&edp_phy>;
 --
 2.39.5
 
