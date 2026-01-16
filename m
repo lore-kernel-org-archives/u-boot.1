@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938F6C982D1
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:31:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC083C982D1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:33:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E6FA83015;
-	Fri, 16 Jan 2026 18:31:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7721283015;
+	Fri, 16 Jan 2026 18:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tiAbt2+B";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eBNERVAi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 939998309A; Fri, 16 Jan 2026 18:31:39 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
+ id D384F83935; Fri, 16 Jan 2026 18:32:58 +0100 (CET)
+Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
+ [IPv6:2001:4860:4864:20::44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDD9382BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:31:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3E6E82BF2
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:32:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7cfd8ca8191so725634a34.3
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:31:36 -0800 (PST)
+Received: by mail-oa1-x44.google.com with SMTP id
+ 586e51a60fabf-40429b1d8baso780214fac.0
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:32:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768584695; x=1769189495; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Mt0MUA5PWBRz+F1hiGde3AJsg9X/nK/86FhlmQL90LM=;
- b=tiAbt2+BQywwYvm5y4/uSNHEECi+83UHHzr9I+x8oYe7szDZxI8WDY03VeLqUllf/s
- vnngXGmj1dBGHpkJbL7RNKb/jCbDOsZO802qL79oc/IU6c2SNdzRvtL9VBhEfyC2BZsY
- N6xVtHDrP+Zj9dQDbtMH8uXOp7j+NP2tGMKtc=
+ d=konsulko.com; s=google; t=1768584775; x=1769189575; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a+aKf1Vcmkjv2UbUd58KCojo/zjEz+N3BYmWIQu2yEI=;
+ b=eBNERVAiVi8M22nIImxE+pEGEs5gPvcl4NJTE41w7ScC5CngJIPv3QJfyo82gXxwcy
+ 4pLD9FzEhMXc2OrFNs5wVXBLstxKk0NvMYELzz68YpNM8h/hqRXkiSmCbSXDy/MJF4j/
+ Qd42d8LwzH7JtCZyKIhuMbCSC90ePXIYZcfhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768584695; x=1769189495;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Mt0MUA5PWBRz+F1hiGde3AJsg9X/nK/86FhlmQL90LM=;
- b=SOlc3wrIzobIut7W9TFh2N9fygOz/YBHvepYnCK3S2x1pXZqpQB//YL7zx2n18jzxa
- 6EIGt8iiyDmvyDsICpgCEvU1Xgzayit3R2QCc8OsQzrVcy7NgHJJM8M9vvsojBrV0Xoq
- 8OfDKpBqt7Wm3+YJ8hpBMcWTlGnIkCCnwQgQ6r/YZzFq3R66fz3qa9bKZpz8VfzQS+GD
- /hytuXcljxeoYgOMWsT8JqBBPLvc4Pge2zWS+fIjTFGH/+cNpw/d8n8+Ki1cOdsZoy22
- Y3VJEA/inLctMa+WVlma4Wi+tzbM7nFfmFmpy9a/swgRxlT0tvxDlQ8h5A0+t9pBE/AY
- rx4g==
-X-Gm-Message-State: AOJu0YwMOJGXfRaipfJoTdPAhgMndKsSz0SjaJhsFwV29kc+5iX68KR0
- 0WRoPJnL5zqgQ2EmiSzYtkdptxtx5DNdLcorWHkL2L/eI8Yov6dUPAJ+14BJYygrO7g=
-X-Gm-Gg: AY/fxX5nHiGCdlxxLYDZUBSAS5crVmzNBs3v96OKjIJn+htEgUHvvi3wkTSQQ2q1sYK
- IxH4Ljz8Ju6idQnRw4a0NRLSFDr7tG4HrgUen34sxsyB9M5jwSlURIAKVpHn3+AWZ41OCpb0Bzt
- gboz51vw5hW3J+LhKhajEaw3KB8Fz6CVCDvwrsGGcCtGoKUm3xRggFIbetgWDjac6nd+nWEOMZx
- qLMTyeOi2hrAhOVeb0rXG2/nWLc2pPRKTBW1fptHrciJ2R1HDKz+sZxAM8OL9HJ4lHJZ9jLAZRw
- 5Iet79ZGmmlplHRVwrhU2K/XARUkjFjYXAtTp6D60QOldQL1EE2lmEmOyi+B0NQXZteQPLTlPDc
- C93j2p7IpB12N741udAoh8D894Nuof8U4FKg25OaH2ZcpN8FkWyz7zg0boDYGgS1O4asem/lDtL
- J5pj2I9MdN5F18UtmCTlk0K04rDZnKeVPGf2hvsCkkRIHhP525JVbpe6b/lJ82IBJAiWgWWB+8N
- skkYgeuJDvkn3GOJMGI0iB6CJG17N9alRO0A+Q=
-X-Received: by 2002:a05:6830:f85:b0:7cf:dcee:3db5 with SMTP id
- 46e09a7af769-7cfe00d8da1mr1410969a34.1.1768584695469; 
- Fri, 16 Jan 2026 09:31:35 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1768584775; x=1769189575;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=a+aKf1Vcmkjv2UbUd58KCojo/zjEz+N3BYmWIQu2yEI=;
+ b=fxkHdOeTYm70aHGE+0umRZ1h7Ncz0uOqGEskgCtNq1aCL2T86f7V3o0A/o1NwboQFd
+ dY2YfphZ5/x7d4YWrffB1T4x+1mKyTrFFVLUHVtdVtw7I7ytYpY9yTjaMoszMBL5ZOyD
+ WSWtsM3FyDskuXTF14twgTmxFmI4GrFJo7AwS2SDeE8VfWbZe0H4dBXHgW/Q8wBVfKTz
+ pyh9mxr75+WDeIb5zjc1GMYFBkPEU3/i9thCEQvq9y3KRneOtgVchctAYtOUQyAwDsCf
+ cEPbeWrXhhLByNaFQVcnuXskBSlyHZSrfDuUjKfiARL3grMIChFktSt7su7ZKEsGl60/
+ ct+A==
+X-Gm-Message-State: AOJu0YzlqROaZl4G1dbWBraWy8kpAxRAqSLcnnFxpOaMXxZ1aixgnvGg
+ UzcusBiTcuwgGAjCscOjaMjCkiqt0I2MC9KC9C/R6razM5qZ0hYlWtlzs+UAU0B2hy4=
+X-Gm-Gg: AY/fxX4rkJSn+3Ln9GRqy9nOcKgd79Ygvyd65+POC3s5Lluc4n8r8ersQz5HzxDEKYu
+ Xd/cQvLXJfvdmQpHigbFFSnLDavvrZM+/crU2Zz+4D+bGQeZDYh2Q0kfQgVK9Up5Nbgov1lzNT3
+ DmJPeBKHg7MoyOLeL/lTFdVRh8OE60a11s+iwxMBK2IPaNs5TFCeL3ztStHEx4Rtl8OR/dZfEIz
+ UnKxam0YiTI4NA8NclsYxcSvnD/hBJxuayDUzYC4hJB1bxX7Ch8rRri/PA51B4VckHgxxhjj9cF
+ dxvIfkWR5r/F9pwvowNzqx6/QsG3veDIR06ca+Z3/mQW+zDAx4DXuA1kIOMSt6yosipCZcxyBGH
+ 3VjdW4YlD6uM07XAnY0LcCQ0eR5qd85+jlkLDlMIq9qZJXIcchAF0BZdJormbDBJX0C1rWvnqYk
+ 5l4gziU2jCtg76qKWi1G46SqVTCwXsUVCI0/e5/6MuGlSLujsTczGnXYofzG1Zt1L5XS1btL71B
+ vDMWR/LbwJxlRJpBoypsHc6awtkik7cInxjL3elh1ZAsNDn
+X-Received: by 2002:a05:6820:229e:b0:65d:3c7:b63 with SMTP id
+ 006d021491bc7-661179c3ef1mr1403450eaf.39.1768584775380; 
+ Fri, 16 Jan 2026 09:32:55 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf0d8b28sm2059378a34.2.2026.01.16.09.31.34
+ 006d021491bc7-661186ca7aasm1494068eaf.2.2026.01.16.09.32.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 09:31:34 -0800 (PST)
-Date: Fri, 16 Jan 2026 11:31:32 -0600
+ Fri, 16 Jan 2026 09:32:55 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH] doc/develop/process.rst: Expand on the Custodian workflow
-Message-ID: <20260116173132.GM3416603@bill-the-cat>
-References: <20260109172905.1446923-1-trini@konsulko.com>
- <35fe875d-0bcc-452b-bb66-a2158b96629e@cherry.de>
+To: u-boot@lists.denx.de, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>
+In-Reply-To: <20260105-topic-am33-evm-lcd-v2026-01-v4-0-7617591b8159@baylibre.com>
+References: <20260105-topic-am33-evm-lcd-v2026-01-v4-0-7617591b8159@baylibre.com>
+Subject: Re: [PATCH v4 0/4] video: simple_panel support for am335x evm
+ panel
+Message-Id: <176858477451.4075554.12235045641218267787.b4-ty@konsulko.com>
+Date: Fri, 16 Jan 2026 11:32:54 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KHRf8phLsStO7gJ+"
-Content-Disposition: inline
-In-Reply-To: <35fe875d-0bcc-452b-bb66-a2158b96629e@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,200 +102,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 05 Jan 2026 10:36:25 +0100, Markus Schneider-Pargmann (TI.com) wrote:
 
---KHRf8phLsStO7gJ+
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> this series adds the capability to define hardcoded panel settings to
+> the simple_panel driver similar to the Linux Kernel and adds the panel
+> used on am335x evm. panel-uclass.c is extended to support get_modes()
+> for panels and drm_display_mode conversion. In a second step the tilcdc
+> is extended to support OF graph to be able to connect to the simple
+> panel devicetree node.
+> 
+> [...]
 
-On Fri, Jan 09, 2026 at 07:08:40PM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 1/9/26 6:29 PM, Tom Rini wrote:
-> > As seen with a recent pull request, there have been implicit assumptions
-> > about how much custodians can change patches before applying and merging
-> > them. This has lead to an unfortunate situation with a contributor being
-> > understandably upset about the changes.
-> >=20
-> > To avoid this in the future, document a few things:
-> > - Non-trivial changes to make something apply need to have at least
-> >    [name: what] in the commit message.
-> > - Only trivial and obviously correct changes can be made by the
-> >    custodian, and ideally this is done in a merge commit and not the
-> >    patch itself.
-> > - It is the responsibility of the custodian to gather relevant tags that
-> >    have been provided by the community.
-> >=20
-> > Link: https://lore.kernel.org/u-boot/1faefbf2-e8b0-4c94-85f5-025355915e=
-0d@gmx.de/
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > With this, Heinrich, per E Shattow's comment on IRC, can you please
-> > revert the commit in question, then apply his patch as-is, and then your
-> > changes as a new patch in order to show correct history?
-> >=20
-> > And I realize at this point the subsection of this document is a bit
-> > wordy. Maybe a follow-up of restructuring this part of the document
-> > would be helpful? I'm not sure what would flow better however.
-> >=20
-> > Cc: E Shattow <e@freeshell.de>
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> > ---
-> >   doc/develop/process.rst | 9 ++++++++-
-> >   1 file changed, 8 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-> > index 4bfbf0eb9c63..84ab09132a0b 100644
-> > --- a/doc/develop/process.rst
-> > +++ b/doc/develop/process.rst
-> > @@ -244,7 +244,12 @@ like this:
-> >         custodian can also accept patches against older code.  It can be
-> >         difficult to find the correct balance between putting too much =
-work on
-> >         the custodian or too much work on an individual submitting a pa=
-tch when
-> > -      something does not apply cleanly.
-> > +      something does not apply cleanly. If non-trivial changes need to=
- be made
-> > +      for it to apply the custodian is expected to annotate the commit=
- message
-> > +      with ``[name: note about changes made]``. Furthermore, only triv=
-ial and
+Applied to u-boot/master, thanks!
 
-As I'm actively working on v2 right now, a few more comments.
-
-> We should provide an example, I think.
->=20
-> commit 66be03b7ee19444b23aae3990a434a7470fc1641
-> Author: J=E9r=E9mie Dautheribes <jeremie.dautheribes@bootlin.com>
-> Date:   Fri Nov 28 12:03:04 2025 +0100
->=20
->     binman: blob_dtb: improve error message when SPL is not found
->=20
->     When using binman with the '-a spl-dtb=3Dy' flag, if the SPL blob is =
-not
->     found, binman throws a cryptic error message:
->     binman: 'NoneType' object has no attribute 'startswith'
->=20
->     Let's improve the error message to explicitly state which SPL blob is
->     missing.
->     This is particularly useful when binman is used as a standalone tool
->     outside the U-Boot source tree.
->=20
->     Signed-off-by: J=E9r=E9mie Dautheribes <jeremie.dautheribes@bootlin.c=
-om>
->     [trini: Add '# pragma: no cover' because coverage doesn't seem to like
->     the documentation about this error]
->     Signed-off-by: Tom Rini <trini@konsulko.com>
->=20
-> is a good one I think.
-
-As I said earlier, I think this is actually a bad example from me, and
-I'm rewording things to say not to do that.
-
-> You also added your SoB which isn't mentioned as a requirement here. I
-> believe it must, because whatever you added/changed, you must comply with
-> DCO to do it.
->=20
-> I'm tempted to say we maybe should add a link to the original (unmerged)
-> commit so that people can actually do the diff themselves if they want to?
->=20
-> For the above example, have
->=20
-> Link: https://lore.kernel.org/u-boot/20251128110304.63138-1-jeremie.dauth=
-eribes@bootlin.com/
->=20
-> Maybe? Not sure how much friction we want to put on custodians. There's
-> probably already a lot to do :)
-
-And part of why I'm writing "don't do that" is because it's a lot easier
-and clearer than trying to list all of the "do this" and "don't do
-this". It's also a more clear and fair practice I think to say that all
-"development" happens on the list in public and Custodians don't have a
-special place to make final tweaks.
-
-> I would really like also that custodians *tell* people that they have mer=
-ged
-> the commits with changes. https://docs.u-boot.org/en/latest/develop/proce=
-ss.html#work-flow-of-a-custodian
-> says it's only "ideally" they do for merged patches, but I really think we
-> should tell people when changes are made to their patches.
->=20
-> > +      obviously correct changes can be made, no other changes should b=
-e made to
-> > +      the patch itself. Ideally all of these changes will be in a merg=
-e commit,
-> > +      and not the commit itself, but that is not always possible.
->=20
-> I have never been a maintainer in public spaces, and in private spaces I
-> enforce a strict rebase policy so I don't have merge commits ever. I
-> wouldn't know what this means (but maybe custodians do, and that's the mo=
-st
-> important as this isn't something contributors need to know?). How are we
-> supposed to do that? Note also that not everybody know that git log -c (or
-> --cc? I use -c but it seems to be showing the diff of the whole merge and
-> not necessarily the conflicts?) needs to be used to see the content of a =
-git
-> merge commit (it won't show with git log -p).
-
-For both of these points, an update talking about b4 from the custodian
-perspective, to mirror how doc/develop/codingstyle.rst talks about it
-=66rom the submitter point of view, is needed. Sending out "applied your
-patch" emails without b4 was a pain, but "b4 ty -S -t 1" is easy.
-Similarly, a submitter writing a cover letter and custodian using a
-merge commit (like say commit 476c59be74c2eadcd32fc3032fb7ac362f02e441
-in master) is done with "b4 shazam -SM message-id" and both easy and
-provides more in-tree history.
-
-> Can we provide an example here of a good merge commit that highlights what
-> is expected from custodians?
->=20
-> I cannot really comment on whether this will help custodians do the right
-> thing as I am no custodian.
->=20
-> We need to set the expectations for contributors as well.
->=20
-> """
-> Trivial fixes may be applied by custodians when merging your patches,
-> sometimes without public notice. The operated changes are explicitly list=
-ed
-> at the end of the commit log or in a merge commit by the custodian.
-> """
->=20
-> or something like that? I'm wondering where we should put this though. ht=
-tps://docs.u-boot.org/en/latest/develop/process.html#review-process-git-tags
-> or https://docs.u-boot.org/en/latest/develop/sending_patches.html? I think
-> this kind of change should be in the same commit (or one that follows aft=
-er,
-> but is done now).
->=20
-> We can have some words about proper etiquette too? Like avoiding big seri=
-es,
-> waiting a bit between versions, not silently ignoring previous reviews for
-> newer versions (you can disagree but you need to speak your mind publicly
-> and "resolve the conflict" before sending a newer version (or at the very
-> least say why something wasn't done in the cover-letter or under the ---
-> section in a patch), waiting at least a week (more?) to send a ping on yet
-> unreviewed patches, ... That's what's coming to mind right now, there's
-> probably more to add? This is a separate topic and I don't want this to b=
-e a
-> blocker for this here.
-
-This is also another long outstanding need, that's not been forgotten.
-
---=20
+[1/4] panel: Add missing comment for the timing argument
+      commit: 60f5170c1fe2a438e36b71eea0237ca166e6ef23
+[2/4] panel: Lightweight support of get_modes()
+      commit: 36829e951bfeddb7b2e9eaa93223d646577fcc02
+[3/4] video: simple_panel: Add tfc_s9700rtwv43tr_01b
+      commit: fe2547b78d0eb6b1a2157c735d92bf2a55dc0443
+[4/4] video: ti: am335x: Support OF graph
+      commit: de3f687e6e85ab07be4488a2ccfb5077da121652
+-- 
 Tom
 
---KHRf8phLsStO7gJ+
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaWp18QAKCRAr4qD1Cr/k
-ChscAPwNhvaMZKKeXdL2x/J40INQimu43Z0UAhCS8a74oqozIAD/RgelM2fZw61d
-1qDT6pZjGUBpS1+4zaR8msADyZKzyQI=
-=lIZW
------END PGP SIGNATURE-----
-
---KHRf8phLsStO7gJ+--
