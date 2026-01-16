@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4836FC982EE
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:23:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63DACC982F0
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 18:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB1AD83935;
-	Fri, 16 Jan 2026 19:23:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E31BA83952;
+	Fri, 16 Jan 2026 19:23:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kbT61GkS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Awmyq+bm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1DF883956; Fri, 16 Jan 2026 19:23:42 +0100 (CET)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
+ id 4634E83956; Fri, 16 Jan 2026 19:23:43 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A82D8367F
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:23:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AF83838A5
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 19:23:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7cfcc131958so1522205a34.0
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:23:40 -0800 (PST)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7cfd53a8c31so1544641a34.1
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 10:23:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768587819; x=1769192619; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OL9WwtsmAIhxy7eVwFBz7qc7Fa7IwOWy1jx0Am9FRzM=;
- b=kbT61GkSFUmRyH7o7iWOsfPc/B+qsm4+BWArwd1HWI/ZbtiYElcGprSjXnrb5/sODb
- HBGhtGGgbrVtu5lJdccMnv06s5xpSX/0bkDIQzkgwSCd26XCJGMtwfYnKWcj+E+axTQi
- 7bwZ0iv+8TDRvd2jzbxrhf/O/QsJaiQAhdT3c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768587819; x=1769192619;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1768587820; x=1769192620; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OL9WwtsmAIhxy7eVwFBz7qc7Fa7IwOWy1jx0Am9FRzM=;
- b=tFKjPa80kL8iUQ5oRD9DawYaMxnmQYXWH5QLS5lTzwVMgFGHCB+pMDFrZAP1g6WiF/
- SMOgQfRAGACiQGLEUOQWNubjxY6v/Bw/lkpfD2lFj78zB7941C1gDfE7lsJbj5p0Csx/
- RHyUMZUk+325mbgwH+daVFdq+3uGBjx3qlwCPsNGVOS5dVGgI8lNyFnSp48C94PHTL+M
- jWHIw/oYmhEpff1spDSQXs89t7P/oMcCFoXBj/lphzOHGm3N6nll+DjnqTAa6OVCXPKJ
- JhLPwcdmtp18L2QJEsJfk8AMN3wulEVIIfd0vw6g9mO9peLaVMV+sM/28Zhc16T5nvD2
- hgBA==
-X-Gm-Message-State: AOJu0YxeOg0Lxgf68gtNwioIXw3hfFIhBp+ZhwCcRrmaMLxbVsAWKjVe
- 3EGfFLCUDthkqOtOJzVH1NsWdXSanjbai6ipnsWBeFeCgiQ8EzhQPnuDUO/jPssP5u+Lt4JOfAt
- vRHw3AIw=
-X-Gm-Gg: AY/fxX40F6v5h+MjxLsLvyobnnQKaHPaGWI8B2bg5/xJKHbb/XtcuKcGmWEK71pJ4Gc
- Z4kIySPQMXEcxiAOCPbMMxRyRuEStgw2N9jDYkpkF6FKkPB1C8m0vb0a+CJ3cStald5/MPq82TB
- mFaQaPm+sNwz07i3XBa37rlIC2BCTn9ynGXTRL3ao4YHmNm2OWAaJnci/rmDloos0BwFCtlRMH3
- icgYcofgj4aEuVkvvANSF8PsO0cgVkL9OJACHOJvNrsC79XzAyYR0SwlmN2QyRl/R0d9Oi1hnYn
- Dl56wqTlwnBuZEHHnQkzhYeR/A0mUJ/oLczLH+5mJYNsaMAiYa2EuLaUQsqQ5K5s/A/vzCN4hCM
- QfKoTnhxeIEnBpJyZfU2vwS8w430IdJtdXYahAjltHa7EYifV/v3sziLjX4yt6XFc+RXFty2Nqa
- G8XXKfUcREnHxFU2zIZfwOB9Vomvb9fpLrzha866eLDQ6N7i3WidSkhbZACq79b5I4lzR28MVdb
- Bw1LdHHbGO4Rsu3MXI+Ho4rN498yWTnM2qov3YMVQ==
-X-Received: by 2002:a9d:77da:0:b0:7cf:e539:dcf0 with SMTP id
- 46e09a7af769-7cfe539e971mr848099a34.10.1768587819027; 
+ bh=c+Gdpebc1QkyzNIS/yJFnF4ByiQVtKx4D8+CUIWYeFU=;
+ b=Awmyq+bmF3AZoTZ0DSfbYO9Fj+WVFH4IK9yZhzTVOinPmQjsTypie+F1qdpgwPuIWR
+ Rtu1AJK15hIDAxilJsRKNjrspeB+HggoIS5+sxMK8EU50hUciXaYjHBmbFYM6IjTQjdM
+ qOrmiKgsTOZ128Q4me8J/AWuKgcVMHixpFLD0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768587820; x=1769192620;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=c+Gdpebc1QkyzNIS/yJFnF4ByiQVtKx4D8+CUIWYeFU=;
+ b=cUwVFKXfzDbMqJBGq4IShnDDlgb78UVDIKgTjdOMiwSTmDfkF9goBaFrffAxBvT23S
+ BmzV+Zk0XRLH/QxejC2lN8wU1JiWidb6j+5I9EbcC8/khSvAbhCL0RJCGWa5VFehzbyo
+ YZ8QlMlnYh+PbHKZAd0IrJZMFbGf+aNCKdMOho4Bh/FzhkPiiUa/ZbYWqpEpuQfT6ZGU
+ pjvYXwdbrZdjSslu+6l8HeZ7tgCMrJBOwjMGLS5l3ogiVx7t2YZyLti5Fvdt7R3ZEF7m
+ LQgQNoEPJBn1l7m8k9dH4CmlHCJp6aVwYW5tWq63yirlfm0HLB+x+jFD9VjW08SYZGxj
+ AZyA==
+X-Gm-Message-State: AOJu0Yye3mZ3WpDAtG6S7hBYE/5tQWBLTouHcLdpKEnMRcIK4aX4vcf5
+ vDEo1cR3EKIdagZdFlKQQWSCpLl4Fmd/i9Sl+vdx9G9kslN8anO/YVLCJXJfd/CDYsNSJa+DT4q
+ IzLAxmv8=
+X-Gm-Gg: AY/fxX4gmkfs4l8VG/4CvuESF93dWrXWyS3jaWLkDx3hohrzr129MxkShsveydO0Zra
+ 2GOAsOCtHQcvyhcYZ//odFlisOt7HI+16DbRvzuDAeBOm2H0gm9bXHI0rYRwIt6bF0wiz8WSe2E
+ vHga7HnUBODD+WbeUU5bEtO0GqY4EHOwPgoN8qr7KqHImgrJe7Op0mWQ52kAfFpVBwbYDPzxldE
+ vSt9/tMl+xcIKxhgDKrslExI3vtu92SZ9vqAcWzWoTCGI8aLa6w19fm8Kn0xH2VfIjgKYi1ijIY
+ uCeQQM5oTy52Gx90a+D3kIuoZLeZ30gB+Dgb+k39N8ExFgKw59FpPoUEMHcYDPTHJs83JCitNa3
+ lu0w9pSz5k6hQ5x4GgLDlPLFb4IDNfQoN8pZ2rEnAikF0v7EGuiGkYVeacALzRsagdriXR9tmZl
+ rmoZGTAHnrwpzaeRK1RcYqifNSEBSrVl4CySKFlKMK9O8+k2iBs3vx4yWDUZibaxQI8+7dbemz5
+ luOqh9Sur0Fsae2b8UT6BH7GXDfFf/keh4zJBAMsw==
+X-Received: by 2002:a9d:4c84:0:b0:7cf:c8c4:366e with SMTP id
+ 46e09a7af769-7cfd45814ecmr3350755a34.3.1768587819839; 
  Fri, 16 Jan 2026 10:23:39 -0800 (PST)
 Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf28ef44sm2152994a34.18.2026.01.16.10.23.38
+ 46e09a7af769-7cfdf28ef44sm2152994a34.18.2026.01.16.10.23.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 10:23:38 -0800 (PST)
+ Fri, 16 Jan 2026 10:23:39 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, E Shattow <e@freeshell.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 0/3] doc: develop: process: Clarify some patch editing
- expectations
-Date: Fri, 16 Jan 2026 12:16:47 -0600
-Message-ID: <20260116182335.4081828-1-trini@konsulko.com>
+Subject: [PATCH v2 1/3] doc: develop: process: Move the existing block about
+ patch application
+Date: Fri, 16 Jan 2026 12:16:48 -0600
+Message-ID: <20260116182335.4081828-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260116182335.4081828-1-trini@konsulko.com>
+References: <20260116182335.4081828-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,21 +98,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey all,
+We have a long block about the expectations and feedback about a patch
+applying, or not, as part of the Custodian workflow. Move this to the
+Custodians section from the Workflow of a custodian section.
 
-This is a v2 of
-https://lore.kernel.org/u-boot/20260109172905.1446923-1-trini@konsulko.com/
-where I've rewritten everything from scratch.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- New patch.
+---
+ doc/develop/process.rst | 22 +++++++++++++---------
+ 1 file changed, 13 insertions(+), 9 deletions(-)
 
-The goal of this series is to make it clear that custodians are only
-supposed to make very limited changes to patches prior to merging. This
-ends up being a small series in that with the current structure of the
-document there's not a good place to do that. So this changes the
-current document to have the "workflow" section refer back to the
-custodian section when discussing the state of a patch itself, converts
-what we have today to bullet points and then states the limited
-circumstances where custodians should make in-line edits while applying.
-
+diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+index 4bfbf0eb9c63..81e1aa7e34db 100644
+--- a/doc/develop/process.rst
++++ b/doc/develop/process.rst
+@@ -143,6 +143,17 @@ reworked/resubmitted, or if it was rejected. However, if a submitter
+ feels it has been too long since posting their patch and not received
+ any feedback, it is OK to follow-up and ask.
+ 
++Another form of feedback is about applying the patch itself to the
++source tree.  The custodian is expected to put in a "best effort" if a
++patch does not apply cleanly, but can be made to apply still. It is up
++to the custodian to decide how recent of a commit the patch must be
++against. It is acceptable to request patches against the last officially
++released version of U-Boot or newer. Of course a custodian can also
++accept patches against older code. It can be difficult to find the
++correct balance between putting too much work on the custodian or too
++much work on an individual submitting a patch when something does not
++apply cleanly.
++
+ Review Process, Git Tags
+ ------------------------
+ 
+@@ -236,15 +247,8 @@ like this:
+ 
+    #. U-Boot Philosophy, as documented in :doc:`designprinciples`.
+ 
+-   #. Applies cleanly to the source tree.  The custodian is expected to put in
+-      a "best effort" if a patch does not apply cleanly, but can be made to apply
+-      still.  It is up to the custodian to decide how recent of a commit the
+-      patch must be against.  It is acceptable to request patches against the
+-      last officially released version of U-Boot or newer.  Of course a
+-      custodian can also accept patches against older code.  It can be
+-      difficult to find the correct balance between putting too much work on
+-      the custodian or too much work on an individual submitting a patch when
+-      something does not apply cleanly.
++   #. Can be applied easily to the source tree, as documented in the
++      :ref:`custodians` section.
+ 
+    #. Passes :doc:`ci_testing` as this checks for new warnings and other issues.
+ 
 -- 
-Tom
+2.43.0
 
