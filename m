@@ -4,63 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 796E0C982DB
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 16:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F953C982DB
+	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 17:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAEE883015;
-	Fri, 16 Jan 2026 17:33:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C6D9B82BF2;
+	Fri, 16 Jan 2026 18:05:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PW8dkuNs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LPrn0+yv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A758309A; Fri, 16 Jan 2026 17:33:17 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFB7483015; Fri, 16 Jan 2026 18:05:40 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D42C82BF2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 17:33:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 172A48003E
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 18:05:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dt54n0Pzcz9t9Z;
- Fri, 16 Jan 2026 17:33:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768581193;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XoaKmOYElTjwM/yBAoU+MSlXFAOitdXCQlX5vo4VqhE=;
- b=PW8dkuNsh1Nf0IwUYW5SOGIAzISNLnOLMczonFSULtqQnKF9HZKMlLjGyd7AT1jCx/14/a
- TwSKRKtoL2RRgFG66NKcef0OrXT/Q2fAeHmTk9FleiX1YIqqsRs54ZeZ3z9MktG+jXKGJP
- 6nFi9MohvUxfV21UQy+Zg/ix2L6BB21i4n64NVxMRwaw+dEHZfzWKZRgKHNWISOjxh6aCL
- hDuLJMqISBLxIwz3qYdq+CjGo4BMVtrQfBN0oKhHfWhjryRDo9bb/9g9c+SReBaUJb0fWH
- KnJNECviFKMcf5vCQR9w/HEsJ/1zB7Mqyzb3MGtwECHhY9VsWDwHx66Y7Z3q3w==
-Message-ID: <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
-Date: Fri, 16 Jan 2026 17:33:09 +0100
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b8765b7f4c0so379290566b.0
+ for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 09:05:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768583137; x=1769187937; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=P8E/e9F8LUE0tzkUUNaGX6LTIPU+hDWYmvBCp698ymE=;
+ b=LPrn0+yvY9/C+45WnqMqCSr1Hb6CzsuXJ7AtQjxQCAaStUi6a5IfyFGxpog6x92Rui
+ g/7qS13cWf8wRvSKOURv3VmqJC8Xv4sVFqx0JbzbrkcCU3U2YCj4UOJ+Vgq8TVhT01Av
+ B1400Lyb6aKgBC06GFDtrpZCfN1sVe6YQn88v9cHMCGqU4DP4k6moJJre75nBp/u8s/F
+ 4PeLav9xhmwuCcuGiNisJ2HYJxU7FwFy/DJHaiQAtsnF5xHocqYCexgo8Tha7FZ0E1fy
+ RtCVIrLdZqa+6m3s3PUhAlE06xYFLkM3VLJG0xpMYy+rwC88VH1oV7nbpxg9eauBCWuw
+ OtOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768583137; x=1769187937;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P8E/e9F8LUE0tzkUUNaGX6LTIPU+hDWYmvBCp698ymE=;
+ b=gxi+JDm5cbeEjBhJeR0jWxYK4iDhji0TdKuJWcJyiuVhJRXvs9w04qAG2B/ZVg30Qh
+ hRTxtwYJGQvVAvIyoZ1cC2IMF7BRVHOHQvFnSzuWCg4fMBN0MTlM0WEhOZgfYrk1WTUj
+ rAHd/E1sKY0eCMQMgAo4fOUC3l1WMwLZ4SyWj5s2mrboDc2Bft6oO+BYf8wE3niDPoeB
+ tBdv+j+DsTwb+eYxy7QN4LUmTDC7yXxOoFD6uDnVRojJdrV1c62Qm/JYKXJjh4Adrp3Q
+ pjprxfVLEZ9eYcJxRNPFvRi144GCgtrMIW4IpKRBGRbOCBI53BGmAeln4yq26c8GBISS
+ yyDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbTVJQWOjQXbxQC1KOt/x+6916FrMKBMh6Q816YJXlqnLG5JVwA/DKt7taSjVds8HISiADY+o=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywp0t4htg9DleOsgCDIo4+aIyOAIwPz5oqvoK+fBrWiadjsL7u7
+ D26C81p871oSxLI1paeNdKVcDYAD1/o5XkoxWnr/eYNzTVoTEWH4S9XdLVkz7Dvmj6Q=
+X-Gm-Gg: AY/fxX4MAHDSPEEwwjgcwhiTleH6YxQCN1YsiqYlJO9dUo4EsvWlRpAmCnXvHUbTMTV
+ cyfcdznJfers5oDN13V7qbIGOIxkJkE7RNGsSr4rDHx5914FFnnFnexyiZI1A7YwrMkumv42VSL
+ iZmGzALEIJlINQKWE6WXydkvNq5DKr8My8Vi5gxovMRr1zR6uS4M//1Bls2X870Fm9EmPh57+wG
+ sL+cMwo2o0D8dCOGyTTBroNnnDPV7OG+1HEfh+/HHXFP7Ca9eXkEYI3e/et1jpoGyW5iEtMx0BB
+ j4qn+HduIYJO9d9YeqftoCDIShFGomly7YaviLbYHXHz9NvDvBMtQZWUJYLBAJkpQbdHOz2mcrp
+ vYK19Zwx8C5hFFEVGY+/VAALVk3GzgV7HhIZstEOUCqW/Hz0Vdfy56o7c52J5ZZWnLWUkT3Wzs9
+ 9O+YXLTvJCTsfAlqMnn/o+alXRm/kKoSWyE+c8nDiqLWM4Rf8kCzvI
+X-Received: by 2002:a17:906:7304:b0:b83:95ca:589b with SMTP id
+ a640c23a62f3a-b8792d68202mr284365066b.10.1768583137321; 
+ Fri, 16 Jan 2026 09:05:37 -0800 (PST)
+Received: from [192.168.1.160] (p5b29e30b.dip0.t-ipconnect.de. [91.41.227.11])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8795168b2esm302151366b.17.2026.01.16.09.05.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Jan 2026 09:05:36 -0800 (PST)
+Message-ID: <69c4d09d-fedf-4940-b4de-1cc824b31e7b@linaro.org>
+Date: Fri, 16 Jan 2026 18:05:35 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
- v1.7.2-35-g52f07dcca47c
-To: Jamie.Gibbons@microchip.com, trini@konsulko.com
-Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
- Valentina.FernandezAlanis@microchip.com
-References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
- <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] usb: common: default dr_mode to OTG when not set
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20260114-casey-usb-role-switch-v1-0-fb7a626466b9@linaro.org>
+ <20260114-casey-usb-role-switch-v1-1-fb7a626466b9@linaro.org>
+ <875x93fd54.fsf@kernel.org> <877btheo4b.fsf@kernel.org>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <877btheo4b.fsf@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 0f3fcd6fbc9be57659a
-X-MBO-RS-META: 6t5inczz3ssja94jj8iutqy6fc4sc4t4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,99 +108,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/16/26 5:13 PM, Jamie.Gibbons@microchip.com wrote:
-> Hi Tom, Marek,
-> On Tue, 2025-12-02 at 20:32 +0100, Marek Vasut wrote:
->> Synchronize local copy of DTC with Linux 6.17 . This includes the
->> following picked and squashed commits from Linux kernel. The squash
->> was necessary, since the DTC here contains changes which were also
->> part of DTC in Linux alraedy, and the squash helped resolve those
->> without going back and forth with the changes.
->>
->> The following commits from Linux are picked:
->>
->> 8f324cd712df7 # scripts/dtc: consolidate include path options in
->> Makefile
->> b5b3d9b63b0ee # scripts/dtc: Add yamltree.c to dtc sources
->> 7d97a76f226d6 # scripts/dtc: Update to upstream version v1.4.7-14-
->> gc86da84d30e4
->> ea6f243be74e5 # scripts/dtc: Update to upstream version v1.4.7-57-
->> gf267e674d145
->> 02d435d4eccd8 # scripts/dtc: Update to upstream version v1.5.0-23-
->> g87963ee20693
->> 6e321b7637396 # scripts/dtc: Update to upstream version v1.5.0-30-
->> g702c1b6c0e73
->> 9f19ec91a7a35 # scripts/dtc: dtx_diff - add color output support
->> 8287d642f38d1 # scripts/dtc: Update to upstream version v1.5.1-22-
->> gc40aeb60b47a
->> 4c52deef9225d # scripts/dtc: Revert "yamltree: Ensure consistent
->> bracketing of properties with phandles"
->> 5d3827e1452ed # scripts/dtc: Remove unused makefile fragments
->> 40dd266887654 # scripts/dtc: Update to upstream version v1.6.0-2-
->> g87a656ae5ff9
->> 8d4cf6b6acb59 # scripts/dtc: use pkg-config to include <yaml.h> in
->> non-standard path
->> b9bf9ace5ae90 # scripts/dtc: Update to upstream version v1.6.0-11-
->> g9d7888cbf19c
->> 69a883b6f5ac0 # scripts/dtc: dtx_diff - make help text formatting
->> consistent
->> 8f829108b8aed # scripts/dtc: only append to HOST_EXTRACFLAGS instead
->> of overwriting
->> b39b4342ac495 # scripts/dtc: Update to upstream version v1.6.0-31-
->> gcbca977ea121
->> 93c6424c486b3 # scripts: dtc: Fetch fdtoverlay.c from external DTC
->> project
->> 0dd574a1d75c3 # scripts/dtc: Update to upstream version v1.6.0-51-
->> g183df9e9c2b9
->> ec38b5df8a231 # scripts: dtc: Build fdtoverlay tool
->> a0c8c431411f5 # scripts: dtc: Remove the unused fdtdump.c file
->> e7dc653d4e890 # scripts/dtc: Add missing fdtoverlay to gitignore
->> d2bf5d2e3f09c # scripts/dtc: Update to upstream version v1.6.1-19-
->> g0a3a9d3449c8
->> a60878f5532d0 # scripts/dtc: dtx_diff: remove broken example from help
->> text
->> 8b739d8658a9b # scripts/dtc: Call pkg-config POSIXly correct
->> b6eeafa67df00 # scripts/dtc: Update to upstream version v1.6.1-63-
->> g55778a03df61
->> f96cc4c787588 # scripts/dtc: Update to upstream version v1.6.1-66-
->> gabbd523bae6e
->> 09ab9c092ef2b # scripts/dtc: Update to upstream version v1.7.0-93-
->> g1df7b047fe43
->> ded8a5a498f2d # scripts/dtc: Update to upstream version v1.7.0-95-
->> gbcd02b523429
->> ee6ff6fca7e71 # scripts/dtc: Update to upstream version v1.7.2-35-
->> g52f07dcca47c
->>
->> This also includes forward port of U-Boot commit
->> e8c2d25845c7 ("libfdt: Revert 6dcb8ba4 from upstream libfdt")
->> to avoid binary size growth.
->>
-> 
-> During testing I discovered the following error on Microchip's PolarFire
-> SoC Icicle kit. I found it during a bisect between the v2026.01 tag and
-> the master branch while looking to solve another issue. With these other
-> issues solved I am left with this one still on master and I am looking
-> for some help.
-> 
-> The error is: failed on fdt_open_into for DTO, i.e. overlay application
-> fdt error. This was introduced by 0535e46d55d scripts/dtc: Update to
-> upstream version v1.7.2-35-g52f07dcca47c, i.e. this patch. Please see
-> the attached log which includes a `printenv` attached.
-Does this fix your problem ?
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 2d040e38d97..1163e837d7e 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2491,7 +2491,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
-ulong addr,
-                 ov = map_sysmem(ovload, ovlen);
 
-                 ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
--               ovcopy = malloc(ovcopylen);
-+               ovcopy = memalign(8, ovcopylen);
-                 if (!ovcopy) {
-                         printf("failed to duplicate DTO before 
-application\n");
-                         fdt_noffset = -ENOMEM;
+On 1/16/26 13:30, Mattijs Korpershoek wrote:
+> On Thu, Jan 15, 2026 at 10:17, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+> 
+>> Hi Casey,
+>>
+>> Thank you for the patch.
+>>
+>> On Wed, Jan 14, 2026 at 15:13, Casey Connolly <casey.connolly@linaro.org> wrote:
+>>
+>>> DT bindings dictate that dr_mode being unset on a DRD capable USB
+>>
+>> For the curious, this is defined in https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/usb/usb-drd.yaml#n23
+>>
+>>> controller means we should default to OTG mode. Adjust usb_get_dr_mode()
+>>> to reflect this.
+>>>
+>>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>>> ---
+>>>   drivers/usb/common/common.c | 3 ++-
+>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
+>>> index 13e9a61072a9..e3bd7339e68e 100644
+>>> --- a/drivers/usb/common/common.c
+>>> +++ b/drivers/usb/common/common.c
+>>> @@ -29,9 +29,10 @@ enum usb_dr_mode usb_get_dr_mode(ofnode node)
+>>>   
+>>>   	dr_mode = ofnode_read_string(node, "dr_mode");
+>>>   	if (!dr_mode) {
+>>>   		pr_debug("usb dr_mode not found\n");
+>>> -		return USB_DR_MODE_UNKNOWN;
+>>> +		/* Default to OTG mode as per DT bindings */
+>>
+>> Nitpick: can we change the comment to:
+>> /* Default to OTG mode as per devicetree/bindings/usb/usb-drd.yaml */
+>>
+>> This tells the same but is more precise and is imho, a more helpful
+>> comment.
+>>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> 
+> Also, I just noticed, but there is another similar change here:
+> https://lore.kernel.org/all/20260108-usb-dwc3-exynos7870-v3-1-343fa1e81e48@disroot.org/
+> 
+> Casey, can you see if the above is useful to you?
+
+Oh yep, same patch basically. I'll drop my version in the next revision.
+
+> 
+>>
+>>
+>>> +		return USB_DR_MODE_OTG;
+>>>   	}
+>>>   
+>>>   	for (i = 0; i < ARRAY_SIZE(usb_dr_modes); i++)
+>>>   		if (!strcmp(dr_mode, usb_dr_modes[i]))
+>>>
+>>> -- 
+>>> 2.51.0
 
