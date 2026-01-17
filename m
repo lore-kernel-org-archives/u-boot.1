@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F353CD4A5F4
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BECF1C9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:47:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7608D8397A;
+	by phobos.denx.de (Postfix) with ESMTP id B8DAD839B1;
 	Sun, 18 Jan 2026 14:47:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l6Mu2wms";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DaFY6V2G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0E84833C6; Sat, 17 Jan 2026 20:04:02 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id F0DF8833C6; Sat, 17 Jan 2026 20:04:40 +0100 (CET)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A18682BF2
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:04:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B80A582BF2
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:04:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-88a367a1dbbso51247976d6.0
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:04:00 -0800 (PST)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-5013d163e2fso33678821cf.0
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:04:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768676639; x=1769281439; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768676677; x=1769281477; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iAYL9YGvJVkbl4OZqFJclC/51QxXGO4KwvTmruem3sc=;
- b=l6Mu2wmsz90ZFA1YS8GO+gUKgG2Nargxq73fUNd3oo64rUhcieZ+5YBJzxlLwK+miX
- uEs+bnAhQrWWh4+qXSdUM/tTIBTOfJKjcUrUwzpfL2mxrRSdfGIpmswor0q22N4lu0lV
- Xt5mYsk6S1VwB7EDpadCmLYLh6p+pHFkTc+yUoiO7wtI/hAk/ODAqxlKKCX/D2pI3W1a
- goQ8D68YVPRyFWTNFAKv5kIYDsM/zag9606bdnEUgSTe5lBgoFhtnBjU9lM158Q5cgyB
- 1Wt28wzKTjhdxGwVWAPEIZo8PbhFKhQFNIq5EjTX/CdylU+Zqfl5xXeoAVykOtZeaXPf
- WEcg==
+ bh=sYGCxea15VhkkXktpl9WRsG8WUBvnJe4DRP480Ld9uM=;
+ b=DaFY6V2G2Ly7K7Ua2us7rqyVdYJsEmYsENn+qigJzU795JSViJggi+t5Oas3M7eOxl
+ 1/vTjwLaJ5O0AXaqCsVPVVQbrTDARBqpN5hFw3yMo6uPxujq6J5+lkhyUrKzo8QRJw+2
+ /IRa4wuCOR2/qZbeBWfitAOZiqYmcODS7i+mBE7BxRF2WfqQaj++642aGWiszWovI5RK
+ Unzh1/5+Fk+19rwhJeoFX2C7ts4KMAEeu/aPR3DmpgfIl9dH3CKSewEY84H5B7dWZvMx
+ Dc+nbLwABBjEI597/5d1JTi5EEDmzkDCvdkK4a3eMYUnUHEwIm4dX1fB1nZmAQiKZOpv
+ d/Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768676639; x=1769281439;
+ d=1e100.net; s=20230601; t=1768676677; x=1769281477;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=iAYL9YGvJVkbl4OZqFJclC/51QxXGO4KwvTmruem3sc=;
- b=A0XSRTpF4oVdw/j4Jk1VU2SGJHrJJhr/In9K4gOflyLt1b0YyEGUoM4Y0eKlsZrwBp
- 8SqGuq5ZWZocc/V+5kWbJWHzYrxq9vFy2G3shWnZHz7j6wfjNi1BYa9G6FqZHiOxEgMU
- bRGzG0pSkeQNT+DsCw4snbePxGx8CKVem4d8T+f7UHee92H9EqwCJhWT4RM8rBGUw8YU
- MrlTv9Tb94+kNMT4K0uytfNN9O2jU0te5dCOBhBn61vcbb1bFWGsvLr1rDeGOr0/f/zU
- /UWRiE+IgG9AOzBbmGzCPt6mRgFrqiXik+7bAmz3x+nl8nmfbY/j9kOc2rR2mRXPh0rt
- uYYQ==
-X-Gm-Message-State: AOJu0YzNHXfPqr3vAMjukdcBWHgvfIkjjSj80XLXoxmlSr6gVW02ZhL4
- ezFyD28GgmCr/Wmc5jIDtZqhe5unEnRXeQVlPYHkPI0+ONOyV6zVOHCTz7GAmA==
-X-Gm-Gg: AY/fxX6Cy5rXigOD+x2EGTk7GtRjD2VOBenHf88N6EqC/GbZn3D8PiauZoy9sqELcbn
- rpR462/J9dC6W/l7hX0tP/0wINJHSkZkKKrkwf7VMmzcxlEbPbc/6JqxWHu1oiB3Q6blkdzpiFg
- u2EIvUoSZgySDYkCv4DgYbH9XhKTVRZrqM/Zd9QvatmAZzv4s49KzPHfk+cRy73eAdTi/Fvw0AM
- +k1Gp61mbZyh7zLgu0ve3J4811BDrLl3ByGdth7k4sMU+CL+2Ye6oa7S8TWpBaHGL5juQshXWuA
- E6IbAs/SH+eiFt8QUHWA5SAwIYbwYB4fK6foWYBZuY1f4D88AE8GIByXrC/8xbP8oO/OTXi3QEU
- n9KSMru7/HF1BtIoLwQJV1MUnUFpGps4Ryfm9CYBh12UwIMO2ZGMgaULojIM/dm/3X2LbPTubbc
- aWf5rUtXQv7eOQkpua4upr2NlCLmNdkRY8g0rhYMyahR/l0LWrOLi5KMz1nGGUI0w5syg1tVg=
-X-Received: by 2002:ac8:5713:0:b0:4f1:b9b4:6a7a with SMTP id
- d75a77b69052e-502a1e5d147mr90226421cf.27.1768676638767; 
- Sat, 17 Jan 2026 11:03:58 -0800 (PST)
+ bh=sYGCxea15VhkkXktpl9WRsG8WUBvnJe4DRP480Ld9uM=;
+ b=lD+95LqWe0iDYjypiGT//zzZwii3F3akscy9PJTEvoy5yYKHhYn6liZo29hUiL5h4X
+ r6OV5S2QxJ/qE2Z1aLdipEs7LUeROYIGUUt/q9K3XNvV4nTdrid7LMPxmLw9mzWHMXXE
+ xCE0XCpSRPYncy67ulKCnD8Zd5JELLUhnOsIP4n9UpcElg7tFVLBuIe+fkgYvDn5ROcy
+ Kjuy4iJ9ns02U+ZeT3vG4a6Igmi3zSzhGdegmwQiQI5HM5Om+IKkvdHha7U/wgS6g+vR
+ CJ91QVgFm0JPAr1VgdrXetlxpw5NqiotpfkXbihrAS6fTAFC10SjCZ8OLJYmtn2BKtY+
+ FfyQ==
+X-Gm-Message-State: AOJu0Yxot6mzUFBGZb6T10bx0/Uajb4lebLFxMzZnyt2kDau65wuF/j2
+ qwmHwUzdoG2XkburqDIxyVrxWjlNJ0deL5QIRwppvliCTvjjC79UBt+5PfnmtA==
+X-Gm-Gg: AY/fxX5reuebRWObdeYhem+T2w8DucMgVeyzOf2X5kNajX27KE3WQdaHoIzR+Q+FKZ+
+ 76sNUz0X3LGfEP1aSsC78sZ2SMUxg4f2SHM9h8j7JUrdX6mF0QdWDiID3nCVspb6PWovhksr1uK
+ DhbRm5ANCak1fwaV7Chkw1cUKFhVY0FCBcBeJ/s5hilD3Q/EXVY7kK49YkRyPfs6LNJvrvJqIzx
+ Kc2NYiRfvib6JSIpCu4nOVOCvxGEfRX62057kEpkMJp8OZ+1dq1aZeSqqY15d+XlHwJxDZM2fpf
+ YGD1xKrAkCkg1FRhdLqcOtV+pf2kVvV72aUaLzqWYVRXwyrV/s78pf3j/OddqFD0pxT8YGF8d1p
+ PvVe2iYqLxcoGrkf9xhnlCQprJDdw3Kqo2BuLItZ6cu/UufAC9W//TmRJyk5Ll/FOU5CKtbwrxR
+ p7PUldOm5jVJziP7vGiel+k1y7tBydblbWvOJitD+zWfxiiI9o1/gWp6YDmVt8TjI81ibcxXI=
+X-Received: by 2002:a05:622a:1a9b:b0:501:5162:a9c with SMTP id
+ d75a77b69052e-502a1f3289dmr98875951cf.57.1768676677301; 
+ Sat, 17 Jan 2026 11:04:37 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.03.55
+ d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.04.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Jan 2026 11:03:58 -0800 (PST)
+ Sat, 17 Jan 2026 11:04:36 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
@@ -77,40 +77,43 @@ Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Heiko Schocher <hs@nabladev.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
- Randolph Sheng-Kai Lin <randolph@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Conor Dooley <conor.dooley@microchip.com>,
  Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
  Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Michal Simek <michal.simek@amd.com>,
  Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- Michal Simek <michal.simek@amd.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Yixun Lan <dlan@gentoo.org>, Sam Protsenko <semen.protsenko@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Aniket Limaye <a-limaye@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
  Angelo Dureghello <angelo.dureghello@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, Aniket Limaye <a-limaye@ti.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Justin Swartz <justin.swartz@risingedge.co.za>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
- Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Samuel Holland <samuel@sholland.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>, Anshul Dalal <anshuld@ti.com>,
  Justin Klaassen <justin@tidylabs.net>,
+ Samuel Holland <samuel@sholland.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andre Przywara <andre.przywara@arm.com>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Heiko Stuebner <heiko@sntech.de>, Joseph Chen <chenjh@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>
-Subject: [PATCH 02/17] spacemit: k1: enable SPL with debug UART
-Date: Sat, 17 Jan 2026 14:01:36 -0500
-Message-Id: <20260117190231.977686-3-raymondmaoca@gmail.com>
+ Elaine Zhang <zhangqing@rock-chips.com>,
+ Joseph Chen <chenjh@rock-chips.com>
+Subject: [PATCH 03/17] configs: k1: enable early timer support
+Date: Sat, 17 Jan 2026 14:01:37 -0500
+Message-Id: <20260117190231.977686-4-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260117190231.977686-1-raymondmaoca@gmail.com>
 References: <20260117190231.977686-1-raymondmaoca@gmail.com>
@@ -135,190 +138,53 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Add SPL support featuring debug UART output for early boot
-diagnostics on K1 SoC.
+Enable CONFIG_TIMER_EARLY to allow udelay() calls during
+early initialization phases. This is required for proper
+timing operations before the full timer driver is available.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- arch/riscv/cpu/k1/Kconfig  |  2 ++
- arch/riscv/dts/Makefile    |  1 +
- arch/riscv/dts/k1-spl.dts  | 26 ++++++++++++++++++++++++++
- arch/riscv/dts/k1.dtsi     |  2 +-
- board/spacemit/k1/Makefile |  2 ++
- board/spacemit/k1/spl.c    | 24 ++++++++++++++++++++++++
- configs/k1_defconfig       | 21 ++++++++++++++++++++-
- include/configs/k1.h       |  2 ++
- 8 files changed, 78 insertions(+), 2 deletions(-)
- create mode 100644 arch/riscv/dts/k1-spl.dts
- create mode 100644 board/spacemit/k1/spl.c
+ configs/k1_defconfig | 2 ++
+ include/configs/k1.h | 4 ++++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/arch/riscv/cpu/k1/Kconfig b/arch/riscv/cpu/k1/Kconfig
-index 4b621158334..4f7a07fd8ee 100644
---- a/arch/riscv/cpu/k1/Kconfig
-+++ b/arch/riscv/cpu/k1/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-or-later
- #
- # Copyright (C) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+# Copyright (C) 2025-2026, RISCStar Ltd.
- 
- if ARCH_K1
- 
-@@ -9,6 +10,7 @@ config SPACEMIT_K1
- 	select BINMAN
- 	select ARCH_EARLY_INIT_R
- 	select SYS_CACHE_SHIFT_6
-+	select SUPPORT_SPL
- 	imply CPU
- 	imply CPU_RISCV
- 	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index 9b347fc3b50..e942ef95142 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
-+dtb-$(CONFIG_ARCH_K1) += k1-spl.dtb
- dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
- dtb-$(CONFIG_TARGET_ANDES_VOYAGER) += qilai-voyager.dtb
- dtb-$(CONFIG_TARGET_BANANAPI_F3) += k1-bananapi-f3.dtb
-diff --git a/arch/riscv/dts/k1-spl.dts b/arch/riscv/dts/k1-spl.dts
-new file mode 100644
-index 00000000000..6018ea1e452
---- /dev/null
-+++ b/arch/riscv/dts/k1-spl.dts
-@@ -0,0 +1,26 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (C) 2023-2026 Spacemit, Inc
-+ * Copyright (C) 2025-2026 RISCStar Ltd.
-+ */
-+
-+/dts-v1/;
-+#include "k1.dtsi"
-+#include "binman.dtsi"
-+
-+/ {
-+	model = "spacemit k1 spl";
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+		bootph-all;
-+	};
-+};
-+
-+&soc {
-+	bootph-all;
-+	serial@d4017000 {
-+		status = "okay";
-+		bootph-all;
-+	};
-+};
-diff --git a/arch/riscv/dts/k1.dtsi b/arch/riscv/dts/k1.dtsi
-index a633e43da32..9c203eb4b79 100644
---- a/arch/riscv/dts/k1.dtsi
-+++ b/arch/riscv/dts/k1.dtsi
-@@ -318,7 +318,7 @@
- 		};
- 	};
- 
--	soc {
-+	soc: soc {
- 		compatible = "simple-bus";
- 		interrupt-parent = <&plic>;
- 		#address-cells = <2>;
-diff --git a/board/spacemit/k1/Makefile b/board/spacemit/k1/Makefile
-index 2168698402b..7bce47bac8c 100644
---- a/board/spacemit/k1/Makefile
-+++ b/board/spacemit/k1/Makefile
-@@ -1,5 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-or-later
- #
- # Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+# Copyright (c) 2025-2026, RISCStar Ltd.
- 
- obj-y := board.o
-+obj-$(CONFIG_SPL_BUILD) += spl.o
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-new file mode 100644
-index 00000000000..11a097389f1
---- /dev/null
-+++ b/board/spacemit/k1/spl.c
-@@ -0,0 +1,24 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2025-2026, RISCStar Ltd.
-+ */
-+
-+#include <spl.h>
-+
-+void board_init_f(ulong dummy)
-+{
-+	int ret;
-+
-+	ret = spl_early_init();
-+	if (ret)
-+		panic("spl_early_init() failed:%d\n", ret);
-+
-+	riscv_cpu_setup();
-+
-+	preloader_console_init();
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	return BOOT_DEVICE_NONE;
-+}
 diff --git a/configs/k1_defconfig b/configs/k1_defconfig
-index 0bdc3c800f0..f1a16735943 100644
+index f1a16735943..ca9c1d0bd8d 100644
 --- a/configs/k1_defconfig
 +++ b/configs/k1_defconfig
-@@ -3,7 +3,19 @@ CONFIG_SYS_MALLOC_LEN=0x1000000
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
--CONFIG_DEFAULT_DEVICE_TREE="k1-bananapi-f3"
-+CONFIG_DEFAULT_DEVICE_TREE="k1-spl"
-+CONFIG_SPL=y
-+CONFIG_SPL_TEXT_BASE=0xC0801000
-+CONFIG_SPL_MAX_SIZE=0x33000
-+CONFIG_SPL_BSS_START_ADDR=0xC0837000
-+CONFIG_SPL_BSS_MAX_SIZE=0x2000
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0xC0840000
-+CONFIG_SPL_SIZE_LIMIT=0x31000
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x08000000
-+CONFIG_STACK_SIZE=0x100000
- CONFIG_SYS_BOOTM_LEN=0xa000000
+@@ -20,6 +20,7 @@ CONFIG_SYS_BOOTM_LEN=0xa000000
  CONFIG_SYS_LOAD_ADDR=0x200000
  CONFIG_ARCH_RV64I=y
-@@ -23,3 +35,10 @@ CONFIG_PINCTRL_SINGLE=y
- CONFIG_RESET_SPACEMIT_K1=y
- CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_BASE=0xD4017000
-+CONFIG_DEBUG_UART_CLOCK=14700000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_DEBUG_UART_NS16550=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+# CONFIG_DEBUG_SBI_CONSOLE is not set
+ CONFIG_RISCV_SMODE=y
++CONFIG_SPL_RISCV_SMODE=y
+ CONFIG_ARCH_K1=y
+ CONFIG_TARGET_BANANAPI_F3=y
+ CONFIG_FIT=y
+@@ -42,3 +43,4 @@ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_DEBUG_UART_NS16550=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ # CONFIG_DEBUG_SBI_CONSOLE is not set
++CONFIG_TIMER_EARLY=y
 diff --git a/include/configs/k1.h b/include/configs/k1.h
-index 97cf4d72df0..6a26fdfcebe 100644
+index 6a26fdfcebe..d46fec8b251 100644
 --- a/include/configs/k1.h
 +++ b/include/configs/k1.h
-@@ -7,6 +7,8 @@
- #ifndef __CONFIG_H
- #define __CONFIG_H
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+ /*
+  * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ * Copyright (c) 2025-2026, RISCStar Ltd.
+  *
+  */
  
-+#define CFG_SYS_NS16550_CLK	    14700000
-+
+@@ -12,4 +13,7 @@
  #define CFG_SYS_SDRAM_BASE         0x0
  #define CFG_SYS_NS16550_IER        0x40 /* UART Unit Enable */
  
++#define RISCV_MMODE_TIMER_FREQ	    24000000
++#define RISCV_SMODE_TIMER_FREQ	    24000000
++
+ #endif /* __CONFIG_H */
 -- 
 2.25.1
 
