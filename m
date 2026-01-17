@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94A5C9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4428C9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37EA083A9A;
+	by phobos.denx.de (Postfix) with ESMTP id 7261C83AAE;
 	Sun, 18 Jan 2026 14:47:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PZp0+F4n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TJX/7Tih";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D563833C6; Sat, 17 Jan 2026 20:08:28 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 199EB833C6; Sat, 17 Jan 2026 20:09:07 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52DB382BF2
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:08:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0B4682BF2
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-502a98c66f7so12987641cf.1
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:08:26 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-50143fe869fso36559451cf.1
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:09:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768676905; x=1769281705; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768676943; x=1769281743; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HzOr2Ehkw99Rz+W6fQ8Lrf3BStVE/BxJKxRwyX6FNiQ=;
- b=PZp0+F4nt/q79quxqTkjk23tKoNJ+13Qfm6CZ9+V7czy4nlCjxYfDEjat9kKR3AtX9
- /lD6C5hZISn2VdRf/pgYM2Wvkxmikf0X/IjXZGJHTESSQt4ugWUZdNo5+tFgC+C+YcYo
- y1jy5/a8Whl+bhzYo5Q7K5jLtEJMu/1o6o4d1oQcrL5wauePoAFskestXSbKpYLjXP77
- UPHbES7WM0AANYf9nJSTPRbSSmI00lYoXO14tyOqwwqn/e44szdq3E7O3hImBdU2Vbqi
- c/eEcJvB8oHNuL1bUobB3twzqjmE+pUgdLLDMWEDlT6Vk7ql0avUtHBeI60HHRXZmrVC
- jsfQ==
+ bh=t2ljAVLhPcMnrMOdDPrZGdkDyPQjEmCjQcQ2qBqk42c=;
+ b=TJX/7TihOvcAEbWWJo770589d3JA4f3TpeCSvN58DyD5e/MQIALctLMj2dOfUPVmv4
+ fJSudjueIkLNJlux0/1Dw1uqkjcLdtiyapkLK7SnSlrHl+mEB+gB+Ek/A0u2uVYEYk0H
+ 6cs0l+5pEdMsEmhF/enw1TUU8mb8lmNdfu1yH1HHz1nS60iCD55Z1ydEB+AMekiLMBnk
+ CVNULzP78X/f43Oyf7KgopceYB6FKUPJpVpfnSIL7uxC/ismo13eICWeTc6s92RJYXq/
+ 8NGf0LdD3haWsUGs7lzri/J+29kekq8nQKfQsUykYn7EQQxLrqTxNOKUI1Zuz9fzsNbZ
+ tIqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768676905; x=1769281705;
+ d=1e100.net; s=20230601; t=1768676943; x=1769281743;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=HzOr2Ehkw99Rz+W6fQ8Lrf3BStVE/BxJKxRwyX6FNiQ=;
- b=EPL5cFh4wAt3KVI9PA+DZuq72F7JiVVRnEQW37ofbLmTZnEnd9F3X1/r0g8wFmtPx9
- qq5W544XZB8nSf0lpkFtqdXtR7egVFAzOGuEPjPGEqtFoUkzuBEG4oLum2Msju9xvUC8
- 3ff19g19NFuhEdP513USlGLYtPPJ60depN/3THMvyNFZoQinz2oZnKnCitPtcikx+i5K
- N9zP1DdLUmYoQjS53i437gh3zEjfG/ThHjc/LtA09KFzNf5hByGOhxgcl30Sf7vv8n5D
- ccdX92rRb0LXlWghoAP8ZSLtpWPbzXX1v9EJUF9saqjabNZnnJYwpt/b+e3VgEsTGk9j
- b+dg==
-X-Gm-Message-State: AOJu0Yz6BG5p+d+O8rIo3BriXynXttuUwh+Jm+nmZ2ENkZxH6FJeroC1
- 62O+6Yr3SVuOD2a0tjOvpfz7zgayO2xeAu5rp0gURafeY56MTcFMVZmu9R2Krw==
-X-Gm-Gg: AY/fxX5v3A1k+AexOYipjF+kM6zRp6aVF+y9/jkoUCG0Vtrbc4shQaJYSxmCaPSGoOb
- Qw9VZgkT2qgb1KTW/bbaspn2+ldvM//TuliYmhvDp4zCg/7bbby/5fEs4+rjINtmmZ0BN5YW2rr
- klpJaQO3jEOxBFoWNH9DFkfkjX4z0UJZ8Ntx3Kv2ftdzOXoL4sLeKtVp8Q1lESbINp7p93SuqT+
- DV8IpJwaOcF6Rc2YlUn0FWl0ZdP46HR2xELWsfNW0NqXxKrRi42WetSug6X0/BBBuxYuiaw4DlF
- rxp3SYDjucqI55hIycW9dkQz/1L507Vz2F1HD8+FLH2/Vcg/sm+vZPTGBJeaRbmZ/XLPsb+/Kdn
- jDslMi84faiCSyBMRZFqtcpv0y2LMRearc2jTtG038jXvAuo/D5l3ySGuOxe284orn08oxQbAgQ
- N/WnEkLY0MONE0gosmY8K5xyBHXTjCjOMkXtqcDcUI7fhYukReJR4ABz+ELTfQD+A6aj3+Ywo=
-X-Received: by 2002:a05:622a:548:b0:4f1:ccdd:ffde with SMTP id
- d75a77b69052e-502a168a6acmr96263041cf.21.1768676904837; 
- Sat, 17 Jan 2026 11:08:24 -0800 (PST)
+ bh=t2ljAVLhPcMnrMOdDPrZGdkDyPQjEmCjQcQ2qBqk42c=;
+ b=W4p+2FnPJ3yoC9z7ZVPqZRnBLJlBuY27ztmNMnu9iPhW31IQrZnqMIirNL5bX2abh7
+ dzgpHgbb9zgkTZD9BOMqXL18bN7zspDtDRgttLKqAfgJ+DiBIQMFhQcCkzOTWfv7eyhq
+ 2XZLHESH5pmQt51RZCzrjqbbr5BFGmBV2q6YxJLtRvhrYRBPQrHqjSYRm2mzhgZnUYgw
+ JqUHV0F9/LKFL3+NABWGRjAxIoUZObKNmXHyMaU91qHMeCpQ+hUU9JljcFg9ycfdb3YV
+ H9UBBhf2WsYgvy0udgOfs3iK2ooJGPF8XXn57QwXUetqCYC5zPF9yQdG9xgQ++sU2+1E
+ hnPg==
+X-Gm-Message-State: AOJu0YwJJ+3a7SM7Tgt6Mxhk1xMw6qMqkXNrQze4EWBlw/TNO9Txy6RT
+ yhHcI7I0il7rrfMQMCqG1Dw1p6y5D8V4+bHvqps/+LQlW+ZDLL0khlPc+z6MOg==
+X-Gm-Gg: AY/fxX5ZVezcd5mFWp6RpWUpCvZEMsw1GdBoNf0TKq1F9mVJhJEsoVUuGrCJYXqqOv9
+ 0HK1b99wVDJp19RDqrCcdEu+6Xd4d2B+faS7c346S7QEyJQPLwVuPnCAJgWa6hrN4pcDz7v3puH
+ lEjGUxoehqrd7eK5iX9HXdGzltsKXpiietO1A21PuYolAAcjg+h5tMjOWsUwd/EkrlYziVRhS3H
+ VXRK9N/Ec10r6XsENrKRZWjIkBSyxSq5eLC34U5tt2PsAPi6SJR/3ocMtKQ4IjlVeTPKzbbpZSC
+ gpai5sAvbc0Iwew9Pct9o5RlL5OpB/K2e8lpKiULzDgeYNsHDIMw/6Q1lN3/IB8zWddD6iD4f6l
+ T8/Z0MmCdTwrSlz7GSvGrNIHkMEsy7+ir5kSHcxKu+KWewOJC6odHLMv6b+NyFwkoWH38r2yd6e
+ ATTaILFDKzbVhuRmkMPanWo+SW4BvOlQVmmevDWZjsRKSV2zt/1qZnEhRG60hcFPt0JTVG95M=
+X-Received: by 2002:ac8:5804:0:b0:4f4:f834:44ed with SMTP id
+ d75a77b69052e-502a16f5d54mr98029311cf.64.1768676943350; 
+ Sat, 17 Jan 2026 11:09:03 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.08.22
+ d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.09.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Jan 2026 11:08:24 -0800 (PST)
+ Sat, 17 Jan 2026 11:09:03 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
@@ -77,11 +77,11 @@ Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Heiko Schocher <hs@nabladev.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
  Yu-Chien Peter Lin <peter.lin@sifive.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Randolph Sheng-Kai Lin <randolph@andestech.com>,
  Conor Dooley <conor.dooley@microchip.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
@@ -89,31 +89,32 @@ Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Justin Swartz <justin.swartz@risingedge.co.za>,
  Aniket Limaye <a-limaye@ti.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Angelo Dureghello <angelo.dureghello@timesys.com>,
+ Greg Malysa <malysagreg@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Henrik Grimler <henrik@grimler.se>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Kory Maincent <kory.maincent@bootlin.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Rui Miguel Silva <rui.silva@linaro.org>,
  Justin Klaassen <justin@tidylabs.net>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
  Samuel Holland <samuel@sholland.org>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Heiko Stuebner <heiko@sntech.de>, Finley Xiao <finley.xiao@rock-chips.com>,
- Joseph Chen <chenjh@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>
-Subject: [PATCH 09/17] board: k1: initialize clock and serial devices in SPL
-Date: Sat, 17 Jan 2026 14:01:43 -0500
-Message-Id: <20260117190231.977686-10-raymondmaoca@gmail.com>
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Joseph Chen <chenjh@rock-chips.com>
+Subject: [PATCH 10/17] configs: k1: add default option for clock driver in SPL
+Date: Sat, 17 Jan 2026 14:01:44 -0500
+Message-Id: <20260117190231.977686-11-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260117190231.977686-1-raymondmaoca@gmail.com>
 References: <20260117190231.977686-1-raymondmaoca@gmail.com>
@@ -138,72 +139,29 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Initialize clock and serial devices in SPL. Otherwise, the device
-driver won't be loaded in SPL.
+Add default option for enabling clock driver in SPL.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- board/spacemit/k1/spl.c | 38 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ configs/k1_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index 11a097389f1..1c299810d39 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -3,8 +3,44 @@
-  * Copyright (c) 2025-2026, RISCStar Ltd.
-  */
- 
-+#include <dm/device.h>
-+#include <dm/uclass.h>
- #include <spl.h>
- 
-+static void clk_early_init(void)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "clock-controller@d4090000", &dev);
-+	if (ret)
-+		panic("Fail to detect clock-controller@d4090000\n");
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4050000", &dev);
-+	if (ret)
-+		panic("Fail to detect system-controller@d4050000\n");
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4282800", &dev);
-+	if (ret)
-+		panic("Fail to detect system-controller@d4282800\n");
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4015000", &dev);
-+	if (ret)
-+		panic("Fail to detect system-controller@d4015000\n");
-+
-+	if (device_active(dev))
-+		debug("clk: device is active\n");
-+	else
-+		debug("clk: device not active, probing...\n");
-+}
-+
-+void serial_early_init(void)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device(UCLASS_SERIAL, 0, &dev);
-+	if (ret)
-+		panic("Serial uclass init failed: %d\n", ret);
-+}
-+
- void board_init_f(ulong dummy)
- {
- 	int ret;
-@@ -15,6 +51,8 @@ void board_init_f(ulong dummy)
- 
- 	riscv_cpu_setup();
- 
-+	clk_early_init();
-+	serial_early_init();
- 	preloader_console_init();
- }
- 
+diff --git a/configs/k1_defconfig b/configs/k1_defconfig
+index ca9c1d0bd8d..9c4612bcd84 100644
+--- a/configs/k1_defconfig
++++ b/configs/k1_defconfig
+@@ -44,3 +44,11 @@ CONFIG_DEBUG_UART_NS16550=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ # CONFIG_DEBUG_SBI_CONSOLE is not set
+ CONFIG_TIMER_EARLY=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
++CONFIG_CLK=y
++CONFIG_CLK_SPACEMIT=y
++CONFIG_SPL_CLK=y
++CONFIG_SYS_MALLOC_F_LEN=0x5000
 -- 
 2.25.1
 
