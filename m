@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 696A4C98306
-	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF42C9830C
+	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 824368367F;
+	by phobos.denx.de (Postfix) with ESMTP id C3F40838BB;
 	Sat, 17 Jan 2026 01:25:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oqqnl9fy";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="P2WRjchE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDA483935; Sat, 17 Jan 2026 01:25:09 +0100 (CET)
+ id A116283015; Sat, 17 Jan 2026 01:25:10 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1FB183015
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A896836AC
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=f646=7W=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1768609504;
- bh=vEGEU6SdCwRqDa8gBwblhhRzh+3HK9rwS2Ovbyw5lgo=;
- b=oqqnl9fy0NWDbiYlx4oSMtn/Jb0/9960WR831PWE37DIi/fg6Sh+wOfJDB3FmSZnNfhp1ecMx
- FzvjPjD/oo38FbjBLy/ifqIyO15JE8Ah8ckxw8JEqsqzk++ot8OM5hOivfXvEYhljZjAgexHsTz
- dmC+1TUdLG70o+HQdrlz+DnF5DsAZBeU0H5Mh3+BWn0Ww6rMLXnoeF1L0Td0r1w0rw+7M059aB1
- gaV8su5dL5Hx7ZKwKaROIDWheCF9oCT/g0QSa4dP+fgFXL5us83dU24Lc34FmW9zbW6Rw1icc2d
- x4NrPbRXD58dgjO55KY19olmqiJdimTdVWhrB4AYqlZQ==
-X-Forward-Email-ID: 696ad6db75104fdab5e8c2f3
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1768609506; bh=Li1mX7GtUZwInyjWpL7UtZC6AJKtFKUQ1lDZGhr5L6A=;
+ b=P2WRjchEKSWqtQuEaqCykQriefVSuJkMCkpLjf9uVMMweH8QgkhMhVRBt+/QwfD4ceYNCOsqx
+ oCTHK1lngv94MNI6APJh2uVXLPE6qr0wWU8M/oezRWN0X22Dkq6Vw3MGO3pkx7pP0H0tllqQHaa
+ 2lqLjF2OffwvdfDJC10g7HuKer0u55XNV/hCazS3GmZgB0ungkvxgh7qYQHP2DDnYEnry5cp+RJ
+ Bm/FFBXjgOSso1lwk7S8CFbhqhr9rQVAPGZ9W7arkBWcBe5c3DL7e2UUCvPgN/+Rhjr4pKQC/tE
+ UsqGyEL+dJ1iN5WjE3RcJIgODBZnFNK0WCjXMJVW3iOA==
+X-Forward-Email-ID: 696ad6de75104fdab5e8c312
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.2.8
@@ -48,10 +48,12 @@ To: Jerome Forissier <jerome@forissier.org>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 0/6] net: lwip: Command fixes and improvements
-Date: Sat, 17 Jan 2026 00:24:36 +0000
-Message-ID: <20260117002452.1026310-1-jonas@kwiboo.se>
+Subject: [PATCH 1/6] net: lwip: dns: Fix print of resolved IP address
+Date: Sat, 17 Jan 2026 00:24:37 +0000
+Message-ID: <20260117002452.1026310-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260117002452.1026310-1-jonas@kwiboo.se>
+References: <20260117002452.1026310-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,32 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series fixes a minor issue with the lwIP dns command, print device
-name from udevice in nfs command, changes to use ipaddr helper functions
-instead of accessing the internal addr field.
+The lwIP dns command only prints out cached resolved IP addresses.
 
-It also ensure the DHCP siaddr field is saved to the 'tftpserverip' env
-var so that correct next server is used for bootstrap.
+When a hostname is first resolved and ERR_INPROGRESS is returned the
+dns command prints out 0.0.0.0 instead of the resolved IP address.
 
-Finally it make the nfs command behave in similar way as tftp in that
-it will prefer to use 'nfsserverip' env var before falling back to use
-'serverip' env var.
+Fix this by printing out host_ipaddr instead of the temporary ipaddr
+that only is valid when ERR_OK is returned.
 
-Jonas Karlman (6):
-  net: lwip: dns: Fix print of resolved IP address
-  net: lwip: nfs: Print device name based on current udevice
-  net: lwip: dns: Call env_set() from dns loop instead of found callback
-  net: lwip: Use ipaddr helpers
-  net: lwip: dhcp: Save DHCP siaddr field to tftpserverip env var
-  net: lwip: nfs: Prefer nfsserverip over serverip when set
+Fixes: 1361d9f4f00a ("lwip: dns: do not print IP address when a variable is specified")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ net/lwip/dns.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- cmd/lwip/ping.c |  2 +-
- net/lwip/dhcp.c |  7 +++++--
- net/lwip/dns.c  | 24 +++++++++---------------
- net/lwip/nfs.c  | 13 ++++++++-----
- net/lwip/tftp.c |  2 +-
- 5 files changed, 24 insertions(+), 24 deletions(-)
-
+diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+index 9964003195f8..2b2a5947a2b8 100644
+--- a/net/lwip/dns.c
++++ b/net/lwip/dns.c
+@@ -86,7 +86,7 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
+ 
+ 	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0) {
+ 		if (!var)
+-			printf("%s\n", ipaddr_ntoa(&ipaddr));
++			printf("%s\n", ipaddr_ntoa(&dns_cb_arg.host_ipaddr));
+ 		return CMD_RET_SUCCESS;
+ 	}
+ 
 -- 
 2.52.0
 
