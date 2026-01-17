@@ -4,55 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A162C98311
-	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 06:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68444C98312
+	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 07:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F01E833C6;
-	Sat, 17 Jan 2026 07:16:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D718833C6;
+	Sat, 17 Jan 2026 08:34:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="b4T+QQYP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rHRMo20c";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="GnRcJ4J6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 732A78367F; Sat, 17 Jan 2026 07:16:05 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id A6169836AC; Sat, 17 Jan 2026 02:24:18 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBFEA83015
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 07:16:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B85D710DC8D; Sat, 17 Jan 2026 07:15:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1768630559;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=sfKUtNWYoVbtHz+rjIYrNzisIg+CtgMsBNKD5E4/hE4=;
- b=b4T+QQYPulUiDzk5HnBBGu8k5SZRtrG8S4GdGMD+sSWU0uYExg5Ry6p3bMVk6qD8Mhmz/i
- U/S9Hp3MecHZoK9dyp3YGHkC2MIA96V6Sdv1us/U/+fK/hj1r624zkKXzXAO5xe77vsulw
- hewm0foDg2yFPD3nP9REwywFvm7SuSj8sJ02TFOleCY7BxLGgbzAYH2Akwo8tQtMATY2KF
- U/Vq2OHSUR5uC/ZI7ZwBYUb5Z71WqMgIVRoK/CQbUWCDO+n28gUtWc+7yFhbynJSSCtk80
- zhD9H09ZWGR1nltHVuDUZP8rkPsG4KFcL0/CqHsr8m0N6QmCVbh/wkTr1We5Bg==
-Message-ID: <fcdde926-f0b7-f1cb-1676-1541934541ad@nabladev.com>
-Date: Sat, 17 Jan 2026 07:16:02 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id F072383015
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 02:24:15 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dtJsW2nmbz9vDX;
+ Sat, 17 Jan 2026 02:24:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768613055;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=J0Aa8ArZYJVg7MTwNEQDk2stu58cO1rvokjkcINj4UE=;
+ b=rHRMo20cpui1AmXU4z24S1r6WWc8jvFeCUjd24XI6j8Zrw198Z4Lhk+FVbPbu6hAwFXLdV
+ 1U/Luu/QVUiGRgM0WcRGJvJnX6SauBeoCT6S86DxfXI/f2fs9+9A0/n/gx3AJ5LzP5mGg5
+ Wpc6H/YWlBUMSg4hAIdMqLVmjQ7lMAJPFWvbOIUsgcos1sF7Exno1PimcfWUH8DHvC3TJW
+ ZS6f2KGxX9Ng6YoAm9wMWlDbQF/jhRoJtZGtHbXeAtfsbMagW/MBrcarYeIq0XmwqzhnOj
+ V+DUZKu0n/cStj01jLua4+24ejyCR3KIwqnutGUlcedTlNKx0OHcLmAWPmhFhQ==
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768613053;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=J0Aa8ArZYJVg7MTwNEQDk2stu58cO1rvokjkcINj4UE=;
+ b=GnRcJ4J6R2hNEX5sOv3JukCxHyald8PUxvFlt8D0pwnjg6OjhF9Br/uC0K9niD+roZvpQ6
+ cnxKpRCoxOaa7AAE/RagtrtbOcb1Jz8m0u+zi+qKsk41yVjC5wSaKaO9FfE24x79/XzX93
+ HkYBoP2q1VeV14jXFo9Ck1EI5KBbR/nGpzmxE0kshu45p3nJzwBrF8uWmKuf8ijGNCi+c/
+ mTyvtU+v51y5E33j9F0q7/D0du4/mreQkHRfe8Y4mVSG9B1GY3wUQ7vQhfDrRsPTi3mITE
+ MEJsLJSM/UrFj2LhqcXVn6LLVs9HTaxIGG8/RaGVYDz+SybYWdZkQBPWwCccog==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+	Janne Grunau <j@jannau.net>
+Subject: [PULL] u-boot-usb/master
+Date: Sat, 17 Jan 2026 02:23:40 +0100
+Message-ID: <20260117012404.187685-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: geni: bail when clocks can't be enabled
-Content-Language: en-US
-To: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260108195301.3159260-1-casey.connolly@linaro.org>
- <176858661122.3399278.240676332307316402.b4-ty@linaro.org>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <176858661122.3399278.240676332307316402.b4-ty@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-META: oimtobh5g3tnhzu4uzx34pek9fs9de4b
+X-MBO-RS-ID: e847f65fb190f0b1b5b
+X-Mailman-Approved-At: Sat, 17 Jan 2026 08:34:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,34 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Casey,
+The following changes since commit 5665d1f4e7cfd6895417d199dd7db73500c5d36c:
 
-On 16.01.26 19:03, Casey Connolly wrote:
-> 
-> On Thu, 08 Jan 2026 20:52:55 +0100, Casey Connolly wrote:
->> Failing to enable clocks will lead to bus hangs and the board crashing
->> in some cases, let's actually deal with this error and fail probe rather than hoping the clocks are already enabled.
->>
->>
-> 
-> Applied, thanks!
+  Merge tag 'net-20260115' of https://source.denx.de/u-boot/custodians/u-boot-net (2026-01-15 08:50:53 -0600)
 
-Fine for me, thanks!
+are available in the Git repository at:
 
-I just planned to add this today to u-boot-i2c and send pull request!
+  git://source.denx.de/u-boot-usb.git master
 
-bye,
-Heiko
-> 
-> [1/1] i2c: geni: bail when clocks can't be enabled
->        https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d38ec14953eb
-> 
-> Best regards,
-> 
+for you to fetch changes up to 81e8c5315cee83d2599fbc570cf1933cc80e170f:
 
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+  usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible (2026-01-16 15:03:51 +0100)
+
+----------------------------------------------------------------
+Janne Grunau (1):
+      usb: xhci-dwc3: Add "apple,t8103-dwc3" compatible
+
+ drivers/usb/host/xhci-dwc3.c | 1 +
+ 1 file changed, 1 insertion(+)
