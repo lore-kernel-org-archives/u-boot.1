@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF42C9830C
-	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE871C9830D
+	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3F40838BB;
-	Sat, 17 Jan 2026 01:25:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 266E683956;
+	Sat, 17 Jan 2026 01:25:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="P2WRjchE";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fhAUNy2R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A116283015; Sat, 17 Jan 2026 01:25:10 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 8DD03836AC; Sat, 17 Jan 2026 01:25:11 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A896836AC
+ by phobos.denx.de (Postfix) with ESMTPS id A1DC98389A
  for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1768609506; bh=Li1mX7GtUZwInyjWpL7UtZC6AJKtFKUQ1lDZGhr5L6A=;
- b=P2WRjchEKSWqtQuEaqCykQriefVSuJkMCkpLjf9uVMMweH8QgkhMhVRBt+/QwfD4ceYNCOsqx
- oCTHK1lngv94MNI6APJh2uVXLPE6qr0wWU8M/oezRWN0X22Dkq6Vw3MGO3pkx7pP0H0tllqQHaa
- 2lqLjF2OffwvdfDJC10g7HuKer0u55XNV/hCazS3GmZgB0ungkvxgh7qYQHP2DDnYEnry5cp+RJ
- Bm/FFBXjgOSso1lwk7S8CFbhqhr9rQVAPGZ9W7arkBWcBe5c3DL7e2UUCvPgN/+Rhjr4pKQC/tE
- UsqGyEL+dJ1iN5WjE3RcJIgODBZnFNK0WCjXMJVW3iOA==
-X-Forward-Email-ID: 696ad6de75104fdab5e8c312
+ t=1768609507; bh=CrIRxKcgCvWzl+Pkf2AaLTMOEIwNzZk1Rn91WwZGv34=;
+ b=fhAUNy2RZgQyZEGwnUWQlczshKgK1plCuIL7UzV3ODdtlyJV4ji+TFma1m52OJd8jffSNwk8C
+ 8lnm2fLkPXmXLOcc6rOmaISIdFJpIl1cIM28PDZoBFkSRfBUsvQRaeYNke7hTGCnXij21ofMk+l
+ u696frZcGY3TL2K7agbFl+FqnX5VCZHGsYiyYoq1kVCxVt/r9n4V1kNCK631BXK8+4QHjeqc9tG
+ ptTLU9TN25COIBw7K6GLM2CeB/Y+eHcMMIL8vBupSIBcKfIIzPY1GbMAsoKkZ5vSY5+v8zqripg
+ wvNpIJRp3V5BRUjVwsBMijl8i75i69rOA5mIHsDqXp7Q==
+X-Forward-Email-ID: 696ad6e275104fdab5e8c348
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 2.2.8
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -45,12 +45,13 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Jerome Forissier <jerome@forissier.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 1/6] net: lwip: dns: Fix print of resolved IP address
-Date: Sat, 17 Jan 2026 00:24:37 +0000
-Message-ID: <20260117002452.1026310-2-jonas@kwiboo.se>
+Subject: [PATCH 2/6] net: lwip: nfs: Print device name based on current udevice
+Date: Sat, 17 Jan 2026 00:24:38 +0000
+Message-ID: <20260117002452.1026310-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260117002452.1026310-1-jonas@kwiboo.se>
 References: <20260117002452.1026310-1-jonas@kwiboo.se>
@@ -72,33 +73,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lwIP dns command only prints out cached resolved IP addresses.
+Use udevice name, similar to other lwip commands, instead of using the
+legacy eth_get_name() when printing out the device being used.
 
-When a hostname is first resolved and ERR_INPROGRESS is returned the
-dns command prints out 0.0.0.0 instead of the resolved IP address.
-
-Fix this by printing out host_ipaddr instead of the temporary ipaddr
-that only is valid when ERR_OK is returned.
-
-Fixes: 1361d9f4f00a ("lwip: dns: do not print IP address when a variable is specified")
+Fixes: 230cf3bc2776 ("net: lwip: nfs: Port the NFS code to work with lwIP")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- net/lwip/dns.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ net/lwip/nfs.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-index 9964003195f8..2b2a5947a2b8 100644
---- a/net/lwip/dns.c
-+++ b/net/lwip/dns.c
-@@ -86,7 +86,7 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
+diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+index 27579af8f1fe..5fc2d3bd8736 100644
+--- a/net/lwip/nfs.c
++++ b/net/lwip/nfs.c
+@@ -3,6 +3,7 @@
  
- 	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0) {
- 		if (!var)
--			printf("%s\n", ipaddr_ntoa(&ipaddr));
-+			printf("%s\n", ipaddr_ntoa(&dns_cb_arg.host_ipaddr));
- 		return CMD_RET_SUCCESS;
- 	}
+ #include <console.h>
+ #include <display_options.h>
++#include <dm/device.h>
+ #include <env.h>
+ #include <image.h>
+ #include <linux/kconfig.h>
+@@ -116,7 +117,7 @@ static int nfs_loop(struct udevice *udev, ulong addr, char *fname,
+ 	nfs_filename = nfs_basename(fname);
+ 	nfs_path     = nfs_dirname(fname);
  
+-	printf("Using %s device\n", eth_get_name());
++	printf("Using %s device\n", udev->name);
+ 
+ 	printf("File transfer via NFS from server %s; our IP address is %s\n",
+ 	       ip4addr_ntoa(&srvip), env_get("ipaddr"));
 -- 
 2.52.0
 
