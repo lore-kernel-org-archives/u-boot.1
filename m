@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BECF1C9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 326DCC9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:48:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8DAD839B1;
-	Sun, 18 Jan 2026 14:47:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D78F839E2;
+	Sun, 18 Jan 2026 14:47:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DaFY6V2G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DeHLV0yb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0DF8833C6; Sat, 17 Jan 2026 20:04:40 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id C77FF83015; Sat, 17 Jan 2026 20:05:18 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B80A582BF2
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:04:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A47D882BF2
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 20:05:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-5013d163e2fso33678821cf.0
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:04:38 -0800 (PST)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-502a98c66f7so12975471cf.1
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 11:05:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768676677; x=1769281477; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768676715; x=1769281515; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sYGCxea15VhkkXktpl9WRsG8WUBvnJe4DRP480Ld9uM=;
- b=DaFY6V2G2Ly7K7Ua2us7rqyVdYJsEmYsENn+qigJzU795JSViJggi+t5Oas3M7eOxl
- 1/vTjwLaJ5O0AXaqCsVPVVQbrTDARBqpN5hFw3yMo6uPxujq6J5+lkhyUrKzo8QRJw+2
- /IRa4wuCOR2/qZbeBWfitAOZiqYmcODS7i+mBE7BxRF2WfqQaj++642aGWiszWovI5RK
- Unzh1/5+Fk+19rwhJeoFX2C7ts4KMAEeu/aPR3DmpgfIl9dH3CKSewEY84H5B7dWZvMx
- Dc+nbLwABBjEI597/5d1JTi5EEDmzkDCvdkK4a3eMYUnUHEwIm4dX1fB1nZmAQiKZOpv
- d/Cg==
+ bh=ZV/BhhLI5JPybX5GYaA/r6ogdk290irrIQHF+qAJrwA=;
+ b=DeHLV0ybOLXf0IyxA5Py0NkJ1jwstVZDbmLWuIKYBHFH+81hjtuk5qAocqWczDZ12q
+ ZEWwlPJuWnzFyLd4hKE8OPq2cysU+78C1xO27kHRblithucJUvYcUh4rnuLD7jRMQ7ov
+ HK5Vi0gb/2DP0M/9s3EfeikDiHX9acYCU3kEFX/Y4Lf6u8hVaABhEVkRZYU174LacDgT
+ 6hDazXPDt0hbZljRJT/I37IgCXQ7hkcxFGk09fKnCwRAXJjh2b+TJs6wvCwvp+TQ6+m2
+ FExMsRuMa09qj+I5/usKnxusNyALOmLaw7uTTDqsUUEeV8riVgOp3Xy/PYjhca382XNe
+ s0dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768676677; x=1769281477;
+ d=1e100.net; s=20230601; t=1768676715; x=1769281515;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=sYGCxea15VhkkXktpl9WRsG8WUBvnJe4DRP480Ld9uM=;
- b=lD+95LqWe0iDYjypiGT//zzZwii3F3akscy9PJTEvoy5yYKHhYn6liZo29hUiL5h4X
- r6OV5S2QxJ/qE2Z1aLdipEs7LUeROYIGUUt/q9K3XNvV4nTdrid7LMPxmLw9mzWHMXXE
- xCE0XCpSRPYncy67ulKCnD8Zd5JELLUhnOsIP4n9UpcElg7tFVLBuIe+fkgYvDn5ROcy
- Kjuy4iJ9ns02U+ZeT3vG4a6Igmi3zSzhGdegmwQiQI5HM5Om+IKkvdHha7U/wgS6g+vR
- CJ91QVgFm0JPAr1VgdrXetlxpw5NqiotpfkXbihrAS6fTAFC10SjCZ8OLJYmtn2BKtY+
- FfyQ==
-X-Gm-Message-State: AOJu0Yxot6mzUFBGZb6T10bx0/Uajb4lebLFxMzZnyt2kDau65wuF/j2
- qwmHwUzdoG2XkburqDIxyVrxWjlNJ0deL5QIRwppvliCTvjjC79UBt+5PfnmtA==
-X-Gm-Gg: AY/fxX5reuebRWObdeYhem+T2w8DucMgVeyzOf2X5kNajX27KE3WQdaHoIzR+Q+FKZ+
- 76sNUz0X3LGfEP1aSsC78sZ2SMUxg4f2SHM9h8j7JUrdX6mF0QdWDiID3nCVspb6PWovhksr1uK
- DhbRm5ANCak1fwaV7Chkw1cUKFhVY0FCBcBeJ/s5hilD3Q/EXVY7kK49YkRyPfs6LNJvrvJqIzx
- Kc2NYiRfvib6JSIpCu4nOVOCvxGEfRX62057kEpkMJp8OZ+1dq1aZeSqqY15d+XlHwJxDZM2fpf
- YGD1xKrAkCkg1FRhdLqcOtV+pf2kVvV72aUaLzqWYVRXwyrV/s78pf3j/OddqFD0pxT8YGF8d1p
- PvVe2iYqLxcoGrkf9xhnlCQprJDdw3Kqo2BuLItZ6cu/UufAC9W//TmRJyk5Ll/FOU5CKtbwrxR
- p7PUldOm5jVJziP7vGiel+k1y7tBydblbWvOJitD+zWfxiiI9o1/gWp6YDmVt8TjI81ibcxXI=
-X-Received: by 2002:a05:622a:1a9b:b0:501:5162:a9c with SMTP id
- d75a77b69052e-502a1f3289dmr98875951cf.57.1768676677301; 
- Sat, 17 Jan 2026 11:04:37 -0800 (PST)
+ bh=ZV/BhhLI5JPybX5GYaA/r6ogdk290irrIQHF+qAJrwA=;
+ b=RdDaEqpFUISvSyWLpp5EsXAqdv4cU/9BLlhUbnOk+mZfPRREwW+P0f88JkEQ6u3CUP
+ req9wpF522LWT8JYEsQY9S7QwADZxIcREFWYaaFIwKo1EAAYCh5ZeyuCAkHdlW22BQPt
+ c7a0+0MNCVvcY/4sb0kkdPUEOpP2Q9QEHOyzgJvkyOyKHlHhQtLwMzMGrLUPvPTzW0R7
+ DoEWGzwR27b4y5F5PqPOmzsBHDj+B54At5VQD/WMNY1HlUYFR/buvXA3UQD8VEr0HKNH
+ z/h+SauLh785s9eDqw8WSKskzFgJDYlEX0eHAVutDzdamd+x52VFkGjYXqdEu7Xlkz39
+ WpHA==
+X-Gm-Message-State: AOJu0YyP8q608dXan+rrLmA2crwiNVqEXAl2r5dqeQ3v8KiW8tDcc5dC
+ dboZjW7ZIbS8vpqE22+GM9kReH4nzeMJlBgJtFTCw08odZDITscML/npZr36/A==
+X-Gm-Gg: AY/fxX46SIJc41UyJIA+ox/ooae3AVTXyT9cBYlKE+mov8GQivrryQ6E4CQ4K/tyhJu
+ FIktot7OH15jFupcsaGgWjxb04YoU1zYp10qVXvsV30ypaDhp42+cSzUaWcd1ygcYoNgiXMdXoa
+ r5iMRTEVzQDDknV5GAXp+0GYljZYXVuvOudFnlLuBxYy96bUZ6V8A1YrXjB6eK/8DNh08IP7iI9
+ cYLJGv8tm79u5lC6xm1xJgK13s9nPiF4HRMPqFGoCiB78WWvlPjqN2H+gDCUTooyb+4pSDx9FER
+ b73MxGKPeTNnSI8U65dsnBCkbFeYEmM8jiBzPjYly6ZFsIZjGBzweFImpuWG+C4+teh6Q0VZhlu
+ 0Ib38PsFtgJQQaARiwHg1hKYWmEgVUM0TmwG4FI40T5MzMlD+fiLukb4m7tLsBPpZk0wCeXeMJD
+ vM7tQc0pyeFkuIZUs06WIoKGv9UxX14DhegsSr798Gd5nvuakExndlAYNTxZBCUwOU2vZu6LA=
+X-Received: by 2002:ac8:5f94:0:b0:4ed:bbca:fdff with SMTP id
+ d75a77b69052e-502a165323cmr86770351cf.9.1768676715128; 
+ Sat, 17 Jan 2026 11:05:15 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.04.34
+ d75a77b69052e-502a1ef9347sm44340261cf.25.2026.01.17.11.05.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Jan 2026 11:04:36 -0800 (PST)
+ Sat, 17 Jan 2026 11:05:14 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
@@ -77,43 +77,43 @@ Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Heiko Schocher <hs@nabladev.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>,
- Yu-Chien Peter Lin <peter.lin@sifive.com>,
  Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Conor Dooley <conor.dooley@microchip.com>,
  Jamie Gibbons <jamie.gibbons@microchip.com>,
  Michal Simek <michal.simek@amd.com>,
  Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
+ Yixun Lan <dlan@gentoo.org>, Junhui Liu <junhui.liu@pigmoral.tech>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Casey Connolly <casey.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Angelo Dureghello <angelo.dureghello@timesys.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, Aniket Limaye <a-limaye@ti.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
+ Christian Marangi <ansuelsmth@gmail.com>, Aniket Limaye <a-limaye@ti.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
  Greg Malysa <malysagreg@gmail.com>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>, Anshul Dalal <anshuld@ti.com>,
- Justin Klaassen <justin@tidylabs.net>,
- Samuel Holland <samuel@sholland.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Justin Klaassen <justin@tidylabs.net>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andre Przywara <andre.przywara@arm.com>,
+ Samuel Holland <samuel@sholland.org>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
  Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
  Elaine Zhang <zhangqing@rock-chips.com>,
  Joseph Chen <chenjh@rock-chips.com>
-Subject: [PATCH 03/17] configs: k1: enable early timer support
-Date: Sat, 17 Jan 2026 14:01:37 -0500
-Message-Id: <20260117190231.977686-4-raymondmaoca@gmail.com>
+Subject: [PATCH 04/17] reset: k1: add SPL support and enable TWSI8 reset
+Date: Sat, 17 Jan 2026 14:01:38 -0500
+Message-Id: <20260117190231.977686-5-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260117190231.977686-1-raymondmaoca@gmail.com>
 References: <20260117190231.977686-1-raymondmaoca@gmail.com>
@@ -138,53 +138,69 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Enable CONFIG_TIMER_EARLY to allow udelay() calls during
-early initialization phases. This is required for proper
-timing operations before the full timer driver is available.
+This commit enhances the K1 reset controller driver:
+
+1. Enable SPL support
+   - Select CONFIG_SPL_RESET_SPACEMIT_K1 for SPL builds
+   - Reset controller is required during early boot for
+     proper hardware initialization sequence
+
+2. Remove TWSI8 (I2C8) reset restriction
+   - TWSI8 is now fully controllable by reset controller
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- configs/k1_defconfig | 2 ++
- include/configs/k1.h | 4 ++++
- 2 files changed, 6 insertions(+)
+ drivers/reset/Kconfig             | 7 +++++++
+ drivers/reset/Makefile            | 2 +-
+ drivers/reset/reset-spacemit-k1.c | 4 ----
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/configs/k1_defconfig b/configs/k1_defconfig
-index f1a16735943..ca9c1d0bd8d 100644
---- a/configs/k1_defconfig
-+++ b/configs/k1_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SYS_BOOTM_LEN=0xa000000
- CONFIG_SYS_LOAD_ADDR=0x200000
- CONFIG_ARCH_RV64I=y
- CONFIG_RISCV_SMODE=y
-+CONFIG_SPL_RISCV_SMODE=y
- CONFIG_ARCH_K1=y
- CONFIG_TARGET_BANANAPI_F3=y
- CONFIG_FIT=y
-@@ -42,3 +43,4 @@ CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_DEBUG_UART_NS16550=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- # CONFIG_DEBUG_SBI_CONSOLE is not set
-+CONFIG_TIMER_EARLY=y
-diff --git a/include/configs/k1.h b/include/configs/k1.h
-index 6a26fdfcebe..d46fec8b251 100644
---- a/include/configs/k1.h
-+++ b/include/configs/k1.h
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0-or-later */
- /*
-  * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ * Copyright (c) 2025-2026, RISCStar Ltd.
-  *
-  */
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 74c267dfc4e..1e69024ce74 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -252,5 +252,12 @@ config RESET_SPACEMIT_K1
+ 	  Support for SPACEMIT's K1 Reset system. Basic Assert/Deassert
+ 	  is supported.
  
-@@ -12,4 +13,7 @@
- #define CFG_SYS_SDRAM_BASE         0x0
- #define CFG_SYS_NS16550_IER        0x40 /* UART Unit Enable */
- 
-+#define RISCV_MMODE_TIMER_FREQ	    24000000
-+#define RISCV_SMODE_TIMER_FREQ	    24000000
++config SPL_RESET_SPACEMIT_K1
++	bool "SPL Reset driver for Spacemit K1 SoC"
++	depends on SPL && RESET_SPACEMIT_K1
++	default y
++	help
++	  Support for reset controller on Spacemit K1 SoCs in SPL.
 +
- #endif /* __CONFIG_H */
+ source "drivers/reset/stm32/Kconfig"
+ endmenu
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index ee5b009d134..ec6893b1c45 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -33,8 +33,8 @@ obj-$(CONFIG_RESET_ZYNQMP) += reset-zynqmp.o
+ obj-$(CONFIG_RESET_DRA7) += reset-dra7.o
+ obj-$(CONFIG_RESET_AT91) += reset-at91.o
+ obj-$(CONFIG_$(PHASE_)RESET_JH7110) += reset-jh7110.o
++obj-$(CONFIG_$(PHASE_)RESET_SPACEMIT_K1) += reset-spacemit-k1.o
+ obj-$(CONFIG_RESET_RZG2L_USBPHY_CTRL) += reset-rzg2l-usbphy-ctrl.o
+-obj-$(CONFIG_RESET_SPACEMIT_K1) += reset-spacemit-k1.o
+ 
+ obj-$(CONFIG_ARCH_STM32) += stm32/
+ obj-$(CONFIG_ARCH_STM32MP) += stm32/
+diff --git a/drivers/reset/reset-spacemit-k1.c b/drivers/reset/reset-spacemit-k1.c
+index 613e002fc4f..99dce90b4c4 100644
+--- a/drivers/reset/reset-spacemit-k1.c
++++ b/drivers/reset/reset-spacemit-k1.c
+@@ -452,10 +452,6 @@ static int spacemit_reset_update(struct reset_ctl *rst, bool assert)
+ 	if (rst->id < RESET_UART1 || rst->id >= RESET_NUMBER)
+ 		return 0;
+ 
+-	/* can not write to twsi8 */
+-	if (rst->id == RESET_TWSI8)
+-		return 0;
+-
+ 	spacemit_reset_set(rst, rst->id, assert);
+ 	return 0;
+ }
 -- 
 2.25.1
 
