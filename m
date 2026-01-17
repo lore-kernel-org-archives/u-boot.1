@@ -4,82 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA83C982C3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Jan 2026 22:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 696A4C98306
+	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D3B68394E;
-	Fri, 16 Jan 2026 23:22:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 824368367F;
+	Sat, 17 Jan 2026 01:25:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FPSju5fs";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oqqnl9fy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E795883956; Fri, 16 Jan 2026 23:22:44 +0100 (CET)
-Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
- [IPv6:2607:f8b0:4864:20::243])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADDA483935; Sat, 17 Jan 2026 01:25:09 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C75C83935
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 23:22:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1FB183015
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x243.google.com with SMTP id
- 5614622812f47-459fa8b6044so1585056b6e.2
- for <u-boot@lists.denx.de>; Fri, 16 Jan 2026 14:22:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768602161; x=1769206961; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8nk2LpG5KlvXbBlm0hGiI3Q/+7oIrxgLRJrdwQQVW6c=;
- b=FPSju5fsUj8MzT+qx3NDOmkxDrGyinnVk2A491spAyq94+9z+ls4XHbjE35lqnrbGo
- eJTa3s9Lh/zAr8eG+lIKEaoNcZLgVTkbBUDrC+8u3LLmRt4bnzCiidpC+JtYoMWaH8rE
- Sc6+OL/CzviOW/Uergi4RURA4PFYuw0s7jADU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768602161; x=1769206961;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=8nk2LpG5KlvXbBlm0hGiI3Q/+7oIrxgLRJrdwQQVW6c=;
- b=iKU3jKWBh0ao2AhsxR1M8GXFFHmJuGru/Uv4pzgmlkSAaKuKQNp1eM13r/fPonw0t6
- oF8H1y2lqGefkVw89fB24heGnzOchvxazMs1z3kdmEVtzF5fte9pJbYDGaIljomlUmXs
- FPVWXFTteLlvrPdUllYCskv54jL5gL2mTAcGHtO/tDR68IXDdO7qczCsbrPKkpY2+XWj
- vWKNQxrMDUISv3Xd3bjlpPEVnq0xSYq3f8p8dHSOspVPec0qSaBJXFTD62VSbdb6Owq5
- yNz0SGDzjkupOo2wiOm5B0iNqMQ672EvDJyHvwwXYjtAuen2X6VAM3m6+uEXY5i3p968
- VSiw==
-X-Gm-Message-State: AOJu0YznBWL3GD7rfz83oVmslRoWCPZ0skx5mCYq9FP9KKb8h9b9HPHQ
- a5zwUFonG5BlqwTk3TOZRzGZiQHolthugRwcGnSlv+yKdNn5xDoS/aKY1s8z2be133WY43aYo68
- b8Juo5ZE=
-X-Gm-Gg: AY/fxX6n2WmQ618+USb4JWi+nnS40sOiYRJGsmrBhSBR3x152MiCqLB8Vsz3Jkii6na
- ATbNHGbtR1N7K5MxWKHpdY/4FtvoCQYN1pHwIhL9Q5/GEy3svjP7JRc/sw41DofoFJe3BjkqOS6
- bNarvI3TzQNR8WCEmcX+E5S9bwoJK2foJmMBC4qK9ipXbSkxuPeFpVIW1O4+oGHoYt3CJuidwdA
- OuNCdbrP0MFVexQwVzJXBcxEqbxXAj9tCB1HYNqmlfEJX4pKHAiXJ7HgjyKqs7ynvo9K7BA7BnE
- zNY+gBA8exSMO3+79Z15v0l+DYg7NBeub2IhZlfKAVgQ2UYNxFbnjWugW5c2Z3EQj8JYS0fcgCk
- q2Jp6wFbKMuF4pdwi9HkuUkCvDNZBwWUg1Jw1tiI5m2iYeOHdM9d26dJsCnODz33OO5JyOJ9xfH
- Mbyzmk1iKrfK3ETHQ/PAhmaedEeRb8B5yAOiNedUuUCAoTcwcF00y/B6PlbgyX8RMFoeEbWPerf
- ZRsaRyI4kwNYdJVCi1BBN+O//CPHAX+4wET4g==
-X-Received: by 2002:a05:6808:3992:b0:44f:e912:eaa3 with SMTP id
- 5614622812f47-45c9d86e8cdmr1714092b6e.32.1768602156507; 
- Fri, 16 Jan 2026 14:22:36 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9e08df1bsm1933917b6e.22.2026.01.16.14.22.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Jan 2026 14:22:36 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>
-In-Reply-To: <20260109112428.262793-1-t.preissl@proton.me>
-References: <20260109112428.262793-1-t.preissl@proton.me>
-Subject: Re: [PATCH v3 0/4] fix integer overflows in filesystem code
-Message-Id: <176860215593.1279379.17854904399589439558.b4-ty@konsulko.com>
-Date: Fri, 16 Jan 2026 16:22:35 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f646=7W=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1768609504;
+ bh=vEGEU6SdCwRqDa8gBwblhhRzh+3HK9rwS2Ovbyw5lgo=;
+ b=oqqnl9fy0NWDbiYlx4oSMtn/Jb0/9960WR831PWE37DIi/fg6Sh+wOfJDB3FmSZnNfhp1ecMx
+ FzvjPjD/oo38FbjBLy/ifqIyO15JE8Ah8ckxw8JEqsqzk++ot8OM5hOivfXvEYhljZjAgexHsTz
+ dmC+1TUdLG70o+HQdrlz+DnF5DsAZBeU0H5Mh3+BWn0Ww6rMLXnoeF1L0Td0r1w0rw+7M059aB1
+ gaV8su5dL5Hx7ZKwKaROIDWheCF9oCT/g0QSa4dP+fgFXL5us83dU24Lc34FmW9zbW6Rw1icc2d
+ x4NrPbRXD58dgjO55KY19olmqiJdimTdVWhrB4AYqlZQ==
+X-Forward-Email-ID: 696ad6db75104fdab5e8c2f3
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.2.8
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jerome Forissier <jerome@forissier.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/6] net: lwip: Command fixes and improvements
+Date: Sat, 17 Jan 2026 00:24:36 +0000
+Message-ID: <20260117002452.1026310-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,29 +70,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 09 Jan 2026 11:24:37 +0000, Timo tp Preißl wrote:
+This series fixes a minor issue with the lwIP dns command, print device
+name from udevice in nfs command, changes to use ipaddr helper functions
+instead of accessing the internal addr field.
 
-> Changes in v3:
-> -added missing variable alloc in fs/zfs/zfs.c
-> -small coding style change in reply-to Simon Glass's review
-> -reversed size_t to int in reply-to Simon Glass's review
-> 
-> v2:
-> https://lore.kernel.org/u-boot/20251231100831.119142-1-t.preissl@proton.me/T/
-> 
-> [...]
+It also ensure the DHCP siaddr field is saved to the 'tftpserverip' env
+var so that correct next server is used for bootstrap.
 
-Applied to u-boot/master, thanks!
+Finally it make the nfs command behave in similar way as tftp in that
+it will prefer to use 'nfsserverip' env var before falling back to use
+'serverip' env var.
 
-[1/4] fs: prevent integer overflow in fs.c do_mv
-      commit: 99416665f006b925db12f6c02b11f9da02c10c5a
-[2/4] fs: prevent integer overflow in zfs_nvlist_lookup
-      commit: c8f0294285f6588322363e1711bc57118e6fc9a3
-[3/4] fs: prevent integer overflow in sqfs_concat
-      commit: 870aff99a279ed428c5a2560b2441b3079ddb34b
-[4/4] fs: prevent integer overflow in ext4fs_get_bgdtable
-      commit: fc16c847a1c9c6e0ee1f605849cc500a04c21602
+Jonas Karlman (6):
+  net: lwip: dns: Fix print of resolved IP address
+  net: lwip: nfs: Print device name based on current udevice
+  net: lwip: dns: Call env_set() from dns loop instead of found callback
+  net: lwip: Use ipaddr helpers
+  net: lwip: dhcp: Save DHCP siaddr field to tftpserverip env var
+  net: lwip: nfs: Prefer nfsserverip over serverip when set
+
+ cmd/lwip/ping.c |  2 +-
+ net/lwip/dhcp.c |  7 +++++--
+ net/lwip/dns.c  | 24 +++++++++---------------
+ net/lwip/nfs.c  | 13 ++++++++-----
+ net/lwip/tftp.c |  2 +-
+ 5 files changed, 24 insertions(+), 24 deletions(-)
+
 -- 
-Tom
-
+2.52.0
 
