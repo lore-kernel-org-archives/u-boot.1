@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CCFC9830D
-	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D11C9830D
+	for <u-boot@archiver.kernel.org>; Sat, 17 Jan 2026 00:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4B37839DF;
-	Sat, 17 Jan 2026 01:25:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1124F83980;
+	Sat, 17 Jan 2026 01:25:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kGj/IRoG";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="uISRVuSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 632BF83980; Sat, 17 Jan 2026 01:25:26 +0100 (CET)
+ id A0B7983980; Sat, 17 Jan 2026 01:25:31 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC153839DF
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81D45839E8
+ for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 01:25:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1768609522; bh=3cY9PC9XYeqDZRIAaIOQnhIFLFt4K/nBANJjdaU+7pc=;
- b=kGj/IRoGmPsGhHDpT425ilYuOxUnBTOj+ko7nrXeR0hZ1lxmtg2LQmcr/iiqvs7bLDOs58fVC
- EEn6SaFdFkr4gVOrXoPII3/jz5LXeA8U3Awo/5893N5Y0eRSj2kJCxFIjEMbJT3xz8lrB5nMyAE
- OpLlIlcYYe2sJ7ZUDPz/J0fIbAd5CllxSPEPwmHFPH347WCm9OB438Y9ekhm/XpaX5cHpo+9lMS
- wwitbsh0AbrDbvVyWIeb0InM4LIFDDyjzp5ceM9ecuG6FQbrgD3R8qmvQ9rSj93wgkeOMNiqNDL
- 7QAIUiSb4HZBuAcNOi77whisEI1Yn+v0SkEW8dOYK/1A==
-X-Forward-Email-ID: 696ad6ee75104fdab5e8c3b4
+ t=1768609527; bh=PXF6M4WvxRzCO9JoaS5ce4msKuGb0rcJpQyAGNwa+9M=;
+ b=uISRVuSVO/yyBtSJDiX+7CpbAbwmpAl62tqXshOU6RraktHKwTpg02yOpvxJlGYn6b4SMSQ+J
+ Iou5UJyx1FjKPmQSh6t9HqF2auqUEBdVRrNDVzH593BKouWhOkDGhiWl1iEy7Et28V+MSyigi60
+ TlnOLnp3tTxgFbsjL69ryTD3JwvvD000FiX3B6Ok/4gIdrMrSAyKgJ3k7BzbY1eKBdttbNlggiR
+ lE0w77bEhlDNk+KgrFj+GLhjhipHE/rwt01yhUaObQfxjV37kgjX1R8GOUnduGSUlBbBslm/LXZ
+ 3lmDNLnE6gjPwFOp7iB7VFAWzArEgcz1Skwx9SSX1ynA==
+X-Forward-Email-ID: 696ad6f275104fdab5e8c3cf
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.2.8
@@ -48,10 +48,9 @@ To: Jerome Forissier <jerome@forissier.org>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 5/6] net: lwip: dhcp: Save DHCP siaddr field to tftpserverip
- env var
-Date: Sat, 17 Jan 2026 00:24:41 +0000
-Message-ID: <20260117002452.1026310-6-jonas@kwiboo.se>
+Subject: [PATCH 6/6] net: lwip: nfs: Prefer nfsserverip over serverip when set
+Date: Sat, 17 Jan 2026 00:24:42 +0000
+Message-ID: <20260117002452.1026310-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260117002452.1026310-1-jonas@kwiboo.se>
 References: <20260117002452.1026310-1-jonas@kwiboo.se>
@@ -73,42 +72,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DHCP siaddr field contains the IP address of next server to use in
-bootstrap. Typically this will be the IP address of a TFTP server or the
-IP address of the DHCP server itself.
+Prefer use of a 'nfsserverip' env var before falling back to 'serverip'
+when using the nfs command. Similar to how the 'tftpserverip' env var
+is preferred over 'serverip' by the tftp command.
 
-RFC 2131, 2. Protocol Summary, Page 10:
-
-   DHCP clarifies the interpretation of the 'siaddr' field as the
-   address of the server to use in the next step of the client's
-   bootstrap process.  A DHCP server may return its own address in the
-   'siaddr' field, if the server is prepared to supply the next
-   bootstrap service (e.g., delivery of an operating system executable
-   image).  A DHCP server always returns its own address in the 'server
-   identifier' option.
-
-Set the 'tftpserverip' env variable when the siaddr field contains an
-IP address that is different compared to the DHCP server IP address.
+This also updates the error message to closer match the error message
+used by the lwIP tftp command when a server ip is not set.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- net/lwip/dhcp.c | 3 +++
- 1 file changed, 3 insertions(+)
+ net/lwip/nfs.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index 4cd4184c42bb..acdf601d7eb5 100644
---- a/net/lwip/dhcp.c
-+++ b/net/lwip/dhcp.c
-@@ -101,6 +101,9 @@ static int dhcp_loop(struct udevice *udev)
- 	env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
- 	if (!ip4_addr_isany(&dhcp->offered_gw_addr))
- 		env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr));
-+	if (!ip4_addr_isany(&dhcp->offered_si_addr) &&
-+	    !ip4_addr_eq(&dhcp->offered_si_addr, &dhcp->server_ip_addr))
-+		env_set("tftpserverip", ip4addr_ntoa(&dhcp->offered_si_addr));
+diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+index 1812bbda68e5..c3b819a091ec 100644
+--- a/net/lwip/nfs.c
++++ b/net/lwip/nfs.c
+@@ -247,10 +247,12 @@ int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		}
+ 	}
  
- #ifdef CONFIG_PROT_DNS_LWIP
- 	env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
++	if (!server_ip)
++		server_ip = env_get("nfsserverip");
+ 	if (!server_ip)
+ 		server_ip = env_get("serverip");
+ 	if (!server_ip) {
+-		log_err("*** ERROR: 'serverip' not set\n");
++		log_err("error: nfsserverip/serverip not set\n");
+ 		ret = CMD_RET_FAILURE;
+ 		goto out;
+ 	}
 -- 
 2.52.0
 
