@@ -4,104 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DECCCA5FEB
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 01:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237A3C9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 10:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8CA283956;
-	Sun, 18 Jan 2026 02:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E94D8307F;
+	Sun, 18 Jan 2026 11:50:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mNj3jfL8";
+	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="k61HHTsA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D636839DE; Sun, 18 Jan 2026 02:48:01 +0100 (CET)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 02EA08313B; Sun, 18 Jan 2026 11:50:29 +0100 (CET)
+Received: from mxout1.routing.net (mxout1.routing.net [IPv6:2a03:2900:1:a::a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B8EB80FA1
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 02:47:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C93AA82BF2
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 11:50:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-6481bd1763bso3012365d50.3
- for <u-boot@lists.denx.de>; Sat, 17 Jan 2026 17:47:59 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768700878; cv=none;
- d=google.com; s=arc-20240605;
- b=KsHsIFrui2lboQEpbukTfYlit+4gt+krzeGGSiOtFNkFPQ5n2zciuXBkK59oYZB8ky
- S0Ng80prRdI1r/IzInw6lJUAeQVhz0WYGCOVLW6cSX7kTHGeFPFURZ1S/BopnjgKV3XP
- z/mJx1CxCIWnTqTmHz2N1dQaIg04vktl8Y6Fn68bR+xdvDCACvqSUyjV3vUxnwLC+030
- o7FrX1qt7rrFECPEOwvfLHGXlLKDHfhesS/PVN+d462s0F9NVG2T22+3daSQLH0UUn4x
- 63VHN5N+DZ6RfW8apfsFTBn+VwZWKly1uwO1B8gUQyAwrQkPmhKYWGirQ6gyqfi+pYgS
- 2xvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=j1hyg79xPA+clSm8tuLBOf8fZh+NB+IDWp8l1s6JQJI=;
- fh=tPAL1aj5DPWMQYt0/Gzb1VwqzsVcQ5rqfVdcwmj/79E=;
- b=Ok/DhGXIaMpjOIVmxwo54D8aQgoIGeQh+/OPbnJIo7idaUXLBZp2W4+J6FW87ddA+i
- Yrbgh69k/qaXMfSVhzeDjhE0pw17+njjQVJsjNdY0jxkFpV9drNrXRG0eFNwUpdD6ii0
- 7I91jWutdism4DpTvvydlAEDWvyk5m9FLoRZSo6tbNGNLYqBWK/E3UQHgBtyLm5NDFRj
- 3YAjDCLa/UO8TP5wDqt+SnDAAnf76DHndN9A4CTkTygwsOBPJhN3OHWN0Fpgkea5jaek
- sJ9qb5gsjKZTLGxHbJpRI+EaODUTOXRRNYUWAyRnbA9TozAGLcWuo5swtyxFkq5LHwdo
- HSvA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768700878; x=1769305678; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j1hyg79xPA+clSm8tuLBOf8fZh+NB+IDWp8l1s6JQJI=;
- b=mNj3jfL8iWWjHt7Vzz5CGIxL4D3w8JNXD/HbuMuqDtE4CbpBHsuO1uvuV2qfYofEzM
- M1dijeSSCdHe7uDpAeB+nBNRd9AU3mtePY152wCF7b+cKsK2fOJAgkV5hQT4JLgq+7JV
- VgJ+mAaPIQ6ddAPEJDnHmg0BilC8hyq/lOlvf9r0yOBWsh9n8nICKoYKrc5JBGdVBZdC
- XhJ1jXttrW2TeKCpS/1OYANabRN7M2X79OaLd5uLUVqE4sxIoTOqwigVyBATO15ZzauP
- IF7UGfiDVmwJqLEzFDYR+0FL4LsUefragnRfHImEVzBJ5X9vA3VQuhhNTDQRQzcljDq8
- B97w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768700878; x=1769305678;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=j1hyg79xPA+clSm8tuLBOf8fZh+NB+IDWp8l1s6JQJI=;
- b=Er7XHpGZiS/q5H1a45103jqZIKqoib90vkSCnKIwFb319NoHza29OlTyTKGRRRV8N1
- 6S847taj6AzMo25nQtE+OztLibyfqnB1b9ATVEy+x8o2chPcmFr+Cm57KSZD4XYH/ESA
- ssUcD8lYa4ftQGRM17/AgBbmz6Mx1e+qhKyVfwC54MkMUExfKyqlEEWipR53UVOAYyy9
- 12By/nMx8U//SpQHYEs3DF0YY9/b26JXm9LxLbpDXu24SaZ+kxEdSMoULAB5tH7x58rd
- yqypnxh/Yp3VbEswvMjhq3PcKVCne7q25vRGMbdlhotk4Lw0xCPY1uxZBSe5KLqhmL8H
- xIoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWRbaH3RF9Va6qxlWXYAJrnyyOZ59XeO1r5OrEeVC/peg6JQgP10mq5Nfn3TQF6k+08uBeYyRg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4XRDMf2k2FixFpX8JnBt7KXzndo/GGRomRx3QpwgXX899TmLv
- pYRsLH8p2BPZGw5Z/8SOsR8UK2JsQ+YlARzryDyYcfQetugOdom1k/X1M1/l6ECIkFp/lhwyUXs
- MUelWqHCb0dzmpiUlZlfxliny273jT8c=
-X-Gm-Gg: AY/fxX5m7l9J1ocQEMvYJIueNOdeK1+8Jko+uwkWAlC4YvuKTVWVBluIGS8hjIBIWDE
- AyY6Qa9T7gaxw4Mg7I9NWTZMqE4q95Ngft0vlXATYt5pp9hIvmfkrqM/cyGxOtt5zpIhaRYn2J0
- j0S0DuoFFQy+t3He4M1vBsanhK5bqNZF2206CdkdDvsCphec1c9qryRv/wIAzdYApWiNhyLbArW
- KUgOTBtDdXjWzbHEBkkJkMVr6j41GMGb72D+pEmhchEsJse5GH/7C/SfZ1CiLkb/mhI49318iwY
- hPyV3lst
-X-Received: by 2002:a53:d252:0:b0:644:542b:bd1d with SMTP id
- 956f58d0204a3-64916490f95mr4953140d50.35.1768700878191; Sat, 17 Jan 2026
- 17:47:58 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=fw-web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
+Received: from mxbulk.masterlogin.de (unknown [192.168.10.85])
+ by mxout1.routing.net (Postfix) with ESMTP id 574EB40008;
+ Sun, 18 Jan 2026 10:50:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
+ s=routing; t=1768733426;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=1rb0gn8eB5IUINw0O4m2BRKHb73Qi4lJz8qW+A7Lvt4=;
+ b=k61HHTsAIKXI2gqspm/h+UwIfcByt/7b5uhJx9glHbeu6qrQMkRilh6w9IIFlAJZLHiUp0
+ eZFUbR33hR+dB4KEC/30aT6rQ9WgIVUtPdkNQibf9YUWzpx5bc/ufyz1UzG/yaqAgRq3uh
+ Tm9p9R5ZenEQEVTQXWSXg8QNku9Woig=
+Received: from frank-u24.. (fttx-pool-194.15.86.3.bambit.de [194.15.86.3])
+ by mxbulk.masterlogin.de (Postfix) with ESMTPSA id 394231226A6;
+ Sun, 18 Jan 2026 10:50:26 +0000 (UTC)
+From: Frank Wunderlich <linux@fw-web.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: [PATCH v4] cmd: mem: add function for getting ram size for use in
+ scripts
+Date: Sun, 18 Jan 2026 11:50:20 +0100
+Message-ID: <20260118105021.19760-1-linux@fw-web.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260116105351.2934665-1-Max.Merchel@ew.tq-group.com>
-In-Reply-To: <20260116105351.2934665-1-Max.Merchel@ew.tq-group.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 17 Jan 2026 22:47:44 -0300
-X-Gm-Features: AZwV_QgCYGeqc1eRBoVIQ8q_v4eGFfhef0eoDwcdwSQk2KquelSyG-rSvSxi_e0
-Message-ID: <CAOMZO5AbKi8P61WJ3KE_ic1WrsFnQA+bS9tBL5KORdtTKBhGjQ@mail.gmail.com>
-Subject: Re: [PATCH 0/5] board: TQMa6: improvements for config settings
-To: Max Merchel <Max.Merchel@ew.tq-group.com>
-Cc: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de, u-boot@ew.tq-group.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,22 +66,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 16, 2026 at 7:56=E2=80=AFAM Max Merchel <Max.Merchel@ew.tq-grou=
-p.com> wrote:
->
-> This series includes adjustments to the TQMa6 configurations.
-> The RAM timings are also updated.
->
-> Markus Niebel (1):
->   board: tqma6: update RAM timing to verified settings Rev.0300D
->
-> Max Merchel (3):
->   board: tqma6: Kconfig: select default SoM variant based on SoC
->   configs: tqma6: mba6: add and use defconfigs with general
->     configurations
->   configs: tqma6: activate CONFIG_CMD_NFS
->
-> Paul Gerber (1):
->   board: tqma6: improve config settings for TQMa6x/MBa6x
+From: Frank Wunderlich <frank-w@public-files.de>
 
-Applied, thanks.
+Add a command for getting detected ram size with possibility to write
+to environment variable.
+
+example usage:
+
+BPI-R4> msize
+4294967296
+BPI-R4> msize m
+4096m
+BPI-R4> msize g
+4g
+BPI-R4> msize g ramsize
+BPI-R4> printenv ramsize
+ramsize=4
+BPI-R4>
+
+board with 8GB ram:
+
+BPI-R4> msize
+8589934592
+BPI-R4> msize m
+8192m
+BPI-R4> msize g
+8g
+BPI-R4> msize g ramsize
+BPI-R4> printenv ramsize
+ramsize=8
+BPI-R4>
+
+Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+---
+v4: drop rounding to full MB/GB as it leads to wrong display
+v3: add missing ifdefs
+v2: add Kconfig entry
+---
+ cmd/Kconfig |  5 +++++
+ cmd/mem.c   | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 5c611fb3016e..b82b17195b7e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -974,6 +974,11 @@ config CMD_RANDOM
+ 	help
+ 	  random - fill memory with random data
+ 
++config CMD_MEMSIZE
++	bool "memsize"
++	help
++	  Get RAM via command for use in scripts.
++
+ config CMD_MEMTEST
+ 	bool "memtest"
+ 	help
+diff --git a/cmd/mem.c b/cmd/mem.c
+index d5d7ca2790bd..9dcfeacbbcc5 100644
+--- a/cmd/mem.c
++++ b/cmd/mem.c
+@@ -33,6 +33,7 @@
+ #include <linux/compiler.h>
+ #include <linux/ctype.h>
+ #include <linux/delay.h>
++#include <linux/sizes.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, int flag, int argc,
+ }
+ #endif /* CONFIG_LOOPW */
+ 
++#ifdef CONFIG_CMD_MEMSIZE
++static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
++		       char *const argv[])
++{
++	u64 memsize = gd->ram_size;
++
++	if (argc > 1) {
++		if (!strcmp(argv[1], "m"))
++			memsize = memsize / SZ_1M;
++		else if (!strcmp(argv[1], "g"))
++			memsize = memsize / SZ_1G;
++		if (argc > 2)
++			env_set_ulong(argv[2], memsize);
++		else
++			printf("%lld%s\n", memsize, argv[1]);
++	} else {
++		printf("%lld\n", memsize);
++	}
++
++	return 0;
++}
++#endif /* CONFIG_CMD_MEMSIZE */
++
+ #ifdef CONFIG_CMD_MEMTEST
+ static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulong end_addr,
+ 			  volatile ulong *dummy)
+@@ -1404,6 +1428,14 @@ U_BOOT_CMD(
+ );
+ #endif /* CONFIG_LOOPW */
+ 
++#ifdef CONFIG_CMD_MEMSIZE
++U_BOOT_CMD(
++	msize,	3,	1,	do_mem_size,
++	"get detected ram size, optional set env variable with value",
++	"[m, g] [envvar]"
++);
++#endif /* CONFIG_CMD_MEMSIZE */
++
+ #ifdef CONFIG_CMD_MEMTEST
+ U_BOOT_CMD(
+ 	mtest,	5,	1,	do_mem_mtest,
+-- 
+2.43.0
+
