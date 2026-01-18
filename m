@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0A9C9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 14:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB2BD4A5F4
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 16:26:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 741DB8389A;
-	Sun, 18 Jan 2026 15:56:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C7E98307F;
+	Sun, 18 Jan 2026 17:26:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ar/hp3An";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hbA+O6AE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8BA183956; Sun, 18 Jan 2026 15:56:00 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 079868397A; Sun, 18 Jan 2026 17:26:10 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A45558313B
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 15:55:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-64baaa754c6so5252426a12.3
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 06:55:58 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A0438307F
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 17:26:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7cfcc131958so2350205a34.0
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 08:26:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1768748158; x=1769352958;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=VVPjRYAdNTUCCylsfyHSbISrRELr4ncnQIVEfeEPAic=;
- b=ar/hp3Andi3ZqxMEB+8Zq6XJIAWobl2x1HNApz26ny0IzryuVODS2AtbSwdM8DuxA4
- oi5JdVXBV5Y7yLcbo5JFqli+AFT83Pp2q/wRnHpOkP6a+3xb5MCuu2XvjZmWoQ4l9sZp
- dzcumOSOZz2PluL8d/V+A6AIejcIUkFM94Nig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768748158; x=1769352958;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1768753566; x=1769358366; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VVPjRYAdNTUCCylsfyHSbISrRELr4ncnQIVEfeEPAic=;
- b=LNO610SONNJbiW3QFYiXNvO+ioiqHrY4JszPV8FqSv5aySoDc6GCwQeY5K21sZQgwv
- ZNM3h2qxGMPJPZC1955CxwbUn8weJV/jsnuo/mu49skniadq3ss+lBbWDfp2ZE+qHdSv
- dk9PsPrH4YAl1YHsKnuhn45DYczgQWbShJtEKrXDcd3Tto8FnOc7osq2F788G8N/2EbX
- r4QTG+1PeYkgOT93MwPpKNUuYNUfD9jOAK3EiG7Fnlrs3QbDYFh8u0Q1oSXnrORp30B2
- aj9b4+KJPO3sErKxNp2kYr21/BHOaGSCCo9NA5fmEyJSXONnQotQw7p8xk9sv0Fom3j9
- pe0A==
-X-Gm-Message-State: AOJu0YwjFrEaFndG57F+NJ8gO8pMfBLJQclNZ2zcr+ajpokGzWagkhyi
- E3Z7ClU/fFLl2QWUlk5unT5nD7ZLpahv3WxRm+Ai41kHWtkqfKalROYK3mI5WUxCQEn/w8Sf071
- 1owyv
-X-Gm-Gg: AY/fxX4JPesrYcmWzDo2xP1q5rGzNj1VGAyxev5Xvkx29lcD2Am6y+gkbqmfascvxik
- SSSfAKS3DM87wYOukIl+WuxIqMaQJdrYKMI6KmvZcKQKZEhcM0tDS+9M7l8MIZtGvn0rC8XCehT
- IntrDNpUGNV3Mq2K3Ei46P9LOLU9LKY0Qv3oGAAmbxsTOm1aqs4mQlR0NTa48gzExOXO3z31Asq
- zohGAOvlGqc3N+WJzQGD7drYD+yvVxM0p8wdn3VOBui7sRu+6Wq8k0B9CC72z+X/ANvmg4/5f9F
- PO1E/Y1/HhpP+KnJLK9GPAgfONvnoe1345AOQmV0yRuV8r6Cfq2RlawFi9neLZbT2y7unqJS9tB
- cj5g/OCZoOfuKVf6M/ZdJk0opJdON854vNXiK7jBFkTgV/DW2RNpXcCTrZIIhmWyJ84jJoYWoWA
- Yv2xBT6YI+Iq9RUIGYg00c/yEuaV6h0cKYmWfUX29hRmReB4kXNpfqS5i/U4WYTQ8sGDresI0fS
- AtTv7afO5o7up5a7tbC3caFFBF9qRiWfuJ/sZdm1ZxSTFYkSlbLu4vTBnI67pzXOWKE32FGeHQi
- FKmjb4L4Tq4=
-X-Received: by 2002:a17:907:3f8a:b0:b87:7e8:e287 with SMTP id
- a640c23a62f3a-b87930086d4mr661659366b.30.1768748157653; 
- Sun, 18 Jan 2026 06:55:57 -0800 (PST)
-Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
- (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8795a31322sm854760166b.63.2026.01.18.06.55.56
+ bh=5t636hJ9NHalISDE4Z5xPjy33G9+c1wkrMQzeWjRFAY=;
+ b=hbA+O6AE1dCkhKJI3OhIkXC4KG+Z0QO47iTfMVJomUwg2K9UOrtJyJN1GWXs9R/+SJ
+ hgm6jayrgiZGhzn9HcLvXiI4fnoIGQskU7GdyvDFcoJfHRLQKzyXAP16NcnvvDoRMCn4
+ BTeILDbOAJgE3J/6awiLSnQ0u5KN0cFuE/IxY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768753566; x=1769358366;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5t636hJ9NHalISDE4Z5xPjy33G9+c1wkrMQzeWjRFAY=;
+ b=cO10F9V3fFqhRV1ZqLjTlwzs0gOIQBKQ70GUS/BR0YGTFWwNBPIXQLBkIyU1qcdQSf
+ BycRzE4Aq7ISRW6Gzq0hOzvPiYF/SgMcB5AGLwycjTpTXgumUzbJ0hhX4jAAtCRhGoK9
+ CggXLmcFH8RNiN3T3pgYTdsUtkZFnd304juOgFPDS5aR6JCV6/p9uwjDQVeV/01Gu6bk
+ m8Vpx1KCAG8mLjIjtoJq1UFJRYZH8DxMkzi7CYzjrq1M4oj1hvu4pM4vZzFpZFMT6TKy
+ /EMa8yKCbq1HaK5f0rScUgiMIJKJhSwh8PO3nNx0eTskdjaTP8GOp5GyHxZNkV4hJpiA
+ dUnA==
+X-Gm-Message-State: AOJu0YzG97b8PwagE4ZS83qL2vY1kDJVtgs9ggIRFiTluh5ypfhHKSY4
+ bZE9+dulJwtsbLflof1HBZzzGuDO3b52mUudq0VuacZr8FzYQrrTYa1LdNM/WxNzVfU=
+X-Gm-Gg: AY/fxX49Jfpf3kyMhCYUXD5Vb+iZgS/AG6MurhBsAaXxKN00kxx1J3a9NhDx6fdEVeb
+ HvT94ud05pdNSBoH3/ckxQNuROI02pZXa2rTUfVgW5NIffz2yOLMlAwvsd4lX9k1IDDhhqVUWUV
+ jnRwkbRuFZSEuOt+uiZ5upQusK2KqbwfT+v1CeM1t8hz6bXCUsFtZGUuL62EpgKsf7Erof/K2X8
+ dPKr2N9tEiS3obceOo7MROFmY+6IOR7q6zAaMFB6TfYIe42HnuRdKkZQ6UqxjWm2/rkP6Q6g3us
+ plfVzEO4GH/r4ynocV8BW0yXk8/GDnVichTErX+WTAkW7Vgi1LpNiDtIIM8brjxXobRrf3ACKjb
+ HQlncvtGDY+L/jp/o10w72CJUEXOKcZr5Rm9MGn6e+AKAz1wXxRZM8TakwwiEBmpaIO6Q5IJ+GD
+ jL9nVetmkCcw0R+3a+xB+AZkGNzdU77ghrO1qwVaTeirc2sAci/X8xgPiKUCI/PbR9pWYaanQYz
+ Npme76FAEJkUXE1tl1lNlKHCTLquYGNVfRlYg==
+X-Received: by 2002:a05:6830:dc3:b0:7c7:5f09:879c with SMTP id
+ 46e09a7af769-7cfdee52e12mr4222800a34.26.1768753566265; 
+ Sun, 18 Jan 2026 08:26:06 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf2a696esm5272134a34.21.2026.01.18.08.26.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Jan 2026 06:55:57 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [RESEND PATCH] board: stm32mp2: read boot index from backup register
-Date: Sun, 18 Jan 2026 11:48:43 +0100
-Message-ID: <20260118104912.1672642-1-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+ Sun, 18 Jan 2026 08:26:05 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Janne Grunau <j@jannau.net>
+In-Reply-To: <20260117012404.187685-1-marek.vasut+usb@mailbox.org>
+References: <20260117012404.187685-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <176875356550.59866.15448808545011526917.b4-ty@konsulko.com>
+Date: Sun, 18 Jan 2026 10:26:05 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,66 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Following the commit 95b5a7de30f6 (“FWU: STM32MP1: Add support to read
-boot index from backup register”), this patch enables reading the boot
-index from backup registers on STM32MP2 platforms.
+On Sat, 17 Jan 2026 02:23:40 +0100, Marek Vasut wrote:
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> The following changes since commit 5665d1f4e7cfd6895417d199dd7db73500c5d36c:
+> 
+>   Merge tag 'net-20260115' of https://source.denx.de/u-boot/custodians/u-boot-net (2026-01-15 08:50:53 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
+> 
+> [...]
 
----
+Merged into u-boot/master, thanks!
 
- arch/arm/mach-stm32mp/include/mach/stm32.h |  4 ++++
- board/st/stm32mp2/stm32mp2.c               | 21 +++++++++++++++++++++
- 2 files changed, 25 insertions(+)
-
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 2bf50c755cbd..90f06a052d3f 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -188,8 +188,12 @@ enum forced_boot_mode {
- /* TAMP registers x = 0 to 127 : hardcoded description, waiting NVMEM node in DT */
- #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * (x))
- 
-+#define TAMP_FWU_BOOT_INFO_REG		TAMP_BACKUP_REGISTER(48)
- /* TAMP registers zone 3 RIF 1 (RW) at 96*/
- #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(96)
-+
-+#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-+#define TAMP_FWU_BOOT_IDX_OFFSET	0
- #endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
- 
- /* offset used for BSEC driver: misc_read and misc_write */
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 7bc7d2a608fd..43bc583378e6 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -188,3 +188,24 @@ void board_quiesce_devices(void)
- {
- 	led_boot_off();
- }
-+
-+#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
-+
-+#include <fwu.h>
-+
-+/**
-+ * fwu_plat_get_bootidx() - Get the value of the boot index
-+ * @boot_idx: Boot index value
-+ *
-+ * Get the value of the bank(partition) from which the platform
-+ * has booted. This value is passed to U-Boot from the earlier
-+ * stage bootloader which loads and boots all the relevant
-+ * firmware images
-+ *
-+ */
-+void fwu_plat_get_bootidx(uint *boot_idx)
-+{
-+	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
-+		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
-+}
-+#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
 -- 
-2.43.0
+Tom
 
-base-commit: ff498a3c5efb424accc1d825cc45cede2540ca13
-branch: stm32mp2-active-index
+
