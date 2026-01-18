@@ -4,100 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12ED9C9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0A9C9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 14:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F65183BF1;
-	Sun, 18 Jan 2026 14:47:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id 741DB8389A;
+	Sun, 18 Jan 2026 15:56:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Q5ihR/gk";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ar/hp3An";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B94B8313B; Sun, 18 Jan 2026 10:28:19 +0100 (CET)
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B8BA183956; Sun, 18 Jan 2026 15:56:00 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31EB882BF2
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 10:28:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1768728429; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=VJy0j6/b/X1PjbpDnWgaXwWQVh/E7rOmqphMexNXAv7WrwhAeiS5OaYfjuf9l320jsb1gOflGLp3mPVoTAsog4/OJQIkaFkcgSmIKBgUlRmAfj9QXzLAFPWVJr3+uGGlKM1FgVAFwYLbNnelp/LsR3pQmO9JdsffBnUDNIaeUDc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1768728429;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=hfT55TRigqzFLhNxoFGP5crJpELkNQlGKs3cHh9R7Es=; 
- b=JPXkVuCtH2B7gzMFbKQtWUf3WjIDvCg2D7in8MOjbzi2OTKOOVvu/253S91y5XYnIcMZKg0pmXU73p4x4Uw7dBaAGFUSgoXMOtK6MVaGFt1KZn2IuFccQMr34A7u7q4VMiIwkh7KLs6izjQ8VbIm4Ac5BDzloDJe8xfH8plUJ7I=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1768728429; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=hfT55TRigqzFLhNxoFGP5crJpELkNQlGKs3cHh9R7Es=;
- b=Q5ihR/gkZULuzaoE65ZYdmfnCWeAOIlXmMPSH2LwL+5ieEuVfsjjGu7xrl9MPBnx
- nSkpdIBLqjGzCfR7qYfg6DeOxXH72HFN8ar5YrtTCdgI27vydtKXMJMEjTYxIBJSK6U
- JjYQMnvrAXBw88bNqMV2n/KkXlEIGeznhXgmf+/Q=
-Received: by mx.zohomail.com with SMTPS id 1768728426370274.2055100892652;
- Sun, 18 Jan 2026 01:27:06 -0800 (PST)
-Date: Sun, 18 Jan 2026 09:26:18 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de
-Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Heiko Schocher <hs@nabladev.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Randolph Sheng-Kai Lin <randolph@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Conor Dooley <conor.dooley@microchip.com>,
- Yu-Chien Peter Lin <peter.lin@sifive.com>,
- Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- Michal Simek <michal.simek@amd.com>,
- Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
+ by phobos.denx.de (Postfix) with ESMTPS id A45558313B
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 15:55:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-64baaa754c6so5252426a12.3
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 06:55:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1768748158; x=1769352958;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VVPjRYAdNTUCCylsfyHSbISrRELr4ncnQIVEfeEPAic=;
+ b=ar/hp3Andi3ZqxMEB+8Zq6XJIAWobl2x1HNApz26ny0IzryuVODS2AtbSwdM8DuxA4
+ oi5JdVXBV5Y7yLcbo5JFqli+AFT83Pp2q/wRnHpOkP6a+3xb5MCuu2XvjZmWoQ4l9sZp
+ dzcumOSOZz2PluL8d/V+A6AIejcIUkFM94Nig=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768748158; x=1769352958;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VVPjRYAdNTUCCylsfyHSbISrRELr4ncnQIVEfeEPAic=;
+ b=LNO610SONNJbiW3QFYiXNvO+ioiqHrY4JszPV8FqSv5aySoDc6GCwQeY5K21sZQgwv
+ ZNM3h2qxGMPJPZC1955CxwbUn8weJV/jsnuo/mu49skniadq3ss+lBbWDfp2ZE+qHdSv
+ dk9PsPrH4YAl1YHsKnuhn45DYczgQWbShJtEKrXDcd3Tto8FnOc7osq2F788G8N/2EbX
+ r4QTG+1PeYkgOT93MwPpKNUuYNUfD9jOAK3EiG7Fnlrs3QbDYFh8u0Q1oSXnrORp30B2
+ aj9b4+KJPO3sErKxNp2kYr21/BHOaGSCCo9NA5fmEyJSXONnQotQw7p8xk9sv0Fom3j9
+ pe0A==
+X-Gm-Message-State: AOJu0YwjFrEaFndG57F+NJ8gO8pMfBLJQclNZ2zcr+ajpokGzWagkhyi
+ E3Z7ClU/fFLl2QWUlk5unT5nD7ZLpahv3WxRm+Ai41kHWtkqfKalROYK3mI5WUxCQEn/w8Sf071
+ 1owyv
+X-Gm-Gg: AY/fxX4JPesrYcmWzDo2xP1q5rGzNj1VGAyxev5Xvkx29lcD2Am6y+gkbqmfascvxik
+ SSSfAKS3DM87wYOukIl+WuxIqMaQJdrYKMI6KmvZcKQKZEhcM0tDS+9M7l8MIZtGvn0rC8XCehT
+ IntrDNpUGNV3Mq2K3Ei46P9LOLU9LKY0Qv3oGAAmbxsTOm1aqs4mQlR0NTa48gzExOXO3z31Asq
+ zohGAOvlGqc3N+WJzQGD7drYD+yvVxM0p8wdn3VOBui7sRu+6Wq8k0B9CC72z+X/ANvmg4/5f9F
+ PO1E/Y1/HhpP+KnJLK9GPAgfONvnoe1345AOQmV0yRuV8r6Cfq2RlawFi9neLZbT2y7unqJS9tB
+ cj5g/OCZoOfuKVf6M/ZdJk0opJdON854vNXiK7jBFkTgV/DW2RNpXcCTrZIIhmWyJ84jJoYWoWA
+ Yv2xBT6YI+Iq9RUIGYg00c/yEuaV6h0cKYmWfUX29hRmReB4kXNpfqS5i/U4WYTQ8sGDresI0fS
+ AtTv7afO5o7up5a7tbC3caFFBF9qRiWfuJ/sZdm1ZxSTFYkSlbLu4vTBnI67pzXOWKE32FGeHQi
+ FKmjb4L4Tq4=
+X-Received: by 2002:a17:907:3f8a:b0:b87:7e8:e287 with SMTP id
+ a640c23a62f3a-b87930086d4mr661659366b.30.1768748157653; 
+ Sun, 18 Jan 2026 06:55:57 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
+ (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8795a31322sm854760166b.63.2026.01.18.06.55.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Jan 2026 06:55:57 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Aniket Limaye <a-limaye@ti.com>, Ian Roberts <ian.roberts@timesys.com>,
- Angelo Dureghello <angelo.dureghello@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
- Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Justin Klaassen <justin@tidylabs.net>,
- Samuel Holland <samuel@sholland.org>,
- Rui Miguel Silva <rui.silva@linaro.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>,
- Joseph Chen <chenjh@rock-chips.com>
-Subject: Re: [PATCH 12/17] dt-bindings: pinctrl: add k1 support
-Message-ID: <aWynOt7uVgtqbA1P@pie>
-References: <20260117190231.977686-1-raymondmaoca@gmail.com>
- <20260117190231.977686-13-raymondmaoca@gmail.com>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [RESEND PATCH] board: stm32mp2: read boot index from backup register
+Date: Sun, 18 Jan 2026 11:48:43 +0100
+Message-ID: <20260118104912.1672642-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260117190231.977686-13-raymondmaoca@gmail.com>
-X-ZohoMailClient: External
-X-ZohoMail-Owner: <aWynOt7uVgtqbA1P@pie>+zmo_0_me@ziyao.cc
-X-Mailman-Approved-At: Sun, 18 Jan 2026 14:47:30 +0100
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,88 +103,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jan 17, 2026 at 02:01:46PM -0500, Raymond Mao wrote:
-> From: Raymond Mao <raymond.mao@riscstar.com>
-> 
-> Add dt-binding file of pinctrl driver for Spacemit K1 SoC.
-> 
-> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> ---
->  include/dt-bindings/pinctrl/k1-pinctrl.h | 59 ++++++++++++++++++++++++
->  1 file changed, 59 insertions(+)
->  create mode 100644 include/dt-bindings/pinctrl/k1-pinctrl.h
-> 
-> diff --git a/include/dt-bindings/pinctrl/k1-pinctrl.h b/include/dt-bindings/pinctrl/k1-pinctrl.h
-> new file mode 100644
-> index 00000000000..6c6b223c969
-> --- /dev/null
-> +++ b/include/dt-bindings/pinctrl/k1-pinctrl.h
-> @@ -0,0 +1,59 @@
-> +/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-> +/*
-> + * Copyright (C) 2025-2026 RISCStar Ltd.
-> + */
-> +
-> +#ifndef __DT_BINDINGS_K1_PINCTRL_H
-> +#define __DT_BINDINGS_K1_PINCTRL_H
-> +
-> +/* pin mux */
-> +#define MUX_MODE0	0
-> +#define MUX_MODE1	1
-> +#define MUX_MODE2	2
-> +#define MUX_MODE3	3
-> +#define MUX_MODE4	4
-> +#define MUX_MODE5	5
-> +#define MUX_MODE6	6
-> +#define MUX_MODE7	7
-> +
-> +/* strong pull resistor */
-> +#define SPU_EN		BIT(3)
-> +
-> +/* edge detect */
-> +#define EDGE_NONE	BIT(6)
-> +#define EDGE_RISE	BIT(4)
-> +#define EDGE_FALL	BIT(5)
-> +#define EDGE_BOTH	(EDGE_RISE | EDGE_FALL)
-> +
-> +/* slew rate output control */
-> +#define SLE_EN		BIT(7)
-> +
-> +/* schmitter trigger input threshold */
-> +#define ST00		(0 << 8)
-> +#define ST01		BIT(8)
-> +#define ST02		BIT(9)
-> +#define ST03		(BIT(8) | BIT(9))
-> +
-> +/* driver strength*/
-> +#define PAD_DS_3V	BIT(10)
-> +#define PAD_DS_SLOW0	(0 << 11)
-> +#define PAD_DS_SLOW1	BIT(11)
-> +#define PAD_DS_MEDIUM	BIT(12)
-> +#define PAD_DS_FAST	(BIT(11) | BIT(12))
-> +
-> +#define PAD_1V8_DS0	PAD_DS_SLOW0
-> +#define PAD_1V8_DS1	PAD_DS_SLOW1
-> +#define PAD_1V8_DS2	PAD_DS_MEDIUM
-> +#define PAD_1V8_DS3	PAD_DS_FAST
-> +
-> +#define PAD_3V_DS0	(PAD_DS_SLOW0 | PAD_DS_3V)
-> +#define PAD_3V_DS1	(PAD_DS_SLOW1 | PAD_DS_3V)
-> +#define PAD_3V_DS2	(PAD_DS_MEDIUM | PAD_DS_3V)
-> +#define PAD_3V_DS3	(PAD_DS_FAST | PAD_DS_3V)
-> +
-> +/* pull up/down */
-> +#define PULL_DIS	(0 << 13)	/* bit[15:13] 000 */
-> +#define PULL_UP		(6 << 13)	/* bit[15:13] 110 */
-> +#define PULL_DOWN	(5 << 13)	/* bit[15:13] 101 */
-> +
-> +#endif /* __DT_BINDINGS_K1_PINCTRL_H */
+Following the commit 95b5a7de30f6 (“FWU: STM32MP1: Add support to read
+boot index from backup register”), this patch enables reading the boot
+index from backup registers on STM32MP2 platforms.
 
-These definitions look like hardware bits instead of dt-bindings, and I
-don't see a binding file for the pinctrl driver of SpacemiT K1 in Linux
-upstream. If it's the case, please keep the definitions inside your
-driver, correct the commit description, and probably squash it into the
-driver patch.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Thanks,
-Yao Zi
+---
+
+ arch/arm/mach-stm32mp/include/mach/stm32.h |  4 ++++
+ board/st/stm32mp2/stm32mp2.c               | 21 +++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 2bf50c755cbd..90f06a052d3f 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -188,8 +188,12 @@ enum forced_boot_mode {
+ /* TAMP registers x = 0 to 127 : hardcoded description, waiting NVMEM node in DT */
+ #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * (x))
+ 
++#define TAMP_FWU_BOOT_INFO_REG		TAMP_BACKUP_REGISTER(48)
+ /* TAMP registers zone 3 RIF 1 (RW) at 96*/
+ #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(96)
++
++#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
++#define TAMP_FWU_BOOT_IDX_OFFSET	0
+ #endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
+ 
+ /* offset used for BSEC driver: misc_read and misc_write */
+diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+index 7bc7d2a608fd..43bc583378e6 100644
+--- a/board/st/stm32mp2/stm32mp2.c
++++ b/board/st/stm32mp2/stm32mp2.c
+@@ -188,3 +188,24 @@ void board_quiesce_devices(void)
+ {
+ 	led_boot_off();
+ }
++
++#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
++
++#include <fwu.h>
++
++/**
++ * fwu_plat_get_bootidx() - Get the value of the boot index
++ * @boot_idx: Boot index value
++ *
++ * Get the value of the bank(partition) from which the platform
++ * has booted. This value is passed to U-Boot from the earlier
++ * stage bootloader which loads and boots all the relevant
++ * firmware images
++ *
++ */
++void fwu_plat_get_bootidx(uint *boot_idx)
++{
++	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
++		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
++}
++#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
+-- 
+2.43.0
+
+base-commit: ff498a3c5efb424accc1d825cc45cede2540ca13
+branch: stm32mp2-active-index
