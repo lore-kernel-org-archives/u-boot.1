@@ -4,81 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09778C9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:50:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E55C9832F
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 13:50:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A447383B8F;
-	Sun, 18 Jan 2026 14:47:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id A6B9683981;
+	Sun, 18 Jan 2026 14:47:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Haiv67Qx";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 287C08313B; Sun, 18 Jan 2026 00:13:39 +0100 (CET)
-Received: from smtp.gentoo.org (dev.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
+ id 967068313B; Sun, 18 Jan 2026 09:52:28 +0100 (CET)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBA7383015
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 00:13:36 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Received: from localhost (unknown [116.232.18.222])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id CDA2A340F1D;
- Sat, 17 Jan 2026 23:13:33 +0000 (UTC)
-Date: Sun, 18 Jan 2026 07:13:30 +0800
-From: Yixun Lan <dlan@gentoo.org>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de, uboot@riscstar.com,
- Raymond Mao <raymond.mao@riscstar.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id F0E6082BF2
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 09:52:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1768726275; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=YOu2whBtrg0FPKQCckEfP+9SlxBhfyvKSGs4qYbUsXbRXG9NaGGueQDlO+1t8t9PzMe+7YE6sYfmRJ5pSKuOeodPqgwknKpghh0Ngt8ULlYnQcTUExkOrMz49ebNlimRQy4x7nEAxpEnqGvh8Mh4WgGvFGXtgP7m5vKDqo9d2nw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1768726275;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=TggExZ1GcIur80vFJRfitJbvadACQD62eIF2Hkv1nGA=; 
+ b=cGhJZZvfVAkPQnvaT+7NFQ21z/dT6rCUciLcI0mOynC7mZMX4FXAo/0p3kK/trSbxsbdVQ9LAGilVTZmhuxTqW47zbxzMz0TRl97n2fHv77giv8ht27Gpg5TsQhyBvyRNjS8lPtCuyGUi3k7+Ie4lJ/aI/gR1PUJWWDtpd/vbbc=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1768726275; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=TggExZ1GcIur80vFJRfitJbvadACQD62eIF2Hkv1nGA=;
+ b=Haiv67Qx+ESswSCgLi6LruEkMCPGGLl2kdMz3ELbPaqNN5VcvjU4MgfvPVBOq4R4
+ Iq6eRoIiZwAuIFp1nUtQHa8qzXMprzQQ/Ulx+QfMVNYPAGs29SPGKWPWOG9aEx/9tsB
+ cJK/VC9ymsEmqsolADk6GhmoFMFENrFx8yB0WKQ4=
+Received: by mx.zohomail.com with SMTPS id 1768726273139680.2181499475954;
+ Sun, 18 Jan 2026 00:51:13 -0800 (PST)
+Date: Sun, 18 Jan 2026 08:50:42 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de
+Cc: uboot@riscstar.com, Raymond Mao <raymond.mao@riscstar.com>,
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Heiko Schocher <hs@nabladev.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Yao Zi <me@ziyao.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Conor Dooley <conor.dooley@microchip.com>,
  Yu-Chien Peter Lin <peter.lin@sifive.com>,
  Jamie Gibbons <jamie.gibbons@microchip.com>,
- Michal Simek <michal.simek@amd.com>,
  Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
+ Michal Simek <michal.simek@amd.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
  Sam Protsenko <semen.protsenko@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Aniket Limaye <a-limaye@ti.com>,
  Angelo Dureghello <angelo.dureghello@timesys.com>,
- Aniket Limaye <a-limaye@ti.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Henrik Grimler <henrik@grimler.se>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>, Anshul Dalal <anshuld@ti.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Samuel Holland <samuel@sholland.org>,
  Justin Klaassen <justin@tidylabs.net>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Rui Miguel Silva <rui.silva@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Heiko Stuebner <heiko@sntech.de>
-Subject: Re: [PATCH 00/17] Add board support for Spacemit K1 SoC in SPL
-Message-ID: <20260117231221-GYB47382@gentoo.org>
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
+ Joseph Chen <chenjh@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>
+Subject: Re: [PATCH 02/17] spacemit: k1: enable SPL with debug UART
+Message-ID: <aWye4oHcHKihs11Z@pie>
 References: <20260117190231.977686-1-raymondmaoca@gmail.com>
+ <20260117190231.977686-3-raymondmaoca@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260117190231.977686-1-raymondmaoca@gmail.com>
+In-Reply-To: <20260117190231.977686-3-raymondmaoca@gmail.com>
+X-ZohoMailClient: External
+X-ZohoMail-Owner: <aWye4oHcHKihs11Z@pie>+zmo_0_me@ziyao.cc
 X-Mailman-Approved-At: Sun, 18 Jan 2026 14:47:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,130 +113,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-please Cc to spacemit@lists.linux.dev for more wide audience
-
-On 14:01 Sat 17 Jan     , Raymond Mao wrote:
+On Sat, Jan 17, 2026 at 02:01:36PM -0500, Raymond Mao wrote:
 > From: Raymond Mao <raymond.mao@riscstar.com>
 > 
-> This patch series introduces full support for the k1 SoC in SPL for
-> multiple boards.
+> Add SPL support featuring debug UART output for early boot
+> diagnostics on K1 SoC.
 > 
-> The series enables the board by:
-> 1. Adding the base board definition with device tree.
-this is rather huge patchset.. please order and list index
-of patches for people easy to review..
-
-some patches touch dts and driver code, please submit in separate patch
-
-> 2. Bringing up essential clock sources and tree.
-> 3. Initializing I2C buses for peripheral communication.
-> 4. Integrating the PMIC driver for power management.
-> 5. Adding regulator drivers for voltage domain control.
-> 
-> Junhui Liu (1):
->   clk: spacemit: Add support for K1 SoC
-> 
-> Raymond Mao (16):
->   spacemit: k1: support multi-board infrastructure
->   spacemit: k1: enable SPL with debug UART
->   configs: k1: enable early timer support
->   reset: k1: add SPL support and enable TWSI8 reset
->   dt-bindings: clock: import k1-syscon from upstream
->   dts: k1: import dts file from upstream folder
->   dts: k1: enable clocks in SPL
->   board: k1: initialize clock and serial devices in SPL
->   configs: k1: add default option for clock driver in SPL
->   i2c: k1: add I2C driver support
->   dt-bindings: pinctrl: add k1 support
->   spacemit: k1: add TLV EEPROM support in SPL
->   spacemit: k1: Add DDR firmware support to SPL
->   power: pmic: add support for Spacemit P1 PMIC
->   power: regulator: add support for Spacemit P1 SoC
->   board: k1: enable pmic in spl
-> 
->  arch/riscv/Kconfig                            |   10 +-
->  arch/riscv/cpu/k1/Kconfig                     |    6 +
->  arch/riscv/dts/Makefile                       |    1 +
->  arch/riscv/dts/k1-spl.dts                     |  239 +++
->  arch/riscv/dts/k1.dtsi                        |  667 +++++-
->  board/spacemit/bananapi-f3/Kconfig            |   25 -
->  board/spacemit/bananapi-f3/Makefile           |    5 -
->  board/spacemit/k1/Kconfig                     |   38 +
->  .../spacemit/{bananapi-f3 => k1}/MAINTAINERS  |    4 +-
->  board/spacemit/k1/Makefile                    |   26 +
->  board/spacemit/{bananapi-f3 => k1}/board.c    |    0
->  board/spacemit/k1/spl.c                       |  252 +++
->  board/spacemit/k1/tlv_codes.h                 |   22 +
->  configs/bananapi-f3_defconfig                 |   24 -
->  configs/k1_defconfig                          |   77 +
->  drivers/clk/Kconfig                           |    5 +-
->  drivers/clk/Makefile                          |    1 +
->  drivers/clk/spacemit/Kconfig                  |   31 +
->  drivers/clk/spacemit/Makefile                 |    7 +
->  drivers/clk/spacemit/clk-k1.c                 | 1793 +++++++++++++++++
->  drivers/clk/spacemit/clk_common.h             |   79 +
->  drivers/clk/spacemit/clk_ddn.c                |   93 +
->  drivers/clk/spacemit/clk_ddn.h                |   53 +
->  drivers/clk/spacemit/clk_mix.c                |  403 ++++
->  drivers/clk/spacemit/clk_mix.h                |  224 ++
->  drivers/clk/spacemit/clk_pll.c                |  157 ++
->  drivers/clk/spacemit/clk_pll.h                |   81 +
->  drivers/i2c/Kconfig                           |    7 +
->  drivers/i2c/Makefile                          |    1 +
->  drivers/i2c/k1_i2c.c                          |  521 +++++
->  drivers/i2c/k1_i2c.h                          |   69 +
->  drivers/power/pmic/Kconfig                    |   17 +
->  drivers/power/pmic/Makefile                   |    1 +
->  drivers/power/pmic/pmic_spacemit_p1.c         |   94 +
->  drivers/power/regulator/Kconfig               |   15 +
->  drivers/power/regulator/Makefile              |    1 +
->  .../power/regulator/spacemit_p1_regulator.c   |  460 +++++
->  drivers/reset/Kconfig                         |    7 +
->  drivers/reset/Makefile                        |    2 +-
->  drivers/reset/reset-spacemit-k1.c             |    4 -
->  include/configs/{bananapi-f3.h => k1.h}       |    9 +
->  .../dt-bindings/clock/spacemit,k1-syscon.h    |  253 +++
->  include/dt-bindings/pinctrl/k1-pinctrl.h      |   59 +
->  include/power/spacemit_p1.h                   |  163 ++
->  include/soc/spacemit/k1-syscon.h              |  149 ++
->  lib/vendor/spacemit/ddr_fw.bin                |  Bin 0 -> 19416 bytes
->  46 files changed, 5985 insertions(+), 170 deletions(-)
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> ---
+>  arch/riscv/cpu/k1/Kconfig  |  2 ++
+>  arch/riscv/dts/Makefile    |  1 +
+>  arch/riscv/dts/k1-spl.dts  | 26 ++++++++++++++++++++++++++
+>  arch/riscv/dts/k1.dtsi     |  2 +-
+>  board/spacemit/k1/Makefile |  2 ++
+>  board/spacemit/k1/spl.c    | 24 ++++++++++++++++++++++++
+>  configs/k1_defconfig       | 21 ++++++++++++++++++++-
+>  include/configs/k1.h       |  2 ++
+>  8 files changed, 78 insertions(+), 2 deletions(-)
 >  create mode 100644 arch/riscv/dts/k1-spl.dts
->  delete mode 100644 board/spacemit/bananapi-f3/Kconfig
->  delete mode 100644 board/spacemit/bananapi-f3/Makefile
->  create mode 100644 board/spacemit/k1/Kconfig
->  rename board/spacemit/{bananapi-f3 => k1}/MAINTAINERS (61%)
->  create mode 100644 board/spacemit/k1/Makefile
->  rename board/spacemit/{bananapi-f3 => k1}/board.c (100%)
 >  create mode 100644 board/spacemit/k1/spl.c
->  create mode 100644 board/spacemit/k1/tlv_codes.h
->  delete mode 100644 configs/bananapi-f3_defconfig
->  create mode 100644 configs/k1_defconfig
->  create mode 100644 drivers/clk/spacemit/Kconfig
->  create mode 100644 drivers/clk/spacemit/Makefile
->  create mode 100644 drivers/clk/spacemit/clk-k1.c
->  create mode 100644 drivers/clk/spacemit/clk_common.h
->  create mode 100644 drivers/clk/spacemit/clk_ddn.c
->  create mode 100644 drivers/clk/spacemit/clk_ddn.h
->  create mode 100644 drivers/clk/spacemit/clk_mix.c
->  create mode 100644 drivers/clk/spacemit/clk_mix.h
->  create mode 100644 drivers/clk/spacemit/clk_pll.c
->  create mode 100644 drivers/clk/spacemit/clk_pll.h
->  create mode 100644 drivers/i2c/k1_i2c.c
->  create mode 100644 drivers/i2c/k1_i2c.h
->  create mode 100644 drivers/power/pmic/pmic_spacemit_p1.c
->  create mode 100644 drivers/power/regulator/spacemit_p1_regulator.c
->  rename include/configs/{bananapi-f3.h => k1.h} (52%)
->  create mode 100644 include/dt-bindings/clock/spacemit,k1-syscon.h
->  create mode 100644 include/dt-bindings/pinctrl/k1-pinctrl.h
->  create mode 100644 include/power/spacemit_p1.h
->  create mode 100644 include/soc/spacemit/k1-syscon.h
->  create mode 100644 lib/vendor/spacemit/ddr_fw.bin
-> 
-> -- 
-> 2.25.1
-> 
 
--- 
-Yixun Lan (dlan)
+...
+
+> diff --git a/configs/k1_defconfig b/configs/k1_defconfig
+> index 0bdc3c800f0..f1a16735943 100644
+> --- a/configs/k1_defconfig
+> +++ b/configs/k1_defconfig
+> @@ -3,7 +3,19 @@ CONFIG_SYS_MALLOC_LEN=0x1000000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
+> -CONFIG_DEFAULT_DEVICE_TREE="k1-bananapi-f3"
+> +CONFIG_DEFAULT_DEVICE_TREE="k1-spl"
+> +CONFIG_SPL=y
+> +CONFIG_SPL_TEXT_BASE=0xC0801000
+
+Please be consistent about cases in hex. Rest of the file uses
+lowercases, and I think it's better to align.
+
+> +CONFIG_SPL_MAX_SIZE=0x33000
+> +CONFIG_SPL_BSS_START_ADDR=0xC0837000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x2000
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_STACK=0xC0840000
+> +CONFIG_SPL_SIZE_LIMIT=0x31000
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT_ADDRESS=0x08000000
+> +CONFIG_STACK_SIZE=0x100000
+>  CONFIG_SYS_BOOTM_LEN=0xa000000
+>  CONFIG_SYS_LOAD_ADDR=0x200000
+>  CONFIG_ARCH_RV64I=y
+> @@ -23,3 +35,10 @@ CONFIG_PINCTRL_SINGLE=y
+>  CONFIG_RESET_SPACEMIT_K1=y
+>  CONFIG_SYS_NS16550=y
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEBUG_UART_BASE=0xD4017000
+> +CONFIG_DEBUG_UART_CLOCK=14700000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_DEBUG_UART_NS16550=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+
+Regards,
+Yao Zi
