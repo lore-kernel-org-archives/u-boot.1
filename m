@@ -4,63 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA5AC9832F
-	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 11:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF5CD4A5F4
+	for <u-boot@archiver.kernel.org>; Sun, 18 Jan 2026 12:06:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86C728307F;
-	Sun, 18 Jan 2026 12:34:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
+	by phobos.denx.de (Postfix) with ESMTP id 6F62E8307F;
+	Sun, 18 Jan 2026 13:06:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="hyFljquD";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k0G4v2tE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C096E8313B; Sun, 18 Jan 2026 12:34:24 +0100 (CET)
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+ id 5443C8313B; Sun, 18 Jan 2026 13:06:21 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45E8A82BF2
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 12:34:22 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=posteo.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j.ne@posteo.net
-Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id CE492240029
- for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 12:34:21 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net; s=2017;
- t=1768736061; bh=Oca1gbM5KrAW2b8mP94lqaYAakJjfHh5z/L4bin4dPU=;
- h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:From;
- b=hyFljquDIrQK1NOIR6o09Na08HWtbWxFOqX0WS0ITrOoPuPR9x23tnzy6iDewxCAW
- UVErSzEUQTj6hfGdEUeKsOzWGZSHRCM71TfL2YsdWPCPJGAKhkSEbo3h23VXE4psUX
- qMhnq1Cxgaof06DnBzqXm5IQL+jMfLgY8ECDQKvlPP/w7oko1lB3lD3zGNh9sCTkhJ
- +SXr6sZVPH1pHsbCEL0a4GDfh2HaKTjFD/9u0Rb5B0JUzH+LqVKacNm/N4ZbK/W7GN
- YpLdoNNCZSvF0/JloMJje+4/GjlKg+4Jl2eU7Z83qG8WhUYXKCVgv86nAJjOWIOy3P
- zlzNajK2ygl4w==
-Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4dvBLt6pyWz6tsf;
- Sun, 18 Jan 2026 12:34:14 +0100 (CET)
-Date: Sun, 18 Jan 2026 11:34:21 +0000
-From: =?utf-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: =?utf-8?Q?J=2E_Neusch=C3=A4fer?= via B4 Relay
- <devnull+j.ne.posteo.net@kernel.org>, 
- j.ne@posteo.net, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Peter Geis <pgwipeout@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- linux-sunxi <linux-sunxi@lists.linux.dev>
-Subject: Re: [PATCH next v2] board: amediatech: Add X96Q support
-Message-ID: <aWzFNrTmfP7Lr2rd@probook>
-References: <20260110-x96q-v2-1-1d6a725eb825@posteo.net>
- <20260110012313.6fa04c9e@minigeek.lan>
+ by phobos.denx.de (Postfix) with ESMTPS id 5880D82BF2
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 13:06:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E66EC3FDEC
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 12:06:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1768737977;
+ bh=NjBqR83t/AIKxqnCQ4DqNYpyTOQFhCzTfSVCuQ6cMUk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=k0G4v2tE1qC9q8oIE455UHyxpmrsAZ7F9PCdSGc/NEBxtL8OaV9zJ/tq/X32bR4in
+ zjkXoC1dRWJ7A/6n2t8VEnQddp6oSk1F04scSIRjDFriCqIWIUylElNGvc6Znhtukm
+ xHhkjv2zA7+2n9HVYQ2R2s4NSkA5qGF86VixHVIDRir4tRQgDTLjSG4JN8yNJdyPs/
+ M8kK+0rgBH7Q7W05ydnow3ean2VvBS3/sQgV2tPa8zBsDN2l9F3toNa9OKnnHIqh7m
+ aa0ExSqZELjgTt+Li00+ArFrMAzu6oCMBQftMa9KGBl2mRLgvC+VgWWhL+co2fXLyG
+ vrTbDp8WzjekzhF6JTc9hDV+OVKpDs/Ul8c/UX863DPS/0ggtJxhDNPiiqVZHbLc0w
+ jJaRpTSBG9HzJbbUAfXicQQggr435TRhYMOp/1Ms4i/qybbZ1SP9lpE5tITsvbCtOp
+ hLL7ArZUKl33+Grcn4a7SnrUEETV2y/PA6WkOx/9Xv5BqMeIpYhr2AYMsLts1ld7+R
+ f8ksnOFf2G94/fhtrE4lsI31AvQK0o4CsbM/P7gY2Ny6HW0Gf88XB9K4EczFotS8cD
+ 9bh0Dsv68pRSf82c3e9sCe5Mb0wS1VZW0Ok9nO/mRYaSXallDJZff4V7UdbJiG/E1B
+ 8SKNdY1D1/6epUuWHXc1F6A8=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-47edee0b11cso17320925e9.1
+ for <u-boot@lists.denx.de>; Sun, 18 Jan 2026 04:06:17 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768737977; x=1769342777;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NjBqR83t/AIKxqnCQ4DqNYpyTOQFhCzTfSVCuQ6cMUk=;
+ b=gtELWLG02SICLB3fpbjHdkNBeLGc2zp+2ljh1iEWmWu8M3OPxRIvG8oSszV0aQjxCH
+ FslGUxDqLHJl0O59uvsyGGmR+YdWQwT8rkR0DlAILK7a0yBvtfqDhITkzoz+r8QPwHZo
+ 7/m82NPLv8wd+Y4txXHAHhOgXwST6JxsCKlJNi7eSxU9wG+X1Q6oQtbZIqIMh5eDSVXj
+ Qdd3zjjZH0thwHT5vXHUtPCXJWsdxfi1aDDRqOHvNdgRuwP6mMi8rDq/yi7wjSmV9jtl
+ Q/sScCX/7JXTYjUMjI45iilgIZnxQAD7TmH6MvdoH8iaMlIl9AkwoBOVn7fNOEDKXLtg
+ tYQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKeycWDwmQj+FC5b/cnvtX7UGttZHftJ73P1LOMKjANMtMsKQ/pIIltjKd77gx3P9N4ZFCbeM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfvbvbDGgQu9ge/1HratJCXRan4Ox6PPW8Y0iImcYZxIsnbyyo
+ sdP7EViFeocxUtqR/drOTw9OuT6aumoa/37xZy9i/xK7qu20An4kZdiCaquEeWGxxy96PIO3G31
+ uaQvNftS1LWpAoYH6mPxKQSAE9LivAdnbFTPl5q/s6l6KbcaL4d1LjUePCW8PFukexxy6RC0vXz
+ V93p8=
+X-Gm-Gg: AY/fxX6Lmq4h2Sw2QwnWVbStNSVS/HYA6qL/BOq+cZdI71uDyHEzBIPXQTz9SxX7M+r
+ 60SG5ebzdHujTaJqs75lV/XkXr35kZfehbAsfSD9BbHmZGBijR2NcPF/HPpo1tzCsyuNhw+/XKJ
+ G4p89qK2AeT0nDGQOGv9ig05IdF4KLVuZyZWIBMHCcv/Id7gh9uxBKpVb3E4oiy5I9ssyLyNIp4
+ LSi2SLtq9SVPi+uVki2MaKLYIObRWt8x7GFggSl/1NIvpwpZi817tDMWR0NYXSLU33CmeVocMkR
+ P2QNiwChvOixz3QWhnI32kU8yHCxyD1yuS9YVD5Hw5kkNqyDgU7HVKSUfeRpBQGt9zuMli2pSj2
+ X6b4jlkse/wtV8DesCGy+33wA0d7J9vLG
+X-Received: by 2002:a05:600c:3b84:b0:47e:e575:a33e with SMTP id
+ 5b1f17b1804b1-4801eb14eb8mr93986375e9.33.1768737977454; 
+ Sun, 18 Jan 2026 04:06:17 -0800 (PST)
+X-Received: by 2002:a05:600c:3b84:b0:47e:e575:a33e with SMTP id
+ 5b1f17b1804b1-4801eb14eb8mr93986195e9.33.1768737977095; 
+ Sun, 18 Jan 2026 04:06:17 -0800 (PST)
+Received: from workstation5 ([2a02:3037:6ee:7719:df76:1721:7535:ce35])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4356999810bsm16731734f8f.40.2026.01.18.04.06.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Jan 2026 04:06:16 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: E Shattow <e@freeshell.de>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: expand on JH7110 boot select switches
+Date: Sun, 18 Jan 2026 13:05:23 +0100
+Message-ID: <20260118120523.13724-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260110012313.6fa04c9e@minigeek.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,145 +113,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jan 10, 2026 at 01:23:13AM +0100, Andre Przywara wrote:
-> On Sat, 10 Jan 2026 00:10:32 +0100
-> J. Neuschäfer via B4 Relay <devnull+j.ne.posteo.net@kernel.org> wrote:
-> 
-> Hi,
-> 
-> many thanks for sending this!
-> CC:ing the sunxi list for better visibility.
-> New board support is mostly a matter for the people interested in the
-> SoC family, less so for the general U-Boot audience.
+While some boards have separate switch RGPIO0, RGPIO1 others only
+have a common switch.
 
-Good point. I just followed get_maintainer.pl, which couldn't add the
-linux-sunxi list for two reasons:
+Describe the restriction.
 
- - U-Boot's MAINTAINERS file doesn't use keyword tags and none of the
-   filenames in this patch match the sunxi entry
- - it doesn't list linux-sunxi mailing list
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/board/starfive/jh7110_common.rst | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Anyway, I'll Cc it on the next revision.
+diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
+index 77102fcc189..14ec556ab13 100644
+--- a/doc/board/starfive/jh7110_common.rst
++++ b/doc/board/starfive/jh7110_common.rst
+@@ -237,6 +237,11 @@ RGPIO1 RGPIO0 StarFive loader function @ 0x2A00_0000
+ 1      1      UART Serial XMODEM loader
+ ====== ====== ======================================
+ 
++While some boards have separate switches for RGPIO0 and RGPI01 (Milk-V Mars,
++StarFive VisionFive 2, Pine64 Star64) other boards only offer a common
++switch (Orange Pi RV, StarFive VisionFive 2 Lite) or control line
++(Milk-V Mars CM). Here booting from SD-card or eMMC is not possible.
++
+ According to `JH-7110 Boot User Guide BootROM`_ the StarFive loader code reads
+ content to SRAM @ 0x0800_0000 from different media selected by [RGPIO1,RGPIO0].
+ 
+-- 
+2.51.0
 
-> 
-> > From: "J. Neuschäfer" <j.ne@posteo.net>
-> > 
-> > The X96Q is a set-top box with an H313 SoC, AXP305 PMIC, 1 or 2 GiB RAM,
-> > 8 or 16 GiB eMMC flash, 2x USB A, Micro-SD, HDMI, Ethernet, audio/video
-> > output, and infrared input.
-> > 
-> >   https://x96mini.com/products/x96q-tv-box-android-10-set-top-box
-> > 
-> > This commit adds a defconfig and some documentation. The devicetree is
-> > already in dts/upstream.
-> > 
-> > The CONFIG_DRAM_SUNXI_* settings are chosen such that the register
-> > values in the DRAM PHY's MMIO space are as close as possible to those
-> > observed when booting with the preinstalled vendor U-Boot. The DRAM
-> > clock frequency of 600 MHz was reported in the vendor U-Boot's output.
-> > 
-> > Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
-> > ---
-> > Changes in v2:
-> > - Add missing Signed-off-by
-> > - Re-generate x96q_defconfig with 'make savedefconfig'
-> > - Move DRAM frequency comment to commit message
-> > - Use GPL-2.0-or-later instead of deprecated GPL-2.0+
-> > - Link to v1: https://lore.kernel.org/r/20251231-x96q-v1-1-316d703b8f03@posteo.net
-> > ---
-> >  configs/x96q_defconfig         | 31 +++++++++++++++++++++++
-> >  doc/board/amediatech/index.rst |  9 +++++++
-> >  doc/board/amediatech/x96q.rst  | 57 ++++++++++++++++++++++++++++++++++++++++++
-> >  doc/board/index.rst            |  1 +
-> >  4 files changed, 98 insertions(+)
-> > 
-> > diff --git a/configs/x96q_defconfig b/configs/x96q_defconfig
-> > new file mode 100644
-> > index 00000000000..b74a1b61f3c
-> > --- /dev/null
-> > +++ b/configs/x96q_defconfig
-> > @@ -0,0 +1,31 @@
-> > +CONFIG_ARM=y
-> > +CONFIG_ARCH_SUNXI=y
-> > +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h313-x96q"
-> > +CONFIG_DRAM_CLK=600
-> > +CONFIG_SPL=y
-> > +CONFIG_DRAM_SUNXI_DX_ODT=0x03030303
-> > +CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-> > +CONFIG_DRAM_SUNXI_CA_DRI=0x1f12
-> > +CONFIG_DRAM_SUNXI_TPR0=0xc0001002
-> > +CONFIG_DRAM_SUNXI_TPR2=0x00000100
-> > +CONFIG_DRAM_SUNXI_TPR10=0x002f0107
-> > +CONFIG_DRAM_SUNXI_TPR11=0xddddcccc
-> > +CONFIG_DRAM_SUNXI_TPR12=0xeddc7665
-> > +CONFIG_MACH_SUN50I_H616=y
-> > +CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
-> > +CONFIG_R_I2C_ENABLE=y
-> > +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> > +CONFIG_FIT_BEST_MATCH=y
-> 
-> What is this for, exactly?
-
-The purpose was to boot FIT images as generated by the Linux kernel
-build system.
-
-> 
-> > +CONFIG_SPL_I2C=y
-> > +CONFIG_CMD_UFETCH=y
-> > +CONFIG_CMD_CAT=y
-> 
-> Can you please drop those two commands? A defconfig is meant to provide
-> some low level common configuration, enabling the features that are
-> needed to boot. Command support should only be selected in the
-> defconfig if it has a special meaning or requirement for this
-> board.
-
-Since this and the previous point are deployment characteristics (how a
-board is used) rather than a characteristics of the board itself, I'll
-remove them.
-
-> 
-> > +CONFIG_SPL_SYS_I2C_LEGACY=y
-> > +CONFIG_SYS_I2C_MVTWSI=y
-> > +CONFIG_SYS_I2C_SLAVE=0x7f
-
-The SYS_I2C_SLAVE setting is also unnecessary for this board.
-
-> > +CONFIG_SYS_I2C_SPEED=400000
-> > +CONFIG_SUPPORT_EMMC_BOOT=y
-> > +CONFIG_SUN8I_EMAC=y
-> > +CONFIG_AXP305_POWER=y
-> > +CONFIG_USB_EHCI_HCD=y
-> > +CONFIG_USB_OHCI_HCD=y
-> > +CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT=y
-> 
-> What is this needed for?
-
-It turns out to be unnecessary.
-
-> 
-> > diff --git a/doc/board/amediatech/index.rst b/doc/board/amediatech/index.rst
-> 
-> What does this file add on top of doc/board/allwinner/sunxi.rst?
-
- - A mention that this board in particular is supported
- - The information that PLAT=sun50i_h616 should be used when building TF-A
-
-I guess both of these could be derived from the defconfig too.
-
-> In general we do not use board/<vendor> directories for Allwinner
-> boards, not for code, and not for documentation.
-> So can you please just drop this file and the amediatech entry below?
-
-Ok.
-
-I suppose it makes sense to change the patch title to "board: sunxi: ..." too.
-
-> But you would need to add an entry into board/sunxi/MAINTAINERS,
-> otherwise the U-Boot CI will fail.
-
-Will do.
-
-
-Thanks for your review!
-J. Neuschäfer
