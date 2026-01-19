@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38343D29C4D
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 19:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78604CCF2DE
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 19:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2324B8389A;
+	by phobos.denx.de (Postfix) with ESMTP id 61CA5839E2;
 	Mon, 19 Jan 2026 20:07:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="U4HN80wD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BsYH1th7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D7A83A83; Mon, 19 Jan 2026 20:07:26 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 27B858313B; Mon, 19 Jan 2026 20:07:26 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C68B88313B
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 20:07:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3204583A64
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 20:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 984B360135;
+ by sea.source.kernel.org (Postfix) with ESMTP id 82E3E40453;
  Mon, 19 Jan 2026 19:07:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4F7FCC19424;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 62EA6C2BC86;
  Mon, 19 Jan 2026 19:07:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1768849640;
- bh=dHfia6EKsEISrDG205tOfoFaxG/GwxaoYF+rzo634iE=;
+ bh=eU9SnUarYYSNgbeK4/7MfGiBb1xq7Xrr/s53iZOVZ/U=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=U4HN80wD0AStPSokNxPvXJIas474R8/QfIJAdLHUZnCw/owmBhnozn+BrIoJk8uyC
- HbASRYoy3X6ds1rlT+fDylNdTanh6sivYWHaXzHUmE5uSmT3LRINiJDQ5D0mwIUcr2
- G9/b0YNJMdTe0Vyi3lc9gdBij9ZFp4b1JqPQ8T7cuod1V+vsMJFcwfgaYHCTiL/KQK
- oYo46kSobNb45tCL361NOeEAVVkmADgUlxl74Q+aF1d0KR3sgjyAKZjOxFSiLxHb7S
- aBWfVTKVOeOHWCNCB7B9dEr1sGh3fANlfbKhBrBvW+NvKOP1XUobaO1X+Q3YjlF/Yj
- 1FkE9aAWpI5Fw==
+ b=BsYH1th7a6odnAKChaiRIQpQPSXGKkjdX2WKwNFa7j9mOpmaXBF7U5KdCwZ6tl7gH
+ wSKCz2DScuCBMzsRB24PbTYq+n/9fAHyU4IzynwUQKRmZmFLm48dYftpyc6o+hk68K
+ TJr66EDQzvEM5zsDk4l78aKoO2pUYZa89k2m6w3P7DkNAUnfG08IU95dctm8tlku5u
+ C3vGKtNOnYhkVvrJMSgpizhMwy3oFhMO/f2Qwe7gWogq2wm0y0H60EuVp2pcJFbxS+
+ yqlu3uNV13oiYpaWS+0XcgMDlsWQp6cCYnaHMh4kFuYcAS76IlKkS0STaHRKW6EDhB
+ PhgIfFyn2xIkg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 3EC5BCCF2DE;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF99CCF2F7;
  Mon, 19 Jan 2026 19:07:20 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Tue, 20 Jan 2026 03:07:18 +0800
-Subject: [PATCH v3 1/6] drivers: core: device: set new parent when old
- parent is NULL
+Date: Tue, 20 Jan 2026 03:07:20 +0800
+Subject: [PATCH v3 3/6] clk: add uclass id check to clk_get_parent()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260120-clk-reparent-v3-1-0d43d4b362ac@outlook.com>
+Message-Id: <20260120-clk-reparent-v3-3-0d43d4b362ac@outlook.com>
 References: <20260120-clk-reparent-v3-0-0d43d4b362ac@outlook.com>
 In-Reply-To: <20260120-clk-reparent-v3-0-0d43d4b362ac@outlook.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
+Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>, 
+ Simon Glass <simon.glass@canonical.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1768849639; l=969;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1768849639; l=845;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=OkZuox6Z1IbENHdSA3AsovLwcHU5OVol0g+5GscgV+U=;
- b=0dzAguuUjbQMz7yawY5OA4wG6fUnDbvwJAUEfhAhT35dlYvGQZNAOGRe6dGPNRXWpVWhPswpI
- n/79eTFy/8zAI92dM36ScNrKTIqrvgIZ4XHW1I6BJcuWY83ftFBc6Pc
+ bh=z8RAmI39MslmxtsJNWHoIU88HjZWrYeA9Sj3Gni2MDQ=;
+ b=eA3SH0a3h3MAHezL7mbybBTXNKIrnN+gdOIPjNxGUpLzNnS1J8191zYh09ZARzisqpQdlfg+q
+ MP5UUucWlweBmMdEpr+USFYFP0Kh9tBFC331Fd5TYaFOl8r864eqQeV
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -88,35 +88,31 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-The current logic does not update the new parent in device_reparent() if
-old parent is NULL. The behavior is not desired. Fix it by setting the
-parent in this case.
+Check the uclass id in clk_get_parent() before casting dev->priv to
+struct clk *.  This sanity check can be also found in some other places
+and should be enforced.
 
-Fixes: cfecbaf4e768 ("dm: core: add support for device re-parenting")
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/core/device.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/clk/clk-uclass.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index 779f371b9d5b..0ae09f5a4e33 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -285,6 +285,14 @@ int device_reparent(struct udevice *dev, struct udevice *new_parent)
- 	assert(dev);
- 	assert(new_parent);
- 
-+	if (!dev->parent) {
-+		assert(list_empty(&dev->sibling_node));
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 0584429bed65..559420c85056 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -507,6 +507,10 @@ struct clk *clk_get_parent(struct clk *clk)
+ 	pdev = dev_get_parent(clk->dev);
+ 	if (!pdev)
+ 		return ERR_PTR(-ENODEV);
 +
-+		list_add_tail(&dev->sibling_node, &new_parent->child_head);
-+		dev->parent = new_parent;
-+		return 0;
-+	}
++	if (device_get_uclass_id(pdev) != UCLASS_CLK)
++		return ERR_PTR(-ENODEV);
 +
- 	device_foreach_child_safe(pos, n, dev->parent) {
- 		if (pos->driver != dev->driver)
- 			continue;
+ 	pclk = dev_get_clk_ptr(pdev);
+ 	if (!pclk)
+ 		return ERR_PTR(-ENODEV);
 
 -- 
 2.43.0
