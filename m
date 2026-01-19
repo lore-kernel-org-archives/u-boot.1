@@ -4,75 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF91D29C32
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 17:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D789D29C4F
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 18:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79E4A8389A;
-	Mon, 19 Jan 2026 18:34:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D1C98313B;
+	Mon, 19 Jan 2026 19:03:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="LZovMQqw";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Zw7Rzv68";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD08B8397A; Mon, 19 Jan 2026 18:34:37 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id E8A768389A; Mon, 19 Jan 2026 19:03:22 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64D388313B
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 18:34:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3D468003E
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 19:03:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id BDDD71A2994;
- Mon, 19 Jan 2026 17:34:34 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6BE4B60731;
- Mon, 19 Jan 2026 17:34:34 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A81F410B68218; Mon, 19 Jan 2026 18:34:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1768844072; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=iYUfL0ls1ZqGS6ABlVqeykARsUx4dOBnEbJirg0TAxs=;
- b=LZovMQqwsPOeCJNYjCCQ9OKC8/P7X0oYckDv7LJQXdzzEJQUVYxchNfytUNK7riApFZdN2
- TXR7kdspVBaQoqyUACaaC5xmUOwksytJqmQPj1sM116QwkWMzwxUyhPVeUdMuUb2bmZsmh
- EH/T45mIbiXkjMma4nFYpdJfqehYHmfTtBq6PbHnZKDTiVBCHu+Km1FybOxMzxj0BRIFss
- wveFD1+T801lQFvrRfnWOYJjS4cYeXsUNj+uOZ5eSPT9UBNBHZ8NuLKYVrtBhN4U28bH6S
- FDlWf0H6VBjg2CVO0O0uxDunGr6WrnsPVBc1hkyomVpOiZtMr5D8wskpiuMm8g==
-Message-ID: <a510fc55-401d-4329-b406-7d0742b01e0b@bootlin.com>
-Date: Mon, 19 Jan 2026 18:34:25 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CVd2dObbDDLVm67kn14KpQXI6uPCCyBK3WoeK+rxZKBNVabAQea8Mj/uatTQG48trGVlD68n673EPIlaRcHS5ZU0wZJbddWRa23MBKFvhLnJUVGOLBPKZIRDOZ7VVONPUOv7XuXvaVA+SLmdd+ZbM4s/gXYavQkawqMr19E1A0yP0esdreZojuJr01Ctfh9sNj3QphFQ/tvNtk+iFyo9LMLfTS7afooUuhYf4gPdIMW+NELhdy0bLviD/n0FpC13t9VNAngp6wZnWVqvP5RxmSVavFnXARKZyAQUT1BLByrAylb1EUgsvGTEBIPxnpDViRbAcLAGyKIX/+gGX3gSBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yLnQJOle+PJNUBO+g971A2GsxanQQaNNyFAi711O0uI=;
+ b=vEwMD59HAJRXzvVMEMZFbrl67xalL46ajiyHlMO+fnTRyHc/8pQJlDa8gkP21i3eF3DbBIxo27SMkeLhq8PRDUNSmdh+4ikb34u43uApvyytwxJxEVKEIbA9kN0SKAQPz7y0aG/vvrtktNQ9UCp7nRrA2hPAOqA14d1UD3nVndjQ7PZRs6u9kS9BYAG6k5+M6MebJmg7YuHZ+AJQZLT5bL05Bc9m27maAEhK6qgJDmb0ouVQiOzdyMtW7+yjDHYXq7ToyWax1y8qJrdDBjlWofYD8v7zcRzFnS06Oc5QirPnJ+M+gQ1iqIarMJqDOcEcXTZnp9isxDrVf9kTA14iqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yLnQJOle+PJNUBO+g971A2GsxanQQaNNyFAi711O0uI=;
+ b=Zw7Rzv68Jx0T07oe1Dk/yfU+vip//hsAZ46U6O9lkXMSjqWBKX2LIw7emzquN0GDWN4iwSWU5VqM/PlViyQ4P62i6LIMjCurUMaHjweK/Enxt4ObP3VEVHfLD2Eb784sQbi4DomVgWVT4K4LwLKaUYFEt6DesyKHa3b9jD17+Sk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PR3PR04MB7323.eurprd04.prod.outlook.com (2603:10a6:102:88::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.10; Mon, 19 Jan
+ 2026 18:03:16 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.011; Mon, 19 Jan 2026
+ 18:03:15 +0000
+Message-ID: <d35d3c89-1b8c-478b-bbbd-7a29f7e10dbf@cherry.de>
+Date: Mon, 19 Jan 2026 19:02:50 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/24] mtd: rawnand: sunxi: remove usage of struct
- sunxi_ccm_reg
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dinesh Maniyam <dinesh.maniyam@intel.com>,
- Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20251028091256.600992-1-richard.genoud@bootlin.com>
- <20251028091256.600992-6-richard.genoud@bootlin.com>
- <20260119141020.729d70b0@orionap.fritz.box>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20260119141020.729d70b0@orionap.fritz.box>
+Subject: Re: [PATCH v2 3/3] doc: develop: process: Explain when/how Custodians
+ may edit patches
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20260116182335.4081828-1-trini@konsulko.com>
+ <20260116182335.4081828-4-trini@konsulko.com>
+ <f3bf1986-187c-405d-aafe-9e59ab14b3fc@cherry.de>
+ <20260119164728.GC3416603@bill-the-cat>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260119164728.GC3416603@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0218.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ac::14) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PR3PR04MB7323:EE_
+X-MS-Office365-Filtering-Correlation-Id: 225d24a3-a94d-41a4-ea5a-08de578504d7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|10070799003|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cmtIbDR3Rm0rUGIvWG9QTmw1dVFKYmplQU9wZkdtalR0VGtna3E4aUdBZTJT?=
+ =?utf-8?B?ZVJldmpFREZwSmZWaWJuWFh3TkFLbUUwTUpyTVpkbjQ0Y3pPaHFaMEwvNVds?=
+ =?utf-8?B?a3ZRZW1wWDdUL05keUZCTTc2aVRZZHVsOXUyS3k4KzZEcWFzTEJoOUN1Q1Vt?=
+ =?utf-8?B?UTdFMms1aXo3em1UT0VHdFJpYUYvLzR1bkRUZnJheWdOc1JrV2lUcUdwb2FC?=
+ =?utf-8?B?SjNWQ2VtZFNnSGI2TUVTeFRpeXFEUWZLQjRuQkJydnFTN3U1amkrb0xBR013?=
+ =?utf-8?B?N1BmWWkrd0hZeGs0Sm1LVnhjekRtM0lyUzlGN1hUSnUwaXE0SjR6KzA1Ulpm?=
+ =?utf-8?B?NFl0cHpnOEVzb094bExwdGFtSEE1OGtMT2tTb3VZL05wSGhYQnBhbHRxajFt?=
+ =?utf-8?B?UmdUNUZ1KzhzY3J0OWRHKzRmMjhtM1MrTEh1OUVpWGhsYU5iU08rSEo1eXZI?=
+ =?utf-8?B?RWRKVHF0dGtxUFZQSjZVclBYVUJtdjlyTVZJbGRTTVljWTNML3paaVlyNEkv?=
+ =?utf-8?B?L1Z1U3BUa1gvRFdGSmRaODJuQ1ZqbWRyckFCa091RDVROVBwVGM3L2FsMjlz?=
+ =?utf-8?B?bGp0eWpkZjUwWnZmQ1UwOStOV2RIVHl2OUFrc3Axd1IvUk9vcm9lNTIzazNF?=
+ =?utf-8?B?cG45eVUwQ2F3SUVJVXV4N3ovNFZlemNtZTZHWlBDMnJRa0o3THlVeE5FaFE5?=
+ =?utf-8?B?TlhWMEp4NWNvVUxvbnFLM2RIVEFhSkJwOWFycVRuVnE0VU9zYzdESGg3bDNC?=
+ =?utf-8?B?MFlNK2dyV0hwVVplR3JhUEtzMUVKWFNZK281R0ZGZnZkTERwc0RoK0dpeFFR?=
+ =?utf-8?B?NVZZRUhvbER4c25XS1F2YlFoTmRmNEg5elFxWEF5U3dCWEJFVlFsK2gxTEp4?=
+ =?utf-8?B?SGtDWEtOaU1xbUhEaVpBTDQyNUpaSXJqOFBGZEpqaVFLTkE4STBRWTZoeHo0?=
+ =?utf-8?B?ZFlRY0FhRVFVcC9ub2RJM3JXWlZMbW53VnIrVHA0L2pKQnZVVEpHQnU2cGdI?=
+ =?utf-8?B?RzRsUzVScmh0Wm1vbzNvNktPSnJieGF5a3VXMmNYUkcwcE9yOTZ4cGYwNUxh?=
+ =?utf-8?B?b1hDRjlRaGlKQVlBUitLSmQ1bkhVWjFOejk1UjdNSzhiTERaTEVuUFFIRENh?=
+ =?utf-8?B?aGkvSnZYM202dlIvLzIwS2kvakEycVJnbCtja1dYTFcrT3JTMkFHeVA1eHFy?=
+ =?utf-8?B?NUhCSWFaOVJ1cS96TjB3eTZMTkpTbkhFdU5ZcFgwUXRaOU9GUHJrd0IydzFR?=
+ =?utf-8?B?RlFSQlpnUkhLQXFvWTJQQUxOYlp5TlcrSEVCU1hVTXZ0aG9ISCtiaUIrbVF2?=
+ =?utf-8?B?bE1OUkg2cG44UDJQK0tFcE1yVU5UcFQxVGxtUGJEMFdyOXhzRkROSVRJaVhr?=
+ =?utf-8?B?SmtzTm5WVnVIWWJaN2xHTnB4akhHc0JoU1Qvc0FTcnk0R0szSzQyNlp1L0d6?=
+ =?utf-8?B?eVBtbjMwZ3ZZTWxZVU1BQ3BFbkp4UmVQUVFKbllpYW9qTUFleFduTitqVzlM?=
+ =?utf-8?B?Vi9Hd21MN0VFYkVGQi82aUw5Q0s1aEpVWDRPd3Y0UHJNYTNFVEg4cWFWMk1S?=
+ =?utf-8?B?QWNzWnd5cFMxTVptNXpCbUFHVmtPcDJMNmJvRlJrSVFZaEJFSjZabjJiZTRJ?=
+ =?utf-8?B?dEVraml1Vk9SNmFBWUtVQmFvN1VjanVVY2NNSnNLS0tUT0xBSC9HQmRCblYz?=
+ =?utf-8?B?SFkxdFd1MFRzNERROWZKTUpMcjlqWW8wanpaeSs1M1dJOVFGRmFuQVdld2o5?=
+ =?utf-8?B?UWlaVm5nS2p3bjdrVkV3Y3VFSGprRGp4VzV2OG56aThSMzJOU2NxZ1FTSkx1?=
+ =?utf-8?B?dnpTQmlmeHRpY2czYml3ODd1WDRFTUtHMWcwQ09wcm9NdlJNWTdDQ2N2eXFK?=
+ =?utf-8?B?QUZtZm5BVDdvaDVxKzVzQTNudUhIeitXNUpENmk1NzhySERuVGw1VURtSFg1?=
+ =?utf-8?B?b0JhVXJ0TW5YZ29IQXNhUmRjMGNYV01QVWc2RWhyRXIxM2NUWWdFbXBBWkx5?=
+ =?utf-8?B?VEJUaXBFNDNSSEEyVTdCSGhEY3hnNll6NkR5RHpPZWJId3ZOYWI4enFwd2Y4?=
+ =?utf-8?B?dGZJN2tXWUtpSzZ2SWhEWng1T1Y4eDJnU3h0ankxME0zbWtDVXBtYTFwK0ov?=
+ =?utf-8?Q?XUes=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(10070799003)(1800799024)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Uis1TGpmbWxYV3BzZlhXd1N0YWs3UERIQlgrZDRsTHFoLzErZVZjQnZlSjB1?=
+ =?utf-8?B?VllyUlZCT21lRVFYMHhIdHdudUx6STdFQklKOU9xY2tabDJ5ckc3ckV5UUJl?=
+ =?utf-8?B?S1hvZWxIOFEvUHJxaUlLTkFMaDJ6MmxrVEpHUnB2TE5ZTHIwMnIyb25nYkN4?=
+ =?utf-8?B?ZDIrL284cUtUSytub3FFRjZXZ3hNbnBPSTRHVjV1NXRYeks5S2Q3ZzB4SkNV?=
+ =?utf-8?B?N2dnN3BML1VucENCQ2V3bUl1aW5CSmd5WUJYUVBjQXQ4VG5JRndLTkJDREl5?=
+ =?utf-8?B?TjJZUXhWSUxOUGpnVjRRL1BnWEw1U25nWHV1WlZ0T1d2NjM4N25VZU9BRnJk?=
+ =?utf-8?B?NmN1bU9GUElJakdySG1aanQwUk4zMkhyR1ZEdlhMamsveGxNaHU4SEJHeGlI?=
+ =?utf-8?B?VDliLzVMUHNEZk9Cc1NnVDFRVVNSZzZ2Skw4VXFuRzR3Z3oxSW0wODVKMHZ3?=
+ =?utf-8?B?cmNPMTI1SDRiRmVsbzFKNThlc21SV2ZEcWpKOEY1R2hGK1ZGQ0pRZWNjYjh4?=
+ =?utf-8?B?bHZLVjlNUFUzRUY5aXZwbnMrOWk4YVF0bXNQQUNSeXEzZWlOL1F0a3JidEc3?=
+ =?utf-8?B?V0tPWFpTMktDcTNESjRJMmtyWnRFZEx6cE9zSmRWY01Db3FSejRCYXBKMExi?=
+ =?utf-8?B?UUhXZzdHWkVabnJNaEEvVTNxcjFsQlpEcHBXUVhZdnhteThxWFA5QTRRVGFp?=
+ =?utf-8?B?UFZHREhHcUJ3NzBvZUJTS2ZmR3YwZCs1bUtjWmJjRDVEakQ5aExDM3lYTi9Q?=
+ =?utf-8?B?SUoyYkM1SXM1QllOdkJUbFp3UGVNaDJ1dEpmMVJMRXQ0ZklleVN5cDZ0Y2ZT?=
+ =?utf-8?B?THovdzFKWVdSMVpTQ3pNREFjd1ZwbXhHK1JKaGpaSU0vVzAvRlovS3REdkhG?=
+ =?utf-8?B?ZWl2aGZvdy9UeCtNOGtUY2YxaGtUVVJDRzBpSE9pVW90RjV2U0dsRGc5aFNt?=
+ =?utf-8?B?TkhuYU5sOUhmczdNVkROS20wclZMV2FxazhPTmFzU0FKbTRSUjZZdkYyUzh4?=
+ =?utf-8?B?OWhlT1R2Szl6citrK3ViUDhidERvN0ZVQWJFSmRJV1dqaExUdWpOT0NjQ0xH?=
+ =?utf-8?B?Z01Qd0FWaUVkWXZjWndSZzgyNERabFFKZUdnTytibzdLL1oyaU45MDV1Y0M2?=
+ =?utf-8?B?T0doZk5VUHJpdEdkRmJlS3o4VXkxWG1jZVo3N25tV0k3bW81WVErbUlpWUZC?=
+ =?utf-8?B?cTVpNWJBYXBaak1Xd1RFUlFZMUJNbXR3RnMxV2Y1cU1xT0JNOFhTME53RUxy?=
+ =?utf-8?B?TjJndUR6K3ZMcjE0Q2dtRTdmZTlWV3ZwSXp4cCtteGcyYlZ2WGJ5UEx2SnVE?=
+ =?utf-8?B?aGpxRklyb3FWNENKTEJsZDl6UDVydENYZkpObXcvTjFmQjJ3VlV4L3hFOXFI?=
+ =?utf-8?B?SEVTSktNTVFKciswR3UxckZyUDVHaDFvczVRaFpDK281SnVxWk85WXcweEJ1?=
+ =?utf-8?B?c2E0YnJyQmRtWFhXUnpDOTc5Qk81UzZUT2pzeUtWNE11WkZHOWdDbC9iSFVV?=
+ =?utf-8?B?QkRMWHNwUW1WZVJVTk51TEh1amRJcDhja1JyRXk4UnRzYWo0eHNWZzU4OTI5?=
+ =?utf-8?B?RkU4VEp2Tk1xSUVXb3gxd2JrL0VhQW5VNnhYbWZVODBHTDBJaTVQWUFTMnc4?=
+ =?utf-8?B?azdvdUdHWDR4K1JBY3VNdW5JNnFZSWJ1UGF0UWF4VllrQVRpenVzL1l1Ykpx?=
+ =?utf-8?B?ZjZab1VaWGtnYlNBUjlHNE9RZGt2dzJ0NldRNmZ0YXlBMmlDTW1XSG9EVkx6?=
+ =?utf-8?B?SVVKZGh3ZUMzRVFlQWJydlhXWnZMbTN3VjBLcjY4UUtudElKc3ZyOFlTRmVi?=
+ =?utf-8?B?VFBoZDF2N1ZDSnB0SStYNzRQZ0NQWlhsQlVlV05oSlVkUEtOL3RFbW1GQkc1?=
+ =?utf-8?B?L1JLeVRaTFRhaFNlZERkMk5JSnVpK3Y4bm9LTFJDcWtnQzkzVkJlWHBmU0pO?=
+ =?utf-8?B?eFk0M1NzUGQ2d2hpbG9CWU00UXQ3K2lYbWhwQUZ1UXBmanBRM21LUGZTT2ZJ?=
+ =?utf-8?B?VEJzU3h0VFRqekEwUjVQTSsrWDlMRC92MmMraHR1Ny83a3FTWWl6aWs5cWx4?=
+ =?utf-8?B?TVBHSWZGRUVKWHFxTlVqbzFSRW5Nd0ljbjBNUXJtVkY4Snl2b1JRNTFuMERQ?=
+ =?utf-8?B?c0VIajM1blFKTlV3eTVjNEZyUUZ0ODduVU9tc0JrWS9aRUNWN3BDbHV4WnFx?=
+ =?utf-8?B?Wnl2RVRJOThMZGlBeHFQaTNwcUY3eVE0ZlhBU1hWSjZMZXVsa1JQUmhZRzdK?=
+ =?utf-8?B?bkkvTmw2ckprdEU5TTVjMUloeDFXc2IwbFVyWXlIbldYSGdqc1pQZlVaYjht?=
+ =?utf-8?B?Q2lQMHdxT0duTjVMSE95NXQvZDRvOENwVWpBZXhxeWpTcDY1NE1ISzNCNjla?=
+ =?utf-8?Q?Z+T6eYyLgfjWiq3Z++bHVvuh0/beyRdHvmJ5Y?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 225d24a3-a94d-41a4-ea5a-08de578504d7
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 18:03:15.7877 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CKjieONinGsPddpaDS9WGgnc0SW8cGy7Fx1KsaeYMCd52UQ3Z9kPUtd5Tm19GMY5TraeIWsmXkM7dyRfH2lqC8Z94g1SgVPQsC1m+eM6bYs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7323
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,209 +187,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
-Le 19/01/2026 à 15:10, Andre Przywara a écrit :
-> On Tue, 28 Oct 2025 10:12:26 +0100
-> Richard Genoud <richard.genoud@bootlin.com> wrote:
-> 
-> Hi Richard,
-> 
-> many thanks for doing this change.
-> 
->> The sunxi_ccm_reg is legacy, drop its usage from nand related code
+Hi Tom,
+
+On 1/19/26 5:47 PM, Tom Rini wrote:
+> On Mon, Jan 19, 2026 at 01:27:52PM +0100, Quentin Schulz wrote:
+>> Hi Tom,
 >>
->> For that, CCU_NAND0_CLK_CFG and CCU_AHB_GATE1 are added to the clock
->> files when missing.
->> And clock code in sunxi_nand{,_spl}.c and board.c are changed to use the
->> new scheme.
+>> On 1/16/26 7:16 PM, Tom Rini wrote:
+>>> As seen with commit d503633a3676 ("Revert "doc: board: starfive: update
+>>> jh7110 common description""), it has not always been clear what is and
+>>> isn't allowed by custodians, and what the expectations are. To prevent
+>>> further unintentional conflicts, document the limited cases where
+>>> custodians are allowed to modify patches directly, and how to do that.
+>>>
+>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>>> ---
+>>> Changes in v2:
+>>> - New patch.
+>>> ---
+>>>    doc/develop/process.rst | 6 ++++++
+>>>    1 file changed, 6 insertions(+)
+>>>
+>>> diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+>>> index 6f5bdd3db957..775a855fd7a0 100644
+>>> --- a/doc/develop/process.rst
+>>> +++ b/doc/develop/process.rst
+>>> @@ -144,6 +144,12 @@ feedback to the submitter of a patch about what is going on:
+>>>        feels it has been too long since posting their patch and not
+>>>        received any feedback, it is OK to follow-up and ask.
+>>> +    * A custodian may make spelling corrections, spacing fixes and other
+>>> +      obviously correct trivial changes. They must also in turn amend
 >>
->> Moreover, drop AHB_DIV_1 in favor of the more readable CCM_NAND_CTRL_M/N
+>> I guess people will have a different interpretation as to *what* is an
+>> "obviously correct trivial change", based on the U-Boot git history, are
+> 
+> Yes, but this is intentional, honestly. In my other follow-up to E
+> Shattow I mentioned there is other general process stuff we need as a
+> project. Custodians are trusted members of the project and should have
+> some leeway.
+> 
+
+Ack.
+
+>> there some commits that used the [] + SoB form that are fine or shouldn't
+>> have be made such that we can elaborate a bit more?
+> 
+> Yes, we've made changes before that perhaps really shouldn't have been,
+> or at least are questionable and should have had more discussion.
+> 
+
+I was just suggesting to provide real-life examples in the docs so 
+people have some idea on how to format the commit log for example. I am 
+neither intending nor expecting to review all commits ever made to check 
+if some changes were made without approval from/feedback to the contributor.
+
+>> I think providing an example would be nice, e.g. the patch as on the mailing
+>> list and after being merged with changes (obviously one you think followed
+>> the rules here). This will make the section longer for sure but it'll be a
+>> visual cue that this is important.
 >>
->> Suggested-by: Andre Przywara <andre.przywara@arm.com>
->> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
->> ---
->>   arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |  1 +
->>   arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |  1 +
->>   arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |  1 +
->>   arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |  2 ++
->>   board/sunxi/board.c                                | 11 ++++++-----
->>   drivers/mtd/nand/raw/sunxi_nand.c                  | 11 +++++------
->>   drivers/mtd/nand/raw/sunxi_nand_spl.c              | 13 +++++++------
->>   7 files changed, 23 insertions(+), 17 deletions(-)
->>
->> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
->> index 00bdd5f938df..caa4b62b3e2d 100644
->> --- a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
->> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
->> @@ -11,6 +11,7 @@
->>   #define _SUNXI_CLOCK_SUN4I_H
->>   
->>   #define CCU_AHB_GATE0		0x60
->> +#define CCU_NAND0_CLK_CFG	0x80
->>   #define CCU_MMC0_CLK_CFG	0x88
->>   #define CCU_MMC1_CLK_CFG	0x8c
->>   #define CCU_MMC2_CLK_CFG	0x90
->> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
->> index 28c3faccbbcf..bdb08a32d01b 100644
->> --- a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
->> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
->> @@ -11,6 +11,7 @@
->>   #define _SUNXI_CLOCK_SUN6I_H
->>   
->>   #define CCU_AHB_GATE0		0x060
->> +#define CCU_NAND0_CLK_CFG	0x80
+>> I would suggest to require the custodian to notify as answer to the original
+>> patch if any change was made when merging the patch, even if the changes
+>> match the allowed list of changes listed above. What do you think?
 > 
-> Just a nit, but can you please change this to 0x080, to align with the
-> other numbers?
+> I worry that we're making too many changes in the wrong direction, based
 
-yes, of course.
->>   #define CCU_MMC0_CLK_CFG	0x088
->>   #define CCU_MMC1_CLK_CFG	0x08c
->>   #define CCU_MMC2_CLK_CFG	0x090
->> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
->> index 5ad2163926ad..70cd0ca00d21 100644
->> --- a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
->> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
->> @@ -14,6 +14,7 @@
->>   #define _SUNXI_CLOCK_SUN8I_A83T_H
->>   
->>   #define CCU_AHB_GATE0		0x060
->> +#define CCU_NAND0_CLK_CFG	0x80
-> 
-> Same here.
-ok
+It's always a fine balance to find. I guess this could be less "needed" 
+if we encourage custodians to use b4 ty to send thank you notes when 
+merging. Then one can simply go and check the commit themselves (or like 
+you alluded in the v1, have tooling that can check that).
 
->>   #define CCU_MMC0_CLK_CFG	0x088
->>   #define CCU_MMC1_CLK_CFG	0x08c
->>   #define CCU_MMC2_CLK_CFG	0x090
->> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
->> index 8d696e533f8f..3448f3fb3225 100644
->> --- a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
->> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
->> @@ -12,11 +12,13 @@
->>   #include <linux/bitops.h>
->>   #endif
->>   
->> +#define CCU_NAND0_CLK_CFG	0x400
->>   #define CCU_MMC0_CLK_CFG	0x410
->>   #define CCU_MMC1_CLK_CFG	0x414
->>   #define CCU_MMC2_CLK_CFG	0x418
->>   #define CCU_MMC3_CLK_CFG	0x41c
->>   #define CCU_AHB_GATE0		0x580
->> +#define CCU_AHB_GATE1		0x584
->>   #define CCU_AHB_RESET0_CFG	0x5a0
-> 
-> For the records, I checked the value of the offsets, they look correct.
-> 
->>   struct sunxi_ccm_reg {
->> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
->> index 2929bc17f084..09b531b7f52a 100644
->> --- a/board/sunxi/board.c
->> +++ b/board/sunxi/board.c
->> @@ -307,15 +307,16 @@ static void nand_pinmux_setup(void)
->>   
->>   static void nand_clock_setup(void)
->>   {
->> -	struct sunxi_ccm_reg *const ccm =
->> -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
->> +	void * const ccm = (void *)SUNXI_CCM_BASE;
->>   
->> -	setbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
->> +	setbits_le32(ccm + CCU_AHB_GATE0,
->> +		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
->>   #if defined CONFIG_MACH_SUN6I || defined CONFIG_MACH_SUN8I || \
->>       defined CONFIG_MACH_SUN9I || defined CONFIG_MACH_SUN50I
-> 
-> So the usage of #define's for the offsets instead of struct members would
-> now allow for those preprocessor guards to be replaced by C statements:
-> 	if (IS_ENABLED(CONFIG_MACH_SUN6I) || IS_ENABLED(CONFIG_MACH_SUN8I)
-> 	...
-> 
-Ok, I'll do that.
+It's always easy to suggest processes when you won't have to follow them 
+yourself, so I'm mostly asking questions or suggesting things.
 
->> -	setbits_le32(&ccm->ahb_reset0_cfg, (1 << AHB_GATE_OFFSET_NAND0));
->> +	setbits_le32(ccm + CCU_AHB_RESET0_CFG, (1 << AHB_GATE_OFFSET_NAND0));
->>   #endif
->> -	setbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
->> +	setbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
->> +		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
->>   }
->>   
->>   void board_nand_init(void)
->> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
->> index c6b9b2a4ebac..ba2740ed1876 100644
->> --- a/drivers/mtd/nand/raw/sunxi_nand.c
->> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
->> @@ -289,8 +289,7 @@ static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
->>   
->>   static void sunxi_nfc_set_clk_rate(unsigned long hz)
->>   {
->> -	struct sunxi_ccm_reg *const ccm =
->> -	(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
->> +	void * const ccm = (void *)SUNXI_CCM_BASE;
->>   	int div_m, div_n;
->>   
->>   	div_m = (clock_get_pll6() + hz - 1) / hz;
->> @@ -305,14 +304,14 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
->>   	/* config mod clock */
->>   	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
->>   	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
->> -	       &ccm->nand0_clk_cfg);
->> +	       ccm + CCU_NAND0_CLK_CFG);
->>   
->>   	/* gate on nand clock */
->> -	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_NAND0));
->> +	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_NAND0));
->>   #ifdef CONFIG_MACH_SUN9I
+> on the problem that did occur. Which was a real problem. But it was also
+> something that obviously fell outside of the "trivially correct" rule
+> above, as it was adding new content.
 > 
-> same here
-ok
 
+Ack.
 
->> -	setbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
->> +	setbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
->>   #else
->> -	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
->> +	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
->>   #endif
->>   }
->>   
->> diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
->> index e90450439e41..2fcf52658008 100644
->> --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
->> +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
->> @@ -533,14 +533,15 @@ unsigned int nand_page_size(void)
->>   
->>   void nand_deselect(void)
->>   {
->> -	struct sunxi_ccm_reg *const ccm =
->> -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
->> +	void * const ccm = (void *)SUNXI_CCM_BASE;
->>   
->> -	clrbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
->> +	clrbits_le32(ccm + CCU_AHB_GATE0,
->> +		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
->>   #ifdef CONFIG_MACH_SUN9I
+> Maybe, since the kind of spacing and spelling fixes I perform are the
+> kind checkpatch complains about, and submitters are already supposed to
+> use checkpatch, I should reword it to something like:
 > 
-> and here.
-ok
+> A custodian may make corrections to patches that checkpatch.pl
+> (reference) notes, or may request the author re-submit after fixing
+> them, at their discretion.
+> 
 
-> But the actual changes look alright, including the usage of
-> CCM_NAND_CTRL_N() and CCM_NAND_CTRL_M().
-> 
-> Cheers,
-> Andre
-> 
->> -	clrbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
->> +	clrbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
->>   #else
->> -	clrbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
->> +	clrbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
->>   #endif
->> -	clrbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
->> +	clrbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
->> +		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
->>   }
-> 
-Thanks !
+This does help but only for code parts. We don't really have anything 
+for the docs for example, or Kconfig, where typos or formatting errors 
+can creep in. But I assume you intended to keep the whitespace/typo as 
+general rules and just add the checkpatch requirement for everything 
+that falls out of those rules?
 
+We can always improve this over time, better have something explained 
+now and refined later if custodians have questions or feedback to provide.
+
+Cheers,
+Quentin
