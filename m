@@ -4,74 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF85D29C28
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 13:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CDCCD29C2D
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 14:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07400802C1;
-	Mon, 19 Jan 2026 14:57:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A69FF8389A;
+	Mon, 19 Jan 2026 15:10:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IhpuzLyP";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4DC183015; Mon, 19 Jan 2026 12:26:21 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EA43800AE
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 12:26:19 +0100 (CET)
+ id DF3D48397A; Mon, 19 Jan 2026 15:10:30 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 71380802C1
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 15:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yannaboinashivaji@gmail.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-78f89501423so50180197b3.1
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 03:26:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768821978; x=1769426778; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=EG2nSk/ttWDcd6dU8o+T11579wBedKTnU6+6cpazwaY=;
- b=IhpuzLyP9PlLKhfQBgINSPporyXcCfiqfgFnrtJoozWQ8SpWbsvK4U6dvTgvk1I76f
- eD3odtG4mgqo6famD5C4rGFGH7k5rYL9VzVf0cN6qBXJBTcaMgztXY2JA/IMNYcSv4EV
- nNZRlkLfqqxKRIV/TpU+K1TX70xF6W5f+6oKIcL5VHkluLR5TImQtpdvP9FzpOHphdzG
- 8aI1L2xS3wvLy3CUuX2ngSm8XyzfGmPWnkVuq21QEKagV8O0QZrvozgT518tBG/fXAm1
- x7sXvGoARzTTljwYj5E6bTlcuZ+Kh+tiVvvcL2dreRmOOFmVqWmx3QGbOtR/DWk438AK
- ZjpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768821978; x=1769426778;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EG2nSk/ttWDcd6dU8o+T11579wBedKTnU6+6cpazwaY=;
- b=O9EwXAQOaUi08KYsP7P+pMmWU+qcY3xTqFrViIGVpv+PwnXgJC478896eBcajxjfzM
- p+0lKgHpD1x7pguaRYXZSTRfXiFw6V15ZyMtxJYop6WDrUBz2IT8eTzZiUwQKzi39hAD
- gy7chMYWs+2+Ya/gRQfiQ146mhG/kLPck+sjqR53JWnq2xSQEk5Z3PByQwIIpwEbRFeA
- mWLXSQIXz/UgDbwv+VmRxd5ahT202dZJs29zN4zG9/sc3KCrxHdicUD/d8knRcd438bH
- jB3TJoOD4cBrp4blWWLaBqzRaY7iUMezowEQF1boqyfk70siSoStCwKVDfVnrkz3CFuU
- J+Cw==
-X-Gm-Message-State: AOJu0YyGSvhVvQgANlV8s4bsPPR0MlHhj2MH6Jq1GeD+Xvz6GVAAN58Q
- 8uf1f1Jvn4hVvdnHIT9xvuewh/yhrSawHuaomLYlpRC+/G9FrcSwRon3SPZhLSBWIHeGuPpZogk
- dEg8i/BsyDbkLEmmNanPagRooMXFRPC0fNA==
-X-Gm-Gg: AZuq6aKVt0+IYJcYIMYeDA0Kj8eVzfZ4p3etzMA6LWRvWPA4uOfWqxKxt/ztRVVrTKJ
- MmCW6tXcHKwoftZ6lNYkubvCmJBE3LyLJSHp5/zqqdnDzvQbUtKOCTkSA6L6AcrrCMcsWl9kZQ0
- jC1riInXbzl3mY5pQes30jupD8JyDwWT4DkXkriRXLvimIUzMxM8CpeCPekYAj2AGGxbSldp9QH
- Bm3r0k6XrVrm93vnmdG8bTot5JEs/2MSk/RpS2taa+/JMwHW+3lgUkfhfRhINI7df/lgDgC/l36
- khVnfnDkEsJDPZA0GhoDkytVgz7FzRKMFdwNAp9D
-X-Received: by 2002:a05:690e:1919:b0:644:7b19:c207 with SMTP id
- 956f58d0204a3-64916b7d34emr8004392d50.38.1768821978171; Mon, 19 Jan 2026
- 03:26:18 -0800 (PST)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 104AE497;
+ Mon, 19 Jan 2026 06:10:21 -0800 (PST)
+Received: from orionap.fritz.box (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ED4383F632;
+ Mon, 19 Jan 2026 06:10:23 -0800 (PST)
+Date: Mon, 19 Jan 2026 14:10:20 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Richard Genoud <richard.genoud@bootlin.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Chen-Yu Tsai <wens@csie.org>, Andrey Skvortsov
+ <andrej.skvortzov@gmail.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Dinesh Maniyam
+ <dinesh.maniyam@intel.com>, Anand Gore <anand.gore@broadcom.com>, Linus
+ Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 05/24] mtd: rawnand: sunxi: remove usage of struct
+ sunxi_ccm_reg
+Message-ID: <20260119141020.729d70b0@orionap.fritz.box>
+In-Reply-To: <20251028091256.600992-6-richard.genoud@bootlin.com>
+References: <20251028091256.600992-1-richard.genoud@bootlin.com>
+ <20251028091256.600992-6-richard.genoud@bootlin.com>
+Organization: ARM
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-From: Shivaji Yannaboina <yannaboinashivaji@gmail.com>
-Date: Mon, 19 Jan 2026 16:56:06 +0530
-X-Gm-Features: AZwV_Qgt0DtdzebnKfwtxdgxJ3n9L0iLLa4NYN6-03-qC1VFSEHyog-eCUpXR5c
-Message-ID: <CAK-N3=PeoVkJJkcxVvGFK3An5-uGTxszt6X1HtAPPSN2m1U4NQ@mail.gmail.com>
-Subject: Raspberry Pi CM5 recommended upstream U-Boot baseline
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Mon, 19 Jan 2026 14:57:40 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,13 +69,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Tue, 28 Oct 2025 10:12:26 +0100
+Richard Genoud <richard.genoud@bootlin.com> wrote:
 
-We are bringing up Raspberry Pi Compute Module 5 on a custom carrier board
-and Evaluation kit.
+Hi Richard,
 
-Could you please advise which upstream U-Boot version and defconfig are
-currently recommended as the baseline for cm5 support?
+many thanks for doing this change.
 
-Thanks and regards,
-Shivaji Y
+> The sunxi_ccm_reg is legacy, drop its usage from nand related code
+> 
+> For that, CCU_NAND0_CLK_CFG and CCU_AHB_GATE1 are added to the clock
+> files when missing.
+> And clock code in sunxi_nand{,_spl}.c and board.c are changed to use the
+> new scheme.
+> 
+> Moreover, drop AHB_DIV_1 in favor of the more readable CCM_NAND_CTRL_M/N
+> 
+> Suggested-by: Andre Przywara <andre.przywara@arm.com>
+> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+> ---
+>  arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |  1 +
+>  arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |  1 +
+>  arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |  1 +
+>  arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |  2 ++
+>  board/sunxi/board.c                                | 11 ++++++-----
+>  drivers/mtd/nand/raw/sunxi_nand.c                  | 11 +++++------
+>  drivers/mtd/nand/raw/sunxi_nand_spl.c              | 13 +++++++------
+>  7 files changed, 23 insertions(+), 17 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> index 00bdd5f938df..caa4b62b3e2d 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> @@ -11,6 +11,7 @@
+>  #define _SUNXI_CLOCK_SUN4I_H
+>  
+>  #define CCU_AHB_GATE0		0x60
+> +#define CCU_NAND0_CLK_CFG	0x80
+>  #define CCU_MMC0_CLK_CFG	0x88
+>  #define CCU_MMC1_CLK_CFG	0x8c
+>  #define CCU_MMC2_CLK_CFG	0x90
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
+> index 28c3faccbbcf..bdb08a32d01b 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
+> @@ -11,6 +11,7 @@
+>  #define _SUNXI_CLOCK_SUN6I_H
+>  
+>  #define CCU_AHB_GATE0		0x060
+> +#define CCU_NAND0_CLK_CFG	0x80
+
+Just a nit, but can you please change this to 0x080, to align with the
+other numbers?
+
+>  #define CCU_MMC0_CLK_CFG	0x088
+>  #define CCU_MMC1_CLK_CFG	0x08c
+>  #define CCU_MMC2_CLK_CFG	0x090
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
+> index 5ad2163926ad..70cd0ca00d21 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
+> @@ -14,6 +14,7 @@
+>  #define _SUNXI_CLOCK_SUN8I_A83T_H
+>  
+>  #define CCU_AHB_GATE0		0x060
+> +#define CCU_NAND0_CLK_CFG	0x80
+
+Same here.
+
+>  #define CCU_MMC0_CLK_CFG	0x088
+>  #define CCU_MMC1_CLK_CFG	0x08c
+>  #define CCU_MMC2_CLK_CFG	0x090
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
+> index 8d696e533f8f..3448f3fb3225 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
+> @@ -12,11 +12,13 @@
+>  #include <linux/bitops.h>
+>  #endif
+>  
+> +#define CCU_NAND0_CLK_CFG	0x400
+>  #define CCU_MMC0_CLK_CFG	0x410
+>  #define CCU_MMC1_CLK_CFG	0x414
+>  #define CCU_MMC2_CLK_CFG	0x418
+>  #define CCU_MMC3_CLK_CFG	0x41c
+>  #define CCU_AHB_GATE0		0x580
+> +#define CCU_AHB_GATE1		0x584
+>  #define CCU_AHB_RESET0_CFG	0x5a0
+
+For the records, I checked the value of the offsets, they look correct.
+
+>  struct sunxi_ccm_reg {
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 2929bc17f084..09b531b7f52a 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -307,15 +307,16 @@ static void nand_pinmux_setup(void)
+>  
+>  static void nand_clock_setup(void)
+>  {
+> -	struct sunxi_ccm_reg *const ccm =
+> -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> +	void * const ccm = (void *)SUNXI_CCM_BASE;
+>  
+> -	setbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+> +	setbits_le32(ccm + CCU_AHB_GATE0,
+> +		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+>  #if defined CONFIG_MACH_SUN6I || defined CONFIG_MACH_SUN8I || \
+>      defined CONFIG_MACH_SUN9I || defined CONFIG_MACH_SUN50I
+
+So the usage of #define's for the offsets instead of struct members would
+now allow for those preprocessor guards to be replaced by C statements:
+	if (IS_ENABLED(CONFIG_MACH_SUN6I) || IS_ENABLED(CONFIG_MACH_SUN8I)
+	...
+
+> -	setbits_le32(&ccm->ahb_reset0_cfg, (1 << AHB_GATE_OFFSET_NAND0));
+> +	setbits_le32(ccm + CCU_AHB_RESET0_CFG, (1 << AHB_GATE_OFFSET_NAND0));
+>  #endif
+> -	setbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
+> +	setbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
+> +		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
+>  }
+>  
+>  void board_nand_init(void)
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+> index c6b9b2a4ebac..ba2740ed1876 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.c
+> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
+> @@ -289,8 +289,7 @@ static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
+>  
+>  static void sunxi_nfc_set_clk_rate(unsigned long hz)
+>  {
+> -	struct sunxi_ccm_reg *const ccm =
+> -	(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> +	void * const ccm = (void *)SUNXI_CCM_BASE;
+>  	int div_m, div_n;
+>  
+>  	div_m = (clock_get_pll6() + hz - 1) / hz;
+> @@ -305,14 +304,14 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
+>  	/* config mod clock */
+>  	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
+>  	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
+> -	       &ccm->nand0_clk_cfg);
+> +	       ccm + CCU_NAND0_CLK_CFG);
+>  
+>  	/* gate on nand clock */
+> -	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_NAND0));
+> +	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_NAND0));
+>  #ifdef CONFIG_MACH_SUN9I
+
+same here
+
+> -	setbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
+> +	setbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
+>  #else
+> -	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
+> +	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
+>  #endif
+>  }
+>  
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
+> index e90450439e41..2fcf52658008 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
+> +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
+> @@ -533,14 +533,15 @@ unsigned int nand_page_size(void)
+>  
+>  void nand_deselect(void)
+>  {
+> -	struct sunxi_ccm_reg *const ccm =
+> -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> +	void * const ccm = (void *)SUNXI_CCM_BASE;
+>  
+> -	clrbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+> +	clrbits_le32(ccm + CCU_AHB_GATE0,
+> +		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+>  #ifdef CONFIG_MACH_SUN9I
+
+and here.
+
+But the actual changes look alright, including the usage of
+CCM_NAND_CTRL_N() and CCM_NAND_CTRL_M().
+
+Cheers,
+Andre
+
+> -	clrbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
+> +	clrbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
+>  #else
+> -	clrbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
+> +	clrbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
+>  #endif
+> -	clrbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
+> +	clrbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
+> +		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
+>  }
+
