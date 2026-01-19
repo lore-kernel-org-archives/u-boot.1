@@ -4,168 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5291CCCF2D9
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 10:23:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34DDCCF2E4
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 10:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99E5B80B98;
-	Mon, 19 Jan 2026 11:22:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0769680B98;
+	Mon, 19 Jan 2026 11:43:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="iLhT8F7K";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="H32L1S33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF4C883015; Mon, 19 Jan 2026 11:22:56 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 1B61D83015; Mon, 19 Jan 2026 11:43:48 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE1E8800AE
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 11:22:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4E99800AE
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 11:43:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H240oNU2S0wccGh9EXcqk+OMZ4zfN3IG7P+rc2GAc+ig4GAri5IS/yrLOovENFIPWJtYaRVzBjD/YDzv+5Fq3a8CY/0eAZgThBGTqIbtRW4NaHxUMkXEa7JD3FnN5dTqmTdZtRWsEL8L4zQAicNtGMzdgiO05L/Z01zZt0ZKZ7giAoLyhU3GRYlDA6dwU9llsdDQMW+KRRgYX99kJn9ilEGLUt9B5PNlCPaalDteL0hsRcO2s4vWXmwYbtCfadrXfphITrp/bKN6puX3AqyUoOfMW1yXNx3M0awKZtDvuzZggtywaqITXPx95tyIgLB5WqKCkZzyGbBp7K928k99og==
+ b=gN0jCmk9EH+sE1Zjn5CIuW/Hrkdks4M2TVgX5RAhYCp2KE+cveTe/gqKlS2VQN/qReUJ8cPuNG07TPLi8mmy2MGTxGGJ+Q5hmtAeZZzi2aX2DjGdeHEhwSz5QyCTrKxB0RFpr5MFWXxTuscczlH9a7nzaJkACZ3GhLI5rAikGO37S2b9eejirQcjKcv3lhYw5dFZQBU970vq+8++QjfhP1nQD10vVQoxfmc0NBw0d1cvZ+fTBZk3p+Sl0j2pfoMMc6PFEzxqACvh5PorKUgAyx1KmnF63lta5ncFjOgZHtI8Z2SypEINM18SfHjEIoiobht7mJYJ/2tF7INhhVrPqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hUw0as/45xXPL+viQNTcfA7EJuZA9r9Hz5GyBdMTP/A=;
- b=LBZwIqSUzUK4eHdPAYBsmc+T+bkvgsu1sG5/35e4Bs1MriL6DHyqTLUM4UQZKjvBVa46vFiqeYnrW+pHM5YJ15kTWCUhYSe86iCFcXbkNd+YqG0YuBUJzhI5nuCUr1sgHS1mh9XcSPW7SiWtxmGIazGJoHCl/u8RK6fABrsbrTKeGUkWdjTiJl4ueo0/Pcj3+eVZOtB2JCYO/FzUIgI9CYEEnu+3H4PyvCB184Gb6FWywm7S9OQkn+LOGhXPojMnJ3SUQSiw8zafetjyyfaVTUYj0CrZWiuB07RpO9K1MKCXSUslFiImBxpE852aqS+ASrGb85kvkDUnUOPgmfxOOw==
+ bh=M/cX+R6UfW1jBIw+6tEMbYvLhaqtuVe1VHB4UOHzy5U=;
+ b=nYgKzVxN4xXIJ3pSKUIB/1GMQZEq6r2OCNalaPMmsiui0qm1A2TZkY4VZY/vgNlhaznrCMOnlrBzFl8nnlBE7/RFlKB/Ahx7UbWrAVUC1pHkvKU3TgCRWG6V7nrB8Gqy24b5XMDuE3uoPwkXHGSCbZCcKdGHkwtH0FoSGX4N4UlJCnuPbgOLkWMD5Rd/OJwGpxZNsK2p7rGK1hc175q8ziWHA907AYRn4GmrH9r72s7eKo1JSCjrDuzqAZWWO/vKG9XKJVzjIpVwRdjdNuc2R1SqlSvhDClEIikdf4/khYNAofiVg//tTKYq7eVgv63k7e3yeGQfNZIugDgsNnnIuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hUw0as/45xXPL+viQNTcfA7EJuZA9r9Hz5GyBdMTP/A=;
- b=iLhT8F7Kd3us2b2iu+g/eCNZb0QC8b5DdNJpcDxloag11A61VRKlVjWmSDd8zvtTQDSqJLVSN0r6mJelvJp4FjQnQ+Hi8mrpBPS68pacVdVohqI6cfj17l/8ZnAG1WNG29Lj/JjLimsG+1EoBQF/d811sQ39UDjYLL1nRpOeiq8=
+ bh=M/cX+R6UfW1jBIw+6tEMbYvLhaqtuVe1VHB4UOHzy5U=;
+ b=H32L1S334QT3c5B1kEN1KDouJ3/zWpvhkjGS9ZZeQCjBQVtWl49D89Bk9zY3U9STD3xiRN7Wvyk5UGeyXSXcnsKPJHoNAKvAl2aoz0hLxbklus3jZKQC6gzGsloENCteVfZs+9PCd03r6CILOHHJPvii/AE6FFGfoIj9zTXj0TI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by MRWPR04MB12072.eurprd04.prod.outlook.com (2603:10a6:501:98::7)
+ by DU2PR04MB8648.eurprd04.prod.outlook.com (2603:10a6:10:2df::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.11; Mon, 19 Jan
- 2026 10:22:52 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Mon, 19 Jan
+ 2026 10:43:34 +0000
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.011; Mon, 19 Jan 2026
- 10:22:52 +0000
-Message-ID: <7906ae57-4700-48fd-8740-66b8626640f1@cherry.de>
-Date: Mon, 19 Jan 2026 11:22:07 +0100
+ 10:43:34 +0000
+Message-ID: <d6c9d982-5b05-40f1-a61e-373bef2dfae5@cherry.de>
+Date: Mon, 19 Jan 2026 11:43:15 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] cmd: mem: add function for getting ram size for use in
- scripts
-To: Frank Wunderlich <linux@fw-web.de>, Tom Rini <trini@konsulko.com>
-Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
- Daniel Golle <daniel@makrotopia.org>
-References: <20260118105021.19760-1-linux@fw-web.de>
+Subject: Re: [PATCH v2 2/3] cmd: gpt: fix partition search boundaries
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Corneliu Doban <cdoban@broadcom.com>,
+ Alexey Romanov <avromanov@salutedevices.com>, u-boot@lists.denx.de
+References: <20260119003606.748561-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260119003606.748561-3-mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260118105021.19760-1-linux@fw-web.de>
+In-Reply-To: <20260119003606.748561-3-mikhail.kshevetskiy@iopsys.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0021.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::8) To GVXPR04MB12038.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0237.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b2::9) To GVXPR04MB12038.eurprd04.prod.outlook.com
  (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|MRWPR04MB12072:EE_
-X-MS-Office365-Filtering-Correlation-Id: afcfb253-abca-4da6-b256-08de5744b408
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DU2PR04MB8648:EE_
+X-MS-Office365-Filtering-Correlation-Id: d898a344-212b-42d5-851d-08de57479814
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|1800799024|10070799003|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SlBCbklmdWNyd29ZaUt4NWkrRFQrbDNGU1BkVnpiNmlNcmtUSTluREZ5TWdl?=
- =?utf-8?B?L0F0WFhSVU9HMVh0YmR2SGUwcmxPelNNTVJmRVBxRjJoKzNhMGJBNVdCZktV?=
- =?utf-8?B?Q04yTHpzY2lGZVdESi9RdDdiYm9KYmIzUndPeWxJK2dFL0tZWlBIUG5DaHBs?=
- =?utf-8?B?UUU3SWNTbzhrdW5aWG11eHhaakRSNlBOZiszQU94aDR1VmFaMk1UV3Bqak9N?=
- =?utf-8?B?VDNMdGRhaEZKM1RaM0FpRUNORjVmQW8yUm1JbUdROGNVTFNIRnF3aFFhMXRQ?=
- =?utf-8?B?a0JTK1Z5YjdoUGRIblpVRm1Qc0xmODh6eEp6d1A4NEFndGlvYU9Wek0xWStl?=
- =?utf-8?B?NFQrTjA3RlFObE1nR1hyTEdLeE5FQUd1Y0IzcUZoWUtOazhuZzcrNkRtaEo1?=
- =?utf-8?B?MWZPcEgwbmRUemR4UkROcFNpYU1IeVFHa0t6K1VmR3BWdGhJekg5UU8yT09L?=
- =?utf-8?B?QUtsRXlGTnE2WWhNVVdkMTBoTUY3K3A1QUlhTVBSSFVZWFU1QVhjQXRlR05L?=
- =?utf-8?B?TWZIVHBnVmV4M09QdTdEdDRodVJHTWJSanRPMUYvRUJsZkI3Q2lVY3dQOUVl?=
- =?utf-8?B?U0VVQVorWVdyblJTQXpYT3ZoZnpoLzA5eXRrSUh5Q0NZTjNHOTJBN3lVWC9h?=
- =?utf-8?B?cklFaVhRazIzQ1JXNmhTWEpxZmNXSDJvb01qSE9iQWtBR3l0ZTRrbVRTN291?=
- =?utf-8?B?YmEvTldibVhYUys1THdXc3pydVJIY3JWWmN2WkpEdlFUb1IyQnZnUG1teXVE?=
- =?utf-8?B?Vi9lYmcyMXZSODlhTkNrTUZwRDJBLzRyTE1wSzh3UTBDb2ZTdHV5QzYzbS9D?=
- =?utf-8?B?a3BDcFRFVmtkM2E0UFgweXQwL0lzWm9LREhuQ21zQWsrd0o3eHVuUVRiMEYr?=
- =?utf-8?B?NUZLWDlmbkFDNHo3NCtkV2MyN0RiaWZQN0hPQlQraTlMSHBHM2pYTVQ2ZXNa?=
- =?utf-8?B?T1FlRFh3dmhhR2pLVCtKUFpoT1Njc2k4aHpBRC9XcCs2QjRac0hDNEc4Y3NZ?=
- =?utf-8?B?MVNObm5iK01oeFBoQy8wdEcxbWtHQ2RST21qU2lqVENsNFNPQkFJbTM0bUJx?=
- =?utf-8?B?TXV1TDhzY2dna2JuYWpGQWpldjhaTXM3NEE4Ui96NldMSXR0UUVjTUxOeGxH?=
- =?utf-8?B?YXc5Q3p6RStQTGh3TlNlRThERlRRLzc4WGZlZ0hUcVF3VEZpM3lrZVpzaGNm?=
- =?utf-8?B?MTRBem54RXA4a3FoRGhUNm5hOWYxWk1hMFl4VjNBZ0xLQUpUNHhRalBCaGdO?=
- =?utf-8?B?SWJiYUZublVTNUMvNFk1b0Vuem03U3haV1FSTnl1YkdHRWlIU3B1TDJWU3d4?=
- =?utf-8?B?Sm92Yk5RNVJONmlaUFo4WXFwdW91NktSZUE4UlBaa0owQUhsRFpmNkQvS0dp?=
- =?utf-8?B?czJvKzJOVS9SYy9icFlKTTBvVXVZby9iUk9sVFZmc1dXTlI1V3ZNV1Q5dE5R?=
- =?utf-8?B?Y0ZuTWVCeFBqb0tSbHdUbnZ6a1hyTTgwYjBYVFk3V1hqdjBLTS9zajIyd3lG?=
- =?utf-8?B?WC9oTmlrMTBxa1FJanZLYmlYSzh5N2tJVGR6Mm9tTmJkMVFqTVZFMzZBSkRn?=
- =?utf-8?B?Y3g2emdHSjk2dVZwQkhVQ3pxZFdwWDBNbXVFcVNpTWFyRHhQc0JRSUwxRDF3?=
- =?utf-8?B?YVZDQVZMMDROT0hlMzFpazdYNmNrUE90cHI1R1NjNktHUTlFYkZZMzEyT1I4?=
- =?utf-8?B?bGNCbURrTzJlenoxT094MzNycnZoeU1LcE9pWmZiVXpJZkZ4dHdNUmxOVDc2?=
- =?utf-8?B?OVNpdzFYSTAzVm5OWlovNHdSRlQ2dW1QTW1JZnBrSC9PRGI5RUlxbUVxRzJM?=
- =?utf-8?B?clhLWndiNytxakpBbVRNanJCeTdVQnRQVHgzZWZlRG5mb3dWZGdTV2JScVFF?=
- =?utf-8?B?aHBSdHpZOW41YzVGL0c0ZXRnc2tPYmViT0R0Z1NRbUJaUUZRb1JHSU5uRllI?=
- =?utf-8?B?NTc1QjM4WmlPM3V3eVJod0U0V3U1T2phY0lZRDkvaFhBc0hMTzdKSzRxNmk5?=
- =?utf-8?B?VloxYTd3QWRIZnFGQ1NnS0pKS0V5OEFMUTlrWk1OWmtuNFBWSDVQa1VtWWY5?=
- =?utf-8?B?SUh3VHRDQWpra253RHNBVGpQL0dGWWxnUzVLYjFYQ3kzMUZqOFF2RnA2Znlq?=
- =?utf-8?Q?LsQY=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|7416014|10070799003|1800799024|921020|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QlVYZlhQcEh4ZkZiRWdhUHp0WnlXRVRMU2lnSFZrSzR6NEN2VTZTYXB5aWYx?=
+ =?utf-8?B?aXFEN2x2ZWJSZ0NLT0tlVCtDYU5PanNBTXAvSHRKQVFkcmMxM21SSjdKMTY4?=
+ =?utf-8?B?QTZ6T3cvcHBJT1YzZmw1bzVEelhqZEhPL0tZZm9IZnYvNjFlOU8rSUpSMG1z?=
+ =?utf-8?B?SXpFTi8vSXpYZmFKR3JuYmhqMkgxN3I4ckRGOENMNG5aRkF4UGFNbi9KSXpu?=
+ =?utf-8?B?UUU4czZ5WWw0SFI3dmlTRU12TS94aVF1NHFiMmpkNDRDVlZ3SjJSa2NVMWpI?=
+ =?utf-8?B?L1pEMFZrTHlCSGg4YmlDOVgwem1xQXp2VmhaaHUvQkg5dVJaK1MzU0J4ODRq?=
+ =?utf-8?B?TnFaU1YzYkJ0Ri9tRDFITzVyNFh6WU4xVG1BbGRBbXRydTFFbTJEMGZJc29Q?=
+ =?utf-8?B?Y1NtS1ljRmhwMlZ6SHVDUkVjdUIxcmtzTTNGUHhMQy82UCtnbERtcDRJSGxR?=
+ =?utf-8?B?TER1cFN1ckhBOFVlUXVRUy9UbVhldTFTWHByaGZUelFRNVVRc0s2OWkyRHBt?=
+ =?utf-8?B?SStQVEVOd1lVWEllYm1rMThLWkNwcWFJTzh5a051WjFJOXV0NTFvMWhCWE5p?=
+ =?utf-8?B?ZFg5UE1OeWZRM1dVMGx6NGJCcW9Za3o0S0dmSG51WGlQNkl3c2F0MWd0YWdk?=
+ =?utf-8?B?WDIwMHQyTnZrRVltdGRtaDQrT2doUHJiaHk2TVlERndHRi9aNmI2VThIejVh?=
+ =?utf-8?B?UEg4Q0ZySm9RK2liVXZXSzVJZG9kVmtDcUc0VzFXU3NvdEFLWTJCTmRyTjJp?=
+ =?utf-8?B?SUNCdU1IT2NwdG9MU0JuNER1Zlc2cEFNbndyQkQ2ZDVxa01yVHp5OW0vRkJX?=
+ =?utf-8?B?WWwzUFAwaEVDazJrdVBYWHpDM1FBWkloOW8zWTE5UDZHb1IycnJTeTk2NlBp?=
+ =?utf-8?B?NHd2cW85bnB6aFNSQ1NuZFBrbUx5UGx3TEZCVEk5K2F2RkJCKzI2cFZJNEZQ?=
+ =?utf-8?B?a3N3a3BMd0hxak9janJ5Q1ptTHBIQktuNkNKQWpXekFSbXN3dmtZK1FuQnI2?=
+ =?utf-8?B?cjhvYi96WnRpREpTdEcvQzBZdWJwSk9xcVBRWGM3ZFg4Slo5YU51ZEcybm5j?=
+ =?utf-8?B?U3F5M0RQdUNJUjBWUGZ5bElHd0RpTHh0QURJUHlzVFh1dmluNGlRWGlzV1E3?=
+ =?utf-8?B?UVZWbXBOK1NlcFZTdk92bml4N3dSMXFLaXhDdXluNkkrRXBRSTZJWjhEbWlt?=
+ =?utf-8?B?OGh2eFZBbWZRV2RyRmtvYlRWWVVabXkzK2hLck52akszcW5LS0t6RVBlcStH?=
+ =?utf-8?B?KzZBcWdEclZvY3dDSmZsVHVFQnBlUWFZQngyVVREejA0WGlNVXROZUU2cjVC?=
+ =?utf-8?B?OG5nRklvQkZZQ3VWMDh1M1dQblRGM2gyR0hjSkJaTFVXNVk0ZmxSRWYySklx?=
+ =?utf-8?B?b1REU09oR1orVzJTUHRIb2tVUjVNcW43ODEwdlJWUWd0TXRZMHFta0E3Z1RS?=
+ =?utf-8?B?WHR5cnBQSXg4a2s3NXhDb0JFK081SnBDOS8rOXdGZUlhbElIeDZUclllSGtJ?=
+ =?utf-8?B?c0NLeXBqMEVDaHlIKzVESzFhZ012b2xTNmNRWTNCOTYvblZEK1daL2xUT0JI?=
+ =?utf-8?B?Tm9TQjVldWVncFNtOURkbW95aVNNcmdORVo5NVVGN0txSTdQamM3ajlwZHJI?=
+ =?utf-8?B?K0g4dkNlUG44VEFWRmcrODFqNDRVWHFPVTV0UmhSdFlQWm9hLzEzV0paenQv?=
+ =?utf-8?B?WkJWc1pBd3cwYmhzQWk0cmYxMWJnZWFhVkx5WXBSYUtySTBtOXdQdVRkdyt5?=
+ =?utf-8?B?TkVYK3ZYYlluVGF3aDRDbDlHcFlIQVlGQWY1ang5Y0tiVjJMYzZwUEJMTjkw?=
+ =?utf-8?B?RTE5VHJUZ0RadjNTK1FSczJ0V1VrUXk3QUhqYWVoRmxJbUFmK2ZUNTRsNkVo?=
+ =?utf-8?B?cHF3aG9qRzcyalQ1eDhRVTgwTHFXa01DM1ZoOHU4MHBsTW5iRlpRVUhnMDhX?=
+ =?utf-8?B?TGdBVUpWZ3RYVDJtMUt6Z3duRHNEVTFUUmNhT1I5cDJzYnY4M2gxUHgrajBV?=
+ =?utf-8?B?UStBRHNESnB2eWJ5UC80UjkrSDdpWTFIMUthbjRVc1NLUHFNalF2OVMraldo?=
+ =?utf-8?B?OFdjeGdzZDUxRnJJSDB4a00veUpmSGxHOFBQSlMybFJGeFVOampxMmpJNFMr?=
+ =?utf-8?B?ZmR4aFRMUEk0V2NiMjRxZkdUaURtc2tXTEhSd0RzOG5ZSTJYT3Q0UHFzUHBn?=
+ =?utf-8?B?N3c9PQ==?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(366016)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(376014)(7416014)(10070799003)(1800799024)(921020)(7053199007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U3hQcGU0NHk3WGpDcGxGRExKNkhkWEMxT2toVzJLY0lJdkhmaFhtWVZxeFhk?=
- =?utf-8?B?THVISW5YVjVmRG9tRkRXVnUrOXpiY2Q4SmhPL1ZRcENEa2cwZElMbVBLSFpV?=
- =?utf-8?B?MXkvQzhhR1c2STJkRk9FQXpVb0FUVWVkSUpkZVMwZWhibG8zaVJMMUs5bGNL?=
- =?utf-8?B?bktkam90RC8yYzkzRnRxdlBpV09XNjZ0d1NIaW5LNC95S1NkOXZzN1JpWXF4?=
- =?utf-8?B?KzdZN0t1ZGZhMFBtQ20xRXZlTFNZQzE0bzNMT1lRN3MxdTc5N1czTkk3MnV6?=
- =?utf-8?B?Ym00Z1VqNWxIQXI2NFNvYytkdDZDdGE2TWltcmc3S3A2ZmszbUh4bm5xVmFV?=
- =?utf-8?B?a1BhTE1LRVVzODJab0RGMWtEVktMUFVGUTVGREl3Wi9zamhscW4zeFprSC90?=
- =?utf-8?B?RzRrelZQbWRWQS9Na0Z6MHZYWERWdjR5UkVJb2R4NStLOVlqUU80Y1pkcXMy?=
- =?utf-8?B?VkZzZnFxL1Jxaml5SXg5VjBWbUcvWk8rZWt2RFVOUXdVVHNkM29wdFVPSFNa?=
- =?utf-8?B?Yk1pTExFK20yb3ovYjg3WlhDbTVGYUYyUmczbXFkdnUwWTh1dHc1VHNCZFFX?=
- =?utf-8?B?REhKeFE4Z2xKZDB0L1E0azhINjZHQkNLd2NXYkFDOTc2VkRZVXU1Ukt5dUxl?=
- =?utf-8?B?N25WVXkxYkNDcTl6ZG1ZQzFSak56TUR5QTE3aEkwS0hzUHdQNUVoanpQRVhQ?=
- =?utf-8?B?UXlWbHZ4SVZTZUptQThwUTl6VERvUDMzZFdRKzkwK2FzZ1pEWS8rQzZ6OGIw?=
- =?utf-8?B?d2IzVDdndTRZQkpSSytaSGYvYkRhRnU5Z0l0Y0dXaGdQWTNIUHhFNXBwTFJP?=
- =?utf-8?B?K1VBMXJMNmgvZlhJWnFWcnR5aExqdEw0d1FqWnE1YkNzYlUwVWNPS3AyeWNU?=
- =?utf-8?B?cW5RRlhvbFJMT1V3SFlDQXl3aUxXbXdEd0RiYU9JNkltVFdZRWFaV3Uza1I4?=
- =?utf-8?B?K1JuWUhjSm1NTVBob1BHZVJNc0Q1Wnd0cnZHdmNKVmpwRDM0V3FocENzNDBp?=
- =?utf-8?B?TzVORTdOTXpkVFRDSkE3RDhUcytkR253cUhWNGx4UVM1YUN2MGpxc0h6M3BC?=
- =?utf-8?B?bFp5Q2M0czJVbnFTZzlZSERVRW1nd2JoOFdwbHNzbkZnbHdGYkRRVk9jZ0dH?=
- =?utf-8?B?TTJxM3hoMnluYXpSR3VzZmRaMXhaYjdpckg3bkoxZnZVcHFCMG5ZMEhSdmw1?=
- =?utf-8?B?T0YzSlF3VUY4RStQakoyK1FjUXBOMURkaXQybGU5VkxPSnFoenRMdEFrYldQ?=
- =?utf-8?B?UlJFQmxDSGx5MjZFNnpPNm9nTEcrNUJTeGRzRWJBVS9aVHlQRXVLK0NsNitl?=
- =?utf-8?B?SVl1U1ZxKzdLNzAvZXovMlpyd0lCdHo2TS90dUpOMnhjLzZyWVBkSGpLTDNY?=
- =?utf-8?B?WjVqUXp0RENOSUNMRzJ5bFNNVk1TNUVWeXlhQ2NDd084UFExTnFwSi9rQUhx?=
- =?utf-8?B?TlRZMnAvb2VRQTJCM1ZmR2RtM3NxMXpmenFEL3c5V3JEL3ZSMkFmTHJib1Jo?=
- =?utf-8?B?djR6TEYyUG84M3BRQy82OWw5RmtLNTJtZlRkdTBzOW5OSWJsV0p6YWxoSU5V?=
- =?utf-8?B?Y2lSRnZXVWF1dVZmak5wRWVQcGpjeE0xbXhUeU0vK1hHdHF6SkYvMEpORVJk?=
- =?utf-8?B?VWxzT21aQmxzTUNXeC9iTmY4TWFRNnFsdUdLTVVyUHVjNm9Cayt2Snd1Ky9V?=
- =?utf-8?B?YVRNSnBDeE1LSnFMTWV5LytJZFBUY2NTY2gvRUQyTnJleGtTN3kyaldONWE1?=
- =?utf-8?B?V2gyMjVYaXJmckVuL0FMK3E5U0VqWC9rWnZjUFJxYVNRNThhN0tVSG9VSm9B?=
- =?utf-8?B?Q29aY0dyUElFSUE1QjVNdy95SVE1OXVXanl6dVVqT1F3bjJyMlVZcm5SUEJt?=
- =?utf-8?B?U1R2Vk1PVUtHaFpNT25POFZLOS9KaGdjaDZhTi9YVnh5dXNXclhYYkVXd2xC?=
- =?utf-8?B?TVIyaUtPeXpUeVlvUVE5cHluUzhoQVVGR3RsR2EwZytDU0xFWnZQS0tLeGlp?=
- =?utf-8?B?bVY4TTZRck9ENGJMSkhNMjFvYUlRZXQzWTRxQ0RxaUVBVzJ3Tmc0aHMzWUIy?=
- =?utf-8?B?QzhTY0U5cVp4MEFzblpoaUV1dHc3ZC93YmliRCtSRlk3aHF0VngxYVpsdHQx?=
- =?utf-8?B?TzZrRFpQQnAveFhMbmtuWG54UUVCS2xSUkdvcEU4R2wwR1c1QVpIMWh5a1VV?=
- =?utf-8?B?S2wxR0xuTkozdkJpcm1nUjcwSGdFd240VEJQUUx0aFhSY3NTakpWV1FPQ2lG?=
- =?utf-8?B?c0tnRTJoUUVORFB2VGpqaGRWRy9GUjZtaGdHb2xVbHpWMHBUZ0txTmlHcnNo?=
- =?utf-8?B?V1lPVnVLN1NNdnVETzVhVG9GYlB0Ym5JYklKWjE2aFBwWDE2blVDOFhQSm53?=
- =?utf-8?Q?VN2AjLeKY8DmE22vl4vD3ZhXj64pXQHzHDPf4?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aThGazJKUWZPSDllV2I1eWtLRC9QRW9BVEhCVktXVjJ0aGFFdmk0U2tGSUVq?=
+ =?utf-8?B?UHNXeWcrajYweDlNak83OWttTWZOalV4NFJKbzBvR2ZOQUxwNXo4aDlKeVFN?=
+ =?utf-8?B?c2xFWEFrMGZOL3BDZ2o3RmpjbEhQelNvL0o1TVhlcEsreWR4aTNGZlRDdGxV?=
+ =?utf-8?B?eGZUcTVvcS9zQjlxRFZSd2NabWZoYnJhd2d1ZjlzUnBmbmNRK2p6dzRPcVV3?=
+ =?utf-8?B?cm5RbEhVd1hPZUdkUEh6TDliZ2tkVFZBcmgyenFHSGl1RW5aa0poeHZTRWR3?=
+ =?utf-8?B?RVBqRjkrcUxTYXZJZjdXODYwNmRMcVA5MktzZzdXRG9nNXNrekJhSmN4VHlR?=
+ =?utf-8?B?bGdGU2JndVhkbFEwSUM2d3FCNVFIWmZGZTBLNGRQcjFIenQ4dnFCa3VtYXRm?=
+ =?utf-8?B?MnV2SVR4NWRoN2V6cEx4cml0dkV0VWhJKzRWcXZGaWJoRlRWdXBRc3pIeDVQ?=
+ =?utf-8?B?RWN4L29Sd3lKbEdISHh3ZWtUYU9KdGVVcFpyVXBDbFVWL1g3R2RuVkJjUVVy?=
+ =?utf-8?B?bUc4R1lHdW82YitPTzJ3YzljMEo3V2FNSUF6VUxSeGVSS0xIcTRobXlhQ21l?=
+ =?utf-8?B?QnJLclhpL0VBdllxenV0OStET2oySkdMaUVibzZ3NVJBK29YSVgxYlpTelNr?=
+ =?utf-8?B?QVBkSWdWTWRaZlBVQjBMSnVRUExiMmtZdkxaM0puUGNtT3JIQTRpMUpyZGM3?=
+ =?utf-8?B?K0cyZ0hpNWhTSnZpZlY2YXBNS1FVeTVEWDVZWm9yMGF2TGtPVUlkeWtmK1li?=
+ =?utf-8?B?YlFIUTBOaGV0YzgwR0NvTGViQ2xMQWRkaEVhRTFCOTV5ZHlKYm5ML3FiWjRS?=
+ =?utf-8?B?MXhQUjhINGI4Y0RSQnFWaCtiVmwvL20wNXluTWMya3EybW1VUnlUcWwycThx?=
+ =?utf-8?B?RVMwVjVWd2RxM1dYaUdDeGl6V1J3WEdHaWNGOHhVaFA1Y01sZ0pFV3pVUnVY?=
+ =?utf-8?B?VFcyNkQrWnMzMzQ3bFowN0xjQUYxNEZEQUNFMU9ya3FnZDlST0ZvbXN5aDNT?=
+ =?utf-8?B?WU1DOWVPTEdUaWFCMlhKazNDdG00VEFkZHo2aWFjaGRFLzExcnVhMVVRL1c4?=
+ =?utf-8?B?MzFyU04ya2g3VmpOVTRZQ1ppeGQxeTVmQm82Rk1PR2k4a3JScDVUeWpTK1g1?=
+ =?utf-8?B?SmU4Q2Fmalg2T2twSzZOMHZnVURDWUlpQ3dKaytZdlYwdllBY2JLa0VIanpV?=
+ =?utf-8?B?bnRsYzM1QlFkdEdCWG9vUWpHaGNraG5LdUFySXZJU0g0aW0xVkkwcGZrSUpL?=
+ =?utf-8?B?UjJxTURrMmdwWVprNHozNVloVFpzMllVSWFBZHBnMjFwM292Z09JSmhmRXd1?=
+ =?utf-8?B?M1kxUEt4MHJkUE9jSmxDeTdFWVhrZWxNYVRyTTR3VjVyamhVOElhK0R4Zm5z?=
+ =?utf-8?B?ZVBnaEoxUG01Nlh4eUNhZjVCSU1jUHROVDBrRzZCVlFmS0RWWWlSM1VmS1oy?=
+ =?utf-8?B?RzE3TWpTaDBtaTAvZGRzVUlMd2MxREZVbHlOS3JrakhWTFhpcFZocGZsczdW?=
+ =?utf-8?B?TmlsWWU3elVTdDBSU0VyWmxTK0ZNd1lMbVpDMURRUlZ1bnZzclFSb3JYQ0V0?=
+ =?utf-8?B?bHJjcTVJMUZHOGlkNWIrU0xpR0ZKNkhJS1JiSElFVlNtazRWNzdTSUw5MVV3?=
+ =?utf-8?B?RHVxNHMxSTFCY1J3eGlRRy9aa29wOWRkbVN5SFU2b1NRNWdFZy9RbWQwNHNB?=
+ =?utf-8?B?WklXVnRyTnVCSzE5Uys4Uld1clhua1FnajF0b05JOVhqK2RsOXZ5MWR3bXVj?=
+ =?utf-8?B?K0ZrbDZwWUxKUnJuc3VRbkduaXFLeWdicGFHcHhXZ1phSVdlL2xEd2JjbGY5?=
+ =?utf-8?B?N3grQVlKcy9zNTZqeDhoQ1dqM3FFR3MyR0RvcWFlY3BUclI0VEdNUVJ2MTdE?=
+ =?utf-8?B?a2JpZGQ5ei8wRjJBM3ZGb1p0dFZheXNheE5lZmljOWZuRnEvNDRwYjJWR2kx?=
+ =?utf-8?B?YnBGdlp4aGQ0QWdOUGsrQTc4a3N2UU9xRkMwSVNFbW9FMEFPZVlpZTdRUldl?=
+ =?utf-8?B?Z0hmQTFzNVlKWkFUeG92TVVVeUpURjFZczh1VlpGbkhvc2xaSk82S3d3aWtD?=
+ =?utf-8?B?QlpzUXlLQlptUXNGcGJ2WnZ4OHRvMlBkOWQ0clpidC9vdmc0b2k1Q0xmZzlF?=
+ =?utf-8?B?TTZNMXRjRm42TTI2WWVFRUxFTkQvYmV5a1loLzNPOHlDYlozTVBpZXkxOVRz?=
+ =?utf-8?B?cC9FTzQ1eVk4UldhdUpmQTFYQlEraU9yeU9BWVYrS3duYmtyTEczbEhoQncw?=
+ =?utf-8?B?RkJuNUtNVVFRcFRkempwSnprM3hGRy9ZVWtnNkhCdFVzYnR4dUt5SENpd2FP?=
+ =?utf-8?B?VDRReWtVQzczUGFVdG54bHV4QTdVRGFkNWJ6SFAwc1BGZVNvbEFPZUpsSjhI?=
+ =?utf-8?Q?+HzmfhugQUXPGVSHqmQEl/x5EV5Ag4mXfFZAf?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: afcfb253-abca-4da6-b256-08de5744b408
+X-MS-Exchange-CrossTenant-Network-Message-Id: d898a344-212b-42d5-851d-08de57479814
 X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 10:22:52.4279 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 10:43:33.9868 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZLKK6ujua4gxfqyVKaBdqMQcWWWFIW+kB8QMgl8zR/wJl8VhCFghTycs7osU4+eY5+fS9tTlXUkeZelRlYAI4AFMrO2X4HIcQ8BMj6xUJGA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRWPR04MB12072
+X-MS-Exchange-CrossTenant-UserPrincipalName: uTMmJ5kSaOGy65SGMoCDkdywLLdFKtRn94uh75QQd9qms0erlCwg7oXCNCFW60+dyjFyQ+F5p+lR/RSWck9ZfOCmDvMZ7G/fjoiHTki46OY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8648
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,170 +197,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
+Hi Mikhail,
 
-On 1/18/26 11:50 AM, Frank Wunderlich wrote:
-> From: Frank Wunderlich <frank-w@public-files.de>
+On 1/19/26 1:36 AM, Mikhail Kshevetskiy wrote:
+> GPT disk partition with max available number (ex: /dev/mmcblk128) can't
+> be used from U-Boot. Here is an example:
 > 
-> Add a command for getting detected ram size with possibility to write
-> to environment variable.
+>    => mmc part
 > 
-> example usage:
+>    Partition Map for mmc device 0  --   Partition Type: EFI
 > 
-> BPI-R4> msize
-> 4294967296
-> BPI-R4> msize m
-> 4096m
-> BPI-R4> msize g
-> 4g
-> BPI-R4> msize g ramsize
-> BPI-R4> printenv ramsize
-> ramsize=4
-> BPI-R4>
+>    Part	Start LBA	End LBA		Name
+> 	Attributes
+> 	Type GUID
+> 	Partition GUID
+>    1	0x00001000	0x000013ff	"env1"
+> 	attrs:	0x0000000000000000
+> 	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
+> 	guid:	5452574f-2211-4433-5566-778899aabb02
+>    2	0x00001400	0x000017ff	"env2"
+> 	attrs:	0x0000000000000000
+> 	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
+> 	guid:	5452574f-2211-4433-5566-778899aabb03
+>    .................
+>    8	0x00158000	0x0034bfff	"apps"
+> 	attrs:	0x0000000000000000
+> 	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
+> 	guid:	5452574f-2211-4433-5566-778899aabb09
+>    128	0x00000420	0x00000fff	"fip"
+> 	attrs:	0x0000000000000000
+> 	type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+> 	guid:	5452574f-2211-4433-5566-778899aabb01
 > 
-> board with 8GB ram:
+>    => gpt setenv mmc 0 fip
+>    error!
+>    => gpt setenv mmc 0 apps
+>    success!
 > 
-> BPI-R4> msize
-> 8589934592
-> BPI-R4> msize m
-> 8192m
-> BPI-R4> msize g
-> 8g
-> BPI-R4> msize g ramsize
-> BPI-R4> printenv ramsize
-> ramsize=8
-> BPI-R4>
+> The error is caused by invalid boundary checks. This patch fixes an
+> issue.
 > 
-> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
-> ---
-> v4: drop rounding to full MB/GB as it leads to wrong display
-> v3: add missing ifdefs
-> v2: add Kconfig entry
-> ---
->   cmd/Kconfig |  5 +++++
->   cmd/mem.c   | 32 ++++++++++++++++++++++++++++++++
->   2 files changed, 37 insertions(+)
-> 
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 5c611fb3016e..b82b17195b7e 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -974,6 +974,11 @@ config CMD_RANDOM
->   	help
->   	  random - fill memory with random data
->   
-> +config CMD_MEMSIZE
-> +	bool "memsize"
-> +	help
-> +	  Get RAM via command for use in scripts.
-> +
+> Fixes: 12fc1f3bb223 ("cmd: gpt: add eMMC and GPT support")
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 
-Only available if CMD_MEMORY is set, so need a depends on.
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-I'm wondering if this new command isn't more suited in cmd/meminfo.c? 
-Maybe even extend the meminfo command instead of creating a new one?
-
->   config CMD_MEMTEST
->   	bool "memtest"
->   	help
-> diff --git a/cmd/mem.c b/cmd/mem.c
-> index d5d7ca2790bd..9dcfeacbbcc5 100644
-> --- a/cmd/mem.c
-> +++ b/cmd/mem.c
-> @@ -33,6 +33,7 @@
->   #include <linux/compiler.h>
->   #include <linux/ctype.h>
->   #include <linux/delay.h>
-> +#include <linux/sizes.h>
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, int flag, int argc,
->   }
->   #endif /* CONFIG_LOOPW */
->   
-> +#ifdef CONFIG_CMD_MEMSIZE
-> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		       char *const argv[])
-> +{
-> +	u64 memsize = gd->ram_size;
-> +
-> +	if (argc > 1) {
-> +		if (!strcmp(argv[1], "m"))
-> +			memsize = memsize / SZ_1M;
-> +		else if (!strcmp(argv[1], "g"))
-> +			memsize = memsize / SZ_1G;
-> +		if (argc > 2)
-> +			env_set_ulong(argv[2], memsize);
-> +		else
-> +			printf("%lld%s\n", memsize, argv[1]);
-> +	} else {
-> +		printf("%lld\n", memsize);
-> +	}
-
-Flatten this like so:
-
-"""
-if (argc <= 1) {
-     printf("%lld\n", memsize);
-     return 0;
-}
-
-if (!strcmp(argv[1], "m"))
-     memsize = memsize / SZ_1M;
-else if (!strcmp(argv[1], "g"))
-     memsize = memsize / SZ_1G;
-if (argc > 2)
-     env_set_ulong(argv[2], memsize);
-else
-     printf("%lld%s\n", memsize, argv[1]);
-return 0;
-"""
-
-Otherwise I see a few issues:
-- rounding not made explicit, (also it's truncating and not rounding I 
-believe here?). Why not print the actual value here as a float (of 
-course, not using floats)? I vaguely remember some of my Rockchip board 
-printing 1.5GiB when booting up (cannot verify because this happens due 
-to a bug in the SDRAM init and isn't easily reproducible). We do have 
-some boards with 256, 512MiB of RAM so we should be clear whether we are 
-printing 0 or 0.25 since that will influence how to do math operations 
-with the variable containing the value.
-- what if I want to save the byte size in a variable? With the current 
-implementation, only mebibyte or gibibyte sizes can be stored. I would 
-suggest to argc-- if m or g is passed, and then compare against argc > 1 
-in which case you'd use this third (in case m or g is passed) or second 
-(if they aren't) argument to store the value.
-- missing documentation on the base for the environment variable. We 
-have some commands setting hex digits in variables, some others in 
-decimal, so this needs to be made explicit so that people know if they 
-need to translate stuff before using it (or how to compare two numbers 
-against each other). Here it's decimal according to the code (maybe we 
-should have it in hex instead? I am not sure what is the expected base 
-for variables :/).
-
-> +
-> +	return 0;
-> +}
-> +#endif /* CONFIG_CMD_MEMSIZE */
-> +
->   #ifdef CONFIG_CMD_MEMTEST
->   static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulong end_addr,
->   			  volatile ulong *dummy)
-> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
->   );
->   #endif /* CONFIG_LOOPW */
->   
-> +#ifdef CONFIG_CMD_MEMSIZE
-> +U_BOOT_CMD(
-> +	msize,	3,	1,	do_mem_size,
-> +	"get detected ram size, optional set env variable with value",
-> +	"[m, g] [envvar]"
-
-Explain m and g so the user knows when typing help msize.
-
-We need tests in test/cmd/ and a new entry in doc/usage/cmd/ for this 
-new command.
-
-Cheers,
+Thanks!
 Quentin
