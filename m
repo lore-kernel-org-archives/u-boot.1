@@ -4,154 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E9E2CCF2C9
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 08:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2327CCF2C5
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 09:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C793680B98;
-	Mon, 19 Jan 2026 09:50:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 257D180B98;
+	Mon, 19 Jan 2026 10:02:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="O9ZQD2uI";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="n3orRgQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDD8C8389A; Mon, 19 Jan 2026 09:50:36 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0227483015; Mon, 19 Jan 2026 10:02:17 +0100 (CET)
+Received: from mail-dy1-x132d.google.com (mail-dy1-x132d.google.com
+ [IPv6:2607:f8b0:4864:20::132d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2533800AE
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 09:50:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AA1D800AE
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 10:02:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uA0Wnup7IYnpao1VxURiyY650PPC5D7GhszlRMwpSL8Io3FyXwKZKy9ElfLF0gM53SgQHS+9PuMnsSPQYdCQJUZXhkYgi9PmzHpRHML7/FIutrhc8RDyksnOVjz7mjtYgYPrFBK3OuiPTftd412YlHhbh8IR9Xp23YoDVDDoCokh0QDCwP6ay2tZAhfOPcJTXTAezeglLi4ZREmvEryya931epVoBCiam/HfFyo+dxYJ7ot5EXz/6E9ib69FL7yfdOE3Kz/FmtHiB85moqJ2QJBbUb9bmLFYinEpJNXhYO9li4AXZBXu2zr55QI52jHuOOvbSXE2oJRX1yamikZInQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YHHL8kLTXdVMwvZ8aGFRZcusmXYmRX/62JCo9npDOkQ=;
- b=T8bbmzUdCIFCIpwBExAwEYpRj3LpGtoQuSBzToyoOKIqzeglTejqk+H7hLSxFGJ5g4LEaZssdjfzwbOWU1uT2iJKL3iMVRTnFjO6/QZZ/wByQ3ehbWbjFKNujaFaeo5oIqEkTUuvec64OZhXIySC+c4/jm2pYJHYx1W6cs+0of7lYc9yi4s5POOMrwi14Fj2XpmHq304KBqomasYkCih9mNenE36NfzoMrS4S9vPTZ7NTRCcBXXqN7RgERA3RK5XRziKlOLOQrRZu87UTThCySVGHybN0IfnqrvdcU7WOi7KgdzbM9r1NotXOzavCVtjeCxohYISy9nd8webh8MPoQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=nabladev.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YHHL8kLTXdVMwvZ8aGFRZcusmXYmRX/62JCo9npDOkQ=;
- b=O9ZQD2uINeyNp7H8u7OdWColDf9/LeHtPojSV8I5pMmWCvA5Y9XEERH2RT0j/bItiiHjM40rLiCIddqJfkPgz/HtJYWLWO56dVqpsX6v6TkCvkuM1npj9sUUob4AUZqu5TGg5y1ueMf+zNRviN/zMNbOe/b35pa7U+fNhhiyITLVDT9pb+WL5ZjubuZZUOfwSEhu3FVPBzEe8atSgFcSlWNV+SSscu/+388jBiGLVlOSYhG0F8tRAFrJpxDz4NcthT6KQl06Y9Ygphw9bOrjm5tvEW2dwmmmJv+EC+ccNPdWvLd4TjXkO9HeykNFf47cKsA7gEGD+doSjk7CGLe7Hw==
-Received: from DB9PR01CA0027.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:1d8::32) by PR3PR10MB3915.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:4b::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Mon, 19 Jan
- 2026 08:50:33 +0000
-Received: from DB3PEPF0000885F.eurprd02.prod.outlook.com
- (2603:10a6:10:1d8:cafe::48) by DB9PR01CA0027.outlook.office365.com
- (2603:10a6:10:1d8::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.12 via Frontend Transport; Mon,
- 19 Jan 2026 08:50:41 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB3PEPF0000885F.mail.protection.outlook.com (10.167.242.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Mon, 19 Jan 2026 08:50:32 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Mon, 19 Jan
- 2026 09:51:51 +0100
-Received: from [10.48.86.129] (10.48.86.129) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Mon, 19 Jan
- 2026 09:50:31 +0100
-Message-ID: <f7038b76-37e6-4dca-bca3-53b39a1d0489@foss.st.com>
-Date: Mon, 19 Jan 2026 09:50:31 +0100
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-dy1-x132d.google.com with SMTP id
+ 5a478bee46e88-2ad70765db9so4131391eec.1
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 01:02:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1768813325; x=1769418125;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KFFzDllupjUTgJobLZVdnOiypBD5HElp7fvwXdeeLVc=;
+ b=n3orRgQ/jKwzQFnshj6MEp38qaOlJU17O2KeOyylPCAOO2rShwZZ8VPAN47XJ/5fr0
+ r92tYl5nB9ohy8IBms/CCFSQ5cwE8u6Z8TmU264dovlllBgsDwR2ha9Uw3TsbBCZ7BxY
+ fXZbOYs0KruHolE0iBSr5s/q7vKurpm2G6Yd8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768813325; x=1769418125;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KFFzDllupjUTgJobLZVdnOiypBD5HElp7fvwXdeeLVc=;
+ b=OkerJjzREJlutjWQjveIjSHttzUKHlxbJMRvF2BnEGxTUSxhv5YW9wkyD9v2Q1LRcY
+ 9LBd6PcfNNVvX+bC5V7LCy3nU8Q+5Hn2zh1nKRjrmk/VLE+YVxFFTPwLjVq+zS5uOlBI
+ RCI/EJ/eFSgMmIZFquPVLXmXy2ZNJIqIVHR7ObL3n2//GOzPitmC+LT7a9fydq+a09N3
+ 4dscqQbIaSQu9UA+kG9kuFslAtKN1EFsCOOkJDBQK5vToLiKxdQISq2RdTuKxrF3jJ4p
+ F5jCxVTIf12Fu87w4mafESq+VfRdwXuqEaY4nxXD/Qfd8lJtym3EOuBbQD3BkbFnMSF8
+ a4dw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2t/IWp5rPx2Re+HbV4e3tzoCoe7t4d0YKsnGNrjqu3cjIcUenB1fu9S/wFVvNdc3nlUB+0qM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzBL3xCt2StFf9Txf17gjggvrn94pIHF7SC2nqjdjY4dHhd3MVL
+ Fw+VD6IW2EXleYmEMCIifSptRl/QicdmL1EvYlDUX5Eva1Utsz5hOeyjox1RpF+DkqyPtqDKMHA
+ OZTFmTdMP8PyCj8AjLhjphK9uQJaK9XYr6qqhyJ0tHw==
+X-Gm-Gg: AY/fxX66Zv6eluVJSc4bMSoEfuj2RZmgZXiSLdk7u1NOeNYeKAKduWIx1ZIvgw9YRav
+ BPLK90Pu9RRZJwQfgjgsGMKTmoQ+4j3mI6r2QOryrYuEJyENHSM6D44hqAWSx408h3GuiYs5nPB
+ htG6v5Gsp4L6hFM3WKj5hPbX9hNeWBU0d2tECVJEIc4jFG69AeNFMuk9lb2touVzHFi7QJHko4d
+ VRkWIQAAzY2ettO+8mIdED1MYecoCsd9hZVpdnPWJUPsR4/CDe+Ck0GYxJkMxvLWcQ0wOjPa5cV
+ g46eGnwtzKlYBPjkIxVL7P0kdYE=
+X-Received: by 2002:a05:7300:8bac:b0:2ae:55ac:3ff6 with SMTP id
+ 5a478bee46e88-2b6b4e28374mr6989559eec.1.1768813322971; Mon, 19 Jan 2026
+ 01:02:02 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Reinstate missing SPL configs for DH
- STM32MP15xx DHSOM
-To: Marek Vasut <marex@nabladev.com>, <u-boot@lists.denx.de>
-CC: Antonio Borneo <antonio.borneo@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260108021705.518243-1-marex@nabladev.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260108021705.518243-1-marex@nabladev.com>
+References: <20251028091256.600992-1-richard.genoud@bootlin.com>
+ <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
+ <5b7e3e38-325f-424b-ab95-8775924333e4@bootlin.com>
+ <CAOf5uwkwDKzZpbj-iXBL2YTu-eH=96f2EzLcn0TFyGcJZHiNWQ@mail.gmail.com>
+In-Reply-To: <CAOf5uwkwDKzZpbj-iXBL2YTu-eH=96f2EzLcn0TFyGcJZHiNWQ@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 19 Jan 2026 10:01:51 +0100
+X-Gm-Features: AZwV_QhA0GGDls6xjmbrfDDmip7PNiFxc66WvoAeT_3AITw60W0gAu_hakTGfQU
+Message-ID: <CAOf5uwkhHyXHUHRMLa9OStb+uuWQ6wajWOWncd=HUgzGZSBV=A@mail.gmail.com>
+Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
+ support
+To: Richard GENOUD <richard.genoud@bootlin.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>, 
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dinesh Maniyam <dinesh.maniyam@intel.com>, Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.129]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885F:EE_|PR3PR10MB3915:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7cea48eb-73af-421c-6cb5-08de5737ce4e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ky9aWEtlVUVtS1Blbi9mb3NMUTJKWDd0Sk8vUi84VDBQV3lHYjlTaUM5K1dI?=
- =?utf-8?B?ckNjRU1acEU5R2IycENORS9QaEJaaGlyTzAzeTQ2QSs0K2g4bDJrY1JoSkZl?=
- =?utf-8?B?NS9oOUM5NUNxdy8zd3F4M21OdFIxUTY5UVFuT1RDUy9uZzd3SGRHRkE1cEcr?=
- =?utf-8?B?RjVjd0xraUtSWFB0VUNKdEN1QjBVMVpVRzNUVk9xWDh0N28xbW0zTE9reGhs?=
- =?utf-8?B?cE9VakF5REYwR096ZXNnOGJNNmRoc2V5SXZseEpmV0ZVRDJsZFpXbGVqQVc1?=
- =?utf-8?B?S2dnL21NZzlaWVl1R3QybUdRUDBodWlVMVhic3IvVzhmaTlxQTNLejRiVEsx?=
- =?utf-8?B?czU4Z2JMY2xKZWR6WWQ0WkJySFVscFFzMUNtV0RyVUlrOTZvZHBLN2JjSHF4?=
- =?utf-8?B?WDJNdlFSSXdRVFNwQU5GeUdkUlN3cUZuSFAvQllwY1hONnJpQ3ZmY3VtZElG?=
- =?utf-8?B?aHREWlZ0ZDlwb0gxSkhlaFdrbWtEQmEyNDdOdmVUYlhNcTFzeXpUTlQ4d0xn?=
- =?utf-8?B?NEVYc0NsaUlndGNLQUxEVUFLM1dLa0xVVHVjd28xcGlSdDFpdktMUzF2WU93?=
- =?utf-8?B?T2k4OUdJOU9DQkdBSGdqd1pTNzFnSjVhejFJWXc2N2dUd3cxN1dyNlRwdk9S?=
- =?utf-8?B?eFdONTZOQXlybkN5c0pVc1dyc3VNREg5V1M2NmM0cXBWbGx6OTFOb1NFdHM2?=
- =?utf-8?B?RlhOUVBjRXVuTHlndjlUNGF5alM1czNacXFkNTI5cVR3MHdmNUd2dG1KTi9M?=
- =?utf-8?B?cDhudC82Q0RzMytWSDZRb2dmUEJGTVRoNUMyaE50TVpLS2p6em45ZTEybkJX?=
- =?utf-8?B?UjFYeEExSEtMOHVjSU9oZzc5Q1N6ZXhNcnJBUUMybW5jcDk1dWFSeXZrN0lk?=
- =?utf-8?B?S09vc0JMQ3VhQzF0RE5XNGI0eUVycVZJWUo4UERJNjE3dStGU0JlNkNRcktn?=
- =?utf-8?B?aFBqbG1JdkEvbXYzQ3RGT1VEQ1doUlZEYm5oN1FPN2tCbnpGaUUzQ3UyUFJo?=
- =?utf-8?B?WFJJMGoralgvQzBkZlpsa1VIK05BOEhhdHNmYy9Tc3BZeTdmQm9XUTVXRktW?=
- =?utf-8?B?OU5vVHc3Wk11RkUwdmYvRE5mZXhaWE9GVTZBTXhuRzBPRTlrRGM5TGQrOEVT?=
- =?utf-8?B?c2JZV0FzYjhEMHNIcCt2TEw3WGh5eWJLQ2dJZWRqcSsvZ2hORzIrMDBYbWxF?=
- =?utf-8?B?ZEJnQ1VFQ3drWkpCd0YrS3ZGTyt2NUZzdkN2SmwrWmNYOUhIYnZ4UmpzNzMy?=
- =?utf-8?B?a0FWckNxV2VWY0JCYnAzWkJmY0pSOC9WWE40Sno3WTlhSlVEbkV6dWhDT0Jp?=
- =?utf-8?B?aEVsRmVtUnBwYlJucFJQOWg0cjUwOHhGRUsyckdLaHhFQ0R0azdHQUdQcWJz?=
- =?utf-8?B?MmpZdmtZd2ZuVDNhTUs1c1pPMmI4cUJqditYNzBNcC9NYWVwd3V6bEFRczF5?=
- =?utf-8?B?ajducUlNMFdrQ3RkbXJtQUVibUx5djkxT0NNVUZzOTg3Vlk2bTBiMk9sTGdC?=
- =?utf-8?B?T0J2Y0NpUkdUWHQ1MEcrK0cvL3l2ZGttTkttZklURW9jWXhPSTd4VnFySGxI?=
- =?utf-8?B?SjVVYjZSSjZyWHVpNmI0RmJ5MVA4aStGSkFsYnhpd01FTVZqRWdIY245REpx?=
- =?utf-8?B?ZmNLaExpNWlnNWhVREpOZWIrcHBmOTJLMzR4ZmlJQXpqSWplVUx1OGpMWUJP?=
- =?utf-8?B?VmZ0SmxpOXppRHJSa2c4RE1xYUNDWGx6SEphb2d3YVBWYWVJMkFpR1VrZTI0?=
- =?utf-8?B?dndRYlBLY3NpM1dBRWQyaHpNc2FmeFVmZjFQbFIxbG9sdTNyNncxZ3hVd2xj?=
- =?utf-8?B?RUlJRkpSZkhZTlZndE9DVHk1bnZyT3JSRmpNcGY3bXNXRFdVNmFsQjZ5YldK?=
- =?utf-8?B?Z1Z4c0kzYzZxNFAwb002MGUvcjhsVnhSTUNIV0MzZXY0STBLZmVNLzVzVEFr?=
- =?utf-8?B?ajdTZHlTT1d0NG90ZEFqOTNNQkdlR20vQWc0bkJMY2JQQ0c0VHJlbVpWbmt2?=
- =?utf-8?B?aE1sUjVTNENWekI0TFMrWXJBeHBPRVVybUNxb3JnWHlnOGNDTlpocis0MVdu?=
- =?utf-8?B?cSt6NG1GMis0OElVRndxQ3R1b2JES2R4YUpEdFk4S0Uva1UvbnF2SzkxRjFs?=
- =?utf-8?B?KzBmUm1RaG9YVEVPY2FCODBtek1QSWVCNy9XU1NQc1pyZlhWSCtkS2NKS0c0?=
- =?utf-8?B?RWxDSzE5ZThRMkVlWFM0QWdVRy9hZncxbmdwSG5oSTM2YkgrQWtXaW93THhC?=
- =?utf-8?B?RlgxaDFOYng0dmtSb2pZOHJmTFlRPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: PXzvtfMJVdQBvFYEHLTWeNtiijrOk4j8s8A6G9mQOMfWzrJBP02E5to23wSMeTGE+iPtHMaWEv6FuQ5n5CML4oawuptgwCzGjPOxDZFx5oB5kzwboasTsYfAA+uYODQImJI+iljLyBmz30ey50tOIiUQRn4RbkPgECix76CfJ1YoXwpygssH6hfv2Z6szDFcKR3XqUR5KXY6Q+Q4os6x76qczc7N5CVf9He0A0VEC5wWALOGZarEV8VMowJo23RmLqYfyRbjKgjHfkslQFaMzgF33ip+MhubxWpRoBCOE4NBEpQLq+ySjSeVvkvVBCUFz6dEGORBVcdP45/8aRB/pTqxKP2AniW5q6YjtCSv2R3NAdjQwUfy7n+XfpzgTs65zzM8KHjK5bY+HDg7h/cOQwQY6yJq3IMYN/iyB9WwMQZOdyxzin1V/+6bIbwptC11wZ5wvZo7pV9CyXpaYhzB0EEOo3EriivJJrSrSayCSKVwRPL3Pqs6H+Yj5bAfDtVB66T44Bj9CAa/H9rt9p47jktRZwQcPT/d/KRojlU1OwU4eAJNZOqqlVFPc0SSNUMj4mNGHNnIZbeHoUCa113KNzg+uZMQMu5lwqKgFv6c/cvf1dYqAauJZUDZcWRZZbiOfENm0Bap/XJQI2SqI7JcZ4i8Q6lHqGzzwBvxmtLSxL90c10epU9djmJQoa6H9j1S
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 08:50:32.8189 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cea48eb-73af-421c-6cb5-08de5737ce4e
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885F.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3915
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,48 +108,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Richard
+
+I queue them and run the CI, I have it ready, waiting for the denx
+site to be up again
+
+Michael
+
+On Mon, Jan 12, 2026 at 6:30=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi
+>
+> My fault, I was thinking to already have picked them, I will do
+>
+> On Mon, Jan 12, 2026 at 6:09=E2=80=AFPM Richard GENOUD
+> <richard.genoud@bootlin.com> wrote:
+> >
+> > Hi Michael,
+> > Le 31/10/2025 =C3=A0 07:43, Michael Nazzareno Trimarchi a =C3=A9crit :
+> > > Hi Richard
+> > >
+> > > On Tue, Oct 28, 2025 at 10:13=E2=80=AFAM Richard Genoud
+> > > <richard.genoud@bootlin.com> wrote:
+> > >>
+> > >> Hi everyone,
+> > >>
+> > >> This patch series introduce H6/H616 NAND controller support (but not=
+ yet
+> > >> the DMA/MDMA part).
+> > >>
+> > >> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 =
+NAND
+> > >> chip.
+> > >> ECC is supported, as well as scrambling.
+> > >>
+> > >> Support for booting from NAND is not part of this series, but it's a=
+lmost
+> > >> ready. (It needs quite some modifications in sunxi-spl-image-builder=
+.c
+> > >> and sunxi_toc0.c)
+> > >>
+> > >> H6 SoC has not been tested, but it shares all registers with H616, p=
+lus
+> > >> some registers dedicated to Embedded Crypto Engine that H616 lacks.
+> > >>
+> > >> This IP has quite some register fields modified from the A10/A23, bu=
+t in
+> > >> the end, it works more or less the same.
+> > >> Main differences with A10/A23 are:
+> > >> - The need for 2 more clocks (for ECC and MBUS)
+> > >> - The use of a new USER_DATA_LEN register
+> > >> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+> > >> - MDMA based on chained buffers
+> > >> - some registers layouts have changed (mainly due do the stronger EC=
+C)
+> > >>
+> > >> Patches 1 and 2 are small fixes
+> > >>
+> > >> Patches 3-6 harmonize the registers definitions between U-Boot and S=
+PL,
+> > >> and ultimately merge those definitions in an include file, without
+> > >> functional change, removing the usage of sunxi_ccm_reg on the way.
+> > >>
+> > >> Patches 7-19 are paving the way to the introduction of H6/H616 NAND
+> > >> controller by adding per SoC capabilities for both drivers. They are
+> > >> small for an easier review, without functional change.
+> > >>
+> > >> Patches 20-21 are adding missing NAND related clocks definitions for
+> > >> H6/H616
+> > >>
+> > >> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+> > >>
+> > >> Patch 23 adds the support for H6/H616 NAND controller in SPL.
+> > >>
+> > >> Patch 24 fixes warnings in sunxi_nand_spl.c
+> > >>
+> > >> A similar series for this NAND controller support in Linux has been =
+sent
+> > >> and being reviewed.
+> > >>
+> > >> Changes from v1:
+> > >> - pick-up reviewed-by
+> > >> - use a readl() loop instead of memcpy_fromio() in patch 2 as sugges=
+ted
+> > >>    by Andre
+> > >> - remove cosmetic in patches that are beyond cosmetic changes
+> > >> - remove usage of struct sunxi_ccm_reg, suggested by Andre
+> > >> - indent @caps member description in comment
+> > >> - give more informations on PAT_FOUND registers in commit message
+> > >> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the ver=
+y
+> > >>    same bit NFC_ECC_BLOCK_512
+> > >> - add missing MACH_SUN50I_H6 in Kconfig
+> > >>
+> > >> Richard Genoud (24):
+> > >>    mtd: rawnand: sunxi: cosmetic: remove needless comment
+> > >>    mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+> > >>    mtd: rawnand: sunxi_spl: harmonize register defines with non spl =
+file
+> > >>    mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+> > >>      linux/mtd/rawnand.h
+> > >>    mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+> > >>    mtd: rawnand: sunxi: merge register definitions for
+> > >>      sunxi_nand{,_spl}.c
+> > >>    mtd: rawnand: sunxi: add per SoC capabilities
+> > >>    mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
+> > >>    mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+> > >>    mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+> > >>    mtd: rawnand: sunxi: add has_ecc_block_512 capability
+> > >>    mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+> > >>    mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+> > >>    mtd: rawnand: sunxi_spl: add per SoC capabilities
+> > >>    mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC ca=
+ps
+> > >>    mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+> > >>    mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUN=
+D
+> > >>    mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+> > >>    mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED mac=
+ros
+> > >>    sunxi: clock: H6: add NAND controller clock registers
+> > >>    clk: sunxi: Add MBUS Master Clock Gating Register
+> > >>    mtd: rawnand: sunxi: add support for H6/H616 nand controller
+> > >>    mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+> > >>    mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warning=
+s
+> > >>
+> > >>   arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
+> > >>   .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+> > >>   arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
+> > >>   .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+> > >>   arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
+> > >>   board/sunxi/board.c                           |  19 +-
+> > >>   drivers/clk/sunxi/clk_h6.c                    |   2 +
+> > >>   drivers/clk/sunxi/clk_h616.c                  |   2 +
+> > >>   drivers/mtd/nand/raw/Kconfig                  |   3 +-
+> > >>   drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++-----=
+---
+> > >>   drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
+> > >>   drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++---=
+----
+> > >>   12 files changed, 629 insertions(+), 284 deletions(-)
+> > >>   create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+> > >>
+> > >
+> > > I will pick the series over the weekend, check CI, and check better
+> > > all the patches that already
+> > > get reviewed anyway
+> >
+> > Any news?
+>
+> Sorry, I have picked the patches assigned to me, but now I found out
+> that I miss your series because
+> was not assigned to me. Give me a couple of days
+>
+> Michael
+>
+> >
+> >
+> > Regards,
+> > Richard
+> >
+> >
+> > >
+> > > MIchael
+> > >
+> > >>
+> > >> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+> > >> --
+> > >> 2.47.3
+> > >>
+> >
+> >
+> > --
+> > Richard Genoud, Bootlin
+> > Embedded Linux and Kernel engineering
+> > https://bootlin.com
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
 
 
-On 1/8/26 03:16, Marek Vasut wrote:
-> Re-enable missing configs for DH STM32MP15xx DHSOM, to allow those
-> devices to successfully boot again.
-> 
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Antonio Borneo <antonio.borneo@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  configs/stm32mp15_dhsom.config | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
-> 
-> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-> index d5ecbac29e0..24420372e3f 100644
-> --- a/configs/stm32mp15_dhsom.config
-> +++ b/configs/stm32mp15_dhsom.config
-> @@ -38,7 +38,13 @@ CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_SPANSION=y
->  CONFIG_SPI_FLASH_STMICRO=y
-> -CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-> -CONFIG_SPL_TEXT_BASE=0x2FFC2500
->  CONFIG_SPL_BLOCK_CACHE=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_SPL_DM_REGULATOR_STPMIC1=y
-> +CONFIG_SPL_DM_USB_GADGET=y
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
->  CONFIG_SPL_MMC=y
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> +CONFIG_SPL_USB_GADGET=y
 
+--
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
