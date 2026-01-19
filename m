@@ -4,169 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 121AFCCF2F2
-	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 12:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBF0CCF2F2
+	for <u-boot@archiver.kernel.org>; Mon, 19 Jan 2026 12:17:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D24E83015;
-	Mon, 19 Jan 2026 13:13:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 738EB83015;
+	Mon, 19 Jan 2026 13:17:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="YTPBlpb4";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oEST9szv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED0248313B; Mon, 19 Jan 2026 13:13:48 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id C29F98389A; Mon, 19 Jan 2026 13:17:54 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC002800AE
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 13:13:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B703F800AE
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 13:17:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=REEXTgT9bN2lL9DKfv90a0NbKBaVUwfDPon1BMExB9CUknQwUKl7/pcp2BR8YhXhq+OJMESYwyre6n82FhqjC+8bjZDkz5u2WrkWfueP8yHRTRwWzhBn4kE8A6bhRfb5jQmGlZBt6Y+KXqX7scI6uJKWEfseDqhDvt/pFFm3XuUiufmxq0jMg3TCi0tOQNBf4gqP6IqjQlePYsVO6H1H8y44mIRIkpPVaXyDB2uhGd/j/eaWEeD7EVbqtwvABv+/RWLCUnKteDXS4rMlCEEAoKBkyOSR3Ko1+Hi9FxTeZ8HpiiTZ1CgHzk1GIrcgefZrF9iaEvQoviELIAD4OPtouQ==
+ b=rZr5jDXkNUi+9OxtaTdqeahBATz7fSTwr982G5T2qNo1vSfEf/AmeFgqPHbLVPX/sjfxGWyd3Pomb8hzVMMCd33kuD/0GcQ3vC6MLeiYEt+QpoPZ3GRlslAwBHIrqyIFO6Z7YudcMzfUbmt6EJj6b934wUhW8GWw472fX0adEtgOF4DMV0cW+z7Up1XDaRJgsC0Y/FsSIhKs1LK5NLGfp9Mt0uft7C9+0glX5C4mqxKpLJLD7Ho73NPKAgyHMUgGT7g/dDGj7kICHnJxkvPL1xIYBGTPXQOgPfUV+YuJgNQt6VtYFrOiuFd8vc5ySh6jRWRUNSmBZX5t6EA73FY72Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LLgT9Zrrg4g8iduaJQhdLnSeerIGpCSs1d+k8dHfsKY=;
- b=X6bJEsbOwF87BSFJYaiFRuJrRlyPTKlFi18mB+LSjHUk1v0emRYMYmDMi5dAcrZ9vPRcvUI2gBvqhhaS2ZKpIy+4L4SRTEsxw8AsSVR+cmAbNhj/oMNRyc5Hv9MxGkgAqYGP4VlapSx2+kHcTfOJmeMv+Z38kXdo9kmGI/XlPjvR0DnPrr7vOcHdXoWqHuDxykAMzFfVRK6nyTPGcEMs4/rQlJU8ULnnVKMCT2czMNYCvVxWfgiNR/liLa9lRi5ViKJA++ciPMxpx6eYdyOToH6gE3pnYsthwQ+8TISGx3KMvoZKAn2wfkccOEKAKaBGHIO2BhCsSgPa0SGEK34j+A==
+ bh=w4Ng7G928wY7WPiq43C2ydsPHTElo7zkWz4/Aw49SWY=;
+ b=Lbz9/ZfUm01Ylo4CEjPf5fqagJ2mzqB58NxeCgqHQozigJSuk/2aA7qpL1wvXIBNwk1bFIeB6/wyR4UnO2ywaQilsAOhhGi1lE4p02CYRG65g2z68vo11vI+QCc3LOs7PTQkVvRzcq6C5LFM/9EGhSHkDeLn66qaP+xJYghIb7a9CAB64ndal66L8RFxacVJa3SVmSrdxX5mOamtJN2F2o27yWRSUKRzp+FkmIfm9ZjNAPTw9DvqL5uGRZnsbEveUTDoOheMIe8bLkZGripXFYTp+XYCaozRCbPablxo+X1y2V6Js6SmJ2+HFraR8ZiKWPOZPcqyA6INXvPxUWE3OQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LLgT9Zrrg4g8iduaJQhdLnSeerIGpCSs1d+k8dHfsKY=;
- b=YTPBlpb4CVM2c539aWo139QMwrSD1zXMnGMtYFVczqFKD22r3V9+j/RCr6ic2qX6Ml8gALLJ9wZY1QRoXV6DCEmc2KvUo4dkbBZJNnG6zExAA+LSGfPmwl5eBZ1+rPtslUsmKuqL+kl3qBTumC1CueoK+mn+TuM3KPEnU01cctY=
+ bh=w4Ng7G928wY7WPiq43C2ydsPHTElo7zkWz4/Aw49SWY=;
+ b=oEST9szv6BW7+eiuSBiunXSREg6npGnvWuRPKotC5CEWb571IcFoOu2ZvfuK3qlwFhB4m36tl+dk57AzoQbjHmkrB2Qkx2NKv6vqrdC1aWdNEldHFHVr+2/u5QcbFVcxFW3HT+1iTkT69uiir3g8Cw2rTmtL7pq7xB7yObxLduU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
  by PA4PR04MB9437.eurprd04.prod.outlook.com (2603:10a6:102:2a9::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.6; Mon, 19 Jan
- 2026 12:13:42 +0000
+ 2026 12:17:51 +0000
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.011; Mon, 19 Jan 2026
- 12:13:42 +0000
-Message-ID: <eaf50435-53c8-4d40-b7cc-edd3551e1a25@cherry.de>
-Date: Mon, 19 Jan 2026 13:13:38 +0100
+ 12:17:51 +0000
+Message-ID: <553303fb-216c-4f3a-8153-cf2df6b5f4c8@cherry.de>
+Date: Mon, 19 Jan 2026 13:17:46 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] doc: develop: process: Move the existing block
- about patch application
+Subject: Re: [PATCH v2 2/3] doc: develop: process: Rework the custodian
+ feedback section
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Cc: E Shattow <e@freeshell.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 References: <20260116182335.4081828-1-trini@konsulko.com>
- <20260116182335.4081828-2-trini@konsulko.com>
+ <20260116182335.4081828-3-trini@konsulko.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260116182335.4081828-2-trini@konsulko.com>
+In-Reply-To: <20260116182335.4081828-3-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0195.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a4::7) To GVXPR04MB12038.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0186.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a4::13) To GVXPR04MB12038.eurprd04.prod.outlook.com
  (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA4PR04MB9437:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8be1b74d-5b55-4dd0-4511-08de57542f8f
+X-MS-Office365-Filtering-Correlation-Id: 35019f6c-662e-4aa6-3571-08de5754c41e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|10070799003|366016|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VWdqMzJ1N3h2Y2JDdnVDU2JVYzhPeDhiV0VTNWU3WnBmdmhZM0lCTzUzaTdq?=
- =?utf-8?B?dTBTa01vVy9OaFdCNUZwVjNPcjRrMlFLaVRUaUpBMDBNUUxWRVJmYVp4NUEz?=
- =?utf-8?B?TjFhME4xWlJJT0haWG9pc1VIa0lqc2Ywb1FWa09Yd1dyVTRnTHU2aUF5VzZL?=
- =?utf-8?B?aVZwS0gwOXhSc3hrcmE0T0lwZ1k5VE1CZjVkR0k1Uzc0Zm1OcU9CRm5qaytC?=
- =?utf-8?B?djRxMDBnaXBLVTBTSWxSWVBIeWJZeVpwcEIxakt2MXJ2aHlabUlvME1qdjRC?=
- =?utf-8?B?bk1aWm5rc3NtL1F2dklIZVZCMTM0Mk5namZsOVlnblhNdU1IZ0RCNEY1YnFo?=
- =?utf-8?B?dkVWalNMeTNSODdPNW5WbVhYbXpXQzRpZldsVWhDeHMyaTNCQm9FYkF2dTNp?=
- =?utf-8?B?dXNITjFmQjh4MUVDSVRmZDVINURHbHhzNUoveW5CQnJOR3pOaUZ4c3FMemZl?=
- =?utf-8?B?VzAxME5oVWZmekE2ZmxYNlFZTDdmbFBwRHU0MVhSNlBpejgrQXNnTXFyZEps?=
- =?utf-8?B?WmhtMGdMWWFiOW5SaENqRVRZQmF4YVIzN2lJdDdxWWhYU0xxSjlLakRKaVh5?=
- =?utf-8?B?RkFJUXd0VXVUNUxUYjdKUzJGWGd3NnNjZTVLdFRzVDZwZ3c2ZmZMQzVvZEht?=
- =?utf-8?B?MUVUa0VkRjRiVHJvVHJIWENOSmZHeE1SSHVXQzhLN29oeFNSZVlDTHpmY3pl?=
- =?utf-8?B?ZnQrWm9Bb3RKWUZJTUk2RzVxRDkzaVVRRldFbEo3QlFJRXRWdVZnaUJDc25T?=
- =?utf-8?B?U2tMMnZibG8rRUpjZDRxZTVuWm9VdGFXcFAxOTVNUTFwVFZjWjFXZUk1VHlE?=
- =?utf-8?B?dkJpdlpEUVpkY25XYnJDSnNSWnUyVjJQeFloSkpUMllKeUxFb3hxMkhpd0lF?=
- =?utf-8?B?M1pJNXFLL1JBVlhOSTBoYVZYNzUzT0lSSHNiVTRiRmE5bVBRRjBKVVIvVDFk?=
- =?utf-8?B?OUtWbXgxYTNYaEVmOGJUSDlEd29yT3dOdVkycDFYMDVyTnhJZmE4ckM3YVVh?=
- =?utf-8?B?cGpPSy9NSlBsUkt1TXRJZG5udW55dWZMbFdFTlZmblpIMVF1RUkvUkpkak9t?=
- =?utf-8?B?OE9pMlgvU3QraTd6MTlMU2ZjdHluREx4WHc2cThxL2xlTHowcmhYM2h4SFk4?=
- =?utf-8?B?akt6Q0U4YzJFazFWbmZSQlNCZjdVUFJFNS9IZTdISzNQWFl4THdkT0JadWdR?=
- =?utf-8?B?WkZESFhVT21wemRuOWpCcW55Wi9SMnVHY0tyaHFGMWtRVzg5WkJtU0pBVjNY?=
- =?utf-8?B?QXl2VmtlUjAzYVBCOFpuWFExWjFJTVpZbVV2YUJKYUJ2d0lBYnpNTmJxd2hP?=
- =?utf-8?B?aWI0S3VnaEhtUVpmY1FvbjhaenFQQ3hIWnE0Y21ycHRCci9SZm1VWmNHb3pW?=
- =?utf-8?B?cVF5bUlXcjJQY3hncnJSV2VneXlEQ2s0RHFGdkY2VFh4c2dzaElEY09FNWVF?=
- =?utf-8?B?UDNoZzJiNkV3a3BTMFZkQjdLOWVOWmpjc0VwMjJmQzVhOGJoak1LMVRwak00?=
- =?utf-8?B?U3ZQK0h1QU1RSHFJbTh6TVFnL3pDT3RBTVFvcDY4N05YcitJR3VOeGVnb2Jh?=
- =?utf-8?B?VDFQRUM1OUZyV2RnTjBkMGVDNzRJZkdKT3dxNDVCN0Y0VytmcGs3RGJ3Zisz?=
- =?utf-8?B?Mi9aZk5lSGxXN0RDYkJIKzFUN3hSY3VNWXBLZTNpM0NrMWdjOWg3M2FqWUlR?=
- =?utf-8?B?ZVJOL3EyYVYxQ2pVS01nUDZ2N2tlTlRFeTZWYlNKeU5UTkVuajVUL3BqWm5D?=
- =?utf-8?B?SmprMEFBcUNwQ3Y4QmxIQWlaQ29kWWRUUHFkM0QzaFdFMGFnOEdkUTBCTVdu?=
- =?utf-8?B?akNlYmw1ZDMrVFloWm9aNWJsc1ZhSXR1b1AxdWJ1T1MreU1Fc1B5eFhyZVBE?=
- =?utf-8?B?aXlhdzQ1akE1dldTOVZMZnFwRkVCZ1l3dHpwcU9qRDNtKzFmay9aNzFyanpr?=
- =?utf-8?B?cmRqVnR1YzdPdTlLM1ZzWk96amNzbS9SaXRKMGlkWUdhVE9MbXBhV2J6WldV?=
- =?utf-8?B?c0tWc0sxTE1MZ0VMZUdvOFk2Y0grR3hJNGZUMkhCa2lOTzllSTFUTGFRZUp0?=
- =?utf-8?B?TElzWHd4emxlb05KS3BMcHF1ZWxPaTFzMm1JS1F5Zi9USGttRU50MGJ2Wnhj?=
- =?utf-8?Q?RRBw=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NmZydUQvbm9LdEdjamRhQXVrQUJQc3lXQW16ZkNhSnRMTkF5YnU5U01RY2JX?=
+ =?utf-8?B?RWxCc012dGxuMGZUUE12bE92dTNwa1hsUE9kZTYwZUtISzZvbllLeUtLRkx2?=
+ =?utf-8?B?MFhIdEdVcVNSNURqUFdKbXdZRW90MkdkZDdMUUVWcXF1d0poZHNjVTF5RnA3?=
+ =?utf-8?B?bkJaaDdDU2g0OXdEc2pwUlFsdFVVaE5LclR0VmptR2JzTStUSzdUbU5ibnFT?=
+ =?utf-8?B?cC9JMTh3QXZLOE40bzVqdVZ0T0RBazlxOHp2aEhVbk1zNWlvYlFzNDFqbm5U?=
+ =?utf-8?B?WHlPRTFzSDEwb09jaVhvS2VMY2ZJL3dBNFg2eWhiLzRtMEhCMWxHSE5YenQ4?=
+ =?utf-8?B?ZjJ6b0E5TkRVaVZwSjhHSWZ3L3JPS2JNZWxIemVFVmNHdE5OVzVoeWJES2FZ?=
+ =?utf-8?B?dWVTNGpRcGgwamhPL3pZNllHMGtaS1FRd3FvcUxldzIyU2JuNnhDbk1lYVQ5?=
+ =?utf-8?B?RFBmTlBpdU5rS2JQMmFWdWVTbVpCOWRXclMyakdzOUZ3WTdXaE9QM3QxcWo0?=
+ =?utf-8?B?cWlyaUMyem9YRURkVXpjUys1SmU3T1B4Tks0SXhCeWdlODBQcnBMSkhwRk1h?=
+ =?utf-8?B?RHlEK0JnVktPT0MydUQyZkp3dU04YnM5ejhYdTdDNXduU2FQc2xPZlNzZ1d3?=
+ =?utf-8?B?UHA0MHdQem5FSUVOSnBHQkRqTllwZWcxMDduNUNhNmpHS2p4YUJtS1lNMW9h?=
+ =?utf-8?B?ejF0QndnRFFQR0Y3UGtYOS9qMlNHRTByY3dqUnZ0Zm12Q3J3MjQ2VVVadVgx?=
+ =?utf-8?B?YUc3aHhhcTd6R2l1TFplZDc2MTBBUGI4VnpjRGt4S3ZXeHNscDlrd2o4aW03?=
+ =?utf-8?B?UXJweklvQm9mTG1SeXhEek8wRjUwdGgwVHlHWXlTamduRTB6V3NZUUwrTWJL?=
+ =?utf-8?B?VzFkVjlPMnZocVVCdFZOUmVUdk9ZeWZSZ1JjT3BmSXdtTnphMGhNVE5mYWdy?=
+ =?utf-8?B?bFE1UW5OekhSOHVaKytyREEyLzVqRGo1cVFZZW9MQUhibjFPVmZVa09UVDF0?=
+ =?utf-8?B?VkF4MUorSE95ZUhycVZPdEYrdWd6SHlSMlRYOWV6V1p5K3FUT3NsL0swUTNN?=
+ =?utf-8?B?MzVJQmhhaEoza0dCeVBUY1I0RFZ0Zlk3K0FhOUdPd3grbDRodGlrV1VkMFhD?=
+ =?utf-8?B?V0lkM3ZjYTczSWE1emN1ZFRJcW9OTGlra2RsTjlYdzhzSFpneW02UC9RUzg2?=
+ =?utf-8?B?SmhnWDlTVVY3QUZWd0R2U3Q0bFVXaGNHdWV1SmJGbkNlTmFVZXlUQjI2U3Ex?=
+ =?utf-8?B?YTJ4S2N1b2oyZzlqd0ppN0pvVVN0ekt1UUdXZ05wVDFYcDJ2YjFjRWorWHBz?=
+ =?utf-8?B?bGNrY25tSVdyZ2RObThJRHN3Q0d0MTg3SzhrYlpDcDZBWk9TMXdJWTZjRjc1?=
+ =?utf-8?B?Z013K1oySDlSOGtkRDBENDg0dmtLTnA0ZkVyUHVHTHZ6d0NSOTVhNzNFaEVz?=
+ =?utf-8?B?c055Mm13enRSVjBwUXNuZERBUWZ3VEQ2WDZFdXo2dTJiMHZjd25XVFIrU2pR?=
+ =?utf-8?B?clM0ckNwa25PQ0lrMG9zVkZ2RjUwWEJnbFg5cXVoSi9XQVNOZ3FJTGNKOGw5?=
+ =?utf-8?B?NkdxTTI4aFpISXg5STY5SEpLNi82VUxOWnk4dmp1QTJ3ZHJGRnlxS0dCelR2?=
+ =?utf-8?B?N3hORUNOSUREYmlsTkhWdWtaM2tUOXVCYlBEZGFKT0pFTk43ZVNOc0k4TzJw?=
+ =?utf-8?B?TW1wMng0dzc5Z1J3QUF1NW8wU2hqZGZ4SzMzK0dLOHV3ampmWlVCLzkzZzBN?=
+ =?utf-8?B?QytJM3dLY2c1SWRXNTVreExOM0tFTnFyWk9hbStGRkRpU2tDS2hOblY5UWZO?=
+ =?utf-8?B?V3BXUk1abDQ0K1lMS0ZIcVpFbGZtckw4V05DcHRoZ0NjNmZxaVF0MjVzVUQx?=
+ =?utf-8?B?VmJiaU9mck8veFI3cS9EUWIrNU5aZm1HcjNkRTYvM0ZIQVJNc2ozcHJ3QUtZ?=
+ =?utf-8?B?SkxsTkZPNzhIT3UvT2k2MjlhZGFhWThDODRMZEgrdFhockUvci80cHRGYzFS?=
+ =?utf-8?B?NklNeEJFYmZVakZ6d3ZEdENXWTNOSStrTDBRSVFmTThHb0IvZ0JFQWtTalls?=
+ =?utf-8?B?NmtMWThMWnZNbFNEQXIzV0ZlTDh6dC9oNUdBQmJRV0dMVkY4R2REd00zUG1B?=
+ =?utf-8?Q?JKfQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Nk1xb1FwbjhoT0tXTnpuR1c0RVM1eVBkTSt5dm5Rc3JzTDREcHMycFJ1SU95?=
- =?utf-8?B?SklaeTFjWVB4UnZGenI1Nzd2NCtuWXExaE1NUG5NbnM1cVRCQTNLYWJMSSth?=
- =?utf-8?B?a3A1Q1crNzhULzZScHo4NWZzd2dDTG9VZG83U3R1MmpzK01pYnZEdzFnTXZI?=
- =?utf-8?B?RU1WREF4SjVwQ3RiN2s2WnkwTXZNTzR1VjI2QlZ0Y2wvTFpNeXVhMWNhcTIx?=
- =?utf-8?B?aHBKSERjYndYRjFDY2NUbWk4TXViaHVPeGRFeU5makl0NWlRRFRLSFgxNnIy?=
- =?utf-8?B?MHZnZk9Lb28wWnEyNnNlakR2Z2dXQjNKY0t0V2ExSVlrMGp0VFl4NnI4V2Ev?=
- =?utf-8?B?TG1OaFg4dGkyWS84Yk9ZZmlSSTlFdjZtZ2NKR3RUSTM3SWx6c1JWK000K2hh?=
- =?utf-8?B?ejZua3hBSkpNcERONWovYzZqNHZvbXVCMmdwM3FTQlkvRHV1UDBGbTBpejg3?=
- =?utf-8?B?N1JNZDg2emZ0bjdQYkVKQ0U5aEtEclBNajdPSHYyL28remNIQkpVcTh4QU9u?=
- =?utf-8?B?VHhtelBMVjZDYjZpNjFwdGV5SDA2TnBjRTQ4NVdHQzdGRWxuaEdiUkNxMkMv?=
- =?utf-8?B?K3lnZUdSN1VHTTZXN21VcUFtZWk3UFBQSUU2VExUWjBpbVVhZ3VtT0N0RWc4?=
- =?utf-8?B?VUxCMlRiUE1VN3ZaWHQ2eDNCN3FYTk1jUUFHR2t6TXFlWmIrM0lUSUxma2ln?=
- =?utf-8?B?WVlzRS8yYjVxMjFFQ01yM2RUS3VDaEhmZzVnVHFyUmFUU25raUZ1UEFlMkdr?=
- =?utf-8?B?Q2FrM0hwZ1M3cy93K3RCWEtFRVRCbk5DMVZqN1dtSUhZajNZUTl4MVBTSC9J?=
- =?utf-8?B?WS9tc0JwRURlcTFxMDROdWF3NUVyVFdWdkZLYytmb3NNenlYOWU2UXFyNEdh?=
- =?utf-8?B?V3UyZ0ZlRGxmVHFpT0NkcTd1K1NaUmpVQmU4bEtyc2FESFNXZm43U3FwM09G?=
- =?utf-8?B?QVkwT3p5eE9NK2NGYURLSGw2UVhqcmpFL2RrSFZTd3IwMVdIRFRWNzMxdXdw?=
- =?utf-8?B?NWNuc0Zjenc5dmFVTmRLcEIvQWIwakVMWGk1ZTJhcllEYU94UUpmb3pWVDhl?=
- =?utf-8?B?TnBwT1FZNis4SlBVSStmMkE1bElTdjdzRHhUYTRFRWg3UW9yNEZTenFmaXZr?=
- =?utf-8?B?OUl1NXIycm1vam5MbGQrM2JVcXdPdzJZLzRnakxNMm9jOW9lUnJwOGxaQlp0?=
- =?utf-8?B?ZlZieGYvYnVpSEkzTGJ0RUN2T3V2ZEQ4U0VzMUYzMzcveDFFNTA0ZzRlaUJE?=
- =?utf-8?B?aHo5SzhjbW9VZFBVd0lmWk1kVWRmWjIzMUpyaitXNE9lUlZjNWdmL1BYR3hM?=
- =?utf-8?B?UDZMRGMwUUNWT3diN0dLbktTRGh2TWhYVTFQckZWQXVkcnpWc0pvMGF3VDI5?=
- =?utf-8?B?eHRjdFQ2bkNnOVV1QVMxbG5Ed1IrMEovWFNVQ0hJU3FTeVQ2VDdwNy9BQ0k0?=
- =?utf-8?B?SDhNWXNsSnlQSlNab0oxOTRSVFYxdWVZWWNnUEV0RWVac2I1QkM3ZTRKMWVZ?=
- =?utf-8?B?UHk5M1pHZ3BaODQyOHVNM2YvaktWZVZURXkwMHRGOFRCc0hkRWVodmpPdm53?=
- =?utf-8?B?cmtRKzB0T05Ed29EcmpkcWFXYWdRMWVWZ3dVejZIVXgxTS9NZlBhY1hTZi82?=
- =?utf-8?B?ZWF3eGs2engxNUNwVURZK29Kb3JUdDA2cDhHNVN1MUNxcFF0ZnA2Q0ZCUkRj?=
- =?utf-8?B?V0xRS0RGMS91d3gzL0lZVWJnMFByOC9sYnFWc0g0UGZNb3E4U09DK0N3SE9K?=
- =?utf-8?B?QmZpVklEM1M0RytqWFVVQnJSRzFJdDRmeGpoMEhkQm1aeVZnUkY3YWlRdnpF?=
- =?utf-8?B?YzRkUjkwUnY2TlRodlAwMmJjQThsUHRPNTlWNk85cjZnNUd4cE9Cb0Y1dVoy?=
- =?utf-8?B?blg3NWlEV3ZaaVFsSjFPbzJ2dnVEQ1QrdGU5aEJGblJEcmk0czNTUjBmNkZ0?=
- =?utf-8?B?Z1V4NTEySEdEcElYaHBJODM0Y1BMUVowY1ZuM040SS9XY0hCL0JGeXBRbGI0?=
- =?utf-8?B?SFRBbmc3aWZmblhLeXF6dmlKZGNTM2dWcTgrdzNOZEVMVmlzSDdFaTloOEtn?=
- =?utf-8?B?Rm83RndHaDZZZllYeUtPc1RXa3ZPdXdUclFid0w4T3cxVkNLbE05QXRHY2RD?=
- =?utf-8?B?Y0cxWUM1T2tsdFNJL25VRklRV2Vha1FMcHNpU3JJSjcxTEk3RVByUHh2YjJH?=
- =?utf-8?B?SzNOYXJGT3AyL3hnWUowNW5aU2I5dEJLYzV0TkpHRzQ1Q0tDZm52TmVJUUpR?=
- =?utf-8?B?T3AzMGNkQW11UXRXUlpPWlN1WUxvbC90MVFscllUOVA0VHVnTVV2K3lHWHh5?=
- =?utf-8?B?Q0E5WExNZmFLUTBveHdDZXNzWWhzOGJtaG5oaEsyeitySFA2ckEzcnN0QlhM?=
- =?utf-8?Q?FauU+5klBTedL6zLfPfDKFyFU/QU2znSZObNY?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b2NTL1pUeVdDUWJGOWhHYjQrTjN0ZEhUeTh6TG4wTmI1WnNOV240d3Y5WERI?=
+ =?utf-8?B?ZmZEazVQd2FreGdoWUNUQW5MbFhnamNMR0h4WmMwb3FTUVRkV0Fob0E1UGZ4?=
+ =?utf-8?B?bktkQXBoQWhjN1cwLzZDSGdDbVBRUzJISGJMS0xia2ZKVnZGR0s4Z1NJSmVU?=
+ =?utf-8?B?alk3UFZQTXZwZlNQS0xnbVhIWkVmdGhSNzd1R01JQ2JiYlZmTnh6cy9YMWw2?=
+ =?utf-8?B?Q0NpNVBWR0VTZ3VNZ1plTTNFY3dQS2JrditsUGpqY08zN0hvL09kdzljdGF3?=
+ =?utf-8?B?RUJrZXE4ZE5kNnRWaHg2eWZJSUFsSTljbXdIOWVHeWtSbjNIbnRzOUFXWWx6?=
+ =?utf-8?B?WUp1VFArVDhwQVRnd3htMldlNkVJN1BTdTRNSEtubzNnSEM0Q0J2ZHI2VS8w?=
+ =?utf-8?B?aC84RS9OWDRJRVhscHdyd3U2clRFQUFLTDdhY01KeFIza0R6WGFLcXNhQWR4?=
+ =?utf-8?B?R3ZXa1BhUjFLREZSQXFKUEpSVjUzd3QwNCsvZElFN3N5WFZwT1ZsYWNmaWlj?=
+ =?utf-8?B?elZQSHo5blRlMG1GMVlFcTNvdE1sMHVML0dlcmpOYS9taThuRzYyTG55dzdV?=
+ =?utf-8?B?NTVjamNQSlFydU1ONkxjcVg3RVlNUjk0bUZtMGRrcnFGRW5zc3JtVmtVWkZr?=
+ =?utf-8?B?N0pKOUpleGVsWDAzRnRBaEhpMFA2U1UwME1CQWhOVTAzb3ZwTjBYODJMMTBT?=
+ =?utf-8?B?WTFJV0dFc1o1MlJDUlkyZjNwd2ZnVVcrbTMrV2xheTdVRWhHOXZ2NUJmQ3pS?=
+ =?utf-8?B?a1NVcGNoZC9FTWpmN28xRXQ3SU5md2lBN20yYUtzcFEwVFQweG9MVWFablph?=
+ =?utf-8?B?eDJOQXVEQ2NlTzNnU0p3Tml1bVpSd2phQk9xRXRHZVpqazdTRUNyTWNmVGNt?=
+ =?utf-8?B?L0w0eUozeUdzVlVpMzVpaS9iRVY3cUpISlFjZDlWRTg4L0tKaVpRcGhqM0ZC?=
+ =?utf-8?B?c1V1NWhNM3ZJaU83OFlMbFh6cm5OS0tqVkVBNjJwVDdVMnZ2WXJQc0FwV2RO?=
+ =?utf-8?B?RkFVb3B2dlVxMWxWTklrd3UwZlp2RkZ0VmVzVnk4RENUWC9mV01jRHMyWjNu?=
+ =?utf-8?B?cnM3T1VGdnBmcWZjS05kdGZuNGtlQWhUL29UUHNEaEhNSEVrQVhkL0lhQVc3?=
+ =?utf-8?B?UE9hYjNTYktvcVhhdVY2WEh6UmI2VzZSSUh5aExIc1BodWVSL1o5SE1JaVJl?=
+ =?utf-8?B?cDkxR3dXN0IzZ3pseGFGampudkNBaDN1dmJHZkxWMitPR0RLUnR4RVczWmpw?=
+ =?utf-8?B?WWx0TWlrU3VkdU9Ray94MmFMdzJMa1VRemZQSXZxWkhkRnRlTEpSUUxZMXJI?=
+ =?utf-8?B?U1BrQ3ZXQUgvcHdBaXp0YzkxWllvY1p5U2ZyMDc5bTdQbm9WazVieFlCTFE2?=
+ =?utf-8?B?TmhjS2hVM0JqTXN2c3FKRnFBS1hvYkZnTFVBMWc3Zy9kdnhmVS9qdjVjU1BN?=
+ =?utf-8?B?UWVyQ3cwUDFITklsS0llaURvS2F5RnMvZFJ0NmNkM0I5N0V0U0thZlNNZXJU?=
+ =?utf-8?B?UGJqdkdzcjhReXc2bnd4b0k1RzZyUXpGdUcvcWJZT2FTbUdDN0k2SDZiWjZh?=
+ =?utf-8?B?Y1lCdVF1T2VrZVp6bEdneWRmYk1MdnFFZ25ERFJJNkptSld3cklGVThBam45?=
+ =?utf-8?B?SktvUUNNUlZDRjVEZTRxSkhCR1NBUERMNGpXZUFXOS92cEQwZmJudGFzNGhP?=
+ =?utf-8?B?RjNaQjdyU2NQTElwN2NXblQxZVR6b1YwYktHV0Yrd0VQMEM2WnRObXpnbjVp?=
+ =?utf-8?B?WHYrNjNLVkc4a3VGdS9lQmswNURlLzhSZmNSaGxmekN6WlRsODdoQUpVREJX?=
+ =?utf-8?B?NkRUTG1pUUM3a0ZBWDk4ZjRMNmxCd0JwMzRQVE16aXFDYTlDN1Z3YURPSlVC?=
+ =?utf-8?B?VkcvN1hTZ0NxS1NoWnVlQXZuT1lvaTd1eFdUT3JKNEF2OVUyN1pwVUV6YzB6?=
+ =?utf-8?B?NkcxMkRnTE80bU96Z1dzUHJBb285TzJvMi9JdFBRdzI5Q0V4MmR2Y0xVRUsr?=
+ =?utf-8?B?cnlxM3FqY1FHcS8vL25NK1BQSkhmZEc0TDVCdytvR2owSEJ1dW1hditKOGxN?=
+ =?utf-8?B?bXlwYjhiRkFwYm5ZS3hwNlRXcE1tSENZVlpmY2xVZFNkOXVXRmdBVHR2YXJF?=
+ =?utf-8?B?TnZHa1M5dm1KOHduMEs5VEdvYUpkRVdIMjFBaTJISkl5cnJYY2hDdmw4WDFq?=
+ =?utf-8?B?RHc1bVBhL1RZc1hnZWFtckg2Q3Y3YUV5Uld6Y2lFMGZxUStmOFo1YU1oL0Zj?=
+ =?utf-8?B?RXdWaWlHbkpEWTdKWVNXT2dydjlUWjZ4MHBwZ29QemRKSUZqUHh5c2t0c0VP?=
+ =?utf-8?B?MmRtUG9YVUhGUE1kNHM5MHFmY09zNHZNd2tuL3BYamZHT3crNVhDS0dPSmRw?=
+ =?utf-8?Q?i5jMjWT9tVeq4c5pvs/7MONlSl35HXZMCG120?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8be1b74d-5b55-4dd0-4511-08de57542f8f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35019f6c-662e-4aa6-3571-08de5754c41e
 X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 12:13:42.1406 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 12:17:51.3233 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mrvGVqzhejmor1jg9I2brvyfxshmYeJbACPad0b8f78VD7Da8w8TG401XLQiaUYnxYUwAsm491XJ6wk3Ngqo5S2YpIrq85eP0grRDDXTWqU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ijP3O7PlgguuA2VH8nN8eEYZM4BPAai9RkWSnT/SnRKKzXQx1gpXSThKYCdNRoN837VuXdSSXhwuoenUIBiKDVb5Q8kJQ8P/LS6MIYL61SE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9437
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -187,51 +187,69 @@ X-Virus-Status: Clean
 Hi Tom,
 
 On 1/16/26 7:16 PM, Tom Rini wrote:
-> We have a long block about the expectations and feedback about a patch
-> applying, or not, as part of the Custodian workflow. Move this to the
-> Custodians section from the Workflow of a custodian section.
+> Now that we have two items here, rework this slightly to be using bullet
+> points, and so easier to expand on.
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Changes in v2:
 > - New patch.
 > ---
->   doc/develop/process.rst | 22 +++++++++++++---------
->   1 file changed, 13 insertions(+), 9 deletions(-)
+>   doc/develop/process.rst | 43 +++++++++++++++++++++--------------------
+>   1 file changed, 22 insertions(+), 21 deletions(-)
 > 
 > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-> index 4bfbf0eb9c63..81e1aa7e34db 100644
+> index 81e1aa7e34db..6f5bdd3db957 100644
 > --- a/doc/develop/process.rst
 > +++ b/doc/develop/process.rst
-> @@ -143,6 +143,17 @@ reworked/resubmitted, or if it was rejected. However, if a submitter
->   feels it has been too long since posting their patch and not received
->   any feedback, it is OK to follow-up and ask.
+> @@ -132,27 +132,28 @@ It is their responsibility to pick up patches from the mailing list
+>   that fall into their responsibility, and to process these.
 >   
-> +Another form of feedback is about applying the patch itself to the
+>   A very important responsibility of each custodian is to provide
+> -feedback to the submitter of a patch about what is going on: if the
+> -patch was accepted, or if it was rejected (which exact list of
+> -reasons), if it needs to be reworked (with respective review
+> -comments). Even a "I have no time now, will look into it later"
+> -message is better than nothing. Also, if there are remarks to a
+> -patch, these should leave no doubt if they were just comments and the
+> -patch will be accepted anyway, or if the patch should be
+> -reworked/resubmitted, or if it was rejected. However, if a submitter
+> -feels it has been too long since posting their patch and not received
+> -any feedback, it is OK to follow-up and ask.
+> -
+> -Another form of feedback is about applying the patch itself to the
+> -source tree.  The custodian is expected to put in a "best effort" if a
+> -patch does not apply cleanly, but can be made to apply still. It is up
+> -to the custodian to decide how recent of a commit the patch must be
+> -against. It is acceptable to request patches against the last officially
+> -released version of U-Boot or newer. Of course a custodian can also
+> -accept patches against older code. It can be difficult to find the
+> -correct balance between putting too much work on the custodian or too
+> -much work on an individual submitting a patch when something does not
+> -apply cleanly.
+> +feedback to the submitter of a patch about what is going on:
+> +
+> +  * If the patch was accepted, or if it was rejected (which exact list
 
-The wording is odd to me, applying the patch isn't a form of feedback? I 
-would assume feedback to be some interaction between the custodian and 
-the submitter.
+For another patch as this isn't added/modified by this patch, but wasn't 
+"with" meant here instead of "which"?
 
-Would
+> +    of reasons), if it needs to be reworked (with respective review
+> +    comments). Even a "I have no time now, will look into it later"
+> +    message is better than nothing. Also, if there are remarks to a
+> +    patch, these should leave no doubt if they were just comments and
+> +    the patch will be accepted anyway, or if the patch should be
+> +    reworked/resubmitted, or if it was rejected. However, if a submitter
+> +    feels it has been too long since posting their patch and not
+> +    received any feedback, it is OK to follow-up and ask.
+> +
+> +  * If the patch itself can still be applied to the tree. The custodian
 
-"""
-Another form of feedback can happen while applying the patch itself to 
-the source tree.
-"""
+Ah, the wording I complained about in patch 1 is gone, so i guess you 
+can ignore it. I don't think it makes sense to nitpick about something 
+that exists for one commit.
 
-help (since we specify later that the custodian can request a rebase if 
-they feel like it)?
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-> +source tree.  The custodian is expected to put in a "best effort" if a
-
-Unnecessary double whitespace before "The custodian".
-
-We could also add a label before this section so we can refer to it 
-exactly later in this patch. See ".. _dco:" in the current rST file. Not 
-a blocker.
-
-Looks ok to me. (Just moving text around after all :) )
-
-Cheers,
+Thanks!
 Quentin
