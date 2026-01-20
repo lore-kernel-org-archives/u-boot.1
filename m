@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C81DCA5FB8
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 18:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085B3CA5FD7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 18:11:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6120483A6A;
+	by phobos.denx.de (Postfix) with ESMTP id A551183A91;
 	Tue, 20 Jan 2026 19:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JMAINTNr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HXfvzbte";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA02C8313B; Tue, 20 Jan 2026 19:09:39 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 3A4188063E; Tue, 20 Jan 2026 19:09:55 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D3348063E
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 19:09:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 356BA82A9E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 19:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-42fbc305552so4121060f8f.0
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:09:38 -0800 (PST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-43246af170aso59732f8f.0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768932577; x=1769537377; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1768932593; x=1769537393; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=B8Yyt0SfLUmQ8CiuNr+p+99DftmooKje1R2T+ThDa3M=;
- b=JMAINTNrX5/rR+kdQRZNxbDID4xT0ymjgeBOsWo8bG2YgV+gobn+3JtjOO/iTFbu/T
- uNFc8UVFXrm/E0ggMFdVV0TNZu+3MOGE3E+2OacyiKKnXZXzd2YNJOZGDlEvYXHDARv7
- NSTscBB2nQLpuKCURinHv8eAlXQFtGFdoPlx5lYAcD1/hoS4nRdrVprGImR9a5CCV/AF
- 0uAR4/uvj6Oetdo5rrOCE17NTjegOtIrJsY+bxFt8ThCtR9HAS2mdhWmTo36AiSbncFT
- Lzku6E4Ld65lIfZ5NSaO84PSx4SM7uzEl1WubNMi0SVFgKawd39W58o1GDhAYoVSWLqT
- n7sw==
+ :reply-to; bh=paz8Pz+GOQDgRibGYFRKXXqw2EWHZXuM8jmmKsRhi6A=;
+ b=HXfvzbtej6hdJEykVmpc5M84vHUGqdnQOz93Y6+NLtWK9IAsJTml63Dk5qfGaZs9+t
+ LbXpRTsFwz9Bb8/RLbWPjIrgRvSsacZyzRcEiRxtcJOE9JbpL7bxT48dm405R4Fi8d1u
+ gEMDToJ6csuQXPug/7RGih5ucdFAQf66wY6WPFVMQBEU+EbZ0qScK2WziLgO0cjnAUlS
+ q94M7pNz67bSjX2+TOnDN+uQaP657IOx7HqY49BDjFjOc48HFkMBUxwRoIUFeFGes1Yc
+ NTlxcbME4uFRECyArE5D42k9YcngMirP6Ll14BXQ4qmHbTDK4dk3URz3MIyA6GFho0gB
+ DRoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768932577; x=1769537377;
+ d=1e100.net; s=20230601; t=1768932593; x=1769537393;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=B8Yyt0SfLUmQ8CiuNr+p+99DftmooKje1R2T+ThDa3M=;
- b=qeA5rzMkjk2LUTDVJ1uXICdmlzj1dImdEZXH1BMtrkDwBw+YY6P2InDMKWQkMGteQj
- Aq9VK6pjB9biMKAry3C+/Bw26Olyf2ndA1Z4C/Ib8IGoiv3v2IIZj7E8M4B4drV04ZsC
- snSotdXpe6f6U/fQo60OAnn4fwDFIgH5suRgw9mlhSXrT9C0EYOEi5+q+/4Ab62KlZxn
- iiu7E9S0hz3bcteRl/kmygF/3bO/NNLkFsODcYM/CzqeB6f4nuevMyOKha+IygkUOtfL
- BWF1RvFFFa5E3LuBZqZs60cq1IPnMOvGp1+hrdPJHvDf6spgKsbjd4TaDi/XUFZhONoo
- AaKg==
-X-Gm-Message-State: AOJu0YxxMHdlULNufHhYrw1gw14Y0Asaw7wohD9yAmbZRHSrP0T0vmlE
- AxsSbOyjwJ+MbgVClmMiT3xxCWGzcklv22xh8AaGCyvd0CS8elih1NIW
-X-Gm-Gg: AZuq6aKEzKeMGmcREKxCClI4+zfYtBzVSt2tWp9P/PYDv7VCX5S4w5qa7hgrsaACqhG
- KXQ+Qzm0yKfqDTyElVyXfmaeXVJgzQuJp8WKVJmWHYc7zbNg1jLLrIoA+4vYY87KNlDFPlUqspH
- ZnN2iJLgnEoeRCasyDya4uJ8PzXbYdFJvGDOB003N59AgsiqI7SmOURJgLY6oWqcz6+Xs+yWzpQ
- rdCAOKLupea6b5UQ2sQkuSxPWtBMTwLc1wrQ5NfMiLoyfPeUMt8A8odJy8EmDvBJwLLoJtnEP+0
- U9QzjjpuM3ToGCNwfYLAuxHZttF054DfmsNYk2skHHPjHsnz8ODg7PlH8fFtVAqV2LsCugh+zvc
- qIHzGBwE1quEBkZzJIYWtNu2lBX3R4zNWvmUXAi1OPqnWdJ6dW+6Q5O0FS94brum23nAn4Xxaf8
- WAXoafxdtcS04lgmvow9gf+ZkkcDkzptgRIHlX3Xeqvnckc+OiJ+7GNqxaH98tIu0=
-X-Received: by 2002:a05:6000:2f83:b0:432:5b81:480 with SMTP id
- ffacd0b85a97d-4356a03d2demr21753895f8f.24.1768932577111; 
- Tue, 20 Jan 2026 10:09:37 -0800 (PST)
+ bh=paz8Pz+GOQDgRibGYFRKXXqw2EWHZXuM8jmmKsRhi6A=;
+ b=HpiRxAZeAcJ0ykCm2+I+40XIvcjh8kL7MX0721veuIkzWgKz8LgMdtymYUhBwfIC02
+ mkwxVzkVQJsmSYjbPRhp6BYYYWD3ag+lENIV3QPG44E+7C33uCVrYsKz6Itds8N90CsD
+ zSOtX656EjF5YqOIv55U+OZuxY4uOa0WEiXiI1aQxnUApYSy+WYtkproTA+lK/5zaE91
+ Wl+Zwa2YSmNu31wsjPT6D3pMXZcJT3V/0yqcHDnrh4StW0VPLSPZc8L0NdNSEJjpvtyI
+ ZiiE8Z7Ks7hVvX+LQPIJsl+MjLyvPNkIrzOZReMaXaIT27qtqra+j7TdGgSFiR/qF0NK
+ pSFA==
+X-Gm-Message-State: AOJu0YxqB494sME2Py5RlRq+EbW4WckRU3/eENQRRjYEd83qtVlAWdWt
+ E+AX92a3y1X/+T0XBsBDYpkqEzKitCAWil0ofAmIjWXPXbUGy2J89dj7
+X-Gm-Gg: AZuq6aIH870e0giNqgRHBWi8uDxLOh8u7HLsQo9tGmswJ63XFIx7v/CAEqabI/Jbbtb
+ X7W2e5+iV3WTlAQCgTGWQVjRrrHZ9LBzy5j+3YN4ceMZ2N/sWKkOypu1BJQM6mZCdYaYzS1fKLm
+ 7kjf7IbwkXWAJMumOtWiyZLQtQwbqvuZkp/EGBqzasRCFXqKqbHlRSijTKb9+aZF2TNfyjU/Cc9
+ rqgsKi2626QUejiMbe3jqqEtpZbJKRwE5eeAHbi6fgM2D7te+T3dXsVNfdRKbVd7UP7GLowTVjX
+ aplV+Z1zSUgOFanIEXWWmbCqvMteMXUqvtkfOCLlMvmEmhckouSygZ/qVJSok5zNrvtdWiJPyrE
+ Id9xUcA/1nZGizVVx4p175a75k7i3g1wFOGHztHlN9zuRgsZ41cr3aK3mx9LlePo2LDpsLuMEDF
+ H43R/HNPNlEuU7IgBMML1h6jS25w2+lWbT7/cDMHLWEsU4seunwfzm0oYFV7jbgbEEV8HHGHwNz
+ g==
+X-Received: by 2002:a5d:5d0e:0:b0:429:cb8b:b58e with SMTP id
+ ffacd0b85a97d-43569578302mr24349165f8f.28.1768932592426; 
+ Tue, 20 Jan 2026 10:09:52 -0800 (PST)
 Received: from alchark-surface.localdomain (bba-83-110-134-52.alshamil.net.ae.
  [83.110.134.52]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43569998240sm30168043f8f.43.2026.01.20.10.09.29
+ ffacd0b85a97d-43569998240sm30168043f8f.43.2026.01.20.10.09.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 10:09:36 -0800 (PST)
+ Tue, 20 Jan 2026 10:09:51 -0800 (PST)
 From: Alexey Charkov <alchark@gmail.com>
-Date: Tue, 20 Jan 2026 22:09:03 +0400
-Subject: [PATCH v5 2/4] reset: rockchip: make device resets available in
- SPL
+Date: Tue, 20 Jan 2026 22:09:05 +0400
+Subject: [PATCH v5 4/4] rockchip: spl: Add support for booting from UFS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260120-rk3576-ufs-v5-2-0edb61b301b7@gmail.com>
+Message-Id: <20260120-rk3576-ufs-v5-4-0edb61b301b7@gmail.com>
 References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
 In-Reply-To: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
 To: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>
@@ -120,12 +120,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
  Elaine Zhang <zhangqing@rock-chips.com>, 
  Joseph Chen <chenjh@rock-chips.com>, Alexey Charkov <alchark@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1756; i=alchark@gmail.com;
- h=from:subject:message-id; bh=qz9kqohcFj8GIIYB3FowNNQ2uu/rY2sUMGjsyhFXlTk=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTmHzm1sUPrUsHepCNnLnlPvbx78wfBwMvf/GMnvXPu3
- 3LtfcDq3I6JLAxiXAyWYoosc78tsZ1qxDdrl4fHV5g5rEwgQ6RFGhiAgIWBLzcxr9RIx0jPVNtQ
- z9BQx1jHiIGLUwCmeqMVwz99oc+3tX8WBDw6qVr/fJnwoWd/2WPPswU/mPOu3+XVnM9LGBkaNPd
- f41py9Ne6o0s0BUvM/YI9bir5XDNX2yG35tPS5UocAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3497; i=alchark@gmail.com;
+ h=from:subject:message-id; bh=bQEtMrrKm0bbJeBimRYvI6Uo8WBWscYZIwJ0R1yYSl0=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTmHznlLestY6SiIdy86KXDjKetEhtO93Vfvc7S/eYJ7
+ 9WlqR83dExkYRDjYrAUU2SZ+22J7VQjvlm7PDy+wsxhZQIZIi3SwAAELAx8uYl5pUY6Rnqm2oZ6
+ hoY6xjpGDFycAjDV89IYGZo3O51jFfssHGqiV76Dx6tTbcec+FVNvNo9MrP2LN8jWcTIsMvEvXl
+ x0yyt7vXdTbMnXrfs9unU60+cGmcmItT4eWoaMwA=
 X-Developer-Key: i=alchark@gmail.com; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Tue, 20 Jan 2026 19:11:03 +0100
@@ -145,48 +145,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the Rockchip reset controller driver in SPL to allow resetting
-attached devices like UFS during early boot.
+Add the required architecture-specific lookups to enable U-boot SPL to
+load images from UFS storage devices on Rockchip RK3576, which has a
+boot ROM capable of loading the SPL image from UFS.
 
 Signed-off-by: Alexey Charkov <alchark@gmail.com>
 ---
- drivers/reset/Kconfig  | 9 +++++++++
- drivers/reset/Makefile | 2 +-
- 2 files changed, 10 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk3576-u-boot.dtsi              | 16 +++++++++++++++-
+ arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
+ arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
+ arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++++++++
+ 4 files changed, 31 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 74c267dfc4e5..d35f3904e404 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -99,6 +99,15 @@ config RESET_ROCKCHIP
- 	  though is that some reset signals, like I2C or MISC reset multiple
- 	  devices.
+diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
+index dc3771b556a3..e442e94f7132 100644
+--- a/arch/arm/dts/rk3576-u-boot.dtsi
++++ b/arch/arm/dts/rk3576-u-boot.dtsi
+@@ -12,7 +12,7 @@
+ 	};
  
-+config SPL_RESET_ROCKCHIP
-+	bool "SPL reset controller driver for Rockchip SoCs"
-+	depends on SPL_DM_RESET && ARCH_ROCKCHIP && CLK
-+	default y
-+	help
-+	  Support for the reset controller on Rockchip SoCs in SPL. Select this
-+	  if you observe any reset-related warnings or errors when booting SPL,
-+	  such as when using UFS storage
+ 	chosen {
+-		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
++		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci, &ufshc;
+ 	};
+ 
+ 	dmc {
+@@ -81,6 +81,15 @@
+ 	bootph-some-ram;
+ };
+ 
++&gpio4 {
++	/* This is specifically for GPIO4_D0, which is the only 1.2V capable
++	 * pin on RK3576 available for use as the UFS device reset, thus
++	 * &gpio4 is required for booting from UFS on RK3576.
++	 */
++	bootph-pre-ram;
++	bootph-some-ram;
++};
 +
- config RESET_HSDK
- 	bool "Synopsys HSDK Reset Driver"
- 	depends on DM_RESET && TARGET_HSDK
-diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index ee5b009d1341..dc7d3b610e6e 100644
---- a/drivers/reset/Makefile
-+++ b/drivers/reset/Makefile
-@@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
- obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
- obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
- obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
--obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
-+obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
- obj-$(CONFIG_RESET_MESON) += reset-meson.o
- obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
- obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+ &ioc_grf {
+ 	bootph-all;
+ };
+@@ -176,6 +185,11 @@
+ 	bootph-pre-ram;
+ };
+ 
++&ufshc {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
+ &xin24m {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
+index b15938c021d6..f9ecb6858f04 100644
+--- a/arch/arm/include/asm/arch-rockchip/bootrom.h
++++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
+@@ -51,6 +51,7 @@ enum {
+ 	BROM_BOOTSOURCE_SPINOR = 3,
+ 	BROM_BOOTSOURCE_SPINAND = 4,
+ 	BROM_BOOTSOURCE_SD = 5,
++	BROM_BOOTSOURCE_UFS = 7,
+ 	BROM_BOOTSOURCE_I2C = 8,
+ 	BROM_BOOTSOURCE_SPI = 9,
+ 	BROM_BOOTSOURCE_USB = 10,
+diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
+index a1e8a7572fa4..46cf60dc77c7 100644
+--- a/arch/arm/mach-rockchip/rk3576/rk3576.c
++++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+@@ -46,6 +46,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	[BROM_BOOTSOURCE_FSPI0] = "/soc/spi@2a340000/flash@0",
+ 	[BROM_BOOTSOURCE_FSPI1_M1] = "/soc/spi@2a300000/flash@0",
+ 	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
++	[BROM_BOOTSOURCE_UFS] = "/soc/ufshc@2a2d0000",
+ };
+ 
+ static struct mm_region rk3576_mem_map[] = {
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index 6572dde29f65..d2dd5e10935f 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -76,6 +76,9 @@ static int spl_node_to_boot_device(int node)
+ 	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
+ 		return BOOT_DEVICE_SPI;
+ 
++	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
++		return BOOT_DEVICE_UFS;
++
+ 	return -1;
+ }
+ 
+@@ -231,6 +234,17 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
+ 		return -ENODEV;
+ 	}
+ 
++	if (boot_device == BOOT_DEVICE_UFS) {
++		ret = uclass_find_device(UCLASS_UFS, 0, &dev);
++		if (ret) {
++			debug("%s: could not find device for UFS: %d\n",
++			      __func__, ret);
++			return ret;
++		}
++
++		return ofnode_get_path(dev_ofnode(dev), buf, buflen);
++	}
++
+ #if CONFIG_IS_ENABLED(BLK)
+ 	dev_num = (boot_device == BOOT_DEVICE_MMC1) ? 0 : 1;
+ 
 
 -- 
 2.52.0
