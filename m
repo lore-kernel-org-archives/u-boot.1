@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7F4D26296
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 20:09:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1345DD2629E
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 20:09:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4768382A9E;
+	by phobos.denx.de (Postfix) with ESMTP id 947EF839D5;
 	Tue, 20 Jan 2026 21:09:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1RIXbeb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W3GGKBg2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD25083015; Tue, 20 Jan 2026 20:48:30 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id E14EA83015; Tue, 20 Jan 2026 21:00:02 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 595A08063E
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 20:48:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 212F68063E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 21:00:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b8715a4d9fdso803596566b.0
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:48:28 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-655af782859so9206263a12.2
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 12:00:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768938508; x=1769543308; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UCtp+N2YjrYVHtkTDwdRwi4lBZlAWlUqmgmD9IoPzik=;
- b=T1RIXbebr5ET2CdwTnkMkLyKHgbTZABHd0ocSIZopze78EXBfT5qp6WfRXe7Lgl/IZ
- Yu2fu2c0f/IXyLkdNQQiDElH+lOGvREqHz0g5xTa4TKJ52lGooJp4Y3R+nTCiaRCRpgB
- j5Ea3uAmU8/vVWYhIM/58Txo6oaP2D6G+v/Gvwuecz7isjfaJTrpBWFy98szkVlXl0/4
- 25CEckNkb0WBqS0FSTV+RzleGig/kIkN5OlzBNpa21Yz/OrRXn3oi1NZls9Q9BK3sZmC
- BFHHcsuv9qT0XEABs616IFtY4TOqFXZw9+7NzkQ+zREa5TkpQ4szfVFnKyvV3cYuvCAO
- Ge/A==
+ d=gmail.com; s=20230601; t=1768939199; x=1769543999; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3HDJbHEiKxgdFZ5hj7OBDa9jlnlewZYAD26U7dzWbXw=;
+ b=W3GGKBg2hWxif1ERUazLS0yD+JbfqwukINo0/3bMmE5gaaV2LwiuVjzFWZN7p/x9Ix
+ FtuvBZcjUqjUr0B9+d2MCvbN9kR0e2wG5hj6l5w/laZKLtVItUNv96zjyP9ngKeferaC
+ Gs7GMnVpvm2r9TAg//Z6Pqytinlbh0eWjatiMhB71qZv5SvvxzoKntm0b23X8e0CYvIe
+ L7Z28JYC5nc45iUG3L5N2V1Gux4QDhz626Gy+nWOW2jVvz6woqREEZ1LaNohiAqpXneq
+ fYCTC0HS81MsxdBFw/eWZaC2S2YFH18x4W2yvuprIjO6JVmUdmxhK+iAN/kVYMwm3kVF
+ vUeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768938508; x=1769543308;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=UCtp+N2YjrYVHtkTDwdRwi4lBZlAWlUqmgmD9IoPzik=;
- b=Ab7Cz4z4wzDB1ziEL4izj6OkYhHVKTpiECZjCdD1tHPHLbcuzu99HmKBru9NhGLaLf
- D9i3ZwsubkunFpI7//P497a8bZ8k4DyozxAOkNo86mqr8x+e8wEH/z9WDsEHmc6cdYgw
- QeOTrVK4unjCLS5RIzolyrqrtUEzvMb/4kAea4UzlLXxzaAgTpmRXv/XANaHTtsoFDaL
- 1gRM1Q7D9rrTxEki1YRyZ6z2d3xfDgjBbBuXTDgw3jCPdo3GZmUqwilU0NMs3F/B6Wme
- T+Ez9/9YheQ4hmkYN+qvt+R9D1YQMV3AVq/R6MJEAQeEHo4O37z7vltcxEkSfP7JDmde
- 1HYw==
-X-Gm-Message-State: AOJu0YybpuDwF8nWTMZio1mjxSWO6JxjaI7iVkDeToUaCN3XAE1TrIgv
- Fzzrfh0jIBxuM/sZktMEnbLKoBkGNQ8sN+5Z9cteOCJXZSE7fB/klspsczHcjI6HPkI=
-X-Gm-Gg: AZuq6aL/Hm5uzaMwrWfrUwPWGB+H2ScZQ/WpeKvbRbYVJjRqGYAmN63atnDBau2M50b
- RDw2Ux3o14eE2xU+XAgljflbcdQxGExUVLaLSKvsA04Vnk7TaqqPNbXNNcIkBGZPHj09Qa2wq2X
- qFPZXJGpW0BxuGkCa54B3Yj/ePoY0AiJn7xS0b7kPmZnysPC1NVvqZzPZTejOXdyVwMXasw0hPw
- 5GajKEbzQ0mw1nKCKrVV3bNc0MehtkKbXG/XUfaIvBV0Uho00582+ZAMndum7Y/dABD0jW1yaGo
- WdIXvtsJ0TPEqACFdJnnnIPqtrw40R0OoUsNXL+8hCklsMBVKtbF+HkWCiVhIg8Ve/E3u/XQhnM
- hm/gIo84zzAJMxtpVx8WKUutfjPnnrjmTj0j5SbvH4kMDbTgWWRwaTJSONIw7TQ4f+oewqr41P2
- XAsMlER32n1aryPN5B1kM2AVdFn6h25eMyxzv7iR3/Hbx2xP5UIG/xbvW3v4icK84=
-X-Received: by 2002:a05:6000:2511:b0:42f:dbbc:5103 with SMTP id
- ffacd0b85a97d-4356a07728fmr21223138f8f.35.1768932584783; 
- Tue, 20 Jan 2026 10:09:44 -0800 (PST)
+ d=1e100.net; s=20230601; t=1768939199; x=1769543999;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3HDJbHEiKxgdFZ5hj7OBDa9jlnlewZYAD26U7dzWbXw=;
+ b=GQVTJF2pjQCHOFE9fcX7np7L9KZD/elD0m0MwXJNJGj6/MPd8nRFWIEEVEkaZ6IZA9
+ xzrxJt4tnuCqX06RIDMeCYq0YXCEwIVuTRuVABQqjxqVs22BVo1aP7kS7hpFcXGvIurD
+ rZiE3bEzsrG3fBtM/dxG7dDBwfI8emggQft66JsXrbcJbWKQKQ9QknDmxogXlWCpDHZo
+ C7GMtNhy5Ut3tkhElAU0DhfI7RkLuILSs26uGpiekLO+q/lVDwrYHAvrTBuKOMq7N+r7
+ aksUNpg+nkPeDwbOtYGFJosLXc7LIwfeANaIRXiDXEOT4So+r3RHSvSGd90fE0iRUbvn
+ vehA==
+X-Gm-Message-State: AOJu0YysPjXooTOZnrhdTACQHnx4uar9ilRjCfeci6DZnMmXY4S3G+tb
+ k9SkdqNJsoqBNiC2l1JHYS+wSJxz8ZxuhNAHF93Z8Wx1jmh3V47Pt1MW
+X-Gm-Gg: AZuq6aJZKEZLnyjatkqYzyoJAZbFP+MXEw/23gvdB2O5BhgUHDpdbLWSFQGKxiUN4F1
+ SrDRGExwbrfc+5xnvDUdCcI+7LtL7XI4AYrgbGxN7R/cLx1D0wD1YoVZa+JEgwgfvxstjJU7tqQ
+ 0P0bnJQF5Jfwvn4WnoTp2rNE6G7YudEX7D9vqsqBnhURJArZAFffbmQS3LC9K3Vypyci2aKmMQ7
+ mrf4UrTy5TnX/SH++Ug7fHn7h/0IhQzscY4w2BxcnPtxwWMOIH/KaiS87u1eYtEdU6oCqtEvb01
+ fkoUd7Jr9ad4Ob5VYIL+KbUSLGIl3+Uc+GILW1KmO1hpAYwy20SYOxIya0Zapay+Gk2l4O8a2Z9
+ pNNqucGFm1sjS9l3EB+Pdi4vJ+6S6yiNfIQ0IuyHwHN5BExDuLWadPdaBT1cfvJmHWPqjHlLPVw
+ +JG1QaVNc2p+/nadkeJ/xJGkbO8PQrGVvCj2RV4503XFNPIGcoZOZvljmiLW6cnvc=
+X-Received: by 2002:a5d:5889:0:b0:431:c60:c5ed with SMTP id
+ ffacd0b85a97d-435699787bbmr23488218f8f.13.1768932561826; 
+ Tue, 20 Jan 2026 10:09:21 -0800 (PST)
 Received: from alchark-surface.localdomain (bba-83-110-134-52.alshamil.net.ae.
  [83.110.134.52]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43569998240sm30168043f8f.43.2026.01.20.10.09.37
+ ffacd0b85a97d-43569998240sm30168043f8f.43.2026.01.20.10.09.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 10:09:44 -0800 (PST)
+ Tue, 20 Jan 2026 10:09:21 -0800 (PST)
 From: Alexey Charkov <alchark@gmail.com>
-Date: Tue, 20 Jan 2026 22:09:04 +0400
-Subject: [PATCH v5 3/4] ufs: rockchip: Add device reset support
+Subject: [PATCH v5 0/4] Enable full UFS boot on Rockchip RK3576
+Date: Tue, 20 Jan 2026 22:09:01 +0400
+Message-Id: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260120-rk3576-ufs-v5-3-0edb61b301b7@gmail.com>
-References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
-In-Reply-To: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAL3Eb2kC/23Q0W7CIBTG8VdpuB4NBwoUr3yPZRcHOChztVvRb
+ ovx3Uc1Jmp2eUh+/5DvxApNmQpbNSc20ZxLHvf10C8NC1vcb4jnWG8mhdQgQfBpp7Q1/JgKx6B
+ 86qi3oA2r4HOilH8usde3em9zOYzT76U9w/L6b2YGLjiq5Mga8sbQejNg/mjDOLAlM8sbNQKEf
+ qCy0oAenXUoovHPVN1T80BVpT6R1C5FE8E+0+6e9g+0q5R6MtZ0LqnU39PzdYiJvo51zMN1DTZ
+ QKXgZc9XckqCUVF3bCQHKCQ78fdxjWe++sx/HttAyqcdCvHaHfFg1JsRotbMok08BtJUBvMAkV
+ VQREwRKKCPZ+onzH3/3O57ZAQAA
+X-Change-ID: 20251210-rk3576-ufs-ac3bf4e87156
 To: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>
 Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
  Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
@@ -119,12 +124,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
  Elaine Zhang <zhangqing@rock-chips.com>, 
  Joseph Chen <chenjh@rock-chips.com>, Alexey Charkov <alchark@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3401; i=alchark@gmail.com;
- h=from:subject:message-id; bh=ZOzJH7cBYN8OgyVAK1Gav+v1EmvlG6lr57/Bo98n9/E=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTmHzl1O4f/qe3ljYsTxUJzJnEW7vo5rZhpZSzbPCmrX
- 92vk/PMOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- Q0MdYx0jBi5OAZjqGVaMDA9ML70WqWmINcs24513YMPW/T9zmvYeqBe5Itwiap0W/5Hhv1ua96L
- fy1vsyhK5T6Wb2O6KiN7ewGWu6CSjcKej8CIzHwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6100; i=alchark@gmail.com;
+ h=from:subject:message-id; bh=GCVawfkBf65Q30+tusGHdpN6pnALQpygI6V9oPx8TPw=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTmHzn1951viHhkYd7aRZ15VY0sN63vxIeYLX78dU6/X
+ sqyBWGvOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ Q0MdYx0jBi5OAZhqySqGf5py8tfPXl2l8eV/wh0v457e/0FmZfsTkziNf31Vv52x2J+R4WlX+In
+ nmkuv/3gY9XFh9cecNzEqV6q+W/zifXJ7Qv/0Wm4A
 X-Developer-Key: i=alchark@gmail.com; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Tue, 20 Jan 2026 21:09:08 +0100
@@ -144,110 +149,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Wire up the GPIO line which Rockchip RK3576 UFS controller uses to reset
-the connected UFS device.
+Rockchip RK3576 can load its bootloader from UFS among other options,
+so this series adds the necessary bits and pieces to enable an end-to-end
+boot from UFS (boot ROM -> SPL -> U-boot proper -> kernel).
 
-This seems necessary at least for some UFS modules and fixes the following
-error while enumerating UFS storage:
+To achieve the above, this series goes through the following:
+ - Patch 1 introduces arch-independent code to enable SPL images to use
+   UFS devices, including build system tweaks and a function to locate
+   a U-boot image at a fixed UFS offset and LUN (SCSI device number)
+ - Patch 2 adds an option to build the Rockchip reset driver for SPL
+ - Patch 3 adds device-reset functionality to the Rockchip UFS glue code,
+   which is required for (at least some) UFS modules to respond to
+   controller commands upon initial enumeration
+ - Patch 4 ties it all together for Rockchip RK3576
 
-ufshcd-rockchip ufshc@2a2d0000: ufshcd_link_startup: Device not present
-ufshcd-rockchip ufshc@2a2d0000: link startup failed -6
-ufshcd-rockchip ufshc@2a2d0000: ufshcd_pltfrm_init() failed -6
+This has been tested on a FriendlyElec NanoPi M5 board with a Biwin
+BWU3AKC46C256G UFS module. Note that booting directly from UFS masks the
+issue which patch 3 aims to address, because the boot ROM initializes the
+UFS module before handing over to U-boot. If, however, one boots SPL from
+FSPI1 with the same driver code, the module fails to respond unless patch
+3 is applied.
 
-Note that the GPIO descriptor for device resets is already required by the
-DT binding (link enclosed).
+This depends on Jonas' recent series [3] enabling DMA writes to PMU SRAM,
+without which the UFS controller will fail to load ATF and end up in an
+unrecoverable error state requiring a hard reset.
 
-Link: https://elixir.bootlin.com/linux/v6.18.5/source/Documentation/devicetree/bindings/ufs/rockchip,rk3576-ufshc.yaml#L70
-Fixes: 76465ce21ee4 ("ufs: rockchip: Add initial support")
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Reviewed-by: Shawn Lin <shawn.lin@rock-chips.com>
+Note that in my experience none of the RK3576 boards actually boot current
+mainline U-boot versions without a single-word SRAM write before jumping
+to DDR initialization, as done in Kwiboo's commit at [1]. Therefore, to
+test this series I additionally applied commits 6b152999908b..d43031c4045e
+from Kwiboo's rk3576 branch [2] (including 6b152999908b), so any testers
+might want to:
+
+git cherry-pick 6b152999908b^..d43031c4045e
+
+from there before or after applying this series
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/d43031c4045ef8aaf29c467b910207e721dabce0
+[2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3576?ref_type=heads
+[3] https://lore.kernel.org/all/20260108133234.4001390-1-jonas@kwiboo.se/
+
 Signed-off-by: Alexey Charkov <alchark@gmail.com>
 ---
- drivers/ufs/Kconfig        |  4 ++++
- drivers/ufs/ufs-rockchip.c | 22 ++++++++++++++++++++++
- drivers/ufs/ufs-rockchip.h |  1 +
- 3 files changed, 27 insertions(+)
+Changes in v5:
+- Reverse X-mas tree in spl_ufs:spl_ufs_load_image (thanks Quentin)
+- Explicit "depends on UFS" from CONFIG_SPL_UFS_SUPPORT (thanks Quentin).
+  This also pulls in SCSI to avoid compilation errors.
+- Split out the patch enabling the Rockchip reset driver for SPL builds
+  (thanks Quentin)
+- Reworded the error message when requesting the UFS reset GPIO fails
+  (thanks Quentin)
+- Added a note in the commit message about reset-gpios being required by
+  the DT binding (thanks Quentin)
+- Dropped the redundant check of GPIO validity in the reset function
+  (thanks Quentin)
+- Added a note about GPIO4_D0 being the only GPIO usable for UFS reset
+  on RK3576 (thanks Shawn)
+- Dropped "imply" symbols from the arch Kconfig, now that both GPIO
+  and RESET drivers are explicitly depended on from the UFS driver
+  (thanks Quentinq)
+- Link to v4: https://lore.kernel.org/r/20260108-rk3576-ufs-v4-0-e8e67649f3f8@gmail.com
 
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 6c75bb2a0790..49472933de36 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -76,6 +76,10 @@ config UFS_RENESAS_GEN5
- config UFS_ROCKCHIP
- 	bool "Rockchip specific hooks to UFS controller platform driver"
- 	depends on UFS
-+	depends on DM_GPIO
-+	depends on RESET_ROCKCHIP
-+	depends on SPL_DM_GPIO || !SPL_UFS_SUPPORT
-+	depends on SPL_RESET_ROCKCHIP || !SPL_UFS_SUPPORT
- 	help
- 	  This selects the Rockchip specific additions to UFSHCD platform driver.
- 
-diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-index 0384244387da..3576f6e7a2b6 100644
---- a/drivers/ufs/ufs-rockchip.c
-+++ b/drivers/ufs/ufs-rockchip.c
-@@ -5,6 +5,7 @@
-  * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
-  */
- 
-+#include <asm/gpio.h>
- #include <asm/io.h>
- #include <clk.h>
- #include <dm.h>
-@@ -153,11 +154,31 @@ static int ufs_rockchip_common_init(struct ufs_hba *hba)
- 		return err;
- 	}
- 
-+	err = gpio_request_by_name(dev, "reset-gpios", 0, &host->device_reset,
-+				   GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
-+	if (err) {
-+		dev_err(dev, "Cannot get reset GPIO\n");
-+		return err;
-+	}
-+
- 	host->hba = hba;
- 
- 	return 0;
- }
- 
-+static int ufs_rockchip_device_reset(struct ufs_hba *hba)
-+{
-+	struct ufs_rockchip_host *host = dev_get_priv(hba->dev);
-+
-+	dm_gpio_set_value(&host->device_reset, true);
-+	udelay(20);
-+
-+	dm_gpio_set_value(&host->device_reset, false);
-+	udelay(20);
-+
-+	return 0;
-+}
-+
- static int ufs_rockchip_rk3576_init(struct ufs_hba *hba)
- {
- 	int ret = 0;
-@@ -175,6 +196,7 @@ static struct ufs_hba_ops ufs_hba_rk3576_vops = {
- 	.init = ufs_rockchip_rk3576_init,
- 	.phy_initialization = ufs_rockchip_rk3576_phy_init,
- 	.hce_enable_notify = ufs_rockchip_hce_enable_notify,
-+	.device_reset = ufs_rockchip_device_reset,
- };
- 
- static const struct udevice_id ufs_rockchip_of_match[] = {
-diff --git a/drivers/ufs/ufs-rockchip.h b/drivers/ufs/ufs-rockchip.h
-index 3dcb80f57020..50c2539da78a 100644
---- a/drivers/ufs/ufs-rockchip.h
-+++ b/drivers/ufs/ufs-rockchip.h
-@@ -72,6 +72,7 @@ struct ufs_rockchip_host {
- 	void __iomem *ufs_sys_ctrl;
- 	void __iomem *mphy_base;
- 	struct reset_ctl_bulk rsts;
-+	struct gpio_desc device_reset;
- 	struct clk ref_out_clk;
- 	uint64_t caps;
- 	uint32_t phy_config_mode;
+Changes in v4:
+- Added a dependency in b4 metadata on Jonas' new series enabling DMA
+  writes to PMU SRAM (thanks Jonas)
+- Dropped the bounce buffer quirk altogether, as it now works as-is
+- Link to v3: https://lore.kernel.org/r/20260106-rk3576-ufs-v3-0-bfe259fd6d17@gmail.com
 
+Changes in v3:
+- Added a UFSHC quirk to use the SCSI bounce buffer for addresses outside
+  SDRAM, and enabled it on Rockchip (thanks Neil and Tom)
+- Dropped the open-coded bounce buffer from spl_ufs.c, now unneeded
+- Link to v2: https://lore.kernel.org/r/20260105-rk3576-ufs-v2-0-caba979a0d6b@gmail.com
+
+Changes in v2:
+- Rename the SPL UFS read helper function more self-descriptively (thanks Neil)
+- Add an option to configure the UFS LUN used to look for the U-boot image
+  in raw offset mode - or rather the SCSI device number, which most of the
+  time coincides with the UFS LUN as long as the UFS device is the only
+  SCSI block device the SPL sees (thanks Neil)
+- Add an option to use a bounce buffer in RAM while loading U-boot from UFS,
+  which helps avoid changes to common spl_fit.c code which in v1 achieved a
+  similar result at a performance cost to unrelated platforms (thanks Jonas)
+- Link to v1: https://lore.kernel.org/r/20251210-rk3576-ufs-v1-0-a3f9e76eb66e@gmail.com
+
+---
+Alexey Charkov (4):
+      spl: Make UFS available for SPL builds
+      reset: rockchip: make device resets available in SPL
+      ufs: rockchip: Add device reset support
+      rockchip: spl: Add support for booting from UFS
+
+ MAINTAINERS                                  |  1 +
+ arch/arm/dts/rk3576-u-boot.dtsi              | 16 ++++++++-
+ arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
+ arch/arm/include/asm/spl.h                   |  1 +
+ arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
+ arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++
+ common/spl/Kconfig                           | 30 +++++++++++++++++
+ common/spl/Makefile                          |  1 +
+ common/spl/spl_ufs.c                         | 49 ++++++++++++++++++++++++++++
+ drivers/Makefile                             |  1 +
+ drivers/reset/Kconfig                        |  9 +++++
+ drivers/reset/Makefile                       |  2 +-
+ drivers/scsi/Makefile                        |  3 ++
+ drivers/ufs/Kconfig                          |  4 +++
+ drivers/ufs/ufs-rockchip.c                   | 22 +++++++++++++
+ drivers/ufs/ufs-rockchip.h                   |  1 +
+ lib/Makefile                                 |  1 +
+ 17 files changed, 155 insertions(+), 2 deletions(-)
+---
+base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
+change-id: 20251210-rk3576-ufs-ac3bf4e87156
+prerequisite-message-id: 20260108133234.4001390-1-jonas@kwiboo.se
+prerequisite-patch-id: 3748e3880ac841dc25628911608140ebb4d4382f
+prerequisite-patch-id: 671586e63ec9021b624d6cdc3b75aef53ed84972
+
+Best regards,
 -- 
-2.52.0
+Alexey Charkov <alchark@gmail.com>
 
