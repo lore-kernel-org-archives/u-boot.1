@@ -4,63 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11856D2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 09:33:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94848D2ED0F
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 10:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D1B483A3B;
-	Tue, 20 Jan 2026 10:33:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id CF51C83A3B;
+	Tue, 20 Jan 2026 11:01:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="m9LHr7FV";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FMqAbaQI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DE2A83A6A; Tue, 20 Jan 2026 10:33:49 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ id 16E8183A6A; Tue, 20 Jan 2026 11:01:19 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 166E083A2D
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:33:47 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 3e894255-f5e3-11f0-be9a-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 3e894255-f5e3-11f0-be9a-005056992ed3;
- Tue, 20 Jan 2026 10:34:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=jEGl2QDGpEBP60mDxZI5CoJV5VH2/AUYIVqZ+JuR4Is=;
- b=m9LHr7FVF1/u4V1n9Uho2VSXdfk1IINr2x4pOnO+ekjWBwLOo1yhbsaw3mB8Q2JrOQ6QVtOFX1TEO
- rZ5US12hwPkNBVK9dlMbuy6t4ytl9dzQ4ZvE4LsLCWs4+P4J028cn1sIFJvhBRqQN9t7QKlgcQu1l5
- S0l9Ykze6+2oku9x9nrr5Q/aYlCbF3lwUfk9UKDr/5+H7v/Jxbd1JCgqZ+/+7kyQMrE46QxYC1qFuw
- SafPEPEFy21RUX02s2PQQrfi2ZZrJRN7Jw8j34C5H3FqynGp7irL7Inr8eDyR+UX1JUKbi8bkSCTcO
- wHvlXL+UrVGG6rlbwKJVpymr6OidVhA==
-X-KPN-MID: 33|6ABXAW2sIXcnpRorFfiO9U22g0wFIqtdWm5mzAcAkp9IL/DGra+Fr39wn2Tq7Ml
- wFlQd7FAWpvNYHmniDwhkMPRFojWTPSzMfx036qm3g3U=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|Dl96axYXKifnHt8qcshjPdYpcAYJQVUz9OX7oDyQQUThhsFRQM+HadsKd07UeLO
- qBeAhlcseiypBHxt5G9CXow==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 1dead03e-f5e3-11f0-bff7-00505699772e;
- Tue, 20 Jan 2026 10:33:46 +0100 (CET)
-Date: Tue, 20 Jan 2026 10:33:45 +0100
-Message-Id: <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: paul.liu@linaro.org, adrianox@gmail.com,
- casey.connolly@linaro.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, jerome@forissier.org,
- mkorpershoek@kernel.org, ravi@prevas.dk, trini@konsulko.com,
- me@ziyao.cc, u-boot@lists.denx.de
-In-Reply-To: <20260119210925.29185-3-casey.connolly@linaro.org> (message from
- Casey Connolly on Mon, 19 Jan 2026 22:09:25 +0100)
+ by phobos.denx.de (Postfix) with ESMTPS id B88EB83A2D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:01:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 253E73FBD6
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:01:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1768903276;
+ bh=q09MFPRUnDS5Ci0oRHy8XM2YPQH5+jVL0Qyg/TlA6wc=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=FMqAbaQI1GjeM23efe+svCgXPKx1a0kqYm3SAT0rHDGNorQCzIFEKo5We7HxxWWEe
+ 0OKEKXKMRc+DvbH8ddVxPZnOrGFrSJgQQCU6wyVeWqQGTHYKvoPvwCvWFuM0VT5ldM
+ LhbKOfvR36hPW6+3s8dZYj1tIp3mKjrWpjl9WNmStdb3O08q8R4toXBNi/7HrhGMgr
+ xWtDdC3OT2sRrpLXjnmLSVbncg1vqzYDRKSvkLbyEnYF/9vvnV9x4rl3T9vNB0EwrO
+ qZXsAtXOIO1RJ0D/4D1MB2GJXodMCz8YVzQ3+xahAFyc8WnGvf46DoMCbrsL6ifF8s
+ BLXMHyoDWkGoZnm9vLga46belfZ/ewz8EB3VveoEqWT+5Kc+3iWALCRwbRQC2MP3zs
+ H1aQE/rzgIIuTmY/eULvvTdcdGJJpZb2M7pQSByVRCl78k+ZTLno0Of5LGN0+POr2E
+ 0DjKG1gh7lxJcm49FFaFMwc29uPYqWdOWWUt8JPQTNNBj1prS7npuQ4gMq7VQp+4X4
+ vzEukQOq4yW6Z/vTdmtXrUQdSb6hDhE1vMg+qLW2MxhWii0PmTOQ9Y2E6agUEH18G3
+ xaN9HuYrRqdm4cNMvCeUiwuLK1fsFQ8NbFbWJZ8Vmr7gn8NxA2QH6oVCzaG+no9Oe1
+ lSgoUDYKD9FdAIUvrBlplh7s=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-4310062d97bso3104811f8f.0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 02:01:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768903276; x=1769508076;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=q09MFPRUnDS5Ci0oRHy8XM2YPQH5+jVL0Qyg/TlA6wc=;
+ b=Y804azBpxoIUrlMH1yVeHJ8psp/YVvxDUt+ZVyng5K6+sTT9Ed09yJC4xxid2XPdfZ
+ V0wWR/GsUD7HU14l+yQrnajQUEp4lE3ulTb2mWepIaqeen/V1bcRmx9Wl97aRJ/Wiy49
+ C4ePcI6CuxvYpVueyxvPD9Gmy+1bx0iBgdrwOnjeKdI3KO9cSx5nKUMD54sqHSBUTOun
+ I6Hc3CqaFZqTsiv+NIP5fUYKopfx6MKC7I+iSUAOcqD+ZKkyG2b5L9SjusBOfJ1IpwMt
+ GBNxnoY5+6pEtoBlUipkwdpE6O9OpoIeGSmtZikeQW33KcRYLCpZjzZpBEA1m7Rb/Veh
+ 20iw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXRQrV2xyYmNlQTPNecE+c9RNxlEBwHgass38Tvy/wu7WKRnkZJZBB3N5PhaHS/uyGZfVr7/ns=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiQlcDt+Yzoszik4bG3JhjoMtTHz5/rxGa1S/ccEnYMZT/dd5s
+ /wzvNFvj6nVlduIaHcrBRmuk+yBpf/GAv7xMJmdLpEwF0nzyLR7JHIex2ycSr5AO6vWTzIfRWNu
+ X7N4WOdDIcPewwYP3CDG7EcVHnj+4XVQa7ujbrGu1FXtIZdNtcbR29Zzoone6/F+Ag2xAoXU=
+X-Gm-Gg: AZuq6aJ2elPu7amwQsTvYy27U+qSIV2sr9S02iOT5Y3ImgXL+sFiA5UdfViUK8GksvD
+ wvPlrE6660ELsNTMpCwjPacf1g036iqcB0ztYsUKH0PA5PUQnDtZnDw3GDA4+A5DNjS8V9zH+SY
+ U09kr/6Y+k3njQFemyyMTWoGfyhXeRAtS9pa0w4a3tgOHLji8DY4c9+ZeREBeHFVfubYvva4wgp
+ lueECbV7KB4CBvygkJ4yjootoDqHDpWn9Zc6nMhPeOkYr+vKvs/E2FrQIhPK4V22fYLyXe2zvVP
+ PlghecCWbZim/Ix6U8XuaI4Zns8UxvTby7QNu7F+Ad97gEVk1VP22xC6k1hfRdbXD0yx6SMR7Rd
+ epUGsESTjWgudFtfnY5US/fai3W5RqGuoFUuIr70anYfR48NGVQClP6F7
+X-Received: by 2002:a05:6000:4022:b0:42f:8816:a509 with SMTP id
+ ffacd0b85a97d-4356a07210bmr19132713f8f.62.1768903275694; 
+ Tue, 20 Jan 2026 02:01:15 -0800 (PST)
+X-Received: by 2002:a05:6000:4022:b0:42f:8816:a509 with SMTP id
+ ffacd0b85a97d-4356a07210bmr19132657f8f.62.1768903275153; 
+ Tue, 20 Jan 2026 02:01:15 -0800 (PST)
+Received: from ?IPV6:2a02:3037:6ea:29a:22ce:ee4f:43a7:7a93?
+ ([2a02:3037:6ea:29a:22ce:ee4f:43a7:7a93])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4359314bbc6sm1561298f8f.12.2026.01.20.02.01.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Jan 2026 02:01:14 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <5995c605-0e94-45ed-981e-49506233597f@gmx.de>
+Date: Tue, 20 Jan 2026 11:01:12 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] efi: stop hw watchdog during EBS
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: paul.liu@linaro.org, adrianox@gmail.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, jerome@forissier.org, mkorpershoek@kernel.org,
+ ravi@prevas.dk, trini@konsulko.com, me@ziyao.cc, u-boot@lists.denx.de,
+ Mark Kettenis <mark.kettenis@xs4all.nl>
 References: <20260119210925.29185-3-casey.connolly@linaro.org>
+ <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
+Content-Language: en-US
+In-Reply-To: <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,60 +121,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Casey Connolly <casey.connolly@linaro.org>
-> Date: Mon, 19 Jan 2026 22:09:25 +0100
+On 1/20/26 10:33, Mark Kettenis wrote:
+>> From: Casey Connolly <casey.connolly@linaro.org>
+>> Date: Mon, 19 Jan 2026 22:09:25 +0100
+>>
+>> Hardware watchdogs don't currently get stopped as part of
+>> ExitBootServices, this can result in resets during boot if the OS
+>> doesn't have a driver for the watchdog, or if the driver isn't loaded
+>> in time.
+>>
+>> As with the EFI watchdog, stop any hardware watchdogs as well.
 > 
-> Hardware watchdogs don't currently get stopped as part of
-> ExitBootServices, this can result in resets during boot if the OS
-> doesn't have a driver for the watchdog, or if the driver isn't loaded
-> in time.
+> This has been discussed before and rejected on the grounds that this
+> defeats the purpose of the watchdog.  I think there was some consensus
+> that an OS that doesn't have a driver for the watchdog or doesn't load
+> it in time is broken.  Some folks also pointed out that on some
+> platforms it isn't possible to disable the watchdog.
 > 
-> As with the EFI watchdog, stop any hardware watchdogs as well.
+> Ultimately, I think EFI needs an API to control the hardware watchdog,
+> such that an OS doesn't need a driver.
 
-This has been discussed before and rejected on the grounds that this
-defeats the purpose of the watchdog.  I think there was some consensus
-that an OS that doesn't have a driver for the watchdog or doesn't load
-it in time is broken.  Some folks also pointed out that on some
-platforms it isn't possible to disable the watchdog.
+The hardware watchdog interrupting an OS if it is hanging is intended 
+behavior. It is required for recovering from a failed capsule update.
 
-Ultimately, I think EFI needs an API to control the hardware watchdog,
-such that an OS doesn't need a driver.
+Some watchdog timers have a maximum timeout that is too short for 
+booting (e.g. 16s on some Sunxi boards). To avoid resets these options 
+are available:
 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
-> Changes in v2:
-> * Fix compilation when CONFIG_WATCHDOG is disabled.
+* Set CONFIG_WATCHDOG_AUTOSTART=n.
+* Use device-tree property u-boot,noautostart.
+* Use the `wdt stop` command in PREBOOT.
+
+Best regards
+
+Heinrich
+
 > 
-> ---
->  lib/efi_loader/efi_boottime.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index ddc935d22409..c34616db578a 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -21,8 +21,9 @@
->  #include <time.h>
->  #include <u-boot/crc.h>
->  #include <usb.h>
->  #include <watchdog.h>
-> +#include <wdt.h>
->  #include <asm/global_data.h>
->  #include <linux/libfdt_env.h>
->  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -2263,8 +2264,10 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
->  	efi_update_table_header_crc32(&systab.hdr);
->  
->  	/* Give the payload some time to boot */
->  	efi_set_watchdog(0);
-> +	if (CONFIG_IS_ENABLED(WDT))
-> +		wdt_stop_all();
->  	schedule();
->  out:
->  	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
->  		if (ret != EFI_SUCCESS)
-> -- 
-> 2.52.0
-> 
-> 
+>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>> ---
+>> Changes in v2:
+>> * Fix compilation when CONFIG_WATCHDOG is disabled.
+>>
+>> ---
+>>   lib/efi_loader/efi_boottime.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+>> index ddc935d22409..c34616db578a 100644
+>> --- a/lib/efi_loader/efi_boottime.c
+>> +++ b/lib/efi_loader/efi_boottime.c
+>> @@ -21,8 +21,9 @@
+>>   #include <time.h>
+>>   #include <u-boot/crc.h>
+>>   #include <usb.h>
+>>   #include <watchdog.h>
+>> +#include <wdt.h>
+>>   #include <asm/global_data.h>
+>>   #include <linux/libfdt_env.h>
+>>   
+>>   DECLARE_GLOBAL_DATA_PTR;
+>> @@ -2263,8 +2264,10 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+>>   	efi_update_table_header_crc32(&systab.hdr);
+>>   
+>>   	/* Give the payload some time to boot */
+>>   	efi_set_watchdog(0);
+>> +	if (CONFIG_IS_ENABLED(WDT))
+>> +		wdt_stop_all();
+>>   	schedule();
+>>   out:
+>>   	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+>>   		if (ret != EFI_SUCCESS)
+>> -- 
+>> 2.52.0
+>>
+>>
+
