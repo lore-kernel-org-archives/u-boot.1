@@ -4,126 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C91A7D2ED11
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 04:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9653D2ED11
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 04:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86A1F83A5A;
-	Tue, 20 Jan 2026 05:26:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A01E83A2D;
+	Tue, 20 Jan 2026 05:26:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XM1ZhTby";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dRp8AKzL";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XCTMqIHK";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JJdC5PXw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2675F8063E; Tue, 20 Jan 2026 05:26:07 +0100 (CET)
+ id A008683A7A; Tue, 20 Jan 2026 05:26:10 +0100 (CET)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB0C7839DF
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 05:26:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A8BD8063E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 05:26:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
 Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 60JGo2qK1904978
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:03 GMT
+ 60JGo2qL1904978
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=I/D3A6dmWnz
- 2YrEbzA4YL852rUAMUM3QHk3E+NjrptE=; b=XM1ZhTbyLIjegpVhQoi9zPltR9B
- J0KdM4pHLznl4JcduJ4mAdh9Cpc1xSD/dzLLCHwrOfFUVe2gFbW6IGzcxRMBlCsG
- ugt3tdE9IAnhxRYJlt3I80WK95YJNrBIGpRAIvla3Q6PTKpzcN5Ugll2Wm1VIU4B
- IXZjCt3u/RYNuCJutn/bVMOyJ8NjlkcT/ZogUGk8AOshauTZIu4UdcQdmhj+JoY7
- IYm6RWP+ZSACGa2pkbgjLkNrZAa64Ff3HCrlvmFND9GUzp5bH8fGMjMX665hes/V
- l/oeHC/EWzhJ49Dl8HdCV/NmVypsQm77EHuepdv7jDOrMk1X3Bsxd/SrPfw==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bsgmuaypq-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=PLC6sKBHiyX
+ bWN67l9/HdBiVUrNtJlcr3yjwzFmoiCw=; b=XCTMqIHK92GgthESSHuQoCfK3i4
+ ZMKQmha9SpKYfxw3LPsb3Kv2K+IfbDrg1I5ZxIZz5kFsxMej+r5KY1siS2v9FAss
+ 5OJQ86jB4KN/JjOU73RGgRv6cJYYNvksuqDW9ymYXosfbfhUayF61DhEGhY19ZeF
+ vau8HXq5/LsVe7jMFL2/uBPRXErumHlodKPnUPRJ/LoLVblMT3FYt0+17Iye+jBD
+ 4MUH7NkP/9sMaHy7FZqoVLCJlHkZrDiwDVKAXnGCbxw/mGzDM1RIoBzxVP3BoEuG
+ MJS/fRw4Fj8PW53AKSQucDk/nfW4PzZ7KmHrEvEnmRWcoVAoylq1wmdOqUg==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bsgmuaypy-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:03 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2a58c1c74a3so41949715ad.2
- for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 20:26:03 -0800 (PST)
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:06 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2a13be531b2so47275235ad.2
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 20:26:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1768883162; x=1769487962; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1768883166; x=1769487966; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=I/D3A6dmWnz2YrEbzA4YL852rUAMUM3QHk3E+NjrptE=;
- b=dRp8AKzLA7ZK88o62kqS412ONau3FRNqJeIO/WXaomN5I1EaUJCct6wmGN7iyLU5eY
- V4/WQ143WjPsITZHSVS0zppA/0yD4MYtq7ik7ufWGSpldcX/8XlDLHTLHANAv6/wS1H8
- bmoTOG+DKI4jSPaXZSxR6M0Ycd3bXoaspOUR/Y4M9lIRml7doyhK36Fbp4pRf81WCusN
- 1lasozV6DtqvI+UtlzQiraM/lnw19dL8UEYxTle0UojK7kw/9JqU0sMFNA/TvLejUoZf
- ya0XlvKEtiRGXPWsDe9oWz0AZBq89tw3C2BzXvIzUO3DyLdw9xgvOj6SNLmdLzi8peO5
- 3rZw==
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PLC6sKBHiyXbWN67l9/HdBiVUrNtJlcr3yjwzFmoiCw=;
+ b=JJdC5PXwZlDTtmNibs0HBm4eeUrXtk8miNVbJsa0nnIuGVe0YDckdqxVV2bDlVNqY7
+ DcDD+lxpbDP3q/S1bRotuT5Oav1jo0DAtQiHeTcG9R9VRDcF5vjau7GqgoSu72ty2HpG
+ 0EGH8eP+yRPWvBwEyNfgpHoQ9vKEzaYK5jeYzGeuudCrMwEtBUb2uT2C5R7N1bapZ7qP
+ naEw6SKkGeyT9u7HIoTHE9HRfEl/RmQH5NAd+k2zfvuGErb9bIxOZDPfi74MRNG4OEz6
+ FbYrjjvwugm0fkWT0Jk7TTvOQwmQjfZDj2OLF/xGKO/r1w/POweXOv1Th02w2o30wrhF
+ j/FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768883162; x=1769487962;
+ d=1e100.net; s=20230601; t=1768883166; x=1769487966;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=I/D3A6dmWnz2YrEbzA4YL852rUAMUM3QHk3E+NjrptE=;
- b=MCpHuf5apMHSL5ZHEMDI2jZxw7NpdGEbPpfPaaF9LuvJhufU1P/CCeVtdLwdPALUy+
- 265iqZu+VQX465slPH+OnuBeJHX+KTDAJ7IbwaChUMHkkb7E3Xnp9D2qlAtqCssct20R
- I6Affs0CUnZsmwfmx7Jj6w2R8MfjUsc+lbLMXkDUs23V13djKSaGNz3DrjqTKFsAF/j/
- EKGRJdFqNTab8EJgZpPRFA+PiQEMFBi+Jtgj4Lv8onvsaGue/pdgsMR6QEJNSLfF1pgG
- U/XZesNakEq01fVExWJ/o1LprJsvl3vAzGUy2kqcKCfiWNOLtP8qk6s7UIsB52yYOr6C
- ShnQ==
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PLC6sKBHiyXbWN67l9/HdBiVUrNtJlcr3yjwzFmoiCw=;
+ b=JKyc6QI1h9+NT2ctuj04W7lsh44Dyo9g99ujTRaEirRdWK6YB+JKB1v4PE0MyXdJ67
+ DpftKp6pJuvJzpC26IImyO9pWcoBC4xjQqX4E12ZU90WVpSLAuEptiZuPkt7zEeEKO76
+ lFwHdtdNv/gVDSmfcNdnLqCSjElvG4kYJELcKeuNQj+kf5J311LZwf0bZTqfkPBjv9VL
+ fmuJfjIw84gI+NRj+HwQVGbtx68tx1f9Gi/wn54lU9XBKd6ezL0R7fn2HmddBV0G6LGG
+ t7O8kdrMoB8mrTNXxDLp2ABXuEdAMDQnfjUmZm8ptTYGz2oE+7PqY9zI4zrYSFxP85H7
+ 3UKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlfSspYGEe82KIZkTOxJuZeizys8HF5N6hAKd4M6eas6qH+2c99GCn8omSX2iuFa1jjmUa5oU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwomRE2Y5e24XNFHQvjJ5AbSX4lXUq1Z254UV63dncBfp0gOyZ
- E2GdKJ45XsaNkpypjfZhfd7L9dHc4FiU9JJ7gr01xEbXcwM1mNC4FPQzrYvPi30enYZ2d5GFmdd
- PeOiayORYGqbO666nsWhqD9YJfF+MS+8Sd8cdExdyzaMIzeyh8lmgSggv
-X-Gm-Gg: AZuq6aJr5LSfVWHcqEpUGXNSVczw1mlzCcV6DngGBlgDFqZ9z4FuQb7/FfEnuOU4N3g
- +FM8mn49L3FQx7H+GT/sjJKWGrIVR/eFR1yZl6PW5YGuMGpoxsZKL0NdVQobxqLLs/Sr1L0v4UH
- Vt+ijZZqg+jKXsauk3Q0mPl/EqbZ7LfE6TCuAE9n1i7cCTF2XnFy1PzAy51ujw7Hb+HNzErOEGA
- t8lI7KRMaWtvyM2djAowQ7EykHkBbA7T7WsWJGq5QsXLoCMtM+Z3R5Mkisy+pnCLT0Fsd8EFS5s
- GOjK0MlQO3OwyDcvECj/OpuymAffj5rdEMIZucJGkPb7JmqknN+cbV00034TZuAPBdkJud63GEC
- 789pdBZwB6F5TtARXvPFJWwbvrFuc0+Dj1siQs1yeHXJtcuxUEEwEIhxqJXQsHsZVgGiVp47SKj
- j26scRk/gTexZHkyEARAXyE44c28CnsjCzV3sVZg==
-X-Received: by 2002:a17:902:e54e:b0:29b:e54f:936d with SMTP id
- d9443c01a7336-2a71888af64mr123668665ad.1.1768883162280; 
- Mon, 19 Jan 2026 20:26:02 -0800 (PST)
-X-Received: by 2002:a17:902:e54e:b0:29b:e54f:936d with SMTP id
- d9443c01a7336-2a71888af64mr123668475ad.1.1768883161797; 
- Mon, 19 Jan 2026 20:26:01 -0800 (PST)
+ AJvYcCVdgMfBXq+M6wwkt6uwmJj/IQFT5qHHAhN9jSoxgB3PRiX+US2AF76M/J+RXNcTvNxgaIlFxQM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdYbvPmvYOCq9LSPwjj5Dg/hsyNqatRlY6PSQ3SgLr/GPKlnPP
+ iIXJlre3N+YDIDsS3H+EmCpZmEBGQ271OiW9JoGALhF2ImSMsDhafEazGJ9wXL3Mp6rhIhgJ37T
+ ZCo0TdhcsPvKSr2kxC9wcGEMwXOC4DKiV8iI3szdtC0vpa2Lp+UeZBQ4I
+X-Gm-Gg: AZuq6aJCzstOfITLYdG1VVmF8IhohmGo7ojGDcXo4/hbNO03C3slRl94Y/9icIbtNnf
+ l9ZLpwfy3kLPN3YJCOQ/rkRFchUZXX1z35xMuGlVkBb/zqeYMg+FVN+d17lBPHdCbS+VuNjrvp+
+ VABbAxXoCcX+2QYA1BClOmSed7unwbMFvQFyhcp1tB2jLYneeM7Q49JVqrl8cZ4fic5I4Hu2X3L
+ CIDyz1/anlXeQ3RbcJ8XBxYftQKMIJRrXQ5UHHjchk1uplrTGsukYq53bn6/3tHKTM9qtd5qaP8
+ 4IlfwIm6216hd5i67zhyV7yRUW5Gte/tEvrOxiQi5dYAL/hWcMoDr/QkfNLESP5Ad4q+uxYaBoh
+ a+91LjM5Gqt9BFDK5R+jCBgiQFoYw2zBzTC8GyxheYx9VrrG5n7hc2GaT4rw8bJZFDxjvZdH6Vh
+ +KqR1gk9LMcQhDQEx7ilWoyITZsoJsvggL+it0hA==
+X-Received: by 2002:a17:902:d4c6:b0:2a7:5171:9221 with SMTP id
+ d9443c01a7336-2a751719365mr12806045ad.42.1768883165737; 
+ Mon, 19 Jan 2026 20:26:05 -0800 (PST)
+X-Received: by 2002:a17:902:d4c6:b0:2a7:5171:9221 with SMTP id
+ d9443c01a7336-2a751719365mr12805815ad.42.1768883165247; 
+ Mon, 19 Jan 2026 20:26:05 -0800 (PST)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a7190eeefasm107929825ad.43.2026.01.19.20.25.58
+ d9443c01a7336-2a7190eeefasm107929825ad.43.2026.01.19.20.26.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Jan 2026 20:26:01 -0800 (PST)
+ Mon, 19 Jan 2026 20:26:04 -0800 (PST)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com, lukma@denx.de,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@kernel.org, balaji.selvanathan@oss.qualcomm.com,
  alexeymin@postmarketos.org, nathbappai@gmail.com, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: [PATCH v2 1/3] arm: dts: qcs615-ride: Remove unsupported USB clock
- reference
-Date: Tue, 20 Jan 2026 09:55:49 +0530
-Message-Id: <20260120042551.650113-2-balaji.selvanathan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: [PATCH v2 2/3] clk: qcom: qcs615: Add GCC_AHB2PHY_WEST_CLK clock
+ support
+Date: Tue, 20 Jan 2026 09:55:50 +0530
+Message-Id: <20260120042551.650113-3-balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260120042551.650113-1-balaji.selvanathan@oss.qualcomm.com>
 References: <20260120042551.650113-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIwMDAzNCBTYWx0ZWRfX5EzPi65IfIHy
- MjOQ+hGxLds+WQjKBVdJi6lez0ohy4yvJpKNGtKR2j4Omx8egKm4GF+20tBsIBXa0BL8c9dXKY9
- hIgM5T8KFhrA0zzU+8Y+LU42t9fx1If397Zcxqnvj8ucKPjRqpCOGnxbh7IZm7z3aRG5rja8F2+
- 5rRK6H0gp+vyCcfsE5qZl/IvxRjuwMJsk1MaJgi0jM/4h5hAhhDcUcf7VYYDKO3mKgHiqfEvEPJ
- L1IHv5NLCyQ8EPOgV4tqW/tadSed+Aa5/Vt8KG3KiWGqkH3eOZNITT54puCZOAD3OfLbKpHjx/c
- uZCJAb615I8zwkgUU/qUgYPRlG+EgZ/vaCLH/NnqKYpnzUL/Weo1ep/quR4YYQpMIHgrFDINInE
- enaiESCVwHFO5VgqZsL/kw2411ZcCt4d6AUhEZHNnvfaQWvAuynmRJDJM7iWnqe5f6XPMNx70OO
- rrpKhRNTQztJobgzgwg==
-X-Authority-Analysis: v=2.4 cv=Is4Tsb/g c=1 sm=1 tr=0 ts=696f03db cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIwMDAzNCBTYWx0ZWRfX8lDUrc5Xerb5
+ YoKaw1DAFO450bVhWicE8rGDSvZJF9O9Vnq1bjYC+Vsyzh2uXF3/g3Lc7QQ5PdqJSLexmUMj2Ew
+ 5q3NmFXlk/i3iJzpzEeu0rRyKCtEwjV0xmyvHkH9/ZAwchxqQXy1719zCRbF2ZkKPzM8T1MiBQc
+ 4En4ulQROmZqbD/ZNER5AWHnzuOJ3fj8wcV7JGmgJ/Bu0JOh/qCaxyx4C7Og+c903NgwHHZDQ2C
+ ir3q677oIF5oFnoiNExm0fW4usznghWzPbV0vpBqgMDrRE+ahjeSV5kUUUf3I/nsjGx/tHJt+C2
+ 0cipQvGH+FDh4y/cnAezRMNvs9bIOzAV3eyL9GRJVCvBdcIC9OL/10etR2ieFVIdee/Ws+JGeoq
+ 2rtjzOfw9BwHgw8TXHfoRwWqbpDK+r7DrylJ72KUvqtms9XQZ+TTqOT9j5ZjVdUxx3+2opviv7I
+ OcYlxzR2DEiZ369J0fg==
+X-Authority-Analysis: v=2.4 cv=Is4Tsb/g c=1 sm=1 tr=0 ts=696f03de cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=Qin-PeR8fBxZ1AKwSVEA:9 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: 8RlJ4b2lsOvS9PBTDZqopWJI2c7r5KW9
-X-Proofpoint-GUID: 8RlJ4b2lsOvS9PBTDZqopWJI2c7r5KW9
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=G1K_gZgz9GLba3hnKCwA:9
+ a=uG9DUKGECoFWVXl0Dc02:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: cDXlEXTPJoYQ8SsOe8gh1-BDLx879uaV
+X-Proofpoint-GUID: cDXlEXTPJoYQ8SsOe8gh1-BDLx879uaV
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2026-01-20_01,2026-01-19_03,2025-10-01_01
@@ -148,38 +151,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove GCC_USB3_PRIM_CLKREF_CLK from the USB controller node as it is
-not implemented in the U-Boot clock driver. Keep only the supported
-clocks to avoid clock warnings during boot.
+Add GCC_AHB2PHY_WEST_CLK gate clock definition to the QCS615
+clock driver. This clock is required for proper PHY operation
+and eliminates clock-related warnings during USB initialization.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- arch/arm/dts/qcs615-ride-u-boot.dtsi | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ drivers/clk/qcom/clock-qcs615.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-index 68fffc70fcb..d8af124cc27 100644
---- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
-+++ b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-@@ -11,4 +11,18 @@
- 		      <0x0 0xc0000000 0x0 0xc0000000>,
- 		      <0x1 0x80000000 0x1 0x00000000>;
- 	};
-+	soc@0 {
-+		/* Remove GCC_USB3_PRIM_CLKREF_CLK from usb_1 node to avoid U-Boot clock warnings */
-+		usb_1: usb@a6f8800 {
-+			/delete-property/ clocks;
-+			/delete-property/ clock-names;
-+			/* Keep only the clocks that are implemented in U-Boot clock driver */
-+			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
-+				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
-+				 <&gcc GCC_AGGRE_USB3_PRIM_AXI_CLK>,
-+				 <&gcc GCC_USB30_PRIM_SLEEP_CLK>,
-+				 <&gcc GCC_USB30_PRIM_MOCK_UTMI_CLK>;
-+			clock-names = "cfg_noc", "core", "iface", "sleep", "mock_utmi";
-+		};
-+	};
- };
+diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+index 4700baba8c9..2b59c4d13fd 100644
+--- a/drivers/clk/qcom/clock-qcs615.c
++++ b/drivers/clk/qcom/clock-qcs615.c
+@@ -66,6 +66,7 @@ static const struct gate_clk qcs615_clks[] = {
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
++	GATE_CLK(GCC_AHB2PHY_WEST_CLK, 0x6a004, BIT(0)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
 -- 
 2.34.1
 
