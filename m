@@ -4,87 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E6BD2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D915D2ECE9
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 768B283A6A;
-	Tue, 20 Jan 2026 15:54:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 26B6583AB8;
+	Tue, 20 Jan 2026 15:55:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y4kxGASY";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sBxIwaSK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 185D283A8D; Tue, 20 Jan 2026 15:54:16 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83B5E83B03; Tue, 20 Jan 2026 15:55:24 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D47BE83A2B
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:54:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8323583A2B
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:55:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-40467f1514aso2479692fac.2
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 06:54:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768920852; x=1769525652; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sFXTaC8qpZV3wsPagmYYl2TQwtud18XSAQxj7Whk8T4=;
- b=Y4kxGASYM0T7/SAqgQXjesoaMNTBPf7OvQEg42p9txa7f0nu5hrRV5Jk3sYTOGARFT
- JsfVBQOwoQLoMqtiz3SeVibc8rA05w+Qp9X2MV5rEhakb9B18pvVtaZaVTa937YeTfx1
- SzlqNXg8gwqj8kMV3pvoL7qx6wh2uZemnyeZE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768920852; x=1769525652;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sFXTaC8qpZV3wsPagmYYl2TQwtud18XSAQxj7Whk8T4=;
- b=AHg+8Kwisw+4Yk3fWplyvzn++ewxKTxIiOohSyMeSBr0PwtWQmvup+8cdnP1dqHutw
- cKntNzY+2lQgj3ajrXyxora9zSYoX0UaFg6RpajIbSB0I0gi4si2JV/kIdxtN48E8PWO
- cpa6DH0fC67NNIN8RL/xeQvYoun0ZIx636Vae1T9EKrYVhxk8tz6cY0vcqD76QSXH9HM
- SiPVIWGFJiLdQuDCtjrVosdXgl3FinE9nfWySt+KFNIqAsrnzr6FpNWNK10VdXr1g6np
- 1gifTxHGNyr3CRMGtKAmKI93a4/OXi3XZivUZbc/rte3MFMHaKjELavVr9cQGv3a7jVo
- /+PA==
-X-Gm-Message-State: AOJu0YzTBG8iKiIqwZfl+W/Yumt0mdgMdAQ6GCqEwEz1oDt9HZNNYvU2
- NnHYH+BdDRwNcPXrkLLfaGuNJuohwlWAb2s2tC8o2EEHaCm97J1lI6LpJrXL+5knLQk=
-X-Gm-Gg: AY/fxX4GJ433hGz3oiKOZJzFPzXhqVYnag5SN6E3Qjs6Rdp8QKx+zK3bixefgts6tk6
- k646aC/aEY7RpLICo/0vjMr/jRYw5reug4Acg6x2tioSte+FrKBPxtlof2Myxi2GHHyqo0uBHCm
- NCUaS3mhj/UQi5+UmoUnbkyFZpEiuZgqgvvK7ntvvZHR19+7NLieczZfwfoJGs1IpVm1DjryV7q
- FhYLrqUPzLQV/kTaSLlcEYXKxBfEUfErswsTZ4A9ot3lXUj2PC8oksPt/JeRunBBVv2HejLYf3u
- h5imtmWnhEgcrsUB/05B6JPuFYZa1ywwSi38sZuq9I+jdp4+kllVDHyZYn02IMXbLVwi7KmNGvO
- HE/kptCQPJqIzWLI2YMjdbnjmmBHLtNPM+58fEwm5lrmEQu4REQGxBBS4+rCbD/Fob2AIcm1IZQ
- zeeyunKEeg2eFu5IY8WTUQ49RBrKHRif+U4dc+BgusPZIGQEulhu1wanvIoNSlXCq9V6gcSVJ4V
- rePcwzhGoQOgym0TmFxeJwFJ9uD/xDHAmMMVPU=
-X-Received: by 2002:a05:6870:610c:b0:404:3c7c:8201 with SMTP id
- 586e51a60fabf-40846aa9d3amr897288fac.8.1768920852552; 
- Tue, 20 Jan 2026 06:54:12 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044bda44f9sm9101751fac.21.2026.01.20.06.54.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 06:54:12 -0800 (PST)
-Date: Tue, 20 Jan 2026 08:54:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, Andrew Davis <afd@ti.com>,
- Judith Mendez <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Vignesh R <vigneshr@ti.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Subject: Re: [PATCH master v4] Kconfig: select
- SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3
-Message-ID: <20260120145409.GL3416603@bill-the-cat>
-References: <20260120-am65_dfu_fix-v4-1-36b2dfab3a64@ti.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dwVk03kLBz9v0m;
+ Tue, 20 Jan 2026 15:55:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768920920;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZTo1Ys7cUdb2dLiY83u4ahfP4GGCn1UZcZFfVLJSdBk=;
+ b=sBxIwaSKiZf3gm+qmM4uZ8piAVDT2pJdzwhkgbmzdW7DeqUfUzb/VPg97kt70bbZTrA+vf
+ Juyi/Q476PC029OJg67HMtB4lFlPCRv/RvnOzEnyczzERCiRmKXnPJUh0wzq3I17zhUkdv
+ 7IBSqPJkhj2ETEEHnAfeFDNtzQ2nX5AeJ9ppguZvTdrcqmIHpqRMSWPOdbuJjadoPrW7/N
+ mg3yoG9IGWD8AcNeHm3d1n/gk79CdzgjyoJwyW+npZDe0J0SFD5L6YD33yaXiGLW+TYzCJ
+ 0j90TIvlwdKRDVvwmkA9n4KotMXOkgNrvFs1s8tCfMa9jaqv2zvtft45MaUd3g==
+Message-ID: <c225d39c-837a-4b5a-b836-5f12c1cc686f@mailbox.org>
+Date: Tue, 20 Jan 2026 15:53:12 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m+uszmJ1KUkJbYHi"
-Content-Disposition: inline
-In-Reply-To: <20260120-am65_dfu_fix-v4-1-36b2dfab3a64@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
+ v1.7.2-35-g52f07dcca47c
+To: Jamie.Gibbons@microchip.com, trini@konsulko.com
+Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
+ Valentina.FernandezAlanis@microchip.com
+References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
+ <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
+ <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
+ <bb9936a8bafa83fceed86f0805d2340914b52dca.camel@microchip.com>
+ <baa48570-2114-4313-9bac-280aab0960fb@mailbox.org>
+ <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
+ <712cfdc9-b3c3-4fca-8f14-763efdf5e0ae@mailbox.org>
+ <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
+ <d6ea8e7c-1fc4-4f05-8a6b-805c0be12f4c@mailbox.org>
+ <f6e27291ecd42a2563034250ac0016c75b61d35c.camel@microchip.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <f6e27291ecd42a2563034250ac0016c75b61d35c.camel@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: brzoqno516bkrrzhsix9pnxouks3qrbe
+X-MBO-RS-ID: b397da27807a5f5bd88
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,46 +84,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---m+uszmJ1KUkJbYHi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jan 20, 2026 at 10:04:28AM +0530, Anshul Dalal wrote:
-
-> Since the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
-> with an extra Kconfig"), SPL_USE_TINY_PRINTF_POINTER_SUPPORT has been
-> made mandatory in order to use %p which would earlier have defaulted to
-> a 'long' print.
->=20
-> Without this config symbol, k3_sysfw_dfu_download fails to set the
-> correct value for the DFU string with:
->=20
->  sprintf(dfu_str, "sysfw.itb ram 0x%p 0x%x", addr,
->    CONFIG_K3_SYSFW_IMAGE_SIZE_MAX);
->=20
-> The value we get "sysfw.itb ram 0x? 0x41c29d40" causes a boot failure.
->=20
-> Therefore this patch sets SPL_USE_TINY_PRINTF_POINTER_SUPPORT for all K3
-> devices since the size impact is less than 100 bytes.
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---m+uszmJ1KUkJbYHi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaW+XEQAKCRAr4qD1Cr/k
-Cl8GAP0XT6xjSdeJVg1pHG1zSGGbKox5zU5BDuXUHtJJ46wFFQEAmdxPS6tWI5rp
-b89iLTWuwvvRh6HYAwOLGEr3+QefwQ4=
-=F9pn
------END PGP SIGNATURE-----
-
---m+uszmJ1KUkJbYHi--
+On 1/20/26 3:50 PM, Jamie.Gibbons@microchip.com wrote:
+> On Tue, 2026-01-20 at 15:32 +0100, Marek Vasut wrote:
+>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>> know the content is safe
+>>
+>> On 1/20/26 2:53 PM, Jamie.Gibbons@microchip.com wrote:
+>>> Hi Marek,
+>>>
+>>> On Tue, 2026-01-20 at 11:58 +0100, Marek Vasut wrote:
+>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>>>> know the content is safe
+>>>>
+>>>> On 1/20/26 11:45 AM, Jamie.Gibbons@microchip.com wrote:
+>>>>
+>>>> Hello Jamie,
+>>>>
+>>>>>> 2489                 debug("%s loaded at 0x%08lx
+>>>>>> len=0x%08lx\n",
+>>>>>> 2490                                 uname, ovload, ovlen);
+>>>>>> 2491                 ov = map_sysmem(ovload, ovlen);
+>>>>>> 2492
+>>>>>> 2493                 ovcopylen = ALIGN(fdt_totalsize(ov),
+>>>>>> SZ_4K);
+>>>>>> 2494                 ovcopy = memalign(8, ovcopylen);
+>>>>>> 2495                 if (!ovcopy) {
+>>>>>> 2496                         printf("failed to duplicate DTO
+>>>>>> before
+>>>>>> application\n");
+>>>>>> 2497                         fdt_noffset = -ENOMEM;
+>>>>>> 2498                         goto out;
+>>>>>> 2499                 }
+>>>>>> 2500
+>>>>>> 2501                 err = fdt_open_into(ov, ovcopy,
+>>>>>> ovcopylen);
+>>>>>> 2502                 if (err < 0) {
+>>>>>> 2503                         printf("failed on fdt_open_into
+>>>>>> for
+>>>>>> DTO\n");
+>>>>>>
+>>>>>> This is where it fails. Is $ov or $ovcopy 4-byte aligned ?
+>>>>>> Enable
+>>>>>> the
+>>>>>> debug() print at the beginning (or #define DEBUG at the
+>>>>>> beginning
+>>>>>> of
+>>>>>> this file) to find out.
+>>>>>>
+>>>>>> If $ov is 4-byte aligned, try to generate your fitImage with
+>>>>>> "mkimage
+>>>>>> ... -E -B 8 ..." , does that make any difference ?
+>>>>>
+>>>>> Thank you for your suggestions.
+>>>>>
+>>>>> I followed your advice and investigated the alignment of the
+>>>>> overlay
+>>>>> buffer. The error code returned by fdt_open_into was
+>>>>> FDT_ERR_ALIGNMENT
+>>>>> (-19), confirming that the overlay was not sufficiently aligned
+>>>>> for
+>>>>> the
+>>>>> updated libfdt.
+>>>>>
+>>>>> I modified our Buildroot post-image.sh script to generate the
+>>>>> FIT
+>>>>> image
+>>>>> using the suggested arguments. With the -B 8 option, all blobs
+>>>>> in
+>>>>> the
+>>>>> FIT image are now 8-byte aligned. This resolved the alignment
+>>>>> error,
+>>>>> and device tree overlays are now applied successfully in U-
+>>>>> Boot.
+>>>>
+>>>> But this is not the fix. Which parameter of fdt_open_into() is
+>>>> unaligned, the ov or ovcopy ?
+>>>
+>>> ov is unaligned
+>> Does this help even without the mkimage -B 8 ?
+>>
+>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>> index 2d040e38d97..49fdc1f0535 100644
+>> --- a/boot/image-fit.c
+>> +++ b/boot/image-fit.c
+>> @@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>> *images,
+>> ulong addr,
+>>                           addr, &uname, &uconfig,
+>>                           arch, IH_TYPE_FLATDT,
+>>                           BOOTSTAGE_ID_FIT_FDT_START,
+>> -                       FIT_LOAD_IGNORED, &ovload, &ovlen);
+>> +                       FIT_LOAD_OPTIONAL_NON_ZERO, &ovload, &ovlen);
+>>                   if (ov_noffset < 0) {
+>>                           printf("load of %s failed\n", uname);
+>>                           continue;
+> This solution removed this misalignment in ov and allowed the system to
+> boot - without any change/additional arguments to mkimage.
+Would you be willing to submit this as a bugfix ?
