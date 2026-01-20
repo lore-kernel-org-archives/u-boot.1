@@ -4,50 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4438DCCF2DD
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B155ED111B0
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F3983AB8;
-	Tue, 20 Jan 2026 16:55:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4ABBA83A8F;
+	Tue, 20 Jan 2026 16:56:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="ZxJT4pkY";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="YaFw84eK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0243283AEE; Tue, 20 Jan 2026 16:55:15 +0100 (CET)
+ id E535983A8F; Tue, 20 Jan 2026 16:56:03 +0100 (CET)
 Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED09183A6A
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:55:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A37083A6A
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:55:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1768924466;
- bh=4liMj9hM7ZRWGZz53MsMxwCHfKg96sr0mqMnSV1jSYg=;
- h=From:To:Cc:Subject:Date:From;
- b=ZxJT4pkY2fEUZBIz2awRB39wopG381zasWE5ijkPMJIlSsjWvcyMKiXT5tOn1854U
- exm2ohK3pkxM9oqi8TIFKGwtkfcMjyXPcBzCJknNuo7wdyS5i9lNjNC8N4EkFrp4lx
- Dj9WkC+MzR3+NLfU4jZRY43sKEPuq7LSb70PK6uk5xjlww+HzAb3zeWbiInSapbIgY
- 5gSA0U0ArWVj2hWjCB/I6g2LpoJE0s00dUPyh5Pltk9xPd5+Yj8IPh5vEs41CMHwXc
- v5zhrNjH9e7i8Tn+jlG1U5qGwaZPrrVWhtrneArDJeeUT2MqmSctuBH3U0CI/Wjq+g
- qqTfXBzZI1NwQ==
+ s=s2025; t=1768924474;
+ bh=zXKKNfuFlZeL7wn+dICOS8KB+0Fzh1jHRX7kij/AuVI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YaFw84eKpfU6kz5owGwx/WoAGYQlX7Yf7Bz9c4ZHn/TffhvBhB3noSGoUBJPk23qm
+ SZiYCVT+u6hJCSS0CxHPDTxaxXQjPlwTzTyZTEzTYNHH0aBq+cgvPssCe9sppUDS0R
+ GVIfTicqnHukXbSuIOVTQH7PZyX/fhR7eZa/48ct+FGcBaErWEbBWsS5uu6nTXFpsQ
+ DvVkjoSIQTQJhgqN3CUXsrOpOQHtk9+OYlSLTyYGa4C4cMXrBGDI1KEPsKB+Eba2At
+ XwcIDWouJS4ItC1X4OUoY/aXD0uNKR5TrTA5VB0UowC0lX0AOtezZ54IYLl+iOg+UE
+ jX+DNZ4wAUYuw==
 Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 01711B22042C;
- Tue, 20 Jan 2026 16:54:24 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id 1F880B220B62;
+ Tue, 20 Jan 2026 16:54:31 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de,
-	E Shattow <e@freeshell.de>
-Subject: [PATCH v3 0/5] Add upstream board Xunlong Orange Pi RV
-Date: Tue, 20 Jan 2026 07:53:33 -0800
-Message-ID: <20260120155406.34916-1-e@freeshell.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Michael Zhu <michael.zhu@starfivetech.com>,
+ Drew Fustini <drew@beagleboard.org>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Icenowy Zheng <uwu@icenowy.me>, Conor Dooley <conor.dooley@microchip.com>,
+ "Rob Herring (Arm)" <robh@kernel.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: [PATCH v3 1/5] dt-bindings: riscv: starfive: add xunlong,orangepi-rv
+Date: Tue, 20 Jan 2026 07:53:34 -0800
+Message-ID: <20260120155406.34916-2-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20260120155406.34916-1-e@freeshell.de>
+References: <20260120155406.34916-1-e@freeshell.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -66,49 +73,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Xunlong Orange Pi RV patches are now in the Linux v6.19 release candidate,
-so let's introduce support for this board.
+From: Icenowy Zheng <uwu@icenowy.me>
 
-Note: The content of EEPROM is known to not be unique on this board, and
-an (optional) invented "XOPIRV" identifier is implemented with this
-series. Without, there are reports that the board is detected in U-Boot as
-StarFive VisionFive 2 1.3b, and is then functional enough to load the
-devicetree prior to booting Linux.
+Add "xunlong,orangepi-rv" as a StarFive JH7110 SoC-based board.
 
-Changes since v2:
-- Collect tags (no code changes)
-- Adjust missing S-o-by tag to first of tags list order for patch 4
-  "configs: starfive: Add Orange Pi RV to visionfive2".
+Signed-off-by: Icenowy Zheng <uwu@icenowy.me>
+Signed-off-by: E Shattow <e@freeshell.de>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Acked-by: Rob Herring (Arm) <robh@kernel.org>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 
-Changes since RFC v1:
-- Cherrypick from devicetree-rebasing instead of importing upstream dts
-  as -u-boot.dtsi overrides.
-- Add basic documentation
-- Mention invented "XOPIRV" identifier in commit messages
-- Rebase on origin/next
+[ upstream commit: d94ebab404b0ce6498770888e25102e32b2b13da ]
 
-E Shattow (3):
-  board: starfive: visionfive2: Add Orange Pi RV selection by product_id
-  configs: starfive: Add Orange Pi RV to visionfive2
-  doc: board: starfive: Add Xunlong OrangePi RV
+(cherry picked from commit 19644ea3243c8749d1c08d4397b4522965a9bf8e)
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+---
+ dts/upstream/Bindings/riscv/starfive.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Icenowy Zheng (2):
-  dt-bindings: riscv: starfive: add xunlong,orangepi-rv
-  riscv: dts: starfive: add Orange Pi RV
-
- board/starfive/visionfive2/spl.c              |  3 +
- .../visionfive2/starfive_visionfive2.c        |  2 +
- configs/starfive_visionfive2_defconfig        |  2 +-
- doc/board/starfive/index.rst                  |  1 +
- doc/board/starfive/orangepi_rv.rst            | 35 +++++++++
- dts/upstream/Bindings/riscv/starfive.yaml     |  1 +
- .../src/riscv/starfive/jh7110-orangepi-rv.dts | 76 +++++++++++++++++++
- 7 files changed, 119 insertions(+), 1 deletion(-)
- create mode 100644 doc/board/starfive/orangepi_rv.rst
- create mode 100644 dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts
-
-
-base-commit: 55ca2110d74f8e5a594aecc11ce4103dc73e9e02
+diff --git a/dts/upstream/Bindings/riscv/starfive.yaml b/dts/upstream/Bindings/riscv/starfive.yaml
+index 04510341a71..3fdeab9d8f0 100644
+--- a/dts/upstream/Bindings/riscv/starfive.yaml
++++ b/dts/upstream/Bindings/riscv/starfive.yaml
+@@ -33,6 +33,7 @@ properties:
+               - pine64,star64
+               - starfive,visionfive-2-v1.2a
+               - starfive,visionfive-2-v1.3b
++              - xunlong,orangepi-rv
+           - const: starfive,jh7110
+ 
+ additionalProperties: true
 -- 
 2.50.0
 
