@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983F8D2ED17
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCE3D2ED17
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:20:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4BDB83A6A;
-	Tue, 20 Jan 2026 16:20:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F214983B21;
+	Tue, 20 Jan 2026 16:20:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q5pEcj20";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HyWR3kPQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2633783A8D; Tue, 20 Jan 2026 16:20:45 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 07FF383B07; Tue, 20 Jan 2026 16:20:52 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8083283A2B
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:20:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A7FBA44227;
- Tue, 20 Jan 2026 15:20:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 85481C19422;
- Tue, 20 Jan 2026 15:20:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768922440;
- bh=yaBHmQAY+03SVzh3vAYb6ADcwVfuLT5cg3ZARHQWEy4=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=Q5pEcj20/CfrE4zuknR+kn5aUuelD+dXqtEgvvnJiR+tnKpTShBGrlShaMRKUi00O
- y/cO21uOug2D7cVsUltNBU4DS8f5pxzgUv2p+ZHACnZalvelJKUk5tks/N8iPodBC+
- 7aKwL+dY4jr4xgDw6tsGuuG9/8ho+Gq+5tQyebzAimwyXHtEB9f0wEhpe9o/XU90D6
- n4oi5ZNiyTKz/8ZBRQKwzkOpW+qCm/0NxlPqy8Hih2zcPRzZP+X/vnKYsGFxFLrUNE
- 0N/Q6E9Rr20mcr3rHXHAfVwRCtcayS3kecnEvzatt5ra43wVtV0ST82gc4Kx2JYqN0
- 1HNWpIo9HOvwA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 72440D2ED15;
- Tue, 20 Jan 2026 15:20:40 +0000 (UTC)
-From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
- <devnull+j.ne.posteo.net@kernel.org>
-Date: Tue, 20 Jan 2026 16:20:38 +0100
-Subject: [PATCH next v3] board: sunxi: Add X96Q support
+ by phobos.denx.de (Postfix) with ESMTPS id C6ACE83A2B
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:20:49 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dwWHM5TLvz9tr0;
+ Tue, 20 Jan 2026 16:20:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768922447;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=biblkG4BChb2r3yUF04FQk8uuKz5QWoeoi8xbHC0yPQ=;
+ b=HyWR3kPQLNxBztkxRmWR/ib74g4pyMatv20fhivVlM8IiT3GBBg9UPXF9ENegfk49WlfWj
+ tipHbjGZrXRMm84BCyot/Sn2tUowKWnel/hwEvQACoqSvlrc7yhDibBvYGfZpunT7XLtlz
+ VFpo2qcLr1oqFESVkKE0oxqSbWoI7Qk9WsL+vAPtmYqlg03jl42qi3k1Glu/juq4nnxwNc
+ si1+5yrDjpjTUZ97WFUN5v1on4tLhncCsTOWMrw46K4lOOKNNd0+r6HHar/C/QEyfPabH7
+ QyfYVkaAks2/ADuFE1pmBPiWiTqb9O+Af0KESGPIjW5wn9rv/SEef6/OuFpHHg==
+Message-ID: <39d8ba9e-f089-4c95-bb65-35e98894c0b4@mailbox.org>
+Date: Tue, 20 Jan 2026 16:20:45 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
+ v1.7.2-35-g52f07dcca47c
+To: Jamie.Gibbons@microchip.com, trini@konsulko.com
+Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
+ Valentina.FernandezAlanis@microchip.com
+References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
+ <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
+ <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
+ <bb9936a8bafa83fceed86f0805d2340914b52dca.camel@microchip.com>
+ <baa48570-2114-4313-9bac-280aab0960fb@mailbox.org>
+ <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
+ <712cfdc9-b3c3-4fca-8f14-763efdf5e0ae@mailbox.org>
+ <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
+ <d6ea8e7c-1fc4-4f05-8a6b-805c0be12f4c@mailbox.org>
+ <f6e27291ecd42a2563034250ac0016c75b61d35c.camel@microchip.com>
+ <c225d39c-837a-4b5a-b836-5f12c1cc686f@mailbox.org>
+ <6a48db81abdeb6e6620d9b7afcb25a03ee4aa97a.camel@microchip.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <6a48db81abdeb6e6620d9b7afcb25a03ee4aa97a.camel@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260120-x96q-v3-1-1419ee399fa1@posteo.net>
-X-B4-Tracking: v=1; b=H4sIAEWdb2kC/1WMTQ6DIBBGr2JmXRpmiKhdeY+mC9GxsgELhtgY7
- 15i24XL7+e9DSIHyxFuxQaBk43WuxzUpYB+6tyThR1yBpJUIikUa6NfomnqHlWl2ZgR8nUOPNr
- 10NzB8brAI7eTjYsP78Od8NjOmoQChUI9VFKZepSqnX1c2F8dfw2J/pSWiPJHUaZw0F1FJZuay
- hO17/sHEnpwiNUAAAA=
-X-Change-ID: 20251231-x96q-998c1376ebbf
-To: u-boot@lists.denx.de
-Cc: linux-sunxi <linux-sunxi@lists.linux.dev>, 
- Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Peter Geis <pgwipeout@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Junhui Liu <junhui.liu@pigmoral.tech>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Hans de Goede <hdegoede@redhat.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Chen-Yu Tsai <wens@kernel.org>, 
- Lukas Schmid <lukas.schmid@netcube.li>, 
- =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1768922439; l=3015;
- i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=lQ0P3AFYQWqSxsOBdi4MNMycxGc0DyWm9yvx4fujLD0=;
- b=aKdiVIWuFj1j1ap4MA8QBhJ/kLAteO04yG7KEIHlfAKZX0gOxDUL97xy1bgvIKiHwy0ITl9h+
- nCLLE5EtUqHAzkQSUExzyykZsZr00hFJHDcn3Iw/GKXO1qmU8ZOTGzN
-X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
- pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
-X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
-X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-MBO-RS-META: qhow3bsbiaqafn4xqznm67xsgkr6d3xp
+X-MBO-RS-ID: 9470607e0295566a94b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,103 +83,126 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "J. Neuschäfer" <j.ne@posteo.net>
-
-The X96Q is a set-top box with an H313 SoC, AXP305 PMIC, 1 or 2 GiB RAM,
-8 or 16 GiB eMMC flash, 2x USB A, Micro-SD, HDMI, Ethernet, audio/video
-output, and infrared input.
-
-  https://x96mini.com/products/x96q-tv-box-android-10-set-top-box
-
-This commit adds a defconfig and some documentation. The devicetree is
-already in dts/upstream.
-
-The CONFIG_DRAM_SUNXI_* settings are chosen such that the register
-values in the DRAM PHY's MMIO space are as close as possible to those
-observed when booting with the preinstalled vendor U-Boot. The DRAM
-clock frequency of 600 MHz was reported in the vendor U-Boot's output.
-
-Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
----
-Changes in v3:
-- Remove CONFIG_FIT_BEST_MATCH, CONFIG_CMD_UFETCH/CAT, CONFIG_SYS_I2C_SLAVE
-  and CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT from defconfig
-- Add board/sunxi/MAINTAINERS entry
-- Remove board-specific documentation
-- Link to v2: https://lore.kernel.org/r/20260110-x96q-v2-1-1d6a725eb825@posteo.net
-
-Changes in v2:
-- Add missing Signed-off-by
-- Re-generate x96q_defconfig with 'make savedefconfig'
-- Move DRAM frequency comment to commit message
-- Use GPL-2.0-or-later instead of deprecated GPL-2.0+
-- Link to v1: https://lore.kernel.org/r/20251231-x96q-v1-1-316d703b8f03@posteo.net
----
- board/sunxi/MAINTAINERS |  5 +++++
- configs/x96q_defconfig  | 26 ++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
-
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index c52e8a34c85..775d0f7ae83 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -611,6 +611,11 @@ M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
- F:	configs/x96_mate_defconfig
- 
-+X96Q TV BOX
-+M:	J. Neuschäfer <j.ne@posteo.net>
-+S:	Maintained
-+F:	configs/x96q_defconfig
-+
- X96Q PRO+ TV BOX
- M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
-diff --git a/configs/x96q_defconfig b/configs/x96q_defconfig
-new file mode 100644
-index 00000000000..24c214b4c63
---- /dev/null
-+++ b/configs/x96q_defconfig
-@@ -0,0 +1,26 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h313-x96q"
-+CONFIG_DRAM_CLK=600
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x03030303
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x1f12
-+CONFIG_DRAM_SUNXI_TPR0=0xc0001002
-+CONFIG_DRAM_SUNXI_TPR2=0x00000100
-+CONFIG_DRAM_SUNXI_TPR10=0x002f0107
-+CONFIG_DRAM_SUNXI_TPR11=0xddddcccc
-+CONFIG_DRAM_SUNXI_TPR12=0xeddc7665
-+CONFIG_MACH_SUN50I_H616=y
-+CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
-+CONFIG_R_I2C_ENABLE=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_AXP305_POWER=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-
----
-base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-change-id: 20251231-x96q-998c1376ebbf
-
-Best regards,
--- 
-J. Neuschäfer <j.ne@posteo.net>
-
-
+On 1/20/26 3:56 PM, Jamie.Gibbons@microchip.com wrote:
+> On Tue, 2026-01-20 at 15:53 +0100, Marek Vasut wrote:
+>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>> know the content is safe
+>>
+>> On 1/20/26 3:50 PM, Jamie.Gibbons@microchip.com wrote:
+>>> On Tue, 2026-01-20 at 15:32 +0100, Marek Vasut wrote:
+>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>>>> know the content is safe
+>>>>
+>>>> On 1/20/26 2:53 PM, Jamie.Gibbons@microchip.com wrote:
+>>>>> Hi Marek,
+>>>>>
+>>>>> On Tue, 2026-01-20 at 11:58 +0100, Marek Vasut wrote:
+>>>>>> EXTERNAL EMAIL: Do not click links or open attachments unless
+>>>>>> you
+>>>>>> know the content is safe
+>>>>>>
+>>>>>> On 1/20/26 11:45 AM, Jamie.Gibbons@microchip.com wrote:
+>>>>>>
+>>>>>> Hello Jamie,
+>>>>>>
+>>>>>>>> 2489                 debug("%s loaded at 0x%08lx
+>>>>>>>> len=0x%08lx\n",
+>>>>>>>> 2490                                 uname, ovload,
+>>>>>>>> ovlen);
+>>>>>>>> 2491                 ov = map_sysmem(ovload, ovlen);
+>>>>>>>> 2492
+>>>>>>>> 2493                 ovcopylen = ALIGN(fdt_totalsize(ov),
+>>>>>>>> SZ_4K);
+>>>>>>>> 2494                 ovcopy = memalign(8, ovcopylen);
+>>>>>>>> 2495                 if (!ovcopy) {
+>>>>>>>> 2496                         printf("failed to duplicate
+>>>>>>>> DTO
+>>>>>>>> before
+>>>>>>>> application\n");
+>>>>>>>> 2497                         fdt_noffset = -ENOMEM;
+>>>>>>>> 2498                         goto out;
+>>>>>>>> 2499                 }
+>>>>>>>> 2500
+>>>>>>>> 2501                 err = fdt_open_into(ov, ovcopy,
+>>>>>>>> ovcopylen);
+>>>>>>>> 2502                 if (err < 0) {
+>>>>>>>> 2503                         printf("failed on
+>>>>>>>> fdt_open_into
+>>>>>>>> for
+>>>>>>>> DTO\n");
+>>>>>>>>
+>>>>>>>> This is where it fails. Is $ov or $ovcopy 4-byte aligned
+>>>>>>>> ?
+>>>>>>>> Enable
+>>>>>>>> the
+>>>>>>>> debug() print at the beginning (or #define DEBUG at the
+>>>>>>>> beginning
+>>>>>>>> of
+>>>>>>>> this file) to find out.
+>>>>>>>>
+>>>>>>>> If $ov is 4-byte aligned, try to generate your fitImage
+>>>>>>>> with
+>>>>>>>> "mkimage
+>>>>>>>> ... -E -B 8 ..." , does that make any difference ?
+>>>>>>>
+>>>>>>> Thank you for your suggestions.
+>>>>>>>
+>>>>>>> I followed your advice and investigated the alignment of
+>>>>>>> the
+>>>>>>> overlay
+>>>>>>> buffer. The error code returned by fdt_open_into was
+>>>>>>> FDT_ERR_ALIGNMENT
+>>>>>>> (-19), confirming that the overlay was not sufficiently
+>>>>>>> aligned
+>>>>>>> for
+>>>>>>> the
+>>>>>>> updated libfdt.
+>>>>>>>
+>>>>>>> I modified our Buildroot post-image.sh script to generate
+>>>>>>> the
+>>>>>>> FIT
+>>>>>>> image
+>>>>>>> using the suggested arguments. With the -B 8 option, all
+>>>>>>> blobs
+>>>>>>> in
+>>>>>>> the
+>>>>>>> FIT image are now 8-byte aligned. This resolved the
+>>>>>>> alignment
+>>>>>>> error,
+>>>>>>> and device tree overlays are now applied successfully in U-
+>>>>>>> Boot.
+>>>>>>
+>>>>>> But this is not the fix. Which parameter of fdt_open_into()
+>>>>>> is
+>>>>>> unaligned, the ov or ovcopy ?
+>>>>>
+>>>>> ov is unaligned
+>>>> Does this help even without the mkimage -B 8 ?
+>>>>
+>>>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>>>> index 2d040e38d97..49fdc1f0535 100644
+>>>> --- a/boot/image-fit.c
+>>>> +++ b/boot/image-fit.c
+>>>> @@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>>>> *images,
+>>>> ulong addr,
+>>>>                            addr, &uname, &uconfig,
+>>>>                            arch, IH_TYPE_FLATDT,
+>>>>                            BOOTSTAGE_ID_FIT_FDT_START,
+>>>> -                       FIT_LOAD_IGNORED, &ovload, &ovlen);
+>>>> +                       FIT_LOAD_OPTIONAL_NON_ZERO, &ovload,
+>>>> &ovlen);
+>>>>                    if (ov_noffset < 0) {
+>>>>                            printf("load of %s failed\n", uname);
+>>>>                            continue;
+>>> This solution removed this misalignment in ov and allowed the
+>>> system to
+>>> boot - without any change/additional arguments to mkimage.
+>> Would you be willing to submit this as a bugfix ?
+> Yes, no problem. I will do so.
+Thank you !
