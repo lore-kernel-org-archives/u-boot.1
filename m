@@ -4,53 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC11CCA5FA6
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BADA9CA5FA2
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 16:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 656C483A8F;
-	Tue, 20 Jan 2026 16:59:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 22AB383A6A;
+	Tue, 20 Jan 2026 17:09:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="WZry6yXJ";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fWxswVZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02D2983B23; Tue, 20 Jan 2026 16:59:34 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 9079A83A91; Tue, 20 Jan 2026 17:08:59 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E40083A6A
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:59:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D8C283A2B
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 17:08:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1768924501;
- bh=8vwWv2sMtSR5AGae6hcomUZKVmYLHHMdmfBJ/5M5BTg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WZry6yXJPi2fnTiRpGAHcV/UGFdxj+mGPB5NntS2Z3u3izQ/TWaavyN5L46OI/AQv
- RtVDDl/rPkLILoRGLnZ3zAV3Ai7icX058MEl7cJ7LcxusrxiGCLVjZdYWYETHQ6+Eo
- CWLnEwjmhd0fAK4xNXDoXe7XYdhTenSYn+xtI3zxAxMAb9lgcKpDMapMLDvMphFnyv
- vbLIz/BgwCnXNvkHvz4xedrX+KRn1zjmeE0OnekQDUyv4NDQL4/Mad6FKVDa6rAW24
- 18iivacoo9IPoQ/2d0U61Udo4A2nN1QmVSfePKb/vSr0j8xXS01Y3YH9ygbilfnk4i
- aAUPl3UfjzsFw==
-Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 34300B220D42;
- Tue, 20 Jan 2026 16:55:00 +0100 (CET)
-From: E Shattow <e@freeshell.de>
-To: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	E Shattow <e@freeshell.de>
-Subject: [PATCH v3 5/5] doc: board: starfive: Add Xunlong OrangePi RV
-Date: Tue, 20 Jan 2026 07:53:38 -0800
-Message-ID: <20260120155406.34916-6-e@freeshell.de>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <20260120155406.34916-1-e@freeshell.de>
-References: <20260120155406.34916-1-e@freeshell.de>
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1408D3FE42
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:08:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1768925337;
+ bh=wtoDKXnfstrIYGwVTkoQRxWixcHtHpAANtwQa7kMbCk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=fWxswVZrjMWVxK+SeRShU0UYoGU6bHXHV08A+Q+k8sz9bF9J3ho71wPYaRHi8FXhI
+ vfk395htRmyN/nN4K+SIaTpSiMxRo84KK4wODMb394dsCDAbLlStMDKXugEBISTjGo
+ Dwf4OMz3F5DzYMLPcfE+rd7hXxF4qst5FEAGt0Jou4aM8RVJuqU4I+qvgXz+QtDXc4
+ Tx1TI4zD747eXcRdnxXYpC5pIoH/mDoRT5L/QtuqHhsZi1Ak/yVM/V6boUMiLzXAFN
+ 53K1BW7Rai8Vm7xT3L3f/rfkdoZxFn0RfKddbcg3MYug6zBpUfC5U2H30k5mla8vT1
+ Gy+t5Nrq34Javy8VHHukiciuY0wWMxsJdVqqywu7glNk6iXjY5qBPtDuwGZn9rfepZ
+ 3vr1Zxa/iH7OVetHvSw+cGPQH6Jxo6lYGIUWh8iNMPr9fDNbRygHxXlFlZN03sX9Fk
+ I2DxYJaAv9MJao5mg5FNGZAO9nKy4/o23zyz3Yrn7IuI6J1edvr+xhk9e5wwvfVX18
+ EZpJ6c9yu2licqLxbYYgPB4a7gU121CkrQuRT9EjByii+qIfzpj3QsWaYogMGuT4x2
+ 2M1ea4Hpm7GZ9sq139TrZ7yJxswBFmrXg5EB1pnOpOVRIZ3T6VRrB3B8l7OYG459Ps
+ QiLNxNKnUIrGiqYjNScuxyrY=
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4779d8fd4ecso28761545e9.1
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 08:08:57 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768925336; x=1769530136;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wtoDKXnfstrIYGwVTkoQRxWixcHtHpAANtwQa7kMbCk=;
+ b=hWTLEyS+61wuSWxVbiBjt/bfaecg5alrplz/OEWyijRK3CLwbxsWC5d63tbGEwZhaa
+ ys7c1kd6rTcZBo9u3ZSdiNQnB7y7zBIBtqDgCr9YarO+fqRRUcTmzA3KXC++OtzWO1Gi
+ kiErU8d3BAm6Qoe5OwkmpoY/KElKl1+YDP9ILIhK1ZCAaJ5B8XBq34cm+QenY6qjKItd
+ 718A/69WM2LJngG3XLABCz3xNS+nc5TuZim1Co05PpzP4BjXLpCQEEk65gSuziPFzIXl
+ CYyqdlWU/FD3MOuKQStsXKS5xV3qEsC/ZNXNq21DbmsdvEq0Kzz3eJBqT7IZi3iFzMlF
+ Fp9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZ4kOsojUxe4wETB6PYGY1lusTcd7+b/Bz/HP7Ig4rQaGSQl82SRSFSoDtqSEbfcnNm1c4zcs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyapLCesUJl5yxOv+fFY3a+rAAmsvrPLetuVjMDjb1RvwzjIQYR
+ 9ekL95awq4RH239ELlEECATRodLqgFxCwFgtlHp0e3yF7PY/cfqWqyR5JvdSmU5OETXIpFP4DmB
+ m+4RV+qEgjrH1M3VEDNN0KrCtGVyIKr68/jSdbsgM2+CYQZ2yyhmpFSJIoQMnIVJ4GruaqP0=
+X-Gm-Gg: AY/fxX65aEp2Q004ogp3L0YAE1izpXHheOR0mMaLUepUPo827kFgUUTbmAm08dDdDIT
+ COEcHIGJ38KMAdHSh4GVzFrtPe344pz+PJppdCJDjiEoF3wPn0h4l+X1exuXNEVyhwvAQ5FtB2C
+ bsQ1ouvaq74OJJAovKHWAACK7YJkhsna0rZxI3NlmMoODcvYaa1JForcUfRl6yY7JZq+U+RWBDr
+ DjxoO66sYyGXrUjBlzM+Y2QpHpJKrW+YkCT2B57wotBQrDx+W4LKRt+id5HgZgnJvFpVRot4VlI
+ X3ixBFfbhn3UR9HapEGiVanWMS+A7kbeTmirCfNzUeZXdHnT4PycpTDi+ZiPJeiyJNI8NqEfPvw
+ Kj1G0JQv9OGn9TJkPvRSpXULATI3KnaZXSQahFIbonOwj6wkacMsda+H4kpUmmklVafjk0GCusv
+ jGdynhWq4=
+X-Received: by 2002:a05:600c:1910:b0:475:ddad:c3a9 with SMTP id
+ 5b1f17b1804b1-4801e67bceemr206608505e9.13.1768925336571; 
+ Tue, 20 Jan 2026 08:08:56 -0800 (PST)
+X-Received: by 2002:a05:600c:1910:b0:475:ddad:c3a9 with SMTP id
+ 5b1f17b1804b1-4801e67bceemr206608075e9.13.1768925336160; 
+ Tue, 20 Jan 2026 08:08:56 -0800 (PST)
+Received: from [192.168.123.154]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4801e8c9cbcsm252305665e9.12.2026.01.20.08.08.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Jan 2026 08:08:55 -0800 (PST)
+Message-ID: <5e09e65c-f8e4-4a05-b5de-342c74817036@canonical.com>
+Date: Tue, 20 Jan 2026 17:08:53 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] efi: stop hw watchdog during EBS
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: paul.liu@linaro.org, adrianox@gmail.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, jerome@forissier.org, mkorpershoek@kernel.org,
+ ravi@prevas.dk, me@ziyao.cc, u-boot@lists.denx.de,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>
+References: <20260119210925.29185-3-casey.connolly@linaro.org>
+ <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
+ <5995c605-0e94-45ed-981e-49506233597f@gmx.de>
+ <6922d2ec-207b-48e6-aa77-ca1e30393bc5@linaro.org>
+ <20260120155211.GN3416603@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260120155211.GN3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,74 +125,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OrangePi RV is a board that uses the same EEPROM product serial identifier
-as the StarFive VisionFive 2 1.3b.
+On 1/20/26 16:52, Tom Rini wrote:
+> On Tue, Jan 20, 2026 at 04:12:27PM +0100, Casey Connolly wrote:
+>>
+>>
+>> On 20/01/2026 11:01, Heinrich Schuchardt wrote:
+>>> On 1/20/26 10:33, Mark Kettenis wrote:
+>>>>> From: Casey Connolly <casey.connolly@linaro.org>
+>>>>> Date: Mon, 19 Jan 2026 22:09:25 +0100
+>>>>>
+>>>>> Hardware watchdogs don't currently get stopped as part of
+>>>>> ExitBootServices, this can result in resets during boot if the OS
+>>>>> doesn't have a driver for the watchdog, or if the driver isn't loaded
+>>>>> in time.
+>>>>>
+>>>>> As with the EFI watchdog, stop any hardware watchdogs as well.
+>>>>
+>>>> This has been discussed before and rejected on the grounds that this
+>>>> defeats the purpose of the watchdog.  I think there was some consensus
+>>>> that an OS that doesn't have a driver for the watchdog or doesn't load
+>>>> it in time is broken.  Some folks also pointed out that on some
+>>>> platforms it isn't possible to disable the watchdog.
+>>>>
+>>>> Ultimately, I think EFI needs an API to control the hardware watchdog,
+>>>> such that an OS doesn't need a driver.
+>>>
+>>> The hardware watchdog interrupting an OS if it is hanging is intended
+>>> behavior. It is required for recovering from a failed capsule update.
+>>>
+>>> Some watchdog timers have a maximum timeout that is too short for
+>>> booting (e.g. 16s on some Sunxi boards). To avoid resets these options
+>>> are available:
+>>>
+>>> * Set CONFIG_WATCHDOG_AUTOSTART=n.
+>>> * Use device-tree property u-boot,noautostart.
+>>> * Use the `wdt stop` command in PREBOOT.
+>>
+>> Hmm, thanks for the suggestions. I considered doing this in some
+>> platform-specific way, but I don't think it's correct for U-Boot's
+>> default behaviour to leave watchdogs enabled, I haven't gone digging
+>> through the EFI spec but I would imagine it's not EFI compliant either?
+> 
+> We've had some long discussions about this in the past. It's very much
+> intentional that U-Boot leaves watchdogs running. As Heinrich noted (and
+> is a summary of the older threads) some hardware doesn't even let you
+> disable a watchdog. But it otherwise defeats the purpose of one to turn
+> it off. Part of my feedback before was that the EFI spec needs to be
+> addressed if it can't handle this correctly.
+> 
 
-In fact it is not completely compatible with the StarFive VisionFive 2
-1.3b for use with Linux Kernel however it is good enough for use with
-U-Boot SPL and U-Boot Main. Describe how to set the devicetree search path
-and, for advanced users, suggest that it is possible to update the EEPROM
-data with an invented "XOPIRV" identifier for automatic board detection.
+The UEFI specification explicitly requires a 5 min watchdog to be 
+enabled when starting an EFI binary. It should be disabled when 
+returning to the boot manager. See chapter 7.5.1 
+EFI_BOOT_SERVICES.SetWatchdogTimer().
 
-Signed-off-by: E Shattow <e@freeshell.de>
----
- doc/board/starfive/index.rst       |  1 +
- doc/board/starfive/orangepi_rv.rst | 35 ++++++++++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 doc/board/starfive/orangepi_rv.rst
+In 7.4.6 EFI_BOOT_SERVICES.ExitBootServices() the specification requires 
+that "the boot services watchdog timer is disabled".
 
-diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
-index f85d7376b44..0996e0a68aa 100644
---- a/doc/board/starfive/index.rst
-+++ b/doc/board/starfive/index.rst
-@@ -10,5 +10,6 @@ StarFive
-    milk-v_mars
-    milkv_marscm_emmc
-    milkv_marscm_lite
-+   orangepi_rv
-    pine64_star64
-    visionfive2
-diff --git a/doc/board/starfive/orangepi_rv.rst b/doc/board/starfive/orangepi_rv.rst
-new file mode 100644
-index 00000000000..29cc58a1e2b
---- /dev/null
-+++ b/doc/board/starfive/orangepi_rv.rst
-@@ -0,0 +1,35 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Xunlong OrangePi RV
-+===================
-+
-+U-Boot for the OrangePi RV uses the same U-Boot binaries as the VisionFive 2
-+board. In U-Boot SPL the actual board is detected as a VisionFive2 1.3b due to
-+a manufacturer problem and having the same EEPROM data as VisionFive2 1.3b.
-+
-+Device-tree selection
-+---------------------
-+
-+U-Boot will set variable $fdtfile to starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
-+
-+This is sufficient for U-Boot however fails to work correctly with the Linux Kernel.
-+
-+To overrule this selection the variable can be set manually and saved in the
-+environment
-+
-+::
-+
-+    env set fdtfile starfive/jh7110-orangepi-rv.dtb
-+    env save
-+
-+EEPROM modification
-+-------------------
-+
-+For advanced users and developers an EEPROM identifier product serial number
-+beginning with "XOPIRV" will match the OrangePi RV and automatically set the
-+correct device-tree at U-Boot SPL phase. The procedure for writing EEPROM data
-+is not detailed here however is similar to that of the Pine64 Star64 and Milk-V
-+Mars CM. The write-protect disable pads on the Orange Pi RV circuit board
-+bottom are labeled WP and GND near the M.2 connector.
-+
-+.. include:: jh7110_common.rst
--- 
-2.50.0
+Both has has been implemented in U-Boot as a software watchdog because 
+some hardware watchdogs don't support 5 min intervals.
 
+A watchdog for the phase after ExitBootServices() is not described.
+
+Setting CONFIG_WATCHDOG_AUTOSTART=n would comply with the specification.
+
+Best regards
+
+Heinrich
