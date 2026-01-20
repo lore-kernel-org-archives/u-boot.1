@@ -4,96 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD83D262AD
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 00:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665D5D262B6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 02:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 505658341A;
-	Wed, 21 Jan 2026 01:45:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5EFA08341A;
+	Wed, 21 Jan 2026 03:24:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a+K/dYVF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FNq40Qol";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E63B38341A; Wed, 21 Jan 2026 01:45:05 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 438AB8397D; Wed, 21 Jan 2026 03:24:04 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58B4C82A9E
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:45:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D244B82A9E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 03:24:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7cfdcae466eso3242826a34.3
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:45:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768956302; x=1769561102; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2/vd6IA6MKHP025U6FVhftOnP77KG1spWj/BYGw02Eo=;
- b=a+K/dYVF2Ylv8G4D7LtFRq9/cch7GIMnF06TpzBzUi91qCSZ6MgIT8zVZELtcI+CJf
- owjSlU+gE4o4WL2LGPvanR0r0MFF/hEm0IDqT815eB/LtNX3FTGlkW9InpiZ4wq9R4+H
- MN1Fh6ORJuQxhQ6/Fcx8/MYkkgCbELcKeXPuM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768956302; x=1769561102;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2/vd6IA6MKHP025U6FVhftOnP77KG1spWj/BYGw02Eo=;
- b=u7M0nlPiehdep9c04bK0xsm9WGwMpXLcVe/Zl0cewOb5GwIR8STMelO8mFUc5mgABi
- iuBkt0Tqmp7qmGlsvqun179pbfsY3CLJSdwlsc6Dx4krBhPrNd2AgrZTyLDjHebu0YAd
- K48FkXfaGB/FvSa83hhdtj4+O1W6YuxOQCmLIZ8LL+xdfMrjPyNALuHX3pv7xS6DfShl
- CZ87PxcEhhl1qATCSR5HQtrcUkN42kdIdDHDWT10uj/KEZ8fXSyoREuYjPKr5XE+TbzM
- cZoPg7HS9U+VMICV/pKdaBmW+KKUIorDso2W1E2BnL8tUhn5lfUzwqKEPp5s3Ius27du
- u+8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/lbUrNwYz0PNMp9Yip5027pgEm9R0hgNQ1fQfEp3SgiQbfpOFacTlfZ1C4bkvga+NzWLMOa4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGOs07G+Z7rR4rozECvd4epLLCHZJEB/VcUoIKe2Iphcr/mrR6
- IqNe0V5oDczTUL6oJkwKyNMOJ3O/qx7r+jhda3gZ0xw19ppIV/u+higSEjP1Qi7B4X0=
-X-Gm-Gg: AY/fxX6WbjhlqtdRtl7ZEi0d/XRIqbWrhqw6Ddd4v51t1JYxFuRxVSXus2M8TNo3TCA
- UWHog+snCvj/OmMDWSss+jvkCV8jOZ+UjawWAtjf/nPEwIr2h5j61uwP0gKNKXQz/9MvhgY3fJs
- rUPs1uYpV5sJ/7E1NcaiOA9BM2dsEwpCIkrlhAnW75mrhP3Ko9DOoMKE9GnMLQl9XChvcSbU4wV
- IoOShpp6FvNBl8BMTF6buXfyXLeody0GHvRxm4JxgteWujCaDNckLi0LbvP1PdAcsyAgXWfSPv3
- 6Be+0ccQvO0tIN7pmEslypNX6mOzvbmigK3q6aQ6REIUEonDC0nPmQ62CW3X3HWVWHRn1+rdTJs
- jP7lzVJl+CPpklFtbDAGG4Rh8491lMPkrtTs4AJNhOEmU1c/WqdBsxhUgCqJhdDdR7XfYaZ23hU
- x4sRg9wjYr0ld31bSOS5H1GB6QCuDF/8neUaWlbrqv198VW+uC45ctsDgZessn0zT0vzMIjq7Mh
- lB6WqpuJulwwlV5v6389wS6MHR5yInlEDHla60=
-X-Received: by 2002:a05:6830:6d2c:b0:7cf:e312:1acc with SMTP id
- 46e09a7af769-7d140a39f03mr1954109a34.1.1768956301951; 
- Tue, 20 Jan 2026 16:45:01 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf0d8e05sm9548781a34.6.2026.01.20.16.45.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 16:45:01 -0800 (PST)
-Date: Tue, 20 Jan 2026 18:44:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Gopinath Sekar <gopinath.sekar@oss.qualcomm.com>,
- Lukasz Majewski <lukma@nabladev.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Shmuel Leib Melamud <smelamud@redhat.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] watchdog: qcom: stop watchdog by default
-Message-ID: <20260121004458.GR3416603@bill-the-cat>
-References: <20260121003659.69305-1-casey.connolly@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dwp0b2kD5z9v0t;
+ Wed, 21 Jan 2026 03:23:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768962239;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2JyHOT44KF3v9ksZKLNm++wzctja6X6FY4gkdRY867w=;
+ b=FNq40QolqlfdTfCf7BT2SkPDK+RSdmlKNTuQSGZNbbrTLSaqgJcPu4Nra9rxxCIV9XlQI3
+ 1EfikXQVxmJeI4nDrRtuDU08bu20S29cQu1gTVdBGKy3XbIxOHyoTPKvjY/nAddsAAB63Z
+ dO4GJgFxZW18q9ZFS9lgCUtWErucbRHsCk1mH96wf1AkUzPDXddStLUYy5XyrGm5pby5sB
+ O6807pisutjt4IH5UFol/YvpszrDW9CNIalwFBJ/prrHHV80aIWfxjGLJkfl0gLokQCp/k
+ L5NhOQ2+q8kXd9GvexXXGBNCBxesXpTwoZo3+kKJrly0gblSN1hqA+RjxeRyNg==
+Message-ID: <1b72905e-03bd-48e7-942b-1a32fdeb2100@mailbox.org>
+Date: Tue, 20 Jan 2026 23:43:46 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HZoMZFNuTc2YFEfy"
-Content-Disposition: inline
-In-Reply-To: <20260121003659.69305-1-casey.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] usb: xhci: fix DMA address corruption in abort_td
+To: ANANDHAKRISHNAN S <anandhakrishnansasidharan@gmail.com>,
+ u-boot@lists.denx.de
+Cc: bmeng.cn@gmail.com, trini@konsulko.com,
+ ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
+References: <20260120145055.233298-1-anandhakrishnan.s@dicortech.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260120145055.233298-1-anandhakrishnan.s@dicortech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: wwch4ncfxy8w9p5nw3gu96mib7boeor6
+X-MBO-RS-ID: c307940548f42c9168d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,36 +77,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/20/26 3:50 PM, ANANDHAKRISHNAN S wrote:
+> When aborting a Transfer Descriptor (TD), the xHCI driver updates the
+> device dequeue pointer by converting the virtual enqueue TRB pointer
+> into a DMA address.
 
---HZoMZFNuTc2YFEfy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+reset_ep() seems to have the same problem ?
 
-On Wed, Jan 21, 2026 at 01:36:51AM +0100, Casey Connolly wrote:
+> Previously, the code OR-ed the ring's Dequeue Cycle State (DCS) bit into
+> the virtual TRB pointer before passing it to xhci_trb_virt_to_dma().
+> This produced an unaligned virtual address (e.g. ending in 0x...1).
+> 
+> Inside xhci_trb_virt_to_dma(), the offset calculation:
+> 
+> segment_offset = trb - seg->trbs;
+> 
+> operated on this unaligned pointer, resulting in an incorrect TRB index.
+> In wraparound cases, this caused the bounds check to fail and the
+> function to return 0.
+> 
+> As a result, a SET_DEQ_PTR command was issued with a DMA address of 0x0,
+> leading to controller hangs and transfer timeouts, most commonly when
+> aborting TDs near the end of a ring segment (e.g. index 63).
+> 
+> Fix this by translating the aligned virtual TRB pointer to a DMA address
+> first, and only then applying the DCS bit to the resulting physical
+> address.
+> 
+> Signed-off-by: ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
+> ---
+>   drivers/usb/host/xhci-ring.c | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+> index 34eb4536f0e..9e0ff71710a 100644
+> --- a/drivers/usb/host/xhci-ring.c
+> +++ b/drivers/usb/host/xhci-ring.c
+> @@ -582,9 +582,11 @@ static void abort_td(struct usb_device *udev, int ep_index)
+>   		TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
+>   		(comp != COMP_SUCCESS && comp != COMP_CTX_STATE));
+>   	xhci_acknowledge_event(ctrl);
+> -
+> -	addr = xhci_trb_virt_to_dma(ring->enq_seg,
+> -		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
 
-> Prevent the Qualcomm watchdog from autostarting and ensure it's stopped
-> when the driver probed. In some cases the watchdog is left running by
-> a previous bootloader stage. Disable autostart so it isn't left running
-> when we boot into the OS, this behaviour can be changed by enabling
-> autostart in the board defconfig.
->=20
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+-		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
++		(void *)(uintptr_t)ring->enqueue) | ring->cycle_state;
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+cycle_state is already either 0 or 1, isn't it ?
 
---=20
-Tom
-
---HZoMZFNuTc2YFEfy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXAhhwAKCRAr4qD1Cr/k
-CighAP9C9ZwnrMY1Ff8VM/LdF30eGxg0rLB0pPnF0pB/SfzwigEAjGjmN4SNVc/+
-28keQ+tpRduF07v5iIFdVNdczyzC/As=
-=DvS1
------END PGP SIGNATURE-----
-
---HZoMZFNuTc2YFEfy--
+> +	addr = xhci_trb_virt_to_dma(ring->enq_seg, ring->enqueue);
+> +	if (ring->cycle_state)
+> +		addr |= 0x1ULL;
+> +	else
+> +		addr &= ~0x1ULL;
+>   	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
+>   	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
+>   	if (!event)
