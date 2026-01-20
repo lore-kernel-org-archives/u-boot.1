@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E50D262A8
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 22:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307BAD262A7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 22:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAB4E83AB8;
-	Tue, 20 Jan 2026 23:34:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 395A883A2D;
+	Tue, 20 Jan 2026 23:34:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WlAFZMe2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rq51+QwQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 400B083A83; Tue, 20 Jan 2026 23:34:15 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
+ id A79DC83A83; Tue, 20 Jan 2026 23:34:14 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D678F83A2B
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 23:34:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B05F83A83
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 23:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7cfe2a6bf81so1760815a34.0
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 14:34:12 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d11e2ee188so2007550a34.1
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 14:34:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768948451; x=1769553251; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768948450; x=1769553250; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=aXVryHa/eduuJWGRvf/lSVcB98uCH2ykAiS2AXVDsK0=;
- b=WlAFZMe2ECE/RYI1vZZAE4zcEjhgjleDMIAKxrrPB0xsDu6UouJJhcl5dLuuhHKo+K
- JryZzNpgUeDWcmPFcIt8C3/qqGsgHDdZTHfZbpRJZ9zJyHaw1Mct+YxLO509Kah+qEfP
- MJccRFj0XJw75pppCgGui4/XsosM2+5YufD0k=
+ :reply-to; bh=FASIz+rOGcI0qsrvUmTItUoRxvukZDfo8gRfBFOaaCg=;
+ b=rq51+QwQoNHByWmCSmprGdc1Yh3SgX5SIetpdJi3FKequHXknlfcNScaoyB7OYTLlv
+ lwj6pGSb5FzgVD9ih9n4He/ncLL5asSPDqCYw9s+3JtDJsgxjgGpWDcAY8W4QC6N7Fx4
+ 6nUA5VhAdBkHIUclxwWQMs421nLA+QUoBNdaM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768948451; x=1769553251;
+ d=1e100.net; s=20230601; t=1768948450; x=1769553250;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=aXVryHa/eduuJWGRvf/lSVcB98uCH2ykAiS2AXVDsK0=;
- b=Yfx+PrmjSoo7grvQg2q4dIvr57REFRM4aWESL5I0azKyvVCqw6CvFwMnV0TY/5p3qI
- CklosPDpCVsm+Imvh0zqWcfVvwS4kITa2yOJTPRfQAjVfEa4l8CVGP/BhHP25oRj7nRk
- UYem3Dr+0M7f65rsYYSDZZiWsbrpNxYYCZTegmEFBjwPLjzFlD6LLz7lbWYAw16AZBHM
- 8glepUaOlgezg2iHQY3yPhUEABq8DJn0TLzYxEMoDUPQ2h2TfcVU3xsLkqdL6vEPlghf
- /jebUJzP3fgv/7yG2k4LnWMSjED8ZpNmgI7dS1tkRdTgU0cIjEGxsSjIBDXsL2Uxy2/A
- jrPg==
-X-Gm-Message-State: AOJu0YwahNkkinYOppiV+ZtvMCjBCbDCsK1EAiPwNKUOBvjAf+fwNEvP
- TBZC7vGne63lZU2iAkaJsaAddBRKpnBDI39YEIyRpAGdHWTWo/N/+9GNlP9Em9uRI1AUOJlMHMq
- 2ppNuqgk=
-X-Gm-Gg: AY/fxX4S1M3BkbSQyG8Ugvdcq+MD+G380AU0JBs6BsWz4Z1+HdLO5vP5i2CxuAksvCu
- bKBpEY651x0cGI+bRD+AdcTUbwD5VZoz2wD/JoULrzRMLVdUClWkz5d+mhHW5HzC/OJZ8qTlRvu
- nvw9iVTr/uuBeLia9TJKUoWmU6RXfOHzYEFZYRnzL0G0LFdmuIq7rLq143uQUyUGLQtF+DaR+QY
- 0RndXgmQuOyc/8LK27b7+tLvInNcy7Z93xnyjQAYWaq5AkKTIwz+Tt7YqKATRgKmY0F0lvuHzbf
- VhlOMPI0lwIW5SxfH42vqaZGRFBRsixYGUbtD6GNxHa6Dr38Ve3t/KgvgyoADhW0yVUVxhqTZB2
- vw2+tz21owoj/zZrIBHDXPQyB6la1WRYGx7ibDcLZ91ctzd86TOLnBUhpbeQOwuxNirwnR1a5uc
- f1MD2tAmIgplUQ7bkrmnTd9x0NzfJK+6pYXfTuSXCRbVFcxfe+XSnbufsnDxB7SYBIZ/yu//DxJ
- LlbNDgcKWuo5yv+FtGDylY5euZxGN1F3hcDdT2Etw==
-X-Received: by 2002:a05:6830:4c09:b0:7cf:cf19:cc62 with SMTP id
- 46e09a7af769-7cfe02bde0cmr8353811a34.38.1768948451640; 
- Tue, 20 Jan 2026 14:34:11 -0800 (PST)
+ bh=FASIz+rOGcI0qsrvUmTItUoRxvukZDfo8gRfBFOaaCg=;
+ b=gn09UJv4lywB2WV9FK3ylToq65KLKzX9Z2+5BDJ/XQ9Kda9TJU3xb0r7GyH7vesLgn
+ LfcHYen7mevfQ3/jw3v4b2w5H0Vt8W2rp/HonVqgM5Z6mr2FDq7jYiJfnPiDObhkWe2O
+ dM0mG3mAmN97L2s7u0HK4kQRl2EEs/Unts2bKhFXhtvLbuRe9W/enXqJasreKaMRornx
+ KPQNzgwoSYodFqm3SDMKrTXrDHghHur52hqUcLmX9IyZlX7tMzhDYVvntKzJuZ8CrJYJ
+ KsUIlIkxPNAVSlrHpKbKWhjX8mS5JSaYvGQb849gFwsrMDRhu0A2ms9pSgmDw42HERS/
+ UaAg==
+X-Gm-Message-State: AOJu0YxfOrQGXaBCeTYpEXflDyeroEy3kYp9kc2LJveXsnE/auh9A2mb
+ aAuj7eq7zMf2xkEwuOXeENtiGCJ3wzSdUpAT6wl1A+GW93hh/5mrTSmgNkPIusLkkWx57M8q4bQ
+ Dx9mYtvY=
+X-Gm-Gg: AY/fxX5BhU0sK5jegxk9TcXdZuJM04MDQM/0hPCiTu43frScgPsv9PVA6KTTJNaz+v+
+ LsCD9MefRgr3/R5K6Beq7TckM/MsWuOwoqXDOdCbuaeIMqhbbxeWyw58VPUunxm8psUqeeKaLvI
+ vMyWCONPGG5JQKS6x10YxDlj0r0NAv0OO1za4R0QoWB6QldnQHfelw1t3ejVA1ZhcImX5IateOs
+ DPxxneA6sTyH+Um/t6SwgvgQB7Y/WiEoipuuM4jqN45rICwyjj+1MK3Ds+5TUz3iiVXVL8nn1YM
+ Wp2CkNuiQqxd5D6glTTVESPxNqceym0F6w5LFXwxUIHGVUyiRpj3JYFNFFGlKtmPvEu/SsKr7SR
+ r2qtHZ0ASINdH4uf9qXIzfEP0KAdxH9gWigJouBu5lrKwi6WbU6T8fnBvr4hdImfMTWAxgqyChn
+ PzDnckl715meaLuKlTLjP085AQP9fOU0JDrK2GVGxQKz8oIgPG6cI/XK4e1p2oxuDMGd6gkaAy+
+ tcgD2ydJ/qyObWckiEHhhBSJuOVKTChuDlr3jze6A==
+X-Received: by 2002:a05:6830:2b1f:b0:7cf:d1e7:852 with SMTP id
+ 46e09a7af769-7cfdff6081fmr8387306a34.6.1768948450343; 
+ Tue, 20 Jan 2026 14:34:10 -0800 (PST)
 Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf2b59e2sm9705687a34.30.2026.01.20.14.34.11
+ 46e09a7af769-7cfdf2b59e2sm9705687a34.30.2026.01.20.14.34.09
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 14:34:11 -0800 (PST)
+ Tue, 20 Jan 2026 14:34:10 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 4/5] doc: develop: sending_patches: Update link to patchwork
-Date: Tue, 20 Jan 2026 16:31:45 -0600
-Message-ID: <20260120223405.469050-5-trini@konsulko.com>
+Subject: [PATCH 2/5] doc: develop: process: Make "Work flow of a Custodian" a
+ subsection
+Date: Tue, 20 Jan 2026 16:31:43 -0600
+Message-ID: <20260120223405.469050-3-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260120223405.469050-1-trini@konsulko.com>
 References: <20260120223405.469050-1-trini@konsulko.com>
@@ -95,27 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make use of an anonymous reference for the external link here, per rST
-best practices.
+Make the "Work flow of a Custodian" section be a subsection of the
+Custodioans section.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- doc/develop/sending_patches.rst | 2 +-
+ doc/develop/process.rst | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-index ee6e34089b5b..53c7655b2c34 100644
---- a/doc/develop/sending_patches.rst
-+++ b/doc/develop/sending_patches.rst
-@@ -325,7 +325,7 @@ Notes
- Patch Tracking
- --------------
+diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+index 3bda5e6b51dd..f436a98433a7 100644
+--- a/doc/develop/process.rst
++++ b/doc/develop/process.rst
+@@ -233,7 +233,7 @@ feedback to the submitter of a patch about what is going on:
+     apply cleanly.
  
--Like some other projects, U-Boot uses `Patchwork <http://patchwork.ozlabs.org/>`_
-+Like some other projects, U-Boot uses `Patchwork <http://patchwork.ozlabs.org/>`__
- to track the state of patches. This is one of the reasons why it is mandatory
- to submit all patches to the U-Boot mailing list - only then they will be
- picked up by patchwork.
+ Work flow of a Custodian
+-------------------------
++^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+ The normal flow of work in the U-Boot development process will look
+ like this:
 -- 
 2.43.0
 
