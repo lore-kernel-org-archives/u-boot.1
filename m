@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4D6D2ECE9
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F4CD2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:27:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 146EA839E2;
-	Tue, 20 Jan 2026 13:26:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC44D839E2;
+	Tue, 20 Jan 2026 13:27:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T/8xc8oc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HZRgjg8v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9414D83A8D; Tue, 20 Jan 2026 13:26:34 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id A978083A91; Tue, 20 Jan 2026 13:27:32 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C0C580B98
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A4C480B98
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-79028cb7f92so42820207b3.2
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:31 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768911991; cv=none;
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-790992528f6so46333107b3.1
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:27:30 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768912049; cv=none;
  d=google.com; s=arc-20240605;
- b=epW9GJkPRnJ1IE42FxZiGJQ842CnHNatUgMuIG2Ofg7XkBxxDT0gqxNfd2H1aB1Pgd
- Q9TFuP/LfnW6A9eT943+QcuCrHj1UcKAv0gYJEqRZUfBdcT2UXnElETxMv0NUSljoBKn
- TozW/v38rSkZzIXNP179WL/eBHt+HtCFlPepAfKYWutcqqMjJXadyVlScMlcAZglodga
- dKzIwgDsaP+ajGNSLj3qXyyLZlQdPi4DMIEgm9E4qI3bRK7lDJCVNDKM5bd74cbhXLsF
- 09YCXMsAQ9pKRxeG41OaTs3fJFVDG42Amvs2deCoCA3tbyPmZAijGoDoeKoqVdnzREyt
- /heQ==
+ b=GxFRhboB1fVKxSLAQ6Q+6IAUt097KJg08fl0QSzzE7L7jP0AstoFS2+zD9cCMpi0Sm
+ L7iF14D8KWGxc3Jmc79fBdAA64gAE3YCRzhk0TqBSIIiRDjk38DqVXzKf4hbDNJqQ40s
+ qA5EyFaCMVkQ+5/TJAmqV9i4JDCWzMQUeOJoNr4x9bp2MNhsEX4jZiKAi6Ue0tH92Dga
+ K7k5F87eaHBjD7lPFhCxtJfLvADpbPOsgyri9LxkFmhA1bdJu55wKWayuWhiNH7DtkZS
+ YiRMwXeBkPaP8+BTPStbHi1n9X0i7VZQDMSY33QG/hQSMKonPge6m/6CznYRK+jdXbTP
+ lyXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
+ bh=o8txhJP3A8ah4nyfffYa36z4LDllnylBYmw6/3QW0F0=;
  fh=s/hXJ48J50Vd6K1Y+3j7h4q6znQ5kpu6I1dzeFfBczI=;
- b=Ax+JOY4x+WQC+l31jbmkHUpHbs9eoOh+VZHzXVJ5mA3hP/z9hqLo04zfKq7czBP0tr
- Zv1Hjs4SBqodbCbXSLWXLMcp/mjTMzWDQzV3HzI6nZjKVF9R0Ddc4PYgsiiBOm5VmphC
- fyviMKDoUN4BMJTmpiCQfGbm92GREEkq2TvlEpziH4LMJ6Ztoc9gPw/qi+SrFtPDcuIj
- 1/4HQWbmladw+q+N/Hr+slLcqaZAqTQaKsP757MM7VUq1KRwQWP0GSRXBnI6I6Ouonmt
- 0+UOphWNXRqmHisulT9xPRev8uvDTLho09h22xAYslUvsshVBnV5eF8/1xyJY9khHivc
- i2eA==; darn=lists.denx.de
+ b=eNolpjZN716dIDBkfMYCzxAPrv7abCEh2N3KCDr82lHyfh/Jarop0Ley+yGqI1tdw4
+ rBWhUvjypCtdO5yly3CwMJS/hUQs6WEMuVhRmc6YA93br6Ae03iN5PRI0AQNtRx6qfSF
+ IOhMtyBGUSC7nrf3Eww4NxvXeM4QqeLisRxEs6ePHCYrYehPQLmtA5bqm6R/W3AWLDHr
+ vmhGMsqUpVZlxKvp6c89zHhJEfwdqRrgaI3U7IaLQEbDuOq8niWpwg7sTnCCZA5nCdTQ
+ b5CTT02IQljHM/3BCi9gFKw8hgPPh4tu3B7LCy5x/lxR4zSu1aNDAVJk3QXQXvWpgYOd
+ agcw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768911991; x=1769516791; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1768912049; x=1769516849; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
- b=T/8xc8ocyWAsCJ/CVosmKnE6a7wtPiAoF0GUyzAoj9qJcx8yYQkz5VMtUJsN8MY997
- hE2zeYuScHx4/HRfygb5/6dNyWmB08hBxeCumo4XmA542qOUO8VbT3TvcF3R1GIvdRXk
- wiUs+ghELeWjFMYCzB2cx4Y+mjUTkxOOof/itFR7cyJch9hveWh8JTNp0dDjX+h0WXLK
- gh2DkvbhEpYuyayd5kDt6P/RFavZrSJBcG8UXacov7tNGd3rQqJ87wnwkjS8+zXZyXFn
- t3fHu/p3IboXQpozZCuNhmaY25j0xdzs0u3JQM04z56GdoJ+mh1UpvNM8cZXtD6yF0Ej
- z0XQ==
+ bh=o8txhJP3A8ah4nyfffYa36z4LDllnylBYmw6/3QW0F0=;
+ b=HZRgjg8vgV9upq0R7Q0jTLlFtB0hAxxgxWjknP41w0dlT+q7DVGf+QN0KQvGEHorP9
+ LWk6S0hzdDUzgOzMz5RMn+Tib31nL0H9XMldtcUjTD314kGXVxSLHKhDNDI+eTyJyauD
+ mwNP1dqftgAtYnE1i/JWFR5PDCPQGcgLZf7PsZjexm6lJRyRtcjg9e3LX75J/Bm7X4Wn
+ fh/eRy/+oSKfzQSaMeaqC9YOOHRtaNcIolXAJ3fELt3/2Y12gQRvcRQo951oJPIhN7XG
+ 9iPbTmAOn/Dnf624DLTFckAZU+xYq+jnJ31+Ze2hol4srnxQZL49talhzawJDYR9jR4n
+ wtug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768911991; x=1769516791;
+ d=1e100.net; s=20230601; t=1768912049; x=1769516849;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
- b=cMV7dQooHl6DCtaV2gsGzXnfdNadANAMdN5ly+dgblpAsJa0xPOc4XzLLsSo4wf1il
- vOdz/fuAvXA5rGz0jTSbeoVD93c5P2T2LZb9KLvc5F33PyolYLoi7t4d6dLfTPuHYmbc
- rhVLJgIWxsYXPfXjTTQ6Fz1jj1ukZIN6kiWBQ3ywAh+1CfscV1eRUVO3CAtCu5upcOhX
- hdkcZvypPyQ2PLvUIDpOT/OClgInAyk8H2hzkVS9PjTzRtYyZ01pBisr2zvRu9E3byNn
- SlVCpKKMvBSSfTMcDeMdCXUCqkk+g1jbIyefgnWQbQEaozQfaGw4SzdjGrEAY5Qu+na5
- fUnQ==
-X-Gm-Message-State: AOJu0Yyl2hCkRtCGV6RsW2nIrN5Ibs+loG9Ayls/QbElWLmLh2JH176w
- OuqBFrV4joJdsNEmRZg2k7oA/8CvAs2UJwqxsdPQPkSXAEYceeg7BJGYCLJIr2zLHir9UUIPvHI
- ro5s9vlq9+1BeiPCobAePjU+Sqb1uoppLLAEOtVO6ww==
-X-Gm-Gg: AZuq6aKdRzfnDhDBSZ75vw2Oiv/gO47pdSf/hLBYWJItk6EA2bYw69e4/fBKfklztuq
- eDqWVBK28kjJc+FUOyIZPHZRFTucBr4PCo8p8876JfTN7XxFGNnrlOQMsRGGY+RBIPRZBhpW7zf
- Ook74HiNgZ1oJcUkpJT4EE9qwPO38AZLSbtljrbn8c8b6EkVcTTpSOm7BU7znyUZvom/+nziXCp
- 0sdixrBeaQINIXmMHR5oMgkL9qVrAPhjEdlcJ2eRgM9MUBsRmdfulwjl+uOh2dteLqOgpL9vNkN
- eldHVTFl5ohxJtPSSTJMa8qgSb0MT3nvaPjHTpyoqSIuQRPT6WJ5O3sNrshIAGnh7zVi9Cz78PY
- IlVeJrc7VmeXZHYOfTSMTNqz2xDk95/JVvUNdwPFjnWxM1t2BsugGkHZMrCVwYJeoTq4f1OvXdx
- Y9Y2xtF7OWOXju3WxgczfJWr1Fp6PM+6Esnw8PG8W1ov6x4wwJpuhlgH1A7hGVsRMFC4qx3Wmg7
- smwxLZMsUEsdrd5FLc0eJjVT3QPW7CFX5g8F2jaAWG5APJIWW2hlh4ay3zP6cID4GeMDczloTdJ
- pv9PVK9n8C+qIRHm3bwmJlDTP4v1ce4mdy7b8iDQTP0=
-X-Received: by 2002:a05:690c:48c2:b0:794:1447:1adc with SMTP id
- 00721157ae682-79414472a93mr3117157b3.22.1768911990791; Tue, 20 Jan 2026
- 04:26:30 -0800 (PST)
+ bh=o8txhJP3A8ah4nyfffYa36z4LDllnylBYmw6/3QW0F0=;
+ b=JHGfbTHjmVGla0wjo4pUOSauC85CWIa2EA7zsi5UbAXx3yVrb/z3uJ/0BM1ZHpheYp
+ NAFsTUJTUfjz2r1Vb6AriZaKWka0yuM3T2YdDU+lap9u6FEjl4PWigaf9CG1B4qCUA1L
+ 8qznwqZHl4h4+nsuYccowxDG5vfMpandc2G/16sSfKhpkyhH7R5BYg8XgaE90+BK2CNH
+ QwMRKgC7IUK9djqPPIVU4CxETH9QfjM/zq9yHUx6sRo7gAFL/Aq5ZJzdBr5ETI8Y3tUO
+ e+rD+SmxpFvkPdj0FnOQeFBfaOLYHD3aE0Fdm2EQrL68MLebraqnPyht76YAjsPs2RA0
+ QlIQ==
+X-Gm-Message-State: AOJu0YyLcvDQDeqljUwsBO2fQDf+blk/bmchrGoMITHvd5QociMZbK/J
+ rRwvFrt1L4+svq9FHryEpsKefbTswLvXgGrwuJz3O+LdP84rZ8DT8GOvSTtF1p6FVJl8sc+dPp8
+ 3XUyFdMNG0SP+cr+d4y/YAOqfyW+9wxSJUabUHczj/g==
+X-Gm-Gg: AZuq6aJRlSeRquludO6bqKbZ2CzqX/eRQcJ2j3xkoSPQinnXSJmVrFWb1fRAcF8oxNw
+ cN8Gwb+sDEPDmTMcMey5uOFUTS2KLjdcPqihmaWybLmXf+JINAHlO6KCGjAcE0xdryIuRknB64I
+ 3EeUywJZfKnfe2zYCXeuD6CPDY5SMvMY0aHubQTZMWhyZiZTfxNLNe4gZvLTIgEZv714qgjwL5M
+ /PC2Hm/2fZo7mGw6yFln2i49xvQlLY49YByrdldRRD4tGwRFNrNEJUPrZBWhq9uODcCWfFf6tkw
+ CoJHC2nvODtHI988nK5MkUpvOR4nM/qsnerFqsiBMDmvbATP5ldOD7sv5oZjuQeXug7lIUX1A2W
+ H/cxxriayIFfD7BkBTs/iNbrbO/YCd2f8yu8K3RbClKUUOCdm48Oakhli3Abn6wxkzimlSs3p0V
+ sH2uOYQ2dO37DNlT74Nyk+PouxVPCBxco+rOeiA6jST0YtsvjSUJesreqUL03CZmByZac+oBYe9
+ /NhFCQXOAPFUvVctJGp+mao9QluyVHbvqCrE2+Zpg0SaeRCUB4uU/6qpVpA3cvwo1OQ0M/wgV/I
+ uxX0zRwUUiYqxM+7IZI0jzS5tp9rTA7tHfSAAUJfFh0=
+X-Received: by 2002:a05:690c:6b0e:b0:78f:8b7b:7910 with SMTP id
+ 00721157ae682-7940a21c18cmr10888437b3.36.1768912049049; Tue, 20 Jan 2026
+ 04:27:29 -0800 (PST)
 MIME-Version: 1.0
 References: <20260119160746.1330877-1-kory.maincent@bootlin.com>
- <20260119160746.1330877-3-kory.maincent@bootlin.com>
-In-Reply-To: <20260119160746.1330877-3-kory.maincent@bootlin.com>
+ <20260119160746.1330877-2-kory.maincent@bootlin.com>
+In-Reply-To: <20260119160746.1330877-2-kory.maincent@bootlin.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 20 Jan 2026 14:25:54 +0200
-X-Gm-Features: AZwV_QgGXzdvPwCPJmRlgPzmM-Z8--GPozT2NBtaWQSIvjX1z8XN3qk1129LC5k
-Message-ID: <CAC_iWjKhd+F1TczjuYN9Q29PQdciihudnuiQ98V90Sq6UUJJ1A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] fwu: Mark failed bank as invalid during rollback
+Date: Tue, 20 Jan 2026 14:26:53 +0200
+X-Gm-Features: AZwV_QgkhqH7Q3DiJH3uOCvKeB1-uHYfFq4znGQalU_akd-dM-HIHlILRVa8CV0
+Message-ID: <CAC_iWjKYhv=vjSe9yVpr_AFE=RdLqromTELkJTFFQEa1js1LtA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] fwu: Pass bank state enum to
+ fwu_state_machine_updates()
 To: Kory Maincent <kory.maincent@bootlin.com>
 Cc: u-boot@lists.denx.de, thomas.petazzoni@bootlin.com, 
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -122,39 +123,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Jan 2026 at 18:08, Kory Maincent <kory.maincent@bootlin.com> wrote:
+Thanks Kory,
+
+This looks cleaner.
+I got ont nit, I don't think you need to cast the states to a unit8.
+
+On Tue, 20 Jan 2026 at 03:35, Kory Maincent <kory.maincent@bootlin.com> wrote:
 >
-> When boot_idx differs from active_idx at boot time, it indicates a
-> rollback scenario where the firmware update failed and the system
-> reverted to the previous working bank. In this case, mark the failed
-> bank (active_idx) as invalid to prevent future boot attempts from that
-> bank.
+> Change fwu_state_machine_updates() to accept an enum fwu_bank_states
+> parameter instead of a boolean. This makes the function interface more
+> explicit and prepares for adding FWU_BANK_INVALID support to handle
+> boot failures on the active bank.
+>
+> Convert the FWU_BANK_* defines to an enum and update all call sites
+> accordingly.
 >
 > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 > ---
 
+
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  lib/fwu_updates/fwu.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+> Changes in v2:
+> - Refactors fwu_state_machine_updates() to use enum as parameter instead
+>   of adding a new fwu_invalid_bank() helper.
+> ---
+>  include/fwu.h                | 22 ++++++++--------
+>  lib/efi_loader/efi_capsule.c |  5 ++--
+>  lib/fwu_updates/fwu_v1.c     | 16 ++++++------
+>  lib/fwu_updates/fwu_v2.c     | 50 +++++++++++++++---------------------
+>  4 files changed, 44 insertions(+), 49 deletions(-)
 >
-> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-> index 0f5ef2ba515..37c613014d1 100644
-> --- a/lib/fwu_updates/fwu.c
-> +++ b/lib/fwu_updates/fwu.c
-> @@ -766,6 +766,12 @@ static int fwu_boottime_checks(void)
->         if (boot_idx != active_idx) {
->                 log_info("Boot idx %u is not matching active idx %u, changing active_idx\n",
->                          boot_idx, active_idx);
+> diff --git a/include/fwu.h b/include/fwu.h
+> index e7bd1d492af..9cee8fb085c 100644
+> --- a/include/fwu.h
+> +++ b/include/fwu.h
+> @@ -80,9 +80,11 @@ struct fwu_mdata_ops {
+>
+>  #define FWU_IMAGE_ACCEPTED     0x1
+>
+> -#define FWU_BANK_INVALID       (uint8_t)0xFF
+> -#define FWU_BANK_VALID         (uint8_t)0xFE
+> -#define FWU_BANK_ACCEPTED      (uint8_t)0xFC
+> +enum fwu_bank_states {
+> +       FWU_BANK_INVALID = 0xFF,
+> +       FWU_BANK_VALID = 0xFE,
+> +       FWU_BANK_ACCEPTED = 0xFC,
+> +};
+>
+>  enum {
+>         PRIMARY_PART = 1,
+> @@ -396,24 +398,24 @@ int fwu_get_mdata_size(uint32_t *mdata_size);
+>
+>  /**
+>   * fwu_state_machine_updates() - Update FWU state of the platform
+> - * @trial_state: Is platform transitioning into Trial State
+> + * @state: FWU bank state
+>   * @update_index: Bank number to which images have been updated
+>   *
+> - * On successful completion of updates, transition the platform to
+> - * either Trial State or Regular State.
+> + * FWU_BANK_VALID transition the platform to Trial state
+> + * FWU_BANK_ACCEPTED accept the FWU bank state
+> + * FWU_BANK_INVALID invalid the FWU bank state
+>   *
+>   * To transition the platform to Trial State, start the
+>   * TrialStateCtr counter, followed by setting the value of bank_state
+>   * field of the metadata to Valid state(applicable only in version 2
+>   * of metadata).
+>   *
+> - * In case, the platform is to transition directly to Regular State,
+> - * update the bank_state field of the metadata to Accepted
+> - * state(applicable only in version 2 of metadata).
+> + * Saving the bank_state field of the metadata is only applicable in
+> + * version 2 of metadata.
+>   *
+>   * Return: 0 if OK, -ve on error
+>   */
+> -int fwu_state_machine_updates(bool trial_state, uint32_t update_index);
+> +int fwu_state_machine_updates(enum fwu_bank_states state, uint32_t update_index);
+>
+>  /**
+>   * fwu_init() - FWU specific initialisations
+> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+> index 89e63ed8dd5..e0f9a6efa25 100644
+> --- a/lib/efi_loader/efi_capsule.c
+> +++ b/lib/efi_loader/efi_capsule.c
+> @@ -465,7 +465,7 @@ static __maybe_unused efi_status_t fwu_empty_capsule_process(
+>                         log_err("Unable to set the Accept bit for the image %pUs\n",
+>                                 image_guid);
+>
+> -               status = fwu_state_machine_updates(0, active_idx);
+> +               status = fwu_state_machine_updates(FWU_BANK_ACCEPTED, active_idx);
+>                 if (status < 0)
+>                         ret = EFI_DEVICE_ERROR;
+>
+> @@ -510,7 +510,8 @@ static __maybe_unused efi_status_t fwu_post_update_process(bool fw_accept_os)
+>                 log_err("Failed to update FWU metadata index values\n");
+>         } else {
+>                 log_debug("Successfully updated the active_index\n");
+> -               status = fwu_state_machine_updates(fw_accept_os ? 1 : 0,
+> +               status = fwu_state_machine_updates(fw_accept_os ?
+> +                                                  FWU_BANK_VALID : FWU_BANK_ACCEPTED,
+>                                                    update_index);
+>                 if (status < 0)
+>                         ret = EFI_DEVICE_ERROR;
+> diff --git a/lib/fwu_updates/fwu_v1.c b/lib/fwu_updates/fwu_v1.c
+> index 974abf216f6..5824cca98cf 100644
+> --- a/lib/fwu_updates/fwu_v1.c
+> +++ b/lib/fwu_updates/fwu_v1.c
+> @@ -98,27 +98,27 @@ void fwu_populate_mdata_image_info(struct fwu_data *data)
+>
+>  /**
+>   * fwu_state_machine_updates() - Update FWU state of the platform
+> - * @trial_state: Is platform transitioning into Trial State
+> + * @state: FWU bank state
+>   * @update_index: Bank number to which images have been updated
+>   *
+> - * On successful completion of updates, transition the platform to
+> - * either Trial State or Regular State.
+> + * FWU_BANK_VALID transition the platform to Trial state
+> + * FWU_BANK_ACCEPTED accept the FWU bank state
+> + * FWU_BANK_INVALID invalid the FWU bank state
+>   *
+>   * To transition the platform to Trial State, start the
+>   * TrialStateCtr counter, followed by setting the value of bank_state
+>   * field of the metadata to Valid state(applicable only in version 2
+>   * of metadata).
+>   *
+> - * In case, the platform is to transition directly to Regular State,
+> - * update the bank_state field of the metadata to Accepted
+> - * state(applicable only in version 2 of metadata).
+> + * Saving the bank_state field of the metadata is only applicable in
+> + * version 2 of metadata.
+>   *
+>   * Return: 0 if OK, -ve on error
+>   */
+> -int fwu_state_machine_updates(bool trial_state,
+> +int fwu_state_machine_updates(enum fwu_bank_states state,
+>                               uint32_t update_index)
+>  {
+> -       return fwu_trial_state_update(trial_state, update_index);
+> +       return fwu_trial_state_update(state == FWU_BANK_VALID, update_index);
+>  }
+>
+>  /**
+> diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
+> index 159315b45b9..f48b6d1264b 100644
+> --- a/lib/fwu_updates/fwu_v2.c
+> +++ b/lib/fwu_updates/fwu_v2.c
+> @@ -80,42 +80,27 @@ static int fwu_mdata_sanity_checks(void)
+>         return 0;
+>  }
+>
+> -static int fwu_bank_state_update(bool trial_state, uint32_t bank)
+> +static int fwu_bank_state_update(enum fwu_bank_states state, uint32_t bank)
+>  {
+>         int ret;
+>         struct fwu_data *data = fwu_get_data();
+>         struct fwu_mdata *mdata = data->fwu_mdata;
+>
+> -       if (!trial_state && !fwu_bank_accepted(data, bank))
+> +       if (state == FWU_BANK_ACCEPTED && !fwu_bank_accepted(data, bank))
+>                 return 0;
+>
+> -       mdata->bank_state[bank] = data->bank_state[bank] = trial_state ?
+> -               FWU_BANK_VALID : FWU_BANK_ACCEPTED;
+> +       mdata->bank_state[bank] = (uint8_t)state;
+> +       data->bank_state[bank] = (uint8_t)state;
+>
+>         ret = fwu_sync_mdata(mdata, BOTH_PARTS);
+>         if (ret)
+>                 log_err("Unable to set bank_state for bank %u\n", bank);
+>         else
+> -               data->trial_state = trial_state;
+> +               data->trial_state = state == FWU_BANK_VALID ? 1 : 0;
+>
+>         return ret;
+>  }
+>
+> -static int fwu_trial_state_start(uint update_index)
+> -{
+> -       int ret;
+> -
+> -       ret = fwu_trial_state_ctr_start();
+> -       if (ret)
+> -               return ret;
+> -
+> -       ret = fwu_bank_state_update(1, update_index);
+> -       if (ret)
+> -               return ret;
+> -
+> -       return 0;
+> -}
+> -
+>  static bool fwu_get_mdata_mandatory(uint part)
+>  {
+>         int ret = 0;
+> @@ -171,27 +156,34 @@ void fwu_populate_mdata_image_info(struct fwu_data *data)
+>
+>  /**
+>   * fwu_state_machine_updates() - Update FWU state of the platform
+> - * @trial_state: Is platform transitioning into Trial State
+> + * @state: FWU bank state
+>   * @update_index: Bank number to which images have been updated
+>   *
+> - * On successful completion of updates, transition the platform to
+> - * either Trial State or Regular State.
+> + * FWU_BANK_VALID transition the platform to Trial state
+> + * FWU_BANK_ACCEPTED accept the FWU bank state
+> + * FWU_BANK_INVALID invalid the FWU bank state
+>   *
+>   * To transition the platform to Trial State, start the
+>   * TrialStateCtr counter, followed by setting the value of bank_state
+>   * field of the metadata to Valid state(applicable only in version 2
+>   * of metadata).
+>   *
+> - * In case, the platform is to transition directly to Regular State,
+> - * update the bank_state field of the metadata to Accepted
+> - * state(applicable only in version 2 of metadata).
+> + * Saving the bank_state field of the metadata is only applicable in
+> + * version 2 of metadata.
+>   *
+>   * Return: 0 if OK, -ve on error
+>   */
+> -int fwu_state_machine_updates(bool trial_state, uint32_t update_index)
+> +int fwu_state_machine_updates(enum fwu_bank_states state, uint32_t update_index)
+>  {
+> -       return trial_state ? fwu_trial_state_start(update_index) :
+> -               fwu_bank_state_update(0, update_index);
+> +       int ret;
 > +
-> +               ret = fwu_state_machine_updates(FWU_BANK_INVALID, active_idx);
+> +       if (state == FWU_BANK_VALID) {
+> +               ret = fwu_trial_state_ctr_start();
 > +               if (ret)
-> +                       log_err("Unable to set bank %u state as invalid",
-> +                               active_idx);
+> +                       return ret;
+> +       }
 > +
->                 ret = fwu_set_active_index(boot_idx);
->                 if (!ret)
->                         boottime_check = 1;
+> +       return fwu_bank_state_update(state, update_index);
+>  }
+>
+>  /**
 > --
 > 2.43.0
 >
