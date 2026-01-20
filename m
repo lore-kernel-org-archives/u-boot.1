@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CEECA5FA0
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 16:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0786ECA5FA6
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 16:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C5483B71;
-	Tue, 20 Jan 2026 17:15:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 8937283A8D;
+	Tue, 20 Jan 2026 17:18:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="TpIuOPJ+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GRMUHKnN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6555583A8F; Tue, 20 Jan 2026 16:29:43 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B57683B21; Tue, 20 Jan 2026 17:18:00 +0100 (CET)
+Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
+ [IPv6:2607:f8b0:4864:20::242])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12FB883A2B
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:29:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=47332a659=Jamie.Gibbons@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1768922981; x=1800458981;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=kH4yQrAyGm6NzFCxrT1Afc8NBjX//8r2REpUVo4Oulw=;
- b=TpIuOPJ++twZ9beRBc6NVQZg5VLCigKTevbENyoHejD6WMd13xTFKyTI
- oUg0mNY7TbFGVNved8mkyZggKWQkgh3SMfdpU8TAHufj4fuMZZVfbp7BF
- 1llAkJ4WOsSLoEzjKF0snm8pdfcm6A6ZlQKAtOmuorQnw1ZOOaFB7u+3O
- PawPPyjJBZX8tsoSXRIgBgjWSQWLeWp3wo50a8BdJg6CxUjZcdwipZ9iA
- Rg6+P7evVZ1jFkB3VmvdwAjdfEp1t/Nirviyn86Sa1XsTXX0RrWOHRtAf
- 8wm5ADaMMb7tGZ8qcx0ZndYNcBABr8xp+vT0AI6FRYaHdUvIQ4K/PToVy g==;
-X-CSE-ConnectionGUID: iuQXoqc9RnGYj0B0Zp4BxQ==
-X-CSE-MsgGUID: LPWufkU5Qe2Lxd+HlrdC0A==
-X-IronPort-AV: E=Sophos;i="6.21,240,1763449200"; d="scan'208";a="52602087"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Jan 2026 08:29:39 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
- chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.29; Tue, 20 Jan 2026 08:28:28 -0700
-Received: from jamie-dev.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Tue, 20 Jan 2026 08:28:26 -0700
-From: Jamie Gibbons <jamie.gibbons@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
- <valentina.fernandezalanis@microchip.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
- <sjg@chromium.org>, Leo <ycliang@andestech.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Cyril Jean <cyril.jean@microchip.com>,
- <jamie.gibbons@microchip.com>
-Subject: [PATCH 1/2] boot: Fix dtbo application by ensuring overlay alignment
-Date: Tue, 20 Jan 2026 15:33:12 +0000
-Message-ID: <20260120153314.95091-2-jamie.gibbons@microchip.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260120153314.95091-1-jamie.gibbons@microchip.com>
-References: <20260120153314.95091-1-jamie.gibbons@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D270C83A9F
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 17:17:57 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x242.google.com with SMTP id
+ 5614622812f47-45c83c49213so3632395b6e.3
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 08:17:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1768925876; x=1769530676; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hJpMtNewBKrtGxFQzLpxwMiDdtjd5j/2UEf7bv0+TcE=;
+ b=GRMUHKnNrycqqTyrPDJORcapkOmQW/58uXm5JHKPEa4C1gyIweqSiAn9aegoNIV3Rr
+ tmfFxPWIEu/Hl3///n3vxEbJyIRsEmAvfUioyOftQA9sdQNqnTRy/hQNxb3OF4xke93U
+ H+bLMtdS1f8cER7RMRCaI4s7p5FkuG04Yft3k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768925876; x=1769530676;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=hJpMtNewBKrtGxFQzLpxwMiDdtjd5j/2UEf7bv0+TcE=;
+ b=SGnVyTn3pJo67wvbHeODXORdcOGx2eQ4Hbc9e59AUM4RfvCvVmWQj1yM73D115a+Gy
+ 6HpfZBqx+X4frnRf64ElKE5d36YYqX1q/22wrilmDXirEG8mwhf/zxFzJ4LHM31GTg2f
+ Gw/6vbxVT419OhdM7wz5pD5nIITOJ+pi4NtVVLlg/hUXuuJb2+FrgdFogMiRVY13kbUh
+ IpzwnAgCUxrPuQ2pjpCl9LX7995n6Rj4uvv9rNFXnpUbt1ZH+lwuj6iWx0urGTQdfip9
+ NpDlJusmx6u5SjssoKsqY5ShEbTOTdfNjsVo4A4e4NdSHlkY6pDtf9mhwQe8wk8E6msH
+ L6Yw==
+X-Gm-Message-State: AOJu0Yz1FF2KB5bDPOnTeKUc3pmGrudozheRJ29YMtyJ0jVK6MQA5U3o
+ Vsamo4N/BWV0LakWsB85hIxx2AuVAqhA9TxaoVPjfsgAuEeI9owAAsp0ToAgW3Ve8lf1x6UcyYr
+ khsMt4SU=
+X-Gm-Gg: AY/fxX6BRQRRn9TZjWFJIfxa8eiz5Y+PCfUydDVLMuGPhVIHlBKgdX8Gck66R7FsbiE
+ zE308AiM44rufx+syh/Mxgavh+3FNUISCfFL4oUyLBCoI5Ox5TXS5BoW9zwTPcqhcNf29cbwKta
+ amaCc1JNM0InwXBMhK+/0DFLzpEx2Ah0uLjg6A8Tc6joj3115xgG3TKRw48vjlUHBka0w6Kk2YQ
+ 8KghsYLtxJz/ss90QyjlbBT+a67bsdseXzvgkvyzVB49f9vUc3r0Wy+ZdM+SgLnaI3UxcdFq9z9
+ aTVtJp+Qje34Bid7LC3h0r8ZjR9HlG0tuP7crZoimiTyjH41NW+Yyk54XBi6pXnd0o9OeEW7uzN
+ JQ+LgzMCIMr3bBW2WSxp3N7xl9WRDrJB4Sg9CzAXDVcOWgXVmjrK+NsDUyhYoZH2EXEjswF+xLd
+ 9sQ3j6anTkV7qydEZhbKrfWUqeVD7q+N142CXHnHFedQtJ9JijwWW2LL0+8KTfZwZGuM+o/LSkk
+ oIDaIvtreIKnLKiim5IzlQtiKb/LiPNxpN2PQ==
+X-Received: by 2002:a05:6808:c1a8:b0:45c:9973:c539 with SMTP id
+ 5614622812f47-45c9bfd2106mr6036231b6e.26.1768925876550; 
+ Tue, 20 Jan 2026 08:17:56 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf28efefsm8613552a34.14.2026.01.20.08.17.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jan 2026 08:17:56 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, E Shattow <e@freeshell.de>, 
+ =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>, 
+ Manjae Cho <manjae.cho@samsung.com>, Paresh Bhagat <p-bhagat@ti.com>
+In-Reply-To: <177fa1c7-edaa-4693-8f3b-c3ceabc3d563@gmx.de>
+References: <177fa1c7-edaa-4693-8f3b-c3ceabc3d563@gmx.de>
+Subject: Re: Pull request efi-2026-04-rc1-2
+Message-Id: <176892587549.422914.15059919746380332316.b4-ty@konsulko.com>
+Date: Tue, 20 Jan 2026 10:17:55 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 20 Jan 2026 17:15:29 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,34 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After U-Boot's DTC/libfdt update, device tree overlay application could
-fail with FDT_ERR_ALIGNMENT due to the overlay DTBO being loaded at a
-misaligned address. Change the FIT image loader option in image-fit.c
-from FIT_LOAD_IGNORED to FIT_LOAD_OPTIONAL_NON_ZERO, to ensure overlays
-are loaded at properly aligned addresses and any alignment errors are
-resolved.
+On Tue, 20 Jan 2026 15:01:25 +0100, Heinrich Schuchardt wrote:
 
-Tested on: PolarFire SoC Icicle Kit
+> I now removed your patches about the development process as some
+> comments came up.
+> 
+> The following changes since commit 6b2d05748cf3cd6ba417a96c00602b0122e10af6:
+> 
+>    Merge tag 'u-boot-imx-master-20260117' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2026-01-17 22:29:24
+> -0600)
+> 
+> [...]
 
-Fixes: 0535e46d55d ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
-Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
----
- boot/image-fit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Merged into u-boot/master, thanks!
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 2d040e38d97..3a327d07784 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 			addr, &uname, &uconfig,
- 			arch, IH_TYPE_FLATDT,
- 			BOOTSTAGE_ID_FIT_FDT_START,
--			FIT_LOAD_IGNORED, &ovload, &ovlen);
-+			FIT_LOAD_OPTIONAL_NON_ZERO, &ovload, &ovlen);
- 		if (ov_noffset < 0) {
- 			printf("load of %s failed\n", uname);
- 			continue;
 -- 
-2.43.0
+Tom
+
 
