@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FDC7CA5FA6
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 16:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CEECA5FA0
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 16:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6850783B5E;
+	by phobos.denx.de (Postfix) with ESMTP id B8C5483B71;
 	Tue, 20 Jan 2026 17:15:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="DBKcSmy8";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="TpIuOPJ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A4AE83A2B; Tue, 20 Jan 2026 16:29:10 +0100 (CET)
+ id 6555583A8F; Tue, 20 Jan 2026 16:29:43 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
+ [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F3AC83A8F
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:29:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12FB883A2B
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:29:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=47332a659=Jamie.Gibbons@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1768922947; x=1800458947;
+ t=1768922981; x=1800458981;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=gJ2ZxQt0ZDdEY0Zj2jIVXC/l62hAI2IGhvnrI8R0GuU=;
- b=DBKcSmy8n9HUNpDkA+0rdWY8jP1NEeuXDkdmhUMXZIRTJ2SLqaZU248O
- t350Xt/EFbO+ixrE52tZf04w4CgKCVO9mRM9IwwGIfLNR1iK7VWAG/ew+
- D92ZEy2G/ULiczjpkqv0lhOnfhZqfrvs4PC5HE3cT9xlsUaLASQ0TQmRF
- Kfl2OUQvqYNe6maAu3IbWwuhNbjGiYpoKeXQsO1o7Kff+ugTZtjz7sVeO
- CbDyVNjWw5VM/CNuxezz0KXprTHCUmBMGvztMe4gGaQd2G8xHuBZkyxV5
- 4jLG/dcmvyLAxMkXDNKoScCaU1VETFoAqEmxs9pxPkOENFK0GciJhNiPq Q==;
-X-CSE-ConnectionGUID: aoX0kG6qQZyw2MNImWKp+w==
-X-CSE-MsgGUID: 0g+F8x6ZRPmBWFZpYAB2rQ==
-X-IronPort-AV: E=Sophos;i="6.21,240,1763449200"; d="scan'208";a="283531039"
+ bh=kH4yQrAyGm6NzFCxrT1Afc8NBjX//8r2REpUVo4Oulw=;
+ b=TpIuOPJ++twZ9beRBc6NVQZg5VLCigKTevbENyoHejD6WMd13xTFKyTI
+ oUg0mNY7TbFGVNved8mkyZggKWQkgh3SMfdpU8TAHufj4fuMZZVfbp7BF
+ 1llAkJ4WOsSLoEzjKF0snm8pdfcm6A6ZlQKAtOmuorQnw1ZOOaFB7u+3O
+ PawPPyjJBZX8tsoSXRIgBgjWSQWLeWp3wo50a8BdJg6CxUjZcdwipZ9iA
+ Rg6+P7evVZ1jFkB3VmvdwAjdfEp1t/Nirviyn86Sa1XsTXX0RrWOHRtAf
+ 8wm5ADaMMb7tGZ8qcx0ZndYNcBABr8xp+vT0AI6FRYaHdUvIQ4K/PToVy g==;
+X-CSE-ConnectionGUID: iuQXoqc9RnGYj0B0Zp4BxQ==
+X-CSE-MsgGUID: LPWufkU5Qe2Lxd+HlrdC0A==
+X-IronPort-AV: E=Sophos;i="6.21,240,1763449200"; d="scan'208";a="52602087"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Jan 2026 08:29:04 -0700
+ by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Jan 2026 08:29:39 -0700
 Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
  chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.29; Tue, 20 Jan 2026 08:28:31 -0700
+ 15.2.2562.29; Tue, 20 Jan 2026 08:28:28 -0700
 Received: from jamie-dev.microchip.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Tue, 20 Jan 2026 08:28:29 -0700
+ 15.1.2507.58 via Frontend Transport; Tue, 20 Jan 2026 08:28:26 -0700
 From: Jamie Gibbons <jamie.gibbons@microchip.com>
 To: <u-boot@lists.denx.de>
 CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
@@ -60,9 +60,9 @@ CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
  <sjg@chromium.org>, Leo <ycliang@andestech.com>, Heinrich Schuchardt
  <xypron.glpk@gmx.de>, Cyril Jean <cyril.jean@microchip.com>,
  <jamie.gibbons@microchip.com>
-Subject: [PATCH 2/2] configs: microchip_mpfs_generic: fix boot failure
-Date: Tue, 20 Jan 2026 15:33:13 +0000
-Message-ID: <20260120153314.95091-3-jamie.gibbons@microchip.com>
+Subject: [PATCH 1/2] boot: Fix dtbo application by ensuring overlay alignment
+Date: Tue, 20 Jan 2026 15:33:12 +0000
+Message-ID: <20260120153314.95091-2-jamie.gibbons@microchip.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260120153314.95091-1-jamie.gibbons@microchip.com>
 References: <20260120153314.95091-1-jamie.gibbons@microchip.com>
@@ -86,28 +86,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Recent changes to device resource management (DEVRES) increased early
-memory requirements during boot. The previous value was insufficient,
-resulting in boot failures. Increase CONFIG_SYS_MALLOC_F_LEN to provide
-enough early malloc pool for successful boot and device initialisation.
+After U-Boot's DTC/libfdt update, device tree overlay application could
+fail with FDT_ERR_ALIGNMENT due to the overlay DTBO being loaded at a
+misaligned address. Change the FIT image loader option in image-fit.c
+from FIT_LOAD_IGNORED to FIT_LOAD_OPTIONAL_NON_ZERO, to ensure overlays
+are loaded at properly aligned addresses and any alignment errors are
+resolved.
 
+Tested on: PolarFire SoC Icicle Kit
+
+Fixes: 0535e46d55d ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
 Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 ---
- configs/microchip_mpfs_generic_defconfig | 2 +-
+ boot/image-fit.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/microchip_mpfs_generic_defconfig b/configs/microchip_mpfs_generic_defconfig
-index 22f67414a7c..973ed09fa87 100644
---- a/configs/microchip_mpfs_generic_defconfig
-+++ b/configs/microchip_mpfs_generic_defconfig
-@@ -1,6 +1,6 @@
- CONFIG_RISCV=y
- CONFIG_SYS_MALLOC_LEN=0x800000
--CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_SYS_MALLOC_F_LEN=0x2800
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x2000
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 2d040e38d97..3a327d07784 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 			addr, &uname, &uconfig,
+ 			arch, IH_TYPE_FLATDT,
+ 			BOOTSTAGE_ID_FIT_FDT_START,
+-			FIT_LOAD_IGNORED, &ovload, &ovlen);
++			FIT_LOAD_OPTIONAL_NON_ZERO, &ovload, &ovlen);
+ 		if (ov_noffset < 0) {
+ 			printf("load of %s failed\n", uname);
+ 			continue;
 -- 
 2.43.0
 
