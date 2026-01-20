@@ -4,85 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A4AD2ECE9
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:31:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9E7D2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E7E683B22;
-	Tue, 20 Jan 2026 15:31:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6325A83AA0;
+	Tue, 20 Jan 2026 15:32:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YiC9gQmd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lHbPTq5Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 744C683B0D; Tue, 20 Jan 2026 15:31:08 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0612C83B03; Tue, 20 Jan 2026 15:32:50 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B12383A6A
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:31:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ADEC83A8D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:32:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-45c819ca0f1so3202488b6e.0
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 06:31:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768919460; x=1769524260; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CgAS8e4myiPCu42TnFrG7j6Oi21syes+SYo2y9SJBmI=;
- b=YiC9gQmdAUcdLPp04cIcJlpkkx5mNH9OREtl5u+ZQ/XcA4X0yjKQAo8coaYmCUh6SE
- 60o+0GdSyT9TOAyudPKWtUTze57WN6YuA5NLXraefh11Z+bIKvHyUnSZvmEjti/axE8T
- I3Dn75nF+vw4KYhRr75s9URKchDsNPRQ8JEog=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768919460; x=1769524260;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=CgAS8e4myiPCu42TnFrG7j6Oi21syes+SYo2y9SJBmI=;
- b=tR7/DixMcoB+Ick3j/JnCAWsYIeQ3JtC2FE+yAr0r+Nsy59NukugPi1jL+sg6krR0t
- nNP3RoeYIZ/ba1ru6a3SAQb2Fubu0kSga7tAKrh+LWbiwu0qVdRuDC5dgmj31F5ReFQ6
- f0QEkEankzZn02yojeftrES+KmVIm13Q47ZASPumE8xClZGkWGd5S+o1JqthAUB5hC5I
- QaZ0bno91sZam1I2YzFO6fzmENPd6PgHQMiaqsWxD6wQ/NqMW96NbINNoOut4updqe14
- YFNiyqYkmlwEO7+ex5jiMF0RMQqUzcwGLpMQi8VYexOJJmCtAGraqv2s6A5mpZyr+hzL
- 9Xzg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxuZ6zLEoRD9XodgYJZpnXXprc+PuMWg/XGfVE4ABwI1x9vYro2HivDRgsHvqDLwQlPHZS2is=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxdgec/z2/GHD/PLN7jxTnYNxjOxXxk8GnBPavUqeFf2H1fHLhP
- Uikm55A2A1hOobgMKRRu7Zegjqh7NIp5LNIxyeNMfw6MA17vP9ewWKBaEsdY4zlwpmA=
-X-Gm-Gg: AY/fxX6WVbfmf1cGwZgwk6uAamRUjnZupbBpps12diCuSkvBkTueFxANP4wf9LqxRK7
- vN/Dn4XCS7QUZAea1JaRsCqZ9fVp2fLpgDw5y/C3J+hsVDgLo1qlQOeNQ/VjGTCcT06saDtqyk9
- a9pqX7YIznXXT7LGauXiIn9pUwBoPlateYJ3n60gpyj1UVbbDyuNiz517toU2XbNSbZMzziCWBo
- 29uZjL4QavW60k0nhdKnwJiEQGuTQ1SMJVWYEmTia1mBZc2WVmWsnUke+/a0SKwi7K7/EEjejQ5
- RkPM0ElrE4n5ODJKU8R1544kp0A1fX0ArViQqKUJIrZnd2Dh7cDzUxKd3G+1Pxnpke2AMNTQ/RM
- EuhjKPTvLf4Ndl6R9tNEhZX20Y9ZfXbdt79W0A6tfJV5vmbRjPVQxXNItcvJv6A0jHW0doJfwQx
- PV+yMVQSzonQDAiSxGBaHustDvHP9TkA4Gsrrp3fSIHeMsWlydzMPiNDkNkm1/hP/QewgNg/UP2
- bYupYUEUHQc21jVUDxhv7LXpJxV8XnMQYUjvA==
-X-Received: by 2002:a05:6808:6905:b0:450:c6af:7c10 with SMTP id
- 5614622812f47-45c880ff49dmr9349723b6e.22.1768919459932; 
- Tue, 20 Jan 2026 06:30:59 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044baf38ffsm8657418fac.5.2026.01.20.06.30.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 06:30:59 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>, 
- Ray Liu <ray.xy.liu@gmail.com>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260118200416.690517-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20260118200416.690517-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH] Revert "arm: dts: an7581: set r_smpl for MMC in
- U-Boot"
-Message-Id: <176891945905.379251.12739237678736346622.b4-ty@konsulko.com>
-Date: Tue, 20 Jan 2026 08:30:59 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dwVCx2rnjz9vB1;
+ Tue, 20 Jan 2026 15:32:45 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1768919565;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HXsniV265UkTlk9MaROReSWJIn9hrS+Q/sDJPm5FJLg=;
+ b=lHbPTq5YqRrtrl60z8sNH7nAGf+WK5oUt/l5F3/IdJcP9Jp8N1WfE2lVWTI97m4uXDEirH
+ ReDjyypZxi4aYi4wbM52Rtu9AVSqIzFTRJ0cQYT8fjQm0H2hC0mvn+FuXtSrL/kd0V1AaS
+ VRmyDK/c0uu2j0VWJqcHPlU2edE/ioEiO2ZnNzYeoOi8Kz2c+FyimZdbvtpTSgeHur3pvM
+ b8a1RNEAn4BZQTt+k/GMlPrYmpyYXkxdhYrw6F9cq9OFzTzSb9ygypbQ5UaqMqS2Tnh0oe
+ SaGVqexCvTCqi6vNg0ksP41VuwL93BYTdLr90F9Z8epaOWA/2ubcKeXWg/inig==
+Message-ID: <d6ea8e7c-1fc4-4f05-8a6b-805c0be12f4c@mailbox.org>
+Date: Tue, 20 Jan 2026 15:32:43 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
+ v1.7.2-35-g52f07dcca47c
+To: Jamie.Gibbons@microchip.com, trini@konsulko.com
+Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
+ Valentina.FernandezAlanis@microchip.com
+References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
+ <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
+ <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
+ <bb9936a8bafa83fceed86f0805d2340914b52dca.camel@microchip.com>
+ <baa48570-2114-4313-9bac-280aab0960fb@mailbox.org>
+ <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
+ <712cfdc9-b3c3-4fca-8f14-763efdf5e0ae@mailbox.org>
+ <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 8jp5daap38twgi4dtosryxwosuwmnzmi
+X-MBO-RS-ID: eea1d3c66b4bc3541ec
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,23 +83,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 18 Jan 2026 23:04:16 +0300, Mikhail Kshevetskiy wrote:
-
-> On my AN7581 board, the same change in the Airoha ATF-2.10 source code
-> causes instability in eMMC reading. After the patch, in about 9 of 10
-> cases, ATF BL2 is unable to read FIP image from the eMMC flash. Thus
-> BL31 and U-Boot are unable to start.
+On 1/20/26 2:53 PM, Jamie.Gibbons@microchip.com wrote:
+> Hi Marek,
 > 
-> Lets revert commit 7cb79f8d3d55 ("arm: dts: an7581: set r_smpl for MMC
-> in U-Boot") until the issue will be investigated.
+> On Tue, 2026-01-20 at 11:58 +0100, Marek Vasut wrote:
+>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>> know the content is safe
+>>
+>> On 1/20/26 11:45 AM, Jamie.Gibbons@microchip.com wrote:
+>>
+>> Hello Jamie,
+>>
+>>>> 2489                 debug("%s loaded at 0x%08lx len=0x%08lx\n",
+>>>> 2490                                 uname, ovload, ovlen);
+>>>> 2491                 ov = map_sysmem(ovload, ovlen);
+>>>> 2492
+>>>> 2493                 ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+>>>> 2494                 ovcopy = memalign(8, ovcopylen);
+>>>> 2495                 if (!ovcopy) {
+>>>> 2496                         printf("failed to duplicate DTO
+>>>> before
+>>>> application\n");
+>>>> 2497                         fdt_noffset = -ENOMEM;
+>>>> 2498                         goto out;
+>>>> 2499                 }
+>>>> 2500
+>>>> 2501                 err = fdt_open_into(ov, ovcopy, ovcopylen);
+>>>> 2502                 if (err < 0) {
+>>>> 2503                         printf("failed on fdt_open_into for
+>>>> DTO\n");
+>>>>
+>>>> This is where it fails. Is $ov or $ovcopy 4-byte aligned ? Enable
+>>>> the
+>>>> debug() print at the beginning (or #define DEBUG at the beginning
+>>>> of
+>>>> this file) to find out.
+>>>>
+>>>> If $ov is 4-byte aligned, try to generate your fitImage with
+>>>> "mkimage
+>>>> ... -E -B 8 ..." , does that make any difference ?
+>>>
+>>> Thank you for your suggestions.
+>>>
+>>> I followed your advice and investigated the alignment of the
+>>> overlay
+>>> buffer. The error code returned by fdt_open_into was
+>>> FDT_ERR_ALIGNMENT
+>>> (-19), confirming that the overlay was not sufficiently aligned for
+>>> the
+>>> updated libfdt.
+>>>
+>>> I modified our Buildroot post-image.sh script to generate the FIT
+>>> image
+>>> using the suggested arguments. With the -B 8 option, all blobs in
+>>> the
+>>> FIT image are now 8-byte aligned. This resolved the alignment
+>>> error,
+>>> and device tree overlays are now applied successfully in U-Boot.
+>>
+>> But this is not the fix. Which parameter of fdt_open_into() is
+>> unaligned, the ov or ovcopy ?
 > 
-> [...]
+> ov is unaligned
+Does this help even without the mkimage -B 8 ?
 
-Applied to u-boot/master, thanks!
-
-[1/1] Revert "arm: dts: an7581: set r_smpl for MMC in U-Boot"
-      commit: 9441ad8715d19e3408313d0b5f51e3ca42d21595
--- 
-Tom
-
-
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 2d040e38d97..49fdc1f0535 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
+ulong addr,
+                         addr, &uname, &uconfig,
+                         arch, IH_TYPE_FLATDT,
+                         BOOTSTAGE_ID_FIT_FDT_START,
+-                       FIT_LOAD_IGNORED, &ovload, &ovlen);
++                       FIT_LOAD_OPTIONAL_NON_ZERO, &ovload, &ovlen);
+                 if (ov_noffset < 0) {
+                         printf("load of %s failed\n", uname);
+                         continue;
