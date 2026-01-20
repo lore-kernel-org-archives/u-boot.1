@@ -4,98 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15851D2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 13:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF8D9D2ECE9
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 13:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53C7883A8F;
-	Tue, 20 Jan 2026 14:36:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9391783AC5;
+	Tue, 20 Jan 2026 14:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="jP4Fyq89";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BEgPbjse";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D6B583AA0; Tue, 20 Jan 2026 14:36:51 +0100 (CET)
+ id D512483AB8; Tue, 20 Jan 2026 14:36:52 +0100 (CET)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 137F183A8D
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 14:36:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE75A83A91
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 14:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javierm@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1768916207;
+ s=mimecast20190719; t=1768916209;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=fgCj3kIirxMMy9JiJTJFUP8W5q9DshUgVIWOJ2zmB08=;
- b=jP4Fyq89GAs+Co7vA1qFAACEdfuXyfhkFAllJ3I2O7fLCX6RtsBgHUn5lVJiIWFLZqduIj
- 5SdmHCW2LI4FCr1jrKrKLi0jG3/9sWmq/UJMqDRBLiQdsQTkcFkGfitTlOucFCBfvthYW+
- llfT5Ubdlqgcr2MBImur5qWQBFiKENw=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zUZ9zKGiGazvekQYd0gK8/T6tGJkQJpqSV5e0fyFtkk=;
+ b=BEgPbjset04vjSbmbTb0pkLdXetVesiK1sDWNdRWXxsNNcFBaZVARs9zIaAX4JkOSyaqUK
+ Z45paX6EGj/HCXC3jR0QPUvRR9zsWZRHXVyAcy9Fr71PQwBUgRmzgMU861g0Ru1hBDiHyj
+ vqkq+iJqrgEZVKGYsq/IXgGgXBrjqpc=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-526-zAiHF1g-OK2Ypf442_mp-g-1; Tue, 20 Jan 2026 08:36:46 -0500
-X-MC-Unique: zAiHF1g-OK2Ypf442_mp-g-1
-X-Mimecast-MFC-AGG-ID: zAiHF1g-OK2Ypf442_mp-g_1768916205
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-4358fe2e7e1so553942f8f.1
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 05:36:46 -0800 (PST)
+ us-mta-340-wCp8zhyvO5C1Qf-3nETNWQ-1; Tue, 20 Jan 2026 08:36:48 -0500
+X-MC-Unique: wCp8zhyvO5C1Qf-3nETNWQ-1
+X-Mimecast-MFC-AGG-ID: wCp8zhyvO5C1Qf-3nETNWQ_1768916207
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-432c05971c6so4359315f8f.1
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 05:36:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768916204; x=1769521004;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fgCj3kIirxMMy9JiJTJFUP8W5q9DshUgVIWOJ2zmB08=;
- b=Ayt3C8qhLp+SHsHBSWPOdCKn6VFaDuMnXh88HUpRq8NOC9gNYWTqF2PWOIa91Z77F7
- LadixWz8B1I1FseC7wIZ2ZDa3hpBjjf5MnnhEGyAjvKIpFyhB+jUT9kCZZOS15zQdnU/
- Z9d4q1JsZBlD5jRVu7AEuqwaUr1zas5chBHmezXHC6H8wxS4Cw2CyReGatwHG9sYmj05
- nFekZZEIoOHVFVOfy8ccmCzebB0LJzgU4laE+A9b45Fo5d+SUShchzTSKx9TKMWsBwtS
- yhz1Ix7YsgI1njTZx5BoKbdXLEXwFIo7d/jpYNiui8qk/3lW3E2ATfm7SMAgqt57BOjd
- DCXA==
-X-Gm-Message-State: AOJu0YyImSt/qrTaibYQBQcSFV4WdaKs/0mFiWJj8AxUxGx1ymrTkVqQ
- AjKcRXDMVwudYFRD72H82NflVU8MMsx5Ph34jxP/+WD3JbYX/748cX/Esg3Go/Dh+ArmxncHnHm
- MGCIB2yE5+kaDz1YNOTCbP+gf4Nc8r6voFiEJj2a0nTBgoReTsUnGl0QM+8vZ4poYGJgQ4UCTaW
- dlnhY4MgVZJkZJXVo/skqa+f61hKsIF11XZIVqvQ==
-X-Gm-Gg: AZuq6aIfczP7OyYZijBArMEp8Wdpc9X0cZVsTAEP529e6Phw/V33YxDpGKnCSC9VDko
- i+Fnrl3/ZEyGxVNrWyC2VzpkoR+nQrim/lAfcmb1wohnyyHpuIjjt3fFpQedmASrPJtsXy81zwm
- HmikzWSfN7HRQhFFedrFihhDkxFBYuk11/AExe0MDjkCt86grOT2o3NL8TRksaH4wUUehD5FBla
- Gxz7I7MqPyR+c6Q6JOKI73wBL/RnEp6GsW61iueX2WOUEZfC1nMvxo/TJE0zN6scRRvJ/B6ihsx
- uVOM+lmTmWGNp6fmvR4H2rtEA6yc19lC1TyjQd6qhrznP5vBnX+9mOhzahxooUrVFzpG0H4jSm4
- mZwDPQVbrF56apPdvEQfcO6YIla8Pw0WvQ7I=
-X-Received: by 2002:a05:6000:2909:b0:431:54c:6f0 with SMTP id
- ffacd0b85a97d-4358fed1181mr3280949f8f.4.1768916204562; 
- Tue, 20 Jan 2026 05:36:44 -0800 (PST)
-X-Received: by 2002:a05:6000:2909:b0:431:54c:6f0 with SMTP id
- ffacd0b85a97d-4358fed1181mr3280890f8f.4.1768916204047; 
- Tue, 20 Jan 2026 05:36:44 -0800 (PST)
+ d=1e100.net; s=20230601; t=1768916207; x=1769521007;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=zUZ9zKGiGazvekQYd0gK8/T6tGJkQJpqSV5e0fyFtkk=;
+ b=kTeUgbcUw/Xs3klOfm6ARCviI4b2bgQ0K1jnC5yFdeIwpN6diGLoGNY1ncseqxoFBu
+ Ca5oUakwH2OmQXDzeDhniitBId1AexezJLROX6CyHgRhA8AXxLpE7CfCzEdR8ABpOkzx
+ GYuwn9UHiOhuleAuhe7oX5YFWj5Bxqo+Q8HtSRn1b0QKigyMcUmc/daAP4duwoHAoBrV
+ lTqouDNcjBAtRsM/4cBw7ZhJdO7Is2kGakje/97bFUIbC+1/PfCuivEv1jCCzQ11Ld6d
+ Latxpnh3segxpEvmXN6TaeWxlIXkqlpcVsRsqZI1DM+3/I66WSQARVAChuJ6LU7RS9i8
+ A4dQ==
+X-Gm-Message-State: AOJu0YxYZAp97Z0NendH5YUdvg7tSbq6aTvedqXqaO0vroYrjMFhDviM
+ 2dNIP7v0EOc08GG/HpzUECCkmX+QTY554nGZnq5b/RjOytrxd1TUdRnSuuOeNj1lVvkTDpxek1h
+ wxVI6TpbR3Pv0xSw1/5RNCpqD1EPYrTQEEdqpZENUxvcbmA2s0iuKmL4fgq+FZ/6ktOpAo0lCkQ
+ 7Gi4XuDZNP59/+pZ9uTatS2vcHT7zHZ47xMarlVg==
+X-Gm-Gg: AZuq6aI7CM85IrdYXEsVzDPCuu8db3q+wBSO403ye/6OGhjDA8/rZ04lY3dCUHQxUk8
+ pELYTEfipyeR8MNMks2oTr2jB22VtFcQTR5M8K+TvF76reNZJnvI/jsTr51AeHr/lAn/GvO4Avt
+ JKdJTXM6EjbS+Tp6oAnbzF/KJSVIB88XSbDFk76KHLR9oKYlJ10i0pxHrspRlVubcc95Xpjy726
+ sPmNs5x1tRfyIaSezig+IXmKG0vMHmwE/BFwFLN0VAS3EbDpFkQ9EmNY179KBHJqzzW6D6FsS8C
+ R7hCMguTGaFzDm908B26NEIsvGzEK7lCSYbwxOd6Q9hzll1Aj2LVWsjIaS35Xp+1m6sLbMhDoq+
+ 3uNPFyfMor5GIqr59mKKdTc9CFb3xCWZNExU=
+X-Received: by 2002:a5d:5d87:0:b0:435:9336:21f3 with SMTP id
+ ffacd0b85a97d-435933623b8mr2187681f8f.10.1768916206802; 
+ Tue, 20 Jan 2026 05:36:46 -0800 (PST)
+X-Received: by 2002:a5d:5d87:0:b0:435:9336:21f3 with SMTP id
+ ffacd0b85a97d-435933623b8mr2187628f8f.10.1768916206216; 
+ Tue, 20 Jan 2026 05:36:46 -0800 (PST)
 Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4356997eb1fsm29551255f8f.35.2026.01.20.05.36.43
+ ffacd0b85a97d-43595e0a705sm1290963f8f.14.2026.01.20.05.36.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 05:36:43 -0800 (PST)
+ Tue, 20 Jan 2026 05:36:45 -0800 (PST)
 From: Javier Martinez Canillas <javierm@redhat.com>
 To: u-boot@lists.denx.de
 Cc: eballetb@redhat.com, alexl@redhat.com,
  Javier Martinez Canillas <javierm@redhat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Javier Tia <javier.tia@linaro.org>,
- Maks Mishin <maks.mishinfz@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Subject: [PATCH 0/5] efi_loader: disk: Add EFI_PARTITION_INFO_PROTOCOL support
- for MBR
-Date: Tue, 20 Jan 2026 14:36:09 +0100
-Message-ID: <20260120133630.1695055-1-javierm@redhat.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] disk: part_dos: Move header to the main include directory
+Date: Tue, 20 Jan 2026 14:36:10 +0100
+Message-ID: <20260120133630.1695055-2-javierm@redhat.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260120133630.1695055-1-javierm@redhat.com>
+References: <20260120133630.1695055-1-javierm@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: W3PpstMQnoAIiqEdqiumZCL1-ezjGx9_nzeMKY921ng_1768916205
+X-Mimecast-MFC-PROC-ID: yhlwQxSfOO29LiIXwXAOIGV0NF4OmFqtme9q4cp8YbI_1768916207
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -115,43 +111,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series extends the EFI_PARTITION_INFO_PROTOCOL implementation
-to also support MBR partition tables schemes.
+There are two different struct definitions for MBR partition table
+entries: one in part_dos.h and a nearly identical one in part_efi.h.
 
-When EFI_PARTITION_INFO_PROTOCOL was implented, only GPT support was
-added but this can cause compatibility issues with platforms whose boot
-ROM only supports MBR. This series add support for MBR partition tables
-to the protocol, making U-Boot compatible with systems that require a
-legacy MBR table.
+To enable future consolidation of these two structures, move part_dos.h
+to the main include directory. This makes it accessible from other parts
+of the codebase, such as part_efi.h, and is the first step toward removing
+the redundant definition.
 
-Patches #1 to #3 are preparatory changes to remove duplicated definitions
-of data structures to store the MBR records.
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
 
-Finally patch #4 adds the MBR support to the EFI_PARTITION_INFO_PROTOCOL
-implementation and patch #5 enhances the protocol selftest, to check that
-the partition record data is correctly filled.
+ disk/part_dos.c              | 2 +-
+ {disk => include}/part_dos.h | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename {disk => include}/part_dos.h (100%)
 
-
-Javier Martinez Canillas (5):
-  disk: part_dos: Move header to the main include directory
-  disk: part_dos: Align dos_partition_t with struct partition
-  disk: part_efi: Remove redundant struct partition definition
-  efi_loader: disk: Extend EFI_PARTITION_INFO_PROTOCOL to support MBR
-  efi_selftest: Enhance MBR test for PARTITION_INFO_PROTOCOL
-
- disk/part_dos.c                              | 77 ++++++++++++--------
- disk/part_efi.c                              |  4 +-
- include/part.h                               | 14 ++++
- {disk => include}/part_dos.h                 |  6 +-
- include/part_efi.h                           | 19 +----
- lib/efi_loader/efi_disk.c                    |  9 ++-
- lib/efi_selftest/efi_selftest_block_device.c | 12 +++
- 7 files changed, 86 insertions(+), 55 deletions(-)
- rename {disk => include}/part_dos.h (87%)
-
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index 18dd35c9b98e..2545cc6bf5d2 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -19,7 +19,7 @@
+ #include <vsprintf.h>
+ #include <asm/unaligned.h>
+ #include <linux/compiler.h>
+-#include "part_dos.h"
++#include <part_dos.h>
+ #include <part.h>
+ 
+ #define DOS_PART_DEFAULT_SECTOR 512
+diff --git a/disk/part_dos.h b/include/part_dos.h
+similarity index 100%
+rename from disk/part_dos.h
+rename to include/part_dos.h
 -- 
 2.52.0
-
-base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-branch: add-mbr-efi-part-info-proto
 
