@@ -4,69 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9E7D2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F6B7D2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6325A83AA0;
-	Tue, 20 Jan 2026 15:32:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A78183AA0;
+	Tue, 20 Jan 2026 15:35:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lHbPTq5Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hShyF6qY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0612C83B03; Tue, 20 Jan 2026 15:32:50 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C66D83B07; Tue, 20 Jan 2026 15:35:00 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ADEC83A8D
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:32:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7757A83A8D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:34:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dwVCx2rnjz9vB1;
- Tue, 20 Jan 2026 15:32:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768919565;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HXsniV265UkTlk9MaROReSWJIn9hrS+Q/sDJPm5FJLg=;
- b=lHbPTq5YqRrtrl60z8sNH7nAGf+WK5oUt/l5F3/IdJcP9Jp8N1WfE2lVWTI97m4uXDEirH
- ReDjyypZxi4aYi4wbM52Rtu9AVSqIzFTRJ0cQYT8fjQm0H2hC0mvn+FuXtSrL/kd0V1AaS
- VRmyDK/c0uu2j0VWJqcHPlU2edE/ioEiO2ZnNzYeoOi8Kz2c+FyimZdbvtpTSgeHur3pvM
- b8a1RNEAn4BZQTt+k/GMlPrYmpyYXkxdhYrw6F9cq9OFzTzSb9ygypbQ5UaqMqS2Tnh0oe
- SaGVqexCvTCqi6vNg0ksP41VuwL93BYTdLr90F9Z8epaOWA/2ubcKeXWg/inig==
-Message-ID: <d6ea8e7c-1fc4-4f05-8a6b-805c0be12f4c@mailbox.org>
-Date: Tue, 20 Jan 2026 15:32:43 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7cfd95f77a3so3523108a34.0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 06:34:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1768919692; x=1769524492; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qy2/rKLmxYGfcLkGh7+rstna/5ywXOAUuEE5k2iKRA4=;
+ b=hShyF6qY4VlGlh+uvkTNDAnFVq+LLI1U6jsZv994EZ4kHKhN6ZsNTQvgflh5fbov6I
+ ZjzuW0y6Z0pe61Z1XRl2bctL7xUcfrObkq+L1cv+mcBL//g7FEjkMl9/fDH/yPhTkmur
+ l9l0IMLhJ240akvtBBCTSWNLGkDZa/wrc/zLU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768919692; x=1769524492;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Qy2/rKLmxYGfcLkGh7+rstna/5ywXOAUuEE5k2iKRA4=;
+ b=rplqYg0LiG9tZtjwtquhSiEwvBe1wERDfNQcr52T75pGX36D04gLBwfMz95B1Ryvfs
+ jreQIatqCLriWiAtqfBiZHyAqCrD0SwKotKUPnH3/vn+dsHPw2g8pgO/8CuYfA8CK6U2
+ 7bmHeleJhA1q17N3NTzWZazO3VAG/tPZGAwmqPKeeRkbUwXkEbraX/LpRisZpMdzKVOF
+ skAnyrVmrzjSSvrBEIbBLuP+EDdMQOzdjhxgv+tXLvf+zDbDHVWmHm/+SJn7nFzVROKE
+ sB0Oeoexb0E4gB+Erei8xEl+ermu5byGCwQY5yeUrmYqjVP6J/5xBAZkzolFaovsV96x
+ g47A==
+X-Gm-Message-State: AOJu0YynOMosEnMPPfs+BnZacrf4JK4EJGj/tOuC48zi5F0YEsfls3yB
+ vg7tmAPxT9/sZFaKnyQL4mKbRGF3+iE6405xxagAU06Y+OzhEOQyUKgC1R7T+RBb2bg=
+X-Gm-Gg: AY/fxX67aD8+5tc7stN1FTsRnrQJqcUKNsX4ZfajpPoBK87p4vFb4avry5SOom6R+1H
+ RkntCyQRVsfsdHeKT+i7Z9mZkYT8bYxoBEbeNnQXcT9VKo5SlgmPllNf0AUeyLf5QsKnWRGbusV
+ +6f5xGIlI2kHD/7atU7iRKVYyk/BgS17gH4aRD0KjS3yoYoWdP/wzEeU7UJneFO25t94C1DkDHr
+ SvjZDzG28iXgczh3T0ViubE9XIcJMPNYJvcNCDiJUfsAufw1C0J+1BGlYUuR2Qg2XeleV3QfZqd
+ F9yVfTxWxs7XbKnhT71l/m92f1wpbk5upldSQNblzU7tFwW4XN+siLlB3sJHZLukjXL0mJlrgby
+ /qJhgz/y178vXtfqr6puzjL/x7qdSKEeGXvIz3UOIxcGuRqIxvikj3GBLte0SmO9E9DMIvtXChr
+ zKCI6lqAghUEZ5Ttk4Tp1YoOLnDaCMwjkf4FN+ssKPgRFnAVz3dBB5yOI3SHvbZN9zytrrtnDW4
+ ERUAYSoihB6Y2RD52xVEig6RsdB/4kI/MdmuFbsWn5SGJbDSQ==
+X-Received: by 2002:a05:6830:6d41:b0:7c7:266:392d with SMTP id
+ 46e09a7af769-7cfdff5bd99mr6487439a34.13.1768919692225; 
+ Tue, 20 Jan 2026 06:34:52 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf28ef44sm8689345a34.18.2026.01.20.06.34.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jan 2026 06:34:51 -0800 (PST)
+Date: Tue, 20 Jan 2026 08:34:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: u-boot@lists.denx.de, eballetb@redhat.com, alexl@redhat.com
+Subject: Re: [PATCH 1/5] disk: part_dos: Move header to the main include
+ directory
+Message-ID: <20260120143449.GH3416603@bill-the-cat>
+References: <20260120133630.1695055-1-javierm@redhat.com>
+ <20260120133630.1695055-2-javierm@redhat.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
- v1.7.2-35-g52f07dcca47c
-To: Jamie.Gibbons@microchip.com, trini@konsulko.com
-Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
- Valentina.FernandezAlanis@microchip.com
-References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
- <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
- <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
- <bb9936a8bafa83fceed86f0805d2340914b52dca.camel@microchip.com>
- <baa48570-2114-4313-9bac-280aab0960fb@mailbox.org>
- <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
- <712cfdc9-b3c3-4fca-8f14-763efdf5e0ae@mailbox.org>
- <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <856f8b6cdbc2311ac535d9b03c6e2d21a859c526.camel@microchip.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8jp5daap38twgi4dtosryxwosuwmnzmi
-X-MBO-RS-ID: eea1d3c66b4bc3541ec
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5JdVvHfaitE5gBvT"
+Content-Disposition: inline
+In-Reply-To: <20260120133630.1695055-2-javierm@redhat.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,81 +98,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/20/26 2:53 PM, Jamie.Gibbons@microchip.com wrote:
-> Hi Marek,
-> 
-> On Tue, 2026-01-20 at 11:58 +0100, Marek Vasut wrote:
->> EXTERNAL EMAIL: Do not click links or open attachments unless you
->> know the content is safe
->>
->> On 1/20/26 11:45 AM, Jamie.Gibbons@microchip.com wrote:
->>
->> Hello Jamie,
->>
->>>> 2489                 debug("%s loaded at 0x%08lx len=0x%08lx\n",
->>>> 2490                                 uname, ovload, ovlen);
->>>> 2491                 ov = map_sysmem(ovload, ovlen);
->>>> 2492
->>>> 2493                 ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
->>>> 2494                 ovcopy = memalign(8, ovcopylen);
->>>> 2495                 if (!ovcopy) {
->>>> 2496                         printf("failed to duplicate DTO
->>>> before
->>>> application\n");
->>>> 2497                         fdt_noffset = -ENOMEM;
->>>> 2498                         goto out;
->>>> 2499                 }
->>>> 2500
->>>> 2501                 err = fdt_open_into(ov, ovcopy, ovcopylen);
->>>> 2502                 if (err < 0) {
->>>> 2503                         printf("failed on fdt_open_into for
->>>> DTO\n");
->>>>
->>>> This is where it fails. Is $ov or $ovcopy 4-byte aligned ? Enable
->>>> the
->>>> debug() print at the beginning (or #define DEBUG at the beginning
->>>> of
->>>> this file) to find out.
->>>>
->>>> If $ov is 4-byte aligned, try to generate your fitImage with
->>>> "mkimage
->>>> ... -E -B 8 ..." , does that make any difference ?
->>>
->>> Thank you for your suggestions.
->>>
->>> I followed your advice and investigated the alignment of the
->>> overlay
->>> buffer. The error code returned by fdt_open_into was
->>> FDT_ERR_ALIGNMENT
->>> (-19), confirming that the overlay was not sufficiently aligned for
->>> the
->>> updated libfdt.
->>>
->>> I modified our Buildroot post-image.sh script to generate the FIT
->>> image
->>> using the suggested arguments. With the -B 8 option, all blobs in
->>> the
->>> FIT image are now 8-byte aligned. This resolved the alignment
->>> error,
->>> and device tree overlays are now applied successfully in U-Boot.
->>
->> But this is not the fix. Which parameter of fdt_open_into() is
->> unaligned, the ov or ovcopy ?
-> 
-> ov is unaligned
-Does this help even without the mkimage -B 8 ?
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 2d040e38d97..49fdc1f0535 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
-ulong addr,
-                         addr, &uname, &uconfig,
-                         arch, IH_TYPE_FLATDT,
-                         BOOTSTAGE_ID_FIT_FDT_START,
--                       FIT_LOAD_IGNORED, &ovload, &ovlen);
-+                       FIT_LOAD_OPTIONAL_NON_ZERO, &ovload, &ovlen);
-                 if (ov_noffset < 0) {
-                         printf("load of %s failed\n", uname);
-                         continue;
+--5JdVvHfaitE5gBvT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jan 20, 2026 at 02:36:10PM +0100, Javier Martinez Canillas wrote:
+
+> There are two different struct definitions for MBR partition table
+> entries: one in part_dos.h and a nearly identical one in part_efi.h.
+>=20
+> To enable future consolidation of these two structures, move part_dos.h
+> to the main include directory. This makes it accessible from other parts
+> of the codebase, such as part_efi.h, and is the first step toward removing
+> the redundant definition.
+>=20
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--5JdVvHfaitE5gBvT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaW+SiQAKCRAr4qD1Cr/k
+CjTDAQDUK2l3wboaBNPvrOr3veQbQ6eHXNz0t1Wb+OgxU/9JQgEAzAN/iW411CCY
+2iV+j0UTP+f3GaSrAFJFrim6tN018Qc=
+=p34l
+-----END PGP SIGNATURE-----
+
+--5JdVvHfaitE5gBvT--
