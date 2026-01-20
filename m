@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12033D2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:31:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C08FD2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 14:31:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8BA483AA0;
-	Tue, 20 Jan 2026 15:31:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2973A83A8D;
+	Tue, 20 Jan 2026 15:31:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s+2KZKAT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FvA/9J9w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9770A83A6A; Tue, 20 Jan 2026 15:31:05 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id C0AD683B0B; Tue, 20 Jan 2026 15:31:07 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70E6A83AEE
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:31:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8E2A83AA0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 15:31:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-45c7400259bso2029711b6e.3
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 06:31:03 -0800 (PST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-4058fd4666eso2273746fac.3
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 06:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768919462; x=1769524262; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768919463; x=1769524263; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hRSyut+X1bbFPT/7B4d87/Nt2QMtjmsJ+tf7g8dcUyw=;
- b=s+2KZKAT2JZ1cyms0ihdYYry2STzrqN8ULH+G6FpQU4DCif5uaXVeWpK5woSJ8hWwX
- 7plSWyP0Sd7bmhkgN9bM5t1bWtQwi4HH1wJ5ycfpt9npIO4wWMidiZ8RYWxCg9gGV3op
- 4KoyHy1szkjpMuxn2jlD0G5ltelxyWyDi0oLI=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LJ+dHRQXeL40RECF0ZysyWrSPM4KukG3oVcmALJjyLE=;
+ b=FvA/9J9wWylQKMMBBOblX8Bcc+UJWTahtoTyULbEJDi70VYGEgOniqyYJ1u9TBMvS+
+ 6xNTin8S18YNiChc1s98aoL/D8jKS6JvrBcS1gfeCo6ScvRRLoCfIz8o8xkBKH/o+xiS
+ 2alN8XtJ+yz+sA0xekTZ5TrQFgW6kkEwBhIH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768919462; x=1769524262;
+ d=1e100.net; s=20230601; t=1768919463; x=1769524263;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=hRSyut+X1bbFPT/7B4d87/Nt2QMtjmsJ+tf7g8dcUyw=;
- b=qy1mPQbz7QdIQCLTQ2CvWY3zOBNUOADwlPuGS03Rpu/SatjoEO1VaXBBQvYx4Iujfg
- P4eQeO4w1LXfd33ytf9uLowMytKBcmLg2UZC33AACQavRPKNda1VIia4bi7rpmkEBsic
- zjB11JHKSEt1oNwAwjopdsNvoLQT4c9Us8tgpT9DpWlAzAP8J+Edu+Rh4O75h2yCSeGg
- GX6juV4YbWD/IcTYgrBmmy+spDl5ycfkj6TA//84LKkon+hTC2HP0b9svIcxAaTQjxiu
- dRAbgBw6gwH/efaFUbKUOa4PM+N2B4NAGwXpkCsfuy4+m8pxdmbUaykg8aU29a5mgQO2
- IsLA==
-X-Gm-Message-State: AOJu0Ywc5yVarNzQl3x/yNsTTXqyKdzS1eOEl4xd5kmeEwJklgK7Z81N
- pImiR/LGs/c46na8MDlnz3Y+HIbMavjs5iymq7bz4pJgL3hkHYcKj1tV6k8eOGLA2xxorEiOLN3
- gxJuT9Ag=
-X-Gm-Gg: AY/fxX51mpsACsyiIxoLzvwAcugAngA0FlMAfyXYyTLnytXqbW4XacAQJb1U72pr4zo
- 9y9xBmtLrH0e0p3m3plAmeLpPJq89IHymtBVQlSOe0U0cGz7P3TY2Fbt5qf0dEKUmQ13UR+EQDX
- 5rE0dy5Dt4aMQf4hjmCadH+Y4FXR5ihgiHHgkxTnA5g8tB/RKtvCXZ46UYmic+ZNAjxTEVyvy/2
- NsMIT2LS+a4pbXtwFkFXb3NRyUvEkmUz3BFutM/eXCueggZw8/bufGay2CJShB1YjlsJCgeXtUm
- iX89ksFXgxYXXWe5oXxKFe72FU+BXnG5XTbwqZODD7dIJAPH3ictFzVoAwyoCy7fuVAHNZlkkx4
- ZQ7fiuBzXTIPjfD7xvhYnZudTaAJaaT/fFL4v8v7gbT8wYJXPGT85sjDkH7+lZaDavVLjIoAm7M
- GFjQq/PMSCmSS7VQbtFOquf6M4Qy+sw/OxVi+HqIse0jBg360UBP867AGfU7Y5YYt5sa26UsfCa
- YI9AhxKc02fOm8po/GxsF36f9104jYbyxcu/Q==
-X-Received: by 2002:a05:6808:2519:b0:450:3e21:f567 with SMTP id
- 5614622812f47-45c9d8e970bmr7475450b6e.56.1768919462141; 
- Tue, 20 Jan 2026 06:31:02 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=LJ+dHRQXeL40RECF0ZysyWrSPM4KukG3oVcmALJjyLE=;
+ b=L14UF0hXYEd+n+Mv6sQadIgi6oTzDnGP3GjD8s9HNSZK14uLxuQIG5gGLP7GORIuG0
+ gp7HqttyTZdqhykV7YaGYTJntf0R4W09j7vt3kfDgTq5GJiXddadHRbZ47B49D8CqBlU
+ MugUyqPRXUBEhjn842ay2dYtO7JYvcnVnE5Td9UBX7xHqVW4x+dT5l5SU+zuV33uPhUq
+ NVWMBmjQGWaDDXO/9JxXEeXSOw2veJJsHWNgVJz7aEH2d5h3mBQNJtF2OAcP002jsVwg
+ dBPAy5EuVwFEgg0pwSsQzDRFwJ3dW+L3aeHTPGdUdkZuvbhuSWUmVReJxPggQmPf6leE
+ qURA==
+X-Gm-Message-State: AOJu0Yya8zOQTI3J9C3yzY5N/CC+Y1rvb34pg8zzsuCWco+QHGqkt6PN
+ dagTvnoemgEflysnQ1b0ENZQghXJL6qZqxnEbFky4Y9hi2+bgS6TpX0qiw+CjoMSdJY=
+X-Gm-Gg: AY/fxX6WIlPZ4sKzXktR6boyDgjvfOTVzveW7fcwy3LPpjsig4ySaJO1bDnNKbM8tAy
+ QtmdJhr/k2IIG10MA3FB5Lakg4IKarL1B3hGuhEcvDnZp09DzzkVBR0qCQl7fmEcBJ1r/9krMSf
+ 89qob/ifQKfl3bZG+AQ5pRTK4CNFUKtdAZXoLfJd4wQ4UXe5WrT+aTnWxsMGdrU+l+KZNbM1lK+
+ XzcNMw1FqVF9zGQZotbm48e6rvIOOuSCPljLPOjwl4tlLjs6qrFscVW7AWCVEvbIX4ExRJqihI9
+ C3pRb0CI8oz4gN9SaO/XeLgeKWNmqo0FKdc8ty0vMmB9V0oa29F6/ToLe4VgIUD2eakkejFxSDx
+ lKDhfF9Bl3E1v5jV2m+LKnKBLGW9L7D6oLD5dU1wRjLDZyiASlO/mlVf2f6t/hsGktBGnCpxepr
+ wWk3WBtI7IhXQvqQ0Sf/tT6r6a691gFMNPdvHLvFAM9WsQhWUyLD41iZA4XcxrpLL6ftmhTp63r
+ IbQCK5/drgXcOjpOvc+P7wFtLJWKK8fqPrh6A==
+X-Received: by 2002:a05:6870:8887:b0:404:1f56:b9c9 with SMTP id
+ 586e51a60fabf-4044d08da51mr6450566fac.58.1768919463201; 
+ Tue, 20 Jan 2026 06:31:03 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044baf38ffsm8657418fac.5.2026.01.20.06.31.01
+ 586e51a60fabf-4044baf38ffsm8657418fac.5.2026.01.20.06.31.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 06:31:01 -0800 (PST)
+ Tue, 20 Jan 2026 06:31:02 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260115161726.3881761-1-trini@konsulko.com>
-References: <20260115161726.3881761-1-trini@konsulko.com>
-Subject: Re: [PATCH] test/py, buildman: Update filelock package version
-Message-Id: <176891946113.379251.4355205492001178976.b4-ty@konsulko.com>
-Date: Tue, 20 Jan 2026 08:31:01 -0600
+To: Michal Simek <michal.simek@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <fbe2f3d0-c9bc-4b31-b443-ada162841078@amd.com>
+References: <fbe2f3d0-c9bc-4b31-b443-ada162841078@amd.com>
+Subject: Re: [GIT PULL] AMD/Xilinx changes for 2026-04-rc1 v2
+Message-Id: <176891946226.379251.3598625720758976307.b4-ty@konsulko.com>
+Date: Tue, 20 Jan 2026 08:31:02 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,17 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 Jan 2026 10:17:26 -0600, Tom Rini wrote:
+On Mon, 19 Jan 2026 19:48:12 +0100, Michal Simek wrote:
 
-> The GitHub dependabot tool has reported a "medium" priority bug
-> CVE-2026-22701, with this package. Update to the patched version.
+> please pull these patches to your tree.
 > 
+> Thanks,
+> Michal
 > 
+> The following changes since commit 1bcb2fe324180d0a8cfbdb0511737eba1d5b8550:
+> 
+>    Merge patch series "Enable / require DEVRES for devm_.alloc usage outside
+> xPL" (2026-01-09 10:19:57 -0600)
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] test/py, buildman: Update filelock package version
-      commit: 8f16767dccffe504eae796ccc0ddf305dbee245e
 -- 
 Tom
 
