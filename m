@@ -4,166 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1513D2ED11
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 04:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7015FD2ECF9
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 07:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 319318389A;
-	Tue, 20 Jan 2026 05:34:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F87E83A2D;
+	Tue, 20 Jan 2026 08:33:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m4XhRTHy";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KCmBdYDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DABE839E8; Tue, 20 Jan 2026 05:34:55 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E496683A3B; Tue, 20 Jan 2026 08:33:33 +0100 (CET)
+Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
+ [IPv6:2607:f8b0:4864:20::1335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E4182A9E
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 05:34:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9655582A9E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 08:33:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RGJUf3AFmrWxqGe+/UMbH24WTkJlZsdegeWWS1FyWc+NNsa9WhQY4CsGosP18fn+aUB5XsQF4zYDH73uCfHvhRHFmLMXK+efFAXi86AN0K8SnYU6tIKIACeK/1r8dWGzK82fBeQj7EqeFrbNOocaF9oFX7Vik3SLMMslqYphlLCMaBrO0skZwLAvOxzQu153UMrJtR+zBqImtuTIU8E2MXqcFnaBfqbXSCDfPGQyYvH5fPRZQc0oFUGeQop4wN7kphTm6mrZz6GfpzyjpiLZ4MzLxmSvJ5OHwiecaDgrZ6rcrnwJ00u3hHoz1qTfBsJQU694N9+RrlccROc3yBV6tQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rth2zCtCNdBlO9jpRFVxXb0ceM4Rjaa98cfa9+O3jQs=;
- b=bJI5O/tOORYR+qBeARJRx7HnhudEvfd4ZWO9OA1r4zDVkuNLlfZI6g/2ZoizWj2F45haHl809cHhcB4skvYk2FeRLU5kIiLarYLce0PiW4+b+fLyFIo3zwlrDrbzGhMRXlZVNc06X17MmU6qotnZZO1GCdN869g/6MkWBUHruheBmRho8lLR5iziqYcdYinGxhRPMTAkWTEYeY4gNxg6WuMZI92L15AIrAypxvZswngiUKRajcYhwnruu7gdFXoovI5g3mtXwBSsVnTa3ya9WzP1YWVVDchVGD4jjoETd5hgixF0ytWVbuQIC6ATg7WIax+saj9KAiNueQC1oBnKcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=dh-electronics.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rth2zCtCNdBlO9jpRFVxXb0ceM4Rjaa98cfa9+O3jQs=;
- b=m4XhRTHydKFmnvmtzI37ShPGuIqtgYxOXpv3wIl0TaVAjisEYWkiBokrY45lLVtUE15Bv0fXVESVWULgJLdl0BkNfjG+E0jdxja+kKFNbc8VFqj3ECmaqm1przmbRwfHs2QK9X7geKc+oXDP1VVni3NRFtGrT4Cud9KnhIZDgpc=
-Received: from BYAPR05CA0030.namprd05.prod.outlook.com (2603:10b6:a03:c0::43)
- by DS4PPFEAFA21C69.namprd10.prod.outlook.com (2603:10b6:f:fc00::d54)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Tue, 20 Jan
- 2026 04:34:47 +0000
-Received: from MWH0EPF000971E2.namprd02.prod.outlook.com
- (2603:10b6:a03:c0:cafe::27) by BYAPR05CA0030.outlook.office365.com
- (2603:10b6:a03:c0::43) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.8 via Frontend Transport; Tue,
- 20 Jan 2026 04:34:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- MWH0EPF000971E2.mail.protection.outlook.com (10.167.243.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Tue, 20 Jan 2026 04:34:45 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 19 Jan
- 2026 22:34:45 -0600
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 19 Jan
- 2026 22:34:45 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 19 Jan 2026 22:34:45 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60K4Yhe2591987;
- Mon, 19 Jan 2026 22:34:44 -0600
-From: Anshul Dalal <anshuld@ti.com>
-Date: Tue, 20 Jan 2026 10:04:28 +0530
-Subject: [PATCH master v4] Kconfig: select
- SPL_USE_TINY_PRINTF_POINTER_SUPPORT for K3
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-dy1-x1335.google.com with SMTP id
+ 5a478bee46e88-2ac3d5ab81bso5317722eec.1
+ for <u-boot@lists.denx.de>; Mon, 19 Jan 2026 23:33:30 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768894409; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dDkK8NOac8LtMi3srb1heoStigwHGBX9yPTScnY85abmgLU5nE+soArwmpSuF3s/9k
+ bMEMtc5184RbMmIpqkvXAeINg2SNU7BNQ4tUR+Xli7N/1XBaME0VM9ktAxy0Dq+Y/1tv
+ SkzbWeV7eZwkETVEbQRxFjjvzF1uW8iY8Z8Ykn0kXJ4sI3R4YgN68I4lulwDwWEvWGH/
+ +wanM6dyHvy7LdRZk3aJ8P+4S/GNoMCEK2+IQmJicWi/XXBVoaVzx6ijJBOOmJDOR7M9
+ Iy9Dt7dzOpWfiSEEeQHQlxeXLR6NfLwD3XmUjoH0DIV/t9FmQZ9/mvqI5vlDtPidfDob
+ OjVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=a88mYNUCng1SYkuL+xaHhLv9d0keASVYhYTYnuCyt9w=;
+ fh=HZe/QuQLf/MSOOizVqb6Tn2p1+bRaclfxbdHzGiOQqE=;
+ b=kW8R8xhyqq4J7naBjkiiZwqXR9RIxGNHp70sUS3L504dqJssGbf0ryDlzaugwGCnjF
+ x8gHsjD7hKdwzBAJYi+5YYQL782QeI+/MPrBHBICLDg36dkaPcMhhaCsYvpneWdzaNm9
+ Ywoynh9vuVN1qQqYYdRWDLqvNyatjQaOL3RUs2eyOg49icfQYYr56MjLF2StGuVGgMY2
+ GJEdW0GEYkInaNd0I7LKy8F3FBl4VCxk/R8x/m+iVpGX3a2VPsHEKk+kG+A4Nr1KHRBO
+ upGooYxg/5T0WIKGYrCpI0DXW8NZ6UYK4OKvIHhSjyeZIbGzFPa7zd3F8pfgyYG3ec71
+ jSZg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1768894409; x=1769499209;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a88mYNUCng1SYkuL+xaHhLv9d0keASVYhYTYnuCyt9w=;
+ b=KCmBdYDFIZ5Z7vq3QsmvcKldOUfs5u4LCbOUlCgBtP2ok0muUXV2oX8n9OwWQx1b0Q
+ 2A7Y+ajD/F6lWNgeRPLi5Rq3MuOwyrzSpvqRsWEiuijCiy/PoCNOoqObUByPl44IEuGW
+ o6UO9FqzdtY/9pBAgDw6PZKEZ1OMbbxdoKDCc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768894409; x=1769499209;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=a88mYNUCng1SYkuL+xaHhLv9d0keASVYhYTYnuCyt9w=;
+ b=nEvaZlPaQFPaSTxAjrOYCS6ysOZb9rB1YLM3FXXFuainYoiGM5hKgUXGWnyB5L4V3F
+ 44fCMXuoBDK1rOX74BWZJg41JakwqvdwQCg0SgCW0hGzOecNO3I1VQX1DxXR9nrw3vIi
+ v9+7ZPVs7tAIHpZdL4/U242ha0mgZXMTckMdFQBoRWQgewkHcutzokvo4/g+4sQMcdMb
+ BOfqYsvHnMZzHPKRfM7qFOgfNALGqqU3jE3ft9JJfMqv/42JYV3ZP8fYXNzmltlg2OH3
+ aE8UXZG6HMb4HxNVGPvKyQ+XmfAHwMKN63oO0BSkNufwlGe98YJg7VH+p8IsrVnrn/PB
+ ne5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV8skFr6F7dXTer7lWN5016oDf+5R3hqLNdCBf38xp1I4LoVOaKyDTsm2uV+6BgY3c/NMAJ8sQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwG3kQwYBF83UyH9pxX238xZ4gaeVcqpNGaycCWxcullORGhtNT
+ CUFveyVD3bMVMi25NfMSE7JTlG9Aa9zgpkfvs1x5JIIiLD2y8uo2RZj24u2NLxxOv9tDbypxOyl
+ mr8UYPS+eMLwfw1fzcxbsNIlmbVSkPNKwSkLc5ud4tw==
+X-Gm-Gg: AZuq6aL1YQy+l4m6udGb/8mVaO2lbxeHHzCsHZPsTS5BlQoklM7uhp6aqi4tYsZq5DM
+ bi0buqJJYG+LlOTeX7+4Nz8KghCxhnpRdpKE9bxOtddhkz9A6naDoqrS623ma5qy+FCtISCpeIg
+ z1EMMFFyuVYIf4kcT7reCWK59Hv7nXwNReAYE00D7mLeOT+m6fVSZTM4syqv8uCzRAj3xoiTu1K
+ eH6bbBV+vIFAluh0wZ5liMrYP9n7Mz8XJLiIQaRfrPm4wWblxrPD6s2BpC9F8qRFw2Ae+1N726X
+ NO+PDRQ0IY4nWX8hZ+AUdhT5kA==
+X-Received: by 2002:a05:7300:8b85:b0:2ab:ca55:89ab with SMTP id
+ 5a478bee46e88-2b6b4eb4c13mr11126224eec.42.1768894408260; Mon, 19 Jan 2026
+ 23:33:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260120-am65_dfu_fix-v4-1-36b2dfab3a64@ti.com>
-X-B4-Tracking: v=1; b=H4sIANMFb2kC/33NTQ7CIBAF4KsY1mIYSklx5T2MaXAYLIu2BirRN
- L27pBt/Yly+N/nezCxRDJTYfjOzSDmkMA4lqO2GYWeHC/HgSmZSyBpA1Nz2um6dv7U+3DmAUkQ
- o9BkMK+QaqdTr3JH1Nk0U2an0XUjTGB/rlwzr9fdgBg7cIkoDAA7RH6aww7FfV7L8J2WRiNbZx
- jijtfuQ1UtKob5kVaQjaMhVvlJvclmWJ5XPdIshAQAA
-X-Change-ID: 20251105-am65_dfu_fix-1144eec06b19
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Judith Mendez
- <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, Hrushikesh Salunke
- <h-salunke@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh R
- <vigneshr@ti.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Anshul Dalal <anshuld@ti.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1768883683; l=1792;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=JzTyQrRmRDBEaNhrhNuzzK4nIlWBrcTJBp3mlz/1BgA=;
- b=WWJbsFhapYC2/UaWu9EsDAufmpvA6JQHlM3ppd26nJh30pLdbjCblO/3yyj6GOM9paSYOx0gv
- /Xj4WH3UApoBor11vhBRgo9CmpH+w/ylPz5RW7+po1vTFmPmH/5R0/c
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E2:EE_|DS4PPFEAFA21C69:EE_
-X-MS-Office365-Filtering-Correlation-Id: 797122f1-be4b-4035-a23c-08de57dd3d43
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SFVyRnlkNVZuQ2drakpnRXhpQUJPTVhRcnZJUFV2UXBLQVF2ZlR5QVVSdUZW?=
- =?utf-8?B?TG5GUkdxa3I0RlIwZ3lEVktkR3pHK0NyU1FqSG9XaW53QlA1S0Q1dmxaN01X?=
- =?utf-8?B?bGEwcUE2a0czVE5QN3Q5amVlekZQbHA4YVdRNGorMjEvUG1VZDFzS1RacUZB?=
- =?utf-8?B?SEdSd0lVc2lwNXR1azhWMHZoT25uRHUyVktHSnRvUGJxKzhVcitLN2U3aUJS?=
- =?utf-8?B?S3lFaHBqVXErbnVqWHRtdUpkN0xxdWl2VU9yTWhCU1ptZVJBcVNwd0lETm53?=
- =?utf-8?B?T2pRRGtrU0tpaTB5dG14cHBCWmUzOEtpR05iTm5SdjBhcjJOSndjeXdkSkxY?=
- =?utf-8?B?S29sRzZNcHhRc0RUQzVsVStENk9KNENoT251TzdtUjJhdnBDSTNMeWdidXlx?=
- =?utf-8?B?cDJiUTVjdXBUa0ZlaWVjcmE2eHpXdWpLUkswMm9WVldpK0dKZFVqRk90MGRp?=
- =?utf-8?B?SUNpdGxRUnltZ2FxWGJ5VHJLa3h3WE96OXRQT3BQU0xIZzZHOXlnaStuMGVV?=
- =?utf-8?B?b0RKVGdLbkRoTTBXNWU3OXRhL2NaUEwxMVVuTGdGOWtBUEZ2bXdEazdnb3Fx?=
- =?utf-8?B?ZVIzSXdFMjc1WjVoaGJvYkd1M05wR01iMy9tb3hNdm9XckxDbG13cWFmY1g3?=
- =?utf-8?B?dTEyS2JsUlZkcnhUVmlyTWUzOE54RklQRUR3aW54RnlrSHdTUkVrV2xBTUVH?=
- =?utf-8?B?cHVWaGlIbGV5RVcwY2d1WEpIOXNENDFXaG15RE1ZTlp4ZmZkREZoR2hNeUIw?=
- =?utf-8?B?VkZFeEt0SE4vL2pKajFnbk1yUVpYaFJQajdHTmdNOHdpU0FEYVc5c2FCdVI4?=
- =?utf-8?B?bTFUdzUxSGZWYTVuQ0ViRjIrUmFIMVJqMys3bStTc0JOV0JuQXN3UG1kYmEy?=
- =?utf-8?B?RmxPaFJiUlVLSEU2Yis1WjY5WDRxV3c5Wmtac3Z0TllzZkVSMStJS25TTzEx?=
- =?utf-8?B?d2RvcXFZemU3SUI3Q1ZYK1pIZERLTUhQRm1uYXY5WUFVOGZ5M096MG5tRTVq?=
- =?utf-8?B?NGgzdXgyVXJwakxRY1BySk0yVW5VM0lxN0dTVTBmKzF4bGh3dTBEZDRMYTlQ?=
- =?utf-8?B?WkhqOEhickpySm1TK2QxejBOaDh1bWJuZXdnVVp4TjRneFczZmhzbitLUzNK?=
- =?utf-8?B?QUd6eVF6Y0p3cEFQeTZyR3hjUmt6UkRBcmlqVCtxTjh4RW1MWkFEbithSUdo?=
- =?utf-8?B?N1paQ09UNnRpV0d0NFo1aHlITzl4dUZDY3NRZXYwcDJ6c0JKSkpnQnVCK1Bh?=
- =?utf-8?B?cG5nNmYvaGRTQllpY0treGRockJraGxSakRQb3BxNzFrWmVwUHIvL2dnTmV3?=
- =?utf-8?B?c204Szk3ZUptMFNjWXN2WEJVc2cvV3RBbFVNL0NzdEVRa21WMWNqQ0dRaS9Y?=
- =?utf-8?B?Q1VGMlN2N0EwUjBEZlhZbDJlRGxLZ3duNDBDUklKTWs1L2VuTXpBNGJEcWJ3?=
- =?utf-8?B?L1RYZGt3UkRoeHdoMWMrV1NqZ0hsMWUrUzJCUU1qeEdoWmRScGhiNjgyNitU?=
- =?utf-8?B?czFoTlg0OVFMNHN3RkpDdkJiL3lHUlJpTlEvaHA1ZHdKNWtBRzVYdm1UeElz?=
- =?utf-8?B?V2c2b0ZUNFpvTG15UmgycVR2ZENvZUlZcUxKUFJmSlo2SHJiY0puZ1ZOT3BJ?=
- =?utf-8?B?TUFDa1NNYTZPaXpaTG1JckFyaEE1MHpHRWFtNWhKT2N6U3pSdzBDNStWRVB0?=
- =?utf-8?B?bGVIZ2kvRVN5ajliWmV5b3g4Ty9hY3Z5ek40YkIrbHY3MnZOcWs4SGp4Yk00?=
- =?utf-8?B?VDJEQStZZENpK3dSVm9hcnlmN3crbEFDN3hlL2hxZFY2TSt6UnpBM2FiOEZM?=
- =?utf-8?B?T0hNSjBMNGFRa0MwZDRVU04zU0l1WWVHSHNRUWxPYzF5aXl3YjVUSmk4Q3li?=
- =?utf-8?B?WHRiT09jS3N0bGlwd3d0WW1wUjhqUVdGZ3NmUmN5cVg4TkN4dHIrdzZaZVZZ?=
- =?utf-8?B?aDdsRFc2NU5VMFRiMldjZlRlSUNaei9yaHRzTHlGM0tzQVZURFhBQTVwdk5w?=
- =?utf-8?B?S2ljR00yMUg0RHB6UWxLR3VhckptUXpRSEgvekhjUTJHc29jdDh2YXR5L3Fj?=
- =?utf-8?B?cUViTnVEckNOVGRrQWhnNVU3dDhacnQ3NGorRW4zNkluMzVIV2VibjM3Zkhi?=
- =?utf-8?B?YnB4Z1RmUk4wVDRJUTdyZnBNbFowemlkYzZlbHNqSGJiN0s0WmFOSkxHMnRJ?=
- =?utf-8?B?NE9MSGZqVWFoRUFrS3JPS2V2RWlzTmN4QTNLS01Ndityb1FrQThzbW5LK0Iw?=
- =?utf-8?B?S2E0dDVwY3BSem1qMVBvS0xHK0h3PT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 04:34:45.9063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 797122f1-be4b-4035-a23c-08de57dd3d43
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E2.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPFEAFA21C69
+References: <20251028091256.600992-1-richard.genoud@bootlin.com>
+ <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
+ <5b7e3e38-325f-424b-ab95-8775924333e4@bootlin.com>
+ <CAOf5uwkwDKzZpbj-iXBL2YTu-eH=96f2EzLcn0TFyGcJZHiNWQ@mail.gmail.com>
+ <CAOf5uwkhHyXHUHRMLa9OStb+uuWQ6wajWOWncd=HUgzGZSBV=A@mail.gmail.com>
+In-Reply-To: <CAOf5uwkhHyXHUHRMLa9OStb+uuWQ6wajWOWncd=HUgzGZSBV=A@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Tue, 20 Jan 2026 08:33:16 +0100
+X-Gm-Features: AZwV_QhX7dLJUZEI2pjtpWfX9CPpoeffhCwq-xbkk9a3UECURUMdgaJPmUtk_lk
+Message-ID: <CAOf5uw=_1O=wYDTXxpXu1UDcUZWUN_9Se1HPbzzMU2Fttqm8Jw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
+ support
+To: Richard GENOUD <richard.genoud@bootlin.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>, 
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dinesh Maniyam <dinesh.maniyam@intel.com>, Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,57 +130,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
-with an extra Kconfig"), SPL_USE_TINY_PRINTF_POINTER_SUPPORT has been
-made mandatory in order to use %p which would earlier have defaulted to
-a 'long' print.
+Hi Richard
 
-Without this config symbol, k3_sysfw_dfu_download fails to set the
-correct value for the DFU string with:
+On Mon, Jan 19, 2026 at 10:01=E2=80=AFAM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi Richard
+>
+> I queue them and run the CI, I have it ready, waiting for the denx
+> site to be up again
+>
 
- sprintf(dfu_str, "sysfw.itb ram 0x%p 0x%x", addr,
-   CONFIG_K3_SYSFW_IMAGE_SIZE_MAX);
+At this point I think the best is resend the series including last
+patches and the requested changes for two
+patches
 
-The value we get "sysfw.itb ram 0x? 0x41c29d40" causes a boot failure.
+Michael
 
-Therefore this patch sets SPL_USE_TINY_PRINTF_POINTER_SUPPORT for all K3
-devices since the size impact is less than 100 bytes.
+> Michael
+>
+> On Mon, Jan 12, 2026 at 6:30=E2=80=AFPM Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
+> >
+> > Hi
+> >
+> > My fault, I was thinking to already have picked them, I will do
+> >
+> > On Mon, Jan 12, 2026 at 6:09=E2=80=AFPM Richard GENOUD
+> > <richard.genoud@bootlin.com> wrote:
+> > >
+> > > Hi Michael,
+> > > Le 31/10/2025 =C3=A0 07:43, Michael Nazzareno Trimarchi a =C3=A9crit =
+:
+> > > > Hi Richard
+> > > >
+> > > > On Tue, Oct 28, 2025 at 10:13=E2=80=AFAM Richard Genoud
+> > > > <richard.genoud@bootlin.com> wrote:
+> > > >>
+> > > >> Hi everyone,
+> > > >>
+> > > >> This patch series introduce H6/H616 NAND controller support (but n=
+ot yet
+> > > >> the DMA/MDMA part).
+> > > >>
+> > > >> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA0=
+0 NAND
+> > > >> chip.
+> > > >> ECC is supported, as well as scrambling.
+> > > >>
+> > > >> Support for booting from NAND is not part of this series, but it's=
+ almost
+> > > >> ready. (It needs quite some modifications in sunxi-spl-image-build=
+er.c
+> > > >> and sunxi_toc0.c)
+> > > >>
+> > > >> H6 SoC has not been tested, but it shares all registers with H616,=
+ plus
+> > > >> some registers dedicated to Embedded Crypto Engine that H616 lacks=
+.
+> > > >>
+> > > >> This IP has quite some register fields modified from the A10/A23, =
+but in
+> > > >> the end, it works more or less the same.
+> > > >> Main differences with A10/A23 are:
+> > > >> - The need for 2 more clocks (for ECC and MBUS)
+> > > >> - The use of a new USER_DATA_LEN register
+> > > >> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+> > > >> - MDMA based on chained buffers
+> > > >> - some registers layouts have changed (mainly due do the stronger =
+ECC)
+> > > >>
+> > > >> Patches 1 and 2 are small fixes
+> > > >>
+> > > >> Patches 3-6 harmonize the registers definitions between U-Boot and=
+ SPL,
+> > > >> and ultimately merge those definitions in an include file, without
+> > > >> functional change, removing the usage of sunxi_ccm_reg on the way.
+> > > >>
+> > > >> Patches 7-19 are paving the way to the introduction of H6/H616 NAN=
+D
+> > > >> controller by adding per SoC capabilities for both drivers. They a=
+re
+> > > >> small for an easier review, without functional change.
+> > > >>
+> > > >> Patches 20-21 are adding missing NAND related clocks definitions f=
+or
+> > > >> H6/H616
+> > > >>
+> > > >> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+> > > >>
+> > > >> Patch 23 adds the support for H6/H616 NAND controller in SPL.
+> > > >>
+> > > >> Patch 24 fixes warnings in sunxi_nand_spl.c
+> > > >>
+> > > >> A similar series for this NAND controller support in Linux has bee=
+n sent
+> > > >> and being reviewed.
+> > > >>
+> > > >> Changes from v1:
+> > > >> - pick-up reviewed-by
+> > > >> - use a readl() loop instead of memcpy_fromio() in patch 2 as sugg=
+ested
+> > > >>    by Andre
+> > > >> - remove cosmetic in patches that are beyond cosmetic changes
+> > > >> - remove usage of struct sunxi_ccm_reg, suggested by Andre
+> > > >> - indent @caps member description in comment
+> > > >> - give more informations on PAT_FOUND registers in commit message
+> > > >> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the v=
+ery
+> > > >>    same bit NFC_ECC_BLOCK_512
+> > > >> - add missing MACH_SUN50I_H6 in Kconfig
+> > > >>
+> > > >> Richard Genoud (24):
+> > > >>    mtd: rawnand: sunxi: cosmetic: remove needless comment
+> > > >>    mtd: rawnand: sunxi_spl: fix pointer from integer without a cas=
+t
+> > > >>    mtd: rawnand: sunxi_spl: harmonize register defines with non sp=
+l file
+> > > >>    mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+> > > >>      linux/mtd/rawnand.h
+> > > >>    mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+> > > >>    mtd: rawnand: sunxi: merge register definitions for
+> > > >>      sunxi_nand{,_spl}.c
+> > > >>    mtd: rawnand: sunxi: add per SoC capabilities
+> > > >>    mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC ca=
+ps
+> > > >>    mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+> > > >>    mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+> > > >>    mtd: rawnand: sunxi: add has_ecc_block_512 capability
+> > > >>    mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+> > > >>    mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+> > > >>    mtd: rawnand: sunxi_spl: add per SoC capabilities
+> > > >>    mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC =
+caps
+> > > >>    mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+> > > >>    mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FO=
+UND
+> > > >>    mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+> > > >>    mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED m=
+acros
+> > > >>    sunxi: clock: H6: add NAND controller clock registers
+> > > >>    clk: sunxi: Add MBUS Master Clock Gating Register
+> > > >>    mtd: rawnand: sunxi: add support for H6/H616 nand controller
+> > > >>    mtd: rawnand: sunxi_spl: add support for H6/H616 nand controlle=
+r
+> > > >>    mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warni=
+ngs
+> > > >>
+> > > >>   arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
+> > > >>   .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+> > > >>   arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
+> > > >>   .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+> > > >>   arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
+> > > >>   board/sunxi/board.c                           |  19 +-
+> > > >>   drivers/clk/sunxi/clk_h6.c                    |   2 +
+> > > >>   drivers/clk/sunxi/clk_h616.c                  |   2 +
+> > > >>   drivers/mtd/nand/raw/Kconfig                  |   3 +-
+> > > >>   drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++---=
+-----
+> > > >>   drivers/mtd/nand/raw/sunxi_nand.h             | 228 ++++++++++++=
++
+> > > >>   drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-=
+------
+> > > >>   12 files changed, 629 insertions(+), 284 deletions(-)
+> > > >>   create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+> > > >>
+> > > >
+> > > > I will pick the series over the weekend, check CI, and check better
+> > > > all the patches that already
+> > > > get reviewed anyway
+> > >
+> > > Any news?
+> >
+> > Sorry, I have picked the patches assigned to me, but now I found out
+> > that I miss your series because
+> > was not assigned to me. Give me a couple of days
+> >
+> > Michael
+> >
+> > >
+> > >
+> > > Regards,
+> > > Richard
+> > >
+> > >
+> > > >
+> > > > MIchael
+> > > >
+> > > >>
+> > > >> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+> > > >> --
+> > > >> 2.47.3
+> > > >>
+> > >
+> > >
+> > > --
+> > > Richard Genoud, Bootlin
+> > > Embedded Linux and Kernel engineering
+> > > https://bootlin.com
+> >
+> >
+> >
+> > --
+> > Michael Nazzareno Trimarchi
+> > Co-Founder & Chief Executive Officer
+> > M. +39 347 913 2170
+> > michael@amarulasolutions.com
+> > __________________________________
+> >
+> > Amarula Solutions BV
+> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> > T. +31 (0)85 111 9172
+> > info@amarulasolutions.com
+> > www.amarulasolutions.com
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
-Changes in v4:
-- Enable pointer support for only DFU configs on ARMv7 cores
-- Link to v3: https://lore.kernel.org/r/20251204-am65_dfu_fix-v3-1-de18ed3f346d@ti.com
 
-Changes in v3:
-- Handle setting the config in Kconfig instead of the defconfig
-- Link to v2: https://lore.kernel.org/r/20251105-am65_dfu_fix-v2-1-ccada89d966d@ti.com
 
-Changes in v2:
-- Remove unrelated changes
-- Link to v1: https://lore.kernel.org/r/20251105-am65_dfu_fix-v1-1-acc29111dccf@ti.com
----
- arch/arm/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 0485fe78e10..2df28d71d75 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -836,6 +836,7 @@ config ARCH_K3
- 	select DMA_ADDR_T_64BIT
- 	select LTO
- 	select SPL_LOAD_FIT if SPL
-+	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF && DFU && CPU_V7R
- 	imply TI_SECURE_DEVICE
- 	imply DM_RNG if ARM64
- 	imply TEE if ARM64
-
----
-base-commit: cde150b5e15f291618c120e047fd85393123c091
-change-id: 20251105-am65_dfu_fix-1144eec06b19
-
-Best regards,
--- 
-Anshul Dalal <anshuld@ti.com>
-
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
