@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF5CD2ED0F
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:07:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1DFD2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDF0E83A8F;
-	Tue, 20 Jan 2026 13:07:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 82A5583A8F;
+	Tue, 20 Jan 2026 13:09:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HAFelywd";
+	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="CclGI0UB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A4583A91; Tue, 20 Jan 2026 13:07:45 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 4A7E183A9F; Tue, 20 Jan 2026 13:09:28 +0100 (CET)
+Received: from mxout2.routing.net (mxout2.routing.net [IPv6:2a03:2900:1:a::b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C255283A8D
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:07:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0B48783A8D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 93A706012A;
- Tue, 20 Jan 2026 12:07:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 055ACC16AAE;
- Tue, 20 Jan 2026 12:07:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768910861;
- bh=YrkURLYRGh72OQblPbiYaCHMzsmJ3QJk0/EERlstCWQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HAFelywd8th6AjyBqA+rcx8U25W69QzKL/QeKtr7hrtGwqsj4NdBs5CoxluIhaPi+
- GxVfq95QGqJQM19K6AOshbhvYtB+d0wRW+47OiAyKe2y6LFf0khcPIt/RsSjSZpMzQ
- zpjQsQP06x+T3Cm4H2kGsVg+ZdSJBbxXEwFqAOonDaqlWjEzweUy54x47W44/wad98
- JJo2sRvgoRgtc+43bACP7XCQx+ZnPl8gRi82WTRp5SgPhqamUuf/AUz2UwwDBH9tUn
- cK1PP896wjorHAnA+0/U8Ue9y4rURsO5Jh/dftVVAmFCLaubT1u9dvBqdm9JNY6WRO
- WDoeZfPvlMjPw==
-Date: Tue, 20 Jan 2026 17:37:34 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: trini@konsulko.com, aswin.murugan@oss.qualcomm.com, lukma@denx.de,
- seanga2@gmail.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, alexeymin@postmarketos.org,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v1 1/3] arm: dts: qcs615-ride: Remove unsupported USB
- clock reference
-Message-ID: <aW9wBo-noyn8YefX@sumit-xelite>
-References: <20251114063804.3835132-1-balaji.selvanathan@oss.qualcomm.com>
- <20251114063804.3835132-2-balaji.selvanathan@oss.qualcomm.com>
- <aU5h8TrvG7GALEMc@sumit-xelite>
- <55809fdb-1da8-4e4a-810a-62d034d1e745@oss.qualcomm.com>
+ dmarc=none (p=none dis=none) header.from=fw-web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
+Received: from mxbox2.masterlogin.de (unknown [192.168.10.89])
+ by mxout2.routing.net (Postfix) with ESMTP id 8BB44601CC;
+ Tue, 20 Jan 2026 12:09:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
+ s=routing; t=1768910964;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BMhFZWd/605NWR6tzl3ezQUty2CpZYcmd7OUJbjzNmE=;
+ b=CclGI0UBQYNh5vO1GrDkMnEfuvxlWaKvxxumcjD2+TMyE/StUNqwRQCOmrMVnnUlI31j6T
+ nw45l0B2ZSMnV+cTfIgvQEMzSFpmX4klnVB1HlchoH6kH54+Xwpdut5MWxdMmAArkaQGdy
+ WSe7GA1f601ysM9bGjDLwc1O2vWZGgQ=
+Received: from ehlo.thunderbird.net (unknown
+ [IPv6:2a01:599:a30:b62f:dfc6:3662:ef04:540b])
+ by mxbox2.masterlogin.de (Postfix) with ESMTPSA id 2AE4D10029A;
+ Tue, 20 Jan 2026 12:09:24 +0000 (UTC)
+Date: Tue, 20 Jan 2026 13:09:23 +0100
+From: Frank Wunderlich <linux@fw-web.de>
+To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+CC: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4=5D_cmd=3A_mem=3A_add_function_?=
+ =?US-ASCII?Q?for_getting_ram_size_for_use_in_scripts?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <7906ae57-4700-48fd-8740-66b8626640f1@cherry.de>
+References: <20260118105021.19760-1-linux@fw-web.de>
+ <7906ae57-4700-48fd-8740-66b8626640f1@cherry.de>
+Message-ID: <1CBAB275-C7DD-4E52-87D8-B648BE9A4981@fw-web.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <55809fdb-1da8-4e4a-810a-62d034d1e745@oss.qualcomm.com>
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mail-ID: 1cc5c7d4-41c9-47bd-a6ae-ba08f1e41c30
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,74 +74,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 20, 2026 at 10:00:58AM +0530, Balaji Selvanathan wrote:
-> Hi Sumit,
-> 
-> Thanks for the feedback. Please find reply below.
-> 
-> On 12/26/2025 3:52 PM, Sumit Garg wrote:
-> > On Fri, Nov 14, 2025 at 12:08:02PM +0530, Balaji Selvanathan wrote:
-> > > Remove GCC_USB3_PRIM_CLKREF_CLK from the USB controller node as it is
-> > > not implemented in the U-Boot clock driver. Keep only the supported
-> > > clocks to avoid clock warnings during boot.
-> > Rather than overriding DT, why can't this be implmented in U-Boot? And
-> > how why it isn't an essential clock for U-Boot operation?
-> > 
-> > -Sumit
-> 
-> GCC_USB3_PRIM_CLKREF_CLK seems to be a reference clock that is enabled by
-> earlier boot stages before U-Boot starts: The clock is already ON when
-> U-Boot starts - verified during boot. This is a reference clock with
-> hardware voting mechanism, not typically controlled by software.
-> 
-> Without this override, we get "Clock 152 not found" warning message (as it
-> is not there in the QCS615 clock driver.
+Hi
 
-Why not implement this clock handling in the U-Boot as it is being
-handled in the kernel (see: drivers/clk/qcom/gcc-qcs615.c +2886)? You
-can also seek a reference from sdm845, qcm2290 clk drivers in U-Boot
-too.
+Thank you for your review
 
-Using DT overrides for missing simple functionality in U-Boot isn't
-acceptable since we want to avoid as much overrides as possible.
+Am 19=2E Januar 2026 11:22:07 MEZ schrieb Quentin Schulz <quentin=2Eschulz=
+@cherry=2Ede>:
+>Hi Frank,
+>
+>On 1/18/26 11:50 AM, Frank Wunderlich wrote:
+>> From: Frank Wunderlich <frank-w@public-files=2Ede>
+>>=20
+>> Add a command for getting detected ram size with possibility to write
+>> to environment variable=2E
+>>=20
+>> example usage:
+>>=20
+>> BPI-R4> msize
+>> 4294967296
+>> BPI-R4> msize m
+>> 4096m
+>> BPI-R4> msize g
+>> 4g
+>> BPI-R4> msize g ramsize
+>> BPI-R4> printenv ramsize
+>> ramsize=3D4
+>> BPI-R4>
+>>=20
+>> board with 8GB ram:
+>>=20
+>> BPI-R4> msize
+>> 8589934592
+>> BPI-R4> msize m
+>> 8192m
+>> BPI-R4> msize g
+>> 8g
+>> BPI-R4> msize g ramsize
+>> BPI-R4> printenv ramsize
+>> ramsize=3D8
+>> BPI-R4>
+>>=20
+>> Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
+>> ---
+>> v4: drop rounding to full MB/GB as it leads to wrong display
+>> v3: add missing ifdefs
+>> v2: add Kconfig entry
+>> ---
+>>   cmd/Kconfig |  5 +++++
+>>   cmd/mem=2Ec   | 32 ++++++++++++++++++++++++++++++++
+>>   2 files changed, 37 insertions(+)
+>>=20
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index 5c611fb3016e=2E=2Eb82b17195b7e 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -974,6 +974,11 @@ config CMD_RANDOM
+>>   	help
+>>   	  random - fill memory with random data
+>>   +config CMD_MEMSIZE
+>> +	bool "memsize"
+>> +	help
+>> +	  Get RAM via command for use in scripts=2E
+>> +
+>
+>Only available if CMD_MEMORY is set, so need a depends on=2E
+>
+>I'm wondering if this new command isn't more suited in cmd/meminfo=2Ec? M=
+aybe even extend the meminfo command instead of creating a new one?
 
--Sumit
+Can put it in meminfo too with depency cmd_memory=2E
 
-> 
-> Regards,
-> 
-> Balaji
-> 
-> 
-> > 
-> > > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > > ---
-> > >   arch/arm/dts/qcs615-ride-u-boot.dtsi | 14 ++++++++++++++
-> > >   1 file changed, 14 insertions(+)
-> > > 
-> > > diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> > > index 68fffc70fcb..d8af124cc27 100644
-> > > --- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> > > +++ b/arch/arm/dts/qcs615-ride-u-boot.dtsi
-> > > @@ -11,4 +11,18 @@
-> > >   		      <0x0 0xc0000000 0x0 0xc0000000>,
-> > >   		      <0x1 0x80000000 0x1 0x00000000>;
-> > >   	};
-> > > +	soc@0 {
-> > > +		/* Remove GCC_USB3_PRIM_CLKREF_CLK from usb_1 node to avoid U-Boot clock warnings */
-> > > +		usb_1: usb@a6f8800 {
-> > > +			/delete-property/ clocks;
-> > > +			/delete-property/ clock-names;
-> > > +			/* Keep only the clocks that are implemented in U-Boot clock driver */
-> > > +			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
-> > > +				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
-> > > +				 <&gcc GCC_AGGRE_USB3_PRIM_AXI_CLK>,
-> > > +				 <&gcc GCC_USB30_PRIM_SLEEP_CLK>,
-> > > +				 <&gcc GCC_USB30_PRIM_MOCK_UTMI_CLK>;
-> > > +			clock-names = "cfg_noc", "core", "iface", "sleep", "mock_utmi";
-> > > +		};
-> > > +	};
-> > >   };
-> > > -- 
-> > > 2.34.1
-> > > 
+>>   config CMD_MEMTEST
+>>   	bool "memtest"
+>>   	help
+>> diff --git a/cmd/mem=2Ec b/cmd/mem=2Ec
+>> index d5d7ca2790bd=2E=2E9dcfeacbbcc5 100644
+>> --- a/cmd/mem=2Ec
+>> +++ b/cmd/mem=2Ec
+>> @@ -33,6 +33,7 @@
+>>   #include <linux/compiler=2Eh>
+>>   #include <linux/ctype=2Eh>
+>>   #include <linux/delay=2Eh>
+>> +#include <linux/sizes=2Eh>
+>>     DECLARE_GLOBAL_DATA_PTR;
+>>   @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, i=
+nt flag, int argc,
+>>   }
+>>   #endif /* CONFIG_LOOPW */
+>>   +#ifdef CONFIG_CMD_MEMSIZE
+>> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
+>> +		       char *const argv[])
+>> +{
+>> +	u64 memsize =3D gd->ram_size;
+>> +
+>> +	if (argc > 1) {
+>> +		if (!strcmp(argv[1], "m"))
+>> +			memsize =3D memsize / SZ_1M;
+>> +		else if (!strcmp(argv[1], "g"))
+>> +			memsize =3D memsize / SZ_1G;
+>> +		if (argc > 2)
+>> +			env_set_ulong(argv[2], memsize);
+>> +		else
+>> +			printf("%lld%s\n", memsize, argv[1]);
+>> +	} else {
+>> +		printf("%lld\n", memsize);
+>> +	}
+>
+>Flatten this like so:
+>
+>"""
+>if (argc <=3D 1) {
+>    printf("%lld\n", memsize);
+>    return 0;
+>}
+>
+>if (!strcmp(argv[1], "m"))
+>    memsize =3D memsize / SZ_1M;
+>else if (!strcmp(argv[1], "g"))
+>    memsize =3D memsize / SZ_1G;
+>if (argc > 2)
+>    env_set_ulong(argv[2], memsize);
+>else
+>    printf("%lld%s\n", memsize, argv[1]);
+>return 0;
+>"""
+>
+>Otherwise I see a few issues:
+>- rounding not made explicit, (also it's truncating and not rounding I be=
+lieve here?)=2E Why not print the actual value here as a float (of course, =
+not using floats)? I vaguely remember some of my Rockchip board printing 1=
+=2E5GiB when booting up (cannot verify because this happens due to a bug in=
+ the SDRAM init and isn't easily reproducible)=2E We do have some boards wi=
+th 256, 512MiB of RAM so we should be clear whether we are printing 0 or 0=
+=2E25 since that will influence how to do math operations with the variable=
+ containing the value=2E
+
+I have dropped my previous round because it leads to wrong values and i wa=
+nted to avoid floating point numbers=2E But yes 2 decimal digits seem to be=
+ needed to give correct output=2E I guess var is then string,not any floati=
+ng point type=2E
+
+So for GB sonething like this:
+
+u64 ram_gb_x100 =3D GB_X100(gd->ram_size);
+char buf[16];
+
+snprintf(buf, sizeof(buf), "%llu=2E%02llu",
+         ram_gb_x100 / 100,
+         ram_gb_x100 % 100);
+
+env_set("ram_size_gb", buf);
+
+>- what if I want to save the byte size in a variable? With the current im=
+plementation, only mebibyte or gibibyte sizes can be stored=2E I would sugg=
+est to argc-- if m or g is passed, and then compare against argc > 1 in whi=
+ch case you'd use this third (in case m or g is passed) or second (if they =
+aren't) argument to store the value=2E
+
+Good idea, thinking about how to implement this the correct way :) as varn=
+ame could be "g" or "b" too=2E
+
+>- missing documentation on the base for the environment variable=2E We ha=
+ve some commands setting hex digits in variables, some others in decimal, s=
+o this needs to be made explicit so that people know if they need to transl=
+ate stuff before using it (or how to compare two numbers against each other=
+)=2E Here it's decimal according to the code (maybe we should have it in he=
+x instead? I am not sure what is the expected base for variables :/)=2E
+
+As i want to use it in scripts to choose correct bl2 file for bananapi r4=
+=2E Imho decimal is better to read here,but it should be mentioned in doc=
+=2E
+
+>> +
+>> +	return 0;
+>> +}
+>> +#endif /* CONFIG_CMD_MEMSIZE */
+>> +
+>>   #ifdef CONFIG_CMD_MEMTEST
+>>   static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulon=
+g end_addr,
+>>   			  volatile ulong *dummy)
+>> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
+>>   );
+>>   #endif /* CONFIG_LOOPW */
+>>   +#ifdef CONFIG_CMD_MEMSIZE
+>> +U_BOOT_CMD(
+>> +	msize,	3,	1,	do_mem_size,
+>> +	"get detected ram size, optional set env variable with value",
+>> +	"[m, g] [envvar]"
+>
+>Explain m and g so the user knows when typing help msize=2E
+>
+>We need tests in test/cmd/ and a new entry in doc/usage/cmd/ for this new=
+ command=2E
+
+I see this note in checkpatch,but as i rely on dynamic value and i saw no =
+test for mem yet=2E
+
+>Cheers,
+>Quentin
+
+
+regards Frank
