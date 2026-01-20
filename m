@@ -4,78 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED61FD2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 07:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B468D2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 08:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D0CB83A2D;
-	Tue, 20 Jan 2026 08:49:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C0FB83A2D;
+	Tue, 20 Jan 2026 09:12:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="nJt9pgVq";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="WZsVI12F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9AB6839E8; Tue, 20 Jan 2026 08:49:29 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 457F483A3B; Tue, 20 Jan 2026 09:12:16 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 567C583A64
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 08:49:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9B81839E8
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 09:12:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id ED6091A2931;
- Tue, 20 Jan 2026 07:49:26 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C0DE4606AB;
- Tue, 20 Jan 2026 07:49:26 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3A55E10B6816D; Tue, 20 Jan 2026 08:49:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1768895365; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=yO9X+DAkmdiehYOBLBPg0nKDwvgJvO6UrdZc/qXDLsM=;
- b=nJt9pgVqgGELwEFwg3Uhp9ZIHfuLqIWEnLiubZmEQgo3+aJTww8R25wz3xK6INdkDPzQuc
- MW8oCr/6UQAUfPUttSUtqe0+w5QLRd+FrWfWb7tkjzFMPNc36ZsJLm0O7jGCP3DaQHCCJf
- vqbMXdQeaKaABvyWRu+AaWNHpgAE1UyKu9HvG10Yf2OGqriR7EEOgg7J1HUvUGv7fwRSxk
- +lipLf+WALBWDCk1PKu1hwtJs+Qg58zmyo7jO8PbC1vXpGOB6wcSxqdTW2Mn6dojGy5bC5
- KcXnlEF+jXMr8N7qNRxzWJalGalK8P7iQbtJKW237PGNA3h3VX3luebfQ+9WcQ==
-Message-ID: <5c6bc402-3bdc-4bd1-aa16-dbac1a91a37d@bootlin.com>
-Date: Tue, 20 Jan 2026 08:49:11 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
- support
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dinesh Maniyam <dinesh.maniyam@intel.com>,
- Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20251028091256.600992-1-richard.genoud@bootlin.com>
- <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
- <5b7e3e38-325f-424b-ab95-8775924333e4@bootlin.com>
- <CAOf5uwkwDKzZpbj-iXBL2YTu-eH=96f2EzLcn0TFyGcJZHiNWQ@mail.gmail.com>
- <CAOf5uwkhHyXHUHRMLa9OStb+uuWQ6wajWOWncd=HUgzGZSBV=A@mail.gmail.com>
- <CAOf5uw=_1O=wYDTXxpXu1UDcUZWUN_9Se1HPbzzMU2Fttqm8Jw@mail.gmail.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <CAOf5uw=_1O=wYDTXxpXu1UDcUZWUN_9Se1HPbzzMU2Fttqm8Jw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=M4jybo31Wjpb+99VWYxa2+PPWJRlN9/eG+e0/g6iYcpK1XXxeU/wSnXNy7Ln8iSlKNih/fOpq2OLingY66XjKys94Hmx75kgLC8dgP9YZVvhuaINnZpmfwlaAX3eDgJRg89cbxFQIQkqMewbbRElrR7CVIRPc0/oGMP8ZG6FxHIwDtA6X6LujoORB3eiEtklQWu+ioBCbJW2bcdmnO2MSMNi7lnmEZub1snuxWo2Vpz4K+Nxt3NJnnOGc8zW9AGR96PAbTAftEX0rA2j+0BmmUwWPRgItBCN36YKNgde2JRtB6O98qtEoeFiiOcikuYqwW0SeaF09sisGuiVD3NC9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A6F40ib0b06QUn1BZBqD/nWjphfKO2TI56eFD4xrqsU=;
+ b=gccmCTI8CfHgS9e3X06J7NHIGHbN+aWDfAflq86ZEMcJGMJPEx1zEUgTVnArDG0IbtwzGuiPk24VAsFStbz3wCLjksVcQX0Iazwy4xo0UrsQFZztZO1007igSGpc1wF0wxz5pC0Q1GA+jmoMiieOzPyA25lOfGldEtG9enlqIJBhyBWJJbzGK26EwWrZ7auSeDRRmpuL0CT25QOuxe5dOQUwRPm88E7EDtSD/WlMxgJrVGibcJL2H7/pvm0TwuzGAfe80Y9uQ5kor5sjk9EU75ELbNonACrRE9FAPZf2LrODb5x5G6SCwPbBc+n4D/vUkV8ApuKN21w2o+PVUQOQXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A6F40ib0b06QUn1BZBqD/nWjphfKO2TI56eFD4xrqsU=;
+ b=WZsVI12FE1YFQqWcnsKWaAbOBYmN4nSCleyOS3E/TfjQ+9k9VCo0YmXsIza5tcb24TLDtd6LfFWCpfsY4vKfIPP3E52awp5T1hagqKIUJ1gYzTK2xnNyMtyqUwJArK3a7+CE1quJKVGYlthQYZsmCBcFghptLmTir8GZNTHVT+nAB5QD2u8QzChmfYB6A4tu6LKeS9FX/0jTseYX3XE0sfJpfblnPBowwD3/VjjH4MK3hSQxd/0qw/qqClG3WHAbxqzqpqUp07r9HcpXA8BMk200c1wRblKqHJzC6HgP9EjKKe1cWrQqoYX4dLjIX0NkSlO41UH8uom2kmpwtYHkAQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by PA4PR03MB6750.eurprd03.prod.outlook.com (2603:10a6:102:ec::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Tue, 20 Jan
+ 2026 08:12:09 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9520.009; Tue, 20 Jan 2026
+ 08:12:09 +0000
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: u-boot@lists.denx.de
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, trini@konsulko.com,
+ simon.glass@canonical.com, quentin.schulz@cherry.de
+Subject: [PATCH v4 0/6] UEFI Capsule - PKCS11 Support
+Date: Tue, 20 Jan 2026 09:11:57 +0100
+Message-ID: <20260120081206.251544-1-Wojciech.Dubowik@mt.com>
+X-Mailer: git-send-email 2.47.3
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
+X-ClientProxiedBy: ZR0P278CA0187.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:44::9) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|PA4PR03MB6750:EE_
+X-MS-Office365-Filtering-Correlation-Id: 85079908-2e6f-4cb1-d3c4-08de57fb9ba3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|19092799006|52116014|1800799024|366016|38350700014|7142099003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jbr/9XjPUSm/tVYnpk1ldyUIwYf+JVN4q+Y+7b+N3UhAWq6OJ4Gjb1SO0t3U?=
+ =?us-ascii?Q?sLImDsbSWa3mFkHjgakhR1q4fT5FhfrGuIamJQingzViM/hOBc4ZB3wz7sC9?=
+ =?us-ascii?Q?yJ25OaR1qNCwaognQ8sIRKz0TSKND0Mv5XTx/XZ11faFKHMEoeK9RVZrdl70?=
+ =?us-ascii?Q?6R3qLyApVBlk+/KfmZzs/hmPG/6sYUf5ScLP+2IRRuGuLRirZHfIK9tNPhAd?=
+ =?us-ascii?Q?DBtbYsahDaUxOOWnITzVwIUmS3F/iZAHZEYa4D/1lQ4qwos/PzpGXdv1cgdB?=
+ =?us-ascii?Q?U7UuXocx16cktjFPXdTXVxDIHLZMjufj1pY4ckjrtizR1IwZn6h3s9aszvkY?=
+ =?us-ascii?Q?rN8AoqzbSYI+5mVyBVp16hXMJZepNL5wOM11EV3iAjEp05Q6lJkCYBmMGGXl?=
+ =?us-ascii?Q?hK1okZlCMLij1OccGzCuwRxjrqUBWnfQ71Ym7hDDoh+7eQ4NG3JkD2TI8zCC?=
+ =?us-ascii?Q?kN/6uCJzv8zM92GSHUOnrPRWvis2eLqBaSHp38nBJI7XpjA07CACNLqZVZH8?=
+ =?us-ascii?Q?Pmkq4rJ64HkFp+bqDrjmxat+8u8s0wtg/yLmwX8bKCsCAo8BbKxRjOCzEXOo?=
+ =?us-ascii?Q?6UfhC8XGaz5CxG77M8MsTWQojcs1rCkIbZ/XnWru3a9h/lQoswoNPwgDkmwn?=
+ =?us-ascii?Q?ha7V05bZGYzNa0kHx6sYERf3IVlZMopvgWoSgxBpRui/PVJnoJy/RYwHDV7I?=
+ =?us-ascii?Q?L70G4tHoxpJn6BMhk0EMmMjWQWH7qoHOZOgXPbecsVqoJIlSBbvSxPGTCQjL?=
+ =?us-ascii?Q?EJQQ1Oi8tp+5JoLizrOVHn3Iy70Q/ztTrF10WoGpWGd6y5zdsEcIgyJn2qbE?=
+ =?us-ascii?Q?jonQnNJ/ZGC3/jgedUcR6gyJCRYjWP7L2HLXTnFBLvx7xcmlwdaBZM64yhgC?=
+ =?us-ascii?Q?d5ZTdVD4JRLxSv1xcX2pwh0OGPVSfHg1ltiTJ/dUE80i8aU9um6bpijmycBs?=
+ =?us-ascii?Q?jsFJIQM5celq3lQap4BnSYGfOmb4fDlcFh6iWai2hgUTnuiKY4nJE4uKE4w5?=
+ =?us-ascii?Q?2MRLYMhKzDrpZhax3+uo226OVZzGsze4qqmc+N5p7T7rPqQfW09O3ihRckHA?=
+ =?us-ascii?Q?vU1cBeuvJXo19RW3SENpRM+VC5MxQ7KE8moxjmwADVwcTKGqV1KKw1j2o4wu?=
+ =?us-ascii?Q?8OX/7UivW0DTAV7S160geohivSE7mUYVPNGzM+tYHM/95FX5D7n+r66Lvz+o?=
+ =?us-ascii?Q?OsIrVhKXpqIZimODp6d5CF8NC8B6UKRIsa+S6chE0wS7yqzAmsn/Wx6ocTcl?=
+ =?us-ascii?Q?bbJrWglo0Bm8apEa1tKfpEl/gH7F5QLlkaUEOI+BmakqL5Il/AhPcRIwBUG5?=
+ =?us-ascii?Q?FM9uTPvsP2nqp/MSXlrRF2WNgkFe5J9PwwZ3ScIHkE+XEW54EdyRUIIHp3fx?=
+ =?us-ascii?Q?BM61bo8BQnMIH1r8fL6TUXRVWxrkWqG1+lnKGOLOttX/h7O/IBHFz0toiiBN?=
+ =?us-ascii?Q?mP637HRfyLCyHiUQY0SRDE4Lcsejvqu2NukEihZ0OTSMV59ENJW2JIsqt2rh?=
+ =?us-ascii?Q?xBT3SerGXfnenn3OpPM5kzAiQ49xqAUtAsdPuEB20VozKyMvsu0tI6PPSLwt?=
+ =?us-ascii?Q?FEj6+IqUtv8poho+xeDRs2DPxjihltLsVGnMIZv7aGDlbT0E+8EC1QTUb4xc?=
+ =?us-ascii?Q?lnSsD7Ybnv46P1Ot0ai2hlk=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(19092799006)(52116014)(1800799024)(366016)(38350700014)(7142099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/1cywqvADAwQk6w2Zh2gwwuRmIQMHX4lrJuqsx9fEBXNoVaEqfS+9BJAIrc4?=
+ =?us-ascii?Q?Wye3xjSqyB2hqvrI5yS2a58HcTD9BqNDgzeLdL7mo5MJ7adef9brYKWQ4gnL?=
+ =?us-ascii?Q?lCLg7C9RPtqM0TmsVO3/9g9TZK87NYykjCjIMEh9b3szOezk9uW0SBaUpRFW?=
+ =?us-ascii?Q?ZgcOthbm54hoqfrsGKHCaAikpkxWpMq+5lChoLyzLYEnT835zxX9qBehftL/?=
+ =?us-ascii?Q?zNuwUPcA63Wt+w1T5A20iNqCzk+4cTdV8EXfvcVNxLUMkxfMkfgAWcwS1cYz?=
+ =?us-ascii?Q?O8au9Fqs+aAzg/VcDkYVHPC9MLPjzuMBZxJMvNm49Bu5zCgEQI4GqE/3K9+X?=
+ =?us-ascii?Q?8XzEsqzfYo1Qgpoy6qcZlMpXTNqfufzDmL9W2Ict2LFaHztUNdqYAxnvlvOu?=
+ =?us-ascii?Q?y9FdL8SifqTV4/yegjbLxTEwZo9wCCRii2amHXTr4orY0EGSSJ5H4aGmqcZc?=
+ =?us-ascii?Q?a72y6PMKwUJ19FMBFVk8vQm+RhoNQxxn7hVwqNufJ+GJiFUr/eA8j696MtvM?=
+ =?us-ascii?Q?9/ypgkPlzXnwG8dMWUKVGxz6YHHZkvhPvmRjPjvVjtoVb9GNr31tNWtXlwNj?=
+ =?us-ascii?Q?mRtLrxuZ6na4945u4iHvGURzis4vBYqkGAgqiy3zHOeEtgtN2LazUehZEmgA?=
+ =?us-ascii?Q?KQiPNKCYiqH2q3ZjYxWW39vp6e60qjz0UPm4p0Q/Cw4lJJnSshXtSkmE4VVe?=
+ =?us-ascii?Q?prS9ASScyUg5yorna4/+qKNxbKF2GfZ9ErN6L/gWy4ggnUo9RuniywcQtXKa?=
+ =?us-ascii?Q?/OMbm4vMVOnpTFYyORsIZRUDf0sD6mPtiwhillMJZ7HSJN0mOdK7UauievLm?=
+ =?us-ascii?Q?U4U6zi8nv9jbQTi9LgYnw5vEleZ/nABSk0br5d5JBTMgfR5blUx0wxlMB1eQ?=
+ =?us-ascii?Q?txLmZDymiEuSfqbcLtia3iGAsCO+54jZm1ZZTSpee+WVGXP4HJFdynLul0+M?=
+ =?us-ascii?Q?HmuHM6CW9c3ykEuDkckqn0wZTLk9MrSR+EmEWKZZtMaR+NGKkQ/yYgQjfxY/?=
+ =?us-ascii?Q?g7qfCR+y7wwDukGqUb1cxp0fqoBBfen9Q/Lyp6oVwWIwD7mMV+P8X6W2vAb3?=
+ =?us-ascii?Q?qFObwb/Jb/XDX2KA+N7axTTHndLQsi7VvShDfifcMZF+CpajhK5TswSVrFkR?=
+ =?us-ascii?Q?o4qp9PqR3ZUMSvHs98oArcJVcfTsnEM5uTf7hra9yMoCj/iYBtt9whm7THqz?=
+ =?us-ascii?Q?kGeDOpOak1UBzB43yAhGpjXczBmPLG+YaGNRP85hbJjJqt2rl3XCW0kSHEYf?=
+ =?us-ascii?Q?1CQqfKMUrtN8uQ0FrwxVf+8m6mf4yIPnyUSQcP2xCW54li1se2iJYi5Jl7ah?=
+ =?us-ascii?Q?rjXt9lVntdY1vgQj4ybuGcPa4iTJ63QtuwZjBMI2NBzOdf4T8updlxhGpTUJ?=
+ =?us-ascii?Q?xWT+CpOVJ/k1ufLOA8fP7e0c4up6myJFwF3ObkUz82/RMhQrViefG/FeCsdf?=
+ =?us-ascii?Q?LerlBlXcffRkLkncN1+D+B7SAitwLWD8zXdCfJJyo/BMu3kgEqTJJxqOHv5L?=
+ =?us-ascii?Q?Vaa6srUbZcYgIwfW0TGf/9sOrJS0F9pLSZZDFKiJkCqxrfT/L3oDyaKUHlQu?=
+ =?us-ascii?Q?hJZDo6muVJAU0sOyJGv4cgJpnOOeMpajPKBQN2SnhVywMD9cX6UjxHXrPCTq?=
+ =?us-ascii?Q?Ga/rDlJSNXH3A//u4vM8n/zNExuFo6rdLsfFD8kmuKDWqXi5E1ifxVllhN6t?=
+ =?us-ascii?Q?ZqltVGzFbUpQzoggm9IfHqDX+pAYQuGjyVIRyZPcVSd2QO7EwAeuECzB8qzB?=
+ =?us-ascii?Q?cc1ixpmtiA=3D=3D?=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85079908-2e6f-4cb1-d3c4-08de57fb9ba3
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 08:12:09.4262 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 80x6Xo5XAQbZgfalPVYacj4chniPE+Bsf9igqtcPGHjND//4/CgdXZaAHIP4otRY34oFQqK78mcdS9vr12EYTg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6750
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,220 +162,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Add support for pkcs11 URI's when generating UEFI capsules and
+accept URI's for certificate in dts capsule nodes.
+Example:
+export PKCS11_MODULE_PATH=<pkcs11 provider path>/libsofthsm2.so
+tools/mkeficapsule --monotonic-count 1 \
+ --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
+ --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
+ --index 1 \
+ --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
+ "capsule-payload" \
+ "capsule.cap
+Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+---
+Changes in v4:
+* adapt mkeficapsule python support to dump detached signature
+  for authenticated capsules
+* verify detached capsule signature with openssl after generation
+* use p11-kit to figure out location of softhsm2 library
+* fix missing long option for dumping signatures in mkeficapsule
+Changes in v3:
+* fix write file encoding, env setting and extra line in binman test
+  after review
+Changes in v2:
+* allow mixed file/pkcs11 URI as key specification in mkeficapsule
+* fix logic for accepting pkcs11 URI in binman device tree sections
+* add binman test for UEFI capsule signature where private key comes
+  from softHSM
+---
+Wojciech Dubowik (6):
+  tools: mkeficapsule: Add support for pkcs11
+  binman: Accept pkcs11 URI tokens for capsule updates
+  tools: Fix long option --dump_sig in mkeficapsule
+  binman: Add dump signarture option to mkeficapsule
+  binman: DTS: Add dump-signature option for capsules
+  test: binman: Add test for pkcs11 signed capsule
 
-Le 20/01/2026 à 08:33, Michael Nazzareno Trimarchi a écrit :
-> Hi Richard
-> 
-> On Mon, Jan 19, 2026 at 10:01 AM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->>
->> Hi Richard
->>
->> I queue them and run the CI, I have it ready, waiting for the denx
->> site to be up again
->>
-> 
-> At this point I think the best is resend the series including last
-> patches and the requested changes for two
-> patches
-Ok!
-
-
-Thanks!
-> 
-> Michael
-> 
->> Michael
->>
->> On Mon, Jan 12, 2026 at 6:30 PM Michael Nazzareno Trimarchi
->> <michael@amarulasolutions.com> wrote:
->>>
->>> Hi
->>>
->>> My fault, I was thinking to already have picked them, I will do
->>>
->>> On Mon, Jan 12, 2026 at 6:09 PM Richard GENOUD
->>> <richard.genoud@bootlin.com> wrote:
->>>>
->>>> Hi Michael,
->>>> Le 31/10/2025 à 07:43, Michael Nazzareno Trimarchi a écrit :
->>>>> Hi Richard
->>>>>
->>>>> On Tue, Oct 28, 2025 at 10:13 AM Richard Genoud
->>>>> <richard.genoud@bootlin.com> wrote:
->>>>>>
->>>>>> Hi everyone,
->>>>>>
->>>>>> This patch series introduce H6/H616 NAND controller support (but not yet
->>>>>> the DMA/MDMA part).
->>>>>>
->>>>>> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
->>>>>> chip.
->>>>>> ECC is supported, as well as scrambling.
->>>>>>
->>>>>> Support for booting from NAND is not part of this series, but it's almost
->>>>>> ready. (It needs quite some modifications in sunxi-spl-image-builder.c
->>>>>> and sunxi_toc0.c)
->>>>>>
->>>>>> H6 SoC has not been tested, but it shares all registers with H616, plus
->>>>>> some registers dedicated to Embedded Crypto Engine that H616 lacks.
->>>>>>
->>>>>> This IP has quite some register fields modified from the A10/A23, but in
->>>>>> the end, it works more or less the same.
->>>>>> Main differences with A10/A23 are:
->>>>>> - The need for 2 more clocks (for ECC and MBUS)
->>>>>> - The use of a new USER_DATA_LEN register
->>>>>> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
->>>>>> - MDMA based on chained buffers
->>>>>> - some registers layouts have changed (mainly due do the stronger ECC)
->>>>>>
->>>>>> Patches 1 and 2 are small fixes
->>>>>>
->>>>>> Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
->>>>>> and ultimately merge those definitions in an include file, without
->>>>>> functional change, removing the usage of sunxi_ccm_reg on the way.
->>>>>>
->>>>>> Patches 7-19 are paving the way to the introduction of H6/H616 NAND
->>>>>> controller by adding per SoC capabilities for both drivers. They are
->>>>>> small for an easier review, without functional change.
->>>>>>
->>>>>> Patches 20-21 are adding missing NAND related clocks definitions for
->>>>>> H6/H616
->>>>>>
->>>>>> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
->>>>>>
->>>>>> Patch 23 adds the support for H6/H616 NAND controller in SPL.
->>>>>>
->>>>>> Patch 24 fixes warnings in sunxi_nand_spl.c
->>>>>>
->>>>>> A similar series for this NAND controller support in Linux has been sent
->>>>>> and being reviewed.
->>>>>>
->>>>>> Changes from v1:
->>>>>> - pick-up reviewed-by
->>>>>> - use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
->>>>>>     by Andre
->>>>>> - remove cosmetic in patches that are beyond cosmetic changes
->>>>>> - remove usage of struct sunxi_ccm_reg, suggested by Andre
->>>>>> - indent @caps member description in comment
->>>>>> - give more informations on PAT_FOUND registers in commit message
->>>>>> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
->>>>>>     same bit NFC_ECC_BLOCK_512
->>>>>> - add missing MACH_SUN50I_H6 in Kconfig
->>>>>>
->>>>>> Richard Genoud (24):
->>>>>>     mtd: rawnand: sunxi: cosmetic: remove needless comment
->>>>>>     mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
->>>>>>     mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
->>>>>>     mtd: rawnand: sunxi_spl: cosmetic: use definitions from
->>>>>>       linux/mtd/rawnand.h
->>>>>>     mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
->>>>>>     mtd: rawnand: sunxi: merge register definitions for
->>>>>>       sunxi_nand{,_spl}.c
->>>>>>     mtd: rawnand: sunxi: add per SoC capabilities
->>>>>>     mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
->>>>>>     mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
->>>>>>     mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
->>>>>>     mtd: rawnand: sunxi: add has_ecc_block_512 capability
->>>>>>     mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
->>>>>>     mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
->>>>>>     mtd: rawnand: sunxi_spl: add per SoC capabilities
->>>>>>     mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
->>>>>>     mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
->>>>>>     mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
->>>>>>     mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
->>>>>>     mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
->>>>>>     sunxi: clock: H6: add NAND controller clock registers
->>>>>>     clk: sunxi: Add MBUS Master Clock Gating Register
->>>>>>     mtd: rawnand: sunxi: add support for H6/H616 nand controller
->>>>>>     mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
->>>>>>     mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
->>>>>>
->>>>>>    arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
->>>>>>    .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
->>>>>>    arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
->>>>>>    .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
->>>>>>    arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
->>>>>>    board/sunxi/board.c                           |  19 +-
->>>>>>    drivers/clk/sunxi/clk_h6.c                    |   2 +
->>>>>>    drivers/clk/sunxi/clk_h616.c                  |   2 +
->>>>>>    drivers/mtd/nand/raw/Kconfig                  |   3 +-
->>>>>>    drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++--------
->>>>>>    drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
->>>>>>    drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-------
->>>>>>    12 files changed, 629 insertions(+), 284 deletions(-)
->>>>>>    create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
->>>>>>
->>>>>
->>>>> I will pick the series over the weekend, check CI, and check better
->>>>> all the patches that already
->>>>> get reviewed anyway
->>>>
->>>> Any news?
->>>
->>> Sorry, I have picked the patches assigned to me, but now I found out
->>> that I miss your series because
->>> was not assigned to me. Give me a couple of days
->>>
->>> Michael
->>>
->>>>
->>>>
->>>> Regards,
->>>> Richard
->>>>
->>>>
->>>>>
->>>>> MIchael
->>>>>
->>>>>>
->>>>>> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
->>>>>> --
->>>>>> 2.47.3
->>>>>>
->>>>
->>>>
->>>> --
->>>> Richard Genoud, Bootlin
->>>> Embedded Linux and Kernel engineering
->>>> https://bootlin.com
->>>
->>>
->>>
->>> --
->>> Michael Nazzareno Trimarchi
->>> Co-Founder & Chief Executive Officer
->>> M. +39 347 913 2170
->>> michael@amarulasolutions.com
->>> __________________________________
->>>
->>> Amarula Solutions BV
->>> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
->>> T. +31 (0)85 111 9172
->>> info@amarulasolutions.com
->>> www.amarulasolutions.com
->>
->>
->>
->> --
->> Michael Nazzareno Trimarchi
->> Co-Founder & Chief Executive Officer
->> M. +39 347 913 2170
->> michael@amarulasolutions.com
->> __________________________________
->>
->> Amarula Solutions BV
->> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
->> T. +31 (0)85 111 9172
->> info@amarulasolutions.com
->> www.amarulasolutions.com
-> 
-> 
-> 
-
+ tools/binman/btool/mkeficapsule.py            |   6 +-
+ tools/binman/entries.rst                      |   2 +
+ tools/binman/etype/efi_capsule.py             |  13 +-
+ tools/binman/ftest.py                         |  53 +++++++++
+ .../binman/test/351_capsule_signed_pkcs11.dts |  22 ++++
+ tools/mkeficapsule.c                          | 111 ++++++++++++++----
+ 6 files changed, 177 insertions(+), 30 deletions(-)
+ create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
 
 -- 
-Richard Genoud, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+2.47.3
+
