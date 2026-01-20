@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6429FCA5FD7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 18:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D183D26292
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 19:29:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE41D82A9E;
-	Tue, 20 Jan 2026 19:22:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17A8882A9E;
+	Tue, 20 Jan 2026 20:29:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LcksEG/I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HeCvp0Rn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFED283015; Tue, 20 Jan 2026 19:22:56 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 646FA83015; Tue, 20 Jan 2026 20:29:01 +0100 (CET)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77F8B8063E
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 19:22:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 933748063E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 20:28:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-45c9fdf2a06so2648701b6e.2
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:22:54 -0800 (PST)
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7d148ddb583so96202a34.0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:28:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768933373; x=1769538173; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1768937327; x=1769542127; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D9wVVIcKiGcAXwrK0OPafEJS0iI8ll1kjwG9/Jnsc5g=;
- b=LcksEG/Ia93VR0aG62BLLHJDyn9YSMG9pcTxsgGLHfO95WHxSVQT8BVJy8s+8wlL+V
- 4YK7H4dDe3VetFr86d073cbjQntsivl7GDh9aKH3cqRHjzLUEiCbvTUvGjEdCkhhJCZS
- W8/md65J0JgvuoBc1cqVR8l2UKizpTp/AoUi0=
+ bh=eC8zdyOIPgH5J9KsyInRJF+qCEqzA+zPURjWGD1wWnA=;
+ b=HeCvp0RnmWgZV/P9rqxKO1JUPhQN6j97XcXRk6FFIHHkNQ/lEHYPR62pC+v2OZCWlG
+ glVxgFXZulIcMGyJcIwYxKOsgkn6NhO6IJ13RH90lt13FHt+RiPeGhZZuKHtTfn6w1mO
+ X6zIHYr4RyIudLu2e9miBTTPKFmHP71FuDtKc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768933373; x=1769538173;
+ d=1e100.net; s=20230601; t=1768937327; x=1769542127;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D9wVVIcKiGcAXwrK0OPafEJS0iI8ll1kjwG9/Jnsc5g=;
- b=HWM5y1y1mpqieREl44nUdpZqPqBqA72ktRHqsuP+fMxQrCZybpwIZCsxFPfe41taf0
- KwF5VrzpZ3HqzLaDw6p2CWVcB7vvcReELnyygf+6K9gTLJNtomgpNrXVf/gNGkEMW6t3
- bmDzNFb9CuDTyq0ReelGAZ2oqCHGjsDh1RVLm+XzVUjH328LfuXOXEgIDsj0tpLCzAAx
- zrxQNA9o7wA72g29qMI7NKQaT0YBf7YqIgAZtMckNZZmsRsGogBhBvtrFJoHfjoKItT1
- Q/v+nUUwmv7k5QCOglSfEaLu0Q4aupuxgYP52F8w5cKUJ1EatZNMtS9tI8KE40dDCg3G
- N31A==
-X-Gm-Message-State: AOJu0YzAnxixJBf6jxUBVeyo+N2DGYch2Dg6xyBTXF1drr0Tqm+pazEW
- EuLkCSXxeYq0EKpSciQvywvupFmN4jhl9ib/mPVsJ+7QtKfvfPwmS4DqS+QUl3MOBvs=
-X-Gm-Gg: AY/fxX4nMcIVineK25YMHEfw7p1UJezavSarYxd1JX2zpOkeF2suoNXpFoiyfq/cFXO
- t3hOjPSTPX5P8J2CrNvM2pxSkN1MNtQsfhOV5NDFC4WGzCfZIurqje1wIyWcJ+byCu4Qh+svkCV
- XpfK5ZA+5vFlNCImf6iPgEox3KMjTnYD/3YIy4gCOkhlWQdClHcO00TAgwJ2VVlK+KQ6D0te5c7
- FhOcgTCzJtqFEgKvcMWAy1zSeOGgBS5s/NmtOCfz6YKVk/qQwhZx37mWrYDA+HivFFwve8dYHSm
- 7YLIb0mByuoikkbbzo9lcyw4YaKVwsmeKQF+SkRy7GsYM+6WfwjEE1rYwTLEqo8CtJpTwWHk23p
- 55HSic6pgRW7/ZBI1SVRjbmsH/wNUnttL5m58dhqZkw3cI3NnHfVxlv3P0BYjJ/JhYwSAFlL1tD
- g/gp0ErZu4EuIihj8dC1a5oMrBWpOxvg0xvEDyK1kN6XhbsjeG7KLaD/qp3e+JyCgRj1G8osCZV
- bU2c9kMcdBLopVSdEYVktwpB/MRWJ9d+ipERL0=
-X-Received: by 2002:a05:6808:a585:20b0:45d:336:5609 with SMTP id
- 5614622812f47-45d036424acmr4147900b6e.20.1768933373057; 
- Tue, 20 Jan 2026 10:22:53 -0800 (PST)
+ bh=eC8zdyOIPgH5J9KsyInRJF+qCEqzA+zPURjWGD1wWnA=;
+ b=PwLKPqMjtZPF+Xma3/WfQjYj4zGGzUm1rgVmKNmA4ZbfuAMHbPv/YYBExBIv3GahbT
+ k4gmUP571Ds2HBeq/oySl+Fcd3EuaXtC0RAo17STCi0h1/6BY+Tns21qCH5r8rVINZJo
+ N4mzDOpn0NhgNm1/O1lQHiRpqXyKKe2PIqoAdIxjEAdoAuJphp0LwSpKRzRU+/rgn0Jf
+ 4byCR0CuQc4RfGu4ZqaBB6evuQBTRmMb8waAjpLwS+sFCFTyg0/RGmg1v2uEl90JxURz
+ 7XFbkVu07O4zHeVR/EOrP8huWwAN2B2knmyUuGe2IvwSupUkT5uixX6yUYwGfaJPV6DG
+ fVmg==
+X-Gm-Message-State: AOJu0YwkDQZlSeYbiBl1N5fO3olvJkTTkBctZcIvm3A1jvgXMc7WCY8T
+ oDvLmsBWg6EOsAXY6hpy7/4h+h0YoodsLF3PCo5Cly667PRLMurpLT3gZk/GqmSYTbU=
+X-Gm-Gg: AY/fxX5ih90r0fzqRS5N7WTKRpfAxJW2c8QhxsIEPMYSWLSLus+6LbPw0EjB985lyE9
+ +vwHDEwrScWsc6ePPrX9OvPyd9+CQfWvhcVCorKwalORaA7royiKV/mjcplUgXIwQX2DAYuJKns
+ R7VOkne0H/Wz4I0Rd5OXk567Ejio7wiQ21TFXyelsle7AyR5uAlDycUX+hFF6D7U9L5P7wS9/JI
+ PaD7lg1CChi8n8ZE4BuzE5KZr3dSvw/9LbXMCcBEXW6l3IeHNmj0jZawfuVOySbwUQIF0pq8aXq
+ qmVBXWQvqIonlMtVoGBUtRBVJSn5mpievlEtccFRSJnI/q6TGDIw71uF0WL8HHZQEf6uTaldI62
+ i6GVDldCCYEMbkRz8S6zTWTw+X+SYUcKKWUd0LGoNVF2La+44FzA8i1+gn0Z8M5PzoC8WIQkKnk
+ tcikrMtB+x8FbaFF01q3roG7GdDhaEyRREnXhHpBzV7QXBclv56UhtilrTZ0BtjHrZjE+a95Lz7
+ ErAx9Q/VygZCU9Tbm3hKz+nul6zKdyI56ZyZM4=
+X-Received: by 2002:a05:6830:6504:b0:7cb:125d:2a47 with SMTP id
+ 46e09a7af769-7d140a3d5eamr1358015a34.1.1768937327243; 
+ Tue, 20 Jan 2026 11:28:47 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9e03e924sm6973473b6e.19.2026.01.20.10.22.52
+ 46e09a7af769-7cfdf0d8b28sm9248328a34.2.2026.01.20.11.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 10:22:52 -0800 (PST)
-Date: Tue, 20 Jan 2026 12:22:50 -0600
+ Tue, 20 Jan 2026 11:28:46 -0800 (PST)
+Date: Tue, 20 Jan 2026 13:28:44 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Dmitrii Sharshakov <d3dx12.xx@gmail.com>,
- Andrew Soknacki <asoknacki@gmail.com>
-Subject: Re: [PATCH v3] binman: elf: Check for ELF_TOOLS availability in
- is_valid
-Message-ID: <20260120182250.GP3416603@bill-the-cat>
-References: <20260109-pyelftools-warning-v2-1-e27784f14c56@gmail.com>
- <20260120154750.420179-1-trini@konsulko.com>
- <80e83cf4-f559-4505-b12c-7696c11e18cf@cherry.de>
- <20260120175504.GO3416603@bill-the-cat>
- <dba2ab4e-e31a-4726-945f-79022c907a74@cherry.de>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 3/3] doc: develop: process: Explain when/how
+ Custodians may edit patches
+Message-ID: <20260120192844.GQ3416603@bill-the-cat>
+References: <20260116182335.4081828-1-trini@konsulko.com>
+ <20260116182335.4081828-4-trini@konsulko.com>
+ <f3bf1986-187c-405d-aafe-9e59ab14b3fc@cherry.de>
+ <20260119164728.GC3416603@bill-the-cat>
+ <d35d3c89-1b8c-478b-bbbd-7a29f7e10dbf@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="G0AT4qnXCLOcdvj5"
+ protocol="application/pgp-signature"; boundary="2iFUFDucXJ7JBc87"
 Content-Disposition: inline
-In-Reply-To: <dba2ab4e-e31a-4726-945f-79022c907a74@cherry.de>
+In-Reply-To: <d35d3c89-1b8c-478b-bbbd-7a29f7e10dbf@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,158 +103,153 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---G0AT4qnXCLOcdvj5
+--2iFUFDucXJ7JBc87
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 20, 2026 at 07:15:08PM +0100, Quentin Schulz wrote:
+On Mon, Jan 19, 2026 at 07:02:50PM +0100, Quentin Schulz wrote:
 > Hi Tom,
 >=20
-> On 1/20/26 6:55 PM, Tom Rini wrote:
-> > On Tue, Jan 20, 2026 at 06:36:33PM +0100, Quentin Schulz wrote:
+> On 1/19/26 5:47 PM, Tom Rini wrote:
+> > On Mon, Jan 19, 2026 at 01:27:52PM +0100, Quentin Schulz wrote:
 > > > Hi Tom,
 > > >=20
-> > > On 1/20/26 4:47 PM, Tom Rini wrote:
-> > > > From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+> > > On 1/16/26 7:16 PM, Tom Rini wrote:
+> > > > As seen with commit d503633a3676 ("Revert "doc: board: starfive: up=
+date
+> > > > jh7110 common description""), it has not always been clear what is =
+and
+> > > > isn't allowed by custodians, and what the expectations are. To prev=
+ent
+> > > > further unintentional conflicts, document the limited cases where
+> > > > custodians are allowed to modify patches directly, and how to do th=
+at.
 > > > >=20
-> > > > Check if elftools package is available before running DecodeElf().
-> > > >=20
-> > > > This clarifies the error message and adds the required test for
-> > > > coverage.
-> > > >=20
-> > > > Signed-off-by: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
-> > > > Signed-off-by: Andrew Soknacki <asoknacki@gmail.com>
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > [trini: Add the test provided by Andrew on IRC, to fix coverage]
 > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
 > > > > ---
-> > > > Changes in v3:
-> > > > - Add the test, provided by Andrew, to address the coverage failure=
- in
-> > > >     CI
+> > > > Changes in v2:
+> > > > - New patch.
 > > > > ---
-> > > >    tools/binman/elf.py      |  2 ++
-> > > >    tools/binman/elf_test.py | 12 ++++++++++++
-> > > >    2 files changed, 14 insertions(+)
+> > > >    doc/develop/process.rst | 6 ++++++
+> > > >    1 file changed, 6 insertions(+)
 > > > >=20
-> > > > diff --git a/tools/binman/elf.py b/tools/binman/elf.py
-> > > > index 6ac960e04196..899c84ad36d6 100644
-> > > > --- a/tools/binman/elf.py
-> > > > +++ b/tools/binman/elf.py
-> > > > @@ -570,6 +570,8 @@ def is_valid(data):
-> > > >        Returns:
-> > > >            bool: True if a valid Elf file, False if not
-> > > >        """
-> > > > +    if not ELF_TOOLS:
-> > > > +        raise ValueError("Python: No module named 'elftools'")
-> > > >        try:
-> > > >            DecodeElf(data, 0)
-> > > >            return True
-> > > > diff --git a/tools/binman/elf_test.py b/tools/binman/elf_test.py
-> > > > index 5b1733928986..3ad0bf4c4b09 100644
-> > > > --- a/tools/binman/elf_test.py
-> > > > +++ b/tools/binman/elf_test.py
-> > > > @@ -373,6 +373,18 @@ class TestElf(unittest.TestCase):
-> > > >            self.assertEqual(True, elf.is_valid(data))
-> > > >            self.assertEqual(False, elf.is_valid(data[4:]))
-> > > > +    def test_is_valid_fail(self):
-> > > > +        """Test calling is_valid() without elftools"""
-> > > > +        old_val =3D elf.ELF_TOOLS
-> > > > +        try:
-> > > > +            elf.ELF_TOOLS =3D False
-> > > > +            with self.assertRaises(ValueError) as e:
-> > > > +                elf.is_valid(b'')
-> > > > +            self.assertIn("Python: No module named 'elftools'",
-> > > > +                      str(e.exception))
-> > > > +        finally:
-> > > > +            elf.ELF_TOOLS =3D old_val
-> > > > +
+> > > > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+> > > > index 6f5bdd3db957..775a855fd7a0 100644
+> > > > --- a/doc/develop/process.rst
+> > > > +++ b/doc/develop/process.rst
+> > > > @@ -144,6 +144,12 @@ feedback to the submitter of a patch about wha=
+t is going on:
+> > > >        feels it has been too long since posting their patch and not
+> > > >        received any feedback, it is OK to follow-up and ask.
+> > > > +    * A custodian may make spelling corrections, spacing fixes and=
+ other
+> > > > +      obviously correct trivial changes. They must also in turn am=
+end
 > > >=20
-> > > I'm not sure this is a good idea. The issue is that you're modifying =
-the
-> > > variable from a python module. The check may be run by other tests at=
- the
-> > > same time in different threads and I think the tests will unnecessari=
-ly be
-> > > skipped or fail?
-> > >=20
-> > > I think we may want something like:
-> > >=20
-> > > @unittest.mock.patch('binman.elf.ELF_TOOLS', False)
-> > > def test_is_valid_fail(self):
-> > > ?
+> > > I guess people will have a different interpretation as to *what* is an
+> > > "obviously correct trivial change", based on the U-Boot git history, =
+are
 > >=20
-> > It's following the same practice as all of the other tests however. I
->=20
-> Which is probably incorrect. Also not sure about the os.environ
-> modification... probably should also be a global or temporary mock.
-
-It's well beyond my scope of expertise at this point, yes.
-
-> > might do a follow-up to try what you suggest, since learning about how
-> > to fix this problem yesterday I realized that I can fix I think my "no
-> > cover" in commit 66be03b7ee19 ("binman: blob_dtb: improve error message
-> > when SPL is not found") correctly now, as I think it's the same kind of
-> > failure.
+> > Yes, but this is intentional, honestly. In my other follow-up to E
+> > Shattow I mentioned there is other general process stuff we need as a
+> > project. Custodians are trusted members of the project and should have
+> > some leeway.
 > >=20
 >=20
-> Yeah, you can likely mock self.FdtContents() to return None, None to trig=
-ger
-> the FileNotFoundError exception with the desired parameters. The only iss=
-ue
-> is whether self.FdtContents is called multiple times within the same
-> function (maybe from functions/methods called from that function), then it
-> gets harder.
+> Ack.
 >=20
-> > Personally, I find the exercise as an example of testing for tests sake.
->=20
-> Coverage test is difficult. Sometimes it's unnecessary tests so it makes =
-the
-> coverage tool happy we don't regress. How does one decide which tests mean
-> something /me shrugs.
-
-Yes, I agree it's a hard task to solve, and sometimes you just need to
-put in a test to make the tool happy.
-
-> > We didn't (and can't?) have a test that caught the real problem, which
-> > is a lack of elftools giving a hard to understand error message. The
-> > patch from Dmitrii fixes that real problem (re-use the test+raise logic
-> > other functions do), but python testing requests a test for this new
-> > failure.
+> > > there some commits that used the [] + SoB form that are fine or shoul=
+dn't
+> > > have be made such that we can elaborate a bit more?
+> >=20
+> > Yes, we've made changes before that perhaps really shouldn't have been,
+> > or at least are questionable and should have had more discussion.
 > >=20
 >=20
-> I haven't looked much into it, but reading elf.py, I didn't like that some
-> methods require elftools and some not. I'm wondering if we shouldn't split
-> them in two and have the one that relies on elftools not even check if it=
-'s
-> there. It imports the module, done. If it cannot, it'll complain about
-> NameError: name 'ELFFile' is not defined
-> NameError: name 'ELFError' is not defined. Did you mean: 'EOFError'?
-> and it's up to the caller to handle whether it should be a hard failure (=
-not
-> catch it) or not?
-> or we could also just raise an Exception to tell the user to install
-> pyelftools if we really need a hint at what to do when the exception is
-> raised.
+> I was just suggesting to provide real-life examples in the docs so people
+> have some idea on how to format the commit log for example. I am neither
+> intending nor expecting to review all commits ever made to check if some
+> changes were made without approval from/feedback to the contributor.
 
-That's one of the first things I noticed as well when I saw v1 of this
-patch and wanted to improve it. I agree splitting the file and having
-one try/raise would be better, and split the requires elftools code from
-the doesn't require elftools code.
+OK, thanks.
+
+> > > I think providing an example would be nice, e.g. the patch as on the =
+mailing
+> > > list and after being merged with changes (obviously one you think fol=
+lowed
+> > > the rules here). This will make the section longer for sure but it'll=
+ be a
+> > > visual cue that this is important.
+> > >=20
+> > > I would suggest to require the custodian to notify as answer to the o=
+riginal
+> > > patch if any change was made when merging the patch, even if the chan=
+ges
+> > > match the allowed list of changes listed above. What do you think?
+> >=20
+> > I worry that we're making too many changes in the wrong direction, based
+>=20
+> It's always a fine balance to find. I guess this could be less "needed" if
+> we encourage custodians to use b4 ty to send thank you notes when merging.
+> Then one can simply go and check the commit themselves (or like you allud=
+ed
+> in the v1, have tooling that can check that).
+
+I think more custodians using b4 would help (as discussed slightly on
+irc, it offers good patchwork integration too), but thats not exactly
+what E Shattow was suggesting for a tooling idea, I believe. But I do
+believe more custodians using "b4 ty" would be helpful as it provides
+"is applied" along with "this commit hash".
+
+> It's always easy to suggest processes when you won't have to follow them
+> yourself, so I'm mostly asking questions or suggesting things.
+
+Yes, thanks. :)
+
+> > on the problem that did occur. Which was a real problem. But it was also
+> > something that obviously fell outside of the "trivially correct" rule
+> > above, as it was adding new content.
+> >=20
+>=20
+> Ack.
+>=20
+> > Maybe, since the kind of spacing and spelling fixes I perform are the
+> > kind checkpatch complains about, and submitters are already supposed to
+> > use checkpatch, I should reword it to something like:
+> >=20
+> > A custodian may make corrections to patches that checkpatch.pl
+> > (reference) notes, or may request the author re-submit after fixing
+> > them, at their discretion.
+> >=20
+>=20
+> This does help but only for code parts. We don't really have anything for
+> the docs for example, or Kconfig, where typos or formatting errors can cr=
+eep
+> in. But I assume you intended to keep the whitespace/typo as general rules
+> and just add the checkpatch requirement for everything that falls out of
+> those rules?
+>=20
+> We can always improve this over time, better have something explained now
+> and refined later if custodians have questions or feedback to provide.
+
+Note that checkpatch.pl will (modulo bugs) catch spelling problems
+globally.  We now have it catching (some) spacing issues in Kconfig
+files, but since the kernel doesn't enforce something there it's local
+to us.
 
 --=20
 Tom
 
---G0AT4qnXCLOcdvj5
+--2iFUFDucXJ7JBc87
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaW/H8AAKCRAr4qD1Cr/k
-Cv8DAPoD4/5hCeDwPjyRNuPVuq/j9rBsg1xqe5QzuNO7sHe5ywD/TUCG8EY4Iuib
-63tupuNLyYHyidaFpMPu0h+pISslowc=
-=8zMa
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaW/XZQAKCRAr4qD1Cr/k
+CvsBAQCJ4nW2bllGz96HkFEt0AekiR1mbgqbld4Nu1DgPPBTMQD+NgUF1TqrEe57
+4vHoCWifs5SrMVb3lfjFVdJAunArOQ8=
+=E+zR
 -----END PGP SIGNATURE-----
 
---G0AT4qnXCLOcdvj5--
+--2iFUFDucXJ7JBc87--
