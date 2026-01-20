@@ -4,88 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D183D26292
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 19:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7F4D26296
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 20:09:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17A8882A9E;
-	Tue, 20 Jan 2026 20:29:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4768382A9E;
+	Tue, 20 Jan 2026 21:09:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HeCvp0Rn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1RIXbeb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 646FA83015; Tue, 20 Jan 2026 20:29:01 +0100 (CET)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id AD25083015; Tue, 20 Jan 2026 20:48:30 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933748063E
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 20:28:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 595A08063E
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 20:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7d148ddb583so96202a34.0
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:28:53 -0800 (PST)
+ spf=pass smtp.mailfrom=alchark@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8715a4d9fdso803596566b.0
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:48:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1768937327; x=1769542127; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eC8zdyOIPgH5J9KsyInRJF+qCEqzA+zPURjWGD1wWnA=;
- b=HeCvp0RnmWgZV/P9rqxKO1JUPhQN6j97XcXRk6FFIHHkNQ/lEHYPR62pC+v2OZCWlG
- glVxgFXZulIcMGyJcIwYxKOsgkn6NhO6IJ13RH90lt13FHt+RiPeGhZZuKHtTfn6w1mO
- X6zIHYr4RyIudLu2e9miBTTPKFmHP71FuDtKc=
+ d=gmail.com; s=20230601; t=1768938508; x=1769543308; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=UCtp+N2YjrYVHtkTDwdRwi4lBZlAWlUqmgmD9IoPzik=;
+ b=T1RIXbebr5ET2CdwTnkMkLyKHgbTZABHd0ocSIZopze78EXBfT5qp6WfRXe7Lgl/IZ
+ Yu2fu2c0f/IXyLkdNQQiDElH+lOGvREqHz0g5xTa4TKJ52lGooJp4Y3R+nTCiaRCRpgB
+ j5Ea3uAmU8/vVWYhIM/58Txo6oaP2D6G+v/Gvwuecz7isjfaJTrpBWFy98szkVlXl0/4
+ 25CEckNkb0WBqS0FSTV+RzleGig/kIkN5OlzBNpa21Yz/OrRXn3oi1NZls9Q9BK3sZmC
+ BFHHcsuv9qT0XEABs616IFtY4TOqFXZw9+7NzkQ+zREa5TkpQ4szfVFnKyvV3cYuvCAO
+ Ge/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768937327; x=1769542127;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eC8zdyOIPgH5J9KsyInRJF+qCEqzA+zPURjWGD1wWnA=;
- b=PwLKPqMjtZPF+Xma3/WfQjYj4zGGzUm1rgVmKNmA4ZbfuAMHbPv/YYBExBIv3GahbT
- k4gmUP571Ds2HBeq/oySl+Fcd3EuaXtC0RAo17STCi0h1/6BY+Tns21qCH5r8rVINZJo
- N4mzDOpn0NhgNm1/O1lQHiRpqXyKKe2PIqoAdIxjEAdoAuJphp0LwSpKRzRU+/rgn0Jf
- 4byCR0CuQc4RfGu4ZqaBB6evuQBTRmMb8waAjpLwS+sFCFTyg0/RGmg1v2uEl90JxURz
- 7XFbkVu07O4zHeVR/EOrP8huWwAN2B2knmyUuGe2IvwSupUkT5uixX6yUYwGfaJPV6DG
- fVmg==
-X-Gm-Message-State: AOJu0YwkDQZlSeYbiBl1N5fO3olvJkTTkBctZcIvm3A1jvgXMc7WCY8T
- oDvLmsBWg6EOsAXY6hpy7/4h+h0YoodsLF3PCo5Cly667PRLMurpLT3gZk/GqmSYTbU=
-X-Gm-Gg: AY/fxX5ih90r0fzqRS5N7WTKRpfAxJW2c8QhxsIEPMYSWLSLus+6LbPw0EjB985lyE9
- +vwHDEwrScWsc6ePPrX9OvPyd9+CQfWvhcVCorKwalORaA7royiKV/mjcplUgXIwQX2DAYuJKns
- R7VOkne0H/Wz4I0Rd5OXk567Ejio7wiQ21TFXyelsle7AyR5uAlDycUX+hFF6D7U9L5P7wS9/JI
- PaD7lg1CChi8n8ZE4BuzE5KZr3dSvw/9LbXMCcBEXW6l3IeHNmj0jZawfuVOySbwUQIF0pq8aXq
- qmVBXWQvqIonlMtVoGBUtRBVJSn5mpievlEtccFRSJnI/q6TGDIw71uF0WL8HHZQEf6uTaldI62
- i6GVDldCCYEMbkRz8S6zTWTw+X+SYUcKKWUd0LGoNVF2La+44FzA8i1+gn0Z8M5PzoC8WIQkKnk
- tcikrMtB+x8FbaFF01q3roG7GdDhaEyRREnXhHpBzV7QXBclv56UhtilrTZ0BtjHrZjE+a95Lz7
- ErAx9Q/VygZCU9Tbm3hKz+nul6zKdyI56ZyZM4=
-X-Received: by 2002:a05:6830:6504:b0:7cb:125d:2a47 with SMTP id
- 46e09a7af769-7d140a3d5eamr1358015a34.1.1768937327243; 
- Tue, 20 Jan 2026 11:28:47 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf0d8b28sm9248328a34.2.2026.01.20.11.28.46
+ d=1e100.net; s=20230601; t=1768938508; x=1769543308;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=UCtp+N2YjrYVHtkTDwdRwi4lBZlAWlUqmgmD9IoPzik=;
+ b=Ab7Cz4z4wzDB1ziEL4izj6OkYhHVKTpiECZjCdD1tHPHLbcuzu99HmKBru9NhGLaLf
+ D9i3ZwsubkunFpI7//P497a8bZ8k4DyozxAOkNo86mqr8x+e8wEH/z9WDsEHmc6cdYgw
+ QeOTrVK4unjCLS5RIzolyrqrtUEzvMb/4kAea4UzlLXxzaAgTpmRXv/XANaHTtsoFDaL
+ 1gRM1Q7D9rrTxEki1YRyZ6z2d3xfDgjBbBuXTDgw3jCPdo3GZmUqwilU0NMs3F/B6Wme
+ T+Ez9/9YheQ4hmkYN+qvt+R9D1YQMV3AVq/R6MJEAQeEHo4O37z7vltcxEkSfP7JDmde
+ 1HYw==
+X-Gm-Message-State: AOJu0YybpuDwF8nWTMZio1mjxSWO6JxjaI7iVkDeToUaCN3XAE1TrIgv
+ Fzzrfh0jIBxuM/sZktMEnbLKoBkGNQ8sN+5Z9cteOCJXZSE7fB/klspsczHcjI6HPkI=
+X-Gm-Gg: AZuq6aL/Hm5uzaMwrWfrUwPWGB+H2ScZQ/WpeKvbRbYVJjRqGYAmN63atnDBau2M50b
+ RDw2Ux3o14eE2xU+XAgljflbcdQxGExUVLaLSKvsA04Vnk7TaqqPNbXNNcIkBGZPHj09Qa2wq2X
+ qFPZXJGpW0BxuGkCa54B3Yj/ePoY0AiJn7xS0b7kPmZnysPC1NVvqZzPZTejOXdyVwMXasw0hPw
+ 5GajKEbzQ0mw1nKCKrVV3bNc0MehtkKbXG/XUfaIvBV0Uho00582+ZAMndum7Y/dABD0jW1yaGo
+ WdIXvtsJ0TPEqACFdJnnnIPqtrw40R0OoUsNXL+8hCklsMBVKtbF+HkWCiVhIg8Ve/E3u/XQhnM
+ hm/gIo84zzAJMxtpVx8WKUutfjPnnrjmTj0j5SbvH4kMDbTgWWRwaTJSONIw7TQ4f+oewqr41P2
+ XAsMlER32n1aryPN5B1kM2AVdFn6h25eMyxzv7iR3/Hbx2xP5UIG/xbvW3v4icK84=
+X-Received: by 2002:a05:6000:2511:b0:42f:dbbc:5103 with SMTP id
+ ffacd0b85a97d-4356a07728fmr21223138f8f.35.1768932584783; 
+ Tue, 20 Jan 2026 10:09:44 -0800 (PST)
+Received: from alchark-surface.localdomain (bba-83-110-134-52.alshamil.net.ae.
+ [83.110.134.52]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43569998240sm30168043f8f.43.2026.01.20.10.09.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jan 2026 11:28:46 -0800 (PST)
-Date: Tue, 20 Jan 2026 13:28:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 3/3] doc: develop: process: Explain when/how
- Custodians may edit patches
-Message-ID: <20260120192844.GQ3416603@bill-the-cat>
-References: <20260116182335.4081828-1-trini@konsulko.com>
- <20260116182335.4081828-4-trini@konsulko.com>
- <f3bf1986-187c-405d-aafe-9e59ab14b3fc@cherry.de>
- <20260119164728.GC3416603@bill-the-cat>
- <d35d3c89-1b8c-478b-bbbd-7a29f7e10dbf@cherry.de>
+ Tue, 20 Jan 2026 10:09:44 -0800 (PST)
+From: Alexey Charkov <alchark@gmail.com>
+Date: Tue, 20 Jan 2026 22:09:04 +0400
+Subject: [PATCH v5 3/4] ufs: rockchip: Add device reset support
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2iFUFDucXJ7JBc87"
-Content-Disposition: inline
-In-Reply-To: <d35d3c89-1b8c-478b-bbbd-7a29f7e10dbf@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260120-rk3576-ufs-v5-3-0edb61b301b7@gmail.com>
+References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
+In-Reply-To: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
+To: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Peng Fan <peng.fan@nxp.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
+ Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
+ Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, 
+ Joseph Chen <chenjh@rock-chips.com>, Alexey Charkov <alchark@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3401; i=alchark@gmail.com;
+ h=from:subject:message-id; bh=ZOzJH7cBYN8OgyVAK1Gav+v1EmvlG6lr57/Bo98n9/E=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTmHzl1O4f/qe3ljYsTxUJzJnEW7vo5rZhpZSzbPCmrX
+ 92vk/PMOiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ Q0MdYx0jBi5OAZjqGVaMDA9ML70WqWmINcs24513YMPW/T9zmvYeqBe5Itwiap0W/5Hhv1ua96L
+ fy1vsyhK5T6Wb2O6KiN7ewGWu6CSjcKej8CIzHwA=
+X-Developer-Key: i=alchark@gmail.com; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Mailman-Approved-At: Tue, 20 Jan 2026 21:09:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,154 +144,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Wire up the GPIO line which Rockchip RK3576 UFS controller uses to reset
+the connected UFS device.
 
---2iFUFDucXJ7JBc87
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This seems necessary at least for some UFS modules and fixes the following
+error while enumerating UFS storage:
 
-On Mon, Jan 19, 2026 at 07:02:50PM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 1/19/26 5:47 PM, Tom Rini wrote:
-> > On Mon, Jan 19, 2026 at 01:27:52PM +0100, Quentin Schulz wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 1/16/26 7:16 PM, Tom Rini wrote:
-> > > > As seen with commit d503633a3676 ("Revert "doc: board: starfive: up=
-date
-> > > > jh7110 common description""), it has not always been clear what is =
-and
-> > > > isn't allowed by custodians, and what the expectations are. To prev=
-ent
-> > > > further unintentional conflicts, document the limited cases where
-> > > > custodians are allowed to modify patches directly, and how to do th=
-at.
-> > > >=20
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > > Changes in v2:
-> > > > - New patch.
-> > > > ---
-> > > >    doc/develop/process.rst | 6 ++++++
-> > > >    1 file changed, 6 insertions(+)
-> > > >=20
-> > > > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-> > > > index 6f5bdd3db957..775a855fd7a0 100644
-> > > > --- a/doc/develop/process.rst
-> > > > +++ b/doc/develop/process.rst
-> > > > @@ -144,6 +144,12 @@ feedback to the submitter of a patch about wha=
-t is going on:
-> > > >        feels it has been too long since posting their patch and not
-> > > >        received any feedback, it is OK to follow-up and ask.
-> > > > +    * A custodian may make spelling corrections, spacing fixes and=
- other
-> > > > +      obviously correct trivial changes. They must also in turn am=
-end
-> > >=20
-> > > I guess people will have a different interpretation as to *what* is an
-> > > "obviously correct trivial change", based on the U-Boot git history, =
-are
-> >=20
-> > Yes, but this is intentional, honestly. In my other follow-up to E
-> > Shattow I mentioned there is other general process stuff we need as a
-> > project. Custodians are trusted members of the project and should have
-> > some leeway.
-> >=20
->=20
-> Ack.
->=20
-> > > there some commits that used the [] + SoB form that are fine or shoul=
-dn't
-> > > have be made such that we can elaborate a bit more?
-> >=20
-> > Yes, we've made changes before that perhaps really shouldn't have been,
-> > or at least are questionable and should have had more discussion.
-> >=20
->=20
-> I was just suggesting to provide real-life examples in the docs so people
-> have some idea on how to format the commit log for example. I am neither
-> intending nor expecting to review all commits ever made to check if some
-> changes were made without approval from/feedback to the contributor.
+ufshcd-rockchip ufshc@2a2d0000: ufshcd_link_startup: Device not present
+ufshcd-rockchip ufshc@2a2d0000: link startup failed -6
+ufshcd-rockchip ufshc@2a2d0000: ufshcd_pltfrm_init() failed -6
 
-OK, thanks.
+Note that the GPIO descriptor for device resets is already required by the
+DT binding (link enclosed).
 
-> > > I think providing an example would be nice, e.g. the patch as on the =
-mailing
-> > > list and after being merged with changes (obviously one you think fol=
-lowed
-> > > the rules here). This will make the section longer for sure but it'll=
- be a
-> > > visual cue that this is important.
-> > >=20
-> > > I would suggest to require the custodian to notify as answer to the o=
-riginal
-> > > patch if any change was made when merging the patch, even if the chan=
-ges
-> > > match the allowed list of changes listed above. What do you think?
-> >=20
-> > I worry that we're making too many changes in the wrong direction, based
->=20
-> It's always a fine balance to find. I guess this could be less "needed" if
-> we encourage custodians to use b4 ty to send thank you notes when merging.
-> Then one can simply go and check the commit themselves (or like you allud=
-ed
-> in the v1, have tooling that can check that).
+Link: https://elixir.bootlin.com/linux/v6.18.5/source/Documentation/devicetree/bindings/ufs/rockchip,rk3576-ufshc.yaml#L70
+Fixes: 76465ce21ee4 ("ufs: rockchip: Add initial support")
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Shawn Lin <shawn.lin@rock-chips.com>
+Signed-off-by: Alexey Charkov <alchark@gmail.com>
+---
+ drivers/ufs/Kconfig        |  4 ++++
+ drivers/ufs/ufs-rockchip.c | 22 ++++++++++++++++++++++
+ drivers/ufs/ufs-rockchip.h |  1 +
+ 3 files changed, 27 insertions(+)
 
-I think more custodians using b4 would help (as discussed slightly on
-irc, it offers good patchwork integration too), but thats not exactly
-what E Shattow was suggesting for a tooling idea, I believe. But I do
-believe more custodians using "b4 ty" would be helpful as it provides
-"is applied" along with "this commit hash".
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 6c75bb2a0790..49472933de36 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -76,6 +76,10 @@ config UFS_RENESAS_GEN5
+ config UFS_ROCKCHIP
+ 	bool "Rockchip specific hooks to UFS controller platform driver"
+ 	depends on UFS
++	depends on DM_GPIO
++	depends on RESET_ROCKCHIP
++	depends on SPL_DM_GPIO || !SPL_UFS_SUPPORT
++	depends on SPL_RESET_ROCKCHIP || !SPL_UFS_SUPPORT
+ 	help
+ 	  This selects the Rockchip specific additions to UFSHCD platform driver.
+ 
+diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+index 0384244387da..3576f6e7a2b6 100644
+--- a/drivers/ufs/ufs-rockchip.c
++++ b/drivers/ufs/ufs-rockchip.c
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
+  */
+ 
++#include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
+@@ -153,11 +154,31 @@ static int ufs_rockchip_common_init(struct ufs_hba *hba)
+ 		return err;
+ 	}
+ 
++	err = gpio_request_by_name(dev, "reset-gpios", 0, &host->device_reset,
++				   GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
++	if (err) {
++		dev_err(dev, "Cannot get reset GPIO\n");
++		return err;
++	}
++
+ 	host->hba = hba;
+ 
+ 	return 0;
+ }
+ 
++static int ufs_rockchip_device_reset(struct ufs_hba *hba)
++{
++	struct ufs_rockchip_host *host = dev_get_priv(hba->dev);
++
++	dm_gpio_set_value(&host->device_reset, true);
++	udelay(20);
++
++	dm_gpio_set_value(&host->device_reset, false);
++	udelay(20);
++
++	return 0;
++}
++
+ static int ufs_rockchip_rk3576_init(struct ufs_hba *hba)
+ {
+ 	int ret = 0;
+@@ -175,6 +196,7 @@ static struct ufs_hba_ops ufs_hba_rk3576_vops = {
+ 	.init = ufs_rockchip_rk3576_init,
+ 	.phy_initialization = ufs_rockchip_rk3576_phy_init,
+ 	.hce_enable_notify = ufs_rockchip_hce_enable_notify,
++	.device_reset = ufs_rockchip_device_reset,
+ };
+ 
+ static const struct udevice_id ufs_rockchip_of_match[] = {
+diff --git a/drivers/ufs/ufs-rockchip.h b/drivers/ufs/ufs-rockchip.h
+index 3dcb80f57020..50c2539da78a 100644
+--- a/drivers/ufs/ufs-rockchip.h
++++ b/drivers/ufs/ufs-rockchip.h
+@@ -72,6 +72,7 @@ struct ufs_rockchip_host {
+ 	void __iomem *ufs_sys_ctrl;
+ 	void __iomem *mphy_base;
+ 	struct reset_ctl_bulk rsts;
++	struct gpio_desc device_reset;
+ 	struct clk ref_out_clk;
+ 	uint64_t caps;
+ 	uint32_t phy_config_mode;
 
-> It's always easy to suggest processes when you won't have to follow them
-> yourself, so I'm mostly asking questions or suggesting things.
+-- 
+2.52.0
 
-Yes, thanks. :)
-
-> > on the problem that did occur. Which was a real problem. But it was also
-> > something that obviously fell outside of the "trivially correct" rule
-> > above, as it was adding new content.
-> >=20
->=20
-> Ack.
->=20
-> > Maybe, since the kind of spacing and spelling fixes I perform are the
-> > kind checkpatch complains about, and submitters are already supposed to
-> > use checkpatch, I should reword it to something like:
-> >=20
-> > A custodian may make corrections to patches that checkpatch.pl
-> > (reference) notes, or may request the author re-submit after fixing
-> > them, at their discretion.
-> >=20
->=20
-> This does help but only for code parts. We don't really have anything for
-> the docs for example, or Kconfig, where typos or formatting errors can cr=
-eep
-> in. But I assume you intended to keep the whitespace/typo as general rules
-> and just add the checkpatch requirement for everything that falls out of
-> those rules?
->=20
-> We can always improve this over time, better have something explained now
-> and refined later if custodians have questions or feedback to provide.
-
-Note that checkpatch.pl will (modulo bugs) catch spelling problems
-globally.  We now have it catching (some) spacing issues in Kconfig
-files, but since the kernel doesn't enforce something there it's local
-to us.
-
---=20
-Tom
-
---2iFUFDucXJ7JBc87
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaW/XZQAKCRAr4qD1Cr/k
-CvsBAQCJ4nW2bllGz96HkFEt0AekiR1mbgqbld4Nu1DgPPBTMQD+NgUF1TqrEe57
-4vHoCWifs5SrMVb3lfjFVdJAunArOQ8=
-=E+zR
------END PGP SIGNATURE-----
-
---2iFUFDucXJ7JBc87--
