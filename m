@@ -4,60 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1DFD2ECF7
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4D6D2ECE9
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 12:26:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82A5583A8F;
-	Tue, 20 Jan 2026 13:09:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
+	by phobos.denx.de (Postfix) with ESMTP id 146EA839E2;
+	Tue, 20 Jan 2026 13:26:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="CclGI0UB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T/8xc8oc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A7E183A9F; Tue, 20 Jan 2026 13:09:28 +0100 (CET)
-Received: from mxout2.routing.net (mxout2.routing.net [IPv6:2a03:2900:1:a::b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9414D83A8D; Tue, 20 Jan 2026 13:26:34 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B48783A8D
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:09:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C0C580B98
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 13:26:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=fw-web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
-Received: from mxbox2.masterlogin.de (unknown [192.168.10.89])
- by mxout2.routing.net (Postfix) with ESMTP id 8BB44601CC;
- Tue, 20 Jan 2026 12:09:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
- s=routing; t=1768910964;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BMhFZWd/605NWR6tzl3ezQUty2CpZYcmd7OUJbjzNmE=;
- b=CclGI0UBQYNh5vO1GrDkMnEfuvxlWaKvxxumcjD2+TMyE/StUNqwRQCOmrMVnnUlI31j6T
- nw45l0B2ZSMnV+cTfIgvQEMzSFpmX4klnVB1HlchoH6kH54+Xwpdut5MWxdMmAArkaQGdy
- WSe7GA1f601ysM9bGjDLwc1O2vWZGgQ=
-Received: from ehlo.thunderbird.net (unknown
- [IPv6:2a01:599:a30:b62f:dfc6:3662:ef04:540b])
- by mxbox2.masterlogin.de (Postfix) with ESMTPSA id 2AE4D10029A;
- Tue, 20 Jan 2026 12:09:24 +0000 (UTC)
-Date: Tue, 20 Jan 2026 13:09:23 +0100
-From: Frank Wunderlich <linux@fw-web.de>
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-CC: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
- Daniel Golle <daniel@makrotopia.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4=5D_cmd=3A_mem=3A_add_function_?=
- =?US-ASCII?Q?for_getting_ram_size_for_use_in_scripts?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <7906ae57-4700-48fd-8740-66b8626640f1@cherry.de>
-References: <20260118105021.19760-1-linux@fw-web.de>
- <7906ae57-4700-48fd-8740-66b8626640f1@cherry.de>
-Message-ID: <1CBAB275-C7DD-4E52-87D8-B648BE9A4981@fw-web.de>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-79028cb7f92so42820207b3.2
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 04:26:31 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768911991; cv=none;
+ d=google.com; s=arc-20240605;
+ b=epW9GJkPRnJ1IE42FxZiGJQ842CnHNatUgMuIG2Ofg7XkBxxDT0gqxNfd2H1aB1Pgd
+ Q9TFuP/LfnW6A9eT943+QcuCrHj1UcKAv0gYJEqRZUfBdcT2UXnElETxMv0NUSljoBKn
+ TozW/v38rSkZzIXNP179WL/eBHt+HtCFlPepAfKYWutcqqMjJXadyVlScMlcAZglodga
+ dKzIwgDsaP+ajGNSLj3qXyyLZlQdPi4DMIEgm9E4qI3bRK7lDJCVNDKM5bd74cbhXLsF
+ 09YCXMsAQ9pKRxeG41OaTs3fJFVDG42Amvs2deCoCA3tbyPmZAijGoDoeKoqVdnzREyt
+ /heQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
+ fh=s/hXJ48J50Vd6K1Y+3j7h4q6znQ5kpu6I1dzeFfBczI=;
+ b=Ax+JOY4x+WQC+l31jbmkHUpHbs9eoOh+VZHzXVJ5mA3hP/z9hqLo04zfKq7czBP0tr
+ Zv1Hjs4SBqodbCbXSLWXLMcp/mjTMzWDQzV3HzI6nZjKVF9R0Ddc4PYgsiiBOm5VmphC
+ fyviMKDoUN4BMJTmpiCQfGbm92GREEkq2TvlEpziH4LMJ6Ztoc9gPw/qi+SrFtPDcuIj
+ 1/4HQWbmladw+q+N/Hr+slLcqaZAqTQaKsP757MM7VUq1KRwQWP0GSRXBnI6I6Ouonmt
+ 0+UOphWNXRqmHisulT9xPRev8uvDTLho09h22xAYslUvsshVBnV5eF8/1xyJY9khHivc
+ i2eA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768911991; x=1769516791; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
+ b=T/8xc8ocyWAsCJ/CVosmKnE6a7wtPiAoF0GUyzAoj9qJcx8yYQkz5VMtUJsN8MY997
+ hE2zeYuScHx4/HRfygb5/6dNyWmB08hBxeCumo4XmA542qOUO8VbT3TvcF3R1GIvdRXk
+ wiUs+ghELeWjFMYCzB2cx4Y+mjUTkxOOof/itFR7cyJch9hveWh8JTNp0dDjX+h0WXLK
+ gh2DkvbhEpYuyayd5kDt6P/RFavZrSJBcG8UXacov7tNGd3rQqJ87wnwkjS8+zXZyXFn
+ t3fHu/p3IboXQpozZCuNhmaY25j0xdzs0u3JQM04z56GdoJ+mh1UpvNM8cZXtD6yF0Ej
+ z0XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768911991; x=1769516791;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2qrDcnDSD7JCX+yu/7mj6MwmmxX1PkbsXP+16rAcwPY=;
+ b=cMV7dQooHl6DCtaV2gsGzXnfdNadANAMdN5ly+dgblpAsJa0xPOc4XzLLsSo4wf1il
+ vOdz/fuAvXA5rGz0jTSbeoVD93c5P2T2LZb9KLvc5F33PyolYLoi7t4d6dLfTPuHYmbc
+ rhVLJgIWxsYXPfXjTTQ6Fz1jj1ukZIN6kiWBQ3ywAh+1CfscV1eRUVO3CAtCu5upcOhX
+ hdkcZvypPyQ2PLvUIDpOT/OClgInAyk8H2hzkVS9PjTzRtYyZ01pBisr2zvRu9E3byNn
+ SlVCpKKMvBSSfTMcDeMdCXUCqkk+g1jbIyefgnWQbQEaozQfaGw4SzdjGrEAY5Qu+na5
+ fUnQ==
+X-Gm-Message-State: AOJu0Yyl2hCkRtCGV6RsW2nIrN5Ibs+loG9Ayls/QbElWLmLh2JH176w
+ OuqBFrV4joJdsNEmRZg2k7oA/8CvAs2UJwqxsdPQPkSXAEYceeg7BJGYCLJIr2zLHir9UUIPvHI
+ ro5s9vlq9+1BeiPCobAePjU+Sqb1uoppLLAEOtVO6ww==
+X-Gm-Gg: AZuq6aKdRzfnDhDBSZ75vw2Oiv/gO47pdSf/hLBYWJItk6EA2bYw69e4/fBKfklztuq
+ eDqWVBK28kjJc+FUOyIZPHZRFTucBr4PCo8p8876JfTN7XxFGNnrlOQMsRGGY+RBIPRZBhpW7zf
+ Ook74HiNgZ1oJcUkpJT4EE9qwPO38AZLSbtljrbn8c8b6EkVcTTpSOm7BU7znyUZvom/+nziXCp
+ 0sdixrBeaQINIXmMHR5oMgkL9qVrAPhjEdlcJ2eRgM9MUBsRmdfulwjl+uOh2dteLqOgpL9vNkN
+ eldHVTFl5ohxJtPSSTJMa8qgSb0MT3nvaPjHTpyoqSIuQRPT6WJ5O3sNrshIAGnh7zVi9Cz78PY
+ IlVeJrc7VmeXZHYOfTSMTNqz2xDk95/JVvUNdwPFjnWxM1t2BsugGkHZMrCVwYJeoTq4f1OvXdx
+ Y9Y2xtF7OWOXju3WxgczfJWr1Fp6PM+6Esnw8PG8W1ov6x4wwJpuhlgH1A7hGVsRMFC4qx3Wmg7
+ smwxLZMsUEsdrd5FLc0eJjVT3QPW7CFX5g8F2jaAWG5APJIWW2hlh4ay3zP6cID4GeMDczloTdJ
+ pv9PVK9n8C+qIRHm3bwmJlDTP4v1ce4mdy7b8iDQTP0=
+X-Received: by 2002:a05:690c:48c2:b0:794:1447:1adc with SMTP id
+ 00721157ae682-79414472a93mr3117157b3.22.1768911990791; Tue, 20 Jan 2026
+ 04:26:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mail-ID: 1cc5c7d4-41c9-47bd-a6ae-ba08f1e41c30
+References: <20260119160746.1330877-1-kory.maincent@bootlin.com>
+ <20260119160746.1330877-3-kory.maincent@bootlin.com>
+In-Reply-To: <20260119160746.1330877-3-kory.maincent@bootlin.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 20 Jan 2026 14:25:54 +0200
+X-Gm-Features: AZwV_QgGXzdvPwCPJmRlgPzmM-Z8--GPozT2NBtaWQSIvjX1z8XN3qk1129LC5k
+Message-ID: <CAC_iWjKhd+F1TczjuYN9Q29PQdciihudnuiQ98V90Sq6UUJJ1A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] fwu: Mark failed bank as invalid during rollback
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: u-boot@lists.denx.de, thomas.petazzoni@bootlin.com, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,205 +122,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
-
-Thank you for your review
-
-Am 19=2E Januar 2026 11:22:07 MEZ schrieb Quentin Schulz <quentin=2Eschulz=
-@cherry=2Ede>:
->Hi Frank,
+On Mon, 19 Jan 2026 at 18:08, Kory Maincent <kory.maincent@bootlin.com> wrote:
 >
->On 1/18/26 11:50 AM, Frank Wunderlich wrote:
->> From: Frank Wunderlich <frank-w@public-files=2Ede>
->>=20
->> Add a command for getting detected ram size with possibility to write
->> to environment variable=2E
->>=20
->> example usage:
->>=20
->> BPI-R4> msize
->> 4294967296
->> BPI-R4> msize m
->> 4096m
->> BPI-R4> msize g
->> 4g
->> BPI-R4> msize g ramsize
->> BPI-R4> printenv ramsize
->> ramsize=3D4
->> BPI-R4>
->>=20
->> board with 8GB ram:
->>=20
->> BPI-R4> msize
->> 8589934592
->> BPI-R4> msize m
->> 8192m
->> BPI-R4> msize g
->> 8g
->> BPI-R4> msize g ramsize
->> BPI-R4> printenv ramsize
->> ramsize=3D8
->> BPI-R4>
->>=20
->> Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
->> ---
->> v4: drop rounding to full MB/GB as it leads to wrong display
->> v3: add missing ifdefs
->> v2: add Kconfig entry
->> ---
->>   cmd/Kconfig |  5 +++++
->>   cmd/mem=2Ec   | 32 ++++++++++++++++++++++++++++++++
->>   2 files changed, 37 insertions(+)
->>=20
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index 5c611fb3016e=2E=2Eb82b17195b7e 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -974,6 +974,11 @@ config CMD_RANDOM
->>   	help
->>   	  random - fill memory with random data
->>   +config CMD_MEMSIZE
->> +	bool "memsize"
->> +	help
->> +	  Get RAM via command for use in scripts=2E
->> +
+> When boot_idx differs from active_idx at boot time, it indicates a
+> rollback scenario where the firmware update failed and the system
+> reverted to the previous working bank. In this case, mark the failed
+> bank (active_idx) as invalid to prevent future boot attempts from that
+> bank.
 >
->Only available if CMD_MEMORY is set, so need a depends on=2E
+> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> ---
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  lib/fwu_updates/fwu.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
->I'm wondering if this new command isn't more suited in cmd/meminfo=2Ec? M=
-aybe even extend the meminfo command instead of creating a new one?
-
-Can put it in meminfo too with depency cmd_memory=2E
-
->>   config CMD_MEMTEST
->>   	bool "memtest"
->>   	help
->> diff --git a/cmd/mem=2Ec b/cmd/mem=2Ec
->> index d5d7ca2790bd=2E=2E9dcfeacbbcc5 100644
->> --- a/cmd/mem=2Ec
->> +++ b/cmd/mem=2Ec
->> @@ -33,6 +33,7 @@
->>   #include <linux/compiler=2Eh>
->>   #include <linux/ctype=2Eh>
->>   #include <linux/delay=2Eh>
->> +#include <linux/sizes=2Eh>
->>     DECLARE_GLOBAL_DATA_PTR;
->>   @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, i=
-nt flag, int argc,
->>   }
->>   #endif /* CONFIG_LOOPW */
->>   +#ifdef CONFIG_CMD_MEMSIZE
->> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
->> +		       char *const argv[])
->> +{
->> +	u64 memsize =3D gd->ram_size;
->> +
->> +	if (argc > 1) {
->> +		if (!strcmp(argv[1], "m"))
->> +			memsize =3D memsize / SZ_1M;
->> +		else if (!strcmp(argv[1], "g"))
->> +			memsize =3D memsize / SZ_1G;
->> +		if (argc > 2)
->> +			env_set_ulong(argv[2], memsize);
->> +		else
->> +			printf("%lld%s\n", memsize, argv[1]);
->> +	} else {
->> +		printf("%lld\n", memsize);
->> +	}
+> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> index 0f5ef2ba515..37c613014d1 100644
+> --- a/lib/fwu_updates/fwu.c
+> +++ b/lib/fwu_updates/fwu.c
+> @@ -766,6 +766,12 @@ static int fwu_boottime_checks(void)
+>         if (boot_idx != active_idx) {
+>                 log_info("Boot idx %u is not matching active idx %u, changing active_idx\n",
+>                          boot_idx, active_idx);
+> +
+> +               ret = fwu_state_machine_updates(FWU_BANK_INVALID, active_idx);
+> +               if (ret)
+> +                       log_err("Unable to set bank %u state as invalid",
+> +                               active_idx);
+> +
+>                 ret = fwu_set_active_index(boot_idx);
+>                 if (!ret)
+>                         boottime_check = 1;
+> --
+> 2.43.0
 >
->Flatten this like so:
->
->"""
->if (argc <=3D 1) {
->    printf("%lld\n", memsize);
->    return 0;
->}
->
->if (!strcmp(argv[1], "m"))
->    memsize =3D memsize / SZ_1M;
->else if (!strcmp(argv[1], "g"))
->    memsize =3D memsize / SZ_1G;
->if (argc > 2)
->    env_set_ulong(argv[2], memsize);
->else
->    printf("%lld%s\n", memsize, argv[1]);
->return 0;
->"""
->
->Otherwise I see a few issues:
->- rounding not made explicit, (also it's truncating and not rounding I be=
-lieve here?)=2E Why not print the actual value here as a float (of course, =
-not using floats)? I vaguely remember some of my Rockchip board printing 1=
-=2E5GiB when booting up (cannot verify because this happens due to a bug in=
- the SDRAM init and isn't easily reproducible)=2E We do have some boards wi=
-th 256, 512MiB of RAM so we should be clear whether we are printing 0 or 0=
-=2E25 since that will influence how to do math operations with the variable=
- containing the value=2E
-
-I have dropped my previous round because it leads to wrong values and i wa=
-nted to avoid floating point numbers=2E But yes 2 decimal digits seem to be=
- needed to give correct output=2E I guess var is then string,not any floati=
-ng point type=2E
-
-So for GB sonething like this:
-
-u64 ram_gb_x100 =3D GB_X100(gd->ram_size);
-char buf[16];
-
-snprintf(buf, sizeof(buf), "%llu=2E%02llu",
-         ram_gb_x100 / 100,
-         ram_gb_x100 % 100);
-
-env_set("ram_size_gb", buf);
-
->- what if I want to save the byte size in a variable? With the current im=
-plementation, only mebibyte or gibibyte sizes can be stored=2E I would sugg=
-est to argc-- if m or g is passed, and then compare against argc > 1 in whi=
-ch case you'd use this third (in case m or g is passed) or second (if they =
-aren't) argument to store the value=2E
-
-Good idea, thinking about how to implement this the correct way :) as varn=
-ame could be "g" or "b" too=2E
-
->- missing documentation on the base for the environment variable=2E We ha=
-ve some commands setting hex digits in variables, some others in decimal, s=
-o this needs to be made explicit so that people know if they need to transl=
-ate stuff before using it (or how to compare two numbers against each other=
-)=2E Here it's decimal according to the code (maybe we should have it in he=
-x instead? I am not sure what is the expected base for variables :/)=2E
-
-As i want to use it in scripts to choose correct bl2 file for bananapi r4=
-=2E Imho decimal is better to read here,but it should be mentioned in doc=
-=2E
-
->> +
->> +	return 0;
->> +}
->> +#endif /* CONFIG_CMD_MEMSIZE */
->> +
->>   #ifdef CONFIG_CMD_MEMTEST
->>   static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulon=
-g end_addr,
->>   			  volatile ulong *dummy)
->> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
->>   );
->>   #endif /* CONFIG_LOOPW */
->>   +#ifdef CONFIG_CMD_MEMSIZE
->> +U_BOOT_CMD(
->> +	msize,	3,	1,	do_mem_size,
->> +	"get detected ram size, optional set env variable with value",
->> +	"[m, g] [envvar]"
->
->Explain m and g so the user knows when typing help msize=2E
->
->We need tests in test/cmd/ and a new entry in doc/usage/cmd/ for this new=
- command=2E
-
-I see this note in checkpatch,but as i rely on dynamic value and i saw no =
-test for mem yet=2E
-
->Cheers,
->Quentin
-
-
-regards Frank
