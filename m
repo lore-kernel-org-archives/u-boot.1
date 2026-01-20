@@ -4,66 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7434FD2ED0F
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 10:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C54D2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 11:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D53BF83A8D;
-	Tue, 20 Jan 2026 11:59:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4984F83A91;
+	Tue, 20 Jan 2026 12:02:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IC84ms1e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HT2PqzsO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02CF783A8F; Tue, 20 Jan 2026 11:59:06 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E7CE83A9A; Tue, 20 Jan 2026 12:02:09 +0100 (CET)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD88683A83
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 11:59:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84DEB83A8D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 12:02:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dwPTJ49cjz9v6C;
- Tue, 20 Jan 2026 11:59:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768906740;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qF3LIjjtr9QC7bjOdwG8UmXSWv3JjxrXat0ZtQEciYw=;
- b=IC84ms1eJCxlnpjr5LsRbQomN+N6NF7YDWOs4XvatYHAHGzTFS6vwkDnWuIVNyYM7KMwVK
- 7jclEKp625e8YYF29zjV7HJjCahj+6J6BGw71xfrFXB2oFqf+SiZACUu7if3YI/KI/YxsI
- kc9QVG5R5xL0l54i1dCytyD1QSXl2+3hGo20qlMMYFU0p3XeB3OFdItP0BvYeOmfFZwp6O
- mx6qQ+Ad0C6i0s1euHFEOBD4UVb+iUdjhOi2l5V1Cr+0mNRpSXM5xyGY+zZSx7KS/iEmWO
- xg8qsP+U6E8vLWZQbkP8IUV6xPpgQyjpY0QeyWr7hYrtu3DhutzmSsBvQpGCXQ==
-Message-ID: <712cfdc9-b3c3-4fca-8f14-763efdf5e0ae@mailbox.org>
-Date: Tue, 20 Jan 2026 11:58:56 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-64455a2a096so4261230d50.3
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 03:02:05 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768906924; cv=none;
+ d=google.com; s=arc-20240605;
+ b=HE+fNMarsd3UAryDrJn4eRTyLaj8tokjgqpSd7iapTjT3ucPxvprB4/wbGG6t7158m
+ 5kFEcabK0KvazLzy8R+cVZNC3P45kBgNajYj9os3fEysSL7xhTR1U1VGbgpQ8alArHWs
+ Yw23cz8cL5NmnZumWgMvS6LQY15Htt8MHvzUSrimU6hL1Ftkd0QV0wYfBZPg6VuuJ682
+ OSiexXcoJXYgZQt7digXnllqjJjb6jC06P+q8yz9C/xKv74zUmOwHRxWdizHIXwMdmOJ
+ oNQDRBScKJbYxqzn5v8WpIAhw95hMLQ1Oog12ZJS8I5asuoCUhdYGJXzZIgO5ZARS7lz
+ dVOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=mlfP/IjXORD1ap0ymDtS6rD85RjIUXm26qBb7eEoh3o=;
+ fh=ciuDMCuEbQdYKFl5+yNxfmXq2QJNFeaP7Jf7r7/h/m4=;
+ b=gEmEOtmDXiL9CSUV/U2ri4AswdAB5yLSsDlRYK01uy+Fd2vAOw5SdcU/HxkkEtlc/E
+ gkpH01wJZAnwx/8omjiDPybu7PqLvhrw//4qCX4M10UswY3l0uBHhOb+ueWX7xjA/DwE
+ 3Fyox65HnKCR6t2QAkp+ma30X7JDj/JdYyRXJYC5nCP4FkCcqi7PavIt0TYU4sURGAk+
+ lcJH9hhO2dcxQtDzwcrLhY7jof3ziOfwjfr8PcsGwYeU31P0mKuqDdroqnso+aMIlUCJ
+ gBePAO02HXAJPqP6GUhWZdj+JSvOwX31R1Xfz4yrincwMT0yEBfVmR31FwkfltM5n05y
+ SUOQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1768906924; x=1769511724; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mlfP/IjXORD1ap0ymDtS6rD85RjIUXm26qBb7eEoh3o=;
+ b=HT2PqzsOSqOwLzZpJ6zQt1FJ6C+6i6JzpxZY7YlGFxbmtxyI7OOZ4IcDV1hfwWC2ur
+ wnHhfrA9R+q38TJPjh12fiU6vUUZju0dkixTx0qydkm/k3gTGDditp4w9YhDAoG2l1vc
+ 0jaIr/qZUNJ9gql+lg7F27GM6U8qACFC1xYOtDnojnTkC84Vd5v6JDllVWTo7YQupnxj
+ FgP9e569IJlaKh+BFkouAP9wDfGcpFejONN5iERAPBBUgkPQPOEIr6qvReDUU4mx3YyD
+ xTvmCmTm4d1w4M+nnfwwrpnI5USAP+cNpgsfYpABX/Y6iYR3p9MMaGTBGCM2O2yEZWF0
+ YSaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768906924; x=1769511724;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mlfP/IjXORD1ap0ymDtS6rD85RjIUXm26qBb7eEoh3o=;
+ b=VUYbYxfnoMM9Ezm3d6an9mTRe2HjC1bFiTLy8xEByvaerl9C0GTnfNOBhLXL/XkIN3
+ XnIeclI2nSdY0HPGd+mD/IWRx8uYgLAXELBXVw27aWMaa3kkrYUzmc6pXjgQdRStqvm/
+ 9XtwFa1NbIIrBoQeIuXdCFRAdzRH1DRaMmEDzITF8Nz1BuDYh+O6Q8+yGfLbSxUGt9GJ
+ nefPsDhTR964HPYfOGApcKF0hw2yKbLdQ8VdmWPCZap6g0qHSHKz/XSKuTLfk6D2Gn4w
+ udaBCI+zLae4fd+MaVQg3nQsXZVkUMuQau+cOSIB4DAs5ODkGm4YCgS9+bRlIMu3fhJ3
+ lXYg==
+X-Gm-Message-State: AOJu0YwOKfusRlHXAcizrV8ZztBQXcaSV1RovTXkkCulcAeeJUcIA+sW
+ XWHU/sG0dsMA5Ux741u4Yclp096o6YNj2KSbgTr8MX4IOCKfBJnxCp/xmhD+tOYULtNY9pHYOg1
+ 7Jnbp24c6VTyZnxmzKJA+aT4TaRFah85Oa0ILb/PEmA==
+X-Gm-Gg: AZuq6aKI6IA0TN6JnaejY7NBr88Jy+uW2+lXDFZ8AlzqoV3WbAK6gTOe0Ecu0BtsJIR
+ c7aMMfWmgonNm2aRk4d2GEb5z+/Fc3GRBiBzZvd8m0mM55SdAqKNwjWJiVrl8forg4bshCEUV4i
+ HEbYa08CgXTlTYa3GZkmDVFE3bvJ7iyrnPkl3HVCam/rbxZ425qah+KOe77BpMvdTPTRuG8RiS2
+ J9ozMHOW63F1KIR+snizA4ftou2Jj4fIZyjdc2HTSZVotNW1/z0a4ICAalRZO77DiNqxMwOKvjA
+ 8xBsuSJkHimqobl96xpEeC8jlIpN6/1wdLHM6d4//vhoP3v5q4ysq6FrehtPYCnUDqzbp4oO3P+
+ npAy9OlBFFiGG1ScNzwukqSPh8EbvyA83U9daKlPN1lPx1a/I6NaGS0fGO9oN0O439Ra6RDH+NX
+ 5qzx4XD+MCvT1sk2URukC99xv86kQs3Olonh3uiktZnTlbr/uGe0pNNUtrFd7bTsOV7H4HoYTJZ
+ Ecb0KY/isDwgMkBPU+KKSGZYJsGeC8y2Ta494wpy3rh/qSDFlDqDDPKg21Rm98lYrjRrq5SGomi
+ IRtM5XE3MVPMufYeygaAVsnzzC5ytSTBOFlL97BAJMw=
+X-Received: by 2002:a05:690c:dc9:b0:793:d0b2:ff08 with SMTP id
+ 00721157ae682-7940a0e6759mr24301447b3.8.1768906924166; Tue, 20 Jan 2026
+ 03:02:04 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] scripts/dtc: Update to upstream version
- v1.7.2-35-g52f07dcca47c
-To: Jamie.Gibbons@microchip.com, trini@konsulko.com
-Cc: u-boot@lists.denx.de, Conor.Dooley@microchip.com,
- Valentina.FernandezAlanis@microchip.com
-References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
- <d5d2320f54090420c32207c25b35c881ea1519b4.camel@microchip.com>
- <82e5aebe-5792-4a68-b054-7f90dd82e7b3@mailbox.org>
- <bb9936a8bafa83fceed86f0805d2340914b52dca.camel@microchip.com>
- <baa48570-2114-4313-9bac-280aab0960fb@mailbox.org>
- <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <58101ca60af16df66be8e2707fef2597f855a8e1.camel@microchip.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: o9nr7dqzahyigartgrq767oyf4nd3te9
-X-MBO-RS-ID: 9a4550ec1a386cb4966
+References: <20260110195610.42068-1-kettenis@openbsd.org>
+In-Reply-To: <20260110195610.42068-1-kettenis@openbsd.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 20 Jan 2026 13:01:27 +0200
+X-Gm-Features: AZwV_QiuJVVKrLxAu1GlZWR-8NFaa6Fbwta-hcEyNdYJrUi-1tcXaOqaYFZ5l5M
+Message-ID: <CAC_iWjKj5b5tF3U3uByuA_6wbQh0oENE0JoQbRuqt88sL9odjQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: armv8: Flush TLB before enabling MMU
+To: Mark Kettenis <kettenis@openbsd.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, anshuld@ti.com, d-gole@ti.com, 
+ casey.connolly@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,46 +116,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/20/26 11:45 AM, Jamie.Gibbons@microchip.com wrote:
+Hi Mark,
 
-Hello Jamie,
+On Sat, 10 Jan 2026 at 21:56, Mark Kettenis <kettenis@openbsd.org> wrote:
+>
+> Commit 9ebdbbc43e5f ("arm: armv8: invalidate dcache entries on
+> dcache_enable") broke Apple Silicon machines in certain scenarios.
+> If the MMU is currently not enabled we need to flush the TLB
+> before we enable it to prevent stale TLB entries from becoming
+> active again.  So move the __asm_invalidate_tlb_all() back
+> immediately before the mmu_setup() call.
+>
+> Fixes: 9ebdbbc43e5f ("arm: armv8: invalidate dcache entries on dcache_enable")
+> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> ---
 
->> 2489                 debug("%s loaded at 0x%08lx len=0x%08lx\n",
->> 2490                                 uname, ovload, ovlen);
->> 2491                 ov = map_sysmem(ovload, ovlen);
->> 2492
->> 2493                 ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
->> 2494                 ovcopy = memalign(8, ovcopylen);
->> 2495                 if (!ovcopy) {
->> 2496                         printf("failed to duplicate DTO before
->> application\n");
->> 2497                         fdt_noffset = -ENOMEM;
->> 2498                         goto out;
->> 2499                 }
->> 2500
->> 2501                 err = fdt_open_into(ov, ovcopy, ovcopylen);
->> 2502                 if (err < 0) {
->> 2503                         printf("failed on fdt_open_into for
->> DTO\n");
->>
->> This is where it fails. Is $ov or $ovcopy 4-byte aligned ? Enable the
->> debug() print at the beginning (or #define DEBUG at the beginning of
->> this file) to find out.
->>
->> If $ov is 4-byte aligned, try to generate your fitImage with "mkimage
->> ... -E -B 8 ..." , does that make any difference ?
-> 
-> Thank you for your suggestions.
-> 
-> I followed your advice and investigated the alignment of the overlay
-> buffer. The error code returned by fdt_open_into was FDT_ERR_ALIGNMENT
-> (-19), confirming that the overlay was not sufficiently aligned for the
-> updated libfdt.
-> 
-> I modified our Buildroot post-image.sh script to generate the FIT image
-> using the suggested arguments. With the -B 8 option, all blobs in the
-> FIT image are now 8-byte aligned. This resolved the alignment error,
-> and device tree overlays are now applied successfully in U-Boot.
+Should we keep the check here or mayber move it in mmu_setup()?
 
-But this is not the fix. Which parameter of fdt_open_into() is 
-unaligned, the ov or ovcopy ?
+Thanks
+/Ilias
+
+>  arch/arm/cpu/armv8/cache_v8.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 0309da6d397..39479df7b21 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -878,15 +878,16 @@ void flush_dcache_range(unsigned long start, unsigned long stop)
+>  void dcache_enable(void)
+>  {
+>         /* The data cache is not active unless the mmu is enabled */
+> -       if (!mmu_status())
+> +       if (!mmu_status()) {
+> +               __asm_invalidate_tlb_all();
+>                 mmu_setup();
+> +       }
+>
+>         /* Set up page tables only once (it is done also by mmu_setup()) */
+>         if (!gd->arch.tlb_fillptr)
+>                 setup_all_pgtables();
+>
+>         invalidate_dcache_all();
+> -       __asm_invalidate_tlb_all();
+>         set_sctlr(get_sctlr() | CR_C);
+>  }
+>
+> --
+> 2.52.0
+>
