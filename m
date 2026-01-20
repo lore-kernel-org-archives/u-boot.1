@@ -4,93 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E23D5D2ECE9
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AC3D2ECE9
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 15:12:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49EAC83A6A;
-	Tue, 20 Jan 2026 16:12:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8EB6983AB8;
+	Tue, 20 Jan 2026 16:12:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lx4kDf1z";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Jvvo3+6X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A06C83A91; Tue, 20 Jan 2026 16:12:32 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3C58283AEE; Tue, 20 Jan 2026 16:12:51 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C28283A2B
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:12:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53EBF83A2B
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 16:12:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b8714a52072so832111366b.3
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 07:12:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768921949; x=1769526749; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fGiXVwwL+U8lTBZWA3VGDx6fNFy/fqGp1YcUtd2YR9Y=;
- b=lx4kDf1zHCVdM2uGL5aCfs+Att4RDZpRjYvu3FlYPZVJhwYzL+O70JK63WBAXHyfay
- d8iQxOgJo4sEqWI42WmHWqFYo0FjkWgcUQpQJAk4MoFq4Js3PZtNy+wh/uzj4sCQLaKn
- rZcCTfQhuFNp5mp8CRsH2BndP9mhoDh8a7Y5yigarLgbAXlUFK7tFugJPTAs3c0KJWr6
- K/5164tM2hQ9niE3nQUvNPrQSi/5jMIQ5bIWvn6pjWtG5bBKBGbdHQmEGygQQq3wfBL3
- mde99hZRqPOGNae9FXJbiyjV3aooVqUnORNuQcbY59cY+kQGAOGpN9NQ4zwqLYxVKYjT
- Vvbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768921949; x=1769526749;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fGiXVwwL+U8lTBZWA3VGDx6fNFy/fqGp1YcUtd2YR9Y=;
- b=bk26jKdIlVagwsE8V2mXsLll+VBIcEM7u/2Aip7J/9DFaZRDL9vw6zZ/9iJ22e9mP4
- eKviA2P43SU6gLY1lMvULruK5Mi/kkYagGuDZN9eehPbUdYyDsUP7/ZL5VwpQ6HnCKyi
- xoazdj0BbFMFlJsKgiWCF+lop8IsllXBiStlRw9U9obRakwPkurto+cEuVO/3aHefDeK
- tr1DMCudo/ycjRUSu6m1Lfec/k7Bz9Icpt7gITpudy7rOeQV1TFpA+KgH4dIOKIdmBqG
- 12vK3X7PnaI3CSZR/Aa0LP4ngZ2+fpdZlt5dcsrNzi7nKxwe9KG62h8fkWeNfGIsUTl7
- DfCg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURmLKLJIAZoEVI6+h+7qTNELEydIWv0oeyR2WmPg5pkKihycclKLeBcSSjtbef+WHyKPJ+fgQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwH1+eXuxdBzs5ZRSrkJpPoiVbr8+AHqNfSYETAn4f4Swx/UBra
- J0lBi7JipMioISCOEvskFGOAsSeguXq3RvMDN6DBnCvTBh6buleuzRiu9outDlfPwBo=
-X-Gm-Gg: AY/fxX46D733uS5wyjriTp+Y4E/NphrGDTlJj80sveoPSONHBVouuy/4awB6rdYFl0r
- iuNGw8CkgkqbiyRgro2cu9UHgtm89++atHQAtShPyubP1gzWgJ6ggxNqszUVKsyRymOCNCHSdks
- 5sjt43gKr7n5W0vA/nY9zPgB6+hXQjKNhBAkxiSQq5VDk3Z0Z5S9NbGajz+AMW0kcw/WiCxbHHZ
- 1TX/Zmrtl9YSuIU+7xef7blFWPorIqogDHKSDgBpeAW6K0STXXSf35gmKl61JOrsv6KKoxj7x3K
- kxLesumSXPApsLL28I6K3/WYgZ8MBiH1L8v99i01VnEHsB6coW7TH32bpByVn2BqfvVRg3JXLtz
- Kxke9C7/XmdQ2u3myi1xXxS43A0Z34SONrDDdVjGKhjmt9zcD9SxbgkANTXgdWSi7dfaCNVWwZ4
- 0UI7Hd0i4JFFs8sSn8nhyLPLAVjhsGl9/bG5FhEyD/1+Q4xHLiMLCzdg==
-X-Received: by 2002:a17:907:868f:b0:b87:19ac:98df with SMTP id
- a640c23a62f3a-b87968d1727mr1143638066b.2.1768921948950; 
- Tue, 20 Jan 2026 07:12:28 -0800 (PST)
-Received: from [192.168.1.36] (p4fc3dfd7.dip0.t-ipconnect.de. [79.195.223.215])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b87f6f69eedsm320031466b.46.2026.01.20.07.12.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Jan 2026 07:12:28 -0800 (PST)
-Message-ID: <6922d2ec-207b-48e6-aa77-ca1e30393bc5@linaro.org>
-Date: Tue, 20 Jan 2026 16:12:27 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HBTlY9zHxIyUDiYO/nJbV6eB0JDIRcAymwegPZ1ERQUw8ano/NfFxs1sMkQsY22LvRm59N7j/GWnIRWm+gdfycSJq+9DVPge5r1qdekGrHW4dMHGqgJPIbg0aemp0unZ+iE974dDjC1MIm0ItrblsK/WaFcTrWosytnPmddQEgdUnRD1ullTxTE+NtO975xIJDgIO8M8Lj8e6Llu6pquLU7lzshUNo4E1+CholNmu37Fdx2b0YxpzxSfY22avxT1uet/rF4/gtDFJIL/MtL90717qQpyA38qNHxQtxLv+UnXe3+GfFu8dZkxFJgH0L8nyn/4HDbq8/PonE6b5W5agw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RJVla0ld6f/4vWyhxOblkQALN2yehGnG81NA0TCAh4o=;
+ b=T3DAKb1SJs/83YyZ3j2e0Qcvpc9wh97D2vGzwGiD2WlSynm8g+tQ9dCAevn1ArnWrwt/AvUvydfDsVKB51eEIOvvxtvTjmtgNgVyyiPKFuoFFGWLXar907CTM4XiuEOT8z+fD0Xa31aDjfXUHFMUJ1wDvJJdrdCDveJcxuK6HwRYdzchS/djri2ry03XkKdQwveIHS5hPHfGeYv1RafFTVP8bdirHEzcrvaeDldWeLijQKvIpCbtsbcJaMgXRpsTg7OLt31hIznJk3T20Hnpu51hBwBTOy5OroooVmOV5OXmQ2t+IKyeKTvQGuMinvC4LAJzF6M1YwXJWZ38RMAZ6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RJVla0ld6f/4vWyhxOblkQALN2yehGnG81NA0TCAh4o=;
+ b=Jvvo3+6XgZgvXkLTQrz9sstcPk6Hse0U9D8/L3xZu+I2hwuSM1hOyDIW89FTsu57YKZkdxoYyMqmL9DIXay/L7W6h8HQYIYSbauR51aTnI8hCAg9kgFdtufAl97gFEOL907Pgzi+UUnxAscA9mO3kpX/D3huehxqSt50oT1z4Qg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by GVXPR04MB10135.eurprd04.prod.outlook.com (2603:10a6:150:1c0::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Tue, 20 Jan
+ 2026 15:12:45 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9520.011; Tue, 20 Jan 2026
+ 15:12:45 +0000
+Message-ID: <8efde50d-2eaa-482b-b71d-d05626f6eb56@cherry.de>
+Date: Tue, 20 Jan 2026 16:11:56 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] efi: stop hw watchdog during EBS
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: paul.liu@linaro.org, adrianox@gmail.com, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, jerome@forissier.org, mkorpershoek@kernel.org,
- ravi@prevas.dk, trini@konsulko.com, me@ziyao.cc, u-boot@lists.denx.de,
- Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <20260119210925.29185-3-casey.connolly@linaro.org>
- <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
- <5995c605-0e94-45ed-981e-49506233597f@gmx.de>
-From: Casey Connolly <casey.connolly@linaro.org>
+Subject: Re: [PATCH v4 3/6] tools: Fix long option --dump_sig in mkeficapsule
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, simon.glass@canonical.com
+References: <20260120081206.251544-1-Wojciech.Dubowik@mt.com>
+ <20260120081206.251544-4-Wojciech.Dubowik@mt.com>
 Content-Language: en-US
-In-Reply-To: <5995c605-0e94-45ed-981e-49506233597f@gmx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260120081206.251544-4-Wojciech.Dubowik@mt.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0112.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a3::15) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|GVXPR04MB10135:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b0a7ad7-993d-4746-36b9-08de58365da5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0; ARA:13230040|10070799003|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?clRLRnBEbDgxR0x4WTlPdlVFS0pWQ1FuOGR0YnYyZmdoQWQrd3NUVnpTWjV0?=
+ =?utf-8?B?aXE0UTBIa3VmTGN6Z2F3bnh2Y0FlVU51KzhnUmdQMWZWbStnblUwOXh3c3V2?=
+ =?utf-8?B?cXpueE9BcmM3TWMyeGpreFJMNzFNUXUxSG5iUll6NVJzOTExclloZ0pHRmhF?=
+ =?utf-8?B?Ylkrd2k5N0Z4UkRmYVpIcVZXS3Z0aS90MERZdytWZUMyaTQyeEhDTStEQ042?=
+ =?utf-8?B?a3g0akdiUGpVREoyWkoxcnNpTXhMZ2drMXpydmV0MFdrSmhTUGVGM3dZWjNk?=
+ =?utf-8?B?YXJTV3RjYXJ2SXBCa1g4VUN2c080NHNhSXFrTEt2alIzNVhCdG9GZ0MyMWFz?=
+ =?utf-8?B?cEJoRm1oQ3Q0K1pmRVN6eit0clMvTHVxVWZhTE10K1RvdDZrTzJNRUdtTDJK?=
+ =?utf-8?B?UEQwL1ppRnp4UWJXWk1aUDd4NFV3NkxjUTBBaEM5YUx2bEt0MHZIWFpVVDM3?=
+ =?utf-8?B?TmtFUkJIUTRVZkY4eWNFNExEWEFzU1lVb3kxU1JOcER6M01XWUNaQ2J6TWVW?=
+ =?utf-8?B?dVEwTFJMcktKQXlrYXFPZkUvaEx6OTlHQytnYi93b0RsV0E4Znp5bC9ZMk5a?=
+ =?utf-8?B?aERneHhxSEwzUlIwRjRWZ0RQMmZHK2FUZWJXYWt4OFRMMlNHUUtNekZiWnQ1?=
+ =?utf-8?B?QXo1WWpPTzhBZUExdnJ1dVNiQjdDWU11enFSdnlrREsydmpCWENjVWRxQ2t5?=
+ =?utf-8?B?YStHSUVoN3Y5Z3RLN1Q2OGQwOHRYdjFTdHNra2ZEWFVjUWs3c3hLYVpONWNJ?=
+ =?utf-8?B?YkpBTVppbFRLdzdXNjVoQURWdERVaVI0TXpUd0I3b3BQU0VlenphZVBxY2FN?=
+ =?utf-8?B?bG1oUEI2amNvTHNMdmtsUHdaNkgxelkxWlFNenpsanhOOGl3Z0wxaFZFVzRX?=
+ =?utf-8?B?N2Z3WnpyNy9sTGpEdlVHU3kyVkZsZDlxeHhJVDM5QlYzRFllanFtU1hHSzcy?=
+ =?utf-8?B?UlZEdTkybEdNdGY1VEgvbjg0ZzNkWnRZT2pnWmhFWGs3Q2dGbUVvbVBnajlO?=
+ =?utf-8?B?cnFZQzVIM091aVdybWtxbDdLUFFvaURIeWw1ZWRLdkpGM2M1NlZaZGsrbEpV?=
+ =?utf-8?B?R1J1bVRsQlkvS2NyZzdoRmV4elJ6QkMwMHpwYkFiZW1MTmYxZkRCR1MzRzFO?=
+ =?utf-8?B?bHp5VHUrSXoydTYrMDc0R3M3VXRFMzZUOEsyNlVpM29qanJ2V21Tb2xXR2M4?=
+ =?utf-8?B?c0hPUmhDWmJpdXhWdVBFdkQ3ZkhUaWVWRzBGb3hSNTg3ZmRyMlJTSHpvOHJ2?=
+ =?utf-8?B?MDg4MzNYREJZcEVxdmVHK1doQTZQamVrVmc0VkJHTXEyU1EwRnJJYkFsc0w5?=
+ =?utf-8?B?STFMV2tNNkZWVjF5STBJdG45MkxHb0dMNHY0ZTJvZ3h6UWhOdjRVUWw2Nmo0?=
+ =?utf-8?B?bVpZSEdXblBGWm5xYXFzN2hwUGpZei9GZzRYUnpDbTh3WkR2YnFWdnNRbVdN?=
+ =?utf-8?B?dFZTRzlJRkREV1FaOHZCVHJaODJJb1ZUMVQ5djc5ejZ1QTBvRkVvR0JrZjQ2?=
+ =?utf-8?B?bXNjY09hcjRtQjVzSEtVSXphOVIyODlaNE5GaUJZYVA0Rlh0azkrZkxKaHJs?=
+ =?utf-8?B?a3YvU2h5ay9MY3FKUHEvRzg4b0RWbjdGeWJ1blYrYjd4UzRFclE2V3BGK29J?=
+ =?utf-8?B?dHJjeDAyT3R6emNDRmFoVVkrYmQ4M2Uza003bkorZExOUTQ4d2YvaGloOGVi?=
+ =?utf-8?B?NWJFVXB6VGNtQkg5Mk5hZ3FHVzBHMllvcnpLbHB0ZUJTSTQzbnZSMlp4VHFa?=
+ =?utf-8?B?bVFQYlZDK0xxSlJoTHdCdnl2SEd5dU9zeW1YQ0orQUY3elFTcmdXcEVxdnVP?=
+ =?utf-8?B?bVFSVUVxaGhNTE9XSDY5Q0tyejFGZ2FJd3JWbGdmalhWU0NIVFpsV0xSdS9q?=
+ =?utf-8?B?bW10djFlTjRSWFVWV2htcGswUDR6VVpEZUJ1Ry9Sclo5ZzNEQk4xSm44Y05t?=
+ =?utf-8?B?YUdYMFR0WFFSQUxqYWxiM0RUMHBGLzF5dlQxbjk3TmpiSE84c3NxNVFUbEdJ?=
+ =?utf-8?B?OUtKMkhmT1VMcnNrWVpDWXhwRWk0VUgyWDdTOEh2NjJ4VVZTT3BKUmlpSXVL?=
+ =?utf-8?B?UWMwNDFNNlA0aDNyRzdtRVNQYmFqcmlJWjlScmJCQWlSK3lEM0IxeHRhazZl?=
+ =?utf-8?Q?7m64=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RGdCUStpNjBUUHVIdThVVnJRTDJhN0V2NVZCS0RzdUlNWVVVd1lUV09aL0o3?=
+ =?utf-8?B?YXhHZFlydktrRmw0NVIxbzVBYndQNlk4Ymg1ejNvWlBNYTRNdjUySmFOVVcv?=
+ =?utf-8?B?am9hL3U5dzJIYW5rcHN6R1d4OU9ScHFDY0RkU3lXeTk5RVRuT1FpL0RwNzFo?=
+ =?utf-8?B?TlhWWGMwV0ZUSFRJcTlRTHM1b0xUVWNJblhTbmppd2xnT2Q4SEhvVWhKUlBN?=
+ =?utf-8?B?bzlUVjlMdW5sZkpxaUxDWGE3RHVwbW9rUm55MHpEMCtyNWZXaVFBay9CVTZp?=
+ =?utf-8?B?TE9Wd3dTeS9ucGFxWHlFUVhWSWhjbG9RY0RjNmRsSWhGMFFWekkvY21PMldT?=
+ =?utf-8?B?R0VvdlpRTGxRVndRdExIU3gwSEVMYUNCZkNSbzN5bk8welhTZDhQcXB2YWFN?=
+ =?utf-8?B?R09aYU1QOHRUSENSeWY4bjZKTE93TVZFQUkwMWVobkxLdTRTNk1kL1FZVFpF?=
+ =?utf-8?B?cklQZWIvSzFLZnpqcnVUbG9WaW40czBDbzhVQ2phTW4zNTFFdjVNRnQrcFhJ?=
+ =?utf-8?B?OEhFdUJiWmo5USs1aVR3VVA5TVZEcGZWVU8wclZSd0RoMVhldHZMNzdFbWw2?=
+ =?utf-8?B?b0RuQnh6eWswWnpMWE1HdGpJcGg1NVdiMUxuakQwREg2UC8wQ0ZnMFdIRUw1?=
+ =?utf-8?B?aFJrd3VVaW9FN3EvSXpISi9yMXZxZlRNcEVLSnJKVUtsQkRBUDVhOU1UaGkz?=
+ =?utf-8?B?ai9PM09QcVFvT2U4Yi9hRExQL3ZneitWNkl1dGV6bEpyZVJRWU1pQ0o2NU5C?=
+ =?utf-8?B?czcva1RPa000dEQ0UGZpNDV2cGxpanZtNzdVT21MVURhaE1NVkh1SUc3Mmp3?=
+ =?utf-8?B?Qys1aGg1MkI1WXkrS1psMlVwOGoyNy93Z1R3UW9Ga3V4MkxSTEpFaTd4cVhm?=
+ =?utf-8?B?bzFRa25sUnI2Q3plRlgreXNSMnhzV1Y5UDFkcmpwbzVYamJiajV3bFBtVzVo?=
+ =?utf-8?B?a0U4emZqM0dkUitiK1p3MGp3ZjVjalZZTjJaRXMwK01ZSlpYTzNBbll1QUpD?=
+ =?utf-8?B?TEw2aGltMmJxYUNSYTcyWXdUVWd2TXYvelJQa3gxTDh2MUZ1OTFnTlM5K3Ri?=
+ =?utf-8?B?SmcyUy84NTcyNE5OZG1ROHJPVHJCWmdQUnRVUUdlU1pqZHAyOXNFYWFGUzNp?=
+ =?utf-8?B?dHdMcVZkbWRUMWljajRPdzJ2RXgvd2NESUluTTF6M2NxSXlNSjdmSnBrZTgr?=
+ =?utf-8?B?YWFuWno5ZHBVd0paM1o1WDMzQThKVUo4cVczVHdYVElJbHFUQVFXd1FuS2pz?=
+ =?utf-8?B?NkxRcXd4eGNwMnA0ZzhMMk9pYUQvanpaYjhzV0NqZjZ5ZUNIMDRjSnpleCtj?=
+ =?utf-8?B?eDI5ZUNFNmJ3aTVzWjRzU0V0eEc5VXQyWFdzUHVlL0taaUl1TENnS2d2bE4v?=
+ =?utf-8?B?VVdWVGR1dy9uaGZBTHdkTEd1bjJXNXA3V3FIR1JuWFZEVndKZEZXN0hlUEdD?=
+ =?utf-8?B?VVlhWVFMbmFabmtzSi9oYnVEdTVxKzlQUmozSGt2TG1uVlArYi9RQkN4VW9J?=
+ =?utf-8?B?OElMdHlQTm1relQ2QXJZd0RXVm03VEM1KzNTNkZFNmVjZEs2WXJCRkVjbW5l?=
+ =?utf-8?B?TGNPWnl1ZGpyc3ZrcnhkdzZOS3BFU2VkWDNvcWJFVmtsTG5uK0hnTjU2VUdR?=
+ =?utf-8?B?VEJWRkkxK2hrL3ExV2EwVm9PSElzK2RxL29BdEptSEJaQU1jQjJQK2laWDZr?=
+ =?utf-8?B?aGlSeFl6aXpub2JSalIrdm01RXBRcStYUE5WaFYvT0VqNUxOQ2xOZENadWov?=
+ =?utf-8?B?V2NNa3Z0Ukxobmp5dUc3ejJ6YS9TVVljYy90bG5rRm40TWtlNnZ0NnBoNkdi?=
+ =?utf-8?B?aktYOEtQT1crcjhacVd1bmRZcXdVcWJTenV2WktKZnQ0c3NlKzlOWW5mTWth?=
+ =?utf-8?B?TTNZdFd4QmsxSk9CanVrWVc4NVdib3NsQnlUdCtqNEpMOHR3UGM4K3M5aGJV?=
+ =?utf-8?B?SCtBNXhkZ0c0VytSVkhieTYwdjZaTzZIRlY4TnFmMXkvM0ljS3pWVGtSd2kr?=
+ =?utf-8?B?T0ZqZ0lzeStBdmtUTW83V1dWa1JtYzI1SURkRWNuS0I1a3VreHpmQlFsRDRy?=
+ =?utf-8?B?TEM4SUhXT0FVblZFYVA4WHNUbTRJQlN2RmhTbnBYUUJVYytjb0JTQTVhNDZG?=
+ =?utf-8?B?Vkdqb0xqOGJIRlh5WHRsdU5NaUZGOXM5QmNGMmVydjIxTHdvMHdsRmhVNXc3?=
+ =?utf-8?B?R29LUFhoZTYzYkdBWmh6ZGZqclJxc2tJYi9Jb05MeE5MVjFhbEoxTlV6TWtF?=
+ =?utf-8?B?THloOEdPOTI1RkxwbHNDQnpOc1Iram1MSTBJVWZXbmwyQTgwOUh6aDgyMjR4?=
+ =?utf-8?B?cGF4WitpTmRNbElZeHE1aW1xTW9CNXpDRW5RUW5BbkhWZU4zOVlyQytSMEdZ?=
+ =?utf-8?Q?TLrlbhKvSVW6myZ+l+LRUJcVZe8h+E1Z5QpQH?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b0a7ad7-993d-4746-36b9-08de58365da5
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 15:12:45.6528 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZCSwKiS4SeCPd1+em7ZeLM3jLCFYNdtm38OHXPXAN3DEpE/CmqVJ9mYlC4zBzuN1GisS5q6m3Ug6fJc80LGzQR/gMVUI1bg5dwXKoaGJMdw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,98 +181,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Wojciech,
 
-
-On 20/01/2026 11:01, Heinrich Schuchardt wrote:
-> On 1/20/26 10:33, Mark Kettenis wrote:
->>> From: Casey Connolly <casey.connolly@linaro.org>
->>> Date: Mon, 19 Jan 2026 22:09:25 +0100
->>>
->>> Hardware watchdogs don't currently get stopped as part of
->>> ExitBootServices, this can result in resets during boot if the OS
->>> doesn't have a driver for the watchdog, or if the driver isn't loaded
->>> in time.
->>>
->>> As with the EFI watchdog, stop any hardware watchdogs as well.
->>
->> This has been discussed before and rejected on the grounds that this
->> defeats the purpose of the watchdog.  I think there was some consensus
->> that an OS that doesn't have a driver for the watchdog or doesn't load
->> it in time is broken.  Some folks also pointed out that on some
->> platforms it isn't possible to disable the watchdog.
->>
->> Ultimately, I think EFI needs an API to control the hardware watchdog,
->> such that an OS doesn't need a driver.
-> 
-> The hardware watchdog interrupting an OS if it is hanging is intended
-> behavior. It is required for recovering from a failed capsule update.
-> 
-> Some watchdog timers have a maximum timeout that is too short for
-> booting (e.g. 16s on some Sunxi boards). To avoid resets these options
-> are available:
-> 
-> * Set CONFIG_WATCHDOG_AUTOSTART=n.
-> * Use device-tree property u-boot,noautostart.
-> * Use the `wdt stop` command in PREBOOT.
-
-Hmm, thanks for the suggestions. I considered doing this in some
-platform-specific way, but I don't think it's correct for U-Boot's
-default behaviour to leave watchdogs enabled, I haven't gone digging
-through the EFI spec but I would imagine it's not EFI compliant either?
-
-I can totally understand why it would be desirable to leave the watchdog
-enabled, but I think boards that want/need that should have to opt-in
-rather than it being the upstream default.
-
-Would you be ok with adding a new config option:
-CONFIG_WATCHDOG_LEAVE_ENABLED or something along those lines? I'd rather
-avoid adding platform-specific workarounds to U-Boot's default behaviour
-like this.>
-> Best regards
-> 
-> Heinrich
-> 
->>
->>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->>> ---
->>> Changes in v2:
->>> * Fix compilation when CONFIG_WATCHDOG is disabled.
->>>
->>> ---
->>>   lib/efi_loader/efi_boottime.c | 3 +++
->>>   1 file changed, 3 insertions(+)
->>>
->>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/
->>> efi_boottime.c
->>> index ddc935d22409..c34616db578a 100644
->>> --- a/lib/efi_loader/efi_boottime.c
->>> +++ b/lib/efi_loader/efi_boottime.c
->>> @@ -21,8 +21,9 @@
->>>   #include <time.h>
->>>   #include <u-boot/crc.h>
->>>   #include <usb.h>
->>>   #include <watchdog.h>
->>> +#include <wdt.h>
->>>   #include <asm/global_data.h>
->>>   #include <linux/libfdt_env.h>
->>>     DECLARE_GLOBAL_DATA_PTR;
->>> @@ -2263,8 +2264,10 @@ static efi_status_t EFIAPI
->>> efi_exit_boot_services(efi_handle_t image_handle,
->>>       efi_update_table_header_crc32(&systab.hdr);
->>>         /* Give the payload some time to boot */
->>>       efi_set_watchdog(0);
->>> +    if (CONFIG_IS_ENABLED(WDT))
->>> +        wdt_stop_all();
->>>       schedule();
->>>   out:
->>>       if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
->>>           if (ret != EFI_SUCCESS)
->>> -- 
->>> 2.52.0
->>>
->>>
+On 1/20/26 9:12 AM, Wojciech Dubowik wrote:
+> Only short option has been present.
 > 
 
--- 
-// Casey (she/her)
+Actually.... it's been there, just under dump-sig and not dump_sig.
 
+So we have the choice of either fixing the usage string and the manpage 
+to use dump-sig instead of dump_sig or support both.
+
+I would personally be in favor of patching the usage string and manpage 
+so we don't have long options with an underscore.. it's odd to me.
+
+Regardless of your choice, we need
+
+Fixes: 16abff246b40 ("tools: mkeficapsule: add firmware image signing")
+
+in the commit log.
+
+If you keep dump_sig, I would really recommend to put it next to 
+dump-sig and explain why we have both (we need to keep dump-sig for free 
+backward compatibility).
+
+Cheers,
+Quentin
