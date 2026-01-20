@@ -4,115 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF01BD2ED0F
-	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 08:39:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11856D2ECF7
+	for <u-boot@archiver.kernel.org>; Tue, 20 Jan 2026 09:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8072B83A2D;
-	Tue, 20 Jan 2026 09:39:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D1B483A3B;
+	Tue, 20 Jan 2026 10:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F5NafIlW";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="m9LHr7FV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF72083A8F; Tue, 20 Jan 2026 09:38:59 +0100 (CET)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1DE2A83A6A; Tue, 20 Jan 2026 10:33:49 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BFEB839E8
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 09:38:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 166E083A2D
+ for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 10:33:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-64938fce805so1037706d50.1
- for <u-boot@lists.denx.de>; Tue, 20 Jan 2026 00:38:57 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768898336; cv=none;
- d=google.com; s=arc-20240605;
- b=azpQ/DKxcFPDwi6o7tko8oVjOAwfEcfUUSqR93DqNiXFBfea5WLGEdMySPRo3cw6qC
- XAfBVnAb4kEYmA7wdiylWEKnXL6l42Hi1TOQgDw39KxH+VTgY7ayTshLzTWIUJ0JVwtt
- fq8pP1Y+EwZAzSVVTRTODiuJlMw9wb66Uz1AbcCXazWyYpu83hhxP2DGg9qH/7JpY15h
- Ygeb1CmWM5DF+ilWcH/exoJEUpkZ015+//Sb75QsI6owXs7kvnrVMrV0UZFkOLf+kwQz
- TI3kHYBjyAhN7Nu/wQcD7/gc6jHzIhrxDzUra8XmP1ZelOXxGBDxBmA9fVjq0mZtNtO3
- Zkyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=yyZkv08gZ2lC7YUuXwf/MLleBXaOldA1gKnfjNw8QeY=;
- fh=dgjDR5ljvYUS7D/4Ak7O/wuLaIcZs0La2Y7nP0DwpDQ=;
- b=goeYhO0UmNXI8da+sDc9jPYuh5mAXHtw+tOzIeDqcVJDWak3Phzdxam6nnt75ShtPn
- lJ3JXCXbifMZoItGjIDfHEYI1p+/gJbuzmLD1TumxJLLfJ3+zIocSzTZ5DgZB8xh2j8O
- pbnS7icKtLRQRGrb+rrSTdXvgYb5FiuEepyCzVjwMy7EdXVo/zaOsZHcM0k74D3fWbGy
- 5ipGzyxtLCg/BgYJfQdxkZ1/H9glDCu9rIjyAkSBd1m7MgM0+PeaPlYxxCIbRv3HVujE
- UM3smFXfjEt+xTtYxcrGvE36Gg9YVo++usYoKBserUoV+uE/mlhMZdSY2pGbbEBHzzrw
- 6GXw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768898336; x=1769503136; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yyZkv08gZ2lC7YUuXwf/MLleBXaOldA1gKnfjNw8QeY=;
- b=F5NafIlWP7mDzclMhqewgpKCPxtjJ3b0y50wA8dvxNSK/0En2uJoe7SGzEJQBJBx8H
- iC/wqeV4LZRfJXNi9xFSsB2aDnz5r6egcfm5EO93pPEfPlglt+ROANXj8EI0oCQcBiYT
- C76INRqLjbNcU5XWnYJW6N92EQSzvr4ul04rj9K+ylsIRPODtCcpx5LavPQ1yTrAIZw9
- GrxoLgptBvI5mSPfMeY9kSqU5/374Ezj2eAfwWAoK7KBZZpZujzcB/coMdDhDp84FEFN
- 3/1nyQWm7uyOt1dviRJFaJgkhNkjORmWgr7uKRIooQqDNDIFTXfbKM1AdlU0c1EQzQ/v
- 6rPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768898336; x=1769503136;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yyZkv08gZ2lC7YUuXwf/MLleBXaOldA1gKnfjNw8QeY=;
- b=qUAV7HFUEWdXGvYLCUzSxXdctc8bQO70aUSykM0DsOI1NMjtm8ZO4dLpNQU6kF1aXf
- T/jASxg6GactGJMeDZZAJTLfT3xmGnM/9lTl0z1U0ah/+dYkPIphBZ6hX4z3KaYPTGZB
- GBwatHka3fRDehm9hCAr+z+4IPSptE5lXbCSRfqd8g6pSGf6LFjq+b6dINY/1R8GEZB2
- R+ZdQYXIWOmSTGtjxwIKpSASrta+eFWRYej7fc/oHhHdkFierGaLpPfm1vIwDEA9a3OY
- 8+qrlFVj6SoYThXEwme7biGVPUX4TlDhHJN+FLWbc+KPXqTH4GXYCfaerFwkPMWtIcQM
- fCtw==
-X-Gm-Message-State: AOJu0Yzbp/G8L2is0dQReMcveIyv7ohH5kmetsEAbruWVk+u7iZ+CL8A
- QSen1HZ/FA1tVib7Xm4DBl14n1OLvnIAmHpeqYgvySusTuI4Xx4MRCevxS5OhYR4Z2oWixTzPVS
- jlYBORZXuVdNwlUYi+NHGD/XPubyFXZ/ksm7b17QdRA==
-X-Gm-Gg: AZuq6aJxcst24eI24eoqGkXVwlzF0cBPrMjR2wMwVNvN/W6euWl21y/VzL/mE8wjU0E
- jsOee2sbmDIZzQfoDeDdQMuZyfmo4Syc0pfBL4xOWrFmi0KHlbCPuTkjbXNzyT/MXjHv7P+Y7iD
- hAPK1Xov/26tWGjZPlbvVm8aGPZFcekXzMiR6UUJeSvOhW0Ew6uiImBynl/kgZNNg7V6pW/n/Kf
- jaJC3BjmH8ZOuiY9UJ/iK6TrBHDiyD9G7B/1vkv8b1SmHKQd/J/nB1hWa+lZDtMTASLItndF7X0
- /m/aRUDCePb8K4NDHhS0mWE2CHWkol4Rwflk0njHkToUW90dU0uDr52DL6SiaR5A1fkrLxYW5aP
- apAH/avqaNjMlVW/p/Ac8bhPT0FqrqCPLNs9zj1FiTCC3UH2T8+9Z7okCDIzHnVTDoJjg23MPgN
- m6881teQFhDkXgRl5eC4Q0eTz34DnEThjuoiKQnEm9N/L3YmI1iUjYWxNAqtWQSeFNr9Ut0FpB0
- 69b3zaq0eLJf/gz/hNdhhyThzWFeLLZ32frfRdvFHyU4gDHm9O0oCEk+YQ7TNNL4fI45fV5AfNW
- OG+os64tL/34H8XjcC6JaaumdfBHxJyT
-X-Received: by 2002:a05:690e:120e:b0:645:54a9:11b6 with SMTP id
- 956f58d0204a3-6493c84819bmr800970d50.52.1768898336069; Tue, 20 Jan 2026
- 00:38:56 -0800 (PST)
-MIME-Version: 1.0
-References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-3-trini@konsulko.com>
- <CAC_iWjLUX38Z0ucpN37EsKE8T8w+Qw5hpteFRm=5uaf+Yfnv7g@mail.gmail.com>
- <20260116144024.GJ3416603@bill-the-cat>
-In-Reply-To: <20260116144024.GJ3416603@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 20 Jan 2026 10:38:19 +0200
-X-Gm-Features: AZwV_QioTC4VcO8R2VQnV9IgX8s1ZT8SdnLPXtudlNc7Y6PcBliwCoD-OpxzQqU
-Message-ID: <CAC_iWj+Uhq-GFDVG78=GL+xtFTSy3cMbmer1fb+gfxv4U0YZ=Q@mail.gmail.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Beleswar Padhi <b-padhi@ti.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Fabio Estevam <festevam@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Joel Stanley <joel@jms.id.au>, Kever Yang <kever.yang@rock-chips.com>, 
- Michal Simek <michal.simek@amd.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 3e894255-f5e3-11f0-be9a-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 3e894255-f5e3-11f0-be9a-005056992ed3;
+ Tue, 20 Jan 2026 10:34:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=jEGl2QDGpEBP60mDxZI5CoJV5VH2/AUYIVqZ+JuR4Is=;
+ b=m9LHr7FVF1/u4V1n9Uho2VSXdfk1IINr2x4pOnO+ekjWBwLOo1yhbsaw3mB8Q2JrOQ6QVtOFX1TEO
+ rZ5US12hwPkNBVK9dlMbuy6t4ytl9dzQ4ZvE4LsLCWs4+P4J028cn1sIFJvhBRqQN9t7QKlgcQu1l5
+ S0l9Ykze6+2oku9x9nrr5Q/aYlCbF3lwUfk9UKDr/5+H7v/Jxbd1JCgqZ+/+7kyQMrE46QxYC1qFuw
+ SafPEPEFy21RUX02s2PQQrfi2ZZrJRN7Jw8j34C5H3FqynGp7irL7Inr8eDyR+UX1JUKbi8bkSCTcO
+ wHvlXL+UrVGG6rlbwKJVpymr6OidVhA==
+X-KPN-MID: 33|6ABXAW2sIXcnpRorFfiO9U22g0wFIqtdWm5mzAcAkp9IL/DGra+Fr39wn2Tq7Ml
+ wFlQd7FAWpvNYHmniDwhkMPRFojWTPSzMfx036qm3g3U=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|Dl96axYXKifnHt8qcshjPdYpcAYJQVUz9OX7oDyQQUThhsFRQM+HadsKd07UeLO
+ qBeAhlcseiypBHxt5G9CXow==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 1dead03e-f5e3-11f0-bff7-00505699772e;
+ Tue, 20 Jan 2026 10:33:46 +0100 (CET)
+Date: Tue, 20 Jan 2026 10:33:45 +0100
+Message-Id: <87ms287hmu.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: paul.liu@linaro.org, adrianox@gmail.com,
+ casey.connolly@linaro.org, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, jerome@forissier.org,
+ mkorpershoek@kernel.org, ravi@prevas.dk, trini@konsulko.com,
+ me@ziyao.cc, u-boot@lists.denx.de
+In-Reply-To: <20260119210925.29185-3-casey.connolly@linaro.org> (message from
+ Casey Connolly on Mon, 19 Jan 2026 22:09:25 +0100)
+Subject: Re: [PATCH v2] efi: stop hw watchdog during EBS
+References: <20260119210925.29185-3-casey.connolly@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,28 +77,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+> From: Casey Connolly <casey.connolly@linaro.org>
+> Date: Mon, 19 Jan 2026 22:09:25 +0100
+> 
+> Hardware watchdogs don't currently get stopped as part of
+> ExitBootServices, this can result in resets during boot if the OS
+> doesn't have a driver for the watchdog, or if the driver isn't loaded
+> in time.
+> 
+> As with the EFI watchdog, stop any hardware watchdogs as well.
 
-On Fri, 16 Jan 2026 at 16:40, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jan 16, 2026 at 11:59:49AM +0200, Ilias Apalodimas wrote:
->
-> > Hi Tom,
-> >
-> > arch/arm/cpu/armv8/u-boot.lds and arch/arm/mach-omap2/u-boot-spl.lds
-> > can use the same alignment. Is the omap2 case covered by the TI
-> > patches? I think it's better if you bundle this up in this series
->
-> Correct, the TI patches fix omap2 (and a number of other platforms, that
-> linker script should be renamed, it's the sram+sdram SPL case)
-> platforms. I mentioned needing it in the cover letter btw :)
+This has been discussed before and rejected on the grounds that this
+defeats the purpose of the watchdog.  I think there was some consensus
+that an OS that doesn't have a driver for the watchdog or doesn't load
+it in time is broken.  Some folks also pointed out that on some
+platforms it isn't possible to disable the watchdog.
 
-Ah, I wasn't in the cc list for the cover letter and missed it. I am
-ok with the TI patches going on a different patchset. Can you amend
-the arm64 .lds file?
+Ultimately, I think EFI needs an API to control the hardware watchdog,
+such that an OS doesn't need a driver.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->
-> --
-> Tom
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+> Changes in v2:
+> * Fix compilation when CONFIG_WATCHDOG is disabled.
+> 
+> ---
+>  lib/efi_loader/efi_boottime.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> index ddc935d22409..c34616db578a 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -21,8 +21,9 @@
+>  #include <time.h>
+>  #include <u-boot/crc.h>
+>  #include <usb.h>
+>  #include <watchdog.h>
+> +#include <wdt.h>
+>  #include <asm/global_data.h>
+>  #include <linux/libfdt_env.h>
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+> @@ -2263,8 +2264,10 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+>  	efi_update_table_header_crc32(&systab.hdr);
+>  
+>  	/* Give the payload some time to boot */
+>  	efi_set_watchdog(0);
+> +	if (CONFIG_IS_ENABLED(WDT))
+> +		wdt_stop_all();
+>  	schedule();
+>  out:
+>  	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+>  		if (ret != EFI_SUCCESS)
+> -- 
+> 2.52.0
+> 
+> 
