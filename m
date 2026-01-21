@@ -4,103 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6BDC44508
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 23:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6AEEC44508
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 23:21:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DE9983B27;
-	Thu, 22 Jan 2026 00:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F9DC83A3B;
+	Thu, 22 Jan 2026 00:20:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k9ArdQgS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k10CniaU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58DD283A3B; Wed, 21 Jan 2026 23:46:28 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 4130B839DF; Thu, 22 Jan 2026 00:17:54 +0100 (CET)
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [IPv6:2607:f8b0:4864:20::e2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D787880077
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 23:46:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E921E8313B
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 00:17:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-45ca0d06eddso151303b6e.2
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 14:46:25 -0800 (PST)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-5eeaae02888so114672137.1
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 15:17:51 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769037471; cv=none;
+ d=google.com; s=arc-20240605;
+ b=j4F+VxorkPV1PmKmtxQJwuWW1Q9NBaLpwgijE4XOSwmEx/fkOYK2JEGyBJN48Ps7YU
+ go6dJPv7fkENA1oGNo0C4We2cjq+9dY7OlARn20rdfPevhraUzPQsgNvVWPXteBjFXo/
+ TNSy3T9ZAw0mR3Kyt5By5lCow++z3pPFnujKUDa8NAhiX3HbXRKErctjABJ2dM9wE3SA
+ jaf0bLG4Cigc8e2OsMSKYd+Xsq2UJKASKxqWlcB/PulnosaNQH4YY+QXkF5Lz1+bjoM9
+ 7cIqPilOgPXKYlyORPFdiiDUJiqfA5h3eM1Q31sdTFzuncXywNuXOiJKJoxItJ++lvS0
+ VmzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=C4tYjwSWea3BkvJKVVHfcLZltxu4pGL9ZEnrk3oNDq8=;
+ fh=Wx7wNhPct/Qj1jCfILDotJwHkArpzRqFupw+1K3o51g=;
+ b=ULKdAWMw7zDfMR4bJeOvTJc7aG/Qxg6xPz0AVWdPk4hiBnchPEHbwqBcHsKsozZGYL
+ 1+dDH60rQqtrwNMejocLuRMOsAkBbDDFDLJ8q7ZHtvyb0tLOXqvshZCR/YwzFAyVzZAE
+ GuNT/mOJ/kyj+vkcYkrq/ReEMPe0lK9W6shjzJB3WOCTa5x5xoNPv0b+L9eWvuJqZMgK
+ q2mOUZMUp2D8//WnsauDJhUsrrITbpYg66C5EUT5Yd0cdl/ioreefgB1L0UfJrC681dj
+ SO8eCIES3nLrrvc5zXKmpbhZg96SCWPpsV8Q2wdc6j+4FZTwfl7cd+Tul2HS/+G/HKJY
+ VMCQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1769035584; x=1769640384;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bFGv8+/NDxB9Ipjpc18hWNeea0bwShcrjJO64UIKBbs=;
- b=k9ArdQgST+MTLxTx5GvHM2bReGR4V4XbFbcaXS7jG0iXHNpcpScHnlEV9AXIwb2Ne8
- rphqRp2nmiS3+qvsvmWW6lG00C2qjO1f+OTBe/ME2NsR4oFLvWSvlIpHoJPk4uKcDfVh
- RhsfTCWmIh9vKJQsZxS08H/ZbZPCHfAjSuMIsmYCcKW8rlMigAASFi/GLmF5QR3hyUxd
- q8I80Hsz2e2/hQumtpKqo03xUoTRgHKmnktWBzl/xWuu2k6y/sumUed4T664oEYNX12p
- erm3tcgoTIF3KaXRBonXC3KuigpoJrK+lOACbUVlDVhyM21P+klzESZqJ2S4mVh7D4n8
- KYFQ==
+ d=gmail.com; s=20230601; t=1769037471; x=1769642271; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=C4tYjwSWea3BkvJKVVHfcLZltxu4pGL9ZEnrk3oNDq8=;
+ b=k10CniaUagDBA7lLZbU7/U/q8cLyjmO2YrRhr1bLhF8mTzazFXrAcHUgbHzSI1Jl9K
+ Rw9SIP7BCCbepm1KRegF7GSicZBf6UMDqYuCYEoBaxA1Y7p/UtOWDaHiHViy3Mz7raQt
+ /oo6ISOTcI1cImGGyrQHfMZ43/iLqIiHFvNkduSlJIjjQimKiDXEmvaTtWvmB5PNo5UO
+ Hc10POJmc9W1cRUlP1aqC2f6HhrXyDSUfdDZh+ZAbr8kNKkUX8UH6LJtPOaVOLxkVLhI
+ DkJtPh/6+uvNXzKlZt13OyvZ/cO1G8oU393cX1IwT67wQjeVAJ8I9JbUkR8/LkvvrMe4
+ A7Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769035584; x=1769640384;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1769037471; x=1769642271;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bFGv8+/NDxB9Ipjpc18hWNeea0bwShcrjJO64UIKBbs=;
- b=J1U2DFNwq9kjECCvRTjGTSO7f9jf45qvNWLgwsN7WMGZrr39jIjdET5+l/GlpxbBHh
- q1C3YJfEx+7CRem3wApDNP1V97KYnZCXczxlwRm7KpEI1t0iw9Du0cNtbpEt/QtD3RGV
- jR9nUFaz1OWs/njKPYzo5GitaV1Q9kkpI2tbdJW6I3AwXWTcbOA5l+jv580w0gBEaT1T
- N+vOwVrcnXnQMu3CsXeputgHq/sD8XV1L9AjUwfND4G8UzGiGx6t7OP0HAvyjFOd2leT
- 6rPpmJEL//nUcbmbB0ijzWeZbMFsP19BiJpg2+pES0EtK3psIdcBPIMo588sMDCzgEk+
- 5g1Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIfAl6LHDxiZc6uQ8zSgqVoeaGVhx6wVO/np93RmRHmUlhCtRy3y+GFYlshPYLatqe3QFxJw4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxk+k/ESQf2UmHs+vDoth6AiAGjPDCpTWJebYAisjsuI6Yjol06
- 90uKVRBMRUjDXmQZbxq/fOTtcRgcJzUXYa4ZMWx65NY1ncxM9Wd3/8byFL50+KwbDs4=
-X-Gm-Gg: AZuq6aLwAVMlnYPyQIiDDr8lN1zkX9tPYGE3DX9RXQPd85n4NtvKTKd7Fod3WxIEBEE
- kdPxFTqoSlxJgO8F9dB2h2Jt38az3HHs+p6LL1jlyVsKV2SVFE969E+Y+8IYQ2bMUmNX5oUp4pB
- Yrd1mZXhsymqUJBUigY7vObOczHOHuOnQ5+Y3//vCPFVX037aOk0plytJIBXFZpEZ2UsWRspjJy
- 4347McwrAyEIoQISmYGY4xzWYv/Kv4Xn2WoyIR+EWsB5t5t5xVwuuXhdUWgigTAL3ThzHlJYf/D
- PpUQKY7U5efIcXpxaNmrQbi/Ckkoad60wGXmSg3lpR22g12P8WYtlctfd7Gh8D+pbVn+BT7ki4M
- WhxwyiaN2UksdbQX15+XekloAognUW7rU7b4yuLs4Ten3+PZwxhMhF3g07ob78jWa0nBXvt7FtV
- trOkJxwQyiW0N9
-X-Received: by 2002:a05:6808:6610:b0:450:3534:dcb7 with SMTP id
- 5614622812f47-45e8a93b3dbmr3289957b6e.23.1769035579725; 
- Wed, 21 Jan 2026 14:46:19 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:9a8b:7a9:24fa:a0a])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9df08545sm9050915b6e.8.2026.01.21.14.46.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 14:46:19 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 21 Jan 2026 16:46:05 -0600
-Subject: [PATCH] configs: mt8365_evk: enable mmc command
+ bh=C4tYjwSWea3BkvJKVVHfcLZltxu4pGL9ZEnrk3oNDq8=;
+ b=lxKsV3GaG5N4/5vPlaJWe3aJtEVDcUoTxNxSuKbBjSjH1fdkSl6LoRQJU+1N7HNH63
+ Dzvq5udzP97OK86ces99st5xozhxOFYVeRJMQ+2iPMta4SrC/FK8qmHzoe5r6MtkOfzI
+ tXkCSufGXz82ewatnw3MDdX9qAgg8hSgDspTIT3di+vME7RE8sdsZKvYrfqH9PsRVpno
+ lDOLXrWuK16LFKIYzb7pUEjjap9SunxnBOgCfgvtHSXe/usxxoS0bPRCKzghUzDJIPs0
+ csJyg7siQv26gFzbaA9wUNJwpi+3NyFAcnO7NC0V40OB2NpaAShM+8RyThU4hLMhWtao
+ 36sA==
+X-Gm-Message-State: AOJu0YzsTHCurtY9XawY1H5dY5DiKXBSkyv4IE9wVbUF6Boq3zccvxfg
+ /6GSZtyA7jPYnt24KQAOKwZefmHCy9go7Wx1AtjxRX3f2GbKplVDvF2uP+0VCdkRlX1lFVZ93EJ
+ mlrV3WUM2MgbNEk9n8zRN6jp+FPQzx2E=
+X-Gm-Gg: AZuq6aKmL4iQa9pu4c/JWm1/ibhRVqJNzs8wcowaPBVjTkHufaF7NvPBREpNjvXqV42
+ h1p2LOmY30syf7HqxpLdH+svpoeNP+mJ2cJvERLDrR1wjDaQy8/1BwgtlvK8nmzp3prPDnZy8hD
+ YNEBHVSMfSz4QamyS5z5oV81rJlhHpYPgJsiGXYl7rDeZf3cTpHkcBIPWh1NcI4qcXvIMGsilJL
+ PKOI8Q6Q/n4SQ4nTUTzU2fS1KSNFyIzDWhsvpGr3F3L5ulrOelnfSQoXU40kNxnG6Tmzsg2
+X-Received: by 2002:a05:6102:d87:b0:5db:3d11:c8d6 with SMTP id
+ ada2fe7eead31-5f1a4d71a7fmr5670515137.5.1769037470555; Wed, 21 Jan 2026
+ 15:17:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260121-configs-mtk-mt8365-mmc-v1-1-abcbac0492aa@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MMQqAMAwAvyKZDbSVqvgVcdAYNUirtCJC8e8Wh
- xtuuEsQOQhH6IoEgW+JcvgsuiyAttGvjDJnB6NMrbTRSIdfZI3orj3TVrVF5wjV3EyWLJFmBTk
- +Ay/y/ON+eN8PTdSjsmgAAAA=
-X-Change-ID: 20260121-configs-mtk-mt8365-mmc-0d7b5c5cc1e0
-To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=994; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=tWOfwIVIAlbI5IYPf9E6QzdWYDpqqC3G2jfrd6WnrSw=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpcVczRaUUy0GaG/xgr1SSY0Gz1YwGvgwbqyRUA
- 394UWCNrj2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaXFXMxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A9AoH/RRXkDIblw5KY1KduAH6cyaBASGjyMO1bUaFFU2
- xTzauBltMpTlJ+lU40pszullvPic1hjvm4E7Wi6vG6OU55mUz9YSXKeK2dZxSSPqq7MBA/1ls//
- XVXeCLLTIMYvZXuY+gAGiFIgnNFl5Fii/8Z5md1hw/o/vzEq2K4KOWtVSG1fNHF7GLeN0TEx4P9
- VqiHxPh5AXFe71TQdvb0U2BXcju7x+uN56KJ/62DgKONzi36Lr4UPGj6JgH94JWv4Ieb4dPY+o6
- uWuiFdAakNdYjOeVMkS+amcZ9nz5l90A0zAatSD35M1xgwzrIHg1upd1xYc44Qa2oKK785yRbZb
- 4HzM=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Thu, 22 Jan 2026 00:20:22 +0100
+References: <20260117190231.977686-1-raymondmaoca@gmail.com>
+ <20260117190231.977686-5-raymondmaoca@gmail.com> <aWyjUHwp2gzZfUYH@pie>
+In-Reply-To: <aWyjUHwp2gzZfUYH@pie>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Wed, 21 Jan 2026 18:17:39 -0500
+X-Gm-Features: AZwV_Qhd9ONWNlr5ukZRj6trW51WKw0nWDp9UHCSCbzPztQzcgZR5We9Jm8A8V4
+Message-ID: <CAMDkj5z5BQN5gSuE_4uTruqqHiNO5c4yKsWBC_eQUm=gaXi+kw@mail.gmail.com>
+Subject: Re: [PATCH 04/17] reset: k1: add SPL support and enable TWSI8 reset
+To: Yao Zi <me@ziyao.cc>
+Cc: u-boot@lists.denx.de, uboot@riscstar.com, 
+ Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Heiko Schocher <hs@nabladev.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Peng Fan <peng.fan@nxp.com>, Randolph Sheng-Kai Lin <randolph@andestech.com>, 
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Conor Dooley <conor.dooley@microchip.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
+ Yixun Lan <dlan@gentoo.org>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Aniket Limaye <a-limaye@ti.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Justin Klaassen <justin@tidylabs.net>, 
+ Rui Miguel Silva <rui.silva@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Samuel Holland <samuel@sholland.org>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, Joseph Chen <chenjh@rock-chips.com>
+X-Mailman-Approved-At: Thu, 22 Jan 2026 00:20:31 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,37 +150,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the MMC command on the MediaTek MT8365 EVK. This is useful since
-the primary boot device is an eMMC.
+Hi Yao Zi
 
-A few partition commands are also enabled since the mmc command alone
-is not enough to read all partitions on the eMMC.
+On Sun, Jan 18, 2026 at 4:12=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- configs/mt8365_evk_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+> On Sat, Jan 17, 2026 at 02:01:38PM -0500, Raymond Mao wrote:
+> > From: Raymond Mao <raymond.mao@riscstar.com>
+> >
+> > This commit enhances the K1 reset controller driver:
+> >
+> > 1. Enable SPL support
+> >    - Select CONFIG_SPL_RESET_SPACEMIT_K1 for SPL builds
+> >    - Reset controller is required during early boot for
+> >      proper hardware initialization sequence
+> >
+> > 2. Remove TWSI8 (I2C8) reset restriction
+> >    - TWSI8 is now fully controllable by reset controller
+>
+> I don't think you change any real logics in the driver, so what fixes
+> the function of TWSI8 reset? This deserves more explanation.
+>
+>
+The TWSI8 reset could be accessed. But it's only writable. So I remove
+the restriction.
 
-diff --git a/configs/mt8365_evk_defconfig b/configs/mt8365_evk_defconfig
-index 19fb6b79b29..f1e7d7fc58a 100644
---- a/configs/mt8365_evk_defconfig
-+++ b/configs/mt8365_evk_defconfig
-@@ -12,6 +12,9 @@ CONFIG_IDENT_STRING=" mt8365-evk"
- CONFIG_DEFAULT_FDT_FILE="mt8365-evk"
- # CONFIG_BOARD_INIT is not set
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_CLK=y
- CONFIG_MMC_MTK=y
+Regards,
+Raymond
 
----
-base-commit: fd871fc6bb497c6ddd7b39622480b89add78f57b
-change-id: 20260121-configs-mtk-mt8365-mmc-0d7b5c5cc1e0
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
-
+> > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> > ---
+> >  drivers/reset/Kconfig             | 7 +++++++
+> >  drivers/reset/Makefile            | 2 +-
+> >  drivers/reset/reset-spacemit-k1.c | 4 ----
+> >  3 files changed, 8 insertions(+), 5 deletions(-)
+>
+> Regards,
+> Yao Zi
+>
