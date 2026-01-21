@@ -4,93 +4,171 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB0DC44536
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 16:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9A8C44536
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 16:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08E778341A;
-	Wed, 21 Jan 2026 17:01:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ED0158341A;
+	Wed, 21 Jan 2026 17:33:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ollT7tZE";
+	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="2sOKuY3q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE08D839D5; Wed, 21 Jan 2026 17:01:47 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B56CE83A3B; Wed, 21 Jan 2026 17:33:38 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9705280077
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 17:01:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBA5880077
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 17:33:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7cfdf7e7d19so4287781a34.2
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 08:01:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769011304; x=1769616104; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zG0qk7mcZg4C8e4VpvzigDO13S1u7VtHmVbxHDSkwXw=;
- b=ollT7tZE9WySIjd/X6cHzqTI90p+u4qpMaZToEItGi4HTVuoghW636JzpIeYxd8tRS
- I3yUdIBRtW4HhjxHzD7jRaASZb24qeZIeD6cGt2h7TtxlVs3M2ikH7UVDhc1HAfUnFET
- KHt7WoEUTRmzKyYLP0KH2ipNdHTxci11QwR24=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769011304; x=1769616104;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zG0qk7mcZg4C8e4VpvzigDO13S1u7VtHmVbxHDSkwXw=;
- b=NtrToQFcnFN4Ea1r5FRarR3o1+gkFa500aPzePvgQUURRo0cFMUliVVuHhUQpHbr0e
- xO4xW8RbUThPu8G9Q+RcDw6GepWmJug94FIlyZsnL/S9FGESzxdTox5xkB0XVC0oi9rO
- PwfnEFWUWZrpybR5wwejuNbo5ziY5WNZONzsm40k1Bj4M9jROeFGgxdk6zM/RNSlSmfO
- +GSW6E2y0fNrhJOOFzrHIDrgP6w1+b/ARvCkFyyX4x1aJwF3GQsCQn5C/ksd+QYOewWY
- 2jALYZeJSHq/aN4iRNaeY8S1T3Nk6SCOA9pKPWUGSFHNqoo4SzgllaF0Tga78+HLIT+e
- w07Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUS+4dg0c5ygpxUyQBL2OWtqOJz6D2VnRCaDJHrlcGfwQ6QGo7GmnGb8C2fhHlznWFO4Fjoh3k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy85bo7sphBK6qxPniiJeTO5PX5mZzPkV4UL4wS3XBbptB1obme
- Iuh/QGGvsisXNPZ/ph4GrMsHej/QBPLQrNCGLcvafrBRaPMYAv7kM8c1abtnXOb9xoY=
-X-Gm-Gg: AZuq6aJhUksIBWVqEZLOfPSQtngjqsUXQxoFYntynVjR1w42l53R5Pi5e/IrZ5cPzeI
- JIl5EENBW4FgTmLRPrLZF14ufM9HFM63IAmC4I5cZtWI/RUxIB/97udOHaW1aIahRlAaLoBPlLx
- udPhwiut9Zgojr1bkx7U4DWqXtRL2kur0WLmdURZ2MyJKL1E716dgHe4YkZ7JsOJkBlGSO9LbL3
- zhRr6k866b6bwQQH6jFqzn9/UBKdfV9taKE21AYEeDlIs0Qnmq7Qx7thI6KQ283q46JGHnbcTCa
- QAbQUsHImRLy9SVfPJv0Oeogw+qtArcmKnu5fgO4ztf8PVDftAWyg2fltjSTEoXUratUM6heeGX
- bIEIRQn8Dr0Gd/oh2KTpr1mn63svTaJeM27HHlKARg6s7WV7qhk9DRfJt2aoUqrYVIdQBIbze5U
- c5cGy3OzjhQI0ze0hkLg/QKxuTjbZu0fDs7euJjvzwox17nZn0OF9xC/McHJaxjx+V0YJ3xx7OW
- 0N3jgmRwKF3qHt0i5YswEIscizvIZOEuUdleys=
-X-Received: by 2002:a05:6820:625:b0:661:ae2:95ed with SMTP id
- 006d021491bc7-661189adbd2mr7504999eaf.60.1769011304124; 
- Wed, 21 Jan 2026 08:01:44 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4044bda221asm11093578fac.20.2026.01.21.08.01.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 08:01:43 -0800 (PST)
-Date: Wed, 21 Jan 2026 10:01:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Julien Stephan <jstephan@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sam Shih <sam.shih@mediatek.com>, dlechner@baylibre.com
-Subject: Re: [PATCH v2 1/2] pinctrl: mediatek: kconfig: fix logic
-Message-ID: <20260121160140.GA570248@bill-the-cat>
-References: <20260108-pinctrl-mediatek-fix-compilation-issue-v2-0-3d0499d3b6db@baylibre.com>
- <20260108-pinctrl-mediatek-fix-compilation-issue-v2-1-3d0499d3b6db@baylibre.com>
- <fba47ca8-7cf7-446a-9242-54c50087cf3c@cherry.de>
+ spf=pass smtp.mailfrom=niko.mauno@vaisala.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZDGnCIv9cgP8yPUL2b5cGJzLUr0gKXf81KbncF7UbNrTc4orgyVF7tBOUcy9NM1rmRm6buuZkNym0hJVmWqMEApgKu56kzqAuSfedSm7hY+2vh7VybTYaSxBvleclc1iIWfgGrdF9nQB0M+dK1qSble6X/IX7tDqbPECDhzEe0mTbFjGMaPEmlCSDOJ1Rv6l1J6j07rvBvtiUQLHZ7Y20YPpWGU0JfCKA0XdaP6jFlnjKcH5IwPe5EqZI8Eh7/53Y+TfP+w4jbqIDaB29QTDAi2/Bglh21Vdp7y8Bjexraga8PoXUwLPcxFnb4NHPT2vGpMZkuOW25UYRZJ/HqDRjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T0QuYYdyDA0ipni1xEOvoxEA84uwXss5X1Q4LRLN3aM=;
+ b=zJ1qwp5DaGU1/Xc0KHKZ2DF4vhgHxZguAowYeOiYiG7N5ZdxTRvhQouMZdb6y7zjN3LRl+xh2sw5ifgOW3f/gfNfzUfEmmWwq21tZxcS6q//WFnfKbZTg2buB8OcS/SemkCctcRyzpWi9dUUI0tSETjZvGq5aLghIJhQrSLz7lauKqBMZow9KTdRSigiYMZNP2/QCzizrTtK+JgpCS2QV616hLCoiJ5eRkUv4g3N4GK9TNzVfhn8b4u649M6YBokwuINFMC8aCglf9IkOfS/gl50xbdEFuXrO5TuftJFnM7oRKEK1Yv9E62S5xd6Q0UNoetc9zADG490MmPElqob7g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T0QuYYdyDA0ipni1xEOvoxEA84uwXss5X1Q4LRLN3aM=;
+ b=2sOKuY3qDWhkxefiKIk5c7kjgrKoCjjEZj5bFsURZn46GQ08g829ocl5G2Ptp7ze2izYECAPIn4PpFbjsjYAXoCDJYRmH4hQmZB2ksQW2xja6mjwgq6IL/fuqq3QOrlQJPSKzahlmSX6AXCxTOfZW+uldFmOccpLRR+jbGeRxld5nr1gwDu7YkGSmtvbEFMMPUXbgTmSiRfDihCEtIfaqt4xlrws5ZP7cFE5DfUuK5aEBMmZKaFEgH59jYPSpC6Z6/WeHDhspw600GbYspaKIq0Z730/cmd3m+SJ0MAu5wmdctKIeikpdrJeVuMiIIsq42GGgG6bRKVb99L7+ALZ9g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
+ by AS8PR06MB7750.eurprd06.prod.outlook.com (2603:10a6:20b:335::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Wed, 21 Jan
+ 2026 16:33:32 +0000
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc%5]) with mapi id 15.20.9542.008; Wed, 21 Jan 2026
+ 16:33:32 +0000
+From: niko.mauno@vaisala.com
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ uboot-imx@nxp.com, vesa.jaaskelainen@vaisala.com,
+ Niko Mauno <niko.mauno@vaisala.com>
+Subject: [PATCH 2/3] imx93_qsb: Enable AHAB_BOOT by default
+Date: Wed, 21 Jan 2026 18:33:57 +0200
+Message-ID: <20260121163358.21322-2-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260121163358.21322-1-niko.mauno@vaisala.com>
+References: <20260121163358.21322-1-niko.mauno@vaisala.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: GV3PEPF0001DBEC.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:400::305) To AS4PR06MB8447.eurprd06.prod.outlook.com
+ (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="svL/WQd9jJFTwiZ/"
-Content-Disposition: inline
-In-Reply-To: <fba47ca8-7cf7-446a-9242-54c50087cf3c@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|AS8PR06MB7750:EE_
+X-MS-Office365-Filtering-Correlation-Id: ec1341bb-4f6d-4bca-d117-08de590ad0f9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Zlg5NmdqN3NQUnlaR0x3VUZGNkZxcXFreFIwaHVJL0htRHZyY2VnSTA1clJ6?=
+ =?utf-8?B?bkV2UThRYXI5MEN5M3Y0YS9YWFpVZGNCU3hqZWRCeFZyN2dJdlVUSzRkWTBz?=
+ =?utf-8?B?STVjamR1VGNmTTBvOWhMcEo4bWh0bmtCV01uVGxuTHYrcU1Ba1piKzh6YTdT?=
+ =?utf-8?B?Z0Q1MG9HQXgxZlF5NG5wdzl0REwrbGRSRmFzUG4ydXRYU1lGT1NXa1dDRk0y?=
+ =?utf-8?B?SXYxWGhqaUVjQTlLOUtjeVJXTDJrY0I2MHNyWjdrVzFXWUJFN3oyRnY2Z1pv?=
+ =?utf-8?B?YXFab08zRjVLUzBnZ0pTUHRia1Jlc3RQMXp4NTQvSCt4enhobWJuNDNmOW1W?=
+ =?utf-8?B?QmZBUC9hdVEraU90MVZUcEZCcmgwTGtpY2dKYkxLb25sdVVqc2VnT3YrS0F1?=
+ =?utf-8?B?QWUvMHUyYkFjUUYrY1BFc2hERGluaEFOaUdZc3RhbkdHSkJDOGxFQm9pWi9a?=
+ =?utf-8?B?eTlhK1RKRzBRelJ5SUUxSVFtQTZsYWplT1UwYXRDdGtmRTBYQ3V4Q3hhSnI0?=
+ =?utf-8?B?TEY4d0tVLzl3dlNDa1A3Nzg5aTFnQ0FhNTZBNXFzR0JtY00zMVV1UlJGU0ZS?=
+ =?utf-8?B?Y0FOKzVQNXV0Zzd5OUdqanBMbG92bjc2KzZWOU96TWNsdzQyZG9hVkIvZUFx?=
+ =?utf-8?B?NmQ0TnF6T3RGT3NlRE9hUUk5aDVLVjI0cG51dUdmUU9BT0tDSktuN1k4KzNK?=
+ =?utf-8?B?Zkc5ZE96RFJaOURsaEszWUFUR1RRaFMzZFdISW55MVBlZHFpbDJWYWZpQVFr?=
+ =?utf-8?B?bEQwMUdHdGFuWkZ3T2g0Z0ZIRVNhaVZQOS8zUzRrTWVTQTJBZXJidHVkZE94?=
+ =?utf-8?B?Y1RBc2xsVlc2bGV6RHQ0b2JqVnJYL1lBRkZSdFV6bEhyaWx5VEhncjJ3YXM0?=
+ =?utf-8?B?Ui9iMVVlbmh4YXZ6KzZuRk9QRDhCOUJBTWpScnowcXhHUW82cDlSVzIzSHhQ?=
+ =?utf-8?B?Vlg0S0NQeS85Zm5STTVrOU1VN0NsNmlTRjJ4bVkvYk4zRml0S1ZIOHZCODNJ?=
+ =?utf-8?B?T1hDaW1adXJ6YkZsNHhpaTkvM2JjUjdUNjhmWS84VGl6dWpkR3ZrcFZnNktQ?=
+ =?utf-8?B?UVFXUVV1MXd4SDVya093bE5qMHAwbFp3czdYYjRWL3BJWjBXeVBRbzJsOWta?=
+ =?utf-8?B?eWdoYTh4S2lQMkNxS3hjK3M2Vnp0eHRoTGU2eTBleENxWU9uRlBDbnp2NHRj?=
+ =?utf-8?B?NmplbXk1aFNoMlU1aUZ5OHpaNG0vbUEzOFlyQkF1QlQ4ZjdVUmxSamNtQjgy?=
+ =?utf-8?B?blVRNHBqYzlWQ0U4RE1iWTM1Z1hSUWZuN0F5SnBnTmV0ejRMTzdVTXFNQzh6?=
+ =?utf-8?B?NHloU3gwN0V0aDh5ZzBmdkRiMHA4RDhkM0RvTDFUekJHWW5KM0JzTXFEKzc1?=
+ =?utf-8?B?S2dJM2JFeFd0ZG9FQVhTMVdzTHBac2hnSkFRc2lWOGM5cmJ1TGU0SFhyUFdL?=
+ =?utf-8?B?bmZZUkJjQXpla3BUejNHUVJZS1ZxQlRidjJNZkgzVkh1R2dtNjBObDJhdUdw?=
+ =?utf-8?B?eXFuRE9EcU0wNExuRUlpVStHbkMxZ014MFpkODgxaTh4SVBmcjVkRkxlWjhM?=
+ =?utf-8?B?Tk8xOFpSYTJiUEVTMTh6ZlBNWGxYMVEvU1RMdi92YXlEaWVoY3dyNURndExF?=
+ =?utf-8?B?VFBmVzExT1MvZTIwZTNyeGxObWhvNHNHeERnbXFyOGVVcmJJaC9zcDlTYnMx?=
+ =?utf-8?B?QldiUWUxMkJ4bno5Qmx2YlJWUitkOEpibkFHZ3hxZFFFWkQ0MHg4TW9GZDFh?=
+ =?utf-8?B?NHdoZE40SE9oYnpvdU5NU2dWbktVSVRFM2dBMGJ1T0xUekhaZk9xSTZBb0Jo?=
+ =?utf-8?B?VVJKaTUxZnRidEptcysyV1pIQTBlclNtNDRJSTN3dHlzRWxwckVmMmU4ckt5?=
+ =?utf-8?B?a3pKL3lkUzlkcEVwTkNwOUU5WVRlVExMQzdHbVBsbGM5STc4YzFwMCtqVmtF?=
+ =?utf-8?B?Rkd4d2xGaExJYWplQnNsaXdkUW1CMzl2cmlUKyt0T29scVhVNTlMdzN5OGsz?=
+ =?utf-8?B?S1ZKVllxNy94UXR1ZXdUNklMY1kwTXBoZDVUYVVyeVdnZkZZTk42c1JqOHBh?=
+ =?utf-8?B?MzYzUVlmR1J4RmlLdXIzdUN5UWlEWXZ2NGFLWmRMekV1R1hLbTZGUExtVjBk?=
+ =?utf-8?B?UnlWbnNXMFFPUU5tU3RtNEhzdWVxSDI2THNscnEyWHgvYllIQ0pEcFdxZ2Fx?=
+ =?utf-8?Q?dMCMHypA0s5EBMFikwnEy3c=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR06MB8447.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bGtOd3dEeDBMMEFHblB1bHlaT09pT0lvUURiaFB6V0Fpdis2UEZ2M2JEQ3ht?=
+ =?utf-8?B?Z3JYVWJKSEV5L0drOGRzK25LM1FCdHArRGRtTzIxcEtWQnR3aG9ySUx1Tzhw?=
+ =?utf-8?B?VVNNT3RMbjRFcTRMbFl5OVJUM0dscXo2VFhKN2Z5S09FYUgzMWhsejNqdkNu?=
+ =?utf-8?B?ak5GcUdTVW1lL1AwOUI5SE9kcHBsZnNTeXlhUkE5REJZVElLQU15RDRsczlz?=
+ =?utf-8?B?MmFnd0E1elMzdlNMdXdLbXQxWVY4N3hSYVhvN0hJY0hoTEsyTkNUOUt4TDlv?=
+ =?utf-8?B?VjMvOXZDblhkT0F0TmhkVGkyRDNXNmJRbHVDWitPaHFLbHU0Wmw4LzUvVjJV?=
+ =?utf-8?B?ZlJWWExtVHJ0QWRGci9FUWdNemVKVkdDaEpsODdzVTYvY0NVcmZBaVVvV1o5?=
+ =?utf-8?B?dFNRSEk4YzhqTTkzMkZ5UGVkYW15a1RTMTF6NHpTVnNQZGhSajNiNTFwWWl1?=
+ =?utf-8?B?K1Nyck1UVDkrOHBldExNcGFSRDNOMkF4emxLL1BJU1FnWldHcjVMOU1zVTVP?=
+ =?utf-8?B?Tzc4TlBlWTM2dzdsNXJ1S1M1cWFtN3c5NmoxSldyM0pTRW0zTlVUVjE1d1dP?=
+ =?utf-8?B?cGU0UG1PZldRMUp5SWxPV0trVEhsa3d0a0tQNWdIYXlpeEdaVEQzdUdSMFZE?=
+ =?utf-8?B?RDhteGx2S1kvZnFoOVFQZ2xNc2RaMDRYS013WFZzOTNEM01OUTNZVnUxU0ll?=
+ =?utf-8?B?UzNjb3RhRDhRc2V2N1k0QWVzb3NZejJJQVNocWU3dzNlcmtxV1VMdnVPKzNR?=
+ =?utf-8?B?KzlWZjFqd2RxOGlWZlJ2QTcvMnZDWVhIc0ZVVVQyQ3dDNzQ3OHNxU296Z0R5?=
+ =?utf-8?B?ZEJheVFZemJxQk4zTTh5STIxNWljQUFPTG1aaVIvUytWR3V1MEhEMTc5Vlov?=
+ =?utf-8?B?T3N2cCtmcE1nNlUrNExiaE9NUC9TRmM1eTVxMEdIdVJNekpuS1lLSXBmeTh6?=
+ =?utf-8?B?TDFyVS9KRS9EOUVoTEc3UEd6aVk5d1p3QS9KeU9ZNHBzM2greWRpUHhaQTJS?=
+ =?utf-8?B?MmVmTVBTWXJKcy9TZDZwNUEydU9FWlRTcmdpUTlRMlROVXhKZElsWUlTZmFG?=
+ =?utf-8?B?dkRYSm9yOXZOWkprMTJWU1JRWjd0UllaS0F2bFExRzkvNmpuV09mNjVYOFlR?=
+ =?utf-8?B?STBwck5DWkpyRnh3VTg5a2ZCT3ZoR1FxcWRUbDNaMlQ2TUU3SGd5bUlielhn?=
+ =?utf-8?B?N1EyaGJHV0psRGZBMjVTNTlaSExJdzMrUjBOK1VyVW1qNkxRU05mYTZyaW5v?=
+ =?utf-8?B?SUM3UUl0c1VTL1hxdnNVVjRyNkF6WTZZbzJtVFN0bytqUjlNdnNmTXRia1BU?=
+ =?utf-8?B?MkNucGk3YjhMODFUdWMzbTJmNjg0d0hZa240aXVVckIycE4xbE9qYXBwcXJY?=
+ =?utf-8?B?ZGl1dUd4dnJwbFlhWTlmTUVwOEs3REd2V0hXWFo2QlVyeXBmUlFza0ZScnRj?=
+ =?utf-8?B?OWRCVDgxVjMrTElnNUdGZkhRWGNFczJTRXdhWHpsbjVBSTBVNnZCajdxd2dW?=
+ =?utf-8?B?dUpHR0VKdVErU2FqaHBSYkdFK2ZCVzl6WEVqbEdDR2J4K3VrWE9tUTY2Mk1h?=
+ =?utf-8?B?OUZNZ0QvREVBVC9tTWxnUVJIS0ppUG1uK2pDaFUzZTZPT1Iva1NKVXhzQ1Fi?=
+ =?utf-8?B?VFVxMFVWdUtqVUx0Zmp4bE0wWGNTR2tZTlpNUGlrM1VlTURIbCsrMGF1eklv?=
+ =?utf-8?B?dTlrT2dCZndGUUl1S0dXRFNPeGxMSnhNbTZjMHU4SUNrYS9Va2NUQTZscHFk?=
+ =?utf-8?B?UUIwckJmSUVJUHpVUFdZdGs5bDJkMW10UjBEM3RoeFd0bG9FR1ppRjdZd3Jy?=
+ =?utf-8?B?alBsZFRZV0t2NmxyZ2lpekY0a0Y5eGYyd3Y4Mjl6ZnRrZFp1dlZmUE5GK1B2?=
+ =?utf-8?B?TVp1SmZvUVBQOW5hb09kbDZNRDhPRlRvUkZHY0JnSUxCeEVrcmd2L1ppRWE4?=
+ =?utf-8?B?bHgwb1VzdCtKNlhSdVUzdWZWRjZiazNRbWdDamtqRVpPUkY4Ujdscjkyd0ZR?=
+ =?utf-8?B?WnVvTnpzNTJuR2tMZHh5NVg3YTJNWUJ4K2hxaEVUUjFkR0E3ZlAzZXpsM21Z?=
+ =?utf-8?B?bkY2c0M3Y0x2YkNhMDFGYlZLRUJkNWhuN1VFNVRKNTZhREhMUGRNU3YxTUJu?=
+ =?utf-8?B?TVNIYzNIdGVzaWtveGhIczllNzNMVzBRZ04zb3FqT1VSOGxvOWJPZUp1SXNa?=
+ =?utf-8?B?alo3WDFCbDlERDVTRktiaTVZc3poUUhQLzQ2aGtOMUYrUTk3bDJ1SmpqNEtp?=
+ =?utf-8?B?WDlhdU9uaHAzMUxMWmtueHQ5YUNWUTVHYVlUVXlqNEZrN1dHYldHbE4xQVE2?=
+ =?utf-8?B?NUpyZ3pHVlRKZGcvOUdGUEk2MW1lbTVKZXZ0WHRNV3BWSkR5MEtzVm1Obm5O?=
+ =?utf-8?Q?WNDo+DzGtTNs/w24=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ec1341bb-4f6d-4bca-d117-08de590ad0f9
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 16:33:32.5162 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UdxIp5P4uLKSFiu1LhQjOa+YoaAE5bDkF/PzzrvLZAStmY5gB0OYElQ30jTGQJlcQKrFObfaMfgBpCFPwc3Kbw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR06MB7750
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,72 +185,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Niko Mauno <niko.mauno@vaisala.com>
 
---svL/WQd9jJFTwiZ/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Enable the support for AHAB secure boot.
 
-On Wed, Jan 14, 2026 at 06:19:18PM +0100, Quentin Schulz wrote:
-> Hi Julien,
->=20
-> On 1/8/26 3:47 PM, Julien Stephan wrote:
-> > We can't have PINCTRL_MTK depend on PINCTRL_GENERIC and then all
-> > drivers select it. Individual drivers should directly depend on
-> > PINCTRL_GENERIC.
-> >=20
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> >   drivers/pinctrl/mediatek/Kconfig | 21 ++++++++++-----------
-> >   1 file changed, 10 insertions(+), 11 deletions(-)
-> >=20
-> > diff --git a/drivers/pinctrl/mediatek/Kconfig b/drivers/pinctrl/mediate=
-k/Kconfig
-> > index 8b9180bd2aaeb56325ba42d08afa42d9317f23a1..d10d08d9fe80441a5a2f8ac=
-c13e312825fa43a5d 100644
-> > --- a/drivers/pinctrl/mediatek/Kconfig
-> > +++ b/drivers/pinctrl/mediatek/Kconfig
-> > @@ -1,47 +1,46 @@
-> >   if ARCH_MEDIATEK
-> >   config PINCTRL_MTK
-> > -	depends on PINCTRL_GENERIC
-> >   	bool
->=20
-> Are you sure this still works?
->=20
-> Since nothing selects PINCTRL_MTK anymore and this boolean isn't selectab=
-le
-> (doesn't have a prompt) and there's no default (Kconfig defaults to n when
-> it's missing), how are the drivers/pinctrl/mediatek/ going to be reached
-> (see drivers/pinctrl/Makefile) and pinctrl-mtk-common.o be compiled?
->=20
-> Maybe you want something similar to what we've done for Rockchip maybe?
->=20
-> Have only one symbol for all drivers but only build the SoC-specific driv=
-er
-> if the symbol for the SoC is selected? (this will also make it easier to
-> have SPL_PINCTRL_MTK for example (don't have to have a symbol for each So=
-C).
-> Using CONFIG_TARGET_MTxxxx for example? Something akin to what's done for
-> the clock framework already for Mediatek, just with the additional
-> PINCTRL_MTK symbol?
+With this change, one can issue 'ahab_status' from U-Boot command line,
+and see e.g. following kind of output:
 
-Agreed, this and then 2/2 feel like it's backwards. These drivers should
-be select'ing the common to mediatek symbol (PINCTRL_MTK) and that
-symbol should select PINCONF.
+  Lifecycle: 0x00000008, OEM Open
 
---=20
-Tom
+      0x0287eed6
+      IPC = MU APD (0x2)
+      CMD = ELE_OEM_CNTN_AUTH_REQ (0x87)
+      IND = ELE_NO_AUTHENTICATION_FAILURE_IND (0xEE)
+      STA = ELE_SUCCESS_IND (0xD6)
 
---svL/WQd9jJFTwiZ/
-Content-Type: application/pgp-signature; name="signature.asc"
+Suggested-by: Vesa Jääskeläinen <vesa.jaaskelainen@vaisala.com>
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+---
+ configs/imx93_9x9_qsb_defconfig            | 1 +
+ configs/imx93_9x9_qsb_inline_ecc_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/configs/imx93_9x9_qsb_defconfig b/configs/imx93_9x9_qsb_defconfig
+index 7772cc4ed11..913eb821249 100644
+--- a/configs/imx93_9x9_qsb_defconfig
++++ b/configs/imx93_9x9_qsb_defconfig
+@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x700000
+ CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="freescale/imx93-9x9-qsb"
++CONFIG_AHAB_BOOT=y
+ CONFIG_TARGET_IMX93_9X9_QSB=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x18000
+diff --git a/configs/imx93_9x9_qsb_inline_ecc_defconfig b/configs/imx93_9x9_qsb_inline_ecc_defconfig
+index efa0bbd92ad..3e954a491fc 100644
+--- a/configs/imx93_9x9_qsb_inline_ecc_defconfig
++++ b/configs/imx93_9x9_qsb_inline_ecc_defconfig
+@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x700000
+ CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="freescale/imx93-9x9-qsb"
++CONFIG_AHAB_BOOT=y
+ CONFIG_TARGET_IMX93_9X9_QSB=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x18000
+-- 
+2.47.3
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXD4XQAKCRAr4qD1Cr/k
-CvHhAP9V7pzsGQ++X0gbxs5cWffTSXEi92Agt2E0ygtROxwu0wEAvnFczs4ZZPfD
-vBRIRWEJklbJGGbCw9xUzhuRf/4SwQ4=
-=FMOl
------END PGP SIGNATURE-----
-
---svL/WQd9jJFTwiZ/--
