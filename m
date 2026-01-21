@@ -4,99 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D63CC44502
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44BEC44502
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7DC38341A;
-	Wed, 21 Jan 2026 10:28:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CE878341A;
+	Wed, 21 Jan 2026 10:29:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="EjDz0nsE";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HArhdxml";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F1BC83A1E; Wed, 21 Jan 2026 10:28:36 +0100 (CET)
+ id 1D4CE83A3B; Wed, 21 Jan 2026 10:29:05 +0100 (CET)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A71182A9E
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:28:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEE5F82A9E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=fmartine@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1768987712;
+ s=mimecast20190719; t=1768987740;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=HnV6rL8DYxHFmrgS4skvtEThybgK/SXQweAuwgFuImA=;
- b=EjDz0nsEH4Zvp+mHqe9mppw71fRBQHwXXT4xiW4X1wlaaMSdwtnjc5F5KUFzUBPT9YnNrV
- k1fwomP/1DY8550DrkAkB2wFWRj416C+DUP1Ev99v5zjoNIqC6LmCAPE7aijq1BmAAaGgu
- kZ5hYCaoryL4r2D137sls/2qzZe3tY4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=X9xE1qODWypvNyUXUPoxGYB+A3O9VoMV42lnBZ67XyE=;
+ b=HArhdxmls1wU5OpFyzPBh6joXBWxZkCYtCiK96wLTTXV0woAwXwgMKvtToNBer1ukftiXa
+ pSQWpWb7V2VRPAExMcWW+GZqMwd4KNy81cKPhD/3fiYGbY4KVBhgSJp+PdTrFMgUSiOV3H
+ w1cOAN8GfQwYQoaP2M3iqEfNkCsQI9U=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-147-KCzyg5IkOgOidvl06XQJnQ-1; Wed, 21 Jan 2026 04:28:31 -0500
-X-MC-Unique: KCzyg5IkOgOidvl06XQJnQ-1
-X-Mimecast-MFC-AGG-ID: KCzyg5IkOgOidvl06XQJnQ_1768987711
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-47edee0b11cso35726695e9.1
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:28:31 -0800 (PST)
+ us-mta-473-gL2AfKCBPfiXUi5l5jLA1w-1; Wed, 21 Jan 2026 04:28:59 -0500
+X-MC-Unique: gL2AfKCBPfiXUi5l5jLA1w-1
+X-Mimecast-MFC-AGG-ID: gL2AfKCBPfiXUi5l5jLA1w_1768987738
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4779ecc3cc8so46176435e9.3
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:28:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768987710; x=1769592510;
+ d=1e100.net; s=20230601; t=1768987738; x=1769592538;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HnV6rL8DYxHFmrgS4skvtEThybgK/SXQweAuwgFuImA=;
- b=SsxEsXP/YXZbnbpyUNAN+zgY4+0eT53tRnKWYfp9umQanxBcuV4VJIXFxP0ckIHiwf
- Dv311sO+AySE13Em0GX8RWGDxeVFvC0j1REv7bQkWs6QEwL3VA2oZEbnYT4wD6OGje2i
- zKXOV4xcg5UtXNLPHux4UxB2jTyh8WhLjwySdJYqrY/TWkIX0pFEkh2P8BYNikf+DPRP
- at4qvU8UT+g31HUsMSeV2ixSniEYFlK89hmE3V8HJzeyZa/FT0VGVO3PowhV6FZlzQFK
- MM2pLGfIohYHZ+q9WTZsdxVVm1VoQioCj2sxyGzpLwLXU/iyrRnK8kUW2m5TPBBUdTaz
- QRNQ==
+ bh=X9xE1qODWypvNyUXUPoxGYB+A3O9VoMV42lnBZ67XyE=;
+ b=V3c5r4O/0B+jWA9ncItwoY4yATRas23f2ewM5IIAl0qb7+caeIlmaOwmDAlrL6lgJV
+ QX67o8wkHsJuIuN01yFCvYgsQ9nWmMHXnBrf59btQllQGHd1YqhtmS9TPSczvNlOPXAV
+ WXzoOrE/iCLN7L5Fk1gJRXj0s3a31fNrXbInk2pfpWb/tUWP9fDNUv6+z8VF+HG2H49s
+ IzA/7UOugUpKCulebs4T+uV8g5WGo+c7P6UvExrpbBylK/0sq8iGHpN4LAT3odXQ2eGk
+ b/XD6gF04GnJogPV5NiUOMdFg5f0fyffVE6PsWRWQi7suHyWPyrHs42OsKATejVmNOg+
+ 21XA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+BCevHHustYLcCTo4zTO7KoSppNqOe48LYNI3b6dbQsRduLcMJDapYU3bfx7yAjxW860Fnrc=@lists.denx.de
-X-Gm-Message-State: AOJu0YysXjlXj+sDeLz0JNrawehtE8Ufe884pEdXDudq6UJcpLpHFjJH
- SIO11UCSmJrtblCBg4/xhUqlq+7FOdaif+3ZZpQnWwY7Rv7f7HP8xDE+UpE2Xw7gJdyBA4KjqMr
- +Fp7KCI+rikaSeuRPen2fh9r57KGRkveCk4eyOO2bHE0TPo6a/P+IZLOGoIFRJ7E=
-X-Gm-Gg: AZuq6aKJiDAc2nDHqvXembjKVBmXLu489pLA3E47ODKP3+oErj5925FfyLe7n0Ilhb0
- meiMwt4kPpPtldWQyDOKpvs+Kam7oPQgHtM9ze4wW/wWziYDV79xBW3iRBug85ngl8NJ9oJdwGU
- BLj+w3TJ8Ru4KalbXGnmIwwDAKunPEI3+0RZ4Wf3gcxVE/Svt5sGeH20J3n2HCb8Gx/Tk4AJm69
- w+yEHWEsxzqvZ1vSaXLRyBfBwX3h36QSaCGtNBShMphATHpp5mVNs7pQWaWnS3daBJtTlvYQK2k
- KOjqfN+FjLzEOnbJAOx3JfORrulcfkZp59qA6lrhImQHwrVORVPQ1g0/ROMGftPtEkcZAJK+SWh
- KEo6ZCcaKbh644mXqkJNKIeSdjUuCXCh9TTFG7nV2CjGDv+s0xSh6LuafFdsMX35+TENL
-X-Received: by 2002:a05:600c:45d1:b0:477:7ae0:cd6e with SMTP id
- 5b1f17b1804b1-4801eab5602mr221054285e9.5.1768987710187; 
- Wed, 21 Jan 2026 01:28:30 -0800 (PST)
-X-Received: by 2002:a05:600c:45d1:b0:477:7ae0:cd6e with SMTP id
- 5b1f17b1804b1-4801eab5602mr221053875e9.5.1768987709786; 
- Wed, 21 Jan 2026 01:28:29 -0800 (PST)
+ AJvYcCUanV5nsUh/27kdiT8Ut2KguB1BUtXj/DaNNECuKCPTY8bwKnzkucgR+EwtQwdzCA6bcka3MxE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxa6cYPjc/Dih/bTG+DI2B4umzPcdF2243n3oN1T+ROTKrU7xUC
+ K1fOutBxOZA45vJ3HZvLTJzuziDpxWhJJKX9XXC9eK49850A1n8xcptTP6ta3GbU3ORe1g6n+Gn
+ JLyiirRsJMpuLr48bQZmHTA4PkKroKBQfwCeRAFkHYqCmhJ7kyrhspak=
+X-Gm-Gg: AZuq6aKuSQHEVdI9k35nhciD9T97hZ1VuENbllnIhWtqTU7ECiYuXQu37P6EZxcU3q0
+ nfHnmNkI95kRK/1PI6M8u3cPN1bWIhErOKeaRsKxoHK94jOgZqmA+q07ClHrScPFoP/T25TutCT
+ r7J9wr9uxcbq3hmLv6tEPw/YxGcESG7LN0HcY8wFnkHjcWGAF2z/Km6huqY6j4glmKUT6R2x1xm
+ m69zYwCOIKdYXbgMlzHOfhFAaHzdUzGx6+FijQ1A+Kz65IZS0+/3n4y51kG2GgWGWMIjM2Jke46
+ Ymsc3lxK86zk88H1jFoMQVT1b/AMrIV2D7FVKuCIQ03aPv+HqU8q2YCUGwQBXg2Lt0r3Xm1am7k
+ SdWgbb+htbkWCvyizDnyQ4M7sBKwoyNHgoZZdqsw7acHz4SLU2RjKISTFc+2NTtpOH9Mw
+X-Received: by 2002:a05:600c:474a:b0:477:5c58:3d42 with SMTP id
+ 5b1f17b1804b1-4803e7a2c6dmr73971975e9.10.1768987738329; 
+ Wed, 21 Jan 2026 01:28:58 -0800 (PST)
+X-Received: by 2002:a05:600c:474a:b0:477:5c58:3d42 with SMTP id
+ 5b1f17b1804b1-4803e7a2c6dmr73971565e9.10.1768987737888; 
+ Wed, 21 Jan 2026 01:28:57 -0800 (PST)
 Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48042c57504sm16024825e9.16.2026.01.21.01.28.29
+ 5b1f17b1804b1-4801e8d90b3sm304521395e9.15.2026.01.21.01.28.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 01:28:29 -0800 (PST)
+ Wed, 21 Jan 2026 01:28:57 -0800 (PST)
 From: Javier Martinez Canillas <javierm@redhat.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de
-Cc: eballetb@redhat.com, alexl@redhat.com, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>, Tien
- Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Subject: Re: [PATCH 4/5] efi_loader: disk: Extend
- EFI_PARTITION_INFO_PROTOCOL to support MBR
-In-Reply-To: <5c6c0fbc-4560-4a88-b52d-97c66341ed30@siemens.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: eballetb@redhat.com, alexl@redhat.com, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 5/5] efi_selftest: Enhance MBR test for
+ PARTITION_INFO_PROTOCOL
+In-Reply-To: <b0c0049b-e15f-4730-955c-55429720adfc@gmx.de>
 References: <20260120133630.1695055-1-javierm@redhat.com>
- <20260120133630.1695055-5-javierm@redhat.com>
- <5c6c0fbc-4560-4a88-b52d-97c66341ed30@siemens.com>
-Date: Wed, 21 Jan 2026 10:28:27 +0100
-Message-ID: <87zf67e2mc.fsf@ocarina.mail-host-address-is-not-set>
+ <20260120133630.1695055-6-javierm@redhat.com>
+ <b0c0049b-e15f-4730-955c-55429720adfc@gmx.de>
+Date: Wed, 21 Jan 2026 10:28:56 +0100
+Message-ID: <87wm1be2lj.fsf@ocarina.mail-host-address-is-not-set>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: -kp2Dc0Ey_IaPaFb-gASaFxC6uzZHbtI9S548Jd2FLk_1768987711
+X-Mimecast-MFC-PROC-ID: z6-2Lbb3y69ahQxR-N5ESObqRbSLWGr4mElES5adhek_1768987738
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -115,42 +112,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Jan Kiszka <jan.kiszka@siemens.com> writes:
+Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
 
-Hello Jan,
-
-> On 20.01.26 14:36, Javier Martinez Canillas wrote:
->> The EFI_PARTITION_INFO_PROTOCOL provides detailed information about
->> partitions. The UEFI specification mentions that both GPT and MBR
->> partition schemes are supported, but the U-Boot implementation only
->> supports the former.
+> On 1/20/26 14:36, Javier Martinez Canillas wrote:
+>> The EFI_PARTITION_INFO_PROTOCOL test was added before the protocol fully
+>> supported MBR partitions. As a result, it lacked specific checks for the
+>> content of the raw MBR partition record.
 >> 
->> This can cause compatibility issues for platforms whose boot ROM only
->> supports MBR. This change adds support for MBR partition tables to
->> the protocol, making U-Boot compatible with systems that require a
->> legacy MBR table.
+>> Now that MBR support has been implemented, enhance the selftest to provide
+>> coverage for the MBR entries too.
+>> 
+>> This verifies that the protocol correctly reads and exposes MBR partition
+>> records and prevents this functionality to regress due future changes.
+>> 
+>> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+>> ---
+>> 
+>>   lib/efi_selftest/efi_selftest_block_device.c | 12 ++++++++++++
+>>   1 file changed, 12 insertions(+)
+>> 
+>> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
+>> index f145e58a267a..50d1fb29e1ef 100644
+>> --- a/lib/efi_selftest/efi_selftest_block_device.c
+>> +++ b/lib/efi_selftest/efi_selftest_block_device.c
+>> @@ -404,6 +404,18 @@ static int execute(void)
+>>   			     part_info->system);
+>>   		return EFI_ST_FAILURE;
+>>   	}
+>> +	/* The first partition starts at LBA 1 on the test image */
+>> +	if (part_info->info.mbr.start_sect != 1) {
+>> +		efi_st_error("MBR start sector %d, expected 1\n",
+>> +			     part_info->info.mbr.start_sect);
+>> +		return EFI_ST_FAILURE;
+>> +	}
+>> +	/* The partition type is FAT12 (0x01) in the test image */
+>> +	if (part_info->info.mbr.sys_ind != 0x01) {
+>> +		efi_st_error("MBR system indicator %d, expected 1\n",
+>> +			     part_info->info.mbr.sys_ind);
+>> +		return EFI_ST_FAILURE;
+>> +	}
 >
-> Normally, this is simple to address via hybrid partition tables. I've
-> done that already for two different SoCs (TI AM62 and Altera Cyclone V),
-> and this allows to use all the nifty features of the modern GPT without
-> upsetting the ROM loaders. Do you have a SoC where this does not work?
+> How about defining a static variable with all fields and using memcmp() 
+> to check them all?
 >
 
-Yes, I know that could be worked around by using hybrid partition tables
-but IMO using that could be fragile.
+Makes sense. I'll do that in v2 as well. Thanks!
 
-> That said, adding this feature may still be valuable.
+> Best regards
 >
-
-Indeed and as mentioned in the commit message it is something supported by
-the EFI partition info protocol according to the spec, so it makes sense
-for U-boot to also implement support for MBR.
-
-> Jan
->
-> -- 
-> Siemens AG, Foundational Technologies
-> Linux Expert Center
+> Heinrich
 >
 
 -- 
