@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87BCC44508
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 20:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C09F8C44508
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 20:49:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC45083AB0;
-	Wed, 21 Jan 2026 21:48:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 742BA83B63;
+	Wed, 21 Jan 2026 21:49:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EwcZb+LL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JivAR7i7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D01C80077; Wed, 21 Jan 2026 21:48:51 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 32BAC83AB7; Wed, 21 Jan 2026 21:48:52 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 036BB83A3B
+ by phobos.denx.de (Postfix) with ESMTPS id E2D4B83AB0
  for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 21:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7cfd139645cso146067a34.0
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 12:48:48 -0800 (PST)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d148f6833aso104367a34.1
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 12:48:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769028528; x=1769633328; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769028529; x=1769633329; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OfI4XPEnIBC4jNh9kCgckiGUZkmmDlhxMKwe52UHn3M=;
- b=EwcZb+LLvWNkV67VK3TZFMTCyMtfAFX/3PudOK2kbrPofrBryIGQkSHSGE8IiMMrEj
- wqHQOY8parR9OKd0ERr5kcVptY7KwIav06GMVY9OpfA6iHMscGHuMoNzwzDOI+QsvbgO
- Cjs5k40tblu4NUrDBPrboUcqyHz+sCLAtdpwo=
+ bh=uK6KFIiBAdlhs1+TdZgdSiNhLJZB7wXcSqkvpZTfSwk=;
+ b=JivAR7i7FNQpaKB2g8Z7qoYkYoNjX50eTU9272V+cVFZLErO5W7GlNi2mc0ImuXYBo
+ fJBXe5/w8HK/C8YRHcxBitKt10vEYoeCNJ2b/UlBmvVKzHAF1Jhpu+CbLGA6kYvKdtC0
+ H2rXPZGQK+g/y1tbFDzMiORwlndjoQ3/RhisM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769028528; x=1769633328;
+ d=1e100.net; s=20230601; t=1769028529; x=1769633329;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=OfI4XPEnIBC4jNh9kCgckiGUZkmmDlhxMKwe52UHn3M=;
- b=dmSIGX6vIOZ4kkpVvImN/Rn2xuJxAfArYM2fonbom+JhOa7U+LO4X0X6dFg/Vykzlv
- jQA+M6dQpJQha9LniFxSHIOM1mdzGc2OPUEIRJLDd+xrqsUFh+DbPg9YEEDgS+EdGJGn
- umWzqpmCQNYvETgT01y9qjZx5kWxcQx2573hkcsgNvsAfcBtWCVIdAvWAjswr9m3JxRX
- ITdLYdYk2XM2B/z4iq6/PUjxIoYRVPMRyyQ+8bLTpFQajJ0O+4L4Siv/on7AFpb/s6KB
- +bv3qEpvOSiswdgNRBf8QXTLnG7EZ7rt8/NayQ+8WBUVm+0erlPbM9px0OBbo002qqzZ
- DZLw==
+ bh=uK6KFIiBAdlhs1+TdZgdSiNhLJZB7wXcSqkvpZTfSwk=;
+ b=M6FToKuiIsUP/vTg56NmztKJTFkcPg2TMgbxbrhgmzhZsXoidSn3HnqDZDtqb12cAv
+ HTdEYZJwNUY1eX/AQJ+cViUNIMY8KXovh09x7aovGTwykGbi4Lv33Z+MMgexh/ZcKL8Q
+ yOk2Awow0hZAlLntJBrIByTE87v27tB0XnDKd8av9THpWDyJb3nKhXFSd5VablbAehgQ
+ ioUf6LVIzX5EUxozFeDjiuvXqfhgiaK5Qug+sgAP/jbiQCZcQ5xHHqn9X9s/qnGg09/d
+ b2PpbRhB3NPXu9jJh1fGAs7/M1fvmX5891NlgsduAVE5ieZJJQl0jYZ1+DkWbH05Rtxu
+ KJfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3sa5GkqobPi2w3yoKFNQinJsOfiPbZpXtLJmOCKFE88DFu8KSytf+3ACG0dh5ekfLkfbX9k0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKnm9RJICgiasnnr19QYJ1vAgd1e01IFXmz5609DlQmvRPhTgG
- 9aTB3uEHf0HPWF6xRsTzIhnRQrPgXIf6cRqNIphVKp3F5gvgLtEpUVY6cl1+0zj/XueyjOHycm6
- 3k5WmqcE=
-X-Gm-Gg: AZuq6aIHjHtMtuPEyM6FOWsLMxeHp2Od9QbIAvk/ELC6Q1+4fO7XhlUpeNKcqk581Va
- UzYF98LFpDpfye/u6i/17YLN95z9dlnTpizzWGqopbUKli86uTrTJulhd0ihoYZwtsQLZOhwZxH
- kqqDj3TcUY7Td14HoIfp32Ve5FkA+Q/HpM1Lfui4AD7ImAGq1Z1DnPv6N/XWDhXkEscmXHI9sbi
- 1LXDm0Igqw7xhewKFCNhLsdakJu11k1phBnGxZpunGt/CF9hE8dPVDP796zpaDJJcWYow4wvV7i
- WFVipQV4P/EdC+CIjHcSon/wkKW0VtLVs9KwEDY2rCQj6xR477pXD/tfQXZuxBX6JpINbjc4oBv
- JIAGPgRcLiabjFEqHR62tdnBfgZYJQVca1qLz7x3K+01ypC5MqJjuiLWBRb73tusNvQmJn2RtcE
- lov4BE2iYjEBxEJxsTJ5YEodOrmAQk+Lnyk7Ek7babzFeCZEVsJzrDGXDGTQ5mR76ixFrTujDTX
- OWHh9TplvLO5vlYiV6u7qzFHsMnWYg3tLuvrA==
-X-Received: by 2002:a9d:6b15:0:b0:7d1:5253:a0b6 with SMTP id
- 46e09a7af769-7d15253a5e4mr258301a34.2.1769028527782; 
- Wed, 21 Jan 2026 12:48:47 -0800 (PST)
+ AJvYcCUR17HbipyYnx5zBo7JWruVqmAX4Zyrqrgi68PA1xH/5W3gnkOqnvzel7T8YCjibPtgrN39g94=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx55cDgzRa0djs79HtnNNhuY84AmnAXCVMDJPax/0NAy8uwWEZB
+ 2DdHoFk4cHZV1i2we/IYFxQn96gE+lZYUWNSpRmXaefZqDbdCKKCwm6mGt46j8Qn7ICIvSiVvJ0
+ bccq1H04=
+X-Gm-Gg: AZuq6aJ2FI7vwJmbtb7T7vsDJPhNJrgbq2EhwPCElAq7Ac33vQG+CnBxmOqQLUKAk1E
+ egRMfrbS/KUgXOOql1lzdSVEF1OnvO08yBcfu1IISpVdRpv+jLwmGU+RLUp9P4mvV89RSAvEvoR
+ zrmrxJ9Qu/4i7KfX9eCMEZplFv1twfRF/Dkcg5dsxs9tn/N/08TumHnYNHnjVZbgq9jFS1mZrlK
+ ywQUJbKocKWnTAx7ZaWKiFMB07kzSzEIabEAwWJGiOlJXFZfxuwXuGtUtMPecPefph4O4Qw5zuY
+ NDlFG4P5dvGWUBlbpMNyT47vqrmDL4P23SycAXCDn2AlQZg/Oj5Lj+P0xK69gcnHVrdg63WldIJ
+ KXS4ahteu5fZHeBHIaCLyZEuwCnxUy/UxM3/P7A+cgVmIB2S/myRk+h+NSqWywqnaDMWnAXCyzU
+ HdvXWbQhBYmWYh7b4QGN+chxaYxzT/ooC4N98MMX8OE8hDm9MwGhMZI2GEXKHLFS2PJt/g7eLWF
+ g+C3tIVt/xJilyI66OtbgO+2UlB+0vr9rTlTg==
+X-Received: by 2002:a05:6830:3788:b0:7c7:6348:594a with SMTP id
+ 46e09a7af769-7cfded3f3a6mr10631144a34.7.1769028528670; 
+ Wed, 21 Jan 2026 12:48:48 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf0d8e05sm11134487a34.6.2026.01.21.12.48.46
+ 46e09a7af769-7cfdf0d8e05sm11134487a34.6.2026.01.21.12.48.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 12:48:47 -0800 (PST)
+ Wed, 21 Jan 2026 12:48:48 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  David Lechner <dlechner@baylibre.com>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260114-clk-mtk-use-is-err-value-v1-1-ab35f0f35118@baylibre.com>
-References: <20260114-clk-mtk-use-is-err-value-v1-1-ab35f0f35118@baylibre.com>
-Subject: Re: [PATCH] clk: mtk: use IS_ERR_VALUE() to check rate return values
-Message-Id: <176902852690.661474.695289092614250246.b4-ty@konsulko.com>
-Date: Wed, 21 Jan 2026 14:48:46 -0600
+In-Reply-To: <20260113-pinctrl-mtk-mt8365-pupd-registers-v1-1-4bceaa52198a@baylibre.com>
+References: <20260113-pinctrl-mtk-mt8365-pupd-registers-v1-1-4bceaa52198a@baylibre.com>
+Subject: Re: [PATCH] pinctrl: mediatek: mt8365: add PUPD registers
+Message-Id: <176902852788.661474.6148850710825810506.b4-ty@konsulko.com>
+Date: Wed, 21 Jan 2026 14:48:47 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,18 +103,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 Jan 2026 16:58:57 -0600, David Lechner wrote:
+On Tue, 13 Jan 2026 19:53:44 -0600, David Lechner wrote:
 
-> Replace casting with long to IS_ERR_VALUE() macro to check for error
-> return values from rate calculation functions. This is the recommended
-> way to check the return value from clock rate functions.
+> Add pull-up/pull-down (PUPD) register definitions for mt8365.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] clk: mtk: use IS_ERR_VALUE() to check rate return values
-      commit: 80cb8a0e895d5ec835dda0ebaf14e293b4039c60
+[1/1] pinctrl: mediatek: mt8365: add PUPD registers
+      commit: fd871fc6bb497c6ddd7b39622480b89add78f57b
 -- 
 Tom
 
