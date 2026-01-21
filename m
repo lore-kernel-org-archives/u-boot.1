@@ -4,64 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA2FC44536
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 15:33:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77228C44536
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 15:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C956C83015;
-	Wed, 21 Jan 2026 16:33:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E4EE283015;
+	Wed, 21 Jan 2026 16:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Rct9mFo0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kROCh5hV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2139E8341A; Wed, 21 Jan 2026 16:33:51 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 714D980077; Wed, 21 Jan 2026 16:44:19 +0100 (CET)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0684B80077
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 16:33:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F312B83A1E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 16:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dx7Wt1YbSz9thq;
- Wed, 21 Jan 2026 16:33:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769009626;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=32y8ssebXCX8rdO4JpWgVxwMIuKffOSdx/rYcvstnXg=;
- b=Rct9mFo0UcO9Ib6D8OaIwliGEGlEEkW2Yr8Vjhv4/4yElDeUL4oqSo3zAor0XbtUbRnxOs
- jN4EUOAxpzziOaCgy6TGvTDrpk/NbE3NiZEYeYyDyUQpuT8V4oJgEfbZ4GI84IEZ7YETlH
- bWiS1KDI5OPjywlah/e1LiOMtDoSDcUV5PhWX2SRYetgi7Yp82cgDsBxbrTlOwrdnHasTw
- oHeUpUfkFTJRBR6WAgkAdWz1ZbUSjpRYuZWDnk4yJQXSFIXDMKkKa7v2GcGNqxjK16qolu
- 3//fpzhsz79RB9bJbk+wsRO+kPSiDs9DCG6Ouv6sqMBhD1zQXQeo8BCqHCh+wQ==
-Message-ID: <151bebd8-9de8-494b-99b3-850da10d3a04@mailbox.org>
-Date: Wed, 21 Jan 2026 12:09:58 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EXD5tJA9kMBtrXxEZqY/qgRpTjw2oFGizypwCja+GxS/KNcZO6at7Vp+tukleGpyAynoopFE+SLSvDzzVuUyKBvU01xXRYH4NhDkHl6ucYs9hqT5oYOdxvOFCOsIIxXthn/nMTo7rEzbdgcDdh1gPQoMKGCJQW+r1ij+Xxc2JexTdJkSkEqHHzJnsVFDNUEwNafAFgRaM+MQrjQewm28hh7D4d7v+Q0aYzOtxmPDByNztNt4IytWvXFxZy/p/NJ+DQcTNfKj0WjMfmeny7rkB6drjmTbIj1LOu7X9VPFY5uSHaNtQmTdnTfuHRRRGwuCTlHdcf4yksvYsTf/YCyvEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=L8mXrx94YuR6euKJKNFmwqJZxRwzkKVgTG0R/mIq07Y=;
+ b=Wuk+GR1anNYBDatcOM2/tGeCPsRmPzOAYWy5sbG52PyNo0CaW36vJeo6Yv32Dd6iEyvk+k6gZs6rCy7YyS8H+uPWzjARWv9J8iW3/Hkn+Hss0uec17pSruJNz8HkaFeIqJy+xSRaCFdZ6R+KtY2geobUCLldKknXGOlDQNOsED1NO6NdLzqR6CuGXuUtpRPSLE36unvUXd96nQxPD54e9OSYkzD/Qh1yoccOmxPsrszoDY9C2tikv7CdDjgOB1+yP3Otvih41UYMcMxCA2k/kbraoJgQrJIsAHueHebaxVTWXexbKubUwFR4Eg0Sl5vaoXRkNZ/VSp7fFukSccM/PA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=L8mXrx94YuR6euKJKNFmwqJZxRwzkKVgTG0R/mIq07Y=;
+ b=kROCh5hVHJC4iMHgsgtiRdwr4JFysyILbIy1mzRDUjM7PmISQYDrjDdxltiD5lIQpMci8NIhYNJepgwSeCNvbuaqrqDjDr+B+L5/xBhnLuVUtFzHyaQ0kwAO35zDEh1vZBElE/O847KwN6gB3zT/txb0ox8VuQXQ/XLX+5M8Fnc=
+Received: from BL1PR13CA0346.namprd13.prod.outlook.com (2603:10b6:208:2c6::21)
+ by MN2PR10MB4191.namprd10.prod.outlook.com (2603:10b6:208:1d1::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.10; Wed, 21 Jan
+ 2026 15:44:14 +0000
+Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
+ (2603:10b6:208:2c6:cafe::fa) by BL1PR13CA0346.outlook.office365.com
+ (2603:10b6:208:2c6::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.9 via Frontend Transport; Wed,
+ 21 Jan 2026 15:44:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9564.0 via Frontend Transport; Wed, 21 Jan 2026 15:44:12 +0000
+Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
+ 2026 09:44:11 -0600
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
+ 2026 09:44:11 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 21 Jan 2026 09:44:11 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60LFiBwI3255987;
+ Wed, 21 Jan 2026 09:44:11 -0600
+Date: Wed, 21 Jan 2026 09:44:11 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+CC: Suhaas Joshi <s-joshi@ti.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>, 
+ <trini@konsulko.com>, <n-francis@ti.com>, <s-tripathi1@ti.com>,
+ <k-malarvizhi@ti.com>, <kamlesh@ti.com>, <vishalm@ti.com>
+Subject: Re: [PATCH v2 0/5] Firewall ATF and OP-TEE memory regions in Sitara
+Message-ID: <20260121154411.l4buznbtw3xjrkqs@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20260121054712.176939-1-s-joshi@ti.com>
+ <20260121140747.GA112150@francesco-nb>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] usb: xhci: fix DMA address corruption in abort_td
-To: ANANDHAKRISHNAN S <anandhakrishnansasidharan@gmail.com>,
- u-boot@lists.denx.de
-Cc: bmeng.cn@gmail.com, trini@konsulko.com, mkorpershoek@kernel.org,
- ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
-References: <20260120145055.233298-1-anandhakrishnan.s@dicortech.com>
- <20260121101207.432503-1-anandhakrishnan.s@dicortech.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260121101207.432503-1-anandhakrishnan.s@dicortech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ritdd5xgixwd9o3qyyk5n4gnsp8ura3n
-X-MBO-RS-ID: f4de031b39ea1b6b3c4
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20260121140747.GA112150@francesco-nb>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|MN2PR10MB4191:EE_
+X-MS-Office365-Filtering-Correlation-Id: 230e48c0-fffe-43c4-ffe7-08de5903ec9c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?T1ZZblRjS2gyNUxhYkZhRXlYZVNzMFU4MVZTMUl6dWE1VC95dU0zWjhaWGl6?=
+ =?utf-8?B?akI0WDc5SWlRcXRpMUJwTENGT3JOZ2NvSWZmYzAvSy9YTnRuajh4SFYrd2Vw?=
+ =?utf-8?B?TkZJcFF4MW8vMjYwRWJHeEEzVlN6T0RjRkJTT1ZBSUNRM0pQekFSaldKZFM3?=
+ =?utf-8?B?RUtMS3Y2TVMvMURtbkFWa1ZzZk41U2xkV1grU1d1Y05YNzB2UFJoMmdsbE9T?=
+ =?utf-8?B?QncyelorTnFUT2QxVmF4Qk1pMk96Q3k5bTJJUkg4QkdJRG43WHFkMHEzK1F1?=
+ =?utf-8?B?cGpORXpJY1BuQm5lV2trdnhpUkRmM1hvN3UyZDFZdnRHaUJLVm5HYmVkNmQ1?=
+ =?utf-8?B?ZktERXRqMmVRN1VlS3d3SXdHd0dwMHl3bjNoc3NyQTEvc0kzU2lQT25QenZ0?=
+ =?utf-8?B?YWthTzVUcmNhanE5b0ZERXVCa1F5bytKaktVV3k1Y2FTYUVUNkdxdVRxNWlG?=
+ =?utf-8?B?K2F2OEU5VmYxdDBLZldrc09PTHlvVlF5Q2R2L2lzbTNWaTMzSjlMVGRsUWpq?=
+ =?utf-8?B?TXRmK0Z2cW03NUpJcVdOWFl3czdDZXhPUDZVNUFlWFFsMGRXcFZqNGRKOUp2?=
+ =?utf-8?B?VDIxSjJWc0oyd2MrblYwMVJJUFVWWmRYZTJqTzVGU05qN0xZTi8rNnJzWVNN?=
+ =?utf-8?B?QXdpL0MvNFZYVXN0d3JmM21zdWtDUVNraEtMWkx3bTNFOHNBODk2cnczUWR2?=
+ =?utf-8?B?bC9WaHV2SGtXdE9lRmNONFpySEpHeXNJc0hPUi9yMkFmQmZ6K2ZKYmlhb3dm?=
+ =?utf-8?B?bVd3ZXlidzJFY3I4ZmJOang0Z2l3czB6Zk0yTjBTN2FCMFozc2RLNWt4LzZp?=
+ =?utf-8?B?ckZEMjRPdmdCS3BrVm5VcXppdDM0Z3VKMVZYSnVJM28rMWtWMGRHSXVCNS8r?=
+ =?utf-8?B?bXBKcUllRWEwYURSTEM5anFJU2VGVUxlYVdyQkdadFE1cE1BNlhONXlpdXVB?=
+ =?utf-8?B?NlRETVBXbW1INit6YjFab09QcitCTkFQWktoSWlxQXJ1QVdCTDFHWGEwNlE3?=
+ =?utf-8?B?TnBEQnlaV3hiMnB3UVpiU2k4dXhKd3YwamZFbjNLc0pFZ2xHV3crd0VOMEVJ?=
+ =?utf-8?B?aHlENFRiRGZpYzBzczh3Mkp6OCtLQU9uTWRQY21OTjNtNmMvb2s0NDJlM0FX?=
+ =?utf-8?B?bGJQTDVtVDJSQzhaS0lSeTBDejZjZkxsYmNpVU8yd05JQ2gzSmZmU3EyZVR1?=
+ =?utf-8?B?cmYzcXByenM0NlUyNmxacVIxWUxRQzFNeVBSTWJNRVlBbGJtWGhpMUJLeEZa?=
+ =?utf-8?B?WTQ1eTdhSVRJQWpiTU1TWXNNZyswU2MvWm1uZWY4d1BYSGdrL29GMld5TlNZ?=
+ =?utf-8?B?UGxDeFQ5dFhueGMvclkySTZ6a2IwL0FkYkw1Rk5kbXRCd25CNGhZbU5QZDFT?=
+ =?utf-8?B?K3hwbmtuemJYdm9pYmcxOERCYzlUUHdoTmZGdERBcEZWUFljN0MyczhrRVpM?=
+ =?utf-8?B?SnBJOFpZRW1LQkd0QzA5dWJMYXhvYy9RZXhVRldOVUtqeFlxa2VxRS9rbHN0?=
+ =?utf-8?B?UFQvRDZhQ3dVVmJNQnU2M1BNbFVtcjZYckpUVkEvZ0JObTVDN0JoRGpBejlD?=
+ =?utf-8?B?SUl6U1g4SWFJQ20rNExXMTBHbms5SEcyZm5GdDBrQzFYczJxeE9vUmI2ZXky?=
+ =?utf-8?B?dnB5aEhTTXFzbExxcmt3VTNmK3lXd3A1SlRqWnBmbXg2azZpeTBxV0lyNVVU?=
+ =?utf-8?B?dTdCNHFmYzdtNGsrS24vam1CYzVnRFZ3UlNEM3VmM0hEU2JlbG91d09CV0pW?=
+ =?utf-8?B?ZS9YUisxRWhnUk5lSi9zc0xYY2pNMU8wR2dlUmdEOG5kSFZRdzNMWEhrNHRZ?=
+ =?utf-8?B?WDROaHRHR0xmMnN1K3l5dkxpS3F4ZVhyZklYZHEyM1ZkL1FGUFY5UllySUc4?=
+ =?utf-8?B?cTJTS0FleDZBOVpYRWl5bnl2WmYwb3QwVVRxQmJMeGJ5WUc4cklad0p3T1RB?=
+ =?utf-8?B?TVdhM2tQazd5OFEzN3FURU1tQ3lsaEsweXpkeU5rRmlSYkJ1bm95S2I5bUdJ?=
+ =?utf-8?B?bzRJVzdaVTBYcmNMN1lWMkpzZDhna0RVSVBqL1NDWklpOEdHWkE3eXNKWlFu?=
+ =?utf-8?B?ZTJjWmtFS2FVbmZBeGxaS3pVYWdNVWZzTDdFTTUyaU4xMnUzN2NJSklZeWt5?=
+ =?utf-8?B?RTZMbXZrRTRid3pkZzlMN3phWXIvSzMreWhuaHU3aWE3dW1XYWlraXFDWFgr?=
+ =?utf-8?B?Qm9zYjVveFRRK1dhNEhMaDVZNTQwSnlBeTV6dzdhY1psUnRDQXVOSERKTFA4?=
+ =?utf-8?B?cnpxTHY2Qys4YXVBU1VkTmtBVFBnPT0=?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 15:44:12.1465 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 230e48c0-fffe-43c4-ffe7-08de5903ec9c
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06C.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4191
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,54 +168,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/26 11:12 AM, ANANDHAKRISHNAN S wrote:
-> When aborting a Transfer Descriptor (TD), the xHCI driver updates the
-> device dequeue pointer by converting the virtual enqueue TRB pointer
-> into a DMA address.
+On January 21, 2026 thus sayeth Francesco Dolcini:
+> Hello,
+> thanks for your patch
 > 
-> Previously, the code OR-ed the ring's Dequeue Cycle State (DCS) bit into
-> the virtual TRB pointer before passing it to xhci_trb_virt_to_dma().
-> This produced an unaligned virtual address (e.g. ending in 0x...1).
+> On Wed, Jan 21, 2026 at 11:17:07AM +0530, Suhaas Joshi wrote:
+> > This series starts by replacing the hard-coded addresses in firewall
+> > templates that are defined in k3-binman.dtsi, by Kconfigs. Using
+> > Kconfigs would make it easier for someone to move ATF and OP-TEE to
+> > another location, since they wouldn't have to fiddle with the firewall
+> > configs in the dtsi files.
+> > 
+> > The rest of the commits in this series add firewall configs to each
+> > device's dtsi file.
 > 
-> Inside xhci_trb_virt_to_dma(), the offset calculation:
-> 
-> segment_offset = trb - seg->trbs;
-> 
-> operated on this unaligned pointer, resulting in an incorrect TRB index.
-> In wraparound cases, this caused the bounds check to fail and the
-> function to return 0.
-> 
-> As a result, a SET_DEQ_PTR command was issued with a DMA address of 0x0,
-> leading to controller hangs and transfer timeouts, most commonly when
-> aborting TDs near the end of a ring segment (e.g. index 63).
-> 
-> Fix this by translating the aligned virtual TRB pointer to a DMA address
-> first, and only then applying the DCS bit to the resulting physical
-> address.
-> 
-> Changes in v2:
-> - Apply the same fix to reset_ep()
-> - Simplify cycle bit handling to a single mask operation
-> 
-> Signed-off-by: ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
-> ---
->   drivers/usb/host/xhci-ring.c | 10 ++++------
->   1 file changed, 4 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> index 34eb4536f0e..229882a9dbd 100644
-> --- a/drivers/usb/host/xhci-ring.c
-> +++ b/drivers/usb/host/xhci-ring.c
-> @@ -523,9 +523,8 @@ static void reset_ep(struct usb_device *udev, int ep_index)
->   	field = le32_to_cpu(event->trans_event.flags);
->   	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
->   	xhci_acknowledge_event(ctrl);
-> -
-> -	addr = xhci_trb_virt_to_dma(ring->enq_seg,
-> -		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
-> +	addr = xhci_trb_virt_to_dma(ring->enq_seg, ring->enqueue);
-> +	addr = (addr & ~0x1ULL) | ring->cycle_state;
+> If I understand correctly the change, you should change also the other
+> k3 boards, not just the TI one.
 
-Can addr actually ever have bit(0) set ? If not, addr & ~0x1ULL is not 
-needed and you can literally addr = xhci_trb_virt_to_dma(ring->enq_seg, 
-ring->enqueue) | ring->cycle_state;
+Yeah we should try to add this to all Sitara platforms
+
+~Bryan
