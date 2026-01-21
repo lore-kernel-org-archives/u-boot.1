@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44BEC44502
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD632C44502
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE878341A;
-	Wed, 21 Jan 2026 10:29:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 11DE48341A;
+	Wed, 21 Jan 2026 10:45:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HArhdxml";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YpvZEWVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D4CE83A3B; Wed, 21 Jan 2026 10:29:05 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80ECB8397D; Wed, 21 Jan 2026 10:44:58 +0100 (CET)
+Received: from mail-dy1-x132a.google.com (mail-dy1-x132a.google.com
+ [IPv6:2607:f8b0:4864:20::132a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEE5F82A9E
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:29:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8EB82A9E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:44:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1768987740;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=X9xE1qODWypvNyUXUPoxGYB+A3O9VoMV42lnBZ67XyE=;
- b=HArhdxmls1wU5OpFyzPBh6joXBWxZkCYtCiK96wLTTXV0woAwXwgMKvtToNBer1ukftiXa
- pSQWpWb7V2VRPAExMcWW+GZqMwd4KNy81cKPhD/3fiYGbY4KVBhgSJp+PdTrFMgUSiOV3H
- w1cOAN8GfQwYQoaP2M3iqEfNkCsQI9U=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-473-gL2AfKCBPfiXUi5l5jLA1w-1; Wed, 21 Jan 2026 04:28:59 -0500
-X-MC-Unique: gL2AfKCBPfiXUi5l5jLA1w-1
-X-Mimecast-MFC-AGG-ID: gL2AfKCBPfiXUi5l5jLA1w_1768987738
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4779ecc3cc8so46176435e9.3
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:28:59 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-dy1-x132a.google.com with SMTP id
+ 5a478bee46e88-2b1981ca515so6864334eec.1
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:44:56 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768988694; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WlWl09k2tTEESOpVCEPVsQHiOeobeK7oEg/NqrwHsWdN1EQs83oTwqTCk+RXIAntTw
+ U6KUZZJtjpgjbyjSIMZbfe56E8Yi2GnfzLu+mjBViwnuHgJb4GtApFW8ubNtTUYckrKP
+ E9gyDIIpDRQmRDtOQ5Q4SF4An6VmLfj82XQzdoe3wEmPGGic612gFw39BziKoRyfBvVo
+ 2U+yCm0xzfNCBAw3ot099O542lgmXm8H0tPeHfvexMPqdw4wAg+ovUSY7Qn4MO7fGAAq
+ AzdQw4dpgIgk9He+f/jn7mUtmkYWhLryX2qaXuItViJHt6f5EJsZb8s0e0cgbBtxznPy
+ v7EQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=DJKPrs0o5M5JzNmQe2vP5/JElwAOsGwt9Jb+6Nx7DaE=;
+ fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
+ b=Fel2tV94+IrO2vOUlH43Ak8DvGBdOkqasiO7yUcYuadyxKRWiI6q8087stH6gN43wQ
+ PP/AOz7HAGHBK2WgaoKmMR1uDvBZ7G5JRvL23wVOgnhyymcx+rvoeA3qIUiiNJldHbr7
+ ah+n1716gfdQxpGnd7lwBUjO1AjYawkbiSLEi19D0wal0/LWBgaZGkGVAIvVkqWFrWsi
+ j4ovN25Q62Uyp5ryXz4JtL0TD4w1N15q64BuI+998j2Ky78AOHKPXAv82mVQuzRw3Rnx
+ HbGgKblLSDRLn0EzEMCkvP8tnAsJVmT2XnyNImQseLtGe2GV/gxy4Ouh1r3dnMmDBAKm
+ zwSw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1768988694; x=1769593494;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DJKPrs0o5M5JzNmQe2vP5/JElwAOsGwt9Jb+6Nx7DaE=;
+ b=YpvZEWVYSR9wDXzwkw4mE2WLJoSVwUSKaIK5JFdVlpAGuC+bhZ1PnBHeOzyfRcF+pq
+ OWi0ui5dhb/byPmwg64V13fzUkK8mB1zSZQDPC59hv4EDaiAKXIj8lzrgm2ijQ31Sn+E
+ Y6KMiXHPu83Ze5s9sQTcBegsq+rT0m9CGkzqo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768987738; x=1769592538;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X9xE1qODWypvNyUXUPoxGYB+A3O9VoMV42lnBZ67XyE=;
- b=V3c5r4O/0B+jWA9ncItwoY4yATRas23f2ewM5IIAl0qb7+caeIlmaOwmDAlrL6lgJV
- QX67o8wkHsJuIuN01yFCvYgsQ9nWmMHXnBrf59btQllQGHd1YqhtmS9TPSczvNlOPXAV
- WXzoOrE/iCLN7L5Fk1gJRXj0s3a31fNrXbInk2pfpWb/tUWP9fDNUv6+z8VF+HG2H49s
- IzA/7UOugUpKCulebs4T+uV8g5WGo+c7P6UvExrpbBylK/0sq8iGHpN4LAT3odXQ2eGk
- b/XD6gF04GnJogPV5NiUOMdFg5f0fyffVE6PsWRWQi7suHyWPyrHs42OsKATejVmNOg+
- 21XA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUanV5nsUh/27kdiT8Ut2KguB1BUtXj/DaNNECuKCPTY8bwKnzkucgR+EwtQwdzCA6bcka3MxE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxa6cYPjc/Dih/bTG+DI2B4umzPcdF2243n3oN1T+ROTKrU7xUC
- K1fOutBxOZA45vJ3HZvLTJzuziDpxWhJJKX9XXC9eK49850A1n8xcptTP6ta3GbU3ORe1g6n+Gn
- JLyiirRsJMpuLr48bQZmHTA4PkKroKBQfwCeRAFkHYqCmhJ7kyrhspak=
-X-Gm-Gg: AZuq6aKuSQHEVdI9k35nhciD9T97hZ1VuENbllnIhWtqTU7ECiYuXQu37P6EZxcU3q0
- nfHnmNkI95kRK/1PI6M8u3cPN1bWIhErOKeaRsKxoHK94jOgZqmA+q07ClHrScPFoP/T25TutCT
- r7J9wr9uxcbq3hmLv6tEPw/YxGcESG7LN0HcY8wFnkHjcWGAF2z/Km6huqY6j4glmKUT6R2x1xm
- m69zYwCOIKdYXbgMlzHOfhFAaHzdUzGx6+FijQ1A+Kz65IZS0+/3n4y51kG2GgWGWMIjM2Jke46
- Ymsc3lxK86zk88H1jFoMQVT1b/AMrIV2D7FVKuCIQ03aPv+HqU8q2YCUGwQBXg2Lt0r3Xm1am7k
- SdWgbb+htbkWCvyizDnyQ4M7sBKwoyNHgoZZdqsw7acHz4SLU2RjKISTFc+2NTtpOH9Mw
-X-Received: by 2002:a05:600c:474a:b0:477:5c58:3d42 with SMTP id
- 5b1f17b1804b1-4803e7a2c6dmr73971975e9.10.1768987738329; 
- Wed, 21 Jan 2026 01:28:58 -0800 (PST)
-X-Received: by 2002:a05:600c:474a:b0:477:5c58:3d42 with SMTP id
- 5b1f17b1804b1-4803e7a2c6dmr73971565e9.10.1768987737888; 
- Wed, 21 Jan 2026 01:28:57 -0800 (PST)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4801e8d90b3sm304521395e9.15.2026.01.21.01.28.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 01:28:57 -0800 (PST)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: eballetb@redhat.com, alexl@redhat.com, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 5/5] efi_selftest: Enhance MBR test for
- PARTITION_INFO_PROTOCOL
-In-Reply-To: <b0c0049b-e15f-4730-955c-55429720adfc@gmx.de>
-References: <20260120133630.1695055-1-javierm@redhat.com>
- <20260120133630.1695055-6-javierm@redhat.com>
- <b0c0049b-e15f-4730-955c-55429720adfc@gmx.de>
-Date: Wed, 21 Jan 2026 10:28:56 +0100
-Message-ID: <87wm1be2lj.fsf@ocarina.mail-host-address-is-not-set>
+ d=1e100.net; s=20230601; t=1768988694; x=1769593494;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=DJKPrs0o5M5JzNmQe2vP5/JElwAOsGwt9Jb+6Nx7DaE=;
+ b=uZ20HnfO+QlYXPyV+6XnYZ1QGYz0XGhAoownl3yylKErXUg85bEqTYoyWDsd0cwg/w
+ V3HNfcUVRnNtBLW+NXTLaS6dAaC+ZUeF7VObhWAMoVakOG6nfdRLdrvgBnZ0nUQaaux6
+ xMixHSSnFS4Ar3VNQgGNgSQbxICwxaOOTseu/ZWYbabsnr2uh7d1jOSNGNydw8ewBxMG
+ 2qaPTfaskVBfXrkQonDsJkGukPpJlP5ensR+uKGjEW6kEafj0iEISQlFnEp74ibEKhvV
+ uATEBfDIbCHcniiW5EhY5pGryz5hHbeltLV0P2yWALrNqqQ1ABl72ZUWPQjbFIQv3S+x
+ r1ng==
+X-Gm-Message-State: AOJu0YzrS0DZOCnL8wdY3Mdh9TW6wOBGSjw6iWiddxd745UIySQTB95P
+ AKYbU2LfDI3Iy+1i2Xzh3NFaR9VQbMQN5V4FU18iz0w2rIKn9x0YwEWpyOvaO508Upsznx0YFB2
+ UwlM48fGtxkN1oxSMTxa0c3NvVsGgHRwSyjaIMMr2W7nIdtNn7nOM
+X-Gm-Gg: AZuq6aIAfEgqjOeLQ6ajPK3ofsXwWf7OB/yaPQnwdNNTqIWyiX363zifdhJR4GHehvg
+ kkUklcecYHEeNX7lZrbi7LxTORC6KzFNOeb089WBwvpsaWCWpMFGhAtS1XWtNK/D+lQUgf2GsJS
+ VEPlIhYCEi4+4bLSSLoeAe8uaLXiieJsQQh6OppOCR8VJ3lhv9tuFfJG95EwWW4azN/VmirPVeF
+ tgOwuU7Ni8Y9pv+uaIXNXXXOEDPT0kpSZ/yHtKqLPih9zUQ9ijjJlrHCOG7PMaAXncJBIMVnEbp
+ fQBzw3kjx3fl640MgqkS1ca8gqdLapPTLCxMYA==
+X-Received: by 2002:a05:7300:a18a:b0:2b0:520c:df62 with SMTP id
+ 5a478bee46e88-2b6fd766d45mr3827155eec.19.1768988694507; Wed, 21 Jan 2026
+ 01:44:54 -0800 (PST)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: z6-2Lbb3y69ahQxR-N5ESObqRbSLWGr4mElES5adhek_1768987738
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+References: <20260120223405.469050-1-trini@konsulko.com>
+ <20260120223405.469050-3-trini@konsulko.com>
+In-Reply-To: <20260120223405.469050-3-trini@konsulko.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 21 Jan 2026 10:44:42 +0100
+X-Gm-Features: AZwV_QhooQhGaUOZHzV6hP5Ck4uZy7ri2iaq6SyZgEv8Hmqj012mMgmnMu1toqs
+Message-ID: <CAOf5uwkkkehBhMdHEKwbr00DCDJ2B+qe18kBRUJ=chox0NKLLA@mail.gmail.com>
+Subject: Re: [PATCH 2/5] doc: develop: process: Make "Work flow of a
+ Custodian" a subsection
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,61 +113,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
+Hi Tom
 
-> On 1/20/26 14:36, Javier Martinez Canillas wrote:
->> The EFI_PARTITION_INFO_PROTOCOL test was added before the protocol fully
->> supported MBR partitions. As a result, it lacked specific checks for the
->> content of the raw MBR partition record.
->> 
->> Now that MBR support has been implemented, enhance the selftest to provide
->> coverage for the MBR entries too.
->> 
->> This verifies that the protocol correctly reads and exposes MBR partition
->> records and prevents this functionality to regress due future changes.
->> 
->> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
->> ---
->> 
->>   lib/efi_selftest/efi_selftest_block_device.c | 12 ++++++++++++
->>   1 file changed, 12 insertions(+)
->> 
->> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
->> index f145e58a267a..50d1fb29e1ef 100644
->> --- a/lib/efi_selftest/efi_selftest_block_device.c
->> +++ b/lib/efi_selftest/efi_selftest_block_device.c
->> @@ -404,6 +404,18 @@ static int execute(void)
->>   			     part_info->system);
->>   		return EFI_ST_FAILURE;
->>   	}
->> +	/* The first partition starts at LBA 1 on the test image */
->> +	if (part_info->info.mbr.start_sect != 1) {
->> +		efi_st_error("MBR start sector %d, expected 1\n",
->> +			     part_info->info.mbr.start_sect);
->> +		return EFI_ST_FAILURE;
->> +	}
->> +	/* The partition type is FAT12 (0x01) in the test image */
->> +	if (part_info->info.mbr.sys_ind != 0x01) {
->> +		efi_st_error("MBR system indicator %d, expected 1\n",
->> +			     part_info->info.mbr.sys_ind);
->> +		return EFI_ST_FAILURE;
->> +	}
+On Tue, Jan 20, 2026 at 11:35=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
 >
-> How about defining a static variable with all fields and using memcmp() 
-> to check them all?
+> Make the "Work flow of a Custodian" section be a subsection of the
+> Custodioans section.
 >
 
-Makes sense. I'll do that in v2 as well. Thanks!
+You have just a typo here
 
-> Best regards
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  doc/develop/process.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Heinrich
+> diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+> index 3bda5e6b51dd..f436a98433a7 100644
+> --- a/doc/develop/process.rst
+> +++ b/doc/develop/process.rst
+> @@ -233,7 +233,7 @@ feedback to the submitter of a patch about what is go=
+ing on:
+>      apply cleanly.
+>
+>  Work flow of a Custodian
+> -------------------------
+> +^^^^^^^^^^^^^^^^^^^^^^^^
+>
+>  The normal flow of work in the U-Boot development process will look
+>  like this:
+> --
+> 2.43.0
 >
 
--- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
-
+I'm fine with it
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
