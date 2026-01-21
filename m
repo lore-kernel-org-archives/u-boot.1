@@ -4,167 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 814CFC44536
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 15:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB0DC44536
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 16:01:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD74D8341A;
-	Wed, 21 Jan 2026 16:57:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mobileye.com
+	by phobos.denx.de (Postfix) with ESMTP id 08E778341A;
+	Wed, 21 Jan 2026 17:01:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="fG+HH17Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ollT7tZE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF14A83A6A; Wed, 21 Jan 2026 16:21:15 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DE08D839D5; Wed, 21 Jan 2026 17:01:47 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8DAD83015
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 16:21:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mobileye.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Vladimir.Kondratiev@mobileye.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ecB4450TXgHyPPBWD5pLDce9BEoS/UM4e4aax56RdGb7LfFtxqT9sikYM629UXWGC8a3VqeMWr8flF9RqCmd5LVMhu0nxdw0CV9bCuEg3XlvMmYKTpIl7xfOwHl4jB52aq4pVYzBNP+KVTJ4UZ7LUiIar/BNtWUzdcfCDgzh8TgUfjnC6245Fz3MRQgTa3I6gjLw0Zi7GDbkC+uYdWvnWXE6wgBbXW2RRKFlpOzKknWKQ/e5/I1Yv+oOpw+bx6ropk3mRO79fROVRVpQTBC7I6r5gMg580JU3SD4sEI9QAJVVaKof7RojUE6IIEMPGoht87cew+b4qrQ9NPer3S3vQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bfx5nIV2VELMhiAiddhvxOXxu5nNspXIaUgyqt3r5GQ=;
- b=CQ9C+yKf7BgKvdRSXpO4Ct5NVXmI/JySivejAoee6duwIAE7a7suwS37hjRibUyyefYzFLoA5vXArVtTV3cMdzh48tbz2Uh0psM0y6V2a8lS8Kj05OkLO5l98zOCb4kcjHD0V9ePPILAJRZK5fqvncYWSB8f5HWH2jF1m9AQJHPoBSZnXpdZFQUD/2IrTthatUsRXXnmPHQzht/7GbO/FwzBKhok39NYlmhQ8eAuiEsWIUuVEnii1Z2fyMQZArsbxJee8k6hFvx0XrEcC31to1TJIjBVAjurJQZANsunBA/GasfvUI/a5vjTXP2BWp9Ll6Kc55VMjO1jIAzq88qwtA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mobileye.com; dmarc=pass action=none header.from=mobileye.com;
- dkim=pass header.d=mobileye.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mobileye.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bfx5nIV2VELMhiAiddhvxOXxu5nNspXIaUgyqt3r5GQ=;
- b=fG+HH17ZS78HYEZS8gGFtXbnIHfcB/nMEkcGK2uAOVEB3q/JcEsAgTwYxbvcIoKUHccWr/KRlTQznAgp040sbFUfQHVePvd0yFQdIlZ7CqDqPZWAAUr/IK25xLAwFBSkjtAlUODQG2JcJlaCI/Ui9UMLgLveocMjpZZK02oKq4A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=mobileye.com;
-Received: from AS2PR09MB6296.eurprd09.prod.outlook.com (2603:10a6:20b:578::5)
- by PAWPR09MB6200.eurprd09.prod.outlook.com (2603:10a6:102:33c::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.3; Wed, 21 Jan
- 2026 15:21:10 +0000
-Received: from AS2PR09MB6296.eurprd09.prod.outlook.com
- ([fe80::ef0b:e667:faa1:bae0]) by AS2PR09MB6296.eurprd09.prod.outlook.com
- ([fe80::ef0b:e667:faa1:bae0%5]) with mapi id 15.20.9520.003; Wed, 21 Jan 2026
- 15:21:10 +0000
-Message-ID: <f65aa26d-6c98-4b08-a94a-1e56f6871d1e@mobileye.com>
-Date: Wed, 21 Jan 2026 17:21:00 +0200
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Vladimir Kondratiev <Vladimir.Kondratiev@mobileye.com>
-Subject: [RFC] opensbi options from FIT image?
-To: nikita.shubin@maquefel.me
-Cc: afd@ti.com, ycliang@andestech.com, alpernebiyasak@gmail.com,
- anup@brainfault.org, linux@yadro.com, mr.nuke.me@gmail.com,
- n.shubin@yadro.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TL2P290CA0003.ISRP290.PROD.OUTLOOK.COM
- (2603:1096:950:2::20) To AS2PR09MB6296.eurprd09.prod.outlook.com
- (2603:10a6:20b:578::5)
+ by phobos.denx.de (Postfix) with ESMTPS id 9705280077
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 17:01:45 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7cfdf7e7d19so4287781a34.2
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 08:01:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1769011304; x=1769616104; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zG0qk7mcZg4C8e4VpvzigDO13S1u7VtHmVbxHDSkwXw=;
+ b=ollT7tZE9WySIjd/X6cHzqTI90p+u4qpMaZToEItGi4HTVuoghW636JzpIeYxd8tRS
+ I3yUdIBRtW4HhjxHzD7jRaASZb24qeZIeD6cGt2h7TtxlVs3M2ikH7UVDhc1HAfUnFET
+ KHt7WoEUTRmzKyYLP0KH2ipNdHTxci11QwR24=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769011304; x=1769616104;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zG0qk7mcZg4C8e4VpvzigDO13S1u7VtHmVbxHDSkwXw=;
+ b=NtrToQFcnFN4Ea1r5FRarR3o1+gkFa500aPzePvgQUURRo0cFMUliVVuHhUQpHbr0e
+ xO4xW8RbUThPu8G9Q+RcDw6GepWmJug94FIlyZsnL/S9FGESzxdTox5xkB0XVC0oi9rO
+ PwfnEFWUWZrpybR5wwejuNbo5ziY5WNZONzsm40k1Bj4M9jROeFGgxdk6zM/RNSlSmfO
+ +GSW6E2y0fNrhJOOFzrHIDrgP6w1+b/ARvCkFyyX4x1aJwF3GQsCQn5C/ksd+QYOewWY
+ 2jALYZeJSHq/aN4iRNaeY8S1T3Nk6SCOA9pKPWUGSFHNqoo4SzgllaF0Tga78+HLIT+e
+ w07Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUS+4dg0c5ygpxUyQBL2OWtqOJz6D2VnRCaDJHrlcGfwQ6QGo7GmnGb8C2fhHlznWFO4Fjoh3k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy85bo7sphBK6qxPniiJeTO5PX5mZzPkV4UL4wS3XBbptB1obme
+ Iuh/QGGvsisXNPZ/ph4GrMsHej/QBPLQrNCGLcvafrBRaPMYAv7kM8c1abtnXOb9xoY=
+X-Gm-Gg: AZuq6aJhUksIBWVqEZLOfPSQtngjqsUXQxoFYntynVjR1w42l53R5Pi5e/IrZ5cPzeI
+ JIl5EENBW4FgTmLRPrLZF14ufM9HFM63IAmC4I5cZtWI/RUxIB/97udOHaW1aIahRlAaLoBPlLx
+ udPhwiut9Zgojr1bkx7U4DWqXtRL2kur0WLmdURZ2MyJKL1E716dgHe4YkZ7JsOJkBlGSO9LbL3
+ zhRr6k866b6bwQQH6jFqzn9/UBKdfV9taKE21AYEeDlIs0Qnmq7Qx7thI6KQ283q46JGHnbcTCa
+ QAbQUsHImRLy9SVfPJv0Oeogw+qtArcmKnu5fgO4ztf8PVDftAWyg2fltjSTEoXUratUM6heeGX
+ bIEIRQn8Dr0Gd/oh2KTpr1mn63svTaJeM27HHlKARg6s7WV7qhk9DRfJt2aoUqrYVIdQBIbze5U
+ c5cGy3OzjhQI0ze0hkLg/QKxuTjbZu0fDs7euJjvzwox17nZn0OF9xC/McHJaxjx+V0YJ3xx7OW
+ 0N3jgmRwKF3qHt0i5YswEIscizvIZOEuUdleys=
+X-Received: by 2002:a05:6820:625:b0:661:ae2:95ed with SMTP id
+ 006d021491bc7-661189adbd2mr7504999eaf.60.1769011304124; 
+ Wed, 21 Jan 2026 08:01:44 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4044bda221asm11093578fac.20.2026.01.21.08.01.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jan 2026 08:01:43 -0800 (PST)
+Date: Wed, 21 Jan 2026 10:01:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sam Shih <sam.shih@mediatek.com>, dlechner@baylibre.com
+Subject: Re: [PATCH v2 1/2] pinctrl: mediatek: kconfig: fix logic
+Message-ID: <20260121160140.GA570248@bill-the-cat>
+References: <20260108-pinctrl-mediatek-fix-compilation-issue-v2-0-3d0499d3b6db@baylibre.com>
+ <20260108-pinctrl-mediatek-fix-compilation-issue-v2-1-3d0499d3b6db@baylibre.com>
+ <fba47ca8-7cf7-446a-9242-54c50087cf3c@cherry.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR09MB6296:EE_|PAWPR09MB6200:EE_
-X-MS-Office365-Filtering-Correlation-Id: 02801ca5-ab67-41f9-09ce-08de5900b4f2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QnZESGlwai9qQkROKzhWZmFqRTJaL01OMXZJa3FtanBzZ0FkVDl6cHJiY0tM?=
- =?utf-8?B?SE5ubWRkenpkY01DVEw2TzNGcWJWT1FrWVZQRTdTRmlnK0JZeWxPZEpyKzE2?=
- =?utf-8?B?WEJUdDVQeEU1OS9HcS9ySW5RTDBqRnN6V29rUWhSbFc5aXU4UldhWWU4SjN3?=
- =?utf-8?B?MEdONWVWb0xjZURzMTFCYjdFQmpTQ0NFTmxicXcxM0FVWS9aVUgyMG9ObXRG?=
- =?utf-8?B?RDh5WXpyVjlwYXRyZjR4WkdPU2hyR2ZRSXRhdEpPV1NaK1RMaFpvVnF2Z2hL?=
- =?utf-8?B?dy9PVG9oMUN5QVliWmtWMFNhSSs1SURtZHRJdG9aWWUwQVRhOXBSZXRLYnk5?=
- =?utf-8?B?UGdQeW9ZNFZ0UWRiSVFBK2RCWHR6aWVHQVB1cjdTak4zODdza3BmeWZyaUV3?=
- =?utf-8?B?MGFYMkJkbFkzK1ZNN3F2QzlxNHhCQ2NGZnMydWswSXkxM0JaZUE0NDRNSGxo?=
- =?utf-8?B?dXgyRTB0akMyNlpNTWlXOWp2UnY2eU1FYkltaGs3VUdSMGtOMW5mVWd3TFJP?=
- =?utf-8?B?WEZMdTlyRVg0Y09HNmE4aTB1Vk9VREx6VkduZnN2dTFvUGhGcFh2aHBKQXhW?=
- =?utf-8?B?K3gxajBzcTQ3TmljQWxpeHkyVUQ4bEc4RE9sQ1FKeTFaRE1uQURESlJjR0Qv?=
- =?utf-8?B?eUh1U1duSGlpTkhGOVAyUzhPWVpRdEdvWVdVczl6UWR3UFRybVZsZHc0ZXph?=
- =?utf-8?B?amN6bHBLNE1laUh4dTNHVlU0dkg1bkdKMHZ1b3BrUHFpU3gybGtqNTdUN0l1?=
- =?utf-8?B?aWRiNldYNnRjSU1PTFF6UWVXaGJxZzgvSDF4cUhQbUo0V0ludmhaTXVEZWFq?=
- =?utf-8?B?MDNZWk1yZzNpVzVpdGNNVk9reDdVaWI0a1J3TFRMTGFpeE9YQysxWFAwZmZ1?=
- =?utf-8?B?ZFVGRnJJM2o1MFIwbzJnMHJ4VUxyYjd1VURJREdNZnZtQVpIYTRRMnQ0Wnly?=
- =?utf-8?B?QisvSmFIckZuVkJVdVJBREUzellNdVBnN2hIQzNJVU8vRFc3UEhaVmhYd3Y3?=
- =?utf-8?B?S0hsOXB2VDYxaGpZRUduM2dYQTdoRUlLdllxZk82RzN0Y0prRTBkb251djJq?=
- =?utf-8?B?YVl1ZDJ6ajRsTSs5NlVWMS9LU1FTYm9INmM2RDIxR2NNcSsrbDArOENDQ2ZP?=
- =?utf-8?B?WFcvVktzTmtGNzdwck9SWmVlNlV2SGFWT21qUXFGU25QRnJBUUR2SVZQbnRj?=
- =?utf-8?B?bS8yNkdFR3ZzemF5VGY2U21pZUtXNGRNem9obVZ6U1Vid1pDUnBXWkxiaUMz?=
- =?utf-8?B?UVpoaVNTUm1RMGxLNTRoSktsMktlK013ZHBsQldzL0hMdnE1bFhWYnpnVEQz?=
- =?utf-8?B?R05SUFBsa1g1NlU3R1MzZ2FNcWVaMHJYSWsvVUhSY0ZrU1RZZE5qK2dGT3Bl?=
- =?utf-8?B?WUd6ZkFHeHhkOGFqUW9teDE4ZUJPYU95MmVxcHd5MEtscktVK3Yxek96Wjlz?=
- =?utf-8?B?Vzg2YnloYllQT2gya1pYYm9leTBXQUhuVnl3bmhFYTR2RXdqSHMwTTNET1lz?=
- =?utf-8?B?NHZscGhKd1MrN1o4b0dSTTlrTDZLRW9ua0NGRk1SU3dtT3dUQVJPaUtrZjEw?=
- =?utf-8?B?c1RIbENJSWFhTC8xVTlSWmtnNW9hUms0N3pCa0ZFcTUzNzJQVG0yYlY1OGFx?=
- =?utf-8?B?d3ZyL2dLYlBlQzZLNHJuRVZwNGxTRUE5cVpwdEF1QlRYbjRrMmlhQk5OT0I1?=
- =?utf-8?B?cDlpWVB0a1RiaUFQT3U5VWJhcm1DQktqbzViME1TTURyZDYrK1pwWkw5UzhH?=
- =?utf-8?B?TWN2RTY2ZFRYL0Q4aWN6dXJzelptQUFXZGxET1FZSnF0THBSUkVyRGxxdlk5?=
- =?utf-8?B?SXIya0FNRDEydmpvZGdwR3FFU2NPVHpPV2R6YzhVSVJ2SUJLTnBQRElpMHNM?=
- =?utf-8?B?N2swdkNTS2NSK08wakkvUlRINENIY0RBRDlkYWg2MnozaU1HSElXMStUS04v?=
- =?utf-8?B?ejByRCs5SE5YNWJqUnpFdy91enc2OFZQU0h4anFWMFpiUGRJZ0RwcUhid3No?=
- =?utf-8?B?eXlZT3FmUHdKZGtGcmtXNnRQMWRRSVMwVEp1a3dHUE56TEdReW9mU2R3SlhP?=
- =?utf-8?B?YTRuNlg5S1lZUmJxM3dIMmtQR2ZScjFBaUpXcHRsOTVFQ3RxSzViNUJvWWVD?=
- =?utf-8?Q?F2q4=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR09MB6296.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WjZCUzdWNm1FbFNhdEc4aEtXOGVXS293bWlMQzdwaks5VjY3TWU1Y2M1MXVY?=
- =?utf-8?B?a1BwOUJnYnd6YjVsV3FiSlZnZ3RLVW5nakh2NTRoNWhZSW9UQ2hyOUYvZ01a?=
- =?utf-8?B?aXFwYmhTUTJGMVlER2Z0a2lsTTVmQmxONXlISXVLNlhHamhDNFFMV0IzdGox?=
- =?utf-8?B?UWJ5Ym9uSnViMVRZNjNSTUJJR0t2Nnl6WmJtUUhIVDhXT1dHdFNOcVpNaGdp?=
- =?utf-8?B?bTNRbU5Nc3BQT0l3OXZmU0tCRGNOeUpPb2ZlcmRIamQ1eVBHMFFhZExGQXZt?=
- =?utf-8?B?ZGJINWY3SG11WFZGOFpqMmxPN21oQTZtSloyd0hBTmw2dEs0b290dGh0QjNL?=
- =?utf-8?B?QzBiOGliUlRTNkVwQkRHSDFjOUQ5YWNjVUR2NUdjR0NSS1kzOW9mTTBBMDNF?=
- =?utf-8?B?bjRyQm5EcEZ1d0l3QVAzSGxKRkhxZGtRb3ZzTGtpa2ZiZVZLVGdVT0V2YjVa?=
- =?utf-8?B?M2M1bWRwNG12Smt0Zk9FSk5JalpQZHg5S3lDaERIbmpzN0xMSWFmTDVtUENJ?=
- =?utf-8?B?aFhrb204cUI1dEw3VER6UFRRMFJ1cVYvM01USFBUTngxN2hRSytnekE2MERF?=
- =?utf-8?B?UnZSa1JaMDQvdzFWdUJ0SWpnM085aHp6TnFRWjBVclhZUG9BYWk2K2Z2Y1Vs?=
- =?utf-8?B?SFVZRElIN0JGTzRNczArdkdRcnJyWXFaVUF6b2NjWWEzbTNqQXZWb0RZdE83?=
- =?utf-8?B?N2V2bnFEeTFaQVJtei9VcUZlWENiWEhXNjNPaWZZdUZQck9jazJ1MGFUK1Yw?=
- =?utf-8?B?dnlqdEcvWlBjemVkN0Q3WEFDNFNHSG9NOVQydU9aSDdzS3BLSE90cHI0TEYr?=
- =?utf-8?B?Z3pVdGduNW1mc0VUbGNiOWxQTkR5bjgyTDgrSExoSUtGMUxJZVcvd0dyeWlz?=
- =?utf-8?B?ZEIxQVRjQ2hKS1hlSFd1U1hobXZseTlRcTdkby9FbXB1SFZBV2s0WXdhVXBR?=
- =?utf-8?B?R2VqS2ZuS2s4RmxBZk1ObWVad09zb1QrZElkQ1BMWUc0NFhNYkZxc0JGWkNT?=
- =?utf-8?B?OGhwUGxvZGZNNG1pc3ErN2liREhtWnQzTjlSZ2NFMFdhTlN0TzMyM2M5VU1p?=
- =?utf-8?B?RGdNYTJRcGdYRjZpTEFYN3VRVmdVVlhxU0hWQ3VZWlN4SVpRdjh4eDA1V0I5?=
- =?utf-8?B?RDhlZVYwWnR4dGk5M05EOW9YbmgvaFpPUGl6MHFTajBuN1Q0NTZwUm5MM2J0?=
- =?utf-8?B?ZmxzaGNHOUdDdkhyZ1FleVNnLythaWpsWnA1RmtBeEZRSlpSdTVHTEpNSkxV?=
- =?utf-8?B?WVJMd1RkQXMvWkQ0ekpTcVgwRHZxZTBuQ295Rk1iQnV3L1RYSUswK0xoSFpJ?=
- =?utf-8?B?bHVjMExmbEVpMmJhaUR2amJtb1oyV3pPakV3aWtjSHNIS2lGQ2tRbWZYTzl4?=
- =?utf-8?B?WE5BckNlbHJBWUFFaTYyc2g3N3lNMlYxWjc0V1JYVWNZUGVoU29zWG8vVE5Q?=
- =?utf-8?B?d2JsemNmQUlCUEozZzRHRnN0eGdDYzFLbEpYS1dZZk5TRHNESFhwUlBKb1ZB?=
- =?utf-8?B?T3NyWTlPTW5hNDI1cUpUWHJkQmdycGZqeHJseUxPUjFaVTB2aGM5dWZjQ1Q2?=
- =?utf-8?B?VDcwc2QzU1VKd0VoV1hleGI5dWcvWGpYbjl2emNkOHVsMDhuVFplNWtKY3BB?=
- =?utf-8?B?VU1rRTBZeHlOZlNxTWVhMXBqbDFSeWZZc3FnaUNMY2JYTTROUHlYVVJFM0hF?=
- =?utf-8?B?dHZlUG1yOHlsalJxMjdvWkVuL0tPQUU2N0ZWWGc3OXdYN0QwSGIzTVZWNmhl?=
- =?utf-8?B?SldVVHhXV0VHV1lWb0czV3M1Sm5PR2FFTmIzd1lCRnlUTzhCRythZk1xU3g2?=
- =?utf-8?B?TWpiLzBRbjB6aG96b25SU2JQcU1uZ0EzZjVlSlh2cGQ5R1dvV0NkT2VBUWlv?=
- =?utf-8?B?MHA5NGMzVU1ISjU3blF0eGQ2TUVVbjhwUjJRS0RIckRCRm1rb1JKeXJaL0ls?=
- =?utf-8?B?RE9JcTh1ZWZOUWpFeFpQRkpaMVpzY24wMHVReGVCVzVnZHgvLzR1dUxzRk1y?=
- =?utf-8?B?MjNjcnptK3owQVBCdUFQeWk5Uk1OTmJ5cUZFYUVCWGFTRHM2UTVRN256TnZ1?=
- =?utf-8?B?WW5SdmpkaHk0cXdaaEM0UXZhdThQYXY2WHZRanViajV6YzBUdlU0OHNNU1Z4?=
- =?utf-8?B?aVVEdDVacGt2MERVQUxud2tQMks3WmsvbjFDLzh3S3VQVXJINHVyVlBsNzFK?=
- =?utf-8?B?ZXVzRzF1YlRmdnk1NHcyelVwVDZ2OSt5VmY3SkZFWDc3TlZYcXRRYlVMSEd6?=
- =?utf-8?B?cWlHZ1BaUGpUWnd0ZXc2c0Z4WE41dUN3ZGppOC9BQlc4OEVWTVZxZVc2RVda?=
- =?utf-8?B?TE5qNlA1SE1sSEZBdU80TVRITXVUQWdxWXRTT3Vhc0h2R2VnMEtndz09?=
-X-OriginatorOrg: mobileye.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02801ca5-ab67-41f9-09ce-08de5900b4f2
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR09MB6296.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 15:21:10.5420 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4f85ba13-6953-46a6-9c5b-7599fd80e9aa
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SWt+/NafNobz5jdePkMzme2lBy0myLj9pnzUaZA4hloiWTOaokA8Tj4nExmGgWaWO5O0ectRlb22PdimyJ6Htg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR09MB6200
-X-Mailman-Approved-At: Wed, 21 Jan 2026 16:57:44 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="svL/WQd9jJFTwiZ/"
+Content-Disposition: inline
+In-Reply-To: <fba47ca8-7cf7-446a-9242-54c50087cf3c@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,82 +102,77 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: YvNmYpUNm9CmRIHP@ubuntu01
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
 
-After commit aa0eda17cf98 ("spl: opensbi: convert scratch options to config") it is possible
-to specify options for the opensbi, as in struct fw_dynamic_info "options", in config file.
-It is better than hard coded value but still, it is fixed at the compile time.
+--svL/WQd9jJFTwiZ/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can we have this options set at image load time? This would help to enable, for example,
-opensbi debug prints at the runtime. I see an option to do so in FIT image, by adding
-property like "opensbi_options" to the opensbi image node or to the configuration node.
+On Wed, Jan 14, 2026 at 06:19:18PM +0100, Quentin Schulz wrote:
+> Hi Julien,
+>=20
+> On 1/8/26 3:47 PM, Julien Stephan wrote:
+> > We can't have PINCTRL_MTK depend on PINCTRL_GENERIC and then all
+> > drivers select it. Individual drivers should directly depend on
+> > PINCTRL_GENERIC.
+> >=20
+> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > ---
+> >   drivers/pinctrl/mediatek/Kconfig | 21 ++++++++++-----------
+> >   1 file changed, 10 insertions(+), 11 deletions(-)
+> >=20
+> > diff --git a/drivers/pinctrl/mediatek/Kconfig b/drivers/pinctrl/mediate=
+k/Kconfig
+> > index 8b9180bd2aaeb56325ba42d08afa42d9317f23a1..d10d08d9fe80441a5a2f8ac=
+c13e312825fa43a5d 100644
+> > --- a/drivers/pinctrl/mediatek/Kconfig
+> > +++ b/drivers/pinctrl/mediatek/Kconfig
+> > @@ -1,47 +1,46 @@
+> >   if ARCH_MEDIATEK
+> >   config PINCTRL_MTK
+> > -	depends on PINCTRL_GENERIC
+> >   	bool
+>=20
+> Are you sure this still works?
+>=20
+> Since nothing selects PINCTRL_MTK anymore and this boolean isn't selectab=
+le
+> (doesn't have a prompt) and there's no default (Kconfig defaults to n when
+> it's missing), how are the drivers/pinctrl/mediatek/ going to be reached
+> (see drivers/pinctrl/Makefile) and pinctrl-mtk-common.o be compiled?
+>=20
+> Maybe you want something similar to what we've done for Rockchip maybe?
+>=20
+> Have only one symbol for all drivers but only build the SoC-specific driv=
+er
+> if the symbol for the SoC is selected? (this will also make it easier to
+> have SPL_PINCTRL_MTK for example (don't have to have a symbol for each So=
+C).
+> Using CONFIG_TARGET_MTxxxx for example? Something akin to what's done for
+> the clock framework already for Mediatek, just with the additional
+> PINCTRL_MTK symbol?
 
-While bootloader usually flashed on some raw partition and it is not that easy to
-recompile and re-flash it for every run, OS FIT image can be stored on the partition
-formatted with some filesystem so changing FIT image is easy. Also, if it is only
-matter of changing .its file and re-run "mkimage", whole process of changing opensbi
-options became easy.
+Agreed, this and then 2/2 feel like it's backwards. These drivers should
+be select'ing the common to mediatek symbol (PINCTRL_MTK) and that
+symbol should select PINCONF.
 
-I see even more value in this for u-boot proper, if we teach it to run in M-mode, so
-for developer boot sequence can be
+--=20
+Tom
 
-PBL -> u-boot SPL -> u-boot -> opensbi -> linux
+--svL/WQd9jJFTwiZ/
+Content-Type: application/pgp-signature; name="signature.asc"
 
-where u-boot will enable network and load FIT image from TFTP; then changing opensbi flags
-will be matter of seconds
+-----BEGIN PGP SIGNATURE-----
 
-Examples, proposed modification marked with "==>":
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXD4XQAKCRAr4qD1Cr/k
+CvHhAP9V7pzsGQ++X0gbxs5cWffTSXEi92Agt2E0ygtROxwu0wEAvnFczs4ZZPfD
+vBRIRWEJklbJGGbCw9xUzhuRf/4SwQ4=
+=FMOl
+-----END PGP SIGNATURE-----
 
-for opensbi image node:
-
-opensbi {
-
-       	description = "OpenSBI fw_dynamic Firmware";
-
-       	data        = /incbin/("fw_dynamic.bin");
-
-	type        = "firmware";
-
-       	arch        = "riscv";
-
-       	os          = "opensbi";
-==>	opensbi_options = 
-<2>; // SBI_SCRATCH_DEBUG_PRINTS
-        compression = "none";
-
-	load        = <0x8 0x00100000>;
-
-       	entry       = <0x8 0x00100000>;
-
-};
-
-
-for configuration node:
-
-config-1 {
-
-	description = "config-description";
-
-	kernel = "linux";
-
-	firmware     = "opensbi";
-
-==>	opensbi_options = <2>; // SBI_SCRATCH_DEBUG_PRINTS
-	ramdisk     = "initrd";
-
-	fdt = "fdt-1";
-
-	loadables = "linux", "initrd";
-
-};
-
-
-Comments?
-
-Thanks, Vladimir
+--svL/WQd9jJFTwiZ/--
