@@ -4,120 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD90C4451E
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 11:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569D7C4451C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 12:01:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EF618341A;
-	Wed, 21 Jan 2026 12:46:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C2A38341A;
+	Wed, 21 Jan 2026 13:01:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bw7ZbJzm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0376B83946; Wed, 21 Jan 2026 12:46:35 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7CE3A8397D; Wed, 21 Jan 2026 13:01:22 +0100 (CET)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A68E83015
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 12:46:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A395683015
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 13:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4358fb60802so484613f8f.1
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 03:46:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1768995991; x=1769600791; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=xkObEXn5ICuY8xdt3jZ+BeRS4lN2H7X1IkucSGLwLtA=;
- b=bw7ZbJzmJ7oBApe7+HlhQGD1HAfzMdJvHk099EKt4dzTUuihxdK/+F+hN1aVKSyBAq
- 4HerXwDjFsRbGLn7mHwAsSEcSOQnJUG1VqLKEGW3xRFlxeSqZa5oBOMjCSSOxS6Qr63c
- ibD/o+yl0x8dFWzLqoVVJNODVAalqJdDnGAiI8GpYQcgJP6PR8kTczN84NrusiJLLXVW
- 5o8W8yo7kuabK++PKbKGLgoZI5WU3W2P7v/afA0mN7tBNm9ReRo9R9a8QF/ZCYXMEOyU
- rHkAw0See4ykUjVSx3Kt4AWGJVGyXq+AUKP0w+yyQzls2g4CgVw0/FV4vA9Dtqn9m3jT
- BJWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768995991; x=1769600791;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xkObEXn5ICuY8xdt3jZ+BeRS4lN2H7X1IkucSGLwLtA=;
- b=qlGoTaKptIUbqZ0XHxURK1AQwoaEcb12H/U9PtknGv+zoeu9zLMdp4PgZ73cHWr5RO
- 9pvmVdFY/tDyMkflXutKGmTPJAozpTc0F/KAJ8FdWrAPadeUDODglxL8vXJPvBONmIZ+
- BkSMaiqQ0xxm2wO6R3y329rm6R7Qj8JGORhDcWnXIouDiZlQ7z70o/VuIuY4QQkx2xuH
- jnQ7P+wQHxD4yz7AW5empO7oekM0NFffW7n+KxywV9EZMeKqQ7dxNfWjR+JDob27DMqR
- RnrgvYpSIZyE9G/DZlbbj8Z4P8dgWwm9+JmqHM7RfEtvnJ9GSfxn/1rdJPufWl57J43u
- InQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIE2r4149r2/qHYMidG7RfCcIhZNMtVmvfWzjoKCOUHREb8q1nlpc6IMxes8me72hYniJHR6M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIdhZrOxOmSdDJMykTI39o0dbyDSJcYkFxrs77fV3gk0wYD6ev
- YUfQp9vPcc/PuvH65fB26QQuIzQa+gkmeWqp8Y3DoDC6PgQxwaOK9IPph2EH2PLeKz8=
-X-Gm-Gg: AZuq6aIbHk30mc8W+meRFkBO00q3Q50YNlZFjOI5HyyyVzxyP9x14P4uTpL3nUHsCaa
- xT3n7i5GHpYk/4ohzfSYT3WR/OMOnCL1m39mBAmgCNAWQo1/BLHI8vhh2oWsyzkIOoRX9/nO1T4
- cToct/RK9QhqUoq/mjo0b+FQR6myuMuDgDRAJe4N2hCzTm17qL6kAFiCWzs4WyR3iTKir/8B+7d
- CgHSnnzWAPzezOxcPbGMsIBoAO16hLhvNQVRPP4oSpL0Lbv1fzmp3ZKU1a0L+LWqQpYvDFXi9Mx
- tSnh/j09UjaQxy2qsu0DRalgXssWEs5l7EKP06D26CcevOYeZ6N+Q1G8yMReXK4cbfEu5/Ec3WW
- pYwfaqM+uC+ir13Oy9V7VSIeXkHvCzFT/SUAPFexHU8JH7adKPx4wB08nJFarWy19xHlIZfhqkZ
- Wvj1EbpUiqli2vy7zdK+pBqZVwk96oB/O1Bpob98H4t1KsInN747PsJSBWdzF/E1BnJzPUcZxrU
- Q==
-X-Received: by 2002:a05:6000:1acb:b0:42f:b555:5274 with SMTP id
- ffacd0b85a97d-434df0ed3d6mr27940393f8f.20.1768995991070; 
- Wed, 21 Jan 2026 03:46:31 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:8ae8:f59d:ae95:f372?
- ([2a01:e0a:3d9:2080:8ae8:f59d:ae95:f372])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43597ae9f37sm6428952f8f.8.2026.01.21.03.46.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Jan 2026 03:46:30 -0800 (PST)
-Message-ID: <311e0216-54f4-48c4-859c-d2db0a424340@linaro.org>
-Date: Wed, 21 Jan 2026 12:46:29 +0100
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 449621F80057
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 12:01:16 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id 14ADAB1B40E; Wed, 21 Jan 2026 12:01:15 +0000 (UTC)
+Received: from collins (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id 6A656B1B405;
+ Wed, 21 Jan 2026 12:01:13 +0000 (UTC)
+Date: Wed, 21 Jan 2026 13:01:11 +0100
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chen-Yu Tsai <wens@csie.org>, Icenowy Zheng <icenowy@aosc.xyz>
+Subject: Re: [PATCH] sunxi: a133: Add NSI arbiter support to DRAM init
+Message-ID: <aXDAB1zRPoG2nRGe@collins>
+References: <20251009171459.564592-1-paulk@sys-base.io>
+ <20251009232127.7cff2e40@minigeek.lan> <aOjd5xKdRD7g3SAi@collins>
+ <20260119010327.4b60ed97@ryzen.lan>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/2] mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
- casey.connolly@linaro.org, jorge.ramirez@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20251229114312.668068-1-sumit.garg@kernel.org>
- <b60d5ee7-fa27-4dc1-8a09-964912ec5654@linaro.org>
- <aWDXQFXQcaoeV7ka@sumit-xelite>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <aWDXQFXQcaoeV7ka@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9eDU4rs5p51yoGA1"
+Content-Disposition: inline
+In-Reply-To: <20260119010327.4b60ed97@ryzen.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,104 +57,333 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/9/26 11:24, Sumit Garg wrote:
-> On Thu, Jan 08, 2026 at 05:19:32PM +0100, neil.armstrong@linaro.org wrote:
->> On 12/29/25 12:43, Sumit Garg wrote:
->>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>
->>> Add support for OP-TEE live tree DT fixup support which enables U-Boot
->>> OP-TEE driver to be probed. As well as the EFI DT fixup protocol allows
->>> the live tree fixup to be carried over to the OS for the OP-TEE driver
->>> in the OS to probe as well.
->>>
->>> Note that this fixup only gets applied if CONFIG_OPTEE gets enabled.
->>
->> Can't the presence of OP-TEE be detected dynamically via scm calls ?
-> 
-> SCM calls aren't present in case of TF-A/OP-TEE flow.
 
-exact, but SMC calls are.
+--9eDU4rs5p51yoGA1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-first thing optee driver does is calling OPTEE_SMC_CALLS_UID:
+Hi Andre,
 
--> optee_probe()
--> is_optee_api()
+Le Mon 19 Jan 26, 01:03, Andre Przywara a =C3=A9crit :
+> is there any update on this? Would you be able to send a v2 this week?
+> If not, I can try to fix the things up I mentioned.
 
-Please investigate how this SMC would behave when QSEECOM or QTEE none are
-present.
+Yes I can send a v2 for it this week (and thanks for the reminder).
+I also have at least one other fix for lpddr4 support.
 
-SMC calls are mandatory to be implemented for PSCI, so they should simply
-return an error.
+All the best,
 
-Neil
+Paul
 
-> 
-> -Sumit
-> 
->>
->> Thanks,
->> Neil
->>
->>>
->>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>> ---
->>>    arch/arm/mach-snapdragon/of_fixup.c | 34 +++++++++++++++++++++++++++++
->>>    1 file changed, 34 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
->>> index eec2c0c757e..29a99f73cf3 100644
->>> --- a/arch/arm/mach-snapdragon/of_fixup.c
->>> +++ b/arch/arm/mach-snapdragon/of_fixup.c
->>> @@ -146,6 +146,37 @@ static void fixup_power_domains(struct device_node *root)
->>>    	}
->>>    }
->>> +static void add_optee_node(struct device_node *root)
->>> +{
->>> +	struct device_node *fw = NULL, *optee = NULL;
->>> +	int ret;
->>> +
->>> +	fw = of_find_node_by_path("/firmware");
->>> +	if (!fw) {
->>> +		log_err("Failed to find /firmware node\n");
->>> +		return;
->>> +	}
->>> +
->>> +	ret = of_add_subnode(fw, "optee", strlen("optee") + 1, &optee);
->>> +	if (ret) {
->>> +		log_err("Failed to add 'maximum-speed' property: %d\n", ret);
->>> +		return;
->>> +	}
->>> +
->>> +	ret = of_write_prop(optee, "compatible", strlen("linaro,optee-tz") + 1,
->>> +			    "linaro,optee-tz");
->>> +	if (ret) {
->>> +		log_err("Failed to optee 'compatible' property: %d\n", ret);
->>> +		return;
->>> +	}
->>> +
->>> +	ret = of_write_prop(optee, "method", strlen("smc") + 1, "smc");
->>> +	if (ret) {
->>> +		log_err("Failed to optee 'method' property: %d\n", ret);
->>> +		return;
->>> +	}
->>> +}
->>> +
->>>    #define time_call(func, ...) \
->>>    	do { \
->>>    		u64 start = timer_get_us(); \
->>> @@ -160,6 +191,9 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
->>>    	time_call(fixup_usb_nodes, root);
->>>    	time_call(fixup_power_domains, root);
->>> +	if (IS_ENABLED(CONFIG_OPTEE))
->>> +		time_call(add_optee_node, root);
->>> +
->>>    	return 0;
->>>    }
->>
+> Cheers,
+> Andre
+>=20
+>=20
+> > Le Thu 09 Oct 25, 23:21, Andre Przywara a =C3=A9crit :
+> > > On Thu,  9 Oct 2025 19:14:59 +0200
+> > > Paul Kocialkowski <paulk@sys-base.io> wrote:
+> > >=20
+> > > Hi Paul,
+> > >=20
+> > > many thanks for sending this, it totally escaped me that we didn't
+> > > setup the bus priorities on the A133! =20
+> >=20
+> > And for the record this solves a display glitch issue that happens when=
+ever the
+> > GPU is rendering. It would probably also happen with big CPU loads.
+> >=20
+> > > > In previous generations of Allwinner SoCs, the memory bus (MBUS) ac=
+cess
+> > > > arbitration was configured as part of the DRAM top registers. This =
+is no
+> > > > longer the case starting with the A133, which has a dedicated base
+> > > > address for the bus arbiter that is now called NSI instead of MBUS.
+> > > >=20
+> > > > NSI appears to be a later iteration of MBUS design, with new dedica=
+ted
+> > > > registers that resemble the previous MBUS ones. Despite NSI not bei=
+ng
+> > > > documented in the manual, the A133 BSP includes a nsi driver with s=
+ome
+> > > > description of the registers. Like previous generations, it impleme=
+nts
+> > > > port arbitration priority for DRAM access and also supports an opti=
+onal
+> > > > QoS mode based on bandwidth limits.
+> > > >=20
+> > > > Configuring port arbitration priority is especially important to ma=
+ke
+> > > > sure that critical masters are not starved by other less important
+> > > > ones. This is especially the case with the display engine that needs
+> > > > to be able to fetch pixels in time for scanout and can easily be
+> > > > starved by CPU or GPU access.
+> > > >=20
+> > > > This introduces support for the NSI arbiter in the A133 DRAM init
+> > > > code. The list and order of available ports are highly SoC-specific
+> > > > and the default config values are set to match the BSP's defaults.
+> > > >=20
+> > > > Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
+> > > > ---
+> > > >  .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
+> > > >  .../include/asm/arch-sunxi/dram_sun50i_a133.h | 50 ++++++++++++++
+> > > >  arch/arm/mach-sunxi/dram_sun50i_a133.c        | 65 +++++++++++++++=
++++-
+> > > >  3 files changed, 118 insertions(+), 1 deletion(-)
+> > > >=20
+> > > > diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch=
+/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > > > index 2a9b086991c3..8e80c520706b 100644
+> > > > --- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > > > +++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > > > @@ -16,6 +16,10 @@
+> > > > =20
+> > > >  #define SUNXI_GIC400_BASE		0x03020000
+> > > > =20
+> > > > +#ifdef CONFIG_MACH_SUN50I_A133
+> > > > +#define SUNXI_NSI_BASE			0x03100000
+> > > > +#endif
+> > > > +
+> > > >  #ifdef CONFIG_MACH_SUN50I_H6
+> > > >  #define SUNXI_DRAM_COM_BASE		0x04002000
+> > > >  #define SUNXI_DRAM_CTL0_BASE		0x04003000
+> > > > diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/a=
+rch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > > > index a5fc6ad36560..a526e55e7bb9 100644
+> > > > --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > > > +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > > > @@ -24,6 +24,56 @@ static inline int ns_to_t(int nanoseconds)
+> > > >  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
+> > > >  }
+> > > > =20
+> > > > +#define SUNXI_NSI_PORT_PRI_CFG_RD(v)	(((v) & 0x3) << 2)
+> > > > +#define SUNXI_NSI_PORT_PRI_CFG_WR(v)	((v) & 0x3)
+> > > > +#define SUNXI_NSI_PRI_LOWEST		0
+> > > > +#define SUNXI_NSI_PRI_LOW		1
+> > > > +#define SUNXI_NSI_PRI_HIGH		2
+> > > > +#define SUNXI_NSI_PRI_HIGHEST		3
+> > > > +#define SUNXI_NSI_QOS_SEL_OUTPUT	0
+> > > > +#define SUNXI_NSI_QOS_SEL_INPUT		1
+> > > > +
+> > > > +struct sunxi_nsi_port_reg { =20
+> > >=20
+> > > Do we really need a struct to describe an MMIO register frame? =20
+> >=20
+> > Well I did that because other code around DRAM does it, and IIRC it's s=
+aid to
+> > be the preferred way to do things in u-boot. Personally I've always fel=
+t like
+> > this approach is a bit fragile, but when in Rome, do as the Romans do.
+> > It doesn't really cause problems in practice.
+> >=20
+> > > I started to get away from them, for the reasons please check the com=
+mit
+> > > messages from one of those patches:
+> > > https://source.denx.de/u-boot/u-boot/-/commit/0453a1d9bb15ee30e8b4b89=
+b4936982dbb44d71d =20
+> >=20
+> > I pretty much agree with all the points raised in the message.
+> >=20
+> > > So can we replace this with something like
+> > > #define SUNXI_NSI_MODE_REG	0x10 =20
+> >=20
+> > Sure thing.
+> >=20
+> > > And, squinting from a distance, the A523 code looks like using the sa=
+me
+> > > per-device MMIO frame, with registers at 0x14 and 0x18 being written,
+> > > with a distance of 0x200 between the devices. So maybe put this
+> > > somewhere where the offsets can be shared between the SoCs? =20
+> >=20
+> > Ah that's what I suspected, without actually looking at the hardware.
+> > So the port registers are likely the same, but I guess the list of ports
+> > is different, so that would need to stay a133-specific.
+> >=20
+> > > > +	u32 reserved0[4];
+> > > > +	u32 mode;
+> > > > +	u32 pri_cfg;
+> > > > +	u32 io_cfg;
+> > > > +	u32 reserved1[41];
+> > > > +	u32 enable;
+> > > > +	u32 clr;
+> > > > +	u32 cycle;
+> > > > +	u32 rq_rd;
+> > > > +	u32 rq_wr;
+> > > > +	u32 dt_rd;
+> > > > +	u32 dt_wr;
+> > > > +	u32 la_rd;
+> > > > +	u32 la_wr;
+> > > > +	u32 reserved2[71];
+> > > > +};
+> > > > +
+> > > > +struct sunxi_nsi_reg { =20
+> > >=20
+> > > Same here, can you please similarly replace this with defines, and
+> > > multiply this index with the frame size (0x200)? =20
+> >=20
+> > Yes sure and I'll rework things to have an explicit list of port indexe=
+s.
+> >=20
+> > > Otherwise this looks nice!
+> > >=20
+> > > Cheers,
+> > > Andre
+> > >  =20
+> > > > +	struct sunxi_nsi_port_reg cpu;
+> > > > +	struct sunxi_nsi_port_reg gpu;
+> > > > +	struct sunxi_nsi_port_reg sd1;
+> > > > +	struct sunxi_nsi_port_reg mstg;
+> > > > +	struct sunxi_nsi_port_reg gmac0;
+> > > > +	struct sunxi_nsi_port_reg gmac1;
+> > > > +	struct sunxi_nsi_port_reg usb0;
+> > > > +	struct sunxi_nsi_port_reg usb1;
+> > > > +	struct sunxi_nsi_port_reg ndfc;
+> > > > +	struct sunxi_nsi_port_reg dmac;
+> > > > +	struct sunxi_nsi_port_reg ce;
+> > > > +	struct sunxi_nsi_port_reg de0;
+> > > > +	struct sunxi_nsi_port_reg de1;
+> > > > +	struct sunxi_nsi_port_reg ve;
+> > > > +	struct sunxi_nsi_port_reg csi;
+> > > > +	struct sunxi_nsi_port_reg isp;
+> > > > +	struct sunxi_nsi_port_reg g2d;
+> > > > +	struct sunxi_nsi_port_reg eink;
+> > > > +	struct sunxi_nsi_port_reg iommu;
+> > > > +	struct sunxi_nsi_port_reg cpus;
+> > > > +};
+> > > > +
+> > > >  /* MBUS part is largely the same as in H6, except for one special =
+register */
+> > > >  #define MCTL_COM_UNK_008	0x008
+> > > >  /* NOTE: This register has the same importance as mctl_ctl->clken =
+in H616 */
+> > > > diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach=
+-sunxi/dram_sun50i_a133.c
+> > > > index 1496f99624dd..6327f00ff5ea 100644
+> > > > --- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> > > > +++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> > > > @@ -69,6 +69,64 @@ static const u8 phy_init[] =3D {
+> > > >  };
+> > > >  #endif
+> > > > =20
+> > > > +static void nsi_configure_port(struct sunxi_nsi_port_reg *port, u8=
+ pri,
+> > > > +			       u8 qos_sel)
+> > > > +{
+> > > > +	u32 pri_cfg;
+> > > > +
+> > > > +	/* QoS with bandwidth limits is not supported, disable it. */
+> > > > +	writel(0, &port->mode);
+> > > > +	writel(0, &port->enable);
+> > > > +
+> > > > +	/*
+> > > > +	 * QoS direction selection should not be in use, but set it never=
+theless
+> > > > +	 * to match the BSP behavior (in case it has some other meaning).
+> > > > +	 */
+> > > > +	writel(qos_sel, &port->io_cfg);
+> > > > +
+> > > > +	/* Port priority is always active. */
+> > > > +	pri_cfg =3D SUNXI_NSI_PORT_PRI_CFG_RD(pri) |
+> > > > +		  SUNXI_NSI_PORT_PRI_CFG_WR(pri);
+> > > > +
+> > > > +	writel(pri_cfg, &port->pri_cfg);
+> > > > +}
+> > > > +
+> > > > +static void nsi_set_master_priority(void)
+> > > > +{
+> > > > +	struct sunxi_nsi_reg *nsi =3D (struct sunxi_nsi_reg *)SUNXI_NSI_B=
+ASE;
+> > > > +	struct {
+> > > > +		struct sunxi_nsi_port_reg *port;
+> > > > +		u8 pri;
+> > > > +		u8 qos_sel;
+> > > > +	} ports[] =3D {
+> > > > +		{ &nsi->cpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->gpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->sd1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->mstg,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->gmac0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->gmac1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->usb0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->usb1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->ndfc,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->dmac,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->ce,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->de0,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->de1,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->ve,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->csi,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->isp,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->g2d,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->eink,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +		{ &nsi->iommu,	SUNXI_NSI_PRI_HIGHEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > > > +		{ &nsi->cpus,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > > > +	};
+> > > > +	unsigned int i;
+> > > > +
+> > > > +	for (i =3D 0; i < ARRAY_SIZE(ports); i++)
+> > > > +		nsi_configure_port(ports[i].port, ports[i].pri,
+> > > > +				   ports[i].qos_sel);
+> > > > +}
+> > > > +
+> > > >  static void mctl_clk_init(u32 clk)
+> > > >  {
+> > > >  	void * const ccm =3D (void *)SUNXI_CCM_BASE;
+> > > > @@ -1184,6 +1242,7 @@ static const struct dram_para para =3D {
+> > > >  unsigned long sunxi_dram_init(void)
+> > > >  {
+> > > >  	struct dram_config config;
+> > > > +	unsigned long size;
+> > > > =20
+> > > >  	/* Writing to undocumented SYS_CFG area, according to user manual=
+=2E */
+> > > >  	setbits_le32(0x03000160, BIT(8));
+> > > > @@ -1200,5 +1259,9 @@ unsigned long sunxi_dram_init(void)
+> > > >  	      1U << config.bankgrps, 1U << config.ranks,
+> > > >  	      16U << config.bus_full_width);
+> > > > =20
+> > > > -	return calculate_dram_size(&config);
+> > > > +	size =3D calculate_dram_size(&config);
+> > > > +
+> > > > +	nsi_set_master_priority();
+> > > > +
+> > > > +	return size;
+> > > >  } =20
+> > >  =20
+> >=20
+>=20
 
+--=20
+Paul Kocialkowski,
+
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
+
+Expert in multimedia, graphics and embedded hardware support with Linux.
+
+--9eDU4rs5p51yoGA1
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmlwwAcACgkQhP3B6o/u
+lQyL5w/+JGMlbH3iS1x3IziijwcLZFJ78t33kvSR9gRqzJfpPE7LCtrceAx3w/hT
+gxmf84kIBEciXspEiEm7ZtBZzonUUopvJAy64RstojBw/dg8WzwiJsjRHVnixD2X
+REEw0+KGc493KeZoffU+8n4AytC4GIgCUL4rareTrHFuzSd3/DXkYdqrICH1KCPX
+gL9Vwxeb3zleX2hTaDMNtiawBjQOsa8k1cRVx5AK8tpZQkPBb/6Gcd+HupHRVWcY
+8XUyGr4UQf9gGD5g/5fO1d4xIZ2DGFwHFO7YbLJzllivfVj1Mk8ZMMLbgqBHwrpR
+1B3Z23l4tXWl9PgwFIcdMbzgRVPgxbCXKrzPBTtleTQEbIfEGuOsv944PLg+R6Wd
+8lHCWHaPzmSlUNse6PCYzMgno950KRminxgcABUHiEm+UFVVZZqxFaHFM2j92Y0S
+opxIBaDVaZiKu7i3qlE6Ywx2aeqUh/ElaIMzJuLKZxovPeBux0/EfaUb+6zfY2CT
+nMr2zc4hY3rCQ45L+0Q8DRx2d+9de9TqmqMH3G+yarBH/J/R+Qa6w5XdZ709okhY
+PQtHrrub5pCRib56bdVyIFOMtZoCImL/kpP4bimnADNJ+LS3tEzwUzAt35eLmUjL
+GzQN/Qwy1nREcSGqiHwgeoPWRTijM8lZDbGOq3+I5agXRCDBoyo=
+=1FR3
+-----END PGP SIGNATURE-----
+
+--9eDU4rs5p51yoGA1--
