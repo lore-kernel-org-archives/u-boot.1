@@ -4,72 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09C10C44501
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F1CC44501
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 09:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6803F8341A;
-	Wed, 21 Jan 2026 10:17:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 098828341A;
+	Wed, 21 Jan 2026 10:25:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="D+Orlmxr";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="SR+riOLG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7A89839DF; Wed, 21 Jan 2026 10:17:46 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 94FE1839D5; Wed, 21 Jan 2026 10:25:46 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8BE682A9E
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:17:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D99E82A9E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 10:25:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dwz9y6nn4z9sSf;
- Wed, 21 Jan 2026 10:17:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1768987063;
+ spf=pass smtp.mailfrom=fmartine@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1768987543;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JKgYwrkRViWOoKx0sKq+vDfU+h6AZzhSyj3NiHiA/Qg=;
- b=D+OrlmxrbxEtivfamQRKVNSNKWWyJfyrupA2Ae55puyhfcESsoFh8PemN1qQMrTOq9HAL0
- JTAbhqSyI8LHsTR7cQcRSSAQbHsFj/L/DUC+gpMSCLC0Fu7tCF4Fj1RdEaxQY5tpLwmvMF
- ELZz2p3SWSkn94tW8MEnaQ+nMQEvu9nkzlHyjqbCU+cZqStDBE9RfC6LisL+WaQLKvLmvW
- c4LN/Lis/psQVZUx98IoS7xo1QfTU2wDkt4dKVYWtJOLGmftt1D+KQNAlnwcC09hFOqTz7
- VV4AWay7UuwoDTSBBAc7swv/H6mocGt75jrKeEqPbvmiYF8uo783yU1NiZl23w==
-Message-ID: <cf1a8fb2-107b-4539-a623-d376217d67b9@mailbox.org>
-Date: Wed, 21 Jan 2026 10:17:38 +0100
+ bh=mJ1IJIe8SK6tmfyCOtWd4NMQA8CoTCvieaLiRmIJm54=;
+ b=SR+riOLGXJiRHqoPABpZ0+AfP2Li7IkC4kdAudxPpll+N3qXAKpVtbHfblyHPcZJTAfhvJ
+ OMsKgwvk4I06mEF0Jx0DNdFRCQkQVT3f1G2VH4Hp3mXXfD9jcBpzpY8KNrs00G7rSh1N9s
+ RxHsPs73PNG5kx4cmyGvxJ0T3/lLPHA=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-661-HH3-ukS-OdyW0sp6fBci_A-1; Wed, 21 Jan 2026 04:25:40 -0500
+X-MC-Unique: HH3-ukS-OdyW0sp6fBci_A-1
+X-Mimecast-MFC-AGG-ID: HH3-ukS-OdyW0sp6fBci_A_1768987540
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-47d62cc05daso45223345e9.3
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 01:25:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768987539; x=1769592339;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mJ1IJIe8SK6tmfyCOtWd4NMQA8CoTCvieaLiRmIJm54=;
+ b=JB7qCZFtV2fu6pJcBeDNAzTSI7VoypC5enE20giXw2OrOt5UJhLUP6cwSs8U2TFfGx
+ 29KiFu16mDca2b45wXqh/LBBSJgeoDbBFn3YagOAGYlcjas86TmWp4gi1SLFGeWI99dA
+ SSX8EpLE5X1vpzYaEtrvQlAlfVIJ/TWesz1NcyTblkAptwemxVEeoR7pF7kittvmvtr1
+ 02lCyZ/bpbAz1b+0Ju6MxxBdzQZbOFpnUMzkmAg/bKyU/EvRD+/hsuxjF0xsykwwSohF
+ alH3yxM+F6aw7aywCFHISMXlqF5jrdfz++SIQgMPsfvJ7+BG2sKEyS1mVZPgQCywJOX9
+ 9m3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuFeg5JlEdPo87jCHeQsODFwrUUYsghLvYwmVtVhd4IpVtrrcgWw9KXLgYex2LTywV4xczLaU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx33h2ErDgCuUH4kmkSp+mcWTWOVJn/3t9iwN/hk2xhFObm3eH7
+ /Oa8S1B2wvFGMlAjVkOtyoUjptR/Z7jhiEFWr+SAbdTbVGXrboAb9MmhNr+lzYkZAd+ykyn62Br
+ Tn4vdz7Av+KBt9TuKRoqSHvjGb8IHfbqFG/suGKqVjaAbHD0I3C9wU9g=
+X-Gm-Gg: AZuq6aJRJMSI2ioL6+N4r0SloxHuTdPkEzVDXL7lKgwIBvleJjxNl7HB8CFItbdR92l
+ UHeiNOMU2fdl0t4Fa++yPeXX6JwoSbqg+TsoBAg53kcSBZ5VY/7EfqY5QkS7yyzht8Cdp1+uFWf
+ HntJzDyCf95o49TNrVfEnMCImJ8LNCAVVAONKYVPzVvDpHLvQCSlJG8MJE2gRJ4q12seNaUM3vY
+ Rf4CG5/FulTqjemfXBkV94FJkAcOCNPTDpdtaqTgLm5XFdY2PnxpFdYQ4r/jkGKFnEX9qh+ed4W
+ /H5cwj8rbIB/ty81eqHhi+ayLFnIXNh7DIx0MjkoAciWxwz+3OzHI86XrS/ysQYtenGT338Qs+T
+ BYhPBgZCm/fYuy0P7Jc8l3z0KLaVLhxAQ5oeeZiWQU71dZ6T3Q7ZpLx57FFiT5Beav04S
+X-Received: by 2002:a05:600c:6085:b0:477:7ab8:aba with SMTP id
+ 5b1f17b1804b1-4803e79b854mr69094515e9.1.1768987539516; 
+ Wed, 21 Jan 2026 01:25:39 -0800 (PST)
+X-Received: by 2002:a05:600c:6085:b0:477:7ab8:aba with SMTP id
+ 5b1f17b1804b1-4803e79b854mr69094135e9.1.1768987539059; 
+ Wed, 21 Jan 2026 01:25:39 -0800 (PST)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4358f12ee69sm11812109f8f.11.2026.01.21.01.25.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jan 2026 01:25:38 -0800 (PST)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: eballetb@redhat.com, alexl@redhat.com, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Javier
+ Tia <javier.tia@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>, Rasmus
+ Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>, Varadarajan
+ Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 4/5] efi_loader: disk: Extend
+ EFI_PARTITION_INFO_PROTOCOL to support MBR
+In-Reply-To: <a45fa439-535d-4bdf-8ac7-94b3150d117e@gmx.de>
+References: <20260120133630.1695055-1-javierm@redhat.com>
+ <20260120133630.1695055-5-javierm@redhat.com>
+ <a45fa439-535d-4bdf-8ac7-94b3150d117e@gmx.de>
+Date: Wed, 21 Jan 2026 10:25:36 +0100
+Message-ID: <87343zfhbj.fsf@ocarina.mail-host-address-is-not-set>
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: qcom: stop watchdog by default
-To: Casey Connolly <casey.connolly@linaro.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Gopinath Sekar <gopinath.sekar@oss.qualcomm.com>,
- Lukasz Majewski <lukma@nabladev.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Shmuel Leib Melamud <smelamud@redhat.com>, Sumit Garg
- <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20260121003659.69305-1-casey.connolly@linaro.org>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260121003659.69305-1-casey.connolly@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: fj4zbj6rrg31hsecs1qkkwtk1r5s91pz
-X-MBO-RS-ID: 9dd748fd51ed4bb9530
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: keajWGSZbpswvcFiGgbtIkZcU83T4GezfsY-Z3_90EU_1768987540
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,52 +115,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/26 01:36, Casey Connolly wrote:
-> Prevent the Qualcomm watchdog from autostarting and ensure it's stopped
-> when the driver probed. In some cases the watchdog is left running by
-> a previous bootloader stage. Disable autostart so it isn't left running
-> when we boot into the OS, this behaviour can be changed by enabling
-> autostart in the board defconfig.
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Hello Heinrich,
 
-Thanks,
-Stefan
+Thanks for your feedback.
 
-> ---
->   drivers/watchdog/Kconfig    | 1 +
->   drivers/watchdog/qcom-wdt.c | 2 +-
->   2 files changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 35ae7d106b1a..416d29d256a2 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -15,8 +15,9 @@ config WATCHDOG_AUTOSTART
->   	bool "Automatically start watchdog timer"
->   	depends on WDT
->   	default n if ARCH_SUNXI
->   	default n if ARCH_STM32MP
-> +	default n if ARCH_SNAPDRAGON
->   	default y
->   	help
->   	  Automatically start watchdog timer and start servicing it during
->   	  init phase. Enabled by default. Disable this option if you want
-> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
-> index e4ebb1f31d4b..a8d7e7a79508 100644
-> --- a/drivers/watchdog/qcom-wdt.c
-> +++ b/drivers/watchdog/qcom-wdt.c
-> @@ -128,9 +128,9 @@ static int qcom_wdt_probe(struct udevice *dev)
->   		return rate < 0 ? (int)rate : -EINVAL;
->   
->   	wdt->clk_rate = (ulong)rate;
->   
-> -	return 0;
-> +	return qcom_wdt_stop(dev);
->   }
->   
->   static const struct wdt_ops qcom_wdt_ops = {
->   	.start = qcom_wdt_start,
+> On 1/20/26 14:36, Javier Martinez Canillas wrote:
+>> The EFI_PARTITION_INFO_PROTOCOL provides detailed information about
+>> partitions. The UEFI specification mentions that both GPT and MBR
+>> partition schemes are supported, but the U-Boot implementation only
+>> supports the former.
+>> 
+>> This can cause compatibility issues for platforms whose boot ROM only
+>> supports MBR. This change adds support for MBR partition tables to
+>> the protocol, making U-Boot compatible with systems that require a
+>> legacy MBR table.
+>> 
+>> To implement this, the existing part_get_info_extended() function,
+>> which already traverses DOS partitions, is refactored to optionally
+>> retrieve the raw MBR partition record. This provides the necessary
+>> data for the EFI subsystem.
+>> 
+>> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+>> ---
+>> 
+>>   disk/part_dos.c           | 63 ++++++++++++++++++++++++---------------
+>>   include/part.h            | 14 +++++++++
+>>   lib/efi_loader/efi_disk.c |  9 ++++--
+>>   3 files changed, 59 insertions(+), 27 deletions(-)
+>> 
+>> diff --git a/disk/part_dos.c b/disk/part_dos.c
+>> index 60c3d6773696..5b508483bae7 100644
+>> --- a/disk/part_dos.c
+>> +++ b/disk/part_dos.c
+>> @@ -201,7 +201,9 @@ static void print_partition_extended(struct blk_desc *desc,
+>
+> Please add a Sphinx style function description describing the usage of 
+> the parameters.
+>
+
+Sure, I didn't add for the new parameter since the function didn't have
+a description, but I'll add a preparatory patch in v2 to add that.
+
+[...]
+   
+>> +/**
+>> + * part_get_mbr() - Get the MBR partition record of a partition
+>> + *
+>> + * This function reads the MBR partition record for a given block
+>> + * device and partition number.
+>> + *
+>> + * @desc:	block device descriptor
+>> + * @part:	partition number for which to return the partition record
+>> + * @mbr:	MBR partition record
+>> + *
+>> + * Return:	0 on success, otherwise error
+>> + */
+>> +int part_get_mbr(struct blk_desc *desc, int part, dos_partition_t *mbr);
+>> +
+>>   #endif
+>>   
+>
+> Please, put the partition library changes into one patch and the EFI 
+> changes into another.
+>
+
+Ok, I'll split these in v2.
+
+> Best regards
+>
+> Heinrich
+>
+
+-- 
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
