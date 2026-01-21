@@ -4,63 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E045C44500
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 22:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D96C44536
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 23:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0523A8341A;
-	Wed, 21 Jan 2026 23:45:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E4D0F8341A;
+	Thu, 22 Jan 2026 00:20:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wdo0+lZt";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vmZKqO26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9AD9839D5; Wed, 21 Jan 2026 23:45:00 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F028B83A3B; Wed, 21 Jan 2026 23:38:27 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDF180077
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 23:44:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF0F18341A
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 23:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dxK5L2DYBz9v0g;
- Wed, 21 Jan 2026 23:44:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769035494;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=s1J+TAcc1Cnhmy3n0hNNPG6WprTDNY/G26A5YMiArzE=;
- b=wdo0+lZtJaqMZHMJzkrU7BvAbeQLmD+6JmdmsvNL2gfTL/FWJiZ8687oz2BdxtndK68031
- XvM9aR6vg9hRu3dcUtbMypbvDimik7KyWvSIuVcjcezRq7oAyS20ZxSkW+mZhlCIyN1fO5
- KIKd8TuYjl9BpoTh8DOTCOJTYWx8CrS7vi6Ksd8muFVK7W4UT1tRM3safLKGLquuzx5oUU
- HsTvAbeDEV9Dit2ME3c7iW0gmDYTKLk99JtEbkKlgbayGsaWF5PVQPD62ObnFg/A+r8LEb
- 4P8rAf+p0tL/ISfDQC/Jq1HV39rHzmw+OPxhumFzmbOcdthklPA6UV6G6E/QTA==
-Message-ID: <5153f94d-8edd-4be5-85de-b096c9f6c317@mailbox.org>
-Date: Wed, 21 Jan 2026 19:07:30 +0100
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-45c962424daso123164b6e.2
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 14:38:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1769035104; x=1769639904;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xdKC+tSKytwRcrB9zU/qNc8ORyWr8hBqnDbzuJdoRds=;
+ b=vmZKqO26eVFLGVShMipaL8tA8OyUy6mGSDEtyf77satpmb01aaNC9SfHD9RRXqIYtp
+ EBeAjE2T7Ma6OX58KuR1HoW9sOysvSr9y3gyUvD06G2uNYt+SKSmY1YTXlCRM6M3mBlI
+ VTwP6/6b+14MP/Ds5MRpvl8F7vRB1j9L1k5r36eWj7TZLADNBHiolj0ky0rsG0xgSPEd
+ GXl3hisFFGLmPrEAkBvL81qeguNAIvjKB1lPXKMzLpe+K+nzTPJXG+xmmvR8V275EEPF
+ Oz+o9Q0P/ou1s43WcRRC2sECCkunBSh+efwK3FDo9SSTJmitxcS6hCg1b03t1Zje1xWw
+ W3dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769035104; x=1769639904;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xdKC+tSKytwRcrB9zU/qNc8ORyWr8hBqnDbzuJdoRds=;
+ b=FDfdifOjQgsUVRWpDjURH47BPf5j4EZe/WAXntREdWVNCNy6cK3PsPMXx8yl7WGwEy
+ 0Ejwmn4XHk5VW+6bDbSjrHQSJIL7nZGzxrQRO4oAvYG2P/wtLbBTTidvLnMUqwjfucJH
+ A4VWoqG45/0ukTNglFSmmoxe2IW2Tcn8zHsW6EYChzLZ1c+vvFilC764mEh1UQb3iKz2
+ al7ZNSHvEOl1fLFWK04iVek9FKVjMwipOMgFTIAyszJtlp5k9aZBsj8RgDM0SNtcGK8C
+ /KB2PsFyqbp8eQU3OK+ZVr1xlfNEuDdQWSVsUFIjTu13+JKJRlp4Q8x7KuZ3XjfFtZtu
+ wnbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcpgnONkJf1kOq+B67XDpSPYOMRHqa0b8SVjMck1B3BG1JSECzC5Db4UO9WArCbBM4qvzTSCE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzn/KX+Utt8ZmcWZW9+azZXKNPyZ4OohJ5b5U3nhkrXPKmVFZEZ
+ +jvHdNTIkJ06AislaskJFTmUoWwGIV7IQzh3zg+MYpfbB4vMXeWP8IIQ2Vdi9dNv8JI=
+X-Gm-Gg: AZuq6aJL1Cuq4M/PB0wYryCYMps6B267yyrKrBZCDdMACUFuMTB6gUjrw15tSq7mJrT
+ 3x7g1fiVhmAfACG7GRQInX6DN2TAKCbubVLD+jLWMeAGjjB1bbKkZMRSFD1/rURHTkEcRo+AhPy
+ y0H/CzdAhG4/RqQAdXNDkhfhV+3oxtUZGcm17C1Y5CW4Jeez6NdFXf6PxH1lwJxnvWum/ggIxgP
+ j8VE5B/YdOCOPi3RPJCVvATnGF+dutD3NWynAh1Aw0BQskDYJzAoAwyTqx/f+LD8kTagdO5FCUr
+ EsRrIEcgnWOWYo7vybBCR2+MIXNJ91AzF1ZNyJbvFeRoc8bVE792b+ApeWyGHUIiE7DC0vra1NZ
+ Pz24SFK8ByXR0urMFPsvn70si2miTQeGjIRYcAotAVtB8nXBpTfKfaOSqjNHO/o7XCdm9Mzd/hZ
+ /5X/SeQOc4iZ4o
+X-Received: by 2002:a05:6820:1ca8:b0:662:bd3d:9f1c with SMTP id
+ 006d021491bc7-662bd3da17cmr1073442eaf.53.1769035104409; 
+ Wed, 21 Jan 2026 14:38:24 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:9a8b:7a9:24fa:a0a])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4044bd150dasm12452458fac.14.2026.01.21.14.38.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jan 2026 14:38:23 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/3] mmc: mtk-sd: DMA support
+Date: Wed, 21 Jan 2026 16:36:23 -0600
+Message-Id: <20260121-mmc-mtk-dma-support-v1-0-3764b487c087@baylibre.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] usb: xhci: fix DMA address corruption in abort_td
-To: ANANDHAKRISHNAN S <anandhakrishnansasidharan@gmail.com>,
- u-boot@lists.denx.de
-Cc: bmeng.cn@gmail.com, trini@konsulko.com, mkorpershoek@kernel.org,
- ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
-References: <20260120145055.233298-1-anandhakrishnan.s@dicortech.com>
- <20260121170631.556826-1-anandhakrishnan.s@dicortech.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260121170631.556826-1-anandhakrishnan.s@dicortech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 6ije8tmcnjz8cn9b4j8trh1jgqp44h1d
-X-MBO-RS-ID: 15364952930129c3ae9
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBtQo4iuEi1MpxrCErUIpLsnL
+ d/i/wyRAlOEocoQ6ObI51Eg6wrMpo+VkG0xKKE6IZVA5wy6tKN1GuPl/RkSGrM0c2vbvtcEpfS
+ BFn7+6zi97wfC31ZgZQAAAA==
+X-Change-ID: 20260120-mmc-mtk-dma-support-ccf3b5d588ae
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>, "ht.lin" <ht.lin@mediatek.com>, 
+ Wenbin Mei <wenbin.mei@mediatek.com>, Julien Masson <jmasson@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=731; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=n1sNVlLvZhbE0Oi8JKs406krYADInErrX0RDjGaY5rk=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpcVU7UiyAAVOIpHAUbkR9KHjb4T/cggxBi97OB
+ iolD/GGwqWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaXFVOxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A5a4H+wZBoLspzeJ3+wWg06bJRF6sz/RWnb2fUwQ5pVg
+ F00HPm5WLIp7kFLE4/8/yhsjbBFZQvi7HHLWwnI+/8+peVNQRd1zxHyPwWx8CpjeUNSf80HBPrj
+ FdkdwGtGqq5TGgBAB34NLpDkWcdnMK83Cfq9GzuBSDjy8EdvE8uDmRMWKYygTqtPfgrJ3HfhReA
+ VdWSK6pacr1WXr2PWZ8C9u+dFrrxtDtg1bUgALWaXAkYwBKHBbKQW1GSCG/98979b9hXW0bXo9G
+ 0ZWXh4+NoUZnY5w+TRMf99knrU56u1zRRa17hbr92W3n799kT+N7aGpUn/e9ySdgpWOyDZUhl9d
+ Wp9Q=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Thu, 22 Jan 2026 00:20:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,49 +124,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/26 6:06 PM, ANANDHAKRISHNAN S wrote:
-> When aborting a Transfer Descriptor (TD), the xHCI driver updates the
-> device dequeue pointer by converting the virtual enqueue TRB pointer
-> into a DMA address.
-> 
-> Previously, the code OR-ed the ring's Dequeue Cycle State (DCS) bit into
-> the virtual TRB pointer before passing it to xhci_trb_virt_to_dma().
-> This produced an unaligned virtual address (e.g. ending in 0x...1).
-> 
-> Inside xhci_trb_virt_to_dma(), the offset calculation:
-> 
-> segment_offset = trb - seg->trbs;
-> 
-> operated on this unaligned pointer, resulting in an incorrect TRB index.
-> In wraparound cases, this caused the bounds check to fail and the
-> function to return 0.
-> 
-> As a result, a SET_DEQ_PTR command was issued with a DMA address of 0x0,
-> leading to controller hangs and transfer timeouts, most commonly when
-> aborting TDs near the end of a ring segment (e.g. index 63).
-> 
-> Fix this by translating the aligned virtual TRB pointer to a DMA address
-> first, and only then applying the DCS bit to the resulting physical
-> address.
-> 
-> Changes in v3:
+Here is a patch to add DMA support to the MediaTek MMC driver (mtk-sd).
+I also took the opportunity to clean up the driver a bit by making use
+of GENMASK() and FIELD_PREP() macros first.
 
-The changelog should be below --- , else it gets included in the commit 
-when it is applied.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (2):
+      mmc: mtk-sd: use GENMASK and FIELD macros
+      mmc: mtk-sd: fix misaligned brace
 
-> - Simplified the DMA address calculation by removing the redundant
->    bit(0) mask (& ~0x1ULL), as XHCI guarantees the address is already
->    aligned.
-> 
-> Changes in v2:
-> - Apply the same fix to reset_ep()
-> - Simplify cycle bit handling to a single mask operation
-> 
-> Signed-off-by: ANANDHAKRISHNAN S <anandhakrishnan.s@dicortech.com>
-> ---
+ht.lin (1):
+      mmc: mediatek: add DMA mode support
 
-i.e. patch changelog goes HERE
+ drivers/mmc/mtk-sd.c | 519 +++++++++++++++++++++++++++++----------------------
+ 1 file changed, 301 insertions(+), 218 deletions(-)
+---
+base-commit: a334853922a3cd87c70033d02d1367991dc66bc9
+change-id: 20260120-mmc-mtk-dma-support-ccf3b5d588ae
 
->   drivers/usb/host/xhci-ring.c | 10 ++++------
->   1 file changed, 4 insertions(+), 6 deletions(-)
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
+
