@@ -4,168 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8BE4D262B2
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 06:54:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1E1D262B0
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 07:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36B518397D;
-	Wed, 21 Jan 2026 07:54:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
+	by phobos.denx.de (Postfix) with ESMTP id EA6468341A;
+	Wed, 21 Jan 2026 08:21:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="O5oj4Gar";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AcmwKhEB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD3D5839D5; Wed, 21 Jan 2026 07:54:51 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id E5F1F8397D; Wed, 21 Jan 2026 08:21:50 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D9778341A
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 07:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 792AB82A9E
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 08:21:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=vaisala.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tomas.melin@vaisala.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ynILlyFHXNzdiKZzrZNfl2O3d6uTgRhqUbQrUqNJM35zJXdYE4jbYELVNtQlfWzvHrmyeJQTdidzQsG2S4QP+2RyjVQ02N+q+XreEYvO8oJVsCC37SIOYuO4NHoar1wQzGSFN+sdiR9eaT05hzPm+tlfdJHUqamZ513JZGCDfimsLN2Yf9DtIJe/45cXEGNBgLyQWknWT0V9kuhpAYrCsXVX2eXS3GAazGPJC2eRHXMgogyJJj+5JBS6TZrsEmB21nadww20N5ebea5LIQ6cuPe3+vU1TkJpAijKM26uylEs6aODnEX/qLBChTaeMZDXAZQOWlqap06lzb8daSD0Vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pAIq5PLls+CEiO6QwOOL1XhsVX0hPELykJbS1hm6RrE=;
- b=MBTKigpicLM3uFKMnoTi/TI0N6QkPHEfSiTEWJvaWIbEt3SVNwaJcE7mZ03Qkb82tuJPWwjso9m+wu+7I/jIWSnTjNTk6QYNivPVuWUYoiXaSiZpjJQl4+XxEY6vgcs1MdrHVDSJGn4/ep2rIE5U9vcMZiH09XFXozeZtEEoOI1fOttBr//4pNIqnG36OpYD01xKhQyp1jF3rgiaPmYSIeXIfuffLUgkrLUHhEDUvbH9BtbFWEASVdp2J+Fd5gYFi1yrqtOM6I5Pr/pVzTurNXb8yrHQQeKlFxGmOokjibKOV7fq7CI74+JwBttcyV528zWmGlSK131O5d45AV3UKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pAIq5PLls+CEiO6QwOOL1XhsVX0hPELykJbS1hm6RrE=;
- b=O5oj4Gar3Xg8lP2NrvJuGIEzOKMvYolj9WoAu+DBX772NUCt5IyEQ7sCMAHmJzsdtOA+j6ykDZgIFXsUXXtuMTQupqxeKSWP2FzHyRR0YTqX/yAB7+F/1zDFKzts4Ha09tdYbuHaQLY8s61c3AePGJJr0Y+QKdytyOy8qIYUwklFS4H5ODWtkgedvqTeS1PV+iv7AdIf5VMahTTDedBdQU4mCHB3gqsKoZVEARnZrZtheMuje0bO7Nvm75p/RPaMiGK3MoZZxXX07RkV+n6J7DIWXXmCaXvkKOuEo2q04+4zg3rtSoZYchZa03pbe2Bu/mDse8BfwNpg+nKCPDQG+g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AMBPR06MB10365.eurprd06.prod.outlook.com (2603:10a6:20b:6f0::7)
- by AM0PR06MB6497.eurprd06.prod.outlook.com (2603:10a6:208:1a2::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Wed, 21 Jan
- 2026 06:54:46 +0000
-Received: from AMBPR06MB10365.eurprd06.prod.outlook.com
- ([fe80::4606:8e25:96e6:bede]) by AMBPR06MB10365.eurprd06.prod.outlook.com
- ([fe80::4606:8e25:96e6:bede%5]) with mapi id 15.20.9542.008; Wed, 21 Jan 2026
- 06:54:46 +0000
-Message-ID: <a10d44f9-028c-4b0c-8266-e681a6bed6e8@vaisala.com>
-Date: Wed, 21 Jan 2026 08:54:44 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] rtc: zynqmp: Add clock framework support with
- calibration fallback
-To: Pranav Tilak <pranav.vinaytilak@amd.com>, u-boot@lists.denx.de
-Cc: git@amd.com, michal.simek@amd.com, Padmarao.Begari@amd.com
-References: <20260120110056.3640303-1-pranav.vinaytilak@amd.com>
-Content-Language: en-US
-From: Tomas Melin <tomas.melin@vaisala.com>
-In-Reply-To: <20260120110056.3640303-1-pranav.vinaytilak@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: GV3P280CA0042.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:9::34) To AMBPR06MB10365.eurprd06.prod.outlook.com
- (2603:10a6:20b:6f0::7)
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 0D1BE60007;
+ Wed, 21 Jan 2026 07:21:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3058DC116D0;
+ Wed, 21 Jan 2026 07:21:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1768980105;
+ bh=aAMzCC1FS6MCPlhfM0QEdzduxaPQCvI6FfqTLA1Ase4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=AcmwKhEBmhKFsTKHn7YPVQbQWKMUoED45YJ8baGzstx3hzelJrxzaf0ZClK9KyFLw
+ IhhUGkSL7nEzeXDQ6KUcvf2yyVCvvQ0m+IKpcQSOhUpT768SyanCDTiRjNVubDGfmH
+ o8TGRIpzJyhOfZQ6ZouOTzFb+lam+1ZXYhsSG2e2fCaN7J9gvMApiSeDVyS2QRO6jG
+ QWW6l+X5zGVbupZrGrhihq1pmUI2JXRtdB9Til0BntIyHCPuo48deJ/LDN2E5zHN7T
+ az0XnW7aP7CCtRSFEPuyuwDb1xMwSIj0TzuKuQsQmPeYrD3ptJNBZZk8mPd9q8is2X
+ +yHyIJSIeD+pw==
+Date: Wed, 21 Jan 2026 12:51:39 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, jens.wiklander@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
+ jorge.ramirez@oss.qualcomm.com,
+ varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH 2/2] configs: Add generic qcom_tfa_optee_defconfig
+Message-ID: <aXB-g6Tb0ihXWAet@sumit-xelite>
+References: <aWjc04IqdiZPR1e4@sumit-xelite>
+ <1d162515-9bf3-4bf4-90fe-6d2cc37cacfc@linaro.org>
+ <aWjrLF9DUPTaSA1c@sumit-xelite>
+ <63eb28ff-7a52-4c60-a206-e79af508f112@linaro.org>
+ <aWnhdIwtgqclaTVq@sumit-xelite>
+ <dc3c2b6d-16fe-4a52-ba9b-35bfd268c5e2@linaro.org>
+ <aWnujB7lF3dqnmpe@sumit-xelite>
+ <6a34ddeb-d3b3-4d7f-a91e-0c40e6ec9a2d@linaro.org>
+ <aWosSZA2Qw8mXeIe@sumit-xelite>
+ <1c0bf780-0d45-4d2a-abc8-bcdd1fd83aa2@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMBPR06MB10365:EE_|AM0PR06MB6497:EE_
-X-MS-Office365-Filtering-Correlation-Id: c76d914b-9a99-471a-c659-08de58b9f65f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?R0M0K3d3Z1F2dGNreDFobXlKTE81NHVDOVg1SEdTcGdTMFV2MVFXT0x0bzRS?=
- =?utf-8?B?M0pzMVVyQWZLSUtMVUxCMnZZWDN3SzhmVVVlc2E5bDBzZWlvSzRBa1RDVVAy?=
- =?utf-8?B?akpOTmVHNDFjWldzTy9LOXpGcERDV2ZITlo1UGxxNWdwT1FIMjgyOFZ4UjU4?=
- =?utf-8?B?dUo2eWtJYW5XNU0rSEpOQnEvY2NScXBJRXZBYjEzcXhDYlBXTjJiTFcrc3Qz?=
- =?utf-8?B?dXJXOWQ5bkNqL2phclNpUW9ra1Y4L0hhUkRIbTY3YkgyMTFvSHRNeEV6dGtt?=
- =?utf-8?B?UFFCU0JxaWR0OUpFcTVPamxsSXNoU1ZTWW9qcE93cTgvcFRhY0svWWo5NUJE?=
- =?utf-8?B?Uk0rU1NFTXZNVEg5N0ppR2phMVpNUmtmRE5rKzNGL1VMY2dmYXRtaXZDNi9u?=
- =?utf-8?B?YnhnVmRGKzRyU0dHM2IwVURZeXNIS1k0WTR6QmhVMUtFSmhDdjd0dFg3Wlhi?=
- =?utf-8?B?SkxacUpTdG9rTHg4QUVtUVppNmZlalBOUU9zSktxb0sxdG5TTDY2eDcrbTlo?=
- =?utf-8?B?TGNTMUl2ZEsvL0htQ1ZrUDR6S0RMT1dvU1lYa2w3RE0rc28xaGVZRUt2MkJu?=
- =?utf-8?B?WkY1a0dTOUhzQ0pneWpDZ0V6VVBLaFhsSXJRSGNNR3RZK3RHMTR1aXA5WkZD?=
- =?utf-8?B?RnpnY1lYbExKSFR1SXBSSzBiOHgyQm9iK0lNeml4Tll0OFd3amJQZHFCczhs?=
- =?utf-8?B?VkpzaEhKOHBMajlPUWZkS0xQN0xoUFlJTjNMc213em1tSmhlMTBPN2ZpbE90?=
- =?utf-8?B?WXVZaUNEQ0orMzBGYlpNeUJjNXdxamZDa0g5ZldLa1hEYmdKR2RDbEVXTHBm?=
- =?utf-8?B?QTlnY1lqOEZjU2FoZVloRURaazU3azBzSitYZTZNS2x2akVIU2s2RjUwTkpM?=
- =?utf-8?B?UC91Q05BRXAyRUZoMk1XQ0tDK2VpT1dwT2xLbVY0OEZCMkpndUgwdU5jWUNo?=
- =?utf-8?B?Q0MvdElEa2RMMkxJU3J5RXdGaGhGZ0kzaGxEMG5TK24zRmRsZnp4TDM0Vlk2?=
- =?utf-8?B?UTY5VHdma3ZEWThWVW9ST2R1UkgvdXZmSzYwbUFNUzViUGdMditNVUpnMGM3?=
- =?utf-8?B?NGNXOVdnYldRTTBNRFhURXRsVTZJNUt4Z0hoYy9IdkkvM3JKbDNtN1AzdXUw?=
- =?utf-8?B?UWZaZ2Z2ekJ2dXRYY0Q3ajlIREtzN21GcnZaKzcxTjFVK2pvMytzd0pkSS9u?=
- =?utf-8?B?c0d6d2I1dndORlUvYjB5Y3hncmJZVWUvMG1YYzlsRkRvWHJxV3JQdklKNnRE?=
- =?utf-8?B?NEZ5T05LMmtiY242OGlGRmU0NmpLR2tjVHEzdXpKTnVBRUpEelUvam5TUHdh?=
- =?utf-8?B?VVR5S244eFNtSzVFUXh1TUpCdnJ3N1JVOUlVaVVuUm5FN1d1UHlWVXZROHBJ?=
- =?utf-8?B?cGQ2MnBVblNQQ0NuTmNWWmIrMnNxWVA4RjZuaW91YlJCTVhQNXVyam1VaWZR?=
- =?utf-8?B?TUJ0a3NzNnNTZEZkS3h6N0tWRHRCalh0cDgrOFBlcS9nOXFtMkNwU0pBZzVF?=
- =?utf-8?B?aDZWNi9NNVZ4cEQ1MzQrbnA4TUtJV3ZML2ZvcUdTdkNXeXJDdGxwVE0zcHNl?=
- =?utf-8?B?NncycjNGbkRhRmxYNUVBd1J4eWs4cXNpL1V5elRTaGt5YllBWldEbGE0cGl1?=
- =?utf-8?B?RXBWQlB1VHdqbkJ2V01iUk1xakhhdFJiUnJKeVB3QWJReWxtalRlaUljTlZ5?=
- =?utf-8?B?V041VXdDTkFYQloyOGhXZU5wVjUzVTYzK0VDNlZVWkpyRklOTVBLK285Tlhy?=
- =?utf-8?B?TEZYVCttZ0FIckpGSUtBd1N3UGNsaG5SUTFiejdFY04vUDh1N3BpVTI2QVhn?=
- =?utf-8?B?OGU1UkIvVVc0eFNBNEg0WklWdHl0WEpQWFA3Y01IS1FRSUpBRzZCRGFLUFRp?=
- =?utf-8?B?STBjWGVTS1Z3U0lmWUt3aERtcmdiVDB5eXdPaTdjK2NJZU1rdVp4LzNBOXFj?=
- =?utf-8?B?bEFTcUhocjgzSUNSZUZBcFFVZTRhdHV1c1VUME0rdWU1WHU1MVZ6MUtvbUxv?=
- =?utf-8?B?Vmo5b1U0QXFPc2x2Y0owNDVPcG9MdURaZEY5TFVXZnNaZTlpMWR2bHkzanJ6?=
- =?utf-8?B?bnRTN1hZUUNQUWd4TWpQSmVrTk8wVkZocDdGM2RCckxJZ3NRZ3hFdlVTMitz?=
- =?utf-8?Q?XjIg=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AMBPR06MB10365.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V2R5UnpOZ0lYL1lURi9wZlNIbTRmc2FmR0pQbzQwRTFKZjkvYWdHOTM1QUFX?=
- =?utf-8?B?TGt2WGY0QUZ2VmtPU1d1RitoK2IwTVFNeENxak5RbFlWbGVWdkdjL0d3elJj?=
- =?utf-8?B?NXNoRGQzWldmUTNEL3VaRCtVVkk5SFgrQ3ZLREJUQlduYVJseExFUUd6YStI?=
- =?utf-8?B?RzdXVkxySHh1TXVWZER1QlQrR0FRU09UZUFvWHh2TENDdU5kRHhsVGFZdW13?=
- =?utf-8?B?RTZvRXk5QlhqMEh3WVYyMjRXRkFEL0FoZ0lDbk0xTFR4dHVwblJFcmsrOCt3?=
- =?utf-8?B?L2FSRFRkYmlaQUdCNWtSeEtwaVVocmJJMTdSL3I0NmxEZE1DalBRTk1NQ20z?=
- =?utf-8?B?bXdBc094L3NZY2hNQ0lBdllmRTAwdXZkVnZXT1hIWTZUalUwZnF3NkdlSXZD?=
- =?utf-8?B?QWNhblVERllJOHBJQlBuQ0dtWnhOSHNXV0NvVGVkcTE3eUdYUlBGK1Q1dTFj?=
- =?utf-8?B?VTEvY1hIZFlSc0haQWZFdWY4dk53TSsyK05JZTVUTWZzVkdFZ0xQTUFaazJS?=
- =?utf-8?B?dWNSUWxSeEFDWkJjQlhvL3JDSWdoaXVqV1p3T1lJRGthcW5GN0Fvb3NHTVFU?=
- =?utf-8?B?S2dtQmtEWXZSdm1Ud2ZZQ0ljcXA3TUpwRGtXV1dpd2FQTkdabThxZWpOS1Nw?=
- =?utf-8?B?K05taG1UcVlKNS9LazE4WkN6eWZXK1N0anpBdWFwc3hBaDJBcnJKNDF4Q2xi?=
- =?utf-8?B?VTl0UzlkaTJKcWd1SitkQUNsSmowQk10SzhsaEFZOXpVQVB3a2oyckgycER4?=
- =?utf-8?B?RnhXMWhxNDN3ZllEWTg0OUw1cVNtQUVoL1VuYlJ1eE4zZjYyNzdQTWdwUUJZ?=
- =?utf-8?B?U1ZmVXFEMXZ4ZDFrTjd0VmhLZktCT3lvK0pScWpFOEg2a0NhV2k4eVBTUTVT?=
- =?utf-8?B?MFZwWkNHRUY1ODJFUVZiZWJsUUUxc1hnVy9MczhTbGhNWmR6NERyY081YXVl?=
- =?utf-8?B?R0EwdFdYRzdJMWlWS1JIRFpoRGdPeE9vNkZRRkVRSWpITlMzbHFycU8vQS8z?=
- =?utf-8?B?RTYvdHFESGEwRmo2YlhicmlJY3hyMTBlSkpnbUs3MCtPdDVCRW44SmhHNHNC?=
- =?utf-8?B?bWxPeWorbFVvckd6dFIxdkhDR0EweWFCeUJpRnBaeHl4Ujg1UzRGRlhyUWNR?=
- =?utf-8?B?aW5QMFdTTlBlZHFaZU5DYWtGQVJRWkxYTGtGbm56cGJQbWt5azh3YWlJT1RM?=
- =?utf-8?B?Y0hNcEI1bFhIVTBZVUZneG5GOXhNb3F1bCtuczhoUEp1b2diTEdXV2Evbkkz?=
- =?utf-8?B?UEZtcXZZdGQzNHZ2ckhsMElTOStmK2ZMOU9zQkdOZzNUQVpldFdMaFhhbzNR?=
- =?utf-8?B?cXptdVIySXlIM2owVFhFRjRqeUl6c1VKaE96aVRjcXQrcWJPdytyZ2xZeXFs?=
- =?utf-8?B?OU5wbWFsdUFDOG1QMldPNjRDeUdYZENMUVdhdE4xbGlMdmg4S2twYm1xYWNE?=
- =?utf-8?B?ZVhMZnJBc2hHcEcxTStQVDRhbjk2WW94S2tzbTFUYmlEejNuY3YrNThIL05F?=
- =?utf-8?B?ckdERDdOUFM1WHlvV3JSTE5ZcjZmczd4aXU1N0FnM0NuZ1JPdStOQ3ZDajNL?=
- =?utf-8?B?d1c4dzgvRVlCZS9aSStMRUlqRkJvVXBrVSt1a2FwTEUzd0JEK0I5eUMyUVlt?=
- =?utf-8?B?NklGdUlBc3FzVzFvd3hIYjk2Z3UxSmw5NGJ1UHdjZk12UVhQQUNLRE5ITGRJ?=
- =?utf-8?B?c3ZOcGpidmxERGFpTGw4dVQ3b2xoUEpCVmRWZEltalhsRVBCWkJOYVpSRUxz?=
- =?utf-8?B?Z0lXbjNmbjZLbVc3TDlFbXE0N1RWVjVsRWhyRCtndWp3MGVhU0lkR3c1bUVI?=
- =?utf-8?B?SE0zU2lQRStxK21uVzVmMTJDM2ZnTjhZTElkN1BTVzVQbWRZMUtTMnNNL09w?=
- =?utf-8?B?clBJL1hnYjdYRWs2U0lBMUZMMkFFTDNCSVJHVVpvZ2toV0IzdWJhZ1BOcVl3?=
- =?utf-8?B?U2ludm9sRzdVRXgwcXdGL1dCK2lYdmhlTTFXWHdhc2hSNjkvMzBmbmNTZXIw?=
- =?utf-8?B?S3ZpTzFmMW5kMFNvNWpBamtVUkxSbXJLWkJrZ25TOHZCaUthQzBuUzhmK1Uy?=
- =?utf-8?B?N0JlYzR1Nk9mVlgxRjI0ZFlURndkV2krNm1KR0p2QVgrd3VEL1p1amxsSmhJ?=
- =?utf-8?B?VkJITE5jc0FJTm5sdFp5MWNMZzNaeVBiS2xOek9LSkI1S2ovYTl6bUdPYUxh?=
- =?utf-8?B?azVaSE1icDFuN0JpUERYMC92MCsrbmNBNjVkSmQycS9xT3plOXErZVRoVzhO?=
- =?utf-8?B?dkhLbDNyYWJ6a2xoelVGWnIxSDhUUFVxWGkzY2xHdVErVkRDYU56U21PeUdn?=
- =?utf-8?B?K2Nwb3NpendHaUo3MkdyTXJSc203RHc5S0kxOEN6QmIyNDA1YnRSb3VpZ3Br?=
- =?utf-8?Q?aLwFfH+kAzJLaAnk=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c76d914b-9a99-471a-c659-08de58b9f65f
-X-MS-Exchange-CrossTenant-AuthSource: AMBPR06MB10365.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 06:54:46.0061 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gyr83KDJtXRorR74n8mK1o7kkUVNibrvg4vIoPPLG++2oDHN8OphAzkuoe8DAytE1GVRcjPJzaVuZQM0Y2AIkg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR06MB6497
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1c0bf780-0d45-4d2a-abc8-bcdd1fd83aa2@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,155 +80,442 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Fri, Jan 16, 2026 at 06:46:16PM +0100, Casey Connolly wrote:
+> Hi Sumit,
+> 
+> (Top-posting since this thread is getting a bit busy)
+> 
+> I'm not sure if Neil and I properly conveyed why we don't agree with your
+> proposal here: essentially it is an inversion of logic. CONFIG_OPTEE doesn't
+> indicate that the board IS running OP-TEE, it just builds in support for
+> OP-TEE. In general U-Boot is trying to trend away from using kconfig to
+> dictate behaviour in this way.
 
-On 20/01/2026 13:00, Pranav Tilak wrote:
-> Add support for reading RTC clock from device tree using clock
-> framework also update the default calibration value to 0x7FFF
-> as per RTC specifications.
-> 
-> Falls back to 'calibration' property if clock unavailable, and uses
-> default calibration if neither is present. Only writes calibration when
-> hardware register reads zero.
-> 
-> The calibration write previously in zynqmp_rtc_set() has been moved to
-> the probe function. The earlier implementation wrote calibration on
-> every time update to clear the tick counter, but since calibration is
-> now dynamically configured from clock framework or device tree during probe,
-> it only requires one-time initialization. This avoids repeated tick
-> counter resets and unnecessary overhead.
-> 
-> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+OP-TEE as TZ is an optional feature for any arm64 SoC. And even with
+U-Boot SPL as the initial boot-loader you get to decide via a Kconfig
+option whether to support OP-TEE or not. Similarly with TF-A BL31, you
+have to specify "spd=opteed" during build time if OP-TEE is supported or
+not. So indeed it's a build time configuration for firmware to support
+OP-TEE or not.
 
-Reviewed-by: Tomas Melin <tomas.melin@vaisala.com>
+> 
+> Adjacently, for Qualcomm support in U-Boot we are trying to improve upon the
+> status quo: we don't do board-specific code, we limit hardcoding
+> functionality or build-time configuration in favour of runtime checks as
+> much as possible.
 
-> ---
-> Changes in v3:
-> - Reorder includes alphabetically
-> - Update the commit message
-> 
-> Changes in v2:
-> - Rename variable from clk_freq to calibval
-> - Handle case where clock node exists but has no clock-frequency
->   property
-> - Treat invalid clock frequency as error instead of warning
-> - Move calibration validation outside if-else to apply to all code paths
-> 
->  drivers/rtc/zynqmp_rtc.c | 64 +++++++++++++++++++++++++++-------------
->  1 file changed, 44 insertions(+), 20 deletions(-)
-> 
-> diff --git a/drivers/rtc/zynqmp_rtc.c b/drivers/rtc/zynqmp_rtc.c
-> index 15122a04838..4fee75bf9cf 100644
-> --- a/drivers/rtc/zynqmp_rtc.c
-> +++ b/drivers/rtc/zynqmp_rtc.c
-> @@ -5,26 +5,30 @@
->  
->  #define LOG_CATEGORY UCLASS_RTC
->  
-> +#include <clk.h>
->  #include <dm.h>
->  #include <rtc.h>
->  #include <asm/io.h>
-> +#include <dm/device_compat.h>
->  
->  /* RTC Registers */
->  #define RTC_SET_TM_WR		0x00
->  #define RTC_SET_TM_RD		0x04
->  #define RTC_CALIB_WR		0x08
-> +#define RTC_CALIB_RD		0x0C
->  #define RTC_CUR_TM		0x10
->  #define RTC_INT_STS		0x20
->  #define RTC_CTRL		0x40
->  
->  #define RTC_INT_SEC		BIT(0)
->  #define RTC_BATT_EN		BIT(31)
-> -#define RTC_CALIB_DEF		0x198233
-> +#define RTC_CALIB_DEF		0x7FFF
-> +#define RTC_FREQ_MAX		0x10000
->  #define RTC_CALIB_MASK		0x1FFFFF
->  
->  struct zynqmp_rtc_priv {
->  	fdt_addr_t	base;
-> -	unsigned int	calibval;
-> +	unsigned long	calibval;
->  };
->  
->  static int zynqmp_rtc_get(struct udevice *dev, struct rtc_time *tm)
-> @@ -70,13 +74,6 @@ static int zynqmp_rtc_set(struct udevice *dev, const struct rtc_time *tm)
->  		 */
->  		new_time = rtc_mktime(tm) + 1;
->  
-> -	/*
-> -	 * Writing into calibration register will clear the Tick Counter and
-> -	 * force the next second to be signaled exactly in 1 second period
-> -	 */
-> -	priv->calibval &= RTC_CALIB_MASK;
-> -	writel(priv->calibval, (priv->base + RTC_CALIB_WR));
-> -
->  	writel(new_time, priv->base + RTC_SET_TM_WR);
->  
->  	/*
-> @@ -107,15 +104,6 @@ static int zynqmp_rtc_init(struct udevice *dev)
->  	rtc_ctrl |= RTC_BATT_EN;
->  	writel(rtc_ctrl, priv->base + RTC_CTRL);
->  
-> -	/*
-> -	 * Based on crystal freq of 33.330 KHz
-> -	 * set the seconds counter and enable, set fractions counter
-> -	 * to default value suggested as per design spec
-> -	 * to correct RTC delay in frequency over period of time.
-> -	 */
-> -	priv->calibval &= RTC_CALIB_MASK;
-> -	writel(priv->calibval, (priv->base + RTC_CALIB_WR));
-> -
->  	return 0;
->  }
->  
-> @@ -128,8 +116,44 @@ static int zynqmp_rtc_probe(struct udevice *dev)
->  	if (priv->base == FDT_ADDR_T_NONE)
->  		return -EINVAL;
->  
-> -	priv->calibval = dev_read_u32_default(dev, "calibration",
-> -					      RTC_CALIB_DEF);
-> +	ret = readl(priv->base + RTC_CALIB_RD);
-> +	if (!ret) {
-> +		struct clk rtc_clk;
-> +		unsigned long clk_rate;
-> +
-> +		/* Get the RTC clock rate */
-> +		ret = clk_get_by_name_optional(dev, "rtc", &rtc_clk);
-> +		if (!ret) {
-> +			clk_rate = clk_get_rate(&rtc_clk);
-> +			/* Use clock frequency if valid, fallback to calibration value */
-> +			if (clk_rate > 0 && clk_rate <= RTC_FREQ_MAX) {
-> +				/* Valid clock frequency */
-> +				priv->calibval = clk_rate - 1;
-> +			} else if (clk_rate == 0) {
-> +				priv->calibval = dev_read_u32_default(dev, "calibration",
-> +								      RTC_CALIB_DEF);
-> +			} else {
-> +				dev_err(dev, "Invalid clock frequency 0x%lx\n",
-> +					clk_rate);
-> +				return -EINVAL;
-> +			}
-> +		} else {
-> +			/* Clock framework unavailable, use DT calibration */
-> +			priv->calibval = dev_read_u32_default(dev, "calibration",
-> +							      RTC_CALIB_DEF);
-> +		}
-> +
-> +		/* Validate final calibration value */
-> +		if (priv->calibval > RTC_FREQ_MAX) {
-> +			dev_err(dev, "Invalid calibration 0x%lx\n",
-> +				priv->calibval);
-> +			return -EINVAL;
-> +		}
-> +
-> +		writel(priv->calibval, (priv->base + RTC_CALIB_WR));
-> +	} else {
-> +		priv->calibval = ret & RTC_CALIB_MASK;
-> +	}
->  
->  	ret = zynqmp_rtc_init(dev);
->  
+Not sure why you consider the OP-TEE feature being added here to be
+board specific. It is rather extending the qcom_defconfig to support
+OP-TEE based security features. For sure, we need to support similar
+board agnostic config fragments to enable UEFI secure boot with EFI
+runtime varibales based on OP-TEE RPMB storage.
 
+> 
+> With that perspective in mind, I would much prefer that switching from QTEE
+> to TF-A/OP-TEE on the rb3gen2 (or any other qcom board) not require flashing
+> a bespoke U-Boot build, the same build should just work on both.
+
+The bespoke U-Boot build is already required for QTEE based flows, see:
+- qcm6490_defconfig
+- qcs9100_defconfig
+- qcom_ipq5424_mmc_defconfig
+- so on..
+
+vs
+
+U-Boot build with OP-TEE flow:
+- qcom_defconfig + OP-TEE config fragment
+
+And the resulting u-boot.bin gets used as BL33 for fip.bin as shown
+here [1].
+
+[1] https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
+
+> 
+> There are several ways it might be possible to check for OP-TEE at runtime,
+> arguably the simplest is the SMC call I proposed (which could be restricted
+> to just kodiak),
+
+This is going to be board specific logic and not scalable.
+
+> the other idea that comes to mind is populating the x2
+> register with a magic number when jumping to U-Boot, or even using the
+> functionality already in place for passing data between bootloader stages
+> (assuming the necessary bits are upstream in both projects).
+
+Having a generic mechanism for passing data among bootloader stages is
+the way to go here. Firmware handoff spec here [2] provides a good
+reference for that. Although I don't see a specific bloblist tag which
+can be used to detect OP-TEE presence.
+
+Not sure why blocking this OP-TEE feature to be supported on Qcom
+platforms is a good idea until that firmware handoff mechanism get's
+realized on Qcom platforms. Also, even when the same U-Boot build can't
+be used for both QTEE and OP-TEE.
+
+[2] https://github.com/FirmwareHandoff/firmware_handoff
+
+> 
+> You say that making that SMC call on QTEE is undefined behaviour, but surely
+> it doesn't break stuff? I'd hope that simply seeing what happens would be
+> enough to define it, maybe checking with the boot team too.
+
+As I said it's going to be hit and trial approach using SMC calls which
+isn't scalable.
+
+> 
+> Your patch also mentions the EFI DT fixup protocol, but there is no
+> corresponding code for that. iirc there are other DT changes needed for
+> everything to work properly on rb3gen2 with OP-TEE, is the plan to get those
+> changes done in such a way that the same DT will work with both OP-TEE and
+> QTEE?
+
+With OP-TEE, we would be booting Linux in EL2 and there is corresponding
+DT work going on for QTEE with *_el2.dtso being added. So essentially
+the plan is to reuse same DT with *_el2.dtso overlay which is
+independent of whether OP-TEE or QTEE is running.
+
+However, even without that we have a functional boot to shell system
+that can be used for OP-TEE based use-cases development.
+
+-Sumit
+
+> 
+> - Casey
+> 
+> On 1/16/26 13:17, Sumit Garg wrote:
+> > On Fri, Jan 16, 2026 at 10:53:15AM +0100, Neil Armstrong wrote:
+> > > On 1/16/26 08:53, Sumit Garg wrote:
+> > > > On Fri, Jan 16, 2026 at 08:34:33AM +0100, Neil Armstrong wrote:
+> > > > > On 1/16/26 07:57, Sumit Garg wrote:
+> > > > > > On Thu, Jan 15, 2026 at 02:35:23PM +0100, Neil Armstrong wrote:
+> > > > > > > On 1/15/26 14:27, Sumit Garg wrote:
+> > > > > > > > On Thu, Jan 15, 2026 at 02:03:29PM +0100, Neil Armstrong wrote:
+> > > > > > > > > On 1/15/26 13:25, Sumit Garg wrote:
+> > > > > > > > > > + Jens (OP-TEE driver author in U-Boot)
+> > > > > > > > > > 
+> > > > > > > > > > On Thu, Jan 15, 2026 at 11:49:49AM +0100, neil.armstrong@linaro.org wrote:
+> > > > > > > > > > > On 1/15/26 07:10, Sumit Garg wrote:
+> > > > > > > > > > > > On Wed, Jan 14, 2026 at 03:56:02PM +0100, Casey Connolly wrote:
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > On 09/01/2026 12:02, Sumit Garg wrote:
+> > > > > > > > > > > > > > On Thu, Jan 08, 2026 at 05:41:42PM +0100, Casey Connolly wrote:
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > On 29/12/2025 12:43, Sumit Garg wrote:
+> > > > > > > > > > > > > > > > From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > Recently upstream TF-A/OP-TEE has started gaining support for Qcom
+> > > > > > > > > > > > > > > > platforms. RB3Gen2 being the first one and more to come. U-Boot in
+> > > > > > > > > > > > > > > > corresponding boot flow is packaged as a position independent executable.
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > So, lets add a generic U-Boot defconfig for Qcom platforms to support
+> > > > > > > > > > > > > > > > TF-A/OP-TEE based TrustZone stack. Build command:
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > $ make qcom_tfa_optee_defconfig
+> > > > > > > > > > > > > > > > $ make -j`nproc` DEVICE_TREE=qcom/qcs6490-rb3gen2
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > This would be better suited as a config fragment rather than a new
+> > > > > > > > > > > > > > > defconfig imo.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > That's fine with me to add it as a config fragment.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > But more importantly, enabling OPTEE support in U-Boot doesn't imply
+> > > > > > > > > > > > > > > that it will be used, just that it's supported.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > There are real use-cases of OP-TEE in U-Boot for Qcom platforms like
+> > > > > > > > > > > > > > secure EFI variables based on OP-TEE secure storage. Have a look here [1].
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > And sure there will be more such use-cases like fTPM, KASLR etc. can be
+> > > > > > > > > > > > > > supported based on OP-TEE.
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > I was referring literally to the fact that CONFIG_OPTEE being enabled
+> > > > > > > > > > > > > doesn't imply that OP-TEE is running, it's faulty logic to assume that's
+> > > > > > > > > > > > > the case and add nodes to the DT.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > I don't disagree here as having a runtime check is always a better
+> > > > > > > > > > > > choice then a compile time config option. However, there isn't a common
+> > > > > > > > > > > > info method from properietary firmware that says if QTEE is running
+> > > > > > > > > > > > instead of OP-TEE.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > I just checked and there is an SMC call that tells you the UUID for the
+> > > > > > > > > > > > > trusted OS, referred to as OPTEE_SMC_CALL_GET_OS_UUID in U-Boot and
+> > > > > > > > > > > > > OPTEE_ABI_CALL_GET_OS_UUID in OP-TEE. Presumably this identifies OP-TEE
+> > > > > > > > > > > > > specifically.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > Also, we don't know how the QTEE will react to this OP-TEE specific SMC
+> > > > > > > > > > > > call given it's different variants running on legacy and the newer SoCs.
+> > > > > > > > > > > > So I would suggest to better gate OP-TEE presence behind a compile time
+> > > > > > > > > > > > check only.
+> > > > > > > > > > > 
+> > > > > > > > > > > So you say it's fine to add the optee node, and the driver will bail out if
+> > > > > > > > > > > OPTEE is not present, but it's not good to call OPTEE_SMC_CALL_GET_OS_UUID
+> > > > > > > > > > > in the fixup code to enable OPTEE only if present ?
+> > > > > > > > > > > 
+> > > > > > > > > > > It's literally the same, my point in https://lore.kernel.org/all/b60d5ee7-fa27-4dc1-8a09-964912ec5654@linaro.org/
+> > > > > > > > > > > was exactly that, just call OPTEE_SMC_CALL_GET_OS_UUID and add the OPTEE
+> > > > > > > > > > > node only if present _AND_ if CONFIG_OPTEE is enabled.
+> > > > > > > > > > > 
+> > > > > > > > > > > Move the CONFIG_OPTEE enable in a fragment and we're done, you will only
+> > > > > > > > > > > select OPTEE explicitly on desired platforms, and won't run the naughty
+> > > > > > > > > > > OPTEE_SMC_CALL_GET_OS_UUID on old crappy platforms.
+> > > > > > > > > > 
+> > > > > > > > > > I am still trying to understand what benefit does invoking
+> > > > > > > > > > OPTEE_SMC_CALL_GET_OS_UUID from platform code provides us. Surely it
+> > > > > > > > > > can't be used to detect OP-TEE not present when QTEE is running due to
+> > > > > > > > > > unknown behaviour with QTEE.
+> > > > > > > > > 
+> > > > > > > > > Sorry but what exactly do you expect that will happen if you enable the OPTEE
+> > > > > > > > > driver when running with QTEE ?
+> > > > > > > > 
+> > > > > > > > The OP-TEE SMC calls are not at all supported with QTEE, so the expected
+> > > > > > > > behaviour is undefined. IOW, the OP-TEE SMC ABI is not compatible with
+> > > > > > > > QTEE. However, it's going to be hit and trial method to see what QTEE
+> > > > > > > > responds to OP-TEE SMC calls. So it's not a reliable source of
+> > > > > > > > information we can use to detect which TEE is present or not.
+> > > > > > > 
+> > > > > > > So until we know, this change is a no go, we can't just add the /optee node
+> > > > > > > and hope the person building uboot did the right thing.
+> > > > > > 
+> > > > > > Not sure why you think Qualcomm platforms are special in this regards
+> > > > > > when similar OP-TEE node additions based on CONFIG_OPTEE exist for other
+> > > > > > platforms, see example here [1] [2] [3].
+> > > > > > 
+> > > > > > The OP-TEE configs will surely be part of a separate config fragment and
+> > > > > > I can add comments there for developer's awareness.
+> > > > > > 
+> > > > > > [1] arch/arm/dts/imx8mm-u-boot.dtsi:10
+> > > > > > [2] arch/arm/dts/imx8mn-u-boot.dtsi:10
+> > > > > > [3] arch/arm/dts/imx8mp-u-boot.dtsi:11
+> > > > > > 
+> > > > > > > 
+> > > > > > > I propose an alternate way, is to check for QTEE and then test for OPTEE.
+> > > > > > 
+> > > > > > There are more combinations rather than just QTEE or OP-TEE as follows:
+> > > > > > - Older targets have support for QSEECOM
+> > > > > > - Newer targets with QTEE support
+> > > > > > - Chrome targets without any TEE support
+> > > > > > - IoT targets with OP-TEE support
+> > > > > > 
+> > > > > > Do you have any particular mechanism in mind for detecting OP-TEE
+> > > > > > presence at runtime? And surely that has to be well supported on variety
+> > > > > > of SoC where U-Boot is supported as of now.
+> > > > > 
+> > > > > OPTEE_SMC_CALL_GET_OS_UUID which works fine on like all the other ARM based
+> > > > > platforms.
+> > > > 
+> > > > Can you share at-least one example of other Arm based platform where this
+> > > > SMC call is used to add OP-TEE DT node?
+> > > 
+> > > AFAIK no other platforms does that, I never said it was a standard thing,
+> > > I said it would be necessary to avoid messing with the qualcomm proprietary
+> > > boot chain.
+> > > 
+> > > > 
+> > > > > 
+> > > > > It's the only way, and only Qualcomm engineers can answer how to determine
+> > > > > without any risk which TEE is running on the system.
+> > > > 
+> > > > The fact that you keep ignoring my responses that OP-TEE SMC ABI is not
+> > > > compatible with QTEE/QSEECOM SMC ABI is not going to change (see [1]).
+> > > > 
+> > > > I am not sure why it's a blocker to use CONFIG_OPTEE for OP-TEE DT node
+> > > > addition on Qcom platforms when the same criteria is being used for imx8*
+> > > > platforms already.
+> > > 
+> > > It is not, if the node is present the it's fine. I'm concerned by adding
+> > > the node when CONFIG_OPTEE is enabled.
+> > > 
+> > > Usually, the ARM64 platforms are shipped with a well-known or compatible
+> > > boot chain like TF-A, and OPTEE is present or not. Those platforms
+> > > will add the optee node knowing it can be present, and knowing other TEE
+> > > won't crash if OPTEE_SMC_CALL_GET_OS_UUID is called.
+> > > 
+> > > You propose the other way, adding the optee node when config is present,
+> > > not knowing exactly if the current system has optee or a qualcomm proprietary
+> > > TEE that could not survive a OPTEE_SMC_CALL_GET_OS_UUID call.
+> > 
+> > Maybe I should have provided reference to the overall open boot stack [1]
+> > early which is being planned for IoT platforms to begin with. The PR for
+> > meta-qcom is here [2]. We are mostly waiting for the OEM only signing
+> > feature for TZ image to be available in XBL_SEC such that any developer
+> > can excercise that stack:
+> > 
+> > PBL (ROM) -> XBL -> TF-A BL2 -> TF-A BL31 -> BL33 -> Linux kernel
+> >                                      |
+> >                                       --> OP-TEE as BL32
+> > 
+> > TF-A and OP-TEE are going to be supported in a similar fashion on Qcom
+> > platforms as any other ARM64 platform.
+> > 
+> > [1] https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
+> > [2] https://github.com/qualcomm-linux/meta-qcom/pull/1172
+> > 
+> > > 
+> > > So my suggestion is:
+> > > - ask the boot team a sequence/way to determine exactly which TEE is loaded (using SMC, smem or whatever)
+> > > - only add the optee node if OPTEE or a compatible TEE is present
+> > > 
+> > > Then if CONFIG_OPTEE is enabled & the node is present the driver will
+> > > be able to communicate with OPTEE.
+> > 
+> > Hence, OP-TEE is going to be supported in a developer controlled
+> > environment only like any other ARM64 platform. So there is intention to
+> > reuse the same workflows here. Since it's an open source boot stack then
+> > it should be possible to use generic methodology if community comes up
+> > with that later in future. That's why we should avoid Qcom specifc
+> > platform code to enable such a feature apart from what others do.
+> > 
+> > -Sumit
+> > 
+> > > 
+> > > > 
+> > > > [1] https://lore.kernel.org/all/aWjrLF9DUPTaSA1c@sumit-xelite/.
+> > > > 
+> > > > -Sumit
+> > > > 
+> > > > > 
+> > > > > Without this, all this discussions is pointless.
+> > > > > 
+> > > > > > 
+> > > > > > Also, there is added complexity for targets where the developer can't
+> > > > > > change the TZ firmware themselves on Qcom SoCs due to QTI signing
+> > > > > > requirement.
+> > > > > > 
+> > > > > > -Sumit
+> > > > > > 
+> > > > > > > 
+> > > > > > > Neil
+> > > > > > > 
+> > > > > > > > 
+> > > > > > > > -Sumit
+> > > > > > > > 
+> > > > > > > > > 
+> > > > > > > > > > 
+> > > > > > > > > > Jens,
+> > > > > > > > > > 
+> > > > > > > > > > Will it be fine with you to expose is_optee_api() from the OP-TEE driver
+> > > > > > > > > > for the platform code to invoke it independently? Just for the sake of this
+> > > > > > > > > > discussion in case people still insist on it being the right thing to do.
+> > > > > > > > > > 
+> > > > > > > > > > -Sumit
+> > > > > > > > > > 
+> > > > > > > > > > > 
+> > > > > > > > > > > Neil
+> > > > > > > > > > > 
+> > > > > > > > > > > > 
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > My suggestion would be to make this SMC call if CONFIG_OPTEE is enabled
+> > > > > > > > > > > > > in qcom_psci_fixup(), compare the UUID and add the node if it matches.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > That's exactly the first SMC call that U-Boot and Linux OP-TEE driver
+> > > > > > > > > > > > does to compare the UUID here [1] and bail out of the driver. I don't
+> > > > > > > > > > > > see a value of a redundant invoke in the Qcom specific platform code.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > [1] drivers/tee/optee/core.c:823:   if (!is_optee_api(pdata->invoke_fn))
+> > > > > > > > > > > > 
+> > > > > > > > > > > > -Sumit
+> > > > > > > > > > > > 
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > [1] lib/efi_loader/efi_variable_tee.c
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > So I think the more appropriate patch here would be to just enable
+> > > > > > > > > > > > > > > OP-TEE in qcom_defconfig (assuming the binary size isn't significantly
+> > > > > > > > > > > > > > > affected).
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > The OP-TEE driver in U-Boot itself is probed based on DT and it's not
+> > > > > > > > > > > > > > only specific to Qcom platforms but every other platform using OP-TEE.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > Considering the other patch is based on this assumption that if OP-TEE
+> > > > > > > > > > > > > > > support is enabled then the board must be using it, a different approach
+> > > > > > > > > > > > > > > is definitely needed.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > Yeah that's true even with TF-A boot flow, there is possibility to boot
+> > > > > > > > > > > > > > without OP-TEE as well. However, TF-A generally doesn't provide a
+> > > > > > > > > > > > > > generic option to detect whether OP-TEE is running or not.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > When I was looking into this last year I remember discussing this same
+> > > > > > > > > > > > > > > issue from the Linux side, there is a good argument to be made that
+> > > > > > > > > > > > > > > OP-TEE support in Linux shouldn't be based on the devicetree -
+> > > > > > > > > > > > > > > particularly in the Qualcomm case where whether or not OP-TEE is used is
+> > > > > > > > > > > > > > > a simple software change, nothing to do with hardware.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > Sadly it's true for every other silicon vendor too. But OP-TEE support
+> > > > > > > > > > > > > > based on DT has become an ABI unless migration for OP-TEE support based
+> > > > > > > > > > > > > > on FF-A comes into picture.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > So in general I'm not particularly keen on this approach, I think it
+> > > > > > > > > > > > > > > /might/ be acceptable for U-Boot to have some fixup code to add the
+> > > > > > > > > > > > > > > OP-TEE node if OP-TEE is in use with the idea of phasing that out in
+> > > > > > > > > > > > > > > favour of runtime detection in the OS itself. I'd also expect that fixup
+> > > > > > > > > > > > > > > code to go in the generic U-Boot DT fixup code that runs before we jump
+> > > > > > > > > > > > > > > to the OS (like the EFI DT fixup function).
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > The EFI DT fixup code is already there based on U-Boot DT. Have a look
+> > > > > > > > > > > > > > here:
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > boot/image-fdt.c:627:   fdt_ret = optee_copy_fdt_nodes(blob);
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > In general on Arm platforms there isn't any SMC bus to detect
+> > > > > > > > > > > > > > dynamically if there is support for OP-TEE or not. That's why
+> > > > > > > > > > > > > > platform bus was choosen for the U-Boot and Linux OP-TEE driver. It's
+> > > > > > > > > > > > > > similar to how we have the SCM DT node for Qcom platforms.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > FF-A bus tries to solve that problem to unify that approach for future
+> > > > > > > > > > > > > > platform but U-Boot hasn't yet gained support for FF-A based OP-TEE
+> > > > > > > > > > > > > > driver too.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > Anyhow, this is the sanest way I can come up with to enable OP-TEE
+> > > > > > > > > > > > > > support in a general way for all the Qcom platforms. This is aligned
+> > > > > > > > > > > > > > with how OP-TEE support is detected for other silicon vendors too.
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > -Sumit
+> > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > Kind regards,
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > For more information refer here:
+> > > > > > > > > > > > > > > > https://trustedfirmware-a.readthedocs.io/en/latest/plat/qti/rb3gen2.html
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > > > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > > > >        configs/qcom_tfa_optee_defconfig | 7 +++++++
+> > > > > > > > > > > > > > > >        1 file changed, 7 insertions(+)
+> > > > > > > > > > > > > > > >        create mode 100644 configs/qcom_tfa_optee_defconfig
+> > > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > > diff --git a/configs/qcom_tfa_optee_defconfig b/configs/qcom_tfa_optee_defconfig
+> > > > > > > > > > > > > > > > new file mode 100644
+> > > > > > > > > > > > > > > > index 00000000000..c398521770f
+> > > > > > > > > > > > > > > > --- /dev/null
+> > > > > > > > > > > > > > > > +++ b/configs/qcom_tfa_optee_defconfig
+> > > > > > > > > > > > > > > > @@ -0,0 +1,7 @@
+> > > > > > > > > > > > > > > > +# Configuration for building a generic U-Boot image
+> > > > > > > > > > > > > > > > +# with support for TF-A/OP-TEE based Arm TrustZone stack.
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +#include "qcom_defconfig"
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +CONFIG_TEE=y
+> > > > > > > > > > > > > > > > +CONFIG_OPTEE=y
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > > > -- 
+> > > > > > > > > > > > > > > // Casey (she/her)
+> > > > > > > > > > > > > > > 
+> > > > > > > > > > > > > 
+> > > > > > > > > > > > > -- 
+> > > > > > > > > > > > > // Casey (she/her)
+> > > > > > > > > > > > > 
+> > > > > > > > > > > 
+> > > > > > > > > 
+> > > > > > > 
+> > > > > 
+> > > 
+> 
