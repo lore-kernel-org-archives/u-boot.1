@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA11C44536
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 14:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1139C44536
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 14:57:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EAE58341A;
-	Wed, 21 Jan 2026 15:51:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18EEE8341A;
+	Wed, 21 Jan 2026 15:57:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KsDfiwre";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sdQHOSCP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22E928397D; Wed, 21 Jan 2026 15:51:42 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id C30DC839D5; Wed, 21 Jan 2026 15:57:37 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F22683015
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 15:51:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AD1D83015
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 15:57:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-45c838069e5so3808215b6e.0
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 06:51:39 -0800 (PST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so2548299fac.3
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 06:57:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769007098; x=1769611898; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769007454; x=1769612254; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Wcdxnd5IbXmkqHfdt+Uui/ZYliWJEqhBgDVQUK8NBe0=;
- b=KsDfiwreqv5KTFFCLSSyawVR2J8s/AjwJabOfCDHq7AkTPEUqH6JpHSeb1S+8hedG1
- ySDOh0AF6DjLE4YcB5HlLnn+p8FJQX7YlMX9qBlwvJvK0qEnfJYw4fC6SIt7x1awNEeg
- EDsocgVVdAF+lAggBbfEBzk7z87qZXYKRM5mU=
+ bh=sbRrTaMMArHSFIM6PaT8EYSt5xvJwe/bkO04WPN7mec=;
+ b=sdQHOSCPXY8PxjOAY8ZNUP/kjQ0yKIR9sD38ye/keJxpyD+ebiFFcDKxTnZpHmWxio
+ /0LlGz8BFNJ4P1kD6AWS7jf+Ql0XasGc17+BwOgOpHTzwfoaOL/skEdHI67z4MXh/0/R
+ Q2S8udmo2JVYVFOzcK8EJ+FgGvXSb6uT5PFv0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769007098; x=1769611898;
+ d=1e100.net; s=20230601; t=1769007454; x=1769612254;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wcdxnd5IbXmkqHfdt+Uui/ZYliWJEqhBgDVQUK8NBe0=;
- b=CyRhgL/RrhP9fyOmKRM/8M0ZPUBEf899a1vB1daW4oSKCXo33p569/d5WoW1iu0d59
- 4qAtd/DVpbjnd0SzotMmraa9QrKlexVy6E0Ny6loV43/Uz/CY+Q5wOWCAn0OoDsChxqS
- B3o1iTh6bk51WuAzEFE6SSKLYiMjuXlQ3C0U4JFEir1LWCUC2wpuAzVfvSd83CqN6tdX
- 8u/ek7RK165Uxu9zYCipMFywAhXO7IiJ55tKblwtn9WXZfbro5Y4i2kpr3m8FJTOGoaw
- FG8ZQJ5eaphWJB4cLdFrvgMfuUEVgEUGY4EmMkMHO/Q0f6lAQHueSnmJBPuvMOCylSP7
- xbSg==
-X-Gm-Message-State: AOJu0Yzy3u2HWbucvcjXG52OvnSwdJ4QYY6T/l9a1xz3fT6aOkFWCPHE
- 7QwCkIFV0c43lTJi9NcZMRAnb6vE2ZBsK7HshWty+RpDdYPpkEYETuPbZ3h6oyCyzDo=
-X-Gm-Gg: AZuq6aImaTc8rwvDrDOstfpsb8K5pvt+GLGrFC1ZOHGdV0BAXV5Svpg0ciysStUNcXO
- bnT0UGsptdwu4LmoyTHLzxWac5HJP60omgU8xWDnqUTv7FPhYVweiB8GIO+pRxJTDnxHlzj92BU
- n7HXqGXxY+zvJ1OrlDeLkj1i3IePVzNXdHvNweSlSx+++4d+8Rbxi2JxWgATSCNkcwdjj8HRY+V
- ZfReiJSL5ae5pqLbvazoG6fC3ro7m6zxzT36YrsI42Ofn1y7TRaupT0DK5D9StSeljFPh7tn04x
- 3i8D2x6SCND34XbecvYco7SX5UHD5xlgSBZR6JpbV3mkfPx++mgV/St4plfjK9iSR8ARhYRB9RY
- e/1e05biUI4KZ4zP9jLp0SwAHnFJTN0zBWS0TC0OV9XbxUO8dXRxI1TVF6qPodYZSc4y4TxDvyG
- S8TTFIpNFdxMo34sTOrKTYjOJOG7AQJgt421DrS4NxEd93znSU//zBdvmoJ9/K27fH6VQ+cCo3t
- s5yfkI/fVZxdhZsQWEQfYb4GxA1JQKWChJZ5Zw=
-X-Received: by 2002:a05:6808:23c6:b0:45c:8526:b56a with SMTP id
- 5614622812f47-45c9bebd566mr7444720b6e.3.1769007098246; 
- Wed, 21 Jan 2026 06:51:38 -0800 (PST)
+ bh=sbRrTaMMArHSFIM6PaT8EYSt5xvJwe/bkO04WPN7mec=;
+ b=ZhTVWqDlQoG9fIS11RYqD24mfVCUI+64HliQjHTKezPXjKHgFDFZQYiAq37OeKLLQ3
+ bG1/N9c/7X8oRufq8n9zNwQgqRO9fCZn/uJNlU3kmj1tnr8U5K/PnfNNlqC8Iow/JaMM
+ 3FxMIsKUschYS2S0mzEgD89bJs7jzsRA5kSudPZrbDD15IGcPjWU40+ukTbYrFDoF6SN
+ H9WPHLmGVCOUMWndkEMOWFENalChmCwUIKfExFsB50g2Q3+jLPIfzwrQNILJ1mUOvY9S
+ AGvUjS9DW3ZBtTw8BGBgkeWusYRWq8zxoqk1n7EfIg6a9oVPqvwjvj7gHvDrWrNXQhsV
+ ZPDg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNSgO87GZsyVOr9AxG3jTxIywcPA3FWc7ZhT2x3BgDdFpWXeE6Oyv8/QBjOH82DpP3Rw1nQ3Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz90RxE3ImKfVfdkUV0aHtS4rbes5tyvcVoIP8phh8E9EB80bd3
+ WvYH1gTrWx87uvE41my90avP70EprXGdTCiBR3Ipyld7xt/iTwDat2srI43QocvCnD8=
+X-Gm-Gg: AZuq6aK/qL5vZGuWrhdaaWUNUYhBW3JWrZyv3L0qEUs1NKJd/jAYMwVLbxazbWayor8
+ LoENjC+lCNmgYi94W3TVTvXMvnXZa8+tjBCG6iFM4qq35ttVlWAMTIbnIsAN5fK1s8FEt0DLW8w
+ pH8FwBehmt2LoIuY6d+j1m8rbWAxqD7aL+ToHWngtIPwQgBpz/BIWaDq1PRGMoEErSLsGGB+EBo
+ pcYyiCthcMYU5aKG1VGBowmezE9RSV10Ras9F1rn9EJg0whHVuWHNgxFDh6xhHXNqTSZpvQmsU/
+ a1f6iuh38mxMjmn3ftDNl2ESK9fSK28LDMeqehPgsVyziw9Um1Jcx7k3tJiw/UViJ9X0r14zwpD
+ wqg1geXk7wZxNESi4RiGldRMXL9EREeFJopYb4YpDaudKNnoZnZ5dLQ/KHbh6S2BlalAc4bTN/9
+ 1VEowHE3Yha2M9ZXZQQR2OodKi7O5/6+ZaAG/dVIUhNUIM0TktX0NCoVP/uN4BCV2IirdWcw6UM
+ dw/N/alabmiszsnyTdB+pheUHcYxJM/GR3dkGI=
+X-Received: by 2002:a05:6870:aa85:b0:3f5:b9c7:6d00 with SMTP id
+ 586e51a60fabf-4044d0c9074mr8804278fac.57.1769007453909; 
+ Wed, 21 Jan 2026 06:57:33 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9e03e924sm8311684b6e.19.2026.01.21.06.51.37
+ 586e51a60fabf-4044bb545b9sm11240630fac.9.2026.01.21.06.57.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jan 2026 06:51:37 -0800 (PST)
-Date: Wed, 21 Jan 2026 08:51:35 -0600
+ Wed, 21 Jan 2026 06:57:33 -0800 (PST)
+Date: Wed, 21 Jan 2026 08:57:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/5] doc: develop: process: Make "Work flow of a
- Custodian" a subsection
-Message-ID: <20260121145135.GS3416603@bill-the-cat>
-References: <20260120223405.469050-1-trini@konsulko.com>
- <20260120223405.469050-3-trini@konsulko.com>
- <CAOf5uwkkkehBhMdHEKwbr00DCDJ2B+qe18kBRUJ=chox0NKLLA@mail.gmail.com>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
+ me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
+ michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH v6 2/5] drivers: sysreset: Add sysreset op that can take
+ arguments
+Message-ID: <20260121145730.GT3416603@bill-the-cat>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="S1fR5XyEnNW6MRUx"
+ protocol="application/pgp-signature"; boundary="uaeeq1ATtI5VMhB+"
 Content-Disposition: inline
-In-Reply-To: <CAOf5uwkkkehBhMdHEKwbr00DCDJ2B+qe18kBRUJ=chox0NKLLA@mail.gmail.com>
+In-Reply-To: <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,64 +106,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---S1fR5XyEnNW6MRUx
-Content-Type: text/plain; charset=utf-8
+--uaeeq1ATtI5VMhB+
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 21, 2026 at 10:44:42AM +0100, Michael Nazzareno Trimarchi wrote:
-> Hi Tom
->=20
-> On Tue, Jan 20, 2026 at 11:35=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > Make the "Work flow of a Custodian" section be a subsection of the
-> > Custodioans section.
-> >
->=20
-> You have just a typo here
+On Wed, Jan 21, 2026 at 12:09:17PM +0530, Varadarajan Narayanan wrote:
 
-Heinrich, can you fix this when applying please?
+> Add a 'request_arg' op to struct sysreset_ops to enable sysreset drivers
+> to receive arguments given to the 'reset' command. Process the
+> request_arg() op before the usual request() op.
+>=20
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
+com>
 
->=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  doc/develop/process.rst | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-> > index 3bda5e6b51dd..f436a98433a7 100644
-> > --- a/doc/develop/process.rst
-> > +++ b/doc/develop/process.rst
-> > @@ -233,7 +233,7 @@ feedback to the submitter of a patch about what is =
-going on:
-> >      apply cleanly.
-> >
-> >  Work flow of a Custodian
-> > -------------------------
-> > +^^^^^^^^^^^^^^^^^^^^^^^^
-> >
-> >  The normal flow of work in the U-Boot development process will look
-> >  like this:
-> > --
-> > 2.43.0
-> >
->=20
-> I'm fine with it
-> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+Thanks for doing this.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---S1fR5XyEnNW6MRUx
+--uaeeq1ATtI5VMhB+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXDn9AAKCRAr4qD1Cr/k
-Cg1iAP9DGxL7s/F56d+1bCtNk1i0vOlEPzcTji8A824Y3QiBUgEAyvX/KfB58IMC
-njB/7FULJSIC+qeNrG1iRVzkqtqY8wo=
-=Tw/0
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXDpWgAKCRAr4qD1Cr/k
+CnqcAQD45uDwgYBiH96Zj3GwMLySnkRb5TslfPSINRCgizHf8gD8CWtddvB/tTmu
+EETGLgw9VIgFZKixYOoK6ziTgUxehwc=
+=V1zJ
 -----END PGP SIGNATURE-----
 
---S1fR5XyEnNW6MRUx--
+--uaeeq1ATtI5VMhB+--
