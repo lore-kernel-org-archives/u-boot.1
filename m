@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3C7C44536
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 03:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAA9C44536
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 03:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DE548313B;
-	Thu, 22 Jan 2026 04:08:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 958E08341A;
+	Thu, 22 Jan 2026 04:33:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y7/XbtvZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R+e91dBu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFBFD8341A; Thu, 22 Jan 2026 04:08:22 +0100 (CET)
+ id AC0AA8341A; Thu, 22 Jan 2026 04:33:34 +0100 (CET)
 Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
  [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C781680077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 04:08:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F5C80077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 04:33:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-59dd263bfd3so463860e87.2
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 19:08:16 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769051296; cv=none;
+ 2adb3069b0e04-59dd7bfeb8aso570736e87.0
+ for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 19:33:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769052812; cv=none;
  d=google.com; s=arc-20240605;
- b=Qk4d/hMAaphGWtAf+ZBCFZ0lPtoEaiL90C0N5QaYoR/NDZZsW7B/I7wDXFUiTDJlVg
- KRRR5Tc5HM41qoCQWl2WS47Hdsv4X9Cwi7OBB3fImPMThnxzpDWFOYlSVUFIuPwVkJA2
- HYqvEH3XkMtWFBzxw6B5viBQwZoppMcIH/AkWybvOUpJj0lCIVpqGX5RuOuwWvq1G5c8
- IwVBl9AXsp7y9WeZeBdQB1wUyQadRPOri45A/oZpeu4F+Li09XG7X0Hg3Hp4Ci6zDFbA
- Sv/fKFbpEwUv1WIuCcZNDZP3UF3vTeqa3zBPzoEOh97NuFIs4Sh6SsnyOiDvBWX14F/2
- hRcg==
+ b=kl8tqvQqwzmaqRZwF6Nk/UK9HyA/3lSe8ad+wc8UGmo40mpWjkG91SX8PWEU5Jsq8f
+ JE3N8Og7b75IVMvnkZNMjlau8o9yUwnZDI+fWq7RRDlE2iJLWiKFWVNVDptqm1DVU+DD
+ T4ZnkZhGyOQUFoRXbxO87CzpUZOCkJDldexWcMOh/YIdL32NO3j7CxUBgyVXmmE2e47m
+ cj0aqofXrkH2/G++T7zVFWTdQQefrwgyr/GNDlZu1Moud8AkW9r0QnWfxF1rpcdHkQmk
+ JdJavOXJiWAKAE2xaYYszLHTk6221LhcP1sdu4se2x6pHewvALm1YKFeaGKkeB8tkyhh
+ 30Mg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=aVs4/SNRe2ok4+t6zAa1RCam+hopDPb2+8qQsQffANY=;
+ bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
  fh=JyVYAqOQ1ckqGUG7bs/mZLOy/LfusYtfrFTH5a5FbxI=;
- b=it1KR7El/7pbrGc//GXnD1zsYXk1KD6cgC0zMFwBOMUtMkeBELV9YQGAvA8m9bbxqb
- 7zhDFBV/hVSbCNYLFhpfpQEe0tbYswzKR2BpT16BVC3jtlaJI7uqJqckujZraswVhe6q
- rYErvpVD4silPeMJByQbcF+DGH8ue5CNT5p/xaTTqsWh3vFK7xtW5PucgamMPRNF5M0m
- MLVr3A8hTpSjMixdsfxis9oOBtP31YxtSbLnNqE8EKEPmUGf4ZkPet1T8LHa2ULwdKAH
- aGV99YnXizwWgzkDtxSFYtIc2IpZM1sllN/jtmwa0U8i3JCpd8C3EfY8K9lQFGHYfW21
- mcbA==; darn=lists.denx.de
+ b=klGbw0Pvd27KJkGTglsM4/ij/M6Ygxz9ooYT0G9WGMpIrNTvsNBu4vDHsWfTOa0thG
+ gc8FWqF43UId36coTJePqi0ghZpF9g0L5Z/3o8wirkip19CgddSdmurEr2J8pccsezh1
+ KWcfOpA6OsquSXTW/eqtZNmJxVXJOY7LrlZORCg5uIlh9nKkXKvNDIdCOcagScMQdeIk
+ oMtFLCYoy1T4jypv53BA8R+F5O9dZtH9pycpkoKTLn9mOdYdA5fCd04Or9fDAmjRO4cu
+ VaUayoU+7B93BPBhvrdJCrfNVEySi3OwpyXhaygaqmSqZuNdihVtLBMLHPr9JbPB7SAf
+ pgZA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769051296; x=1769656096; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1769052812; x=1769657612; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aVs4/SNRe2ok4+t6zAa1RCam+hopDPb2+8qQsQffANY=;
- b=Y7/XbtvZcVlliZRRfLnXGMN/XZB452fPDBrFsE0JZatNEyPEVS/GyL4qRr0qc10WmN
- lIiDueEPEZ296m9TlFJgnKYpxf/ZuIkJ45R6qi7zDtfEmWcmg7bmby3dKDK7ywhEldVD
- cIu/m+ijbsNl5XNcHfLsVr3eyt7sb+mF/koMMtAsAvmnJa+XRwdW4XPRj2p90feCLGO2
- I00tNBlwxTvWe8ph1MBPfD8x5OCxFZB9YYOEYz9UX+Lmcy5lbLh72TO5A9fTpW4cxQML
- O3sIKFJLKTgQ3OZcDKmRrQDFX7Iy/pJapFs8U7jSu1MTR03W2sYgHTDDCeVaUx1d1WpB
- jaTA==
+ bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
+ b=R+e91dBu4mJ2q5aG1PbA5FJWoOZMsE9IPhRQHcNXwIplRUOH/fS2UzwUD9WoBvcJJS
+ NlpIuDnOFw442uY57+QBdsJOASx5+gkvKZG+nL6JeYEmjErlEftvS0QrCm2827VaH+1g
+ w78Jk54cEB/c0zhBrRqqD5eXlPPvK31q8+LUHpDQgYmkWDQN8BP2HB0TjfDoNigUtGRh
+ 3baIpYZwjmX1k04692kaH9l4Jv+qo2YKCS2C82FiLmRD7L+F5WsAmqQxSDBzUBXszqGp
+ mQ88SsG73sxurnTMrApQ4KrNZyZ1d4uNnhbiMMWu6shSHnzVizKplk5dSAINcUoJPTBo
+ ESCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769051296; x=1769656096;
+ d=1e100.net; s=20230601; t=1769052812; x=1769657612;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=aVs4/SNRe2ok4+t6zAa1RCam+hopDPb2+8qQsQffANY=;
- b=KVlEU3UkA8p/5h9h74HGVEaCxOl3wFPA6qIPuAjdc7dGf+rn9E6RRVkljPJg7dV0s1
- enQZFxpKQQdpZg4hGYrqFQuIEmTB6UllZR5ROI2z3J88apHCsjrslHrDmkAm6wkZQetr
- 5Htsw8cet5+9YndYOgoMCATEVkJEIuuvk8udhKUNpfs2Ezb6yvAFFU/cpjen74b1NqD2
- hYzRv9jsQ/YjuDRTt8sUH05W8d54NQNg3nDPJWKKGlfPXZdG6uacsezt/SBqNhvJsiMu
- 8QiSJ8bvBl0TmO2YPCglFB28closf4dvDNyFl58FrjW2kLhgCf3GlyPOVrbdjhE/Fcyk
- hJ/w==
-X-Gm-Message-State: AOJu0YwbWnE/TxfdHvJ2rsj30hPgeKfQTNCkJULWUHBlUckD9TfBfRpU
- fcpyTrGyX/p3j2fV6m8d9WF1yx+XSf7EOnxEr86nuR+qeZFy6rWwm+Ydy/G5JtgmIl+2eAbARAf
- ++NaLNc1fxYRqbXxcRwAwafy4qpdS42QGKBIH
-X-Gm-Gg: AZuq6aLMbi4fiDysAZKJYrybjCoIjSUMqfxcbmv6x+nSMDQcpe3xcCp6zKWs/hfG6y7
- qUiWw7B0OOsBCWTj4XJeIld7s/j0qRnB8qm3B3lemFxMAhBHyIJcxA7kzHxswK9ESKaeCgInlPp
- +CXc5rAadTbg2nyJR3nCuJyZUoNaufvv3Srn9RZJ6h5HsdWHJbNbmLYDiMSfSpOLk/u5KiXzHYk
- 2rvUJinIo2Kon9bwWSagjoTyfzeuqj94Lo1nhF8/6L1UeE2/nPxQEgIOdcMOhC0X+UYpDwpqnVE
- uNGfwZeU5t8g6V55bVeZnJOu
-X-Received: by 2002:a05:6512:1246:b0:59b:8436:79da with SMTP id
- 2adb3069b0e04-59baffd6f05mr7210437e87.44.1769051295650; Wed, 21 Jan 2026
- 19:08:15 -0800 (PST)
+ bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
+ b=GIF5DcU4pCu5KMnGY7oKHGNsWKruK8MpJAYQrHzaQA14jQnwunJnEctKfd4W5/p9Xy
+ XLezS3dk4Dd+qQTS6mrgKM+aHuu4oSGWWVrdJoPtpGW3wV6CInzIHi/YWgmHBDY2nXYk
+ cbUlw2IpQ1J0bUCBKXMRjKHKyw8U/cO6DboMGV6BtTBSB8H5hIkd0e9JMqBuKUQkq7Qh
+ AXwZaKkAYBzCbrqlN1NST87veL0v5dbnAuzma1WhrrQoshzTOKiTQ5j7sSfHZEY/5NCW
+ wF2iYP5KYHw64gmKrnKivB545Ky8DjGT+SKgFDJautry/5QN3zCw3T/NkPTS0+HcrVqD
+ Bw4A==
+X-Gm-Message-State: AOJu0YwrS8kURBFDkHq7NlsJdaYffB+XCNp/5hAuyclHsWlAGbq76PvW
+ 7nkbEANTFx3UHg6RjO/rK+jM2BlGWqZyjXAQjaWReaLx5MAdPImKR0KWkrGPjCu7l9CmbDL6uSJ
+ VNqCUXSIR7Ud6jHKqJ4X3fprsGNBsmQo=
+X-Gm-Gg: AZuq6aJ3QMxpn+G8pl688w3cPWncDCUQgm5q/15vu32jeKawN0ABChw8W/SyfjNq+DS
+ SXhjUDUzoMNsSr73y2Lb2XU3t+Lnl3MRPiyiAKnBmiDz7Dc00nLcgq7X5eUXFEG3L+FNJnWvxBw
+ OccH7sSCLiYThCr4fzpzl/ZHwtQ6f7J2Yb/vX0WDsR7Smi62NmOyZKXdmj7/twH+s8TjE2cp7Zm
+ RxANviRaCKbH/sR3rMZoSzgupKNQBG8FsD01G4WxUaNRMIAQ/zHbgoTXO/gAtBKLuEslvT+Qo+D
+ GB/r0G5JlPrvvFL/gQ4qtXvs
+X-Received: by 2002:a05:6512:3b81:b0:594:253c:209f with SMTP id
+ 2adb3069b0e04-59baeef8a4fmr8004581e87.39.1769052810513; Wed, 21 Jan 2026
+ 19:33:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20260115222828.3931345-1-trini@konsulko.com>
  <20260115222828.3931345-3-trini@konsulko.com>
-In-Reply-To: <20260115222828.3931345-3-trini@konsulko.com>
+ <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 22 Jan 2026 00:08:04 -0300
-X-Gm-Features: AZwV_QjhJ2cw39eg4YXEoFll2EssMA2A3tPncpET5FAxwwjtNnfvLGhajv78AjM
-Message-ID: <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
+Date: Thu, 22 Jan 2026 00:33:19 -0300
+X-Gm-Features: AZwV_QjKI836-aWUy-i1KgS7U1JT1obqPJ-KeMJkDkXhCGL58xtUC4FY1B_gIZg
+Message-ID: <CAOMZO5COTa3ykhF8XZyzmJ0QZNotK4USo0LrH0XBJLogatfXFQ@mail.gmail.com>
 Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
  device tree is aligned
 To: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>
@@ -126,64 +127,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Jan 22, 2026 at 12:08=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-On Thu, Jan 15, 2026 at 7:28=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> With commit 0535e46d55d7 ("scripts/dtc: Update to upstream version
-> v1.7.2-35-g52f07dcca47c") it is now a fatal error to U-Boot if our
-> device tree is not 8-byte aligned. In commit f613a6e15ef7 ("ARM: OMAP2+:
-> Pad SPL binary to 8-byte alignment before DTB") Beleswar Padhi explains
-> that we must have ALIGN(x) statements inside of a section to ensure that
-> padding is included and not simply that the linker address counter is
-> incremented. To that end, this patch:
-> - Expands some linker sections to be more readable when adding a second
->   statement to the section.
-> - Aligns the final section before _end (for U-Boot) or
->   _image_binary_end or __bss_end (for xPL phases) by 8-bytes by adding
->   '. =3D ALIGN(8);' to the final section before the symbol.
-> - Ensure that we do have alignment by adding an ASSERT so that when not
->   aligned we fail to link (and explain why).
-> - Remove now-spurious  '. =3D ALIGN(x);' statements that were intended to
->   provide the above alignments.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> The only part of this I am only mostly rather than fully confident in is
-> having caught all cases of having SPL_SEPARATE_BSS being false. I
-> believe I have as the generic ARM SPL linker script enforces the BSS
-> ending with 8-byte alignment, and the point of the ASSERTs here is to
-> catch the case where the section we're adding the ALIGN to ends up being
-> empty and so that ALIGN would become useless.
+> RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
+> also affected by this change.
 
-I'm working on bringing up Rockchip RV1103 (ARMv7 SoC, no custom .lds file)
+The change below restores the boot:
 
-After this patch is applied, the board does not boot anymore:
+diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+index d780a5060774..fc2b7fcb969f 100644
+--- a/arch/arm/cpu/u-boot-spl.lds
++++ b/arch/arm/cpu/u-boot-spl.lds
+@@ -40,6 +40,7 @@ SECTIONS
+        .binman_sym_table : {
+                __binman_sym_start =3D .;
+                KEEP(*(SORT(.binman_sym*)));
++               . =3D ALIGN(8);
+                __binman_sym_end =3D .;
+        }
 
-Missing DTB
-spl_early_init() failed: -2
-### ERROR ### Please RESET the board ###
-
-If I force "imply SPL_SEPARATE_BSS" in the SoC Kconfig, the board boots aga=
-in.
-
-In this case, the build shows some warnings:
-
-  LD      spl/u-boot-spl
-/usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sram
-/usr/bin/arm-linux-gnueabihf-ld: invalid origin for memory region .sdram
-/usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sdram
-  OBJCOPY spl/u-boot-spl-nodtb.bin
-  SYM     spl/u-boot-spl.sym
-  CAT     spl/u-boot-spl-dtb.bin
-  COPY    spl/u-boot-spl.bin
-  BINMAN  .binman_stamp
-  OFCHK   .config
-
-RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
-also affected by this change.
-
-What do you suggest?
-
-Thanks
+If you agree, I can send a formal patch.
