@@ -4,62 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23DF9D3EE6C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 14:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B01D3EE6B
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 15:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C86C839DF;
-	Thu, 22 Jan 2026 15:48:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 9C0F88397D;
+	Thu, 22 Jan 2026 16:01:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="sRRFc8vA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YoZ/O/HA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A1C883A1E; Thu, 22 Jan 2026 15:48:56 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B47A2839DF; Thu, 22 Jan 2026 16:01:42 +0100 (CET)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBD508397D
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:48:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A94980077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 16:01:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 9E3A81FA74;
- Thu, 22 Jan 2026 15:48:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1769093333;
- bh=EPd3rCg18mvGzPfisyle9OuQdtn2whpYFrm3PUHL8n8=; h=From:To:Subject;
- b=sRRFc8vA29xFhg+7+r88gA8pCsPGnUA2nV+/MlFSF1BYpnlDOmh3GJ8AZelZAtp8d
- 09kZ6KWNgyzehoGtgBrMlaR5FWhWpIpsU2/OyGxVg/tBoBpG+GuDffFuGC3lYjX658
- G0Ks/zGWFrsJTwkjfRqlByPYsmfbn2Ck58Lsg814DrR8x8npwOjwYfWgeDq7N9F5qy
- Zl//FMazOEP+5bJ+p0je3YncN48uGnuYVxl2sPmQDHwawO7NmZz/tHV49iOmzn3tOH
- 0ZSJ4HQD5Lmr7VfNisMJwSlI7vVtc9694FRr3uhh5D0LNazS7SyXH1sEMkAmauShVh
- FM05bzITfF1jg==
-Date: Thu, 22 Jan 2026 15:48:48 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
- upstream@lists.phytec.de, Tom Rini <trini@konsulko.com>,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Garrett Giordano <ggiordano@phytec.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>,
- Paresh Bhagat <p-bhagat@ti.com>, Vitor Soares <vitor.soares@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Andrew Davis <afd@ti.com>, Gowtham Tammana <g-tammana@ti.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: Re: [PATCH master] arch: arm: dts: k3: refactor common nodes to
- k3-*-r5.dtsi
-Message-ID: <20260122144848.GA72806@francesco-nb>
-References: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
- <20260122144404.GA71266@francesco-nb>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7cfcebf1725so625600a34.1
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 07:01:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1769094099; x=1769698899; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zkf0/DsExzVnpIJWbOQAlOzZCiGCNQEjC/tL3ZyGUxA=;
+ b=YoZ/O/HA+80QFK9ez7eTZdCzhCxvGwQu3ivwoLLaC5lJzTKIIa0Ib3aJyUnjWCRKov
+ zdQdBAY/JizsM7K8lP7/YaHoD/HwdWjKrIobvQ08tO3WleOeTIOPWijtbNiUVjmuX4ZI
+ EA//MZjc6aZb8tbkWSVoShEsSUDmN42Ogbtp8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769094099; x=1769698899;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zkf0/DsExzVnpIJWbOQAlOzZCiGCNQEjC/tL3ZyGUxA=;
+ b=ghGm533vdAIEKs3o0whE/sFIEO/bdttYrQewT85boaPQLZurnSu7Yk6U5zQnTQerrY
+ OTQG2zL71iFVp2CW1gkyRXIlAnArGREMLGnQ30VtBKeDesuODdUZ5q0yJYjcv+mWsSuG
+ kyar3R+zMaBL/lrgEawpJ1Qqf0A5tyyWkg75gynXkAj1AX2GyLrg/Cob0h8jmNz+xuua
+ gSmd/jb0HJbRED74TbCgL21JY8VRfeewVY+O8g0o1LThITa+ncCkJRd1JtVOIfzSRLIP
+ 8VGpMHzXiD1DyrHeSuuL/t7cu4YiB5/MsPmLSUPWb0NPGQLFmeN1YUCcP1gyFDzqmMQX
+ zCnw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWsm5hKSeFcUmfP+LonZ6rtlxEvDNwnmsv8gNm5EL9St3WAem+iAauI7MRp/WLzw0jXPnyfxAQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxWTHOlmPqRmUwPiuwMb3weGEC05IGwyxhuL+cHc4lFZu5qNat
+ TXY6PZBF5oVTb6Lw6M7Mcl49kPIKmbGj3CKdWy5gfoj0iNtNoJCkSdu5qHTNejN06cM=
+X-Gm-Gg: AZuq6aIzLtjU3HC5UKQvHlAywSW6tdliSzcOR1O19gnHn+OoabSWqsffjoq40SzTYG6
+ aYwJq1cEL9RkEd3JMK4uprPD9N7gi7HPlPklLRywYCjbgOuGsKjBbM/pWDyN2/W4d8qcUdqHe+W
+ p8ZwEHiKi9/541xf4VMGUdjm0SsBPA78llFS/YFZUYH5zg5L8CURCZ7XuWIUbOVb++5k391ZiBk
+ jxeIIDPRXKonudysH7aDoeXOlclkjtVSw3swvWiE6IPJsXnCbl2WamBAt7AceRruHoJj9RcVY/A
+ 2EodPoVKbh5Hee8CWdk+fvGjGwbTNBTEOkFAtByt+oSbbVfMoJpuwyj2lv5yOtXOepfx0v0UWZX
+ 14FJgYN6ykcsv57uagY2OZ3Rhp6ZAwJZeyCbNcJ25DwHRYGvBaiVGIgeSg6zP5b/26lA5CSdJ0r
+ C8rSoOLlTJxfkeL/nY5b9pkcBo9Tri/uW8AE1Qm2BmlYC45HOLT2NAUrMuRh1Aft9tahTUoEGWa
+ FUq76nhegJH+gCH8HbSWIJwYbulDqc2N6uAZTk=
+X-Received: by 2002:a05:6830:6586:b0:7cf:d2f3:af8a with SMTP id
+ 46e09a7af769-7d140ac1cfcmr4265849a34.28.1769094098645; 
+ Thu, 22 Jan 2026 07:01:38 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7cfdf0d8e05sm12688052a34.6.2026.01.22.07.01.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jan 2026 07:01:38 -0800 (PST)
+Date: Thu, 22 Jan 2026 09:01:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: varadarajan.narayanan@oss.qualcomm.com, gabriel.dalimonte@gmail.com,
+ u-boot@lists.denx.de, caleb.connolly@linaro.org
+Subject: Re: [PATCH v3] fs: fat: Handle 'FAT sector size mismatch'
+Message-ID: <20260122150135.GZ3416603@bill-the-cat>
+References: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yhZl+UcNKJftXPL5"
 Content-Disposition: inline
-In-Reply-To: <20260122144404.GA71266@francesco-nb>
+In-Reply-To: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,86 +99,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 22, 2026 at 03:44:04PM +0100, Francesco Dolcini wrote:
-> On Thu, Jan 22, 2026 at 07:38:38PM +0530, Anshul Dalal wrote:
-> > This patch refactors the nodes in each board's R5 device-tree to common
-> > SoC level dtsi. No functional change is intended from this patch.
-> 
-> ...
-> 
-> > diff --git a/arch/arm/dts/k3-am625-r5.dtsi b/arch/arm/dts/k3-am625-r5.dtsi
-> > new file mode 100644
-> > index 00000000000..c509857ac5d
-> > --- /dev/null
-> > +++ b/arch/arm/dts/k3-am625-r5.dtsi
-> > @@ -0,0 +1,88 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-> > + */
-> > +
-> > +/ {
-> > +	aliases {
-> > +		tick-timer = &main_timer0;
-> > +		remoteproc0 = &sysctrler;
-> > +		remoteproc1 = &a53_0;
-> > +		serial0 = &wkup_uart0;
-> > +		serial3 = &main_uart1;
-> > +	};
-> > +
-> > +	a53_0: a53@0 {
-> > +		compatible = "ti,am654-rproc";
-> > +		reg = <0x00 0x00a90000 0x00 0x10>;
-> > +		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> > +				<&k3_pds 135 TI_SCI_PD_EXCLUSIVE>,
-> > +				<&k3_pds 166 TI_SCI_PD_EXCLUSIVE>;
-> > +		resets = <&k3_reset 135 0>;
-> > +		clocks = <&k3_clks 61 0>, <&k3_clks 135 0>;
-> > +		clock-names = "gtc", "core";
-> > +		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 135 0>;
-> > +		assigned-clock-parents = <&k3_clks 61 2>;
-> > +		assigned-clock-rates = <200000000>, <1200000000>;
-> > +		ti,sci = <&dmsc>;
-> > +		ti,sci-proc-id = <32>;
-> > +		ti,sci-host-id = <10>;
-> > +		bootph-pre-ram;
-> > +	};
-> 
-> ....
-> 
-> > diff --git a/arch/arm/dts/k3-am625-verdin-r5.dts b/arch/arm/dts/k3-am625-verdin-r5.dts
-> > index fb431c96337..dfd960aaf3c 100644
-> > --- a/arch/arm/dts/k3-am625-verdin-r5.dts
-> > +++ b/arch/arm/dts/k3-am625-verdin-r5.dts
-> > @@ -9,75 +9,30 @@
-> >  #include "k3-am62-ddr.dtsi"
-> >  
-> >  #include "k3-am625-verdin-wifi-dev-u-boot.dtsi"
-> > +#include "k3-am625-r5.dtsi"
-> >  
-> >  / {
-> > -	a53_0: a53@0 {
-> > -		compatible = "ti,am654-rproc";
-> > -		reg = <0x00 0x00a90000 0x00 0x10>;
-> > -		/*
-> > -		 * FIXME: Currently only the SPL running on the R5 has a clock
-> > -		 * driver. As a workaround therefore move the assigned-clock
-> > -		 * stuff required for our ETH_25MHz_CLK from the cpsw3g_mdio
-> > -		 * node of the regular device tree to here (last one each in
-> > -		 * below three lines, adding a <0> as spacing for parents).
-> > -		 */
-> > -		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 135 0>, <&k3_clks 157 20>;
-> > -		assigned-clock-parents = <&k3_clks 61 2>, <0>, <&k3_clks 157 22>;
-> > -		assigned-clock-rates = <200000000>, <800000000>, <25000000>;
->                                                                  ^^^^^^^^^^
-> 
-> Can you check this? On both verdin am62 and am62p?
-> 
-> According to your diff nothing should change here, however if I look at
-> the code you are removing the ethernet clock.
 
-Sorry, my fault. I see you are properly taking care of this, my fault.
-All good.
+--yhZl+UcNKJftXPL5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Francesco
+On Thu, Jan 22, 2026 at 12:04:42PM +0530, Balaji Selvanathan wrote:
 
+> From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+>=20
+> Do FAT read and write based on the device sector size
+> instead of the size recorded in the FAT meta data.
+>=20
+> FAT code issues i/o in terms of the sector size. Convert that to
+> device sector size before doing the actual i/o. Additionally,
+> handle leading/trailing blocks when the meta data based block
+> no and i/o size is not an exact multiple of the device sector
+> size or vice versa.
+>=20
+> Tested on UFS device with sector size 4096 and meta data recorded
+> sector size 512.
+>=20
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
+com>
+> ---
+> Changes in v3:
+> - Respin, no changes
+> - Link to v2: https://lore.kernel.org/u-boot/20241125085213.460723-1-quic=
+_varada@quicinc.com/
+>=20
+> Changes in v2:
+> - fat_sect_size is declared as static
+> - The else block in disk_write() function has been removed
+> - The commit message has additional details about testing
+> - Link to v1: https://lore.kernel.org/u-boot/20241119073048.3469260-1-qui=
+c_varada@quicinc.com/
+
+Have you put this through CI
+https://docs.u-boot.org/en/latest/develop/ci_testing.html or manually
+run the filesystem tests locally? It would also be good to know that CI
+does pass since I saw some divides and modulos in there and knowing we
+don't run in to the cases where that needs to be a shift or use a helper
+macro now would be good. Thanks.
+
+--=20
+Tom
+
+--yhZl+UcNKJftXPL5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXI7ywAKCRAr4qD1Cr/k
+CrhnAQDdg5FhB2qC09f4Pv1jkjUX5l9ePbwbvRO3zugEV+ECqQD+K9oeD26FVxUk
+lXzbq26zAi4rqUzH6/2sW0A5h7QyxQU=
+=s8mW
+-----END PGP SIGNATURE-----
+
+--yhZl+UcNKJftXPL5--
