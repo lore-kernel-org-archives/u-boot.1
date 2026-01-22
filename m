@@ -4,152 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE082C44536
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 02:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30A0D489BF
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 02:17:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1EA8313B;
-	Thu, 22 Jan 2026 03:14:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id D974F8313B;
+	Thu, 22 Jan 2026 03:17:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="SKqRWMca";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v+f72fMT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 219BE8341A; Thu, 22 Jan 2026 03:14:03 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 81543839DF; Thu, 22 Jan 2026 03:17:05 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979EB80077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 03:13:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4540380077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 03:17:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BsvpqbNGXpVmHePGUvs98CdInjWQQnn8IsBWzTMfwwV/PC/h3lFvgnKvgpaI0bZmV1ySie/JkCrakKLlG0BP0E8uSMPak5TZUsq0+eHDkY38ti+HWOE5SytlZiZi8OLinlSU9cQrEp1Ypu1pOtpoYkTwpKXZxhLkwhvJ562xhp0g07Lae+/LZXNpsoD7g/yRvo01+SW8FPz+nYisW7VDk7xwlWjyxlyDvDa/0rvEX4Bl+SFykRXqmTE4OFhKWpBtET3CnXEpbVCpt7663GJIVbz7uUt7YZp+KQQqnd9ZF5JBz7p155T5KuGWpHhoyj8oQ+aumfQcrqYoCR5+9m+P4g==
+ b=y83t3ep4oF3ENHecsNfGE8L3It2nIulteCe6c+L4BiRalkNoTzp0tpZ/iSSXgLs+/EKxwIJwszxdqBdYxCSjXYwHUJkoueEIjy3Ucv8Rd8RNoKhd1+RwaC7eauSlC8UBZwwT/IvwjKtT0629hyTG2YJB+rmw6VxdaGbeX7P2XEI3j0F6dK8YKvXmpiLDAPNhJa5y7DTf7cxt1kV7SSavxvuXQoVWdmcYWIgjbeLmZ9w17zUKYCSY/JWNqeZboFEV+s4FdW10wHmNABoVsEavagPfWNRkmgvxkOj2pcEzh2IyynYq62JjHWSL4CyaN+TexiOuvbkXre42M2b3Tlwtqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=J42dmjQy76hYXWmrZwEQ9BDGMrqguP9QKgxt5Av7OFo=;
- b=xFzzEf1ut2LhGTkaRnTW/P8RI+GOfDFazd7rc+aZtz9nFwMp4zQ/D5Qq6JFOacJ6i3jqXHRfev2lDlViCzFsSkYZzBp4za+KZDn/ApDQWHjZcNgs2rd+/aLO9joXdyS5Tt1DFtg0ywMX2zAhovBPFMVRppDiCNw/fhhdieRH8cDeFyK5OF6nUcOfsLJMZmXiEABgDs24MIwHbTaqJezMTDWIkWk8ZFFA6QMHo72Tg/504+wBaIzPixVB1371qWQy26vMqWqr5MGwpEznRohUh0bRXeJojX6RhhsuGa6DR3y98A5YOc5WedJBV5lMHeOfDxqpXJhRVHoDNZY+bdAnTQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=lTuESj3oAQPqutJ+ivbsqGTnJo0L7vEhDBDTFb33Qbs=;
+ b=f7G0ZbmbuUfVGKMCzjNXPprp9QSfdxLFk10VeMRRJPM5t9YKLtwTQiygutuZl3ZLTkh5xGEXytu1824dtk+xvOFYKZW2whBrJ4UunZPQ59LzhStxLxAGdLa8rqHVYODhZBUPnR1eRTh0bpXHGUckiED2LJfVYVylNMfavWun2EtbtrK+WC02ry/ooku+3f1k+DfCPd1B/oFQR2X3oDnTtTdjd1nMTr08C+1NJzFyMXcSLQxGjhvor+hJ83gkYPfFcbZkRbcqKIrbXxbU4fovcZTBjL2F1JZnsHwqIoiE8hfiFJlD6pRbUXQE02bx6j4bXlj8THs0mHormgRZ3z1XVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J42dmjQy76hYXWmrZwEQ9BDGMrqguP9QKgxt5Av7OFo=;
- b=SKqRWMcacdoM6HFPYOm3cXQyDw0Dw2N2MgPrxAsgZk7aNtaG2g8xA5M1QybFH+cg9qFdLbJgwHz8nQZPaRDOXVLsumeppkBiyUsvaLjxhFFZxeYWV9KL4ZTeUf8q6oq8jquwO9EXcMFvvdk25GVesTxQzblo8d+lbdNEquD3fRjha3uSpl6nAGqEHMrGyGDwyrNgmhQSxOsNP2Oy11Z+SVsI13lUFGOLD/cbQzU9p6xoK4fW29LZbM222GNoDIme/5HL8jaMExDenCgBn+B+sexxQ6KOjzzKVlxJi0mJwA5QycikXe+CGKQl8g+KC8uOV1QBj8NYFyFtDoMaped4Mw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA1PR04MB10700.eurprd04.prod.outlook.com (2603:10a6:102:48e::16)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=lTuESj3oAQPqutJ+ivbsqGTnJo0L7vEhDBDTFb33Qbs=;
+ b=v+f72fMTfmTOIFDm3PqLCD+ntkcAAuD/bazrifC6OltgsSlCL1VqutlQvQnlsCp8QaKtWII7D9TNgLDttLHwfffCX1hnLWe4wyvyU1twGlx4Kc578Hd/xSETfLqvKygOX3YKO0XFfm5eANfKhFtsmD111CgJZ0EAll2BUUrCBVU=
+Received: from CH0P221CA0045.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::15)
+ by DM6PR10MB4124.namprd10.prod.outlook.com (2603:10b6:5:218::18) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.10; Thu, 22 Jan
- 2026 02:13:54 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%5]) with mapi id 15.20.9542.009; Thu, 22 Jan 2026
- 02:13:54 +0000
-Date: Thu, 22 Jan 2026 11:28:21 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Mateus Lima Alves <mateuslima.ti@gmail.com>
-Cc: alison.wang@nxp.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot
- board.
-Message-ID: <aXGZVQhGzIrtXY86@nxa18884-linux.ap.freescale.net>
-References: <20260113142303.441190-1-mateuslima.ti@gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260113142303.441190-1-mateuslima.ti@gmail.com>
-X-ClientProxiedBy: SI1PR02CA0008.apcprd02.prod.outlook.com
- (2603:1096:4:1f7::14) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ 2026 02:16:58 +0000
+Received: from CH1PEPF0000AD7D.namprd04.prod.outlook.com
+ (2603:10b6:610:11d:cafe::5a) by CH0P221CA0045.outlook.office365.com
+ (2603:10b6:610:11d::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.10 via Frontend Transport; Thu,
+ 22 Jan 2026 02:16:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CH1PEPF0000AD7D.mail.protection.outlook.com (10.167.244.86) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9542.4 via Frontend Transport; Thu, 22 Jan 2026 02:16:58 +0000
+Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
+ 2026 20:16:58 -0600
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
+ 2026 20:16:57 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 21 Jan 2026 20:16:57 -0600
+Received: from [172.24.233.249] (ula0502350.dhcp.ti.com [172.24.233.249])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60M2GsKs3865416;
+ Wed, 21 Jan 2026 20:16:55 -0600
+Message-ID: <9bdedb19-3b08-4d1c-b3e8-b025ad970282@ti.com>
+Date: Thu, 22 Jan 2026 07:46:54 +0530
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] doc: board: ti: Add AM62D documentation
+To: Bryan Brattlof <bb@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <praneeth@ti.com>,
+ <vigneshr@ti.com>, <khasim@ti.com>, <afd@ti.com>, <nm@ti.com>,
+ <v-singh1@ti.com>, <anshuld@ti.com>
+References: <20260117033328.837487-1-p-bhagat@ti.com>
+ <20260120133649.r2juaw5yxvggfga4@bryanbrattlof.com>
+Content-Language: en-US
+From: Paresh Bhagat <p-bhagat@ti.com>
+In-Reply-To: <20260120133649.r2juaw5yxvggfga4@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA1PR04MB10700:EE_
-X-MS-Office365-Filtering-Correlation-Id: 81133f57-2b75-4975-80cd-08de595be2b2
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7D:EE_|DM6PR10MB4124:EE_
+X-MS-Office365-Filtering-Correlation-Id: eb00ade9-249e-4539-ece6-08de595c5260
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|19092799006|1800799024|366016|38350700014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wo+bOCTzJV4ofKWyIgoGOq4sbVvhJS+BRgaFbufGZz9FQDzqWi43iR9VcDeM?=
- =?us-ascii?Q?NPFMcsOs1d+4b3Vk4PtpeYL/KEN8Z3wu8s5ohxpOM2PyM3STRtEwTPe7pet2?=
- =?us-ascii?Q?Zm9X9gGvojtT5l0YCsdjTqK7hUdo/YdFvoON4D4ijtox34ZVlowp7xHM7veK?=
- =?us-ascii?Q?r1f0kD+o5p8NZgJ3MU2itYYrl1xGH7vCZQymMTmI9tP7LRQBCSFEkkq5+7oA?=
- =?us-ascii?Q?1e+s7NpCfiqoumLFMCRRiv5MnTmo2G6PVI/8X1xIgBkkAw6vHErPwUojkb/4?=
- =?us-ascii?Q?Um38l5dCmwxI6D21KS7LR/08lG9qOSGn7+DMFfS4SO8aTZV0b1nI1W/ai8Qv?=
- =?us-ascii?Q?hvBaibBt1oaR1zaoea2G/ivzCH1wE45mzvxPa3E3/jYEOgaW30e3SSlMljXB?=
- =?us-ascii?Q?XI4In4s2IDS9rEiJ2QOr4lxJT1KUE6LH13RQ9iLwMGMcLiZYUWGzvx9a6LM/?=
- =?us-ascii?Q?ER0SrvVd8CuIQ6bkArt+1RKwjZ7di9LgbMcfuNMKlhxlHfbWCaYf98wRx/QA?=
- =?us-ascii?Q?RiDoYPMqABwAADBv7AmsC1zpbTVZ4lCyNAlqweTx+5XKe2/Pd8ADgu4/h0OI?=
- =?us-ascii?Q?chAaKWHuOSmVW1Dm3ohrX87JS90TpQhwPDBOl1eYRGXywvvHCoNOLZUL97xO?=
- =?us-ascii?Q?FKuF6254eOfAA/yUtliE3t63hMTqccmpJOHZ68EWP2rqICUnNItYZmBS3AiN?=
- =?us-ascii?Q?yYILwcLMX1YX5Mw5FST+lOST4G5TYvg8anM7rM0lMYiDZ/bHZqe/bmOiSnUL?=
- =?us-ascii?Q?8aiAF28JIKdIWVQy23R8rPkxbVgC8F8FqvLwEzFrIhh3Q0fBVbNYB6XRwQ5Q?=
- =?us-ascii?Q?K8PMyMrEEofZk/aLG+ByW+61T63wWYixmu7iTO/mWvZ46ofJFK1PYyVSdagd?=
- =?us-ascii?Q?qPUqg8hEw0fGYl9UhsyPhdAG/1gzTqcyB3XYCtHxI90pxQVo2ATP+74cDqcm?=
- =?us-ascii?Q?v7Qg9hMD/B9swgWevaXCNAJ11sYi41uXBNg4oJNv8UfV0N64rIQEeZLOK326?=
- =?us-ascii?Q?ebvEQuqIj8azoT3zPYKo9v60EedkBnDUsRqIFZe2XrK5z4CQF9MUbq8EsP6h?=
- =?us-ascii?Q?PKeCX04oI+tGaAOLc1GKFvNDuUeyq5TxfpBPpxkf399oYhGS8RBYuF9lZGcL?=
- =?us-ascii?Q?8nGwg+dQ8Jsy4KwGF7NKlki/y6J5jmZ8I4hB9zx9lHtCoyLTILh043o6Y2xr?=
- =?us-ascii?Q?dYqYLJOzmSGCHRQZkE6KTtBzRShca8D1bxuDKPNX0UsO/ZDSfLo0O/LMY+3A?=
- =?us-ascii?Q?+GiqgHa7JeaBYnk3ONPNMN/+iAACePHwIdEsCNyGRb9zmiwywi6FmdEKksbd?=
- =?us-ascii?Q?v5rs94HaQtG2pn3Mgd8XZGKYgscreTMTKAPhSLjOVcSUs5dow8KDvcbrt5if?=
- =?us-ascii?Q?JI1nWL6lOjoMq4Nq5TMVQxaVaBx5wbPOhx0k8yXgWE6VughXmbT0qBHjg1Fl?=
- =?us-ascii?Q?UVGz9iDQje7Y+yO/uJ900X/PI1w07ix1FTbVDvpFAs+Bo5gomzdytYdFLVLW?=
- =?us-ascii?Q?d0uSPNIC9YVAjUIgC9H0gVLvT649z+CdJgbZdFHHUFbnem+PCOGI298gs/J5?=
- =?us-ascii?Q?iistY/5hh1TUodQxXeBs2w18HaWkd5mq7L0VO9s1rio7PDKI/e+tM5o+X7aX?=
- =?us-ascii?Q?OL+mjYsGHOBTo3kYxFDh4+c=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(19092799006)(1800799024)(366016)(38350700014)(7053199007);
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SVJ6YnExOVJBZjV5bk9ZNHEvVGVFaW5FRndWUHRUbXNDTVRKZlYrMlI0d05R?=
+ =?utf-8?B?Slg5RWtCNCtGeWRmV2hzdUUvRkZYRmlXZzdPeE9TMGk0UzFWZ25pZ0oxNjNs?=
+ =?utf-8?B?MWk5a2F1VXhGazZ4ekxDYTZabVRkT1J6R1U5aVh6SS9VOTd3aTAyYnRmRk15?=
+ =?utf-8?B?SmgyV0phSHFQdnBGdWxvS0todW8xWlhadXJKSU42YlMxU1Z1a0V1T3ZtZEdO?=
+ =?utf-8?B?VGwxQmVpa0lOcE9hYXprbHRjUEZpWWhnbU9VYU85TVptWnZ4M3RkYUpvZFV0?=
+ =?utf-8?B?WUNjNEFjKzdnNnltanNRbnF4Mm9ndEMwVjljeUZ0YnF1UWpWQmRSNENHaGhZ?=
+ =?utf-8?B?MXlvMHZZT2hDbUZZWGtrNkgvandJdkpQdE1vdTQyMTVIOGxmWXUzNkpBUGJl?=
+ =?utf-8?B?TUFMSVBXOFk0bzVPbmU5T21nRnB5OTJNbWI0bG9CRDhub0VQSE1IbFlXNEJO?=
+ =?utf-8?B?S3RLOFZ1V3hPVmoybFFpbFFSWHA0M3lhOUpKd2hLbHp6V2FJSDh3MDQvaEtE?=
+ =?utf-8?B?Yk5mT0hZcEtUbExWNGpBaFhsZzNSMlN1ZFVzU0dNQnFDWkJhK0RFNVB6YXpP?=
+ =?utf-8?B?Y1paUFVDcDdScjJCdlk3VG1XWVorcHY4ZnA1WlVucE00dm1mMkJvVCtCQ0lm?=
+ =?utf-8?B?S01JUWFBd0VxTTBvOVM1djhiejQ0d1BHM0RvNkhDSy9pMTdRMi9DdUwrbUtw?=
+ =?utf-8?B?Q3pYZk5hVGlRQnpaSk0wSWFCc1pZN1FiNDZZbVNrbzg4cTc3Tmh4RlFsdVJ4?=
+ =?utf-8?B?TkdGWFBaK1o1MXhlNVc4VTNiWjJzaGI3ekRCQXVxTzBtRnpMVUN5dW5oaXdT?=
+ =?utf-8?B?eTZuNSsxYUZwYWYwci9SUDJ0VE9oZzVKWTdYaXpOV0R2enNaMHpBckpIcWlF?=
+ =?utf-8?B?Um9Oc0VFdHU0bUZmSHNKT1FQN2c0S3NRaURyZ1RCSTBOaW9Ga2NPNmNTSExm?=
+ =?utf-8?B?TVU4eDhQQnByOWsvYkNhVUtaYTRSejJlVkx2YUpNT2I3VTQzWVVRRHZNanVn?=
+ =?utf-8?B?TmNScW9Gb0JPTDZ4MmlsS3psNG9CaDllNlNmdXdLU1FNbGdKMmhIcm0xc2h2?=
+ =?utf-8?B?MXpvSGpadzJmR29VeU5CdlFndTFPRWtUZVgycDM0K2g2OEZQV3ovRVhoMnRV?=
+ =?utf-8?B?UFBJeXd3UTVyd094aS9XNFhpTCtqZUFOdDI2Qnh0WjQwZlBzZDBkOUMrMk1J?=
+ =?utf-8?B?cVBqZ2RNK3ZwekZ2ck1TM0JGdTFFbFhkbGk1WFRvQ01yK1FiWlZkMjdqaENE?=
+ =?utf-8?B?Nzh0MGE4WnBBSVg5MmdMWkpQck90OHBzNi9sUmVDL3ZFempmUEVoRU5FNWlz?=
+ =?utf-8?B?Uk1wZWZ3SzFTbXpQTUJOalI1anpvL2NuVjFjd1BMVDV2OU9uU2pXZDBKTkpK?=
+ =?utf-8?B?N2FkN08ydkdxMnRlMlJTSERzc205QU80Y2F4UlFJRFdEUjE1THN1WUNRTFRy?=
+ =?utf-8?B?NUpNczBQZS8vQ3FoZkNqRmRQYkdSSSsvb3QxUjh6VFN3eG1EdjNBTy96VjdQ?=
+ =?utf-8?B?Q3JBQlBKc1RwS0sxQjB2V0hHRFBoWEJQdy9zZjZxOExLTG5ndEU2MUdDajA1?=
+ =?utf-8?B?Q3dmeFEyVUswUWh1anNGMUVUNzBVdEpacW9OaDlEZ205MW9veXFRM1RCQUxJ?=
+ =?utf-8?B?RlBHYUJZNCtuOW9MVHgzaTBhYm5QQytuekhwR2hFaEd5T21UVEpySTRQVkdo?=
+ =?utf-8?B?QVlWZ0Vhc2djRmNvRmFEaVhjWkMrd0dZcEtlRFdsUlpsRXRiNnBBNVFacWRU?=
+ =?utf-8?B?NzUyU1F1Z04wdzBOaVlsdEN2NkZ4YmVOVUVZUEY4VjNBWDgxSWVhdnBPMmo0?=
+ =?utf-8?B?QUxUZzk5UXdNeDlyYkcxOWlNSHBGZ2Q3MUJQRk1WSDRiTnpBRW5TeVVKcWcv?=
+ =?utf-8?B?STFUSnd3OTJLenU3MmlvNmJ6T2VURGVBU09yL0U5dSt1dmdiWUpUZzM4RkdZ?=
+ =?utf-8?B?S3FkeWhIL1V1L0RvOFRVeDFJeE45U2xZTzc5MStTZVpOSXNaUFgycjN5N05n?=
+ =?utf-8?B?VnA0MkRFd1lGWlVlb1krZStOL1dqYXB4amtwOGdjKzkxRUNBVjlyNFpFNk5x?=
+ =?utf-8?B?ajlaMVFNQVIzb3NvVGJTOTk4SXljVm9OWVZTWC9hV1l1aTRaSlYxa2Y5c1By?=
+ =?utf-8?B?dWRWazVvN0N5VDhLSS9UamlCVm5IZDlCeFg2TFVaZEZJRmxteVZkeW9IUmlu?=
+ =?utf-8?B?L3M3Rm9OSlJWODF3cUNBTEJLWGUyYjVyNjRkbXlpWTZ3cStGQXVBdEo0QmRR?=
+ =?utf-8?Q?++pM9X3833YInO3bEYTWlT8eMu7STi8l9TAtH6+FP0=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5zxlJHr/5dnLkjA7kUjiOzw08emV+8xGUxjmQ+o7EhCI7A7hF7Gw9EszXOgu?=
- =?us-ascii?Q?t26dw+rERfN+uN6ti6Z70k3i8hgcNFcifr5OarIh4OOSlf5OlAiC8VyOOhzk?=
- =?us-ascii?Q?lhx/u0Hfrkg90C7eldq03PkulYUTd+3jmur6lAQF0m8OKcQs/1Svp9f5xlTH?=
- =?us-ascii?Q?7eF4BDz5omM2V2pD0izxrqeduQg/IV/crnSgT2D1RzG6DAYncJcc9KG08RG7?=
- =?us-ascii?Q?Ma7Nzmtw5qLsig82Y5exV4zEaDH9NOIkxxNWCtkSeuuJYYC9zRlvR4+Rgnsd?=
- =?us-ascii?Q?B/PEps42961AHceo1k/8rFPO3SxkCa4G0OPZC17hDHzdy5/6wqOlDOzAHydM?=
- =?us-ascii?Q?ceNfYKBI9QFgjqXGs7i8QpTPfQrpyoQRpv/YkhFdeXTGoavP88aNH6PPuefq?=
- =?us-ascii?Q?9/vBk4QcG3lKJRDhVyBLHX7aftB4P4F3rzjdzgzlWyayG7yK9klG7SRWA3mH?=
- =?us-ascii?Q?u2S41+u29b/U/uVijSOIM9EeBqZnq4v0IMsZuZ51dol81SEzyJIFkH3bIBNe?=
- =?us-ascii?Q?8ofTfeJqYXw3yfivTqCGN7bWISVZmZx/UBZP4Cue22soBaK3uHW6Q7qpnLRZ?=
- =?us-ascii?Q?bVzRIFPtk3rxZ/fuXkKviSkXwKobKPZiDC61ulSxegsOsyWH0TtnHcsrm08F?=
- =?us-ascii?Q?V6ltXohUq3Cyq67lnVy3AfMOYHk/tnukSVrueVTMcANJW5RvQWvXGmlbIO9z?=
- =?us-ascii?Q?6XE4PcsMwNIp2hnDZeFviW0TYr84eMALLqhL6Vfih0b6yYXaCjuxbTVxYcNT?=
- =?us-ascii?Q?LKdmNkleWb1TvZotzVd87M5NEntL9D7rlmPbirCIgJr65hQiQVwlZxmaRbTb?=
- =?us-ascii?Q?tFq2HaJzWFt0Hu2V0GeMSaxzxWppUPMTLPht/ZWCcnbfVqV9MeZpioJxztdV?=
- =?us-ascii?Q?hUMJuQvQouSy8BorkGtaHNavHzWr4HYZcIfVYQr6+kDXuXx6gqesdHU1Ef48?=
- =?us-ascii?Q?wtNkeG6aya3KR8aGbBFyD2bF1l7yybWE+SmwrvD7WxwmwatN0fGKLoCgdwjo?=
- =?us-ascii?Q?mySwvrrhA9QPQgZUXhqFK9sM83v9UoGdLn69w3XXOOwlot483tFvx8mOUnaV?=
- =?us-ascii?Q?dSqWZJEzPCnyVYK8Be7maQjLD8aQ0kqlMHnrAYPMX5NRn+CVsG6iJF85p7Ro?=
- =?us-ascii?Q?5B/5lTcE4zvz+ViRRcwRjU1RKSNOwjCQEUBabqo9/kBS/mEOnVcy4+ZQxgL9?=
- =?us-ascii?Q?oTAXivL/UZOo8P5r9FMUxMtwRYPqaEW9EVCFPIRdO9nCJ+cXxZ1GCT0ljYxx?=
- =?us-ascii?Q?mwxYADjkVDWS/PEPeWZ+4sQQadGvBILD3ag4v7Zn/yTfQlTQKwFBnsulGXWO?=
- =?us-ascii?Q?asDzzK5It2zxQZRFJb50JclEADeyyYFzmJJIzOM9SI8a+zrmnzzbYmUmt6Ii?=
- =?us-ascii?Q?s8uIi7LOsLFbp+flO9qI8GzhUUUmOou7v3vSRylP8Jf25pJXJhi1VVcjez+K?=
- =?us-ascii?Q?GzdMztmcVQH0etSh6ppZMxiuRlx6Lra+1gwmPNBMxFUeD61AXsYa35oo2T44?=
- =?us-ascii?Q?MDDLs8GTNKqPr1bcyGfPNzdUN55DihNgsv41pLkb1ITihK30rVgWmoNIJ1te?=
- =?us-ascii?Q?TwAigjjWi9NC62+ofQkPY7At/DnkAIKfxk+/qAqPDocW9j3pZtT9Tb8Ur6MG?=
- =?us-ascii?Q?KJiqdZxT0jCWYcZZqNya61S7K4FN5zXUFAgiFqQFSLRyeKfQ7xemFtaUeIJP?=
- =?us-ascii?Q?RKGdSjcxHmTbczqATtfK5SKQKj3D3gsuwhiuSZb1wyE939bq340/YBzfVkpV?=
- =?us-ascii?Q?bRrYZg/NYQ=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81133f57-2b75-4975-80cd-08de595be2b2
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 02:13:54.7957 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eztDBRxhDVz4FYR6wjMvhzJm32RSEISry3/yhwcOb8YdsffhpEJfnEAPKLeOEYJuGrjODvrhQzWAIiALI502Tw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10700
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 02:16:58.6130 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb00ade9-249e-4539-ece6-08de595c5260
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4124
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,29 +169,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
->This patch adds CPLD support via IFC to the ls1021a-iot board.
+Hi Bryan,
+
+
+On 20/01/26 19:06, Bryan Brattlof wrote:
+> On January 17, 2026 thus sayeth Paresh Bhagat:
+>> Add info of boot flow and build steps for AM62Dx EVM.
+>>
+>> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+> Reviewed-by: Bryan Brattlof <bb@ti.com>
 >
->Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
+> Thanks for adding docs for the reference board Paresh.
+>
+>> ---
+>> Change log:
+>> 	v1->v2: Updated openocd cfg file path, usage note and TRM link.
+>>
+>> v1:https://lore.kernel.org/all/20260105183545.4108567-1-p-bhagat@ti.com/
+>>
+>>   doc/board/ti/am62dx_evm.rst | 256 ++++++++++++++++++++++++++++++++++++
+>>   doc/board/ti/k3.rst         |   1 +
+>>   2 files changed, 257 insertions(+)
+>>   create mode 100644 doc/board/ti/am62dx_evm.rst
+>>
+>> diff --git a/doc/board/ti/am62dx_evm.rst b/doc/board/ti/am62dx_evm.rst
+>> new file mode 100644
+>> index 00000000000..2d66241ce68
+>> --- /dev/null
+>> +++ b/doc/board/ti/am62dx_evm.rst
+>> @@ -0,0 +1,256 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+>> +.. sectionauthor:: Paresh Bhagat <p-bhagat@ti.com>
+>> +
+>> +AM62D Platforms
+>> +===============
+>> +
+>> +Introduction:
+>> +-------------
+>> +The AM62D2 SoC belongs to the K3 Multicore SoC architecture with DSP core
+>> +targeted for applications needing high-performance Digital Signal
+>> +Processing. It is used in applications like automotive audio systems,
+>> +professional sound equipment, radar and radio for aerospace, sonar in
+>> +marine devices, and ultrasound in medical imaging. It also supports
+>> +precise signal analysis in test and measurement tools.
+>> +
+>> +Some highlights of AM62D2 SoC are:
+>> +
+>> +* Quad-Cortex-A53s (running up to 1.4GHz) in a single cluster. Dual/Single
+>> +  core variants are provided in the same package to allow HW compatible
+>> +  designs.
+>> +* One Device manager Cortex-R5F for system power and resource management,
+>> +  and one Cortex-R5F for Functional Safety or general-purpose usage.
+>> +* DSP with Matrix Multiplication Accelerator(MMA) (up to 2 TOPS) based on
+>> +  single core C7x.
+>> +* 3x Multichannel Audio Serial Ports (McASP) Up to 4/6/16 Serial Data Pins
+>> +  which can Transmit and Receive Clocks up to 50MHz, with multi-channel I2S
+>> +  and TDM Audio inputs and outputs.
+>> +* Integrated Giga-bit Ethernet switch supporting up to a total of two
+>> +  external ports with TSN capable to enable audio networking features such
+>> +  as, Ethernet Audio Video Bridging (eAVB) and Dante.
+>> +* 9xUARTs, 5xSPI, 6xI2C, 2xUSB2, 3xCAN-FD, 3x eMMC and SD, OSPI memory
+>> +  controller, 1x CSI-RX-4L for Camera, eCAP/eQEP, ePWM, among other
+>> +  peripherals.
+>> +* Dedicated Centralized Hardware Security Module with support for secure
+>> +  boot, debug security and crypto acceleration and trusted execution
+>> +  environment.
+>> +* One 32 bit DDR Subsystem that supports LPDDR4, DDR4 memory types.
+>> +* Low power mode support: Partial IO support for CAN/GPIO/UART wakeup.
+>> +
+>> +This SoC is of part K3 AM62x family, which includes the AM62A and AM62P
+>> +variants. While the AM62A and AM62D are largely similar, the AM62D is
+>> +specifically targeted for general-purpose DSP applications, whereas the
+>> +AM62A focuses on edge AI workloads. A key distinction is that the AM62D
+>> +does not include multimedia components such as the video encoder/decoder,
+>> +MJPEG encoder, Vision Processing Accelerator (VPAC) for image signal
+>> +processing, or the display subsystem. Additionally, the AM62D has a
+>> +different pin configuration compared to the AM62A, which impacts
+>> +embedded software development.
+>> +
+>> +More details can be found in the Technical Reference Manual:
+>> +https://www.ti.com/lit/pdf/sprujd4
+> If you have to make another spin of this, one small nitpick is to have
+> this link be consistent with the 'Platform information' section below.
 
-CI report build failure.
 
-  CC      drivers/video/hitachi-tx10d07vm0baa.o
-In file included from drivers/misc/fsl_ifc.c:8:
-include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or directory
-   16 | #include <asm/ppc.h>
-      |          ^~~~~~~~~~~
-compilation terminated.
-make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Error 1
-make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
-make[2]: *** Waiting for unfinished jobs....
-  CC      drivers/rtc/ht1380.o
-  CC      drivers/video/hitachi_tx18d42vm_lcd.o
-  CC      drivers/rtc/i2c_rtc_emul.o
+Yep now you mentioned, this does looks odd when we view in html. I can 
+have a patch later to update this for all of our platforms (this one is 
+merged now).
 
-make[1]: *** [Makefile:2191: drivers] Error 2
-make: *** [Makefile:362: __build_one_by_one] Error 2
-Cleaning up project directory and file based variables
+Thanks for the review.
 
-Regards
-Peng
+
+>
+>> +
+>> +Platform information:
+>> +
+>> +* https://www.ti.com/tool/AUDIO-AM62D-EVM
+>> +
+> ~Bryan
+>
