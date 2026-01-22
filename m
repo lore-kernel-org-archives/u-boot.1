@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06DF4D3EE6B
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 14:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B10D3EE6B
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 14:25:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D598397D;
-	Thu, 22 Jan 2026 15:23:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 141AE8397D;
+	Thu, 22 Jan 2026 15:25:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AeaWdcSp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gvg1H4Ll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EE6F83A1E; Thu, 22 Jan 2026 15:23:29 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id AD14883A6A; Thu, 22 Jan 2026 15:25:52 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67EF58341A
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:23:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DF638341A
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:25:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-4041b3c1fa1so343013fac.3
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 06:23:27 -0800 (PST)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-45c83c49213so694118b6e.3
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 06:25:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769091806; x=1769696606; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769091949; x=1769696749; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0/kLkxfXOPt5ZsQkHYnv0owhvlfU8SExO7L0d9XxhEU=;
- b=AeaWdcSp2XY9Q1aI4WZQ2zeIxbAGleuYunrhScgjiCcky9E9HYVRbJKzoPaWWJKhXp
- x0Ff7cfolJjk0BJEIMNVcusKYn5Efb6EQTGVxpCF5Nio7ugc0B0Xi2SlAwjML30wiGmn
- WlQ4u4vDaBVUS2kHzbAQbHfKK3AlF8uotNgL0=
+ bh=Vf+CiFhrsck/crRzHV5719faIPKV7H4XqNYfhY2EpbA=;
+ b=Gvg1H4LlEwbpeYrgVSKJaPlleO3RYK3YZ96DnLo8ly3i9krT/iqEZs+42wZSWjqZ8m
+ QxckgBS/E+lyyT16+xD73Gzh8c4OVphIiPIXYrTvisGmkO6Wc1vLWFbHllZEvePdMCBp
+ qUU0gmdy+qlgdNx1/3snFr4pKnVYHAWZonMr4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769091806; x=1769696606;
+ d=1e100.net; s=20230601; t=1769091949; x=1769696749;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0/kLkxfXOPt5ZsQkHYnv0owhvlfU8SExO7L0d9XxhEU=;
- b=M6ErFEddAKJ4mERL4myZx1wFt7asTyqE0OoZd1wcNB0QpgjHwIIVM1xuSI+/mZ0WfL
- Z24SqRzZ9hgD6qVLzsHoI9sqRzdPH35hkeUGco2p7IrkNoYqWXY3Q4DTgk6edcO3/Zi8
- qtDUWbrqFmO3dXYGmTc9jJXe5O4oYojelZ/iLx37DHMG2vtdp/AlzNL8hKL9rnEbDS6z
- sAyZC68WTDZB7Xyu36D8IyeuIUcnsmyQ7ATjfz+Hxtn1oMazRywvPu3ssB0hDle/Gqpq
- HwGmqbhj/zzJZECaGOjPM5dgcasvQZo7ZCHDbWV5uBSjXBknbKtHI2qQ3UCNTBANoQjA
- PPAw==
+ bh=Vf+CiFhrsck/crRzHV5719faIPKV7H4XqNYfhY2EpbA=;
+ b=HiyZGpvdNlXWn1afFRvyRfgp7JhMFB7E3TF/1sm05Dt4/954NGvhihL6nrjqjoPZ4k
+ DFfOKK9OU/n2oF/7x4SuXzIBU8v2UNjNDI1AwyXF/F1g7QtqkWjSM4xqvyovngsSKMxP
+ vFhfeL77fGACsmlMcCeYRoSBw/ywZIL8Ew7dpjp//fZlCXCilepLsQzQw7UmlVgWt6AH
+ mxftSgZi39bhj8Q27gFHCFZ0cISqhaK8uuE7a25HZwAMzC4F+WdqBWsCmouw0mwycqmy
+ LJ0E69ZyfeeoARX/szlmUMBtiTsd2UgXDhMXpARF0bQWga33tLIzh4mWeOufXgDrnqUD
+ YQtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXo80brRo5TP+ZNxI2lCbgmwZkRsDLR41p1Tfo3LwLpnyQ+UKDMi6eKyPT+J4E7vQTOLTgokuU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAHh+bVhJyt7ttqJ0cBkLAUt3rLu7Aw//5n8GA3HNOfRW9Tzrh
- rLVZoU9F0j99ePjJvlLzRRVR9IqSzNduv1UDKCyzuxQ/r1XEUBcUdRBbE2rsPqYx1rg=
-X-Gm-Gg: AZuq6aJMXE/SWWBBc5/XFLY5nLks94hz6IRkYBA8et7qFs9L8gb1ko2o8aRO6FPybez
- 74rOL6mOXtt3xzZWxqdd6eTec/BSD7EVJq382jny2ICbMEWmzkNMtjrHMJWzw+MPfzxNrApJnaG
- QXhDbqFeSq98ZUcSuJh97eMfWEdfb5twmaK2jJipb9Z0Bks7UVCv73yQcvp2OJe/Kch2/d05T/d
- x9HfKtpgbXQxGBzHAdynvAOFany35Q06lsfVX/eSKTP5HhJp0p7MDnRwJBRe4GMrsIW8zV+hQGO
- cbrdwfqmL/d8bSXCMA9RUB8shaGXsjjkUTMEnA5IcFw5hWY0E5sDGDKsH5a5p2Fnr6r9PaEhO+6
- sMr0CN4uNCmS/CPUZWop/4gPG9QnjvXCHbt5kbWlyuW86gYjhO6jz2454vlfCAFUVQsslgFwIl3
- /k5QCfAo0RmdjkYM+bMAanQ9XuaEKHbRCxKZnnNNGxV0H9GAcTIa/ESO12wwYKfVyMfIZL2pyy0
- goYaoeod+dKDgoITPcbEHw/5TidkWdPU+HJxzI=
-X-Received: by 2002:a05:6870:d62a:b0:404:2fe7:e184 with SMTP id
- 586e51a60fabf-4044cff2eb4mr9488515fac.43.1769091806065; 
- Thu, 22 Jan 2026 06:23:26 -0800 (PST)
+ AJvYcCUpyYj7949v+R0HPriW7rqMl0GSkqCOSD90L/0vivickScu1JwwadPmjWnmdOU6fJ/1toX3cD8=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywp01QRsBuRgMxEFHKPzCetp/+/VejSVEWGNvVPvIdKT3h2r0++
+ 32Sa6Y7I8V3I4kyZT8iWHEWHjjeOijb6okbZWBkRuqW7M0qZkONAbDMBp1gWk4PDoaQ=
+X-Gm-Gg: AZuq6aKvfYoQfUK4pcb6UD8bbzCB44JAacfDbWtS0YaTFHH0CUi20UWqFbcTkjQ5RN6
+ D+lf0S9nHA0YqirOoa9wo7OAk75jsgvCY4cUgRBCrqFe083tPNynw+ZMdVcSt66VRrjYYs8C2a/
+ YPeJwHx8bmrNjifrU2u0rIERD5N35ijC46s2QFWb6rYEBYfRp8DQBS4JnXDZjZp5hHuQU76Fk4X
+ r3JyWH9u1mWFL+hxw6uFOZx3KN/fLr1TM+9rmF5bW6kFBkUdy9ZA9+9U81GvbhJqDJ++3EBgvwf
+ 8CDZtljMnKjsDnu8UGpGjvcMK4Kifx+PDeHWvXzeLuSTiOXStqtfMi1U/IEpCA2g3ReLSeH8Ol0
+ O9RhV7Jwq5SbnGzGRow+KldwSDq4fIw8BxcddqqrYolJzIvyimZULplO8JVY8PAB2J8msGGgRBm
+ iqjUk4I+F2DHX1wka3geaCOvoo8yLgKq15/PQ5l1KicrJHVsLOWQ68HjTCYnL/EsdGaBHa3RAHA
+ 4L0Le3ghnGkCFphb2kKPMDLK7z2P91w8021JirDTMDf2faNVw==
+X-Received: by 2002:a05:6808:4f07:b0:45e:84be:b3a4 with SMTP id
+ 5614622812f47-45e84beb3f2mr5428919b6e.17.1769091949158; 
+ Thu, 22 Jan 2026 06:25:49 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-408a00adc20sm466092fac.18.2026.01.22.06.23.24
+ 5614622812f47-45c9dff95a2sm10253378b6e.11.2026.01.22.06.25.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 06:23:25 -0800 (PST)
-Date: Thu, 22 Jan 2026 08:23:23 -0600
+ Thu, 22 Jan 2026 06:25:48 -0800 (PST)
+Date: Thu, 22 Jan 2026 08:25:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Fabio Estevam <festevam@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Beleswar Padhi <b-padhi@ti.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
@@ -89,17 +88,15 @@ Cc: Fabio Estevam <festevam@gmail.com>,
  Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
 Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
  device tree is aligned
-Message-ID: <20260122142323.GX3416603@bill-the-cat>
+Message-ID: <20260122142545.GY3416603@bill-the-cat>
 References: <20260115222828.3931345-1-trini@konsulko.com>
  <20260115222828.3931345-3-trini@konsulko.com>
  <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
- <CAOMZO5COTa3ykhF8XZyzmJ0QZNotK4USo0LrH0XBJLogatfXFQ@mail.gmail.com>
- <040e129c-44ca-4a59-828f-d37c6e41d3b2@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YSyuquBVYVj23Lds"
+ protocol="application/pgp-signature"; boundary="V+NOYZp8DsNtjKoL"
 Content-Disposition: inline
-In-Reply-To: <040e129c-44ca-4a59-828f-d37c6e41d3b2@mailbox.org>
+In-Reply-To: <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,53 +115,89 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YSyuquBVYVj23Lds
+--V+NOYZp8DsNtjKoL
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 22, 2026 at 12:22:01PM +0100, Marek Vasut wrote:
-> On 1/22/26 4:33 AM, Fabio Estevam wrote:
-> > On Thu, Jan 22, 2026 at 12:08=E2=80=AFAM Fabio Estevam <festevam@gmail.=
-com> wrote:
-> >=20
-> > > RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
-> > > also affected by this change.
-> >=20
-> > The change below restores the boot:
-> >=20
-> > diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> > index d780a5060774..fc2b7fcb969f 100644
-> > --- a/arch/arm/cpu/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/u-boot-spl.lds
-> > @@ -40,6 +40,7 @@ SECTIONS
-> >          .binman_sym_table : {
-> >                  __binman_sym_start =3D .;
-> >                  KEEP(*(SORT(.binman_sym*)));
-> > +               . =3D ALIGN(8);
-> >                  __binman_sym_end =3D .;
-> >          }
-> >=20
-> > If you agree, I can send a formal patch.
+On Thu, Jan 22, 2026 at 12:08:04AM -0300, Fabio Estevam wrote:
+> Hi Tom,
 >=20
-> Shouldn't we instead find a way to surely align ONLY the _image_binary_end
-> or __bss_end symbols instead of adding random ALIGN(8) into the linker
-> scripts ?
+> On Thu, Jan 15, 2026 at 7:28=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > With commit 0535e46d55d7 ("scripts/dtc: Update to upstream version
+> > v1.7.2-35-g52f07dcca47c") it is now a fatal error to U-Boot if our
+> > device tree is not 8-byte aligned. In commit f613a6e15ef7 ("ARM: OMAP2+:
+> > Pad SPL binary to 8-byte alignment before DTB") Beleswar Padhi explains
+> > that we must have ALIGN(x) statements inside of a section to ensure that
+> > padding is included and not simply that the linker address counter is
+> > incremented. To that end, this patch:
+> > - Expands some linker sections to be more readable when adding a second
+> >   statement to the section.
+> > - Aligns the final section before _end (for U-Boot) or
+> >   _image_binary_end or __bss_end (for xPL phases) by 8-bytes by adding
+> >   '. =3D ALIGN(8);' to the final section before the symbol.
+> > - Ensure that we do have alignment by adding an ASSERT so that when not
+> >   aligned we fail to link (and explain why).
+> > - Remove now-spurious  '. =3D ALIGN(x);' statements that were intended =
+to
+> >   provide the above alignments.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > The only part of this I am only mostly rather than fully confident in is
+> > having caught all cases of having SPL_SEPARATE_BSS being false. I
+> > believe I have as the generic ARM SPL linker script enforces the BSS
+> > ending with 8-byte alignment, and the point of the ASSERTs here is to
+> > catch the case where the section we're adding the ALIGN to ends up being
+> > empty and so that ALIGN would become useless.
+>=20
+> I'm working on bringing up Rockchip RV1103 (ARMv7 SoC, no custom .lds fil=
+e)
+>=20
+> After this patch is applied, the board does not boot anymore:
+>=20
+> Missing DTB
+> spl_early_init() failed: -2
+> ### ERROR ### Please RESET the board ###
+>=20
+> If I force "imply SPL_SEPARATE_BSS" in the SoC Kconfig, the board boots a=
+gain.
+>=20
+> In this case, the build shows some warnings:
+>=20
+>   LD      spl/u-boot-spl
+> /usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sram
+> /usr/bin/arm-linux-gnueabihf-ld: invalid origin for memory region .sdram
+> /usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sdram
+>   OBJCOPY spl/u-boot-spl-nodtb.bin
+>   SYM     spl/u-boot-spl.sym
+>   CAT     spl/u-boot-spl-dtb.bin
+>   COPY    spl/u-boot-spl.bin
+>   BINMAN  .binman_stamp
+>   OFCHK   .config
+>=20
+> RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
+> also affected by this change.
+>=20
+> What do you suggest?
 
-We did that, yes. I'm not sure what Fabio is running in to here..
+Where are those memory regions coming from? They aren't specified in
+arch/arm/cpu/u-boot-spl.lds
 
 --=20
 Tom
 
---YSyuquBVYVj23Lds
+--V+NOYZp8DsNtjKoL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXIy2gAKCRAr4qD1Cr/k
-CqRlAP4zX2OXkflBh9UTs5dbAD2Uw0N0G5Jk2MbYeJn3eTaaewEAqDKyp8V2FYk2
-JmvItuofBusbYtFbDqrjBZSpIs+17AI=
-=IsV1
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXIzaQAKCRAr4qD1Cr/k
+CqtaAQDSu1bSoLtVLOHbXznjUj+IlFF2UFK3FNlu80ttkAG4wAEAo+tc5vWwdKr2
+Q9qTW6CXz+xT/745I5LC4wPxda+gfQw=
+=xdrS
 -----END PGP SIGNATURE-----
 
---YSyuquBVYVj23Lds--
+--V+NOYZp8DsNtjKoL--
