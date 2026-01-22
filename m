@@ -4,100 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B10D3EE6B
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 14:25:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAE4D3EE6B
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 14:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 141AE8397D;
-	Thu, 22 Jan 2026 15:25:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 55DD7839DF;
+	Thu, 22 Jan 2026 15:44:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gvg1H4Ll";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="f8ftQwIY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD14883A6A; Thu, 22 Jan 2026 15:25:52 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 47D528397D; Thu, 22 Jan 2026 15:44:03 +0100 (CET)
+Received: from sender4-op-o14.zoho.com (sender4-op-o14.zoho.com
+ [136.143.188.14])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DF638341A
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:25:50 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45c83c49213so694118b6e.3
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 06:25:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769091949; x=1769696749; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vf+CiFhrsck/crRzHV5719faIPKV7H4XqNYfhY2EpbA=;
- b=Gvg1H4LlEwbpeYrgVSKJaPlleO3RYK3YZ96DnLo8ly3i9krT/iqEZs+42wZSWjqZ8m
- QxckgBS/E+lyyT16+xD73Gzh8c4OVphIiPIXYrTvisGmkO6Wc1vLWFbHllZEvePdMCBp
- qUU0gmdy+qlgdNx1/3snFr4pKnVYHAWZonMr4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769091949; x=1769696749;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Vf+CiFhrsck/crRzHV5719faIPKV7H4XqNYfhY2EpbA=;
- b=HiyZGpvdNlXWn1afFRvyRfgp7JhMFB7E3TF/1sm05Dt4/954NGvhihL6nrjqjoPZ4k
- DFfOKK9OU/n2oF/7x4SuXzIBU8v2UNjNDI1AwyXF/F1g7QtqkWjSM4xqvyovngsSKMxP
- vFhfeL77fGACsmlMcCeYRoSBw/ywZIL8Ew7dpjp//fZlCXCilepLsQzQw7UmlVgWt6AH
- mxftSgZi39bhj8Q27gFHCFZ0cISqhaK8uuE7a25HZwAMzC4F+WdqBWsCmouw0mwycqmy
- LJ0E69ZyfeeoARX/szlmUMBtiTsd2UgXDhMXpARF0bQWga33tLIzh4mWeOufXgDrnqUD
- YQtg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpyYj7949v+R0HPriW7rqMl0GSkqCOSD90L/0vivickScu1JwwadPmjWnmdOU6fJ/1toX3cD8=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp01QRsBuRgMxEFHKPzCetp/+/VejSVEWGNvVPvIdKT3h2r0++
- 32Sa6Y7I8V3I4kyZT8iWHEWHjjeOijb6okbZWBkRuqW7M0qZkONAbDMBp1gWk4PDoaQ=
-X-Gm-Gg: AZuq6aKvfYoQfUK4pcb6UD8bbzCB44JAacfDbWtS0YaTFHH0CUi20UWqFbcTkjQ5RN6
- D+lf0S9nHA0YqirOoa9wo7OAk75jsgvCY4cUgRBCrqFe083tPNynw+ZMdVcSt66VRrjYYs8C2a/
- YPeJwHx8bmrNjifrU2u0rIERD5N35ijC46s2QFWb6rYEBYfRp8DQBS4JnXDZjZp5hHuQU76Fk4X
- r3JyWH9u1mWFL+hxw6uFOZx3KN/fLr1TM+9rmF5bW6kFBkUdy9ZA9+9U81GvbhJqDJ++3EBgvwf
- 8CDZtljMnKjsDnu8UGpGjvcMK4Kifx+PDeHWvXzeLuSTiOXStqtfMi1U/IEpCA2g3ReLSeH8Ol0
- O9RhV7Jwq5SbnGzGRow+KldwSDq4fIw8BxcddqqrYolJzIvyimZULplO8JVY8PAB2J8msGGgRBm
- iqjUk4I+F2DHX1wka3geaCOvoo8yLgKq15/PQ5l1KicrJHVsLOWQ68HjTCYnL/EsdGaBHa3RAHA
- 4L0Le3ghnGkCFphb2kKPMDLK7z2P91w8021JirDTMDf2faNVw==
-X-Received: by 2002:a05:6808:4f07:b0:45e:84be:b3a4 with SMTP id
- 5614622812f47-45e84beb3f2mr5428919b6e.17.1769091949158; 
- Thu, 22 Jan 2026 06:25:49 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45c9dff95a2sm10253378b6e.11.2026.01.22.06.25.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 06:25:48 -0800 (PST)
-Date: Thu, 22 Jan 2026 08:25:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Beleswar Padhi <b-padhi@ti.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Joel Stanley <joel@jms.id.au>, Michal Simek <michal.simek@amd.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-Message-ID: <20260122142545.GY3416603@bill-the-cat>
-References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-3-trini@konsulko.com>
- <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 96F218397D
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:43:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1769093026; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=TSvDeQhjEzKjg7KeB6sekD/EUC4NMP0wpZvz142/EzceX6kfkP24B7zh8jvBCp9WuPTSmYERejhYEPvQi8b/KvblZG4wELbZTdo8zlB7Io34lILRloP8Uy8M+NOKca7Tso75ciqFB2VGavWWVU3xs9Arf7fECIkj2hMnwWhAJsI=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1769093026;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=AbMVSg1M2JptVbZ3/CxE3xZokZM2vJ5AT85bxJjzzGQ=; 
+ b=ZKIfj/rKR92ZlXwEMCVMle66qMexn+VoeivUDo+jdGapwDGwSkbsGExUsL05qDLFQehC2S5uWCHI8PfSFcek8JfNCcShTo5Ejsr3b0JAI4+BnP+B8gRJ5R/NePM1aEm1ryHKY2Snwn2PcMmHMpxcSn2NWx8SVKGv8dCw0Yo8LIg=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769093026; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+ bh=AbMVSg1M2JptVbZ3/CxE3xZokZM2vJ5AT85bxJjzzGQ=;
+ b=f8ftQwIYrJv6yrJQDrIB9dhuoj0WrIiaBIXg8O58e4Qe1q1SKn7NP2T6qrIof/Hb
+ 1qX42c90yzXwAdGa4sdX5sKxxTZb9dKjgJpqWZx9qlFaghsfdnJoOiBwy7bmhz6b5UZ
+ 7ObcndkieoiLo4rQZF90Uu+3Ngs7EHF6Blbo8mH4=
+Received: by mx.zohomail.com with SMTPS id 1769093023630263.2303800352968;
+ Thu, 22 Jan 2026 06:43:43 -0800 (PST)
+Date: Thu, 22 Jan 2026 14:43:29 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: u-boot@lists.denx.de, uboot@riscstar.com,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Heiko Schocher <hs@nabladev.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Yixun Lan <dlan@gentoo.org>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH 14/17] spacemit: k1: Add DDR firmware support to SPL
+Message-ID: <aXI3kc8t9bPRmnkM@pie>
+References: <20260117190231.977686-1-raymondmaoca@gmail.com>
+ <20260117190231.977686-15-raymondmaoca@gmail.com>
+ <aWyryi4ZPNgNIejE@pie>
+ <CAMDkj5yGNxL0Hkw5k0Kae=SjPb51Bu9T0M60Dpaj5OVckN3R1g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="V+NOYZp8DsNtjKoL"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMDkj5yGNxL0Hkw5k0Kae=SjPb51Bu9T0M60Dpaj5OVckN3R1g@mail.gmail.com>
+X-ZohoMailClient: External
+X-ZohoMail-Owner: <aXI3kc8t9bPRmnkM@pie>+zmo_0_me@ziyao.cc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,90 +89,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---V+NOYZp8DsNtjKoL
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jan 22, 2026 at 12:08:04AM -0300, Fabio Estevam wrote:
-> Hi Tom,
->=20
-> On Thu, Jan 15, 2026 at 7:28=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
+On Wed, Jan 21, 2026 at 06:24:01PM -0500, Raymond Mao wrote:
+> Hi Yao Zi,
+> 
+> On Mon, Jan 19, 2026 at 4:41 AM Yao Zi <me@ziyao.cc> wrote:
+> 
+> > (My mail provider complains about the huge list of recipients, so I
+> > reduced it a little.)
 > >
-> > With commit 0535e46d55d7 ("scripts/dtc: Update to upstream version
-> > v1.7.2-35-g52f07dcca47c") it is now a fatal error to U-Boot if our
-> > device tree is not 8-byte aligned. In commit f613a6e15ef7 ("ARM: OMAP2+:
-> > Pad SPL binary to 8-byte alignment before DTB") Beleswar Padhi explains
-> > that we must have ALIGN(x) statements inside of a section to ensure that
-> > padding is included and not simply that the linker address counter is
-> > incremented. To that end, this patch:
-> > - Expands some linker sections to be more readable when adding a second
-> >   statement to the section.
-> > - Aligns the final section before _end (for U-Boot) or
-> >   _image_binary_end or __bss_end (for xPL phases) by 8-bytes by adding
-> >   '. =3D ALIGN(8);' to the final section before the symbol.
-> > - Ensure that we do have alignment by adding an ASSERT so that when not
-> >   aligned we fail to link (and explain why).
-> > - Remove now-spurious  '. =3D ALIGN(x);' statements that were intended =
-to
-> >   provide the above alignments.
+> > On Sat, Jan 17, 2026 at 02:01:48PM -0500, Raymond Mao wrote:
+> > > From: Raymond Mao <raymond.mao@riscstar.com>
+> > >
+> > > Include DDR initialization firmware in the SPL image. The firmware
+> > > path can be specified via the DDR_FW_FILE environment variable. If
+> > > the firmware is not found, an empty placeholder file is created to
+> > > allow the build to proceed without DDR initialization support.
+> > >
+> > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> > > ---
+> > >  arch/riscv/dts/k1-spl.dts      |  34 ++++++++++++++++++++++++++++++++-
+> > >  board/spacemit/k1/Kconfig      |   8 ++++++++
+> > >  board/spacemit/k1/Makefile     |  19 ++++++++++++++++++
+> > >  board/spacemit/k1/spl.c        |  30 +++++++++++++++++++++++++++++
+> > >  include/configs/k1.h           |   3 +++
+> > >  lib/vendor/spacemit/ddr_fw.bin | Bin 0 -> 19416 bytes
 > >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > The only part of this I am only mostly rather than fully confident in is
-> > having caught all cases of having SPL_SEPARATE_BSS being false. I
-> > believe I have as the generic ARM SPL linker script enforces the BSS
-> > ending with 8-byte alignment, and the point of the ASSERTs here is to
-> > catch the case where the section we're adding the ALIGN to ends up being
-> > empty and so that ALIGN would become useless.
->=20
-> I'm working on bringing up Rockchip RV1103 (ARMv7 SoC, no custom .lds fil=
-e)
->=20
-> After this patch is applied, the board does not boot anymore:
->=20
-> Missing DTB
-> spl_early_init() failed: -2
-> ### ERROR ### Please RESET the board ###
->=20
-> If I force "imply SPL_SEPARATE_BSS" in the SoC Kconfig, the board boots a=
-gain.
->=20
-> In this case, the build shows some warnings:
->=20
->   LD      spl/u-boot-spl
-> /usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sram
-> /usr/bin/arm-linux-gnueabihf-ld: invalid origin for memory region .sdram
-> /usr/bin/arm-linux-gnueabihf-ld: invalid length for memory region .sdram
->   OBJCOPY spl/u-boot-spl-nodtb.bin
->   SYM     spl/u-boot-spl.sym
->   CAT     spl/u-boot-spl-dtb.bin
->   COPY    spl/u-boot-spl.bin
->   BINMAN  .binman_stamp
->   OFCHK   .config
->=20
-> RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
-> also affected by this change.
->=20
-> What do you suggest?
+> > It's unusual to ship binary firmware in U-Boot repository. Please place
+> > the firmware somewhere else, and give a clear instruction in the
+> > board/architecture documentation explaining how to obtain/build it.
+> >
+> > >  6 files changed, 93 insertions(+), 1 deletion(-)
+> > >  create mode 100644 lib/vendor/spacemit/ddr_fw.bin
+> >
+> > ...
+> >
+> > > diff --git a/board/spacemit/k1/Kconfig b/board/spacemit/k1/Kconfig
+> > > index 9f9c806d00d..a5fa788f660 100644
+> > > --- a/board/spacemit/k1/Kconfig
+> > > +++ b/board/spacemit/k1/Kconfig
+> > > @@ -15,6 +15,14 @@ config SYS_CONFIG_NAME
+> > >  config TEXT_BASE
+> > >       default 0x00200000
+> > >
+> > > +config SPL_DDR_FIRMWARE_OFFSET
+> > > +     hex "DDR firmware offset in SPL image"
+> > > +     depends on SPL
+> > > +     default 0x20000
+> > > +     help
+> > > +       Offset where DDR firmware should be placed in the SPL
+> > > +       image.
+> > > +
+> > >  config SPL_OPENSBI_LOAD_ADDR
+> > >       default 0x00000000
+> > >
+> > > diff --git a/board/spacemit/k1/Makefile b/board/spacemit/k1/Makefile
+> > > index 7bce47bac8c..ebe6e55867c 100644
+> > > --- a/board/spacemit/k1/Makefile
+> > > +++ b/board/spacemit/k1/Makefile
+> > > @@ -5,3 +5,22 @@
+> > >
+> > >  obj-y := board.o
+> > >  obj-$(CONFIG_SPL_BUILD) += spl.o
+> > > +
+> > > +DDR_FW_SRC ?= $(DDR_FW_FILE)
+> > > +FW_TARGET = $(srctree)/lib/vendor/spacemit/ddr_fw.bin
+> > > +
+> > > +DDR_FW_HEADER = $(objtree)/include/generated/ddr_fw_info.h
+> > > +
+> > > +$(obj)/spl.o: $(DDR_FW_HEADER)
+> > > +
+> > > +$(DDR_FW_HEADER): $(FW_TARGET)
+> > > +     @echo "/* DDR firmware info - $$(date) */" > $@
+> > > +     @if [ -f "$(FW_TARGET)" ]; then \
+> > > +             SIZE=$$(stat -c%s "$(FW_TARGET)" 2>/dev/null || echo 0); \
+> > > +     else \
+> > > +             SIZE=0; \
+> > > +     fi; \
+> > > +     echo "#define DDR_FW_FILE_SIZE  $$SIZE" >> $@
+> > > +     @echo "/* Note: Update ADDR if binman layout changes */" >> $@
+> > > +
+> > > +clean-files += $(FW_TARGET) $(DDR_FW_HEADER)
+> >
+> > Please make use of existing binman[1] facibilities to avoid the extra
+> > Kconfig and Makefile pieces. binman_sym() could be used for obtaining
+> > both size and offset of a binman entry.
+> >
+> > It doesn't work at all in SPL. I checked the binman symbol table
+> that was totally empty.
 
-Where are those memory regions coming from? They aren't specified in
-arch/arm/cpu/u-boot-spl.lds
+I've tried commit fd871fc6bb49 ("pinctrl: mediatek: mt8365: add PUPD
+registers") with th1520_lpi4a_defconfig, and
+drivers/ram/thead/th1520_ddr.c, which makes use of binman_sym(), does
+work.
 
---=20
-Tom
+This suggests binman facilities do work on RISC-V, at least after the
+last time when I fixed it[1]. Are you testing on a U-Boot version
+earlier than v2025.07? Otherwise there's likely something (configuration
+or code) wrong on your side.
 
---V+NOYZp8DsNtjKoL
-Content-Type: application/pgp-signature; name="signature.asc"
+btw, every first line of your replied paragraphs has the wrong level of
+quotes, which is a little confusing.
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+Yao Zi
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXIzaQAKCRAr4qD1Cr/k
-CqtaAQDSu1bSoLtVLOHbXznjUj+IlFF2UFK3FNlu80ttkAG4wAEAo+tc5vWwdKr2
-Q9qTW6CXz+xT/745I5LC4wPxda+gfQw=
-=xdrS
------END PGP SIGNATURE-----
-
---V+NOYZp8DsNtjKoL--
+[1]: https://lore.kernel.org/u-boot/20250416162533.1396-1-ziyao@disroot.org/
