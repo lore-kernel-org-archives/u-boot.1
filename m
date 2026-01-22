@@ -4,148 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB8B4D3EE64
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 13:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1797D3EE65
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 13:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18E8D8397D;
-	Thu, 22 Jan 2026 14:17:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 6B6088397D;
+	Thu, 22 Jan 2026 14:19:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="LeSE6oYt";
+	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="bRWNG0uN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE72883A1E; Thu, 22 Jan 2026 14:17:39 +0100 (CET)
+ id 9BA0983A6A; Thu, 22 Jan 2026 14:19:07 +0100 (CET)
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1BDC80077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 14:17:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75F0C80077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 14:19:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=pass smtp.mailfrom=niko.mauno@vaisala.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m1ufZs9M+WUUyq5jS9WK/Xz2n/39DUrbOP1fzqYL64lcMvlddmwPBKF0XCVNrMN+ljEqp/nwMhXckxBtkBdCAIKMuzCNhJPNCLlKOMduG/m87j/QIk6Ic9sL248OHE4AtL5HEtTTqO3VRGCHltA8FuoX+gWAJysQzxdZZzecbzHto4MuFUICgsaIMiMCYe6aOcFpoRlnjpLou4LDjg/0bKwmdM27OnmMectUWMBTMlCLlTELNs+0RaRu0EHhjd7F1OEerV2leiyIlzCY7zSUWA+7IrIvk/0AOhV0ch8qSaIjG2ZNNc4MPJ48/OSfrjWcvJ89eprPDRdrMGFgX69C1A==
+ b=HbZ3M+ZB7M9m8Pe9orr2WWAAbOPu/iyedlOATAWDaA1aLnA43O0Ylb+dhihSqfOLH6ST2ilkcyRGL+PWpHYmPuv1fanxUvlP2jWP78Ac1ckfTsJTQUtjpxgAM94jy7g/psoIlGxW+RbDfKqsquXtI5Y3mJVS+w16uSc0pNIJ3UWzPpwjMtIt4LADJ+zX3gu6jiEEDJ+iaIzJHj7S+ApDzRXjtmW3H608ntGjgFCAMpRKVmkF9DoVbO7etMrLjzlEDx4FFolJabeS7k3zCh1j2tMHSMNZJf8nKNVpvMWoZqIAeS00sCPosDFp4RHwazgZLREBzvMR8g+G/NdYPeqpMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0/VP8QymH9dTR9TyGet0kigjflowDo1CETF5qFbTcjc=;
- b=aaloKzok76O8VzdWjW2MArd6WLT+y/aAvw68jnCB+kp6xlkavPGQGgNrk9KYmHRVVCdT+4rGExtkA8h88la2y32WnReVbblu+/Xdibjvovuj2hJdI1xu0h5T9OV+5AWmSwb0czWtjIdIBBc7APJfn3/e0yY07l2pFog+LagxOpAgQcrf1g+TBNzL8liDYIi5Eb0b6XPlSWQRGYF6Xy5RgmEyJV/RPlMR2fM1qVHMXMGi+a4x3Bm7sb5aEXEF5c10/RCtb04lS8Yd97m3BUqGerfO8p5WhK/xFG6LongBlVhpggdWTVKequ1e2Rfq1qO9Ug25DJyTNAzvgpNN23knZQ==
+ bh=X2za/WzoCAH3o9zgXzOpjFfUGFtwXXa/e9Ge/YtibuI=;
+ b=WF0fo7wdZpO54umP+KqcKq7Y9v6WxxJYQCZ6RqLEKvnMN96/bjBGheY3ht9fLfHlCsx8raRTuQMy5uB8D4WxAAfAUnkNIgnJ8oPDgvqNPOLoPhp0+6UCJYGw55yz/ykSKYGsYwvk+9HJk/aV/spQUKtWEGtvcqqvAoegcJW+kbbY+OyX3nGmoAduCC3BRyCIOBAXgb4I8PmzFIhsf7CT9q6NFB4ohzlHDs9fOfd2ATNinwYqLOfiS9Tboo12PZuu+7kmPy+8KpFmI8FSKa1p1zlrvs7w2Fwlrtb7rdPTplFSsnXuqrSrN7LEJtsJVmiYg2iNCtVhKToSPxDACRY8zw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0/VP8QymH9dTR9TyGet0kigjflowDo1CETF5qFbTcjc=;
- b=LeSE6oYtiTIjSR8oZzbbAL+mYh+QldMyDhMXoubS2bY0Hm5U7ORmEm+W3YHDQvQfcyzVPy13UIKcz9wrdi6QfTDUGaDAdNAa9bG0ukNp5Hta4FgdCC4a7NN+BMM0jXEoobGDOJPDOMi1rfOFU04oOOMlkh5taoZK7glIoM9YUJI=
+ bh=X2za/WzoCAH3o9zgXzOpjFfUGFtwXXa/e9Ge/YtibuI=;
+ b=bRWNG0uNpD9lXTZGs3YoAbAUfW0dvV8z7lrlwDUC4vV/zS298Oo9+wrJBzuYyBmCeol3F8fpYA5cxIMGZF+ESu6aPeyLi5JIu1j5jrB1F3OXSTxbh695UrDEVeb35vMmuy3Ethihh3gVinYQeqZVlYl82QIBGlBt66AgbxOF5n2nlyCntDU86DWFW/XLGN+s5M9O215/YPf9s9/j6V01iM8tIpH5J3HhqXlIQiVs/Gu+3VDsACXekkHvIC9CbOCSqVAXd4c3C6hnRF3UgJrHwfHtHLKpMOaq7ASC8l66INGujCfyQq+xFFSpkKVBVSphhWuiYcuffKymT9ZdxmyLqw==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by GV2PR10MB6984.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:d2::13)
- with Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
+ by GV1PR06MB8388.eurprd06.prod.outlook.com (2603:10a6:150:23::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.10; Thu, 22 Jan
- 2026 13:17:31 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9542.009; Thu, 22 Jan 2026
- 13:17:31 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] am335x: add support for loading u-boot from multiple offsets
-Date: Thu, 22 Jan 2026 14:17:28 +0100
-Message-ID: <20260122131728.1551365-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.52.0
+ 2026 13:18:59 +0000
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc%5]) with mapi id 15.20.9542.008; Thu, 22 Jan 2026
+ 13:18:59 +0000
+Message-ID: <a7acf012-bc74-4503-a141-a73d02617bab@vaisala.com>
+Date: Thu, 22 Jan 2026 15:19:57 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] imx93_qsb: Enable AHAB_BOOT by default
+To: Ye Li <ye.li@oss.nxp.com>, u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
+ peng.fan@nxp.com, uboot-imx@nxp.com, vesa.jaaskelainen@vaisala.com
+References: <20260121163358.21322-1-niko.mauno@vaisala.com>
+ <20260121163358.21322-2-niko.mauno@vaisala.com>
+ <ae96d38e-4e50-48cd-8c2f-71cc359bcbf0@oss.nxp.com>
+Content-Language: en-US
+From: Niko Mauno <niko.mauno@vaisala.com>
+In-Reply-To: <ae96d38e-4e50-48cd-8c2f-71cc359bcbf0@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0067.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::34) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+X-ClientProxiedBy: GV3P280CA0031.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:9::22) To AS4PR06MB8447.eurprd06.prod.outlook.com
+ (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GV2PR10MB6984:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3ff434d-9686-4518-7b82-08de59b8993c
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|GV1PR06MB8388:EE_
+X-MS-Office365-Filtering-Correlation-Id: 027f62db-c973-4d96-f42d-08de59b8cd6c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?azpgs7rwHzUi0514BsE1r+SlPuYNkobwx8kkR2i0IlKaCazjvblYwfyCJlv8?=
- =?us-ascii?Q?wSUXYDhsV/bQXsQTscq2eAM2vTE/jtSPpuw+HkrrLvEiakkaXMv23Xt/Rldf?=
- =?us-ascii?Q?9ZsW/HwP+bn0e3I6ZbMXG6/bRt+f+0axGjgVi2SAeLDQwfERa4pTbAAOeedR?=
- =?us-ascii?Q?xradg6EFjn0fj67H2gZF592bMiw98Qr/uxqQv8DAXZru9AtwQY+M8xrrUr9C?=
- =?us-ascii?Q?qed6RijmGbOAtUEaqAykbSjU+W7I1sw/NYglUjCMFZr/Os0XqYufvr6CK+ka?=
- =?us-ascii?Q?Gw1gyycqwBqZIjb5dIyD204WS4upNt/rlCExUjOKu2VosxjuRNRhd2iU5M/C?=
- =?us-ascii?Q?eRxfSVloa+O5bwlR+KHD3W2J+FFANrndG+yPL2hLIdWTHSA5x2HjCo4r+Oz5?=
- =?us-ascii?Q?PN3R+00WLxYWoSIWkyleI6loyV3NQ3f0ykgsjcrsEXTIjTW/GHIDup6jMRSS?=
- =?us-ascii?Q?JuuzT7G18VgjHV8ZH9lgeav9Vpry/mitpqH1e6pgl61HRJjEeDkkw46Ek6kQ?=
- =?us-ascii?Q?3X9NrgDfDRN3uUbeabEv8SMJcJXQY/ycGZXOnD/TWuv7XC0fHCbPgHQyfSuC?=
- =?us-ascii?Q?EnhTsQl3b3zgx8F1xFU5fzqquqZLxrgfrppqAfK60COptaYJeq64F/T51gPp?=
- =?us-ascii?Q?vvuqdJaR8R30IGPh7CxXJou1Ft1rm3/4NPVpJBZkB53dvBEONB+WZiN2u1Wb?=
- =?us-ascii?Q?Agqo4cOJQ7MWNs7WAuy7+XYNOaQs6t/Y8m9AznZz4Xz861qTDM2ka2JRs67V?=
- =?us-ascii?Q?c76Fz3vS0KeJS/Gx5VrvhW7F5aq4S6j7Th0VZqUsYEHuHLcXgv8RtSj1qedF?=
- =?us-ascii?Q?3MO62pKlfhlC08HHxqzEBshoW7uzXO2i7bczRYYXyOzSTWBone2Kr4aylRSp?=
- =?us-ascii?Q?tX+R0kvDfIjAvRNGaizOwyfS+Gfq4f8VBodziriggtbZ7RolgOtbTSpik1eP?=
- =?us-ascii?Q?EvP8pA8C9C3hq20z8pOAos3KbUE0caEbOonv5B3V7DcjR0D0wc9+KRQO5HiQ?=
- =?us-ascii?Q?U/8Th2hvANpJlFt34htPmJtuD9pSnOB3RpYv7vEjA7uU5pAKTYC2GXDCkUQV?=
- =?us-ascii?Q?HzvKzr91mMHGxzxTJKlVkHKMausxohLAfusSeCW0VJuHG4Kjl7SDKevB9Hiw?=
- =?us-ascii?Q?GRTc5E35n+g+q6HxNm94OleH/QWsv1AxwxMOM2ikYbJXvKdfT9Di8+z3sf+M?=
- =?us-ascii?Q?1VcBLC7d/F/sTguEaytFBirOCx6xcQFJgCugHPtUB24W+I9gwZq2fYMLwnmX?=
- =?us-ascii?Q?w03n+yKthEGxJGV12NT7TLsH0EMwRJvEj1uepp4ur5sc3o04vAjDhJ39ItRG?=
- =?us-ascii?Q?6LJgJJUf/ApFNPcBXyxbtKdwJTafpN+crE6dxLctjqcLPRy6LR7bEwKSE9ih?=
- =?us-ascii?Q?d76NTyoc7gWyQkwKK8J7PJLKdEmutfJ92OJNwX7J14fFem9Eddbff6qiz8tl?=
- =?us-ascii?Q?GbS9R92D6ykoWaMItWDB0Lu44HD7jHWdpm3b25RsAmNVMxmdyLFW+takvP0+?=
- =?us-ascii?Q?B+tilm9mVtK/yRQsShk3dNMnkdKVWjqVI7d04cQe1H4JQTTaOmmwEebeKX14?=
- =?us-ascii?Q?1nQ/6S/6e4RDmyvxWrhvFh5i04/Dp5kjbxS2nCgqerskqSkOUSsaBjMUpt4N?=
- =?us-ascii?Q?eCQuZ7q6yFwXxk7aPq4iI1c=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OTdSLzZ0cldpWTgwMERlb2poeXU5Qy8rT04zN1NadnBGS21RMVVPdkJ1a0NS?=
+ =?utf-8?B?KzdRL1h4d2xVSGg2SHZIMFdHVEVjTTBBdzdEVHBIWlZTUmNXMjdhcUovV0xO?=
+ =?utf-8?B?V05vdEgrYStxM3BMVFZlNEVQbEZ2R0tXTnNTV3JpN285Z0k4aGx4K0NWS2Y5?=
+ =?utf-8?B?aWNLU1haTlRYWXNMcFdYanRUWU5QNnFHZmpsNDd2QzRaUjJqNFY0SnE2U1RF?=
+ =?utf-8?B?ZnNSNW9lc21DMUtuU0wyL25HdlZ1WE9JVFE2NThvL0hadG1pSEVhWTdBMTlN?=
+ =?utf-8?B?T0Z3Tm05Y2FhR2Jjb0tIaDdKSTQxSk5sVnBjNGV3WjBQVGdqa3V5T0lpSTln?=
+ =?utf-8?B?SU9yMExhamcwVU85RGVEWk5ZeUFYTzhDOXJiVVhiZFVCVjRpZTFhRXZNLzAy?=
+ =?utf-8?B?Rm1qTTNwMmZtMTA2SmdsTUgxeUdsenlyelgxSkFFZExCVmJ5VVJ0Y2crd3F6?=
+ =?utf-8?B?aEd0WFhBWjZuQkw3MG85anZadTJSY2dYdVFaM2xiWU5zVS9LSGQ0eXlXYWpu?=
+ =?utf-8?B?dW00VFJGUmhnSkt0ZjdmTlN3U2ZSUmJyZnhEVGEwbmJLemZpaGkwdkV3cks4?=
+ =?utf-8?B?R1RSMjgzZDZQUGg3bFdqaGEzQitjeFZIZ0xNK2hHZWdHT0JJY0liOW1FbGU2?=
+ =?utf-8?B?eGw5bU9lL0JQTmJiWXNyRk9HYkF1OG5NSCs1Z2g4MDhuMWpydEZhblF4VFFX?=
+ =?utf-8?B?UWhWOXVGY3dtZmE5QjBzQksxaEYyNHJxclBTQlRzNkFaM0ZQdnI2VUJPUk9M?=
+ =?utf-8?B?UHpFdGlCWEtLdTVUdzhvY1I0bmVVOXltTWwzbGFrdU1lK3JZeTViNktsbjdR?=
+ =?utf-8?B?ZE5JQTRyUUxCdDE2NCtEV2RlQjlaWHl6VEp6bE9BbWVEcVNBaFFMT2RzWnJ3?=
+ =?utf-8?B?YjRyTkkyaG91R3dlR05xK21YUjNDS01lWXZlSDM5YWRQYUZvL3lnbjFmYVpy?=
+ =?utf-8?B?NDlOU3pxejA4amhIbUwvRHhmbWYyVTd3dFV2N2xyMEdIZnVsYUZxUDlPUG45?=
+ =?utf-8?B?dWdUdjM0WExXTHBtTnE5WDlacVVlQ1FOWW11YU5pbWhOdkIxQWJrUC9vWXEz?=
+ =?utf-8?B?RTlQeTA2ODRFQkNGS1VHaEtKbXB2NXFtVVFhR3NPUkVmQ2FzSHpJMVBmOGV2?=
+ =?utf-8?B?R1Y2cjFUeXVOeHFxNHZWUHdYSTlERitpclQxOGVmUDUzWTN4OUxIRWpqVnBL?=
+ =?utf-8?B?RHRBSWhjSldaSzJtaFZaOXZQZ3NlOFo3UnVmaDlZT1hRdmJmOTJxcy96RkN6?=
+ =?utf-8?B?U08zMnI3TzMwTHpTQituK2RQSlBLNS9JTHFEU0FUNVdLLzBxakFuWDhtaGs3?=
+ =?utf-8?B?azQ4UWJaMDQxWG9ieE15eCsvYmN4bkR2RzVvSkdzcUJDM3BQaUcrdEMzRlh2?=
+ =?utf-8?B?ZnpwSitwdk93bm56V1VndkRjZ0t5L1ZOWDJoajdGMW5HYmtTNmtBd1FWUk5p?=
+ =?utf-8?B?UFh5TFdva0NlNWU4LzQyMWsyS04vTG5xbWZDelFrVWRVQVZKNnFmdEJvcHFI?=
+ =?utf-8?B?dHZ0RVNUS1JNeHFWZE5uTWhLcjZDYXp5S2k0bnk2ekR2dStZZmkybms1ZUsr?=
+ =?utf-8?B?RTcvYzZhMy9lWW43UFFsQlBDUnNUbG9UamVzVGV0M1lzOVlrczVOM2NzVFI5?=
+ =?utf-8?B?UnJMalhEVFlOK1k2VGRGVE5EY1J1aTF4b2twNWJDNHZSTWd2U0NEK3U5bVV3?=
+ =?utf-8?B?MVI0ZVVvYndET1RIdmhZc3cxT2ltcjBWQWNVU08za3JDQmRYZEJ6U1Z5VXZY?=
+ =?utf-8?B?Vk9vOFZrazM2MzByVlF5YTZsMklDeDVySS9TbUdIYmVRZ1FYQXFWaTMwdk5Q?=
+ =?utf-8?B?NDN5Y2dGczJjVzU3d1J4bkgrakQ3aW44VGxMWFcwQUtLenBFT21aNmhRaXR3?=
+ =?utf-8?B?NDFBcDhYUkJwdy9HZ1QrcUJseFJrR3RuY1hVd3dPTDlhSEVnQlhqRFFoUXN3?=
+ =?utf-8?B?ODdwNi9GYi9nTnJRdWdydnRxaWtDSENpOHdRUlR6cldnSDdjZVRsdnNjdXVh?=
+ =?utf-8?B?ZnVRMUhmQjFJTWlrdzduK0s0Y2VhVVB3VExDZEFpWTJabEd1M2VVZVlRZExy?=
+ =?utf-8?B?WG5pbTJmZUNoL3JxYldkVXBnNi9QLzNCOVRucVIvWUlDcEsvaW9lUTRmbUFU?=
+ =?utf-8?Q?4+Pc=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:AS4PR06MB8447.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/ueEGiBtn1kyRq0LYpe/H76Mu4zrZSOGF+qUVY1HLfnCLRXlxJHKRVB+8N9S?=
- =?us-ascii?Q?KsSvYns6y1588y4airvT9t8FurjJ5Z3XHOoeqVmpCsGNtlYC83CScXBuii4B?=
- =?us-ascii?Q?og+X65LrQt8CLMYdm1YNHYrW9dt6LB0y+CpS5wH6/VUxMDAmy4oPgdZ+tpV5?=
- =?us-ascii?Q?HtZdhbjh9k8HXWgaUnQ6ByrfszwilhPyQkn3hiQU8mzLi3GrGiK02Mh4Obdr?=
- =?us-ascii?Q?/P5rRmIyrWtABEsgHrjrY0XUWGj3JTQqN1KLZUQ0a8RxFExf9XewD15LF1P7?=
- =?us-ascii?Q?NYPWCCiShrYyZw+kUVBz/dl5bvJye7djundQIRgYrrNt9fFA/uzwVgIbfPzO?=
- =?us-ascii?Q?/iNlzGcVyvlJDdTUL51VSHZYF38kJ0SL2WEtFbF/wO0MG5sSZF8MZnyX9PeL?=
- =?us-ascii?Q?pM5hscB+cHYF+VhEMPTFTCJEPgEduBjR7+kvCJtRHt6p1H7wV82QN0H4WSCm?=
- =?us-ascii?Q?WVI7izaFZ152W2W6nNxiNqOhBjFCA9tY/TFYJnyD2ODetjflpPn12kX3k7vF?=
- =?us-ascii?Q?PxpQR7eF489zKGstRxMPrMzn3VTlI7jmHSpNQTsADvJ1GoKXhdJaHD1alDF1?=
- =?us-ascii?Q?zJ40D4B16sFPOpojx2ZJls+lRT127qdaNFyCJX/JepSetP14BFEvTQdX17zn?=
- =?us-ascii?Q?322DuUFVkuzd3gOvAnQoHckrc0zFTkeerUMagfkYsc5FHS7KUIJN/TbjPzhh?=
- =?us-ascii?Q?lI1yIcsK+ZJCPlEXlyejdiHAdkClsAhGT1rh9dRRq9k4n6+oJlpEwTw2VQ/3?=
- =?us-ascii?Q?XlEXj0jtVl91s13THR24RqWOHY0y8r0SaQaSqgMlOAxAgBMoqFg0cOPpoeyh?=
- =?us-ascii?Q?3hFbgWGzgm36KXFJ2pXGT6KTHX61lTQlY4vgbyD8cIIn9jrHLORP2QJU/N7E?=
- =?us-ascii?Q?yM5IT7Svc26XyvrndvN+Ba6nOcz9T+HIDN03wo25oQZfkQDU9ATI1ucYOOg0?=
- =?us-ascii?Q?Suhr8SObJPEUzpwLZdSFHFizo9yiaCa3x39fOLAjkNTsCdXsrUVLB994QEQo?=
- =?us-ascii?Q?QOKgm7vRCu7XFzRJGx9yWiRp+yHXVWXJlYBS8xwNoULoACZqG7DJ4jflIXLg?=
- =?us-ascii?Q?iicnVK8Jz9qY3CNByGZAIpp6m5d72DkD2/+kaVab6k1WFJoqO5tzQxHxAKuO?=
- =?us-ascii?Q?fD/MSbBH0Uftr9CnugCGFUOJ8GD8BA0F4RhXqe9BDBkZtp7ztsqnzl4RREm/?=
- =?us-ascii?Q?Vx9Da59WTo5wI+6L5SzP+Jbor2m1R+FZTz7cltrg5Wnjg07hSrq2l634hiEA?=
- =?us-ascii?Q?1wJ5qnh4m2Iwe0Kt5CmRwTVMwvTPsmS1LjQCkp9pVwB0UlLL521JJyn0U5iY?=
- =?us-ascii?Q?YWsAM3n+A+tvZdSlgzSLsPIxZsI26SJ9xz98hSgijLIk3RO2VczvxgO8BhGd?=
- =?us-ascii?Q?md29K7dqSUg5Qh0kV7PdVIZvng4+PTwmhBCOhLzTVLvQl3HPnBftZoCeN6Yt?=
- =?us-ascii?Q?54ryJJ3kdf+42ggJEEds2DwIQF2JlQ8Xdwsf2fmcLo0ceqrsSYKzO2hc47zO?=
- =?us-ascii?Q?zK0PQHN98ef8DZSwOarmOH8qyNnzl7LdHklqLn8BpKNc/v9s51gFB09E1QQ9?=
- =?us-ascii?Q?SDy6mJy+DSEzdGJ9UO6wUj0cCSs4e0JGrOMnH4F47F9+ifIK0tBtSo5cd2v8?=
- =?us-ascii?Q?M7/uMjSJJuNsA8yVCwHuz1wxwWaUNklscT4NznkKQOJtcYQ+u9l6dyLrnZP0?=
- =?us-ascii?Q?Gx/WNG50ivcT57poGmlYGUfI2PIIuqVK0zTZa/+lco6/frC9xFf4nn3I8wim?=
- =?us-ascii?Q?DbaJwmzK9UvHBxBk9XKeLUraTgmjyn0=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3ff434d-9686-4518-7b82-08de59b8993c
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmxPTUhOaHkyRDdWdkQ2YWN6b3MvakV2dytwNnZkVnNLdTZFcGdaNkhlQ3hQ?=
+ =?utf-8?B?aGZyMjBkQjlsZWk5elpzZUx5QStWdjJYV2xLVllvQTV3TzVtQ25PWThTc1Zt?=
+ =?utf-8?B?QUttSTJiTWVQYmdYSEFuRkRXYlJRUi9NeDF2Q1N3ZmdWaUtsYmpKL0hPTlFp?=
+ =?utf-8?B?eTRLVktFNG05OFFGbjlsYmlJMitlbGQyeDViMWVLVkRkVG9TUDlLd2tzdm1S?=
+ =?utf-8?B?eHBmb0ltYnVLTEJUUGJsNjBqclY0MW0xNTlOV1g5cjAwbysycWJqVXhnK2Fs?=
+ =?utf-8?B?RktOekdRa0lNVDd1OXZaMUVYbDJXTzRtQUlpNTBKenJWZGh5YUxKSDZMQ0Rk?=
+ =?utf-8?B?Q2t6MmVWVVBoWEFuL1FUUGsyS1JGcWlYT29vMy9MYXZjVXdaTnAyVVdpS25o?=
+ =?utf-8?B?Qzd2L1BaUFJTaFA4ZERPUHpPUGV2N1puYlBkV3IrdmVIYUt2RUlZcm1rS1kw?=
+ =?utf-8?B?VFg3VURHdksrKzI5bkQyTDJyMkJwSzRKSkczQ2N1UmpMRG5iN0ZkTUphaDJZ?=
+ =?utf-8?B?ZEhROWQ5WGg3T2RsbGtxZlJIWkVBMmxsRTNERkF0b0J6Vk4xWjM4d3o1V0hC?=
+ =?utf-8?B?QWRHUHA0MDQ1cmlpSDN1UHZTVDdkRDhyZjlrVFBZd05FRytGMGd5OUM0T2Vo?=
+ =?utf-8?B?ZFphOEJJZnZ6VmZyay9IWUdmeXBUSnp1cDZqdGdvemhGcGxVWTVCQkRYLzBl?=
+ =?utf-8?B?QXZoY1RtbG5qRnVWUFZUNExvT3pIUDZzd3VSd0dIdFBseVRxRkY5V2ZmUERM?=
+ =?utf-8?B?NGxNcmRZL3lmdWQ4L2E5d3ZNL3IvUjJKMUdQa2xYRklKM0VWNWtOK0pJeTVv?=
+ =?utf-8?B?U3FXTFRpQjA4dHJVS3JuejVuMXBSeloxWE5pYkZhYlZkUkxMY21VZEUxb1pT?=
+ =?utf-8?B?djhnTDVMZ204T3R5c0hzWDBlU0RuVmQ2MHE4cjVzbjVLL0Ria1kzVFRlUkk4?=
+ =?utf-8?B?VXBsRkc2dmdSMFBWeXkyQmIwV1JsNVRXTFl6aVFmRkNGRzBlTUhrRXBwRnpo?=
+ =?utf-8?B?cS85Y0hwZG52SWk5MGRnSDJ5UHlGYUtYZy92amFHTzN0Zi9JNUl6MjhMREpV?=
+ =?utf-8?B?QTVHeTdwY3dWaUYxbjA5QWJVSHlQQWduYkZSL0xRcHp5dnY3OU5pTXdsdTlv?=
+ =?utf-8?B?Q3dBOXpNSXJRUTR0N09oaCtBK3VtUnNQOUViclB6TEJSVHplZ2RlcXIxTUlt?=
+ =?utf-8?B?L21DNHhOTjNNZ243QnBJMXkrVzBPSjRLZ1Q2UEFvYlFuNEFoUmVMMHZrQjIw?=
+ =?utf-8?B?K2pkY0lVRFc1cVVzbkRYbjcxa1FFODB2cG96MW5uQ2JCQ2FVRFN0L09XUHNm?=
+ =?utf-8?B?Smw2d1c3MVpueDM5eVdDYkQwb0c3aGJRRUdjMVZySExQcjFNR1RHOU5DSGlj?=
+ =?utf-8?B?SmNoV0tkVXNmYlcra0ttRDdUQldSTWpWck8yUXhBVFRUKzJlMEJyZGtNellr?=
+ =?utf-8?B?SVhyYjUxVFdiWUVuQldOMXo2V3h3NjZoOG1hUUs4OGxFNUhVR3Q5MEhBaGpC?=
+ =?utf-8?B?QVdLUHRrUVFadWNHRmxrN0k1bnAzWk9VbmpmbzhwVzc5bFJJd3Q1Y0JBY09B?=
+ =?utf-8?B?ckNyS3dQbHVNMjVKVzdRaC9NL1kzeU9PT0ZqSTMzYXBrVmNQTGtPUWVZU0VF?=
+ =?utf-8?B?M210WWlZbHVYZUxzVzZJajR4ZWxJdEpwbjdrQVhSbmVOVzhTUVgrOTN2WTJD?=
+ =?utf-8?B?dVcwUUFLcEE4ejVaNElPKzQ3TW5xa1NLQlNTNzlIV3FJQzV0LzVpemhmZUtV?=
+ =?utf-8?B?Q2xNZGVobXpYa0dZWW5HMmFJTWZGMlNicTdqRHVaOG9zN2o0NzBUVSs5TWk0?=
+ =?utf-8?B?VXd4Um85R0VzRXo5a1l2WEloc3ZNU3QyYjBDc3hpNEZnc0xNM1ppVnVwaUxt?=
+ =?utf-8?B?Vzg3Qk9CSmdkaGtYNG1TNHkrSmtRYmhkV2V2c1dmUEJhaWhPSTZqc0dFUzFw?=
+ =?utf-8?B?WThVQzVlNVZzbGlYNlRXdTA2UVR3T040SnRQWkNCdFlDWEFRN1dyUlhGTVM5?=
+ =?utf-8?B?czM5K1hBRjFEc08xVDE3NlNCMVVvd3crN0I4dllUK0xyb0FPNCtac0ZsdFpk?=
+ =?utf-8?B?RDdRb0l3Zmk0ZS83c0JaaHREaHhFYWkxM1drY2NBTUNSdEE4bWVoQ2hMSTFj?=
+ =?utf-8?B?OUozeVkxaXVDSnNQWUVKZnBLbDlkWERlV2xSbmV6T3kyekxtaWJ3MUJWeEtO?=
+ =?utf-8?B?TUhpaU9qcGZGRVFOMVhLaHBPQ1FONFNkK24vMktTQ0ltYzYwYndweGFwQkdH?=
+ =?utf-8?B?SmYrdWFjOFVjV21IWnlXTFVRWVFKdW9TVkQ4YllQQ0FQc0ZPK21DOHB6YUF0?=
+ =?utf-8?B?cEVBMERXdU54VTU4MzJDcm10M1FFVTdDNUNteDlaNVcxQ1VvMmxXMXN4STFC?=
+ =?utf-8?Q?uyZu4cLduRSrHfyQ=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 027f62db-c973-4d96-f42d-08de59b8cd6c
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 13:17:31.4803 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 13:18:58.9692 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z5jnZLqv9mvm3iyypjah1c5pvsFjUn76eRPCeAEHPwqYufpl5Q4J0FwuO6WdJbdiTqWWxVtRK+QDE9bw/c4yRStzxzohs1mopQeVjnSLmV8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6984
+X-MS-Exchange-CrossTenant-UserPrincipalName: NCbVVcTZe/kjkL01rdAr92oEOhSFiChj+mOiHpvdDTdJyWkMdkxZDJ08kAbqeSRcq56fm5YKaZ5xSohSeXAhsg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR06MB8388
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,137 +184,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The am335x knows nothing about eMMC boot partitions, so in order to
-implement an update procedure of the bootloader which is robust
-against power failure or other interruptions, one must make use of the
-fact that ROM code on the am335x looks for a valid first stage
-bootloader at several different offsets. Updating that can then be
-implemented by (assume we put MLO at offsets 128K and 256K):
+On 1/22/26 3:33 AM, Ye Li wrote:
+> 
+> 
+> On 1/22/2026 12:33 AM, niko.mauno@vaisala.com wrote:
+>> [Some people who received this message don't often get email from niko.mauno@vaisala.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>>
+>> From: Niko Mauno <niko.mauno@vaisala.com>
+>>
+>> Enable the support for AHAB secure boot.
+>>
+>> With this change, one can issue 'ahab_status' from U-Boot command line,
+>> and see e.g. following kind of output:
+>>
+>>    Lifecycle: 0x00000008, OEM Open
+>>
+>>        0x0287eed6
+>>        IPC = MU APD (0x2)
+>>        CMD = ELE_OEM_CNTN_AUTH_REQ (0x87)
+>>        IND = ELE_NO_AUTHENTICATION_FAILURE_IND (0xEE)
+>>        STA = ELE_SUCCESS_IND (0xD6)
+>>
+> I don't agree to enable CONFIG_AHAB_BOOT by default. It is only for secure product for OEM closed LC and secure boot development in open.
+> 
+> Best regards,
+> Ye Li>
 
-(1) At least one of the two slots must contain a valid header, since
-we successfully booted. Pick the other one.
-
-(2) Overwrite the first sector of the slot chosen in step (a) with all
-zeroes.
-
-(3) Write everything but the first sector to the chosen slot.
-
-(4) Write the first sector (containing the magic signature that the
-boot ROM uses to identify a valid image) to the chosen slot.
-
-(5) Repeat steps (2)-(4) for the other slot.
-
-It's not possible to simply write the whole MLO in one go, especially
-not when updating the 128K slot, because an interruption after the
-first sector is written would make the ROM code believe the image is
-valid.
-
-But this only caters for SPL itself; regardless of where SPL was
-loaded from, it would go on to load U-Boot proper from
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR. So in order to update the whole
-bootloader, we need to teach SPL to use a
-different offset for U-Boot proper depending on where SPL itself was
-loaded from (*). With that, the update procedure is just amended by a step
-
-(3a) Write U-Boot proper to the offset corresponding to the SPL slot
-being updated.
-
-We can know (*) because the ROM code sets a new bit in a certain
-"trace vector" before each successive attempt.
-
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- arch/arm/mach-omap2/Kconfig       | 37 +++++++++++++++++++++++++++++++
- arch/arm/mach-omap2/boot-common.c | 31 ++++++++++++++++++++++++++
- 2 files changed, 68 insertions(+)
-
-diff --git a/arch/arm/mach-omap2/Kconfig b/arch/arm/mach-omap2/Kconfig
-index c07dd68e6ce..1e989ac48ac 100644
---- a/arch/arm/mach-omap2/Kconfig
-+++ b/arch/arm/mach-omap2/Kconfig
-@@ -156,6 +156,43 @@ config SYS_DEFAULT_LPDDR2_TIMINGS
- 
- endchoice
- 
-+config SPL_AM33XX_MMCSD_MULTIPLE
-+	bool "Support multiple locations of next boot phase"
-+	depends on AM33XX
-+	depends on SPL_SYS_MMCSD_RAW_MODE
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+	help
-+	  The boot ROM on the am33xx looks for the first stage
-+	  bootloader at several hard-coded offsets in the mmc device
-+	  (0, 128K, 256K, 384K) and uses the first location which has
-+	  a valid header. This can be used to implement failsafe
-+	  update of that first stage (SPL). But in order for the
-+	  update of the whole bootloader to be failsafe, SPL must load
-+	  U-Boot proper from a location dependent on where SPL itself
-+	  was loaded from. This option allows you to specify four
-+	  different offsets corresponding to the different places
-+	  where SPL could have been loaded from.
-+
-+if SPL_AM33XX_MMCSD_MULTIPLE
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_0K
-+	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 0K"
-+	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_128K
-+	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 128K"
-+	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_256K
-+	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 256K"
-+	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_384K
-+	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 384K"
-+	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+
-+endif
-+
- source "arch/arm/mach-omap2/omap3/Kconfig"
- 
- source "arch/arm/mach-omap2/omap5/Kconfig"
-diff --git a/arch/arm/mach-omap2/boot-common.c b/arch/arm/mach-omap2/boot-common.c
-index 95b44c8b1e5..88fa59feaf1 100644
---- a/arch/arm/mach-omap2/boot-common.c
-+++ b/arch/arm/mach-omap2/boot-common.c
-@@ -318,3 +318,34 @@ static void tee_image_process(ulong tee_image, size_t tee_size)
- }
- U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TEE, tee_image_process);
- #endif
-+
-+#ifdef CONFIG_SPL_AM33XX_MMCSD_MULTIPLE
-+
-+#define AM335X_TRACE_VECTOR2 0x4030CE44
-+
-+unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
-+{
-+	u32 bits = *(u32 *)AM335X_TRACE_VECTOR2;
-+
-+	bits &= 0xf000;
-+
-+	/*
-+	 * The ROM code sets the "trial bit 3", bit 15, first, when
-+	 * attempting offset 0, then "trial bit 2", bit 14, when
-+	 * attempting offset 128K, and so on. If the tracing vector
-+	 * has completely unexpected contents, fall back to the
-+	 * raw_sect we were given.
-+	 */
-+	switch (bits) {
-+	case 0x8000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_0K;   break;
-+	case 0xc000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_128K; break;
-+	case 0xe000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_256K; break;
-+	case 0xf000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_384K; break;
-+	default:
-+		printf("Warning: Unexpected trial bits 0x%04x in trace vector 2, falling back to 0x%lx\n",
-+		       bits, raw_sect);
-+	}
-+
-+	return raw_sect;
-+}
-+#endif
--- 
-2.52.0
-
+Thank you, submitted v2 which contains only fix for imx93_qsb build error: https://lists.denx.de/pipermail/u-boot/2026-January/608341.html
+-Niko
