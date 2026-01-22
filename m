@@ -4,85 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B01D3EE6B
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 15:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA63D3EE75
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 15:08:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0F88397D;
-	Thu, 22 Jan 2026 16:01:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4988A8397D;
+	Thu, 22 Jan 2026 16:08:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YoZ/O/HA";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="csmgu0kq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B47A2839DF; Thu, 22 Jan 2026 16:01:42 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BA1AB83AE9; Thu, 22 Jan 2026 15:56:54 +0100 (CET)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A94980077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 16:01:40 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7cfcebf1725so625600a34.1
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 07:01:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769094099; x=1769698899; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zkf0/DsExzVnpIJWbOQAlOzZCiGCNQEjC/tL3ZyGUxA=;
- b=YoZ/O/HA+80QFK9ez7eTZdCzhCxvGwQu3ivwoLLaC5lJzTKIIa0Ib3aJyUnjWCRKov
- zdQdBAY/JizsM7K8lP7/YaHoD/HwdWjKrIobvQ08tO3WleOeTIOPWijtbNiUVjmuX4ZI
- EA//MZjc6aZb8tbkWSVoShEsSUDmN42Ogbtp8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769094099; x=1769698899;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zkf0/DsExzVnpIJWbOQAlOzZCiGCNQEjC/tL3ZyGUxA=;
- b=ghGm533vdAIEKs3o0whE/sFIEO/bdttYrQewT85boaPQLZurnSu7Yk6U5zQnTQerrY
- OTQG2zL71iFVp2CW1gkyRXIlAnArGREMLGnQ30VtBKeDesuODdUZ5q0yJYjcv+mWsSuG
- kyar3R+zMaBL/lrgEawpJ1Qqf0A5tyyWkg75gynXkAj1AX2GyLrg/Cob0h8jmNz+xuua
- gSmd/jb0HJbRED74TbCgL21JY8VRfeewVY+O8g0o1LThITa+ncCkJRd1JtVOIfzSRLIP
- 8VGpMHzXiD1DyrHeSuuL/t7cu4YiB5/MsPmLSUPWb0NPGQLFmeN1YUCcP1gyFDzqmMQX
- zCnw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsm5hKSeFcUmfP+LonZ6rtlxEvDNwnmsv8gNm5EL9St3WAem+iAauI7MRp/WLzw0jXPnyfxAQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxWTHOlmPqRmUwPiuwMb3weGEC05IGwyxhuL+cHc4lFZu5qNat
- TXY6PZBF5oVTb6Lw6M7Mcl49kPIKmbGj3CKdWy5gfoj0iNtNoJCkSdu5qHTNejN06cM=
-X-Gm-Gg: AZuq6aIzLtjU3HC5UKQvHlAywSW6tdliSzcOR1O19gnHn+OoabSWqsffjoq40SzTYG6
- aYwJq1cEL9RkEd3JMK4uprPD9N7gi7HPlPklLRywYCjbgOuGsKjBbM/pWDyN2/W4d8qcUdqHe+W
- p8ZwEHiKi9/541xf4VMGUdjm0SsBPA78llFS/YFZUYH5zg5L8CURCZ7XuWIUbOVb++5k391ZiBk
- jxeIIDPRXKonudysH7aDoeXOlclkjtVSw3swvWiE6IPJsXnCbl2WamBAt7AceRruHoJj9RcVY/A
- 2EodPoVKbh5Hee8CWdk+fvGjGwbTNBTEOkFAtByt+oSbbVfMoJpuwyj2lv5yOtXOepfx0v0UWZX
- 14FJgYN6ykcsv57uagY2OZ3Rhp6ZAwJZeyCbNcJ25DwHRYGvBaiVGIgeSg6zP5b/26lA5CSdJ0r
- C8rSoOLlTJxfkeL/nY5b9pkcBo9Tri/uW8AE1Qm2BmlYC45HOLT2NAUrMuRh1Aft9tahTUoEGWa
- FUq76nhegJH+gCH8HbSWIJwYbulDqc2N6uAZTk=
-X-Received: by 2002:a05:6830:6586:b0:7cf:d2f3:af8a with SMTP id
- 46e09a7af769-7d140ac1cfcmr4265849a34.28.1769094098645; 
- Thu, 22 Jan 2026 07:01:38 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7cfdf0d8e05sm12688052a34.6.2026.01.22.07.01.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 07:01:38 -0800 (PST)
-Date: Thu, 22 Jan 2026 09:01:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: varadarajan.narayanan@oss.qualcomm.com, gabriel.dalimonte@gmail.com,
- u-boot@lists.denx.de, caleb.connolly@linaro.org
-Subject: Re: [PATCH v3] fs: fat: Handle 'FAT sector size mismatch'
-Message-ID: <20260122150135.GZ3416603@bill-the-cat>
-References: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 42775839DF
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:56:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1769093762; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=kJNE9oKYGNFspybkSyZ0J4zSbJZR/XFIviO6mYifShhLKNxTWgn1eCqRGpbquAcwwOYGbcRZ+eXHV22TztwwDfhh8HlFR5y6xA1aYS9uwwzi5WimC3YCiQPqUZEZCIF6mlOIyXqULkpu5tI8wYyJF9GZQahIt0PjBLlI1yYD9As=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1769093762;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=IhK6gD4U58i9Iq6LDQ/+dYLOsQrZa+XP3LCKfo5PXys=; 
+ b=lZvp0K9f5WTE3Ckb6NAx9O6XJRlPtDAVYTfVi437fyd1dwv8Frbs46rO1G9WDo3/gEjWXlIc62TZ/uAdhVDW7OSkZ2NaIvR7NoKKVLLrC+e8mVaYh4qxMN7cHbxJrqf4FAxHvBVSoqGNFfQSLnjR5lzmyZqaFwyVw5pCWEVlzBA=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769093762; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+ bh=IhK6gD4U58i9Iq6LDQ/+dYLOsQrZa+XP3LCKfo5PXys=;
+ b=csmgu0kqh1FhZOI8xGWOVjEOzU9mg7EoXoS9nSJyVuqbLM0s92SY/iRfiUUtNlXv
+ CkqgoMMjoBbejcaoD2JHRvXxcZU3ob7jTyctfwR0NeziI6j9Z0BeXe/hTFjBw+6Tytt
+ 20Fb7vU4mH08LTxPE4IWrTlv2+FIBWyjjUgujY4w=
+Received: by mx.zohomail.com with SMTPS id 176909375945764.29740913063688;
+ Thu, 22 Jan 2026 06:55:59 -0800 (PST)
+Date: Thu, 22 Jan 2026 14:55:39 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: u-boot@lists.denx.de, uboot@riscstar.com,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Heiko Schocher <hs@nabladev.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@gentoo.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
+ Aniket Limaye <a-limaye@ti.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Angelo Dureghello <angelo.dureghello@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Henrik Grimler <henrik@grimler.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Justin Klaassen <justin@tidylabs.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>,
+ Joseph Chen <chenjh@rock-chips.com>
+Subject: Re: [PATCH 12/17] dt-bindings: pinctrl: add k1 support
+Message-ID: <aXI6a9VRLqlElMKt@pie>
+References: <20260117190231.977686-1-raymondmaoca@gmail.com>
+ <20260117190231.977686-13-raymondmaoca@gmail.com>
+ <aWynOt7uVgtqbA1P@pie>
+ <CAMDkj5yRkgniJzFhywuQoQLWw-jGWgCpCNExHpjE-o+hTr49NQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yhZl+UcNKJftXPL5"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMDkj5yRkgniJzFhywuQoQLWw-jGWgCpCNExHpjE-o+hTr49NQ@mail.gmail.com>
+X-ZohoMailClient: External
+X-ZohoMail-Owner: <aXI6a9VRLqlElMKt@pie>+zmo_0_me@ziyao.cc
+X-Mailman-Approved-At: Thu, 22 Jan 2026 16:08:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,62 +118,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Jan 21, 2026 at 06:20:15PM -0500, Raymond Mao wrote:
+> Hi Yao Zi,
+> 
+> On Sun, Jan 18, 2026 at 4:28 AM Yao Zi <me@ziyao.cc> wrote:
+> 
+> > On Sat, Jan 17, 2026 at 02:01:46PM -0500, Raymond Mao wrote:
+> > > From: Raymond Mao <raymond.mao@riscstar.com>
+> > >
+> > > Add dt-binding file of pinctrl driver for Spacemit K1 SoC.
+> > >
+> > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> > > ---
+> > >  include/dt-bindings/pinctrl/k1-pinctrl.h | 59 ++++++++++++++++++++++++
+> > >  1 file changed, 59 insertions(+)
+> > >  create mode 100644 include/dt-bindings/pinctrl/k1-pinctrl.h
+> > >
+> > > diff --git a/include/dt-bindings/pinctrl/k1-pinctrl.h
+> > b/include/dt-bindings/pinctrl/k1-pinctrl.h
+> > > new file mode 100644
+> > > index 00000000000..6c6b223c969
+> > > --- /dev/null
+> > > +++ b/include/dt-bindings/pinctrl/k1-pinctrl.h
+> > > @@ -0,0 +1,59 @@
+> > > +/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+> > > +/*
+> > > + * Copyright (C) 2025-2026 RISCStar Ltd.
+> > > + */
+> > > +
+> > > +#ifndef __DT_BINDINGS_K1_PINCTRL_H
+> > > +#define __DT_BINDINGS_K1_PINCTRL_H
+> > > +
+> > > +/* pin mux */
+> > > +#define MUX_MODE0    0
+> > > +#define MUX_MODE1    1
+> > > +#define MUX_MODE2    2
+> > > +#define MUX_MODE3    3
+> > > +#define MUX_MODE4    4
+> > > +#define MUX_MODE5    5
+> > > +#define MUX_MODE6    6
+> > > +#define MUX_MODE7    7
+> > > +
+> > > +/* strong pull resistor */
+> > > +#define SPU_EN               BIT(3)
+> > > +
+> > > +/* edge detect */
+> > > +#define EDGE_NONE    BIT(6)
+> > > +#define EDGE_RISE    BIT(4)
+> > > +#define EDGE_FALL    BIT(5)
+> > > +#define EDGE_BOTH    (EDGE_RISE | EDGE_FALL)
+> > > +
+> > > +/* slew rate output control */
+> > > +#define SLE_EN               BIT(7)
+> > > +
+> > > +/* schmitter trigger input threshold */
+> > > +#define ST00         (0 << 8)
+> > > +#define ST01         BIT(8)
+> > > +#define ST02         BIT(9)
+> > > +#define ST03         (BIT(8) | BIT(9))
+> > > +
+> > > +/* driver strength*/
+> > > +#define PAD_DS_3V    BIT(10)
+> > > +#define PAD_DS_SLOW0 (0 << 11)
+> > > +#define PAD_DS_SLOW1 BIT(11)
+> > > +#define PAD_DS_MEDIUM        BIT(12)
+> > > +#define PAD_DS_FAST  (BIT(11) | BIT(12))
+> > > +
+> > > +#define PAD_1V8_DS0  PAD_DS_SLOW0
+> > > +#define PAD_1V8_DS1  PAD_DS_SLOW1
+> > > +#define PAD_1V8_DS2  PAD_DS_MEDIUM
+> > > +#define PAD_1V8_DS3  PAD_DS_FAST
+> > > +
+> > > +#define PAD_3V_DS0   (PAD_DS_SLOW0 | PAD_DS_3V)
+> > > +#define PAD_3V_DS1   (PAD_DS_SLOW1 | PAD_DS_3V)
+> > > +#define PAD_3V_DS2   (PAD_DS_MEDIUM | PAD_DS_3V)
+> > > +#define PAD_3V_DS3   (PAD_DS_FAST | PAD_DS_3V)
+> > > +
+> > > +/* pull up/down */
+> > > +#define PULL_DIS     (0 << 13)       /* bit[15:13] 000 */
+> > > +#define PULL_UP              (6 << 13)       /* bit[15:13] 110 */
+> > > +#define PULL_DOWN    (5 << 13)       /* bit[15:13] 101 */
+> > > +
+> > > +#endif /* __DT_BINDINGS_K1_PINCTRL_H */
+> >
+> > These definitions look like hardware bits instead of dt-bindings, and I
+> > don't see a binding file for the pinctrl driver of SpacemiT K1 in Linux
+> > upstream. If it's the case, please keep the definitions inside your
+> > driver, correct the commit description, and probably squash it into the
+> > driver patch.
+> >
+> > We'll use the pinctrl-single driver. So all pin configurations could be
 
---yhZl+UcNKJftXPL5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+But you removed the pinctrl-single node in PATCH 6, didn't you? And I
+don't think this "binding" file gets used in any devicetree after
+applying the series.
 
-On Thu, Jan 22, 2026 at 12:04:42PM +0530, Balaji Selvanathan wrote:
+And I suggest aligning with the upstream pinctrl binding. It eases
+migration to upstream device-tree, and makes it possible to share a
+single dtb between Linux and U-Boot, which is a nice feature.
 
-> From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
->=20
-> Do FAT read and write based on the device sector size
-> instead of the size recorded in the FAT meta data.
->=20
-> FAT code issues i/o in terms of the sector size. Convert that to
-> device sector size before doing the actual i/o. Additionally,
-> handle leading/trailing blocks when the meta data based block
-> no and i/o size is not an exact multiple of the device sector
-> size or vice versa.
->=20
-> Tested on UFS device with sector size 4096 and meta data recorded
-> sector size 512.
->=20
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
-com>
-> ---
-> Changes in v3:
-> - Respin, no changes
-> - Link to v2: https://lore.kernel.org/u-boot/20241125085213.460723-1-quic=
-_varada@quicinc.com/
->=20
-> Changes in v2:
-> - fat_sect_size is declared as static
-> - The else block in disk_write() function has been removed
-> - The commit message has additional details about testing
-> - Link to v1: https://lore.kernel.org/u-boot/20241119073048.3469260-1-qui=
-c_varada@quicinc.com/
+> filled in the DTS file, not in the dt-binding file.
+> But the pinmux configurations should be included in the dt-binding file.
 
-Have you put this through CI
-https://docs.u-boot.org/en/latest/develop/ci_testing.html or manually
-run the filesystem tests locally? It would also be good to know that CI
-does pass since I saw some divides and modulos in there and knowing we
-don't run in to the cases where that needs to be a shift or use a helper
-macro now would be good. Thanks.
+> Regards,
+> Raymond
+> 
+> 
+> > Thanks,
+> > Yao Zi
+> >
 
---=20
-Tom
-
---yhZl+UcNKJftXPL5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXI7ywAKCRAr4qD1Cr/k
-CrhnAQDdg5FhB2qC09f4Pv1jkjUX5l9ePbwbvRO3zugEV+ECqQD+K9oeD26FVxUk
-lXzbq26zAi4rqUzH6/2sW0A5h7QyxQU=
-=s8mW
------END PGP SIGNATURE-----
-
---yhZl+UcNKJftXPL5--
+Best regards,
+Yao Zi
