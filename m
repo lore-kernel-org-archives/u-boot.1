@@ -4,148 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D741D6261F
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 12:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB09ED3EE64
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 13:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E776D83AB0;
-	Thu, 22 Jan 2026 13:51:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E53E28397D;
+	Thu, 22 Jan 2026 14:15:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="DUv1AOAV";
+	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="O8HV6Eyr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E90BE83A6A; Thu, 22 Jan 2026 13:51:08 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 2D2F7839DF; Thu, 22 Jan 2026 14:15:39 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1361983B03
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 13:51:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B4FB80077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 14:15:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=vaisala.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=niko.mauno@vaisala.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pAdo3Dh0r1CPdt1tAy5OP5NrR4NV3lvMcEGECm5v7Xh7Tkeucw8AP5YKPlusbsTOy5c+K/mey9rrmUtz1vzkeLj13ZVuGsuDro2/QFkhocEy2D2HqfywwF07vmCqLXPFA3YIJolhnh4dsq9qroXkwoJ46DTTlYCz0C9AabCX3XEe2fkh9JbJB1Bc+rFksfCH4cLdTLCWJfvSyIlTtft3T1V5ObbK+5dZXSIlVVoAGlZvdMewW4MR+rFnn0icMdYd0iG/2Qrbyx71Y8PXwHyFrB7Ns89C/dqBpuGM0830dtpLku4+b3uRuXsSJ8z9VvqNbp1Hx00PKt70a/o64SUsSQ==
+ b=ez3C9nEIPGEWXn05XYPfJls/bdDQERNgHqdAhLJrnRPJhLNCXJLgWTjENfvEUiK3KQBXQFMUVIgU/SgiF4sQBc3DHuoEZNhOhw6vVbKq5Igp4kdYyoWkQaHW5TgsZHQVp/6GriqYAxlZ0ZPjfE/hzk/YPpvrWw0KsJCNN/Qztrzm4tdtmLqhAQ9PlRb0JSg4q2hpDq6BcdPg16hBC9sDgE+YvSeTk6g0o+4KWtiiy18bqDr4BGaceWWwjVy42zLyNNd0uj8TLMHDqJAHYbnJlbfROl80gFtRvNE5OjzDVGy8htCi4uTj+Xkp4Fd6+zI62n5rWkiANcVjM0c4DKQ+tg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pr8JKsB4zkTKOL8/HtePhzhn36J6zcDPPRf+PS/YE8E=;
- b=yNIrcCFkS+AhxxlBXoK9tQvmC/66UGB42Q/9QqQtMQccVmDluspTcgAKjQe4x78JEvFOY4ZOIceGaqsNg4M/d77roNkpoBETZKO40Y4S96EukHwkNFF+9LMeWGVfzZCvK67o8poGPsBDtWOHovbdEYbCCO1M/HW7E8avc5D1HNBWi2sY5+0vNmE/XjM0Zao1sCFehpg3pgBm6ZoFFnEStDI7AVTAzCk8PDiceFez+AugL8AoZFk2feSxpUEZd1ut4YpuEBei9HpciQmcAJ2yUHn5AR74Aq1TysL7v5Gv7tA5tE+i72sE+I29h7LicYM86VGsfl4KDSf+hUwCB73+TQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=dx3GvPrtEc84oKQFqZgw+1SQMoPJkUHR0Y/wpzWk6o0=;
+ b=rh3Kh/4nRceYu6UUaTc18E5RtJBZggdqVt26TVOIGqbwAE9Az/hcCwgaFxH/3VUx+y2TsGrH6uCso3vde13XyP2k0BR560LDkjlHdGrWOz/5kwKmlyOmtTc5R1UsmlvTQrbVsUMshyx6IJO2jOCWO4R7FRJjFbIEio/HC9f+q+7Sm8rh5lXTT2kksFDAumF2DrxZdVhf5z1xAxQIQRbVg8neDALmFI/JsM+ZL/DelsQOwZJ6G60Wo0/yh+fxEv1iXZ3CwcFEFfPjtgkQRhhhf4xm3mb/9sVc6VxBbVCIYpeVhfK2d7C+rOLr7yR/M2Eh0zrqQOSlczD2dc/bPvHWPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pr8JKsB4zkTKOL8/HtePhzhn36J6zcDPPRf+PS/YE8E=;
- b=DUv1AOAVd3QnO70tKcvDXpcwfN2vJKrtVGOfvEWmoK0twFooy2bCwoLb0zt+oIJBUSQnH20c1NvKVIEcpHNWL6ztdiy/njjhDS624KvcB+/2OitUrgBXfk+9l8PUHuAWXF/Pu2fdRNHsKdTZATXcp/nV8XXtOULJ0W12Bw3T7GI=
-Received: from CH2PR16CA0029.namprd16.prod.outlook.com (2603:10b6:610:50::39)
- by PH8PR12MB7208.namprd12.prod.outlook.com (2603:10b6:510:224::7)
+ bh=dx3GvPrtEc84oKQFqZgw+1SQMoPJkUHR0Y/wpzWk6o0=;
+ b=O8HV6EyryRbaREUwz5RiDTPN4hXVgxaAetbJsEb02sBwqVi3i2G9gOyYKgexShOafmqn4wPXbONxSTadGnFcqEYRokpOi+WqSdQW8km3V5r+MmiBGXWXqE4mec7i2T1hOTonidAwPITQiLujHv3Bkghdsjc/uD43xUm8gGjZ9/fR/tF9nqWQua7JPUeN3zpI3vSY37P3QCo6DTWEHNN8cW/zDBBRT9YhaMO/kWVPEgZg3MIXF2zzrFhj/OPPCS1o4dcc3eHfJaIE0lThxlV8XhLC+nrJidRdl4ytcqKVYsZDIwgx2ZAmj1NKZtFvuG1Hpc+yk6qT+RGpa1PNbtApCQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
+ by VI0PR06MB10594.eurprd06.prod.outlook.com (2603:10a6:800:310::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Thu, 22 Jan
- 2026 12:50:54 +0000
-Received: from CH2PEPF0000014A.namprd02.prod.outlook.com
- (2603:10b6:610:50:cafe::28) by CH2PR16CA0029.outlook.office365.com
- (2603:10b6:610:50::39) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.11 via Frontend Transport; Thu,
- 22 Jan 2026 12:50:42 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH2PEPF0000014A.mail.protection.outlook.com (10.167.244.107) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.3 via Frontend Transport; Thu, 22 Jan 2026 12:50:54 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 22 Jan
- 2026 06:50:52 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 22 Jan
- 2026 06:50:52 -0600
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 22 Jan 2026 06:50:51 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Nithish Kumar Naroju <nithishkumar.naroju@amd.com>, Rohit Visavalia
- <rohit.visavalia@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] arm64: zynqmp: Wire gpio-delay driver for USB hub reset
-Date: Thu, 22 Jan 2026 13:50:35 +0100
-Message-ID: <d9935cb8244244d60e87ea69585dbdb2654e0216.1769086229.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1769086229.git.michal.simek@amd.com>
-References: <cover.1769086229.git.michal.simek@amd.com>
-MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6555; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=qPaIO0i5qLcOtKkpa2K+t8vEIJTPRlSA9VFrFZUQ+tM=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQWycrbZt/ZuuuY3MbwPWHGF/cwXZ4wu15z+g+FlToWb
- e2XAx5FdpSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEbqxnZOgOVlgrzGjIx+ar
- Ysf193Lqsfm6An9v8L7SsN+TPfUszyuG36wrpnDn/H6UUnWtb6qP/NrJT++of/m+rjjUW/nw2am
- B3AwA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.10; Thu, 22 Jan
+ 2026 13:15:31 +0000
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc%5]) with mapi id 15.20.9542.008; Thu, 22 Jan 2026
+ 13:15:30 +0000
+From: niko.mauno@vaisala.com
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ uboot-imx@nxp.com, vesa.jaaskelainen@vaisala.com,
+ Niko Mauno <niko.mauno@vaisala.com>
+Subject: [PATCH v2] mach-imx: ele_ahab: Mitigate imx93_qsb build error
+Date: Thu, 22 Jan 2026 15:15:52 +0200
+Message-ID: <20260122131552.30702-1-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.47.3
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: GV3P280CA0042.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:9::34) To AS4PR06MB8447.eurprd06.prod.outlook.com
+ (2603:10a6:20b:4e2::11)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000014A:EE_|PH8PR12MB7208:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19e4e4f1-cef6-490f-f1ed-08de59b4e182
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|VI0PR06MB10594:EE_
+X-MS-Office365-Filtering-Correlation-Id: 60704eb6-cf17-4d8d-c5d7-08de59b850f4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TzGAOmD8sq9VZjm3/J47GUEaVsBbiR+rrcjpaOpwmcrOHLwCLCYwL2vFdu1/?=
- =?us-ascii?Q?f0ZqZmqKoztB7U4F7ixPLptTgl6TKMiTbQXai1h2FP0ub0bKfN8d+tmWmfiK?=
- =?us-ascii?Q?HtwuMd7lDLqP7/sB/+xsvhEvSXzcgE4NzIYZHxIsI52K71NzJZUOobBzkZXg?=
- =?us-ascii?Q?7RfeeZqFZAP+4xchb9WU67lx/VLvqrKVhNU96yyuLzkA7xyVfC2Bwhbz2bAr?=
- =?us-ascii?Q?7Mc6chOmR52h6cf3UocThhqGdVDyOjH/Y6HHilg/GmnORnYqdB83W5iMw5XZ?=
- =?us-ascii?Q?lHC8yTlAUOiXn7SvMkqf48kxFhEe/1xs3mXrfEGAJJ2Wh9mLPbJwWKG/Uc6+?=
- =?us-ascii?Q?d6E15IOIw9j0tCQl/L4zAe/HPjrCWdPpltsqCZYyiAZDgXJlo/j/IzF4x4o2?=
- =?us-ascii?Q?XWEK1i+T8IslXiUBYoM6M6GHx8ykp3AXakUAtGZ+2qqOohVJ3IqIKT2MvOU3?=
- =?us-ascii?Q?tHp7CCkxVKc+8yDFFOmArlvj79+AYaGdlrBepvYQWpdqfs0JQ3zxUFu4U0ZL?=
- =?us-ascii?Q?QyDaY+aARQiDuDvTADQZoPn7NhppThfgcgt4XMfRsZf2fZyU7sjiF7G6Q8GZ?=
- =?us-ascii?Q?l6xBWNEHRn+DPP6f1aVYRPfPwb762U1yQ7nk45JAHF4kkdbM3c+P8LDS4cFc?=
- =?us-ascii?Q?RosZSQucByPXwwL2jwRAvADGoscybPKoXlPL4fAyWpN6GMrN2Hs+DeN/neK4?=
- =?us-ascii?Q?7CES+OObcr9NdLsY+Z4QIr5DPKMGnurrQ0PtGpBWFVHMcYBMzCXUWVQpU9ps?=
- =?us-ascii?Q?AuBgaf+8YRWNam/NDHJsOtlqmITo8Sg5QeiuUfF5A9by531k0GZ8MWE3eH/j?=
- =?us-ascii?Q?Tl+JBSUl9K6RStcK8rlODxqdiEAYsIbR6CcUORmOlmf/6Sw2uxfAqQY6LX4r?=
- =?us-ascii?Q?DzypapbsvLyTKdnRby36zu4CPN1V7iJSYOLJX5ucBmor9B7RVsnOOO3SfmOw?=
- =?us-ascii?Q?nMIVkmtB+gGvpDqoALdrknZ5SWqTPImma1MR0iPX6gF5aoOnrW7c5WMDSTV4?=
- =?us-ascii?Q?JuveAiiNUCn0MnTMJ3QQ6t48MIWh4vdA7PFtWIJBkVEGGxfgNMiRFmEAFg+h?=
- =?us-ascii?Q?fCd3+kgF4F733c00BePcD4Oyozw8y/X6aCIapseTpeyWGWIvqrl2FmWvaTU0?=
- =?us-ascii?Q?fZ+GEvOcZwQyE0OOua0ZE7bB4UPzM4Qle3aew9XaNL1hD87a0YJZqg+vbuU2?=
- =?us-ascii?Q?HnN9uORSVRhqNJQWVde/q11s3DfWWnr3QQ04ERUmERk84srKHZsIxI5ed4OZ?=
- =?us-ascii?Q?pnNXfFNF73KncQQwhSxiHLYFJr2jbkmZ+Jl5745Psdxn0Q7O1fAbhbSB/5wI?=
- =?us-ascii?Q?QjJu1+k+v71tdNf4iCbpU+xShvvHmcvlSxvCsRcY4ZVaCukjid0GW+2zdjZv?=
- =?us-ascii?Q?hBbz2eNVSC9iWoYtiYFuBM4rBS4W9ntNDqLELODSP+By8qUxA3VFj9C/TCIy?=
- =?us-ascii?Q?19p07wW+OpvdCk6R6EjhpWox+ivO+/WlJDV3ObbPs0foRjMymMSOeoWEPe5C?=
- =?us-ascii?Q?XADVMUtB6EQIbHMvkdNnASoOuInb56+xd2WCrJg0fCVmu3axdJb9jnN3j/vc?=
- =?us-ascii?Q?6NlDfQFYR2YsNTSCNU6GKl/eKlwZhD02VWQM/8GlltZQ9yG+Z9scprVhbViD?=
- =?us-ascii?Q?RLcX2YliOR0UkMN4Ouh7ZcoKrrHS6H7JnJwyHzai+yv0GkTo6vABme6nCxzk?=
- =?us-ascii?Q?fXFFkg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 12:50:54.5086 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19e4e4f1-cef6-490f-f1ed-08de59b4e182
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000014A.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7208
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pEd04+amQNvbL6U3ALdSllfZ9s38sSDts3GAwdNBhH/EkLuQK5C6A159PdC+?=
+ =?us-ascii?Q?3UEye66aEkOg86118HA7hvQI+P4ZlZYnb2Gxu9omC0vDvB5EEAj1rb6U27dk?=
+ =?us-ascii?Q?dcPExUwdYThOtloEtXoCuvS9schWFIFrWq/W1Ww+zT7UogCRDGnIEGWeY4Lu?=
+ =?us-ascii?Q?WdjJx5egLSYHZqSu2qwCQKowvpkFcKWUackCwu5lZzW6NTG4L4XFxpljsQrR?=
+ =?us-ascii?Q?rIF2TO7+DuMZlGnoppk5tkLx2Fi40D9ige0aHQxO8s8glvtX2Rkv1fSkJupx?=
+ =?us-ascii?Q?Z17+zskC6iJ1QajFeZSmyh+s/gY6q6OTpWQf0AhG1I7EFewNHsbj/bQxewRy?=
+ =?us-ascii?Q?9yiSJTKT8lq7xq4wBW0Gd6y80fAz4tGWq9zFvVtpzrt5Qq5rGwT6cFOOi/yF?=
+ =?us-ascii?Q?B65Xfwe8OAxSf974oD3kV0jI0z2In1gnByecBeLMv4pRRQP+cU4i+de9gh4T?=
+ =?us-ascii?Q?k2w01YvvD84UKmtCzImDXLUDTjg3wVny/vmwEoBCH8oQd4bxneEIzKy6Ka+b?=
+ =?us-ascii?Q?uoDp4eAW8JbXATo/2HnFlZxf0cVaJKM/fkFvXRh+jo1EoJlQM6bTsDE0D4n1?=
+ =?us-ascii?Q?kUVZFXFEVM5yt8/9omJRHfHoB9aaI4fyvnyiFAKfZfWOKcFZ1bPyAaQqpXAH?=
+ =?us-ascii?Q?HG6mlgPJizkloJlRlUjjfHYY7JQC3EEnZms0GymDnv3erCtgBbybF9WR6jht?=
+ =?us-ascii?Q?TOx49b5iO9wdl55oLSeLkxZdUeJxHHyMBUaz7kQQIlUOPVzv790FDOnM9sMW?=
+ =?us-ascii?Q?RdCTzISBbVqTtaGVZq3XgQqpBJj3MYFq8RTIO+jn7z06KDRhnY6/sx4VKOTD?=
+ =?us-ascii?Q?1nlsydB0mwTxeXmHzCP9rNhMyoW6tMS45WiUGbZcUNB5T35ns7eqU/q7U7N/?=
+ =?us-ascii?Q?na5SNERlOmgBskJmUMCN5LcoqtwOEBvVvsh+o/fh5qPQbo48qvaxmk53ZOkd?=
+ =?us-ascii?Q?0U7IYhIZBkgcs/U7s/rblDvdMo/4lFE0QoxrHLWoEXzJ86rjPNoClIyrVzFB?=
+ =?us-ascii?Q?QoCWaWB4vfLsrla1HWS8tadce+pHxZ1gBQVE6v7c9wuB+SDpsne5glVprUnz?=
+ =?us-ascii?Q?uJ6gKkAx8nlXv6zhh9NJT+YUGi9/5X6xEa9LJZN08Wy00HY4d5CDqwv+8WR8?=
+ =?us-ascii?Q?7WA1fcrTol3mC3nEGi2wzMwqyR+fhAFGe1tSBbtSBvN9vTvttlQL5E2VVRCn?=
+ =?us-ascii?Q?MKEQoceM3pP/qMTUFs3ORGrRzyX8ufL9Kmae8U7m6uAjFylfIIheEbnBmgBK?=
+ =?us-ascii?Q?vsj6H1qVEN/blOJzR7q8rbkr3roCmqx8SxPFaZ7ZffznRVhBxcyAno1En2v3?=
+ =?us-ascii?Q?QfoqvQrfaqsaD1cA4J6WJhwdmtSx9NSw2ywvtI/6l859M/Qp7ny2B5Z//pyw?=
+ =?us-ascii?Q?HQ33GEkxLVC0IamLulZpQRCY6mPUT7p5DTzbIwE0PWgDdc0zanyJAaOGww6F?=
+ =?us-ascii?Q?eB05bYsxaLazr1aDXXnU3XP21L09SChFKEGRed41z4CVyBIt6/TuTpNA0ofa?=
+ =?us-ascii?Q?n/3kbLubzl7HZ6NYFmqyYJ6/qoSipyYvyUSX/9dSK9KIXUKaW/GZSdvrh9fS?=
+ =?us-ascii?Q?fYAKL8zLtcdt976iGqcHJb0bez0en8JOhmpHv4g0GfcvMcR2Tz21w0V40ksa?=
+ =?us-ascii?Q?hIbLp0UruFqUt6RrbCdQOsw=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR06MB8447.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KLavlIzAyRf+8o3g+X49ch6DxgzlqYWu1QrTkzqWCnzecJvL6B/lv5NMwwyI?=
+ =?us-ascii?Q?hSYuwkhT10ShWPJosB1D6bm6vHzqviCNhEEDjCMWJxX2CFfj08HynmAuOLxs?=
+ =?us-ascii?Q?QGktnis6oTjdOifMMhXjuSkdEHx8jLT+Obkur6x7pHChFvNk5FYiPc+9XqNu?=
+ =?us-ascii?Q?lwihYxGkjnGsDytW9G1s6qDvfALlJGl1uBvcXvtyyR8jUr6w2icMyoW2rURZ?=
+ =?us-ascii?Q?kNtnl0jYc/LceBBdteSHKTAK3UXk+E124Sv36ZOjUZuNbXDm6CmXZUanJqqr?=
+ =?us-ascii?Q?Yg+eAWioRuflQuYVUWUudcxf31+NTDE/2WGckKzq3DUO2sVh6IOuZUyyBK8e?=
+ =?us-ascii?Q?R03blZ+TIXYypHcRwzM/KpCpGPmSp8m/R6uz4CO+dtkgWEE340nc4PME6CVb?=
+ =?us-ascii?Q?oatP0fM112smWa7e8Uj3u6+THPzCP4gHmgLF5b4LcxJoF70WFtaYq9hf3E/J?=
+ =?us-ascii?Q?weQIxWUl7657/Am40wK19FfGaSOaM8Y/mItU1tUEwCOjjAf5Yzuy/7ryOfLL?=
+ =?us-ascii?Q?uC1CDKE4vAL2vHtHefcg8fo9niku5X853YC49cbosCzA+LxN89hgteCt8wtV?=
+ =?us-ascii?Q?hnfDorxHlYgG9Sfb7oGuRHxh0JQkqeTiS7y488jvhPMM+5YzMDL1HjIKfn2G?=
+ =?us-ascii?Q?qxLLdQMprcpQlzmjDPc3+7C0Y8oymURuSkD26tubYMA+kKTprfSOhFQbeV3o?=
+ =?us-ascii?Q?GPGEnAIHmoRFKF6c+uN3iazJfzP+Y43r/mUq2oxkVpQSBQ23hr8YY72FnSkh?=
+ =?us-ascii?Q?mdg2gxM4swczos06RNYXHOhvIcVY8C88ASlqUsdyPT1qatwfusNMFa7Me8hf?=
+ =?us-ascii?Q?dH62d1fiFXtyvy4ZzzF9GEZaBVtlPGyTSpuXQvGTI7av1cM2T2WAnVXd7KZ5?=
+ =?us-ascii?Q?KsPMAG0BJAP+W+VH2OnGTuruyiLYjswhCzzNB5LHvQ2Pzl85pe2jHbMhFAhf?=
+ =?us-ascii?Q?XhvlACicfVh7uPD7TQkohsCSn1VGD2U7i0efOfA01q+Kj1xR8mKehJVOKXTX?=
+ =?us-ascii?Q?OzN9HQHn1sMilSRnLnmOg266OdNe0879zkFh1ovaXDFsnKWFDlyC7l0Ac5Xy?=
+ =?us-ascii?Q?a31dgsnVqkITPdwB4yziYlVrZPPjgMd7nSQl1A8FgNzevAc1NtLGH+10ktuf?=
+ =?us-ascii?Q?fh8v0Jm9cYzEnMEMAzKC63i2LPNW148QoHHN9cKp8GB526mInUcfCVIs2o9h?=
+ =?us-ascii?Q?bafGaZ4fjw9NvRS74fHKfGAN1lTgar7uNxpt/c8Vmpb0VXKVaRw2N/nIjfbB?=
+ =?us-ascii?Q?T+fM51G4XBlfuwQPc47Z05un2IxJAy41JwdCGlN3Gn32ImaKEntWA77Pc35+?=
+ =?us-ascii?Q?BioRCJ7xyMbnQ1DumI2BKoyMiSgVAxkH4G+ozvdfEUfsfFJaAJCMYJe3s4KU?=
+ =?us-ascii?Q?6DodUyoisfEKwcq9zhGcHSB9i7xHpnM3r9Is8z3N+wjHdxnK7/c74mgFv2uQ?=
+ =?us-ascii?Q?2CCXTDM4XHTumE5IKaeBdWyDhsf21eGPFjGD4A0xv/L3IPepjkkP//FwWG0I?=
+ =?us-ascii?Q?Q5lq90KJQA9vOs0qPzcPnOfqBEXwQxB7f3C+hgjqJPjFDp65qnQIJtdWzwUq?=
+ =?us-ascii?Q?Rhg2yMsntyy3qvYxGMx6WBoukt8uHRKYOSFGYxqUoWTrvQPH8IgrIcnmVgaA?=
+ =?us-ascii?Q?dA6Itu7+yEbxhkKaS4FzI1GlrphjvopQux8NdE9LpmVYQwVA7iPynTaPAhcm?=
+ =?us-ascii?Q?oX2/qGFpz/fdxgMjAIVBQqpSExf0S11IcxaKzlmVM+74Ql7H9JqvmYxKCKhG?=
+ =?us-ascii?Q?NGMMtsLkB9Pf32Lk1GJNA3FkmFDXpPA=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 60704eb6-cf17-4d8d-c5d7-08de59b850f4
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 13:15:30.2372 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yoZ2tNhRgqlmhITV6hPLiQ8eucSemogumD1/ow1h3UCFe6TW7jRtYCXjVXPKT3mZz5QqBzBwdJgXlkJtt0Io5w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR06MB10594
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,255 +164,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-USB hub requires longer delay to get out of the reason to work properly
-that's why use gpio-delay to ensure enough waiting time.
+From: Niko Mauno <niko.mauno@vaisala.com>
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Add include to avoid following build error with imx93_qsb, when
+AHAB_BOOT is enabled:
+
+  .../arch/arm/mach-imx/ele_ahab.c:262:24: error: 'IMG_CONTAINER_BASE' undeclared (first use in this function); did you mean 'IMG_CONTAINER_END_BASE'?
+  .../arch/arm/mach-imx/ele_ahab.c:477:20: error: 'FSB_BASE_ADDR' undeclared (first use in this function); did you mean 'WDOG_BASE_ADDR'?
+  .../arch/arm/mach-imx/ele_ahab.c:543:20: error: 'FSB_BASE_ADDR' undeclared (first use in this function); did you mean 'WDOG_BASE_ADDR'?
+
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
+ arch/arm/mach-imx/ele_ahab.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 13 ++++++++++---
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 16 ++++++++++++----
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 16 ++++++++++++----
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 13 ++++++++++---
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 11 +++++++++--
- 5 files changed, 53 insertions(+), 16 deletions(-)
-
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-index 832dc5ab2458..8342479b108a 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KD240 revA Carrier Card
-  *
-  * Copyright (C) 2021 - 2022, Xilinx, Inc.
-- * Copyright (C) 2022 - 2023, Advanced Micro Devices, Inc.
-+ * Copyright (C) 2022 - 2026, Advanced Micro Devices, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-  */
-@@ -43,6 +43,13 @@
- 		#clock-cells = <0>;
- 		clock-frequency = <25000000>;
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &can0 {
-@@ -116,7 +123,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -125,7 +132,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index 532f6bf92bc5..db042ffb4f36 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -77,6 +77,14 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>,
-+			<&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C26/C27 - MIO from SOM */
-@@ -187,7 +195,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -196,7 +204,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-@@ -224,7 +232,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub1_3_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -233,7 +241,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub1_2_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index 458d79e81192..e3567d0abfe0 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -78,6 +78,14 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>,
-+			<&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C26/C27 - MIO from SOM */
-@@ -188,7 +196,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -197,7 +205,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-@@ -225,7 +233,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub1_3_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -234,7 +242,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub1_2_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index e7417af8ae01..f93c7460a552 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KV260 revA Carrier Card
-  *
-  * (C) Copyright 2020 - 2022, Xilinx, Inc.
-- * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
-+ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
-  *
-  * SD level shifter:
-  * "A" - A01 board un-modified (NXP)
-@@ -78,6 +78,13 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C23/C24 - MIO from SOM */
-@@ -161,7 +168,7 @@
- 		compatible = "usb424,2744";
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -169,7 +176,7 @@
- 		compatible = "usb424,5744";
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index 7a05180e58b4..70de6933600e 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -74,6 +74,13 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C23/C24 - MIO from SOM */
-@@ -148,7 +155,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -157,7 +164,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
+diff --git a/arch/arm/mach-imx/ele_ahab.c b/arch/arm/mach-imx/ele_ahab.c
+index 38e671e3935..4d4620dcafd 100644
+--- a/arch/arm/mach-imx/ele_ahab.c
++++ b/arch/arm/mach-imx/ele_ahab.c
+@@ -10,6 +10,7 @@
+ #include <asm/mach-imx/ele_api.h>
+ #include <asm/mach-imx/sys_proto.h>
+ #include <asm/arch-imx/cpu.h>
++#include <asm/arch/imx-regs.h>
+ #include <asm/arch/sys_proto.h>
+ #include <console.h>
+ #include <cpu_func.h>
 -- 
-2.43.0
+2.47.3
 
