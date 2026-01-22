@@ -4,108 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2D6C44508
-	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 23:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD3EC44508
+	for <u-boot@archiver.kernel.org>; Wed, 21 Jan 2026 23:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C30C583A1E;
-	Thu, 22 Jan 2026 00:24:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6107B83A3B;
+	Thu, 22 Jan 2026 00:51:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nWNv9XSd";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Xe59ylKB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BBF783A6A; Thu, 22 Jan 2026 00:24:15 +0100 (CET)
-Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
- [IPv6:2607:f8b0:4864:20::e2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B0DB180077; Thu, 22 Jan 2026 00:51:20 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2625C8313B
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 00:24:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53C7680077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 00:51:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-5eef115c781so155010137.2
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 15:24:13 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769037852; cv=none;
- d=google.com; s=arc-20240605;
- b=IGpEUBztMIrwSzMuXOx45VZnn53Y7nfyfJqZFrXujKaUUqiDkW2C5Ed83QZapQ2AUb
- Qqihq+tfxDdpdA0qknl5J5rxEj+MHT5HyShvYBZbefVf3DJDG0eXPjUlpbtPoTWXNkqL
- e/kTrSRjnZwEfxzhcCBlV9TOuZkkGjK3MHE737ssOeTEziYkZkYZO4DcbhsakrZU5At4
- UYCK159Eu/OyiB4aODiWg4zPrJ38QSPqAACVaHsKEpu0pe7S0xDIX5eoudBFp3pZVO/i
- n7t1vnaba00WFLEiTeTdksh6xMzaXWHadQUDfx+TNUD3930rfCKHRzlzkFOxV9CJkbGj
- 9RLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=cCDcSDydTLXOlZ3TA5qTZYd0Nv+S/77Xj6414PPERZk=;
- fh=GS5XrplfQdUIvoEGSgbap2KiZDVxNyY+j4cdU/9iaBs=;
- b=MqplwgxxcigcSfveLCQwodCfrr2suREKGUTfQecrJGwHULbscC4l8SO1spYcf/paUP
- eA9qdQ5APLhQtdBmsdNID3l0mRhKqyqzAI5TjCDA96DjYjnozM8KJll1X3trk4qG7dTn
- WsdLZIyC7pieGPxsOUrUhmjX1Yuf9Xgl+pl3cfuD57bro/Sntfv6+lBJ5xfCymaYjRGa
- 35nkX1zS038CAqC6oRS0gsXGIaGW2Hyfv3yCmgJEiSD5HEy1Wma6ySbz4iYbqudM4Tc8
- UwKab0mJ2sDcbQbVg/SkKZKZ7SRxlbZ84Lp8DeLWoDnqP5lGc4+WzWAh2xr9opoHQpyQ
- cZYg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769037852; x=1769642652; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cCDcSDydTLXOlZ3TA5qTZYd0Nv+S/77Xj6414PPERZk=;
- b=nWNv9XSd0qkQHpIGd/4oq2UkKNaeNm3dOaX+iZRnW9jMPrTZf+Lf40uZUnnXjW97v3
- 7Nwn/SBphfF31TZUSnsDZDckflugmpKnr8rI6TY9YGs3yVk7UiJEJxsmgHLM9z3ZlKi4
- Z2HP/Cnrv8QXqPdHYcB20hkJ5p+sLElXwrIyyG0BI0i6Ikn6kXzOOpgnijAFvxmHZZdd
- PmVHVgOMO/cy8edChimX8DkmkjSgq7mi9p4rA1ynhnftx/CQteyyGVc+FGLIB214bOCW
- RVF1qwSLfVkP5MBYV2CLZzMg1+Lrn0HTs1gdlmOPgw5OW8wk2p5qtUJnQN15vUAohNr2
- m9ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769037852; x=1769642652;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cCDcSDydTLXOlZ3TA5qTZYd0Nv+S/77Xj6414PPERZk=;
- b=QbczflihpGCBnZLbtlPgLAyQQkOsVLzwxvLC/VgBOKU6JQ16S/2rAgVNGgZ1eS+ScZ
- Z7QehVthcjOQu2oyFcj9MDxsRCh0hzZu56zXWstumaO6KeNY/dgw4AC3n//Ofm6YiQzK
- KwFS2jbLy2BtKVlRfms3dZbXNntTW5bVTGuFzbMw7j7BJdTY5klsm8Rwrb0bejH2UDoV
- T+3T+nz217ytTn7B3FZ4HmQriwk1yS8uWxMIC/M6TX8acTORkPgzLaw6m7nAAmz0uJwq
- 0MDMZl8cNKsYbXS+V3Qtr1RjQRqL87K4etb1ZgFn352R+ASYEB9s6NEn0+LlJstHGu3A
- R+Fw==
-X-Gm-Message-State: AOJu0Yz6nb3C4hLU7SyCEgJUmfqn1YF/GXLlEMmjR7uxVECCnkAv90hC
- iiGWNw/q5tSCoQPGIkrh88R1tZI/qFbsPyZwrW7ms/NEVk4HnKBZBj6aMsDiejCn6iNc4eRYKyS
- VCITKBv6b0n8np38QWHyT2dnDVMY1kDE=
-X-Gm-Gg: AZuq6aKn2w48msgdWv/LVNewmyJr5rKselQZxkCehkEHzyX9qOlvq/xVEXLj65V4IHW
- OIZQrmwkWOpzY13QgNh7C6WPcVvcAb+SX1qicvM+0KQWRkfnD1hsEtdkB9JLKHSg6zJevUeP68c
- R3/hoZnaUAm9BBNjHZfLyili8bgMC0MeP9pN8qcy/YHuj8Mbhqq6LslJOFR6B8En6Ig6yP8VBgp
- HpEEBFJ1YoSqlhST0rTsJzcvFirUg1wgQdBNMUl8cFrW3xF528khq0e9vaiY98Oum4fup68
-X-Received: by 2002:a05:6102:370c:b0:5db:fce3:af8b with SMTP id
- ada2fe7eead31-5f1a5381ff0mr6019896137.12.1769037851864; Wed, 21 Jan 2026
- 15:24:11 -0800 (PST)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QUbxHAPVRuOz/ZF9MgZS80ccYtzzK6UhYD9cOngs/Rjz/fGKiQbrPZAiS3hGFmLLUPWdxNRdMCmSG4QMMdnNW6xIQiaVoUkiBCwZybtgEyAcb6+tX7d4L7ju5yie/lhciw6YCvMvbsueQ6ul8LLdsa+t0cDGPDg0KaYGpT84nQoZh5DWF1veJUF+I3mbVFjXPmSMKDdXDqvqILhl56LsAsfLvJeetCPO9VSQ35IwbpYGfOIwnhWlExxYTzwdppWiVTF7BFi+YySUFRxDeJeTw2b37wqK2sX83ovwKWYm7h9bH0WunQdiIl5mlG03jekgRXD/DWp3PRvuAB4skhVYmQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yYaV/2J7HNXwwGKLAWGVScKo7iZbuCMomXE4grc7SRc=;
+ b=pxMSylHmCxnNyQtmD7NbUzxlorGx+T7FDcYwjIK0vLUc6k6QBNabx3noJVBAnHBuNwAwm3dzQ5qIFNo/9ZlIQnoQ/Eq80mwD8FJCU14oVCbRuvoB/ZK6ju9LcZMaLt0eu64+qxpkWmomeOdSxdu4LpZtkIrjZFqj6/ifeS7K3fMmf9/IZmfLOHAuEKX+wnad4fSWHI6YOT3miPSk7y1WHNJKWgpm6qk84TaiJ/8dF1pUMVi1T6fwszYddxS95gjcX8h4+BoHR7tibB7ebr17cO7lopoGc8jilx1LHKe3+cNUUYIgUqx4iSAefuFOfaTexRT+WcfhT4xzwXA9f3/ubQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yYaV/2J7HNXwwGKLAWGVScKo7iZbuCMomXE4grc7SRc=;
+ b=Xe59ylKB5GD6FFeE2rZnWf02EspnKn7zhFgG2jLzNVlEnYgmU9huS6X2MDql/QEH0vZAlpXlnqWRA6MQZ4CTgWeHKVhIFB0cGKl7cEhW6FSZjwr1aC7BWK7YuHwcodqFfdn4bFfAG25bQjGR2Rlb+REcusSv8JcGEDkz7QdlRuH4ST83LzWkV6QVwYKtWPQXaInM0ht8Rsp7HJX3+JKtr32IfzmhQBsKVIbFX/6kMGWAnE8YPRojGJbmcGP4lXu45JKUtKcN7r9Ez+cx46ZzyvxUBxFFloAgG3t26PN7l3Wlu3uW4CFDEZv3hkmSwoQO4UR3rAvlqecsBTTd1eSUFA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM0PR04MB7090.eurprd04.prod.outlook.com (2603:10a6:208:19e::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Wed, 21 Jan
+ 2026 23:51:14 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%5]) with mapi id 15.20.9542.009; Wed, 21 Jan 2026
+ 23:51:14 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 00/12] imx8m/8ulp/93-frdm: board cleanup
+Date: Thu, 22 Jan 2026 09:05:43 +0800
+Message-Id: <20260122-imx-clean-v1-v1-0-a52a94b7e173@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOd3cWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDQ0NL3czcCt3knNTEPN0yQ90UY4skA1Mzi0QLA1MloJaCotS0zAqwcdG
+ xtbUA8U5tnl4AAAA=
+X-Change-ID: 20260119-imx-clean-v1-d38b0568a805
+To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.14.3
+X-ClientProxiedBy: SI2PR02CA0030.apcprd02.prod.outlook.com
+ (2603:1096:4:195::17) To PAWSPRMB0023.eurprd04.prod.outlook.com
+ (2603:10a6:102:37e::21)
 MIME-Version: 1.0
-References: <20260117190231.977686-1-raymondmaoca@gmail.com>
- <20260117190231.977686-15-raymondmaoca@gmail.com> <aWyryi4ZPNgNIejE@pie>
-In-Reply-To: <aWyryi4ZPNgNIejE@pie>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 21 Jan 2026 18:24:01 -0500
-X-Gm-Features: AZwV_QjPZ1kfG-oYVKvb60SDcboPugetPerNAoSh7YWyNHxKVLQCmN7kp_yng9E
-Message-ID: <CAMDkj5yGNxL0Hkw5k0Kae=SjPb51Bu9T0M60Dpaj5OVckN3R1g@mail.gmail.com>
-Subject: Re: [PATCH 14/17] spacemit: k1: Add DDR firmware support to SPL
-To: Yao Zi <me@ziyao.cc>
-Cc: u-boot@lists.denx.de, uboot@riscstar.com, 
- Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Heiko Schocher <hs@nabladev.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Peng Fan <peng.fan@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Randolph Sheng-Kai Lin <randolph@andestech.com>, Yixun Lan <dlan@gentoo.org>, 
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Samuel Holland <samuel@sholland.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM0PR04MB7090:EE_
+X-MS-Office365-Filtering-Correlation-Id: 82be2bcb-e396-42e2-a05f-08de5947f5c2
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|52116014|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SEkxb2VibWpwQkRNaUdVQlRWQ2xVYTBmL2VGVVVIaE84aWFTWjFhQlAyayt0?=
+ =?utf-8?B?QXB2Qzhub01GQW5GaThuRmYxc0dmcE9LbVU0bXZPYlBIenB2RlVCaG5Fa0tC?=
+ =?utf-8?B?NlFseUwzcUFIcTBLaGhhLzdzWU1wNkUzbUs2MHpRRUxNKzIvb1hJRXh1NlBL?=
+ =?utf-8?B?M24zUDAxYzhyNnlpbUJQUThvcDhkQ2o2cythK2tCTkZ2MWhSeGdaTllBUUwx?=
+ =?utf-8?B?YzZGakd3NTFrVEtSbzZSN1N5MURWSjVNUWVJd2dHZUdVbHN1OXpmKy8zMW9v?=
+ =?utf-8?B?aGsxNDJSOTNmN0lGcU9LZUZvL0lISGhJclJuN0grMjlNSjY0MGg5U3lockhW?=
+ =?utf-8?B?ZmhNTnFZUWM1dzhNUmZrVE4vS1FzeFNDNkptcE1tNEUzVHhYeEVZMTJjQ2R4?=
+ =?utf-8?B?eFZ0cmxMRzR5UVhUTk9xRVQvWXFWU1F4K0hGZXBGTDNuVnhPVHIxYVRjMWxx?=
+ =?utf-8?B?cHFwaGtEemtjNFo4djBTQ1ZRTHJPRVJIOVNtOWtRNHBWRlkrK0J4Nkl2cHZi?=
+ =?utf-8?B?VHd5a1dOS1cxcG82cE0yU1RoRkgzTm5idVVoT0NNNndzdi9HbkNSazZFU0xW?=
+ =?utf-8?B?MlZUb2swSDM2cmJVY0QrWGFQZG0vSmlMcEdIamFLV3YvSUtpQlV5eVMzZmdE?=
+ =?utf-8?B?Qy9aQVVucTVNdTV4RU9OOS94c3JnTSt5cXZybTZFRGczQzZ0RmV2VDRockY1?=
+ =?utf-8?B?bjJZWXhGU21UNjdPSFpjVTZyRGlMWEc2L1NKVnRhOWptbjkxeG9EcWtVMGlF?=
+ =?utf-8?B?QTd6amNRMzA5QVppV0p6dUZsdy9MeUFTc28rd2ZvdElrQ3lzMTJ6UWRoblEz?=
+ =?utf-8?B?dnd1U0RlandPUW1RZytZUVZDU21FUGoxVWZLQlhOb3pkeTVCQ0xpOVlGSmkr?=
+ =?utf-8?B?UVkwN3cxalV0akpEVTVWTEhpK1RKTDBSa3d0NDk4K1lBWXo4UEgzOHlCRmcr?=
+ =?utf-8?B?bDlaeVZqMEg0b1FjT1pBR0JIa2xNZnVrOXhZVEU3OGtuSk9SQnpKRzl2WTUv?=
+ =?utf-8?B?bnovdVpNNUNqS3B4bjBVemMxb0N6NU9PY1lPK0dUQ2xsYTdtRjFWVVIwQS9V?=
+ =?utf-8?B?RE1hWk55VnVSZjE5ZFlqcFdYckN6bFJ0UWdBWUsyYmdzbmVGUkF3T3BLam93?=
+ =?utf-8?B?cjhHTFlTMzgyYjA5SHRlcnJzRGxVVFJnR1ZQREpLbEVUQkF4dVUwdVRaRHNw?=
+ =?utf-8?B?TVBRaTM2cXpFd0lTa3l2VnhqSUduWnIwc2d2VlB2RDM5Mk1zdWRFZE9ROXI5?=
+ =?utf-8?B?TDZWaTdVQmIxNG5zcm9OcU5GN2JSQVVCdGtuTWZKV1cvZStpemZEK3hqWlZo?=
+ =?utf-8?B?R216a3lRMWh3dzNHUlQxNVFHMmgzVWlFSTZseUs0RjBLZmljdmtLUjZvL00x?=
+ =?utf-8?B?em9jYnQzSTVFYkJnbEp4enNVSWoyYzVVRXJDcDlnRXpHWFMya1hPR1JudU9M?=
+ =?utf-8?B?bjR3eFk1SG9aaTdIWTlRdXBVc2NyZ3JvellxYWFhQ0Z4ZVFwcGwvT05xQUhN?=
+ =?utf-8?B?SlA1bDZiaWJ4cGtybzlQTy9XdDVXSXFHMHVxQ0xMV0hwbVJSZWQrVEhqeDFy?=
+ =?utf-8?B?MWpibEVCcUxQb2M1K2RwVkpoK1dKZnhiaWhjZmRWRmN2OEFtK2pHSkt5TTQ5?=
+ =?utf-8?B?SlJ1WG5rd1RUaDhUeTVWSlU4YXVTUjhtMW9lNTRXaERNSGxubG9TM0RJNjda?=
+ =?utf-8?B?NlZaUFB4ODR6bjI4T0Z2U0FaNVFhVi9tNHI3MVE1a21Fdm5OVEVEa2dnRk4r?=
+ =?utf-8?B?RERwZzhCVWRURDFKMEtPdG9rV0Y0Tjdtdlh1bWZGcUxoN3lhampXNXBTWDFZ?=
+ =?utf-8?B?dU1BOUFuZ284WmZ5K2N1aHB3VzRwRjlWc0FpQWJndWt6aDVhd2NPaXpzUGpQ?=
+ =?utf-8?B?WVdTekUrdE9GZCt1Mi9ySkNvUXdLa3hpTzhRVUl2eXNkMWJyN2NFRnVnV1BH?=
+ =?utf-8?B?RFpLbDlITUlFN0F1VEU3VFV4RmtWNWNLK0lDSUhLcmc1QVNJZ0sxb251ZG1F?=
+ =?utf-8?B?NDRsd1RmTWdmN3E1UnlJcTNiUkFVK3UvZXR6czVZcHF2NW1lTVJ1UGtFd2dW?=
+ =?utf-8?B?WkVZTHovZENISjl5RzNrS0FzajV4amFFdk5yVGpONklUL2k2ai9NcnE1eHBV?=
+ =?utf-8?B?Qi8xbmZ1Y3ZxbUxEYlRJVWNZVWtIY0k4RG5vaCtDb1VBWUFFUU5RbEt5d3d2?=
+ =?utf-8?Q?LHy+Gh5nmJQZv97uzSs/P4s=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(52116014)(376014)(1800799024)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ay9jZHlsZ2d4THlqRlkwN2t0ejdJU2VqdC9EUWY0Tks5ZkxTdHhFV25oVEsx?=
+ =?utf-8?B?aHc2S1pLYkxRMHl1QldWeERvbXl1bEY3bGJBYWF6SThjS2lxaDE0S3NnbGdy?=
+ =?utf-8?B?dGJ1QUlYL3JXMDQvUzBGdUZJZmZkckwwbkZuNE1zb1AyTUFhUG1FT2dtMmd0?=
+ =?utf-8?B?a1lhR0syNUVqc0VkcWpMTjE1YnVsYW1vQlRWNTFBNFR4MjMxUnY3aGNMZnUx?=
+ =?utf-8?B?ZmtUdUVWQVNOanNreEZqd2psODVPSEhLNzZROURiNzdZam5oYTVZZ2t2ZlVL?=
+ =?utf-8?B?SXBRSzZla3JXVGlGRkRwb2FKT3BheXlUVW9ab01Qb3hkZk5EZml5MFIwU2xx?=
+ =?utf-8?B?NDM0Q3k3OFY4MWo4SmJ5ODd3b0J2MGdXcHA0K3JOYy9WVnpML1dzNFJvNDN4?=
+ =?utf-8?B?VXRzbnF4ZEptUVVlVGVPMHM2d3NNOTM0TW9NQlBuYUNLa0tWN0R4MkUxSEVG?=
+ =?utf-8?B?bGQ1eE15NWJtL0syK0RTSmlJSzVwTmxTVGUxYmxiNGVVOUViRE1lOXloVENv?=
+ =?utf-8?B?WnNVSHhycURITzBNZkhDNXBzc1pLdkQwb1hJUXJxeTgzYjBjOHE5Y243cUpz?=
+ =?utf-8?B?OFdyNGlLZnYrdE55VFNrc0pVekVZOUttYVFJTkM5QmRSNkFRS2ZhSmN6RzZy?=
+ =?utf-8?B?WkhxQ0VldHBldXVnN2RqOU5DOWllYzdHN3FicVhyVHFiOGh3V0RleFl6VUhI?=
+ =?utf-8?B?Zm9TU1lPWFEyK3Y3SWFENlpMWkhvcThsZlRZMFFjNkppa2JiQ0I0eUhNeVgy?=
+ =?utf-8?B?SncwLzJHWk9BYXFXZDNzNnJJcDY4dUVUQmNXcXgrWW0ra1NSekc5NGpEaUVT?=
+ =?utf-8?B?Q0VoUDhUS3ZJWDg5Z2lrWWFHS21ablBCSWkyeUNIU1p3VUtLRlcyZWpCMk1o?=
+ =?utf-8?B?M1BlMkluY0dRazZORjJIYXlsYWhpOFpLc0h3bEdURlNXQk5tSCtISHM0Umxh?=
+ =?utf-8?B?eStKYU1YSUNWVXRjV0FtWGxqRFROMUtLekRLNVFjRzZPbWwxT0pveXNrU1pq?=
+ =?utf-8?B?LzhlN3RQU2FvcVVZc3h5eDM3U1BvWXpRQlBQalVoMklURjA5TjZ2b0JDNnp6?=
+ =?utf-8?B?Q1hYejZYdVc2aENkNjhWWlo3c2xKbHhUMDBhMUNBVGtiSk12VklvYyt0cS9v?=
+ =?utf-8?B?WXBlK0JBQWxDWjVZNTZidHBQMU5aUllWdEJDVWVoNThtRWdWOVZ6TDA1RU4x?=
+ =?utf-8?B?aUFSNGVPMWhVa1d1TWdUL2VTeHNtTmsxUGNYQjV4M0NlbEN6QW1SVy9kekRq?=
+ =?utf-8?B?bXJXZXYxcGJLbG00UWp6TDd5azh0Q1lacXQxZEhuM3pjMGI3YW1lT2NyZXJN?=
+ =?utf-8?B?bEhvalY1cnRjUy8xU0kyYVdDSHhraStYdmYwY0J1QzNQM0R1ckN4T0hRK2Yw?=
+ =?utf-8?B?eWtGMVZZcHRYMDFCY0x2Z3dqTmdTdHdxVkxQQ3dyM1dSMk5WTitjaTB2cXFF?=
+ =?utf-8?B?QytpUDgyVnYzaXBaUDhtUWc0OVpQUlRnN3h0QXNzOXRVbVFWQzlaTkpIakRC?=
+ =?utf-8?B?eFJyd3BkbnJRUWE0YjF3cGJ1aTdJTGR1MUZDVG1MRE9LeEZpRythTVFCQmhD?=
+ =?utf-8?B?WTFPZXdiSFZTLzNNT2gvK0V4d0FQUnQ2QVhvWnFVT1piS3hLak44cHpUYlpm?=
+ =?utf-8?B?TGlwbFgwK1lxOHlSWFh0TTIwd0pIM0pYWnFOMHZQVDduS241YXkybkEzSHhD?=
+ =?utf-8?B?cWhxaUZnOXl3bUlDOHVWMnhZNWNkVmNnVDdoTjM4V0tZdUFweDR1enBtK1l6?=
+ =?utf-8?B?YmkwMDhaalNhZWJEOThRUm5KVThkMm9aS3BSeDVGZ2Q1NDdMbXhGekt2dXYv?=
+ =?utf-8?B?ZFhYR2x4LzlLVzhoa0VyVGZDZnU5TVFuSHM5NHZDR0lOVCsxZTJZOGNrUFNH?=
+ =?utf-8?B?TStMNFlMUWZLenVWaHdyZ3QvaVhocGNBSC8vekVBaXNEYyt5YU9XSkVSWTlj?=
+ =?utf-8?B?V2h4ZjAwQTF0czNvdFdvU2c5OUovOCtKTXlXWlNsNVA0Qzh1dWt3UC83Umgr?=
+ =?utf-8?B?NFpIRi9aSzh5NHZMemdEcm9rdkpDblZIVDVwY2RObGl0enFtZ2p6cU5IemhV?=
+ =?utf-8?B?S0pyL2p4Vnh6L1dZcGtYRlB3TjZIcWR4T2lYU0dQRWdmSmF4M3l5K2o5RU5W?=
+ =?utf-8?B?MWlWV1JNMHNOV2UrT2J3RXY2MEFXWlF1OWZINExuTk55UHRoN2tXOHpWelNu?=
+ =?utf-8?B?Y2RpUmV2ZnVFQ1l6aWxQQmxwbFZCcElTQjgzTTlkUWljOU9sNVRad3ZBeWxu?=
+ =?utf-8?B?dW4vWnJ0K3dTV0FZckNQK2lnZWNFblJsNnBBNHRSTEpJMEtiMFBFOCtzSGYy?=
+ =?utf-8?B?N0w2ODFMTXpBaUdMOXF3V0FZbjRYSUh3YmpadDZrUFhPeWZLWnNFZz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 82be2bcb-e396-42e2-a05f-08de5947f5c2
+X-MS-Exchange-CrossTenant-AuthSource: PAWSPRMB0023.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 23:51:14.4926 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: B+3YQw9jqRhTQJLtGj/gWDqfpea5NL6xY2B7o/DoK4Vo6Q0X5rlU7BWwPjrbJUU4fbawL/ZUhE+gF2X79VEtjg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7090
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,151 +187,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao Zi,
+The 2nd batch to do some cleanup. The patchset is mainly to cleanup
+i.MX8M/ULP-EVK board code and sort the included header files.
 
-On Mon, Jan 19, 2026 at 4:41=E2=80=AFAM Yao Zi <me@ziyao.cc> wrote:
+While at here when reviewing the code, the i.MX93 FRDM EFI GUID
+is copied from i.MX93-EVK which is wrong, so updated it.
 
-> (My mail provider complains about the huge list of recipients, so I
-> reduced it a little.)
->
-> On Sat, Jan 17, 2026 at 02:01:48PM -0500, Raymond Mao wrote:
-> > From: Raymond Mao <raymond.mao@riscstar.com>
-> >
-> > Include DDR initialization firmware in the SPL image. The firmware
-> > path can be specified via the DDR_FW_FILE environment variable. If
-> > the firmware is not found, an empty placeholder file is created to
-> > allow the build to proceed without DDR initialization support.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> > ---
-> >  arch/riscv/dts/k1-spl.dts      |  34 ++++++++++++++++++++++++++++++++-
-> >  board/spacemit/k1/Kconfig      |   8 ++++++++
-> >  board/spacemit/k1/Makefile     |  19 ++++++++++++++++++
-> >  board/spacemit/k1/spl.c        |  30 +++++++++++++++++++++++++++++
-> >  include/configs/k1.h           |   3 +++
-> >  lib/vendor/spacemit/ddr_fw.bin | Bin 0 -> 19416 bytes
->
-> It's unusual to ship binary firmware in U-Boot repository. Please place
-> the firmware somewhere else, and give a clear instruction in the
-> board/architecture documentation explaining how to obtain/build it.
->
-> >  6 files changed, 93 insertions(+), 1 deletion(-)
-> >  create mode 100644 lib/vendor/spacemit/ddr_fw.bin
->
-> ...
->
-> > diff --git a/board/spacemit/k1/Kconfig b/board/spacemit/k1/Kconfig
-> > index 9f9c806d00d..a5fa788f660 100644
-> > --- a/board/spacemit/k1/Kconfig
-> > +++ b/board/spacemit/k1/Kconfig
-> > @@ -15,6 +15,14 @@ config SYS_CONFIG_NAME
-> >  config TEXT_BASE
-> >       default 0x00200000
-> >
-> > +config SPL_DDR_FIRMWARE_OFFSET
-> > +     hex "DDR firmware offset in SPL image"
-> > +     depends on SPL
-> > +     default 0x20000
-> > +     help
-> > +       Offset where DDR firmware should be placed in the SPL
-> > +       image.
-> > +
-> >  config SPL_OPENSBI_LOAD_ADDR
-> >       default 0x00000000
-> >
-> > diff --git a/board/spacemit/k1/Makefile b/board/spacemit/k1/Makefile
-> > index 7bce47bac8c..ebe6e55867c 100644
-> > --- a/board/spacemit/k1/Makefile
-> > +++ b/board/spacemit/k1/Makefile
-> > @@ -5,3 +5,22 @@
-> >
-> >  obj-y :=3D board.o
-> >  obj-$(CONFIG_SPL_BUILD) +=3D spl.o
-> > +
-> > +DDR_FW_SRC ?=3D $(DDR_FW_FILE)
-> > +FW_TARGET =3D $(srctree)/lib/vendor/spacemit/ddr_fw.bin
-> > +
-> > +DDR_FW_HEADER =3D $(objtree)/include/generated/ddr_fw_info.h
-> > +
-> > +$(obj)/spl.o: $(DDR_FW_HEADER)
-> > +
-> > +$(DDR_FW_HEADER): $(FW_TARGET)
-> > +     @echo "/* DDR firmware info - $$(date) */" > $@
-> > +     @if [ -f "$(FW_TARGET)" ]; then \
-> > +             SIZE=3D$$(stat -c%s "$(FW_TARGET)" 2>/dev/null || echo 0)=
-; \
-> > +     else \
-> > +             SIZE=3D0; \
-> > +     fi; \
-> > +     echo "#define DDR_FW_FILE_SIZE  $$SIZE" >> $@
-> > +     @echo "/* Note: Update ADDR if binman layout changes */" >> $@
-> > +
-> > +clean-files +=3D $(FW_TARGET) $(DDR_FW_HEADER)
->
-> Please make use of existing binman[1] facibilities to avoid the extra
-> Kconfig and Makefile pieces. binman_sym() could be used for obtaining
-> both size and offset of a binman entry.
->
-> It doesn't work at all in SPL. I checked the binman symbol table
-that was totally empty.
+For patches to sort the header, I follow such rules to sort the header,
+same as the last patchset to clean i.MX9:
+*.h [generic header]
+asm/*.h
+asm/arch/*.h
+asm/mach-imx/*.h
 
+CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/29059
 
-> > diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-> > index 6fe064bd430..54bad9000fe 100644
-> > --- a/board/spacemit/k1/spl.c
-> > +++ b/board/spacemit/k1/spl.c
-> > @@ -6,10 +6,12 @@
-> >  #include <asm/io.h>
-> >  #include <clk.h>
-> >  #include <clk-uclass.h>
-> > +#include <cpu_func.h>
-> >  #include <configs/k1.h>
-> >  #include <dm/device.h>
-> >  #include <dm/uclass.h>
-> >  #include <dt-bindings/pinctrl/k1-pinctrl.h>
-> > +#include <generated/ddr_fw_info.h>
-> >  #include <i2c.h>
-> >  #include <linux/delay.h>
-> >  #include <log.h>
-> > @@ -115,6 +117,33 @@ void serial_early_init(void)
-> >               panic("Serial uclass init failed: %d\n", ret);
-> >  }
-> >
-> > +/* Load DDR training firmware */
-> > +int init_ddr_firmware(void)
-> > +{
-> > +     void __iomem *src, *dst;
-> > +     unsigned long size;
-> > +
-> > +     src =3D (void __iomem *)(CONFIG_SPL_TEXT_BASE +
-> > +                            CONFIG_SPL_DDR_FIRMWARE_OFFSET);
-> > +     dst =3D (void __iomem *)(DDR_TRAINING_DATA_BASE);
-> > +     memcpy(dst, src, DDR_FW_FILE_SIZE);
-> > +     size =3D round_up(DDR_FW_FILE_SIZE, 64);
-> > +     flush_dcache_range((u32)(u64)dst, (u32)(u64)dst + size);
-> > +     return 0;
-> > +}
-> > +
-> > +void ddr_early_init(void)
-> > +{
-> > +     void __iomem *addr;
-> > +
-> > +     init_ddr_firmware();
-> > +     addr =3D (void __iomem *)(CONFIG_SPL_TEXT_BASE +
-> > +                             CONFIG_SPL_DDR_FIRMWARE_OFFSET);
-> > +     // verify DDR firmware header
->
-> However, you don't verify it, but only print some of the information.
-> The comment seems misleading and extra.
->
-> OK. I could remove the print and use checking instead.
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+Peng Fan (12):
+      imx8mm_evk: Drop DECLARE_GLOBAL_DATA_PTR
+      imx8mp_evk: spl: Drop i2c_pad_info1
+      imx8mp_evk: spl: Drop DECLARE_GLOBAL_DATA_PTR
+      imx8mp_evk: Cleanup headers
+      imx8mn_evk: spl: Drop DECLARE_GLOBAL_DATA_PTR
+      imx8mn_evk: Cleanup headers
+      imx8ulp_evk: Drop DECLARE_GLOBAL_DATA_PTR
+      imx8ulp_evk: Drop board_phy_config
+      imx8ulp_evk: Cleanup headers
+      imx8mq_evk: spl: Drop DECLARE_GLOBAL_DATA_PTR
+      imx93_frdm: Drop DECLARE_GLOBAL_DATA_PTR
+      imx93_frdm: Update IMX_BOOT_IMAGE_GUID
 
-Raymond
+ board/freescale/imx8mm_evk/imx8mm_evk.c   |  3 ---
+ board/freescale/imx8mn_evk/imx8mn_evk.c   |  4 ++--
+ board/freescale/imx8mn_evk/spl.c          | 22 ++++------------------
+ board/freescale/imx8mp_evk/imx8mp_evk.c   |  2 +-
+ board/freescale/imx8mp_evk/spl.c          | 30 +++---------------------------
+ board/freescale/imx8mq_evk/spl.c          |  3 ---
+ board/freescale/imx8ulp_evk/imx8ulp_evk.c | 17 ++---------------
+ board/freescale/imx8ulp_evk/spl.c         | 12 +-----------
+ board/freescale/imx93_frdm/imx93_frdm.c   |  7 ++-----
+ 9 files changed, 15 insertions(+), 85 deletions(-)
+---
+base-commit: 6b2d05748cf3cd6ba417a96c00602b0122e10af6
+change-id: 20260119-imx-clean-v1-d38b0568a805
 
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
 
-> > +     log_info("[0x%x]:0x%x, firmware size:%d\n",
-> > +              (uint)(u64)addr, readl(addr), DDR_FW_FILE_SIZE);
->
-> Regards,
-> Yao Zi
->
