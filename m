@@ -4,83 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E36C44536
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 09:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D273C44500
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 09:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67CB580086;
-	Thu, 22 Jan 2026 10:29:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0395180086;
+	Thu, 22 Jan 2026 10:40:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QE1FF2Oq";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="f8OV0agf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A002783A1E; Thu, 22 Jan 2026 10:29:35 +0100 (CET)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B215839DF; Thu, 22 Jan 2026 10:40:05 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ADC380077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 10:29:33 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-648ff033fb2so860230d50.0
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 01:29:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769074172; x=1769678972; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7QE30ewXCKuEnIUv1J58L8pWHbw+QdsLg2W7g+IhNCI=;
- b=QE1FF2OqtRKO6oPdRC4u+sLO2rARfZvQHV/yuTWNiSv7aV8nnlshHSZ1uQ2vJIOEGS
- DuKIpfbbA7NSSgZt9G24GuFTs03mU1sp+6pdI/O+iqMnGHvcjrXqvtJGlEG6q7EBfw2w
- J91yKZ7bHcT4Og42d5thHbHfBjWJoNrFFGZIKqBZS/AdaPnIx4LnLtxz3R6UkwURLDSV
- fxzSKZrwGrHfO4H1Vv3xOlqNrrFTlhLH2dy0jcNLkwtsUIJiGKxIwnk0mFF0fQL3sVqc
- sm43eK+F+Q45MFhtbSllsBRVyhy9kgrhL5mF1eyNTa/KrB6RjzZI2Hf1xC9I537VEiTc
- nLYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769074172; x=1769678972;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7QE30ewXCKuEnIUv1J58L8pWHbw+QdsLg2W7g+IhNCI=;
- b=Rq4YLWKz5CVFKXQ470MwGj1pBCAHwra/GFC69FtM1NP+PFHpQH3db0HpM8dphLJSSD
- FyNkymuQfOW5kfTSSZ78e/LbzTIpeTCdrYNRvBLHB/Df4q6FZNpR9JIS8Exo5FJ6cqbF
- 8MglkS4zNZA7qLVImEroinculm/7gTGhy5XvPP7kNfq1JfoBJ/kRpeqPTvZrAjDGjSy8
- 9ckvQfKi8gRf4HnyaRRSWLYe9IBLCdltJ3AxQhtukJsr1mt/FYs3D73vCuDMwkFmukOc
- 8+AjzwLXlt3cri1uXbMmoXMId1cQaLgw3qaVAEWAJJ0AKrL9N2Scj5LN5/V8+MS+Exw9
- iZjQ==
-X-Gm-Message-State: AOJu0YyxxEQ1MXh6o3e3u5jGj4SpE7cMKt5jRZzq14UzD9P5+IU5UQIN
- 1RQ3tINzfUstOZbHxjpMQi53Gewi3RAR2dKYFdBjXfXMaN0OlwTTkZXqPoBf
-X-Gm-Gg: AZuq6aJhFPs2Za2DJQME/JKE1XwLiA7Zi7wgUV4CJ9LH3rRFAqcFA/oPJvprSZGmdo7
- wdxggMaQr9QMkmrLy67B9KxmecylkvVQ03KHOSkZDFM9oiuMi7L6+1tsGSZPNovNZxBhP7mUF+W
- WNA1y1gts0ZiEQjhxaknQTY9+08ayNLqVhE7PxNu+o2vcJujlDdobMvJ26ZLWpKJdfC8McTuTeU
- J+C9SXlGOGak8+UkPEZJNbHlB5NBZX1XntCYb4SGyyiJxVBGul7PEJc4Z8Irg+Si3w8PjZFNVx7
- 1DUo+uOU4FbOYqbvGGs/v0p2whgww/LHb1ulaMM6CudY8odpMmQBf5gN8xjLqDCGpdpfLFw7L7u
- mcTHFldljK21Ebx8nEmbxuTjejtVbmtDx9u7iyMwHVH6xZdDqr1ZYWGhxhWl5hQuVZ4CCBIwkKq
- qvh1/rKP6CaSoKx8coCP9ur5x53A==
-X-Received: by 2002:a05:690e:1405:b0:649:38f0:ae7f with SMTP id
- 956f58d0204a3-64938f0b13bmr7803034d50.22.1769074171767; 
- Thu, 22 Jan 2026 01:29:31 -0800 (PST)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6494830d0a0sm2149126d50.18.2026.01.22.01.29.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 01:29:31 -0800 (PST)
-From: Greg Malysa <malysagreg@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] scripts/dtc: Fix pkg-config behavior under sysroot
-Date: Thu, 22 Jan 2026 04:28:53 -0500
-Message-ID: <20260122092901.11771-1-malysagreg@gmail.com>
-X-Mailer: git-send-email 2.49.1
+ by phobos.denx.de (Postfix) with ESMTPS id 52D2F80077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 10:40:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 400B810E1C6; Thu, 22 Jan 2026 10:39:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1769074799;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=17jramYHRgyDBYo+ubo/O/y5HaXH6dyOwBU14flKnQ4=;
+ b=f8OV0agfROfvFZUl8oRBDotk/gNmSUABonhYXVzgHhOzFOFXsMbbqvmFYAPnr3zlgc6kcy
+ cq7L9rm5Q3kk3LTx/DsSOxN0iCCxmOENFuDXRX8jDbryrJyGW/4xDfoQyUeWhnoc4SUigq
+ EFTttQY1y+lNUVdBK2xULt4inwqcEqorQUcbtpEU4ypq2VRtxVDSsVbT34ZNCgLG9B2kII
+ qmEjYlmcu9nT8JwF5AAeeM3XXcMO1C5bBsRQ+ek3BsaZegJCdX6poz/S+aaj8M4hVie/XO
+ xNZb7FAb7RQI+0V/B6hp3ZrTxq0Fh7i5DEj6k5EOZserb4GXh/S7VrBHWgd95Q==
+Message-ID: <1c9a6853-9acb-9665-78f4-d5c051bf9d2f@nabladev.com>
+Date: Thu, 22 Jan 2026 10:40:11 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v1 2/2] doc_ cmd: add documentation for sm3sum
+Content-Language: en-US
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20260106141405.82637-1-hs@nabladev.com>
+ <20260106141405.82637-3-hs@nabladev.com>
+ <a0cb3bb1-c9de-470b-9169-386b05eceb6f@cherry.de>
+ <3c02e1a5-aceb-1528-078f-80b695f741dd@nabladev.com>
+ <77fbaee4-777b-4d8a-afa5-239d8e0974e2@cherry.de>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <77fbaee4-777b-4d8a-afa5-239d8e0974e2@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,65 +73,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building with a toolchain that uses a modified sysroot (such as a
-Yocto-generated SDK) that does not include libyaml, on a host that does
-have libyaml, building dtc will fail with errors like:
+Hello Quentin,
 
-  HOSTLD  scripts/dtc/dtc
-/usr/lib/gcc/x86_64-pc-linux-gnu/14/../../../../x86_64-pc-linux-gnu/bin/ld:
-scripts/dtc/yamltree.o: in function `yaml_propval_int':
-yamltree.c:(.text+0x167): undefined reference to
-`yaml_sequence_start_event_initialize'
-/usr/lib/gcc/x86_64-pc-linux-gnu/14/../../../../x86_64-pc-linux-gnu/bin/ld:
-yamltree.c:(.text+0x172): undefined reference to `yaml_emitter_emit'
-/usr/lib/gcc/x86_64-pc-linux-gnu/14/../../../../x86_64-pc-linux-gnu/bin/ld:
-yamltree.c:(.text+0x1e8): undefined reference to
-`yaml_scalar_event_initialize'
-/usr/lib/gcc/x86_64-pc-linux-gnu/14/../../../../x86_64-pc-linux-gnu/bin/ld:
-yamltree.c:(.text+0x1f5): undefined reference to `yaml_emitter_emit'
+On 22.01.26 10:24, Quentin Schulz wrote:
+> Hi Heiko,
+> 
+> On 1/22/26 10:12 AM, Heiko Schocher wrote:
+>> Hello Quentin,
+>>
+>> sorry for long delay...
+>>
+>> On 14.01.26 15:22, Quentin Schulz wrote:
+>>> Hi Heiko,
+>>>
+>>> Typo in title, should be doc: and not doc_.
+>>>
+>>> On 1/6/26 3:14 PM, Heiko Schocher wrote:
+> [...]
+>>>> diff --git a/doc/usage/cmd/sm3sum.rst b/doc/usage/cmd/sm3sum.rst
+>>>> new file mode 100644
+>>>> index 00000000000..3b157779a0e
+>>>> --- /dev/null
+>>>> +++ b/doc/usage/cmd/sm3sum.rst
+>>>> @@ -0,0 +1,117 @@
+>>>> +.. SPDX-License-Identifier: GPL-2.0+:
+>>>
+>>> Use the canonical version:
+>>>
+>>> GPL-2.0-or-later
+>>>
+>>> c.f. https://eur02.safelinks.protection.outlook.com/? 
+>>> url=https%3A%2F%2Fspdx.org%2Flicenses%2FGPL-2.0-or- 
+>>> later.html&data=05%7C02%7Cquentin.schulz%40cherry.de%7C752a802f23394270c5f808de5996472c%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639046699157004614%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=hFPbf2cm4pcD17T8ORnYC%2FL9VOWm2s%2B8Ebnb6TMjru8%3D&reserved=0 
+>>>
+>>>
+>>> (Do not end it with a colon either).
+>>
+>> okay, but I just copied from other files... for example
+>> doc/usage/cmd/dm.rst:
+>>    1 .. SPDX-License-Identifier: GPL-2.0+:
+>>    2
+>>
+>> So of course I change it... but does that mean, we should fix all other
+>> files too?
+>>
+> 
+> It's unnecessary churn so I would say no. Considering I had other comments on the patch, I allowed 
+> myself this nitpick but if that was the only thing I was bothered with I wouldn't have told you. 
+> It's still clear we're talking about the -or-later version of the license. The biggest issue would 
+> be with GPL-2.0 or GPLv2 for example because it isn't clear if it's the -only version of the 
+> -or-later version since it matches none of the SPDX license identifier.
+> 
+> I don't think Tom will want a patch to change all SPDX-License-Identifier from GPL-2.0+ to 
+> GPL-2.0-or-later but maybe I'm wrong :)
 
-(... rest of errors truncated ...)
+I think not :-P
 
-This happens because the test looks for the file in the default path but
-uses pkg-config, which is affected by changing sysroot, to determine the
-correct linker arguments. This does not happen when building entirely
-within yocto, as pseudo will intercept and rewrite the file path when
-trying to test for /usr/include/yaml.h to match the sysroot and thus
-generate consistent behavior.
+What is with ending ":" ... above example has also the ending ":"
+I removed it as you suggested...
 
-This commit adds the PKG_CONFIG_SYSROOT_DIR prefix to the file path
-in order to test against the same conditions that are used to resolve
-the build flags for libyaml.
+> 
+> [...]
+> 
+>>>> +Description
+>>>> +-----------
+>>>> +
+>>>> +The sm3sum command calculates the SM3_256 Hash from a
+>>>
+>>> Are there variants of SM3? From what I understood, it's "equivalent" to sha256 in terms of 
+>>> security and efficiency, but it's SM3, just that?
+>>
+>> As I know, there is only sm3_256 hash. If you look for example
+>> into include/tpm-v2.h
+>>   33 #define TPM2_SM3_256_DIGEST_SIZE 32
+>> [...]
+>> 277         TPM2_ALG_SM3_256        = 0x12,
+>> [...]
+>> 301 #define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
+>>
+> 
+> So I would say we should use ``SM3`` here, instead of ``SM3_256``?
 
-In linux commit ef8795f3f1c ("dt-bindings: kbuild: Use DTB files for
-validation"), including yaml is disabled again anyway because of other
-problems that it causes, so this problem can also be addressed by
-partially backporting that commit instead and simply disabling the yaml
-support.
+No, as linux also use the same define, see linux base:
+*   6c790212c588 - (HEAD -> master, origin/master, origin/HEAD) Merge tag 
+'devicetree-fixes-for-6.19-3' of git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux
 
-Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
-Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+  include/linux/tpm.h:
+  55         TPM_ALG_SM3_256         = 0x0012,
 
----
+Thanks!
 
- scripts/dtc/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+bye,
+Heiko
+> 
+> Cheers,
+> Quentin
 
-diff --git a/scripts/dtc/Makefile b/scripts/dtc/Makefile
-index 53f94e5a48d..6f309b37e08 100644
---- a/scripts/dtc/Makefile
-+++ b/scripts/dtc/Makefile
-@@ -17,7 +17,7 @@ fdtoverlay-objs	:= $(libfdt) fdtoverlay.o util.o
- # Source files need to get at the userspace version of libfdt_env.h to compile
- HOST_EXTRACFLAGS := -I$(srctree)/$(src)/libfdt
- 
--ifeq ($(wildcard /usr/include/yaml.h),)
-+ifeq ($(wildcard $(PKG_CONFIG_SYSROOT_DIR)/usr/include/yaml.h),)
- HOST_EXTRACFLAGS += -DNO_YAML
- else
- dtc-objs	+= yamltree.o
 -- 
-2.49.1
-
-base-commit: 04b37257c034f5d7ad877f72e03b12a806114ac9
-branch: dev/sc5xx-boards-v4
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
