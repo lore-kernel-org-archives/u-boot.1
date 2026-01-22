@@ -4,113 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAA9C44536
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 03:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B34C44500
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 06:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 958E08341A;
-	Thu, 22 Jan 2026 04:33:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CEA558341A;
+	Thu, 22 Jan 2026 07:11:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R+e91dBu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OaPsii19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC0AA8341A; Thu, 22 Jan 2026 04:33:34 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D38228397D; Thu, 22 Jan 2026 07:11:34 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89F5C80077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 04:33:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 295CE80077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 07:11:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-59dd7bfeb8aso570736e87.0
- for <u-boot@lists.denx.de>; Wed, 21 Jan 2026 19:33:32 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769052812; cv=none;
- d=google.com; s=arc-20240605;
- b=kl8tqvQqwzmaqRZwF6Nk/UK9HyA/3lSe8ad+wc8UGmo40mpWjkG91SX8PWEU5Jsq8f
- JE3N8Og7b75IVMvnkZNMjlau8o9yUwnZDI+fWq7RRDlE2iJLWiKFWVNVDptqm1DVU+DD
- T4ZnkZhGyOQUFoRXbxO87CzpUZOCkJDldexWcMOh/YIdL32NO3j7CxUBgyVXmmE2e47m
- cj0aqofXrkH2/G++T7zVFWTdQQefrwgyr/GNDlZu1Moud8AkW9r0QnWfxF1rpcdHkQmk
- JdJavOXJiWAKAE2xaYYszLHTk6221LhcP1sdu4se2x6pHewvALm1YKFeaGKkeB8tkyhh
- 30Mg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
- fh=JyVYAqOQ1ckqGUG7bs/mZLOy/LfusYtfrFTH5a5FbxI=;
- b=klGbw0Pvd27KJkGTglsM4/ij/M6Ygxz9ooYT0G9WGMpIrNTvsNBu4vDHsWfTOa0thG
- gc8FWqF43UId36coTJePqi0ghZpF9g0L5Z/3o8wirkip19CgddSdmurEr2J8pccsezh1
- KWcfOpA6OsquSXTW/eqtZNmJxVXJOY7LrlZORCg5uIlh9nKkXKvNDIdCOcagScMQdeIk
- oMtFLCYoy1T4jypv53BA8R+F5O9dZtH9pycpkoKTLn9mOdYdA5fCd04Or9fDAmjRO4cu
- VaUayoU+7B93BPBhvrdJCrfNVEySi3OwpyXhaygaqmSqZuNdihVtLBMLHPr9JbPB7SAf
- pgZA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769052812; x=1769657612; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
- b=R+e91dBu4mJ2q5aG1PbA5FJWoOZMsE9IPhRQHcNXwIplRUOH/fS2UzwUD9WoBvcJJS
- NlpIuDnOFw442uY57+QBdsJOASx5+gkvKZG+nL6JeYEmjErlEftvS0QrCm2827VaH+1g
- w78Jk54cEB/c0zhBrRqqD5eXlPPvK31q8+LUHpDQgYmkWDQN8BP2HB0TjfDoNigUtGRh
- 3baIpYZwjmX1k04692kaH9l4Jv+qo2YKCS2C82FiLmRD7L+F5WsAmqQxSDBzUBXszqGp
- mQ88SsG73sxurnTMrApQ4KrNZyZ1d4uNnhbiMMWu6shSHnzVizKplk5dSAINcUoJPTBo
- ESCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769052812; x=1769657612;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=B3wRO1fvxyGc35jmVwANrhLZds9xsi/sZ5SQlvicFNU=;
- b=GIF5DcU4pCu5KMnGY7oKHGNsWKruK8MpJAYQrHzaQA14jQnwunJnEctKfd4W5/p9Xy
- XLezS3dk4Dd+qQTS6mrgKM+aHuu4oSGWWVrdJoPtpGW3wV6CInzIHi/YWgmHBDY2nXYk
- cbUlw2IpQ1J0bUCBKXMRjKHKyw8U/cO6DboMGV6BtTBSB8H5hIkd0e9JMqBuKUQkq7Qh
- AXwZaKkAYBzCbrqlN1NST87veL0v5dbnAuzma1WhrrQoshzTOKiTQ5j7sSfHZEY/5NCW
- wF2iYP5KYHw64gmKrnKivB545Ky8DjGT+SKgFDJautry/5QN3zCw3T/NkPTS0+HcrVqD
- Bw4A==
-X-Gm-Message-State: AOJu0YwrS8kURBFDkHq7NlsJdaYffB+XCNp/5hAuyclHsWlAGbq76PvW
- 7nkbEANTFx3UHg6RjO/rK+jM2BlGWqZyjXAQjaWReaLx5MAdPImKR0KWkrGPjCu7l9CmbDL6uSJ
- VNqCUXSIR7Ud6jHKqJ4X3fprsGNBsmQo=
-X-Gm-Gg: AZuq6aJ3QMxpn+G8pl688w3cPWncDCUQgm5q/15vu32jeKawN0ABChw8W/SyfjNq+DS
- SXhjUDUzoMNsSr73y2Lb2XU3t+Lnl3MRPiyiAKnBmiDz7Dc00nLcgq7X5eUXFEG3L+FNJnWvxBw
- OccH7sSCLiYThCr4fzpzl/ZHwtQ6f7J2Yb/vX0WDsR7Smi62NmOyZKXdmj7/twH+s8TjE2cp7Zm
- RxANviRaCKbH/sR3rMZoSzgupKNQBG8FsD01G4WxUaNRMIAQ/zHbgoTXO/gAtBKLuEslvT+Qo+D
- GB/r0G5JlPrvvFL/gQ4qtXvs
-X-Received: by 2002:a05:6512:3b81:b0:594:253c:209f with SMTP id
- 2adb3069b0e04-59baeef8a4fmr8004581e87.39.1769052810513; Wed, 21 Jan 2026
- 19:33:30 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I9OYDsTNgUf+9iRawkhJOaF8AjAGeP4xWg0C2sVagNkFVGDsbkHLgwOmoQ1X5/kdBlX1tbD6NelQukrqn6O8Grq9BMlmZAJ8AM34mDGnFTq1uXROUsbQr5AAwaSmSlb/pfaUjvgCZBBoPJGr5AJFdDhfJzn17NmADPk3CA3l4sU6/oAKeA/dAbMFfiDr4xMMXYHcKU9NHbHjtTvfLjIEbrEDOV5+N3snyanur6KucCEQX0YL3XRXKqCq5LS35YuFbYtUaEPUsUEF59cRDfNurfhUjwt8GwCes3yA6z3YZU0wFqLZ8xqkPoD7kUbnnldiIQfExf/zmETPuH288NWW6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MIWObc6MtpLUREoRomuHfzlKw2cy38G/IxEiquzVOsg=;
+ b=LHrznL7CBXixsJbCFxUJmwuLu4AgFFl09RdYF29hVnxq8Ngk5rlfTLFQsnyjaJrUzqo/ARH9KIbRAqJD5MvJPCsyx3/2LugSCX0SoBfHcGn1vSac6Idqk5vL8P02wy6U+W1pf0xhYilFXTTkif6xUlBWbfdPAMtkOxbdqi2A56UDtKdlOAj1Gbr0mu+9YX0oQNqhOBXI8LcgDzlafk6A9Nn2c+b/Apwq4Hr5Gfmgbt7/lQVOtHCJnZExvKhNtrAGHUwKLN1wNOT2kmXzs466itVWOEjrNwrJld5O9JXrs9d7E4/8v1GLglJpAcHyN1SEeW9RpiKL40jwykO9LCY9nw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MIWObc6MtpLUREoRomuHfzlKw2cy38G/IxEiquzVOsg=;
+ b=OaPsii19j4jq2+9FvpJZRKL5X2rz4wELEacIUD1fP8ov3HhDSc5BVCjJsKegihllgnUFJXb5LDGcUlQxgoUIFXARsOGQH6KvK4vI0+JB7khtTCXda3eLjyiKSvDLHZ3MEYNtgZSdwLigLYkWKY3R8RgjHRldYi/46uToMpQvk8c=
+Received: from SJ0PR13CA0146.namprd13.prod.outlook.com (2603:10b6:a03:2c6::31)
+ by LV3PR10MB7984.namprd10.prod.outlook.com (2603:10b6:408:20d::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Thu, 22 Jan
+ 2026 06:11:29 +0000
+Received: from SJ5PEPF000001D1.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c6:cafe::a8) by SJ0PR13CA0146.outlook.office365.com
+ (2603:10b6:a03:2c6::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.3 via Frontend Transport; Thu,
+ 22 Jan 2026 06:11:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SJ5PEPF000001D1.mail.protection.outlook.com (10.167.242.53) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9542.4 via Frontend Transport; Thu, 22 Jan 2026 06:11:27 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 22 Jan
+ 2026 00:11:20 -0600
+Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 22 Jan
+ 2026 00:11:20 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 22 Jan 2026 00:11:20 -0600
+Received: from [172.24.21.121] (ltpw0bk3wf.dhcp.ti.com [172.24.21.121])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60M6BIPc087445;
+ Thu, 22 Jan 2026 00:11:19 -0600
+Message-ID: <adee9f4a-e468-4a10-8186-1e6ca8f9f971@ti.com>
+Date: Thu, 22 Jan 2026 11:41:18 +0530
 MIME-Version: 1.0
-References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-3-trini@konsulko.com>
- <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
-In-Reply-To: <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 22 Jan 2026 00:33:19 -0300
-X-Gm-Features: AZwV_QjKI836-aWUy-i1KgS7U1JT1obqPJ-KeMJkDkXhCGL58xtUC4FY1B_gIZg
-Message-ID: <CAOMZO5COTa3ykhF8XZyzmJ0QZNotK4USo0LrH0XBJLogatfXFQ@mail.gmail.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-To: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Beleswar Padhi <b-padhi@ti.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Joel Stanley <joel@jms.id.au>, Michal Simek <michal.simek@amd.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3-j721s2*: Enable OSPI1 with 32-bit address
+ mappings for R5 SPL
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <anshuld@ti.com>
+CC: <gehariprasath@ti.com>, <u-boot@lists.denx.de>
+References: <20260121053857.18304-1-a-dutta@ti.com>
+ <db5bb703-6971-4908-8c95-68da27bcc247@ti.com>
+Content-Language: en-US
+From: "Dutta, Anurag" <a-dutta@ti.com>
+In-Reply-To: <db5bb703-6971-4908-8c95-68da27bcc247@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D1:EE_|LV3PR10MB7984:EE_
+X-MS-Office365-Filtering-Correlation-Id: b78f7e0a-44d1-4012-355b-08de597d140e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NjlYeVlnbndFQ1UyVWcxeUx4ank0bnNSVXpDYmlncVROaitBK2toRWptYnpJ?=
+ =?utf-8?B?Lyt4MVNxZUhrdDNnZDhKYTNsNnhkNDFRY2JOY3hBakxnRmdydzlyNkplOWJG?=
+ =?utf-8?B?SiswYTZMTFAvN1RzZmt4WlJEUWtWNlJXSDNONjE2QmU0aGMremhQSnFsWFFQ?=
+ =?utf-8?B?b1kyc1g3VTdpU1cyWGtSQkVLTmdjbGY0ZDIrSEx6Nm5Mb1VYS1RWb1NxOElk?=
+ =?utf-8?B?c3JEK0tEeFBrVUlWYWJKY1hXbFdDc3dUT3ZtOHlXNTl4aUdNM1NMZnU1N1k5?=
+ =?utf-8?B?TlRockZZM3JubWVLdkJET1Q4bVBDaHdqbmUxKzR6RHdFLzRnY1orWjBZUlY0?=
+ =?utf-8?B?SlUxZHNTVk5QUW9FMVBUdlkyNFVhU2xZRGNmU1dCd3hKUlR4eDQ0VlhGVUVx?=
+ =?utf-8?B?ZEdhd1EreTI0MzdaU0I5Qis2Q09lVkZVeUhHbEpVTFB2VUNTTWpETlJ6R1Fp?=
+ =?utf-8?B?SzFVSkRiZEFpdzJlNStQaU82SG0vRjhONWZ3eU9adnZXbU5YeStrSTJNaTdl?=
+ =?utf-8?B?Tk1BVVV1ZE8ycXVBcnRUajRjM2pHenREMEtWQjU3YnN6V2VWWk5nSVdKcjJU?=
+ =?utf-8?B?U2dwdFVDWE4vNXZJU1BpQkdmTDNJVW1Mby83Wk9uL2ZQbFJDaU5zR0s5Qk5w?=
+ =?utf-8?B?aEFYc2VXNWIyRzliYmI3cXd3dkxVZjNlc0NpazhRYTFFOUYzd3YvYWhFWWZk?=
+ =?utf-8?B?WklkYVdVVEZaL0dKaE5JOHRsbDRIL21zRGZET2dobVJRd0tPWlRlN3RqcVNT?=
+ =?utf-8?B?amhkdDlTeG04UllOTXZDT2ZNTHA1SnR6Z0xjYU1xVi96R3F4aGxTdFg5aGJ3?=
+ =?utf-8?B?MzRPNnZLM2VsdUF0MkJuUHd6ZW1RTGNsQnpHeW1ZUHdycEZlaVhuK2FNL1NR?=
+ =?utf-8?B?T1Vpc3ROSVRPYWJJY1Z3ODI3UTd4RGF6UWJLcW9Dem11UnR4ZW9vL2daRStn?=
+ =?utf-8?B?WE1ZMjVwOUtPQkVpU1dWaDFSdnhaRFVOVFlaT01oY2F4ejIybFVqR0ZIQ0Zk?=
+ =?utf-8?B?cTZkcDJVUlZHTmE4M2E5RFNEeVUzbnhycnNWMnhac2FyaVQvNCtnWEUwWHo5?=
+ =?utf-8?B?WFc0L08yc05wWW8yYVppUWEwY3dudk80NnVyU1YvWVJvSE5QeEY2OTN1Mkda?=
+ =?utf-8?B?eStLdlg2bGhKOGJMZ3VEQTVjQ3plekRiNFE4YUU4TUxUeGp3UWdiQXNNNVI0?=
+ =?utf-8?B?cElqYUlGUm92MHhrMjFlWmRvRE41Wk9MMzJYNmNOazkrRjJsUDNrbkMrYUwv?=
+ =?utf-8?B?ejllbitZaEhqYU5lNTBadzVTWmtjY2VRWnltTTN2WURjUDhIRVYvdjRBS04v?=
+ =?utf-8?B?QjcyT1dYY1ZoYjRaRzNsbHI2ZTJtR29EUjJFUTQrU003MklJQ21xOTB4T2xF?=
+ =?utf-8?B?Um8zZkJVVHZCSlpBL2x0NlY5QnR1QXBNLzF6aU41UE5UM2pHV1ArZktuelFz?=
+ =?utf-8?B?d3RvWXZPc00yUjRpczNrczJnSk5MS0lkVFREQUZQK0dQamN6NEp1L2cwaGdF?=
+ =?utf-8?B?dVZpZWNqeUlwaW80QmZ5ZUREanZkQVQ4Q1RWaVRCbVgzTndWcVJNMGF4dFhC?=
+ =?utf-8?B?eWp6dFpKZlZqRzNlVHJZN3BDRDNrSloyZEoveGpTWXpvTUtYbmQvd2N6M2ZL?=
+ =?utf-8?B?Q2ZQMjVPc2JxZTJiNmpsU1RYTVFSL3ZFZTZ6VExTWEwzQ2hHOXJETTZRRzlL?=
+ =?utf-8?B?bVNCenNYSytUV01rL3BjTHhLdEZNMGJxZ2sxTUdzWGtuZkgrZzZTaElyM20x?=
+ =?utf-8?B?TEUxVHh3YkVPN0xXVXhrbEdUc0V6WjB5ZTlSY2paR1llRFRPZmpuY1dmYjlx?=
+ =?utf-8?B?eTV4MW54S3V6ZVFlMkRmVXlwOEU2MlI4ckVVYVZ0cEw3elphYVcvcmZOVm5N?=
+ =?utf-8?B?YU4xUDNia29LRjk0YjV5ZW8vTlg1NkNiS3g0ZWYvVkFiK3FIeGRTUzZXYVJC?=
+ =?utf-8?B?YXR5c1Y5UGNlL1NuMWw4QzFIWCtyTGFNNzMycW5IcjArblBaSFR3d3hTVkdM?=
+ =?utf-8?B?WUczSEpvNkptOFNIMGl5aVBqTjZnOGRXL3puZ1hjM0VMbXdteFFvY3E0bmpQ?=
+ =?utf-8?B?aDhIcy9VeHppYjNLRmxZWWl0aFlQS0JERDdFMHNpaWs0cFdTSUIzblpQTHFv?=
+ =?utf-8?B?U1pTZ0FlL2pZbnlqNGFoTitQS25QR2FaTXluVzNieGs1RFU2aFo3TnkxcklH?=
+ =?utf-8?Q?IaCvUdRvwk7LMFLePVuqd9U=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 06:11:27.4149 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b78f7e0a-44d1-4012-355b-08de597d140e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D1.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7984
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,24 +167,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 22, 2026 at 12:08=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
 
-> RV1108 is also an ARMv7 without SPL_SEPARATE_BSS, so I believe it is
-> also affected by this change.
+On 22-01-2026 08:51, Kumar, Udit wrote:
+> Thanks Anurag
+>
+> On 1/21/2026 11:08 AM, Anurag Dutta wrote:
+>> The R5 SPL requires 32-bit address mappings for OSPI1(QSPI) access.
+>> Override the OSPI1 node with appropriate 32-bit register ranges to
+>> enable proper address translation on the 32-bit R5 core, while
+>> preserving 64-bit mappings for A72 cores. While at it, remove the
+>> disabled status override for ospi1 node to support booting from
+>> qspi.
+>>
+>> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+>> ---
+>> Test logs : 
+>> https://gist.github.com/anuragdutta731/b65f63f22c69317d714b65a201438cbc
+>
+> Could you check, for below error in logs
+>
+> jedec_spi_nor flash@0: Software reset enable failed: -524
+>
+> If this needs some parameter tuning in QSPI node or something to look 
+> at driver itself.
+>
+Hi Udit
+This warning seems to be expected. In file : drivers/mtd/spi/spi-nor-core.c,
+In function spi_nor_soft_reset(), we can see that spi_nor_setup_op() is 
+being invoked
+with SNOR_PROTO_8_8_8_DTR as default. However, ours being QSPI(1 1 4) it 
+fails to enable
+software reset for qspi. This can be confirmed from ospi nor logs :
+https://gist.github.com/anuragdutta731/cc30688b596ee063178e6c47947146c0
 
-The change below restores the boot:
+We do not see the jedec_spi_nor flash@0: Software reset enable failed: 
+-524 warning.
 
-diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-index d780a5060774..fc2b7fcb969f 100644
---- a/arch/arm/cpu/u-boot-spl.lds
-+++ b/arch/arm/cpu/u-boot-spl.lds
-@@ -40,6 +40,7 @@ SECTIONS
-        .binman_sym_table : {
-                __binman_sym_start =3D .;
-                KEEP(*(SORT(.binman_sym*)));
-+               . =3D ALIGN(8);
-                __binman_sym_end =3D .;
-        }
+Also, the spi_nor_soft_reset() description clearly mentions that :
+The soft reset is executed in Octal DTR mode.
 
-If you agree, I can send a formal patch.
+Regards
+Anurag
+
+>>
+>>   arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi | 4 ----
+>>   arch/arm/dts/k3-j721s2-r5.dtsi                       | 5 +++++
+>>   2 files changed, 5 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi 
+>> b/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
+>> index 54eb9b4072c..8d51fea72b8 100644
+>> --- a/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
+>> @@ -107,10 +107,6 @@
+>>       };
+>>   };
+>>   -&ospi1 {
+>> -    status = "disabled";
+>> -};
+>> -
+>>   &usbss0 {
+>>       bootph-all;
+>>   };
+>> diff --git a/arch/arm/dts/k3-j721s2-r5.dtsi 
+>> b/arch/arm/dts/k3-j721s2-r5.dtsi
+>> index c1c12e217d2..f3f7dbd86c1 100644
+>> --- a/arch/arm/dts/k3-j721s2-r5.dtsi
+>> +++ b/arch/arm/dts/k3-j721s2-r5.dtsi
+>> @@ -90,6 +90,11 @@
+>>                 <0x0 0x50000000 0x0 0x8000000>;
+>>   };
+>>   +&ospi1 {
+>> +        reg = <0x0 0x47050000 0x0 0x100>,
+>> +              <0x0 0x58000000 0x0 0x8000000>;
+>> +};
+>> +
+>>   &fss {
+>>       /* fss node has 64 bit address regions mapped to it and since 
+>> the ospi
+>>        * nodes is being override, override the fss node ranges as well
