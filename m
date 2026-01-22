@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75EFD3EE89
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 16:38:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC4AD3EE89
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 16:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91E9D83A6A;
-	Thu, 22 Jan 2026 17:38:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F38ED83B21;
+	Thu, 22 Jan 2026 17:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bc6t2fmC";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hp9BSuGb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3CB783B0B; Thu, 22 Jan 2026 17:38:28 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 9101F839DF; Thu, 22 Jan 2026 17:38:29 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D69E783AB0
+ by phobos.denx.de (Postfix) with ESMTPS id A024C839DF
  for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 17:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4801bc328easo13549365e9.3
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-42fbc305882so805228f8f.0
  for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 08:38:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1769099905; x=1769704705;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LshzIswTLtiEdAIhMLhDX2zkEfrQA1K2wCqOUqQELdw=;
- b=bc6t2fmC14n926lfO23EHmU46zGG2oXzR85V9GnH64mF/lTgH8etdf2sM1NYJVbpKw
- Yz0yeE/HNiRS5D60gh8EbYejw0Dg193Qd5sfKcLIm0iQugESOc7u/UhewuK/gKk1CUlF
- CiwLWbie1reeKjtWIi9jdIdz1TgrAoi6av5unfFLOC5IINENiL0ioLd1VPHxmWUqQvxF
- upCWGqvQnE/Wx4KvfDVVSWfTnG1VGgTauzzi9NJbSUdJAKx5t+6Xe+O5OJqtPFWMdwtZ
- s5iAaOsM8W+8FjaM6erwvEEQpSYXQS3woxU24DWcg93p819tf+iPzh800eRNPTrb9Czq
- 9vIQ==
+ :reply-to; bh=PcDQ1svtsISriWe1We3/miagcL1D5N3s5ZguC6VdDFE=;
+ b=hp9BSuGbj245jMp1PZL1Yi9letyolKF5ueGeatH+d+aYQ/FkciJQT1cCWfPzC+8JeC
+ /I5PuRbo7JHQ/Ox9UPt5XcspkMQL7aIwDBU6Q3wDB+PaX64vnSzOihE8Zx+YKzKRVOdl
+ RN2iN7GH5ADU1qB7SCWjQPq0XnJG2+poYUaN7GuXpjUx8cqDzt89FyhpsRckyPsK0i9k
+ HY2o1q+t6qE9cOXQm2m+FyqNEjUxuMqTAM9ttkz2B7QSMxtipABjCkOVVtdkbBXJOWcm
+ nPVg0UO39zN8bK0uerCe8EdD1VL6+hwb/HS1is+W4adkeUpXLi/UUNuIHYcneo1Sz0hU
+ UtZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1769099905; x=1769704705;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=LshzIswTLtiEdAIhMLhDX2zkEfrQA1K2wCqOUqQELdw=;
- b=UABz706kZRb0bxFozdaZ7Rrf9+7/BjohUiamkTNxbxqhUCtiKw5H7XR44l2SnEpRiS
- TdPCQpciDCNQ/cvWVlZWienPZ7dwSHOXMnAUjQiDS4GgANQmxlE4cCanQyua0bTtCvZf
- 0LXLgx7PkegI8sO1roJ4mjy0LOGj91xKc0L/Io+cCssuR+0vGVydrM+dOeXRHJ+Eem6J
- 8L/FoCjcBSXUIg0P9KFewdEi2FM8N+Lkqc/4iN8wd5/zHek5qgu5EyREwT/ZpftQDmB7
- tvOLzmskF56SNj+MWd5Op+8/xohLoYQVFvw+E2qrMQpQhdoFfkNYbT0Vd2tihZSoqC+U
- 5ZNw==
-X-Gm-Message-State: AOJu0YxLXxtD/XjgaLQBmlkK2mPnXlCW0EhskW/7dgJHDUU53BAdgLA4
- lBJTbvSHE9HF0c0fPq/v33++ghh8IT+l8/5BJGGdhS4gVf5fP5CDJa9+H9qlKllRIA0=
-X-Gm-Gg: AZuq6aJ2NhbpKvoEBT5py70KVToI7G5ozJWtq3lBEjdDOk7Wl8CXvlZTcsHIGCGUhYO
- vjNYHOmH9h6TvXyx8oBmz/R+79qEUUKe1cWdaE7jI8x+i27aa49vqnFzpeNDvRZsSAJ3LPNq9YT
- OrJgVg2CO5deV87GjVdosvnzuAmIKtb+yNU9EG3DRMEYVu1RMghamieiajIsDqHRj7J2SXS4Wt2
- P18UAP7A2AlnUxdoXufs0VzYQ1BMxIrAokWVV7zVupysNIcEK0BRGDaKSFjcHjkhCr6Cplb2FRR
- PZtpGwjcI6X8Wnir5tKQRGILzovaqrvzPao+f/5gezwk6ifHPwzRIhKR1B6lw3OClO+SxFj2v8M
- 75RA7wn1u1bPTeOy+A/8LX1wyJG2+qvfrQhkxk0GUoVo/vOhj/x/5R6NwtMjf+3+g8NLnDOCEcW
- S95BQbitVUJ2BmASLz2sja/b9Y/TzOKaPq
-X-Received: by 2002:a05:600c:4fcb:b0:47e:e807:a042 with SMTP id
- 5b1f17b1804b1-4804c964ad5mr3398305e9.15.1769099905154; 
- Thu, 22 Jan 2026 08:38:25 -0800 (PST)
+ bh=PcDQ1svtsISriWe1We3/miagcL1D5N3s5ZguC6VdDFE=;
+ b=NDcqck+9m0ufTf0lI4wpGQs3w8EVW/DUo+NWskdE3gsNw6+2ZLiBXsZcRI63mKmq2N
+ LXk7m4FeGFEOU6W66cutvb/Um0O1ZILrjlwADmEFnMmurRs+v18GS3MqPkmvdaVrDRey
+ UQK0b2P5b/SG230Q7DTTOi/yLh+Ic/CaUVQLOTfl/CDQCCkP6FfT+bCupRvKAHV9594S
+ jqOSgpjvnLd2rKtLftJtCNnkL4MG+VNEOsxJa7TtwzMEBSRwEBWcEOsrMOGeWxFJZ/r6
+ 6jzvIkYVqLMF/6ETYaL1vhhld9l+NpKb/xvxjxBWrp7ZUheaOepxY3LdXSaxT0FI0czD
+ ZVLQ==
+X-Gm-Message-State: AOJu0YwmUpPOsBAAyA6ChLWsVxiHfaFwoy94oSfqssI7SmstgrerN/ZS
+ zMPEOrGAPDjvnIYgZ+l/fzdp8epShq+YdLFWh9YD1Z4eOhBs6olFEX3ielFwtOScBCA=
+X-Gm-Gg: AZuq6aIsL1iKiEV9f+/k6d5/IY7YEWH7raRlvzhb5mEfCC0d3XUIkVVCfuVjPScj9qN
+ hhsdy5UWjsmcCGibUuBeA9hYGKf/J6YJul/M1LATe1zLjMV+3mvbmXWnxp6Np+Zy1+Gp7BicE37
+ jm0b422AZiIOjPlCYD3/mj02/hQAbzIwG5ndIdtwIBe2wWTnTug5GdEF048WCwa9knIkqychWok
+ VbUSx0lFVIaU+YHc4yq0Fr9aSRHTpUxB7Fvegh2yWMtaGqy6Wr7eaPLgJ+j7Wey+oVjRP4dhiBC
+ O/qmlf+7VR9DVAshBfZ+SQDYUtivGGplV6IaBTi6J77NWb7/zDq4d4LrTgdUAnM7ePYMUZtTgQY
+ U1HFl+Sbh/OG2jAe5xfFuOhgU9scn8AkMICXsKTwYGxif6ExY8suYwc2j3iIZvD/UAkWXInDeST
+ 8Be6kyNp7z+/DN8LqqUtbefOce/H9M1YLq
+X-Received: by 2002:a05:6000:2212:b0:435:97f6:4f44 with SMTP id
+ ffacd0b85a97d-435b1622094mr201233f8f.56.1769099904410; 
+ Thu, 22 Jan 2026 08:38:24 -0800 (PST)
 Received: from [192.168.1.35] ([2a01:cb1c:39a:2200:c85b:67ae:76b0:e0c6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-435924ae723sm19468949f8f.41.2026.01.22.08.38.24
+ ffacd0b85a97d-435924ae723sm19468949f8f.41.2026.01.22.08.38.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 22 Jan 2026 08:38:24 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 22 Jan 2026 17:38:23 +0100
-Subject: [PATCH v2 2/2] pinctrl: mediatek: add pinmux_property_set ops support
+Date: Thu, 22 Jan 2026 17:38:22 +0100
+Subject: [PATCH v2 1/2] pinctrl: mediatek: Add pinctrl driver for MT8188
+ SoC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260122-add-mt8188-pinctrl-support-v2-2-324b4c8f2b64@baylibre.com>
+Message-Id: <20260122-add-mt8188-pinctrl-support-v2-1-324b4c8f2b64@baylibre.com>
 References: <20260122-add-mt8188-pinctrl-support-v2-0-324b4c8f2b64@baylibre.com>
 In-Reply-To: <20260122-add-mt8188-pinctrl-support-v2-0-324b4c8f2b64@baylibre.com>
 To: u-boot@lists.denx.de
@@ -107,54 +108,1397 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Sato Eschholz <vsatoes@baylibre.com>
+From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
 
-Add pinmux_property_set ops for mediatek pinctrl framework
+Add pinctrl driver for mt8188. The driver is based on the kernel driver.
 
-Signed-off-by: Julien Masson <jmasson@baylibre.com>
+Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+Signed-off-by: Jill.Wu <shu-yun.wu@mediatek.com>
 Signed-off-by: Vitor Sato Eschholz <vsatoes@baylibre.com>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/pinctrl/mediatek/Kconfig          |    4 +
+ drivers/pinctrl/mediatek/Makefile         |    1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8188.c | 1344 +++++++++++++++++++++++++++++
+ 3 files changed, 1349 insertions(+)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-index b1fdcd18027..e991e03ea41 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-@@ -15,6 +15,7 @@
- #include <log.h>
- #include <regmap.h>
- #include <syscon.h>
-+#include <dt-bindings/pinctrl/mt65xx.h>
+diff --git a/drivers/pinctrl/mediatek/Kconfig b/drivers/pinctrl/mediatek/Kconfig
+index ed4b02be0dd..8a588d17c4b 100644
+--- a/drivers/pinctrl/mediatek/Kconfig
++++ b/drivers/pinctrl/mediatek/Kconfig
+@@ -34,6 +34,10 @@ config PINCTRL_MT7988
+ 	bool "MT7988 SoC pinctrl driver"
+ 	select PINCTRL_MTK
  
- #include "pinctrl-mtk-common.h"
- 
-@@ -657,6 +658,16 @@ static int mtk_pinconf_group_set(struct udevice *dev,
- }
- #endif
- 
-+static int mtk_pinctrl_pinmux_property_set(struct udevice *dev, u32 pinmux_group)
-+{
-+	u32 pin = MTK_GET_PIN_NO(pinmux_group);
-+	u32 func = MTK_GET_PIN_FUNC(pinmux_group);
-+	int ret;
++config PINCTRL_MT8188
++	bool "MT8188 SoC pinctrl driver"
++	select PINCTRL_MTK
 +
-+	ret = mtk_hw_set_value(dev, pin, PINCTRL_PIN_REG_MODE, func);
-+	return ret ? ret : pin;
+ config PINCTRL_MT8365
+ 	bool "MT8365 SoC pinctrl driver"
+ 	select PINCTRL_MTK
+diff --git a/drivers/pinctrl/mediatek/Makefile b/drivers/pinctrl/mediatek/Makefile
+index 565279157f9..b9116c073ea 100644
+--- a/drivers/pinctrl/mediatek/Makefile
++++ b/drivers/pinctrl/mediatek/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_PINCTRL_MT7981) += pinctrl-mt7981.o
+ obj-$(CONFIG_PINCTRL_MT7986) += pinctrl-mt7986.o
+ obj-$(CONFIG_PINCTRL_MT7987) += pinctrl-mt7987.o
+ obj-$(CONFIG_PINCTRL_MT7988) += pinctrl-mt7988.o
++obj-$(CONFIG_PINCTRL_MT8188) += pinctrl-mt8188.o
+ obj-$(CONFIG_PINCTRL_MT8365) += pinctrl-mt8365.o
+ obj-$(CONFIG_PINCTRL_MT8512) += pinctrl-mt8512.o
+ obj-$(CONFIG_PINCTRL_MT8516) += pinctrl-mt8516.o
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8188.c b/drivers/pinctrl/mediatek/pinctrl-mt8188.c
+new file mode 100644
+index 00000000000..386d4d4a922
+--- /dev/null
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8188.c
+@@ -0,0 +1,1344 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * The MT8188 driver based on Linux generic pinctrl binding.
++ *
++ * Copyright (C) 2026 MediaTek Inc.
++ * Author: Chris Chen <chris-qj.chen@mediatek.com>
++ *         Vitor Sato Eschholz <vsatoes@baylibre.com>
++ */
++
++#include <dm.h>
++#include "pinctrl-mtk-common.h"
++
++/* MT8188 have multiple bases to program pin configuration listed as the below:
++ * iocfg[0]:0x10005000, iocfg[1]:0x11c00000, iocfg[2]:0x11e10000,
++ * iocfg[3]:0x11e20000, iocfg[4]:0x11ea0000
++ * enum base could be used to indicate what base the pin should be mapped into.
++ */
++
++#define PIN_FIELD_BASE(_s_pin, _e_pin, _i_base, _s_addr, _x_addrs, _s_bit,	\
++		       _x_bits)							\
++	PIN_FIELD_BASE_CALC(_s_pin, _e_pin, _i_base, _s_addr, _x_addrs, _s_bit,	\
++			    _x_bits, 32, 0)
++
++#define PINS_FIELD_BASE(_s_pin, _e_pin, _i_base, _s_addr, _x_addrs, _s_bit,	\
++			_x_bits)						\
++	PIN_FIELD_BASE_CALC(_s_pin, _e_pin, _i_base, _s_addr, _x_addrs, _s_bit,	\
++			    _x_bits, 32, 1)
++
++#define MT8188_TYPE0_PIN(_number, _name)        \
++	MTK_TYPED_PIN(_number, _name, DRV_GRP4, IO_TYPE_GRP0)
++
++#define MT8188_TYPE1_PIN(_number, _name)        \
++	MTK_TYPED_PIN(_number, _name, DRV_GRP4, IO_TYPE_GRP1)
++
++enum iocfg_base {
++	IOCFG0 = 0,
++	IOCFG_RM = 1,
++	IOCFG_LT = 2,
++	IOCFG_LM = 3,
++	IOCFG_RT = 4,
++};
++
++static const char * const mt8188_pinctrl_register_base_names[] = {
++	"iocfg0", "iocfg_rm", "iocfg_lt", "iocfg_lm", "iocfg_rt",
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_mode_range[] = {
++	PIN_FIELD_BASE(0, 177, IOCFG0, 0x0300, 0x10, 0, 4),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_dir_range[] = {
++	PIN_FIELD_BASE(0, 177, IOCFG0, 0x0000, 0x10, 0, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_di_range[] = {
++	PIN_FIELD_BASE(0, 177, IOCFG0, 0x0200, 0x10, 0, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_do_range[] = {
++	PIN_FIELD_BASE(0, 177, IOCFG0, 0x0100, 0x10, 0, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_smt_range[] = {
++	PIN_FIELD_BASE(0, 0, IOCFG_RM, 0x0170, 0x10, 8, 1),
++	PIN_FIELD_BASE(1, 1, IOCFG_RM, 0x0170, 0x10, 9, 1),
++	PIN_FIELD_BASE(2, 2, IOCFG_RM, 0x0170, 0x10, 10, 1),
++	PIN_FIELD_BASE(3, 3, IOCFG_RM, 0x0170, 0x10, 11, 1),
++	PIN_FIELD_BASE(4, 4, IOCFG_RM, 0x0170, 0x10, 18, 1),
++	PIN_FIELD_BASE(5, 5, IOCFG_RM, 0x0170, 0x10, 18, 1),
++	PIN_FIELD_BASE(6, 6, IOCFG_RM, 0x0170, 0x10, 18, 1),
++	PIN_FIELD_BASE(7, 7, IOCFG_RM, 0x0170, 0x10, 12, 1),
++	PIN_FIELD_BASE(8, 8, IOCFG_RM, 0x0170, 0x10, 13, 1),
++	PIN_FIELD_BASE(9, 9, IOCFG_RM, 0x0170, 0x10, 14, 1),
++	PIN_FIELD_BASE(10, 10, IOCFG_RM, 0x0170, 0x10, 15, 1),
++	PIN_FIELD_BASE(11, 11, IOCFG_RM, 0x0170, 0x10, 19, 1),
++	PIN_FIELD_BASE(12, 12, IOCFG_LT, 0x0160, 0x10, 12, 1),
++	PIN_FIELD_BASE(13, 13, IOCFG_LT, 0x0160, 0x10, 13, 1),
++	PIN_FIELD_BASE(14, 14, IOCFG_LT, 0x0160, 0x10, 14, 1),
++	PIN_FIELD_BASE(15, 15, IOCFG_LT, 0x0160, 0x10, 15, 1),
++	PIN_FIELD_BASE(16, 16, IOCFG_LM, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(17, 17, IOCFG_LM, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(18, 18, IOCFG_RT, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(19, 19, IOCFG_RT, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(20, 20, IOCFG_RT, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(21, 21, IOCFG_RT, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(22, 22, IOCFG_RT, 0x00e0, 0x10, 0, 1),
++	PIN_FIELD_BASE(23, 23, IOCFG_RT, 0x00e0, 0x10, 1, 1),
++	PIN_FIELD_BASE(24, 24, IOCFG_RT, 0x00e0, 0x10, 2, 1),
++	PIN_FIELD_BASE(25, 25, IOCFG_RM, 0x0170, 0x10, 17, 1),
++	PIN_FIELD_BASE(26, 26, IOCFG_RM, 0x0170, 0x10, 17, 1),
++	PIN_FIELD_BASE(27, 27, IOCFG_RM, 0x0170, 0x10, 17, 1),
++	PIN_FIELD_BASE(28, 28, IOCFG_RM, 0x0170, 0x10, 18, 1),
++	PIN_FIELD_BASE(29, 29, IOCFG_RM, 0x0170, 0x10, 16, 1),
++	PIN_FIELD_BASE(30, 30, IOCFG_RM, 0x0170, 0x10, 17, 1),
++	PIN_FIELD_BASE(31, 31, IOCFG_RM, 0x0170, 0x10, 19, 1),
++	PIN_FIELD_BASE(32, 32, IOCFG_RM, 0x0170, 0x10, 19, 1),
++	PIN_FIELD_BASE(33, 33, IOCFG_RM, 0x0170, 0x10, 20, 1),
++	PIN_FIELD_BASE(34, 34, IOCFG_RM, 0x0170, 0x10, 20, 1),
++	PIN_FIELD_BASE(35, 35, IOCFG_RM, 0x0170, 0x10, 19, 1),
++	PIN_FIELD_BASE(36, 36, IOCFG_RM, 0x0170, 0x10, 20, 1),
++	PIN_FIELD_BASE(37, 37, IOCFG_RM, 0x0170, 0x10, 21, 1),
++	PIN_FIELD_BASE(38, 38, IOCFG_RM, 0x0170, 0x10, 20, 1),
++	PIN_FIELD_BASE(39, 39, IOCFG_RM, 0x0170, 0x10, 21, 1),
++	PIN_FIELD_BASE(40, 40, IOCFG_RM, 0x0170, 0x10, 21, 1),
++	PIN_FIELD_BASE(41, 41, IOCFG_RM, 0x0170, 0x10, 21, 1),
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x0160, 0x10, 21, 1),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x0160, 0x10, 22, 1),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x0160, 0x10, 21, 1),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x0160, 0x10, 22, 1),
++	PIN_FIELD_BASE(46, 46, IOCFG_LM, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(47, 47, IOCFG_RM, 0x0170, 0x10, 16, 1),
++	PIN_FIELD_BASE(48, 48, IOCFG_RM, 0x0170, 0x10, 16, 1),
++	PIN_FIELD_BASE(49, 49, IOCFG_RM, 0x0170, 0x10, 16, 1),
++	PIN_FIELD_BASE(50, 50, IOCFG_LM, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(51, 51, IOCFG_LM, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(52, 52, IOCFG_LM, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(53, 53, IOCFG_LM, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(54, 54, IOCFG_LM, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(55, 55, IOCFG_RM, 0x0170, 0x10, 25, 1),
++	PIN_FIELD_BASE(56, 56, IOCFG_RM, 0x0170, 0x10, 28, 1),
++	PIN_FIELD_BASE(57, 57, IOCFG_LT, 0x0160, 0x10, 29, 1),
++	PIN_FIELD_BASE(58, 58, IOCFG_LT, 0x0160, 0x10, 31, 1),
++	PIN_FIELD_BASE(59, 59, IOCFG_RM, 0x0170, 0x10, 26, 1),
++	PIN_FIELD_BASE(60, 60, IOCFG_RM, 0x0170, 0x10, 29, 1),
++	PIN_FIELD_BASE(61, 61, IOCFG_RM, 0x0170, 0x10, 27, 1),
++	PIN_FIELD_BASE(62, 62, IOCFG_RM, 0x0170, 0x10, 30, 1),
++	PIN_FIELD_BASE(63, 63, IOCFG_LT, 0x0160, 0x10, 30, 1),
++	PIN_FIELD_BASE(64, 64, IOCFG_LT, 0x0170, 0x10, 0, 1),
++	PIN_FIELD_BASE(65, 65, IOCFG_RT, 0x00e0, 0x10, 10, 1),
++	PIN_FIELD_BASE(66, 66, IOCFG_RT, 0x00e0, 0x10, 12, 1),
++	PIN_FIELD_BASE(67, 67, IOCFG_RT, 0x00e0, 0x10, 11, 1),
++	PIN_FIELD_BASE(68, 68, IOCFG_RT, 0x00e0, 0x10, 13, 1),
++	PIN_FIELD_BASE(69, 69, IOCFG_RM, 0x0180, 0x10, 0, 1),
++	PIN_FIELD_BASE(70, 70, IOCFG_RM, 0x0170, 0x10, 31, 1),
++	PIN_FIELD_BASE(71, 71, IOCFG_RM, 0x0180, 0x10, 4, 1),
++	PIN_FIELD_BASE(72, 72, IOCFG_RM, 0x0180, 0x10, 3, 1),
++	PIN_FIELD_BASE(73, 73, IOCFG_RM, 0x0180, 0x10, 1, 1),
++	PIN_FIELD_BASE(74, 74, IOCFG_RM, 0x0180, 0x10, 2, 1),
++	PIN_FIELD_BASE(75, 75, IOCFG_RM, 0x0180, 0x10, 6, 1),
++	PIN_FIELD_BASE(76, 76, IOCFG_RM, 0x0180, 0x10, 5, 1),
++	PIN_FIELD_BASE(77, 77, IOCFG_RM, 0x0180, 0x10, 8, 1),
++	PIN_FIELD_BASE(78, 78, IOCFG_RM, 0x0180, 0x10, 7, 1),
++	PIN_FIELD_BASE(79, 79, IOCFG_RT, 0x00e0, 0x10, 15, 1),
++	PIN_FIELD_BASE(80, 80, IOCFG_RT, 0x00e0, 0x10, 14, 1),
++	PIN_FIELD_BASE(81, 81, IOCFG_RT, 0x00e0, 0x10, 17, 1),
++	PIN_FIELD_BASE(82, 82, IOCFG_RT, 0x00e0, 0x10, 16, 1),
++	PIN_FIELD_BASE(83, 83, IOCFG_LT, 0x0160, 0x10, 26, 1),
++	PIN_FIELD_BASE(84, 84, IOCFG_LT, 0x0160, 0x10, 26, 1),
++	PIN_FIELD_BASE(85, 85, IOCFG_LT, 0x0160, 0x10, 27, 1),
++	PIN_FIELD_BASE(86, 86, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(87, 87, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(88, 88, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(89, 89, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(90, 90, IOCFG_LT, 0x0160, 0x10, 27, 1),
++	PIN_FIELD_BASE(91, 91, IOCFG_LT, 0x0160, 0x10, 27, 1),
++	PIN_FIELD_BASE(92, 92, IOCFG_LT, 0x0160, 0x10, 18, 1),
++	PIN_FIELD_BASE(93, 93, IOCFG_LT, 0x0160, 0x10, 18, 1),
++	PIN_FIELD_BASE(94, 94, IOCFG_LT, 0x0160, 0x10, 18, 1),
++	PIN_FIELD_BASE(95, 95, IOCFG_LT, 0x0160, 0x10, 18, 1),
++	PIN_FIELD_BASE(96, 96, IOCFG_LT, 0x0160, 0x10, 22, 1),
++	PIN_FIELD_BASE(97, 97, IOCFG_LT, 0x0160, 0x10, 23, 1),
++	PIN_FIELD_BASE(98, 98, IOCFG_LT, 0x0160, 0x10, 24, 1),
++	PIN_FIELD_BASE(99, 99, IOCFG_LT, 0x0160, 0x10, 22, 1),
++	PIN_FIELD_BASE(100, 100, IOCFG_LT, 0x0160, 0x10, 16, 1),
++	PIN_FIELD_BASE(101, 101, IOCFG_LT, 0x0160, 0x10, 23, 1),
++	PIN_FIELD_BASE(102, 102, IOCFG_LT, 0x0160, 0x10, 23, 1),
++	PIN_FIELD_BASE(103, 103, IOCFG_LT, 0x0160, 0x10, 23, 1),
++	PIN_FIELD_BASE(104, 104, IOCFG_LT, 0x0160, 0x10, 24, 1),
++	PIN_FIELD_BASE(105, 105, IOCFG_LT, 0x0160, 0x10, 24, 1),
++	PIN_FIELD_BASE(106, 106, IOCFG_LT, 0x0160, 0x10, 24, 1),
++	PIN_FIELD_BASE(107, 107, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(108, 108, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(109, 109, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(110, 110, IOCFG_LT, 0x0160, 0x10, 17, 1),
++	PIN_FIELD_BASE(111, 111, IOCFG_LT, 0x0160, 0x10, 19, 1),
++	PIN_FIELD_BASE(112, 112, IOCFG_LT, 0x0160, 0x10, 19, 1),
++	PIN_FIELD_BASE(113, 113, IOCFG_LT, 0x0160, 0x10, 19, 1),
++	PIN_FIELD_BASE(114, 114, IOCFG_LT, 0x0160, 0x10, 19, 1),
++	PIN_FIELD_BASE(115, 115, IOCFG_LT, 0x0160, 0x10, 20, 1),
++	PIN_FIELD_BASE(116, 116, IOCFG_LT, 0x0160, 0x10, 20, 1),
++	PIN_FIELD_BASE(117, 117, IOCFG_LT, 0x0160, 0x10, 20, 1),
++	PIN_FIELD_BASE(118, 118, IOCFG_LT, 0x0160, 0x10, 20, 1),
++	PIN_FIELD_BASE(119, 119, IOCFG_LT, 0x0160, 0x10, 21, 1),
++	PIN_FIELD_BASE(120, 120, IOCFG_LT, 0x0160, 0x10, 21, 1),
++	PIN_FIELD_BASE(121, 121, IOCFG_LM, 0x00d0, 0x10, 6, 1),
++	PIN_FIELD_BASE(122, 122, IOCFG_LM, 0x00d0, 0x10, 9, 1),
++	PIN_FIELD_BASE(123, 123, IOCFG_LM, 0x00d0, 0x10, 8, 1),
++	PIN_FIELD_BASE(124, 124, IOCFG_LM, 0x00d0, 0x10, 7, 1),
++	PIN_FIELD_BASE(125, 125, IOCFG_LT, 0x0160, 0x10, 25, 1),
++	PIN_FIELD_BASE(126, 126, IOCFG_LT, 0x0160, 0x10, 25, 1),
++	PIN_FIELD_BASE(127, 127, IOCFG_LT, 0x0160, 0x10, 25, 1),
++	PIN_FIELD_BASE(128, 128, IOCFG_LT, 0x0160, 0x10, 25, 1),
++	PIN_FIELD_BASE(129, 129, IOCFG_LT, 0x0160, 0x10, 26, 1),
++	PIN_FIELD_BASE(130, 130, IOCFG_LT, 0x0160, 0x10, 26, 1),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x0170, 0x10, 0, 1),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x0170, 0x10, 1, 1),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x0170, 0x10, 6, 1),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x0170, 0x10, 7, 1),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x0170, 0x10, 22, 1),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x0170, 0x10, 22, 1),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x0170, 0x10, 22, 1),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x0170, 0x10, 22, 1),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x0170, 0x10, 23, 1),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x0170, 0x10, 23, 1),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x0170, 0x10, 23, 1),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x0170, 0x10, 23, 1),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x0170, 0x10, 2, 1),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x0170, 0x10, 3, 1),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x0170, 0x10, 4, 1),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x0170, 0x10, 5, 1),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x0170, 0x10, 24, 1),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x0170, 0x10, 24, 1),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x0170, 0x10, 24, 1),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x0170, 0x10, 24, 1),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x0160, 0x10, 9, 1),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x0160, 0x10, 8, 1),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x0160, 0x10, 7, 1),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x0160, 0x10, 6, 1),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x0160, 0x10, 11, 1),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x0160, 0x10, 1, 1),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x0160, 0x10, 0, 1),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x0160, 0x10, 5, 1),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x0160, 0x10, 4, 1),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x0160, 0x10, 3, 1),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x0160, 0x10, 2, 1),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x0160, 0x10, 10, 1),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x00e0, 0x10, 4, 1),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x00e0, 0x10, 3, 1),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x00e0, 0x10, 5, 1),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x00e0, 0x10, 6, 1),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x00e0, 0x10, 7, 1),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x00e0, 0x10, 8, 1),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x00d0, 0x10, 1, 1),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x00d0, 0x10, 0, 1),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x00d0, 0x10, 2, 1),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x00d0, 0x10, 3, 1),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x00d0, 0x10, 4, 1),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x00d0, 0x10, 5, 1),
++	PIN_FIELD_BASE(175, 175, IOCFG_LT, 0x0160, 0x10, 28, 1),
++	PIN_FIELD_BASE(176, 176, IOCFG_LT, 0x0160, 0x10, 28, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_ies_range[] = {
++	PIN_FIELD_BASE(0, 0, IOCFG_RM, 0x0080, 0x10, 26, 1),
++	PIN_FIELD_BASE(1, 1, IOCFG_RM, 0x0080, 0x10, 27, 1),
++	PIN_FIELD_BASE(2, 2, IOCFG_RM, 0x0080, 0x10, 28, 1),
++	PIN_FIELD_BASE(3, 3, IOCFG_RM, 0x0080, 0x10, 29, 1),
++	PIN_FIELD_BASE(4, 4, IOCFG_RM, 0x0080, 0x10, 30, 1),
++	PIN_FIELD_BASE(5, 5, IOCFG_RM, 0x0080, 0x10, 31, 1),
++	PIN_FIELD_BASE(6, 6, IOCFG_RM, 0x0090, 0x10, 0, 1),
++	PIN_FIELD_BASE(7, 7, IOCFG_RM, 0x0090, 0x10, 1, 1),
++	PIN_FIELD_BASE(8, 8, IOCFG_RM, 0x0090, 0x10, 2, 1),
++	PIN_FIELD_BASE(9, 9, IOCFG_RM, 0x0090, 0x10, 3, 1),
++	PIN_FIELD_BASE(10, 10, IOCFG_RM, 0x0090, 0x10, 4, 1),
++	PIN_FIELD_BASE(11, 11, IOCFG_RM, 0x0090, 0x10, 5, 1),
++	PIN_FIELD_BASE(12, 12, IOCFG_LT, 0x0070, 0x10, 24, 1),
++	PIN_FIELD_BASE(13, 13, IOCFG_LT, 0x0070, 0x10, 25, 1),
++	PIN_FIELD_BASE(14, 14, IOCFG_LT, 0x0070, 0x10, 26, 1),
++	PIN_FIELD_BASE(15, 15, IOCFG_LT, 0x0070, 0x10, 27, 1),
++	PIN_FIELD_BASE(16, 16, IOCFG_LM, 0x0040, 0x10, 1, 1),
++	PIN_FIELD_BASE(17, 17, IOCFG_LM, 0x0040, 0x10, 2, 1),
++	PIN_FIELD_BASE(18, 18, IOCFG_RT, 0x0050, 0x10, 3, 1),
++	PIN_FIELD_BASE(19, 19, IOCFG_RT, 0x0050, 0x10, 5, 1),
++	PIN_FIELD_BASE(20, 20, IOCFG_RT, 0x0050, 0x10, 4, 1),
++	PIN_FIELD_BASE(21, 21, IOCFG_RT, 0x0050, 0x10, 6, 1),
++	PIN_FIELD_BASE(22, 22, IOCFG_RT, 0x0050, 0x10, 0, 1),
++	PIN_FIELD_BASE(23, 23, IOCFG_RT, 0x0050, 0x10, 1, 1),
++	PIN_FIELD_BASE(24, 24, IOCFG_RT, 0x0050, 0x10, 2, 1),
++	PIN_FIELD_BASE(25, 25, IOCFG_RM, 0x0080, 0x10, 23, 1),
++	PIN_FIELD_BASE(26, 26, IOCFG_RM, 0x0080, 0x10, 22, 1),
++	PIN_FIELD_BASE(27, 27, IOCFG_RM, 0x0080, 0x10, 25, 1),
++	PIN_FIELD_BASE(28, 28, IOCFG_RM, 0x0080, 0x10, 24, 1),
++	PIN_FIELD_BASE(29, 29, IOCFG_RM, 0x0080, 0x10, 0, 1),
++	PIN_FIELD_BASE(30, 30, IOCFG_RM, 0x0080, 0x10, 1, 1),
++	PIN_FIELD_BASE(31, 31, IOCFG_RM, 0x0090, 0x10, 31, 1),
++	PIN_FIELD_BASE(32, 32, IOCFG_RM, 0x0090, 0x10, 30, 1),
++	PIN_FIELD_BASE(33, 33, IOCFG_RM, 0x00a0, 0x10, 1, 1),
++	PIN_FIELD_BASE(34, 34, IOCFG_RM, 0x00a0, 0x10, 0, 1),
++	PIN_FIELD_BASE(35, 35, IOCFG_RM, 0x00a0, 0x10, 3, 1),
++	PIN_FIELD_BASE(36, 36, IOCFG_RM, 0x00a0, 0x10, 2, 1),
++	PIN_FIELD_BASE(37, 37, IOCFG_RM, 0x0090, 0x10, 9, 1),
++	PIN_FIELD_BASE(38, 38, IOCFG_RM, 0x0090, 0x10, 6, 1),
++	PIN_FIELD_BASE(39, 39, IOCFG_RM, 0x0090, 0x10, 7, 1),
++	PIN_FIELD_BASE(40, 40, IOCFG_RM, 0x0090, 0x10, 8, 1),
++	PIN_FIELD_BASE(41, 41, IOCFG_RM, 0x0090, 0x10, 10, 1),
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x0080, 0x10, 10, 1),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x0080, 0x10, 11, 1),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x0080, 0x10, 12, 1),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x0080, 0x10, 13, 1),
++	PIN_FIELD_BASE(46, 46, IOCFG_LM, 0x0040, 0x10, 0, 1),
++	PIN_FIELD_BASE(47, 47, IOCFG_RM, 0x0090, 0x10, 13, 1),
++	PIN_FIELD_BASE(48, 48, IOCFG_RM, 0x0090, 0x10, 12, 1),
++	PIN_FIELD_BASE(49, 49, IOCFG_RM, 0x0090, 0x10, 11, 1),
++	PIN_FIELD_BASE(50, 50, IOCFG_LM, 0x0040, 0x10, 5, 1),
++	PIN_FIELD_BASE(51, 51, IOCFG_LM, 0x0040, 0x10, 4, 1),
++	PIN_FIELD_BASE(52, 52, IOCFG_LM, 0x0040, 0x10, 3, 1),
++	PIN_FIELD_BASE(53, 53, IOCFG_LM, 0x0040, 0x10, 6, 1),
++	PIN_FIELD_BASE(54, 54, IOCFG_LM, 0x0040, 0x10, 7, 1),
++	PIN_FIELD_BASE(55, 55, IOCFG_RM, 0x0090, 0x10, 14, 1),
++	PIN_FIELD_BASE(56, 56, IOCFG_RM, 0x0090, 0x10, 17, 1),
++	PIN_FIELD_BASE(57, 57, IOCFG_LT, 0x0080, 0x10, 22, 1),
++	PIN_FIELD_BASE(58, 58, IOCFG_LT, 0x0080, 0x10, 25, 1),
++	PIN_FIELD_BASE(59, 59, IOCFG_RM, 0x0090, 0x10, 15, 1),
++	PIN_FIELD_BASE(60, 60, IOCFG_RM, 0x0090, 0x10, 18, 1),
++	PIN_FIELD_BASE(61, 61, IOCFG_RM, 0x0090, 0x10, 16, 1),
++	PIN_FIELD_BASE(62, 62, IOCFG_RM, 0x0090, 0x10, 19, 1),
++	PIN_FIELD_BASE(63, 63, IOCFG_LT, 0x0080, 0x10, 23, 1),
++	PIN_FIELD_BASE(64, 64, IOCFG_LT, 0x0080, 0x10, 26, 1),
++	PIN_FIELD_BASE(65, 65, IOCFG_RT, 0x0050, 0x10, 13, 1),
++	PIN_FIELD_BASE(66, 66, IOCFG_RT, 0x0050, 0x10, 15, 1),
++	PIN_FIELD_BASE(67, 67, IOCFG_RT, 0x0050, 0x10, 14, 1),
++	PIN_FIELD_BASE(68, 68, IOCFG_RT, 0x0050, 0x10, 16, 1),
++	PIN_FIELD_BASE(69, 69, IOCFG_RM, 0x0090, 0x10, 21, 1),
++	PIN_FIELD_BASE(70, 70, IOCFG_RM, 0x0090, 0x10, 20, 1),
++	PIN_FIELD_BASE(71, 71, IOCFG_RM, 0x0090, 0x10, 25, 1),
++	PIN_FIELD_BASE(72, 72, IOCFG_RM, 0x0090, 0x10, 24, 1),
++	PIN_FIELD_BASE(73, 73, IOCFG_RM, 0x0090, 0x10, 22, 1),
++	PIN_FIELD_BASE(74, 74, IOCFG_RM, 0x0090, 0x10, 23, 1),
++	PIN_FIELD_BASE(75, 75, IOCFG_RM, 0x0090, 0x10, 27, 1),
++	PIN_FIELD_BASE(76, 76, IOCFG_RM, 0x0090, 0x10, 26, 1),
++	PIN_FIELD_BASE(77, 77, IOCFG_RM, 0x0090, 0x10, 29, 1),
++	PIN_FIELD_BASE(78, 78, IOCFG_RM, 0x0090, 0x10, 28, 1),
++	PIN_FIELD_BASE(79, 79, IOCFG_RT, 0x0050, 0x10, 18, 1),
++	PIN_FIELD_BASE(80, 80, IOCFG_RT, 0x0050, 0x10, 17, 1),
++	PIN_FIELD_BASE(81, 81, IOCFG_RT, 0x0050, 0x10, 20, 1),
++	PIN_FIELD_BASE(82, 82, IOCFG_RT, 0x0050, 0x10, 19, 1),
++	PIN_FIELD_BASE(83, 83, IOCFG_LT, 0x0080, 0x10, 30, 1),
++	PIN_FIELD_BASE(84, 84, IOCFG_LT, 0x0080, 0x10, 29, 1),
++	PIN_FIELD_BASE(85, 85, IOCFG_LT, 0x0080, 0x10, 31, 1),
++	PIN_FIELD_BASE(86, 86, IOCFG_LT, 0x0090, 0x10, 1, 1),
++	PIN_FIELD_BASE(87, 87, IOCFG_LT, 0x0090, 0x10, 0, 1),
++	PIN_FIELD_BASE(88, 88, IOCFG_LT, 0x0090, 0x10, 2, 1),
++	PIN_FIELD_BASE(89, 89, IOCFG_LT, 0x0090, 0x10, 4, 1),
++	PIN_FIELD_BASE(90, 90, IOCFG_LT, 0x0090, 0x10, 3, 1),
++	PIN_FIELD_BASE(91, 91, IOCFG_LT, 0x0090, 0x10, 5, 1),
++	PIN_FIELD_BASE(92, 92, IOCFG_LT, 0x0080, 0x10, 19, 1),
++	PIN_FIELD_BASE(93, 93, IOCFG_LT, 0x0080, 0x10, 18, 1),
++	PIN_FIELD_BASE(94, 94, IOCFG_LT, 0x0080, 0x10, 21, 1),
++	PIN_FIELD_BASE(95, 95, IOCFG_LT, 0x0080, 0x10, 20, 1),
++	PIN_FIELD_BASE(96, 96, IOCFG_LT, 0x0080, 0x10, 15, 1),
++	PIN_FIELD_BASE(97, 97, IOCFG_LT, 0x0080, 0x10, 16, 1),
++	PIN_FIELD_BASE(98, 98, IOCFG_LT, 0x0080, 0x10, 24, 1),
++	PIN_FIELD_BASE(99, 99, IOCFG_LT, 0x0080, 0x10, 14, 1),
++	PIN_FIELD_BASE(100, 100, IOCFG_LT, 0x0080, 0x10, 17, 1),
++	PIN_FIELD_BASE(101, 101, IOCFG_LT, 0x0070, 0x10, 0, 1),
++	PIN_FIELD_BASE(102, 102, IOCFG_LT, 0x0070, 0x10, 5, 1),
++	PIN_FIELD_BASE(103, 103, IOCFG_LT, 0x0070, 0x10, 3, 1),
++	PIN_FIELD_BASE(104, 104, IOCFG_LT, 0x0070, 0x10, 4, 1),
++	PIN_FIELD_BASE(105, 105, IOCFG_LT, 0x0070, 0x10, 1, 1),
++	PIN_FIELD_BASE(106, 106, IOCFG_LT, 0x0070, 0x10, 2, 1),
++	PIN_FIELD_BASE(107, 107, IOCFG_LT, 0x0080, 0x10, 1, 1),
++	PIN_FIELD_BASE(108, 108, IOCFG_LT, 0x0070, 0x10, 28, 1),
++	PIN_FIELD_BASE(109, 109, IOCFG_LT, 0x0080, 0x10, 2, 1),
++	PIN_FIELD_BASE(110, 110, IOCFG_LT, 0x0070, 0x10, 29, 1),
++	PIN_FIELD_BASE(111, 111, IOCFG_LT, 0x0070, 0x10, 30, 1),
++	PIN_FIELD_BASE(112, 112, IOCFG_LT, 0x0070, 0x10, 31, 1),
++	PIN_FIELD_BASE(113, 113, IOCFG_LT, 0x0080, 0x10, 0, 1),
++	PIN_FIELD_BASE(114, 114, IOCFG_LT, 0x0080, 0x10, 8, 1),
++	PIN_FIELD_BASE(115, 115, IOCFG_LT, 0x0080, 0x10, 3, 1),
++	PIN_FIELD_BASE(116, 116, IOCFG_LT, 0x0080, 0x10, 9, 1),
++	PIN_FIELD_BASE(117, 117, IOCFG_LT, 0x0080, 0x10, 4, 1),
++	PIN_FIELD_BASE(118, 118, IOCFG_LT, 0x0080, 0x10, 5, 1),
++	PIN_FIELD_BASE(119, 119, IOCFG_LT, 0x0080, 0x10, 6, 1),
++	PIN_FIELD_BASE(120, 120, IOCFG_LT, 0x0080, 0x10, 7, 1),
++	PIN_FIELD_BASE(121, 121, IOCFG_LM, 0x0040, 0x10, 14, 1),
++	PIN_FIELD_BASE(122, 122, IOCFG_LM, 0x0040, 0x10, 17, 1),
++	PIN_FIELD_BASE(123, 123, IOCFG_LM, 0x0040, 0x10, 16, 1),
++	PIN_FIELD_BASE(124, 124, IOCFG_LM, 0x0040, 0x10, 15, 1),
++	PIN_FIELD_BASE(125, 125, IOCFG_LT, 0x0070, 0x10, 6, 1),
++	PIN_FIELD_BASE(126, 126, IOCFG_LT, 0x0070, 0x10, 7, 1),
++	PIN_FIELD_BASE(127, 127, IOCFG_LT, 0x0070, 0x10, 8, 1),
++	PIN_FIELD_BASE(128, 128, IOCFG_LT, 0x0070, 0x10, 9, 1),
++	PIN_FIELD_BASE(129, 129, IOCFG_LT, 0x0070, 0x10, 10, 1),
++	PIN_FIELD_BASE(130, 130, IOCFG_LT, 0x0070, 0x10, 11, 1),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x0080, 0x10, 3, 1),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x0080, 0x10, 4, 1),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x0080, 0x10, 11, 1),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x0080, 0x10, 12, 1),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x0080, 0x10, 13, 1),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x0080, 0x10, 14, 1),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x0080, 0x10, 15, 1),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x0080, 0x10, 16, 1),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x0080, 0x10, 17, 1),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x0080, 0x10, 18, 1),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x0080, 0x10, 5, 1),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x0080, 0x10, 6, 1),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x0080, 0x10, 7, 1),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x0080, 0x10, 8, 1),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x0080, 0x10, 9, 1),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x0080, 0x10, 10, 1),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x0080, 0x10, 20, 1),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x0080, 0x10, 21, 1),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x0080, 0x10, 19, 1),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x0080, 0x10, 2, 1),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x0070, 0x10, 21, 1),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x0070, 0x10, 20, 1),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x0070, 0x10, 19, 1),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x0070, 0x10, 18, 1),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x0070, 0x10, 23, 1),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x0070, 0x10, 13, 1),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x0070, 0x10, 12, 1),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x0070, 0x10, 17, 1),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x0070, 0x10, 16, 1),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x0070, 0x10, 15, 1),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x0070, 0x10, 14, 1),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x0070, 0x10, 22, 1),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x0050, 0x10, 8, 1),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x0050, 0x10, 7, 1),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x0050, 0x10, 9, 1),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x0050, 0x10, 10, 1),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x0050, 0x10, 11, 1),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x0050, 0x10, 12, 1),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x0040, 0x10, 9, 1),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x0040, 0x10, 8, 1),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x0040, 0x10, 10, 1),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x0040, 0x10, 11, 1),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x0040, 0x10, 12, 1),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x0040, 0x10, 13, 1),
++	PIN_FIELD_BASE(175, 175, IOCFG_LT, 0x0080, 0x10, 27, 1),
++	PIN_FIELD_BASE(176, 176, IOCFG_LT, 0x0080, 0x10, 28, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_pupd_range[] = {
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x00c0, 0x10, 12, 1),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x00c0, 0x10, 13, 1),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x00c0, 0x10, 14, 1),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x00c0, 0x10, 15, 1),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x00d0, 0x10, 1, 1),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x00d0, 0x10, 2, 1),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x00d0, 0x10, 9, 1),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x00d0, 0x10, 12, 1),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x00d0, 0x10, 13, 1),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x00d0, 0x10, 14, 1),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x00d0, 0x10, 15, 1),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x00d0, 0x10, 16, 1),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x00d0, 0x10, 3, 1),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x00d0, 0x10, 4, 1),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x00d0, 0x10, 5, 1),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x00d0, 0x10, 6, 1),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x00d0, 0x10, 7, 1),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x00d0, 0x10, 8, 1),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x00d0, 0x10, 18, 1),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x00d0, 0x10, 19, 1),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x00d0, 0x10, 17, 1),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x00d0, 0x10, 0, 1),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x00c0, 0x10, 9, 1),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x00c0, 0x10, 8, 1),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x00c0, 0x10, 7, 1),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x00c0, 0x10, 6, 1),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x00c0, 0x10, 11, 1),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x00c0, 0x10, 1, 1),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x00c0, 0x10, 0, 1),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x00c0, 0x10, 5, 1),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x00c0, 0x10, 4, 1),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x00c0, 0x10, 3, 1),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x00c0, 0x10, 2, 1),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x00c0, 0x10, 10, 1),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x0070, 0x10, 1, 1),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x0070, 0x10, 0, 1),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x0070, 0x10, 2, 1),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x0070, 0x10, 3, 1),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x0070, 0x10, 4, 1),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x0070, 0x10, 5, 1),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x0060, 0x10, 1, 1),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x0060, 0x10, 0, 1),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x0060, 0x10, 2, 1),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x0060, 0x10, 3, 1),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x0060, 0x10, 4, 1),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x0060, 0x10, 5, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_r0_range[] = {
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x00f0, 0x10, 12, 1),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x00f0, 0x10, 13, 1),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x00f0, 0x10, 14, 1),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x00f0, 0x10, 15, 1),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x0100, 0x10, 1, 1),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x0100, 0x10, 2, 1),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x0100, 0x10, 9, 1),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x0100, 0x10, 10, 1),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x0100, 0x10, 11, 1),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x0100, 0x10, 12, 1),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x0100, 0x10, 13, 1),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x0100, 0x10, 14, 1),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x0100, 0x10, 15, 1),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x0100, 0x10, 16, 1),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x0100, 0x10, 3, 1),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x0100, 0x10, 4, 1),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x0100, 0x10, 5, 1),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x0100, 0x10, 6, 1),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x0100, 0x10, 7, 1),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x0100, 0x10, 8, 1),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x0100, 0x10, 18, 1),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x0100, 0x10, 19, 1),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x0100, 0x10, 17, 1),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x0100, 0x10, 0, 1),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x00f0, 0x10, 9, 1),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x00f0, 0x10, 8, 1),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x00f0, 0x10, 7, 1),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x00f0, 0x10, 6, 1),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x00f0, 0x10, 11, 1),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x00f0, 0x10, 1, 1),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x00f0, 0x10, 0, 1),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x00f0, 0x10, 5, 1),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x00f0, 0x10, 4, 1),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x00f0, 0x10, 3, 1),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x00f0, 0x10, 2, 1),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x00f0, 0x10, 10, 1),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x0090, 0x10, 1, 1),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x0090, 0x10, 0, 1),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x0090, 0x10, 2, 1),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x0090, 0x10, 3, 1),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x0090, 0x10, 4, 1),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x0090, 0x10, 5, 1),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x0080, 0x10, 1, 1),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x0080, 0x10, 0, 1),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x0080, 0x10, 2, 1),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x0080, 0x10, 3, 1),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x0080, 0x10, 4, 1),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x0080, 0x10, 5, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_r1_range[] = {
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x0100, 0x10, 12, 1),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x0100, 0x10, 13, 1),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x0100, 0x10, 14, 1),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x0100, 0x10, 15, 1),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x0110, 0x10, 1, 1),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x0110, 0x10, 2, 1),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x0110, 0x10, 9, 1),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x0110, 0x10, 10, 1),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x0110, 0x10, 11, 1),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x0110, 0x10, 12, 1),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x0110, 0x10, 13, 1),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x0110, 0x10, 14, 1),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x0110, 0x10, 15, 1),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x0110, 0x10, 16, 1),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x0110, 0x10, 3, 1),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x0110, 0x10, 4, 1),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x0110, 0x10, 5, 1),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x0110, 0x10, 6, 1),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x0110, 0x10, 7, 1),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x0110, 0x10, 8, 1),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x0110, 0x10, 18, 1),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x0110, 0x10, 19, 1),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x0110, 0x10, 17, 1),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x0110, 0x10, 0, 1),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x0100, 0x10, 9, 1),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x0100, 0x10, 8, 1),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x0100, 0x10, 7, 1),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x0100, 0x10, 6, 1),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x0100, 0x10, 11, 1),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x0100, 0x10, 1, 1),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x0100, 0x10, 0, 1),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x0100, 0x10, 5, 1),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x0100, 0x10, 4, 1),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x0100, 0x10, 3, 1),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x0100, 0x10, 2, 1),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x0100, 0x10, 10, 1),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x00a0, 0x10, 1, 1),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x00a0, 0x10, 0, 1),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x00a0, 0x10, 2, 1),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x00a0, 0x10, 3, 1),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x00a0, 0x10, 4, 1),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x00a0, 0x10, 5, 1),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x0090, 0x10, 1, 1),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x0090, 0x10, 0, 1),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x0090, 0x10, 2, 1),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x0090, 0x10, 3, 1),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x0090, 0x10, 4, 1),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x0090, 0x10, 5, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_pu_range[] = {
++	PIN_FIELD_BASE(0, 0, IOCFG_RM, 0x00e0, 0x10, 6, 1),
++	PIN_FIELD_BASE(1, 1, IOCFG_RM, 0x00e0, 0x10, 7, 1),
++	PIN_FIELD_BASE(2, 2, IOCFG_RM, 0x00e0, 0x10, 8, 1),
++	PIN_FIELD_BASE(3, 3, IOCFG_RM, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(4, 4, IOCFG_RM, 0x00e0, 0x10, 10, 1),
++	PIN_FIELD_BASE(5, 5, IOCFG_RM, 0x00e0, 0x10, 11, 1),
++	PIN_FIELD_BASE(6, 6, IOCFG_RM, 0x00e0, 0x10, 12, 1),
++	PIN_FIELD_BASE(7, 7, IOCFG_RM, 0x00e0, 0x10, 13, 1),
++	PIN_FIELD_BASE(8, 8, IOCFG_RM, 0x00e0, 0x10, 14, 1),
++	PIN_FIELD_BASE(9, 9, IOCFG_RM, 0x00e0, 0x10, 15, 1),
++	PIN_FIELD_BASE(10, 10, IOCFG_RM, 0x00e0, 0x10, 16, 1),
++	PIN_FIELD_BASE(11, 11, IOCFG_RM, 0x00e0, 0x10, 17, 1),
++	PIN_FIELD_BASE(12, 12, IOCFG_LT, 0x00d0, 0x10, 12, 1),
++	PIN_FIELD_BASE(13, 13, IOCFG_LT, 0x00d0, 0x10, 13, 1),
++	PIN_FIELD_BASE(14, 14, IOCFG_LT, 0x00d0, 0x10, 14, 1),
++	PIN_FIELD_BASE(15, 15, IOCFG_LT, 0x00d0, 0x10, 15, 1),
++	PIN_FIELD_BASE(16, 16, IOCFG_LM, 0x0070, 0x10, 1, 1),
++	PIN_FIELD_BASE(17, 17, IOCFG_LM, 0x0070, 0x10, 2, 1),
++	PIN_FIELD_BASE(18, 18, IOCFG_RT, 0x0080, 0x10, 3, 1),
++	PIN_FIELD_BASE(19, 19, IOCFG_RT, 0x0080, 0x10, 5, 1),
++	PIN_FIELD_BASE(20, 20, IOCFG_RT, 0x0080, 0x10, 4, 1),
++	PIN_FIELD_BASE(21, 21, IOCFG_RT, 0x0080, 0x10, 6, 1),
++	PIN_FIELD_BASE(22, 22, IOCFG_RT, 0x0080, 0x10, 0, 1),
++	PIN_FIELD_BASE(23, 23, IOCFG_RT, 0x0080, 0x10, 1, 1),
++	PIN_FIELD_BASE(24, 24, IOCFG_RT, 0x0080, 0x10, 2, 1),
++	PIN_FIELD_BASE(25, 25, IOCFG_RM, 0x00e0, 0x10, 3, 1),
++	PIN_FIELD_BASE(26, 26, IOCFG_RM, 0x00e0, 0x10, 2, 1),
++	PIN_FIELD_BASE(27, 27, IOCFG_RM, 0x00e0, 0x10, 5, 1),
++	PIN_FIELD_BASE(28, 28, IOCFG_RM, 0x00e0, 0x10, 4, 1),
++	PIN_FIELD_BASE(29, 29, IOCFG_RM, 0x00e0, 0x10, 0, 1),
++	PIN_FIELD_BASE(30, 30, IOCFG_RM, 0x00e0, 0x10, 1, 1),
++	PIN_FIELD_BASE(31, 31, IOCFG_RM, 0x00f0, 0x10, 11, 1),
++	PIN_FIELD_BASE(32, 32, IOCFG_RM, 0x00f0, 0x10, 10, 1),
++	PIN_FIELD_BASE(33, 33, IOCFG_RM, 0x00f0, 0x10, 13, 1),
++	PIN_FIELD_BASE(34, 34, IOCFG_RM, 0x00f0, 0x10, 12, 1),
++	PIN_FIELD_BASE(35, 35, IOCFG_RM, 0x00f0, 0x10, 15, 1),
++	PIN_FIELD_BASE(36, 36, IOCFG_RM, 0x00f0, 0x10, 14, 1),
++	PIN_FIELD_BASE(37, 37, IOCFG_RM, 0x00e0, 0x10, 21, 1),
++	PIN_FIELD_BASE(38, 38, IOCFG_RM, 0x00e0, 0x10, 18, 1),
++	PIN_FIELD_BASE(39, 39, IOCFG_RM, 0x00e0, 0x10, 19, 1),
++	PIN_FIELD_BASE(40, 40, IOCFG_RM, 0x00e0, 0x10, 20, 1),
++	PIN_FIELD_BASE(41, 41, IOCFG_RM, 0x00e0, 0x10, 22, 1),
++	PIN_FIELD_BASE(46, 46, IOCFG_LM, 0x0070, 0x10, 0, 1),
++	PIN_FIELD_BASE(47, 47, IOCFG_RM, 0x00e0, 0x10, 25, 1),
++	PIN_FIELD_BASE(48, 48, IOCFG_RM, 0x00e0, 0x10, 24, 1),
++	PIN_FIELD_BASE(49, 49, IOCFG_RM, 0x00e0, 0x10, 23, 1),
++	PIN_FIELD_BASE(50, 50, IOCFG_LM, 0x0070, 0x10, 5, 1),
++	PIN_FIELD_BASE(51, 51, IOCFG_LM, 0x0070, 0x10, 4, 1),
++	PIN_FIELD_BASE(52, 52, IOCFG_LM, 0x0070, 0x10, 3, 1),
++	PIN_FIELD_BASE(53, 53, IOCFG_LM, 0x0070, 0x10, 6, 1),
++	PIN_FIELD_BASE(54, 54, IOCFG_LM, 0x0070, 0x10, 7, 1),
++	PIN_FIELD_BASE(55, 55, IOCFG_RM, 0x00e0, 0x10, 26, 1),
++	PIN_FIELD_BASE(56, 56, IOCFG_RM, 0x00e0, 0x10, 29, 1),
++	PIN_FIELD_BASE(57, 57, IOCFG_LT, 0x00e0, 0x10, 6, 1),
++	PIN_FIELD_BASE(58, 58, IOCFG_LT, 0x00e0, 0x10, 9, 1),
++	PIN_FIELD_BASE(59, 59, IOCFG_RM, 0x00e0, 0x10, 27, 1),
++	PIN_FIELD_BASE(60, 60, IOCFG_RM, 0x00e0, 0x10, 30, 1),
++	PIN_FIELD_BASE(61, 61, IOCFG_RM, 0x00e0, 0x10, 28, 1),
++	PIN_FIELD_BASE(62, 62, IOCFG_RM, 0x00e0, 0x10, 31, 1),
++	PIN_FIELD_BASE(63, 63, IOCFG_LT, 0x00e0, 0x10, 7, 1),
++	PIN_FIELD_BASE(64, 64, IOCFG_LT, 0x00e0, 0x10, 10, 1),
++	PIN_FIELD_BASE(65, 65, IOCFG_RT, 0x0080, 0x10, 7, 1),
++	PIN_FIELD_BASE(66, 66, IOCFG_RT, 0x0080, 0x10, 9, 1),
++	PIN_FIELD_BASE(67, 67, IOCFG_RT, 0x0080, 0x10, 8, 1),
++	PIN_FIELD_BASE(68, 68, IOCFG_RT, 0x0080, 0x10, 10, 1),
++	PIN_FIELD_BASE(69, 69, IOCFG_RM, 0x00f0, 0x10, 1, 1),
++	PIN_FIELD_BASE(70, 70, IOCFG_RM, 0x00f0, 0x10, 0, 1),
++	PIN_FIELD_BASE(71, 71, IOCFG_RM, 0x00f0, 0x10, 5, 1),
++	PIN_FIELD_BASE(72, 72, IOCFG_RM, 0x00f0, 0x10, 4, 1),
++	PIN_FIELD_BASE(73, 73, IOCFG_RM, 0x00f0, 0x10, 2, 1),
++	PIN_FIELD_BASE(74, 74, IOCFG_RM, 0x00f0, 0x10, 3, 1),
++	PIN_FIELD_BASE(75, 75, IOCFG_RM, 0x00f0, 0x10, 7, 1),
++	PIN_FIELD_BASE(76, 76, IOCFG_RM, 0x00f0, 0x10, 6, 1),
++	PIN_FIELD_BASE(77, 77, IOCFG_RM, 0x00f0, 0x10, 9, 1),
++	PIN_FIELD_BASE(78, 78, IOCFG_RM, 0x00f0, 0x10, 8, 1),
++	PIN_FIELD_BASE(79, 79, IOCFG_RT, 0x0080, 0x10, 12, 1),
++	PIN_FIELD_BASE(80, 80, IOCFG_RT, 0x0080, 0x10, 11, 1),
++	PIN_FIELD_BASE(81, 81, IOCFG_RT, 0x0080, 0x10, 14, 1),
++	PIN_FIELD_BASE(82, 82, IOCFG_RT, 0x0080, 0x10, 13, 1),
++	PIN_FIELD_BASE(83, 83, IOCFG_LT, 0x00e0, 0x10, 16, 1),
++	PIN_FIELD_BASE(84, 84, IOCFG_LT, 0x00e0, 0x10, 15, 1),
++	PIN_FIELD_BASE(85, 85, IOCFG_LT, 0x00e0, 0x10, 17, 1),
++	PIN_FIELD_BASE(86, 86, IOCFG_LT, 0x00e0, 0x10, 19, 1),
++	PIN_FIELD_BASE(87, 87, IOCFG_LT, 0x00e0, 0x10, 18, 1),
++	PIN_FIELD_BASE(88, 88, IOCFG_LT, 0x00e0, 0x10, 20, 1),
++	PIN_FIELD_BASE(89, 89, IOCFG_LT, 0x00e0, 0x10, 22, 1),
++	PIN_FIELD_BASE(90, 90, IOCFG_LT, 0x00e0, 0x10, 21, 1),
++	PIN_FIELD_BASE(91, 91, IOCFG_LT, 0x00e0, 0x10, 23, 1),
++	PIN_FIELD_BASE(92, 92, IOCFG_LT, 0x00e0, 0x10, 3, 1),
++	PIN_FIELD_BASE(93, 93, IOCFG_LT, 0x00e0, 0x10, 2, 1),
++	PIN_FIELD_BASE(94, 94, IOCFG_LT, 0x00e0, 0x10, 5, 1),
++	PIN_FIELD_BASE(95, 95, IOCFG_LT, 0x00e0, 0x10, 4, 1),
++	PIN_FIELD_BASE(96, 96, IOCFG_LT, 0x00d0, 0x10, 31, 1),
++	PIN_FIELD_BASE(97, 97, IOCFG_LT, 0x00e0, 0x10, 0, 1),
++	PIN_FIELD_BASE(98, 98, IOCFG_LT, 0x00e0, 0x10, 8, 1),
++	PIN_FIELD_BASE(99, 99, IOCFG_LT, 0x00d0, 0x10, 30, 1),
++	PIN_FIELD_BASE(100, 100, IOCFG_LT, 0x00e0, 0x10, 1, 1),
++	PIN_FIELD_BASE(101, 101, IOCFG_LT, 0x00d0, 0x10, 0, 1),
++	PIN_FIELD_BASE(102, 102, IOCFG_LT, 0x00d0, 0x10, 5, 1),
++	PIN_FIELD_BASE(103, 103, IOCFG_LT, 0x00d0, 0x10, 3, 1),
++	PIN_FIELD_BASE(104, 104, IOCFG_LT, 0x00d0, 0x10, 4, 1),
++	PIN_FIELD_BASE(105, 105, IOCFG_LT, 0x00d0, 0x10, 1, 1),
++	PIN_FIELD_BASE(106, 106, IOCFG_LT, 0x00d0, 0x10, 2, 1),
++	PIN_FIELD_BASE(107, 107, IOCFG_LT, 0x00d0, 0x10, 21, 1),
++	PIN_FIELD_BASE(108, 108, IOCFG_LT, 0x00d0, 0x10, 16, 1),
++	PIN_FIELD_BASE(109, 109, IOCFG_LT, 0x00d0, 0x10, 22, 1),
++	PIN_FIELD_BASE(110, 110, IOCFG_LT, 0x00d0, 0x10, 17, 1),
++	PIN_FIELD_BASE(111, 111, IOCFG_LT, 0x00d0, 0x10, 18, 1),
++	PIN_FIELD_BASE(112, 112, IOCFG_LT, 0x00d0, 0x10, 19, 1),
++	PIN_FIELD_BASE(113, 113, IOCFG_LT, 0x00d0, 0x10, 20, 1),
++	PIN_FIELD_BASE(114, 114, IOCFG_LT, 0x00d0, 0x10, 28, 1),
++	PIN_FIELD_BASE(115, 115, IOCFG_LT, 0x00d0, 0x10, 23, 1),
++	PIN_FIELD_BASE(116, 116, IOCFG_LT, 0x00d0, 0x10, 29, 1),
++	PIN_FIELD_BASE(117, 117, IOCFG_LT, 0x00d0, 0x10, 24, 1),
++	PIN_FIELD_BASE(118, 118, IOCFG_LT, 0x00d0, 0x10, 25, 1),
++	PIN_FIELD_BASE(119, 119, IOCFG_LT, 0x00d0, 0x10, 26, 1),
++	PIN_FIELD_BASE(120, 120, IOCFG_LT, 0x00d0, 0x10, 27, 1),
++	PIN_FIELD_BASE(121, 121, IOCFG_LM, 0x0070, 0x10, 8, 1),
++	PIN_FIELD_BASE(122, 122, IOCFG_LM, 0x0070, 0x10, 11, 1),
++	PIN_FIELD_BASE(123, 123, IOCFG_LM, 0x0070, 0x10, 10, 1),
++	PIN_FIELD_BASE(124, 124, IOCFG_LM, 0x0070, 0x10, 9, 1),
++	PIN_FIELD_BASE(125, 125, IOCFG_LT, 0x00d0, 0x10, 6, 1),
++	PIN_FIELD_BASE(126, 126, IOCFG_LT, 0x00d0, 0x10, 7, 1),
++	PIN_FIELD_BASE(127, 127, IOCFG_LT, 0x00d0, 0x10, 8, 1),
++	PIN_FIELD_BASE(128, 128, IOCFG_LT, 0x00d0, 0x10, 9, 1),
++	PIN_FIELD_BASE(129, 129, IOCFG_LT, 0x00d0, 0x10, 10, 1),
++	PIN_FIELD_BASE(130, 130, IOCFG_LT, 0x00d0, 0x10, 11, 1),
++	PIN_FIELD_BASE(175, 175, IOCFG_LT, 0x00e0, 0x10, 11, 1),
++	PIN_FIELD_BASE(176, 176, IOCFG_LT, 0x00e0, 0x10, 12, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_pd_range[] = {
++	PIN_FIELD_BASE(0, 0, IOCFG_RM, 0x00b0, 0x10, 6, 1),
++	PIN_FIELD_BASE(1, 1, IOCFG_RM, 0x00b0, 0x10, 7, 1),
++	PIN_FIELD_BASE(2, 2, IOCFG_RM, 0x00b0, 0x10, 8, 1),
++	PIN_FIELD_BASE(3, 3, IOCFG_RM, 0x00b0, 0x10, 9, 1),
++	PIN_FIELD_BASE(4, 4, IOCFG_RM, 0x00b0, 0x10, 10, 1),
++	PIN_FIELD_BASE(5, 5, IOCFG_RM, 0x00b0, 0x10, 11, 1),
++	PIN_FIELD_BASE(6, 6, IOCFG_RM, 0x00b0, 0x10, 12, 1),
++	PIN_FIELD_BASE(7, 7, IOCFG_RM, 0x00b0, 0x10, 13, 1),
++	PIN_FIELD_BASE(8, 8, IOCFG_RM, 0x00b0, 0x10, 14, 1),
++	PIN_FIELD_BASE(9, 9, IOCFG_RM, 0x00b0, 0x10, 15, 1),
++	PIN_FIELD_BASE(10, 10, IOCFG_RM, 0x00b0, 0x10, 16, 1),
++	PIN_FIELD_BASE(11, 11, IOCFG_RM, 0x00b0, 0x10, 17, 1),
++	PIN_FIELD_BASE(12, 12, IOCFG_LT, 0x00a0, 0x10, 12, 1),
++	PIN_FIELD_BASE(13, 13, IOCFG_LT, 0x00a0, 0x10, 13, 1),
++	PIN_FIELD_BASE(14, 14, IOCFG_LT, 0x00a0, 0x10, 14, 1),
++	PIN_FIELD_BASE(15, 15, IOCFG_LT, 0x00a0, 0x10, 15, 1),
++	PIN_FIELD_BASE(16, 16, IOCFG_LM, 0x0050, 0x10, 1, 1),
++	PIN_FIELD_BASE(17, 17, IOCFG_LM, 0x0050, 0x10, 2, 1),
++	PIN_FIELD_BASE(18, 18, IOCFG_RT, 0x0060, 0x10, 3, 1),
++	PIN_FIELD_BASE(19, 19, IOCFG_RT, 0x0060, 0x10, 5, 1),
++	PIN_FIELD_BASE(20, 20, IOCFG_RT, 0x0060, 0x10, 4, 1),
++	PIN_FIELD_BASE(21, 21, IOCFG_RT, 0x0060, 0x10, 6, 1),
++	PIN_FIELD_BASE(22, 22, IOCFG_RT, 0x0060, 0x10, 0, 1),
++	PIN_FIELD_BASE(23, 23, IOCFG_RT, 0x0060, 0x10, 1, 1),
++	PIN_FIELD_BASE(24, 24, IOCFG_RT, 0x0060, 0x10, 2, 1),
++	PIN_FIELD_BASE(25, 25, IOCFG_RM, 0x00b0, 0x10, 3, 1),
++	PIN_FIELD_BASE(26, 26, IOCFG_RM, 0x00b0, 0x10, 2, 1),
++	PIN_FIELD_BASE(27, 27, IOCFG_RM, 0x00b0, 0x10, 5, 1),
++	PIN_FIELD_BASE(28, 28, IOCFG_RM, 0x00b0, 0x10, 4, 1),
++	PIN_FIELD_BASE(29, 29, IOCFG_RM, 0x00b0, 0x10, 0, 1),
++	PIN_FIELD_BASE(30, 30, IOCFG_RM, 0x00b0, 0x10, 1, 1),
++	PIN_FIELD_BASE(31, 31, IOCFG_RM, 0x00c0, 0x10, 11, 1),
++	PIN_FIELD_BASE(32, 32, IOCFG_RM, 0x00c0, 0x10, 10, 1),
++	PIN_FIELD_BASE(33, 33, IOCFG_RM, 0x00c0, 0x10, 13, 1),
++	PIN_FIELD_BASE(34, 34, IOCFG_RM, 0x00c0, 0x10, 12, 1),
++	PIN_FIELD_BASE(35, 35, IOCFG_RM, 0x00c0, 0x10, 15, 1),
++	PIN_FIELD_BASE(36, 36, IOCFG_RM, 0x00c0, 0x10, 14, 1),
++	PIN_FIELD_BASE(37, 37, IOCFG_RM, 0x00b0, 0x10, 21, 1),
++	PIN_FIELD_BASE(38, 38, IOCFG_RM, 0x00b0, 0x10, 18, 1),
++	PIN_FIELD_BASE(39, 39, IOCFG_RM, 0x00b0, 0x10, 19, 1),
++	PIN_FIELD_BASE(40, 40, IOCFG_RM, 0x00b0, 0x10, 20, 1),
++	PIN_FIELD_BASE(41, 41, IOCFG_RM, 0x00b0, 0x10, 22, 1),
++	PIN_FIELD_BASE(46, 46, IOCFG_LM, 0x0050, 0x10, 0, 1),
++	PIN_FIELD_BASE(47, 47, IOCFG_RM, 0x00b0, 0x10, 25, 1),
++	PIN_FIELD_BASE(48, 48, IOCFG_RM, 0x00b0, 0x10, 24, 1),
++	PIN_FIELD_BASE(49, 49, IOCFG_RM, 0x00b0, 0x10, 23, 1),
++	PIN_FIELD_BASE(50, 50, IOCFG_LM, 0x0050, 0x10, 5, 1),
++	PIN_FIELD_BASE(51, 51, IOCFG_LM, 0x0050, 0x10, 4, 1),
++	PIN_FIELD_BASE(52, 52, IOCFG_LM, 0x0050, 0x10, 3, 1),
++	PIN_FIELD_BASE(53, 53, IOCFG_LM, 0x0050, 0x10, 6, 1),
++	PIN_FIELD_BASE(54, 54, IOCFG_LM, 0x0050, 0x10, 7, 1),
++	PIN_FIELD_BASE(55, 55, IOCFG_RM, 0x00b0, 0x10, 26, 1),
++	PIN_FIELD_BASE(56, 56, IOCFG_RM, 0x00b0, 0x10, 29, 1),
++	PIN_FIELD_BASE(57, 57, IOCFG_LT, 0x00b0, 0x10, 6, 1),
++	PIN_FIELD_BASE(58, 58, IOCFG_LT, 0x00b0, 0x10, 9, 1),
++	PIN_FIELD_BASE(59, 59, IOCFG_RM, 0x00b0, 0x10, 27, 1),
++	PIN_FIELD_BASE(60, 60, IOCFG_RM, 0x00b0, 0x10, 30, 1),
++	PIN_FIELD_BASE(61, 61, IOCFG_RM, 0x00b0, 0x10, 28, 1),
++	PIN_FIELD_BASE(62, 62, IOCFG_RM, 0x00b0, 0x10, 31, 1),
++	PIN_FIELD_BASE(63, 63, IOCFG_LT, 0x00b0, 0x10, 7, 1),
++	PIN_FIELD_BASE(64, 64, IOCFG_LT, 0x00b0, 0x10, 10, 1),
++	PIN_FIELD_BASE(65, 65, IOCFG_RT, 0x0060, 0x10, 7, 1),
++	PIN_FIELD_BASE(66, 66, IOCFG_RT, 0x0060, 0x10, 9, 1),
++	PIN_FIELD_BASE(67, 67, IOCFG_RT, 0x0060, 0x10, 8, 1),
++	PIN_FIELD_BASE(68, 68, IOCFG_RT, 0x0060, 0x10, 10, 1),
++	PIN_FIELD_BASE(69, 69, IOCFG_RM, 0x00c0, 0x10, 1, 1),
++	PIN_FIELD_BASE(70, 70, IOCFG_RM, 0x00c0, 0x10, 0, 1),
++	PIN_FIELD_BASE(71, 71, IOCFG_RM, 0x00c0, 0x10, 5, 1),
++	PIN_FIELD_BASE(72, 72, IOCFG_RM, 0x00c0, 0x10, 4, 1),
++	PIN_FIELD_BASE(73, 73, IOCFG_RM, 0x00c0, 0x10, 2, 1),
++	PIN_FIELD_BASE(74, 74, IOCFG_RM, 0x00c0, 0x10, 3, 1),
++	PIN_FIELD_BASE(75, 75, IOCFG_RM, 0x00c0, 0x10, 7, 1),
++	PIN_FIELD_BASE(76, 76, IOCFG_RM, 0x00c0, 0x10, 6, 1),
++	PIN_FIELD_BASE(77, 77, IOCFG_RM, 0x00c0, 0x10, 9, 1),
++	PIN_FIELD_BASE(78, 78, IOCFG_RM, 0x00c0, 0x10, 8, 1),
++	PIN_FIELD_BASE(79, 79, IOCFG_RT, 0x0060, 0x10, 12, 1),
++	PIN_FIELD_BASE(80, 80, IOCFG_RT, 0x0060, 0x10, 11, 1),
++	PIN_FIELD_BASE(81, 81, IOCFG_RT, 0x0060, 0x10, 14, 1),
++	PIN_FIELD_BASE(82, 82, IOCFG_RT, 0x0060, 0x10, 13, 1),
++	PIN_FIELD_BASE(83, 83, IOCFG_LT, 0x00b0, 0x10, 16, 1),
++	PIN_FIELD_BASE(84, 84, IOCFG_LT, 0x00b0, 0x10, 15, 1),
++	PIN_FIELD_BASE(85, 85, IOCFG_LT, 0x00b0, 0x10, 17, 1),
++	PIN_FIELD_BASE(86, 86, IOCFG_LT, 0x00b0, 0x10, 19, 1),
++	PIN_FIELD_BASE(87, 87, IOCFG_LT, 0x00b0, 0x10, 18, 1),
++	PIN_FIELD_BASE(88, 88, IOCFG_LT, 0x00b0, 0x10, 20, 1),
++	PIN_FIELD_BASE(89, 89, IOCFG_LT, 0x00b0, 0x10, 22, 1),
++	PIN_FIELD_BASE(90, 90, IOCFG_LT, 0x00b0, 0x10, 21, 1),
++	PIN_FIELD_BASE(91, 91, IOCFG_LT, 0x00b0, 0x10, 23, 1),
++	PIN_FIELD_BASE(92, 92, IOCFG_LT, 0x00b0, 0x10, 3, 1),
++	PIN_FIELD_BASE(93, 93, IOCFG_LT, 0x00b0, 0x10, 2, 1),
++	PIN_FIELD_BASE(94, 94, IOCFG_LT, 0x00b0, 0x10, 5, 1),
++	PIN_FIELD_BASE(95, 95, IOCFG_LT, 0x00b0, 0x10, 4, 1),
++	PIN_FIELD_BASE(96, 96, IOCFG_LT, 0x00a0, 0x10, 31, 1),
++	PIN_FIELD_BASE(97, 97, IOCFG_LT, 0x00b0, 0x10, 0, 1),
++	PIN_FIELD_BASE(98, 98, IOCFG_LT, 0x00b0, 0x10, 8, 1),
++	PIN_FIELD_BASE(99, 99, IOCFG_LT, 0x00a0, 0x10, 30, 1),
++	PIN_FIELD_BASE(100, 100, IOCFG_LT, 0x00b0, 0x10, 1, 1),
++	PIN_FIELD_BASE(101, 101, IOCFG_LT, 0x00a0, 0x10, 0, 1),
++	PIN_FIELD_BASE(102, 102, IOCFG_LT, 0x00a0, 0x10, 5, 1),
++	PIN_FIELD_BASE(103, 103, IOCFG_LT, 0x00a0, 0x10, 3, 1),
++	PIN_FIELD_BASE(104, 104, IOCFG_LT, 0x00a0, 0x10, 4, 1),
++	PIN_FIELD_BASE(105, 105, IOCFG_LT, 0x00a0, 0x10, 1, 1),
++	PIN_FIELD_BASE(106, 106, IOCFG_LT, 0x00a0, 0x10, 2, 1),
++	PIN_FIELD_BASE(107, 107, IOCFG_LT, 0x00a0, 0x10, 21, 1),
++	PIN_FIELD_BASE(108, 108, IOCFG_LT, 0x00a0, 0x10, 16, 1),
++	PIN_FIELD_BASE(109, 109, IOCFG_LT, 0x00a0, 0x10, 22, 1),
++	PIN_FIELD_BASE(110, 110, IOCFG_LT, 0x00a0, 0x10, 17, 1),
++	PIN_FIELD_BASE(111, 111, IOCFG_LT, 0x00a0, 0x10, 18, 1),
++	PIN_FIELD_BASE(112, 112, IOCFG_LT, 0x00a0, 0x10, 19, 1),
++	PIN_FIELD_BASE(113, 113, IOCFG_LT, 0x00a0, 0x10, 20, 1),
++	PIN_FIELD_BASE(114, 114, IOCFG_LT, 0x00a0, 0x10, 28, 1),
++	PIN_FIELD_BASE(115, 115, IOCFG_LT, 0x00a0, 0x10, 23, 1),
++	PIN_FIELD_BASE(116, 116, IOCFG_LT, 0x00a0, 0x10, 29, 1),
++	PIN_FIELD_BASE(117, 117, IOCFG_LT, 0x00a0, 0x10, 24, 1),
++	PIN_FIELD_BASE(118, 118, IOCFG_LT, 0x00a0, 0x10, 25, 1),
++	PIN_FIELD_BASE(119, 119, IOCFG_LT, 0x00a0, 0x10, 26, 1),
++	PIN_FIELD_BASE(120, 120, IOCFG_LT, 0x00a0, 0x10, 27, 1),
++	PIN_FIELD_BASE(121, 121, IOCFG_LM, 0x0050, 0x10, 8, 1),
++	PIN_FIELD_BASE(122, 122, IOCFG_LM, 0x0050, 0x10, 11, 1),
++	PIN_FIELD_BASE(123, 123, IOCFG_LM, 0x0050, 0x10, 10, 1),
++	PIN_FIELD_BASE(124, 124, IOCFG_LM, 0x0050, 0x10, 9, 1),
++	PIN_FIELD_BASE(125, 125, IOCFG_LT, 0x00a0, 0x10, 6, 1),
++	PIN_FIELD_BASE(126, 126, IOCFG_LT, 0x00a0, 0x10, 7, 1),
++	PIN_FIELD_BASE(127, 127, IOCFG_LT, 0x00a0, 0x10, 8, 1),
++	PIN_FIELD_BASE(128, 128, IOCFG_LT, 0x00a0, 0x10, 9, 1),
++	PIN_FIELD_BASE(129, 129, IOCFG_LT, 0x00a0, 0x10, 10, 1),
++	PIN_FIELD_BASE(130, 130, IOCFG_LT, 0x00a0, 0x10, 11, 1),
++	PIN_FIELD_BASE(175, 175, IOCFG_LT, 0x00b0, 0x10, 11, 1),
++	PIN_FIELD_BASE(176, 176, IOCFG_LT, 0x00b0, 0x10, 12, 1),
++};
++
++static const struct mtk_pin_field_calc mt8188_pin_drv_range[] = {
++	PIN_FIELD_BASE(0, 0, IOCFG_RM, 0x0000, 0x10, 24, 3),
++	PIN_FIELD_BASE(1, 1, IOCFG_RM, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(2, 2, IOCFG_RM, 0x0010, 0x10, 0, 3),
++	PIN_FIELD_BASE(3, 3, IOCFG_RM, 0x0010, 0x10, 3, 3),
++	PIN_FIELD_BASE(4, 4, IOCFG_RM, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(5, 5, IOCFG_RM, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(6, 6, IOCFG_RM, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(7, 7, IOCFG_RM, 0x0010, 0x10, 6, 3),
++	PIN_FIELD_BASE(8, 8, IOCFG_RM, 0x0010, 0x10, 9, 3),
++	PIN_FIELD_BASE(9, 9, IOCFG_RM, 0x0010, 0x10, 12, 3),
++	PIN_FIELD_BASE(10, 10, IOCFG_RM, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(11, 11, IOCFG_RM, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(12, 12, IOCFG_LT, 0x0010, 0x10, 24, 3),
++	PIN_FIELD_BASE(13, 13, IOCFG_LT, 0x0010, 0x10, 27, 3),
++	PIN_FIELD_BASE(14, 14, IOCFG_LT, 0x0020, 0x10, 0, 3),
++	PIN_FIELD_BASE(15, 15, IOCFG_LT, 0x0020, 0x10, 3, 3),
++	PIN_FIELD_BASE(16, 16, IOCFG_LM, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(17, 17, IOCFG_LM, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(18, 18, IOCFG_RT, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(19, 19, IOCFG_RT, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(20, 20, IOCFG_RT, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(21, 21, IOCFG_RT, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(22, 22, IOCFG_RT, 0x0000, 0x10, 0, 3),
++	PIN_FIELD_BASE(23, 23, IOCFG_RT, 0x0000, 0x10, 3, 3),
++	PIN_FIELD_BASE(24, 24, IOCFG_RT, 0x0000, 0x10, 6, 3),
++	PIN_FIELD_BASE(25, 25, IOCFG_RM, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(26, 26, IOCFG_RM, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(27, 27, IOCFG_RM, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(28, 28, IOCFG_RM, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(29, 29, IOCFG_RM, 0x0020, 0x10, 3, 3),
++	PIN_FIELD_BASE(30, 30, IOCFG_RM, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(31, 31, IOCFG_RM, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(32, 32, IOCFG_RM, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(33, 33, IOCFG_RM, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(34, 34, IOCFG_RM, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(35, 35, IOCFG_RM, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(36, 36, IOCFG_RM, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(37, 37, IOCFG_RM, 0x0010, 0x10, 27, 3),
++	PIN_FIELD_BASE(38, 38, IOCFG_RM, 0x0010, 0x10, 18, 3),
++	PIN_FIELD_BASE(39, 39, IOCFG_RM, 0x0010, 0x10, 21, 3),
++	PIN_FIELD_BASE(40, 40, IOCFG_RM, 0x0010, 0x10, 24, 3),
++	PIN_FIELD_BASE(41, 41, IOCFG_RM, 0x0020, 0x10, 0, 3),
++	PIN_FIELD_BASE(42, 42, IOCFG_LT, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(43, 43, IOCFG_LT, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(44, 44, IOCFG_LT, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(45, 45, IOCFG_LT, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(46, 46, IOCFG_LM, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(47, 47, IOCFG_RM, 0x0020, 0x10, 3, 3),
++	PIN_FIELD_BASE(48, 48, IOCFG_RM, 0x0020, 0x10, 3, 3),
++	PIN_FIELD_BASE(49, 49, IOCFG_RM, 0x0020, 0x10, 3, 3),
++	PIN_FIELD_BASE(50, 50, IOCFG_LM, 0x0000, 0x10, 6, 3),
++	PIN_FIELD_BASE(51, 51, IOCFG_LM, 0x0000, 0x10, 3, 3),
++	PIN_FIELD_BASE(52, 52, IOCFG_LM, 0x0000, 0x10, 0, 3),
++	PIN_FIELD_BASE(53, 53, IOCFG_LM, 0x0000, 0x10, 9, 3),
++	PIN_FIELD_BASE(54, 54, IOCFG_LM, 0x0000, 0x10, 12, 3),
++	PIN_FIELD_BASE(55, 55, IOCFG_RM, 0x0020, 0x10, 27, 3),
++	PIN_FIELD_BASE(56, 56, IOCFG_RM, 0x0030, 0x10, 6, 3),
++	PIN_FIELD_BASE(57, 57, IOCFG_LT, 0x0030, 0x10, 9, 3),
++	PIN_FIELD_BASE(58, 58, IOCFG_LT, 0x0030, 0x10, 15, 3),
++	PIN_FIELD_BASE(59, 59, IOCFG_RM, 0x0030, 0x10, 0, 3),
++	PIN_FIELD_BASE(60, 60, IOCFG_RM, 0x0030, 0x10, 9, 3),
++	PIN_FIELD_BASE(61, 61, IOCFG_RM, 0x0030, 0x10, 3, 3),
++	PIN_FIELD_BASE(62, 62, IOCFG_RM, 0x0030, 0x10, 12, 3),
++	PIN_FIELD_BASE(63, 63, IOCFG_LT, 0x0030, 0x10, 12, 3),
++	PIN_FIELD_BASE(64, 64, IOCFG_LT, 0x0030, 0x10, 18, 3),
++	PIN_FIELD_BASE(65, 65, IOCFG_RT, 0x0010, 0x10, 0, 3),
++	PIN_FIELD_BASE(66, 66, IOCFG_RT, 0x0010, 0x10, 6, 3),
++	PIN_FIELD_BASE(67, 67, IOCFG_RT, 0x0010, 0x10, 3, 3),
++	PIN_FIELD_BASE(68, 68, IOCFG_RT, 0x0010, 0x10, 9, 3),
++	PIN_FIELD_BASE(69, 69, IOCFG_RM, 0x0030, 0x10, 18, 3),
++	PIN_FIELD_BASE(70, 70, IOCFG_RM, 0x0030, 0x10, 15, 3),
++	PIN_FIELD_BASE(71, 71, IOCFG_RM, 0x0040, 0x10, 0, 3),
++	PIN_FIELD_BASE(72, 72, IOCFG_RM, 0x0030, 0x10, 27, 3),
++	PIN_FIELD_BASE(73, 73, IOCFG_RM, 0x0030, 0x10, 21, 3),
++	PIN_FIELD_BASE(74, 74, IOCFG_RM, 0x0030, 0x10, 24, 3),
++	PIN_FIELD_BASE(75, 75, IOCFG_RM, 0x0040, 0x10, 6, 3),
++	PIN_FIELD_BASE(76, 76, IOCFG_RM, 0x0040, 0x10, 3, 3),
++	PIN_FIELD_BASE(77, 77, IOCFG_RM, 0x0040, 0x10, 12, 3),
++	PIN_FIELD_BASE(78, 78, IOCFG_RM, 0x0040, 0x10, 9, 3),
++	PIN_FIELD_BASE(79, 79, IOCFG_RT, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(80, 80, IOCFG_RT, 0x0010, 0x10, 12, 3),
++	PIN_FIELD_BASE(81, 81, IOCFG_RT, 0x0010, 0x10, 21, 3),
++	PIN_FIELD_BASE(82, 82, IOCFG_RT, 0x0010, 0x10, 18, 3),
++	PIN_FIELD_BASE(83, 83, IOCFG_LT, 0x0030, 0x10, 0, 3),
++	PIN_FIELD_BASE(84, 84, IOCFG_LT, 0x0020, 0x10, 27, 3),
++	PIN_FIELD_BASE(85, 85, IOCFG_LT, 0x0030, 0x10, 0, 3),
++	PIN_FIELD_BASE(86, 86, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(87, 87, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(88, 88, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(89, 89, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(90, 90, IOCFG_LT, 0x0030, 0x10, 0, 3),
++	PIN_FIELD_BASE(91, 91, IOCFG_LT, 0x0030, 0x10, 0, 3),
++	PIN_FIELD_BASE(92, 92, IOCFG_LT, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(93, 93, IOCFG_LT, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(94, 94, IOCFG_LT, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(95, 95, IOCFG_LT, 0x0020, 0x10, 9, 3),
++	PIN_FIELD_BASE(96, 96, IOCFG_LT, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(97, 97, IOCFG_LT, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(98, 98, IOCFG_LT, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(99, 99, IOCFG_LT, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(100, 100, IOCFG_LT, 0x0030, 0x10, 6, 3),
++	PIN_FIELD_BASE(101, 101, IOCFG_LT, 0x0000, 0x10, 0, 3),
++	PIN_FIELD_BASE(102, 102, IOCFG_LT, 0x0000, 0x10, 15, 3),
++	PIN_FIELD_BASE(103, 103, IOCFG_LT, 0x0000, 0x10, 9, 3),
++	PIN_FIELD_BASE(104, 104, IOCFG_LT, 0x0000, 0x10, 12, 3),
++	PIN_FIELD_BASE(105, 105, IOCFG_LT, 0x0000, 0x10, 3, 3),
++	PIN_FIELD_BASE(106, 106, IOCFG_LT, 0x0000, 0x10, 6, 3),
++	PIN_FIELD_BASE(107, 107, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(108, 108, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(109, 109, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(110, 110, IOCFG_LT, 0x0020, 0x10, 6, 3),
++	PIN_FIELD_BASE(111, 111, IOCFG_LT, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(112, 112, IOCFG_LT, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(113, 113, IOCFG_LT, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(114, 114, IOCFG_LT, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(115, 115, IOCFG_LT, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(116, 116, IOCFG_LT, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(117, 117, IOCFG_LT, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(118, 118, IOCFG_LT, 0x0020, 0x10, 12, 3),
++	PIN_FIELD_BASE(119, 119, IOCFG_LT, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(120, 120, IOCFG_LT, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(121, 121, IOCFG_LM, 0x0010, 0x10, 3, 3),
++	PIN_FIELD_BASE(122, 122, IOCFG_LM, 0x0010, 0x10, 12, 3),
++	PIN_FIELD_BASE(123, 123, IOCFG_LM, 0x0010, 0x10, 9, 3),
++	PIN_FIELD_BASE(124, 124, IOCFG_LM, 0x0010, 0x10, 6, 3),
++	PIN_FIELD_BASE(125, 125, IOCFG_LT, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(126, 126, IOCFG_LT, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(127, 127, IOCFG_LT, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(128, 128, IOCFG_LT, 0x0020, 0x10, 27, 3),
++	PIN_FIELD_BASE(129, 129, IOCFG_LT, 0x0020, 0x10, 27, 3),
++	PIN_FIELD_BASE(130, 130, IOCFG_LT, 0x0020, 0x10, 27, 3),
++	PIN_FIELD_BASE(131, 131, IOCFG_RM, 0x0000, 0x10, 0, 3),
++	PIN_FIELD_BASE(132, 132, IOCFG_RM, 0x0000, 0x10, 15, 3),
++	PIN_FIELD_BASE(133, 133, IOCFG_RM, 0x0000, 0x10, 18, 3),
++	PIN_FIELD_BASE(134, 134, IOCFG_RM, 0x0000, 0x10, 21, 3),
++	PIN_FIELD_BASE(135, 135, IOCFG_RM, 0x0020, 0x10, 15, 3),
++	PIN_FIELD_BASE(136, 136, IOCFG_RM, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(137, 137, IOCFG_RM, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(138, 138, IOCFG_RM, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(139, 139, IOCFG_RM, 0x0020, 0x10, 18, 3),
++	PIN_FIELD_BASE(140, 140, IOCFG_RM, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(141, 141, IOCFG_RM, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(142, 142, IOCFG_RM, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(143, 143, IOCFG_RM, 0x0000, 0x10, 3, 3),
++	PIN_FIELD_BASE(144, 144, IOCFG_RM, 0x0000, 0x10, 6, 3),
++	PIN_FIELD_BASE(145, 145, IOCFG_RM, 0x0000, 0x10, 9, 3),
++	PIN_FIELD_BASE(146, 146, IOCFG_RM, 0x0000, 0x10, 12, 3),
++	PIN_FIELD_BASE(147, 147, IOCFG_RM, 0x0020, 0x10, 21, 3),
++	PIN_FIELD_BASE(148, 148, IOCFG_RM, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(149, 149, IOCFG_RM, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(150, 150, IOCFG_RM, 0x0020, 0x10, 24, 3),
++	PIN_FIELD_BASE(151, 151, IOCFG_LT, 0x0010, 0x10, 15, 3),
++	PIN_FIELD_BASE(152, 152, IOCFG_LT, 0x0010, 0x10, 12, 3),
++	PIN_FIELD_BASE(153, 153, IOCFG_LT, 0x0010, 0x10, 9, 3),
++	PIN_FIELD_BASE(154, 154, IOCFG_LT, 0x0010, 0x10, 6, 3),
++	PIN_FIELD_BASE(155, 155, IOCFG_LT, 0x0010, 0x10, 21, 3),
++	PIN_FIELD_BASE(156, 156, IOCFG_LT, 0x0000, 0x10, 21, 3),
++	PIN_FIELD_BASE(157, 157, IOCFG_LT, 0x0000, 0x10, 18, 3),
++	PIN_FIELD_BASE(158, 158, IOCFG_LT, 0x0010, 0x10, 3, 3),
++	PIN_FIELD_BASE(159, 159, IOCFG_LT, 0x0010, 0x10, 0, 3),
++	PIN_FIELD_BASE(160, 160, IOCFG_LT, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(161, 161, IOCFG_LT, 0x0000, 0x10, 24, 3),
++	PIN_FIELD_BASE(162, 162, IOCFG_LT, 0x0010, 0x10, 18, 3),
++	PIN_FIELD_BASE(163, 163, IOCFG_RT, 0x0000, 0x10, 12, 3),
++	PIN_FIELD_BASE(164, 164, IOCFG_RT, 0x0000, 0x10, 9, 3),
++	PIN_FIELD_BASE(165, 165, IOCFG_RT, 0x0000, 0x10, 15, 3),
++	PIN_FIELD_BASE(166, 166, IOCFG_RT, 0x0000, 0x10, 18, 3),
++	PIN_FIELD_BASE(167, 167, IOCFG_RT, 0x0000, 0x10, 21, 3),
++	PIN_FIELD_BASE(168, 168, IOCFG_RT, 0x0000, 0x10, 24, 3),
++	PIN_FIELD_BASE(169, 169, IOCFG_LM, 0x0000, 0x10, 18, 3),
++	PIN_FIELD_BASE(170, 170, IOCFG_LM, 0x0000, 0x10, 15, 3),
++	PIN_FIELD_BASE(171, 171, IOCFG_LM, 0x0000, 0x10, 21, 3),
++	PIN_FIELD_BASE(172, 172, IOCFG_LM, 0x0000, 0x10, 24, 3),
++	PIN_FIELD_BASE(173, 173, IOCFG_LM, 0x0000, 0x10, 27, 3),
++	PIN_FIELD_BASE(174, 174, IOCFG_LM, 0x0010, 0x10, 0, 3),
++	PIN_FIELD_BASE(175, 175, IOCFG_LT, 0x0030, 0x10, 3, 3),
++	PIN_FIELD_BASE(176, 176, IOCFG_LT, 0x0030, 0x10, 3, 3),
++};
++
++static const struct mtk_pin_reg_calc mt8188_reg_cals[PINCTRL_PIN_REG_MAX] = {
++	[PINCTRL_PIN_REG_MODE] = MTK_RANGE(mt8188_pin_mode_range),
++	[PINCTRL_PIN_REG_DIR] = MTK_RANGE(mt8188_pin_dir_range),
++	[PINCTRL_PIN_REG_DI] = MTK_RANGE(mt8188_pin_di_range),
++	[PINCTRL_PIN_REG_DO] = MTK_RANGE(mt8188_pin_do_range),
++	[PINCTRL_PIN_REG_SMT] = MTK_RANGE(mt8188_pin_smt_range),
++	[PINCTRL_PIN_REG_IES] = MTK_RANGE(mt8188_pin_ies_range),
++	[PINCTRL_PIN_REG_PUPD] = MTK_RANGE(mt8188_pin_pupd_range),
++	[PINCTRL_PIN_REG_R0] = MTK_RANGE(mt8188_pin_r0_range),
++	[PINCTRL_PIN_REG_R1] = MTK_RANGE(mt8188_pin_r1_range),
++	[PINCTRL_PIN_REG_PU] = MTK_RANGE(mt8188_pin_pu_range),
++	[PINCTRL_PIN_REG_PD] = MTK_RANGE(mt8188_pin_pd_range),
++	[PINCTRL_PIN_REG_DRV] = MTK_RANGE(mt8188_pin_drv_range),
++};
++
++static const struct mtk_pin_desc mt8188_pins[] = {
++	MT8188_TYPE0_PIN(0, "GPIO00"),
++	MT8188_TYPE0_PIN(1, "GPIO01"),
++	MT8188_TYPE0_PIN(2, "GPIO02"),
++	MT8188_TYPE0_PIN(3, "GPIO03"),
++	MT8188_TYPE0_PIN(4, "GPIO04"),
++	MT8188_TYPE0_PIN(5, "GPIO05"),
++	MT8188_TYPE0_PIN(6, "GPIO06"),
++	MT8188_TYPE0_PIN(7, "GPIO07"),
++	MT8188_TYPE0_PIN(8, "GPIO08"),
++	MT8188_TYPE0_PIN(9, "GPIO09"),
++	MT8188_TYPE0_PIN(10, "GPIO10"),
++	MT8188_TYPE0_PIN(11, "GPIO11"),
++	MT8188_TYPE0_PIN(12, "GPIO12"),
++	MT8188_TYPE0_PIN(13, "GPIO13"),
++	MT8188_TYPE0_PIN(14, "GPIO14"),
++	MT8188_TYPE0_PIN(15, "GPIO15"),
++	MT8188_TYPE0_PIN(16, "GPIO16"),
++	MT8188_TYPE0_PIN(17, "GPIO17"),
++	MT8188_TYPE0_PIN(18, "CMMPDN0"),
++	MT8188_TYPE0_PIN(19, "CMMRST0"),
++	MT8188_TYPE0_PIN(20, "CMMPDN1"),
++	MT8188_TYPE0_PIN(21, "CMMRST1"),
++	MT8188_TYPE0_PIN(22, "CMMCLK0"),
++	MT8188_TYPE0_PIN(23, "CMMCLK1"),
++	MT8188_TYPE0_PIN(24, "CMMCLK2"),
++	MT8188_TYPE0_PIN(25, "DSI0_LCM_RST"),
++	MT8188_TYPE0_PIN(26, "DSI0_DSI_TE"),
++	MT8188_TYPE0_PIN(27, "DSI1_LCM_RST"),
++	MT8188_TYPE0_PIN(28, "DSI1_DSI_TE"),
++	MT8188_TYPE0_PIN(29, "DISP_PWM0"),
++	MT8188_TYPE0_PIN(30, "DISP_PWM1"),
++	MT8188_TYPE0_PIN(31, "UART0_TXD"),
++	MT8188_TYPE0_PIN(32, "UART0_RXD"),
++	MT8188_TYPE0_PIN(33, "UART1_TXD"),
++	MT8188_TYPE0_PIN(34, "UART1_RXD"),
++	MT8188_TYPE0_PIN(35, "UART2_TXD"),
++	MT8188_TYPE0_PIN(36, "UART2_RXD"),
++	MT8188_TYPE0_PIN(37, "JTMS"),
++	MT8188_TYPE0_PIN(38, "JTCK"),
++	MT8188_TYPE0_PIN(39, "JTDI"),
++	MT8188_TYPE0_PIN(40, "JTDO"),
++	MT8188_TYPE0_PIN(41, "JTRST"),
++	MT8188_TYPE1_PIN(42, "KPCOL0"),
++	MT8188_TYPE1_PIN(43, "KPCOL1"),
++	MT8188_TYPE1_PIN(44, "KPROW0"),
++	MT8188_TYPE1_PIN(45, "KPROW1"),
++	MT8188_TYPE0_PIN(46, "DPTX_HPD"),
++	MT8188_TYPE0_PIN(47, "PCIE_WAKE_N"),
++	MT8188_TYPE0_PIN(48, "PCIE_PERESET_N"),
++	MT8188_TYPE0_PIN(49, "PCIE_CLKREQ_N"),
++	MT8188_TYPE0_PIN(50, "HDMITX_PWR5V"),
++	MT8188_TYPE0_PIN(51, "HDMITX_HTPLG"),
++	MT8188_TYPE0_PIN(52, "HDMITX_CEC"),
++	MT8188_TYPE0_PIN(53, "HDMITX_SCL"),
++	MT8188_TYPE0_PIN(54, "HDMITX_SDA"),
++	MT8188_TYPE0_PIN(55, "SCL0"),
++	MT8188_TYPE0_PIN(56, "SDA0"),
++	MT8188_TYPE0_PIN(57, "SCL1"),
++	MT8188_TYPE0_PIN(58, "SDA1"),
++	MT8188_TYPE0_PIN(59, "SCL2"),
++	MT8188_TYPE0_PIN(60, "SDA2"),
++	MT8188_TYPE0_PIN(61, "SCL3"),
++	MT8188_TYPE0_PIN(62, "SDA3"),
++	MT8188_TYPE0_PIN(63, "SCL4"),
++	MT8188_TYPE0_PIN(64, "SDA4"),
++	MT8188_TYPE0_PIN(65, "SCL5"),
++	MT8188_TYPE0_PIN(66, "SDA5"),
++	MT8188_TYPE0_PIN(67, "SCL6"),
++	MT8188_TYPE0_PIN(68, "SDA6"),
++	MT8188_TYPE0_PIN(69, "SPIM0_CSB"),
++	MT8188_TYPE0_PIN(70, "SPIM0_CLK"),
++	MT8188_TYPE0_PIN(71, "SPIM0_MOSI"),
++	MT8188_TYPE0_PIN(72, "SPIM0_MISO"),
++	MT8188_TYPE0_PIN(73, "SPIM0_MIO2"),
++	MT8188_TYPE0_PIN(74, "SPIM0_MIO3"),
++	MT8188_TYPE0_PIN(75, "SPIM1_CSB"),
++	MT8188_TYPE0_PIN(76, "SPIM1_CLK"),
++	MT8188_TYPE0_PIN(77, "SPIM1_MOSI"),
++	MT8188_TYPE0_PIN(78, "SPIM1_MISO"),
++	MT8188_TYPE0_PIN(79, "SPIM2_CSB"),
++	MT8188_TYPE0_PIN(80, "SPIM2_CLK"),
++	MT8188_TYPE0_PIN(81, "SPIM2_MOSI"),
++	MT8188_TYPE0_PIN(82, "SPIM2_MISO"),
++	MT8188_TYPE0_PIN(83, "USB0_IDDIG"),
++	MT8188_TYPE0_PIN(84, "USB0_DRV_VBUS"),
++	MT8188_TYPE0_PIN(85, "USB0_VBUS_VALID"),
++	MT8188_TYPE0_PIN(86, "USB1_IDDIG"),
++	MT8188_TYPE0_PIN(87, "USB1_DRV_VBUS"),
++	MT8188_TYPE0_PIN(88, "USB1_VBUS_VALID"),
++	MT8188_TYPE0_PIN(89, "USB2_IDDIG"),
++	MT8188_TYPE0_PIN(90, "USB2_DRV_VBUS"),
++	MT8188_TYPE0_PIN(91, "USB2_VBUS_VALID"),
++	MT8188_TYPE0_PIN(92, "PWRAP_SPI_CSN"),
++	MT8188_TYPE0_PIN(93, "PWRAP_SPI_CK"),
++	MT8188_TYPE0_PIN(94, "PWRAP_SPI_MO"),
++	MT8188_TYPE0_PIN(95, "PWRAP_SPI_MI"),
++	MT8188_TYPE0_PIN(96, "PMIC_SRCLKENA0"),
++	MT8188_TYPE0_PIN(97, "PMIC_SRCLKENA1"),
++	MT8188_TYPE0_PIN(98, "SCP_VREQ_VAO"),
++	MT8188_TYPE0_PIN(99, "PMIC_RTC32K_CK"),
++	MT8188_TYPE0_PIN(100, "PMIC_WATCHDOG"),
++	MT8188_TYPE0_PIN(101, "AUD_CLK_MOSI"),
++	MT8188_TYPE0_PIN(102, "AUD_SYNC_MOSI"),
++	MT8188_TYPE0_PIN(103, "AUD_DAT_MOSI0"),
++	MT8188_TYPE0_PIN(104, "AUD_DAT_MOSI1"),
++	MT8188_TYPE0_PIN(105, "AUD_DAT_MISO0"),
++	MT8188_TYPE0_PIN(106, "AUD_DAT_MISO1"),
++	MT8188_TYPE0_PIN(107, "I2SIN_MCK"),
++	MT8188_TYPE0_PIN(108, "I2SIN_BCK"),
++	MT8188_TYPE0_PIN(109, "I2SIN_WS"),
++	MT8188_TYPE0_PIN(110, "I2SIN_D0"),
++	MT8188_TYPE0_PIN(111, "I2SIN_D1"),
++	MT8188_TYPE0_PIN(112, "I2SIN_D2"),
++	MT8188_TYPE0_PIN(113, "I2SIN_D3"),
++	MT8188_TYPE0_PIN(114, "I2SO2_MCK"),
++	MT8188_TYPE0_PIN(115, "I2SO2_BCK"),
++	MT8188_TYPE0_PIN(116, "I2SO2_WS"),
++	MT8188_TYPE0_PIN(117, "I2SO2_D0"),
++	MT8188_TYPE0_PIN(118, "I2SO2_D1"),
++	MT8188_TYPE0_PIN(119, "I2SO2_D2"),
++	MT8188_TYPE0_PIN(120, "I2SO2_D3"),
++	MT8188_TYPE0_PIN(121, "PCM_CLK"),
++	MT8188_TYPE0_PIN(122, "PCM_SYNC"),
++	MT8188_TYPE0_PIN(123, "PCM_DO"),
++	MT8188_TYPE0_PIN(124, "PCM_DI"),
++	MT8188_TYPE0_PIN(125, "DMIC1_CLK"),
++	MT8188_TYPE0_PIN(126, "DMIC1_DAT"),
++	MT8188_TYPE0_PIN(127, "DMIC1_DAT_R"),
++	MT8188_TYPE0_PIN(128, "DMIC2_CLK"),
++	MT8188_TYPE0_PIN(129, "DMIC2_DAT"),
++	MT8188_TYPE0_PIN(130, "DMIC2_DAT_R"),
++	MT8188_TYPE1_PIN(131, "DPI_D0"),
++	MT8188_TYPE1_PIN(132, "DPI_D1"),
++	MT8188_TYPE1_PIN(133, "DPI_D2"),
++	MT8188_TYPE1_PIN(134, "DPI_D3"),
++	MT8188_TYPE1_PIN(135, "DPI_D4"),
++	MT8188_TYPE1_PIN(136, "DPI_D5"),
++	MT8188_TYPE1_PIN(137, "DPI_D6"),
++	MT8188_TYPE1_PIN(138, "DPI_D7"),
++	MT8188_TYPE1_PIN(139, "DPI_D8"),
++	MT8188_TYPE1_PIN(140, "DPI_D9"),
++	MT8188_TYPE1_PIN(141, "DPI_D10"),
++	MT8188_TYPE1_PIN(142, "DPI_D11"),
++	MT8188_TYPE1_PIN(143, "DPI_D12"),
++	MT8188_TYPE1_PIN(144, "DPI_D13"),
++	MT8188_TYPE1_PIN(145, "DPI_D14"),
++	MT8188_TYPE1_PIN(146, "DPI_D15"),
++	MT8188_TYPE1_PIN(147, "DPI_HSYNC"),
++	MT8188_TYPE1_PIN(148, "DPI_VSYNC"),
++	MT8188_TYPE1_PIN(149, "DPI_DE"),
++	MT8188_TYPE1_PIN(150, "DPI_CK"),
++	MT8188_TYPE1_PIN(151, "EMMC_DAT7"),
++	MT8188_TYPE1_PIN(152, "EMMC_DAT6"),
++	MT8188_TYPE1_PIN(153, "EMMC_DAT5"),
++	MT8188_TYPE1_PIN(154, "EMMC_DAT4"),
++	MT8188_TYPE1_PIN(155, "EMMC_RSTB"),
++	MT8188_TYPE1_PIN(156, "EMMC_CMD"),
++	MT8188_TYPE1_PIN(157, "EMMC_CLK"),
++	MT8188_TYPE1_PIN(158, "EMMC_DAT3"),
++	MT8188_TYPE1_PIN(159, "EMMC_DAT2"),
++	MT8188_TYPE1_PIN(160, "EMMC_DAT1"),
++	MT8188_TYPE1_PIN(161, "EMMC_DAT0"),
++	MT8188_TYPE1_PIN(162, "EMMC_DSL"),
++	MT8188_TYPE1_PIN(163, "MSDC1_CMD"),
++	MT8188_TYPE1_PIN(164, "MSDC1_CLK"),
++	MT8188_TYPE1_PIN(165, "MSDC1_DAT0"),
++	MT8188_TYPE1_PIN(166, "MSDC1_DAT1"),
++	MT8188_TYPE1_PIN(167, "MSDC1_DAT2"),
++	MT8188_TYPE1_PIN(168, "MSDC1_DAT3"),
++	MT8188_TYPE1_PIN(169, "MSDC2_CMD"),
++	MT8188_TYPE1_PIN(170, "MSDC2_CLK"),
++	MT8188_TYPE1_PIN(171, "MSDC2_DAT0"),
++	MT8188_TYPE1_PIN(172, "MSDC2_DAT1"),
++	MT8188_TYPE1_PIN(173, "MSDC2_DAT2"),
++	MT8188_TYPE1_PIN(174, "MSDC2_DAT3"),
++	MT8188_TYPE0_PIN(175, "SPMI_M_SCL"),
++	MT8188_TYPE0_PIN(176, "SPMI_M_SDA"),
++};
++
++// =========================================================================
++
++static const struct mtk_io_type_desc mt8188_io_type_desc[] = {
++	[IO_TYPE_GRP0] = {
++		.name = "mt8188",
++		.bias_set = mtk_pinconf_bias_set_pu_pd,
++		.drive_set = mtk_pinconf_drive_set_v1,
++		.input_enable = mtk_pinconf_input_enable_v1,
++	},
++	[IO_TYPE_GRP1] = {
++		.name = "MSDC",
++		.bias_set = mtk_pinconf_bias_set_pupd_r1_r0,
++		.drive_set = mtk_pinconf_drive_set_v1,
++		.input_enable = mtk_pinconf_input_enable_v1,
++	},
++};
++
++static int mt8188_uart0_pins[] = {32, 31};
++static int mt8188_uart0_funcs[] = {1, 1};
++
++static int mt8188_uart1_pins[] = {34, 33};
++static int mt8188_uart1_funcs[] = {1, 1};
++
++static int mt8188_msdc0_pins[] = {151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162};
++static int mt8188_msdc0_funcs[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
++
++static int mt8188_i2c0_pins[] = {55, 56};
++static int mt8188_i2c0_funcs[] = {1, 1};
++
++static int mt8188_i2c1_pins[] = {57, 58};
++static int mt8188_i2c1_funcs[] = {1, 1};
++
++static int mt8188_i2c2_pins[] = {59, 60};
++static int mt8188_i2c2_funcs[] = {1, 1};
++
++static int mt8188_i2c3_pins[] = {61, 62};
++static int mt8188_i2c3_funcs[] = {1, 1};
++
++static int mt8188_i2c4_pins[] = {63, 64};
++static int mt8188_i2c4_funcs[] = {1, 1};
++
++static int mt8188_i2c5_pins[] = {65, 66};
++static int mt8188_i2c5_funcs[] = {1, 1};
++
++static int mt8188_i2c6_pins[] = {67, 68};
++static int mt8188_i2c6_funcs[] = {1, 1};
++
++static int mt8188_spi0_pins[] = {69, 70, 71, 72};
++static int mt8188_spi0_funcs[] = {1, 1, 1, 1};
++
++static int mt8188_spi1_pins[] = {75, 76, 77, 78};
++static int mt8188_spi1_funcs[] = {1, 1, 1, 1};
++
++static int mt8188_spi2_pins[] = {79, 80, 81, 82};
++static int mt8188_spi2_funcs[] = {1, 1, 1, 1};
++
++static const struct mtk_group_desc mt8188_groups[] = {
++	PINCTRL_PIN_GROUP("uart0_0_rxd_txd", mt8188_uart0),
++	PINCTRL_PIN_GROUP("uart1_0", mt8188_uart1),
++	PINCTRL_PIN_GROUP("msdc0", mt8188_msdc0),
++	PINCTRL_PIN_GROUP("i2c0", mt8188_i2c0),
++	PINCTRL_PIN_GROUP("i2c1", mt8188_i2c1),
++	PINCTRL_PIN_GROUP("i2c2", mt8188_i2c2),
++	PINCTRL_PIN_GROUP("i2c3", mt8188_i2c3),
++	PINCTRL_PIN_GROUP("i2c4", mt8188_i2c4),
++	PINCTRL_PIN_GROUP("i2c5", mt8188_i2c5),
++	PINCTRL_PIN_GROUP("i2c6", mt8188_i2c6),
++	PINCTRL_PIN_GROUP("spi0", mt8188_spi0),
++	PINCTRL_PIN_GROUP("spi1", mt8188_spi1),
++	PINCTRL_PIN_GROUP("spi2", mt8188_spi2),
++};
++
++static const char *const mt8188_uart_groups[] = {
++	"uart0_0_rxd_txd", "uart1_0",
++};
++
++static const char *const mt8188_msdc_groups[] = {
++	"msdc0",
++};
++
++static const char *const mt8188_i2c_groups[] = {
++	"i2c0", "i2c1", "i2c2", "i2c3", "i2c4", "i2c5", "i2c6"
++};
++
++static const char *const mt8188_spi_groups[] = {
++	"spi0", "spi1", "spi2",
++};
++
++static const struct mtk_function_desc mt8188_functions[] = {
++	{"uart", mt8188_uart_groups, ARRAY_SIZE(mt8188_uart_groups)},
++	{"msdc", mt8188_msdc_groups, ARRAY_SIZE(mt8188_msdc_groups)},
++	{"i2c", mt8188_i2c_groups, ARRAY_SIZE(mt8188_i2c_groups)},
++	{"spi", mt8188_spi_groups, ARRAY_SIZE(mt8188_spi_groups)},
++};
++
++static struct mtk_pinctrl_soc mt8188_data = {
++	.name = "mt8188_pinctrl",
++	.reg_cal = mt8188_reg_cals,
++	.pins = mt8188_pins,
++	.npins = ARRAY_SIZE(mt8188_pins),
++	.grps = mt8188_groups,
++	.ngrps = ARRAY_SIZE(mt8188_groups),
++	.funcs = mt8188_functions,
++	.nfuncs = ARRAY_SIZE(mt8188_functions),
++	.io_type = mt8188_io_type_desc,
++	.ntype = ARRAY_SIZE(mt8188_io_type_desc),
++	.base_names = mt8188_pinctrl_register_base_names,
++	.nbase_names = ARRAY_SIZE(mt8188_pinctrl_register_base_names),
++	.base_calc = 1,
++	.rev = MTK_PINCTRL_V1,
++};
++
++static int mtk_pinctrl_mt8188_probe(struct udevice *dev)
++{
++	return mtk_pinctrl_common_probe(dev, &mt8188_data);
 +}
 +
- const struct pinctrl_ops mtk_pinctrl_ops = {
- 	.get_pins_count = mtk_get_pins_count,
- 	.get_pin_name = mtk_get_pin_name,
-@@ -674,6 +685,7 @@ const struct pinctrl_ops mtk_pinctrl_ops = {
- 	.pinconf_group_set = mtk_pinconf_group_set,
- #endif
- 	.set_state = pinctrl_generic_set_state,
-+	.pinmux_property_set = mtk_pinctrl_pinmux_property_set,
- };
- 
- #if CONFIG_IS_ENABLED(DM_GPIO) || \
++static const struct udevice_id mt8188_pctrl_match[] = {
++	{.compatible = "mediatek,mt8188-pinctrl"},
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(mt8188_pinctrl) = {
++	.name = "mt8188_pinctrl",
++	.id = UCLASS_PINCTRL,
++	.of_match = mt8188_pctrl_match,
++	.ops = &mtk_pinctrl_ops,
++	.probe = mtk_pinctrl_mt8188_probe,
++	.priv_auto = sizeof(struct mtk_pinctrl_priv),
++};
 
 -- 
 2.52.0
