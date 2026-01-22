@@ -4,164 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D5CC44500
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 07:20:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D892BC44536
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 08:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECC4A8341A;
-	Thu, 22 Jan 2026 08:20:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 07E4483A6A;
+	Thu, 22 Jan 2026 09:40:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FKFFT0a4";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="kZYv8UOP";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZMiNSzvy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C93CB8397D; Thu, 22 Jan 2026 08:20:11 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 3FA8680077; Thu, 22 Jan 2026 09:40:06 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD5B280077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 08:20:08 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z0GeaopGDSJAQaN2ZahAQ0W/hD83hP9G9qbFNKYLqTK1u3nvPaaqI9GPiY4kLDP8WSTOZu2WEbt1Pet09rhAlbwtXuYNjawU9+DT+M8r0hQhQ1ZL8FJ7SZ/CNamfil9j1c5rDtHn7vXgKX+CqqBn5L4ZQWi9z3crtsLkNh0batPsGPQB2WJOEoxsWPIp7zV9FhbVR+Evv9r+UEXqZ+CFsK5qfwjqNmJ1329cSaDxPqfcRIE2CQliqplD6EG+ecA6Qy1zOgOhN148u9sIIabwFIbdq1mIQY9NrdHOeIwdssU+J5IklWDz34Wyv2SNvHOd26vFYBcdSsPIV65+LGr+Vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R5e9JwJ4NrgNBK7TF726HnFVG5z119Fxqa8/2nf2i8s=;
- b=uML2pDwF1cQQCizW15hXwhNkM7wHVkXUPUxOQto+12LqYB/egf4SbbMmXiNZNIfZ55vkC81U84Kid+lNYFHaxiA9kxDvLD5QGZe48GtdRyXa4FhgkpCJaxCBrremrHPeodC3TjlrO8DXKU3AEVcuAYLubtGauoZEpcBWLsZzqeqCahaLffAchaAVKrl9XhafyyX5Ue5YrrC5uGskGopSEH1y3/PMy61IZ1/pnh/wjshT42mwe5gwSM7NMhM7tAkcuMWym9hSHkIP1ok4RshkFj2SIvr4FfCZX6fBnnCYRb7ibzi74qpM09pIH0PgXOfq1xt6tMtzx8crGixNmYd9QQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R5e9JwJ4NrgNBK7TF726HnFVG5z119Fxqa8/2nf2i8s=;
- b=FKFFT0a4W2NaFh1e8Un1JBt0el5Z7a0vNKT0fP3PrXHzYtR5Juxxe3vCtj61cOIj4TRbSMXjaxWy0YdDkQ3bjP2Uf8kmkchLa1oIDQwbznxhbn+igA/gbDUw5K1LqO3yjZuggOoa7GIuuPUTNEFPVOwQVIadEZ0Ig5N9huyUsqI=
-Received: from MW4PR04CA0387.namprd04.prod.outlook.com (2603:10b6:303:81::32)
- by IA3PR10MB8615.namprd10.prod.outlook.com (2603:10b6:208:574::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Thu, 22 Jan
- 2026 07:20:06 +0000
-Received: from SJ1PEPF000023CE.namprd02.prod.outlook.com
- (2603:10b6:303:81:cafe::51) by MW4PR04CA0387.outlook.office365.com
- (2603:10b6:303:81::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.10 via Frontend Transport; Thu,
- 22 Jan 2026 07:20:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF000023CE.mail.protection.outlook.com (10.167.244.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.3 via Frontend Transport; Thu, 22 Jan 2026 07:20:05 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 22 Jan
- 2026 01:20:04 -0600
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 22 Jan
- 2026 01:20:04 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 22 Jan 2026 01:20:04 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60M7K3Cf176040;
- Thu, 22 Jan 2026 01:20:04 -0600
-From: Anshul Dalal <anshuld@ti.com>
-Date: Thu, 22 Jan 2026 12:49:56 +0530
-Subject: [PATCH master] mach-k3: am64x: add support for speed grades
+ by phobos.denx.de (Postfix) with ESMTPS id 7071280077
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 09:40:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 60M7LXOt483542
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 08:40:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=L+sz9EY3UbKuGdRte71+z6tyn5kV7sJl+KN
+ e4ywquR0=; b=kZYv8UOPwR+YM8KOu6pcDFE++U1Hi8HzoUTlChk3052WT7cEUhM
+ 5a3pT/XtF55VXv8M4U7xWPspqZWiMMZG7rYotIuFi8yneld/2sAXm5DQj5Leg4DW
+ bG3jW/cXkDQHYZOJ76vK8bkxGqZPCY6Pzy5MT55n0RmLV9/UxY0S8Nzi0gas/Csy
+ TEMNpz44xr5NM1/cC8q3r+eBAmDXzVBHC5Px7QfyieRBjtuAdQBtgt8XyZIn3P1T
+ PtWfEyWDyCPG0RsQy+BQSyFK8FDgf4ek7mY75IT267VIJ3kdkhXrF449brmPHAEM
+ y8TdBUtLL+PXv+P8bebM4rqi36Xk3z37o9A==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bu6pj1qmr-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 08:40:01 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-29f2381ea85so15969295ad.0
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 00:40:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1769071201; x=1769676001; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=L+sz9EY3UbKuGdRte71+z6tyn5kV7sJl+KNe4ywquR0=;
+ b=ZMiNSzvyRqtuCgrvlWlG2mVYUww9bv08UtIEKhKUInrtrzXDoBk1u/ntQtcY3/AWCB
+ ZpeYGSCKNLwmnc21/h12WFcRKxMJhT+Ju8qM06z3QkkPSevSGstCWxSK0XxDjtJic6rp
+ AlQZ+5ANUblpCidI+Fyy6aHdDoT3flDtG26b66LlWecVJODQQsWXCvKfrDflIoUkpLnt
+ HpGX1P3IzJB42FxCtmP8tfbdmC5SGDFzmBL3qGfqUB0gvD6sx0/lEL9WgQrkqMW+4m6s
+ OEW3UT88RwTHcgQAqtuePbYA98Jjp7zxi4xmSREM+rHdT5aMvFn1ZUs4tL6aSEvVkE00
+ pF1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769071201; x=1769676001;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=L+sz9EY3UbKuGdRte71+z6tyn5kV7sJl+KNe4ywquR0=;
+ b=gs2R4IA3/fIPzEb2yUMz1eF1P49rAyyRSqKGPBZc1N1fcu2P+/fM04Q5YUplFa/rgP
+ xmFGp8LQJdz7ffKcplqelQHi5+QjvtX1aXK7AlVlxscdZRjsDiZeMs2FG2XZLwVDlXtd
+ CgaNZK8wzao1pwSW8/u234eDWc8Znc8qYTi+PELOIZ0LGTLWEoXlv1jgFJ+SBuH/8q3N
+ zEVckkolWZfEn3GuLBol+kzzqhZPd8hElk8DEF+CYVoeG8hSuxRUA+KuxfMaWIf+mBiB
+ iVzsitjLoMcr8E28MpZX5OPFtgYfRGRDTLv4h1pUKUQ86GdqxoeOAIQqEXWWMu3KMHiY
+ qDoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrkRp5zBuufuE6IrOnTCUYC1VoQ8yA6Ycio/e3VYSgLYIMEXrXtqW+Qee+Pgo0A1raOrBKP0M=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXmN9s7nuGx0aoJ2ThaZGTDM7I+FqYhIL7NOe5vLHa5cd0appa
+ TBlt7nXhO4Yqd8R7cW9lWV4QveEtN4DqGp84qH21XEwTEsUcNlLAQGDv6l+m11vPekBv3CT1bML
+ X5MpnzNuO5cczYiHJxiH484iagNaZWXfpkqItI+4yk3q7kOkHwTxtDQBE
+X-Gm-Gg: AZuq6aLohupnl0JAFrdMrjy8159rA+ujjVr69DDY7ZtSPHrW282Ws2GpLUHw04sVwDz
+ 1Ot+/dc5te8O1eJlc/nntWMScWCf+Q1MIiJzIkYMIUO7AgMPq4xitCvvy0yL2SBr3L0Koo8a8Je
+ WF8IMiVc7iKITzv+Fh9BEjFXxOW2Uk23iL1T3ts6184IwQazDe90mnbPk0Fhgo9EJFcUtWAAq+V
+ 7RYLivWlREqQFmRSUn7zN21GSG8DIsRCWN7sIUNuqKwWr0XTbKoFuTRENFNffxy+pkJm2TqVykT
+ t/qZrEc+X81n+57d4PEjilEfM9PHGMOhq5Y3DM31sAIFsiKie1fs+Euj8pTJ6ALJEyGPoMviN+z
+ a8YXrqBLWZiy0njhcbtoXE6mrKkqugRt8CDwvTuVTwOrH61Pmqs7UCgNKc6VzBhSNPsQk0IW1c3
+ kLjqgT9Zf5e5xur8RoL8Q9TjFieszoC2W3Mu8kKA==
+X-Received: by 2002:a17:902:e949:b0:2a7:8088:371a with SMTP id
+ d9443c01a7336-2a7808838cdmr63095165ad.35.1769071200740; 
+ Thu, 22 Jan 2026 00:40:00 -0800 (PST)
+X-Received: by 2002:a17:902:e949:b0:2a7:8088:371a with SMTP id
+ d9443c01a7336-2a7808838cdmr63094945ad.35.1769071200242; 
+ Thu, 22 Jan 2026 00:40:00 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-35335213ca9sm1720708a91.7.2026.01.22.00.39.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jan 2026 00:39:59 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, neil.armstrong@linaro.org,
+ balaji.selvanathan@oss.qualcomm.com, quic_varada@quicinc.com,
+ casey.connolly@linaro.org, bmeng.cn@gmail.com,
+ andrew.goodbody@linaro.org, u-boot@lists.denx.de
+Subject: [PATCH v2 0/2] scsi: Replace SYNC_CACHE with FUA for scsi write
+Date: Thu, 22 Jan 2026 14:09:52 +0530
+Message-Id: <20260122083954.2722972-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260122-am64x_speed_grade-v1-1-8a8db3147428@ti.com>
-X-B4-Tracking: v=1; b=H4sIAJvPcWkC/x3MQQqDQAxG4atI1h0wU1HoVUqRMPm1WWglKUUQ7
- +7Q5bd476CAG4IezUGOn4V91gq+NVTess5IptWU29y3nDnJ0nf7GBug4+yiSFwGngbR7q6Farc
- 5Jtv/zyctEl84vc7zAk+ug1lrAAAA
-X-Change-ID: 20260121-am64x_speed_grade-1c71f7ad43dc
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Chintan Vankar <c-vankar@ti.com>, "Steffen
- Kothe" <steffen.kothe@skothe.net>, Neha Malcom Francis <n-francis@ti.com>, 
- Beleswar Padhi <b-padhi@ti.com>, Bryan Brattlof <bb@ti.com>, T Pratham
- <t-pratham@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Anshul Dalal
- <anshuld@ti.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1769066403; l=2318;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=l3vS5G/QgmF8I3+G1ceifmnyUCai+8JBc5BBGO2G5FI=;
- b=kG1zhso3nc9S6nVJoa0dTwdMPU4YgOaFjsYRRDHK3tCe7Sa0mNk+m0eHnBbmvTXbb/pnkakTs
- ji6AS5TSFmRAS5kj9PtdECNoq7/1JMPA2110pIL/RhT7DcU9kZ5HtbK
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CE:EE_|IA3PR10MB8615:EE_
-X-MS-Office365-Filtering-Correlation-Id: 380df850-0975-4d79-5c45-08de5986aadf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?amVXaU1nQUZ5VUJPNXZHV1hIMmJnb2NGYjJMa1h4ek9ueCtzVXRBRDR2ckZn?=
- =?utf-8?B?NXg0NHpvU0Y2MUFDYTJhNWlHWlNqcjA2dlR0d2p3M0Nsa2tDOTcxQy9QYlRX?=
- =?utf-8?B?TFltRzY1Q3l3N2wzb3JwS0h3RXNNZm50MXU3T2FTMkUrYWNORS9MVUs2d1VH?=
- =?utf-8?B?aTV6VklsYnVFczFiRGFxM09hKzE2SlBYSkhPNHpaZTVQSkw0Z29BZ3R5cElw?=
- =?utf-8?B?WHVTOHU0eEVOMmpVNGFacGN3dkdsWmJlWk0xVXVCcXJEcXlyNmtPVnFsc2xJ?=
- =?utf-8?B?UDlOam9aV1lqSlNaNEJPQWszUjhlSDM3RkJHRDJJWXo4cnZQQnoxSVVEd05Z?=
- =?utf-8?B?anVNQXl4eXlneXBDek84MlMzdlF2NllhTGRWSXhjSGU0WlU2RUp1T2FXT0lu?=
- =?utf-8?B?WE1WUCtBcUZkWUdyVXVDdXZmN01zN1ZqMGU4Y3F3dWFyczM1UVZ6aXdQTUFr?=
- =?utf-8?B?TktBR0ZDZzZsdzZ3ZDBIOHRpVk5USGljNU1jdDVpWTFJdnBmbXZHRnRYbmlh?=
- =?utf-8?B?Q3p3WkFwYk1JbWs4RVFBcjBVdWsrcjdaU0o2c3hxOERwdlFLU1JSQWtmaTR5?=
- =?utf-8?B?MjJrRldHd0EzdDl1NENESm1JSU9LYWEwM0kvUXBQWDRsS1JMSWdJR2xzT0w2?=
- =?utf-8?B?RFNIUW4rTUxxN3JudHhtbUVvckFHWVRGbFJqczBUME9XVG5XS1V1S0ttMUIz?=
- =?utf-8?B?aGlFeWJBa0ZINy9nTjlodnFEVlJUbFJkUHFyaFFYUjFmTWdoL2dIMzduY2tZ?=
- =?utf-8?B?QkFub09SemFjZFJnUWs0cldOV0kxclkveGpNcjlCRmhCZ3JkRzNEZ21PUU5I?=
- =?utf-8?B?S0hYU2FmSjF3eUwyOWh6ZEM0QnRLMXM3eEhSaVRiOFRGMUtUZS8xY0JPRTFB?=
- =?utf-8?B?SFpQM1p5MlVsRy9YNVpoeENabzNvSTNqVGVMT2Q1VEdsZHpmcmwxdVRMR3dj?=
- =?utf-8?B?dllNWHpqdkdSMEM0YUo0T01CWTdmVStVcHEvMlpnMVUyaHFKQTl4VXVtajhj?=
- =?utf-8?B?RmhNeVYxcVpOR3JZdlNsQkJDZjRjTU5KcHZrcGNqd0RxZXVUa3pHeXZOR1RI?=
- =?utf-8?B?RUkyU1RBT01vMmVHeXM2cXVtYnZYVXlYdHhsM2FyNzN6OFZQa1dRdFl3Sm5K?=
- =?utf-8?B?MVlnQWw1ejAya3FKR243UHhySlFqSVVaVFZDUHBiSVE2ajZOVW1MRjljS3Ur?=
- =?utf-8?B?dllVaWI4SHV5R3pIVUNHSmxzMFB5SGQwdEhwWFFhS3RvQlJvZSt2MzBEYmU1?=
- =?utf-8?B?cHNYU0UwWVQ0OEFkbEtvYndSVjZQUEZPcVBBNVdNQmx4MmR0bFhobW84VXM4?=
- =?utf-8?B?TElYMWF0dzErbWo3b1RzR0FOZStzMVdEMTFxOEMvdnVkT3g5MG9vcTY3Y2d2?=
- =?utf-8?B?NWU4T1BteUFoS1hDcWFNaFJ6MHc5a2I2SnFONFQwaXV2TDB1M2hoOXZ0c0dI?=
- =?utf-8?B?WGk0VmJmZHdYb292VW54VGtNVVgyNXFMTEsyQkt2SXBHM2lpZ2ZsSndNL2cy?=
- =?utf-8?B?QXZNOW9YQ1FpV2ZNUnpyTVFZcVowTlBFeEh3R1VLK1d4MzdDQnVScDdXUjZO?=
- =?utf-8?B?ckY3YU1TSExRZ1UvRGpwR2xFTWppa0g5cDBkMnFTMXc4WUF1dm9YalFXSjRO?=
- =?utf-8?B?MW1BalZxRTEwbnR0R2FzVDJVSjBtMzZYY3RXZnp0SDYxWVRGaTZLMmpKOXBn?=
- =?utf-8?B?V1JDSDFDeUpYVGVMMUh1cWNJSmdJdy9ZL0dONGVTMUorL0FYeE5qN0VyYy9J?=
- =?utf-8?B?RkhKSUJybG5FVFVEUXJML2pOYXZZRlh0dXVXVUNlSm41a0xMU1NiKzR1Y1Jl?=
- =?utf-8?B?MHdjNW5zcmoySGNJbk5VVFR6N1NsZDdCK2x4OWtnZEJNV0tSV3dDOUtpQ3BD?=
- =?utf-8?B?dVd2TUJRNXh1aFdraVVCSlc3RVc3RXQ5c0Q4cXQxc1JYeURPSXIwaldCMENK?=
- =?utf-8?B?cDVaR1BaZHBVRDNpNzkwYWxiMEhyRXBmcEt3TjV1WTAvVFI0U29iUFNqVWdJ?=
- =?utf-8?B?SStVTER5RVpFUk9wODgwMzEwYUVJRlFETVM4TUJiR29UREJvdHhVU2tGbGFL?=
- =?utf-8?B?Zms1RFNoUVZSWEZsQWNLMzdMK2V3VEdnTVhsdkptS0d3ZjVnRzhzbFhGb3dq?=
- =?utf-8?B?bW5lTGdUZXBmUEFSQmE0eTQxdURRVHQySUVDVXNmRVBvQUFFK254NGR5ZWR4?=
- =?utf-8?B?d0QyMEUwZWpjTUtTbFgxNUFDUW5LRjJ4cnJuVGN2NjRmQ2pmN0pZWTBOeXZW?=
- =?utf-8?B?ZlN6RkpQREYwVTRGb2xQM2VQUFRBPT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 07:20:05.9089 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 380df850-0975-4d79-5c45-08de5986aadf
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CE.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8615
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=D8pK6/Rj c=1 sm=1 tr=0 ts=6971e261 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Us0OqhRn_OvhrVabkMwA:9 a=zZCYzV9kfG8A:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIyMDA1NyBTYWx0ZWRfX00/SF0wsZ/mt
+ PXUB9QTjszlQC1YQX0wILpaQBehcDufPzUMV4lobigVygwxwjcx/N9CNsTTO1xCF18S2CddE4uj
+ NiOcYSIswRnpteZiX8FX32j7+jmhVAXBQ2cDLiBdjOxlKSlSYIXj/crNV3vTLW97UgFgp34GhuL
+ bS5eIN5zpQpTyGsHsJNnEnkzAkBJrDQ9Xe03jNomMI3lUIo3jU3bxVdECAeVpL+kw29NVUNPqd5
+ FppruDeaZ4+Ne/ChGa/g2cZGYKX6vmXv6afS0Br3E1YSpv3F7p9VzTdRVMpPqOw9q9UibnK6TKp
+ aUQ/WZ5itLupXlGpt3nJo2O5M46qw4ybUg78mwjNg+x5r9zHjLVCIIuyzApw0hvIJdgjgmDSgbz
+ fRxEDsNUP+jPzVh31TOe/h6IZqOGyAC0XZUu6iIfCskurTC+VvguUX8OVR704q7xYuAHeWlRFMA
+ 3/8SI4MJMQB60rNdjDA==
+X-Proofpoint-ORIG-GUID: _u-p6Lr1TYYvWr_VRpphIHK_afLkcEc2
+X-Proofpoint-GUID: _u-p6Lr1TYYvWr_VRpphIHK_afLkcEc2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
+ definitions=2026-01-21_04,2026-01-20_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 malwarescore=0 adultscore=0 phishscore=0 impostorscore=0
+ priorityscore=1501 clxscore=1015 spamscore=0 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
+ definitions=main-2601220057
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,77 +146,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the support for common speed grade configuration added in commit
-65a6b83a9b7f ("mach-k3: refactor A53 speed grade clock-rate fixup"),
-this patch extends the support to AM64x SoCs.
+This series replaces the SYNC_CACHE approach with FUA (Force Unit
+Access) to prevent data loss during board resets while avoiding
+system hangs during large sparse image flashing operations.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+The previous SYNC_CACHE implementation caused timeouts and hangs
+when flashing large sparse images because it issued cache sync
+commands after every write operation. The FUA approach achieves
+the same data integrity goal by setting the FUA bit in 
+WRITE10 commands.
 ---
- arch/arm/mach-k3/am64x/am642_init.c           | 22 ++++++++++++++++++++++
- arch/arm/mach-k3/include/mach/am64_hardware.h |  4 ++++
- 2 files changed, 26 insertions(+)
+Changes in v2:
+- Reverted "scsi: sync cache on write" commit and then set the FUA bit
+- Link to v1: https://lore.kernel.org/u-boot/20260105052526.593017-1-balaji.selvanathan@oss.qualcomm.com/
 
-diff --git a/arch/arm/mach-k3/am64x/am642_init.c b/arch/arm/mach-k3/am64x/am642_init.c
-index 219798315db..a15adf1cb1e 100644
---- a/arch/arm/mach-k3/am64x/am642_init.c
-+++ b/arch/arm/mach-k3/am64x/am642_init.c
-@@ -29,6 +29,26 @@
- #define SW_POR_MCU                             BIT(24)
- #define SW_POR_MAIN                            BIT(25)
- 
-+const struct k3_speed_grade_map am64_map[] = {
-+	{'S', 1000000000},
-+	{'K', 800000000},
-+	{/* List Terminator */ },
-+};
-+
-+char k3_get_speed_grade(void)
-+{
-+	u32 efuse_val = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 efuse_speed = (efuse_val & JTAG_DEV_SPEED_MASK) >>
-+			  JTAG_DEV_SPEED_SHIFT;
-+
-+	return ('A' - 1) + efuse_speed;
-+}
-+
-+const struct k3_speed_grade_map *k3_get_speed_grade_map(void)
-+{
-+	return am64_map;
-+}
-+
- static void ctrl_mmr_unlock(void)
- {
- 	/* Unlock all PADCFG_MMR1 module registers */
-@@ -263,6 +283,8 @@ void board_init_f(ulong dummy)
- 	if (ret)
- 		panic("DRAM init failed: %d\n", ret);
- #endif
-+
-+	k3_fix_rproc_clock("/a53@0");
- }
- 
- u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-diff --git a/arch/arm/mach-k3/include/mach/am64_hardware.h b/arch/arm/mach-k3/include/mach/am64_hardware.h
-index 2717da07690..7e33617151e 100644
---- a/arch/arm/mach-k3/include/mach/am64_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am64_hardware.h
-@@ -18,6 +18,10 @@
- #define MCU_CTRL_MMR0_BASE				0x04500000
- #define CTRL_MMR0_BASE					0x43000000
- 
-+#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
-+#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
-+#define JTAG_DEV_SPEED_SHIFT			6
-+
- #define CTRLMMR_MAIN_DEVSTAT				(CTRL_MMR0_BASE + 0x30)
- 
- #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK		0x00000078
+Aswin Murugan (1):
+  scsi: Enable FUA bit in WRITE10 commands
 
----
-base-commit: 51a884fdf3a9f88f3bbd0e4b1782cc6eb172b8a9
-change-id: 20260121-am64x_speed_grade-1c71f7ad43dc
+Balaji Selvanathan (1):
+  Revert "scsi: sync cache on write"
 
-Best regards,
+ drivers/scsi/scsi.c | 24 +-----------------------
+ 1 file changed, 1 insertion(+), 23 deletions(-)
+
 -- 
-Anshul Dalal <anshuld@ti.com>
-
+2.34.1
