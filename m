@@ -4,120 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC95D6CFA2
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 18:48:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6A5D6CFA3
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 19:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9DF8397D;
-	Thu, 22 Jan 2026 19:48:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 898C7839DF;
+	Thu, 22 Jan 2026 20:03:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gG1wbDVW";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g8pudGYO";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QMKsMBjz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ED5683A6A; Thu, 22 Jan 2026 19:48:09 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 11FAA83A6A; Thu, 22 Jan 2026 20:03:46 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90BD680077
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 19:48:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D75838FA
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 20:03:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-385b9be0759so11527641fa.3
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 10:48:05 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769107684; cv=none;
- d=google.com; s=arc-20240605;
- b=fg6AyXXzG1OMD2s/2b2lkrEgFV2YMJVEil9RCBw2F9//m/C+nBuirjXT2UZaAycyWW
- hgh5buyu4AT85h/WimVFlZ3oqXRSummke4DQIavJtCe9i+8TPH0qhbOL/dodENghRttD
- 70+PJaiuZhzqbri2sLfMHnerBwm5tl0J1f28CEcAsur2qCXJUsQIm+4l2p932kTEVWFN
- 0fXP0MkAdOE7nLj4YmHvfN1EoBTbpxV/5QOJhHOL3exu6D/sWBYUiVW/MCXqVTiAYi2n
- lQRUNW3XE3BGzjiEWqR52uw36LxkoyGvUR6Cuf1lVBTFZlBSRkev86w2ekfraJA0ScFE
- N2Sg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=GS4NRNbWk5QNqzYgxz+0yHNYGDvdDTMUbC0EcxzCRMw=;
- fh=Rbg0/vmMBpKyz4/PdkuTW7qZ4LYeD5uU8zyq2ojUFF4=;
- b=AfnihfwCh0hBbKP3fmWTJJuUB1+DSDmalQzTJdxMho3LuCV2plMcMmXoDnlscrYOo3
- 4/UuHgL9qivvODDDeZgoNyMbZoMa9hMXQ0PxwU1hVb1JqIabczp8Q1Q+TaPbi5r4qXHR
- F4y0Kk1I8DZkadaibDLZ15lYyYF1sT/A9pvsa0pXXVyw+BRcH9+2thfpdtzYjFLXm2tW
- M1nQMe+AzBMkg2NjCiuJvfaBky+EEj/8+LLbhPi7MQau0GkcpErjP6EaKvpf5f970iWa
- laWaTM6pKimGBlYLlY8hx61RQdP2YX9DQf8TpFdlpEnezmg9uuyChFRQCLJXUycILYm0
- BFpA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769107684; x=1769712484; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GS4NRNbWk5QNqzYgxz+0yHNYGDvdDTMUbC0EcxzCRMw=;
- b=gG1wbDVWB0RGQ4TiCEINa2+iDAN3d9tR46e4PJF7+cfmkfxQjGHLaIG6i5vRR+x02l
- xaaFiojhvyCnTJVKy8lVywsizzUsmI+19mXHZUdS03zI3ktoiiS3Ckv5ZKELu4ucZa8/
- vmgYUmZCVmuHQzQC0QHfHwJDKQmknqFpwsmU+oY5oI+RDAgskwtn//OiQp36wZu+MVme
- IjKlwRAy5mwTrHt3s40KtF563V4saR5G6kfssW/ePkMpwx3rsXPeaZZiPPFnvs6OdVVZ
- lZF90fzSdgeIokMoa+8AmC9IYKOzlnlFQF4J+TVUXRyOoAngk2jF/+jdVANRXkK2cSL9
- /pcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769107684; x=1769712484;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=GS4NRNbWk5QNqzYgxz+0yHNYGDvdDTMUbC0EcxzCRMw=;
- b=H0USNefL7c2X97VlzJax4V1cjjzxygcPv630seU53o5ilkKxmsYJsSz/XGmnqBJWwp
- vHz9MXRnfQNJm5m/LaD3KwYHqpIOyp3IWIKZBM9ZT7el3UCyYHrUSd7OpYeQOvDlKWwK
- vsgqMnipx1Uimio5XuvI6R8lSD9XJQqqpObSC1HAvT5kYyNcwO2ZtOpsYvaAyiopnzgm
- /AsAx9tjzY5mJJOR/jkEGcwbimgKjlK5bEP7iCUT/cmPeUUiKt9w1nNYiqhYpFQ+n6BN
- 3Xm8wwhBaMlpCMyr+7YiRaR11FWbVsLK1WOftCrDuHb9OgaNIkM9Onq5QF02Fnp7Er3X
- yYqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIwIA8vUxbn2lmGd6eO+Bj1rJtI3BMupIfgSX5gkAznIfoJ5mvIG+6CDRNANJ0mVZFbRbPI0M=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywa554kT2oF+XVOaNA5o14xqP+M+EjJ6iKDl8YbGsknc9qD9Izs
- RQujLAb3Xa7iFQ2ePVluGqJzBmrLRGEJCZbSvOJvP+Ho43LHImkQoy7MuanrclKje1xAd+Qi75H
- NsLMg4mEfWCDWRpIYQLyymeUjD9fNlbw=
-X-Gm-Gg: AZuq6aKBWBXq+YXnR3izUILUstvtJ4BybLbb2Mo55qTMYWBdMXKNmzvAMKPiF7dyFz4
- D6TaRpz+oMmfv1Ek5lZKW6PMpzJvAeAibKS7TxK+lxylPFSbLyPPKngm9jtIarvdosaVmOzCzEM
- cEDs1p2LTyzsLSkqRHlp0tLClZUjU47j6YGXn82omAqEKvslLRV4BbKV+fFJstl8gutK/QAsj6j
- PFRzg8dFQswIVj4WL7xMVS0mAd6nMcjzyzzSKmGfTIa2PqAMwMk8oGqtPzJq1ONiBfQBLNODjX0
- ohrchUE2PBbVOFYi8NrwTCooZyE=
-X-Received: by 2002:a2e:be27:0:b0:37a:34e2:88e7 with SMTP id
- 38308e7fff4ca-385da028b39mr1013551fa.22.1769107683881; Thu, 22 Jan 2026
- 10:48:03 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dxr7f6sfbz9vCg;
+ Thu, 22 Jan 2026 20:03:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769108623;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RMg0zjJBKG6oMOL117UGNTBloNQNtmWH/8Um1KQ+XcM=;
+ b=g8pudGYOM97LknWe2yS+7kK85mkVbxW3VTDx2FxRVARMjqAsflnrHQRX2FVOFNmyJ7/sLE
+ 7FNONHCgJEGc4pEpxbgQxzu2jOWtl3ziB2cAeXafBd3V1AHCpvHZWlH38BFNTCtYbmkfja
+ toujg+QF+tgJbJB0Q0Q3RLs7Z2D7yNbdacsg/+hefQLggcJHHZyRA5/cnhyjdu9cWHXOxn
+ VME7d4GobvU7jkeoIoT2tuJ5/OZC8A5NA8szaoRO6tSt8X37fuXzUjBizS+pzoOy/CjHqG
+ 59tNH+Ecr4sVKAaEl6gw2cvFf6wmRD0AtsiUfDbX0dnjw76edj0mmJS3pKRu/Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=QMKsMBjz;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769108620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RMg0zjJBKG6oMOL117UGNTBloNQNtmWH/8Um1KQ+XcM=;
+ b=QMKsMBjzYOuSkXO925ExMQa8dueczR4jSBxZr5qi8sSWMEj/bk5amLYJx2pvzLHlexikBA
+ kRiCbXYUptJnJ8DD5B7Jyd4SJdbqEdOp02SH3jEtr8wCkevYSKHoaVXL60fNm6/ZpDAC6v
+ kgO5iS34kOZhmElGZB4BK3oGNrrLKsHe2BddDVRGBnrNtvtFfpFL03vXGVLU5nloB6JHNU
+ 9i85Fl4m4tq/xyUB+Zk4pg9rpAUr6xko1N2MhWUNBAQAY9abYvbBsSr9q8HQNxGHNLgu9U
+ kZ4A4DxZlAmtZc/+DQBgmwzhyPT9S9QIIQ4cCOH7ZF78UihPdnDXoXVNt2t41A==
+Date: Thu, 22 Jan 2026 20:03:35 +0100
 MIME-Version: 1.0
-References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-3-trini@konsulko.com>
- <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
- <CAOMZO5COTa3ykhF8XZyzmJ0QZNotK4USo0LrH0XBJLogatfXFQ@mail.gmail.com>
- <040e129c-44ca-4a59-828f-d37c6e41d3b2@mailbox.org>
- <20260122142323.GX3416603@bill-the-cat>
-In-Reply-To: <20260122142323.GX3416603@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 22 Jan 2026 15:47:52 -0300
-X-Gm-Features: AZwV_QhihS7-pvnNkslgNUZ_LUda99W-KKBgXUBP9lPotsGm69se8ZhDYVerSkA
-Message-ID: <CAOMZO5AZiBajXK1b6Mse9LPwHEzhJSM_-OcQs4BsnbXP3WzuxA@mail.gmail.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Kever Yang <kever.yang@rock-chips.com>, 
- u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Beleswar Padhi <b-padhi@ti.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Joel Stanley <joel@jms.id.au>, Michal Simek <michal.simek@amd.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
+ via -b argument
+To: Tom Rini <trini@konsulko.com>, Beleswar Padhi <b-padhi@ti.com>
+Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
+ sughosh.ganu@linaro.org, philip.molloy@analog.com,
+ marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, anshuld@ti.com,
+ afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+References: <20260122172247.2995437-1-b-padhi@ti.com>
+ <20260122174546.GB3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260122174546.GB3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 1rhxwe1ykwhsk9o8epyz44pui9k11g5a
+X-MBO-RS-ID: 8bf41dfa628722107a5
+X-Rspamd-Queue-Id: 4dxr7f6sfbz9vCg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,76 +99,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom and Marek,
+On 1/22/26 6:45 PM, Tom Rini wrote:
+> On Thu, Jan 22, 2026 at 10:52:47PM +0530, Beleswar Padhi wrote:
+> 
+>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
+>> packed inside the multidtb.fit FIT image. While the individual DTBs
+>> and the FIT image start address are 8-byte aligned, the DTBs embedded
+>> within the FIT image are not guaranteed to maintain 8-byte alignment.
+>>
+>> This misalignment causes -FDT_ERR_ALIGNMENT failure in
+>> setup_multi_dtb_fit() when locating the next available DTB within the
+>> FIT blob and setting gd->fdt_blob, because of the recent libfdt
+>> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
+>> version v1.7.2-35-g52f07dcca47c")
+>>
+>> The mkimage tool already supports enforcing this alignment via the -B
+>> option, but users would have to specify it explicitly. This change
+>> makes 8-byte alignment the default when using -b.
+>>
+>> Reported-by: Anshul Dalal <anshuld@ti.com>
+>> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+>> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> 
+> Tested-by: Tom Rini <trini@konsulko.com>
+Doesn't this enable 8-byte alignment for everything in case a DT is 
+specified on mkimage command line ? That doesn't seem right ?
 
-On Thu, Jan 22, 2026 at 11:23=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
-
-> We did that, yes. I'm not sure what Fabio is running in to here..
-
-Let me share more information with you.
-
-The board I am working on is based on Rockchip RV1103 (ARMv7) and will
-submit it upstream soon.
-
-The board was booting fin last week. Yesterday, after rebasing it
-against the top of the tree U-Boot, the board no longer boots.
-
-The boot error is:
-
-Missing DTB
-spl_early_init() failed: -2
-### ERROR ### Please RESET the board ###
-
-After running "git bisect", I found Tom's commit 8b0ebe054bb3 ("arm:
-Update linker scripts to ensure appended device tree is aligned") to
-be the guilty one.
-
-If I partially revert the arm/cpu/u-boot-spl.lds change, as shown
-below, the board boots again:
-
---- a/arch/arm/cpu/u-boot-spl.lds
-+++ b/arch/arm/cpu/u-boot-spl.lds
-@@ -51,9 +51,9 @@ SECTIONS
-                __rel_dyn_start =3D .;
-                *(.rel*)
-                __rel_dyn_end =3D .;
--               . =3D ALIGN(8);
-        }
-
-+       . =3D ALIGN(8);
-        _image_binary_end =3D .;
-        _end =3D .;
-
-With Tom's commit applied (failing case), the spl/u-boot-spl.map looks
-like this:
-
-.rel.dyn        0x0000000000015cac        0x4
-                0x0000000000015cac                __rel_dyn_start =3D .
- *(.rel*)
- .rel.iplt      0x0000000000015cac        0x0 arch/arm/cpu/armv7/start.o
-                0x0000000000015cac                __rel_dyn_end =3D .
-                0x0000000000015cb0                . =3D ALIGN (0x8)
- *fill*         0x0000000000015cac        0x4
-                0x0000000000015cb0                _image_binary_end =3D .
-                0x0000000000015cb0                _end =3D .
-
-With the partial revert above (booting case):
-
-.rel.dyn        0x0000000000015cac        0x0
-                0x0000000000015cac                __rel_dyn_start =3D .
- *(.rel*)
- .rel.iplt      0x0000000000015cac        0x0 arch/arm/cpu/armv7/start.o
-                0x0000000000015cac                __rel_dyn_end =3D .
-                0x0000000000015cb0                . =3D ALIGN (0x8)
-                0x0000000000015cb0                _image_binary_end =3D .
-                0x0000000000015cb0                _end =3D .
-
-Basically, in the good case, .rel.dyn is zero. In the failing case:
-.rel.dyn is 0x4 and *fill* is 0x4 as well.
-
-This change messes with dtb being found in SPL.
-
-What would be a proper fix?
-
-Thanks
+If I do mkimage -f auto -b ...dtb ... , then I only want the DTB to be 
+8-byte aligned, all the other blobs can be 4 byte aligned just fine .
