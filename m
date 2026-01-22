@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0713D6CFA1
-	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 19:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD55D6CFA2
+	for <u-boot@archiver.kernel.org>; Thu, 22 Jan 2026 19:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65848839DF;
-	Thu, 22 Jan 2026 20:10:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 44E4983AC5;
+	Thu, 22 Jan 2026 20:20:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W7YXlyPu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LgrDA6G7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8658C83AB0; Thu, 22 Jan 2026 20:10:50 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id A6D9983AC5; Thu, 22 Jan 2026 20:20:10 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96240838FA
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 20:10:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F454839DF
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 20:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-40429b1d8baso402434fac.0
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 11:10:46 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-383122fbc9bso10192851fa.1
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 11:20:08 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769109607; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ZpXREwZSLKZP9Swymmh5jWan02XqCC4n1jEMAZqleJ1TWf7zGbv7jZvCmwQTrnU78P
+ 60YDwSo1tHexlNo0DX90D2pPEzIXw+2GwJvIBG9ZVjFbMIfX9s2I4j8F9FtdMwwWXX82
+ +SbZ8faM9k4BO24BdRlFSqlVOFIKlS8Mzm+XybAVvpEkBKidsD9KJB/10MZJ9BKLNg1E
+ RoIJl97DbqZ+4/IaGqR9FbVtJLmUtf6538BQPeAWFiPNCQT+iZlsF5j1rKJ2r1pQowQ6
+ X1M4a65aP4qtfBpg7vX1L/4UUyMxyf3X5z5C9a9nWHl2Gl3qseaSpTNRm2nHHokE1B1D
+ +eUw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=3mA8UbrIczvAi7/Fdr/Vu1NiCyKznsllfr4VxXh8/rM=;
+ fh=a745K87F3y9Gs+Vbl8alxuQHh6ZqH47cbltSzYQ1CGE=;
+ b=CpyHX35EfkZZBREXPhROP3XGJa58bBwyH91wPzjiZAmC5PYM7mCR2X5pWs8igURtv7
+ Ha0be4qLl2WYiGhyQfYzVhcYcuJIugQiVdiN+sss3mNa3CmBdfTYzS9mxGpamMuRp32U
+ ScuTm7M16K4e7DHj0Jfg2sLpEvSWzrq6TG2H7tpB8WtSTqof2v6Nd5lmoS0fa/wgrhqH
+ FpCP8RRlvVzAzm7mhPQ9+NgTkVMJfNoEFaDw07JOntR0HOyhX5apXtLOOaZn36vPQ1Zg
+ 15weMG2xI66H3c1QTUcBNWDpfmgVM89I3EuP02AFkASe0oRHrK4DULqP/0MMhRp3kX0b
+ 92Ww==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769109046; x=1769713846; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QY0/HRvU9qdR4itj3ZxJrR2VKnEd3LJqcvlGyblE4CM=;
- b=W7YXlyPuW395SVC2MXDBIayoPuUCeVVWVv/2QHcuz6EDdpN5fPmVWzh1416PICWJjf
- 4ZXhMyqstOu0f12ZXsj2zSISMKWK7iN6j6TZ8gvx98+0P2UQOfgbu+YbBm1TeeUiWrla
- Z3DOb4IPMDsZHWcPnzRjFAR7Oeltbz1X0Cpcg=
+ d=gmail.com; s=20230601; t=1769109607; x=1769714407; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3mA8UbrIczvAi7/Fdr/Vu1NiCyKznsllfr4VxXh8/rM=;
+ b=LgrDA6G7MrxSMjBF0qKtNp9BlFSU3YoYPqHs3WW0EyXEFffJP8ZzvZHoXMytzokXW7
+ W9CCTyYQ2qeVjzQp7x8V29/Yx8xktGYXU1Ynl9a9utzvNDnlZTFZc+hw7YgaNR67SwRn
+ Nwm/2FcAGjL8EEHTDeplXnNYH4IN/3gTI5waO0oDL9vxPbQ4UuqQCW0FAby9ver7NFS2
+ lNpkRaWKs85vA/21y5IlW++3scQpltM6KfVHG2NgdT2oSvFFmi9mCevhsHM96I/FcEX/
+ cP/Yha9lFW6NZ0lVceqmcCXFJxRG2tIE1gy2NPm8sk3+UJxSukHjtE4oemmkR9gZ2kiq
+ kj4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769109046; x=1769713846;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QY0/HRvU9qdR4itj3ZxJrR2VKnEd3LJqcvlGyblE4CM=;
- b=U3VG0Guzwy6lJAToh3DMNLnyo/kO6zqMii+1+0lbEvPskSzHDQKiqu/+tfiky+6Mym
- VnGUlqPae3fr3Ve3DmGaYnsng+VmVPa5FSm0HO73glfG7qio4gqVUdTqpnQwQG0GcjBW
- qAm6gWJirGswoNvflbcjIrw1K6bQ/Id0KSB+vjOBwVFBFg/6ox1GIb+ACSd0brqVgTl2
- QEgb9g6+gkX1gZRmZmameyGviugiIxNymN15VBoDvEg4CYWwNa2Ob5bXYTAYasJHrhqA
- awgkQ5Km5+OaO/4hjGP8whtDM70Iyw4uSy9tehIPC9PsM9iAs0/QeQQsokJgRyxJ4aIO
- A7EA==
+ d=1e100.net; s=20230601; t=1769109607; x=1769714407;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=3mA8UbrIczvAi7/Fdr/Vu1NiCyKznsllfr4VxXh8/rM=;
+ b=Fd48gZkq52Mg39wTuzKFEwcl3M52S+WP5+asfXHiFjuo4VuYMhsXgjBgBuxlcfpdFx
+ Mq4lZVpuqoVsWRh9PjWz0qy/G+oNlM0vNNKex/kPWxAFjwHzhYw78fffA+zbWIdhUOGn
+ ua3Wq2q6lbkMabyL0rhov+Wggu66zLyKSSk3RQmt4vT58Ed5s6IHNRzOPFqsALJkzEcG
+ oYIgwpZA5ebw3YmVQT5kLgYeFbl8jp0AVTAk/CjrkTd/9cilBtrHKRgCROIXFsNHjSv8
+ di4AP82S1hMTpy/Q0fHF+O6ylAclqq2f7559epvlNRduQUgbkWIclAvqMAyn/umzYREZ
+ s+7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXejjzcAVviqVLJ/weKy+eGacq6BuldSSYoxX6Xgg3nnWpByDcRi14pAV/3aG9hN9PZ1YSo40=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmEAI5K+NoT0at/bRVhNYVUu0VWkOjGsh+i6Xd/dURCgqm46M7
- kOgw8E8cfiUSuhCtU0KQyk26+dobmMJGvb48+mSG8tn/Wr3hUWPG+a3MqkUaT1KdB60=
-X-Gm-Gg: AZuq6aJc6sZG/xdEYrUHaLdNzDVoYKwpeEU591kDVFKcovMvdUfAEkSkvqf9RsMbql/
- ip/GhAlVqaNCq42iL9ZimJJ7uODVJwPJIT3fYrKyqmXOmAR8Aa7KGbmrnuwBtszWBK8oS11P+aq
- rDnrcd+E2JuNtJho8L9sLggUrcLn7FlRDqlHcJbuvWc+UHugsBFYSNpu6iBVKGW8sLNMHqb38xh
- xiFOxOJJ+VBi3icjdfvGHPXxWkBv4xuKEbC58JiGoxOZeWWlbVITNrR21Y+CaHUv16LZvTyPEaA
- LnJin3t3DttlMVusLONFZ18FysB7s4GOLXV7fLXL0fQIA7GY9V9fIwprU3WvP5phJ83UGQrNG3P
- dDqb5UvwITSwFYETcbU7d7NAGXxEx9RSw+8SyuQ63sfzbK9fusNNWZsPAQ4wBFGSPoV4FgKXZ2V
- 24J5JoHJqUBKz1A2PGsjL1LnFl8R3g+J6oHQMBn77vOwxtdyW1n1YFmQq0gGvcVjcsdaDBlnqha
- +7RBfgG8nsTbEtSHn51mR6HA8UnAT73aIjVBpQCDSWBm2rtMg==
-X-Received: by 2002:a05:6870:2209:b0:3f5:5d85:80bb with SMTP id
- 586e51a60fabf-408ab82f8acmr373084fac.49.1769109045594; 
- Thu, 22 Jan 2026 11:10:45 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-408afc0397csm8095fac.17.2026.01.22.11.10.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 11:10:44 -0800 (PST)
-Date: Thu, 22 Jan 2026 13:10:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Beleswar Padhi <b-padhi@ti.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Joel Stanley <joel@jms.id.au>, Michal Simek <michal.simek@amd.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-Message-ID: <20260122191042.GD3416603@bill-the-cat>
+ AJvYcCVCwlR7EZrnufeCM3PoLnwzpKSt/qxebtlTO3s39k5pLnmNdnBABc6xxBfvQa//bUGIe8TUnlc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxjp0l2ovu/fd6ZLMdMA+obZooQMplmTNTCsfYTJumgjCROjAJy
+ bMYHXM1JfgabEm0AVHoSsmgL4oBOZtAza+v9FbipRzoMkZHggEIc0PWJNPhmASCCro2VBtxTPSw
+ /82XgNiDCNg164qvBWFW9wPIhANHryrE=
+X-Gm-Gg: AZuq6aLZkNe8Ej0Clo7nJ9qNOFt80elaDAMp7t6RinEZGJEtVxKjeIT7tke43OLf2LH
+ VjTi1ivjmx3pNIh7x7o+iP6frYfsFMdvDO3RY61aaB8d6wP2l8fOVdfMRQ40BMZ9SY2S1kVZsgQ
+ /tH4Hs8KPpQcVAqgpk83uLLhmuwDDgFBYLX8DPU/+GuNOIIzhfWTNTPKrHSBUeQrL2G8gDjMjuM
+ NGkYgBL+z0aKG6goaalH0ztPakkGY8LKkGqw7d2yJVgeq3gTfBU+MjIDFd9WqgnrbP0at7EPbcs
+ grChchACnIDQBa5ThVwqL6TsRIU=
+X-Received: by 2002:a2e:a556:0:b0:383:1ec5:9640 with SMTP id
+ 38308e7fff4ca-385da02f857mr1680891fa.32.1769109607221; Thu, 22 Jan 2026
+ 11:20:07 -0800 (PST)
+MIME-Version: 1.0
 References: <20260115222828.3931345-1-trini@konsulko.com>
  <20260115222828.3931345-3-trini@konsulko.com>
  <CAOMZO5DZNJ+=AP1spWCv7Ar6etf03H=DFVU=mXZcC7QFTGoh_Q@mail.gmail.com>
@@ -97,12 +95,31 @@ References: <20260115222828.3931345-1-trini@konsulko.com>
  <040e129c-44ca-4a59-828f-d37c6e41d3b2@mailbox.org>
  <20260122142323.GX3416603@bill-the-cat>
  <CAOMZO5AZiBajXK1b6Mse9LPwHEzhJSM_-OcQs4BsnbXP3WzuxA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ytfbtONEMAHuT29R"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5AZiBajXK1b6Mse9LPwHEzhJSM_-OcQs4BsnbXP3WzuxA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20260122191042.GD3416603@bill-the-cat>
+In-Reply-To: <20260122191042.GD3416603@bill-the-cat>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 22 Jan 2026 16:19:55 -0300
+X-Gm-Features: AZwV_QjjP4NsLMm60AJlRp8fQ3vRE6ci0lToUQ_O_-jyc6xFkWdptTQcjuL_IGg
+Message-ID: <CAOMZO5CJ4BAi95gjV8a=_W-Wu=zr1dMOoDOCB4yUVAzY2ARBUA@mail.gmail.com>
+Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
+ device tree is aligned
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Beleswar Padhi <b-padhi@ti.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Joel Stanley <joel@jms.id.au>, Michal Simek <michal.simek@amd.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,109 +136,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jan 22, 2026 at 4:10=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 
---ytfbtONEMAHuT29R
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Can you please share it with my off-list maybe? I'm still confused as to
 
-On Thu, Jan 22, 2026 at 03:47:52PM -0300, Fabio Estevam wrote:
-> Hi Tom and Marek,
->=20
-> On Thu, Jan 22, 2026 at 11:23=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
->=20
-> > We did that, yes. I'm not sure what Fabio is running in to here..
->=20
-> Let me share more information with you.
->=20
-> The board I am working on is based on Rockchip RV1103 (ARMv7) and will
-> submit it upstream soon.
+My work-in-progress tree is at:
 
-Can you please share it with my off-list maybe? I'm still confused as to
-where the "sram" and "sdram" parts are coming from.
+https://github.com/fabioestevam/u-boot/commits/rv1103_prep/
 
-> The board was booting fin last week. Yesterday, after rebasing it
-> against the top of the tree U-Boot, the board no longer boots.
->=20
-> The boot error is:
->=20
-> Missing DTB
-> spl_early_init() failed: -2
-> ### ERROR ### Please RESET the board ###
->=20
-> After running "git bisect", I found Tom's commit 8b0ebe054bb3 ("arm:
-> Update linker scripts to ensure appended device tree is aligned") to
-> be the guilty one.
->=20
-> If I partially revert the arm/cpu/u-boot-spl.lds change, as shown
-> below, the board boots again:
->=20
-> --- a/arch/arm/cpu/u-boot-spl.lds
-> +++ b/arch/arm/cpu/u-boot-spl.lds
-> @@ -51,9 +51,9 @@ SECTIONS
->                 __rel_dyn_start =3D .;
->                 *(.rel*)
->                 __rel_dyn_end =3D .;
-> -               . =3D ALIGN(8);
->         }
->=20
-> +       . =3D ALIGN(8);
->         _image_binary_end =3D .;
->         _end =3D .;
->=20
-> With Tom's commit applied (failing case), the spl/u-boot-spl.map looks
-> like this:
->=20
-> .rel.dyn        0x0000000000015cac        0x4
->                 0x0000000000015cac                __rel_dyn_start =3D .
->  *(.rel*)
->  .rel.iplt      0x0000000000015cac        0x0 arch/arm/cpu/armv7/start.o
->                 0x0000000000015cac                __rel_dyn_end =3D .
->                 0x0000000000015cb0                . =3D ALIGN (0x8)
->  *fill*         0x0000000000015cac        0x4
->                 0x0000000000015cb0                _image_binary_end =3D .
->                 0x0000000000015cb0                _end =3D .
->=20
-> With the partial revert above (booting case):
->=20
-> .rel.dyn        0x0000000000015cac        0x0
->                 0x0000000000015cac                __rel_dyn_start =3D .
->  *(.rel*)
->  .rel.iplt      0x0000000000015cac        0x0 arch/arm/cpu/armv7/start.o
->                 0x0000000000015cac                __rel_dyn_end =3D .
->                 0x0000000000015cb0                . =3D ALIGN (0x8)
->                 0x0000000000015cb0                _image_binary_end =3D .
->                 0x0000000000015cb0                _end =3D .
->=20
-> Basically, in the good case, .rel.dyn is zero. In the failing case:
-> .rel.dyn is 0x4 and *fill* is 0x4 as well.
->=20
-> This change messes with dtb being found in SPL.
->=20
-> What would be a proper fix?
+This tree boots fine. After rebasing these patches to the top of the
+tree, it fails to boot.
 
-Well, where is the dtb ending up in the resulting binary? The addresses
-are aligned correctly, but the dtb isn't where it's supposed to be,
-where is it instead? A challenge here is that I could only check the
-linker script used by about half of the 32bit ARM boards
-(arch/arm/mach-omap2/u-boot-spl.lds) and not the one used by the other
-half (arch/arm/cpu/u-boot-spl.lds). The initial error you reported makes
-me wonder if we can somehow unify these two afterall, which would be
-good in general to do.
+> Well, where is the dtb ending up in the resulting binary? The addresses
+> are aligned correctly, but the dtb isn't where it's supposed to be,
+> where is it instead? A challenge here is that I could only check the
+> linker script used by about half of the 32bit ARM boards
+> (arch/arm/mach-omap2/u-boot-spl.lds) and not the one used by the other
+> half (arch/arm/cpu/u-boot-spl.lds). The initial error you reported makes
+> me wonder if we can somehow unify these two afterall, which would be
+> good in general to do.
 
---=20
-Tom
+The spl/u-boot-spl.bin file is 4 bytes longer in the failing case.
 
---ytfbtONEMAHuT29R
-Content-Type: application/pgp-signature; name="signature.asc"
+Let me know if you need any further clarification or if you'd like me
+to test something.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXJ2KQAKCRAr4qD1Cr/k
-ChfCAP9QpvkA3VLD9WGrr0fBvwr5v+uW+ixdcEypRTatZkH4pAD7BOjAVDGneF7M
-E9kLSXgxsvcCokFgip5IhyBaQ8woxwU=
-=6TnQ
------END PGP SIGNATURE-----
-
---ytfbtONEMAHuT29R--
+Thanks
