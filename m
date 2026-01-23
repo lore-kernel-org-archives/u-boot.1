@@ -4,103 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DE5D778B1
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 00:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D740D77898
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 00:30:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FDBD83AEE;
-	Sat, 24 Jan 2026 01:13:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B7C2C83AEE;
+	Sat, 24 Jan 2026 01:30:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iT6Kue3t";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="voTq46mE";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vmnz3biW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 717C783B03; Sat, 24 Jan 2026 01:13:41 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C506283B03; Sat, 24 Jan 2026 01:30:38 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76ACD839DF
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 01:13:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97624839DF
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 01:30:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-383122fbc9bso20689091fa.1
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 16:13:39 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769213619; cv=none;
- d=google.com; s=arc-20240605;
- b=OI/pPW8tsWk9mh1KAZWNfRpCflSzzwRFYiw/lMZBy2S9xkS2oz5/HORRmmtaSKB3aB
- 6NP0NpDyu/yIr0qu5FyjJAikq8s2ZQgWmYxBfTxqymfs6hdUVxWNKNP/P0nAk4gWbrOF
- M1gsALhuskC3P8o+L9dYDXWJ5Oo5AexAGjAAshNVut7YxArLPodxf5fke/0OjlWzpSDc
- AOG+n7f9N0dXFNWLBw7DgRHMiPnd9ghn2cHZceb1+14dRncUhfvOmQUg7+6Fg6NoYVOL
- u5sUwvY/o2BS8R/WofMn92mCsKSeFWm959N56g9c5rVMlXkxeQXH6If/jynsr/e3q3dO
- CH9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
- fh=i9kap9ZwZr4yVKZ2aHRk/U8QCM1eWKG+SZj9RqkaYJU=;
- b=NOmFMgYDO2iLzSAIEBcmiySv0MVBA4HLtS8l0i4h+kEbR6l3XW0mD1UW/P/hv7XGt0
- ATONeKfxTfdOr/pFhjOiPdLWi/qUfL+22t0fW2Z0Cimk2aG4J1A9MOTx2O8QIedXSpbi
- sZFKrYquTvkdG4lRh/pE6E7SUJ1bMyjW5nHwYMWH/u+Ze2D9G/2ajGdHG8XVbCjbKXA4
- vqlZm5MIWT2DbSL9gTxdKzcql+fFPSPWDhMMf7cPEbBPfAcVRlHcs4MhSkmQalQrxXgA
- qgxp0Sji4amv5NqCTQJJEiSaynGRECUI0Ar4EjFY0eyOp5uRdYDvLUFF9w4lz37UfXIa
- WPkQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769213619; x=1769818419; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
- b=iT6Kue3tYtQSmbk9sFqERLmLmYkKkIRwQx+KnpvdyaAOCtVNjJk+jO/t6IQmpkk9XU
- XFJslW1fqig8cZ/+0RJqocDWh1SjHdc5D3mjMe+GBCuujFZNCApdehgkKneHvVlK7PJh
- uTTn3wJYLjEaP1Wa55+ucG/8jUcGSzzZYxgNdikizfBBMM7I/YNkD5JlXiEZ30hT8I2W
- AAS+cDjr+E9DpmyM7TZ1L0cPl+B+Ku7T5l+zxLraIIEiMrriX62Ly9mS1yL4feK3/IcJ
- NbXo1Zk/vb8eCKIROBctDgyU/IdxbCPao/8k9DRhWDkn4ghrKsnARu8/nxuEZ16Isyng
- Do0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769213619; x=1769818419;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
- b=VyDojtVCHsctETImd+k5I+xFz+CGtH2JV+7K9erdTCKrmdwnxvTLAhfdHuKYPHvQ8z
- U4KZVTlNxI/t3CvJidIlSPm1wazUzlN8Lc/ilpECXbWDLgugZ7Qx4XpxgYmQPCBnc7iW
- yC4kr1+7MVYLvtAVVy0fZ6FbuPEB1i8JWbht5kf1e68Ah8xtWYRLeUlXDABOTJ9ubz36
- /4IV055/gMte3cqlp+tqvR8DMfZe8CQ1fxUc1AJ4nU+ac8x1cy47yOOOc8mzqQeSLVAy
- hqwnfst58rUQ7tO3QBHVuBcu8CdPzqan3vaH2QVZO89NxKC5Iq8gBJQzSnlqXnBvD4+E
- cb1A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXrNh+JLwDXg6X6tAEdMpvwhjkYo9XF8Joq3Emt7yDY1/2S7fDb/wj9sSQkd/QroRMfdregw1w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpSx8zmI7SQIDpDsBJkWqBcNQn6bc0sLMPuyH0vipLb0CfZw14
- XVTr6KgHOqXFEZK2P4tdIQVri+BEFaPIJFJ1H/dNlZGEXv7w9wal8QlowMlJyVtc6oyxNG005r4
- cq03I2fl+RMdeIE37zpl0kHDZQjW9LqM=
-X-Gm-Gg: AZuq6aJKxng5kT7QBPFiIjjaKNdNzy25dOp7Lpu/lKtXZ8ChJjSWoKe8lbgi5E0f+Yg
- GDf6CiUoO04/DvlyVJ16vGyXT39+OVHG+S1bSYjiaPWq/FQKXGDICE3XsgDaUz8h4RYRIxQw6NX
- FCialrMcMwmU9nCA/eLh3n7YJZGxqzfL0vugQW/7jwfSi5g9qqVy3b02JgkCxLbcdZueSWG5jNw
- JrrbksibLfUa4BzkeDWYgesrOE7zkKbt+EvoQ5Ldc1WEkqPbDBP/h79le573wpnAplKep9Sdfu7
- MLaK+yMg8bajaLiq0WTlyz95OBUy7HHVfRq8
-X-Received: by 2002:a05:651c:1504:b0:37b:a640:765e with SMTP id
- 38308e7fff4ca-385d9f0fd0bmr15964451fa.11.1769213618400; Fri, 23 Jan 2026
- 16:13:38 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dybLN1XW5z9tlb;
+ Sat, 24 Jan 2026 01:30:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769214636;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hK+CKylKc9YluoZaCUMPknix3Z8v7d5c9rJg4NTSZpE=;
+ b=voTq46mExH62anGqEUXW8YImYc7wwZwzNJNKcEbyeDmDq1B2C5TPsJ1Ih3/6l88T1m0yEe
+ D+0m6QNmVVcZxwKbLKz53oGh6HdF48NTGaMnnStkJai41DyPRsMhuiQZdJDevsJK/ldMhe
+ rwaYM0WJHcIQJXjKd9sQOZSizhkMMQQyUSkL4PIn6ObB0YNSnV6KkdYT9/K8tXlNPVHYj7
+ yuAP97C9i2osO/dPPlgcBn0oqTCSCEBwma7C1MWSkIPYGHlnfn/ShoSnb8bG+0Zb2+R8aa
+ jEOA8rxZg8L90OXh7LKE8xs1rQPgKD0m3nWuTbJPkEo3mRgyRUKtCa0YlEi7nA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Vmnz3biW;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <c60ae82e-da62-42c8-89d1-ed44adeaf351@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769214634;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hK+CKylKc9YluoZaCUMPknix3Z8v7d5c9rJg4NTSZpE=;
+ b=Vmnz3biWmTNcOmSH55IdEGakqYIxSqUnUjG/lVo54bUvuqHo+ZVgYeJz1Xio9e4ng3H14j
+ pU+JFqQsRMk7DY+HfNqDOKxYQBv4MpzAXZfCvlGSX1abYpPGs1vCE9EZIjoP674+u2wPMU
+ 51Si0q30WtLh/MQqgxdtxuh9EdeB24mj+X5gExHsYAnVKbyvbI6cOqiNguuAE5oDLRJrZS
+ WTuuBBh6lZNa7qa2a//QVdUfxNZ5Vy8sheOc51JJWL4UxcUKmI72YzPVT8BXf5jSK7d5fx
+ 1mIMwMKPZEzrKZtfwKu9zwk6XRVdRXzy+ojf6hKEu03Zd57eWwW4w3+kKaKVOQ==
+Date: Fri, 23 Jan 2026 19:53:03 +0100
 MIME-Version: 1.0
-References: <20260123161907.392211-1-festevam@gmail.com>
- <20260123201202.GO3416603@bill-the-cat>
-In-Reply-To: <20260123201202.GO3416603@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 23 Jan 2026 21:13:27 -0300
-X-Gm-Features: AZwV_Qjvu2ypNaTay5ZXoi5iKsh6SydxefY8--TlBlhAaFxCMdlRw9PGd_aap04
-Message-ID: <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
-Subject: Re: [PATCH] arm: spl: Fix DTB offset after binman symbol table
+Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
+ via -b argument
 To: Tom Rini <trini@konsulko.com>
-Cc: marek.vasut@mailbox.org, u-boot@lists.denx.de, sjg@chromium.org, 
- ilias.apalodimas@linaro.org, Fabio Estevam <festevam@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Anshul Dalal <anshuld@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
+ ilias.apalodimas@linaro.org, malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, marek.vasut+renesas@mailbox.org,
+ james.hilliard1@gmail.com, afd@ti.com, nm@ti.com, vigneshr@ti.com,
+ n-francis@ti.com, u-kumar1@ti.com, bb@ti.com, praneeth@ti.com,
+ u-boot@lists.denx.de
+References: <20260122172247.2995437-1-b-padhi@ti.com>
+ <20260122174546.GB3416603@bill-the-cat>
+ <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
+ <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
+ <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
+ <DFVWL63A8IDP.23PE1QNTXTMRU@ti.com>
+ <6cb4957c-7178-4a31-aea9-ad78d6627c28@mailbox.org>
+ <20260123152506.GL3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260123152506.GL3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: fgizd1d7pp65j5g389qy6dcabrrzzgcz
+X-MBO-RS-ID: b6253f63bfc574afe0e
+X-Rspamd-Queue-Id: 4dybLN1XW5z9tlb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,39 +106,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 1/23/26 4:25 PM, Tom Rini wrote:
 
-On Fri, Jan 23, 2026 at 5:12=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+>>>> "
+>>>> diff --git a/tools/fit_image.c b/tools/fit_image.c
+>>>> index 0306333141e..0c606ba4cc3 100644
+>>>> --- a/tools/fit_image.c
+>>>> +++ b/tools/fit_image.c
+>>>> @@ -642,9 +642,15 @@ static int fit_extract_data(struct
+>>>> image_tool_params *params, const char *fname)
+>>>>            for (node = fdt_first_subnode(fdt, images);
+>>>>                 node >= 0;
+>>>>                 node = fdt_next_subnode(fdt, node)) {
+>>>> -               const char *data;
+>>>> +               const char *data, *type;
+>>>>                    int len;
+>>>>
+>>>> +               if (align_size < 8) {
+>>>> +                       type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
+>>>> +                       if (type && !strcmp(type, "flat_dt"))
+>>>> +                               align_size = 8;
+>>>> +               }
+>>>> +
+>>>>                    data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
+>>>>                    if (!data)
+>>>>                            continue;
+>>>> "
+>>>>
+>>>
+>>> I just ran a quick test with this diff and it seems to fix the issue for
+>>> us. If it's okay can we take the change as is.
+>> I think the strcmp needs to be some strncmp and check the 'len' too.
+>>
+>> Let's see what others think.
+> 
+> Probably fine to keep going as-is. If there's security challenges here
+> this isn't the first one I bet.
+This is unacceptable.
 
-> I've been talking with Ilias for the last few hours. This still isn't
-> right, it just happens to work in some cases, but not others. What's
-> going on is that while we always have u-boot-nodtb.bin 8-byte aligned
-> because while the BSS itself may end 8 byte aligned, we actually care
-> about the size of the BSS being 8 byte aligned. Can you please try:
->
-> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> index d780a5060774..dae8a1ec665b 100644
-> --- a/arch/arm/cpu/u-boot-spl.lds
-> +++ b/arch/arm/cpu/u-boot-spl.lds
-> @@ -58,6 +58,7 @@ SECTIONS
->         _end =3D .;
->
->         .bss __rel_dyn_start (OVERLAY) : {
-> +               . =3D ALIGN(8);
->                 __bss_start =3D .;
->                 *(.bss*)
->                  . =3D ALIGN(8);
->
-> And see if it works at run time? hexdump'ing looks good. If so, I'll do
-> something more broad to catch the SPL_SEPARATE_BSS=3Dn case, and add the
-> ASSERTS that are missing.
-
-This fixes the boot on RV1103, thanks!
-
-When you send a formal patch, feel free to add:
-
-Reported-by: Fabio Estevam <festevam@gmail.com>
-Tested-by: Fabio Estevam <festevam@gmail.com>
-
-Thanks
+Adding strncmp() is trivial.
