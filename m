@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4359D7236C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2308D7237B
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B94F83B86;
-	Fri, 23 Jan 2026 12:46:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DAA0683C91;
+	Fri, 23 Jan 2026 12:46:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="o8hbEOdr";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="eImAqqGV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDE1083B86; Fri, 23 Jan 2026 12:46:25 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id BA7C783C5E; Fri, 23 Jan 2026 12:46:27 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 951A783B63
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:46:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C907183C72
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:46:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 43075C21ABE;
- Fri, 23 Jan 2026 11:46:23 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 8200D1A2B52;
+ Fri, 23 Jan 2026 11:46:25 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 0A1D86070A;
- Fri, 23 Jan 2026 11:46:23 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 574EA6070A;
+ Fri, 23 Jan 2026 11:46:25 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3D77E119A87C5; Fri, 23 Jan 2026 12:46:19 +0100 (CET)
+ with ESMTPSA id 59EE2119A83E7; Fri, 23 Jan 2026 12:46:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1769168781; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1769168784; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=gimbKAegWL7FBNhcRA6zXDsk5FrI95XCDx5tQgRTF/o=;
- b=o8hbEOdrgF1lfSZfhK1k7JZ0/AxxbvkhF4JMD2S7UgK1LAcNjlzHdoBSyWlswZBCwcadUI
- HiYp9igDcvaWG/rzmhryOk+tqBorG4GzNcPHGx8sTyPdfTVKUNq6YYxtXXQH3px65fVyH5
- C28JPCOhxUMZvV+reWCl/8wxa58Gnr4h9vObuJGlm19hxZ/w2sn/+Ga0AdKXKJqqMOE5rw
- 1flT19RorvJkJEi8azb51ArYSMQQiCDG+vJaMhhBt85Emp20BkFSDYZ+NKlpx6yMCOwJkR
- 4DNpQQIasUlhFG9c62LHL61kShga3jfDTMFWPtHoRBHnfyNZxnj1EqD6IXPmjA==
+ bh=YCsgo3vzRJqo3y5sfEhY6ycW8e78aW0oXxM5SPOKKt4=;
+ b=eImAqqGVsXHwmbAAtXq+jAvUp/+1GKUbC72OSDnMAfJQCamwL1JWuHoKpgH9O07yDCiTYk
+ u6iQzTafz7AtCMBlqXa3AexMIcNTVPXNlNPhMvVILfsSvpqT5wGVFlau/HcHf6xPU2gp8Z
+ +vGOCWdhUk3KyY6hYTn+g0hYXj3EKBDJtS59KYTX/ormaAkmq6N5r6AFOJVhd+vEunKmW9
+ 5zyypdLQvPwEez+YVDm/3TDx5isJyTLnXepFEhVsHAOTHL7YypO89hA34I1/l6KzGB1Nd9
+ yjk7qV34H4b54KKjcB1AOvRfw7MNPOZtK/zoRg7cc3mTJEVqww8pGA3Tm9IHHQ==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -61,10 +61,10 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v3 16/26] mtd: rawnand: sunxi: introduce reg_spare_area in
- sunxi_nfc_caps
-Date: Fri, 23 Jan 2026 12:44:51 +0100
-Message-ID: <20260123114507.1400918-17-richard.genoud@bootlin.com>
+Subject: [PATCH v3 17/26] mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and
+ NFC_ECC_PAT_FOUND
+Date: Fri, 23 Jan 2026 12:44:52 +0100
+Message-ID: <20260123114507.1400918-18-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260123114507.1400918-1-richard.genoud@bootlin.com>
 References: <20260123114507.1400918-1-richard.genoud@bootlin.com>
@@ -87,94 +87,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce NDFC Spare Area Register offset in SoC capabilities
+Use defines instead of hardcoded values for NFC_ECC_{ERR_MSK,PAT_FOUND}
 
-The H6/H616 spare area register is not at the same offset as the
-A10/A23 one, so move its offset into sunxi_nfc_caps.
+SPL is using hard coded values for ECC error detection and empty chunk
+detection.
+The H6/H616 registers for that have changed, the pattern found is no
+more in the NFC_REG_ECC_ST register.
 
-No functional change.
+So, don't presume anymore that pattern_found is in NFC_REG_ECC_ST, and
+read the pattern_found register to get this information.
+
+Apart from an additional register reading, no functional change.
 
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand.c     | 3 ++-
- drivers/mtd/nand/raw/sunxi_nand.h     | 7 +++++--
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 3 ++-
- 3 files changed, 9 insertions(+), 4 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand.h     |  3 +++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c | 21 +++++++++++++++------
+ 2 files changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-index c35dff75de06..aabfcdfe637f 100644
---- a/drivers/mtd/nand/raw/sunxi_nand.c
-+++ b/drivers/mtd/nand/raw/sunxi_nand.c
-@@ -328,7 +328,7 @@ static void sunxi_nfc_select_chip(struct mtd_info *mtd, int chip)
- 				ctl |= NFC_RB_SEL(sel->rb.info.nativeid);
- 		}
- 
--		writel(mtd->writesize, nfc->regs + NFC_REG_SPARE_AREA);
-+		writel(mtd->writesize, nfc->regs + NFC_REG_SPARE_AREA(nfc));
- 
- 		if (nfc->clk_rate != sunxi_nand->clk_rate) {
- 			sunxi_nfc_set_clk_rate(sunxi_nand->clk_rate);
-@@ -1727,6 +1727,7 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
- 	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
- 	.reg_user_data = NFC_REG_A10_USER_DATA,
- 	.reg_pat_found = NFC_REG_ECC_ST,
-+	.reg_spare_area = NFC_REG_A10_SPARE_AREA,
- 	.reg_pat_id = NFC_REG_A10_PAT_ID,
- 	.pat_found_mask = GENMASK(31, 16),
- 	.ecc_mode_mask = GENMASK(15, 12),
 diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-index 2cbfc5c9c62a..b5a3800d33d2 100644
+index b5a3800d33d2..25d18eaa0b81 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand.h
 +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-@@ -49,8 +49,9 @@
- #define NFC_REG_ECC_ERR_CNT(nfc, x)	(((nfc)->caps->reg_ecc_err_cnt + (x)) & ~0x3)
- #define NFC_REG_A10_USER_DATA	0x0050
- #define NFC_REG_USER_DATA(nfc, x)	((nfc)->caps->reg_user_data + ((x) * 4))
--#define NFC_REG_SPARE_AREA	0x00A0
--#define NFC_REG_PAT_ID(nfc)	((nfc)->caps->reg_pat_id)
-+#define NFC_REG_SPARE_AREA(nfc) ((nfc)->caps->reg_spare_area)
-+#define NFC_REG_A10_SPARE_AREA	0x00A0
-+#define NFC_REG_PAT_ID(nfc) ((nfc)->caps->reg_pat_id)
- #define NFC_REG_A10_PAT_ID	0x00A4
- #define NFC_RAM0_BASE		0x0400
- #define NFC_RAM1_BASE		0x0800
-@@ -173,6 +174,7 @@
-  * @nstrengths:		Number of element of ECC strengths array
-  * @reg_ecc_err_cnt:	ECC error counter register
-  * @reg_user_data:	User data register
-+ * @reg_spare_area:	Spare Area Register
+@@ -150,6 +150,7 @@
+ 
+ /* define bit use in NFC_ECC_ST */
+ #define NFC_ECC_ERR(x)		BIT(x)
++#define NFC_ECC_ERR_MSK(nfc)	((nfc)->caps->ecc_err_mask)
+ 
+ /*
+  * define bit use in NFC_REG_PAT_FOUND
+@@ -177,6 +178,7 @@
+  * @reg_spare_area:	Spare Area Register
   * @reg_pat_id:		Pattern ID Register
   * @reg_pat_found:	Data Pattern Status Register
++ * @ecc_err_mask:	ERR_ERR mask in NFC_ECC_ST register
   * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
-@@ -184,6 +186,7 @@ struct sunxi_nfc_caps {
- 	unsigned int nstrengths;
- 	unsigned int reg_ecc_err_cnt;
- 	unsigned int reg_user_data;
-+	unsigned int reg_spare_area;
+  * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
+  * @random_en_mask:	RANDOM_EN mask in NFC_ECC_CTL register
+@@ -190,6 +192,7 @@ struct sunxi_nfc_caps {
  	unsigned int reg_pat_id;
  	unsigned int reg_pat_found;
  	unsigned int pat_found_mask;
++	unsigned int ecc_err_mask;
+ 	unsigned int ecc_mode_mask;
+ 	unsigned int random_en_mask;
+ };
 diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 49ff56fb695c..7f9ee14ffc3c 100644
+index 7f9ee14ffc3c..da94285e6b72 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -54,6 +54,7 @@ const uint16_t random_seed[128] = {
- 
+@@ -55,6 +55,9 @@ const uint16_t random_seed[128] = {
  __maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
  	.has_ecc_block_512 = true,
-+	.reg_spare_area = NFC_REG_A10_SPARE_AREA,
+ 	.reg_spare_area = NFC_REG_A10_SPARE_AREA,
++	.reg_pat_found = NFC_REG_ECC_ST,
++	.pat_found_mask = GENMASK(31, 16),
++	.ecc_err_mask = GENMASK(15, 0),
  	.random_en_mask = BIT(9),
  };
  
-@@ -151,7 +152,7 @@ static void nand_apply_config(const struct nfc_config *conf)
- 	writel(val | NFC_PAGE_SIZE(conf->page_size),
- 	       SUNXI_NFC_BASE + NFC_REG_CTL);
- 	writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_REG_CNT);
--	writel(conf->page_size, SUNXI_NFC_BASE + NFC_REG_SPARE_AREA);
-+	writel(conf->page_size, SUNXI_NFC_BASE + NFC_REG_SPARE_AREA(conf));
- }
+@@ -211,7 +214,7 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 	u16 rand_seed = 0;
+ 	int oob_chunk_sz = ecc_bytes[conf->ecc_strength];
+ 	int page = offs / conf->page_size;
+-	u32 ecc_st;
++	u32 ecc_st, pattern_found;
+ 	int i;
  
- static int nand_load_page(const struct nfc_config *conf, u32 offs)
+ 	if (offs % conf->page_size || len % conf->ecc_size ||
+@@ -256,15 +259,21 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 		ecc_st = readl(SUNXI_NFC_BASE + NFC_REG_ECC_ST);
+ 
+ 		/* ECC error detected. */
+-		if (ecc_st & 0xffff)
++		if (ecc_st & NFC_ECC_ERR_MSK(conf))
+ 			return -EIO;
+ 
+ 		/*
+-		 * Return 1 if the first chunk is empty (needed for
+-		 * configuration detection).
++		 * Return 1 if the first chunk is empty (all 00 or ff)
++		 * (needed for configuration detection).
+ 		 */
+-		if (!i && (ecc_st & 0x10000))
+-			return 1;
++		if (!i) {
++			pattern_found = readl(SUNXI_NFC_BASE +
++					      conf->caps->reg_pat_found);
++			pattern_found = field_get(NFC_ECC_PAT_FOUND_MSK(conf),
++						  pattern_found);
++			if (pattern_found & NFC_ECC_PAT_FOUND(0))
++				return 1;
++		}
+ 
+ 		/* Retrieve the data from SRAM */
+ 		nand_readlcpy((u32 *)data,
 -- 
 2.47.3
 
