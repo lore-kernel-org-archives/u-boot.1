@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA98FD7236C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237E3D7236C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:45:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BCE183B63;
-	Fri, 23 Jan 2026 12:45:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AFA6F83B21;
+	Fri, 23 Jan 2026 12:45:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="FgGlBtqt";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="0z4gh2N8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0E2E83B21; Fri, 23 Jan 2026 12:45:43 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id A747B83B21; Fri, 23 Jan 2026 12:45:46 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 383648397D
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:45:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 067BF8397D
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:45:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 21051C21ABE;
- Fri, 23 Jan 2026 11:45:41 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 90A8C4E42216;
+ Fri, 23 Jan 2026 11:45:43 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id DD0476070A;
- Fri, 23 Jan 2026 11:45:40 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 65F0B6070A;
+ Fri, 23 Jan 2026 11:45:43 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 794B0119A83E7; Fri, 23 Jan 2026 12:45:37 +0100 (CET)
+ with ESMTPSA id 300F1119A87BF; Fri, 23 Jan 2026 12:45:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1769168739; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1769168742; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=a3VNTURQAzGTsCYqW4nh25ACXiZU/O2k6YDnpYHBecQ=;
- b=FgGlBtqtF6r1jq2rpvnXfJRwxrU6xT4dppi0QL4Ii+7WWb4Bu0qDNLiRmy1kk5l0pU3Djz
- Xn8AZb7rFZ4PlM5K7ClNv/7eUVEjnZu8mIi5d7owjqCXsOYvCPyRAgPkFtQQpwH9LIy00w
- 4a38Z81BHf8tYuwFQXHptkd9Xo0C5NLfpJmf0X6MnaVM2bGJ+MMdM2gAgv4YCyHdi0zJA+
- QfiN15taE80s97VtpOt4vf9gb3NOQKdTitjzpdJuguht0M6K6vy7t1ZOccCCSBINfvWAzt
- al1ddWvVzQQiA60+kbnjxbhBqqHSFJjbDqo9I+sJpvabgh4y0qLGhP8HE4fO0w==
+ bh=yes95cjRqP3lVau+BHtP6QulD7sbtaA2NDEIlpwDnjc=;
+ b=0z4gh2N8CqrIJ39qOvu429v+TBNH7HLbQZyVd3U61iw3mflZgvGROzbR7ceW3HCIWSlzTE
+ IctfNPAb25PdsWaLSV934NzRPe+bgpKc1pRb4FwjmVpw0oOqYOFbtBU+PyWAU1G5oYscSD
+ XPjIhuH+pfS0g88p5SqJFvDA8YI8CKyMy4ZC88z6xOqIBDYRgJAPyPOFOvWw04uBIJ6NGE
+ rTMMOyDSjMBlRAvJ7kr3aPVvi+7OVC28TnRxecABdWhp47ZfkhnX8JYGjlz2lx85FxkH03
+ EGkpkcJ42CxAtm0pCxRCV4ZJQmV78WehHhrRECDQtybF5n6ijfPgOvUUbuR/YQ==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -61,14 +61,15 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v3 01/26] mtd: rawnand: sunxi: cosmetic: remove needless
- comment
-Date: Fri, 23 Jan 2026 12:44:36 +0100
-Message-ID: <20260123114507.1400918-2-richard.genoud@bootlin.com>
+Subject: [PATCH v3 02/26] mtd: rawnand: sunxi_spl: fix pointer from integer
+ without a cast
+Date: Fri, 23 Jan 2026 12:44:37 +0100
+Message-ID: <20260123114507.1400918-3-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260123114507.1400918-1-richard.genoud@bootlin.com>
 References: <20260123114507.1400918-1-richard.genoud@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -87,29 +88,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove 'complete' member from struct sunxi_nfc
+Fix pointer from interget warning when compiling for ARM64
 
-The 'complete' member isn't part of the structure, let's remove it.
+When compiling for arm64, we get this error:
+error: passing argument 2 of ‘__memcpy_fromio’ makes pointer from
+			integer without a cast [-Wint-conversion]
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+Moreover the copy should be made with dedicated readl(), like for any
+register access on this peripheral, since they are 32bit wide.
+
+So, instead of memcpy_fromio(), just use a readl() loop.
+Introduce nand_readlcpy() to implement this loop.
+
+Fixes: 6ddbb1e936c7 ("spl: nand: sunxi: use PIO instead of DMA")
+Suggested-by: Andre Przywara <andre.przywara@arm.com>
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand_spl.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-index 1ce09b56b804..c6b9b2a4ebac 100644
---- a/drivers/mtd/nand/raw/sunxi_nand.c
-+++ b/drivers/mtd/nand/raw/sunxi_nand.c
-@@ -270,8 +270,6 @@ static inline struct sunxi_nand_chip *to_sunxi_nand(struct nand_chip *nand)
-  * @clk_rate:		NAND controller current clock rate
-  * @chips:		a list containing all the NAND chips attached to
-  *			this NAND controller
-- * @complete:		a completion object used to wait for NAND
-- *			controller events
-  */
- struct sunxi_nfc {
- 	struct nand_hw_control controller;
+diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
+index 4f1e2d9a5775..4441990dd938 100644
+--- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
++++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
+@@ -251,6 +251,15 @@ static int nand_change_column(u16 column)
+ 
+ static const int ecc_bytes[] = {32, 46, 54, 60, 74, 88, 102, 110, 116};
+ 
++static void nand_readlcpy(u32 *dest, u32 * __iomem src, size_t len)
++{
++	/* NB: len should be multiple of 4 (32bits access) */
++	len >>= 2;
++
++	while (len--)
++		*dest++ = readl(src++);
++}
++
+ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 			  void *dest, int len)
+ {
+@@ -310,7 +319,8 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 			return 1;
+ 
+ 		/* Retrieve the data from SRAM */
+-		memcpy_fromio(data, SUNXI_NFC_BASE + NFC_RAM0_BASE,
++		nand_readlcpy((u32 *)data,
++			      (void *)(uintptr_t)SUNXI_NFC_BASE + NFC_RAM0_BASE,
+ 			      conf->ecc_size);
+ 
+ 		/* Stop the ECC engine */
 -- 
 2.47.3
 
