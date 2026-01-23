@@ -4,91 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF120D72379
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C702D7236C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18DDE839DF;
-	Fri, 23 Jan 2026 12:28:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id DC1A4839DF;
+	Fri, 23 Jan 2026 12:45:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lxEkLq1/";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="csm9j3I5";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="I2w+tWfG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1556D83A6A; Fri, 23 Jan 2026 12:28:03 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 660DA83A6A; Fri, 23 Jan 2026 12:45:34 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0DF08397D
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:27:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02D2D8397D
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:45:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dyFzL4Mprz9trL;
- Fri, 23 Jan 2026 12:27:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769167678;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=f9uB9t9zh9M/BpAbgkR+tcOIGV/6LRySd/BuA4rYTnE=;
- b=lxEkLq1/36aSjjwMWKWk9XNk5d60szOhlT8SIauKMPSg5KK+PB72AvkoT0rEpAvrGhuhHr
- LApf+z9rWGuocDZtb2iGxrUqDUVVv3ecNFLolNTUfDKcdNy7N+pCGosQtwt/ckbw4PWuQG
- EKT+0ZVa2ZqJqUfH9ePN5JnUWGBG9d6uDh56jdB3eqsi1jgE9E+6+Mkjrr19ANF6H+iXQL
- +Av5Ntjr1dLnTuBDryR5qKxuAs+dMZm9abz7SjUGmK9mUXj1nQ4Vv3gyN0Z34afyLaTsz8
- dFWLg7QTXcBceTyj2sXu9qRrfAxf1jjb1W6LiTii52TVqMWzKXSPQjicAx9qZg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=csm9j3I5;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <6cb4957c-7178-4a31-aea9-ad78d6627c28@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769167676;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=f9uB9t9zh9M/BpAbgkR+tcOIGV/6LRySd/BuA4rYTnE=;
- b=csm9j3I5co+Dd1A6o9NQlrz258dpggZ9Eolhek0MUx7EcFsXjCc3T+3cMidZHRqo5kwYqw
- JZCipxB4IODNycBySdJissCVH1uB4hz+bTYOsQyVz+j65b13f7Rxs8Kjx23lc9ys1lr6ig
- 4tHi+0bypo3iudI8uttV9gzc4xe/Phzp9enUAe2R6ikkpwY8q8mQXFku9XUhE8IqQDV4pm
- JuN7v9zfz6y5r7v/LddH5t3+4qSN1xRzrwxBFvQSD6mI9PjNI0U5hlnvc75dW61k7YnYA0
- 8tP07JRFE1fIh1GAzBoPDujN/nDCOl+mrWXOC/U+wbrff59CAo+ykR9CemHb4g==
-Date: Fri, 23 Jan 2026 11:51:59 +0100
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 99858C21ABE;
+ Fri, 23 Jan 2026 11:45:31 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 32F9F6070A;
+ Fri, 23 Jan 2026 11:45:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 05546119A83E7; Fri, 23 Jan 2026 12:45:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1769168730; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=Af96CRtaFXV09nPfwtHt5VxFIV0xxsLf/C7r3PKBd8E=;
+ b=I2w+tWfG2mkZUMyJ4NsZEVGXR02T4/Szw7WVY7xZsk0z4Rz2OuxEdlETfXk72WAn1v7J9A
+ 1A1cKvX7P0mCypijWe7vDctAt80v2VGh2axCtBA/in1kS8aICCD98QLnJ6F3IDxNJ/EQ5n
+ W8E5xJ8lUDf8qtWIGbaRmLCk7bRej913MKAVbgpF9hMj3iDd74aRBpwp4s1r2IEY+O6XmE
+ 2hQCHKAkQxBn+Fo+LLn+F1KrC4byTRX5yLzbwtdadsCV45kQaZbMT2SQRJ7jE3oMGPGx9y
+ +NWWI7coZS4ftXcf9+BsItaOPGJ57XPjLhQ+ru5jEmbeqMszFvfJIY/P1KTYfA==
+From: Richard Genoud <richard.genoud@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Boris Brezillon <bbrezillon@kernel.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, u-boot@lists.denx.de,
+ Richard Genoud <richard.genoud@bootlin.com>
+Subject: [PATCH v3 00/26] Introduce Allwinner H6/H616 NAND controller support
+Date: Fri, 23 Jan 2026 12:44:35 +0100
+Message-ID: <20260123114507.1400918-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
- via -b argument
-To: Anshul Dalal <anshuld@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
- Tom Rini <trini@konsulko.com>
-Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
- sughosh.ganu@linaro.org, philip.molloy@analog.com,
- marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, afd@ti.com,
- nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, bb@ti.com,
- praneeth@ti.com, u-boot@lists.denx.de
-References: <20260122172247.2995437-1-b-padhi@ti.com>
- <20260122174546.GB3416603@bill-the-cat>
- <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
- <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
- <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
- <DFVWL63A8IDP.23PE1QNTXTMRU@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <DFVWL63A8IDP.23PE1QNTXTMRU@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: twrabqqp7sd5hyx8gdtmhrpfxiky569f
-X-MBO-RS-ID: 30ce5fb3522f9c187ab
-X-Rspamd-Queue-Id: 4dyFzL4Mprz9trL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,84 +84,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/26 11:40 AM, Anshul Dalal wrote:
-> Hi Marek,
-> 
-> On Fri Jan 23, 2026 at 3:57 PM IST, Marek Vasut wrote:
->> On 1/23/26 4:32 AM, Beleswar Prasad Padhi wrote:
->>>
->>> On 23/01/26 00:33, Marek Vasut wrote:
->>>> On 1/22/26 6:45 PM, Tom Rini wrote:
->>>>> On Thu, Jan 22, 2026 at 10:52:47PM +0530, Beleswar Padhi wrote:
->>>>>
->>>>>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
->>>>>> packed inside the multidtb.fit FIT image. While the individual DTBs
->>>>>> and the FIT image start address are 8-byte aligned, the DTBs embedded
->>>>>> within the FIT image are not guaranteed to maintain 8-byte alignment.
->>>>>>
->>>>>> This misalignment causes -FDT_ERR_ALIGNMENT failure in
->>>>>> setup_multi_dtb_fit() when locating the next available DTB within the
->>>>>> FIT blob and setting gd->fdt_blob, because of the recent libfdt
->>>>>> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
->>>>>> version v1.7.2-35-g52f07dcca47c")
->>>>>>
->>>>>> The mkimage tool already supports enforcing this alignment via the -B
->>>>>> option, but users would have to specify it explicitly. This change
->>>>>> makes 8-byte alignment the default when using -b.
->>>>>>
->>>>>> Reported-by: Anshul Dalal <anshuld@ti.com>
->>>>>> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
->>>>>> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
->>>>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->>>>>
->>>>> Tested-by: Tom Rini <trini@konsulko.com>
->>>> Doesn't this enable 8-byte alignment for everything in case a DT is specified on mkimage command line ? That doesn't seem right ?
->>>>
->>>> If I do mkimage -f auto -b ...dtb ... , then I only want the DTB to be 8-byte aligned, all the other blobs can be 4 byte aligned just fine .
->>>
->>>
->>> All the mkimage flags are parsed at once and populated in the params
->>> data structure in one shot in the code. There is no separation of code
->>> specifically for generating a FIT for a DTB vs for anything else.
->>
->> That does not seem to be true ?
->>
->> $ git grep -p '\<bl_len\>' tools/
->> tools/fit_image.c=static int fit_extract_data(struct image_tool_params
->> *params, const char *fname)
->> tools/fit_image.c:      align_size = params->bl_len ? params->bl_len : 4;
->> ...
->>
->> So something like that may work ?
->>
->> "
->> diff --git a/tools/fit_image.c b/tools/fit_image.c
->> index 0306333141e..0c606ba4cc3 100644
->> --- a/tools/fit_image.c
->> +++ b/tools/fit_image.c
->> @@ -642,9 +642,15 @@ static int fit_extract_data(struct
->> image_tool_params *params, const char *fname)
->>           for (node = fdt_first_subnode(fdt, images);
->>                node >= 0;
->>                node = fdt_next_subnode(fdt, node)) {
->> -               const char *data;
->> +               const char *data, *type;
->>                   int len;
->>
->> +               if (align_size < 8) {
->> +                       type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
->> +                       if (type && !strcmp(type, "flat_dt"))
->> +                               align_size = 8;
->> +               }
->> +
->>                   data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
->>                   if (!data)
->>                           continue;
->> "
->>
-> 
-> I just ran a quick test with this diff and it seems to fix the issue for
-> us. If it's okay can we take the change as is.
-I think the strcmp needs to be some strncmp and check the 'len' too.
+This patch series introduce H6/H616 NAND controller support (but not yet
+the DMA/MDMA part).
 
-Let's see what others think.
+All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
+chip.
+ECC is supported, as well as scrambling.
+
+H6 SoC has not been tested, but it shares all registers with H616, plus
+some registers dedicated to Embedded Crypto Engine that H616 lacks.
+
+This IP has quite some register fields modified from the A10/A23, but in
+the end, it works more or less the same.
+Main differences with A10/A23 are:
+- The need for 2 more clocks (for ECC and MBUS)
+- The use of a new USER_DATA_LEN register
+- More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+- MDMA based on chained buffers
+- some registers layouts have changed (mainly due do the stronger ECC)
+
+Patches 1 and 2 are small fixes
+
+Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
+and ultimately merge those definitions in an include file, without
+functional change, removing the usage of sunxi_ccm_reg on the way.
+
+Patches 7-19 are paving the way to the introduction of H6/H616 NAND
+controller by adding per SoC capabilities for both drivers. They are
+small for an easier review, without functional change.
+
+Patches 20-21 are adding missing NAND related clocks definitions for
+H6/H616
+
+Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+
+Patch 23 adds the support for H6/H616 NAND controller in SPL.
+
+Patch 24 fixes warnings in sunxi_nand_spl.c
+
+Patch 25 fixes a wrong page size setting in control register
+NB: this patch is new
+
+Patch 26 introduces support for H6/H616 in sunxi-spl-image-builder
+NB: this last patch was sent apart from this series first
+
+A similar series for this NAND controller support in Linux has been
+upstreamed.
+
+Changes from v2:
+- add patch 25 and 26
+- use if (IS_ENABLED(CONFIG_ whenever that was possible
+- removed the check on length in nand_readlcpy()
+- harmonize CCU_NAND0_CLK_CFG defines
+- rebase onto v2026.01
+
+Changes from v1:
+- pick-up reviewed-by
+- use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
+  by Andre
+- remove cosmetic in patches that are beyond cosmetic changes
+- remove usage of struct sunxi_ccm_reg, suggested by Andre
+- indent @caps member description in comment
+- give more informations on PAT_FOUND registers in commit message
+- drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
+  same bit NFC_ECC_BLOCK_512
+- add missing MACH_SUN50I_H6 in Kconfig
+
+
+Richard Genoud (26):
+  mtd: rawnand: sunxi: cosmetic: remove needless comment
+  mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+  mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
+  mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+    linux/mtd/rawnand.h
+  mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+  mtd: rawnand: sunxi: merge register definitions for
+    sunxi_nand{,_spl}.c
+  mtd: rawnand: sunxi: add per SoC capabilities
+  mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
+  mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+  mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+  mtd: rawnand: sunxi: add has_ecc_block_512 capability
+  mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+  mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: add per SoC capabilities
+  mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
+  mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
+  mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+  mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
+  sunxi: clock: H6: add NAND controller clock registers
+  clk: sunxi: Add MBUS Master Clock Gating Register
+  mtd: rawnand: sunxi: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
+  mtd: rawnand: sunxi: fix page size in control register
+  tools: sunxi-spl-image-builder: support H6/H616 NAND boot
+
+ arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+ arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
+ .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
+ board/sunxi/board.c                           |  19 +-
+ drivers/clk/sunxi/clk_h6.c                    |   2 +
+ drivers/clk/sunxi/clk_h616.c                  |   2 +
+ drivers/mtd/nand/raw/Kconfig                  |   4 +-
+ drivers/mtd/nand/raw/sunxi_nand.c             | 310 ++++++++---------
+ drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c         | 319 +++++++++++-------
+ scripts/Makefile.xpl                          |   1 +
+ tools/sunxi-spl-image-builder.c               |  92 +++--
+ 14 files changed, 702 insertions(+), 304 deletions(-)
+ create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+
+
+base-commit: 127a42c7257a6ffbbd1575ed1cbaa8f5408a44b3
+-- 
+2.47.3
+
