@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48565D7236C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7443BD7237B
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 11:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 278B283D7A;
-	Fri, 23 Jan 2026 12:46:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70C7F83CF3;
+	Fri, 23 Jan 2026 12:47:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="KBqqH/nB";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="lDzn8lAk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA25F83DB6; Fri, 23 Jan 2026 12:46:52 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 2937D83AEE; Fri, 23 Jan 2026 12:47:01 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E755983DDD
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:46:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6713583DFA
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 12:46:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id A0F861A2B5E;
- Fri, 23 Jan 2026 11:46:41 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 158A64E42214;
+ Fri, 23 Jan 2026 11:46:44 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6E9316070A;
- Fri, 23 Jan 2026 11:46:41 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id DDE926070A;
+ Fri, 23 Jan 2026 11:46:43 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1CBFF119A83E7; Fri, 23 Jan 2026 12:46:38 +0100 (CET)
+ with ESMTPSA id B4204119A87BF; Fri, 23 Jan 2026 12:46:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1769168800; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1769168802; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=cim3YTGIWOVJrd5wGzN/Sn2Xr9cRKY1dATujxBMgebA=;
- b=KBqqH/nBf4My/9b3kYo0c0pZwrI9jiFIgNXIXFstoNipt/x7DYCwUwuSyg4G3OsVPz+S8H
- A7WGIK2dLfgz45BUCx4xaP7Z2T1802bya1cOLbfsDTOjHL+0kyTV1FRknHj4ANzLn4qg+9
- bJ0xU1FgI6LG5f97ix69Ge9VAgptpJnrsRaFnDi9DqZ3tPcYJkXXxpaBG8vyXboD82PHaB
- tskHu7my0Wdim3vd/I2JUs0eVphRmcDYED+tY6onqj1ycdBEibIZVHTA3YYQDv+JiINK0d
- x5q9lT7vef96Pf+uF8zOYUVhizkavfUR9FgjT1glsmYlkHmovXOcCaxJXnJ7oQ==
+ bh=zIQnTZfTAp16ntWfqJa/T/Eym5sgpSVtNVx8eLhu5vw=;
+ b=lDzn8lAkVLk1cSjanIN6CBFBi2md41h8bJlOdnImdTtrJcD2TySQDDShKNyy60v19IjuKt
+ 1iudyLZb9p2HEFKEq9bZWpc+WIqgkekuGTQgv/w6jLVGcCiKcPI0c4SORCB3JFGD4avI37
+ lbzIMrmPvkJ0aLRROM3EJTiA8sgyv5HHHswWRbl0zrEysRSjDEtWgWCURPaOIWfVk3xzpK
+ IdXtxDOwZ0KV4d1RhgvoweQAQvcpwv8R+AAp6i1YOHl1jiwiMS2gM2wthG4+/Q4h/OTYBf
+ s/a216efpMs3a71d5pSMjWmkR4GEhWA9Iom96jUxHWTFcPgfSdcAZPvkzpQv6Q==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -61,14 +61,15 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v3 23/26] mtd: rawnand: sunxi_spl: add support for H6/H616
- nand controller
-Date: Fri, 23 Jan 2026 12:44:58 +0100
-Message-ID: <20260123114507.1400918-24-richard.genoud@bootlin.com>
+Subject: [PATCH v3 24/26] mtd: rawnand: sunxi_spl: Fix cast to pointer from
+ integer warnings
+Date: Fri, 23 Jan 2026 12:44:59 +0100
+Message-ID: <20260123114507.1400918-25-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260123114507.1400918-1-richard.genoud@bootlin.com>
 References: <20260123114507.1400918-1-richard.genoud@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -87,195 +88,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce H6/H616 NAND controller support for SPL
+Fix a cast to pointer from integer warning on ARM64
 
-The H616 NAND controller has the same base as A10/A23, with some
-differences:
-- MDMA is based on chained buffers
-- its ECC supports up to 80bit per 1024bytes
-- some registers layouts are a bit different, mainly due do the stronger
-ECC.
-- it uses USER_DATA_LEN registers along USER_DATA registers.
-- it needs a specific clock for ECC and MBUS.
+On 64bits platform, the casts done in {read,write}l() give that kind of
+warnings:
+drivers/mtd/nand/raw/sunxi_nand_spl.c: In function ‘check_value_inner’:
+./arch/arm/include/asm/io.h:110:43: warning: cast to pointer from \
+integer of different size [-Wint-to-pointer-cast]
+  110 | #define __raw_readl(a) (*(volatile unsigned int *)(a))
+      |                          ^
+[...]
+drivers/mtd/nand/raw/sunxi_nand_spl.c:81:27: note: in expansion of \
+macro ‘readl’
+   81 |                 int val = readl(offset) & expected_bits;
 
-For SPL, most of the work was setting the clocks, adding the new
-capability structure for H616 and supporting the new USER_DATA_LEN
-registers.
-
-Tested on Whatsminer H616 board (with and without scrambling, ECC)
+Introduce {read,write}l_nfc inline function to do the right cast and
+push the base address (SUNXI_NFC_BASE) into those functions, making the
+code more readable.
 
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- board/sunxi/board.c                   |  8 +++
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 89 ++++++++++++++++++++++++++-
- 2 files changed, 94 insertions(+), 3 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand_spl.c | 97 +++++++++++++++------------
+ 1 file changed, 53 insertions(+), 44 deletions(-)
 
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 09b531b7f52a..9fade60d4897 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -309,11 +309,19 @@ static void nand_clock_setup(void)
- {
- 	void * const ccm = (void *)SUNXI_CCM_BASE;
- 
-+#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
-+	setbits_le32(ccm + CCU_H6_NAND_GATE_RESET,
-+		     (1 << GATE_SHIFT) | (1 << RESET_SHIFT));
-+	setbits_le32(ccm + CCU_H6_MBUS_GATE, (1 << MBUS_GATE_OFFSET_NAND));
-+	setbits_le32(ccm + CCU_NAND1_CLK_CFG, CCM_NAND_CTRL_ENABLE |
-+		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
-+#else
- 	setbits_le32(ccm + CCU_AHB_GATE0,
- 		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
- #if defined CONFIG_MACH_SUN6I || defined CONFIG_MACH_SUN8I || \
-     defined CONFIG_MACH_SUN9I || defined CONFIG_MACH_SUN50I
- 	setbits_le32(ccm + CCU_AHB_RESET0_CFG, (1 << AHB_GATE_OFFSET_NAND0));
-+#endif
- #endif
- 	setbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
- 		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
 diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 76458c2063ea..c69f704497a7 100644
+index c69f704497a7..67f7d22ed2c8 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -52,6 +52,10 @@ const uint16_t random_seed[128] = {
- 	0x7c57, 0x0fbe, 0x46ce, 0x4939, 0x6b17, 0x37bb, 0x3e91, 0x76db,
- };
+@@ -80,11 +80,25 @@ __maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_h616_caps = {
  
-+static const u8 sunxi_user_data_len_h6[] = {
-+	0, 4, 8, 12, 16, 20, 24, 28, 32
-+};
-+
- __maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
- 	.has_ecc_block_512 = true,
- 	.reg_spare_area = NFC_REG_A10_SPARE_AREA,
-@@ -62,6 +66,18 @@ __maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
- 	.random_en_mask = BIT(9),
- };
- 
-+__maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_h616_caps = {
-+	.reg_user_data_len = NFC_REG_H6_USER_DATA_LEN,
-+	.reg_spare_area = NFC_REG_H6_SPARE_AREA,
-+	.reg_pat_found = NFC_REG_H6_PAT_FOUND,
-+	.pat_found_mask = GENMASK(31, 0),
-+	.ecc_mode_mask = GENMASK(15, 8),
-+	.ecc_err_mask = GENMASK(31, 0),
-+	.user_data_len_tab = sunxi_user_data_len_h6,
-+	.nuser_data_tab = ARRAY_SIZE(sunxi_user_data_len_h6),
-+	.random_en_mask = BIT(5),
-+};
-+
  #define DEFAULT_TIMEOUT_US	100000
  
++static inline u32 readl_nfc(u32 offset)
++{
++	void * __iomem base = (void *)(uintptr_t)SUNXI_NFC_BASE;
++
++	return readl(base + offset);
++}
++
++static inline u32 writel_nfc(u32 val, u32 offset)
++{
++	void * __iomem base = (void *)(uintptr_t)SUNXI_NFC_BASE;
++
++	return writel(val, base + offset);
++}
++
  static int check_value_inner(int offset, int expected_bits,
-@@ -197,7 +213,61 @@ static int nand_change_column(u16 column)
- 	return 0;
+ 			     int timeout_us, int negation)
+ {
+ 	do {
+-		int val = readl(offset) & expected_bits;
++		int val = readl_nfc(offset) & expected_bits;
+ 		if (negation ? !val : val)
+ 			return 1;
+ 		udelay(1);
+@@ -107,8 +121,8 @@ static inline int check_value_negated(int offset, int unexpected_bits,
+ 
+ static int nand_wait_cmd_fifo_empty(void)
+ {
+-	if (!check_value_negated(SUNXI_NFC_BASE + NFC_REG_ST,
+-				 NFC_CMD_FIFO_STATUS, DEFAULT_TIMEOUT_US)) {
++	if (!check_value_negated(NFC_REG_ST, NFC_CMD_FIFO_STATUS,
++				 DEFAULT_TIMEOUT_US)) {
+ 		printf("nand: timeout waiting for empty cmd FIFO\n");
+ 		return -ETIMEDOUT;
+ 	}
+@@ -118,7 +132,7 @@ static int nand_wait_cmd_fifo_empty(void)
+ 
+ static int nand_wait_int(void)
+ {
+-	if (!check_value(SUNXI_NFC_BASE + NFC_REG_ST, NFC_CMD_INT_FLAG,
++	if (!check_value(NFC_REG_ST, NFC_CMD_INT_FLAG,
+ 			 DEFAULT_TIMEOUT_US)) {
+ 		printf("nand: timeout waiting for interruption\n");
+ 		return -ETIMEDOUT;
+@@ -135,8 +149,8 @@ static int nand_exec_cmd(u32 cmd)
+ 	if (ret)
+ 		return ret;
+ 
+-	writel(NFC_CMD_INT_FLAG, SUNXI_NFC_BASE + NFC_REG_ST);
+-	writel(cmd, SUNXI_NFC_BASE + NFC_REG_CMD);
++	writel_nfc(NFC_CMD_INT_FLAG, NFC_REG_ST);
++	writel_nfc(cmd, NFC_REG_CMD);
+ 
+ 	return nand_wait_int();
+ }
+@@ -147,15 +161,12 @@ void nand_init(void)
+ 
+ 	board_nand_init();
+ 
+-	val = readl(SUNXI_NFC_BASE + NFC_REG_CTL);
++	val = readl_nfc(NFC_REG_CTL);
+ 	/* enable and reset CTL */
+-	writel(val | NFC_EN | NFC_RESET,
+-	       SUNXI_NFC_BASE + NFC_REG_CTL);
++	writel_nfc(val | NFC_EN | NFC_RESET, NFC_REG_CTL);
+ 
+-	if (!check_value_negated(SUNXI_NFC_BASE + NFC_REG_CTL,
+-				 NFC_RESET, DEFAULT_TIMEOUT_US)) {
++	if (!check_value_negated(NFC_REG_CTL, NFC_RESET, DEFAULT_TIMEOUT_US))
+ 		printf("Couldn't initialize nand\n");
+-	}
+ 
+ 	/* reset NAND */
+ 	nand_exec_cmd(NFC_SEND_CMD1 | NFC_WAIT_FLAG | NAND_CMD_RESET);
+@@ -167,24 +178,23 @@ static void nand_apply_config(const struct nfc_config *conf)
+ 
+ 	nand_wait_cmd_fifo_empty();
+ 
+-	val = readl(SUNXI_NFC_BASE + NFC_REG_CTL);
++	val = readl_nfc(NFC_REG_CTL);
+ 	val &= ~NFC_PAGE_SHIFT_MSK;
+-	writel(val | NFC_PAGE_SIZE(conf->page_size),
+-	       SUNXI_NFC_BASE + NFC_REG_CTL);
+-	writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_REG_CNT);
+-	writel(conf->page_size, SUNXI_NFC_BASE + NFC_REG_SPARE_AREA(conf));
++	writel_nfc(val | NFC_PAGE_SIZE(conf->page_size), NFC_REG_CTL);
++	writel_nfc(conf->ecc_size, NFC_REG_CNT);
++	writel_nfc(conf->page_size, NFC_REG_SPARE_AREA(conf));
  }
  
--static const int ecc_bytes[] = {32, 46, 54, 60, 74, 88, 102, 110, 116};
-+/*
-+ * On H6/H616 the user_data length has to be set in specific registers
-+ * before writing.
-+ */
-+static void sunxi_nfc_reset_user_data_len(const struct nfc_config *nfc)
-+{
-+	int loop_step = NFC_REG_USER_DATA_LEN_CAPACITY;
-+
-+	/* not all SoCs have this register */
-+	if (!NFC_REG_USER_DATA_LEN(nfc, 0))
-+		return;
-+
-+	for (int i = 0; i < nfc->caps->max_ecc_steps; i += loop_step)
-+		writel(0, SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, i));
-+}
-+
-+static void sunxi_nfc_set_user_data_len(const struct nfc_config *nfc,
-+					int len, int step)
-+{
-+	bool found = false;
-+	u32 val;
-+	int i;
-+
-+	/* not all SoCs have this register */
-+	if (!nfc->caps->reg_user_data_len)
-+		return;
-+
-+	for (i = 0; i < nfc->caps->nuser_data_tab; i++) {
-+		if (len == nfc->caps->user_data_len_tab[i]) {
-+			found = true;
-+			break;
-+		}
-+	}
-+
-+	if (!found) {
-+		printf("Unsupported length for user data reg: %d\n", len);
-+		return;
-+	}
-+
-+	val = readl(SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, step));
-+
-+	val &= ~NFC_USER_DATA_LEN_MSK(step);
-+	val |= field_prep(NFC_USER_DATA_LEN_MSK(step), i);
-+	writel(val, SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, step));
-+}
-+
-+#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
-+static const int ecc_bytes[] = {
-+	32, 46, 54, 60, 74, 82, 88, 96, 102, 110, 116, 124, 130, 138, 144
-+};
-+#else
-+static const int ecc_bytes[] = {
-+	32, 46, 54, 60, 74, 88, 102, 110, 116
-+};
-+#endif
- 
- static void nand_readlcpy(u32 *dest, u32 * __iomem src, size_t len)
+ static int nand_load_page(const struct nfc_config *conf, u32 offs)
  {
-@@ -256,8 +326,11 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 		 * the data.
- 		 */
- 		nand_change_column(oob_off);
--		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
+ 	int page = offs / conf->page_size;
  
-+		sunxi_nfc_reset_user_data_len(conf);
-+		sunxi_nfc_set_user_data_len(conf, 4, 0);
-+
-+		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
+-	writel((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
+-	       (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
+-	       (NAND_CMD_READSTART << NFC_READ_CMD_OFFSET),
+-	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
+-	writel(((page & 0xFFFF) << 16), SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
+-	writel((page >> 16) & 0xFF, SUNXI_NFC_BASE + NFC_REG_ADDR_HIGH);
++	writel_nfc((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
++		   (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
++		   (NAND_CMD_READSTART << NFC_READ_CMD_OFFSET),
++		   NFC_REG_RCMD_SET);
++	writel_nfc(((page & 0xFFFF) << 16), NFC_REG_ADDR_LOW);
++	writel_nfc((page >> 16) & 0xFF, NFC_REG_ADDR_HIGH);
+ 
+ 	return nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_NORMAL_OP |
+ 			     NFC_SEND_ADR | NFC_WAIT_FLAG |
+@@ -195,11 +205,11 @@ static int nand_change_column(u16 column)
+ {
+ 	int ret;
+ 
+-	writel((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
+-	       (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
+-	       (NAND_CMD_RNDOUTSTART << NFC_READ_CMD_OFFSET),
+-	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
+-	writel(column, SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
++	writel_nfc((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
++		   (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
++		   (NAND_CMD_RNDOUTSTART << NFC_READ_CMD_OFFSET),
++		   NFC_REG_RCMD_SET);
++	writel_nfc(column, NFC_REG_ADDR_LOW);
+ 
+ 	ret = nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_NORMAL_OP |
+ 			    (1 << NFC_ADR_NUM_OFFSET) | NFC_SEND_ADR |
+@@ -226,7 +236,7 @@ static void sunxi_nfc_reset_user_data_len(const struct nfc_config *nfc)
+ 		return;
+ 
+ 	for (int i = 0; i < nfc->caps->max_ecc_steps; i += loop_step)
+-		writel(0, SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, i));
++		writel_nfc(0, NFC_REG_USER_DATA_LEN(nfc, i));
+ }
+ 
+ static void sunxi_nfc_set_user_data_len(const struct nfc_config *nfc,
+@@ -252,11 +262,11 @@ static void sunxi_nfc_set_user_data_len(const struct nfc_config *nfc,
+ 		return;
+ 	}
+ 
+-	val = readl(SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, step));
++	val = readl_nfc(NFC_REG_USER_DATA_LEN(nfc, step));
+ 
+ 	val &= ~NFC_USER_DATA_LEN_MSK(step);
+ 	val |= field_prep(NFC_USER_DATA_LEN_MSK(step), i);
+-	writel(val, SUNXI_NFC_BASE + NFC_REG_USER_DATA_LEN(nfc, step));
++	writel_nfc(val, NFC_REG_USER_DATA_LEN(nfc, step));
+ }
+ 
+ #if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
+@@ -307,18 +317,18 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 			ecc512_bit = NFC_ECC_BLOCK_512;
+ 
+ 		/* Clear ECC status and restart ECC engine */
+-		writel(0, SUNXI_NFC_BASE + NFC_REG_ECC_ST);
++		writel_nfc(0, NFC_REG_ECC_ST);
+ 
+-		writel(NFC_RANDOM_SEED(rand_seed) |
+-		       NFC_ECC_MODE(conf, conf->ecc_strength) |
+-		       (conf->randomize ? NFC_RANDOM_EN(conf) : 0) |
+-		       ecc512_bit |
+-		       NFC_ECC_EN | NFC_ECC_EXCEPTION,
+-		       SUNXI_NFC_BASE + NFC_REG_ECC_CTL);
++		writel_nfc(NFC_RANDOM_SEED(rand_seed) |
++			   NFC_ECC_MODE(conf, conf->ecc_strength) |
++			   (conf->randomize ? NFC_RANDOM_EN(conf) : 0) |
++			   ecc512_bit |
++			   NFC_ECC_EN | NFC_ECC_EXCEPTION,
++			   NFC_REG_ECC_CTL);
+ 
+ 		/* Move the data in SRAM */
+ 		nand_change_column(data_off);
+-		writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_REG_CNT);
++		writel_nfc(conf->ecc_size, NFC_REG_CNT);
+ 		nand_exec_cmd(NFC_DATA_TRANS);
+ 
+ 		/*
+@@ -332,7 +342,7 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 
+ 		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
  		/* Get the ECC status */
- 		ecc_st = readl(SUNXI_NFC_BASE + NFC_REG_ECC_ST);
+-		ecc_st = readl(SUNXI_NFC_BASE + NFC_REG_ECC_ST);
++		ecc_st = readl_nfc(NFC_REG_ECC_ST);
  
-@@ -412,7 +485,10 @@ static int nand_detect_config(struct nfc_config *conf, u32 offs, void *dest)
- 	if (conf->valid)
- 		return 0;
+ 		/* ECC error detected. */
+ 		if (ecc_st & NFC_ECC_ERR_MSK(conf))
+@@ -343,8 +353,7 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 		 * (needed for configuration detection).
+ 		 */
+ 		if (!i) {
+-			pattern_found = readl(SUNXI_NFC_BASE +
+-					      conf->caps->reg_pat_found);
++			pattern_found = readl_nfc(conf->caps->reg_pat_found);
+ 			pattern_found = field_get(NFC_ECC_PAT_FOUND_MSK(conf),
+ 						  pattern_found);
+ 			if (pattern_found & NFC_ECC_PAT_FOUND(0))
+@@ -357,8 +366,8 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 			      conf->ecc_size);
  
--	conf->caps = &sunxi_nfc_a10_caps;
-+	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) || IS_ENABLED(CONFIG_MACH_SUN50I_H6))
-+		conf->caps = &sunxi_nfc_h616_caps;
-+	else
-+		conf->caps = &sunxi_nfc_a10_caps;
+ 		/* Stop the ECC engine */
+-		writel(readl(SUNXI_NFC_BASE + NFC_REG_ECC_CTL) & ~NFC_ECC_EN,
+-		       SUNXI_NFC_BASE + NFC_REG_ECC_CTL);
++		writel_nfc(readl_nfc(NFC_REG_ECC_CTL) & ~NFC_ECC_EN,
++			   NFC_REG_ECC_CTL);
  
- 	/*
- 	 * Modern NANDs are more likely than legacy ones, so we start testing
-@@ -515,12 +591,19 @@ void nand_deselect(void)
- {
- 	void * const ccm = (void *)SUNXI_CCM_BASE;
- 
-+#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
-+	clrbits_le32(ccm + CCU_H6_NAND_GATE_RESET,
-+		     (1 << GATE_SHIFT) | (1 << RESET_SHIFT));
-+	clrbits_le32(ccm + CCU_H6_MBUS_GATE, (1 << MBUS_GATE_OFFSET_NAND));
-+	clrbits_le32(ccm + CCU_NAND1_CLK_CFG, CCM_NAND_CTRL_ENABLE);
-+#else
- 	clrbits_le32(ccm + CCU_AHB_GATE0,
- 		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
- #ifdef CONFIG_MACH_SUN9I
- 	clrbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
- #else
- 	clrbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
-+#endif
- #endif
- 	clrbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
- 		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
+ 		if (data_off + conf->ecc_size >= len)
+ 			break;
 -- 
 2.47.3
 
