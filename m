@@ -4,99 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54769D72350
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 08:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC6ED72361
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 09:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8900183AC5;
-	Fri, 23 Jan 2026 09:37:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id C24B3839DF;
+	Fri, 23 Jan 2026 10:39:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0Da8iQmJ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WRcjnfee";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1A8683B85; Fri, 23 Jan 2026 09:37:12 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7A61783A6A; Fri, 23 Jan 2026 10:39:17 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5271983B87
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 09:37:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E7208397D
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 10:39:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4801c731d0aso14773235e9.1
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 00:37:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1769157429; x=1769762229;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hxdQACk/oIsoyLR/ccgYBYnR/cKIt+ULFLBqjthKuaA=;
- b=0Da8iQmJfaV/Ab0GdmRZhmIR0Dt07LucEZIGlVw9kohSKk5XnrFo01HXd76N6VEEsF
- jH41sWux5ivCLSLUK2dIM5IIzIhsZFJCPFNOrMo6rSh0rauO1pNFF74DavKJqQoNkwpG
- 74Bevhrj96ywZn6aCt3DQLJ+wJjXaHnax0Hbmtg9ccOBCmYuerOido1Jjha3FxenVTLY
- zQLYr9GcWep9EBirOgNZD/40xIVHT1weVoYa7LhkyaXo0fdiLduk3NBGEGVIOLtYSIRC
- d9jLuO33k5gUXzgWTqh9MWSj1Gw7cFOeyHF0nqDixRMdmySeE7HDggfZyNFdGaHAsBwW
- J1yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769157429; x=1769762229;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hxdQACk/oIsoyLR/ccgYBYnR/cKIt+ULFLBqjthKuaA=;
- b=JKOI9r922fJaFEmCDVGalhC6187MmT4c/qITVBeN2Lr9bO4yejR/pskXC8jchLwkOZ
- nO83YMOSaEoRscroGfdBtWRMsdWWHLRqz9GHjRgBgRQwvr16k+0oq3JIJbiDshP7kuqu
- OWenG49wSPe3/8hGHaQ3UxwNiak92AEE6S4xABO82rZZwCajsPtcREfgsbUW5nl5BJQv
- aa6SfvnKE9jsEJ/FnptCxZOATdb1DIfMMYenAUevsDoVJvCWSnrErP0s73VsmQXIpV4E
- NX1sgtIrf50YcyQiPbGFPfksujIGmMor6t1hRWbKNA9k6XusT1m5OB8Q/y4smjkWc6F/
- HEhA==
-X-Gm-Message-State: AOJu0Yw6KzQJgoYp+g5peiS3KiYVHFAcvPSvey9t526Av1uKEhdfY7jN
- Mn4yqAhpo5/FwXYWdg88ubov/AZcPTpwxdvBjk63KZZ42mq9J+RGBZOUfCc2qMW7vvM=
-X-Gm-Gg: AZuq6aLUxYgg/z4rh+itZhZHlkbvGl3gvcWjmGvB7Xbpssn206f70X5jhQmiGqCd3+H
- YRecOK9OjjyohN5oCTK3sHdrtnZhZSzmPpdpS/SbzS7wPEL2rH0jbWWBA3SnyG9SbjPyusHfGAT
- 5c3OfzyoyK/OCM2qXULXVEfD4FbX+sivDjEH9cyA6TqMHK8nbp+6decL3tIoHoCO4pZfRoCHD7a
- scp/aGMiSQJFAFT2NREs9E+1aeoXDhshmu68oCTGfOEMo1ZXZRvp2LHB3UhkxGY5Ein8nra3FzK
- nxnhE1TWzr2Nw7KA8F4J9cTm94qfh45GrlvZ/0sbVvYovJMhLjyLtJEDq1x7D1yzeW/Ap3u7K9c
- AP4y8sa/kDGbOGn8n63RNuRL3qFNK1lCrluii24hr2U3PcfhX8T6kzwllUvdg+3Zm48tSNndT00
- d9KVRJ9QINsg6aX71HiKkQuE+8ohXhL0Mor9OTktjgcTHPez6lIi4qTFbTdyRh+54E5ZXdkEHyM
- r9cnOSBxQ==
-X-Received: by 2002:a05:600c:1396:b0:480:3a71:92b2 with SMTP id
- 5b1f17b1804b1-48051256163mr8179885e9.26.1769157428551; 
- Fri, 23 Jan 2026 00:37:08 -0800 (PST)
-Received: from [192.168.1.60]
- (2a02-8428-e55b-1101-a95a-db72-930a-81eb.rev.sfr.net.
- [2a02:8428:e55b:1101:a95a:db72:930a:81eb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4804703b5b4sm124823875e9.5.2026.01.23.00.37.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Jan 2026 00:37:07 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 23 Jan 2026 09:37:06 +0100
-Subject: [PATCH] board: mediatek: add MT8390 EVK board support
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FiAJNhXPdGSUqS7cQDHE0xm5wWh4ZNUH7UABvaZS8lpF0ncquHb4A/SlfXP0lVPy58Kd7ADZ6rWBcEKmViw0DqOxecL3soSHiQOxACBfW9TUEF71szkKH3b7SMdPAGWJS3milru+cIy1e76m0gtHq4J6EJKqlJwYB/Gh5HDypue44UnUiPjRLTdE4YGPu6EK0yPn/fouZ1S8EmbWLUB/dxYWcfEBuFkmr5RUdc3UVlQJWQR6JTUdiyG9mv/AhB6o4V/h7dlbuOA3l5/R4MHgBrV9IKyaUr33/QDJvVqLdw4g7x04Spk4txQ9q11FJrkrNqIEE6mOMm5RGmOB0nF1WQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7cGzq58yL5uKPbB+RLtXTEjiSFlpGpRalYX62Oy3HzM=;
+ b=XimjanZECGFjDJUJyvkDlJg8kDTYyUydZq/wxga2JR8XO5Z303bfRXfJNMT1TYZ2rTL6W/zwFcDhK3I0vAQ1R+ddozzQHMpuxQPbzGlFqJmAPCCiXPUDX5mQ2DK3XHUM6ufvi41s26NU1gF1McfPwk+Pv4HjrlwT5F17K3WtYHmmiNM8plzDrFqpwjklS5h72VUR2YXXLPn0/A1PTl8ELbl6oGwr68bBt3b5BcvfalqUDTtlqsWwfhhqnp1aQ7UFniiokzjb6STIdGA0rEdA4WwI7Zfn96zR2cYDzVWqcxZGuOlrtX4xeOg0visUQWYTSwzcqTBX8pSxJst7qUzIvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7cGzq58yL5uKPbB+RLtXTEjiSFlpGpRalYX62Oy3HzM=;
+ b=WRcjnfeeJtNnRlA5LnO3nouCy7YT3hfnxoY7mrwRgWhOUEhvgl7riD+Vld4/IG7ZjDGu9sdKI0eaFUaAu4mWLwrjEErj5c4mBFGuy8UYOjXlUmgVLT3NYZ5Ok1tI2R5vVBAar+OwlKEps/gcIP5RthOsmGpspoNExozRQ+NcNHE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AS8PR04MB7877.eurprd04.prod.outlook.com (2603:10a6:20b:2ad::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Fri, 23 Jan
+ 2026 09:39:13 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9542.008; Fri, 23 Jan 2026
+ 09:39:13 +0000
+Message-ID: <d9cd19b3-388b-4321-a81c-340c2add8b43@cherry.de>
+Date: Fri, 23 Jan 2026 10:38:50 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Regenerate expired test certificate
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Simon Glass <simon.glass@canonical.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20260122224420.2679336-1-simon.glass@canonical.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260122224420.2679336-1-simon.glass@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260123-add-genio-700-board-v1-1-274019c628d1@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02Oy2rDMBBFf8Vo3YHRWA/Lv1Ky0GOcCmrLlZRQC
- Pn3imTT5blwD+chGtfMTazTQ1S+55bLMUB+TCJ++ePKkNNgQUgGJRH4lODKRy5gESEUXxNoQzI
- oWiIqFuN5Vt7y78v6eXlz5Z/bkPf3KIJvDLHse+7rZJQxFJyLyCFqE8naOfqZPKH3qHUibaXbr
- PgftU4jSUvC+ZW090UuC5z5iL1+Q7udZ6kdtLLJzdY5q7b1TuLyfP4BNFr01fMAAAA=
-X-Change-ID: 20260122-add-genio-700-board-5621b428c04e
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+X-ClientProxiedBy: AS8P251CA0014.EURP251.PROD.OUTLOOK.COM
+ (2603:10a6:20b:2f2::13) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AS8PR04MB7877:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3c47e474-00e0-4d7c-e3a6-08de5a63448d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|10070799003|1800799024|7416014|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NHY4YzFMZXBKQy9qTWlIT3BvN3I4NG1tRS9VeGFDOE5RaC9RTmFza2MyVGlp?=
+ =?utf-8?B?OE1DZUdHK2YxeXZ0MVFBUkQ4Z21CZFo5dGZnUmdxT0hvbXJOaWpYTUVBSmla?=
+ =?utf-8?B?cGQ3OGtuN3h3eDV5LzZiUlNwd3A1WkJXL0JSclQ5ZGU3TWMwcjluRWcvSk1E?=
+ =?utf-8?B?WGNFbGFwNnpKVUE4VGdwaU1JeVpjUnozTk1lS0FVcTFROVVneVJBUzRKMms1?=
+ =?utf-8?B?OTcwd1FxdXRPYUV3Q0k1MzBINDBJdEhReHBCZk8vMC9BU3hsR1lWWmZjVG9X?=
+ =?utf-8?B?SGdEb052L00xQ3VmL0RzaDAwZWVXU2l4ekdOdnNYWkRoVEY5bVZNV2lMV2Zz?=
+ =?utf-8?B?cGtKS05NeThRdDVIUTBUZlNBYmRoMTRac2JHcDNmSTRZRE5Na1REZXdrcnQ4?=
+ =?utf-8?B?YWlaRzNMbUdpcHU2NHFHVTBKN0h6MW11UTRhb3ZoenNuTWVGNjZrUUR5WGsv?=
+ =?utf-8?B?cXdPSElkbkNPUzlKZlczSVdHZTFHZXdhdWIwMzlFQ2orWTlIbzE1a3Q5bkRH?=
+ =?utf-8?B?QW9naldCY3NkQkU5SnFLTDBaWWxyVjcyaE1RYytJb2N3bkFDNlVMVXNVMXBV?=
+ =?utf-8?B?WmFmbjdvZE96UW5zR3FkNzVXKzVmdnpZbndGalRxeEIyOGozcEQ4SkZ4Qjkr?=
+ =?utf-8?B?SmszSXI0U1RJSXcwMlhpRE5mM3Yrc1I3MkpCR21xbWxKRXpMVDNETSt3QzZM?=
+ =?utf-8?B?czh3c0FTd2Z1SC9yRldGWFJvalFWZGxLcDRKR1Z4Wm95V1FGa3pmNTY0VmtQ?=
+ =?utf-8?B?Nm5IcFo4M1FvWXRUUFBpRlpOSTQyYlVqRTVJdTlHSzd4cDNLUVFhZXk4ZlJT?=
+ =?utf-8?B?cjhYY2o4T21BTWZtWGlLVDF2S3JEM1kzSmczSFM5TmZKN29ocFhpZ3FWcURV?=
+ =?utf-8?B?VVN4NmdpV0JvM2hQYWlPbXF0TmU3MTBHTGFiMW5KbUdaZEduN0x4WlJGcU5G?=
+ =?utf-8?B?VnAwN1RWeGExakNUREV6cE1XTHRMSzEza1VSVUY3b0ptODBKaG1lQm1MTy8y?=
+ =?utf-8?B?SC9PMENHYkZQTzZpRFNsYll0eElJNHlZMDZKMzNUZGE2ckZoMzNOSXpDaG4v?=
+ =?utf-8?B?WGNKbEpZaGtybGxxaGZidmw4amYwV1NXRGJNVlBhQThidnpZYkhSZ3BjQzJo?=
+ =?utf-8?B?bytYSnE5OTFiYnB6REdYM3ljTGk0dWNXNE10bFlnQWRHT00zWVpZbW9MbFlR?=
+ =?utf-8?B?L0Z3bzAzL1lrVXpTZVcvZHp6dUVFY1lQVFhUT1RnWlFSVTF6S1d2d3Q1UEg3?=
+ =?utf-8?B?VzZxakdzcEh2S3U0U0R2VWgxUENROWh4RE5TUnhreE1rTTdqWWtXNG1lMFpD?=
+ =?utf-8?B?T0E1a1dhMm8yUG1HWGN5OGsrME9SWGJQTTduR1ZUbTRZQ2ozeWhyR05jTU9C?=
+ =?utf-8?B?OUN0aVBqbW9GcU9TRVB4eVJyOXlvd0xwNHduN3poODNydFpha05EbFp2bWtQ?=
+ =?utf-8?B?bEx3NVZmaHZOT0JYbWhJTE9Xbk5DYmFENFp5YjAvV0VOY0taQWViUVI2MVpW?=
+ =?utf-8?B?Vkk3QUJJdVhnOTRjcy9aZ1orK2NYQllocTVzaWY3UjQxOThFQ2VJZ3NkR3dv?=
+ =?utf-8?B?OTZWVWFiOWs2eTgrSlo4TDZYb0xycmduL3FJUmxiMEpiakpsRjJTd2pzNTYv?=
+ =?utf-8?B?SzdCUXFhNTd3dXJLOWZvL3QraG5JUUl4akZhRkpTNUlBR3Q5NVo5dG9qR1RQ?=
+ =?utf-8?B?RmJ0M3FQemhJL3RYczBSVE1tS1NOUVpvNHI3a1U0SFpHVTgrdzFjc0cvSC9u?=
+ =?utf-8?B?Uy9aWmJSTHFMRTNPUGloUU50eE5YTUJhS2NyblhCaGZ0WVR3V2E3cFpwcWd0?=
+ =?utf-8?B?MFFSMW0zOHdpSkEzWVRNSDFjTUJUYXVrWDJXM2ZwMG5JRFNSTDZXY3NrVFpy?=
+ =?utf-8?B?VUIwVXdyVXpRdEMvcUI5R1dMMWhRY1YzWTIxSmRaZ1F4dW9jQ2krTEdXSXE2?=
+ =?utf-8?B?MEVyQnk0RWJ3L3R2SHZQVjNsV3owZVRlWGluOVcwdkhUNlQySEJiUklsdVFQ?=
+ =?utf-8?B?N2RtWEV4c1ZTYmR4Qy9DK3JGbUxLZFdXWEVrMWhLQUE2YVdoZHd5M0x5T2M0?=
+ =?utf-8?B?UmhoeHN3K0xZZFFEcE1sN1UrRy9lK3kwRTl5akQzN2RlbmM4WC9HSDVqR3Bl?=
+ =?utf-8?Q?Eimo=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(10070799003)(1800799024)(7416014)(376014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VTdVaklhYnB4ZVRIMVp0S3FwS3MvTUFqbit1ZkFKSzBwaTRuc05xNDBsWFQ1?=
+ =?utf-8?B?VEhyc25PaW5sUW9LNkoyVGtiOFBLVU04MTEwM0tFUUd4RHBzNEIyRjhGR1pu?=
+ =?utf-8?B?enE2bExMVFdvV0lQWllMZ1FTN1IwS1A0eHBZVjc2UmRCV2RLTDhOTEF0SVVa?=
+ =?utf-8?B?RTVtMnJ3ajY1Ny94VUR2NmhxaktiSDhjRVEwTDJ4Z05wckszVEZtVzNScmdD?=
+ =?utf-8?B?RjV0WkxTUGFRYWVoUzkvVW51QW9MZy84SW9NV1g1ZnpBZ2oxbVhYQ25JSFFB?=
+ =?utf-8?B?MEF4aXdFeFdCaXN0ZHBVdFhiVW5yYXB1VWZnTVpqQVpDNE40LzdNQkRaT3FS?=
+ =?utf-8?B?STlIeVNUTmE4djZwaHRSMTh6K3NqUkx2RXFVM3dSdUdMNnZjaDl6Zk5NbjIv?=
+ =?utf-8?B?NTIrUHVJN2lSMjVqM2FTQ0g4ZzhITzdlU2loaG9FYWRwU1k4aDRXSHZuOGI0?=
+ =?utf-8?B?blR4TUdGdzBMdGJ2eVV5MVVBeG15Wmx4N1VCUnhRM3ZPOWRlOWN4YU5jZmRL?=
+ =?utf-8?B?cTR2RUV4emc3bS9pZFF3Z0xjUjdRaWlFVW9qTzZXbGgzQjJ6SEw1NkRCcXlN?=
+ =?utf-8?B?WDZzK3RnM0dYb3RiS3N1VjBWOEppTEF6NmRDSVhja1I5S3VMdTdMMFlFc3Jh?=
+ =?utf-8?B?Qi9ZOWIwN2lwQmhhQjQwNkN3a0ZJcjNJaDh6WjdBUFVCQmUxS2xFRlJzZnJ0?=
+ =?utf-8?B?UDZYRmxXNlAvVXdXK0Rpd2dGS1ZNQ1BBNlErWVFLc1dJejBobWNLbWhBOVB3?=
+ =?utf-8?B?dXJKS0xDTDYwU2xPVVJJOVZJd0NwVVROZEtqSU1jN0hTd205M05mbWJhVExZ?=
+ =?utf-8?B?THdjcHRzMzZQOXNhWGJYWkJlMHlvenh1SzBSZkdVTU1kUUJWQ2tzMDlTbXVq?=
+ =?utf-8?B?R1JTZ2pkYjFpUlAyalRHdGZVRnU2cUxlYitieS9IdTVEbkxVU3JYM3VmZ1ZO?=
+ =?utf-8?B?dmkvTlJZYTVpMGJPQ1kvYVFkMHdTTWJvNmNaQWh3MDJ1TmF3QkI5czZsdE8y?=
+ =?utf-8?B?a2JaRU5ncUJSV2lQLzB5cGE1L3ExNnpLWTE2ZndaeUM5UFFXdHVJbVhlUElm?=
+ =?utf-8?B?cVBWejlLSDFVOFpwdCtEOU41Rzd0VWlhQU1Ua0k4eHRLYUt6VXNMV2Rxanky?=
+ =?utf-8?B?cE0zelJNSGV0MlZiRUx3RXdzY1pGWTFWWUg1amgzcDhuRS96bWYwMzdWV0hL?=
+ =?utf-8?B?YmU2b3pmM05xWFloQkxiL2c3ekNDb0xXdDQ1M1BzcDIyUFpOcVhSMjExMTIx?=
+ =?utf-8?B?aEowakVhZml3ZUszcXZuN2xvMjZudGxqK2pzcmxSWU9sSlM3SXljZmtBVlVP?=
+ =?utf-8?B?aWxyd2R3R0huU3VpakpZRzVQOWhvUGZDWThlMUpDcjNSTVdsdmVsbll0UjZu?=
+ =?utf-8?B?TzdmZFFreTlEeDBkOEIxQVlJR05vV296aTVWVk5ydkVMaDYvVFNYT0NmZmpu?=
+ =?utf-8?B?WTYzNVRuVzJKNVNBQ3NBT21kRGloQk9yUU5HdWJFNENIeHlnMEJxODE1Ry9w?=
+ =?utf-8?B?QTg0TmdDQ2lwYmQwa3l2bjNkOE12RzNSNHRXOS90OGZObkJHNk16VlhtSHJK?=
+ =?utf-8?B?c2tPWW9ySGVqNFlJejQyVDQzWVA2QVlVaEltSVhZMDk1bXo2QmpETkxjeHo0?=
+ =?utf-8?B?VmxxQm0zNk9HcloxY1Arak10SVFZSnBpVE54MWZCWFE5d014cEZKM256NEEv?=
+ =?utf-8?B?M1h5WWltdGhIQUhyUVhGdnpyWDZqcGJHMkVDT1Z6VitNM3dWQm83ZEZQOVNW?=
+ =?utf-8?B?WHpJZ242SVBDaW1Pbzc4bmkwSlhKL2Y0aVUwWEVuRm16djZaSk9qZlhSNkdk?=
+ =?utf-8?B?NzdINmpONWNQcGpqVE0zV2g4emoxOUpZNG9aZXZxZTBTUlVrOGVZSFZTdDhC?=
+ =?utf-8?B?TjlwTlYxazJrWEdzTU4vemN6K0xqOGk5VXFNN010Y3MwMEFGRU9ZTFZoQm9C?=
+ =?utf-8?B?Y2VQRmVUZG1FU2lEb01lRGV0cHFZT2JMRHM2dlhXY3JiSW1ETHFnaDQ5OGFC?=
+ =?utf-8?B?ZzBYcjIvOEZPNFdESzkxTXBCS09LaG5EV0ZkVmRxRlMrQ0dqb3hHV3pIT0JE?=
+ =?utf-8?B?SnNLWENVaGY3UjlxVGtPWTlpWDFJMTNhOXgySW9TV0I1a2xaWTVQYjVhZ3hB?=
+ =?utf-8?B?N3VCSmRWa3FMb05pREVycDcxNDAvTXhkd2J3RzkyV25WNEZkbUFka3ZnbkJ2?=
+ =?utf-8?B?V2hxVVZNaDViWEtTSHVHalowekpMSkljNkpOcDRwMkVBSHJxMDdqRXNLZnpQ?=
+ =?utf-8?B?OFM3d0dQMmRhRENhbzZIMW5meDZZNEZRRjdyb1c4Mlhzck9URUdTOWxVWWx6?=
+ =?utf-8?B?ZVZkblRRQXlocXpnWVgzbzE4eE9DVHVOZ0JsUFQvVkhGTkJacU5pdFRsNGcr?=
+ =?utf-8?Q?4JuNqYi8J8CT4PNfnupy1Yr02puznTkLreYCW?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3c47e474-00e0-4d7c-e3a6-08de5a63448d
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jan 2026 09:39:13.2762 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nODGIkZoParFPfQhjxnlLJ/DbGdeNWIzWGoxZ4FEXi4UpZA5fwWJfnpwFroRrTi9C+3uEqVxEJZmLaXP6fk7UkMtrm0teQFNZxyuxtR8yf0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7877
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,124 +188,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Julien Masson <jmasson@baylibre.com>
+Hi Simon,
 
-This adds support for the MT8390 EVK board with the following
-features enabled/tested: Boot, UART, Watchdog and MMC.
+On 1/22/26 11:44 PM, Simon Glass wrote:
+> The test certificate expired on Feb 13, 2024. This just used for
+> testing, so regenerate it with a 100-year validity period.
+> 
+> Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-MT8390 is based on MT8188.
+Modulus of the private key and certificate are identical.
 
-Signed-off-by: Julien Masson <jmasson@baylibre.com>
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- board/mediatek/mt8390_evk/MAINTAINERS  |  5 +++++
- board/mediatek/mt8390_evk/Makefile     |  3 +++
- board/mediatek/mt8390_evk/mt8390_evk.c | 34 ++++++++++++++++++++++++++++++++++
- configs/mt8390_evk_defconfig           | 27 +++++++++++++++++++++++++++
- 4 files changed, 69 insertions(+)
+I can decrypt with key.key openssl a file I encrypted with a pubkey from 
+the cert, so:
 
-diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt8390_evk/MAINTAINERS
-new file mode 100644
-index 00000000000..73fc28b096e
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/MAINTAINERS
-@@ -0,0 +1,5 @@
-+MT8390 EVK
-+M:	Julien Masson <jmasson@baylibre.com>
-+S:	Maintained
-+F:	board/mediatek/mt8390_evk/
-+F:	configs/mt8390_evk_defconfig
-diff --git a/board/mediatek/mt8390_evk/Makefile b/board/mediatek/mt8390_evk/Makefile
-new file mode 100644
-index 00000000000..a26d46838c4
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += mt8390_evk.o
-diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt8390_evk/mt8390_evk.c
-new file mode 100644
-index 00000000000..1ca40366a55
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/mt8390_evk.c
-@@ -0,0 +1,34 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 BayLibre SAS
-+ * Author: Julien Masson <jmasson@baylibre.com>
-+ */
-+
-+#include <linux/types.h>
-+#include <asm/armv8/mmu.h>
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+static struct mm_region mt8390_evk_mem_map[] = {
-+	{
-+		/* DDR */
-+		.virt = 0x40000000UL,
-+		.phys = 0x40000000UL,
-+		.size = 0x200000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x20000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		0,
-+	}
-+};
-+
-+struct mm_region *mem_map = mt8390_evk_mem_map;
-diff --git a/configs/mt8390_evk_defconfig b/configs/mt8390_evk_defconfig
-new file mode 100644
-index 00000000000..9bc1d922587
---- /dev/null
-+++ b/configs/mt8390_evk_defconfig
-@@ -0,0 +1,27 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_BOARD="mt8390_evk"
-+CONFIG_COUNTER_FREQUENCY=13000000
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_MEDIATEK=y
-+CONFIG_TEXT_BASE=0x4c000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8390-genio-700-evk"
-+CONFIG_TARGET_MT8188=y
-+CONFIG_SYS_LOAD_ADDR=0x4c000000
-+CONFIG_IDENT_STRING="mt8390-evk"
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_CLK=y
-+CONFIG_MMC_MTK=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_MT8188=y
-+CONFIG_BAUDRATE=921600
-+CONFIG_DM_SERIAL=y
-+CONFIG_MTK_SERIAL=y
-+CONFIG_WDT=y
-+CONFIG_WDT_MTK=y
-+# CONFIG_RANDOM_UUID is not set
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
----
-base-commit: 64662b99c0ebc56c2773ca32a20aa055d25719f7
-change-id: 20260122-add-genio-700-board-5621b428c04e
-prerequisite-change-id: 20251203-add-mt8188-pinctrl-support-547d9379974f:v2
-prerequisite-patch-id: a8cb24313e56c02b98910f553972a13e8079db30
-prerequisite-patch-id: 16094fb012cd9d3ab5e62f81969ba7b4d796af41
-
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
-
+Thanks!
+Quentin
