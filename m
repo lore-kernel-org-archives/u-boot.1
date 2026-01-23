@@ -4,113 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB02ED74EC2
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 13:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE33D74EC2
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 13:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FF3783B21;
-	Fri, 23 Jan 2026 14:01:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7057383B21;
+	Fri, 23 Jan 2026 14:08:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YmCEL3Fr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cQdLOe4d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E654183B82; Fri, 23 Jan 2026 14:01:44 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 0DFCA83B27; Fri, 23 Jan 2026 14:08:59 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15C2B83B0B
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 14:01:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0C7D83B0B
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 14:08:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-79420190633so20820937b3.0
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 05:01:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769173300; cv=none;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-59dcd9b89ecso2704051e87.1
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 05:08:56 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769173736; cv=none;
  d=google.com; s=arc-20240605;
- b=F21msdOEBpujVEMeSOhbEavKlVxiWW4GykwMVLnSbySzJCAwX54WtLMEfvvgA9SVuX
- eRKp4Vgl/xqN8uz/sHb2MQ8PwPjAtDf5BGJRttVxwo/IeJFsMiWCh2NU4w0c417wqFac
- wIVDY7mqqcXwSNmBY2LvIw9t1P2sSrpcBRC87PqplmocRRPazIdUPEnHxvydwz3D++9I
- BWydLpNpd6xiutCEiB9NgIrSmK9O7lEyVrGWoUZuQYZElwk7QfUjmSQ460DS6A2AmDgj
- np3WHSLo9T5yrB/vV3ITOtaxudRwQFK76RMWTXi55rYsnqatM5mBoNcuY2MdXXQQABbs
- thxQ==
+ b=lRfmXui08gg02zXIMSECGc4deUGBCsUXDTzB+iNx7k0szQweY1VioqjfmT1WB/eNks
+ FyRvhaZ/Du5avMAFxMMKBDmyEaptKY5Mdni+J4fOXSNtF+AV9r8+6Wm0zbVIKE3FMp8h
+ 3KZeB5f2K1LMeuzAv4WNSLD5gjzqKljdZoHt4osCJ71g3t315/c9UDrty87HbQLJra7v
+ iWlh1UzPYnJHfoplhiOKGEmFPOiXUqlV9nFKL5nBI/g7A3KBvi0KdfUN400GvTxoXQQd
+ nrw3pMUuJnOcF3IOxNRUBgMWWOA8728XfQbBhtgkAP67LtoQy14wF5Gd6E5GB4ltpUFt
+ 9g7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=DqEsxoi4UCVFpIt5p19t9e1sobjuKLGSqLA0efA7kPE=;
- fh=VBuFGIskrY1b+y09un0Xcpv8WJId8l6a/B0avbDe9rg=;
- b=FoxsJpHg8NtfX6YlcgQnWzAA6+oL/T9xw/vHq7qZ0p8mtDVIkagF9QybKoB1um1rep
- sFW1ecukJ8FA1d3nF1GgMVDcpDzY8qym/4hXxKbc3qB7b/RcrM2hdh9Uppp444yHuUAO
- LP7XBxZn0GcEGznFKhONzJ7Zcvjb3MJeDip+rNBALm7yXsscsDLnyVe0Sfm7murv0QXm
- yH1hcoKfLGiOjTYYeL6jiTg7+Y4AOdwusp3qGzwVw9U75vurS1VoFIDmDOQb73WkmDX+
- TWLisThWfrf/Ar+yhWjw3IxMkYd+nMwZemc/BjwdM+tBqpHbO4VDQZ7yMqCRCyXak5zW
- FW1A==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ujrOV/FsBipR7MEoDwahDiPbT1VSvkgvpwsQscDJ43U=;
+ fh=jEHQ9YrjInL0slv9QHP0Tn9W7qgvCDAVcthgvL4rGy0=;
+ b=S9h/DXuCzA3Tj83S0ui+ZUCzPQLSFwvg6M++MqIRsHXNC1sJjHGIEDaehoHY7tvdzt
+ 72G0oXJHAfslqyPISFa/0+Y7T9nqSMnczrxhesOMYYHu2x8BHQM8GA0Dvk6/sAqPkIiQ
+ utmYe3nP2iYEHRed1At9KI45EsRCfnHo84t6N3etlty7EYgu6+37QCUCC5TSSUTXKDJS
+ IXk3HeJBvnEbMrY/Ls950fzi3XqIfBo7WHCOjqtZ/SlQrbPJYG97R8MlPTUXLEVouJsh
+ 7rzhDKJsS0R5Dk4Yk7nRvzI4It3uNd7+cWl5q0ZU44oed3QlcdmQ+Z7BDNlDHsR3giiz
+ VCmg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1769173300; x=1769778100; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DqEsxoi4UCVFpIt5p19t9e1sobjuKLGSqLA0efA7kPE=;
- b=YmCEL3Frz3TnACYZ8t1x0CcneECql9k7txm/o+Lpa/Z5v9fNBF+hapjLeEUGN6izLK
- jMypw2njTGw7E5JkgkiCbO1kZ95xpxjSx9UYN/7ITyAxyuYC8bcydBOdS+Q26l/8LazM
- XZJ2qwSf/Rz5abrGeEzRrAWKvyh0Ygxu6A4tt0cvjc8dNKXvFF3q2cakQ0zrt1FSI8dN
- 9CxYMIvgItXOgTFBJReFK3r1pdJc4FzccqRsJZICnU33FkSooRlj/OHnCSpQaLTr6N2h
- ZRJ0AB5niq4yp5yal/1AyEUP/aGq6hDOvSBxZZmxvUDP3DZ0rUghNglOCkrjXJSjeWr+
- 6Tlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769173300; x=1769778100;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1769173736; x=1769778536; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DqEsxoi4UCVFpIt5p19t9e1sobjuKLGSqLA0efA7kPE=;
- b=CFXR67xQF+h1gRXpzpUkXuB4UY2Ieky73fVxp3NB/Gvc/arGtJTwO8LtOB2E7T1cw+
- ekUt6L13jw6o04vjf84oR9f8xVIHNW3UQVjaYFBrjnRoFGDHZEWWlRfppvMI/LXNFM+3
- jCf82Tr035ZZLVhEcEI6UABxmXYxxdfZZKOiJcEVSOgqSVtcwSfcys/44nhTL4MJrlfQ
- 2QkaeU5ucQHiWwb++e2DPXL0OAPYnHf5vub/UwHBXzZkowXUI4J4aF8ENd2Yw1624D2Q
- MRfFbkGEmQyHMLS9GY4McaOIgm7jBhCInE16PZUF5og+G7FVwn5YUg/NIM4y3gYIu5xQ
- DK3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXO5qlOyBnSN6URF07BwbuYA6eZ+c1YvokynqA0mcXIEkM/l1bc+98KrgrL6q/BPsdpyr/1BIE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWzmHMgOY/4hmiwtLmRCSAbz6KMSxc3fUee8LyGGJujtpUuWnF
- 5sZP/d6Y9qeWZmlHtymcQG9f7Cb8CV7KndPnrMBYhqjchgsQyiUHqNQcqDt4j3kJCC6JTG4jgeE
- frI2r0uhwwsMM6UiKVsET5kO0cC/CKv9QnAeRqoi7Dg==
-X-Gm-Gg: AZuq6aL3fLBy/ltt0IYaG9oM0loq2lKiuDlahuD2F+JUVhFstEOebGJM0yiGELIseOK
- E/Gg0TBeQxjfGcdU+Ar+gryG/LpeGo3Or0TW/q3/J912hyqXopjMAVdkfeu7OiCOb6fY7oI3hAs
- ob3tJuarE0kFYglMkPAXDaNi0QJb5S/QfRawqYZZuhKfL/zHbsJ0B8jivZ+4m0txKr/vkwrYici
- rj2d+ZPZZWBOpU/w6FNboZIcocrxF6fYtl10quVnQdxl9bsOdweWYIQ2JYPlQ2PKWbFimjOjYvP
- FJYBZAEC6BJmnj8DwqWbYQZY8nGG3clypiomI0Fl3WKbLIqR2k8PRG2ijFiZLrXZGbgClv28yye
- y4duVT/N2p38yddMh7X+U8daOiRPzyYwdu1+NfWfhg9WrQlBHGhuRG7xEoppWkXD8iHu3smmNZK
- VCegWfgOQAZ/HAovluSuphXvpQus7D5z+9kv2Nh/xMuo9GBCUi+P1KqE+gwn9Ln6Zj/VRFpH7hm
- rxpU0ulGOK4ZcJtxO8nm8DTE72MJe249AdTl3Xun7LFrwhGtlMy7HVIGh6JAxHO2aDd5RbwvShZ
- 9hxfFGoBs/R7T8Yf2Rf70YZXExwPmOM=
-X-Received: by 2002:a05:690c:ec6:b0:792:7371:63ab with SMTP id
- 00721157ae682-7943993b81cmr20746027b3.20.1769173299544; Fri, 23 Jan 2026
- 05:01:39 -0800 (PST)
+ bh=ujrOV/FsBipR7MEoDwahDiPbT1VSvkgvpwsQscDJ43U=;
+ b=cQdLOe4dmQ21ytbAUKGyGx50+tw+IJoc8SGoigLx9H2z8wHg0L1MvvLoD722DhK5tl
+ c48FX0TuajSlUikpZaqiwT5fUCWjni16efxnCRiQB9Ph1cxefRNzGRq9VFTigV4cHubv
+ lE6jBradFRxC6NsgBDHLRSP94lsdPQugFmC+2lPRGWTqhxqH4p+AnnEkPFjvF/VnKy8X
+ e954Qm35qX9qglQAJhYUHTnP/TEU/RStb69RSHWdLRhTSXcbbCK2V70nrqrSNesN2x0V
+ eQ9+6NYynSyuWbQoV7TJBBRy6eLSU3kA9pCOKKlHDsNxaC5+A5VhicWaZ/pkQb7OxPyO
+ bseQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769173736; x=1769778536;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ujrOV/FsBipR7MEoDwahDiPbT1VSvkgvpwsQscDJ43U=;
+ b=FToJEW3KoKmAW8JoQNtZHpCKbUPzSmcHIghpcoPlDSjCVnSz6+fnDy0mKB9JuQiP3d
+ jWqHmiTSyhqczhpV7rQMh6nu1D2hSOFg1CQB4yLBU69yiv1otuSK9wYSynukZjBj6UG1
+ lCTSToxmB/X3oB6JWY0cCix7M8hLzi+nLsBaLiL4SJxkTR3Eg6uL23XowWGJXS4PCDbu
+ WwKA3cD9sTndo8yMg1lG8TXhqG5lxlJLw3gVqy3n+isF1OzuBln7oT53VKpNhxmxwKBy
+ z+W62QnIIYUJ5s7mi6r9ARnauX7oN9s0xXxZkmwVi/YkwORlj7qVz6ioMexUDYxMUQHm
+ otTQ==
+X-Gm-Message-State: AOJu0YzclvBFdBuc+kv2InaWMi5B1Cxgu4BYOL63S/SgUnWBBWF9DOcT
+ 9aRvjop6hXCgiDuVRLy4TgYOIzP8yLm70sVf074mS4yjlQroAZHGtUDDsiYWyt6jDBKyvxeRDS0
+ QauKfjLHwkCPcnPAEq4wGjbcSGzlNYhI=
+X-Gm-Gg: AZuq6aJcWwZCCdJBRVK1Xzy/FNPKqJI2AJOSYYRL4CJPGskadQRqcMqMsL+fnLC/Xsy
+ IFLqjUe+bwvSZebnPdzvUyDeujnu1iW0cT6f8Rc2OOlveyvJV3pKw1OYipNr6l6r/FRkoGpnmA7
+ KtZeoff8XCZgAg002FhQ/KmrLEOcuUUV2y3KLFWJX5LUJZkKCPiVyGPrLXEsA6GCwS+ELK3yz3v
+ u1SPKbd5FA652fzlw9Wzw75zvrYjqE2fl3c6hOnAn8IqfrcQh7nVSVHyh1zFQCsWopJLOr6+Zt4
+ Cco5yY/7qDAQAbd9l1FF0dJhTgqIo5s3k9cJ
+X-Received: by 2002:a05:6512:118d:b0:59b:b478:f160 with SMTP id
+ 2adb3069b0e04-59dd7d14b5emr2321683e87.14.1769173735582; Fri, 23 Jan 2026
+ 05:08:55 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1768403729.git.michal.simek@amd.com>
- <da6f7b65cfb5aa81b7ff13848f532cde1b009227.1768403729.git.michal.simek@amd.com>
- <CAC_iWjKrfLXNy6a+bBUAW-xHSicir1TL0vXey2MVz8MxDsMYMA@mail.gmail.com>
- <6b91098b-8072-4691-b2b4-a41ecf6879e2@amd.com>
- <CAC_iWjLBZz1m+9o1PJJegEPE6SGfNvbAe_JuAUrrFTCE=ydOjw@mail.gmail.com>
- <2de4c7cb-4d74-4f8e-a14a-1f09ad880b80@amd.com>
-In-Reply-To: <2de4c7cb-4d74-4f8e-a14a-1f09ad880b80@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 23 Jan 2026 15:01:03 +0200
-X-Gm-Features: AZwV_QgSdtXXuIxN9DnjS5cvfHoq7FIy11PEg-tsJoLxIXe73DhnEXS2w3eo11Q
-Message-ID: <CAC_iWjJy=77AVuPUyaJzxgQyGtkkcNcrEQsknLwU0r8e35absA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] efi_vars: Implement SPI Flash store
-To: Michal Simek <michal.simek@amd.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, git@amd.com,
- Shantur Rathore <i@shantur.com>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+References: <d7d22e35540857e9726f4b435a73a1435aa4fe37.camel@gmail.com>
+In-Reply-To: <d7d22e35540857e9726f4b435a73a1435aa4fe37.camel@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 23 Jan 2026 10:08:44 -0300
+X-Gm-Features: AZwV_QiRBB-5RhzEopxO0wz2WGGABUq5rBpL-Nz_yqnHS9LTfMZzf-yhmTUfjzY
+Message-ID: <CAOMZO5CPMsWDR-yKVyfx+1+iCGkVxh3wh_zpVV7njoDMYg-7_Q@mail.gmail.com>
+Subject: Re: Toradex Verdin AM62 boot failure on recent master
+To: Vitor Soares <ivitro@gmail.com>
+Cc: u-boot@lists.denx.de, vitor.soares@toradex.com, trini@konsulko.com, 
+ n-francis@ti.com, b-padhi@ti.com, afd@ti.com, anshuld@ti.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,136 +114,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 23 Jan 2026 at 10:22, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 1/23/26 08:40, Ilias Apalodimas wrote:
-> > On Thu, 22 Jan 2026 at 14:32, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >> Hi,
-> >>
-> >> On 1/22/26 13:18, Ilias Apalodimas wrote:
-> >>> Hi Michal,
-> >>>
-> >>> [...]
-> >>>
-> >>>>
-> >>>>    config EFI_RT_VOLATILE_STORE
-> >>>>           bool "Allow variable runtime services in volatile storage (e.g RAM)"
-> >>>> -       depends on EFI_VARIABLE_FILE_STORE
-> >>>> +       depends on EFI_VARIABLE_FILE_STORE || EFI_VARIABLE_SF_STORE
-> >>>
-> >>> Will this work on nands as well? They got a  much shrter lifetime that
-> >>> spi flashes.
-> >>
-> >> I don't think this is valid argument here. Users have options to decide where to
-> >> put them. The same argument can be used for u-boot variables saved in NAND.
-> >> Obviously I can update Kconfig option with saying that you should be careful
-> >> about it but it is user choice.
-> >
-> > Yes I think that's a good idea.
-> >
-> >>
-> >>>
-> >>>>           help
-> >>>>             When EFI variables are stored on file we don't allow SetVariableRT,
-> >>>>             since the OS doesn't know how to write that file. At the same time
-> >>>
-> >>> I am not sure we need to allow this for now. At least not until we've
-> >>> talked to the efitool maintainers and make sure they will accept
-> >>> another 'special' case.
-> >>
-> >> Not a problem for me to disable it for now.
-> >>
-> >>>
-> >>> The problem with allowing this is that if people enable it, boot a
-> >>> linux and do a setvariable, it will return a success. But none of the
-> >>> variables will be preserved after a reboot unless someone manually
-> >>> updates the serial flash contents. In theory, we can preserve the
-> >>> driver  model and the spi drivers in EFI runtime services and allow
-> >>> 'proper' setvariable at runtime.
-> >>
-> >> Wasn't this the same case for file based one? I mean u-boot had it but efi
-> >>
-> >> Yours efivar patch was merged Jun 23, 2025
-> >> But this symbol was introduce in U-Boot April 18, 2024.
-> >
-> > Yes but the patches were sent a long time ago in efivar. If you look
-> > at the original PR date it was a lot eariler [0]. It just took a long
-> > time to discuss and merge.
-> > Apart from that the case for file stored variables is by itself pretty
-> > unique and convincing the maintainers to accept the patch had some
-> > basis. I don't know if they want the same workaround for spi flashes.
->
-> Correct June, 2024
-> https://github.com/rhboot/efivar/pull/267
->
->
-> >>
-> >>
-> >>> However, I think this is not very useful. Having an unprotected to
-> >>> store authenticated EFI variables, is dangerous. Someone can erase the
-> >>> SPI flash and efectively disable secure boot. Due to that, I prefer
-> >>> the current file based approach for EFI variables -- which doesn't
-> >>> store/restore authenticated EFI variables (and which this patch
-> >>> implements). The obvious downside is that enable setvariable at
-> >>> runtime is tricky once again....
-> >>
-> >> Isn't the same happening with file store too?
-> >>
-> >>   From implementation perspective it should be the same as file based. Obviously
-> >> efivar part is missing.
-> >
-> > Yes. However, that commit included instructions on how to set runtime
-> > variables with dd, so people could use it until the efivar changes
-> > were merged.
->
-> I don't think it is going to be problem too.
->
-> What about?
-> dd if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c \
->     of=/tmp/vars skip=4 bs=1
-> flashcp /tmp/vars /dev/mtdX
+Hi Vitor,
 
-If you manage to test this then yes, please include it on the commit
-message and in the future we can add it to the documentation
+On Fri, Jan 23, 2026 at 1:54=E2=80=AFAM Vitor Soares <ivitro@gmail.com> wro=
+te:
+>
+>
+> Hi,
+>
+> I'm experiencing a boot failure on Toradex Verdin AM62 with the latest ma=
+ster.
+> The last known good commit is a4dc1c3b7d56 and it fails to boot at 64662b=
+99c0eb
+> (current HEAD).
+>
+> Looking at the 35 commits in this range, I noticed that the first commit =
+after
+> my last known good is 85f586035d75 ("ARM: OMAP2+: Pad SPL binary to 8-byt=
+e
+> alignment before DTB"), which directly modifies the K3/AM62 SPL linker sc=
+ript.
+>
+> Related commits:
+>   85f586035d75 ARM: OMAP2+: Pad SPL binary to 8-byte alignment before DTB
+>   8b0ebe054bb3 arm: Update linker scripts to ensure appended device tree =
+is
+> aligned
+>
+> Could these changes be related to the boot failure? Any insights would
+> be appreciated.
 
->
-> >
-> >>
-> >>>
-> >>> [...]
-> >>>
-> >>>> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> >>>> index be670a8e7c25..feab212b245b 100644
-> >>>> --- a/lib/efi_loader/efi_variable.c
-> >>>> +++ b/lib/efi_loader/efi_variable.c
-> >>>> @@ -397,11 +397,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
-> >>>>                   ret = EFI_SUCCESS;
-> >>>>
-> >>>>           /*
-> >>>> -        * Write non-volatile EFI variables to file
-> >>>> +        * Write non-volatile EFI variables to file or SPI Flash
-> >>>>            * TODO: check if a value change has occured to avoid superfluous writes
-> >>>>            */
-> >>>>           if (attributes & EFI_VARIABLE_NON_VOLATILE) {
-> >>>> -#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
-> >>>> +#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE) || CONFIG_IS_ENABLED(EFI_VARIABLE_SF_STORE)
-> >>>
-> >>> Do we need the ifdefery here? efi_variable.o is basically compiled
-> >>> whenever we have the variables managed by the non-secure world and
-> >>> this function will exist either with a file back storage or a SPI
-> >>> flash
-> >>
-> >> It can be reverted and return EFI_NOT_READY for EFI_VARIABLE_NO_STORE.
-> >
-> > Yes I *thinkk* that will look cleaner.
->
-> ok.
+Does reverting 8b0ebe054bb3 ("arm: Update linker scripts to ensure
+appended device tree is aligned") make the board boot again?
 
-Thanks
-/Ilias
->
-> Thanks,
-> Michal
+I noticed that this commit broke the boot of a Rockchip board:
+
+https://lore.kernel.org/u-boot/CAOMZO5CLQZ3i+Eit5csv6E+az-_g2eOHfCr-whQTPeg=
+06WtqEg@mail.gmail.com/
+
+In the failing boot case, do you get any SPL message at all?
