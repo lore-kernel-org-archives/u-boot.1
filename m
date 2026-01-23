@@ -4,104 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E4CD6CFBB
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 04:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CB9D6CFC1
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 04:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74293839D5;
-	Fri, 23 Jan 2026 05:36:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BE26883B72;
+	Fri, 23 Jan 2026 05:36:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PqOAqEZS";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Dcy3zYe+";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KJkmgkoP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67C8783AC5; Fri, 23 Jan 2026 03:11:44 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7020B83B5E; Fri, 23 Jan 2026 05:36:24 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E92E8397D
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 03:11:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-59b834e3d64so2251066e87.2
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 18:11:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769134301; cv=none;
- d=google.com; s=arc-20240605;
- b=XBWfmW4F46Y1y9PE2z3KtXqEVba0vh4e7gF4ezePpCawSGUBXwZINls88Rg0pg6F5O
- DUa87DfA/hDCGL8Zoe9GQ/pqR27X9ZX3YDNkI2xlCQ5ee4egZM3rpizGli9FLr60OXQs
- 4s/8F+coJHkgyrv5eVdm0zdF/560gSy/RpApSODEVyahiNPRkZUihboFjY9yKP0qScdM
- Gnthvc9Ux3rTl3l3K8OGjmwsWe+D2HFuqKowKip1xHuOIEOXUtCy90Oo/ydKLWkQQY65
- NnWr94H5YZE6qMzhjo0FRtQnNUS955pcrMNuNblkUuyA9xxMAfpbMeKFe1UF2NJAurQI
- qb8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
- fh=iRFH3MgPC7wgzlKa9Kbr8z7p0ugw9sjGx91vbOxdENE=;
- b=NFIwMGhAXDLuU2Y7tIaRAZNib103Oo3vYQiqqvyEqzhN1HuKob3TGXZTP8Z2RfqO6B
- NBmXbzHlJcm9D4nBVLI/femIelyBTQPAuLdFCQQqUug3katRbqFR5qM9fiUmbk0GEqgn
- JCfX3nY3Tv2EppEeEgSgqc27m3mRqfV0jeSpns+X20W7D3grrFoyH1KjqjGN273tmYZe
- LAUI7ASlE1diqcLbnfUdC2SDanlVncSsGXvMupVsElfobJFx2zW3kP3kYFA3sNZfTarn
- OVT44bO0Q0jSBezNvtAbgP63K3hKnKSsgvDhDOKLKJep0c9sBgTE102wl3AYCDyogW/j
- n9eA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 3635483AE9
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 05:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 60MK7XSC1117235
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 04:36:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=VlfK3qTuUjnRShkWEtZEN78N
+ RLeNJLsCzQl/uH0tXaU=; b=Dcy3zYe+Wop62mH0OmvXO1qGsSPtxxut2xWXNfQg
+ WUOerFTX/dUqrpRqeZR0gOW9UvUdNb0Lzi7JIBTn2FnUrDmW5uMeTNLBYerCDUim
+ 3cT5dUXkXsI9f9nu5hJ8+LD+8lj3SnB+9OsxrZJopu8PBn/RhkpuNe8PKAkCZxdf
+ GPOXdDgpzJW2OGppG6Krtn6ZQbmMy7djtaJnt7x3e0Wy5kJBC4h53MmsH0OudAIU
+ 6f22djxzKN3E1kInVgf2ll7SyKzZdT0phnTt9PxAOCfMAG7jRoAgUwDk+1Wr9m+5
+ atEA5igk6GXgJWODDt6z6pE/bo/fIf8IYLMiep03e3HJrw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bur1ca1aq-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 04:36:17 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c52d37d346dso908528a12.3
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 20:36:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769134301; x=1769739101; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
- b=PqOAqEZSpC377wu+vXkAiuX1u80/cUXou1Q9twb8fbhJFNW82+SWQ3n1Oxd7rMc7Ga
- IfqR2GpbVJjewxNcwb0au76/Pc7HjFAVbQdENYaIuH4qJxsSM/y8z64n5w34r25si8ND
- 8xMgIAYaMm6hcrmVckANFwlcLHZCuiM6LzuCPoht4K0kvHHyv/zZBvnIjRNT7jqy77cU
- PTMMztZY9MdRDK3tgoJlgwdwPPcDZAcA+qENPTTGpA8Tm5h9fdB1yuteAHO5uXr0MKyz
- I/2SwOuwqwMxELmdXQup+gSgwyScRciJxHPp7XAIahIqC5lUUsGEtiJe+j4qwnPob+bR
- ndSw==
+ d=oss.qualcomm.com; s=google; t=1769142976; x=1769747776; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VlfK3qTuUjnRShkWEtZEN78NRLeNJLsCzQl/uH0tXaU=;
+ b=KJkmgkoP+YUNyFI80UKq4cxWzAPYebLb+W/4Jrddc7glpqISVcluWs4Cf2A+tbrqfp
+ Vn0BONENn+b9QX024t4GtsNeNTr6HuYhOdlJi4JEf2vn9F6p6AsfjnmNDV1Y844YzOrT
+ 0UM+uUIse0lq9tns6bWVACPvk9neAFYLrdK/PM0+lXX00PjlIw7A2y9GC80Jrvwbe4Y6
+ IrPi0n/OMr/r/iCocqz3xLoNUrh4uG9sXnYVPEFwNHEuazPh5RyC+bbg5t8k2tLeP7JQ
+ WiSoJziYTEf41UN+n0nCJbeWeTMzoGAiPYRyZzZGL3AM6wOLVtir1apqt+XcqsDx35Mb
+ cdsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769134301; x=1769739101;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
- b=OIRjYJfIGWkFG/j3iCkBOTS3T9lV1qX1HYhk62AjBH3bP3yZ5TPab/5ImH5zbp38w3
- 8RyBLv/BGkDpSGhhRUyriV1lxCB/IiUiz7394Qg1K6E1rS7/T2Qr7QpEeY0OI9X1f/Oz
- IkLbJTU+xIlRIJD4DlPPCTBtUUhlSjbxZQ7XxXNbFMA/bBTRMvw94VxmfCB/AJAO0YJv
- xFircNDemS525g9eSaZZbOcQbg3e/BHdpRAy6bGJolj7HUYa8leX5V/XG8lCfJQWZdeS
- 9D4pajFehZkX3kSLCziPrrDptPKS0bbkeZUTbFLoZ5JK7z/lAJV5MoppryswmqpJ+KRg
- bnIQ==
+ d=1e100.net; s=20230601; t=1769142976; x=1769747776;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VlfK3qTuUjnRShkWEtZEN78NRLeNJLsCzQl/uH0tXaU=;
+ b=tlYo7shO4kn3iBvVCc4ZZ2Y3MaDnlEJJsN+XQ1D1Rvptm56q8fCfGk3hcCjcYdaZjr
+ l85pLbCjMcTih9okHZkOBOFX9P+VM3yhNyxzMKEZUhqhh1JDi/eSKlO1ofgwauxwCSlp
+ 5KnIDeovFRoCo+n2yZSXGFS8jD4GVGF5TLonorPjJGKBG4kvMI75774ae9uArq7I2QHA
+ sErjZ4f6VjFA1L4I2cHoYpN+bzqiiVoSfZhjhdcpIA3mEOuJ0TL95RyOicqc19uvcs8N
+ MfkQRZMxinZeGF4NB4jipqPeSC6X9k+8WVixRlPlXiQjMZNhsFNCB63GwQJUAPjGlb9u
+ 7uPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBSoqIp20WWHU3IkQekSMCl9MTh2THDr/PxCxD0XcV8btRfLHa5IbwitQQSaoHuEbIBjLULMQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzLVkvkFrt1ur6R/wgjBAr/xvUpvUrFuh63s8B7z2b/FTtkrAR8
- 7kQQXT62u2PlDVRiSZuae2zgQB00tE2rXsILWPiT5sC4rEtIPeSyS5oxsXyVi+CAd1hTpDhgjBV
- S2/QMKkBHrvKn25/0eiuHd5B8AvIt2LE=
-X-Gm-Gg: AZuq6aLPzHyJ8XLfbcPofxdvsxy/hXn+2FjAmSBfIMGU7yUZtUDyNnD0ZM6/PBkAxA4
- TjNmiNQdmSCpqfB3KQQ7OL0tlTASfkAgQNMcByojItuc4SKgi1yqEhDBZ1gYVZ3BlkQpBKKI8rz
- Mkqqu4qtNq707bH2lT012SJJkP9MlAUyrK9fDRB5IW/SLHA8jnwqkeRGOW57qq8AFZlrHkjGXsd
- Vltt3VRiluKqBcZEjZgmZD821ko6wDGkIvMP1gG5ng8uBEVCpRCmkIcjCRvTzFVC0l+ICEvMA==
-X-Received: by 2002:a05:6512:ba1:b0:59c:bdd8:9d7e with SMTP id
- 2adb3069b0e04-59de4a326d9mr385665e87.45.1769134300256; Thu, 22 Jan 2026
- 18:11:40 -0800 (PST)
+ AJvYcCVPYU+sFon5hQNu0YwLWx2HMv4ttuAOzaMPB567DVoNEfkGbUrAP2+DAfUYXwIKfjB72LYT/Gk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyg/OuMf9n5ePfXbIPWwH3KUSVWyionhLUTE5dHfPgXQnw0ZFOu
+ RMIjg8vCh8jPJsdi5KMMPBzdIjgEg/GbRLaJVmJFL3wqOVWfuE8vcFXHqjSNXMWkhnE0nujIMmT
+ 04FpGII/kGaIweHpdEzdjA4xPzz0pnyvQeqVQiUCZ/POjz0C6gw3s1nW6
+X-Gm-Gg: AZuq6aJD5xgxsYflIsuarUY+Fxv3domRnDlthiJKp8a0lRqC8zU6YhHkAAegLfCKbxz
+ PX45eZi4Yo81N4IObiCL5HGgl4bBhmoHcXU0fGdbhECaFBFgVjUnkSG/62biJP4H/amRuAcOeK+
+ t4zxpyFJiW70I23r0TWbh+k7Fgp/7eXVxzUZX8N8Y/RnQLlU8JJunYE78XS3gQB28IIXovZcYzL
+ /1AwX3sPxmCjHEkQWerUMD6qYhBwurqhqhxnZ9254ThgKI+65kYhqAOorHzP9VRwWRFXmsWO+Cv
+ lAEIZfJW/x0dk5CRgk/xYmzDWJ+FhN1zhxlXAG5AAK3yYfv7hHCcYl4O4DpV01VVwPhh/tnmHXE
+ Mzvt7xxAdNrRG/eATrmpKY8ZNKPKf9fg/7MBBthddfIros0p6ULu1Ngij5j5EOeq6CkqUkvAurE
+ xE2VoLo+2YluRkDtF0ksD4lmh2WAid99lRsqZoEYU=
+X-Received: by 2002:a17:902:d489:b0:299:e031:173 with SMTP id
+ d9443c01a7336-2a7fe625165mr15983195ad.35.1769142976446; 
+ Thu, 22 Jan 2026 20:36:16 -0800 (PST)
+X-Received: by 2002:a17:902:d489:b0:299:e031:173 with SMTP id
+ d9443c01a7336-2a7fe625165mr15982355ad.35.1769142974981; 
+ Thu, 22 Jan 2026 20:36:14 -0800 (PST)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a802daa85esm6999845ad.1.2026.01.22.20.36.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jan 2026 20:36:14 -0800 (PST)
+Date: Fri, 23 Jan 2026 10:06:09 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org, quic_varada@quicinc.com,
+ casey.connolly@linaro.org, bmeng.cn@gmail.com,
+ andrew.goodbody@linaro.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] Revert "scsi: sync cache on write"
+Message-ID: <aXL6uTKU8xVWhwyM@hu-varada-blr.qualcomm.com>
+References: <20260122083954.2722972-1-balaji.selvanathan@oss.qualcomm.com>
+ <20260122083954.2722972-2-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260113142303.441190-1-mateuslima.ti@gmail.com>
- <aXGZVQhGzIrtXY86@nxa18884-linux.ap.freescale.net>
- <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
-In-Reply-To: <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
-From: Mateus Lima <mateuslima.ti@gmail.com>
-Date: Thu, 22 Jan 2026 23:11:28 -0300
-X-Gm-Features: AZwV_Qjh3qTUncF5sKtJULj-n4Y3A4O2ZMiNGjUAzSltEyXXMpJBhAGz0XG-qd0
-Message-ID: <CAP8WwTGBmobvB_AvCd4SfxbDB5ZsNv8zGS_m9LQ_KPPKqCWHNg@mail.gmail.com>
-Subject: Re: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot
- board.
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: alison.wang@nxp.com, u-boot@lists.denx.de
-X-Mailman-Approved-At: Fri, 23 Jan 2026 05:36:21 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260122083954.2722972-2-balaji.selvanathan@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=FswIPmrq c=1 sm=1 tr=0 ts=6972fac1 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8 a=N_ykLT0s8f5MVdpOFKkA:9
+ a=CjuIK1q_8ugA:10 a=zZCYzV9kfG8A:10 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: vJ35j32b6eKfO7dJmruBMDCEMGg1rCVs
+X-Proofpoint-GUID: vJ35j32b6eKfO7dJmruBMDCEMGg1rCVs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIzMDAzMCBTYWx0ZWRfX6QZCRZuMg1wL
+ uKVhYPPTF49BCOLvgzIAnbPuzNfwUgsnksOvgKSxnGYo51bnK9bLWDQdaNia8rng/Ly+lUivmYQ
+ bGEC3Tt1x+KNL+pejlJ1rSjIrjQMhMmfdXxwxEWoE5cUi90clXFXB3YkkJcTdxQqn2uWEz7wEi7
+ 0PtMQ1FsGWshrEkE4RorMdoHjlv8LXqVOFCtyRBlAIcENMrbFDdVIx03VvVpwVW1Cifg3zQrYVd
+ sXIzfsrwkQUTGciAOkIPKW83vsfuNerO3p3S7fOfj39ArQo5cdtgMDmnyogVzL4xTIRC/Lukdn8
+ WvayWKq+B3/ShHF4R3t60qDbNKCmZe2GVUY6xzBIqbocmqu075Tvf8JpjEX1HZhy5IcWuiMdi8C
+ vrxRtoQPnWnrSoJ6J1PUaUKMmRhWarzALAbbnoCQQyNnwxqVOHJqj2KrXXzv+RT91i04z5eTTT8
+ ybr0NcCztprhEMaHvYw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
+ definitions=2026-01-22_06,2026-01-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 malwarescore=0 spamscore=0 priorityscore=1501 phishscore=0
+ lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601230030
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,74 +148,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 22, 2026 at 10:12=E2=80=AFAM Mateus Lima <mateuslima.ti@gmail.c=
-om>
-wrote:
+On Thu, Jan 22, 2026 at 02:09:53PM +0530, Balaji Selvanathan wrote:
+> This reverts commit ffe4e6ab42d2534302be825e49a2d085acf80f30.
+>
+> While the SYNC_CACHE approach prevents data loss during board resets,
+> it causes system hangs during large sparse image flashing operations.
+> This will be replaced with a FUA (Force Unit Access) approach in future
+> commit, which achieves the same data integrity goal more efficiently.
 
-> On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> =
-wrote:
->
->> On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
->> >This patch adds CPLD support via IFC to the ls1021a-iot board.
->> >
->> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
->>
->> CI report build failure.
->>
->>   CC      drivers/video/hitachi-tx10d07vm0baa.o
->> In file included from drivers/misc/fsl_ifc.c:8:
->> include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or directo=
-ry
->>    16 | #include <asm/ppc.h>
->>       |          ^~~~~~~~~~~
->> compilation terminated.
->> make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Error =
-1
->> make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
->> make[2]: *** Waiting for unfinished jobs....
->>   CC      drivers/rtc/ht1380.o
->>   CC      drivers/video/hitachi_tx18d42vm_lcd.o
->>   CC      drivers/rtc/i2c_rtc_emul.o
->>
->> make[1]: *** [Makefile:2191: drivers] Error 2
->> make: *** [Makefile:362: __build_one_by_one] Error 2
->> Cleaning up project directory and file based variables
->>
->> Regards
->> Peng
->>
-> Hi Peng,
->
-> Thank you for the test, and apologies for not having validated the patch
-> on other targets.
-> In fact, this driver was not being used by any target (neither ARM nor
-> PPC) and after this patch it became enabled again. However, PPC targets
-> fail when trying to include the asm/ppc.h header, which is not available
-> for some reason.
->
-> For now, I am thinking of submitting a v3 of the patch adding an explicit
-> dependency on ARM, something like:
->
-> + depends on ARM
->
-> This way we would avoid building the driver for PPC targets.
-> What do you think about this approach?
->
-> Thanks again for the report and the feedback.
->
-> BR,
-> Mateus
->
-Hi Peng,
+Typically the format is
 
-I have just run a pipeline in the U-Boot Azure DevOps environment and all
-targets were built successfully. Please take a look:
+	Revert "subject of the reverted commit"
 
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D12700&view=3Dr=
-esults
+	-- explanation of this commit --
+	. . .
+	. . .
+	. . .
 
-Could you please let me know what you did differently that caused the build
-to fail?
+	This reverts commit ffe4e6ab42d2534302be825e49a2d085acf80f30.
 
-BR,
-Mateus
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
+-Varada
