@@ -4,82 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF06D6CFC5
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 04:36:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E4CD6CFBB
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 04:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCF72839DF;
-	Fri, 23 Jan 2026 05:36:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74293839D5;
+	Fri, 23 Jan 2026 05:36:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mm2ewxSa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PqOAqEZS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A732D839DF; Fri, 23 Jan 2026 00:59:00 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 67C8783AC5; Fri, 23 Jan 2026 03:11:44 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B40383946
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 00:58:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E92E8397D
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 03:11:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-42fb4eeb482so1089473f8f.0
- for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 15:58:58 -0800 (PST)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-59b834e3d64so2251066e87.2
+ for <u-boot@lists.denx.de>; Thu, 22 Jan 2026 18:11:41 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769134301; cv=none;
+ d=google.com; s=arc-20240605;
+ b=XBWfmW4F46Y1y9PE2z3KtXqEVba0vh4e7gF4ezePpCawSGUBXwZINls88Rg0pg6F5O
+ DUa87DfA/hDCGL8Zoe9GQ/pqR27X9ZX3YDNkI2xlCQ5ee4egZM3rpizGli9FLr60OXQs
+ 4s/8F+coJHkgyrv5eVdm0zdF/560gSy/RpApSODEVyahiNPRkZUihboFjY9yKP0qScdM
+ Gnthvc9Ux3rTl3l3K8OGjmwsWe+D2HFuqKowKip1xHuOIEOXUtCy90Oo/ydKLWkQQY65
+ NnWr94H5YZE6qMzhjo0FRtQnNUS955pcrMNuNblkUuyA9xxMAfpbMeKFe1UF2NJAurQI
+ qb8g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
+ fh=iRFH3MgPC7wgzlKa9Kbr8z7p0ugw9sjGx91vbOxdENE=;
+ b=NFIwMGhAXDLuU2Y7tIaRAZNib103Oo3vYQiqqvyEqzhN1HuKob3TGXZTP8Z2RfqO6B
+ NBmXbzHlJcm9D4nBVLI/femIelyBTQPAuLdFCQQqUug3katRbqFR5qM9fiUmbk0GEqgn
+ JCfX3nY3Tv2EppEeEgSgqc27m3mRqfV0jeSpns+X20W7D3grrFoyH1KjqjGN273tmYZe
+ LAUI7ASlE1diqcLbnfUdC2SDanlVncSsGXvMupVsElfobJFx2zW3kP3kYFA3sNZfTarn
+ OVT44bO0Q0jSBezNvtAbgP63K3hKnKSsgvDhDOKLKJep0c9sBgTE102wl3AYCDyogW/j
+ n9eA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769126337; x=1769731137; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
- :subject:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=hfzci/6maJ3a5urWpJI9GfFUMwWwFuxrNN5LuWZf0zc=;
- b=mm2ewxSa6UPNBFlKjF5KShAgKAhajQGSxeAAHR7koVS8lcvij7voz1hZdK9t2TGXIF
- m8LuPrwXfxdn4UqYmGZRqiJh4pitDAj1kaJLa3O4x2gDNUlntAHqfoeVR3ygTkSwcw03
- 5K2q/CFMWNHJYC9/R3oMeMmXSM55RSLNloHp5oCvYZ9JDLMcv7pZJ2xFZFIcAV+XLCjf
- 5RKvhhURta9XepaIUxw0ygB5UYs3ap+4/C7UZIkke/KjNA6QHBeA9zzx2tu1yE5FMong
- oeEZxvT02NswIA6D1QIRmbT1uFztEKcRXjaESyj8lWn60dUm/hM53+9vTpgJvgB/sroL
- yjTA==
+ d=gmail.com; s=20230601; t=1769134301; x=1769739101; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
+ b=PqOAqEZSpC377wu+vXkAiuX1u80/cUXou1Q9twb8fbhJFNW82+SWQ3n1Oxd7rMc7Ga
+ IfqR2GpbVJjewxNcwb0au76/Pc7HjFAVbQdENYaIuH4qJxsSM/y8z64n5w34r25si8ND
+ 8xMgIAYaMm6hcrmVckANFwlcLHZCuiM6LzuCPoht4K0kvHHyv/zZBvnIjRNT7jqy77cU
+ PTMMztZY9MdRDK3tgoJlgwdwPPcDZAcA+qENPTTGpA8Tm5h9fdB1yuteAHO5uXr0MKyz
+ I/2SwOuwqwMxELmdXQup+gSgwyScRciJxHPp7XAIahIqC5lUUsGEtiJe+j4qwnPob+bR
+ ndSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769126337; x=1769731137;
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
- :subject:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=hfzci/6maJ3a5urWpJI9GfFUMwWwFuxrNN5LuWZf0zc=;
- b=DmUXuxhDL8N69dMzpxCA8/skEZ3NjRecYiVVjvaeLj/mO9cs6GGVyj5hCfuzTo2tGY
- SrUcYZoXg07DwCeL2ZuQHJgsZxz0elljlkrnKBQCz7LsGifW8gZkVQk37h7qIrrvUorK
- HJOrdpZ68tG827jc1IyaV8SaBhJtayQ+gTd3u9Jq33NQuPpe95kRGB+mb9LeNUV900oy
- KRxjIT2TSXhU573dllM0DyMnH2yQKSsZ89KNw+pPngsQ/PC7+pSB6cWTSgbkvk/yYKdn
- 3/FYSo+8uXVCKbz+aOsCXM6Hu44sk+/nOpZ3NJ1DjS9x8x27c0qm77ljoi84eQ4b7aBh
- JNfg==
-X-Gm-Message-State: AOJu0YwkWY8081PgvX00HbD9zTQI0TgrXJADn8yfNzCvbKR7QP8xhqEw
- y5PUTQYSYK4bq26M0EI8YufToYaU2CxP/ukrnKuDZQT+In0XQZmhADQUHLJVGg==
-X-Gm-Gg: AZuq6aLvzI0eqnQmxM7hh5HlrEzuCLN66c6eCSMPl86TBRGCohCMrPh9Q12smykA6Qn
- GX6mUHxmkIwsUBNX7K6cqQwFD7VEuJUqL0zQs6iwhsue+bQxFxIaG2nMd8I7WpFsTD9idh9W/Za
- 4gjVV3+D3RdoyD9tRg3phOePSRj+FGuhuCd3AYNxar5qX9CwCHyw5abf3J7T1mK7dvgr+Qt4EsQ
- IAaJsbnKEhWGEp1zrTMOj60cF1jcHd6D1w2lhv4toIbq+A4dklHSBgIOUOo91189Y9h/Mc9cZ4r
- AFDBtPf/3KqTNsdWCLIuJSBNyUF5YEsK/op44QGHDUmDj49TAMM46c/QYnOviLJxBZVTXNIGpda
- GN3OiBinh891TZ6IrRDj5r5Eu3NBUA4RZXKQtJOHaj3Tcl7JJy0BZbarC6FoVlSqTSuGk2Bbfe5
- K5GKekxALXwnYwyUI/EkMkNCjEAYRMxRElWA==
-X-Received: by 2002:a05:6000:4026:b0:435:9cd5:bb2e with SMTP id
- ffacd0b85a97d-435b159124bmr2279888f8f.11.1769126337407; 
- Thu, 22 Jan 2026 15:58:57 -0800 (PST)
-Received: from vitor-nb.Home (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-435b1c24ac1sm2202435f8f.14.2026.01.22.15.58.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 15:58:56 -0800 (PST)
-Message-ID: <d7d22e35540857e9726f4b435a73a1435aa4fe37.camel@gmail.com>
-Subject: Toradex Verdin AM62 boot failure on recent master
-From: Vitor Soares <ivitro@gmail.com>
-To: u-boot@lists.denx.de
-Cc: vitor.soares@toradex.com, trini@konsulko.com, n-francis@ti.com, 
- b-padhi@ti.com, afd@ti.com, anshuld@ti.com
-Date: Thu, 22 Jan 2026 23:58:54 +0000
+ d=1e100.net; s=20230601; t=1769134301; x=1769739101;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DDo7pufPLI3WP1XKZY05AroYwQa7YmvjCs1zyVOPydU=;
+ b=OIRjYJfIGWkFG/j3iCkBOTS3T9lV1qX1HYhk62AjBH3bP3yZ5TPab/5ImH5zbp38w3
+ 8RyBLv/BGkDpSGhhRUyriV1lxCB/IiUiz7394Qg1K6E1rS7/T2Qr7QpEeY0OI9X1f/Oz
+ IkLbJTU+xIlRIJD4DlPPCTBtUUhlSjbxZQ7XxXNbFMA/bBTRMvw94VxmfCB/AJAO0YJv
+ xFircNDemS525g9eSaZZbOcQbg3e/BHdpRAy6bGJolj7HUYa8leX5V/XG8lCfJQWZdeS
+ 9D4pajFehZkX3kSLCziPrrDptPKS0bbkeZUTbFLoZ5JK7z/lAJV5MoppryswmqpJ+KRg
+ bnIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBSoqIp20WWHU3IkQekSMCl9MTh2THDr/PxCxD0XcV8btRfLHa5IbwitQQSaoHuEbIBjLULMQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLVkvkFrt1ur6R/wgjBAr/xvUpvUrFuh63s8B7z2b/FTtkrAR8
+ 7kQQXT62u2PlDVRiSZuae2zgQB00tE2rXsILWPiT5sC4rEtIPeSyS5oxsXyVi+CAd1hTpDhgjBV
+ S2/QMKkBHrvKn25/0eiuHd5B8AvIt2LE=
+X-Gm-Gg: AZuq6aLPzHyJ8XLfbcPofxdvsxy/hXn+2FjAmSBfIMGU7yUZtUDyNnD0ZM6/PBkAxA4
+ TjNmiNQdmSCpqfB3KQQ7OL0tlTASfkAgQNMcByojItuc4SKgi1yqEhDBZ1gYVZ3BlkQpBKKI8rz
+ Mkqqu4qtNq707bH2lT012SJJkP9MlAUyrK9fDRB5IW/SLHA8jnwqkeRGOW57qq8AFZlrHkjGXsd
+ Vltt3VRiluKqBcZEjZgmZD821ko6wDGkIvMP1gG5ng8uBEVCpRCmkIcjCRvTzFVC0l+ICEvMA==
+X-Received: by 2002:a05:6512:ba1:b0:59c:bdd8:9d7e with SMTP id
+ 2adb3069b0e04-59de4a326d9mr385665e87.45.1769134300256; Thu, 22 Jan 2026
+ 18:11:40 -0800 (PST)
+MIME-Version: 1.0
+References: <20260113142303.441190-1-mateuslima.ti@gmail.com>
+ <aXGZVQhGzIrtXY86@nxa18884-linux.ap.freescale.net>
+ <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
+In-Reply-To: <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
+From: Mateus Lima <mateuslima.ti@gmail.com>
+Date: Thu, 22 Jan 2026 23:11:28 -0300
+X-Gm-Features: AZwV_Qjh3qTUncF5sKtJULj-n4Y3A4O2ZMiNGjUAzSltEyXXMpJBhAGz0XG-qd0
+Message-ID: <CAP8WwTGBmobvB_AvCd4SfxbDB5ZsNv8zGS_m9LQ_KPPKqCWHNg@mail.gmail.com>
+Subject: Re: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot
+ board.
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: alison.wang@nxp.com, u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 23 Jan 2026 05:36:21 +0100
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
-MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 23 Jan 2026 05:36:15 +0100
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,29 +118,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jan 22, 2026 at 10:12=E2=80=AFAM Mateus Lima <mateuslima.ti@gmail.c=
+om>
+wrote:
 
-Hi,
+> On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> =
+wrote:
+>
+>> On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
+>> >This patch adds CPLD support via IFC to the ls1021a-iot board.
+>> >
+>> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
+>>
+>> CI report build failure.
+>>
+>>   CC      drivers/video/hitachi-tx10d07vm0baa.o
+>> In file included from drivers/misc/fsl_ifc.c:8:
+>> include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or directo=
+ry
+>>    16 | #include <asm/ppc.h>
+>>       |          ^~~~~~~~~~~
+>> compilation terminated.
+>> make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Error =
+1
+>> make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
+>> make[2]: *** Waiting for unfinished jobs....
+>>   CC      drivers/rtc/ht1380.o
+>>   CC      drivers/video/hitachi_tx18d42vm_lcd.o
+>>   CC      drivers/rtc/i2c_rtc_emul.o
+>>
+>> make[1]: *** [Makefile:2191: drivers] Error 2
+>> make: *** [Makefile:362: __build_one_by_one] Error 2
+>> Cleaning up project directory and file based variables
+>>
+>> Regards
+>> Peng
+>>
+> Hi Peng,
+>
+> Thank you for the test, and apologies for not having validated the patch
+> on other targets.
+> In fact, this driver was not being used by any target (neither ARM nor
+> PPC) and after this patch it became enabled again. However, PPC targets
+> fail when trying to include the asm/ppc.h header, which is not available
+> for some reason.
+>
+> For now, I am thinking of submitting a v3 of the patch adding an explicit
+> dependency on ARM, something like:
+>
+> + depends on ARM
+>
+> This way we would avoid building the driver for PPC targets.
+> What do you think about this approach?
+>
+> Thanks again for the report and the feedback.
+>
+> BR,
+> Mateus
+>
+Hi Peng,
 
-I'm experiencing a boot failure on Toradex Verdin AM62 with the latest mast=
-er.
-The last known good commit is a4dc1c3b7d56 and it fails to boot at 64662b99=
-c0eb
-(current HEAD).
+I have just run a pipeline in the U-Boot Azure DevOps environment and all
+targets were built successfully. Please take a look:
 
-Looking at the 35 commits in this range, I noticed that the first commit af=
-ter
-my last known good is 85f586035d75 ("ARM: OMAP2+: Pad SPL binary to 8-byte
-alignment before DTB"), which directly modifies the K3/AM62 SPL linker scri=
-pt.
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D12700&view=3Dr=
+esults
 
-Related commits:
-  85f586035d75 ARM: OMAP2+: Pad SPL binary to 8-byte alignment before DTB
-  8b0ebe054bb3 arm: Update linker scripts to ensure appended device tree is
-aligned
+Could you please let me know what you did differently that caused the build
+to fail?
 
-Could these changes be related to the boot failure? Any insights would
-be appreciated.
-
-Thanks,
-Vitor Soares
-
+BR,
+Mateus
