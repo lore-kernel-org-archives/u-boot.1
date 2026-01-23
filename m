@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D6B3D72367
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 10:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165EDD7236B
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 10:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FC2A83B03;
-	Fri, 23 Jan 2026 11:27:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 91DE483B32;
+	Fri, 23 Jan 2026 11:29:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="S4I2RmxR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wE+W6Pk/";
+	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="oEvEZ1hT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A3BA83B0B; Fri, 23 Jan 2026 11:27:51 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 24E3183B5E; Fri, 23 Jan 2026 11:29:24 +0100 (CET)
+Received: from outbound.ci.icloud.com (ci-2002h-snip4-11.eps.apple.com
+ [57.103.88.211])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DD2183AC5
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 11:27:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FE0F83B03
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 11:29:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dyDdw58xbz9t3C;
- Fri, 23 Jan 2026 11:27:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769164068;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZJROupKTeEYwIMfUbPGFuQTAryZcwPaaBNBFhqedkss=;
- b=S4I2RmxRm3bkTkE/6GDeVv7pw158dCWrzh49Hy2dsnz+4g13KvaFrY15UfNxveVF5WAHd6
- lv9etainz9GoCG2kDwC7+n6LCM9OpUwvf8cm09YIMEp6Duc88nUHY4fbe24vVSIODiAaJi
- /SJZ6pd4mrz7U4EyRtAmx7nnjQiwigK/yNraPQlUvkA/aXdJyy6b45/4p2kKjkZaxdvfrz
- V96cLuh7RH8AxQfm7eY1X7f9GrSICaP/8iTf9bhrO7oAE9JQFSdE3CcllCwzHk9YC7w5rz
- ThziFSPgg4+uzZNQFAk6QOGfZknH3jvvb5fzQWXKJQsoHfiYbyfrStT4Y9FRYw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="wE+W6Pk/";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769164066;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZJROupKTeEYwIMfUbPGFuQTAryZcwPaaBNBFhqedkss=;
- b=wE+W6Pk/LJgr+f5pt6nGiei3jqIJYsl5vilnujKePhLs55WiUxu4dokSDJgIJY08Bymk72
- WOWBiDJWtSVmznhlolY7v1RnzJ/eXtMffXDQzdSzy7rCixXmDaqbGVJxZdvYJjsFnnGy7/
- H970T8QKniGyRJBWWMSwgUCG93UVJTu5P+qX1KHnRnlz9+nFtD39JHWnVDrFuk89e0a1ak
- TIsOLTxaaldZ/2HFXh8KMX18onXFCqqrbylAB8k6SjBbQE5+exUuYR9ntTDMJTjJ/gSZpN
- sGTcz6Tdk7P6vjavnRi2JpRvSxPL06QdnIGmf1Y4LsuHgYQPBvijTEIiYsWMDw==
-Date: Fri, 23 Jan 2026 11:27:41 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
- via -b argument
-To: Beleswar Prasad Padhi <b-padhi@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
- sughosh.ganu@linaro.org, philip.molloy@analog.com,
- marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, anshuld@ti.com,
- afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
- bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
-References: <20260122172247.2995437-1-b-padhi@ti.com>
- <20260122174546.GB3416603@bill-the-cat>
- <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
- <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 1fbyc4pndzs8s8ytnynbcgigr11tcgoz
-X-MBO-RS-ID: 3e9839bcbf37c6cc9c2
-X-Rspamd-Queue-Id: 4dyDdw58xbz9t3C
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.ci.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-central-1k-20-percent-3 (Postfix) with ESMTPS id
+ 451781800171; Fri, 23 Jan 2026 10:29:18 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ t=1769164160; x=1771756160; bh=StCa8yCS6IB2eZnURhZpk/o8U9k488XrBA4YApQi98g=;
+ h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
+ b=oEvEZ1hTX8fwrdl0AZvUjVAaCwz6nr97ZeyuFOPhs3BDpO8J5W0Hx4LMD0WTjzOBBmViYkjQDhw1xPg/+pVrpJDlfAxC3cf8LpSRfI81ihg6BVfDLL/4aMraJfOBZ2mN3Egi5O53i5Q0T1KHy+tXroAZ2PvBgYPZjQUVQiI5BlL3HL+X4LEtPA43fKevh2/ycPuRefglsxwH6OiuWNKU/47kbiK2qyHeFDTFOUpi68VkvKmUyHaeNWGLbefnqZ02xPxr0GWj2iiCZ2DhaUu7wkrAPln+ITM1T59+o5QIWqfJISjzelnyXSQqI7MFArqf+BFH7OcUvSPiZXTIkaSiWA==
+mail-alias-created-date: 1549370554000
+Received: from smtpclient.apple (unknown [17.57.156.36])
+ by p00-icloudmta-asmtp-us-central-1k-20-percent-3 (Postfix) with ESMTPSA id
+ 5F4C31800154; Fri, 23 Jan 2026 10:29:15 +0000 (UTC)
+From: Beiyan Yun <root@infi.wang>
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.4\))
+Subject: Question about Marvell CUX3410 support
+Message-Id: <A2A08E1D-EF71-4C83-B2E1-9375B32257F2@infi.wang>
+Date: Fri, 23 Jan 2026 18:29:02 +0800
+Cc: Weijie Gao <weijie.gao@mediatek.com>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, joe.hershberger@ni.com, lucienzx159@gmail.com,
+ marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
+ rfried.dev@gmail.com, romain.gantois@bootlin.com, s-vadapalli@ti.com,
+ trini@konsulko.com, =?utf-8?B?5YyX6ZuB5piA?= <root@infi.wang>
+To: u-boot@lists.denx.de
+X-Mailer: Apple Mail (2.3826.700.81.1.4)
+X-Authority-Info-Out: v=2.4 cv=R+MO2NRX c=1 sm=1 tr=0 ts=69734d7f
+ cx=c_apl:c_apl_out:c_pps a=2G65uMN5HjSv0sBfM2Yj2w==:117
+ a=2G65uMN5HjSv0sBfM2Yj2w==:17 a=kj9zAlcOel0A:10 a=MKtGQD3n3ToA:10
+ a=1oJP67jkp3AA:10 a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=NEAV23lmAAAA:8 a=Zg8YGq9y1hQxktwvM1cA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: gCfS-th8NLM0TuFLw4rxXUREzU28-ncw
+X-Proofpoint-GUID: gCfS-th8NLM0TuFLw4rxXUREzU28-ncw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIzMDA4NCBTYWx0ZWRfX44V+JADwbpju
+ FVU3MY85+ZuwSn4Ttsn+txTiFiSV6vICDEjbvileLN0aI+gbHtxK4lOmFTlqah42KLorCCKAwQq
+ 4wyxOX+yBwxTzIit3F/FPqBQVoo1Th3xB4AbH6ry3i7SYg5dvjIWmXar1Ytzy9fCYT2WPjmaxnc
+ ngFBTxG+2OOQH4bX5XIZabaRAGV1S5+3R42bl+xzEbGiXM4sEUd1le7FDTzOXjE6Y8mEyKrpgRE
+ NR831rBPnYk1F5wKMUWnQE1e7GNVJpG3AWaIZjPtLvDXoIo0qOze2osr1j1IRGMMlR+GNMLaYpj
+ XOIBG1uDdQqYycpkBUHkU00208P8m3udhO+MsWi7+ajEDfc4dRVS0PwI3EIn+A=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
+ definitions=2026-01-23_01,2026-01-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ malwarescore=0 spamscore=0 adultscore=0 suspectscore=0 bulkscore=0
+ mlxlogscore=463 phishscore=0 lowpriorityscore=0 clxscore=1030 classifier=spam
+ authscore=0 adjust=0 reason=mlx scancount=1 engine=8.22.0-2601080000
+ definitions=main-2601230084
+X-JNJ: AAAAAAABNAvKvS9PyHIChaiJAKlVg9PvtVHEvCMYETNf7W/og0P/GZkhsWcW15GkGJWBQ76gzNq4zzpELwixh9GMIKZjXqXWU1peYT1GJRXdPVb3UefJKxyD6nyre1pzCc53CZhtiHUgD6hl5fVLvJHI6Wgxp/FbKdx8OcV9pXulDdZ12wjeMKWKn4u8u7AebxfnwYJ4quZ+b8lHoT7P1e7ucwuCI2qpE2Ehyc5iU14q/wJdxjclPxn05x0wjxirzhvHlH8aXiKtrop4SiVNA+HeLoxI4tiTg6BLCwrse52HHWmHG8/PoTtkqKfgBG88nsrahLXZPZ5oVWmkOmECn3HtcfVdrluW4mckprL2Mb+QDwVWefJH8XMIFXQPlvkQSGOyIgg+cUaOjHG1B/dF73eGuf2RDazkQmrqHgWXszHClE54SM6AHobl4xRLN3/gCWynVhPSGReEdF7ZMhljnNQTNrXt4MhOICwsXQ/51R+XaMq62NWJP9/0LvpLgOsnlQ0fCgPm4MC/rC9WFO7sSzJqqyiSpmUOrBj6MakGKSYjM8f9EcFZJ3uWPRl3Ly4eBZgnPBn7s03YImKO7AibByCz7Pcdnl7AjCoczVqFcEwejyI3qUfKiIH/Uwh+ZSgqrirB3ETMYc1iWAfr8WphihwVwUdbsnW1pq246sRE+ptiopyte4yfW+MCu924P0SdWTNgvxiSfJQM9gsvIR1P8hW+itYdLJTS8ZUIBI4x5QdnLt09biVoMKe7vCCD4+IL6MbwRU+5oyRVCjAlnpDSv816baitavb0T4bOzh0nMiQ11ANO3t6AbRQILUoc7/xgwCslP77hzCEuJEk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,79 +89,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/26 4:32 AM, Beleswar Prasad Padhi wrote:
-> 
-> On 23/01/26 00:33, Marek Vasut wrote:
->> On 1/22/26 6:45 PM, Tom Rini wrote:
->>> On Thu, Jan 22, 2026 at 10:52:47PM +0530, Beleswar Padhi wrote:
->>>
->>>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
->>>> packed inside the multidtb.fit FIT image. While the individual DTBs
->>>> and the FIT image start address are 8-byte aligned, the DTBs embedded
->>>> within the FIT image are not guaranteed to maintain 8-byte alignment.
->>>>
->>>> This misalignment causes -FDT_ERR_ALIGNMENT failure in
->>>> setup_multi_dtb_fit() when locating the next available DTB within the
->>>> FIT blob and setting gd->fdt_blob, because of the recent libfdt
->>>> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
->>>> version v1.7.2-35-g52f07dcca47c")
->>>>
->>>> The mkimage tool already supports enforcing this alignment via the -B
->>>> option, but users would have to specify it explicitly. This change
->>>> makes 8-byte alignment the default when using -b.
->>>>
->>>> Reported-by: Anshul Dalal <anshuld@ti.com>
->>>> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
->>>> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
->>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->>>
->>> Tested-by: Tom Rini <trini@konsulko.com>
->> Doesn't this enable 8-byte alignment for everything in case a DT is specified on mkimage command line ? That doesn't seem right ?
->>
->> If I do mkimage -f auto -b ...dtb ... , then I only want the DTB to be 8-byte aligned, all the other blobs can be 4 byte aligned just fine .
-> 
-> 
-> All the mkimage flags are parsed at once and populated in the params
-> data structure in one shot in the code. There is no separation of code
-> specifically for generating a FIT for a DTB vs for anything else.
+Hi Weijie, and Aquantia maintainers:
 
-That does not seem to be true ?
+I'm still working on porting U-Boot to Buffalo WXR18000BE10P. Despite my =
+previous cleanup of the firmware loading code, the PHY still needs =
+proper bringup.
 
-$ git grep -p '\<bl_len\>' tools/
-tools/fit_image.c=static int fit_extract_data(struct image_tool_params 
-*params, const char *fname)
-tools/fit_image.c:      align_size = params->bl_len ? params->bl_len : 4;
-...
+I noticed a useful commit in MediaTek's U-Boot that adds support for =
+this PHY =
+(https://github.com/mtk-openwrt/u-boot/commit/7a5cf8f2f6d043ed6c9105fac985=
+1e16b82a9623). Do you have plans to upstream this, or would you mind if =
+I prepare a patch based on your work?
 
-So something like that may work ?
-
-"
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index 0306333141e..0c606ba4cc3 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -642,9 +642,15 @@ static int fit_extract_data(struct 
-image_tool_params *params, const char *fname)
-         for (node = fdt_first_subnode(fdt, images);
-              node >= 0;
-              node = fdt_next_subnode(fdt, node)) {
--               const char *data;
-+               const char *data, *type;
-                 int len;
-
-+               if (align_size < 8) {
-+                       type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
-+                       if (type && !strcmp(type, "flat_dt"))
-+                               align_size = 8;
-+               }
-+
-                 data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
-                 if (!data)
-                         continue;
-"
-
-> We
-> would get the same result when using mkimage -f auto -b ...dtb... -B 0x8
-> I think we should be fine with this limitation for the usecases when
-> generating fitImage with mixed images. Unless you have some idea?
-What about the above ?
+Thanks,
+Yun
