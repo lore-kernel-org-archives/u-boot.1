@@ -4,120 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199EDD72369
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 10:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D6B3D72367
+	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 10:27:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA0383B03;
-	Fri, 23 Jan 2026 11:11:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6FC2A83B03;
+	Fri, 23 Jan 2026 11:27:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PU/VXeA+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="S4I2RmxR";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wE+W6Pk/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06E6F83B32; Fri, 23 Jan 2026 11:11:51 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A3BA83B0B; Fri, 23 Jan 2026 11:27:51 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B1FE839DF
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 11:11:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DD2183AC5
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 11:27:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47ee0291921so16950785e9.3
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 02:11:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1769163107; x=1769767907; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=uaLOyrVJfCvq6LoF1WuIHA8whsMEP0o7R3luDMTE13s=;
- b=PU/VXeA+oVwPznJABPb95jyaxrYvzLXZLGKSPt/6Q0e/M8WCnzGv15bYLCbIy/Apw3
- qYicQQVzCVDTvg0lpgQPEeWFoaTFxKbQUitaqthR1d21b7VwrEFH273bnHMGpperUnWE
- BwM9E+bmAhkR0KyGobNKyriOw8C2yEZotkKieJrsjc59GfMVVkfbS93yjImtgXs+do9T
- Y1HCbjAlaFH+YydO1XM9ukqqdqy/P8FPBU39ULgqsM3mCebubtw16kWHiLiTygSPJdW1
- W5NbI2LA8GTOkKALBXIB/mbP4mlCeTITrFe1v2Iq2sQPTdCUAS+9/apuJmMfldAHT3Ic
- sUfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769163107; x=1769767907;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uaLOyrVJfCvq6LoF1WuIHA8whsMEP0o7R3luDMTE13s=;
- b=Z28iHSiGBauCSasgvez8yzhnXKxHwK3EpwHaje4gFeVn6GBu4bHm6JvnM2oL+u6NA3
- RQuK1uFTu95WJNn8/+b+l99kTHnZolq+aRF322TwBNMxXohDkGOH/iv6NACDtMifVJ6O
- Fg1q/OLJ37YA90MqyR/WwTjIsfysxZ6NZHdT87Ujyi9d2JTFSquVIQb9Hmb00lzr+/KG
- W/1QN778TIEtbZskDtHKJ1B5hJdMcKBDvzKkoUcKeB+Ub3lBvw24SACNYuuTlFDUbARm
- 8h3JUwPdQbkjCNCDvL8x2LIu2mNITTwJyZvle8hscVmpqd95nlixRgXSWphMJFYtDPqQ
- 6TmQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1f3Cwzup67RODosZePiUBrori4vvwHSPqcr8Lidij3/pvjoj2aCecay5/9BJaBML7GsiCqG0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2e1VvggPRzpz1VM3TY7bMiH/Q3v/9ncRLB5MLDA5e6IaSDZhu
- xXcF1LFGzpchx+S31TNtc3snXCFkM3F9aBhLHjmVhNP19VsiP1cu+aHpaOUf6Qa3lx8=
-X-Gm-Gg: AZuq6aLxfiZawp0U077kVSlMXiYGrkdvwD1xz9s3iY0q3iT5ayriANMTkdX4EAaGfAT
- ZJ8Gy2nrlfCrwF68pn5yM8JfUebmjtQf2gvGThx/Or9srSOTqvmHl2oDdZPvO7TOXBxW98973qm
- dgjmK3ITiKjttPKR/up4zdqF3XoSDEuGJqMHYKQQxdDFkqhlAhrxi052dX9ZJ7JZZjJzCdEDBJc
- 6RHGU6SIuhiCzvwtXz+71613eOUA26Ms+osE/frNsnFCPVwup9pShPrddRZ6em4ByKDDwcM/DDA
- C73WjK0UshPfq5p3S+0lLp+pN9bXfi7RjBIZAiaOhHYJPPeEpwU9wduxqIX87RhtPa+GYH7xPOA
- vFtAjpydWZJxpI2ZKAAv3OYgUqXk9FYPzZq29qTdNBYak2gqZydtcM5WPskqwezEi5mzw2kuI8Q
- 1SL6wm31O5F5MXQQBBkFDSLst7DLdBYHyMbB6qx13mwlHCdeVOXfuNHzOzMcRQ7ro=
-X-Received: by 2002:a05:600c:1f84:b0:47a:814c:eea1 with SMTP id
- 5b1f17b1804b1-4804c9cac70mr44736885e9.35.1769163106518; 
- Fri, 23 Jan 2026 02:11:46 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:7c4d:f1cc:300a:2e42?
- ([2a01:e0a:3d9:2080:7c4d:f1cc:300a:2e42])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-480470cf1acsm130673305e9.14.2026.01.23.02.11.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 Jan 2026 02:11:46 -0800 (PST)
-Message-ID: <109c235b-f16f-4cc0-ab9c-aebad653867d@linaro.org>
-Date: Fri, 23 Jan 2026 11:11:45 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dyDdw58xbz9t3C;
+ Fri, 23 Jan 2026 11:27:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769164068;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZJROupKTeEYwIMfUbPGFuQTAryZcwPaaBNBFhqedkss=;
+ b=S4I2RmxRm3bkTkE/6GDeVv7pw158dCWrzh49Hy2dsnz+4g13KvaFrY15UfNxveVF5WAHd6
+ lv9etainz9GoCG2kDwC7+n6LCM9OpUwvf8cm09YIMEp6Duc88nUHY4fbe24vVSIODiAaJi
+ /SJZ6pd4mrz7U4EyRtAmx7nnjQiwigK/yNraPQlUvkA/aXdJyy6b45/4p2kKjkZaxdvfrz
+ V96cLuh7RH8AxQfm7eY1X7f9GrSICaP/8iTf9bhrO7oAE9JQFSdE3CcllCwzHk9YC7w5rz
+ ThziFSPgg4+uzZNQFAk6QOGfZknH3jvvb5fzQWXKJQsoHfiYbyfrStT4Y9FRYw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="wE+W6Pk/";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769164066;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZJROupKTeEYwIMfUbPGFuQTAryZcwPaaBNBFhqedkss=;
+ b=wE+W6Pk/LJgr+f5pt6nGiei3jqIJYsl5vilnujKePhLs55WiUxu4dokSDJgIJY08Bymk72
+ WOWBiDJWtSVmznhlolY7v1RnzJ/eXtMffXDQzdSzy7rCixXmDaqbGVJxZdvYJjsFnnGy7/
+ H970T8QKniGyRJBWWMSwgUCG93UVJTu5P+qX1KHnRnlz9+nFtD39JHWnVDrFuk89e0a1ak
+ TIsOLTxaaldZ/2HFXh8KMX18onXFCqqrbylAB8k6SjBbQE5+exUuYR9ntTDMJTjJ/gSZpN
+ sGTcz6Tdk7P6vjavnRi2JpRvSxPL06QdnIGmf1Y4LsuHgYQPBvijTEIiYsWMDw==
+Date: Fri, 23 Jan 2026 11:27:41 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 2/3] mach-snapdragon: of_fixup: Add OP-TEE DT fixup
- support
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: trini@konsulko.com, casey.connolly@linaro.org, jens.wiklander@linaro.org, 
- ilias.apalodimas@linaro.org, jorge.ramirez@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, tonyh@qti.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20260122085806.542149-1-sumit.garg@kernel.org>
- <20260122085806.542149-3-sumit.garg@kernel.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260122085806.542149-3-sumit.garg@kernel.org>
+Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
+ via -b argument
+To: Beleswar Prasad Padhi <b-padhi@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: ilias.apalodimas@linaro.org, malysagreg@gmail.com,
+ sughosh.ganu@linaro.org, philip.molloy@analog.com,
+ marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, anshuld@ti.com,
+ afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+References: <20260122172247.2995437-1-b-padhi@ti.com>
+ <20260122174546.GB3416603@bill-the-cat>
+ <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
+ <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 1fbyc4pndzs8s8ytnynbcgigr11tcgoz
+X-MBO-RS-ID: 3e9839bcbf37c6cc9c2
+X-Rspamd-Queue-Id: 4dyDdw58xbz9t3C
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,95 +96,84 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/22/26 09:58, Sumit Garg wrote:
-> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On 1/23/26 4:32 AM, Beleswar Prasad Padhi wrote:
 > 
-> Add support for OP-TEE live tree DT fixup support which enables U-Boot
-> OP-TEE driver to be probed. As well as the EFI DT fixup protocol allows
-> the live tree fixup to be carried over to the OS for the OP-TEE driver
-> in the OS to probe as well.
+> On 23/01/26 00:33, Marek Vasut wrote:
+>> On 1/22/26 6:45 PM, Tom Rini wrote:
+>>> On Thu, Jan 22, 2026 at 10:52:47PM +0530, Beleswar Padhi wrote:
+>>>
+>>>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
+>>>> packed inside the multidtb.fit FIT image. While the individual DTBs
+>>>> and the FIT image start address are 8-byte aligned, the DTBs embedded
+>>>> within the FIT image are not guaranteed to maintain 8-byte alignment.
+>>>>
+>>>> This misalignment causes -FDT_ERR_ALIGNMENT failure in
+>>>> setup_multi_dtb_fit() when locating the next available DTB within the
+>>>> FIT blob and setting gd->fdt_blob, because of the recent libfdt
+>>>> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
+>>>> version v1.7.2-35-g52f07dcca47c")
+>>>>
+>>>> The mkimage tool already supports enforcing this alignment via the -B
+>>>> option, but users would have to specify it explicitly. This change
+>>>> makes 8-byte alignment the default when using -b.
+>>>>
+>>>> Reported-by: Anshul Dalal <anshuld@ti.com>
+>>>> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+>>>> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
+>>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>>>
+>>> Tested-by: Tom Rini <trini@konsulko.com>
+>> Doesn't this enable 8-byte alignment for everything in case a DT is specified on mkimage command line ? That doesn't seem right ?
+>>
+>> If I do mkimage -f auto -b ...dtb ... , then I only want the DTB to be 8-byte aligned, all the other blobs can be 4 byte aligned just fine .
 > 
-> Note that this fixup only gets applied if OP-TEE support is detected via
-> checking for OP-TEE message UID.
 > 
-> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> ---
->   arch/arm/mach-snapdragon/of_fixup.c | 35 +++++++++++++++++++++++++++++
->   1 file changed, 35 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 5b6076ea8e5..3d19449f133 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -25,6 +25,7 @@
->   #include <fdt_support.h>
->   #include <linux/errno.h>
->   #include <stdlib.h>
-> +#include <tee/optee.h>
->   #include <time.h>
->   
->   /* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
-> @@ -164,6 +165,37 @@ static void fixup_power_domains(struct device_node *root)
->   	}
->   }
->   
-> +static void add_optee_node(struct device_node *root)
-> +{
-> +	struct device_node *fw = NULL, *optee = NULL;
-> +	int ret;
-> +
-> +	fw = of_find_node_by_path("/firmware");
-> +	if (!fw) {
-> +		log_err("Failed to find /firmware node\n");
-> +		return;
-> +	}
-> +
-> +	ret = of_add_subnode(fw, "optee", strlen("optee") + 1, &optee);
-> +	if (ret) {
-> +		log_err("Failed to add 'maximum-speed' property: %d\n", ret);
-> +		return;
-> +	}
-> +
-> +	ret = of_write_prop(optee, "compatible", strlen("linaro,optee-tz") + 1,
-> +			    "linaro,optee-tz");
-> +	if (ret) {
-> +		log_err("Failed to optee 'compatible' property: %d\n", ret);
-> +		return;
-> +	}
-> +
-> +	ret = of_write_prop(optee, "method", strlen("smc") + 1, "smc");
-> +	if (ret) {
-> +		log_err("Failed to optee 'method' property: %d\n", ret);
-> +		return;
-> +	}
-> +}
-> +
->   #define time_call(func, ...) \
->   	do { \
->   		u64 start = timer_get_us(); \
-> @@ -178,6 +210,9 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
->   	time_call(fixup_usb_nodes, root);
->   	time_call(fixup_power_domains, root);
->   
-> +	if (is_optee_smc_api())
-> +		time_call(add_optee_node, root);
+> All the mkimage flags are parsed at once and populated in the params
+> data structure in one shot in the code. There is no separation of code
+> specifically for generating a FIT for a DTB vs for anything else.
 
-Since is_optee_smc_api only returns false when CONFIG_OPTEE is disabled, the compiler should
-drop this, but to help it optimize you should replace with:
-	if (IS_ENABLED(CONFIG_OPTEE) && is_optee_smc_api())
-		time_call(add_optee_node, root);
+That does not seem to be true ?
 
-Thanks,
-Neil
+$ git grep -p '\<bl_len\>' tools/
+tools/fit_image.c=static int fit_extract_data(struct image_tool_params 
+*params, const char *fname)
+tools/fit_image.c:      align_size = params->bl_len ? params->bl_len : 4;
+...
 
-> +
->   	return 0;
->   }
->   
+So something like that may work ?
 
+"
+diff --git a/tools/fit_image.c b/tools/fit_image.c
+index 0306333141e..0c606ba4cc3 100644
+--- a/tools/fit_image.c
++++ b/tools/fit_image.c
+@@ -642,9 +642,15 @@ static int fit_extract_data(struct 
+image_tool_params *params, const char *fname)
+         for (node = fdt_first_subnode(fdt, images);
+              node >= 0;
+              node = fdt_next_subnode(fdt, node)) {
+-               const char *data;
++               const char *data, *type;
+                 int len;
+
++               if (align_size < 8) {
++                       type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
++                       if (type && !strcmp(type, "flat_dt"))
++                               align_size = 8;
++               }
++
+                 data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
+                 if (!data)
+                         continue;
+"
+
+> We
+> would get the same result when using mkimage -f auto -b ...dtb... -B 0x8
+> I think we should be fine with this limitation for the usecases when
+> generating fitImage with mixed images. Unless you have some idea?
+What about the above ?
