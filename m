@@ -4,62 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20BC4D715E5
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 14:35:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D458AD715EE
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 16:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 410F883BC8;
-	Sat, 24 Jan 2026 15:35:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 1265D83B32;
+	Sat, 24 Jan 2026 17:05:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="XOalBU1C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AlXWEglB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE79983B85; Sat, 24 Jan 2026 12:35:26 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D806F83B63; Sat, 24 Jan 2026 17:05:31 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 658F283B63
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 12:35:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8F8183A36
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 17:05:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=benjamin.robin@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id DFDEF4E42247;
- Sat, 24 Jan 2026 11:35:23 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B428C60760;
- Sat, 24 Jan 2026 11:35:23 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4AFE6119A8618; Sat, 24 Jan 2026 12:35:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1769254523; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=+bvH+/7zagji1hN0JFp0QXzXqtGCqrvBw0g5wBnOgwk=;
- b=XOalBU1CGlK7mWYqEIfRbS7QS0JE1iVrx0nuDLaghKesXbrvkmoJBvHxb+NiZYXUygXDyC
- 6kZvVbU0IAATOTyS4VFCOaeG1taTGi9sC+YNpTt56UsXOh0tGtYXMEr6yaHpLgy5/b50gs
- vew0ORMp1sxeWFGehjqoB1MTChixcLEUiTj6p18nDrZvKyw/2ViLPKffZwru0nM8o/iHeU
- MAx3ELpcjHrsHba3CtXsbvpzxaY0bN/5g5VTm3X8qzZKhuFe6XShfQeuuv7+Zwf4aGf+2f
- WeMCvijQ62vzjLGid/i/Nsw4BbiVSQeAjxRXROvpGwfnp+kAMA8gp2RSbifQ5A==
-From: Benjamin ROBIN <benjamin.robin@bootlin.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
- Heiko Schocher <hs@nabladev.com>, Benjamin ROBIN <dev@benjarobin.fr>,
- Jerome Forissier <jerome@forissier.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1] env: add w flags for net config in explicit write mode
-Date: Sat, 24 Jan 2026 12:35:19 +0100
-Message-ID: <2397776.ElGaqSPkdT@brobin-bootlin>
-In-Reply-To: <20260124054040.7597-1-hs@nabladev.com>
-References: <20260124054040.7597-1-hs@nabladev.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7cfe2a6bf81so1029149a34.0
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 08:05:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1769270727; x=1769875527; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4ZmaNtqvQfUjgf+RneFtoy+WZxS9SqLWHNmqY3VZsn4=;
+ b=AlXWEglBnQKL8/6ToRv6R9oGZi90elE1bMTTKYAOIAZoLsk2sUX9UL27mD4Uc9Qf9V
+ eCiLQf17/fHkALRsbKqqKRGt6QJjLzDimVOU04RB5dD2zHnANi42tih3yFBkJG/t0u3e
+ mRlS/7mIgKVtnjr0KGpIdp0dAcRmqNreNxJ8A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769270727; x=1769875527;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4ZmaNtqvQfUjgf+RneFtoy+WZxS9SqLWHNmqY3VZsn4=;
+ b=pTfQrM0VkQoDqY9mJYYlBQUhK92L35+RCMq0PGgBHsBJS9N9fbQaHZexufkH8CHe6G
+ 9W0ZmaaYpFsRs7l0BBU3jtUMxi9/c9tRKSU3L1ctgbs1KfBg/VPzdasrjAFBroc0ULNI
+ DZihvVp5K4lJ3u+zMtCoyeZP9xHKHF4ttOFx91AcWj6ZDw1Y0LHQUnicc3mfABaHr+0I
+ ATsZYwQRySWf0mTn8XT8QKviKAV/Mo15sK+LBGwJ8ADNXHJOXd9TXyHDDiw35AmhqMhn
+ KCYXIkuO9gkkK5X1AQNkah3iW+z1WobjOnkVwz1Wf1kdL4P91G+rcb0Umi2SdN50IbPH
+ lMPg==
+X-Gm-Message-State: AOJu0YzbahFBZEpyklnQfWvI9HjwfCk247PYq9xyfhK5dWXLCvsrVC/p
+ fkKHqSTbYv1/BKlqMBM7tkhO4gNmrZ+ACcc0g22JeKZbLDg5HscPcakdNiMmRp2/N5Q=
+X-Gm-Gg: AZuq6aLq4NOQoieFOFv0GbJ3RZtL8xdZpru3LxCAyFiXg3ftADYuhWjbiwAEuCytNtd
+ 5iSPKEvqt4+31Mkrh912h1dijOcvFtXgZtsQjDsKiaJgDGfAlYPMG6FwtcnOKaLHqesWaoiOiTH
+ KAAZ3tuLHZ7yRHeFL4R6bnvPwct7OXPLrmv4GHeTPoltPwgDf+QRtHd0DUwv6swxNlQ90TcZ9LW
+ nFnXQxCpLt6jW6MO6FdYXUwUIxX9HPyO1TQweI9ybdmKqi/KuDKBTg3dDZho0viQ/dhHX/WoLx7
+ unhQQElEsnKxev1f8eq+MZ+sC2NHYgS3rTIhSPLZSB2rBuXx5eYYHccFHjEy6DuAqr2TER5nJNO
+ GJ3kmC5CMg/APDzitzjtr0s+ylEZmzWMGLZYUCuiyCBjSWzY61qgGrFrvVL6T/TLCzrPs9j7+5T
+ q+DKcU0Hdgz9njh+9DxTJ3H3UVGuCVxHjjRIhij71B0LxYy5XcH4RefBpputUilfn+Uti1y4+mI
+ O1XOqB5n1ucCzBoYPuasoqGMDwwCdVnahws7q4=
+X-Received: by 2002:a05:6830:6a85:b0:7cf:d119:8c1a with SMTP id
+ 46e09a7af769-7d15a5d78eamr3244028a34.7.1769270727379; 
+ Sat, 24 Jan 2026 08:05:27 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-408af7ff54dsm3627003fac.1.2026.01.24.08.05.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 Jan 2026 08:05:26 -0800 (PST)
+Date: Sat, 24 Jan 2026 10:05:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] dts: add exynos arm64 vendor support for
+ OF_UPSTREAM_BUILD_VENDOR
+Message-ID: <20260124160524.GP3416603@bill-the-cat>
+References: <20260123-dts-exynos-vendor-v1-1-479e72170257@disroot.org>
+ <20260123182003.GN3416603@bill-the-cat>
+ <DFWMTYEQKEJ7.2KB7GXDI6E0P8@disroot.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Sat, 24 Jan 2026 15:35:21 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8r3W+9aG7q2RxAZi"
+Content-Disposition: inline
+In-Reply-To: <DFWMTYEQKEJ7.2KB7GXDI6E0P8@disroot.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,78 +99,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
-On Saturday, January 24, 2026 at 6:40=E2=80=AFAM, Heiko Schocher wrote:
-> From: Adrian Freihofer <adrian.freihofer@siemens.com>
+--8r3W+9aG7q2RxAZi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Jan 24, 2026 at 12:44:17PM +0530, Kaustabh Chakraborty wrote:
+> On 2026-01-23 12:20 -06:00, Tom Rini wrote:
+> > On Fri, Jan 23, 2026 at 11:41:41PM +0530, Kaustabh Chakraborty wrote:
+> >
+> >> Set OF_UPSTREAM_BUILD_VENDOR to build all devicetrees in "exynos/" for
+> >> Exynos-based 64-bit ARM platforms (32-bit ARM uses "samsung/").
+> >>=20
+> >> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+> >> ---
+> >>  dts/Kconfig | 1 +
+> >>  1 file changed, 1 insertion(+)
+> >>=20
+> >> diff --git a/dts/Kconfig b/dts/Kconfig
+> >> index 870f75ad3ec..e0f6f03a343 100644
+> >> --- a/dts/Kconfig
+> >> +++ b/dts/Kconfig
+> >> @@ -124,6 +124,7 @@ config OF_UPSTREAM_VENDOR
+> >>  	default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
+> >>  	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
+> >>  	default "nvidia" if ARCH_TEGRA
+> >> +	default "exynos" if ARCH_EXYNOS && ARCH_ARM64
+> >>  	help
+> >>  	  Select the vendor to build all devicetree files for.
+> >
+> > Two things. First, it's "ARM64" and not "ARCH_ARM64". Second, since we
+> > know what the 32bit one is and it's not the same, we might as well do
+> > both while we're here?
 >=20
-> In explicit write access mode (CONFIG_ENV_WRITEABLE_LIST) the
-> environment variables listed in NET_FLAGS and NET6_FLAGS are
-> probably intended to be writeable. Therefore add the 'w' flag
-> to these variables.
+> Sure, I can add it. However "samsung/" in ARM also includes pre-Exynos
+> SoCs, I assume that's not a problem here.
 
-Users who enable CONFIG_ENV_WRITEABLE_LIST typically want full control over=
-=20
-which environment variables are writable. The new default behavior introduc=
-ed=20
-by your patch might not align with what all users expect or want.
+Yes, that's fine, we can always add on the other targets later.
 
-Would overriding the flags using CFG_ENV_FLAGS_LIST_STATIC not work in this=
-=20
-case?
+--=20
+Tom
 
-> diff --git a/include/env_flags.h b/include/env_flags.h
-> index 0c48874690f..fc65dcaba21 100644
-> --- a/include/env_flags.h
-> +++ b/include/env_flags.h
-> @@ -56,6 +56,16 @@ enum env_flags_varaccess {
->  #define ETHADDR_FLAGS "eth" ETHADDR_WILDCARD "addr:mo,"
->  #endif
->  #endif
-> +#ifdef CONFIG_ENV_WRITEABLE_LIST
-> +#define NET_FLAGS \
-> +	"ipaddr:iw," \
-> +	"gatewayip:iw," \
-> +	"netmask:iw," \
-> +	"serverip:iw," \
-> +	"nvlan:dw," \
-> +	"vlan:dw," \
-> +	"dnsip:iw,"
-> +#else
->  #define NET_FLAGS \
->  	"ipaddr:i," \
->  	"gatewayip:i," \
-> @@ -64,16 +74,24 @@ enum env_flags_varaccess {
->  	"nvlan:d," \
->  	"vlan:d," \
->  	"dnsip:i,"
-> +#endif
->  #else
->  #define ETHADDR_FLAGS
->  #define NET_FLAGS
->  #endif
->=20
->  #ifdef CONFIG_IPV6
-> +#ifdef CONFIG_ENV_WRITEABLE_LIST
-> +#define NET6_FLAGS \
-> +	"ip6addr:sw," \
-> +	"serverip6:sw," \
-> +	"gatewayip6:sw,"
-> +#else
->  #define NET6_FLAGS \
->  	"ip6addr:s," \
->  	"serverip6:s," \
->  	"gatewayip6:s,"
-> +#endif
->  #else
->  #define NET6_FLAGS
->  #endif
+--8r3W+9aG7q2RxAZi
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Best regards,
-=2D-=20
-Benjamin Robin, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXTtwAAKCRAr4qD1Cr/k
+CpicAP9LiGweZCcz3wu7KgwLh6YXGkn6wSunGsOAU5ojT39opgEAkxJdn285Oq5+
+NkUYpoTZneyEyrzTZcpx18mNYKcLFwo=
+=Dmbu
+-----END PGP SIGNATURE-----
 
-
+--8r3W+9aG7q2RxAZi--
