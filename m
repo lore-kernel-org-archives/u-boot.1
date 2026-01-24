@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 039A0D715CA
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B83AD715CA
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DE1783C39;
-	Sat, 24 Jan 2026 06:55:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E0DEE83C02;
+	Sat, 24 Jan 2026 06:55:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="UW3MkL2E";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="h85yxn1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C802F83B63; Sat, 24 Jan 2026 06:55:04 +0100 (CET)
+ id 3D15683C08; Sat, 24 Jan 2026 06:55:05 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1DA8839DF
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:54:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50EC583BE1
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:55:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3179910F1D7; Sat, 24 Jan 2026 06:54:59 +0100 (CET)
+ with ESMTPSA id 5057C10F25C; Sat, 24 Jan 2026 06:55:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769234099; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1769234101; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=0vAitSgcGyahb6HdOodw4V8grdr/KcGArD6EFC9F2R0=;
- b=UW3MkL2EQnpyjcBGD9JyR/0EXSdwoaEzX8dRnIKoEe0GU+rwRNSpOYzMg+zp1vFtRK2Oy2
- WzBKl/esDst3R4Ggvv3514y0zKwWnABnB1jN43M1nizTtaw8Q/Ed4ehbAgwckMtRGvnEKC
- RRIVOrichMQcJoz0jmyaa3RyW01u2bMDzy2meHeIFrTel8qYAflYtWUQ2pYQyHrX1+WQPY
- ktUu+IVbWiHMmpFDcj1kidLwCnjvjvf1QgejqZpIXDXxhQCoskd8HIydR1HSAIzzWoQimN
- pyk3nSBvbL46Y8Wy1L3qpQ6N4QTZIeWBtAeDvzhgjOicoexQuVyc3bLGUTcHeA==
+ bh=jiJRmgfQfOsHL54dcoDZOQQ7+fBkYeyJgefUktycN6s=;
+ b=h85yxn1UgxjREX5WDfSr181+QByS6B+G2v6oHAon2SYOooZ29gD8bvKLqSiKz2WVlV3DVm
+ 9Wr7ln4XsRIgMfLFdgj5ect7sh4Xwff7vvJjfj4nOa2t7oJZCtpIfuv8a7gsk3H+MMcRnc
+ 9O9Mxnc2lnaa0o/mAurxJIafJZ9X93S+F5yexybqHmjstLQqzE0yJr3BW3yN1O91lHlRj9
+ RXhWn52pprLTWCB7pMQ1MMI9s2OoZ9XBhmfQ4xtzvnJmleE62MB7aqLlJDXzxjelQjPjtM
+ NkPVNcCfawnWAiw6r7MA1NgIUgddn3VLh41MGqpiOUqUrhFaVd71jmMlVes3Ig==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Fabio Estevam <festevam@gmail.com>,
- Lukas Stockmann <lukas.stockmann@siemens.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
  Heiko Schocher <hs@nabladev.com>,
  Adrian Freihofer <adrian.freihofer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Walter Schweizer <walter.schweizer@siemens.com>
-Subject: [PATCH v1 03/11] arm: dts: capricorn: remove pinctrl_usdhc2
-Date: Sat, 24 Jan 2026 06:54:44 +0100
-Message-Id: <20260124055452.8799-4-hs@nabladev.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Tomas Peterka <atheiste@seznam.cz>
+Subject: [PATCH v1 05/11] imx8qxp_capricorn config: add wget command
+Date: Sat, 24 Jan 2026 06:54:46 +0100
+Message-Id: <20260124055452.8799-6-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20260124055452.8799-1-hs@nabladev.com>
 References: <20260124055452.8799-1-hs@nabladev.com>
@@ -71,42 +71,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Stockmann <lukas.stockmann@siemens.com>
+From: Walter Schweizer <walter.schweizer@siemens.com>
 
-usdhc2 is not used on the Capricorn board.
+Faster than tftp.
 
-Signed-off-by: Lukas Stockmann <lukas.stockmann@siemens.com>
+Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
- arch/arm/dts/imx8-capricorn.dtsi | 14 --------------
- 1 file changed, 14 deletions(-)
+ configs/imx8qxp_capricorn.config | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/imx8-capricorn.dtsi b/arch/arm/dts/imx8-capricorn.dtsi
-index fab7ef95166..41f4b2f646b 100644
---- a/arch/arm/dts/imx8-capricorn.dtsi
-+++ b/arch/arm/dts/imx8-capricorn.dtsi
-@@ -66,20 +66,6 @@
- 			>;
- 		};
- 
--		pinctrl_usdhc2: usdhc2grp {
--			fsl,pins = <
--				SC_P_ENET0_RGMII_RXC_CONN_USDHC1_CLK	0x06000041
--				SC_P_ENET0_RGMII_RX_CTL_CONN_USDHC1_CMD	0x00000021
--				SC_P_ENET0_RGMII_RXD0_CONN_USDHC1_DATA0	0x00000021
--				SC_P_ENET0_RGMII_RXD1_CONN_USDHC1_DATA1	0x00000021
--				SC_P_ENET0_RGMII_RXD2_CONN_USDHC1_DATA2	0x00000021
--				SC_P_ENET0_RGMII_RXD3_CONN_USDHC1_DATA3	0x00000021
--				SC_P_ENET0_RGMII_TXD2_CONN_USDHC1_CD_B	0x06000021
--				//SC_P_ENET0_RGMII_TXD2_LSIO_GPIO5_IO01	0x06000021
--				SC_P_ENET0_RGMII_TX_CTL_LSIO_GPIO4_IO30	0x06000021
--			>;
--		};
--
- 		pinctrl_fec2: fec2grp {
- 			fsl,pins = <
- 				SC_P_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB0_PAD	0x000014a0
+diff --git a/configs/imx8qxp_capricorn.config b/configs/imx8qxp_capricorn.config
+index 62babf2626f..b5c9fdbc9b3 100644
+--- a/configs/imx8qxp_capricorn.config
++++ b/configs/imx8qxp_capricorn.config
+@@ -73,6 +73,7 @@ CONFIG_CMD_CPU=y
+ # CONFIG_CMD_CRC32 is not set
+ # CONFIG_CMD_BIND is not set
+ CONFIG_CMD_WDT=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DM=y
+ CONFIG_CMD_FUSE=y
 -- 
 2.20.1
 
