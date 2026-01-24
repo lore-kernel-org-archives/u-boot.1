@@ -4,92 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D740D77898
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 00:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A8C4D715C9
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:40:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7C2C83AEE;
-	Sat, 24 Jan 2026 01:30:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 666C683B03;
+	Sat, 24 Jan 2026 06:40:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="voTq46mE";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vmnz3biW";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BgHBT7+C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C506283B03; Sat, 24 Jan 2026 01:30:38 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 2C18C83B32; Sat, 24 Jan 2026 06:40:54 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97624839DF
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 01:30:36 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dybLN1XW5z9tlb;
- Sat, 24 Jan 2026 01:30:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769214636;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hK+CKylKc9YluoZaCUMPknix3Z8v7d5c9rJg4NTSZpE=;
- b=voTq46mExH62anGqEUXW8YImYc7wwZwzNJNKcEbyeDmDq1B2C5TPsJ1Ih3/6l88T1m0yEe
- D+0m6QNmVVcZxwKbLKz53oGh6HdF48NTGaMnnStkJai41DyPRsMhuiQZdJDevsJK/ldMhe
- rwaYM0WJHcIQJXjKd9sQOZSizhkMMQQyUSkL4PIn6ObB0YNSnV6KkdYT9/K8tXlNPVHYj7
- yuAP97C9i2osO/dPPlgcBn0oqTCSCEBwma7C1MWSkIPYGHlnfn/ShoSnb8bG+0Zb2+R8aa
- jEOA8rxZg8L90OXh7LKE8xs1rQPgKD0m3nWuTbJPkEo3mRgyRUKtCa0YlEi7nA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Vmnz3biW;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <c60ae82e-da62-42c8-89d1-ed44adeaf351@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769214634;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hK+CKylKc9YluoZaCUMPknix3Z8v7d5c9rJg4NTSZpE=;
- b=Vmnz3biWmTNcOmSH55IdEGakqYIxSqUnUjG/lVo54bUvuqHo+ZVgYeJz1Xio9e4ng3H14j
- pU+JFqQsRMk7DY+HfNqDOKxYQBv4MpzAXZfCvlGSX1abYpPGs1vCE9EZIjoP674+u2wPMU
- 51Si0q30WtLh/MQqgxdtxuh9EdeB24mj+X5gExHsYAnVKbyvbI6cOqiNguuAE5oDLRJrZS
- WTuuBBh6lZNa7qa2a//QVdUfxNZ5Vy8sheOc51JJWL4UxcUKmI72YzPVT8BXf5jSK7d5fx
- 1mIMwMKPZEzrKZtfwKu9zwk6XRVdRXzy+ojf6hKEu03Zd57eWwW4w3+kKaKVOQ==
-Date: Fri, 23 Jan 2026 19:53:03 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 771CB839DF
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:40:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1DC0610D50D; Sat, 24 Jan 2026 06:40:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1769233250; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Y5tVkVqWU25h4DSt0LpsdjWILC/XTkqeb2dsUMJqgJg=;
+ b=BgHBT7+Cr4RyXJaR4Cr5TmaaQuwK61sEVDfCKq7rly3GyG4Ws9+e2HpqIfdJwT3IUaqmgP
+ f8yU6ssW5fv+Xymzr5y08KS4f2kDL2U2/os1j6yf0MUJZMBuPsqgIY3+qmM/8o17xlwNfz
+ UtC9BhuL5MCL2Vjs0vQ4W9v4WuZFtw8p54NnTLAi4mRHgLeEg2R3h83cmVZBfADZyyGH+A
+ HOHOW1ZKJ4Pk1Y0Aal0d8eYDchv3QHVoxXGDBipw5GwpX1JZrAVhSE3P4p3hd1DLYU/g8y
+ wPjB0Cgsg51rbiEW1ORcTPi0YUXaKKOdSJdm3yuLNkaIujghiRSJWmJ6EoWB4w==
+From: Heiko Schocher <hs@nabladev.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>, Benjamin ROBIN <dev@benjarobin.fr>,
+ Jerome Forissier <jerome@forissier.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1] env: add w flags for net config in explicit write mode
+Date: Sat, 24 Jan 2026 06:40:40 +0100
+Message-Id: <20260124054040.7597-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
- via -b argument
-To: Tom Rini <trini@konsulko.com>
-Cc: Anshul Dalal <anshuld@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
- ilias.apalodimas@linaro.org, malysagreg@gmail.com, sughosh.ganu@linaro.org,
- philip.molloy@analog.com, marek.vasut+renesas@mailbox.org,
- james.hilliard1@gmail.com, afd@ti.com, nm@ti.com, vigneshr@ti.com,
- n-francis@ti.com, u-kumar1@ti.com, bb@ti.com, praneeth@ti.com,
- u-boot@lists.denx.de
-References: <20260122172247.2995437-1-b-padhi@ti.com>
- <20260122174546.GB3416603@bill-the-cat>
- <c05217b3-f753-4fd1-9582-921e2cfd3a0b@mailbox.org>
- <b65ad902-2d07-4948-8a1a-64f4d5825a08@ti.com>
- <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
- <DFVWL63A8IDP.23PE1QNTXTMRU@ti.com>
- <6cb4957c-7178-4a31-aea9-ad78d6627c28@mailbox.org>
- <20260123152506.GL3416603@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260123152506.GL3416603@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: fgizd1d7pp65j5g389qy6dcabrrzzgcz
-X-MBO-RS-ID: b6253f63bfc574afe0e
-X-Rspamd-Queue-Id: 4dybLN1XW5z9tlb
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,42 +66,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/26 4:25 PM, Tom Rini wrote:
+From: Adrian Freihofer <adrian.freihofer@siemens.com>
 
->>>> "
->>>> diff --git a/tools/fit_image.c b/tools/fit_image.c
->>>> index 0306333141e..0c606ba4cc3 100644
->>>> --- a/tools/fit_image.c
->>>> +++ b/tools/fit_image.c
->>>> @@ -642,9 +642,15 @@ static int fit_extract_data(struct
->>>> image_tool_params *params, const char *fname)
->>>>            for (node = fdt_first_subnode(fdt, images);
->>>>                 node >= 0;
->>>>                 node = fdt_next_subnode(fdt, node)) {
->>>> -               const char *data;
->>>> +               const char *data, *type;
->>>>                    int len;
->>>>
->>>> +               if (align_size < 8) {
->>>> +                       type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
->>>> +                       if (type && !strcmp(type, "flat_dt"))
->>>> +                               align_size = 8;
->>>> +               }
->>>> +
->>>>                    data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
->>>>                    if (!data)
->>>>                            continue;
->>>> "
->>>>
->>>
->>> I just ran a quick test with this diff and it seems to fix the issue for
->>> us. If it's okay can we take the change as is.
->> I think the strcmp needs to be some strncmp and check the 'len' too.
->>
->> Let's see what others think.
-> 
-> Probably fine to keep going as-is. If there's security challenges here
-> this isn't the first one I bet.
-This is unacceptable.
+In explicit write access mode (CONFIG_ENV_WRITEABLE_LIST) the
+environment variables listed in NET_FLAGS and NET6_FLAGS are
+probably intended to be writeable. Therefore add the 'w' flag
+to these variables.
 
-Adding strncmp() is trivial.
+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+Signed-off-by: Heiko Schocher <hs@nabladev.com>
+---
+
+ include/env_flags.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+Azure build (patch is in a bunch of siemens patches sending
+now to mainline):
+https://dev.azure.com/hs0298/hs/_build/results?buildId=202&view=results
+
+diff --git a/include/env_flags.h b/include/env_flags.h
+index 0c48874690f..fc65dcaba21 100644
+--- a/include/env_flags.h
++++ b/include/env_flags.h
+@@ -56,6 +56,16 @@ enum env_flags_varaccess {
+ #define ETHADDR_FLAGS "eth" ETHADDR_WILDCARD "addr:mo,"
+ #endif
+ #endif
++#ifdef CONFIG_ENV_WRITEABLE_LIST
++#define NET_FLAGS \
++	"ipaddr:iw," \
++	"gatewayip:iw," \
++	"netmask:iw," \
++	"serverip:iw," \
++	"nvlan:dw," \
++	"vlan:dw," \
++	"dnsip:iw,"
++#else
+ #define NET_FLAGS \
+ 	"ipaddr:i," \
+ 	"gatewayip:i," \
+@@ -64,16 +74,24 @@ enum env_flags_varaccess {
+ 	"nvlan:d," \
+ 	"vlan:d," \
+ 	"dnsip:i,"
++#endif
+ #else
+ #define ETHADDR_FLAGS
+ #define NET_FLAGS
+ #endif
+ 
+ #ifdef CONFIG_IPV6
++#ifdef CONFIG_ENV_WRITEABLE_LIST
++#define NET6_FLAGS \
++	"ip6addr:sw," \
++	"serverip6:sw," \
++	"gatewayip6:sw,"
++#else
+ #define NET6_FLAGS \
+ 	"ip6addr:s," \
+ 	"serverip6:s," \
+ 	"gatewayip6:s,"
++#endif
+ #else
+ #define NET6_FLAGS
+ #endif
+-- 
+2.20.1
+
+base-commit: 6b2d05748cf3cd6ba417a96c00602b0122e10af6
