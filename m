@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE48D715CA
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3919D715C7
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:56:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDF5B83CB5;
-	Sat, 24 Jan 2026 06:55:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0629583CD3;
+	Sat, 24 Jan 2026 06:55:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="XSLvtvrW";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="jKwWyWW5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38FA283C23; Sat, 24 Jan 2026 06:55:11 +0100 (CET)
+ id 68E2683C01; Sat, 24 Jan 2026 06:55:11 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E240083C01
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:55:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BFCB483BF4
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:55:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 10E5B10F26D; Sat, 24 Jan 2026 06:55:03 +0100 (CET)
+ with ESMTPSA id D2D5A10F279; Sat, 24 Jan 2026 06:55:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769234103; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1769234105; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=TqDWsiWBHDVGB3utT20RJ9ATyVHoFUCDdauPdgUrMH8=;
- b=XSLvtvrW2/8VUaxzbSwjhoipgx7LR3s1UvaQ9lH0BtxZtPXK+d0qyVi1tXfylK10JE4m4s
- prR4cj5HPv0PNOkj6/Wfpw8wFMA0JDLT2++QGl52vXzBgyjTbHrxDYrVQw3dHGva2EStYn
- 578Av26XWJ+TxvuN+JDuELcQjp+oDM7wQvdbl07TJThtQE+ciw1FJpg9KthuuL1xJIcjCl
- sBoUWvuM96ROsTE1UlWOAN1TRP5YmBpHp91yPNhu2NNDLs2ef72MXGUDbbN1CB6Op2RDJj
- IWUPjAAl/ZA+APq52ZJw4LGjb/4dKu2Q53fsKY4IHVxagahNpFQ2XdicN6jiOQ==
+ bh=K4nDSA77l7N51N0OI1oZlVrl5sR+IoF3hWHOGxDhMjQ=;
+ b=jKwWyWW56Ad29RQzm+Et43vt4shnvIq4QDApQFDBn9lZvTILlhL/KHCP8YLCGiBTELO42u
+ ZNWk474XulwoFh3LW38qNKVh4Tj9MB+8jEHy5Oz+Co1mPrjrHY8vzJXkyfHDrG76/Qhjt1
+ ajOHjzbxLG22QtIYIrm5UPfzs1CripgNQ+ZzAvf6ViBxSMZA/I6n/rNGqVqKswESAtFGaI
+ 5n3fm1UUDbzVcr8R4bnB7m/Nfro8Bw4In74kGLvohP4vQb5JBDuQYlZapmlC7lIbKzV+Id
+ 461466yoRtq4aTs2tQ8dXXzIAy990x+mWfZyj4Wt5jN1Jo1rCk/M11Ew9pvGjw==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Heiko Schocher <hs@nabladev.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
+Cc: Fabio Estevam <festevam@gmail.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 07/11] siemens: capricorn: add logic to U-Boot to avoid
- zig-zag boot
-Date: Sat, 24 Jan 2026 06:54:48 +0100
-Message-Id: <20260124055452.8799-8-hs@nabladev.com>
+ Tom Rini <trini@konsulko.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: [PATCH v1 10/11] siemens: capricorn: rework bootcmd environment
+ variables
+Date: Sat, 24 Jan 2026 06:54:51 +0100
+Message-Id: <20260124055452.8799-11-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20260124055452.8799-1-hs@nabladev.com>
 References: <20260124055452.8799-1-hs@nabladev.com>
@@ -67,120 +69,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add logic in board code for detecting the real boot
-partition and set a local hush shell variable fallback
-which can be used later in boot variables for detecting
-a ROMbootloader fallback case.
+From: Adrian Freihofer <adrian.freihofer@siemens.com>
 
-We use the local hush shell variable, as we do not want
-to save in any case the fallback variable in U-Boot
-Environment, as the default Environment is may saved
-in boards, which are downgraded to older U-Boot versions.
+Rework the boot state machine to a significantly simpler and more
+robust implementation. The basic idea is to revert to the previous
+partition whenever an issue is detected during the boot process.
 
-And than the board code does not run, and fallback never
-gets the correct value.
+- Broken SPL
 
-Introduce also hush shell variable envvers to value "v2_"
-so we can use them in Environment for running different
-versions of variables between new and old U-Boot images.
+  If one of the two SPLs does not boot, the ROM code of the i.MX8 SoC
+  automatically starts the second SPL from the second boot partition.
+  For example, if the system's active partition is A but the SPL from
+  partition A is broken, the ROM code automatically uses the SPL/u-boot
+  from partition B.
+  Proceeding with this boot procedure would lead to booting the kernel/
+  rootfs from partition A, which could potentially successfully boot
+  the system and allow the user to apply the firmware update with the
+  broken SPL again. This would lead to a non-bootable system because
+  thesecond update would overwrite the last working bootloader.
+  To prevent such situations, zigzag boots are detected and the system
+  reverts to the previous partition rather than booting the kernel/rootfs
+  from the currently active partition. Detecting zigzag boots is done
+  via the new fallback variable.
 
+  To make this state machine even more consistent, the partitionset_active
+  variable is no longer used to determine the active partition during
+  boot. Instead, the active partition is always read from the eMMC
+  partconf registers.
+  For backward compatibility, the partitionset_active variable is still
+  updated whenever a partition switch occurs. However, u-boot no longer
+  relies on this variable, as it could potentially be out of sync with
+  the actual partition state, leading to situations where the ROM code
+  of the i.MX8 SoC would be out of sync with u-boot.
+
+- Broken kernel, initramfs or rootfs
+
+  If the upgrade_available variable is set, u-boot counts the number of
+  consecutive boots via the bootcount variable. If the bootcount exceeds
+  the bootlimit variable, u-boot starts the altbootcmd instead of the
+  bootcmd. Previously, this logic was bypassed by assigning the regular
+  bootcmd to altbootcmd. Now, the altbootcmd is used to revert to the
+  previous partition when the bootlimit is exceeded.
+
+The netdev variable is changed to eth0 by default. This is what the FEC
+driver uses on Capricorn boards. For devices with switches and DSA
+subsystems in use, the netdev should be set accordingly by additional
+logic in the environment or u-boot code. This is not part of this commit.
+
+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
-Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
 ---
+Ignore checkpatch warning:
+board/siemens/capricorn/capricorn_default.env:4: warning: line length of 118 exceeds 100 columns
+board/siemens/capricorn/capricorn_default.env:37: warning: line length of 130 exceeds 100 columns
+board/siemens/capricorn/capricorn_default.env:40: warning: line length of 321 exceeds 100 columns
 
- board/siemens/capricorn/Kconfig |  2 ++
- board/siemens/capricorn/board.c | 43 +++++++++++++++++++++++++++------
- 2 files changed, 37 insertions(+), 8 deletions(-)
+ board/siemens/capricorn/capricorn_default.env | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/board/siemens/capricorn/Kconfig b/board/siemens/capricorn/Kconfig
-index fe230971e97..d6d1aad75b2 100644
---- a/board/siemens/capricorn/Kconfig
-+++ b/board/siemens/capricorn/Kconfig
-@@ -1,5 +1,7 @@
- if TARGET_CAPRICORN
- 
-+config HUSH_INIT_VAR
-+	def_bool y
- 
- config SYS_BOARD
- 	default "capricorn"
-diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
-index 390a7b0d841..d4f26b6ff7f 100644
---- a/board/siemens/capricorn/board.c
-+++ b/board/siemens/capricorn/board.c
-@@ -5,6 +5,7 @@
-  * Copyright 2019 Siemens AG
-  *
-  */
-+#include <cli_hush.h>
- #include <command.h>
- #include <dm.h>
- #include <env.h>
-@@ -29,6 +30,7 @@
- #include "../common/board.h"
- #include "../common/eeprom.h"
- #include "../common/factoryset.h"
-+#include <firmware/imx/sci/sci.h>
- 
- #define GPIO_PAD_CTRL \
- 		((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | \
-@@ -373,23 +375,48 @@ __weak int mmc_map_to_kernel_blk(int dev_no)
- 
- void board_late_mmc_env_init(void)
- {
--	char cmd[32];
--	char mmcblk[32];
- 	u32 dev_no = mmc_get_env_dev();
- 
- 	if (!check_mmc_autodetect())
- 		return;
- 
- 	env_set_ulong("mmcdev", dev_no);
-+}
-+
-+#if defined(CONFIG_HUSH_INIT_VAR)
-+int hush_init_var(void)
-+{
-+	sc_misc_bt_t boot_type;
- 
--	/* Set mmcblk env */
--	sprintf(mmcblk, "/dev/mmcblk%dp2 rootwait rw",
--		mmc_map_to_kernel_blk(dev_no));
--	env_set("mmcroot", mmcblk);
-+	if (sc_misc_get_boot_type(-1, &boot_type) != 0) {
-+		puts("boottype cannot be retrieved\n");
-+		return 0;
-+	}
-+
-+	/*
-+	 * Set here explicitly a hush shell variable, so if a saveenv
-+	 * happens, this variable is *not* saved in U-Boot environment.
-+	 *
-+	 * This is for devices which are already in the field essential,
-+	 * as if such a device breaks, the cutsomer gets a new device
-+	 * with a new U-Boot version (and so a new U-Boot environment).
-+	 *
-+	 * But the customer makes a downgrade to an older U-bootversion,
-+	 * which does not have this code in, and runs now with a new
-+	 * U-Boot Environment (yes, protected Environment is not enabled
-+	 * there) and the old U-Boot must still work with the new U-Boot
-+	 * Environment. So we cannot store this variable in U-Boot
-+	 * Environment as a stored value will in this case never be over-
-+	 * written.
-+	 */
-+	if (boot_type == 1) {
-+		printf("boot-container fallback ocured\n");
-+		set_local_var("fallback=1", 0);
-+	}
- 
--	sprintf(cmd, "mmc dev %d", dev_no);
--	run_command(cmd, 0);
-+	return 0;
- }
-+#endif
- 
- #ifndef CONFIG_XPL_BUILD
- static int load_parameters_from_factoryset(void)
+diff --git a/board/siemens/capricorn/capricorn_default.env b/board/siemens/capricorn/capricorn_default.env
+index cf5bd09a4da..9d2eba0181f 100644
+--- a/board/siemens/capricorn/capricorn_default.env
++++ b/board/siemens/capricorn/capricorn_default.env
+@@ -1,10 +1,10 @@
+-altbootcmd=run bootcmd
++altbootcmd=run toggle_partition
+ baudrate=115200
+ bootcmd=run flash_self;reset;
++bootcmd=if test -n "$fallback"; then echo "fallback: $fallback"; run toggle_partition ; else run flash_self; reset; fi
+ bootdelay=3
+ bootdir=targetdir/rootfs/boot
+ bootlimit=3
+-check_upgrade=if test ${upgrade_available} -eq 1; then echo  upgrade_available is set; if test ${bootcount} -gt ${bootlimit}; then setenv upgrade_available 0;echo toggle partition;run toggle_partition;fi;fi;
+ cntr_addr=0x88000000
+ cntr_file=os_cntr_signed.bin
+ console=ttyLP2
+@@ -19,13 +19,13 @@ initrd_high=0xffffffffffffffff
+ ip_method=none
+ kernel_name=Image
+ loadaddr=0x80400000
+-mmc_boot=run set_bootargs;run check_upgrade; run set_partition;run set_bootargs_mmc;run mmc_load_bootfiles
++mmc_boot=run set_bootargs; run set_partition;run set_bootargs_mmc;run mmc_load_bootfiles
+ mmc_boot_fit=ext4load mmc 0:${mmc_part_nr} 0x88000000 boot/fitImage;if test -n ${A};then setenv bootargs ${bootargs} rootfs_sig=${sig_a};fi;if test -n ${B};then setenv bootargs ${bootargs} rootfs_sig=${sig_b};fi;bootm 0x88000000#conf-${dtb_name}.dtb;bootm 0x88000000
+ mmc_boot_image=ext4load mmc 0:${mmc_part_nr} ${fdt_addr} boot/${dtb_name}.dtb;if test $? -eq 1;then ext4load mmc 0:${mmc_part_nr} ${fdt_addr} boot/${dtb_name_default}.dtb;fi; ext4load mmc 0:${mmc_part_nr} ${loadaddr} boot/${kernel_name}; booti ${loadaddr} - ${fdt_addr}
+ mmc_load_bootfiles=echo -n Loading from eMMC ...; if test -e mmc 0:${mmc_part_nr} boot/fitImage; then echo fit; setenv fdt_high; setenv initrd_high; run mmc_boot_fit; else echo image; run mmc_boot_image; fi
+ net_nfs=wdt dev scu-wdt; wdt stop; echo Booting from network ...; run set_bootargs_net; tftpboot ${loadaddr} ${bootdir}/${kernel_name}; printenv bootargs; if test ${kernel_name} = fitImage; then setenv fdt_high; setenv initrd_high; bootm ${loadaddr}#conf-${dtb_name}.dtb; else tftpboot ${fdt_addr} ${serverip}:${bootdir}/${dtb_name}.dtb; if test $? -eq 1; then echo Loading default.dtb!; tftpboot ${fdt_addr} ${serverip}:${bootdir}/${dtb_name_default}.dtb; fi; booti ${loadaddr} - ${fdt_addr}; fi
+ net_unfs=setenv nfsopts vers=3,udp,rsize=4096,wsize=4096,nolock,port=3049,mountport=3048 rw; run net_nfs
+-netdev=lan0
++netdev=eth0
+ nfsopts=vers=3,udp,rsize=4096,wsize=4096,nolock rw
+ partitionset_active=A
+ rootfs_name=/dev/mmcblk0
+@@ -34,9 +34,10 @@ script_file=u-boot-commands.img
+ set_bootargs_mmc=setenv bootargs ${bootargs} root=${mmc_active_vol} ro rootdelay=1 rootwait rootfstype=ext4 ip=${ip_method}
+ set_bootargs_net=run set_bootargs; if test ${kernel_name} = fitImage; then setenv loadaddr 0x88000000; fi; setenv bootargs ${bootargs} root=/dev/nfs nfsroot=${serverip}:${rootpath},${nfsopts} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:${netdev}:off
+ set_bootargs=setenv bootargs console=${console},${baudrate} target_env=${target_env} ${testargs} ${optargs}
+-set_partition=setenv ${partitionset_active} true;if test -n ${A}; then setenv mmc_part_nr 1;fi;if test -n ${B}; then setenv mmc_part_nr 2;fi;setenv mmc_active_vol ${rootfs_name}p${mmc_part_nr}
++set_partition=mmc partconf 0 v_mmc_part_nr; setenv mmc_part_nr $v_mmc_part_nr; setenv mmc_active_vol ${rootfs_name}p$v_mmc_part_nr
+ tftp_run_script=tftpboot ${kernel_loadaddr} ${serverip}:${script_file};if test $? -eq 0;then source ${kernel_loadaddr};fi
+-toggle_partition=setenv ${partitionset_active} true; if test -n ${A}; then setenv partitionset_active B; mmc partconf 0 1 2 0; env delete A; fi; if test -n ${B}; then setenv partitionset_active A; mmc partconf 0 1 1 0; env delete B; fi;saveenv; reset
++toggle_partition_fin=bootcount reset; setenv upgrade_available 0; saveenv; reset
++toggle_partition=mmc partconf 0 v_mmc_part_nr; if test $v_mmc_part_nr -eq 1; then mmc partconf 0 1 2 0; setenv partitionset_active B; run toggle_partition_fin; elif test $v_mmc_part_nr -eq 2; then mmc partconf 0 1 1 0; setenv partitionset_active A; run toggle_partition_fin; else echo error mmc_part_nr $v_mmc_part_nr; fi
+ upgrade_available=0
+ emmc_dev=0
+ sd_dev=1
 -- 
 2.20.1
 
