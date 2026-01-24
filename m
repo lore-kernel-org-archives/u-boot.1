@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE300D715EE
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 18:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6626D7237B
+	for <u-boot@archiver.kernel.org>; Sun, 25 Jan 2026 01:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AD6983BFE;
-	Sat, 24 Jan 2026 19:33:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id F049D83AEE;
+	Sun, 25 Jan 2026 02:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="ipbRbP8p";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="cBuY4NLd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AE7483BC8; Sat, 24 Jan 2026 17:58:37 +0100 (CET)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ id 0F63D83BFE; Sat, 24 Jan 2026 19:35:35 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C09583AEE
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 17:58:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCB4783B72
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 19:35:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kauschluss@disroot.org
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id DC291276D1;
- Sat, 24 Jan 2026 17:58:33 +0100 (CET)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VdPzCBPBZT_J; Sat, 24 Jan 2026 17:58:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1769273913; bh=LoOzy4o0YsfqTqi7i3cUK17EQayEbeBkrhgvRvZIezg=;
- h=From:Date:Subject:To:Cc;
- b=ipbRbP8ppXAnIGSJgz7FeV/yFhLH/AEEsR83xFqqBEr4Zopc6QOr3sLBVbfcwODee
- aN5Z9RVRzB3wgYXNQetDnRwTsRPY3CPsBbT821nrMXuAgWcH1rqU+9DqA0g6U56Ns8
- Ab9kY7NUfnTQG7NVI9AXPEOoSCa8qIFfKqtg6kVTuXlr57kEdxCok0ZFz/TyhMndDw
- eXpepWKJDscMibcyR6gbU2FVIeg38gvq1KNfkmdtPZHIzdJTt/gIeqP7+eeGTDQyBZ
- U85gMQCiGZa1ii2X+jvPoF/M3Ahrv9c9GcrLEt9U4fIJeZgHLBeEFz6i0f/AS9ReNn
- huWek7akxJDVg==
-From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Sat, 24 Jan 2026 22:28:24 +0530
-Subject: [PATCH v2] dts: add Exynos vendor support for OF_UPSTREAM_VENDOR
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=festevam@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPA id 8008310DB2C; Sat, 24 Jan 2026 19:35:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1769279731;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=hXtPPcz6p6yaRtohnYpV5HvrYniwH+d+mWXUCwQquHg=;
+ b=cBuY4NLdG/QcQZfjRaHBYsUGQTDUQYxDZpSREDKP0IMK1IHy+tBGYoNQ1Co+ct9FtS4NOi
+ 1oZjYj42CF55rYQsymQKTk+EpuITn2DNIH/zoTmrjYkAXwYJsaD9bwrPSmFm5S4GgN56zs
+ m+O4U1S6kehqcF/ooOM2SXeOLEYFzv+V0r0glzvAxLasphWe6Fl6NMliE1GZyzz/lyKB9h
+ FdG8i4OpAIwo503WhpP3oB/m5B6lzZU6qxM2jx0/DutQCOpIi9r+wMeuMmQWaIQPe6K4gR
+ F+RpSDygGvdqklk8EAK5JPOM/CMEdJJQ/E+0TwNf/dbL0XNJc1iCqDDXo8E+bg==
+From: "Fabio Estevam" <festevam@nabladev.com>
+In-Reply-To: <06bd1e1cee6a2c3d8fc408330279e093c734f487.camel@gmail.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260124-dts-exynos-vendor-v2-1-89eb2866d43a@disroot.org>
-X-B4-Tracking: v=1; b=H4sIAC/6dGkC/32NQQ6CMBBFr0Jm7ZhOURtceQ/DAukI3XTMlDQQ0
- rtbOYDL95L//g6JNXCCe7ODcg4pSKxgTw2M8xAnxuArgzX2Zsi26JeEvG5REmaOXhRNNwzkWnr
- RyFB3H+V3WI/ms688h7SIbsdFpp/9V8uEhBfXsbPkjL26hw9JRZaz6AR9KeULugHROLQAAAA=
-X-Change-ID: 20260123-dts-exynos-vendor-09aa1731b1ce
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>
-X-Mailman-Approved-At: Sat, 24 Jan 2026 19:33:45 +0100
+References: <d7d22e35540857e9726f4b435a73a1435aa4fe37.camel@gmail.com>
+ <20260123150129.GK3416603@bill-the-cat>
+ <06bd1e1cee6a2c3d8fc408330279e093c734f487.camel@gmail.com>
+Date: Sat, 24 Jan 2026 19:35:30 +0100
+Cc: "Tom Rini" <trini@konsulko.com>, u-boot@lists.denx.de,
+ vitor.soares@toradex.com, n-francis@ti.com, b-padhi@ti.com, afd@ti.com,
+ anshuld@ti.com, festevam@denx.de
+To: "Vitor Soares" <ivitro@gmail.com>
+MIME-Version: 1.0
+Message-ID: <8a18cf34-7f00-f909-4094-0a498d9e5922@nabladev.com>
+Subject: =?utf-8?q?Re=3A?= Toradex Verdin AM62 boot failure on recent master
+User-Agent: SOGoMail 5.12.4
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: None
+X-Mailman-Approved-At: Sun, 25 Jan 2026 02:36:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,40 +72,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building Exynos boards, configure OF_UPSTREAM_VENDOR to build all
-device trees in:
- - "samsung/" for 32-bit ARM platforms.
- - "exynos/" for 64-bit ARM platforms.
+Hi Vitor,
 
-Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
----
-Changes in v2:
-- s/ARCH_ARM64/ARM64 (Tom Rini)
-- add target for 32-bit Exynos devices as well (Tom Rini)
-- Link to v1: https://lore.kernel.org/r/20260123-dts-exynos-vendor-v1-1-479e72170257@disroot.org
----
- dts/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+On Saturday, January 24, 2026 13:36 -03, Vitor Soares <ivitro@gmail.com=
+> wrote:
+=20
+> +Cc Fabio - this should resolve your boot failure as well.
+>=20
+> [1]
+> https://lore.kernel.org/u-boot/1e1f2e09-bfb7-4c7d-abd6-25a79271f256@m=
+ailbox.org/
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 870f75ad3ec..af8d30b45ab 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -124,6 +124,8 @@ config OF_UPSTREAM_VENDOR
- 	default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
- 	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
- 	default "nvidia" if ARCH_TEGRA
-+	default "samsung" if ARCH_EXYNOS && 32BIT
-+	default "exynos" if ARCH_EXYNOS && ARM64
- 	help
- 	  Select the vendor to build all devicetree files for.
- 
+Thanks for the suggestion, but this does not fix the boot failure on RV=
+1103.
 
----
-base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-change-id: 20260123-dts-exynos-vendor-09aa1731b1ce
+Tom's proposal fixes it:
 
-Best regards,
--- 
-Kaustabh Chakraborty <kauschluss@disroot.org>
+https://lore.kernel.org/u-boot/CAOMZO5DVFO=3DA6g1CWOrRbqy4VNgL+VcUw0Q5p=
+gELXm30puGz4w@mail.gmail.com/
+
+Thanks,
+
+Fabio Estevam
+--=20
+Nabla Software Engineering GmbH	Managing Director: Stefano Babic
+Phone: +49 821 45592596 	E-Mail: festevam@nabladev.com
 
