@@ -4,51 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B8FBD715CA
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:55:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 107CBD715CA
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5847A83B63;
+	by phobos.denx.de (Postfix) with ESMTP id 97DE283C5E;
 	Sat, 24 Jan 2026 06:55:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="EyU/S0P3";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="A//Ith/k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A306183BE1; Sat, 24 Jan 2026 06:55:07 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id D27D183B8F; Sat, 24 Jan 2026 06:55:07 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E37783BD2
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:55:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6D9F83C04
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:55:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CC1C810F1BD; Sat, 24 Jan 2026 06:54:59 +0100 (CET)
+ with ESMTPSA id B3DD410EFD1; Sat, 24 Jan 2026 06:55:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769234100; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1769234104; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=3spcNZxghmM43gKkPl5vtkGm/C/6PS5vUmuLovXNmRk=;
- b=EyU/S0P3z4pZSfiFi/q91wg+EoI7XDYh8zPotoUwOMhhnCL77AFCSKkx/u7pR5wqFZ+p/e
- fjNpnLqaX0q6Vmp+qf7O6xeCam7OYkNf8opvcvl57idOyC2CU5+jEwqNIldkoFBIFSTTt/
- yuT0x7XlElIpk5xz+Xvm5JABl7fdqUWO8id8GERxeHrBMhGPwPSMZDUYuk5JF3w8xKTAy2
- ZlPkhpF3rwSk6qcUtjkvIs2xuM6wsYsjBcvnTVuw2okYlPEJP13zjlxPqcMhSevEM8ZQ0l
- YS3M6/c+ywtUR66gQbNPjLz0tnEMRsSpUA5FvbjDNmUFZfD5ZeMshC6/Vz34LQ==
+ bh=MKfXqvaX43Cx1sXC+QGp3dMlTvEM6oPmQe2YH9IRWWU=;
+ b=A//Ith/kEbu99uDIQAoFHs6kGKjQYEo2t0n57usHfJ6UE2emWEwdIluVaEtvQA0xwiNNGG
+ 9NtPYjdFgVmyMATtxy1wSuEKG3JEwZWwvskRcwN4i/cpIgekripTpK+wBkgG9Kb21segdv
+ L/v45xP9eJWAvX8NlU3GNIQUHSfwBQr6hdCWIL/38dbVbo3mKGyUxeGtvHqJLH6hD6pBei
+ kfiSR/dncHX7R3l3wjPsIwkNwoRjnLPIzZKtCKLsQUVjIWzJ+KlHmcMeddBAtdiY2RhDc+
+ ifGECLV/BdxMQEz43bBBTfjXF6B6erVU/IhmbBUXXQU2hQ/Q4AKJvY0OkVtPog==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>,
- Lukas Stockmann <lukas.stockmann@siemens.com>,
- Heiko Schocher <hs@nabladev.com>,
+Cc: Fabio Estevam <festevam@gmail.com>, Heiko Schocher <hs@nabladev.com>,
  Adrian Freihofer <adrian.freihofer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Tom Rini <trini@konsulko.com>,
  Walter Schweizer <walter.schweizer@siemens.com>
-Subject: [PATCH v1 04/11] arm: dts: capricorn: move fec2 config
-Date: Sat, 24 Jan 2026 06:54:45 +0100
-Message-Id: <20260124055452.8799-5-hs@nabladev.com>
+Subject: [PATCH v1 08/11] siemens: capricorn: always detect emmc device
+Date: Sat, 24 Jan 2026 06:54:49 +0100
+Message-Id: <20260124055452.8799-9-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20260124055452.8799-1-hs@nabladev.com>
 References: <20260124055452.8799-1-hs@nabladev.com>
@@ -71,137 +67,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Stockmann <lukas.stockmann@siemens.com>
+drop Environment variable mmcautodetect and the board logic
+behind it, as we want always to autodetct the emmc device.
 
-fec2 config does not belong to the Capricorn CPU module, move it to
-the main board.
-
-Signed-off-by: Lukas Stockmann <lukas.stockmann@siemens.com>
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
- arch/arm/dts/imx8-capricorn-cxg3.dts | 44 ++++++++++++++++++++++++++++
- arch/arm/dts/imx8-capricorn.dtsi     | 44 ----------------------------
- 2 files changed, 44 insertions(+), 44 deletions(-)
+ board/siemens/capricorn/board.c               | 13 -------------
+ board/siemens/capricorn/capricorn_default.env |  1 -
+ 2 files changed, 14 deletions(-)
 
-diff --git a/arch/arm/dts/imx8-capricorn-cxg3.dts b/arch/arm/dts/imx8-capricorn-cxg3.dts
-index 2f8597579f3..b40410b2b6f 100644
---- a/arch/arm/dts/imx8-capricorn-cxg3.dts
-+++ b/arch/arm/dts/imx8-capricorn-cxg3.dts
-@@ -102,6 +102,26 @@
- 	pinctrl-0 = <&pinctrl_gpio_keys>;
+diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
+index d4f26b6ff7f..bce343714eb 100644
+--- a/board/siemens/capricorn/board.c
++++ b/board/siemens/capricorn/board.c
+@@ -357,16 +357,6 @@ int board_mmc_get_env_dev(int devno)
+ 	return devno;
+ }
  
- 	muxcgrp: imx8qxp-som {
-+		pinctrl_fec2: fec2grp {
-+			fsl,pins = <
-+				SC_P_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB0_PAD	0x000014a0
-+				SC_P_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB1_PAD	0x000014a0
-+				SC_P_COMP_CTL_GPIO_1V8_3V3_GPIORHB_PAD		0x000514a0
-+
-+				SC_P_ENET0_MDC_CONN_ENET1_MDC			0x00000060
-+				SC_P_ENET0_MDIO_CONN_ENET1_MDIO			0x00000060
-+
-+				SC_P_ESAI0_FSR_CONN_ENET1_RCLK50M_IN		0x00000060
-+				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0		0x00000060
-+				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x00000060
-+				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RMII_RX_ER	0x00000060
-+				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL		0x00000060
-+				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0	0x00000060
-+				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1	0x00000060
-+				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL		0x00000060
-+			>;
-+		};
-+
- 		pinctrl_gpio_leds: gpioledsgrp {
- 			fsl,pins = <
- 			SC_P_ESAI0_FST_LSIO_GPIO0_IO01		0x06000021
-@@ -127,3 +147,27 @@
- 		>;
- 	};
- };
-+
-+&fec2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_fec2>;
-+	phy-mode = "rmii";
-+
-+	phy-handle = <&ethphy1>;
-+	fsl,magic-packet;
-+	status = "okay";
-+
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ethphy0: ethernet-phy@0 {
-+			compatible = "ethernet-phy-ieee802.3-c22";
-+			reg = <0>;
-+		};
-+		ethphy1: ethernet-phy@1 {
-+			compatible = "ethernet-phy-ieee802.3-c22";
-+			reg = <1>;
-+		};
-+	};
-+};
-diff --git a/arch/arm/dts/imx8-capricorn.dtsi b/arch/arm/dts/imx8-capricorn.dtsi
-index 41f4b2f646b..f640daa775f 100644
---- a/arch/arm/dts/imx8-capricorn.dtsi
-+++ b/arch/arm/dts/imx8-capricorn.dtsi
-@@ -65,26 +65,6 @@
- 				SC_P_EMMC0_RESET_B_CONN_EMMC0_RESET_B	0x00000021
- 			>;
- 		};
+-static int check_mmc_autodetect(void)
+-{
+-	char *autodetect_str = env_get("mmcautodetect");
 -
--		pinctrl_fec2: fec2grp {
--			fsl,pins = <
--				SC_P_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB0_PAD	0x000014a0
--				SC_P_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB1_PAD	0x000014a0
--				SC_P_COMP_CTL_GPIO_1V8_3V3_GPIORHB_PAD		0x000514a0
+-	if (autodetect_str && (strcmp(autodetect_str, "yes") == 0))
+-		return 1;
 -
--				SC_P_ENET0_MDC_CONN_ENET1_MDC                   0x00000060
--				SC_P_ENET0_MDIO_CONN_ENET1_MDIO                 0x00000060
+-	return 0;
+-}
 -
--				SC_P_ESAI0_FSR_CONN_ENET1_RCLK50M_IN            0x00000060
--				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0            0x00000060
--				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1        0x00000060
--				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RMII_RX_ER        0x00000060
--				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL          0x00000060
--				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0        0x00000060
--				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1        0x00000060
--				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL         0x00000060	/* ERST: Reset pin */
--			>;
--		};
- 	};
- };
+ /* This should be defined for each board */
+ __weak int mmc_map_to_kernel_blk(int dev_no)
+ {
+@@ -377,9 +367,6 @@ void board_late_mmc_env_init(void)
+ {
+ 	u32 dev_no = mmc_get_env_dev();
  
-@@ -146,27 +126,3 @@
- &fec1 {
- 	status ="disabled";
- };
+-	if (!check_mmc_autodetect())
+-		return;
 -
--&fec2 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&pinctrl_fec2>;
--	phy-mode = "rmii";
--
--	phy-handle = <&ethphy1>;
--	fsl,magic-packet;
--	status = "okay";
--
--	mdio {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		ethphy0: ethernet-phy@0 {
--			compatible = "ethernet-phy-ieee802.3-c22";
--			reg = <0>;
--		};
--		ethphy1: ethernet-phy@1 {
--			compatible = "ethernet-phy-ieee802.3-c22";
--			reg = <1>;
--		};
--	};
--};
+ 	env_set_ulong("mmcdev", dev_no);
+ }
+ 
+diff --git a/board/siemens/capricorn/capricorn_default.env b/board/siemens/capricorn/capricorn_default.env
+index c8b5b3d7da3..ad88f7ed770 100644
+--- a/board/siemens/capricorn/capricorn_default.env
++++ b/board/siemens/capricorn/capricorn_default.env
+@@ -45,4 +45,3 @@ kboot=booti
+ bootcmd_mfg=run mfgtool_args; if iminfo ${initrd_addr}; then if test ${tee} = yes; then bootm ${tee_addr} ${initrd_addr} ${fdt_addr}; else booti ${loadaddr} ${initrd_addr} ${fdt_addr}; fi; else echo "Run fastboot ..."; fastboot usb auto; fi;
+ fastboot_bytes=124c00
+ fastboot_dev=mmc
+-mmcautodetect=yes
 -- 
 2.20.1
 
