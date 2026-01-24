@@ -4,100 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CE0D778BC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Jan 2026 22:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DE5D778B1
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 00:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C000839DF;
-	Fri, 23 Jan 2026 23:33:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FDBD83AEE;
+	Sat, 24 Jan 2026 01:13:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MCKGVldD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iT6Kue3t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02FD183A6A; Fri, 23 Jan 2026 23:33:21 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 717C783B03; Sat, 24 Jan 2026 01:13:41 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA368397D
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 23:33:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76ACD839DF
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 01:13:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-45c733ccc32so852458b6e.0
- for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 14:33:18 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-383122fbc9bso20689091fa.1
+ for <u-boot@lists.denx.de>; Fri, 23 Jan 2026 16:13:39 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769213619; cv=none;
+ d=google.com; s=arc-20240605;
+ b=OI/pPW8tsWk9mh1KAZWNfRpCflSzzwRFYiw/lMZBy2S9xkS2oz5/HORRmmtaSKB3aB
+ 6NP0NpDyu/yIr0qu5FyjJAikq8s2ZQgWmYxBfTxqymfs6hdUVxWNKNP/P0nAk4gWbrOF
+ M1gsALhuskC3P8o+L9dYDXWJ5Oo5AexAGjAAshNVut7YxArLPodxf5fke/0OjlWzpSDc
+ AOG+n7f9N0dXFNWLBw7DgRHMiPnd9ghn2cHZceb1+14dRncUhfvOmQUg7+6Fg6NoYVOL
+ u5sUwvY/o2BS8R/WofMn92mCsKSeFWm959N56g9c5rVMlXkxeQXH6If/jynsr/e3q3dO
+ CH9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
+ fh=i9kap9ZwZr4yVKZ2aHRk/U8QCM1eWKG+SZj9RqkaYJU=;
+ b=NOmFMgYDO2iLzSAIEBcmiySv0MVBA4HLtS8l0i4h+kEbR6l3XW0mD1UW/P/hv7XGt0
+ ATONeKfxTfdOr/pFhjOiPdLWi/qUfL+22t0fW2Z0Cimk2aG4J1A9MOTx2O8QIedXSpbi
+ sZFKrYquTvkdG4lRh/pE6E7SUJ1bMyjW5nHwYMWH/u+Ze2D9G/2ajGdHG8XVbCjbKXA4
+ vqlZm5MIWT2DbSL9gTxdKzcql+fFPSPWDhMMf7cPEbBPfAcVRlHcs4MhSkmQalQrxXgA
+ qgxp0Sji4amv5NqCTQJJEiSaynGRECUI0Ar4EjFY0eyOp5uRdYDvLUFF9w4lz37UfXIa
+ WPkQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769207597; x=1769812397; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1769213619; x=1769818419; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fg8H4oHQMzkJOVkvlgk1JvUZHcS3fpIn9Ksuu/DMB9U=;
- b=MCKGVldDp1ZYpcsKHpmL7o8UQIgXs4prGZyaB2m1lYPdm6wwF7k49ZoV9W68JdnVvY
- c6hbF0KhjIz2jE0h2MsDO6TGPISfH3XzMF+KwXJbrx4Z85yWvGSN2PZNy8ftdmpwhSXb
- 4bRMXXkDqmo/6lKIoF88Lmm+TX1THS9upUU9s=
+ bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
+ b=iT6Kue3tYtQSmbk9sFqERLmLmYkKkIRwQx+KnpvdyaAOCtVNjJk+jO/t6IQmpkk9XU
+ XFJslW1fqig8cZ/+0RJqocDWh1SjHdc5D3mjMe+GBCuujFZNCApdehgkKneHvVlK7PJh
+ uTTn3wJYLjEaP1Wa55+ucG/8jUcGSzzZYxgNdikizfBBMM7I/YNkD5JlXiEZ30hT8I2W
+ AAS+cDjr+E9DpmyM7TZ1L0cPl+B+Ku7T5l+zxLraIIEiMrriX62Ly9mS1yL4feK3/IcJ
+ NbXo1Zk/vb8eCKIROBctDgyU/IdxbCPao/8k9DRhWDkn4ghrKsnARu8/nxuEZ16Isyng
+ Do0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769207597; x=1769812397;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1769213619; x=1769818419;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Fg8H4oHQMzkJOVkvlgk1JvUZHcS3fpIn9Ksuu/DMB9U=;
- b=J6UmVc4RZ5a/9CHPwDnLimFEDqGZfOAQ/GS7WOrShq/9zt+rzoj8kmcup5FfGuNC8U
- nEDeru14dU/WmLuXbJLrGd+0dgHbLII+hxODE77oUGG+zpMJrA7upR+z8kvwpkrSYPmN
- WjBLREcD2dAu/USW6sAhx5Cmh2IHucThOb+OfoeeddEInGdpsXc5pLoMnGQNs3Z2QR3k
- XJoSzmHeA5tEQtD+WyTRI2I59yvtjbF/kdcmUBAbFczfMYOa+1gBanfRpLXT9xxD4X+y
- GAGMlcd9t4JYcrxnGwDcYEeCyk4Ye9atsG/CQue2YU+X7hpqC86uz5KcMxF/WGhoFBlp
- ZASA==
-X-Gm-Message-State: AOJu0Yz9ZgNH6GBjArEF7guWFaRsRMoDK9ggaNPjOVKcsPwdXXIta6Bj
- RpCkbrvw35CMPh1HcSZt3lkmncYevAdPV3alfgDhxDbAqwGAel2qKvWAlRxEwW1EOLA=
-X-Gm-Gg: AZuq6aLyTelj+SpBTqCbOE9uTJs2/GvkH3ILW+11qgYbM0T/Yg6xEqwN8GoD6VHe7KQ
- k3oe8IPnrNqvy0SkTLen/d8DH6+R8+Gp/HfMeXcvX0G4lCw76FnGvHsif9fbh9wCpqo0jV5fIjD
- Iy0oImJJ6UzuSCBZiad35v0BFGqo958u0oLICgg0N6ZJ6c24vjmMIy6IzFQJEHi+FRhklmx7KZO
- BP3wXH8UaNn3ugRUjYJBlWzXCND+4yTQbulgRL8oRnRA0evYDGuyzM0jQ3DL0x6ioCFevfC9yvr
- +wIrFHdl3X72yzXxXc87XjnSBPFqsiYCM42hm/gawbdi/K2Ky11sJ0C/RiC6/Gu2BGM7Nk8KKDa
- ezcpsTITa0JZPKDeRMqO6SQSJH7McDMac8z9R7J1c4Cb7rFwGpYFsynm+rwKYZFtdquRAuFjjqP
- RZt5YBlSpEtKQBbmvVPZTtHBIf7fA24ArdNYz1L1JjrKJvNQ1+HieyfNhwFSo15v1/Z3jbjlSKM
- r8oLwWQ8sGhoXwxFMLj6zwU9l7J7bvjrg2vQg==
-X-Received: by 2002:a05:6808:250e:b0:45c:71ff:1f6c with SMTP id
- 5614622812f47-45eb1cbaf28mr2328241b6e.35.1769207597325; 
- Fri, 23 Jan 2026 14:33:17 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45eb40e32desm1900894b6e.5.2026.01.23.14.33.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Jan 2026 14:33:16 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Greg Malysa <malysagreg@gmail.com>
-Cc: adsp-linux@analog.com, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Caleb Ethridge <caleb.ethridge@analog.com>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Philip Molloy <philip@philipmolloy.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, Yao Zi <me@ziyao.cc>, 
- Jerome Forissier <jerome@forissier.org>, 
- Masahiro Yamada <masahiroy@kernel.org>
-In-Reply-To: <20251211080414.5363-1-malysagreg@gmail.com>
-References: <20251211080414.5363-1-malysagreg@gmail.com>
-Subject: Re: [PATCH 00/12] sc5xx: Add complete board support for all ADI
- SC5xx boards
-Message-Id: <176920759551.2792764.4393744502494646019.b4-ty@konsulko.com>
-Date: Fri, 23 Jan 2026 16:33:15 -0600
+ bh=WvGns2M38eUMOxnBw+AKVlEnOm9nSudSU3clN6oCBdc=;
+ b=VyDojtVCHsctETImd+k5I+xFz+CGtH2JV+7K9erdTCKrmdwnxvTLAhfdHuKYPHvQ8z
+ U4KZVTlNxI/t3CvJidIlSPm1wazUzlN8Lc/ilpECXbWDLgugZ7Qx4XpxgYmQPCBnc7iW
+ yC4kr1+7MVYLvtAVVy0fZ6FbuPEB1i8JWbht5kf1e68Ah8xtWYRLeUlXDABOTJ9ubz36
+ /4IV055/gMte3cqlp+tqvR8DMfZe8CQ1fxUc1AJ4nU+ac8x1cy47yOOOc8mzqQeSLVAy
+ hqwnfst58rUQ7tO3QBHVuBcu8CdPzqan3vaH2QVZO89NxKC5Iq8gBJQzSnlqXnBvD4+E
+ cb1A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXrNh+JLwDXg6X6tAEdMpvwhjkYo9XF8Joq3Emt7yDY1/2S7fDb/wj9sSQkd/QroRMfdregw1w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpSx8zmI7SQIDpDsBJkWqBcNQn6bc0sLMPuyH0vipLb0CfZw14
+ XVTr6KgHOqXFEZK2P4tdIQVri+BEFaPIJFJ1H/dNlZGEXv7w9wal8QlowMlJyVtc6oyxNG005r4
+ cq03I2fl+RMdeIE37zpl0kHDZQjW9LqM=
+X-Gm-Gg: AZuq6aJKxng5kT7QBPFiIjjaKNdNzy25dOp7Lpu/lKtXZ8ChJjSWoKe8lbgi5E0f+Yg
+ GDf6CiUoO04/DvlyVJ16vGyXT39+OVHG+S1bSYjiaPWq/FQKXGDICE3XsgDaUz8h4RYRIxQw6NX
+ FCialrMcMwmU9nCA/eLh3n7YJZGxqzfL0vugQW/7jwfSi5g9qqVy3b02JgkCxLbcdZueSWG5jNw
+ JrrbksibLfUa4BzkeDWYgesrOE7zkKbt+EvoQ5Ldc1WEkqPbDBP/h79le573wpnAplKep9Sdfu7
+ MLaK+yMg8bajaLiq0WTlyz95OBUy7HHVfRq8
+X-Received: by 2002:a05:651c:1504:b0:37b:a640:765e with SMTP id
+ 38308e7fff4ca-385d9f0fd0bmr15964451fa.11.1769213618400; Fri, 23 Jan 2026
+ 16:13:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260123161907.392211-1-festevam@gmail.com>
+ <20260123201202.GO3416603@bill-the-cat>
+In-Reply-To: <20260123201202.GO3416603@bill-the-cat>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 23 Jan 2026 21:13:27 -0300
+X-Gm-Features: AZwV_Qjvu2ypNaTay5ZXoi5iKsh6SydxefY8--TlBlhAaFxCMdlRw9PGd_aap04
+Message-ID: <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
+Subject: Re: [PATCH] arm: spl: Fix DTB offset after binman symbol table
+To: Tom Rini <trini@konsulko.com>
+Cc: marek.vasut@mailbox.org, u-boot@lists.denx.de, sjg@chromium.org, 
+ ilias.apalodimas@linaro.org, Fabio Estevam <festevam@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,45 +117,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Dec 2025 03:03:51 -0500, Greg Malysa wrote:
+Hi Tom,
 
-> This series adds the final pieces to enable mainline U-Boot to build and
-> boot all Analog Devices SC5xx SoCs and supports the associated carrier
-> board options. At this point it should be viable for new users for these
-> platforms to start with the latest version of U-Boot rather than our
-> vendor fork, however some features (such as OSPI support and falcon
-> boot) remain unavailable until we are able to unify our implementations
-> with the mainline implementations.
-> 
-> [...]
+On Fri, Jan 23, 2026 at 5:12=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 
-Applied to u-boot/master, thanks!
+> I've been talking with Ilias for the last few hours. This still isn't
+> right, it just happens to work in some cases, but not others. What's
+> going on is that while we always have u-boot-nodtb.bin 8-byte aligned
+> because while the BSS itself may end 8 byte aligned, we actually care
+> about the size of the BSS being 8 byte aligned. Can you please try:
+>
+> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+> index d780a5060774..dae8a1ec665b 100644
+> --- a/arch/arm/cpu/u-boot-spl.lds
+> +++ b/arch/arm/cpu/u-boot-spl.lds
+> @@ -58,6 +58,7 @@ SECTIONS
+>         _end =3D .;
+>
+>         .bss __rel_dyn_start (OVERLAY) : {
+> +               . =3D ALIGN(8);
+>                 __bss_start =3D .;
+>                 *(.bss*)
+>                  . =3D ALIGN(8);
+>
+> And see if it works at run time? hexdump'ing looks good. If so, I'll do
+> something more broad to catch the SPL_SEPARATE_BSS=3Dn case, and add the
+> ASSERTS that are missing.
 
-[01/12] mach-sc5xx: Introduce Kconfig symbols for image addresses
-        commit: 280dbbbf6e4645595015c2a15add6dcc10795b4d
-[02/12] mach-sc5xx: Rename SC_BOOT_MODE
-        commit: ca8cceb12f10253e73141a136ca3dcd7f1f85927
-[03/12] mach-sc5xx: Kconfig: Make EZKIT and EZLITE carriers mutually exclusive
-        commit: e01743624ef9d1de087f82352cc52e71ec3d8812
-[04/12] mach-sc5xx: Add preliminary support for binman
-        commit: a6927e717565ebab18fcbba3cb9a50457119d83d
-[05/12] docker: add Analog Devices tools to docker image
-        commit: b36007b01620905f16eff864a09140adcff670fa
-[06/12] board: adi: Add SOMCRR infrastructure
-        commit: 48a45b74aa56b65c6d5776e2c5c4fb3c4bda3ee8
-[07/12] board: adi: Add support for SC573-ezkit
-        commit: 34d41f8da617ad9ca4527fac7764671159463b4f
-[08/12] board: adi: Add support for SC589 boards
-        commit: e382cb2be4ef6f205b6f3231801ee2d7d24d2906
-[09/12] board: adi: Add support for SC584-ezkit
-        commit: e1d6232874f663c0db758567f77d0ddcfd9da4be
-[10/12] board: adi: Add support for SC598
-        commit: c9e893d6266dc83dd053998cdf73957b623e2eb5
-[11/12] board: adi: Add support for SC594
-        commit: be7937847b7ca0e1ac44a1982c58343a3a8ad0f3
-[12/12] MAINTAINERS: Update ADI entries for new boards
-        commit: b0df2df8d4787b60214987d06fff1410beca26fb
--- 
-Tom
+This fixes the boot on RV1103, thanks!
 
+When you send a formal patch, feel free to add:
 
+Reported-by: Fabio Estevam <festevam@gmail.com>
+Tested-by: Fabio Estevam <festevam@gmail.com>
+
+Thanks
