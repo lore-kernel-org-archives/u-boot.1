@@ -4,51 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A97D715C7
-	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077EAD715C7
+	for <u-boot@archiver.kernel.org>; Sat, 24 Jan 2026 05:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 490A883B82;
-	Sat, 24 Jan 2026 06:47:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7EE5883B03;
+	Sat, 24 Jan 2026 06:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="NEg6/cOl";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="LkcL0f/M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE7E383B85; Sat, 24 Jan 2026 06:47:21 +0100 (CET)
+ id CDC8583B72; Sat, 24 Jan 2026 06:50:52 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D4F183B72
- for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:47:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8526C839DF
+ for <u-boot@lists.denx.de>; Sat, 24 Jan 2026 06:50:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0582F10EFEC; Sat, 24 Jan 2026 06:47:16 +0100 (CET)
+ with ESMTPSA id 81CEF10D50D; Sat, 24 Jan 2026 06:50:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769233637; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=YriPKWZAxZHAV7eYbeAuDK+kBH3Fhzn3TOMwXB0q2os=;
- b=NEg6/cOlC9MZbgqNiRhP8pR6iOdquhX1bCdK3PI4gjliipkoJ0DphN8gk/idtts7qm/HR2
- uZHPRsAOOIw6znqzJAZOKo/7ISE/uz2MgXBqxN9WG+s/YHFQCETBjGAQAcaG2+MbiwH/2/
- ZYQoNDWsWf++zMpao+ZvguC5Wa5lHJz5OUVLtMM+ky7r8cGA3gdTt+6MSZDqQNLYZKVuAz
- //r8J3v48BIfnUEufzW2IAeHKjqRd4JDPZ4f5dJUwUpiQsg0qunMcXTjfUI6I7g8LaieBw
- pbAeM86KwclYYzRSrq2jklVNvEHpOuI0J5AegLJzo2htKOAES7tGCS0lbGGMIw==
+ s=dkim; t=1769233849; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Rmk/KLC7vC3BzXKOzxZHLahrPjAVEr9XhpZvc0EPBIY=;
+ b=LkcL0f/Mc6K3XKAuPS3cBB2DByEF+Ctrp1emR0CYU0QZ+XlZI8q/QN5OaM0PhpkqhYVOSv
+ kw8sMucn7MFKpukIv/PykP3Dn3i6ThN6m5zYYpkEzpFg8uegyFlzZZrIg5YEZSlrE8W2mK
+ YLJzZoL6S3lXbnk8/QmU6LXmVCrJC0RjsCUBtiM/n9q5f7VNVVME22rZS/j0u32DhvoScH
+ XbYIzYroRa8tq8VfJeoDgIX5V/uBVMhwt0l4fv033kAKCyMnRjuLVBz/fx8IGzFcG4V+DR
+ nwESIpSIjoquSI6MaO5mgLTofAD7gKpcdWZVfOUbaRYECMwsLHRx1SgSlVwTXw==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
- Heiko Schocher <hs@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+Cc: Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>, John Ripple <john.ripple@keysight.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 2/2] arch: imx8qxp: Override weak fb_mmc_get_boot_offset
- function
-Date: Sat, 24 Jan 2026 06:47:11 +0100
-Message-Id: <20260124054712.7939-3-hs@nabladev.com>
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: [PATCH v1 0/2] Add for imx8x SoC get_boot_type command
+Date: Sat, 24 Jan 2026 06:50:42 +0100
+Message-Id: <20260124055044.8149-1-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20260124054712.7939-1-hs@nabladev.com>
-References: <20260124054712.7939-1-hs@nabladev.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -68,54 +65,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 
-Add IMX8QXP SoCs specific implementation of fb_mmc_get_boot_offset()
+add function sc_misc_get_boot_type() which requests from the
+SC the current used boottype and add a comand "boottype" which
+saves the current boot_type in environment variable "boottype",
+so we can use this later.
 
-This is needed as bootloader offset is different dependent on SoC
-revision!
 
-For revision B0 the bootloader starts at 32k offset. On offset
-0x0 the bootloaders environment is stored.
+Heiko Schocher (2):
+  imx: scu_api: implement sc_misc_get_boot_type
+  imx8qx: misc: add command for getting boottype
 
-On C0 revisions of the SoC bootloader image starts at offset 0x0
+ arch/arm/mach-imx/imx8/misc.c  | 27 +++++++++++++++++++++++++++
+ drivers/misc/imx8/scu_api.c    | 25 +++++++++++++++++++++++++
+ include/firmware/imx/sci/sci.h |  1 +
+ 3 files changed, 53 insertions(+)
 
-Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-Signed-off-by: Heiko Schocher <hs@nabladev.com>
----
+Azure build (series is in a bunch of siemens patches sending
+now to mainline):
+https://dev.azure.com/hs0298/hs/_build/results?buildId=202&view=results
 
- arch/arm/mach-imx/imx8/cpu.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
-
-diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
-index 0e112af661c..27c431881b0 100644
---- a/arch/arm/mach-imx/imx8/cpu.c
-+++ b/arch/arm/mach-imx/imx8/cpu.c
-@@ -899,3 +899,24 @@ bool m4_parts_booted(void)
- 
- 	return false;
- }
-+
-+#ifdef CONFIG_IMX8QXP
-+#include <blk.h>
-+
-+/*
-+ * On B0 revision SoCs the bootloader is on 32k offset
-+ * and at offset 0x0 is the U-Boot Environment stored
-+ *
-+ * So we cannot flash bootloader images to offset 0x0
-+ *
-+ * On C0 revisions of the SoC bootloader image starts
-+ * at offset 0x0 ...
-+ */
-+lbaint_t fb_mmc_get_boot_offset(void)
-+{
-+	if ((get_cpu_rev() & 0xF) == CHIP_REV_C)
-+		return 0;
-+
-+	return 0x40;
-+}
-+#endif
 -- 
 2.20.1
 
+base-commit: 5c3e84731b68d26340e6acf8e27c7c680aa55360
