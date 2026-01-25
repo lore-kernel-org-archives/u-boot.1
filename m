@@ -4,54 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79332E63CA5
-	for <u-boot@archiver.kernel.org>; Sun, 25 Jan 2026 13:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C35E63CA2
+	for <u-boot@archiver.kernel.org>; Sun, 25 Jan 2026 13:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5487983CB1;
-	Sun, 25 Jan 2026 14:13:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
+	by phobos.denx.de (Postfix) with ESMTP id EE13783A5A;
+	Sun, 25 Jan 2026 14:33:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="pxPzK5kS";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MU9/1n67";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA0B283C72; Sun, 25 Jan 2026 14:13:04 +0100 (CET)
-Received: from mxout1.routing.net (mxout1.routing.net [IPv6:2a03:2900:1:a::a])
+ id 399BB83C4B; Sun, 25 Jan 2026 14:33:31 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84EB83A5A
- for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 14:12:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 916B583A36
+ for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 14:33:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=fw-web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
-Received: from mxbulk.masterlogin.de (unknown [192.168.10.85])
- by mxout1.routing.net (Postfix) with ESMTP id 6175D400A3;
- Sun, 25 Jan 2026 13:12:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
- s=routing; t=1769346779;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=E6shiLaeIZ6u2Lb4U2UEyPEdYRE/pvV8VshuRyB1E+0=;
- b=pxPzK5kSQOg3kg4lbtOPMfGGkSvgQ3HjZc2/1ypOG/9VfBMeHYapyXAB1lt8l3yBIAi5t+
- eWJQsNnOzBNoGlYtmrH3G5cFeGcqBMffd1hf5r1fdJSOUBYrtW3CXZO5aR6myZyEdeU01x
- Vgs47cOVcuWaRYpDi+kiSovLexLLgdI=
-Received: from frank-u24.. (fttx-pool-194.15.85.69.bambit.de [194.15.85.69])
- by mxbulk.masterlogin.de (Postfix) with ESMTPSA id 4671C122708;
- Sun, 25 Jan 2026 13:12:59 +0000 (UTC)
-From: Frank Wunderlich <linux@fw-web.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
- Daniel Golle <daniel@makrotopia.org>
-Subject: [PATCH v6 2/3] test: cmd: add test for memsize
-Date: Sun, 25 Jan 2026 14:12:52 +0100
-Message-ID: <20260125131254.23210-3-linux@fw-web.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260125131254.23210-1-linux@fw-web.de>
-References: <20260125131254.23210-1-linux@fw-web.de>
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=benjamin.robin@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id E43A24E42275;
+ Sun, 25 Jan 2026 13:33:27 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9C3E66073E;
+ Sun, 25 Jan 2026 13:33:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B1451119A80E2; Sun, 25 Jan 2026 14:33:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1769348006; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=RBXr2K+52zmyuu8XWcPfN1dDrxLIwurGrfvWhq7Tau0=;
+ b=MU9/1n67F7PVVkDhH3Y3CFX9muAaAmBTfaffgtis9rcKLAYwAYGymmz4kvVZUW37PvTDFA
+ h49iDlDp2dCRjnO3nAmD4bh88Lhl/I9ArET7OaINVj3jNH0owBiLsQlSddf6D6/it/owgX
+ ujTc11z6lU06Ks+UDRArxzBR1CQhjvS48z6gGBflsPwFme4OL8P97Bo6vndqUmwR1spdgz
+ J94eCFGayQ8NKrcDhMWkK8QKvRgzy9q4K1aFTFtQWxhl6DvRir6+yDFDQb0WEWVV+1uV/a
+ GIpFaHuzY3ycPUYAYa0f35q0W0MSZHrck2t0KUML/ZwGaUHSdohyXMcsOoTPgw==
+From: Benjamin ROBIN <benjamin.robin@bootlin.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>
+Cc: Benjamin ROBIN <dev@benjarobin.fr>,
+ Jerome Forissier <jerome@forissier.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1] env: add w flags for net config in explicit write mode
+Date: Sun, 25 Jan 2026 14:33:22 +0100
+Message-ID: <8634622.T7Z3S40VBb@brobin-bootlin>
+In-Reply-To: <31984d37-7857-f6f1-fe58-96d064d45019@nabladev.com>
+References: <20260124054040.7597-1-hs@nabladev.com>
+ <2397776.ElGaqSPkdT@brobin-bootlin>
+ <31984d37-7857-f6f1-fe58-96d064d45019@nabladev.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,67 +78,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Frank Wunderlich <frank-w@public-files.de>
+Hello Heiko,
 
-Add a test for memsize command in same way as meminfo.
+On Sunday, January 25, 2026 at 2:03=E2=80=AFPM, Heiko Schocher wrote:
+> > Users who enable CONFIG_ENV_WRITEABLE_LIST typically want full control
+> > over
+> > which environment variables are writable. The new default behavior
+> > introduced by your patch might not align with what all users expect or
+> > want.
+> >=20
+> > Would overriding the flags using CFG_ENV_FLAGS_LIST_STATIC not work in
+> > this
+> > case?
+>=20
+> Good question, I have to test... or may Adrian has already done
+> such tests...
 
-Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
----
-tested via:
-$ ./u-boot -T -c "ut cmd cmd_test_memsize"
-...
-Test: memsize: meminfo.c
-Tests run: 1, 0 ms, average: 0 ms, failures: 0
----
- cmd/Kconfig        |  1 +
- test/cmd/meminfo.c | 17 +++++++++++++++++
- 2 files changed, 18 insertions(+)
+Please test.
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index be79bf0747df..2bafa156ca8a 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -927,6 +927,7 @@ config CMD_MEMINFO_MAP
- 
- config CMD_MEMSIZE
- 	bool "memsize"
-+	default y if SANDBOX
- 	depends on CMD_MEMINFO
- 	help
- 	  Get RAM via command for use in scripts.
-diff --git a/test/cmd/meminfo.c b/test/cmd/meminfo.c
-index 53b41e3b49e0..ba772a8b7616 100644
---- a/test/cmd/meminfo.c
-+++ b/test/cmd/meminfo.c
-@@ -7,6 +7,7 @@
-  */
- 
- #include <dm/test.h>
-+#include <env.h>
- #include <test/cmd.h>
- #include <test/ut.h>
- 
-@@ -39,4 +40,20 @@ static int cmd_test_meminfo(struct unit_test_state *uts)
- 
- 	return 0;
- }
-+
-+/* Test 'memsize' command */
-+static int cmd_test_memsize(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("memsize", 0));
-+	ut_assert_nextline("256 MiB");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("memsize memsz", 0));
-+	ut_asserteq_str("256", env_get("memsz"));
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
- CMD_TEST(cmd_test_meminfo, UTF_CONSOLE);
-+CMD_TEST(cmd_test_memsize, UTF_CONSOLE);
--- 
-2.43.0
+> But looking into code.. if we add this variables in ENV_WRITEABLE_LIST
+> the results would be, that this variables are twice in ENV_FLAGS_LIST_STA=
+TIC
+>
+> include/env_flags.h
+>   87 #define ENV_FLAGS_LIST_STATIC \
+>   88         ETHADDR_FLAGS \
+>   89         NET_FLAGS \
+>   90         NET6_FLAGS \
+>   91         SERIAL_FLAGS \
+>   92         CFG_ENV_FLAGS_LIST_STATIC
+>=20
+> once through NET_FLAGS and once through CFG_ENV_FLAGS_LIST_STATIC
+
+Yes, the variables with the flags would be declared twice.
+=20
+> So, that is not good, and I think, code will find the first
+> entry, and parse it -> so it will not work.
+
+What leads you to this assumption?
+
+If you examine the code, you'll notice that:
+ - The env_attr_lookup() function returns the last entry.
+ - When iterating over the flags using env_attr_walk(), any previous attrib=
+ute
+   flags are overridden by subsequent flag declarations.
+
+> Should we instead in case CONFIG_ENV_WRITEABLE_LIST is enabled
+> only set/allow CFG_ENV_FLAGS_LIST_STATIC in ENV_FLAGS_LIST_STATIC ?
+
+I haven't tested this myself, as I currently don't have a test environment=
+=20
+available. Please test it, and if it doesn't work, the correct fix would be=
+ to=20
+ensure that any future flag declaration overrides previous ones.
+
+=2D-=20
+Benjamin Robin, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
+
+
 
