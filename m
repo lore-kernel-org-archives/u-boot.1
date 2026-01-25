@@ -4,60 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82739E63C8E
-	for <u-boot@archiver.kernel.org>; Sun, 25 Jan 2026 13:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABEC6E63CA5
+	for <u-boot@archiver.kernel.org>; Sun, 25 Jan 2026 13:13:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA5AB83A5A;
-	Sun, 25 Jan 2026 14:03:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 21C9283C4B;
+	Sun, 25 Jan 2026 14:13:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="EDF+im7/";
+	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="ZuIYvxDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE62083BF1; Sun, 25 Jan 2026 14:03:40 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id DB84D83C67; Sun, 25 Jan 2026 14:13:01 +0100 (CET)
+Received: from mxout2.routing.net (mxout2.routing.net [IPv6:2a03:2900:1:a::b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C663483A36
- for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 14:03:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 93DAD10E681; Sun, 25 Jan 2026 14:03:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769346217;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=9moY/9wGizldDIgRi1sC8ciiYh4HBZZ0gptHThf1SHU=;
- b=EDF+im7/XM5ePKO5An2pV3DOMEh76WlIpzY07VbWLmv0tekgtCXX9vj1cF/b6Ac07W3LQv
- 9BtBjgddANTPpBwS524FU4AnnmWXKrQviW1hxl6VWoK/kKLwgMYaCoOVLVnulk8AX3HH26
- UC5dFFge/w6lH6j3dDR89hGD9jeHIosUvR9lMsEx+6Vrmnn4vuJ0Tga3v15MrOhIPfqaMp
- G1MWUL5lgP4oeneF2UXiB9OsA5giWFBcUS2JUSZ6BK3uClZ5bwKiHo9NAIUXbkKJpRjVk2
- amjDWx+XsxRBwHuCy8uLNd3X3ANXmn6iTW+DuNJk1HJfeJ9XuifvNgwsgRNl7g==
-Message-ID: <31984d37-7857-f6f1-fe58-96d064d45019@nabladev.com>
-Date: Sun, 25 Jan 2026 14:03:36 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B9AA783A36
+ for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 14:12:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=fw-web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
+Received: from mxbulk.masterlogin.de (unknown [192.168.10.85])
+ by mxout2.routing.net (Postfix) with ESMTP id 2EA5F5FD8C;
+ Sun, 25 Jan 2026 13:12:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
+ s=routing; t=1769346779;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Gl4A5LNlz7HG1snybatKYfEkdgU6WpWORjeZrnZAWvc=;
+ b=ZuIYvxDstu2AenwMdXTXMav12jybADsIx8SflvcUNiUELBE0nBXz6Md7bO5I1VMRzzsPM9
+ dOuIXKXqpCT8EkdQIxNnCs3F2aErvKjhYcC9J3iOL71BPsPFiT+mAZU41CYIwxiQPhdazf
+ 7mIY6vVx6QxjTOSv7+CnaX9Fx0mPeSc=
+Received: from frank-u24.. (fttx-pool-194.15.85.69.bambit.de [194.15.85.69])
+ by mxbulk.masterlogin.de (Postfix) with ESMTPSA id 0A3471226CC;
+ Sun, 25 Jan 2026 13:12:59 +0000 (UTC)
+From: Frank Wunderlich <linux@fw-web.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: [PATCH v6 0/3] Add command for getting ramsize in scripts
+Date: Sun, 25 Jan 2026 14:12:50 +0100
+Message-ID: <20260125131254.23210-1-linux@fw-web.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1] env: add w flags for net config in explicit write mode
-Content-Language: en-US
-To: Benjamin ROBIN <benjamin.robin@bootlin.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Adrian Freihofer <adrian.freihofer@siemens.com>
-Cc: Benjamin ROBIN <dev@benjarobin.fr>,
- Jerome Forissier <jerome@forissier.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <20260124054040.7597-1-hs@nabladev.com>
- <2397776.ElGaqSPkdT@brobin-bootlin>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <2397776.ElGaqSPkdT@brobin-bootlin>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,53 +65,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Benjamin,
+From: Frank Wunderlich <frank-w@public-files.de>
 
-On 24.01.26 12:35, Benjamin ROBIN wrote:
-> Hello,
-> 
-> On Saturday, January 24, 2026 at 6:40 AM, Heiko Schocher wrote:
->> From: Adrian Freihofer <adrian.freihofer@siemens.com>
->>
->> In explicit write access mode (CONFIG_ENV_WRITEABLE_LIST) the
->> environment variables listed in NET_FLAGS and NET6_FLAGS are
->> probably intended to be writeable. Therefore add the 'w' flag
->> to these variables.
-> 
-> Users who enable CONFIG_ENV_WRITEABLE_LIST typically want full control over
-> which environment variables are writable. The new default behavior introduced
-> by your patch might not align with what all users expect or want.
-> 
-> Would overriding the flags using CFG_ENV_FLAGS_LIST_STATIC not work in this
-> case?
+Add command for getting ramsize in scripts
 
-Good question, I have to test... or may Adrian has already done
-such tests...
+v6:
+- add missing return for error in env_set_long
+v5:
+- move msize to meminfo and drop first param (always display as MiB)
+- rename msize to memsize
+- add doc and test so it becomes a series
 
-But looking into code.. if we add this variables in ENV_WRITEABLE_LIST
-the results would be, that this variables are twice in ENV_FLAGS_LIST_STATIC
+Frank Wunderlich (3):
+  cmd: mem: add command for getting ram size for use in scripts
+  test: cmd: add test for memsize
+  doc: cmd: add usage doc for memsize
 
-include/env_flags.h
-  87 #define ENV_FLAGS_LIST_STATIC \
-  88         ETHADDR_FLAGS \
-  89         NET_FLAGS \
-  90         NET6_FLAGS \
-  91         SERIAL_FLAGS \
-  92         CFG_ENV_FLAGS_LIST_STATIC
+ cmd/Kconfig               |  7 +++++++
+ cmd/meminfo.c             | 25 +++++++++++++++++++++++
+ doc/usage/cmd/memsize.rst | 43 +++++++++++++++++++++++++++++++++++++++
+ test/cmd/meminfo.c        | 17 ++++++++++++++++
+ 4 files changed, 92 insertions(+)
+ create mode 100644 doc/usage/cmd/memsize.rst
 
-once through NET_FLAGS and once through CFG_ENV_FLAGS_LIST_STATIC
-
-So, that is not good, and I think, code will find the first
-entry, and parse it -> so it will not work.
-
-Should we instead in case CONFIG_ENV_WRITEABLE_LIST is enabled
-only set/allow CFG_ENV_FLAGS_LIST_STATIC in ENV_FLAGS_LIST_STATIC ?
-
-bye,
-Heiko
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+2.43.0
+
