@@ -4,38 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E0BCF65E5
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 12:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636CECF65FF
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 12:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 346FC83B32;
-	Mon, 26 Jan 2026 13:10:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E9B183B27;
+	Mon, 26 Jan 2026 13:45:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="khaOH3oO";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B47A683B55; Mon, 26 Jan 2026 13:10:11 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4B00583B27
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 13:10:09 +0100 (CET)
+ id 1EAB383B32; Mon, 26 Jan 2026 13:45:13 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E2FA83B0B
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 13:45:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A2FA339;
- Mon, 26 Jan 2026 04:10:02 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.33.9.63])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D3CCA3F5CA;
- Mon, 26 Jan 2026 04:10:07 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] u-boot-sunxi/master for v2026.04
-Date: Mon, 26 Jan 2026 12:10:02 +0000
-Message-Id: <20260126121002.383545-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-59b77f2e43aso6468406e87.1
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 04:45:06 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769431505; cv=none;
+ d=google.com; s=arc-20240605;
+ b=kC/gGe5Jyd7OUmsf0cRh3oEeYGY8wKK+2lCZLhRs11AdaQ7SSmpKpfHhrD1RiONe1h
+ eqHlV+B4AqG6s0/jKoCJASH9Njglo7xA7uNrjAkcQWAVqtBZEuHT8YjLdHE0w8pJYVab
+ D8yzwWXlofjnhjuaWEZL4NT29jc5NgBkay4VPxcRSfW86dsCTmrSMLBW/mnB6MOHx+UU
+ AbB6joC7y70lKlkHkXwozDrebj85dDbHo1jbMOBjEXePKbkVoxIbPIQFAzrI+0yabCT1
+ KDYOxBWXEQ08y9068xwuFxsgXN3Ypyd/jRP87xfT1lA3f/feIiCKb4VZVuYxGfWnXpBX
+ /WoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ma9tRSWeypmCaam4B62CwRG5sdQ4KE0LVu5T5BiDwu0=;
+ fh=HMeFAPOAZn567QxgTRSRn/DL4wRSz8n7dI7Ne5jaVa4=;
+ b=UBs/PJ8S+l1Drdh7RGFgRpfavxYlfNP6XBoOF4Q4APF5cmugCkUxmZzTxNhXqTQbZi
+ gNQ3l8YUJ2z262fiIE48L2F1s+Ui2QsS1JhZdsqHk8S6NMJ1Txjzs0rosgivCpGEtPhZ
+ s5isH87vbCucIIW+GkuQ0pJCPe6LakuPSHir/RJ8ANnofgHOv2Ha603KPGzpEMMnqnWx
+ vumuTN+ofQzA00BXbGdfTAL/TGQ+EA/o2CcGFTEssKtvP/zsQ3mm6P0q5WR9NdmrUpDG
+ L7AuB4HjiMM92//qwVz4/kcuVkOAVeSOrPglF4BW2UPLNZ683vdErGIxWO4wL6JCJuOf
+ RG5Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1769431505; x=1770036305; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ma9tRSWeypmCaam4B62CwRG5sdQ4KE0LVu5T5BiDwu0=;
+ b=khaOH3oO38m5hTCsVAG914a8vd1wULp1Yu723xUl22ZPMtf9VMWWXJmxe2/kZ+HCFN
+ whpNwvTVhN9+YmLoiCix6vcB/f5ULm5kJiNQ5EHOoLPtSFqMDhFL56C4dvk4siL6PyKK
+ 0oK44OaD3Ez6Zgv2MmfpBDym5Fp6iUrUxxwvs/VrWTSSs6ZYHEiEu3GlqrSKt2RVfFOM
+ UXZjw9dSHUuQ+54iGapNPf1N2t2M4bdUdif9DKYiJlR/YhIk7DCF5vxGCph8bN+Hl+FA
+ FbG+gM/INQFjZspQvC2pmR34DJk2icuyl5m3bQ7fzr/aDozjOy47WDzdQFjlXy34Mcu4
+ xpyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769431505; x=1770036305;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ma9tRSWeypmCaam4B62CwRG5sdQ4KE0LVu5T5BiDwu0=;
+ b=C0LZXyjWa0AaWj5KtVXvHpyeaJfS3IyzJ4rX39Xtn1vw/iXUzGRAwFKEIXPrZ+Ao7L
+ AnwZeqi8kFYD0DZUayxbmyefNbQhU9N2K4PkGZetH2e7keiI2y4VlIHzDu1aUHRK6mil
+ W51U5RI2geAhAKaF1IFD5kAG2dvWT1pMGGZJRDiNl6/nzP+CACjLLvvehE/8pv3pNgEg
+ ybP/0IJ+5YTjpi3ptefK82wpfLGYSCRVW6wctAqnB2P2l1wkGmOZ4iaBFDEEcg9X/nIx
+ 8nX/DEp29KmQvFEzqyv4LeRPRkbSaFLDA/YjkAaDqTmhXdqvUjkjl80mjunnunhx197P
+ phLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU75Oe1BeFCTYivoCUjwnoJmZM6LwYfh1O1ebP+vL/+GEpNRBrRT1N/ur3ISUHu30RBDFsUcd8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxbm/h0OLLt1Mfhq1ltzzUYgLpe8vaLppqbLWXiJn9IWjobHmo4
+ poMpFGLPVPu4M9JzZbitgz2gj3EO2xILW/L1juVkCTWcDaadiz5EVfTrsVrBhqPYUoSwQKvOgi7
+ SzZgcdA3H2tBYjFcz6+4rHxkTYFMB3UZprJwC
+X-Gm-Gg: AZuq6aKd7YCIXWOgSGNG1+i5ziejxhw/buUj14jMKT4ZFzLK9oXlSQPXlhvFyAx5659
+ j04RohpYVEn3xnF7RLi/k+uNMnGMVHg+pphDNju0UIvw5Y2HnoQG3DcqXwS+AEasziyVyoDF45a
+ SWTHOZUuuU2zkwoSkXISeJrHpwPPX8ldHZOBz8Dg/YsKroW1sLFjdwRPOT6IDYHtZOmr3ntS+Oa
+ St0TjQq7ZJnPZ0yeXGxLp0ZpcaRLrMUFsRvMWxO/FTi149ayXuWFMnFdHX5E36fAIL0geMDaVFH
+ YhtanTi1hIniiHNdj7qKDDewVMo=
+X-Received: by 2002:a05:6512:800b:20b0:59d:f5a6:bea9 with SMTP id
+ 2adb3069b0e04-59df5a6bf79mr960014e87.1.1769431505065; Mon, 26 Jan 2026
+ 04:45:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260123161907.392211-1-festevam@gmail.com>
+ <20260123201202.GO3416603@bill-the-cat>
+ <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
+ <CAC_iWjJ5gVzOP_6cgxEbUJn8a=KRj=-wEFy=Do7Dp8oqH3V+Dg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ5gVzOP_6cgxEbUJn8a=KRj=-wEFy=Do7Dp8oqH3V+Dg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 26 Jan 2026 09:44:53 -0300
+X-Gm-Features: AZwV_QjlcUKmanahgjTjO3JuP8Up3F0fKvp366-YKVP57au5BsgbyBNuN3ZnxmE
+Message-ID: <CAOMZO5D5awN11z8Hxwr4+tunqvhH8fYbUJvU6McES=edi2OR4Q@mail.gmail.com>
+Subject: Re: [PATCH] arm: spl: Fix DTB offset after binman symbol table
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, marek.vasut@mailbox.org,
+ u-boot@lists.denx.de, 
+ sjg@chromium.org, Fabio Estevam <festevam@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,63 +120,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-please pull these sunxi changes for 2064.04. Some improvements for some
-boards' DRAM setup, to allow boards with "odd" DRAM sizes (1.5GB or 3GB),
-and to support the T113-s4 with double the co-packaged DRAM.
-Support for a new board (X96Q TV box), and a fix for the DT name prefix.
-Also we support the new AXP318W PMIC, which is used on new boards with the
-A733 SoC. There are some preliminary support patches for this SoC, but
-they are not quite ready yet - though maybe I push some uncontroversial
-ones a bit later still.
+On Mon, Jan 26, 2026 at 3:29=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 
-Thanks,
-Andre
+> Fabio can you please try this
+> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+> index d780a5060774..af9f3a3c39c0 100644
+> --- a/arch/arm/cpu/u-boot-spl.lds
+> +++ b/arch/arm/cpu/u-boot-spl.lds
+> @@ -51,8 +51,8 @@ SECTIONS
+>                 __rel_dyn_start =3D .;
+>                 *(.rel*)
+>                 __rel_dyn_end =3D .;
+> -               . =3D ALIGN(8);
+>         }
+> +       . =3D ALIGN(8);
+>
+>         _image_binary_end =3D .;
+>         _end =3D .;
 
-=============================
-The following changes since commit 0ffca1dff1e8960b5920dfc3164e0fcd5892b961:
+Yes, this works. This is a partial revert of 8b0ebe054bb3.
 
-  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2026-01-25 11:20:53 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
-
-for you to fetch changes up to 8805aa120ca5341ca14d8f7f2311f7a85d57a5f9:
-
-  board: sunxi: Add X96Q support (2026-01-25 23:29:32 +0000)
-
-----------------------------------------------------------------
-Andre Przywara (1):
-      sunxi: dram: detect non-power-of-2 sized DRAM chips
-
-Bohdan Chubuk (1):
-      sunxi: avoid double vendor prefix when CONFIG_OF_UPSTREAM is enabled
-
-J. Neuschäfer (1):
-      board: sunxi: Add X96Q support
-
-Lukas Schmid (1):
-      sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
-
-Yixun Lan (2):
-      power: regulator: add AXP318W support
-      power: regulator: enable AWP318W SPL support
-
- arch/arm/include/asm/arch-sunxi/dram.h  |  1 +
- arch/arm/mach-sunxi/dram_dw_helpers.c   | 22 ++++++++++++++-
- arch/arm/mach-sunxi/dram_helpers.c      | 12 ++++++++
- board/sunxi/MAINTAINERS                 |  5 ++++
- board/sunxi/board.c                     |  5 +++-
- configs/x96q_defconfig                  | 27 ++++++++++++++++++
- drivers/power/Kconfig                   | 10 +++++++
- drivers/power/Makefile                  |  1 +
- drivers/power/axp_spl.c                 | 20 +++++++++++++
- drivers/power/pmic/axp.c                |  1 +
- drivers/power/regulator/axp_regulator.c | 50 +++++++++++++++++++++++++++++++++
- drivers/ram/sunxi/dram_sun20i_d1.c      | 10 +++++++
- drivers/ram/sunxi/dram_sun20i_d1.h      | 11 ++++++++
- include/axp_pmic.h                      |  1 +
- 14 files changed, 174 insertions(+), 2 deletions(-)
- create mode 100644 configs/x96q_defconfig
+Thanks
