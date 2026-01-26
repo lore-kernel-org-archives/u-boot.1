@@ -4,66 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284F3D19502
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 18:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70741D19502
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 18:46:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88F1283BD2;
-	Mon, 26 Jan 2026 19:13:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B3A3683D0F;
+	Mon, 26 Jan 2026 19:46:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="h/feuOlT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aaz9LDF4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3D9E83CEE; Mon, 26 Jan 2026 19:13:11 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CC69683D13; Mon, 26 Jan 2026 19:45:59 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8772483B27
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 19:13:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAF6783BD2
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 19:45:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f0GqR3sW9z9sWq;
- Mon, 26 Jan 2026 19:13:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769451187;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OjwucHTklR50jRcZIlWTkRjS1XV9Mg0XuEiC62AieGE=;
- b=h/feuOlTxiOcJ2s4F2UEGCNCT42qheZ5b7jR4fOlSPcrvVMQUNQgvscCrltmqWlagQOaex
- 6M07Yi7SGC1CjwI982YRHa+/64lwZTtcJbFvwEkrtm7AGoQ+Ekqwb+TUxQLmDQwQzPpB81
- qnahXM1EX2mnXua5GOx0aXF4NVUVj9P1S3IsCjn+CnM1fDa4yzocdwDmo3Vq/BY4JAIRQi
- 1+BySbvt2YjlOk7hrTqdilVInlIlLxkqvCap8pfexZbyfIzRXCq8qGNV3rL3pBBD6JIazR
- hssTLEpT67wMrVKPPuWXZ6XnxzuTXuk3D1TP4x0ZX4Ts41Mfm5T4H75OtBhYUA==
-Message-ID: <e3100b4b-98e6-4a08-aa26-df9dcceac235@mailbox.org>
-Date: Mon, 26 Jan 2026 19:13:04 +0100
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-59b710d46ceso4654310e87.3
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 10:45:57 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769453157; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Wno1uyAquAzb0Oj+Q7f6hRwEQIJtCF/0WjRQRz5tGfDvX+iGPfU0ZbFEzyW5gJIEWL
+ lMxvUtETh8JeypSyQDbRnyR9tuIdzzpwCcCKJjgScGiAumJ/nlB8AoeASXDVXKjWetfr
+ XY1nvRYgyVQu3B97ZyI7A9VePnNZVXcOs6t3m50/dsBudBPfa9W7IFKwQKLSbYH5HXrm
+ 7mTq7rFrljIYv0aHJpU3cXC6d4yxtHFsILBJKOOZJbyR1ZXwy6DKwSLOcXCrhVkLZKWA
+ RZoqebDNChN/xw8I7r6smdIvqXHF0cK2fcv1jHaDqoz2kiXSFzDo4siR80kcWlyNDsCY
+ AGbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=GRv1w/IQ5p8AnZ6XRye8hJeFq8e2rDzky0kwIQM+m44=;
+ fh=hmZM2R/tdrgghdCxD0JU6b7UTsxGeRQpElcZCPcYwfI=;
+ b=CIR+PsQ++AgGPUyXFka9P5X9BQ5TA9qdxWkU52RxlFXf9U9aWZW8BEOWkQs3bB2LQ+
+ QMJAat2qoyRl6OldZHQJMhDmM3130EM+Ah8jYpLVD9bZUJvRTVLIK7dKlhp+Xgds5VsP
+ LIcIK1ncX7K2ECkmGD6bEVLS1maoeh2UwJjaWIZy0tIfv0qoHJqRAt5Oxgc8rXYYMJPC
+ iSQIPy0+idH35L3iGaIRV2NZHm1oAWCL+xvl2jvxUA99jJQAWz0p/GvTMUGpJnJ2wig6
+ niYN82M84NfEUNYCzi8R6LJAKs80oHA8dFMbn1Vb1wN8xQi78AeWvBwXJ+1dq70PonH1
+ 2NKw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1769453157; x=1770057957; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GRv1w/IQ5p8AnZ6XRye8hJeFq8e2rDzky0kwIQM+m44=;
+ b=aaz9LDF4B31T/2ovcUS0DmphUdqdBdsyCOMQE1vzwpyOYNA+99Ke0A4itiPJUCdcnP
+ 8op9dHSlYPgWQLYGwb7wWJN83KR2B0kQb+K+w+1x5o4Oj8w88Lvv2/CzSFbSP/E7F8Gm
+ Mj/0YkQVXxL5F90ZuDPgS04J+3+/SZqG1Rsf1TBZ/Q2s6VXAa3M/X7YvlRtfBDuLlQD1
+ rgqlGxlXLtv502gri8FNnXwoDzqnaOHe8Dnx0WXbdDBt+lAa1ifBZmqOuZ7of4URuHze
+ rUXORuG8ncw/mJN1xWwchbrRXevCgnPir2rz1Huy5AUZH06f4AqFA/JIhMg3X4QuWceD
+ 6c8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769453157; x=1770057957;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GRv1w/IQ5p8AnZ6XRye8hJeFq8e2rDzky0kwIQM+m44=;
+ b=iJxX3hzunCV+gi6DsgA8n+c+f9gkBNOOcCSa0FuBgZ9AHWeIWx2TJrtuvMjHgynfJF
+ Jy9PiFerHhTXSNGBOtt2kq0S/Ju1qxUycVfbgotzSumxgmfN1VCgUR7sMpmkC8FBez3x
+ AvqXGYP0KlVM4+VRFg+yTr0KVtOD+A8Ko4WTrK1UgMvOQ6cYwpVy/tWo7D3J0c992kaI
+ Q1vILybvVcNqzxvBF7tGiyJ0iDg+EOswEnNbd828Z/2wTr1P3KluxVY+F8t7M2+f6aa/
+ p0MBLzfQg8VXxME69iSTqMtmlGZxyGzB0qQpREJoIdHc17qowo0POX/Fsj7OdsDgltgL
+ Zoeg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtxqMq40LJinIwRZZBnZGF1hT6Ok2iX00Bk2XxrC0ZYoZp5cJm1XNyy5XMwtctZ1dTGQQH4tk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdIeM5Nscyn1ovwThroE/WhBF43zY08o2ngLFA8WavGguHbl/Z
+ N+vgxJiltobRg3qtDCRjbS1a5zodOM3Yxb1fU3VZTQMFDO2xJUfSQDpXpmXU1/sHtdNwN1vyffp
+ Zf+muhdSOvbiKfiFDKCjJZ0kR97LJtY0=
+X-Gm-Gg: AZuq6aL9/VyKIqoPwhyx/zrx2pc/yaodFzwy7DAFeiiYwnzG2waLxc6uQuxtVsCZXaf
+ shJn0jO4Ei54ekBS9Dj0hMs+TUD33gjaBsBspCTAgxPC1tkS6XQEf19TdR92AE+OrXlIQbrZfzy
+ 0nAXKa1f4ydjcV+Q/q9wHePS70KleVaTaguxO8N5cVwgrTiSx4+GprsGqH7fT/j3nZdXAF2qIk7
+ majZ3e+1Vsj0aWxU/zhetpQo7X4sAYaV9s+p21LAn1AprQQ+rGqFag5j3EROHMvSEyyx+30SuNt
+ couFT9++Adooh2cNf1jDU/5fCSM=
+X-Received: by 2002:a05:6512:32c1:b0:59d:f5a8:273 with SMTP id
+ 2adb3069b0e04-59df5a8032amr1369862e87.29.1769453156817; Mon, 26 Jan 2026
+ 10:45:56 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/5] scsi: ufs: renesas: Add reusable functions
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20260103002254.183357-1-marek.vasut+renesas@mailbox.org>
- <20260103002254.183357-5-marek.vasut+renesas@mailbox.org>
- <a99b6773-5bd4-4030-9308-59db9d4d0fbc@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <a99b6773-5bd4-4030-9308-59db9d4d0fbc@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: a3jstc8byo6yk79g8zhpuigi7r848pcb
-X-MBO-RS-ID: 2275b3952d64975a0f0
+References: <20260123-nxp-v1-1-91feb4312639@nxp.com>
+ <aab556e9-9789-41f0-a4c8-01d48c191940@mailbox.org>
+ <20260123143854.GJ3416603@bill-the-cat> <aXbLT9xwbP4bipYR@shlinux89>
+In-Reply-To: <aXbLT9xwbP4bipYR@shlinux89>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 26 Jan 2026 15:45:44 -0300
+X-Gm-Features: AZwV_Qj-tGmMO0HwwCYk7yrrXBUbZcLh__rgTx0O7yEJlb_26pOZxYwnugzE1Bg
+Message-ID: <CAOMZO5ASey_Xqs0iQt4ZvvrXm83_qp395kh-i=quvMmyU3EL4w@mail.gmail.com>
+Subject: Re: [PATCH RESEND] board: nxp: Rename board directory from
+ board/freescale to board/nxp
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Peng Fan <peng.fan@nxp.com>, alice.guo@oss.nxp.com, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,21 +120,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/5/26 4:20 PM, Neil Armstrong wrote:
+Hi Peng,
 
-Hello Neil,
+On Sun, Jan 25, 2026 at 11:03=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> wr=
+ote:
 
->> @@ -244,9 +275,7 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
->>       ufs_renesas_indirect_poll(hba, 7, 0x41, 0, BIT(7));
->>       /* end of phy setup */
->> -    ufs_renesas_write(hba, 0xf0, 0);
->> -    ufs_renesas_write(hba, 0xd0, 0x00000d00);
->> -    ufs_renesas_write(hba, 0xd4, timer_val);
->> +    ufs_renesas_init_enable_timer(hba, timer_val);
->>   }
->>   static int ufs_renesas_hce_enable_notify(struct ufs_hba *hba,
-> 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Do you plan to pick this series, or shall I take it via sh tree ?
+> Since this touches LS and i.MX both, I would like to get an Ack from Fabi=
+o.
+> Then I will send you the PR soon.
 
-Thank you !
+Personally, I'm not a big fan of changing directory names to reflect
+companies' name changes.
+
+I view it more as an unnecessary churn.
+
+In the kernel, we still use freescale/fsl in several locations.
+
+Anyway, I am not opposed to using nxp:
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
