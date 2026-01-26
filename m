@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 455B1D19503
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6024AD19501
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24B5383C6C;
+	by phobos.denx.de (Postfix) with ESMTP id 5F09C83EC0;
 	Mon, 26 Jan 2026 17:15:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MtgooJNE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W3dG3F5u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F35B283C04; Mon, 26 Jan 2026 17:15:14 +0100 (CET)
+ id 06F2F83C04; Mon, 26 Jan 2026 17:15:16 +0100 (CET)
 Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
  [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B8A483C04
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:15:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 278D083B03
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:15:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ozndrgt@gmail.com
 Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4801d1daf53so51332855e9.2
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 08:15:13 -0800 (PST)
+ 5b1f17b1804b1-47fedb7c68dso47435745e9.2
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 08:15:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769444112; x=1770048912; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1769444113; x=1770048913; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4JPsHvLYr+bBjqEZJ+jwVEuGyEzCxMTS3wLZRu6S1vk=;
- b=MtgooJNErryT6ysz0kPAhtCEqSkRuAqgMOIAziYKwuDCXzkpNFfX/IoTOoIgDSI7Nr
- 6HJ5SgjxIc44FlzLloNOYy7EjTmX2Axq9YVhiuGTgn0nYCUvYZuueLcP1mMplRg3OJBf
- O2ruqAzBXEQBZBGzFTNog2H6FTRAcGxMkD1zYtkCkP1hI1mC4HsHIo8/gjvZxrBTiB6E
- w/1BQ27E9oJO3wi9MQgBZarWsYs+7lVfJzpWISIZ3OMs9aDhVsF6QFc7xTRl+4cnSZSF
- T/p1ZulujCW0blhV/uxMnqt/6DgIJKq1/cIwcrVY5+hg0jecm1NEBwATlxbNW87VIh/z
- lJnA==
+ bh=t9fgQEwbn9RuEw6zC67PMHo7kDK4g9uwtgbcuyvtV6A=;
+ b=W3dG3F5uEEzlP5xBWXi4H+Y+Hq+/83dRuVztZqwCrdrvM41oX4hX+bg4e+LF9PZpZ8
+ rg+GDfyal/c3yR5q6Vae6lqjBjVxpJOvmB6UPBRSQRBy/Htn8UBSM1QAJ0BNj6FTOQ0G
+ 6hELpsRk0BX1b/8Txhkp7+NR27fY1Z24PKYuQ4y7y29GXxKvTTvRQAPyuHqIBG1W8l+e
+ c/+P3NSlS8giq/RS+Ri5gxxsp8pc9y8stBraL9WgdkakjTAQ27FvqRzopBnkS1Kchkwm
+ eJzfqvQJ7i9AIJTQW2HfGoclIDFypoFpmBzPVqfFoTE0wYmxSkn7oemuYjsAVjlJ0fW8
+ 2+CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769444112; x=1770048912;
+ d=1e100.net; s=20230601; t=1769444113; x=1770048913;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4JPsHvLYr+bBjqEZJ+jwVEuGyEzCxMTS3wLZRu6S1vk=;
- b=UPqDXmLXpP0yreA12O2W5dKdK/6/igULVrJTgVOrW1OOlF0I0qeF8mT9fqaT9op3V6
- GGwNq8LXCzha3eKM8m/4erFUncn3BN8Lci8gJlnckI1cPqnE2sq7XQ4gFRwvmDt6yBYY
- KPz5ufUmEMzd7AkWUmn0A9OMPXIvKaImTZjqBdKOTCTPoxjOGerlqeAhul7tIIaF2jCy
- ggzILH5Lthwx9hDf4ygXL8Ndho7xMB18kHYHToaEyaUNmOoAYbO8askcTcFQcCPVneo+
- BAC9EAfBng0CNB/3AxG7W0XlqhzvBfVzuQdZoxkCBnKKtJ070qLG1SE/bjhF0RXz3dtA
- 98GA==
-X-Gm-Message-State: AOJu0YzKFqCVMpGU+8MtDuKVu0imACNOmuk1CA75m54tVCYpkwmiZM/v
- Oy8MYw4WTE/ruG7xrIPSfLldbScdzedk6aZVxYnEQXbbKClyStyihu3lz+Z9mA==
-X-Gm-Gg: AZuq6aLT8Oh3WYKDZ4nLlrtN4hBvNHn8Eoap0+aOgCEo7LuegS0469hH/QjfAwnptyn
- /4FEpgQZzqWvLI++1J8vggPt23rVxKIjfOCnN0P5jfwTWvNiMuaKjFTjP8r6ZTQnqBOyamPoWJm
- DvpPWzg70ModfGLOZnzbQW/aebla1ITStkWlFsGVlW68a66VpfF64KLYtE6ZJFvPiddXjyLmUAp
- zuKjSs2ExSq7wfGNZiVcT966iT/qvmSDIrqj7niBSk4EIEcx80o573pBnnfL9QfEAVs73g6kFDT
- t/ubRSeSN4Ix4vmJqSSB3NKXLModcOZODONfOpupIYjVA5nne6MT/64s61YUrmVjJw/WcTpZLud
- Cr/VEn66uG3WV3GLlbsr9b/n7HHjGJZ6G0z7OLFC2eeh2d6qBPvtv1YQztFtp0VD+ORAjqSDsAm
- Tas/p3GvtUi4ISth9+ceqkOAQ=
-X-Received: by 2002:a05:600c:4693:b0:477:af07:dd1c with SMTP id
- 5b1f17b1804b1-4805d066303mr104271295e9.35.1769444112005; 
- Mon, 26 Jan 2026 08:15:12 -0800 (PST)
+ bh=t9fgQEwbn9RuEw6zC67PMHo7kDK4g9uwtgbcuyvtV6A=;
+ b=IaOKv5KOSukrvpSfVlhaN8T5+S0Nx3/cgKl8TWDqZl9iNofbJkWTSSzqg+nBbphm0X
+ GPZ05Xxu0B/rBYOCQTxlABz9sGVrs4NZZddbvv6yLlzl0MnNVrMi2wwDPlUw8JEG6Keh
+ qwtGh7+0T2elOv2ylc4wf7mCQcQaJ5dGl53+y42Dkv7eIQQD5PHt/7dFnZzltUfv/GYV
+ NMK6Sm1XYxMsCXoNy/T3Few89EgOKQa8OpcKAcZ+7ysUBr7jvIbBizeW5ElURcpxDtpN
+ I20+V6GxqQlAUu9ldBTpuh4gl2SaVVt7eU2c7ZqBoCcxr44K1gu/OEQ2XVCDdesP3g4N
+ Yf6w==
+X-Gm-Message-State: AOJu0Yx7IIAsfhLV8q8Pe/MViRsjr4OGyDLH/cu0H80T6vfitl5mYpel
+ Lq/3xX0yYv00JC1LeVppH8a+Iu9NwAzh4OvXHt5PMWqZtoTHZe5VaQzlmwY/Sw==
+X-Gm-Gg: AZuq6aLIMYh9Ha9jx1R1mzK/HFmhzk+ghNAsCy8jYgyJ69CKrVDISuLbF5TnKtQgifQ
+ jXqUi9PpWb3deah2BHWaXLXWIap0+ckP/Bybiv99gXGa6RkbdviDYDnYK5v8F5HmWdjm/MQna+a
+ frUL5xJ8jv38sD3hvPrnZgZON1PiM0rfIAEo7AU5TzE9V86b0PMQ/NL+H3vlS3ozO43iEi/enJM
+ 8eiTsp03GFhRnVzAei3P3fLjKUSDQS5V/bbETSdOi4kO7DVbEO7l9F2MbGbQLAdDhqxcfy5xOuk
+ iYxqNYPi+sQ5/YtJIEzVPbAU5aqRsHwm0eaxk2kJUsrZvS5xokxTohjZhOxsXaebPrpHqRwEhXi
+ OJmcDbGaTVMzssTbmza03fDmkTJSGg15wy5KXxmOD4Fu8+rcOcNd0BYxOkP7LGILwXgwJrNfnMt
+ Fh26auvLX7Hc+ylNJ3n/fu6CU=
+X-Received: by 2002:a05:600c:5494:b0:47e:e78a:c833 with SMTP id
+ 5b1f17b1804b1-4805d064297mr77843075e9.32.1769444113302; 
+ Mon, 26 Jan 2026 08:15:13 -0800 (PST)
 Received: from odurgut-Precision-5570..
  ([2a00:20:c361:3985:cfa:b5c2:f360:f511])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4804d5ffe12sm107368615e9.3.2026.01.26.08.15.10
+ 5b1f17b1804b1-4804d5ffe12sm107368615e9.3.2026.01.26.08.15.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 08:15:11 -0800 (PST)
+ Mon, 26 Jan 2026 08:15:12 -0800 (PST)
 From: ozndrgt@gmail.com
 To: u-boot@lists.denx.de
 Cc: linux@analog.com, malysagreg@gmail.com,
  Ozan Durgut <ozan.durgut@analog.com>
-Subject: [PATCH 1/5] configs: sc598-ezkit: enable additional commands
-Date: Mon, 26 Jan 2026 17:15:01 +0100
-Message-ID: <1f8bbe390897cd96bccd17536625e3ceecb270ce.1769439596.git.ozan.durgut@analog.com>
+Subject: [PATCH 2/5] arm: dts: sc598: add missing GPIO hogs for Rev D
+Date: Mon, 26 Jan 2026 17:15:02 +0100
+Message-ID: <3a53026951eba0ff6e0f7d2be8760feae8b48521.1769439596.git.ozan.durgut@analog.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1769439596.git.ozan.durgut@analog.com>
 References: <cover.1769439596.git.ozan.durgut@analog.com>
@@ -101,25 +101,58 @@ X-Virus-Status: Clean
 
 From: Ozan Durgut <ozan.durgut@analog.com>
 
-Enable FAT and GPT support, as well as mtd and wget commands
+Add missing GPIO hogs for UART0 enable, UART0 flow control,
+SD Card and eMMC control signals.
 
+Fixes: c9e893d ("board: adi: Add support for SC598")
 Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
 ---
- configs/sc598-som-ezkit-spl_defconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/sc598-som-revD.dtsi | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/configs/sc598-som-ezkit-spl_defconfig b/configs/sc598-som-ezkit-spl_defconfig
-index 567faadefa9..498af6d2052 100644
---- a/configs/sc598-som-ezkit-spl_defconfig
-+++ b/configs/sc598-som-ezkit-spl_defconfig
-@@ -109,3 +109,7 @@ CONFIG_USB_DWC2=y
- CONFIG_USB_STORAGE=y
- # CONFIG_SPL_CRC8 is not set
- # CONFIG_TOOLS_MKEFICAPSULE is not set
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_WGET=y
+diff --git a/arch/arm/dts/sc598-som-revD.dtsi b/arch/arm/dts/sc598-som-revD.dtsi
+index bf1ef88cb58..26e272966ff 100644
+--- a/arch/arm/dts/sc598-som-revD.dtsi
++++ b/arch/arm/dts/sc598-som-revD.dtsi
+@@ -55,6 +55,38 @@
+ 			line-name = "spi2flash-cs";
+ 			bootph-pre-ram;
+ 		};
++
++		uart0 {
++			gpio-hog;
++			gpios = <5 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "uart0-en";
++			bootph-pre-ram;
++		};
++
++		uart0-flow-en {
++			gpio-hog;
++			gpios = <6 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "uart0-flow-en";
++			bootph-pre-ram;
++		};
++
++		som-emmc {
++			gpio-hog;
++			gpios = <8 GPIO_ACTIVE_LOW>;
++			output-high;
++			line-name = "som-emmc-en";
++			bootph-pre-ram;
++		};
++
++		crr-sdcard {
++			gpio-hog;
++			gpios = <9 GPIO_ACTIVE_LOW>;
++			output-low;
++			line-name = "crr-sdcard-en";
++			bootph-pre-ram;
++		};
+ 	};
+ };
+ 
 -- 
 2.43.0
 
