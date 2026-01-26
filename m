@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F55D13C3C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 15:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 181A2D13C3C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BF1083C4B;
-	Mon, 26 Jan 2026 16:59:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C716483DB6;
+	Mon, 26 Jan 2026 16:59:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="DKhTEPnD";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jGwDjj/J";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="YOElX8d5";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CmwRYcTK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 187DB83C4B; Mon, 26 Jan 2026 16:59:52 +0100 (CET)
+ id 561ED83DDD; Mon, 26 Jan 2026 16:59:55 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCE183C04
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:59:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20F4983CEA
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:59:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 60Q95K101075287
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 15:59:48 GMT
+ 60QEr05T170916
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 15:59:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=amG9nJOgbRbtXT5XUkm5bNpZn7/Pj2E7jlE
- Q9dfpJXg=; b=DKhTEPnDCtpTyelH+CPrAo0KFaBY0uiYcfj+LEUdmemkd+55bgQ
- xIRvu9C05e9qhKcvBgaqS7EhpIXBQIJAicLiBUr+S2n+eNZukAMz7uucW9ZhyVLe
- NbqghO+4OQ/X/u3WBJfZ29d57K9bjezGlEBebF7lufRx4UqWQ33iVVqSaUs0stpO
- rX29BFXYbie9zbnY9mRMQIAee4QDjDwGdz9wQobpjYO6wxnlWuNukZlhlLPwj4nP
- 4k2ydUAKJVnsihDaSe45LRmBfe4oM/IAZU74o34reM/SwwLbQFZXrhCR+BsC6Im0
- 0SbPhiCWj4oIUS17g+h/SwY1ALrxW25kWTQ==
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=88ZRcFWEjU7
+ GAijgqs6gguWeFMOjZ8mDyjSpg1LVvnQ=; b=YOElX8d5Ej9e5Jgk3BdCsbf/789
+ VgdalNak8cz16Rwt+WS1VuUCiYyD7QsqOo4ntS8ncEXtWEY2uusCaU52oefgOkbF
+ bdk7LSujKwvRIL9xYOKqoeRSkH0PXWrQ2xudbab5i/qYYsU7G0Pt2eTUdubNZtdx
+ XRkOH4Fw9h0xYKu0NcGbdQ8orl0q/oavjHZXhtt6mCc9QS87ASefecJS9JVSTxVx
+ GaB/1/fZ7/AXkVFpzQwic6ejw/3mW3ZYkvDkAt1g53ThV8861O4dP+qdCXHJig/O
+ ZRHy+7c/ae/jGMzzHpSMAgRjksYVqz9+eYcdzhOXQUKCrCITtB5JsnIKAQg==
 Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
  [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bvq9f51aa-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bxadpr661-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 15:59:47 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 15:59:51 +0000 (GMT)
 Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2a78c094ad6so44184765ad.1
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 07:59:47 -0800 (PST)
+ d9443c01a7336-2a351686c17so40406985ad.0
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 07:59:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1769443187; x=1770047987; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=amG9nJOgbRbtXT5XUkm5bNpZn7/Pj2E7jlEQ9dfpJXg=;
- b=jGwDjj/Jl5MBmhk0wCD/pOUSdUv8mOgH9v3Wv+jglbhdBWAQA0f+cxFPmqJS6yx3Eg
- WdFjVwEZL+vtsX2nj36+oMHtqqHhEpF+Bo7rseODxLSxt4ouoFzfZ4/3NJPkbKfxYkP/
- iezni69DjYnpCOYvLbVDkoE+iRm4tLI0O+ThPTR2e0nhUICPSUy2RyRhaunNWglUjisz
- I29Z5Z2IHLZs6PKun6KM2rCaL6adP4Q/KZTVUOtvVaCEOHK0NMi2RxxebPde/AR1lzlr
- ugac/zmIkFGt9yju43AtKBVZ+te9Uey4siwjLkuBEz0Hw12UQ9DnfqqUiZ52/3k1Xw27
- fTYg==
+ d=oss.qualcomm.com; s=google; t=1769443191; x=1770047991; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=88ZRcFWEjU7GAijgqs6gguWeFMOjZ8mDyjSpg1LVvnQ=;
+ b=CmwRYcTK2BdOEQoJnYpMmLOvbRFKNhMG279fcckijITK8INatUL3u2On0EiriNqJXy
+ A598TnkrHAJs+C2iexTRdJHWeb6JT5zdBU29Ls8e8lVra17PZWrgBFWz8ftw3mn4G8HW
+ GnIIdwFg0tclO1iQlnXkcmdhvlOCjSs2dXBNLa69Nh4v6TSdh3UXk1F/qbHGdOUX7puq
+ fGDI9oMssMajxyncZbNVlU+HNUpMRq51uTx8ttw6pTN7LIubNFNmavvzXLxIhY9zScGn
+ czAfrFNV8pQFuFOr8WxH+usOi6KOio9kwHjcdiFvEjl7CRj+O8RDOtQMtPLJ9DTwx0Pl
+ ISjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769443187; x=1770047987;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=amG9nJOgbRbtXT5XUkm5bNpZn7/Pj2E7jlEQ9dfpJXg=;
- b=CgF/eBr0oCMjaT8EthB8AQzN0TMFpU1aRMX6kjWseFXavC4261IippTNjYLLyP8uHa
- gg0MMolPg+CCuQjjiGrqKwPwT2u4DPOxbBqvniG1Tvoh2cTtqMhpnmJcj1F5mw9J/nn3
- qJ+X9rSlXYNT1O++RO6s6mTw52w4+oiBmvsiVDiP9wcyu2jzJQ6vAalQXV+K3iXYiKmI
- WmYUVEo9jLapyf8l1V8G4s7ZgJuNitq3LTbbIu+a14rCl4Sztb2zsU4UMA4GVTiq7LAu
- sOJnTNp+2msgTesCzrRd+oS+tKU8+Tq1PQZU3hyW3Z1KhD7YpibDXGM1/0WmXYdHznnG
- j7aw==
+ d=1e100.net; s=20230601; t=1769443191; x=1770047991;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=88ZRcFWEjU7GAijgqs6gguWeFMOjZ8mDyjSpg1LVvnQ=;
+ b=f8rlq6dw32TS+WJVD9htBRpPpHTBT1+iqJ0Wrg3fcN7idOxZ3Ie6Civ5a83xdEVx5+
+ 4LWpsNyIa1WuRxxI7zwEhTaDZSAwGyC2JDc9qNpN+F2CvLFRSPhT7c5qEBxCNLS5Oel+
+ kSlUatddAjGysad3kNo4QMhcNcXRobdSi7whDqZmO5u0ARCDWARz+CXIdN8XBimGqbfl
+ eFH6127iBBNN851iiAXfsmOPA/8HCn9589CqNs+bhcldVBPKIIqDQovC/1mpxpRaq9BZ
+ LK2oPTX9zkK/d80k1uMQqamXeTzb5/M7TB2Jui2HYdQL3qbgYQ4uBnmn3dMzwBf1QFh4
+ Ye+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXS1wh4JzDzHJ8ynO9KF87TR2UGtTOBwadaIizfi0O3vjSOfVO6Qg1YSMXVTJjtiJTgIjduwO0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcdvGUtl0OmGVFg2K8NImz1b5Zb29/0afUWeajX1Gz/NgHgC6q
- KrsJ+0xhgB17i8JTSBjlxFCuwCYyXzC84LKQyzvIYW+9ld/Ej7R/g1ZTw3ZmS8BKitSJ7UkVf9q
- oBNbU/TmQmI8mNpVZP3u81eHidJJG30NpgjllUT1wkl6WunQqSyLPFi6j
-X-Gm-Gg: AZuq6aKhDKzsDboTuIp1ea1+MnvXjYpjIoGChe6sUqwkN5eHp3pcSRdHYU/Td96647f
- Unx3rbfGVl9QJ4mpkOhGH5726nnLDYMQ5QmENYs/7ySXai/dHrejZl2bLLGmCTjD3vUfKfO0VAF
- 50rxKWHoNctqlj9d4n2IxgbZMFHF1Jrx9+SW79yLTAPHGnZWPPSGMQ4aHkfzN0NgHYvt0m/LaFZ
- bjK7gnQ18wdf6XGfyqMmeCteCrdg/0aI407IZfTpInMgKE0z0PsNMDjRI04m17BAYN9TDE0uqQU
- zRvLuEqnrgCGZE0gvWm74CKByw70sRtV4VwBalgOKNXfPDduSWZqlarLkpp1kqrrNB/XJN7Kp2k
- KUNHK3OftM5ACSXAD69BBD8GKZO42H4pCDhcNIm/04U8F1v08GObb0kEwTrJQWShAHaPNnIbD6k
- q0JYnV8Z3SCgHCnfeFK54IAMSKrWLlIA87P0XKiQ==
-X-Received: by 2002:a17:903:2305:b0:2a5:8e98:1b44 with SMTP id
- d9443c01a7336-2a8452b5e41mr49652495ad.31.1769443186405; 
- Mon, 26 Jan 2026 07:59:46 -0800 (PST)
-X-Received: by 2002:a17:903:2305:b0:2a5:8e98:1b44 with SMTP id
- d9443c01a7336-2a8452b5e41mr49652155ad.31.1769443185880; 
- Mon, 26 Jan 2026 07:59:45 -0800 (PST)
+ AJvYcCUP4gldEU3WzCuIUac2UGbQnN1/TIsnjp+n5kaDwkq4bk0vpSxhseXES18V1gCQtzfyCFxVBxY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/Iimt7XhRJAQGdAD0TDTGQ8NW7VB0aKqNWkRMKNXPltNvcbbd
+ T/USsnEIrnaRwsiinGha6kYVjqLnKNvfN/aDPuwYxesZ1CfLfhTzloScphKSv8eEcn99AD4XmyN
+ D4Nq4mfr4kxgqmHL9kxruu2Y6/jBpXiPpei23mHl0h8TW4Tj30VbKnRs2
+X-Gm-Gg: AZuq6aK4HxJ9lhUpPCyPiJbqCBHZsmj7oHL6LVtvUHwRHp1u7w7naGYXVkEw8eYOAz5
+ +7oemJ5z3TBW0tq828UZnfcnxX4bW3DZ6Pm9y0a65XXMRxiRJZHSU4P7Hq9bcqxWaw5485tKIa1
+ DHh+HE4kuRSDlwmeq6TKWzQW6OJixOf9AYG9iepIOHSroJH5G1ALYLYd/hMltaBdQENKGpTB+Ll
+ OMWbTchb1QM8rEMQ00UtPjj8no4ATfHqyMBDAS/cfZeYyBDSYDc0u4Wsm9NL4Z8gfuvtmg7EW0f
+ dvXc1wuY9s7Mn/GgAvqbfEH6BW1XOtLFFZIESZi99w2QFh9IQLp7VP+cGUKWU8mu/ZT7dTwRg04
+ QtiFjtzUI5emYP/WPCwTRckQj7VL6zE0jJisGcl3xAEWIy4Vxf6xO7E/wk8d5I9NkLCiOeBgJn/
+ intNr+kuHCMbA/u5zA3wUGjZ/X/lKJqwNijMGquw==
+X-Received: by 2002:a17:902:f64b:b0:299:e215:f62d with SMTP id
+ d9443c01a7336-2a845226363mr50243785ad.5.1769443190649; 
+ Mon, 26 Jan 2026 07:59:50 -0800 (PST)
+X-Received: by 2002:a17:902:f64b:b0:299:e215:f62d with SMTP id
+ d9443c01a7336-2a845226363mr50243565ad.5.1769443190149; 
+ Mon, 26 Jan 2026 07:59:50 -0800 (PST)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a802fd929asm93245505ad.90.2026.01.26.07.59.41
+ d9443c01a7336-2a802fd929asm93245505ad.90.2026.01.26.07.59.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 07:59:45 -0800 (PST)
+ Mon, 26 Jan 2026 07:59:49 -0800 (PST)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, lukma@denx.de, aswin.murugan@oss.qualcomm.com,
@@ -103,32 +103,35 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  luca.weiss@fairphone.com, jorge.ramirez@oss.qualcomm.com,
  stephan.gerhold@linaro.org, quic_varada@quicinc.com,
  u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1 0/3] Enable eMMC/SDCC support for QCS615 platform
-Date: Mon, 26 Jan 2026 21:29:35 +0530
-Message-Id: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v1 1/3] clk: qcom: Add QCS615 SDCC clock support and RPMH-CLK
+ compatibility
+Date: Mon, 26 Jan 2026 21:29:36 +0530
+Message-Id: <20260126155938.2717540-2-balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=YLGSCBGx c=1 sm=1 tr=0 ts=69778f73 cx=c_pps
+X-Proofpoint-ORIG-GUID: -x2I3NfpXnll6aoLLqJq6_uLUZk4yKnu
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI2MDEzNiBTYWx0ZWRfX9Hjy90s8v8B2
+ EXu8IiWYKLhWUwCxu5tb/8ztcuySR3jEl62jiOXEAJ/rYiZKOpWg8XKPAkuCBCpK3dfI9DKEcmq
+ fbkQUD1tMr8Id57b6KFn5GJ0yz8nbNTDM1946yJr0sniQmfPXxhs7VsgD+ZhmshvIeHW2XVatUu
+ sbHj9CmOVao7fgG4+g6ek06i5KAnHuB1YY8L1no2X2OTWJhHN+ZhqQYnm1SW2AIOgQVPVLpHcmu
+ qpYtvSf6Tz4L9rYqZjUk5XwHrKPYJxCqrgeXkHk0bmTgiy2NLzlGlcenMIdumQVydAblqsfJfuM
+ d9ZVv9UAK8DQGGuxfgMWF12TFmMrlNdA+sim/ruk8O3GsEPuZBf0gsEUEJ2S1Iq7S+K2pZc0SYX
+ j6iVHJ57VJy4aulcdRGYt1feyIUlPMe9YVJrP9pEkUnRnP+PbmOS37S8J5LSwG97CSNNRt8UBXt
+ 2mzNWWZygru/RCjnSbA==
+X-Authority-Analysis: v=2.4 cv=GvdPO01C c=1 sm=1 tr=0 ts=69778f77 cx=c_pps
  a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=ESlZkW5zvKLu4ixrP44A:9 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: _5CRV24a5ISVx3pgvFX1OyzLXZf5LFTG
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI2MDEzNiBTYWx0ZWRfX2xsZTLQIBuMI
- p1YlORSxn+2rdr3au8t/PVq2/zCChDcasKUYXUwknC6hK6EfmK41XX3jG/bquIfcmC4P3eC5XeG
- O2+7frV1VITu9F57T2O5ygeet9KWGOLlIp99WmdO2KFKUoBbe8rhd8XpaU7a5lN1atjAXGXAtaT
- 6ktZqyH9hD3E/EcNFrPR37j73zh+7EiHvLlCmChpDZXvdRqgnfwh5P/mHpP2CbZgRonH+dIKwDc
- 6VDhz7oGfdg04CNttq5KlP4//vJVoB60TDUfuyHB+qLSJZdgzXEv90AjtAR3VH7q77xiAyfsALm
- TgUDAhrST/wi+/wV7kZ/R4EoEjaK2EvGA1Rqy1u10Vd1gfW4pcMxQ6d0kNaKD+vaVdBvzHZFx8C
- /Z4TBVHcqM335z3yX+vBqkktRm7OYby7c7feVr5Sxj+o9p4XRUDxLgtD0bWP5yvTjueV4xDu9QC
- ABRcNPaBtGfigYdgcKA==
-X-Proofpoint-ORIG-GUID: _5CRV24a5ISVx3pgvFX1OyzLXZf5LFTG
+ a=EUspDBNiAAAA:8 a=NtDLkoeqyif-_yi8tQ8A:9 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-GUID: -x2I3NfpXnll6aoLLqJq6_uLUZk4yKnu
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
  definitions=2026-01-26_03,2026-01-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 lowpriorityscore=0
- clxscore=1015 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
+ suspectscore=0 priorityscore=1501 malwarescore=0 spamscore=0 phishscore=0
+ lowpriorityscore=0 clxscore=1015 bulkscore=0 impostorscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601260136
 X-BeenThere: u-boot@lists.denx.de
@@ -147,22 +150,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables eMMC functionality on QCS615 platform by adding
-the necessary clock infrastructure, removing conflicting device tree
-fixups, and updating the boot environment to work reliably with eMMC
-storage.
+Add SDCC (SD Card Controller) clock support for QCS615 platform to
+enable eMMC functionality. This includes adding SDCC1 and SDCC2 clock
+gates, implementing SDCC1 apps clock rate configuration
+and adding QCS615 RPMH clock compatibility to the stub
+driver to handle device tree clock controller references.
 
-Balaji Selvanathan (3):
-  clk: qcom: Add QCS615 SDCC clock support and RPMH-CLK compatibility
-  arm: snapdragon: Remove QCS615 MMC node disable fixup
-  board: qualcomm: Remove SCSI scan from default preboot environment
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ drivers/clk/clk-stub.c          |  2 +-
+ drivers/clk/qcom/clock-qcom.h   |  1 +
+ drivers/clk/qcom/clock-qcs615.c | 10 ++++++++++
+ 3 files changed, 12 insertions(+), 1 deletion(-)
 
- arch/arm/mach-snapdragon/of_fixup.c | 14 --------------
- board/qualcomm/default.env          |  2 +-
- drivers/clk/clk-stub.c              |  2 +-
- drivers/clk/qcom/clock-qcom.h       |  1 +
- drivers/clk/qcom/clock-qcs615.c     | 10 ++++++++++
- 5 files changed, 13 insertions(+), 16 deletions(-)
-
+diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+index 117266ac778..1bc749e47b3 100644
+--- a/drivers/clk/clk-stub.c
++++ b/drivers/clk/clk-stub.c
+@@ -50,6 +50,7 @@ static struct clk_ops stub_clk_ops = {
+ 
+ static const struct udevice_id stub_clk_ids[] = {
+ 	{ .compatible = "qcom,rpmcc" },
++	{ .compatible = "qcom,qcs615-rpmh-clk" },
+ 	{ .compatible = "qcom,sdm670-rpmh-clk" },
+ 	{ .compatible = "qcom,sdm845-rpmh-clk" },
+ 	{ .compatible = "qcom,sc7180-rpmh-clk" },
+@@ -69,4 +70,3 @@ U_BOOT_DRIVER(clk_stub) = {
+ 	.of_match = stub_clk_ids,
+ 	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+-
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index 3a4550d8536..bc7e0453cba 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -14,6 +14,7 @@
+ #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
+ #define CFG_CLK_SRC_GPLL2 (2 << 8)
+ #define CFG_CLK_SRC_GPLL2_MAIN (2 << 8)
++#define CFG_CLK_SRC_GPLL6_OUT_MAIN (2 << 8)
+ #define CFG_CLK_SRC_GPLL9 (2 << 8)
+ #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
+ #define CFG_CLK_SRC_GPLL6 (4 << 8)
+diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+index 4700baba8c9..483642531ef 100644
+--- a/drivers/clk/qcom/clock-qcs615.c
++++ b/drivers/clk/qcom/clock-qcs615.c
+@@ -18,6 +18,7 @@
+ #define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0xf034
+ #define USB30_PRIM_MASTER_CLK_CMD_RCGR		0xf01c
+ #define USB3_PRIM_PHY_AUX_CMD_RCGR		0xf060
++#define SDCC1_APPS_CLK_CMD_RCGR			0x12028
+ 
+ #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
+ #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
+@@ -52,6 +53,10 @@ static ulong qcs615_set_rate(struct clk *clk, ulong rate)
+ 				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
+ 		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
+ 		return rate;
++	case GCC_SDCC1_APPS_CLK:
++		clk_rcg_set_rate(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
++				 1, CFG_CLK_SRC_GPLL6_OUT_MAIN);
++		return rate;
+ 	default:
+ 		return 0;
+ 	}
+@@ -66,6 +71,11 @@ static const struct gate_clk qcs615_clks[] = {
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
++	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x12008, BIT(0)),
++	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x12004, BIT(0)),
++	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK, 0x1200c, BIT(0)),
++	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
++	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
 -- 
 2.34.1
+
