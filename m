@@ -4,94 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3984DC88E49
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 05:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC458C88E42
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 05:15:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A2BD83E70;
-	Mon, 26 Jan 2026 06:15:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8011583E7F;
+	Mon, 26 Jan 2026 06:15:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f986hunw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m+npL+VK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B31483E76; Mon, 26 Jan 2026 06:15:43 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 330D883E85; Mon, 26 Jan 2026 06:15:50 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E998C83DDD
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 06:15:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DC7483DDD
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 06:15:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b883c8dfb00so876552166b.1
- for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 21:15:40 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769404540; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b8849dc12f6so603306066b.1
+ for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 21:15:48 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769404547; cv=none;
  d=google.com; s=arc-20240605;
- b=LsmS8g/lIw+mArQi+CzGlEUEs57fqRvJzonVzeT7AS0TfN6uONhgfdLkCYizbolx8a
- qPKHfr++FxOKGQGOOh1zO5BpUbxhsYvY5UwctbRnzukghedG7DOisDCEYLkVMQYFycNx
- sIVpbXcK2CyGZKJkLuNmxq5PQVucPUA2V8U2NNjJMX9vZaUVdrcEEAfBqQh5JBYChCj4
- 9RXH8JpGNnCAZVOLZNINCZ40Wf+cbAivnHBIGiA2zdsMVuftRT9yvU8u6ePasbMkaaQH
- sDGYxjeTkQ20u/K/BlnsaTKM8oA1++9V1L7MDzBzXA9j6x/i6C97emjaBcAk8B0vkRex
- 3Qzg==
+ b=eEpsVZaEvDc4aVaJn3cMZyg1jHMHIYUKAKgVm0WsmLt1XJ75E8zdd8JxsKSWEOf8rb
+ Kl5ecBKZdCJJHXSysQRzFMCgn5KVBOR/Ns9xCaTISY2kKpR6T3E9VjmlvNjkEYpVcTHe
+ U8ZJJfdRXqio26XFZxbmXcOpxqe+xz+KVgXNRQh3AGhafr/kBzmJwjZclNdk6lIq+uVq
+ 6WlVqiOD9y6qJC3hCJptb9gfAcr0qA/kdaG+h3fMazgYnvTSyrTS0m4caWsueuZbBvW+
+ lutJipocjeHcocxKSCAVtaO5EGhV1kmHjM1TCjiNNlP806Brb8X75So+sZsz6HpkZyrr
+ YeZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=pS7hCuc93ierMToitj4BbfI7Lufh6i8Xhu6imFwuCQc=;
- fh=8yBEU56r5NKo9EN8x6ltPeR/oM/L5gjHYW/GwqzAZkQ=;
- b=buZADhVRhJPjlhVlhmspja+B9vfWGs8ywx4VlMcYw9N6Ao32MXY9Y1z0waB+TnfrYt
- VD8YhWSNVMEUTPsIIOLk178UD0jhQ/K11NDShsRosu+xio6NJDUE1QymR55hSFfYXuHm
- CSwBZSihNC2zuYiBSonpIK+ZaGC+VYNIIwsZ59Ykzc2px+Y9cmOilfAMxNYe9IZhyho4
- f95ucpSKnS/VE7D0F0J4p1ZJnaU42yFltmkHi/lPhQNzn6ilWtjH38JF4horwvN1j+ng
- rFWiCog8MdZzZjeV92Nq0Rqbsr4sMBEzVW8jAp3rJ4+0zhM9xyj0gY9YP9tqh6zNx5CQ
- pfiQ==; darn=lists.denx.de
+ bh=wXvmmb47Hv6SPtVnnPrfvERiX05lzhwnsQHvXZ5UEq4=;
+ fh=+Tm2ihy32xHl4i1ac8BgsK0NEOzhsfMuZ6NphDyPiVo=;
+ b=Oc75BuxVyjbyIwtHTFBhkXyW9JXoOXQWLCCzMi16bcD0h7bc7M995C1zEJcszWKD3N
+ /DcvCM2FUIzdwcR0rXxp1K8t3hutoOED8FhYku11eEJyE1gMveSPASabGGpAKnOEvzHS
+ w5JJEN4B7vGGNivH6X0rK5qZhWoRn66daBrddkf3/xZXPpHza+D8D3E4EOIPRdBBgaro
+ PNaeSZ6fSZDmD4XsQj8Mf21ikMOFiVqYVDu5fRTwIzmoTdO/9v5pmeIdS1NOAFdEQIjX
+ xw+81CVAR1QBnm1OruqNsDeRQXdlE0G+bjctC9yAPF6WBug6rMAOeRe5fRB7i7hXNs6t
+ fikQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1769404540; x=1770009340; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1769404547; x=1770009347; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pS7hCuc93ierMToitj4BbfI7Lufh6i8Xhu6imFwuCQc=;
- b=f986hunwBLb8eoZCiCPR6kjBMoqMHMeyjlJfLOLF4tlzg3yuduD0huZhFZnjJ3eFud
- QUCdPlieL6lu6FmBgzo/qR2emaoRgMGtkWlLELQjLuR2C3Mz+iZP4AbFrBYEOfrvkFrd
- E7NgY6QF9x86qwBgjXGrrRLJJ97fN4+u+TfQI=
+ bh=wXvmmb47Hv6SPtVnnPrfvERiX05lzhwnsQHvXZ5UEq4=;
+ b=m+npL+VKuYVLqZeZ/PQKr2eX/ePITm6mO7HQ3SsqPBHMCzHs6xwKAyiejD74x8kdRf
+ FLRSexYCWQryAFTOk1vTmzDMZELBaFNEZqqo5xr/eWmZeLYaDpblvQOkQvZwbT7+c2AX
+ ArhKs3Z8QltdrZHwD5zdBcz4d+jBU+2yvla/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769404540; x=1770009340;
+ d=1e100.net; s=20230601; t=1769404547; x=1770009347;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pS7hCuc93ierMToitj4BbfI7Lufh6i8Xhu6imFwuCQc=;
- b=oJAc0HJFDQAbP7yv/uawuEkxvQMjSWD16Ea/mT3I/3SL1sAme1VQZkye0q7UKwUyfu
- QzlfM6uRcYOUuCbTD43m5+8x9StQ9s4GPY5Q0IWhk0U78lc7is0rg+iWLMrbkd6pmAuN
- VIFlt0k6T/RehY8oERBTjXzyzGVos66+6PyfdYfsHd63d+NwnfDn/9+WILxwCD6Wbriy
- BKeZQoTZMM7CRhPBnsEhyGv7dWDZc1RnSbo9P/UE1cTt9cHtHxNZNakSiM7jvY9ZAmWe
- LEVmHXWAHYCxY69efB/x15UrnYcZBOoubQaNBkTn4mkz+OfsLcIoVgKfIsXKgjWa7oGe
- ONOg==
+ bh=wXvmmb47Hv6SPtVnnPrfvERiX05lzhwnsQHvXZ5UEq4=;
+ b=iHvbctp81yZZ6rlvrACRWxYPLzgOBkscnTQb5lGq1bwUPkO4qGPhZw0RLgO1k1Z+C8
+ 1W97KibNc509CEsd1MSoj6jOkj4JJatAPbO9MoPBmBBKA5HnKZpsFDZGyQwFxOxSX5KZ
+ Z0pEX/D2HtGvTloSnagxnt/mC94FKpsIK1dubHlEAP8euavVwhTpK1qkSGnzTDz3zHoX
+ BwL+9sSiCIIkkyoO5MHtZZroz+LG5mUhiRi9oFwAi6h5uNW4H+MKrPEk8OZXbnL1zC+7
+ V8r50jDGC6p7dNGEQnYuTHuEFy7btojruHoHO5KoOw8M/kRGgHdvKL9cD0x2msfVte/D
+ +o0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaoc6zmWO4pKtLeRqemLlZo2AXj8ihmFhHLXktuIlvwWAhvT7A08CcHV8rR7dXBOlKvli6PdI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5TRqKuHVav+Dk/68FIFWLCgac8pc8Vj7UmRq2AQxt2Sla8Ys0
- OInnX/IIugcSn+S3HQRZ91cnu34IkcPkwWGSQr/hmQLkqqR3J8sFmLptBeK0mWBpiJM58bqtGLC
- fBTfj2pHfgO6ZrazHE9hlc/ehYdqQq3Qz5oetBESonGYCPn2kcuct2A==
-X-Gm-Gg: AZuq6aLz54k0dSNz9diOLhWHO418+T+sKQk+oIVvse3SrccT1mNchOrnQR3R/am6wGP
- 6UeLfgGbOOkVKsuP/S4bUCNzdteT1LnnDM1AMlHvKt4gIxoOyQrwZRXzY7IXBQJ9XxaL7PyF/tq
- fqf6/kiEhBlVX1hAsC3UcxC30DJTG2D9ece0MZE2FebouKgzciQ2tMoD5qPDDDrzPWwIZ6+fUwp
- GJmk2mZYDpomVJisYtwtVH21WYym+ncFHt+HWhDID8y+SF2Tc7hVWIAtmbko3ddNcIC0Bs1Yg==
-X-Received: by 2002:a17:907:9804:b0:b88:6dd4:9ca0 with SMTP id
- a640c23a62f3a-b8d2e88cbbemr230871166b.64.1769404540301; Sun, 25 Jan 2026
- 21:15:40 -0800 (PST)
+ AJvYcCWeKWH/rQ1oayBNo4va3PXiKCsN94r1b9cujl+ESVV3nE3y2gGCehvAQu+kb4W2LBMxOWzNq10=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBzTlDmdYt/2RJKQEhY0sNceheo/yfBKMazxZqwNXYAxXjGqcH
+ jptADd36ghj+FquwXPQ6OxcQIjj1wZRMetNnnP3i1HcZ6IEJ2tFaHpqOM53jhkYzfn/DPn064GJ
+ kDzE5m58ezpRlqCql0EDz7bVboZC+UPBzRIZMptT/
+X-Gm-Gg: AZuq6aJUTqMkNOmssIr9mSN7mC4sR4HEKF9Twvyzt1pAKU676DDToI7n/MFXE6KB6HI
+ VoTCDOVdBosOd9SV72eoqdHGh9xh6f0sRljltXQh8zn/Dt+FaU3cz7sSTQVLihkvA8wmVXpMxXh
+ AQLzOIT4VVYnvu4yT2bybV6hees1vFjA34VwtrO8elGeT37Ct2zdw+tAl8bYIvVggiIwhBF8zKQ
+ Pp5lSfbdUO7gqCesUQFCxyZahW+iNWPva77o0KwnsjOVE1BKsKOmIRHl4RnRVUsb8MRVtHU2iQ3
+ 4A6T0cAj
+X-Received: by 2002:a17:907:702:b0:b77:1b05:a081 with SMTP id
+ a640c23a62f3a-b8d20d405f0mr220618166b.27.1769404547497; Sun, 25 Jan 2026
+ 21:15:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20260122172057.3212673-1-jonas@kwiboo.se>
-In-Reply-To: <20260122172057.3212673-1-jonas@kwiboo.se>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 26 Jan 2026 18:15:27 +1300
-X-Gm-Features: AZwV_QgFJGd97MfrEGqea1QWaOUtbh9619LgwQL-xEfxAgNvqkyNL7CJeydRIvY
-Message-ID: <CAFLszTiZ_gaRnYmmDFgUNVRRaSCRe+-FUDvtit4aeq2v_QOHpw@mail.gmail.com>
-Subject: Re: [PATCH v2] armv8: u-boot-spl.lds: Place binman symbols at end of
- binary
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 26 Jan 2026 18:15:34 +1300
+X-Gm-Features: AZwV_Qjzf4QFven2HhAF7k_sywLcXxWO5M4b3t65DuCK6h0107oQW98ASEwsM5s
+Message-ID: <CAFLszThUMWgySrb4H2F5PE6XVsRK0Cc+PZ37f_3xZ12HEhM=3g@mail.gmail.com>
+Subject: Re: [PATCH v6 2/5] drivers: sysreset: Add sysreset op that can take
+ arguments
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, 
+ ilias.apalodimas@linaro.org, me@samcday.com, aswin.murugan@oss.qualcomm.com, 
+ clamor95@gmail.com, michal.simek@amd.com, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io, Sumit Garg <sumit.garg@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,46 +116,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 23 Jan 2026 at 06:21, Jonas Karlman <jonas@kwiboo.se> wrote:
+Hi,
+
+On Wed, 21 Jan 2026 at 19:39, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
 >
-> It can be useful in xPL to access symbols from binman, such as the
-> offset/position and size of a binman entry.
+> Add a 'request_arg' op to struct sysreset_ops to enable sysreset drivers
+> to receive arguments given to the 'reset' command. Process the
+> request_arg() op before the usual request() op.
 >
-> Place these binman symbols together at the end of the xPL binary for
-> ARMv8, similar to ARM and RISC-V.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
-> v2: Rebase on master after "arm: Update linker scripts to ensure
->     appended device tree is aligned".
+> v6: Wrap this functionality inside CONFIG_SYSRESET_CMD_RESET_ARGS
 > ---
->  arch/arm/cpu/armv8/u-boot-spl.lds | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  drivers/sysreset/Kconfig           |  8 +++++++
+>  drivers/sysreset/sysreset-uclass.c | 37 ++++++++++++++++++++++++++++++
+>  include/sysreset.h                 | 18 +++++++++++++++
+>  3 files changed, 63 insertions(+)
 >
-
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-
-
-
-> diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-> index d9963846c4f4..b732133ce76d 100644
-> --- a/arch/arm/cpu/armv8/u-boot-spl.lds
-> +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-> @@ -55,6 +55,14 @@ SECTIONS
->                 . = ALIGN(8);
->         } >.sram
+> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> index 0181f6cd581..6fb0ca81dc6 100644
+> --- a/drivers/sysreset/Kconfig
+> +++ b/drivers/sysreset/Kconfig
+> @@ -49,6 +49,14 @@ config SYSRESET_CMD_RESET
+>         help
+>           Enable sysreset implementation of the reset command.
 >
-> +       .binman_sym_table : {
-> +               . = ALIGN(8);
-> +               __binman_sym_start = .;
-> +               KEEP(*(SORT(.binman_sym*)));
-> +               __binman_sym_end = .;
-> +               . = ALIGN(8);
-> +       } > .sram
+> +config SYSRESET_CMD_RESET_ARGS
+> +       bool "Enable reset command to take arguments"
+> +       help
+> +         Pass on the arguments received by the 'reset' command to the
+> +         sysreset driver(s). The sysreset driver(s) may make use of the
+> +         additional arguments for implementing arch/board specific
+> +         functionality.
 > +
->         __image_copy_end = .;
->         _end = .;
->         _image_binary_end = .;
+
+I haven't been following this, but what sort of args are you planning to pass?
+
+Regards,
+Simon
+
+
+>  if CMD_POWEROFF
+>
+>  config SYSRESET_CMD_POWEROFF
+> diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+> index 536ac727142..f25e09e9cd0 100644
+> --- a/drivers/sysreset/sysreset-uclass.c
+> +++ b/drivers/sysreset/sysreset-uclass.c
+> @@ -32,6 +32,18 @@ int sysreset_request(struct udevice *dev, enum sysreset_t type)
+>         return ops->request(dev, type);
+>  }
+>
+> +#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> +int sysreset_request_arg(struct udevice *dev, int argc, char * const argv[])
+> +{
+> +       struct sysreset_ops *ops = sysreset_get_ops(dev);
+> +
+> +       if (!ops->request_arg)
+> +               return -ENOSYS;
+> +
+> +       return ops->request_arg(dev, argc, argv);
+> +}
+> +#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
+> +
+>  int sysreset_get_status(struct udevice *dev, char *buf, int size)
+>  {
+>         struct sysreset_ops *ops = sysreset_get_ops(dev);
+> @@ -71,6 +83,26 @@ int sysreset_walk(enum sysreset_t type)
+>         return ret;
+>  }
+>
+> +#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> +int sysreset_walk_arg(int argc, char * const argv[])
+> +{
+> +       struct udevice *dev;
+> +       int ret = -ENOSYS;
+> +
+> +       while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
+> +               for (uclass_first_device(UCLASS_SYSRESET, &dev);
+> +                    dev;
+> +                    uclass_next_device(&dev)) {
+> +                       ret = sysreset_request_arg(dev, argc, argv);
+> +                       if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
+> +                               break;
+> +               }
+> +       }
+> +
+> +       return ret;
+> +}
+> +#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
+> +
+>  int sysreset_get_last_walk(void)
+>  {
+>         struct udevice *dev;
+> @@ -132,6 +164,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>         printf("resetting ...\n");
+>         mdelay(100);
+>
+> +#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> +       if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
+> +               return 0;
+> +#endif
+> +
+>         sysreset_walk_halt(reset_type);
+>
+>         return 0;
+> diff --git a/include/sysreset.h b/include/sysreset.h
+> index ff20abdeed3..d1cc9ebc542 100644
+> --- a/include/sysreset.h
+> +++ b/include/sysreset.h
+> @@ -43,6 +43,24 @@ struct sysreset_ops {
+>          * (in which case this method will not actually return)
+>          */
+>         int (*request)(struct udevice *dev, enum sysreset_t type);
+> +
+> +       /**
+> +        * @request_arg: Reset handler implementations that might need to process
+> +        *               arguments given to the 'reset' command.
+> +        *
+> +        * Note that this function may return before the reset takes effect.
+> +        *
+> +        * @dev:        Device to be used for system reset
+> +        * @argc:       No. of items in @argv
+> +        * @argv:       Arguments given to 'reset' command
+> +        * Return:
+> +        * -EINPROGRESS         if the reset has started and will complete soon
+> +        * -EPROTONOSUPPORT     if not supported by this device
+> +        * 0                    if the reset has already happened
+> +        * (in which case this method will not actually return)
+> +        */
+> +       int (*request_arg)(struct udevice *dev, int argc, char * const argv[]);
+> +
+>         /**
+>          * @get_status: get printable reset status information
+>          *
 > --
-> 2.52.0
+> 2.34.1
 >
