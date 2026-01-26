@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6024AD19501
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37AAFD19503
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:15:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F09C83EC0;
-	Mon, 26 Jan 2026 17:15:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D02A83EA9;
+	Mon, 26 Jan 2026 17:15:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W3dG3F5u";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uk2TplrG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06F2F83C04; Mon, 26 Jan 2026 17:15:16 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 33FC883EEF; Mon, 26 Jan 2026 17:15:18 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 278D083B03
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:15:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 544E583B03
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:15:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ozndrgt@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-47fedb7c68dso47435745e9.2
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 08:15:14 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4801bc328easo53191575e9.3
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 08:15:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769444113; x=1770048913; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1769444115; x=1770048915; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t9fgQEwbn9RuEw6zC67PMHo7kDK4g9uwtgbcuyvtV6A=;
- b=W3dG3F5uEEzlP5xBWXi4H+Y+Hq+/83dRuVztZqwCrdrvM41oX4hX+bg4e+LF9PZpZ8
- rg+GDfyal/c3yR5q6Vae6lqjBjVxpJOvmB6UPBRSQRBy/Htn8UBSM1QAJ0BNj6FTOQ0G
- 6hELpsRk0BX1b/8Txhkp7+NR27fY1Z24PKYuQ4y7y29GXxKvTTvRQAPyuHqIBG1W8l+e
- c/+P3NSlS8giq/RS+Ri5gxxsp8pc9y8stBraL9WgdkakjTAQ27FvqRzopBnkS1Kchkwm
- eJzfqvQJ7i9AIJTQW2HfGoclIDFypoFpmBzPVqfFoTE0wYmxSkn7oemuYjsAVjlJ0fW8
- 2+CQ==
+ bh=q9TgC3I59QD3PvqvseW1viZTMJWVcil+mdaW9CQ7l58=;
+ b=Uk2TplrGO99v1P2IN6S5+ZIRZXIiplMT0F+l9bOO9jo4WkAd6e9wR/fPy/iQj5pjwc
+ vLqMLGByU4waLvUf8jVRo2y435NsAlcMumhXrJresgizfFx2kqrGlUbixUTjRuu4u8Bm
+ j3lpIJEEUMR/KFhYRRc3c8wGESpt1fyH+5u0kJF0BE3E9UH1ec92PPb9jvzdDNf/vw/0
+ LkfHTnMO3sAER8KBlpYYTzoXWT01AjUKpgu1EMqlrgbgjkhQGlpDjn84eVNjEtVcmMUZ
+ nwT0AckjbqebQ2/SlTYAm0pkIx5Nr0ZTlDfvA9XXLsAn6l2HLGP5t3p5sUKbYmKCYSC2
+ OArg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769444113; x=1770048913;
+ d=1e100.net; s=20230601; t=1769444115; x=1770048915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=t9fgQEwbn9RuEw6zC67PMHo7kDK4g9uwtgbcuyvtV6A=;
- b=IaOKv5KOSukrvpSfVlhaN8T5+S0Nx3/cgKl8TWDqZl9iNofbJkWTSSzqg+nBbphm0X
- GPZ05Xxu0B/rBYOCQTxlABz9sGVrs4NZZddbvv6yLlzl0MnNVrMi2wwDPlUw8JEG6Keh
- qwtGh7+0T2elOv2ylc4wf7mCQcQaJ5dGl53+y42Dkv7eIQQD5PHt/7dFnZzltUfv/GYV
- NMK6Sm1XYxMsCXoNy/T3Few89EgOKQa8OpcKAcZ+7ysUBr7jvIbBizeW5ElURcpxDtpN
- I20+V6GxqQlAUu9ldBTpuh4gl2SaVVt7eU2c7ZqBoCcxr44K1gu/OEQ2XVCDdesP3g4N
- Yf6w==
-X-Gm-Message-State: AOJu0Yx7IIAsfhLV8q8Pe/MViRsjr4OGyDLH/cu0H80T6vfitl5mYpel
- Lq/3xX0yYv00JC1LeVppH8a+Iu9NwAzh4OvXHt5PMWqZtoTHZe5VaQzlmwY/Sw==
-X-Gm-Gg: AZuq6aLIMYh9Ha9jx1R1mzK/HFmhzk+ghNAsCy8jYgyJ69CKrVDISuLbF5TnKtQgifQ
- jXqUi9PpWb3deah2BHWaXLXWIap0+ckP/Bybiv99gXGa6RkbdviDYDnYK5v8F5HmWdjm/MQna+a
- frUL5xJ8jv38sD3hvPrnZgZON1PiM0rfIAEo7AU5TzE9V86b0PMQ/NL+H3vlS3ozO43iEi/enJM
- 8eiTsp03GFhRnVzAei3P3fLjKUSDQS5V/bbETSdOi4kO7DVbEO7l9F2MbGbQLAdDhqxcfy5xOuk
- iYxqNYPi+sQ5/YtJIEzVPbAU5aqRsHwm0eaxk2kJUsrZvS5xokxTohjZhOxsXaebPrpHqRwEhXi
- OJmcDbGaTVMzssTbmza03fDmkTJSGg15wy5KXxmOD4Fu8+rcOcNd0BYxOkP7LGILwXgwJrNfnMt
- Fh26auvLX7Hc+ylNJ3n/fu6CU=
-X-Received: by 2002:a05:600c:5494:b0:47e:e78a:c833 with SMTP id
- 5b1f17b1804b1-4805d064297mr77843075e9.32.1769444113302; 
- Mon, 26 Jan 2026 08:15:13 -0800 (PST)
+ bh=q9TgC3I59QD3PvqvseW1viZTMJWVcil+mdaW9CQ7l58=;
+ b=gO4ro0DLw3MnbJ6TBk67X/71Si2rsqA39jrc7bGWOSy5SMPxPPG6KglFknSHFaqQZZ
+ WW6Jlb2qC2vSUzlWbLX2N8iTfhMgmne0BlOotXdvIhbsiPC9EdwGGK9WGJprdhNPBklw
+ 3b6R8imVdBvCsjTyV4auqhkapCMQIVgzvWCxqD5kUgFT9HjmMigBhGPgnrBN6ytVfM8z
+ gxgFItIzsjQMRL3WWcYEwuW4wnD5UOk3YqB7KMe/IRKCKmHUVOa5+tqTMxMDXOlKfVgo
+ pwymoFiImJq9t6rZPscDu64RIDIw1lpz77SDIgkgZXw1jY1IdORC99ZCXh8ssxgouG/F
+ nZcQ==
+X-Gm-Message-State: AOJu0YxP4SXJEw4lgL0zx6j7ps8pYU8CEplAqBEJeMBvgm79ePYnde/D
+ buUYkNppFOepn28qfbKKNkDZUkvJCgxvMG3Gg/6hli2yWcdiksC29j0+FesrBw==
+X-Gm-Gg: AZuq6aJucbYh2igiyg5zFqL81UULCEyU0TdfThDYJOn3u3pMrRRCw6gvQM+Ahl5qasw
+ v0bOS9d/1veBzVPNmQsvtPLGigprzTAfCg+Q1hcJAVj38K7gRZfnm8yV0Ox80QaVgJwBMVlA5XV
+ x+9Pv8VlzEo/ekn8AFB+zaGCqoBjXsAUGWa7Yie5On/FFyvBZdG/RyMCfiMrHdM12NNubMkWTRe
+ lOoHqA8Nxe+OntUFK0dDv3aT/XfNY8XZfw5aF/L8z7We073Lr/vhbyU2S5zLIZh/2q0m9XOsQDL
+ PXJYG+IPSIC/9HFu3sBQL75f99vXE/KbGdPYeVWQTj1+m4icpQwtnfm47TxOcaqRU7xKLIYAUHT
+ nd9VC8Qcu4R/Ekm5MWKQ/P/uMn2qg9PJTRQK5J8XX33dJLi8d3JIgQzgyw/dNq+WlfMTkdp0cb7
+ rWoiQXXpyT3JLyQ0XmnNTifU1CFrM1PNYYtw==
+X-Received: by 2002:a05:600c:3b17:b0:47e:e970:cf28 with SMTP id
+ 5b1f17b1804b1-4805d066140mr69902155e9.30.1769444115274; 
+ Mon, 26 Jan 2026 08:15:15 -0800 (PST)
 Received: from odurgut-Precision-5570..
  ([2a00:20:c361:3985:cfa:b5c2:f360:f511])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4804d5ffe12sm107368615e9.3.2026.01.26.08.15.12
+ 5b1f17b1804b1-4804d5ffe12sm107368615e9.3.2026.01.26.08.15.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 08:15:12 -0800 (PST)
+ Mon, 26 Jan 2026 08:15:14 -0800 (PST)
 From: ozndrgt@gmail.com
 To: u-boot@lists.denx.de
 Cc: linux@analog.com, malysagreg@gmail.com,
+ Philip Molloy <philip.molloy@analog.com>,
  Ozan Durgut <ozan.durgut@analog.com>
-Subject: [PATCH 2/5] arm: dts: sc598: add missing GPIO hogs for Rev D
-Date: Mon, 26 Jan 2026 17:15:02 +0100
-Message-ID: <3a53026951eba0ff6e0f7d2be8760feae8b48521.1769439596.git.ozan.durgut@analog.com>
+Subject: [PATCH 3/5] arm: dts: sc5xx: drop SPI flash from common dtsi
+Date: Mon, 26 Jan 2026 17:15:03 +0100
+Message-ID: <d4c06bbe3be760eeeb6fdda5adc74e9a287e2d7a.1769439596.git.ozan.durgut@analog.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1769439596.git.ozan.durgut@analog.com>
 References: <cover.1769439596.git.ozan.durgut@analog.com>
@@ -99,60 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ozan Durgut <ozan.durgut@analog.com>
+From: Philip Molloy <philip.molloy@analog.com>
 
-Add missing GPIO hogs for UART0 enable, UART0 flow control,
-SD Card and eMMC control signals.
+SPI flash devices are not common across all SC5xx boards. They
+already defined in the SoM-specific dtsi files. Keeping the
+definition in the common dtsi is therefore incorrect.
 
 Fixes: c9e893d ("board: adi: Add support for SC598")
+Signed-off-by: Philip Molloy <philip.molloy@analog.com>
 Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
 ---
- arch/arm/dts/sc598-som-revD.dtsi | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ arch/arm/dts/sc5xx.dtsi | 11 -----------
+ 1 file changed, 11 deletions(-)
 
-diff --git a/arch/arm/dts/sc598-som-revD.dtsi b/arch/arm/dts/sc598-som-revD.dtsi
-index bf1ef88cb58..26e272966ff 100644
---- a/arch/arm/dts/sc598-som-revD.dtsi
-+++ b/arch/arm/dts/sc598-som-revD.dtsi
-@@ -55,6 +55,38 @@
- 			line-name = "spi2flash-cs";
+diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
+index 483661d0b1b..9d346ae62e0 100644
+--- a/arch/arm/dts/sc5xx.dtsi
++++ b/arch/arm/dts/sc5xx.dtsi
+@@ -154,17 +154,6 @@
+ 			clock-names = "spi";
+ 			status = "okay";
  			bootph-pre-ram;
+-
+-			flash1: is25lp512@1 {
+-				#address-cells = <1>;
+-				#size-cells = <1>;
+-				compatible = "jedec,spi-nor", "is25lp512";
+-				reg = <1>;
+-				spi-tx-bus-width = <4>;
+-				spi-rx-bus-width = <4>;
+-				spi-max-frequency = <10000000>;
+-				bootph-pre-ram;
+-			};
  		};
-+
-+		uart0 {
-+			gpio-hog;
-+			gpios = <5 GPIO_ACTIVE_LOW>;
-+			output-high;
-+			line-name = "uart0-en";
-+			bootph-pre-ram;
-+		};
-+
-+		uart0-flow-en {
-+			gpio-hog;
-+			gpios = <6 GPIO_ACTIVE_LOW>;
-+			output-low;
-+			line-name = "uart0-flow-en";
-+			bootph-pre-ram;
-+		};
-+
-+		som-emmc {
-+			gpio-hog;
-+			gpios = <8 GPIO_ACTIVE_LOW>;
-+			output-high;
-+			line-name = "som-emmc-en";
-+			bootph-pre-ram;
-+		};
-+
-+		crr-sdcard {
-+			gpio-hog;
-+			gpios = <9 GPIO_ACTIVE_LOW>;
-+			output-low;
-+			line-name = "crr-sdcard-en";
-+			bootph-pre-ram;
-+		};
- 	};
- };
  
+ 		wdog: watchdog@31008000 {
 -- 
 2.43.0
 
