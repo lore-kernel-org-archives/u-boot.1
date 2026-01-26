@@ -4,134 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA61D13C3C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7CFDD13C3C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 16:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E590883EE2;
-	Mon, 26 Jan 2026 17:00:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0068583C4B;
+	Mon, 26 Jan 2026 17:02:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ai4SG25n";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QTU46Yt0";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="LLTGWBU7";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kcpu57s8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30CCB83C04; Mon, 26 Jan 2026 17:00:05 +0100 (CET)
+ id 1271983CEA; Mon, 26 Jan 2026 17:02:39 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1467683E9F
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:00:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B6F083C04
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 17:02:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 60Q8U8VN860194
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:00:00 GMT
+ 60Q8shN4762743
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:02:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=qdJwO5BY8+H
- hRGjzkKFxrxZU34Mgf2Sm9jJe1lKXDD0=; b=ai4SG25n1PACcWfbCFdJYrF1qte
- yB1QOLaDqcCTBLJ4sVx49ISSFXpdFq3C4IZ/tDu+lJm8nVZ8iVvRbBXliNEy+Soo
- oTkmY080KSox51cToRLELttc4x6unW50hvzoJ9bLVJcA0SZt88AdTdcChqyiudny
- RjlQD6s05dNC2jlttbdyelMhAJGuRGrDKAVMMIVwhscoWeWV4zmeAyTZL70ZbLqX
- m93w0+79UnExzEn7HlJ4HVhKheDUIxS0Hf1818yqdkAv4C1ilb6E2hEgjFz4pQoC
- MfYaLEv6ycatTEPkqusCj/GfrEN5+967vqf241pLkbqVuPo7LQSYoRnf6xA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bvwtycg5h-1
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=fzCZ4lsUkQ5h4mx6ZaOp9sYiiBd7OLMV9qz
+ HPmsSGHY=; b=LLTGWBU727Dcs7u0biy4usC8djqKH5yfxAB10SwNxkkrbU9JDsL
+ JpDfeSOnaL5C1a5S+iDrUekEcL3RL/Zfd02pt3C3k121QRUeOouSe2mJbE9N9Ygq
+ TdO04j9WMzmKumb6apNicKNvhkGGk3mynm0n7+xSQicDuMIYTkRIJIuLrbYa6KER
+ rEoYsxHy+F0s1KgOsJVYwpEhAfytX9Fql0xJPuj0KaQAohMMmlCws3nV6TPDZjED
+ ob68UlpM3URKInt6brDPhXEy+fszC5ryexmogvZY/2PhwMbdVN8nFE7zAJdKFrKX
+ Wj5jje79zrs5/oALkGG3tGk1k4acgzn1jUA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bvq9f51t0-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 15:59:59 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2a0a4b748a0so98215935ad.1
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 07:59:59 -0800 (PST)
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:02:32 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-822426d21a8so698711b3a.3
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 08:02:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1769443199; x=1770047999; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qdJwO5BY8+HhRGjzkKFxrxZU34Mgf2Sm9jJe1lKXDD0=;
- b=QTU46Yt0FF0boHFOCgYTGcy+lU6U2/LWVzMr+nulo/DbwapHWvScCwDMRNo8HzgMvI
- KUCrZyuifqOIW/BBb7rCvuYOLAQhW+AaaW6fmEQntFg31WU7x4eywJJInoDtpiaDgPBn
- T0l3FnPFRd7AYcG0waPgTtvpBJEl4FqAdoJ+4mLCg2CcUWYAdrvMSPR7SL9FUG1HpqRY
- 2xOBZz2ui7eXOCM5+FLjBldt/um15aNQxGE7x/++PiEiwCtW2BH36Io14MhfAC9iHxuY
- 4tvwD/sjP6W5Fgjj6hfRIJamFU0L3fwDqy5x6ANzyw0jWzANoUiRPHogsX1jzM0AieQ2
- rgBg==
+ d=oss.qualcomm.com; s=google; t=1769443352; x=1770048152; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fzCZ4lsUkQ5h4mx6ZaOp9sYiiBd7OLMV9qzHPmsSGHY=;
+ b=kcpu57s84MGAHqmv29l70bLxzKIiebx4ZEvvZktaR9khSlEh8TQgAiTavWbuDePT0j
+ V7TMPwMIwANPmRNMqCQ8X9dyqZ271+vEpsswYeLQKPUz0d/BcTW1tBiVMpaz5+tTHiE/
+ BUP5H+kNgeFgCoxpe6FjRxvcA3OTDPftfuLeBMhnAksFfUAEhq5kRzaPOIKX28H3fZQh
+ htTeozBdXUBZJb6QyfKW9Z3/G/rbPbb8VDYVWI1ahRQTr4arezi+D7mULsvqMDQ0RQqX
+ NuuvD0Ul4zG1MVirADojTQ9g5wACZ+czGchOV4dQL/IKvd/xCJS0OAWetZh3iyat9O72
+ yIEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769443199; x=1770047999;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=qdJwO5BY8+HhRGjzkKFxrxZU34Mgf2Sm9jJe1lKXDD0=;
- b=nsfRDJ+RMWlLgunC5Hirnd92Ku8evgpUcPiUQvkvz2euO40od7cwLhc+MDOH4a6PrC
- Jsqobw9S+nWl9f+hmdkV1a8Kf97N2P4CWqjoPeVOAZRF3HuwUEugyarfM8ior1gnqdqs
- 5jyB4b2/HhClw5XAIqwcxHZyjlqyairptqr1+exKOEScftX3bdN0iMtl7wMOC2veFC4I
- taIG4wKialUphKzGavVj5Hvf971pjmSwiB5L/4awV6JPJQkxZf0fsIK/LRigT1tP+tqW
- 2iovtR0JDQfhweD+LoL/gYhbN/KBEYRGTPL2VsfNtZmyjAHMuwj3DSjq59iwFsSoLlvM
- hGXg==
+ d=1e100.net; s=20230601; t=1769443352; x=1770048152;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fzCZ4lsUkQ5h4mx6ZaOp9sYiiBd7OLMV9qzHPmsSGHY=;
+ b=J4QLb0rcXYBmiZGoWqhN35yB/72Ark5zq2JHg5aoyFy81JX6mlQGSlF/vMMv5uRuNp
+ PRTOkF6QIE4qwcC4/GhNjVnBerJFEHiPX6eFaAhesbL6DZs2k4UQel3O2/Xz5sB1uRDr
+ 94fv56AinRKPrF7LeLhjxBoo2CBxCPDyn7OLwvekUoiWoN69cVPBOHs1mH9mwgQG6+tI
+ 9q/uLz6BeqA2bmwQeonE3oyODCl8cgMy1FLlkaRH+Y5IkTWKFLz9SjiANsjJFlGEPLgE
+ qVBFLl50mBWJGIdND96ucWNjJcQNUWheO7mZ3ogBivojRiwbeEXF8MJH3XdkS3F610E/
+ 19+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUXdycuMVZGDiFiMvj2ZP/2VhNY0A+FR1A9vgPulB+0q4xuKEeJtUu4wSmk87u3Mr/GttZwpM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKQIxnwLiNElkVhhrelNBHSScOPX/YzoKCTv+lcvLI9S89/wYU
- Zo/WCMgPFUr1lRDgeeEWpCcxpO5nxHfsufM8/aAgQXYfX0gYoTUTJq0g5tpSDgfnOImOvmoinq6
- SK7mzwuk3KK8WR3xD3vpMAQaCQdG7pmuP64quLyT4TsuKFSbsZ3cHRyIx
-X-Gm-Gg: AZuq6aJJPLH5FpyiF+TOzp+x13U8y2iinUH4mYK1r80JoHYMnuNOURKv/I4xnv8KFcQ
- p6HfosfnA3/S/QkrqX2djISf4dN9KOfCFd9WtnQtar8wQF66CnR4R35QwxRlQ3863q1tmUfFOaN
- qvjMk3v8oUlhVyKqXH6wYVbVpfxWO1G9oDKK7PytwCLMV8CBPAyLpdB53vAfdHHX91G5G56ZTWE
- T+t1K4BbYFsmvBU9noULcdt6VJbrTDpqkWyEf/ZSr+SWX+F57hspbf8HHOYW5TSsnZSaXQDlP61
- Z3hlfVi+Rw49o9A7xzHZtqNE7yawNRxuNuyukaUnpqM4s80XNKXPUZTwxBBbu0VwRFtASzstr1v
- rz+P+T+Dbo3KXUXUQOXmI179LawnH+AKwWrKWyWNW1NNM4ldD2Dk/tMjH4R3QisNKyu9sxh3HsU
- 0romGRA4mDfEewi7stsMaeZY/qf9Dw0kQ9jNGUkQ==
-X-Received: by 2002:a17:902:f70d:b0:2a7:757b:35ad with SMTP id
- d9443c01a7336-2a84530eb6amr50607025ad.42.1769443199150; 
- Mon, 26 Jan 2026 07:59:59 -0800 (PST)
-X-Received: by 2002:a17:902:f70d:b0:2a7:757b:35ad with SMTP id
- d9443c01a7336-2a84530eb6amr50606725ad.42.1769443198683; 
- Mon, 26 Jan 2026 07:59:58 -0800 (PST)
+ AJvYcCWzGK4S95RyVLzpbgajyq1/yrUtrMhuYc6tQl7iKPzExMxylNFSoF5TewX/eS21qimdUhL9mJg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdZUvRTHqEf54q82k0jV7GrPDwSkOaqfkNAYzYczCfG7MltMnO
+ jZ03eD+rIWeFt+nU4TQeO8ce6FAxAzMLWmbGgTGYChYKCqq/DDZEbpYtygEUtvATXM2MFYcl/ul
+ e+R7BgXjhhGKb2p9GY6V+sheXm3BN96zYsRTRmZ+58lsl1Jip9El9/ZKO
+X-Gm-Gg: AZuq6aJNJCrguoBcYfz4Nj/rTEm994PYQupbvFnzbZV4TdAZltoeq2pqLBBMZO7hGNF
+ 7geQ2oT68aQlyLL8zGiTpzxuEVfRVK+arlwZ4y7fKIru5OCNYf+qVfBJHpdjEMKf/4YPLGkbHvL
+ 6tUSvuJ3udYNR3DlWfnERtWSirOOG6Q0cCr+dIfg3/E5Xd4BHeSi14oCYQJwEBjIybVCAstZwun
+ ruVeQ48GiARsVsNWUaLAArGBrmpSKPBkJGyWo5e5nR/L993lR2NsgobxQ1gqRsmDtUNTrxzaqwg
+ SIYahSyurLnqkZ3NtOHUKa2icpBtCVAcR09cHksn9KyKO8N/6cI5eITqr4CjNyHIJly4ySQFY38
+ Q5xJEUHOHZS9dbQndpdRtzT1JJDERGtn+T9HIkS9La5Ba0yMFH+iLrgC9EHc0Dn13ALqCuhZxPO
+ aeN8m180eOfM4c3fBILYWvUE+GTIpngewpvfaNBQ==
+X-Received: by 2002:a05:6a00:3389:b0:81f:521c:b640 with SMTP id
+ d2e1a72fcca58-823412b97b6mr4104072b3a.55.1769443351798; 
+ Mon, 26 Jan 2026 08:02:31 -0800 (PST)
+X-Received: by 2002:a05:6a00:3389:b0:81f:521c:b640 with SMTP id
+ d2e1a72fcca58-823412b97b6mr4103975b3a.55.1769443350059; 
+ Mon, 26 Jan 2026 08:02:30 -0800 (PST)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2a802fd929asm93245505ad.90.2026.01.26.07.59.54
+ d2e1a72fcca58-8234fd9a5a7sm2277205b3a.63.2026.01.26.08.02.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 07:59:58 -0800 (PST)
+ Mon, 26 Jan 2026 08:02:29 -0800 (PST)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, lukma@denx.de, aswin.murugan@oss.qualcomm.com,
- balaji.selvanathan@oss.qualcomm.com, rui.silva@linaro.org,
- david.wronek@mainlining.org, ilias.apalodimas@linaro.org,
- luca.weiss@fairphone.com, jorge.ramirez@oss.qualcomm.com,
- stephan.gerhold@linaro.org, quic_varada@quicinc.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1 3/3] board: qualcomm: Remove SCSI scan from default preboot
- environment
-Date: Mon, 26 Jan 2026 21:29:38 +0530
-Message-Id: <20260126155938.2717540-4-balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, balaji.selvanathan@oss.qualcomm.com,
+ varadarajan.narayanan@oss.qualcomm.com, u-boot@lists.denx.de
+Subject: [PATCH v1] fs: fat: fix buffer overflow on repeated fat_set_blk_dev
+ calls
+Date: Mon, 26 Jan 2026 21:32:24 +0530
+Message-Id: <20260126160224.2718059-1-balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
-References: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 88T7tPwFMplW0xrTdsOtnUPULwbkkpdJ
-X-Authority-Analysis: v=2.4 cv=BteQAIX5 c=1 sm=1 tr=0 ts=69778f7f cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=YLGSCBGx c=1 sm=1 tr=0 ts=69779018 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=22eT9C0fHbvWDeABP3MA:9 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-ORIG-GUID: 88T7tPwFMplW0xrTdsOtnUPULwbkkpdJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI2MDEzNiBTYWx0ZWRfX4hTc+Gu+dAJF
- 8x1gPriDYBT4mXBNEKRTfxYilo7fLsaR7tbBhz7P0wDNJ77WxtY86FVSLhNNsXqOjxXBovGjMOq
- 5sglMP4AtHKUFesKVfly2Mr5dh8WDI09vETHjHNtJOBT0ye1Wz6jYk4MX3OWl6pDI6EP3UCPTkW
- RogyhhJbLyV/UPRFW5jU2IoeEiCLIWDVv3rq4156J8VpHIY2asWOzKAO/puo5Pp2L+eSEPWshm0
- FxgVLnR6Z+VjZ7kX+hJKFL4Eb/RALrRdY3s0t7SFO9ob6eLUxsJ60kNiyVTMwJ6KV6vPNvLMrVW
- KUM9UFmZt+szRI7gfSMOu6zlA+C0gUtieXtdmgLxManggK8gumDmQNTBSMNmgg/f3x7LqjMdZxq
- qJBA/RlhTFaoQkFQ8KOUBPZulDJqXeXsQhW3e5MgaQd0wm6V878YAvW0kIKZDKe8VjXDGNNh7u7
- bzSjxEe9FR9dvFjk2Kg==
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=l6rqwx8q1VO34AIQI6MA:9
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-GUID: jShU_lKseQlo0N80GtvHbHd2qnu7eD8j
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI2MDEzNiBTYWx0ZWRfX/B7MBYxLLhvD
+ 542SjYHNKcgSu5SK8Tp57wIrL5RZRNCvmGrYdn5dP/ipD9IDI8Pz0W719N0Lv2Fa78cWGHn1nzw
+ AQbFoccF6If9IlrbHJTBTyiYeJ9SzIk8TwxSJ1wNu4X1JepmUaoJQJ1bPKFDZ8c3amSRy9/Za7X
+ qn/luxmaAS4u3+/kJYI76mxmdg8bFygTgMzh4s4EVG/Nv5807UOrV9Q0ymrSOV6D3jn2gqSPcEC
+ WcJrCrLryyrueqLMArBnqnnYjrJMow9v4HbcQAbzy41OF66I8VQ2OED1lbQMc14k0Gjl16kJlS+
+ rOKsLk3oTDluGty2V9ZLjfB1Stj1V2VgYz5kZ4wUDxVdwXBnk4F6lXDKraf63Q66aHWQ39n4Ot3
+ m6xt3+3Flbo7UvosDUDv/HHlDDkLzOTfgrZu4YFr06aTw0MOAFxoyU4zOJTwwwLWgoIVtluWMB/
+ 4lO3jxM2bGSh90UY7DQ==
+X-Proofpoint-ORIG-GUID: jShU_lKseQlo0N80GtvHbHd2qnu7eD8j
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
  definitions=2026-01-26_03,2026-01-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 phishscore=0
- lowpriorityscore=0 adultscore=0 spamscore=0 bulkscore=0 malwarescore=0
+ adultscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601260136
 X-BeenThere: u-boot@lists.denx.de
@@ -150,32 +144,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove "scsi scan" from the preboot command sequence in the default
-Qualcomm board environment. The SCSI scan command fails on eMMC-based
-boot configurations, causing unnecessary boot delays and potential
-error messages during the preboot phase.
+Fix a buffer overflow that occurs when fat_set_blk_dev() is called
+multiple times for the same partition.
 
-This change improves boot reliability on platforms using eMMC storage
-as the primary boot device.
+On the first call, fat_sect_size starts at 0 and gets set to the FAT
+sector size (e.g., 4096) after reading the boot sector. On subsequent
+calls to the same partition, fat_sect_size retains this value, causing
+disk_read() to attempt reading 4096 bytes into a 512-byte buffer,
+resulting in memory corruption.
+
+The fix adds caching to detect when the same device/partition is being
+accessed and returns early without re-initialization. For new
+partitions, fat_sect_size is reset to 0 to ensure proper
+initialization sequence.
+
+This patch is based on the changes in the upstream submission:
+https://lore.kernel.org/u-boot/20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com/
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- board/qualcomm/default.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/fat/fat.c | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
-index dbf6f4e7260..7cfa8e0ce2a 100644
---- a/board/qualcomm/default.env
-+++ b/board/qualcomm/default.env
-@@ -1,7 +1,7 @@
- stdin=serial,button-kbd
- stdout=serial,vidconsole
- stderr=serial,vidconsole
--preboot=scsi scan; usb start
-+preboot=usb start
- fastboot=fastboot -l $fastboot_addr_r usb 0
- do_boot=bootefi bootmgr
- bootmenu_0=Boot first available device=run do_boot
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index 05acd24d8bd..8138f7418a1 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -257,10 +257,28 @@ exit:
+ 
+ int fat_set_blk_dev(struct blk_desc *dev_desc, struct disk_partition *info)
+ {
+-	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
++	static struct blk_desc *last_dev;
++	static struct disk_partition last_part_info = {0};
++
++	/* Check if we're already initialized for the same device/partition */
++	if (last_dev == dev_desc &&
++	    last_part_info.start == info->start &&
++	    last_part_info.size == info->size &&
++	    fat_sect_size != 0) {
++		cur_dev = dev_desc;
++		cur_part_info = *info;
++		return 0;
++	}
+ 
+ 	cur_dev = dev_desc;
+ 	cur_part_info = *info;
++	last_dev = dev_desc;
++	last_part_info = *info;
++
++	/* Reset fat_sect_size for new device/partition */
++	fat_sect_size = 0;
++
++	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
+ 
+ 	/* Make sure it has a valid FAT header */
+ 	if (disk_read(0, 1, buffer) != 1) {
 -- 
 2.34.1
 
