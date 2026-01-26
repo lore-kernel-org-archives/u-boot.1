@@ -4,92 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57151D13C2E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 15:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC1ED13C36
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 15:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F0283B27;
-	Mon, 26 Jan 2026 16:18:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E40483C04;
+	Mon, 26 Jan 2026 16:46:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HJNktN0J";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="XoZhNoSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F20A183C29; Mon, 26 Jan 2026 16:18:37 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C60EC83C65; Mon, 26 Jan 2026 16:46:22 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF73C83B0B
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:18:35 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-45c719bb855so2674248b6e.1
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 07:18:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769440714; x=1770045514; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Fk4aWTa0o+1XKbnXgahVZkno8veHcDvyx0nHfSMog2g=;
- b=HJNktN0Jpfd4KE6mqvQrVaKPN+GOxKSbCuGp+bEKI3zNkOC43vS9zSM17w9vG6STtF
- H6wHJghKjr6CBrHOlcilChZNhvdjycCi+t28esd7ZbZcDe11Dzj5INusPYGi8Lf964PI
- aGV/AcJLgz++4/2iqMzeeH9su2GDDo0Tt++dA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769440714; x=1770045514;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Fk4aWTa0o+1XKbnXgahVZkno8veHcDvyx0nHfSMog2g=;
- b=GZPDS8o+Tu3EBaRG+4ZJCwGYrzVOuEp9zGD0Wu1cpbliOgROmHu938vSCe+pncuU/A
- YjaHmKn08vbUk2B9qWEZoipp+xQlrk8KqImSClml54Tp3fwV1+rKlJcE3vd7QQqBxgSS
- YAsXW80HxU2jifgdmXsyNCmLQ7SI7WicbQGHYs+SEP8b0YLuYLC7hJPopZTjpp9o0gb5
- 4jk03XEyWF/i8bLJGfvw2b1edDNAuUfcDNACXgYab7Mrlb5I9REW9fjK+6PVAETc8cjv
- Z/ZuReZglZaAG13cuoo1I++zoBjAexNuqKZSwkKQmTiwVxGzTQFNfCmnbW68pN1ka10y
- 6zcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVbxpPQYcWx4H/2d2Ds0hQpIA9+OcX/vUp1NqqhRUK9ikP/k5mrDTQwjxqAC14LzjQhJJbKOfk=@lists.denx.de
-X-Gm-Message-State: AOJu0YznGGTxG1Cqx9SUwoMyOwwVI9xUrLrrOIzet9KBl7wCN/ZboWhl
- HHb/5700tlTR08RwDctwXc0C2hr/kM4sgwPU8o6F2VLrntXyeO/rQrIQKWwVC9A0yNwEV32zaiI
- LEBDbawY=
-X-Gm-Gg: AZuq6aLrpCnPIWF/L+Fi79lB8tkDS8qc3WycHOetqS5t/EtK4JnAqk+TaFk2hqf2OjP
- Odiml+xW0hChPkcn64o8ZzPNk/x6lZRNq+nuCyan16yrD73Too5ZKudy44rreiHn47qxthG4DMx
- fix9geqqv4CJ+gJEwH8g29pokf74owpEHFe6hCbeOUWpQ/LEZeRQJSL5H09FjrUZd3ZOl+96YAs
- zhBimu71vPt8qOUVTp9fVRfFd9SUEsCiuX7U+gQ2PMgpSbQA7PsyskJyLBN6iNyjiuklOxuNX1m
- u3ORCPWj/rMCUBvwB+mpWo0Gl5IT+WM+3XfmDIrdXZYGW+w/UHqQHNTolgi0oPcRLVB6SM8AKe1
- Xa3NQETvD1HAbME6lWLiJpuiMcNF4+FPHl3CMm5aN/deni9Qfv2eegYVGYsJNslw3u7g1uOebKn
- pwja/gZj+biaN46znUxS18FJfuGos+Re784JVvKorKU7KxAhuNlE6XWUy2VcaEk/E/6D3mfz/Ql
- GG1oK4CdGlSlxHERQuoH8E4sdDWlRr39vuAKp4=
-X-Received: by 2002:a05:6808:bd6:b0:44f:e912:eaa3 with SMTP id
- 5614622812f47-45ed99cfa89mr1999131b6e.32.1769440714348; 
- Mon, 26 Jan 2026 07:18:34 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45eb42530e9sm6203328b6e.16.2026.01.26.07.18.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 07:18:33 -0800 (PST)
-Date: Mon, 26 Jan 2026 09:18:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Fabio Estevam <festevam@gmail.com>, marek.vasut@mailbox.org,
- u-boot@lists.denx.de, sjg@chromium.org,
- Fabio Estevam <festevam@nabladev.com>
-Subject: Re: [PATCH] arm: spl: Fix DTB offset after binman symbol table
-Message-ID: <20260126151831.GT3416603@bill-the-cat>
-References: <20260123161907.392211-1-festevam@gmail.com>
- <20260123201202.GO3416603@bill-the-cat>
- <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
- <CAC_iWjJ5gVzOP_6cgxEbUJn8a=KRj=-wEFy=Do7Dp8oqH3V+Dg@mail.gmail.com>
- <CAOMZO5D5awN11z8Hxwr4+tunqvhH8fYbUJvU6McES=edi2OR4Q@mail.gmail.com>
- <CAC_iWj+BYi5mhE9+NUWTgByKZiH6E-XYt64G2JBdHRT4XY=bOA@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7A25083BD2
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 16:46:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id A6621109F9B; Mon, 26 Jan 2026 16:46:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1769442374;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=l+84om3PKCv7urRYVon7zoHGyOJl2VSVtmVC75OkjMk=;
+ b=XoZhNoSDNBVQoAkTCrfO4+i/AD5vnqnP6TdyNixhOjCiEO5toXv5ygWxXD+9U1uij3Fiwe
+ 86WCs4SNAzNwyT0PPfsuSQEXpWXTV+C7L9wJ1A5+vQ/b8WgZK+R0AMou+HDVXkP80eso02
+ U4Cwg2FQsQU8bZ7B8g0qSn7Ak13km3JTCsTpQvjZL/YiZxHtGsmwq4MZ2gdWQTmxQ2HcUX
+ ZmlkNPR4RFl+66Hl+tg1txEJNW8lGKZ3H6tHtTYZ5KXL8201ThZ9LJXpMaIbM+iVitLjpv
+ UOVLigSIg+6iJ6j9sHPXB3Ns9WlwQRtf8fGozKKv47JzUmYEdju4gzdjW/0pcw==
+Message-ID: <e7917bc9-11b1-18d0-1f04-9d6af003c1cd@nabladev.com>
+Date: Mon, 26 Jan 2026 16:46:19 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2JMD/4pxUBMqdj1j"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWj+BYi5mhE9+NUWTgByKZiH6E-XYt64G2JBdHRT4XY=bOA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v1 0/2] fastboot: mmc: fix bootloader offset
+Content-Language: en-US
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+References: <20260124054712.7939-1-hs@nabladev.com> <87y0lkogbt.fsf@kernel.org>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <87y0lkogbt.fsf@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,73 +73,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Mattijs,
 
---2JMD/4pxUBMqdj1j
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 26.01.26 10:48, Mattijs Korpershoek wrote:
+> Hi Heiko,
+> 
+> Thank you for the patch.
 
-On Mon, Jan 26, 2026 at 05:12:56PM +0200, Ilias Apalodimas wrote:
-> On Mon, 26 Jan 2026 at 14:45, Fabio Estevam <festevam@gmail.com> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Mon, Jan 26, 2026 at 3:29=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >
-> > > Fabio can you please try this
-> > > diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> > > index d780a5060774..af9f3a3c39c0 100644
-> > > --- a/arch/arm/cpu/u-boot-spl.lds
-> > > +++ b/arch/arm/cpu/u-boot-spl.lds
-> > > @@ -51,8 +51,8 @@ SECTIONS
-> > >                 __rel_dyn_start =3D .;
-> > >                 *(.rel*)
-> > >                 __rel_dyn_end =3D .;
-> > > -               . =3D ALIGN(8);
-> > >         }
-> > > +       . =3D ALIGN(8);
-> > >
-> > >         _image_binary_end =3D .;
-> > >         _end =3D .;
-> >
-> > Yes, this works. This is a partial revert of 8b0ebe054bb3.
->=20
-> Yea, i don't want to apply this, just verify what I am seeing.
-> So, Tom the bss size doesn't have to be 8b aligned (look below). It's
-> worth noting that we  do have some implicit assumptions in our asm
-> that rel{a}.dyn must be 4b/8b aligned in armv7/v8 respectively, but
-> that's not what's happening here.
->=20
-> We want _image_binary_end to still be 8b aligned etc. Since ALIGN()
-> has been moved into the dyn section, we now create a section for .dyn
-> in SPL that was previously empty. This new section also gets copied by
-> objcopy. That section will be 0 or 4 bytes depending on the alignment
-> of the preceding code. That's what blows up on Fabios set up.
->=20
-> We can probably apply the patch you suggested, but we need comments in
-> the linker script + an update to the commit message
+You are welcome!
 
-What should the commit message say? I'm loathe to add big comments at
-least to the linker scripts because while we hit this on armv7 it's
-another case of needing to modify most of the linker scripts. But a "/*
-Ensure alignmnet for device tree appending */" is fine, esp since git
-blame will point out the real details in the commit message. And since
-you mentioned on IRC maybe being able to turn Fabio's hexdump in to a
-build time check, we really need that too.
+> 
+> On Sat, Jan 24, 2026 at 06:47, Heiko Schocher <hs@nabladev.com> wrote:
+> 
+>> Not for all SoCs the bootloader start at offset 0x0,
+>> in a hardware partition of an emmc. So we need the possibility to
+>> set the correct offset, where bootloader starts.
+>>
+>> Example:
+>>
+>> imx8qxp revision C0 emmc Partition layout
+>>
+>> | eMMC block / partition | Offset     | Size  | Purpose                        |
+>> | ---------------------- | ---------- | ----- | ------------------------------ |
+>> | /dev/mmcblk0boot0      | 0x0        | 2MB   | imx-boot-container A           |
+>> |                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+>> | /dev/mmcblk0boot1      | 0x0        | 2MB   | imx-boot-container B           |
+>> |                        | 0x00200000 | 8kB   | U-Boot env 0                   |
+>> |                        | 0x00202000 | 8kB   | U-Boot env 1                   |
+>> |                        | 0x00220000 | 128kB | secure boot signature rootfs B |
+>>
+>> imx8qxp rev B0 emmc Partition layout
+>>
+>> | eMMC block / partition | Offset     | Size  | Purpose                        |
+>> | ---------------------- | ---------- | ----- | ------------------------------ |
+>> | /dev/mmcblk0boot0      | 0x00008000 | 2MB   | imx-boot-container A           |
+>> |                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+>> | /dev/mmcblk0boot1      | 0x0        | 8kB   | U-Boot env 0                   |
+>> |                        | 0x00002000 | 8kB   | U-Boot env 1                   |
+>> |                        | 0x00008000 | 2MB   | imx-boot-container B           |
+>>
+> 
+> Why can't we use raw partition descriptors for this?
+> 
+> See:
+> https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-descriptors
 
---=20
-Tom
+Thanks for this hint!
 
---2JMD/4pxUBMqdj1j
-Content-Type: application/pgp-signature; name="signature.asc"
+Possible yes ( I must try)... but this will lead in adding
+complexity to scripts people use all over there and needs
+to adapt CI setups, as siemens has B0 and C0 variants.
 
------BEGIN PGP SIGNATURE-----
+If we introduce this series, user has nothing to know about
+offsets for different CPU modules as no change in API for
+them...
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXeFwAAKCRAr4qD1Cr/k
-CuHmAQC37wy6OW/RuR+Uy3PiTBYYXckXHJkNfbyR/Y0xq9Y/QgD/ROoDtxSgpPct
-4JszFzp9aVvuLiij4jbm9szQV0jcygA=
-=tSY0
------END PGP SIGNATURE-----
-
---2JMD/4pxUBMqdj1j--
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
