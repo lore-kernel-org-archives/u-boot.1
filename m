@@ -4,59 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0240DC88E42
-	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 05:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C587C88E57
+	for <u-boot@archiver.kernel.org>; Mon, 26 Jan 2026 06:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A83E83E86;
-	Mon, 26 Jan 2026 06:30:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 9694483DDD;
+	Mon, 26 Jan 2026 07:29:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="hv2M75Ok";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KR2uCXpv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8BA183E8E; Mon, 26 Jan 2026 06:30:18 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5718383E86; Mon, 26 Jan 2026 07:29:36 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A20A83E70
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 06:30:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4C09A10E454; Mon, 26 Jan 2026 06:30:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1769405414;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=KeLCMamY8+MZMYkwgUN1bJZ/eKCSzq2nd8/cUivMNac=;
- b=hv2M75OkO4kSa9pjLPeKkdd3K5mQoCbD+35JsJw8b7HEjzrp90KHTa8UtNOyh2q7vZNWKK
- sW3OfrUsvzycYqw54p9Vd06vMkjwAVqlRnZvc04wLiG2fTYNICS8CiyCOj47mc/FI/R1hz
- PJHCwQymA1JVN1WSAQDhvXkUZMAta8ylhsPMmnykQbmFYTAT8n7hp4HnxwQEFbn9rd2cPI
- pXr8BfApPZWQcmMofmF8wU6uiyBNk4WtybTUyf3XQCqKNCfvI6xFGMGbRZjS667VFUX6bi
- /lvnWG52NhfmSZUpcgHbGNOBskk4SyvoCuR79HYfvLGXE/e7TZbnBK4fvSX1xg==
-Message-ID: <fa65e079-58e3-2a3e-f77c-12e07b824c81@nabladev.com>
-Date: Mon, 26 Jan 2026 06:30:23 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 89E7783DB6
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 07:29:33 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-790992528f6so38798947b3.1
+ for <u-boot@lists.denx.de>; Sun, 25 Jan 2026 22:29:33 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769408972; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NGIEh/tendTr+dDJ4Fx/+3Li0QQA//Kdy20+MtsDVvPRVmLcoCNi2+AmGOOxYC9MaH
+ mebjpNUAEx8GZu632NjXpVqyn1SIgXKxhC8vY2gN5nR/eKxBm5KgqUC9ZfOSS1kg7q8y
+ 4STm8J6Qg+llMiS/egM01/nKo4w4iH8Ca2AJD/nJZ6M9GUNeSksHDSQRWDPCJQ44HOrf
+ iF06A7gCf5VQQ3DOsvLkjRNiPk6zWfQ92do8HPxah+s1++5EnSs6PJ2iDm9EGXFBSvhj
+ Xy+odmbgt/shswUubilBBAar9XG2A+rh+BLesS+qM43vxex5+04USpKmVKfZR4AatjAy
+ Dm1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vqCe8TqSmE+Mz9p/oyAnaEi/3fL8AGZJstb/J6PVquY=;
+ fh=Ke+oIg9tmcIJpCbkXrO47WAkt0VZ2LRx2mW3gltYoZ0=;
+ b=MMdnvVMCVB4io6zXysC7GYyjxMY+cBjIxRCqdsEnF+diNTyvabAsyVR9a4qWfwPi+k
+ uxDCeqsAOzQ2bufAaQXz5tBjZzRPJqssfC58P1DOxpwC7sf9t7vyBwJvQ/1XKlXGoT65
+ QYlD7+LFjM0tytfusk6Or4azO/754tqzJwfNBRAh40P6rjNoeDfS7qMXRN0cfuYUSr7H
+ MdStERK6mY1kg6W1QOnIMvWWfVjmQoqyQAo7an4QJk9Fq27nWiOt9PQV09/HteMuBK6n
+ +SNgjW1GbqmkRdELSyF10fENCr0anOVl60SBafdAccDiZPcghXu3mPE2u5RijZYdZeui
+ 3DQA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1769408972; x=1770013772; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vqCe8TqSmE+Mz9p/oyAnaEi/3fL8AGZJstb/J6PVquY=;
+ b=KR2uCXpvWx17Pgu0nDnSTQs97eMkwoju3ihyyxWkwaxq78RNBPlKjpCM36GfQ4Phy2
+ X5PNpJqqLABHgTiOvXWakrchQ29piMgZUZi+j9KQY2fghk/Tx0eAk7xP/thfz0V/9FHD
+ eLItTqM9X0nGTmLuTqUjBo7GV7MWVH2cjR0OixBhz8iVSzyfAewq/YLhL2eJQJTGOd0B
+ wQLNjZOvQazPYrzaeG3cIfv56QHgMpzQTRyqGuOKRGQ6ZISNKxBm7asGBCi7toV98P6S
+ HHPVcCSyemCuiT6NG01Zjh3cM5xGFhqjdFbW23eeqdqAUxKJbO7EpafXtM3QYtxZDKTp
+ a9UA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769408972; x=1770013772;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vqCe8TqSmE+Mz9p/oyAnaEi/3fL8AGZJstb/J6PVquY=;
+ b=gL0k6c8ToKgZIGetED3RaHw7AbLJDuPt22+NmG8cB8mZd9CmOxlaRyzLpmI2wJMEoQ
+ zry7ToYYQ2mzwRfXQNjAfqBTWVXXYyIagW7EOWpKYchS/1+JQtcpPwxXkQavkjVsXl4b
+ o2XLGQD+UxikJIDXYMMz0/SfkwbBwzxs+iavZXBxrw5dx87i4hdPtDn6t/ARZ/x2aOAT
+ nsWVre2U88xfm5eSIpwilMN091hdhkRqWt9siYVI4ykbgZuiaY/1uAAI+QKpxbw4CC2G
+ GqxotlwrVPRPep96NCsSS5TLHt5nc8n7b8rjwINyprZB4dwyWOyvoX1UjCPhdkG3UK+D
+ 2XJQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYDu5NAPgRHygU7MH+3ZjGzVqe2OUNZaRwsDRNxdiBpHfPt/hP9vhFLzswEBLb9OB0NO6+y/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzl9R4Zx6Hru+72irnTEG268Jkkd6urE3mSQqOM6dvPrpUFJ4b5
+ zALdewvCXp7MUNyhm3GKNeTKUmbzENUSKJa5cSymrPEtml1cSUe7en/hXpGNV6y+9zHLvMAgMDJ
+ 189LJlI0OUDEdkIqhd4Nd0L024qQoN36yEW7R7n5//Q==
+X-Gm-Gg: AZuq6aIDO3LrcE+d8wvs1h8nGVFE8/2NYNjY/jWTn5EZ7GXmbN63fDLzBbUcHoC9skk
+ wL9I0DDAP5jwAjumPdE859erBtCTZh3JkEW4XKy1yBM5Km6KvenZ5rPqJwMh29T+hqM7gatbM0/
+ rvNDcg+EtGMyvzgRIZxU3vZWsfXrUPeZIYt9L1GtJZtOWkkuWznQFkvPkfmdbqlt7vO8vK76y+/
+ hJotg239HXN3bQ7YECXLZ+u+4lzGir3iyCY/2B6QP6QCVBaR6cV0tKHbITKlh/O7VHYh9Qn21ik
+ GSZRXEGJ5ntvxVFLW2Z4TzQC/Q0hFarILS2rnYuzS72LIYf3h89vOBvIG5pju5km9ubXC8XdD4b
+ pKe2+iwJR7TzRpD57AwqvaeVIySS/keWrLitFnQnsxPDQ+gbLeamjq0aQsN2t9GDF9RrcXB9d92
+ R9CKwuTQ7or48PmSznM2Uz0BjnTkbHKMVh5cikNBgpCzvZRjSD/AKg0qNoqSxsdbfi5OTwQjB/3
+ tGbZFBe4aUHhZL/kH4M0G6INNpOKgVB0+IFlZSnSQfhy+VW9dSTdQ1VdiAg0BJGiNq24EwqB7lb
+ QdnFInuJGy2VokkQHYbMRnBuU02z78ch
+X-Received: by 2002:a05:690c:90:b0:78c:69fe:eb1d with SMTP id
+ 00721157ae682-7945a86f8f1mr26661447b3.17.1769408972139; Sun, 25 Jan 2026
+ 22:29:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 07/11] siemens: capricorn: add logic to U-Boot to avoid
- zig-zag boot
-Content-Language: en-US
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Tom Rini <trini@konsulko.com>
-References: <20260124055452.8799-1-hs@nabladev.com>
- <20260124055452.8799-8-hs@nabladev.com> <aXbDjGfIgPGIc439@shlinux89>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <aXbDjGfIgPGIc439@shlinux89>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260123161907.392211-1-festevam@gmail.com>
+ <20260123201202.GO3416603@bill-the-cat>
+ <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
+In-Reply-To: <CAOMZO5DVFO=A6g1CWOrRbqy4VNgL+VcUw0Q5pgELXm30puGz4w@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 26 Jan 2026 08:28:55 +0200
+X-Gm-Features: AZwV_Qj2EffhUhRknCzj4OQPHgCYsxL0FLCEmtBthFggwUfHHmOUM-GfuZ4MXQk
+Message-ID: <CAC_iWjJ5gVzOP_6cgxEbUJn8a=KRj=-wEFy=Do7Dp8oqH3V+Dg@mail.gmail.com>
+Subject: Re: [PATCH] arm: spl: Fix DTB offset after binman symbol table
+To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: marek.vasut@mailbox.org, u-boot@lists.denx.de, sjg@chromium.org, 
+ Fabio Estevam <festevam@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,146 +122,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Peng,
+Hi Tom, Fabio
 
-On 26.01.26 02:29, Peng Fan wrote:
-> On Sat, Jan 24, 2026 at 06:54:48AM +0100, Heiko Schocher wrote:
->> add logic in board code for detecting the real boot
->> partition and set a local hush shell variable fallback
->> which can be used later in boot variables for detecting
->> a ROMbootloader fallback case.
-> 
-> Typo: ROM bootloader
 
-Fixed
+On Sat, 24 Jan 2026 at 02:13, Fabio Estevam <festevam@gmail.com> wrote:
+>
+> Hi Tom,
+>
+> On Fri, Jan 23, 2026 at 5:12=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+>
+> > I've been talking with Ilias for the last few hours. This still isn't
+> > right, it just happens to work in some cases, but not others. What's
+> > going on is that while we always have u-boot-nodtb.bin 8-byte aligned
+> > because while the BSS itself may end 8 byte aligned, we actually care
+> > about the size of the BSS being 8 byte aligned. Can you please try:
+> >
+> > diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+> > index d780a5060774..dae8a1ec665b 100644
+> > --- a/arch/arm/cpu/u-boot-spl.lds
+> > +++ b/arch/arm/cpu/u-boot-spl.lds
+> > @@ -58,6 +58,7 @@ SECTIONS
+> >         _end =3D .;
+> >
+> >         .bss __rel_dyn_start (OVERLAY) : {
+> > +               . =3D ALIGN(8);
+> >                 __bss_start =3D .;
+> >                 *(.bss*)
+> >                  . =3D ALIGN(8);
+> >
 
-> 
->>
->> We use the local hush shell variable, as we do not want
->> to save in any case the fallback variable in U-Boot
->> Environment, as the default Environment is may saved
-> 
-> Typo: maybe
+I think the reason this is happening is that we *force* thje rel.dyn
+alignment now, and as a result we create the section. That section
+might be 0 or 4 bytes depending on the layout and that'w hy adding
+ALIGN() commands at various places fiorx the problem.
+For 'fun',can you force a -dirty compilation of your broken tree? The
+update of version_string[], which lives in .rodata will update the
+alignment of your bss_end and the binary will start working...
 
-Fixed
+## readelf before 8b0ebe054bb3 (no rel.dyn present)
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk I=
+nf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0  =
+ 0  0
+  [ 1] .text             PROGBITS        00000000 001000 0086e0 00  AX  0  =
+ 0 32
+  [ 2] .rodata           PROGBITS        000086e0 0096e0 001d6e 00   A  0  =
+ 0  4
+  [ 3] .data             PROGBITS        0000a450 00b450 000538 00  WA  0  =
+ 0  4
+  [ 4] __u_boot_list     PROGBITS        0000a988 00b988 000798 00  WA  0  =
+ 0  4
+  [ 5] .binman_sym_table PROGBITS        0000b120 00c120 000014 00  WA  0  =
+ 0  4
+  [ 6] .bss              PROGBITS        0000b134 00c134 000054 00   W  0  =
+ 0  4
+  [...]
 
-> 
->> in boards, which are downgraded to older U-Boot versions.
->>
->> And than the board code does not run, and fallback never
->> gets the correct value.
->>
->> Introduce also hush shell variable envvers to value "v2_"
->> so we can use them in Environment for running different
->> versions of variables between new and old U-Boot images.
->>
->> Signed-off-by: Heiko Schocher <hs@nabladev.com>
->> Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
->> ---
->>
->> board/siemens/capricorn/Kconfig |  2 ++
->> board/siemens/capricorn/board.c | 43 +++++++++++++++++++++++++++------
->> 2 files changed, 37 insertions(+), 8 deletions(-)
->>
->> diff --git a/board/siemens/capricorn/Kconfig b/board/siemens/capricorn/Kconfig
->> index fe230971e97..d6d1aad75b2 100644
->> --- a/board/siemens/capricorn/Kconfig
->> +++ b/board/siemens/capricorn/Kconfig
->> @@ -1,5 +1,7 @@
->> if TARGET_CAPRICORN
->>
->> +config HUSH_INIT_VAR
->> +	def_bool y
->>
->> config SYS_BOARD
->> 	default "capricorn"
->> diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
->> index 390a7b0d841..d4f26b6ff7f 100644
->> --- a/board/siemens/capricorn/board.c
->> +++ b/board/siemens/capricorn/board.c
->> @@ -5,6 +5,7 @@
->>   * Copyright 2019 Siemens AG
->>   *
->>   */
->> +#include <cli_hush.h>
->> #include <command.h>
->> #include <dm.h>
->> #include <env.h>
->> @@ -29,6 +30,7 @@
->> #include "../common/board.h"
->> #include "../common/eeprom.h"
->> #include "../common/factoryset.h"
->> +#include <firmware/imx/sci/sci.h>
->>
->> #define GPIO_PAD_CTRL \
->> 		((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | \
->> @@ -373,23 +375,48 @@ __weak int mmc_map_to_kernel_blk(int dev_no)
->>
->> void board_late_mmc_env_init(void)
->> {
->> -	char cmd[32];
->> -	char mmcblk[32];
->> 	u32 dev_no = mmc_get_env_dev();
->>
->> 	if (!check_mmc_autodetect())
->> 		return;
->>
->> 	env_set_ulong("mmcdev", dev_no);
->> +}
->> +
->> +#if defined(CONFIG_HUSH_INIT_VAR)
->> +int hush_init_var(void)
->> +{
->> +	sc_misc_bt_t boot_type;
->>
->> -	/* Set mmcblk env */
->> -	sprintf(mmcblk, "/dev/mmcblk%dp2 rootwait rw",
->> -		mmc_map_to_kernel_blk(dev_no));
->> -	env_set("mmcroot", mmcblk);
->> +	if (sc_misc_get_boot_type(-1, &boot_type) != 0) {
->> +		puts("boottype cannot be retrieved\n");
->> +		return 0;
->> +	}
->> +
->> +	/*
->> +	 * Set here explicitly a hush shell variable, so if a saveenv
->> +	 * happens, this variable is *not* saved in U-Boot environment.
->> +	 *
->> +	 * This is for devices which are already in the field essential,
->> +	 * as if such a device breaks, the cutsomer gets a new device
->> +	 * with a new U-Boot version (and so a new U-Boot environment).
->> +	 *
->> +	 * But the customer makes a downgrade to an older U-bootversion,
-> 
-> Typo: U-Boot version.
+## readelf after 8b0ebe054bb3
 
-Fixed.
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk I=
+nf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0  =
+ 0  0
+  [ 1] .text             PROGBITS        00000000 001000 008848 00  AX  0  =
+ 0 32
+  [ 2] .rodata           PROGBITS        00008848 009848 001dfd 00   A  0  =
+ 0  4
+  [ 3] .data             PROGBITS        0000a648 00b648 000530 00  WA  0  =
+ 0  4
+  [ 4] __u_boot_list     PROGBITS        0000ab78 00bb78 000798 00  WA  0  =
+ 0  4
+  [ 5] .binman_sym_table PROGBITS        0000b310 00c310 000014 00  WA  0  =
+ 0  4
+  [ 6] .rel.dyn          REL             0000b324 00c324 000004 08   A  0  =
+ 0  4
+  [ 7] .bss              PROGBITS        0000b324 00c328 000054 00   W  0  =
+ 0  4
+  [...]
 
-> 
-> 
-> Otherwise:
-> 
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Fabio can you please try this
+diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+index d780a5060774..af9f3a3c39c0 100644
+--- a/arch/arm/cpu/u-boot-spl.lds
++++ b/arch/arm/cpu/u-boot-spl.lds
+@@ -51,8 +51,8 @@ SECTIONS
+                __rel_dyn_start =3D .;
+                *(.rel*)
+                __rel_dyn_end =3D .;
+-               . =3D ALIGN(8);
+        }
++       . =3D ALIGN(8);
 
-Many thanks for your review of all the patches!
+        _image_binary_end =3D .;
+        _end =3D .;
+--=20
 
-I worked in all your comments for the series, try to make a test which Benjamin
-requested yesterday for patch:
 
-"env: add w flags for net config in explicit write mode"
-https://patchwork.ozlabs.org/project/uboot/patch/20260124054040.7597-1-hs@nabladev.com/
+Cheers
+/Ilias
 
-and wait for more comments before I resend v2.
-
-Thanks!
-
-bye,
-Heiko
-> 
-
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+> > And see if it works at run time? hexdump'ing looks good. If so, I'll do
+> > something more broad to catch the SPL_SEPARATE_BSS=3Dn case, and add th=
+e
+> > ASSERTS that are missing.
+>
+> This fixes the boot on RV1103, thanks!
+>
+> When you send a formal patch, feel free to add:
+>
+> Reported-by: Fabio Estevam <festevam@gmail.com>
+> Tested-by: Fabio Estevam <festevam@gmail.com>
+>
+> Thanks
