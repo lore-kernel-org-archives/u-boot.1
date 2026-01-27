@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDF0D2F03E
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 14:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07F5AC88E41
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 14:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BC26840CC;
-	Tue, 27 Jan 2026 15:52:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95D8184121;
+	Tue, 27 Jan 2026 15:53:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZtM9mqke";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BzrsiWWq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F42F840CC; Tue, 27 Jan 2026 15:52:41 +0100 (CET)
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
+ id 59736840AC; Tue, 27 Jan 2026 15:53:42 +0100 (CET)
+Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
+ [IPv6:2001:4860:4864:20::42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 011858407B
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 15:52:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 559D98405E
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 15:53:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x242.google.com with SMTP id
- 5614622812f47-45ca17ef16eso1624804b6e.0
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 06:52:38 -0800 (PST)
+Received: by mail-oa1-x42.google.com with SMTP id
+ 586e51a60fabf-4094fbd1808so123055fac.1
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 06:53:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769525558; x=1770130358; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769525618; x=1770130418; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sYJxp8I1FErQyG7BdP4XeaRL+gtZ3oDSOL+R3dbVboo=;
- b=ZtM9mqkeQMK3+GPMu2t0d84XjMg/aUjllf7sqrpySsDxM3GdJlZ8mO/9dfLGDANbL8
- uCnNUd0fIpiu9ChzgOcgU56DJtpxRgSkMBo00JQK/nbBpCpitVB2VQJ+N2G942osSIKs
- d/vlXLhZx7l6gdkoLsTEpW+pkkfIxKKwoI5GI=
+ bh=EBg6WiiY07pOUPt5+mm3qsHFo9o2kM/5/TGsQhnIPz0=;
+ b=BzrsiWWqKK/IP1PE3FOaSDtqVaro+qatCCzhMD86Jj8e6hSaihEi09na16RljrxmH0
+ Rjocv07ogJgHqRCRI/+QFrO4eKZNJ7+6WrviTfXMWJ7uQuKX2I0djvH6Jlx3vRA1ZdiX
+ KFahLZypsfI9X+sLsK1M5qq68yS0HQocOHig8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769525558; x=1770130358;
+ d=1e100.net; s=20230601; t=1769525618; x=1770130418;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sYJxp8I1FErQyG7BdP4XeaRL+gtZ3oDSOL+R3dbVboo=;
- b=uKmCa3HwS7PkLgNGTv3t8Ww1eEKAJXJtfxNFi9m1M0W7iE358ssGyi20InrB8WspGT
- lWzwt/k9EJr/IVx/pnfY7cmrghnHKccheMAmyvgFraXsjMCee98B0gZWkLxwVQCLzTrn
- hvjuYKD0/TOfkVnHXjeIaaUZSXLId+Lz3l/tcRIKLn37zB5mromdigoY9ouaPu1s3/XQ
- cHFY/Mzb1mkggvL5H0FCfZ85JlWKkUGaqYR7mctCFssRr0bWEjto/UvNoG7Neg5MmV8z
- QBEaVuzw0djblOIX6vFL/zkJWN6ymJ6vCnzC7lLSThm4lrfeY5IVtgUkxfx/rCEAHXZW
- LIZw==
-X-Gm-Message-State: AOJu0YzBbUZdiGDwj+QrB0ok8cD50QqOcKkaA9bGJDBwL3bC8KoZ+oC2
- fbbksBEqO0KE6dhdFz07gO6MU8WoxVR7ZBdVEKriko2xpsgPGAku6FSJARxEO/nShVw=
-X-Gm-Gg: AZuq6aImbfHrUlLvvRhctQ0Y+5wn8FXLWDD6Fpj7GVE8Ddfl3a6XMGVCP1o7NO7BEn6
- rTyDRLpr6iH5LQcYUb4lAYCxMU3kSM8JbWatjIaolT6ZgP/keydEDo64heespcgfNTx6EWQWHnY
- RewPMU4Pn01I4/XAQY0l0hLfp/HqaDRWwPYRkr8WDMIs1ziVMvsNgJQca0IirHec4IKmi2mybT6
- eEGHN6h/vzbhJYnKkvw2jezTObfksntyG7+5OoRX5lTkpcrwec2txuBTviW6Q83FQR6vYs/RS6y
- GK07I7mx7Y/g4kryiTaE0RL790jWYLHtf1od+wo9dh1FQryK0WBzjS2QlIFI0wPoHGON7ZvIyYq
- jopxcYSrZjByeO5KwZQahMsKK7EmQISoQ33pqPC7oNcX+6bveJuPMKwVdQseDYcT9Kfi7De+lRU
- F0g3v+Mvt+nX0ZDY1aS/cuwPEsRc2Hp2HHXHPdZB8koZ1n3r9I6sXdEX9Fxj7j/z1X5DSlKBVMb
- 91TuQQSNq397H+o1KuM2twE6QdKol/f8eMh9P8=
-X-Received: by 2002:a05:6808:7c4:b0:45f:65d:e864 with SMTP id
- 5614622812f47-45f065dea65mr111999b6e.18.1769525557576; 
- Tue, 27 Jan 2026 06:52:37 -0800 (PST)
+ bh=EBg6WiiY07pOUPt5+mm3qsHFo9o2kM/5/TGsQhnIPz0=;
+ b=doUDL/+t/RSMAbyEyBZe4daOU1/bEONsPF/jB/N51uqXF7lpglVsdObzQrtcVsL4Mc
+ 5P2CnNPRWJY6NQNrgRUBpHM77MBekWiOvz4+0YBoC4uRDsd2L2Ej4aitzivQwhZX1gq0
+ 12J4PHbV+KYNkyu7R3Z9B8TNFVNVFjIsWjS+BF8vHaBjFQPkD+VVxQl44fzyd1s5sPjo
+ rs8jZgiuuwyz8Zur8PWsuVLH5ziAywq1UP0idaLy/rATop8+avFGlS5GkvH2VK0RM4ad
+ QF86ckkfZAzUK7QCWNgJnFfx6pTVZgnxwPrr4xW9OgF6UNjiaD+4nWwKKrU/+gI2ejlk
+ EjpQ==
+X-Gm-Message-State: AOJu0YzLm9iE8klYbqvc4ZPqADV4cuWtApgXptmvxtZV/xSyXtQ0sMEn
+ TOEZAN3vimJ9R7O7s4hlyUOD1r/W8dn5E5UgkxcbXRhiG2jSWuuj9EWX0r0QBEsE35U=
+X-Gm-Gg: AZuq6aIRuTc69nwyWzmUua5aeEkjv7rgghWmK+8aVG7wlDX5IoO0MKWEgrcgkgYWTnX
+ E7RS6OCi/VTRvTAerDxcvgg5hCnyId15DQQVaaHRAvVGciOvSuJxiXAObniuMl0PjyEElHi/0xA
+ o8CIDDyWjdWBqmlvM/D6BDvOgyTlJUDKcaWqPMnXsrw91KHYbjxqU1nirrFM4UpJ4JN498H3yEO
+ WIA01vfjRZJXcIcBL7PrhPrlBupTdPOEgvMqV30j0SfeDb3LtbPPQNgL5Zko3BFdrV0XZfl1L2i
+ ep7MyAAarSsfogHoZYnUSVYEfMV+/XgK1opIWkPBoYyFiP68EbYTTNOqjAjP39Kx3pu0TS9EvlB
+ ZbMifryREPmuQuWd1st9MKyHTi1k3/URuvgK6/rfKL3WBv7ihyv22/KPi5l9X3d70e12fsMGMqg
+ 0Ru/I1bSgFiXhFICRQuIv2XIM5gLyRyX9r/6c13G7GAOpydVWy8cVJUkledUcDV2ynlyeFWzYiP
+ LKzYlqWjuicAr5cNyeWbRMuljN4aoJwvgLfVCg=
+X-Received: by 2002:a05:6870:fba8:b0:3f9:e924:3c9a with SMTP id
+ 586e51a60fabf-4093fd668e1mr1355848fac.26.1769525617912; 
+ Tue, 27 Jan 2026 06:53:37 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45eb425343esm7174767b6e.18.2026.01.27.06.52.36
+ 586e51a60fabf-408afba74casm9481426fac.14.2026.01.27.06.53.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jan 2026 06:52:37 -0800 (PST)
-Date: Tue, 27 Jan 2026 08:52:35 -0600
+ Tue, 27 Jan 2026 06:53:37 -0800 (PST)
+Date: Tue, 27 Jan 2026 08:53:35 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
  u-boot-board-maintainers@lists.denx.de
 Subject: Re: [ANN] U-Boot v2026.04-rc1 released
-Message-ID: <20260127145235.GZ3416603@bill-the-cat>
-References: <20260126204548.GX3416603@bill-the-cat> <87ms1zo538.fsf@kernel.org>
+Message-ID: <20260127145335.GA3416603@bill-the-cat>
+References: <20260126204548.GX3416603@bill-the-cat>
+ <c2737282-7001-46f3-8ada-58e4007329fe@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZFI4MtKR4GQFynVz"
+ protocol="application/pgp-signature"; boundary="NXL+gQZEjjd/FH/V"
 Content-Disposition: inline
-In-Reply-To: <87ms1zo538.fsf@kernel.org>
+In-Reply-To: <c2737282-7001-46f3-8ada-58e4007329fe@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,22 +99,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZFI4MtKR4GQFynVz
+--NXL+gQZEjjd/FH/V
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 27, 2026 at 09:03:07AM +0100, Mattijs Korpershoek wrote:
-> Hi Tom,
+On Tue, Jan 27, 2026 at 11:10:50AM +0100, Quentin Schulz wrote:
+> Hi Tom, all,
 >=20
-> Thanks for the update.
->=20
-> On Mon, Jan 26, 2026 at 14:45, Tom Rini <trini@konsulko.com> wrote:
->=20
+> On 1/26/26 9:45 PM, Tom Rini wrote:
 > > Hey all,
-> >
+> >=20
 > > So it's release day and I have tagged and pushed things out.
-> >
+> >=20
 > > First and foremost, this is a bit rougher than I would like but I hope
 > > that doing the release will underscore the urgency of finishing some of
 > > these fixes. We now require for our own use to be given a correctly (8
@@ -132,12 +130,12 @@ om/
 > > contains some of the discussion around the case of SPL *not* enabling
 > > SPL_BSS_SEPARATE and so having an incorrectly sized empty BSS appeneded
 > > to the image.
-> >
+> >=20
 > > So, that's the important state of things right now. Some platforms are
 > > broken. People helping to test the proposed fixes, or if needed, picking
 > > up the changes and posting the next version of them, would be
 > > appreciated.
-> >
+> >=20
 > > We're continuing with a community meeting following the release and the
 > > calendar link is
 > > https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMH=
@@ -149,52 +147,33 @@ p.calendar.google.com&scp=3DALL
 > > meeting details itself are:
 > > https://meet.google.com/btj-wgcg-euw
 > > January 26th, 2025. 9am (GMT -06:00)
-> >
+> >=20
 > > To join by phone:
 > > https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
-> >
+> >=20
 > > In terms of a rough changelog:
 > > - We're on v6.17-dts for upstream device trees/bindings. The v6.18-dts
-> >   tag will be too late for our release cycle so I expect people to be
-> >   using the cherry-pick method to bring in dts changes as needed.
-> > - Lots of platform updates. This is always the case with -rc1 and I
-> >   never know which ones to emphasize.
-> >   - That said, we've removed ATAGS support from some platforms as it's
-> >     very legacy these days.
-> > - Lots of fixing of issues reported by Smatch.
-> > - We now support clang-format and prefer that over the old
-> >   scripts/Lindent option for formatting code.
-> > - Continued work on improving our old pre-rST docs and converting them
-> >   to rST.
-> > - Fixes in our DFU, MMC, PMIC, USB, UBI, SCMI, UEFI and networking
-> >   subsystems.
-> > - Some cleanups and improvements to Falcon mode, with the aim of being
-> >   able to support this feature in secure boot contexts.
-> > - More patches required for "allyesconfig" to build have been merged,
-> >   but some are still outstanding.
-> >
-> > I continue to plan to do an rc release every two weeks and the final
-> > release will be 05 January 2026.
 >=20
-> I guess you mean 06 April 2026 as stated in
-> https://docs.u-boot.org/en/latest/develop/release_cycle.html#future-relea=
-ses
+> We're on v6.18-dts already, so increment one in both versions above to ha=
+ve
+> the current state.
 
-Yes, thanks. It does show sometimes that I edit previous release emails
-:)
+=2E.. Oh blah. I knew I got sidetracked and would forget something. I was
+looking at the final linker / dtb problem (that Fabio reported) and so
+forgot entirely to write a changelog.
 
 --=20
 Tom
 
---ZFI4MtKR4GQFynVz
+--NXL+gQZEjjd/FH/V
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXjRLwAKCRAr4qD1Cr/k
-CkjyAP4zOqL0WWC9XOA1P3lYCuz1ZI9/yXkDNwgCqE6QYCR7BQD/VaexMLvurXp7
-GlPxNC4rPjSVkapnsNC6zo0UVQxJ8wg=
-=jHMO
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXjRbwAKCRAr4qD1Cr/k
+Cl/9AP9xUv+O5s3FpvRtDr0C4k3u7tNvuExc+q9dMEhjv1d3swD9FSL9BSGfq+eY
+RFWtj6b60XjmAaZn2sgp/pCjAcWNgQA=
+=cVB2
 -----END PGP SIGNATURE-----
 
---ZFI4MtKR4GQFynVz--
+--NXL+gQZEjjd/FH/V--
