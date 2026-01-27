@@ -4,91 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E85D2F03E
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 14:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBDBD1953D
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 15:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 997B784062;
-	Tue, 27 Jan 2026 15:56:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 164918405E;
+	Tue, 27 Jan 2026 16:04:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dR/msWDM";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SgsNVkvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 883698407B; Tue, 27 Jan 2026 15:56:00 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 80212840B6; Tue, 27 Jan 2026 16:04:13 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 571868405E
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 15:55:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 350868341A
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 16:04:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-45c7f550f46so1766205b6e.3
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 06:55:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769525757; x=1770130557; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K35Awk1jgWytbPRKSVIinrEl0CjxYelSuGqGCPqpz/s=;
- b=dR/msWDMwRuuWjaQEn7mDhAQ8nA4LTAQ9V/spMMUu5KmcEXOUI7JmLppCO3D8M2QKt
- m8QZTnuK5wTP7HpFH3r1owx5YrfZRisIhcoD+hPW3qMJnQtNJzwWaQhXnVrLmkuHaPcC
- p4d0/hCgPHWLV9lcFNIYeTdBdUQqU6oHbeKFE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769525757; x=1770130557;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K35Awk1jgWytbPRKSVIinrEl0CjxYelSuGqGCPqpz/s=;
- b=eV8+9sQHGwsZ3SXSzVeLaK9i6iXucdKik5kGbxRimRokf5yrR0isJMw9EP8kK8rSoZ
- UqgXhBWvB2Sh7XEL0QYqiVYtEZl/B5SoaKwY6voztAIispPlM+ZlE4H6JttbkguecEGF
- F30KIup+3xOy1VOlNCb8PdS08TCc02fCFeaQvvAFkO4K6j/PVPp06nxCynwhollmqIQD
- MvgB89teqGVPSF7XFDoOEAvtQhlsJnqDsqoptVVxWdqrrXOWtb+3NldZCY+CkVMSaBWW
- /uGdZ8E1SiLUtD8LNfSLL3tJiyEcdLtxlPnLtjeq7xhUnpFOAH6r1yvx8W7vpmeMs5RZ
- THmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLjr+8zCU08PsxTJoyNXJNU9Eg8k6pjXYFPRT6rmtOpju0aT7E4rr1F0CdCKITsEyxm4slgtA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRu0h6shpM0hI3ia8UU1t0zE6ZfvlzNftRrfMUaXmONNVN74uH
- a9maruCh54y3gXmObRM+59hgvb48Ns2oOONTSsrpOzCx0mqRADZ2XRPA7SWMDpVsWms=
-X-Gm-Gg: AZuq6aIdRYsMkEkjAEe/eQLKTt1tVzmZ5b7Hat7eAc0lMGAeTtTZYjupEvu7goz03Ej
- 8apBIvDcp7Dj5jyfQY2zAtP9cDR7OBskwyxL694+CyTtqDEUiJpKbIg2otwj5Y4zWM51oLaOv9s
- zVni3sZsUuDpntfPqFjBknocDdIhUYs5Ntw0QFGx/1pth8Z5btEAh7HGl5pgivTYblyLLjJSVbx
- RcwRi4CCWryomNScxLKq3WX82maDAlcyGDZLKyBhMlc6jwhrQxZoJBUiiWiZj4EG2+seVHWUd5G
- qtHTBP3JvrUhN0AfGuTB8YP4kdeRTYXpJz4CekWtmtG13lcwhkTOMpYR6zLHMgkXO+OiYHoaFDK
- 2+ZGFbAIrml4vcFqGd7TWoP2ELLwwtALkD3FKa5EzvEElSPKVcd3mBeRiO91aqKXLHbO2am/fZR
- M5sZDFmBMUojLyWgD1M85+1ci0aKc3Jzb56rnLblEeCVyZObF/Zja5KotWkKtOUfdHssUYysJCT
- z0pLUfBseaqyNYAwTEFQ+G9UNkXKpsxxt3t+bY=
-X-Received: by 2002:a05:6808:151e:b0:45e:b160:76e2 with SMTP id
- 5614622812f47-45efc49417emr1128949b6e.6.1769525757059; 
- Tue, 27 Jan 2026 06:55:57 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d15b3bfeb6sm9940246a34.18.2026.01.27.06.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jan 2026 06:55:56 -0800 (PST)
-Date: Tue, 27 Jan 2026 08:55:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jamie.Gibbons@microchip.com
-Cc: Valentina.FernandezAlanis@microchip.com, xypron.glpk@gmx.de,
- Conor.Dooley@microchip.com, Cyril.Jean@microchip.com,
- sjg@chromium.org, u-boot@lists.denx.de,
- marek.vasut+renesas@mailbox.org, ycliang@andestech.com
-Subject: Re: [PATCH 1/2] boot: Fix dtbo application by ensuring overlay
- alignment
-Message-ID: <20260127145554.GB3416603@bill-the-cat>
-References: <20260120153314.95091-1-jamie.gibbons@microchip.com>
- <20260120153314.95091-2-jamie.gibbons@microchip.com>
- <20260123201540.GA2406606@bill-the-cat>
- <36c8cbb602754cdad8a20221548da8a79d81b3a2.camel@microchip.com>
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 8E67544463;
+ Tue, 27 Jan 2026 15:04:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68B44C116D0;
+ Tue, 27 Jan 2026 15:04:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1769526249;
+ bh=bStycg8Bt3ed58Xu3ZvTdzQdFQRY4BWn0vOtpeiGPlA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=SgsNVkvfTUmHWfy80p1NYhvR8XHs47f1O6nrE4pe6NC61kjNrbYc31mtywXAS331D
+ iUOFHqXqPtWI+iOKgjzks3CX/MoJ4hMvDTogBx42pTgCiaSIi7rPQxeJ7qtZ6JyTq1
+ asRZulPylVK/q+sNI1XIe2rogn5I2dE7r8CdhtiP2VaftmoEGANz+1fMYJelbKzLR8
+ r20ZejvpYYMhwfQ6ZCyEqs6Y5N0R/xhiiyxeIR8uJIBz+Dpmho2U/SZ0jJ8hilrniu
+ Zu6SQ5zCVLQAY7mMxb3beE2RCklUuExHWa4xdepGkgn2vPTtGF9B/YnYT5qze61XEl
+ yyCwlICMvZFJQ==
+From: Michael Walle <mwalle@kernel.org>
+To: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+	Michael Walle <mwalle@kernel.org>
+Subject: [PATCH 0/4] board: kontron: add initial SMARC-sAM67 support
+Date: Tue, 27 Jan 2026 16:02:29 +0100
+Message-ID: <20260127150401.1177176-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7Uau5aQqZk9JtFvY"
-Content-Disposition: inline
-In-Reply-To: <36c8cbb602754cdad8a20221548da8a79d81b3a2.camel@microchip.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,82 +67,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add initial support for the SMARC-sAM67 board (enineering name
+sa67).
 
---7Uau5aQqZk9JtFvY
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The board has different RAM options. The exact configuration is
+tri-state encoded with strapping options. u-boot already has support
+for that, but unfortunately, the pull-ups/-downs can only be
+configured by the pinmux and not by the gpio controller. Therefore,
+this will introduce another method to read the tri-state encoded
+strappings by switching the pinmux configurations on the fly.
 
-On Tue, Jan 27, 2026 at 10:26:33AM +0000, Jamie.Gibbons@microchip.com wrote:
-> Hi Tom,
->=20
-> On Fri, 2026-01-23 at 14:15 -0600, Tom Rini wrote:
-> > On Tue, Jan 20, 2026 at 03:33:12PM +0000, Jamie Gibbons wrote:
-> >=20
-> > > After U-Boot's DTC/libfdt update, device tree overlay application
-> > > could
-> > > fail with FDT_ERR_ALIGNMENT due to the overlay DTBO being loaded at
-> > > a
-> > > misaligned address. Change the FIT image loader option in image-
-> > > fit.c
-> > > from FIT_LOAD_IGNORED to FIT_LOAD_OPTIONAL_NON_ZERO, to ensure
-> > > overlays
-> > > are loaded at properly aligned addresses and any alignment errors
-> > > are
-> > > resolved.
-> > >=20
-> > > Tested on: PolarFire SoC Icicle Kit
-> > >=20
-> > > Fixes: 0535e46d55d ("scripts/dtc: Update to upstream version
-> > > v1.7.2-35-g52f07dcca47c")
-> > > Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
-> > > ---
-> > > =A0boot/image-fit.c | 2 +-
-> > > =A01 file changed, 1 insertion(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/boot/image-fit.c b/boot/image-fit.c
-> > > index 2d040e38d97..3a327d07784 100644
-> > > --- a/boot/image-fit.c
-> > > +++ b/boot/image-fit.c
-> > > @@ -2481,7 +2481,7 @@ int boot_get_fdt_fit(struct bootm_headers
-> > > *images, ulong addr,
-> > > =A0			addr, &uname, &uconfig,
-> > > =A0			arch, IH_TYPE_FLATDT,
-> > > =A0			BOOTSTAGE_ID_FIT_FDT_START,
-> > > -			FIT_LOAD_IGNORED, &ovload, &ovlen);
-> > > +			FIT_LOAD_OPTIONAL_NON_ZERO, &ovload,
-> > > &ovlen);
-> > > =A0		if (ov_noffset < 0) {
-> > > =A0			printf("load of %s failed\n", uname);
-> > > =A0			continue;
-> >=20
-> > After talking with Marek about this more, we think this is the wrong
-> > approach. Can you please try dropping the load_op test from
-> > 8fbcc0e0e839
-> > and seeing if that also fixes your problem? If so, please post a
-> > patch
-> > with that and a Fixes tag, thanks!
-> >=20
-> Dropping the load_op test added in commit 8fbcc0e0e839 does not solve
-> the issue - failed on fdt_open_into for DTO due to misalignment of ov.
+There is also a sysinfo driver to read the remaining board options
+and is used to apply corresponding device tree overlays.
 
-Ugh, darn. Is there another load_op check that can be removed to fix
-that case? If not, then we need to pass in a new flag that means that we
-always relocate the data. That was Marek's other suggestion as we talked
-this over.
+The device tree itself is picked from the last tag of the
+dt-rebasing tree.
 
---=20
-Tom
+Michael Walle (4):
+  arm64: dts: ti: Add support for Kontron SMARC-sAM67
+  sysinfo: add driver for the Kontron SMARC-sAM67 board
+  gpio: 3way strapping: add pinctrl method
+  board: kontron: initial commit for the SMARC-sAM67
 
---7Uau5aQqZk9JtFvY
-Content-Type: application/pgp-signature; name="signature.asc"
+ .../k3-am67a-kontron-sa67-base-u-boot.dtsi    |  127 +
+ .../arm/dts/k3-am67a-kontron-sa67-binman.dtsi |  202 ++
+ ...m67a-kontron-sa67-ddr-mt53e256m32d1ks.dtsi | 2797 +++++++++++++++++
+ ...-am67a-kontron-sa67-ddr-mt53e2g32d4de.dtsi | 2797 +++++++++++++++++
+ ...-am67a-r5-kontron-sa67-mt53e256m32d1ks.dts |   16 +
+ ...k3-am67a-r5-kontron-sa67-mt53e2g32d4de.dts |   17 +
+ arch/arm/dts/k3-am67a-r5-kontron-sa67.dtsi    |  104 +
+ arch/arm/mach-k3/j722s/Kconfig                |   18 +
+ board/kontron/sa67/Kconfig                    |   21 +
+ board/kontron/sa67/MAINTAINERS                |    7 +
+ board/kontron/sa67/Makefile                   |    5 +
+ board/kontron/sa67/board-cfg.yaml             |   36 +
+ board/kontron/sa67/common.c                   |   41 +
+ board/kontron/sa67/pm-cfg.yaml                |   12 +
+ board/kontron/sa67/r5.c                       |  144 +
+ board/kontron/sa67/rm-cfg.yaml                | 1137 +++++++
+ board/kontron/sa67/sa67.c                     |  311 ++
+ board/kontron/sa67/sa67.env                   |   21 +
+ board/kontron/sa67/sec-cfg.yaml               |  379 +++
+ board/kontron/sa67/tifs-rm-cfg.yaml           |  993 ++++++
+ configs/kontron_sa67_a53_defconfig            |  211 ++
+ configs/kontron_sa67_r5_defconfig             |  126 +
+ doc/board/kontron/index.rst                   |    1 +
+ doc/board/kontron/sa67.rst                    |   62 +
+ doc/board/ti/k3.rst                           |    1 +
+ drivers/gpio/gpio-uclass.c                    |   31 +-
+ drivers/sysinfo/Kconfig                       |    7 +
+ drivers/sysinfo/Makefile                      |    1 +
+ drivers/sysinfo/sa67.c                        |  149 +
+ .../arm64/ti/k3-am67a-kontron-sa67-base.dts   | 1091 +++++++
+ .../arm64/ti/k3-am67a-kontron-sa67-gbe1.dtso  |   26 +
+ .../arm64/ti/k3-am67a-kontron-sa67-gpios.dtso |   61 +
+ .../ti/k3-am67a-kontron-sa67-rtc-rv8263.dtso  |   31 +
+ include/asm-generic/gpio.h                    |    4 +
+ include/configs/kontron_sa67.h                |   13 +
+ include/sysinfo/sa67.h                        |   21 +
+ 36 files changed, 11014 insertions(+), 7 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am67a-kontron-sa67-base-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am67a-kontron-sa67-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am67a-kontron-sa67-ddr-mt53e256m32d1ks.dtsi
+ create mode 100644 arch/arm/dts/k3-am67a-kontron-sa67-ddr-mt53e2g32d4de.dtsi
+ create mode 100644 arch/arm/dts/k3-am67a-r5-kontron-sa67-mt53e256m32d1ks.dts
+ create mode 100644 arch/arm/dts/k3-am67a-r5-kontron-sa67-mt53e2g32d4de.dts
+ create mode 100644 arch/arm/dts/k3-am67a-r5-kontron-sa67.dtsi
+ create mode 100644 board/kontron/sa67/Kconfig
+ create mode 100644 board/kontron/sa67/MAINTAINERS
+ create mode 100644 board/kontron/sa67/Makefile
+ create mode 100644 board/kontron/sa67/board-cfg.yaml
+ create mode 100644 board/kontron/sa67/common.c
+ create mode 100644 board/kontron/sa67/pm-cfg.yaml
+ create mode 100644 board/kontron/sa67/r5.c
+ create mode 100644 board/kontron/sa67/rm-cfg.yaml
+ create mode 100644 board/kontron/sa67/sa67.c
+ create mode 100644 board/kontron/sa67/sa67.env
+ create mode 100644 board/kontron/sa67/sec-cfg.yaml
+ create mode 100644 board/kontron/sa67/tifs-rm-cfg.yaml
+ create mode 100644 configs/kontron_sa67_a53_defconfig
+ create mode 100644 configs/kontron_sa67_r5_defconfig
+ create mode 100644 doc/board/kontron/sa67.rst
+ create mode 100644 drivers/sysinfo/sa67.c
+ create mode 100644 dts/upstream/src/arm64/ti/k3-am67a-kontron-sa67-base.dts
+ create mode 100644 dts/upstream/src/arm64/ti/k3-am67a-kontron-sa67-gbe1.dtso
+ create mode 100644 dts/upstream/src/arm64/ti/k3-am67a-kontron-sa67-gpios.dtso
+ create mode 100644 dts/upstream/src/arm64/ti/k3-am67a-kontron-sa67-rtc-rv8263.dtso
+ create mode 100644 include/configs/kontron_sa67.h
+ create mode 100644 include/sysinfo/sa67.h
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.47.3
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXjR+gAKCRAr4qD1Cr/k
-Ci4jAQDQc+cccAHHK3mHD0uhF/oUNiXgr9bHUpm3kV11U9nEPQEAvMqGV7EEFVY0
-wjOIJfxUbrN3uqWy1UWEP8AxeAnIQwU=
-=pF9L
------END PGP SIGNATURE-----
-
---7Uau5aQqZk9JtFvY--
