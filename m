@@ -4,103 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C0FD25920
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 02:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D83D25923
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 02:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3170A83F50;
-	Tue, 27 Jan 2026 03:55:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7D3D683F64;
+	Tue, 27 Jan 2026 03:55:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hfy0Ss8r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JVFt79xg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09CBD83F5D; Tue, 27 Jan 2026 03:55:22 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 43A6683F6A; Tue, 27 Jan 2026 03:55:28 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB5EB83BFE
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 03:55:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E46D83F63
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 03:55:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b8710c9cddbso633113366b.2
- for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 18:55:19 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769482519; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-65063a95558so7087263a12.0
+ for <u-boot@lists.denx.de>; Mon, 26 Jan 2026 18:55:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769482526; cv=none;
  d=google.com; s=arc-20240605;
- b=d3TG46lAfvS/ONETNYE+XKAKw4cEFaKIcP/fBbGcjcKye/HPAca71v5oV+xd3XD4n+
- UahBi2ympZxiJ9KGMvPZrU8EZ/H9xOFOQ5kuGaz1s2liXd8do2oC4LFtYWeKWuYEFu0c
- QY5LF0nfqNnd7eqJoyfisMdonOPiWw5UzdingrHm0cSulQoo2QFLk60HcARpihfEkRV/
- e2tY/JC1uqALdMmM+UQK4NTq+XWxjr5/N8ACld6QQW0eqoeocEYKRCbBBcQPfNXJKLa4
- 1+30HtR8nD71U1r2jt+lER3sfulnCj3Dvrl7RVnTtqN7JZxemqjTdsDyrPyifcOC6RZR
- WTzw==
+ b=Pn3vBCZXd+h/MGNq6DGD0OXPWxi4QCmA06OGqetF1ZtP9LrE3vy5cNbaF6uW4RWhqi
+ lNswH+4x79NdjXtHibQhYs1jAeu+p1gpun2p6ij0pHDREe+cHp7iic1CjZeh6TQVPK/v
+ BnwGZagQD4CpQKHv/DQTf6X1qYExGJ0YxPzyP3r1+zxRD6GbRzV2Gywng6eT2gcAPETN
+ XlA1SyrZzNnQ2QFMwYUJ+/MKmjIlkGvIH88NFooBZHmoTW+5qlFdr5q0wiv2/y3lVyVq
+ nY0p+WGaBz3QTlK7x4JamhAHw7b138MJLV4ghsmMnJ6OYMb1e+wFFN/xWiC/6JezgDxn
+ EF+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=M8mUslVE4EtU6qtCbwH1jzBcY2TNDDMscnMGnJ1pGcE=;
- fh=pLPW9G0nY5afxya6J1SRRFm4G5WR9SZHRKprXg8519M=;
- b=FxtuEDqfOFJsX4z+fKlJ+6TGIj4slHwf2paBKMuhm69DU0JCgwyRmiFOBwG9FzZLiE
- 1HedY4gEROKwe1wvYySh6F+Xj6OlHyOCiM6+5Bwlig+1Th7iT/nStVqJBL3EWUNvB0tf
- vslwrL/Xn1wFUz36FuEzpetYXeSF7nbCuzVm15kTHICzHyKgZ7pK36WEGx6pJdBxz3ln
- CEce7DG8HqhRbw5EpL+ObAp0mQTZhKHOe7pNk81kZNN+C+nTJzhzZYQb0kgmhjTMNGfL
- SE+uqh960bqNJzaUHsFjwWJogmgp3MyD8kei4VUmTZDyZUUyHT4s3QWgq6jH3/eTftsT
- XXpw==; darn=lists.denx.de
+ bh=YLGOPujGyw5cT9GoUsLoXbCbmhAsDUalJEvFnno5Q+o=;
+ fh=TCBdUFJ8Qo/n0fS8Qkbxqew5p5mxpoEKaWr/fkoz7iU=;
+ b=O0/KutBV0eZ4QvOkiZDjgsgSkyeg/KlI4N08B7O4JGYBJ3VKSDvZ9EK6my/8NXXQl7
+ /wSXf8c9xqwcukJYIRR2pcBDR9UKYOG9jQxwZdtTNGW6jYhhPfIDXFW2oW6lj3M/oZO9
+ XR7JQOy8JTvnrA63etIlXLUOqj2gYNcQsOR2qweWnmPijJajdAY4LHK0reHWyG0QnDEG
+ 0koVVWjua1oyiqUB90Pp2mmAjd8m62qo1Sas88UxZQ93LMyhHagpnP4wluDUF6aQ8xvC
+ lqdn6CckQcnMJ4xC9scdpvmNi9zKidsIR4w+j9Tlg0N49U3oUK51HzkvIWGOBkNdwxVo
+ 2oqA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1769482519; x=1770087319; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1769482526; x=1770087326; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M8mUslVE4EtU6qtCbwH1jzBcY2TNDDMscnMGnJ1pGcE=;
- b=hfy0Ss8rrwAPWu2DBKzHtc4yXtZTGKJu2T3ime7XHWRpVwTD+/Vughndv1e3K8UqnV
- u1r+giGFiFcBwI4BH275wFI8OyhoXO+Lhohjpd+nmvrKnGPUz9xCA0z/M3ZYf3szr/ya
- QtXsPCb8df/t2vzxh/W5dTeUfkRwN6mjn3V+o=
+ bh=YLGOPujGyw5cT9GoUsLoXbCbmhAsDUalJEvFnno5Q+o=;
+ b=JVFt79xgmIsIEYE7DmcyLgZRJY9QjIsOWz/HYZpIMIGO8eldZ+UpDQHzdMBqndNGXQ
+ w8YWyFzT73qVRhEXzzvblqjwAICGgc9ez/vQCvgwGG5akhbx3n5rnrOGefPXzte9PP3l
+ NgTXr4vuBAAsLIYdrEhvOIXHHp9WFzX/Xoq7A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769482519; x=1770087319;
+ d=1e100.net; s=20230601; t=1769482526; x=1770087326;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M8mUslVE4EtU6qtCbwH1jzBcY2TNDDMscnMGnJ1pGcE=;
- b=Mb7THmck/zr0r+nkQWjYFSdtjNQP+P76wHY4t1pZIQivvVdt0QVDL1GI4EtZ2iPjlr
- 0nM1jT7REgRCCGF8RHj69lbgz8PpQFfExOh+SoHQ7cZKO/fKcdg5rueSqXJnzlWceRV+
- 1y6aDKnl/JrgQ0fGS7W0yTQp4CS3ijAXB4Y8gmDYZSOddLJToaJa6kX5am5JDawRxGha
- fkqtfHGfyiN51RGj9yZgvFvbw0FiXiVBnyC8wHvSwhq5xXFz4dDUYT2GeOROURwdiD+U
- 2uYyh0ziTYGRhkiD3XDwKkVGsdxQHuW3mNKwm/gO+6w/iqva7SONjd0q+IBI2vwhtPSK
- 071g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVM0FX6g73hlJPrjhXncM6WDYU42jHkt6grUdt73Vpc4obynv58wc+RpQ2GEEbk9gHFnOSOaTM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyvugaGtLGBlxj9H+x72hdJKb2jjSU9s4b/NifKFu/H5+vGW+Ir
- ZyyJSLvR8LcCFd07WJJDoRHKnKdIuRXnipkHp3QpqSIRzFvEDmYmIc6p3XlZ+toSsNTJ3TAy2uF
- 2SdUoJx9c8WNoSamZ5JFERJPgyrw35jj13i48dpZj
-X-Gm-Gg: AZuq6aIIjxHHMr7BY8C1yXtOeWJgk9p6sRiS7LrXJFBWBezAG8UCdMQ7LE8Orz9VDpV
- BcQddMwnul2bbdvX8k6twW6EW0exJ18QtalZl43YIslopgcD1GVmDitI0T9fy+eQF1KjoGnYjLD
- gSpSsyPrVSC/LgGMZVG5F8MzYi+4mc/aN9EI0pxaoeTsmcSaCDur87MXPVu2thnSuGPwAJJWHkD
- ECOF1QcGnMO+nVnbeLC5qDxubtAljBqOGx57UGkjqf+4GM7dus2mb8Yk/7DnTwLBgXKKo6h
-X-Received: by 2002:a17:907:3e13:b0:b88:3bb9:e2d1 with SMTP id
- a640c23a62f3a-b8dab3d97f4mr25835066b.60.1769482519178; Mon, 26 Jan 2026
- 18:55:19 -0800 (PST)
+ bh=YLGOPujGyw5cT9GoUsLoXbCbmhAsDUalJEvFnno5Q+o=;
+ b=ECKHPzUv+6HBQ/23RoL1r71ScznAt9owaGPvNJWa4kh/DyuyK18WD+wZBAzii/IOj1
+ V7tlkgVHk3foLmVsuwIPO/KAr6BqKkXU8evgF0BJIOGCXug+66PaphGIQd2SdHUDagnK
+ Dfqag62RZMkVltaAfk0TLW4e8Q7QrmEw1z6gODgXLuB/wvL4Vu6tC4SJWV5XgNmJ6huD
+ zFcyjVXjuG0w6oSJA8dEj/toBwEGyGAonW5vhrI1a4KYs+O5k6HYfV5LrwK7Uc/pP4hv
+ uuzpgWbfb2geO3B1DgmxiYcYwZQ2Jt3dnGnPsfRCORLPubN1EPDmIBuhdN00+4BME3sn
+ WDlQ==
+X-Gm-Message-State: AOJu0YxjqXWiLLW5vR8tPCvtynPVSPsjTQCFpdBO3qUf0w7xAeyf90Al
+ JOGWvq8FW3dvKZRPpVb2M6JmeZOeZaL4aGruY1RH4TN7YKCk2H4qza0j9I1Y1HAirEYBUPI3abl
+ AFPVQYRZ069Snozw6Ug3FxCcRLN+sRclY3KMA6MYclqJ4kxM/u7vQdg==
+X-Gm-Gg: AZuq6aLvKRM6Ite89nq4EGl61tCD3EhigB5YNTkYH+gyyB8QuLILGC4lPYZdX1NXFNN
+ xSVpHNPqJ/hVePm6p45Vl/nHeJZp8D6+Xb63R2PJcnzncibI3p++TSikbBUeTas6SBklPO2hFh+
+ hraN5m5pGUpuE5+3HKUYY6hdIzcbEmgfDC4a++WvyiLHahdG4WxCeYL4WfCd1Z0N7427/BuduSa
+ UoGuQE7S3SWmO6z34aICigPby15yXvet9mhJHIeYIUwDXITFzlRg74spOLHtI33iDw4PMDp
+X-Received: by 2002:a17:907:1b10:b0:b87:685a:31f3 with SMTP id
+ a640c23a62f3a-b8dab36196bmr25711066b.52.1769482525718; Mon, 26 Jan 2026
+ 18:55:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20250323160107.145749-1-marex@denx.de>
- <20250323160107.145749-15-marex@denx.de>
- <f6b85cb6-509c-46a8-984e-3881374ceb02@canonical.com>
- <9dbccbf2-39a7-48a0-9d2c-79de220c07f3@canonical.com>
-In-Reply-To: <9dbccbf2-39a7-48a0-9d2c-79de220c07f3@canonical.com>
+References: <20250819105554.3067982-1-ravi@prevas.dk>
+In-Reply-To: <20250819105554.3067982-1-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 Jan 2026 15:55:18 +1300
-X-Gm-Features: AZwV_Qgbol-xD9ZK5MT3EkSDn3XaH9FEkwTg13MZHHLUdNdPj1A4vfKv3g_Jg6U
-Message-ID: <CAFLszTh7-9a7F9h+knc1CMNvm8C=gXLZhLZ+W5eJDEZ_e5pc2A@mail.gmail.com>
-Subject: Re: [PATCH v2 14/24] clk: clk-composite: Resolve parent clock by name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Marek Vasut <marex@denx.de>, Hal Feng <hal.feng@starfivetech.com>, 
- Minda Chen <minda.chen@starfivetech.com>, Adam Ford <aford173@gmail.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Dong Aisheng <aisheng.dong@nxp.com>, 
- Fabio Estevam <festevam@denx.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- uboot-imx@nxp.com, u-boot@lists.denx.de, E Shattow <lucent@gmail.com>
+Date: Tue, 27 Jan 2026 15:55:24 +1300
+X-Gm-Features: AZwV_QgoGzN93gPQxEKY8qRHE2TGTjJFUt-zD474eHrBWOTsdhtCmJ6m2VUTias
+Message-ID: <CAFLszTgxbJxxUhPAcFpXE80=ks1ogtLL47EKbK4eGpLz1CffgQ@mail.gmail.com>
+Subject: Re: [PATCH] common/spl: use memmove() in load_simple_fit()
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Sam Edwards <cfsworks@gmail.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,107 +108,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Rasmus,
 
-On Mon, 31 Mar 2025 at 05:14, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 19 Aug 2025 at 22:56, Rasmus Villemoes <ravi@prevas.dk> wrote:
 >
-> On 30.03.25 17:15, Heinrich Schuchardt wrote:
-> > On 23.03.25 16:58, Marek Vasut wrote:
-> >> Use clock-names property which is accessible via parent clock OF node
-> >> to look up the parent clock by name instead of depending on unreliable
-> >> global clock name to perform look up.
-> >>
-> >> Signed-off-by: Marek Vasut <marex@denx.de>
-> >
-> > This patch breaks booting starfive_visionfive2_defconfig in the SPL stage.
-> >
-> > To dig a bit deeper I enabled the debug UART for SPL with these setting
-> > on origin/master (5e74863ad6613df):
-> >
-> > CONFIG_DEBUG_UART=y
-> > CONFIG_DEBUG_UART_NS16550=y
-> > CONFIG_DEBUG_UART_BASE=0x10000000
-> > CONFIG_DEBUG_UART_CLOCK=24000000
-> > CONFIG_SPL_DEBUG_UART_BASE=0x10000000
-> > CONFIG_DEBUG_UART_SHIFT=2
-> >
-> > clk_register: failed to get pll0_out device (parent of perh_root)
-> > clk_register: failed to get pll0_out device (parent of qspi_ref_src)
-> > clk_register: failed to get pll0_out device (parent of usb_125m)
-> > clk_register: failed to get pll0_out device (parent of gmac_src)
-> > clk_register: failed to get pll0_out device (parent of gmac1_gtxclk)
-> > clk_register: failed to get pll0_out device (parent of gmac0_gtxclk)
-> >
-> > Marek assumes that property bootph-pre-ram might be missing for some
-> > clocks in arch/riscv/dts/jh7110-u-boot.dtsi.
+> I had trouble booting some am335x boards (both
+> beagleboneblack and a custom board). SPL would start just fine, and
+> apparently load U-Boot proper, but it would hang when jumping to
+> U-Boot.
 >
-> This change suggested by Marek resolves the issue:
+> While debugging, I stumbled on this memcpy() which from code
+> inspection very much looked to have overlapping src and dst, and
+> indeed a simple printf revealed
 >
-> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi
-> b/arch/riscv/dts/jh7110-u-boot.dtsi
-> index ce7d9e16961..4ed764393bb 100644
-> --- a/arch/riscv/dts/jh7110-u-boot.dtsi
-> +++ b/arch/riscv/dts/jh7110-u-boot.dtsi
-> @@ -113,3 +113,7 @@
->   &sys_syscon {
->          bootph-pre-ram;
->   };
-> +
-> +&pllclk {
-> +       bootph-pre-ram;
-> +};
-
-I just hit this as well, thanks for the post.
-
-However, -master still does not boot for me on vf2:
-
-U-Boot SPL 2026.04-rc1 (Jan 26 2026 - 19:52:48 -0700)
-DDR version: dc2e84f0.
-Trying to boot from MMC2
-spl: partition error
-Error: -38
-SPL: Unsupported Boot Device!
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-Regards,
-Simon
-
+>   calling memcpy(0x8087bf68, 0x8087bf80, 0xf7f8)
 >
-> >
-> >> ---
-> >> Cc: Adam Ford <aford173@gmail.com>
-> >> Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> >> Cc: Dong Aisheng <aisheng.dong@nxp.com>
-> >> Cc: Fabio Estevam <festevam@denx.de>
-> >> Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> >> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> >> Cc: Peng Fan <peng.fan@nxp.com>
-> >> Cc: Tim Harvey <tharvey@gateworks.com>
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> Cc: u-boot@lists.denx.de
-> >> Cc: uboot-imx@nxp.com
-> >> ---
-> >> V2: Rebase on u-boot/next with additional clock patches
-> >> ---
-> >>   drivers/clk/clk-composite.c | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/clk/clk-composite.c b/drivers/clk/clk-composite.c
-> >> index 1191bdf87df..9e3b5191767 100644
-> >> --- a/drivers/clk/clk-composite.c
-> >> +++ b/drivers/clk/clk-composite.c
-> >> @@ -149,7 +149,7 @@ struct clk *clk_register_composite(struct udevice
-> >> *dev, const char *name,
-> >>       clk = &composite->clk;
-> >>       clk->flags = flags;
-> >>       ret = clk_register(clk, UBOOT_DM_CLK_COMPOSITE, name,
-> >> -               parent_names[clk_composite_get_parent(clk)]);
-> >> +        clk_resolve_parent_clk(dev,
-> >> parent_names[clk_composite_get_parent(clk)]));
-> >>       if (ret) {
-> >>           clk = ERR_PTR(ret);
-> >>           goto err;
-> >
+> Now, it will always be with src > dst, our memcpy()
+> implementations "most likely" do forward-copying, and in the end it
+> turned out that this wasn't the culprit after all [*].
 >
+> But to avoid me or others barking up the wrong tree in the future, and
+> because this use of memcpy() is technically undefined, use memmove()
+> instead.
+>
+> [*] That was 358d1cc232c ("spl: Align FDT load address"), which has
+> since been fixed in master but not the v2025.07 I worked of by
+> 52caad0d14a ("ARM: Align image end to 8 bytes to fit DT alignment").
+>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> ---
+>  common/spl/spl_fit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 25f3c822a49..746c3d2fa28 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -353,7 +353,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+>                 }
+>                 length = loadEnd - CONFIG_SYS_LOAD_ADDR;
+>         } else {
+> -               memcpy(load_ptr, src, length);
+> +               memmove(load_ptr, src, length);
+>         }
+>
+>         if (image_info) {
+> --
+> 2.50.1
+>
+
+I just hit this too, thanks for the fix!
+
+
+- Simon
