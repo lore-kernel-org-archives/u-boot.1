@@ -4,121 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33119D2D8E6
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 10:22:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C02BD2D8EF
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 10:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9416083F53;
-	Tue, 27 Jan 2026 11:22:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5794883FDE;
+	Tue, 27 Jan 2026 11:30:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lLYL+OMo";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="R3GcIT7p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED01B83F9D; Tue, 27 Jan 2026 11:22:54 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4A3E583FDF; Tue, 27 Jan 2026 11:30:15 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A02AE83F50
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 11:22:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33CE183FD9
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 11:30:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4805ef35864so17398255e9.0
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 02:22:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1769509371; x=1770114171; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=rdCtmpPX7/OdeR3hu/m/0MxtWrU1rpBJ0xvuDf5/9TE=;
- b=lLYL+OMoZsePP9kx0BImc9lRe9bPF90NOQlqYg8syxtiM0dEzGz87ZaRSLug5ze4DB
- 3Fp56zW3R8mL6HU/FQNsSmnGgzgUpgjKfEQMpp+rR01PR1kNzz0kw00Q6jK1jzWHN3m8
- 3Tm/bgvWxb/nKiXmtExJoZvz+bu9nZ0HfkprMYY6oez+XRuqcWAfRlfO+WMEIpcIydS0
- drc81YH39Qab+B84nliD7zVXv3NN1FrkBZ94QDrnGEv+u/Ak195dYB02ip7gXnfqg47v
- WiyhLbhpvC2VrS6DTMW5uJZ/PLTpBXX7Th0MC4N/N0Xv+kqebNbH0LsHAqPNtXDu4SLM
- noRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769509371; x=1770114171;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rdCtmpPX7/OdeR3hu/m/0MxtWrU1rpBJ0xvuDf5/9TE=;
- b=DNu+RroYNWwD01ksQErNvje3Z5g7KOAWxRi793a/SRkX7y4ag+kMLcaBt+1iWVYvWp
- RkD4+nAn+E1+jiTI7QKXpDOUYBKT3YxZxC2zWaUuZuHdVYXV5v04ds+W/yOGi+VXeqjc
- IUmIUfEXij+dQnuifl59UdE9R8SrPAuEm/lZnbVjijDvjD55L23IWwDf0ArxwdmChisU
- gvTlcZa2k1GfiKyZP+kl26qSntqLK903rzzfh69fFl4XQsdPswr+jwDJ9DljSto5Xetc
- bdvBH/6JG6/Ev7J5ES/12KgguHV3KJVZNhXAmNPIOYi/NvR9EQob1s0LZX6/FS0Sc9E+
- VSyA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU6c5asVW7JjVzFC8L9yFek0wgAGEjBI+Wgnd73EIpDmjjJuQTU0cSxy5Ax75or/JVvu8WKo9Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmHAZJZIUabx+ELEHguhmwI/4683mP3u50NPALD2bgZKfPCKqd
- RviMmHzx9qH3tP2m/koVoTnpQYQtQoqXFAiZcPrZeQyUY+v+ovkIpaFZVTzARqhw4oI=
-X-Gm-Gg: AZuq6aLewxjEz9FiEljldsxqCfMJOjySfOu6LE2J9RtcEnpmqABDg4G4SH9/pNd0hlm
- o2FAnwzW+4R6a4yxsmZu9+NsvKO4jQw/1ryAsRdjg1vBbz9a2sMQmcVC9F+JdFOCMoRP2nBcl/W
- UKMLkEk+MHCMR3ZtzHopbqexrDQ7NpAmxwtrq3I9wwLKQOlK930AvcB+cel3E8XE/X7x7SRz36m
- 40wDSehC9lLndQk7ANKPjOnuVVzzHlqb4kLPHUNdYbAVGgYMby6XYcA/8Jvk84e5lPXzgnmTJEq
- EhAN+vfUhHnvZVbhP7SDkjE8sn82MSNvLwEwM3KSXRVk5adeKyx4CLZhdeFyLLVQtA3SW1WOdnC
- qjsAxeOiWGlxNyi0DO/OuubcX5zYNBXDEiCvf0SPNCCTXEkng85YGpwd1LIXMLAVoZshk+AxcT+
- nEWumU4IIQkeFummywbjkjKOH0s73Nx/nmm66JZj7Vxxgur8UUigNazs0J6k0dB/I=
-X-Received: by 2002:a05:600c:4f0c:b0:477:9cdb:e337 with SMTP id
- 5b1f17b1804b1-48069bfaa18mr19185205e9.7.1769509370836; 
- Tue, 27 Jan 2026 02:22:50 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:53a6:bd3c:8e65:509d?
- ([2a01:e0a:3d9:2080:53a6:bd3c:8e65:509d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066bf7c58sm53125885e9.8.2026.01.27.02.22.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Jan 2026 02:22:50 -0800 (PST)
-Message-ID: <956d86e5-6bef-47b3-a436-9acd03b38aec@linaro.org>
-Date: Tue, 27 Jan 2026 11:22:49 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X9CJFKhBC6RYO6YBeRvd+6BoIOPMbpR1HM87U4neiujeacLyNu3gDbFTP//sAZ7mZNUALpEI1eypMqJoCsbIuUPVKffsAMK8lm7SQQE9sOBTE3faGbVJKvkmKdQN1fpl0sAKltHpqG9rNtoyDCMnLYmhaJ3qsfAPq0wekijlyQTAaST4M8xu+9izq7ed/k9kjNqUm+Gr+wym0tgEDlRAOgbs/x94TFQb3vq0+d13j4vzcA8L/rZMjOjJTyYekhb3HF4opsMkJizhV9hPn/pECtUhJb6jfOuqM1SqxqqVAxxRHYL/G3kZMy3p1UzFuGDCrNraIXM0IYYVjK8+J6RVRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7CbfPo+2Y4N1HKyP95ktKi2JVjnndo6yZvQohBptgvI=;
+ b=AgpUxKdoiQC2zRHye4zfY4q41ldznrm1np8qpnKHsrvXAiznGWWjbgD2otAk3xa3KDKoRmvaGDM0C243eRKatOO4sNWsJKaNLYYb3xtFX27z8OtwkhqFwlOv4GLWxvn8xw7boAoVGXcF+yPz+recUEeo9hXnCLkkMpBgssP8SWDexpHhc+9lCOMSJeHtqNfD+wZas1t3sC+IPyu/e+ABd1CRdN6v/3XeWz+yvyrQCLWvjz6wOb2WZJ1nh1Fyg3hfHiSUFeJLhF1OmSI16gyM/Orm5mCKC+gZHKE+8V2YIGMy2ttRE6EWyfgfRCccrT2aJdL5udXFN7FzMJrr0sqqzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7CbfPo+2Y4N1HKyP95ktKi2JVjnndo6yZvQohBptgvI=;
+ b=R3GcIT7pyw9hie+Na47BsyaZqnZEp7Ue6N+TRWEkD5Q1a0p2r+mpNVzmcx+0C7D94MQyeSz1mcLOABc6Skhy97o9IWbTgKxtEzFNzUeN0ikoXV9RpDaMZFQUcN0bVnidyMxU3V4gK0KxrKUlaBtL5z/TMZNGhQ6vEUZKkPndwPntM8lJd4fzyaGOM1jbxkt0HzTrEsDirlG2PFPSEYe5gRE23b39oFXBX2/VBHEK/ELS65H/+/WQH9R6KEV83Ab5d7mv4LIv7DhLg0PxPzqYmAeWUBAEgqpn5KybRaOcFa/mFTbcgxmqaEGcXiJKG6i6JJ1GPYnmisz3GU/HJYBLpA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by IA3PR03MB7715.namprd03.prod.outlook.com (2603:10b6:208:512::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.16; Tue, 27 Jan
+ 2026 10:30:09 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9542.015; Tue, 27 Jan 2026
+ 10:30:09 +0000
+Message-ID: <13ab5e37-2ea9-4273-aaad-ec711a6c8ebd@altera.com>
+Date: Tue, 27 Jan 2026 18:30:01 +0800
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 5/5] scsi: ufs: renesas: Add reusable functions
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20260103002254.183357-1-marek.vasut+renesas@mailbox.org>
- <20260103002254.183357-5-marek.vasut+renesas@mailbox.org>
- <a99b6773-5bd4-4030-9308-59db9d4d0fbc@linaro.org>
- <e3100b4b-98e6-4a08-aa26-df9dcceac235@mailbox.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <e3100b4b-98e6-4a08-aa26-df9dcceac235@mailbox.org>
+Subject: Re: [PATCH v3 1/2] Add CoreCourse socfpga Board AC501
+To: Brian Sune <briansune@gmail.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinh Nguyen <dinguyen@kernel.org>
+References: <20260106011325.4634-1-briansune@gmail.com>
+ <20260106011325.4634-2-briansune@gmail.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tienfong.chee@altera.com>
+In-Reply-To: <20260106011325.4634-2-briansune@gmail.com>
+X-ClientProxiedBy: SG2PR03CA0090.apcprd03.prod.outlook.com
+ (2603:1096:4:7c::18) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|IA3PR03MB7715:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2a7c65b3-dccf-4e45-297c-08de5d8f0b65
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|13003099007|8096899003|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NTRLdEZWWndIQTR5TGZrTUJ1ZmVKWlF5Tk5TcmFDS0JtMEc0OWRFR0gybXJ4?=
+ =?utf-8?B?eEFZcGtTNjJ1SG1vWlpGdHhqSWZaZDl5TTBtZld5MmFlSTdrOTE5TUNjRlM4?=
+ =?utf-8?B?ZzVYZm1lZjdtYUFpcXJEcGhxRUlrd1dtNUR1QTE5bFFNTXBQSkxnUTZDdkFO?=
+ =?utf-8?B?OWpEbjFjNXF3VTRjSzRHVW5MTnhQKzhxY2tldEovR0w4Y1JmL0E1UUE3d0Jj?=
+ =?utf-8?B?SExGbGRBVktZQ05vbkRSaEtnSkFlMVBObVYzTzhnVEVKa0VYK3NPWllhVEg0?=
+ =?utf-8?B?Ty83WmdqazF5WGprUCtuZnpCQnQrQkZzRTljbGtOdnhvNnJnUWdyK3Z1RXBl?=
+ =?utf-8?B?SzlFdmlzcTM0WGQ5dk1YT3dOL29HNkJPRVJoSENwcVZTL2lTVFplekVadEpy?=
+ =?utf-8?B?ZDh4OFBGVWlpZ2Q0cE1ubVRsbG5kQjB4MHJVeEpvc3MybGpoWklBQm1zSkg0?=
+ =?utf-8?B?Y3o1VHZjMW1TdCsyTk9PSFlxTzFobzVrRGErb0czWEo3dG1BL1Z5ZGw5YUFr?=
+ =?utf-8?B?Z1lwenRRZTNBQ0FTWFU2NVpHSC9ZUjVURzJsYTl4aWNIUWcxMTUzS1NzcFdS?=
+ =?utf-8?B?U2JvYUtNNFpaS21QUWdJMzVrL2RyejVrekROWk13NHgrRzROcW9SdHQyY01w?=
+ =?utf-8?B?ODNrcE96aVFSTmtiUEx4c1lUcVBIL0VIY0U1cndOV2FtVmZFNTVjQWU1Z2dm?=
+ =?utf-8?B?STM5bHRZMnZIVkJ4emNaQXBIZlZTY1d1QlVmdW5mYUpEc21Xb0VSZDFaM2NZ?=
+ =?utf-8?B?YWROS1NBR3B1MFZUNHlxbXdSRnA3Unl2NTZvUzBjU3o3RTVmaDlib1RRWmlz?=
+ =?utf-8?B?OVF6elpXeGdvVE1TOTRGaDd0RE5KMmFEUlBmcmJ5U29ibjhMZmZheU9wd3Np?=
+ =?utf-8?B?Uk1uRkw0L3d4OVduUVR3UXI0aU54RE1yTDAyVUtaWU50T1Q1ZUdpNTRtSld0?=
+ =?utf-8?B?WHpXODRVYkxLV1BqRythUmVzNlRvRGJBSlBvMzR1SEFWYjlIQW53RlRTZVdk?=
+ =?utf-8?B?Q0pBamprWmo2K2R6NDFTV1pIcmdpekVFQWxNM2N0Tit2VjB0dzQyZ2NxNUhz?=
+ =?utf-8?B?OWY5SmNWNzhScnFqckxUTU5yUTFrVWRqamdiWUhYSjY3WUlzVjdYY0lFUkJJ?=
+ =?utf-8?B?WjFGNGJBTmlpTW1WQ3dsUjBkMHpNeEtiWlljOENGK3NoVnBRS3JSYWJLaDVS?=
+ =?utf-8?B?L2ExZEhsTkVNZFNuelBTeG5MclZlaTlWb1VzdmdkQ1IybXI5T0JjTUVLckw5?=
+ =?utf-8?B?dFhoL1hEQlpmaWZFN0dRQnBoNVMwdU9nZ25naGlGOGhaakpaUXg0bE1Iak11?=
+ =?utf-8?B?MmlxaTQwc3RNbEZBaFFkdHBTd3pGbGRQZHRBY1FBcGRIUTc1R2JIYzlNZ3l3?=
+ =?utf-8?B?NFRjdXErbldWVEFMOXdTNjRCcjluY1lOVFdjOElUTEZraTlkdDZqRHd5SmQy?=
+ =?utf-8?B?NXg3MXhtQUwvNjBvZ3dmdm8reTZNdENrSTcxM3RpWDU4Zi9BclAzcWFkSXlK?=
+ =?utf-8?B?dzhXK0N0cG1VRFhwOU9aeVMrOEZkZTVjNWgvQzBZUWhueXlWSUxrS0Y0dXlE?=
+ =?utf-8?B?UjZBSEp6aFFSTWhPNThlYlRteVlrY0FqdEhCMk5jVi9KSC9Dd0NNNG9Vc04w?=
+ =?utf-8?B?TUp6cHkyUFpSTDFZT1YvSW9VQlZua1d0OGlrSnB6cCtDZFY5N1dYOXkyMlZ2?=
+ =?utf-8?B?b1lrWWhWc1JpVVRyMXZEU2FsYWZOVm1kenR6REpaK3NFRzZhd3VQRFpmSC93?=
+ =?utf-8?B?NHZwTU9QdTNsQ25Sa0hCRE5tc0V3YWtmNFl3dHp4YWZOWVRZblhoQk95clFy?=
+ =?utf-8?B?UmJycERDbkRDZVg4bU4rWWhydnhSaGpseWN6UUtHV2p4TkRNMVY3VWkxT1kx?=
+ =?utf-8?B?alVPcDZiWFV4ZjJaTEd5Uy9VS04xMHpjTWZnWVYvdDROYXhRTUdZdjUwaXlt?=
+ =?utf-8?B?SlliaUh0THp6RS9RSnNsa0VVNE40NXlHNWNtUUc3cTYvUll0YUZzVnhVaUVY?=
+ =?utf-8?B?M3RCMldaSXdkeW1JeVRUUlFybnJENDhYRFdTUzV5dHAvelJZZ3RxSForcTJh?=
+ =?utf-8?Q?mvDCfa?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(13003099007)(8096899003)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N2s4a0xDUHFhSnNVbEwzOGZHTE16M1RkWkcvazIwL3JvWVlZSk9JMHRBaGU5?=
+ =?utf-8?B?UUZCakpHYmw3WWxDYVFZc1pGclVHS0RoL2tKTlFNb0EvTDk0blJqZERqZGRF?=
+ =?utf-8?B?b3pKYitJamptNGkraGNmKzRKWkczVVdYbjlGSWViMGRXZ0toMmNxRkNLcURv?=
+ =?utf-8?B?aEs3N21obXkydThnRGFMY3d4cXFPNk5CandseS93d2lSWDlLaU8vNzRlUXg5?=
+ =?utf-8?B?N29aUVNuNGZxd3daRjk1K1VkTUc5VjZ5UTFBVUE2ZUhKcDM2WktBemZ2K0t6?=
+ =?utf-8?B?NGsxYUorYjhzVzF5akxGZXQ3aVdrNTBDLy9TSzdHTFB1eU1vUWx1RUNZMVho?=
+ =?utf-8?B?OUIzQ0ZMM3RrdStNcWhEYXRnZ205bUh6aUtxdnFoeW5vTTd3N1dmVzhsbkxS?=
+ =?utf-8?B?bmw5M29ObzIva25CQUtIaEIwc0dER0l5YWwwOHAzL0tsYWFySVRIRjU0a2lU?=
+ =?utf-8?B?SnkzTG5mdFUvWDBST1htODlNNGY3TFlCd3JYSXlwbjdPTWd6elk1UXNkMUtE?=
+ =?utf-8?B?elE0SXNDZHRDSCtwSXNiYWNqRCtQZ2hCT2ZYYUFrRklZZitiRjQ3NWVLL0xY?=
+ =?utf-8?B?NGhtcTZGcGV1K3E1YVA1T1BNdlZRUDZjWmZLUzYxanR5cFdDN0hldG5vS3Ry?=
+ =?utf-8?B?VytuWTcrdHplNW1YZG9mdklyVU5xNURCRExkdHpIVVB6TVNuRXluOUMxWnNU?=
+ =?utf-8?B?amh5NWdwNWIxNjkwSzZ4OWRkcUFyMlhMdUZJTnN6VzFXQ2duRTcweVVTTG0r?=
+ =?utf-8?B?Nks1VjhLWTc4Qy94SHdOV2NWOXdzdzFKSHdUcGtSbzdOOG1rdGJlS094SzRB?=
+ =?utf-8?B?UVVvQUpldnlXNzBRdFhPMTVFVlN6endrSHdBZEo5KzRuR0l4YXM5VU03K0s3?=
+ =?utf-8?B?U2tIdmYxN2hwOVd3TGNvbjV0T0tiVXkwblVNMEszdnYydmZnZk9YVU1WUzhN?=
+ =?utf-8?B?TFpha2pxcDV1b0dBc2pQdXN4dzZKNTlJVUIyd2dlcS9GSStWcjlPMGRTVmxl?=
+ =?utf-8?B?d2VHTWxFbTNaSHlmUVpjSlgySlA0L2xXdDJUa00vU2ZYTEhxVURibU5WdFVN?=
+ =?utf-8?B?SDEwZWI1dUJzR0pkTDRLblRkRDJHbXl0aVU5em9oYjJSM3N4SnhSdXBob2Zp?=
+ =?utf-8?B?bDU1QlNkT1M0TDgyT0hqempuQnhVcWlNTmNuQk5GczdXazlpNGZORjVxQmtL?=
+ =?utf-8?B?aUYwV1Y2VVNwQXJ6UzFxR2RsVzh3VUNMN0tCcWpPc3Zyc1IwMmgxd0dub3ZW?=
+ =?utf-8?B?eUUzbW9kNG54NWFRV2xPUTJaaWxVOEdkNVlqdDdpTzVxSHJhNXc2M1o1N2No?=
+ =?utf-8?B?WXJQYUkxUFV3QzNrYklWYzltZ0FmZXU3UjNpaHJicVpHWVhVbHpmU3RPRHlI?=
+ =?utf-8?B?Y2czb3prUi9nZkpibWZhajdxb3E5eDAzRHEzT002SHFiVHdpSGFwbmtDYzM3?=
+ =?utf-8?B?djhlVW13Nlh6dGt4a2x4WlJWZjZFWFdsTkZ1MEhxZyt5Z29sNzVnSWJqNmJT?=
+ =?utf-8?B?cE51YlBRb281SXJGdTFyUFJ1ZnRMeEgyeDZuOWptSHArWDNWc1MySG0ydktZ?=
+ =?utf-8?B?ZlhTWThIZmZJNHU4VkFkVHI1djJqaStVOThaSmVCbmt2bDhrRVUvdGR0THVP?=
+ =?utf-8?B?d2I1bGZ6ZzROVDgySVE4RWJGNXJsNWN1dldsaWYydUJBbkNpdlI5aHZPNTBY?=
+ =?utf-8?B?THVCaEV5RjBlY3cvSFI3Zy9QZHFyaThPRkJsYTdUTHhWb2JTOWw0RmFPN3VO?=
+ =?utf-8?B?WTg3anFMVktSM0hvTSt2Ukx6VGczMXhWcXFHVFZ2ek5CdHlub0syd0VvT2xa?=
+ =?utf-8?B?bFZ0NW1LSE44Zi9LM1ZEZGFvajhpTVg2TnpONXJBeFF3U092SlkxaVF3b0Fq?=
+ =?utf-8?B?R3ZTMGd3a1RndzRJdXpaSmw0QXNpcVZKSnpVeE41anlwYVRZM0tvYU0weWdE?=
+ =?utf-8?B?ZVYzdXhvRHRqblkrbHYrY0FWMHc4NDhXM2lKOGZnM092cjhpNW9XMGhPdGIy?=
+ =?utf-8?B?dC9sWHlMcUdZKzNESHZaaGdNTGRlNFh3bEVSRUh1L0dlZVp5cDhJN3REWmI0?=
+ =?utf-8?B?L21tU1A1bStzbjE3ZW5oWEEyczdTV3ZxMWNhVnJPeDIwUURRZlEyMHdZQkw5?=
+ =?utf-8?B?YlFxZ3pmbTR1S1p3TGkyTlB4UDN3bm4vclpybUthUm94VGN3aTJDT0hUd1lt?=
+ =?utf-8?B?UVBDczdRZFovSHU2Szk3dHhaMWE5OXFZNENEVENzZ2EzeHZJWmUrRlFqSEZn?=
+ =?utf-8?B?bndQK25zUlNaTEFJUGR1cFhyUkdNMlA5eHJEelhrZFlmSDM0U3lQSXlwU0cv?=
+ =?utf-8?B?NjhIQ0tIbVJhSlR6MXVZb1BGMmo0WmpSM1NDclBjcUJvWWR5dUt5Vksvc0d1?=
+ =?utf-8?Q?Sasqx9Xyh2vDWDo8=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2a7c65b3-dccf-4e45-297c-08de5d8f0b65
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2026 10:30:08.7952 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UUg+3UsWRc6Vyw/nolYDnoHnHhyWIEs1u7Vag4jttI+93X7VoCtZDNsHt1t4nQGdOf28+GKSMzdpFw4WfkajOz7XCLTV9xy9KwgfqIrAhhY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR03MB7715
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,34 +182,291 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/26/26 19:13, Marek Vasut wrote:
-> On 1/5/26 4:20 PM, Neil Armstrong wrote:
-> 
-> Hello Neil,
-> 
->>> @@ -244,9 +275,7 @@ static void ufs_renesas_pre_init(struct ufs_hba *hba)
->>>       ufs_renesas_indirect_poll(hba, 7, 0x41, 0, BIT(7));
->>>       /* end of phy setup */
->>> -    ufs_renesas_write(hba, 0xf0, 0);
->>> -    ufs_renesas_write(hba, 0xd0, 0x00000d00);
->>> -    ufs_renesas_write(hba, 0xd4, timer_val);
->>> +    ufs_renesas_init_enable_timer(hba, timer_val);
->>>   }
->>>   static int ufs_renesas_hce_enable_notify(struct ufs_hba *hba,
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Do you plan to pick this series, or shall I take it via sh tree ?
+Hi Brian,
 
-Yes please
+On 6/1/2026 9:13 am, Brian Sune wrote:
+> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>
+> CoreCourse Altera GEN5 Cyclone V board
+> do support different size and formfactor.
+> Now introducing AC501 C5 to mainstream u-boot
+> This is a UBGA-484 based board with basic
+> feature. More info on [1]
+>
+> [1]https://corecourse.cn/forum.php?mod=viewthread&tid=27704&highlight=AC501
+>
+> Signed-off-by: Brian Sune<briansune@gmail.com>
+> ---
+>   arch/arm/dts/Makefile                         |   1 +
+>   arch/arm/dts/socfpga_cyclone5_ac501soc.dts    |  86 +++
+>   .../dts/socfpga_cyclone_ac501soc-u-boot.dtsi  |  44 ++
+>   arch/arm/mach-socfpga/Kconfig                 |   7 +
+>   board/corecourse/ac501soc/MAINTAINERS         |   6 +
+>   board/corecourse/ac501soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+>   board/corecourse/ac501soc/qts/pinmux_config.h | 222 ++++++
+>   board/corecourse/ac501soc/qts/pll_config.h    |  86 +++
+>   board/corecourse/ac501soc/qts/sdram_config.h  | 349 +++++++++
+>   configs/socfpga_ac501soc_defconfig            |  85 +++
+>   include/configs/socfpga_ac501soc.h            |  16 +
+>   11 files changed, 1566 insertions(+)
+>   create mode 100644 arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+>   create mode 100644 arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi
+>   create mode 100644 board/corecourse/ac501soc/MAINTAINERS
+>   create mode 100644 board/corecourse/ac501soc/qts/iocsr_config.h
+>   create mode 100644 board/corecourse/ac501soc/qts/pinmux_config.h
+>   create mode 100644 board/corecourse/ac501soc/qts/pll_config.h
+>   create mode 100644 board/corecourse/ac501soc/qts/sdram_config.h
+>   create mode 100644 configs/socfpga_ac501soc_defconfig
+>   create mode 100644 include/configs/socfpga_ac501soc.h
+>
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 3cd762977cb..2210b44f9bf 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -469,6 +469,7 @@ dtb-$(CONFIG_ARCH_SOCFPGA) +=                               \
+>          socfpga_cyclone5_socrates.dtb                   \
+>          socfpga_cyclone5_sr1500.dtb                     \
+>          socfpga_cyclone5_vining_fpga.dtb                \
+> +       socfpga_cyclone5_ac501soc.dtb                   \
+>          socfpga_n5x_socdk.dtb                           \
+>          socfpga_stratix10_socdk.dtb
+>
+> diff --git a/arch/arm/dts/socfpga_cyclone5_ac501soc.dts b/arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+> new file mode 100644
+> index 00000000000..2c11e2088e3
+> --- /dev/null
+> +++ b/arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+> @@ -0,0 +1,86 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2025, Brian Sune
+> + *
+> + * based on socfpga_cyclone5_socdk.dts
+> + */
+> +
+> +#include "socfpga_cyclone5.dtsi"
+> +#include "socfpga-common-u-boot.dtsi"
 
-Neil
 
-> 
-> Thank you !
+Remove #include "socfpga-common-u-boot.dtsi" from socfpga_cyclone5_ac501soc.dts;
+it’s already included via socfpga_cyclone_ac501soc-u-boot.dtsi.
 
+
+> +
+> +/ {
+> +       model = "CoreCourse AC501SoC";
+> +       compatible = "altr,socfpga-cyclone5", "altr,socfpga";
+> +
+> +       chosen {
+> +               bootargs = "console=ttyS0,115200";
+> +               stdout-path = "serial0:115200n8";
+> +       };
+> +
+> +       aliases {
+> +               ethernet0 = &gmac1;
+> +               udc0 = &usb1;
+> +       };
+> +
+> +       memory {
+> +               name = "memory";
+> +               device_type = "memory";
+> +               reg = <0x0 0x40000000>; /* 1GB */
+> +       };
+> +};
+> +
+> +&gmac1 {
+> +       status = "okay";
+> +       phy-mode = "rgmii";
+> +
+> +       rxd0-skew-ps = <420>;
+> +       rxd1-skew-ps = <420>;
+> +       rxd2-skew-ps = <420>;
+> +       rxd3-skew-ps = <420>;
+> +       txen-skew-ps = <0>;
+> +       txc-skew-ps = <1860>;
+> +       rxdv-skew-ps = <420>;
+> +       rxc-skew-ps = <1680>;
+> +};
+> +
+> +&gpio0 {
+> +       status = "okay";
+> +};
+> +
+> +&gpio1 {
+> +       status = "okay";
+> +};
+> +
+> +&gpio2 {
+> +       status = "okay";
+> +};
+> +
+> +&porta {
+> +       bank-name = "porta";
+> +};
+> +
+> +&portb {
+> +       bank-name = "portb";
+> +};
+> +
+> +&portc {
+> +       bank-name = "portc";
+> +};
+
+
+Avoid duplicating nodes between DTS and -u-boot.dtsi (e.g., GPIO bank-name).
+
+Keep board-common settings in the DTS; U-Boot–specific settings belong 
+in -u-boot.dtsi
+
+
+> +
+> +&mmc0 {
+> +       status = "okay";
+> +       bootph-all;
+> +};
+> +
+> +&usb1 {
+> +       status = "okay";
+> +};
+> +
+> +&uart0 {
+> +       clock-frequency = <100000000>;
+> +       bootph-all;
+> +};
+> +
+> +&watchdog0 {
+> +       status = "disabled"; +}; diff --git a/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi 
+> b/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi new file mode 
+> 100644 index 00000000000..8d2caf69dd1 --- /dev/null +++ 
+> b/arch/arm/dts/socfpga_cyclone_ac501soc-u-boot.dtsi @@ -0,0 +1,44 @@ 
+> +// SPDX-License-Identifier: GPL-2.0+ +/* + * U-Boot additions + * + * 
+> Copyright Altera Corporation (C) 2015 + * Copyright (c) 2018 Simon 
+> Goldschmidt + */ + +#include "socfpga-common-u-boot.dtsi"
+> +
+> +/{
+> +       aliases {
+> +               udc0 = &usb1;
+> +       };
+> +};
+> +
+> +&watchdog0 {
+> +       status = "disabled";
+> +};
+> +
+> +&mmc {
+> +       bootph-all;
+> +};
+> +
+> +&uart0 {
+> +       clock-frequency = <100000000>;
+> +       bootph-all;
+> +};
+> +
+> +&uart1 {
+> +       clock-frequency = <100000000>;
+> +};
+> +
+> +&porta {
+> +       bank-name = "porta";
+> +};
+> +
+> +&portb {
+> +       bank-name = "portb";
+> +};
+> +
+> +&portc {
+> +       bank-name = "portc";
+> +};
+> diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
+> index f2e959b5662..1a0fcd64296 100644
+> --- a/arch/arm/mach-socfpga/Kconfig
+> +++ b/arch/arm/mach-socfpga/Kconfig
+> @@ -239,6 +239,10 @@ config TARGET_SOCFPGA_TERASIC_SOCKIT
+>          bool "Terasic SoCkit (Cyclone V)"
+>          select TARGET_SOCFPGA_CYCLONE5
+>
+> +config TARGET_SOCFPGA_CORECOURSE_AC501SOC
+> +       bool "CoreCourse AC501SoC (Cyclone V)"
+> +       select TARGET_SOCFPGA_CYCLONE5
+> +
+>   endchoice
+>
+>   config SYS_BOARD
+> @@ -263,6 +267,7 @@ config SYS_BOARD
+>          default "sr1500" if TARGET_SOCFPGA_SR1500
+>          default "stratix10-socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
+>          default "vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
+> +       default "ac501soc" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
+>
+>   config SYS_VENDOR
+>          default "intel" if TARGET_SOCFPGA_AGILEX7M_SOCDK
+> @@ -284,6 +289,7 @@ config SYS_VENDOR
+>          default "terasic" if TARGET_SOCFPGA_TERASIC_DE10_NANO
+>          default "terasic" if TARGET_SOCFPGA_TERASIC_DE10_STANDARD
+>          default "terasic" if TARGET_SOCFPGA_TERASIC_SOCKIT
+> +       default "corecourse" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
+>
+>   config SYS_SOC
+>          default "socfpga"
+> @@ -310,5 +316,6 @@ config SYS_CONFIG_NAME
+>          default "socfpga_sr1500" if TARGET_SOCFPGA_SR1500
+>          default "socfpga_stratix10_socdk" if TARGET_SOCFPGA_STRATIX10_SOCDK
+>          default "socfpga_vining_fpga" if TARGET_SOCFPGA_SOFTING_VINING_FPGA
+> +       default "socfpga_ac501soc" if TARGET_SOCFPGA_CORECOURSE_AC501SOC
+>
+>   endif
+> diff --git a/board/corecourse/ac501soc/MAINTAINERS b/board/corecourse/ac501soc/MAINTAINERS
+> new file mode 100644
+> index 00000000000..e0479c9921d
+> --- /dev/null
+> +++ b/board/corecourse/ac501soc/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +SOCFPGA BOARD
+> +M:     Brian Sune<briansune@gmail.com>
+> +S:     Maintained
+> +F:     board/corecource/ac501soc/
+
+
+Typo: fix path F: board/corecource/ac501soc/ → board/corecourse/ac501soc/
+
+
+> +F:     include/configs/socfpga_ac501soc.h
+> +F:     configs/socfpga_ac501soc_defconfig
+
+[...]
+
+
+> diff --git a/include/configs/socfpga_ac501soc.h b/include/configs/socfpga_ac501soc.h
+> new file mode 100644
+> index 00000000000..1da5c866220
+> --- /dev/null
+> +++ b/include/configs/socfpga_ac501soc.h
+> @@ -0,0 +1,16 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2025 Brian Sune<briansune@gmail.com>
+> + */
+> +#ifndef __CONFIG_CORESOURCE_AC501SOC_H__
+> +#define __CONFIG_CORESOURCE_AC501SOC_H__
+> +
+> +#include <asm/arch/base_addr_ac5.h>
+> +
+> +/* Memory configurations */
+> +#define PHYS_SDRAM_1_SIZE              0x40000000      /* 1GiB */
+
+
+PHYS_SDRAM_1_SIZE is legacy and not used by drivers.
+
+Memory size should come from DT (/memory node) rather than a hard-coded 
+define.
+
+Thanks.
+
+Best regards,
+
+Tien Fong
