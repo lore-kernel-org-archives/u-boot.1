@@ -4,99 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2F6D340BC
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 16:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 497F7D2FED2
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 18:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C93CC8410D;
-	Tue, 27 Jan 2026 17:51:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 85BFE84181;
+	Tue, 27 Jan 2026 19:52:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LB97bb+y";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fZN1ONJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F4FA841BE; Tue, 27 Jan 2026 17:51:20 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3FB6A8416E; Tue, 27 Jan 2026 19:52:42 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F94A84101
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 17:51:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58E3384164
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 19:52:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4801d7c72a5so46247375e9.0
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 08:51:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1769532678; x=1770137478;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DEKYRro7isq6qJNyySAdjHcMjWwR2tt47QIbKnucL9w=;
- b=LB97bb+yuoIjU+3PU+Ie0fizlhuJ+WEPqaeRgkspvYefyqRF95zP7Tn/UzhE30FJyg
- AEUXJA3u4x86bVMzhQMiDOmo7ngruoMPEkpBKFoyIDCQyW6ycpcxp9tfZFKC9bEdioJk
- zDKVM/FoIHSuU7Ibgw53vWA/DkTKN7OXN8YyhhYapQu4j5CGn8h5CLoQVht0Z54Pxboj
- yaypuhzVE0eGvZCb2aFfIlJ5QGjHaYGBdjrQyhYi0CExss2h9jwAxCuDlXRrtrz5f9fE
- H4YiFBIi/DYNgJkBN4g1EBu2fkRZ98Kgjzx4kRMT2aLkIE4TuYC5zhKTynQoRXcJMvHR
- SSFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769532678; x=1770137478;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=DEKYRro7isq6qJNyySAdjHcMjWwR2tt47QIbKnucL9w=;
- b=B3th+pYt9TqGGLIGbvOWDyPB6QigGA+JvCw6k44ICoBijKQrU8/CjPiu+m4JDlcl1D
- bAPcdys7wqdfIKWpZKSJxFqqRlUngON06jbCtRHFADSIlKctQCFdxHNYMm+6oEq17NmW
- FqmZ6wo6IRrHFV6ydLbzRaUeZ6nAwTjPcA5aAp0UB0pa0KtKQ0Cduu33I7haOAgkTMTx
- DtssfE3movRUkQl9Zcu+snk4C/aR2bwcak2Iv/KevSV+0EnuWY1yLc+dHdxanEdt2yme
- ct6/xHjOGb0JlpFGj/hn7ZbAF48UHVFJucjhuZfQ68iT1Obkc4YOHeqaKl+ZfsJtK9fb
- 462A==
-X-Gm-Message-State: AOJu0YwoNJlGywbTcejTvkbKZ5lUWtGHPU2OCv4ESV9XkL/pqAT8ovP2
- KpsmFnSrW5RVfxulQp9QV477q/7VAMvf3F1kLoUkMo5dcJ1QG+FgkvX2tO6EC3tG270=
-X-Gm-Gg: AZuq6aJZGWMhxpP+jxJSyLN+Jezcrsbeb4VZeOPTbSI5X9pwCdA44LGMuLC2/aQq29m
- /T+eXMu7/aYDr/GaixAmQy3wE6GX/GqpGusEaK1FBaVeVC7OWjpLmCTCbaSd6ZGeAbu/e8EcJcq
- ZXbQ7d5EGkjWIpkIsFnc91+o3F3PgQ2Fhd16lYyTH2ZTJ7IxUg+7mktCfCroG86QTbiRpucJLVf
- Z+QeEpGVO525+Hw2b+Eicn7g3rfnpeOHlzQVeuhba73wv4oP08MRxHLfSbHIHqooNUvyhuvLa7T
- tYs/juFpN+Wv5Nu8HXYjWVZ8YxZROtM9ilRC40VscJ0KFD0nkLaeveK9e3XDkRW4oFHXCHCBaaj
- knCTFfmeUXFPuq/dpQvT8HPsxyfdap2qU7pqC/mA9QGboZxeNqERvzgV8CTdQwmcDhH5STJb6eY
- CApZZHCbtjYg/jG952PJw=
-X-Received: by 2002:a05:600c:3e16:b0:47e:e20e:bba3 with SMTP id
- 5b1f17b1804b1-48069c40595mr31143575e9.7.1769532677916; 
- Tue, 27 Jan 2026 08:51:17 -0800 (PST)
-Received: from localhost ([2001:4090:a244:872b:a354:65f3:92a0:8de7])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c428basm74878895e9.12.2026.01.27.08.51.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jan 2026 08:51:17 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Tue, 27 Jan 2026 17:48:24 +0100
-Subject: [PATCH v4 10/10] configs: am335x_evm_defconfig: Switch to upstream
- devicetree
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f0vfX3ZX7z9tPg;
+ Tue, 27 Jan 2026 19:52:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769539956;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J7yrDDCwJT+vVdfAl5LB5sanpnoJm533nl/mezYXuOk=;
+ b=fZN1ONJn2jAIQQrwOXs3UPx6QGICTWWJyyccDJDLLyIrA8y6JkqFTvlzEnxj0XA3AVy3Qp
+ xTvdm0Y0iC2XWwOah/wIAgJmGxBo7lwnJXLTsBJ+lcpEg3hf5opm4jXFNTqG8hZFQvt8QX
+ otq/y3ep4sdXIEvHGos1Oi+P4/L9EjkQwH6k6xglojeNbWrVEwRy6Ah/gEAn+2JkMNXH/E
+ FAzHtSWevP0Cvmrk2FtOXitzIpaHSfiG1ytarLTFUdnAIfd0GkLG1pL5ze9x3QaiksX+NC
+ sAvLObBsb83S8h5+JEug9a9RNIyvna/fzSHOwQpj1qLkWU4QtemKGJxL0dHBqg==
+Message-ID: <79af3d2e-7948-4610-9b8e-69aa61e5965d@mailbox.org>
+Date: Tue, 27 Jan 2026 19:52:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v3] mkimage: Default to 8-byte alignment for DTBs added
+ via -b argument
+To: Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>
+Cc: Anshul Dalal <anshuld@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
+ ilias.apalodimas@linaro.org, malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, james.hilliard1@gmail.com, afd@ti.com, nm@ti.com,
+ vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, bb@ti.com,
+ praneeth@ti.com, u-boot@lists.denx.de
+References: <1e1f2e09-bfb7-4c7d-abd6-25a79271f256@mailbox.org>
+ <DFVWL63A8IDP.23PE1QNTXTMRU@ti.com>
+ <6cb4957c-7178-4a31-aea9-ad78d6627c28@mailbox.org>
+ <ab3a8a36-eaa2-4030-ba18-6c75647455b6@seco.com>
+ <6896afd5-76fa-4b1a-abbd-0798f19185ba@mailbox.org>
+ <785327c7-9d8a-4f5f-b792-4a1590796948@seco.com>
+ <20260126225842.GY3416603@bill-the-cat>
+ <f9310861-396d-4a89-b4a1-d67b9d6cae89@mailbox.org>
+ <20260127160637.GD3416603@bill-the-cat>
+ <b09e8fbe-1f5f-445a-a28b-ff6386a728a5@seco.com>
+ <20260127163844.GE3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260127163844.GE3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260127-topic-am33-evm-oftree-v2026-01-v4-10-0dadb0710ce7@baylibre.com>
-References: <20260127-topic-am33-evm-oftree-v2026-01-v4-0-0dadb0710ce7@baylibre.com>
-In-Reply-To: <20260127-topic-am33-evm-oftree-v2026-01-v4-0-0dadb0710ce7@baylibre.com>
-To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
-Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Romain Gantois <romain.gantois@bootlin.com>, 
- Parvathi Pudi <parvathi@couthit.com>, 
- Basharath Hussain Khaja <basharath@couthit.com>, 
- Paul Barker <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4612; i=msp@baylibre.com;
- h=from:subject:message-id; bh=xmFULg1apv2XcySD8tPc9Z8/v5CjRqvZxNA8NOd0y0Q=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhsyKN5+c/is9z849vG3TmtjfvqtfnJGbv1mltTMyVWo/+
- 99HHglpHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjARhemMDJ/jIuIuLIxb+UNi
- 5euV8/jnFUe7JBquKAmZt8GwbckT/VxGhhPfAr6/dN8h9HeV3axPa7LNGjmOsE/yqni14fFPs4y
- dO1kB
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
+X-MBO-RS-META: pr9frszzemc4cmo57sonpdicfk7mfd7i
+X-MBO-RS-ID: 1560d826dad6f0bbe2e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,84 +89,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream devicetree uses simple-pm-bus, so CONFIG_POWER_DOMAIN is
-required now. CONFIG_POWER_DOMAIN enables probing power domains, the PRM
-power domain driver is requierd as well now.
+On 1/27/26 5:38 PM, Tom Rini wrote:
 
-This switches all evm defconfig variants to use the upstream devicetree.
+>> No, the check in fdt_getprop is only for the name, not the value (which
+>> could be arbitrary binary data including many nul bytes).
+>>
+>> I think the assumption in most of U-Boot is that the provided FDT is
+>> trusted (or at least not maliciously ill-formed).  functions like
+>> image_get_checksum_algo read up to 6 bytes beyond full_name if full_name
+>> == "". It's possible to read off the end of the DTB if this is the very
+>> last string in the strings block and there is no trailing padding. If
+>> we're really concerned about this (e.g. to avoid false-positives with
+>> ASAN), then we should just add (say) 16 bytes to the end of every DTB
+>> when we malloc it.
+> 
+> Yes, we rely on the sanity checking in libfdt, which I think the kernel
+> also does.
+> 
+> And no, I'm not sure if we care enough about all of these corner cases,
+> but if we do then I'm not sure this right here and now is where to
+> start. It should start with upstream libfdt to see whatever cases aren't
+> handled, and then what cases fall on the callers to deal with wrt
+> security implications.
+> 
+> Because I really, really, really, do not want to block fixing booting on
+> some large number of boards because now we're going to depend first on a
+> security audit here.
+So back to my and Sean suggestion:
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- configs/am335x_evm.config            | 6 +++++-
- configs/am335x_evm_defconfig         | 2 +-
- configs/am335x_evm_spiboot_defconfig | 2 +-
- configs/am335x_hs_evm.config         | 2 +-
- 4 files changed, 8 insertions(+), 4 deletions(-)
+fdt_string_eq_() does effectively memcmp():
 
-diff --git a/configs/am335x_evm.config b/configs/am335x_evm.config
-index 9c12771a3299bcd0b1c5c14bb4c2306d7b02aae5..fbc070c930e4d2d85739c9e428c4b130490cd6bc 100644
---- a/configs/am335x_evm.config
-+++ b/configs/am335x_evm.config
-@@ -3,7 +3,10 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SF_DEFAULT_SPEED=24000000
--CONFIG_DEFAULT_DEVICE_TREE="am335x-evm"
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am335x-evm"
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_OMAP_PRM_POWER_DOMAIN=y
-+CONFIG_SIMPLE_PM_BUS=y
- CONFIG_AM33XX=y
- CONFIG_CLOCK_SYNTHESIZER=y
- CONFIG_SYS_BOOTM_LEN=0x1000000
-@@ -12,6 +15,7 @@ CONFIG_TIMESTAMP=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
-+CONFIG_OF_UPSTREAM=y
- CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run distro_bootcmd"
- CONFIG_LOGLEVEL=3
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index 448b0a8308fcca04732b81313c72f7fd2247d1ca..9281178f914085b199e3d35e95d0ce1f3c0faaa5 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -24,7 +24,7 @@ CONFIG_CMD_SPL_NAND_OFS=0x00080000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-sancloud-bbe am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-sancloud-bbe ti/omap/am335x-sancloud-bbe-lite ti/omap/am335x-sancloud-bbe-extended-wifi ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_ENV_IS_NOWHERE=y
- CONFIG_CLK=y
- CONFIG_CLK_CCF=y
-diff --git a/configs/am335x_evm_spiboot_defconfig b/configs/am335x_evm_spiboot_defconfig
-index eebd916c02a2cad0d01ab738aab37b11dd3a9645..bbaca6c8800baf19377a457e49db446159e338a8 100644
---- a/configs/am335x_evm_spiboot_defconfig
-+++ b/configs/am335x_evm_spiboot_defconfig
-@@ -12,7 +12,7 @@ CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- # CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SPL_ENV_IS_NOWHERE=y
-diff --git a/configs/am335x_hs_evm.config b/configs/am335x_hs_evm.config
-index 7ade2fb163b204ad8bcc9554455fdd3e81657890..0bc8556b1d4b18a413ecd6879ab85be54f2730ef 100644
---- a/configs/am335x_hs_evm.config
-+++ b/configs/am335x_hs_evm.config
-@@ -8,7 +8,7 @@ CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_RSA=y
+return p && (slen == len) && (memcmp(p, s, len) == 0);
 
--- 
-2.51.0
+So do this and be done with it ?
 
+type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
+if (type && len == strlen(FIT_TYPE_PROP) && !memcmp(type, "flat_dt", len))
+   align_size = 8;
