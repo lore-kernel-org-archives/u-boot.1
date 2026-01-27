@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09742D2594B
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 06:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6805DD2594B
+	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 06:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 836FE83F98;
-	Tue, 27 Jan 2026 07:24:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C78BA83FA3;
+	Tue, 27 Jan 2026 07:24:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BM9JWF3m";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UwXSiGuL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E95B83F85; Tue, 27 Jan 2026 07:24:06 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 06F8883FAA; Tue, 27 Jan 2026 07:24:12 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B2D783F98
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 07:24:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E077D83F85
+ for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 07:24:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 7333E60051;
+ by sea.source.kernel.org (Postfix) with ESMTP id 2E486409A2;
+ Tue, 27 Jan 2026 06:24:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E61FC116C6;
  Tue, 27 Jan 2026 06:24:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86BA4C116C6;
- Tue, 27 Jan 2026 06:23:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769495043;
- bh=mJpJZ0Nn6eZNWMT8dD7to/s5D8SmzygGv8NqeAYCXs8=;
+ s=k20201202; t=1769495048;
+ bh=+2zT9OdFnpFJJ5fGPWTUleM8x5J+pZakUQDtI/Tyupo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BM9JWF3mGb3Kp/JWk95CGu76Zr8j4+hcc50ToZ4NPAXYiZP46bBi2YoC2Tq+RobSV
- Lovr1DhGeBfBuP0tfUCJAwCiLORIAvfNushd64SKoC1WqrqtXMd7mQCvSFYF3Tve8w
- yCpwoSK9tA8E+G2yvoCxmuGut2dLAFg/vP71S81t6ZiKfrkXO5oVzon3DIzGKhgz+k
- RdVIL9L7Oj/dKzoLLOTdwJQv/YVBCuDF9IuHJia1Cny+ey2hTmi9Lr6idPN/wQsZMf
- bE6j/42ipZNoGR6dSyig6AHAOc1+d9cnb2jP5XftWB1R2V1QXeMkvBWmhBXFBRBrpg
- tfhgEBoT2WR7A==
+ b=UwXSiGuLQQET7bdgiIihaeFxNmESDjROnhJVrCPXkep1cK47YE9Ovf0K5R2P8kea5
+ VsLuqMPBT98RctbgYJHZ6+b1ZmAAXGtpZs9K5PrgG3g9XOvhZV2xYhvzaJK2IReuUQ
+ Q6dCyODhH/7ZkPRxePQmoxFVWBXM7ErzF7ii/AQOC991IwMxs4bC+bSWiiODJwHuhP
+ WjSVJx/AGwkC+rk2POiFtcV/0Y4aqCICmbUsFbkBY7/A/KDbFX4cd/G13TKJMPP9CV
+ lIx4wqZEDJV2BTYkgPgxn24gdAYl/4ZA92VQRyPtSCLo222PDjhXe2DFHJUQQqo1tA
+ 3A4nJHDLzDASQ==
 From: Sumit Garg <sumit.garg@kernel.org>
 To: u-boot-qcom@groups.io,
 	u-boot@lists.denx.de
@@ -47,9 +48,9 @@ Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
  jorge.ramirez@oss.qualcomm.com, varadarajan.narayanan@oss.qualcomm.com,
  tonyh@qti.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v3 1/3] tee: optee: Export OP-TEE message UID check API
-Date: Tue, 27 Jan 2026 11:53:39 +0530
-Message-ID: <20260127062341.723966-2-sumit.garg@kernel.org>
+Subject: [PATCH v3 2/3] mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
+Date: Tue, 27 Jan 2026 11:53:40 +0530
+Message-ID: <20260127062341.723966-3-sumit.garg@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260127062341.723966-1-sumit.garg@kernel.org>
 References: <20260127062341.723966-1-sumit.garg@kernel.org>
@@ -73,54 +74,79 @@ X-Virus-Status: Clean
 
 From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-OP-TEE message UID check API can be useful to know whether OP-TEE
-is enabled on not assuming the corresponding SMC call is properly
-handled if OP-TEE is not supported.
+Add support for OP-TEE live tree DT fixup support which enables U-Boot
+OP-TEE driver to be probed. As well as the EFI DT fixup protocol allows
+the live tree fixup to be carried over to the OS for the OP-TEE driver
+in the OS to probe as well.
 
-This API can be used by platform code to know OP-TEE presence and
-on that basis OP-TEE DT node can be added as part of DT fixups for
-the OP-TEE driver probe to happen for both U-Boot and Linux.
+Note that this fixup only gets applied if OP-TEE support is detected via
+checking for OP-TEE message UID.
 
 Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 ---
- drivers/tee/optee/core.c | 5 +++++
- include/tee/optee.h      | 9 +++++++++
- 2 files changed, 14 insertions(+)
+ arch/arm/mach-snapdragon/of_fixup.c | 35 +++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
-diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-index 5fc0505c788..4d67c948ec1 100644
---- a/drivers/tee/optee/core.c
-+++ b/drivers/tee/optee/core.c
-@@ -795,6 +795,11 @@ static optee_invoke_fn *get_invoke_func(struct udevice *dev)
- 	return ERR_PTR(-EINVAL);
+diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+index 5b6076ea8e5..644afc22d88 100644
+--- a/arch/arm/mach-snapdragon/of_fixup.c
++++ b/arch/arm/mach-snapdragon/of_fixup.c
+@@ -25,6 +25,7 @@
+ #include <fdt_support.h>
+ #include <linux/errno.h>
+ #include <stdlib.h>
++#include <tee/optee.h>
+ #include <time.h>
+ 
+ /* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
+@@ -164,6 +165,37 @@ static void fixup_power_domains(struct device_node *root)
+ 	}
  }
  
-+bool is_optee_smc_api(void)
++static void add_optee_node(struct device_node *root)
 +{
-+	return is_optee_api(optee_smccc_smc);
++	struct device_node *fw = NULL, *optee = NULL;
++	int ret;
++
++	fw = of_find_node_by_path("/firmware");
++	if (!fw) {
++		log_err("Failed to find /firmware node\n");
++		return;
++	}
++
++	ret = of_add_subnode(fw, "optee", strlen("optee") + 1, &optee);
++	if (ret) {
++		log_err("Failed to add 'optee' subnode: %d\n", ret);
++		return;
++	}
++
++	ret = of_write_prop(optee, "compatible", strlen("linaro,optee-tz") + 1,
++			    "linaro,optee-tz");
++	if (ret) {
++		log_err("Failed to add optee 'compatible' property: %d\n", ret);
++		return;
++	}
++
++	ret = of_write_prop(optee, "method", strlen("smc") + 1, "smc");
++	if (ret) {
++		log_err("Failed to add optee 'method' property: %d\n", ret);
++		return;
++	}
 +}
 +
- static int optee_of_to_plat(struct udevice *dev)
- {
- 	struct optee_pdata *pdata = dev_get_plat(dev);
-diff --git a/include/tee/optee.h b/include/tee/optee.h
-index 77729450bb6..d1194493780 100644
---- a/include/tee/optee.h
-+++ b/include/tee/optee.h
-@@ -65,4 +65,13 @@ static inline int optee_copy_fdt_nodes(void *new_blob)
- }
- #endif
+ #define time_call(func, ...) \
+ 	do { \
+ 		u64 start = timer_get_us(); \
+@@ -178,6 +210,9 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
+ 	time_call(fixup_usb_nodes, root);
+ 	time_call(fixup_power_domains, root);
  
-+#if defined(CONFIG_OPTEE)
-+bool is_optee_smc_api(void);
-+#else
-+static inline bool is_optee_smc_api(void)
-+{
-+	return false;
-+}
-+#endif
++	if (IS_ENABLED(CONFIG_OPTEE) && is_optee_smc_api())
++		time_call(add_optee_node, root);
 +
- #endif /* _OPTEE_H */
+ 	return 0;
+ }
+ 
 -- 
 2.51.0
 
