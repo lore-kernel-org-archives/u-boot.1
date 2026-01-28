@@ -4,111 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF32D35669
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF2CD35669
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:32:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F320E841FF;
-	Wed, 28 Jan 2026 05:26:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E047841FF;
+	Wed, 28 Jan 2026 05:32:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IMZiLOWr";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Vr9ziqdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31FC584207; Wed, 28 Jan 2026 05:26:42 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 33C9184213; Wed, 28 Jan 2026 05:32:51 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA991841E7
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:26:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB3A6841E7
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:32:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-65807298140so10288895a12.2
- for <u-boot@lists.denx.de>; Tue, 27 Jan 2026 20:26:39 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769574399; cv=none;
- d=google.com; s=arc-20240605;
- b=A6jaDRcdaB8F/dWfwlJUlUhSKthvYWvY0cJH0t1OmdwW771MHoCcY7B5O/TbFBvWCy
- 9T1wB9wdT6Kn1SAKVraPMJWXygwnak4EfaFXbfM7OzN2LgaRQuocw9FFmV3JlXNvAs6J
- ABZk8R2Oc8PjnhvnJXvbiGlPEMP/silD1akcap4dRmENsE1dCmCBleaPH9swf5epFc3w
- HWwzlGeDykdWVuHD55njTuvGHRTV+PU2iR77o90yCbCO4h1m4lbzI2XQEut2VdWZwrBn
- G1QUK6g+CsuxUfglnjR5ndxirXcr5e6GKJ5Z9WwKRSASoA+4Kei6yMDohKmG5BqE30WC
- j2HQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=g7fwbQUadOGS3deXU+U2CuJf6bf3WBbZpdPGtrriiLc=;
- fh=xsiJ2RE3qztzlh97btP+FMGnI6QNiTPEsE85jZyBWDM=;
- b=bW1NgVXW9HDqU9ZRw1Vdvvxv1TSeUCRMkrsrtsoaszD3vc/ceRKywmmw+sum7UChGt
- spzZs/Z9EEdcB3betHPdbsrhHfKspNpAuAwRdidTkcelvhJY76GsPk3xchoCkCumDEgG
- 1OsssfGMAbuv+ewCITNYdKih0o7VGZR9BFyTcLM/QUcEL8wVi7183xmsoGEjFULOV6NI
- /GKCzWyDX14UIHQoda/4SBLiorEuKH59zEfVEIYZmGjH6xwvztQwOLmWFtCNq6Jis/lG
- gDMshy+3bXJb7PWIObhmtBFiCnsUOJUOW0nVn6UUU/Y3f5l/QPyLiEv6tc+C3UQWGO8S
- RjVA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769574399; x=1770179199; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g7fwbQUadOGS3deXU+U2CuJf6bf3WBbZpdPGtrriiLc=;
- b=IMZiLOWrBO/dDMzKdRrobvlTXzXN+Kakdm0NGKIjSLnaO01mTtahTg18c1/mtqjBox
- Pxm4XzbwQmIalTzuSrQ/atSM0K12+DEBFNuWLydsifHAMcx8T4iS62KjOKv6u4soDJRv
- X36L/EIFvPVaYTXWTPkz/PD8NTRbbRSEFhL35orVs/EgR4g5AgWiv2CDJtNmwBlG1afP
- Ic3blNiEj8o3G0xePdQ3n/hPOjWgmqmqXkEtYtxCRGawNdohmzG+/FAUpDyaelcU9TyQ
- CqZa3GTbD1OGtQJyEqF6cuKssORls9uWrH6qe5TQxxJuZSSRIcaMSjnkhzC2KhyEMEY1
- CnVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769574399; x=1770179199;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=g7fwbQUadOGS3deXU+U2CuJf6bf3WBbZpdPGtrriiLc=;
- b=Jhc2zRzG75QoO+WijMnYRcLWFYbQ4iD2t8pPYCUzy49eIlYANGg38Q2iSwL1+JPwVY
- JhIE7FvpZQoZMTp8wCK3Ywkjb7wzwfFLEeRF5D86EGHM3vOGY3VAcQHkoanRbbzSZfRf
- wzgsTxrRRCEaUpA4VzrK2DLHytf4pbHXxtnq4V8994lkm5A/SwHlB+04VAWcQdgE173n
- 0osf5UmT4FlYrvvicxcp5yr2sd/hMDDeHQK+jGkvaP1/V9H7RZQLXAomNrZyVSBQFv+c
- klSg1UrfF8g8dCoWuv4re8A44oCRwZHyKO9+Q7oNVEwXR3Hu5zFIXibSTOtj21qy40eL
- 7uuw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSeGz6cEOfBTtcS46oBBWntzDkfEcEaxUUJrzd0JOYFf6NFLkRcsKkBzXAsPhL5LQVKB24ZS0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7ffSrsSG5oWHOdF6Reunl84djw8shdPxSvWpM5rTdsmM2T2Jt
- 40BQjGoZSi92sDqIB7B40FJHghEQEGPQGgl5/b8GyS0Tb2QQuRE/8hMtwQgf3YkKVwr9ogZuR9Z
- Nl9N7GOwcjYo4ITQMKVLjCNsRPjMT5ro=
-X-Gm-Gg: AZuq6aLR5nRJAqIc83jvR9lh7T2NSu+/iNOAFlZTs75i0qSwr4KFB1DRfmuIt9/y0qb
- boyNKaMMqqhGiou1Xz/tpFCN8q+qdZkACkP9NRZyc5Z+ZPa/sZ/Z+1OMuVUMaQvJWnyBi7Yo+ik
- /G9bPGfcWNpqwka/S78eMWQvct5k7mPQADA6HWOvkgDkkzllI23aaiyB1JPeDQ216FcfrNztqTB
- WTqBnq65J2JhG2cExTquCQvLChvECmPWNu3rnn39kzruhGwQLTrVrBDta9A6TyFRxG3aZ6LjgNt
- qWnfQwxvx09LKEpFcWsHrjakFeMKdpiPwGbCS209J/qeKXZtl6463xaUvImKKT3oPMN1Nd4KugJ
- z1V5kVpdxcj4GdWNTOtkQYZ5dwODkjCHmnke5
-X-Received: by 2002:a17:907:97d1:b0:b87:1f21:f09d with SMTP id
- a640c23a62f3a-b8dab195a15mr283193366b.19.1769574399031; Tue, 27 Jan 2026
- 20:26:39 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1769574756; x=1770179556; i=xypron.glpk@gmx.de;
+ bh=LUL6UbZmpMkCG5tTHpuYdnUIHcpZpV/3VDnugYglA8c=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=Vr9ziqdIqZsJ/8jDTSNe1786lut1U68a5scd55BCs9m2JHaDEkJG82W8BPfECkIu
+ ehclu7sIJRakXKSfYyS9cAjj+0VGaPavG5pNbggwOYYrZssgqMY8Fl/UTICQkFzyH
+ x9rU12iWlt5+hOm2qbiB4ECSaZutjyznF06i7x5n2rqbFSiF3WEtfk4cMYbLK39vO
+ /bVNmGQxvnVQo2eYiJr7oUHe5fgdUY/pSDHfn/3HzfZxk/AD35M3DzvHFuseY9Mky
+ y+eKRMDPXgHuCJCxh89ym7AddGEG5GUvSPwtwsHb5DuyhwI3tDB1DoAJVVcAvpGpc
+ rOpdXgt8JUN10gfM1A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from ehlo.thunderbird.net ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M26vB-1viUG51non-000A7x; Wed, 28
+ Jan 2026 05:32:36 +0100
+Date: Wed, 28 Jan 2026 05:32:32 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+CC: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] gunzip: Fix len parameter in function signature
+User-Agent: Thunderbird for Android
+In-Reply-To: <20260127235156.1503207-1-marek.vasut+renesas@mailbox.org>
+References: <20260127235156.1503207-1-marek.vasut+renesas@mailbox.org>
+Message-ID: <0F151B61-19A0-4F8E-925B-1EDFD7054E1B@gmx.de>
 MIME-Version: 1.0
-References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
- <CAFLszTjgsSj47P6u2JohHv3vV1=sOWQxQ7qS3RDuBYBQsejKWA@mail.gmail.com>
- <CANqXHyEShK3bCA-5K4K=zH_b19i9+o9DRPYW8LHo-gFpMB2Hkg@mail.gmail.com>
- <CANqXHyH3OwPEpo=rv6E+uSP01quOQisEJ3_aD2-r=DkNDK4_+g@mail.gmail.com>
- <CAC_iWjLKotX4X9mD1qnJbnkbh9xBHfnyF+b=b--XvMjjbCrU-g@mail.gmail.com>
- <CANqXHyGZSGybzchkqSE0-7s3HgfY=UBjpkjS1wjuRkZzOLDMWQ@mail.gmail.com>
- <430A021B-7511-4C08-B30C-72C153A25A27@wolfssl.com>
-In-Reply-To: <430A021B-7511-4C08-B30C-72C153A25A27@wolfssl.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 28 Jan 2026 04:26:27 +0000
-X-Gm-Features: AZwV_QgiOJ7eUxoEiO-m5YeKFOWnpClqCWR6kWLT8IcCqWOkp39uIY2bNjf_-PM
-Message-ID: <CALeDE9M7ENPccTD18b3YKrvYEu8yU0cXT1ePXM_tagV4Ou+Z0w@mail.gmail.com>
-Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
-To: David Garske <david@wolfssl.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Todd Ouska <todd@wolfssl.com>, Larry Stefonic <larry@wolfssl.com>, 
- Wolfram Kusterer <wolfram@wolfssl.com>, Aidan Garske <aidan@wolfssl.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Osj91HRuxgTvkhfOCbjn0WTNFEkrX1u3UGoddBgbMZGJSdMFKpm
+ FO5iKb4CUlZTiqBDkJSa1n0Ll0b7VLQ5jhADwN5Pf6AUzLPkwQQnU8T3C/joLFEhX3G0UO/
+ UK0ya6GqFBcINIASWc6qIBBQtVpvhbI/iG62G/U6MrAiwZSsklwMxqJfjQuimwwAcdHBLbZ
+ bFncXbxdG+fGgYw15LWHg==
+UI-OutboundReport: notjunk:1;M01:P0:m2d8sqjxmp8=;CJmQCmSNlcGHPT0ToIlcFnhlpl+
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,166 +156,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
-
-> We have made the U-Boot changes requested and attached a patch for upstre=
-am. Let me know if you have any issues or questions.
-
-Please send the patch using 'git send-emaiil' or a similar tool.
-
-Regards,
-Peter
-
-> Fork: https://github.com/aidangarske/u-boot/tree/rpi4-wolftpm-uboot
-> Instructions: https://github.com/aidangarske/rpi4-wolftpm-uboot/tree/mast=
-er
+Am 28=2E Januar 2026 00:51:35 MEZ schrieb Marek Vasut <marek=2Evasut+renesa=
+s@mailbox=2Eorg>:
+>The only call site of gzwrite() is cmd/unzip=2Ec do_gzwrite(), where
+>the 'len' parameter passed to gzwrite(=2E=2E=2E, len, =2E=2E=2E) function=
+ is of
+>type unsigned long=2E This usage is correct, the 'len' parameter is
+>an unsigned integer, and the gzwrite() function currently supports
+>input data 'len' of up to 4 GiB - 1 =2E
 >
-> =EF=BF=BC
+>The function signature of gzwrite() function in both include/gzip=2Eh
+>and lib/gunzip=2Ec does however list 'len' as signed integer, which
+>is not correct, and ultimatelly limits the implementation to only
+>2 GiB input data 'len' =2E
 >
-> Thanks,
-> David Garske
-> Software Engineer, wolfSSL
-> +1 (530) 409-2990
-> https://www.wolfssl.com <https://www.wolfssl.com/>
-> https://github.com/wolfssl
+>Fix this, update gzwrite() function parameter 'len' data type to
+>unsigned long consistently in include/gzip=2Eh and lib/gunzip=2Ec =2E
 >
-> > On Aug 5, 2025, at 8:31=E2=80=AFAM, Aidan Garske <aidan@wolfssl.com> wr=
-ote:
-> >
-> > Hi Ilias,
-> >
-> > Sounds good, I will keep them in cmd/wolftpm.c. I guess Simon can proba=
-bly answer the other question the best.
-> > He had asked if I could "put the driver code into drivers/ with just th=
-e command code in cmd/" so I am just trying
-> > to get clarity on what driver code he is specifically referring to.
-> >
-> > Thanks for the help,
-> > Aidan
-> > -------------------------------------
-> > Aidan Garske
-> > Engineering Intern, wolfSSL
-> > +1 (916) 337-1246
-> > -------------------------------------
-> >
-> >
-> > On Tue, Aug 5, 2025 at 1:17=E2=80=AFAM Ilias Apalodimas <ilias.apalodim=
-as@linaro.org <mailto:ilias.apalodimas@linaro.org>> wrote:
-> >> Hi Aidan,
-> >>
-> >>
-> >> On Sat, 2 Aug 2025 at 01:59, Aidan Garske <aidan@wolfssl.com <mailto:a=
-idan@wolfssl.com>> wrote:
-> >> >
-> >> > Hi Simon and Ilias,
-> >> >
-> >> > Thank you for the great feedback. Currently I am working in the refa=
-ctor you suggested and I wanted to ask a question about some of your commen=
-ts.
-> >> >
-> >> > 1. What exactly is the "driver code" you are referring to in this ca=
-se?
-> >> > 2. Do you want me to separate out our helper functions into a `cmd/w=
-olftpm-common.c` or should I keep them in `cmd/wolftpm.c`?
-> >> >
-> >> > Looking forward to your response,
-> >> > Aidan
-> >> > -------------------------------------
-> >> > Aidan Garske
-> >> > Engineering Intern, wolfSSL
-> >> > +1 (916) 337-1246
-> >> > -------------------------------------
-> >> >
-> >> >
-> >> > On Wed, Jul 30, 2025 at 8:40=E2=80=AFAM Aidan Garske <aidan@wolfssl.=
-com <mailto:aidan@wolfssl.com>> wrote:
-> >> >>
-> >> >> Hi Simon,
-> >> >>
-> >> >> Thank you for the great feedback. Currently I am working in the ref=
-actor you suggested and I wanted to ask a question about some of your comme=
-nts.
-> >> >>
-> >> >> 1. What exactly is the "driver code" you are referring to in this c=
-ase?
-> >>
-> >> It's been a while and I am not sure I am following on that
-> >>
-> >> >> 2. Do you want me to separate out our helper functions into a `cmd/=
-wolftpm-common.c` or should I keep them in `cmd/wolftpm.c`?
-> >>
-> >> Are you expecting it to be reusable by something else? If not just
-> >> keep it to cmd/wolftpm.c
-> >>
-> >> Thanks
-> >> /Ilias
-> >>
-> >> >>
-> >> >> Looking forward to your response,
-> >> >> Aidan
-> >> >> -------------------------------------
-> >> >> Aidan Garske
-> >> >> Engineering Intern, wolfSSL
-> >> >> +1 (916) 337-1246
-> >> >> -------------------------------------
-> >> >>
-> >> >>
-> >> >>
-> >> >> On Sat, May 10, 2025 at 4:25=E2=80=AFAM Simon Glass <sjg@chromium.o=
-rg <mailto:sjg@chromium.org>> wrote:
-> >> >>>
-> >> >>> Hi David,
-> >> >>>
-> >> >>> On Thu, 8 May 2025 at 00:41, David Garske <david@wolfssl.com <mail=
-to:david@wolfssl.com>> wrote:
-> >> >>> >
-> >> >>> > Hi Denx,
-> >> >>> >
-> >> >>> > We at wolfSSL have developed a port for wolfTPM in U-Boot. The p=
-atch allows using the current built-in TPM 2.0 support or switching to wolf=
-TPM via CONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware update for t=
-he Infineon SLB9672 and SLB9673.
-> >> >>> >
-> >> >>> > I think there is probably some more cleanup and testing needed, =
-but I wanted to submit this to start the discussion and see your thoughts.
-> >> >>> >
-> >> >>> > The wolfTPM library is GPLv2 and added as a submodule. If the li=
-cense or submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive =
-we can resolve anything.
-> >> >>> >
-> >> >>> > Attached is the patch based on latest master 3b6760ddeb4 to revi=
-ew.
-> >> >>>
-> >> >>> Thank you for doing this!
-> >> >>>
-> >> >>> Here are a few thoughts:
-> >> >>>
-> >> >>> - Use lower case for function names
-> >> >>> - Avoid camel case
-> >> >>> - What is XMEMSET()? - Can you use memset() ?
-> >> >>> - Convert most prinf() functions to log_debug()
-> >> >>> - Can you use subcommands (from command.h) instead of parsing the
-> >> >>> subcommand yourself?
-> >> >>> - put the FIRMWARE_UPGRADE thing into Kconfig, as well as WOLFTPM_=
-SLB9672/3
-> >> >>> - put the driver code into drivers/ with just the command code in =
-cmd/
-> >> >>> - add config WOLFTPM, separate from CMD_WOLFTPM
-> >> >>> - can you add a test in test/ and docs in doc/usage/cmd/  ?
-> >> >>>
-> >> >>> Regards,
-> >> >>> Simon
-> >> >>>
-> >> >>>
-> >> >>> >
-> >> >>> > =EF=BF=BC
-> >> >>> >
-> >> >>> > Thanks,
-> >> >>> > David Garske
-> >> >>> > Software Engineer, wolfSSL
-> >> >>> > +1 (530) 409-2990
-> >> >>> > https://www.wolfssl.com <https://www.wolfssl.com/> <https://www.=
-wolfssl.com/>
-> >> >>> > https://github.com/wolfssl
-> >> >>> >
+>Furthermore, update gzwrite() function 'szwritebuf' parameter in
+>lib/gunzip=2Ec from 'unsigned long' to 'ulong' to be synchronized
+>with include/gzip=2Eh =2E
 >
+>Since the gzwrite() function currently surely only supports input
+>data size of 4 GiB - 1, add input data size check=2E The limitation
+>comes from the current use of zlib z_stream =2Eavail_in parameter,
+>to which the gzwrite() function sets the entire input data size,
+>and which is of unsigned int type, which cannot accept any number
+>beyond 4 GiB - 1=2E This limitation will be removed in future commit=2E
+>
+>Reported-by: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
+>Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
+>---
+>Cc: Alexander Graf <agraf@csgraf=2Ede>
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
+>Cc: Jerome Forissier <jerome@forissier=2Eorg>
+>Cc: Mattijs Korpershoek <mkorpershoek@kernel=2Eorg>
+>Cc: Neil Armstrong <neil=2Earmstrong@linaro=2Eorg>
+>Cc: Peng Fan <peng=2Efan@nxp=2Ecom>
+>Cc: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
+>Cc: Simon Glass <sjg@chromium=2Eorg>
+>Cc: Tom Rini <trini@konsulko=2Ecom>
+>Cc: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
+>Cc: u-boot@lists=2Edenx=2Ede
+>---
+> include/gzip=2Eh |  4 ++--
+> lib/gunzip=2Ec   | 13 ++++++++-----
+> 2 files changed, 10 insertions(+), 7 deletions(-)
+>
+>diff --git a/include/gzip=2Eh b/include/gzip=2Eh
+>index 304002ffc42=2E=2E5396e3ffec7 100644
+>--- a/include/gzip=2Eh
+>+++ b/include/gzip=2Eh
+>@@ -77,8 +77,8 @@ void gzwrite_progress_finish(int retcode, ulong totalwr=
+itten, ulong totalsize,
+>  *		for files under 4GiB
+>  * Return: 0 if OK, -1 on error
+> p */
+>-int gzwrite(unsigned char *src, int len, struct blk_desc *dev, ulong szw=
+ritebuf,
+>-	    ulong startoffs, ulong szexpected);
+>+int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+>+	    ulong szwritebuf, ulong startoffs, ulong szexpected);
+
+Ulong and unsigned long are essentially the same but using both in one fun=
+ction signature looks weird=2E
+
+I would prefer size_t for the size of objects in memory and off_t for file=
+ sizes and positions in files=2E
+
+Please, consider adjusting startoffs and szexpected, too=2E
+
+>=20
+> /**
+>  * gzip()- Compress data into a buffer using the gzip algorithm
+>diff --git a/lib/gunzip=2Ec b/lib/gunzip=2Ec
+>index a05dcde9a75=2E=2E040450c0e79 100644
+>--- a/lib/gunzip=2Ec
+>+++ b/lib/gunzip=2Ec
+>@@ -116,11 +116,8 @@ void gzwrite_progress_finish(int returnval,
+> 	}
+> }
+>=20
+>-int gzwrite(unsigned char *src, int len,
+>-	    struct blk_desc *dev,
+>-	    unsigned long szwritebuf,
+>-	    ulong startoffs,
+>-	    ulong szexpected)
+>+int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+>+	    ulong szwritebuf, ulong startoffs, ulong szexpected)
+
+ditto
+
+> {
+> 	int i, flags;
+> 	z_stream s;
+>@@ -133,6 +130,12 @@ int gzwrite(unsigned char *src, int len,
+> 	u32 payload_size;
+> 	int iteration =3D 0;
+>=20
+>+	if (len > 0xffffffff) {
+>+		printf("%s: input size over 4 GiB in size not supported\n",
+>+		       __func__);
+
+Please, use log_err() for error output=2E
+
+Best regards
+
+Heinrich
+
+>+		return -1;
+>+	}
+>+
+> 	if (!szwritebuf ||
+> 	    (szwritebuf % dev->blksz) ||
+> 	    (szwritebuf < dev->blksz)) {
+
