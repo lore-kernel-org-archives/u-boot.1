@@ -4,160 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E04F5D3F074
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 15:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B36D3F07A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 15:27:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 578FA83FC6;
-	Wed, 28 Jan 2026 16:26:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AE95A83FC6;
+	Wed, 28 Jan 2026 16:27:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FYIqho0K";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="isNg34NW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52CE583FD6; Wed, 28 Jan 2026 16:26:40 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id D40F983FE9; Wed, 28 Jan 2026 16:27:56 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933F283DFF
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 16:26:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B69B083DFF
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 16:27:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YHIdbtLhVECjnZ8l58MJYgbP2sNPzYKZbkAecEzCacIg+Vv6CxXUXJGQpfzU7q27oo6BrxGNLikwlO3z98xd7VAFHnmJhtZvGMbJ/xSWnJnoYVXF+iugNzgPHYQPQ1pSjCltTSbIJuU1yBYOe2gC/e3nh9AgR0Tng0D0vHDHtns6KszaVfuXnctY04tduk/+4dJ7fwmvLUvtOr9nyEEUpYPE8PVXvWGnxUT1tq5iTRWCEPJ/8WfI+5M+fPdgHG21eR1IWf9PY37Eb6sEixF8GfILsRKC8VbWYGuVfHSr7trCK1Bkf1daFCXlNiaR7Eg5RSWSIMgQsnYdpHRiMXwK0g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W1vZGCrPVq5Qpa7THB/1rrp8yihewAlWfM8tx8lHsRU=;
- b=ZcylCu+S1et0Fdhi0R7ZzZPGQAf3g4+iBoYUruJRQkOW7IC+XuWN5tqhdtnoGLv42uTa/9g3yoO2U5ddiLtH8tsW9XrPgYpSClpSxJ6DizArFUSq+L3ZKab9zMea7gd16Bl+6i0s/o6PN4Arde2kCcKNti9/deRlhGq2nu1RxoNWeM+O4Kd5aXbS7J1aFFgcxpFdRIQmn/SRtNz39b/t1cyST+OIFjUP6wEAq3xFEpRSz/2c5aHAu9ggWTKXZ8qowpORUCiwfauWVsesF/tsYmVao4iQelKTHO75YLQzF+vPxNR1C4D3ee3D7qom0xstMwRcUKTFlakGUEOlS74oqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W1vZGCrPVq5Qpa7THB/1rrp8yihewAlWfM8tx8lHsRU=;
- b=FYIqho0KNlNBIi/0/1RCDNhzF+XhYBquHUUYJ3hG7jkMcTHwnrNP6p+W0OC72Fv09OoWrboTuT+hrEk/gg7k/dthkKa4Nxo5XTvzYSmX2s9BQ3YM/4T18NHJAtxsBMH9OipvOU8F4hssCb4LLEFTct6smh9eLVsxLPJZTbOBcNA=
-Received: from PH0PR07CA0044.namprd07.prod.outlook.com (2603:10b6:510:e::19)
- by PH7PR10MB7011.namprd10.prod.outlook.com (2603:10b6:510:273::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.8; Wed, 28 Jan
- 2026 15:26:33 +0000
-Received: from SJ1PEPF000023D3.namprd21.prod.outlook.com
- (2603:10b6:510:e:cafe::ac) by PH0PR07CA0044.outlook.office365.com
- (2603:10b6:510:e::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.16 via Frontend Transport; Wed,
- 28 Jan 2026 15:26:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF000023D3.mail.protection.outlook.com (10.167.244.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.0 via Frontend Transport; Wed, 28 Jan 2026 15:26:33 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 09:26:32 -0600
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 09:26:32 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 28 Jan 2026 09:26:32 -0600
-Received: from [10.249.130.12] ([10.249.130.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60SFQPSC2572203;
- Wed, 28 Jan 2026 09:26:26 -0600
-Message-ID: <139a01e9-c395-47f0-a09d-1c591c178bf9@ti.com>
-Date: Wed, 28 Jan 2026 20:56:24 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for
- flat_dt images
-To: Marek Vasut <marek.vasut@mailbox.org>, <trini@konsulko.com>
-CC: <sean.anderson@seco.com>, <ilias.apalodimas@linaro.org>,
- <malysagreg@gmail.com>, <sughosh.ganu@linaro.org>,
- <philip.molloy@analog.com>, <marek.vasut+renesas@mailbox.org>,
- <james.hilliard1@gmail.com>, <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <bb@ti.com>,
- <praneeth@ti.com>, <u-boot@lists.denx.de>
-References: <20260128141834.2322865-1-b-padhi@ti.com>
- <71adda09-1f3b-48f7-aaed-845e6a30b6ca@mailbox.org>
-Content-Language: en-US
-From: "Padhi, Beleswar" <b-padhi@ti.com>
-In-Reply-To: <71adda09-1f3b-48f7-aaed-845e6a30b6ca@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D3:EE_|PH7PR10MB7011:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60a08b63-4677-4bb8-baf7-08de5e819e77
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QVltc0V4bzZ6NGN3czlJK0xWT3R1ZUxmN0dIU1hyckJuS0l6OHVtSnFMMExi?=
- =?utf-8?B?Uy9MS3ZYNnV1WkpxY2xRRzh1Wnh6L0MybWRjRHd3VDN5TnNnbWZUZm9tQUNM?=
- =?utf-8?B?SUxoVzNVME1YNkp5NnhoaG5hdC9JWUpDcWE5ZTV5d3RrS09wS1IxbC9wTmlL?=
- =?utf-8?B?RlhuNWVjRUVIRzc2Mk9ROXp2dGN6dUNCdDMyYVd4YmpVc3RJZGFQYzJ5U1F2?=
- =?utf-8?B?U0creTNzME5ZbzVrZXdibnpIcEJ3U1NIU0JMVU0yWWg0REtRUWpjMXdkRWhZ?=
- =?utf-8?B?Z1F5aVdXVWtES0s3Tk1EK1AxUHBEdjF1OHROQk12UnovS0FlZ2JlbGtQVm8z?=
- =?utf-8?B?SUhTclY2SGczN0lxbFRxeGVyZ1VsNjZObjdyaC9rY3kwU3B5Sm5neWlrK2I3?=
- =?utf-8?B?L2l6QWx5M2ZzZDFGYzJ4OHhibVo2d1QvNTQzK1FYc1ZxK09BdUZGQzVxeHhT?=
- =?utf-8?B?b3F3QWQrS0pmSDk1bXMxdDRkYVNnSDhHQTRiZHpNeVpjclE1Rk9Pc0puQVhw?=
- =?utf-8?B?cG81RVBPK3c0OGVWRVFYc1p6ellqenlyanpvTkNnWTNPUVMwQ1lYM0xpQ1BK?=
- =?utf-8?B?YUFUMUpCaWFiUEhUQTBuc3BpVm01b1VITnBUWm5TLy9sZEo3U3hxNldabDli?=
- =?utf-8?B?MWxLSjd1WmgybWV1Yk1WU2VmNkJ1bWNlOGMyOUV4K0xsYXc2ZDZDMHlkM3VM?=
- =?utf-8?B?U2Rub0hjQ205dmFxWFQvYkdiRHc0RERzNXlhdi9aa0g5Wkc2QXBpWUF2NytB?=
- =?utf-8?B?cmE1Z3NPdGtWNkNvN3F3SUJWK1NNTlhiUFpRVDVUSE9GMGZoaGJmVXc3ZTFn?=
- =?utf-8?B?ajUzZktEb04zQVV4WTlpdm0vYy90SHVya2ZaRkNDSk90YlRDM0plRWxlTUti?=
- =?utf-8?B?dTJpcmdna0FTbTh0L1hiWmdoQUdmWHJObnZyR3hzSjdDd3R0ODVSKy9kdHFO?=
- =?utf-8?B?MkdoMTQ3TjYrMW0wN2F2OHU5aWwzS3hpdkpoSks4RG5OUE92Nll4dm1qKzNv?=
- =?utf-8?B?bGF2SEJhNEtVbXJVZGpjczdnd08yYXRKTUdTYWZYRFBkbnlaVHZ4TEZCUHdW?=
- =?utf-8?B?Z1dSSVkzSzVhY0srT2tSTDhtNHJlb1ArSzFEd2tvTU9FendZYklZQ0hEcE5k?=
- =?utf-8?B?WGd1eHF4TmN5alMxZDVBeGtlRnFBODlYZWdUUVltSXp2QXI0czhDWlJyZlY1?=
- =?utf-8?B?N1pkRkJDREU3MUZxUzgyM1I0bkhjUEhyd1R0WjNQa1I2algrd1FScHMxUGxD?=
- =?utf-8?B?ZGVIRG5RaU9ZTnZ2YWdMSk0vRlU0YWdvY0d3dlhmZVB2VVNvNms4QW00anZi?=
- =?utf-8?B?VG1PN2JMNTQ4RlpvWDZOSTQyL3RZMHdsc21CUVZDa3p2WlZyMm1hbDhIdEJI?=
- =?utf-8?B?VlNPWE1PWkZvb1VFQkpFSS9YckhVL2plWGI5V3ZQRngrR1dZTEJEenpaZnhy?=
- =?utf-8?B?ZXQ4bHZDanBmNkU3ejRnS3daUW4yWkZqeGU2L3FFc0pwTm1EWGdOSXB3bEVO?=
- =?utf-8?B?djdsU0hxYTgyNUFGTks0aGc5dlhkd2pNcWMyNDBKVG1VaitSdGpnNzBUWS9i?=
- =?utf-8?B?ZVhuN2Y0dGxYZ0FYeUNndGU2Vmd4QTN3U3ZYZkd4bkhhTFBMa0diYkRMWWJP?=
- =?utf-8?B?MjJ4UjZqYk00b0dkWGlKdDZDRUlWeTRzdU1oZHFoNEJpbGtZK0ZYclFSQ0Rw?=
- =?utf-8?B?VTYxSHBlcmVPUGI0RkdHQVhPUExVa3dvQWl2anp1WmhjRTBFWGxNUnRCMnFQ?=
- =?utf-8?B?cnc4bEF5REZmOHJnZmlxNm5sbmVod1c2N1JQWndGOXIrRzZ5UnZ1QnlzMTZN?=
- =?utf-8?B?RDhlRlo3dUNqWEthckYzMUlhb3g1WFpjaGMwTktNcGcyaEozQXJuenpKd0RH?=
- =?utf-8?B?b3pmdFhDS2twd3BWME0wWlR1Ylh4V3lIaTFDUDIveHYwZ1ZpQllYSjR2N2da?=
- =?utf-8?B?NkVxczRHRWZjUEx5MC9wWjdqajQrYWtHc1FlYjErUWJMc2RnVnZOT09LY3Nr?=
- =?utf-8?B?WWxWSFZTMG03ZnVCYVRGV3RZb05ubjJHSjQwdytreUVXTCsrTlNKVnhDUTM5?=
- =?utf-8?B?QmdvTXJ5eVhoZWlIbGxtMHZKZ2VjaG1JVmFMQ2RFendpRDFwMk1vaExBRjNQ?=
- =?utf-8?B?YXZkU2tMQ1J5TU8vcGswT2p5MXRBU3VJckIwWnc3UTc1akRPZFNzWXlPWkpK?=
- =?utf-8?B?TzQwY2ZlKzU0TE9lNlJzOEdOUGxweHp1eXV0NFQ3Yzh5amx4V2JLUEZOZE5C?=
- =?utf-8?B?blp5eHhXdDZibHJKdTAwS2FjVFhBPT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 15:26:33.4262 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60a08b63-4677-4bb8-baf7-08de5e819e77
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D3.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB7011
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: e9fda4ab-fc5d-11f0-be9c-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id e9fda4ab-fc5d-11f0-be9c-005056992ed3;
+ Wed, 28 Jan 2026 16:27:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=pY/yWm9qZHvd/e9ncUsRIWf2zbOhRNECcPZgZZxiQ0E=;
+ b=isNg34NW1PMg8ew4WZQTHrwFgFLydzdv0QUvRC0v3Z+9ebwZOUnL8Dloya2CWVXRSyuRSEimJInfo
+ R9wxyHHbhGB7OFs+WxOW3WiWpKaUDa1jENSwn6cgGxzUBzkqe2m+oKgFQkGsUqjwX8aa/fGPSW3/pK
+ DZXn3V56gErtGk1KXdyFcUFXr2KFjk8mvvo3pS9CznQ1IKYo0lbnnwgt4+6AqZ1jNY40zPLsOss3TE
+ suadfinVKzL/QtYwHeDy7bKhSOfEC1yKyBr5NG2Ikp+9NLdtNCThH9dNlzYz7/0p/L5/Fn8X7nxwSK
+ yYbUwFI4AVRBeZCrYDaLAFv/P20sSGQ==
+X-KPN-MID: 33|lyUAeVPPl5pNPR3imiRRg+zsILJdtyyeD7jytjhTwbbOQHsc4uHp/wjeHWC1ecJ
+ Ew9Hsr+OQd1FY5G5s4O9CbtO0yTOHjRj4sOm4x5wsb68=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|Z7dE8fmmQvPgMd9/rzIwkU+bK58EQFGCJ+UCy34/qHX/AROAfZyUsPPeoT38MO4
+ tXGI4yMBF5oGyhzL9/OgAFA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id e99269e5-fc5d-11f0-8d40-00505699b758;
+ Wed, 28 Jan 2026 16:27:53 +0100 (CET)
+Date: Wed, 28 Jan 2026 16:27:52 +0100
+Message-Id: <875x8l69l3.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: xypron.glpk@gmx.de, u-boot@lists.denx.de,
+ yuya.hamamachi.sx@renesas.com, andrew.goodbody@linaro.org,
+ casey.connolly@linaro.org, holger.brunck@hitachienergy.com,
+ ilias.apalodimas@linaro.org, jonas@kwiboo.se,
+ kettenis@openbsd.org, semen.protsenko@linaro.org,
+ sughosh.ganu@linaro.org, trini@konsulko.com
+In-Reply-To: <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org> (message from
+ Marek Vasut on Wed, 28 Jan 2026 12:43:28 +0100)
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
+ <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,75 +80,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Date: Wed, 28 Jan 2026 12:43:28 +0100
+> From: Marek Vasut <marek.vasut@mailbox.org>
 
-On 1/28/2026 8:26 PM, Marek Vasut wrote:
-> On 1/28/26 3:18 PM, Beleswar Padhi wrote:
->> From: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> Please drop this , it isnt needed.
->
->> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
->> packed inside the multidtb.fit FIT image. While the individual DTBs
->> and the FIT image start address are 8-byte aligned, the DTBs embedded
->> within the FIT image are not guaranteed to maintain 8-byte alignment.
->>
->> This misalignment causes -FDT_ERR_ALIGNMENT failure in
->> setup_multi_dtb_fit() when locating the next available DTB within the
->> FIT blob and setting gd->fdt_blob, because of the recent libfdt
->> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
->> version v1.7.2-35-g52f07dcca47c")
->>
->> To fix this, check the image type when extracting
->
-> "extracting" ? This code changes mkimage, so not "extracting" but 
-> "packing" (into fitImage), right ?
+Hi Marek,
 
+> On 1/28/26 5:41 AM, Heinrich Schuchardt wrote:
+> > Am 28. Januar 2026 00:48:40 MEZ schrieb Marek Vasut <marek.vasut+renesas@mailbox.org>:
+> >> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+> >> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
+> >> same bank"). These are based on incorrect premise of the first commit, that
+> >> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
+> >> not and should not use memory above ram_top, user can perfectly well use
+> >> that memory from the U-Boot shell, for example to load content in there.
+> >>
+> >> Currently, attempt to use that memory to load large image using TFTP ends
+> >> with "TFTP error: trying to overwrite reserved memory...". With this change
+> >> in place, the memory can be used again.
+> > 
+> > IIRC there are drivers that have issues with memory above 4 GiB and boards that artificially set ram_top to 4 GiB to work around these issues.
+> 
+> I thought I had all of those solved, but apparently not, please read on.
+> 
+> > We need to carefully consider why the reverted patch was introduced.
+> 
+> I didn't find much on either commit. I believe the premise on which the 
+> original patch was introduced is wrong, cf this commit message. We 
+> should allow U-Boot to access the memory above ram_top, we should not 
+> allow U-Boot to use it for its data structures because of the possible 
+> 32bit DMA limitations.
 
-Well the function name is fit_extract_data(). It is documented as extracting
-all the data properties of a node to the end of the fit. So just keeping the
-same terminology. Its obviously not in the same context as extracting data
-out of a FIT image to consume information...
+What do you want to do with that memory in U-Boot?  You can't really
+use it to load a kernel into if there is a 32-bit DMA limitations in,
+for example, your MMC controller...
 
->
->> FIT image data and
->> set the alignment size to 8 bytes (if not already) only for flat_dt
->> images. This ensures correct alignment for device tree blobs as per the
->> DT spec, while also allowing different alignment sizes for other image
->> types within the FIT.
->
-> [...]
->
->> diff --git a/tools/fit_image.c b/tools/fit_image.c
->> index e865f65a400..f842c845771 100644
->> --- a/tools/fit_image.c
->> +++ b/tools/fit_image.c
->> @@ -682,9 +682,17 @@ static int fit_extract_data(struct 
->> image_tool_params *params, const char *fname)
->>       for (node = fdt_first_subnode(fdt, images);
->>            node >= 0;
->>            node = fdt_next_subnode(fdt, node)) {
->> -        const char *data;
->> +        const char *data, *type;
->>           int len;
->>   +        /* Fallback to 8-byte alignment for DTBs if unaligned */
->> +        type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
->> +        if (type &&
->> +            len == sizeof("flat_dt") &&
->> +            !memcmp(type, "flat_dt", len) &&
->> +            align_size & 0x7)
->
-> What will be the resulting alignment if align_size = 0x1f ? 8 right ? 
-> I think it should be 0x20 .
+Are there boards that don't have enough memory below the 4GB address
+boundary?
 
+> > Why does your board use a 4GiB ram_top and not place ram_top at the physical top?
+> Originally, I thought it was only a remnant from the past which kept 
+> U-Boot and all its data structures, stack, heap in the first DRAM bank 
+> in 32bit space, so I tried to remove that. It turns out there are still 
+> a couple of problems that have to be solved to make it possible to 
+> relocate U-Boot fully into the 64bit space.
+> 
+> The first one is the standard parsing of DRAM size / ram_top / DRAM 
+> banks order in common/board_f.c , which probably hides a lot of issues 
+> on various boards, pretty much what you wrote above. In short, 
+> dram_init() only sets up gd->ram_base and gd->ram_size , which is often 
+> the first continuous DRAM bank which is in 32bit space. The follow up 
+> setup_dest_addr() uses that information to set up U-Boot relocation 
+> address at the end of that first continuous bank. And then 
+> dram_init_banksize() parses the rest of the DRAM banks into gd->bd 
+> (gd->bd is set up after setup_dest_addr() is called, in reserve_board()).
+> 
+> This above is fixable and I already have some clean up patches for that, 
+> which I implemented while writing this email.
+> 
+> But then I found out, that the ravb ethernet driver also has 32bit 
+> limited DMA, which breaks if I relocate U-Boot to the 64bit range. It 
+> worked thus far, because U-Boot was in 32bit space, so were mallocated 
+> DMA descriptors, so was the net_pkt_buf[] array (which is in .data 
+> section). I didn't find any other breakage thus far.
 
-I thought we agreed on resetting align_size to 8 if its not already aligned
-(regardless if < or > 8) in v3 version of this patch[0]. Do we really 
-have to
-align the align_size var itself? It seems like a overkill to me...
+Unfortunately hardware with 32-bit DMA constraints is very common.
+There are device trees with dma-ranges properties that imply DMA
+constraints.  That is mostly about restrictions of busses that have a
+limited number of address lines so it certainly doesn't cover
+everything.  My list of additonal SoCs with restrictions in OpenBSD has
+the Raspberry Pi 4 and Rockchip RK356x and RK3588 on it.
 
-[0]: 
-https://lore.kernel.org/all/75b9e8b8-dbbe-4502-8d4f-9a50b332bc7f@mailbox.org/
+> Which means, before we can really start switching boards to relocate to 
+> 64bit space, we need to find all these remaining 32bit limitation sites 
+> and fix them first. And to do that, we would need some way to force 
+> allocation from 32bit space for drivers which need that ... do we 
+> already have such a thing ? I couldn't find anything.
 
-Thanks,
-Beleswar
+We have bounce buffers in the EFI loader.  There is a more genric
+bounce buffer implementation in U-Boot as well, but that is only used
+to solve DMA cache coherency issues.  But this suggests that solving
+things in generic code instead of drivers might be feasable (at the
+price of extra memery copying).
 
+That said, is there really a benefit in giving U-Boot more memory on
+systems that typically have 2GB or more below the 4GB address
+boundary?
