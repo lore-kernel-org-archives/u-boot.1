@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3D2D46C15
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 23:05:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 032EFD46C01
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 23:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A40A583BFE;
-	Thu, 29 Jan 2026 00:05:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FEB283BDD;
+	Thu, 29 Jan 2026 00:44:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a/0BAp5q";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ai14WP9r";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cPewDd66";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87AB383AAD; Thu, 29 Jan 2026 00:05:32 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 25AB183BE1; Thu, 29 Jan 2026 00:44:14 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C00D83B86
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:05:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BFD0D83B5E
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:43:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d1890f7cefso250102a34.3
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:05:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769641529; x=1770246329; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aUpuAgKlliaa3MtH1BZ3ZRLK0zEjnyyzArziHmfpJec=;
- b=a/0BAp5qnfdIDHDJONLms2HQiIEBi3NMaNjchkQHdELHq2HFcGqPUb320CrKKz3d1R
- ptnStRSl4vuE5RJj2OHhDhnoqzOq4vRvznDNefdI4HmfzyZQWKnFTDF2yezZlkn/daD8
- nI8GzCMqVmctq6EatqOAOPrPAdM2lmJZxRexA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769641529; x=1770246329;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=aUpuAgKlliaa3MtH1BZ3ZRLK0zEjnyyzArziHmfpJec=;
- b=vHrNlUlGsvb8mZBRJo6n4MyG1Kd2lQhM7AXCu1lEWlvd+nJnh3PRMr22zNFz9qKM/w
- KHrGsyUeti2XcMIDKlg+0jCZhAR4EPM8ANM9DSlDwfzEfIIS3XrlQAVXnx7FJzYMy5be
- yXWiT0ygzn1nJO45jClmju6CKE5mtskXhprMVklx63t74txu7LEKbS5MZiW2bW2yY/Oj
- VaLdhcT22Zd1KQFhOGyCogSzGMf1PsBH/4J2GS5fp4N+5WtkGQD/xPvJtXUvh66TBfLe
- iUeLa6B6c8xPEJ8+8to9DffQxGuTFg5ddwHnYPSJOd5k4lGmKQ9nzO6jPCLyTMlBd0RW
- 9EeA==
-X-Gm-Message-State: AOJu0YyvES1EkmuGwK0GwBqhhipzsAInWVNtImsZ2HIRbbmCfJf16C5Q
- fKcQkkgUUn6GEHGVBIw+BEr3zN3/86bzsJQVM1K0SseJgfkGHPn7+MMmGihhy7hskXQqLk/2yZJ
- HfoyYrwk=
-X-Gm-Gg: AZuq6aIWCz8AswYcY+DPCT3S/I+nyXKcueqWokKQeCyQ8Jgn4AQiBYq+F4PovYPapUk
- kGlwf3Ox0zNYcIC0myy2Evk7rPbiUIaNuJTNmkNSGvAAnGx1ZLIT2BtXPNUyY2dF0HSkepO4rC5
- 7gtdyvxx+SXYZp6kebqTQvcpqFBVWMMhDlrXSGYrTFxdbTKUVAz/BqioHsx/EVxYjiW24UoLGLQ
- 1ICrVainndLLXiadNe13Mx1mhe/D6blnhGbP0YmjF+OmVmFHMsGbfWQav11hQdlTJNbav2bWeD2
- 0/9HWwy0iYS4zWOYmmsCZUtgWDVeswo1yHPPSNeDsIhLnsy0n/TwDBQN5dqJjUVy6l+UZsCYmLA
- rg250vBG8CBAYh6Yf0JVqWwayQOcSddTmKRsD0hjcbIwlKfryBq+OAROksXRz1GeIOEYUbH8x7h
- o7a6oI74VDLTIPa3BW7AHaEpePJgHwIyjSrTP+SAqsCylx8TK6gtayKsv7LM6ijh0g3nwwz58TO
- 66hZ63FcuXF1pmGOovEu4YSjeB9Rxu3XMV+ow==
-X-Received: by 2002:a05:6830:658b:b0:7cf:d191:3a76 with SMTP id
- 46e09a7af769-7d184fd847fmr4703694a34.2.1769641528869; 
- Wed, 28 Jan 2026 15:05:28 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d18c82e494sm2598076a34.28.2026.01.28.15.05.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 15:05:28 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-In-Reply-To: <a937a2e4-2bd0-4158-9b74-55131054c2ab@canonical.com>
-References: <a937a2e4-2bd0-4158-9b74-55131054c2ab@canonical.com>
-Subject: Re: Pull request doc-2026-04-rc2
-Message-Id: <176964152825.1796592.8303451057903605998.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 17:05:28 -0600
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f1f4F2Mxdz9sdB;
+ Thu, 29 Jan 2026 00:43:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769643837;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0i67h6JpcZAkCSIAoq7C2wLGRJpFsFlz1qjctMesaZs=;
+ b=ai14WP9rOJua8nOZfdMWmHsaR3ON5OoTE0mvGa27Lqy2ZHsxRg8PNgDPp974BJKwxbFij3
+ Jqg5axlWc7DLJrU67riI+3twN7Lq2gQeKnniZWlF0085043WfSZY8X4gB4jUiYkL+qdvSA
+ Degfx8H2QmYDZc5kr+zA1wArG6rkLMGluHHotURJaEHWS7/6j+moo8cq+QHaIw0gedAOBn
+ +X2DYJv/D+g84FAAKO0Mcr4VaZW8kUjfkWshlAb5WOB58lQWtxo6JoZIk3NRkyn+p7xGi3
+ 50b0g7YyswBlzkZ0fkXBwIgzaiywTfxsSZXdhDIig+X3VMFkcKYdHziYfKxs5g==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=cPewDd66;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769643835;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0i67h6JpcZAkCSIAoq7C2wLGRJpFsFlz1qjctMesaZs=;
+ b=cPewDd66ci8mD76EeBamFxoxXTGUDqNbQdcm3aDnyYTHb6yI7bE6PuLOoR0GzDKr4xPub6
+ 3QW6nLAFmtAe1sxNmqNC6RyV+UEQzYsNHSvV2G4v7KCjPvZ4p4mQvnctIciqkNRPz9SjHE
+ nvkss0ut6aS0HUxjccXly3rlk3HqQ+AcR0MBhcWemhqnuJ5zcPdvmrkQ4jUegemXMx5Ok5
+ uPxr9fPBK33p/orr4ESXkeLrtRDzaW7ZqUSSViTcUd+TmFmL4m/aoG29O0QDVL8uxhZksr
+ 6w+pKy/CuZ8UmLt4/XWkYW2ND9SZ0qdwkWN7rCJM5Voo4IokCZPpdOpAdS7EMg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: [PATCH] net: lwip: tftp: add support of tsize option to client
+Date: Thu, 29 Jan 2026 00:43:45 +0100
+Message-ID: <20260128234351.405945-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 39529374c0fe95994c6
+X-MBO-RS-META: zwzdyybdzqkmyk7mwnun4t57tp6jd9si
+X-Rspamd-Queue-Id: 4f1f4F2Mxdz9sdB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,23 +95,255 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Jan 2026 23:53:20 +0100, Heinrich Schuchardt wrote:
+The TFTP server can report the size of the entire file that is about to
+be received in the Transfer Size Option, this is described in RFC 2349.
+This functionality is optional and the server may not report tsize in
+case it is not supported.
 
-> The following changes since commit e8ec8d980a31c4a1d665e4aa9089d6aa27cb0d0b:
-> 
->    Merge patch series "dm: core: Support same compatible in host/gadget
-> musb drivers" (2026-01-28 09:21:17 -0600)
-> 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/doc-2026-04-rc2
-> 
-> [...]
+Always send tsize request to the server to query the transfer size,
+and in case the server does respond, cache that information locally
+in tftp_state.tsize, otherwise cache size 0. Introduce new function
+tftp_client_get_tsize() which returns the cached tftp_state.tsize so
+clients can determine the transfer size and use it.
 
-Merged into u-boot/master, thanks!
+Update net/lwip/tftp.c to make use of tftp_client_get_tsize() and
+avoid excessive printing of '#' during TFTP transfers in case the
+transfer size is reported by the server.
 
+Submitted upstream: https://savannah.nongnu.org/patch/index.php?item_id=10557
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome@forissier.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Cc: u-boot@lists.denx.de
+---
+ lib/lwip/lwip/src/apps/tftp/tftp.c            | 51 +++++++++++++++----
+ .../lwip/src/include/lwip/apps/tftp_client.h  |  1 +
+ net/lwip/tftp.c                               | 35 +++++++++++--
+ 3 files changed, 74 insertions(+), 13 deletions(-)
+
+diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
+index ecb6c55ae11..5061446b1cf 100644
+--- a/lib/lwip/lwip/src/apps/tftp/tftp.c
++++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
+@@ -98,6 +98,7 @@ struct tftp_state {
+   int last_pkt;
+   u16_t blknum;
+   u16_t blksize;
++  u32_t tsize;
+   u8_t retries;
+   u8_t mode_write;
+   u8_t tftp_mode;
+@@ -167,6 +168,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
+ {
+   size_t fname_length = strlen(fname)+1;
+   size_t mode_length = strlen(mode)+1;
++  size_t tsize_length = strlen("tsize")+3; /* "tsize\0\0\0" */
+   size_t blksize_length = 0;
+   int blksize = tftp_state.blksize;
+   struct pbuf* p;
+@@ -182,7 +184,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
+     }
+   }
+ 
+-  p = init_packet(opcode, 0, fname_length + mode_length + blksize_length - 2);
++  p = init_packet(opcode, 0, fname_length + mode_length + blksize_length + tsize_length - 2);
+   if (p == NULL) {
+     return ERR_MEM;
+   }
+@@ -190,8 +192,9 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
+   payload = (char*) p->payload;
+   MEMCPY(payload+2,              fname, fname_length);
+   MEMCPY(payload+2+fname_length, mode,  mode_length);
++  sprintf(payload+2+fname_length+mode_length, "tsize%c%u%c", 0, 0, 0);
+   if (tftp_state.blksize)
+-    sprintf(payload+2+fname_length+mode_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
++    sprintf(payload+2+fname_length+mode_length+tsize_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
+ 
+   tftp_state.wait_oack = true;
+   ret = udp_sendto(tftp_state.upcb, p, addr, port);
+@@ -450,14 +453,24 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
+       }
+ 
+       blknum = lwip_ntohs(sbuf[1]);
+-      if (tftp_state.blksize && tftp_state.wait_oack) {
++      if (tftp_state.wait_oack) {
+         /*
+-         * Data received while we are expecting an OACK for our blksize option.
++         * Data received while we are expecting an OACK for our tsize option.
+          * This means the server doesn't support it, let's switch back to the
+          * default block size.
+          */
+-       tftp_state.blksize = 0;
+-       tftp_state.wait_oack = false;
++        tftp_state.tsize = 0;
++        tftp_state.wait_oack = false;
++
++        if (tftp_state.blksize) {
++          /*
++           * Data received while we are expecting an OACK for our blksize option.
++           * This means the server doesn't support it, let's switch back to the
++           * default block size.
++           */
++          tftp_state.blksize = 0;
++          tftp_state.wait_oack = false;
++        }
+       }
+       if (blknum == tftp_state.blknum) {
+         pbuf_remove_header(p, TFTP_HEADER_LENGTH);
+@@ -527,21 +540,31 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
+       }
+       break;
+     case PP_HTONS(TFTP_OACK): {
+-      const char *optval = find_option(p, "blksize");
++      const char *blksizeoptval = find_option(p, "blksize");
++      const char *tsizeoptval = find_option(p, "tsize");
+       u16_t srv_blksize = 0;
++      u32_t srv_tsize = 0;
+       tftp_state.wait_oack = false;
+-      if (optval) {
++      if (blksizeoptval) {
+ 	if (!tftp_state.blksize) {
+ 	  /* We did not request this option */
+           send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "blksize unexpected");
+ 	}
+-	srv_blksize = atoi(optval);
++	srv_blksize = atoi(blksizeoptval);
+ 	if (srv_blksize <= 0 || srv_blksize > tftp_state.blksize) {
+ 	  send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "Invalid blksize");
+ 	}
+ 	LWIP_DEBUGF(TFTP_DEBUG | LWIP_DBG_STATE, ("tftp: accepting blksize=%d\n", srv_blksize));
+ 	tftp_state.blksize = srv_blksize;
+       }
++      if (tsizeoptval) {
++	srv_tsize = atoi(tsizeoptval);
++	if (srv_tsize <= 0) {
++	  srv_tsize = 0; /* tsize is optional */
++	}
++	LWIP_DEBUGF(TFTP_DEBUG | LWIP_DBG_STATE, ("tftp: accepting tsize=%d\n", srv_tsize));
++	tftp_state.tsize = srv_tsize;
++      }
+       send_ack(addr, port, 0);
+       break;
+     }
+@@ -655,6 +678,16 @@ tftp_init_client(const struct tftp_context *ctx)
+   return tftp_init_common(LWIP_TFTP_MODE_CLIENT, ctx);
+ }
+ 
++/** @ingroup tftp
++ * Get the transfer size used by the TFTP client. The server may
++ * report zero in case this is unsupported.
++ */
++u32_t
++tftp_client_get_tsize(void)
++{
++  return tftp_state.tsize;
++}
++
+ /** @ingroup tftp
+  * Set the block size to be used by the TFTP client. The server may choose to
+  * accept a lower value.
+diff --git a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
+index e1e21d06b67..78de50f4924 100644
+--- a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
++++ b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
+@@ -45,6 +45,7 @@ enum tftp_transfer_mode {
+ 
+ err_t tftp_init_client(const struct tftp_context* ctx);
+ void tftp_client_set_blksize(u16_t blksize);
++u32_t tftp_client_get_tsize(void);
+ err_t tftp_get(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
+ err_t tftp_put(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
+ 
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+index 6c7ffba661e..213c1292eb1 100644
+--- a/net/lwip/tftp.c
++++ b/net/lwip/tftp.c
+@@ -31,6 +31,7 @@ struct tftp_ctx {
+ 	ulong daddr;
+ 	ulong size;
+ 	ulong block_count;
++	ulong hash_count;
+ 	ulong start_time;
+ 	enum done_state done;
+ };
+@@ -49,6 +50,8 @@ struct tftp_ctx {
+ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ {
+ 	ulong store_addr = ctx->daddr;
++	ulong tftp_tsize;
++	ulong pos;
+ 	void *ptr;
+ 
+ 	if (CONFIG_IS_ENABLED(LMB)) {
+@@ -67,10 +70,21 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ 	ctx->daddr += len;
+ 	ctx->size += len;
+ 	ctx->block_count++;
+-	if (ctx->block_count % 10 == 0) {
+-		putc('#');
+-		if (ctx->block_count % (65 * 10) == 0)
+-			puts("\n\t ");
++
++	tftp_tsize = tftp_client_get_tsize();
++	if (tftp_tsize) {
++		pos = clamp(ctx->size, 0UL, tftp_tsize);
++
++		while (ctx->hash_count < pos * 50 / tftp_tsize) {
++			putc('#');
++			ctx->hash_count++;
++		}
++	} else {
++		if (ctx->block_count % 10 == 0) {
++			putc('#');
++			if (ctx->block_count % (65 * 10) == 0)
++				puts("\n\t ");
++		}
+ 	}
+ 
+ 	return 0;
+@@ -84,6 +98,7 @@ static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
+ static void tftp_close(void *handle)
+ {
+ 	struct tftp_ctx *ctx = handle;
++	ulong tftp_tsize;
+ 	ulong elapsed;
+ 
+ 	if (ctx->done == FAILURE || ctx->done == ABORTED) {
+@@ -92,6 +107,17 @@ static void tftp_close(void *handle)
+ 	}
+ 	ctx->done = SUCCESS;
+ 
++	tftp_tsize = tftp_client_get_tsize();
++	if (tftp_tsize) {
++		/* Print hash marks for the last packet received */
++		while (ctx->hash_count < 49) {
++			putc('#');
++			ctx->hash_count++;
++		}
++		puts("  ");
++		print_size(tftp_tsize, "");
++	}
++
+ 	elapsed = get_timer(ctx->start_time);
+ 	if (elapsed > 0) {
+ 		puts("\n\t ");	/* Line up with "Loading: " */
+@@ -176,6 +202,7 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	ctx.done = NOT_DONE;
+ 	ctx.size = 0;
+ 	ctx.block_count = 0;
++	ctx.hash_count = 0;
+ 	ctx.daddr = addr;
+ 
+ 	printf("Using %s device\n", udev->name);
 -- 
-Tom
-
+2.51.0
 
