@@ -4,57 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC8FDD46C0F
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 22:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797BBD46C01
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 22:53:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F4B783C2B;
-	Wed, 28 Jan 2026 23:51:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id ACC2B83C2B;
+	Wed, 28 Jan 2026 23:53:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GqPC3G0V";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Dtgb+tjp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC28483C4B; Wed, 28 Jan 2026 23:51:10 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id C61B783C65; Wed, 28 Jan 2026 23:53:25 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D537983BE1
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 23:51:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
+ by phobos.denx.de (Postfix) with ESMTPS id 64FD183BE1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 23:53:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=20d3=AC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1769640666;
- bh=WRwoRaXLVZtXD+h/ipC8oT0DhFLfz0EOt61X0t8/W2Q=;
- b=GqPC3G0Vmh8D19jBk7U7h7TEo4+lGi+QLxujR1+virJ0pB8ou7iy4IZRwhxxrywEwwLnmRPhd
- 1MN79RbY1sJuvrSOXO5335zCjzccPQ9MLaAJE0vvSo+LBXBR9+3XQjTYpTtFxBZJ13v1BZeG6a3
- szZuqkXqz0KMJD3UqyAnn85wsCEogtuUs2S/gVZ8Wm9GlMt3+jBQYDQ+br7VM4GV5p1oWh0VvgU
- PU0Yqw7N75MVPqBayzzTH4QFZPBRdRChyqHWAVUWrg94x2cVf+k0GEjq3Afm4tGlIVTngyuIl4C
- UPyeO9hFZiIsMi8WQzADWqIqDsgm30DHZ4Kw2TBCMf/g==
-X-Forward-Email-ID: 697a92d7c8e1d86c9dc2e1ae
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.5.4
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH] usb: gadget: dwc2: Move dr_mode check from of_to_plat() to
- bind()
-Date: Wed, 28 Jan 2026 22:50:55 +0000
-Message-ID: <20260128225057.1699019-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.52.0
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 097B43FA7C
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 22:53:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1769640803;
+ bh=QzxYiJQXn6kLeBRsiNKQoZib/GplfkK+VoL6HlBymUE=;
+ h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
+ b=Dtgb+tjpqjgYjijku7oGVQ+l5RTcNBWBsF87HC9owXEnCtYVVh4GAlA7jWGCTldKL
+ m0ES0kxyFh/mjv9IIuT5HN4Y1zt4vOVZykQjqy40cTGLD+LzSjeRGNf+NKATD+CyE8
+ 8cHke7Fs+b89jaxFyf7XoUIVIW2cBs7YRIXTrGplrL4kIGaEK9GvOjnfuaKcpwalp1
+ Uev0mqLpsi79UMmOFUyV8dW9uyNeiqyLAs62EbmwFuuCK3QD49CB/HSeq8NvKG355u
+ uTKRoJAAZ4nETLOjdfsWaNw6m4aCqEnc9yn14rHtjUA50yzIvYt1yXz/3BOoFvykmS
+ rXgcOt9iX2MGP6le3BlZqLVli2GSFqyDnnlhG5MDE+963oKx/YuKlQyMnMqL+D8NNm
+ wQkwIhg1utmoapCtmo3PbZTUViiPKo6rr8tK5fxBhQ6vFAtv0MFLy9FVjc8YuVQ3bA
+ fBXLsyrFVRqqgZIMsXjpfapvX6okoO6nqvkhjYXtVQqzmkX5BbaKUHY5qNIO7P86FY
+ dyWFGbbWTb8Gi5K6YP5crWO3oeDI3jcmhSGnu0N3tcTaotKvpAkRPX+Ojv/C0ELwmq
+ 4gYxbXjPXiQ85fL/O9+EwL0dnKDbFA6HUBEsUI3+yqGIqDDiKkAV/fQ9BUWvpyxRTy
+ B9J0u1bfBRlwsCxVzF+Zb4kM=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-47edfdc6c1aso3129155e9.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 14:53:23 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769640802; x=1770245602;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QzxYiJQXn6kLeBRsiNKQoZib/GplfkK+VoL6HlBymUE=;
+ b=e1TkEwVBxallkll4BPieKJwZ6LHcdzd1fKn0IJjIfCaedP8Yh1dg3WDvFLVr5lCnQ/
+ pGlwVLgSBdCxsJH5w40mO+q+hXE3X3voqx1b2sUPovp3YYPjkTjdlbs2US+pQ6PbzH0z
+ wd8wBui98S5YXtE9dLi1s0ji/FYogAZG2tGY77BsFdaDeYCr2CzKjUXGHpB/u+ynlInt
+ FqT7QhzY4y0CIP0oS+iYDKXivN4/U4f053aPnG14LGaLRPF/078g8DagX7tsymp2voU0
+ exa8sYZKMjjYKwwRMFeEC4r3NgVTi7sysKkQJ6Wq5J/d0OvmsidhLN+x3QZtEmWmOzfg
+ dJsw==
+X-Gm-Message-State: AOJu0YyAdIJhEf6v6Oox9Yc87oEPxRSAThmoEYUKwJ1C2G9rCiwb6guc
+ q8p87Tz9wuucgM29gr0u5PnLH4D8+qld1Z6oXKQqB+/SidlTj7hEOZzKfOAKJOFOuxXg/+su8+C
+ ueOv6nmTfnyMAu5ObJVgt6zoi6LTAhVrM4yYJdS8VhLmAqy0TMJv5xpFw3eN7EoWLNLaoKk3i64
+ JBf3w=
+X-Gm-Gg: AZuq6aJU/M+r7WvN3Q70ei9Df3o4nBIddn/WeuopGqylHFjbFXrdEsxhTXXWeD6driV
+ Puv640nCbUwXm7LEYPd6f7JTwaz4PNYkTXO0jAtlzcDRG8SF0p16mXo+TpaFxhdFhq/Q38HXoC9
+ DpcQrOjnMXjPjQlcaLob6f6fCFN37K8x+byQBfRtnqZqjfvk5xpo3tk99pOx1QNmGkWvfpZxqBB
+ RiUYWSXW9EDOwEtumx5Srd5Pmlc5wMJeBgMR1tuyurJ9uNRCORILXAy9SlBwOLJ+sFnO25nmBHm
+ KhoPQzbo1XsoRHCNbin+kJ087h2RWdesVi61MtlZgp4ZKoKhiyK6N9IcDQOWsiIROVHSz5RLR9g
+ 72mVyCMHe/Z+u6hJeiaWtcOLMiRAwreS73uGSOUUvqHkZpQaPyGhMoIEymaUF0c24jA9n5cAEbo
+ AcvA==
+X-Received: by 2002:a05:600c:450b:b0:47e:e946:3a72 with SMTP id
+ 5b1f17b1804b1-48069c5fed2mr72207465e9.27.1769640802594; 
+ Wed, 28 Jan 2026 14:53:22 -0800 (PST)
+X-Received: by 2002:a05:600c:450b:b0:47e:e946:3a72 with SMTP id
+ 5b1f17b1804b1-48069c5fed2mr72207285e9.27.1769640802150; 
+ Wed, 28 Jan 2026 14:53:22 -0800 (PST)
+Received: from ?IPV6:2a02:3037:6e4:3a21:e5f9:4824:4c1f:bab0?
+ ([2a02:3037:6e4:3a21:e5f9:4824:4c1f:bab0])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-481a5d2fcd0sm1426935e9.1.2026.01.28.14.53.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Jan 2026 14:53:21 -0800 (PST)
+Message-ID: <a937a2e4-2bd0-4158-9b74-55131054c2ab@canonical.com>
+Date: Wed, 28 Jan 2026 23:53:20 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Pull request doc-2026-04-rc2
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,92 +114,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip RK3288 and RK3506 contain two DWC2 USB controllers, typically
-one controller use dr_mode=otg and the other one use dr_mode=host.
+Dear Tom,
 
-With USB_GADGET_DWC2_OTG, DM_USB_GADGET and USB_DWC2 enabled this result
-in the dwc2-udc-otg driver binding to both controllers, however only one
-will probe due to use of dr_mode=host on the other one.
+The following changes since commit e8ec8d980a31c4a1d665e4aa9089d6aa27cb0d0b:
 
-After the commit 6668b8e7cc68 ("dm: core: Support multiple drivers with
-same compatibles") it is possible to bind one controller to the
-dwc2-udc-otg driver and the other one to the dwc2_usb driver.
+   Merge patch series "dm: core: Support same compatible in host/gadget 
+musb drivers" (2026-01-28 09:21:17 -0600)
 
-Move the dr_mode check from of_to_plat() to bind() to allow dm core to
-bind the dwc2 host driver to dr_mode=host controllers.
+are available in the Git repository at:
 
-Before this:
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
+tags/doc-2026-04-rc2
 
-  => dm tree
-   ...
-   usb_gadget    0  [   ]   dwc2-udc-otg          |   |-- usb@ff740000
-   usb_gadget    1  [   ]   dwc2-udc-otg          |   |-- usb@ff780000
+for you to fetch changes up to 302c054d64a19c5bb579c3a74cc809f7338cf9de:
 
-  => usb start
-  starting USB...
-  No USB controllers found
+   doc: develop: process: Document using b4 and patchwork for custodians 
+(2026-01-28 21:20:07 +0100)
 
-After this:
+Gitlab Ci showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/29122
 
-  => dm tree
-   ...
-   usb_gadget    0  [   ]   dwc2-udc-otg          |   |-- usb@ff740000
-   usb           0  [   ]   dwc2_usb              |   |-- usb@ff780000
+----------------------------------------------------------------
+Pull request doc-2026-04-rc2
 
-  => usb start
-  starting USB...
-  USB DWC2
-  Bus usb@ff780000: 1 USB Device(s) found
+Documentation:
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/usb/gadget/dwc2_udc_otg.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+* describe QEMU VGA emulation
+* development process
+   - Move the existing block about patch application
+   - Rework the custodian feedback section
+   - Explain when/how Custodians may edit patches
+   - Move Custodians section
+   - Make "Work flow of a Custodian" a subsection
+   - Document using b4 and patchwork for custodians
+* develop: codingstyle: Update b4 external link
+* develop: sending_patches: Update link to patchwork
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 40393141ca95..d1d4fa7618b0 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -975,12 +975,6 @@ static int dwc2_udc_otg_of_to_plat(struct udevice *dev)
- 	void (*set_params)(struct dwc2_plat_otg_data *data);
- 	int ret;
- 
--	if (usb_get_dr_mode(dev_ofnode(dev)) != USB_DR_MODE_PERIPHERAL &&
--	    usb_get_dr_mode(dev_ofnode(dev)) != USB_DR_MODE_OTG) {
--		dev_dbg(dev, "Invalid mode\n");
--		return -ENODEV;
--	}
--
- 	plat->regs_otg = dev_read_addr(dev);
- 
- 	plat->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
-@@ -1163,6 +1157,18 @@ static int dwc2_udc_otg_remove(struct udevice *dev)
- 	return dm_scan_fdt_dev(dev);
- }
- 
-+static int dwc2_udc_otg_bind(struct udevice *dev)
-+{
-+	enum usb_dr_mode dr_mode = usb_get_dr_mode(dev_ofnode(dev));
-+
-+	if (dr_mode != USB_DR_MODE_PERIPHERAL && dr_mode != USB_DR_MODE_OTG) {
-+		dev_dbg(dev, "Invalid mode\n");
-+		return -ENODEV;
-+	}
-+
-+	return 0;
-+}
-+
- static int dwc2_gadget_handle_interrupts(struct udevice *dev)
- {
- 	return dwc2_udc_handle_interrupt();
-@@ -1186,6 +1192,7 @@ U_BOOT_DRIVER(dwc2_udc_otg) = {
- 	.of_match = dwc2_udc_otg_ids,
- 	.ops	= &dwc2_gadget_ops,
- 	.of_to_plat = dwc2_udc_otg_of_to_plat,
-+	.bind = dwc2_udc_otg_bind,
- 	.probe = dwc2_udc_otg_probe,
- 	.remove = dwc2_udc_otg_remove,
- 	.plat_auto	= sizeof(struct dwc2_plat_otg_data),
--- 
-2.52.0
+----------------------------------------------------------------
+Heinrich Schuchardt (1):
+       doc: describe QEMU VGA emulation
+
+Tom Rini (8):
+       doc: develop: process: Move the existing block about patch 
+application
+       doc: develop: process: Rework the custodian feedback section
+       doc: develop: process: Explain when/how Custodians may edit patches
+       doc: develop: process: Move Custodians section
+       doc: develop: process: Make "Work flow of a Custodian" a subsection
+       doc: develop: codingstyle: Update b4 external link
+       doc: develop: sending_patches: Update link to patchwork
+       doc: develop: process: Document using b4 and patchwork for custodians
+
+  doc/board/emulation/index.rst   |   1 +
+  doc/board/emulation/video.rst   |  63 ++++++++++++++++++++++++
+  doc/develop/codingstyle.rst     |   4 +-
+  doc/develop/process.rst         | 106 
++++++++++++++++++++++++++++-------------
+  doc/develop/sending_patches.rst |   4 +-
+  5 files changed, 143 insertions(+), 35 deletions(-)
+  create mode 100644 doc/board/emulation/video.rst
 
