@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB831D46C15
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 23:05:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3D2D46C15
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 23:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6505483B72;
+	by phobos.denx.de (Postfix) with ESMTP id A40A583BFE;
 	Thu, 29 Jan 2026 00:05:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="omeVpD48";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a/0BAp5q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC1BB83BE1; Thu, 29 Jan 2026 00:05:31 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 87AB383AAD; Thu, 29 Jan 2026 00:05:32 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C916E83AAD
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:05:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C00D83B86
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:05:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7cfd6f321b5so189310a34.2
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:05:29 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d1890f7cefso250102a34.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:05:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769641528; x=1770246328; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769641529; x=1770246329; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=SPD+Tm9fdv6aw7uvtkuDZKWvgbKVlR7oDZwidAQ9xR4=;
- b=omeVpD48tkCzhYkNbncWMMrsPoVtuX3B9b0Z/gKX5kvN8USKzu7iqbpHfQCQIK3gmk
- zqeJVBN+7rEvpJabyKs097RWbgSs+PhVJYPG35uqR8mUFowuGUuaYiZ7mL94lbiIeG9E
- BFESglt3T/LuFvUE3YP43Br7b32o3bTSL26SI=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aUpuAgKlliaa3MtH1BZ3ZRLK0zEjnyyzArziHmfpJec=;
+ b=a/0BAp5qnfdIDHDJONLms2HQiIEBi3NMaNjchkQHdELHq2HFcGqPUb320CrKKz3d1R
+ ptnStRSl4vuE5RJj2OHhDhnoqzOq4vRvznDNefdI4HmfzyZQWKnFTDF2yezZlkn/daD8
+ nI8GzCMqVmctq6EatqOAOPrPAdM2lmJZxRexA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769641528; x=1770246328;
+ d=1e100.net; s=20230601; t=1769641529; x=1770246329;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=SPD+Tm9fdv6aw7uvtkuDZKWvgbKVlR7oDZwidAQ9xR4=;
- b=ltVvUYvLTu6sVv4A05Bhu8TPV7kWxYh+eBsoDbgwT+7xzbU8Nk8h0eqIxbl8jG9RXM
- UNpVq3AFLkzoD80EEeu+fZSrxG7/ffVWh9zhYQ2oxvH+96sPfJ0tzPDHIP3/oU5okPvl
- b+/uO27HFQ5OGEM5PcVOdf4QgtLq04XVDTRf4KoYbiD20DEH9CxCM3oW42I3L2nULMRA
- /FhVAeilHcvGuN7GGxKEqYMnavzfMj6/xdkO4K8l9+gUI6n+06WHhXq0bDsv8fKBLhW+
- zOhk/dgLej9D3nvPJXPL+uyKTM/TNBDmr6b3VVsiE1QSoeZ6TtbWKF1uWj/YWEBKxh8k
- W/vA==
-X-Gm-Message-State: AOJu0Ywuy1vzFBzkI2iivuW3Pyb7sUA8AvigIUSOPbV+SBn0jQTINahr
- JrpIdMIzCaUeWLIp7qYqOahRBei4g5NhvPNNXvjqO37jTW8k3x1riidI3M0luFoZIuDBU91ePy/
- DXo5N8dc=
-X-Gm-Gg: AZuq6aIavxZOx1nL/Co/chP3T4pKVk83UCkBERNtQGrFAvQtP7c9wJ9GIna2JIF5vuL
- WuKrKYe6vPUkqSOx5we2atWoVSsNFG0I4lUWrUY1BJ/8M5Ies9ecDJBgJDuTUqB/lczx3skHYSQ
- XrT1pZnudoAP5dJb9SO1I8LiAs40eoqvgpoRau7jFXfwH6ew1O3ioReD3Jj4AvTIDyUwXMGpsTH
- yTRuXqhS07jA5CpovQPlIARnbEm+T2BDKtTJLr4vC7+KPJaeYmip7HBDQ5vjuFHvQMZI9ZEi51t
- /1vc5tsrfiQ4t6xx7EAWs7lRWVAdY1BIawZxMjTyDEBsVcDgVqKSvrkqAvYips8acmJt2qmEMP+
- 2ved/gYEUEEpE03xP9A4FZauEsmNuMGPs6W7eCkPfhKHXxA0sefUB9M+0IbtOcMigzI1Nyuzfpc
- 6JoD5BxKFyExq9aIY04Mx+weW9XzLDnFmmUqFBaxu4M5jH9wRHhmdZjwaO5hn8TuOQosP1J+n1D
- N6MBi71Z1hj78Pvre1Yh6ZAHkuk8jBxq3YSoQ==
-X-Received: by 2002:a05:6830:6614:b0:7cf:cc64:7636 with SMTP id
- 46e09a7af769-7d1850f751dmr3896693a34.29.1769641528126; 
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=aUpuAgKlliaa3MtH1BZ3ZRLK0zEjnyyzArziHmfpJec=;
+ b=vHrNlUlGsvb8mZBRJo6n4MyG1Kd2lQhM7AXCu1lEWlvd+nJnh3PRMr22zNFz9qKM/w
+ KHrGsyUeti2XcMIDKlg+0jCZhAR4EPM8ANM9DSlDwfzEfIIS3XrlQAVXnx7FJzYMy5be
+ yXWiT0ygzn1nJO45jClmju6CKE5mtskXhprMVklx63t74txu7LEKbS5MZiW2bW2yY/Oj
+ VaLdhcT22Zd1KQFhOGyCogSzGMf1PsBH/4J2GS5fp4N+5WtkGQD/xPvJtXUvh66TBfLe
+ iUeLa6B6c8xPEJ8+8to9DffQxGuTFg5ddwHnYPSJOd5k4lGmKQ9nzO6jPCLyTMlBd0RW
+ 9EeA==
+X-Gm-Message-State: AOJu0YyvES1EkmuGwK0GwBqhhipzsAInWVNtImsZ2HIRbbmCfJf16C5Q
+ fKcQkkgUUn6GEHGVBIw+BEr3zN3/86bzsJQVM1K0SseJgfkGHPn7+MMmGihhy7hskXQqLk/2yZJ
+ HfoyYrwk=
+X-Gm-Gg: AZuq6aIWCz8AswYcY+DPCT3S/I+nyXKcueqWokKQeCyQ8Jgn4AQiBYq+F4PovYPapUk
+ kGlwf3Ox0zNYcIC0myy2Evk7rPbiUIaNuJTNmkNSGvAAnGx1ZLIT2BtXPNUyY2dF0HSkepO4rC5
+ 7gtdyvxx+SXYZp6kebqTQvcpqFBVWMMhDlrXSGYrTFxdbTKUVAz/BqioHsx/EVxYjiW24UoLGLQ
+ 1ICrVainndLLXiadNe13Mx1mhe/D6blnhGbP0YmjF+OmVmFHMsGbfWQav11hQdlTJNbav2bWeD2
+ 0/9HWwy0iYS4zWOYmmsCZUtgWDVeswo1yHPPSNeDsIhLnsy0n/TwDBQN5dqJjUVy6l+UZsCYmLA
+ rg250vBG8CBAYh6Yf0JVqWwayQOcSddTmKRsD0hjcbIwlKfryBq+OAROksXRz1GeIOEYUbH8x7h
+ o7a6oI74VDLTIPa3BW7AHaEpePJgHwIyjSrTP+SAqsCylx8TK6gtayKsv7LM6ijh0g3nwwz58TO
+ 66hZ63FcuXF1pmGOovEu4YSjeB9Rxu3XMV+ow==
+X-Received: by 2002:a05:6830:658b:b0:7cf:d191:3a76 with SMTP id
+ 46e09a7af769-7d184fd847fmr4703694a34.2.1769641528869; 
  Wed, 28 Jan 2026 15:05:28 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d18c82e494sm2598076a34.28.2026.01.28.15.05.27
+ 46e09a7af769-7d18c82e494sm2598076a34.28.2026.01.28.15.05.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 15:05:27 -0800 (PST)
+ Wed, 28 Jan 2026 15:05:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Vishal Mahaveer <vishalm@ti.com>
-In-Reply-To: <20260121195340.3041549-1-vishalm@ti.com>
-References: <20260121195340.3041549-1-vishalm@ti.com>
-Subject: Re: [PATCH v3 0/4] board: ti: Add 32k crystal initialization
-Message-Id: <176964152741.1796592.10357694633976440223.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 17:05:27 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <a937a2e4-2bd0-4158-9b74-55131054c2ab@canonical.com>
+References: <a937a2e4-2bd0-4158-9b74-55131054c2ab@canonical.com>
+Subject: Re: Pull request doc-2026-04-rc2
+Message-Id: <176964152825.1796592.8303451057903605998.b4-ty@konsulko.com>
+Date: Wed, 28 Jan 2026 17:05:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,29 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 21 Jan 2026 13:53:36 -0600, Vishal Mahaveer wrote:
+On Wed, 28 Jan 2026 23:53:20 +0100, Heinrich Schuchardt wrote:
 
-> Add 32k crystal initialization support for am62x, am62ax and am62px TI boards.
+> The following changes since commit e8ec8d980a31c4a1d665e4aa9089d6aa27cb0d0b:
 > 
-> Changes for v3:
-> - Rebase and fixed am62d build failure
+>    Merge patch series "dm: core: Support same compatible in host/gadget
+> musb drivers" (2026-01-28 09:21:17 -0600)
 > 
-> Changes for v2:
-> - Created a common API which can be called from individual board files
-> - Squashed defconfig and board file changes into single commits
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/doc-2026-04-rc2
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/4] board: ti: common: Add function for initialization of 32k crystal
-      commit: c927eefd969d3714d55ac56e7a2ba34f923b9c1e
-[2/4] board: ti: am62x: Enable 32k crystal on the board
-      commit: d7550d01050c72edc548829dcc4d9a7494bf124b
-[3/4] board: ti: am62ax/am62dx: Enable 32k crystal on the board
-      commit: b259574e471dd632c31f7a8caea29102a3219fab
-[4/4] board: ti: am62px: Enable 32k crystal on the board
-      commit: de6b11e27b3a127d6e500e970f6ee7a70d7ab4bd
 -- 
 Tom
 
