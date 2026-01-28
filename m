@@ -4,142 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF2CD35669
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFCDD35673
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:42:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E047841FF;
-	Wed, 28 Jan 2026 05:32:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E798D841E2;
+	Wed, 28 Jan 2026 05:42:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Vr9ziqdI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="oWaZWtM3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33C9184213; Wed, 28 Jan 2026 05:32:51 +0100 (CET)
+ id 0823A841E7; Wed, 28 Jan 2026 05:42:07 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB3A6841E7
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:32:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1919841B9
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:42:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1769574756; x=1770179556; i=xypron.glpk@gmx.de;
- bh=LUL6UbZmpMkCG5tTHpuYdnUIHcpZpV/3VDnugYglA8c=;
+ s=s31663417; t=1769575305; x=1770180105; i=xypron.glpk@gmx.de;
+ bh=Mi9cRGVpGXulTdY1te8TCzbTIndUSoQFa+yQDW5egQw=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=Vr9ziqdIqZsJ/8jDTSNe1786lut1U68a5scd55BCs9m2JHaDEkJG82W8BPfECkIu
- ehclu7sIJRakXKSfYyS9cAjj+0VGaPavG5pNbggwOYYrZssgqMY8Fl/UTICQkFzyH
- x9rU12iWlt5+hOm2qbiB4ECSaZutjyznF06i7x5n2rqbFSiF3WEtfk4cMYbLK39vO
- /bVNmGQxvnVQo2eYiJr7oUHe5fgdUY/pSDHfn/3HzfZxk/AD35M3DzvHFuseY9Mky
- y+eKRMDPXgHuCJCxh89ym7AddGEG5GUvSPwtwsHb5DuyhwI3tDB1DoAJVVcAvpGpc
- rOpdXgt8JUN10gfM1A==
+ b=oWaZWtM3cV8byDMmt9DuaLp+q4WXTDMpjHrmmXtxEVeos4BsDL4QGHYt7R68VVc/
+ 4rFl15qG+z5Ftfx46VwU5Bgx+faH7ATKCerYGTIipMv9pa7NvGIsmOlItWPnzr5ev
+ H4MLF7nsi5npfj/Ft1ASZGNAc18t0r5/s7xIy30uLLjaWXRqEq4xinpCspTWrYYRD
+ iwPnak8JOuQTsfxZdyWw1ZphAh95ZuZZF8IraH9E+quuQUHN0xrFrDUwO/2gDuXMX
+ g8vRvp+WBdvm5p32kRMUPBEdsUlHwW4FtX0rzl+tIkVBEMYtqo3msS+zjcHDX+BCm
+ 22BALZZUrNNtjE9ZNA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from ehlo.thunderbird.net ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M26vB-1viUG51non-000A7x; Wed, 28
- Jan 2026 05:32:36 +0100
-Date: Wed, 28 Jan 2026 05:32:32 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M3UV8-1vlVL02KW2-003BDk; Wed, 28
+ Jan 2026 05:41:44 +0100
+Date: Wed, 28 Jan 2026 05:41:42 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 CC: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Alexander Graf <agraf@csgraf.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] gunzip: Fix len parameter in function signature
+ Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
 User-Agent: Thunderbird for Android
-In-Reply-To: <20260127235156.1503207-1-marek.vasut+renesas@mailbox.org>
-References: <20260127235156.1503207-1-marek.vasut+renesas@mailbox.org>
-Message-ID: <0F151B61-19A0-4F8E-925B-1EDFD7054E1B@gmx.de>
+In-Reply-To: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+Message-ID: <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Osj91HRuxgTvkhfOCbjn0WTNFEkrX1u3UGoddBgbMZGJSdMFKpm
- FO5iKb4CUlZTiqBDkJSa1n0Ll0b7VLQ5jhADwN5Pf6AUzLPkwQQnU8T3C/joLFEhX3G0UO/
- UK0ya6GqFBcINIASWc6qIBBQtVpvhbI/iG62G/U6MrAiwZSsklwMxqJfjQuimwwAcdHBLbZ
- bFncXbxdG+fGgYw15LWHg==
-UI-OutboundReport: notjunk:1;M01:P0:m2d8sqjxmp8=;CJmQCmSNlcGHPT0ToIlcFnhlpl+
- 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
+X-Provags-ID: V03:K1:hZoTlDeeZez5tXQfR+Tezf4wzKPveW6rsa0b7ayS4Rc1JUa+zgL
+ hmmY2TjGz8I2HfliXh6K2jg/CV+btrXlq8C84AG0YglDAOMtsE24t4gH55uK1xOK17M+UIR
+ HhNIkBIOHBo+awsaIAU5to9A5E9atGpasHOFJvGkOTWVQ1kaH03AOGFmiTKRJaIlrTAB1dc
+ 9gh2H8dZigykspy8hnEFA==
+UI-OutboundReport: notjunk:1;M01:P0:0Fa9meR8Afo=;mWYlFNMNS3nGQZrLQGm/kSm9dAr
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,119 +156,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 28=2E Januar 2026 00:51:35 MEZ schrieb Marek Vasut <marek=2Evasut+renesa=
+Am 28=2E Januar 2026 00:48:40 MEZ schrieb Marek Vasut <marek=2Evasut+renesa=
 s@mailbox=2Eorg>:
->The only call site of gzwrite() is cmd/unzip=2Ec do_gzwrite(), where
->the 'len' parameter passed to gzwrite(=2E=2E=2E, len, =2E=2E=2E) function=
- is of
->type unsigned long=2E This usage is correct, the 'len' parameter is
->an unsigned integer, and the gzwrite() function currently supports
->input data 'len' of up to 4 GiB - 1 =2E
+>Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+>and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even fr=
+om
+>same bank")=2E These are based on incorrect premise of the first commit, =
+that
+>"U-Boot does not use memory above ram_top"=2E While U-Boot itself indeed =
+does
+>not and should not use memory above ram_top, user can perfectly well use
+>that memory from the U-Boot shell, for example to load content in there=
+=2E
 >
->The function signature of gzwrite() function in both include/gzip=2Eh
->and lib/gunzip=2Ec does however list 'len' as signed integer, which
->is not correct, and ultimatelly limits the implementation to only
->2 GiB input data 'len' =2E
->
->Fix this, update gzwrite() function parameter 'len' data type to
->unsigned long consistently in include/gzip=2Eh and lib/gunzip=2Ec =2E
->
->Furthermore, update gzwrite() function 'szwritebuf' parameter in
->lib/gunzip=2Ec from 'unsigned long' to 'ulong' to be synchronized
->with include/gzip=2Eh =2E
->
->Since the gzwrite() function currently surely only supports input
->data size of 4 GiB - 1, add input data size check=2E The limitation
->comes from the current use of zlib z_stream =2Eavail_in parameter,
->to which the gzwrite() function sets the entire input data size,
->and which is of unsigned int type, which cannot accept any number
->beyond 4 GiB - 1=2E This limitation will be removed in future commit=2E
->
->Reported-by: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
->Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
->---
->Cc: Alexander Graf <agraf@csgraf=2Ede>
->Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->Cc: Jerome Forissier <jerome@forissier=2Eorg>
->Cc: Mattijs Korpershoek <mkorpershoek@kernel=2Eorg>
->Cc: Neil Armstrong <neil=2Earmstrong@linaro=2Eorg>
->Cc: Peng Fan <peng=2Efan@nxp=2Ecom>
->Cc: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
->Cc: Simon Glass <sjg@chromium=2Eorg>
->Cc: Tom Rini <trini@konsulko=2Ecom>
->Cc: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
->Cc: u-boot@lists=2Edenx=2Ede
->---
-> include/gzip=2Eh |  4 ++--
-> lib/gunzip=2Ec   | 13 ++++++++-----
-> 2 files changed, 10 insertions(+), 7 deletions(-)
->
->diff --git a/include/gzip=2Eh b/include/gzip=2Eh
->index 304002ffc42=2E=2E5396e3ffec7 100644
->--- a/include/gzip=2Eh
->+++ b/include/gzip=2Eh
->@@ -77,8 +77,8 @@ void gzwrite_progress_finish(int retcode, ulong totalwr=
-itten, ulong totalsize,
->  *		for files under 4GiB
->  * Return: 0 if OK, -1 on error
-> p */
->-int gzwrite(unsigned char *src, int len, struct blk_desc *dev, ulong szw=
-ritebuf,
->-	    ulong startoffs, ulong szexpected);
->+int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
->+	    ulong szwritebuf, ulong startoffs, ulong szexpected);
+>Currently, attempt to use that memory to load large image using TFTP ends
+>with "TFTP error: trying to overwrite reserved memory=2E=2E=2E"=2E With t=
+his change
+>in place, the memory can be used again=2E
 
-Ulong and unsigned long are essentially the same but using both in one fun=
-ction signature looks weird=2E
+IIRC there are drivers that have issues with memory above 4 GiB and boards=
+ that artificially set ram_top to 4 GiB to work around these issues=2E We n=
+eed to carefully consider why the reverted patch was introduced=2E
 
-I would prefer size_t for the size of objects in memory and off_t for file=
- sizes and positions in files=2E
-
-Please, consider adjusting startoffs and szexpected, too=2E
-
->=20
-> /**
->  * gzip()- Compress data into a buffer using the gzip algorithm
->diff --git a/lib/gunzip=2Ec b/lib/gunzip=2Ec
->index a05dcde9a75=2E=2E040450c0e79 100644
->--- a/lib/gunzip=2Ec
->+++ b/lib/gunzip=2Ec
->@@ -116,11 +116,8 @@ void gzwrite_progress_finish(int returnval,
-> 	}
-> }
->=20
->-int gzwrite(unsigned char *src, int len,
->-	    struct blk_desc *dev,
->-	    unsigned long szwritebuf,
->-	    ulong startoffs,
->-	    ulong szexpected)
->+int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
->+	    ulong szwritebuf, ulong startoffs, ulong szexpected)
-
-ditto
-
-> {
-> 	int i, flags;
-> 	z_stream s;
->@@ -133,6 +130,12 @@ int gzwrite(unsigned char *src, int len,
-> 	u32 payload_size;
-> 	int iteration =3D 0;
->=20
->+	if (len > 0xffffffff) {
->+		printf("%s: input size over 4 GiB in size not supported\n",
->+		       __func__);
-
-Please, use log_err() for error output=2E
+Why does your board use a 4GiB ram_top and not place ram_top at the physic=
+al top?
 
 Best regards
 
 Heinrich
 
->+		return -1;
->+	}
->+
-> 	if (!szwritebuf ||
-> 	    (szwritebuf % dev->blksz) ||
-> 	    (szwritebuf < dev->blksz)) {
+>
+>Fixes: eb052cbb896f ("lmb: add and reserve memory above ram_top")
+>Fixes: 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from s=
+ame bank")
+>Reported-by: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
+>Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
+>---
+>Cc: Andrew Goodbody <andrew=2Egoodbody@linaro=2Eorg>
+>Cc: Casey Connolly <casey=2Econnolly@linaro=2Eorg>
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>Cc: Holger Brunck <holger=2Ebrunck@hitachienergy=2Ecom>
+>Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
+>Cc: Jonas Karlman <jonas@kwiboo=2Ese>,
+>Cc: Mark Kettenis <kettenis@openbsd=2Eorg>
+>Cc: Sam Protsenko <semen=2Eprotsenko@linaro=2Eorg>
+>Cc: Sughosh Ganu <sughosh=2Eganu@linaro=2Eorg>
+>Cc: Tom Rini <trini@konsulko=2Ecom>
+>Cc: u-boot@lists=2Edenx=2Ede
+>---
+> lib/lmb=2Ec | 17 +----------------
+> 1 file changed, 1 insertion(+), 16 deletions(-)
+>
+>diff --git a/lib/lmb=2Ec b/lib/lmb=2Ec
+>index e2d9fe86c14=2E=2E8f12c6ad8e5 100644
+>--- a/lib/lmb=2Ec
+>+++ b/lib/lmb=2Ec
+>@@ -611,7 +611,6 @@ static __maybe_unused void lmb_reserve_common_spl(voi=
+d)
+> static void lmb_add_memory(void)
+> {
+> 	int i;
+>-	phys_addr_t bank_end;
+> 	phys_size_t size;
+> 	u64 ram_top =3D gd->ram_top;
+> 	struct bd_info *bd =3D gd->bd;
+>@@ -625,23 +624,9 @@ static void lmb_add_memory(void)
+>=20
+> 	for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> 		size =3D bd->bi_dram[i]=2Esize;
+>-		bank_end =3D bd->bi_dram[i]=2Estart + size;
+>=20
+>-		if (size) {
+>+		if (size)
+> 			lmb_add(bd->bi_dram[i]=2Estart, size);
+>-
+>-			/*
+>-			 * Reserve memory above ram_top as
+>-			 * no-overwrite so that it cannot be
+>-			 * allocated
+>-			 */
+>-			if (bd->bi_dram[i]=2Estart >=3D ram_top)
+>-				lmb_reserve(bd->bi_dram[i]=2Estart, size,
+>-					    LMB_NOOVERWRITE);
+>-			else if (bank_end > ram_top)
+>-				lmb_reserve(ram_top, bank_end - ram_top,
+>-					    LMB_NOOVERWRITE);
+>-		}
+> 	}
+> }
+>=20
 
