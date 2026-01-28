@@ -4,100 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D515D46C06
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 21:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7265D46C06
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 21:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2755983C6E;
-	Wed, 28 Jan 2026 22:49:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C22A83C6E;
+	Wed, 28 Jan 2026 22:54:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dfzwexci";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RX2ySEDh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FCDF83F2E; Wed, 28 Jan 2026 21:03:02 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 18E5683DF3; Wed, 28 Jan 2026 22:54:21 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37AF583DFF
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 21:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E69E783BFE
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 22:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-382fb275271so1900971fa.0
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 12:03:00 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769630579; cv=none;
- d=google.com; s=arc-20240605;
- b=K96RH1Oz2denWdVlbZM391C1LkXbR0xZ9pBLlWSanHIi1Rdl2gDj8hDi8fUQJnJMPb
- W0dtifx6Tj9TvJ/N+KM8J7Y0FritMKhDbeKP23EOhikycDutp642+KEMtBwgON3tBmrc
- sURUn0uffaCRnUIS2TUys38W7kEvsPgFnvIG13/5l6heHi9JWEEC6rj5J4LM5kIWsz/7
- xpIifo4L6Qn3jBvhpcD75SG0ympjEgrFlB7Be5gchwcSNdh7GherDjavwGH9AEdtBdom
- Zb0WnfV1eBc14cZTN1z4maLpK+wMt4XUK2IQdpQ0x8TTnBFcRLrsd5qiuIFQoLvL4mQj
- esRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8yrWdmVrCVHIm85uWZGcIOtHIQiCmqw4BE6OfvzBkHI=;
- fh=pWROPrRRpFFL3l/rgyoH13cbpCNEhjyurkIAlh6w4dE=;
- b=UO1AQ1Vs9iW9sh0l97tc+zh7UCJVgS+FdMyuIl6sc+YcC04Y++MMmTIZqPnG85oYEL
- W0ign+YInloq9gYv52k5YI1r/Si2VRd1Bl/4kioGIIlYczw3JRbf4yDl5nbavQ+mfesZ
- vivZDur6pyDP5MvHJfdfLmhLg2iyFfshiSqPYtc8rPTRMKhoAxQUi0uxuz+SXSeVNuDp
- Bgn07qyocxp9/en7IKhyfwLvKQJ6NDSDJOq5FEgB8zHhRORttixsQve1RA4nWTZmE5l/
- 49AuojpC3VWyrohY/aNpudX0aAJTlKG+guj9M8ezRn12Z/3iMZsZu63fU6f2/08FtlQm
- Hpnw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-40438380b88so168685fac.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 13:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769630579; x=1770235379; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8yrWdmVrCVHIm85uWZGcIOtHIQiCmqw4BE6OfvzBkHI=;
- b=DfzwexciW39lXgvbp/DKo5mxr90xTKv7/jcDxYTjI2JQsrBkBcurx03RfmjYjSNstq
- M7LQvujIGRlUY7y7HDx/ChIDT7FsG7EE34Q7eGzf5QSzPLTw/r1K/Y+ycZV3Rml0tSFp
- tknk4VXHoE7QWGAtSTG6ytNIG6yjk/jn7SMbyE/3r8AisP5wDhafRfnFyYCHqrgeznIg
- aJa1ny8OTCxSz5xeyFiaJ3qm84XzNqZ/c+ivY4XcoY8T8c/WfRzq/HsKs4eNSCaSSFeM
- W5UVo9+8Bn3d0tdoitbw2u7xoUFzFyUasmuK5QCbiYzcmwd0E/68fPDNEx3hHB8H6FUG
- hpQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769630579; x=1770235379;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1769637257; x=1770242057; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8yrWdmVrCVHIm85uWZGcIOtHIQiCmqw4BE6OfvzBkHI=;
- b=msKweTekDs5qivPwZcNhTdNRFU7EAuKxX4z9j2/FSBN3wjHYwpEsF47ny8O99CJwi1
- KihDmJGA0/U0vdY1NonAKBP95KmD6JCLLAFmt6bPjCTBHaN6vfTjsx68hv6Hlid16hfY
- ooDVJH/ts2NKPWOIUxwqUVK1OOQ9Y9KpG+yj7N3N/fJtsBFaUTQUlqe2a5YaBGqXTnxG
- /4WfTT4tW6Oa3CiNBfywN1XYMoreFV2qHYBVTlgInx49+t0zLB3olG+FIEhkk3Rj82ev
- wiH2ScBDiVTZt6Nnh8yCaxf/DmaMZeIPlG3K7hwpC8b3+RGEkupS1nwJbg3SA/5PhSeJ
- VP8g==
-X-Gm-Message-State: AOJu0YwKzUxpH0st+1M+TH5Ff0hGfX0DZXSY5V97DEQsnPZb9E1en1WS
- glrvg9fJWsfcnz9SR3WsBOYMsCN3ZoEVycahdvHHhqNBRHOq1Rrv8yQv9tIRO7oNkc+ISPgmwZw
- 6iS6Zpg/FL1IqFur2OGnBGdU5v0bXbJIwtElw
-X-Gm-Gg: AZuq6aJ2aCgj5pZes5Mn5t/K7AWkTOlU6bvo+vnN+fMC33Bz+HGwIJE4RrV8/LXsNLp
- T4Xw/oVSvHsKUgjMrJn7g3wFqM8PMoAFuMwts4UmZWzwVP3wEkrf/QP2vmvyOfhLUwUnh8Q1MMu
- PpVWNOeC+j9OpY/0vWZ/fk2Lin+yV/vH/u+3UB+HkqsaqjTgb2472vCjt0AEP9Rwdba8ZxIO0My
- N+VSTe8SyNV6mJpn4CYnP8BmMVaCEbHY0OEu8kFZaAsu98FYdfAJG/IEJLF90l8bzuVHOrBiKDz
- Qqy6B3q4f94sVetb1k1pu1KcWWjt
-X-Received: by 2002:a05:6512:ac6:b0:59d:f2f3:7e9a with SMTP id
- 2adb3069b0e04-59e04027a89mr2951174e87.36.1769630579028; Wed, 28 Jan 2026
- 12:02:59 -0800 (PST)
+ bh=vnEEKUJDBszjBBlq1Vay7QiKbubiXi2MrhqGb2+sF80=;
+ b=RX2ySEDhobl4/14+zPl/hwmVaFj5ls0UqzdAHD0jERXcbMq/WyxTZDY49+z2slmiIR
+ M+jeHTmsWBsjRHA3IhwqopyqczwoZ/eQfs7VhvO7/TL4dxqMqPhBRz/JVnQ8zqy70R88
+ 3epf3MN9e+uHDlrsEFVq67PEorfKC3mdmR74A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769637257; x=1770242057;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vnEEKUJDBszjBBlq1Vay7QiKbubiXi2MrhqGb2+sF80=;
+ b=gf7L0hGKT1yOcszkVR8fAc3CXvCf+8FNIIxutomsiHtwMNW4jb6jgylP/zBfvYxpED
+ GIIptAVgGtltlh1zoZfcZDtuHQNFW/1qCEDO5PAHumGz1fOhtDD9O9CdqkOE+1AQJDzU
+ Jp//oaRvvo75yvJS0png7P0MZgT/eWYIc6isdbIMvHcUs6qJFs+ayS+lmzBPXupnc3Ff
+ JM6DdMgd5YfPvNjmfZTixKQoqEfcyO7k9zWOyeADFla7sPlDzGYUyflDCygvrjVHRxU4
+ r+17K3YyxHCfitglFYCJWyAbrLyTNqykg5WIKP1vh6QHTATjOsK/XOQtkcw+7j2eb/g0
+ KhCQ==
+X-Gm-Message-State: AOJu0Yxfxb0P82S352q1g8NtnWleEeZRhOBX+JFfGTNGqkmee8UzpMTf
+ JJwPP19zpl6W5j/ZbmzgFynM8Uo6Q7nVaUNBcoC9OFjbd6keKXbnfNkTx2QsegdWH5I=
+X-Gm-Gg: AZuq6aKVtTGTX/HvFejzkHAcuKgoY7w0xPHrEUtkWn8ste7Jw6oP5tWHthw3l0jbZvG
+ l6R4moCkPbhJ7XNJG6cjtPL2MWmcbnytuQA1X8vI2yfNjJiv7cle6e8li9yj70dO3wUsXE18IIF
+ tikpgBH1ZFlPL5GpGbwQ+g+R5BQC7Y555jHw8375UDFApVJ5LXZT1QnWb/lcBhb/9jm6IRBsIDd
+ g/geAluhyeSNq7gKSHBl66s1phJAdaPtf3KJgEuK/WUBtgvbXAB0CbCjuBj1aHbl+pgXY+xRx/D
+ OFrOsNYesZthxTY9hrTTktX84J69jNpYKyw0avP1/e1RoCTPNIo+HCdXTt1CDy1sPxijmJhaGnV
+ lRUzJQ3bfIyQYr78QNSMJ1I5vyD6JRUDOp07beNi+osNeg2WX8K84b7fo+H9W3z3QlYzu5xj2qR
+ eou5xMH2w7fxbPimL7TZ8QY2FHfCTa14oHB4Balg2BrXMSGwWwJYvxm2+eM6tuCA7XyY0DQ9xDO
+ SCj7yL15XxhkyEhjsIoQir9zVOE9Vy1ApHZnA==
+X-Received: by 2002:a05:6871:8a98:b0:409:62ce:83f8 with SMTP id
+ 586e51a60fabf-40962ce89fcmr1449282fac.13.1769637257417; 
+ Wed, 28 Jan 2026 13:54:17 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-409571ae8f5sm2570113fac.9.2026.01.28.13.54.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Jan 2026 13:54:16 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>, "Jill.Wu" <shu-yun.wu@mediatek.com>
+In-Reply-To: <20260122-add-mt8188-pinctrl-support-v2-0-324b4c8f2b64@baylibre.com>
+References: <20260122-add-mt8188-pinctrl-support-v2-0-324b4c8f2b64@baylibre.com>
+Subject: Re: [PATCH v2 0/2] Add pinctrl driver for mt8188
+Message-Id: <176963725598.1779019.6630756447147831259.b4-ty@konsulko.com>
+Date: Wed, 28 Jan 2026 15:54:15 -0600
 MIME-Version: 1.0
-References: <20260128192617.1724570-1-trini@konsulko.com>
-In-Reply-To: <20260128192617.1724570-1-trini@konsulko.com>
-From: Mateus Lima <mateuslima.ti@gmail.com>
-Date: Wed, 28 Jan 2026 17:02:47 -0300
-X-Gm-Features: AZwV_QjTQEJMPCM5ZTiy5SDX2sl9sKts5PoEkO6UeLrdRnhz12Ek8dxxYBjIYfE
-Message-ID: <CAP8WwTETA8ZXSC19bhvtTRLP2t-nvcqa+ER3HrYpshQDr05iAA@mail.gmail.com>
-Subject: Re: [PATCH] misc: Keep FSL_IFC available on PowerPC as well
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailman-Approved-At: Wed, 28 Jan 2026 22:49:55 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,80 +103,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, 22 Jan 2026 17:38:21 +0100, Julien Stephan wrote:
 
-Indeed, there are a lot of PPC targets that try to use this symbol, but as
-Peng Fan reported before, his CI reported a build failure.
+> The driver is based on the kernel driver for mt8188.
+> 
+> While at it, also add pinmux_property_set ops for mediatek pinctrl framework.
+> 
+> 
 
-On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> wr=
-ote:
+Applied to u-boot/master, thanks!
 
-> On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
-> >This patch adds CPLD support via IFC to the ls1021a-iot board.
-> >
-> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
->
-> CI report build failure.
->
->   CC      drivers/video/hitachi-tx10d07vm0baa.o
-> In file included from drivers/misc/fsl_ifc.c:8:
-> include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or director=
-y
->    16 | #include <asm/ppc.h>
->       |          ^~~~~~~~~~~
-> compilation terminated.
-> make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Error 1
-> make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
-> make[2]: *** Waiting for unfinished jobs....
->   CC      drivers/rtc/ht1380.o
->   CC      drivers/video/hitachi_tx18d42vm_lcd.o
->   CC      drivers/rtc/i2c_rtc_emul.o
->
-> make[1]: *** [Makefile:2191: drivers] Error 2
-> make: *** [Makefile:362: __build_one_by_one] Error 2
-> Cleaning up project directory and file based variables
->
-> Regards
-> Peng
+[1/2] pinctrl: mediatek: Add pinctrl driver for MT8188 SoC
+      commit: aa6eb2a5895bb9f0f311522b7d4dd3b86629f8b2
+[2/2] pinctrl: mediatek: add pinmux_property_set ops support
+      commit: 15999c22f5df791364f0eb6d646c36d735c74f16
+-- 
+Tom
 
 
-Is that okay now Peng Fan?
-
-If so, then my v2 patch would have worked.
-
-BR,
-Mateus
-
-On Wed, Jan 28, 2026 at 4:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
-
-> This symbol is used on a number of PowerPC platforms as well, so make it
-> available there again.
->
-> Fixes: 424b324165ea ("armv7: Add CPLD support via IFC to the ls1021a-iot
-> board.")
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> ---
->  drivers/misc/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index be7fdab56d14..a0aa290480eb 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -695,7 +695,7 @@ config ESM_PMIC
->
->  config FSL_IFC
->         bool "Freescale Integrated Flash Controller"
-> -       depends on ARM
-> +       depends on ARM || PPC
->         help
->           This driver is for the Integrated Flash Controller(IFC) module
->           available in Freescale SoCs. This controller allows to handle
-> --
-> 2.43.0
->
->
