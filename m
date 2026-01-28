@@ -4,90 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ADDBD3F083
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 16:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E22A3D3F098
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 16:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62D9184034;
-	Wed, 28 Jan 2026 17:47:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EE39984034;
+	Wed, 28 Jan 2026 17:48:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J7GH0VV/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WCLW9ZRW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81D178405F; Wed, 28 Jan 2026 17:47:10 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 9ADAD84065; Wed, 28 Jan 2026 17:48:23 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33F898401A
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 17:47:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BD1F8401A
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 17:48:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-45f09874c4cso45462b6e.3
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 08:47:08 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-8c52c948d45so966885a.1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 08:48:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769618827; x=1770223627; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0qdv8zUef3IBzp2K7WzcShE2AJTRr5C4GQSQUpe5zCs=;
- b=J7GH0VV/0JfozSYEoBDsM7ivSIcIkvE7I2SJ9oRCUpAcYDNkeIHJcwRnDzAGEYq7M2
- SRF08V9axNpm1hTsVMJOkVPAJ/oddLf/QpFDuNdprWgWbuEMSqu5XjGR2/5n6D6zcEUo
- oJDnf/cEl73OlmDNl1/iN8aoXR7QPavAqZFkQ=
+ d=gmail.com; s=20230601; t=1769618899; x=1770223699; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=plGkDXhnEkP9C+pHHgCZWTFAw3wN9oX+LHYx9U+4BxE=;
+ b=WCLW9ZRWzpZluvd9zWXZXour1qNINiguUFdRI0NLNNTNcbQofCxYc4I7E2nLeWCQsZ
+ 9eHEHuso66k+5frO0nsowNp6G0qyyBFmnNp3IMiSuexA73QV7WVSb4eVo0ebRhTPGjGd
+ M+6+PpwBf0Nwrd5JeA69KHCXseNv4fuM7NFEAv+u6dOM7PpoRf5J8fSryo9f7rsoWnlk
+ IUS1ydfquRuFv+4QlXPMiM3Vo1cKd1AsHRrkeizTyWNJgO9y4UMgBQ3perPZAwHwFu6t
+ 9J1ncBAbO9wcFgdEGOR1Rdwte/IQiC0/UYuxdiDJBU/06j/hjB4waKcSMSH+9De16IOX
+ ABQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769618827; x=1770223627;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0qdv8zUef3IBzp2K7WzcShE2AJTRr5C4GQSQUpe5zCs=;
- b=ReizgjwTzkqiB5zk+Rz+APlYOXcz9x+EjvGTo0y/h3EmvuOfRtzEgeZ2+O0IWUmpH7
- T/AhAFrN4kRvwuyXS8vzhK9IF5MzAWh0QFy9Hl+Pm0aHUSiATOTEZV9mifcmgehMlEEc
- +tNlqgdGV/9EZZL5ZZo1YMx45nPCX/hKJyXjoJnHbMBSZyzoYJf/c992DGTRdySETcy4
- OxEG15FF9hEksywV2SIMfs4qMCDkAIKS5d35euj+ZsJtsOAaDzQk1oShu8A66ulMsX0r
- egIEn72lYRvZgzExoE7qL4jQnWMHaKSHhvUfUsmA5PqdhfDrG4b+nfJnX8aAG5FJK7VQ
- Ei7w==
+ d=1e100.net; s=20230601; t=1769618899; x=1770223699;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=plGkDXhnEkP9C+pHHgCZWTFAw3wN9oX+LHYx9U+4BxE=;
+ b=aXVm/jwohq/oPNTg7onsZGphUYw0Ld3DRy+JyrhrPJ1HV+mYBTNRZS4Dr17hG97Szs
+ BDClNcGVqOMiVK2m9EU11T1vFRV/jjcpR2v9L6lMELzByGmkmE4ysO5SGoJMOWZD4Mbk
+ nPVFBy+l6sa2m7h1rr4qMZJu/aqLBLrt+QLg5ojOPchH413m7J/OZQCwAawRqM4jEytX
+ hk7RzOkzPTsPJzrqqzSrgeA5i/TRrHXkVBMQ/+fNjUoNZgIZXx4cOH4WAiNIAxky1Vq3
+ yDpr79KptH6jnLhHH/3TK7I/cN+5WK5HpD/DxXziBmcPWTL+nDen6rkux587eRqyoiLh
+ 82Tg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5VdCcihlORy7IBSOQP1d2ot4eVZcgO2kdGYk1V4y/xYtCjn3Q3iyolGqJ5O+xGA9z1jMu7Qg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyn1frWQ+S7qstoOrK6eFDbmoGAN6spD3kJrPt2oLOkbiNbc+Vf
- XIFLs5QlC7NiGjKuxqsZ20nFB9bzjfqBnaX9XUYNPRM20Tmx2/4TYQZTqEu3P3ptd/6IpAQUoON
- F8TO8L2A=
-X-Gm-Gg: AZuq6aLrWxzdPG4Xgc6Intwr47uHEAFjYRova9b6UtDo1i0wK1PTn17LSMSy1yXo0TU
- ImAOnaRDnZHineZHcVxfJhiz349zdaUx8e/1/+PJ0YGyFMrSRuq1S1rViHpn7Gjh6ynWXD7Uby8
- IFC2FcHsavTnYJJrGwWuF9ZfH6CxtixlITr8UyjmX+GwEeDNtwzS3cbk6Wg3BrT+nedyPB181xf
- 8Z9bWG4aoj0wW9lp2cMqtR9HNW6o2WJi2t7fPe+pImkOZ6/NpGeJAqXKiwEGo4UVMS/FLHYbrqW
- wp4nZ8fBu3MQ+VezAfTuiqxWVYWf91C2q9l7BSQT5XDdj0opuP32AOLm4d7yATYv+qo6g2dlyTk
- 7/IeokOoYaOTc8UB3lJgU1cDxGbCwoYaKwCBKgvEoi2tf3Q1liF4JvLOJAOe0XpjwYOktuQFxne
- nTpBGIN/vThpo9CQ3iButVYp/ypIh6VL36+0vFyNCOaVbWLFcO8MZlxz3TTPpWP6pEH9UZ8NTmJ
- CXiou+KWJuObgwWeYe/DWErnhKLKJHqi6y39JA=
-X-Received: by 2002:a05:6808:c3f2:b0:455:8b5b:c763 with SMTP id
- 5614622812f47-45efc6f6e3emr3225046b6e.67.1769618826833; 
- Wed, 28 Jan 2026 08:47:06 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45f08d894f5sm1627010b6e.5.2026.01.28.08.47.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 08:47:06 -0800 (PST)
-Date: Wed, 28 Jan 2026 10:47:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Mateus Lima <mateuslima.ti@gmail.com>, alison.wang@nxp.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot
- board.
-Message-ID: <20260128164704.GM3416603@bill-the-cat>
-References: <20260113142303.441190-1-mateuslima.ti@gmail.com>
- <aXGZVQhGzIrtXY86@nxa18884-linux.ap.freescale.net>
- <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
- <aXbNSAUDjG83gKsq@shlinux89>
+ AJvYcCWmj7LWdw9CX+eGkZ5kbpR5l0qJTajXi+2T99YbqT0X4V16h95whtISL9BOHGaHPMH7WdQFr0Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzPFaSUrtm4C6Tt2xFIz5YQlHlJ6JWmt/fFl8NhDjBOovFlsrY
+ x1dA3fvg+fSX4D/KGGVbvtLoOCWCCOLcWUChCFf/UOAbYJDi4B1kLu0G7e0A8QtI
+X-Gm-Gg: AZuq6aL+038eWnEHOGVu6IAQaNGZGwFAvTye7mt5IPKGjw0xGXc0Z54SEciJfwBqDgt
+ XvTU07zGXG2CxbozAHoGAgLapOtayZXvlr/a+gKjf81C9kvWLX7j8lu7KwRUrGMs4r/FRU2CD94
+ su3qf8+l1i+xyNiKBEugzJKMteP5yg5EeA/29rXCO80M/w84+enmd3yK8GcXFOse018bPWmPvM6
+ 2pLDddN9AMcGJXlMsCpRW5Vksb8j6clwj+R2HPS1azQZoll189luYdJKv6lgVGpv38iD8sLpfvr
+ PkqUfPYQHW/XMYi0g5pMX8qGUSeRVXs+var76lPG4hSdlfyA2GNh+GSWh1qECCyT7FBhOldqvl/
+ QM2ApTRJ5QpzXDDiZzDv5gwQLsIkRzqCwBEsLLzpUgSOdtIMIhtmVqClskWbba0uu9LOOPVGiEo
+ SpXKviWd4rduNPdkiOdIvdEH40XWzbLVO6EiIdvgMcvy/12fm7vtriocE=
+X-Received: by 2002:a05:620a:1a0b:b0:8b2:5af3:7fce with SMTP id
+ af79cd13be357-8c71ad23708mr84788985a.7.1769618899090; 
+ Wed, 28 Jan 2026 08:48:19 -0800 (PST)
+Received: from ?IPV6:2600:4040:4476:3800:2d8:61ff:fe7c:5d59?
+ ([2600:4040:4476:3800:2d8:61ff:fe7c:5d59])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8c711d2ab04sm207995185a.25.2026.01.28.08.48.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Jan 2026 08:48:18 -0800 (PST)
+Message-ID: <708253cc-be1d-f375-0427-91658d5e88fe@gmail.com>
+Date: Wed, 28 Jan 2026 11:48:17 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K5FGKpMjTocs0h5j"
-Content-Disposition: inline
-In-Reply-To: <aXbNSAUDjG83gKsq@shlinux89>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for
+ flat_dt images
+Content-Language: en-US
+To: Beleswar Padhi <b-padhi@ti.com>, trini@konsulko.com
+Cc: sean.anderson@seco.com, ilias.apalodimas@linaro.org,
+ malysagreg@gmail.com, sughosh.ganu@linaro.org, philip.molloy@analog.com,
+ marek.vasut+renesas@mailbox.org, james.hilliard1@gmail.com, anshuld@ti.com,
+ afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+References: <20260128141834.2322865-1-b-padhi@ti.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20260128141834.2322865-1-b-padhi@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,92 +109,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Beleswar,
 
---K5FGKpMjTocs0h5j
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 1/28/26 09:18, Beleswar Padhi wrote:
+> From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> 
+> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
+> packed inside the multidtb.fit FIT image. While the individual DTBs
+> and the FIT image start address are 8-byte aligned, the DTBs embedded
+> within the FIT image are not guaranteed to maintain 8-byte alignment.
+> 
+> This misalignment causes -FDT_ERR_ALIGNMENT failure in
+> setup_multi_dtb_fit() when locating the next available DTB within the
+> FIT blob and setting gd->fdt_blob, because of the recent libfdt
+> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
+> version v1.7.2-35-g52f07dcca47c")
+> 
+> To fix this, check the image type when extracting FIT image data and
+> set the alignment size to 8 bytes (if not already) only for flat_dt
+> images. This ensures correct alignment for device tree blobs as per the
+> DT spec, while also allowing different alignment sizes for other image
+> types within the FIT.
+> 
+> Reported-by: Anshul Dalal <anshuld@ti.com>
+> Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
+> Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+> Testing Done:
+> 1. Boot tested on all TI K3 platforms.
+> 
+> v4: Changelog:
+> 1. Align only the DTBs to 8-bytes, other images in a FIT can have their
+>     independent alignment. [Marek]
+> 
+> Link to v3:
+> https://lore.kernel.org/all/20260122172247.2995437-1-b-padhi@ti.com/
+> 
+> v3: Changelog:
+> 1. Default to 8-byte alignment for DTBs in mkimage instead of
+>     passing -B 0x8 in build command [Marek]
+> 2. Remove previous R/Bs.
+> 
+> Link to v2:
+> https://lore.kernel.org/all/20260112101102.1417970-2-b-padhi@ti.com/
+> 
+> v2: Changelog:
+> 1. Carry R/B, Reported-by, Closes and Fixes tag.
+> 
+> Link to v1:
+> https://lore.kernel.org/all/20260109190026.58464-2-b-padhi@ti.com/
+> 
+>   tools/fit_image.c | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
 
-On Mon, Jan 26, 2026 at 10:11:20AM +0800, Peng Fan wrote:
-> On Thu, Jan 22, 2026 at 10:12:36AM -0300, Mateus Lima wrote:
-> >On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com>=
- wrote:
-> >
-> >> On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
-> >> >This patch adds CPLD support via IFC to the ls1021a-iot board.
-> >> >
-> >> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> >>
-> >> CI report build failure.
-> >>
-> >>   CC      drivers/video/hitachi-tx10d07vm0baa.o
-> >> In file included from drivers/misc/fsl_ifc.c:8:
-> >> include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or direc=
-tory
-> >>    16 | #include <asm/ppc.h>
-> >>       |          ^~~~~~~~~~~
-> >> compilation terminated.
-> >> make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Erro=
-r 1
-> >> make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
-> >> make[2]: *** Waiting for unfinished jobs....
-> >>   CC      drivers/rtc/ht1380.o
-> >>   CC      drivers/video/hitachi_tx18d42vm_lcd.o
-> >>   CC      drivers/rtc/i2c_rtc_emul.o
-> >>
-> >> make[1]: *** [Makefile:2191: drivers] Error 2
-> >> make: *** [Makefile:362: __build_one_by_one] Error 2
-> >> Cleaning up project directory and file based variables
-> >>
-> >> Regards
-> >> Peng
-> >>
-> >Hi Peng,
-> >
-> >Thank you for the test, and apologies for not having validated the patch=
- on
-> >other targets.
-> >In fact, this driver was not being used by any target (neither ARM nor P=
-PC)
-> >and after this patch it became enabled again. However, PPC targets fail
-> >when trying to include the asm/ppc.h header, which is not available for
-> >some reason.
-> >
-> >For now, I am thinking of submitting a v3 of the patch adding an explicit
-> >dependency on ARM, something like:
-> >
-> >+ depends on ARM
-> >
-> >This way we would avoid building the driver for PPC targets.
-> >What do you think about this approach?
->=20
-> It should be ok.
+Can you please update doc/mkimage.1 as well? There should be a note about
+this under -E.
 
-This has lead to:
-WARNING: unmet direct dependencies detected for FSL_IFC
-  Depends on [n]: ARM [=3Dn]
-  Selected by [y]:
-  - ARCH_P1010 [=3Dy] && PPC [=3Dy] && MPC85xx [=3Dy]
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> index e865f65a400..f842c845771 100644
+> --- a/tools/fit_image.c
+> +++ b/tools/fit_image.c
+> @@ -682,9 +682,17 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
+>   	for (node = fdt_first_subnode(fdt, images);
+>   	     node >= 0;
+>   	     node = fdt_next_subnode(fdt, node)) {
+> -		const char *data;
+> +		const char *data, *type;
+>   		int len;
+>   
+> +		/* Fallback to 8-byte alignment for DTBs if unaligned */
+> +		type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
+> +		if (type &&
+> +		    len == sizeof("flat_dt") &&
+> +		    !memcmp(type, "flat_dt", len) &&
+> +		    align_size & 0x7)
+> +			align_size = 8;
+> +
 
-WARNING: unmet direct dependencies detected for FSL_IFC
-  Depends on [n]: ARM [=3Dn]
-  Selected by [y]:
-  - ARCH_P1010 [=3Dy] && PPC [=3Dy] && MPC85xx [=3Dy]
+Doesn't this increase the alignment for all images following the devicetree?
 
-For example on P1010RDB-PB_SPIFLASH.
+And actually, doesn't this happen too late? By the time we check whether the
+node is a devicetree, buf_ptr has already been updated. This check will only
+affect the alignment of the *next* image in the FIT.
 
---=20
-Tom
+--Sean
 
---K5FGKpMjTocs0h5j
-Content-Type: application/pgp-signature; name="signature.asc"
+>   		data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
+>   		if (!data)
+>   			continue;
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXo9hAAKCRAr4qD1Cr/k
-CtQIAQD2gtV65lSR7NSnTiBzRq0wMG2A12m3o3kwe10DW7WrVwD/RMrtCrggvIAx
-jSqAHkxOBOMTglFLO06XjUHvAlC3QQU=
-=77PK
------END PGP SIGNATURE-----
-
---K5FGKpMjTocs0h5j--
