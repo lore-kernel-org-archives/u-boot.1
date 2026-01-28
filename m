@@ -4,55 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53C4D3F081
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 16:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33381D3F081
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 16:02:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DC2A83FFF;
-	Wed, 28 Jan 2026 17:01:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 9299D8404D;
+	Wed, 28 Jan 2026 17:02:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yl5QiIDA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F8384019; Wed, 28 Jan 2026 17:01:46 +0100 (CET)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0b])
+ id 47ED084051; Wed, 28 Jan 2026 17:02:15 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF97483FFE
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 17:01:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E22D784035
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 17:02:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4f1Rpv2BH6zZnZ;
- Wed, 28 Jan 2026 17:01:43 +0100 (CET)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4f1Rps5l88zRt; Wed, 28 Jan 2026 17:01:41 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 28 Jan 2026 17:01:25 +0100
-Subject: [PATCH v3] sunxi: remove usage of legacy LED API
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f1RqQ4q52z9tV7;
+ Wed, 28 Jan 2026 17:02:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769616130;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=sf4Zb+SbOfW0zbhEGdR+KSgODsB5rdheDwXv3MuZRJA=;
+ b=yl5QiIDAjzJa6vZunjamcVTI8nzr+B26nHnRl9nKez2zCHvXpAGm+M6ztyzse3UVkB3fpQ
+ GE9sVKF4sqq4NzcsjYwmMZ2tF3WV+vVjomgRnkW0MI3pAyX33MktvyuBFLagzGzU1cqDkO
+ kTr96JcO9/bFDyHyUEkJ9N1jRjIlrNjXFeS7V0qEM8V0UuYP1nThCFP60tJkUnpLotnb1i
+ FicP8xtvvi77TyrQdDqk5lGqnPFjU7Zz2DRrNb3hjQMr/AIkbtFXJv2AzPVEqri4JcWCW6
+ etSTF+RQOPHdF8yBrsq+N+2N9XMfJk9lySVPydaAhoFFLOkmLJ+1dxf3T3SHMA==
+Message-ID: <43843495-aca4-4556-a1c1-bdfb22a06b92@mailbox.org>
+Date: Wed, 28 Jan 2026 17:02:06 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260128-legacy-led-sunxi-v3-1-4a528077aeab@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NQQ6CMBAF0KuQrq1hhhaDK+9hXNR2gCYGtIWGh
- nB3Cy5wYVxN/k/m/Zl5cpY8O2czcxSst32XQnHImG5V1xC3JmWGOUoAzPmDGqVjOob7sZssl0I
- JvFelFpCz9PZ0VNtpI6+3T3b0GpM87GVr/dC7uM0GWNs/CwE4cC00CMTaoMCLbsm5eDTEVizgD
- iCUPwBMgDwVlZJKotDVN7AsyxsC9w7dBgEAAA==
-X-Change-ID: 20251120-legacy-led-sunxi-54a42b96c410
-To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
- Hans de Goede <hdegoede@redhat.com>, Samuel Holland <samuel@sholland.org>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Paul Kocialkowski <contact@paulk.fr>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Cody Eksal <masterr3c0rd@epochal.quest>, Liya Huang <1425075683@qq.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Bohdan Chubuk <chbgdn@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Subject: Re: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for
+ flat_dt images
+To: Tom Rini <trini@konsulko.com>
+Cc: "Padhi, Beleswar" <b-padhi@ti.com>, sean.anderson@seco.com,
+ ilias.apalodimas@linaro.org, malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, james.hilliard1@gmail.com, anshuld@ti.com,
+ afd@ti.com, nm@ti.com, vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com,
+ bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+References: <20260128141834.2322865-1-b-padhi@ti.com>
+ <71adda09-1f3b-48f7-aaed-845e6a30b6ca@mailbox.org>
+ <139a01e9-c395-47f0-a09d-1c591c178bf9@ti.com>
+ <3be6cbf5-9a54-424a-9a8e-f43867cb5a3a@mailbox.org>
+ <20260128155028.GK3416603@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260128155028.GK3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: e09826662616173a4ef
+X-MBO-RS-META: 43ejbtwhm7b4b6yun9u638eaq6qn5z8z
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,160 +82,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
-
-We are trying to get rid of the legacy LED API and PinePhone is one of
-the last ones requiring it.
-
-Unlike all other users of the legacy LED API, PinePhone is controlling
-the GPIO LED in SPL. Unfortunately, Sunxi doesn't enable DM support in
-SPL because of tight space constraints, so we cannot make use of the
-modern LED framework as that is based on DM_GPIO.
-
-Since PinePhone is the last user of this API, I'm moving the logic to
-Sunxi SPL code and will let this community decide how to handle this hot
-potato.
-
-The logic is extremely simplified as only one GPIO LED is currently
-controlled in SPL by PinePhone. No need for handling multiple LEDs or
-inverted polarity, let's keep it simple.
-
-This however allows us to use the modern LED framework once in U-Boot
-proper since this logic won't collide with the new framework.
-
-Since the only misc drivers that were compiled in SPL were guarded by
-CONFIG_LED_STATUS and CONFIG_LED_STATUS_GPIO, we can also disable
-CONFIG_SPL_DRIVERS_MISC (which does nothing anymore).
-
-This also saves some space for PinePhone in SPL and proper.
-
-Tested-by: Andre Przywara <andre.przywara@arm.com>
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Note that I do not own this device so I could only build test it.
-
-This is to continue the effort of getting rid of the legacy LED API.
----
-Changes in v3:
-- rebased on top of master,
-- Link to v2: https://patch.msgid.link/20251216-legacy-led-sunxi-v2-1-5739a5a524c9@cherry.de
-
-Changes in v2:
-- removed printf as suggested by Andre in v1,
-- removed check of return code of gpio_request() as it'll always be 0
-  with the sunxi_gpio driver, we could technically even remove it as it
-  does nothing but return 0, but it is "more correct" to have it,
-  especially if Sunxi ever decides to move to DM_GPIO where you really
-  need to request the gpio (and check the return value),
-- Link to v1: https://patch.msgid.link/20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de
----
- arch/arm/mach-sunxi/Kconfig | 18 ++++++++++++++++++
- board/sunxi/board.c         | 16 ++++++++++++----
- configs/pinephone_defconfig |  9 +++------
- 3 files changed, 33 insertions(+), 10 deletions(-)
-
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index e979ee4a2cc..a60ebe1d964 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -1232,6 +1232,24 @@ config CHIP_DIP_SCAN
- 	select W1_EEPROM_DS24XXX
- 	select CMD_EXTENSION
- 
-+config SPL_SUNXI_LED_STATUS
-+	bool "Control GPIO status LED within SPL"
-+	depends on SPL_GPIO && SUNXI_GPIO
-+
-+if SPL_SUNXI_LED_STATUS
-+
-+config SPL_SUNXI_LED_STATUS_BIT
-+	int "GPIO number for GPIO status LED"
-+	help
-+	  GPIO number for the GPIO controlling the GPIO status LED in SPL.
-+
-+config SPL_SUNXI_LED_STATUS_STATE
-+	bool "GPIO status LED initial state is on"
-+	help
-+	  Whether the initial state of the status LED in SPL must be on or off.
-+
-+endif # SPL_SUNXI_LED_STATUS
-+
- source "board/sunxi/Kconfig"
- 
- endif
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index e9e3fb9a571..194b140328b 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -50,7 +50,6 @@
- #include <spl.h>
- #include <sy8106a.h>
- #include <asm/setup.h>
--#include <status_led.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -552,14 +551,23 @@ static void sunxi_spl_store_dram_size(phys_addr_t dram_size)
- 	spl->dram_size = dram_size >> 20;
- }
- 
-+static void status_led_init(void)
-+{
-+#if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
-+	unsigned int state = CONFIG_SPL_SUNXI_LED_STATUS_STATE;
-+	unsigned int gpio = CONFIG_SPL_SUNXI_LED_STATUS_BIT;
-+
-+	gpio_request(gpio, "gpio_led");
-+	gpio_direction_output(gpio, state);
-+#endif
-+}
-+
- void sunxi_board_init(void)
- {
- 	int power_failed = 0;
- 
--#ifdef CONFIG_LED_STATUS
--	if (IS_ENABLED(CONFIG_SPL_DRIVERS_MISC))
-+	if (CONFIG_IS_ENABLED(SUNXI_LED_STATUS))
- 		status_led_init();
--#endif
- 
- #ifdef CONFIG_SY8106A_POWER
- 	power_failed = sy8106a_set_vout1(CONFIG_SY8106A_VOUT1_VOLT);
-diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-index 8a9916c7978..ed7dbc1852b 100644
---- a/configs/pinephone_defconfig
-+++ b/configs/pinephone_defconfig
-@@ -2,20 +2,17 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="sun50i-a64-pinephone-1.2"
- CONFIG_DRAM_CLK=552
--CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL=y
- CONFIG_MACH_SUN50I=y
- CONFIG_SUNXI_DRAM_LPDDR3_STOCK=y
- CONFIG_DRAM_ZQ=3881949
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_PINEPHONE_DT_SELECTION=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_BIT=114
-+CONFIG_SPL_SUNXI_LED_STATUS_STATE=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_CMD_PSTORE=y
- CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
- CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
- CONFIG_SYS_I2C_MVTWSI=y
--CONFIG_LED_STATUS=y
--CONFIG_LED_STATUS_GPIO=y
--CONFIG_LED_STATUS0=y
--CONFIG_LED_STATUS_BIT=114
--CONFIG_LED_STATUS_STATE=2
-
----
-base-commit: 4234f4d432bf1dcd30b5fee91c71abc1acae5e75
-change-id: 20251120-legacy-led-sunxi-54a42b96c410
-
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@cherry.de>
-
+On 1/28/26 4:50 PM, Tom Rini wrote:
+> On Wed, Jan 28, 2026 at 04:42:47PM +0100, Marek Vasut wrote:
+>> On 1/28/26 4:26 PM, Padhi, Beleswar wrote:
+>>>
+>>> On 1/28/2026 8:26 PM, Marek Vasut wrote:
+>>>> On 1/28/26 3:18 PM, Beleswar Padhi wrote:
+>>>>> From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>
+>>>> Please drop this , it isnt needed.
+>>>>
+>>>>> When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
+>>>>> packed inside the multidtb.fit FIT image. While the individual DTBs
+>>>>> and the FIT image start address are 8-byte aligned, the DTBs embedded
+>>>>> within the FIT image are not guaranteed to maintain 8-byte alignment.
+>>>>>
+>>>>> This misalignment causes -FDT_ERR_ALIGNMENT failure in
+>>>>> setup_multi_dtb_fit() when locating the next available DTB within the
+>>>>> FIT blob and setting gd->fdt_blob, because of the recent libfdt
+>>>>> hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
+>>>>> version v1.7.2-35-g52f07dcca47c")
+>>>>>
+>>>>> To fix this, check the image type when extracting
+>>>>
+>>>> "extracting" ? This code changes mkimage, so not "extracting" but
+>>>> "packing" (into fitImage), right ?
+>>>
+>>>
+>>> Well the function name is fit_extract_data(). It is documented as
+>>> extracting
+>>> all the data properties of a node to the end of the fit. So just keeping
+>>> the
+>>> same terminology. Its obviously not in the same context as extracting data
+>>> out of a FIT image to consume information...
+>>
+>> ... check the image type when moving image data at the end of the tree ...
+>> or something like that ?
+>>
+>>>>> FIT image data and
+>>>>> set the alignment size to 8 bytes (if not already) only for flat_dt
+>>>>> images. This ensures correct alignment for device tree blobs as per the
+>>>>> DT spec, while also allowing different alignment sizes for other image
+>>>>> types within the FIT.
+>>>>
+>>>> [...]
+>>>>
+>>>>> diff --git a/tools/fit_image.c b/tools/fit_image.c
+>>>>> index e865f65a400..f842c845771 100644
+>>>>> --- a/tools/fit_image.c
+>>>>> +++ b/tools/fit_image.c
+>>>>> @@ -682,9 +682,17 @@ static int fit_extract_data(struct
+>>>>> image_tool_params *params, const char *fname)
+>>>>>        for (node = fdt_first_subnode(fdt, images);
+>>>>>             node >= 0;
+>>>>>             node = fdt_next_subnode(fdt, node)) {
+>>>>> -        const char *data;
+>>>>> +        const char *data, *type;
+>>>>>            int len;
+>>>>>    +        /* Fallback to 8-byte alignment for DTBs if unaligned */
+>>>>> +        type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
+>>>>> +        if (type &&
+>>>>> +            len == sizeof("flat_dt") &&
+>>>>> +            !memcmp(type, "flat_dt", len) &&
+>>>>> +            align_size & 0x7)
+>>>>
+>>>> What will be the resulting alignment if align_size = 0x1f ? 8 right
+>>>> ? I think it should be 0x20 .
+>>>
+>>>
+>>> I thought we agreed on resetting align_size to 8 if its not already aligned
+>>> (regardless if < or > 8) in v3 version of this patch[0]. Do we really
+>>> have to
+>>> align the align_size var itself? It seems like a overkill to me...
+>> Maybe simply call round_up(8) on the align_size , to align to the next
+>> 8-byte aligned offset , but somewhat respect user wishes ?
+>>
+>> But looking at this code one more time , look at the calloc() in this
+>> function, I think you might also have to allocate a bit more memory to
+>> really hold all the newly aligned DTs, right ?
+>>
+>> Also, don't you need to align the buf_ptr as well ? Consider a scenario
+>> where the fitImage contains two images, one ends at 4-byte aligned address,
+>> followed by a DT. The users passes -B 4 to mkimage, and I think buf_ptr
+>> would then be 4-byte aligned, so will the DT, no ?
+> 
+> I'm confused. Where did we go from "default should be 8 not 4, for
+> device trees" to "take what the user passed, make sure is 8b aligned" ?
+> If the user tells us to do something, we should do it, and they can
+> suffer the potential consequences. If the user doesn't tell us to do
+> something, we should pick a reasonable default.
+You can remove the "the user passes -B 4" part from my example, keep the 
+rest, the DT will likely end up 4-byte aligned, no ?
