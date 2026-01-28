@@ -4,68 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467B2D3F083
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 15:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53C4D3F081
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 16:01:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F07383FFF;
-	Wed, 28 Jan 2026 16:58:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5DC2A83FFF;
+	Wed, 28 Jan 2026 17:01:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TEwQ2Dh4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F244684013; Wed, 28 Jan 2026 16:58:21 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 96F8384019; Wed, 28 Jan 2026 17:01:46 +0100 (CET)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AAA483FFE
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 16:58:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF97483FFE
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 17:01:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f1Rkw0Rgqz9tj3;
- Wed, 28 Jan 2026 16:58:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769615896;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=poqjfirjQiUIwbCVfSZT5Fl9bFEov1PfH2+6PaHrSyQ=;
- b=TEwQ2Dh4JURVCW+k5A9YHEwV2ukmHKTKXF48plH0SIZElz0mxK/H/0JsZPK6QjyLb5nBS5
- WkHCKbWb/f9JFAb/CCGjGEX0X1v7h37lfIv3TJS3vTUwGt9gWijzVItM+F+bjmOM021orP
- NbM6JoOF+2HRWN1cNWi6mtZ1jzS6cHzo0V0RD5Ldu9NE0lO6A9v0Z2qfjv958FevtX6XP+
- fO9W0OJGf/4oaxODoPDx8TDutk8h+vmpZK9S3tjW87s4y1nGVDD+jviQQkeEkFF4uZZtjP
- m7goaqh3lLyYMOvTxPAgWfYqBZXQeYN7jf1rnrcHzBLOnhfv9xSIc8M8n0dZUA==
-Message-ID: <3dae966e-d866-4cd9-b136-c62794dfe137@mailbox.org>
-Date: Wed, 28 Jan 2026 16:58:09 +0100
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4f1Rpv2BH6zZnZ;
+ Wed, 28 Jan 2026 17:01:43 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4f1Rps5l88zRt; Wed, 28 Jan 2026 17:01:41 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 28 Jan 2026 17:01:25 +0100
+Subject: [PATCH v3] sunxi: remove usage of legacy LED API
 MIME-Version: 1.0
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: xypron.glpk@gmx.de, u-boot@lists.denx.de, yuya.hamamachi.sx@renesas.com,
- andrew.goodbody@linaro.org, casey.connolly@linaro.org,
- holger.brunck@hitachienergy.com, ilias.apalodimas@linaro.org,
- jonas@kwiboo.se, kettenis@openbsd.org, semen.protsenko@linaro.org,
- sughosh.ganu@linaro.org, trini@konsulko.com
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
- <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
- <875x8l69l3.fsf@bloch.sibelius.xs4all.nl>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <875x8l69l3.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: fdf2f4aef0549c90917
-X-MBO-RS-META: kubotkgn3ybroksdshmh3x8844w5ay7k
+Message-Id: <20260128-legacy-led-sunxi-v3-1-4a528077aeab@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NQQ6CMBAF0KuQrq1hhhaDK+9hXNR2gCYGtIWGh
+ nB3Cy5wYVxN/k/m/Zl5cpY8O2czcxSst32XQnHImG5V1xC3JmWGOUoAzPmDGqVjOob7sZssl0I
+ JvFelFpCz9PZ0VNtpI6+3T3b0GpM87GVr/dC7uM0GWNs/CwE4cC00CMTaoMCLbsm5eDTEVizgD
+ iCUPwBMgDwVlZJKotDVN7AsyxsC9w7dBgEAAA==
+X-Change-ID: 20251120-legacy-led-sunxi-54a42b96c410
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Samuel Holland <samuel@sholland.org>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Paul Kocialkowski <contact@paulk.fr>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Cody Eksal <masterr3c0rd@epochal.quest>, Liya Huang <1425075683@qq.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Bohdan Chubuk <chbgdn@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,130 +69,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/28/26 4:27 PM, Mark Kettenis wrote:
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Hello Mark,
+We are trying to get rid of the legacy LED API and PinePhone is one of
+the last ones requiring it.
 
->> On 1/28/26 5:41 AM, Heinrich Schuchardt wrote:
->>> Am 28. Januar 2026 00:48:40 MEZ schrieb Marek Vasut <marek.vasut+renesas@mailbox.org>:
->>>> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
->>>> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
->>>> same bank"). These are based on incorrect premise of the first commit, that
->>>> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
->>>> not and should not use memory above ram_top, user can perfectly well use
->>>> that memory from the U-Boot shell, for example to load content in there.
->>>>
->>>> Currently, attempt to use that memory to load large image using TFTP ends
->>>> with "TFTP error: trying to overwrite reserved memory...". With this change
->>>> in place, the memory can be used again.
->>>
->>> IIRC there are drivers that have issues with memory above 4 GiB and boards that artificially set ram_top to 4 GiB to work around these issues.
->>
->> I thought I had all of those solved, but apparently not, please read on.
->>
->>> We need to carefully consider why the reverted patch was introduced.
->>
->> I didn't find much on either commit. I believe the premise on which the
->> original patch was introduced is wrong, cf this commit message. We
->> should allow U-Boot to access the memory above ram_top, we should not
->> allow U-Boot to use it for its data structures because of the possible
->> 32bit DMA limitations.
-> 
-> What do you want to do with that memory in U-Boot?  You can't really
-> use it to load a kernel into if there is a 32-bit DMA limitations in,
-> for example, your MMC controller...
+Unlike all other users of the legacy LED API, PinePhone is controlling
+the GPIO LED in SPL. Unfortunately, Sunxi doesn't enable DM support in
+SPL because of tight space constraints, so we cannot make use of the
+modern LED framework as that is based on DM_GPIO.
 
-I want to load system image into it, via ethernet. The network stack 
-does have built-in packet buffer which is part of the U-Boot binary in 
-.data section, which is below ram_top . The malloc area is also below 
-ram_top, so any private data which hold DMA descriptors are also below 
-ram_top . When a TFTP transfer runs, the data are all exchanged within 
-the 32bit memory range and reachable by the network hardware, the packet 
-data are copied between the packet buffer in U-Boot .data section and 
-the real source/destination address which may be above the 32bit boundary.
+Since PinePhone is the last user of this API, I'm moving the logic to
+Sunxi SPL code and will let this community decide how to handle this hot
+potato.
 
-This copying is what the network stack does today, so optimizing that is 
-out of scope of this discussion (although it is on my radar).
+The logic is extremely simplified as only one GPIO LED is currently
+controlled in SPL by PinePhone. No need for handling multiple LEDs or
+inverted polarity, let's keep it simple.
 
-As for the SD card controllers with 32bit limitations, I think we need 
-bounce buffer with the ability to bounce into area that is forced below 
-32bit boundary. I think we are missing that.
+This however allows us to use the modern LED framework once in U-Boot
+proper since this logic won't collide with the new framework.
 
-> Are there boards that don't have enough memory below the 4GB address
-> boundary?
+Since the only misc drivers that were compiled in SPL were guarded by
+CONFIG_LED_STATUS and CONFIG_LED_STATUS_GPIO, we can also disable
+CONFIG_SPL_DRIVERS_MISC (which does nothing anymore).
 
-Yes, there are system images which are larger than 2 GiB when gzip 
-compressed. They are being written into NVMe storage during board 
-installation, without booting the OS.
+This also saves some space for PinePhone in SPL and proper.
 
->>> Why does your board use a 4GiB ram_top and not place ram_top at the physical top?
->> Originally, I thought it was only a remnant from the past which kept
->> U-Boot and all its data structures, stack, heap in the first DRAM bank
->> in 32bit space, so I tried to remove that. It turns out there are still
->> a couple of problems that have to be solved to make it possible to
->> relocate U-Boot fully into the 64bit space.
->>
->> The first one is the standard parsing of DRAM size / ram_top / DRAM
->> banks order in common/board_f.c , which probably hides a lot of issues
->> on various boards, pretty much what you wrote above. In short,
->> dram_init() only sets up gd->ram_base and gd->ram_size , which is often
->> the first continuous DRAM bank which is in 32bit space. The follow up
->> setup_dest_addr() uses that information to set up U-Boot relocation
->> address at the end of that first continuous bank. And then
->> dram_init_banksize() parses the rest of the DRAM banks into gd->bd
->> (gd->bd is set up after setup_dest_addr() is called, in reserve_board()).
->>
->> This above is fixable and I already have some clean up patches for that,
->> which I implemented while writing this email.
->>
->> But then I found out, that the ravb ethernet driver also has 32bit
->> limited DMA, which breaks if I relocate U-Boot to the 64bit range. It
->> worked thus far, because U-Boot was in 32bit space, so were mallocated
->> DMA descriptors, so was the net_pkt_buf[] array (which is in .data
->> section). I didn't find any other breakage thus far.
-> 
-> Unfortunately hardware with 32-bit DMA constraints is very common.
-> There are device trees with dma-ranges properties that imply DMA
-> constraints.  That is mostly about restrictions of busses that have a
-> limited number of address lines so it certainly doesn't cover
-> everything.  My list of additonal SoCs with restrictions in OpenBSD has
-> the Raspberry Pi 4 and Rockchip RK356x and RK3588 on it.
+Tested-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Note that I do not own this device so I could only build test it.
 
-I know. The ram_top is used to keep U-Boot below the 4 GiB boundary, 
-including its structures, so this limited hardware can surely work, 
-until there is a better fix.
+This is to continue the effort of getting rid of the legacy LED API.
+---
+Changes in v3:
+- rebased on top of master,
+- Link to v2: https://patch.msgid.link/20251216-legacy-led-sunxi-v2-1-5739a5a524c9@cherry.de
 
->> Which means, before we can really start switching boards to relocate to
->> 64bit space, we need to find all these remaining 32bit limitation sites
->> and fix them first. And to do that, we would need some way to force
->> allocation from 32bit space for drivers which need that ... do we
->> already have such a thing ? I couldn't find anything.
-> 
-> We have bounce buffers in the EFI loader.  There is a more genric
-> bounce buffer implementation in U-Boot as well, but that is only used
-> to solve DMA cache coherency issues.
+Changes in v2:
+- removed printf as suggested by Andre in v1,
+- removed check of return code of gpio_request() as it'll always be 0
+  with the sunxi_gpio driver, we could technically even remove it as it
+  does nothing but return 0, but it is "more correct" to have it,
+  especially if Sunxi ever decides to move to DM_GPIO where you really
+  need to request the gpio (and check the return value),
+- Link to v1: https://patch.msgid.link/20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de
+---
+ arch/arm/mach-sunxi/Kconfig | 18 ++++++++++++++++++
+ board/sunxi/board.c         | 16 ++++++++++++----
+ configs/pinephone_defconfig |  9 +++------
+ 3 files changed, 33 insertions(+), 10 deletions(-)
 
-That is my doing, but indeed, it does solve coherency problems, not 
-placement problems.
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index e979ee4a2cc..a60ebe1d964 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -1232,6 +1232,24 @@ config CHIP_DIP_SCAN
+ 	select W1_EEPROM_DS24XXX
+ 	select CMD_EXTENSION
+ 
++config SPL_SUNXI_LED_STATUS
++	bool "Control GPIO status LED within SPL"
++	depends on SPL_GPIO && SUNXI_GPIO
++
++if SPL_SUNXI_LED_STATUS
++
++config SPL_SUNXI_LED_STATUS_BIT
++	int "GPIO number for GPIO status LED"
++	help
++	  GPIO number for the GPIO controlling the GPIO status LED in SPL.
++
++config SPL_SUNXI_LED_STATUS_STATE
++	bool "GPIO status LED initial state is on"
++	help
++	  Whether the initial state of the status LED in SPL must be on or off.
++
++endif # SPL_SUNXI_LED_STATUS
++
+ source "board/sunxi/Kconfig"
+ 
+ endif
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index e9e3fb9a571..194b140328b 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -50,7 +50,6 @@
+ #include <spl.h>
+ #include <sy8106a.h>
+ #include <asm/setup.h>
+-#include <status_led.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -552,14 +551,23 @@ static void sunxi_spl_store_dram_size(phys_addr_t dram_size)
+ 	spl->dram_size = dram_size >> 20;
+ }
+ 
++static void status_led_init(void)
++{
++#if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
++	unsigned int state = CONFIG_SPL_SUNXI_LED_STATUS_STATE;
++	unsigned int gpio = CONFIG_SPL_SUNXI_LED_STATUS_BIT;
++
++	gpio_request(gpio, "gpio_led");
++	gpio_direction_output(gpio, state);
++#endif
++}
++
+ void sunxi_board_init(void)
+ {
+ 	int power_failed = 0;
+ 
+-#ifdef CONFIG_LED_STATUS
+-	if (IS_ENABLED(CONFIG_SPL_DRIVERS_MISC))
++	if (CONFIG_IS_ENABLED(SUNXI_LED_STATUS))
+ 		status_led_init();
+-#endif
+ 
+ #ifdef CONFIG_SY8106A_POWER
+ 	power_failed = sy8106a_set_vout1(CONFIG_SY8106A_VOUT1_VOLT);
+diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+index 8a9916c7978..ed7dbc1852b 100644
+--- a/configs/pinephone_defconfig
++++ b/configs/pinephone_defconfig
+@@ -2,20 +2,17 @@ CONFIG_ARM=y
+ CONFIG_ARCH_SUNXI=y
+ CONFIG_DEFAULT_DEVICE_TREE="sun50i-a64-pinephone-1.2"
+ CONFIG_DRAM_CLK=552
+-CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL=y
+ CONFIG_MACH_SUN50I=y
+ CONFIG_SUNXI_DRAM_LPDDR3_STOCK=y
+ CONFIG_DRAM_ZQ=3881949
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_PINEPHONE_DT_SELECTION=y
++CONFIG_SPL_SUNXI_LED_STATUS=y
++CONFIG_SPL_SUNXI_LED_STATUS_BIT=114
++CONFIG_SPL_SUNXI_LED_STATUS_STATE=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_CMD_PSTORE=y
+ CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
+ CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+ CONFIG_SYS_I2C_MVTWSI=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS_GPIO=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=114
+-CONFIG_LED_STATUS_STATE=2
 
-> But this suggests that solving
-> things in generic code instead of drivers might be feasable (at the
-> price of extra memery copying).
+---
+base-commit: 4234f4d432bf1dcd30b5fee91c71abc1acae5e75
+change-id: 20251120-legacy-led-sunxi-54a42b96c410
 
-Yes, correct. I am thinking of some DMA32 DM flag, which would indicate 
-the hardware has such limitation and its data buffers should be bounced 
-in common code.
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
-> That said, is there really a benefit in giving U-Boot more memory on
-> systems that typically have 2GB or more below the 4GB address
-> boundary?
-
-Yes there is, there are systems with a lot of DRAM, 8 GiB, 16 GiB, or 
-even more. And yes, there is a use case for loading very large data into 
-that DRAM. That is what spawned this change.
-
-Do you think this change is acceptable until we have some 32bit DMA 
-allocator ? Can you please test it on RK3588 and see if it causes any 
-breakage for you ?
-
-Thank you for your help !
