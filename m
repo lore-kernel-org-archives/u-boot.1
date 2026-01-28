@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD61D3F061
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36DFDD3F064
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:03:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9097D83EC9;
+	by phobos.denx.de (Postfix) with ESMTP id C8DE083F2E;
 	Wed, 28 Jan 2026 15:02:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LZs5XQ8L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvh1Y7yQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B6F83F2E; Wed, 28 Jan 2026 15:02:35 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id C923983EB3; Wed, 28 Jan 2026 15:02:35 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D1D583EB3
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:02:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96BDD83CEA
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:02:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-40866608701so1602682fac.1
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 06:02:32 -0800 (PST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-40429b1d8baso1843034fac.0
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 06:02:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769608951; x=1770213751; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769608947; x=1770213747; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0K2ZVmYF64yWl/cvd4j6VzqwZL5KriEc2G0aKyqhvqY=;
- b=LZs5XQ8LvxXrs3vUub9MZ4u53tCtqkIs13w0X9bYmNpnnjeyEC5OwGdxL0FJ1Moc6u
- bUpLNr2OBSbLiMq6yw+fihGGkke7VlZbeV5WcX6zNHTja23Zo2YY20b1BwbvujqvMCnp
- i8KIWCzBd86CWNK10SVqMhAc3nTPY4OpsPcjc=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RdjBJkk0t/QEacQQ3Us0bz5TXCc+jDwXebs03gnG5uo=;
+ b=tvh1Y7yQYFupy1EKHEYSphm8O70rAiTgVh0wpJ4ddrR7ApMHDqAQRzHQhdecuwes0Q
+ tBdJkXgiJ1CZYh6wqcr5ZzS8WgjqFQ3B87HfBmFWABNKtqcjdrMMkFKSFd8SZjutmiUF
+ 5vZkDlU29BMu7YKf1F4cYx/ZvmW3qi3QflA9I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769608951; x=1770213751;
+ d=1e100.net; s=20230601; t=1769608947; x=1770213747;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=0K2ZVmYF64yWl/cvd4j6VzqwZL5KriEc2G0aKyqhvqY=;
- b=bP/50u8aPYYEg3FrcBIqb9Xi3kqRI0c80mEpuymtzsDIQ/t5BlYc3KNqftjovEwzUe
- oOF4opZIj74bR8BfocATY0DOWyqL69Zv4PPKZLrCuBX5bmkyOP7neoJ3Qo/U3F8DM+Da
- 7QSM28XAENK5+Lc0YchWkv5scQrYud4Lc5lbidZPdxmBE0mU+V5mL44XfpS/fQmoNgak
- ShhpriJBzH9HrbldyZCk8CFLJsky79zpbwgWxNghO/ezBfGb+4Z+FBVxjNmBET3b5lzr
- c02SyhJgi8K6ZuNmp5Nyscne4NDm/d7gqyQrUUyGscn7+JDIIq69EpAzePwxZGnHX6AB
- OZ9A==
-X-Gm-Message-State: AOJu0Ywf8/c2NoHZoeRuVYlFRXPbhlkC5e3gItEKwSjG6CVA8vQhoEAo
- GvAw6bE4+Is/79ETbG6mb/8iUsp0qdBX6jKohDtyLmikhjoA475CAbXtGQnZrcs5BeVhTjkZO6o
- zOqtSt9I=
-X-Gm-Gg: AZuq6aJgCdeyQC3Ol2+EJp7KLSZsNxlOKsb8RTsXdSLa4RPNDtrgnLU4e4ZanVgCksw
- Hw1fUTeZE1S6KYz2SeSmnhnFPdEnohl6f+2BhESeFkiuI3BEEyJVl8AdwrIw5706thILFI997bi
- Z7bM/HX0kiMVHns1/7PYhhed1VLNtgJaCcIn3XRrTzTeJOD3rWIFs5zyTkN2AvOg3sxtWt2Q/UA
- zuXVrjgLiaQBLHZFfx4bgiW91wwr9KwLZeYGhL04fd25ZssJVPJZhklM2WafnUzclnpdl+Nea/l
- bv2w7o58b/wNMK6gmDHajR0J2SEkcFQEiP8j0KCzOejkARdckaSHC3myrrP9QZUubZ+lGLqtWyr
- HnQZRMbvBphhHx0IzFqZE7MrzigmS3IsYU40bCRtKwO8k9e8UZrgBaZk86cm+gJKT65HouNIpfx
- 3L3f28MIHvF5kAN2hgvnBN51Tr/5rQSCgehSST2MXFyHJ2+vMV9BqVYJ48XxfJVvu/JLodV19c2
- Zl3rnDy8wwxjFqOyVoHSvv1ux6X5VSO2JsfOg==
-X-Received: by 2002:a05:6871:692:b0:3ec:a4ed:cf48 with SMTP id
- 586e51a60fabf-4093fd6ee54mr3199922fac.25.1769608950742; 
- Wed, 28 Jan 2026 06:02:30 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=RdjBJkk0t/QEacQQ3Us0bz5TXCc+jDwXebs03gnG5uo=;
+ b=rGyKZd8SNCynox2sgVFVOWojlODIuGvIrYAOKAEhmU6e4eV2c3voZzQ7rPSkC6i/dD
+ XE0Bu8aw6t4tW58LEH+g2D5uIwhXA9UTg85Jzxea17UlsMocLucP9b/z532baPQalpyW
+ gRTx/yGtbuwyd4F6K+Gk0dPRDIospTvsBZ/ln/7IuDfKgJXJsJygA/GMhRaIxoSM7ms9
+ Bs+2cwWKiHwf6PnEKZQQ9pBrFTcvBOCRM13BaFFNANX1rgBhLnXpKLrAHawUqWWHqMvz
+ /VdUGpu9fAuDRcOowgs4II+PAP+ZeNMkP64mx6a8stt8FrDVqwFzUJYYfY2RrlDJkqpn
+ +SQA==
+X-Gm-Message-State: AOJu0YxBVSJgv0O/zORlswSQ2LwHict5b/4JVcBSXVViLhkf62Cni5zX
+ n7KIWKezlkrBHpBI/nI2vNRZtIokhueglytcktA/lbI2xUmU4KtMXSUJ7brmL20Ky1f6IrC90Dz
+ k5zNy
+X-Gm-Gg: AZuq6aIPJCdXyN0T7ZES0+8WIOFG56qo+12egv4c7h5rLXpa13aM7tpth8N1GGCnNbq
+ X+2DoWtFH7qvOZmily1daG8cX1d1VwmIGYAdY4LDAR2hY6e/y4U0bpB5L+ajftyXDjfLNrBhU0I
+ 92syVFoDbgCgJVWYCKtVlz7issP9NxXxBDLzqsKEwnahy0wtZg3ON7XlB5+xqwt3xrsqHpYqEB7
+ 1yUOGzcdYAkLUpR5EPJWxglnw9VX3LYdeFPOP5GMAAAkvjenzuBgpnFgLaTeb6z+mBG5K3RHK1a
+ LicMBmxryYNmzFDQ+jl5isNmtozYm0uOjfeD0xhU+mM5pcULvqWT920A+DljXux3EFfTscmBoOw
+ 0wV2xNHb0rwppyj4Dmd+6yoAbM2XAofWid9CSQU3N5tmF368mLb4GUw71XCgAKUKEIEZ4gtUsfq
+ HX5a5JIF4bOubNz/FXfjEZWMA3jzBXQE0tLcFg3byu8hOMbEoCif4+kbM0hsRrspJh7v8zOf2TO
+ lGhp9WOUUa2DAuaigLCg4gz+ggAmJPZ7gZ3mjoQDr9mPIJt
+X-Received: by 2002:a05:6870:4688:b0:404:2f23:c63 with SMTP id
+ 586e51a60fabf-4093ffc78b2mr3365043fac.42.1769608947109; 
+ Wed, 28 Jan 2026 06:02:27 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4095749f332sm1751438fac.11.2026.01.28.06.02.30
+ 586e51a60fabf-4095749f332sm1751438fac.11.2026.01.28.06.02.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 06:02:30 -0800 (PST)
+ Wed, 28 Jan 2026 06:02:26 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260118195610.81287-1-trini@konsulko.com>
-References: <20260118195610.81287-1-trini@konsulko.com>
-Subject: Re: [PATCH] fit: Rework SPL_LOAD_FIT_ADDRESS slightly
-Message-Id: <176960895012.1640006.17323368155731573462.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 08:02:30 -0600
+Cc: Martin Husemann <martin@netbsd.org>
+In-Reply-To: <20260112170511.1856525-1-trini@konsulko.com>
+References: <20260112170511.1856525-1-trini@konsulko.com>
+Subject: Re: [PATCH] bootm: Remove BOOTM_NETBSD from defaults
+Message-Id: <176960894610.1640006.9201032820406089507.b4-ty@konsulko.com>
+Date: Wed, 28 Jan 2026 08:02:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,27 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 18 Jan 2026 13:56:10 -0600, Tom Rini wrote:
+On Mon, 12 Jan 2026 11:05:11 -0600, Tom Rini wrote:
 
-> Options which deal with memory locations and have a default value of 0x0
-> are dangerous, as that is often not a valid memory location. Rework
-> SPL_LOAD_FIT_ADDRESS as follows:
-> - Add SPL_HAS_LOAD_FIT_ADDRESS to guard prompting the question as the
->   case of loading a FIT image does not strictly require setting an
->   address and allows for a malloc()'d area to be used.
-> - For SPL_RAM_SUPPORT, select the new guard symbol if SPL_LOAD_FIT is
->   enabled because in that case an address must be provided.
-> - Update defconfigs for these new changes. Largely this means some
->   defconfigs need to enable SPL_HAS_LOAD_FIT_ADDRESS to maintain their
->   current status. In the case of sandbox, we also need to set
->   SPL_LOAD_FIT_ADDRESS to 0x0.
+> After talking with someone from the NetBSD project, platforms that do
+> not boot with a device tree (and so would be using our BOOTM_NETBSD
+> support) a very few in number. So we can remove this option from being
+> enabled by default and save a little space in most places with platforms
+> that need it still being able to re-enable it, if needed. Ideally, in a
+> few years we can instead just remove the code entirely.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] fit: Rework SPL_LOAD_FIT_ADDRESS slightly
-      commit: 272b8784faf33b0eded27ba78ad4251151ef357b
+[1/1] bootm: Remove BOOTM_NETBSD from defaults
+      commit: 0fcd1548596a5d9358bfeb96bc7863f6fa17e15d
 -- 
 Tom
 
