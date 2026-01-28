@@ -4,59 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E644D2FEF4
-	for <u-boot@archiver.kernel.org>; Tue, 27 Jan 2026 23:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B75D2FEFA
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 00:03:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 176CD84101;
-	Wed, 28 Jan 2026 00:59:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0906084212;
+	Wed, 28 Jan 2026 01:03:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="D8sIZWBx";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RIgfXqYq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G9kMz7lZ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P8BSVLnM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D184F84206; Wed, 28 Jan 2026 00:59:37 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 2EE258421E; Wed, 28 Jan 2026 01:03:50 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99F82840CF
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 00:59:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD1608420D
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 01:03:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4f12Sl2lD1z9vLp;
- Wed, 28 Jan 2026 00:59:35 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f12Yb2QWFz9thT;
+ Wed, 28 Jan 2026 01:03:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769558375;
+ s=mail20150812; t=1769558627;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Q5uYqHPbaI+Jvx0vSlIAGR/a9UERAOEck66J1MJYhAw=;
- b=D8sIZWBxt9YiHAbJ7KXFCHbkcRwgjqUGKg2Oq3oW9gw2M7tTLkq1wS5M6yMlPyXXjLlOK+
- Pk8eFGyzYXrOBvfojOAsVp5BjXm/BTOtb3bMlBZwI3VSMMqNbhObtf2i+pQIEGPk3ZH/fh
- faZ4j1fdSZlKnUagSPNrG6z4srs57iEq6J4mOe0q6cpMKhgUV0E0kWfGg5BlPG/Wbtl0Xh
- KBQrcSsrwuHlrnZVtY9hge3OW6pJGLx2OtYDq670qrxqy4aGZiuOIefodwSi5SqH8DY+k3
- NIeFsLY9gJCD8KJuG1wuRXwg4Bzdkq95YQPhJduLb5wVn8sUBbb23eXtkm1O7g==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=owV+CetA5V90cGVLezJTXCxUNnQaGhwob0RByOb7Ut4=;
+ b=G9kMz7lZ5ZMgTnntJCMSne81Ii3EKqFobX9XuOKAE+VN2Ca+DKIivfDbg+BjW/JWeioSku
+ IU7sMaarrCORSg/i55F5c9XqZSpFqmTjPPtPoyFeYclf50XO1EwJTQz9KTOlQjEaRSlBBt
+ uCLrlSdPgKqnLuT2bl+0fiT70C/4vC9RkXXLP+g+cPaxg/16PjkYwf1EmIWhKBXxa53eIG
+ QIJXjHk89uipjHY4k8W4Ecqfm/IXaLuTJEfN6tHoWq0rf0y85FEiFRKzn9BFZgZrmU0QWY
+ fEzzo561rNliHx2tFwH+E/HUlwYKkoAtrjMWd54cTCz22Otfmtolf4NeGU5kLQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=P8BSVLnM;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769558373;
+ s=mail20150812; t=1769558625;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Q5uYqHPbaI+Jvx0vSlIAGR/a9UERAOEck66J1MJYhAw=;
- b=RIgfXqYqjRCuGMXzw/TrDcwzshLOjGZb56Nq5K2YerLFPGhXkTUh5gKSOkPPZJPrDmeRpn
- UliOKHD3M6Klqewpki2e5h7x+chinjcWye4jYxcIAFRIZzpoNpfwPTcdfB2e5G5+YQmA5t
- eAlh2JlemhLw3osT5yzMJrQibOULdg0LroafjhA9eXeZPb3Q0arVlnuD6/99mo/Bma+sBT
- run2VQuelRh2qGDQeLpNljaNGCtvHQHX9E855JB4vwdy1AsKuqkDd77XTRr1EeFDx6i/Ej
- /klESz0w0sQtmNfjoYfgiToXL1qOlOnArh18a5kr/L7EhhsaGOXe5YXyDiZwLg==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=owV+CetA5V90cGVLezJTXCxUNnQaGhwob0RByOb7Ut4=;
+ b=P8BSVLnMp5jrkBEOsoN9sLY1m6qt6XfkYP+24spUzwuD3ApAHf5Sx4n+otAg3J9fhZvgFU
+ 1IvDqV9p/QAlPXoGm0z1S3X9uQHKncXH7teejUW7UDPbxoYMzjZodDWKya3GKCCY1tU/3I
+ VTSooBdJo1IRV57SXofZJ5+2TI1s5ijaEhofugc1QbJmjiFJ3n4XIwIKbO30SswaBjp1/X
+ rQkAPPjxuOk9tbbiFmOc6jvDbSHe+mFmTlymiMW8gT7ECSGiWQoXgoIJwPjxierE22CQ+n
+ /srO8yfRxTABQctR7ma0ZGWzwUkJzdn9wIWg04WfuujY/OXsxRU8au4Sx9qBhw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -67,15 +71,14 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
  Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: [PATCH 3/3] test: cmd: Add test for zip/unzip/gzwrite commands
-Date: Wed, 28 Jan 2026 00:57:22 +0100
-Message-ID: <20260127235914.1503663-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260127235914.1503663-1-marek.vasut+renesas@mailbox.org>
-References: <20260127235914.1503663-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] gunzip: Implement chunked decompression
+Date: Wed, 28 Jan 2026 01:03:31 +0100
+Message-ID: <20260128000340.1504375-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 75689b8248739a518e7
-X-MBO-RS-META: 7jy8c564fhyzezkixxapboy45bidh8ja
+X-MBO-RS-ID: 0160d78eb76438b6987
+X-MBO-RS-META: agdfzqgdzp8n3s7w6boerxoasxd3ga9x
+X-Rspamd-Queue-Id: 4f12Yb2QWFz9thT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,15 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add simple test for zip/unzip/gzwrite commands. The test works as
-follows. First, create three buffers with a bit of space between
-each of them, fill them with random data, then compress data in
-buffer 1 into buffer 2, decompress data in buffer 2 either directly
-into buffer 3 or into MMC 1 and then read them back into buffer 3,
-and finally compare buffer 1 and buffer 3, they have to be identical.
+The current gzwrite() implementation is limited to 4 GiB compressed
+input buffer size due to struct z_stream_s { uInt avail_in } member,
+which is of type unsigned int. Current gzwrite() implementation sets
+the entire input buffer size as avail_in and performs decompression
+of the whole compressed input buffer in one round, which limits the
+size of input buffer to 4 GiB.
 
-The buffers are filled with random data to detect out of bounds writes.
-Test for various sizes, both small and large and unaligned.
+Rework the decompression loop to use chunked approach, and decompress
+the input buffer in up to 4 GiB - 1 kiB avail_in chunks, possibly in
+multiple decompression rounds. This way, the compressed input buffer
+size is limited by gzwrite() function 'len' parameter type, which is
+unsigned long.
+
+In case of sandbox build, include parsing of 'gzwrite_chunk'
+environment variable, so the chunked approach can be thoroughly tested
+with non default chunk size. For non-sandbox builds, the chunk size is
+4 GiB - 1 kiB.
+
+The gzwrite test case is extended to test various chunk sizes during
+gzwrite decompression test.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -117,193 +131,201 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/sandbox/dts/test.dts |   7 +++
- test/cmd/Makefile         |   4 ++
- test/cmd/unzip.c          | 127 ++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py  |   6 ++
- 4 files changed, 144 insertions(+)
- create mode 100644 test/cmd/unzip.c
+This depends on multiple fixes, and the actual unit test for gzwrite command:
+https://lore.kernel.org/u-boot/20260127235156.1503207-1-marek.vasut+renesas@mailbox.org/
+https://lore.kernel.org/u-boot/20260127235310.1503239-1-marek.vasut+renesas@mailbox.org/
+https://lore.kernel.org/u-boot/20260127235339.1503312-1-marek.vasut+renesas@mailbox.org/
+https://lore.kernel.org/u-boot/20260127235914.1503663-1-marek.vasut+renesas@mailbox.org/
+---
+ lib/gunzip.c     | 77 +++++++++++++++++++++++++++++++++---------------
+ test/cmd/unzip.c | 12 +++++++-
+ 2 files changed, 64 insertions(+), 25 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index cd53c170171..a8ff0a4993a 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1268,6 +1268,13 @@
- 		filename = "mmc8.img";
- 	};
- 
-+	/* This is used for zip/unzip/gzwrite tests. */
-+	mmc9 {
-+		status = "disabled";
-+		compatible = "sandbox,mmc";
-+		filename = "mmc9.img";
-+	};
-+
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 2476068aee6..273009a034f 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -45,3 +45,7 @@ endif
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
- endif
- obj-$(CONFIG_CMD_SPAWN) += spawn.o
-+
-+ifdef CONFIG_CMD_ZIP
-+obj-$(CONFIG_CMD_UNZIP) += unzip.o
-+endif
-diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-new file mode 100644
-index 00000000000..725fcf91458
---- /dev/null
-+++ b/test/cmd/unzip.c
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Tests for zip/unzip/gzwrite commands
-+ *
-+ * Copyright 2026, Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#include <command.h>
+diff --git a/lib/gunzip.c b/lib/gunzip.c
+index d31bbb2ba03..0e4bca28a5e 100644
+--- a/lib/gunzip.c
++++ b/lib/gunzip.c
+@@ -8,8 +8,10 @@
+ #include <command.h>
+ #include <console.h>
+ #include <div64.h>
 +#include <env.h>
-+#include <dm.h>
-+#include <dm/lists.h>
-+#include <dm/test.h>
+ #include <gzip.h>
+ #include <image.h>
 +#include <linux/sizes.h>
-+#include <mapmem.h>
-+#include <part.h>
-+#include <test/cmd.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <u-boot/crc.h>
-+
-+static const int sizes[] = { 32, SZ_1K, SZ_4K, SZ_1M, SZ_16M, SZ_1M - 1, SZ_1M + 1, 6758401 };
-+
-+static int do_test_cmd_zip_unzip(struct unit_test_state *uts, const int size,
-+				 const bool gzwrite)
-+{
-+	env_set_hex("size", size);
-+
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <u-boot/crc.h>
+@@ -124,7 +126,7 @@ void gzwrite_progress_finish(int returnval,
+ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 	    ulong szwritebuf, ulong startoffs, ulong szexpected)
+ {
+-	int i, flags;
++	int flags;
+ 	z_stream s;
+ 	int r = 0;
+ 	unsigned char *writebuf;
+@@ -132,14 +134,23 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 	ulong totalfilled = 0;
+ 	lbaint_t blksperbuf, outblock;
+ 	u32 expected_crc;
+-	u32 payload_size;
++	unsigned long i, payload_size;
++	unsigned long blocks_written;
++	lbaint_t writeblocks;
++	int numfilled = 0;
+ 	int iteration = 0;
+-
+-	if (len > 0xffffffff) {
+-		printf("%s: input size over 4 GiB in size not supported\n",
+-		       __func__);
+-		return -1;
+-	}
 +	/*
-+	 * Prepare three buffers, $loadadd, $encaddr, $decaddr, and
-+	 * fill them all with random data. Add slight space between
-+	 * the compressed buffer 'encaddr' and uncompressed buffer
-+	 * 'decaddr', because the compressed data with gzip header
-+	 * might be longer than uncompressed source data 'loadaddr',
-+	 * and if the uncompressed data buffer 'decaddr' followed
-+	 * 'encaddr', the decompression could corrupt end of 'encaddr'
-+	 * buffer.
++	 * Allow runtime configuration of decompression chunk on
++	 * sandbox to better cover the chunked decompression
++	 * functionality without having to use > 4 GiB files.
 +	 */
-+	ut_assertok(run_command("setexpr encaddr $loadaddr + $size", 0));
-+	ut_assertok(run_command("setexpr encaddr $encaddr + 0x10000", 0));
-+
-+	ut_assertok(run_command("setexpr decaddr $encaddr + $size", 0));
-+	ut_assertok(run_command("setexpr decaddr $decaddr + 0x10000", 0));
-+
-+	ut_assertok(run_command("random $loadaddr $size", 0));
-+	ut_assert_nextline("%d bytes filled with random data", size);
-+	ut_assertok(run_command("random $encaddr $size", 0));
-+	ut_assert_nextline("%d bytes filled with random data", size);
-+	ut_assertok(run_command("random $decaddr $size", 0));
-+	ut_assert_nextline("%d bytes filled with random data", size);
-+
-+	/* Compress data in $loadaddr into $encaddr */
-+	ut_assertok(run_command("zip $loadaddr $size $encaddr", 0));
-+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+	ut_assert(strstr(uts->actual_str, "Compressed size: "));
-+
-+	if (gzwrite) {
-+		unsigned int sectsize = DIV_ROUND_UP(size, 512);
-+		unsigned char *db = map_sysmem(env_get_ulong("loadaddr", 16, 0), size);
-+		u32 crc = crc32(0, db, size);
-+
-+		ut_assertok(run_command("gzwrite mmc 9 $encaddr $filesize", 0));
-+		ut_assert_skipline();	/* Empty line */
-+		ut_assert_nextline("\t%u bytes, crc 0x%08x", size, crc);
-+
-+		env_set_hex("sectsize", sectsize);
-+		ut_assertok(run_command("mmc read $decaddr 0 $sectsize", 0));
-+		ut_assert_nextline("MMC read: dev # 9, block # 0, count %u ... %u blocks read: OK",
-+				   sectsize, sectsize);
-+	} else {
-+		/* Decompress data in $encaddr into $decaddr */
-+		ut_assertok(run_command("unzip $encaddr $decaddr $filesize", 0));
-+		ut_assert_nextline("Uncompressed size: %u = 0x%X", size, size);
-+	}
-+
-+	/* Input data and compressed-decompressed data */
-+	ut_assertok(run_command("cmp.b $loadaddr $decaddr $size", 0));
-+	ut_assert_nextline("Total of %u byte(s) were the same", size);
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+static int dm_test_cmd_zip_unzip(struct unit_test_state *uts)
-+{
-+	int i, ret;
-+
-+	for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+		ret = do_test_cmd_zip_unzip(uts, sizes[i], false);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_cmd_zip_unzip, UTF_CONSOLE);
-+
-+static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
-+{
-+	struct blk_desc *mmc_dev_desc;
-+	struct udevice *dev;
-+	ofnode root, node;
-+	int i, ret;
-+
-+	/* Enable the mmc9 node for this test */
-+	root = oftree_root(oftree_default());
-+	node = ofnode_find_subnode(root, "mmc9");
-+	ut_assert(ofnode_valid(node));
-+	ut_assertok(lists_bind_fdt(gd->dm_root, node, &dev, NULL, false));
-+
-+	ut_asserteq(9, blk_get_device_by_str("mmc", "9", &mmc_dev_desc));
-+	ut_assertok(run_commandf("mmc dev 9"));
-+	ut_assert_nextline("switch to partitions #0, OK");
-+	ut_assert_nextline("mmc9 is current device");
-+
-+	/* Disable gzwrite progress indication */
-+	env_set("gzwrite_quiet", "yes");
-+
-+	for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+		ret = do_test_cmd_zip_unzip(uts, sizes[i], true);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_cmd_zip_gzwrite, UTF_CONSOLE);
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 6d535b5206d..b7166d59943 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -522,6 +522,12 @@ def test_ut_dm_init(ubman):
-     with open(fn, 'wb') as fh:
-         fh.write(data)
++	const ulong minchunk = 0x400;
++	const ulong maxchunk = SZ_4G - minchunk;
++	const ulong chunk =
++		CONFIG_IS_ENABLED(SANDBOX,
++				  (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
++					 minchunk, maxchunk)),
++				  (maxchunk));
  
-+    mmc_dev = 9
-+    fn = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
-+    data = b'\x00' * (32 * 1024 * 1024)
-+    with open(fn, 'wb') as fh:
-+        fh.write(data)
-+
+ 	if (!szwritebuf ||
+ 	    (szwritebuf % dev->blksz) ||
+@@ -181,7 +192,7 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 		return -1;
+ 	}
  
- def setup_efi_image(ubman):
-     """Create a 20MB disk image with an EFI app on it"""
+-	payload_size = len - i - 8;
++	payload_size = len - i;
+ 
+ 	memcpy(&expected_crc, src + len - 8, sizeof(expected_crc));
+ 	expected_crc = le32_to_cpu(expected_crc);
+@@ -211,35 +222,44 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 		return -1;
+ 	}
+ 
+-	s.next_in = src + i;
+-	s.avail_in = payload_size+8;
++	src += i;
++	s.avail_in = 0;
+ 	writebuf = (unsigned char *)malloc_cache_aligned(szwritebuf);
+ 
+ 	/* decompress until deflate stream ends or end of file */
+ 	do {
+ 		if (s.avail_in == 0) {
+-			printf("%s: weird termination with result %d\n",
+-			       __func__, r);
+-			break;
++			if (payload_size == 0) {
++				printf("%s: weird termination with result %d\n",
++				       __func__, r);
++				break;
++			}
++
++			s.next_in = src;
++			s.avail_in = (payload_size > chunk) ? chunk : payload_size;
++			src += s.avail_in;
++			payload_size -= s.avail_in;
+ 		}
+ 
+ 		/* run inflate() on input until output buffer not full */
+ 		do {
+-			unsigned long blocks_written;
+-			int numfilled;
+-			lbaint_t writeblocks;
+-
+-			s.avail_out = szwritebuf;
+-			s.next_out = writebuf;
++			if (numfilled) {
++				s.avail_out = szwritebuf - numfilled;
++				s.next_out = writebuf + numfilled;
++			} else {
++				s.avail_out = szwritebuf;
++				s.next_out = writebuf;
++			}
+ 			r = inflate(&s, Z_SYNC_FLUSH);
+ 			if ((r != Z_OK) &&
+ 			    (r != Z_STREAM_END)) {
+ 				printf("Error: inflate() returned %d\n", r);
+ 				goto out;
+ 			}
++			crc = crc32(crc, writebuf + numfilled,
++				    szwritebuf - s.avail_out - numfilled);
++			totalfilled += szwritebuf - s.avail_out - numfilled;
+ 			numfilled = szwritebuf - s.avail_out;
+-			crc = crc32(crc, writebuf, numfilled);
+-			totalfilled += numfilled;
+ 			if (numfilled < szwritebuf) {
+ 				writeblocks = (numfilled+dev->blksz-1)
+ 						/ dev->blksz;
+@@ -247,14 +267,17 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 				       dev->blksz-(numfilled%dev->blksz));
+ 			} else {
+ 				writeblocks = blksperbuf;
++				numfilled = 0;
+ 			}
+ 
+ 			gzwrite_progress(iteration++,
+ 					 totalfilled,
+ 					 szexpected);
+-			blocks_written = blk_dwrite(dev, outblock,
++			if (!numfilled) {
++				blocks_written = blk_dwrite(dev, outblock,
+ 						    writeblocks, writebuf);
+-			outblock += blocks_written;
++				outblock += blocks_written;
++			}
+ 			if (ctrlc()) {
+ 				puts("abort\n");
+ 				goto out;
+@@ -264,6 +287,12 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
+ 		/* done when inflate() says it's done */
+ 	} while (r != Z_STREAM_END);
+ 
++	if (numfilled) {
++		blocks_written = blk_dwrite(dev, outblock,
++				    writeblocks, writebuf);
++		outblock += blocks_written;
++	}
++
+ 	if ((szexpected != totalfilled) ||
+ 	    (crc != expected_crc))
+ 		r = -1;
+diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
+index 725fcf91458..7c54cc7a815 100644
+--- a/test/cmd/unzip.c
++++ b/test/cmd/unzip.c
+@@ -100,7 +100,7 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
+ 	struct blk_desc *mmc_dev_desc;
+ 	struct udevice *dev;
+ 	ofnode root, node;
+-	int i, ret;
++	int i, j, ret;
+ 
+ 	/* Enable the mmc9 node for this test */
+ 	root = oftree_root(oftree_default());
+@@ -122,6 +122,16 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
+ 			return ret;
+ 	}
+ 
++	/* Test various sizes of decompression chunk sizes */
++	for (j = 0; j < ARRAY_SIZE(sizes); j++) {
++		env_set_ulong("gzwrite_chunk", sizes[j]);
++		for (i = 0; i < ARRAY_SIZE(sizes); i++) {
++			ret = do_test_cmd_zip_unzip(uts, sizes[i], true);
++			if (ret)
++				return ret;
++		}
++	}
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_cmd_zip_gzwrite, UTF_CONSOLE);
 -- 
 2.51.0
 
