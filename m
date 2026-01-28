@@ -4,93 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3776D46BE5
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 17:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFA0D46BEE
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 18:55:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F33883E88;
-	Wed, 28 Jan 2026 18:56:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E357783CAA;
+	Wed, 28 Jan 2026 19:55:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q457oude";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXHTuBcP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E115983F2D; Wed, 28 Jan 2026 18:56:20 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 53D9583CB1; Wed, 28 Jan 2026 19:55:38 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86AF83E4C
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 18:56:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63A1B83C6E
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 19:55:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45c889aba0dso611233b6e.0
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:56:18 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-37fd6e91990so1682911fa.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 10:55:36 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769626536; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BpWV2SlsxIxgkOyWe6UhI8Fy5FdJEY2s/FqGGh0jkuUsnW/S9FwYQobbRmHSWd/DWp
+ 958XyOR/QxZDhxt9NAzzB7J8DFocSPaE/zcREedP7b1P4mOgSUKTNc6T82knNSceZOpy
+ MXzHYBfBr7HBpYMDTgpUoez1NUm5VO+cVGzfA+57kpfy/0m3B87hPjaETgZhU05ISjBi
+ JqxwuNoFXe8Ygmz5fr7Wybt+BZ7x7dp5F9ZghMsiQlvjyUNWU1NWmEgngvw4wlFFm+8o
+ mOVUzG14bcXuDJ7H1vZclNu8O+ujpt7cJTft64VszvsCOoi9/IyBdRqUJ6iGM+1puKBy
+ 5Exw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
+ fh=9BPus0yw327gTQle30Kr9dCX5TV3W7iVVJS5r3yt3jY=;
+ b=CEB5JwDsv2ng01vjOZEbh3qB7ZSAcQgiTLPSBFJxmgj2J6EfcqykLNHnUfi7iEiaES
+ dSeoMuaAaSxl2vgb+qGpPzL9mfoNfPZc5pA2Bipy6S5UkO7fdpBdmzLyND8X2IIMuljH
+ V9Me1W1lmOQ6Tt5isIHf/VdUSck8XSn0stcIluxZ/kbYYoji8rWm2fD8Mz16nO5aUZFS
+ tsgrx16Cax46+IwMv6msko470WEeTdJeOgyaPrWsNLCFOYG1cpMeWD5P5m5gt5k5YEWK
+ 9wGuBZraS2Dehc2B8bMdf4BnDxovhM8uHQOd2HgGEv1i4riJqN22o3fzWk1YP+g3yRfD
+ AoaA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769622977; x=1770227777; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=t6XsL1gnjoc3CAQo/+xkgxdmyW2fazXhHXo3dPyRLLs=;
- b=q457oudeYWS0o53vi0T0x2+RxSTdYCDuYcPneRRl8SHLXOlyfuluVYpilBlLIzZ7Kk
- j1HcSMJ9wp6e1t6L42DgZYUdw80S6wUokCUZZfxn0LzjepACt1GvYRC4i3mmNl/D72Sc
- NUzD9b+z2msoyO+8p3bMugCuEJzxja6ZjziuI=
+ d=gmail.com; s=20230601; t=1769626536; x=1770231336; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
+ b=FXHTuBcPouwbwj6qlLkLIEEwweYrjAfFrL+ZPNGxELznTgsrmM68POSJTmxxYzELwH
+ X/TACVwH+ibpwGrlnhZbQJghhgxOQyIjw4v0Uk39v5RmPrk32scxfG5Mun+8Bgqifn7I
+ 9S/JzVgHbroAHUxwQaTTz6IHV6Sa0sa+jYKstj3XCGw3D/RRTEvArk9xtUnRmoQTAWNP
+ K/rJkFtQkOS5WoNNHvOdD/N+cARftpdhPFXS32qR11AJHHJevh5jt+bnsEZu/cAYoDhQ
+ fzjUWuzIq1jkfKyO7M8HWcyb/Cj2MECnlkE1H6zHE0Stl0txSp7bx95lUKvfGgsCEA7I
+ pQPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769622977; x=1770227777;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t6XsL1gnjoc3CAQo/+xkgxdmyW2fazXhHXo3dPyRLLs=;
- b=OOuxqQgvIZRcnDGykPwCzSfTD2dEPrzrojUigqWB5RmDnQynjjAiZ9FNGzhLXZbIiA
- jLnYRyyIqBC7R+xbhRO7QWweuO4cORfic+CYrS+BWqksnHpF8K97+sJremcKEabs0W5N
- VtiCLcBkiVBHYLeiDoC1QG5OLnEhgHeQzhqo16hTPd4vOGrbbYLpOy7wSfHJTCatsBbL
- B2RUXxo6za7wxhTely5iaiPEwqK1knyGVXOKFCMK39w8dzFbzkP/jgtqFRg2hDT2+bil
- RZ6sSNEDeQkvGYmo8zfww/zLIWeMITXNTFSwFm5oN3kYrOB4+q1xNr0fkCvPLOF9Bd/Q
- bg1g==
+ d=1e100.net; s=20230601; t=1769626536; x=1770231336;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
+ b=XZ8BTwaPqfQn1PoEc5su+D2tia+NDPm6fTF74YEX1wEGGsear4WVG818LeyF9Ejcx9
+ vU2J5YArYZ44xZfPPef9rSDPWuNZaNVpeeevd27OeEy97+/cj7dB1jOkuvQynDXKeZXW
+ UwLWs38lOJZSv63+EQyfFknxVgFaRnUXHKANiRXCToe9XpoG61IAWc2631oZIP9vvyd5
+ jq9zfQrQnGZLveYQQKurnKOpM3GrxRbfD9gvj3UbMFRGAHXCr5TReuJk8VeaAeO6+eoE
+ H6xRGv9mslVm8aNES4A2oTYabMPXTBLXWLx+XThQ/4hXTXe/4R9JuO5RYYChJlIQDOqY
+ pjLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXccYOwGYnmcxpVq0MuAKyTbBkryhB1Fe7qnuIMnqxsnjEUoQ8KRvQ+3i3w8kHH2AzeSscPb9k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3ZmyFPE/t3lk67DR6mCRvNJLIYO2jvZEqUBxtNjLu3/pUVCFP
- x5/YvUUL5+RpDIgMZVI2A1SM3FIUhgMMQ4cVBtQz8bCi1GCRZ51K41dZF1orhrroOOc=
-X-Gm-Gg: AZuq6aKnsE5JDl8/00MW0XMCM1g76avmXTPnq7Zc0Xqju8oUUmeD4O4Q7p5qaMoF2b+
- xAOqkgo9zxwaEsjBWW/WXQ3GHQiouOX5iZE69IUtfZ8bniNNOgskmf9/rxmtnxq9RRnzinCMuhV
- LgT86K3ixXKgIaQo2mIFjmMkKLmd/RuWageo6VCYz0NnNDXmMSR6xo2lm0cr3a+jiAgSMy7//8g
- FkmVyUa5MJLax5Yd0tudhJ4LsQS08XEY6zoz4raYI8jvCzgs4HeSJXgH4zgoHojhtultm+WdSPM
- WnDTFM/9aVRchQPQE+LLhkPAg2FrlB1bhjuLaxl4F+djQGxRMaOYYEoH1vQVSzXQUbtxkmNRrYE
- uOTUk77a2gHYzwSSiXVVyx+kj8Og1KPD+0/c5NuMF2ZAF16b3I+XQPVgn1jZ4ol1PziXlzUZFob
- gmsTFv9SBuH+h7v49XdLOOwlu9shjjMF6AB94vqJ3nZy1lof0ohSO/+NmwQfNtcG+aOAk8Q3QvT
- +qGPpHN3BIkoT7LaKu28suoQ/XNfoHqXow270mVCg9rSBn6Uw==
-X-Received: by 2002:a05:6808:19a9:b0:453:ea2:36d9 with SMTP id
- 5614622812f47-45f1e407e0dmr129245b6e.32.1769622977372; 
- Wed, 28 Jan 2026 09:56:17 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45f08f22826sm1600703b6e.11.2026.01.28.09.56.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 09:56:15 -0800 (PST)
-Date: Wed, 28 Jan 2026 11:56:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Sean Anderson <seanga2@gmail.com>, Beleswar Padhi <b-padhi@ti.com>,
- sean.anderson@seco.com, ilias.apalodimas@linaro.org,
- malysagreg@gmail.com, sughosh.ganu@linaro.org,
- philip.molloy@analog.com, marek.vasut+renesas@mailbox.org,
- james.hilliard1@gmail.com, anshuld@ti.com, afd@ti.com, nm@ti.com,
- vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, bb@ti.com,
- praneeth@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for
- flat_dt images
-Message-ID: <20260128175613.GP3416603@bill-the-cat>
-References: <20260128141834.2322865-1-b-padhi@ti.com>
- <708253cc-be1d-f375-0427-91658d5e88fe@gmail.com>
- <3432c5f4-ad37-46fe-bac3-ec0fc7778767@mailbox.org>
+ AJvYcCX1Hzt2UsLe2QsvCkydVeo8Qpvnif7ly7z2Lncvq7rllyf4p0OOaH73H992GACT/qLq1l1hlyM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOzEdWmI8De1V2FZkCqtbpDSVRM7WcY9x52QFKu+eQA9gcHJmc
+ kGnD6bLPYBahfX3VVx1fLMowIS6Xw7SYL736y3a6jxGCjHxizSMzlSfHgWSLbfhYjm+JCtzg/Kg
+ oWBLI7cYy71sdJwCf0GXcWOQ6Sowdypc=
+X-Gm-Gg: AZuq6aIFN2f+AAXiffeKwDhyC3J6UWFlipDCCWZprq50m4EcJX54iXxdlcHH2h4e320
+ F8jr2lSs43QyO2ESfFIrIFskSanQ9Ra2KyZ9w1aypQIzDaiAnwzYgv76oQJiBcbMukbEA/ZnqRV
+ jhoJiVoO0vaM523s5PSciORS3PfJSHicbke1/NGcLvsQ4ixiGcV3kWQngNrBHV6lz7OQ6OJRDTb
+ XzgG6qTO36TBzXu89BifrIQREvZYXsloFERLU26lsUYKPVmCE45WdMT1hEoZmeMybQutcotHDJU
+ OBd0nxnc7HOZ3P51Z0Mkw/QNeHg=
+X-Received: by 2002:a05:6512:23a4:b0:59d:da10:4234 with SMTP id
+ 2adb3069b0e04-59e03fe1532mr2662984e87.0.1769626535237; Wed, 28 Jan 2026
+ 10:55:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zM7J5GLV8ilBAi9I"
-Content-Disposition: inline
-In-Reply-To: <3432c5f4-ad37-46fe-bac3-ec0fc7778767@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260122-imx-clean-v1-v1-0-a52a94b7e173@nxp.com>
+In-Reply-To: <20260122-imx-clean-v1-v1-0-a52a94b7e173@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 28 Jan 2026 15:55:23 -0300
+X-Gm-Features: AZwV_QhcOSteXvyuiV9VIanjM4m4QEiu30BnC6mNpH708uvO9HkX89GKwHGRicA
+Message-ID: <CAOMZO5APUR+ahmad69iqpWQpD-u-m2MzoWu0g52kykBweKD3kw@mail.gmail.com>
+Subject: Re: [PATCH 00/12] imx8m/8ulp/93-frdm: board cleanup
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,58 +117,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng,
 
---zM7J5GLV8ilBAi9I
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jan 21, 2026 at 8:51=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.co=
+m> wrote:
 
-On Wed, Jan 28, 2026 at 06:23:20PM +0100, Marek Vasut wrote:
+>  board/freescale/imx8mm_evk/imx8mm_evk.c   |  3 ---
 
-Thanks for taking my request and doing what you're suggesting should be
-done.
+Now that master changed from board/freescale/ to boad/nxp, this series
+no longer applies.
 
-[snip]
-> -	for (node =3D fdt_first_subnode(fdt, images);
-> -	     node >=3D 0;
-> -	     node =3D fdt_next_subnode(fdt, node)) {
-> -		const char *data;
-> -		int len;
-> +	fdt_for_each_subnode(node, fdt, images) {
-> +		const char *data, *type;
-> +		int pl;
-> +
-> +		if (params->bl_len)
-> +			align_size =3D 8;//params->bl_len;
-
-This should be params->bl_len, not 8.
-
-> +		else {
-> +			type =3D fdt_getprop(fdt, node, FIT_TYPE_PROP, &pl);
-> +			if (type && pl =3D=3D sizeof("flat_dt") && !memcmp(type, "flat_dt", p=
-l))
-> +				align_size =3D 8; // or params->bl_len rounded up to 8 ?
-> +			else	/* Default alignment to 4 Bytes */
-> +				align_size =3D 8;
-
-If not params->bl_len, then 8. If params->bl_len then whatever the user
-asked for is what they get.
-
-Then post it on its own so patchwork picks it up and I can grab it
-please.
-
---=20
-Tom
-
---zM7J5GLV8ilBAi9I
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXpNvQAKCRAr4qD1Cr/k
-ClHLAQCqc23XYIRoJztCOFjMaYJ92AljpKIyIe7Eax/9F7NyQAEAuxuPlHnWLp7G
-s3JINyfXQ3USFuMGyunemOykFrayNgk=
-=6i2j
------END PGP SIGNATURE-----
-
---zM7J5GLV8ilBAi9I--
+Please rebase and resend, thanks.
