@@ -4,149 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B92CD35687
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 08:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A97BD35662
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 08:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72B138429E;
+	by phobos.denx.de (Postfix) with ESMTP id B287D842BF;
 	Wed, 28 Jan 2026 09:05:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="s2TCkYas";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="ebFdGZaj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5972C83B87; Wed, 28 Jan 2026 09:05:33 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 1842083B87; Wed, 28 Jan 2026 09:05:34 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E94B84280
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:05:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 131FD84286
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:05:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=byNA5J9C+P1IjP3qouCI3oJ1nvjYHssS+zW3ew+Pu+4/aL9NFYEr7Ls5QmAenxZW//l3TZ4Cgg7Ak3Qhjw2R6IMp7qCium/loAnuntbR/xiHSrch1w9b3GKCW3CahR6YrzjuC+xTUrwRXUFyCvVoFz0tusDpa3n52SBW+Q7cFEywy4xxnqPObPPXYrKpI+JQ7mbc4yEg/iRI7s7ZVa7bZrcXkVpEtJFiW8ELnFpmSUbJTMTMNPcLB2cg1NZCnXW4FjpHfrp0yIP5gOdHWhKsTUspXD4LavL+77L0gIq42x1oX7wa8oPPDx7tz4QPq68XNkMg8gp/2OosEzranO16RQ==
+ b=R/YQGj5aw6/XO4HAmi1MPkWCYCvV9ga+LdrhjPpsR3ntZqGsYKS56DTQkbf3Fe0GCj8wDAcd5TQh6F6khYYT3fdrB4WLFtybuSiCaZIO0tF26vh2qv8C3Itv6LirJEjF8f6Yf5RftWDIzbIY9GYXjjBYZ3muC+Mbvf7nsL61Fqekd52y2tSzy6U14lWFKj8rak7sRx4GHfe/2Bik/w/IZ+LBkcZKio9gBRv9490baoVJnsHIiAU4MDwHBjTlDHK1kQyNiYsZggTw2TG8RRlxZ1s8Ygsd/ZkC9fKvdr30B5LR4KpOC7TamlkQRVzN3fMyRW7cB3tP9QGYSjQogHmDyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q2dzx/1dvm8+sPnkdSr9YxIewr+2aqAqhCFKoOR+Kqo=;
- b=QrT8zKn4H9DBea61A8UVApncVwwaG+Ds1b27bI/dJcStZHeqgeUHpEMhEb3GhDh0Ie2JKwyuN2fAkC5j9+/dBcoLF2D2g1AtGVx5LArQyK609CW7/ROvJODK7OwmuuyTrPSAjS6iZcHE96Xmp9Vx0UJlQmE3L1uf+YCnQLqONr+3BwphipBKtPz6KvcstVsKzNH1cy2prKqQacwd789m8k9fwN6rUWoFoVv1mnCNkIO2PnqbOlYswlIfxkPk7j9s0cM0TQB0cs/JP41d6Dv9b6CJ62i+COx35tLcTkiHw+FI3sfTtAtC4Lqy9LR+DuyFTiwBqHqvGDIBNDhX5NM40Q==
+ bh=KvcDsHHKQBvGPhdBF15520xnz8aqRi4H5vfU0eJx9XE=;
+ b=ygP5ILGxz8C2hEO/geuSF/yW84kEgUx7S+iZlEV7OvRS+dtLSbJyBrUmZcBqUeiFM98bk2DjIR0jYdjr0PEYnpfCPYbn75pgTlPSVS1VrHe/JZzP525/u0ktuygebSaF5OU4+rjPgtaHQ09GWVWSoFBToUCo9yrwaEZsTVa86jTYCA7CjtKxZdoWjRKDwEBldIktJjKj4nOoCvVQnfQS5TwhpKxRX/hc2sdSu3gN27Xc0UpDCMHyVeSmB4s8AWx2W3ok04K3h2XW4KV4EiKYjXWowXmyEjAKTx+lrqkyFW22IqneebiP0Tj3Gh0Kgo3r1nn3fIVP8LIcN+pBkCF98g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
  header.d=mt.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q2dzx/1dvm8+sPnkdSr9YxIewr+2aqAqhCFKoOR+Kqo=;
- b=s2TCkYas2/DwQs5BKrL2IodiwHeiTIZMlE/d5OTelEj0zqJARCA4ChaJ5XikIW/yC0KmHgYGEgicFBUsE49CJIb/6EHz2tWv9+nTCEiC8n0V+cVsIAKZc13no0aomZzWqA3FNTi7rnghH6nt8cUf8caJ+UezH3wYH86q02SAXRciiLHv2E3TnOEQR+8J6fGhoQqQszYR/IuwvPPE83L2jYx0eprrVH7Es8rjc/f64tSemt2TlbXgXvldxxqlKi4dwCMylfkL0u9RC3KaDtymMlwJU2ZLdz8Lqfz8u+FcMuqCrCvRAWtdy8VKB9cNmpwkvCKCYDFyfb09tsOfQCitow==
+ bh=KvcDsHHKQBvGPhdBF15520xnz8aqRi4H5vfU0eJx9XE=;
+ b=ebFdGZajgdK3xoNN9RbUYk8oe+AW5oi8BN5rIkQ2KLEisUnlyCB3y8i9zBFZipWvlvWnUVvpSDKKhxEEq2fUhI3hrnHvsFK0+Ntjj/6uLW/TWoZz5NyD810OgEKTWWP5kHVQUtmpi79WFd5nKLj6KPW91uzfEuDB58k6MuF7QJe5Px9v/Wc8JJ53qbaa1LpI+cP/a4ZpJv+f74RgNSHCYTfZUC/COSudWIUZgGA3pGI6/sxFT60LJlUMG0TV8pafq1ozMGukkQmBSR4aES7Fb9JhpfdVlby++GR5FLrqRyl/XeGuEBNZdoJA5rBmOgiTk0jmRbNpzSDi90+x1JNcAw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=mt.com;
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
  by VI0PR03MB11456.eurprd03.prod.outlook.com (2603:10a6:800:321::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Wed, 28 Jan
- 2026 08:05:28 +0000
+ 2026 08:05:30 +0000
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9564.006; Wed, 28 Jan 2026
- 08:05:28 +0000
+ 08:05:30 +0000
 From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 To: u-boot@lists.denx.de
 Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, trini@konsulko.com,
  simon.glass@canonical.com, quentin.schulz@cherry.de
-Subject: [PATCH v5 3/6] tools: mkeficapsule: Fix dump signature long option
-Date: Wed, 28 Jan 2026 09:05:10 +0100
-Message-ID: <20260128080515.1275941-4-Wojciech.Dubowik@mt.com>
+Subject: [PATCH v5 5/6] binman: DTS: Add dump-signature option for capsules
+Date: Wed, 28 Jan 2026 09:05:12 +0100
+Message-ID: <20260128080515.1275941-6-Wojciech.Dubowik@mt.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260128080515.1275941-1-Wojciech.Dubowik@mt.com>
 References: <20260128080515.1275941-1-Wojciech.Dubowik@mt.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: ZR2P278CA0059.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:53::7) To DB9PR03MB7180.eurprd03.prod.outlook.com
+X-ClientProxiedBy: ZR0P278CA0219.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:6a::16) To DB9PR03MB7180.eurprd03.prod.outlook.com
  (2603:10a6:10:22d::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|VI0PR03MB11456:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1024b87-a78f-4117-270c-08de5e43ffeb
+X-MS-Office365-Filtering-Correlation-Id: ce48e48d-cff0-45b1-e784-08de5e440135
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|52116014|376014|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nOboSqiZJO0DMM8Z3c6J7aR4Z6IHSicyO1fUbPcObo4zy7xoP1UvFR7o654Z?=
- =?us-ascii?Q?6ZitNzn+vHb23yw3gwYOJbhUzgWMhZmRjtJb3KoSmCZYgeeJvP1+2NIwxN6Q?=
- =?us-ascii?Q?ZSUE/WEO8ubjuT6l/JB6TkTPQXM02nqhc42mNt08CpgcVKmT0yKf2bkjH+T6?=
- =?us-ascii?Q?XKUcXr/xjXwoUCxiYd3RR24BAPiKryybNc+1041f9RO3uU8nVqTT/qLvvaGb?=
- =?us-ascii?Q?T2eFPABNX7InxAh1V+MAP6VCxk9+S456QPcfkE4nCjZ3e7vILV/S+nCUiy9r?=
- =?us-ascii?Q?2vpEONUgwjNQRlgtu6xDoggE3DnyCSfToeNS2tm9lPGv64VwLfB58WBmH79V?=
- =?us-ascii?Q?LFrvQnIi573sCvbibBhQFforiHM0EscYT3CIOhvAtms7x8p7VSxGUHOcQM0n?=
- =?us-ascii?Q?wDzazkpDK69Hzd3k4mhIhg4sVMjr3zVnpjdkuX8Ooq8yuJ6qFHN9v3BgUTKF?=
- =?us-ascii?Q?wICHSBljaoSJSbm8yHcJvZ75qSKwWxEUFUyqmEPAFZrsB2U7e/G6bH3A4MQG?=
- =?us-ascii?Q?l4vS1tF1v++yGuxb6Bvkv9duASc/uBFpwIuBw5U0koD3ZwzlHTgwCeX6992N?=
- =?us-ascii?Q?UQnUeeAaFAcBKW5wOcXkC5ApBKOntMUbVwBqWAxniU6aHygKvkC5LOLRBFmC?=
- =?us-ascii?Q?wLDr8GFravcE/i8ImVN7QJ1557YeecJ4ZalOmzulUCq6pK3+v6uH7YzuoEb4?=
- =?us-ascii?Q?G7qxisZs+vqqtj1qYABf5+vdbnm3pc6RIDK0m5cujy5GyKR/nENQoYJyn22T?=
- =?us-ascii?Q?ye3s3Ha2Uvu5GWLgls9lCjb0i9utiTf7eG0cCZCMfnbcjbtvC+fY1rZm+9Rn?=
- =?us-ascii?Q?uemGj+5EfXvY9VkH1K6rA0z0Jy3ZaE+lEFmYlJ6vyAEsqAFxzovCCqkzQMlq?=
- =?us-ascii?Q?OA4TbMySLD8axredckxh+1M/C5oIvxyMrrTaExANuwSGwRFMSegABv07E4s1?=
- =?us-ascii?Q?Ubm9VaYbXK2oA43e05I3U2Dywv3ZqEvkN2vdWL2WtvDYphdHchF61Q0fFyQY?=
- =?us-ascii?Q?ojnx/pCQ76/aIuthPXyrTdGQxJzIdqve9UJZjQkXukOBtda1XNKrRQTeKuz+?=
- =?us-ascii?Q?t4iTPgyFophKa9sIAvg/x5p1qEwHR8dVpMqg82Tx2JZXApWUEWpl6IVNqB+n?=
- =?us-ascii?Q?u0W71/v5Qt47NUyv3oD0eCY36lyIAQjklgbWG4TJYy4wX99p1meBcYBKS/qh?=
- =?us-ascii?Q?gt6kScZHSorTdAblJjvicOCryYTxYtno8+dL/NqZhf+KvIm09+TC+QaW8JVd?=
- =?us-ascii?Q?t5efXGaWSD7zJFaCC79A6AXAZYQ0jkBuQql3cdibB21EdeZ5R9NXKM0q+GzV?=
- =?us-ascii?Q?48wBb8qb8/5NePNgmlA4nrCfq24G9W/l1hmyS0Kvk7rjSNAAf4EM74uG5V0a?=
- =?us-ascii?Q?bMSC/rERzsCi565/QWNqTCiKD1nnsCPccxHRqhdwK00OY38iFaHKtYlBctLw?=
- =?us-ascii?Q?dMnnrw8EP1BbD3d0G6ZeESkAvsqi0+vc2xHRXOHoDdiHQalBedGNCU2q2GYp?=
- =?us-ascii?Q?LRhYGtVn/OWfrDJ/DVjRKaErZZjt5u2MyyOn21tg+kUPJE1pUAENTPiYHdEX?=
- =?us-ascii?Q?YzxF4uXX+ok9d/TFAcifTVoaJY48cPm+9Voo+HsMhaVfqgD+/Nm9hFKqYhMY?=
- =?us-ascii?Q?Ovc1NVc4JNHvNumrfMwUoew=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7vl6Ue9QXRgxwhay2ko+vCaQ+0CzcBeqnViAozg9iVnrnT/lpNany/lYJw2k?=
+ =?us-ascii?Q?QkLlI7yywKNXEYEBQ7Jf7FiZFxVPT1qsqVtEwFqIBYGMriw5l6ESDxqZ0u7O?=
+ =?us-ascii?Q?jTKveMTncJtRS7jb2WbnM6zCKlLZlUXl5fwFnzNwNoaqOTXxjeHs6AMt1/dA?=
+ =?us-ascii?Q?7zA75MmIFqXX2xI4z3MaUBdzMxhS0AJwXR57j8TpkyGFbojoAPjrK//4tKaA?=
+ =?us-ascii?Q?dZf4vaalmk+0RDDE2RNPhYNgJkEE7WeXPmlwudGho0+7g9oB2+/chcb57rxq?=
+ =?us-ascii?Q?PUSR5IehrNozKXIpWYXqS3rY65p4OOpdAPZ60Vhooz/pinb+A5qFAgOOUbEB?=
+ =?us-ascii?Q?WuMpwSCW7gYDsa51PjFpudUexl/El1CiddJy259P9aA69KMtl98xqMr3udZj?=
+ =?us-ascii?Q?BPlEaOMfZ8GV7wHfqSLMA1Ai916fjbocH/O1EFsdLzwzzf5FGPcMimWcofKN?=
+ =?us-ascii?Q?qxQJIzjtOnPUZB7f7G2DU99sao1PukiD7o2C4qMEtoCBmReu2EBcozi32w/w?=
+ =?us-ascii?Q?VeAbGXDtP7xhWBdTe8GYDZL3L0Y6aR9SM0rZ1qnZFJnyFDXSsRdhChBNEwfd?=
+ =?us-ascii?Q?uP++nHFvRyjEWX+hZOmiVzG6NaC3godYE3Eu7Dya+v9ukm03NHPzFim2BuIe?=
+ =?us-ascii?Q?FHIZowSKBfpSh+1VA6mrzvyoz7oZKoc6ZidahGEThdeLNnn9HM1EJSQE0oxx?=
+ =?us-ascii?Q?GJ0DxRZPIW0RikhLfbupewgqNBJFctnrL/66nigJLg3lIV5e5y6xxmRbT2lh?=
+ =?us-ascii?Q?aRAcp6Yf9GUW7YTWRUppY8a885EooKk/tVuG8lA28mCnW+f2OpfeQMfMMiFx?=
+ =?us-ascii?Q?ed8IMt7qaL2kTFjCwsB28Cb5e0k4jTr960jwjSPJwVQbckVWbo/W+r34yL7e?=
+ =?us-ascii?Q?Fun3FsLCgOsHrtj73772n6sSZGT2eO1fTfvi6Zcnm4Bbnz7+Ob0zbFV83MNS?=
+ =?us-ascii?Q?KmtplIkD6mIEBf8ESc7vLRzpw9eWHmsoXiWCJwWk8rfEUUtNs3Xkb/gIwFpb?=
+ =?us-ascii?Q?FrrkiIZwfHQVwXqes+vNWxiuaTYF6j5OeceRm2YLLgMoTHH4Dc9BPBqHqRxL?=
+ =?us-ascii?Q?JaZXlhmXjTtlYT7g1EL3xkUB3wNeHvv0BJbFkeu1UIgltML5ua5iN2RF6dZs?=
+ =?us-ascii?Q?/6eLcGwEQuw5GmSoWuI7oFxnhLjQBdf1L6S67mZ+BTKZotfO/jLJHmDlo1zv?=
+ =?us-ascii?Q?ePtFgGS43+RUXoZ4dgCBQa//gVQQQXCPESYrJ39ESUNIBn79uAoSGaeQN0AK?=
+ =?us-ascii?Q?Iuf3Haj7PX6cB7nvJmxaECcEXA3BNw3gjEcYaGrz2Pc2YUfGN/IGUGn6WwJa?=
+ =?us-ascii?Q?6HcWvFC6VVWRft27EbICFl6osXuA5FkPPxDCgLV/37GQo8fITcbIlJBcOiio?=
+ =?us-ascii?Q?of52XV7j9n9o39erMN5qXe/01lsm0gvnMWRC8ZKO0bOV1Xscd/HW27iv5fIM?=
+ =?us-ascii?Q?/sVLqjPE+1LCiOq96PGEXHXa8v+OVKp2W/S+BEtFIluoghFm3O3TiYJftIk1?=
+ =?us-ascii?Q?+esFo/hkWUD8qPOsU82zMYp5He/69qG86L0BV8+lrCIgF4NqZYJF5QQ+F/Lh?=
+ =?us-ascii?Q?NvhlqWWC3XSzixCr4ZFmmDQ0k24cBJ/CqRlcWEML2fFGkXyJn1iOoDtEy49w?=
+ =?us-ascii?Q?/P/tj5tQqMJqE3/NkrokQg8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(52116014)(376014)(19092799006)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yXTxELWGywGvw0IwUpS58b/h3XQHHD1DfKoyuvzR6nqGRSBHNpl9BCSLZe77?=
- =?us-ascii?Q?aWS9D8gtTbObHwEQzKgwbGe0xU+ntp8yQUrnkQBilgSSgB9snGZZANgxsJ/X?=
- =?us-ascii?Q?Cqe+F5GAc38RpsRPTqCg5Ul081xXGSBMCiGif1h/PKtviNEFL2G3fz1JCArH?=
- =?us-ascii?Q?MWnHB6VqcI+aLGhfgHpl+c39gKxtCfKdqM9hB7YZG5JDF4gk/b1PyGbkyntn?=
- =?us-ascii?Q?38Uv2J3x3zGxFMMRBOVPZ1ludGzP+n4qS7/x/qZjyz25FDYKZAMIl3tjllV/?=
- =?us-ascii?Q?vKJzHOGUJ+Yr3KVwImd1SDCbmfJdhfrIPnwPUPK8RS3wLLp2xkeJJba3FliY?=
- =?us-ascii?Q?cB5We6VmWWzfEb19+b6kFfPYoWmNd8ligPXtKRrGbCUz/PxtpppoMUbeQuDv?=
- =?us-ascii?Q?jspX2apUliHWvf+VnspLBSujOqIUxYAT8JY50s6l6hgNEGohuMxhkv7xMPtn?=
- =?us-ascii?Q?xDljBBs/FU9xozQi31GiF0Mv6Q63Be+Maf2gvMx06qxjBN+6K/ybxGZOwQVo?=
- =?us-ascii?Q?TZ+XK7Y4NO11a5mapiVuH2/DcpVCrnx9kyzGXavoxUCiee7FVXQQcIbKUkOc?=
- =?us-ascii?Q?PaJFJIFsmzQY8g5fJDMAQa8qq0C7RZ2FLTRBBmGgaOCEf5at1Gai0bXBsnCM?=
- =?us-ascii?Q?83ypvHU42SocJHVIm6an9ziFzmfETQWhPR6+7CTnFB9UkYPHnACcUYNsknQ0?=
- =?us-ascii?Q?DzUSqNwzbE0gXMyUIkvad85DBJRcgDzLt3iNfG+4kWRkt5aXAWCfFMJhLbxX?=
- =?us-ascii?Q?V/nm18P6PTY20aJSetgjEmzYeAKjWXO2gZeKq9TsXyrd6LAdAJxPsakGkM1S?=
- =?us-ascii?Q?U8hxpwwacf7gsu9DvhHpfxISY2YXGacdIXUZq56lHzNo106HE9RR7qmQpwZ6?=
- =?us-ascii?Q?nr/y7FHoVB/gpNgl3hIecqmyiig/kHC0NPeu5ChvI2N6d3RQ117RHcnIkabY?=
- =?us-ascii?Q?iuLIJ0P5kTgDH43UGEXs0dv3xPx/3gpyGREWot96pi0Vf/gaxXDA7q+71dhd?=
- =?us-ascii?Q?e2WldAgUqEbLQpkALtA6M2FnkO72PS3jphzPa01TqLlEMDDWiqbg9lxc9gCk?=
- =?us-ascii?Q?7R2mby00zIhV43dITF2DcOMuPZb4ciobapNgvU2nH8th0Jw8UfIhzWES0o+j?=
- =?us-ascii?Q?kWaqvOVunj/tjNjpv5NFN9avhyGVX8qGuJqv8+QgzmC8NwrB2/AW8L8M9mj9?=
- =?us-ascii?Q?5yjQPoa6SvCia03sfx9ugtrO32NHWSGnmceYEf2t8AZ2hnJroyH7eBsYMmby?=
- =?us-ascii?Q?7UfvgM7LahljiYwDLqXxWB306MyOIN0VFzO69s+WNdDvgZhT9Sx++uMu47tf?=
- =?us-ascii?Q?eor/bCfD+zW2vSqEEglX0DgEKYGOcnc5jH5SsWweRKqo0uKfnicL/CiWeDh7?=
- =?us-ascii?Q?ugbb/jbYpjORAkeCxg0FKN8bULsWV5Ha56P1sF7CFcgZpuuROCAJn+9sL49R?=
- =?us-ascii?Q?Gyhkc93U9AVwM//S1f8RcKpwZSk+0veagMQAVKsbV1q+2w5Ya1UhscNipaAk?=
- =?us-ascii?Q?bN+RaSD4IiT2doeWBq8rYTyoFuwb4OIK78kzOAUB2gYWQfJeJdUNxmWdfUfi?=
- =?us-ascii?Q?/14JQqYnEYfGdN/fYIXl3U2msvTG/HDVwfu0oN6XCzZzGOA7xaIXhPojU5Oo?=
- =?us-ascii?Q?tBRf51ssKU9G4pYeB0yXbsU7bmJsw/sW3hNTOHFp0kVeFEjPO49gdDDNTxrL?=
- =?us-ascii?Q?mlUz3kS8wbyVMmCgVtmiZF9LXZyvxikfRXD2K1LlDaPNNfr4kqkOKp1OoSEQ?=
- =?us-ascii?Q?AZrCmESihA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uzX39Rdgt4iGU0GSALY1JFL6ak8MzVNEfatc4ReEwRocBXFT66WPdqLQhNLm?=
+ =?us-ascii?Q?cN5X8+1KufNeR0Npo2FPoZZvQsTSeUY8dvTXWtP3EM1CpyzjVi74XYq+6TlV?=
+ =?us-ascii?Q?AIF3gZB0MZkYSvRnFMQordgWl2q+/RSerd6A4tt0E4Wvy5kW3deLqBaEUKfv?=
+ =?us-ascii?Q?XHd7uriwpTojtQGWdOrqi7dEhqaOm1eCrFzbe/NlIB5qLiZF5MFDdYzawMq5?=
+ =?us-ascii?Q?bXUAvjoasjnn2dnoBSd+TVKJ1mvPOjyfi0ApfSE1OqmPs5PNNsr3uvv9+iYl?=
+ =?us-ascii?Q?/I/11tY/+BEg1sa1MEnzfXosm0/9/yRoSVE5JbcFRuY6k2FfM5R/T/HmwJPK?=
+ =?us-ascii?Q?CwSlerbp4bVdVvjV0jB/1lzKnG4bT0KJjPvJ8gaBgTYmTaokmT7NZMqPAChB?=
+ =?us-ascii?Q?0NpVVCuAXWXO4ZkBPPdo/FbKnGYmVWvTUfj0NATvLeDKz3sRnou7Cg+lElT3?=
+ =?us-ascii?Q?S4MkCgmGDiy/+EqSKV19zNef1Vi5ADCD7ohivdHWtA4olZ1LVxaBlABX52S0?=
+ =?us-ascii?Q?VyjGcr4ngrYcu4/4nFuRsBekqJYj7oo39PIhR3wq9WCIZuFfQedm+eaC48Qh?=
+ =?us-ascii?Q?mU/d3RCFUu5YyJ2wMjO1OZ7QrQaRgI+d4tePXaeRygFTbFjqNU0znpQWAPXr?=
+ =?us-ascii?Q?rkaOTkzTYKapHu8swxU0dWwV9aDFirXtTg8d2dHHAZmGExHigsWlS+wcCrOW?=
+ =?us-ascii?Q?WHS/JOsXRUgx27pwQdq9QFKEUqrPhJX9Ulha/49oSfcb1PHyNwMg3R1VaKWM?=
+ =?us-ascii?Q?T/Ckr/JuGHFpEIgPNZgiTgwHav276qEGZ2i/nsIB+mMj8R3Lhuwb2biVLXlU?=
+ =?us-ascii?Q?HiMS/0nfssj/dGQQPVFpjCmcnI01/m3fe79MxFk5ILogAWdebdI/To6SkLFz?=
+ =?us-ascii?Q?j4KoC++4DhmHTAyIer2vQfm7FhKHtrNccgcFxS2OIWLjRJYNiaWjeUzRoScT?=
+ =?us-ascii?Q?lm6Ab1d2hRYaOCPau7qcPKlQUJD+CcLZVfu+1y4frXC5uRB2PaemzN6Z7DPk?=
+ =?us-ascii?Q?fPoG24E8cTFjkRC51HUTKlA47KGQVNzwusNoovs0YViGTl3cP1Ti7J0WHBRT?=
+ =?us-ascii?Q?eAn9RfAB5CIib2Y8cOvQMlt0J2lJ2nz/T/7GjNYAxHWLd1DMHImLDDXlV8+7?=
+ =?us-ascii?Q?DIurwQJ3U5W2tWFQKQxbXPCo/TgaD5YbJlDlMEESh3ascTU2YI25k0r04gcO?=
+ =?us-ascii?Q?gbV3wRee/vUCKSRrkDNdhcGqQWSr9k1Xkgi+ai4FgcDvdmyInXAW9iqqj81I?=
+ =?us-ascii?Q?0W96aZtZHaeuHMuhJdgJtdmGdVSrjySM3w7WKSodMmqFo++K5gJJdBM13jgG?=
+ =?us-ascii?Q?s5gvIU9+iG0LHU2a2q1wdNS+HNZ9ZOHhgRvsxFUZcydNnlRlISkiV98wuTxG?=
+ =?us-ascii?Q?cjdQRk15wkNnnbecj15sAhpEOYNjCDy66EWHZtXdl5orPJGLaH0ZYVye5JgJ?=
+ =?us-ascii?Q?mKNKZjr5wT6cbvpFt1t5aqnXICPn5PQ0wMQhZsHlwPj0tCC79+KieQzOup49?=
+ =?us-ascii?Q?znSzCAIwDt4iJWya30y/YLRcLaboEaf5zW37/ltIyZelYQcHAdhPD8BvPyrE?=
+ =?us-ascii?Q?DzJUntnakF9x5tlNo9QDq1kaOuwPLMt4fwOVYHNOEEko6aWuOgsXW6fWHzxC?=
+ =?us-ascii?Q?VLRb2o7a1G2iLzTHNvqQRHgczAd/Np2IRHHCviwIYhD089/MYURkqo2LZLE5?=
+ =?us-ascii?Q?yBC2EAkg+bVY4WlYKC5Cjo3SLObpgDgXduIrxQUM17RJ3jc0xaB+J5XEwr6F?=
+ =?us-ascii?Q?OVG8h87TWA=3D=3D?=
 X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1024b87-a78f-4117-270c-08de5e43ffeb
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce48e48d-cff0-45b1-e784-08de5e440135
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 08:05:28.3466 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 08:05:30.5101 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t+odARXUwgfLoajzEeOfmz3GqNS1uxglCbIDTjKS3fvDIdYOb9g9Tdkx3wLuvh2lYJjCBctkgH0dvIKTTxmqMA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: f8U7iBnOSFgborhsZ9Bhr39pvCSn7r1al0o10tDHtigDEaVgNCSayMdOUNQg1dpDCfX+z5xpm73EwkjXPE6cUA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR03MB11456
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,67 +164,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Only short option has been present. Also rename dump_sig
-to dump-sig to match with other parameter names.
-
-Fixes: 16abff246b40 ("tools: mkeficapsule: add firmware image signing")
+Mkeficapsule can dump signature for signed capsules. It can
+be used in test to validate signature i.e. with openssl.
+Add an entry for device tree node.
 
 Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 ---
- doc/mkeficapsule.1                 | 4 ++--
- tools/binman/btool/mkeficapsule.py | 2 +-
- tools/mkeficapsule.c               | 3 ++-
- 3 files changed, 5 insertions(+), 4 deletions(-)
+ tools/binman/entries.rst          | 4 ++++
+ tools/binman/etype/efi_capsule.py | 9 ++++++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
-index a726149ba2ce..d6653ec42472 100644
---- a/doc/mkeficapsule.1
-+++ b/doc/mkeficapsule.1
-@@ -121,8 +121,8 @@ Specify a monotonic count which is set to be monotonically incremented
- at every firmware update.
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index a81fcbd3891f..91f855f6d7a3 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -552,6 +552,10 @@ Properties / Entry arguments:
+     - public-key-cert: Path to PEM formatted .crt public key certificate
+       file. Mandatory property for generating signed capsules.
+     - oem-flags - OEM flags to be passed through capsule header.
++    - dump-signature: Optional boolean (default: false). Instruct
++      mkeficapsule to write signature data to a separate file. The
++      filename will be <capsule file>.p7. It might be used to verify
++      capsule authentication with external tools.
  
- .TP
--.B "-d\fR,\fB --dump_sig"
--Dump signature data into *.p7 file
-+.B "-d\fR,\fB --dump-sig"
-+Dump signature data into <capsule-file-name>.p7 file
+ Since this is a subclass of Entry_section, all properties of the parent
+ class also apply here. Except for the properties stated as mandatory, the
+diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
+index 3b30c12ea514..022d57ee5519 100644
+--- a/tools/binman/etype/efi_capsule.py
++++ b/tools/binman/etype/efi_capsule.py
+@@ -53,6 +53,10 @@ class Entry_efi_capsule(Entry_section):
+         - public-key-cert: Path to PEM formatted .crt public key certificate
+           file. Mandatory property for generating signed capsules.
+         - oem-flags - OEM flags to be passed through capsule header.
++        - dump-signature: Optional boolean (default: false). Instruct
++          mkeficapsule to write signature data to a separate file. The
++          filename will be <capsule file>.p7. It might be used to verify
++          capsule authentication with external tools.
  
- .SH "GUIDGEN OPTIONS"
+     Since this is a subclass of Entry_section, all properties of the parent
+     class also apply here. Except for the properties stated as mandatory, the
+@@ -101,6 +105,7 @@ class Entry_efi_capsule(Entry_section):
+         self.private_key = ''
+         self.public_key_cert = ''
+         self.auth = 0
++        self.dump_signature = False
  
-diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
-index f7e5a8868495..f2ac654db81e 100644
---- a/tools/binman/btool/mkeficapsule.py
-+++ b/tools/binman/btool/mkeficapsule.py
-@@ -16,7 +16,7 @@ Options:
- 	-p, --private-key <privkey file>  private key file
- 	-c, --certificate <cert file>     signer's certificate file
- 	-m, --monotonic-count <count>     monotonic count
--	-d, --dump_sig              dump signature (*.p7)
-+	-d, --dump-sig              dump signature to <output file>.p7
- 	-A, --fw-accept  firmware accept capsule, requires GUID, no image blob
- 	-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob
- 	-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index a61557b73bef..e9b9ffe9b774 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -56,6 +56,7 @@ static struct option options[] = {
- 	{"fw-revert", no_argument, NULL, 'R'},
- 	{"capoemflag", required_argument, NULL, 'o'},
- 	{"dump-capsule", no_argument, NULL, 'D'},
-+	{"dump-sig", no_argument, NULL, 'd'},
- 	{"help", no_argument, NULL, 'h'},
- 	{NULL, 0, NULL, 0},
- };
-@@ -83,7 +84,7 @@ static void print_usage_mkeficapsule(void)
- 		"\t-p, --private-key <privkey file>  private key file\n"
- 		"\t-c, --certificate <cert file>     signer's certificate file\n"
- 		"\t-m, --monotonic-count <count>     monotonic count\n"
--		"\t-d, --dump_sig              dump signature (*.p7)\n"
-+		"\t-d, --dump-sig              dump signature to <output file>.p7\n"
- 		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
- 		"\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
- 		"\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
+     def ReadNode(self):
+         super().ReadNode()
+@@ -111,6 +116,7 @@ class Entry_efi_capsule(Entry_section):
+         self.hardware_instance = fdt_util.GetInt(self._node, 'hardware-instance')
+         self.monotonic_count = fdt_util.GetInt(self._node, 'monotonic-count')
+         self.oem_flags = fdt_util.GetInt(self._node, 'oem-flags')
++        self.dump_signature = fdt_util.GetBool(self._node, 'dump-signature')
+ 
+         self.private_key = fdt_util.GetString(self._node, 'private-key')
+         self.public_key_cert = fdt_util.GetString(self._node, 'public-key-cert')
+@@ -150,7 +156,8 @@ class Entry_efi_capsule(Entry_section):
+                                                  public_key_cert,
+                                                  self.monotonic_count,
+                                                  self.fw_version,
+-                                                 self.oem_flags)
++                                                 self.oem_flags,
++                                                 self.dump_signature)
+         if ret is not None:
+             return tools.read_file(capsule_fname)
+         else:
 -- 
 2.47.3
 
