@@ -4,81 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 032EFD46C01
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 23:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44E3AD46C15
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 00:08:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FEB283BDD;
-	Thu, 29 Jan 2026 00:44:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6F11883BC7;
+	Thu, 29 Jan 2026 01:07:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=paulk.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ai14WP9r";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cPewDd66";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25AB183BE1; Thu, 29 Jan 2026 00:44:14 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 99FF983C29; Thu, 29 Jan 2026 00:59:20 +0100 (CET)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFD0D83B5E
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:43:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0180383BB1
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:59:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f1f4F2Mxdz9sdB;
- Thu, 29 Jan 2026 00:43:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769643837;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=0i67h6JpcZAkCSIAoq7C2wLGRJpFsFlz1qjctMesaZs=;
- b=ai14WP9rOJua8nOZfdMWmHsaR3ON5OoTE0mvGa27Lqy2ZHsxRg8PNgDPp974BJKwxbFij3
- Jqg5axlWc7DLJrU67riI+3twN7Lq2gQeKnniZWlF0085043WfSZY8X4gB4jUiYkL+qdvSA
- Degfx8H2QmYDZc5kr+zA1wArG6rkLMGluHHotURJaEHWS7/6j+moo8cq+QHaIw0gedAOBn
- +X2DYJv/D+g84FAAKO0Mcr4VaZW8kUjfkWshlAb5WOB58lQWtxo6JoZIk3NRkyn+p7xGi3
- 50b0g7YyswBlzkZ0fkXBwIgzaiywTfxsSZXdhDIig+X3VMFkcKYdHziYfKxs5g==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=cPewDd66;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769643835;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=0i67h6JpcZAkCSIAoq7C2wLGRJpFsFlz1qjctMesaZs=;
- b=cPewDd66ci8mD76EeBamFxoxXTGUDqNbQdcm3aDnyYTHb6yI7bE6PuLOoR0GzDKr4xPub6
- 3QW6nLAFmtAe1sxNmqNC6RyV+UEQzYsNHSvV2G4v7KCjPvZ4p4mQvnctIciqkNRPz9SjHE
- nvkss0ut6aS0HUxjccXly3rlk3HqQ+AcR0MBhcWemhqnuJ5zcPdvmrkQ4jUegemXMx5Ok5
- uPxr9fPBK33p/orr4ESXkeLrtRDzaW7ZqUSSViTcUd+TmFmL4m/aoG29O0QDVL8uxhZksr
- 6w+pKy/CuZ8UmLt4/XWkYW2ND9SZ0qdwkWN7rCJM5Voo4IokCZPpdOpAdS7EMg==
+ dmarc=none (p=none dis=none) header.from=paulk.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=contact@paulk.fr
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 2369F1F8004F
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 23:59:17 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id 76346B1D48A; Wed, 28 Jan 2026 23:59:16 +0000 (UTC)
+Received: from shepard (unknown [192.168.1.65])
+ by laika.paulk.fr (Postfix) with ESMTP id B55A9B1D47F;
+ Wed, 28 Jan 2026 23:58:38 +0000 (UTC)
+From: Paul Kocialkowski <contact@paulk.fr>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH] net: lwip: tftp: add support of tsize option to client
-Date: Thu, 29 Jan 2026 00:43:45 +0100
-Message-ID: <20260128234351.405945-1-marek.vasut+renesas@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@csie.org>,
+ Icenowy Zheng <icenowy@aosc.xyz>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Paul Kocialkowski <paulk@sys-base.io>
+Subject: [PATCH v2 1/3] sunxi: a133: dram: Add NSI arbiter configuration
+ support
+Date: Thu, 29 Jan 2026 00:57:15 +0100
+Message-ID: <20260128235727.1322861-1-contact@paulk.fr>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 39529374c0fe95994c6
-X-MBO-RS-META: zwzdyybdzqkmyk7mwnun4t57tp6jd9si
-X-Rspamd-Queue-Id: 4f1f4F2Mxdz9sdB
+X-Mailman-Approved-At: Thu, 29 Jan 2026 01:07:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,255 +60,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TFTP server can report the size of the entire file that is about to
-be received in the Transfer Size Option, this is described in RFC 2349.
-This functionality is optional and the server may not report tsize in
-case it is not supported.
+From: Paul Kocialkowski <paulk@sys-base.io>
 
-Always send tsize request to the server to query the transfer size,
-and in case the server does respond, cache that information locally
-in tftp_state.tsize, otherwise cache size 0. Introduce new function
-tftp_client_get_tsize() which returns the cached tftp_state.tsize so
-clients can determine the transfer size and use it.
+In previous generations of Allwinner SoCs, the memory bus (MBUS) access
+arbitration was configured as part of the DRAM top registers. This is no
+longer the case starting with the A133, which has a dedicated base
+address for the bus arbiter that is now called NSI instead of MBUS.
 
-Update net/lwip/tftp.c to make use of tftp_client_get_tsize() and
-avoid excessive printing of '#' during TFTP transfers in case the
-transfer size is reported by the server.
+NSI appears to be a later iteration of MBUS design, with new dedicated
+registers that resemble the previous MBUS ones. Despite NSI not being
+documented in the manual, the A133 BSP includes a nsi driver with some
+description of the registers. Like previous generations, it implements
+port arbitration priority for DRAM access and also supports an optional
+QoS mode based on bandwidth limits.
 
-Submitted upstream: https://savannah.nongnu.org/patch/index.php?item_id=10557
+Configuring port arbitration priority is especially important to make
+sure that critical masters are not starved by other less important
+ones. This is especially the case with the display engine that needs
+to be able to fetch pixels in time for scanout and can easily be
+starved by CPU or GPU access.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+This introduces support for the NSI arbiter in the A133 DRAM init
+code. The list and order of available ports are highly SoC-specific
+and the default config values are set to match the BSP's defaults.
+
+Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
+Sponsored-by: MEC Electronics GmbH <https://www.mec.at/>
 ---
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome@forissier.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Cc: u-boot@lists.denx.de
----
- lib/lwip/lwip/src/apps/tftp/tftp.c            | 51 +++++++++++++++----
- .../lwip/src/include/lwip/apps/tftp_client.h  |  1 +
- net/lwip/tftp.c                               | 35 +++++++++++--
- 3 files changed, 74 insertions(+), 13 deletions(-)
+ .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
+ .../include/asm/arch-sunxi/dram_sun50i_a133.h | 36 ++++++++++
+ arch/arm/mach-sunxi/dram_sun50i_a133.c        | 67 ++++++++++++++++++-
+ 3 files changed, 106 insertions(+), 1 deletion(-)
 
-diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-index ecb6c55ae11..5061446b1cf 100644
---- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-+++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-@@ -98,6 +98,7 @@ struct tftp_state {
-   int last_pkt;
-   u16_t blknum;
-   u16_t blksize;
-+  u32_t tsize;
-   u8_t retries;
-   u8_t mode_write;
-   u8_t tftp_mode;
-@@ -167,6 +168,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
- {
-   size_t fname_length = strlen(fname)+1;
-   size_t mode_length = strlen(mode)+1;
-+  size_t tsize_length = strlen("tsize")+3; /* "tsize\0\0\0" */
-   size_t blksize_length = 0;
-   int blksize = tftp_state.blksize;
-   struct pbuf* p;
-@@ -182,7 +184,7 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
-     }
-   }
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+index 2a9b086991c3..8e80c520706b 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+@@ -16,6 +16,10 @@
  
--  p = init_packet(opcode, 0, fname_length + mode_length + blksize_length - 2);
-+  p = init_packet(opcode, 0, fname_length + mode_length + blksize_length + tsize_length - 2);
-   if (p == NULL) {
-     return ERR_MEM;
-   }
-@@ -190,8 +192,9 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
-   payload = (char*) p->payload;
-   MEMCPY(payload+2,              fname, fname_length);
-   MEMCPY(payload+2+fname_length, mode,  mode_length);
-+  sprintf(payload+2+fname_length+mode_length, "tsize%c%u%c", 0, 0, 0);
-   if (tftp_state.blksize)
--    sprintf(payload+2+fname_length+mode_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
-+    sprintf(payload+2+fname_length+mode_length+tsize_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
+ #define SUNXI_GIC400_BASE		0x03020000
  
-   tftp_state.wait_oack = true;
-   ret = udp_sendto(tftp_state.upcb, p, addr, port);
-@@ -450,14 +453,24 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-       }
- 
-       blknum = lwip_ntohs(sbuf[1]);
--      if (tftp_state.blksize && tftp_state.wait_oack) {
-+      if (tftp_state.wait_oack) {
-         /*
--         * Data received while we are expecting an OACK for our blksize option.
-+         * Data received while we are expecting an OACK for our tsize option.
-          * This means the server doesn't support it, let's switch back to the
-          * default block size.
-          */
--       tftp_state.blksize = 0;
--       tftp_state.wait_oack = false;
-+        tftp_state.tsize = 0;
-+        tftp_state.wait_oack = false;
++#ifdef CONFIG_MACH_SUN50I_A133
++#define SUNXI_NSI_BASE			0x03100000
++#endif
 +
-+        if (tftp_state.blksize) {
-+          /*
-+           * Data received while we are expecting an OACK for our blksize option.
-+           * This means the server doesn't support it, let's switch back to the
-+           * default block size.
-+           */
-+          tftp_state.blksize = 0;
-+          tftp_state.wait_oack = false;
-+        }
-       }
-       if (blknum == tftp_state.blknum) {
-         pbuf_remove_header(p, TFTP_HEADER_LENGTH);
-@@ -527,21 +540,31 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-       }
-       break;
-     case PP_HTONS(TFTP_OACK): {
--      const char *optval = find_option(p, "blksize");
-+      const char *blksizeoptval = find_option(p, "blksize");
-+      const char *tsizeoptval = find_option(p, "tsize");
-       u16_t srv_blksize = 0;
-+      u32_t srv_tsize = 0;
-       tftp_state.wait_oack = false;
--      if (optval) {
-+      if (blksizeoptval) {
- 	if (!tftp_state.blksize) {
- 	  /* We did not request this option */
-           send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "blksize unexpected");
- 	}
--	srv_blksize = atoi(optval);
-+	srv_blksize = atoi(blksizeoptval);
- 	if (srv_blksize <= 0 || srv_blksize > tftp_state.blksize) {
- 	  send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "Invalid blksize");
- 	}
- 	LWIP_DEBUGF(TFTP_DEBUG | LWIP_DBG_STATE, ("tftp: accepting blksize=%d\n", srv_blksize));
- 	tftp_state.blksize = srv_blksize;
-       }
-+      if (tsizeoptval) {
-+	srv_tsize = atoi(tsizeoptval);
-+	if (srv_tsize <= 0) {
-+	  srv_tsize = 0; /* tsize is optional */
-+	}
-+	LWIP_DEBUGF(TFTP_DEBUG | LWIP_DBG_STATE, ("tftp: accepting tsize=%d\n", srv_tsize));
-+	tftp_state.tsize = srv_tsize;
-+      }
-       send_ack(addr, port, 0);
-       break;
-     }
-@@ -655,6 +678,16 @@ tftp_init_client(const struct tftp_context *ctx)
-   return tftp_init_common(LWIP_TFTP_MODE_CLIENT, ctx);
+ #ifdef CONFIG_MACH_SUN50I_H6
+ #define SUNXI_DRAM_COM_BASE		0x04002000
+ #define SUNXI_DRAM_CTL0_BASE		0x04003000
+diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+index a5fc6ad36560..eadec74cc2b6 100644
+--- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
++++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+@@ -24,6 +24,42 @@ static inline int ns_to_t(int nanoseconds)
+ 	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
  }
  
-+/** @ingroup tftp
-+ * Get the transfer size used by the TFTP client. The server may
-+ * report zero in case this is unsupported.
-+ */
-+u32_t
-+tftp_client_get_tsize(void)
++#define SUNXI_NSI_MODE_REG(i)		((i) * 0x200 + 0x10)
++#define SUNXI_NSI_PRI_CFG_REG(i)	((i) * 0x200 + 0x14)
++#define SUNXI_NSI_PRI_CFG_RD(v)		(((v) & 0x3) << 2)
++#define SUNXI_NSI_PRI_CFG_WR(v)		((v) & 0x3)
++#define SUNXI_NSI_PRI_CFG_LOWEST	0
++#define SUNXI_NSI_PRI_CFG_LOW		1
++#define SUNXI_NSI_PRI_CFG_HIGH		2
++#define SUNXI_NSI_PRI_CFG_HIGHEST	3
++#define SUNXI_NSI_IO_CFG_REG(i)		((i) * 0x200 + 0x18)
++#define SUNXI_NSI_IO_CFG_QOS_SEL_OUTPUT	0
++#define SUNXI_NSI_IO_CFG_QOS_SEL_INPUT	1
++#define SUNXI_NSI_ENABLE_REG(i)		((i) * 0x200 + 0xc0)
++
++enum sunxi_nsi_port {
++	SUNXI_NSI_PORT_CPU	= 0,
++	SUNXI_NSI_PORT_GPU,
++	SUNXI_NSI_PORT_SD1,
++	SUNXI_NSI_PORT_MSTG,
++	SUNXI_NSI_PORT_GMAC0,
++	SUNXI_NSI_PORT_GMAC1,
++	SUNXI_NSI_PORT_USB0,
++	SUNXI_NSI_PORT_USB1,
++	SUNXI_NSI_PORT_NDFC,
++	SUNXI_NSI_PORT_DMAC,
++	SUNXI_NSI_PORT_CE,
++	SUNXI_NSI_PORT_DE0,
++	SUNXI_NSI_PORT_DE1,
++	SUNXI_NSI_PORT_VE,
++	SUNXI_NSI_PORT_CSI,
++	SUNXI_NSI_PORT_ISP,
++	SUNXI_NSI_PORT_G2D,
++	SUNXI_NSI_PORT_EINK,
++	SUNXI_NSI_PORT_IOMMU,
++	SUNXI_NSI_PORT_CPUS,
++};
++
+ /* MBUS part is largely the same as in H6, except for one special register */
+ #define MCTL_COM_UNK_008	0x008
+ /* NOTE: This register has the same importance as mctl_ctl->clken in H616 */
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+index 1496f99624dd..204810aecf2a 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+@@ -69,6 +69,66 @@ static const u8 phy_init[] = {
+ };
+ #endif
+ 
++static void nsi_configure_port(unsigned int port, u8 pri, u8 qos_sel)
 +{
-+  return tftp_state.tsize;
++	void *base = (void *)SUNXI_NSI_BASE;
++	u32 pri_cfg;
++
++	/* QoS with bandwidth limits is not supported, disable it. */
++	writel(0, base + SUNXI_NSI_MODE_REG(port));
++	writel(0, base + SUNXI_NSI_ENABLE_REG(port));
++
++	/*
++	 * QoS direction selection should not be in use, but set it nevertheless
++	 * to match the BSP behavior (in case it has some other meaning).
++	 */
++	writel(qos_sel, base + SUNXI_NSI_IO_CFG_REG(port));
++
++	/* Port priority is always active. */
++	pri_cfg = SUNXI_NSI_PRI_CFG_RD(pri) | SUNXI_NSI_PRI_CFG_WR(pri);
++
++	writel(pri_cfg, base + SUNXI_NSI_PRI_CFG_REG(port));
 +}
 +
- /** @ingroup tftp
-  * Set the block size to be used by the TFTP client. The server may choose to
-  * accept a lower value.
-diff --git a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-index e1e21d06b67..78de50f4924 100644
---- a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-+++ b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-@@ -45,6 +45,7 @@ enum tftp_transfer_mode {
- 
- err_t tftp_init_client(const struct tftp_context* ctx);
- void tftp_client_set_blksize(u16_t blksize);
-+u32_t tftp_client_get_tsize(void);
- err_t tftp_get(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
- err_t tftp_put(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
- 
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 6c7ffba661e..213c1292eb1 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -31,6 +31,7 @@ struct tftp_ctx {
- 	ulong daddr;
- 	ulong size;
- 	ulong block_count;
-+	ulong hash_count;
- 	ulong start_time;
- 	enum done_state done;
- };
-@@ -49,6 +50,8 @@ struct tftp_ctx {
- static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
++#define NSI_CONF(port, pri, qos_sel) \
++	{ SUNXI_NSI_PORT_ ## port, SUNXI_NSI_PRI_CFG_ ## pri, \
++	  SUNXI_NSI_IO_CFG_QOS_SEL_ ## qos_sel }
++
++static void nsi_set_master_priority(void)
++{
++	struct {
++		unsigned int port;
++		u8 pri;
++		u8 qos_sel;
++	} ports[] = {
++		NSI_CONF(CPU,	LOWEST,		INPUT),
++		NSI_CONF(GPU,	LOWEST,		INPUT),
++		NSI_CONF(SD1,	LOWEST,		OUTPUT),
++		NSI_CONF(MSTG,	LOWEST,		OUTPUT),
++		NSI_CONF(GMAC0,	LOWEST,		OUTPUT),
++		NSI_CONF(GMAC1,	LOWEST,		OUTPUT),
++		NSI_CONF(USB0,	LOWEST,		OUTPUT),
++		NSI_CONF(USB1,	LOWEST,		OUTPUT),
++		NSI_CONF(NDFC,	LOWEST,		OUTPUT),
++		NSI_CONF(DMAC,	LOWEST,		OUTPUT),
++		NSI_CONF(CE,	LOWEST,		OUTPUT),
++		NSI_CONF(DE0,	HIGH,		INPUT),
++		NSI_CONF(DE1,	HIGH,		INPUT),
++		NSI_CONF(VE,	LOWEST,		INPUT),
++		NSI_CONF(CSI,	HIGH,		INPUT),
++		NSI_CONF(ISP,	HIGH,		INPUT),
++		NSI_CONF(G2D,	LOWEST,		INPUT),
++		NSI_CONF(EINK,	LOWEST,		OUTPUT),
++		NSI_CONF(IOMMU,	HIGHEST,	INPUT),
++		NSI_CONF(CPUS,	LOWEST,		OUTPUT),
++	};
++	unsigned int i;
++
++	for (i = 0; i < ARRAY_SIZE(ports); i++)
++		nsi_configure_port(ports[i].port, ports[i].pri,
++				   ports[i].qos_sel);
++}
++
+ static void mctl_clk_init(u32 clk)
  {
- 	ulong store_addr = ctx->daddr;
-+	ulong tftp_tsize;
-+	ulong pos;
- 	void *ptr;
- 
- 	if (CONFIG_IS_ENABLED(LMB)) {
-@@ -67,10 +70,21 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
- 	ctx->daddr += len;
- 	ctx->size += len;
- 	ctx->block_count++;
--	if (ctx->block_count % 10 == 0) {
--		putc('#');
--		if (ctx->block_count % (65 * 10) == 0)
--			puts("\n\t ");
-+
-+	tftp_tsize = tftp_client_get_tsize();
-+	if (tftp_tsize) {
-+		pos = clamp(ctx->size, 0UL, tftp_tsize);
-+
-+		while (ctx->hash_count < pos * 50 / tftp_tsize) {
-+			putc('#');
-+			ctx->hash_count++;
-+		}
-+	} else {
-+		if (ctx->block_count % 10 == 0) {
-+			putc('#');
-+			if (ctx->block_count % (65 * 10) == 0)
-+				puts("\n\t ");
-+		}
- 	}
- 
- 	return 0;
-@@ -84,6 +98,7 @@ static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
- static void tftp_close(void *handle)
+ 	void * const ccm = (void *)SUNXI_CCM_BASE;
+@@ -1184,6 +1244,7 @@ static const struct dram_para para = {
+ unsigned long sunxi_dram_init(void)
  {
- 	struct tftp_ctx *ctx = handle;
-+	ulong tftp_tsize;
- 	ulong elapsed;
+ 	struct dram_config config;
++	unsigned long size;
  
- 	if (ctx->done == FAILURE || ctx->done == ABORTED) {
-@@ -92,6 +107,17 @@ static void tftp_close(void *handle)
- 	}
- 	ctx->done = SUCCESS;
+ 	/* Writing to undocumented SYS_CFG area, according to user manual. */
+ 	setbits_le32(0x03000160, BIT(8));
+@@ -1200,5 +1261,9 @@ unsigned long sunxi_dram_init(void)
+ 	      1U << config.bankgrps, 1U << config.ranks,
+ 	      16U << config.bus_full_width);
  
-+	tftp_tsize = tftp_client_get_tsize();
-+	if (tftp_tsize) {
-+		/* Print hash marks for the last packet received */
-+		while (ctx->hash_count < 49) {
-+			putc('#');
-+			ctx->hash_count++;
-+		}
-+		puts("  ");
-+		print_size(tftp_tsize, "");
-+	}
+-	return calculate_dram_size(&config);
++	size = calculate_dram_size(&config);
 +
- 	elapsed = get_timer(ctx->start_time);
- 	if (elapsed > 0) {
- 		puts("\n\t ");	/* Line up with "Loading: " */
-@@ -176,6 +202,7 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
- 	ctx.done = NOT_DONE;
- 	ctx.size = 0;
- 	ctx.block_count = 0;
-+	ctx.hash_count = 0;
- 	ctx.daddr = addr;
- 
- 	printf("Using %s device\n", udev->name);
++	nsi_set_master_priority();
++
++	return size;
+ }
 -- 
-2.51.0
+2.52.0
 
