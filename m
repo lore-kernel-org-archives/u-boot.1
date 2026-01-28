@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8B7FD3F064
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F40E4D3F06A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:12:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF27B83F4C;
-	Wed, 28 Jan 2026 15:02:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7321F83F00;
+	Wed, 28 Jan 2026 15:12:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rYIe8ZpE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JjxwzT9Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DABD83CEA; Wed, 28 Jan 2026 15:02:38 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id CC9AA83EC9; Wed, 28 Jan 2026 15:12:27 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64B8D83EAC
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:02:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1DAD83E63
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:12:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-4086661715cso4633977fac.2
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 06:02:36 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2a07f8dd9cdso50150755ad.1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 06:12:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769608955; x=1770213755; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CmiRQpBdgavRvSZQbCkN0CTDOstUcBl1azZYNz935Z8=;
- b=rYIe8ZpEGba+jWS2S5XVpwAoscGYp0ChjBfgfEsqfbDlwoxxx63AaHW0oRRoRXs+vm
- ArXt9cwpVCs7ANBVBfjbwN2h9sA+D1xIuPD9/e6NPe1JohwL8GmSlqugZXj7NXQorzPu
- rRUmHXG3h3cDy6lZ0fZ2br0XJFZk+2CL1+gsQ=
+ d=gmail.com; s=20230601; t=1769609544; x=1770214344; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XU89oFDgOIjbHRsy3X0rrOTyZIgewOlfgkifjdTLZ0I=;
+ b=JjxwzT9Y2ZuVx8XUC/J1aOpPNPBf21mn32uHLIw0J6EEW/SuyrZ/ifI+8nJUvNvN2r
+ 1if9JcZC067dfQJYh2UH+7r7vA1a4zg9SiUTblxO2CU2xO722csh6V7a6fSOKbwAymt1
+ SmxVFz7c+kHJpXomGv/vEWZYx5E9GKdVvI9hA+p+ROK7mAmnEAx7N34gxbeTk85T+Y0v
+ 94oU+V5FpZUmXY8kzJUAEOy5xtwJEvy6P3CI/kSATax5HvRgf5w3246XB3Ry2e5Jdqfa
+ T7VBezEhK6TnGF5RRwK27HSyKzPBW6pqrVEXWISZ2LfpI0T/uSQyPZdQ70YUrRc5XJzn
+ Rj4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769608955; x=1770213755;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=CmiRQpBdgavRvSZQbCkN0CTDOstUcBl1azZYNz935Z8=;
- b=oUIr5lVbx5AnHMFsa/fAwaP+iYkpKTh7GpILK0F0iaL6o2n3zRPOkjEkvE/bHslR3t
- cC2/wwOesJ3TZMrAJVEpAy0LHEOs9/Hj1/l3227ME1cXslcEXOcQ5yd3ctmPHKtj8nOU
- 0sdpe9zRs3+CRA/1r7FaAXCBbRnnRngtzVP7DJoVk6DgycL/RYPEEE9V47AwWSsgpPpo
- MnHYIUHjAIkL9Vc/m2qYWZ4i04/vcZCXF+ZvGdBLh0Hgax7NAFtA76UzS7tXFDEjSgvR
- sb+jrEFbQo5twS58wiMt6zFsK7UT7Exv3w2HVZJ7wGy7G5gsZynmnvITUlMeeomSf7Ra
- xSKQ==
-X-Gm-Message-State: AOJu0YwTzYIProhRDu3efKKdqh/cDmjFeMYwwVDcKUwP6aHwtsXR6Xo3
- VGu1bmnz0zvidlzdutZzAulFZMmHGEWUvgUl1QwnX8roEjrHmzm9kHzkkVcGIWrKCzg=
-X-Gm-Gg: AZuq6aK27WqEwe8w3gFtSZ9ia66lzNmF/i83KuuwrLCKN6UfA5Lz8pu9f0Cp8t0NCHt
- bomyqsLqw0aJ93JEGTOmQFhULxZSpPBOasUAQUoGtI7FY+fynjs4AXzvWKT7oZT3TYgsumWdTlT
- icXkoirc06VO1lPW3j4PNl4VYO5XT5w1dRcwJ6moqQrP6o9qxbI26achKcL0NvhJWb6atufxtw/
- moan2vmCAkR7yURxNoSdMRkGZTyEwfnb4f5gOLP0J9apWUC1cWngjpb3ErcfnHAjZBcwJYt5T9L
- fAUejG+ZhcOD1T9HejNU6hZc9OPVxSljb89rXhtiDl2A0kKmneSt8jzxLPPXbGRqOb+WaXWVw0N
- 7bYahVr0b6pl9XrL8Yp79gY6swgq1Z+BUFN1kiWDDpwfI9pUXafzX8uXcqCwBQq/I7gjcNnf9k8
- h2FB4J85jWpxg8gYprBzcvigGTZIg+sGbyiJp7BTzjlcz/vljd13LGg1wCQmMETROAX1W9FlkJM
- q9/i/+024ZSs6SpCALP20v4ZKrhVhBl/7/l4G/DkBm0Hf03
-X-Received: by 2002:a05:6870:ad03:b0:3f5:694f:9366 with SMTP id
- 586e51a60fabf-4093ff09979mr3675087fac.30.1769608953566; 
- Wed, 28 Jan 2026 06:02:33 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4095749f332sm1751438fac.11.2026.01.28.06.02.32
+ d=1e100.net; s=20230601; t=1769609544; x=1770214344;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XU89oFDgOIjbHRsy3X0rrOTyZIgewOlfgkifjdTLZ0I=;
+ b=uJBpKoccN7LLgG2TGdRmHr3lMbUiorpko5f5nF2BpJCZOY6bw19w/62Mzggx5t4jDQ
+ 8rJ5DMtz4Px2t3Rvu2QyTcLNGmYL/5H/OrdLkLZqVmYqhnRa6PkBoYu36HBZmfZnsKnZ
+ uWjswPbXnUdYroB9Hgf3CtDzZafrUyDxgTiBtba87rulpjcEtfDeHbLqKCgijXU973e7
+ BIyTgz/bvixOMXcHXmYy78f2nHvsOMFbzEeybUubFT/NdT/9si0cexCN1RvZY10PEoN5
+ JcuruSFXT/nanmjRpgghg9DVge1JrWw1vm5XUmaBy4HLAWLtRAKXmuATbSQrhbtlJFJq
+ Q9lA==
+X-Gm-Message-State: AOJu0Yzbj0V9vi8MjT//vaXCzoma1WQinYXqWdEJvuu2oc0OyBKBjld4
+ nun0bdbk3H6I8eqLSGabnGiw7ocRGtufJ4Jmqt8AszbRw2DC/uNc/G8pZQF4oqWeytw=
+X-Gm-Gg: AZuq6aLEyl1jtHJ7Ks9pGdXecf57Ox7kZvFdQibJvE5ks4AShfwkfWH+Z0bOUPR5N7T
+ tDVDgYDC9dp8hSq2oW7u8L7uDhVATIEhtZfaJ+0ibby+FeyPQuL2pxzdSmGM+q1+QR8/Xgkd2mr
+ fuf4hz9+EzZQz0qeckSA70LhwmtphahmG7UggJPKynIbzRJpoOjlaScxXd/xn2MsEDC/1ggYDz0
+ UIj8q/1vpTYkulzGZPatuNYqVa4ThSVk5pXJx3OX0wI8VpGyfNHZiza3zYsFqrEItI+aUbTSjHE
+ cZkAyaXkFyqYu3LScbFAF25p0za1zI9D0BUmktQF4W5MU7VfNOUd0L/o9qUHT+yffPk+UFniKdq
+ nGul1vZqZzd/OXPQnnYXrn6aX1MS96iVr3o7tKuQ5L6Kf0y+ZlRlM+YG86hhkdg274izpSviV0A
+ zPz6TDtc5wvw8kuOP+9hoxtzLSYEj+1qG0OA==
+X-Received: by 2002:a17:903:94b:b0:2a0:c884:7f09 with SMTP id
+ d9443c01a7336-2a870db7639mr55437585ad.38.1769609543788; 
+ Wed, 28 Jan 2026 06:12:23 -0800 (PST)
+Received: from intel-VirtualBox.. ([94.156.205.238])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a88b4c3b29sm24005065ad.54.2026.01.28.06.12.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 06:02:33 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, 
- Simon Glass <simon.glass@canonical.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-In-Reply-To: <20260122224420.2679336-1-simon.glass@canonical.com>
-References: <20260122224420.2679336-1-simon.glass@canonical.com>
-Subject: Re: [PATCH] binman: Regenerate expired test certificate
-Message-Id: <176960895265.1640006.1370983922834730888.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 08:02:32 -0600
+ Wed, 28 Jan 2026 06:12:23 -0800 (PST)
+From: Brian Sune <briansune@gmail.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Cc: Brian Sune <briansune@gmail.com>
+Subject: [PATCH v6 0/2] Add-CoreCourse-socfpga-Boards
+Date: Wed, 28 Jan 2026 22:12:13 +0800
+Message-Id: <20260128141215.329235-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,18 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 22 Jan 2026 15:44:10 -0700, Simon Glass wrote:
+Introduce CoreCourse boards to mainstream.
 
-> The test certificate expired on Feb 13, 2024. This just used for
-> testing, so regenerate it with a 100-year validity period.
-> 
-> 
+Altera SoCFPGA GEN5 boards:
+AC501 - small formfactor
+AC550 - complex development board
 
-Applied to u-boot/master, thanks!
+Brian Sune (2):
+  Add CoreCourse socfpga Board - AC501
+  Add CoreCourse socfpga Board - AC550
 
-[1/1] binman: Regenerate expired test certificate
-      commit: 4234f4d432bf1dcd30b5fee91c71abc1acae5e75
+ arch/arm/dts/Makefile                         |   1 +
+ .../dts/socfpga_cyclone5_ac501soc-u-boot.dtsi |  44 ++
+ arch/arm/dts/socfpga_cyclone5_ac501soc.dts    |  72 ++
+ .../dts/socfpga_cyclone5_ac550soc-u-boot.dtsi |  44 ++
+ arch/arm/dts/socfpga_cyclone5_ac550soc.dts    | 118 ++++
+ arch/arm/mach-socfpga/Kconfig                 |   7 +
+ board/corecourse/ac501soc/MAINTAINERS         |   6 +
+ board/corecourse/ac501soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+ board/corecourse/ac501soc/qts/pinmux_config.h | 222 ++++++
+ board/corecourse/ac501soc/qts/pll_config.h    |  86 +++
+ board/corecourse/ac501soc/qts/sdram_config.h  | 349 +++++++++
+ board/corecourse/ac550soc/MAINTAINERS         |   6 +
+ board/corecourse/ac550soc/qts/iocsr_config.h  | 664 ++++++++++++++++++
+ board/corecourse/ac550soc/qts/pinmux_config.h | 222 ++++++
+ board/corecourse/ac550soc/qts/pll_config.h    |  86 +++
+ board/corecourse/ac550soc/qts/sdram_config.h  | 349 +++++++++
+ configs/socfpga_ac501soc_defconfig            |  85 +++
+ configs/socfpga_ac550soc_defconfig            |  85 +++
+ include/configs/socfpga_ac501soc.h            |  13 +
+ include/configs/socfpga_ac550soc.h            |  13 +
+ 20 files changed, 3136 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac501soc-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac501soc.dts
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac550soc-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_cyclone5_ac550soc.dts
+ create mode 100644 board/corecourse/ac501soc/MAINTAINERS
+ create mode 100644 board/corecourse/ac501soc/qts/iocsr_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/pinmux_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/pll_config.h
+ create mode 100644 board/corecourse/ac501soc/qts/sdram_config.h
+ create mode 100644 board/corecourse/ac550soc/MAINTAINERS
+ create mode 100644 board/corecourse/ac550soc/qts/iocsr_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pinmux_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/pll_config.h
+ create mode 100644 board/corecourse/ac550soc/qts/sdram_config.h
+ create mode 100644 configs/socfpga_ac501soc_defconfig
+ create mode 100644 configs/socfpga_ac550soc_defconfig
+ create mode 100644 include/configs/socfpga_ac501soc.h
+ create mode 100644 include/configs/socfpga_ac550soc.h
+
 -- 
-Tom
-
+2.34.1
 
