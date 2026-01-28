@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5345CD46BF8
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 20:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2581D46BFB
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 20:41:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A017583D8A;
-	Wed, 28 Jan 2026 21:21:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D43D83DFF;
+	Wed, 28 Jan 2026 21:41:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ep8rPSmz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f4ZlYEa1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51D2983D8A; Wed, 28 Jan 2026 21:21:12 +0100 (CET)
-Received: from mail-oo1-xc42.google.com (mail-oo1-xc42.google.com
- [IPv6:2607:f8b0:4864:20::c42])
+ id 9DF9E83F14; Wed, 28 Jan 2026 21:41:10 +0100 (CET)
+Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
+ [IPv6:2001:4860:4864:20::41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D40183CAA
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 21:21:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A35F83D8A
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 21:41:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc42.google.com with SMTP id
- 006d021491bc7-662fca4503cso141692eaf.0
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 12:21:09 -0800 (PST)
+Received: by mail-oa1-x41.google.com with SMTP id
+ 586e51a60fabf-4094d7d71a9so80984fac.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 12:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769631668; x=1770236468; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769632866; x=1770237666; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jN/nSHEkjIjI8QJT/1k6dT62QRJhA2lE0FK8NeNYqy4=;
- b=Ep8rPSmz0ymGM5cP39Af5HFQx742msdeBsRQUMufb9WMGFsLOHsGig4saYAGoT86ji
- woHCLqk91v56o2eAXOb6RO77B8uarZz+nnRIqpPyNHCBx9QNu3CKq8wAB/0HhJVgHG1K
- KdoYBUibomc9Py00v4gg1Q6WUko6ZX8KWCQXg=
+ bh=U39Z7FtEBVQgKgj8SVH1DRl1z7lKlJF9n/KpivQqROc=;
+ b=f4ZlYEa1pyRDupXvS/+JSywCKvpppnhhd4ATm0h5dTMLLxnbmvnHXr1tLJeWEt2f4J
+ I824JVAniIYSppAm2NRdhcRSLD7+HjpXABeMvqH6BV3Xlvl/g+Orbcg342ytS6HQz+TH
+ mh10YOUI+c3m6kSg2BF4pUDxA4Vd92R/I9/WU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769631668; x=1770236468;
+ d=1e100.net; s=20230601; t=1769632866; x=1770237666;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jN/nSHEkjIjI8QJT/1k6dT62QRJhA2lE0FK8NeNYqy4=;
- b=TKYg3ek1aJs9kdwE7RV1QYUean2VTDyVyuvUa05nFT7U6KwP90opCXe2h1aol65vDk
- kBIIaSBjYxVR4Nr5UjNH+mFDCQSrJxqLfk25RSSF8hKUpk7BlQmJjD3ein6uIeTMEij6
- CHzJiQKDwaNTdodiQ5xEZDn1vUXID2aT9DF6pUw0cztEiK2fO5h2xYtKfbT+uwfiyBVO
- rQ9sX2mzF4VTqDFhW5gai0FUqFhd9f9caEBwQ3tG04+BvnsZ/fzoS/CAN/XlZfaRqjWT
- zPukpWNjGeXAiwcTFgLiMgc0rrK8Xuv6+RXiI9M4gH6RKQgRWpgQ4qHjgyQVCsOh195A
- kyxA==
-X-Gm-Message-State: AOJu0YyEOykRSU8xxovuH0NyLcT+OKYZmBOPWjRmPF98+45193n6vD7b
- FeL+knpJZgXIyVRps9VcS85E7E2pXJ5qjMCL7en0ln3aKkOKMUeNZl7aIDtA9QeQ8Yk=
-X-Gm-Gg: AZuq6aKg5L+VD7A+QmOCdQhJ6dvpkRIglBhKgXM5+0hXELt6sKsSZtXIrf56sTHyKcG
- Y2+rehUp0+OY2jh7MDP7/Kwpav376qVMXnihRcIzbgAn8q9mtcPmenpRKi3X3127jF+Y+Mo2ZrQ
- NPtfqNsa42qYDntTNjkxAXbUQdcnfrbM4ea6sSMMylKcu02jOEcp5ipAYZLwTQvcgolC1HdNGXY
- NfmPB1+Oyc2BmR/jJwTExIHLjwXaIyI4GtRNJ7Cn42rPAg2rQ0Zwcr4dnOsX5Tc+fOKyox5yJuA
- QuvGgFfKusiRDS64VCtq3QNjYtJMIT2or4nlHHQvTFIEd+W468J8/Vo8H9S/UtX04RhVmlBSQhe
- VjoLRyR+m3Uo89gIFLaRASdV0CZ53l4lzu5X9LdqQX8N6S+MOtr1zUVr9hoGhhA76CK9zc1N4CP
- kdYtETiqMLW0yEtpDrdw8bey5QFTonhRa+YcvD2zU0M7ab0UU67sHQuJeOZmtTs/yjgMCyoX1as
- hQ5pMEe8xAa8oSpoMaxwIzDtIyyEw2sTc8w/iI=
-X-Received: by 2002:a05:6820:8186:b0:662:b8db:e67a with SMTP id
- 006d021491bc7-662f21444e7mr3435193eaf.59.1769631667855; 
- Wed, 28 Jan 2026 12:21:07 -0800 (PST)
+ bh=U39Z7FtEBVQgKgj8SVH1DRl1z7lKlJF9n/KpivQqROc=;
+ b=KboOTseiID2BzaVdJrpfZA6INg7MgyOGGkQrfLiN5BGOXM4ZfIVvZ2LDaUGf22ro5R
+ eP4AU4ns/gsoPtzQSrLp402iJhz8pC4DzxQc96KBXo8GBStv02UgFDYUtMyVFQeyzBqz
+ 79gyeUefbLMJC2GcrawqwNYYbWiEuEPCAYCxXXziZoFCLbBdTohXxnJSoKCPo4g12tQk
+ hT29giJB0j86pLdMCvXGNOd8EoBM0zohb2r6SPHxsOfMMvig+IWKZbzjpNdrwn5+v+Vi
+ q7ZOjf5u4D/GxPztwbCl3v5p291wI+r8BraDSVuhPpJIblnAqgZYBZdPyuJ5OkByYch3
+ YWoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW+tWl2ZBdeYZmuWvq1QdQissf3MmXKOYtSAEnQG/ind64SMC6F8pdcejTSweqspAoi3JWfO6M=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDrLRpM+E27nBxZvU0hILxU+AYVGoVGG6h1rBJtSGdx4AbPt0W
+ vjBiWgh3cXp9V59Jt122adx92QrjSz9D5aIaSMheGOK2h2hNXND7uypNNj8MZLYZ6EygHrlwyxx
+ gRozN9qA=
+X-Gm-Gg: AZuq6aIDmB4Kv7hxAXeBlBNpTCisFCgL/KruUhqVgGzV2gYnlVevcllWnUa/B68x0wk
+ hMk5z59pVauSw7Y8rv8z2bvaY9BvkdbJ+STyxDtROHAURXAjks4fWnHKzXDxeHoU8DKBI68cDlQ
+ IxqpIw1W9Et4Io1QLBbdfi9MMmukB/iUVzxHVaQWLmTJBmSsvBlw9zihX4X3FD6QzpdqPOJk4F3
+ XKHfLgc33MYniaUrz4J6q35bY1rzHVteD+CDz2OAhnJqHmsz0bbUf521TK2iDmM7LL822B0UotD
+ gG6mw98/SD03kMiETUXCo/jT4maD149ov4LTfoJm+gvQT1N0vm2NrK3s3rPTZJETtiyKCtIkeI6
+ x4Vbmbemzwtca4MnfzCdFq+6rhiORiV7zEFsINHx7nxg1wRkxn2fjR3aAvF9I/DHS8Ylfpqpa6A
+ BWHFtXhwirRXozmyqbORl2xpI0CmAYmus0H/cHAeMKTbIN5CK1U1MQQX+3CokmfmDSQVq9u+Mve
+ wjVh0CPtvLytsAoUURKI0SU2EQSu89xz2szHEY=
+X-Received: by 2002:a4a:e841:0:b0:663:517:7d8e with SMTP id
+ 006d021491bc7-66305178077mr544589eaf.17.1769632865767; 
+ Wed, 28 Jan 2026 12:41:05 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-662f9a18776sm1955776eaf.12.2026.01.28.12.21.06
+ 006d021491bc7-662f9a18de2sm2054866eaf.11.2026.01.28.12.41.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 12:21:07 -0800 (PST)
-Date: Wed, 28 Jan 2026 14:21:05 -0600
+ Wed, 28 Jan 2026 12:41:04 -0800 (PST)
+Date: Wed, 28 Jan 2026 14:41:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mateus Lima <mateuslima.ti@gmail.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] misc: Keep FSL_IFC available on PowerPC as well
-Message-ID: <20260128202105.GQ3416603@bill-the-cat>
-References: <20260128192617.1724570-1-trini@konsulko.com>
- <CAP8WwTETA8ZXSC19bhvtTRLP2t-nvcqa+ER3HrYpshQDr05iAA@mail.gmail.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: varadarajan.narayanan@oss.qualcomm.com, gabriel.dalimonte@gmail.com,
+ u-boot@lists.denx.de, caleb.connolly@linaro.org
+Subject: Re: [PATCH v3] fs: fat: Handle 'FAT sector size mismatch'
+Message-ID: <20260128204102.GA1740001@bill-the-cat>
+References: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bSr2Ne0n9ngfst/j"
+ protocol="application/pgp-signature"; boundary="2wcXbl0lzv0Myd7M"
 Content-Disposition: inline
-In-Reply-To: <CAP8WwTETA8ZXSC19bhvtTRLP2t-nvcqa+ER3HrYpshQDr05iAA@mail.gmail.com>
+In-Reply-To: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,112 +101,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---bSr2Ne0n9ngfst/j
-Content-Type: text/plain; charset=utf-8
+--2wcXbl0lzv0Myd7M
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 28, 2026 at 05:02:47PM -0300, Mateus Lima wrote:
+On Thu, Jan 22, 2026 at 12:04:42PM +0530, Balaji Selvanathan wrote:
 
-> Hi Tom,
+> From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >=20
-> Indeed, there are a lot of PPC targets that try to use this symbol, but as
-> Peng Fan reported before, his CI reported a build failure.
+> Do FAT read and write based on the device sector size
+> instead of the size recorded in the FAT meta data.
+>=20
+> FAT code issues i/o in terms of the sector size. Convert that to
+> device sector size before doing the actual i/o. Additionally,
+> handle leading/trailing blocks when the meta data based block
+> no and i/o size is not an exact multiple of the device sector
+> size or vice versa.
+>=20
+> Tested on UFS device with sector size 4096 and meta data recorded
+> sector size 512.
+>=20
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
+com>
 
-Yes, I'm not sure what the particular problem there was with your
-previous patch / Peng's setup:
-https://source.denx.de/u-boot/u-boot/-/pipelines/29116
-(the failure is because we need
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D488348&state=3D*
-merged to master).
+First thing, clang shows a lot of warnings from this:
+https://source.denx.de/u-boot/u-boot/-/jobs/1365316
+Second thing, filesystem tests do pass:
+https://source.denx.de/u-boot/u-boot/-/jobs/1365314
+Please make sure v4 is put through CI:
+https://docs.u-boot.org/en/latest/develop/ci_testing.html
 
->=20
-> On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.com> =
-wrote:
->=20
-> > On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
-> > >This patch adds CPLD support via IFC to the ls1021a-iot board.
-> > >
-> > >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> >
-> > CI report build failure.
-> >
-> >   CC      drivers/video/hitachi-tx10d07vm0baa.o
-> > In file included from drivers/misc/fsl_ifc.c:8:
-> > include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or direct=
-ory
-> >    16 | #include <asm/ppc.h>
-> >       |          ^~~~~~~~~~~
-> > compilation terminated.
-> > make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o] Error=
- 1
-> > make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
-> > make[2]: *** Waiting for unfinished jobs....
-> >   CC      drivers/rtc/ht1380.o
-> >   CC      drivers/video/hitachi_tx18d42vm_lcd.o
-> >   CC      drivers/rtc/i2c_rtc_emul.o
-> >
-> > make[1]: *** [Makefile:2191: drivers] Error 2
-> > make: *** [Makefile:362: __build_one_by_one] Error 2
-> > Cleaning up project directory and file based variables
-> >
-> > Regards
-> > Peng
->=20
->=20
-> Is that okay now Peng Fan?
->=20
-> If so, then my v2 patch would have worked.
->=20
-> BR,
-> Mateus
->=20
-> On Wed, Jan 28, 2026 at 4:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
->=20
-> > This symbol is used on a number of PowerPC platforms as well, so make it
-> > available there again.
-> >
-> > Fixes: 424b324165ea ("armv7: Add CPLD support via IFC to the ls1021a-iot
-> > board.")
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> > Cc: Peng Fan <peng.fan@nxp.com>
-> > ---
-> >  drivers/misc/Kconfig | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> > index be7fdab56d14..a0aa290480eb 100644
-> > --- a/drivers/misc/Kconfig
-> > +++ b/drivers/misc/Kconfig
-> > @@ -695,7 +695,7 @@ config ESM_PMIC
-> >
-> >  config FSL_IFC
-> >         bool "Freescale Integrated Flash Controller"
-> > -       depends on ARM
-> > +       depends on ARM || PPC
-> >         help
-> >           This driver is for the Integrated Flash Controller(IFC) module
-> >           available in Freescale SoCs. This controller allows to handle
-> > --
-> > 2.43.0
-> >
-> >
+Thanks!
 
 --=20
 Tom
 
---bSr2Ne0n9ngfst/j
+--2wcXbl0lzv0Myd7M
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXpvqQAKCRAr4qD1Cr/k
-Cgq1AQDewdXRqkxG7YAF6PM9E7e7i7h9BRp4vc72yDHMUZ4lEwEAwHtbFbLadSnY
-iurM0KwSA8U+prIrZKQZemqPF+MdFAI=
-=0X0a
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXp0WwAKCRAr4qD1Cr/k
+CuzEAP4zA+klUfsWIwMt+k80Au7tR3QWJQALfnTuDZwDqucDDgD+Ll+Cpp5Ck8Uu
+qhlGSIoASzWXbwBE10PGDJL66LiKegg=
+=F4M3
 -----END PGP SIGNATURE-----
 
---bSr2Ne0n9ngfst/j--
+--2wcXbl0lzv0Myd7M--
