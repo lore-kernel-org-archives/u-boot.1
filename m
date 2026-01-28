@@ -4,81 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B99AD46C04
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 21:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC8FDD46C0F
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 22:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9189083DEC;
-	Wed, 28 Jan 2026 22:54:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F4B783C2B;
+	Wed, 28 Jan 2026 23:51:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C9l8510T";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GqPC3G0V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E92D083F26; Wed, 28 Jan 2026 22:54:22 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC28483C4B; Wed, 28 Jan 2026 23:51:10 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BCB783DEA
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 22:54:20 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-65e943048afso160846eaf.0
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 13:54:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769637259; x=1770242059; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sngh1UDruJ9mowIDFrZzYPTfwZeZ/Mu/iXrDf+21tGk=;
- b=C9l8510TPRAJYdhif0PTt0PUVZ2oYjBJWigJ1aUROOtkHwdusuVcRGmM1UIVQoqqr6
- xNmJhOqxbyJxbH+8/ap2j2xfIMQutjlCOn7XwUbbk9E99pUGdw0oyZD0bIxxM+BLTiEE
- nlctKQG54Tj+N/w5uWvR+MI6jOgN0+fwZ3NVU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769637259; x=1770242059;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=sngh1UDruJ9mowIDFrZzYPTfwZeZ/Mu/iXrDf+21tGk=;
- b=xUsUZjgKamv9Rmyghg4BzUg7qyylgiDTdEqVW57xJbAINbRNGEr2rZvkX5+wW7Ov3h
- 52AjBmnhPn+ZHrAUE6qFL981ZBkNMhbCNpPfjQAXzxHL3czcDLwFuEj999rECpfLLkmA
- eN2IsvxlZnqQheFnFYShSDCdIKge6aqbFo6uELSQ8qu7+y7I+TXelaxb6dj6HaTsc7hR
- 4cpODSzXr4jeSUHcv6sitsK9CCcK6SQ/GY4oQ5WNUHeAXQntJEnEFn8IMb1WYeEQyHzB
- KJuuzxoofYlbCzCQdWwgZB4APlqma21chc/lId3uPu9k7jokwqczoj4SUHcM4YI3VXjs
- tU+g==
-X-Gm-Message-State: AOJu0YyllhlpCEWattKyIAsbTJI63NeIb3CYlam9ltz82FxhG/TUh0v6
- LOwcsA3Md7aciB8J2Y+xNkgyWlU33r4pkUPN060tMokjxiUni8if+UPfo140E3kko0QdRgWVHDP
- 6q6SKNvM=
-X-Gm-Gg: AZuq6aInFxVjXW4V+0ZEU0Tfjy0lPc61BX1hG/miCmqWca9c/Yqz7SHLgyjodnTteby
- 3jpl4p7fM7ardyv7lloGXT66C+DIA2VEbH6wpKJfrHthRt8oEhYkgIZh4A7A3na+I32p3y258Iz
- JfYRii3BGEmx722+tCYNyRjNBizIHbY6cautdO5xfJ3n5jGhWgIpOuNLMdElt5xpFfmUy5nFjMJ
- izadQEgEyfECzH5WDoAu61nn7KXpGnR87tg4wQYjwhX/MzYFn3iUuc198XmjeQqPPLGoka9xfRa
- u75UxSCy0JGz5l1z1OYeOSvRglbUsfKsDKM7wkd4CMx7tzYst8J0daTv5920kSCwWnqAklZYlq7
- 7e+JtjFiur6jmcoeYLwUQP4g2EJubFrZms6ALVBBHOTQKQWdkfaxV6QyL6/2R0oLiv3LV17our8
- fy9AHvgPz7YhDIWb0t6N9vE68NdI26dEuFrzW1Rm8AidBP0wlsgM/0ldEc1pUZdo2+bhzTAVc4e
- DRESJjbYtafmqPa1IC/MZaw632+XrD8Bor2oQ==
-X-Received: by 2002:a05:6820:1f11:b0:65f:cda0:ed8f with SMTP id
- 006d021491bc7-662f20603e8mr3599084eaf.35.1769637258979; 
- Wed, 28 Jan 2026 13:54:18 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-409571ae8f5sm2570113fac.9.2026.01.28.13.54.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 13:54:18 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-In-Reply-To: <BESP194MB2805AC7C1861BF2283BA065FDA88A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB2805AC7C1861BF2283BA065FDA88A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH] tools: Handle realloc failure in strlist_add
-Message-Id: <176963725837.1779019.9200460876498498769.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 15:54:18 -0600
+ by phobos.denx.de (Postfix) with ESMTPS id D537983BE1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 23:51:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=20d3=AC=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1769640666;
+ bh=WRwoRaXLVZtXD+h/ipC8oT0DhFLfz0EOt61X0t8/W2Q=;
+ b=GqPC3G0Vmh8D19jBk7U7h7TEo4+lGi+QLxujR1+virJ0pB8ou7iy4IZRwhxxrywEwwLnmRPhd
+ 1MN79RbY1sJuvrSOXO5335zCjzccPQ9MLaAJE0vvSo+LBXBR9+3XQjTYpTtFxBZJ13v1BZeG6a3
+ szZuqkXqz0KMJD3UqyAnn85wsCEogtuUs2S/gVZ8Wm9GlMt3+jBQYDQ+br7VM4GV5p1oWh0VvgU
+ PU0Yqw7N75MVPqBayzzTH4QFZPBRdRChyqHWAVUWrg94x2cVf+k0GEjq3Afm4tGlIVTngyuIl4C
+ UPyeO9hFZiIsMi8WQzADWqIqDsgm30DHZ4Kw2TBCMf/g==
+X-Forward-Email-ID: 697a92d7c8e1d86c9dc2e1ae
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.5.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH] usb: gadget: dwc2: Move dr_mode check from of_to_plat() to
+ bind()
+Date: Wed, 28 Jan 2026 22:50:55 +0000
+Message-ID: <20260128225057.1699019-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,19 +71,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Jan 2026 15:49:06 +0100, Francois Berder wrote:
+Rockchip RK3288 and RK3506 contain two DWC2 USB controllers, typically
+one controller use dr_mode=otg and the other one use dr_mode=host.
 
-> If realloc fails, list->strings was set to NULL and
-> it would create a leak. This commit ensures that if we cannot
-> add a string to the list, the list stays in a good state.
-> 
-> 
+With USB_GADGET_DWC2_OTG, DM_USB_GADGET and USB_DWC2 enabled this result
+in the dwc2-udc-otg driver binding to both controllers, however only one
+will probe due to use of dr_mode=host on the other one.
 
-Applied to u-boot/master, thanks!
+After the commit 6668b8e7cc68 ("dm: core: Support multiple drivers with
+same compatibles") it is possible to bind one controller to the
+dwc2-udc-otg driver and the other one to the dwc2_usb driver.
 
-[1/1] tools: Handle realloc failure in strlist_add
-      commit: 3a53a03f50118e329a0f38bd28ea5f7d8e22147a
+Move the dr_mode check from of_to_plat() to bind() to allow dm core to
+bind the dwc2 host driver to dr_mode=host controllers.
+
+Before this:
+
+  => dm tree
+   ...
+   usb_gadget    0  [   ]   dwc2-udc-otg          |   |-- usb@ff740000
+   usb_gadget    1  [   ]   dwc2-udc-otg          |   |-- usb@ff780000
+
+  => usb start
+  starting USB...
+  No USB controllers found
+
+After this:
+
+  => dm tree
+   ...
+   usb_gadget    0  [   ]   dwc2-udc-otg          |   |-- usb@ff740000
+   usb           0  [   ]   dwc2_usb              |   |-- usb@ff780000
+
+  => usb start
+  starting USB...
+  USB DWC2
+  Bus usb@ff780000: 1 USB Device(s) found
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/usb/gadget/dwc2_udc_otg.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 40393141ca95..d1d4fa7618b0 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -975,12 +975,6 @@ static int dwc2_udc_otg_of_to_plat(struct udevice *dev)
+ 	void (*set_params)(struct dwc2_plat_otg_data *data);
+ 	int ret;
+ 
+-	if (usb_get_dr_mode(dev_ofnode(dev)) != USB_DR_MODE_PERIPHERAL &&
+-	    usb_get_dr_mode(dev_ofnode(dev)) != USB_DR_MODE_OTG) {
+-		dev_dbg(dev, "Invalid mode\n");
+-		return -ENODEV;
+-	}
+-
+ 	plat->regs_otg = dev_read_addr(dev);
+ 
+ 	plat->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
+@@ -1163,6 +1157,18 @@ static int dwc2_udc_otg_remove(struct udevice *dev)
+ 	return dm_scan_fdt_dev(dev);
+ }
+ 
++static int dwc2_udc_otg_bind(struct udevice *dev)
++{
++	enum usb_dr_mode dr_mode = usb_get_dr_mode(dev_ofnode(dev));
++
++	if (dr_mode != USB_DR_MODE_PERIPHERAL && dr_mode != USB_DR_MODE_OTG) {
++		dev_dbg(dev, "Invalid mode\n");
++		return -ENODEV;
++	}
++
++	return 0;
++}
++
+ static int dwc2_gadget_handle_interrupts(struct udevice *dev)
+ {
+ 	return dwc2_udc_handle_interrupt();
+@@ -1186,6 +1192,7 @@ U_BOOT_DRIVER(dwc2_udc_otg) = {
+ 	.of_match = dwc2_udc_otg_ids,
+ 	.ops	= &dwc2_gadget_ops,
+ 	.of_to_plat = dwc2_udc_otg_of_to_plat,
++	.bind = dwc2_udc_otg_bind,
+ 	.probe = dwc2_udc_otg_probe,
+ 	.remove = dwc2_udc_otg_remove,
+ 	.plat_auto	= sizeof(struct dwc2_plat_otg_data),
 -- 
-Tom
-
+2.52.0
 
