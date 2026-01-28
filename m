@@ -4,106 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBCDED46BE0
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 17:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3776D46BE5
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 17:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2B8E83F4C;
-	Wed, 28 Jan 2026 18:49:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F33883E88;
+	Wed, 28 Jan 2026 18:56:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GcrTp+/6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q457oude";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F02AC84099; Wed, 28 Jan 2026 18:06:43 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id E115983F2D; Wed, 28 Jan 2026 18:56:20 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8515C8401A
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 18:06:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A86AF83E4C
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 18:56:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mateuslima.ti@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-59de2d1fc2cso10215805e87.2
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:06:36 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769619996; cv=none;
- d=google.com; s=arc-20240605;
- b=fbYyjd+EksA12Cg8sjTPZYtKtYnlpYV1fURLuFVzfwVsYPLzvvGVGvoVEQwE0ZUhNW
- mfSjTT3AUbWE99vQhISwZGRk+iqwef+oZNnKXWBHrVkQxBvDfjobZh1POcZawYfZkfNy
- ROTpMRLaqRP6ROplniZnpROrMD3P24uA8JXIOu8itw5lkH7APG7cyyPKhEvbUg5gvw9l
- UtPWID3vFG+clmAZIthRId6XG4+7G9bEjlMKCmrR5SgGJ+5XAtSAcO2lr8hn1uCudWHe
- lLOWam9BbVBM50vsJebbhTPb/AQ/MXQ7q2AKS2iR9p4Nv4QOh7GjeYS/X4e8LSIwnkge
- F2AQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=hKNVvr/juovcW1QAOCOyLjnfOGraB9KyIV8XR4CD12E=;
- fh=fIZ5OWhRun3f+E+FD3+naBsgnHlm+T1VOtVGLuIauIc=;
- b=lSgs7rSf0Mny2hWulyYSJSOhDKYvc9I2VK9i4Itrd6v81rDj/FkcNrgTQFy4nLgMFs
- AjucfC6H2IQeGvDre6O76grqbLp0BFhjZYgwf11Ujyd48lrT6SinW1+/Zwpak46MdtnB
- 82JcLVTWMK6nIuLoAMUOlNm+JQcLzDsZMXVfz7nsbYUB7zMI5LnRZdw2gjFnhBE963Nx
- B95Z5E6c81rAWzN8N9VBvyliCG5/enwE6LO/QtLMJL1pPxytyJ/GtlGImjM/4nsVraWv
- 7gjw5TFQGTT7GDxTYgIyXps4q8M6xjjD31Tqsb9bZ53yyaGGgC0id8S2YDNkNWl2VBGC
- 7cFA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-45c889aba0dso611233b6e.0
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:56:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769619996; x=1770224796; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hKNVvr/juovcW1QAOCOyLjnfOGraB9KyIV8XR4CD12E=;
- b=GcrTp+/6CrJS/k/MJj1NHSBWTdz8J49C5uEiwYBOCzPUzDFZA67tRFL61JVcJ1Q3qS
- MMfUVlrt69+ruwZRUjkTn03GziOUuU9wdycKS+aAzHtKNlO25T9R2f0gnj0ByUjLr9zP
- 0roElH1R9ANc9yNHirJQP7sI8/iA0jSB5q8rPJxRUdJ1Mu8SqTvQmvdLoYZMqWBu6pKj
- vHDAIxlqhRyuFNUdqvTuMyrFamvAdboWt2K/NdMSeBRQIS782il4wogN8L/LJkYXttZV
- GBV4FMPR0LjicyPBLphq+/w8tl3Ir+mUqswA/DNgl0gQvu44izGBelVWnwGN4Q2vIe+k
- uZig==
+ d=konsulko.com; s=google; t=1769622977; x=1770227777; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=t6XsL1gnjoc3CAQo/+xkgxdmyW2fazXhHXo3dPyRLLs=;
+ b=q457oudeYWS0o53vi0T0x2+RxSTdYCDuYcPneRRl8SHLXOlyfuluVYpilBlLIzZ7Kk
+ j1HcSMJ9wp6e1t6L42DgZYUdw80S6wUokCUZZfxn0LzjepACt1GvYRC4i3mmNl/D72Sc
+ NUzD9b+z2msoyO+8p3bMugCuEJzxja6ZjziuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769619996; x=1770224796;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hKNVvr/juovcW1QAOCOyLjnfOGraB9KyIV8XR4CD12E=;
- b=D6hMy998WDN/NlLlbCkCeZbtQhrU1dHiiyeaDi+bYc/6uyNxDXR+LdnR1absSgUYWQ
- /xA/ltCv82bVrhIL+LfGBCXevilywHujHw/qARTKy9JUYMO7CugbVYIOb4EkUm6cfMt2
- KOTqt+9Mra6osG9UgKqvhuSp7muHgyAB5wqw6cMGVLG5qQV967d93cdLlXWIudLzewqI
- 8j7f/nXme3QJNpSmRNAODewDCVqPKK6DshnJbK2PC5VHWFjLsTVFBc9Sd9p9i6A1RAFb
- tsfhniJn0j6JS2SCr8Xn+pHwjm7lEPVTlI9kJwiTAj/dsJBf5poxvR0F8MCNUl+izM3I
- oAFw==
+ d=1e100.net; s=20230601; t=1769622977; x=1770227777;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t6XsL1gnjoc3CAQo/+xkgxdmyW2fazXhHXo3dPyRLLs=;
+ b=OOuxqQgvIZRcnDGykPwCzSfTD2dEPrzrojUigqWB5RmDnQynjjAiZ9FNGzhLXZbIiA
+ jLnYRyyIqBC7R+xbhRO7QWweuO4cORfic+CYrS+BWqksnHpF8K97+sJremcKEabs0W5N
+ VtiCLcBkiVBHYLeiDoC1QG5OLnEhgHeQzhqo16hTPd4vOGrbbYLpOy7wSfHJTCatsBbL
+ B2RUXxo6za7wxhTely5iaiPEwqK1knyGVXOKFCMK39w8dzFbzkP/jgtqFRg2hDT2+bil
+ RZ6sSNEDeQkvGYmo8zfww/zLIWeMITXNTFSwFm5oN3kYrOB4+q1xNr0fkCvPLOF9Bd/Q
+ bg1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4Gn7kMV5Gs+G5sdnlgqUloKbGqbGhoGOZY31GIn0oidDuCjs0WKp3CARsZLj+K9Bfa1F5xws=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxxuz/4HLoOumJW6b4NnVsG61iWY3fOlx8QOT9KD6f/6y4Cha6B
- VRExOGoBlM+h8D4jhLmenpQ9PSdDxM/Imbi6XIyHhje4Mlg2RTYM1duESkQOCOliKUFNA0BZ9e2
- OuyiwI4PhfKJ4kpXgZd9X/g/UxyE+34M=
-X-Gm-Gg: AZuq6aLHp6EOi4He698lEawS86xC8zGCnNSTVTvoG4filRjKET99Xle5iXprAf1mW0r
- xtPgNsJUok99WoNO6yh3mqBkDMA5LKlTbMI+vQXJ2GzA4P4THju8sZTMJ9UdOW78g+iig/tg903
- 48ljAbFg887+uISrTgIUbLK3YuhxtkGWtFe+/6RiXhMH1XPMwHiHyhu/shSsidJmFMiatQ6CjiD
- Z8ToEEVfukDvYKpaVPnDjo/GdWSTj5wj9PHouQhT4jD9LAOCJvsVfTvF6SpBrKmVy3BRiRPtRaI
- wFDotrdVGqoWcy7Vw/LR7awHS/joh1VHsxN04XQ=
-X-Received: by 2002:a05:6512:3ca8:b0:59e:9b0:bf46 with SMTP id
- 2adb3069b0e04-59e09b0c05amr963814e87.42.1769619995275; Wed, 28 Jan 2026
- 09:06:35 -0800 (PST)
+ AJvYcCXccYOwGYnmcxpVq0MuAKyTbBkryhB1Fe7qnuIMnqxsnjEUoQ8KRvQ+3i3w8kHH2AzeSscPb9k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3ZmyFPE/t3lk67DR6mCRvNJLIYO2jvZEqUBxtNjLu3/pUVCFP
+ x5/YvUUL5+RpDIgMZVI2A1SM3FIUhgMMQ4cVBtQz8bCi1GCRZ51K41dZF1orhrroOOc=
+X-Gm-Gg: AZuq6aKnsE5JDl8/00MW0XMCM1g76avmXTPnq7Zc0Xqju8oUUmeD4O4Q7p5qaMoF2b+
+ xAOqkgo9zxwaEsjBWW/WXQ3GHQiouOX5iZE69IUtfZ8bniNNOgskmf9/rxmtnxq9RRnzinCMuhV
+ LgT86K3ixXKgIaQo2mIFjmMkKLmd/RuWageo6VCYz0NnNDXmMSR6xo2lm0cr3a+jiAgSMy7//8g
+ FkmVyUa5MJLax5Yd0tudhJ4LsQS08XEY6zoz4raYI8jvCzgs4HeSJXgH4zgoHojhtultm+WdSPM
+ WnDTFM/9aVRchQPQE+LLhkPAg2FrlB1bhjuLaxl4F+djQGxRMaOYYEoH1vQVSzXQUbtxkmNRrYE
+ uOTUk77a2gHYzwSSiXVVyx+kj8Og1KPD+0/c5NuMF2ZAF16b3I+XQPVgn1jZ4ol1PziXlzUZFob
+ gmsTFv9SBuH+h7v49XdLOOwlu9shjjMF6AB94vqJ3nZy1lof0ohSO/+NmwQfNtcG+aOAk8Q3QvT
+ +qGPpHN3BIkoT7LaKu28suoQ/XNfoHqXow270mVCg9rSBn6Uw==
+X-Received: by 2002:a05:6808:19a9:b0:453:ea2:36d9 with SMTP id
+ 5614622812f47-45f1e407e0dmr129245b6e.32.1769622977372; 
+ Wed, 28 Jan 2026 09:56:17 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08f22826sm1600703b6e.11.2026.01.28.09.56.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Jan 2026 09:56:15 -0800 (PST)
+Date: Wed, 28 Jan 2026 11:56:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Sean Anderson <seanga2@gmail.com>, Beleswar Padhi <b-padhi@ti.com>,
+ sean.anderson@seco.com, ilias.apalodimas@linaro.org,
+ malysagreg@gmail.com, sughosh.ganu@linaro.org,
+ philip.molloy@analog.com, marek.vasut+renesas@mailbox.org,
+ james.hilliard1@gmail.com, anshuld@ti.com, afd@ti.com, nm@ti.com,
+ vigneshr@ti.com, n-francis@ti.com, u-kumar1@ti.com, bb@ti.com,
+ praneeth@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for
+ flat_dt images
+Message-ID: <20260128175613.GP3416603@bill-the-cat>
+References: <20260128141834.2322865-1-b-padhi@ti.com>
+ <708253cc-be1d-f375-0427-91658d5e88fe@gmail.com>
+ <3432c5f4-ad37-46fe-bac3-ec0fc7778767@mailbox.org>
 MIME-Version: 1.0
-References: <20260113142303.441190-1-mateuslima.ti@gmail.com>
- <aXGZVQhGzIrtXY86@nxa18884-linux.ap.freescale.net>
- <CAP8WwTH5=Aqy+QLLRv9QGJ3RTbwyMXA88BsO4eJOB-WawHfHMg@mail.gmail.com>
- <aXbNSAUDjG83gKsq@shlinux89> <20260128164704.GM3416603@bill-the-cat>
-In-Reply-To: <20260128164704.GM3416603@bill-the-cat>
-From: Mateus Lima <mateuslima.ti@gmail.com>
-Date: Wed, 28 Jan 2026 14:06:22 -0300
-X-Gm-Features: AZwV_QjPmWOZu0MKYMMk7320YvnafGUhZWNMaY0WtgeuCYZsyJbN_n7S1RIVP1M
-Message-ID: <CAP8WwTG0VVR26QxEFtpDN2s7xH_L3dR2y4PkwfwFgeSv-yV-cw@mail.gmail.com>
-Subject: Re: [PATCH v2] armv7: Add CPLD support via IFC to the ls1021a-iot
- board.
-To: Tom Rini <trini@konsulko.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, alison.wang@nxp.com, u-boot@lists.denx.de
-X-Mailman-Approved-At: Wed, 28 Jan 2026 18:49:13 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zM7J5GLV8ilBAi9I"
+Content-Disposition: inline
+In-Reply-To: <3432c5f4-ad37-46fe-bac3-ec0fc7778767@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,101 +107,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 28, 2026 at 1:47=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
 
-> On Mon, Jan 26, 2026 at 10:11:20AM +0800, Peng Fan wrote:
-> > On Thu, Jan 22, 2026 at 10:12:36AM -0300, Mateus Lima wrote:
-> > >On Wed, Jan 21, 2026 at 11:13=E2=80=AFPM Peng Fan <peng.fan@oss.nxp.co=
-m> wrote:
-> > >
-> > >> On Tue, Jan 13, 2026 at 11:23:01AM -0300, Mateus Lima Alves wrote:
-> > >> >This patch adds CPLD support via IFC to the ls1021a-iot board.
-> > >> >
-> > >> >Signed-off-by: Mateus Lima Alves <mateuslima.ti@gmail.com>
-> > >>
-> > >> CI report build failure.
-> > >>
-> > >>   CC      drivers/video/hitachi-tx10d07vm0baa.o
-> > >> In file included from drivers/misc/fsl_ifc.c:8:
-> > >> include/fsl_ifc.h:16:10: fatal error: asm/ppc.h: No such file or
-> directory
-> > >>    16 | #include <asm/ppc.h>
-> > >>       |          ^~~~~~~~~~~
-> > >> compilation terminated.
-> > >> make[3]: *** [scripts/Makefile.build:271: drivers/misc/fsl_ifc.o]
-> Error 1
-> > >> make[2]: *** [scripts/Makefile.build:492: drivers/misc] Error 2
-> > >> make[2]: *** Waiting for unfinished jobs....
-> > >>   CC      drivers/rtc/ht1380.o
-> > >>   CC      drivers/video/hitachi_tx18d42vm_lcd.o
-> > >>   CC      drivers/rtc/i2c_rtc_emul.o
-> > >>
-> > >> make[1]: *** [Makefile:2191: drivers] Error 2
-> > >> make: *** [Makefile:362: __build_one_by_one] Error 2
-> > >> Cleaning up project directory and file based variables
-> > >>
-> > >> Regards
-> > >> Peng
-> > >>
-> > >Hi Peng,
-> > >
-> > >Thank you for the test, and apologies for not having validated the
-> patch on
-> > >other targets.
-> > >In fact, this driver was not being used by any target (neither ARM nor
-> PPC)
-> > >and after this patch it became enabled again. However, PPC targets fai=
-l
-> > >when trying to include the asm/ppc.h header, which is not available fo=
-r
-> > >some reason.
-> > >
-> > >For now, I am thinking of submitting a v3 of the patch adding an
-> explicit
-> > >dependency on ARM, something like:
-> > >
-> > >+ depends on ARM
-> > >
-> > >This way we would avoid building the driver for PPC targets.
-> > >What do you think about this approach?
-> >
-> > It should be ok.
->
-> This has lead to:
-> WARNING: unmet direct dependencies detected for FSL_IFC
->   Depends on [n]: ARM [=3Dn]
->   Selected by [y]:
->   - ARCH_P1010 [=3Dy] && PPC [=3Dy] && MPC85xx [=3Dy]
->
-> WARNING: unmet direct dependencies detected for FSL_IFC
->   Depends on [n]: ARM [=3Dn]
->   Selected by [y]:
->   - ARCH_P1010 [=3Dy] && PPC [=3Dy] && MPC85xx [=3Dy]
->
-> For example on P1010RDB-PB_SPIFLASH.
->
-> --
-> Tom
->
-Hi Tom,
+--zM7J5GLV8ilBAi9I
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, I noticed that this warning is appearing now, and before this patch,
-neither this flag nor fsl_ifc were properly used for compiling PPC targets.
-Now that I've added more information about this option, it's being
-considered again during compilation.
+On Wed, Jan 28, 2026 at 06:23:20PM +0100, Marek Vasut wrote:
 
-But in this thread, I commented to Peng Fan that it was possible to build
-for PPC targets, meaning we wouldn't need to restrict this to ARM targets,
-but I don't know what setup was used to crash the mentioned PPC target, but
-in the U-Boot Azure DevOps environment, all targets were built successfully=
-.
+Thanks for taking my request and doing what you're suggesting should be
+done.
 
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D12700&view=3Dr=
-esults
+[snip]
+> -	for (node =3D fdt_first_subnode(fdt, images);
+> -	     node >=3D 0;
+> -	     node =3D fdt_next_subnode(fdt, node)) {
+> -		const char *data;
+> -		int len;
+> +	fdt_for_each_subnode(node, fdt, images) {
+> +		const char *data, *type;
+> +		int pl;
+> +
+> +		if (params->bl_len)
+> +			align_size =3D 8;//params->bl_len;
 
-We can use patch v2 in this case, or could Peng Fan please show me how he
-made his build break? Is it a different environment?
+This should be params->bl_len, not 8.
 
-BR,
-Mateus
+> +		else {
+> +			type =3D fdt_getprop(fdt, node, FIT_TYPE_PROP, &pl);
+> +			if (type && pl =3D=3D sizeof("flat_dt") && !memcmp(type, "flat_dt", p=
+l))
+> +				align_size =3D 8; // or params->bl_len rounded up to 8 ?
+> +			else	/* Default alignment to 4 Bytes */
+> +				align_size =3D 8;
+
+If not params->bl_len, then 8. If params->bl_len then whatever the user
+asked for is what they get.
+
+Then post it on its own so patchwork picks it up and I can grab it
+please.
+
+--=20
+Tom
+
+--zM7J5GLV8ilBAi9I
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXpNvQAKCRAr4qD1Cr/k
+ClHLAQCqc23XYIRoJztCOFjMaYJ92AljpKIyIe7Eax/9F7NyQAEAuxuPlHnWLp7G
+s3JINyfXQ3USFuMGyunemOykFrayNgk=
+=6i2j
+-----END PGP SIGNATURE-----
+
+--zM7J5GLV8ilBAi9I--
