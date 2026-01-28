@@ -4,142 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F132D35671
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:54:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79180D35673
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 04:55:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E49C8841E2;
-	Wed, 28 Jan 2026 05:53:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CE0F841E2;
+	Wed, 28 Jan 2026 05:55:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XMYvrKey";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gq7jCO5f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E04968422D; Wed, 28 Jan 2026 05:53:58 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 4E8A384239; Wed, 28 Jan 2026 05:55:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C676D841D7
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:53:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45DB1841D7
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 05:55:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1769576029; x=1770180829; i=xypron.glpk@gmx.de;
- bh=LxR4rhwRGsDTeZqHgc4cRekzG4lBcncb041WCS7rXWo=;
+ s=s31663417; t=1769576108; x=1770180908; i=xypron.glpk@gmx.de;
+ bh=jJ4i3vHbWvBUoy5iwtwto+h00EVP8btUy4SH/6lqzLo=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=XMYvrKeybxlVSOaPrRm89+151+rZIUOrn5FD1bwX9fLhT6E5vvNsi2afcX4DZM9j
- 142t+HTJ59AaYB0CHHxlrWWn94FmKbd09umq6pjD0c7c0kieGoPgH6+5wK61rWuca
- GU3wG8iVZFWzKy0PucJUB29iua7KTqjga78SFTmhHA5x4jmCxAv1YGZlJ6YjZfrfW
- TXclwRznb0IGV+LCKqXCGl/1lfhBn1l/jN1sRrRuOpUAS3l6Vl1x94tSdap4owiZG
- BuqQP6r2sxApdfMUvyyj9zXaWEXTP7LIlXDIWmWuchCiDzN3SEsz/Wb/nU9hByOQm
- JLV9rwNrATO+ziXn3Q==
+ b=gq7jCO5fYWxTTbkmkeVqHp0pMjTqYi4J42y+E3tXlvwhHz3j54RiZkFvpjm4BKUq
+ X1L+p5aQZpGQ+YCmlpmxQrg+TD8SgZXxbYCvA/Kl3hSIhoqaj42+Eo3zPprFjptLK
+ R0F7hir+/2zrSjIylAk9fD+1U4zUpK+KhvtZ1nh4pKC9yrC+fTdYHZuAf4yhDlxn8
+ nLlBjZdu7CGJoLxukGc5VjBaae/aibu32yg9Nq9qZ1E5SGKERYwDmSTTmrtn1yrN+
+ XlrvDw9N9mOHbt1DkVy8F/JD0Mt6lPDDJOm232CLHKYFjvbtpsQdq34NRB4vW6kWr
+ MQ8/+l7YPzp62CF86A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from ehlo.thunderbird.net ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MVNB1-1vM2A72daZ-00UUqp; Wed, 28
- Jan 2026 05:53:48 +0100
-Date: Wed, 28 Jan 2026 05:53:45 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Md6R1-1wKIGW3kix-00bxZN; Wed, 28
+ Jan 2026 05:55:08 +0100
+Date: Wed, 28 Jan 2026 05:55:05 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+CC: Alexander Graf <agraf@csgraf.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome@forissier.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
  Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_cmd=3A_zip=3A_Use_map=5Fsysme?=
- =?US-ASCII?Q?m=28=29_with_buffers_in_the_zip_command?=
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_cmd=3A_unzip=3A_Use_map=5Fsysmem?=
+ =?US-ASCII?Q?=28=29_with_buffers_in_the_gzwrite_command?=
 User-Agent: Thunderbird for Android
-In-Reply-To: <20260127235339.1503312-1-marek.vasut+renesas@mailbox.org>
-References: <20260127235339.1503312-1-marek.vasut+renesas@mailbox.org>
-Message-ID: <CE08F0E4-6577-4CC8-9512-76790D72830A@gmx.de>
+In-Reply-To: <20260127235310.1503239-1-marek.vasut+renesas@mailbox.org>
+References: <20260127235310.1503239-1-marek.vasut+renesas@mailbox.org>
+Message-ID: <15C875DB-52B1-4BFF-98EE-FB45F570898A@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1mjV9RBunXT0xjGupEZTX2fZDl5DvtntfFT9VsnPeKmPR/U1HJ/
- FB+eVHe1q4w3cDt6kCQyhll3ai03SS/vD88teDwiYJ50A8XQ8Q27DYK7WLWU4VxJ8mJmGSy
- cFv0V7hdRssbK8xgM2oOBqdsSRjpws1A03/10Uk2jOh2QFSvZVeX1DJ6XJyV7DanKoqBeU8
- ++s0v/DT0q7uYvWZ/E1XA==
-UI-OutboundReport: notjunk:1;M01:P0:sD0/qMrC81Y=;MAjfX/k7RW9Tf88XYqBKgo90c4j
- Z113b7cr10jeWwc5BGmcB16M533GEZR/f+2p5E7i4H7UL8k0Tsd/sPgL4ZnCk5jkxkHM8WUPA
- CwXam2Rn4dPYCdfetLplk6/SB3cD0tDsLwQfnvEs2nRf57SUc7j0WxKNKaJ6TQoOOO4azlXuR
- gXFsiChfrAQkME7n8j8nZ9oMD/VD+TwZZAFapi0guTJf0119WMmsGLqyQq5UGyj2giSYO+Gza
- W3LvuGtHVSWJ0cPt3I/GR8N5zlBoNVJodAy5oVFi24eEWBEOYwGrWXoAGrtMlKsnCY7vCUnv5
- shiu7VYnpuCE6behcsdldrIJr/90U6U24YFzHHRZuxmz/qyzRi06QY4uAj0Dp+mxDA9vLN4GG
- lZMp6eFEzn8QNNRZfY/5ViSIHJQCzd0aAzgZ/lbJUYi8byFRs5PIOZEXLxdLo7kqa3o6w8FRm
- NNT8HcXhwi/B6UxLgcnpkE1HRR3aywIGLl6r/yeU6TNZLT1qcQF9CPv+SBu7psidVD5csldS6
- Y2UEv8pgFOOtFCejadBA0YEbh1a0DPVPCGGYSS9//9mM4o+WaDPIjni0VcqpetUY3rF8kq1b2
- M/uavCzij39FBgn82zkhtDysVyG6Yemr1ODWqCnrC5swSUiOZrsncxZ66vuJhEiJOd3PgR96f
- wvIa0Fz+5Ru1dnsV+RYGSZbq5JDiCVySv1gWnUtQ6ohz6DBSKkPRA+vswVhBMFS7hFYF1w35B
- idiDd7WfYL8xdQGGqsHqh/qvMvr0F0UUEjNEnd/2moL4M1xb9Nyo08YrK4dUVY/F3LhNdDN4w
- tmCVj1767mHDfcBtcaY5eb/2Q+5ajoaVyMwDZXisZ2fUe1wS3YQUCt2XumgX4XEzmDkQtob7r
- aK24w3n2MG0W6FR24RGUeu7PTc6xFRJNBTigxy1lqo/6ZwTMlXPR5ugZOvgpdW5CLmK9c/D1M
- W7HgkgYfmszAJOp+Pj2H6FgzL9Veqd5zEoOGZvdXZ+5UA+2vgFH1E59H2nWKt6heo08NJAEhG
- LRUPDpYnK3f8OH15iy0hyfG7IDofYUPqvT1PWIGlK6vy63LuqThhcZ4woy2nxSme3OVl0S6qX
- zM5Z79ncJiy/AnURw8upIyqQYi7DwHtVYmuxh9dMKvZvYN5l0N9iohfjFM2EthDR2w8bcN99r
- oTa8I0fPxu3oF5kvUeDIhRSwuJUY8gP71J2M1UIMllQooLAZhyr/Ln+k3kX4T7DA3IPo6M7x2
- pku/pYIvnUvTlBG+ludE6B4WViB7k7va57XmFr8VqqMlBxDIBu/kwpG33WJTAEh24jAviPoDE
- b1bkX0cPsG6rFYHQewgRMIx4p6Qsg+H6MAugozkSlMYhmX+6aRbCfAHHK87iws2bcXgPJ6epG
- lg5J/hNKhWlsV/N16offsgRZGpIOA7QO43gcytE02u0+yLAyp/388ZWDhGgQaku+c9N5UCzT1
- YSUkd9C0soGEdHU91ryF3NbbQnYFMNgxkAhHpHUJz3zLGWNlF6KlDZ7uxEfNX99ijUnngWvPv
- In1B4CXppiFCfa8pEhLhCKy+UotGwapX7TWWV7hxts0x8YA5dI7XU5VWvlWEutinT9DylNdwu
- V8jtl8FXzd2dISL0X/qiS5GlPjhCv561ZGaLbIseGgS+NSNJjnFePtXdru+yYiV3KKevCIVxq
- uRMtJ+F4eCe7NACGsMT0asF0g5uiXIhKnt3Cw171/VlYr5KNwPLBv+4NCWLQUHufArUWE2hu4
- ANQJwpjSOCesr1eOMJ+yqYxdqbyRZ7iIj6FQJsxjAGruV5a59SoRVYuBwW6H/0XBwn9QC50Em
- TiS/JPSi1V1BAC5GL/kBz1Ueu22IeA1PngQ9fjbDFc/JE00LgCqQX71387WayUfvYUCT0kv0W
- aYJrsxhQpSgalUlj/YYx8ETYBm9+6WxQB+FS95vRBLwqb8JaowBj6iGExnVQoFYNwpwhU7a1S
- ipJZsiJxLm1WtBA7NYlC39zhS/L8r54klVKT18QlIkq/E8k3srlbrRDP+7MAunasKe1Z+cSrT
- RpavPtq6MxRm0WXAy9y1QJKZu013kortLDGmhmdQPNRD9OMt9BoE/pwZaERmf4ufbDVE53cJt
- ixvbBY3XRiHv4oEnRnS0YraN/OUgDc+JoJnwbGR3V137qsYl5x/+Uw5gO64/eNHOfdpIT6c6b
- AaCwtz2uvEWWjmaez3l6jsjNViX6iv5cEbPbs5nEA+815lzuRbEOEMSpnHv64VB9OTXVl5TBo
- HqAjwWXJraJsjmKu82qwKaosrumZNuAwoO/6nzg95IT4phWWZQSkegcYNdPvxJn5477ba8Yaq
- ExPvdp+SGWs17oeNgl59pf00Z42LgFh6PKSg7TiVuNuLCVq+1WQA0Ciuadi+wV4Lt1Co9GqJl
- PXb/B+SqG01o6tDj79MtOetOGZfnrsiuomoZjNbpdBmBZ51e4CMvPlpX5jc8mnTgnnAIstoM1
- S9s1/nk+NoaSrOHztJvnJ095eaE0EFRk7snOIygTAbQs6O6+oJE+NUkzXkis6QTndxSuWlB/6
- O9Fv5eGFmijl1ozwEEDzdLs2mmgtkPUVnQA8E8Fyelohrxn5BgN02mw5a8TenDGekUILKiNkm
- dFFuFX7Gt0muuPcc0xnX8+t1TEZm4CrpYiGzxqoT/Sh5P1gVqcYv+JvXU1IUNTmLr6iTL3R7k
- KCx8wMHyLBJ4OOedt9AkUjaUfTHSUckm6AisXEpV0BLDKAMnEUV3i195RD5R8EFKV7bqEcjIm
- KDqgwvPf3xp+9i4p+eJM509p+9KBFK8ZgzhShpR4mpHseD1Od6sB8eYNoM4uKtlEzyGsz+7up
- +cy3PidYQ0TZ/APolq8gt+SIodw+UzKQtwRBs6jOm+X3CmjLLkAd8fKqi4k0wQrIZ9k/gRfYH
- Ec7XvTpYje+yNCZmT1/FFxeEpW66DhxbYBKfMrWQPyyPxXnbJrcxMi2SV8tcbWkCUPqpK9idX
- HvqKdW6uzRD8ZA5oW0/9L32XaDRm3J7us0uvAAvc62TxN+cLcazuV0b5Mk4pFjEKSo18iXRvS
- qj2ii1hjh4Jvz02xtvURNAvMuG1hUo/rn6l7xALIw2dUjrf73rcDpLoUORE9OSVmu0+28phFy
- o/l5I3IPRp7Tw68yYkORIbuLrqS7DzZxx+bfgda/VvTNm0f3pXuK8tjHUvZSd9aDKxapLMl8/
- dyIFYqTVI659+jPqjpMq/nFKpxRr1ZhHEMYhJGCXiQZ1aM96VJu0WFabLGm2XGFAFWVE5n28+
- W60IlIZTCo/jz7bF5avRE82Sr5CScr4dceAHhDVaCjM39vXdssXqBZqo6AWnNXl4UFkQs7wqe
- D3snSSy2G9nZpnEQOecWBN09g75xmTlBem9NEh5pPLv0I2syBH6jpLX2BOHeTzHBz8jtpgw5M
- fhwSBri2C5avvL1DgktTbLfGY7pEzWJwdQG2eqazYUIxcnYdACbyfA8u2vSMFoelN4wu3c9tN
- diVW0CEwKQyWJZgnkdIIOJ+gCxDGVqpT+Q1CP9jo2sWOjVCj9K6J3GZb/AGWIwC3lmrzjJA8F
- Y7gDRaBbdOSRXltXMJ/HVe6YOoxScLF+4jVIZjHFsLVWwCmLcsB8cidIVWZq/AjjNY4uIfONx
- aMMmHy8EVShbk4XmmGtXQ2SBOgwf/Fghtj3JNsYWzIOsb7Z3iyHbucEi13BzZ351L/UEN7P0Q
- nmBVOBSF6SGYnbCt7HwAEUb8Ar5SMysRtcwgyU/rfxhSJv8hSXCyeFTgc58YAjWKUxUMsYZK1
- K3uGLGn/PAuCU6bUMAjGBtvIwbpSOnjqXuMPJhOJzDA3SPamozD+J1e9gSLR9J9VDsbjZjVjS
- LKbgfXY09V3aYLeCOmmBTy2KgMvtxaEhs7GQ8ujvVztFlyZ7ghbz8Und3MUC1FKVfFyCdRw62
- A5yAaJkq0e62XpPlwJnR4TpMRykDcnuAROalchiDNCOKKMpj8OMtiJCvx56jSNAi5YetEKk60
- vmJnuP/2rmxaGt0zMtJ8r/cAC1Ncax8/gnr0gZarSR5qVONlmapdNqUpXNPbpmR2MUJWsT3xR
- +7estSo3/Rnvvj+jQ+r9InVjuQUVlFFtexmSGwF7UQgQWG5zf+9k52ByzPSoPp0W56AxXC//2
- 5BQyPTq5WNHqNe6B+sCiaZ3BkDRRYcQsb7SjzLUrJ4TDoXyU9Uh9kQogWhJLZk75PPykIzJ9m
- 8xdMXbTjvvmhvluUOaP0geg9m1jhuIsSW52RTqzmcOVQ/05hxJaB63s2eZsc27UnaDDGqSwu2
- GWUAbcHaO9yN924KdIAoutbadPh4zda0dBJKFKxIcztDHplumMzVKtQ7q71w9n1muJKw/4Mtg
- UQbyTEltz2OauBxI9ScHeeU0NMvXOtbv1E+0QovYQoSyQfqiLXAQboW9KyPvX76LhyQ9SheVD
- JM4pKvShj5y17aLm/5AVjSnfB/5gdhAAoRHO7hKkjSorlGSER0qy8UwCJoGkTosHFBU/1Km7/
- nzXAVqNGygOMiuwZnQ33ee6/uC3kngzSCWh0Ko06D2w5ymD0COkjtzvpV6ZY3VezcJ/MXd75z
- S+NJtjXFBIS97qZorlZQHAjY775Pw1fjF8G36GvnwhbJRZKeVmvRQXbqdUTWFzZUNngzUrgkb
- LDOFlC2SygRYOSmSZfP4CeKR5XaiEksv8GXsijqAK5xToVQCqUIpJUrG06m3bCNs1iSIMT2CC
- SUPZUprWnDljYS3qZhWBj3bcHOQTC3ALi1H60IyBSByi+sFAqK5nXwrieU70OQ5gwi8vpzcQp
- rXzKY9XbFei9X8TOTpfe2KoUvRTy5rcmLz8+Z71hO3hFzOnihEzlD7hJYCabDcjK/bTk2sx3b
- BIyFiNt2PzHdGZge0eLutdvLUGf1sqAUudy3+Yhc426qKMEnABebWp478BXaGg+1ORK6e8fDY
- hOjsY2b8c2jlWwFJMsecuinLdFlrgiULrzW/Kg41I6INcx9XX4dCDkKp3938Z9Og1EkGRVsOO
- XJQFJuwunf3HAQWFi10b4M2VaBiGpkPucYhlcpnjTbUZKmq9/S0EkIM4BXOSP3e7X3u+XqeyS
- QyLAEa+H+F+UL99Gsod/Ckr4f7v3UVEaMPgdDsfsbTV4kBgbo7sV+fUhYGFDB11N0lFVnJ5xZ
- C85Ldjvd4N3NSkrPjVX/HlnfoueYQm9fsG2Nf2ZRagq2/DP6fVUuxBFWj5MVZxlI9LSScox6T
- x80IoJuVNBjdQ57nECt76T2P62u2OvPqgSCFkvICiFeOXQSEyGQ==
+X-Provags-ID: V03:K1:z3wJcE7L0DRh83caAF7L+Zck/AYPPmmz5mCNJ0nwonwQeGPBsxB
+ 2mfZ1Xbnh6LWdsspa52LpTh2H1qGr4s7R/oaTjyvnOT0lPMB9VZvF7pnPs6R0VkpVCE5wqw
+ 55x7nDqJPIsq9LiOCuk9+oxC4v4vgwEoQ8MmkhaeMPUrUnjkgj+TYvXZgTz3OsGY1XnJy+n
+ 96Ig82m7FNbMx/pBRkMow==
+UI-OutboundReport: notjunk:1;M01:P0:lCVfZr0EmCg=;Jo88taxkU8XJA4Xrh0yseKElTZz
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,10 +157,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 28=2E Januar 2026 00:53:23 MEZ schrieb Marek Vasut <marek=2Evasut+renesa=
+Am 28=2E Januar 2026 00:52:50 MEZ schrieb Marek Vasut <marek=2Evasut+renesa=
 s@mailbox=2Eorg>:
 >The current implementation casts an address to a pointer=2E Make it more
 >sandbox-friendly by using map_sysmem()=2E
+>
+>Convert 'addr' variable to unsigned long, as that is the return type of
+>hextoul() and address parameter type of map_sysmem()=2E
 >
 >Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
 >---
@@ -176,47 +180,46 @@ s@mailbox=2Eorg>:
 >Cc: Yuya Hamamachi <yuya=2Ehamamachi=2Esx@renesas=2Ecom>
 >Cc: u-boot@lists=2Edenx=2Ede
 >---
-> cmd/zip=2Ec | 5 ++++-
-> 1 file changed, 4 insertions(+), 1 deletion(-)
+> cmd/unzip=2Ec | 6 +++---
+> 1 file changed, 3 insertions(+), 3 deletions(-)
 >
->diff --git a/cmd/zip=2Ec b/cmd/zip=2Ec
->index 2d255428822=2E=2E1712434ba0a 100644
->--- a/cmd/zip=2Ec
->+++ b/cmd/zip=2Ec
->@@ -7,6 +7,7 @@
-> #include <command=2Eh>
-> #include <env=2Eh>
-> #include <gzip=2Eh>
->+#include <mapmem=2Eh>
-> #include <vsprintf=2Eh>
+>diff --git a/cmd/unzip=2Ec b/cmd/unzip=2Ec
+>index e7a3f9808b2=2E=2Eb265f43f2ea 100644
+>--- a/cmd/unzip=2Ec
+>+++ b/cmd/unzip=2Ec
+>@@ -50,7 +50,7 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
+> {
+> 	struct blk_desc *bdev;
+> 	int ret;
+>-	unsigned char *addr;
+>+	unsigned long addr;
+> 	unsigned long length;
+> 	unsigned long writebuf =3D 1<<20;
+> 	u64 startoffs =3D 0;
+>@@ -62,7 +62,7 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
+> 	if (ret < 0)
+> 		return CMD_RET_FAILURE;
 >=20
-> static int do_zip(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
- argv[])
->@@ -27,8 +28,10 @@ static int do_zip(struct cmd_tbl *cmdtp, int flag, int=
- argc, char *const argv[])
-> 			return cmd_usage(cmdtp);
+>-	addr =3D (unsigned char *)hextoul(argv[3], NULL);
+>+	addr =3D hextoul(argv[3], NULL);
+> 	length =3D hextoul(argv[4], NULL);
+>=20
+> 	if (5 < argc) {
+>@@ -75,7 +75,7 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
+> 		}
 > 	}
 >=20
->-	if (gzip((void *) dst, &dst_len, (void *) src, src_len) !=3D 0)
->+	if (gzip(map_sysmem(dst, dst_len), &dst_len,
->+		 map_sysmem(src, src_len), src_len) !=3D 0) {
+>-	ret =3D gzwrite(addr, length, bdev, writebuf, startoffs, szexpected);
+>+	ret =3D gzwrite(map_sysmem(addr, length), length, bdev, writebuf, start=
+offs, szexpected);
 
-Wasn't the idea of map_sysmem() with a non-zero length to have a matching =
-unmap_sysmem()?
-
-@Simon:
-
-Does the sandbox really need the mappped areas or can we get rid of the le=
-ngth parameter and of unmap_sysmem()?
+unmap_sysmem() seems to be missing here=2E
 
 Best regards
 
 Heinrich
 
-
-> 		return 1;
->+	}
 >=20
-> 	printf("Compressed size: %lu =3D 0x%lX\n", dst_len, dst_len);
-> 	env_set_hex("filesize", dst_len);
+> 	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
+> }
 
