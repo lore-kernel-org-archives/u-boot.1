@@ -4,81 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B75D2FEFA
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 00:03:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07EAD2FEFA
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 00:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0906084212;
-	Wed, 28 Jan 2026 01:03:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 45D508421D;
+	Wed, 28 Jan 2026 01:13:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G9kMz7lZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P8BSVLnM";
+	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="ZKdDBkHx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EE258421E; Wed, 28 Jan 2026 01:03:50 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 5AD6A8421E; Wed, 28 Jan 2026 01:13:20 +0100 (CET)
+Received: from SEYPR02CU001.outbound.protection.outlook.com
+ (mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c40f::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1608420D
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 01:03:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 296EB84164
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 01:13:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f12Yb2QWFz9thT;
- Wed, 28 Jan 2026 01:03:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769558627;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=owV+CetA5V90cGVLezJTXCxUNnQaGhwob0RByOb7Ut4=;
- b=G9kMz7lZ5ZMgTnntJCMSne81Ii3EKqFobX9XuOKAE+VN2Ca+DKIivfDbg+BjW/JWeioSku
- IU7sMaarrCORSg/i55F5c9XqZSpFqmTjPPtPoyFeYclf50XO1EwJTQz9KTOlQjEaRSlBBt
- uCLrlSdPgKqnLuT2bl+0fiT70C/4vC9RkXXLP+g+cPaxg/16PjkYwf1EmIWhKBXxa53eIG
- QIJXjHk89uipjHY4k8W4Ecqfm/IXaLuTJEfN6tHoWq0rf0y85FEiFRKzn9BFZgZrmU0QWY
- fEzzo561rNliHx2tFwH+E/HUlwYKkoAtrjMWd54cTCz22Otfmtolf4NeGU5kLQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=P8BSVLnM;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769558625;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=owV+CetA5V90cGVLezJTXCxUNnQaGhwob0RByOb7Ut4=;
- b=P8BSVLnMp5jrkBEOsoN9sLY1m6qt6XfkYP+24spUzwuD3ApAHf5Sx4n+otAg3J9fhZvgFU
- 1IvDqV9p/QAlPXoGm0z1S3X9uQHKncXH7teejUW7UDPbxoYMzjZodDWKya3GKCCY1tU/3I
- VTSooBdJo1IRV57SXofZJ5+2TI1s5ijaEhofugc1QbJmjiFJ3n4XIwIKbO30SswaBjp1/X
- rQkAPPjxuOk9tbbiFmOc6jvDbSHe+mFmTlymiMW8gT7ECSGiWQoXgoIJwPjxierE22CQ+n
- /srO8yfRxTABQctR7ma0ZGWzwUkJzdn9wIWg04WfuujY/OXsxRU8au4Sx9qBhw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: [PATCH] gunzip: Implement chunked decompression
-Date: Wed, 28 Jan 2026 01:03:31 +0100
-Message-ID: <20260128000340.1504375-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=chiawei_wang@aspeedtech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k7e1RjTbO31f9kmEHBwdjZtQscQ3LzPyMiFHHzVHCLrvuIZe2CKhypoG/maJoXXg7sNWf2z06oNUwr/il7jSDfKRS9FCbfsZFk43xmcuP0ryTB/hG7O4xQWMaiEustgBLQt38cDJ62uAelaMlJ1lUCZeLhceWKBleQgElGMCcxg+1xJ6t6QkBPojUM/ufX/kCZWDVg8qrh8txyAn9R93+cJGUDVU9DnpYQoXaSHJfb++W/IV0xHHhayE2524jCUTI8v4EwuDk+I1yw8ypnMG2I+70/g5LGPyiKjVLrUWPdfDrqygfOjczOPrF5cxSjMEwglAFEy4EDPOvY4Ctt7LoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rwe7JE9Em9wQhXlGdDWw5z5eUlLfeCxFrVUL0ROZfaQ=;
+ b=u7zB6W/KI5g6amJf5rPTOubupwYq4AiqNbdAi4e8ogPGvc/1wfUeNt4GfUqxZQYe5QeAraYITx4ncR80qXWayCMZIPaGwcU/gACXAeS6E856kinlK/+zDFBk0O9/8sbySpQBBQhzyL5/MEt4kkT189LSU3Vs+6LbmSph/Ni5zLPPMFGRB4UyZsYcwQKh1U5qv8G/SvPf0SY9cPJXn28DxOzDp7nMIck8XvMrD11+qgQZMNhNzQaL0wTnX3Ewz0j4OMEorl2R9A9t8wH2awubtstUO6qHXBeVDdXtj2Wc0waZkukfLYeJ8PTzX0EF+md/wlY405TZ46lIwVAlECjV8A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
+ header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rwe7JE9Em9wQhXlGdDWw5z5eUlLfeCxFrVUL0ROZfaQ=;
+ b=ZKdDBkHxM9LGX4xTJb045GxuNd8XIJIxfog0meUiEzbWwzITCXK1NEHjTtvPdn5fmlAmy/GSVV/o2Xo/Bac5nylX1s5gbjsSG1M21F7eJkj/wqE/Yw4NNw6eKogbQqStHggE4OWAosZCl2upzMuG6vk9sAMH+SzdA8gNuF6S1/yaK8j/Vs0PCDzT60wVw8OxHgTZQU8GhwiPFsGniKYGLUGxIfY+7WcN+ATNSq3pAxIcMbn23+G+T+fB++jWY5MK3FahpNNrPbMqcpLEQ6d/cYnpXR8HXZpClllJzybB79zs7fsitEhFZVoP2oYvJI1AdVrygAKzb0htNavcu8KdcQ==
+Received: from KL1PR0601MB5488.apcprd06.prod.outlook.com
+ (2603:1096:820:9d::10) by SEYPR06MB5135.apcprd06.prod.outlook.com
+ (2603:1096:101:5b::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Wed, 28 Jan
+ 2026 00:13:13 +0000
+Received: from KL1PR0601MB5488.apcprd06.prod.outlook.com
+ ([fe80::d45a:6698:a285:990]) by KL1PR0601MB5488.apcprd06.prod.outlook.com
+ ([fe80::d45a:6698:a285:990%5]) with mapi id 15.20.9542.010; Wed, 28 Jan 2026
+ 00:13:12 +0000
+From: ChiaWei Wang <chiawei_wang@aspeedtech.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Fabio Estevam <festevam@gmail.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Adam Ford <aford173@gmail.com>
+Subject: RE: [PATCH] arm: Remove rel.dyn from SPL linker scripts
+Thread-Topic: [PATCH] arm: Remove rel.dyn from SPL linker scripts
+Thread-Index: AQHcj9RdTek7cySKk0yVdfVXHtDGerVms8jw
+Date: Wed, 28 Jan 2026 00:13:12 +0000
+Message-ID: <KL1PR0601MB54882F38FB9675D83E1F1D129191A@KL1PR0601MB5488.apcprd06.prod.outlook.com>
+References: <20260127213149.1338179-1-trini@konsulko.com>
+In-Reply-To: <20260127213149.1338179-1-trini@konsulko.com>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aspeedtech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: KL1PR0601MB5488:EE_|SEYPR06MB5135:EE_
+x-ms-office365-filtering-correlation-id: 28562c91-94e1-41e9-130d-08de5e0206b9
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700021;
+x-microsoft-antispam-message-info: =?us-ascii?Q?/Am6Wn5Oc1vz3BBFFaj79JWYoRQ8BLXvmXmNZmLl+WJr8w3j4s1I/KcvpoRA?=
+ =?us-ascii?Q?YhnoKzwuCc3jjC3FWR0d5RaFiILgzfHgY4CWlqr0iTFiVOy7k6WJbs553h7c?=
+ =?us-ascii?Q?ApxaPdtnEAhRgp+eXVNTy3fUywZf86B+SVQfERkIXTuDb/6vn6BAvpJasran?=
+ =?us-ascii?Q?YlnzGkPQxCCG7qxnHOQcn8F+gxX8jyLvQOtDNZxUNi0ow4dCsekOUgOVYR8P?=
+ =?us-ascii?Q?KqSceTqluZ13/Vtcp4fgoUEBaO8COV7fIuM582L9psU5Dm41DEOSm5M5tJda?=
+ =?us-ascii?Q?smMtYzryQc7G52cXBuXDGTCf+ZTWPcb7VV7xdGFILXe/60JKn+BQMbauc/7A?=
+ =?us-ascii?Q?MMf+/LPblKBQCnFb48MEmYyLoM/7okp37eWJlKAsCwRz2B0ggVMRkPDEQm21?=
+ =?us-ascii?Q?3jw5CESaRf0wFrgqoIROPhr3XmvmLDrI/HYuTi7JWm73u80VeRbmhqJwdEh3?=
+ =?us-ascii?Q?3hJmfFSDgIEzg1Zf1hQYzs5S+mP5PhVXIMddBN8+peJDS7YpXsCRg4Sse0QW?=
+ =?us-ascii?Q?5muzSNqK8U8AYyOad+IFfVj5ZQsNvy8odwOIrrMSy8IXAATyLnrRLeNryW9H?=
+ =?us-ascii?Q?zNVIAcXOJ0n2dQ4XKqMfWmk8I4ekyXR2BdVstcTjrSowvHQF+nf4xBwDkGql?=
+ =?us-ascii?Q?NpiM7AQm7Gr5d7CkuwY6Kou5QrEWYyGM8ZVQnUSe9xS7oCXf5TxHPI8WfLFD?=
+ =?us-ascii?Q?hqccJUv41P4CxiPBv4ltWmDocLQN1KHJxDnM9IU4GXq0uNKJNxkS4f3IDzTX?=
+ =?us-ascii?Q?ACa4Bba3k9WNgpusTGNjguN0RO9T4XMhBIgepqIn8N9SL5zRTauzF3vEpR9Q?=
+ =?us-ascii?Q?l7u+495SZj6MWrnddeWtHozKQgF88m1a2KV6palvM7pYSAm6WS9J1BJf/d7Z?=
+ =?us-ascii?Q?Oklg+UKbdY7aPfuZ0Oc/s0V3M1yLGhlyCjlDEzfvczBK7yfJ/G7dnu+jjIf+?=
+ =?us-ascii?Q?5a+NUFGh+L/SbZnuFs7z4wrs0uCo92UrmTBhyO2t9BRq0FZbHTa1ta6S+Pbn?=
+ =?us-ascii?Q?GGuXGCpKk8A5zr9oT9EQnkjR4p2mIBAMLp4vGqe7T/pdoY8Iy7sxLr3RSlgW?=
+ =?us-ascii?Q?uZ2Ti5zoG5MJshHYoU/uXEnRAxqBW5DYQm2QSdYoPowGUVb6UVlGR0vXp6N0?=
+ =?us-ascii?Q?Ctj/95IuZYtL9gqo8cBkvWTzxAM4Dqk2QfrFEwctdQ+ElyC1chtfcNwx55dH?=
+ =?us-ascii?Q?LZz47cU+zWfxBq9NyTwI2J7pQo67r44K1akz8yypFcBocp4C479N6qNMRUog?=
+ =?us-ascii?Q?Sz5903GqA6Pndq5kRcayGXCGw7Ia3uN8f6FOmfJyyyeOafJPRWw3LS/gMB/o?=
+ =?us-ascii?Q?cxBngkACILuoc8kajgEmNMNMbHcWhFASaFdRs60JiooQlOtoJaeuXx/8eH2t?=
+ =?us-ascii?Q?GoTB3bhLUBOByferODbdQa56D2NWbtd9Rx6ukxKxGxJUiNnlcbO9qh27U/3m?=
+ =?us-ascii?Q?J5UC9rChrR1LVtoEml2p+cWG1TVOnT0xFnT243zJkPMWBPVBquQaS4S9Dxp/?=
+ =?us-ascii?Q?1h50PN2UeNZbQjVyUKjra7Y3jtJwE15KyoinhUK/gVqljYO74f4QzlEU/I7c?=
+ =?us-ascii?Q?yekctdG8Fg5i4MHgJCSvShlGTZnaTEOZzOsBzhakFBT/i2/sMr8Y9Ot1IO8w?=
+ =?us-ascii?Q?d0pG1RkT7H1lP7Qd5C3F4VA=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR0601MB5488.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700021); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?6wD8Yh69PiL/hgSGI+HIOhgKOLJrcqIhnbCce8VcTls3KGdngabRAmZ9xnfL?=
+ =?us-ascii?Q?zFUWHpjAR6j561/QAUukalyXFj50m8fBxL0einMHB6m9Ih4shLmSHMLuQg1U?=
+ =?us-ascii?Q?xaXrm7Eld6a3ICooknBWCa+rEiAKFxvPFuglXfdJD7deZ/z7zJMFSaupNviB?=
+ =?us-ascii?Q?0Ma+ri9Awe2mHVLN0yqguZ0d5am0UO1sRFGOnE6XIrOXksrV8dEBuUbiytUd?=
+ =?us-ascii?Q?3F7JwYnfTNSPisUAR0h5dwHPtaD4zdjMycHwhBfrE0LepX45EJ9uXvEFoiQZ?=
+ =?us-ascii?Q?ta0im2t0msgQPEfGSUpugWGPs3T2DCixkYj1yriNMLNmupI2JKmfkaWWqOA3?=
+ =?us-ascii?Q?eZ2Bll6SaqRypMURLmxCjFpbHGF8n+ETuiSmbVsN0Zs92l6WqsoNUVgIfiU9?=
+ =?us-ascii?Q?lOaUhgC51lpjv7Fw/DMjJhjgT2prDsolYFnnV3KGyyxl5XFQgC2UNgguSIjd?=
+ =?us-ascii?Q?6mYa24QbqEnC/KqqBwA5pzcOfvUsscEPCC83aKkP1jr/nF2Q5N0uIdjWika2?=
+ =?us-ascii?Q?XXMDkWFupZdh4qQWF3Eo9eJM66FgrxnAV6f4PD9cZw2GwMdwxAT9/eptCS5q?=
+ =?us-ascii?Q?JTl19zeC5GNGR/CVctnMDO5gEBeiFKNh9cGNn7D8DxcwHqC4i6jirTB0lBqH?=
+ =?us-ascii?Q?RVwE1IWwRR7HIkrdk9mEpGxjNTpjbgPDUHAfpY92D2mZ4XcOsuBOWlIAdCgr?=
+ =?us-ascii?Q?z+aqXJimH3YXBhg5Z2zIHC2l0G585ep6blp70oKp8jle3ou2ZFo5gF8s/F5C?=
+ =?us-ascii?Q?pWoAxiFqD9M29TEXFCfLMLWyOkIZdSXxGAIelZ+dcixwZRErZsTFPVAoR9oc?=
+ =?us-ascii?Q?s5sQMgEPURYOag/9mRn3sFS8FenBJQiG2jarj1ds5lXGvSXPF2zYwjPfypFU?=
+ =?us-ascii?Q?9MWMW/hG3MQV3SXvEDCqnkKOmUXFuCmx623bTnR56R4IMMOOV+9vU5OslpJE?=
+ =?us-ascii?Q?c/74SmpHOqgi4EcxBy7ju7sefX4vjm1Ryi0TLG+aE0NZDv8EIB4erqtLxswO?=
+ =?us-ascii?Q?05BPCvDaLPSxGZz7G+PCnpu1/t1+Us8hwZlXonOiKsvGtX8Y07LToQfx7d4j?=
+ =?us-ascii?Q?FG03omRgo+8UFE5xackOFdDh6zm3m2RP9Kkn5DTCOkGhgZKq78RaphhjXmMq?=
+ =?us-ascii?Q?rP7AV0prhx951yADhDQbCgrIfabBYClHEAXxbCYN9Y78FAdW7hBh87N+KVFh?=
+ =?us-ascii?Q?IQ7g2KcTD45vjCJb2gTOuAjsnKQxUO/wb/HDp4hDVdhHXb1uXRvOfCfYiguD?=
+ =?us-ascii?Q?gydLluJZ+Z+LBBwyZXVXmZ98uz71NcplO168tvG83XVvrrVp/U9E5NZpj0eH?=
+ =?us-ascii?Q?69XMoDY+RiU+x3DdsBHznDGiVyRBI38zs97IQvtD3oS5KoIwbLPGX5/h13IS?=
+ =?us-ascii?Q?jmPV1DZ6Jd4aCwWGCEC1l/R15DQAkfzJQSe3eikD43UuV0ro+VRfCtT1M8vI?=
+ =?us-ascii?Q?VljR8x2phEC1F2jO1SKZpEzQtax34kFq0E+FqmLDt3sbmRzDRVwxeJcy5kp3?=
+ =?us-ascii?Q?RwBs42Oq5v5DnCo8E//bFtEAZGauCvi6+ss/OZe2QCuZoEl0rDd6ZE/5uxQO?=
+ =?us-ascii?Q?T79QR/VbGjXmPTP6kIVjrb7GLI7Jf2zFzA5rVWNwUZ9LBf8ilhtz2ukm04xP?=
+ =?us-ascii?Q?tDe/msbYBHItDy66lDQxHye/bfgG4U3tBcDC1TBSnumWUVpbjlTbsM80f3Mv?=
+ =?us-ascii?Q?fxFkcwSVGzkp85mon2PqbGd0Ek3lt8D1qyLWM1yafv9/d9MykrPbQxKuGmOU?=
+ =?us-ascii?Q?+LrrQJaUVQ=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0160d78eb76438b6987
-X-MBO-RS-META: agdfzqgdzp8n3s7w6boerxoasxd3ga9x
-X-Rspamd-Queue-Id: 4f12Yb2QWFz9thT
+X-OriginatorOrg: aspeedtech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR0601MB5488.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 28562c91-94e1-41e9-130d-08de5e0206b9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jan 2026 00:13:12.8394 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: TxPPxGgL9TryTDTPXMy5Z86MVJIX6roMuRC22HcbZC71s9cfpYXWPrMih10+vcwAIqOpkzdAJ4+ZjVNLHbcjr/MsfiDkafuRA9295a6v41Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,237 +166,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current gzwrite() implementation is limited to 4 GiB compressed
-input buffer size due to struct z_stream_s { uInt avail_in } member,
-which is of type unsigned int. Current gzwrite() implementation sets
-the entire input buffer size as avail_in and performs decompression
-of the whole compressed input buffer in one round, which limits the
-size of input buffer to 4 GiB.
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Wednesday, January 28, 2026 5:32 AM
+>=20
+> As of v2026.01, no platforms contain any rel.dyn sections in their xPL ph=
+ase
+> images. Their inclusion in linker scripts initially was an oversight as p=
+art of
+> taking the full U-Boot linker scripts and modifying them down. Then in co=
+mmit
+> 8b0ebe054bb3 ("arm: Update linker scripts to ensure appended device tree =
+is
+> aligned") these sections were used to force correct alignment for the dev=
+ice
+> tree. This however, lead to a different problem.
+>=20
+> That problem is that when we do not have a separate BSS section in SPL we
+> instead would overlay the BSS with the rel.dyn section, in the common lin=
+ker
+> script case. This in turn lead to creating an incorrectly sized BSS "pad"=
+ file
+> sometimes (depending on arbitrary changes within the rest of the binary i=
+tself).
+> This in turn lead to the dtb being in the wrong location in the binary an=
+d not
+> found at run time.
+>=20
+> This commit fixes a few things:
+> - Remove the rel.dyn section from all ARM SPL linker scripts.
+> - In turn, this moves the dtb alignment statement in to another section.
+> - For ast2600 which uses CONFIG_POSITION_INDEPENDENT we need to keep
+> the
+>   symbols however.
+>=20
+> Tested-by: Fabio Estevam <festevam@gmail.com>
+> Reported-by: Fabio Estevam <festevam@gmail.com>
+> Co-developed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> I sent this off-list to Fabio first to confirm it finally fixed things.
+>=20
+> Cc: "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>
+> Cc: Adam Ford <aford173@gmail.com>
+> ---
+>  arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds      |  8 --------
+>  arch/arm/cpu/u-boot-spl.lds                    | 13 ++-----------
+>  arch/arm/mach-aspeed/ast2600/u-boot-spl.lds    | 16 +++++++---------
+>  board/davinci/da8xxevm/u-boot-spl-da850evm.lds |  9 ++-------
+>  4 files changed, 11 insertions(+), 35 deletions(-)
+>=20
+> diff --git a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+> b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+> index b4adae272eba..ac166d1d8526 100644
+> --- a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+> +++ b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+> @@ -33,14 +33,6 @@ SECTIONS
+>  		*(.data*)
+>  	}
+>=20
+> -	. =3D ALIGN(4);
+> -
+> -	.rel.dyn : {
+> -		__rel_dyn_start =3D .;
+> -		*(.rel*)
+> -		__rel_dyn_end =3D .;
+> -	}
+> -
+>  	.bss : {
+>  		. =3D ALIGN(4);
+>  		__bss_start =3D .;
+> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds in=
+dex
+> d780a5060774..c578c3ebf821 100644
+> --- a/arch/arm/cpu/u-boot-spl.lds
+> +++ b/arch/arm/cpu/u-boot-spl.lds
+> @@ -41,23 +41,14 @@ SECTIONS
+>  		__binman_sym_start =3D .;
+>  		KEEP(*(SORT(.binman_sym*)));
+>  		__binman_sym_end =3D .;
+> -	}
+> -
+> -	. =3D ALIGN(4);
+> -
+> -	__image_copy_end =3D .;
+> -
+> -	.rel.dyn : {
+> -		__rel_dyn_start =3D .;
+> -		*(.rel*)
+> -		__rel_dyn_end =3D .;
+>  		. =3D ALIGN(8);
+>  	}
+>=20
+> +	__image_copy_end =3D .;
+>  	_image_binary_end =3D .;
+>  	_end =3D .;
+>=20
+> -	.bss __rel_dyn_start (OVERLAY) : {
+> +	.bss : {
+>  		__bss_start =3D .;
+>  		*(.bss*)
+>  		 . =3D ALIGN(8);
+> diff --git a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+> b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+> index c9664a6ce566..303ace2f61ca 100644
+> --- a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+> +++ b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+> @@ -49,19 +49,17 @@ SECTIONS
+>  		__binman_sym_start =3D .;
+>  		KEEP(*(SORT(.binman_sym*)));
+>  		__binman_sym_end =3D .;
+> +		. =3D ALIGN(8);
+>  	} > .nor
+>=20
+> -	. =3D ALIGN(4);
+> +	/*
+> +	 * These platforms enable CONFIG_POSITION_INDEPENDENT and so need
+> +	 * these names. The always however hold the same value.
+> +	 */
+> +	__rel_dyn_start =3D .;
+> +	__rel_dyn_end =3D .;
+>=20
+>  	__image_copy_end =3D .;
+> -
+> -	.rel.dyn : {
+> -		__rel_dyn_start =3D .;
+> -		*(.rel*)
+> -		__rel_dyn_end =3D .;
+> -		. =3D ALIGN(8);
+> -	} > .nor
+> -
+>  	_end =3D .;
+>  	_image_binary_end =3D .;
+>=20
 
-Rework the decompression loop to use chunked approach, and decompress
-the input buffer in up to 4 GiB - 1 kiB avail_in chunks, possibly in
-multiple decompression rounds. This way, the compressed input buffer
-size is limited by gzwrite() function 'len' parameter type, which is
-unsigned long.
+Thanks for the fix.
+Aspeed enables PIE mainly for the U-Boot execution.
+For SPL, the symbols should be fine to be the same.
 
-In case of sandbox build, include parsing of 'gzwrite_chunk'
-environment variable, so the chunked approach can be thoroughly tested
-with non default chunk size. For non-sandbox builds, the chunk size is
-4 GiB - 1 kiB.
-
-The gzwrite test case is extended to test various chunk sizes during
-gzwrite decompression test.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Alexander Graf <agraf@csgraf.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome@forissier.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Cc: u-boot@lists.denx.de
----
-This depends on multiple fixes, and the actual unit test for gzwrite command:
-https://lore.kernel.org/u-boot/20260127235156.1503207-1-marek.vasut+renesas@mailbox.org/
-https://lore.kernel.org/u-boot/20260127235310.1503239-1-marek.vasut+renesas@mailbox.org/
-https://lore.kernel.org/u-boot/20260127235339.1503312-1-marek.vasut+renesas@mailbox.org/
-https://lore.kernel.org/u-boot/20260127235914.1503663-1-marek.vasut+renesas@mailbox.org/
----
- lib/gunzip.c     | 77 +++++++++++++++++++++++++++++++++---------------
- test/cmd/unzip.c | 12 +++++++-
- 2 files changed, 64 insertions(+), 25 deletions(-)
-
-diff --git a/lib/gunzip.c b/lib/gunzip.c
-index d31bbb2ba03..0e4bca28a5e 100644
---- a/lib/gunzip.c
-+++ b/lib/gunzip.c
-@@ -8,8 +8,10 @@
- #include <command.h>
- #include <console.h>
- #include <div64.h>
-+#include <env.h>
- #include <gzip.h>
- #include <image.h>
-+#include <linux/sizes.h>
- #include <malloc.h>
- #include <memalign.h>
- #include <u-boot/crc.h>
-@@ -124,7 +126,7 @@ void gzwrite_progress_finish(int returnval,
- int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 	    ulong szwritebuf, ulong startoffs, ulong szexpected)
- {
--	int i, flags;
-+	int flags;
- 	z_stream s;
- 	int r = 0;
- 	unsigned char *writebuf;
-@@ -132,14 +134,23 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 	ulong totalfilled = 0;
- 	lbaint_t blksperbuf, outblock;
- 	u32 expected_crc;
--	u32 payload_size;
-+	unsigned long i, payload_size;
-+	unsigned long blocks_written;
-+	lbaint_t writeblocks;
-+	int numfilled = 0;
- 	int iteration = 0;
--
--	if (len > 0xffffffff) {
--		printf("%s: input size over 4 GiB in size not supported\n",
--		       __func__);
--		return -1;
--	}
-+	/*
-+	 * Allow runtime configuration of decompression chunk on
-+	 * sandbox to better cover the chunked decompression
-+	 * functionality without having to use > 4 GiB files.
-+	 */
-+	const ulong minchunk = 0x400;
-+	const ulong maxchunk = SZ_4G - minchunk;
-+	const ulong chunk =
-+		CONFIG_IS_ENABLED(SANDBOX,
-+				  (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
-+					 minchunk, maxchunk)),
-+				  (maxchunk));
- 
- 	if (!szwritebuf ||
- 	    (szwritebuf % dev->blksz) ||
-@@ -181,7 +192,7 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 		return -1;
- 	}
- 
--	payload_size = len - i - 8;
-+	payload_size = len - i;
- 
- 	memcpy(&expected_crc, src + len - 8, sizeof(expected_crc));
- 	expected_crc = le32_to_cpu(expected_crc);
-@@ -211,35 +222,44 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 		return -1;
- 	}
- 
--	s.next_in = src + i;
--	s.avail_in = payload_size+8;
-+	src += i;
-+	s.avail_in = 0;
- 	writebuf = (unsigned char *)malloc_cache_aligned(szwritebuf);
- 
- 	/* decompress until deflate stream ends or end of file */
- 	do {
- 		if (s.avail_in == 0) {
--			printf("%s: weird termination with result %d\n",
--			       __func__, r);
--			break;
-+			if (payload_size == 0) {
-+				printf("%s: weird termination with result %d\n",
-+				       __func__, r);
-+				break;
-+			}
-+
-+			s.next_in = src;
-+			s.avail_in = (payload_size > chunk) ? chunk : payload_size;
-+			src += s.avail_in;
-+			payload_size -= s.avail_in;
- 		}
- 
- 		/* run inflate() on input until output buffer not full */
- 		do {
--			unsigned long blocks_written;
--			int numfilled;
--			lbaint_t writeblocks;
--
--			s.avail_out = szwritebuf;
--			s.next_out = writebuf;
-+			if (numfilled) {
-+				s.avail_out = szwritebuf - numfilled;
-+				s.next_out = writebuf + numfilled;
-+			} else {
-+				s.avail_out = szwritebuf;
-+				s.next_out = writebuf;
-+			}
- 			r = inflate(&s, Z_SYNC_FLUSH);
- 			if ((r != Z_OK) &&
- 			    (r != Z_STREAM_END)) {
- 				printf("Error: inflate() returned %d\n", r);
- 				goto out;
- 			}
-+			crc = crc32(crc, writebuf + numfilled,
-+				    szwritebuf - s.avail_out - numfilled);
-+			totalfilled += szwritebuf - s.avail_out - numfilled;
- 			numfilled = szwritebuf - s.avail_out;
--			crc = crc32(crc, writebuf, numfilled);
--			totalfilled += numfilled;
- 			if (numfilled < szwritebuf) {
- 				writeblocks = (numfilled+dev->blksz-1)
- 						/ dev->blksz;
-@@ -247,14 +267,17 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 				       dev->blksz-(numfilled%dev->blksz));
- 			} else {
- 				writeblocks = blksperbuf;
-+				numfilled = 0;
- 			}
- 
- 			gzwrite_progress(iteration++,
- 					 totalfilled,
- 					 szexpected);
--			blocks_written = blk_dwrite(dev, outblock,
-+			if (!numfilled) {
-+				blocks_written = blk_dwrite(dev, outblock,
- 						    writeblocks, writebuf);
--			outblock += blocks_written;
-+				outblock += blocks_written;
-+			}
- 			if (ctrlc()) {
- 				puts("abort\n");
- 				goto out;
-@@ -264,6 +287,12 @@ int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *dev,
- 		/* done when inflate() says it's done */
- 	} while (r != Z_STREAM_END);
- 
-+	if (numfilled) {
-+		blocks_written = blk_dwrite(dev, outblock,
-+				    writeblocks, writebuf);
-+		outblock += blocks_written;
-+	}
-+
- 	if ((szexpected != totalfilled) ||
- 	    (crc != expected_crc))
- 		r = -1;
-diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-index 725fcf91458..7c54cc7a815 100644
---- a/test/cmd/unzip.c
-+++ b/test/cmd/unzip.c
-@@ -100,7 +100,7 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
- 	struct blk_desc *mmc_dev_desc;
- 	struct udevice *dev;
- 	ofnode root, node;
--	int i, ret;
-+	int i, j, ret;
- 
- 	/* Enable the mmc9 node for this test */
- 	root = oftree_root(oftree_default());
-@@ -122,6 +122,16 @@ static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
- 			return ret;
- 	}
- 
-+	/* Test various sizes of decompression chunk sizes */
-+	for (j = 0; j < ARRAY_SIZE(sizes); j++) {
-+		env_set_ulong("gzwrite_chunk", sizes[j]);
-+		for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+			ret = do_test_cmd_zip_unzip(uts, sizes[i], true);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
- 	return 0;
- }
- DM_TEST(dm_test_cmd_zip_gzwrite, UTF_CONSOLE);
--- 
-2.51.0
-
+Reviewed-by: "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>
