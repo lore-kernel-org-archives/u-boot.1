@@ -4,152 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07EAD2FEFA
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 00:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11F8D35661
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 00:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45D508421D;
-	Wed, 28 Jan 2026 01:13:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+	by phobos.denx.de (Postfix) with ESMTP id B988584221;
+	Wed, 28 Jan 2026 01:51:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="ZKdDBkHx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="P1ON9mzh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD6A8421E; Wed, 28 Jan 2026 01:13:20 +0100 (CET)
-Received: from SEYPR02CU001.outbound.protection.outlook.com
- (mail-koreacentralazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c40f::6])
+ id 7103F84222; Wed, 28 Jan 2026 01:51:06 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 296EB84164
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 01:13:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aspeedtech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0991E84164
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 01:51:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chiawei_wang@aspeedtech.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k7e1RjTbO31f9kmEHBwdjZtQscQ3LzPyMiFHHzVHCLrvuIZe2CKhypoG/maJoXXg7sNWf2z06oNUwr/il7jSDfKRS9FCbfsZFk43xmcuP0ryTB/hG7O4xQWMaiEustgBLQt38cDJ62uAelaMlJ1lUCZeLhceWKBleQgElGMCcxg+1xJ6t6QkBPojUM/ufX/kCZWDVg8qrh8txyAn9R93+cJGUDVU9DnpYQoXaSHJfb++W/IV0xHHhayE2524jCUTI8v4EwuDk+I1yw8ypnMG2I+70/g5LGPyiKjVLrUWPdfDrqygfOjczOPrF5cxSjMEwglAFEy4EDPOvY4Ctt7LoQ==
+ b=aLfDZk0KPlVQtnmkQoNJOwDpcnYWaQ/q200rvzxUmV0wsXVAu9ndSBbpswDy6iBjAFZ6At2U6bSSBrEFJliCuLkAhz088V6EEl33WN/gDIdSfiKKSZ+YVoC+X88Y7h5r/dLdaHPBedtau6u5yoNRYfSyIVDCDTRrkXaLU487q5uF9IMtCxoLHokJUwPDooqw0oZjDP78CPhg1w2S1bSz2fAjwC49bA547/wgr5AQaMaWD2IZOx17OikFV+CJSU+UsYn2rIcjzE5uROZdqsminnb+oLvAscT+p/D77BTrYQ5+PAu4X6qUqvueZPd4mgTqCKS+0hRyDCK4sOe2SHJKaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rwe7JE9Em9wQhXlGdDWw5z5eUlLfeCxFrVUL0ROZfaQ=;
- b=u7zB6W/KI5g6amJf5rPTOubupwYq4AiqNbdAi4e8ogPGvc/1wfUeNt4GfUqxZQYe5QeAraYITx4ncR80qXWayCMZIPaGwcU/gACXAeS6E856kinlK/+zDFBk0O9/8sbySpQBBQhzyL5/MEt4kkT189LSU3Vs+6LbmSph/Ni5zLPPMFGRB4UyZsYcwQKh1U5qv8G/SvPf0SY9cPJXn28DxOzDp7nMIck8XvMrD11+qgQZMNhNzQaL0wTnX3Ewz0j4OMEorl2R9A9t8wH2awubtstUO6qHXBeVDdXtj2Wc0waZkukfLYeJ8PTzX0EF+md/wlY405TZ46lIwVAlECjV8A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
+ bh=ltPjyz70ElXDHF4Swxo8lkBp1chL6b6bTxImDvqKEe4=;
+ b=DGlGhX2+KjPhM52AlglaH9yL/N0DPl1ovQ4tgmnXW5kKY5viFgg+/NehXFGzAMjkl3MFFJfEzehNDxjBbDuAi2xl5AdeH4LsGDa7jkU773qdoV6Sl7oNwjz4wDNXIEiUou3upUV+nE3V2NgcNtQ0CnbeLz6eHULL7Bum20hi8OD9l/5iI5aZKgzyP7CZ+E55R7BWzB3oNBLVed6H2wDafuR1xX+Kzfs7h1rC8Xrnn+yfDruHGyNldI1d0lxPawvy6NA3YBXz4aFUK0Ud0xhEEidG+XKslTn0vD0G8gz0RoZQip1zJ/TBw3r4PCrtvJ/oPfzZEjh1XN58VL4zpIqAMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rwe7JE9Em9wQhXlGdDWw5z5eUlLfeCxFrVUL0ROZfaQ=;
- b=ZKdDBkHxM9LGX4xTJb045GxuNd8XIJIxfog0meUiEzbWwzITCXK1NEHjTtvPdn5fmlAmy/GSVV/o2Xo/Bac5nylX1s5gbjsSG1M21F7eJkj/wqE/Yw4NNw6eKogbQqStHggE4OWAosZCl2upzMuG6vk9sAMH+SzdA8gNuF6S1/yaK8j/Vs0PCDzT60wVw8OxHgTZQU8GhwiPFsGniKYGLUGxIfY+7WcN+ATNSq3pAxIcMbn23+G+T+fB++jWY5MK3FahpNNrPbMqcpLEQ6d/cYnpXR8HXZpClllJzybB79zs7fsitEhFZVoP2oYvJI1AdVrygAKzb0htNavcu8KdcQ==
-Received: from KL1PR0601MB5488.apcprd06.prod.outlook.com
- (2603:1096:820:9d::10) by SEYPR06MB5135.apcprd06.prod.outlook.com
- (2603:1096:101:5b::10) with Microsoft SMTP Server (version=TLS1_2,
+ bh=ltPjyz70ElXDHF4Swxo8lkBp1chL6b6bTxImDvqKEe4=;
+ b=P1ON9mzh2VN6fyBCwFz/ehY1LFtXUTyDYWkC2B+eM2d3f+t+TsJY0t4Q2ey8bk0eWLCzsVEbQf61EAUitWhXjGLGXcIO/1eFFIu6hBEKXVgNUdStY6bWY5sMxmJIZMeKmcPg4OQ/vuk4aXtlM+p/BkrcSyEKDD+arGGcGxv3QkI=
+Received: from BN1PR12CA0013.namprd12.prod.outlook.com (2603:10b6:408:e1::18)
+ by CH2PR10MB4199.namprd10.prod.outlook.com (2603:10b6:610:7f::19)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Wed, 28 Jan
- 2026 00:13:13 +0000
-Received: from KL1PR0601MB5488.apcprd06.prod.outlook.com
- ([fe80::d45a:6698:a285:990]) by KL1PR0601MB5488.apcprd06.prod.outlook.com
- ([fe80::d45a:6698:a285:990%5]) with mapi id 15.20.9542.010; Wed, 28 Jan 2026
- 00:13:12 +0000
-From: ChiaWei Wang <chiawei_wang@aspeedtech.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Fabio Estevam <festevam@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Adam Ford <aford173@gmail.com>
-Subject: RE: [PATCH] arm: Remove rel.dyn from SPL linker scripts
-Thread-Topic: [PATCH] arm: Remove rel.dyn from SPL linker scripts
-Thread-Index: AQHcj9RdTek7cySKk0yVdfVXHtDGerVms8jw
-Date: Wed, 28 Jan 2026 00:13:12 +0000
-Message-ID: <KL1PR0601MB54882F38FB9675D83E1F1D129191A@KL1PR0601MB5488.apcprd06.prod.outlook.com>
-References: <20260127213149.1338179-1-trini@konsulko.com>
-In-Reply-To: <20260127213149.1338179-1-trini@konsulko.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: KL1PR0601MB5488:EE_|SEYPR06MB5135:EE_
-x-ms-office365-filtering-correlation-id: 28562c91-94e1-41e9-130d-08de5e0206b9
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700021;
-x-microsoft-antispam-message-info: =?us-ascii?Q?/Am6Wn5Oc1vz3BBFFaj79JWYoRQ8BLXvmXmNZmLl+WJr8w3j4s1I/KcvpoRA?=
- =?us-ascii?Q?YhnoKzwuCc3jjC3FWR0d5RaFiILgzfHgY4CWlqr0iTFiVOy7k6WJbs553h7c?=
- =?us-ascii?Q?ApxaPdtnEAhRgp+eXVNTy3fUywZf86B+SVQfERkIXTuDb/6vn6BAvpJasran?=
- =?us-ascii?Q?YlnzGkPQxCCG7qxnHOQcn8F+gxX8jyLvQOtDNZxUNi0ow4dCsekOUgOVYR8P?=
- =?us-ascii?Q?KqSceTqluZ13/Vtcp4fgoUEBaO8COV7fIuM582L9psU5Dm41DEOSm5M5tJda?=
- =?us-ascii?Q?smMtYzryQc7G52cXBuXDGTCf+ZTWPcb7VV7xdGFILXe/60JKn+BQMbauc/7A?=
- =?us-ascii?Q?MMf+/LPblKBQCnFb48MEmYyLoM/7okp37eWJlKAsCwRz2B0ggVMRkPDEQm21?=
- =?us-ascii?Q?3jw5CESaRf0wFrgqoIROPhr3XmvmLDrI/HYuTi7JWm73u80VeRbmhqJwdEh3?=
- =?us-ascii?Q?3hJmfFSDgIEzg1Zf1hQYzs5S+mP5PhVXIMddBN8+peJDS7YpXsCRg4Sse0QW?=
- =?us-ascii?Q?5muzSNqK8U8AYyOad+IFfVj5ZQsNvy8odwOIrrMSy8IXAATyLnrRLeNryW9H?=
- =?us-ascii?Q?zNVIAcXOJ0n2dQ4XKqMfWmk8I4ekyXR2BdVstcTjrSowvHQF+nf4xBwDkGql?=
- =?us-ascii?Q?NpiM7AQm7Gr5d7CkuwY6Kou5QrEWYyGM8ZVQnUSe9xS7oCXf5TxHPI8WfLFD?=
- =?us-ascii?Q?hqccJUv41P4CxiPBv4ltWmDocLQN1KHJxDnM9IU4GXq0uNKJNxkS4f3IDzTX?=
- =?us-ascii?Q?ACa4Bba3k9WNgpusTGNjguN0RO9T4XMhBIgepqIn8N9SL5zRTauzF3vEpR9Q?=
- =?us-ascii?Q?l7u+495SZj6MWrnddeWtHozKQgF88m1a2KV6palvM7pYSAm6WS9J1BJf/d7Z?=
- =?us-ascii?Q?Oklg+UKbdY7aPfuZ0Oc/s0V3M1yLGhlyCjlDEzfvczBK7yfJ/G7dnu+jjIf+?=
- =?us-ascii?Q?5a+NUFGh+L/SbZnuFs7z4wrs0uCo92UrmTBhyO2t9BRq0FZbHTa1ta6S+Pbn?=
- =?us-ascii?Q?GGuXGCpKk8A5zr9oT9EQnkjR4p2mIBAMLp4vGqe7T/pdoY8Iy7sxLr3RSlgW?=
- =?us-ascii?Q?uZ2Ti5zoG5MJshHYoU/uXEnRAxqBW5DYQm2QSdYoPowGUVb6UVlGR0vXp6N0?=
- =?us-ascii?Q?Ctj/95IuZYtL9gqo8cBkvWTzxAM4Dqk2QfrFEwctdQ+ElyC1chtfcNwx55dH?=
- =?us-ascii?Q?LZz47cU+zWfxBq9NyTwI2J7pQo67r44K1akz8yypFcBocp4C479N6qNMRUog?=
- =?us-ascii?Q?Sz5903GqA6Pndq5kRcayGXCGw7Ia3uN8f6FOmfJyyyeOafJPRWw3LS/gMB/o?=
- =?us-ascii?Q?cxBngkACILuoc8kajgEmNMNMbHcWhFASaFdRs60JiooQlOtoJaeuXx/8eH2t?=
- =?us-ascii?Q?GoTB3bhLUBOByferODbdQa56D2NWbtd9Rx6ukxKxGxJUiNnlcbO9qh27U/3m?=
- =?us-ascii?Q?J5UC9rChrR1LVtoEml2p+cWG1TVOnT0xFnT243zJkPMWBPVBquQaS4S9Dxp/?=
- =?us-ascii?Q?1h50PN2UeNZbQjVyUKjra7Y3jtJwE15KyoinhUK/gVqljYO74f4QzlEU/I7c?=
- =?us-ascii?Q?yekctdG8Fg5i4MHgJCSvShlGTZnaTEOZzOsBzhakFBT/i2/sMr8Y9Ot1IO8w?=
- =?us-ascii?Q?d0pG1RkT7H1lP7Qd5C3F4VA=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KL1PR0601MB5488.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700021); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?6wD8Yh69PiL/hgSGI+HIOhgKOLJrcqIhnbCce8VcTls3KGdngabRAmZ9xnfL?=
- =?us-ascii?Q?zFUWHpjAR6j561/QAUukalyXFj50m8fBxL0einMHB6m9Ih4shLmSHMLuQg1U?=
- =?us-ascii?Q?xaXrm7Eld6a3ICooknBWCa+rEiAKFxvPFuglXfdJD7deZ/z7zJMFSaupNviB?=
- =?us-ascii?Q?0Ma+ri9Awe2mHVLN0yqguZ0d5am0UO1sRFGOnE6XIrOXksrV8dEBuUbiytUd?=
- =?us-ascii?Q?3F7JwYnfTNSPisUAR0h5dwHPtaD4zdjMycHwhBfrE0LepX45EJ9uXvEFoiQZ?=
- =?us-ascii?Q?ta0im2t0msgQPEfGSUpugWGPs3T2DCixkYj1yriNMLNmupI2JKmfkaWWqOA3?=
- =?us-ascii?Q?eZ2Bll6SaqRypMURLmxCjFpbHGF8n+ETuiSmbVsN0Zs92l6WqsoNUVgIfiU9?=
- =?us-ascii?Q?lOaUhgC51lpjv7Fw/DMjJhjgT2prDsolYFnnV3KGyyxl5XFQgC2UNgguSIjd?=
- =?us-ascii?Q?6mYa24QbqEnC/KqqBwA5pzcOfvUsscEPCC83aKkP1jr/nF2Q5N0uIdjWika2?=
- =?us-ascii?Q?XXMDkWFupZdh4qQWF3Eo9eJM66FgrxnAV6f4PD9cZw2GwMdwxAT9/eptCS5q?=
- =?us-ascii?Q?JTl19zeC5GNGR/CVctnMDO5gEBeiFKNh9cGNn7D8DxcwHqC4i6jirTB0lBqH?=
- =?us-ascii?Q?RVwE1IWwRR7HIkrdk9mEpGxjNTpjbgPDUHAfpY92D2mZ4XcOsuBOWlIAdCgr?=
- =?us-ascii?Q?z+aqXJimH3YXBhg5Z2zIHC2l0G585ep6blp70oKp8jle3ou2ZFo5gF8s/F5C?=
- =?us-ascii?Q?pWoAxiFqD9M29TEXFCfLMLWyOkIZdSXxGAIelZ+dcixwZRErZsTFPVAoR9oc?=
- =?us-ascii?Q?s5sQMgEPURYOag/9mRn3sFS8FenBJQiG2jarj1ds5lXGvSXPF2zYwjPfypFU?=
- =?us-ascii?Q?9MWMW/hG3MQV3SXvEDCqnkKOmUXFuCmx623bTnR56R4IMMOOV+9vU5OslpJE?=
- =?us-ascii?Q?c/74SmpHOqgi4EcxBy7ju7sefX4vjm1Ryi0TLG+aE0NZDv8EIB4erqtLxswO?=
- =?us-ascii?Q?05BPCvDaLPSxGZz7G+PCnpu1/t1+Us8hwZlXonOiKsvGtX8Y07LToQfx7d4j?=
- =?us-ascii?Q?FG03omRgo+8UFE5xackOFdDh6zm3m2RP9Kkn5DTCOkGhgZKq78RaphhjXmMq?=
- =?us-ascii?Q?rP7AV0prhx951yADhDQbCgrIfabBYClHEAXxbCYN9Y78FAdW7hBh87N+KVFh?=
- =?us-ascii?Q?IQ7g2KcTD45vjCJb2gTOuAjsnKQxUO/wb/HDp4hDVdhHXb1uXRvOfCfYiguD?=
- =?us-ascii?Q?gydLluJZ+Z+LBBwyZXVXmZ98uz71NcplO168tvG83XVvrrVp/U9E5NZpj0eH?=
- =?us-ascii?Q?69XMoDY+RiU+x3DdsBHznDGiVyRBI38zs97IQvtD3oS5KoIwbLPGX5/h13IS?=
- =?us-ascii?Q?jmPV1DZ6Jd4aCwWGCEC1l/R15DQAkfzJQSe3eikD43UuV0ro+VRfCtT1M8vI?=
- =?us-ascii?Q?VljR8x2phEC1F2jO1SKZpEzQtax34kFq0E+FqmLDt3sbmRzDRVwxeJcy5kp3?=
- =?us-ascii?Q?RwBs42Oq5v5DnCo8E//bFtEAZGauCvi6+ss/OZe2QCuZoEl0rDd6ZE/5uxQO?=
- =?us-ascii?Q?T79QR/VbGjXmPTP6kIVjrb7GLI7Jf2zFzA5rVWNwUZ9LBf8ilhtz2ukm04xP?=
- =?us-ascii?Q?tDe/msbYBHItDy66lDQxHye/bfgG4U3tBcDC1TBSnumWUVpbjlTbsM80f3Mv?=
- =?us-ascii?Q?fxFkcwSVGzkp85mon2PqbGd0Ek3lt8D1qyLWM1yafv9/d9MykrPbQxKuGmOU?=
- =?us-ascii?Q?+LrrQJaUVQ=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ 2026 00:50:58 +0000
+Received: from BN3PEPF0000B06B.namprd21.prod.outlook.com
+ (2603:10b6:408:e1:cafe::1a) by BN1PR12CA0013.outlook.office365.com
+ (2603:10b6:408:e1::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.16 via Frontend Transport; Wed,
+ 28 Jan 2026 00:50:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN3PEPF0000B06B.mail.protection.outlook.com (10.167.243.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.0 via Frontend Transport; Wed, 28 Jan 2026 00:50:56 +0000
+Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 27 Jan
+ 2026 18:50:56 -0600
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 27 Jan
+ 2026 18:50:56 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 27 Jan 2026 18:50:56 -0600
+Received: from [172.24.233.249] (ula0502350.dhcp.ti.com [172.24.233.249])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60S0oqHt1443906;
+ Tue, 27 Jan 2026 18:50:53 -0600
+Message-ID: <b9facf13-8e1e-45c5-b3a9-37e75dfafab2@ti.com>
+Date: Wed, 28 Jan 2026 06:20:52 +0530
 MIME-Version: 1.0
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR0601MB5488.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28562c91-94e1-41e9-130d-08de5e0206b9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jan 2026 00:13:12.8394 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TxPPxGgL9TryTDTPXMy5Z86MVJIX6roMuRC22HcbZC71s9cfpYXWPrMih10+vcwAIqOpkzdAJ4+ZjVNLHbcjr/MsfiDkafuRA9295a6v41Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5135
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] arm: dts: k3-am62d-evm-binman: Override tiboot3
+ filenames for AM62D
+To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <khasim@ti.com>,
+ <m-chawdhry@ti.com>, <t-pratham@ti.com>, <nm@ti.com>, <v-singh1@ti.com>
+References: <20260116103010.3947922-1-p-bhagat@ti.com>
+ <20260116103010.3947922-4-p-bhagat@ti.com>
+ <65dd25b7-f4fa-4ede-8da7-39c963bcaa6a@ti.com>
+Content-Language: en-US
+From: Paresh Bhagat <p-bhagat@ti.com>
+In-Reply-To: <65dd25b7-f4fa-4ede-8da7-39c963bcaa6a@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06B:EE_|CH2PR10MB4199:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3bfdfe29-305a-4c97-57ed-08de5e074c34
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?R3VURnd1QVgyamhBY2xqMWlhUG1JTU13blc2REtiQlFsVjViYVVZSlNsbFpB?=
+ =?utf-8?B?UE50ZXNqOWs5UUNlRG13UHBKWndxWmVIZ0xiQkdPaFlGVEpqdk9ZRU1xaWVP?=
+ =?utf-8?B?ZXFBUHhxN250azJRRWVPVDlBWkEzb0lCK3d3REhUMGV5UVZMbEtHYVZ3dEpQ?=
+ =?utf-8?B?a1psdHQ5dERqZitqUERReVNwY1pCVFlHQlFsVzBhaGNWTDIrNEl0OU5jSFhE?=
+ =?utf-8?B?L0lJRmtlbWNheU5SbnFDWVhDV3ZJWGlqQnRuMk4wNVprOGRqVldPeks4ZUxy?=
+ =?utf-8?B?OFRJc1ZUWWhXUkRtYXM0TlZhRTRaTDBkUXZRSUFkZXZiZDNnVHZZc0w5Vms4?=
+ =?utf-8?B?SFp1S29IRTlhU1ZyNldqd1RZRTdVOEhGOTFlZ3MwS2ZVcVdYREhhSmg1VzB0?=
+ =?utf-8?B?SERvdUdObnBLYUk5K3VjVkJvdm9od3NnTVZaNVhzS0E1bWdCQlJZbS9QMHV6?=
+ =?utf-8?B?WG5NY3g1bkdjck5LQXdhcVBiYmVFazdTOUlGYUF6dDJSOERCK3c1VGVWd0oz?=
+ =?utf-8?B?dVdjeFFyWml2M0pXbGJYOGhoOXBWZlVuSUQ2Z0RKMlhiakxUSzI4VzcwR0J4?=
+ =?utf-8?B?VlZUbkd1a0tuWGVTYUVzY0NNN2xyb09XUFRFbkx6ZlFUelNWQWNQYWxEYW1p?=
+ =?utf-8?B?OEk2d0Y0dDBLRUtyMGpPU3F6TGZzYUcxZUp2ak52QW93cW9WanlET3Rza2lM?=
+ =?utf-8?B?eXg5QkVyNmtsN04rdnRoVmh4dGRRK25YaUdFaEpjQ1pMbjhYRU0wMlZucTVt?=
+ =?utf-8?B?NXVuWGxCU0tDRklUNjViWDhHSCt5WjJFVzNQa3dId2JhUkhtZjNFcnJhWU5M?=
+ =?utf-8?B?WGNBZFFMQ2pyYVkvenczbE9KVFljODRHMGFrYmlKSDl0cS9KdWw2czl5alB4?=
+ =?utf-8?B?ZjI3b0hIRzh1c2FRSXJLRTEzTVhFMXhaYXF0c0d1QW5RM1dRTTFQSTRGbGND?=
+ =?utf-8?B?cGVIZjZRZHd3d3QwODMreVF0ZVdLTVJydGhPbm04OWJtYjhsRnlvTUVLQ0VC?=
+ =?utf-8?B?UVNvdyttTUZiWjFNNm0xTlNRd1JNZlpQY1h5UDZVMHh0aFh4NHkxR1dZK3Zh?=
+ =?utf-8?B?MGsrbjQwam9hL25vbXNiTTVaRldZTWErQm1leXJvNmFTQ081OXZvWndwenlO?=
+ =?utf-8?B?Y0xiWEhTd2hsZVFtaG1qNVV4TVFZekFwSnpnZ1A5QUhSTEZMTWF2S2J0MTk4?=
+ =?utf-8?B?cElJRnFWbFRpNGd0bnVyK291aGs4MnJPQk5BU2FjNTJrWW42UEN4aFdpZnAw?=
+ =?utf-8?B?RDZHTkZ0bk1Kb21EVVBGQXdlLy9zbktKS1VoZkk1T0twMnl3WitWWXNERXh6?=
+ =?utf-8?B?SkdpSUtOR0Rvei9Bb0tRQ016SXlrQnZ3TFUwQTFSY3J6RU9MREpHTy9lRjNQ?=
+ =?utf-8?B?aXpEWWV6U2pONEtBNHlGSkZlazJ2bDZyRXBTZXRXRy9XNWFvaGcydXZ6NEFz?=
+ =?utf-8?B?cTZ5NXlvL2FHdmFUenhOemhHeHNRUUZJUzlZVTBsVVEyb3lmVWRDSVF4MWFp?=
+ =?utf-8?B?WUd6RjNrSk05MFBXOHVrUXZDUjZwTTdtZzVKZzBNTzRiMjAvQ2NUM2hFY2Fw?=
+ =?utf-8?B?VzJVQ1YwMXhnbytUcFZYU08zRnVEZk03UlRxYndwMUJORHFsZ2l3Vzlmb0hs?=
+ =?utf-8?B?QWxIbVJMRFYxcENrV2VGeE5rc2lleENHYUtYVXIvaFNURDZBZlYrd1F5bnB2?=
+ =?utf-8?B?cy9oN2FMbzdERUk3ZlEwOE8wZmlBRm96ZzVkVEExMElwcGgzMUhHQ1FYZGVR?=
+ =?utf-8?B?ZWV0azZ1NDVHMXp5VEt0TWhYWm9Mc0k2MFQyL0ozdFBkbjdqU0N4b29pYnZu?=
+ =?utf-8?B?NUZYeFNDUzk5S3NIRHpmVGhKSFRZU0h2TWJHRU9McW5nSlIrRlZOKzloMjNO?=
+ =?utf-8?B?UFZ4dmRnSXd5eDBhRmtnZ1JLOThJamN2MWxmcjVEN3ZVMVFXeVBIQ1liV1pt?=
+ =?utf-8?B?aHNuWmVvNGU2MXlWWE0yN1IzWGdWVTZDSnNsUTViZDNndDJMRERScUpNVG1x?=
+ =?utf-8?B?bzR2cWpwcFlxNThQd1cxMGREK2VjL2FDK2xXNGR2ZERwc05vUVFvbDdNeDFn?=
+ =?utf-8?B?NjRSVi9oU0F0ai9EUUY1MVJQeHY5L1VhNTBxaVdzTWdSNm9XbTFqNTJUMTdh?=
+ =?utf-8?B?ZElYYW9PNUZLR296a0s4ZTZQVzIzVmpZNHhJNExLQStMSFZWQkQxd3FuV3pS?=
+ =?utf-8?Q?NhN1Gj1ZFrxOM7YyCQY8ANdCtvMov1MT+Gfwe0fpDUet?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 00:50:56.8296 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3bfdfe29-305a-4c97-57ed-08de5e074c34
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06B.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB4199
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,141 +169,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Tom Rini <trini@konsulko.com>
-> Sent: Wednesday, January 28, 2026 5:32 AM
->=20
-> As of v2026.01, no platforms contain any rel.dyn sections in their xPL ph=
-ase
-> images. Their inclusion in linker scripts initially was an oversight as p=
-art of
-> taking the full U-Boot linker scripts and modifying them down. Then in co=
-mmit
-> 8b0ebe054bb3 ("arm: Update linker scripts to ensure appended device tree =
-is
-> aligned") these sections were used to force correct alignment for the dev=
-ice
-> tree. This however, lead to a different problem.
->=20
-> That problem is that when we do not have a separate BSS section in SPL we
-> instead would overlay the BSS with the rel.dyn section, in the common lin=
-ker
-> script case. This in turn lead to creating an incorrectly sized BSS "pad"=
- file
-> sometimes (depending on arbitrary changes within the rest of the binary i=
-tself).
-> This in turn lead to the dtb being in the wrong location in the binary an=
-d not
-> found at run time.
->=20
-> This commit fixes a few things:
-> - Remove the rel.dyn section from all ARM SPL linker scripts.
-> - In turn, this moves the dtb alignment statement in to another section.
-> - For ast2600 which uses CONFIG_POSITION_INDEPENDENT we need to keep
-> the
->   symbols however.
->=20
-> Tested-by: Fabio Estevam <festevam@gmail.com>
-> Reported-by: Fabio Estevam <festevam@gmail.com>
-> Co-developed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> I sent this off-list to Fabio first to confirm it finally fixed things.
->=20
-> Cc: "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>
-> Cc: Adam Ford <aford173@gmail.com>
-> ---
->  arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds      |  8 --------
->  arch/arm/cpu/u-boot-spl.lds                    | 13 ++-----------
->  arch/arm/mach-aspeed/ast2600/u-boot-spl.lds    | 16 +++++++---------
->  board/davinci/da8xxevm/u-boot-spl-da850evm.lds |  9 ++-------
->  4 files changed, 11 insertions(+), 35 deletions(-)
->=20
-> diff --git a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> index b4adae272eba..ac166d1d8526 100644
-> --- a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> +++ b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> @@ -33,14 +33,6 @@ SECTIONS
->  		*(.data*)
->  	}
->=20
-> -	. =3D ALIGN(4);
-> -
-> -	.rel.dyn : {
-> -		__rel_dyn_start =3D .;
-> -		*(.rel*)
-> -		__rel_dyn_end =3D .;
-> -	}
-> -
->  	.bss : {
->  		. =3D ALIGN(4);
->  		__bss_start =3D .;
-> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds in=
-dex
-> d780a5060774..c578c3ebf821 100644
-> --- a/arch/arm/cpu/u-boot-spl.lds
-> +++ b/arch/arm/cpu/u-boot-spl.lds
-> @@ -41,23 +41,14 @@ SECTIONS
->  		__binman_sym_start =3D .;
->  		KEEP(*(SORT(.binman_sym*)));
->  		__binman_sym_end =3D .;
-> -	}
-> -
-> -	. =3D ALIGN(4);
-> -
-> -	__image_copy_end =3D .;
-> -
-> -	.rel.dyn : {
-> -		__rel_dyn_start =3D .;
-> -		*(.rel*)
-> -		__rel_dyn_end =3D .;
->  		. =3D ALIGN(8);
->  	}
->=20
-> +	__image_copy_end =3D .;
->  	_image_binary_end =3D .;
->  	_end =3D .;
->=20
-> -	.bss __rel_dyn_start (OVERLAY) : {
-> +	.bss : {
->  		__bss_start =3D .;
->  		*(.bss*)
->  		 . =3D ALIGN(8);
-> diff --git a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> index c9664a6ce566..303ace2f61ca 100644
-> --- a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> +++ b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> @@ -49,19 +49,17 @@ SECTIONS
->  		__binman_sym_start =3D .;
->  		KEEP(*(SORT(.binman_sym*)));
->  		__binman_sym_end =3D .;
-> +		. =3D ALIGN(8);
->  	} > .nor
->=20
-> -	. =3D ALIGN(4);
-> +	/*
-> +	 * These platforms enable CONFIG_POSITION_INDEPENDENT and so need
-> +	 * these names. The always however hold the same value.
-> +	 */
-> +	__rel_dyn_start =3D .;
-> +	__rel_dyn_end =3D .;
->=20
->  	__image_copy_end =3D .;
-> -
-> -	.rel.dyn : {
-> -		__rel_dyn_start =3D .;
-> -		*(.rel*)
-> -		__rel_dyn_end =3D .;
-> -		. =3D ALIGN(8);
-> -	} > .nor
-> -
->  	_end =3D .;
->  	_image_binary_end =3D .;
->=20
+Hi Andrew,
 
-Thanks for the fix.
-Aspeed enables PIE mainly for the U-Boot execution.
-For SPL, the symbols should be fine to be the same.
 
-Reviewed-by: "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>
+On 17/01/26 00:03, Andrew Davis wrote:
+> On 1/16/26 4:30 AM, Paresh Bhagat wrote:
+>> Reference the tiboot3 binary labels from k3-am62a-sk-binman.dtsi and
+>> override their filenames to use AM62D-specific names:
+>> - tiboot3-am62dx-hs-evm.bin
+>> - tiboot3-am62dx-hs-fs-evm.bin
+>>
+>> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am62d-evm-binman.dtsi | 8 ++++++++
+>>   1 file changed, 8 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/k3-am62d-evm-binman.dtsi 
+>> b/arch/arm/dts/k3-am62d-evm-binman.dtsi
+>> index 41c8746cf08..430bf8ccb79 100644
+>> --- a/arch/arm/dts/k3-am62d-evm-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am62d-evm-binman.dtsi
+>> @@ -63,6 +63,14 @@
+>>       config = "board/ti/am62ax/rm-cfg.yaml";
+>>   };
+>>   +&tiboot3_am62ax_hs_evm {
+>> +    filename = "tiboot3-am62dx-hs-evm.bin";
+>> +};
+>
+> NAK
+>
+> We have discussed this before, the name of the file is based on the TIFS
+> binary used. This file uses "ti-fs-firmware-am62ax-hs-enc.bin" so its
+> name must match. The name has nothing to do with which board or SoC the
+> SPL was built for, we have *never* named the SPL image after the board or
+> SoC, if you believe otherwise then tell me what specific board or SoC the
+> file "tiboot3.bin" or "MLO" is for?
+>
+> You also give no "why" you need to change the name in your commit message
+> nor cover-letter, simply stating it is the "correct" name. I do know the
+> reason, and it isn't a good one, go fix your yocto/test scripts.
+>
+> Andrew
+
+
+Agreed Andrew. I will remove the patches from the series. Thanks
+
+
+>
+>> +
+>> +&tiboot3_am62ax_hs_fs_evm {
+>> +    filename = "tiboot3-am62dx-hs-fs-evm.bin";
+>> +};
+>> +
+>>   #endif
+>>     #ifdef CONFIG_TARGET_AM62D2_A53_EVM
+>
