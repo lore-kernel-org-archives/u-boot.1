@@ -4,57 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FFBD46BF6
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 19:41:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78BC1D46BF8
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 19:42:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6A783E7A;
-	Wed, 28 Jan 2026 20:41:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F335783DFF;
+	Wed, 28 Jan 2026 20:42:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MOdirfng";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KC+Pg9dt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="heMk3cmt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fEhIK10Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F8BF83E63; Wed, 28 Jan 2026 20:41:26 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id F0DBA83E63; Wed, 28 Jan 2026 20:42:00 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BE2083E83
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 20:41:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E047183DA9
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 20:41:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f1XhM70cQz9tRX;
- Wed, 28 Jan 2026 20:41:23 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f1Xj24Bvvz9sQX;
+ Wed, 28 Jan 2026 20:41:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769629284;
+ s=mail20150812; t=1769629318;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=V0TQUhm7+SrqgMz7naupz3IsaV92armC4Ov2rQ7WHWc=;
- b=MOdirfng59fFqySe8bYZGDOuOV31MWYqXmdsEv6hJq4sdQby7Tg9yMkCVg6UpIRJnQlfOD
- ZRDATNPAjrfZaNXIrcL5Cc8uuABSl3Ws6XtiAuaCIZtdv7VcGkdoYFhJ8DRYEwptCESmwC
- EY8bSwSzfemZiHc1yD658uiyPudODSaDjgWbpLw2b6TGBZxEtp992uIvW6D4LqEx2ctxeo
- 4ea2SuAWaCiWfGLRfwYEM1tZq07EugA6y2BuCcjpuoSMlH7ogzMzn90r8VNMsSsn2iu/rH
- FWeFiUbSZydzoh3h6GszZVXPZD/rjHNMh5B42D+u03jR0WBMWQlT6MGJkTAB6w==
+ bh=EL1Enut7kBRdiT06KJjFcP5QQaHZtfD1NbmK2Q8N9Bw=;
+ b=heMk3cmtwO7eOnsjhVT3LZRf4PgGvPttvwLMwBB+Qu5c24IN5pxpMVNOGUt22SK9jylbiw
+ SJ7IveWg6uDxSxrY3c01rSPdFFNyw37VLnPBX64+JgEg/MLgTEelJOg08fjvwJl+M6VPI4
+ 27gZsjR6A3yGuzhdka7H0BjBhaY2anNamD04l3n+in5Fa3CoX3/aVc/gjmYzc5BBQ+76DD
+ UqDiyqDXJlSImOw8gxBTmrTnObxcP/ONchWCfawJJbiz66wik2MXztDBFlmAY+tdeynDwa
+ 2vxtgOa/5ozqbffBhr6lYcDfOSv6Bg6KNUgdM0Zc2STUh4+YYJCvV/dLiVzDJQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=fEhIK10Y;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769629282;
+ s=mail20150812; t=1769629316;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=V0TQUhm7+SrqgMz7naupz3IsaV92armC4Ov2rQ7WHWc=;
- b=KC+Pg9dtlB3wxCPh6tuYZ+4ORYvJhn9/3ylYVm90Y85K69BvwTL8G/b4f1zpxU/WZxGuva
- zF2XumgUbg33M/Nia/46gRDun+ibjIgTiwvgnybkIKgLdr1kdsXnw2aTveoZVRM+Fay62R
- W1pQCJ56Y38Y0zuOd/bj+Sn9OJtKcvrUnATKHNQtSNSwuzn3yxw6ngEFmoTjoSfT0GSWWF
- /OXOG6v/rLVMeyPQVIs9s6klseHGstXm0vXTcT3UJQ4qsZ797v5cOT7f5w5q8rhKNEHm+z
- ujJuPdGEQlVRD/ajmuWn4w+PH56MgCpEeTrw9kJULrCfJ98oqtU3eu3LXijAFw==
+ bh=EL1Enut7kBRdiT06KJjFcP5QQaHZtfD1NbmK2Q8N9Bw=;
+ b=fEhIK10Y2Bm/r9ydEQkde+cj4KgUJoG4OIR6A/kt6hR9A6rRbIveVPYN0MfPCrWtYTBuSO
+ IjrMQiXbCjZSVgUJAsi5HKKC2V49t1EFg/bKUDvICP/L9oTdtg8eixxVQKZU9HC64HeZob
+ DfcMw1W6vYT6P+uRtW/LopMEsDxMqnHT+TEbKTMgMh4I/Yt5cQbDpCbmIYE5BRcuKjKVgW
+ mVaD3EzQpwSThpXhS5CifmW+aN1Wq1aExGw/rKhh2fYN7vP1zLlgsR8K03L1ycB4kU12j5
+ 17spXPDnTUHrSHHR3G3OyJ2o1TpBUNb699x2W4tJhBqTTZ9fh+s2K4+rT+V6Mw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -65,14 +71,14 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
  Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: [PATCH v2] cmd: unzip: Use map_sysmem() with buffers in the gzwrite
- command
-Date: Wed, 28 Jan 2026 20:41:04 +0100
-Message-ID: <20260128194117.278566-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2] cmd: zip: Use map_sysmem() with buffers in the zip command
+Date: Wed, 28 Jan 2026 20:41:30 +0100
+Message-ID: <20260128194152.278586-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b53e12fcc876640b2e4
-X-MBO-RS-META: c1rgdtqirrxi7xk6hj7bb3iti7z3wm9w
+X-MBO-RS-ID: e6de8ff0694ab03e2f8
+X-MBO-RS-META: fgdu56ctpcqn7kye35hik748d79iqnbp
+X-Rspamd-Queue-Id: 4f1Xj24Bvvz9sQX
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,8 +98,8 @@ X-Virus-Status: Clean
 The current implementation casts an address to a pointer. Make it more
 sandbox-friendly by using map_sysmem().
 
-Convert 'addr' variable to unsigned long, as that is the return type of
-hextoul() and address parameter type of map_sysmem().
+Use symbolic return value for the command while updating
+the return value handling.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -110,51 +116,57 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: Add missing unmap_sysmem()
+V2: - Add missing unmap_sysmem()
+    - Use symbolic CMD_RET_FAILURE/CMD_RET_SUCCESS return values
 ---
- cmd/unzip.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ cmd/zip.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/unzip.c b/cmd/unzip.c
-index da958f12803..ba83995040b 100644
---- a/cmd/unzip.c
-+++ b/cmd/unzip.c
-@@ -50,11 +50,12 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
+diff --git a/cmd/zip.c b/cmd/zip.c
+index 2d255428822..4bd1179390b 100644
+--- a/cmd/zip.c
++++ b/cmd/zip.c
+@@ -7,12 +7,15 @@
+ #include <command.h>
+ #include <env.h>
+ #include <gzip.h>
++#include <mapmem.h>
+ #include <vsprintf.h>
+ 
+ static int do_zip(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  {
- 	struct blk_desc *bdev;
- 	int ret;
--	unsigned char *addr;
-+	unsigned long addr;
- 	unsigned long length;
- 	unsigned long writebuf = 1<<20;
- 	off_t startoffs = 0;
- 	size_t szexpected = 0;
-+	void *addrp;
+ 	unsigned long src, dst;
+ 	unsigned long src_len, dst_len = ~0UL;
++	void *srcp, *dstp;
++	int ret;
  
- 	if (argc < 5)
- 		return CMD_RET_USAGE;
-@@ -62,7 +63,7 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
- 	if (ret < 0)
- 		return CMD_RET_FAILURE;
- 
--	addr = (unsigned char *)hextoul(argv[3], NULL);
-+	addr = hextoul(argv[3], NULL);
- 	length = hextoul(argv[4], NULL);
- 
- 	if (5 < argc) {
-@@ -75,7 +76,11 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
- 		}
+ 	switch (argc) {
+ 		case 5:
+@@ -27,13 +30,21 @@ static int do_zip(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			return cmd_usage(cmdtp);
  	}
  
--	ret = gzwrite(addr, length, bdev, writebuf, startoffs, szexpected);
-+	addrp = map_sysmem(addr, length);
+-	if (gzip((void *) dst, &dst_len, (void *) src, src_len) != 0)
+-		return 1;
++	srcp = map_sysmem(src, src_len);
++	dstp = map_sysmem(dst, dst_len);
 +
-+	ret = gzwrite(addrp, length, bdev, writebuf, startoffs, szexpected);
++	ret = gzip(dstp, &dst_len, srcp, src_len);
 +
-+	unmap_sysmem(addrp);
++	unmap_sysmem(dstp);
++	unmap_sysmem(srcp);
++
++	if (ret)
++		return CMD_RET_FAILURE;
  
- 	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
+ 	printf("Compressed size: %lu = 0x%lX\n", dst_len, dst_len);
+ 	env_set_hex("filesize", dst_len);
+ 
+-	return 0;
++	return CMD_RET_SUCCESS;
  }
+ 
+ U_BOOT_CMD(
 -- 
 2.51.0
 
