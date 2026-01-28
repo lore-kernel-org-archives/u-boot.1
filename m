@@ -4,94 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AECD340BD
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD47D340BD
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:01:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC50183EB3;
-	Wed, 28 Jan 2026 15:01:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B4AA83EC9;
+	Wed, 28 Jan 2026 15:01:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="czT1VzSN";
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="W43UcA6X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97ED883B97; Wed, 28 Jan 2026 09:42:51 +0100 (CET)
-Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
- [IPv6:2607:f8b0:4864:20::e2e])
+ id 2877183D0F; Wed, 28 Jan 2026 13:08:42 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B9D583B55
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 09:42:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BECAA83C39
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 13:08:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gregory.b.dev@gmail.com
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-5f52b3d98cfso2376061137.2
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 00:42:48 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769589767; cv=none;
+ spf=pass smtp.mailfrom=jimmy.ho@sifive.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-3831ad8ae4eso59378451fa.1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 04:08:39 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769602117; cv=none;
  d=google.com; s=arc-20240605;
- b=Pw+BPzWU3EFoZ9HSpTgYA55QBIeU4z+++WuUxg7doMBYgfm2gTOVD3xaPiRVxFg6KK
- Vc4F7/hOTWwUNBUzCfwwpO9JYDCvzaL+HrmvhsROUvfw2pD1GcYJfm00UH3iECD5d8Wx
- 9vX/Xjz6W1WBEeXoVVadI7U7fpho2ISG8FAw5zVLbQkgLcqnH//Q0byE+hSXeJ5bs1+B
- LXrbvog5Zbb4EnofEWgVlKFx9zaAMTJ7ofn48epXx0lMnHJmTAGruJu5qCcu7t70CAI8
- bNtLlR32VSW5CFotD3LPkr3D+hbDdzPRBQXlkluE/Mn7xnaWViin65w08sW5ZHgTCwHF
- dNRQ==
+ b=bxq+NH4MziAj/ltGrgHV/+8jCseObred9kbTCI1mLa5JHj1fFwI+4l/J69agwYOLkG
+ wyA+RY6x8AJyp5wIliwP7NsdyXuuYQ5GD76QkedzdcjE7Mg5NFAS1hin5QwpZXnBXhRe
+ s1mH7BliAC46+R1aVGeGOg2YslQmvlw2ce3c/tulQVwytCjR75QNjSefbYGB6veRerXQ
+ qrtIHrsQ3nr8djfhzzf3ZFzvbMZKMi9u3F0Zlx/Y9LXW7k+cpIOS9/qaAjzPXj+RXQs5
+ 7lmhCB7DvzhGYIE9nP5ilr5OI53BYMRGRUYIupieH18bEVIfN0ugXx1VEbSqEjjotCAy
+ ZJIA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=pXxkfQ8zNB6CMewWw4+AOIXItHFbduKJs0WoR0w6egE=;
- fh=K4vm983Q2G37R7/BYHcY8BpitWW6ydyFiQ3lWVBV/YE=;
- b=Hg5qWOytC8+1SKIEgAzFuVInGsEKPpiYWRlIyKlA9OUF0ClBFpl0AnzWtLxCu2gMEl
- FDML2unPt9OXo+hYMZXwkrXtV1s0de9tODuEoWi/E2AW/RsJXDXZ584ve/cUrnBUW+5m
- xlSmE0QPLxWivcex15CpxhZ13fF8mapxmTpdLn4LtHAonYKlLIu5pvtD8bmDI8CBbJJ5
- oUO63Y8mmBNzOUavzKxlqHBm7deWFBfILJRG5sOlWyL7J4N+T+R7SN7ZrDmTdtlpwqks
- Ewfb9pRzviVBCCF/c5D32Octfep5XLfnYOOg0VV23JhMtJ1b3mTZ7rQdB/n7jNNJutXn
- kE7w==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=0NYcMotSpZ2Ldfz7x2QZFod1kxVmcKgdaOz9MKnPjxk=;
+ fh=m+dtN6TUifFvJayOKgarS1jFh3gWqlunOAdIPbgfjVM=;
+ b=byRFe/JnzWVdV86CAG6My8UJ4JWKz/2cu9+crUdwFDi0ooj8EvDxT6+CGLbPr1DDwy
+ 40PUxbsuyJ9wtDbRwbycMe9IIAnkDdz+IxMVyn8RNmGug7rX3qvakbxU1Z6GOhPsZJvl
+ Vz1WZfIbj5ok1/fNqW4fI2ZJ5zOON75W/+SPD8FAtE7GY9Ssylfoq0cTVAeQBSSeGzQ2
+ 3OvvjGzaqpH0eAdZ1FxufCw6XXeldfI5dmv1OvLAMGm22J7DGG+1o1nVhE5Gi9JLs7vz
+ 6reJ0O7mq7ScMjLSID/I1lFr+7JyKPhP32EZ3FUG1xXROaungga0A0we4W/7sjGwPO2r
+ sYkw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769589767; x=1770194567; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=pXxkfQ8zNB6CMewWw4+AOIXItHFbduKJs0WoR0w6egE=;
- b=czT1VzSNu7ety6VOsFrcs2W6IJ+qm/fFq1RDVA22LNwgDuJuvnACERa/5rl8oI2YuG
- OurAY0lBnWLCZAkD4JDMcIYVOzbVMIl4CucWHlmogt0uq/2Ey/YTA64JuTmwWoli7g/h
- RrSjbr2ZRnHHKVUoVMglY4g9cIIVmOkmsGarqNxhDSA0q7Il0uJ2/LImuG0BomKkKmJM
- 6cTybZQS83/mASyJq5N34wFpHXMZe6MMtcZy30vrdU5kb4kKWMcGA/lRnyQCe3N8hcws
- W4JdF9ZhuE3rJ9eTU2cYSMM26vum6LOVxqJxa+KPGTgSCSY9lPPQyc0/qL5sJQllUk8j
- b0Sg==
+ d=sifive.com; s=google; t=1769602117; x=1770206917; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0NYcMotSpZ2Ldfz7x2QZFod1kxVmcKgdaOz9MKnPjxk=;
+ b=W43UcA6X6beKMFHJeMgy/+1ytKUUc3z7j2Xz7ZDIIPevWgwl1swhW5v9OcaJ2sgsWN
+ JJ/+Ou+JXzK3CUHA236kLMCydrpQUfRy1I5JJngZsMa5WvoLG1oeBQKx/eAkVZdOEnLU
+ /QOyUpWSsWuM7s08qPWsb+NrcJyJvqwI5mlH6l2wd/Q2I1KXTHQEzJz1ec6wUZuZds0w
+ A6EuMEDOxg0H7QebB2kImRht1/HPNX4345NSkNrSck8bThYWfaDc8M3tdefZQc0H1SUS
+ YlW0fvEKper7TvQdaTpsw8qMfQqHxvvv05iXcLKv4sfG0gYjHyz4O17pViPPed80EoY1
+ RI7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769589767; x=1770194567;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pXxkfQ8zNB6CMewWw4+AOIXItHFbduKJs0WoR0w6egE=;
- b=Lq03gnmgNidoXJdAlVFChgDAfd6YitvHh3nonzFCMj3CnJ3lCgRXcgM0a1s561cYOk
- ACgqaC/w+EvA8SpZ6ldoPQRWeXatBdzHMaCufbA4zasia5SEG3k7/SOrsnBTK8z5YUzH
- JmpQntM6ab+C3w/6d1pUIOIn1mDoSdTiUqlxBNpPu/dc5KTvn9ZPp/ouxLTCpNcrRQfu
- CUBrvRv1L16yT7JWXQiRIAcAJG5L/o4QUEn478doe5e4bZvhQAUA1uCD3fL6utu2ZrFW
- abwxgi1VxKAPcRaAskJUT8pNkexiXnh9010fsU84nQL8M3W1FRQnHixR9ii6inD/Mzz7
- y+1g==
-X-Gm-Message-State: AOJu0Yxy7nCCfY/pJXoIn2ASrEFR+nlx8KgPH2NN6uKHdbqwya/8uINf
- hMybdBjuqNve+hRdFVoAIM39VVrd3G0fFX47awXebVKVGrBLvv+EbL25R77oWpYLbw78hzbCUzm
- 7G9kdYkZOTKc20lNq3sKrUtfAOFrIS64VFJw1
-X-Gm-Gg: AZuq6aJDEpfmKYX6KADmlb/4HuEjchFY+WnAr8I1dBNSMK1jFdeDOUnbZ1gyzEQ6M37
- 8jeTc4CIYZT0oeDjU8sn3L2q5bZkZUji1J/2NvpnI9AepesLvLoA0iqKrfJRS2DxO8fimLKf+CQ
- XdnNDSEIjBkbYcFPqAARfQTH9w/k4X9/rzH9IUf1aNjzeIseueIBdN4v3mPaYwFgYFzb46aJo/2
- vko3AuF2J3FvoZKkgZDI4ezbZLuMVxNES8CNV+Ut2dRaMnosy/ey09oO7diFbuS2vTgvZA=
-X-Received: by 2002:a05:6102:d86:b0:5f5:3c38:c4bc with SMTP id
- ada2fe7eead31-5f72379c561mr1487011137.23.1769589766703; Wed, 28 Jan 2026
- 00:42:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1769602117; x=1770206917;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=0NYcMotSpZ2Ldfz7x2QZFod1kxVmcKgdaOz9MKnPjxk=;
+ b=lANKQb/6YkjMHN43RHFkQrnJqpTSmmTh4jwei8zLcXFxqCnQ08cSQwu0CeAY9B/Ecy
+ o/bC3kpGsVIMZAut4cqv1iQmFIWwpa9LgGcp+lK/p63c+qKeurtgtqZozVboHyzGBWlw
+ FtmNL6RMSl0Y0Fm2Fx1SbVMRgg47YXGcGBqu+b+ROwRBxfMAVjClaW7jc+yp0oAS3hEG
+ v+y1HUTqUIKEuct4j61ISMYHdLYaWXRNK9IFK25CvAn8QIqJyhY31tfRll4G14EWJsyb
+ 1oCwbrTWTF5qoAqC4vU0Eb9Ah3Xkj+oPb7RRE1t9w+EBLWCqpTnEL3rw966383QuUvtU
+ EZ8w==
+X-Gm-Message-State: AOJu0YxfvqHNKauG2zolWABinUPziXKzUm9e0MTjnMTnGJjhgvRf6JN9
+ auaMYBMkNgylDea0UsXII6lIh34YZlVD4uxEbPrDOTpPw07nwBlfug5xo6JnpxnsWIbFREs4dfG
+ g8lNBDnf3xPDIWJoPp8Yd+nyPIt0RfCeATPBOuC3P1hfzpHuUkCLpy6c=
+X-Gm-Gg: AZuq6aLd/7aPPxEQ6w1WEvg8tDIdcUnXNv3fXwflDQ40UrUJju33Yf1tCa57j0krCci
+ EiRtwNN1xaGDYnXAbe2YIGTj2YcXPPSbbYzxGs+hAWu3YleTrF3xQeFSdycnNFuD6giNAfh3Sqs
+ 6pDo3qVArLRj4KkyDShb4yhQ9QrIsb4Yut6pzqjxO1EdGoECrEj4KksC2NWU4earVzj+eA6DF5I
+ hYeM6EIfj0ilS5Wvm6x89L46Ji4Ttql6NBEkP2mbc7BB6qCl9vcF+pz8YfSlAqMhMLH8+n07Vra
+ 7nyNRoVr
+X-Received: by 2002:a05:651c:4cb:b0:37f:8332:6ae0 with SMTP id
+ 38308e7fff4ca-3861c93f352mr22727911fa.33.1769602117385; Wed, 28 Jan 2026
+ 04:08:37 -0800 (PST)
 MIME-Version: 1.0
-From: "Gregory B." <gregory.b.dev@gmail.com>
-Date: Wed, 28 Jan 2026 09:42:35 +0100
-X-Gm-Features: AZwV_Qgj8TlHGwlwnu-idlRv-eoFu01BrgVW_1NJzMfxOrWLWgJPqyb9LOpFYQE
-Message-ID: <CA+ZXaAbay3Se5+ZorL6HRHzp-vYXD4Hk_n_NqHZNOMhk-o8M8A@mail.gmail.com>
-Subject: eMMC standard update JESD84-B51B
+References: <20260119055523.13460-1-jimmy.ho@sifive.com>
+In-Reply-To: <20260119055523.13460-1-jimmy.ho@sifive.com>
+From: Jimmy Ho <jimmy.ho@sifive.com>
+Date: Wed, 28 Jan 2026 20:08:24 +0800
+X-Gm-Features: AZwV_QjG45WkBXxttAgh4A6sFGB9wRSqodxIhOzRQ03EPedAyl0-E9qIVEp8zA4
+Message-ID: <CAJh9TS+u5VYevuZ8cbUmBNk9NjpykMn7OD8ipJyPmzpgygV7Og@mail.gmail.com>
+Subject: Re: [PATCH] driver: cache: Remove SiFive PL2 driver
 To: u-boot@lists.denx.de
-Cc: peng.fan@nxp.com, jh80.chung@samsung.com
-X-Mailman-Approved-At: Wed, 28 Jan 2026 15:01:19 +0100
+Cc: greentime.hu@sifive.com, nick.hu@sifive.com
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 28 Jan 2026 15:01:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,29 +114,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Hi,
+just a friendly ping to see if you've had a chance to look at this.
 
-There was a recent change of the eMMC standard at JEDEC. The latest version
-is now JESD84-B51B.
-The CSD_REV has moved to value 9.
-The update of the standard is essentially to redefined the manufacturing
-date field in order to be able to encode year 2026 up to 2038.
-More information can be found in the commits of Linux Kernel and mmc-utils
-reference below.
+Best regards, jimmy ho
 
-A couple of patches are now being released in Kernel:
-
-   -
-   https://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc.git/commit/?h=next&id=bf60037e32e963f8053c3372c438ba272b7c30c0
-   -
-   https://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc.git/commit/?h=next&id=b40ebb75b7461c69ee4da1e49cc2fed309a96349
-
-
-mmc-utils is also being updated:
-https://git.kernel.org/pub/scm/utils/mmc/mmc-utils.git
-
-I was wondering whether a similar update on the uboot code might be needed,
-and I haven't seen any patch or ongoing discussion on the uboot side.
-
-Best regards,
-Gregory Baudet
+On Mon, Jan 19, 2026 at 1:55=E2=80=AFPM Jimmy Ho <jimmy.ho@sifive.com> wrot=
+e:
+>
+> From: Nick Hu <nick.hu@sifive.com>
+>
+> Under single core boot platform, the secondary cores won't enter the
+> u-boot spl. Therefore we move the pl2 driver from u-boot to the Opensbi.
+>
+> Signed-off-by: Nick Hu <nick.hu@sifive.com>
+> Signed-off-by: Jimmy Ho <jimmy.ho@sifive.com>
+> ---
+>  arch/riscv/lib/sifive_cache.c | 3 ---
+>  drivers/cache/Kconfig         | 6 ------
+>  drivers/cache/Makefile        | 1 -
+>  3 files changed, 10 deletions(-)
+>
+> diff --git a/arch/riscv/lib/sifive_cache.c b/arch/riscv/lib/sifive_cache.=
+c
+> index d74544b93d8..9a0519af494 100644
+> --- a/arch/riscv/lib/sifive_cache.c
+> +++ b/arch/riscv/lib/sifive_cache.c
+> @@ -41,8 +41,5 @@ static inline void probe_cache_device(struct driver *dr=
+iver, struct udevice *dev
+>
+>  void enable_caches(void)
+>  {
+> -       struct udevice *dev =3D NULL;
+> -
+> -       probe_cache_device(DM_DRIVER_GET(sifive_pl2), dev);
+>  }
+>  #endif /* !CONFIG_XPL_BUILD */
+> diff --git a/drivers/cache/Kconfig b/drivers/cache/Kconfig
+> index 4f358657444..28446c479dc 100644
+> --- a/drivers/cache/Kconfig
+> +++ b/drivers/cache/Kconfig
+> @@ -45,11 +45,5 @@ config SIFIVE_CCACHE
+>           This driver is for SiFive Composable L2/L3 cache. It enables ca=
+che
+>           ways of composable cache.
+>
+> -config SIFIVE_PL2
+> -       bool "SiFive private L2 cache"
+> -       select CACHE
+> -       help
+> -         This driver is for SiFive Private L2 cache. It configures regis=
+ters
+> -         to enable the clock gating feature.
+>
+>  endmenu
+> diff --git a/drivers/cache/Makefile b/drivers/cache/Makefile
+> index 2f683866b87..05ad7d8a33e 100644
+> --- a/drivers/cache/Makefile
+> +++ b/drivers/cache/Makefile
+> @@ -5,4 +5,3 @@ obj-$(CONFIG_L2X0_CACHE) +=3D cache-l2x0.o
+>  obj-$(CONFIG_NCORE_CACHE) +=3D cache-ncore.o
+>  obj-$(CONFIG_ANDES_L2_CACHE) +=3D cache-andes-l2.o
+>  obj-$(CONFIG_SIFIVE_CCACHE) +=3D cache-sifive-ccache.o
+> -obj-$(CONFIG_SIFIVE_PL2) +=3D cache-sifive-pl2.o
+> --
+> 2.43.7
+>
