@@ -4,103 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFA0D46BEE
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 18:55:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0780D46BF5
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 19:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E357783CAA;
-	Wed, 28 Jan 2026 19:55:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 02FCE83C2B;
+	Wed, 28 Jan 2026 20:26:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXHTuBcP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z3nAY4Yh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53D9583CB1; Wed, 28 Jan 2026 19:55:38 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 0B4CA83CF2; Wed, 28 Jan 2026 20:26:24 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63A1B83C6E
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 19:55:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C6F483B95
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 20:26:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-37fd6e91990so1682911fa.3
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 10:55:36 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769626536; cv=none;
- d=google.com; s=arc-20240605;
- b=BpWV2SlsxIxgkOyWe6UhI8Fy5FdJEY2s/FqGGh0jkuUsnW/S9FwYQobbRmHSWd/DWp
- 958XyOR/QxZDhxt9NAzzB7J8DFocSPaE/zcREedP7b1P4mOgSUKTNc6T82knNSceZOpy
- MXzHYBfBr7HBpYMDTgpUoez1NUm5VO+cVGzfA+57kpfy/0m3B87hPjaETgZhU05ISjBi
- JqxwuNoFXe8Ygmz5fr7Wybt+BZ7x7dp5F9ZghMsiQlvjyUNWU1NWmEgngvw4wlFFm+8o
- mOVUzG14bcXuDJ7H1vZclNu8O+ujpt7cJTft64VszvsCOoi9/IyBdRqUJ6iGM+1puKBy
- 5Exw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
- fh=9BPus0yw327gTQle30Kr9dCX5TV3W7iVVJS5r3yt3jY=;
- b=CEB5JwDsv2ng01vjOZEbh3qB7ZSAcQgiTLPSBFJxmgj2J6EfcqykLNHnUfi7iEiaES
- dSeoMuaAaSxl2vgb+qGpPzL9mfoNfPZc5pA2Bipy6S5UkO7fdpBdmzLyND8X2IIMuljH
- V9Me1W1lmOQ6Tt5isIHf/VdUSck8XSn0stcIluxZ/kbYYoji8rWm2fD8Mz16nO5aUZFS
- tsgrx16Cax46+IwMv6msko470WEeTdJeOgyaPrWsNLCFOYG1cpMeWD5P5m5gt5k5YEWK
- 9wGuBZraS2Dehc2B8bMdf4BnDxovhM8uHQOd2HgGEv1i4riJqN22o3fzWk1YP+g3yRfD
- AoaA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-45c89d754dfso98148b6e.1
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 11:26:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769626536; x=1770231336; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
- b=FXHTuBcPouwbwj6qlLkLIEEwweYrjAfFrL+ZPNGxELznTgsrmM68POSJTmxxYzELwH
- X/TACVwH+ibpwGrlnhZbQJghhgxOQyIjw4v0Uk39v5RmPrk32scxfG5Mun+8Bgqifn7I
- 9S/JzVgHbroAHUxwQaTTz6IHV6Sa0sa+jYKstj3XCGw3D/RRTEvArk9xtUnRmoQTAWNP
- K/rJkFtQkOS5WoNNHvOdD/N+cARftpdhPFXS32qR11AJHHJevh5jt+bnsEZu/cAYoDhQ
- fzjUWuzIq1jkfKyO7M8HWcyb/Cj2MECnlkE1H6zHE0Stl0txSp7bx95lUKvfGgsCEA7I
- pQPA==
+ d=konsulko.com; s=google; t=1769628380; x=1770233180; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KUUHRHvi4Opjov9QofTWjzOUsf9EmdO4vdwVeii2Ez4=;
+ b=Z3nAY4Yht3hr1ptn7TTx2hwkoRLMcZJfPrblR8QgM5Mt7JK3paistP2ivPe6OM5Mm5
+ 7CwLqEoumNZnby9G+rEJ517iF3Usbq7cuRKFKjOoGZfcjgPPFi6uLrJIEEI2KVbxsYwt
+ xZBmuGlBaNsmQ6UyBi7kZAejvpmgyJ8fD+VaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769626536; x=1770231336;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Wal6u3P7jDqOwJPH1p+bVzfMpSLtDxeNW3TLgrX1tTc=;
- b=XZ8BTwaPqfQn1PoEc5su+D2tia+NDPm6fTF74YEX1wEGGsear4WVG818LeyF9Ejcx9
- vU2J5YArYZ44xZfPPef9rSDPWuNZaNVpeeevd27OeEy97+/cj7dB1jOkuvQynDXKeZXW
- UwLWs38lOJZSv63+EQyfFknxVgFaRnUXHKANiRXCToe9XpoG61IAWc2631oZIP9vvyd5
- jq9zfQrQnGZLveYQQKurnKOpM3GrxRbfD9gvj3UbMFRGAHXCr5TReuJk8VeaAeO6+eoE
- H6xRGv9mslVm8aNES4A2oTYabMPXTBLXWLx+XThQ/4hXTXe/4R9JuO5RYYChJlIQDOqY
- pjLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1Hzt2UsLe2QsvCkydVeo8Qpvnif7ly7z2Lncvq7rllyf4p0OOaH73H992GACT/qLq1l1hlyM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOzEdWmI8De1V2FZkCqtbpDSVRM7WcY9x52QFKu+eQA9gcHJmc
- kGnD6bLPYBahfX3VVx1fLMowIS6Xw7SYL736y3a6jxGCjHxizSMzlSfHgWSLbfhYjm+JCtzg/Kg
- oWBLI7cYy71sdJwCf0GXcWOQ6Sowdypc=
-X-Gm-Gg: AZuq6aIFN2f+AAXiffeKwDhyC3J6UWFlipDCCWZprq50m4EcJX54iXxdlcHH2h4e320
- F8jr2lSs43QyO2ESfFIrIFskSanQ9Ra2KyZ9w1aypQIzDaiAnwzYgv76oQJiBcbMukbEA/ZnqRV
- jhoJiVoO0vaM523s5PSciORS3PfJSHicbke1/NGcLvsQ4ixiGcV3kWQngNrBHV6lz7OQ6OJRDTb
- XzgG6qTO36TBzXu89BifrIQREvZYXsloFERLU26lsUYKPVmCE45WdMT1hEoZmeMybQutcotHDJU
- OBd0nxnc7HOZ3P51Z0Mkw/QNeHg=
-X-Received: by 2002:a05:6512:23a4:b0:59d:da10:4234 with SMTP id
- 2adb3069b0e04-59e03fe1532mr2662984e87.0.1769626535237; Wed, 28 Jan 2026
- 10:55:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1769628380; x=1770233180;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KUUHRHvi4Opjov9QofTWjzOUsf9EmdO4vdwVeii2Ez4=;
+ b=Jq/NVASTOuiM/zzgi8V/t1MO3lznEXYlna/OhIe0A9HPvObMvwE4IbhDg47jsj8+fv
+ lQzKkSu0DDDhzUv2joca2N/3swgTmKBmkCZeVoxyH2e7aY6XpgSZbKd90Pbkz4GMbB9w
+ NCAn5P/Nmq1iR2oVAQJI2qq4kWGgMJZR2AC13h9ouW+70ro98AhAeOUMC2veVvmU0BZB
+ 9C98PGilrxyFXMSIU4TkFBCwMcemEmYWanw9q6s97l+ocyy50WcqOiotw3/MX4y2eyF0
+ zzJPF4Vuql3C+F/c5zc4EYmXxSyT3HOlm3UYmNeGjDMy25x7qEPQqX+0q04W4LWcxLAf
+ gIbg==
+X-Gm-Message-State: AOJu0YwpEPS2VC+6oR4V+PYfcIgT+y+bqtXpJ9bZepEB1Ot7IaXTuzuI
+ nFZwuW79+8PNYGft6FfSry/v1bmZAA00lQiVDJxyfHSDOlo9Lu8eF2RHWByzxPUzpz82etoPm/0
+ IUTv2ReQ=
+X-Gm-Gg: AZuq6aIgD0reEvmkoN2Uaf7nRMNeAd3qpjFkQrDKPk+1S6bDHxCVpbJEcihl2MPAFtd
+ KQaPtmZtQ3uipsnIsKpffiNuZPGdZX8XGAuH+3jhG1BKOTvrJWcNvCWpQyNzktDrKx+mObO6WST
+ hBg3dauTscjSYRhQ0kVgbEBkpyhT47sj7yjrGHSc+/sBg3pRzrEqUoSVHPiJMq1enNKEeKInh/O
+ o7MVIaBuFZ8oHyyRgg4+4AOYMZxedTT4ES0tWIn0rA43KNVM1iLniL7esRD3IJO4+RdRESpDFhM
+ AqNZ8gmfk1/F7xSDutR8TBFpoKpQLxFkJs6DFwk12OgrUWESkpn/LD0RgancodtJRrP+hk2ybUH
+ bh9vUAWkufuHzXZCNqvEMKavcE3o70GV/HHZ0TUbhtGDfFRfQrGyFnEq4momausdsJex5IQlEdG
+ 56LthzFHkntdSLgoGkZiAvFisZgUzMMl+dZfK/UUhpV4KshkgYqLq8u6EWM7ICYLZ11EIDN5eip
+ cpYcmnekqDpjtt8dz933Vs2Af1V7LZpUR8aqFjTpg==
+X-Received: by 2002:a05:6808:1455:b0:45c:98c8:70ee with SMTP id
+ 5614622812f47-45efc603246mr3621064b6e.26.1769628380006; 
+ Wed, 28 Jan 2026 11:26:20 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08f769e8sm1777364b6e.19.2026.01.28.11.26.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Jan 2026 11:26:19 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Mateus Lima Alves <mateuslima.ti@gmail.com>,
+	Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH] misc: Keep FSL_IFC available on PowerPC as well
+Date: Wed, 28 Jan 2026 13:26:17 -0600
+Message-ID: <20260128192617.1724570-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260122-imx-clean-v1-v1-0-a52a94b7e173@nxp.com>
-In-Reply-To: <20260122-imx-clean-v1-v1-0-a52a94b7e173@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 28 Jan 2026 15:55:23 -0300
-X-Gm-Features: AZwV_QhcOSteXvyuiV9VIanjM4m4QEiu30BnC6mNpH708uvO9HkX89GKwHGRicA
-Message-ID: <CAOMZO5APUR+ahmad69iqpWQpD-u-m2MzoWu0g52kykBweKD3kw@mail.gmail.com>
-Subject: Re: [PATCH 00/12] imx8m/8ulp/93-frdm: board cleanup
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,14 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+This symbol is used on a number of PowerPC platforms as well, so make it
+available there again.
 
-On Wed, Jan 21, 2026 at 8:51=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+Fixes: 424b324165ea ("armv7: Add CPLD support via IFC to the ls1021a-iot board.")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Mateus Lima Alves <mateuslima.ti@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+---
+ drivers/misc/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->  board/freescale/imx8mm_evk/imx8mm_evk.c   |  3 ---
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index be7fdab56d14..a0aa290480eb 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -695,7 +695,7 @@ config ESM_PMIC
+ 
+ config FSL_IFC
+ 	bool "Freescale Integrated Flash Controller"
+-	depends on ARM
++	depends on ARM || PPC
+ 	help
+ 	  This driver is for the Integrated Flash Controller(IFC) module
+ 	  available in Freescale SoCs. This controller allows to handle
+-- 
+2.43.0
 
-Now that master changed from board/freescale/ to boad/nxp, this series
-no longer applies.
-
-Please rebase and resend, thanks.
