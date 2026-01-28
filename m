@@ -4,137 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF91D46BF6
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 19:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6166D46BF8
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 19:41:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6D4D83DA9;
-	Wed, 28 Jan 2026 20:38:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B53A83DFF;
+	Wed, 28 Jan 2026 20:41:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mPW1Xscb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="skrGnB3e";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mpqSVfc7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF6A983DCB; Wed, 28 Jan 2026 20:38:42 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id ED88783DFF; Wed, 28 Jan 2026 20:41:03 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B9B83C2B
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 20:38:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18D7B83C2B
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 20:40:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o8zm3gH2gXZOPnDP2synuTWcnx8fVUXuqMSGwUrw0s6BEYbdxyQeVA2RhvDnCU/vm22Els5mJ3tZHu0ut+9zfTYo/50BNnVtkAQS5xzXnG2AXZCAuOAK/FB+pP2xcdVspJcT/LteznO2TFJ11x7zm8LSjpfoNAYk0xPbIAAxNeiEREuX+qbssIeEvtgpVKmnY0hIGCQzA+ikCbxrYfOh0svi4PconUb4LX3R4o1Usa62DnGgkwfu62R/DR6aOo+z5s+fBvo8V3BoqYBjW4BzOepVOnaPQv32dMOSkJa5+keU3DJzUzmF22XoBbAErnjdZlswqjPn7ntqIQuosgug6w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PDHYgdssdCZmu+hieCdmmiBaiJiH4Of8hjDsMk1+0XU=;
- b=NJ+SN2L16uIYZ/NRbxhVfSukU9jQjbPbPcYWc8mluCH0Owpp0oN7zNzAGwh8KGyhXGy28OCWenaR4kTrUq6J6bPkYSSxLNcF5buRQ0jZjLB/KAV+hSi07kYEkYatB1PDW5CD2KRCpVPASFxzp6y2of0PqLpbxpIFxprAMyKCRphi6Kyn344cvp90P7/hcjbLt1EhZ+y/lvmEM8KqplJU3omy0VQcawkgKfctNFs96FreiuTsAfAsn/fcep7LKFeZYOWjB1+9fqUKnDmFOglIQkEAbOwvzq51q76pifRrZt25DNIx2LfG3XEIOQWJL+/MlLyRy2s8g8aAP8qbNSE80g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PDHYgdssdCZmu+hieCdmmiBaiJiH4Of8hjDsMk1+0XU=;
- b=mPW1Xscbe907ry5JujvF1R3v9W9Cid4myytFoNMb0mSzLih1Y/rH17ef69LNKBB3W0aGHOKdspKP3lRcwjqUkuhiCGcaQoQ++tPwqVGBMbIeTp3H3HQpOc02h897H0Y4Y9yYIig5Pk/5a0LHQj5X1YnY1g7VMOWBQET/mLjGkns=
-Received: from SJ0PR03CA0099.namprd03.prod.outlook.com (2603:10b6:a03:333::14)
- by MW6PR12MB8662.namprd12.prod.outlook.com (2603:10b6:303:243::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Wed, 28 Jan
- 2026 19:38:31 +0000
-Received: from CO1PEPF000066E7.namprd05.prod.outlook.com
- (2603:10b6:a03:333:cafe::9c) by SJ0PR03CA0099.outlook.office365.com
- (2603:10b6:a03:333::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.7 via Frontend Transport; Wed,
- 28 Jan 2026 19:38:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CO1PEPF000066E7.mail.protection.outlook.com (10.167.249.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.3 via Frontend Transport; Wed, 28 Jan 2026 19:38:29 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 28 Jan
- 2026 13:38:29 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 28 Jan
- 2026 11:38:28 -0800
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 28 Jan 2026 13:38:27 -0600
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <jagan@amarulasolutions.com>
-Subject: [PATCH] spi: cadence_qspi: reset OSPI controller
-Date: Thu, 29 Jan 2026 01:08:19 +0530
-Message-ID: <20260128193819.1177944-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4f1Xgr40K8z9t6L;
+ Wed, 28 Jan 2026 20:40:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769629256;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UWHEqY5AGzyYb2a6UMHn1roh2GFuvnZ0nyRucQVb0DY=;
+ b=skrGnB3emsaHFHDAOVh+GiCJStcBI+vE31WAyfuTlFI2w03EpkmN++MzTtQbdfOEFy/o2E
+ 6802iogNGKUxMJsV5SFrmLpQJR+xY/kbruU7vkZ34XJ4eVjZMh92xoW8xYuiBJbUVR24sR
+ yb34pG1AYAV2xJPeoNM7fFC83Wl3y6oAB3bSPFS32u6Pld9XxamlncUfrD4QcTzD8QNDPW
+ v6FdwV4t4wtdL5hbuYter47+h1rByD3TpUwYJSfB0cByIbwYZ0OPsDz0nLvMPS1Xfl//mP
+ k/Vfs1JLMJamG19tmz0Kb4g2+NsN0xD3D0l02wScruuC8tctY+ilJiyxt4mSFQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769629254;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UWHEqY5AGzyYb2a6UMHn1roh2GFuvnZ0nyRucQVb0DY=;
+ b=mpqSVfc7p27APbC/WwWOkmWrfwTvW0mabwY6XCKEv2LxYgN7AfCOe3zy+sbTX7OhsYFCV0
+ 9sz/y+0Rom0k+YUrqln/2gBu9V/j85nmNVaZeN+xfz1GZ4OfkebZ+sl5AmTL2FxAYcWXm2
+ OOfVm+C9jjD/ajOKdXKgCo8KRK0Ay65ZVDTUQ0CxxzWshPrfX2Pp26esixlj3Ygy13X0dX
+ N0aQei4SHP88vUO+XJkKM5a0tU46FuhkwLtrMC2wKQAWfEy/P5VdRe4D5QHgp2h0cPxD17
+ 7/tNd+Be5hVY9/uzmoNJtEplJDz/hU5cTReo0p84pZnE4ZqSHX6APQeWaHw/4w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] gunzip: Fix len parameter in function signature
+Date: Wed, 28 Jan 2026 20:40:40 +0100
+Message-ID: <20260128194049.278542-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000066E7:EE_|MW6PR12MB8662:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e81c091-9d37-4515-9e6f-08de5ea4d092
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xnoZ8jOxecJo2/IU2932PABe2cWjeyM9D3DtfhGkLaxhVb8vMzyctU76ncJY?=
- =?us-ascii?Q?OJvisnV/zQipK2afTViEvinanC1lQsi17aVZ0Pz75mypH4crMDC47wuWGWUs?=
- =?us-ascii?Q?5aEBpArBSeBgRICzPpl43J7h6xdejVp0TGPbRPINkNqf7A9UBgVYr4Ooj/kv?=
- =?us-ascii?Q?Vv9QBsVMy/PG4ZhgFolEGsKk2dCPM73L4s3PyRTpggaQpzXeyA/S04APLfl5?=
- =?us-ascii?Q?gQrpwCr97xy+i/TuhGWUGqHzrrRdTHZ1O2zj3Y7jtIao9wqd0VOwG4r/bp8C?=
- =?us-ascii?Q?6NRMUfwptfokdzqQSNa9tvROJ78TQqT1uOZA/XlkmcNG9dmtwEGuJljsQ3yr?=
- =?us-ascii?Q?63En4ngjc4s+hF1zSDrNkJHkFMIVgwLtWo6xu3NXwbZCtm/Syp4IG0JV9WPX?=
- =?us-ascii?Q?2Z2d2x50JXc2VYrJGuAAfW3d17tgPMga1CEQjD16AsQ+Q1nvSg5feFOlm9fb?=
- =?us-ascii?Q?O0gKd5JKO7Mq2pgiDRITfKTA2qQuBbm6bGWfNG7Jg5hJsXzxHzaQVI+O2bfw?=
- =?us-ascii?Q?a2ViS7FOgPp0nhg1TIg9ZL5FwDW+PUlBRQ5e0I4Cw6p3tNQVFf6CywQE3nVe?=
- =?us-ascii?Q?vrjMipISZc9NuqBoxmP5E60Y/201AfLiyCvh9Ob+oQ6TZo987en54/m+/1+8?=
- =?us-ascii?Q?vQ6xETOl7IBSQKheKRS/DRIHR4/s8Djym+XugqpebS3JKrP/WgWmo4Aztcv1?=
- =?us-ascii?Q?1XLRWAEYCY9zolC6IUU9qUYuIr6tEqWoDrz3cYjWWGzysH8OnbHfRpvAViWE?=
- =?us-ascii?Q?vaPaLArPkT1pdeTJ+KOF8gWsBkgRslAn3T9LfJq3iq/Q23qPnjY8s0p0Q9+B?=
- =?us-ascii?Q?T4eVlOkUOf36xSLf05Gc9q5z0Y2i5fpukXuD+RLZp0c/CRRUgtHcLwAXEoXp?=
- =?us-ascii?Q?S7uoXPK92nwx3bgSMbqw5VQXeArEeYq8gvx80gmA3xhD67NrHZL6F0CTPpGy?=
- =?us-ascii?Q?TP73myQZHsVp4xaxotrdy/A/qAbbhooJ3Cehe0br4EUvA20GS3jtz5yc1N4Z?=
- =?us-ascii?Q?dP7rIbV2PVYIEDA0iKTZ03YEg4QlUUfHD9nGZWc4rntVMcO5mHAs/rKTPZCh?=
- =?us-ascii?Q?e+D6wf+Ge3+atO1QtK2q2V6cyzJkJyqLGTKvm4C38SMkD72tZxPx9VT7txDE?=
- =?us-ascii?Q?cmRGsKpUhQDJ+OXXPP7LBTqbwmqhmjPN8pVKFyQdBH0lijxrTASgooVkU+Eo?=
- =?us-ascii?Q?A37/MZzG5nLAyq3tqMXYZz6c4p6Fl56SYX8J4iYJFeH/fg8qbL9NeaJ9RE3Q?=
- =?us-ascii?Q?YCK6zkXWhjA1QKCpBLJgmVQ9PmvtFN/lND/o9Svy6QVxndGnj5WQVEaVqyvp?=
- =?us-ascii?Q?JLglzbb7xQ36kHksvSFU+OBd3QoxRQKhK024sAS47VKCnlstc2Zy//YhRWLc?=
- =?us-ascii?Q?3iPzNIjjzDlVfbHQEsg1iwmWWsAfliijPVtNuLh+tMxr8Kb8SsspRYPqkWnL?=
- =?us-ascii?Q?+NIkSuM5uBUb+SI2nqYUBhnvnu0V3PGUMDYz9GvMiFKftm5uZw5pLV1qNmo6?=
- =?us-ascii?Q?rBMpnkbAnz3FGRRkNAlejywNy5CV4mqwmDiMzI1xCKiGr3E4dZ+T6NVBcqln?=
- =?us-ascii?Q?/53qfgafTd851VFUpluL5yi2RnUFPeWXhQ9M2HWbTi76+f1xuuL603kA1UmY?=
- =?us-ascii?Q?8/6ym9qIS1LQW0/iNPEKiJISESK1ntHkFtLPqNaNZ/N0Z9NsWuMoF12fxpRd?=
- =?us-ascii?Q?b/L6Rw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 19:38:29.8772 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e81c091-9d37-4515-9e6f-08de5ea4d092
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066E7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8662
+X-MBO-RS-ID: e3fc22727b377b41e2d
+X-MBO-RS-META: 6czswgbw44qqdcqdnqo5gcqoe9ewopr6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,54 +88,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During probe, toggle the OSPI controller reset if
-CONFIG_ZYNQMP_FIRMWARE is enabled to guarantee the block starts
-from a clean state. Add the small delay and error handling
-around reset assert/deassert. This ensures the OSPI controller
-is reliably reset during probe on AMD FPGA platforms.
+The only call site of gzwrite() is cmd/unzip.c do_gzwrite(), where
+the 'len' parameter passed to gzwrite(..., len, ...) function is of
+type unsigned long. This usage is correct, the 'len' parameter is
+an unsigned integer, and the gzwrite() function currently supports
+input data 'len' of up to 4 GiB - 1 .
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+The function signature of gzwrite() function in both include/gzip.h
+and lib/gunzip.c does however list 'len' as signed integer, which
+is not correct, and ultimatelly limits the implementation to only
+2 GiB input data 'len' .
+
+Fix this, update gzwrite() function parameter 'len' data type to
+size_t consistently in include/gzip.h and lib/gunzip.c .
+
+Furthermore, update gzwrite() function 'szwritebuf' parameter in
+lib/gunzip.c from 'unsigned long' to 'size_t' to be synchronized
+with include/gzip.h . Rewrite the other parameters to size_t and
+off_t and propagate the change too.
+
+Since the gzwrite() function currently surely only supports input
+data size of 4 GiB - 1, add input data size check. The limitation
+comes from the current use of zlib z_stream .avail_in parameter,
+to which the gzwrite() function sets the entire input data size,
+and which is of unsigned int type, which cannot accept any number
+beyond 4 GiB - 1. This limitation will be removed in future commit.
+
+Reported-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/spi/cadence_qspi.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+Cc: Alexander Graf <agraf@csgraf.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome@forissier.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Cc: u-boot@lists.denx.de
+---
+V2: - Rewrite function parameters to size_t and off_t and propagate
+      the changes into internal calls too
+    - Use log_err()
+---
+ cmd/unzip.c    |  4 ++--
+ include/gzip.h | 10 +++++-----
+ lib/gunzip.c   | 32 +++++++++++++++++---------------
+ 3 files changed, 24 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-index d1404e13810..a29acf75abd 100644
---- a/drivers/spi/cadence_qspi.c
-+++ b/drivers/spi/cadence_qspi.c
-@@ -13,6 +13,7 @@
- #include <spi.h>
- #include <spi-mem.h>
- #include <dm/device_compat.h>
-+#include <linux/delay.h>
- #include <linux/err.h>
- #include <linux/errno.h>
- #include <linux/io.h>
-@@ -257,6 +258,24 @@ static int cadence_spi_probe(struct udevice *bus)
- 	if (priv->resets)
- 		reset_deassert_bulk(priv->resets);
+diff --git a/cmd/unzip.c b/cmd/unzip.c
+index e7a3f9808b2..da958f12803 100644
+--- a/cmd/unzip.c
++++ b/cmd/unzip.c
+@@ -53,8 +53,8 @@ static int do_gzwrite(struct cmd_tbl *cmdtp, int flag,
+ 	unsigned char *addr;
+ 	unsigned long length;
+ 	unsigned long writebuf = 1<<20;
+-	u64 startoffs = 0;
+-	u64 szexpected = 0;
++	off_t startoffs = 0;
++	size_t szexpected = 0;
  
-+	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) && priv->resets) {
-+		/* Assert ospi controller */
-+		ret = reset_assert(priv->resets->resets);
-+		if (ret) {
-+			dev_err(bus, "Failed to assert OSPI reset: %d\n", ret);
-+			return ret;
-+		}
-+
-+		udelay(10);
-+
-+		/* Deassert ospi controller */
-+		ret = reset_deassert(priv->resets->resets);
-+		if (ret) {
-+			dev_err(bus, "Failed to deassert OSPI reset: %d\n", ret);
-+			return ret;
-+		}
+ 	if (argc < 5)
+ 		return CMD_RET_USAGE;
+diff --git a/include/gzip.h b/include/gzip.h
+index 304002ffc42..fe8e21dc2a9 100644
+--- a/include/gzip.h
++++ b/include/gzip.h
+@@ -58,11 +58,11 @@ int zunzip(void *dst, int dstlen, unsigned char *src, unsigned long *lenp,
+  *	gzwrite_progress_finish called at end of loop to
+  *		indicate success (retcode=0) or failure
+  */
+-void gzwrite_progress_init(ulong expected_size);
++void gzwrite_progress_init(size_t expected_size);
+ 
+-void gzwrite_progress(int iteration, ulong bytes_written, ulong total_bytes);
++void gzwrite_progress(int iteration, ulong bytes_written, size_t total_bytes);
+ 
+-void gzwrite_progress_finish(int retcode, ulong totalwritten, ulong totalsize,
++void gzwrite_progress_finish(int retcode, ulong totalwritten, size_t totalsize,
+ 			     u32 expected_crc, u32 calculated_crc);
+ 
+ /**
+@@ -77,8 +77,8 @@ void gzwrite_progress_finish(int retcode, ulong totalwritten, ulong totalsize,
+  *		for files under 4GiB
+  * Return: 0 if OK, -1 on error
+  */
+-int gzwrite(unsigned char *src, int len, struct blk_desc *dev, ulong szwritebuf,
+-	    ulong startoffs, ulong szexpected);
++int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
++	    size_t szwritebuf, off_t startoffs, size_t szexpected);
+ 
+ /**
+  * gzip()- Compress data into a buffer using the gzip algorithm
+diff --git a/lib/gunzip.c b/lib/gunzip.c
+index a05dcde9a75..76f3397fced 100644
+--- a/lib/gunzip.c
++++ b/lib/gunzip.c
+@@ -84,7 +84,7 @@ __rcode int gunzip(void *dst, int dstlen, unsigned char *src, unsigned long *len
+ 
+ #ifdef CONFIG_CMD_UNZIP
+ __weak
+-void gzwrite_progress_init(ulong expectedsize)
++void gzwrite_progress_init(size_t expectedsize)
+ {
+ 	putc('\n');
+ }
+@@ -92,35 +92,32 @@ void gzwrite_progress_init(ulong expectedsize)
+ __weak
+ void gzwrite_progress(int iteration,
+ 		     ulong bytes_written,
+-		     ulong total_bytes)
++		     size_t total_bytes)
+ {
+ 	if (0 == (iteration & 3))
+-		printf("%lu/%lu\r", bytes_written, total_bytes);
++		printf("%lu/%zu\r", bytes_written, total_bytes);
+ }
+ 
+ __weak
+ void gzwrite_progress_finish(int returnval,
+ 			     ulong bytes_written,
+-			     ulong total_bytes,
++			     size_t total_bytes,
+ 			     u32 expected_crc,
+ 			     u32 calculated_crc)
+ {
+ 	if (0 == returnval) {
+-		printf("\n\t%lu bytes, crc 0x%08x\n",
++		printf("\n\t%zu bytes, crc 0x%08x\n",
+ 		       total_bytes, calculated_crc);
+ 	} else {
+-		printf("\n\tuncompressed %lu of %lu\n"
++		printf("\n\tuncompressed %lu of %zu\n"
+ 		       "\tcrcs == 0x%08x/0x%08x\n",
+ 		       bytes_written, total_bytes,
+ 		       expected_crc, calculated_crc);
+ 	}
+ }
+ 
+-int gzwrite(unsigned char *src, int len,
+-	    struct blk_desc *dev,
+-	    unsigned long szwritebuf,
+-	    ulong startoffs,
+-	    ulong szexpected)
++int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
++	    size_t szwritebuf, off_t startoffs, size_t szexpected)
+ {
+ 	int i, flags;
+ 	z_stream s;
+@@ -130,13 +127,18 @@ int gzwrite(unsigned char *src, int len,
+ 	ulong totalfilled = 0;
+ 	lbaint_t blksperbuf, outblock;
+ 	u32 expected_crc;
+-	u32 payload_size;
++	size_t payload_size;
+ 	int iteration = 0;
+ 
++	if (len > 0xffffffff) {
++		log_err("Input size over 4 GiB in size not supported\n");
++		return -1;
 +	}
 +
- 	if (!priv->qspi_is_init) {
- 		cadence_qspi_apb_controller_init(priv);
- 		priv->qspi_is_init = 1;
+ 	if (!szwritebuf ||
+ 	    (szwritebuf % dev->blksz) ||
+ 	    (szwritebuf < dev->blksz)) {
+-		printf("%s: size %lu not a multiple of %lu\n",
++		printf("%s: size %zu not a multiple of %lu\n",
+ 		       __func__, szwritebuf, dev->blksz);
+ 		return -1;
+ 	}
+@@ -182,12 +184,12 @@ int gzwrite(unsigned char *src, int len,
+ 	if (szexpected == 0) {
+ 		szexpected = le32_to_cpu(szuncompressed);
+ 	} else if (szuncompressed != (u32)szexpected) {
+-		printf("size of %lx doesn't match trailer low bits %x\n",
++		printf("size of %zx doesn't match trailer low bits %x\n",
+ 		       szexpected, szuncompressed);
+ 		return -1;
+ 	}
+ 	if (lldiv(szexpected, dev->blksz) > (dev->lba - outblock)) {
+-		printf("%s: uncompressed size %lu exceeds device size\n",
++		printf("%s: uncompressed size %zu exceeds device size\n",
+ 		       __func__, szexpected);
+ 		return -1;
+ 	}
 -- 
-2.34.1
+2.51.0
 
