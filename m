@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB432D46C06
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 21:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B99AD46C04
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 21:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4510383DFF;
-	Wed, 28 Jan 2026 22:54:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9189083DEC;
+	Wed, 28 Jan 2026 22:54:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OY98XCuy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C9l8510T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B5B83BFE; Wed, 28 Jan 2026 22:54:21 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id E92D083F26; Wed, 28 Jan 2026 22:54:22 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89CE283D2E
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 22:54:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BCB783DEA
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 22:54:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-662f65c7d8cso186655eaf.2
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 13:54:19 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-65e943048afso160846eaf.0
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 13:54:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769637258; x=1770242058; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769637259; x=1770242059; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=37zOzTpqAP+DwXBvEpmGmTXEJ9rYAV//QXMm5JMj3OU=;
- b=OY98XCuya6+0nhe95DxYj5gK3DD0ezGI77NTRq37rYQUwCnrg+P+VUlzNfQpzx47t0
- D9zq+iJ2yAgnbJ2tpQpq7TTdQRH1VAhOM/F5OCsNhrY5EtGIMt+oR/L0D1Htz4piwrr2
- Pdvll3HP9U48o6eCLi9dnvRhB5y+39k0VCQDU=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=sngh1UDruJ9mowIDFrZzYPTfwZeZ/Mu/iXrDf+21tGk=;
+ b=C9l8510TPRAJYdhif0PTt0PUVZ2oYjBJWigJ1aUROOtkHwdusuVcRGmM1UIVQoqqr6
+ xNmJhOqxbyJxbH+8/ap2j2xfIMQutjlCOn7XwUbbk9E99pUGdw0oyZD0bIxxM+BLTiEE
+ nlctKQG54Tj+N/w5uWvR+MI6jOgN0+fwZ3NVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769637258; x=1770242058;
+ d=1e100.net; s=20230601; t=1769637259; x=1770242059;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=37zOzTpqAP+DwXBvEpmGmTXEJ9rYAV//QXMm5JMj3OU=;
- b=JZv0NpfbjTpMSmHLj7kKWt7oUNpd31c/Y2ebVhkncjMfwrmRAPI9etf/ll4o9pJSgU
- a8a9Jz+3fCJqd74Akxi8f1WUHvhH4MPWeNrZ8FigPv5u/8lEPCQ0fW5NYTuFnGRhaUzL
- Hewz9aObTcUwWFDHfvlaJDWqICZcDe0Op7CLyGf7hAdf1NbB/iquidlXZQsOZ4C2Wjpt
- Q99KLPfeNd4UVbvhpm2Fgoz+2n/pymUF3pzgMlxi9Qqr8c/2XKUE3il1e7mIpvxLC/1h
- hfmZCwlWNN9GvmnzyTxmYp8uD3CSSqdYYYDBLAnDTUuoZRBDMX4RQaw5cRTA4ALPVGdo
- +a8A==
-X-Gm-Message-State: AOJu0Yyz203PHta/hYBpXfVp0f5tiliUEdSklOs3BPcPD48b/1E6x+Hj
- EvsXRgtJBcPLxCXh2K9OEN0bWk5aXzkKa84kBvdWVAK0EZAE6MJDwzyhm/atrkvhh2rfsgUVvjd
- Jb+7zZ6w=
-X-Gm-Gg: AZuq6aJYaxNmH1/k7PlkLrfBd8TqhXa+yB6mlY7BMgImhTI0uAcu21/Qj9HqtHsygmH
- ROR73KjoqJ6ZEopSI00VxiDyRzOPbZcTrifOBNdoJ9G2HQOpl7zBhjFcK3Ri4+lH/ddEZrWzt7m
- 0JKmCn/Uter8JzFQzKWLSUxNi3vBaFhxgVKAQbn5Krm/fyGrlD5A3yBJGq/qraVHssmVMHWKrGZ
- F6iJTMu7B5+jHw/FgMrhxdCeYx4tS3WV2+1lyr5cqJvXsQyMFRxaI4opB6UHJN3mnAY1A0Scyvz
- /gdegzxCr0LOlWEBzP1Nf+MB+Mv2xE3v9z+eETyufi5c4LQ+3eaaxHCcZuvf2VGTcKqWcjKWk4E
- XKKwT78J6qqN3ZjuSs27tYreb08F799Lsv54KTCKtysbtVRbp/y612iVm8JCDuOuJx9iQArIO7w
- dq0eRxJkRRcNPuArgtCm7dfyGOe7iSdxfRnrrrfPZ+si6fOZlCfctQLXAkchn33QkPozOtGFjSw
- 0yXJdEcnZFAprxIXTPTCoPIiAR9W948sM/+zQ==
-X-Received: by 2002:a05:6820:1693:b0:662:fc35:453b with SMTP id
- 006d021491bc7-662fc35476emr1965628eaf.53.1769637258267; 
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=sngh1UDruJ9mowIDFrZzYPTfwZeZ/Mu/iXrDf+21tGk=;
+ b=xUsUZjgKamv9Rmyghg4BzUg7qyylgiDTdEqVW57xJbAINbRNGEr2rZvkX5+wW7Ov3h
+ 52AjBmnhPn+ZHrAUE6qFL981ZBkNMhbCNpPfjQAXzxHL3czcDLwFuEj999rECpfLLkmA
+ eN2IsvxlZnqQheFnFYShSDCdIKge6aqbFo6uELSQ8qu7+y7I+TXelaxb6dj6HaTsc7hR
+ 4cpODSzXr4jeSUHcv6sitsK9CCcK6SQ/GY4oQ5WNUHeAXQntJEnEFn8IMb1WYeEQyHzB
+ KJuuzxoofYlbCzCQdWwgZB4APlqma21chc/lId3uPu9k7jokwqczoj4SUHcM4YI3VXjs
+ tU+g==
+X-Gm-Message-State: AOJu0YyllhlpCEWattKyIAsbTJI63NeIb3CYlam9ltz82FxhG/TUh0v6
+ LOwcsA3Md7aciB8J2Y+xNkgyWlU33r4pkUPN060tMokjxiUni8if+UPfo140E3kko0QdRgWVHDP
+ 6q6SKNvM=
+X-Gm-Gg: AZuq6aInFxVjXW4V+0ZEU0Tfjy0lPc61BX1hG/miCmqWca9c/Yqz7SHLgyjodnTteby
+ 3jpl4p7fM7ardyv7lloGXT66C+DIA2VEbH6wpKJfrHthRt8oEhYkgIZh4A7A3na+I32p3y258Iz
+ JfYRii3BGEmx722+tCYNyRjNBizIHbY6cautdO5xfJ3n5jGhWgIpOuNLMdElt5xpFfmUy5nFjMJ
+ izadQEgEyfECzH5WDoAu61nn7KXpGnR87tg4wQYjwhX/MzYFn3iUuc198XmjeQqPPLGoka9xfRa
+ u75UxSCy0JGz5l1z1OYeOSvRglbUsfKsDKM7wkd4CMx7tzYst8J0daTv5920kSCwWnqAklZYlq7
+ 7e+JtjFiur6jmcoeYLwUQP4g2EJubFrZms6ALVBBHOTQKQWdkfaxV6QyL6/2R0oLiv3LV17our8
+ fy9AHvgPz7YhDIWb0t6N9vE68NdI26dEuFrzW1Rm8AidBP0wlsgM/0ldEc1pUZdo2+bhzTAVc4e
+ DRESJjbYtafmqPa1IC/MZaw632+XrD8Bor2oQ==
+X-Received: by 2002:a05:6820:1f11:b0:65f:cda0:ed8f with SMTP id
+ 006d021491bc7-662f20603e8mr3599084eaf.35.1769637258979; 
  Wed, 28 Jan 2026 13:54:18 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-409571ae8f5sm2570113fac.9.2026.01.28.13.54.17
+ 586e51a60fabf-409571ae8f5sm2570113fac.9.2026.01.28.13.54.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jan 2026 13:54:17 -0800 (PST)
+ Wed, 28 Jan 2026 13:54:18 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260122172057.3212673-1-jonas@kwiboo.se>
-References: <20260122172057.3212673-1-jonas@kwiboo.se>
-Subject: Re: [PATCH v2] armv8: u-boot-spl.lds: Place binman symbols at end
- of binary
-Message-Id: <176963725770.1779019.9045396325515962115.b4-ty@konsulko.com>
-Date: Wed, 28 Jan 2026 15:54:17 -0600
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+In-Reply-To: <BESP194MB2805AC7C1861BF2283BA065FDA88A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB2805AC7C1861BF2283BA065FDA88A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] tools: Handle realloc failure in strlist_add
+Message-Id: <176963725837.1779019.9200460876498498769.b4-ty@konsulko.com>
+Date: Wed, 28 Jan 2026 15:54:18 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 22 Jan 2026 17:20:54 +0000, Jonas Karlman wrote:
+On Mon, 19 Jan 2026 15:49:06 +0100, Francois Berder wrote:
 
-> It can be useful in xPL to access symbols from binman, such as the
-> offset/position and size of a binman entry.
-> 
-> Place these binman symbols together at the end of the xPL binary for
-> ARMv8, similar to ARM and RISC-V.
+> If realloc fails, list->strings was set to NULL and
+> it would create a leak. This commit ensures that if we cannot
+> add a string to the list, the list stays in a good state.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] armv8: u-boot-spl.lds: Place binman symbols at end of binary
-      commit: b8a820ac98fda6005ae131d89026c60bf7c9c535
+[1/1] tools: Handle realloc failure in strlist_add
+      commit: 3a53a03f50118e329a0f38bd28ea5f7d8e22147a
 -- 
 Tom
 
