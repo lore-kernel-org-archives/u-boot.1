@@ -4,146 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA3BD3F06D
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:18:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B55CD3F06D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 14:27:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0406183FAD;
-	Wed, 28 Jan 2026 15:18:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CCF0983F4C;
+	Wed, 28 Jan 2026 15:27:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lHSnnFRQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fRgWtTuW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F6B483FBC; Wed, 28 Jan 2026 15:18:49 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C47CE83F5B; Wed, 28 Jan 2026 15:27:23 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2E6B83FA7
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F9DD83F2E
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 15:27:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g19BvCI7PerHBZyLHfq+sKbksuimshfvPGDjrI6cp3AQpMRL0EddoGMiezWkCmYUWm8OPfLPFCryTvHeHR3b/PiDwV261o/JzxalSaQYx1rM/y0b6Eoa9wAW3JB+KJWC5a70ZSQJzzFTh1qRE8SQYG60hS/UO5GoS7Svr7ZYi3uEbB5DDVjEAVcuJO8yYyEqyf/ac/nL2mgsHFT0OFu74uuogS6wxDLvieUMzTF90szlozH4EzZJAYytiyYiMuZP0Qdc6U8hXlnrWlHh4znc0frECtryLjmauvX5GP4uwx6d+5Toju4192M0iXurkrgL1mPeZvDX5dUda4mD0T6B4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A8uGY4XE15wtdpSWBRPbYVQ5FnOg6xIJWv2tCeYEgHc=;
- b=DyytfD+LahF5TxyRTt6Ueau2uuiciY0C3TL5THqrkxE2/xYuwzGRD05I0nnN4Xj+HObFkWp1VcjRFearzBHtnMkPpgzE57/MioJeYvuD2aeiVXVQ/Y/VnJ1SH7phQzYzRjabmBSlEacChQeFADlzXh2HuJPIGEFHJEfqFy3gOEYghATMCI3RHotwlX0pfPcgFoWWe+MTMqEUd0LQKN42Y5uiddbwNtc+oZwUgak9k5sgQtZH9wfJRGUUFKsVCoSWI89oTsR99/OHtsI6OCNtq8QZYbaSmywumvpA8rUiwo3RGfiwWeg1SHpFt6UXF4mMGfmPdCNp2mjkzfOrjf6aRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A8uGY4XE15wtdpSWBRPbYVQ5FnOg6xIJWv2tCeYEgHc=;
- b=lHSnnFRQtqcXv+cwU3+N7uXdsY9NHg94O61S3NVbvOEC07XoNfiU3yz2CotIsaxRgWLidd6ZUvpBecaMdBI3JfQnDhaYTVp0HJQ7hGvRLFsKCnVeXOHUCzSI3w5RJ32sTSeyPJSMFl745USjyfNn7H792DGCBrslK3KP4PkG0SI=
-Received: from CH0P223CA0015.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:116::33)
- by BY5PR10MB4242.namprd10.prod.outlook.com (2603:10b6:a03:20d::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.15; Wed, 28 Jan
- 2026 14:18:42 +0000
-Received: from CH3PEPF00000016.namprd21.prod.outlook.com
- (2603:10b6:610:116:cafe::45) by CH0P223CA0015.outlook.office365.com
- (2603:10b6:610:116::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.8 via Frontend Transport; Wed,
- 28 Jan 2026 14:18:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH3PEPF00000016.mail.protection.outlook.com (10.167.244.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.0 via Frontend Transport; Wed, 28 Jan 2026 14:18:40 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 08:18:40 -0600
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 08:18:40 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 28 Jan 2026 08:18:40 -0600
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60SEIY8I2087912;
- Wed, 28 Jan 2026 08:18:35 -0600
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <sean.anderson@seco.com>, <ilias.apalodimas@linaro.org>,
- <malysagreg@gmail.com>, <sughosh.ganu@linaro.org>,
- <philip.molloy@analog.com>, <marek.vasut+renesas@mailbox.org>,
- <james.hilliard1@gmail.com>, <anshuld@ti.com>, <afd@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <bb@ti.com>,
- <praneeth@ti.com>, <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v4] tools: fit_image: Fallback to 8-byte alignment for flat_dt
- images
-Date: Wed, 28 Jan 2026 19:48:34 +0530
-Message-ID: <20260128141834.2322865-1-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-45f194e9a98so54237b6e.3
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 06:27:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1769610440; x=1770215240; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2SW08wbzUWdc4KgpLfCBtumXLyJVocBwZtiPVURHg9Y=;
+ b=fRgWtTuWT0rdJ2S6xGXCPfa/I+Jvbvol1y4K3NaUuFODvkR9Rg02jiiSYl4DqX4UUZ
+ 6KUzl3yolD4q64aSm5jETS9ifi0hJXqWaHyNcF/34c2f0tO1zYc8TKM7e91VLclZSkR0
+ Z0uWBnQyTwbPiTfV00YpaU6RWtCl1gPnwrjyw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769610440; x=1770215240;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2SW08wbzUWdc4KgpLfCBtumXLyJVocBwZtiPVURHg9Y=;
+ b=wyb1rDxii0fnOZ3pNLUycWA1+Gj4z+L7p4aF9Nh2/BhugwQ8iimKczwxK36jygyboa
+ 1Wf9/4xn/I4+F8y6dvF4jqSH3JQKi/2ixJkMWf1tCdriGHcZ+nAU+CIybJ+tfOgNkQ33
+ X72AlKyoNnK/JvpX6Bq8+vVvTYjsro7y8qJl5iANdst7xDz/dwHPaCSWSZVK4nyenod5
+ HjKfiG2dKUv7LNrIiVSYqbgXnjuml3pw7IDK+URxAeNIbTx7/60w1xAbYwZ8WpqKiVkn
+ a634yvFjmBa6epGrVgcjfF1OYGo84njxq2f5L8v9dHdibLfx3ufP/4oJpwdwQ0eao9iH
+ zSFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEMhLSl07eLbS/q6OUi+BCEkd0OZrzsQIC8qqrhDnMO6mtt4XqD/GZKKet9OacG+SAUhQeJhE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzfKs/PZl9ARLyyoxGq4Qg37b4HcUY5AJmwVZMQY3TUCpcrB4J
+ CJChMK/MAIRheaz9uWppMVCe6hhOjIW4Hh0jTym8DuxTe79pmGIzT1vFIyk53rMtV7k=
+X-Gm-Gg: AZuq6aJbw6nXCf1xNpmOHeRQrDmhsBhE8WnLvrdD7Yinw3whykAW2h4544UQl290cCR
+ 5r5B88OA7IctwnMufPy2yqlB4PGH2XX7glQX6yinMYb9mNKdFUxXt9y2WmydcpUCH3FqbR152VR
+ Oyo/SW5QJd/ZloGZXuoNNvhKVQAmyk3/12CJD7Ij9HxNrWKQa7ddj0fysgVhwFpOrrqpvMALkHa
+ vh9QMmPQr3YRoRRcg/mBTXOXRVvovXnV25LScqWkvYD0qKhbd5r793848+kxtLkZfdPARKALjdo
+ cAfRX2Yu0pE5Wy8i49tMCbjOEM/tXegaaF5Fx61KRq2vvcK13Jk5wkr77jII1L0hxHciSPjQuHC
+ PYLWCf0O4nKjUFqbDTz91eSq8v/AGNRfMcxfk3zPhZc77YCwJA+3+b8D8QdQfBDdvu4sWa8cYla
+ lmyiMk4yONXE7WOqXOwr48BqSmFMsObPrUDCrZSkWpSTYm0FpjjkxstlGl3Zj4H82a0+54ndVXO
+ vBVaj0hYlT2XlxJ+SC0K2nPW5c8+7U9/BYVOGU=
+X-Received: by 2002:a05:6808:d4b:b0:453:50af:c463 with SMTP id
+ 5614622812f47-45efc6d0dd9mr2760322b6e.41.1769610439657; 
+ Wed, 28 Jan 2026 06:27:19 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08fb82f5sm1322793b6e.22.2026.01.28.06.27.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Jan 2026 06:27:19 -0800 (PST)
+Date: Wed, 28 Jan 2026 08:27:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] gunzip: Fix len parameter in function signature
+Message-ID: <20260128142716.GH3416603@bill-the-cat>
+References: <20260127235156.1503207-1-marek.vasut+renesas@mailbox.org>
+ <0F151B61-19A0-4F8E-925B-1EDFD7054E1B@gmx.de>
+ <1846ef8d-44c4-4c3b-b810-6ad906405e18@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000016:EE_|BY5PR10MB4242:EE_
-X-MS-Office365-Filtering-Correlation-Id: da8f60b4-2e41-46cd-e4ad-08de5e7822f2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ilMwLAV77fMXcQYoRdiKch0EHy0zBD4j/ZUHsPOzxPle5kzTq0E0GZpZVSbM?=
- =?us-ascii?Q?2xpOwRf+hR2sT+iLmpJhAgGUna7Nn+ObCe3YwrKg2+F6M1swtjueaK+7OAX5?=
- =?us-ascii?Q?Y80bSFI8AoGaqxWyn6NaqQuALsjZrn//Vu7Zj7r2hXT1Kp2rt9cdcSWFlQ/O?=
- =?us-ascii?Q?NzawZ7Msgx5PjA7EsmxUZndzrgA75Peu60YX41XfQBaxKpvrgKGXSZ+0w3zh?=
- =?us-ascii?Q?J4svoHecNWuKW3rqBPnd7DL1XxqxK2yduG8Kc4RFJCWhTNtYpNsGlovMC5Xi?=
- =?us-ascii?Q?Lz0KoYwZ50Cy5PoN26XZ7cYrh/MqU0sc1wSNGTWlKEw7h9y9w+J9v5KSTgTc?=
- =?us-ascii?Q?9uez/9XjiTICP1JOlWElY3PlMGz2Nhuc+OqCax6c7TEgrHsH6XPWBiOdTg9s?=
- =?us-ascii?Q?L9iKPOi49tSuzipsxh4WE4huTZHocxSEKg7hlgCom50LPpqvmbD83uPJBB3C?=
- =?us-ascii?Q?RrsmcpI2R2NSrarQlt+KZTMRnwnzLhO/ktlNnIpxOVhDmo3s5FJkp+Yv0ezC?=
- =?us-ascii?Q?mBvPmtFVQw+yJ6AnF1Uv4mUvyDrSSewKLVeyc7iLyc+af8ZzEG/KVtOlnfg1?=
- =?us-ascii?Q?8RLgSuQxcktEUan7PB7O99vOsm8rBbkNlahAv3TY3NxklJpbJGESwaulvprm?=
- =?us-ascii?Q?BSK+Cso4c1JEd8q5aULKxl2bE0nDEj96nmftgEx4mJfitjgsUpG/FCTGk9dI?=
- =?us-ascii?Q?Q7u+AgPSxgLuOapb3g8M4xc9SWpKnr5omyQ9G0Pf265cOTxpvmNSjWO+YK7n?=
- =?us-ascii?Q?1W6jOsQBntOGEWu/+WG7HpaObafkGxAdB+tNkccLmSVaME3WcxHbHyaY4xrd?=
- =?us-ascii?Q?CFF0AlOpemy7OiJNcdUIAIwRJ0JL6MW+YQfn2wT3FYB4EQQw4w1kGxCsRJV4?=
- =?us-ascii?Q?XEwAqm/uVTac3h1ztlTdSljLp/FEQ10axke1fx4EwQh6ntZr3rW4zWivl4Q9?=
- =?us-ascii?Q?DvsQKLnoJIbeKgQVd1K1xrDzy689lcos6li5pccrofWYae80vbVvtXV+WEdV?=
- =?us-ascii?Q?nt+EgQg6zFIO8MSnYng5EDTmanc4WAPzAzhyz5xJYgpDGbhfZ4b6gIuqA3dW?=
- =?us-ascii?Q?uTy2vmgi9W3UmdW3tytrOkPjKzjbfSDkHCkWqxEN7/WLaAdVy2B4yQNSwriJ?=
- =?us-ascii?Q?Gk9gZXxVXg0hS3nWj5r4nY+GmhdSzEtGrk21ayOS6qkTN1+poyUarUbWfj2t?=
- =?us-ascii?Q?Ptu56DKAwZZxIdz/mHi8w++PodRMwpHWpsj6X0jCNNoY0m0Qlh4NFVPqcVjv?=
- =?us-ascii?Q?oNQaavCQPdks+qU8gDmI6WMc0N46teou+21zwf8L6ajMhPuCnd4k0Yrsqb2R?=
- =?us-ascii?Q?Ghia3i8fSw6I//HqXy/C793UC8vLMiASPxjCERixuGMjTmeOM0jAbMO81CSq?=
- =?us-ascii?Q?wNec0PzumTcRlyjdM3qOMPF4q3wbNtCs5hxfI2ZSa8l7owtPMy1g6qSr4ImM?=
- =?us-ascii?Q?6Q64qyBZj27MtIQuZJ8uRzq+iUeDyPt9i9mPG/8bA9hQgRhUFgnZ4tKy6c1N?=
- =?us-ascii?Q?yVQObLpux5EFXnQv1OUhan9L5+HYmSt+sq0i9MjlN3yzYZAmsvkij2yhMIu3?=
- =?us-ascii?Q?5trSc/HY1g4rocr8Si6VoHRlHvssR1d9gQg5KqnJqKZxFyKE+kZRL9LGI458?=
- =?us-ascii?Q?CIzdL2JT+A/fMcVYMj6iSMB9OfM6k3IlVnocDxd3V73Khk1mekeD/D3JO6tz?=
- =?us-ascii?Q?PV2q64TtB7YCWMRHQWrxAAxElMI=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 14:18:40.7535 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: da8f60b4-2e41-46cd-e4ad-08de5e7822f2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000016.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4242
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vvc9+45uGzNOlMtx"
+Content-Disposition: inline
+In-Reply-To: <1846ef8d-44c4-4c3b-b810-6ad906405e18@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,81 +107,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-When CONFIG_SPL_MULTI_DTB_FIT is enabled, multiple device trees are
-packed inside the multidtb.fit FIT image. While the individual DTBs
-and the FIT image start address are 8-byte aligned, the DTBs embedded
-within the FIT image are not guaranteed to maintain 8-byte alignment.
+--vvc9+45uGzNOlMtx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This misalignment causes -FDT_ERR_ALIGNMENT failure in
-setup_multi_dtb_fit() when locating the next available DTB within the
-FIT blob and setting gd->fdt_blob, because of the recent libfdt
-hardening since commit 0535e46d55d7 ("scripts/dtc: Update to upstream
-version v1.7.2-35-g52f07dcca47c")
+On Wed, Jan 28, 2026 at 01:01:09PM +0100, Marek Vasut wrote:
+> On 1/28/26 5:32 AM, Heinrich Schuchardt wrote:
+>=20
+> Hello Heinrich,
+>=20
+> > > diff --git a/include/gzip.h b/include/gzip.h
+> > > index 304002ffc42..5396e3ffec7 100644
+> > > --- a/include/gzip.h
+> > > +++ b/include/gzip.h
+> > > @@ -77,8 +77,8 @@ void gzwrite_progress_finish(int retcode, ulong tot=
+alwritten, ulong totalsize,
+> > >   *		for files under 4GiB
+> > >   * Return: 0 if OK, -1 on error
+> > > p */
+> > > -int gzwrite(unsigned char *src, int len, struct blk_desc *dev, ulong=
+ szwritebuf,
+> > > -	    ulong startoffs, ulong szexpected);
+> > > +int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *=
+dev,
+> > > +	    ulong szwritebuf, ulong startoffs, ulong szexpected);
+> >=20
+> > Ulong and unsigned long are essentially the same but using both in one =
+function signature looks weird.
+> >=20
+> > I would prefer size_t for the size of objects in memory and off_t for f=
+ile sizes and positions in files.
+> >=20
+> > Please, consider adjusting startoffs and szexpected, too.
+>=20
+> OK
+>=20
+> > > /**
+> > >   * gzip()- Compress data into a buffer using the gzip algorithm
+> > > diff --git a/lib/gunzip.c b/lib/gunzip.c
+> > > index a05dcde9a75..040450c0e79 100644
+> > > --- a/lib/gunzip.c
+> > > +++ b/lib/gunzip.c
+> > > @@ -116,11 +116,8 @@ void gzwrite_progress_finish(int returnval,
+> > > 	}
+> > > }
+> > >=20
+> > > -int gzwrite(unsigned char *src, int len,
+> > > -	    struct blk_desc *dev,
+> > > -	    unsigned long szwritebuf,
+> > > -	    ulong startoffs,
+> > > -	    ulong szexpected)
+> > > +int gzwrite(unsigned char *src, unsigned long len, struct blk_desc *=
+dev,
+> > > +	    ulong szwritebuf, ulong startoffs, ulong szexpected)
+> >=20
+> > ditto
+> >=20
+> > > {
+> > > 	int i, flags;
+> > > 	z_stream s;
+> > > @@ -133,6 +130,12 @@ int gzwrite(unsigned char *src, int len,
+> > > 	u32 payload_size;
+> > > 	int iteration =3D 0;
+> > >=20
+> > > +	if (len > 0xffffffff) {
+> > > +		printf("%s: input size over 4 GiB in size not supported\n",
+> > > +		       __func__);
+> >=20
+> > Please, use log_err() for error output.
+> I believe log_*() primitives are frowned upon ? Tom ?
 
-To fix this, check the image type when extracting FIT image data and
-set the alignment size to 8 bytes (if not already) only for flat_dt
-images. This ensures correct alignment for device tree blobs as per the
-DT spec, while also allowing different alignment sizes for other image
-types within the FIT.
+My initial answer is that log_*() is better than just plain printf. I
+think my high level complaint is that we have too many logging macros
+that do the same thing and that should be looked at, at some point.
 
-Reported-by: Anshul Dalal <anshuld@ti.com>
-Closes: https://lore.kernel.org/u-boot/DFJ950O0QM0D.380U0N16ZO19E@ti.com
-Fixes: 0535e46d55d7 ("scripts/dtc: Update to upstream version v1.7.2-35-g52f07dcca47c")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
-Testing Done:
-1. Boot tested on all TI K3 platforms.
+--=20
+Tom
 
-v4: Changelog:
-1. Align only the DTBs to 8-bytes, other images in a FIT can have their
-   independent alignment. [Marek]
+--vvc9+45uGzNOlMtx
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Link to v3:
-https://lore.kernel.org/all/20260122172247.2995437-1-b-padhi@ti.com/
+-----BEGIN PGP SIGNATURE-----
 
-v3: Changelog:
-1. Default to 8-byte alignment for DTBs in mkimage instead of
-   passing -B 0x8 in build command [Marek]
-2. Remove previous R/Bs.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXocwAAKCRAr4qD1Cr/k
+CqkLAQDmWY/904EUKVuYOnpYdtfyL2JRVDsyFE5x59eTb5qjqAEAwieIsQ24y18P
+NXZ2P1mOV6w1ahA6frfvPLBcbOW/3Qw=
+=01JZ
+-----END PGP SIGNATURE-----
 
-Link to v2:
-https://lore.kernel.org/all/20260112101102.1417970-2-b-padhi@ti.com/
-
-v2: Changelog:
-1. Carry R/B, Reported-by, Closes and Fixes tag.
-
-Link to v1:
-https://lore.kernel.org/all/20260109190026.58464-2-b-padhi@ti.com/
-
- tools/fit_image.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index e865f65a400..f842c845771 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -682,9 +682,17 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
- 	for (node = fdt_first_subnode(fdt, images);
- 	     node >= 0;
- 	     node = fdt_next_subnode(fdt, node)) {
--		const char *data;
-+		const char *data, *type;
- 		int len;
- 
-+		/* Fallback to 8-byte alignment for DTBs if unaligned */
-+		type = fdt_getprop(fdt, node, FIT_TYPE_PROP, &len);
-+		if (type &&
-+		    len == sizeof("flat_dt") &&
-+		    !memcmp(type, "flat_dt", len) &&
-+		    align_size & 0x7)
-+			align_size = 8;
-+
- 		data = fdt_getprop(fdt, node, FIT_DATA_PROP, &len);
- 		if (!data)
- 			continue;
--- 
-2.34.1
-
+--vvc9+45uGzNOlMtx--
