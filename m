@@ -4,155 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17EF0D25B5C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 13:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0DFD25B76
+	for <u-boot@archiver.kernel.org>; Wed, 28 Jan 2026 13:28:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FD0A83CEA;
-	Wed, 28 Jan 2026 14:14:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C94683CEA;
+	Wed, 28 Jan 2026 14:28:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Eu6DXKK1";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XV69hw7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2622583DCA; Wed, 28 Jan 2026 14:14:35 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 5775283DDF; Wed, 28 Jan 2026 14:28:40 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22EAB83C65
- for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 14:14:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78EE283C65
+ for <u-boot@lists.denx.de>; Wed, 28 Jan 2026 14:28:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ee1Z75z5S09zx9xEzArsnTwirS0LKsvCUH7FCxk/63m4i86xkK/e1SK7HYVHEsTkp3FoGiNwGvu31PAVoQWfnn8On+Z3txCljE54G8EiriJGBmRE7JZJje2FtrFxgxtzoZDt30PG6or7zGrFHPIUNWqZbfkQN2WZZg4b8A7zqcTj7q7+hb/eQPUsvMjxq1HIBu+dlpnkXFKrzjsBt1u/U31eHbgd4FCNmdHaqJyOITWWR+389E0x63cVSh3koT05LftHgiZGHZRwqaViseLvGxq1ahSDgtXKGtKe5lQWNwvjOjckasVMnUL1Uns2UtntCWK9uqA6KYGKu8xlKYUf6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QWdberDLmOcGdCNRypYfA4dSqu36yDIxUYACynX/qTA=;
- b=QSmBd0uvc7y2Bk8RZrp3NYrQu/TxbdRBec7RtyABO20KfnmA1TlU5kqOSIG3b3iOnLfwbAqfA/FuJd+wYdvikj404Uw9WUJXGwBbmhCojakdCDXIFNO1oD9oSxTgtE2+jU0MsQo3Z9JadNwroSPTTd1kD1RLLQMPiyE7hhEVboZydGXQ52PydYHBUTpKC2GkdV5wNkB6vLJwlgMtMAQ6RemQpAbhv+c0r0RH8nB/OCN0HwhwMAqRL9LeietE7MbVDBFfFTvtxK98tEsfbK0Ul2/qWX23hl2ZTnNUXIALf3G4JJxuaIGlCjT/zsOQyM3cOYiVbGgOhhM5CjeDG90lhA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QWdberDLmOcGdCNRypYfA4dSqu36yDIxUYACynX/qTA=;
- b=Eu6DXKK1t9Z1iRgLiBYFYcQYJuK6Nm0Aj2+NDgetalGRKPfnv3UL63vuDQfJKQypcswRRfEqwG5v/QPKKRgKPJVibChhffXQW+vqM39p73CsbZ7S/n/YY0zuajlSclKcSj5u3NiEFYTv6rNEsLwv+OOL80Ew4TdpVGVrlhSMI6o=
-Received: from DS7PR05CA0089.namprd05.prod.outlook.com (2603:10b6:8:56::6) by
- PH7PR10MB5747.namprd10.prod.outlook.com (2603:10b6:510:127::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.15; Wed, 28 Jan
- 2026 13:14:28 +0000
-Received: from CH3PEPF00000016.namprd21.prod.outlook.com
- (2603:10b6:8:56:cafe::91) by DS7PR05CA0089.outlook.office365.com
- (2603:10b6:8:56::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.4 via Frontend Transport; Wed,
- 28 Jan 2026 13:14:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH3PEPF00000016.mail.protection.outlook.com (10.167.244.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.0 via Frontend Transport; Wed, 28 Jan 2026 13:14:26 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 07:14:16 -0600
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 28 Jan
- 2026 07:14:15 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 28 Jan 2026 07:14:15 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60SDEFAU2008675;
- Wed, 28 Jan 2026 07:14:15 -0600
-Message-ID: <ce64abb6-220e-4757-91b6-b6f19ea7ca34@ti.com>
-Date: Wed, 28 Jan 2026 07:14:15 -0600
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f1NQC3lhkz9tQH;
+ Wed, 28 Jan 2026 14:28:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769606915;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=a7O93CS5v8pq8PB8hPzVs8ZicayaTFYO1SCpzFr1UP8=;
+ b=XV69hw7M41vaKSNyQS8mrmdN8evIRRAI/zFuRdw1S3+9P6GrMcwX38zuGIbxMQxPsOQwZ/
+ BI1BMJTf98KvBRuHg64VrFqXDkdytrbEMHoHUMMKVxYqqx7nLtgGMy5gPSYauI8Joervzc
+ NALfrrfHKjoAhIZf3VBcc7noDKYOWnf4aXQhWVM/hXSoryDXISg4BUv3kd+41ko/floC/F
+ WFnGX7F2aqgBe49Fk7My67g3XS1KZAdMBCXqfCixwSZPn6m8+jS5di6V6v28N8zwUnCOQw
+ EEpm3TXB9BvOfb5jR4ZD3wjTLCffHMKNynLAQt7GD5sr9N/mNcwEYRWKZXgCeQ==
+Message-ID: <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
+Date: Wed, 28 Jan 2026 12:43:28 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] arm: dts: k3-am62d-evm-binman: Fix device tree
- reference
-To: Paresh Bhagat <p-bhagat@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-CC: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
- <t-pratham@ti.com>, <nm@ti.com>, <v-singh1@ti.com>
-References: <20260128005453.1387483-1-p-bhagat@ti.com>
- <20260128005453.1387483-2-p-bhagat@ti.com>
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20260128005453.1387483-2-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000016:EE_|PH7PR10MB5747:EE_
-X-MS-Office365-Filtering-Correlation-Id: da96a29a-c109-4f50-0b37-08de5e6f29e9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WWJIVzhCZnIzcWFTRmZBbGlXSkNDZHdHVy9YTVNtUysySHNZenVCSElWclZt?=
- =?utf-8?B?aUE4empEeFMrYzExbkZzNFFrRVcxUjBTVEZFbVI1dHFCSm9IZUR4WFRRVTgz?=
- =?utf-8?B?eEV4NnZqSUF0ek9pMnhnZjMzeVdOKzhNeVdRaXMwbkVIZ2ZPN3Y4VW43UEdI?=
- =?utf-8?B?Zm8xaGJJTTJkK3ZMc0RzTlJCb1VjMlZQb213Y2VqSVdHRU9BNlN4bS9rTTk2?=
- =?utf-8?B?cmFjSUdoWnlGOHo4V2c0aDNDNVpjZ1pzVmp2OVl6cy9acEVGVWk1RExjUTdv?=
- =?utf-8?B?R2tJTi9KWEp0VlpDUzZaR2l4R3pCdUdzWEo4OW5HOXIyRlVDNFdhM2NZd3ZX?=
- =?utf-8?B?bzZjUm5wbzVkN0NDM3B0QUJydXRuV1Q1YXFYQTVNYTlWT0xGMGZUdWQva1U2?=
- =?utf-8?B?KzFOZ2RmU0hOd2lUQnBuQ1l0YURHUTlZTlpISXhNWk0rcHFPS2hOQStTWERt?=
- =?utf-8?B?a3hqK1FnK09jQmZEb2lFa1kxSTd5N3lZdVM0L1AyUkJUMkV4SWMxRjJkVkg5?=
- =?utf-8?B?VzVIMk0rWWhFaDlJYWR0T1FWS0xEUnNHWWg2K2g4WitRYzdZdFNJMG9rRUo3?=
- =?utf-8?B?Nm5zRFpuZUg2QWRaUkZ1ZWZnN0ppZklTQzB4Q2h1dWFsaEVSbHZOUUhiVEZC?=
- =?utf-8?B?bGRjek9FTFA2bW93VEZkNWxpVzlFb2tLQStTZE4wZWFPNElyTG5OUHhpUUI5?=
- =?utf-8?B?cDBvbXFETzdaSXgweitJZXdQcE1VSzBqYUEvYm53dUlkYWpVR0ZrcTR6WTNE?=
- =?utf-8?B?dlpuNk5IR0x6OEkxRFh0N2pxa2xhWkZMd1JsRUhVM2JranB2bEhZZ0tCckpk?=
- =?utf-8?B?cC9Pb3o2NVp6WFJFaHFCeG4rVkN0ZkRlQW1hSWYrMmNVR29aQlVCaDFzNTJq?=
- =?utf-8?B?cHRXVkUvZER0c21pUjk5OG1yRVRzQ0JkWGY5WkVZanZjR05vNVVTUG5qblox?=
- =?utf-8?B?MDdiUUM5alBBd3cvUXBxTGoxdk45T0xZTzFqOGNaWVJDanVmVUdGVDBrN3pq?=
- =?utf-8?B?dTNjOGh3a2kvbHZNb010WG5sd2FpdVRBM0FrT0QyZ0E4T0xpZVliU2dpZ0xX?=
- =?utf-8?B?S1BrY20xUmhjcG0yaG52VUtQcXRkbjdvYkNkMlBkd1ZNbWEvRUVNTkl1SWF2?=
- =?utf-8?B?RExQa3dLWisrRmYzaTVYRzdVU2tHOVpNVk5Qd0lGQ2lCZkN1VHlVZkhTRFll?=
- =?utf-8?B?TEdBbUNWTTVudDRMN0k4RE92aTNWSWRLdkFyRkJoeUZjd3BZYU9ObEtXbHd3?=
- =?utf-8?B?cUY3dHp6U21EblA5VUloY2RrTXFhcTg3TjlQaHNYV3c2a3FGQVZ0Z29YTFZO?=
- =?utf-8?B?MGVZWUlXdGZHQy94L0Rianp0RUFLdkJodTRMUWlnOUR1c3VLRjB2NkFKbFBL?=
- =?utf-8?B?VDB2UDBjdEtCQUtwWEU5b2tDR0xmNTdmTUx0OEM0a1BWR1hNeDZYeTNScm5j?=
- =?utf-8?B?ajdjenM3blRpbThlQk9IM29zYXRQV29qbW00WUhQbFlCMDd1MDFXUmdYeG12?=
- =?utf-8?B?WGQ1UHI3Ynk0NG40MVlVSVRGdjQ3clpaUm9KcmxKZ0lwWFpCUnA5QVhxTlA1?=
- =?utf-8?B?eVFwL0Rma2EzV1E5akZORVRQOTVWL0w1cmNSZFBvZlB6MkJtblJZUWxUTlpp?=
- =?utf-8?B?VXppbnAzTmJoenJ3OWlydUl4Mk1jK1I3QUZFSm1idWh0cUttZWpEYU9lL2hs?=
- =?utf-8?B?T3V2cUR0RnAzMGNGRWNIejNETUJGSjJiSDg5ck1lN01nUXZZYzNMR25ZdGNv?=
- =?utf-8?B?TWs1K3hLQWp6d0ZTaFpFakNjdkw1TU1TMlNDQjJWVHZQRy9NUEFFeS8wSEts?=
- =?utf-8?B?OVNJb0dzWVNJeFdZUC9MWWQ1VGh2YWxmTENPZndSeXdsdG5oSnlYbnlaeEx2?=
- =?utf-8?B?WEFuUm9VUXY3SG9QSTgwT0pDVWcrN3pRSUNGTGNTMXBkMS9RU1p0enBvZXZM?=
- =?utf-8?B?MkhxNVF4SDZaYjN4cjdMbHpEVDFDeGdwemZTQzBqcXlSbTN1SFVQYUFzSXU3?=
- =?utf-8?B?U2ZCTnhneTAxTDl3T0tyVlBqZnV2V1M5c0hXYmxXbFpXMDhuNzFBZTVjY1Iv?=
- =?utf-8?B?Y0ZwSEpEWjdmY3JleTY4OVZxRmVvVVFFTUtOcUlCSGZjZzBoZTQxbko0R0ZJ?=
- =?utf-8?B?aldvMGpYRURROVE3d3E0TEYyUGtGQkYyZFIrd1hVQkNVYXJYUFIzZUt6UUwy?=
- =?utf-8?B?aHc9PQ==?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2026 13:14:26.9737 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: da96a29a-c109-4f50-0b37-08de5e6f29e9
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000016.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB5747
+X-MBO-RS-ID: 57a7031b82eb5b6dd19
+X-MBO-RS-META: 8qbdtssc33oarpb3znxsxr7uh3t7knog
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,39 +82,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/27/26 6:54 PM, Paresh Bhagat wrote:
-> Fix ti-secure content reference from spl_am62a7_sk_dtb to
-> spl_am62d2_evm_dtb or AM62d dtb. Also remove redundant k3-binman.dtsi
-> include.
+On 1/28/26 5:41 AM, Heinrich Schuchardt wrote:
+> Am 28. Januar 2026 00:48:40 MEZ schrieb Marek Vasut <marek.vasut+renesas@mailbox.org>:
+>> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+>> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
+>> same bank"). These are based on incorrect premise of the first commit, that
+>> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
+>> not and should not use memory above ram_top, user can perfectly well use
+>> that memory from the U-Boot shell, for example to load content in there.
+>>
+>> Currently, attempt to use that memory to load large image using TFTP ends
+>> with "TFTP error: trying to overwrite reserved memory...". With this change
+>> in place, the memory can be used again.
 > 
-> Fixes: 14dfa6b86187 ("Add initial support for AM62D2-EVM")
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-> ---
+> IIRC there are drivers that have issues with memory above 4 GiB and boards that artificially set ram_top to 4 GiB to work around these issues.
 
-Reviewed-by: Andrew Davis <afd@ti.com>
+I thought I had all of those solved, but apparently not, please read on.
 
->   arch/arm/dts/k3-am62d-evm-binman.dtsi | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/dts/k3-am62d-evm-binman.dtsi b/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> index 3a0ab9f8b2b..41c8746cf08 100644
-> --- a/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> +++ b/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2024-2025 Texas Instruments Incorporated - https://www.ti.com/
->    */
->   
-> -#include "k3-binman.dtsi"
->   #include "k3-am62a-sk-binman.dtsi"
->   
->   #ifdef CONFIG_TARGET_AM62D2_R5_EVM
-> @@ -72,7 +71,7 @@
->   	description = "k3-am62d2-evm";
->   
->   	ti-secure {
-> -		content = <&spl_am62a7_sk_dtb>;
-> +		content = <&spl_am62d2_evm_dtb>;
->   		keyfile = "custMpk.pem";
->   	};
->   
+> We need to carefully consider why the reverted patch was introduced.
 
+I didn't find much on either commit. I believe the premise on which the 
+original patch was introduced is wrong, cf this commit message. We 
+should allow U-Boot to access the memory above ram_top, we should not 
+allow U-Boot to use it for its data structures because of the possible 
+32bit DMA limitations.
+
+> Why does your board use a 4GiB ram_top and not place ram_top at the physical top?
+Originally, I thought it was only a remnant from the past which kept 
+U-Boot and all its data structures, stack, heap in the first DRAM bank 
+in 32bit space, so I tried to remove that. It turns out there are still 
+a couple of problems that have to be solved to make it possible to 
+relocate U-Boot fully into the 64bit space.
+
+The first one is the standard parsing of DRAM size / ram_top / DRAM 
+banks order in common/board_f.c , which probably hides a lot of issues 
+on various boards, pretty much what you wrote above. In short, 
+dram_init() only sets up gd->ram_base and gd->ram_size , which is often 
+the first continuous DRAM bank which is in 32bit space. The follow up 
+setup_dest_addr() uses that information to set up U-Boot relocation 
+address at the end of that first continuous bank. And then 
+dram_init_banksize() parses the rest of the DRAM banks into gd->bd 
+(gd->bd is set up after setup_dest_addr() is called, in reserve_board()).
+
+This above is fixable and I already have some clean up patches for that, 
+which I implemented while writing this email.
+
+But then I found out, that the ravb ethernet driver also has 32bit 
+limited DMA, which breaks if I relocate U-Boot to the 64bit range. It 
+worked thus far, because U-Boot was in 32bit space, so were mallocated 
+DMA descriptors, so was the net_pkt_buf[] array (which is in .data 
+section). I didn't find any other breakage thus far.
+
+Which means, before we can really start switching boards to relocate to 
+64bit space, we need to find all these remaining 32bit limitation sites 
+and fix them first. And to do that, we would need some way to force 
+allocation from 32bit space for drivers which need that ... do we 
+already have such a thing ? I couldn't find anything.
