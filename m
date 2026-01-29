@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E68DAD6B076
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 15:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E93D6B076
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 15:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53D7A83FF8;
-	Thu, 29 Jan 2026 16:32:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 894CC83F32;
+	Thu, 29 Jan 2026 16:34:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q73P+BXS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cB0Fndr2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0028B83FF9; Thu, 29 Jan 2026 16:32:06 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id ECF1E83FDE; Thu, 29 Jan 2026 16:34:17 +0100 (CET)
+Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
+ [IPv6:2607:f8b0:4864:20::243])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BAFF83B32
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 16:32:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C52583B32
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 16:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7d1866473b0so665239a34.1
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 07:32:04 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769700723; cv=none;
- d=google.com; s=arc-20240605;
- b=MXnH6q1j9ldX8/ZIbu7T+jKHh8/YZMx6SNbt7EfxSrRMdH+V9YZuQKhdMIKUbANYNL
- Z0Ohe2qiu9XV14yg3WaT4bMkkPz8ho2t+v7offrkj/Jt5w2sbcXQYY+D8DoopOvC1+YV
- yRzmV9dMFQCO50tIiOw8aQfKbiyjFMZhlKGNi2n4vdR1x2Qfh4ASm8AOwgWydmmp62/C
- MlSyneI42Oi0LNwSJPKlQin4TMLzsFgSUXtFWVLB/BOSKTDNE2+75Aj0WVu1XuBZjHAA
- p+7vu6KZfNp8ecEUlfxRsW+0c/xfdz/xMkiIApteTBF9dqUnlL1C1MSTGQ7R2a0NGrxD
- 6x8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=QFDTlKK1O5QKYA2gsLMIU0TGBaZEskhbV63GGuC82+Y=;
- fh=6TexoJ5yKuEdpnuZGuPIlVO9D08xF3U4yWlT3PeMtdE=;
- b=AykAsheD/pbZuETCwPdc51Hidmveox0Q01di7p1btUWkS/B9gUQpokB6e3KfOKCxEe
- mtUYXOEVCY4RjYA+HM7Hksf55pGzlZRDpDDq0eRK2jgvDtW9knOKOzGjQpIjEvunNojL
- 0z31wuY3JtaS/ssdtsDKoSWq1ByfbnRKzFxbV2oMQV6nhbWgQMtSL87CTaoVVt6pOolg
- cLg4VGROPS35D/cyWOCVwYSwEmH3C1z1pU3RKOMIDWB0eAIDgAFjbq++5yJK98gWmugb
- xKBsrUAAh+Ys2NK/kfRj4lZbVHiFanyMdkI2qivbvtszQYt5PaAs71IVXhdjocS0rtq8
- vFLA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x243.google.com with SMTP id
+ 5614622812f47-45f015a3259so450054b6e.2
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 07:34:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769700723; x=1770305523; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QFDTlKK1O5QKYA2gsLMIU0TGBaZEskhbV63GGuC82+Y=;
- b=Q73P+BXSApe31CPQR68PqW2BSW9IRZtk3nDcHeqrdTbkJOiDfEbcT/45vXH1SrRYK0
- dyH8DCOhDpvikSDlxBS5LQBX0djZoZsPtylcKx/nSXZ56MoTX9c9j2oxo5fQ7iDbucsC
- sETPmmh9oxviT+RlpLk+eog+rMu9cVOoIBCXB3g2cUzDS5kA38f+kkDP7syoRc5KjFPB
- qGZ5KEjlgp9lNMFj/V8EPdP0X0uz5XlwmAxHApSKQlbrtpGyGv97+kcen1JYXvwIvXHY
- WNmEsVz9/7fVunpQXpZPiHGL6SCwRz0ldBUs8SS3O2rZsn/Z6weU2+NRfDN/ghq91Pa/
- fUPA==
+ d=konsulko.com; s=google; t=1769700850; x=1770305650; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=oidoLvGRslCuowaQ4V+YwbNMDVHZ29qAjfnE4ldUKJk=;
+ b=cB0Fndr2U66qxMcR6bhRdsEmCKgPFUh7JDAsH/+7Z5h4cjEpVvYQInO+zUgkHY1vQn
+ jut7avPX3HxDQXUC6MtdDqUQD7Sp4BUh/grKaLx0nDdAzt2jQy00LXSQv+N7lDY5DoTS
+ HZudYJ49qL2zBrq2NeBcPcBsso9eejVUrbgb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769700723; x=1770305523;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QFDTlKK1O5QKYA2gsLMIU0TGBaZEskhbV63GGuC82+Y=;
- b=EAOR0SqtMT5qcazBc9BrqZu2WA6NY6MmOwUbjw41gDRXFB8nky7ERmJo2dY4Nwr+pN
- zlBRluVngv51eGY0PCF/bxSR2DJns3BdW6Sf1GX4MJj1bSXXgRV90gQiFQzNUsoJJDV7
- wDhVHJi3DeXBVjZOYR93xG1qhljcGF9EFNymuJgwQMtuT8lsMgDz716iLnF73DTro/9m
- LglnAdn+GAXh2V4aNcbKtCFE0uHktuTY9xJ9fcY6CKqWaXcu7WOH4CxX/p+YVVVVkmPu
- Ca0t/ANf9JsuvwoMZJqQxOviRk6iEGMpfDYNEcCWWlzBzP7dM2ZuWbKLNBw2R2Nik3b7
- U+dQ==
-X-Gm-Message-State: AOJu0YysvRdd2oEJ2amR9e1RbrqVJABOMcOBv6OQAhRZS1VFGyFPdwoc
- RKRHM4vySIyCLXiIDoXXiL6ykR8hzWzYORNLKVEpoVJCzSwNeHgp+O3bKhMn2K1DFXWP5URBg1X
- JwetatUuntkX/iywS2iWOB3iFqlRfzxU=
-X-Gm-Gg: AZuq6aLRHG6fJN2cQlzgMy9Y7MlMJJR3jjSS6sgjkAfZ57ghpXp0MGk6T+yIkL7J1HX
- yrl7ZS19wdhzvCNbBbm9BwO+HeLnCQE7ZUZZdj4g9tDjGawn63Lbvp/7UE+GuzUrohrO2dfj/l2
- Td/0y7zdFTO/Ko0GlLdCQQtxqXukcZCLhaKKGdl14Kis9Q/NP3hA/7++HuBg/odPxKdqXY5b8mt
- /cdbJztOhTDhAt9ZFC26EyLihZleSZFld84dYtQcE9PDAhzM5snCdHYBMlEMSlsx7pmQktC
-X-Received: by 2002:a05:6830:6d18:b0:7cf:d91b:c49e with SMTP id
- 46e09a7af769-7d1850e67b2mr5931934a34.18.1769700722527; Thu, 29 Jan 2026
- 07:32:02 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1769700850; x=1770305650;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oidoLvGRslCuowaQ4V+YwbNMDVHZ29qAjfnE4ldUKJk=;
+ b=qlZOoz/DMiLW5X1EvKFUr9F/3KS0mQ0+eqOGXVuCbbhXI/k5KcPvJ0AjG77qZO8zYd
+ bfy64icWDDqHWM4F0eBRr1whMlbZLTdigmIw+J3EZdKtveceGHDoHFpPhOZO+BgZN56w
+ Y2HbeOTb2hKWXNOdTIXNr/Zh/4fTIR9TPisl/rThGBHQk3Tt/RR910MXdJ+ACwjGwf9j
+ FvEBIgYcIqSwLu0f29O9yDhEPBMklTeMz+s4sPbsWlEsAEzkUbRjWpR2ePKMJ9lepyZc
+ HCTij/VMgu5FeHPcdiMD3BGgeweTbKKolWcJSrqaaA1mQsRTtqAZ4yCTn8xrnHaa15IR
+ rEAA==
+X-Gm-Message-State: AOJu0YxHNwJBPLtrEg7meMQNzGAWKwaay32XD83sVeYHRFq63g/CPEsl
+ 4BnR9RVtiypXT2ZEwZHIvBcstdfG9hxwxqO73UJlD0F3aLScy2r4QaAkP75BPZW1FSc=
+X-Gm-Gg: AZuq6aIZC0y1av0+R3OA2XpIOGPfqwWN9Ly7e9GJ8pvfCzctbRdEgM7Kv1cSLzeO+DS
+ v/JsQT5X+SuUsmfgLjy1EgmwHjMZk57aUjY/5ioU4IK7I9swXdKFlb2DhXLr5AxuZo9HVvRjPPD
+ WobX0creEM6wSIy9l3/Jw9foILIiYGdCmwTh6AwFh1mWIX73+sjgojC13V27GiPv89Jz0GgTsVB
+ B89IKQ6/5hNB5nQiqKuNCnpurb89msdY6Gx0XZf2brAldkChJiqs4UDxDlacsfFb0Mw8jepNORa
+ eoMkaFZ4emBo0Y4OtPW2WRRz95C44gY+B4j9YrG5UNZRqeP5NY7x4GXt1GA3k2HtyOVNplu/GEr
+ ENSur1uosvpDZXCR7d+KaVy7CgybhwzSsHrrV4pwSLHv4kgdf27DHC2BXoN5aLQidGLqOdW1FN7
+ GDP4PvteODxhNMdoMn8poXDatjkdVagbIg+Pvg/mtLayF+RnKWh57A5cznnvTC+GHOdTewcOHSJ
+ lrS7ubPEwIvNUuysY1djg/rXpeS4oLRlcp0hWs=
+X-Received: by 2002:a05:6808:bcc:b0:450:bbed:7a75 with SMTP id
+ 5614622812f47-45f34bd2eb2mr1684b6e.28.1769700850076; 
+ Thu, 29 Jan 2026 07:34:10 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08d898c6sm3208327b6e.2.2026.01.29.07.34.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Jan 2026 07:34:09 -0800 (PST)
+Date: Thu, 29 Jan 2026 09:34:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] arm: Remove rel.dyn from SPL linker scripts
+Message-ID: <20260129153407.GX3416603@bill-the-cat>
 References: <CAN7C2SA4gFg8zxqs8aT4_ng9wTFLHdMO=C9b8LdtszMkcp0aWw@mail.gmail.com>
  <20260128145118.GJ3416603@bill-the-cat>
  <CAN7C2SBq+=xFH_doVfQqNFuVtjqVDCZUt3DVoB2MJJ6RMEhGgw@mail.gmail.com>
@@ -93,16 +81,13 @@ References: <CAN7C2SA4gFg8zxqs8aT4_ng9wTFLHdMO=C9b8LdtszMkcp0aWw@mail.gmail.com>
  <20260129151919.GU3416603@bill-the-cat>
  <CAN7C2SBMTxqeN45RiAuz4oW9bKVUYDgJzmHH+eM0pNN3X6QpHw@mail.gmail.com>
  <20260129152644.GW3416603@bill-the-cat>
-In-Reply-To: <20260129152644.GW3416603@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 29 Jan 2026 23:31:51 +0800
-X-Gm-Features: AZwV_QgcdPe1FGTxw8D_4MSNbfGQF9BnDD3Mq5hse9lfJw7Su5Ing0qpQMIzlTI
-Message-ID: <CAN7C2SA85pMyF_Mn4YrwQnaLD4Ks8y3Zr3RGn1hkEds6nM1SYg@mail.gmail.com>
-Subject: Re: [PATCH] arm: Remove rel.dyn from SPL linker scripts
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAN7C2SA85pMyF_Mn4YrwQnaLD4Ks8y3Zr3RGn1hkEds6nM1SYg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B6bDhwCGBvBAkKJu"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SA85pMyF_Mn4YrwQnaLD4Ks8y3Zr3RGn1hkEds6nM1SYg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,116 +104,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 29, 2026 at 11:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Thu, Jan 29, 2026 at 11:25:03PM +0800, Sune Brian wrote:
-> > On Thu, Jan 29, 2026 at 11:19=E2=80=AFPM Tom Rini <trini@konsulko.com> =
-wrote:
-> > >
-> > > On Thu, Jan 29, 2026 at 11:06:59PM +0800, Sune Brian wrote:
-> > > > On Thu, Jan 29, 2026 at 10:54=E2=80=AFPM Tom Rini <trini@konsulko.c=
-om> wrote:
-> > > > >
-> > > > > On Thu, Jan 29, 2026 at 10:58:21AM +0800, Sune Brian wrote:
-> > > > > > On Wed, Jan 28, 2026 at 10:51=E2=80=AFPM Tom Rini <trini@konsul=
-ko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Jan 28, 2026 at 10:49:37PM +0800, Sune Brian wrote:
-> > > > > > >
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > The commits after c08da5d03c2a0b72e81a11ff7ca507e3a6414db3
-> > > > > > > > All Cyclone V boards are unable to boot, not sure this patc=
-h is the fix?
-> > > > > > >
-> > > > > >
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > > Yes, those commits were unintentional and have been reverted.
-> > > > > >
-> > > > > > Had tested the last commit 6a1bdb7e952d5841f42742fefa907cae5dc8=
-d50a
-> > > > > > Same situation that the boards are unable to enter the SPL phas=
-e.
-> > > > > > The commit 8de6e8f8a076d2c9b6d38d8563db135c167077ec works prope=
-rly.
-> > > > > > After that things are broken.
-> > > > >
-> > > > > Please give
-> > > > > https://patchwork.ozlabs.org/project/uboot/patch/20260129035512.6=
-39362-1-marek.vasut+renesas@mailbox.org/
-> > > > > a try as I think it might have been working before by alignment l=
-uck
-> > > > > rather than design.
-> > > >
-> > > > Hi Tom,
-> > > >
-> > > > It is the revert itself that is broken.
-> > > > I tested f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
-> > > >
-> > > >
-> > > > U-Boot SPL 2026.01-00754-gf4dfa5d3c268-dirty (Jan 29 2026 - 22:56:1=
-7 +0800)
-> > > > Trying to boot from MMC1
-> > > >
-> > > > Which revert is correct.
-> > > >
-> > > > But once dc2d8423b19d30472b02e02b41504226908a4291
-> > > > And revert to 431f1ce46bbffff0db8f03437a34400b11b30175
-> > > >
-> > > > Then all these broken I don't understand why even file diff cannot
-> > > > show any changes.
-> > > >
-> > > > Do you mean the revert is broken and fixed by alignment?
-> > >
-> > > I mean that arbitrary changes (as part of testing these things, the
-> > > "-dirty" in the version string would lead to failing trees now passin=
-g)
-> > > can make the difference between pass/fail to boot. Did you try Marek'=
-s
-> > > patch I linked to?
+
+--B6bDhwCGBvBAkKJu
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jan 29, 2026 at 11:31:51PM +0800, Sune Brian wrote:
+> On Thu, Jan 29, 2026 at 11:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
+ote:
 > >
-> > Yes, I had tried. Cannot boot same as I had mentioned failing commit #.
-> > I apply that patch on the latest master commit.
->
-> The other, maybe, thing is you need a bigger SPL_SYS_MALLOC_F_LEN ?
-> Otherwise, you'll need to dig more and see why the device tree isn't
-> being found where expected on your platform, and possibly where it is
-> instead.
+> > On Thu, Jan 29, 2026 at 11:25:03PM +0800, Sune Brian wrote:
+> > > On Thu, Jan 29, 2026 at 11:19=E2=80=AFPM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Thu, Jan 29, 2026 at 11:06:59PM +0800, Sune Brian wrote:
+> > > > > On Thu, Jan 29, 2026 at 10:54=E2=80=AFPM Tom Rini <trini@konsulko=
+=2Ecom> wrote:
+> > > > > >
+> > > > > > On Thu, Jan 29, 2026 at 10:58:21AM +0800, Sune Brian wrote:
+> > > > > > > On Wed, Jan 28, 2026 at 10:51=E2=80=AFPM Tom Rini <trini@kons=
+ulko.com> wrote:
+> > > > > > > >
+> > > > > > > > On Wed, Jan 28, 2026 at 10:49:37PM +0800, Sune Brian wrote:
+> > > > > > > >
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > The commits after c08da5d03c2a0b72e81a11ff7ca507e3a6414db3
+> > > > > > > > > All Cyclone V boards are unable to boot, not sure this pa=
+tch is the fix?
+> > > > > > > >
+> > > > > > >
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > > Yes, those commits were unintentional and have been reverte=
+d.
+> > > > > > >
+> > > > > > > Had tested the last commit 6a1bdb7e952d5841f42742fefa907cae5d=
+c8d50a
+> > > > > > > Same situation that the boards are unable to enter the SPL ph=
+ase.
+> > > > > > > The commit 8de6e8f8a076d2c9b6d38d8563db135c167077ec works pro=
+perly.
+> > > > > > > After that things are broken.
+> > > > > >
+> > > > > > Please give
+> > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20260129035512=
+=2E639362-1-marek.vasut+renesas@mailbox.org/
+> > > > > > a try as I think it might have been working before by alignment=
+ luck
+> > > > > > rather than design.
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > It is the revert itself that is broken.
+> > > > > I tested f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
+> > > > >
+> > > > >
+> > > > > U-Boot SPL 2026.01-00754-gf4dfa5d3c268-dirty (Jan 29 2026 - 22:56=
+:17 +0800)
+> > > > > Trying to boot from MMC1
+> > > > >
+> > > > > Which revert is correct.
+> > > > >
+> > > > > But once dc2d8423b19d30472b02e02b41504226908a4291
+> > > > > And revert to 431f1ce46bbffff0db8f03437a34400b11b30175
+> > > > >
+> > > > > Then all these broken I don't understand why even file diff cannot
+> > > > > show any changes.
+> > > > >
+> > > > > Do you mean the revert is broken and fixed by alignment?
+> > > >
+> > > > I mean that arbitrary changes (as part of testing these things, the
+> > > > "-dirty" in the version string would lead to failing trees now pass=
+ing)
+> > > > can make the difference between pass/fail to boot. Did you try Mare=
+k's
+> > > > patch I linked to?
+> > >
+> > > Yes, I had tried. Cannot boot same as I had mentioned failing commit =
+#.
+> > > I apply that patch on the latest master commit.
+> >
+> > The other, maybe, thing is you need a bigger SPL_SYS_MALLOC_F_LEN ?
+> > Otherwise, you'll need to dig more and see why the device tree isn't
+> > being found where expected on your platform, and possibly where it is
+> > instead.
+>=20
+> No the failing point is done after
+>=20
+> f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
+> Revert "arm: spl: Correct alignment of .rel.dyn section"
+> This reverts commit 380ddb4. Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> This commit I tried to boot and works..
+>=20
+> Then this commit
+>=20
+> dc2d8423b19d30472b02e02b41504226908a4291
+> count rel_dyn
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> I manually replaced the old Makefile.xpl and also worked it boot.
+>=20
+> Then 431f1ce46bbffff0db8f03437a34400b11b30175
+>=20
+> Revert a number of incorrect commits
+> As part of debugging the appended device tree failure, I inadvertently
+> committed some changes as I was debugging to master, and not a private
+> branch, and pushed them as part of the release. This reverts commit
+> dc2d842 through 380ddb4. Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> This is the point that everything no longer boots.
+>=20
+> But between those commits there are no extra codes.
+>=20
+> After that all things no longer work.
 
-No the failing point is done after
+Yes, and I need you to investigate your failure case here. There is no
+code change between a working commit and a failing commit, which leads
+me to the suggestions I gave for debugging.
 
-f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
-Revert "arm: spl: Correct alignment of .rel.dyn section"
-This reverts commit 380ddb4. Signed-off-by: Tom Rini <trini@konsulko.com>
+--=20
+Tom
 
-This commit I tried to boot and works..
+--B6bDhwCGBvBAkKJu
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Then this commit
+-----BEGIN PGP SIGNATURE-----
 
-dc2d8423b19d30472b02e02b41504226908a4291
-count rel_dyn
-Signed-off-by: Tom Rini <trini@konsulko.com>
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXt97wAKCRAr4qD1Cr/k
+CjDBAQCkmmCRSgUa0vA9az6tmqbQsRfP7FOLKSpqj3tsF71bbgEA2Z9Dp5iZabwc
+bfkRzyD20sH/DmH6k5entxOID5ZHCgI=
+=WlDr
+-----END PGP SIGNATURE-----
 
-I manually replaced the old Makefile.xpl and also worked it boot.
-
-Then 431f1ce46bbffff0db8f03437a34400b11b30175
-
-Revert a number of incorrect commits
-As part of debugging the appended device tree failure, I inadvertently
-committed some changes as I was debugging to master, and not a private
-branch, and pushed them as part of the release. This reverts commit
-dc2d842 through 380ddb4. Signed-off-by: Tom Rini <trini@konsulko.com>
-
-This is the point that everything no longer boots.
-
-But between those commits there are no extra codes.
-
-After that all things no longer work.
-
-Thanks
-
->
-> --
-> Tom
+--B6bDhwCGBvBAkKJu--
