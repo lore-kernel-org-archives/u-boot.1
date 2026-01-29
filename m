@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E79DD358D6
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 16:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4524DD358D6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 16:52:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD03683FFF;
-	Thu, 29 Jan 2026 17:44:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 51E8083FFF;
+	Thu, 29 Jan 2026 17:52:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BCxo46Wk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GWF/Fxnw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA89B84056; Thu, 29 Jan 2026 17:44:07 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id BC04C8405B; Thu, 29 Jan 2026 17:52:17 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD51D83A64
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 17:44:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3CA283F32
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 17:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7cfd0f349c4so681766a34.1
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 08:44:04 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769705043; cv=none;
- d=google.com; s=arc-20240605;
- b=bHl28aBumn3y3g12aZvwVkAbdx7R1vfJMm9sUOB6AIqL3VDByK7uBS/wYL5Oyv7+I6
- ePTAn4cgdtTlGFgMup2A04a0mQVOsNDdAT/Y2YWhYum18NMOramwlI8h3j1tOskCS5us
- fR7OBQU1a68YiUM22UnoRJaoTNSPoXIhHL0Yhe7ZbXDQOD9/ugJBlqDSSXqzpPq2CGwl
- 2L/TgojRL/roKwD4yfytT7ewlktT/d1ZqDZSVeS5NwLIkeP1Z0mHX3f1eBXB0ZPD3+lE
- Me9hAlJwn0zxazFfrRdh5/HewIMQgYq4rUloPbmnmV01PWjNyMrYdnzCD04i9u+yX1S1
- FpMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=VNxLdjAQwkemJQWlPC1Z2E1llz9jbeVqkh953YU85+M=;
- fh=6TexoJ5yKuEdpnuZGuPIlVO9D08xF3U4yWlT3PeMtdE=;
- b=IlP/NjtgEv1tzE5D7j/Ahx1uubGT69FVv+aQ2LxuFMQCf02uL2+0bjOe6kDWN+Gxqy
- 6AYXRwnFcILmRTunIXnREqQW9SxQd+zBmqD81znZU2JQLAczGZNg3uf3uNfofngCQqFc
- e2tIawqTCIJMgAX4ucAX895NSivGGgqu5GIeizzt6OH5SK8Tdn2tcmCyr7H8z0KEzv8p
- BJE6yiyY+WHGQU2wJTv5ZRwSXWeXbvpJItdq6wMWhblqOeQFN+KUJaV9RRp/nzZwpJ4x
- 32rbQ+32M+a9NsY2XXQiiWuZ3dqa+KVIEEnhAfu37lGZgGC8bpFXkoR8DL9HM0+Z/gHK
- GLGQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-45f0c1f1b54so719576b6e.1
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 08:52:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769705043; x=1770309843; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VNxLdjAQwkemJQWlPC1Z2E1llz9jbeVqkh953YU85+M=;
- b=BCxo46WkOcA06irgvqdQd094oUUjM7SgmdbSWIRTAPosffD8fu5BMnzXy0b0NPZmVd
- eFOCZ7s02X141cXLb8PLvxlEMpKzGwnlqMxox2gfGV/x2ab4D/BJy4k+4Bx+KB804aOt
- AjsqW2myG2KSCIow9fxSEY2kRaK9328WAA7apAteGdTyxZgWy05XNLg4K2t1RmiIKjyV
- oNDuy7pgaEIC49kP38azOULBLIP+K/yJPazfnQi3P9+0cFfx0nculmbPrFQs8sJM3Mp6
- aedQGCGSQgvbJ8ubyksQK+Jyp2DvKEPKY6xUP2De4UGSz6yY+I59D3lXrUySZ41V9MJS
- gd8g==
+ d=konsulko.com; s=google; t=1769705533; x=1770310333; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cbC3jin+PzkmjsxhjfqfQ9wWRgWN2aFNLlNmNrcCzxY=;
+ b=GWF/Fxnw/purNUlRQ75c+kwmh+PcS9ACObpSoQeEWTqmSFDXuWWHpg5Sf4xELYA+n8
+ xJ+0ZCZjZ0KXrbtMuMV5Ajn/Q72Jw16FP8vHGlXVfbGjY0tKks8KY214vIKDclKUjXqY
+ 8DQr9y06xFf4bdy9/cqar84Ky2mzAursECPLY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769705043; x=1770309843;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=VNxLdjAQwkemJQWlPC1Z2E1llz9jbeVqkh953YU85+M=;
- b=JRRwJX6SEqKg9ZropLGuX0g+9cYg/GrFr8uNdxPT9b+r4oiEGbfRF2fRbkklaDAwbZ
- VeEbFMqw9AlHaCJ3gP1b9GR2dVnpBpgOw9PopUEnbmummgWggtPRCtWFPubzG0ROEsbt
- 1GMvaAdDenCVN5zyF2jvadwZU340eEt2hfB5X17cYWK1AX3bzPnS3rIa3uNByq2xWGfI
- u4XrGolG3qpL0JO/cOUOqx1uQOX0m8EsY9/lBUy+2LpQRGu94zeWBAJkY3/pZo/4ulTp
- cQxOOyFETXsPK2AKYlg2tTWsMGs8NXXN7ZVor9NZ6ndTEBpNarMA9//3xZfw/uN7L3z9
- UWPw==
-X-Gm-Message-State: AOJu0YzPnsRnfRQP/uftSScvWDfXU1Ls1gESdwnoiMUJ4u4mMHVkbnfK
- wDkR+tAgwzH3fk/bMZC2ariJpGiy5VXUjTWOr2hLTvVZa1J3rvZoay+RcCeMCY9d5AkzXIHl7Dz
- JgYsnlyzaRxAYUrAt2GIeu7YDhUIqf2M6omjmNqwaQQ==
-X-Gm-Gg: AZuq6aIicS6S1Fd3YLm7M8vT078jhXuNrHGYeILxv/zRr4Efn63NX7VoP3/btDHZ99C
- I2qOZflurDIT9QLC5jXi/XoLLsXDiCRVE8bDUyjzPo6C/qc8/S4ErX5hnQY5zYZOdK1BlVhwbhL
- j0nFkB0mdzkwLcP2kebeoRRBQ7BL8P4wrPKxjA8DYZwIAHE/NB2szZ0K31wqXjl1nept8H86fS0
- Vah8H0ZUk+LGdINeha/ggpSQ7eb8IQsA1HCt6MUxjJPu6I7ysELdkL7zktNsumXOuO7PUVX
-X-Received: by 2002:a05:6830:719f:b0:7c7:2e9d:aee1 with SMTP id
- 46e09a7af769-7d1a532b4f3mr110332a34.19.1769705043294; Thu, 29 Jan 2026
- 08:44:03 -0800 (PST)
-MIME-Version: 1.0
-References: <20260129154646.GY3416603@bill-the-cat>
- <CAN7C2SDFkeg8Q=SFjRBBx4LctMPOvj8U0+TdmxfEuvHNp5w5BQ@mail.gmail.com>
- <20260129160315.GZ3416603@bill-the-cat>
+ d=1e100.net; s=20230601; t=1769705533; x=1770310333;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cbC3jin+PzkmjsxhjfqfQ9wWRgWN2aFNLlNmNrcCzxY=;
+ b=FtavErMgjSS+5iZ1NCE2/FGhPpAcCM3e2fuHc3KXjUSnPMua3ypq9IQNMre2pu98Ul
+ y3yJqwK5UBu2XpegplcDmLLroqqxKDrrtaaER9KhSjaKOM+V30TrJ2rluCh/lPi4/l58
+ fZWm6BH305NJzhdUJR0eTZWXQQMVJanRMqDoA9UV7hiYNdFSGdlVlWCZWr4HFXN7bfGA
+ ZD2fv8sHYbR2j+EYpxzpsnT8h2maEQR3ikry4bZi7D5irCRxUmTIAF8C4NADyKQSsF8E
+ uzccWYofjB8u5KnwcskS+DCaGAc9UV/xAhLd50+DNqfm8jf7uvQ0sSLFxceugchC39Ei
+ 6LHA==
+X-Gm-Message-State: AOJu0Yyq13YDO+G+s3WcUVJwM14FWdytOB77WsVLZnQC07pSuTOR4qcM
+ sGWI7WGCYqeGWWMBxjagTBmUr6PLt3RxzNclFp+zcMv+J/DH83ywAZIUtm4v62ftKWc=
+X-Gm-Gg: AZuq6aK0VrxqoWhopD742hwVwBeWChELK7NQLEyQ4LvzxhE2FMJDgbpzMebIC01ajod
+ NuVujnIMbB7oyDswHUjGF3zGxHPSNDTBrk/vDtcFiXLhpLOecDb2Pj6GZ0+TYu9A6I5Q8/QxQRR
+ FKhq+aNBi2VlZcDJ43jo0kK1I2ufb2x9C7wHQzhqwQsILLayCBNIWxupvXzKztBw30ITH7Fd/aw
+ Yoo9V5vsX8zeCnkLtnmggYWaiDvc52cM1p1qFMGi3jjCw9ir7u85TL4c7DnY2p0beFpNDZMA19f
+ lJ1zP1ZDCxZyppuWvdjhcIsxhqPr135gQUX1uHux0Dt/P8FKxWgQZhN+aew3hnre4By2pDRzKht
+ j1PjP2bsUnyqg+hC2MKSbBYGV718O4qBRKnBp+jOD5OCZT3Mz9ttBGQHt2/+i8U05+PXSNnINVb
+ QhIiF7HF60q6eNGaU1h9AcCi7ceaGXWcdL8sIGFzaQkjviLLHyGZEaj0KbjQQWjyBW6qiC9YjP1
+ CLt1PKmiJDP/lzF1pN5Uc6rWsSXQK0KOW8PN8o=
+X-Received: by 2002:a05:6808:1485:b0:45a:6d11:9895 with SMTP id
+ 5614622812f47-45f34d8e349mr84491b6e.64.1769705533543; 
+ Thu, 29 Jan 2026 08:52:13 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08f20e43sm3243118b6e.13.2026.01.29.08.52.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Jan 2026 08:52:13 -0800 (PST)
+Date: Thu, 29 Jan 2026 10:52:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] arm: Remove rel.dyn from SPL linker scripts
+Message-ID: <20260129165210.GB2044980@bill-the-cat>
+References: <20260129160315.GZ3416603@bill-the-cat>
  <CAN7C2SDZ9fO-BsjcRj638LtR5QYWUt+PjOyXvao9aXS+J9Pnzw@mail.gmail.com>
  <20260129160830.GA3416603@bill-the-cat>
  <CAN7C2SB0+kNYjho=LDKASfqddgQeCYXu0hhPeK62menTR6VW1Q@mail.gmail.com>
@@ -96,16 +82,13 @@ References: <20260129154646.GY3416603@bill-the-cat>
  <20260129163540.GA2043007@bill-the-cat>
  <CAN7C2SBwwLrsrHgkS82oGuWZf8K1O9+UgZHOuvsco3ExCMD0Fw@mail.gmail.com>
  <20260129164130.GA2044980@bill-the-cat>
-In-Reply-To: <20260129164130.GA2044980@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 30 Jan 2026 00:43:51 +0800
-X-Gm-Features: AZwV_QiGSCQQ48ZAIlctsIX_9PuDW37v08AOK4-vFYh2OaSrpzn_K1OflCW4Y9Q
-Message-ID: <CAN7C2SCYYqQviS6pJYd7KiSYvd7tJKLqHPc5tCpyuF1ckYexcA@mail.gmail.com>
-Subject: Re: [PATCH] arm: Remove rel.dyn from SPL linker scripts
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAN7C2SCYYqQviS6pJYd7KiSYvd7tJKLqHPc5tCpyuF1ckYexcA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cMZvEHlu0ganLSHN"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SCYYqQviS6pJYd7KiSYvd7tJKLqHPc5tCpyuF1ckYexcA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,328 +105,338 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 30, 2026 at 12:41=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, Jan 30, 2026 at 12:39:17AM +0800, Sune Brian wrote:
-> > On Fri, Jan 30, 2026 at 12:35=E2=80=AFAM Tom Rini <trini@konsulko.com> =
-wrote:
-> > >
-> > > On Fri, Jan 30, 2026 at 12:29:56AM +0800, Sune Brian wrote:
-> > > > On Fri, Jan 30, 2026 at 12:22=E2=80=AFAM Tom Rini <trini@konsulko.c=
-om> wrote:
-> > > > >
-> > > > > On Fri, Jan 30, 2026 at 12:09:26AM +0800, Sune Brian wrote:
-> > > > > > On Fri, Jan 30, 2026 at 12:08=E2=80=AFAM Tom Rini <trini@konsul=
-ko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Jan 30, 2026 at 12:07:25AM +0800, Sune Brian wrote:
-> > > > > > > > On Fri, Jan 30, 2026 at 12:03=E2=80=AFAM Tom Rini <trini@ko=
-nsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Thu, Jan 29, 2026 at 11:58:50PM +0800, Sune Brian wrot=
-e:
-> > > > > > > > > > On Thu, Jan 29, 2026 at 11:46=E2=80=AFPM Tom Rini <trin=
-i@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Thu, Jan 29, 2026 at 11:43:02PM +0800, Sune Brian =
-wrote:
-> > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:34=E2=80=AFPM Tom Rini <=
-trini@konsulko.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:31:51PM +0800, Sune Br=
-ian wrote:
-> > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:26=E2=80=AFPM Tom Ri=
-ni <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:25:03PM +0800, Sun=
-e Brian wrote:
-> > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:19=E2=80=AFPM To=
-m Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:06:59PM +0800,=
- Sune Brian wrote:
-> > > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 10:54=E2=80=AFP=
-M Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 10:58:21AM +0=
-800, Sune Brian wrote:
-> > > > > > > > > > > > > > > > > > > > On Wed, Jan 28, 2026 at 10:51=E2=80=
-=AFPM Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > On Wed, Jan 28, 2026 at 10:49:37P=
-M +0800, Sune Brian wrote:
-> > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > > The commits after c08da5d03c2a0=
-b72e81a11ff7ca507e3a6414db3
-> > > > > > > > > > > > > > > > > > > > > > All Cyclone V boards are unable=
- to boot, not sure this patch is the fix?
-> > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > Yes, those commits were unintenti=
-onal and have been reverted.
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > Had tested the last commit 6a1bdb7e=
-952d5841f42742fefa907cae5dc8d50a
-> > > > > > > > > > > > > > > > > > > > Same situation that the boards are =
-unable to enter the SPL phase.
-> > > > > > > > > > > > > > > > > > > > The commit 8de6e8f8a076d2c9b6d38d85=
-63db135c167077ec works properly.
-> > > > > > > > > > > > > > > > > > > > After that things are broken.
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > Please give
-> > > > > > > > > > > > > > > > > > > https://patchwork.ozlabs.org/project/=
-uboot/patch/20260129035512.639362-1-marek.vasut+renesas@mailbox.org/
-> > > > > > > > > > > > > > > > > > > a try as I think it might have been w=
-orking before by alignment luck
-> > > > > > > > > > > > > > > > > > > rather than design.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > It is the revert itself that is broken.
-> > > > > > > > > > > > > > > > > > I tested f4dfa5d3c2680322fd17fcc7c62218=
-76e00a03c2
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > U-Boot SPL 2026.01-00754-gf4dfa5d3c268-=
-dirty (Jan 29 2026 - 22:56:17 +0800)
-> > > > > > > > > > > > > > > > > > Trying to boot from MMC1
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Which revert is correct.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > But once dc2d8423b19d30472b02e02b415042=
-26908a4291
-> > > > > > > > > > > > > > > > > > And revert to 431f1ce46bbffff0db8f03437=
-a34400b11b30175
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Then all these broken I don't understan=
-d why even file diff cannot
-> > > > > > > > > > > > > > > > > > show any changes.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Do you mean the revert is broken and fi=
-xed by alignment?
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > I mean that arbitrary changes (as part of=
- testing these things, the
-> > > > > > > > > > > > > > > > > "-dirty" in the version string would lead=
- to failing trees now passing)
-> > > > > > > > > > > > > > > > > can make the difference between pass/fail=
- to boot. Did you try Marek's
-> > > > > > > > > > > > > > > > > patch I linked to?
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Yes, I had tried. Cannot boot same as I had=
- mentioned failing commit #.
-> > > > > > > > > > > > > > > > I apply that patch on the latest master com=
-mit.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > The other, maybe, thing is you need a bigger =
-SPL_SYS_MALLOC_F_LEN ?
-> > > > > > > > > > > > > > > Otherwise, you'll need to dig more and see wh=
-y the device tree isn't
-> > > > > > > > > > > > > > > being found where expected on your platform, =
-and possibly where it is
-> > > > > > > > > > > > > > > instead.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > No the failing point is done after
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
-> > > > > > > > > > > > > > Revert "arm: spl: Correct alignment of .rel.dyn=
- section"
-> > > > > > > > > > > > > > This reverts commit 380ddb4. Signed-off-by: Tom=
- Rini <trini@konsulko.com>
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > This commit I tried to boot and works..
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Then this commit
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > dc2d8423b19d30472b02e02b41504226908a4291
-> > > > > > > > > > > > > > count rel_dyn
-> > > > > > > > > > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > I manually replaced the old Makefile.xpl and al=
-so worked it boot.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Then 431f1ce46bbffff0db8f03437a34400b11b30175
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Revert a number of incorrect commits
-> > > > > > > > > > > > > > As part of debugging the appended device tree f=
-ailure, I inadvertently
-> > > > > > > > > > > > > > committed some changes as I was debugging to ma=
-ster, and not a private
-> > > > > > > > > > > > > > branch, and pushed them as part of the release.=
- This reverts commit
-> > > > > > > > > > > > > > dc2d842 through 380ddb4. Signed-off-by: Tom Rin=
-i <trini@konsulko.com>
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > This is the point that everything no longer boo=
-ts.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > But between those commits there are no extra co=
-des.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > After that all things no longer work.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Yes, and I need you to investigate your failure c=
-ase here. There is no
-> > > > > > > > > > > > > code change between a working commit and a failin=
-g commit, which leads
-> > > > > > > > > > > > > me to the suggestions I gave for debugging.
-> > > > > > > > > > > >
-> > > > > > > > > > > > I even tried a fresh clone from https://github.com/=
-u-boot/u-boot.
-> > > > > > > > > > > > Same situation.
-> > > > > > > > > > > > I don't understand.
-> > > > > > > > > > > > The commit missed or messed up?
-> > > > > > > > > > >
-> > > > > > > > > > > You need to look at the resulting binaries and see wh=
-y the device tree
-> > > > > > > > > > > is not where it's expected to be.
-> > > > > > > > > > >
-> > > > > > > > > > > You might find it helpful looking through
-> > > > > > > > > > > https://lore.kernel.org/u-boot/CAOMZO5BiQcp2HYJgrYnPQ=
-Ln8Q52Z05FKjbqVKPXxKa8D3Cny5Q@mail.gmail.com/
-> > > > > > > > > > > for some ideas.
-> > > > > > > > > >
-> > > > > > > > > > So you are suggesting even the commit between revert co=
-uld introduce this issue?
-> > > > > > > > > > Aren't the revert only applied to two changes?
-> > > > > > > > >
-> > > > > > > > > What I'm saying is that the underlying issue is that the =
-device tree is
-> > > > > > > > > not where it's expected to be. The likely root cause is t=
-hat we now
-> > > > > > > > > require the device tree to be (correctly!) 8 byte aligned=
- in memory and
-> > > > > > > > > not 4 byte aligned. In the case of appending a device tre=
-e to our binary
-> > > > > > > > > any sort of change in the code can change the size of the=
- binary and in
-> > > > > > > > > turn mean that the address where the device tree is ends =
-up being at a
-> > > > > > > > > different alignment.
-> > > > > > > >
-> > > > > > > > You are correct on this, but I don't understand why even re=
-verting to
-> > > > > > > > two code changes
-> > > > > > > > could introduce this issue.
-> > > > > > > >
-> > > > > > > > The revert also included other commits?
-> > > > > > > >
-> > > > > > > > "
-> > > > > > > > Revert a number of incorrect commits
-> > > > > > > > As part of debugging the appended device tree failure, I in=
-advertently
-> > > > > > > > committed some changes as I was debugging to master, and no=
-t a private
-> > > > > > > > branch, and pushed them as part of the release. This revert=
-s commit
-> > > > > > > > dc2d842 through 380ddb4.
-> > > > > > > > "
-> > > > > > > >
-> > > > > > > > This is my debug case:
-> > > > > > > >
-> > > > > > > > Correct boot:
-> > > > > > > > hexdump -Cv spl/u-boot-spl.sfp | grep 'd0 0d fe ed'
-> > > > > > > > 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed =
- |..pGo...pG......|
-> > > > > > > > 0000beb0  00 00 00 00 00 00 00 00  d0 0d fe ed 00 00 08 c8 =
- |................|
-> > > > > > > >
-> > > > > > > > Fail boot:
-> > > > > > > > hexdump -Cv u-boot-spl_a.sfp | grep 'd0 0d fe ed'
-> > > > > > > > 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed =
- |..pGo...pG......|
-> > > > > > > > 0000beb0  00 00 00 00 00 00 00 00  00 00 00 00 d0 0d fe ed =
- |................|
-> > > > > > >
-> > > > > > > Yup, so it's mis-aligned. I guess can you tell me what the de=
-fconfig
-> > > > > > > you're using is?
+
+--cMZvEHlu0ganLSHN
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Jan 30, 2026 at 12:43:51AM +0800, Sune Brian wrote:
+> On Fri, Jan 30, 2026 at 12:41=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+ote:
+> >
+> > On Fri, Jan 30, 2026 at 12:39:17AM +0800, Sune Brian wrote:
+> > > On Fri, Jan 30, 2026 at 12:35=E2=80=AFAM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Fri, Jan 30, 2026 at 12:29:56AM +0800, Sune Brian wrote:
+> > > > > On Fri, Jan 30, 2026 at 12:22=E2=80=AFAM Tom Rini <trini@konsulko=
+=2Ecom> wrote:
 > > > > > >
-> > > > > > socfpga_cyclone5_defconfig
+> > > > > > On Fri, Jan 30, 2026 at 12:09:26AM +0800, Sune Brian wrote:
+> > > > > > > On Fri, Jan 30, 2026 at 12:08=E2=80=AFAM Tom Rini <trini@kons=
+ulko.com> wrote:
+> > > > > > > >
+> > > > > > > > On Fri, Jan 30, 2026 at 12:07:25AM +0800, Sune Brian wrote:
+> > > > > > > > > On Fri, Jan 30, 2026 at 12:03=E2=80=AFAM Tom Rini <trini@=
+konsulko.com> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Thu, Jan 29, 2026 at 11:58:50PM +0800, Sune Brian wr=
+ote:
+> > > > > > > > > > > On Thu, Jan 29, 2026 at 11:46=E2=80=AFPM Tom Rini <tr=
+ini@konsulko.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:43:02PM +0800, Sune Bria=
+n wrote:
+> > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:34=E2=80=AFPM Tom Rini=
+ <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:31:51PM +0800, Sune =
+Brian wrote:
+> > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:26=E2=80=AFPM Tom =
+Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:25:03PM +0800, S=
+une Brian wrote:
+> > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:19=E2=80=AFPM =
+Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 11:06:59PM +080=
+0, Sune Brian wrote:
+> > > > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 10:54=E2=80=
+=AFPM Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > On Thu, Jan 29, 2026 at 10:58:21AM =
++0800, Sune Brian wrote:
+> > > > > > > > > > > > > > > > > > > > > On Wed, Jan 28, 2026 at 10:51=E2=
+=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > On Wed, Jan 28, 2026 at 10:49:3=
+7PM +0800, Sune Brian wrote:
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > The commits after c08da5d03c2=
+a0b72e81a11ff7ca507e3a6414db3
+> > > > > > > > > > > > > > > > > > > > > > > All Cyclone V boards are unab=
+le to boot, not sure this patch is the fix?
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > Yes, those commits were uninten=
+tional and have been reverted.
+> > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > Had tested the last commit 6a1bdb=
+7e952d5841f42742fefa907cae5dc8d50a
+> > > > > > > > > > > > > > > > > > > > > Same situation that the boards ar=
+e unable to enter the SPL phase.
+> > > > > > > > > > > > > > > > > > > > > The commit 8de6e8f8a076d2c9b6d38d=
+8563db135c167077ec works properly.
+> > > > > > > > > > > > > > > > > > > > > After that things are broken.
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > Please give
+> > > > > > > > > > > > > > > > > > > > https://patchwork.ozlabs.org/projec=
+t/uboot/patch/20260129035512.639362-1-marek.vasut+renesas@mailbox.org/
+> > > > > > > > > > > > > > > > > > > > a try as I think it might have been=
+ working before by alignment luck
+> > > > > > > > > > > > > > > > > > > > rather than design.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > It is the revert itself that is broke=
+n.
+> > > > > > > > > > > > > > > > > > > I tested f4dfa5d3c2680322fd17fcc7c622=
+1876e00a03c2
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > U-Boot SPL 2026.01-00754-gf4dfa5d3c26=
+8-dirty (Jan 29 2026 - 22:56:17 +0800)
+> > > > > > > > > > > > > > > > > > > Trying to boot from MMC1
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > Which revert is correct.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > But once dc2d8423b19d30472b02e02b4150=
+4226908a4291
+> > > > > > > > > > > > > > > > > > > And revert to 431f1ce46bbffff0db8f034=
+37a34400b11b30175
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > Then all these broken I don't underst=
+and why even file diff cannot
+> > > > > > > > > > > > > > > > > > > show any changes.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > Do you mean the revert is broken and =
+fixed by alignment?
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > I mean that arbitrary changes (as part =
+of testing these things, the
+> > > > > > > > > > > > > > > > > > "-dirty" in the version string would le=
+ad to failing trees now passing)
+> > > > > > > > > > > > > > > > > > can make the difference between pass/fa=
+il to boot. Did you try Marek's
+> > > > > > > > > > > > > > > > > > patch I linked to?
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Yes, I had tried. Cannot boot same as I h=
+ad mentioned failing commit #.
+> > > > > > > > > > > > > > > > > I apply that patch on the latest master c=
+ommit.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > The other, maybe, thing is you need a bigge=
+r SPL_SYS_MALLOC_F_LEN ?
+> > > > > > > > > > > > > > > > Otherwise, you'll need to dig more and see =
+why the device tree isn't
+> > > > > > > > > > > > > > > > being found where expected on your platform=
+, and possibly where it is
+> > > > > > > > > > > > > > > > instead.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > No the failing point is done after
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > f4dfa5d3c2680322fd17fcc7c6221876e00a03c2
+> > > > > > > > > > > > > > > Revert "arm: spl: Correct alignment of .rel.d=
+yn section"
+> > > > > > > > > > > > > > > This reverts commit 380ddb4. Signed-off-by: T=
+om Rini <trini@konsulko.com>
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > This commit I tried to boot and works..
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Then this commit
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > dc2d8423b19d30472b02e02b41504226908a4291
+> > > > > > > > > > > > > > > count rel_dyn
+> > > > > > > > > > > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I manually replaced the old Makefile.xpl and =
+also worked it boot.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Then 431f1ce46bbffff0db8f03437a34400b11b30175
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Revert a number of incorrect commits
+> > > > > > > > > > > > > > > As part of debugging the appended device tree=
+ failure, I inadvertently
+> > > > > > > > > > > > > > > committed some changes as I was debugging to =
+master, and not a private
+> > > > > > > > > > > > > > > branch, and pushed them as part of the releas=
+e. This reverts commit
+> > > > > > > > > > > > > > > dc2d842 through 380ddb4. Signed-off-by: Tom R=
+ini <trini@konsulko.com>
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > This is the point that everything no longer b=
+oots.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > But between those commits there are no extra =
+codes.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > After that all things no longer work.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Yes, and I need you to investigate your failure=
+ case here. There is no
+> > > > > > > > > > > > > > code change between a working commit and a fail=
+ing commit, which leads
+> > > > > > > > > > > > > > me to the suggestions I gave for debugging.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I even tried a fresh clone from https://github.co=
+m/u-boot/u-boot.
+> > > > > > > > > > > > > Same situation.
+> > > > > > > > > > > > > I don't understand.
+> > > > > > > > > > > > > The commit missed or messed up?
+> > > > > > > > > > > >
+> > > > > > > > > > > > You need to look at the resulting binaries and see =
+why the device tree
+> > > > > > > > > > > > is not where it's expected to be.
+> > > > > > > > > > > >
+> > > > > > > > > > > > You might find it helpful looking through
+> > > > > > > > > > > > https://lore.kernel.org/u-boot/CAOMZO5BiQcp2HYJgrYn=
+PQLn8Q52Z05FKjbqVKPXxKa8D3Cny5Q@mail.gmail.com/
+> > > > > > > > > > > > for some ideas.
+> > > > > > > > > > >
+> > > > > > > > > > > So you are suggesting even the commit between revert =
+could introduce this issue?
+> > > > > > > > > > > Aren't the revert only applied to two changes?
+> > > > > > > > > >
+> > > > > > > > > > What I'm saying is that the underlying issue is that th=
+e device tree is
+> > > > > > > > > > not where it's expected to be. The likely root cause is=
+ that we now
+> > > > > > > > > > require the device tree to be (correctly!) 8 byte align=
+ed in memory and
+> > > > > > > > > > not 4 byte aligned. In the case of appending a device t=
+ree to our binary
+> > > > > > > > > > any sort of change in the code can change the size of t=
+he binary and in
+> > > > > > > > > > turn mean that the address where the device tree is end=
+s up being at a
+> > > > > > > > > > different alignment.
+> > > > > > > > >
+> > > > > > > > > You are correct on this, but I don't understand why even =
+reverting to
+> > > > > > > > > two code changes
+> > > > > > > > > could introduce this issue.
+> > > > > > > > >
+> > > > > > > > > The revert also included other commits?
+> > > > > > > > >
+> > > > > > > > > "
+> > > > > > > > > Revert a number of incorrect commits
+> > > > > > > > > As part of debugging the appended device tree failure, I =
+inadvertently
+> > > > > > > > > committed some changes as I was debugging to master, and =
+not a private
+> > > > > > > > > branch, and pushed them as part of the release. This reve=
+rts commit
+> > > > > > > > > dc2d842 through 380ddb4.
+> > > > > > > > > "
+> > > > > > > > >
+> > > > > > > > > This is my debug case:
+> > > > > > > > >
+> > > > > > > > > Correct boot:
+> > > > > > > > > hexdump -Cv spl/u-boot-spl.sfp | grep 'd0 0d fe ed'
+> > > > > > > > > 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe e=
+d  |..pGo...pG......|
+> > > > > > > > > 0000beb0  00 00 00 00 00 00 00 00  d0 0d fe ed 00 00 08 c=
+8  |................|
+> > > > > > > > >
+> > > > > > > > > Fail boot:
+> > > > > > > > > hexdump -Cv u-boot-spl_a.sfp | grep 'd0 0d fe ed'
+> > > > > > > > > 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe e=
+d  |..pGo...pG......|
+> > > > > > > > > 0000beb0  00 00 00 00 00 00 00 00  00 00 00 00 d0 0d fe e=
+d  |................|
+> > > > > > > >
+> > > > > > > > Yup, so it's mis-aligned. I guess can you tell me what the =
+defconfig
+> > > > > > > > you're using is?
+> > > > > > >
+> > > > > > > socfpga_cyclone5_defconfig
+> > > > > >
+> > > > > > You might need to do some debugging yourself on this. Is that a=
+lso where
+> > > > > > __bss_end is? This looks like the exact case that
+> > > > > > 5ffc1dcc26d3df9e2b192151936cb98014fb6e49 should have fixed. And=
+ locally,
+> > > > > > I see it being aligned, and then also just making a trival chan=
+ge (git
+> > > > > > tree is dirty) that used to lead to mis-alignment, retaining al=
+ignment.
 > > > > >
-> > > > > You might need to do some debugging yourself on this. Is that als=
-o where
-> > > > > __bss_end is? This looks like the exact case that
-> > > > > 5ffc1dcc26d3df9e2b192151936cb98014fb6e49 should have fixed. And l=
-ocally,
-> > > > > I see it being aligned, and then also just making a trival change=
- (git
-> > > > > tree is dirty) that used to lead to mis-alignment, retaining alig=
-nment.
+> > > > > I have a question I still don't understand.
+> > > > > The example you gave me is even earlier than
+> > > > > f4dfa5d3c2680322fd17fcc7c6221876e00a03c2.
+> > > > > But build on f4dfa5d3c2680322fd17fcc7c6221876e00a03c2 can boot no=
+rmally.
+> > > > > So what 431f1ce46bbffff0db8f03437a34400b11b30175 actually reverte=
+d and
+> > > > > could introduce this shift from first place.
+> > > > >
+> > > > > I really need this to clear out for me to debug the issue.
 > > > >
-> > > > I have a question I still don't understand.
-> > > > The example you gave me is even earlier than
-> > > > f4dfa5d3c2680322fd17fcc7c6221876e00a03c2.
-> > > > But build on f4dfa5d3c2680322fd17fcc7c6221876e00a03c2 can boot norm=
-ally.
-> > > > So what 431f1ce46bbffff0db8f03437a34400b11b30175 actually reverted =
-and
-> > > > could introduce this shift from first place.
-> > > >
-> > > > I really need this to clear out for me to debug the issue.
-> > >
-> > > You might need to build with V=3D1 and see what's being generated to =
-go in
-> > > to the binary file, and look at spl/u-boot-spl.map to see if things l=
-ike
-> > > __bss_end match. You need to ignore the 3 commits I reverted because
+> > > > You might need to build with V=3D1 and see what's being generated t=
+o go in
+> > > > to the binary file, and look at spl/u-boot-spl.map to see if things=
+ like
+> > > > __bss_end match. You need to ignore the 3 commits I reverted because
+>=20
+> For the __bss_end:
+>=20
+> Boot case:
+>=20
+> hexdump -Cv u-boot-spl.sfp | grep 'd0 0d fe ed'
+> 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed  |..pGo...pG..=
+=2E...|
+> 0000beb0  00 00 00 00 00 00 00 00  d0 0d fe ed 00 00 08 c8  |............=
+=2E...|
+>=20
+> arm-none-eabi-readelf -s spl/u-boot-spl  | grep __bss_end
+>   1196: ffffbeb8     0 NOTYPE  GLOBAL DEFAULT    6 __bss_end
+>=20
+> This makes sense to me because it matched.
+>=20
+> Fail boot cas:
+>=20
+> hexdump -Cv u-boot-spl_a.sfp | grep 'd0 0d fe ed'
+> 00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed  |..pGo...pG..=
+=2E...|
+> 0000beb0  00 00 00 00 00 00 00 00  00 00 00 00 d0 0d fe ed  |............=
+=2E...|
+>=20
+> arm-none-eabi-readelf -s spl/u-boot-spl  | grep __bss_end
+>   1196: ffffbeb8     0 NOTYPE  GLOBAL DEFAULT    6 __bss_end
 
-For the __bss_end:
+FWIW, I use: grep -E '__bss_(start|end)' spl/u-boot-spl.map
 
-Boot case:
+> So this is indeed broken as it now should be beb'C'?
 
-hexdump -Cv u-boot-spl.sfp | grep 'd0 0d fe ed'
-00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed  |..pGo...pG....=
-..|
-0000beb0  00 00 00 00 00 00 00 00  d0 0d fe ed 00 00 08 c8  |..............=
-..|
+It shouldn't be 'bebc' as that is not 8 byte aligned.
 
-arm-none-eabi-readelf -s spl/u-boot-spl  | grep __bss_end
-  1196: ffffbeb8     0 NOTYPE  GLOBAL DEFAULT    6 __bss_end
+> Where to change this may I ask?
 
-This makes sense to me because it matched.
+That's what I'm asking you to figure out. The __bss_end symbol is at
+beb8, which is aligned, but there's 4 extra bytes between where the dtb
+should be, and where it's being placed. I thought I had fixed that.
+Maybe the rule for -pad.bin in scripts/Makefile.xpl is getting something
+wrong (see the reverted commits for when I was investigating that) but
+maybe not.
 
-Fail boot cas:
+--=20
+Tom
 
-hexdump -Cv u-boot-spl_a.sfp | grep 'd0 0d fe ed'
-00001ba0  08 00 70 47 6f f0 12 00  70 47 00 bf d0 0d fe ed  |..pGo...pG....=
-..|
-0000beb0  00 00 00 00 00 00 00 00  00 00 00 00 d0 0d fe ed  |..............=
-..|
+--cMZvEHlu0ganLSHN
+Content-Type: application/pgp-signature; name="signature.asc"
 
-arm-none-eabi-readelf -s spl/u-boot-spl  | grep __bss_end
-  1196: ffffbeb8     0 NOTYPE  GLOBAL DEFAULT    6 __bss_end
+-----BEGIN PGP SIGNATURE-----
 
-So this is indeed broken as it now should be beb'C'?
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXuQMgAKCRAr4qD1Cr/k
+CkqQAP9+qwTvUB/CHYJk1fwusm1mvG24hNOaQygrZg6jNtqI9wEAhO2M80X5+ACG
+b8jXs+RybRPg8lE6vZkbFruZvavj6gY=
+=A1nE
+-----END PGP SIGNATURE-----
 
-Where to change this may I ask?
-
-Thanks,
-Brian
-
-
-> > > they were debug things that did not work. They change behavior becaus=
-e
-> > > they make changes in the linker scripts and so change alignments.
-> >
-> > Yes this is understood for debugging but even reverting and only buildi=
-ng at
-> > the reverted commit fails to boot properly this is what I am kept menti=
-oning.
-> >
-> > This is why I don't understand how could no code change can even shift =
-or
-> > change the build result this is not possible or I really missed hidden
-> > revert commit
-> > from the first place.
->
-> The state of the git tree can result in the version string changing and
-> so change the binary.
->
-> --
-> Tom
+--cMZvEHlu0ganLSHN--
