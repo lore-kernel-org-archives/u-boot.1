@@ -4,61 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E431FD73E87
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 19:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 140B3D73E84
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 19:32:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E24184082;
-	Thu, 29 Jan 2026 20:21:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6FBE584082;
+	Thu, 29 Jan 2026 20:32:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YgLsneuV";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kJfCDDCH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4773D8063E; Thu, 29 Jan 2026 20:21:42 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 69B43840A2; Thu, 29 Jan 2026 20:32:11 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 176838063E
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 20:21:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB74A84073
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 20:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C219860126;
- Thu, 29 Jan 2026 19:21:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD271C2BC87;
- Thu, 29 Jan 2026 19:21:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769714498;
- bh=tN9MIaIkXeZAC3q/Z/hBdJIAvkGhl2YK+fxSG1j6q7o=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=YgLsneuVcM4FO4uOXE49Jjh4qXFrOs4wsvB7gBSNVskpZ8nDUaR8GLznUJhd8x40g
- gnJsD0QPYmGjzLVOjDnmfPLb50KWexmI2lokVuTOAdT64wzicV8JgACYKX3d+SUr1R
- P6q4h9jTIs5f4g8Phi6SQyjgWn3WuBk+Li5PgAb3aX05wvIB9IOPTrT8+uxDADSpFo
- l2ey7bPYVc4wGFthiHhENhQS5YuOI5AfbnOXUBhVXKnaivqzFwYXaw5k8CVWTnTbwK
- aL5re6WR8Nq2WTMliMvR1UENNW7Euwnz7HHKKX7XBDbXCB0WOOwO7TiZeQYQ7NOs7S
- 8QIYNlaRpPqMQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Marek Vasut <marek.vasut@mailbox.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Cc: Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: Re: [PATCH 1/3] gunzip: Add ability to disable progress indicator
-In-Reply-To: <0af7fd1f-7f8b-4ef4-b8ba-9df260fb8f81@mailbox.org>
-References: <20260127235914.1503663-1-marek.vasut+renesas@mailbox.org>
- <87wm10mm0g.fsf@kernel.org>
- <0af7fd1f-7f8b-4ef4-b8ba-9df260fb8f81@mailbox.org>
-Date: Thu, 29 Jan 2026 20:21:35 +0100
-Message-ID: <87o6mcmdhc.fsf@kernel.org>
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d4a6=AD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1769715125;
+ bh=NTHr0Dt8StDQnvlp8X4xUehKQn55dWL7iwMpCkFcVI8=;
+ b=kJfCDDCHFXOLvAfYKDixrdC/y5JsKRrkn+3joUTx04YF/mpEFGz+GwwoI0EtPMOmuaodM1ce3
+ a1yO+SfVdKL3eJu8iuWH5+aRY8BuRsQ3qpumGHp2rcZwjKG4JLv+SlydLm62yOBCTtoX5xQGdFa
+ ALiELSRFVGBBpO9cbd+nZ2vi6im9kskRue7qxzS/S6d2AAUHUzAJOQbl/NGx3CxE3IsWl7/gbbF
+ EFD3IsJ+Eecat5XK6SkgO+6Kq0ORyTKgyDKmT9cG2sWD5fzscDq3OfrXK6nIJ2fgIHovaPctF2B
+ l8CKA1b/3XmspMdu4vm6+MENK3RAJMWDEPLAAaNpiG9Q==
+X-Forward-Email-ID: 697bb5af8bac728cb5318728
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.5.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3568: Include all addressable DRAM in memory map
+Date: Thu, 29 Jan 2026 19:31:50 +0000
+Message-ID: <20260129193153.2232395-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,37 +70,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 29, 2026 at 17:33, Marek Vasut <marek.vasut@mailbox.org> wrote:
+Rockchip RK356x supports up to 8 GiB DRAM, however U-Boot only includes
+the initial 4 GiB in its memory map, something that matches gd->ram_top
+and current expected memory available for use in U-Boot.
 
-> On 1/29/26 5:17 PM, Mattijs Korpershoek wrote:
->
-> Hi,
->
->> +++ b/lib/gunzip.c
->> @@ -8,6 +8,7 @@
->>   #include <command.h>
->>   #include <console.h>
->>   #include <div64.h>
->> +#include <env.h>
->>   #include <gzip.h>
->>   #include <image.h>
->>   #include <malloc.h>
->
-> This is part of
->
-> gunzip: Implement chunked decompression
->
-> so clearly I should move that part here already.
->
->> Maybe this should be included conditionally depending on the command
->> being enabled or not?
-> Why conditionally ?
+Add the remaining 4-8 GiB range to the memory map to more correctly
+describe available and addressable DRAM of RK356x. While at it also add
+the missing UL suffix to the PCIe address range for consistency.
 
-Tom seems to have chimed in already but code size was one of them.
-Other reason was that it seems weird to have library code (that should
-not have too many dependencies) depend on environment (which is
-optional).
-Especially if it's just for test cases.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/mach-rockchip/rk3568/rk3568.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-I see from the thread that this will be dropped for v2 so no longer need
-to debate about this :)
+diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+index c2b96902d2dd..2b1eafee37c9 100644
+--- a/arch/arm/mach-rockchip/rk3568/rk3568.c
++++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+@@ -72,9 +72,15 @@ static struct mm_region rk3568_mem_map[] = {
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+-		.virt = 0x300000000,
+-		.phys = 0x300000000,
+-		.size = 0x0c0c00000,
++		.virt = 0x100000000UL,
++		.phys = 0x100000000UL,
++		.size = 0x100000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		.virt = 0x300000000UL,
++		.phys = 0x300000000UL,
++		.size = 0x0c0c00000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-- 
+2.52.0
+
