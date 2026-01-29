@@ -4,103 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E28BD358F5
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 10:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C648D358F6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 10:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E930583CBD;
-	Thu, 29 Jan 2026 11:08:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 79A6B83CBD;
+	Thu, 29 Jan 2026 11:09:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mkK44O4Q";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="L841XZ+b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CD0E83DA9; Thu, 29 Jan 2026 11:08:26 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B92AF83E13; Thu, 29 Jan 2026 11:09:18 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CD2C83C8C
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 11:08:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2157B83C8C
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 11:09:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-59dd4bec4ecso877949e87.0
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 02:08:24 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769681303; cv=none;
- d=google.com; s=arc-20240605;
- b=VYOvPePaiACt/UNRfqiZzSbloQGWCaBvRTF0oTXElfLao2wi8zAIqDbm6FnLyYmdhJ
- T7j1GaKyoVwvzF+Da4UiusupplYE0eyfZ74wVQuiQrbopLJDYE0JY3LpHPpq2z8elfcG
- 6s3MXkdT5awCbA5LSIxPjVo6Wx1y1fU+LRrGTKETdFpQ6NwFQIhg5KXWD5ujtUCQyIRK
- O4Vm/1hANaeeA74YLncGz9ZsjEIF97H8SqN/xK9a4i4e6cl2GlVVF5LCPalqK1PU4ypX
- uAwKUHsZbpK+KJuzvGBgiES9D2OiepaP748pz9VgMw1V74BNRvkctzLrrnUSllZ/9y55
- 7U9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=7G98bJj4cnZ4aTkfzovmADg5lN7f6c6qrdEeETdygoQ=;
- fh=p6MXb22yGHjcOSAhxt9rqYfJ8/fMqraBxRauuqGAbTU=;
- b=T4NhB8BLoWnnmpI9mzBw8LZkMSHJ+r7M8b/IS8OC6KZLLe958efWxiN7mozS/AzFr2
- jbmy8EWM3vWc6zH8HVt+IvEZ21q3+emy/M166f8ZQaN8rSyJhfEdmriOQv3AYdL0yrX8
- JAZd26spKUyAwEjiYcoVojFiANaiAiKVf+XanMxGA9pPs3RqpgaE4QJUDW45Fh1kXI6q
- 7RAcoRWfXoFmGFlsYRJ4JWq1cv0CnHMSuf/VmWVU2puwGMTgVFgo9i9J1oFa0mVo+Hac
- FRdirJU3nVyrE0fK18b/XfdvUrrV15X66kz5uwi4GSnTIGQ5og0yLDcBktQF+6VIPkaC
- VYpg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769681303; x=1770286103; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7G98bJj4cnZ4aTkfzovmADg5lN7f6c6qrdEeETdygoQ=;
- b=mkK44O4QnJvras/LhLsJbPvAb2a1Py4d/eyzBJyzEc2pkXFr6CFi1Wy/+hsBgiMcJ8
- FWGPNbyz+lXwAk9QF5kW0PqHHx4u2fDW0FczO+ycPhVqr12NtaTvpD3eYkJ0B1dOJukD
- vHiyJvgANby4ftaZu1xDEVmSa3PBy+HgfNU48EaxcRX6IIJLK63lco2bDrqoiKzKK1LM
- 5fZY88nJrtpvEgQ31B355/KInwZ7bAl9EinNg1zkKagUMNSXzTdEsf2KwMW93uO59ioP
- hP3LuC1PBHTCtozyPAb4DkVNsOBgHPUCQNHmPV9rfnLhqIwnsq8zMgeSrLqJjyPdD3jE
- Vs0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769681303; x=1770286103;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=7G98bJj4cnZ4aTkfzovmADg5lN7f6c6qrdEeETdygoQ=;
- b=VetTh3bb4zNobm0QhaTw0HJ4fmYNI79/DuJCzfMxhCNfazZnXDIRgr+s+wEsFS2YV8
- yybRkzNhgT2KqXvglg+cfP+qTu+ETD/Vc6rLaJhP10W0t21owkIjwMYq8K86AHFtv5HJ
- sUiKLByte/ezIHX52xzAYgf2Tw3At7B/ziW4Yq3R4Z1WBsNTpPFog8ZQPMrF/5sYspDN
- 7uIbOOCYhecq2kVuGZ2vOzJUxpBT1euxSm9IZPOp5R4mDvaLiQBHJ5gEcNj/gMSlHSmH
- u5tAGt70tHbqr8CvR0PeFv2gJwukWoKRVo2a3eRcAxgRkQSZLf6lm09uxu86r70mnMcC
- ujJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxikqq/BNYDuYE3KwTx8sHwZbD4TvEAw5kVsx5FrfVb+ppNZ1BhJ/5AL6u7ivVbs3AnQl3mQY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyIdEVFT3WMRW15BoblLHNZfkWI2WjMLzsNus2bWlG9Hhrw8jRF
- e9tNGzGvMZMlL8F51Tb4WCWKTHrVFwen2DhCn8fIcVySEPAA59oJSpcAdALYG2r2yBxbQKubRvZ
- YVgAAaX9S4XdI71rsK93FT1vPS1FTr70=
-X-Gm-Gg: AZuq6aL9RtWzNKbn3UhGP0J5G8gKYBsd/QQd8SGrW/6xvLY+1JuFb+MsDR6sMrLbi95
- 6kHL3CuhIesqeCh7WPeqFCutpNokhP+YYqeDDUUVuUnxvDQQFhn4cBopWFFzwkdaieli+6ELfyn
- /WZCseZMIMon1X45SdaznHWCEE0aa14vyYtgm9peNDQ1NVyOhULLtYV6CNZTkQ78+ZEDVVfLiqC
- c+6bsYyu7jVTLnAsyPekKBuExYF57WQsfCRrZ5DfKCdx6vvBY7oV+hlPWzGVW+YwIY9tZgkLDJb
- tMV+QBRxYgn3REJ/V0UcYXKR5Vg=
-X-Received: by 2002:a05:6512:a8a:b0:598:853e:4866 with SMTP id
- 2adb3069b0e04-59e04035474mr3625805e87.51.1769681303027; Thu, 29 Jan 2026
- 02:08:23 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 067426001A;
+ Thu, 29 Jan 2026 10:09:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F2B8C4CEF7;
+ Thu, 29 Jan 2026 10:09:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1769681354;
+ bh=U9dmP6ErwteGxYzDrHoQwqCL91iisX7YuvDSe/NGojQ=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=L841XZ+b1XydW90CptySE96hzsnjeJtrS5oBMN/nmMnsTdkpK1wb1o1owgnZ6wWbl
+ OzrQKRvIGS3yNxUAKaptIrcJseqO4Wa+7nPnHYEcdi3RHZX1QQySLLupi7+fKp5Iv/
+ SePnczHBSuJn8+lDP93EZbt/2jFU2x/om19nEOsXuQpEglzvEtFlj1EMCg9zm6RVr1
+ 2GJ9l2Z75JwaoAhDohaNEDX3FPW0q0lSnjt9MwfT54JDSE2RNQrCyeQn+NmJ5X205R
+ 9ZonxaEYYOJ9w802GDMj8JsXnzs42d0KmgIySAS0VrF5VRsc7RC3LmE5ZXlgFgLjoq
+ cAenweYEU1ESA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Heiko Schocher <hs@nabladev.com>, U-Boot Mailing List
+ <u-boot@lists.denx.de>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>, Dmitrii Merkurev
+ <dimorinny@google.com>, Fabio Estevam <festevam@gmail.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, Stefano
+ Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 0/2] fastboot: mmc: fix bootloader offset
+In-Reply-To: <e7917bc9-11b1-18d0-1f04-9d6af003c1cd@nabladev.com>
+References: <20260124054712.7939-1-hs@nabladev.com> <87y0lkogbt.fsf@kernel.org>
+ <e7917bc9-11b1-18d0-1f04-9d6af003c1cd@nabladev.com>
+Date: Thu, 29 Jan 2026 11:09:12 +0100
+Message-ID: <875x8kohmf.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20260129-imx95-rproc-v1-0-035b2dbf3e57@nxp.com>
- <20260129-imx95-rproc-v1-3-035b2dbf3e57@nxp.com>
-In-Reply-To: <20260129-imx95-rproc-v1-3-035b2dbf3e57@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 29 Jan 2026 07:08:11 -0300
-X-Gm-Features: AZwV_Qhn4ltUOLEQKi1_pyE-G6YttadpeGjZIFPaqr2_IEXZhsgLxhyDWVE1pfc
-Message-ID: <CAOMZO5A0WEQTwCFOUS=Q7Re5=CPYgNMdX2LcJxM7D9NbOdB_Rw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] arm: dts: imx95: Add cm7 node
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,19 +73,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+On Mon, Jan 26, 2026 at 16:46, Heiko Schocher <hs@nabladev.com> wrote:
 
-On Thu, Jan 29, 2026 at 6:10=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+> Hello Mattijs,
 >
-> From: Peng Fan <peng.fan@nxp.com>
+> On 26.01.26 10:48, Mattijs Korpershoek wrote:
+>> Hi Heiko,
+>>=20
+>> Thank you for the patch.
 >
-> Add i.MX95 CM7 node for remoteproc usage.
+> You are welcome!
+>
+>>=20
+>> On Sat, Jan 24, 2026 at 06:47, Heiko Schocher <hs@nabladev.com> wrote:
+>>=20
+>>> Not for all SoCs the bootloader start at offset 0x0,
+>>> in a hardware partition of an emmc. So we need the possibility to
+>>> set the correct offset, where bootloader starts.
+>>>
+>>> Example:
+>>>
+>>> imx8qxp revision C0 emmc Partition layout
+>>>
+>>> | eMMC block / partition | Offset     | Size  | Purpose                =
+        |
+>>> | ---------------------- | ---------- | ----- | -----------------------=
+------- |
+>>> | /dev/mmcblk0boot0      | 0x0        | 2MB   | imx-boot-container A   =
+        |
+>>> |                        | 0x00220000 | 128kB | secure boot signature r=
+ootfs A |
+>>> | /dev/mmcblk0boot1      | 0x0        | 2MB   | imx-boot-container B   =
+        |
+>>> |                        | 0x00200000 | 8kB   | U-Boot env 0           =
+        |
+>>> |                        | 0x00202000 | 8kB   | U-Boot env 1           =
+        |
+>>> |                        | 0x00220000 | 128kB | secure boot signature r=
+ootfs B |
+>>>
+>>> imx8qxp rev B0 emmc Partition layout
+>>>
+>>> | eMMC block / partition | Offset     | Size  | Purpose                =
+        |
+>>> | ---------------------- | ---------- | ----- | -----------------------=
+------- |
+>>> | /dev/mmcblk0boot0      | 0x00008000 | 2MB   | imx-boot-container A   =
+        |
+>>> |                        | 0x00220000 | 128kB | secure boot signature r=
+ootfs A |
+>>> | /dev/mmcblk0boot1      | 0x0        | 8kB   | U-Boot env 0           =
+        |
+>>> |                        | 0x00002000 | 8kB   | U-Boot env 1           =
+        |
+>>> |                        | 0x00008000 | 2MB   | imx-boot-container B   =
+        |
+>>>
+>>=20
+>> Why can't we use raw partition descriptors for this?
+>>=20
+>> See:
+>> https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-de=
+scriptors
+>
+> Thanks for this hint!
+>
+> Possible yes ( I must try)... but this will lead in adding
+> complexity to scripts people use all over there and needs
+> to adapt CI setups, as siemens has B0 and C0 variants.
 
-Please explain in the commit message why this is being added to
-u-boot.dtsi for now.
+If you try, please let me know.
 
-Also, as part of this series, please add a new patch that adds an
-i.MX95 entry to doc/board/nxp/rproc.rst.
+Do the same boards (as in U-Boot board definition) have multiple SoC
+variants (B0 and C0) ?
+
+In that case I understand it's a pain to add more script complexity.
+
+>
+> If we introduce this series, user has nothing to know about
+> offsets for different CPU modules as no change in API for
+> them...
+
+I understand, and I do like this approach as well. I just don't like
+having 2 code paths/approaches for the "same thing".
+
+I am not saying that this is a NAK, but i'd like to iterate a bit to see
+if we can either deprecated raw partition descriptors (and migrate
+existing boards) or use that everywhere.
+
+I will try to use this series on VIM3 to see how it behaves. It will
+take some time though.
 
 Thanks
+Mattijs
+
+>
+> bye,
+> Heiko
+> --=20
+> Nabla Software Engineering
+> HRB 40522 Augsburg
+> Phone: +49 821 45592596
+> E-Mail: office@nabladev.com
+> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
