@@ -4,147 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197FBD358F7
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 10:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E09D358F7
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 10:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6C383F59;
+	by phobos.denx.de (Postfix) with ESMTP id E12F283F95;
 	Thu, 29 Jan 2026 11:54:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="B7meBOm4";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="jcE5zqo9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ED1A83F20; Thu, 29 Jan 2026 11:54:43 +0100 (CET)
+ id 515D983F59; Thu, 29 Jan 2026 11:54:44 +0100 (CET)
 Received: from AS8PR04CU009.outbound.protection.outlook.com
  (mail-westeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D0F683B43
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 11:54:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5640F83F26
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 11:54:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Oip3lNZ41DH/sVM34a1I6XwbrBgAnA/ykZlEgvJwjApL/NeVyZQIXkDQefgydmtuut3dAegXU6x4Li2cMGd7t/tthjPLlkI8S94uChjNgUXzUzeaRTchBsMdj1MhHToHt7WFXuhRO3euT/0N4bJAXtzO13FJYCAYBHHY9cPxqZiUpujM6VKMnu1gtEhPbM9OxBKBBkmLI5IM8TjV0r6yVUKi4MPAJwrhSnlxZoC4ZVJjgC/9jVjaAbbcBMKwCW/5zA+KZfWWo7UEiLW+kUYSLaiYIHfsQkhSsWh0XVb/EWso78Cdt1lGGNFUqL7RYWC5MAH4l+pZRFAz3VboV8VSlg==
+ b=T4sRsRrZ7Lfsgcj9iH3u/4vNDju4tt7lRr/cl+M5OGIJsY7up8tcomkDvCurt/lQuO5Fan8uE1X5+pW3lBaw4nX0I5Iv8NjKPNQgYCgH2CNiLL90Q6lR06CG3fega8AOtgG+UMNScfJkGGReiC7ZGGM9J1Z3XQ2j/HEE4ebaxSKQBFFTjSSZBmAdGYTL9wAKuzrcLTfjxiy3Eao9RsEsm+R8FzYGXuDmkTLu7GPCP0u+y/s4E/5d/JeyZRS3qZWOrkexYITEhu4YQ6UdsRImdAzn6rlPQ1LN447ZHZWAZ2a2GsPMydnok3+T3SQdK6oqYj8HfB2WxEfElZHzyMq7aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IOv2foZYBsk4O/M2uyHEn7920xr1j4sKvRepf/qcGtg=;
- b=r5aPNbuFJ9ysjKCo0Bil1hJ2jU4yNCZ+QMiUa6T2Ubdpnhut7Oorcaif1y+wVrw+Qh0cZ8TeIyVuQkfKq4i3txcHc/NGGOmyu3s9aBXL+b7avLZ7qVAOxuMgpLxWwVx2a00ZqRqbUSymqNCJ57ko7T3QT/YE+n3SY+yxt1ZYZpfd+hCcNOk0JU/tmMZU0ad+Kuj7+PGYmsPMnyGgUavrLLKyMkXgrgr3oJ24bgcGOOjIagcbWvHB4ALxSgCb2YjpL7IBD37J/hUC7RE6W2D/wnidTkOv3qkwBEhl5piZaxxta6HZBuQOT64/nHodaKGxjogqRh2gA6xA9nPAMuKaRg==
+ bh=9HzsOPqefwP/T7NH14Z90wjwhmpoBtR7OnQk7zD1Tqs=;
+ b=fHXTnBmigv8pR7XHrzLip+g/teGTKb2Q+8acIRL2WeVzid+KbP4bzyaN4+YL/edv5j9aDlEHHqhF6oliL+/VgAa2gqGiBx/eVEdrCS+TjTABYV2Up78lfplbkHBWiRPik0faMrgZ0yhAsNRmBLxjBRwNyvWWxpQYiUK9S87ibHEgn9H/zAoOw5n8PyeyhDbY8S4daXKwcLluiCAyFJL/LfxMByeE3IHIFbnU8WWAoipY0KyJ6kn3xxkAwJzgRamUd4cT6g0qaPEh5KQr2+WdOiXAFVNEfZXj1ietrjP4syZ8TZnIxqg4n5+F1rW+XX/8FU5So8KbVV+rDj9ujmBmKA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IOv2foZYBsk4O/M2uyHEn7920xr1j4sKvRepf/qcGtg=;
- b=B7meBOm4Kn/imOzshYfjKSZnSp+cYYeQ3P1c15pyK/CD02pXKuqxawf+UPIlm/Xn6KighHwjSfzo/v8+7wqf71JtdQ5pOR52Bud4xdd1tFWjAc78hyYoV/ST/hQuLvmLcbt7ooYNi8a8xkqgo+b0bioBfiasqkRgzgSr37pi3I8=
+ bh=9HzsOPqefwP/T7NH14Z90wjwhmpoBtR7OnQk7zD1Tqs=;
+ b=jcE5zqo9cdT27+c/LTCwC3MrL/oS+f+iXlSU1/sq3hqQvhpzRUJ8sKyYg/zMs6ihNtYR2uRr44tBz27bi8nGTWlJnd3xsBDxLvki6sIQ75K4lKDF+lov9FcD1X6MR6ooNyB7ZPuKc13uAt5HrfcmIHHidvojqWxv7fvhsFTX9XE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by AS1PR10MB7936.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:471::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Thu, 29 Jan
- 2026 10:54:37 +0000
+ 2026 10:54:38 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9564.006; Thu, 29 Jan 2026
- 10:54:37 +0000
+ 10:54:38 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 0/2] am335x: failsafe bootloader update
-Date: Thu, 29 Jan 2026 11:54:31 +0100
-Message-ID: <20260129105433.2624686-1-ravi@prevas.dk>
+Subject: [PATCH v2 1/2] am335x: add support for loading u-boot from multiple
+ offsets
+Date: Thu, 29 Jan 2026 11:54:32 +0100
+Message-ID: <20260129105433.2624686-2-ravi@prevas.dk>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260129105433.2624686-1-ravi@prevas.dk>
+References: <20260129105433.2624686-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: CPCP307CA0001.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::11)
- To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+X-ClientProxiedBy: CPCP307CA0010.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::9)
+ To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS1PR10MB7936:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1c4e05f2-1eab-4bf4-291d-08de5f24cb8c
+X-MS-Office365-Filtering-Correlation-Id: e38abda6-12a2-4159-e054-08de5f24cc4d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GvpjrlujjxUBYvipgod8rwoy2EZEGPhMXy3n50x5jzgAMFB5iqfSTWU+dtaq?=
- =?us-ascii?Q?z0GmBOBnp1Ob/81yRyQuAcFuu9n4WMMzu8Rcf2/iBkWcMVGfCT0pjkgEGAih?=
- =?us-ascii?Q?p6DmOm9KHmxU9uixZTgJQoSTnBTzIo/9jIjBuNLR7aiweaup3rc6tS+JEQHt?=
- =?us-ascii?Q?13aYZvFf49WvRSnyVVrBkvlaccqd2peS98ptEXogmxLbJvZVIj3ys0ocgQP6?=
- =?us-ascii?Q?62Z2Dzmr6GT0g2R++EIA8l0E5s+yQbAA3yrArfpvshskDb3cqVbT2Qpd2DJ9?=
- =?us-ascii?Q?QKRSRLIeRz5mODykV66/1iWOB/KmtI8iSRRlzH2Za0PoiDPgLKlbjO9Eva4B?=
- =?us-ascii?Q?VnMUVFTMoIdDiIMh4oysC3Bt8FYMDv35dFC5QWFGP0C1+r8jrXEduXwy4rlL?=
- =?us-ascii?Q?dcLHs+RDmjDxWwWO67UtDwIKVWn8TMPNElAyWnpnmQ+w8KKfe3xCre1v1G5z?=
- =?us-ascii?Q?gqmC+j2b9a+Ut1U51aULbkHlCkWix0KI5iqrdGvwMh14ayF9NYM5Xr10vA3c?=
- =?us-ascii?Q?yqRqemAJLZo8oII1xLVQGk+rQU7aolcq8MHtS0LUSvw96h44QmKQUG1fdYMt?=
- =?us-ascii?Q?mdgNUKHMcaqgHiT6GyE0id9kelMDXZ1JRcmgPytOByOpBOpfeUZtuF9AcSKV?=
- =?us-ascii?Q?uj+ykjfa2JOCm+N+yL8v6btmF0IS+VxUE3s4E1gA8L5uszNeCM0f9CZEZc3u?=
- =?us-ascii?Q?LoCvbfYljaX7hNu320T+CrMsPdyp1EvjnA5WtfFOWKusoXsJeH5oJCHl/Cap?=
- =?us-ascii?Q?ff/qRtEQKfB93YimC0sMaRGiEZcesY6QQ8jnh5elZ+RFcJy4ywQfu5u+MN9j?=
- =?us-ascii?Q?7sz08WyXZ3Zbp7cdsdm3CveJHU7qHsnT7sPoJnH+IffTZBiMiomOa89a5IG5?=
- =?us-ascii?Q?/nKRlvOQ2OCl8mvpldFztXVDxdZpxpC2nnjAKgqAbUuxoqeMDQLKw0dJ7XP4?=
- =?us-ascii?Q?Yvp0UVn82F9ctTDoi6lnYrzdfYpqvYYFpIq6/dh2kZrUQD1isqaPITVeKUcS?=
- =?us-ascii?Q?xv0XfMgJB7fs6IfNmgwASAb3YITqaD5120uOS0vRQnVgso3ak7065UihULkj?=
- =?us-ascii?Q?gGJZNilJoi7qvBeiVmxfykpUK45BUpCBlFkw5ryuGlqlikrU4mTevS/u0H2/?=
- =?us-ascii?Q?RNR3iI7ry0BGWhPftAvLgc/zOem9isN02hEmd1xZgvr8QNKUrrA2hRyszo6k?=
- =?us-ascii?Q?PHBrNmB0ZEYPzhhnIKA+TKATYv6cEIEa9fajvR25s8wpklFqhARKEf6WIxQO?=
- =?us-ascii?Q?l0Gpsu0j/kM69WE4uhvko1LufwE4VGBr1/D6ByhJMKW+560AcsOCD39/u0c8?=
- =?us-ascii?Q?yS1Lhp37SoF90+NUeo5tO03errY2XNLwqc9V5YFDA768V0t3Kk/JDKKHUqY9?=
- =?us-ascii?Q?rdH2NWbQcmieJVefOBhLP51iWCF1phBOlWtIotqv9eonBa8mWodz+hAehPT5?=
- =?us-ascii?Q?4ebZvPfEPG6ptXBZFy6ilCpUz5ZkZWeGz0ym0GD7FFQr3K4QiKciiTK48LRC?=
- =?us-ascii?Q?ii+lApsmc82RCPDt//xJXGHXuwGJKrKZzkVzXhdX0+tQerd17rgKA3m67l6M?=
- =?us-ascii?Q?KjntN5t0zPVqQRDy3r9j8RRVJTKtnI1zYeirSnHESfHuzAlVmh9HoRukltYk?=
- =?us-ascii?Q?pC+WnWlwHEdmdHifd6ub4aY=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bbFQGQ0pcnyij6t10sYT5pv8SVbcBYFx1i6+g+21KgmSXE3QncF44Jaf5QZP?=
+ =?us-ascii?Q?hnFrwqsofXZfkUqEWE2Ackv1PMSVa/4lgAEujKElL3sLuWHvdQRwh7689vI1?=
+ =?us-ascii?Q?DpT7PigqIDF9HGA3hXoEYhe9vBr2+TVGD4OzQDaGvxpn2O2YbidLsT8yAAL+?=
+ =?us-ascii?Q?etVfBs3JiFHhOcKsJ2tKquCBF7piZqDK7wq7whdLFRIVwgkrdtL47N0sGX+n?=
+ =?us-ascii?Q?eOxWfC/USJtn9pzdHhd+5eKCJkH3XilCDOPZBAdtqUgZ02JVZiV3EyvL9yqq?=
+ =?us-ascii?Q?FkuuhDIBAQ7P95eQxrLnDjEFMwRtW6KUilTM7/qyzpINLHETeWP0cPntKHSK?=
+ =?us-ascii?Q?c5B0FY52YMzF5AbWOLM6VXot3FzlcpCa6tGytdrVCryz2zq74bIM+Jy3q9Fo?=
+ =?us-ascii?Q?yuYkVsL0KKstpqpmv2m8UixtxEizpeQKglvdclOQowMsaxF/fDqiR90GzH1b?=
+ =?us-ascii?Q?ZA4ghcWHVpqiNnoEutWGTVRxIAQJm5HD2txCcnGN8l3zep5KIx0Pz8sXDyA5?=
+ =?us-ascii?Q?ds3ar/vR+JxUKbPaqmDt7eby+HBIC87xI87REL2c/cbOp2rzD6swo17gMM+y?=
+ =?us-ascii?Q?KcLGl9c5v22+k1WLcBhYpA8MtkXdy2gKUX8yr0JReaMwRFbSyEOxNtwmuaBo?=
+ =?us-ascii?Q?HD0EopmwfKaFXKJkYFzYroYywBpveldyVsayQemXXLw/cnZUqtpNi4bR+k/o?=
+ =?us-ascii?Q?dLxJxoQTfcMZ0fJKG3GqTCtjJqRZZBPj+i8ff6MJRAPZuXbPAeyp9L6xxlEt?=
+ =?us-ascii?Q?MMTWpzELiAtN2rX2pcJ8iAYGQlKWF6UucmAZsZHkrNn7mg/zrS4SKs2CEgIx?=
+ =?us-ascii?Q?FXYctU6K2DIzoF7Q2vKjz1w2aUpWk9P7eMn1UBYE6tilCe0/DSMD0Xp1qaBD?=
+ =?us-ascii?Q?xFe7EB+XKxAQpgAseAXJtubJBZEO9nP42E5O8urJwc3/QEAsrbXokwpxfZfS?=
+ =?us-ascii?Q?zkd8bZvfiHVIyaVqq5EHSfJUQnCb9leN5oapj+KiF8jfIA/p1yTpSLN7g1+L?=
+ =?us-ascii?Q?PSCdkJpdLnyH4laccZ0/XzWkGDqAY0fiSKcW4/xxv7mFdPW3mvIhDIZFD4FY?=
+ =?us-ascii?Q?9L0tMZiqybEepREGV7Dr5h0OnNfBWN0TiYzgHNc++maWm1J2Mg0h4Zxm3zjo?=
+ =?us-ascii?Q?HoFXanU9LWZI6rTvUh4l1FzKgfs+4CgS4n9NmdNZRUakzuzlG8L7HMcnNctY?=
+ =?us-ascii?Q?q+AivwITqL70xJ69QVKKBrHQLXswd/fBvINTZukw25nbaVWZeWhMtPICgcZG?=
+ =?us-ascii?Q?3KhgyCsSztZ5cqpv0r59688tpTaPomioz11e732MBHIKPoj23qne46Yb4xU/?=
+ =?us-ascii?Q?wYOAmAk3kETQJCFPVAhFgfqf7tvNtaGxfNl1X/KFL17PX5XV+M34AzhfyL0a?=
+ =?us-ascii?Q?4FySdLS5nqbtE4N4DKg93hxCfOgnXBEfpkGS70fPLb4YY4A44Av7lxFKraJy?=
+ =?us-ascii?Q?PpCJDJ1zG/R1rzyED4lruYKIw3ZR8DLlYn2eFDzXoHr6IW8ZfqzHgUpIpHhi?=
+ =?us-ascii?Q?pFRa48JNC4orNalrpolqTJL6pgydk+Zo+Wur0yI+SOozk9VtC6cceaKnHc28?=
+ =?us-ascii?Q?POHzRt0pVDiVq8IPra50gA5kE0IeFCF4U02/UHsCXKXW5WrClqhIVRtEmIt/?=
+ =?us-ascii?Q?xBxuX1t8aEvvSQCIYdAe4nQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iRb6DrJkV89a9kbIyVVdZXlA8oJzqGLkCKJRSXSJ6z9juVgWuwBv6AdO3FlK?=
- =?us-ascii?Q?9WnagtX8ssQOgoIffEPLu7kGd8AslUWzYgaCAMwKpXZOhtEi5le6NindsEiP?=
- =?us-ascii?Q?l4fUNbsnuCOEAcuVMdPpk795CHbbBnFEnJ5K0atafyFMz9yd8MltAy7tCm/d?=
- =?us-ascii?Q?MZUxsm0P44DtUBG4f7ihPlOqGa3Z1Zk+FFT2FJS+kRXkNrnSd2tuSM/w277f?=
- =?us-ascii?Q?Gv0nejpEpgs/U0oka8G9lCYX1Uf3qA0JyAdexaojxlVBQoEV0MK9PiefqSth?=
- =?us-ascii?Q?i3OyMcl9Zu9bzXk22RfjvYL0HqKO7Kp5hj6Vji8RJlkzIGPkafJ1SJwkrF3t?=
- =?us-ascii?Q?JS3bVNIbQMKM+8jctMvSEXsxzrMEgsA1q7lyXwxr5SDc6/ldgVXa1P5NXnSE?=
- =?us-ascii?Q?Evwl09sRyQbO6GHsmRakRhVccFT+R8ecxq9W3VJt9w1EU0wmJauM6cApGYM3?=
- =?us-ascii?Q?cPnEjPiGe92QGQv8InG3lK/qPIGwXd5Lxdw0tsIMEzF16+EPilBvv/2QXx7S?=
- =?us-ascii?Q?8Ua70AcI6JBmREsvbs7lj2wddp2srB88sX80h2cgzB5RFF0dZl8AEd07+Jwv?=
- =?us-ascii?Q?MXI5jErfwUGFJNNnYxH/H2zUBVvzYy8HulQBQnPdak1s1XKVg7wXP3VIXbo7?=
- =?us-ascii?Q?z3Efigzh4lTMoos1Dt/y+mYSN2wfXfvw9BlFbDC7sJXxIG1E789lX4tIa8og?=
- =?us-ascii?Q?0q/i9zNXhMht/CzAGFZBZ7eepHsrCufV/DmjN6SeBEwUrUy6Jonqvdyhi2FJ?=
- =?us-ascii?Q?hAPfcSYnV+VE4yMiQBAnrgfOKkv96Wp6ISF1+BxmW7vqn0usUutTpX0wfPSg?=
- =?us-ascii?Q?tRGM4ZDvfxri7VBV9AONQyHgmKBIPRkmv/BTI2rxD6E9uJBkBihewf8B4kd5?=
- =?us-ascii?Q?wpTAjk8ogFFN95EawIQPNZ+NxrIEWkIJUn87ZZDeBDNALbX10eUO7zIdyhQT?=
- =?us-ascii?Q?adwZ2DIIECHq07qb4TQ6gxvr5sbLigHDw0kU36z8bm4mNfSZKNs6NNWFbyFI?=
- =?us-ascii?Q?Ry0wdSeslZDzeX3W+ZJRrmGFw7ZQUIVWOE606udrsNTXtjVtaLSf4hPEwRFO?=
- =?us-ascii?Q?o0Pwu6uCj5NAtBJW6GYytS4JdQMQHa2xD5/c3PNF951RJtTSiMLKzj6ubbwc?=
- =?us-ascii?Q?ok9M/cMRoQO+q1dvWsOWRw2u5YBJHYmE+ce5hwxVF18sF0fbsS2svd8OLZq2?=
- =?us-ascii?Q?oCIGrFoGQPN0Fq9dGmvzbtbyVNdACXS6YUrOHon22Zto2bvc3yh6IIISU8bl?=
- =?us-ascii?Q?MgiWR/9dhNpqlECUSmAjFzSqP1BbNnoPxrGV2GMcczGndmXHcHdhc6OFRmV9?=
- =?us-ascii?Q?eLtJ8b1+l7UmrNVemqcgFHgNHHGlX0fHLCvRBafERu1DrQYyLCeEU/rhKR3P?=
- =?us-ascii?Q?836sAu6ytVneLCeuzquTG1f7gSK/NDW7kfdlsZAKX9OLNdMF+6INLuweO7/d?=
- =?us-ascii?Q?5nIa3pzdw0DaLW7EvhjgcQByOvSbIBVjVtHSoS3kwIDZE2G5ptG8N8XZyZS0?=
- =?us-ascii?Q?hMzQvkY9zGGhbkBxXR4sdfAGuN/dqEn2ZOnvzFZlLb+rKwOUrLVFKDUkUrKz?=
- =?us-ascii?Q?/zwIXHdqaPvvCgUlZML9mzvaM3qevW5dHoLBy6xzYIdTnUhZNKv72/gQFXjj?=
- =?us-ascii?Q?1VotLpdY4GluLMGQGrrvRQIEmRESgeMNAqI4nCvY8M7ndcLKD7m/JEitRZNa?=
- =?us-ascii?Q?Zh8M/83m477qjzTTutYSVVzG7OI83VAHXnArHgkg4S21NwHUBvv69EEsVXHK?=
- =?us-ascii?Q?UF1PiL7MAuztqcVQQSdKsooY4jCAkaA=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gEF5UqglgVz0ZmySJm7HFuQJ5QfkozmQ+1yUWb6j4Z7hENUlPtA7rmH9tjsy?=
+ =?us-ascii?Q?k17v2GXqfLc13bs47WATWa3TdYMQAekHJDmcncFIwIBPQ6LgxTaD7UFe8oRd?=
+ =?us-ascii?Q?4QJawmIhsmXlKNsPC0hArzkz31X4Z9HoV3fnTsAjXLgS9GxUM3i3x26kQsRr?=
+ =?us-ascii?Q?ZqyIOmSV98002YE/hBBR2hYu+YJGWPtim82YuGe0QUfk0meXfU+gFg1C3mya?=
+ =?us-ascii?Q?Bjyyo+abCPuAkxQ05Q59oD7Om6+wGIaYbxeVNSsEXjHYv47qtVTBb8gakWVj?=
+ =?us-ascii?Q?Y/YmhSUPPT20l9JjKTbkSwPz/KGYYfgX0v1fLnsvnFsj5fissRTgg8czyQ8p?=
+ =?us-ascii?Q?FNN5nnKwK+0O6r4YhQR9T8l77j7+20o3qClFQIPAjDbCzT1pb0Tm2njLHmlL?=
+ =?us-ascii?Q?cJp7Ob+mX/CKwDL84OmwtdDSysrc5NnncBX1tg5BrURfzdeQd3R6CYQCFtlS?=
+ =?us-ascii?Q?zLC+5CcJhkEqiwguYv/SZ6BEL20uTvWqef1zvQyO/HWbba6b3pUyXfYsGfVM?=
+ =?us-ascii?Q?KfP0P9TsX9ofFLtry75/BROmXj1FwW/rD4GHk4ZYRORnK975bhq65xmVa6RE?=
+ =?us-ascii?Q?vlxiq0N154q8uygmJ4JCIrkVwiu67TTmg4cnxBje4w+ZhR9hLIxKTq62TtqC?=
+ =?us-ascii?Q?3iqDLMzSVSZUFj8rRsH8b8yE7DrwlWU6sKOzX5TusBJhjtatJlfwKPZ9KTef?=
+ =?us-ascii?Q?h2UL+JzsrcnBSpGOcUlU9UtCMrs4MA4XrilyWJRE6IPRRyuI9QNTwmwB2oaz?=
+ =?us-ascii?Q?85Wcvgrw09pfO+CMyEzBtzGWVyDp5awpsTN0orrmRxlE4VH3KvA/1z5xlOWC?=
+ =?us-ascii?Q?R0bPtakSiSt4HbTw0+ZkOFmtl0TNzMFuuondqLPYjm2vKY0Nxp3YEAa9r31T?=
+ =?us-ascii?Q?ngrEsp8Xf2M0x4hz5xttGOfahBrQOzyhnyqE62P91t42emQnzvJwZlDGPC8c?=
+ =?us-ascii?Q?uJO6ClDJozItU+FzvoP1iRHw2+3rUZEXTokmiQtjm34xTvQFEE5zXP8tVryh?=
+ =?us-ascii?Q?Kxg3KVi5I9OuodHkQ2+rpPCoEBP7fzqlXaEKodBZ7vuLeaNWJhEWTgj5XdtF?=
+ =?us-ascii?Q?yEXCzA8yenMbgcLk5iDVfnqGb6264hIF4bRBVjiQAFH/ET30fG/Ua4rqr+jy?=
+ =?us-ascii?Q?GGVfWrvH3snwPr74YSbBvXwHUZD4tK1bOEx2VoIDpexlJXC5MndWB7EXcmnB?=
+ =?us-ascii?Q?G6nZRdIXu5jF/9ZK++HvEQth27Da1KSYZofNJ6l7zfl74SDHvQiEn0ySYrpZ?=
+ =?us-ascii?Q?ZMIHuVu8Q6J6pDZvHTfAdvoPGGqHhBxjIuRVLYfDkcdfRGct3a9iwEhyWCVd?=
+ =?us-ascii?Q?tpFRXYirI9y+VQg0CK8zNsWn1YLF7RQP/v+YsLlQck9mFZIcSiv8pwmJh57t?=
+ =?us-ascii?Q?7vafDgQ/fN2xTXdBZSsjPxN3tzaX7Xkhj5IhGorD6LcB4ilwEtAHDfu/81OP?=
+ =?us-ascii?Q?2MebPIRkUhBa5vyLsxK1qYVzmvHX2FdJWRw+ofpOGsmgLPhW7oMGz1lXW7sF?=
+ =?us-ascii?Q?XkT3ZI+xe8ZGV+9YsS9izchM4YlzSuqDn7BYjs0/B3xLn9HPxupijv2LhlYA?=
+ =?us-ascii?Q?5rloGOCTvhMCtOWtiVQeYoqBcEsccLQcb3l90dnv1G58v+OKAcVL8qvmBJ5K?=
+ =?us-ascii?Q?kIgWYDBfosyZgTs2sw+hkmP0X3Z+PlLbjQNb3wIQrT/8ozMqPoRB5ACeJMux?=
+ =?us-ascii?Q?E4WZ+1Wt/+2r8NTvcOKJJsx52TStyBC2o089Mck2ZgyptvIbBuwrOL6xoKcp?=
+ =?us-ascii?Q?OsVJQgTUCjJIMzrhydyOqkX4VWu4ghU=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c4e05f2-1eab-4bf4-291d-08de5f24cb8c
+X-MS-Exchange-CrossTenant-Network-Message-Id: e38abda6-12a2-4159-e054-08de5f24cc4d
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2026 10:54:37.3155 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2026 10:54:38.6179 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oXjmukoQ+OhR0Ehxrsf74NQRgZrq1E1inAqOht6rv5EEnQhvLTTQz901LnYOz5z5khYjLPN9/iSNxnLna0p0jjC8HnQjtdFYcyKdokPJXiI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: TuF2auAfUIJGvqe/TePgDgfZtUVwRwo9HVmLJhW42AI1FqYgeLbrBx06iV57Voc0zsOa60jH8ErjmUUGmzXDyDDvNnTOA+crtyT4U8OAKfU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB7936
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,29 +164,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make it possible to update the (whole) bootloader on am335x robustly,
-i.e. so that a power failure or random OOM killing of the update
-process or other interruptions do not result in a bricked board.
+The am335x knows nothing about eMMC boot partitions, so in order to
+implement an update procedure of the bootloader which is robust
+against power failure or other interruptions, one must make use of the
+fact that ROM code on the am335x looks for a valid first stage
+bootloader at several different offsets. Updating that can then be
+implemented by (assume we put MLO at offsets 128K and 256K):
 
-The order the trial bits gets set is somewhat odd, but is clearly what
-happens, and somebody else trying to reverse engineer the ROM code has
-observed the same thing: See the TracingVectors.ods in
-https://github.com/sjgallagher2/am335xbootrom .
+(1) At least one of the two slots must contain a valid header, since
+we successfully booted. Pick the other one.
 
-v2: Add patch updating documentation, including a sketch of shell
-commands that could be used for the actual update procedure.
+(2) Overwrite the first sector of the slot chosen in step (a) with all
+zeroes.
 
-v1: https://lore.kernel.org/u-boot/20260122131728.1551365-1-ravi@prevas.dk/
+(3) Write everything but the first sector to the chosen slot.
 
-Rasmus Villemoes (2):
-  am335x: add support for loading u-boot from multiple offsets
-  doc: am335x: document use of CONFIG_SPL_AM33XX_MMCSD_MULTIPLE
+(4) Write the first sector (containing the magic signature that the
+boot ROM uses to identify a valid image) to the chosen slot.
 
- arch/arm/mach-omap2/Kconfig       | 37 ++++++++++++++
- arch/arm/mach-omap2/boot-common.c | 31 ++++++++++++
- doc/board/ti/am335x_evm.rst       | 80 +++++++++++++++++++++++++++++++
- 3 files changed, 148 insertions(+)
+(5) Repeat steps (2)-(4) for the other slot.
 
+It's not possible to simply write the whole MLO in one go, especially
+not when updating the 128K slot, because an interruption after the
+first sector is written would make the ROM code believe the image is
+valid.
+
+But this only caters for SPL itself; regardless of where SPL was
+loaded from, it would go on to load U-Boot proper from
+SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR. So in order to update the whole
+bootloader, we need to teach SPL to use a different offset for U-Boot
+proper depending on where SPL itself was loaded from (*). With that,
+the update procedure is just amended by a step
+
+(3a) Write U-Boot proper to the offset corresponding to the SPL slot
+being updated.
+
+We can know (*) because the ROM code sets a new bit in a certain
+"trace vector" before each successive attempt.
+
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+---
+ arch/arm/mach-omap2/Kconfig       | 37 +++++++++++++++++++++++++++++++
+ arch/arm/mach-omap2/boot-common.c | 31 ++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+)
+
+diff --git a/arch/arm/mach-omap2/Kconfig b/arch/arm/mach-omap2/Kconfig
+index c07dd68e6ce..1e989ac48ac 100644
+--- a/arch/arm/mach-omap2/Kconfig
++++ b/arch/arm/mach-omap2/Kconfig
+@@ -156,6 +156,43 @@ config SYS_DEFAULT_LPDDR2_TIMINGS
+ 
+ endchoice
+ 
++config SPL_AM33XX_MMCSD_MULTIPLE
++	bool "Support multiple locations of next boot phase"
++	depends on AM33XX
++	depends on SPL_SYS_MMCSD_RAW_MODE
++	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
++	help
++	  The boot ROM on the am33xx looks for the first stage
++	  bootloader at several hard-coded offsets in the mmc device
++	  (0, 128K, 256K, 384K) and uses the first location which has
++	  a valid header. This can be used to implement failsafe
++	  update of that first stage (SPL). But in order for the
++	  update of the whole bootloader to be failsafe, SPL must load
++	  U-Boot proper from a location dependent on where SPL itself
++	  was loaded from. This option allows you to specify four
++	  different offsets corresponding to the different places
++	  where SPL could have been loaded from.
++
++if SPL_AM33XX_MMCSD_MULTIPLE
++
++config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_0K
++	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 0K"
++	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
++
++config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_128K
++	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 128K"
++	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
++
++config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_256K
++	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 256K"
++	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
++
++config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_384K
++	hex "Address on the MMC to load U-Boot from when SPL was loaded from offset 384K"
++	default SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
++
++endif
++
+ source "arch/arm/mach-omap2/omap3/Kconfig"
+ 
+ source "arch/arm/mach-omap2/omap5/Kconfig"
+diff --git a/arch/arm/mach-omap2/boot-common.c b/arch/arm/mach-omap2/boot-common.c
+index 95b44c8b1e5..88fa59feaf1 100644
+--- a/arch/arm/mach-omap2/boot-common.c
++++ b/arch/arm/mach-omap2/boot-common.c
+@@ -318,3 +318,34 @@ static void tee_image_process(ulong tee_image, size_t tee_size)
+ }
+ U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TEE, tee_image_process);
+ #endif
++
++#ifdef CONFIG_SPL_AM33XX_MMCSD_MULTIPLE
++
++#define AM335X_TRACE_VECTOR2 0x4030CE44
++
++unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
++{
++	u32 bits = *(u32 *)AM335X_TRACE_VECTOR2;
++
++	bits &= 0xf000;
++
++	/*
++	 * The ROM code sets the "trial bit 3", bit 15, first, when
++	 * attempting offset 0, then "trial bit 2", bit 14, when
++	 * attempting offset 128K, and so on. If the tracing vector
++	 * has completely unexpected contents, fall back to the
++	 * raw_sect we were given.
++	 */
++	switch (bits) {
++	case 0x8000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_0K;   break;
++	case 0xc000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_128K; break;
++	case 0xe000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_256K; break;
++	case 0xf000: raw_sect = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR_384K; break;
++	default:
++		printf("Warning: Unexpected trial bits 0x%04x in trace vector 2, falling back to 0x%lx\n",
++		       bits, raw_sect);
++	}
++
++	return raw_sect;
++}
++#endif
 -- 
 2.52.0
 
