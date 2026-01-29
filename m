@@ -4,48 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B1AED46C15
-	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 00:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080E5D46C01
+	for <u-boot@archiver.kernel.org>; Thu, 29 Jan 2026 00:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0778883D7A;
-	Thu, 29 Jan 2026 01:08:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=paulk.fr
+	by phobos.denx.de (Postfix) with ESMTP id 6FDF883B91;
+	Thu, 29 Jan 2026 01:23:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="O6O3d5U7";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ISflETZ6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2F483C29; Thu, 29 Jan 2026 01:00:25 +0100 (CET)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ id A26C383BC7; Thu, 29 Jan 2026 01:23:57 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85AF783BC7
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 01:00:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C12B283B30
+ for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 01:23:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=paulk.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=contact@paulk.fr
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id CA4711F80057
- for <u-boot@lists.denx.de>; Thu, 29 Jan 2026 00:00:22 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 5609AB1D48B; Thu, 29 Jan 2026 00:00:22 +0000 (UTC)
-Received: from shepard (unknown [192.168.1.65])
- by laika.paulk.fr (Postfix) with ESMTP id 3821AB1D484;
- Wed, 28 Jan 2026 23:58:43 +0000 (UTC)
-From: Paul Kocialkowski <contact@paulk.fr>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f1fyL3Jxrz9tVh;
+ Thu, 29 Jan 2026 01:23:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769646234;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5Lfv5FmYZR8nAq8UbjcgqccjPx7wiTnIFKn0m6oNKAo=;
+ b=O6O3d5U7BbOqnlkkKwS19v5k/jJiYna13KNy7BpH3T96mc9VbUjRnP9nV6m7QQwL5foB8p
+ Z+Oz4TJe2MTNH/g0l1vA4w1nUK/F1akpLsq3RAl6/aVI5j5zrUleYGG9G/XWdrH8gw3fWC
+ +oy47G+qMm2qyRcDza1K0MtpNQGJDKGplNqZm7zG+vudD0mgRWlIk++PzYZDimehq6vvir
+ 5+4pNNFV8BONmk15QZS71wTbFLPbPN51+gxGWBYjYn0mdJMIjBGouPLSnzLxEw00h1ORjX
+ lW7YFaWSvSi1wg4OiYMc1jbEci17KB4KNDl5VbFrZ4M1E9lpqOy24cao25cHeg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ISflETZ6;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1769646232;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5Lfv5FmYZR8nAq8UbjcgqccjPx7wiTnIFKn0m6oNKAo=;
+ b=ISflETZ6TxVo9PzekwlWa9CxzUbizGGDj99Nv5JrkgIrNSJOwW0cUMMHDlA4hTTRayMR/D
+ QZx+AVREHh4rQD38oqTpeLudmGUROiCqwqyMOqAoMroi+MVqGXnY9IiTLV8YOKqhf7mQe7
+ G7Yl8W7cRg3jTzCyA91U1OaEpqC/6nlYvP7w8CM5YR3csEWZDlb9Lo5zuLrWuYidcJe5DV
+ KT9I6Us0Ashb6XLuj1yZg9appQSA3yDOPhHdjHdQG6eC/AfTbjEcGCbcpcwpYihj2V8McB
+ qLzffwsyGguzqefgLg75ZFDta2ebwrskK+l6SfxgZzyd9SehiWmdjlCtNomOMA==
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@csie.org>,
- Icenowy Zheng <icenowy@aosc.xyz>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Paul Kocialkowski <paulk@sys-base.io>, Paul Kocialkowski <contact@paulk.fr>
-Subject: [PATCH v2 3/3] sunxi: a133: dram: Align parameters terminology with
- Allwinner
-Date: Thu, 29 Jan 2026 00:57:17 +0100
-Message-ID: <20260128235727.1322861-3-contact@paulk.fr>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260128235727.1322861-1-contact@paulk.fr>
-References: <20260128235727.1322861-1-contact@paulk.fr>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: lwip: wget: rework the '#' printing
+Date: Thu, 29 Jan 2026 01:23:29 +0100
+Message-ID: <20260129002348.433050-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 29 Jan 2026 01:07:58 +0100
+X-MBO-RS-ID: 68754a196ce3a504186
+X-MBO-RS-META: 5k3xifwmdwscpjjqk8o14xts7zmi64ts
+X-Rspamd-Queue-Id: 4f1fyL3Jxrz9tVh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,130 +92,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a mistmatch between Allwinner's dram_para BSP definitions and the
-parameters names in mainline u-boot for TPR1-3. What we call TPR1 is actually
-MR22 while TPR2 is TPR0 and TPR3 is TPR1. MR22 does get written to the
-corresponding register. This only concerns LPDDR4 support.
+Currently, the LWIP wget command prints excessive amount of progress
+indicator '#' for very long file downloads, limit this to one line
+that scales according to transfer size.
 
-Introduce a new Kconfig entry for MR22 and proceed with the rename.
-Update the only config currently using it.
+The HTTP server does report the size of the entire file in protocol
+headers, which are received before the actual data transfer. Cache
+this information and use it to adaptively print progress indicator
+'#' until it fills one entire line worth of '#', which indicates the
+transfer has completed. This way, long transfers don't print pages of
+'#', but every transfer will print exactly one line worth of '#'. The
+algorithm for '#' printing is the same as TFTP tsize one.
 
-See the list of parameters from the Allwinner BSP at the end of:
-https://linux-sunxi.org/A133/DRAMC
-
-Note that the H616/H6 code is coherent with this new TPR0 definition
-(and does not use TPR1 and MR22).
-
-Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-Sponsored-by: MEC Electronics GmbH <https://www.mec.at/>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h |  2 ++
- arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
- arch/arm/mach-sunxi/dram_sun50i_a133.c             | 12 ++++++------
- configs/liontron-h-a133l_defconfig                 |  6 +++---
- 4 files changed, 18 insertions(+), 9 deletions(-)
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome@forissier.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ net/lwip/wget.c | 27 +++++++++++++++++++++++----
+ 1 file changed, 23 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-index eadec74cc2b6..da3ee5fa0161 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-@@ -241,6 +241,8 @@ struct dram_para {
- 	uint32_t mr12;
- 	uint32_t mr13;
- 	uint32_t mr14;
-+	uint32_t mr22;
-+	uint32_t tpr0;
- 	uint32_t tpr1;
- 	uint32_t tpr2;
- 	uint32_t tpr3;
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index e979ee4a2ccb..70885c1c78bc 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -118,6 +118,13 @@ config DRAM_SUNXI_MR14
- 	help
- 	  MR14 value from vendor DRAM settings.
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index 55bd2b72e26..008f3b395e7 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -37,6 +37,8 @@ struct wget_ctx {
+ 	ulong size;
+ 	ulong prevsize;
+ 	ulong start_time;
++	ulong content_len;
++	ulong hash_count;
+ 	enum done_state done;
+ };
  
-+config DRAM_SUNXI_MR22
-+	hex "DRAM MR22 parameter"
-+	depends on DRAM_SUN50I_A133
-+	default 0x0
-+	help
-+	  MR22 value from vendor DRAM settings.
+@@ -152,6 +154,7 @@ static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
+ {
+ 	ulong store_addr = ctx->daddr;
+ 	uchar *ptr;
++	ulong pos;
+ 
+ 	/* Avoid overflow */
+ 	if (wget_info->buffer_size && wget_info->buffer_size < ctx->size + len)
+@@ -174,10 +177,12 @@ static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
+ 
+ 	ctx->daddr += len;
+ 	ctx->size += len;
+-	if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
+-		if (!wget_info->silent)
+-			printf("#");
+-		ctx->prevsize = ctx->size;
 +
- config DRAM_SUNXI_TPR0
- 	hex "DRAM TPR0 parameter"
- 	default 0x0
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-index 568dc1eea2ea..c4022b76fcb4 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-@@ -486,8 +486,8 @@ static void mctl_drive_odt_config(const struct dram_para *para)
- 
- 		writel_relaxed(val, base);
- 		if (para->type == SUNXI_DRAM_TYPE_LPDDR4) {
--			if (para->tpr3 & 0x1f1f1f1f)
--				val = (para->tpr3 >> (i * 8)) & 0x1f;
-+			if (para->tpr1 & 0x1f1f1f1f)
-+				val = (para->tpr1 >> (i * 8)) & 0x1f;
- 			else
- 				val = 4;
- 		}
-@@ -528,7 +528,7 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para)
- 	u32 *ptr;
- 
- 	if (para->tpr10 & BIT(31)) {
--		val = para->tpr2;
-+		val = para->tpr0;
- 	} else {
- 		val = ((para->tpr10 << 1) & 0x1e) |
- 		      ((para->tpr10 << 5) & 0x1e00) |
-@@ -841,7 +841,7 @@ static void mctl_dfi_init(const struct dram_para *para)
- 		mctl_mr_write_lpddr4(12, para->mr12);
- 		mctl_mr_write_lpddr4(13, para->mr13);
- 		mctl_mr_write_lpddr4(14, para->mr14);
--		mctl_mr_write_lpddr4(22, para->tpr1);
-+		mctl_mr_write_lpddr4(22, para->mr22);
- 		break;
++	pos = clamp(ctx->size, 0UL, ctx->content_len);
++
++	while (ctx->hash_count < pos * 50 / ctx->content_len) {
++		putc('#');
++		ctx->hash_count++;
  	}
  
-@@ -1242,7 +1242,6 @@ static const struct dram_para para = {
- #elif defined(CONFIG_SUNXI_DRAM_LPDDR4)
- 	.type = SUNXI_DRAM_TYPE_LPDDR4,
- #endif
--	/* TODO: Populate from config */
- 	.dx_odt = CONFIG_DRAM_SUNXI_DX_ODT,
- 	.dx_dri = CONFIG_DRAM_SUNXI_DX_DRI,
- 	.ca_dri = CONFIG_DRAM_SUNXI_CA_DRI,
-@@ -1251,9 +1250,10 @@ static const struct dram_para para = {
- 	.mr12 = CONFIG_DRAM_SUNXI_MR12,
- 	.mr13 = CONFIG_DRAM_SUNXI_MR13,
- 	.mr14 = CONFIG_DRAM_SUNXI_MR14,
-+	.mr22 = CONFIG_DRAM_SUNXI_MR22,
-+	.tpr0 = CONFIG_DRAM_SUNXI_TPR0,
- 	.tpr1 = CONFIG_DRAM_SUNXI_TPR1,
- 	.tpr2 = CONFIG_DRAM_SUNXI_TPR2,
--	.tpr3 = CONFIG_DRAM_SUNXI_TPR3,
- 	.tpr6 = CONFIG_DRAM_SUNXI_TPR6,
- 	.tpr10 = CONFIG_DRAM_SUNXI_TPR10,
- 	.tpr11 = CONFIG_DRAM_SUNXI_TPR11,
-diff --git a/configs/liontron-h-a133l_defconfig b/configs/liontron-h-a133l_defconfig
-index 56c5262f2678..831d5b56e3a7 100644
---- a/configs/liontron-h-a133l_defconfig
-+++ b/configs/liontron-h-a133l_defconfig
-@@ -10,9 +10,9 @@ CONFIG_DRAM_SUNXI_PARA0=0xd0a050c
- CONFIG_DRAM_SUNXI_MR11=0x4
- CONFIG_DRAM_SUNXI_MR12=0x72
- CONFIG_DRAM_SUNXI_MR14=0x7
--CONFIG_DRAM_SUNXI_TPR1=0x26
--CONFIG_DRAM_SUNXI_TPR2=0x6060606
--CONFIG_DRAM_SUNXI_TPR3=0x84040404
-+CONFIG_DRAM_SUNXI_MR22=0x26
-+CONFIG_DRAM_SUNXI_TPR0=0x6060606
-+CONFIG_DRAM_SUNXI_TPR1=0x84040404
- CONFIG_DRAM_SUNXI_TPR6=0x48000000
- CONFIG_DRAM_SUNXI_TPR10=0x273333
- CONFIG_DRAM_SUNXI_TPR11=0x231d151c
+ 	return 0;
+@@ -234,6 +239,14 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+ 		return;
+ 	}
+ 
++	/* Print hash marks for the last packet received */
++	while (ctx->hash_count < 49) {
++		putc('#');
++		ctx->hash_count++;
++	}
++	puts("  ");
++	print_size(ctx->content_len, "");
++
+ 	elapsed = get_timer(ctx->start_time);
+ 	if (!elapsed)
+ 		elapsed = 1;
+@@ -263,11 +276,15 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct pbuf *hdr,
+ 				   u16_t hdr_len, u32_t content_len)
+ {
++	struct wget_ctx *ctx = arg;
++
+ 	wget_lwip_fill_info(hdr, hdr_len, content_len);
+ 
+ 	if (wget_info->check_buffer_size && (ulong)content_len > wget_info->buffer_size)
+ 		return ERR_BUF;
+ 
++	ctx->content_len = content_len;
++
+ 	return ERR_OK;
+ }
+ 
+@@ -294,6 +311,8 @@ int wget_do_request(ulong dst_addr, char *uri)
+ 	ctx.size = 0;
+ 	ctx.prevsize = 0;
+ 	ctx.start_time = 0;
++	ctx.content_len = 0;
++	ctx.hash_count = 0;
+ 
+ 	if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
+ 		return CMD_RET_USAGE;
 -- 
-2.52.0
+2.51.0
 
