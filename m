@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24638E6BF20
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 15:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BAACE6BF1B
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 15:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8E39844C0;
+	by phobos.denx.de (Postfix) with ESMTP id E5EA4844CB;
 	Fri, 30 Jan 2026 16:40:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r5qm7NdO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uwc43QZZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A50C583C30; Fri, 30 Jan 2026 16:39:37 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 4D02C844C0; Fri, 30 Jan 2026 16:39:39 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75A2283C30
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 16:39:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 450C184073
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 16:39:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=george.mccollister@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso1634694fac.0
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 07:39:35 -0800 (PST)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-66314fa03c9so297930eaf.2
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 07:39:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769787573; x=1770392373; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769787575; x=1770392375; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2y55Ozop1jlTMFLCZGpRhEwWf7BsApz3F7/gmMn4CJE=;
- b=r5qm7NdOvvOaSwEXm5dPxYTfpd1tSJWQb5QKzL+F9zIXYEBKbGtv7SqTll3+bhJ5gE
- m6LOEnRCqD+oyAP6dQK+fOB3RWS0BYeaf9T0/DsDV+iApQapxqhEit/9QskHEDbqzX8o
- eYZy5a/BpuspYFkMMAz+UHEmcBkichlX48PbI=
+ bh=Krgkw7x732nUWNBxwah344X9hakz4cdm9cKdpC/rn00=;
+ b=uwc43QZZ8vDkZ2I3BU3XODY/FlR0c9uNyEZyW9MLBnWDqC1uDBAATq8J+bRNUEl7pF
+ epsZHyY1FDVai2R0roo2raoW+v/Mn23LjTbMK83ELVpDtwStWGn6fn0JC3JQQY1Mxskb
+ TBqgkkLVLwJEXZkX9IQvi+kvKvwmzenQBIa6U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769787573; x=1770392373;
+ d=1e100.net; s=20230601; t=1769787575; x=1770392375;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2y55Ozop1jlTMFLCZGpRhEwWf7BsApz3F7/gmMn4CJE=;
- b=v7lSihBeW/ey4EuCLu6BZi0eu6755XcHI1HHlExS2TAmLv0ovPvABLJ01KqrlS0qaz
- Buro5ijmLoxXweCNT86mgc8JN26CgzosU7vrbZ8cb32J+6tWcAey8g3mI3fiVPbKXv7J
- I6dKXwiV6RNb5OBvkIvD9+3zx9VdiUcrdLjn2eBZnXyRNNjp7nGykIsEURi/nmVC06ys
- 9WyjliKBUP7Iv5Hi8nQwM0cv1CR5XvEIzJcQb1Wc5nMpfA3lMJherKBanDg7vUdnx+Fd
- OGtZxQ6MqmUaDHtJeKNmp+ZtGH0Zatgr5UIoWpTMVLxEkw0uDIbmPwLZG54Ofuc74YDv
- ltcA==
-X-Gm-Message-State: AOJu0YyJx9Ise7XQr6qV7ZK/EoP6FgrouCcnGLU2SMIHa3G0oImWHZmR
- ztyyJASI9pT2MLj9B+Adnia8n7cTRpYROjcdTAweKKlECpNiWLcdRo3WNfD8gJhD4amAtu+CpBt
- ANOyL
-X-Gm-Gg: AZuq6aLGvMbV2Cu4+1jEyzyPMdJ5Hutn3Sx0j4pwC/sA04EPeJImjPh9sPu3T0ZaU1F
- hmkxjEXi2BAkLhZmuw6fAIsTPzKK4VhBtx615wBnxNtmXAqIU8RBtGd7ML96StuaNJwVc803MXP
- WdyoELjFxAQ5AZ+9RYCisXvJ13jsGPdjo1pY4wYB22yPBHX44pRLYUmlvhuHnpiKK/JWNNMKHv4
- FL2goFx2Murlg6NgpoA2AS1sZ4XfJZGVS7kumbXCbZD911eNCQPPAl2LN6RYh/2LN2i3ukPXDWd
- t/N/Hq82AOUXjWFZKB5JgFdNKEg8dxM5DpSgUjC6BAMDimVIqQscB/Y5r3L1VIW+/Ul+QOGJvKp
- Sm2ASUmXnTOoWPPiCD362u3YYurm9ZfCuQdPQaYK5ZBVkxbAUrkxx+O8crCpBh5X9s0lbsoTDIf
- dCf83MsrldgCCuGnNphJIrPgGroS1JNeLPOuQ=
-X-Received: by 2002:a05:6870:d69f:b0:404:3f2b:fc99 with SMTP id
- 586e51a60fabf-4097fd69ef4mr3672330fac.18.1769787573597; 
- Fri, 30 Jan 2026 07:39:33 -0800 (PST)
+ bh=Krgkw7x732nUWNBxwah344X9hakz4cdm9cKdpC/rn00=;
+ b=HYwYMITODtHPTmrEJvTcovwo1oViWv6DISom4z3gih/kNc+VdXFK3GipWCct9fUeVO
+ 6E8X93YCRjnOyNRpWwz65z+HPX0DR2Rtfr43kKDBw9nW3oTLPI02B5geboGiWhnxb4Ip
+ 2QAcTaMgaaWB2Vmkg47lIG/FdWICnULIawhXsdhPvpO8cU3N2b46MH+tasYN/6wKatWL
+ Hq3sLSGZysMTAmV4vRHyft8d3omwyHp7bPSYPmrtdqS6z7NfLX4BHOemwF7fM6zIvtPW
+ /yGfb/fV4R8l2R0OqD65XgBppjEPPoDRuBVVNJ+A8uqadqLfqFQU/cEfyjnjNXfv4rhw
+ mQag==
+X-Gm-Message-State: AOJu0YwP9fjPKYy9NSpvUW/3ANmvtnZXmz72VeCimat6TvBx2VVf+UrJ
+ y6GJKsoVm6qbO5PnTmOcCG7a7Y2NAKgVYSpELgRHMbIIjhwPcirMfKahMY1IMGVXd9SmBjgpMWN
+ 9vOHl
+X-Gm-Gg: AZuq6aL5FUErkAeAGoysqKDDYbk1dC4HjTJkyye6rNjhgD2hAQe0ySqB8VG05fxzyQv
+ X5aNuGZDfHlXfa3aL/CAmbjrkZuGyZc64COuiFuyv11IpVrOLFUOTC95LS0JefsOcZ4Gu8+uNGe
+ 7pPXmpRyy9n85pZNtjIeMVBJM22y3jmgbgnRGsy2rjjN+S0pE7f3Op7kkX2oFigYUNjF08V8TCO
+ bkYyhT0OnMTO5KjW5eUUF6yK/BPGTrrxo9yjbNnf/DqpbFvUSGSylCmRt3/ghL3PpxZl7u6nNNj
+ Q4zXYepifIzcotwy3a2w98b/M266LP6xx6OFaTZyNdV0IuxRr6M+LV89yi7RZtBww+RLs0kOAAb
+ +yGAbvhotSifPrAgwB7dBTKI/UQCL3PQuS2IKObCgM2vNomIDVeLvradZEQQ/5jZV5GoPkeW7nR
+ xWXyll5JEGpKcRHGg/h12pDBmgpepURFn1whtmkTIlb7QFMw==
+X-Received: by 2002:a05:6820:c91:b0:662:c112:c506 with SMTP id
+ 006d021491bc7-6630f3b507bmr1533870eaf.69.1769787574600; 
+ Fri, 30 Jan 2026 07:39:34 -0800 (PST)
 Received: from ryzen.localdomain ([136.33.243.183])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4095752ef7bsm5944934fac.16.2026.01.30.07.39.32
+ 586e51a60fabf-4095752ef7bsm5944934fac.16.2026.01.30.07.39.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jan 2026 07:39:33 -0800 (PST)
+ Fri, 30 Jan 2026 07:39:34 -0800 (PST)
 From: George McCollister <george.mccollister@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Bryan Brattlof <bb@ti.com>,
  George McCollister <george.mccollister@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/6] pci: skip unnecessary PCIe scanning
-Date: Fri, 30 Jan 2026 09:38:01 -0600
-Message-ID: <20260130153856.2049575-2-george.mccollister@konsulko.com>
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/6] phy: ti: j721e-wiz: Enable reference clock output in
+ cmn_refclk_<p/m>
+Date: Fri, 30 Jan 2026 09:38:02 -0600
+Message-ID: <20260130153856.2049575-3-george.mccollister@konsulko.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260130153856.2049575-1-george.mccollister@konsulko.com>
 References: <20260130153856.2049575-1-george.mccollister@konsulko.com>
@@ -98,78 +101,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the same mechanism as the Linux kernel to skip unnecessary (and in
-the case of the J722S, errant) scanning of direct children of root
-ports, downstream ports or bridges.
+cmn_refclk_<p/m> lines in Torrent SERDES are used for an connecting
+external reference clock. cmn_refclk_<p/m> can also be configured to
+output the reference clock. In order to drive the refclk out from the
+SERDES (Cadence Torrent), PHY_EN_REFCLK should be set in SERDES_RST of
+WIZ. Model PHY_EN_REFCLK as a clock, so that platforms like AM642 EVM
+can enable it.
 
-Based on Linux PCI code in the following files as of b927546677c8:
-  drivers/pci/probe.c
-  drivers/pci/pci.h
-  include/linux/pci.h
+Based on: https://lore.kernel.org/r/20210310120840.16447-6-kishon@ti.com
 
 Signed-off-by: George McCollister <george.mccollister@konsulko.com>
 Tested-by: Bryan Brattlof <bb@ti.com>
 ---
 
-Changes in v2:
-- Return 0 if dev_get_parent_plat(dev) is invalid.
+(no changes since v1)
 
- drivers/pci/pci-uclass.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ drivers/phy/ti/phy-j721e-wiz.c | 46 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
 
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index c370f8c6400d..83b76d01f24a 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
-@@ -872,6 +872,38 @@ __weak extern void board_pci_fixup_dev(struct udevice *bus, struct udevice *dev)
- {
+diff --git a/drivers/phy/ti/phy-j721e-wiz.c b/drivers/phy/ti/phy-j721e-wiz.c
+index eaf68d18f3a1..466e2a5d0b50 100644
+--- a/drivers/phy/ti/phy-j721e-wiz.c
++++ b/drivers/phy/ti/phy-j721e-wiz.c
+@@ -75,6 +75,7 @@ enum wiz_typec_master_lane {
+ 
+ static const struct reg_field por_en = REG_FIELD(WIZ_SERDES_CTRL, 31, 31);
+ static const struct reg_field phy_reset_n = REG_FIELD(WIZ_SERDES_RST, 31, 31);
++static const struct reg_field phy_en_refclk = REG_FIELD(WIZ_SERDES_RST, 30, 30);
+ static const struct reg_field pll1_refclk_mux_sel =
+ 					REG_FIELD(WIZ_SERDES_RST, 29, 29);
+ static const struct reg_field pll1_refclk_mux_sel_2 =
+@@ -534,9 +535,43 @@ static int wiz_clk_of_xlate(struct clk *clk, struct ofnode_phandle_args *args)
+ 	return 0;
  }
  
-+static int only_one_child(struct udevice *bus)
++static int wiz_phy_en_refclk_enable(struct clk *clk)
 +{
-+	int pos;
++	struct udevice *dev = clk->dev;
++	struct wiz_clk *priv = dev_get_priv(dev);
++	struct wiz *wiz = priv->wiz;
++	int id;
 +
-+	if (!dev_get_parent_plat(bus))
++	id = clk->id >> 10;
++	if (id != TI_WIZ_PHY_EN_REFCLK)
 +		return 0;
 +
-+	/*
-+	 * A PCIe Downstream Port normally leads to a Link with only Device
-+	 * 0 on it (PCIe spec r3.1, sec 7.3.1).  As an optimization, scan
-+	 * only for Device 0 in that situation.
-+	 */
-+	pos = dm_pci_find_capability(bus, PCI_CAP_ID_EXP);
-+	if (pos) {
-+		ulong reg;
-+		ulong pcie_type;
-+
-+		dm_pci_read_config(bus, pos + PCI_EXP_FLAGS,
-+				   &reg, PCI_SIZE_16);
-+
-+		pcie_type = (reg & PCI_EXP_FLAGS_TYPE) >> 4;
-+
-+		if (pcie_type == PCI_EXP_TYPE_ROOT_PORT ||
-+		    pcie_type == PCI_EXP_TYPE_DOWNSTREAM ||
-+		    pcie_type == PCI_EXP_TYPE_PCIE_BRIDGE) {
-+			return 1;
-+		}
-+	}
++	regmap_field_write(wiz->phy_en_refclk, 1);
 +
 +	return 0;
 +}
 +
- int pci_bind_bus_devices(struct udevice *bus)
- {
- 	ulong vendor, device;
-@@ -895,6 +927,9 @@ int pci_bind_bus_devices(struct udevice *bus)
- 		if (PCI_FUNC(bdf) && !found_multi)
- 			continue;
- 
-+		if (only_one_child(bus) && (PCI_MASK_BUS(bdf) > 0))
-+			continue;
++static int wiz_phy_en_refclk_disable(struct clk *clk)
++{
++	struct udevice *dev = clk->dev;
++	struct wiz_clk *priv = dev_get_priv(dev);
++	struct wiz *wiz = priv->wiz;
++	int id;
 +
- 		/* Check only the first access, we don't expect problems */
- 		ret = pci_bus_read_config(bus, bdf, PCI_VENDOR_ID, &vendor,
- 					  PCI_SIZE_16);
++	id = clk->id >> 10;
++	if (id != TI_WIZ_PHY_EN_REFCLK)
++		return 0;
++
++	regmap_field_write(wiz->phy_en_refclk, 0);
++
++	return 0;
++}
++
+ static const struct clk_ops wiz_clk_ops = {
+ 	.set_parent = wiz_clk_set_parent,
+ 	.of_xlate = wiz_clk_of_xlate,
++	.enable = wiz_phy_en_refclk_enable,
++	.disable = wiz_phy_en_refclk_disable,
+ };
+ 
+ int wiz_clk_probe(struct udevice *dev)
+@@ -818,6 +853,12 @@ static int wiz_regfield_init(struct wiz *wiz)
+ 		return PTR_ERR(wiz->phy_reset_n);
+ 	}
+ 
++	wiz->phy_en_refclk = devm_regmap_field_alloc(dev, regmap, phy_en_refclk);
++	if (IS_ERR(wiz->phy_en_refclk)) {
++		dev_err(dev, "PHY_EN_REFCLK reg field init failed\n");
++		return PTR_ERR(wiz->phy_en_refclk);
++	}
++
+ 	wiz->pma_cmn_refclk_int_mode =
+ 		devm_regmap_field_alloc(dev, regmap, pma_cmn_refclk_int_mode);
+ 	if (IS_ERR(wiz->pma_cmn_refclk_int_mode)) {
+@@ -1042,6 +1083,11 @@ static int j721e_wiz_bind_clocks(struct wiz *wiz)
+ 		}
+ 	}
+ 
++	rc = device_bind(dev, wiz_clk_drv, "phy-en-refclk",
++			 NULL, dev_ofnode(dev), NULL);
++	if (rc)
++		dev_err(dev, "cannot bind driver for clock phy-en-refclk\n");
++
+ 	return 0;
+ }
+ 
 -- 
 2.52.0
 
