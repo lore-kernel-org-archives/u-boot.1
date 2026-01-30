@@ -4,100 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01C2E6BF2F
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 17:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A7AE6BF2F
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 17:13:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE467844F4;
-	Fri, 30 Jan 2026 18:03:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D3CE5844F4;
+	Fri, 30 Jan 2026 18:13:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dGW6i/yh";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="PifAjg5U";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UvKE7d34";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABB3B84513; Fri, 30 Jan 2026 18:03:06 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DC6D84517; Fri, 30 Jan 2026 18:13:43 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 846BB844F1
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 18:03:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C738C844F1
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 18:13:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d15b8feca3so2330611a34.3
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 09:03:04 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769792583; cv=none;
- d=google.com; s=arc-20240605;
- b=H+ZRpbjDK0OJYd3I9r3ogdvuaA4cwVtyQYhgVpJiMK175p2hNLBtT+/fsbRLFKltWC
- wWNviB6QkNru54ohux1osoCT3LX5cL0v/bszRqZpzO18GwL6ewMgiSo915Gp0MpqkjXE
- G1uCAnoJ4l/qrrWpOkEUmFDffZlmX0S0PBNOIDjYZo3JcL7Buv9WjS46bpwjgE1q+DU5
- Fcsblog1dn5x/wbbZ8H1pnQ42dNW5+YZQZRa2qtxnoefBUGwBwd0GdSB1CHSTmTlvF2F
- 45TdvCIWYjdp7dgsBDGxmIbRNJ+MKHxpR0MoZUdY0MrfLFZgK/3MdE2LpmFeuQRF+xaV
- 3LIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
- fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=gC14DcFoVv/ViewdLMBx0MjE6wa/vhar89LvpF+zUhI/OFsmZvPZhQJH3oixVZeN+N
- zAnqrrnkwb50a2LyfrS4ClL+KLw58p9s2Gaye3b4sklPz1LGCvdimn0UGr4xHkn5yybp
- PlRIcqT/RHOBmq1vOf7k9u5j/gcdIooRoUlfLu1CwUVlfUsSI0PqV1KAT+CfQfQX3T/1
- QehMwHbk5w9uQA+9moq/NPKzBRd6v8B5bSL0spksaFZuj8Rn1S0Fo2hA/CGcavvGEgQQ
- WT0ug6oRrsm74Q8WmMkiyP+vj0JEW8zKjyWOl9Dz0mQixomO/hBFYClwmTMUvUTOiXh5
- 9EiA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 60UAPNmG1488307
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 17:13:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ M+zQBYSZQ5VNpiQx73aIoDGDHlc/pnUp1m/d6dLcLoU=; b=PifAjg5UaB2juHco
+ 35qRXLKjlnbnxK5LRSN4JTHfHJkhcS+1Fa5leuDMmKtHgD9EbrS9NUfoaDqC1iU2
+ Mjh9J3ISs1zDtrPNfIvprr8yQIwue+BSZdoxMEVvvlev9eEUf/T/2PpD5tPLZMMZ
+ aSdbV+GS1xWaZecGn+pMX8/o6ypmmCsVc06o6Fk86Q3DkFFXbYmeAU3dg+b0piL+
+ TTks8RDDB/TOuoH6+6fZhif7f915rk0LlsShm2A3ii6hkxb6kANYOez35iLOSI9D
+ lieXyIff5FKHoxnmtS3z4tOYNA5atGhTrCTR4Mz5ZCR/Dn1flz48VYW1kdP4F4lT
+ aHrXfw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c0bp3v2de-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 17:13:38 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c549aaa796dso4223365a12.1
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 09:13:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769792583; x=1770397383; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
- b=dGW6i/yhnVNBwR0mdwC1FVms0NMgQVVM+jnLQwD02TT9sqWCGxqZ+v8kZWz1JBbb68
- lFQq5nqxW6xATlnqENzuVovtueF2Z6h2t/znWlYsiG5B9KzSXRXM2Xh5r5D7Mch8Kh84
- 9sL2jM9KuHIUK7mQiaw1k/s/NWufAeVOzg4VpTfpkbWYJgZpU5QG0SD5GCovn+XTMWHh
- fHDFrF59Qt0tPJ9DrKQX8yh6swwHY9irEdZxVDFDnUqhROdJOAv3lO8gYz3JiNHe6+/J
- kDurusb1W/l3g9JuV5JzTm4znS2oB7HpINMlUqT87/vmQ6erZWqDIMeAXG+hACBChiUX
- xCig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769792583; x=1770397383;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=oss.qualcomm.com; s=google; t=1769793218; x=1770398018; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
  :to:cc:subject:date:message-id:reply-to;
- bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
- b=PvaTx/kKA3TaHbJEq5IuC8DBXBTgosk4NIXD2Z0QiA8/e0oRCmTxzz4b8FyRiNGSH5
- /O0Qu2D8FJiAUR7lm40HRAjS9wlK+LeO+6FdC8IG/NGHDLim9VBMgrxeBwFfVjcrXSWq
- qaDx8cH/KrA82/1m+rYNq3uDDsw7HUnkID4xXFuQ2tVqrnwltxTPefdZBdZEyaHPiBVq
- /LOylYqoiaPuKO8D6Fzw9m/Athq+BBafD7JFF0jBMb3sgtEOHxUMnahq5DXHlpr1uX1x
- WcJZ+NKo+xNLa5S+xTofP4bY5WkI9xeTMc2K0NbflctDgHZaE24B8s77o6wUwgfcuM/5
- EfOQ==
-X-Gm-Message-State: AOJu0YzAF+I+k5f8dSpwJSaLZk0PcbL0lQLS6eqyqQ7DlICk+BNhKiJe
- YhF8uoYcRRqjtgy6LLkYvJlu41/5dfREqzn8uBDtRyxXBfM/02y9UeibXPXBMMudJVif1kDdqS1
- CrfbPmACfyNERX733CEwznrgd6NGW38GAHUxELYuLhg==
-X-Gm-Gg: AZuq6aLz0Neu5XVVTWaZGRPBySCpc+P6tucJTHjp2AVfqkWKOmW6F4DcYth/mFxhUUT
- F0WuyG7IjQU9ykg4H1QhcN6auZoNQKuzsrzowi7phhdgEXt4RwhOAHhq8XyepIc/Y2/PeQm7d7g
- DYFNsqxGoY8qLNSmJ0CZAkf1ECm10eFd4NuyM9R4GzgvdVyIVWbHlK5/1D/9kfb6qcpyZNo+tMZ
- 3e9xzH5vrJcgRyBQhe4OMN2B8jFW6DcWZz+h++cmiQVoJXamnHZlPr2eCpC89WY9QGTyQH56FfI
- 2fCgTwk=
-X-Received: by 2002:a05:6830:4409:b0:7cf:d150:a245 with SMTP id
- 46e09a7af769-7d1a52a75e1mr2380587a34.5.1769792583033; Fri, 30 Jan 2026
- 09:03:03 -0800 (PST)
+ bh=M+zQBYSZQ5VNpiQx73aIoDGDHlc/pnUp1m/d6dLcLoU=;
+ b=UvKE7d34HxtlmYfOezvwFjhIlhZTAbgUKW1cc14WB1LiBOBgYqtNTKf0pe7LA4TJgw
+ qYfdumOYnvwMhOaBe+pmsWd4kNqnIDL0o4rYiAk4CCXSNxU0IEYq+Ie6rACpBYsXr/2R
+ Nrp/I3i9pfndnA+3P1uzXJAOaOaKD5YEOsxqVro12/A5SIJ5UDHh4RbBYTOLFlj7tbqV
+ SOTNouCK+GacSfbj1JmFlgztIhUwcr6JIS5gbLE2WGBUXKCHXXWFKcUmKfz7zWW3rEtv
+ Qs89zlASYZ9IEvS2rO9pRzoIanGpMQS3WcW5WgVj0AJqgZ1sKAtdB7EfDysuKfFeg2xU
+ xFMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769793218; x=1770398018;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M+zQBYSZQ5VNpiQx73aIoDGDHlc/pnUp1m/d6dLcLoU=;
+ b=QtW6Bosoj5E32vRLcssj4LQjqHTk6klXUBy3nG5i9zdDP2AXWAWCpA472W1vQSCr8X
+ QPvHaJvsliMdtENudBhYBj+h/ZHRpu2vfD0cA2ZG6VINW/kktqCqNS7VumdEpYdyob32
+ stToe8I/xVqUsnj+Lj7IK2t187YHseLkqQhWKYLbUnlwVRWZPkcCzQYWHxDfHn0zmGC2
+ J2xBaSf5anZLD9ktQzfc4ZPgPTHE0rRtd6J/CdvMuTvkz554/I+U0ZNpXlgjjJQBt/9U
+ dIBsdZSjfxfgLKV8Dc744x8QHzdxq4dNWZ4z8srVh0Gn6uyyI22uNLwPyPuGF5fPhzs3
+ sO9g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCiQ+skAkBRhjww7o3SQOL52lon9IYh2AXzxD8uZn3GhhVDLCZsSKAVS7iYdgCKBsKb5VW/b8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTob/5KS92/2qodi3X4vh8mEJKK85Raf5LH5gm5Vcc1LDbFvyo
+ EVqFrTVQzGqvQvkphh74ICO/E82Gq0OMDfvyqUcxX00Jf2kH1EoxzL/rLZgRXBA8QborKnWpfNJ
+ iyE24Rcv2Fq2rLvA1CvcSB+Gi/CwDADE8JfTvNSdNvgFVHU5O7M4VuGOs
+X-Gm-Gg: AZuq6aIyXqfp9qycsqOzUhJnVz7AB+hvY2j/WonPNjjf4m/IHlfjJP5V6OBpT+XiJUw
+ 3yhLmSY0kbncPlmwLhX6DUrOCP6pqEXmlFxGS/5WYVt5LVPyvW4DnM/UjgfLx1N/SqupUcJJuiC
+ mG0OzWtVBNru01GwP/7ap/aJENlpYazRrS2b/Foie5W/Q65pkXEGEqppgRW6kFBwtrD3mR/paY6
+ KMIq8YFYaT4EAfNxpTqGEeTa0iMYwZyZbuepD5unwDj5Xh3hnrBn38TgXEgDPI07sRfmVelV5zh
+ 9UaiNoy9p4RJi99CZjPy+sqFG7GbbDehtysdGhr9Jnidjr0w0q83licxw1M37kpAJdDYvLklSeR
+ ZT0uTJcu550t/6GCYLnaKZe5Sij674VHY4q+DTOs7LFydufRFc87MXLNFURQBAfDr3c+czFKNjC
+ kHu/U=
+X-Received: by 2002:a05:6a00:2290:b0:81f:852b:a91d with SMTP id
+ d2e1a72fcca58-823ab9755b0mr3604535b3a.58.1769793217944; 
+ Fri, 30 Jan 2026 09:13:37 -0800 (PST)
+X-Received: by 2002:a05:6a00:2290:b0:81f:852b:a91d with SMTP id
+ d2e1a72fcca58-823ab9755b0mr3604499b3a.58.1769793217418; 
+ Fri, 30 Jan 2026 09:13:37 -0800 (PST)
+Received: from ?IPV6:2401:4900:1cc9:68c8:d0b9:1522:2fad:2de3?
+ ([2401:4900:1cc9:68c8:d0b9:1522:2fad:2de3])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82379b59e10sm8862799b3a.25.2026.01.30.09.13.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 Jan 2026 09:13:36 -0800 (PST)
+Message-ID: <1ffaa53f-75f5-43f3-a5b4-53a0d203abc0@oss.qualcomm.com>
+Date: Fri, 30 Jan 2026 22:43:29 +0530
 MIME-Version: 1.0
-References: <20260130031217.998002-1-briansune@gmail.com>
- <20260130145528.GA2421612@bill-the-cat>
-In-Reply-To: <20260130145528.GA2421612@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Sat, 31 Jan 2026 01:02:51 +0800
-X-Gm-Features: AZwV_Qiulh1pFPP39HmvUxWtOlbUPqff9eTP1ByAZ5Z_3GgY_whyJGT8paOuh_Q
-Message-ID: <CAN7C2SCKKFnQvJ1V3xoVHu_LL_YNBLR+T2btS0hFou7JE455qg@mail.gmail.com>
-Subject: Re: [PATCH v1] Fix unbootable ARMv7 devices
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/5] Added QCOM RPMH Power Domain Driver
+To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ jh80.chung@samsung.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, quic_varada@quicinc.com, me@samcday.com,
+ marek.vasut+renesas@mailbox.org, miquel.raynal@bootlin.com,
+ alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
+ w.egorov@phytec.de, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20251222114823.2146775-1-aswin.murugan@oss.qualcomm.com>
+ <5ae1432d-b5fa-4f30-b58a-0e4b08de744f@linaro.org>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <5ae1432d-b5fa-4f30-b58a-0e4b08de744f@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: j77Uvp5Isu3bjs1GHusRWzDZKI7U9cMz
+X-Proofpoint-ORIG-GUID: j77Uvp5Isu3bjs1GHusRWzDZKI7U9cMz
+X-Authority-Analysis: v=2.4 cv=d6T4CBjE c=1 sm=1 tr=0 ts=697ce6c2 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=-ahtfY8fPboJ07B6I6YA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTMwMDE0MSBTYWx0ZWRfX/arNI2nrl+td
+ svbB3PXVD4f9Jlt9GD8B4VZbp+rznjHd3uBpntvSR142jlQHTl62lV/UJ/Br4QAv+IFuM073wJg
+ TZtNbJfH4zY3qeOQdhYF+FJsH+5D2QG8joaPK6qPxLNxUvAmDGbkaPXHurMnPjD+xOp1nByfKlK
+ tCSoEyodTAOJY2bBXQB5OASSSiEvl+Dr+0gT0mHkDERK9bfYhoMLEvhvbUldoKBLwPUvFA3apYs
+ ZTu/VmgL1wC7WNIv2cBk2Cb4HYn08aHiLBBCbgPsyu1UHq35QZlEnhWRftH2mh2eLtTjhs1gPVi
+ t/U3Cv4Z3f6bs9B1qu9BRg2Pr58xHDE6+DtNGoS6+apX7iyEpCmDdaJqg0UNOun6CXvCqaTx8W0
+ Kcpvp9+W0WoCBpeSSpedGdm+dIfR7OObkIxOk7ZpAF5YYUc36NrZzRAqn7by3LepvQ7qYMfMD4S
+ OgiiCdtLeG15DzyPrEA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-01-30_02,2026-01-30_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 adultscore=0
+ bulkscore=0 malwarescore=0 clxscore=1015 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601300141
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,82 +157,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 30, 2026 at 10:55=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, Jan 30, 2026 at 11:12:17AM +0800, Brian Sune wrote:
->
-> > The linker script u-boot-spl.lds now
-> > is no longer aligned and -nodtb.bin ending shows
-> > the zeros are not 8 byte aligned. This result in
-> > the Makefile.xpl simply think the previous file
-> > is aligned and do not zero pad. simply fix the
-> > data align to 8 can ensure the -nodtb.bin is aligned,
-> > hence, the formation of u-boot-spl.bin properly align.
-> >
-> > Signed-off-by: Brian Sune <briansune@gmail.com>
-> > ---
-> >  arch/arm/cpu/u-boot-spl.lds | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> This fixes your problem in that it results in the device tree being
-> aligned still, but doesn't solve the underlying problem of why there
+Hi Casey,
 
-Hi Tom,
+Thanks for the review & feedback
 
-Another follow up question here is even making the data node to
-8 byte aligned will this create any harm or even fail case from first place=
-?
-As for testing on a real platform it makes no difference at all.
+Regarding comment *#2*, this was already discussed in v5 [1] and got 
+addressed from v6.
+In Patch No 2 "power-domain: Add warning when power-domain driver is 
+missing", |dev_power_domain_ctrl()| was updated to log a warning when 
+the power‑domain driver isn’t found (|-ENODEV|) and return 0 so that 
+execution continues without breaking the rpmpd platforms.
 
-If "binman_sym_table" is empty then the previous node data is 8 byte aligne=
-d.
-Where "__u_boot_list" is also gated by 8 byte end aligned unless it could b=
-e
-empty while "binman_sym_table" does not.
+For the remaining comments (#1 and #3), I’ll incorporate the suggestions 
+and respin the series.
 
-Just wondering and not really too good at these linker scripts.
+[1] 
+https://lore.kernel.org/u-boot/2e387aeb-2ba2-4b72-aa91-0815cd06f831@linaro.org/
 
-brian
+Regards,
+Aswin
 
-> were 4 extra bytes. Can you please try:
+On 1/14/2026 8:08 PM, Casey Connolly wrote:
+> Hi Aswin,
 >
-> diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> index c578c3ebf821..5f807323f856 100644
-> --- a/arch/arm/cpu/u-boot-spl.lds
-> +++ b/arch/arm/cpu/u-boot-spl.lds
-> @@ -31,16 +31,16 @@ SECTIONS
->                 *(.data*)
->         }
+> Sorry for the late response here.
 >
-> -       . =3D ALIGN(4);
-> -       __u_boot_list : {
-> -               KEEP(*(SORT(__u_boot_list*)));
-> -       }
-> -
->         . =3D ALIGN(4);
->         .binman_sym_table : {
->                 __binman_sym_start =3D .;
->                 KEEP(*(SORT(.binman_sym*)));
->                 __binman_sym_end =3D .;
-> +       }
-> +
-> +       . =3D ALIGN(4);
-> +       __u_boot_list : {
-> +               KEEP(*(SORT(__u_boot_list*)));
->                 . =3D ALIGN(8);
->         }
+> Still a few minor issues with this series but it's more or less there.
+> I'll just list everything here rather than replying to individual patches.
 >
-> As the problem ends up being that when both of these are true:
-> - .binman_sym_table is empty of actual .binman_sym* symbols
-> - The inner '. =3D ALIGN(8);' increments the linker counter from the
->   previous '. =3D ALIGN(4);' (in other words we were not already 8b
->   aligned).
+> 1. Please rename the kconfig option to something more specific like
+> QCOM_RPMH_POWER_DOMAIN
+> 2. Removing the fixup code will break msm8916 and other platforms that
+> use rpmpd (non-hardened), it should be pretty trivial to check if the
+> compatible string for the power-controller node ends with "rpmpd" or
+> "rpmhpd" and skip the logic in the latter case.
+> 3. The commit "mach-snapdragon: fixup power-domains" should have a more
+> specific title.
 >
-> The linker sets the type for this section to "NOBITS" which in turn
-> means that when we later call objcopy to create u-boot-spl-nodtb.bin we
-> get a mismatch between our expected size and actual size for creating
-> the -pad.bin file.
+> I'll pick this up as soon as I get the next revision.
 >
-> --
-> Tom
+> Kind regards,
+>
+> On 22/12/2025 12:48, Aswin Murugan wrote:
+>> This patch series adds support for the Qualcomm RPMH power domain
+>> driver, responsible for managing power domains on Qualcomm SoCs.
+>> The driver is ported from the Linux kernel and adapted for
+>> U-Boot to enable proper power domain control on SA8775P platform.
+>>
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> ---
+>> Changes in v7:
+>> - Droped soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data() functions
+>>    patch from previous version, since it was already picked
+>>    Link: https://lore.kernel.org/u-boot/176363183220.2293399.7296647117885059868.b4-ty@linaro.org/
+>> - Cleaned up the warning logic in drivers/power/domain/power-domain-uclass.c
+>>    when power-domain driver is missing
+>> - Link to v6: https://lore.kernel.org/u-boot/20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com/
+>>
+>> Changes in v6:
+>> - Added the change in drivers/power/domain/power-domain-uclass.c to give warning
+>>    when power-domain driver is missing
+>> - Added the change log 'In qcom-rpmhpd driver, the un-supported power domains are handled with warning
+>>    in rpmhpd_power_on() & rpmhpd_power_on()'
+>> - In drivers/power/domain/qcom-rpmhpd.c, the 'ret' variable in rpmhpd_probe() is initialized with 0
+>> - Link to v5: https://lore.kernel.org/u-boot/20251027113312.3815169-1-aswinm@qti.qualcomm.com/
+>>
+>> Changes in v5:
+>> - As part of "qcom_rpmhpd" driver removal change did in v4, the rpmh_write() in drivers/power/domain/qcom-rpmhpd.c
+>>    should be passed with pd->dev as first argument to align with it.
+>> - Added (ulong) casting in rpmhpd_match_table to address the warning.
+>>
+>> Changes in v4:
+>> - Added all soc entries in power domain linux driver to drivers/power/domain/qcom-rpmhpd.c and
+>>    stubbed it
+>> - Removed "qcom_rpmhpd" driver & unused members of struct rpmhpd in drivers/power/domain/qcom-rpmhpd.c
+>> - Moved the "soc: qcom: cmd-db" change before the "power-domain" change
+>> - Link to v3: https://lore.kernel.org/u-boot/20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com/
+>>
+>> Changes in v3:
+>> - Removed OF_LIVE_SA8775P config in arch/arm/mach-snapdragon/Kconfig & configs/qcs9100_defconfig,
+>>    since there is no SA8775p specific fixups are done
+>> - Link to v2: https://lore.kernel.org/u-boot/20250702171335.1811080-1-aswin.murugan@oss.qualcomm.com/
+>>
+>> Changes in v2:
+>> - Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN in drivers/power/domain/Kconfig
+>> - In drivers/power/domain/qcom-rpmhpd.c, the un-supported power domains are handled with warning
+>> - Power domain fixups have been removed since they are now managed by drivers/power/domain/qcom-rpmhpd.c
+>> - Link to v1: https://lore.kernel.org/u-boot/20250626112441.143064-1-aswin.murugan@oss.qualcomm.com/
+>> ---
+>>
+>> Aswin Murugan (5):
+>>    soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data()
+>>      functions
+>>    power-domain: Add QCOM RPMH Power Domain Driver Support
+>>    power-domain: Add warning when power-domain driver is missing
+>>    mach-snapdragon: fixup power-domains
+>>    configs: qcom: Add QCOM_POWER_DOMAIN config
+>>
+>>   arch/arm/mach-snapdragon/of_fixup.c        |  31 ---
+>>   configs/qcom_defconfig                     |   1 +
+>>   drivers/power/domain/Kconfig               |   8 +
+>>   drivers/power/domain/Makefile              |   1 +
+>>   drivers/power/domain/power-domain-uclass.c |   7 +
+>>   drivers/power/domain/qcom-rpmhpd.c         | 278 +++++++++++++++++++++
+>>   drivers/soc/qcom/cmd-db.c                  |  45 ++++
+>>   include/soc/qcom/cmd-db.h                  |   2 +
+>>   8 files changed, 342 insertions(+), 31 deletions(-)
+>>   create mode 100644 drivers/power/domain/qcom-rpmhpd.c
+>>
