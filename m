@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E39E6BF2A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 16:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01C2E6BF2F
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 17:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8589844F4;
-	Fri, 30 Jan 2026 17:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE467844F4;
+	Fri, 30 Jan 2026 18:03:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gGN8OopV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dGW6i/yh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99A688450D; Fri, 30 Jan 2026 17:50:35 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id ABB3B84513; Fri, 30 Jan 2026 18:03:06 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 618DE844F1
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 17:50:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 846BB844F1
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 18:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-45c819ca0f1so1411094b6e.0
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 08:50:33 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769791832; cv=none;
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d15b8feca3so2330611a34.3
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 09:03:04 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769792583; cv=none;
  d=google.com; s=arc-20240605;
- b=SvZWv4WkzQrpwazLhhjIcMd7m8ev7YlzrNAOZ8Ru4///FTD/7BQ4TzSdotlFH+bPEc
- A1qnHoQTpiPqp8fDmjKpfjxKHQQ4XpgO0T+imQg/vGqjvEesqf7VlGYk97ml79zYP9WU
- 7vQ7KmHUcUMhXr8zv29FWv7GgPJNxx0b2mQYqKCLVTkrcc2NNEWVEg4YLSJSGP4uWdSR
- EZomncDoiKpF3j1dRlKGKj9AQaPMSgt7JcJCXBTQRUTyN4DcXvHiTJaIDbJeT9weQLAq
- o8HO3oqFDUB8xYAOWSagaSbIUvH9TIzkcQu1ACUnUhOdHJL8sDUsNux+7p+meS9ws8Kj
- hp0A==
+ b=H+ZRpbjDK0OJYd3I9r3ogdvuaA4cwVtyQYhgVpJiMK175p2hNLBtT+/fsbRLFKltWC
+ wWNviB6QkNru54ohux1osoCT3LX5cL0v/bszRqZpzO18GwL6ewMgiSo915Gp0MpqkjXE
+ G1uCAnoJ4l/qrrWpOkEUmFDffZlmX0S0PBNOIDjYZo3JcL7Buv9WjS46bpwjgE1q+DU5
+ Fcsblog1dn5x/wbbZ8H1pnQ42dNW5+YZQZRa2qtxnoefBUGwBwd0GdSB1CHSTmTlvF2F
+ 45TdvCIWYjdp7dgsBDGxmIbRNJ+MKHxpR0MoZUdY0MrfLFZgK/3MdE2LpmFeuQRF+xaV
+ 3LIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=SdKQcV12GEEzICx2+PbnzdKr3aeWqBiTLMZtDtPCBp0=;
+ bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
  fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=T+FJhU9TSCP0uaLN+cvlX7xWzEHJzE5AvYkb4s41ZL+OsfgS8xeWBE4Wh06vuMJd53
- caZbQJxa2xIM3q/N0tcrGrS+JDeixCokFp+B3nLYel5UdMWyyA2oeXxoXfsZ7CiV17ar
- CVYLJvKHyM+IlpkIKa9iPNTYD0M0ZilDY4j/zc5VkbZC3SupbfBR9h6dAfkCzFPMJlA2
- w3vIPPlEieoblK3Xboqb5xMwIXxd7CD5gyqAxieULEPlviXuttygJwtcEjlL1VVj/IO6
- hQeAE8n7qi9TbuVvxg80peXkaY94hdzBFTigt8ozdiJ0m5F8Q+DHBQYz7xJpfCY65SGe
- m3fQ==; darn=lists.denx.de
+ b=gC14DcFoVv/ViewdLMBx0MjE6wa/vhar89LvpF+zUhI/OFsmZvPZhQJH3oixVZeN+N
+ zAnqrrnkwb50a2LyfrS4ClL+KLw58p9s2Gaye3b4sklPz1LGCvdimn0UGr4xHkn5yybp
+ PlRIcqT/RHOBmq1vOf7k9u5j/gcdIooRoUlfLu1CwUVlfUsSI0PqV1KAT+CfQfQX3T/1
+ QehMwHbk5w9uQA+9moq/NPKzBRd6v8B5bSL0spksaFZuj8Rn1S0Fo2hA/CGcavvGEgQQ
+ WT0ug6oRrsm74Q8WmMkiyP+vj0JEW8zKjyWOl9Dz0mQixomO/hBFYClwmTMUvUTOiXh5
+ 9EiA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769791832; x=1770396632; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1769792583; x=1770397383; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SdKQcV12GEEzICx2+PbnzdKr3aeWqBiTLMZtDtPCBp0=;
- b=gGN8OopV54vRb76mlEhw4VzHdBLOlVnSjc2GoP3t8Q2hC0ucwvhmA2dTEpIdzlrAJ3
- 51YBhC2mbrJXEATAdNhYc/1lsm02s/4/KaM6cSh3b7YnJPNhiUsyLX8PY9bn1vNjVzhN
- st310Ye9GstiXUyn6gjg4S1YaPyrj+7VTyIE0frZhPpZk09C+Dkgn+drLFEFylVMZlm0
- c346ER5S6YfCkiX3/HiUaiRGyyu8qaXlY8De2z7xJE0lEkIL1Fnl+yVSWBl6WyC54myj
- rp70p1tMrHF/RxxoccUfYqrfwR46mPVk+95aMKLxEGY/B5xbFrri3OMNGtPW7y9RC2zU
- TUsg==
+ bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
+ b=dGW6i/yhnVNBwR0mdwC1FVms0NMgQVVM+jnLQwD02TT9sqWCGxqZ+v8kZWz1JBbb68
+ lFQq5nqxW6xATlnqENzuVovtueF2Z6h2t/znWlYsiG5B9KzSXRXM2Xh5r5D7Mch8Kh84
+ 9sL2jM9KuHIUK7mQiaw1k/s/NWufAeVOzg4VpTfpkbWYJgZpU5QG0SD5GCovn+XTMWHh
+ fHDFrF59Qt0tPJ9DrKQX8yh6swwHY9irEdZxVDFDnUqhROdJOAv3lO8gYz3JiNHe6+/J
+ kDurusb1W/l3g9JuV5JzTm4znS2oB7HpINMlUqT87/vmQ6erZWqDIMeAXG+hACBChiUX
+ xCig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769791832; x=1770396632;
+ d=1e100.net; s=20230601; t=1769792583; x=1770397383;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=SdKQcV12GEEzICx2+PbnzdKr3aeWqBiTLMZtDtPCBp0=;
- b=gXXferYYz4G6BotUACYyUSG6aZBaTxaEcNBqiNIU5N1KG6/Hi9QqtnV3W+sXaZJGt2
- b8YA0FF5xJW/9xFVZoOcDgh+pF6WqgSMUkdroRYzcsznTTbd+cjk85rRcqyox+Frad+7
- XHmLh4DvGEmUCSMaO0nMof2b8OCI9fvfN8ysKX6okG3XQsdQjVd0BPKgVvaVfsz1V1kC
- CkRwjuVAE7ViBriKsgXfgsr+SGRxvPK+ezd+Ze00twJRNF1qhcafuCd6cMp1QXlOUQd8
- bG4ncG5q8puqbT4prh6Rp+Ml9yKVQPNNrJarhmyo23bj7A3owoD7uyQvUGqOfyczD6rD
- VFHw==
-X-Gm-Message-State: AOJu0YxjeQZIP08B4IXW7r/uLhljWr1hMHw6IVHXyV7kNssCozVKl4mJ
- xFMJnqP0uppAJxqFFl0XGBLpRxJHxOiULBBaUOz2eWSu6cUIgRLo25/M/ZdBTJo9h5W4ApHYpgK
- fEjVKPVXmJCspALXm0qym/Jnj4HJtmKM=
-X-Gm-Gg: AZuq6aL6+jxW1SCy0XeRCeyCJ8sQ1a0o3EvRei5Ed0B9VaAVkHRb8M84kO6yQpZFaJp
- sd1NkqadxorZ0Z9l8BN2Zjzd/aiwfc6fzZAyb16VnvtCo+aoWkhf2E11xPj5dHvVzcwW0tsGmme
- 47zZmjZ+FE+zMImJIPIBKu90e/V4CvgaGol7MzIs9nApRM/tdPWVCAIr46FhTspLAYBLYqkcBiF
- 0IbGuyW91YcLQZG4AmUJ4tzAzxRnt5+FHcHeJPm6ZTeKzWHasRDnVjJRSDMTzB4ydGoMC1T
-X-Received: by 2002:a05:6808:10d3:b0:45a:6e83:fbff with SMTP id
- 5614622812f47-45f1e3c76acmr3451607b6e.20.1769791828499; Fri, 30 Jan 2026
- 08:50:28 -0800 (PST)
+ bh=N6yrYkbCg6P/9UrPbMblFPOvM5FGZ1UYOPoY8WP70iA=;
+ b=PvaTx/kKA3TaHbJEq5IuC8DBXBTgosk4NIXD2Z0QiA8/e0oRCmTxzz4b8FyRiNGSH5
+ /O0Qu2D8FJiAUR7lm40HRAjS9wlK+LeO+6FdC8IG/NGHDLim9VBMgrxeBwFfVjcrXSWq
+ qaDx8cH/KrA82/1m+rYNq3uDDsw7HUnkID4xXFuQ2tVqrnwltxTPefdZBdZEyaHPiBVq
+ /LOylYqoiaPuKO8D6Fzw9m/Athq+BBafD7JFF0jBMb3sgtEOHxUMnahq5DXHlpr1uX1x
+ WcJZ+NKo+xNLa5S+xTofP4bY5WkI9xeTMc2K0NbflctDgHZaE24B8s77o6wUwgfcuM/5
+ EfOQ==
+X-Gm-Message-State: AOJu0YzAF+I+k5f8dSpwJSaLZk0PcbL0lQLS6eqyqQ7DlICk+BNhKiJe
+ YhF8uoYcRRqjtgy6LLkYvJlu41/5dfREqzn8uBDtRyxXBfM/02y9UeibXPXBMMudJVif1kDdqS1
+ CrfbPmACfyNERX733CEwznrgd6NGW38GAHUxELYuLhg==
+X-Gm-Gg: AZuq6aLz0Neu5XVVTWaZGRPBySCpc+P6tucJTHjp2AVfqkWKOmW6F4DcYth/mFxhUUT
+ F0WuyG7IjQU9ykg4H1QhcN6auZoNQKuzsrzowi7phhdgEXt4RwhOAHhq8XyepIc/Y2/PeQm7d7g
+ DYFNsqxGoY8qLNSmJ0CZAkf1ECm10eFd4NuyM9R4GzgvdVyIVWbHlK5/1D/9kfb6qcpyZNo+tMZ
+ 3e9xzH5vrJcgRyBQhe4OMN2B8jFW6DcWZz+h++cmiQVoJXamnHZlPr2eCpC89WY9QGTyQH56FfI
+ 2fCgTwk=
+X-Received: by 2002:a05:6830:4409:b0:7cf:d150:a245 with SMTP id
+ 46e09a7af769-7d1a52a75e1mr2380587a34.5.1769792583033; Fri, 30 Jan 2026
+ 09:03:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20260130031217.998002-1-briansune@gmail.com>
  <20260130145528.GA2421612@bill-the-cat>
 In-Reply-To: <20260130145528.GA2421612@bill-the-cat>
 From: Sune Brian <briansune@gmail.com>
-Date: Sat, 31 Jan 2026 00:50:17 +0800
-X-Gm-Features: AZwV_Qin5nzIEIpV1YefyUGRtsWO7uBgmKkJ3u88nwGfStZVf5niIiV_3qSQoA0
-Message-ID: <CAN7C2SCixc3Ug+MsfMj5wnJVVPQSa3QS7frkXvj90LsY09ehQg@mail.gmail.com>
+Date: Sat, 31 Jan 2026 01:02:51 +0800
+X-Gm-Features: AZwV_Qiulh1pFPP39HmvUxWtOlbUPqff9eTP1ByAZ5Z_3GgY_whyJGT8paOuh_Q
+Message-ID: <CAN7C2SCKKFnQvJ1V3xoVHu_LL_YNBLR+T2btS0hFou7JE455qg@mail.gmail.com>
 Subject: Re: [PATCH v1] Fix unbootable ARMv7 devices
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
@@ -134,7 +135,22 @@ e:
 > This fixes your problem in that it results in the device tree being
 > aligned still, but doesn't solve the underlying problem of why there
 
-No it is not 4 extra bytes but 4 bytes short on the latest master commits.
+Hi Tom,
+
+Another follow up question here is even making the data node to
+8 byte aligned will this create any harm or even fail case from first place=
+?
+As for testing on a real platform it makes no difference at all.
+
+If "binman_sym_table" is empty then the previous node data is 8 byte aligne=
+d.
+Where "__u_boot_list" is also gated by 8 byte end aligned unless it could b=
+e
+empty while "binman_sym_table" does not.
+
+Just wondering and not really too good at these linker scripts.
+
+brian
 
 > were 4 extra bytes. Can you please try:
 >
@@ -164,41 +180,11 @@ No it is not 4 extra bytes but 4 bytes short on the latest master commits.
 >                 . =3D ALIGN(8);
 >         }
 >
-
-This patch will create the same result but the actual problem
-never caused by the -pad.bin.
-
-The bss size is 8 byte aligned hence it will not be the issue from
-first place at Makefile.xpl as it will not create any zero pad.
-
-The issue here is that the nodtb size itself size is never 8 byte
-aligned at the end result in short or long cases while the
-Makefile.xpl only creates extra zero based on the bss size rather than
-the nodtb size.
-
-Then they simply join nodtb + pad + bss but from first place nodtb
-is not sized correctly at the end aka 8 byte sized.
-
-Any method that can make the end back to 8 byte size of the nodtb
-should do the job.
-
 > As the problem ends up being that when both of these are true:
 > - .binman_sym_table is empty of actual .binman_sym* symbols
 > - The inner '. =3D ALIGN(8);' increments the linker counter from the
 >   previous '. =3D ALIGN(4);' (in other words we were not already 8b
 >   aligned).
-
-So what you are suggesting is that the section of  binman_sym_table
-is empty so the ALIGN(8) just simply cannot do its 8 byte alignment job.
-
-And reversing the order makes sure it will always ALIGN end with 8.
-But does "__u_boot_list" result in an empty case? If not then this
-indeed do what I also wanted to.
-
-I intended not to change any ordering to fix the issue.
-
-Brian
-
 >
 > The linker sets the type for this section to "NOBITS" which in turn
 > means that when we later call objcopy to create u-boot-spl-nodtb.bin we
