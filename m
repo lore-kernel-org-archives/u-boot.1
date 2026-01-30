@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7572E6BF39
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 21:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE3A5E6BF3C
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 21:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CD548420D;
-	Fri, 30 Jan 2026 22:07:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id 3DC42844C7;
+	Fri, 30 Jan 2026 22:57:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=debian.org header.i=@debian.org header.b="H1R6Onjz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KAultVyE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56B0E844F4; Fri, 30 Jan 2026 22:07:46 +0100 (CET)
-Received: from stravinsky.debian.org (stravinsky.debian.org
- [IPv6:2001:41b8:202:deb::311:108])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3C14D84563; Fri, 30 Jan 2026 22:57:30 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50830841E6
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 22:07:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3445D844C0
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 22:57:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=vagrant@debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org; 
- s=smtpauto.stravinsky;
- h=X-Debian-User:Content-Type:MIME-Version:Message-ID:
- Date:References:In-Reply-To:Subject:Cc:To:From:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=NL34bRIIpW7ErWeod4yaaTlidVF13wkX8KIDBWNNQxU=; b=H1R6Onjz1V/UfOaMy/b0wLKDUq
- ZyTtzNsNmFuCWv8RimAJwmMoNF7S/xgP4OQFsKWAE3dTCqWfJDAi2a1NwcClseCG1Hj0RHjZXAXPX
- 4MwnL1uKRwPr07ruWQJGBpow6D6CsrxnB8caAuqzdRvUMNWQv2o9qFXrR6jwkTBiU1RGWQPpXEUQ7
- bkP1ldus9Sgo/BuaClFY5az5qSWeG9iaHqVPR0t2cT+W5YKEx1Z2njU1Xnyp/F6+x+9IagJO3atVP
- tXMHvphgRNe+dWBLZqyY/kB0WC2a261NkoYJwEDY83FNTz6UkV/TqBEIzq7ATogn498/M36tnYE/9
- 3JOHhXRA==;
-Received: from authenticated user by stravinsky.debian.org with utf8esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
- (Exim 4.94.2) (envelope-from <vagrant@debian.org>)
- id 1vlviR-001zS2-2l; Fri, 30 Jan 2026 21:07:43 +0000
-From: Vagrant Cascadian <vagrant@debian.org>
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: rk3588 MNT Reform2 fails to boot from SD card
-In-Reply-To: <11f467e2-1059-4edb-81a2-8b970b315882@cherry.de>
-References: <87ikcjc1oc.fsf@wireframe>
- <11f467e2-1059-4edb-81a2-8b970b315882@cherry.de>
-Date: Fri, 30 Jan 2026 13:07:36 -0800
-Message-ID: <87bjiabyhz.fsf@wireframe>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-45efde72438so1686801b6e.3
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 13:57:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1769810245; x=1770415045; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xcB8PTLZb7xJwZSZ+8pbCakQ6b9WahATk3MExDJynes=;
+ b=KAultVyEwc5N+f/loJyeL3Hih3djXo9xJ72WGZbHPzPUyTVdaaCTjT3ljuAuLBawnV
+ H3XfUo8a6AeLaEBeq9OVUsN4BHd6Dk8pJNZtJ/0laGfhNKx28WQkKs03MPRz8ENTKdT0
+ D3K5z36jriCGLNF1SPLov1ONKqfIRFPDl6/6w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769810245; x=1770415045;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xcB8PTLZb7xJwZSZ+8pbCakQ6b9WahATk3MExDJynes=;
+ b=HRIfiC0rz2jLgKLGb7beQEPfIuwHfOZjqDk/SJp6n4fPIyGD74T/R1j4NuFgdKKQjd
+ LiHbnsEPT36a9buZxwBnrfPGvbn8mPdTiS2M9l/yvvJKlgHPBeEFDRrBgf07vwvGYYe+
+ 0SRE6hpYugyr267khzJkZ9rhyH/HilcxnAn4GVa3CjWid2ULEx5ILBXfVs5kIxLlitp6
+ 4YVxoNNsVC0Lu5YLMPoybg+P84+TF6aG243HQc1WQ/qCKFmpKoPr2/wl8Ieb+hXlHVBE
+ b9hLH4AH7Y59naAt56ZfiEMrcG+fpjey3sXBlw19Wr12Ch6OB60RIKxN8jegiy8VY7YF
+ Rlsw==
+X-Gm-Message-State: AOJu0YyBi6Qk5zQLZuKn2UZaJSg8H16c4PzULj4/BuY0FtYhu+l8Wjkl
+ g+L+joDUY21MJ3HCqx6LR1cewiIuDDC3NQ5dj7IyR6EH0Bsbcnkp5NcBjj3BII/tIcA2hWBsaGP
+ sjVDdD9Y=
+X-Gm-Gg: AZuq6aIFsdGSvdCoAJtwmvAhhtJzrFVs8Cqg0VoIoruzJYN6DEIvkfmT0nbYQPfV6Bq
+ V72fzWgUZr/AcAPh7jjfO4Th1lJ9Si5efaAD8pkkHAXDk16mazb4e9Xjatso939jzSoukfIFUTM
+ 3gcvURuLiDt2XvSisWUq0+5DuPsfmM0qPlHXlWcedU28uLsiuSTS/pUMtjwSCSBfODkMr6Ob1mD
+ dxToTywUMlMY00s7KDaObhVtTx6M6rChszoyt1rsesRAuB3w6E3kxubXXFKOKn/Y9h55vxzjqGa
+ kNGy1lwtR4U7me7dOxfBSjANgygCV1kbk1+alMui8ttftb8loIEolp/iffULnGLuuZrd9WzZsV0
+ 62FI9KxMExy6yJa2ZW8EIcXPH9Obz6mnrMlyM1cH1Gx3y+S+bJp8SR4mUMcG5OWjKw+uSaQpNeZ
+ byIlIwYBfb7hpM/C4Dct6Rohzx8u/RWa3D/wcGCd1hWFXfnWGo5XdlJQ2CyeDG+bspNz1sWU9Ql
+ v9+mirE01QMzXWMW70WqZR2a358aVWhctg2AlnuSg==
+X-Received: by 2002:a05:6808:23c8:b0:45e:af0b:3afa with SMTP id
+ 5614622812f47-45f34b9c707mr2216164b6e.22.1769810244781; 
+ Fri, 30 Jan 2026 13:57:24 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45f08d894f5sm5552610b6e.5.2026.01.30.13.57.23
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Jan 2026 13:57:24 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] CI: Update to using grub-2.14 for our tests
+Date: Fri, 30 Jan 2026 15:57:22 -0600
+Message-ID: <20260130215722.3117956-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha512; protocol="application/pgp-signature"
-X-Debian-User: vagrant
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,137 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+When building grub-2.12 with a newer GCC, we run in to warings (treated
+as errors). The simple fix here is to move to the latest release tag. In
+order to build a newer grub from source we need the autoconf-archive
+package to be installed.
 
-On 2026-01-30, Quentin Schulz wrote:
-> On 1/30/26 2:46 AM, Vagrant Cascadian wrote:
->> Thanks for adding support for rk3588 MNT Reform2!
->>=20
->> I tried using u-boot 2026.01 with the rk3588 MNT Reform2, but it only
->> gets as far as SPL, and then fails:
->>=20
->>    U-Boot SPL 2026.01 (Jan 01 1970 - 00:00:01 +0000)
->>    Trying to boot from MMC1
->>    mmc_load_image_raw_sector: mmc block read error
->>    Error: -38
->>    SPL: Unsupported Boot Device!
->>    SPL: failed to boot from all boot devices
->>    ### ERROR ### Please RESET the board ###
->>=20
->> I *think* MMC1 is eMMC, which I currently have blanked, as recovering
->> from a failed install on eMMC is trickier.
->>=20
->
-> It's surprising it isn't trying MMC1 twice as that's what it's supposed=20
-> to do due to u-boot,spl-boot-order containing "same-as-spl" and the eMMC=
-=20
-> controller again later in the chain (see the property).
->
-> In any case, no support for the SD controller in SPL according to the=20
-> defconfig, can you try with:
->
-> """
-> diff --git a/configs/mnt-reform2-rk3588_defconfig=20
-> b/configs/mnt-reform2-rk3588_defconfig
-> index 6adc9e4e60c..982e6c6eb20 100644
-> --- a/configs/mnt-reform2-rk3588_defconfig
-> +++ b/configs/mnt-reform2-rk3588_defconfig
-> @@ -50,6 +50,8 @@ CONFIG_MMC_HS400_ES_SUPPORT=3Dy
->   CONFIG_SPL_MMC_HS400_ES_SUPPORT=3Dy
->   CONFIG_MMC_HS400_SUPPORT=3Dy
->   CONFIG_SPL_MMC_HS400_SUPPORT=3Dy
-> +CONFIG_MMC_DW=3Dy
-> +CONFIG_MMC_DW_ROCKCHIP=3Dy
->   CONFIG_MMC_SDHCI=3Dy
->   CONFIG_MMC_SDHCI_SDMA=3Dy
->   CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> """
->
-> and report if it gets you further?
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+There are compiler problems to resolve before CI can move up to
+gcc-15.2.0 but this step will be required.
+---
+ tools/docker/Dockerfile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Much further, indeed! With that applied to 2026.04-rc1, I managed to
-load the kernel, initrd and dtb from NVMe, and boot all the way to a
-rootfs!
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 21f0369275c6..73bf6cdd2c52 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -60,6 +60,7 @@ RUN echo deb http://apt.llvm.org/noble/ llvm-toolchain-noble-20 main | tee /etc/
+ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+     apt-get update && apt-get install -y \
++	autoconf-archive \
+ 	automake \
+ 	autopoint \
+ 	bc \
+@@ -155,7 +156,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
+ RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
+ 	cd /tmp/grub && \
+-	git checkout grub-2.12 && \
++	git checkout grub-2.14 && \
+ 	git config --global user.name "GitLab CI Runner" && \
+ 	git config --global user.email trini@konsulko.com && \
+ 	GNULIB_URL=https://https.git.savannah.gnu.org/git/gnulib.git ./bootstrap && \
+-- 
+2.43.0
 
-With one big downside... no display on linux (eDP? panel, or on
-HDMI). Neither upstream u-boot or vendor u-boot provided output on the
-display, so that part is not a regression.
-
-I have a slightly older rk3588 module that does not use dsi -> eDP, that
-might be an issue... maybe upstream u-boot vs. vendor u-boot is
-configuring or not configuring something needed...
-
-
-> I think you'll be missing support for=20
-> the CD gpio as well in SPL.
->
-> So probably you need to enable SPL_GPIO:
->
-> """
-> diff --git a/configs/mnt-reform2-rk3588_defconfig=20
-> b/configs/mnt-reform2-rk3588_defconfig
-> index 6adc9e4e60c..7485d03a0cb 100644
-> --- a/configs/mnt-reform2-rk3588_defconfig
-> +++ b/configs/mnt-reform2-rk3588_defconfig
-> @@ -2,6 +2,7 @@ CONFIG_ARM=3Dy
->   CONFIG_SKIP_LOWLEVEL_INIT=3Dy
->   CONFIG_COUNTER_FREQUENCY=3D24000000
->   CONFIG_ARCH_ROCKCHIP=3Dy
-> +CONFIG_SPL_GPIO=3Dy
->   CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3588-mnt-reform2"
->   CONFIG_ROCKCHIP_RK3588=3Dy
->   CONFIG_SPL_SERIAL=3Dy
-> @@ -50,6 +51,8 @@ CONFIG_MMC_HS400_ES_SUPPORT=3Dy
->   CONFIG_SPL_MMC_HS400_ES_SUPPORT=3Dy
->   CONFIG_MMC_HS400_SUPPORT=3Dy
->   CONFIG_SPL_MMC_HS400_SUPPORT=3Dy
-> +CONFIG_MMC_DW=3Dy
-> +CONFIG_MMC_DW_ROCKCHIP=3Dy
->   CONFIG_MMC_SDHCI=3Dy
->   CONFIG_MMC_SDHCI_SDMA=3Dy
->   CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> """
->
-> aaaand also enable it in SPL DT:
->
-> """
-> diff --git a/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi=20
-> b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..47509f4cb37
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-> @@ -0,0 +1,9 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +/* SD CD */
-> +&gpio0 {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> """
->
-> I believe?
-
-Do you think it is worth testing this part as well? Or is booting to
-rootfs sufficient to demonstrate it is working?
-
-
-live well,
-  vagrant
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEARYKAB0WIQRlgHNhO/zFx+LkXUXcUY/If5cWqgUCaX0dmAAKCRDcUY/If5cW
-qqNgAQD9HofGHRk8TyEafB8skPAtQTB2NAUmvL1PR7JhzOaILQEAzBuk5UJWjJrh
-Wr+gnROGzpobUdlA7hN7dl7KSYf+UAg=
-=Ssly
------END PGP SIGNATURE-----
---=-=-=--
