@@ -4,62 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 623EAD73EB0
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 02:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 788B4D73EB0
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 02:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155D5841CF;
-	Fri, 30 Jan 2026 03:15:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id DDC5E8419D;
+	Fri, 30 Jan 2026 03:18:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Y7ay31dx";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="VfMSSe89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F47840DF; Fri, 30 Jan 2026 03:15:51 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 50D638419E; Fri, 30 Jan 2026 03:18:09 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D01C2841BD
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 03:15:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1290E8418A
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 03:18:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f2KNy5BP3z9tlB;
- Fri, 30 Jan 2026 03:15:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769739346;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SGgDXJrBoSNguzNzcK7zQ83vWIaYzKpLjzF/OYBv4fM=;
- b=Y7ay31dxuMQlBhLK9ipqYZMXLcDaXoUfBOd+aIo7orqIo2yKIjZI2Q6wqf79OuFi3xbarE
- PfE0IOnw/4kpq2Vwz2lH22YQTNOcps9o+45DqXgZOqmaNgNT6WoJNE4oarp5MkmImRW54S
- SgC72tQk/zgHrD9f3bTX8naRD1wazxEGqeAnO1arvW8A14UCFFpy1w2Epf+S7zLCd+npuh
- +lk7f7K+GAe4Q6/VXcAc1pmzkNdW+7tIMKsCDuzsmxykLk39q63ubN04A4P1BKv1z7lEfA
- 76Fr4rLvhoO4EDp8AvXJuYfgChO15hYXhEFXeC3kHA+9YSz0EJ/gm2Kw89WgzQ==
-Message-ID: <d771106a-46be-45de-ab8a-8d0f4f0ee383@mailbox.org>
-Date: Fri, 30 Jan 2026 02:31:14 +0100
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=5t
+ cIn2NJ4JKIlBaIjAG4JCb8BWdK5ixB55lATfrM+bY=; b=VfMSSe89VkmXB+w+r0
+ KUzsV9vjSTA2v26KAcpukGc/WexpsAgrkraHT87S59DR5gzqUdDSW45Swtk4nbCj
+ 2gF1wKYY0JJ4jxfh3FEZULR7YREOx4QmDIGxoXUTdagJNAdRHso5TrP6Y0URBMI8
+ J7Cyc7L9ktfP7ON7+qjv5CIVo=
+Received: from ProDesk-480.. (unknown [])
+ by gzsmtp5 (Coremail) with SMTP id QCgvCgBHlHbLFHxpyOAaNQ--.36S2;
+ Fri, 30 Jan 2026 10:17:52 +0800 (CST)
+From: Andy Yan <andyshrk@163.com>
+To: ada@thorsis.com, dario.binacchi@amarulasolutions.com,
+ michael@amarulasolutions.com, trini@konsulko.com, u-boot@lists.denx.de
+Cc: Andy Yan <andyshrk@163.com>
+Subject: [PATCH] mtd: nand: raw: atmel: Access device ofnode through functions
+Date: Fri, 30 Jan 2026 10:17:37 +0800
+Message-ID: <20260130021745.391602-1-andyshrk@163.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH 6/6] usb: eth: asix88179: Add read_rom_hwaddr() ops
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: Khoa Hoang <admin@khoahoang.com>, u-boot@lists.denx.de
-References: <20260130002941.2336252-1-jonas@kwiboo.se>
- <20260130002941.2336252-7-jonas@kwiboo.se>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260130002941.2336252-7-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: cc870585ba5b732d3da
-X-MBO-RS-META: fm5d6m6g5gyd77g64wk8puiawzpky51y
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: QCgvCgBHlHbLFHxpyOAaNQ--.36S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxXry5CF13XrWrCFWkGw45Wrg_yoWrtw17pa
+ yUJay3tw40qF4Y9FWIkFWDGanIy3WktFZ8J3yxX34Iv3ZxXFyUtry5CF1Ik3WrCFWxu3Wa
+ vFW0qa4DuF4rAw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pMfOw-UUUUU=
+X-Originating-IP: [58.22.7.114]
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbCxhCyEWl8FNBscgAA36
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,11 +66,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/30/26 1:29 AM, Jonas Karlman wrote:
-> The ASIX 88179 driver already has helpers for reading the MAC address.
-> 
-> Add support for the read_rom_hwaddr() ops using the existing
-> asix_read_mac() helper function.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+According to commit 84a42ae36683 ("dm: core: Rename device node to indicate it is private")
+
+node_ should not be aaccess outside driver model.
+
+Signed-off-by: Andy Yan <andyshrk@163.com>
+---
+
+ drivers/mtd/nand/raw/atmel/nand-controller.c | 18 +++++++++---------
+ drivers/mtd/nand/raw/atmel/pmecc.c           |  6 +++---
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
+index c90a4eab8df..d6e940d4a90 100644
+--- a/drivers/mtd/nand/raw/atmel/nand-controller.c
++++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
+@@ -1010,10 +1010,10 @@ static int atmel_nand_pmecc_init(struct nand_chip *chip)
+ 	if (nc->caps->legacy_of_bindings) {
+ 		u32 val;
+ 
+-		if (!ofnode_read_u32(nc->dev->node_, "atmel,pmecc-cap", &val))
++		if (!ofnode_read_u32(dev_ofnode(nc->dev), "atmel,pmecc-cap", &val))
+ 			chip->ecc.strength = val;
+ 
+-		if (!ofnode_read_u32(nc->dev->node_,
++		if (!ofnode_read_u32(dev_ofnode(nc->dev),
+ 				     "atmel,pmecc-sector-size",
+ 				     &val))
+ 			chip->ecc.size = val;
+@@ -1671,7 +1671,7 @@ static int atmel_nand_controller_add_nands(struct atmel_nand_controller *nc)
+ 	 * Add support for legacy nands
+ 	 */
+ 
+-	np = nc->dev->node_;
++	np = dev_ofnode(nc->dev);
+ 
+ 	ret = ofnode_read_u32(np, "#address-cells", &val);
+ 	if (ret) {
+@@ -1791,7 +1791,7 @@ static int atmel_nand_attach_chip(struct nand_chip *chip)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (nc->caps->legacy_of_bindings || !ofnode_valid(nc->dev->node_)) {
++	if (nc->caps->legacy_of_bindings || !ofnode_valid(dev_ofnode(nc->dev))) {
+ 		/*
+ 		 * We keep the MTD name unchanged to avoid breaking platforms
+ 		 * where the MTD cmdline parser is used and the bootloader
+@@ -1855,7 +1855,7 @@ atmel_nand_controller_init(struct atmel_nand_controller *nc,
+ 		return PTR_ERR(nc->mck);
+ 	}
+ 
+-	ret = ofnode_parse_phandle_with_args(dev->parent->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev->parent),
+ 					     "atmel,smc", NULL, 0, 0, &args);
+ 	if (ret) {
+ 		dev_err(dev, "Missing or invalid atmel,smc property\n");
+@@ -1887,7 +1887,7 @@ atmel_smc_nand_controller_init(struct atmel_smc_nand_controller *nc)
+ 	if (nc->base.caps->legacy_of_bindings)
+ 		return 0;
+ 
+-	ret = ofnode_parse_phandle_with_args(dev->parent->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev->parent),
+ 					     nc->base.caps->ebi_csa_regmap_name,
+ 					     NULL, 0, 0, &args);
+ 	if (ret) {
+@@ -1933,7 +1933,7 @@ static int atmel_hsmc_nand_controller_init(struct atmel_hsmc_nand_controller *nc
+ 	int ret;
+ 	u32 addr;
+ 
+-	ret = ofnode_parse_phandle_with_args(dev->parent->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev->parent),
+ 					     "atmel,smc", NULL, 0, 0, &args);
+ 	if (ret) {
+ 		dev_err(dev, "Missing or invalid atmel,smc property\n");
+@@ -1957,7 +1957,7 @@ static int atmel_hsmc_nand_controller_init(struct atmel_hsmc_nand_controller *nc
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = ofnode_parse_phandle_with_args(dev->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev),
+ 					     "atmel,nfc-io", NULL, 0, 0, &args);
+ 	if (ret) {
+ 		dev_err(dev, "Missing or invalid atmel,nfc-io property\n");
+@@ -1971,7 +1971,7 @@ static int atmel_hsmc_nand_controller_init(struct atmel_hsmc_nand_controller *nc
+ 		return ret;
+ 	}
+ 
+-	ret = ofnode_parse_phandle_with_args(dev->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev),
+ 					     "atmel,nfc-sram", NULL, 0, 0, &args);
+ 	if (ret) {
+ 		dev_err(dev, "Missing or invalid atmel,nfc-sram property\n");
+diff --git a/drivers/mtd/nand/raw/atmel/pmecc.c b/drivers/mtd/nand/raw/atmel/pmecc.c
+index e500a0fe3f8..216ee0f7ac7 100644
+--- a/drivers/mtd/nand/raw/atmel/pmecc.c
++++ b/drivers/mtd/nand/raw/atmel/pmecc.c
+@@ -833,9 +833,9 @@ atmel_pmecc_create(struct udevice *dev,
+ 	pmecc->dev = dev;
+ 	mutex_init(&pmecc->lock);
+ 
+-	ofnode_read_resource(dev->node_, 0, &res);
++	ofnode_read_resource(dev_ofnode(dev), 0, &res);
+ 	pmecc->regs.base = (void *)res.start;
+-	ofnode_read_resource(dev->node_, 1, &res);
++	ofnode_read_resource(dev_ofnode(dev), 1, &res);
+ 	pmecc->regs.errloc = (void *)res.start;
+ 
+ 	pmecc->regs.timing = 0;
+@@ -910,7 +910,7 @@ struct atmel_pmecc *devm_atmel_pmecc_get(struct udevice *userdev)
+ 	if (!userdev)
+ 		return ERR_PTR(-EINVAL);
+ 
+-	ret = ofnode_parse_phandle_with_args(userdev->node_,
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(userdev),
+ 					     "ecc-engine",
+ 					     NULL, 0, 0, &args);
+ 	/* Probe pmecc driver */
+-- 
+2.43.0
+
+base-commit: 62b45e82bdbf703571450e97f605893fe0d50530
+branch: master
+
