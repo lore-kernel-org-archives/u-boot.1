@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B205E6BF10
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 22:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF788E6BF3B
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 22:06:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B8298456C;
+	by phobos.denx.de (Postfix) with ESMTP id AA06A8457A;
 	Fri, 30 Jan 2026 23:06:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="a/qq4Yem";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="zRgpMae/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34BFE84572; Fri, 30 Jan 2026 23:06:47 +0100 (CET)
+ id 5DF968455B; Fri, 30 Jan 2026 23:06:47 +0100 (CET)
 Received: from MRWPR03CU001.outbound.protection.outlook.com
  (mail-francesouthazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD8B8455B
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 23:06:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 666EE84568
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 23:06:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KSGRBaZBFlqOGRL4RtgjjIw37oPsDepWBaOmC9qVGVqelcUbhgLipjBip3hSsWDwNOlcE7b3fEVJCn2lkveqIvVWQ1qxrH0n0L0lWrcyLO66npYW5DN9mUgnHDD4viaCpjoVqGjeRgHDEdrk7++RTqm26C9C6zoNRIbsVis9MYuj2/Oo26mZGKFZNvEk/hnUpdbMnFdLHsyPOyLE3qAAgzZ3G77zavnLb4ULqcWRAPRCKV410xdkbRT/Nf2rZAKWKQQ/em35BH3j71SMgWnU3HkTTZgMyhZx77NjgFuEtnMr0o7vcyAqqPTHoBVSmB2RdgG4rh9oml+LDQU+95dQLg==
+ b=D5MrmNUmm+UUcue2fpaLJev2w1jRDNotcJOERK3NI/RSUa+5tWuO0AisuQ/4dJY3u6aKHiuowxu9qHY7w2yk6jKo2epWx2O1yWBLWGmsZH4l4223SGB1HOslObLoodaDUDbo5K9oc/9IQfydzZisjYKC0ai4wQYTlONWEUhXRvWG3yjiOFbdm9QXS/o6e6t+25fq+g2AXrG984i10+go8LX2KYhXbD/RY33jf+q4K27zTn2KF2EUaQgrbLgrf4Pa4EMrOXBC/9SUgawXSVqaG2L4MCMzvOMBYBWvbvWucaQvhRMmRszbmRxC02Wp01wt+sZl6vltNMKF7IVT54ny/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xolYU9/T4YOg/JSFQF0GO+9Q4g7hYbv5S0x41heW6xM=;
- b=RQOyKIeZjevbnPQqakwN24ofUwuzSfhksaQg81RQa3Yz2bBGuGID1acOrvYkdOKlb+JTDzqR8FRndrEwkxnKLwJBMO8wBpKJHqAsNU9xPrdvkcQ3fE14aevbcT3nqPzoiYUj6EEJeW4BAt1RKlsQAbwsKlPqi45Q1BTFCdL+85gdvu2zpw5yj64Cx3w5Xe7FsI8hZouf8k4yU0fEcpjfHILp/9qsagYbzwpiW2OcwVmAC0f4Rwe2NF1V5EUvsuQA4Tb4/Ltwfa8Pj93CFPmVpQgBp93gCdVPq8lQUD22LEU2Uol922Em0Zb+Oc8373s4PQ8w2y6NUtWqHcPeBvgaZA==
+ bh=JhcLKawIvwAtLXGeiEYVf3nwKNLBmUReBEQo4sKBCHg=;
+ b=WV+b31YDg0qlkeiKNfd50hfZqOPtgby6D1wIdQ8G0u28qL53dj7NVjBGxXG8tplanbhPTbrHcFlFKAFJhiHDAahFHNR63netzjyM+/E4oZtH2BPuJFvqvWDsbyipkDUMI5lqZOpFnxvCMWFrFRQpQBJDujzd7P5N/reOix0Lj0hNLsOJTAoV2t3EOhvIsUd/Zu9fNDcf0EIan9eHXTpneFyJu+dYe2Viqan+dCv5Xu77tdaKWxTIzuggnQKAojlan/FV8pQlCETLj9Z4MTfAmSde9pejwMHr+aaxUtKuSdPpsc7V9ZER/1wmuq6RCquOAz9wfiAcrX6Fi8XB2Jb2eQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xolYU9/T4YOg/JSFQF0GO+9Q4g7hYbv5S0x41heW6xM=;
- b=a/qq4Yem9POLmNEkZmjmjub4X6YjBKZHiHLjKRYgtFTKz7Qgi9XwtjbGfF/8z58QWk1/YYdMZ6+iUNNJ5WU+1yZYjZRopPqzeKo1hW8WTJQMyInN1Hqr/5yNv08EKNjT6xduNLYv2/L1qAhkNHj9NihwEBL/8As8W7OrXgbf2Q6WbRBLeX+NRUBw1jClxAXmafnrXR+hpZ5JGEcg5y9c5dqoIRAVsOdlVMciVVFg0M0L0eJ+sm716B5AQYDUmTEfcv6j919AxQEADXDbGkgxOdbL5N+hke5uVaUq1bCtD7I8kvcGaU2yiRf0H51D3sPj1K/85qAO5wSfCrTuiOCT/A==
+ bh=JhcLKawIvwAtLXGeiEYVf3nwKNLBmUReBEQo4sKBCHg=;
+ b=zRgpMae/VIN1r3HDNQPIOQSfjqKr4yLslJUnyPA7wTAiqF4N37Ha+GpxiF7NizsF0IYwVNMeh2tW5PMq4mWRTjWG6xHnoYTzpUdYNg0GELNIIgw3HbGSWDQyJmGSmcar4bnVezWL3vynxgSApZkp86hru1tm5SkR19N2CGU32szkniodIFLeS1KsyZK/Lq83x6pTu1Yhuc/fY9K0w6QDpZgJLii06TnlcnIseVm+oh0m1Yl8mhASW6rOormCcmIlweGNSGl2K3XOw3hDB4y37k/4kZDTWGESwzizXC11UCmL9FjO9oNh3OPyEdBT+DGK10Gc6aYIYCP3kc+9zKU27A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by DBBPR08MB10697.eurprd08.prod.outlook.com (2603:10a6:10:52a::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Fri, 30 Jan
- 2026 22:06:41 +0000
+ 2026 22:06:44 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%4]) with mapi id 15.20.9520.011; Fri, 30 Jan 2026
- 22:06:41 +0000
+ 22:06:44 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -63,10 +63,12 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Robert Marko <robert.marko@sartura.hr>, Greg Malysa <malysagreg@gmail.com>,
  u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH 0/7] net: airoha: mdio support for the switch
-Date: Sat, 31 Jan 2026 01:06:22 +0300
-Message-ID: <20260130220629.4040550-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 1/7] net: airoha_eth: fix mdio binding to switch device
+Date: Sat, 31 Jan 2026 01:06:23 +0300
+Message-ID: <20260130220629.4040550-2-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260130220629.4040550-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260130220629.4040550-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: MI0P293CA0002.ITAP293.PROD.OUTLOOK.COM
@@ -75,83 +77,83 @@ X-ClientProxiedBy: MI0P293CA0002.ITAP293.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|DBBPR08MB10697:EE_
-X-MS-Office365-Filtering-Correlation-Id: c0674f4e-4290-491d-c062-08de604bd8ec
+X-MS-Office365-Filtering-Correlation-Id: f138c22e-2e0a-4f28-c22b-08de604bdaa6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|7416014|52116014|376014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Kjexb9E8NF2mhwsEafPi+ifjNtN+t9jwSTEArffGp4R3TM4nnH5N8gWyowFC?=
- =?us-ascii?Q?KM9d9J667A1wRxjUFQNdSsZQ6maUVSdBA8wHoFRRuQa7FheQljQmXVXbdh1+?=
- =?us-ascii?Q?I64M4eATw2gJ0y3bcgNC/lgMD3BME0xKuoC7vFIeJvY1pSkYVuo1tSC1Sd8B?=
- =?us-ascii?Q?Ve7jDk3gbDH1tVzFmFQknsJAmCxQ+kIX/4pHpJXcnDov/a7COMoFIcXFs5P5?=
- =?us-ascii?Q?msCgQ5mvXd7u+D8iw7eZqdfDBMieAwv2cyr/plt0cdZtoLVopJYI3mQPXMwS?=
- =?us-ascii?Q?pygsHaOv+sL0wUzCtFqaZ+bWuE8ODZ8jVghTRHmYfbSRHaNhbrAfDEs4oRcY?=
- =?us-ascii?Q?fLD5jYoZTwFW09UPMO2klNxvZDNiwzRwoTogx/dQ06Y/gPsI2joq8jMKvD5E?=
- =?us-ascii?Q?OiPbslXAxxYw38u3s31Vz/S3smdS5z9CKlgfq+SYhjPeL74LoiRCyMPYRSS5?=
- =?us-ascii?Q?/0DF4E9oPRIgYgYyjnNWU6HzxAtACD5fXBKGwMNDU2iXKbnUqA2wRY2Hf9uj?=
- =?us-ascii?Q?47O4xvWsWaGKr5+BwAIvye/fT0dDQ4Uei8rLpRzxVsIN8vj5ZenNklDFnMsD?=
- =?us-ascii?Q?0ma9MPTUUq4IgdA03VrPE7heyv+KeDmWMWCtRDkymsH8gs94dw1yweUn3fPN?=
- =?us-ascii?Q?1QrpwKCRXT3DlJlJG4UHPy1PW4EfSZgAjjOSadtyiLU7/kO37tT7xQtHXiwY?=
- =?us-ascii?Q?zXVpHDYBE8mw1QP8SNoFNfbNCrwRBE0GTRfRS2olTKDJJ7W8gSiL0dTvanWV?=
- =?us-ascii?Q?p0N3jbd/PTbvthC0OIMOobjITSgx/p6SjpuK5kGIHM6X6aYHDrSjlnCi9T9M?=
- =?us-ascii?Q?CiMn2BFneC7KLRjkUeg0ouGZ8yhW5Xa5t229HZCEpXeipyCOKedFU5zv7FJX?=
- =?us-ascii?Q?25cHX57Yti1enmN2GmoxiKlqNuDuGFFVF89Wsgf+/PS13+xvZ8n0aCmNJaiJ?=
- =?us-ascii?Q?5rK0DHSds3Fni9ysSS7AT5ozXmIYHPFvJrltaImDJLiWJfC9sXNCDWWocNwd?=
- =?us-ascii?Q?NH0AUo9EsP+oqE4zY+eYEk58DgOcSkWYHlcGOpsBfISl/hCqri7m6sOpt6Ks?=
- =?us-ascii?Q?8X1jD8EyciWzQVJGRyAx6hbrEBvorwmbvyA/uGy9fXmmvS7OLxQfR4lyb+dX?=
- =?us-ascii?Q?MwWrSAuJxiOJUmUf0lVPA2Rzy+eNC/kSsVg2Rc945RcvV6P9CNHL45xHIULP?=
- =?us-ascii?Q?H3Y3va9g6N4dt55ufWq+8FwpRTXUUDp5l7p8Kg/QJtFigKU0BP3sKdqI6BI+?=
- =?us-ascii?Q?5Kf1lO94BYgUig4AlZ/RcNxolQXNkqZSn9eL4q4gjuMbz5EoyVda7qZ2DW+x?=
- =?us-ascii?Q?tLbgz/eM80bwrb1AtGX9t0/5tygo9v/as9qB3tUtS9UX/AHelT9RAiLDHIN/?=
- =?us-ascii?Q?rU9+gEpDLBCus6F6EUdhyXg0VTGJfqNXmReUVfn2V7I+55eapnpsuEFAodAm?=
- =?us-ascii?Q?/VHnBq/PQAkA9Ayp67JobvApR9NWlCS3Ne2xxnm74vkjQDJOyAbnvqvmj92E?=
- =?us-ascii?Q?nWlXmwjfdfJ7/Kw/MTW8nLJzmDlm5k47LYgjoUmRUd2GbaHlxGmgG70A0yyX?=
- =?us-ascii?Q?XdYd0OhWtnkfgOi3wq10VHdAjTF0RAAXZ4jE+ujjZwCSRchISHRIrLr+aB4c?=
- =?us-ascii?Q?ZXl4lIC17pQZ6QKGzdPPNENYegTUOwcYwrMYapp6/kYh?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?47gDgTf5o18LAhH2heXQw063/ok6s7NVef5B6YC1XiWjaiXYGlDfY+U9XsZj?=
+ =?us-ascii?Q?d5UNWXqnVMKC3N9JYITwbUnCNnjT79vPRt/77GBN6L4dXGC5HAuzFfA2l4zF?=
+ =?us-ascii?Q?AoEF1H5jRS41RWc2uYHOTlQTbUFR0zFCmU/p9mjkvvKekWS7ifJmA0pHLCUR?=
+ =?us-ascii?Q?zU2IjhVztfpKO4pclMQ26GiUc2nkNplco0D/CplozP/y/oFlRY5jFJ+X/h/Y?=
+ =?us-ascii?Q?jJYxH0UI7gvLsuLySamAhiLPtxXWnYZcCXoNDGdKCAGNLZtPqSriN7BcU1Ea?=
+ =?us-ascii?Q?MGjKwC+h2a7ACq8g0wi3h7bSbzyRVdF+Sjt8roqXsttY39ER7unwlXSOjD9m?=
+ =?us-ascii?Q?J9Bl/Xe+YAGVPXwLYTeKAkSKhxrKbKgDHFvFm8aqxqvR3T/ox4B7QRe9oWK6?=
+ =?us-ascii?Q?lHmMpEjAGeQnSb9iV4MGUmA/nmHpR1+4TjA/w1EOga3Om0d0pg9l9zOKTcrU?=
+ =?us-ascii?Q?zoOpwdNXhTzih2HPmE6KKm+BRJR26tzrR3+eZY/xHSbPgWyCR0ane9mFOwNL?=
+ =?us-ascii?Q?HkF1cxrIxuEOSmaGOXsJEPp/s4lBtme2neAIA1tB/0FGgoQbutjpOP3EPvxK?=
+ =?us-ascii?Q?BkFBoYmhqwH7tc1sXTilmEHJrDJyX2u00JGxYiTarrZM7SS/t0rjy2iK31V/?=
+ =?us-ascii?Q?vsxzyrfzIJIuhO9DEgJ/ycUMDX4fVO+i/iMVP4ZMmQ9C0KbNgJ0M5+JqsYij?=
+ =?us-ascii?Q?7THQ5oeuUpsL2xivzB/PpYqOMY+NJsxLRzYj0bCH99Q+/e4HJs4AjolgJnCe?=
+ =?us-ascii?Q?TyXIKW8bqvdIqmua3KybsVwt/hW0OX2XOctHk5Tbc4z4MQw9Yaca83Cra2YY?=
+ =?us-ascii?Q?+NUCUo8xrnHUdiO4ZuN3teehMwEgfNQ/8UUFbMw6qLldpeHfgS/8aJn9pcW3?=
+ =?us-ascii?Q?LseLHz5rPYqXRfO7B8SVh+Lj/7XrP3ogyBFBMOzDA/LZ/aIZ/hb1cOtmwXaX?=
+ =?us-ascii?Q?3U88r8wNcc7qNhN/iAbk6wDO8xksJWiHi/yCdw+qyLI+51iqqUxyo4++/38y?=
+ =?us-ascii?Q?aXmfb98jJDEKVi8p/FGarABBLivCic2s6r371jqzSj4+0FOt/VkSvlIkTDO1?=
+ =?us-ascii?Q?WaWT0tnQ0VWFiNPr18tN9rCbiy5khIlD0VRr6zYmdjRY5NVEu5aXP99Q3x8J?=
+ =?us-ascii?Q?gKxphD92C3a8jjbZ7anM5WPkZJdAvuj2YoGll9CmUQYCUdEgZBc0lbohA94f?=
+ =?us-ascii?Q?LyZk5mNsA+9Dh+r27QZxOku7qCCkza+pxu9TlG+dvi5Ulj/pWYvgtM+bXDLa?=
+ =?us-ascii?Q?9JFCrU/zO5g9o26BkfBHQyKSaAl1yKAigDdJ34tjryJ+cou3Ulc0CzTlOqj9?=
+ =?us-ascii?Q?glxDsYahiHZQi23KeJ6NNeoyTzN8x1cuwgWtMmUuJOPFxwO5R4eMy9IzUhF4?=
+ =?us-ascii?Q?zBgD7dAHmpaJEP8Mo5TFSCZCjkcAXVybBw8jkrOPDqJ8ZMXQpVvyf4/Fvtws?=
+ =?us-ascii?Q?gqWB9dPKv74LZXq2+3UQgUefu+TAjzM8d30cXhVXBhxQobnZJhsjt1mCjyUw?=
+ =?us-ascii?Q?L2EFSbUhUyCmG1GrWhMt4gIvZvon3Y0038Pon1LLxVvzqHvaEDHIaZYRSyIv?=
+ =?us-ascii?Q?WPVtr0NFTH5GPI29r7P7QuearUfmxd7R+7F8Wd5euUERF4waE+e5z19oc7ze?=
+ =?us-ascii?Q?3L6iViFE+YcUP4In+Hp+sQ1hon+ufIht+dDmk4ZWYzlA?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(7416014)(52116014)(376014)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Tgxg1BsRZq5sEfGJQ9JafKj7k2BXzk48XnM/TM//mx4apL1iz877BawR+8Tw?=
- =?us-ascii?Q?NiPvcLShaeY0Mah0TJ8fhSvL3Yvuz8ZKrsDrAK6CQnO76arb8e0gfU6NdrSj?=
- =?us-ascii?Q?hUQu1jAeA/4wYFPPLZa0UeI7fviFQMnbwRWlzF9sd+8v5NHx8Yx1m6TcnqJ2?=
- =?us-ascii?Q?gogEPG9LTvfTwAbXn0iGF8MUR2V6TbtbhPo4xgTYo+LprSqBz3ChReKepKjJ?=
- =?us-ascii?Q?U86Yg7Sv+jQ5Xfel1ZGzpR1pXBlkAb3KEl7ih8sL0ftgt+jhpB/19gGzecZq?=
- =?us-ascii?Q?NgcP/tNkMRgnrQ7ylcP/Zcf+w808dAb//q7nmkI2U/9J8Ezyyq/cym193N3w?=
- =?us-ascii?Q?CgeSmLJb7GGCBo58TdR98Ijj6CduUS+GyF++ZfroVp3z+nva2c1qVNQI4exc?=
- =?us-ascii?Q?4UVvQJgeIlSH5B+sgS9UEoPKhRMK3ECU+6oGcqyopPxacqEoIQVhn4vuht91?=
- =?us-ascii?Q?9bKaV+TdCHGGBpRe4BYppJXMQUakopiKwgKqRIrzZY8kV3sLcMsNsqlc9itT?=
- =?us-ascii?Q?yRsk71QxpfZkdnkdvfdyghcAQtePZlgPyRRUElsCtgS8Mijf5nVzZG2qlcZ+?=
- =?us-ascii?Q?ca5i9MxqB/+73DuQMsUniXyvUj3Z6eZyIK3kxVNBK5gf7xGW+dcmOS2RzUuN?=
- =?us-ascii?Q?/k63GRZTyanL1V+BlHkOIkkX4UIYX/MhOVe1RFYgnMNA2Jkj1uWkaOeY5ZWk?=
- =?us-ascii?Q?wy93vlog3KGRNL5AUrzlGkp6QM2Hzr/k/80XvA8P0VjHo6dn5F8apfTt4pt4?=
- =?us-ascii?Q?3r4HD5tOJJcnlwQtHia1cHOPP4cJtV5ygx4w8XvQXrDEh9t7J2ybjp0Kb6VF?=
- =?us-ascii?Q?Wor3E5PhQwspxNeK/Xwiufo9zOsSV9Z7vYHbVkN4HHKmk5c7No39UUfmwmtp?=
- =?us-ascii?Q?+rXOPBVqUdGhnDiKE8U2driqhDWbquM7U9V9Gu4qiS2+0DUC8ryJPsN888od?=
- =?us-ascii?Q?jgQkV05EBn5c6HGTZU6jUpYrBpK9L79Ws1/bwsOmWQcVTsAVZPQgz7p7hLeH?=
- =?us-ascii?Q?8WGZfSRDfoQ+tXTm8aZzoA1LLAAHmqI4mrBFaDpvY8EQrMxm7W7gnDo1oyT1?=
- =?us-ascii?Q?Sk03zd2218GE0x8Rkxw1LHItH8JNZu9tL0STVGM0QaKbYP+QI/Ga3VUeGVlV?=
- =?us-ascii?Q?NtvwMf5TcxUWdKlUsvplvSeXwsjm8xmD0LX00Mn0ePVlmTjDvQB9x08vxkI8?=
- =?us-ascii?Q?ySzfKEr4hfANavcJpLOcj8I7cp5irvuy1XIMcUC3zNkDUN/PhRyDVsFLkeHj?=
- =?us-ascii?Q?iFolBJIAZ7dmyw3vo8YuchMT1W2fxsZSKkJqC+szHe5qzGGzT71iezy53kuQ?=
- =?us-ascii?Q?Kg9bYWt4aUzJJZ22x7C/kaAEVAuivsQfvoz+SF0UzFeks3OdysWoNpfFM4Gq?=
- =?us-ascii?Q?0lNw1tbzzsJoNGC/dBPe/0oYtZHZxu8nOSy6ZOTuCiFZuzKWBjXLFwQjnUJz?=
- =?us-ascii?Q?luu7aKUQiTaTRplmX5C9ScZW0Ef1/4miGINneXe0RokTY0xsSaAUSXI182jK?=
- =?us-ascii?Q?PQduv1EdwV7NMFBKmsiWliZ3lpqz5LRwABsiCnGhnHkcfMmT5usRCmUbTqrL?=
- =?us-ascii?Q?2ha5cWc8Sd3yfHI78sdLWK91Xs2vKizTV7uJvEzfkfLGnlIyoJ7tRlGr5xgp?=
- =?us-ascii?Q?OpWNa3s9F9hl0Ny40mb4g0DUA1vSQ3aJbyG1kqq0P+VOSzWOy4y3fmLInzX9?=
- =?us-ascii?Q?fXAQITcRHu4GwrnkiTIj+1bXewU3M49+L2V/imFT5f/zffBFG8eXyJSdn9o7?=
- =?us-ascii?Q?joRsM1Px/jw6uXHYHy9tTdLnS1sVK2k=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lbn6d5VPcMxaVftDvdbVGamYencF0rOb/7p0fjivwK1EQuLk2RDyn85alsff?=
+ =?us-ascii?Q?Jumq+eUjQ+O2CWxB7XMR+FjjO34VxBTNQ/1+5vq0K/IQxYi4GY45kH6PvjGw?=
+ =?us-ascii?Q?TgTKU750jrM2uMcF7uQTQfqOWOdQcz8iB5yGMrhcmrAXhrnvPsO0fHkiOOgd?=
+ =?us-ascii?Q?WanZkpnL2fydL86In4t4qafLSqJASnWkJyD9ip4mSkX97K1qo19k9BtG2Kyj?=
+ =?us-ascii?Q?Sj7HsTwNJllbBOw0/Qj/ZKS9aPrvoJF12fsIRG4tuZyjTMJuqzv6lHrTtjxe?=
+ =?us-ascii?Q?pXaYadyWeaOCPMyxSJraC88ansp5ZeFiLo5kc/rarNO221De2EbgeUJUx0RX?=
+ =?us-ascii?Q?LBkgmNm3RMY4IkB8TJbhaeQFIY8ushZ6D5Ki1QE4P3ERE764oBRPnoMrS92E?=
+ =?us-ascii?Q?dCZ6g4+LA0tiu821JjmM47HfO+pJaC4uHhRby0hhDO19VaFpSEwZcnrBwBgv?=
+ =?us-ascii?Q?Twwe/WNFV7kH03lAMeW8h/ZA00xf3g5rbEFcBnrg9bKur12WxWNSbhi7OVD8?=
+ =?us-ascii?Q?eIYStMxgep35FuXP4yVxI3fNhrH1P8YBdaplOw5rHScY5w1HCaqKKP7rmv/q?=
+ =?us-ascii?Q?9SI73rLxq/vh8qvsZH1wnG6jZxhMGFMKnon63yy+j/JXRyyzHqFXDQo7s6kA?=
+ =?us-ascii?Q?z9qnakU1zWlnnE4LN/XzA0C8vIbRKbOi+KWXTt89/sb5FIqLn+K3OHl0+fkG?=
+ =?us-ascii?Q?OO4Ie8Eh/d40lp9AXe2bRH8rvQtH9++VrFPkhh+/uSvk4aQx7H+xh/uWXtFj?=
+ =?us-ascii?Q?rcLiBTeaZI16gCWn8ouH0S85Dhf/CAEnmfR2WgNLk3Ee+pRP6xXFOdnGJatk?=
+ =?us-ascii?Q?MyGQMrR7kV4kXAu2UCbNx8VEhN9tvcfMsEAaoLKdVKRGqNyDunCTQme6Tea5?=
+ =?us-ascii?Q?vTAN5NCE+c1Ket9SiseSSuxpGzJNuhGQAA4IDzaf9pz2DCsZFX2sRlAJ2s+e?=
+ =?us-ascii?Q?b6aVWgc16nmLh/zHvIt7hKQc/y1j+TiktwBLmYQb1nNRO1KeQ17KE4T923zm?=
+ =?us-ascii?Q?IndeG30fFG8orYTRFWLucLhIuSeCZaFHmkwyKv6QGKU4xEthE/skizHUqoXV?=
+ =?us-ascii?Q?Pfg8t4YrNxDmmrL7F4iH9UOmzRbN8XrrPJQg/KBy1S9cbFK1CoEbU2ZHDCpj?=
+ =?us-ascii?Q?Vo8WVP8CjB8F5U3CcRfFmGB1eUoPO7HUFYjY08LpbhzrcxN0Mc5pmkyOYo5d?=
+ =?us-ascii?Q?nyQKDvz8KxnXKOpHtIkIjXpx6YqjyeZROFEvKzPUW+YxDemLLU63kjrJUQig?=
+ =?us-ascii?Q?dkUx/FLR4X4day+xQnsQgFjiA+1KwSY4YovvfMTg8XBfTuX9Hv4ZU3KO9elN?=
+ =?us-ascii?Q?8BrV1CZERbxTEtGzFGoGFxHvcUvcIpf75cMsy+llq3Klx7Uep/ADbNQBOef6?=
+ =?us-ascii?Q?zBhOoChXv1Q3CPOHD8eZbzXzx64yTX0oKVF+O8eUn9eePqZWHZkWr1XljCjr?=
+ =?us-ascii?Q?rhzGHwyTdfEx4o2Hhpvu4/k2o2bkqYlgzp5SAcVWsAMvda2nqX/qt5T1+BtO?=
+ =?us-ascii?Q?BVVyMy87NUrYpwNw8KevM54JCtZ+Lp+/5keYtTyGIGVHM1F1vv4FypI7nNGe?=
+ =?us-ascii?Q?HTJVc6yXo8HdZRNv5J/wk/dsL5KbcjwrzNQJMJ8Jw/wN21Kgv5rM/H15CBLf?=
+ =?us-ascii?Q?CKkm1C1P8PCgvW8TN4gPh79yM8efV4kGxJLdY9QlUsIlgmG0Yng21UZZsw7/?=
+ =?us-ascii?Q?yzMb3jCJmFvazIUjgRu+NbOQLewsSh6+fyO7mmNWDlw2BKvXCUpJen2QXHV7?=
+ =?us-ascii?Q?ro4ocbtXns63YZEoQjIxEIW8He32nD8=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: c0674f4e-4290-491d-c062-08de604bd8ec
+X-MS-Exchange-CrossTenant-Network-Message-Id: f138c22e-2e0a-4f28-c22b-08de604bdaa6
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2026 22:06:41.5054 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2026 22:06:44.2378 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: efXNBmohT7QeZO/xp2YW0tceD1DFSRrRa1nQc57ozxDwVKKIPBtaW3r0MYD8tzPZlGOMmsXRGkmQicAo2aOiLfXpRhk1mI+fXJOTcAbzgyc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6bUv3q43bJTDL56FdkbyJgXBTsALL1OTKwW/yBOB549Alixve/EIkEwCFVSa5KLc9gPfBJDuGRQYUnYSfenK7Lp8VhKKyyt9yi+G6mI176E=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB10697
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,29 +171,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series of patches add support of internal switch mdio interface.
-The series can be split on two parts:
- * fixes of existing code (patches 1--3)
- * make switch mii/mdio really working on airoha (patches 4--7)
+Commit d2145a89bcf6 ("net: airoha: bind MDIO controller on Ethernet load")
+refers to non-present CONFIG_MDIO_MT7531 and non-present "mt7531-mdio"
+driver. It should use CONFIG_MDIO_MT7531_MMIO and "mt7531-mdio-mmio"
+instead.
 
-Mikhail Kshevetskiy (7):
-  net: airoha_eth: fix mdio binding to switch device
-  net: airoha_eth: use proper switch node for en7523 case
-  net: mdio-mt7531-mmio: fix switch regs initialization
-  configs: an7581: add mii/mdio support
-  arm: dts: an7581: add mdio child node to switch node
-  configs: en7523: add mii/mdio support
-  arm: dts: en7523: add mdio child node to switch node
+Fixes: d2145a89bcf6 ("net: airoha: bind MDIO controller on Ethernet load")
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+---
+ drivers/net/Kconfig      | 2 +-
+ drivers/net/airoha_eth.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- arch/arm/dts/an7581-u-boot.dtsi | 5 +++++
- arch/arm/dts/en7523-u-boot.dtsi | 5 +++++
- configs/an7581_evb_defconfig    | 3 +++
- configs/en7523_evb_defconfig    | 3 +++
- drivers/net/Kconfig             | 2 +-
- drivers/net/airoha_eth.c        | 7 ++++---
- drivers/net/mdio-mt7531-mmio.c  | 7 ++++++-
- 7 files changed, 27 insertions(+), 5 deletions(-)
-
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 4fda1b0c28c..47e2fa192c2 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -127,7 +127,7 @@ config AIROHA_ETH
+ 	select PHYLIB
+ 	select DEVRES
+ 	select DM_RESET
+-	select MDIO_MT7531
++	select MDIO_MT7531_MMIO
+ 	help
+ 	  This Driver support Airoha Ethernet QDMA Driver
+ 	  Say Y to enable support for the Airoha Ethernet QDMA.
+diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
+index 046b677d78e..5e393db5ffe 100644
+--- a/drivers/net/airoha_eth.c
++++ b/drivers/net/airoha_eth.c
+@@ -989,7 +989,7 @@ static int airoha_eth_bind(struct udevice *dev)
+ 	struct udevice *mdio_dev;
+ 	int ret = 0;
+ 
+-	if (!CONFIG_IS_ENABLED(MDIO_MT7531))
++	if (!CONFIG_IS_ENABLED(MDIO_MT7531_MMIO))
+ 		return 0;
+ 
+ 	switch_node = ofnode_by_compatible(ofnode_null(),
+@@ -1005,7 +1005,7 @@ static int airoha_eth_bind(struct udevice *dev)
+ 		return 0;
+ 	}
+ 
+-	ret = device_bind_driver_to_node(dev, "mt7531-mdio", "mdio",
++	ret = device_bind_driver_to_node(dev, "mt7531-mdio-mmio", "mdio",
+ 					 mdio_node, &mdio_dev);
+ 	if (ret)
+ 		debug("Warning: failed to bind mdio controller\n");
 -- 
 2.51.0
 
