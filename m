@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB56E6BF17
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 14:55:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 274F7E6BF1B
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 15:40:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 223CD8441D;
-	Fri, 30 Jan 2026 15:55:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A87783C30;
+	Fri, 30 Jan 2026 16:40:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPFG6RZ+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qbiK3wvY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C17FF84435; Fri, 30 Jan 2026 15:55:34 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 1B9CB844C0; Fri, 30 Jan 2026 16:39:37 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9623384319
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 15:55:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E23C883AA7
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 16:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d19bfe1190so1531667a34.1
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 06:55:32 -0800 (PST)
+ spf=pass smtp.mailfrom=george.mccollister@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-40423dbe98bso1065784fac.2
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 07:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769784931; x=1770389731; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=h/36cu2r1NyZA1/hU8MeBElhd0Hgujgwvdllp/ANKtQ=;
- b=PPFG6RZ+eNQHnE1073t4t9Ok4BEJmnwIZKtdwhVsGflEQR6B2z9RTAVup2T8pRxov3
- bsAYDXTRG9FyfJftcoB2demi4SOyiqzMDNYm+9UcRyhv+F/eDQQ3t1hAt1CtP4VKRAzg
- qhPmGsw07oflfRYjUxAk82d0NkSaBzGEMMJp0=
+ d=konsulko.com; s=google; t=1769787573; x=1770392373; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GMxpgNNrjoHv0jtFyvpH/mqqhUiJiwOGzFzEMLTMnnc=;
+ b=qbiK3wvYXttnYTyOf0sLeupwhMgmDWS7wnTE6dqc+oIGItRyxcc+ZgFFMK8FHuFaVu
+ 5c65SXTPt1xML2FPFuOS5S2BFyOYfvIFNtoAWNonojqXniGBPnWDHX3baj17iFBEwXus
+ 74uMX3yfQ2pXYVtx7Qi3bUI7jyD/kgfpI0OOE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769784931; x=1770389731;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h/36cu2r1NyZA1/hU8MeBElhd0Hgujgwvdllp/ANKtQ=;
- b=Ki37e3dvU3ObO3u6JfhhC26qiJaTcw++5LpR3yckzXxuwnkU59xseESQUEfS6dOS2l
- lqb9poqkhn4T3BF/xqQW/sHC1yZP1QHE8OaNKLiyjZjA2XBCvdyOemkYGaY1BhZIFxan
- nJ/kp1aLdSp3I67ysyoIEGPTJXA7ZkNZ/+JARMK3YGvZ2kmxC8aYRXzl+wVG1xwrnDUF
- LaDZRXOO/uje/HE02XQdtSgv0rvQGgoguBKNq4GBjPwY0CU/1aB4A9bNOS3iKKfWd4Gw
- mWr/DOkwyMnhmPF0hMw/ElWntyIb1emcV+xjhuTt9RutGkMSp4jDqrBRbUwX/DpyQJko
- eqXQ==
-X-Gm-Message-State: AOJu0YwIA80k5h3ZaEHcoHkS5nMQsi8ikB9BwEXllaOhwwIQ8PSsVBlr
- k6RVD7Xi/NXWH340mUahlAJv2PgIoFbW8AsIRUMPYE1fr2rb05ABwFwnZZrzXW3JjhA=
-X-Gm-Gg: AZuq6aKdJ5gtxLSYdXGZuXB3rakw4ba89FzIRqlUJ/wOoUa1+mXxPFWo6fDNxLLK18B
- xj70fZyMnlvmqfR7kpjTjEKhzkYMJeDTZKABbCrVol0fn4jb8uLbn/bzWeyroYc4D58B0thlGge
- aWoVzkPuWfrT8cwhQn/LAzrtHXcefDk+gaMTETMQkdGaFnCrpqi4r7mM55weHLbl5cbsebbJ1rV
- OfKlBUPxKbfeD9k2LWRIoYCnPLAP34BibLaI52PxpE1LZNsWDuQ5EY/IwshbbmVvyobrSQnXvzn
- v6tEc++sPmsRBKpK1uOiUJteqAaCk4Hnx4uRJ+5VgUPvXzepuEaugGexyOD1BuGEvg2i+oIxCIg
- AAykVUTVyHP+BikZHLdo9h6Cc7rz679mEISlcvjN3kWyuGnG2XzpaQdPQFFYp28qi4nMZqEtQdO
- 8LGEPa+K9HGTMDdpCSoaMlU5lrnhgNZ/PbKlkQUW355fvcE1Qmwu9Md/B0J/rcZeaQfT3wAQo/l
- ixF1lev479gMXXP4y68Vm3Y9raEzpqNbH+Gh4w=
-X-Received: by 2002:a05:6820:1012:b0:663:1399:1412 with SMTP id
- 006d021491bc7-66313991619mr477365eaf.9.1769784931238; 
- Fri, 30 Jan 2026 06:55:31 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-662f9a18776sm4948391eaf.12.2026.01.30.06.55.29
+ d=1e100.net; s=20230601; t=1769787573; x=1770392373;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GMxpgNNrjoHv0jtFyvpH/mqqhUiJiwOGzFzEMLTMnnc=;
+ b=HpzZx/kdTKkwxPODDupBGtNXREZpR6K3lq4jzZUCHL3rz6om3sLUiSA6yyVOwRbmdE
+ Y9DcuGs23EWgRWmWd01B9r45UDLpG5YzzZRbkmptoS8/Xx15H+/e+sJaO33J7vV9YjVF
+ CgrWpugLskLBMtQAJ4hR20c1XOPHmcb0GVe0aMK8ABwUvHydkw0pXnlXLWzyJ+rTT2H7
+ idP2Njk2vkampTPtinm6gWXW9szapzVS1gfeb13xufYWVd8x/K6bYVEdO1oxceufwqXt
+ 9CF/gBQQY7p45cS0RL0uDYvtWq31TMCQVINnMj3317JU4cQ6RiHy9SXGdm4EqScqxZrc
+ AkoQ==
+X-Gm-Message-State: AOJu0YyfCPDYbIfqbUUhrsLaV/hgc9Zcu4kuS/cUVHzCgkElinAkMr8k
+ xj7kcJhjlbz7dSGTQ0M2u2F2hiNFhC3T6gCQW/DSemj/RHZrAglsO9tT2GExwMQJP7RIcTXzlFd
+ 0BBEX
+X-Gm-Gg: AZuq6aKijL3c3aRkUbuILHrKh7p6Cj3OutRqTFbzttm4Ry4a9IMLmDyWgOEtpOXq60T
+ MkZnHwotm6qya/yStWeVAqWdrO91lXq8UtLrT/JZBQ65n51OggeowTWLsj+nmtVyLP0wspWJRj5
+ I14DJwNUGFRHvQEhB6QiSCUxBhv357a8d9Dwvpk7Gtv/tG47xXFd2PcfDtxAtwP0K28hX1Lv3Ji
+ ecw51Wy/xMxq6JKQKaHaheCfeuqnvn4BN5FVO9UClQ0+O+z5tDmqPKKRlv6o8qgkcl6/uvptjIx
+ geZC5Kc2aNYmOLzsZW9aW5hE4c3u3p2+2LaI1bS+V1XTgzNj0obCzBP5Alr5iMjoO46glqpS4Z8
+ fKyvxIr8T70kzaGOugd+9opp99/4MuhT24iz/1BeYBLozIInTu6a2TIDeB4JFeatwLr1uYSrHwU
+ Gvna3n4XYKsqiCkm3pBTS1tAK93/g18JNqTJoQ/5/U0Gwg4A==
+X-Received: by 2002:a05:6871:e28a:b0:409:3f13:f5e with SMTP id
+ 586e51a60fabf-409a6b755cdmr1669760fac.22.1769787572549; 
+ Fri, 30 Jan 2026 07:39:32 -0800 (PST)
+Received: from ryzen.localdomain ([136.33.243.183])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4095752ef7bsm5944934fac.16.2026.01.30.07.39.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jan 2026 06:55:30 -0800 (PST)
-Date: Fri, 30 Jan 2026 08:55:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] Fix unbootable ARMv7 devices
-Message-ID: <20260130145528.GA2421612@bill-the-cat>
-References: <20260130031217.998002-1-briansune@gmail.com>
+ Fri, 30 Jan 2026 07:39:32 -0800 (PST)
+From: George McCollister <george.mccollister@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Bryan Brattlof <bb@ti.com>,
+ George McCollister <george.mccollister@konsulko.com>,
+ Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Judith Mendez <jm@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>
+Subject: [PATCH v2 0/6] arm: k3: j722s: add PCIe support
+Date: Fri, 30 Jan 2026 09:38:00 -0600
+Message-ID: <20260130153856.2049575-1-george.mccollister@konsulko.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m7dV+Qk7Zr7ODzFn"
-Content-Disposition: inline
-In-Reply-To: <20260130031217.998002-1-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 30 Jan 2026 16:40:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,80 +101,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series brings over several changes from Linux that are required
+to get PCIe working on the j722s and also enables PCIe in
+j722s_evm_a53_defconfig. This allows Linux to be booted from an NVMe drive.
 
---m7dV+Qk7Zr7ODzFn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The J722S SoC provides pcie0 (using pcie_cdns_ti) thru serdes1
+(using phy-cadence-torrent) thru serdes_wiz1 (using phy-j721e-wiz). Changes
+to the three drivers needed to be ported from Linux to enable the REFCLK
+output which is used with this SoC. These changes should be tested on other
+platforms using these drivers by those with the hardware available to make
+sure no problems were introduced.
 
-On Fri, Jan 30, 2026 at 11:12:17AM +0800, Brian Sune wrote:
+The PCIe controller in this SoC relies on the code performing the PCI scan
+not scanning devices which cannot exist. In Linux this is implemented as
+only_one_child() in probe.c. If this mechanism is not used, PCI config reads
+for subsequent functions will return information for device 0 resulting in
+U-Boot detecting 32 devices when only 1 is present. This change should be
+tested on other platforms with PCI to ensure the same PCI devices are
+enumerated before and after the patch is applied.
 
-> The linker script u-boot-spl.lds now
-> is no longer aligned and -nodtb.bin ending shows
-> the zeros are not 8 byte aligned. This result in
-> the Makefile.xpl simply think the previous file
-> is aligned and do not zero pad. simply fix the
-> data align to 8 can ensure the -nodtb.bin is aligned,
-> hence, the formation of u-boot-spl.bin properly align.
->=20
-> Signed-off-by: Brian Sune <briansune@gmail.com>
-> ---
->  arch/arm/cpu/u-boot-spl.lds | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+I would like to thank Opto 22 for sponsoring the initial development and
+anyone that is able to contribute to testing of patches.
 
-This fixes your problem in that it results in the device tree being
-aligned still, but doesn't solve the underlying problem of why there
-were 4 extra bytes. Can you please try:
+Changes in v2:
+- Return 0 if dev_get_parent_plat(dev) is invalid.
 
-diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-index c578c3ebf821..5f807323f856 100644
---- a/arch/arm/cpu/u-boot-spl.lds
-+++ b/arch/arm/cpu/u-boot-spl.lds
-@@ -31,16 +31,16 @@ SECTIONS
- 		*(.data*)
- 	}
-=20
--	. =3D ALIGN(4);
--	__u_boot_list : {
--		KEEP(*(SORT(__u_boot_list*)));
--	}
--
- 	. =3D ALIGN(4);
- 	.binman_sym_table : {
- 		__binman_sym_start =3D .;
- 		KEEP(*(SORT(.binman_sym*)));
- 		__binman_sym_end =3D .;
-+	}
-+
-+	. =3D ALIGN(4);
-+	__u_boot_list : {
-+		KEEP(*(SORT(__u_boot_list*)));
- 		. =3D ALIGN(8);
- 	}
+George McCollister (6):
+  pci: skip unnecessary PCIe scanning
+  phy: ti: j721e-wiz: Enable reference clock output in cmn_refclk_<p/m>
+  phy: cadence-torrent: Add support to drive refclk out
+  pci: pcie_cdns_ti: Add support to provide refclk to PCIe connector
+  pci: pcie_cdns_ti: Add PCIe support for J722S SoC
+  configs: j722s_evm_a53_defconfig: enable PCIe
 
-As the problem ends up being that when both of these are true:
-- .binman_sym_table is empty of actual .binman_sym* symbols
-- The inner '. =3D ALIGN(8);' increments the linker counter from the
-  previous '. =3D ALIGN(4);' (in other words we were not already 8b
-  aligned).
+ configs/j722s_evm_a53_defconfig           |   8 ++
+ drivers/pci/pci-uclass.c                  |  35 +++++
+ drivers/pci/pcie_cdns_ti.c                |  23 +++
+ drivers/phy/cadence/phy-cadence-torrent.c | 168 ++++++++++++++++++++++
+ drivers/phy/ti/phy-j721e-wiz.c            |  46 ++++++
+ 5 files changed, 280 insertions(+)
 
-The linker sets the type for this section to "NOBITS" which in turn
-means that when we later call objcopy to create u-boot-spl-nodtb.bin we
-get a mismatch between our expected size and actual size for creating
-the -pad.bin file.
+-- 
+2.52.0
 
---=20
-Tom
-
---m7dV+Qk7Zr7ODzFn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXzGXAAKCRAr4qD1Cr/k
-CvScAQCGMwHZpmALoNZE2/CIJXKltJqG317dXyhzEyPj8Mz+2AD/aKGKG6pUw+wZ
-EefqJKYKOuTAE8n6kkCjHiRbjQh/pgc=
-=p+RZ
------END PGP SIGNATURE-----
-
---m7dV+Qk7Zr7ODzFn--
+base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
+branch: j722s-pcie-next
