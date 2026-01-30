@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1010D73EB2
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 02:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A00E7D73EB2
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 02:16:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEBC2841A2;
-	Fri, 30 Jan 2026 03:15:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C9DD84101;
+	Fri, 30 Jan 2026 03:15:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZxUfYvHh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pQ8y9y5y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BF8C84199; Fri, 30 Jan 2026 03:15:47 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 3A8D1841BC; Fri, 30 Jan 2026 03:15:49 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29C0784181
+ by phobos.denx.de (Postfix) with ESMTPS id EBB6F8418C
  for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 03:15:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -31,36 +31,36 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4f2KNv28Zdz9vCt;
- Fri, 30 Jan 2026 03:15:43 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4f2KNw0d3Vz9t4B;
+ Fri, 30 Jan 2026 03:15:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1769739343;
+ s=mail20150812; t=1769739344;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KENWgaqq/8/ccxrmK9yYmvr6YnWrOF9LOHTSe1N+5pI=;
- b=ZxUfYvHh1q9AbDG6bVelN1ZXn2Gqb0wrL/Qkz93K0+UFMu/ZTbwKCN1zgnIhwsNb/O3LOL
- HEm8yLMSH2K+BXOgPSK+xyyBbeyz7hRASzT/pWfZqYxPak+quHbMRn6Fwy34J2N4sN9zH/
- 1+V4pE9PYzKOLkZJ7IrzgiRffLnwTHNBje4HqLCBrLhaQaPn28SBTzLXrfu6Csc/y0s/eo
- LqC0OLzJ2eYlbqVK4Oo0ICHv0CyBItq+w/6TTu4N5qg1hzjBUViownLfSVJZsebNHWQogd
- jx31pMaKFbX64g55qBblasqtbCqjYT7g1GLNIoBHMQpbyDYGEfdOMJz9HEUmTQ==
-Message-ID: <b251561f-936f-44be-bd01-eb1d08c0bdfc@mailbox.org>
-Date: Fri, 30 Jan 2026 02:26:09 +0100
+ bh=0Pu4dv0SE72IuYbbOV0k8JHSrdTIS/WC16bIMmlltCc=;
+ b=pQ8y9y5yw+OZpl/FyCmeDnJUaoUylIkCrYJ3alV0tXKys/1iGqni2AwSP9M/umWLMauJiU
+ 4/DmA+FyEbou1sRjT41a3/N9vvmTWLJJ0/RXoZWx89Kx+9G/M8VP5gJJF6jhAva7Dq82hS
+ txWcEHgbYfuAsD55QskvsyWnpTpLHV6jRedEwCrO0dnYh/TlQcR/PNZsvALT3lj2yFec/d
+ EfnPK9lgaEeU04r/XHaIw6xz9rkHQBBarF2JvvkwA5xdt5wWs0L2x7ooKWoFrWBFFSBtnr
+ 7O6l/prc+vs/9PQkleYsXZ/ppoikmE8Xy7z9s9hh6ccrdK6kboYgD1uUtGSJ/A==
+Message-ID: <51deeb8f-b680-4140-add3-e7c98a29ff6b@mailbox.org>
+Date: Fri, 30 Jan 2026 02:26:53 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/6] usb: eth: asix88179: Use a fixed URB buffer size of
- 16 KiB
+Subject: Re: [PATCH 3/6] usb: eth: asix88179: Make functions static and align
+ params
 To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
 Cc: Khoa Hoang <admin@khoahoang.com>, u-boot@lists.denx.de
 References: <20260130002941.2336252-1-jonas@kwiboo.se>
- <20260130002941.2336252-3-jonas@kwiboo.se>
+ <20260130002941.2336252-4-jonas@kwiboo.se>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260130002941.2336252-3-jonas@kwiboo.se>
+In-Reply-To: <20260130002941.2336252-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: bcb13b480597c52170c
-X-MBO-RS-META: 54hos9uzsggoz9ru6n78jnhh4d3abrwt
+X-MBO-RS-ID: f5a78868843e94e9e58
+X-MBO-RS-META: ibgze7cmg58nmgdy6yecanrzctycmfy6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,21 +78,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/30/26 1:29 AM, Jonas Karlman wrote:
-> The commit 05278af8b3df ("eth: asix88179: packet drop when receiving
-> large fragmented packets") adjusted the URB buffer size to allow large
-> fragmented packets. However, this change result in use of a large URB
-> buffer size for slow speed connections, e.g. 10/100M use 26 KiB.
+> Make internal functions static, align function parameters and drop
+> unnecessary != 0 checks to cleanup code.
 > 
-> Using a ASIX AX88179B USB 3.0 or ASIX AX88772E USB 2.0 Ethernet adapter
-> on a Rockchip RK3528 with a DWC2 USB controller this large URB buffer
-> size result in invalid rx_hdr and result in unusable Ethernet.
-> 
-> The data read back from AX_RX_BULKIN_QCTRL after being configured also
-> does not match the values in the AX88179_BULKIN_SIZE array.
-> 
-> Change to use a fixed URB buffer size of 16 KiB to fix use of Ethernet,
-
-Why 16 kiB and not something else ?
-
-Is this a USB controller related problem/limitation ? Maybe the DWC2 
-driver needs fixing instead, to handler larger buffers ?
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
