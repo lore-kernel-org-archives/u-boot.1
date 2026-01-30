@@ -4,50 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC789D73EBA
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 04:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C51D73EBA
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 04:04:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65EE7841DD;
-	Fri, 30 Jan 2026 05:04:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A7A98841E6;
+	Fri, 30 Jan 2026 05:04:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=debian.org header.i=@debian.org header.b="KNegQfVJ";
+	dkim=pass (2048-bit key; secure) header.d=debian.org header.i=@debian.org header.b="ffhatDWb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59342841DF; Fri, 30 Jan 2026 05:04:49 +0100 (CET)
-Received: from cascadia.aikidev.net (cascadia.aikidev.net [173.255.214.101])
+ id B90898418A; Fri, 30 Jan 2026 05:04:53 +0100 (CET)
+Received: from cascadia.aikidev.net (cascadia.aikidev.net
+ [IPv6:2600:3c01:e000:267:0:a171:de7:c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21E478418A
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 05:04:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3398841E6
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 05:04:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vagrant@aikidev.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=debian.org;
- s=1.vagrant.user; t=1769745884;
- bh=GTMHU1RkZMzHq3O/z/Xzz6Up8NFiVAAEbpNPfVOh7ic=;
- h=From:To:Cc:Subject:Date:From;
- b=KNegQfVJCWnGxJkVosfSDQezq5hPXpMC/jH+PVau6OKbmGxdoF+oKkdqV+4miE2Zw
- xQWaqZFXepFUIqXGIIvQ676LYWFTUYu0iL0BS46m44FW6IueEUxLrMgpN/udwTqu29
- tz5Tsip6i2ouEleueP+IfTcYcCkPxJWkbtrn5PMxFOxwPp+eJ5fHirHBHoHeNUINOl
- mOjF07bhnfbO5EKSoY8bOiu0mh5LF/QeI3vhmeDI9rtsTOUzioXLmkmU45kKkuHlZ5
- 5nbp8KBac/4VX3sBA3KiSF19VHlth5ICkqw8UJlnv5RcMrianfxlJSYdH5cd/5bqaP
- B5rB16O1vDxxw==
+ s=1.vagrant.user; t=1769745890;
+ bh=wKgpkBKH58xUmax42GxMOK4mNAZTktIvfZoGi72AsvU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ffhatDWbYab0LSqQqsBmkRiNb3MasnvZMiU7gokvDMKsAF4WB2knlCjKRMZt1diXf
+ mE/n+zM1igvmwy0Y9rHyVdZ+ladsBsSiewYKOWl60rvPLSEESzwGC1Y1nUHIAzOqhM
+ OZQb7flQUK1YmVhFuQam2dtmDheTF1bo9yiTwkSmVfmvwV3RvmFEdTRYbQzGFHAn1M
+ kA5T/jmp7PcKq3ylQ6fYZipZKfxu+KPMgqNVS/eJjT1PxmHeCDJlilbrWCjneoMwFT
+ Qk3NLuA/Eb0lAzrJkZKte0KMLzXmGphTjg4ZOZ1dmJ+QaNFKeP1GTk5xdQnEMZmQEc
+ 3FlydpsJHTzRw==
 Received: from localhost (unknown [IPv6:2600:3c01:e000:21:7:77:0:50])
- by cascadia.aikidev.net (Postfix) with UTF8SMTPSA id 22C62117;
- Thu, 29 Jan 2026 20:04:44 -0800 (PST)
+ by cascadia.aikidev.net (Postfix) with UTF8SMTPSA id 01CEBD7E7;
+ Thu, 29 Jan 2026 20:04:49 -0800 (PST)
 From: vagrant@debian.org
 To: u-boot@lists.denx.de
 Cc: vagrant@debian.org, Tom Rini <trini@konsulko.com>,
  Green Wan <green.wan@sifive.com>, Paul Walmsley <paul.walmsley@sifive.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Peng Fan <peng.fan@nxp.com>,
  Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH 1/2] env: Provide another work-around for unquoting fdtfile
-Date: Thu, 29 Jan 2026 20:04:23 -0800
-Message-ID: <20260130040424.472735-1-vagrant@debian.org>
+Subject: [PATCH 2/2] board: sifive: unmatched: set fdtfile with unquoted
+ variable.
+Date: Thu, 29 Jan 2026 20:04:24 -0800
+Message-ID: <20260130040424.472735-2-vagrant@debian.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260130040424.472735-1-vagrant@debian.org>
+References: <20260130040424.472735-1-vagrant@debian.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,32 +72,34 @@ X-Virus-Status: Clean
 
 From: Vagrant Cascadian <vagrant@debian.org>
 
-Some boards use CONFIG_DEFAULT_FDT_FILE to specify the value of
-fdtfile, althugh the quotes get embedded in the value.
+The fdtdfile variable contains quotes:
 
-Provide DEFAULT_FDT_FILE with the quotes stripped.
+  printenv fdtfile
+  fdtfile="sifive/hifive-unmatched-a00.dtb"
 
-This is a similar work-around to the one provided in commit
-d085e692c98d0d7b57cc577ed9befda159cd4a40 for
-CONFIG_DEFAULT_DEVICE_TREE.
+But this leads to issues which booting with an extlinux.conf format
+file failing to find the .dtb file:
+
+  Retrieving file: /usr/lib/linux-image-6.12.63+deb13-riscv64/"sifive/hifive-unmatched-a00.dtb"
+  Skipping fdtdir /usr/lib/linux-image-6.12.63+deb13-riscv64/ for failure retrieving dts
+
+Use the DEFAULT_FDT_FILE variable which has the quotes removed.
 
 Signed-off-by: Vagrant Cascadian <vagrant@debian.org>
 ---
- Makefile | 1 +
- 1 file changed, 1 insertion(+)
+ board/sifive/unmatched/unmatched.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 435a4bf372d..75d407a24f5 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2138,6 +2138,7 @@ quiet_cmd_gen_envp = ENVP    $@
- 			-D__ASSEMBLY__ \
- 			-D__UBOOT_CONFIG__ \
- 			-DDEFAULT_DEVICE_TREE=$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE)) \
-+			-DDEFAULT_FDT_FILE=$(subst ",,$(CONFIG_DEFAULT_FDT_FILE)) \
- 			-I . -I include -I $(srctree)/include \
- 			-include linux/kconfig.h -include include/config.h \
- 			-I$(srctree)/arch/$(ARCH)/include \
+diff --git a/board/sifive/unmatched/unmatched.env b/board/sifive/unmatched/unmatched.env
+index 34425dc9efa..f309229481b 100644
+--- a/board/sifive/unmatched/unmatched.env
++++ b/board/sifive/unmatched/unmatched.env
+@@ -16,4 +16,4 @@ partitions=
+     name=loader1,start=17K,size=1M,type=${type_guid_gpt_loader1};
+     name=loader2,size=4MB,type=${type_guid_gpt_loader2};
+     name=system,size=-,bootable,type=${type_guid_gpt_system};
+-fdtfile=CONFIG_DEFAULT_FDT_FILE
++fdtfile=DEFAULT_FDT_FILE
 -- 
 2.47.3
 
