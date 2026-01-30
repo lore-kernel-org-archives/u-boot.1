@@ -4,85 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0BAE6BF2F
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 18:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 952A8E6BF30
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 18:19:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B2D384523;
-	Fri, 30 Jan 2026 19:10:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B0F5C84535;
+	Fri, 30 Jan 2026 19:19:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xw71R8tt";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Hmep63qQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4080D8452D; Fri, 30 Jan 2026 19:10:58 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9FE3A84543; Fri, 30 Jan 2026 19:19:28 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03517844C0
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 19:10:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C71984523
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 19:19:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-79274e0e56bso24817667b3.0
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 10:10:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769796655; x=1770401455; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6JZDzRTljtGypfYP6cZSu4Ps3UyRacUAm1+j/k+MC74=;
- b=Xw71R8ttAxdEod2jWxXf3E0i1glWxaO8X5EJ/QI240A/tWOflBx/UgB3PgOUtUhvz5
- AYd14GhYlRtds4N50pROSyrWWpRygLutkXFmCaPkuMSfMNSBh48UkAQxJpN4xi7MqfCj
- SwxWf5iee4CdQHqL0iaBiK7kkwCobeBGfzSEc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769796655; x=1770401455;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6JZDzRTljtGypfYP6cZSu4Ps3UyRacUAm1+j/k+MC74=;
- b=tcEyYFxvKhf6r+YiauFTBAlgP16lMsSHNYaYAkSxCe1yyE/bebHO1jS0cIBVBfV0T8
- 6nAASvsyrIH6osbmkn4YhRho9qeFSHbH/4w8V/r2jMDHgZTN1ZX0wex+wRLr2lbzv1X0
- TlavtFxeOxR8QQENYqmucfLnh3mYJaMvvZiAJAwymlfz9MGtVpgwHUYbD/cqhjunzOG6
- 1iIHgc0t4a4V7/IspAWbamoJVoNbLcJqtUPVNpCr9HhNxyN4WtVl25oYMF9HbugkVWem
- JC22PH+GvamHDa2exYamwrgt6MT1p9HKwtvT3E8ntbaEwUcXE7X/zowMmxxbm0ST0f6R
- 2hnA==
-X-Gm-Message-State: AOJu0YyX456SS/0wVSQbUHt+tVUzE94BHR1U7kJhNmUS5Nb4gIrWWwAW
- xeVqVdECQepf1LbeWQVWCVXjlMYWlplYMzxdMC1wMOCLlXlOEgudLFgEinlSI7/yLBsPAf6V1uV
- hIx9E8sk=
-X-Gm-Gg: AZuq6aKQALWgJ2AsTm6vdkEXEh2IX9/qXXuZP4GeQV6rQRywonba6MqFGNnc0LvQw5a
- lDgpPm37yIQvAVgKuNEAX9VCk1q9zpBhKXz38ala2Kgw7JJqEUCBSK+MdHCwcjCn/+GvVGl0al7
- a+PPCXvdffIYQwuhuvl01O8R4AxiVKuuh7LERWIpDaxRP+rnm+eE6HinOJQwCOF4cOM2s38riAz
- D9fklXG+3y3Heg//HXGM3hrDwKy/tqt31GxUyEA5zBHoyB4rW8lmCb13xLqyfFxTPufkD3ZkPnr
- YkzRRxvDqcEpfWEtghstjm2blzFQMvJJ8NWu6tBMRmsxnAxZrLqiHI9y9LYhNqJ+ZTEoP6cs7Qq
- 14m3FA0eMZ3S/SQcAwfaF7E5aDDzy7x1+d7WgKj0UiYz1Rfs3BTBO3bWc6INQkAAg9faTBdvKBK
- UkGRqPZq3HJ8sM68uJSjFHjEXG8jTkOcyzyBjBXXaE1IZb3HHWbVLjx9Pc6Tjzqe01jMoUAjBrb
- GduhDCG8K4rnUDjhke0P9yit0V9bwKzX+a08Pw=
-X-Received: by 2002:a05:690c:399:b0:787:cad1:bdb2 with SMTP id
- 00721157ae682-7949e060c04mr28929737b3.69.1769796654498; 
- Fri, 30 Jan 2026 10:10:54 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-794828a9be2sm38420787b3.33.2026.01.30.10.10.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jan 2026 10:10:53 -0800 (PST)
-Date: Fri, 30 Jan 2026 12:10:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sune Brian <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] Fix unbootable ARMv7 devices
-Message-ID: <20260130181051.GA2603314@bill-the-cat>
-References: <20260130031217.998002-1-briansune@gmail.com>
- <20260130145528.GA2421612@bill-the-cat>
- <CAN7C2SCixc3Ug+MsfMj5wnJVVPQSa3QS7frkXvj90LsY09ehQg@mail.gmail.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SQB71chzeN+KfG03NIvekR0MY9gRF3aTfW7iwuTi8dZISz5H+UhdWsgCkR/063fGIWBk7FQBYQ67o7pQ//x5Hx72D9lD3+hAY1mZHtEtV2ddk4NuhMtj8M0DqM1he3ALxppr/81+XvhO3GbduKKDl8+4v8VL/RZFXViplNNeLhURjFlECWdlbPxmqyQpeLVpxfM4KXMcmfuG5NNeMg9KIuo5uE4t/R+DzMbjwOdzD/64PUnN8ORyW5EnTdVw3fjs63zXLM5Nt6ySpP3gr18i8fDU2N9zKu9lqqyvqoEbxkIiFoMFRFrI68wq9UYwvPhJ3w0bvwDyQ51A5psCfXfkOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WdGxA51lg042W1A4C7nx5X8f06GjZ02Xlmrocaapw60=;
+ b=ZcnjaLV6x+hJsLX8yEnEce2vKUanyhNsOCjO1xVKAoGhOv68aS+Nmg10M0Uf99QS3BPuWFy+6gZTp0YcoSi3AdBE7B26l8xaulczdGWS/wLfhUA6gdj5Bc/eGSWRC9F3rBvFkfVyyWJs9P1RKFGmNiVMarCxDc/ju6PQ2Fyc73TmbZuQkvHRoAYdvX2RZXOcCd3Mi7M2ErGvO2GQ45lVevCMqnR02Bh8EXapMQFhZeuR2Dd9Bo1l5CqavUoE2/tNIEc6+5W7S1Ctyvrxq0kUKkrIOpxzPJwJJR1BsLRgC76Yvtupn4/ZVBnLjnDs7Kiry3fR8AQeDVEJ2UgHbVDPpA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WdGxA51lg042W1A4C7nx5X8f06GjZ02Xlmrocaapw60=;
+ b=Hmep63qQ7VcfwLkWqxzEQzGAKAnJbE+swEb9qa6SDrxcF1/UXxwKwx/iNS5RUjfasW+KgyMFZq3Te0VwuJgIVoouTXbKcmYn9aspCmCgFYVdnmnwRwEb21fjEVC53rzBgWBWOVi7rkSk0RVlVEVoxYHjN26ctobKxFTrXSQgv3A=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AS5PR04MB9827.eurprd04.prod.outlook.com (2603:10a6:20b:652::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Fri, 30 Jan
+ 2026 18:19:24 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9564.010; Fri, 30 Jan 2026
+ 18:19:24 +0000
+Message-ID: <8bd0b00f-9631-4c36-bb73-280e4943dccc@cherry.de>
+Date: Fri, 30 Jan 2026 19:19:22 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3568: Include all addressable DRAM in memory
+ map
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20260129193153.2232395-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260129193153.2232395-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0388.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f7::17) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xncNK1Jj2hGtwpUR"
-Content-Disposition: inline
-In-Reply-To: <CAN7C2SCixc3Ug+MsfMj5wnJVVPQSa3QS7frkXvj90LsY09ehQg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AS5PR04MB9827:EE_
+X-MS-Office365-Filtering-Correlation-Id: cdb7dc88-5e47-4181-8523-08de602c18a8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UXlKTkc4RTZyQWNYYlcrZG1kNXRUT2lZQ1FMb3NDbjEvZ2hGOGN5WEFaT1gr?=
+ =?utf-8?B?a3ovTC9iMkJPdGtuTW1MbkIzMFcvQkFyYTVBVUtLODB2ckRiN2hDb3JtS1Z1?=
+ =?utf-8?B?VXN1dU1tc29xWDFMZ1RMY2YzcUhZQ3FIK21YZWVjK094bHdrN2VHZ1QvL2Zs?=
+ =?utf-8?B?L2pvR1BKdzdHOWVQWFNJa0JGZk9iMmtCMkttZitEUDFTSmhrcC91S3pNM3gv?=
+ =?utf-8?B?NlYybklLNkFJMHYwTk0xYnRYaitubU1obVdVN0Y0OE9RNkJKMFBFdC8wRXgx?=
+ =?utf-8?B?ekM4Y1FJMWVqbTJxTEl3dWdWclh0Nlc0MUNYbW1LVFhMMWp4NzNHMFF1MWQy?=
+ =?utf-8?B?eUVqYzBFV3pGaXEreHBaVlBmeDRFemxTSGs3TEwvUnpHVHB4TzZPbGFvaHNw?=
+ =?utf-8?B?bmRTWXE4eVRTREtGVUdtOTJXU2ttdnljY3dMYVNZZGJFaTRDeWQyOWoxdDB4?=
+ =?utf-8?B?VkJUbTNMREg5YTlITjFzNTlUN01UY1VPKzBzaGdYdnRWVmZFRGVxNmJRTzZP?=
+ =?utf-8?B?RzZ2VE5kUnpYR2hqK2k5L2dtR3c3dmFHTUcrWHNEWXdOU0FyNjdZNmR4TGtk?=
+ =?utf-8?B?VVFnSFFZbG9tZDNSZ1lyQnM1T3UwU2k4RVk1K2luUHFpR3I0Uno1eHM4N0h2?=
+ =?utf-8?B?YW9DOW9qbEc5ZzNKUWZ6VWwyZzVlMHlSVTEyUU1xNXpsbTZJSzRqMWZjejVF?=
+ =?utf-8?B?MkdoNElHb2doYjBJbDZ2UjVvQ2t6QTUwL0RzWDIyZ0FyVktJY0Yrdmh4Nkh4?=
+ =?utf-8?B?V2hwZkpRUStSVUtOalNBV0o2T25xWTR2bWUwT29Pd3lFNFJvUDFGUXl5L2N0?=
+ =?utf-8?B?RGRyYmlIcW5mUmQ4LzNXRGh3L3lFWkt4TDQ3UUJ6MERUSlFPVWJCbmZ1S0VB?=
+ =?utf-8?B?ZU1LZ2hLV1RFSURReEE4eHQweXhNKzNqayt1NEZTWHBuNE5wWWNubFBBOG5N?=
+ =?utf-8?B?dmhQdTY3SEloQXczcWZmbEFWakZaYks0Q1phVlNoSC9rUFBiRDkzY3ZENVFP?=
+ =?utf-8?B?V0lYMzFyamhFUHF4djRPeHY1OVRKVVZQMkZoemUzelRKQWZmcWtRc2NIN0xF?=
+ =?utf-8?B?SWYwMFdCZWh1TkNHM2Vwa25UTWxzNjFpb1hzVGZvVGVudjJ0ZjFJSVozcEpX?=
+ =?utf-8?B?aE1ibC9hTHg3ZjNBYi81TnRYQ2wwdUZ3MG52NnJNaWI4eFBURDF3VS9DTzJO?=
+ =?utf-8?B?VGwzdmJxd2hhRG4rcHZIUUNlS09weXdpdExReGlTbmJINWhhR1IxYzlqdURa?=
+ =?utf-8?B?Q1dYUDBaamFwWWZuYy90Ty9sSzFVSnlSTDlHSGlzSDZRNWI4UjlXRy90emha?=
+ =?utf-8?B?dXRIZlRwaVZiTVZuTjRVc1pTWkp1a3ZwUWgydzZ4d3VnUlBRc0hlUlpYSEdk?=
+ =?utf-8?B?OVNNRC9lbURub3NLdGlZYnhWYmFjTzZqSUEwVkkxZWlVbCtsUkROUUVUTGVh?=
+ =?utf-8?B?czBIVW9Hc2F3U3F5bGxmNWlCNit3bk92TGw3K1BueVhvd1RXb2RGQU03clAx?=
+ =?utf-8?B?Z1V6ZEVvd1ZFSEtjZGFDYWtkc045UzRROHk1Y0I5UzlZaGNnUUdRczBNWnF1?=
+ =?utf-8?B?NWYzTHhOYzdvMG92WjFMSWJSTjNOM2RuUzlXbTlnMmtFNEh4bDdXNEEzSEs1?=
+ =?utf-8?B?SVBCSTRPWEs5bFJUUHNqaDhrR0tvN3ZaNUxRTWYwVkRvSkRFNUdzNTE2RGpG?=
+ =?utf-8?B?VEZYdG1xMEh5VkVGNndNbjE1SDQwYTFIU2FzWDZWbjhhSzFjUWwrV2ZyY2FP?=
+ =?utf-8?B?Q1A2OWxLN3ZhUTNQWFZkQ0ZkMVh0bERYbGprVmszSlB4ZGRLNTdMdTdMR3gr?=
+ =?utf-8?B?cTQ3VTZGY29qN0JFWjFDWk9nMks4TitPUThYVC92Q2pFZG1ZMHhERmZzWHo0?=
+ =?utf-8?B?RFVYZCtIeHFhamptUkg0ZmRkSGxGWFFVSUdCd2VOcUIyaFJIbEh5TTN3RVl5?=
+ =?utf-8?B?STkvODZFMUkwL1d4VWRtK2VQQjhVc1FCbDNjZDNBWnpqODhnSXJ6Vml6TTkw?=
+ =?utf-8?B?NkRMQy93enBnR2xLODdUUktZUTAwV1A5NXY0RWZzWjJjZ3BVWjVBdnNvdCtR?=
+ =?utf-8?B?aUVxWTdPbHFENnZOQjlxVm1jTGU0WVRoVGNSem43eXpwOGNtUks1NnRZNEdG?=
+ =?utf-8?Q?NVlk=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TWxVejhXZ3VFL3NVNmN6VzdTZk8zQmZlYUxsSmpPemw5eUtwU054bHFyblAz?=
+ =?utf-8?B?cm8xNDJML0FGbTFIZ1dBc0NUM1daa0NkWUhtdUhkSTl3ODlCbFNLbUVPZHdy?=
+ =?utf-8?B?bjhSbTE0aThHYXM1Y001elhuc3ZhN2N2RWhJa0lzbS9sS3ZubDhCZWpJL1Bz?=
+ =?utf-8?B?WHEvbkUxdDY0MGVQY0huVUhiMmdDRnNHVkRPK0EwbWtIM1h1L3lyU3BrYTR5?=
+ =?utf-8?B?UjBLdUh0TVFzYWZqT3VialpZQXJnY2pXWDBPUGthQy8wZTZWZlR1QkZoeUY4?=
+ =?utf-8?B?OGdXVEVLZHVTTGVndzZ0RU1keVI0SS9IeG44VWFVWk5NdVA4SnRoSUgzNkMr?=
+ =?utf-8?B?UWdMNW1tUDc2eHdIWExPZE1HSVpLNW1UeUpNaVF4a2NuQkd0QmdhTnBQRVZW?=
+ =?utf-8?B?VUE3VEFMY043SnFMZW1MM1RwZU41azBTeGRTaFkvZ1JZVExXbmRKUSs3K3hY?=
+ =?utf-8?B?OE1qSWRTQjhFQWtKVFlQektrd0VKOTN6KzArdDk3R25Eb2RxVUtjd0VHQWhi?=
+ =?utf-8?B?ekw2dXVXYkdIdlBaZWJUVVV5OGVud1RreFI0bU5xRmlJNUdPdmtSQ0xzS2Mr?=
+ =?utf-8?B?blFBZUtCNm9NRUlHM2c4RWw5OTA4RjVPOTBaVGlJRnUzTWg3enZOQmdRblVr?=
+ =?utf-8?B?TTBnSGdqRXBEc2V1MkJ2dlBjRXpacldJWUlENlFTT2lQOE9UNk9aaFJSSnBQ?=
+ =?utf-8?B?TGRRTTNqd2gyMWNHd3BUT25qbUIyOGNyRHBWN0t2aVBoMFlJYWhSUkgxb0Nh?=
+ =?utf-8?B?c3o4aENDRWJ0MmIwQ05ESjB0YTNLWVlqeURTdFJQQ3FONEFKbG5DMlJIeHht?=
+ =?utf-8?B?NVFxb2lTekEyL1JId2E5SG9CT01mZG92bEd3MzFVUVZSSXMwZENKeFQ3SGJr?=
+ =?utf-8?B?TkNodzdHMVNOaG1VbVNhclcyQ3NCYW9xc2U5TFROcFJTOVVyODlFQ2JKMTJV?=
+ =?utf-8?B?VU02STF4WTlTU2x4ZnltY1NhSURZcnV1TGh3Q3E0QnZyalVoc0psd2JBYkhi?=
+ =?utf-8?B?am5CRFloSlNlaW9oa0Y1Wnpxck56aGtMdTNFdHFxMkJuT2FRQ2hPMzhkTXpE?=
+ =?utf-8?B?a0lwdTcyeFhsbllCcERsYlZoaFBYRkpnSGNhTG03akJndjk2UHVLWkJ4bVp3?=
+ =?utf-8?B?VGx5bGlVYXR1QnYzWi9YRWpCc2tDT3RjMVpTZUNSYThIWVRPM2RJUVkxYUsv?=
+ =?utf-8?B?bjdTY092ckZTL1Qvbk5sTG5xeG9jeEJYUm9ydmFJdUNWV1MxZUlydnEwMVFn?=
+ =?utf-8?B?T3U0cWtOSXVHRzJUNzg0M0p1U0QycWwwQWFyUzllakZWNGdmaFpzaEZ3TzJT?=
+ =?utf-8?B?Rm1SY2VnTkhPZndTSzRvazh2Z1JLeDkxMk1LSk0rN2VLc0ZBM0lnTDlKckYv?=
+ =?utf-8?B?Rm9rT1c3bzFpYi80cytWbDV0LzQrY25yRW8rWFJuOVNFamtjWVRydStidTdF?=
+ =?utf-8?B?Z0MyK1lUY21MOXpyblZWaTR1Y1VWOXpLRVBYNjVNaVcvdmZLSldGZEpKaEl1?=
+ =?utf-8?B?WFl1RnhaV2lpVkwrdlhaWlluVlVTRkx3WlRJZ1lzM2RWMXVxaVVVd1htNHhI?=
+ =?utf-8?B?a2FqR280QTcxNFVRVlQ1SWV1NmJiYkl2WG4vL3h1akE2NFpzRGNtMkNsUWQ5?=
+ =?utf-8?B?WFVrM3IzT2tXYllUMDdBNmZaeStiNlpJTEJCcG1vS2xyckR2MFBhVG1vQUx6?=
+ =?utf-8?B?TmpZdkV2cURoNXoxUUpjRDRRZDV3N2dPVGNnUHdheUx0TlZBRFU2ZVVzbjBT?=
+ =?utf-8?B?RU5ObHdNVUlZUU5ld2VnbFNMZytuNGZwakN2ZWRsMzRNazljcno3cUtrdGlz?=
+ =?utf-8?B?YmN6UVZOeU90RUpqMllsTWxQTDdCWCs3Zi9xR2RtUEM2aEwvRUN0cTJjeklv?=
+ =?utf-8?B?OW1XV3MzVUtUbUZlbTZhd3Rja1pnZ3Z1WmZsZUlQT2U2c2czRnhPbkI3aU5C?=
+ =?utf-8?B?bmtoWGVxNGZLYWhoWGMyaHZWLzJMaUZ2dkZCYXQ3a1k0OGpZWDA1b2dRMTAv?=
+ =?utf-8?B?MnRnYjBYU1R0cFk2NUNhZ2RweHd6WURUcEl0dzRlUUloMUo2dDM4dXUrcFk3?=
+ =?utf-8?B?TDR2SW43dHJxc2RadXVkejRwQTkzRDltSTZmcmtBRno0WnlhdmkxTXlCUVVL?=
+ =?utf-8?B?VGdmdzh5S3g1cmg3RjkrNDQyYlZRVnQwTzF2NUNYTHNha0NWeDdJTlNydEJC?=
+ =?utf-8?B?SExtRFl1anVOQUpmczFjZElHMWs5bmtHcnh5YnkxdkVhSis3MkVyVzkzYmN6?=
+ =?utf-8?B?UUZHdlN1R3htU3lycGIyOGJOSVgySXA5SlVMUWNNYVQxRFp5RW9lU0k4V1Fk?=
+ =?utf-8?B?MURNNFU0LzFQL2d5VVVZdGNiS2o2Qm5FQVY1bVZUV1lPejI0Sm05QT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: cdb7dc88-5e47-4181-8523-08de602c18a8
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2026 18:19:24.2543 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Fo2npk7zhZkuqGrh1jMsdZaVpzOjJquRZEDf5wzHaBVB1OWV8XafHfgembEi3+5lkAQaTJ3a1PEFbS9w9JmgQCaHf3zkuYQjG4KQ0adtges=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9827
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,140 +182,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---xncNK1Jj2hGtwpUR
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 1/29/26 8:31 PM, Jonas Karlman wrote:
+> Rockchip RK356x supports up to 8 GiB DRAM, however U-Boot only includes
+> the initial 4 GiB in its memory map, something that matches gd->ram_top
 
-On Sat, Jan 31, 2026 at 12:50:17AM +0800, Sune Brian wrote:
-> On Fri, Jan 30, 2026 at 10:55=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Fri, Jan 30, 2026 at 11:12:17AM +0800, Brian Sune wrote:
-> >
-> > > The linker script u-boot-spl.lds now
-> > > is no longer aligned and -nodtb.bin ending shows
-> > > the zeros are not 8 byte aligned. This result in
-> > > the Makefile.xpl simply think the previous file
-> > > is aligned and do not zero pad. simply fix the
-> > > data align to 8 can ensure the -nodtb.bin is aligned,
-> > > hence, the formation of u-boot-spl.bin properly align.
-> > >
-> > > Signed-off-by: Brian Sune <briansune@gmail.com>
-> > > ---
-> > >  arch/arm/cpu/u-boot-spl.lds | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > This fixes your problem in that it results in the device tree being
-> > aligned still, but doesn't solve the underlying problem of why there
->=20
-> No it is not 4 extra bytes but 4 bytes short on the latest master commits.
->=20
-> > were 4 extra bytes. Can you please try:
+Does it? The first range is 0-0xf0000000 which is 3.75GiB and not 4GiB.
 
-Yes, we're off by 4 bytes. Sometimes in one direction, sometimes in the
-other. I believe in either case it's because of not accounting for a
-non-empty section correctly.
+> and current expected memory available for use in U-Boot.
+> 
+> Add the remaining 4-8 GiB range to the memory map to more correctly
+> describe available and addressable DRAM of RK356x. While at it also add
+> the missing UL suffix to the PCIe address range for consistency.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>   arch/arm/mach-rockchip/rk3568/rk3568.c | 12 +++++++++---
+>   1 file changed, 9 insertions(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> index c2b96902d2dd..2b1eafee37c9 100644
+> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
+> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> @@ -72,9 +72,15 @@ static struct mm_region rk3568_mem_map[] = {
+>   			 PTE_BLOCK_NON_SHARE |
+>   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>   	}, {
+> -		.virt = 0x300000000,
+> -		.phys = 0x300000000,
+> -		.size = 0x0c0c00000,
+> +		.virt = 0x100000000UL,
+> +		.phys = 0x100000000UL,
 
-> > diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> > index c578c3ebf821..5f807323f856 100644
-> > --- a/arch/arm/cpu/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/u-boot-spl.lds
-> > @@ -31,16 +31,16 @@ SECTIONS
-> >                 *(.data*)
-> >         }
-> >
-> > -       . =3D ALIGN(4);
-> > -       __u_boot_list : {
-> > -               KEEP(*(SORT(__u_boot_list*)));
-> > -       }
-> > -
-> >         . =3D ALIGN(4);
-> >         .binman_sym_table : {
-> >                 __binman_sym_start =3D .;
-> >                 KEEP(*(SORT(.binman_sym*)));
-> >                 __binman_sym_end =3D .;
-> > +       }
-> > +
-> > +       . =3D ALIGN(4);
-> > +       __u_boot_list : {
-> > +               KEEP(*(SORT(__u_boot_list*)));
-> >                 . =3D ALIGN(8);
-> >         }
-> >
->=20
-> This patch will create the same result but the actual problem
-> never caused by the -pad.bin.
->=20
-> The bss size is 8 byte aligned hence it will not be the issue from
-> first place at Makefile.xpl as it will not create any zero pad.
+How do you know it starts there? I'm assuming from the ATAGS? If so, 
+please state that in the commit log.
 
-Right, the pad file is created the correct size.
+The previous mem region ends there but if you read the TRM, it should 
+likely end at 0xFE8C0000 + 128KiB which is 0xfe8e0000. This only gives 
+us an additional 23.125MiB which wouldn't be enough to explain the 
+missing 0.25GiB we need to round this all to a nice 4/8GiB.
 
-> The issue here is that the nodtb size itself size is never 8 byte
-> aligned at the end result in short or long cases while the
-> Makefile.xpl only creates extra zero based on the bss size rather than
-> the nodtb size.
-
-Yes, the nodtb isn't aligned, but it's supposed to be.
-
-The ASSERT statements we have mean that the ELF object is correct, but
-when we transform it, we're breaking it.
-
-> Then they simply join nodtb + pad + bss but from first place nodtb
-> is not sized correctly at the end aka 8 byte sized.
->=20
-> Any method that can make the end back to 8 byte size of the nodtb
-> should do the job.
-
-It's a two-part problem. The file has to be aligned, and we have to
-place the dtb at where __bss_end (in the case of SPL_SEPARATE_BSS=3Dn) is
-at run-time.
-
-> > As the problem ends up being that when both of these are true:
-> > - .binman_sym_table is empty of actual .binman_sym* symbols
-> > - The inner '. =3D ALIGN(8);' increments the linker counter from the
-> >   previous '. =3D ALIGN(4);' (in other words we were not already 8b
-> >   aligned).
->=20
-> So what you are suggesting is that the section of  binman_sym_table
-> is empty so the ALIGN(8) just simply cannot do its 8 byte alignment job.
-
-Not quite. When we say "ALIGN(8)" we advance the linkers program counter
-but that's not the same as saying "add bytes of 0x0 until we reach the
-counter".
-
-> And reversing the order makes sure it will always ALIGN end with 8.
-> But does "__u_boot_list" result in an empty case? If not then this
-> indeed do what I also wanted to.
->=20
-> I intended not to change any ordering to fix the issue.
->=20
-> Brian
->=20
-> >
-> > The linker sets the type for this section to "NOBITS" which in turn
-> > means that when we later call objcopy to create u-boot-spl-nodtb.bin we
-> > get a mismatch between our expected size and actual size for creating
-> > the -pad.bin file.
-
-Which is what I'm explaining here. We have to make sure the last section
-before the BSS is something that will never be empty. That's what makes
-sure that the final ALIGN does what we expect.
-
---=20
-Tom
-
---xncNK1Jj2hGtwpUR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaXz0KAAKCRAr4qD1Cr/k
-CpkLAP9KOEXxRvNsZ+HQTBF9O2/Mqo4PqSkMJNK3+cww0VJscQD/dgXl7z13fnxr
-EvrKqyPjfEUG2IDEYKCu6myIZJzifg4=
-=nrOr
------END PGP SIGNATURE-----
-
---xncNK1Jj2hGtwpUR--
+Cheers,
+Quentin
