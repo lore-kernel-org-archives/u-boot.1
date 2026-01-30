@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B913CE6BF20
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 15:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA58E6BF1B
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 15:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0EEE844F9;
+	by phobos.denx.de (Postfix) with ESMTP id ED90484500;
 	Fri, 30 Jan 2026 16:40:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j3PMSqND";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="faApMF03";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7A4A83C30; Fri, 30 Jan 2026 16:39:41 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 562A8843D1; Fri, 30 Jan 2026 16:39:43 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E0A684073
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 16:39:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35EA284067
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 16:39:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=george.mccollister@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-45c889aba0dso1879218b6e.0
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 07:39:39 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-662fe3ff6f6so1293069eaf.0
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 07:39:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1769787578; x=1770392378; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1769787579; x=1770392379; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ou31N2bIYACjItqJcEW75pMzIlhBo5xV5AC1nz57qYc=;
- b=j3PMSqNDAPk4MMF3l8FkVHTgruMScDvj9R0SprBYXbvSI1Q4fNnxyg6TIgOv82iVNW
- Ho//i+SKy5UFmRzsfHFEFZVoiXe/0klxe67e2Ida0qo66GlwFX3gEh+f5hHsGVW+lqPE
- Xfk+6lOn4ZK8HMgBSgVGZ47aiYmT+hn8wjiuQ=
+ bh=0GijrqfwaxANQCAmtF3bTGN6FXJSIWRzGIcmKvGtJTY=;
+ b=faApMF03W7Ilrm/Lhgv8oeqnKyLWr908Ly+QCYWhNWrDoJQfXtEIkiCbL1bWPtDXGy
+ O0zmCBxFH6H+N99j1vzv8ezpWXUeWrTerxhAhToM+GA1SNpuQZS3G/Daqt8VwB0inwO6
+ OHOQF1iroLYidbFRvXZFcU1pudp3Wx1DFWs9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769787578; x=1770392378;
+ d=1e100.net; s=20230601; t=1769787579; x=1770392379;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Ou31N2bIYACjItqJcEW75pMzIlhBo5xV5AC1nz57qYc=;
- b=WOa66F1xg+T+Ck/gzM1nTq4a/dcN7SyxUXJXbNN8oVYV1ypWdNfAlO5O0WuuVeey0q
- 074JFZghcynkO0ccZlP73ilFycghh3ZhPlNIQQBAiDjFdBWdtd7Q/YrTCOs4MtawHMcL
- GobmPBdPoN4bGFl9AF7bNe5U9WwEawMl/ySV5lxqklWGwOq9Dyw7eCB7w5BfDM5Eati3
- dUkOi3soJkr0Tu1/h2twttp6VmmtOR05dtH56vH11XzuPQPr9gD1Q01xK7BjeWWUZlNN
- lR2iBKBBhOHJ9fDZTU+7Ygws1Plz1fAyGayC04FRUwam8JNa8r6MGWZI9nVDOAjDpwIw
- SS9A==
-X-Gm-Message-State: AOJu0YzWfCzW0qhChGhWh1AiahEB4//bXt3SCelhD5vt7Fm/ru6mik8f
- xwLHcvSMvM2e6zFwbAMRhni1vDdhGCu14Linyhu3rmhUZKIr+Yz0mdbaT+qg6IYVx2R8/LRmgBP
- Uq5Ag
-X-Gm-Gg: AZuq6aJjqxanAkNvtrRHUJBwph2Bk6icB2ffYFYEixFsLeEhKZrpFBOuoN4dcv+gQUd
- TDb4zZkXw0qHZ+QO2Lfnb71TnTRT88Q2Rsm742OqFml3NnFBOOq5bRcSwuwrAp789jSXSj7XOHh
- A85ELgB7lfkX6hdem1pdetWJvuXJG3TMm+47R2eac9+63SvLd65kXiyLtaKR0ozOFCqWYU1WRW2
- gpg54754Qf5dDNRowVJmhh9tstsbLSbAZl1PEJtCmOHKrbEIeqUSepAvqTk42J9xhMUqNY6dNv1
- SLHw8vnjzzQneBZazBaFla2VJxircadadIiOwWTtGPMwTGFfHv6bkHMlLB+wZo4UXThIKWy8/Cp
- 5eAmVHh2neJDQAacCnpTJuYKBO20EBsDYDZmpDSvNRSoQji5TX+jowO/pG+yoRzS0OB6Yw5o8Qw
- uIof58d0nG3dA+16BaG302LNit0ounUs02AUbOsERLAvYMdw==
-X-Received: by 2002:a05:6808:f8a:b0:45a:7084:cbd3 with SMTP id
- 5614622812f47-45f1e2b88d0mr3557837b6e.15.1769787577785; 
- Fri, 30 Jan 2026 07:39:37 -0800 (PST)
+ bh=0GijrqfwaxANQCAmtF3bTGN6FXJSIWRzGIcmKvGtJTY=;
+ b=uegvO+BdSCcDLa75nAB8ME4aHhZeIpplZixRGeb/Fn+8jGH5T5czvVs8Xo2vFdUHqb
+ wNGUPwHR+3gAMau26oJpj6eCnG7qdWkLMgiLqtPIMIy4yYSdNJFRYXgoZbxKbNEAhdce
+ FzOMpiihj9hUYoDe4NYXIYaeYSToVnn0vlxyYFKKI+DX131nL/CjSozZDgkluo3OBpGl
+ i2ZlFnQjpEAPCm1SCH/tLfos+//y04LRG3sQmu486ugB4Rm6p7XO8hE2u7EaSm2V4Qvf
+ VOyH3Y/4sXnis2hB4DgwNkkZg7benfkNZrDEHYWA8G2n1/1zKiCboKa3Tn1Oamz5Vlt1
+ 3QyQ==
+X-Gm-Message-State: AOJu0YwbYYZdQml0zZWUIsA2kqs7wsItn4HaFYSeIMJ2+3z7a2Pjp8Qp
+ 7v3h4WeuMXh4oidkfmkUasq/qBuA/N2T9FnCgZgKCQlpb6nYYwuYh9kX9I+sOIXhrsQpTeGGi/9
+ ii/ff
+X-Gm-Gg: AZuq6aIPiANGbNmCqCQW9YfpIzGMQFMLgSJr3AI00qEHj7aN1y76GntZHoQNydxdaLP
+ 0P0ymBd/6uCrczxpMbHjiLsstGwtnews/AXz7lW+rE4EHNd5VYvUv9EWBLimpxNb/f0KOUHpc86
+ C06aJLe8Gchw+DSgKkS6dHbUEIVy2WVDW5rcikYcC9V1UWeANTARYPcikyzyml+q258s7k9M6sw
+ mDaAcB7YYKYTirf2h+WgUI9LdzovflrM22YOJR0oDrG0rRTIDSmbqUWo6zwG/AxK1MCzud1EcDA
+ Q+jrR3sxseAAQa4ufsj96/+9rs68CPgLGlIdj8BONGD1i6fIb+2duiHoaH0mDuk4xY9r8kLquha
+ oOYjOSAx3FYP3qvQj51Yr0kOpiuGzrTFt7HA7YySuh+cK4wCZn09SvgkZlhH4MMTCWQLWjB9gwX
+ jBJTyiT51ld9yvNVOTJCdumFeY8/m/KCPS1lQ=
+X-Received: by 2002:a05:6820:229d:b0:65e:f5db:f478 with SMTP id
+ 006d021491bc7-6630f03c99fmr1634322eaf.22.1769787579695; 
+ Fri, 30 Jan 2026 07:39:39 -0800 (PST)
 Received: from ryzen.localdomain ([136.33.243.183])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4095752ef7bsm5944934fac.16.2026.01.30.07.39.37
+ 586e51a60fabf-4095752ef7bsm5944934fac.16.2026.01.30.07.39.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jan 2026 07:39:37 -0800 (PST)
+ Fri, 30 Jan 2026 07:39:39 -0800 (PST)
 From: George McCollister <george.mccollister@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Bryan Brattlof <bb@ti.com>,
  George McCollister <george.mccollister@konsulko.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/6] pci: pcie_cdns_ti: Add PCIe support for J722S SoC
-Date: Fri, 30 Jan 2026 09:38:05 -0600
-Message-ID: <20260130153856.2049575-6-george.mccollister@konsulko.com>
+ Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Judith Mendez <jm@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>
+Subject: [PATCH v2 6/6] configs: j722s_evm_a53_defconfig: enable PCIe
+Date: Fri, 30 Jan 2026 09:38:06 -0600
+Message-ID: <20260130153856.2049575-7-george.mccollister@konsulko.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260130153856.2049575-1-george.mccollister@konsulko.com>
 References: <20260130153856.2049575-1-george.mccollister@konsulko.com>
@@ -99,12 +102,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TI's J722S SoC has one instance of PCIe namely PCIe0 which is a Gen3
-single lane PCIe controller. Add support for the "ti,j722s-pcie-host"
-compatible specific to J722S SoC.
-
-Based on:
-https://lore.kernel.org/all/20240524092349.158443-1-s-vadapalli@ti.com/
+Enable PCIe now that it is fixed.
 
 Signed-off-by: George McCollister <george.mccollister@konsulko.com>
 Tested-by: Bryan Brattlof <bb@ti.com>
@@ -112,36 +110,49 @@ Tested-by: Bryan Brattlof <bb@ti.com>
 
 (no changes since v1)
 
- drivers/pci/pcie_cdns_ti.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ configs/j722s_evm_a53_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/pci/pcie_cdns_ti.c b/drivers/pci/pcie_cdns_ti.c
-index ff56ba3930c6..38804f1c09c7 100644
---- a/drivers/pci/pcie_cdns_ti.c
-+++ b/drivers/pci/pcie_cdns_ti.c
-@@ -855,6 +855,11 @@ static const struct pcie_cdns_ti_data am64_pcie_rc_data = {
- 	.max_lanes = 1,
- };
- 
-+static const struct pcie_cdns_ti_data j722s_pcie_rc_data = {
-+	.mode = PCIE_MODE_RC,
-+	.max_lanes = 1,
-+};
-+
- static const struct udevice_id pcie_cdns_ti_ids[] = {
- 	{
- 		.compatible = "ti,j7200-pcie-host",
-@@ -864,6 +869,10 @@ static const struct udevice_id pcie_cdns_ti_ids[] = {
- 		.compatible = "ti,am64-pcie-host",
- 		.data = (ulong)&am64_pcie_rc_data,
- 	},
-+	{
-+		.compatible = "ti,j722s-pcie-host",
-+		.data = (ulong)&j722s_pcie_rc_data,
-+	},
- 	{},
- };
- 
+diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
+index 74a67da9033a..e84670c75edf 100644
+--- a/configs/j722s_evm_a53_defconfig
++++ b/configs/j722s_evm_a53_defconfig
+@@ -27,6 +27,7 @@ CONFIG_SPL_FS_FAT=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
++CONFIG_PCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+@@ -53,6 +54,7 @@ CONFIG_SPL_THERMAL=y
+ CONFIG_SPL_YMODEM_SUPPORT=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_MTD=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_UBI=y
+@@ -71,6 +73,7 @@ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
++CONFIG_CLK_CCF=y
+ CONFIG_CLK_TI_SCI=y
+ CONFIG_DFU_MMC=y
+ CONFIG_DFU_MTD=y
+@@ -115,6 +118,11 @@ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_S28HX_T=y
+ CONFIG_PHY_TI_DP83867=y
+ CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_CDNS_TI=y
++CONFIG_PHY=y
++CONFIG_PHY_CADENCE_TORRENT=y
++CONFIG_PHY_J721E_WIZ=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
 -- 
 2.52.0
 
