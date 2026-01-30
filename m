@@ -4,165 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A012DD49C8D
-	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 09:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5FED49C9E
+	for <u-boot@archiver.kernel.org>; Fri, 30 Jan 2026 10:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E4CB8421E;
-	Fri, 30 Jan 2026 10:51:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 6433E842F4;
+	Fri, 30 Jan 2026 11:54:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="P4Lj1zU8";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Il4NrhkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B02DC84118; Fri, 30 Jan 2026 10:51:51 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id CA72F842FC; Fri, 30 Jan 2026 11:54:28 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78A268421E
- for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 10:51:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF1478420D
+ for <u-boot@lists.denx.de>; Fri, 30 Jan 2026 11:54:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iLQRIxnT2xdCUKs7bwfhwRxKu34oKbw3poJqQUjIQERJ1F52bs1o3JPIvfE6OOI2ZgEuziRPrYmB784HkjMv7guJu1hmCW9T+Z4EZEjyniZt1iDpob9xHvRXWD/tnYUobHGhiQam8+IHGSusLxMz6I/3uVI0SbwuTX8uc1xGjQSPItJm4bM+ev48zRYxsb2PCBjdYxAF2k6lRANSC0MTm4P3nalYn2NwCXBnFZ3qs/bHCzM1Rpw5asO8e0Etsmyo/vHTKUMfP/L5UOLAM8VMDgfAn6zlFJlQBPS4dYVESVlPDAWnyP3cRtsZPVVW/Iry9hOtuiYmMh5JCb39UFvyEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/HLnxuvsFV5Rlu4VZKesRjBWwzwXyj5RgCuTcI9K2eM=;
- b=IC9eBM3aMADNH/et1bnYQkF48CmBZX47mUoRvHyXuwwZoWjUDAv1rF4lZLPnUex1iFzIRvpSCXedP0z5O+TxU0njjktZuEwn/4tGLauwYRZxZ6kiZ7I2a5eKMLNz1SlNpnlA5V2Dvq5YI0JN4Iab27Wqal4eBakwwQiO9s8HQ7Gk1wUvuFuxiPx/uUOfpZ6KXO/5s0BoR2SOyCjfBmoOhHEDCeed2Jqe7BSspiMUior3pddlDWU2e0ygxzbe3g6dammn5hqhSo3tLu2DlcAqieV5w1ovyYOdQ7jAce3KTVG0oUvWgfQP8Py4Rtcl/J2BpCxfkpJu3IaneKahqbT/WA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/HLnxuvsFV5Rlu4VZKesRjBWwzwXyj5RgCuTcI9K2eM=;
- b=P4Lj1zU81tF+mjxiYaF9tDEC/E8+3KYjcekhtyibsviN3bFvYP38MYKT1uSaKAdKR6uwMmI0jiSB8cRw/dEI+m11Eg90PDEGXRozQOOPyVRu9C5P1+aQqs36GXiy2rWfFK7CGIOhvaIPhL9P51zewgkLFDf1qQ33jMWTL+YIZFc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by AM8PR04MB7347.eurprd04.prod.outlook.com (2603:10a6:20b:1d0::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.8; Fri, 30 Jan
- 2026 09:51:43 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9564.010; Fri, 30 Jan 2026
- 09:51:43 +0000
-Message-ID: <11f467e2-1059-4edb-81a2-8b970b315882@cherry.de>
-Date: Fri, 30 Jan 2026 10:51:41 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: rk3588 MNT Reform2 fails to boot from SD card
-To: Vagrant Cascadian <vagrant@debian.org>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>
-References: <87ikcjc1oc.fsf@wireframe>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <87ikcjc1oc.fsf@wireframe>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0153.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b3::12) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d4a6=AD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1769770464;
+ bh=v1ViP8xlO6lMduJYMvUBoMOSgCVis/DAU5sm6K1Mguw=;
+ b=Il4NrhkL4WQEY0VG1nXLwBDd2QtocAhD5wUgawGua05tup/bgwfaxRcm+thQ2yScnEpy3/Hk0
+ F8IbAm58miewDP816iHy013Mrv9oEud6U7aOJRM660OEmCqQb6ddLmrJ/2wRLpvzskKxItOKSDd
+ 1PGPSfX/uNNqbIgTOMwFLQ+B7CDHr6veehSM+9vc5fp6hlKJmEO5NDsq2DKbVe+9oNNOY5u6+Rx
+ ZHsUXOZ5OWpo2rY2DrtEQ798mlS6h4t7eZLtioKKhLQYdE/gc9VaE8oL9Hj0WxEd6FHklLonRaQ
+ tniXGan/jY+O5Kdu268n4ZAD4+NyBrfJkUoMQPVdPg8A==
+X-Forward-Email-ID: 697c8dd8a5545d580c921750
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.5.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <d578ba21-bf07-4c3c-9e76-567f91ccab15@kwiboo.se>
+Date: Fri, 30 Jan 2026 11:54:11 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM8PR04MB7347:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6bdfc1c2-89ec-4c35-1ee5-08de5fe52c8b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aFlVTW1aWWdidFRGT1czK2h5dUtCSzRFeVpobExBcTFDUkZzRGllZlIzaXpl?=
- =?utf-8?B?UTRYcWRwWUV1RzJmU2ZNWTRLRHVKN092d0tWMzAxRzROTUZFWVpJak0yaU9T?=
- =?utf-8?B?UTZxR1FlcUlnWVdPOWcyTlg3Qlc3ZXhJbTM1cmZKeHFOc0llS2tzNjN4UDcy?=
- =?utf-8?B?VjRGQnZ5U2xNYnJWaVErVGpaeWZiTWdGRGQ2M1d6MHNvUXpuUWdyVlExR1VO?=
- =?utf-8?B?L2NXTXk1eEFmNDl2a1NDMEJLUTA4ZGhFa1l2eXFPNWNGZUpucWVEcWtNclNI?=
- =?utf-8?B?WHUwdVIrQnJmVytNQ21lUXJYN2hvWE5tbkFxQWI3ZElDWm1zbittRUN4UDFB?=
- =?utf-8?B?c2RjR2pGRUM1S3p4REJnZHphUnBCNk91RDltaTVtNWZSZVc2Y3YyMG1uQXZX?=
- =?utf-8?B?UmV5bzNRdmVxNWZmdHlqSDZOamxjQjcvTEh4TDNPNVFtTU9YdFJYWjVHRElD?=
- =?utf-8?B?bnJRQVkvTis2QVJUMHZXNk56dEJVcUhPcHJjNzc0dkhrZjdQaGxWd05VUXhv?=
- =?utf-8?B?MkNDK3JTSEdlWi9zUnJvSW83Z2I2Sm9nTS9xZzVpM3FUc1QwVU03K2pGeXRK?=
- =?utf-8?B?ZHQ3cUZ5bGVJUE5ZV3Mrc1VLeXYwNUJlVkV3MzA1Z0NxcjZpNFRuU2cwdld0?=
- =?utf-8?B?R0IzQXA2YksxUmhtN2tWK3dDT2VoYS8yL3V2MFQrYllXRTVhdG40YjBTMGpO?=
- =?utf-8?B?bDQ2MnR3bWFBc1QrWlZHNUJkemRFQjdydXRKcjV6b1JVSzlRM2Z2WHFLMS9L?=
- =?utf-8?B?aTBYYUNRazBsNmhmeUQ1cGJPQVYxU2xMVUdYUk9kRjV4dEdpOU0xbnlVQTEr?=
- =?utf-8?B?SmtUYmIvN205TU1WZDk4WFdiRUVRMmRKY2MvdXBoNGZGRUpRZzAybS9sOXlt?=
- =?utf-8?B?SDF5Ui9LOEtiMHB0ODZOYTBRZkFKaDNnb3p1MU5DMTlVbEhPZklIdHhFUXBX?=
- =?utf-8?B?dFZaazBHMTBOV1JPZGhmeEZiZ1FvZVUwRGFUd1Z1eFZIRXNoaVBzMStLNkY5?=
- =?utf-8?B?YXpaNU5nc3k3ZGFkVC84MnFsVU5BelByZWNLR3hkNnpDOXNEbVNyZEpiS05s?=
- =?utf-8?B?V09pZDhwVTJmck5vYlNCc2N4aDVodk1NbUJ5ZlBiTUZGVVdtemtDdmtDU05G?=
- =?utf-8?B?TjJZS011UUQ1Yy9QQXJIYmVTTmlkVGI2Z2wxY2prbXh4dG85Q0QzdGtlZ0pF?=
- =?utf-8?B?cTYyaWxUWk1hSTlFWW9scmphN2FGTEdiaHB3SkpvQWJSU2gxTnZoMExmNG41?=
- =?utf-8?B?WG1XSUFTdnl2QUEwYTZVWkhnQ0dncVg4ckd6VmtuM3VpYzRFVHhHWEpQSjNn?=
- =?utf-8?B?U0E1clJpRHJVbUNDejdoSGc5QXRDNjA3bmxUQ3FUV1pUYjdtbkhlYkZQYWFw?=
- =?utf-8?B?Z1E3bUNPZnhaaW5PZWpFdU1oNHJRZXNiZyt3dytYVUQyckJWSDZycDIreGlY?=
- =?utf-8?B?OHliMGhQNzgvS3NlL0w4dnIzV093dmw1MGhHYlVYMXRvaEd2QXZGM2ZLYU5x?=
- =?utf-8?B?RnY2emhtenJXdENpaEFuN3FjMm96NjJhSll4NFN4RGRIMGpkczRSTkxxcUZy?=
- =?utf-8?B?QjYxVEpxaWlyL3VxQ2duVEJ1SHY2U0FOS084a3NQbW5GYUFreHJydDlGOFNp?=
- =?utf-8?B?SHpLMlNHRm5SVHNPZW1DaE9oWU54SXVPNzRBNUFJZENuY0V6WjVCWFlrK2V6?=
- =?utf-8?B?a2RoM2oxekJHYVFQbUJjMEFuVHlBV29UdllMUnI0U2xzZ2lwNVpTYnlKdk9v?=
- =?utf-8?B?QVp1QWkvUzR1NzRCMUREVDFTZFlsNXFmSHJPVU1aa05yd1BxZkxtdVA0Ly9B?=
- =?utf-8?B?eTFUeTF5YlVPMjJUdXFpV2hGR2s5RUM2dDZqUWhZTExnS0pac1ZmTUEwVHZp?=
- =?utf-8?B?UWtGdmxvaFhyMU9Bdmp5MUFWTkZtV3pLZmZTMjNoTUx4T1lhTEUvM250cUY5?=
- =?utf-8?B?RVorZTJFb2hhcGtWa29Scm1WT2U1TCtrQ0VLci92VnZQR2ZGVGJlZXZkUDZo?=
- =?utf-8?B?dzB6aGt3SjNwM3lIN1c2S2EwRFFiYU52ZUd1LzV5YUlWc3Boa2dQQXJaMUhq?=
- =?utf-8?B?VGlwUHF4T0NLQTlRNms5cG14L01nMEtRNEdQa1dXMlBqVUxXWk0rbFVKSk1r?=
- =?utf-8?Q?uZTE=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MjkyMjVISVVJS0FybFVSUFJ2ajh3VWk0UjhuR3NQVWdLcVMzRUpZNFVEQ0Jq?=
- =?utf-8?B?UTYyK0pIWkZpaERUWnVJQVpXNFZqT2hPUkdPUWZ6clNqT1ptMGJNMHlBN2l1?=
- =?utf-8?B?NkdPWXZwSGZhMGFZNk1HN09CZWtBRk1qRTE3ZFdpL0ZTem5PNFB6cUJ6YkFq?=
- =?utf-8?B?MUhKcVE4a3RxZjFxdi9KVnB2VTFNM0x4KzQwWnozUi9PZHd3YlV4MHFIRTM4?=
- =?utf-8?B?czZRUmVScExKQU0rbVpJeUFqYURPR0p5Y2hwdHdmL3RlRFNOMHEydlJuZnJF?=
- =?utf-8?B?cFhzR1dSaklxN0k0ZW9ON1QvNWc2cnUyamJndVB5YTFRNEZFZFpEMWpINGVo?=
- =?utf-8?B?WkVUd0dMZ2NUWFZ1a3dwS0FUd0cydWF2TklNUnlucWRrZm5odUVoUFh2ZnVQ?=
- =?utf-8?B?NWZEYTQyYlJhVk5oVytBV3lBVWN6YkFGczh0Njk3WmNKam5nWFBrb2U1MFMx?=
- =?utf-8?B?R0FJc2VPMDBzWVc5VXF1V05Ia084VFlVdFlDcjNaTUFnTnhvNzBmYzc5c2d5?=
- =?utf-8?B?T1o1YUE3alhHTkVFZFM1TW5hUWZXYmxKOHJtWDRXSzJWS0oxaG15YmdMVmJ4?=
- =?utf-8?B?WjVWc0ZFRnZTQlhQaVg4QUJ5U3ZDOU81QWtwdzgwa255emJpeExOeGJGWWdK?=
- =?utf-8?B?cmd1MDJFa1dyL2g2UWh3a05sOVNrK3hkMWxIbzhHaitIWkI2VGJyRGtLUXls?=
- =?utf-8?B?ZlZHVElMRjRVemF5V0hzOWdjTitBVHZMNm5mWXJmVUNWZVphbEVyaHZoc09F?=
- =?utf-8?B?akM1TFdFVTFyYzJ1ajk2TUQ3eUppZFhxUEY1TktxdmtKa2lFbFF3ck4yTW1H?=
- =?utf-8?B?RXRMcnZBT2VYOERsc3BkS0h4SlViR3RhNDN4RUpYVTNVK1MrWFhiWmdwQkwy?=
- =?utf-8?B?dXcrb01Ed2FrdUk4Q3RMaXJ5MHdXUzJLTXp0T2VZTVpsTWR1M2l3emhKQ21I?=
- =?utf-8?B?eUl2SGVyd29Dd3FXbkVRNk5ZOHJlZGZKa1VMdzBXSlV2RytGY3d0ZDh1b1Uy?=
- =?utf-8?B?dzA0VlhiMWVDdEFVdU5DSFlrSTVuYm5UZjJVMHU3R2RMVWkvQWJBZDR5Z2Jj?=
- =?utf-8?B?SDg4c1ZyKzlGTGtrUkNJenoxKzAzU3RoQUliZTluV3NUTW5saU95NzRGcWZh?=
- =?utf-8?B?K05OU0xKMHZWbnJ2eVpOUktBb1JDdXE2SlQyK0pLUnZ2ZUhKdENqMU9HZE1T?=
- =?utf-8?B?U3ZVWXJ4MjY5b1hPenEySHFORGhHZHpGcCtuUkJnczBBS2RMT255SHI1ZU9u?=
- =?utf-8?B?QkxVMHh5Q0J3V0wwVUlwNzZRbHlRVTdINFk2ZHYxbm5zTVFRZFhMMDRlVWxm?=
- =?utf-8?B?Ry9ndU9PSmFFZGhiRTRRYWo0WnF5d2JSaWVJdkN3ckVQTXRMV2NoT29hSXlI?=
- =?utf-8?B?NjlTTnNoanRETlZhTDA2NjBKd3FaK1kweFUyRVZ3ZHlONVFpSi9VQVdXUHJo?=
- =?utf-8?B?M1RhUzlvclNPV3k0TWxXajRRdUZadlkvMnFDRkZNZHJtVUh3SjFjR1NqVmwx?=
- =?utf-8?B?bkd2blVLSDhra0FSL0NPdUdabkNuMlBKSmcvaTdJdmtIUzJWYzh3eGF0cjZX?=
- =?utf-8?B?RElBQUtvUFJzdFBUYngxUllJc2Vqc0U3N2VySGlmdFhyR0tSNUJMWmszSWpL?=
- =?utf-8?B?SWNhdnVhRTE4NlZQaFF2YUkyRW5RNllaY2wrajQvTlI1REZuOWEzTytQRXgy?=
- =?utf-8?B?bTdyR1lLZ3pvMTVSb3YzVDVzU3oxWXVSWlY4WEI0L3U5NDhmYXlsTGlWenFU?=
- =?utf-8?B?VnFPZXl6ZnV4N2RUK2dNejR1cmJMVXNLRHJpejVtQ3M0SHVYaUNHSHpNaU1r?=
- =?utf-8?B?UGpveUJEWk5wd2lvTCtSNTRSR0UzSEQycldJT1c3cm9GWmlSS3RBQWIvN2tL?=
- =?utf-8?B?dkdYS3c1WGk1dUpoNkRvSTBMYzhJUU8rRnVmcFBGOXVYczcrbmVTUmNxbjRq?=
- =?utf-8?B?ZGFJVnEyTmwwcVQxYy9FdC8vWWphQlR5bE4wUzVaSzRHRVhrdUpBeEs2VHBs?=
- =?utf-8?B?VHZxeThiWmZUaXRIRVN5ZFpwRS9VWVpCTHJ6Y1JuYzJIZElEc3hIaEdMczFj?=
- =?utf-8?B?L3BBYm02a0QrNFJHeERHV3JWREEvS2ZXVC9lbWJjaVVDQ0NCakVXMWVvT0lu?=
- =?utf-8?B?UkFvMlNsZzJmdFVZN3NhMkVoUnNZcnhiMWRZNXFGYkZ0cTJrT0hHVElnczVh?=
- =?utf-8?B?c3F4N0k1QzFzYkE2ZmtUTFU0LzJaODVzOHVIbXh3TDJ1VjdYdEJ2REQwS1dn?=
- =?utf-8?B?dkhzaitsSFFneThNOHZxYjlqWVk3eDBkYjB2K0FNdUlaZTYwbUh3WDVHQWU4?=
- =?utf-8?B?andTTjZCc2FkNkY3bWdoTUwreGtTTUR6UHVhMW9qYkhBQU16UW9ydz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6bdfc1c2-89ec-4c35-1ee5-08de5fe52c8b
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2026 09:51:43.3603 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: H6BslDTINtaP8vEeRRp4Dqv8dvH0gP++STDw+sRX4LPnsuiXpQL/oeCOY+EgGrbVbxeZECY2SxwjQqjcXa6L+02EneNU//WDvLjDFoCldaw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7347
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] usb: eth: asix88179: Use a fixed URB buffer size of
+ 16 KiB
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Khoa Hoang <admin@khoahoang.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260130002941.2336252-1-jonas@kwiboo.se>
+ <20260130002941.2336252-3-jonas@kwiboo.se>
+ <b251561f-936f-44be-bd01-eb1d08c0bdfc@mailbox.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <b251561f-936f-44be-bd01-eb1d08c0bdfc@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,102 +76,286 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vagrant,
+Hi Marek,
 
-On 1/30/26 2:46 AM, Vagrant Cascadian wrote:
-> Thanks for adding support for rk3588 MNT Reform2!
+On 1/30/2026 2:26 AM, Marek Vasut wrote:
+> On 1/30/26 1:29 AM, Jonas Karlman wrote:
+>> The commit 05278af8b3df ("eth: asix88179: packet drop when receiving
+>> large fragmented packets") adjusted the URB buffer size to allow large
+>> fragmented packets. However, this change result in use of a large URB
+>> buffer size for slow speed connections, e.g. 10/100M use 26 KiB.
+>>
+>> Using a ASIX AX88179B USB 3.0 or ASIX AX88772E USB 2.0 Ethernet adapter
+>> on a Rockchip RK3528 with a DWC2 USB controller this large URB buffer
+>> size result in invalid rx_hdr and result in unusable Ethernet.
+>>
+>> The data read back from AX_RX_BULKIN_QCTRL after being configured also
+>> does not match the values in the AX88179_BULKIN_SIZE array.
+>>
+>> Change to use a fixed URB buffer size of 16 KiB to fix use of Ethernet,
 > 
-> I tried using u-boot 2026.01 with the rk3588 MNT Reform2, but it only
-> gets as far as SPL, and then fails:
+> Why 16 kiB and not something else ?
+
+Using anything larger than 16 KiB resulted in issues, and a datasheet
+for the older AX88772 prior to the D revision mention default 16 KiB for 
+"Maximum Frame Burst transfer on USB bus" so 16 KiB seemed like a safe
+size to use for newer revisions, and this also made it possible to use
+fragmented packets up to just below 16 KiB.
+
 > 
->    U-Boot SPL 2026.01 (Jan 01 1970 - 00:00:01 +0000)
->    Trying to boot from MMC1
->    mmc_load_image_raw_sector: mmc block read error
->    Error: -38
->    SPL: Unsupported Boot Device!
->    SPL: failed to boot from all boot devices
->    ### ERROR ### Please RESET the board ###
-> 
-> I *think* MMC1 is eMMC, which I currently have blanked, as recovering
-> from a failed install on eMMC is trickier.
-> 
+> Is this a USB controller related problem/limitation ? Maybe the DWC2 
+> driver needs fixing instead, to handler larger buffers ?
 
-It's surprising it isn't trying MMC1 twice as that's what it's supposed 
-to do due to u-boot,spl-boot-order containing "same-as-spl" and the eMMC 
-controller again later in the chain (see the property).
+I accidentally mixed up what host controller was being used, the board in
+question is using a generic-echi controller not the DWC2 as I stated.
 
-In any case, no support for the SD controller in SPL according to the 
-defconfig, can you try with:
+Below follow some debug prints, what can be observed is that when
+length=26624 is returned from ehci_submit_bulk_msg the ax88179_eth_recv
+will return len >16 KiB and that result in the rx_hdr at the end of
+the returned buffer being bogus data, e.g. for following:
 
-"""
-diff --git a/configs/mnt-reform2-rk3588_defconfig 
-b/configs/mnt-reform2-rk3588_defconfig
-index 6adc9e4e60c..982e6c6eb20 100644
---- a/configs/mnt-reform2-rk3588_defconfig
-+++ b/configs/mnt-reform2-rk3588_defconfig
-@@ -50,6 +50,8 @@ CONFIG_MMC_HS400_ES_SUPPORT=y
-  CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
-  CONFIG_MMC_HS400_SUPPORT=y
-  CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-  CONFIG_MMC_SDHCI=y
-  CONFIG_MMC_SDHCI_SDMA=y
-  CONFIG_MMC_SDHCI_ROCKCHIP=y
-"""
+  BOOTP broadcast 1
+  ** asix_send_common(), len 342
+  ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+  dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=350, req=0000000000000000
+  TOKEN=0x80008c00
+  Tx: len = 346, actual = 350, err = 0
 
-and report if it gets you further? I think you'll be missing support for 
-the CD gpio as well in SPL.
+  ax88179_eth_recv: first try, len=0
+  ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+  dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+  TOKEN=0xa7808d00
+  ax88179_eth_recv: second try, len=16512
+  ax88179_eth_recv: 2 packets received, pkt header at 112
+  ax88179_eth_recv: return packet of 106 bytes (1 packets left)
+  ax88179_eth_recv: return packet of 0 bytes (0 packets left)
 
-So probably you need to enable SPL_GPIO:
+The buffers returned from the AX88179 contains something like:
 
-"""
-diff --git a/configs/mnt-reform2-rk3588_defconfig 
-b/configs/mnt-reform2-rk3588_defconfig
-index 6adc9e4e60c..7485d03a0cb 100644
---- a/configs/mnt-reform2-rk3588_defconfig
-+++ b/configs/mnt-reform2-rk3588_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
-  CONFIG_SKIP_LOWLEVEL_INIT=y
-  CONFIG_COUNTER_FREQUENCY=24000000
-  CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
-  CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-mnt-reform2"
-  CONFIG_ROCKCHIP_RK3588=y
-  CONFIG_SPL_SERIAL=y
-@@ -50,6 +51,8 @@ CONFIG_MMC_HS400_ES_SUPPORT=y
-  CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
-  CONFIG_MMC_HS400_SUPPORT=y
-  CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-  CONFIG_MMC_SDHCI=y
-  CONFIG_MMC_SDHCI_SDMA=y
-  CONFIG_MMC_SDHCI_ROCKCHIP=y
-"""
+ <packet data N><N+1>... <packet header N><N+1>... <RX HDR>
 
-aaaand also enable it in SPL DT:
+Above the "2 packets received, pkt header at 112" seem to indicate that
+the pkt header is in the middle of the packet data, in other instances
+the rx_hdr seem to indicate that the buffer contains  thousands of
+packets, i.e. the rx_hdr is likely bogus when more than 16 KiB is
+returned from ehci_submit_bulk_msg.
 
-"""
-diff --git a/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi 
-b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-new file mode 100644
-index 00000000000..47509f4cb37
---- /dev/null
-+++ b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+/* SD CD */
-+&gpio0 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-"""
 
-I believe?
+More info and debug prints:
 
-Cheers,
-Quentin
+=> dm tree -e usb
+ Class     Seq    Probed  Driver                Name
+-----------------------------------------------------------
+ pinconfig   277  [ + ]   pinconfig             usb
+ pinconfig   278  [ + ]   pinconfig             `-- usb-host-en
+ pinconfig   280  [   ]   pinconfig             usb-wifi-pwr
+ nop           0  [   ]   dwc3-generic-wrapper  usb@fe500000
+ usb_gadget    0  [   ]   dwc3-generic-periphe  `-- usb@fe500000
+ usb           0  [ + ]   ehci_generic          usb@ff100000
+ usb_hub       0  [ + ]   usb_hub               `-- usb_hub
+ usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
+ ethernet      0  [ + ]   ax88179_eth                   `-- ax88179_eth
+ bootdev       2  [ + ]   eth_bootdev                       `-- ax88179_eth.bootdev
+ nop           1  [ + ]   rockchip_usb2phy      usb2phy@ffdf0000
+ phy           1  [   ]   rockchip_usb2phy_por  |-- otg-port
+ phy           2  [ + ]   rockchip_usb2phy_por  |-- host-port
+ clk           3  [ + ]   rockchip_usb2phy_clo  `-- clk_usbphy_480m
+
+=> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Hub (480 Mb/s, 100mA)
+    |   USB 2.0 Hub
+    |
+    +-3  Vendor specific (480 Mb/s, 100mA)
+      |  ASIX AX88772E 00CFCE77
+      |
+
+=> dhcp
+** asix_init_common()
+asix_write_cmd() cmd=0x01 value=0x000b index=0x0002 size=2
+usb_control_msg: request: 0x1, requesttype: 0x40, value 0xB index 0x2 length 0x2
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000303, buffer=00000000f9ee0bc0, length=2, req=00000000f9ee0ac0
+req=1 (0x1), type=64 (0x40), value=11 (0xb), index=2
+TOKEN=0x8d01
+asix_read_cmd() cmd=0x02 value=0x0003 index=0x0001 size=2
+usb_control_msg: request: 0x2, requesttype: 0xC0, value 0x3 index 0x1 length 0x2
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000383, buffer=00000000f9ee0b80, length=2, req=00000000f9ee0a80
+req=2 (0x2), type=192 (0xc0), value=3 (0x3), index=1
+TOKEN=0x8c00
+asix_read_cmd() cmd=0x01 value=0x0002 index=0x0001 size=1
+usb_control_msg: request: 0x1, requesttype: 0xC0, value 0x2 index 0x1 length 0x1
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000383, buffer=00000000f9ee0bc0, length=1, req=00000000f9ee0ac0
+req=1 (0x1), type=192 (0xc0), value=2 (0x2), index=1
+TOKEN=0x8c00
+asix_read_cmd() cmd=0x02 value=0x0003 index=0x0011 size=2
+usb_control_msg: request: 0x2, requesttype: 0xC0, value 0x3 index 0x11 length 0x2
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000383, buffer=00000000f9ee0bc0, length=2, req=00000000f9ee0ac0
+req=2 (0x2), type=192 (0xc0), value=3 (0x3), index=17
+TOKEN=0x8c00
+asix_write_cmd() cmd=0x01 value=0x002e index=0x0005 size=5
+usb_control_msg: request: 0x1, requesttype: 0x40, value 0x2E index 0x5 length 0x5
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000303, buffer=00000000f9ee0bc0, length=5, req=00000000f9ee0ac0
+req=1 (0x1), type=64 (0x40), value=46 (0x2e), index=5
+TOKEN=0x8d01
+asix_write_cmd() cmd=0x01 value=0x0022 index=0x0002 size=2
+usb_control_msg: request: 0x1, requesttype: 0x40, value 0x22 index 0x2 length 0x2
+ehci_submit_control_msg: dev='usb@ff100000', udev=00000000f9f2c520, udev->dev='ax88179_eth', portnr=3
+dev=00000000f9f2c520, pipe=80000303, buffer=00000000f9ee0bc0, length=2, req=00000000f9ee0ac0
+req=1 (0x1), type=64 (0x40), value=34 (0x22), index=2
+TOKEN=0x8d01
+BOOTP broadcast 1
+** asix_send_common(), len 342
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=350, req=0000000000000000
+TOKEN=0x80008c00
+Tx: len = 346, actual = 350, err = 0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7808d00
+ax88179_eth_recv: second try, len=16512
+ax88179_eth_recv: 2 packets received, pkt header at 112
+ax88179_eth_recv: return packet of 106 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+BOOTP broadcast 2
+** asix_send_common(), len 342
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=350, req=0000000000000000
+TOKEN=0x8c00
+Tx: len = 346, actual = 350, err = 0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x27808d00
+ax88179_eth_recv: second try, len=16512
+ax88179_eth_recv: 2 packets received, pkt header at 112
+ax88179_eth_recv: return packet of 106 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+BOOTP broadcast 3
+** asix_send_common(), len 342
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=350, req=0000000000000000
+TOKEN=0x80008c00
+Tx: len = 346, actual = 350, err = 0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7a88d00
+ax88179_eth_recv: second try, len=16472
+ax88179_eth_recv: 2 packets received, pkt header at 72
+ax88179_eth_recv: return packet of 3938 bytes (1 packets left)
+** asix_send_common(), len 342
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0600, length=350, req=0000000000000000
+TOKEN=0x8c00
+Tx: len = 346, actual = 350, err = 0
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x27a88d00
+ax88179_eth_recv: second try, len=16472
+ax88179_eth_recv: 2 packets received, pkt header at 72
+ax88179_eth_recv: return packet of 3938 bytes (1 packets left)
+DHCP client bound to address 192.168.42.234 (3365 ms)
+Using ax88179_eth device
+TFTP from server 192.168.2.50; our IP address is 192.168.42.234; sending through gateway 192.168.42.1
+Filename 'default'.
+Load address: 0xc00800
+Loading: ** asix_send_common(), len 42
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0580, length=50, req=0000000000000000
+TOKEN=0x80008c00
+Tx: len = 46, actual = 50, err = 0
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7988d00
+ax88179_eth_recv: second try, len=16488
+ax88179_eth_recv: 2 packets received, pkt header at 88
+ax88179_eth_recv: return packet of 0 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x27a88d00
+ax88179_eth_recv: second try, len=16472
+ax88179_eth_recv: 2 packets received, pkt header at 72
+ax88179_eth_recv: return packet of 3650 bytes (1 packets left)
+ax88179_eth_recv: return packet of 4949 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7808d00
+ax88179_eth_recv: second try, len=16512
+ax88179_eth_recv: 2 packets received, pkt header at 112
+ax88179_eth_recv: return packet of 106 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x26189d00
+ax88179_eth_recv: second try, len=16872
+ax88179_eth_recv: 2 packets received, pkt header at 472
+ax88179_eth_recv: return packet of 0 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7b08d00
+ax88179_eth_recv: second try, len=16464
+ax88179_eth_recv: 2 packets received, pkt header at 64
+ax88179_eth_recv: return packet of 3360 bytes (1 packets left)
+ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x27b08d00
+ax88179_eth_recv: second try, len=16464
+ax88179_eth_recv: 2 packets received, pkt header at 64
+ax88179_eth_recv: return packet of 5681 bytes (1 packets left)
+ax88179_eth_recv: return packet of 3141 bytes (0 packets left)
+ax88179_eth_recv: first try, len=0
+** asix_send_common(), len 42
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=50, req=0000000000000000
+TOKEN=0x8c00
+Tx: len = 46, actual = 50, err = 0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0xa7a88d00
+ax88179_eth_recv: second try, len=16472
+ax88179_eth_recv: 2 packets received, pkt header at 72
+ax88179_eth_recv: return packet of 0 bytes (1 packets left)
+ax88179_eth_recv: return packet of 64 bytes (0 packets left)
+** asix_send_common(), len 82
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0600, length=90, req=0000000000000000
+TOKEN=0x80008c00
+Tx: len = 86, actual = 90, err = 0
+ax88179_eth_recv: first try, len=0
+ax88179_eth_recv: first try, len=0
+ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+TOKEN=0x27b08d00
+ax88179_eth_recv: second try, len=16464
+ax88179_eth_recv: 2 packets received, pkt header at 64
+ax88179_eth_recv: return packet of 63 bytes (1 packets left)
+
+TFTP error: 'File not found' (1)
+Not retrying...
+** ax88179_eth_stop()
+
+Regards,
+Jonas
